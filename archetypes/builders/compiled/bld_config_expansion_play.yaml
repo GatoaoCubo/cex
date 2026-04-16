@@ -12,11 +12,24 @@ tags:
 - builder
 - config
 tldr: Naming, paths, limits for expansion_play production
-domain: expansion_play construction
+domain: expansion_play configuration -- governs naming, paths, and runtime limits for expansion play artifacts. Expansion
+  plays are triggered by usage thresholds and cross-sell signals, targeting NRR >120%.
 created: '2026-04-14'
 updated: '2026-04-14'
 density_score: 0.85
-naming_convention: "Pattern: `p03_ep_{{name}}.md`  \nExamples:  \n- p03_ep_initial.md  \n- p03_ep_v1.md"
-paths: "Artifacts: `/artifacts/p03/ep/{{name}}`  \nExamples:  \n- `/artifacts/p03/ep/initial`  \n- `/artifacts/p03/ep/v1`"
+naming_convention: 'Pattern: `p03_ep_{{name}}.md`
+
+  Examples:
+
+  - p03_ep_initial.md
+
+  - p03_ep_v1.md'
+paths: 'Artifacts: `/artifacts/p03/ep/{{name}}`
+
+  Examples:
+
+  - `/artifacts/p03/ep/initial`
+
+  - `/artifacts/p03/ep/v1`'
 limits: 'max_bytes: 5120 max_turns: 10 effort_level: 3'
 hooks: 'pre_build: null post_build: null on_error: null on_quality_fail: null'

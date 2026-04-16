@@ -16,21 +16,66 @@ domain: app_directory_entry construction
 created: '2026-04-14'
 updated: '2026-04-14'
 density_score: 0.85
-definition: "| metric | threshold | operator | scope |  \n|---|---|---|---|  \n| Required fields | 100% | must be present\
-  \ | tagline, screenshots, install steps, demo link |"
-hard_gates: "| ID | Check | Fail Condition |  \n|---|---|---|  \n| H01 | YAML frontmatter valid | invalid YAML syntax |  \n\
-  | H02 | ID matches pattern | ID does not match ^p05_ade_[a-z][a-z0-9_]+.md$ |  \n| H03 | kind field matches 'app_directory_entry'\
-  \ | kind ≠ 'app_directory_entry' |  \n| H04 | tagline present | tagline field missing or empty |  \n| H05 | screenshots\
-  \ ≥3 | <3 screenshots provided |  \n| H06 | install steps ≥2 | <2 install steps listed |  \n| H07 | demo link functional\
-  \ | demo link invalid or unreachable |  \n| H08 | app name present | app name field missing |"
-soft_scoring: "| Dim | Dimension | Weight | Scoring Guide |  \n|---|---|---|---|  \n| D01 | Tagline clarity | 0.10 | 0.0–1.0\
-  \ based on conciseness |  \n| D02 | Screenshot quality | 0.15 | 0.0–1.0 based on relevance |  \n| D03 | Install steps completeness\
-  \ | 0.15 | 0.0–1.0 based on detail |  \n| D04 | Demo link usability | 0.10 | 0.0–1.0 based on accessibility |  \n| D05 |\
-  \ App name accuracy | 0.10 | 0.0–1.0 based on correctness |  \n| D06 | Category alignment | 0.10 | 0.0–1.0 based on relevance\
-  \ |  \n| D07 | Description completeness | 0.15 | 0.0–1.0 based on detail |  \n| D08 | UX consistency | 0.15 | 0.0–1.0 based\
-  \ on design |"
-actions: "| Score | Action |  \n|---|---|  \n| ≥9.5 | GOLDEN: Auto-publish |  \n| ≥8.0 | PUBLISH: Approved |  \n| ≥7.0 | REVIEW:\
-  \ Manual check |  \n| <7.0 | REJECT: Fix required |"
-bypass: "| conditions | approver | audit trail |  \n|---|---|---|  \n| Critical bug in demo link | Senior Manager | Jira ticket\
-  \ # |  \n| Legal compliance override | Legal Team | Contract reference |  \n| Emergency release | CTO | Slack channel log\
-  \ |"
+definition: '| metric | threshold | operator | scope |
+
+  |---|---|---|---|
+
+  | Required fields | 100% | must be present | tagline, screenshots, install steps, demo link |'
+hard_gates: '| ID | Check | Fail Condition |
+
+  |---|---|---|
+
+  | H01 | YAML frontmatter valid | invalid YAML syntax |
+
+  | H02 | ID matches pattern | ID does not match ^p05_ade_[a-z][a-z0-9_]+.md$ |
+
+  | H03 | kind field matches ''app_directory_entry'' | kind != ''app_directory_entry'' |
+
+  | H04 | tagline present | tagline field missing or empty |
+
+  | H05 | screenshots >= 3 | fewer than 3 screenshots provided |
+
+  | H06 | install steps >= 2 | fewer than 2 install steps listed |
+
+  | H07 | demo link functional | demo link invalid or unreachable |
+
+  | H08 | app name present | app name field missing |'
+soft_scoring: '| Dim | Dimension | Weight | Scoring Guide |
+
+  |---|---|---|---|
+
+  | D01 | Tagline clarity | 0.10 | 0.0–1.0 based on conciseness |
+
+  | D02 | Screenshot quality | 0.15 | 0.0–1.0 based on relevance |
+
+  | D03 | Install steps completeness | 0.15 | 0.0–1.0 based on detail |
+
+  | D04 | Demo link usability | 0.10 | 0.0–1.0 based on accessibility |
+
+  | D05 | App name accuracy | 0.10 | 0.0–1.0 based on correctness |
+
+  | D06 | Category alignment | 0.10 | 0.0–1.0 based on relevance |
+
+  | D07 | Description completeness | 0.15 | 0.0–1.0 based on detail |
+
+  | D08 | UX consistency | 0.15 | 0.0–1.0 based on design |'
+actions: '| Score | Action |
+
+  |---|---|
+
+  | GOLDEN (>=9.5) | Auto-publish |
+
+  | PUBLISH (>=8.0) | Approved |
+
+  | REVIEW (>=7.0) | Manual check |
+
+  | REJECT (<7.0) | Fix required |'
+bypass: '| conditions | approver | audit trail |
+
+  |---|---|---|
+
+  | Critical bug in demo link | Senior Manager | Jira ticket # |
+
+  | Legal compliance override | Legal Team | Contract reference |
+
+  | Emergency release | CTO | Slack channel log |'

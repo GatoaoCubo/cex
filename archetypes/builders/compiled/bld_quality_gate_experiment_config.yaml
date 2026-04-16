@@ -18,6 +18,7 @@ tags:
 tldr: 'Gates for experiment_config: validates variant structure, traffic splits, metric definitions, and statistical parameter
   completeness.'
 density_score: 0.92
+llm_function: GOVERN
 definition: '| Field | Value |
 
   |-------|-------|

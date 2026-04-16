@@ -22,29 +22,29 @@ component_inventory: '| ISO Name             | Role                             
 
   | bld_manifest         | Defines pricing page structure and metadata | P05    | Active |
 
-  | bld_instruction      | Specifies pricing logic and rules         | P05    | Active |
+  | bld_instruction      | Specifies pricing logic and rules         | P03    | Active |
 
-  | bld_system_prompt    | Guides AI in generating pricing content   | P05    | Active |
+  | bld_system_prompt    | Guides AI in generating pricing content   | P03    | Active |
 
-  | bld_schema           | Enforces data format validation           | P05    | Active |
+  | bld_schema           | Enforces data format validation           | P06    | Active |
 
-  | bld_quality_gate     | Ensures content meets quality standards   | P05    | Active |
+  | bld_quality_gate     | Ensures content meets quality standards   | P11    | Active |
 
   | bld_output_template  | Formats final pricing page output         | P05    | Active |
 
-  | bld_examples         | Provides sample pricing scenarios         | P05    | Active |
+  | bld_examples         | Provides sample pricing scenarios         | P07    | Active |
 
-  | bld_knowledge_card   | Stores pricing-related knowledge assets   | P05    | Active |
+  | bld_knowledge_card   | Stores pricing-related knowledge assets   | P01    | Active |
 
-  | bld_architecture     | Defines builder system architecture       | P05    | Active |
+  | bld_architecture     | Defines builder system architecture       | P08    | Active |
 
-  | bld_collaboration    | Manages team workflows and feedback       | P05    | Active |
+  | bld_collaboration    | Manages team workflows and feedback       | P12    | Active |
 
-  | bld_config           | Centralizes pricing builder settings      | P05    | Active |
+  | bld_config           | Centralizes pricing builder settings      | P09    | Active |
 
-  | bld_memory           | Tracks pricing page session data          | P05    | Active |
+  | bld_memory           | Tracks pricing page session data          | P10    | Active |
 
-  | bld_tools            | Integrates external pricing utilities     | P05    | Active |'
+  | bld_tools            | Integrates external pricing utilities     | P04    | Active |'
 dependencies: '| From             | To               | Type       |
 
   |------------------|------------------|------------|
@@ -57,7 +57,7 @@ dependencies: '| From             | To               | Type       |
 
   | bld_quality_gate | bld_memory       | State Dependency |
 
-  | bld_tools        | analytics_tool   | External API |'
+  | bld_tools        | cex_compile.py   | CEX Tool |'
 architectural_position: The pricing_page serves as the user-facing interface within the CEX P05 ecosystem, enabling dynamic
   generation of subscription-based pricing models. It integrates with configuration, memory, and validation components to
   ensure consistent, high-quality pricing content while leveraging external tools for analytics and compliance checks.

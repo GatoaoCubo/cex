@@ -20,3 +20,5 @@ naming_convention: 'Pattern: `p05_ade_{{name}}.md` Examples: `p05_ade_user_profi
 paths: 'Artifacts stored in: `/artifacts/p05/ade/{{name}}.md` Example: `/artifacts/p05/ade/user_profile.md`'
 limits: 'max_bytes: 4096 max_turns: 5 effort_level: medium'
 hooks: 'pre_build: null post_build: null on_error: null on_quality_fail: null'
+domain_scope: This config applies to app directory entry artifacts. Each app directory entry artifact is stored under the
+  app directory path with the ade prefix, scoping all entry files to the app directory namespace.

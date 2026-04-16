@@ -24,17 +24,17 @@ phase_1_research:
 - Design evolutionary triggers (e.g., error thresholds, performance drops).
 - Simulate loop behavior using historical data.
 phase_2_compose:
-- Reference SCHEMA.md for structural requirements.
+- Reference bld_schema_self_improvement_loop.md for structural requirements.
 - Define feedback loop components (sensor, evaluator, modifier).
 - Write sensor module to capture real-time system data.
 - Implement evaluator using metrics from Phase 1.
-- Code modifier to apply governance rules (see OUTPUT_TEMPLATE.md).
+- Code modifier to apply governance rules (see bld_output_template_self_improvement_loop.md).
 - Integrate loop with existing system architecture.
 - Embed versioning to track iterative changes.
 - Add safety guards to prevent destabilizing updates.
 - Finalize documentation per OUTPUT_TEMPLATE.md.
 phase_3_validate:
-- '[ ] Verify schema compliance (SCHEMA.md).'
+- '[ ] Verify schema compliance (bld_schema_self_improvement_loop.md).'
 - '[ ] Test loop with synthetic failure scenarios.'
 - '[ ] Confirm feedback accuracy via metric cross-checks.'
 - '[ ] Ensure governance rules align with P11 Pillar.'

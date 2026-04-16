@@ -4,30 +4,107 @@ pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of consolidation_policy artifacts
 quality: null
-title: Examples Consolidation Policy
-version: 1.0.0
-author: wave1_builder_gen_v2
+title: 'Examples: consolidation_policy artifacts'
+version: 2.0.0
+author: n06_commercial
 tags:
 - consolidation_policy
 - builder
 - examples
-tldr: Golden and anti-examples of consolidation_policy artifacts
-domain: consolidation_policy construction
+tldr: 'Golden example: MemGPT-style promotion + eviction + compliance. Anti-examples: OS GC (wrong domain) and missing promotion
+  rules.'
+domain: LLM agent memory consolidation
 created: '2026-04-14'
 updated: '2026-04-14'
-density_score: 0.85
-golden_example: "title: \"PyTorch Memory Consolidation Policy for Large Language Models\"\nkind: consolidation_policy\nvendor:\
-  \ Meta\nversion: 1.13.1\ndescription: \"Memory lifecycle management for PyTorch-based LLM inference workloads\"\n\nbody:\n\
-  \  memory_retention:\n    - stage: \"inference\"\n      duration: \"session_lifetime\"\n      strategy: \"reference_counting\"\
-  \n  eviction:\n    - trigger: \"memory_pressure\"\n      threshold: \"90% GPU utilization\"\n      action: \"evict_low_priority_tensors\"\
-  \n  garbage_collection:\n    - interval: \"every 100ms\"\n    - strategy: \"mark_and_sweep\"\n  logging:\n    - level: \"\
-  debug\"\n    - metrics: [\"resident_memory\", \"cached_tensors\", \"eviction_rate\"]"
-anti_example_1_confusing_with_memory_scope: "title: \"Incorrect Memory Scope Policy\"\nkind: consolidation_policy\nvendor:\
-  \ HuggingFace\nversion: 4.28.0\ndescription: \"Access control for model parameters\"\n\nbody:\n  access:\n    - role: \"\
-  inference\"\n      permissions: [\"read\", \"write\"]\n    - role: \"training\"\n      permissions: [\"read\", \"write\"\
-  , \"modify\"]"
-why_it_fails: Lacks essential policies for memory retention, eviction strategies, and monitoring metrics. A complete policy
-  must define full lifecycle management from allocation to deallocation.
-anti_example_2_missing_critical_policies: "title: \"Incomplete Memory Policy\"\nkind: consolidation_policy\nvendor: Google\n\
-  version: 2.5.0\ndescription: \"Basic memory management for TPU workloads\"\n\nbody:\n  garbage_collection:\n    - interval:\
-  \ \"every 5s\""
+density_score: 0.9
+golden_example_customer_support_agent_pro_tier: '---
+
+  id: p10_cp_customer_support_pro
+
+  kind: consolidation_policy
+
+  pillar: P10
+
+  title: "Consolidation Policy: Customer Support Agent (PRO)"
+
+  version: "1.0.0"
+
+  created: "2026-04-14"
+
+  author: n06_commercial
+
+  domain: customer-support
+
+  quality: null
+
+  tags: [consolidation_policy, customer_support, pro]
+
+  tldr: "PRO tier: session-end episodic promotion, importance-gated semantic, 90-day TTL, LRU eviction."
+
+  tier: pro
+
+  eviction_strategy: hybrid
+
+  consolidation_async: true
+
+  importance_floor: 0.3
+
+  retention_days: 90
+
+  promotion_threshold: 0.7
+
+  audit_trail: false
+
+  ---
+
+
+  Why golden: all required frontmatter, consolidation_async: true, tier=pro,
+
+  eviction_strategy=hybrid, importance_floor + promotion_threshold defined. Body includes
+
+  Promotion Rules table, Eviction Rules table, importance scoring formula, async job spec,
+
+  and FREE/PRO/ENTERPRISE tier matrix. No OS memory terminology.'
+anti_example_1_os_gc_domain_contamination_d04: "---\nid: p10_cp_pytorch_gc\nkind: consolidation_policy\ntitle: \"PyTorch Memory\
+  \ Consolidation for LLM Inference\"\nvendor: Meta\nversion: 1.13.1\ndescription: \"Memory lifecycle for PyTorch inference\
+  \ with mark-and-sweep GC\"\nbody:\n  garbage_collection:\n    interval: \"every 100ms\"\n    strategy: \"mark_and_sweep\"\
+  \n  eviction:\n    trigger: \"90% GPU utilization\"\n    action: \"evict_low_priority_tensors\"\n---\n\nWhy it fails:\n\
+  - Describes PyTorch tensor management and GPU memory -- NOT agent memory\n- `garbage_collection: mark_and_sweep` is OS/GC\
+  \ terminology, wrong domain\n- No `consolidation_async` field, no `importance_floor`, no `tier`\n- No Promotion Rules (working->episodic)\
+  \ or Semantic Promotion\n- Missing all required frontmatter fields (`pillar`, `quality`, `tags`, `tldr`)"
+anti_example_2_missing_promotion_rules: '---
+
+  id: p10_cp_minimal
+
+  kind: consolidation_policy
+
+  pillar: P10
+
+  tier: pro
+
+  consolidation_async: true
+
+  eviction_strategy: ttl
+
+  retention_days: 90
+
+  ---
+
+  ## Eviction Rules
+
+  Delete everything older than 90 days.
+
+
+  Why it fails:
+
+  - Has eviction but NO promotion rules: episodic -> semantic promotion is missing
+
+  - Eviction rule is a sentence, not a structured table
+
+  - No importance scoring section
+
+  - No Commercial Tier Matrix
+
+  - Missing required frontmatter: `quality`, `tags`, `tldr`, `domain`, `author`
+
+  - Fails H05 (Promotion Rules section absent), D2 (0.0), D3 (0.0)'

@@ -24,15 +24,15 @@ phase_1_research:
 - Benchmark against P07 governance standards for AI system accountability.
 - Interview domain experts to identify unmet evaluation needs.
 phase_2_compose:
-- Set up artifact structure using SCHEMA.md’s hierarchical framework.
-- Write introduction aligning with OUTPUT_TEMPLATE.md’s scope section.
-- 'Detail methodology: metric definitions, data sources, and evaluation workflows.'
-- Map governance principles (P07) to evaluation stages (e.g., risk mitigation).
-- Embed trajectory analysis examples from Phase 1 datasets.
-- Reference SCHEMA.md for compliance with artifact metadata standards.
-- Draft validation protocols (e.g., cross-agent comparisons, edge case testing).
-- Format tables and figures per OUTPUT_TEMPLATE.md’s visual guidelines.
-- Finalize artifact with peer review and schema validation.
+- Set up artifact structure using bld_schema_trajectory_eval.md’s field definitions.
+- Write trajectory overview table aligned with bld_output_template_trajectory_eval.md’s structure.
+- 'Log each step: observation summary, reasoning summary, action taken, outcome.'
+- 'Compute all evaluation metrics: task_success, path_efficiency, tool_call_accuracy, partial_credit.'
+- Score each step using LLM-as-judge pattern from bld_quality_gate_trajectory_eval.md.
+- Reference bld_schema_trajectory_eval.md for ID pattern and required fields.
+- Identify first failure step and classify root cause (hallucination/grounding_error/tool_misuse/reasoning_drift).
+- Write targeted recommendations based on failure analysis.
+- 'Finalize frontmatter and compile: python _tools/cex_compile.py {path}'
 phase_3_validate:
 - '[ ] Conduct peer review for clarity and governance alignment.'
 - '[ ] Verify data accuracy against Phase 1 datasets.'

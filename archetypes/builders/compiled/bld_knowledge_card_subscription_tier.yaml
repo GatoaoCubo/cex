@@ -6,55 +6,84 @@ purpose: Domain knowledge for subscription_tier production
 quality: null
 title: Knowledge Card Subscription Tier
 version: 1.0.0
-author: wave1_builder_gen_v2
+author: n03_builder
 tags:
 - subscription_tier
 - builder
 - knowledge_card
-tldr: Domain knowledge for subscription_tier production
+tldr: 'SaaS subscription tier domain knowledge: Stripe/Chargebee billing contracts, monetization units, feature matrices,
+  NRR / expansion MRR, and grandfathering discipline.'
 domain: subscription_tier construction
 created: '2026-04-14'
 updated: '2026-04-14'
-density_score: 0.85
-domain_overview: Subscription tiers are foundational to SaaS monetization, structuring access to features, support, and scalability
-  based on pricing. Tiers typically range from free (limited functionality) to premium (enterprise-level capabilities), enabling
-  customer segmentation and revenue optimization. Pricing models include flat-rate, usage-based, and tiered pricing, with
-  feature matrices defining what each tier unlocks. Effective tier design balances customer value perception with cost recovery,
-  often informed by pricing psychology and competitive benchmarking. Tiered models also influence churn management and upsell
-  opportunities, requiring alignment with customer lifetime value (CLV) and product roadmap priorities. Industry leaders like
-  Salesforce and Slack use tiered pricing to scale from individual users to large organizations, while startups often adopt
-  freemium models to drive adoption.
-key_concepts: "| Concept                | Definition                                                                 | Source\
-  \                              |  \n|-----------------------|----------------------------------------------------------------------------|-------------------------------------|\
-  \  \n| Freemium Model        | Offering basic features for free, with premium tiers requiring payment.   | Anderson (2006,\
-  \ The Long Tail)    |  \n| Price Discrimination  | Charging different prices for the same product based on customer segments.\
-  \ | Varian (2006, Intermediate Microeconomics) |  \n| Value-Based Pricing   | Setting prices based on perceived customer\
-  \ value rather than cost.        | Kaplan & Norton (1984, Harvard Business Review) |  \n| Feature Matrix        | A table\
-  \ mapping features to tiers, clarifying what each tier includes.     | HBR Case Study: SaaS Pricing Strategy |  \n| Churn\
-  \ Rate            | Percentage of customers canceling subscriptions within a period.          | Bain & Company (2018, Customer\
-  \ Retention Report) |  \n| Cohort Analysis       | Grouping customers by sign-up date to track tier retention and spending.\
-  \  | Mixpanel (2020, Product Analytics Guide) |  \n| Net Promoter Score (NPS) | Measures customer satisfaction and loyalty\
-  \ across tiers.               | Reichheld (2003, Harvard Business Review) |  \n| Tiered Pricing        | Structuring prices\
-  \ into discrete levels with incremental feature access. | Gartner (2021, SaaS Pricing Trends) |  \n| Bundling          \
-  \    | Combining features or services into a single tiered offering.             | McAfee & Schwartz (2002, Economics of\
-  \ Network Goods) |  \n| Price Elasticity      | Sensitivity of demand to price changes across tiers.                   \
-  \   | Varian (2006, Intermediate Microeconomics) |  \n| Revenue Per User (RPU)| Average revenue generated per customer across\
-  \ tiers.                      | SaaS Metrics (2022, ARR and RPU Benchmarks) |"
+density_score: 0.88
+domain_overview: 'Subscription tiers are the structural unit of SaaS monetization: each tier is a priced bundle of features
+  with a recurring billing cadence. Effective tier design balances simplicity (3-4 tiers max to avoid decision fatigue) with
+  price discrimination across customer segments. Industry systems of record -- Stripe Billing, Chargebee, Recurly, Paddle,
+  Zuora -- impose a canonical contract: an integer `unit_amount` in the smallest currency unit, an ISO 4217 `currency`, a
+  `recurring.interval` in {day, week, month, year}, and an `interval_count`. Tier artifacts that deviate from these semantics
+  break multi-region billing, tax calculation, and proration. Beyond mechanics, tier design governs two SaaS metrics that
+  determine enterprise value: Net Revenue Retention (NRR, target >= 110%) and Gross Revenue Retention (GRR, target >= 90%).
+  Tiers drive NRR through expansion hooks: seat growth (per_seat models), usage growth (per_usage), and upgrade paths (tier
+  -> tier). Bessemer''s "State of the Cloud" and OpenView''s SaaS Benchmarks publish these thresholds annually.'
+key_concepts: '| Concept | Definition | Source |
+
+  |---|---|---|
+
+  | Monetization Unit | The axis of value capture: flat, per_seat, per_usage, or hybrid. | OpenView SaaS Pricing Benchmarks
+  (annual) |
+
+  | Feature Matrix | Table mapping features to tiers with `{included, quota, addon_price}` cells. | Stripe Billing product
+  docs |
+
+  | Price Object (Stripe) | `{unit_amount, currency, recurring.interval, interval_count}` canonical shape. | Stripe API reference
+  (`/v1/prices`) |
+
+  | Net Revenue Retention (NRR) | MRR retained and expanded from a cohort over 12 months. Target >= 110%. | Bessemer "State
+  of the Cloud" |
+
+  | Expansion MRR | Incremental MRR from existing customers via seat / usage / upgrade growth. | OpenView SaaS Benchmarks
+  |
+
+  | Grandfathering | Keeping legacy customers on old pricing/features after a tier change. | Stripe, Chargebee product docs
+  |
+
+  | Proration Behavior | How mid-cycle plan changes are billed. Stripe values: none, create_prorations, always_invoice. |
+  Stripe API (`proration_behavior`) |
+
+  | ARPU / ARPA | Average Revenue Per User / Account. | Standard SaaS metric (SaaStr, KeyBanc) |
+
+  | Churn Rate | Percentage of customers canceling per period. Logo vs revenue churn distinct. | KeyBanc SaaS Survey |
+
+  | Seat Expansion | Growth within a tier via additional licensed users (drives NRR for per_seat). | Salesforce, Slack, Linear
+  playbooks |
+
+  | Annual Discount | Incentive to prepay; industry norm 15-25% vs monthly. | OpenView, ProfitWell data |
+
+  | Sample Ratio in Pricing Tests | Guardrail when A/B testing prices -- SRM invalidates conclusions. | Kohavi et al. (2020)
+  "Trustworthy Online Controlled Experiments" |'
 industry_standards:
-- Gartner’s SaaS Pricing and Monetization Framework
-- ISO/IEC 20000-1:2018 (IT service management, indirectly relevant)
-- ACM SIGCHI guidelines for user-centric feature design
-- Harvard Business Review case studies on tiered pricing
-- McKinsey’s Price Optimization Framework
+- Stripe Billing API (`/v1/prices`, `/v1/products`, `/v1/subscriptions`) -- de-facto price object contract.
+- Chargebee Plans API -- plan, addon, coupon, entitlement model.
+- Recurly Plans & Add-ons -- tier + add-on + coupon decomposition.
+- Paddle Billing -- Merchant-of-Record semantics (tax_behavior, geo pricing).
+- Zuora Billing -- enterprise rate plan + charge model.
+- ISO 4217 -- currency codes (mandatory for price.currency).
+- 'Gartner Magic Quadrant: Subscription Management -- vendor landscape.'
+- OpenView SaaS Benchmarks -- NRR, GRR, CAC payback norms.
 common_patterns:
-- Freemium with hard limits – Free tier restricts usage or features to drive upgrades.
-- User-based tiering – Pricing scales with the number of users or seats.
-- Feature-based differentiation – Premium tiers unlock advanced analytics or APIs.
-- Bundled add-ons – Additional features sold as optional upgrades.
-- Usage-based pricing – Costs tied to transaction volume or data processed.
+- '3-4 tier ceiling -- Starter, Growth/Pro, Business, Enterprise. More than 4 triggers decision fatigue (data: ProfitWell).'
+- Seat-based for collaboration tools (Slack, Linear, Notion) -- seat count drives expansion MRR naturally.
+- Usage-based for APIs/infra (OpenAI, Stripe, AWS) -- meter + included quota + overage price.
+- Hybrid (platform + usage) (Zendesk, Intercom) -- flat platform fee + per-seat or per-conversation.
+- Annual discount 15-25% -- pulls cash forward, lifts retention.
+- Enterprise = custom -- "Contact us" pricing with negotiated contract; tier is a shell.
 pitfalls:
-- Overloading tiers with too many features, confusing customers.
-- Failing to align tier benefits with customer pain points.
-- Ignoring price elasticity, leading to suboptimal pricing.
-- Poor onboarding for higher tiers, reducing activation rates.
-- Lack of clear value differentiation between adjacent tiers.
+- 'Medal naming (Bronze/Silver/Gold): buyers self-select by outcome ("I''m a team", "I run a business"), not by metal.'
+- 'Floating-point prices (9.99): breaks Stripe, rounds wrong in multi-currency, fails exact-cents accounting.'
+- 'Missing grandfathering: legal risk + mass churn when live tier is repriced without lock.'
+- 'Overlap collapse: Pro and Enterprise differ only by "support SLA" -> buyers negotiate to Pro.'
+- 'No expansion hooks: flat tier with no seat/usage/upgrade path caps NRR below 100%.'
+- 'Ignoring proration: mid-cycle upgrades over-bill or lose revenue -- pick `create_prorations` and document.'
+- 'Tax opacity: omitting `tax_behavior` breaks EU VAT / US sales-tax compliance.'
+- 'No sunset plan: every tier accumulates debt -- design deprecation from day one.'

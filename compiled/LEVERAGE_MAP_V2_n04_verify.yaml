@@ -10,6 +10,7 @@ nucleus: n04
 model: llama3.1:8b
 cycle: verify
 timestamp: 2026-04-15 15:05:29-03:00
+density_score: 1.0
 f1_constrain:
 - 'Kind: verification_report'
 - 'Pillar: P01'

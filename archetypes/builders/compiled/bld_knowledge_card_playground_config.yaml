@@ -16,39 +16,51 @@ domain: playground_config construction
 created: '2026-04-14'
 updated: '2026-04-14'
 density_score: 0.85
-domain_overview: Playground_config artifacts enable controlled, interactive evaluation of products by defining environments
-  where users can test features, configurations, or integrations without affecting production systems. Common in DevOps, cloud
-  computing, and developer tooling, these configs balance flexibility with safety, ensuring users can experiment with APIs,
-  workflows, or parameters while enforcing isolation, resource limits, and compliance. They are critical in scenarios like
-  API sandboxing, CI/CD pipeline prototyping, and product demo environments. Key to modern software evaluation, playground_configs
-  often integrate with containerization (e.g., Docker), orchestration (e.g., Kubernetes), and API management tools. They must
-  align with security policies, performance benchmarks, and scalability requirements while minimizing friction for end-users.
-key_concepts: "| Concept | Definition | Source |  \n|---|---|---|  \n| Environment Variables | Key-value pairs defining runtime\
-  \ parameters | POSIX.1-2017 |  \n| Resource Quotas | Limits on CPU, memory, or storage usage | Kubernetes API |  \n| Access\
-  \ Control Lists (ACLs) | Permissions defining user/group access | RFC 2119 |  \n| API Gateway Rules | Routing, rate limiting,\
-  \ and authentication policies | OpenAPI Specification |  \n| Ephemeral Volumes | Temporary storage for stateful operations\
-  \ | Docker Docs |  \n| Configuration Templates | Parameterized blueprints for environment setup | 12-Factor App |  \n| Compliance\
-  \ Policies | Regulatory or organizational rules enforced in configs | NIST SP 800-53 |  \n| Dependency Injection | Mechanism\
-  \ to externalize service dependencies | Spring Framework |  \n| Logging Configuration | Rules for audit trails and error\
-  \ tracking | RFC 5424 |  \n| Versioned Environments | Isolated setups tied to specific product versions | GitOps Principles\
-  \ |"
+domain_overview: 'Playground_config artifacts define interactive, try-before-buy evaluation environments for AI products,
+  APIs, and SDKs. The pattern is proven by OpenAI Playground (prompt + model + sampling controls), Anthropic Console, Swagger/OpenAPI
+  "Try It Out" in-browser explorers, Replit and CodeSandbox embed APIs, and JupyterLite WASM kernels. The goal is zero-friction
+  first-touch: the user runs a representative workload with sane defaults, hits resource caps safely, and sees a clear upgrade
+  path to paid tiers. A playground_config differs from a sandbox_spec: playground optimizes for conversion (low friction,
+  short sessions, shareable URLs), sandbox optimizes for enterprise procurement (strict isolation, audit trails, compliance).
+  Playground sessions are typically rate-limited, time-boxed, stateless, and observable.'
+key_concepts: '| Concept | Definition | Source |
+
+  |---|---|---|
+
+  | Rate-limited session | Per-IP or per-key caps on requests and tokens | OpenAI Playground, Anthropic Console |
+
+  | Interactive REPL | Read-eval-print loop in browser | JupyterLite, Replit, CodeSandbox |
+
+  | API Try-It-Out | Form-driven API call from docs | Swagger UI, Redoc, Stoplight |
+
+  | Embed snippet | iframe or script tag to host playground elsewhere | CodeSandbox, StackBlitz, Replit |
+
+  | Activation metric | Instrumented event signaling value realized | PLG literature (Reforge, OpenView) |
+
+  | Quota gate | Hard stop that surfaces upgrade prompt | Vercel, Supabase, Stripe test mode |
+
+  | Ephemeral state | No persistence across sessions | Firecracker-backed notebook kernels |
+
+  | Sharable reproduction | URL encodes prompt + config for collab | OpenAI Playground share links |'
 industry_standards:
-- Kubernetes API (Resource Management)
-- OpenID Connect (Authentication)
-- RFC 7231 (HTTP Methods for API Testing)
-- NIST SP 800-53 (Compliance)
-- 12-Factor App (Configuration Patterns)
-- OpenAPI Specification (API Gateway Rules)
-- POSIX.1-2017 (Environment Variables)
+- OpenAI Playground (prompt + model + temperature + max_tokens reference UX)
+- Anthropic Console playground controls
+- Swagger UI / OpenAPI 3.1 "Try It Out" spec
+- Replit + CodeSandbox embed API contracts
+- JupyterLite (WASM Python, pyodide)
+- Product-Led Growth activation metric frameworks (Reforge, OpenView)
+- JSON Schema draft 2020-12 (config validation)
+- 12-Factor App (externalized config principles)
 common_patterns:
-- Modular configuration templates using JSON Schema
-- Versioned environments aligned with Git branches
-- Ephemeral resource allocation via Kubernetes
-- Policy-based access control using OAuth 2.0
-- Integrated CI/CD triggers with Webhooks
+- Pre-filled example prompts that demonstrate the killer use case in under 10 seconds.
+- Hard quotas (token + rate) with inline upgrade CTA when exceeded.
+- Stateless, shareable URLs encoding the full config.
+- Embed mode via iframe with postMessage event bus for analytics.
+- Activation event fires on first successful run; feeds conversion funnel.
+- Ephemeral compute via WASM or Firecracker micro-VMs for isolation.
 pitfalls:
-- Overly permissive defaults leading to security gaps
-- Insufficient isolation causing environment contamination
-- Ignoring compliance frameworks during setup
-- Poor logging configurations masking errors
-- Lack of versioning causing config drift
+- Generous defaults burn compute budget with zero conversion signal.
+- No activation metric -- unable to measure free-to-paid funnel effectiveness.
+- Playground treated as a sandbox (over-isolated, slow boot, hurts first-touch UX).
+- Missing upgrade CTA at quota wall -- friction without destination.
+- No shareable reproduction -- blocks viral loop and support reproducibility.

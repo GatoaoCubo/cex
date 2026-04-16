@@ -24,15 +24,20 @@ phase_1_research:
 - Document use cases for abandoned cart recovery and dynamic pricing.
 - Benchmark industry standards for checkout conversion rates and load times.
 phase_2_compose:
-- 'Define artifact schema per SCHEMA.md (sections: compliance, flows, engines).'
+- 'Define artifact schema per bld_schema_ecommerce_vertical.md (sections: compliance, flows, engines).'
 - Map PCI-DSS requirements to checkout data fields and encryption protocols.
-- Write recommendation engine logic using OUTPUT_TEMPLATE.md’s ML integration block.
+- Write recommendation engine logic using bld_output_template_ecommerce_vertical.md’s ML integration block.
 - Draft fraud detection rules (thresholds, anomaly scoring) in JSON format.
 - Outline cart/checkout UX steps with error handling and validation rules.
 - Embed use case examples (e.g., “guest checkout”, “multi-currency support”).
 - Integrate schema versioning and artifact metadata (author, date, version).
-- Validate template syntax against OUTPUT_TEMPLATE.md’s placeholder structure.
+- Validate template syntax against bld_output_template_ecommerce_vertical.md’s placeholder structure.
 - Finalize artifact with cross-references to compliance and performance metrics.
-phase_3_validate: '[ ] ✅ Schema matches SCHEMA.md (no missing fields or invalid types) [ ] ✅ PCI-DSS compliance rules pass
-  static code analysis [ ] ✅ Fraud detection thresholds align with industry benchmarks [ ] ✅ Recommendation engine outputs
-  match sample data in OUTPUT_TEMPLATE.md [ ] ✅ Cart/checkout flow passes end-to-end simulation (no deadlocks or errors)'
+phase_3_validate:
+- '[ ] Schema matches bld_schema_ecommerce_vertical.md (no missing fields or invalid types)'
+- '[ ] PCI-DSS compliance rules pass static code analysis'
+- '[ ] Fraud detection thresholds align with industry benchmarks'
+- '[ ] Recommendation engine outputs match sample data in bld_output_template_ecommerce_vertical.md'
+- '[ ] Cart/checkout flow passes end-to-end simulation (no deadlocks or errors)'
+domain_scope: This instruction applies to ecommerce vertical artifacts (cart, checkout, catalog, payments, recommendations).
+  It covers the full ecommerce transaction lifecycle from product discovery through post-purchase loyalty mechanics.

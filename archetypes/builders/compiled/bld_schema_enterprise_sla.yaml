@@ -17,23 +17,50 @@ created: '2026-04-14'
 updated: '2026-04-14'
 density_score: 0.85
 frontmatter_fields: ''
-required: "| Field | Type | Required | Default | Notes |  \n|---|---|---|---|---|  \n| id | string | yes |  | Must match ID\
-  \ Pattern |  \n| kind | string | yes |  | Always `enterprise_sla` |  \n| pillar | string | yes |  | Always `P11` |  \n|\
-  \ title | string | yes |  | Human-readable name |  \n| version | string | yes |  | Semantic version (e.g., `1.0.0`) |  \n\
-  | created | datetime | yes |  | ISO 8601 format |  \n| updated | datetime | yes |  | ISO 8601 format |  \n| author | string\
-  \ | yes |  | Owner of the document |  \n| domain | string | yes |  | Business unit or product |  \n| quality | null | yes\
-  \ | null | Never self-score; peer review assigns |  \n| tags | list | yes |  | Keywords for search |  \n| tldr | string\
-  \ | yes |  | Summary of key terms |  \n| service_level_objective | string | yes |  | Target uptime or performance |  \n\
-  | compliance_requirements | list | yes |  | Legal or regulatory mandates |"
-recommended: "| Field | Type | Notes |  \n|---|---|---|  \n| revision_history | list | Track changes over time |  \n| contact_info\
-  \ | string | Point of contact for SLA |"
+required: '| Field | Type | Required | Default | Notes |
+
+  |---|---|---|---|---|
+
+  | id | string | yes |  | Must match ID Pattern |
+
+  | kind | string | yes |  | Always `enterprise_sla` |
+
+  | pillar | string | yes |  | Always `P11` |
+
+  | title | string | yes |  | Human-readable name |
+
+  | version | string | yes |  | Semantic version (e.g., `1.0.0`) |
+
+  | created | datetime | yes |  | ISO 8601 format |
+
+  | updated | datetime | yes |  | ISO 8601 format |
+
+  | author | string | yes |  | Owner of the document |
+
+  | domain | string | yes |  | Business unit or product |
+
+  | quality | null | yes | null | Never self-score; peer review assigns |
+
+  | tags | list | yes |  | Keywords for search |
+
+  | tldr | string | yes |  | Summary of key terms |
+
+  | service_level_objective | string | yes |  | Target uptime or performance |
+
+  | compliance_requirements | list | yes |  | Legal or regulatory mandates |'
+recommended: '| Field | Type | Notes |
+
+  |---|---|---|
+
+  | revision_history | list | Track changes over time |
+
+  | contact_info | string | Point of contact for SLA |'
 id_pattern: ^p11_sla_[a-z][a-z0-9_]+.md$
-body_structure: "1. Service Level Objectives (SLOs)  \n   Define measurable targets for uptime, response time, and resolution\
-  \ time.  \n\n2. Compliance and Legal Requirements  \n   List regulatory standards, data protection clauses, and audit procedures.\
-  \  \n\n3. SLA Renewal and Termination  \n   Outline conditions for contract extension, breach penalties, and exit clauses.\
-  \  \n\n4. Performance Metrics and Reporting  \n   Specify KPIs, reporting cadence, and tools for monitoring and transparency.\
-  \  \n\n5. Escalation Procedures  \n   Detail steps for resolving service disruptions, including contact hierarchies and\
-  \ timelines."
+body_structure: "1. Service Level Objectives (SLOs)\n   Define measurable targets for uptime, response time, and resolution\
+  \ time.\n\n2. Compliance and Legal Requirements\n   List regulatory standards, data protection clauses, and audit procedures.\n\
+  \n3. SLA Renewal and Termination\n   Outline conditions for contract extension, breach penalties, and exit clauses.\n\n\
+  4. Performance Metrics and Reporting\n   Specify KPIs, reporting cadence, and tools for monitoring and transparency.\n\n\
+  5. Escalation Procedures\n   Detail steps for resolving service disruptions, including contact hierarchies and timelines."
 constraints:
 - ID must match ^p11_sla_[a-z][a-z0-9_]+.md$ exactly.
 - All required fields must be present and non-null.

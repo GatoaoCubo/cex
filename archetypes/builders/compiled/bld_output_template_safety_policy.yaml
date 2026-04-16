@@ -17,7 +17,7 @@ domain: safety_policy construction
 created: '2026-04-13'
 updated: '2026-04-13'
 density_score: 0.92
-1_purpose_and_scope: 'Purpose: {{state what behaviors this policy governs and why}} Applies to: {{platform type, user segment,
+1_purpose_and_scope: 'Purpose: `{{state what behaviors this policy governs and why}}` Applies to: {{platform type, user segment,
   product area}} Out of scope: {{what this policy does NOT govern -- delegate to other policies}}'
 2_harm_category_table: 'Real harm taxonomies must be cited. DO NOT use placeholder category names.
 
@@ -26,8 +26,8 @@ density_score: 0.92
 
   |----------|--------|-----------|----------------|-------------|
 
-  | {{category}} | {{Perspective API / OpenAI / Anthropic}} | {{0.80}} | {{BLOCK/FLAG/DEGRADE/LOG}} | {{EU AI Act Art. X /
-  COPPA}} |
+  | `{{category}}` | {{Perspective API / OpenAI / Anthropic}} | {{0.80}} | {{BLOCK/FLAG/DEGRADE/LOG}} | {{EU AI Act Art. X
+  / COPPA}} |
 
 
   Minimum required rows:
@@ -45,9 +45,9 @@ density_score: 0.92
 
   | EU | AI Act (2024) | Art. 9 | Risk management system | This policy document |
 
-  | EU | AI Act | Art. 13 | Transparency disclosure | {{disclosure mechanism}} |
+  | EU | AI Act | Art. 13 | Transparency disclosure | `{{disclosure mechanism}}` |
 
-  | {{US/CO/NYC}} | {{Colorado SB 22-169 / NYC LL144}} | {{section}} | {{obligation}} | {{deliverable}} |'
+  | {{US/CO/NYC}} | {{Colorado SB 22-169 / NYC LL144}} | `{{section}}` | {{obligation}} | `{{deliverable}}` |'
 4_enforcement_actions: 'Every harm category maps to exactly one action tier:
 
 
@@ -111,6 +111,6 @@ density_score: 0.92
   | LOG only | Full revenue | None | Low: log must be available to audit |'
 7_review_and_update_protocol:
 - 'Review trigger: any of (a) new legal framework enacted, (b) harm category miss in production, (c) quarterly scheduled review'
-- 'Owner: {{safety policy owner role}}'
+- 'Owner: `{{safety policy owner role}}`'
 - 'Approval: {{legal + CISO sign-off}}'
 - 'Version history: maintained in git, semantic versioning'

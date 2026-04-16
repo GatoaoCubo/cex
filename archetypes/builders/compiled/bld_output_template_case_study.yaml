@@ -5,24 +5,70 @@ llm_function: PRODUCE
 purpose: Template with vars for case_study production
 quality: null
 title: Output Template Case Study
-version: 1.0.0
+version: 1.1.0
 author: wave1_builder_gen_v2
 tags:
 - case_study
 - builder
 - output_template
-tldr: Template with vars for case_study production
+tldr: Challenge-Solution-Outcome template with pullquote, ROI call-out, and KPI table
 domain: case_study construction
 created: '2026-04-14'
 updated: '2026-04-14'
 density_score: 0.85
-overview: '{{overview}} <!-- Brief context and objectives -->'
-key_findings: '| Metric       | Value   | Description              |
+company_snapshot: '| Field | Value |
 
-  |--------------|---------|--------------------------|
+  |-------|-------|
 
-  | {{metric1}}  | {{val1}}| {{desc1}}                |
+  | Company | {{customer_name}} |
 
-  | {{metric2}}  | {{val2}}| {{desc2}}                |'
-recommendations: "# Sample code block\ndef {{function_name}}():\n    {{code_logic}}  # Placeholder for implementation"
-conclusion: '{{conclusion}} <!-- Summary of implications and next steps -->'
+  | Industry | {{industry}} |
+
+  | Size | {{employee_count}} employees |
+
+  | Region | {{region}} |
+
+  | Champion | {{champion_name}}, {{champion_title}} |
+
+  | Product Used | {{cex_product}} |'
+the_challenge: '<!-- 150-200 words. Before-state, pain context, business stakes. -->
+
+  {{challenge_narrative}}
+
+
+  Key pain points:
+
+  - {{pain_point_1}}
+
+  - {{pain_point_2}}
+
+  - {{pain_point_3}}'
+the_solution: '<!-- Named features, deployment timeline, integrations. -->
+
+  {{solution_narrative}}
+
+
+  Implementation:
+
+  - Timeline: {{deployment_weeks}} weeks
+
+  - Key features: {{feature_list}}
+
+  - Integrations: {{integration_list}}'
+the_outcome: '<!-- 3+ KPIs with before/after comparison. -->
+
+  {{outcome_narrative}}
+
+
+  | Metric | Before | After | Change |
+
+  |--------|--------|-------|--------|
+
+  | {{kpi_1_name}} | {{kpi_1_before}} | {{kpi_1_after}} | {{kpi_1_delta}} |
+
+  | {{kpi_2_name}} | {{kpi_2_before}} | {{kpi_2_after}} | {{kpi_2_delta}} |
+
+  | {{kpi_3_name}} | {{kpi_3_before}} | {{kpi_3_after}} | {{kpi_3_delta}} |'
+roi_call_out: '> {{roi_headline_metric}} in {{roi_timeframe}} > Source: {{roi_source}} ({{roi_date}})'
+customer_pullquote: '> "{{pullquote_text_50_80_words}}" > > -- {{champion_name}}, {{champion_title}}, {{customer_name}}'
+lessons_learned: <!-- 50-100 words. Transferable insight for similar customers. --> {{lessons_learned}}

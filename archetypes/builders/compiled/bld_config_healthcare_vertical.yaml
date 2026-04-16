@@ -16,7 +16,13 @@ domain: healthcare_vertical construction
 created: '2026-04-14'
 updated: '2026-04-14'
 density_score: 0.85
-naming_convention: "Pattern: `p01_hv_{{name}}.md`  \nExamples:  \n- `p01_hv_example.md`  \n- `p01_hv_patient_portal.md`"
+naming_convention: 'Pattern: `p01_hv_{{name}}.md`
+
+  Examples:
+
+  - `p01_hv_example.md`
+
+  - `p01_hv_patient_portal.md`'
 paths: 'Artifacts stored in: `/cex/verticals/P01/{{name}}/artifacts/`'
 limits: 'max_bytes: 6144 max_turns: 10 effort_level: 3'
 hooks: 'pre_build: null post_build: null on_error: null on_quality_fail: null'

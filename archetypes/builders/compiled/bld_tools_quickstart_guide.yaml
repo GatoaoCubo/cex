@@ -16,15 +16,27 @@ domain: quickstart_guide construction
 created: '2026-04-14'
 updated: '2026-04-14'
 density_score: 0.85
-production_tools: "| Tool | Purpose | When |  \n|------|---------|------|  \n| cex_compile.py | Assembles guide components\
-  \ into a cohesive document | Initial build |  \n| cex_score.py | Evaluates guide quality using predefined metrics | Post-creation\
-  \ validation |  \n| cex_retriever.py | Fetches external data/dependencies for inclusion | During content integration | \
-  \ \n| cex_doctor.py | Diagnoses and fixes common guide structure issues | Debugging phase |  \n| cex_formatter.py | Standardizes\
-  \ markdown, code blocks, and citations | Final formatting pass |"
-validation_tools: "| Tool | Purpose | When |  \n|------|---------|------|  \n| validator_check.py | Ensures syntax and link\
-  \ integrity | Pre-deployment |  \n| validator_consistency.py | Verifies cross-page terminology alignment | Multi-page guides\
-  \ |  \n| validator_accessibility.py | Tests compliance with WCAG standards | Accessibility audits |"
+production_tools: '| Tool | Purpose | When |
+
+  |------|---------|------|
+
+  | cex_compile.py | Compiles guide ISOs into deployable artifact | Initial build |
+
+  | cex_score.py | Scores guide quality via 3-layer rubric | Post-creation validation |
+
+  | cex_retriever.py | Fetches related guides and examples via TF-IDF | During content integration |
+
+  | cex_doctor.py | Diagnoses structure and frontmatter issues | Debugging phase |'
+validation_tools: '| Tool | Purpose | When |
+
+  |------|---------|------|
+
+  | cex_wave_validator.py | Validates frontmatter, ISO count, kind fields | Pre-commit |
+
+  | cex_hooks.py | Pre/post build validation hooks | On build events |
+
+  | cex_system_test.py | Full system validation (54 checks) | Release gate |'
 external_references:
-- Sphinx (documentation generation)
-- Jupyter (interactive code examples)
-- Markdown (standard formatting language)
+- Diataxis framework (Tutorial / How-To / Reference / Explanation quadrants)
+- Write the Docs (developer documentation standards)
+- OpenAPI Specification (api_reference cross-reference)

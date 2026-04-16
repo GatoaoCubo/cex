@@ -17,21 +17,49 @@ created: '2026-04-14'
 updated: '2026-04-14'
 density_score: 0.85
 frontmatter_fields: ''
-required: "| Field | Type | Required | Default | Notes |  \n|---|---|---|---|---|  \n| id | string | yes | null | Must match\
-  \ ID Pattern |  \n| kind | string | yes | \"prompt_technique\" | Fixed value |  \n| pillar | string | yes | \"P03\" | Fixed\
-  \ value |  \n| title | string | yes | null | Human-readable name |  \n| version | string | yes | \"1.0\" | Semantic versioning\
-  \ |  \n| created | datetime | yes | null | ISO 8601 format |  \n| updated | datetime | yes | null | ISO 8601 format |  \n\
-  | author | string | yes | null | Creator's identifier |  \n| domain | string | yes | \"prompt_engineering\" | Technical\
-  \ domain |  \n| quality | null | yes | null | Peer-reviewed score |  \n| tags | list | yes | [] | Keywords for categorization\
-  \ |  \n| tldr | string | yes | null | Summary in 1 sentence |  \n| example_use_case | string | yes | null | Practical application\
-  \ |  \n| technique_type | string | yes | null | Classification (e.g., \"chain-of-thought\") |"
-recommended: "| Field | Type | Notes |  \n|---|---|---|  \n| related_techniques | list | Cross-references |  \n| difficulty_level\
-  \ | string | \"beginner\"/\"intermediate\"/\"advanced\" |"
+required: '| Field | Type | Required | Default | Notes |
+
+  |---|---|---|---|---|
+
+  | id | string | yes | null | Must match ID Pattern |
+
+  | kind | string | yes | "prompt_technique" | Fixed value |
+
+  | pillar | string | yes | "P03" | Fixed value |
+
+  | title | string | yes | null | Human-readable name |
+
+  | version | string | yes | "1.0" | Semantic versioning |
+
+  | created | datetime | yes | null | ISO 8601 format |
+
+  | updated | datetime | yes | null | ISO 8601 format |
+
+  | author | string | yes | null | Creator''s identifier |
+
+  | domain | string | yes | "prompt_engineering" | Technical domain |
+
+  | quality | null | yes | null | Peer-reviewed score |
+
+  | tags | list | yes | [] | Keywords for categorization |
+
+  | tldr | string | yes | null | Summary in 1 sentence |
+
+  | example_use_case | string | yes | null | Practical application |
+
+  | technique_type | string | yes | null | Classification (e.g., "chain-of-thought") |'
+recommended: '| Field | Type | Notes |
+
+  |---|---|---|
+
+  | related_techniques | list | Cross-references |
+
+  | difficulty_level | string | "beginner"/"intermediate"/"advanced" |'
 id_pattern: ^p03_pt_[a-z][a-z0-9_]+.md$
-body_structure: "1. Overview  \n   Brief description of the technique's purpose and scope.  \n\n2. Application Context  \n\
-  \   Scenarios where the technique is most effective.  \n\n3. Example Use Case  \n   Concrete implementation example with\
-  \ input/output.  \n\n4. Best Practices  \n   Guidelines for optimal usage and common pitfalls.  \n\n5. Technical Considerations\
-  \  \n   System requirements, dependencies, or performance notes."
+body_structure: "1. Overview\n   Brief description of the technique's purpose and scope.\n\n2. Application Context\n   Scenarios\
+  \ where the technique is most effective.\n\n3. Example Use Case\n   Concrete implementation example with input/output.\n\
+  \n4. Best Practices\n   Guidelines for optimal usage and common pitfalls.\n\n5. Technical Considerations\n   System requirements,\
+  \ dependencies, or performance notes."
 constraints:
 - IDs must be unique and follow the ID Pattern.
 - All datetime fields must use ISO 8601 format.

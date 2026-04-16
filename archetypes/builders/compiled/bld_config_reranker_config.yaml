@@ -16,6 +16,12 @@ domain: reranker_config construction
 created: '2026-04-14'
 updated: '2026-04-14'
 density_score: 0.85
-naming_convention: "Pattern: `p01_rr_<project_name>.yaml`  \nExamples:  \n- `p01_rr_search.yaml`  \n- `p01_rr_recommend.yaml`"
+naming_convention: 'Pattern: `p01_rr_<project_name>.yaml`
+
+  Examples:
+
+  - `p01_rr_search.yaml`
+
+  - `p01_rr_recommend.yaml`'
 paths: 'Artifacts stored in: `/mnt/cex/artifacts/p01/rerankers/{{name}}.yaml`'
 limits: '-'

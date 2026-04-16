@@ -1,0 +1,53 @@
+kind: output_template
+id: bld_output_template_search_strategy
+pillar: P05
+llm_function: PRODUCE
+purpose: Template with vars for search_strategy production
+quality: null
+title: Output Template Search Strategy
+version: 1.0.0
+author: wave1_builder_gen
+tags:
+- search_strategy
+- builder
+- output_template
+tldr: Template with vars for search_strategy production
+domain: search_strategy construction
+created: '2026-04-13'
+updated: '2026-04-13'
+density_score: 0.85
+overview: '<!-- Purpose: what compute allocation problem this strategy solves. Scope: which inference loads it applies to
+  (batch vs. real-time, query sizes). Contrast: how it differs from static allocation or alternative strategies. -->'
+objectives: '| Goal | Target | Constraint |
+
+  |------|--------|------------|
+
+  | Latency | p99 < `{{N}}`ms | Under `{{load_condition}}` |
+
+  | Throughput | > `{{N}}` QPS | With <= `{{resource_budget}}` |
+
+  | Utilization | GPU > `{{N}}`% | No OOM, no cold-start >`{{N}}`s |'
+methodology: "<!-- Step-by-step allocation logic.\n     Decision points: what signals trigger reallocation.\n     Algorithms:\
+  \ Pareto-frontier, bin-packing, cost-benefit. -->\n1. Classify query complexity: `{{classifier approach}}`\n2. Look up resource\
+  \ tier: `{{tier table or formula}}`\n3. Allocate: {{allocation call, e.g. Kubernetes resource request}}\n4. Fallback: `{{what\
+  \ happens on OOM or timeout}}`"
+parameters: '| Parameter | Type | Default | Range | Notes |
+
+  |-----------|------|---------|-------|-------|
+
+  | `{{param}}` | float | {{default}} | [{{min}}, {{max}}] | `{{tuning guidance}}` |
+
+  | timeout_ms | int | 500 | [50, 5000] | Hard SLA cutoff |'
+constraints:
+- 'Resource hard limits: CPU <= `{{N}}` cores, RAM <= `{{N}}` GB'
+- 'Latency SLA: p99 <= `{{N}}`ms'
+- 'Strategy enum: must be one of static, dynamic, or adaptive'
+evaluation_metrics: '| Metric | Target | Measurement Method |
+
+  |--------|--------|-------------------|
+
+  | Allocation efficiency | >= 90% | Used / Allocated |
+
+  | SLA compliance | >= 99.9% | Requests within latency target |
+
+  | Cost per request | <= $`{{N}}` | Cloud billing / request count |'

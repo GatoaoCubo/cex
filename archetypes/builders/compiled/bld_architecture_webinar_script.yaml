@@ -58,10 +58,7 @@ component_inventory: 'All 13 ISOs of the webinar-script-builder with role, pilla
   | 12 | bld_memory_webinar_script.md | memory | P10 | INJECT | Observed patterns, evidence, and builder recommendations |
 
   | 13 | bld_tools_webinar_script.md | tools | P04 | CALL | Production tools, validation tools, external platform references
-  |
-
-
-  ---'
+  |'
 dependency_graph: 'Dependencies listed as: ISO -> depends on -> ISO (load order).
 
 
@@ -112,10 +109,7 @@ dependency_graph: 'Dependencies listed as: ISO -> depends on -> ISO (load order)
 
   12. collaboration (F8 COLLABORATE -- handoff routing)
 
-  13. architecture (reference -- no pipeline stage, used for system audits)
-
-
-  ---'
+  13. architecture (reference -- no pipeline stage, used for system audits)'
 external_dependencies: '| Dependency | Type | Used By | Notes |
 
   |-----------|------|---------|-------|
@@ -132,10 +126,7 @@ external_dependencies: '| Dependency | Type | Used By | Notes |
 
   | GoToWebinar API | External | tools ISO | Platform integration reference |
 
-  | Teams Live Events API | External | tools ISO | Platform integration reference |
-
-
-  ---'
+  | Teams Live Events API | External | tools ISO | Platform integration reference |'
 architectural_position: 'The webinar_script builder occupies the P03 Prompt / Live Delivery layer of CEX. It bridges prompt
   engineering (structured speaker narration) with audience engagement mechanics (hook frameworks, Q&A facilitation, conversion
   CTAs). Upstream: Marketing brief (N02), product demo assets (N05 or product team), slide deck outline (design team or pitch_deck-builder).

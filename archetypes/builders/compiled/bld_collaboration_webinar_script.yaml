@@ -20,7 +20,7 @@ density_score: 0.85
 crew_role: 'Webinar content architect in the CEX multi-nucleus content pipeline. Responsible for producing complete, production-ready
   live session scripts with timed speaker narration, slide synchronization markers, and Q&A facilitation support. Operates
   within the N02 Marketing nucleus for copy and content tasks, or N03 Builder nucleus for artifact construction tasks. Primary
-  output artifact type: `webinar_script` (kind), `p03_ws_*.md` (naming pattern) ---'
+  output artifact type: `webinar_script` (kind), `p03_ws_*.md` (naming pattern)'
 receives_from: 'Inputs required before script production begins. Missing inputs block script construction.
 
 
@@ -63,10 +63,7 @@ receives_from: 'Inputs required before script production begins. Missing inputs 
 
   - CTA Action: [trial | download | consultation | registration]
 
-  - CTA URL: [URL]
-
-
-  ---'
+  - CTA URL: [URL]'
 produces_for: 'Downstream consumers of the webinar_script artifact.
 
 
@@ -87,10 +84,7 @@ produces_for: 'Downstream consumers of the webinar_script artifact.
   script |
 
   | Marketing Analytics | Webinar metadata (title, platform, audience, CTA URL) | YAML frontmatter | Extracted by cex_compile.py
-  |
-
-
-  ---'
+  |'
 collaboration_signals: '| Event | Signal Action | Target |
 
   |-------|--------------|--------|
@@ -101,10 +95,7 @@ collaboration_signals: '| Event | Signal Action | Target |
 
   | Quality gate failed | write_signal(n02, ''webinar_script_rejected'', score) | N07 for review routing |
 
-  | Demo assets missing | write_signal(n02, ''needs_input'', ''demo_assets'') | N07 -> Sales team |
-
-
-  ---'
+  | Demo assets missing | write_signal(n02, ''needs_input'', ''demo_assets'') | N07 -> Sales team |'
 boundary: 'The webinar_script builder handles ONLY live session scripts. Adjacent content types route to specialized builders.
 
 

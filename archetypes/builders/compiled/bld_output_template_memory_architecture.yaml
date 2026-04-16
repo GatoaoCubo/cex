@@ -4,20 +4,96 @@ pillar: P05
 llm_function: PRODUCE
 purpose: Template with vars for memory_architecture production
 quality: null
-title: Output Template Memory Architecture
-version: 1.0.0
-author: wave1_builder_gen_v2
+title: 'Output Template: memory_architecture'
+version: 2.0.0
+author: n06_commercial
 tags:
 - memory_architecture
 - builder
 - output_template
-tldr: Template with vars for memory_architecture production
-domain: memory_architecture construction
+tldr: 'Template for LLM agent memory architecture artifacts: layer table, storage backends, pipelines, tier matrix'
+domain: LLM agent memory systems
 created: '2026-04-14'
 updated: '2026-04-14'
-density_score: 0.85
-example_memory_hierarchy: "| Level | Type   | Capacity | Access Time |\n|-------|--------|----------|-------------|\n| L1\
-  \    | SRAM   | 32KB     | 1ns         |\n| L2    | SRAM   | 256KB    | 5ns         |\n| L3    | DRAM   | 4GB      | 50ns\
-  \        |\n\n// Pseudocode for memory access\nvoid fetch_data(address) {\n    if (L1.contains(address)) {\n        return\
-  \ L1.read(address);\n    } else if (L2.contains(address)) {\n        return L2.read(address);\n    } else {\n        return\
-  \ L3.read(address);\n    }\n}"
+density_score: 0.9
+overview: '{{agent_name}} memory architecture for {{agent_domain}}. Active layers: {{active_layers}}. Commercial tier: {{tier}}.
+  Reference design: {{reference_system}}.'
+memory_layer_definitions: '| Layer | Backend | Retention | Tier Required | Notes |
+
+  |-------|---------|-----------|---------------|-------|
+
+  | Working | In-context ({{context_window_size}} tokens) | Session only | Free | Always active |
+
+  | Episodic | {{episodic_backend}} | {{episodic_retention_days}} days | Pro | {{episodic_notes}} |
+
+  | Semantic | {{semantic_backend}} | Persistent | Pro | {{semantic_notes}} |
+
+  | Procedural | {{procedural_backend}} | Persistent | Pro | {{procedural_notes}} |
+
+
+  <!-- Remove rows for inactive layers. Add justification note in Overview if excluded. -->'
+storage_backends: ''
+working_memory:
+- 'Type: In-context (native LLM context window)'
+- 'Capacity: {{context_window_size}} tokens'
+- 'Management: {{context_management_strategy}} (e.g., sliding window, summarization)'
+episodic_memory:
+- 'Backend: {{episodic_backend}} (e.g., pgvector, Pinecone, Weaviate)'
+- 'Embedding model: {{embedding_model}}'
+- 'Retrieval: semantic search, top-{{episodic_top_k}} results'
+- 'TTL: {{episodic_retention_days}} days'
+semantic_memory:
+- 'Backend: {{semantic_backend}} (e.g., Neo4j, ArangoDB, Redis JSON)'
+- 'Schema: entity-relation triples with temporal metadata'
+- 'Retrieval: entity lookup + graph traversal'
+procedural_memory:
+- 'Backend: {{procedural_backend}} (e.g., Redis KV, PostgreSQL, filesystem)'
+- 'Format: versioned skill definitions (YAML/JSON)'
+- 'Retrieval: exact key match + fuzzy name search'
+read_pipeline:
+- Parse query intent and extract memory retrieval signals.
+- 'Query episodic memory: semantic search over recent interactions.'
+- 'Query semantic memory: entity lookups for referenced entities.'
+- 'Query procedural memory: skill lookup if task matches known procedure.'
+- 'Rank results by: recency (0.4) + relevance (0.4) + importance (0.2).'
+- Inject top-{{total_top_k}} memories into system prompt under `## Context` section.
+write_pipeline:
+- After generation, extract memory-worthy content via LLM extraction prompt.
+- 'Classify extracted content: fact (-> semantic), event (-> episodic), skill (-> procedural).'
+- Deduplicate against existing memories (embedding similarity > 0.92 = merge).
+- Write to appropriate backend with timestamp and importance score.
+- Append to episodic log with session ID.
+- Trigger consolidation if episodic buffer > {{consolidation_threshold}} entries.
+eviction_policy: '| Layer | Strategy | Trigger | Action |
+
+  |-------|----------|---------|--------|
+
+  | Working | FIFO + summarization | Token budget > 80% | Summarize oldest 20% |
+
+  | Episodic | TTL + importance | Age > {{episodic_retention_days}}d OR importance < 0.3 | Archive or delete |
+
+  | Semantic | LRU + staleness | Last accessed > 180d AND no entity links | Soft-delete + audit log |
+
+  | Procedural | Version-based | New version > old | Archive old, activate new |'
+commercial_tier_matrix: '| Feature | Free | Pro | Enterprise |
+
+  |---------|------|-----|------------|
+
+  | Working memory | {{free_context_tokens}} tokens | {{pro_context_tokens}} tokens | {{enterprise_context_tokens}} tokens
+  |
+
+  | Episodic memory | None | Last {{pro_episodic_sessions}} sessions | Unlimited + searchable |
+
+  | Semantic memory | None | Auto-extraction | Full knowledge graph |
+
+  | Procedural memory | None | Shared skill library | Versioned + team-scoped |
+
+  | Consolidation | None | Basic TTL | Sleep-time + compliance |
+
+  | Retention | N/A | {{pro_retention_days}} days | Custom + data residency |
+
+  | Audit logs | None | Read | Write + export + GDPR |'
+integration_points:
+- 'Consolidation rules: see `consolidation_policy` kind (P10) for promotion logic.'
+- 'Skill storage: see `procedural_memory` kind (P10) for skill schema and versioning.'
+- 'Retrieval config: see `retriever_config` kind (P01) for embedding and ranking config.'

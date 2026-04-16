@@ -24,8 +24,8 @@ phase_1_research:
 - Map current product capabilities against analyst evaluation dimensions.
 - Identify coverage gaps where proof points are weak or missing.
 phase_2_compose:
-- Reference SCHEMA.md for required fields (company_overview, market_position, product_strengths, competitive_landscape, roadmap,
-  analyst_questions).
+- Reference bld_schema_analyst_briefing.md for required fields (company_overview, market_position, product_strengths, competitive_landscape,
+  roadmap, analyst_questions).
 - Write a concise company overview (max 150 words) positioning the vendor within the analyst's target market.
 - Articulate market position with Gartner/Forrester/IDC framework language (e.g., "Visionary," "Leader," "Strong Performer").
 - List 5-7 quantified product strengths mapped to analyst evaluation criteria.

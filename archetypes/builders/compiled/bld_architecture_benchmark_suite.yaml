@@ -20,31 +20,31 @@ component_inventory: '| ISO Name             | Role                          | P
 
   |----------------------|-------------------------------|--------|---------|
 
-  | bld_manifest         | Benchmark suite definition    | P07    | Active  |
+  | bld_manifest         | Builder identity and routing  | P07    | Active  |
 
-  | bld_instruction      | Task specification            | P07    | Active  |
+  | bld_instruction      | Step-by-step production guide | P03    | Active  |
 
-  | bld_system_prompt    | LLM interaction guidance      | P07    | Active  |
+  | bld_system_prompt    | Builder persona and rules     | P03    | Active  |
 
-  | bld_schema           | Data structure definition     | P07    | Active  |
+  | bld_schema           | Formal data contract (SSOT)   | P06    | Active  |
 
-  | bld_quality_gate     | Validation criteria           | P07    | Active  |
+  | bld_quality_gate     | HARD/SOFT scoring gates       | P11    | Active  |
 
-  | bld_output_template  | Result formatting             | P07    | Active  |
+  | bld_output_template  | Output skeleton with vars     | P05    | Active  |
 
   | bld_examples         | Sample input/output pairs     | P07    | Active  |
 
-  | bld_knowledge_card   | Domain-specific knowledge     | P07    | Active  |
+  | bld_knowledge_card   | Domain knowledge injection    | P01    | Active  |
 
-  | bld_architecture     | System design blueprint       | P07    | Active  |
+  | bld_architecture     | ISO inventory and deps        | P08    | Active  |
 
-  | bld_collaboration    | Team coordination framework   | P07    | Active  |
+  | bld_collaboration    | Crew coordination protocol    | P12    | Active  |
 
-  | bld_config           | Configuration management      | P07    | Active  |
+  | bld_config           | Runtime configuration         | P09    | Active  |
 
-  | bld_memory           | State retention mechanism     | P07    | Active  |
+  | bld_memory           | Learned patterns (memory ISO) | P10    | Active  |
 
-  | bld_tools            | Utility functions             | P07    | Active  |'
+  | bld_tools            | Tool registry for F5 CALL     | P04    | Active  |'
 dependencies: '| From              | To                  | Type         |
 
   |-------------------|---------------------|--------------|

@@ -16,25 +16,64 @@ domain: cohort_analysis construction
 created: '2026-04-14'
 updated: '2026-04-14'
 density_score: 0.85
-definition: "| metric         | threshold | operator | scope         |  \n|----------------|-----------|----------|---------------|\
-  \  \n| retention_rate | 0.3       | >=       | per cohort    |  \n| ltv_model_r2   | 0.7       | >=       | per user segment\
-  \ |"
-hard_gates: "| ID      | Check                     | Fail Condition                              |  \n|---------|---------------------------|---------------------------------------------|\
-  \  \n| H01     | YAML frontmatter valid    | Missing or invalid frontmatter              |  \n| H02     | ID matches pattern\
-  \        | ID does not match ^p07_ca_[a-z][a-z0-9_]+.yaml$ |  \n| H03     | kind field matches        | kind ≠ 'cohort_analysis'\
-  \                   |  \n| H04     | cohort_key defined        | cohort_key missing or invalid               |  \n| H05\
-  \     | retention_window defined  | retention_window missing or < 1 day        |  \n| H06     | ltv_window defined     \
-  \   | ltv_window missing or < 30 days            |  \n| H07     | metrics field valid       | metrics missing or not a list\
-  \              |  \n| H08     | dimensions field valid    | dimensions missing or not a list           |"
-soft_scoring: "| Dim         | Dimension               | Weight | Scoring Guide                          |  \n|-------------|-------------------------|--------|----------------------------------------|\
-  \  \n| D01         | Data completeness       | 0.15   | 1.0 if 100% data, 0.5 if 50%           |  \n| D02         | Metric\
-  \ accuracy         | 0.15   | 1.0 if metrics align with business KPIs|  \n| D03         | Cohort definition clarity | 0.10\
-  \ | 1.0 if cohort_key is unambiguous       |  \n| D04         | Retention window validity | 0.10 | 1.0 if window ≥ 1 day\
-  \                  |  \n| D05         | LTV model validity      | 0.15   | 1.0 if R² ≥ 0.7                        |  \n\
-  | D06         | Aggregation method      | 0.10   | 1.0 if method is documented and valid  |  \n| D07         | Analysis\
-  \ type           | 0.10   | 1.0 if 'retention' or 'ltv' specified  |  \n| D08         | Dimension relevance     | 0.15 \
-  \  | 1.0 if dimensions correlate with KPIs  |"
-actions: "| Score     | Action         |  \n|-----------|----------------|  \n| GOLDEN    | Auto-publish   |  \n| PUBLISH\
-  \   | Manual review  |  \n| REVIEW    | Flag for QA    |  \n| REJECT    | Block deployment |"
-bypass: "| conditions                  | approver | audit trail              |  \n|-----------------------------|----------|--------------------------|\
-  \  \n| Experimental schema         | CTO      | Note: \"Bypassed for testing\" |"
+definition: '| metric         | threshold | operator | scope         |
+
+  |----------------|-----------|----------|---------------|
+
+  | retention_rate | 0.3       | >=       | per cohort    |
+
+  | ltv_model_r2   | 0.7       | >=       | per user segment |'
+hard_gates: '| ID      | Check                     | Fail Condition                              |
+
+  |---------|---------------------------|---------------------------------------------|
+
+  | H01     | YAML frontmatter valid    | Missing or invalid frontmatter              |
+
+  | H02     | ID matches pattern        | ID does not match ^p07_ca_[a-z][a-z0-9_]+.yaml$ |
+
+  | H03     | kind field matches        | kind ≠ ''cohort_analysis''                   |
+
+  | H04     | cohort_key defined        | cohort_key missing or invalid               |
+
+  | H05     | retention_window defined  | retention_window missing or < 1 day        |
+
+  | H06     | ltv_window defined        | ltv_window missing or < 30 days            |
+
+  | H07     | metrics field valid       | metrics missing or not a list              |
+
+  | H08     | dimensions field valid    | dimensions missing or not a list           |'
+soft_scoring: '| Dim         | Dimension               | Weight | Scoring Guide                          |
+
+  |-------------|-------------------------|--------|----------------------------------------|
+
+  | D01         | Data completeness       | 0.15   | 1.0 if 100% data, 0.5 if 50%           |
+
+  | D02         | Metric accuracy         | 0.15   | 1.0 if metrics align with business KPIs|
+
+  | D03         | Cohort definition clarity | 0.10 | 1.0 if cohort_key is unambiguous       |
+
+  | D04         | Retention window validity | 0.10 | 1.0 if window ≥ 1 day                  |
+
+  | D05         | LTV model validity      | 0.15   | 1.0 if R² ≥ 0.7                        |
+
+  | D06         | Aggregation method      | 0.10   | 1.0 if method is documented and valid  |
+
+  | D07         | Analysis type           | 0.10   | 1.0 if ''retention'' or ''ltv'' specified  |
+
+  | D08         | Dimension relevance     | 0.15   | 1.0 if dimensions correlate with KPIs  |'
+actions: '| Score     | Action         |
+
+  |-----------|----------------|
+
+  | GOLDEN    | Auto-publish   |
+
+  | PUBLISH   | Manual review  |
+
+  | REVIEW    | Flag for QA    |
+
+  | REJECT    | Block deployment |'
+bypass: '| conditions                  | approver | audit trail              |
+
+  |-----------------------------|----------|--------------------------|
+
+  | Experimental schema         | CTO      | Note: "Bypassed for testing" |'

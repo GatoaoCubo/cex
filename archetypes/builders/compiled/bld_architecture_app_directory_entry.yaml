@@ -16,35 +16,35 @@ domain: app_directory_entry construction
 created: '2026-04-14'
 updated: '2026-04-14'
 density_score: 0.85
-component_inventory: '| ISO Name             | Role                              | Pillar | Status  |
+component_inventory: '| ISO Name             | Role                                                      | Pillar | Status  |
 
-  |----------------------|-----------------------------------|--------|---------|
+  |----------------------|-----------------------------------------------------------|--------|---------|
 
-  | bld_manifest         | Defines app structure             | P05    | Active  |
+  | bld_manifest         | Builder identity, capabilities, routing                   | P05    | Active  |
 
-  | bld_instruction      | Specifies build process           | P05    | Active  |
+  | bld_instruction      | 3-phase production process (Research, Compose, Validate)  | P03    | Active  |
 
-  | bld_system_prompt    | Sets system behavior rules        | P05    | Active  |
+  | bld_system_prompt    | LLM persona and ALWAYS/NEVER rules                        | P03    | Active  |
 
-  | bld_schema           | Enforces data format standards    | P05    | Active  |
+  | bld_schema           | Frontmatter fields + body structure (SSOT)                | P06    | Active  |
 
-  | bld_quality_gate     | Validates output compliance       | P05    | Active  |
+  | bld_quality_gate     | HARD gates (H01-H08) + SOFT scoring (D01-D08)             | P11    | Active  |
 
-  | bld_output_template  | Structures final deliverables     | P05    | Active  |
+  | bld_output_template  | Production template with var guidance                     | P05    | Active  |
 
-  | bld_examples         | Provides reference implementations| P05    | Active  |
+  | bld_examples         | Golden + anti-examples with failure analysis              | P07    | Active  |
 
-  | bld_knowledge_card   | Documents component metadata      | P05    | Active  |
+  | bld_knowledge_card   | Domain knowledge: app directory standards + pitfalls      | P01    | Active  |
 
-  | bld_architecture     | Maps component relationships      | P05    | Active  |
+  | bld_architecture     | This document: ISO map + dependencies                     | P08    | Active  |
 
-  | bld_collaboration    | Manages team coordination         | P05    | Active  |
+  | bld_collaboration    | Cross-builder workflow coordination                       | P12    | Active  |
 
-  | bld_config           | Stores runtime parameters         | P05    | Active  |
+  | bld_config           | Naming, paths, limits, hooks                              | P09    | Active  |
 
-  | bld_memory           | Tracks state across sessions      | P05    | Active  |
+  | bld_memory           | Learned patterns and pitfalls (memory)                    | P10    | Active  |
 
-  | bld_tools            | Integrates external utilities     | P05    | Active  |'
+  | bld_tools            | Production + validation tools (CEX-native)                | P04    | Active  |'
 dependencies: '| From               | To                   | Type         |
 
   |--------------------|----------------------|--------------|

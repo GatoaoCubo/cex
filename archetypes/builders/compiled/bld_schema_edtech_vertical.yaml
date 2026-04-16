@@ -17,22 +17,50 @@ created: '2026-04-14'
 updated: '2026-04-14'
 density_score: 0.85
 frontmatter_fields: ''
-required: "| Field | Type | Required | Default | Notes |  \n|---|---|---|---|---|  \n| id | string | yes | null | Must match\
-  \ ID Pattern |  \n| kind | string | yes | \"edtech_vertical\" | Fixed value |  \n| pillar | string | yes | \"P01\" | Fixed\
-  \ value |  \n| title | string | yes | null | Human-readable name |  \n| version | string | yes | \"1.0\" | Semantic versioning\
-  \ |  \n| created | datetime | yes | null | ISO 8601 format |  \n| updated | datetime | yes | null | ISO 8601 format |  \n\
-  | author | string | yes | null | Owner/creator |  \n| domain | string | yes | \"edtech\" | Fixed value |  \n| quality |\
-  \ null | yes | null | Never self-score; peer review assigns |  \n| tags | list | yes | [] | Keywords for categorization\
-  \ |  \n| tldr | string | yes | null | Summary in 1–2 sentences |  \n| focus_area | string | yes | null | E.g., \"K-12\"\
-  , \"Higher Ed\" |  \n| target_demographic | string | yes | null | E.g., \"students\", \"instructors\" |"
-recommended: "| Field | Type | Notes |  \n|---|---|---|  \n| certifications | list | E.g., \"ISO 27001\", \"GDPR\" |  \n|\
-  \ partnerships | list | Key collaborators |"
+required: '| Field | Type | Required | Default | Notes |
+
+  |---|---|---|---|---|
+
+  | id | string | yes | null | Must match ID Pattern |
+
+  | kind | string | yes | "edtech_vertical" | Fixed value |
+
+  | pillar | string | yes | "P01" | Fixed value |
+
+  | title | string | yes | null | Human-readable name |
+
+  | version | string | yes | "1.0" | Semantic versioning |
+
+  | created | datetime | yes | null | ISO 8601 format |
+
+  | updated | datetime | yes | null | ISO 8601 format |
+
+  | author | string | yes | null | Owner/creator |
+
+  | domain | string | yes | "edtech" | Fixed value |
+
+  | quality | null | yes | null | Never self-score; peer review assigns |
+
+  | tags | list | yes | [] | Keywords for categorization |
+
+  | tldr | string | yes | null | Summary in 1–2 sentences |
+
+  | focus_area | string | yes | null | E.g., "K-12", "Higher Ed" |
+
+  | target_demographic | string | yes | null | E.g., "students", "instructors" |'
+recommended: '| Field | Type | Notes |
+
+  |---|---|---|
+
+  | certifications | list | E.g., "ISO 27001", "GDPR" |
+
+  | partnerships | list | Key collaborators |'
 id_pattern: ^p01_etv_[a-z][a-z0-9_]+.md$
-body_structure: "1. Overview  \n   Brief description of the vertical’s purpose and scope.  \n\n2. Focus Areas  \n   Detailed\
-  \ breakdown of educational domains (e.g., STEM, language learning).  \n\n3. Target Demographics  \n   Specific user groups\
-  \ (e.g., age ranges, roles, geographic regions).  \n\n4. Technology Stack  \n   Tools, platforms, and integrations used\
-  \ (e.g., LMS, AI tutors).  \n\n5. Compliance  \n   Regulatory and data privacy requirements (e.g., COPPA, FERPA).  \n\n\
-  6. Partnerships  \n   Collaborations with institutions, developers, or content providers."
+body_structure: "1. Overview\n   Brief description of the vertical’s purpose and scope.\n\n2. Focus Areas\n   Detailed breakdown\
+  \ of educational domains (e.g., STEM, language learning).\n\n3. Target Demographics\n   Specific user groups (e.g., age\
+  \ ranges, roles, geographic regions).\n\n4. Technology Stack\n   Tools, platforms, and integrations used (e.g., LMS, AI\
+  \ tutors).\n\n5. Compliance\n   Regulatory and data privacy requirements (e.g., COPPA, FERPA).\n\n6. Partnerships\n   Collaborations\
+  \ with institutions, developers, or content providers."
 constraints:
 - ID must match ^p01_etv_[a-z][a-z0-9_]+.md$ exactly.
 - All required fields must be present and valid.

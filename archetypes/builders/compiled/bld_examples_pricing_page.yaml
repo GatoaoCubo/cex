@@ -16,15 +16,38 @@ domain: pricing_page construction
 created: '2026-04-14'
 updated: '2026-04-14'
 density_score: 0.85
-golden_example: "---\ntitle: \"Pricing - ClickUp\"\ndescription: \"Compare plans to find the right fit for your team\"\n---\n\
-  \nChoose the plan that fits your workflow\n\n| Feature              | Basic ($12/user/month) | Pro ($29/user/month) | Enterprise\
-  \ (Custom) |\n|----------------------|------------------------|----------------------|---------------------|\n| Task Management\
-  \      | ✔️                     | ✔️                   | ✔️                  |\n| Integrations         | 10            \
-  \         | 50                   | Unlimited           |\n| Storage              | 5GB                    | 20GB       \
-  \          | Unlimited           |\n| Priority Support     | Email                  | 24/7 Chat            | Dedicated Account\
-  \   |\n| Team Members         | 1                      | 10                   | Unlimited           |\n\nWhy upgrade?  \n\
-  Pro plan users report 40% faster project completion. Enterprise customers get custom workflows and API access.  \n\U0001F449\
-  \ Start free trial or Contact sales"
+golden_example: '---
+
+  title: "Pricing - ClickUp"
+
+  description: "Compare plans to find the right fit for your team"
+
+  ---
+
+
+  Choose the plan that fits your workflow
+
+
+  | Feature              | Basic ($12/user/month) | Pro ($29/user/month) | Enterprise (Custom) |
+
+  |----------------------|------------------------|----------------------|---------------------|
+
+  | Task Management      | [YES]                     | [YES]                   | [YES]                  |
+
+  | Integrations         | 10                     | 50                   | Unlimited           |
+
+  | Storage              | 5GB                    | 20GB                 | Unlimited           |
+
+  | Priority Support     | Email                  | 24/7 Chat            | Dedicated Account   |
+
+  | Team Members         | 1                      | 10                   | Unlimited           |
+
+
+  Why upgrade?
+
+  Pro plan users report 40% faster project completion. Enterprise customers get custom workflows and API access.
+
+  --> Start free trial or Contact sales'
 anti_example_1_missing_clear_ctas: '---'
 pricing: 'Our plans
 

@@ -25,15 +25,30 @@ domain_overview: Visual workflow editors are GUI-based tools enabling users to d
   and low-code platforms such as OutSystems. These systems rely on domain-specific languages (DSLs) embedded in visual metaphors,
   balancing abstraction with configurability. Challenges include maintaining consistency across platforms, ensuring scalability,
   and integrating with backend systems without sacrificing user experience.
-key_concepts: "| Concept | Definition | Source |  \n|---|---|---|  \n| Node-Based Interface | Workflow elements represented\
-  \ as modular nodes connected by edges | Visual Design Patterns (Tidwell, 2001) |  \n| Drag-and-Drop (DnD) | User interaction\
-  \ paradigm for placing and connecting workflow components | Direct Manipulation (Shneiderman, 1992) |  \n| Real-Time Collaboration\
-  \ | Concurrent editing by multiple users with conflict resolution | Google Docs Architecture (RFC 7525) |  \n| Undo/Redo\
-  \ Stack | Mechanism to revert or reapply user actions | GUI Programming (O’Reilly, 2003) |  \n| Visual Programming Language\
-  \ (VPL) | Workflow logic expressed through graphical symbols | VPLs in Education (ICPC, 2018) |  \n| Accessibility Compliance\
-  \ | Adherence to WCAG 2.1 for screen readers and keyboard navigation | Web Content Accessibility Guidelines (W3C) |  \n\
-  | Version Control | Tracking changes to workflow configurations | Git for GUI Tools (GitHub Docs) |  \n| Serialization Format\
-  \ | Data structure (e.g., JSON, XML) for storing workflow definitions | JSON Schema (RFC 8259) |"
+key_concepts: '| Concept | Definition | Source |
+
+  |---|---|---|
+
+  | Node-Based Interface | Workflow elements represented as modular nodes connected by edges | Visual Design Patterns (Tidwell,
+  2001) |
+
+  | Drag-and-Drop (DnD) | User interaction paradigm for placing and connecting workflow components | Direct Manipulation (Shneiderman,
+  1992) |
+
+  | Real-Time Collaboration | Concurrent editing via CRDT or OT algorithms | CRDT: Conflict-Free Replicated Data Types (Shapiro
+  2011) |
+
+  | Undo/Redo Stack | Mechanism to revert or reapply user actions | GUI Programming (O’Reilly, 2003) |
+
+  | Visual Programming Language (VPL) | Workflow logic expressed through graphical symbols | VPLs in Education (ICPC, 2018)
+  |
+
+  | Accessibility Compliance | Adherence to WCAG 2.1 for screen readers and keyboard navigation | Web Content Accessibility
+  Guidelines (W3C) |
+
+  | Version Control | Tracking changes to workflow configurations | Git for GUI Tools (GitHub Docs) |
+
+  | Serialization Format | Data structure (e.g., JSON, XML) for storing workflow definitions | JSON Schema (RFC 8259) |'
 industry_standards:
 - BPMN 2.0 (Business Process Model and Notation)
 - UML Activity Diagrams (OMG)
@@ -41,7 +56,7 @@ industry_standards:
 - WCAG 2.1 (Web Content Accessibility Guidelines)
 - IEEE 12207 (Software Life Cycle Processes)
 - ISO/IEC 25010 (System Quality Requirements)
-- RFC 7525 (Real-Time Collaboration Protocols)
+- CRDT / Operational Transformation (real-time collaboration algorithms)
 - JSON Schema (RFC 8259)
 common_patterns:
 - Node-Link Diagrams – Represent workflows as interconnected nodes and edges.

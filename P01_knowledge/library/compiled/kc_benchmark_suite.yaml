@@ -1,0 +1,58 @@
+id: kc_benchmark_suite
+kind: knowledge_card
+title: Benchmark Suite Definition
+version: 1.0.0
+quality: null
+pillar: P01
+density_score: 1.0
+key_characteristics:
+- Task hierarchy with dependent sub-tasks
+- Performance metrics framework
+- Baseline reference benchmarks
+- Result validation criteria
+- Resource constraints parameters
+implementation_guidelines:
+- Define task dependencies using DAG structure
+- Specify quantitative measurement parameters
+- Establish pass/fail thresholds
+- Include environmental constraints
+- Document validation procedures
+task_structure_pattern: "benchmark_suite:\n  id: \"ai-model-evaluation-2026\"\n  name: \"AI Model Performance Benchmark Suite\"\
+  \n  description: \"Comprehensive evaluation of AI model capabilities across multiple dimensions\"\n  version: 1.0.0\n  tasks:\n\
+  \    - id: \"baseline\"\n      name: \"Baseline Performance Check\"\n      description: \"Establish baseline metrics for\
+  \ model performance\"\n      dependencies: []\n      parameters:\n        input_size: 1024\n        complexity: \"low\"\n\
+  \      metrics:\n        - accuracy: 0.95\n        - latency: 0.1\n      validation:\n        - type: \"threshold\"\n  \
+  \        metric: \"accuracy\"\n          threshold: 0.95\n        - type: \"threshold\"\n          metric: \"latency\"\n\
+  \          threshold: 0.1\n      constraints:\n        memory: 4096\n        cpu: 4\n        time_limit: 300\n\n    - id:\
+  \ \"text-generation\"\n      name: \"Text Generation Benchmark\"\n      description: \"Evaluate model performance on text\
+  \ generation tasks\"\n      dependencies: [\"baseline\"]\n      parameters:\n        input_size: 4096\n        complexity:\
+  \ \"medium\"\n      metrics:\n        - coherence: 0.92\n        - diversity: 0.85\n      validation:\n        - type: \"\
+  threshold\"\n          metric: \"coherence\"\n          threshold: 0.92\n        - type: \"threshold\"\n          metric:\
+  \ \"diversity\"\n          threshold: 0.85\n      constraints:\n        memory: 8192\n        cpu: 8\n        time_limit:\
+  \ 600\n\n    - id: \"image-recognition\"\n      name: \"Image Recognition Benchmark\"\n      description: \"Evaluate model\
+  \ performance on image recognition tasks\"\n      dependencies: [\"baseline\"]\n      parameters:\n        input_size: 2048\n\
+  \        complexity: \"high\"\n      metrics:\n        - accuracy: 0.98\n        - inference_speed: 0.05\n      validation:\n\
+  \        - type: \"threshold\"\n          metric: \"accuracy\"\n          threshold: 0.98\n        - type: \"threshold\"\
+  \n          metric: \"inference_speed\"\n          threshold: 0.05\n      constraints:\n        memory: 16384\n        cpu:\
+  \ 16\n        time_limit: 900\n\n    - id: \"robustness\"\n      name: \"Robustness Testing\"\n      description: \"Evaluate\
+  \ model performance under adversarial conditions\"\n      dependencies: [\"text-generation\", \"image-recognition\"]\n \
+  \     parameters:\n        input_size: 8192\n        complexity: \"extreme\"\n      metrics:\n        - resilience: 0.90\n\
+  \        - error_rate: 0.02\n      validation:\n        - type: \"threshold\"\n          metric: \"resilience\"\n      \
+  \    threshold: 0.90\n        - type: \"threshold\"\n          metric: \"error_rate\"\n          threshold: 0.02\n     \
+  \ constraints:\n        memory: 32768\n        cpu: 32\n        time_limit: 1200\n\n    - id: \"validation\"\n      name:\
+  \ \"Result Validation\"\n      description: \"Verify benchmark results against defined criteria\"\n      dependencies: [\"\
+  baseline\", \"text-generation\", \"image-recognition\", \"robustness\"]\n      parameters:\n        validation_type: \"\
+  comprehensive\"\n      metrics:\n        - overall_score: 0.95\n      validation:\n        - type: \"threshold\"\n     \
+  \     metric: \"overall_score\"\n          threshold: 0.95\n      constraints:\n        memory: 65536\n        cpu: 64\n\
+  \        time_limit: 1800"
+integration_patterns: '- Parallel dispatch: Run text-generation and image-recognition tasks concurrently
+
+  - Scratchpad analysis: Use <analysis> blocks for intermediate validation steps
+
+  - Resource constraints: Specify hardware requirements for each task
+
+  - Validation chain: Execute validation task after all primary benchmarks
+
+
+  This template enables creation of benchmark suites for AI systems, computational workloads, and technical infrastructure
+  evaluation. The structure follows the steps patterns for modular, reusable workflow definition.'

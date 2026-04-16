@@ -17,15 +17,44 @@ created: '2026-04-14'
 updated: '2026-04-14'
 density_score: 0.85
 frontmatter_fields: ''
-required: "| Field | Type | Required | Default | Notes |  \n|---|---|---|---|---|  \n| id | string | yes |  | Must match ID\
-  \ Pattern |  \n| kind | string | yes | \"self_improvement_loop\" |  |  \n| pillar | string | yes | \"P11\" |  |  \n| title\
-  \ | string | yes |  | Descriptive name |  \n| version | string | yes | \"1.0\" |  |  \n| created | datetime | yes |  | ISO\
-  \ 8601 format |  \n| updated | datetime | yes |  | ISO 8601 format |  \n| author | string | yes |  |  |  \n| domain | string\
-  \ | yes | \"self_improvement\" |  |  \n| quality | null | yes | null | Never self-score; peer review assigns |  \n| tags\
-  \ | list | yes | [] | Keywords for categorization |  \n| tldr | string | yes |  | Summary of purpose |  \n| loop_stages\
-  \ | list | yes | [] | Sequential steps in the loop |  \n| metrics | dict | yes | {} | Quantifiable outcomes |"
-recommended: "| Field | Type | Notes |  \n|---|---|---|  \n| feedback_sources | list | External/peer inputs |  \n| review_cycle\
-  \ | string | Frequency of evaluation |"
+required: '| Field | Type | Required | Default | Notes |
+
+  |---|---|---|---|---|
+
+  | id | string | yes |  | Must match ID Pattern |
+
+  | kind | string | yes | "self_improvement_loop" |  |
+
+  | pillar | string | yes | "P11" |  |
+
+  | title | string | yes |  | Descriptive name |
+
+  | version | string | yes | "1.0" |  |
+
+  | created | datetime | yes |  | ISO 8601 format |
+
+  | updated | datetime | yes |  | ISO 8601 format |
+
+  | author | string | yes |  |  |
+
+  | domain | string | yes | "self_improvement" |  |
+
+  | quality | null | yes | null | Never self-score; peer review assigns |
+
+  | tags | list | yes | [] | Keywords for categorization |
+
+  | tldr | string | yes |  | Summary of purpose |
+
+  | loop_stages | list | yes | [] | Sequential steps in the loop |
+
+  | metrics | dict | yes | {} | Quantifiable outcomes |'
+recommended: '| Field | Type | Notes |
+
+  |---|---|---|
+
+  | feedback_sources | list | External/peer inputs |
+
+  | review_cycle | string | Frequency of evaluation |'
 id_pattern: ^p11_sil_[a-z][a-z0-9_]+.md$
 body_structure:
 - Overview

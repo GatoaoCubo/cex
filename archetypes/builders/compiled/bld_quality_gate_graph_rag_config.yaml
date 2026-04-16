@@ -16,22 +16,66 @@ domain: graph_rag_config construction
 created: '2026-04-14'
 updated: '2026-04-14'
 density_score: 0.85
-definition: "(Table: metric, threshold, operator, scope)  \n| metric | threshold | operator | scope |  \n|---|---|---|---|\
-  \  \n| Schema Validity | 1 | equals | All files |"
-hard_gates: "(Table: ID | Check | Fail Condition)  \n| ID | Check | Fail Condition |  \n|---|---|---|  \n| H01 | YAML frontmatter\
-  \ valid | Invalid YAML frontmatter |  \n| H02 | ID matches pattern ^p01_grc_[a-z][a-z0-9_]+.yaml$ | ID does not match schema\
-  \ pattern |  \n| H03 | kind field matches 'graph_rag_config' | kind field not 'graph_rag_config' |  \n| H04 | graph_type\
-  \ field present | Missing graph_type |  \n| H05 | embedding_model field valid | Invalid or missing embedding_model |  \n\
-  | H06 | retrieval_strategy field valid | Invalid or missing retrieval_strategy |  \n| H07 | knowledge_sources field present\
-  \ | Missing knowledge_sources |  \n| H08 | query_transformer field valid | Invalid or missing query_transformer |"
-soft_scoring: "(Table: Dim | Dimension | Weight | Scoring Guide)  \n| Dim | Dimension | Weight | Scoring Guide |  \n|---|---|---|---|\
-  \  \n| D01 | Schema Completeness | 0.15 | 100% required fields present |  \n| D02 | Configuration Validity | 0.15 | Valid\
-  \ parameters and values |  \n| D03 | Security Compliance | 0.15 | Encryption and access controls |  \n| D04 | Performance\
-  \ Optimization | 0.15 | Efficient query handling |  \n| D05 | Scalability | 0.10 | Supports growth without degradation |\
-  \  \n| D06 | Usability | 0.10 | Clear documentation and parameters |  \n| D07 | Documentation | 0.15 | Full API and usage\
-  \ guides |"
-actions: "(Table: Score | Action)  \n| Score | Action |  \n|---|---|  \n| GOLDEN | >=9.5 | Auto-approve and deploy |  \n|\
-  \ PUBLISH | >=8.0 | Review and publish |  \n| REVIEW | >=7.0 | Manual review required |  \n| REJECT | <7.0 | Reject and\
-  \ fix |"
-bypass: "(Table: conditions, approver, audit trail)  \n| conditions | approver | audit trail |  \n|---|---|---|  \n| Critical\
-  \ production issue requiring immediate deployment | CTO | Change management system log |"
+definition: '(Table: metric, threshold, operator, scope)
+
+  | metric | threshold | operator | scope |
+
+  |---|---|---|---|
+
+  | Schema Validity | 1 | equals | All files |'
+hard_gates: '(Table: ID | Check | Fail Condition)
+
+  | ID | Check | Fail Condition |
+
+  |---|---|---|
+
+  | H01 | YAML frontmatter valid | Invalid YAML frontmatter |
+
+  | H02 | ID matches pattern ^p01_grc_[a-z][a-z0-9_]+.yaml$ | ID does not match schema pattern |
+
+  | H03 | kind field matches ''graph_rag_config'' | kind field not ''graph_rag_config'' |
+
+  | H04 | graph_type field present | Missing graph_type |
+
+  | H05 | embedding_model field valid | Invalid or missing embedding_model |
+
+  | H06 | retrieval_strategy field valid | Invalid or missing retrieval_strategy |
+
+  | H07 | knowledge_sources field present | Missing knowledge_sources |
+
+  | H08 | query_transformer field valid | Invalid or missing query_transformer |'
+soft_scoring: '| Dim | Dimension | Weight | Scoring Guide |
+
+  |---|---|---|---|
+
+  | D01 | Schema Completeness | 0.20 | 100% required fields present |
+
+  | D02 | Configuration Validity | 0.20 | Valid parameters and values |
+
+  | D03 | Graph Model Fidelity | 0.15 | Correct community detection and entity extraction config |
+
+  | D04 | Retrieval Strategy Quality | 0.15 | Multi-hop, hybrid vector+graph strategy defined |
+
+  | D05 | Scalability | 0.10 | Configurable traversal depth and query latency thresholds |
+
+  | D06 | Usability | 0.10 | Clear documentation and parameters |
+
+  | D07 | Documentation | 0.10 | Usage guides and examples present |'
+actions: '| Score | Action |
+
+  |---|---|
+
+  | >=9.5 | GOLDEN |
+
+  | >=8.0 | PUBLISH |
+
+  | >=7.0 | REVIEW |
+
+  | <7.0 | REJECT |'
+bypass: '(Table: conditions, approver, audit trail)
+
+  | conditions | approver | audit trail |
+
+  |---|---|---|
+
+  | Critical production issue requiring immediate deployment | CTO | Change management system log |'

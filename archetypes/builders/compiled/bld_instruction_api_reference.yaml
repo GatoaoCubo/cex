@@ -22,7 +22,7 @@ phase_1_research:
 - Extract parameters (query, path, body) with data types and constraints.
 - Define response formats (JSON, XML) and error codes (4xx, 5xx).
 - Gather example requests/responses for each endpoint.
-- Validate against SCHEMA.md for structure and constraint compliance.
+- Validate against bld_schema_api_reference.md for structure and constraint compliance.
 phase_2_compose:
 - Create table of contents with grouped endpoints (e.g., /v1/resources).
 - Write endpoint descriptions with HTTP method, path, and summary.
@@ -30,9 +30,9 @@ phase_2_compose:
 - Detail parameters (name, type, required, example) per endpoint.
 - Specify response codes, schemas, and example payloads.
 - Insert example requests/responses with cURL and JSON samples.
-- Cross-reference SCHEMA.md to ensure parameter/response alignment.
-- Use OUTPUT_TEMPLATE.md for consistent formatting (tables, code blocks).
+- Cross-reference bld_schema_api_reference.md to ensure parameter/response alignment.
+- Use bld_output_template_api_reference.md for consistent formatting (tables, code blocks).
 - Finalize with versioning, changelog, and API lifecycle notes.
-phase_3_validate: '[ ] ✅ All endpoints listed with correct methods/paths [ ] ✅ Authentication details match SCHEMA.md and
-  spec [ ] ✅ Example requests/responses pass constraint validation [ ] ✅ Formatting adheres to OUTPUT_TEMPLATE.md rules [
-  ] ✅ Peer review confirms clarity and completeness'
+phase_3_validate: '[ ] All endpoints listed with correct methods/paths [ ] Authentication details match bld_schema_api_reference.md
+  and spec [ ] Example requests/responses pass constraint validation [ ] Formatting adheres to bld_output_template_api_reference.md
+  rules [ ] Peer review confirms clarity and completeness'

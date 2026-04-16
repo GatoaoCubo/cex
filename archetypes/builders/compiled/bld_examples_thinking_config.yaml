@@ -1,0 +1,49 @@
+kind: examples
+id: bld_examples_thinking_config
+pillar: P07
+llm_function: GOVERN
+purpose: Golden and anti-examples of thinking_config artifacts
+quality: null
+title: Examples Thinking Config
+version: 1.0.0
+author: wave1_builder_gen
+tags:
+- thinking_config
+- builder
+- examples
+tldr: Golden and anti-examples of thinking_config artifacts
+domain: thinking_config construction
+created: '2026-04-13'
+updated: '2026-04-13'
+density_score: 0.85
+golden_example: "This ISO configures a thinking budget: how many tokens the model may spend on internal reasoning before emitting.\n\
+  ---\ntitle: \"Thinking Budget Configuration\"\ndescription: \"Configures extended thinking with token budget limits\"\n\
+  version: \"1.0\"\nauthor: \"System Admin\"\n---\n\nthinking_budget: 1000\ntoken_limits: \n  - max_context: 500\n  - max_response:\
+  \ 300\ndynamic_adjustment: true\nfallback_strategy: \"truncate\""
+anti_example_1_missing_essential_fields: "---\ntitle: \"Incomplete Config\"\ndescription: \"Missing thinking_budget parameter\"\
+  \nversion: \"0.5\"\nauthor: \"Newbie\"\n---\n\ntoken_limits: \n  - max_context: 500\n  - max_response: 300"
+why_it_fails: Uses strings instead of numeric values for budget parameters, causing parsing errors.
+anti_example_2_invalid_budget_values: "---\ntitle: \"Invalid Config\"\ndescription: \"Uses non-numeric budget values\"\nversion:\
+  \ \"1.0\"\nauthor: \"Mistake\"\n---\n\nthinking_budget: \"high\"\ntoken_limits: \n  - max_context: \"unlimited\"\n  - max_response:\
+  \ 300"
+properties: '| Property | Value |
+
+  |----------|-------|
+
+  | Kind | `examples` |
+
+  | Pillar | P07 |
+
+  | Domain | thinking_config construction |
+
+  | Pipeline | 8F (F1-F8) |
+
+  | Scorer | cex_score.py |
+
+  | Compiler | cex_compile.py |
+
+  | Retriever | cex_retriever.py |
+
+  | Quality target | 9.0+ |
+
+  | Density target | 0.85+ |'

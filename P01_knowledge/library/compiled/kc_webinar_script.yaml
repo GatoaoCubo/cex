@@ -1,0 +1,58 @@
+id: kc_webinar_script
+kind: knowledge_card
+title: Webinar Script Template
+version: 1.0.0
+quality: null
+pillar: P01
+language: English
+density_score: 1.0
+structure:
+- Intro (0:00-5:00)
+- Welcome slide + host introduction
+- Webinar objective statement
+- Agenda preview
+- Agenda (5:00-7:00)
+- 3-5 key topics with time allocations
+- Interactive element preview
+- Q&A session reminder
+- Segments (7:00-95:00)
+- 'Topic 1: [Subheading]'
+- Key points (3-5)
+- 'Visual cue: [Slide number]'
+- 'Topic 2: [Subheading]'
+- Key points (3-5)
+- 'Visual cue: [Slide number]'
+- 'Topic 3: [Subheading]'
+- Key points (3-5)
+- 'Visual cue: [Slide number]'
+- Q&A (95:00-105:00)
+- Moderated questions
+- Live chat integration
+- 'Poll question: [Topic]'
+- CTA (105:00-110:00)
+- Call to action statement
+- Registration link + deadline
+- Social media hashtag
+speaker_notes:
+- Use bold for key terms
+- Include timing cues
+- Add visual references
+- Note interactive elements
+slide_cues:
+- '[Slide 1] Title slide with date'
+- '[Slide 2] Agenda overview'
+- '[Slide 3] Topic 1 summary'
+- '[Slide 4] Data visualization'
+- '[Slide 5] Case study example'
+- '[Slide 6] Interactive poll'
+- '[Slide 7] Q&A instructions'
+- '[Slide 8] Final CTA'
+customization_guide:
+- Replace bracketed text with specific details
+- Use bold for key terms in speaker notes
+- Maintain 10-15 word count per slide title
+- Include 3-5 key points per topic
+- Add 2-3 interactive elements
+- Verify all timing cues
+- Include 1-2 polls/questions
+- Add social media integration

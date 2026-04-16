@@ -16,20 +16,48 @@ domain: eval_framework construction
 created: '2026-04-14'
 updated: '2026-04-14'
 density_score: 0.85
-component_inventory: "| ISO Name           | Role                          | Pillar | Status  |  \n|--------------------|-------------------------------|--------|---------|\
-  \  \n| bld_manifest       | Defines framework structure   | P07    | Active  |  \n| bld_instruction    | Specifies evaluation\
-  \ tasks    | P07    | Active  |  \n| bld_system_prompt  | Sets system behavior rules    | P07    | Active  |  \n| bld_schema\
-  \         | Defines data structure format | P07    | Active  |  \n| bld_quality_gate   | Enforces output quality rules |\
-  \ P07    | Active  |  \n| bld_output_template| Formats evaluation results    | P07    | Active  |  \n| bld_examples    \
-  \   | Provides sample inputs/outputs| P07    | Active  |  \n| bld_knowledge_card | Stores domain-specific info   | P07 \
-  \   | Active  |  \n| bld_architecture   | Documents framework design    | P07    | Active  |  \n| bld_collaboration  | Manages\
-  \ team coordination     | P07    | Active  |  \n| bld_config         | Centralizes configuration     | P07    | Active \
-  \ |  \n| bld_memory         | Tracks evaluation history     | P07    | Active  |  \n| bld_tools          | Integrates evaluation\
-  \ utilities| P07   | Active  |"
-dependencies: "| From             | To               | Type       |  \n|------------------|------------------|------------|\
-  \  \n| bld_instruction  | bld_manifest     | Reference  |  \n| bld_quality_gate | bld_schema       | Validation |  \n| bld_output_template\
-  \ | bld_schema   | Dependency |  \n| bld_examples     | bld_instruction  | Data Source|  \n| bld_config       | bld_tools\
-  \        | Configuration|"
+component_inventory: '| ISO Name           | Role                          | Pillar | Status  |
+
+  |--------------------|-------------------------------|--------|---------|
+
+  | bld_manifest       | Defines framework structure   | P07    | Active  |
+
+  | bld_instruction    | Specifies evaluation tasks    | P07    | Active  |
+
+  | bld_system_prompt  | Sets system behavior rules    | P07    | Active  |
+
+  | bld_schema         | Defines data structure format | P07    | Active  |
+
+  | bld_quality_gate   | Enforces output quality rules | P07    | Active  |
+
+  | bld_output_template| Formats evaluation results    | P07    | Active  |
+
+  | bld_examples       | Provides sample inputs/outputs| P07    | Active  |
+
+  | bld_knowledge_card | Stores domain-specific info   | P07    | Active  |
+
+  | bld_architecture   | Documents framework design    | P07    | Active  |
+
+  | bld_collaboration  | Manages team coordination     | P07    | Active  |
+
+  | bld_config         | Centralizes configuration     | P07    | Active  |
+
+  | bld_memory         | Tracks evaluation history     | P07    | Active  |
+
+  | bld_tools          | Integrates evaluation utilities| P07   | Active  |'
+dependencies: '| From             | To               | Type       |
+
+  |------------------|------------------|------------|
+
+  | bld_instruction  | bld_manifest     | Reference  |
+
+  | bld_quality_gate | bld_schema       | Validation |
+
+  | bld_output_template | bld_schema   | Dependency |
+
+  | bld_examples     | bld_instruction  | Data Source|
+
+  | bld_config       | bld_tools        | Configuration|'
 architectural_position: The eval_framework serves as the central evaluation engine within CEX P07, ensuring consistency, quality,
   and alignment across all builder ISOs by standardizing processes, enforcing quality gates, and enabling collaborative validation
   through shared configurations and templates.

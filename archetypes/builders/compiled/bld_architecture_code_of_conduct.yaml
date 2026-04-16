@@ -42,7 +42,7 @@ component_inventory: '| ISO Name            | Role                              
 
   | bld_config          | Naming, paths, limits, hooks                  | P09    | Active |
 
-  | bld_memory          | Learned patterns and pitfalls (learning_record) | P10  | Active |
+  | bld_memory          | Learned patterns and pitfalls (memory)          | P10  | Active |
 
   | bld_tools           | Production + validation tools (CEX-native)    | P04    | Active |'
 dependencies: '| From              | To                          | Type         |

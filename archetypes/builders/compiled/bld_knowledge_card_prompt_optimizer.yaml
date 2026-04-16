@@ -26,21 +26,31 @@ domain_overview: The prompt_optimizer domain focuses on refining natural languag
   NLP, machine learning, and human-computer interaction to iteratively refine prompts through metrics like BLEU, ROUGE, or
   task-specific accuracy. The field is shaped by advancements in few-shot learning, prompt templating, and model-agnostic
   methods, with a growing emphasis on ethical considerations such as bias mitigation and transparency.
-key_concepts: "| Concept | Definition | Source |  \n|--------|------------|-------|  \n| Prompt Engineering | Designing inputs\
-  \ to guide LLM outputs effectively | Sheng et al. (2021) |  \n| Instruction Tuning | Fine-tuning models using task-specific\
-  \ prompts | Zou et al. (2022) |  \n| Prompt Templates | Structured formats for consistent input generation | Liu et al.\
-  \ (2023) |  \n| Prompt Compression | Reducing prompt length without losing efficacy | Chen et al. (2023) |  \n| Prompt Hallucination\
-  \ | Generation of factually incorrect outputs from ambiguous prompts | Rajani et al. (2022) |  \n| LoRA (Low-Rank Adaptation)\
-  \ | Efficient parameter updates for prompt optimization | Hu et al. (2021) |  \n| Adapters | Modular components to modify\
-  \ prompt behavior | Pfeiffer et al. (2020) |  \n| Prompt Evaluation Metrics | BLEU, ROUGE, and task-specific accuracy benchmarks\
-  \ | Papineni et al. (2002) |"
+key_concepts: '| Concept | Definition | Source |
+
+  |--------|------------|-------|
+
+  | DSPy signatures | Declarative prompt specification + compiled optimization | Khattab et al. (Stanford, 2023) |
+
+  | OPRO | Optimization by prompting -- LLM generates and scores candidates | Yang et al. (DeepMind, 2023) |
+
+  | APE | Automatic prompt engineer -- candidate generation via LLM + scoring | Zhou et al. (2023) |
+
+  | PromptWizard | Feedback-driven iterative prompt refinement with critique | Microsoft Research (2024) |
+
+  | Prompt Templates | Structured formats for consistent input generation | Liu et al. (2023) |
+
+  | Prompt Compression | Reducing prompt length without losing efficacy | Chen et al. (2023) |
+
+  | Instruction Tuning | Fine-tuning models using task-specific prompts | Wei et al. (2022) |
+
+  | Prompt Evaluation Metrics | Task-specific accuracy, BLEU, ROUGE for pass scoring | Papineni et al. (2002) |'
 industry_standards:
-- Prompt Engineering Working Group (ML Commons)
-- Prompt Tuning Framework (Microsoft P-Tuning v2)
-- LoRA Paper (Hu et al., 2021)
-- Prompt Compression RFC (Hugging Face, 2023)
-- Prompt Evaluation Benchmark (ACL 2023 Workshop)
-- Prompt Hallucination Detection Framework (Meta, 2023)
+- 'DSPy framework (Stanford NLP, 2023): systematic compilation of prompt pipelines'
+- 'OPRO (DeepMind, 2023): LLM-as-optimizer for prompt search'
+- 'APE (Zhou et al., 2023): automatic prompt engineer benchmark'
+- 'PromptWizard (Microsoft, 2024): feedback-loop prompt refinement'
+- 'P-Tuning v2 (Microsoft): parameter-efficient prompt optimization'
 common_patterns:
 - Iterative refinement using A/B testing for prompt variants
 - Template-based optimization with dynamic slot insertion

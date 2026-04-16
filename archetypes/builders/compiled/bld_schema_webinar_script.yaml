@@ -27,10 +27,7 @@ id_pattern: '^p03_ws_[a-z][a-z0-9_]+\.md$
 
   - `p03_ws_ProductDemo.md` -- INVALID (uppercase)
 
-  - `ws_product_demo.md` -- INVALID (missing pillar prefix)
-
-
-  ---'
+  - `ws_product_demo.md` -- INVALID (missing pillar prefix)'
 frontmatter_fields: ''
 required_fields: '| Field | Type | Validation | Example |
 
@@ -79,10 +76,7 @@ optional_fields: '| Field | Type | Notes |
 
   | cta_url | string | URL for the closing CTA action |
 
-  | llm_function | string | Pipeline function tag |
-
-
-  ---'
+  | llm_function | string | Pipeline function tag |'
 body_structure: 'Sections must appear in this order. Section headings must include timestamp markers.
 
 
@@ -104,10 +98,7 @@ body_structure: 'Sections must appear in this order. Section headings must inclu
 
   | 7 | Q&A Facilitation | YES | Moderator intro, 3 seed questions, graceful close line |
 
-  | 8 | CTA Close | YES | Action statement, URL, [SLIDE X: CTA] cue |
-
-
-  ---'
+  | 8 | CTA Close | YES | Action statement, URL, [SLIDE X: CTA] cue |'
 constraints: '| Constraint | Value | Enforcement |
 
   |-----------|-------|-------------|

@@ -106,8 +106,8 @@ pitfalls_anti_patterns_to_avoid: '| ID | Pitfall | Prevention |
 
   | P-003 | Including GDPR in the Annex IV package | Explicitly exclude GDPR at system prompt NEVER rules |
 
-  | P-004 | Leaving placeholder text ({{PLACEHOLDER}}) in published artifact | F7 GOVERN check: scan for unfilled {{}} patterns
-  |
+  | P-004 | Leaving placeholder text (unfilled template variables) in published artifact | F7 GOVERN check: scan for unfilled
+  double-brace patterns |
 
   | P-005 | Saying system "complies" | Builder documents evidence; provider DECLARES conformity via DoC (Art. 47) |
 
@@ -166,4 +166,4 @@ recommendations_derived_from_learning: '| Recommendation | Applies To | Priority
 memory_update_protocol: "When a new pattern is discovered during a build run:\n1. Add an observation (O-XXX) with frequency\
   \ estimate\n2. Add the corresponding pitfall (P-XXX) if actionable\n3. Update high-scoring patterns table if score > 9.0\
   \ was achieved\n4. Log to .cex/learning_records/ via cex_memory_update.py\n\npython _tools/cex_memory_update.py --kind correction\
-  \ --source conformity_assessment \\\n  --note \"Pattern: {{DESCRIPTION}}\" --impact \"{{SCORE_DELTA}}\""
+  \ --source conformity_assessment \\\n  --note \"Pattern: DESCRIPTION_TEXT\" --impact \"SCORE_DELTA_VALUE\""

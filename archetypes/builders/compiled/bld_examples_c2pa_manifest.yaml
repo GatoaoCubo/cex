@@ -1,0 +1,45 @@
+kind: examples
+id: bld_examples_c2pa_manifest
+pillar: P07
+llm_function: GOVERN
+purpose: Golden and anti-examples of c2pa_manifest artifacts
+quality: null
+title: Examples C2PA Manifest
+version: 1.0.0
+author: n04_wave7
+tags:
+- c2pa_manifest
+- builder
+- examples
+- C2PA
+- AI-ML-generator
+- claim
+- assertion
+tldr: Golden and anti-examples of c2pa_manifest artifacts
+domain: c2pa_manifest construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+golden_example: "{\n  \"manifests\": {\n    \"cex:firefly-campaign-banner\": {\n      \"claim_generator\": \"CEX-N02-Marketing/1.0\
+  \ c2pa-rs/0.36\",\n      \"title\": \"Black Friday Campaign Banner 2026\",\n      \"format\": \"image/jpeg\",\n      \"\
+  instance_id\": \"xmp:iid:f3a9b2c1-d4e5-4f6a-8b7c-9d0e1f2a3b4c\",\n      \"ingredients\": [],\n      \"assertions\": [\n\
+  \        {\n          \"label\": \"c2pa.ai_generator\",\n          \"data\": {\n            \"digitalSourceType\": \"trainedAlgorithmicMedia\"\
+  ,\n            \"generatorModel\": {\n              \"name\": \"Adobe Firefly\",\n              \"version\": \"3.0\"\n \
+  \           },\n            \"promptText\": \"Black Friday sale banner, dark background, gold typography, shopping bags,\
+  \ 4K\"\n          }\n        },\n        {\n          \"label\": \"c2pa.training-mining\",\n          \"data\": {\n    \
+  \        \"dataType\": \"trainedAlgorithmicMedia\",\n            \"entries\": [\n              {\"uri\": \"https://firefly.adobe.com/training-data-manifest\"\
+  , \"alg\": \"sha256\", \"hash\": \"a1b2c3...\"}\n            ]\n          }\n        }\n      ],\n      \"signature_info\"\
+  : {\n        \"issuer\": \"Adobe Inc.\",\n        \"cert_serial_number\": \"0x1234ABCD\"\n      }\n    }\n  },\n  \"active_manifest\"\
+  : \"cex:firefly-campaign-banner\"\n}"
+anti_example_1_missing_ai_generator_assertion: "{\n  \"manifests\": {\n    \"unknown:manifest\": {\n      \"title\": \"Generated\
+  \ Image\",\n      \"format\": \"image/png\",\n      \"assertions\": []\n    }\n  }\n}\nWhy it fails: No c2pa.ai_generator\
+  \ assertion. C2PA 2.2+ requires AI-ML generator attribution for AI-generated content. Empty assertions array provides no\
+  \ provenance information to content consumers or auditors."
+anti_example_2_missing_ingredient_hashes: "{\n  \"assertions\": [\n    {\n      \"label\": \"c2pa.ingredient\",\n      \"\
+  data\": {\n        \"title\": \"Source Image\",\n        \"relationship\": \"parentOf\"\n      }\n    }\n  ]\n}\nWhy it\
+  \ fails: Ingredient assertion without content hash. Without SHA-256 hash binding the ingredient reference to actual file\
+  \ content, the provenance chain is unverifiable and can be spoofed."
+anti_example_3_non_iana_mime_type: '{"format": "jpg"}
+
+  Why it fails: "jpg" is not an IANA MIME type. Must be "image/jpeg". Invalid format breaks manifest parsing in all C2PA-compliant
+  readers (Adobe, Nikon, Canon, Microsoft).'

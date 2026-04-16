@@ -17,16 +17,46 @@ created: '2026-04-14'
 updated: '2026-04-14'
 density_score: 0.85
 frontmatter_fields: ''
-required: "| Field     | Type   | Required | Default | Notes |  \n|-----------|--------|----------|---------|-------|  \n\
-  | id        | string | yes      |         |       |  \n| kind      | string | yes      |         |       |  \n| pillar \
-  \   | string | yes      |         |       |  \n| title     | string | yes      |         |       |  \n| version   | string\
-  \ | yes      |         |       |  \n| created   | date   | yes      |         |       |  \n| updated   | date   | yes  \
-  \    |         |       |  \n| author    | string | yes      |         |       |  \n| domain    | string | yes      |   \
-  \      |       |  \n| quality   | null   | yes      | null    | Never self-score; peer review assigns |  \n| tags      |\
-  \ list   | yes      |         |       |  \n| tldr      | string | yes      |         |       |  \n| report_period | string\
-  \ | yes |         |       |  \n| user_count | integer | yes |         |       |"
-recommended: "| Field         | Type   | Notes |  \n|---------------|--------|-------|  \n| data_source   | string |     \
-  \  |  \n| metrics       | list   |       |  \n| methodology   | string |       |"
+required: '| Field     | Type   | Required | Default | Notes |
+
+  |-----------|--------|----------|---------|-------|
+
+  | id        | string | yes      |         |       |
+
+  | kind      | string | yes      |         |       |
+
+  | pillar    | string | yes      |         |       |
+
+  | title     | string | yes      |         |       |
+
+  | version   | string | yes      |         |       |
+
+  | created   | date   | yes      |         |       |
+
+  | updated   | date   | yes      |         |       |
+
+  | author    | string | yes      |         |       |
+
+  | domain    | string | yes      |         |       |
+
+  | quality   | null   | yes      | null    | Never self-score; peer review assigns |
+
+  | tags      | list   | yes      |         |       |
+
+  | tldr      | string | yes      |         |       |
+
+  | report_period | string | yes |         |       |
+
+  | user_count | integer | yes |         |       |'
+recommended: '| Field         | Type   | Notes |
+
+  |---------------|--------|-------|
+
+  | data_source   | string |       |
+
+  | metrics       | list   |       |
+
+  | methodology   | string |       |'
 id_pattern: ^p07_ur_[a-z][a-z0-9_]+.yaml$
 body_structure:
 - 'Overview: Summary of report scope and purpose.'

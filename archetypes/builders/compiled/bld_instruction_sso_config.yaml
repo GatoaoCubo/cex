@@ -24,17 +24,17 @@ phase_1_research:
 - Document existing SSO infrastructure (e.g., federation services, proxy configurations).
 - Confirm compliance with regulatory requirements (e.g., GDPR, HIPAA).
 phase_2_compose:
-- Set up working directory with SCHEMA.md and OUTPUT_TEMPLATE.md as references.
+- Set up working directory with bld_schema_sso_config.md and bld_output_template_sso_config.md as references.
 - 'Define artifact structure: `idp_config`, `protocol`, `attribute_mapping`, `constraints`.'
 - Populate `idp_config` with metadata URLs, entity IDs, and certificate fingerprints.
 - Specify protocol version (SAML 2.0, OIDC 1.0) and message signing requirements.
 - Map user attributes to application claims (e.g., `user.email` → `email`).
 - 'Apply constraints: token lifetime (e.g., `max_age=3600`), encryption algorithms (e.g., `RSA256`).'
-- Validate against SCHEMA.md using a JSON schema validator (e.g., jsonschema).
-- Use OUTPUT_TEMPLATE.md to format final configuration (YAML or JSON).
+- Validate against bld_schema_sso_config.md using a JSON schema validator (e.g., jsonschema).
+- Use bld_output_template_sso_config.md to format final configuration (YAML or JSON).
 - Add comments for audit trails (e.g., `last_modified`, `author`).
 phase_3_validate:
-- '[ ] ✅ Check syntax compliance with SCHEMA.md (no schema errors).'
+- '[ ] [OK] Check syntax compliance with bld_schema_sso_config.md (no schema errors).'
 - '[ ] ✅ Verify protocol compatibility (SAML/OIDC endpoints match IDP metadata).'
 - '[ ] ✅ Confirm attribute mappings align with application requirements.'
 - '[ ] ✅ Ensure constraints (e.g., `max_age`, `encryption`) meet security policies.'

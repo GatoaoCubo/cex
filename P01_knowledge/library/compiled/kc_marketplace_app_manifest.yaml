@@ -1,0 +1,45 @@
+id: kc_marketplace_app_manifest
+kind: knowledge_card
+title: Marketplace App Manifest Specification
+version: 1.0.0
+quality: null
+pillar: P01
+density_score: 0.94
+core_components:
+- Metadata
+- App name and description
+- Versioning information
+- Author/organization details
+- License type and restrictions
+- Permissions
+- Access control settings
+- Data handling policies
+- Third-party integration rights
+- User privacy preferences
+- Pricing Model
+- Subscription tiers
+- Pay-per-use rates
+- Free tier limitations
+- Currency and payment methods
+- Functional Capabilities
+- Core features and APIs
+- Performance benchmarks
+- System requirements
+- Compatibility specifications
+- Dependencies
+- Required libraries/frameworks
+- Recommended runtime versions
+- External service integrations
+- Security
+- Data encryption standards
+- Authentication mechanisms
+- Audit logging requirements
+- Compliance certifications
+platform_specific_notes: '- Claude: Include model version compatibility and prompt budget allocations
+
+  - LangChain: Specify chain execution policies and memory management
+
+  - HuggingFace: Define model card requirements and training data sources
+
+
+  This specification ensures consistent app discovery, security, and interoperability across different AI platform ecosystems.'

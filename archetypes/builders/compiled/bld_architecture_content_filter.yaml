@@ -1,0 +1,29 @@
+kind: architecture
+id: bld_architecture_content_filter
+pillar: P08
+llm_function: CONSTRAIN
+purpose: Component map of content_filter -- inventory, dependencies
+quality: null
+title: Architecture Content Filter
+version: 1.0.0
+author: wave1_builder_gen
+tags:
+- content_filter
+- builder
+- architecture
+tldr: Component map of content_filter -- inventory, dependencies
+domain: content_filter construction
+created: '2026-04-13'
+updated: '2026-04-13'
+density_score: 0.85
+component_inventory: "This ISO defines a content filter -- the moderation rules that gate output or input.\n| Name | Role\
+  \ | Owner | Status |  \n|------|------|-------|--------|  \n| Parser | Processes raw content | DevTeamA | Active |  \n|\
+  \ RuleEngine | Applies filtering rules | DevTeamB | Active |  \n| RuleDB | Stores filtering policies | DBTeam | Active |\
+  \  \n| UI_Panel | Configures rules | UXTeam | Under Dev |  \n| Validator | Ensures rule integrity | QAteam | Active |  \n\
+  | Logger | Tracks filtering events | OpsTeam | Active |  \n| API_Gateway | Exposes filtering endpoints | DevTeamA | Active\
+  \ |"
+dependencies: "| From | To | Type |  \n|------|----|------|  \n| Parser | RuleEngine | Data |  \n| RuleEngine | RuleDB | Data\
+  \ |  \n| API_Gateway | Parser | Control |  \n| UI_Panel | RuleDB | Data |  \n| Validator | RuleEngine | Control |"
+architectural_position: Content_filter operates within CEX's compliance layer, ensuring user-generated content adheres to
+  regulatory and platform policies. It interfaces with trading systems, user management, and audit modules, acting as a gatekeeper
+  for data integrity and risk mitigation.

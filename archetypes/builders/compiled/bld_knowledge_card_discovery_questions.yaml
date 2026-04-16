@@ -22,18 +22,26 @@ domain_overview: Discovery questions in MEDDIC/BANT frameworks are structured to
   and deal stages (e.g., needs analysis, proposal), sales teams can identify pain points, budget limits, and decision influencers.
   Unlike general sales playbooks, discovery questions focus on actionable insights rather than broad strategies, enabling
   personalized engagement.
-key_concepts: "| Concept               | Definition                                                                 | Source\
-  \                              |  \n|----------------------|----------------------------------------------------------------------------|-------------------------------------|\
-  \  \n| MEDDIC               | Framework for qualifying deals via Metrics, Economic Buyer, etc.          | Neil Rackham,\
-  \ MEDDIC Selling     |  \n| BANT                 | Qualification criteria: Budget, Authority, Need, Timeline.          \
-  \      | The Challenger Sale              |  \n| Pain Points          | Specific problems hindering the buyer’s operations\
-  \ or goals.              | Harvard Business Review            |  \n| Economic Buyer       | Individual with authority to\
-  \ approve spending.                            | MEDDIC Selling                   |  \n| Decision Criteria    | Metrics\
-  \ used to evaluate solutions (e.g., ROI, risk reduction).           | CEB Buying Process                 |  \n| Champion\
-  \             | Internal advocate who supports the solution.                              | MEDDIC Selling             \
-  \      |  \n| Deal Stage           | Progression in the sales cycle (e.g., discovery, proposal).               | Salesforce\
-  \ Sales Cloud             |  \n| Buyer Persona        | Detailed profile of a target customer (e.g., technical buyer, executive).\
-  \ | HubSpot                            |"
+key_concepts: '| Concept               | Definition                                                                 | Source                              |
+
+  |----------------------|----------------------------------------------------------------------------|-------------------------------------|
+
+  | MEDDIC               | Framework for qualifying deals via Metrics, Economic Buyer, etc.          | Neil Rackham, MEDDIC
+  Selling     |
+
+  | BANT                 | Qualification criteria: Budget, Authority, Need, Timeline.                | The Challenger Sale              |
+
+  | Pain Points          | Specific problems hindering the buyer’s operations or goals.              | Harvard Business Review            |
+
+  | Economic Buyer       | Individual with authority to approve spending.                            | MEDDIC Selling                   |
+
+  | Decision Criteria    | Metrics used to evaluate solutions (e.g., ROI, risk reduction).           | CEB Buying Process                 |
+
+  | Champion             | Internal advocate who supports the solution.                              | MEDDIC Selling                   |
+
+  | Deal Stage           | Progression in the sales cycle (e.g., discovery, proposal).               | Salesforce Sales Cloud             |
+
+  | Buyer Persona        | Detailed profile of a target customer (e.g., technical buyer, executive). | HubSpot                            |'
 industry_standards:
 - MEDDIC Selling (Neil Rackham)
 - BANT Framework (Salesforce, HubSpot)

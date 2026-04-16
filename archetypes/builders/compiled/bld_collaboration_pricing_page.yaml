@@ -18,11 +18,13 @@ updated: '2026-04-14'
 density_score: 0.85
 crew_role: Designs and builds interactive pricing page UI components, ensuring alignment with brand guidelines and user experience
   standards. Coordinates with data and marketing teams for integration.
-receives_from: "| Builder              | What                  | Format      |  \n|---------------------|-----------------------|-------------|\
-  \  \n| subscription_tier   | Tier data             | JSON        |  \n| design_system       | UI component specs    | Figma\
-  \       |  \n| analytics           | Usage statistics      | CSV         |"
-produces_for: "| Builder              | What                  | Format      |  \n|---------------------|-----------------------|-------------|\
-  \  \n| subscription_tier   | Configurable tier UI  | React       |  \n| marketing           | Embeddable pricing UI | HTML/CSS\
-  \    |  \n| analytics           | Event tracking code   | JavaScript  |"
-boundary: Does NOT handle subscription_tier data modeling (subscription_tier_builder), landing_page content (landing_page_builder),
-  or payment processing (payment_gateway_builder).
+receives_from: "| Builder                      | What                              | Format  |  \n|------------------------------|-----------------------------------|---------|\
+  \  \n| content_monetization-builder | Tier pricing data, feature gating spec | YAML |  \n| landing_page-builder        \
+  \ | Hero section copy + brand context | YAML    |  \n| referral_program-builder     | Upgrade CTA copy variants (A/B)  \
+  \ | YAML    |"
+produces_for: "| Builder                      | What                              | Format  |  \n|------------------------------|-----------------------------------|---------|\
+  \  \n| landing_page-builder         | Pricing section embed (tier table + CTAs) | YAML |  \n| content_monetization-builder\
+  \ | Tier comparison UI spec + most-popular badge logic | YAML |  \n| onboarding_flow-builder      | Post-sign-up upgrade\
+  \ nudge copy   | YAML    |"
+boundary: Does NOT handle subscription billing logic (content_monetization-builder), landing_page hero content (landing_page-builder),
+  or payment gateway integration. Pricing page is UI + copy only; business logic lives in monetization layer.

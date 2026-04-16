@@ -14,6 +14,7 @@ tags:
 created: 2026-04-15
 nucleus: n04
 density_score: 1.0
+updated: '2026-04-15'
 1_current_state: ''
 1_1_n04_artifact_inventory: 'Command: inline Python frontmatter scan over `N04_knowledge/*/.md`
 

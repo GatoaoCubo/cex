@@ -16,17 +16,27 @@ domain: eval_metric construction
 created: '2026-04-14'
 updated: '2026-04-14'
 density_score: 0.85
-production_tools: "| Tool | Purpose | When |  \n|------|---------|------|  \n| cex_compile.py | Compiles metric configurations\
-  \ into executable code | During metric setup |  \n| cex_score.py | Applies scoring logic to evaluation data | After data\
-  \ processing |  \n| cex_retriever.py | Fetches benchmark datasets for evaluation | When initializing metrics |  \n| cex_doctor.py\
-  \ | Debugs inconsistencies in metric outputs | During validation phase |  \n| cex_validator.py | Ensures metric compliance\
-  \ with spec standards | Before deployment |  \n| cex_formatter.py | Converts raw scores into human-readable reports | For\
-  \ final output delivery |"
-validation_tools: "| Tool | Purpose | When |  \n|------|---------|------|  \n| metric_validator.py | Checks metric consistency\
-  \ across datasets | During testing |  \n| benchmark_comparator.py | Compares results against reference benchmarks | For\
-  \ accuracy verification |  \n| visualizer.py | Generates plots for metric performance trends | When analyzing results |\
-  \  \n| stress_tester.py | Tests edge cases in metric calculations | During robustness checks |"
+production_tools: '| Tool | Purpose | When |
+
+  |------|---------|------|
+
+  | cex_compile.py | Compile eval_metric artifact after save | F8 COLLABORATE |
+
+  | cex_score.py | Score artifact against quality gate (--apply flag) | F7 GOVERN |
+
+  | cex_retriever.py | Find similar eval_metric artifacts for template reuse | F3 INJECT |
+
+  | cex_doctor.py | Validate builder health and ISO completeness | F7 GOVERN |
+
+  | cex_wave_validator.py | Run schema + frontmatter validation on builder ISOs | Pre-commit |'
+validation_tools: '| Tool | Purpose | When |
+
+  |------|---------|------|
+
+  | python -m pytest | Run unit tests for eval_metric artifacts | CI gate |
+
+  | python _tools/cex_hooks.py pre-commit | Pre-commit hook: ASCII check + frontmatter | Before git add |'
 external_references:
-- 'Hugging Face Datasets: For benchmark data handling'
-- 'MLflow: For experiment tracking and metric logging'
-- 'SciPy: For statistical validation of scores'
+- 'evaluate (huggingface.co/docs/evaluate): Standard NLP metric library (BLEU, ROUGE, BERTScore)'
+- 'scikit-learn metrics (sklearn.metrics): F1, precision, recall, ROC-AUC'
+- 'sacrebleu: Reproducible BLEU scoring with standardized tokenization'

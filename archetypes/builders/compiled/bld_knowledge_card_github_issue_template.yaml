@@ -21,14 +21,25 @@ domain_overview: GitHub issue templates standardize bug reports, feature request
   and environment details. Industry adoption emphasizes alignment with project workflows, such as linking to documentation
   or using labels for prioritization. Templates also support community-driven projects by fostering consistency and reducing
   onboarding friction for contributors.
-key_concepts: "| Concept | Definition | Source |  \n|---|---|---|  \n| Required Fields | Mandatory inputs (e.g., \"Steps to\
-  \ reproduce\") to ensure completeness | GitHub Docs |  \n| Labels | Categorization tags (e.g., \"bug,\" \"enhancement\"\
-  ) for filtering and prioritization | GitHub Docs |  \n| Issue Type | Classification (bug/feature/question) to route issues\
-  \ appropriately | GitHub Docs |  \n| Triage Labels | Metadata (e.g., \"needs triage,\" \"blocked\") for workflow automation\
-  \ | Atlassian |  \n| Reproducibility | Steps to reproduce an issue, aligned with OSI's reproducibility standards | OSI |\
-  \  \n| Environment Details | System-specific info (OS, browser) to diagnose issues | RFC 7841 |  \n| Code of Conduct | Reference\
-  \ to contributor guidelines (e.g., Contributor Covenant) | Contributor Covenant |  \n| Linking to Docs | Direct links to\
-  \ relevant documentation for self-service resolution | GitHub Docs |"
+key_concepts: '| Concept | Definition | Source |
+
+  |---|---|---|
+
+  | Required Fields | Mandatory inputs (e.g., "Steps to reproduce") to ensure completeness | GitHub Docs |
+
+  | Labels | Categorization tags (e.g., "bug," "enhancement") for filtering and prioritization | GitHub Docs |
+
+  | Issue Type | Classification (bug/feature/question) to route issues appropriately | GitHub Docs |
+
+  | Triage Labels | Metadata (e.g., "needs triage," "blocked") for workflow automation | Atlassian |
+
+  | Reproducibility | Steps to reproduce an issue, aligned with OSI''s reproducibility standards | OSI |
+
+  | Environment Details | System-specific info (OS, browser) to diagnose issues | RFC 7841 |
+
+  | Code of Conduct | Reference to contributor guidelines (e.g., Contributor Covenant) | Contributor Covenant |
+
+  | Linking to Docs | Direct links to relevant documentation for self-service resolution | GitHub Docs |'
 industry_standards:
 - GitHub Issue Template Guidelines
 - Contributor Covenant (Code of Conduct)

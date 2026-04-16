@@ -16,25 +16,60 @@ domain: rbac_policy construction
 created: '2026-04-14'
 updated: '2026-04-14'
 density_score: 0.85
-definition: "| metric         | threshold | operator | scope      |  \n|----------------|-----------|----------|------------|\
-  \  \n| Policy Count   | ≥1        | ≥         | per tenant |"
-hard_gates: "| ID  | Check                          | Fail Condition                                      |  \n|-----|--------------------------------|-----------------------------------------------------|\
-  \  \n| H01 | YAML frontmatter valid         | Missing or invalid frontmatter                      |  \n| H02 | ID matches\
-  \ pattern             | ID does not match ^p09_rbac_[a-z][a-z0-9_]+.yaml$ |  \n| H03 | kind field matches 'rbac_policy'\
-  \ | kind ≠ 'rbac_policy'                               |  \n| H04 | role field present             | role missing      \
-  \                                  |  \n| H05 | resource field present         | resource missing                      \
-  \            |  \n| H06 | action field present           | action missing                                    |  \n| H07\
-  \ | tenant isolation enforced      | tenant field missing or wildcard used             |  \n| H08 | no wildcard permissions\
-  \        | action contains '' or resource contains ''      |"
-soft_scoring: "| Dim       | Dimension             | Weight | Scoring Guide                                      |  \n|-----------|-----------------------|--------|----------------------------------------------------|\
-  \  \n| D01       | Completeness          | 0.20   | All required fields present (role, resource, action)|  \n| D02     \
-  \  | Isolation             | 0.20   | Tenant-specific isolation enforced                 |  \n| D03       | Specificity\
-  \           | 0.15   | No wildcard permissions                            |  \n| D04       | Syntax                | 0.15\
-  \   | Valid YAML and field formatting                    |  \n| D05       | Clarity               | 0.10   | Descriptive\
-  \ role/resource/action names             |  \n| D06       | Coverage              | 0.10   | Policies cover all critical\
-  \ operations             |  \n| D07       | Consistency           | 0.10   | Uniform naming and structure across policies\
-  \       |"
-actions: "| Score   | Action       |  \n|---------|--------------|  \n| ≥9.5    | GOLDEN       |  \n| ≥8.0    | PUBLISH  \
-  \    |  \n| ≥7.0    | REVIEW       |  \n| <7.0    | REJECT       |"
-bypass: "| conditions                          | approver   | audit trail         |  \n|-------------------------------------|------------|---------------------|\
-  \  \n| Critical tenant isolation override  | CTO        | documented in JIRA  |"
+definition: '| metric         | threshold | operator | scope      |
+
+  |----------------|-----------|----------|------------|
+
+  | Policy Count   | ≥1        | ≥         | per tenant |'
+hard_gates: '| ID  | Check                          | Fail Condition                                      |
+
+  |-----|--------------------------------|-----------------------------------------------------|
+
+  | H01 | YAML frontmatter valid         | Missing or invalid frontmatter                      |
+
+  | H02 | ID matches pattern             | ID does not match ^p09_rbac_[a-z][a-z0-9_]+.yaml$ |
+
+  | H03 | kind field matches ''rbac_policy'' | kind ≠ ''rbac_policy''                               |
+
+  | H04 | role field present             | role missing                                        |
+
+  | H05 | resource field present         | resource missing                                  |
+
+  | H06 | action field present           | action missing                                    |
+
+  | H07 | tenant isolation enforced      | tenant field missing or wildcard used             |
+
+  | H08 | no wildcard permissions        | action contains '''' or resource contains ''''      |'
+soft_scoring: '| Dim       | Dimension             | Weight | Scoring Guide                                      |
+
+  |-----------|-----------------------|--------|----------------------------------------------------|
+
+  | D01       | Completeness          | 0.20   | All required fields present (role, resource, action)|
+
+  | D02       | Isolation             | 0.20   | Tenant-specific isolation enforced                 |
+
+  | D03       | Specificity           | 0.15   | No wildcard permissions                            |
+
+  | D04       | Syntax                | 0.15   | Valid YAML and field formatting                    |
+
+  | D05       | Clarity               | 0.10   | Descriptive role/resource/action names             |
+
+  | D06       | Coverage              | 0.10   | Policies cover all critical operations             |
+
+  | D07       | Consistency           | 0.10   | Uniform naming and structure across policies       |'
+actions: '| Score   | Action       |
+
+  |---------|--------------|
+
+  | ≥9.5    | GOLDEN       |
+
+  | ≥8.0    | PUBLISH      |
+
+  | ≥7.0    | REVIEW       |
+
+  | <7.0    | REJECT       |'
+bypass: '| conditions                          | approver   | audit trail         |
+
+  |-------------------------------------|------------|---------------------|
+
+  | Critical tenant isolation override  | CTO        | documented in JIRA  |'

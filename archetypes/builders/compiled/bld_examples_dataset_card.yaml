@@ -1,0 +1,41 @@
+kind: examples
+id: bld_examples_dataset_card
+pillar: P07
+llm_function: GOVERN
+purpose: Golden and anti-examples of dataset_card artifacts
+quality: null
+title: Examples Dataset Card
+version: 1.0.0
+author: wave1_builder_gen
+tags:
+- dataset_card
+- builder
+- examples
+tldr: Golden and anti-examples of dataset_card artifacts
+domain: dataset_card construction
+created: '2026-04-13'
+updated: '2026-04-13'
+density_score: 0.85
+golden_example: '--- id: movie_reviews_v2 type: dataset_card version: 2.1 ---'
+summary: A curated dataset of 50,000 English-language movie reviews for sentiment analysis.
+data_collection: Data was scraped from public IMDB forums between 2022 and 2023. All PII was removed during ingestion.
+data_structure:
+- '`review_text`: string (The raw text of the review)'
+- '`label`: integer (0 for negative, 1 for positive)'
+- '`timestamp`: datetime (Date of the review)'
+limitations: The dataset contains a bias toward modern films (post-2010) and does not represent non-English cinema.
+usage: Intended for training binary classifiers for sentiment detection.
+why_it_fails: This is a `knowledge_card`. It provides general factual information and encyclopedic knowledge about a topic,
+  rather than documenting a structured dataset's metadata, features, or collection methods.
+anti_example_1_including_evaluation_metrics_eval_dataset: '--- id: sentiment_model_eval type: eval_dataset ---'
+model_performance_report: The BERT-base model achieved an F1-score of 0.89 on the test split.
+metrics:
+- 'Accuracy: 91%'
+- 'Precision: 0.88'
+- 'Recall: 0.90'
+anti_example_2_providing_factual_information_knowledge_card: '--- id: photosynthesis_info type: knowledge_card ---'
+photosynthesis: Photosynthesis is the process used by plants and other organisms to convert light energy into chemical energy.
+key_components:
+- Chlorophyll
+- Sunlight
+- Carbon Dioxide

@@ -17,20 +17,49 @@ created: '2026-04-14'
 updated: '2026-04-14'
 density_score: 0.85
 frontmatter_fields: ''
-required: "| Field | Type | Required | Default | Notes |  \n|---|---|---|---|---|  \n| id | string | yes |  | Must match ID\
-  \ Pattern |  \n| kind | string | yes | \"user_journey\" |  |  \n| pillar | string | yes | \"P05\" |  |  \n| title | string\
-  \ | yes |  | Descriptive name |  \n| version | string | yes | \"1.0\" |  |  \n| created | datetime | yes |  | ISO 8601 format\
-  \ |  \n| updated | datetime | yes |  | ISO 8601 format |  \n| author | string | yes |  |  |  \n| domain | string | yes |\
-  \ \"CEX\" |  |  \n| quality | null | yes | null | Never self-score; peer review assigns |  \n| tags | list | yes | [] |\
-  \ Keywords for search |  \n| tldr | string | yes |  | Summary in 1 sentence |  \n| journey_stages | list | yes | [] | Ordered\
-  \ steps in journey |  \n| user_segment | string | yes |  | Target audience |"
-recommended: "| Field | Type | Notes |  \n|---|---|---|  \n| research_method | string | e.g., \"interviews\", \"analytics\"\
-  \ |  \n| validation_status | string | \"draft\", \"review\", \"approved\" |"
+required: '| Field | Type | Required | Default | Notes |
+
+  |---|---|---|---|---|
+
+  | id | string | yes |  | Must match ID Pattern |
+
+  | kind | string | yes | "user_journey" |  |
+
+  | pillar | string | yes | "P05" |  |
+
+  | title | string | yes |  | Descriptive name |
+
+  | version | string | yes | "1.0" |  |
+
+  | created | datetime | yes |  | ISO 8601 format |
+
+  | updated | datetime | yes |  | ISO 8601 format |
+
+  | author | string | yes |  |  |
+
+  | domain | string | yes | "CEX" |  |
+
+  | quality | null | yes | null | Never self-score; peer review assigns |
+
+  | tags | list | yes | [] | Keywords for search |
+
+  | tldr | string | yes |  | Summary in 1 sentence |
+
+  | journey_stages | list | yes | [] | Ordered steps in journey |
+
+  | user_segment | string | yes |  | Target audience |'
+recommended: '| Field | Type | Notes |
+
+  |---|---|---|
+
+  | research_method | string | e.g., "interviews", "analytics" |
+
+  | validation_status | string | "draft", "review", "approved" |'
 id_pattern: ^p05_uj_[a-z][a-z0-9_]+.md$
-body_structure: "1. Overview  \n   Brief description of the user journey's purpose and scope.  \n\n2. Key Stages  \n   Detailed\
-  \ breakdown of each stage, including touchpoints and goals.  \n\n3. User Segment  \n   Demographic, behavioral, or psychographic\
-  \ profile of the target audience.  \n\n4. Success Metrics  \n   Quantitative and qualitative indicators of journey effectiveness.\
-  \  \n\n5. Validation  \n   Summary of research methods, data sources, and peer review outcomes."
+body_structure: "1. Overview\n   Brief description of the user journey's purpose and scope.\n\n2. Key Stages\n   Detailed\
+  \ breakdown of each stage, including touchpoints and goals.\n\n3. User Segment\n   Demographic, behavioral, or psychographic\
+  \ profile of the target audience.\n\n4. Success Metrics\n   Quantitative and qualitative indicators of journey effectiveness.\n\
+  \n5. Validation\n   Summary of research methods, data sources, and peer review outcomes."
 constraints:
 - Journey stages must be ordered chronologically.
 - Use domain-specific terminology consistently.

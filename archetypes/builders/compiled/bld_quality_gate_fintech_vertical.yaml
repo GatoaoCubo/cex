@@ -16,8 +16,11 @@ domain: fintech_vertical construction
 created: '2026-04-14'
 updated: '2026-04-14'
 density_score: 0.85
-definition: "| metric | threshold | operator | scope |  \n|---|---|---|---|  \n| Fintech industry vertical | SOC2+PCI-DSS,\
-  \ KYC/AML, fraud detection, use cases | must meet | entire system |"
+definition: '| metric | threshold | operator | scope |
+
+  |---|---|---|---|
+
+  | Fintech industry vertical | SOC2+PCI-DSS, KYC/AML, fraud detection, use cases | must meet | entire system |'
 hard_gates: '| ID | Check | Fail Condition |
 
   |---|---|---|
@@ -57,8 +60,19 @@ soft_scoring: '| Dim | Dimension | Weight | Scoring Guide |
   | D07 | Integration specificity | 0.10 | 1.00 = specific API/platform patterns documented |
 
   | D08 | Documentation completeness | 0.05 | 1.00 = all required frontmatter fields populated |'
-actions: "| Score | Action |  \n|---|---|  \n| GOLDEN | >=9.5 | Auto-publish with CTO approval |  \n| PUBLISH | >=8.0 | Publish\
-  \ after QA sign-off |  \n| REVIEW | >=7.0 | Escalate to compliance team |  \n| REJECT | <7.0 | Block deployment, fix required\
-  \ |"
-bypass: "| conditions | approver | audit trail |  \n|---|---|---|  \n| Emergency hotfix | CTO | Documented in incident report\
-  \ |"
+actions: '| Score | Action |
+
+  |---|---|
+
+  | GOLDEN | >=9.5 | Auto-publish with CTO approval |
+
+  | PUBLISH | >=8.0 | Publish after QA sign-off |
+
+  | REVIEW | >=7.0 | Escalate to compliance team |
+
+  | REJECT | <7.0 | Block deployment, fix required |'
+bypass: '| conditions | approver | audit trail |
+
+  |---|---|---|
+
+  | Emergency hotfix | CTO | Documented in incident report |'

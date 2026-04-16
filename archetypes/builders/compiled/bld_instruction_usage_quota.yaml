@@ -24,12 +24,12 @@ phase_1_research:
 - Audit historical usage data for anomalies or abuse trends.
 - Consult stakeholders to prioritize quota enforcement for critical services.
 phase_2_compose:
-- Reference SCHEMA.md to define `usage_quota` fields (e.g., `quota_limit`, `reset_interval`).
+- Reference bld_schema_usage_quota.md to define `usage_quota` fields (e.g., `quota_limit`, `reset_interval`).
 - Set initial quota thresholds using P09 guidelines for resource allocation.
 - Map metrics to monitored resources (e.g., CPU, memory, API calls).
 - Write enforcement logic for exceeding thresholds (e.g., rate limiting, blocking).
 - Implement fair-use exceptions for legitimate high-usage scenarios.
-- Use OUTPUT_TEMPLATE.md to structure quota configuration files (YAML/JSON).
+- Use bld_output_template_usage_quota.md to structure quota configuration files (YAML/JSON).
 - Integrate with monitoring tools for real-time quota tracking.
 - Document enforcement rules in a policy repository.
 - Test artifact against sample workloads to ensure constraint accuracy.

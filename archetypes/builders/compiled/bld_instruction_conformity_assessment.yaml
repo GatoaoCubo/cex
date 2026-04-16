@@ -18,7 +18,7 @@ updated: '2026-04-14'
 density_score: 0.85
 overview: 'This instruction governs the 8F production of a `conformity_assessment` artifact under the EU-AI-Act. Target: high-risk
   AI systems as defined by Annex-III, following the conformity procedure in Article-43. Deadline: Aug-2026 for existing high-risk
-  systems entering the market. ---'
+  systems entering the market.'
 phase_1_research_f1_f3: ''
 step_1_1_identify_system_type_f1_constrain: '| Action | Detail |
 
@@ -111,10 +111,7 @@ step_1_5_compile_post_market_monitoring_data_f3_inject: 'Post-market-monitoring 
 
   | Periodic review schedule | Review calendar |
 
-  | Threshold for corrective action | Defined thresholds table |
-
-
-  ---'
+  | Threshold for corrective action | Defined thresholds table |'
 phase_2_compose_f4_f6: ''
 step_2_1_plan_annex_iv_sections_f4_reason: 'Annex IV requires 7 categories of technical documentation:
 
@@ -173,7 +170,7 @@ step_2_3_document_accuracy_robustness_cybersecurity_f6_produce: 'Per Article 15:
   | Performance degradation handling | Graceful degradation procedure |'
 step_2_4_generate_output_artifact_f6_produce: Use bld_output_template_conformity_assessment.md. Populate all placeholders.
   Do NOT leave any [PLACEHOLDER] unfilled. Cite Annex-IV section numbers for every claim. Flag items with "AUG-2026-DEADLINE"
-  where applicable. ---
+  where applicable.
 phase_3_validate_f7_govern: ''
 step_3_1_completeness_checklist: '| Item | Check |
 

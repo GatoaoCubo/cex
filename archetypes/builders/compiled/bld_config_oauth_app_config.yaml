@@ -16,7 +16,13 @@ domain: oauth_app_config construction
 created: '2026-04-14'
 updated: '2026-04-14'
 density_score: 0.85
-naming_convention: "Pattern: `p09_oauth_<app_name>.yaml`  \nExamples:  \n- `p09_oauth_authservice.yaml`  \n- `p09_oauth_paymentgateway.yaml`"
+naming_convention: 'Pattern: `p09_oauth_<app_name>.yaml`
+
+  Examples:
+
+  - `p09_oauth_authservice.yaml`
+
+  - `p09_oauth_paymentgateway.yaml`'
 paths: 'Artifacts stored in: `/opt/cex/config/oauth/p09/<app_name>/` Logs: `/var/log/cex/oauth/p09/<app_name>/`'
 limits: 'max_bytes: 4096 max_turns: 10 effort_level: 3'
 hooks: 'pre_build: null post_build: null on_error: null on_quality_fail: null'

@@ -25,10 +25,10 @@ required: "| Field      | Type   | Required | Default | Notes                   
   \   | ISO 8601 format                    |  \n| updated    | date   | yes      | null    | ISO 8601 format             \
   \       |  \n| author     | string | yes      | null    | Author name                        |  \n| domain     | string\
   \ | yes      | null    | \"pricing\"                          |  \n| quality    | null   | yes      | null    | Never self-score;\
-  \ peer review assigns |  \n| tags       | array  | yes      | null    | Keywords (e.g., \"crypto\", \"fiat\")  |  \n| tldr\
-  \       | string | yes      | null    | Summary of pricing structure       |  \n| pricing_model | string | yes | null |\
-  \ \"flat\", \"tiered\", \"dynamic\"        |  \n| currency   | string | yes      | null    | ISO 4217 code (e.g., \"USD\"\
-  )        |  \n| tiers      | array  | yes      | null    | Tiered pricing details             |"
+  \ peer review assigns |  \n| tags       | array  | yes      | null    | Keywords (e.g., \"saas\", \"freemium\", \"b2b\"\
+  ) |  \n| tldr       | string | yes      | null    | Summary of pricing structure       |  \n| pricing_model | string | yes\
+  \ | null | \"flat\", \"tiered\", \"dynamic\"        |  \n| currency   | string | yes      | null    | ISO 4217 code (e.g.,\
+  \ \"USD\")        |  \n| tiers      | array  | yes      | null    | Tiered pricing details             |"
 recommended: "| Field         | Type   | Notes                          |  \n|---------------|--------|--------------------------------|\
   \  \n| last_reviewed | date   | Last peer review date          |  \n| source_url    | string | Link to pricing source  \
   \       |  \n| notes         | string | Additional context or comments |"

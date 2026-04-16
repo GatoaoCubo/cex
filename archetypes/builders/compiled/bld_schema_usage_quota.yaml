@@ -64,10 +64,10 @@ recommended: '| Field | Type | Notes |
 
   | deprecated | boolean | Mark if obsolete |'
 id_pattern: ^p09_uq_[a-z][a-z0-9_]+.yaml$
-body_structure: "1. Quota Limit Definition  \n   Specify numerical limit and unit of measurement.\n\n2. Usage Metric  \n \
-  \  Define what usage is measured (e.g., API calls, data transfer).\n\n3. Reset Interval  \n   Define timeframe for quota\
-  \ reset (e.g., daily, monthly).\n\n4. Enforcement Policy  \n   Specify enforcement type (hard: block, soft: warn).\n\n5.\
-  \ Quota Allocation  \n   Describe how quotas are distributed across users/roles."
+body_structure: "1. Quota Limit Definition\n   Specify numerical limit and unit of measurement.\n\n2. Usage Metric\n   Define\
+  \ what usage is measured (e.g., API calls, data transfer).\n\n3. Reset Interval\n   Define timeframe for quota reset (e.g.,\
+  \ daily, monthly).\n\n4. Enforcement Policy\n   Specify enforcement type (hard: block, soft: warn).\n\n5. Quota Allocation\n\
+  \   Describe how quotas are distributed across users/roles."
 constraints:
 - All required fields must be present and valid
 - '`quota_limit` must be a positive number'

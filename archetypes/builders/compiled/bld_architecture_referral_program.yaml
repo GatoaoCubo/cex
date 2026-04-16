@@ -20,31 +20,31 @@ component_inventory: '| ISO Name             | Role                             
 
   |----------------------|-------------------------------------------|--------|--------|
 
-  | bld_manifest         | Defines program structure and metadata    | P11    | Active |
+  | bld_manifest         | Defines program structure and metadata    | P05    | Active |
 
-  | bld_instruction      | Encodes referral logic and rules        | P11    | Active |
+  | bld_instruction      | Encodes referral logic and rules        | P03    | Active |
 
-  | bld_system_prompt    | Sets AI behavior for program execution  | P11    | Active |
+  | bld_system_prompt    | Sets AI behavior for program execution  | P03    | Active |
 
-  | bld_schema           | Validates data formats and structures   | P11    | Active |
+  | bld_schema           | Validates data formats and structures   | P06    | Active |
 
   | bld_quality_gate     | Enforces compliance and accuracy checks | P11    | Active |
 
-  | bld_output_template  | Formats referral program outputs        | P11    | Active |
+  | bld_output_template  | Formats referral program outputs        | P05    | Active |
 
-  | bld_examples         | Provides sample referral scenarios      | P11    | Active |
+  | bld_examples         | Provides sample referral scenarios      | P07    | Active |
 
-  | bld_knowledge_card   | Stores domain-specific referral knowledge | P11    | Active |
+  | bld_knowledge_card   | Stores domain-specific referral knowledge | P01    | Active |
 
-  | bld_architecture     | Documents system design and components  | P11    | Active |
+  | bld_architecture     | Documents system design and components  | P08    | Active |
 
-  | bld_collaboration    | Manages stakeholder coordination        | P11    | Active |
+  | bld_collaboration    | Manages stakeholder coordination        | P12    | Active |
 
-  | bld_config           | Centralizes program configuration       | P11    | Active |
+  | bld_config           | Centralizes program configuration       | P09    | Active |
 
-  | bld_memory           | Tracks referral program state           | P11    | Active |
+  | bld_memory           | Tracks referral program state           | P10    | Active |
 
-  | bld_tools            | Integrates external referral utilities  | P11    | Active |'
+  | bld_tools            | Integrates external referral utilities  | P04    | Active |'
 dependencies: '| From              | To                  | Type       |
 
   |-------------------|---------------------|------------|

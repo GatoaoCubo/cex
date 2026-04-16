@@ -1,0 +1,25 @@
+id: kc_model_registry
+kind: knowledge_card
+title: Model Registry
+version: 1.0.0
+quality: null
+pillar: P01
+density_score: 0.98
+key_features:
+- Semantic versioning (SemVer) for model updates
+- Artifact lineage tracking for reproducibility
+- Dependency resolution for model composition
+- Access control for sensitive models
+- Audit trails for regulatory compliance
+use_cases: '- Model version comparison
+
+  - Collaborative model development
+
+  - Production deployment tracking
+
+  - Research reproducibility
+
+  - Model governance
+
+
+  The registry integrates with CEX''s 8F pipeline to automatically capture model metadata during the build process.'

@@ -5,8 +5,8 @@ llm_function: CALL
 purpose: Tools available for interactive_demo production
 quality: null
 title: Tools Interactive Demo
-version: 1.0.0
-author: wave1_builder_gen_v2
+version: 1.0.1
+author: n02_marketing
 tags:
 - interactive_demo
 - builder
@@ -16,14 +16,32 @@ domain: interactive_demo construction
 created: '2026-04-14'
 updated: '2026-04-14'
 density_score: 0.85
-production_tools: "| Tool | Purpose | When |  \n|------|---------|------|  \n| cex_compile.py | Compiles demo code into executable\
-  \ format | Pre-deployment |  \n| cex_score.py | Evaluates demo performance against benchmarks | Post-execution |  \n| cex_retriever.py\
-  \ | Fetches required assets/data for demo | Demo initialization |  \n| cex_doctor.py | Diagnoses and fixes common demo errors\
-  \ | Debugging phase |  \n| cex_runner.py | Executes demo in isolated environment | Testing |"
-validation_tools: "| Tool | Purpose | When |  \n|------|---------|------|  \n| val_linter.py | Checks demo code for syntax/structure\
-  \ issues | Pre-deployment |  \n| val_simulator.py | Simulates user interactions for edge cases | QA phase |  \n| val_consistency.py\
-  \ | Ensures demo output matches expected results | Post-execution |"
-external_references:
-- Jupyter Notebook (for interactive code embedding)
-- React (for dynamic UI components)
-- TensorFlow Lite (for on-device ML demos)
+production_tools: '| Tool | Purpose | When |
+
+  |------|---------|------|
+
+  | cex_compile.py | Compiles interactive_demo artifact and validates frontmatter | After draft complete |
+
+  | cex_score.py | Scores demo script against quality gate dimensions | After each draft |
+
+  | cex_retriever.py | Fetches comparable demo scripts and talk track KCs | Research phase |
+
+  | cex_doctor.py | Validates structural integrity and required sections | Pre-commit |'
+validation_tools: '| Tool | Purpose | When |
+
+  |------|---------|------|
+
+  | cex_hooks.py | Pre-commit gate: ASCII check + frontmatter validation | On git add |
+
+  | cex_hygiene.py | Artifact CRUD enforcement: naming, kind, quality=null | Post-generation |'
+external_references_informational_not_cex_tools: '| Resource | Purpose |
+
+  |----------|---------|
+
+  | Demostack / Reprise / Navattic | Guided tour platform patterns: step triggers, branching, presales flows |
+
+  | Arcade / Supademo | Click-through demo structure: screenshot-based walkthroughs, CTA placement |
+
+  | Presales SE Playbook | Talk track structure: discovery questions, objection maps, proof points |
+
+  | MEDDIC / MEDDPIC | Qualification framework for demo script targeting |'

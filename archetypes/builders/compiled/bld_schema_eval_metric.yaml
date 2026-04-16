@@ -17,26 +17,51 @@ created: '2026-04-14'
 updated: '2026-04-14'
 density_score: 0.85
 frontmatter_fields: ''
-required: "| Field      | Type   | Required | Default | Notes                              |  \n|------------|--------|----------|---------|------------------------------------|\
-  \  \n| id         | string | yes      | null    | Unique identifier                  |  \n| kind       | string | yes  \
-  \    | null    | Always \"eval_metric\"               |  \n| pillar     | string | yes      | null    | \"P07\"        \
-  \                      |  \n| title      | string | yes      | null    | Descriptive name                   |  \n| version\
-  \    | string | yes      | \"1.0\"   | Schema version                     |  \n| created    | date   | yes      | null \
-  \   | ISO 8601                           |  \n| updated    | date   | yes      | null    | ISO 8601                    \
-  \       |  \n| author     | string | yes      | null    | Owner                              |  \n| domain     | string\
-  \ | yes      | null    | Application area                   |  \n| quality    | null   | yes      | null    | Never self-score;\
-  \ peer review assigns |  \n| tags       | list   | yes      | []      | Keywords                           |  \n| tldr \
-  \      | string | yes      | null    | Summary                            |  \n| metric_type| string | yes      | null \
-  \   | e.g., \"accuracy\", \"precision\"      |  \n| evaluation_context | string | yes | null | e.g., \"training\", \"testing\"\
-  \ |"
-recommended: "| Field         | Type   | Notes                          |  \n|---------------|--------|--------------------------------|\
-  \  \n| description   | string | Detailed explanation           |  \n| example       | string | Sample usage            \
-  \       |  \n| reference     | string | Source or standard             |"
+required: '| Field      | Type   | Required | Default | Notes                              |
+
+  |------------|--------|----------|---------|------------------------------------|
+
+  | id         | string | yes      | null    | Unique identifier                  |
+
+  | kind       | string | yes      | null    | Always "eval_metric"               |
+
+  | pillar     | string | yes      | null    | "P07"                              |
+
+  | title      | string | yes      | null    | Descriptive name                   |
+
+  | version    | string | yes      | "1.0"   | Schema version                     |
+
+  | created    | date   | yes      | null    | ISO 8601                           |
+
+  | updated    | date   | yes      | null    | ISO 8601                           |
+
+  | author     | string | yes      | null    | Owner                              |
+
+  | domain     | string | yes      | null    | Application area                   |
+
+  | quality    | null   | yes      | null    | Never self-score; peer review assigns |
+
+  | tags       | list   | yes      | []      | Keywords                           |
+
+  | tldr       | string | yes      | null    | Summary                            |
+
+  | metric_type| string | yes      | null    | e.g., "accuracy", "precision"      |
+
+  | evaluation_context | string | yes | null | e.g., "training", "testing" |'
+recommended: '| Field         | Type   | Notes                          |
+
+  |---------------|--------|--------------------------------|
+
+  | description   | string | Detailed explanation           |
+
+  | example       | string | Sample usage                   |
+
+  | reference     | string | Source or standard             |'
 id_pattern: ^p07_em_[a-z][a-z0-9_]+.md$
-body_structure: "1. Definition  \n   Clear description of the metric's purpose and scope.  \n\n2. Context  \n   Use case,\
-  \ data sources, and evaluation phase (e.g., training, inference).  \n\n3. Calculation  \n   Formula, thresholds, and implementation\
-  \ details.  \n\n4. Interpretation  \n   Meaning of values, benchmarks, and success criteria.  \n\n5. Thresholds  \n   Critical\
-  \ values for performance evaluation.  \n\n6. Sources  \n   Origin of the metric (e.g., internal, external standards)."
+body_structure: "1. Definition\n   Clear description of the metric's purpose and scope.\n\n2. Context\n   Use case, data sources,\
+  \ and evaluation phase (e.g., training, inference).\n\n3. Calculation\n   Formula, thresholds, and implementation details.\n\
+  \n4. Interpretation\n   Meaning of values, benchmarks, and success criteria.\n\n5. Thresholds\n   Critical values for performance\
+  \ evaluation.\n\n6. Sources\n   Origin of the metric (e.g., internal, external standards)."
 constraints:
 - ID must match ^p07_em_[a-z][a-z0-9_]+.md$ exactly.
 - '`metric_type` must be a valid evaluation metric (predefined list).'

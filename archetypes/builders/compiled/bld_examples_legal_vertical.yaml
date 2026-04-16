@@ -16,20 +16,71 @@ domain: legal_vertical construction
 created: '2026-04-14'
 updated: '2026-04-14'
 density_score: 0.85
-golden_example: "---  \ntitle: Legal Vertical Artifact for Contract Analysis  \nkind: legal_vertical  \nvendor: ContractWorks\
-  \  \nuse_case: Contract Review for M&A Transactions  \ndate: 2023-10-05  \n---  \nPrivilege Management: Uses AI to flag\
-  \ privileged communications in due diligence, integrating with Relativity for e-discovery workflows.  \nBillable Hour Tracking:\
-  \ Syncs with Bill.com to auto-generate time entries for contract review tasks, reducing manual logging by 40%.  \nContract\
-  \ Analysis: Parses 10,000+ clauses across 500+ contracts using natural language processing, identifying non-compliance with\
-  \ GDPR and CCPA.  \nUse Cases: Deployed by Baker McKenzie for cross-border merger contracts, reducing review time from 8\
-  \ weeks to 3 weeks.  "
-anti_example_1_compliance_checklist_misuse: "---  \ntitle: Legal Vertical Artifact for Audit Compliance  \nkind: legal_vertical\
-  \  \nvendor: LogicGate  \nuse_case: SOC 2 Audit Preparation  \ndate: 2023-09-20  \n---  \nPrivilege Management: N/A  \n\
-  Billable Hour Tracking: N/A  \nContract Analysis: N/A  \nUse Cases: Tracks compliance controls for cloud providers, not\
-  \ legal workflows.  "
+golden_example: '---
+
+  title: Legal Vertical Artifact for Contract Analysis
+
+  kind: legal_vertical
+
+  vendor: ContractWorks
+
+  use_case: Contract Review for M&A Transactions
+
+  date: 2023-10-05
+
+  ---
+
+  Privilege Management: Uses AI to flag privileged communications in due diligence, integrating with Relativity for e-discovery
+  workflows.
+
+  Billable Hour Tracking: Syncs with Bill.com to auto-generate time entries for contract review tasks, reducing manual logging
+  by 40%.
+
+  Contract Analysis: Parses 10,000+ clauses across 500+ contracts using natural language processing, identifying non-compliance
+  with GDPR and CCPA.
+
+  Use Cases: Deployed by Baker McKenzie for cross-border merger contracts, reducing review time from 8 weeks to 3 weeks.'
+anti_example_1_compliance_checklist_misuse: '---
+
+  title: Legal Vertical Artifact for Audit Compliance
+
+  kind: legal_vertical
+
+  vendor: LogicGate
+
+  use_case: SOC 2 Audit Preparation
+
+  date: 2023-09-20
+
+  ---
+
+  Privilege Management: N/A
+
+  Billable Hour Tracking: N/A
+
+  Contract Analysis: N/A
+
+  Use Cases: Tracks compliance controls for cloud providers, not legal workflows.'
 why_it_fails: Lacks specificity in legal vertical use cases (e.g., privilege logs, contract analysis). Treats Clio as a general
   tool rather than a legal_vertical artifact.
-anti_example_2_generic_case_study: "---  \ntitle: Legal Vertical Artifact for General Practice  \nkind: legal_vertical  \n\
-  vendor: Clio  \nuse_case: Small Business Law  \ndate: 2023-08-15  \n---  \nPrivilege Management: Basic document storage\
-  \ with no AI features.  \nBillable Hour Tracking: Manual time entry only.  \nContract Analysis: No clause parsing or automation.\
-  \  \nUse Cases: \"Helps lawyers manage their practice\" (too vague, not aligned with legal_vertical KC).  "
+anti_example_2_generic_case_study: '---
+
+  title: Legal Vertical Artifact for General Practice
+
+  kind: legal_vertical
+
+  vendor: Clio
+
+  use_case: Small Business Law
+
+  date: 2023-08-15
+
+  ---
+
+  Privilege Management: Basic document storage with no AI features.
+
+  Billable Hour Tracking: Manual time entry only.
+
+  Contract Analysis: No clause parsing or automation.
+
+  Use Cases: "Helps lawyers manage their practice" (too vague, not aligned with legal_vertical KC).'

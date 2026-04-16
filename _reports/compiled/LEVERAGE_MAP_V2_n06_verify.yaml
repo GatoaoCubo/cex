@@ -4,6 +4,7 @@ model: llama3.1:8b
 phase: verify_cycle
 created: 2026-04-15
 quality: null
+density_score: 1.0
 f1_constrain: 'Kind: knowledge_card (tool audit + gap analysis) Pillar: P11 (Feedback/Monetization) Domain: N06 commercial
   nucleus — pricing, revenue, funnels, monetization Scope: Verify cohort analyzer implementation, audit commercial tool suite,
   identify gaps ---'

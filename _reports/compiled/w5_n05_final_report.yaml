@@ -17,6 +17,7 @@ warn_before: 64
 warn_after: 68
 pass_before: 189
 pass_after: 190
+density_score: 1.0
 executive_summary: '| Metric | Pre-W5 (after W4) | Post-W5 | Delta |
 
   |--------|------------------|---------|-------|

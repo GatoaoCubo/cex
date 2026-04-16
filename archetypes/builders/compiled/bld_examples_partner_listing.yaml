@@ -16,15 +16,68 @@ domain: partner_listing construction
 created: '2026-04-14'
 updated: '2026-04-14'
 density_score: 0.85
-golden_example: "---\nkind: partner_listing\ntitle: Cisco Systems Inc. Partner Listing\n---\nPartner Name: Cisco Systems Inc.\
-  \  \nTier: Platinum  \nRegion: North America  \nCertifications:  \n- Cisco Certified Partner (CCP)  \n- Cisco Partner Advantage\
-  \ (CPA)  \nContact:  \n- Email: partners@cisco.com  \n- Phone: +1 800 553 2447  \nDescription: Cisco Systems Inc. is a global\
-  \ leader in networking and IT solutions, offering enterprise-grade hardware, software, and services. As a Platinum partner,\
-  \ they provide advanced consulting, deployment, and support services for Cisco products across North America.  "
-anti_example_1_missing_key_fields: "---\nkind: partner_listing\ntitle: TechSolutions Inc. Listing\n---\nPartner Name: TechSolutions\
-  \ Inc.  \nRegion: Europe  \nCertifications:  \n- ISO 9001  \nContact:  \n- Email: contact@techsolutions.com  "
+golden_example: '---
+
+  kind: partner_listing
+
+  title: Cisco Systems Inc. Partner Listing
+
+  ---
+
+  Partner Name: Cisco Systems Inc.
+
+  Tier: Platinum
+
+  Region: North America
+
+  Certifications:
+
+  - Cisco Certified Partner (CCP)
+
+  - Cisco Partner Advantage (CPA)
+
+  Contact:
+
+  - Email: partners@cisco.com
+
+  - Phone: +1 800 553 2447
+
+  Description: Cisco Systems Inc. is a global leader in networking and IT solutions, offering enterprise-grade hardware, software,
+  and services. As a Platinum partner, they provide advanced consulting, deployment, and support services for Cisco products
+  across North America.'
+anti_example_1_missing_key_fields: '---
+
+  kind: partner_listing
+
+  title: TechSolutions Inc. Listing
+
+  ---
+
+  Partner Name: TechSolutions Inc.
+
+  Region: Europe
+
+  Certifications:
+
+  - ISO 9001
+
+  Contact:
+
+  - Email: contact@techsolutions.com'
 why_it_fails: This is a case study, not a partner listing. It focuses on a customer's success story rather than detailing
   the partner's tier, region, certifications, or direct contact methods for collaboration.
-anti_example_2_case_study_confusion: "---\nkind: partner_listing\ntitle: How ABC Corp Boosted Efficiency with XYZ Tools\n\
-  ---\nCustomer: ABC Corp  \nSolution: XYZ Tools' AI-driven analytics platform  \nOutcome: 30% faster processing times  \n\
-  Contact: sales@xyztools.com  "
+anti_example_2_case_study_confusion: '---
+
+  kind: partner_listing
+
+  title: How ABC Corp Boosted Efficiency with XYZ Tools
+
+  ---
+
+  Customer: ABC Corp
+
+  Solution: XYZ Tools'' AI-driven analytics platform
+
+  Outcome: 30% faster processing times
+
+  Contact: sales@xyztools.com'

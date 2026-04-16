@@ -17,22 +17,48 @@ created: '2026-04-14'
 updated: '2026-04-14'
 density_score: 0.85
 frontmatter_fields: ''
-required: "| Field     | Type      | Required | Default | Notes                              |  \n|-----------|-----------|----------|---------|------------------------------------|\
-  \  \n| id        | string    | yes      | null    | Must match ID Pattern              |  \n| kind      | string    | yes\
-  \      | null    | Always \"marketplace_app_manifest\"  |  \n| pillar    | string    | yes      | null    | Always \"P09\"\
-  \                       |  \n| title     | string    | yes      | null    | Human-readable name                |  \n| version\
-  \   | string    | yes      | null    | Semantic version (e.g., 1.0.0)     |  \n| created   | timestamp | yes      | null\
-  \    | ISO 8601 format                    |  \n| updated   | timestamp | yes      | null    | ISO 8601 format          \
-  \          |  \n| author    | string    | yes      | null    | Creator/organization               |  \n| domain    | string\
-  \    | yes      | null    | Marketplace domain (e.g., \"appstore\") |  \n| quality   | null      | yes      | null    |\
-  \ Never self-score; peer review assigns |  \n| tags      | array     | yes      | null    | Keywords for discovery     \
-  \        |  \n| tldr      | string    | yes      | null    | Summary of app purpose             |  \n| app_id    | string\
-  \    | yes      | null    | Unique identifier for the app      |  \n| marketplace_url | string | yes      | null    | URL\
-  \ of marketplace listing         |"
-recommended: "| Field         | Type   | Notes                          |  \n|---------------|--------|--------------------------------|\
-  \  \n| description   | string | Detailed app description       |  \n| dependencies  | array  | Required system/applications\
-  \   |  \n| license       | string | Legal terms for use            |  \n| screenshots   | array  | URLs to app interface\
-  \ images   |"
+required: '| Field     | Type      | Required | Default | Notes                              |
+
+  |-----------|-----------|----------|---------|------------------------------------|
+
+  | id        | string    | yes      | null    | Must match ID Pattern              |
+
+  | kind      | string    | yes      | null    | Always "marketplace_app_manifest"  |
+
+  | pillar    | string    | yes      | null    | Always "P09"                       |
+
+  | title     | string    | yes      | null    | Human-readable name                |
+
+  | version   | string    | yes      | null    | Semantic version (e.g., 1.0.0)     |
+
+  | created   | timestamp | yes      | null    | ISO 8601 format                    |
+
+  | updated   | timestamp | yes      | null    | ISO 8601 format                    |
+
+  | author    | string    | yes      | null    | Creator/organization               |
+
+  | domain    | string    | yes      | null    | Marketplace domain (e.g., "appstore") |
+
+  | quality   | null      | yes      | null    | Never self-score; peer review assigns |
+
+  | tags      | array     | yes      | null    | Keywords for discovery             |
+
+  | tldr      | string    | yes      | null    | Summary of app purpose             |
+
+  | app_id    | string    | yes      | null    | Unique identifier for the app      |
+
+  | marketplace_url | string | yes      | null    | URL of marketplace listing         |'
+recommended: '| Field         | Type   | Notes                          |
+
+  |---------------|--------|--------------------------------|
+
+  | description   | string | Detailed app description       |
+
+  | dependencies  | array  | Required system/applications   |
+
+  | license       | string | Legal terms for use            |
+
+  | screenshots   | array  | URLs to app interface images   |'
 id_pattern: ^p09_mam_[a-z][a-z0-9_]+.yaml$
 body_structure:
 - App Information

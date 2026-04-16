@@ -1,0 +1,79 @@
+id: auto-accept-handoff
+kind: runtime_rule
+pillar: P12
+description: '--auto-accept semantics: after manifest, nucleus executes without re-prompting.'
+quality: null
+title: Auto-Accept Handoff
+version: 1.0.0
+author: n03_builder
+tags:
+- rule
+- dispatch
+- autonomy
+- boris_merge
+tldr: Handoffs with --auto-accept carry the authority to override any remaining subjective gate; used after manifest lock.
+domain: CEX system
+created: '2026-04-15'
+updated: '2026-04-15'
+density_score: 0.88
+the_problem: After GDP decisions are written to `decision_manifest.yaml`, nuclei still sometimes stall on unexpected subjective
+  choices at F4 REASON (e.g. a new GDP gate introduced mid-flight). This halts grid execution and breaks the "dispatched nuclei
+  never ask the user" rule.
+the_rule: "Handoff frontmatter MAY include `auto_accept: true`. When set:\n\n1. Nucleus reads `decision_manifest.yaml` normally.\n\
+  2. For any subjective decision not covered by the manifest:\n   - Apply the builder's `* Recommended` default.\n   - Log\
+  \ the auto-filled choice to `.cex/runtime/decisions/autofilled/<timestamp>_<nucleus>.yaml`\n   - Continue 8F without stopping.\n\
+  3. Nucleus NEVER re-prompts user under any circumstance.\n4. At F8 COLLABORATE, the autofilled log gets linked in the commit\
+  \ message."
+frontmatter_form: '---
+
+  nucleus: n03
+
+  task: dispatch
+
+  created: 2026-04-15T16:10:00-03:00
+
+  auto_accept: true            # <-- new
+
+  auto_accept_reason: "BORIS_MERGE manifest locked; GDP frozen"
+
+  ---'
+propagation:
+- '`dispatch.sh` forwards the flag via env `CEX_AUTO_ACCEPT=1` to boot wrappers.'
+- Boot wrappers (`boot/n0X_*.ps1`) export it into the nucleus session.
+- Nuclei check `CEX_AUTO_ACCEPT` before any GDP gate at F4.
+guardrails: "1. `auto_accept` is not a bypass of H01-H07 quality gates -- F7 still blocks.\n2. Autofilled decisions are auditable\
+  \ via `.cex/runtime/decisions/autofilled/`.\n3. N07 MAY retroactively override by editing the manifest and re-dispatching.\n\
+  4. If a nucleus cannot find any reasonable default (no * Recommended exists),\n   it writes a `BLOCKED` signal instead of\
+  \ asking -- N07 decides next step."
+when_to_use: '| Situation | auto_accept? |
+
+  |-----------|--------------|
+
+  | Grid dispatch of 6 nuclei in wave | YES (manifest is locked) |
+
+  | Overnight `/mission evolve` | YES (user not present) |
+
+  | Solo interactive `/dispatch n03 "task"` | NO (user is there) |
+
+  | `/guide --plan-loop` resume | NO (explicit iteration) |
+
+  | Autonomous loops (`ScheduleWakeup` fired) | YES |'
+relation_to_gdp_guided_decisions_md: 'GDP decides what (user owns subjective choices). `auto_accept` decides how to handle
+  gaps in the manifest (LLM owns defaults). The two coexist: manifest answers what it covers, auto_accept fills the rest.'
+interaction_with_shared_file_proposal: '`auto_accept` does NOT authorize direct edits to protected shared files -- proposals
+  still required. Autonomy is about decisions, not about merge safety.'
+example_boris_merge_wave_b_handoff: '---
+
+  nucleus: n03
+
+  task: BORIS_MERGE_WAVE_B
+
+  auto_accept: true
+
+  auto_accept_reason: "Wave B decisions locked in plan_boris_merge.md"
+
+  ---
+
+  # Task
+
+  Execute B1-B8 as specified. Any open gate: apply * Recommended + log.'

@@ -1,0 +1,29 @@
+id: kc_transport_config
+kind: knowledge_card
+title: Transport Configuration for Real-Time Communication
+version: 1.0.0
+quality: null
+pillar: P01
+language: en
+density_score: 1.0
+overview: The transport_config defines parameters for establishing and maintaining real-time network communication between
+  systems. It specifies protocols, security settings, and connection parameters to ensure reliable data transmission.
+key_components:
+- 'Protocol: Specifies the transport protocol (e.g., WebSockets, MQTT, HTTP/2)'
+- 'Host/Port: Server address and port for connection'
+- 'Encryption: TLS/SSL configuration for secure communication'
+- 'Keepalive: Settings to maintain persistent connections'
+- 'Compression: Enables data compression for efficiency'
+- 'Backoff: Retry strategy for failed connections'
+configuration_parameters: "transport:\n  protocol: websocket\n  host: api.example.com\n  port: 443\n  ssl: true\n  keepalive:\
+  \ 30s\n  compression: gzip\n  backoff:\n    initial: 1s\n    max: 30s\n    factor: 2"
+use_cases:
+- IoT device communication
+- Real-time chat applications
+- Collaborative editing tools
+- Live data streaming services
+security_considerations:
+- Always use TLS for encrypted communication
+- Validate certificate chains for trusted connections
+- Implement rate limiting to prevent abuse
+- Rotate encryption keys periodically

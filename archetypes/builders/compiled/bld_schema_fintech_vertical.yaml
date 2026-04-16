@@ -17,22 +17,48 @@ created: '2026-04-14'
 updated: '2026-04-14'
 density_score: 0.85
 frontmatter_fields: ''
-required: "| Field      | Type   | Required | Default | Notes                              |  \n|------------|--------|----------|---------|------------------------------------|\
-  \  \n| id         | string | yes      | null    | Must match ID Pattern              |  \n| kind       | string | yes  \
-  \    | null    | Always \"fintech_vertical\"          |  \n| pillar     | string | yes      | null    | Always \"P01\" \
-  \                      |  \n| title      | string | yes      | null    | Descriptive name                   |  \n| version\
-  \    | string | yes      | \"1.0\"   | Semantic versioning                |  \n| created    | date   | yes      | null \
-  \   | ISO 8601                           |  \n| updated    | date   | yes      | null    | ISO 8601                    \
-  \       |  \n| author     | string | yes      | null    | Owner                              |  \n| domain     | string\
-  \ | yes      | null    | Fintech subdomain (e.g., \"payments\") |  \n| quality    | null   | yes      | null    | Never\
-  \ self-score; peer review assigns |  \n| tags       | array  | yes      | []      | Keywords                           |\
-  \  \n| tldr       | string | yes      | null    | Summary                            |  \n| service_type | string | yes\
-  \ | null | E.g., \"neobanking\", \"lending\" |  \n| regulatory_scope | string | yes | null | E.g., \"global\", \"EU-only\"\
-  \ |"
-recommended: "| Field              | Type   | Notes                          |  \n|--------------------|--------|--------------------------------|\
-  \  \n| compliance_status  | string | E.g., \"ISO 27001 certified\"    |  \n| user_base          | string | E.g., \"B2B\"\
-  , \"B2C\", \"B2B2C\"    |  \n| integration_support| array  | E.g., [\"API\", \"SDK\"]           |  \n| security_standards\
-  \ | array  | E.g., [\"PCI-DSS\", \"GDPR\"]      |"
+required: '| Field      | Type   | Required | Default | Notes                              |
+
+  |------------|--------|----------|---------|------------------------------------|
+
+  | id         | string | yes      | null    | Must match ID Pattern              |
+
+  | kind       | string | yes      | null    | Always "fintech_vertical"          |
+
+  | pillar     | string | yes      | null    | Always "P01"                       |
+
+  | title      | string | yes      | null    | Descriptive name                   |
+
+  | version    | string | yes      | "1.0"   | Semantic versioning                |
+
+  | created    | date   | yes      | null    | ISO 8601                           |
+
+  | updated    | date   | yes      | null    | ISO 8601                           |
+
+  | author     | string | yes      | null    | Owner                              |
+
+  | domain     | string | yes      | null    | Fintech subdomain (e.g., "payments") |
+
+  | quality    | null   | yes      | null    | Never self-score; peer review assigns |
+
+  | tags       | array  | yes      | []      | Keywords                           |
+
+  | tldr       | string | yes      | null    | Summary                            |
+
+  | service_type | string | yes | null | E.g., "neobanking", "lending" |
+
+  | regulatory_scope | string | yes | null | E.g., "global", "EU-only" |'
+recommended: '| Field              | Type   | Notes                          |
+
+  |--------------------|--------|--------------------------------|
+
+  | compliance_status  | string | E.g., "ISO 27001 certified"    |
+
+  | user_base          | string | E.g., "B2B", "B2C", "B2B2C"    |
+
+  | integration_support| array  | E.g., ["API", "SDK"]           |
+
+  | security_standards | array  | E.g., ["PCI-DSS", "GDPR"]      |'
 id_pattern: ^p01_fv_[a-z][a-z0-9_]+.md$
 body_structure:
 - Service Offering

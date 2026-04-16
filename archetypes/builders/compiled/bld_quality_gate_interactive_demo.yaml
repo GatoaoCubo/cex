@@ -16,22 +16,72 @@ domain: interactive_demo construction
 created: '2026-04-14'
 updated: '2026-04-14'
 density_score: 0.85
-definition: "(Table: metric, threshold, operator, scope)  \n| metric | threshold | operator | scope |  \n|---|---|---|---|\
-  \  \n| Interactive demo script completeness | 100% | = | Entire product |"
-hard_gates: "(Table: ID | Check | Fail Condition)  \n| ID | Check | Fail Condition |  \n|---|---|---|  \n| H01 | YAML frontmatter\
-  \ valid | Invalid YAML syntax |  \n| H02 | ID matches pattern ^p05_id_[a-z][a-z0-9_]+.md$ | ID format mismatch |  \n| H03\
-  \ | kind field matches 'interactive_demo' | Kind field incorrect |  \n| H04 | Guided tour steps present | Missing or incomplete\
-  \ steps |  \n| H05 | Talk track script included | Script missing or incomplete |  \n| H06 | User flow aligns with product\
-  \ | Inconsistent or broken flow |  \n| H07 | Accessibility compliance (WCAG 2.1 AA) | Fails accessibility checks |  \n|\
-  \ H08 | Device compatibility (desktop/mobile) | Not functional on required platforms |"
-soft_scoring: "(Table: Dim | Dimension | Weight | Scoring Guide)  \n| Dim | Dimension | Weight | Scoring Guide |  \n|---|---|---|---|\
-  \  \n| D01 | Script completeness | 0.15 | 1.0 = 100% complete |  \n| D02 | User experience | 0.15 | 1.0 = seamless interaction\
-  \ |  \n| D03 | Clarity | 0.10 | 1.0 = no ambiguity |  \n| D04 | Engagement | 0.10 | 1.0 = high user retention |  \n| D05\
-  \ | Accessibility | 0.10 | 1.0 = WCAG 2.1 AA compliant |  \n| D06 | Localization | 0.10 | 1.0 = all languages supported\
-  \ |  \n| D07 | Performance | 0.10 | 1.0 = <2s load time |  \n| D08 | Device compatibility | 0.10 | 1.0 = works on all targets\
-  \ |"
-actions: "(Table: Score | Action)  \n| Score | Action |  \n|---|---|  \n| GOLDEN | >=9.5 | Auto-publish with celebration |\
-  \  \n| PUBLISH | >=8.0 | Publish to production |  \n| REVIEW | >=7.0 | Send to UX team for review |  \n| REJECT | <7.0 |\
-  \ Block release, fix required |"
-bypass: "(Table: conditions, approver, audit trail)  \n| conditions | approver | audit trail |  \n|---|---|---|  \n| Prototype/demo\
-  \ version | Product Lead | Meeting note dated 2023-10-01 |"
+definition: '(Table: metric, threshold, operator, scope)
+
+  | metric | threshold | operator | scope |
+
+  |---|---|---|---|
+
+  | Interactive demo script completeness | 100% | = | Entire product |'
+hard_gates: '(Table: ID | Check | Fail Condition)
+
+  | ID | Check | Fail Condition |
+
+  |---|---|---|
+
+  | H01 | YAML frontmatter valid | Invalid YAML syntax |
+
+  | H02 | ID matches pattern ^p05_id_[a-z][a-z0-9_]+.md$ | ID format mismatch |
+
+  | H03 | kind field matches ''interactive_demo'' | Kind field incorrect |
+
+  | H04 | Guided tour steps present | Missing or incomplete steps |
+
+  | H05 | Talk track script included | Script missing or incomplete |
+
+  | H06 | User flow aligns with product | Inconsistent or broken flow |
+
+  | H07 | Accessibility compliance (WCAG 2.1 AA) | Fails accessibility checks |
+
+  | H08 | Device compatibility (desktop/mobile) | Not functional on required platforms |'
+soft_scoring: '(Table: Dim | Dimension | Weight | Scoring Guide)
+
+  | Dim | Dimension | Weight | Scoring Guide |
+
+  |---|---|---|---|
+
+  | D01 | Script completeness | 0.20 | 1.0 = all steps, talk track, and objection map present |
+
+  | D02 | User experience | 0.20 | 1.0 = seamless guided flow, no dead ends |
+
+  | D03 | Clarity | 0.15 | 1.0 = no ambiguity, active voice throughout |
+
+  | D04 | Engagement | 0.15 | 1.0 = compelling proof points and CTA present |
+
+  | D05 | Accessibility | 0.10 | 1.0 = WCAG 2.1 AA compliant |
+
+  | D06 | Localization | 0.05 | 1.0 = all target locales supported |
+
+  | D07 | Performance | 0.05 | 1.0 = <2s load time per step |
+
+  | D08 | Device compatibility | 0.10 | 1.0 = desktop and mobile verified |'
+actions: '(Table: Score | Action)
+
+  | Score | Action |
+
+  |---|---|
+
+  | GOLDEN | >=9.5 | Auto-publish with celebration |
+
+  | PUBLISH | >=8.0 | Publish to production |
+
+  | REVIEW | >=7.0 | Send to UX team for review |
+
+  | REJECT | <7.0 | Block release, fix required |'
+bypass: '(Table: conditions, approver, audit trail)
+
+  | conditions | approver | audit trail |
+
+  |---|---|---|
+
+  | Prototype/demo version | Product Lead | Meeting note dated 2023-10-01 |'

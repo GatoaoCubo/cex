@@ -16,17 +16,60 @@ domain: contributor_guide construction
 created: '2026-04-14'
 updated: '2026-04-14'
 density_score: 0.85
-definition: "| metric | threshold | operator | scope |  \n|---|---|---|---|  \n| completeness | 100% | >= | required sections\
-  \ |"
-hard_gates: "| ID | Check | Fail Condition |  \n|---|---|---|  \n| H01 | YAML frontmatter valid | invalid YAML syntax |  \n\
-  | H02 | ID matches pattern ^p05_cg_[a-z][a-z0-9_]+.md$ | invalid filename |  \n| H03 | kind field matches 'contributor_guide'\
-  \ | mismatched kind |  \n| H04 | dev setup instructions present | missing setup guide |  \n| H05 | PR flow documented |\
-  \ incomplete PR process |  \n| H06 | coding standards defined | no style guidelines |  \n| H07 | review process outlined\
-  \ | missing review criteria |  \n| H08 | CLA process described | no CLA requirements |"
-soft_scoring: "| Dim | Dimension | Weight | Scoring Guide |  \n|---|---|---|---|  \n| D01 | Clarity | 0.15 | 1.0=unambiguous\
-  \ |  \n| D02 | Completeness | 0.20 | 1.0=all sections present |  \n| D03 | Structure | 0.15 | 1.0=logical flow |  \n| D04\
-  \ | Coding standards | 0.15 | 1.0=specific and enforceable |  \n| D05 | PR process | 0.10 | 1.0=step-by-step |  \n| D06\
-  \ | Review process | 0.10 | 1.0=clear expectations |  \n| D07 | CLA compliance | 0.15 | 1.0=explicit requirements |"
-actions: "| Score | Action |  \n|---|---|  \n| GOLDEN >=9.5 | Auto-approve and publish |  \n| PUBLISH >=8.0 | Manual review\
-  \ required |  \n| REVIEW >=7.0 | Minor edits needed |  \n| REJECT <7.0 | Reject and request rewrite |"
-bypass: "| conditions | approver | audit trail |  \n|---|---|---|  \n| emergency release | CTO | signed waiver |"
+definition: '| metric | threshold | operator | scope |
+
+  |---|---|---|---|
+
+  | completeness | 100% | >= | required sections |'
+hard_gates: '| ID | Check | Fail Condition |
+
+  |---|---|---|
+
+  | H01 | YAML frontmatter valid | invalid YAML syntax |
+
+  | H02 | ID matches pattern ^p05_cg_[a-z][a-z0-9_]+.md$ | invalid filename |
+
+  | H03 | kind field matches ''contributor_guide'' | mismatched kind |
+
+  | H04 | dev setup instructions present | missing setup guide |
+
+  | H05 | PR flow documented | incomplete PR process |
+
+  | H06 | coding standards defined | no style guidelines |
+
+  | H07 | review process outlined | missing review criteria |
+
+  | H08 | CLA process described | no CLA requirements |'
+soft_scoring: '| Dim | Dimension | Weight | Scoring Guide |
+
+  |---|---|---|---|
+
+  | D01 | Clarity | 0.15 | 1.0=unambiguous |
+
+  | D02 | Completeness | 0.20 | 1.0=all sections present |
+
+  | D03 | Structure | 0.15 | 1.0=logical flow |
+
+  | D04 | Coding standards | 0.15 | 1.0=specific and enforceable |
+
+  | D05 | PR process | 0.10 | 1.0=step-by-step |
+
+  | D06 | Review process | 0.10 | 1.0=clear expectations |
+
+  | D07 | CLA compliance | 0.15 | 1.0=explicit requirements |'
+actions: '| Score | Action |
+
+  |---|---|
+
+  | GOLDEN >=9.5 | Auto-approve and publish |
+
+  | PUBLISH >=8.0 | Manual review required |
+
+  | REVIEW >=7.0 | Minor edits needed |
+
+  | REJECT <7.0 | Reject and request rewrite |'
+bypass: '| conditions | approver | audit trail |
+
+  |---|---|---|
+
+  | emergency release | CTO | signed waiver |'

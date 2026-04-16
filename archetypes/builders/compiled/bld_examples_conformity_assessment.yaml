@@ -137,14 +137,10 @@ section_2_data_governance_golden: '| Dataset | Source | Size | Date Range | Lice
 
   Why this is golden: Named datasets, specific sizes, named license, audit methodology cited,
 
-  known limitation quantified, mitigation described.
-
-
-  ---'
+  known limitation quantified, mitigation described.'
 anti_example_1_missing_rms_section: 'System: RetailScoringAI v1.0 What went wrong: Conformity package submitted without a
   risk-management-system section.'
 the_bad_output: '# AI Compliance Framework -- HRScreening-AI v3
-
 
   ## GDPR Compliance
 
@@ -154,13 +150,11 @@ the_bad_output: '# AI Compliance Framework -- HRScreening-AI v3
 
   DPO notified: yes.
 
-
   ## Internal Policy
 
   Our AI governance policy (AI-GOV-2024) covers all AI systems.
 
   We review it annually.
-
 
   ## Conclusion
 
@@ -206,10 +200,7 @@ root_cause: 'The builder failed to distinguish:
 
   not a policy statement. It contains design records, risk tables, test results,
 
-  and monitoring plans -- not policy assertions.
-
-
-  ---'
+  and monitoring plans -- not policy assertions.'
 anti_example_2_conformity_assessment_confused_with_compliance_framework: 'System: HRScreening-AI v3 What went wrong: Author
   produced a GDPR compliance framework instead of an EU AI Act Annex-IV conformity assessment package.'
 score_comparison: '| Example | H-Gates | D Score | Total | Publishable? |

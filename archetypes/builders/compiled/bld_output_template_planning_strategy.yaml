@@ -1,0 +1,21 @@
+kind: output_template
+id: bld_output_template_planning_strategy
+pillar: P05
+llm_function: PRODUCE
+purpose: Template with vars for planning_strategy production
+quality: null
+title: Output Template Planning Strategy
+version: 1.0.0
+author: builder_agent
+tags:
+- planning_strategy
+- builder
+- output_template
+- react
+- tot
+- htn
+tldr: 'Concrete template for planning_strategy artifacts: strategy class, step schema, budget, termination, tradeoffs.'
+domain: planning_strategy construction
+created: '2026-04-13'
+updated: '2026-04-13'
+density_score: 0.88

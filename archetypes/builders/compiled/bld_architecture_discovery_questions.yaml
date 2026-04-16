@@ -16,20 +16,48 @@ domain: discovery_questions construction
 created: '2026-04-14'
 updated: '2026-04-14'
 density_score: 0.85
-component_inventory: "| ISO Name             | Role                          | Pillar | Status |  \n|----------------------|-------------------------------|--------|--------|\
-  \  \n| bld_manifest         | Defines builder structure     | P11    | Active |  \n| bld_instruction      | Specifies task\
-  \ parameters     | P03    | Active |  \n| bld_system_prompt    | Sets LLM interaction rules    | P03    | Active |  \n|\
-  \ bld_schema           | Enforces data format          | P06    | Active |  \n| bld_quality_gate     | Validates output\
-  \ compliance   | P11    | Active |  \n| bld_output_template  | Structures final responses    | P05    | Active |  \n| bld_examples\
-  \         | Provides training samples     | P07    | Active |  \n| bld_knowledge_card   | Embeds domain-specific info  \
-  \ | P01    | Active |  \n| bld_architecture     | Maps builder components       | P08    | Active |  \n| bld_collaboration\
-  \    | Manages team input workflows  | P12    | Active |  \n| bld_config           | Stores runtime parameters     | P09\
-  \    | Active |  \n| bld_memory           | Tracks session context        | P10    | Active |  \n| bld_tools           \
-  \ | Integrates external utilities | P04    | Active |"
-dependencies: "| From              | To                  | Type       |  \n|-------------------|---------------------|------------|\
-  \  \n| bld_instruction   | bld_manifest        | Definition |  \n| bld_system_prompt | bld_knowledge_card  | Reference \
-  \ |  \n| bld_quality_gate  | bld_schema          | Validation |  \n| bld_output_template | bld_config       | Configuration\
-  \ |  \n| bld_tools         | LLM API             | External   |"
+component_inventory: '| ISO Name             | Role                          | Pillar | Status |
+
+  |----------------------|-------------------------------|--------|--------|
+
+  | bld_manifest         | Defines builder structure     | P11    | Active |
+
+  | bld_instruction      | Specifies task parameters     | P03    | Active |
+
+  | bld_system_prompt    | Sets LLM interaction rules    | P03    | Active |
+
+  | bld_schema           | Enforces data format          | P06    | Active |
+
+  | bld_quality_gate     | Validates output compliance   | P11    | Active |
+
+  | bld_output_template  | Structures final responses    | P05    | Active |
+
+  | bld_examples         | Provides training samples     | P07    | Active |
+
+  | bld_knowledge_card   | Embeds domain-specific info   | P01    | Active |
+
+  | bld_architecture     | Maps builder components       | P08    | Active |
+
+  | bld_collaboration    | Manages team input workflows  | P12    | Active |
+
+  | bld_config           | Stores runtime parameters     | P09    | Active |
+
+  | bld_memory           | Tracks session context        | P10    | Active |
+
+  | bld_tools            | Integrates external utilities | P04    | Active |'
+dependencies: '| From              | To                  | Type       |
+
+  |-------------------|---------------------|------------|
+
+  | bld_instruction   | bld_manifest        | Definition |
+
+  | bld_system_prompt | bld_knowledge_card  | Reference  |
+
+  | bld_quality_gate  | bld_schema          | Validation |
+
+  | bld_output_template | bld_config       | Configuration |
+
+  | bld_tools         | LLM API             | External   |'
 architectural_position: discovery_questions sits at the core of CEX P01, enabling structured question generation through ISO-driven
   modularity. It integrates with knowledge, configuration, and validation components to ensure alignment with domain-specific
   requirements, while collaboration and memory ISOs sustain iterative refinement and contextual continuity.

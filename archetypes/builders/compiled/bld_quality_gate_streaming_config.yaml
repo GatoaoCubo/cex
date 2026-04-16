@@ -17,6 +17,7 @@ tags:
 - P11
 tldr: 'Gates for streaming_config: validates protocol enum, buffer positivity, heartbeat presence, lifecycle completeness.'
 density_score: 0.92
+llm_function: GOVERN
 definition: '| Field | Value |
 
   |-------|-------|

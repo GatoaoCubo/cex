@@ -17,7 +17,7 @@ domain: content_filter construction
 created: '2026-04-13'
 updated: '2026-04-13'
 density_score: 0.92
-1_overview: 'Purpose: {{what this filter intercepts and why}}
+1_overview: 'Purpose: `{{what this filter intercepts and why}}`
 
 
   Filter type: {{pre_inference (input sanitization) | post_inference (output scan) | both}}

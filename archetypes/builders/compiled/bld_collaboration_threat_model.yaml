@@ -1,0 +1,28 @@
+kind: collaboration
+id: bld_collaboration_threat_model
+pillar: P12
+llm_function: COLLABORATE
+purpose: How threat_model-builder works in crews with other builders
+quality: null
+title: Collaboration Threat Model
+version: 1.0.0
+author: wave1_builder_gen
+tags:
+- threat_model
+- builder
+- collaboration
+tldr: How threat_model-builder works in crews with other builders
+domain: threat_model construction
+created: '2026-04-13'
+updated: '2026-04-13'
+density_score: 0.85
+crew_role: 'This ISO records a threat model: the assets worth protecting and the attacker profiles that target them. Identifies
+  potential threats, maps attack vectors, and models risk scenarios to inform security design and mitigation strategies.'
+receives_from: "| Builder       | What                  | Format      |  \n|---------------|-----------------------|-------------|\
+  \  \n| System Design | Architecture diagrams | JSON        |  \n| Compliance    | Regulatory requirements | CSV        \
+  \ |  \n| Threat Intel  | External threat data  | API         |"
+produces_for: "| Builder       | What                  | Format      |  \n|---------------|-----------------------|-------------|\
+  \  \n| Security Team | Threat model          | JSON        |  \n| Risk Team     | Risk assessment       | Markdown    |\
+  \  \n| Design Team   | Mitigation roadmap    | Custom      |"
+boundary: Does NOT enforce safety policies (handled by safety_policy) or implement runtime filters (handled by guardrail).
+  Focuses solely on pre-deployment threat/risk analysis.

@@ -18,7 +18,7 @@ updated: '2026-04-14'
 density_score: 0.85
 overview: 'A grounding record is a structured per-inference provenance artifact. It answers: "What sources, tools, and model
   produced this output -- and can I prove it?" Each record covers exactly ONE inference run. Do not aggregate multiple runs
-  into one record. ---'
+  into one record.'
 phase_1_research_f3_inject_f5_call: Collect all evidence from the inference session before writing a single field.
 step_1_1_identify_tool_calls: '| Action                          | Detail                                                                      |
 
@@ -74,31 +74,25 @@ step_1_5_prepare_output_hash_input: '| Action                          | Detail 
 
   | Compute output-hash             | SHA-256 of raw output bytes -- this is MANDATORY, cannot be omitted        |
 
-  | Record hash algorithm           | Always "sha256" -- no MD5, no SHA-1                                        |
-
-
-  ---'
+  | Record hash algorithm           | Always "sha256" -- no MD5, no SHA-1                                        |'
 phase_2_compose_f6_produce: Populate the grounding record fields in this exact order. Use bld_output_template for the structure.
 step_2_1_header_block: "inference_id: <UUIDv4>\nsession_id: <string or null>\ntimestamp: <ISO 8601 with timezone>\ndownstream_use:\
-  \ <production | test | eval>\ngrounding_coverage_pct: <float 0.0-1.0>\n\nCompute grounding_coverage_pct as:\n  (number of\
-  \ output claims with a traceable RAG-chunk or tool-call source)\n  divided by\n  (total factual claims in output)\n\nIf\
-  \ uncertain, use 0.0 -- do not guess."
+  \ <production | test | eval>\ngrounding_coverage_pct: <float 0.0-1.0>\nCompute grounding_coverage_pct as:\n  (number of\
+  \ output claims with a traceable RAG-chunk or tool-call source)\n  divided by\n  (total factual claims in output)\nIf uncertain,\
+  \ use 0.0 -- do not guess."
 step_2_2_model_block: "model:\n  id: <exact model identifier>\n  version: <version string>\n  provider: <provider name>\n\
   \  model-signature: <hash or attestation string, null if unavailable>"
-step_2_3_tool_calls_array: "For each tool invocation, one entry:\n\ntool_calls:\n  - tool_name: <string>\n    tool_input_hash:\
+step_2_3_tool_calls_array: "For each tool invocation, one entry:\ntool_calls:\n  - tool_name: <string>\n    tool_input_hash:\
   \ <sha256 of input payload>\n    tool_output_hash: <sha256 of output payload>\n    duration_ms: <integer>\n    timestamp:\
-  \ <ISO 8601>\n    status: <success | error>\n\nIf no tools were called, write: `tool_calls: []`"
-step_2_4_rag_chunks_array: "For each retrieved chunk, one entry:\n\nrag_chunks:\n  - chunk_id: <string>\n    source_url: <full\
-  \ URL or internal path>\n    retrieval_score: <float>\n    content_hash: <sha256 of chunk text at retrieval>\n\nIf no RAG\
+  \ <ISO 8601>\n    status: <success | error>\nIf no tools were called, write: `tool_calls: []`"
+step_2_4_rag_chunks_array: "For each retrieved chunk, one entry:\nrag_chunks:\n  - chunk_id: <string>\n    source_url: <full\
+  \ URL or internal path>\n    retrieval_score: <float>\n    content_hash: <sha256 of chunk text at retrieval>\nIf no RAG\
   \ was used, write: `rag_chunks: []`"
 step_2_5_integrity_and_compliance_fields: 'output_hash: <sha256 of raw model output>
 
   otel_span_id: <OTel span ID string>
 
-  c2pa_manifest_ref: <C2PA manifest URI or null>
-
-
-  ---'
+  c2pa_manifest_ref: <C2PA manifest URI or null>'
 phase_3_validate_f7_govern: Run this checklist before finalizing the record. Any FAIL = do not publish.
 hard_gate_checklist: '| Gate | Check                                        | Pass Condition                        |
 

@@ -16,15 +16,34 @@ domain: playground_config construction
 created: '2026-04-14'
 updated: '2026-04-14'
 density_score: 0.85
-production_tools: "| Tool | Purpose | When |  \n|------|---------|------|  \n| cex_compile.py | Compiles config files into\
-  \ executable formats | Pre-deployment |  \n| cex_score.py | Evaluates config quality using metrics | Post-validation | \
-  \ \n| cex_retriever.py | Fetches external data for config generation | During runtime |  \n| cex_doctor.py | Diagnoses config\
-  \ errors and suggests fixes | Debugging phase |  \n| cex_optimizer.py | Optimizes config parameters for performance | Tuning\
-  \ stage |  \n| cex_generator.py | Creates base config templates from schemas | Initial setup |"
-validation_tools: "| Tool | Purpose | When |  \n|------|---------|------|  \n| val_schema.py | Validates config against schema\
-  \ rules | Pre-compilation |  \n| val_consistency.py | Checks internal config consistency | Post-editing |  \n| val_input.py\
-  \ | Ensures input parameters meet constraints | Runtime initialization |"
+production_tools: '| Tool | Purpose | When |
+
+  |------|---------|------|
+
+  | cex_compile.py | Compile .md artifact to .yaml | Post-write (F8) |
+
+  | cex_retriever.py | TF-IDF similarity over 2184 docs | Find prior playground_config artifacts (F3) |
+
+  | cex_score.py | 3-layer scoring (structural + rubric + semantic) | Quality gate (F7) |
+
+  | cex_doctor.py | Builder health check across 13 ISOs | Pre-dispatch validation |
+
+  | cex_hygiene.py | Frontmatter + ASCII + naming enforcement | Pre-commit (F7) |
+
+  | cex_prompt_optimizer.py | Analyze builder ISOs for drift | When quality < 9.0 |'
+validation_tools: '| Tool | Purpose | When |
+
+  |------|---------|------|
+
+  | cex_wave_validator.py | D01-D15 defect checks across ISOs | After bulk generation |
+
+  | cex_sanitize.py --check | ASCII-only enforcement on .py/.ps1 | Pre-commit hook |
+
+  | cex_hooks.py pre-commit | YAML frontmatter + schema compliance | Git pre-commit |'
 external_references:
-- JSON Schema (for structure validation)
-- PyYAML (for config parsing)
-- pytest (for config test cases)
+- OpenAI Playground (interactive prompt eval reference)
+- Swagger/OpenAPI "Try It Out" (in-browser API explorer pattern)
+- Replit + CodeSandbox embed APIs (sandboxed runtime templates)
+- JupyterLite (WASM-based ephemeral Python kernels)
+- JSON Schema draft 2020-12 (config structure validation)
+- 12-Factor App config principles (env-var externalization)

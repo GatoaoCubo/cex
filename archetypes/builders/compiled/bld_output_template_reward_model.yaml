@@ -1,0 +1,37 @@
+kind: output_template
+id: bld_output_template_reward_model
+pillar: P05
+llm_function: PRODUCE
+purpose: Template with vars for reward_model production
+quality: null
+title: Output Template Reward Model
+version: 1.0.0
+author: wave1_builder_gen
+tags:
+- reward_model
+- builder
+- output_template
+tldr: Template with vars for reward_model production
+domain: reward_model construction
+created: '2026-04-13'
+updated: '2026-04-13'
+density_score: 0.85
+overview: '<!-- Purpose: what alignment objective this model encodes. Scope: what agent behaviors it evaluates. Governance:
+  ISO/IEC 23894 or AI Act clause if applicable. -->'
+calculation_method: "<!-- Mathematical expression for reward computation.\n     Variables: define each term.\n     Edge cases:\
+  \ what happens at 0, max, adversarial inputs. -->\nR(x) = {{formula}}\nwhere:\n  {{var}} = {{definition}}"
+reward_parameters: '| Parameter | Type | Range | Semantics |
+
+  |-----------|------|-------|-----------|
+
+  | `{{param}}` | float | [0, 1] | `{{what higher values mean}}` |
+
+  | weight_`{{criterion}}` | float | [0, 1] | Importance of `{{criterion}}` |'
+eligibility_criteria: "<!-- Conditions under which the reward applies.\n     Exclusions: behaviors explicitly excluded from\
+  \ reward. -->\n- ELIGIBLE: `{{specific conditions}}`\n- EXCLUDED: {{adversarial patterns, out-of-scope behaviors}}"
+distribution_schedule: '<!-- When and how rewards are applied. Frequency: per-step, per-episode, per-evaluation. Normalization:
+  z-score, clipping, scaling. -->'
+compliance_and_auditing:
+- 'Explainability: `{{how reward components can be inspected}}`'
+- 'Auditability: {{logging requirements, review cadence}}'
+- 'Bias check: `{{method to detect reward hacking or proxy gaming}}`'

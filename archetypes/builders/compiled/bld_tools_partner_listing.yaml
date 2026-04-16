@@ -16,15 +16,32 @@ domain: partner_listing construction
 created: '2026-04-14'
 updated: '2026-04-14'
 density_score: 0.85
-production_tools: "| Tool              | Purpose                  | When                      |  \n|-------------------|--------------------------|---------------------------|\
-  \  \n| cex_compile.py    | Aggregates partner data  | During data collection    |  \n| cex_score.py      | Assigns partner\
-  \ ratings  | Post-validation phase     |  \n| cex_retriever.py  | Fetches partner metadata | On-demand queries         |\
-  \  \n| cex_doctor.py     | Diagnoses data issues    | Pre-validation checks     |  \n| cex_validator.py  | Enforces schema\
-  \ rules    | Data ingestion pipeline   |  \n| cex_analyzer.py   | Generates partner insights | Reporting cycles        |"
-validation_tools: "| Tool              | Purpose                  | When                      |  \n|-------------------|--------------------------|---------------------------|\
-  \  \n| val_check.py      | Verifies data consistency| Pre-deployment            |  \n| val_audit.py      | Cross-references\
-  \ records | Quarterly reviews         |  \n| val_comparator.py | Detects duplicates       | Merge operations          |\
-  \  \n| val_sanitizer.py  | Cleans invalid entries   | Data preprocessing        |"
+production_tools: '| Tool              | Purpose                  | When                      |
+
+  |-------------------|--------------------------|---------------------------|
+
+  | cex_compile.py    | Aggregates partner data  | During data collection    |
+
+  | cex_score.py      | Assigns partner ratings  | Post-validation phase     |
+
+  | cex_retriever.py  | Fetches partner metadata | On-demand queries         |
+
+  | cex_doctor.py     | Diagnoses data issues    | Pre-validation checks     |
+
+  | cex_validator.py  | Enforces schema rules    | Data ingestion pipeline   |
+
+  | cex_analyzer.py   | Generates partner insights | Reporting cycles        |'
+validation_tools: '| Tool              | Purpose                  | When                      |
+
+  |-------------------|--------------------------|---------------------------|
+
+  | val_check.py      | Verifies data consistency| Pre-deployment            |
+
+  | val_audit.py      | Cross-references records | Quarterly reviews         |
+
+  | val_comparator.py | Detects duplicates       | Merge operations          |
+
+  | val_sanitizer.py  | Cleans invalid entries   | Data preprocessing        |'
 external_references:
 - 'Partner API (v3.2): For real-time partner data integration'
 - 'Data Validation Framework (DVX): Schema enforcement library'

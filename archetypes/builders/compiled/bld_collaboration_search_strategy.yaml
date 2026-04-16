@@ -1,0 +1,28 @@
+kind: collaboration
+id: bld_collaboration_search_strategy
+pillar: P12
+llm_function: COLLABORATE
+purpose: How search_strategy-builder works in crews with other builders
+quality: null
+title: Collaboration Search Strategy
+version: 1.0.0
+author: wave1_builder_gen
+tags:
+- search_strategy
+- builder
+- collaboration
+tldr: How search_strategy-builder works in crews with other builders
+domain: search_strategy construction
+created: '2026-04-13'
+updated: '2026-04-13'
+density_score: 0.85
+crew_role: Designs and optimizes search/inference strategies to guide data retrieval and analysis, ensuring alignment with
+  task goals and constraints.
+receives_from: "| Builder       | What                  | Format      |  \n|---------------|-----------------------|-------------|\
+  \  \n| Query Parser  | Structured query      | JSON        |  \n| User Input    | Raw text input        | Text        |\
+  \  \n| Data Processor| Metadata              | Structured data |"
+produces_for: "| Builder       | What                  | Format      |  \n|---------------|-----------------------|-------------|\
+  \  \n| Retriever     | Search strategy       | JSON        |  \n| Inference Engine | Inference parameters | Config file\
+  \ |  \n| Task Orchestrator | Retrieval plan     | Text        |"
+boundary: Does NOT handle document retrieval (retriever), prompt engineering (reasoning_strategy), or raw data processing
+  (data_processor). Those are managed by dedicated builders.

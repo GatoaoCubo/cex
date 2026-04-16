@@ -16,31 +16,64 @@ domain: agentic_rag construction
 created: '2026-04-14'
 updated: '2026-04-14'
 density_score: 0.85
-definition: "(Table: metric, threshold, operator, scope)  \n| metric         | threshold | operator | scope         |  \n\
-  |----------------|-----------|----------|---------------|  \n| Retrieval Accuracy | 95%       | >=       | All queries \
-  \  |  \n| Response Latency | 500ms     | <=       | Production    |  \n| Agent Policy Alignment | 100%   | ==       | All\
-  \ outputs   |"
-hard_gates: "(Table: ID | Check | Fail Condition)  \n| ID             | Check                         | Fail Condition   \
-  \                             |  \n|----------------|-------------------------------|-----------------------------------------------|\
-  \  \n| H01            | YAML frontmatter valid        | Invalid YAML syntax or missing fields         |  \n| H02       \
-  \     | ID matches ^p01_ar_[a-z][a-z0-9_]+.md$ | ID does not conform to schema pattern        |  \n| H03            | kind\
-  \ field matches 'agentic_rag' | kind field is not 'agentic_rag'              |  \n| H04            | Agent configuration\
-  \ present     | Missing agent configuration file              |  \n| H05            | Retrieval sources validated     |\
-  \ Unverified or insecure data sources used      |  \n| H06            | Response alignment with knowledge | Output contradicts\
-  \ verified knowledge       |  \n| H07            | Error handling implemented      | No fallback or error recovery mechanism\
-  \       |  \n| H08            | Logging enabled                 | Missing audit logs for agent decisions        |"
-soft_scoring: "(Table: Dim | Dimension | Weight | Scoring Guide)  \n| Dim | Dimension               | Weight | Scoring Guide\
-  \                                      |  \n|-----|-------------------------|--------|----------------------------------------------------|\
-  \  \n| D01 | Retrieval Accuracy      | 0.20   | 95%+ = 1.0, 90% = 0.8, 80% = 0.5, <80% = 0.0        |  \n| D02 | Latency\
-  \                 | 0.15   | 500ms = 1.0, 600ms = 0.75, 700ms = 0.5, >700ms = 0.0 |  \n| D03 | Policy Alignment        |\
-  \ 0.15   | 100% = 1.0, 90% = 0.8, 80% = 0.5, <80% = 0.0        |  \n| D04 | Error Handling          | 0.10   | Full = 1.0,\
-  \ partial = 0.5, none = 0.0               |  \n| D05 | Logging Completeness    | 0.10   | Full = 1.0, partial = 0.5, none\
-  \ = 0.0               |  \n| D06 | User Experience         | 0.10   | Seamless = 1.0, minor issues = 0.75, major = 0.5 \
-  \    |  \n| D07 | Scalability             | 0.10   | Handles 10k+ reqs = 1.0, 5k = 0.75, <5k = 0.5       |  \n| D08 | Security\
-  \ Compliance     | 0.10   | Fully compliant = 1.0, partial = 0.5, none = 0.0     |"
-actions: "(Table: Score | Action)  \n| Score      | Action         |  \n|------------|----------------|  \n| >=9.5      |\
-  \ GOLDEN         |  \n| >=8.0      | PUBLISH        |  \n| >=7.0      | REVIEW         |  \n| <7.0       | REJECT      \
-  \   |"
-bypass: "(Table: conditions, approver, audit trail)  \n| conditions                  | approver             | audit trail\
-  \                              |  \n|-----------------------------|----------------------|------------------------------------------|\
-  \  \n| Emergency fix required      | Senior Engineering Lead | \"Bypass approved by [name] for [reason]\" |"
+definition: '| metric | threshold | operator | scope |
+
+  |---|---|---|---|
+
+  | ID pattern | ^p01_ar_[a-z][a-z0-9_]+.md$ | matches | artifact filename |'
+hard_gates: '| ID  | Check | Fail Condition |
+
+  |-----|-------|----------------|
+
+  | H01 | YAML frontmatter valid | Invalid YAML syntax or missing required fields |
+
+  | H02 | ID matches ^p01_ar_[a-z][a-z0-9_]+.md$ | ID does not conform to schema pattern |
+
+  | H03 | kind field equals ''agentic_rag'' | kind field is not ''agentic_rag'' |
+
+  | H04 | agent_type field present and non-empty | Missing or empty agent_type field |
+
+  | H05 | knowledge_source field present and non-empty | Missing or empty knowledge_source field |
+
+  | H06 | Execution workflow section present | Missing ## Execution Workflow section |
+
+  | H07 | Reflection loop documented (retrieve->reflect->re-query) | No reflection loop specification |
+
+  | H08 | Fallback strategy defined | No fallback behavior for retrieval failure |'
+soft_scoring: '| Dim | Dimension | Weight | Scoring Guide |
+
+  |-----|-----------|--------|---------------|
+
+  | D01 | Schema Completeness | 0.20 | All required frontmatter fields present and typed correctly |
+
+  | D02 | Agent Loop Clarity | 0.20 | retrieve->reflect->re-query cycle explicitly documented |
+
+  | D03 | Retrieval Strategy | 0.15 | Retriever type, similarity metric, top-k defined |
+
+  | D04 | Knowledge Source Provenance | 0.15 | Source type, format, access method documented |
+
+  | D05 | Error and Fallback Coverage | 0.10 | CRAG-style corrective fallback or equivalent |
+
+  | D06 | Tool Plan Coverage | 0.10 | Agent tools listed against bld_config_agentic_rag.md registry |
+
+  | D07 | Documentation Quality | 0.10 | Usage examples and section headers complete |'
+actions: '(Table: Score | Action)
+
+  | Score      | Action         |
+
+  |------------|----------------|
+
+  | >=9.5      | GOLDEN         |
+
+  | >=8.0      | PUBLISH        |
+
+  | >=7.0      | REVIEW         |
+
+  | <7.0       | REJECT         |'
+bypass: '(Table: conditions, approver, audit trail)
+
+  | conditions                  | approver             | audit trail                              |
+
+  |-----------------------------|----------------------|------------------------------------------|
+
+  | Emergency fix required      | Senior Engineering Lead | "Bypass approved by [name] for [reason]" |'

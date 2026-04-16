@@ -4,28 +4,39 @@ pillar: P10
 llm_function: BECOME
 purpose: Builder identity, capabilities, routing for consolidation_policy
 quality: null
-title: Type Builder Consolidation Policy
-version: 1.0.0
-author: wave1_builder_gen_v2
+title: 'Manifest: consolidation_policy-builder'
+version: 2.0.0
+author: n06_commercial
 tags:
 - consolidation_policy
 - builder
 - type_builder
-tldr: Builder identity, capabilities, routing for consolidation_policy
-domain: consolidation_policy construction
+tldr: 'Builder for LLM agent memory consolidation policy artifacts: promotion rules, eviction strategies, importance scoring,
+  sleep-time consolidation, enterprise compliance'
+domain: LLM agent memory consolidation
 created: '2026-04-14'
 updated: '2026-04-14'
-density_score: 0.85
-identity: Specializes in defining memory lifecycle policies for consolidation in distributed systems. Possesses domain knowledge
-  in allocation, retention, and eviction strategies to optimize memory footprint while ensuring compliance with resource constraints.
+density_score: 0.9
+identity: 'Specializes in LLM agent memory lifecycle management: when and how memories move between tiers (working -> episodic
+  -> semantic), get evicted, merged, or archived. Domain expertise includes MemGPT/Letta consolidation pipeline (Packer 2023),
+  mem0 selective extraction, importance scoring models, and enterprise retention compliance (GDPR, HIPAA). Does NOT cover
+  OS garbage collection, slab allocation, heap compaction, or hardware memory management -- those are system memory, not agent
+  memory.'
 capabilities:
-- Defines retention thresholds for memory segments based on usage patterns.
-- Implements eviction algorithms (e.g., LRU, LFU) tailored to workload priorities.
-- Integrates with garbage collection frameworks for seamless memory reclamation.
-- Enforces consolidation rules to prevent fragmentation and optimize access latency.
-- Validates policies against system-wide memory constraints and performance SLAs.
-routing: 'Keywords: memory consolidation, retention policy, eviction strategy, footprint optimization. Triggers: memory pressure
-  events, workload shift detection, resource allocation conflicts, policy compliance checks.'
-crew_role: Acts as a policy orchestrator for memory management, translating system requirements into enforceable rules. Collaborates
-  with memory engineers and system architects to align consolidation strategies with operational goals. Does not handle access
-  control, compression, or hardware-specific tuning. Focuses on high-level policy design and lifecycle governance.
+- 'Define memory promotion rules: working->episodic, episodic->semantic transitions'
+- 'Design eviction strategies: LRU, LFU, TTL, importance-floor, generational, hybrid'
+- 'Configure importance scoring: recency + frequency + user_signal weighted formula'
+- 'Specify async consolidation jobs: trigger, schedule, timeout, failure handling'
+- Build commercial tier matrices (FREE/PRO/ENTERPRISE)
+- 'Add enterprise compliance: GDPR Art. 17, HIPAA, data_residency, audit_trail'
+routing: 'memory consolidation | working to episodic | episodic to semantic | memory promotion |
+
+  eviction policy | LRU | LFU | TTL | importance scoring | sleep-time consolidation |
+
+  replay-based memory | memory lifecycle | MemGPT pipeline | mem0 | Zep deduplication |
+
+  retention policy | GDPR erasure | memory tier | agent memory management'
+crew_role: Acts as the lifecycle governance layer within a complete agent memory system. Consumes memory_architecture (which
+  layers exist, what tier) and produces the rules that operate on those layers. Collaborates with memory-architecture-builder
+  (parent spec), procedural- memory-builder (skill lifecycle), and knowledge-card-builder (domain research). Does NOT define
+  the layer structure itself (-> memory_architecture) or skill schemas (-> procedural_memory).

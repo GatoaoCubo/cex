@@ -23,16 +23,29 @@ domain_overview: Multimodal prompts enable systems to process and generate conte
   consistency across heterogeneous data. The field is shaped by research emphasizing cross-modal retrieval, fusion architectures,
   and prompt engineering that bridge gaps between modalities. Industry adoption focuses on usability, scalability, and integration
   with existing workflows, often requiring adherence to standards like IEEE P2859 for multimodal AI systems.
-key_concepts: "| Concept | Definition | Source |  \n|---|---|---|  \n| Cross-modal alignment | Mapping representations between\
-  \ modalities (e.g., text-to-image) | CLIP (OpenAI) |  \n| Modality-specific tokens | Unique embeddings for vision/audio/text\
-  \ inputs | Audio-Visual Pretraining (AVP, Facebook) |  \n| Multimodal fusion | Combining features from multiple modalities\
-  \ | MML Framework (IEEE) |  \n| Prompt injection | Embedding task-specific instructions into multimodal inputs | MMP (Stanford)\
-  \ |  \n| Temporal synchronization | Aligning sequential data across modalities (e.g., video + speech) | VQA Dataset (AI2)\
-  \ |  \n| Semantic grounding | Ensuring prompts reference real-world contexts | AVSE (Microsoft) |  \n| Modality weighting\
-  \ | Adjusting contribution of each modality during inference | MPE (Meta) |  \n| Zero-shot prompting | Generalizing to unseen\
-  \ modalities without retraining | MPZSL (MIT) |  \n| Context-aware fusion | Using task context to guide modality interaction\
-  \ | MT Architecture (Google) |  \n| Prompt normalization | Scaling embeddings for cross-modal consistency | MMR Benchmark\
-  \ (CMU) |"
+key_concepts: '| Concept | Definition | Source |
+
+  |---|---|---|
+
+  | Cross-modal alignment | Mapping representations between modalities (e.g., text-to-image) | CLIP (OpenAI) |
+
+  | Modality-specific tokens | Unique embeddings for vision/audio/text inputs | Audio-Visual Pretraining (AVP, Facebook) |
+
+  | Multimodal fusion | Combining features from multiple modalities | MML Framework (IEEE) |
+
+  | Prompt injection | Embedding task-specific instructions into multimodal inputs | MMP (Stanford) |
+
+  | Temporal synchronization | Aligning sequential data across modalities (e.g., video + speech) | VQA Dataset (AI2) |
+
+  | Semantic grounding | Ensuring prompts reference real-world contexts | AVSE (Microsoft) |
+
+  | Modality weighting | Adjusting contribution of each modality during inference | MPE (Meta) |
+
+  | Zero-shot prompting | Generalizing to unseen modalities without retraining | MPZSL (MIT) |
+
+  | Context-aware fusion | Using task context to guide modality interaction | MT Architecture (Google) |
+
+  | Prompt normalization | Scaling embeddings for cross-modal consistency | MMR Benchmark (CMU) |'
 industry_standards:
 - 'IEEE P2859: Standard for Multimodal AI Systems'
 - 'W3C Media Fragments: Audio/visual metadata interoperability'

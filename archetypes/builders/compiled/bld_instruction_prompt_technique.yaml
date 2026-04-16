@@ -24,18 +24,18 @@ phase_1_research:
 - Refine technique based on A/B test results with domain experts.
 - Ensure alignment with Pillar P03’s injection-specific constraints.
 phase_2_compose:
-- Define artifact structure using SCHEMA.md’s `prompt_technique` fields.
-- Align function (`INJECT`) with schema-defined parameters and outputs.
+- Define artifact structure using bld_schema_prompt_technique.md’s `prompt_technique` fields.
+- Align function (PRODUCE) with schema-defined parameters and outputs.
 - Write technique name (e.g., “Role Injection with Contextual Anchors”).
-- 'Describe mechanism: how injection triggers desired model behavior.'
-- Specify parameters (e.g., anchor phrases, injection depth, domain tags).
-- Include example prompts from OUTPUT_TEMPLATE.md’s `examples` section.
-- Format artifact with YAML headers per SCHEMA.md’s metadata rules.
-- Validate against OUTPUT_TEMPLATE.md’s structure and syntax.
+- 'Describe mechanism: how the technique elicits desired model behavior.'
+- Specify parameters (e.g., anchor phrases, context depth, domain tags).
+- Include example prompts from bld_output_template_prompt_technique.md’s `examples` section.
+- Format artifact with YAML headers per bld_schema_prompt_technique.md’s metadata rules.
+- Validate against bld_output_template_prompt_technique.md’s structure and syntax.
 - Finalize artifact with versioning and authorship metadata.
 phase_3_validate:
-- '[ ] ✅ Artifact conforms to SCHEMA.md’s required fields and types.'
-- '[ ] ✅ Example prompts produce expected outputs in target domain.'
-- '[ ] ✅ Parameters are clearly defined and injectable via schema.'
-- '[ ] ✅ Technique adheres to P03’s injection-specific constraints.'
-- '[ ] ✅ No conflicts with existing techniques in the same domain.'
+- '[ ] Artifact conforms to bld_schema_prompt_technique.md’s required fields and types.'
+- '[ ] Example prompts produce expected outputs in target domain.'
+- '[ ] Parameters are clearly defined and match schema.'
+- '[ ] Technique adheres to P03 prompt-specific constraints.'
+- '[ ] No conflicts with existing techniques in the same domain.'

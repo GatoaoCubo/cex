@@ -16,16 +16,32 @@ domain: app_directory_entry construction
 created: '2026-04-14'
 updated: '2026-04-14'
 density_score: 0.85
-production_tools: "| Tool | Purpose | When |  \n|------|---------|------|  \n| cex_compile.py | Compiles app directory entries\
-  \ | During entry creation |  \n| cex_score.py | Scores entries based on quality metrics | During validation phase |  \n\
-  | cex_retriever.py | Retrieves external data for entries | When populating metadata |  \n| cex_doctor.py | Diagnoses entry\
-  \ inconsistencies | During pre-deployment checks |  \n| cex_validator.py | Validates entry structure | On submission | \
-  \ \n| cex_analyzer.py | Analyzes entry performance | Post-deployment |"
-validation_tools: "| Tool | Purpose | When |  \n|------|---------|------|  \n| validator_check.py | Ensures compliance with\
-  \ app directory standards | During entry submission |  \n| schema_validator.py | Validates JSON schema integrity | On metadata\
-  \ updates |  \n| consistency_checker.py | Checks cross-entry data consistency | During bulk imports |  \n| code_linter.py\
-  \ | Lints code snippets in entries | On code submission |"
+production_tools: '| Tool                  | Purpose                               | When                          |
+
+  |-----------------------|---------------------------------------|-------------------------------|
+
+  | cex_compile.py        | Compile .md builder ISOs to .yaml     | After each ISO write          |
+
+  | cex_score.py          | Score artifact quality (5D + H gates) | Post-validation assessment    |
+
+  | cex_retriever.py      | TF-IDF similarity search on artifacts | When finding similar entries  |
+
+  | cex_doctor.py         | Builder health check (118 assertions) | Pre-deployment checks         |
+
+  | cex_wave_validator.py | Validate all ISOs in a builder dir    | After completing all 13 ISOs  |
+
+  | cex_hygiene.py        | Artifact CRUD + 8 hygiene rules       | Cleanup and consistency pass  |'
+validation_tools: '| Tool                  | Purpose                               | When                          |
+
+  |-----------------------|---------------------------------------|-------------------------------|
+
+  | cex_hooks.py          | Pre-commit validation + ASCII check   | On git commit                 |
+
+  | cex_sanitize.py       | Detect and fix non-ASCII in code      | Before committing .py/.ps1    |
+
+  | cex_schema_hydrate.py | Hydrate ISOs with universal patterns  | After schema changes          |'
 external_references:
-- JSON Schema (for metadata validation)
-- Pydantic (for data model validation)
-- Requests (for API data retrieval)
+- 'Product Hunt listing guidelines: tagline <= 60 chars, 1280x800 screenshots'
+- 'Chrome Web Store developer documentation: icon 512x512 PNG, feature graphic 1280x800'
+- 'W3C Web App Manifest spec: name, short_name, description, icons'
+- 'Apple App Store Review Guidelines: metadata standards for app submissions'

@@ -87,6 +87,7 @@ observation_types:
 - project
 - reference
 density_score: 0.91
+llm_function: INJECT
 summary: 'Knowledge graph construction failures follow three patterns: unconstrained entity extraction (scope explosion),
   missing deduplication (entity fragmentation), and no extraction prompt (empty graph). A constrained entity type whitelist,
   fuzzy deduplication, and an explicit extraction strategy address all three systematically.'

@@ -1,16 +1,16 @@
-kind: learning_record
-id: p10_lr_sso_config_builder
+kind: memory
+id: p10_mem_sso_config_builder
 pillar: P10
 llm_function: INJECT
 purpose: Learned patterns and pitfalls for sso_config construction
 quality: null
-title: Learning Record Sso Config
+title: Memory Sso Config
 version: 1.0.0
 author: wave1_builder_gen_v2
 tags:
 - sso_config
 - builder
-- learning_record
+- memory
 tldr: Learned patterns and pitfalls for sso_config construction
 domain: sso_config construction
 created: '2026-04-14'

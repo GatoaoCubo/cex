@@ -5,53 +5,77 @@ llm_function: INJECT
 purpose: Domain knowledge for judge_config production
 quality: null
 title: Knowledge Card Judge Config
-version: 1.0.0
-author: wave1_builder_gen_v2
+version: 1.1.0
+author: n03_hybrid_review4
 tags:
 - judge_config
 - builder
 - knowledge_card
-tldr: Domain knowledge for judge_config production
+tldr: 'A judge_config is the full spec for an LLM-as-a-judge: judge_type, judge_model, rubric, and bias controls. Canonical
+  references: MT-Bench, Chatbot Arena, G-Eval, Prometheus, PandaLM.'
 domain: judge_config construction
 created: '2026-04-14'
 updated: '2026-04-14'
-density_score: 0.85
-domain_overview: Judge_config artifacts define structured parameters for LLM evaluation systems, enabling consistent, repeatable,
-  and scalable automated judgment. They underpin benchmarks like MLCommons and Hugging Face datasets, where configurations
-  dictate how models are scored on tasks ranging from factuality to safety. These configs often integrate with frameworks
-  such as LMSYS and OpenLett, ensuring alignment with human-centric rubrics while enabling machine-readable scoring rules.
-  The rise of AI alignment and LLM testing has increased demand for judge_config rigor, as misconfigured systems can produce
-  biased or inconsistent evaluations. Configs must balance flexibility (to adapt to new tasks) with specificity (to avoid
-  ambiguity in scoring). Industry leaders emphasize config versioning, traceability, and compatibility with both human and
-  machine judges.
-key_concepts: "Concept | Definition | Source  \n--- | --- | ---  \nEvaluation Criteria | Metrics used to assess model outputs\
-  \ (e.g., accuracy, fluency) | MLCommons benchmarks  \nScoring Thresholds | Numerical ranges defining pass/fail or quality\
-  \ tiers | NeurIPS 2022: \"Automated Scoring in NLP\"  \nPrompt Templates | Structured instructions for judges to evaluate\
-  \ outputs | Hugging Face Dataset API docs  \nJudgment Granularity | Level of detail in scoring (e.g., per-token vs. per-response)\
-  \ | Alignment Research Center paper  \nConfig Versioning | Tracking changes to judge_config over time | Git-based LLM benchmarking\
-  \ practices  \nBias Mitigation Rules | Parameters to reduce evaluation bias (e.g., demographic filters) | ACM SIGKDD 2023:\
-  \ \"Fairness in LLM Evaluation\"  \nError Handling Policies | Rules for managing invalid or ambiguous model outputs | RFC\
-  \ 7807: Problem Details for API Errors  \nScoring Normalization | Techniques to align scores across different judges/configs\
-  \ | ISO/IEC 23894: AI Trustworthiness  \nArtifact Logging Parameters | Configs for recording evaluation metadata (e.g.,\
-  \ timestamps, judge IDs) | LMSYS evaluation framework  \nJudgment Aggregation Methods | Algorithms to combine scores from\
-  \ multiple judges/configs | OpenLett v2.1 specification"
+density_score: 0.92
+domain_overview: 'An LLM-as-a-Judge pattern replaces expensive human annotators with a strong LLM scoring model outputs against
+  a rubric. Zheng et al. (MT-Bench, 2023) established the modern template: single-answer grading with Chain-of-Thought + an
+  anchored rubric, or pairwise preference judgment. Chatbot Arena (LMSYS) uses pairwise human votes combined with LLM judges
+  and Bradley-Terry ranking to build leaderboards. G-Eval (Liu et al. 2023) auto-generates evaluation_steps from a criterion
+  and uses weighted logprobs for fine-grained scores. Prometheus (Kim et al. 2024) adds explicit 5-level anchored rubrics
+  + reference answers and is tuned as an open judge. PandaLM is an open pairwise judge with reproducibility as a goal. A well-specified
+  judge_config makes the judgment reproducible and calibrated: it declares judge_type (pairwise/rubric/reference_based/direct),
+  judge_model (provider + model + temperature), scoring_scale, the criteria being judged, the prompt_template, and -- critically
+  -- the bias mitigations in place. Judge bias is the main failure mode: LLM judges exhibit position bias (favoring first
+  answer in pairwise), verbosity/length bias, self-enhancement bias (favoring their own outputs), and stylistic bias (favoring
+  their own prose style).'
+key_concepts: '| Concept | Definition | Canonical Source |
+
+  |---------|-----------|------------------|
+
+  | Judge type | pairwise / rubric / reference_based / direct | MT-Bench taxonomy |
+
+  | Rubric anchoring | Descriptor per scale level (score_1 .. score_5) | Prometheus |
+
+  | Reference answer | Gold answer for reference_based judging | MT-Bench reference-based prompts |
+
+  | Position bias | Preference for first (or second) answer in pairwise | Zheng et al. 2023 |
+
+  | Length / verbosity bias | Preference for longer answers | MT-Bench analysis |
+
+  | Self-enhancement bias | Judge favoring outputs from its own model family | Zheng et al. 2023 |
+
+  | Swap-order mitigation | Run pairwise judge twice with A/B swapped; require consistency | MT-Bench, PandaLM |
+
+  | Self-consistency aggregation | Sample n judgments, majority or mean | G-Eval, Wang et al. 2022 |
+
+  | Bradley-Terry ranking | Pairwise preferences -> scalar ranking | Chatbot Arena, Elo |
+
+  | Calibration example | Few-shot exemplar of (input, gold score) to anchor the judge | Prometheus calibration |
+
+  | Chain-of-Thought judging | Judge emits reasoning before score | G-Eval, MT-Bench |
+
+  | Weighted-logprob score | Score = sum over scale * P(score) from token logprobs | G-Eval |'
 industry_standards:
-- MLCommons benchmarks (e.g., MMLU, TruthfulQA)
-- Hugging Face Datasets API (version 2.10+)
-- 'RFC 7807: Problem Details for API Errors'
-- 'ISO/IEC 23894: Artificial Intelligence — Trustworthiness'
-- 'Alignment Research Center: "Judgment Alignment in LLM Evaluation" (2023)'
-- LMSYS evaluation framework (v2.1)
-- 'OpenLett: Open-Source LLM Evaluation Toolkit'
+- MT-Bench (LMSYS FastChat) -- 80 multi-turn questions, GPT-4 single-answer + pairwise judge
+- Chatbot Arena (LMSYS) -- pairwise human + LLM judges, Bradley-Terry leaderboard
+- G-Eval (Liu et al. 2023) -- CoT + weighted-logprob, integrated in DeepEval
+- Prometheus, Prometheus-2 (KAIST) -- open judge with 5-level anchored rubric + reference answer
+- PandaLM (ByteDance) -- open pairwise judge, reproducibility-first
+- JudgeBench, AlignBench, MT-Bench-Extended -- calibration benchmarks for judges
+- HELM-judge, OpenAI Evals modelgraded -- embedded judge patterns in eval harnesses
 common_patterns:
-- 'Modular configuration: Separate criteria, thresholds, and logging rules into reusable components.'
-- 'Versioned configs: Use semantic versioning (e.g., v1.2.3) for traceability and rollback.'
-- 'Parameterized templates: Allow dynamic insertion of task-specific instructions or metrics.'
-- 'Cross-judge normalization: Ensure compatibility between human and LLM judges via shared scales.'
-- 'Edge-case handling: Predefine responses for invalid inputs (e.g., "unanswerable" or "unsafe").'
+- Declare judge_type explicitly; do not mix pairwise and rubric in one artifact
+- Use temperature=0 and fixed decoding for determinism; relax only when self_consistency_n > 1
+- Anchor every level of the scoring scale with a descriptor + a worked example (Prometheus pattern)
+- 'For pairwise: always swap A/B positions and report agreement rate; low agreement => unreliable judge'
+- Provide calibration examples (few-shot) with gold scores; report judge agreement with humans
+- Separate judge_model from the model being judged to mitigate self-enhancement bias
+- Track and report judge version + prompt template version; pin both in the artifact
 pitfalls:
-- Hardcoding thresholds without domain-specific calibration.
-- Ignoring task-specific edge cases (e.g., ambiguous queries, multilingual content).
-- Overlooking bias mitigation in scoring rules, leading to skewed results.
-- Failing to align judge_config with human rubrics, causing evaluation drift.
-- Neglecting config versioning, resulting in untraceable evaluation changes.
+- No bias controls -- position, length, or self-enhancement bias silently inflates scores
+- Free-form scoring scale without descriptors -- inter-judge variance becomes untraceable
+- Using the same model as both judge and subject (self-enhancement bias)
+- Missing reference_answer for reference_based judges -- equivalent to a direct judge
+- No self-consistency or swap-order control -- single noisy sample treated as ground truth
+- Prompt template embedded in code instead of referenced as a prompt_template artifact (no versioning)
+- Reporting judge scores without a judge-vs-human calibration number

@@ -1,0 +1,146 @@
+kind: output_template
+id: bld_output_template_incident_report
+pillar: P05
+llm_function: PRODUCE
+purpose: Template with vars for incident_report production
+quality: null
+title: Output Template Incident Report
+version: 1.1.0
+author: n05_ops
+tags:
+- incident_report
+- builder
+- output_template
+- post-mortem
+- nist
+- sre
+tldr: Blameless post-mortem template with 5-Whys RCA, NIST SP 800-61 phases, and SRE severity tiers
+domain: incident_report construction
+created: '2026-04-13'
+updated: '2026-04-13'
+density_score: 0.9
+1_executive_summary: 'Severity: P{{1-5}} ({{Critical|High|Medium|Low|Informational}})
+
+  Duration: `{{start_datetime}}` - {{end_datetime}} (`{{total_duration}}`)
+
+  Incident Commander: {{name}}
+
+  Affected Systems: `{{comma_separated_systems}}`
+
+  Customer Impact: `{{number_of_users_affected}}` users affected; `{{service_disruption_description}}`
+
+
+  > {{2-3 sentence plain language summary of what happened, impact, and current status}}'
+2_timeline_nist_sp_800_61_phases: '| Timestamp (UTC) | Phase | Event | Actor | Evidence |
+
+  |-----------------|-------|-------|-------|----------|
+
+  | `{{datetime}}` | Detection | {{event_description}} | {{system_or_person}} | Log: `{{log_ref}}` |
+
+  | `{{datetime}}` | Analysis | {{event_description}} | {{person}} | Ticket: `{{ticket_id}}` |
+
+  | `{{datetime}}` | Containment | {{event_description}} | {{person}} | Runbook: `{{runbook_ref}}` |
+
+  | `{{datetime}}` | Eradication | {{event_description}} | {{person}} | Commit: `{{commit_sha}}` |
+
+  | `{{datetime}}` | Recovery | {{event_description}} | {{person}} | Monitor: `{{dashboard_url}}` |
+
+  | `{{datetime}}` | Post-Incident | This report created | `{{author}}` | - |'
+3_impact_assessment: ''
+user_impact:
+- 'Affected users: `{{count}}`'
+- 'Degraded functionality: `{{description}}`'
+- 'Data integrity: {{intact|compromised|under_investigation}}'
+business_impact:
+- 'Downtime cost: $`{{estimated_cost}}` (`{{calculation_basis}}`)'
+- 'SLO breach: {{yes|no}} -- `{{slo_details}}`'
+- 'Regulatory exposure: {{none|GDPR Art. 33|HIPAA Breach|other}}'
+technical_impact:
+- 'Systems affected: `{{list}}`'
+- 'Data affected: `{{records_count}}` records of type `{{data_type}}`'
+- 'Dependencies broken: `{{downstream_services}}`'
+4_root_cause_analysis: ''
+method_5_whys_google_sre: "1. Why did `{{observable_failure}}` occur?\n   Because `{{reason_1}}`.\n\n2. Why did `{{reason_1}}`\
+  \ occur?\n   Because `{{reason_2}}`.\n\n3. Why did `{{reason_2}}` occur?\n   Because `{{reason_3}}`.\n\n4. Why did `{{reason_3}}`\
+  \ occur?\n   Because `{{reason_4}}`.\n\n5. Why did `{{reason_4}}` occur?\n   Because `{{root_cause}}` -- THIS IS THE ROOT\
+  \ CAUSE."
+contributing_factors: '| Factor | Category | Description |
+
+  |--------|----------|-------------|
+
+  | `{{factor}}` | Technical/Process/Human/Environmental | `{{description}}` |'
+not_root_cause_ruled_out:
+- '`{{hypothesis_1}}`: `{{why_ruled_out}}`'
+5_detection_gap_analysis: 'Time to Detect (TTD): `{{duration}}`
+
+  Time to Acknowledge (TTA): `{{duration}}`
+
+  Time to Resolve (TTR): `{{duration}}`
+
+
+  Was this detected by:
+
+  - [ ] Automated monitoring alert
+
+  - [ ] User report
+
+  - [ ] Manual inspection
+
+  - [ ] External disclosure
+
+
+  Gap: `{{what_monitoring_or_process_should_have_caught_this_sooner}}`'
+6_containment_eradication_and_recovery: ''
+containment_actions: '| Action | Taken By | Time | Effect |
+
+  |--------|---------|------|--------|
+
+  | `{{action}}` | {{person}} | {{datetime}} | `{{outcome}}` |'
+eradication: '`{{description_of_permanent_fix_applied}}`'
+recovery_validation:
+- '[ ] Service restored and monitored for `{{duration}}`'
+- '[ ] No recurrence in `{{observation_window}}`'
+- '[ ] Stakeholders notified of resolution'
+7_action_items_corrective_and_preventive: '| ID | Action | Owner | Due Date | Priority | Status |
+
+  |----|--------|-------|----------|----------|--------|
+
+  | A01 | `{{action}}` | {{team}} | `{{date}}` | P1/P2/P3 | Open |
+
+  | A02 | `{{action}}` | {{team}} | `{{date}}` | P1/P2/P3 | Open |'
+8_lessons_learned: 'What went well:
+
+  - `{{positive_1}}`
+
+
+  What could be improved:
+
+  - `{{improvement_1}}`
+
+
+  Systemic gaps identified:
+
+  - `{{gap_1}}` -- maps to action A`{{id}}`'
+9_notifications_and_regulatory_obligations: '| Stakeholder | Notified At | Method | Required By |
+
+  |-------------|------------|--------|-------------|
+
+  | Engineering leadership | `{{datetime}}` | Slack | Internal SLA |
+
+  | Customers (if applicable) | `{{datetime}}` | Status page | SLA / GDPR Art. 34 |
+
+  | DPA (if personal data breach) | Within 72h of discovery | Formal report | GDPR Art. 33 |'
+10_sign_off: '| Role | Name | Signature | Date |
+
+  |------|------|-----------|------|
+
+  | Incident Commander | {{name}} | `{{signature}}` | `{{date}}` |
+
+  | Engineering Lead | {{name}} | `{{signature}}` | `{{date}}` |
+
+  | Compliance Officer | {{name}} | `{{signature}}` | `{{date}}` |'
+references:
+- 'NIST SP 800-61 Rev. 2: Computer Security Incident Handling Guide'
+- 'Google SRE Book: Chapter 14 -- Managing Incidents'
+- 'ISO/IEC 27035: Information Security Incident Management'
+- 'ITIL 4: Incident Management Practice Guide'

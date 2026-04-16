@@ -18,11 +18,11 @@ updated: '2026-04-14'
 density_score: 0.85
 crew_role: Synthesizes multimodal prompts by integrating text, image, and audio inputs into cohesive instructions for AI models.
   Acts as a bridge between content creators and technical teams.
-receives_from: "| Builder       | What               | Format     |  \n|---------------|--------------------|------------|\
-  \  \n| Content Curator | Raw text snippets  | .txt       |  \n| Media Team    | Image assets       | .jpg/.png  |  \n| Data\
-  \ Scientist | Audio recordings   | .wav/.mp3  |"
-produces_for: "| Builder       | What               | Format     |  \n|---------------|--------------------|------------|\
-  \  \n| Model Trainer | Structured prompts | JSON       |  \n| Review Team   | Prompt drafts      | Markdown   |  \n| Evaluation\
-  \ Team | Test cases       | CSV        |"
+receives_from: "| Builder             | What                              | Format   |  \n|---------------------|-----------------------------------|----------|\
+  \  \n| multi_modal_config  | Modality constraints and settings | YAML     |  \n| knowledge_card      | Domain context for\
+  \ grounding      | Markdown |  \n| embedding_config    | Token embedding specifications    | YAML     |"
+produces_for: "| Builder             | What                              | Format   |  \n|---------------------|-----------------------------------|----------|\
+  \  \n| prompt_template     | Multimodal prompt structures      | Markdown |  \n| llm_judge           | Test cases for cross-modal\
+  \ eval   | Markdown |  \n| benchmark           | Evaluation scenarios with inputs  | Markdown |"
 boundary: Does NOT handle model-specific configuration (handled by `multi_modal_config`) or text-only prompt optimization
   (handled by `prompt_technique`).

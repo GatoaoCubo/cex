@@ -16,7 +16,13 @@ domain: case_study construction
 created: '2026-04-14'
 updated: '2026-04-14'
 density_score: 0.85
-naming_convention: "Pattern: `p05_cs_<study_name>.md`  \nExamples:  \n- `p05_cs_marketing.md`  \n- `p05_cs_technology.md`"
+naming_convention: 'Pattern: `p05_cs_<study_name>.md`
+
+  Examples:
+
+  - `p05_cs_marketing.md`
+
+  - `p05_cs_technology.md`'
 paths: 'Artifacts stored in: `/opt/cex/artifacts/p05/{{name}}/` Subdirectories: `docs/`, `data/`, `outputs/`'
 limits:
 - 'max_bytes: 6144'

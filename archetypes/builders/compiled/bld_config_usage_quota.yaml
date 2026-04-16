@@ -16,7 +16,13 @@ domain: usage_quota construction
 created: '2026-04-14'
 updated: '2026-04-14'
 density_score: 0.85
-naming_convention: "Pattern: p09_uq_{{name}}.yaml  \nExamples:  \n- p09_uq_example.yaml  \n- p09_uq_another.yaml"
+naming_convention: 'Pattern: p09_uq_{{name}}.yaml
+
+  Examples:
+
+  - p09_uq_example.yaml
+
+  - p09_uq_another.yaml'
 paths: /artifacts/usage_quotas/{{name}}.yaml
 limits: 'max_bytes: 3072 max_turns: 0 effort_level: high'
 hooks: 'pre_build: null post_build: null on_error: null on_quality_fail: null'

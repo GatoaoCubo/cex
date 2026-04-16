@@ -4,15 +4,76 @@ pillar: P05
 llm_function: PRODUCE
 purpose: Template with vars for consolidation_policy production
 quality: null
-title: Output Template Consolidation Policy
-version: 1.0.0
-author: wave1_builder_gen_v2
+title: 'Output Template: consolidation_policy'
+version: 2.0.0
+author: n06_commercial
 tags:
 - consolidation_policy
 - builder
 - output_template
-tldr: Template with vars for consolidation_policy production
-domain: consolidation_policy construction
+tldr: 'Template for LLM agent memory consolidation policy artifacts: promotion rules, eviction strategy, importance scoring,
+  tier matrix, compliance'
+domain: LLM agent memory consolidation
 created: '2026-04-14'
 updated: '2026-04-14'
-density_score: 0.85
+density_score: 0.9
+overview: '{{agent_name}} memory consolidation policy for {{agent_domain}}. Tier: {{tier}}. Strategy: {{strategy}}. Reference:
+  MemGPT/Letta pipeline with importance scoring.'
+promotion_rules: '| Trigger | Source Layer | Target Layer | Condition | Action |
+
+  |---------|-------------|-------------|-----------|--------|
+
+  | Session end | Working | Episodic | Always | Save conversation to episodic store |
+
+  | Importance > {{promotion_threshold}} | Episodic | Semantic | importance_score > {{promotion_threshold}} | Extract facts,
+  write to semantic store |
+
+  | Merge check | Episodic | Episodic | Similarity > 0.92 with existing entry | Merge into canonical record |
+
+
+  <!-- Add/remove rows based on active layers. Free tier: no rows needed. -->'
+eviction_rules: '| Layer | Strategy | Trigger | Action |
+
+  |-------|----------|---------|--------|
+
+  | Working | FIFO + summarize | Token budget > 80% | Summarize oldest 20% out of context |
+
+  | Episodic | TTL + importance | Age > {{retention_days}}d OR importance < {{importance_floor}} | Archive to cold storage,
+  then delete after {{archive_hold_days}}d |
+
+  | Semantic | LRU + staleness | Last accessed > 180d AND no entity links | Soft-delete + audit log entry |
+
+
+  <!-- Remove rows for layers not active in this tier. -->'
+importance_scoring:
+- '`recency_score`: 1.0 for today, decays by Ebbinghaus forgetting curve over {{decay_days}} days'
+- '`access_frequency`: normalized count of retrievals in last 30 days'
+- '`explicit_feedback`: 1.0 if user explicitly referenced, 0.0 if never accessed'
+- 'Weights: recency={{recency_weight}}, frequency={{frequency_weight}}, signal={{user_signal_weight}}'
+consolidation_job:
+- 'Trigger: async, fires on session end'
+- 'Schedule: also runs nightly at {{nightly_schedule}} for replay sweep'
+- 'Timeout: {{consolidation_timeout_seconds}}s per batch of {{batch_size}} entries'
+- 'Failure handling: log error, skip failed entry, retry next cycle (max {{max_retries}} retries)'
+- 'Concurrency: single-threaded per agent instance; multi-agent safe via distributed lock'
+commercial_tier_matrix: '| Feature | Free | Pro | Enterprise |
+
+  |---------|------|-----|------------|
+
+  | Consolidation | None | Session-end async | Session-end + nightly sweep |
+
+  | Episodic retention | None | {{pro_retention_days}} days | Custom (1y / indefinite) |
+
+  | Semantic promotion | None | Auto (importance > {{promotion_threshold}}) | Scheduled + audited |
+
+  | Importance scoring | None | Recency + frequency | Recency + frequency + user signals |
+
+  | Merge/dedup | None | Similarity-based | LLM-driven + manual review queue |
+
+  | Compliance | N/A | Basic TTL | GDPR + HIPAA + data residency |
+
+  | Audit trail | None | Read-only | Full write + export + GDPR Art. 17 |'
+compliance_config: "<!-- Required for enterprise tier. Remove section for free/pro. -->\n\ncompliance:\n  retention_days:\
+  \ {{retention_days}}\n  data_residency: \"{{region}}\"\n  gdpr_erasure:\n    enabled: true\n    hard_delete: true\n    audit_log:\
+  \ true\n    max_erasure_latency_hours: 24\n  audit_trail:\n    enabled: true\n    log_promotions: true\n    log_evictions:\
+  \ true\n    export_format: \"jsonl\"\n    retention_days: 365"

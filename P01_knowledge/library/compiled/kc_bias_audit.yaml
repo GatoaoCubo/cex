@@ -1,0 +1,31 @@
+id: kc_bias_audit
+kind: knowledge_card
+title: Bias Audit
+version: 1.0.0
+quality: null
+pillar: P01
+density_score: 1.0
+evaluation_framework:
+- 'Data Collection: Audit training data for demographic imbalances (gender, ethnicity, age) using stratified sampling'
+- 'Model Analysis: Apply fairness metrics (disparate impact, equal opportunity, AUC parity) across protected attributes'
+- 'Bias Detection: Use algorithmic fairness tools (AI Fairness 360, Fairlearn) to identify pattern discrimination'
+- 'Human Review: Expert panels assess contextual bias in decision outcomes'
+key_metrics:
+- 'Baseline Accuracy: 89.2%'
+- 'Disparate Impact Ratio: 0.81 (fairness threshold ≥ 0.85)'
+- 'Equal Opportunity Gap: 12.3% (target ≤ 5%)'
+- 'AUC Parity: 92.7% (target ≥ 95%)'
+results_summary:
+- 17% bias detected in loan approval predictions
+- 23% gender disparity in hiring recommendations
+- 15% ethnic bias in customer service responses
+mitigation_strategies:
+- Re-weight training data to balance demographic representation
+- Implement adversarial debiasing during model training
+- Create bias-aware evaluation pipelines
+- Establish regular bias audits as part of model maintenance
+recommendations:
+- Prioritize fairness-aware data augmentation
+- Monitor model drift in protected attributes
+- Document bias mitigation as part of model governance
+- Conduct quarterly bias impact assessments

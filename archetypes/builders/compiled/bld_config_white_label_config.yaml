@@ -16,7 +16,13 @@ domain: white_label_config construction
 created: '2026-04-14'
 updated: '2026-04-14'
 density_score: 0.85
-naming_convention: "Pattern: `p09_wl_{{name}}.yaml`  \nExamples:  \n- `p09_wl_example.yaml`  \n- `p09_wl_test.yaml`"
+naming_convention: 'Pattern: `p09_wl_{{name}}.yaml`
+
+  Examples:
+
+  - `p09_wl_example.yaml`
+
+  - `p09_wl_test.yaml`'
 paths: '`/config/white_labels/p09_wl_{{name}}.yaml`'
 limits:
 - 'max_bytes: 4096'

@@ -1,0 +1,73 @@
+id: kind-builder
+kind: type_builder
+pillar: P08
+parent: null
+domain: kind_builder
+llm_function: BECOME
+version: 1.0.0
+created: 2026-04-13
+updated: 2026-04-13
+author: builder_agent
+tags:
+- kind-builder
+- meta-builder
+- P08
+- architecture
+- builders
+- iso
+keywords:
+- kind
+- builder
+- meta
+- archetype
+- iso
+- scaffold
+- type_builder
+- 13-iso
+triggers:
+- create a new builder
+- scaffold builder for kind
+- add a new kind builder
+- generate builder ISOs
+capabilities:
+- Read kinds_meta.json to resolve target kind metadata (pillar, naming, max_bytes, llm_function, boundary)
+- Load a reference builder (e.g. env-config-builder) as structural template for all 13 ISOs
+- Produce all 13 bld_*.md files with kind-specific content, frontmatter, and domain knowledge
+- Create .claude/agents/{kind}-builder.md sub-agent file for dispatch
+- 'Validate the full package: 13 files exist, all have YAML frontmatter, quality: null in all'
+- Cross-reference related kinds from the same pillar and adjacent pillars for boundary clarity
+quality: null
+title: Manifest Kind Builder
+tldr: 'Meta-builder: creates complete 13-ISO builder packages for any CEX kind from kinds_meta.json metadata.'
+density_score: 0.9
+identity: Meta-builder that creates new builder directories with all 13 ISOs for any CEX kind. The builder of builders. Given
+  a kind name, it reads the kind's metadata from kinds_meta.json, loads a reference builder as structural template, and produces
+  a complete 13-file ISO package at archetypes/builders/{kind}-builder/. It also creates the .claude/agents/{kind}-builder.md
+  sub-agent definition.
+routing: 'keywords: [kind, builder, meta, archetype, iso, scaffold, type_builder, 13-iso, new-builder] triggers: "create a
+  new builder", "scaffold builder for kind", "add a new kind builder", "generate builder ISOs"'
+crew_role: 'In a crew, I handle BUILDER SCAFFOLDING. I answer: "what does a complete builder package look like for kind X?"
+  I do NOT handle: building the actual artifacts of that kind (the new builder does that), modifying kinds_meta.json (N03/N04
+  handle registry changes), or deploying builders (N05).'
+metadata: python _tools/cex_score.py --apply kind-builder.md
+properties: '| Property | Value |
+
+  |----------|-------|
+
+  | Kind | `type_builder` |
+
+  | Pillar | P08 |
+
+  | Domain | kind_builder |
+
+  | Pipeline | 8F (F1-F8) |
+
+  | Scorer | cex_score.py |
+
+  | Compiler | cex_compile.py |
+
+  | Retriever | cex_retriever.py |
+
+  | Quality target | 9.0+ |
+
+  | Density target | 0.85+ |'

@@ -16,18 +16,80 @@ domain: enterprise_sla construction
 created: '2026-04-14'
 updated: '2026-04-14'
 density_score: 0.85
-golden_example: "---  \ntitle: \"AWS Enterprise SLA\"  \nvendor: \"Amazon Web Services, Inc.\"  \neffective_date: \"2023-10-01\"\
-  \  \n---  \n\nUptime Commitment  \nAWS guarantees 99.95% monthly uptime for EC2 instances in regions with multiple availability\
-  \ zones. Downtime exceeding this threshold triggers service credits (5% for 1–29 days, 10% for 30+ days).  \n\nLatency SLA\
-  \  \nFor AWS Global Accelerator, latency between 50ms and 150ms is guaranteed for 95% of requests in North America. Latency\
-  \ exceeding 150ms for >5% of requests incurs credits.  \n\nSupport Commitments  \n24/7 enterprise support via phone, email,\
-  \ and chat. Critical issues (e.g., outages) must be resolved within 2 hours; non-critical issues within 24 hours.  \n\n\
-  Penalties  \nService credits are issued automatically for breaches. No cap on credits for outages exceeding 30 days.  "
-anti_example_1_missing_key_metrics: "---  \ntitle: \"CloudCo Enterprise SLA\"  \nvendor: \"CloudCo Inc.\"  \neffective_date:\
-  \ \"2023-09-15\"  \n---  \n\nUptime Commitment  \nWe strive to provide reliable service.  \n\nSupport Commitments  \nOur\
-  \ team will help you as best as possible.  "
+golden_example: '---
+
+  title: "AWS Enterprise SLA"
+
+  vendor: "Amazon Web Services, Inc."
+
+  effective_date: "2023-10-01"
+
+  ---
+
+
+  Uptime Commitment
+
+  AWS guarantees 99.95% monthly uptime for EC2 instances in regions with multiple availability zones. Downtime exceeding this
+  threshold triggers service credits (5% for 1–29 days, 10% for 30+ days).
+
+
+  Latency SLA
+
+  For AWS Global Accelerator, latency between 50ms and 150ms is guaranteed for 95% of requests in North America. Latency exceeding
+  150ms for >5% of requests incurs credits.
+
+
+  Support Commitments
+
+  24/7 enterprise support via phone, email, and chat. Critical issues (e.g., outages) must be resolved within 2 hours; non-critical
+  issues within 24 hours.
+
+
+  Penalties
+
+  Service credits are issued automatically for breaches. No cap on credits for outages exceeding 30 days.'
+anti_example_1_missing_key_metrics: '---
+
+  title: "CloudCo Enterprise SLA"
+
+  vendor: "CloudCo Inc."
+
+  effective_date: "2023-09-15"
+
+  ---
+
+
+  Uptime Commitment
+
+  We strive to provide reliable service.
+
+
+  Support Commitments
+
+  Our team will help you as best as possible.'
 why_it_fails: Terms like "high availability" and "low latency" lack definitions or benchmarks. No clear accountability or
   remedies for failures.
-anti_example_2_vague_language: "---  \ntitle: \"DataCorp SLA\"  \nvendor: \"DataCorp Solutions\"  \neffective_date: \"2023-08-01\"\
-  \  \n---  \n\nUptime Commitment  \nHigh availability is guaranteed.  \n\nLatency SLA  \nLow latency is ensured for all users.\
-  \  \n\nSupport Commitments  \nSupport is available when needed.  "
+anti_example_2_vague_language: '---
+
+  title: "DataCorp SLA"
+
+  vendor: "DataCorp Solutions"
+
+  effective_date: "2023-08-01"
+
+  ---
+
+
+  Uptime Commitment
+
+  High availability is guaranteed.
+
+
+  Latency SLA
+
+  Low latency is ensured for all users.
+
+
+  Support Commitments
+
+  Support is available when needed.'

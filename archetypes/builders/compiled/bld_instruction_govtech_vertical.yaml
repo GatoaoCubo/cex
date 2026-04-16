@@ -24,8 +24,8 @@ phase_1_research:
 - Evaluate existing govtech artifacts for alignment with P01.
 - Document stakeholder needs for vertical-specific inject functions.
 phase_2_compose:
-- Align artifact structure with SCHEMA.md (govtech_vertical, P01).
-- Use OUTPUT_TEMPLATE.md to draft overview and compliance sections.
+- Align artifact structure with bld_schema_govtech_vertical.md (govtech_vertical, P01).
+- Use bld_output_template_govtech_vertical.md to draft overview and compliance sections.
 - Populate FedRAMP and FISMA requirements in "Regulatory Alignment" block.
 - Detail CJIS data security protocols in "Technical Controls" section.
 - Embed Section 508 accessibility checks in "User Experience" module.
@@ -34,8 +34,9 @@ phase_2_compose:
 - Cross-reference schema fields with template placeholders.
 - Finalize artifact with metadata (version, author, compliance status).
 phase_3_validate:
-- '[ ] ✅ Verify FedRAMP and FISMA requirements are fully addressed.'
-- '[ ] ✅ Confirm CJIS data classification aligns with artifact controls.'
-- '[ ] ✅ Ensure Section 508 compliance checks are explicitly documented.'
-- '[ ] ✅ Validate GSA contract references match current procurement terms.'
-- '[ ] ✅ Confirm artifact adheres to SCHEMA.md and OUTPUT_TEMPLATE.md.'
+- '[ ] Verify FedRAMP authorization level (Moderate or High) is explicitly stated.'
+- '[ ] Confirm FISMA categorization (Low/Moderate/High) matches artifact scope.'
+- '[ ] Ensure CJIS Security Policy version (SP 20-01) is cited for law enforcement data.'
+- '[ ] Validate Section 508 WCAG 2.1 AA criteria are mapped to specific UI requirements.'
+- '[ ] Confirm GSA Schedule or StateRAMP reference is present for procurement path.'
+- '[ ] Confirm artifact adheres to bld_schema_govtech_vertical.md ID pattern and required fields.'

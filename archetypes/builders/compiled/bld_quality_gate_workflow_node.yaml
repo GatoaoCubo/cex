@@ -2,45 +2,81 @@ kind: quality_gate
 id: p12_qg_workflow_node
 pillar: P11
 llm_function: GOVERN
-purpose: Quality gate with HARD and SOFT scoring for workflow_node
+purpose: Quality gate with HARD and SOFT scoring for workflow_node ARTIFACTS (not runtime)
 quality: null
 title: Quality Gate Workflow Node
-version: 1.0.0
-author: wave1_builder_gen_v2
+version: 1.1.0
+author: n03_hybrid_review4
 tags:
 - workflow_node
 - builder
 - quality_gate
-tldr: Quality gate with HARD and SOFT scoring for workflow_node
+tldr: Tests the workflow_node artifact structure (frontmatter + body sections), not runtime behavior.
 domain: workflow_node construction
 created: '2026-04-14'
 updated: '2026-04-14'
-density_score: 0.85
-definition: "(Table: metric, threshold, operator, scope)  \n| Metric       | Threshold                          | Operator\
-  \ | Scope              |  \n|--------------|------------------------------------|----------|--------------------|  \n| Schema\
-  \ ID    | ^p12_wn_[a-z][a-z0-9_]+.md$       | matches  | All workflow_node files |"
-hard_gates: "(Table: ID | Check | Fail Condition)  \n| ID      | Check                          | Fail Condition         \
-  \                             |  \n|---------|--------------------------------|-----------------------------------------------------|\
-  \  \n| H01     | YAML frontmatter valid         | Invalid YAML syntax or missing frontmatter          |  \n| H02     | ID\
-  \ matches ^p12_wn_[a-z][a-z0-9_]+.md$ | ID does not match required schema pattern         |  \n| H03     | kind field matches\
-  \ 'workflow_node' | kind is not 'workflow_node'                        |  \n| H04     | 'name' field present           |\
-  \ Missing 'name' field                               |  \n| H05     | 'inputs' and 'outputs' defined | Missing 'inputs'\
-  \ or 'outputs'                      |  \n| H06     | 'type' field valid             | 'type' not in [trigger, processor,\
-  \ decision]       |  \n| H07     | 'description' field present    | Missing 'description'                              |\
-  \  \n| H08     | Unique node ID in workflow     | Duplicate node ID detected                         |"
-soft_scoring: "(Table: Dim | Dimension | Weight | Scoring Guide)  \n| Dim | Dimension         | Weight | Scoring Guide   \
-  \                                   |  \n|-----|-------------------|--------|----------------------------------------------------|\
-  \  \n| D1  | Code Quality      | 0.15   | Clean, readable code; no syntax errors             |  \n| D2  | Documentation\
-  \     | 0.10   | Complete and accurate 'description' field          |  \n| D3  | Input/Output      | 0.15   | Valid, non-ambiguous\
-  \ 'inputs'/'outputs'            |  \n| D4  | Error Handling    | 0.10   | Robust error handling for edge cases         \
-  \      |  \n| D5  | Performance       | 0.10   | Efficient execution, minimal latency               |  \n| D6  | Maintainability\
-  \   | 0.10   | Modular design, clear separation of concerns       |  \n| D7  | Test Coverage     | 0.10   | Unit/integration\
-  \ tests cover >80% of logic         |  \n| D8  | Type Safety       | 0.10   | Strong typing enforced for inputs/outputs\
-  \          |"
-actions: "(Table: Score | Action)  \n| Score      | Action                                      |  \n|------------|---------------------------------------------|\
-  \  \n| GOLDEN     | Auto-approve and deploy                     |  \n| PUBLISH    | Manual review required before deployment\
-  \    |  \n| REVIEW     | Flag for technical lead review              |  \n| REJECT     | Reject; fix all HARD/Gate failures\
-  \          |"
-bypass: "(Table: conditions, approver, audit trail)  \n| Conditions              | Approver         | Audit Trail        \
-  \                      |  \n|-------------------------|------------------|------------------------------------------|  \n\
-  | Emergency workflow fix  | Lead Architect   | Bypass logged with justification and date |"
+density_score: 0.9
+definition: '| Metric | Threshold | Operator | Scope |
+
+  |--------|-----------|----------|-------|
+
+  | ID pattern match | ^p12_wn_[a-z][a-z0-9_]+\.md$ | matches | frontmatter.id |
+
+  | Max bytes | 4096 | <= | file size |
+
+  | Required sections | 5 | >= | body |
+
+  | Edge declaration present | 1 | >= | body: Edges/Transitions |'
+hard_gates: '| ID | Check | Fail Condition |
+
+  |----|-------|----------------|
+
+  | H01 | Valid YAML frontmatter | YAML parse error or missing frontmatter |
+
+  | H02 | ID matches ^p12_wn_[a-z][a-z0-9_]+\.md$ | ID does not match pattern |
+
+  | H03 | kind == "workflow_node" | kind field missing or != "workflow_node" |
+
+  | H04 | pillar == "P12" | pillar != "P12" |
+
+  | H05 | quality == null | quality self-scored (must be null) |
+
+  | H06 | node_type in enum | node_type not in [agent, tool, router, condition, parallel, start, end, human] |
+
+  | H07 | Body contains "## Inputs" and "## Outputs" sections | Either section missing |
+
+  | H08 | Body contains "## Edges" or "## Next Nodes" section | No transition declaration |
+
+  | H09 | state_schema reference or input/output types declared | Missing type contract |'
+soft_scoring: '| Dim | Dimension | Weight | Scoring Guide |
+
+  |-----|-----------|--------|---------------|
+
+  | D1 | Schema compliance | 0.25 | All required frontmatter fields present with correct types |
+
+  | D2 | Edge/transition clarity | 0.20 | Next-node routing explicit (conditional vs unconditional edges named) |
+
+  | D3 | Contract rigor | 0.20 | Input/output types declared, state_schema referenced |
+
+  | D4 | Industry alignment | 0.20 | Uses LangGraph/Prefect/Temporal/Dagster/Airflow terminology correctly |
+
+  | D5 | Documentation density | 0.15 | tldr + description + example invocation present |
+
+
+  Weight check: 0.25 + 0.20 + 0.20 + 0.20 + 0.15 = 1.00'
+actions: '| Score | Action |
+
+  |-------|--------|
+
+  | GOLDEN (>= 9.5) | Auto-approve, promote to examples library |
+
+  | PUBLISH (>= 8.0) | Approve as-is |
+
+  | REVIEW (>= 7.0) | Peer review required before publish |
+
+  | REJECT (< 7.0) | Rework; fix all HARD failures and re-submit |'
+bypass: '| Conditions | Approver | Audit Trail |
+
+  |------------|----------|-------------|
+
+  | Emergency hotfix to existing node | Pillar owner (P12) | Log bypass with reason + version diff in git commit |'

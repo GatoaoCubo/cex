@@ -1,16 +1,16 @@
-kind: learning_record
-id: p10_lr_audit_log_builder
+kind: memory
+id: p10_mem_audit_log_builder
 pillar: P10
 llm_function: INJECT
 purpose: Learned patterns and pitfalls for audit_log construction
 quality: null
-title: Learning Record Audit Log
+title: Memory Audit Log
 version: 1.0.0
 author: wave1_builder_gen_v2
 tags:
 - audit_log
 - builder
-- learning_record
+- memory
 tldr: Learned patterns and pitfalls for audit_log construction
 domain: audit_log construction
 created: '2026-04-14'

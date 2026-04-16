@@ -17,27 +17,55 @@ created: '2026-04-14'
 updated: '2026-04-14'
 density_score: 0.85
 frontmatter_fields: ''
-required: "| Field     | Type   | Required | Default | Notes                              |  \n|-----------|--------|----------|---------|------------------------------------|\
-  \  \n| id        | string | yes      | null    | Unique identifier                  |  \n| kind      | string | yes    \
-  \  | null    | Must be `faq_entry`                |  \n| pillar    | string | yes      | null    | Must be `P01`       \
-  \               |  \n| title     | string | yes      | null    | Concise question                   |  \n| version   | string\
-  \ | yes      | `1.0`   | Semantic versioning                |  \n| created   | string | yes      | null    | ISO 8601 date\
-  \                      |  \n| updated   | string | yes      | null    | ISO 8601 date                      |  \n| author\
-  \    | string | yes      | null    | Author name                        |  \n| domain    | string | yes      | null    |\
-  \ Contextual domain (e.g., `trading`) |  \n| quality   | null   | yes      | null    | Never self-score; peer review assigns\
-  \ |  \n| tags      | array  | yes      | `[]`    | Keywords for searchability         |  \n| tldr      | string | yes  \
-  \    | null    | Summary of answer                  |  \n| question  | string | yes      | null    | Full question text\
-  \                 |  \n| answer    | string | yes      | null    | Detailed response                  |  \n| category  |\
-  \ string | yes      | null    | Classification (e.g., `security`)  |  \n| related_topics | array | yes | `[]`    | Linked\
-  \ FAQ entries                 |"
-recommended: "| Field           | Type   | Notes                          |  \n|-----------------|--------|--------------------------------|\
-  \  \n| difficulty_level | string | `beginner`, `intermediate`, `advanced` |  \n| last_reviewed  | string | ISO 8601 date\
-  \                  |  \n| source_url     | string | Link to external reference     |"
+required: '| Field     | Type   | Required | Default | Notes                              |
+
+  |-----------|--------|----------|---------|------------------------------------|
+
+  | id        | string | yes      | null    | Unique identifier                  |
+
+  | kind      | string | yes      | null    | Must be `faq_entry`                |
+
+  | pillar    | string | yes      | null    | Must be `P01`                      |
+
+  | title     | string | yes      | null    | Concise question                   |
+
+  | version   | string | yes      | `1.0`   | Semantic versioning                |
+
+  | created   | string | yes      | null    | ISO 8601 date                      |
+
+  | updated   | string | yes      | null    | ISO 8601 date                      |
+
+  | author    | string | yes      | null    | Author name                        |
+
+  | domain    | string | yes      | null    | Contextual domain (e.g., `billing`, `account_management`, `product`) |
+
+  | quality   | null   | yes      | null    | Never self-score; peer review assigns |
+
+  | tags      | array  | yes      | `[]`    | Keywords for searchability         |
+
+  | tldr      | string | yes      | null    | Summary of answer                  |
+
+  | question  | string | yes      | null    | Full question text                 |
+
+  | answer    | string | yes      | null    | Detailed response                  |
+
+  | category  | string | yes      | null    | Classification (e.g., `security`)  |
+
+  | related_topics | array | yes | `[]`    | Linked FAQ entries                 |'
+recommended: '| Field           | Type   | Notes                          |
+
+  |-----------------|--------|--------------------------------|
+
+  | difficulty_level | string | `beginner`, `intermediate`, `advanced` |
+
+  | last_reviewed  | string | ISO 8601 date                  |
+
+  | source_url     | string | Link to external reference     |'
 id_pattern: ^p01_faq_[a-z][a-z0-9_]+.md$
-body_structure: "1. Question  \n   Full text of the question.  \n\n2. Answer  \n   Detailed, structured response.  \n\n3.\
-  \ Category  \n   Contextual grouping (e.g., `security`, `trading`).  \n\n4. Related Topics  \n   List of linked FAQ entries.\
-  \  \n\n5. Difficulty Level  \n   Audience-appropriate complexity rating.  \n\n6. Source  \n   External reference or internal\
-  \ documentation."
+body_structure: "1. Question\n   Full text of the question.\n\n2. Answer\n   Detailed, structured response.\n\n3. Category\n\
+  \   Contextual grouping (e.g., `getting_started`, `billing`, `troubleshooting`, `account`, `security`).\n\n4. Related Topics\n\
+  \   List of linked FAQ entries.\n\n5. Difficulty Level\n   Audience-appropriate complexity rating.\n\n6. Source\n   External\
+  \ reference or internal documentation."
 constraints:
 - ID must match `^p01_faq_[a-z][a-z0-9_]+.md$`
 - '`question` and `answer` fields must be non-empty'

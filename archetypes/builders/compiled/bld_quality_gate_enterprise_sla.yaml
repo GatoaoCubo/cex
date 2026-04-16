@@ -16,29 +16,66 @@ domain: enterprise_sla construction
 created: '2026-04-14'
 updated: '2026-04-14'
 density_score: 0.85
-definition: "| metric             | threshold     | operator | scope         |  \n|--------------------|---------------|----------|---------------|\
-  \  \n| Uptime             | 99.9%         | >=       | Production    |  \n| Latency            | 100ms         | <=    \
-  \   | All services  |  \n| Support response   | 1 hour        | <=       | SLA team      |  \n| SLA coverage       | 95%\
-  \           | >=       | Enterprise    |"
-hard_gates: "| ID           | Check                        | Fail Condition                              |  \n|--------------|------------------------------|---------------------------------------------|\
-  \  \n| H01          | YAML frontmatter valid       | Invalid YAML syntax or missing fields       |  \n| H02          | ID\
-  \ matches ^p11_sla_[a-z][a-z0-9_]+.md$ | ID does not conform to schema pattern      |  \n| H03          | kind field matches\
-  \ 'enterprise_sla' | kind field is incorrect                     |  \n| H04          | Uptime >=99.9%               | Uptime\
-  \ <99.9%                               |  \n| H05          | Latency <=100ms              | Latency >100ms             \
-  \                 |  \n| H06          | Support response <=1 hour    | Support response >1 hour                    |  \n\
-  | H07          | SLA coverage >=95%           | SLA coverage <95%                           |  \n| H08          | SLA documentation\
-  \ exists     | Missing required SLA documentation          |"
-soft_scoring: "| Dim       | Dimension              | Weight | Scoring Guide                              |  \n|-----------|------------------------|--------|--------------------------------------------|\
-  \  \n| D1        | Uptime reliability     | 0.20   | 1.00=99.99%, 0.50=99.5%, 0.00=99.0%         |  \n| D2        | Latency\
-  \ consistency    | 0.15   | 1.00=50ms, 0.50=150ms, 0.00=250ms           |  \n| D3        | Support responsiveness | 0.15\
-  \   | 1.00=30min, 0.50=1.5hr, 0.00=3hr            |  \n| D4        | SLA coverage           | 0.15   | 1.00=100%, 0.50=90%,\
-  \ 0.00=80%               |  \n| D5        | Documentation quality  | 0.10   | 1.00=complete, 0.50=partial, 0.00=missing\
-  \    |  \n| D6        | Compliance             | 0.10   | 1.00=fully compliant, 0.00=non-compliant    |  \n| D7        |\
-  \ Review process         | 0.15   | 1.00=automated, 0.50=manual, 0.00=no review  |"
-actions: "| Score      | Action                   |  \n|------------|--------------------------|  \n| GOLDEN     | Auto-publish\
-  \             |  \n| PUBLISH    | Manual approval required |  \n| REVIEW     | Peer review required     |  \n| REJECT  \
-  \   | Reject and fix required  |"
-bypass: "| conditions                          | approver       | audit trail              |  \n|------------------------------------|----------------|--------------------------|\
-  \  \n| Critical production outage         | CTO            | Emergency bypass log     |  \n| Regulatory compliance override\
-  \     | Legal team     | Compliance audit trail   |  \n| Temporary SLA exception            | SVP Operations | Exception\
-  \ approval log   |"
+definition: '| metric             | threshold                         | operator | scope              |
+
+  |--------------------|-----------------------------------|----------|--------------------|
+
+  | artifact_id        | ^p11_sla_[a-z][a-z0-9_]+.md$     | matches  | all artifact files |'
+hard_gates: '| ID  | Check                                    | Fail Condition                                        |
+
+  |-----|------------------------------------------|-------------------------------------------------------|
+
+  | H01 | YAML frontmatter valid                   | Invalid YAML syntax or missing required fields        |
+
+  | H02 | ID matches ^p11_sla_[a-z][a-z0-9_]+.md$ | ID does not conform to schema naming pattern          |
+
+  | H03 | kind field = ''enterprise_sla''            | kind field is absent or incorrect                     |
+
+  | H04 | service_level_objective field present    | service_level_objective missing or empty              |
+
+  | H05 | compliance_requirements field is a list  | compliance_requirements absent or not a list          |
+
+  | H06 | SLO section present in body              | Body lacks Service Level Objectives section           |
+
+  | H07 | Escalation Procedures section present    | Body lacks escalation procedures section              |
+
+  | H08 | quality field = null                     | quality is non-null (self-score violation)            |'
+soft_scoring: '| Dim | Dimension                   | Weight | Scoring Guide                                        |
+
+  |-----|-----------------------------|--------|------------------------------------------------------|
+
+  | D1  | SLO specificity             | 0.20   | 1.00=numeric SLO+credits+RPO/RTO, 0.50=numeric SLO only, 0.00=vague |
+
+  | D2  | Uptime math accuracy        | 0.15   | 1.00=both 99.9% and 99.99% with downtime minutes, 0.50=one tier, 0.00=absent
+  |
+
+  | D3  | Error budget coverage       | 0.15   | 1.00=error budget + burn rate defined, 0.50=partial, 0.00=absent |
+
+  | D4  | Penalty and credit clauses  | 0.15   | 1.00=tiered credits with calculation formula, 0.50=flat credit, 0.00=absent
+  |
+
+  | D5  | Standards citations         | 0.10   | 1.00=ITIL4+ISO20000+SRE cited, 0.50=one standard, 0.00=none |
+
+  | D6  | Escalation path depth       | 0.10   | 1.00=Tier1-3 with timelines, 0.50=partial, 0.00=absent |
+
+  | D7  | Completeness (all sections) | 0.15   | 1.00=all 5 body sections present, 0.50=3-4, 0.00=<3  |'
+actions: '| Score      | Action                   |
+
+  |------------|--------------------------|
+
+  | GOLDEN     | Auto-publish             |
+
+  | PUBLISH    | Manual approval required |
+
+  | REVIEW     | Peer review required     |
+
+  | REJECT     | Reject and fix required  |'
+bypass: '| conditions                          | approver       | audit trail              |
+
+  |------------------------------------|----------------|--------------------------|
+
+  | Critical production outage         | CTO            | Emergency bypass log     |
+
+  | Regulatory compliance override     | Legal team     | Compliance audit trail   |
+
+  | Temporary SLA exception            | SVP Operations | Exception approval log   |'

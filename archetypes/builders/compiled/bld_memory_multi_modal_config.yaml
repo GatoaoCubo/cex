@@ -1,0 +1,53 @@
+id: p10_lr_multi_modal_config_builder
+kind: learning_record
+pillar: P10
+version: 1.0.0
+created: 2026-04-07
+updated: 2026-04-07
+author: n04_knowledge
+observation: Multi-modal configs that fail most often use max resolution always (4K images = 2000+ tokens each, burns budget),
+  have no format validation (unsupported format → API error at runtime), or lack audio transcription fallback.
+pattern:
+- Resolution per use case — 768px classification, 1024px general, 2048px detail
+- Format validation — whitelist accepted formats, convert if needed
+- Transcription fallback — audio → Whisper → text when model lacks native audio
+- Token cost estimates — ~750 tokens per 1024px image, plan budget accordingly
+evidence: Initial pattern from KC analysis — no production log yet.
+confidence: 0.7
+outcome: PENDING
+domain: multi_modal_config
+tags:
+- multi-modal
+- image
+- audio
+- resolution
+- routing
+- token-cost
+tldr: Set resolution limits per use case. Validate formats. Transcription fallback for audio. Estimate token costs. quality:null.
+impact_score: 7.0
+decay_rate: 0.05
+agent_group: n04_knowledge
+keywords:
+- multi_modal
+- resolution
+- format
+- routing
+- preprocessing
+- token_cost
+memory_scope: project
+observation_types:
+- user
+- feedback
+- project
+- reference
+llm_function: INJECT
+quality: null
+title: Memory ISO - multi_modal_config
+density_score: 1.0
+summary: Multi-modal configs define how non-text inputs are processed in LLM pipelines. Primary failures are unlimited resolution
+  (burns tokens), no format validation (API errors), and no fallback chains.
+anti_pattern:
+- 'Max resolution always: 4K images burn token budget'
+- 'No format validation: unsupported format → runtime API error'
+- 'No audio fallback: silent failure when model can''t process audio natively'
+- 'Ignoring token costs: 10 images = 15K tokens, blows context budget'

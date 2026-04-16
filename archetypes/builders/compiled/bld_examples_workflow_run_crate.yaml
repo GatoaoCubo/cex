@@ -1,0 +1,52 @@
+kind: examples
+id: bld_examples_workflow_run_crate
+pillar: P07
+llm_function: GOVERN
+purpose: Golden and anti-examples of workflow_run_crate artifacts
+quality: null
+title: Examples Workflow Run Crate
+version: 1.0.0
+author: n04_wave7
+tags:
+- workflow_run_crate
+- builder
+- examples
+- RO-Crate
+- workflow-run
+- CreateAction
+- ORCID
+- Galaxy
+- provenance-graph
+tldr: Golden and anti-examples of workflow_run_crate artifacts
+domain: workflow_run_crate construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+golden_example: "{\n  \"@context\": [\n    \"https://www.researchobject.org/ro-crate/1.2/context\",\n    \"https://w3id.org/ro/terms/workflow-run\"\
+  \n  ],\n  \"@graph\": [\n    {\n      \"@type\": \"CreativeWork\",\n      \"@id\": \"ro-crate-metadata.json\",\n      \"\
+  about\": {\"@id\": \"./\"},\n      \"conformsTo\": [\n        {\"@id\": \"https://w3id.org/ro/crate/1.2\"},\n        {\"\
+  @id\": \"https://w3id.org/workflowhub/workflow-ro-crate/1.0\"}\n      ]\n    },\n    {\n      \"@type\": \"Dataset\",\n\
+  \      \"@id\": \"./\",\n      \"name\": \"RNA-seq Alignment Pipeline Run 20260414\",\n      \"datePublished\": \"2026-04-14\"\
+  ,\n      \"license\": {\"@id\": \"https://spdx.org/licenses/CC-BY-4.0\"}\n    },\n    {\n      \"@type\": [\"File\", \"\
+  SoftwareSourceCode\", \"ComputationalWorkflow\"],\n      \"@id\": \"rna-seq-alignment.ga\",\n      \"name\": \"RNA-seq Alignment\
+  \ Workflow\",\n      \"programmingLanguage\": {\"@id\": \"#galaxy\"},\n      \"url\": \"https://workflowhub.eu/workflows/123\"\
+  ,\n      \"version\": \"2.1\"\n    },\n    {\n      \"@type\": \"CreateAction\",\n      \"@id\": \"#run-20260414-001\",\n\
+  \      \"name\": \"RNA-seq alignment run 20260414-001\",\n      \"startTime\": \"2026-04-14T09:00:00Z\",\n      \"endTime\"\
+  : \"2026-04-14T11:32:00Z\",\n      \"instrument\": {\"@id\": \"rna-seq-alignment.ga\"},\n      \"object\": [{\"@id\": \"\
+  input/sample_reads.fastq.gz\"}],\n      \"result\": [{\"@id\": \"output/aligned.bam\"}],\n      \"agent\": {\"@id\": \"\
+  https://orcid.org/0000-0002-1825-0097\"}\n    },\n    {\n      \"@type\": \"Person\",\n      \"@id\": \"https://orcid.org/0000-0002-1825-0097\"\
+  ,\n      \"name\": \"Josiah Carberry\",\n      \"affiliation\": {\"@id\": \"#brown-university\"}\n    },\n    {\n      \"\
+  @type\": \"Dataset\",\n      \"@id\": \"input/sample_reads.fastq.gz\",\n      \"name\": \"Sample FASTQ reads\",\n      \"\
+  encodingFormat\": \"application/gzip\",\n      \"contentSize\": \"2048000000\",\n      \"sha256\": \"a1b2c3d4e5f6789012345678901234567890abcd\"\
+  ,\n      \"license\": {\"@id\": \"https://spdx.org/licenses/CC0-1.0\"}\n    }\n  ]\n}"
+anti_example_1_missing_createaction: "{\n  \"@context\": [\"https://www.researchobject.org/ro-crate/1.2/context\"],\n  \"\
+  @graph\": [\n    {\"@type\": \"Dataset\", \"@id\": \"./\", \"name\": \"My Workflow Run\"},\n    {\"@type\": \"File\", \"\
+  @id\": \"workflow.ga\"}\n  ]\n}\nWhy it fails: No CreateAction entity. The CreateAction is the provenance graph spine --\
+  \ it links the workflow (instrument) to inputs (object) and outputs (result) with the executing researcher (agent/ORCID).\
+  \ Without it, the crate cannot be used for reproducibility or provenance verification."
+anti_example_2_non_orcid_person_id: "{\n  \"@type\": \"Person\",\n  \"@id\": \"author\",\n  \"name\": \"John Smith\"\n}\n\
+  Why it fails: Person @id must be a full ORCID URL (https://orcid.org/XXXX-XXXX-XXXX-XXXX). Local IRI \"author\" is not resolvable,\
+  \ breaks FAIR Signposting, and prevents cross-crate author deduplication."
+anti_example_3_no_dataset_checksums: "{\n  \"@type\": \"Dataset\",\n  \"@id\": \"input/data.csv\",\n  \"name\": \"Input Data\"\
+  \n}\nWhy it fails: Missing sha256/md5 checksum. Without content hashes, input and output datasets cannot be verified for\
+  \ integrity, defeating the reproducibility purpose of Workflow Run Crate. RO-Crate 1.2 recommends sha256 for all file entities."

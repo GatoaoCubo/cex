@@ -1,16 +1,16 @@
-kind: learning_record
-id: p10_lr_compliance_checklist_builder
+kind: memory
+id: p10_mem_compliance_checklist_builder
 pillar: P10
 llm_function: INJECT
 purpose: Learned patterns and pitfalls for compliance_checklist construction
 quality: null
-title: Learning Record Compliance Checklist
+title: Memory Compliance Checklist
 version: 1.0.0
 author: wave1_builder_gen_v2
 tags:
 - compliance_checklist
 - builder
-- learning_record
+- memory
 tldr: Learned patterns and pitfalls for compliance_checklist construction
 domain: compliance_checklist construction
 created: '2026-04-14'

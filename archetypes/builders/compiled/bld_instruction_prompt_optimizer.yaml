@@ -22,17 +22,17 @@ phase_1_research:
 - Study optimization techniques from NLP literature (2020-2024)
 - Benchmark 5+ existing prompt compilation tools for performance metrics
 - Collect user feedback on current prompt governance workflows
-- Document schema requirements from SCHEMA.md for artifact compatibility
+- Document schema requirements from bld_schema_prompt_optimizer.md for artifact compatibility
 phase_2_compose:
-- Define input/output schema using SCHEMA.md specifications
-- Set up Python environment with transformers and langchain libraries
-- Implement core prompt parsing function with token counting
-- Develop optimization engine using beam search for variant generation
-- Integrate schema validation layer from OUTPUT_TEMPLATE.md
+- Define input/output schema using bld_schema_prompt_optimizer.md specifications
+- 'Identify prompt failure modes: ambiguity, redundancy, instruction drift'
+- 'Apply DSPy-style systematic optimization: define signature, generate candidates, select best'
+- 'Develop optimization passes: clarity, specificity, constraint alignment'
+- Integrate schema validation layer from bld_output_template_prompt_optimizer.md
 - Add governance rules engine for compliance checks
 - Implement feedback loop for iterative prompt refinement
-- 'Create CLI interface with command: `prompt_optimizer optimize --input`'
+- Score variants using cex_score.py before finalizing
 - Finalize artifact with versioning and metadata tagging
-phase_3_validate: '[ ] ✅ Test with 50+ sample prompts from P03 domain [ ] ✅ Verify output quality against human-optimized
-  benchmarks [ ] ✅ Confirm schema compliance with SCHEMA.md requirements [ ] ✅ Conduct user testing with 10+ domain experts
-  [ ] ✅ Benchmark performance against industry standards (latency, accuracy)'
+phase_3_validate: '[ ] Frontmatter complete and valid YAML [ ] Schema compliance verified against bld_schema_prompt_optimizer.md
+  [ ] At least 2 optimization passes documented [ ] Industry references cited (DSPy, OPRO, APE, or PromptWizard) [ ] Output
+  conforms to bld_output_template_prompt_optimizer.md structure'

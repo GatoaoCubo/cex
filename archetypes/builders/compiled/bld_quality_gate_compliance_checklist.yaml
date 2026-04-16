@@ -16,19 +16,60 @@ domain: compliance_checklist construction
 created: '2026-04-14'
 updated: '2026-04-14'
 density_score: 0.85
-definition: "| metric | threshold | operator | scope |  \n|---|---|---|---|  \n| compliance_coverage | 100% | >= | all audits\
-  \ |"
-hard_gates: "| ID | Check | Fail Condition |  \n|---|---|---|  \n| H01 | YAML frontmatter valid | invalid YAML syntax |  \n\
-  | H02 | ID matches pattern ^p11_cc_[a-z][a-z0-9_]+.md$ | invalid ID format |  \n| H03 | kind field matches 'compliance_checklist'\
-  \ | incorrect kind value |  \n| H04 | SOC2 controls documented | missing control descriptions |  \n| H05 | GDPR data subject\
-  \ rights implemented | incomplete DSAR process |  \n| H06 | HIPAA encryption policies enforced | unencrypted sensitive data\
-  \ |  \n| H07 | EU AI Act audit trails complete | missing audit logs for AI systems |"
-soft_scoring: "| Dim | Dimension | Weight | Scoring Guide |  \n|---|---|---|---|  \n| D1 | Data protection | 0.20 | 1.00 (full\
-  \ encryption) |  \n| D2 | Audit readiness | 0.15 | 1.00 (complete logs) |  \n| D3 | Documentation | 0.15 | 1.00 (all policies\
-  \ documented) |  \n| D4 | GDPR compliance | 0.15 | 1.00 (DSARs handled) |  \n| D5 | HIPAA adherence | 0.15 | 1.00 (controls\
-  \ met) |  \n| D6 | AI Act compliance | 0.10 | 1.00 (audit trails valid) |  \n| D7 | Third-party reviews | 0.10 | 1.00 (all\
-  \ vendors audited) |"
-actions: "| Score | Action |  \n|---|---|  \n| >=9.5 | GOLDEN |  \n| >=8.0 | PUBLISH |  \n| >=7.0 | REVIEW |  \n| <7.0 | REJECT\
-  \ |"
-bypass: "| conditions | approver | audit trail |  \n|---|---|---|  \n| legal exception | CTO | signed waiver |  \n| urgent\
-  \ regulatory change | CEO | emergency audit |"
+definition: '| metric | threshold | operator | scope |
+
+  |---|---|---|---|
+
+  | compliance_coverage | 100% | >= | all audits |'
+hard_gates: '| ID | Check | Fail Condition |
+
+  |---|---|---|
+
+  | H01 | YAML frontmatter valid | invalid YAML syntax |
+
+  | H02 | ID matches pattern ^p11_cc_[a-z][a-z0-9_]+.md$ | invalid ID format |
+
+  | H03 | kind field matches ''compliance_checklist'' | incorrect kind value |
+
+  | H04 | SOC2 controls documented | missing control descriptions |
+
+  | H05 | GDPR data subject rights implemented | incomplete DSAR process |
+
+  | H06 | HIPAA encryption policies enforced | unencrypted sensitive data |
+
+  | H07 | EU AI Act audit trails complete | missing audit logs for AI systems |'
+soft_scoring: '| Dim | Dimension | Weight | Scoring Guide |
+
+  |---|---|---|---|
+
+  | D1 | Data protection | 0.20 | 1.00 (full encryption) |
+
+  | D2 | Audit readiness | 0.15 | 1.00 (complete logs) |
+
+  | D3 | Documentation | 0.15 | 1.00 (all policies documented) |
+
+  | D4 | GDPR compliance | 0.15 | 1.00 (DSARs handled) |
+
+  | D5 | HIPAA adherence | 0.15 | 1.00 (controls met) |
+
+  | D6 | AI Act compliance | 0.10 | 1.00 (audit trails valid) |
+
+  | D7 | Third-party reviews | 0.10 | 1.00 (all vendors audited) |'
+actions: '| Score | Action |
+
+  |---|---|
+
+  | >=9.5 | GOLDEN |
+
+  | >=8.0 | PUBLISH |
+
+  | >=7.0 | REVIEW |
+
+  | <7.0 | REJECT |'
+bypass: '| conditions | approver | audit trail |
+
+  |---|---|---|
+
+  | legal exception | CTO | signed waiver |
+
+  | urgent regulatory change | CEO | emergency audit |'

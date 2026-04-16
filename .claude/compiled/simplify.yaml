@@ -1,0 +1,46 @@
+id: simplify
+kind: instruction
+pillar: P08
+description: 'Review and fix changed code for reuse, quality, efficiency. Usage: /simplify [path]'
+quality: null
+title: Simplify
+version: 1.0.0
+author: n03_builder
+tags:
+- instruction
+- command
+- audit
+- boris_merge
+tldr: Review changed code, apply reuse/quality/efficiency fixes via simplify skill.
+domain: CEX system
+created: '2026-04-15'
+updated: '2026-04-15'
+density_score: 0.9
+usage:
+- '`/simplify` — audit `git diff HEAD` (staged + unstaged)'
+- '`/simplify _tools/cex_foo.py` — audit a specific file or directory'
+- '`/simplify --since "1 hour ago"` — audit recent commits'
+three_lens_audit_from_skill:
+- 'Reuse: existing helper being bypassed? Replace ad-hoc with canonical.'
+- 'Quality: dead code, duplicate blocks, unnecessary nesting.'
+- 'Efficiency: O(n^2) over lists, redundant I/O, serialization churn.'
+invocation: 'When the user types `/simplify`, invoke the skill:
+
+
+  Skill(skill="simplify", args="$ARGUMENTS")'
+boundaries:
+- Scope stays inside the diff/path given.
+- No speculative abstractions (YAGNI).
+- No new comments unless the WHY is non-obvious.
+- Preserve public API without explicit user authorization.
+verification: 'After each fix:
+
+  1. Type-check if supported (`mypy`, `tsc`, `pyright`).
+
+  2. Run affected tests.
+
+  3. Report: `N fixes, M lines removed, 0 behavior changes`.'
+cross_runtime:
+- 'Claude Code: native skill + this command'
+- 'Codex/Gemini/Ollama: boot wrapper loads `.cex/skills/simplify.md` as context'
+output_format: 'Bulleted diff summary, one bullet per fix: `path:line -- what changed, why simpler`'

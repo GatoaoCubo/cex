@@ -1,0 +1,32 @@
+kind: examples
+id: bld_examples_content_filter
+pillar: P07
+llm_function: GOVERN
+purpose: Golden and anti-examples of content_filter artifacts
+quality: null
+title: Examples Content Filter
+version: 1.0.0
+author: wave1_builder_gen
+tags:
+- content_filter
+- builder
+- examples
+tldr: Golden and anti-examples of content_filter artifacts
+domain: content_filter construction
+created: '2026-04-13'
+updated: '2026-04-13'
+density_score: 0.85
+golden_example: "This ISO defines a content filter -- the moderation rules that gate output or input.\n---\nkind: content_filter\n\
+  name: example_filter\ndescription: Filters input/output content for prohibited patterns\nversion: 1.0\n---\nstages:\n  -\
+  \ name: input_sanitization\n    type: regex_replacement\n    parameters:\n      patterns: [\"<script>.?</script>\", \"\\\
+  $$.?\\$$\"]\n      replacement: \"[REDACTED]\"\n  - name: output_validation\n    type: keyword_filter\n    parameters:\n\
+  \      prohibited_keywords: [\"nsfw\", \"hate_speech\"]\n      action: drop"
+anti_example_1_missing_essential_parameters: "---\nkind: content_filter\nname: broken_filter\ndescription: Incomplete filter\
+  \ config\nversion: 0.1\n---\nstages:\n  - name: input_sanitization\n    type: regex_replacement\n    parameters:\n     \
+  \ patterns: [\"<script>.*?</script>\"]"
+why_it_fails: Content_filter should handle structured filtering, not broad safety constraints. Guardrail checks belong to
+  a different pipeline type and would cause configuration conflicts.
+anti_example_2_mixing_with_guardrail_checks: "---\nkind: content_filter\nname: mixed_filter\ndescription: Combines filtering\
+  \ with safety checks\nversion: 1.0\n---\nstages:\n  - name: input_sanitization\n    type: regex_replacement\n    parameters:\n\
+  \      patterns: [\"<script>.*?</script>\"]\n      replacement: \"[REDACTED]\"\n  - name: safety_check\n    type: guardrail\n\
+  \    parameters:\n      constraints: [\"no_harmful_content\", \"no_personal_data\"]"

@@ -14,6 +14,7 @@ tags:
 - leverage_map_v2
 - tooling
 - self_audit
+density_score: 0.96
 8f_pipeline: 'F1 CONSTRAIN: mission=LEVERAGE_MAP_V2, scope=_tools coverage/test/doctor/release surface, output=N05_operations/reports/n05_leverage_map_v2_verification.md
 
   F2 BECOME: N05 Operations loaded from agent card + n05 rules

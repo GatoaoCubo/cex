@@ -16,16 +16,33 @@ domain: white_label_config construction
 created: '2026-04-14'
 updated: '2026-04-14'
 density_score: 0.85
-production_tools: "| Tool | Purpose | When |  \n|------|---------|------|  \n| cex_compile.py | Compiles white-label config\
-  \ templates into deployable formats | During config deployment |  \n| cex_score.py | Scores config validity against compliance\
-  \ rules | Pre-deployment validation |  \n| cex_retriever.py | Fetches dynamic config data from external sources | When integrating\
-  \ real-time data |  \n| cex_doctor.py | Diagnoses config conflicts and suggests fixes | Post-deployment troubleshooting\
-  \ |  \n| cex_generator.py | Auto-generates config templates from schema definitions | Initial config setup |  \n| cex_deployer.py\
-  \ | Applies config changes to target environments | Final deployment stage |"
-validation_tools: "| Tool | Purpose | When |  \n|------|---------|------|  \n| validation_check.py | Validates config syntax\
-  \ and structure | Pre-deployment |  \n| consistency_validator.py | Ensures cross-environment config consistency | Multi-environment\
-  \ setups |  \n| config_linter.py | Enforces naming and formatting standards | Code review phases |"
+production_tools: '| Tool | Purpose | When |
+
+  |------|---------|------|
+
+  | cex_compile.py | Compile white_label_config artifact to YAML + register | After authoring |
+
+  | cex_score.py | Score artifact quality (5D + HARD gates) | After compile |
+
+  | cex_retriever.py | Find similar white-label config artifacts for reuse | During F3 INJECT |
+
+  | cex_doctor.py | Validate all ISOs in builder for structural health | Post-build audit |
+
+  | cex_wave_validator.py | Batch-validate full white-label-config-builder (39 ISOs) | CI gate |
+
+  | cex_hygiene.py | Enforce 8 hygiene rules (frontmatter, density, IDs) | Pre-commit |'
+validation_tools: '| Tool | Purpose | When |
+
+  |------|---------|------|
+
+  | cex_hooks.py | Pre-commit hook: block schema violations + ASCII errors | On git add |
+
+  | cex_sanitize.py | ASCII sanitize .py/.ps1 in builder scope | After code edits |
+
+  | cex_feedback.py | Track quality trends and archive low-score artifacts | After scoring |'
 external_references:
-- JSON Schema (for config structure validation)
-- Pydantic (for data model enforcement)
-- ConfigCat (for feature flag integration)
+- Stripe Connect (sub-account and platform fee model reference)
+- OAuth 2.0 RFC 6749 (reseller API key issuance)
+- JSON Schema (config structure validation)
+- SemVer (semantic versioning for config artifacts)
+- GDPR Article 28 (data processor configuration requirements)

@@ -1,0 +1,59 @@
+kind: schema
+id: bld_schema_experiment_tracker
+pillar: P06
+llm_function: CONSTRAIN
+purpose: Formal schema -- SINGLE SOURCE OF TRUTH for experiment_tracker
+quality: null
+title: Schema Experiment Tracker
+version: 1.0.0
+author: wave1_builder_gen
+tags:
+- experiment_tracker
+- builder
+- schema
+tldr: Formal schema -- SINGLE SOURCE OF TRUTH for experiment_tracker
+domain: experiment_tracker construction
+created: '2026-04-13'
+updated: '2026-04-13'
+density_score: 0.85
+frontmatter_fields: ''
+required: '| Field | Type | Required | Default | Notes |
+
+  | :---- | :---- | :---: | :---: | :--- |
+
+  | id | string | Y | N/A | Unique identifier |
+
+  | kind | string | Y | experiment_tracker | Schema type |
+
+  | pillar | string | Y | P07 | Pillar designation |
+
+  | title | string | Y | N/A | Experiment name |
+
+  | version | string | Y | 1.0.0 | Schema version |
+
+  | created | datetime | Y | N/A | Creation timestamp |
+
+  | updated | datetime | Y | N/A | Last modification |
+
+  | author | string | Y | N/A | Document owner |
+
+  | domain | string | Y | N/A | Functional area |
+
+  | quality | number\|null | Y | null | Peer-review score; null until scored (never self-assign) |
+
+  | tags | list | Y | [] | Metadata tags |
+
+  | tldr | string | Y | N/A | Executive summary |
+
+  | hypothesis | string | Y | N/A | Core assumption |
+
+  | metric_primary | string | Y | N/A | Main KPI |'
+recommended: '| Field | Type | Notes |
+
+  | :---- | :---- | :--- |
+
+  | control_group | string | Baseline group definition |
+
+  | duration | string | Planned time window |
+
+  | confidence_level | float | Statistical significance target |'

@@ -16,21 +16,67 @@ domain: oauth_app_config construction
 created: '2026-04-14'
 updated: '2026-04-14'
 density_score: 0.85
-definition: "| metric | threshold | operator | scope |  \n|---|---|---|---|  \n| schema_id | ^p09_oauth_[a-z][a-z0-9_]+.yaml$\
-  \ | matches | H02 |  \n| required_fields | 7 | >= | app config |"
-hard_gates: "| ID | Check | Fail Condition |  \n|---|---|---|  \n| H01 | YAML frontmatter valid | invalid YAML syntax |  \n\
-  | H02 | ID matches pattern ^p09_oauth_[a-z][a-z0-9_]+.yaml$ | invalid schema ID |  \n| H03 | kind field matches 'oauth_app_config'\
-  \ | incorrect kind value |  \n| H04 | client_id present | missing client_id |  \n| H05 | redirect_uris are valid URLs |\
-  \ invalid redirect URI format |  \n| H06 | scopes are non-empty | empty or missing scopes |  \n| H07 | token_lifetime <=\
-  \ 86400 | token lifetime exceeds 24h |  \n| H08 | refresh_token_policy is 'fixed' or 'rolling' | invalid refresh policy\
-  \ |"
-soft_scoring: "| Dim | Dimension | Weight | Scoring Guide |  \n|---|---|---|---|  \n| D01 | Scope completeness | 0.15 | 1.0\
-  \ if all required scopes present |  \n| D02 | Redirect validity | 0.15 | 1.0 if all URIs are HTTPS and registered |  \n\
-  | D03 | Token lifetime | 0.15 | 1.0 if <= 24h and aligned with policy |  \n| D04 | Refresh policy | 0.15 | 1.0 if 'rolling'\
-  \ or 'fixed' with clear rules |  \n| D05 | Security practices | 0.10 | 1.0 if PKCE enforced and client secrets rotated |\
-  \  \n| D06 | Documentation | 0.10 | 1.0 if app config includes usage examples |  \n| D07 | Compliance | 0.20 | 1.0 if aligns\
-  \ with CEX OAuth2 spec |"
-actions: "| Score | Action |  \n|---|---|  \n| GOLDEN | >=9.5 | Auto-approve and deploy |  \n| PUBLISH | >=8.0 | Deploy after\
-  \ review |  \n| REVIEW | >=7.0 | Require manual review |  \n| REJECT | <7.0 | Block deployment |"
-bypass: "| conditions | approver | audit trail |  \n|---|---|---|  \n| Security exception | CTO | \"Bypassed by [name] on\
-  \ [date] for [reason]\" |"
+definition: '| metric | threshold | operator | scope |
+
+  |---|---|---|---|
+
+  | schema_id | ^p09_oauth_[a-z][a-z0-9_]+.yaml$ | matches | H02 |
+
+  | required_fields | 7 | >= | app config |'
+hard_gates: '| ID | Check | Fail Condition |
+
+  |---|---|---|
+
+  | H01 | YAML frontmatter valid | invalid YAML syntax |
+
+  | H02 | ID matches pattern ^p09_oauth_[a-z][a-z0-9_]+.yaml$ | invalid schema ID |
+
+  | H03 | kind field matches ''oauth_app_config'' | incorrect kind value |
+
+  | H04 | client_id present | missing client_id |
+
+  | H05 | redirect_uris are valid URLs | invalid redirect URI format |
+
+  | H06 | scopes are non-empty | empty or missing scopes |
+
+  | H07 | access token_lifetime <= 3600 (OAuth BCP recommends 5-60 min) | token lifetime exceeds 1h |
+
+  | H08 | refresh_token_policy is ''rotating'' (OAuth 2.1 / BCP) | static refresh tokens not allowed |
+
+  | H09 | grant_types subset of {authorization_code, client_credentials, refresh_token} | implicit/ROPC forbidden by OAuth
+  2.1 |
+
+  | H10 | PKCE (S256) required for authorization_code flow | missing code_challenge_method |'
+soft_scoring: '| Dim | Dimension | Weight | Scoring Guide |
+
+  |---|---|---|---|
+
+  | D01 | Scope completeness | 0.15 | 1.0 if all required scopes present |
+
+  | D02 | Redirect validity | 0.15 | 1.0 if all URIs are HTTPS and registered |
+
+  | D03 | Token lifetime | 0.15 | 1.0 if <= 24h and aligned with policy |
+
+  | D04 | Refresh policy | 0.15 | 1.0 if ''rolling'' or ''fixed'' with clear rules |
+
+  | D05 | Security practices | 0.10 | 1.0 if PKCE enforced and client secrets rotated |
+
+  | D06 | Documentation | 0.10 | 1.0 if app config includes usage examples |
+
+  | D07 | Standards compliance | 0.20 | 1.0 if aligns with OAuth 2.1 + RFC 7636 PKCE + RFC 8252 |'
+actions: '| Score | Action |
+
+  |---|---|
+
+  | GOLDEN | >=9.5 | Auto-approve and deploy |
+
+  | PUBLISH | >=8.0 | Deploy after review |
+
+  | REVIEW | >=7.0 | Require manual review |
+
+  | REJECT | <7.0 | Block deployment |'
+bypass: '| conditions | approver | audit trail |
+
+  |---|---|---|
+
+  | Security exception | CTO | "Bypassed by [name] on [date] for [reason]" |'

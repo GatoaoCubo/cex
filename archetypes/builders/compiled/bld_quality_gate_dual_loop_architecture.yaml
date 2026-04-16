@@ -1,0 +1,83 @@
+kind: quality_gate
+id: p08_qg_dual_loop_architecture
+pillar: P11
+llm_function: GOVERN
+purpose: Quality gate with HARD and SOFT scoring for dual_loop_architecture
+quality: null
+title: Quality Gate Dual Loop Architecture
+version: 1.0.0
+author: wave1_builder_gen
+tags:
+- dual_loop_architecture
+- builder
+- quality_gate
+tldr: Quality gate with HARD and SOFT scoring for dual_loop_architecture
+domain: dual_loop_architecture construction
+created: '2026-04-13'
+updated: '2026-04-13'
+density_score: 0.85
+definition: 'This ISO applies to the dual loop pattern, coordinating an outer orchestrator with one or more inner worker loops.
+
+  | Metric | Threshold | Operator | Scope |
+
+  |---|---|---|---|
+
+  | Dual-loop architecture compliance | 100% | Equals | System-wide |'
+hard_gates: '| ID | Check | Fail Condition |
+
+  |---|---|---|
+
+  | H01 | YAML valid | Invalid YAML syntax |
+
+  | H02 | ID matches pattern | ID does not match `P08-XX-XXX` |
+
+  | H03 | Kind matches | Kind does not equal `dual_loop_architecture` |
+
+  | H04 | Outer/inner loop separation | No clear separation of concerns |
+
+  | H05 | Communication protocol | Missing secure inter-loop messaging |
+
+  | H06 | Error handling | No fallback in outer loop on inner failure |
+
+  | H07 | Scalability | Inner loop cannot scale independently |
+
+  | H08 | Security isolation | Shared resources between loops |'
+soft_scoring: '| Dim | Dimension | Weight | Scoring Guide |
+
+  |---|---|---|---|
+
+  | D01 | Architecture clarity | 0.15 | 1.0 = fully documented |
+
+  | D02 | Loop separation | 0.20 | 1.0 = strict isolation |
+
+  | D03 | Communication efficiency | 0.15 | 1.0 = low latency, high reliability |
+
+  | D04 | Error resilience | 0.15 | 1.0 = full redundancy |
+
+  | D05 | Scalability | 0.10 | 1.0 = linear scaling |
+
+  | D06 | Security | 0.10 | 1.0 = zero cross-loop vulnerabilities |
+
+  | D07 | Documentation | 0.10 | 1.0 = complete API/flow diagrams |
+
+  | D08 | Maintainability | 0.15 | 1.0 = modular, testable components |'
+actions: '| Score | Action |
+
+  |---|---|
+
+  | >=9.5 | GOLDEN: Auto-approve, deploy to production |
+
+  | >=8.0 | PUBLISH: Deploy to staging, notify team |
+
+  | >=7.0 | REVIEW: Manual review required |
+
+  | <7.0 | REJECT: Block deployment, fix required |'
+bypass: '| Conditions | Approver | Audit Trail |
+
+  |---|---|---|
+
+  | Legacy system migration | CTO | Change request + risk assessment |
+
+  | Urgent security fix | Security lead | Emergency ticket + post-mortem |
+
+  | Experimental feature | Lead architect | Prototype approval + test logs |'

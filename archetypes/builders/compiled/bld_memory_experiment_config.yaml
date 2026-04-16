@@ -49,6 +49,7 @@ observation_types:
 quality: null
 title: Memory Experiment Config
 density_score: 0.91
+llm_function: INJECT
 summary: 'Experiment configuration failures fall into two categories: validity failures (results are statistically meaningless
   due to methodology errors) and deployment failures (a winning variant ships while degrading an unmonitored metric). Pre-registration
   of metrics, guardrails, and statistical parameters addresses both categories.'

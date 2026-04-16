@@ -16,8 +16,11 @@ domain: healthcare_vertical construction
 created: '2026-04-14'
 updated: '2026-04-14'
 density_score: 0.85
-definition: "| metric | threshold | operator | scope |  \n|---|---|---|---|  \n| Healthcare vertical compliance | 100% | =\
-  \ | All healthcare-related content |"
+definition: '| metric | threshold | operator | scope |
+
+  |---|---|---|---|
+
+  | Healthcare vertical compliance | 100% | = | All healthcare-related content |'
 hard_gates: '| ID | Check | Fail Condition |
 
   |---|---|---|
@@ -43,12 +46,40 @@ hard_gates: '| ID | Check | Fail Condition |
   | H09 | Audit logging requirements documented per 45 CFR 164.312(b) | No audit trail requirements |
 
   | H10 | Role-based access control (RBAC) documented | No access control specification |'
-soft_scoring: "| Dim | Dimension | Weight | Scoring Guide |  \n|---|---|---|---|  \n| D01 | HIPAA compliance | 0.15 | 100%\
-  \ = 1.0, 50% = 0.5 |  \n| D02 | PHI handling | 0.15 | 100% = 1.0, 50% = 0.5 |  \n| D03 | HL7/FHIR adherence | 0.12 | 100%\
-  \ = 1.0, 75% = 0.75 |  \n| D04 | Use case coverage | 0.12 | 100% = 1.0, 75% = 0.75 |  \n| D05 | Data encryption | 0.10 |\
-  \ 100% = 1.0, 50% = 0.5 |  \n| D06 | Audit logging | 0.10 | 100% = 1.0, 50% = 0.5 |  \n| D07 | Access controls | 0.10 |\
-  \ 100% = 1.0, 50% = 0.5 |  \n| D08 | Documentation completeness | 0.16 | 100% = 1.0, 50% = 0.5 |"
-actions: "| Score | Action |  \n|---|---|  \n| GOLDEN | >=9.5 | Auto-approve for production |  \n| PUBLISH | >=8.0 | Manual\
-  \ review required |  \n| REVIEW | >=7.0 | Escalate to compliance team |  \n| REJECT | <7.0 | Block deployment |"
-bypass: "| conditions | approver | audit trail |  \n|---|---|---|  \n| Emergency fix with CTO approval | CTO | Documented\
-  \ in Jira |  \n| Regulatory change with legal sign-off | Legal team | Signed waiver |"
+soft_scoring: '| Dim | Dimension | Weight | Scoring Guide |
+
+  |---|---|---|---|
+
+  | D01 | HIPAA compliance | 0.15 | 100% = 1.0, 50% = 0.5 |
+
+  | D02 | PHI handling | 0.15 | 100% = 1.0, 50% = 0.5 |
+
+  | D03 | HL7/FHIR adherence | 0.12 | 100% = 1.0, 75% = 0.75 |
+
+  | D04 | Use case coverage | 0.12 | 100% = 1.0, 75% = 0.75 |
+
+  | D05 | Data encryption | 0.10 | 100% = 1.0, 50% = 0.5 |
+
+  | D06 | Audit logging | 0.10 | 100% = 1.0, 50% = 0.5 |
+
+  | D07 | Access controls | 0.10 | 100% = 1.0, 50% = 0.5 |
+
+  | D08 | Documentation completeness | 0.16 | 100% = 1.0, 50% = 0.5 |'
+actions: '| Score | Action |
+
+  |---|---|
+
+  | GOLDEN | >=9.5 | Auto-approve for production |
+
+  | PUBLISH | >=8.0 | Manual review required |
+
+  | REVIEW | >=7.0 | Escalate to compliance team |
+
+  | REJECT | <7.0 | Block deployment |'
+bypass: '| conditions | approver | audit trail |
+
+  |---|---|---|
+
+  | Emergency fix with CTO approval | CTO | Documented in Jira |
+
+  | Regulatory change with legal sign-off | Legal team | Signed waiver |'

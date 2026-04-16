@@ -1,0 +1,27 @@
+kind: examples
+id: bld_examples_quantization_config
+pillar: P07
+llm_function: GOVERN
+purpose: Golden and anti-examples of quantization_config artifacts
+quality: null
+title: Examples Quantization Config
+version: 1.0.0
+author: wave1_builder_gen
+tags:
+- quantization_config
+- builder
+- examples
+tldr: Golden and anti-examples of quantization_config artifacts
+domain: quantization_config construction
+created: '2026-04-13'
+updated: '2026-04-13'
+density_score: 0.85
+golden_example: '--- kind: quantization_config version: "1.2" --- method: "bitsandbytes" bits: 4 compute_dtype: "bfloat16"
+  bnb_4bit_quant_type: "nf4" bnb_4bit_use_double_quant: true bnb_4bit_compute_dtype: "bfloat16"'
+anti_example_1_including_context_compression_settings: '--- kind: quantization_config --- bits: 4 compression_config: method:
+  "token_pruning" reduction_ratio: 0.5 context_window_compression: true'
+why_it_fails: This example incorrectly includes `model_architecture` parameters such as `num_layers`, `hidden_size`, and `vocab_size`.
+  These parameters define the structural topology of the model and belong in a separate architecture configuration, not within
+  the quantization settings.
+anti_example_2_including_model_architecture_parameters: '--- kind: quantization_config --- bits: 8 num_layers: 32 hidden_size:
+  4096 vocab_size: 32000 attention_heads: 32'

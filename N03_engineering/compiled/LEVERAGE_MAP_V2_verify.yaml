@@ -17,6 +17,7 @@ tags:
 - 8f
 tldr: Verified _tools/cex_builder_linter.py is present and useful for structural builder checks, but it does not yet validate
   full 8F compliance or exact 13-ISO contracts.
+density_score: 0.97
 8f_trace: '| Step | Evidence |
 
   |------|----------|

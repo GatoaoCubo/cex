@@ -1,0 +1,18 @@
+kind: output_template
+id: bld_output_template_thinking_config
+pillar: P05
+llm_function: PRODUCE
+purpose: Template with vars for thinking_config production
+quality: null
+title: Output Template Thinking Config
+version: 1.0.0
+author: wave1_builder_gen
+tags:
+- thinking_config
+- builder
+- output_template
+tldr: Template with vars for thinking_config production
+domain: thinking_config construction
+created: '2026-04-13'
+updated: '2026-04-13'
+density_score: 0.85

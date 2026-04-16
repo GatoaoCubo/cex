@@ -16,14 +16,31 @@ domain: graph_rag_config construction
 created: '2026-04-14'
 updated: '2026-04-14'
 density_score: 0.85
-production_tools: "| Tool | Purpose | When |  \n|------|---------|------|  \n| cex_compile.py | Compiles graph_rag_config\
-  \ from YAML/JSON | During config build |  \n| cex_score.py | Scores config validity against graph metrics | Post-validation\
-  \ |  \n| cex_retriever.py | Fetches external graph data for config | During data integration |  \n| cex_doctor.py | Diagnoses\
-  \ config errors and suggests fixes | On config failure |"
-validation_tools: "| Tool | Purpose | When |  \n|------|---------|------|  \n| schema_checker.py | Validates config schema\
-  \ compliance | Pre-deployment |  \n| consistency_validator.py | Ensures graph node/edge consistency | Post-retrieval | \
-  \ \n| performance_tester.py | Benchmarks config execution speed | Pre-production |"
+production_tools: '| Tool | Purpose | When |
+
+  |------|---------|------|
+
+  | cex_compile.py | Compile graph_rag_config artifact to .yaml | After authoring |
+
+  | cex_score.py | Peer-review score via 5D rubric | After compile |
+
+  | cex_retriever.py | Find similar existing graph_rag_config artifacts | During F3 INJECT |
+
+  | cex_doctor.py | Validate builder ISO health | Pre-dispatch |
+
+  | cex_wave_validator.py | Validate all ISOs in builder directory | Post-build |'
+validation_tools: '| Tool | Purpose | When |
+
+  |------|---------|------|
+
+  | cex_hooks.py | Pre-commit quality gate enforcement | Before git commit |
+
+  | cex_sanitize.py | Check ASCII compliance in code files | Pre-commit |
+
+  | cex_hygiene.py | Artifact CRUD rules (frontmatter, naming) | Periodic cleanup |'
 external_references:
-- GraphRAG (https://github.com/microsoft/graphrag)
-- Neo4j (graph database framework)
-- LangChain (LLM integration toolkit)
+- Microsoft GraphRAG (github.com/microsoft/graphrag, Edge et al. 2024)
+- Neo4j LLM Graph Builder (community detection via Leiden algorithm)
+- LangChain GraphRAG integration (graph Q&A chain)
+- Graspologic (hierarchical community detection, used by MS GraphRAG)
+- LlamaIndex KnowledgeGraphIndex (triplet extraction + graph store)

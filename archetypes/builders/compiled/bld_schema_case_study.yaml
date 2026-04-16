@@ -5,40 +5,75 @@ llm_function: CONSTRAIN
 purpose: Formal schema -- SINGLE SOURCE OF TRUTH for case_study
 quality: null
 title: Schema Case Study
-version: 1.0.0
+version: 1.1.0
 author: wave1_builder_gen_v2
 tags:
 - case_study
 - builder
 - schema
-tldr: Formal schema -- SINGLE SOURCE OF TRUTH for case_study
+tldr: Formal schema -- SINGLE SOURCE OF TRUTH for case_study. Challenge-Solution-Outcome with pullquote and ROI.
 domain: case_study construction
 created: '2026-04-14'
 updated: '2026-04-14'
 density_score: 0.85
 frontmatter_fields: ''
-required: "| Field     | Type   | Required | Default | Notes |  \n|-----------|--------|----------|---------|-------|  \n\
-  | id        | string | yes      |         |       |  \n| kind      | string | yes      |         |       |  \n| pillar \
-  \   | string | yes      |         |       |  \n| title     | string | yes      |         |       |  \n| version   | string\
-  \ | yes      |         |       |  \n| created   | date   | yes      |         |       |  \n| updated   | date   | yes  \
-  \    |         |       |  \n| author    | string | yes      |         |       |  \n| domain    | string | yes      |   \
-  \      |       |  \n| quality   | null   | yes      | null    | Never self-score; peer review assigns |  \n| tags      |\
-  \ array  | yes      |         |       |  \n| tldr      | string | yes      |         |       |  \n| context   | string |\
-  \ yes      |         | Case background |  \n| outcome   | string | yes      |         | Key result |"
-recommended: "| Field              | Type   | Notes |  \n|--------------------|--------|-------|  \n| references         |\
-  \ array  |       |  \n| methodology        | string |       |  \n| impact_assessment  | string |       |"
-id_pattern: ^p05_cs_[a-z][a-z0-9_]+.md$
-body_structure:
-- Introduction
-- Context
-- Analysis
-- Outcomes
-- Lessons Learned
-- Stakeholders
+required: '| Field | Type | Required | Default | Notes |
+
+  |-------|------|----------|---------|-------|
+
+  | id | string | yes | | Must match ID Pattern |
+
+  | kind | string | yes | | Always "case_study" |
+
+  | pillar | string | yes | | P05 |
+
+  | title | string | yes | | "{Customer}: {Outcome Headline}" |
+
+  | version | string | yes | | Artifact version (e.g., "1.0.0") |
+
+  | created | string | yes | | ISO 8601 YYYY-MM-DD |
+
+  | updated | string | yes | | ISO 8601 YYYY-MM-DD |
+
+  | author | string | yes | | Content author username |
+
+  | domain | string | yes | | Customer industry |
+
+  | quality | null | yes | null | Never self-score; peer review assigns |
+
+  | tags | list | yes | | Industry, product, case_study |
+
+  | tldr | string | yes | | One-sentence result + champion attribution |
+
+  | context | string | yes | | Challenge summary (50 words max) |
+
+  | outcome | string | yes | | Primary KPI result (e.g., "85% cost reduction") |'
+recommended: '| Field | Type | Notes |
+
+  |-------|------|-------|
+
+  | champion_name | string | Named customer quote author |
+
+  | champion_title | string | Champion''s job title |
+
+  | roi_headline | string | Headline ROI metric for marketing reuse |
+
+  | customer_size | string | Company size (e.g., "500-1000 employees") |'
+id_pattern: ^p05_cs_[a-z][a-z0-9_]+\\.md$
+body_structure_challenge_solution_outcome:
+- Company Snapshot -- Industry, size, region, champion name/title
+- The Challenge -- Before-state, pain context, business stakes (150-200 words)
+- The Solution -- Named features, deployment timeline, integrations
+- The Outcome -- 3+ KPIs with before/after comparison table
+- ROI Call-Out -- Headline metric, timeframe, verified source (block element)
+- Customer Pullquote -- Direct quote, champion name + title (50-80 words)
+- Lessons Learned -- Transferable insight closing (50-100 words)
 constraints:
-- ID must match ^p05_cs_[a-z][a-z0-9_]+.md$
-- File size must not exceed 6144 bytes
-- All required fields must be present
-- Quality field must be peer-reviewed, not self-assigned
-- Domain-specific fields (context, outcome) must be non-empty
-- ASCII-only characters required
+- ID must match ^p05_cs_[a-z][a-z0-9_]+\\.md$ exactly.
+- File size must not exceed 6144 bytes.
+- All required fields must be present and non-empty.
+- quality field must be null (peer-reviewed only).
+- Pullquote must be attributed to a named person with title.
+- Outcome section must include at least 3 KPIs with before/after values.
+- No unverified metrics or fabricated statistics.
+- ASCII-only characters required in all fields.

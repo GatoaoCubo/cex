@@ -16,20 +16,48 @@ domain: case_study construction
 created: '2026-04-14'
 updated: '2026-04-14'
 density_score: 0.85
-component_inventory: "| ISO Name             | Role                          | Pillar | Status  |  \n|----------------------|-------------------------------|--------|---------|\
-  \  \n| bld_manifest         | Case study structure definition | P05    | Active  |  \n| bld_instruction      | User guidance\
-  \ specification   | P05    | Active  |  \n| bld_system_prompt    | LLM interaction framework     | P05    | Active  |  \n\
-  | bld_schema           | Data format validation        | P05    | Active  |  \n| bld_quality_gate     | Output verification\
-  \ logic     | P05    | Active  |  \n| bld_output_template  | Result formatting rules       | P05    | Active  |  \n| bld_examples\
-  \         | Sample case study repository  | P05    | Active  |  \n| bld_knowledge_card   | Domain-specific knowledge base|\
-  \ P05    | Active  |  \n| bld_architecture     | System design documentation   | P05    | Active  |  \n| bld_collaboration\
-  \    | Multi-stakeholder workflow    | P05    | Active  |  \n| bld_config           | Builder parameter management  | P05\
-  \    | Active  |  \n| bld_memory           | Session state persistence     | P05    | Active  |  \n| bld_tools         \
-  \   | External utility integration  | P05    | Active  |"
-dependencies: "| From              | To                  | Type         |  \n|-------------------|---------------------|--------------|\
-  \  \n| bld_config        | bld_instruction     | Configuration|  \n| bld_schema        | bld_quality_gate    | Validation\
-  \   |  \n| bld_knowledge_card| bld_examples        | Data source  |  \n| bld_memory        | bld_collaboration   | State\
-  \ sharing|  \n| bld_tools         | bld_output_template | External API |"
+component_inventory: '| ISO Name             | Role                          | Pillar | Status  |
+
+  |----------------------|-------------------------------|--------|---------|
+
+  | bld_manifest         | Case study structure definition | P05    | Active  |
+
+  | bld_instruction      | User guidance specification   | P05    | Active  |
+
+  | bld_system_prompt    | LLM interaction framework     | P05    | Active  |
+
+  | bld_schema           | Data format validation        | P05    | Active  |
+
+  | bld_quality_gate     | Output verification logic     | P05    | Active  |
+
+  | bld_output_template  | Result formatting rules       | P05    | Active  |
+
+  | bld_examples         | Sample case study repository  | P05    | Active  |
+
+  | bld_knowledge_card   | Domain-specific knowledge base| P05    | Active  |
+
+  | bld_architecture     | System design documentation   | P05    | Active  |
+
+  | bld_collaboration    | Multi-stakeholder workflow    | P05    | Active  |
+
+  | bld_config           | Builder parameter management  | P05    | Active  |
+
+  | bld_memory           | Session state persistence     | P05    | Active  |
+
+  | bld_tools            | External utility integration  | P05    | Active  |'
+dependencies: '| From              | To                  | Type         |
+
+  |-------------------|---------------------|--------------|
+
+  | bld_config        | bld_instruction     | Configuration|
+
+  | bld_schema        | bld_quality_gate    | Validation   |
+
+  | bld_knowledge_card| bld_examples        | Data source  |
+
+  | bld_memory        | bld_collaboration   | State sharing|
+
+  | bld_tools         | bld_output_template | External API |'
 architectural_position: case_study acts as a P05 CEX pillar enabler, orchestrating structured knowledge creation through ISO-driven
   modularity. It bridges domain expertise (via bld_knowledge_card) and technical execution (via bld_tools), ensuring alignment
   with CEX standards through bld_quality_gate and bld_schema.

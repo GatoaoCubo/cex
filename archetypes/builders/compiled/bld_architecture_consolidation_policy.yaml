@@ -2,35 +2,85 @@ kind: architecture
 id: bld_architecture_consolidation_policy
 pillar: P08
 llm_function: CONSTRAIN
-purpose: Component map of consolidation_policy -- inventory, dependencies
+purpose: Component map of the consolidation_policy-builder -- 13 ISOs, dependencies, position
 quality: null
-title: Architecture Consolidation Policy
-version: 1.0.0
-author: wave1_builder_gen_v2
+title: 'Architecture: consolidation_policy-builder'
+version: 2.0.0
+author: n06_commercial
 tags:
 - consolidation_policy
 - builder
 - architecture
-tldr: Component map of consolidation_policy -- inventory, dependencies
-domain: consolidation_policy construction
+tldr: 13-ISO builder for LLM agent memory consolidation policy artifacts; child of memory_architecture, sibling of procedural_memory
+domain: LLM agent memory consolidation
 created: '2026-04-14'
 updated: '2026-04-14'
-density_score: 0.85
-component_inventory: "| ISO Name              | Role                          | Pillar | Status  |  \n|-----------------------|-------------------------------|--------|---------|\
-  \  \n| bld_manifest          | Policy structure definition   | P10    | Active  |  \n| bld_instruction       | Directive\
-  \ formulation         | P10    | Active  |  \n| bld_system_prompt     | AI behavior guidance          | P10    | Active\
-  \  |  \n| bld_schema            | Data format specification     | P10    | Active  |  \n| bld_quality_gate      | Compliance\
-  \ validation         | P10    | Active  |  \n| bld_output_template   | Policy rendering blueprint    | P10    | Active \
-  \ |  \n| bld_examples          | Use case references           | P10    | Active  |  \n| bld_knowledge_card    | Contextual\
-  \ information        | P10    | Active  |  \n| bld_architecture      | Structural policy mapping     | P10    | Active \
-  \ |  \n| bld_collaboration     | Stakeholder alignment         | P10    | Active  |  \n| bld_config            | Configuration\
-  \ management      | P10    | Active  |  \n| bld_memory            | Historical policy tracking    | P10    | Active  | \
-  \ \n| bld_tools             | Policy execution utilities    | P10    | Active  |"
-dependencies: "| From              | To              | Type           |  \n|-------------------|-----------------|----------------|\
-  \  \n| bld_manifest      | bld_config      | Configuration  |  \n| bld_instruction   | bld_system_prompt | Input      |\
-  \  \n| bld_quality_gate  | bld_schema      | Validation     |  \n| bld_output_template | bld_examples  | Reference     \
-  \ |  \n| bld_tools         | Policy Engine   | External       |  \n| bld_memory        | bld_config      | Storage     \
-  \   |"
-architectural_position: consolidation_policy acts as the central orchestrator within the CEX P10 pillar, integrating builder
-  ISOs to standardize policy creation, enforce quality gates, and ensure alignment with architectural principles across execution
-  environments. It bridges domain-specific logic with system-wide governance, enabling consistent policy deployment and auditability.
+density_score: 0.9
+component_inventory: '| ISO File | Kind | Pillar | Role |
+
+  |----------|------|--------|------|
+
+  | bld_manifest_consolidation_policy.md | type_builder | P10 | Builder registry entry + meta |
+
+  | bld_instruction_consolidation_policy.md | instruction | P03 | 3-phase production process (F4 REASON) |
+
+  | bld_system_prompt_consolidation_policy.md | system_prompt | P03 | Builder persona (F2 BECOME) |
+
+  | bld_schema_consolidation_policy.md | schema | P06 | Frontmatter contract + body structure (F1 CONSTRAIN) |
+
+  | bld_quality_gate_consolidation_policy.md | quality_gate | P11 | HARD gates + SOFT scoring (F7 GOVERN) |
+
+  | bld_output_template_consolidation_policy.md | output_template | P05 | Annotated template with vars (F6 PRODUCE) |
+
+  | bld_examples_consolidation_policy.md | examples | P07 | Golden + anti-examples (F3 INJECT) |
+
+  | bld_knowledge_card_consolidation_policy.md | knowledge_card | P01 | Domain knowledge: MemGPT pipeline, eviction, compliance
+  (F3 INJECT) |
+
+  | bld_architecture_consolidation_policy.md | architecture | P08 | This file -- component map |
+
+  | bld_collaboration_consolidation_policy.md | collaboration_pattern | P12 | Multi-nucleus handoff protocol |
+
+  | bld_config_consolidation_policy.md | env_config | P09 | Builder runtime parameters |
+
+  | bld_memory_consolidation_policy.md | memory | P10 | Learned patterns + pitfalls |
+
+  | bld_tools_consolidation_policy.md | toolkit | P04 | Tools used during construction |'
+dependencies: '| Consumer ISO | Depends On | Dependency Type |
+
+  |---|---|---|
+
+  | bld_instruction | bld_schema | Must reference correct frontmatter fields |
+
+  | bld_system_prompt | bld_knowledge_card | Persona grounded in domain knowledge |
+
+  | bld_quality_gate | bld_schema | H02 ID pattern comes from schema |
+
+  | bld_output_template | bld_schema | Template vars match schema required fields |
+
+  | bld_examples | bld_quality_gate | Golden examples must pass all HARD gates |
+
+  | bld_memory | bld_knowledge_card | Patterns grounded in domain evidence |'
+architectural_position: 'consolidation_policy is a P10 (Memory) kind. It is a child artifact of memory_architecture: you need
+  a memory_architecture artifact first (which defines what layers exist), then consolidation_policy defines the lifecycle
+  rules for those layers. A complete agent memory system requires: memory_architecture (1) -> consolidation_policy (1) + procedural_memory
+  (n).'
+8f_stage_map: '| 8F Stage | Primary ISOs Used |
+
+  |---|---|
+
+  | F1 CONSTRAIN | bld_schema, bld_manifest |
+
+  | F2 BECOME | bld_system_prompt |
+
+  | F3 INJECT | bld_knowledge_card, bld_examples, bld_memory |
+
+  | F4 REASON | bld_instruction |
+
+  | F5 CALL | bld_tools, bld_config |
+
+  | F6 PRODUCE | bld_output_template |
+
+  | F7 GOVERN | bld_quality_gate |
+
+  | F8 COLLABORATE | bld_collaboration |'

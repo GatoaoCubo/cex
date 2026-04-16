@@ -1,16 +1,16 @@
-kind: learning_record
-id: p10_lr_agentic_rag_builder
+kind: memory
+id: p10_mem_agentic_rag_builder
 pillar: P10
 llm_function: INJECT
 purpose: Learned patterns and pitfalls for agentic_rag construction
 quality: null
-title: Learning Record Agentic Rag
+title: Memory Agentic Rag
 version: 1.0.0
 author: wave1_builder_gen_v2
 tags:
 - agentic_rag
 - builder
-- learning_record
+- memory
 tldr: Learned patterns and pitfalls for agentic_rag construction
 domain: agentic_rag construction
 created: '2026-04-14'

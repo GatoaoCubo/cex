@@ -5,46 +5,73 @@ llm_function: CONSTRAIN
 purpose: Formal schema -- SINGLE SOURCE OF TRUTH for changelog
 quality: null
 title: Schema Changelog
-version: 1.0.0
+version: 1.1.0
 author: wave1_builder_gen_v2
 tags:
 - changelog
 - builder
 - schema
-tldr: Formal schema -- SINGLE SOURCE OF TRUTH for changelog
+tldr: Formal schema -- SINGLE SOURCE OF TRUTH for changelog. Keep a Changelog format, SemVer 2.0.
 domain: changelog construction
 created: '2026-04-14'
 updated: '2026-04-14'
 density_score: 0.85
 frontmatter_fields: ''
-required: "| Field     | Type             | Required | Default | Notes                              |  \n|-----------|------------------|----------|---------|------------------------------------|\
-  \  \n| id        | string           | yes      |         | Must match ID Pattern              |  \n| kind      | string\
-  \           | yes      |         | Always \"changelog\"                 |  \n| pillar    | string           | yes      |\
-  \         | P01                                |  \n| title     | string           | yes      |         | Human-readable\
-  \ name                |  \n| version   | string           | yes      |         | Semantic version (e.g., v1.2.3)    |  \n\
-  | created   | datetime         | yes      |         | ISO 8601                           |  \n| updated   | datetime   \
-  \      | yes      |         | ISO 8601                           |  \n| author    | string           | yes      |      \
-  \   | Maintainer username                |  \n| domain    | string           | yes      |         | CEX-specific context\
-  \               |  \n| quality   | null             | yes      | null    | Never self-score; peer review assigns |  \n|\
-  \ tags      | list<string>     | yes      |         | Keywords (e.g., \"security\", \"feature\") |  \n| tldr      | string\
-  \           | yes      |         | Summary of changes (≤200 chars)    |  \n| changes   | list<string>     | yes      | \
-  \        | List of updates/fixes              |  \n| impact    | string           | yes      |         | User-facing effect\
-  \ (e.g., \"minor\") |"
-recommended: "| Field           | Type             | Notes                          |  \n|------------------|------------------|--------------------------------|\
-  \  \n| related_issues   | list<string>     | Linked issue IDs (e.g., \"CEX-123\") |  \n| reviewers        | list<string>\
-  \     | Peer reviewers                 |  \n| deprecated       | boolean          | Whether prior versions are deprecated\
-  \ |"
-id_pattern: ^p01_ch_[a-z][a-z0-9_]+.md$
-body_structure:
-- Overview – Summary of the changelog’s scope.
-- Changes – Detailed list of updates, features, or fixes.
-- Impact – Analysis of user or system implications.
-- Deprecations – Removed features or APIs.
-- Reviewers – Names and roles of peer reviewers.
+required: '| Field | Type | Required | Default | Notes |
+
+  |-------|------|----------|---------|-------|
+
+  | id | string | yes | | Must match ID Pattern |
+
+  | kind | string | yes | | Always "changelog" |
+
+  | pillar | string | yes | | P01 |
+
+  | title | string | yes | | Human-readable name (e.g., "MyApp Changelog") |
+
+  | version | string | yes | | SemVer X.Y.Z (no leading v) |
+
+  | release_date | string | yes | | ISO 8601 YYYY-MM-DD |
+
+  | created | string | yes | | ISO 8601 YYYY-MM-DD |
+
+  | updated | string | yes | | ISO 8601 YYYY-MM-DD |
+
+  | author | string | yes | | Maintainer username |
+
+  | domain | string | yes | | Product domain |
+
+  | quality | null | yes | null | Never self-score; peer review assigns |
+
+  | tags | list | yes | | Keywords (e.g., security, feature) |
+
+  | tldr | string | yes | | Summary of changes (<=200 chars, ASCII only) |'
+recommended: '| Field | Type | Notes |
+
+  |-------|------|-------|
+
+  | related_prs | list | PR/issue IDs linked to this release |
+
+  | reviewers | list | Peer reviewer usernames |
+
+  | breaking | boolean | true if MAJOR version bump |'
+id_pattern: ^p01_ch_[a-z][a-z0-9_]+\\.md$
+body_structure_keep_a_changelog:
+- '[Unreleased] -- In-progress changes not yet versioned'
+- '[X.Y.Z] - YYYY-MM-DD -- Version header (linked to diff)'
+- '### Added -- New capabilities (imperative: "Add X")'
+- '### Changed -- Modified behavior (imperative: "Change Y")'
+- '### Deprecated -- Features marked for removal with target version'
+- '### Removed -- Deleted features (BREAKING; imperative: "Remove Z")'
+- '### Fixed -- Bug fixes with issue ID (imperative: "Fix A")'
+- '### Security -- Vulnerability patches with CVE ID'
+- '### Migration -- Step-by-step upgrade guide (MAJOR versions only)'
 constraints:
-- All required fields must be present and valid.
+- All required fields must be present and valid YAML.
 - ID must match exact regex pattern.
-- Version must follow semantic versioning.
-- Quality must be assigned by peer review, not self-assigned.
-- TLDR must be ≤200 characters and ASCII-only.
-- Body sections must be ordered and non-empty.
+- version must be X.Y.Z (SemVer 2.0; no leading v, no pre-release suffix in production).
+- MAJOR version bump requires Migration section in body.
+- Breaking entries must be prefixed "BREAKING:" for scanner detection.
+- quality must remain null (assigned by peer review only).
+- tldr must be <= 200 characters and ASCII-only.
+- Each change entry uses imperative mood.

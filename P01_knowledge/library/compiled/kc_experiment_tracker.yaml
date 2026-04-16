@@ -1,0 +1,23 @@
+id: kc_experiment_tracker
+kind: knowledge_card
+title: Experiment Tracker
+version: 1.0.0
+quality: null
+pillar: P01
+density_score: 0.99
+purpose: A structured framework for documenting, executing, and analyzing experiments with configurable parameters and result
+  tracking.
+key_features:
+- 'Configuration Management: Store hypotheses, variables, and control parameters'
+- 'Result Logging: Automated tracking of metrics and observations'
+- 'Version Control: Link experiments to code versions and dependencies'
+- 'Analysis Tools: Built-in statistical evaluation and visualization'
+usage_example: "experiment:\n  id: \"exp-2023-04-15-01\"\n  title: \"Model Optimization Test\"\n  parameters:\n    learning_rate:\
+  \ 0.001\n    batch_size: 32\n  results:\n    accuracy: 0.92\n    loss: 0.078\n  metadata:\n    created_at: 2023-04-15T14:30:00Z\n\
+  \    researcher: \"john.doe\""
+best_practices:
+- Use semantic versioning for experiment IDs
+- Document all assumptions and constraints
+- Include baseline comparisons
+- Store raw data alongside aggregated results
+- Tag experiments with relevant metadata categories

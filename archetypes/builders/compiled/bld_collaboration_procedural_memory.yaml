@@ -2,29 +2,61 @@ kind: collaboration
 id: bld_collaboration_procedural_memory
 pillar: P12
 llm_function: COLLABORATE
-purpose: How procedural_memory-builder works in crews with other builders
+purpose: How procedural_memory-builder works in crews with other CEX builders
 quality: null
-title: Collaboration Procedural Memory
-version: 1.0.0
-author: wave1_builder_gen_v2
+title: 'Collaboration: procedural_memory-builder'
+version: 2.0.0
+author: n06_commercial
 tags:
 - procedural_memory
 - builder
 - collaboration
-tldr: How procedural_memory-builder works in crews with other builders
-domain: procedural_memory construction
+tldr: procedural_memory-builder consumes memory_architecture + consolidation_policy, produces skill library specs for agent-builder
+  and knowledge-card-builder
+domain: LLM agent procedural memory
 created: '2026-04-14'
 updated: '2026-04-14'
-density_score: 0.85
-crew_role: Manages procedural memory tasks, such as skill acquisition, habit formation, and motor pattern encoding. Coordinates
-  with other builders to ensure seamless integration of learned procedures into autonomous systems.
-receives_from: "| Builder          | What                          | Format      |  \n|------------------|-------------------------------|-------------|\
-  \  \n| knowledge_card_builder | Declarative steps for procedures | JSON        |  \n| entity_memory_builder  | Contextual\
-  \ entity references   | YAML        |  \n| task_scheduler_builder | Action sequences to memorize   | ProtocolBuf |  \n|\
-  \ sensor_data_processor  | Real-time feedback for refinement | CSV        |"
-produces_for: "| Builder          | What                          | Format      |  \n|------------------|-------------------------------|-------------|\
-  \  \n| action_executor_builder | Encoded procedural routines   | Binary      |  \n| habit_former_builder    | Reinforcement\
-  \ triggers        | JSON        |  \n| skill_assessor_builder  | Proficiency metrics           | XML         |  \n| feedback_loop_builder\
-  \   | Error correction protocols    | ProtocolBuf |"
-boundary: Does NOT handle declarative knowledge (knowledge_card), entity facts (entity_memory), or high-level decision-making
-  (planning_builder). Those are managed by respective builders.
+density_score: 0.9
+crew_role: Defines the skill storage layer within a complete agent memory system. Consumes memory_architecture (tier, procedural
+  backend) and consolidation_policy (skill TTL, versioning rules) to produce procedural_memory artifacts that specify the
+  skill library structure. Other builders reference procedural_memory for skill availability at runtime.
+receives_from: '| Builder | What | Format |
+
+  |---------|------|--------|
+
+  | memory-architecture-builder | Tier, procedural layer backend config | memory_architecture artifact |
+
+  | consolidation-policy-builder | Skill TTL, versioning policy, eviction rules | consolidation_policy artifact |
+
+  | knowledge-card-builder | Domain research on Voyager/Reflexion/ExpeL | knowledge_card artifact |'
+produces_for: '| Builder | What | Format |
+
+  |---------|------|--------|
+
+  | agent-builder | Skill availability per tier for system prompt | Skill list + tier summary |
+
+  | knowledge-card-builder | Lessons from skill library patterns | Feedback on domain |
+
+  | N06 commercial review | Enterprise skill ACL + versioning config | Tier matrix |'
+boundary: 'Does NOT produce:
+
+  - Memory layer definitions or backend specs (-> memory_architecture kind)
+
+  - Memory lifecycle rules or eviction policies (-> consolidation_policy kind)
+
+  - Fact/entity storage (-> entity_memory or knowledge_index kinds)
+
+  - Semantic memory (-> knowledge_card or knowledge_graph kinds)
+
+  - Agent routing or tool call configs (-> agent kind, P02)'
+dispatch_pattern: 'In a grid dispatch building a complete agent memory system:
+
+  1. N06 (commercial) builds `memory_architecture` first (tier, layer definitions)
+
+  2. N06 (commercial) builds `consolidation_policy` (lifecycle rules)
+
+  3. N04 (knowledge) builds `procedural_memory` for each skill domain
+
+  4. N01 (intelligence) or N06 validates tier matrices are consistent across all three
+
+  5. N07 consolidates: all artifacts form the complete P10 memory cluster spec'

@@ -37,10 +37,7 @@ observations: '| Observation | Source | Confidence |
   remaining content quality. | Zoom attendance data, ON24 drop-off analysis | Medium |
 
   | Webinars using the Pain-Agitate-Solution hook framework retain 2.1x more attendees through the first 10 minutes than those
-  using a feature-led or bio-led opener. | A/B test data from 8 paired webinar campaigns | Medium |
-
-
-  ---'
+  using a feature-led or bio-led opener. | A/B test data from 8 paired webinar campaigns | Medium |'
 patterns: '| Pattern | When Observed | Application |
 
   |---------|--------------|-------------|
@@ -58,10 +55,7 @@ patterns: '| Pattern | When Observed | Application |
   | Moderator must be briefed: "Read Seed Q1 at 5 seconds of silence, not 60" |
 
   | CTA repetition | Stating the CTA URL twice (once with the action, once as the final line) increases click-through by 18%
-  | Repeat URL in the last sentence of the closing section |
-
-
-  ---'
+  | Repeat URL in the last sentence of the closing section |'
 evidence: '| Claim | Evidence | Sample Size |
 
   |-------|---------|------------|
@@ -78,10 +72,7 @@ evidence: '| Claim | Evidence | Sample Size |
   | Dead air in Q&A (no seed questions) = 65% occurrence rate | Moderator survey + replay analysis, 47 sessions reviewed |
   47 sessions |
 
-  | Running over time = 40-60% audience drop at stated end | Zoom attendance graph data, 22 webinars | 22 webinars |
-
-
-  ---'
+  | Running over time = 40-60% audience drop at stated end | Zoom attendance graph data, 22 webinars | 22 webinars |'
 recommendations:
 - 'Hook timing is non-negotiable: The benefit statement must be in the first 2 sentences. Any script that opens with speaker
   bio, company history, or housekeeping instructions must be revised before quality review.'

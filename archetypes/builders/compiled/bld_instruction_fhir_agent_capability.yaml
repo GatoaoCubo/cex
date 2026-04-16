@@ -38,7 +38,7 @@ phase_2_compose:
 - Validate authorization_scopes are consistent with SMART on FHIR v2 specification.
 - Include FHIR CapabilityStatement reference (the FHIR server this agent is certified for).
 phase_3_validate:
-- '[ ] agent_id follows pattern p08_fhir_{{capability_slug}}.md'
+- '[ ] agent_id follows pattern `p08_fhir_[capability_slug].md`'
 - '[ ] fhir_version is "R5" (or explicitly R4B with migration note)'
 - '[ ] capability_category is from HL7 taxonomy: CDS/summarization/coding/documentation/scheduling'
 - '[ ] smart_scopes follow SMART on FHIR v2 format: `{{system}}/{{resource}}.{{action}}`'

@@ -29,5 +29,6 @@ scope:
 - Produces code examples, not API schema or integration narratives.
 - Focuses on language-specific idioms and conventions (e.g., Python’s async/await, Java’s try-with-resources).
 - Avoids platform-specific dependencies or framework assumptions.
-always_never: ALWAYS USE STANDARD LIBRARY CONSTRUCTS FOR CORE FUNCTIONALITY ALWAYS INCLUDE ERROR HANDLING AND INPUT VALIDATION
-  NEVER INCORPORATE THIRD-PARTY LIBRARIES OR FRAMEWORK-SPECIFIC CODE NEVER ASSUME PRIOR CONTEXT OR EXTERNAL STATE IN EXAMPLES
+always_never: ALWAYS prefer standard library constructs for core functionality ALWAYS include error handling and input validation
+  in every example NEVER hardcode credentials, API keys, or secrets in example code NEVER assume prior context or external
+  state without explicit documentation

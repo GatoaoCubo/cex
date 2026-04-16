@@ -44,15 +44,30 @@ industry_standards:
 - Gartner "SLA Best Practices for Cloud Providers" (2022)
 - IEEE 1220-2005 (Service Level Agreements for IT Services)
 - SLA Templates from AWS, Azure, and Salesforce
+uptime_math_must_include_in_every_enterprise_sla: "| Uptime % | Monthly Downtime | Annual Downtime | Typical Tier |  \n|----------|------------------|-----------------|--------------|\
+  \  \n| 99.0%    | 7h 18m           | 3d 15h          | Basic        |  \n| 99.5%    | 3h 39m           | 1d 19h        \
+  \  | Standard     |  \n| 99.9%    | 43m 50s          | 8h 45m          | Production   |  \n| 99.95%   | 21m 55s        \
+  \  | 4h 22m          | Business     |  \n| 99.99%   | 4m 22s           | 52m 34s         | Enterprise   |  \n| 99.999% \
+  \ | 26s              | 5m 15s          | Mission-critical |"
+error_budget_google_sre_model: "Error budget = 1 - SLO target. Example: 99.9% SLO = 0.1% error budget = 43.8 min/month.  \n\
+  - Burn rate: ratio of error budget consumed vs. time elapsed. Burn rate > 1 = on pace to exhaust budget.  \n- Alert threshold:\
+  \ page at 2% budget consumed in 1h (burn rate 14.4x), ticket at 5% in 6h (burn rate 6x).  \n- Budget exhaustion: triggers\
+  \ freeze on non-critical releases until budget resets."
+rpo_rto_definitions: "| Term | Definition | Typical Enterprise Values |  \n|------|-----------|---------------------------|\
+  \  \n| RTO (Recovery Time Objective) | Max acceptable downtime before service resumes | Tier 1: 15min, Tier 2: 4h, Tier\
+  \ 3: 24h |  \n| RPO (Recovery Point Objective) | Max acceptable data loss window | Tier 1: 0min (sync replication), Tier\
+  \ 2: 1h, Tier 3: 24h |"
 common_patterns:
-- Define uptime as a percentage with clear calculation windows (e.g., monthly).
-- Use tiered latency thresholds for different service tiers (e.g., gold/silver/bronze).
-- Specify support SLAs with escalation timelines (e.g., 15-minute response, 4-hour resolution).
-- Include service credits proportional to breach severity (e.g., 10% per hour of downtime).
-- Align SLA metrics with business KPIs (e.g., transaction success rate).
+- Define uptime as a percentage with monthly calculation windows (include actual downtime minutes, not just %).
+- 'Use tiered latency thresholds per service tier: gold (<50ms p99), silver (<150ms p99), bronze (<300ms p99).'
+- 'Specify support SLAs with escalation timelines (P0: 15min response/1h resolution, P1: 1h/4h, P2: 4h/24h).'
+- Include service credits proportional to breach severity (e.g., 10% monthly fee per hour over threshold).
+- Define error budget explicitly and link to release freeze policy.
+- Specify both RTO and RPO for each service tier.
+- Align SLA with SLI (Service Level Indicator) definitions for objective measurement.
 pitfalls:
-- Vague metrics (e.g., "high availability" without a defined percentage).
+- Vague metrics (e.g., "high availability" without a defined percentage and downtime calculation).
+- Missing error budget and burn-rate alerting (SLO without error budget is unenforceable at scale).
+- Omitting RPO/RTO, leaving disaster recovery obligations undefined.
 - Ignoring breach remedies, leading to unresolved disputes.
-- Overlooking regional differences in service expectations (e.g., latency in APAC vs. EU).
-- Not aligning SLA terms with service-level objectives (SLOs) or error budgets.
 - Overcomplicating SLAs with excessive clauses, reducing enforceability.

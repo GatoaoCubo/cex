@@ -4,6 +4,7 @@ pillar: P11
 title: 'Optimizer: {{TARGET_NAME}}'
 version: 1.0.0
 quality: null
+density_score: 1.0
 objective: '{{ONE_SENTENCE_ON_THE_METRIC_TO_IMPROVE}}'
 signals: '| Metric | Threshold | Action |
 

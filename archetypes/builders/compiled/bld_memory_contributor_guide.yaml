@@ -34,10 +34,7 @@ observations: '| Observation | Source | Confidence |
   the first 30 days after publication. | GitHub Discussions analysis, 47 OSS projects | Medium-High |
 
   | Contributor guides that reference a CI lint gate in the Coding Standards section reduce "fails linting" PR review cycles
-  by 55%. | Internal project analysis across 12 repos | Medium |
-
-
-  ---'
+  by 55%. | Internal project analysis across 12 repos | Medium |'
 patterns: '| Pattern | When Observed | Application |
 
   |---------|--------------|-------------|
@@ -55,10 +52,7 @@ patterns: '| Pattern | When Observed | Application |
   SLA in business days |
 
   | Conventional Commits adoption | Projects that mandate Conventional Commits see 30% fewer merge conflict issues in changelogs
-  and CHANGELOG.md generation | Include Conventional Commits by default, mark as optional if project uses custom format |
-
-
-  ---'
+  and CHANGELOG.md generation | Include Conventional Commits by default, mark as optional if project uses custom format |'
 evidence: '| Claim | Source | Data |
 
   |-------|--------|------|
@@ -73,10 +67,7 @@ evidence: '| Claim | Source | Data |
   core team" merge 40% faster than "discretionary" |
 
   | No code block = 3x more setup issues | GitHub Discussions, 47 repos | 31% of "getting started" issues in text-only guides
-  vs. 10% in code-block guides |
-
-
-  ---'
+  vs. 10% in code-block guides |'
 recommendations: '| Recommendation | Priority | Implementation |
 
   |---------------|----------|---------------|

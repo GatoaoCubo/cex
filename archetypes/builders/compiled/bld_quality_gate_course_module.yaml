@@ -6,35 +6,93 @@ purpose: Quality gate with HARD and SOFT scoring for course_module
 quality: null
 title: Quality Gate Course Module
 version: 1.0.0
-author: wave1_builder_gen_v2
+author: n03_builder
 tags:
 - course_module
 - builder
 - quality_gate
-tldr: Quality gate with HARD and SOFT scoring for course_module
+tldr: 'Artifact-level quality gate: validates course_module structure, Bloom-alignment, assessment coverage, and accessibility
+  (not learner runtime metrics).'
 domain: course_module construction
 created: '2026-04-14'
 updated: '2026-04-14'
-density_score: 0.85
-definition: "| metric               | threshold | operator | scope         |  \n|----------------------|-----------|----------|---------------|\
-  \  \n| Completion Rate      | 85%       | >=       | Course Module |  \n| Assessment Pass Rate | 75%       | >=       |\
-  \ Course Module |  \n| Engagement Time      | 15 min    | >=       | Per Lesson    |"
-hard_gates: "| ID   | Check                     | Fail Condition                              |  \n|------|---------------------------|---------------------------------------------|\
-  \  \n| H01  | YAML frontmatter valid    | Invalid or missing YAML frontmatter         |  \n| H02  | ID matches pattern \
-  \       | ID does not match ^p05_cm_[a-z][a-z0-9_]+.md$ |  \n| H03  | kind field matches 'course_module' | kind field not\
-  \ 'course_module'        |  \n| H04  | Learning objectives present | Missing or incomplete learning objectives |  \n| H05\
-  \  | Assessments included      | No formative or summative assessments       |  \n| H06  | Content length >= 10 min  | Content\
-  \ duration < 10 minutes               |  \n| H07  | Accessibility compliance  | Missing captions or screen reader support\
-  \   |"
-soft_scoring: "| Dim | Dimension               | Weight | Scoring Guide                          |  \n|-----|-------------------------|--------|----------------------------------------|\
-  \  \n| D01 | Learning Objectives Clarity | 0.15   | Clear, measurable, aligned to outcomes |  \n| D02 | Assessment Alignment\
-  \    | 0.15   | Assessments match learning objectives  |  \n| D03 | Content Quality         | 0.20   | Accurate, engaging,\
-  \ up-to-date         |  \n| D04 | Engagement Design       | 0.10   | Interactive elements, pacing           |  \n| D05 |\
-  \ Accessibility           | 0.10   | WCAG compliance, inclusive design      |  \n| D06 | Multimedia Use          | 0.10\
-  \   | Relevant videos, diagrams, audio       |  \n| D07 | Peer Review Feedback    | 0.10   | Incorporates reviewer suggestions\
-  \       |  \n| D08 | Feedback Mechanism      | 0.10   | Includes learner feedback channels     |"
-actions: "| Score     | Action                   |  \n|-----------|--------------------------|  \n| GOLDEN    | Approve for\
-  \ publication  |  \n| PUBLISH   | Publish with minor edits |  \n| REVIEW    | Request revisions        |  \n| REJECT   \
-  \ | Reject and rework        |"
-bypass: "| conditions                          | approver       | audit trail                   |  \n|-------------------------------------|----------------|-------------------------------|\
-  \  \n| Urgent release required by business | Senior Manager | Documented in change log      |"
+density_score: 0.87
+definition: '| metric | threshold | operator | scope |
+
+  |---|---|---|---|
+
+  | schema_fields_present | 100% | == | frontmatter |
+
+  | outcome_assessment_coverage | 100% | == | learning_outcomes |
+
+  | score_minimum | 8.0 | >= | artifact |'
+hard_gates: '| ID | Check | Fail Condition |
+
+  |---|---|---|
+
+  | H01 | YAML frontmatter valid | Missing or malformed YAML |
+
+  | H02 | ID matches `^p05_cm_[a-z][a-z0-9_]+\.md$` | ID does not conform |
+
+  | H03 | `kind` field == `course_module` | kind is wrong or missing |
+
+  | H04 | `learning_outcomes` non-empty AND every item starts with a Bloom verb | Verb absent or generic ("know", "learn",
+  "understand" unqualified) |
+
+  | H05 | `bloom_levels` subset of {Remember, Understand, Apply, Analyze, Evaluate, Create} | Invalid level label |
+
+  | H06 | `assessment_items` non-empty; every item has `outcome_ref` matching a learning_outcome id | Missing coverage |
+
+  | H07 | Every `assessment_items[i].bloom_level` == its referenced outcome''s bloom_level | Objective-assessment drift |
+
+  | H08 | `duration_minutes` present and > 0 | Missing or non-positive |
+
+  | H09 | `prerequisites[]` entries are course_module IDs (pattern `^p05_cm_`) or empty list | Free-text prerequisite |
+
+  | H10 | `quality: null` in frontmatter | Self-scored (must be null) |'
+soft_scoring: '| Dim | Dimension | Weight | Scoring Guide |
+
+  |---|---|---|---|
+
+  | D1 | Outcome measurability | 0.15 | 1.0: Bloom verb + measurable artifact; 0.5: verb only; 0.0: aspirational |
+
+  | D2 | Assessment alignment | 0.15 | 1.0: 1:1 outcome->assessment, same Bloom level; 0.5: coverage with drift; 0.0: divergent
+  |
+
+  | D3 | Cognitive load fit | 0.10 | 1.0: <= 4 new concepts per 10 min; 0.5: 5-6; 0.0: overload |
+
+  | D4 | Micro-learning chunking | 0.10 | 1.0: 5-10 min chunks with formative checks; 0.5: 15-20 min; 0.0: lecture-length
+  |
+
+  | D5 | Accessibility (WCAG 2.2) | 0.12 | 1.0: AA confirmed + captions + alt-text; 0.5: partial; 0.0: unaddressed |
+
+  | D6 | Kirkpatrick measurement | 0.10 | 1.0: L1-L2 + L3/L4 plan; 0.5: L1-L2 only; 0.0: no evaluation plan |
+
+  | D7 | Interoperability | 0.08 | 1.0: SCORM 2004 or xAPI emission; 0.5: declares but no wrapper; 0.0: platform-locked |
+
+  | D8 | Prerequisite rigor | 0.08 | 1.0: module IDs + rationale; 0.5: IDs only; 0.0: free-text |
+
+  | D9 | Content diversity | 0.07 | 1.0: >= 3 formats (text+video+interactive); 0.5: 2 formats; 0.0: single format |
+
+  | D10 | Equity & inclusion | 0.05 | 1.0: diverse examples + inclusive language; 0.0: exclusionary framing |
+
+
+  Weights sum = 1.00.'
+actions: '| Score | Action |
+
+  |---|---|
+
+  | >= 9.5 | GOLDEN: approve for publication |
+
+  | >= 8.0 | PUBLISH: ship to LMS |
+
+  | >= 7.0 | REVIEW: return to instructional designer |
+
+  | < 7.0 | REJECT: rebuild -- outcome/assessment misalignment |'
+bypass: '| condition | approver | audit trail |
+
+  |---|---|---|
+
+  | Compliance-required content with fixed outline | Chief Learning Officer | Decision record required |
+
+  | Legacy module migration (SCORM 1.2 import) | Head of Learning Engineering | Migration plan attached |'

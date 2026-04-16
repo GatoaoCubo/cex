@@ -1,0 +1,74 @@
+kind: output_template
+id: bld_output_template_model_registry
+pillar: P05
+llm_function: PRODUCE
+purpose: Template with vars for model_registry production
+quality: null
+title: Output Template Model Registry
+version: 1.0.0
+author: wave1_builder_gen
+tags:
+- model_registry
+- builder
+- output_template
+tldr: Template with vars for model_registry production
+domain: model_registry construction
+created: '2026-04-13'
+updated: '2026-04-13'
+density_score: 0.85
+model_metadata: '| Field | Value |
+
+  | :--- | :--- |
+
+  | base_model | {{parent model: e.g., meta-llama/Llama-3-8B}} |
+
+  | training_data | {{dataset name + URI: e.g., HuggingFace datasets/dolly-15k}} |
+
+  | training_pipeline | {{pipeline name + git_sha: e.g., pipeline-nlp-v4 @ abc1234}} |
+
+  | compute_tier | {{GPU hours / instance type: e.g., 4x A100 80GB, 12h}} |
+
+  | parameter_count | {{e.g., 8B, 70B, 405B}} |'
+performance_metrics: '| Metric | Value | Benchmark | Source |
+
+  | :--- | :--- | :--- | :--- |
+
+  | {{e.g., F1}} | {{e.g., 0.923}} | {{e.g., SQuAD 2.0}} | {{e.g., eval run 2024-01-15}} |
+
+  | {{e.g., latency p50}} | {{e.g., 42ms}} | {{e.g., internal load test}} | {{e.g., N05 eval report}} |'
+artifact_uris: '| Type | URI |
+
+  | :--- | :--- |
+
+  | weights | {{e.g., s3://models/llama3-8b/v1.0.0/weights.safetensors}} |
+
+  | config | {{e.g., s3://models/llama3-8b/v1.0.0/config.json}} |
+
+  | tokenizer | {{e.g., s3://models/llama3-8b/v1.0.0/tokenizer.model}} |'
+lineage: '| Field | Value |
+
+  | :--- | :--- |
+
+  | base_model | {{e.g., meta-llama/Llama-3-8B @ sha256:abc...}} |
+
+  | parent_version | {{e.g., p10_mr_llama3_8b_v0_9_0 -- or "none" for first version}} |
+
+  | dataset_hash | {{e.g., sha256:def456...}} |
+
+  | git_sha | {{training repo commit: e.g., abc1234}} |'
+deployment_information: '| Field | Value |
+
+  | :--- | :--- |
+
+  | serving_endpoint | {{e.g., https://api.internal/models/llama3-8b/v1 -- or N/A}} |
+
+  | container_image | {{e.g., registry.internal/llama3-8b:v1.0.0 -- or N/A}} |
+
+  | inference_config | {{e.g., max_tokens=2048, temperature=0.7, quantization=int8}} |'
+lifecycle_history: '| Date | Stage | Approver | Notes |
+
+  | :--- | :--- | :--- | :--- |
+
+  | {{YYYY-MM-DD}} | Experimental | {{nucleus or person}} | {{e.g., initial registration}} |
+
+  | {{YYYY-MM-DD}} | Staging | {{e.g., N05 Operations}} | {{e.g., passed eval gate H09-H14}} |'

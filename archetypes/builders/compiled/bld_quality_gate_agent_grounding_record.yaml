@@ -29,10 +29,7 @@ scoring_overview: '| Layer       | Weight | Method                              
   | Target      | --     | >= 9.0 overall for production-grade grounding record     |
 
 
-  A record that fails ANY hard gate receives a score of 0.0 regardless of rubric or semantic scores.
-
-
-  ---'
+  A record that fails ANY hard gate receives a score of 0.0 regardless of rubric or semantic scores.'
 hard_gates_h01_h08: 'ALL hard gates must pass. One FAIL = record is invalid = do not publish.
 
 
@@ -63,10 +60,7 @@ hard_gates_h01_h08: 'ALL hard gates must pass. One FAIL = record is invalid = do
   timestamp; epoch integers are not accepted  |
 
   | H08  | model.id present              | Non-empty string identifying the model                                 | Retrieve
-  from inference session metadata             |
-
-
-  ---'
+  from inference session metadata             |'
 hard_gate_failure_reference: '| Gate | Most Common Cause                             | Prevention                                                   |
 
   |------|-----------------------------------------------|--------------------------------------------------------------|
@@ -85,10 +79,7 @@ hard_gate_failure_reference: '| Gate | Most Common Cause                        
 
   | H07  | Timezone missing from timestamp               | Always use UTC (Z suffix) or explicit offset                 |
 
-  | H08  | Model ID not captured from provider response  | Log model ID from every API response header or body          |
-
-
-  ---'
+  | H08  | Model ID not captured from provider response  | Log model ID from every API response header or body          |'
 soft_scoring_dimensions_d1_d5: '| Dim | Name                    | Weight | Scoring Criteria                                                              |
 
   |-----|-------------------------|--------|-------------------------------------------------------------------------------|
@@ -162,10 +153,7 @@ d5_downstream_tracking_rubric: '| Score | Criteria                              
 
   | 6     | downstream_use set; grounding_coverage_pct is 0.0 (conservative but honest)                   |
 
-  | 0-3   | downstream_use missing or grounding_coverage_pct defaulted to 1.0 without verification        |
-
-
-  ---'
+  | 0-3   | downstream_use missing or grounding_coverage_pct defaulted to 1.0 without verification        |'
 score_interpretation: '| Score Range | Interpretation                       | Action                                     |
 
   |-------------|--------------------------------------|--------------------------------------------|
@@ -176,19 +164,14 @@ score_interpretation: '| Score Range | Interpretation                       | Ac
 
   | 7.0 - 7.9   | Below standard; significant gaps     | Do not publish; return to F6 for revision  |
 
-  | < 7.0       | Compliance failure                   | Reject; investigate data capture pipeline  |
-
-
-  ---'
+  | < 7.0       | Compliance failure                   | Reject; investigate data capture pipeline  |'
 scoring_commands: '# Score an artifact
 
   python _tools/cex_score.py --apply p10_gr_example.md
 
-
   # Validate schema fields before scoring
 
   python _tools/cex_compile.py p10_gr_example.md
-
 
   # Check all P10 grounding records
 

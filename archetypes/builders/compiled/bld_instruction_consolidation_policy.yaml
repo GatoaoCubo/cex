@@ -4,35 +4,42 @@ pillar: P03
 llm_function: REASON
 purpose: Step-by-step production process for consolidation_policy
 quality: null
-title: Instruction Consolidation Policy
-version: 1.0.0
-author: wave1_builder_gen_v2
+title: 'Instruction: consolidation_policy-builder'
+version: 2.0.0
+author: n06_commercial
 tags:
 - consolidation_policy
 - builder
 - instruction
-tldr: Step-by-step production process for consolidation_policy
-domain: consolidation_policy construction
+tldr: '8F production process for LLM agent memory consolidation policy: load schema, define promotion rules, eviction strategy,
+  importance scoring, tier matrix, compliance'
+domain: LLM agent memory consolidation
 created: '2026-04-14'
 updated: '2026-04-14'
-density_score: 0.85
-phase_1_research:
-- Analyze current memory allocation patterns across systems.
-- Identify stakeholders and their memory usage priorities.
-- Review existing consolidation policies for conflicts or gaps.
-- Benchmark memory utilization thresholds for critical workloads.
-- Evaluate hardware/software constraints affecting consolidation.
-- Document findings into a policy requirements matrix.
-phase_2_compose:
-- Set up environment with SCHEMA.md and OUTPUT_TEMPLATE.md.
-- 'Define policy scope: memory pools, lifecycle stages, and triggers.'
-- Map schema fields to policy parameters (e.g., `max_memory_usage`, `eviction_priority`).
-- Draft policy rules using template syntax for memory reclamation.
-- Align governance clauses with P10 Pillar compliance standards.
-- Specify consolidation thresholds for underutilized memory segments.
-- Embed audit trails for policy enforcement and exceptions.
-- Validate template variables against schema validation rules.
-- Finalize artifact with versioning and change control metadata.
-phase_3_validate: '[ ] [ ] Verify schema compliance using `validate_policy.py` script. [ ] [ ] Conduct stakeholder review
-  for alignment with P10 governance. [ ] [ ] Simulate policy execution against memory stress test scenarios. [ ] [ ] Audit
-  for adherence to memory lifecycle governance rules. [ ] [ ] Approve artifact with signed-off validation checklist.'
+density_score: 0.9
+phase_1_research: "1. Identify the parent memory_architecture artifact (which layers are active, what tier).\n2. Determine\
+  \ which memory transitions need consolidation rules:\n   - Does the agent have episodic memory? If yes, define working ->\
+  \ episodic promotion.\n   - Does the agent have semantic memory? If yes, define episodic -> semantic promotion.\n3. Map\
+  \ the target commercial tier (free/pro/enterprise) against the tier matrix\n   in bld_knowledge_card_consolidation_policy.md.\n\
+  4. Review reference pipelines: MemGPT/Letta consolidation pipeline (Packer 2023),\n   mem0 selective extraction, Zep deduplication/merge.\n\
+  5. Identify compliance requirements: GDPR Art. 17, HIPAA, data residency constraints.\n6. Check bld_schema_consolidation_policy.md\
+  \ for required frontmatter and body structure."
+phase_2_compose: "1. Write frontmatter per bld_schema_consolidation_policy.md (all required fields,\n   quality: null, consolidation_async:\
+  \ true).\n2. Write Overview: agent type, tier, consolidation strategy summary.\n3. Write Promotion Rules table:\n   - Columns:\
+  \ Trigger | Source Layer | Target Layer | Condition | Action\n   - Row per active transition (working->episodic on session\
+  \ end, etc.)\n4. Write Eviction Rules table:\n   - Columns: Layer | Strategy | Trigger | Action\n   - Row per active layer\
+  \ with concrete trigger (TTL, importance floor, LRU budget)\n5. Write Importance Scoring section: formula, model reference,\
+  \ or scoring rubric.\n6. Write Consolidation Job section: async trigger, schedule, timeout, failure handling.\n7. Write\
+  \ Commercial Tier Matrix: FREE/PRO/ENTERPRISE capability comparison.\n8. Write Compliance Config (required for enterprise):\
+  \ retention_days, data_residency,\n   gdpr_erasure procedure, audit_trail config."
+phase_3_validate:
+- '[ ] Schema compliance: all required frontmatter fields present, ID matches pattern.'
+- '[ ] Domain accuracy: content is agent memory consolidation, not OS/GC memory.'
+- '[ ] consolidation_async: true in frontmatter.'
+- '[ ] Promotion Rules table: at least one row for active tier.'
+- '[ ] Eviction Rules table: at least one row per active layer.'
+- '[ ] Tier matrix present: FREE/PRO/ENTERPRISE differentiation explicit.'
+- '[ ] Compliance section present if tier=enterprise.'
+- '[ ] No OS memory terminology: GC, slab, heap, TLB, fragmentation, compaction.'
+- '[ ] quality: null in frontmatter (never self-score).'
+- '[ ] No Unicode characters (ASCII only per ascii-code-rule.md).'

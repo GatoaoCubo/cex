@@ -16,3 +16,5 @@
 [22:00:06] Wave W7 result=COMPLETE
 [22:00:14] Phase A complete. Moving to Phase B (flywheel).
 [22:00:14] Phase B cycle 1 mode=auto
+[22:00:34] Phase B cycle 1 done. Sleeping 180 s.
+[22:03:34] Phase B cycle 2 mode=evolve

@@ -1,31 +1,46 @@
-kind: learning_record
-id: p10_lr_consolidation_policy_builder
+kind: memory
+id: p10_mem_consolidation_policy_builder
 pillar: P10
 llm_function: INJECT
 purpose: Learned patterns and pitfalls for consolidation_policy construction
 quality: null
-title: Learning Record Consolidation Policy
-version: 1.0.0
-author: wave1_builder_gen_v2
+title: 'Memory: consolidation_policy-builder patterns'
+version: 2.0.0
+author: n06_commercial
 tags:
 - consolidation_policy
 - builder
-- learning_record
-tldr: Learned patterns and pitfalls for consolidation_policy construction
-domain: consolidation_policy construction
+- memory
+tldr: 'Key lessons: domain is LLM agent memory lifecycle (not OS GC), always async, consolidation_async: true required, enterprise
+  needs compliance section'
+domain: LLM agent memory consolidation
 created: '2026-04-14'
 updated: '2026-04-14'
-density_score: 0.85
-observation: Common issues include conflicting retention rules across policies and failure to align with system resource constraints,
-  leading to memory leaks or excessive garbage collection overhead.
-pattern: Effective policies use explicit, time-bound retention rules and prioritize release triggers (e.g., task completion)
-  over indefinite holding. Modular policies that isolate lifecycle stages (e.g., creation, usage, discard) improve clarity
-  and reuse.
-evidence: Reviewed artifacts showed 70% fewer conflicts when policies included explicit release conditions and avoided overlapping
-  scopes.
-recommendations:
-- Define retention periods with concrete time thresholds (e.g., "release after 30 minutes of inactivity").
-- Avoid implicit dependencies on external systems; use self-contained policy logic.
-- Validate policies against system resource limits during design.
-- Use versioned policy templates to ensure consistency across artifacts.
-- Include audit hooks for tracking policy compliance and memory usage trends.
+density_score: 0.9
+observation: 'The most common defect in consolidation_policy artifacts is domain confusion: generators default to OS/GC memory
+  management (garbage collection, slab allocation, heap compaction, TLB shootdown) instead of LLM agent memory lifecycle (working->episodic->semantic
+  promotion, importance scoring, sleep-time consolidation). Every ISO must be checked for GC terminology. A second common
+  defect is missing consolidation_async: true -- synchronous consolidation blocks agent response time. This is always a defect
+  regardless of tier.'
+pattern: "High-quality consolidation_policy artifacts share four traits:\n1. Clear promotion rules: which layers are active,\
+  \ what triggers promotion, what condition.\n2. Eviction strategy per layer with concrete triggers (not just \"when memory\
+  \ is full\").\n3. Importance scoring: formula or model reference that quantifies memory value.\n4. Commercial tier matrix:\
+  \ FREE (no consolidation), PRO (TTL + importance), ENTERPRISE\n   (full compliance + audit trail + data residency)."
+evidence: 'Wave 3 generation (qwen3:14b) produced OS-focused ISOs for consolidation_policy:
+
+  - knowledge_card cited Java G1GC, POSIX memory management, Linux slab allocation
+
+  - system_prompt described heap fragmentation control and GC hooks
+
+  - quality_gate tested memory leak rate, deallocation latency, heap fragmentation ratio
+
+  - schema required `consolidation_criteria: array` (generic policy, not memory lifecycle)
+
+
+  None of these are relevant to LLM agent memory consolidation.'
+recommendations: "- On every read of an existing consolidation_policy ISO, grep for: GC, garbage, slab,\n  heap, fragmentation,\
+  \ compaction, TLB, deallocation, malloc, free(). Any match = domain\n  contamination.\n- The parent memory_architecture\
+  \ artifact defines which layers exist; consolidation_policy\n  defines the lifecycle rules for those layers. Always read\
+  \ the parent first.\n- Free tier: consolidation_policy is trivially empty (no persistent memory to consolidate).\n  Document\
+  \ this explicitly rather than leaving empty sections.\n- Enterprise compliance is non-trivial: GDPR Art. 17 hard-delete\
+  \ must be verifiable.\n  Never use soft-delete alone for enterprise compliance artifacts."

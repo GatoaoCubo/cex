@@ -1,0 +1,41 @@
+id: kc_rbac_policy
+kind: knowledge_card
+title: RBAC Policy for Multi-Tenant Isolation
+version: 1.0.0
+quality: null
+pillar: P01
+density_score: 0.97
+key_principles: "1. Principle of Least Privilege  \n   Users are granted only the permissions necessary to perform their role-specific\
+  \ tasks.\n\n2. Tenant Isolation  \n   Each tenant's resources are completely isolated from other tenants, with no cross-tenant\
+  \ access by default.\n\n3. Role Separation  \n   Roles are strictly separated to prevent conflicts of interest and ensure\
+  \ accountability."
+role_definitions: '| Role              | Permissions                                                                 | Description                                  |
+
+  |-------------------|------------------------------------------------------------------------------|----------------------------------------------|
+
+  | Tenant Admin      | Full access to tenant resources                                            | Manages tenant configuration
+  and users        |
+
+  | Developer         | Read/write access to application code                                       | Deploys and maintains
+  tenant-specific code    |
+
+  | Viewer            | Read-only access to tenant data                                            | Monitors tenant operations                   |
+
+  | Auditor           | Read access to audit logs and compliance reports                            | Reviews security and
+  compliance metrics      |'
+enforcement_mechanisms:
+- 'Identity and Access Management (IAM): Centralized authentication and authorization system'
+- 'API Gateways: Enforce access control at the API level'
+- 'Database Row-Level Security: Isolate tenant data at the database level'
+- 'Audit Logging: Track all access and modification activities'
+security_considerations:
+- Regularly review and update role permissions
+- Implement multi-factor authentication for sensitive roles
+- Monitor for anomalous access patterns
+- Maintain detailed audit trails for compliance
+example_scenarios: "1. Tenant Admin Actions:\n   - Create/destroy tenant instances\n   - Assign roles to users\n   - Configure\
+  \ tenant-specific settings\n\n2. Developer Actions:\n   - Deploy application code to tenant environment\n   - Access diagnostic\
+  \ logs for their tenant\n   - Request temporary elevated permissions for troubleshooting\n\n3. Viewer Actions:\n   - Access\
+  \ tenant performance metrics\n   - View system-wide statistics (aggregated across tenants)\n   - Receive alerts about tenant-specific\
+  \ events\n\nThis policy ensures that tenants are completely isolated while allowing necessary interactions between tenants\
+  \ and system administrators."

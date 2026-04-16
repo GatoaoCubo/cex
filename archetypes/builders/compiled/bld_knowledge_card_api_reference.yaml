@@ -22,21 +22,30 @@ domain_overview: API reference documentation serves as a critical interface betw
   and platform economies, comprehensive API references are essential for onboarding developers, ensuring interoperability,
   and reducing integration friction. They also act as a contract, defining expected behavior and constraints for both producers
   and consumers of an API.
-key_concepts: "| Concept               | Definition                                                                 | Source\
-  \                          |  \n|-----------------------|----------------------------------------------------------------------------|---------------------------------|\
-  \  \n| REST                  | Architectural style emphasizing statelessness, uniform interfaces, and resource-based URLs\
-  \ | RFC 7231                        |  \n| OpenAPI Specification | Standard for describing RESTful APIs using declarative\
-  \ YAML or JSON formats | OpenAPI Initiative              |  \n| OAuth 2.0             | Authorization framework enabling\
-  \ secure delegated access without sharing credentials | RFC 6749                        |  \n| HTTP Methods          | Verbs\
-  \ (GET, POST, PUT, DELETE) defining resource operations                  | RFC 7231                        |  \n| Status\
-  \ Codes          | Numeric responses (200, 404, 500) indicating request outcomes               | RFC 7231              \
-  \          |  \n| Query Parameters      | Key-value pairs in URLs for filtering, sorting, or pagination               |\
-  \ RFC 3986                        |  \n| Path Parameters       | URL segments representing resource identifiers        \
-  \                      | RFC 7231                        |  \n| Headers               | Metadata for requests/responses\
-  \ (e.g., authentication tokens, content type) | RFC 7230                        |  \n| JSON Schema           | Structural\
-  \ definition for validating request/response payloads              | JSON Schema (IETF)              |  \n| HAL        \
-  \           | Hypertext Application Language for linking resources within API responses   | RFC 5843                   \
-  \     |"
+key_concepts: '| Concept               | Definition                                                                 | Source                          |
+
+  |-----------------------|----------------------------------------------------------------------------|---------------------------------|
+
+  | REST                  | Architectural style emphasizing statelessness, uniform interfaces, and resource-based URLs | RFC
+  7231                        |
+
+  | OpenAPI Specification | Standard for describing RESTful APIs using declarative YAML or JSON formats | OpenAPI Initiative              |
+
+  | OAuth 2.0             | Authorization framework enabling secure delegated access without sharing credentials | RFC 6749                        |
+
+  | HTTP Methods          | Verbs (GET, POST, PUT, DELETE) defining resource operations                  | RFC 7231                        |
+
+  | Status Codes          | Numeric responses (200, 404, 500) indicating request outcomes               | RFC 7231                        |
+
+  | Query Parameters      | Key-value pairs in URLs for filtering, sorting, or pagination               | RFC 3986                        |
+
+  | Path Parameters       | URL segments representing resource identifiers                              | RFC 7231                        |
+
+  | Headers               | Metadata for requests/responses (e.g., authentication tokens, content type) | RFC 7230                        |
+
+  | JSON Schema           | Structural definition for validating request/response payloads              | JSON Schema (IETF)              |
+
+  | HAL                   | Hypertext Application Language for linking resources within API responses   | RFC 5843                        |'
 industry_standards:
 - OpenAPI Specification (OAS)
 - OAuth 2.0 (RFC 6749)

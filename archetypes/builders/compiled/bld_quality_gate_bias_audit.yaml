@@ -17,7 +17,9 @@ domain: bias_audit construction
 created: '2026-04-13'
 updated: '2026-04-13'
 density_score: 0.92
-definition: '| metric | threshold | operator | scope | scale |
+definition: 'This ISO drives a bias audit: measuring fairness across demographic slices.
+
+  | metric | threshold | operator | scope | scale |
 
   |--------|-----------|----------|-------|-------|
 

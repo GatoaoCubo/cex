@@ -24,18 +24,18 @@ phase_1_research:
 - Collect relevant internal links (KB articles, product docs, community forums).
 - Verify compliance with company policies and legal requirements.
 phase_2_compose:
-- 'Outline structure: question, answer, links, metric (per SCHEMA.md).'
+- 'Outline structure: question, answer, related_topics, metric (per bld_schema_faq_entry.md).'
 - Draft question using active voice, avoiding jargon.
-- Write canonical answer with step-by-step guidance (max 3 paragraphs).
+- Write canonical answer with step-by-step guidance (max 3 paragraphs, <=150 words).
 - Embed hyperlinked references to related resources (validate URLs).
 - Calculate support deflection metric using historical resolution data.
-- Apply OUTPUT_TEMPLATE.md formatting for consistency.
+- Apply bld_output_template_faq_entry.md formatting for consistency.
+- Add Schema.org FAQPage structured data snippet for rich-results eligibility.
 - Review for clarity, conciseness, and alignment with brand tone.
-- Cross-check technical terms against product documentation.
 - Finalize artifact with metadata (author, date, version).
 phase_3_validate:
-- '[ ] ✅ All required fields (question, answer, links, metric) present.'
-- '[ ] ✅ Answer resolves issue without ambiguity or missing steps.'
-- '[ ] ✅ Links are functional and relevant to the topic.'
-- '[ ] ✅ Support deflection metric is accurate and up-to-date.'
-- '[ ] ✅ Artifact adheres to SCHEMA.md and OUTPUT_TEMPLATE.md specs.'
+- '[ ] All required fields (question, answer, related_topics, metric) present per bld_schema_faq_entry.md.'
+- '[ ] Answer resolves issue without ambiguity or missing steps.'
+- '[ ] Schema.org FAQPage snippet included in output template.'
+- '[ ] Support deflection metric is accurate and up-to-date.'
+- '[ ] Artifact adheres to bld_schema_faq_entry.md and bld_output_template_faq_entry.md specs.'

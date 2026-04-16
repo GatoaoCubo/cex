@@ -1,0 +1,30 @@
+kind: architecture
+id: bld_architecture_planning_strategy
+pillar: P08
+llm_function: CONSTRAIN
+purpose: Component map of planning_strategy -- inventory, dependencies
+quality: null
+title: Architecture Planning Strategy
+version: 1.0.0
+author: wave1_builder_gen
+tags:
+- planning_strategy
+- builder
+- architecture
+tldr: Component map of planning_strategy -- inventory, dependencies
+domain: planning_strategy construction
+created: '2026-04-13'
+updated: '2026-04-13'
+density_score: 0.85
+component_inventory: "| Name | Role | Owner | Status |  \n|------|------|-------|--------|  \n| Strategy Engine | Core logic\
+  \ for strategy generation | Strategy Team | In Progress |  \n| Data Aggregator | Collects market and historical data | Data\
+  \ Team | Completed |  \n| Validation Module | Ensures strategy compliance | Compliance Team | Planned |  \n| Risk Profile\
+  \ Mapper | Aligns strategies with risk parameters | Risk Team | In Progress |  \n| Output Formatter | Converts strategies\
+  \ to executable formats | DevOps | Planned |  \n| Config Manager | Stores and retrieves strategy parameters | Infrastructure\
+  \ | Completed |"
+dependencies: "| From | To | Type |  \n|------|----|------|  \n| Strategy Engine | Data Aggregator | Data |  \n| Validation\
+  \ Module | Strategy Engine | Control |  \n| Risk Profile Mapper | Strategy Engine | Data |  \n| Output Formatter | Strategy\
+  \ Engine | Execution |  \n| Config Manager | Strategy Engine | Configuration |"
+architectural_position: planning_strategy sits at the intersection of strategic decision-making and operational execution
+  in CEX, translating high-level goals into actionable plans while ensuring alignment with risk, compliance, and performance
+  pillars. It integrates with data, risk, and execution systems to enable dynamic, rules-based strategy building.

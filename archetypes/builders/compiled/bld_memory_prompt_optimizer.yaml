@@ -1,16 +1,16 @@
-kind: learning_record
-id: p10_lr_prompt_optimizer_builder
+kind: memory
+id: p10_mem_prompt_optimizer_builder
 pillar: P10
 llm_function: INJECT
 purpose: Learned patterns and pitfalls for prompt_optimizer construction
 quality: null
-title: Learning Record Prompt Optimizer
+title: Memory Prompt Optimizer
 version: 1.0.0
 author: wave1_builder_gen_v2
 tags:
 - prompt_optimizer
 - builder
-- learning_record
+- memory
 tldr: Learned patterns and pitfalls for prompt_optimizer construction
 domain: prompt_optimizer construction
 created: '2026-04-14'

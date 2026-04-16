@@ -1,0 +1,29 @@
+kind: architecture
+id: bld_architecture_safety_policy
+pillar: P08
+llm_function: CONSTRAIN
+purpose: Component map of safety_policy -- inventory, dependencies
+quality: null
+title: Architecture Safety Policy
+version: 1.0.0
+author: wave1_builder_gen
+tags:
+- safety_policy
+- builder
+- architecture
+tldr: Component map of safety_policy -- inventory, dependencies
+domain: safety_policy construction
+created: '2026-04-13'
+updated: '2026-04-13'
+density_score: 0.85
+component_inventory: "| Name | Role | Owner | Status |  \n|------|------|-------|--------|  \n| Policy_Engine | Core policy\
+  \ validation | Security_Team | Active |  \n| Rule_Repository | Stores safety rules | Compliance_Team | Active |  \n| Builder_UI\
+  \ | User interface for policy creation | DevOps | Under Development |  \n| Audit_Trail | Logs policy changes | Legal_Team\
+  \ | Active |  \n| Validator_Module | Cross-checks policies against regulations | Risk_Management | Active |  \n| Policy_Distributor\
+  \ | Deploys policies to systems | Ops_Team | Active |"
+dependencies: "| From | To | Type |  \n|------|----|------|  \n| Builder_UI | Policy_Engine | API |  \n| Rule_Repository |\
+  \ Validator_Module | Database |  \n| Policy_Engine | Audit_Trail | Event |  \n| Validator_Module | Policy_Distributor |\
+  \ Messaging |"
+architectural_position: Safety_policy sits at the intersection of compliance and operational control in the CEX ecosystem,
+  ensuring policies are rigorously validated, audited, and distributed across trading, risk, and legal systems to mitigate
+  regulatory and operational risks.

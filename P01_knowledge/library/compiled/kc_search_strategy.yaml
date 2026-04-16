@@ -1,0 +1,34 @@
+id: kc_search_strategy
+kind: knowledge_card
+title: Search Strategy
+version: 1.0.0
+quality: null
+pillar: P01
+density_score: 1.0
+overview: A search strategy defines how computational resources are allocated during inference to optimize query processing.
+  It determines the balance between depth of exploration and efficiency of execution.
+purpose:
+- Prioritize relevant search paths
+- Allocate compute budget dynamically
+- Balance accuracy with performance
+- Handle varying query complexity
+key_concepts:
+- 'Resource allocation: Distribute GPU/CPU cycles across search branches'
+- 'Depth control: Limit recursion depth to prevent infinite loops'
+- 'Priority queues: Rank search nodes by relevance scores'
+- 'Early stopping: Terminate unproductive branches'
+strategy_types:
+- 'Greedy: Focus on highest-scoring paths first'
+- 'Balanced: Distribute resources evenly across branches'
+- 'Adaptive: Adjust allocation based on real-time metrics'
+- 'Hybrid: Combine multiple approaches dynamically'
+implementation:
+- Use token budgeting for memory management
+- Apply pruning rules to eliminate low-value paths
+- Monitor latency/accuracy tradeoffs
+- Maintain fallback strategies for edge cases
+use_cases:
+- Complex pattern matching
+- Multi-step reasoning tasks
+- Resource-constrained environments
+- High-precision requirement scenarios

@@ -16,7 +16,13 @@ domain: marketplace_app_manifest construction
 created: '2026-04-14'
 updated: '2026-04-14'
 density_score: 0.85
-naming_convention: "Pattern: `p09_mam_<app_name>.yaml`  \nExamples:  \n- `p09_mam_calendar.yaml`  \n- `p09_mam_notes.yaml`"
+naming_convention: 'Pattern: `p09_mam_<app_name>.yaml`
+
+  Examples:
+
+  - `p09_mam_calendar.yaml`
+
+  - `p09_mam_notes.yaml`'
 paths: 'Artifacts stored in: `/mnt/cex/apps/marketplace/manifests/<app_name>/v<version>/manifest.yaml`'
 limits: 'max_bytes: 4096 max_turns: 20 effort_level: medium'
 hooks: 'pre_build: null post_build: null on_error: null on_quality_fail: null'

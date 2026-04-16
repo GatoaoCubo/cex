@@ -17,21 +17,46 @@ created: '2026-04-14'
 updated: '2026-04-14'
 density_score: 0.85
 frontmatter_fields: ''
-required: "| Field      | Type   | Required | Default | Notes                              |  \n|------------|--------|----------|---------|------------------------------------|\
-  \  \n| id         | string | yes      | null    | Must match ID Pattern              |  \n| kind       | string | yes  \
-  \    | null    | Always \"product_tour\"              |  \n| pillar     | string | yes      | null    | Always \"P05\" \
-  \                      |  \n| title      | string | yes      | null    | Descriptive name                   |  \n| version\
-  \    | string | yes      | \"1.0\"   | Semantic versioning                |  \n| created    | date   | yes      | null \
-  \   | ISO 8601                           |  \n| updated    | date   | yes      | null    | ISO 8601                    \
-  \       |  \n| author     | string | yes      | null    | Owner email                        |  \n| domain     | string\
-  \ | yes      | null    | Product area (e.g., \"onboarding\")  |  \n| quality    | null   | yes      | null    | Never self-score;\
-  \ peer review assigns |  \n| tags       | array  | yes      | []      | Keywords for search                |  \n| tldr \
-  \      | string | yes      | null    | One-sentence summary               |  \n| tour_steps | array  | yes      | []   \
-  \   | Ordered list of tour steps         |  \n| target_audience | string | yes | null | User segment (e.g., \"new users\"\
-  ) |  \n| completion_criteria | string | yes | null | Metric for tour success |"
-recommended: "| Field             | Type   | Notes                          |  \n|-------------------|--------|--------------------------------|\
-  \  \n| feature_highlight | string | Key feature emphasized         |  \n| related_content   | array  | Links to related\
-  \ resources     |"
+required: '| Field      | Type   | Required | Default | Notes                              |
+
+  |------------|--------|----------|---------|------------------------------------|
+
+  | id         | string | yes      | null    | Must match ID Pattern              |
+
+  | kind       | string | yes      | null    | Always "product_tour"              |
+
+  | pillar     | string | yes      | null    | Always "P05"                       |
+
+  | title      | string | yes      | null    | Descriptive name                   |
+
+  | version    | string | yes      | "1.0"   | Semantic versioning                |
+
+  | created    | date   | yes      | null    | ISO 8601                           |
+
+  | updated    | date   | yes      | null    | ISO 8601                           |
+
+  | author     | string | yes      | null    | Owner email                        |
+
+  | domain     | string | yes      | null    | Product area (e.g., "onboarding")  |
+
+  | quality    | null   | yes      | null    | Never self-score; peer review assigns |
+
+  | tags       | array  | yes      | []      | Keywords for search                |
+
+  | tldr       | string | yes      | null    | One-sentence summary               |
+
+  | tour_steps | array  | yes      | []      | Ordered list of tour steps         |
+
+  | target_audience | string | yes | null | User segment (e.g., "new users") |
+
+  | completion_criteria | string | yes | null | Metric for tour success |'
+recommended: '| Field             | Type   | Notes                          |
+
+  |-------------------|--------|--------------------------------|
+
+  | feature_highlight | string | Key feature emphasized         |
+
+  | related_content   | array  | Links to related resources     |'
 id_pattern: ^p05_pt_[a-z][a-z0-9_]+.md$
 body_structure:
 - Introduction

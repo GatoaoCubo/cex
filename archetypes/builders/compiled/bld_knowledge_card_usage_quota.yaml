@@ -25,18 +25,31 @@ domain_overview: Usage quota systems enforce predefined limits on resource consu
   a cloud provider might allocate 1TB of storage per user monthly, with mechanisms to throttle or block access when thresholds
   are exceeded. Fair-use policies typically include grace periods, notifications, and escalation paths for exceeding limits,
   ensuring transparency and user satisfaction.
-key_concepts: "| Concept                | Definition                                                                 | Source\
-  \                              |  \n|-----------------------|----------------------------------------------------------------------------|-------------------------------------|\
-  \  \n| Bucketing             | Grouping resources into discrete units (e.g., 100GB blocks) for tracking  | RFC 7231 (HTTP/1.1)\
-  \                 |  \n| Tiered Quotas         | Hierarchical limits (e.g., free tier vs. paid tier)                   \
-  \     | OpenStack Quota Management Docs     |  \n| Soft Limits           | Thresholds that trigger warnings before enforcement\
-  \                       | IEEE 802.1X (Network Access Control) |  \n| Hard Limits           | Absolute caps that enforce\
-  \ immediate throttling or blocking               | ACM SIGCOMM 2018: Resource Allocation |  \n| Grace Periods         |\
-  \ Buffer time before enforcing penalties for exceeding limits               | ISO/IEC 23894: Cloud Computing SLAs  |  \n\
-  | Usage Buckets         | Time-based windows (e.g., daily, monthly) for quota calculation           | AWS API Gateway Documentation\
-  \       |  \n| Fair-Use Policies     | Rules defining acceptable usage thresholds and escalation procedures      | Gartner\
-  \ API Management Best Practices |  \n| Quota Inheritance     | Sharing limits across nested resources (e.g., projects within\
-  \ an account) | Kubernetes Resource Quotas Spec     |"
+key_concepts: '| Concept                | Definition                                                                 | Source                              |
+
+  |-----------------------|----------------------------------------------------------------------------|-------------------------------------|
+
+  | Bucketing             | Grouping resources into discrete units (e.g., 100GB blocks) for tracking  | RFC 7231 (HTTP/1.1)                 |
+
+  | Tiered Quotas         | Hierarchical limits (e.g., free tier vs. paid tier)                        | OpenStack Quota Management
+  Docs     |
+
+  | Soft Limits           | Thresholds that trigger warnings before enforcement                       | IEEE 802.1X (Network
+  Access Control) |
+
+  | Hard Limits           | Absolute caps that enforce immediate throttling or blocking               | ACM SIGCOMM 2018:
+  Resource Allocation |
+
+  | Grace Periods         | Buffer time before enforcing penalties for exceeding limits               | ISO/IEC 23894: Cloud
+  Computing SLAs  |
+
+  | Usage Buckets         | Time-based windows (e.g., daily, monthly) for quota calculation           | AWS API Gateway Documentation       |
+
+  | Fair-Use Policies     | Rules defining acceptable usage thresholds and escalation procedures      | Gartner API Management
+  Best Practices |
+
+  | Quota Inheritance     | Sharing limits across nested resources (e.g., projects within an account) | Kubernetes Resource
+  Quotas Spec     |'
 industry_standards:
 - 'RFC 7231: HTTP/1.1 defines header fields for quota negotiation.'
 - 'IEEE 802.1X: Network access control standards include usage thresholds.'

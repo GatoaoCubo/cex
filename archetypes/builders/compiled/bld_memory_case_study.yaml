@@ -1,16 +1,16 @@
-kind: learning_record
-id: p10_lr_case_study_builder
+kind: memory
+id: p10_mem_case_study_builder
 pillar: P10
 llm_function: INJECT
 purpose: Learned patterns and pitfalls for case_study construction
 quality: null
-title: Learning Record Case Study
+title: Memory Case Study
 version: 1.0.0
 author: wave1_builder_gen_v2
 tags:
 - case_study
 - builder
-- learning_record
+- memory
 tldr: Learned patterns and pitfalls for case_study construction
 domain: case_study construction
 created: '2026-04-14'

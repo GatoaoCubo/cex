@@ -16,8 +16,17 @@ domain: sales_playbook construction
 created: '2026-04-14'
 updated: '2026-04-14'
 density_score: 0.85
-golden_example: "Frontmatter:  \ntitle: Sales Playbook for HubSpot CRM Implementation  \ntarget_account: Mid-market SaaS companies\
-  \  \ncreated_by: Sales Enablement Team, HubSpot  \nlast_updated: 2023-10-05  \nBody:"
+golden_example: 'Frontmatter:
+
+  title: Sales Playbook for HubSpot CRM Implementation
+
+  target_account: Mid-market SaaS companies
+
+  created_by: Sales Enablement Team, HubSpot
+
+  last_updated: 2023-10-05
+
+  Body:'
 personas:
 - 'Primary Buyer: Startup founder (e.g., "Alex Chen," 28, founder of a fintech startup).'
 discovery_flow:
@@ -27,9 +36,23 @@ objection_handling:
 close_patterns:
 - 'Time-Sensitive Offer: "Our Q4 discount ends October 31—can we lock this in today?"'
 - 'ROI Guarantee: "If HubSpot doesn’t deliver 20% faster sales cycles, we’ll refund 50% of the first year’s cost."'
-anti_example_1_vague_personas: "Frontmatter:  \ntitle: Sales Playbook for \"ProviderA\"  \ntarget_account: \"Any company\"\
-  \  \ncreated_by: \"Sales Team\"  \nBody:"
+anti_example_1_vague_personas: 'Frontmatter:
+
+  title: Sales Playbook for "ProviderA"
+
+  target_account: "Any company"
+
+  created_by: "Sales Team"
+
+  Body:'
 why_it_fails: Omits objection handling and close patterns, making the playbook incomplete. Sales teams can’t address common
   objections or apply proven closing techniques.
-anti_example_2_missing_key_sections: "Frontmatter:  \ntitle: Sales Playbook for \"ExampleModel\"  \ntarget_account: Startups\
-  \  \ncreated_by: \"SomeVendor\"  \nBody:"
+anti_example_2_missing_key_sections: 'Frontmatter:
+
+  title: Sales Playbook for "ExampleModel"
+
+  target_account: Startups
+
+  created_by: "SomeVendor"
+
+  Body:'

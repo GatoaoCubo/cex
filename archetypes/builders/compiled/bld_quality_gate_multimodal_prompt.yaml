@@ -16,29 +16,72 @@ domain: multimodal_prompt construction
 created: '2026-04-14'
 updated: '2026-04-14'
 density_score: 0.85
-definition: "(Table: metric, threshold, operator, scope)  \n| metric         | threshold | operator | scope          |  \n\
-  |----------------|-----------|----------|----------------|  \n| modalities     | 2         | >=       | each prompt    |\
-  \  \n| cross_ref      | 1         | >=       | metadata       |"
-hard_gates: "(Table: ID | Check | Fail Condition)  \n| ID         | Check                          | Fail Condition      \
-  \                                |  \n|------------|--------------------------------|-----------------------------------------------------|\
-  \  \n| H01        | YAML frontmatter valid         | Invalid YAML syntax or missing fields               |  \n| H02    \
-  \    | ID matches ^p03_mmp_[a-z][a-z0-9_]+.md$ | ID format invalid or missing schema pattern        |  \n| H03        |\
-  \ kind field matches 'multimodal_prompt' | Kind mismatch or missing field                     |  \n| H04        | At least\
-  \ 2 modalities present  | Only 1 modality or none specified                   |  \n| H05        | No conflicting instructions\
-  \    | Contradictory commands across modalities          |  \n| H06        | Metadata includes 'modality_type' | Missing\
-  \ required metadata field                   |  \n| H07        | Prompt not empty               | Empty text/audio/vision\
-  \ content                     |"
-soft_scoring: "(Table: Dim | Dimension | Weight | Scoring Guide)  \n| Dim | Dimension         | Weight | Scoring Guide   \
-  \                                   |  \n|-----|-------------------|--------|----------------------------------------------------|\
-  \  \n| D1  | Coherence         | 0.15   | 1.0: Seamless; 0.5: Minor gaps; 0.0: Incoherent    |  \n| D2  | Completeness \
-  \     | 0.15   | 1.0: All modalities covered; 0.5: Missing 1 modality |  \n| D3  | Clarity           | 0.12   | 1.0: Unambiguous;\
-  \ 0.5: Ambiguous; 0.0: Confusing   |  \n| D4  | Cross-modal alignment | 0.18 | 1.0: Perfect alignment; 0.5: Partial; 0.0:\
-  \ None    |  \n| D5  | Modality balance  | 0.10   | 1.0: Even distribution; 0.5: Skewed; 0.0: Overload |  \n| D6  | Creativity\
-  \        | 0.10   | 1.0: Novel; 0.5: Standard; 0.0: Dull                |  \n| D7  | Technical accuracy| 0.10   | 1.0: Correct;\
-  \ 0.5: Minor errors; 0.0: Major flaws   |  \n| D8  | User intent       | 0.10   | 1.0: Clear purpose; 0.5: Vague; 0.0: Misaligned\
-  \    |"
-actions: "(Table: Score | Action)  \n| Score     | Action         |  \n|-----------|----------------|  \n| >=9.5     | GOLDEN\
-  \         |  \n| >=8.0     | PUBLISH        |  \n| >=7.0     | REVIEW         |  \n| <7.0      | REJECT         |"
-bypass: "(Table: conditions, approver, audit trail)  \n| conditions              | approver         | audit trail        \
-  \                  |  \n|-------------------------|------------------|--------------------------------------|  \n| Emergency\
-  \ fix required  | Senior Engineer  | Bypass logged with reason and approver |"
+definition: '(Table: metric, threshold, operator, scope)
+
+  | metric         | threshold | operator | scope          |
+
+  |----------------|-----------|----------|----------------|
+
+  | modalities     | 2         | >=       | each prompt    |
+
+  | cross_ref      | 1         | >=       | metadata       |'
+hard_gates: '(Table: ID | Check | Fail Condition)
+
+  | ID         | Check                          | Fail Condition                                      |
+
+  |------------|--------------------------------|-----------------------------------------------------|
+
+  | H01        | YAML frontmatter valid         | Invalid YAML syntax or missing fields               |
+
+  | H02        | ID matches ^p03_mmp_[a-z][a-z0-9_]+.md$ | ID format invalid or missing schema pattern        |
+
+  | H03        | kind field matches ''multimodal_prompt'' | Kind mismatch or missing field                     |
+
+  | H04        | At least 2 modalities present  | Only 1 modality or none specified                   |
+
+  | H05        | No conflicting instructions    | Contradictory commands across modalities          |
+
+  | H06        | Metadata includes ''modality_type'' | Missing required metadata field                   |
+
+  | H07        | Prompt not empty               | Empty text/audio/vision content                     |'
+soft_scoring: '(Table: Dim | Dimension | Weight | Scoring Guide)
+
+  | Dim | Dimension         | Weight | Scoring Guide                                      |
+
+  |-----|-------------------|--------|----------------------------------------------------|
+
+  | D1  | Coherence         | 0.15   | 1.0: Seamless; 0.5: Minor gaps; 0.0: Incoherent    |
+
+  | D2  | Completeness      | 0.15   | 1.0: All modalities covered; 0.5: Missing 1 modality |
+
+  | D3  | Clarity           | 0.12   | 1.0: Unambiguous; 0.5: Ambiguous; 0.0: Confusing   |
+
+  | D4  | Cross-modal alignment | 0.18 | 1.0: Perfect alignment; 0.5: Partial; 0.0: None    |
+
+  | D5  | Modality balance  | 0.10   | 1.0: Even distribution; 0.5: Skewed; 0.0: Overload |
+
+  | D6  | Creativity        | 0.10   | 1.0: Novel; 0.5: Standard; 0.0: Dull                |
+
+  | D7  | Technical accuracy| 0.10   | 1.0: Correct; 0.5: Minor errors; 0.0: Major flaws   |
+
+  | D8  | User intent       | 0.10   | 1.0: Clear purpose; 0.5: Vague; 0.0: Misaligned    |'
+actions: '(Table: Score | Action)
+
+  | Score     | Action         |
+
+  |-----------|----------------|
+
+  | >=9.5     | GOLDEN         |
+
+  | >=8.0     | PUBLISH        |
+
+  | >=7.0     | REVIEW         |
+
+  | <7.0      | REJECT         |'
+bypass: '(Table: conditions, approver, audit trail)
+
+  | conditions              | approver         | audit trail                          |
+
+  |-------------------------|------------------|--------------------------------------|
+
+  | Emergency fix required  | Senior Engineer  | Bypass logged with reason and approver |'

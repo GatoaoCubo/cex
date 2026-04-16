@@ -16,18 +16,19 @@ domain: sdk_example construction
 created: '2026-04-14'
 updated: '2026-04-14'
 density_score: 0.85
-frontmatter_fields: ''
-required: "| Field     | Type   | Required | Default | Notes                              |  \n|-----------|--------|----------|---------|------------------------------------|\
-  \  \n| id        | string | yes      | null    | Must match ID Pattern              |  \n| kind      | string | yes    \
-  \  | null    | Always \"sdk_example\"               |  \n| pillar    | string | yes      | null    | Always \"P04\"    \
-  \                   |  \n| title     | string | yes      | null    | Descriptive SDK name               |  \n| version \
-  \  | string | yes      | null    | Semantic versioning (e.g., 1.0.0)  |  \n| created   | date   | yes      | null    | ISO\
-  \ 8601 format                    |  \n| updated   | date   | yes      | null    | ISO 8601 format                    | \
-  \ \n| author    | string | yes      | null    | Maintainer name                    |  \n| domain    | string | yes     \
-  \ | null    | SDK target domain (e.g., \"blockchain\") |  \n| quality   | null   | yes      | null    | Never self-score;\
-  \ peer review assigns |  \n| tags      | array  | yes      | null    | Keywords for discovery             |  \n| tldr  \
-  \    | string | yes      | null    | One-sentence SDK purpose           |  \n| language  | string | yes      | null    |\
-  \ Primary programming language       |  \n| dependencies | array | yes | null | Required libraries/dependencies  |"
+frontmatter_fields_sdk_example_schema: ''
+required_fields_for_an_sdk_example: "| Field     | Type   | Required | Default | Notes                              |  \n\
+  |-----------|--------|----------|---------|------------------------------------|  \n| id        | string | yes      | null\
+  \    | Must match ID Pattern              |  \n| kind      | string | yes      | null    | Always \"sdk_example\"      \
+  \         |  \n| pillar    | string | yes      | null    | Always \"P04\"                       |  \n| title     | string\
+  \ | yes      | null    | Descriptive SDK name               |  \n| version   | string | yes      | null    | Semantic versioning\
+  \ (e.g., 1.0.0)  |  \n| created   | date   | yes      | null    | ISO 8601 format                    |  \n| updated   |\
+  \ date   | yes      | null    | ISO 8601 format                    |  \n| author    | string | yes      | null    | Maintainer\
+  \ name                    |  \n| domain    | string | yes      | null    | SDK target domain (e.g., \"payments\") |  \n\
+  | quality   | null   | yes      | null    | Never self-score; peer review assigns |  \n| tags      | array  | yes      |\
+  \ null    | Keywords for discovery             |  \n| tldr      | string | yes      | null    | One-sentence SDK purpose\
+  \           |  \n| language  | string | yes      | null    | Primary programming language       |  \n| dependencies | array\
+  \ | yes | null | Required libraries/dependencies  |"
 recommended: "| Field              | Type   | Notes                          |  \n|--------------------|--------|--------------------------------|\
   \  \n| example_usage      | string | Code snippet demonstrating SDK |  \n| license            | string | Open-source license\
   \ type       |"

@@ -1,16 +1,16 @@
-kind: learning_record
-id: p10_lr_benchmark_suite_builder
+kind: memory
+id: p10_mem_benchmark_suite_builder
 pillar: P10
 llm_function: INJECT
 purpose: Learned patterns and pitfalls for benchmark_suite construction
 quality: null
-title: Learning Record Benchmark Suite
+title: Memory Benchmark Suite Builder
 version: 1.0.0
 author: wave1_builder_gen_v2
 tags:
 - benchmark_suite
 - builder
-- learning_record
+- memory
 tldr: Learned patterns and pitfalls for benchmark_suite construction
 domain: benchmark_suite construction
 created: '2026-04-14'

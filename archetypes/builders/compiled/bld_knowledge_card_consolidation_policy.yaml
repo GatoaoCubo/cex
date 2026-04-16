@@ -4,59 +4,104 @@ pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for consolidation_policy production
 quality: null
-title: Knowledge Card Consolidation Policy
-version: 1.0.0
-author: wave1_builder_gen_v2
+title: 'Knowledge Card: consolidation_policy Builder'
+version: 2.0.0
+author: n06_commercial
 tags:
 - consolidation_policy
 - builder
 - knowledge_card
-tldr: Domain knowledge for consolidation_policy production
-domain: consolidation_policy construction
+- memgpt
+- letta
+- memory_consolidation
+tldr: 'LLM agent memory consolidation: working->episodic->semantic promotion, LRU/LFU/importance eviction, sleep-time consolidation,
+  replay-based memory, enterprise retention compliance'
+domain: LLM agent memory consolidation
 created: '2026-04-14'
 updated: '2026-04-14'
-density_score: 0.85
-domain_overview: Memory consolidation policies govern how systems reclaim, reuse, and optimize memory allocations over time.
-  These policies are critical in environments with constrained resources, such as embedded systems, cloud-native applications,
-  and high-performance computing. They address challenges like fragmentation, memory leaks, and inefficient allocation patterns
-  by defining rules for when and how memory should be consolidated, merged, or released. Effective policies balance performance,
-  latency, and resource utilization, often integrating with garbage collection, memory pooling, and virtual memory systems.
-  Consolidation policies differ from access control (memory_scope) or compression (compression_config) by focusing on lifecycle
-  events—such as object promotion, slab reuse, or page merging—rather than access permissions or data encoding. They are influenced
-  by workload characteristics, hardware constraints, and system-level trade-offs between throughput and memory overhead.
-key_concepts: "| Concept | Definition | Source |  \n|--------|------------|--------|  \n| Memory Compaction | Reorganizing\
-  \ memory to reduce fragmentation by moving objects | Java G1GC Paper (2012) |  \n| Slab Allocation | Pre-allocating memory\
-  \ blocks for objects of similar size | Linux Kernel Documentation |  \n| Generational Collection | Dividing memory into\
-  \ regions based on object lifespan | JVM Specification (Java 8) |  \n| Working Set Optimization | Prioritizing memory retention\
-  \ for frequently accessed data | Operating System Design (Tanenbaum, 1990) |  \n| Page Replacement Algorithms | Strategies\
-  \ for evicting memory pages (e.g., CLOCK, LRU) | RFC 1122 (TCP/IP Model) |  \n| Memory Coalescing | Merging adjacent free\
-  \ memory blocks to create larger allocations | PostgreSQL Memory Management (2018) |  \n| Fragmentation Threshold | Maximum\
-  \ acceptable fragmentation level before consolidation triggers | ISO/IEC 23271:2015 (GC Standards) |  \n| TLB Shootdown\
-  \ | Invalidation of translation lookaside buffer entries during memory moves | Intel x86 Architecture Manual |  \n| Object\
-  \ Lifespan Tracking | Monitoring object usage to determine consolidation priority | .NET Memory Model (Microsoft Docs) |\
-  \  \n| Memory Pressure Events | System signals indicating low available memory | Windows Memory Management (Microsoft Docs)\
-  \ |  \n| Copy-on-Write | Delaying memory duplication until actual modification occurs | Unix System V IPC (1986) |  \n|\
-  \ Region-Based Memory Management | Allocating memory in regions with explicit deallocation | PLDI Paper: \"Region-Based\
-  \ Memory Management\" (1994) |"
-industry_standards:
-- ISO/IEC 23271:2015 (Garbage Collection Standards)
-- POSIX Memory Management (IEEE Std 1003.1)
-- Java Memory Model (JLS, 2021)
-- LLVM Memory Management (LLVM Docs, 2023)
-- ACM SIGPLAN Papers on Memory Consolidation (e.g., "Memory Consolidation in Garbage-Collected Languages")
-- IEEE Real-Time Systems Standards (IEEE 1754)
-- Open Group Base Specifications (Memory Allocation)
-- RFC 793 (TCP/IP Memory Management, 1981)
+density_score: 0.91
+domain_overview: 'Memory consolidation in LLM agents governs when and how memories move between tiers (working -> episodic
+  -> semantic), get evicted, merged, or archived. Unlike OS garbage collection or hardware memory compaction, agent memory
+  consolidation is about *information value*: should this interaction be remembered? At what granularity? For how long? MemGPT/Letta
+  (Packer 2023) introduced the consolidation pipeline as an explicit agent function: after each conversation, a background
+  job scores episodic entries, promotes high-value facts to semantic memory, and archives or deletes low-value entries. This
+  "sleep-time consolidation" mirrors neuroscience models of memory offline replay.'
+key_concepts: '| Concept | Definition | Source |
+
+  |---------|-----------|--------|
+
+  | Working -> Episodic Promotion | Saving in-context interaction to episodic store after session ends | MemGPT/Letta |
+
+  | Episodic -> Semantic Promotion | Extracting durable facts from interaction history into semantic store | MemGPT consolidation
+  pipeline |
+
+  | Importance Scoring | Assigning a retention priority to each memory unit (0-1 float) | mem0 (2024) |
+
+  | Sleep-Time Consolidation | Background job runs when agent is idle to consolidate memories | MemGPT/Letta (Packer 2023)
+  |
+
+  | Replay-Based Memory | Re-processing old episodic entries to extract missed semantic facts | Episodic memory research |
+
+  | LRU Eviction | Remove least recently accessed memories when storage budget exceeded | Cache theory |
+
+  | LFU Eviction | Remove least frequently accessed memories | Cache theory |
+
+  | TTL (Time-To-Live) | Fixed expiry time per memory unit (e.g., 90 days) | Standard practice |
+
+  | Memory Merging | Deduplicating similar episodic entries into a single canonical record | Zep (2024) |
+
+  | Forgetting Curve | Exponential decay of memory importance over time without reinforcement | Ebbinghaus (1885) |
+
+  | Retention Policy | Rule set defining what to keep, for how long, and under what conditions | Enterprise compliance |'
+consolidation_pipeline_memgpt_model: "[Session ends]\n     |\n     v\n[Episodic buffer] -- (async job triggered)\n     |\n\
+  \     +-- Score each entry (recency + relevance + user_feedback)\n     |\n     +-- High score (>0.7) --> Promote to semantic\
+  \ memory\n     |       |\n     |       +-- Deduplicate against existing semantic entries\n     |       +-- Merge if similarity\
+  \ > 0.92\n     |       +-- Write new entity/fact to graph or KV store\n     |\n     +-- Medium score (0.3-0.7) --> Archive\
+  \ to cold storage\n     |\n     +-- Low score (<0.3) --> Delete (or soft-delete for compliance)"
+eviction_strategies: '| Strategy | Trigger | Best For |
+
+  |----------|---------|---------|
+
+  | TTL | Age > N days | Time-sensitive facts, compliance |
+
+  | LRU | Storage > budget, remove oldest accessed | General episodic memory |
+
+  | LFU | Storage > budget, remove least queried | Semantic entity store |
+
+  | Importance threshold | Importance < floor (e.g., 0.3) | Mixed TTL + value |
+
+  | Generational | N interactions old, no semantic promotion | Conversation logs |'
+commercial_tier_differentiation: '| Feature | Free | PRO | ENTERPRISE |
+
+  |---------|------|-----|------------|
+
+  | Consolidation | None | Basic TTL (90 days) | Configurable + compliance |
+
+  | Episodic retention | None | 90 days | Custom (1y / indefinite) |
+
+  | Semantic promotion | None | Auto (LLM-driven) | Scheduled + audited |
+
+  | Sleep-time consolidation | None | On session end | Continuous + scheduled |
+
+  | Retention policy | N/A | Fixed | Custom rules + data residency |
+
+  | Audit trail | None | Read | Write + export + GDPR |
+
+  | Merge/dedup | None | Similarity-based | LLM-driven + manual review |'
+enterprise_compliance_considerations:
+- 'GDPR Art. 17 (right to erasure): consolidation must support hard-delete, not just archive'
+- 'HIPAA: retention period for health-related agent memories may be governed by law'
+- 'Data residency: consolidation jobs must not transfer memories across regions'
+- 'Audit trail: every promotion/eviction event should be logged with timestamp + reason'
 common_patterns:
-- 'Generational collection: Separate short-lived and long-lived objects.'
-- 'Memory pooling: Pre-allocate slabs for frequent allocation patterns.'
-- 'Compaction triggers: Consolidate memory when fragmentation exceeds thresholds.'
-- 'Lazy consolidation: Delay consolidation until memory pressure events occur.'
-- 'Region-based management: Use explicit regions for deterministic deallocation.'
-- 'Working set tracking: Prioritize retention of frequently accessed data.'
+- 'Session-end consolidation: trigger pipeline after every conversation ends.'
+- 'Importance-gated promotion: only promote episodic entries with score > threshold.'
+- 'Merge-before-write: check semantic memory for duplicates before adding new facts.'
+- 'Cold archival: TTL-expired entries move to cold storage before hard delete.'
+- 'Replay sweep: periodic re-processing of episodic archive for missed semantic facts.'
 pitfalls:
-- 'Ignoring fragmentation: Policies that neglect fragmentation may waste memory.'
-- 'Over-consolidation: Excessive merging can increase latency and CPU usage.'
-- 'Workload-specific blind spots: Policies not tailored to application patterns may fail.'
-- 'Lack of monitoring: No feedback loops to adjust policies dynamically.'
-- 'Inconsistent enforcement: Policies that vary across environments lead to unpredictability.'
+- Consolidating everything wastes semantic memory with low-signal facts.
+- No deduplication creates semantic memory bloat with conflicting versions of the same fact.
+- Ignoring compliance requirements exposes the system to data retention violations.
+- Synchronous consolidation blocks agent response time; always run async.
+- No audit trail makes GDPR erasure requests impossible to verify.

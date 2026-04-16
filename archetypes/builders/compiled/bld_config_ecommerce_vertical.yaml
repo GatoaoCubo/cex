@@ -16,7 +16,13 @@ domain: ecommerce_vertical construction
 created: '2026-04-14'
 updated: '2026-04-14'
 density_score: 0.85
-naming_convention: "Pattern: `p01_ev_{{name}}.md`  \nExamples:  \n- `p01_ev_homepage.md`  \n- `p01_ev_productpage.md`"
+naming_convention: 'Pattern: `p01_ev_{{name}}.md`
+
+  Examples:
+
+  - `p01_ev_homepage.md`
+
+  - `p01_ev_productpage.md`'
 paths:
 - 'Source: `/src/verticals/ecommerce/p01/`'
 - 'Artifacts: `/artifacts/ecommerce/p01/`'

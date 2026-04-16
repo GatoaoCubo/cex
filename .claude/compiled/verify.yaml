@@ -4,6 +4,7 @@ pillar: null
 title: null
 version: 1.0.0
 quality: null
+density_score: 1.0
 remaining_3_items_1_commit_n03_boris_merge_wave_d_tail_d1_d3_d4:
 - 'D1 `.claude/skills/verify.md` + mirror `.cex/skills/verify.md` — chain: `bun run test || npm test || pytest` (~60 lines
   each)'

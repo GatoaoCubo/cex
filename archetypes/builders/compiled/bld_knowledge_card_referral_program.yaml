@@ -23,20 +23,32 @@ domain_overview: Referral programs are critical growth mechanisms in SaaS, finte
   requires understanding user behavior, such as the critical mass threshold for virality and the activation rate of referred
   users. Programs must also mitigate fraud, ensure compliance with privacy laws (e.g., CCPA), and integrate with analytics
   tools to track conversion funnels and ROI.
-key_concepts: "| Concept                | Definition                                                                 | Source\
-  \                                                                 |  \n|-----------------------|----------------------------------------------------------------------------|------------------------------------------------------------------------|\
-  \  \n| Viral Coefficient (K) | Average number of new users generated per existing user                    | Anderson & Joiner,\
-  \ Viral Growth (2014)                               |  \n| Referral Reward       | Incentive given to referrer and referee\
-  \ (e.g., credits, discounts)       | Gupta & Lehmann, Referral Economics (2018)                          |  \n| Activation\
-  \ Rate       | Percentage of referred users who complete a key action (e.g., sign-up)    | HBR, The Power of Referral (2020)\
-  \                                   |  \n| K-Factor              | Ratio of invitations sent to users acquired (K = (invites\
-  \ sent)/users)   | GrowthHackers, K-Factor Framework                                    |  \n| Network Effects       | Increase\
-  \ in product value as more users join                               | Harvard Business Review, Network Effects (2019)  \
-  \                   |  \n| Critical Mass         | Minimum user base required for virality to outpace churn            \
-  \     | Anderson, Viral Loops (2016)                                        |  \n| Referral Funnel       | Path from invitation\
-  \ to conversion, tracked via UTM parameters           | Mixpanel, Referral Analytics                                   \
-  \      |  \n| Incentive Alignment   | Ensuring rewards benefit both referrer and business                      | Eyal, Hooked\
-  \ (2014)                                                 |"
+key_concepts: '| Concept                | Definition                                                                 | Source                                                                 |
+
+  |-----------------------|----------------------------------------------------------------------------|------------------------------------------------------------------------|
+
+  | Viral Coefficient (K) | Average number of new users generated per existing user                    | Anderson & Joiner,
+  Viral Growth (2014)                               |
+
+  | Referral Reward       | Incentive given to referrer and referee (e.g., credits, discounts)       | Gupta & Lehmann, Referral
+  Economics (2018)                          |
+
+  | Activation Rate       | Percentage of referred users who complete a key action (e.g., sign-up)    | HBR, The Power of
+  Referral (2020)                                   |
+
+  | K-Factor              | Ratio of invitations sent to users acquired (K = (invites sent)/users)   | GrowthHackers, K-Factor
+  Framework                                    |
+
+  | Network Effects       | Increase in product value as more users join                               | Harvard Business
+  Review, Network Effects (2019)                     |
+
+  | Critical Mass         | Minimum user base required for virality to outpace churn                 | Anderson, Viral Loops
+  (2016)                                        |
+
+  | Referral Funnel       | Path from invitation to conversion, tracked via UTM parameters           | Mixpanel, Referral
+  Analytics                                         |
+
+  | Incentive Alignment   | Ensuring rewards benefit both referrer and business                      | Eyal, Hooked (2014)                                                 |'
 industry_standards:
 - Viral Coefficient Formula (Anderson, 2014)
 - Growth-Driven Design framework (Marcus Lemonis, 2020)

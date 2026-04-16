@@ -3,7 +3,7 @@ kind: type_builder
 pillar: P09
 parent: null
 domain: batch_config
-llm_function: CALL
+llm_function: BECOME
 version: 1.0.0
 created: 2026-04-13
 updated: 2026-04-13

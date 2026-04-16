@@ -18,11 +18,11 @@ updated: '2026-04-14'
 density_score: 0.85
 crew_role: Designs, validates, and maintains Role-Based Access Control (RBAC) policies to enforce least-privilege access models
   across systems.
-receives_from: "| Builder        | What                  | Format      |  \n|----------------|-----------------------|-------------|\
-  \  \n| Security Architect | Policy templates      | YAML        |  \n| Compliance Officer | Regulatory requirements | JSON\
-  \        |  \n| System Administrator | Existing role definitions | Text doc  |"
-produces_for: "| Builder        | What                  | Format      |  \n|----------------|-----------------------|-------------|\
-  \  \n| Security Architect | Policy drafts        | YAML        |  \n| Compliance Officer | Compliance reports   | PDF  \
-  \       |  \n| System Administrator | Role manifests       | JSON        |"
-boundary: Does NOT handle permission assignments (handled by Permission Manager) or identity configuration (handled by Identity
-  Provider). Policy enforcement is managed by Access Control Engine.
+receives_from: "| Builder                    | What                              | Format  |  \n|----------------------------|-----------------------------------|---------|\
+  \  \n| permission-builder         | Permission definitions + scopes   | YAML    |  \n| guardrail-builder          | Safety\
+  \ boundaries + deny rules    | YAML    |  \n| env-config-builder         | Environment and tenant context    | YAML    |"
+produces_for: "| Builder                    | What                              | Format  |  \n|----------------------------|-----------------------------------|---------|\
+  \  \n| agent-profile-builder      | Role bindings for agent personas  | YAML    |  \n| sandbox-config-builder     | Sandbox\
+  \ access control rules      | YAML    |  \n| compliance-framework-builder | RBAC policy compliance mapping  | YAML    |"
+boundary: Does NOT handle secret storage (secret-config-builder), SSO federation (sso-config-builder), or authentication flows.
+  Policy enforcement integration is handled downstream by the agent runtime.

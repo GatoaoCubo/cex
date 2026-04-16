@@ -16,18 +16,32 @@ domain: reranker_config construction
 created: '2026-04-14'
 updated: '2026-04-14'
 density_score: 0.85
-production_tools: "| Tool              | Purpose                  | When                          |  \n|-------------------|--------------------------|-------------------------------|\
-  \  \n| cex_compile.py    | Builds reranker config   | During config creation        |  \n| cex_score.py      | Evaluates\
-  \ model quality  | After training                |  \n| cex_retriever.py  | Fetches training data    | Preprocessing phase\
-  \           |  \n| cex_doctor.py     | Validates config schema  | Before deployment             |  \n| cex_optimizer.py\
-  \  | Fine-tunes hyperparams   | During model optimization     |  \n| cex_exporter.py   | Exports config artifacts | For\
-  \ production deployment     |"
-validation_tools: "| Tool                  | Purpose                    | When                          |  \n|-----------------------|----------------------------|-------------------------------|\
-  \  \n| validation_check.py   | Ensures schema compliance  | Pre-deployment validation     |  \n| validation_benchmark.py\
-  \ | Compares reranker performance | Post-training testing       |  \n| validation_analyzer.py  | Diagnoses config issues\
-  \    | During troubleshooting      |  \n| validation_simulator.py | Tests edge cases         | Stress-testing phase    \
-  \      |"
+production_tools: '| Tool | Purpose | When |
+
+  |------|---------|------|
+
+  | cex_compile.py | Compile reranker_config artifact to .yaml | After authoring |
+
+  | cex_score.py | Peer-review score via 5D rubric | After compile |
+
+  | cex_retriever.py | Find similar existing reranker_config artifacts | During F3 INJECT |
+
+  | cex_doctor.py | Validate builder ISO health | Pre-dispatch |
+
+  | cex_wave_validator.py | Validate all ISOs in builder directory | Post-build |'
+validation_tools: '| Tool | Purpose | When |
+
+  |------|---------|------|
+
+  | cex_hooks.py | Pre-commit quality gate enforcement | Before git commit |
+
+  | cex_sanitize.py | Check ASCII compliance in code files | Pre-commit |
+
+  | cex_hygiene.py | Artifact CRUD rules (frontmatter, naming) | Periodic cleanup |'
 external_references:
-- Hugging Face Transformers (model integration)
-- Elasticsearch (retrieval baseline)
-- FAISS (vector similarity search)
+- Cohere Rerank v3 (cross-encoder reranking API)
+- BGE reranker (BAAI/bge-reranker-large via HuggingFace)
+- ColBERT v2 (late-interaction neural ranking, Stanford NLP)
+- ms-marco cross-encoders (ms-marco-MiniLM-L-6-v2, msmarco-distilbert)
+- RankGPT (GPT-4 listwise reranking, Sun et al. 2023)
+- FAISS (vector similarity search, Facebook AI)

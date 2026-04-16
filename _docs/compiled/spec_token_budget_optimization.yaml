@@ -10,6 +10,7 @@ tags:
 - context-window
 pillar: P03
 created: 2026-04-13
+density_score: 1.0
 1_problem_statement: 'Every builder call assembles context from multiple sources (ISOs, KCs, memory, brand, examples). This
   context directly determines output quality -- but also determines cost and latency. The tradeoff is non-linear: quality
   plateaus well before the context window fills.

@@ -1,30 +1,44 @@
-kind: learning_record
-id: p10_lr_memory_architecture_builder
+kind: memory
+id: p10_mem_memory_architecture_builder
 pillar: P10
 llm_function: INJECT
 purpose: Learned patterns and pitfalls for memory_architecture construction
 quality: null
-title: Learning Record Memory Architecture
-version: 1.0.0
-author: wave1_builder_gen_v2
+title: 'Memory: memory_architecture-builder patterns'
+version: 2.0.0
+author: n06_commercial
 tags:
 - memory_architecture
 - builder
-- learning_record
-tldr: Learned patterns and pitfalls for memory_architecture construction
-domain: memory_architecture construction
+- memory
+tldr: 'Key lessons: domain is LLM agent memory (not hardware), always include tier matrix, cite MemGPT/Zep/mem0, define eviction
+  policy per layer'
+domain: LLM agent memory systems
 created: '2026-04-14'
 updated: '2026-04-14'
-density_score: 0.85
-observation: Common issues include inconsistent hierarchy definitions, overlooked coherence protocol integration, and misalignment
-  between memory latency requirements and system workload profiles.
-pattern: Effective designs prioritize modular abstraction layers, explicit interface specifications, and cross-tier performance
-  modeling to ensure scalability and interoperability.
-evidence: Reviewed artifacts with robust architectures explicitly defined hierarchical tiers (e.g., cache, main memory, storage)
-  and included formalized coherence rules in system-level specifications.
-recommendations:
-- Define memory hierarchy tiers with clear abstraction boundaries and access policies.
-- Integrate coherence protocols at the architecture level, not post-design.
-- Model latency and bandwidth requirements across all tiers during early-stage planning.
-- Use standardized interfaces (e.g., AXI, PCIe) to ensure component compatibility.
-- Validate designs with simulation-driven performance benchmarks before implementation.
+density_score: 0.9
+observation: 'The most common defect in memory_architecture artifacts is domain confusion: generators trained on broad corpora
+  default to hardware memory architecture (DRAM, cache hierarchies, MESI coherence) instead of LLM agent memory systems. Every
+  ISO in this builder must be checked for hardware terminology and corrected.'
+pattern: "High-quality memory_architecture artifacts share three traits:\n1. Explicit four-layer model (working/episodic/semantic/procedural)\
+  \ with backend per layer.\n2. Commercial tier matrix distinguishing FREE (context-only) from PRO (episodic) from\n   ENTERPRISE\
+  \ (full graph + compliance).\n3. Industry grounding: reference MemGPT/Letta (2023), Zep (2024), or mem0 (2024) as\n   architectural\
+  \ precedent -- not computer architecture textbooks."
+evidence: 'Wave 3 generation (qwen3:14b) produced hardware-focused ISOs for memory_architecture:
+
+  - knowledge_card cited JEDEC DDR5, CXL 3.0, AMD Infinity Fabric
+
+  - system_prompt described cache hierarchy design and MESI protocol
+
+  - schema required `memory_type: RAM/ROM`, `capacity: bytes`, `access_time: nanoseconds`
+
+  - quality_gate tested latency <10ns and error rate 0.01% (hardware metrics)
+
+
+  These are all correct for computer architecture but wrong for LLM agent memory.'
+recommendations: "- On every read of an existing memory_architecture ISO, grep for: DRAM, DDR, SRAM,\n  cache, coherence,\
+  \ ECC, CXL, bandwidth, nanosecond. Any match = domain contamination.\n- When referencing memory latency, use agent-relevant\
+  \ units: milliseconds for\n  retrieval, seconds for consolidation -- not nanoseconds for hardware access.\n- The consolidation_policy\
+  \ and procedural_memory kinds are siblings in P10: cross-reference\n  them rather than re-specifying their content.\n- Tier\
+  \ matrix is mandatory per N06 commercial lens. Free tier = no persistent memory;\n  pro tier = episodic + semantic; enterprise\
+  \ = full graph + compliance + team sharing."

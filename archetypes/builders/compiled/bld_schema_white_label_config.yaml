@@ -58,9 +58,9 @@ recommended: '| Field         | Type   | Notes |
 
   | deprecated    | bool   |       |'
 id_pattern: ^p09_wl_[a-z][a-z0-9_]+.yaml$
-body_structure: "1. Branding Configuration  \n   Define logo, color schemes, and legal text.\n\n2. Customization Options \
-  \ \n   Specify UI/UX elements available for modification.\n\n3. Feature Whitelisting  \n   List enabled/disabled features\
-  \ per tenant.\n\n4. Compliance Settings  \n   Regional regulations and data handling rules."
+body_structure: "1. Branding Configuration\n   Define logo, color schemes, and legal text.\n\n2. Customization Options\n \
+  \  Specify UI/UX elements available for modification.\n\n3. Feature Whitelisting\n   List enabled/disabled features per\
+  \ tenant.\n\n4. Compliance Settings\n   Regional regulations and data handling rules."
 constraints:
 - ID must match ^p09_wl_[a-z][a-z0-9_]+.yaml$
 - 'Max file size: 4096 bytes'

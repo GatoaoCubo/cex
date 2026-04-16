@@ -1,0 +1,33 @@
+kind: architecture
+id: bld_architecture_threat_model
+pillar: P08
+llm_function: CONSTRAIN
+purpose: Component map of threat_model -- inventory, dependencies
+quality: null
+title: Architecture Threat Model
+version: 1.1.0
+author: n05_ops
+tags:
+- threat_model
+- builder
+- architecture
+tldr: Component map of threat_model -- inventory, dependencies
+domain: threat_model construction
+created: '2026-04-13'
+updated: '2026-04-13'
+density_score: 0.85
+component_inventory: "This ISO records a threat model: the assets worth protecting and the attacker profiles that target them.\n\
+  | Name              | Role                      | Owner         | Status    |  \n|-------------------|---------------------------|---------------|-----------|\
+  \  \n| Threat Database   | Stores threat data        | Security Team | Production|  \n| Model Validator   | Validates threat\
+  \ models   | Dev Team      | Testing   |  \n| User Interface    | Frontend for model input  | UX Team       | Development\
+  \ |  \n| Rule Engine       | Applies validation rules  | Dev Team      | Production|  \n| Compliance Checker| Ensures regulatory\
+  \ checks | Legal Team    | Testing   |  \n| API Gateway       | Manages external requests | Infrastructure| Production|\
+  \  \n| Audit Logger      | Logs all model changes    | Security Team | Production|"
+dependencies: "| From              | To                | Type   |  \n|-------------------|-------------------|--------|  \n\
+  | User Interface    | API Gateway       | API    |  \n| API Gateway       | Threat Database   | Data   |  \n| Model Validator\
+  \   | Rule Engine       | API    |  \n| Compliance Checker| Threat Database   | Data   |  \n| Audit Logger      | Threat\
+  \ Database   | Data   |  \n| User Interface    | Model Validator   | API    |"
+architectural_position: 'The threat_model-builder sits within the CEX P11 Feedback pillar as the pre-deployment risk analysis
+  module. It feeds into downstream builders: compliance_framework (regulatory gap mapping), guardrail (runtime controls),
+  and red_team_eval (adversarial validation). Outputs are structured STRIDE documents consumed by security architects and
+  compliance officers. It does NOT perform runtime monitoring (trace_config) or auto-remediation (bugloop).'

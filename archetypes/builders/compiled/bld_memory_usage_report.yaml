@@ -1,5 +1,5 @@
-kind: learning_record
-id: p10_lr_usage_report_builder
+kind: memory
+id: p10_mem_usage_report_builder
 pillar: P10
 llm_function: INJECT
 purpose: Learned patterns and pitfalls for usage_report construction

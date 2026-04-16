@@ -68,6 +68,7 @@ extraction_prompt: 'Schema-constrained LLM triplet extraction: entity types Nucl
   with relation type whitelist'
 node_count_estimate: 60
 edge_count_estimate: 120
+density_score: 1.0
 overview: 'This knowledge graph covers the CEX typed knowledge system architecture -- 8 nuclei (N00-N07), 12 pillars (P01-P12),
   125+ builders, 130 kinds, and the artifacts they produce. A graph is needed here because the relationships between these
   components are multi-hop and bidirectional: N03 dispatches builders, builders produce kinds, kinds live in pillars, pillars

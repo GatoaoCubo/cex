@@ -2,40 +2,84 @@ kind: quality_gate
 id: p07_qg_judge_config
 pillar: P11
 llm_function: GOVERN
-purpose: Quality gate with HARD and SOFT scoring for judge_config
+purpose: Quality gate for judge_config ARTIFACTS (structure/fields, not runtime judgment accuracy)
 quality: null
 title: Quality Gate Judge Config
-version: 1.0.0
-author: wave1_builder_gen_v2
+version: 1.1.0
+author: n03_hybrid_review4
 tags:
 - judge_config
 - builder
 - quality_gate
-tldr: Quality gate with HARD and SOFT scoring for judge_config
+tldr: Tests the judge_config artifact structure. Judgment calibration accuracy is measured by eval runs, not by this gate.
 domain: judge_config construction
 created: '2026-04-14'
 updated: '2026-04-14'
-density_score: 0.85
-definition: "| metric       | threshold | operator | scope         |  \n|--------------|-----------|----------|---------------|\
-  \  \n| accuracy     | 95%       | >=       | evaluation    |  \n| consistency  | 90%       | >=       | judge output  |\
-  \  \n| latency      | 500ms     | <=       | system-wide   |"
-hard_gates: "| ID         | Check                  | Fail Condition                          |  \n|------------|------------------------|-----------------------------------------|\
-  \  \n| H01        | YAML frontmatter valid | Invalid YAML syntax or missing fields   |  \n| H02        | ID matches pattern\
-  \     | ID does not match ^p07_jc_[a-z][a-z0-9_]+.md$ |  \n| H03        | kind field matches     | kind != 'judge_config'\
-  \                  |  \n| H04        | judge model specified  | judge_model is missing or empty         |  \n| H05     \
-  \   | multiple judges        | judge_count < 2                         |  \n| H06        | criteria defined       | evaluation_criteria\
-  \ is empty            |  \n| H07        | timeout configured     | timeout_threshold is missing or <=0     |  \n| H08  \
-  \      | config versioned       | version field is missing or invalid     |"
-soft_scoring: "| Dim        | Dimension     | Weight | Scoring Guide                          |  \n|------------|---------------|--------|----------------------------------------|\
-  \  \n| D01        | Accuracy      | 0.20   | 95-100% = 1.0, 90-94% = 0.8, <90% = 0.5 |  \n| D02        | Consistency   |\
-  \ 0.15   | 90-100% = 1.0, 80-89% = 0.7, <80% = 0.3 |  \n| D03        | Fairness      | 0.15   | 95-100% = 1.0, 85-94% =\
-  \ 0.7, <85% = 0.3 |  \n| D04        | Completeness  | 0.15   | 100% = 1.0, 90-99% = 0.8, <90% = 0.5    |  \n| D05      \
-  \  | Scalability   | 0.10   | 500ms latency = 1.0, 700ms = 0.7, >700ms=0.3 |  \n| D06        | Usability     | 0.10   |\
-  \ Configurable = 1.0, partial = 0.5, none=0.0 |  \n| D07        | Reliability   | 0.10   | 99.9% uptime = 1.0, 99% = 0.7,\
-  \ <99% = 0.3 |  \n| D08        | Others        | 0.05   | Minor issues = 0.5, no issues = 1.0     |"
-actions: "| Score      | Action                          |  \n|------------|---------------------------------|  \n| GOLDEN\
-  \     | Auto-approve and deploy         |  \n| PUBLISH    | Manual review required          |  \n| REVIEW     | Request\
-  \ changes and re-evaluate |  \n| REJECT     | Reject and require rework       |"
-bypass: "| conditions                          | approver         | audit trail                  |  \n|------------------------------------|------------------|------------------------------|\
-  \  \n| Emergency system fix required      | Senior Engineer  | Ticket #1234, 2023-10-05     |  \n| Legacy system compatibility\
-  \        | CTO              | Ticket #5678, 2023-10-06     |"
+density_score: 0.9
+definition: '| Metric | Threshold | Operator | Scope |
+
+  |--------|-----------|----------|-------|
+
+  | ID pattern match | ^p07_jc_[a-z][a-z0-9_]+\.md$ | matches | frontmatter.id |
+
+  | Max bytes | 4096 | <= | file size |
+
+  | Required sections | 5 | >= | body |
+
+  | Rubric levels defined | 1 | >= | body: Rubric |'
+hard_gates: '| ID | Check | Fail Condition |
+
+  |----|-------|----------------|
+
+  | H01 | Valid YAML frontmatter | YAML parse error or missing frontmatter |
+
+  | H02 | ID matches ^p07_jc_[a-z][a-z0-9_]+\.md$ | ID does not match pattern |
+
+  | H03 | kind == "judge_config" | kind field missing or != "judge_config" |
+
+  | H04 | pillar == "P07" | pillar != "P07" |
+
+  | H05 | quality == null | quality self-scored (must be null) |
+
+  | H06 | judge_type in enum | judge_type not in [pairwise, rubric, reference_based, direct] |
+
+  | H07 | judge_model declared | judge_model field missing (provider + model required) |
+
+  | H08 | scoring_scale declared | scoring_scale missing (e.g., 1-5, 1-10, binary, pairwise) |
+
+  | H09 | judgment_criteria non-empty | criteria array missing or [] |
+
+  | H10 | Position bias mitigation noted (for pairwise) | judge_type==pairwise but no swap_order/randomize declared |'
+soft_scoring: '| Dim | Dimension | Weight | Scoring Guide |
+
+  |-----|-----------|--------|---------------|
+
+  | D1 | Schema compliance | 0.25 | All required frontmatter fields present, correct types |
+
+  | D2 | Rubric specificity | 0.20 | Each scale level has a descriptor (Prometheus-style anchored rubric) |
+
+  | D3 | Bias mitigation | 0.20 | Position bias, length bias, self-enhancement bias addressed |
+
+  | D4 | Reference grounding | 0.20 | Reference answer provided (for reference_based) or calibration examples listed |
+
+  | D5 | Industry alignment | 0.15 | Uses MT-Bench / G-Eval / Prometheus / Chatbot-Arena terminology correctly |
+
+
+  Weight check: 0.25 + 0.20 + 0.20 + 0.20 + 0.15 = 1.00'
+actions: '| Score | Action |
+
+  |-------|--------|
+
+  | GOLDEN (>= 9.5) | Auto-approve, promote to examples library |
+
+  | PUBLISH (>= 8.0) | Approve as-is |
+
+  | REVIEW (>= 7.0) | Peer review required before publish |
+
+  | REJECT (< 7.0) | Rework; fix all HARD failures and re-submit |'
+bypass: '| Conditions | Approver | Audit Trail |
+
+  |------------|----------|-------------|
+
+  | Exploratory judge (research-only, not for production eval) | Pillar owner (P07) | Log bypass with research context + expected
+  deprecation date |'

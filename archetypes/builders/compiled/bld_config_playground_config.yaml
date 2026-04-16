@@ -16,7 +16,13 @@ domain: playground_config construction
 created: '2026-04-14'
 updated: '2026-04-14'
 density_score: 0.85
-naming_convention: "Pattern: `p09_pg_{{name}}.yaml`  \nExamples:  \n- p09_pg_example.yaml  \n- p09_pg_test.yaml"
+naming_convention: 'Pattern: `p09_pg_{{name}}.yaml`
+
+  Examples:
+
+  - p09_pg_example.yaml
+
+  - p09_pg_test.yaml'
 paths: 'Artifacts: `/mnt/data/cex/playgrounds/p09/{{name}}` Logs: `/mnt/data/cex/logs/p09/{{name}}`'
 limits:
 - 'max_bytes: 4096'

@@ -24,18 +24,18 @@ phase_1_research:
 - Document technical constraints (e.g., supported frameworks, analytics integration).
 - Prioritize features for inclusion based on impact and user engagement potential.
 phase_2_compose:
-- Reference SCHEMA.md to structure tour metadata (id, name, version).
+- Reference bld_schema_product_tour.md to structure tour metadata (id, name, version).
 - Define step order using `step_id`, `title`, `content`, and `target_element` fields.
 - Write tooltip content with concise, action-oriented language (max 2 sentences).
 - 'Assign trigger conditions (e.g., `user_first_time: true`, `feature_flag: enabled`).'
-- Specify visual styles (color, icon) per step in `style` block (see OUTPUT_TEMPLATE.md).
+- Specify visual styles (color, icon) per step in `style` block (see bld_output_template_product_tour.md).
 - Align tour with brand guidelines (tone, terminology, visual hierarchy).
-- Use OUTPUT_TEMPLATE.md to populate `tour.yaml` with structured data.
+- Use bld_output_template_product_tour.md to populate `tour.yaml` with structured data.
 - Add analytics events for each step (e.g., `step_viewed`, `tooltip_closed`).
 - Validate YAML syntax and schema compliance with linter tools.
 phase_3_validate:
-- '[ ] ✅ All steps match SCHEMA.md requirements (required fields, data types).'
-- '[ ] ✅ Tooltip content aligns with user research and avoids jargon.'
-- '[ ] ✅ Triggers fire correctly in simulated environments (no false positives).'
-- '[ ] ✅ Visual design matches brand guidelines and is accessible (contrast, fonts).'
-- '[ ] ✅ End-to-end tour flows complete without errors in production preview.'
+- '[ ] All steps match bld_schema_product_tour.md requirements (required fields, data types).'
+- '[ ] Tooltip content aligns with user research and avoids jargon.'
+- '[ ] Triggers fire correctly in simulated environments (no false positives).'
+- '[ ] Visual design matches brand guidelines and is accessible (contrast, fonts).'
+- '[ ] End-to-end tour flows complete without errors in production preview.'

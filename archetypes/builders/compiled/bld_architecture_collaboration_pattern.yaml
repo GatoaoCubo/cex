@@ -1,0 +1,69 @@
+kind: architecture
+id: bld_architecture_collaboration_pattern
+pillar: P08
+llm_function: CONSTRAIN
+purpose: Component map of collaboration_pattern -- inventory, dependencies
+quality: null
+title: Architecture Collaboration Pattern
+version: 1.0.0
+author: wave1_builder_gen
+tags:
+- collaboration_pattern
+- builder
+- architecture
+tldr: Component map of collaboration_pattern -- inventory, dependencies
+domain: collaboration_pattern construction
+created: '2026-04-13'
+updated: '2026-04-13'
+density_score: 0.85
+component_inventory: '| Name | Role | Owner | Status |
+
+  |------|------|-------|--------|
+
+  | Pattern Orchestrator | Coordinates pattern execution | Collaboration Team | Active |
+
+  | Validator | Ensures pattern compliance | Rules Team | Active |
+
+  | UI Builder | Generates collaboration interfaces | UX Team | Under Development |
+
+  | Data Modeler | Defines pattern data schemas | Data Team | Active |
+
+  | Integration Hub | Connects to external systems | CEX Integration | Active |
+
+  | Logger | Tracks pattern usage | Ops Team | Active |'
+dependencies: '| From | To | Type |
+
+  |------|----|------|
+
+  | Orchestrator | Validator | Control Flow |
+
+  | UI Builder | Data Modeler | Data Flow |
+
+  | Integration Hub | CEX API | External Dependency |
+
+  | Logger | Orchestrator | Event Subscription |'
+architectural_position: collaboration_pattern sits in P12 (Orchestration layer) as the structural specification for multi-agent
+  coordination topology. It is consumed by dispatch systems and agent orchestration frameworks that instantiate agent roles
+  and channels. It sits above individual agent definitions (P02 agent) and alongside workflow (sequential execution) and dispatch_rule
+  (task routing).
+properties: '| Property | Value |
+
+  |----------|-------|
+
+  | Kind | `architecture` |
+
+  | Pillar | P08 |
+
+  | Domain | collaboration_pattern construction |
+
+  | Pipeline | 8F (F1-F8) |
+
+  | Scorer | cex_score.py |
+
+  | Compiler | cex_compile.py |
+
+  | Retriever | cex_retriever.py |
+
+  | Quality target | 9.0+ |
+
+  | Density target | 0.85+ |'

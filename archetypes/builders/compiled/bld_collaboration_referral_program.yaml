@@ -17,11 +17,13 @@ created: '2026-04-14'
 updated: '2026-04-14'
 density_score: 0.85
 crew_role: Designs and manages referral program logic, tracking, and integration with external systems.
-receives_from: "| Builder         | What               | Format  |  \n|-----------------|--------------------|---------| \
-  \ \n| Referral Designer | Program rules      | JSON    |  \n| Data Engineer   | User data          | CSV     |  \n| Marketing\
-  \ Team  | Campaign details   | YAML    |"
-produces_for: "| Builder             | What               | Format  |  \n|---------------------|--------------------|---------|\
-  \  \n| Referral Program Manager | Program config   | JSON    |  \n| Analytics Team      | Referral stats     | CSV     |\
-  \  \n| User Interface Team | UI components      | Figma   |"
-boundary: Does NOT handle A/B testing (ab_test_config) or pricing models (content_monetization). A/B testing is managed by
-  Experiment Engineers; pricing is handled by Monetization Specialists.
+receives_from: "| Builder                   | What                              | Format  |  \n|---------------------------|-----------------------------------|---------|\
+  \  \n| content_monetization-builder | Pricing tier data (LTV, CAC ratios) | YAML  |  \n| landing_page-builder      | Campaign\
+  \ landing page spec        | YAML    |  \n| onboarding_flow-builder   | Aha-moment trigger points for invite hooks | YAML\
+  \ |"
+produces_for: "| Builder                   | What                              | Format  |  \n|---------------------------|-----------------------------------|---------|\
+  \  \n| landing_page-builder      | Referral CTA copy and reward spec | YAML    |  \n| onboarding_flow-builder   | Invite\
+  \ hook config (step, trigger, reward) | YAML |  \n| content_monetization-builder | Viral k-factor input for revenue model\
+  \ | YAML |"
+boundary: Does NOT handle A/B test configurations (experiment_config-builder) or pricing models (content_monetization-builder).
+  Referral program produces the reward spec; monetization determines whether the CAC is sustainable.

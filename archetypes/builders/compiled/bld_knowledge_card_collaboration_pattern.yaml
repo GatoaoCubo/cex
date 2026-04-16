@@ -1,0 +1,81 @@
+kind: knowledge_card
+id: bld_knowledge_card_collaboration_pattern
+pillar: P01
+llm_function: INJECT
+purpose: Domain knowledge for collaboration_pattern production
+quality: null
+title: Knowledge Card Collaboration Pattern
+version: 1.0.0
+author: wave1_builder_gen
+tags:
+- collaboration_pattern
+- builder
+- knowledge_card
+tldr: Domain knowledge for collaboration_pattern production
+domain: collaboration_pattern construction
+created: '2026-04-13'
+updated: '2026-04-13'
+density_score: 0.85
+domain_overview: Collaboration_pattern artifacts define how autonomous agents interact to achieve shared goals in decentralized
+  systems. These patterns are critical in robotics, autonomous vehicles, and distributed AI, where agents must dynamically
+  negotiate roles, share information, and resolve conflicts without centralized control. Unlike workflows, which enforce rigid
+  execution sequences, collaboration patterns emphasize emergent coordination through rules, protocols, and adaptive behaviors.
+  They underpin systems like swarm robotics, multi-robot task allocation, and decentralized decision-making in IoT networks.
+  Key challenges include ensuring scalability, fault tolerance, and real-time responsiveness. Patterns often leverage consensus
+  algorithms (e.g., Paxos, Raft) and communication protocols (e.g., ROS 2, MQTT) to enable agents to synchronize actions while
+  avoiding bottlenecks. The focus is on topological relationships—how agents connect, influence, and depend on each other—rather
+  than predefined task sequences.
+key_concepts: "| Concept                | Definition                                                                 | Source\
+  \                      |  \n|-----------------------|----------------------------------------------------------------------------|----------------------------|\
+  \  \n| Agent Role            | Defined responsibilities (e.g., leader, follower) within a coordination topology | IEEE 1860-2017\
+  \             |  \n| Communication Protocol | Rules for message exchange (e.g., publish-subscribe, request-response)   \
+  \   | ROS 2 Documentation        |  \n| Consensus Mechanism   | Algorithm for agreeing on shared state (e.g., Paxos, Raft)\
+  \                 | Lamport (1989)             |  \n| Topology Type         | Structural arrangement (e.g., mesh, star,\
+  \ ring)                             | IEEE 1860-2017             |  \n| Conflict Resolution   | Strategies for resolving\
+  \ competing agent goals (e.g., voting, arbitration) | ICRA 2020                  |  \n| Trust Model           | Framework\
+  \ for evaluating agent reliability (e.g., reputation-based systems) | IJCAI 2019                 |  \n| Scalability Heuristic\
+  \ | Metrics for evaluating performance as agent count increases                 | IEEE TPAMI 2021            |  \n| Fault\
+  \ Tolerance       | Ability to maintain coordination despite agent failures                    | ROS 2 Design Docs     \
+  \     |"
+industry_standards:
+- 'IEEE 1860-2017: Standard for Intelligent Vehicle Initiative Communication'
+- ROS 2 (Robot Operating System 2)
+- Apache Kafka (for distributed event streaming)
+- 'IEEE 1471: Architecture Tradeoff Analysis Method (ATAM)'
+- ICRA/IROS Conference Papers on Multi-Agent Coordination
+- 'ISO/IEC 23247: Systems and software engineering — Architecture description'
+- Paxos and Raft consensus algorithms (Lamport, Ongaro)
+common_patterns:
+- 'Leader-Follower Hierarchy: Centralized control with dynamic role assignment.'
+- 'Consensus-Based Synchronization: Agents agree on shared goals via voting.'
+- 'Event-Driven Coordination: Actions triggered by environmental or agent-generated events.'
+- 'Mesh Networking: Peer-to-peer communication with redundant pathways.'
+- 'Task Allocation via Auctions: Distributing workloads through competitive bidding.'
+- 'Reactive Coordination: Immediate responses to local stimuli without global planning.'
+pitfalls:
+- Over-reliance on centralized coordination, reducing fault tolerance.
+- Ignoring latency in communication protocols, causing out-of-sync actions.
+- Poorly defined trust models leading to collusion or misinformation.
+- Inadequate scalability testing, resulting in performance degradation under load.
+- Hardcoding topology types instead of enabling dynamic reconfiguration.
+properties: '| Property | Value |
+
+  |----------|-------|
+
+  | Kind | `knowledge_card` |
+
+  | Pillar | P01 |
+
+  | Domain | collaboration_pattern construction |
+
+  | Pipeline | 8F (F1-F8) |
+
+  | Scorer | cex_score.py |
+
+  | Compiler | cex_compile.py |
+
+  | Retriever | cex_retriever.py |
+
+  | Quality target | 9.0+ |
+
+  | Density target | 0.85+ |'

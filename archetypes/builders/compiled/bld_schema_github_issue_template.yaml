@@ -17,27 +17,49 @@ created: '2026-04-14'
 updated: '2026-04-14'
 density_score: 0.85
 frontmatter_fields: ''
-required: "| Field      | Type   | Required | Default | Notes                              |  \n|------------|--------|----------|---------|------------------------------------|\
-  \  \n| id         | string | yes      | null    | Must match ID Pattern              |  \n| kind       | string | yes  \
-  \    | null    | Always \"github_issue_template\"     |  \n| pillar     | string | yes      | null    | Always \"P05\" \
-  \                      |  \n| title      | string | yes      | null    | Descriptive title                  |  \n| version\
-  \    | string | yes      | \"1.0\"   | Template version                   |  \n| created    | date   | yes      | null \
-  \   | ISO 8601 date                      |  \n| updated    | date   | yes      | null    | ISO 8601 date               \
-  \       |  \n| author     | string | yes      | null    | Creator’s GitHub username          |  \n| domain     | string\
-  \ | yes      | null    | Repository or project name         |  \n| quality    | null   | yes      | null    | Never self-score;\
-  \ peer review assigns |  \n| tags       | list   | yes      | []      | Keywords for categorization        |  \n| tldr \
-  \      | string | yes      | null    | One-sentence summary               |  \n| template_type | string | yes | null | \"\
-  bug_report\", \"feature_request\", etc. |  \n| labels     | list   | yes      | []      | GitHub labels                \
-  \      |"
-recommended: "| Field         | Type   | Notes                          |  \n|---------------|--------|--------------------------------|\
-  \  \n| assignees     | list   | Default assignees              |  \n| issue_category| string | \"enhancement\", \"bug\"\
-  , \"discussion\" |"
+required: '| Field      | Type   | Required | Default | Notes                              |
+
+  |------------|--------|----------|---------|------------------------------------|
+
+  | id         | string | yes      | null    | Must match ID Pattern              |
+
+  | kind       | string | yes      | null    | Always "github_issue_template"     |
+
+  | pillar     | string | yes      | null    | Always "P05"                       |
+
+  | title      | string | yes      | null    | Descriptive title                  |
+
+  | version    | string | yes      | "1.0"   | Template version                   |
+
+  | created    | date   | yes      | null    | ISO 8601 date                      |
+
+  | updated    | date   | yes      | null    | ISO 8601 date                      |
+
+  | author     | string | yes      | null    | Creator’s GitHub username          |
+
+  | domain     | string | yes      | null    | Repository or project name         |
+
+  | quality    | null   | yes      | null    | Never self-score; peer review assigns |
+
+  | tags       | list   | yes      | []      | Keywords for categorization        |
+
+  | tldr       | string | yes      | null    | One-sentence summary               |
+
+  | template_type | string | yes | null | "bug_report", "feature_request", etc. |
+
+  | labels     | list   | yes      | []      | GitHub labels                      |'
+recommended: '| Field         | Type   | Notes                          |
+
+  |---------------|--------|--------------------------------|
+
+  | assignees     | list   | Default assignees              |
+
+  | issue_category| string | "enhancement", "bug", "discussion" |'
 id_pattern: ^p05_git_[a-z][a-z0-9_]+.md$
-body_structure: "1. Template Type and Purpose  \n   Define the issue category (e.g., bug report, feature request).  \n\n2.\
-  \ Labels and Assignees  \n   Specify default GitHub labels and assignees for triage.  \n\n3. Issue Category and Priority\
-  \  \n   Categorize the issue and assign priority (high/medium/low).  \n\n4. Related Issues and Dependencies  \n   Link to\
-  \ related issues or dependencies (e.g., blocked_by, related_issues).  \n\n5. TLDR Summary  \n   Concise one-sentence summary\
-  \ of the issue."
+body_structure: "1. Template Type and Purpose\n   Define the issue category (e.g., bug report, feature request).\n\n2. Labels\
+  \ and Assignees\n   Specify default GitHub labels and assignees for triage.\n\n3. Issue Category and Priority\n   Categorize\
+  \ the issue and assign priority (high/medium/low).\n\n4. Related Issues and Dependencies\n   Link to related issues or dependencies\
+  \ (e.g., blocked_by, related_issues).\n\n5. TLDR Summary\n   Concise one-sentence summary of the issue."
 constraints:
 - ID must match ^p05_git_[a-z][a-z0-9_]+.md$ exactly.
 - All required fields must be present and valid.

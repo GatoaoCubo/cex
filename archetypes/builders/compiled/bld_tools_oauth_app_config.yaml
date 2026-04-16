@@ -16,16 +16,32 @@ domain: oauth_app_config construction
 created: '2026-04-14'
 updated: '2026-04-14'
 density_score: 0.85
-production_tools: "| Tool | Purpose | When |  \n|------|---------|------|  \n| oauth_compile.py | Compiles OAuth app config\
-  \ from templates | Deploying new apps |  \n| oauth_scope_validator.py | Validates scope definitions against policies | Configuring\
-  \ permissions |  \n| oauth_retriever.py | Fetches config data from external sources | Integrating third-party services |\
-  \  \n| oauth_doctor.py | Diagnoses misconfigurations in app settings | Troubleshooting failures |  \n| oauth_tokenizer.py\
-  \ | Generates and manages access tokens | Implementing authentication flows |  \n| oauth_encryptor.py | Encrypts sensitive\
-  \ config fields | Securing production environments |"
-validation_tools: "| Tool | Purpose | When |  \n|------|---------|------|  \n| scope_checker.py | Ensures scopes match registered\
-  \ APIs | Pre-deployment checks |  \n| compliance_tester.py | Verifies config adherence to OAuth 2.0 specs | Auditing configurations\
-  \ |  \n| token_validator.py | Tests token lifecycle and revocation | Security testing |  \n| endpoint_checker.py | Validates\
-  \ redirect URIs and endpoints | Configuring app redirects |"
+production_tools: '| Tool | Purpose | When |
+
+  |------|---------|------|
+
+  | oauth_compile.py | Compiles OAuth app config from templates | Deploying new apps |
+
+  | oauth_scope_validator.py | Validates scope definitions against policies | Configuring permissions |
+
+  | oauth_retriever.py | Fetches config data from external sources | Integrating third-party services |
+
+  | oauth_doctor.py | Diagnoses misconfigurations in app settings | Troubleshooting failures |
+
+  | oauth_tokenizer.py | Generates and manages access tokens | Implementing authentication flows |
+
+  | oauth_encryptor.py | Encrypts sensitive config fields | Securing production environments |'
+validation_tools: '| Tool | Purpose | When |
+
+  |------|---------|------|
+
+  | scope_checker.py | Ensures scopes match registered APIs | Pre-deployment checks |
+
+  | compliance_tester.py | Verifies config adherence to OAuth 2.0 specs | Auditing configurations |
+
+  | token_validator.py | Tests token lifecycle and revocation | Security testing |
+
+  | endpoint_checker.py | Validates redirect URIs and endpoints | Configuring app redirects |'
 external_references:
 - OAuthlib
 - Flask-OAuthlib

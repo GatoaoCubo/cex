@@ -45,10 +45,7 @@ naming_anti_patterns_rejected_by_h02: '| Wrong Pattern                    | Reas
 
   | grounding_record_7f3a2c1b.md     | Missing pillar prefix entirely         |
 
-  | p10_gr_inference_7f3a2c1b.md     | Verbose -- use UUID prefix only        |
-
-
-  ---'
+  | p10_gr_inference_7f3a2c1b.md     | Verbose -- use UUID prefix only        |'
 output_paths: '| Context                         | Path                                          |
 
   |---------------------------------|-----------------------------------------------|
@@ -61,10 +58,7 @@ output_paths: '| Context                         | Path                         
 
   | Proposal files (concurrent)     | .cex/runtime/proposals/                       |
 
-  | Full trace log (overflow ref)   | P10_memory/grounding/traces/{{inference_id}}.json |
-
-
-  ---'
+  | Full trace log (overflow ref)   | P10_memory/grounding/traces/{{inference_id}}.json |'
 byte_limits: '| Limit Type        | Value  | Enforcement               |
 
   |-------------------|--------|---------------------------|
@@ -93,10 +87,7 @@ byte_budget_per_section_target: '| Section               | Target Bytes | Hard M
 
   | Audit Summary         | 300          | 500      |
 
-  | Total (3 tools, 5 chunks) | ~2650   | 4096     |
-
-
-  ---'
+  | Total (3 tools, 5 chunks) | ~2650   | 4096     |'
 post_build_hooks: ''
 hook_1_output_hash_verification_mandatory: 'Runs automatically after F6 PRODUCE if output_hash was not provided by the caller.
 
@@ -129,10 +120,7 @@ hook_3_compile_and_size_check_mandatory: 'python tools/cex_compile.py P10_memory
 hook_4_quality_score_mandatory_before_publish: 'python tools/cex_score.py --apply P10_memory/grounding/p10_gr{{prefix}}.md
 
 
-  A score below 8.0 blocks publication. Score between 8.0 and 9.0 allowed with documented waiver.
-
-
-  ---'
+  A score below 8.0 blocks publication. Score between 8.0 and 9.0 allowed with documented waiver.'
 runtime_flags: '| Flag                    | Type    | Default  | Description                                                   |
 
   |-------------------------|---------|----------|---------------------------------------------------------------|
@@ -152,7 +140,7 @@ runtime_flags: '| Flag                    | Type    | Default  | Description    
   | max_rag_chunks_inline   | integer | 20       | Truncate rag_chunks table beyond this count                  |'
 setting_flags: "Flags are set in the grounding record builder section of the CEX config:\n\n# .cex/config/builder_config.yaml\n\
   agent_grounding_record:\n  auto_compute_hash: true\n  require_c2pa: false\n  require_model_signature: false\n  downstream_use_default:\
-  \ \"test\"\n  archive_after_days: 30\n  max_tool_calls_inline: 10\n  max_rag_chunks_inline: 20\n\n---"
+  \ \"test\"\n  archive_after_days: 30\n  max_tool_calls_inline: 10\n  max_rag_chunks_inline: 20"
 environment_requirements: '| Requirement              | Value                   | Notes                                              |
 
   |--------------------------|-------------------------|----------------------------------------------------|
@@ -165,10 +153,7 @@ environment_requirements: '| Requirement              | Value                   
 
   | Disk space per record    | ~8 KB                   | Includes MD source + compiled YAML + trace log    |
 
-  | Write permissions        | P10_memory/grounding/   | Builder must have write access to this directory  |
-
-
-  ---'
+  | Write permissions        | P10_memory/grounding/   | Builder must have write access to this directory  |'
 retention_policy: '| Record Type              | Retention            | Archive Action                                       |
 
   |--------------------------|----------------------|------------------------------------------------------|

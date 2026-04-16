@@ -36,10 +36,7 @@ production_tools: 'CEX internal tools used during and after webinar_script artif
   all builders |
 
   | cex_hygiene.py | `python _tools/cex_hygiene.py --check {path}` | F7 GOVERN -- frontmatter completeness check | List of
-  missing or malformed fields |
-
-
-  ---'
+  missing or malformed fields |'
 validation_tools: 'Checks specific to webinar_script quality gates.
 
 
@@ -59,10 +56,7 @@ validation_tools: 'Checks specific to webinar_script quality gates.
   present |
 
   | Speaker note checker | Verify [SPEAKER NOTE] in every segment | Grep `[SPEAKER NOTE` from each segment | Min 1 per segment
-  |
-
-
-  ---'
+  |'
 external_references: '| Platform | Reference | Relevance |
 
   |---------|-----------|----------|
@@ -78,10 +72,7 @@ external_references: '| Platform | Reference | Relevance |
   | Teams Live Events API | https://learn.microsoft.com/en-us/microsoftteams/teams-live-events | Teams live event creation
   and Q&A moderation |
 
-  | GoToWebinar REST API | https://developer.goto.com/GoToWebinarV2 | Programmatic scheduling and attendee registration |
-
-
-  ---'
+  | GoToWebinar REST API | https://developer.goto.com/GoToWebinarV2 | Programmatic scheduling and attendee registration |'
 tool_execution_order_f5_call: '| Step | Tool | Purpose |
 
   |------|------|---------|

@@ -58,9 +58,9 @@ recommended: '| Field | Type | Notes |
 
   | environment | string | Deployment context |'
 id_pattern: ^p09_oauth_[a-z][a-z0-9_]+.yaml$
-body_structure: "1. Configuration Overview  \n   Define app metadata, redirect URIs, and scope requirements.\n\n2. Security\
-  \ Parameters  \n   Specify encryption standards, secret storage, and access controls.\n\n3. Authorization Flow  \n   Document\
-  \ grant types, token endpoints, and refresh mechanisms.\n\n4. Metadata Schema  \n   Include JSON structure for dynamic client\
+body_structure: "1. Configuration Overview\n   Define app metadata, redirect URIs, and scope requirements.\n\n2. Security\
+  \ Parameters\n   Specify encryption standards, secret storage, and access controls.\n\n3. Authorization Flow\n   Document\
+  \ grant types, token endpoints, and refresh mechanisms.\n\n4. Metadata Schema\n   Include JSON structure for dynamic client\
   \ registration."
 constraints:
 - All required fields must be present and valid

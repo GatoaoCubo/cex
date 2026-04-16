@@ -2,41 +2,88 @@ kind: schema
 id: bld_schema_judge_config
 pillar: P06
 llm_function: CONSTRAIN
-purpose: Formal schema -- SINGLE SOURCE OF TRUTH for judge_config
+purpose: Formal schema -- SINGLE SOURCE OF TRUTH for judge_config artifacts
 quality: null
 title: Schema Judge Config
-version: 1.0.0
-author: wave1_builder_gen_v2
+version: 1.1.0
+author: n03_hybrid_review4
 tags:
 - judge_config
 - builder
 - schema
-tldr: Formal schema -- SINGLE SOURCE OF TRUTH for judge_config
+tldr: Schema for an LLM-as-judge configuration -- aligned with MT-Bench, Chatbot-Arena, G-Eval, Prometheus, PandaLM canonical
+  patterns.
 domain: judge_config construction
 created: '2026-04-14'
 updated: '2026-04-14'
-density_score: 0.85
+density_score: 0.92
 frontmatter_fields: ''
-required: "| Field | Type | Required | Default | Notes |  \n|---|---|---|---|---|  \n| id | string | yes |  | Must match ID\
-  \ Pattern |  \n| kind | string | yes | \"judge_config\" |  |  \n| pillar | string | yes | \"P07\" |  |  \n| title | string\
-  \ | yes |  | Descriptive name |  \n| version | string | yes | \"1.0.0\" | Semantic versioning |  \n| created | date | yes\
-  \ |  | ISO 8601 format |  \n| updated | date | yes |  | ISO 8601 format |  \n| author | string | yes |  | Owner's identifier\
-  \ |  \n| domain | string | yes |  | Application context |  \n| quality | null | yes | null | Never self-score; peer review\
-  \ assigns |  \n| tags | array | yes | [] | Keywords for categorization |  \n| tldr | string | yes |  | Summary of purpose\
-  \ |  \n| judgment_criteria | array | yes | [] | List of evaluation rules |  \n| scoring_weights | object | yes | {} | Key-value\
-  \ pairs for criteria importance |"
-recommended: "| Field | Type | Notes |  \n|---|---|---|  \n| example_judgment | string | Sample output for clarity |  \n|\
-  \ reviewers | array | List of peer reviewers |  \n| last_reviewed | date | Last peer review date |  \n| notes | string |\
-  \ Additional context |"
-id_pattern: ^p07_jc_[a-z][a-z0-9_]+.md$
-body_structure: "1. Introduction  \n   Overview of the judge_config's purpose and scope.  \n\n2. Judgment Criteria  \n   Detailed\
-  \ description of evaluation rules and thresholds.  \n\n3. Scoring Weights  \n   Explanation of how criteria influence final\
-  \ scores.  \n\n4. Review Process  \n   Steps for peer validation and quality assurance.  \n\n5. Constraints  \n   Hard limits\
-  \ on inputs, outputs, or configurations.  \n\n6. Example  \n   Illustrative use case with expected outcomes."
+required: '| Field | Type | Required | Default | Notes |
+
+  |-------|------|----------|---------|-------|
+
+  | id | string | yes | -- | Must match ID Pattern below |
+
+  | kind | string | yes | "judge_config" | Must equal "judge_config" |
+
+  | pillar | string | yes | "P07" | Must equal "P07" |
+
+  | title | string | yes | -- | Descriptive name |
+
+  | version | string | yes | "1.0.0" | Semantic version |
+
+  | created | date | yes | -- | ISO 8601 |
+
+  | updated | date | yes | -- | ISO 8601 |
+
+  | author | string | yes | -- | Owner |
+
+  | domain | string | yes | -- | Judging domain (factuality, safety, style, pairwise_chat, rag_faithfulness) |
+
+  | quality | null | yes | null | NEVER self-score; peer review assigns |
+
+  | tags | array | yes | [] | Keywords |
+
+  | tldr | string | yes | -- | One-sentence summary |
+
+  | judge_type | enum | yes | -- | One of: pairwise, rubric, reference_based, direct |
+
+  | judge_model | object | yes | -- | {provider, model, temperature} e.g. {provider: openai, model: gpt-4-turbo, temperature:
+  0} |
+
+  | scoring_scale | string | yes | -- | "1-5", "1-10", "binary", "pairwise_ab_tie", or custom |
+
+  | judgment_criteria | array | yes | [] | Named criteria (relevance, faithfulness, coherence, harmlessness, ...) |
+
+  | prompt_template_ref | string | yes | -- | Reference to prompt_template artifact id |'
+recommended: '| Field | Type | Notes |
+
+  |-------|------|-------|
+
+  | rubric | object | Anchored descriptors per scale level (Prometheus-style) |
+
+  | reference_answer_ref | string | Required for judge_type == "reference_based" |
+
+  | position_bias_mitigation | enum | "swap_order", "randomize", "none" -- for pairwise |
+
+  | length_bias_mitigation | string | e.g., "normalize_by_token_count" |
+
+  | calibration_examples | array | Few-shot exemplars with gold scores |
+
+  | self_consistency_n | integer | Number of judge samples to aggregate |'
+id_pattern: 'Regex: `^p07_jc_[a-z][a-z0-9_]+\.md$` Examples: `p07_jc_mtbench_gpt4.md`, `p07_jc_prometheus_rubric5.md`, `p07_jc_pairwise_arena.md`'
+body_structure_required_sections:
+- Overview -- what this judge evaluates, when to invoke it.
+- 'Criteria -- each criterion: name, definition, observable signals.'
+- Rubric -- for each scale level, a descriptor and a worked example.
+- Judge Model -- provider, model, temperature, decoding parameters; rationale for choice.
+- Bias Controls -- position, length, self-enhancement, verbosity mitigations.
+- Example -- input -> judge prompt -> sample output with parsed score.
 constraints:
-- All judgment_criteria must be objective and quantifiable.
-- Scoring_weights must sum to 100% across all criteria.
+- judge_type is an enum; no free-form values.
+- For judge_type == "reference_based", reference_answer_ref MUST be set.
+- For judge_type == "pairwise", position_bias_mitigation MUST be declared (non-null).
+- judge_model.temperature SHOULD be 0 for deterministic scoring unless self_consistency_n > 1.
+- scoring_weights (if present in body) MUST sum to 1.00.
 - File size must not exceed 4096 bytes.
-- Tags must follow domain-specific naming conventions.
-- Peer review is mandatory for quality field assignment.
-- Created and updated dates must be synchronized with versioning.
+- quality is assigned by peer review; always null at authoring time.

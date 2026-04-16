@@ -1,0 +1,37 @@
+kind: output_template
+id: bld_output_template_experiment_tracker
+pillar: P05
+llm_function: PRODUCE
+purpose: Template with vars for experiment_tracker production
+quality: null
+title: Output Template Experiment Tracker
+version: 1.0.0
+author: wave1_builder_gen
+tags:
+- experiment_tracker
+- builder
+- output_template
+tldr: Template with vars for experiment_tracker production
+domain: experiment_tracker construction
+created: '2026-04-13'
+updated: '2026-04-13'
+density_score: 0.85
+1_objective: '{{describe_the_primary_goal}}'
+2_hypothesis: '{{if_condition_then_outcome}}'
+3_parameters_setup:
+- 'Variable A: {{value_a}}'
+- 'Variable B: {{value_b}}'
+- 'Environment: {{environment_details}}'
+4_execution_steps:
+- '{{step_1}}'
+- '{{step_2}}'
+- '{{step_3}}'
+5_results: '| Metric | Target | Observed |
+
+  |--------|--------|----------|
+
+  | {{metric_1}} | {{target_1}} | {{actual_1}} |
+
+  | {{metric_2}} | {{target_2}} | {{actual_2}} |'
+6_analysis: '{{interpretation_of_observed_data}}'
+7_conclusion_next_steps: '{{decision_to_scale_pivot_or_discard}}'

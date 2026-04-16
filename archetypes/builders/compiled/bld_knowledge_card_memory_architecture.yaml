@@ -4,59 +4,106 @@ pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for memory_architecture production
 quality: null
-title: Knowledge Card Memory Architecture
-version: 1.0.0
-author: wave1_builder_gen_v2
+title: 'Knowledge Card: memory_architecture Builder'
+version: 2.0.0
+author: n06_commercial
 tags:
 - memory_architecture
 - builder
 - knowledge_card
-tldr: Domain knowledge for memory_architecture production
-domain: memory_architecture construction
+- llm_agent_memory
+- memgpt
+- letta
+tldr: 'LLM agent memory architecture: hierarchical working/episodic/semantic/procedural layers, MemGPT/Letta pipeline, Zep/mem0/Cognee
+  backends, tier-differentiated PRO/ENTERPRISE features'
+domain: LLM agent memory systems
 created: '2026-04-14'
 updated: '2026-04-14'
-density_score: 0.85
-domain_overview: Memory architecture design focuses on structuring hierarchical systems (cache, main memory, storage) to optimize
-  performance, latency, and scalability. Modern systems integrate heterogeneous memory technologies (e.g., DRAM, NVM) with
-  coherent interconnects, requiring careful balancing of bandwidth, access patterns, and fault tolerance. Key challenges include
-  managing cache coherence across multi-core and distributed environments, mitigating memory bottlenecks, and ensuring compatibility
-  with evolving standards like DDR5 and persistent memory. Designs must account for memory controllers, channel configurations,
-  error correction (ECC), and thermal management, while aligning with industry frameworks such as UCIe and CXL. The shift
-  toward disaggregated memory and compute-attached storage further complicates architecture decisions, emphasizing the need
-  for modular, scalable, and interoperable designs.
-key_concepts: "| Concept                  | Definition                                                                 | Source\
-  \                          |  \n|-------------------------|----------------------------------------------------------------------------|---------------------------------|\
-  \  \n| Memory Hierarchy        | Layered structure (cache, RAM, storage) to balance speed and capacity      | Computer Architecture:\
-  \ Hennessy |  \n| Cache Coherence         | Mechanism to ensure consistency across cached data in multi-core systems   |\
-  \ MESI Protocol (Intel)          |  \n| NUMA                    | Architecture where memory access time depends on location\
-  \ relative to CPU | IBM Power Systems Documentation |  \n| Memory Bandwidth        | Data transfer rate between memory and\
-  \ processor (measured in GB/s)         | JEDEC DDR5 Standard            |  \n| Latency                 | Time delay between\
-  \ memory request and data availability                    | Intel Xeon Scalable White Paper|  \n| Memory Channels      \
-  \   | Parallel pathways for data transfer between controller and DIMMs           | DDR4/DDR5 Specifications       |  \n\
-  | ECC Memory              | Error-correcting code to detect/correct bit errors                         | IBM z15 Technical\
-  \ Guide        |  \n| Persistent Memory       | Non-volatile memory accessible via memory bus (e.g., Intel Optane)     \
-  \   | NVM Express (NVMe)             |  \n| Interconnect Protocols  | Standards like PCIe, CXL, or NVLink for memory-device\
-  \ communication       | PCIe 6.0 Specification         |  \n| Memory Controller       | Hardware managing data flow between\
-  \ CPU, memory, and storage               | AMD Zen 3 Architecture White Paper |"
-industry_standards:
-- JEDEC DDR5 SDRAM Standard
-- PCIe 6.0 Specification
-- NVM Express (NVMe) 1.4
-- Intel CXL 3.0 Interconnect Specification
-- OpenCAPI 2.0
-- IEEE 1848.1-2020 (Memory Channel Interface)
-- AMD Infinity Fabric Architecture
-- IBM z15 Memory Architecture Guide
+density_score: 0.91
+domain_overview: 'Memory architecture in LLM agents defines how systems store, retrieve, and manage context across sessions.
+  Unlike hardware memory, agent memory is about *information persistence* -- keeping what matters, forgetting what does not,
+  and surfacing the right facts at generation time. The field is shaped by MemGPT/Letta (Packer 2023) which introduced virtual
+  context management with paging between in-context (working) and external (persistent) memory tiers. Modern agent memory
+  systems layer four types: working (active context window), episodic (interaction history), semantic (extracted facts/entities),
+  and procedural (skills, workflows, tool usage patterns). Production systems combine vector stores, knowledge graphs, and
+  key-value backends to serve each layer at appropriate latency.'
+key_concepts: '| Concept | Definition | Source |
+
+  |---------|-----------|--------|
+
+  | Virtual Context Management | Paging memory in/out of the fixed LLM context window | MemGPT/Letta (Packer 2023) |
+
+  | Working Memory | Active in-context window: system prompt + recent messages | MemGPT architecture |
+
+  | Episodic Memory | Interaction history: conversation logs, session summaries | LangMem, Zep |
+
+  | Semantic Memory | Extracted facts, entities, relationships in persistent store | mem0, Cognee |
+
+  | Procedural Memory | Skills, SOPs, learned workflows stored outside context | Voyager (Wang 2023) |
+
+  | Temporal Knowledge Graph | Time-aware graph capturing evolving entity relationships | Zep (2024) |
+
+  | Selective Memory Extraction | LLM-driven extraction of facts worth retaining | mem0 (2024) |
+
+  | Sleep-Time Consolidation | Offline processing to promote and merge memories | MemGPT consolidation pipeline |
+
+  | Memory Hierarchy | Ordered tiers by recency/importance: L1 context -> L2 episodic -> L3 semantic | CEX P10 |
+
+  | Context Assembly | Retrieval + ranking + injection of memories into prompt at inference | RAG + reranker |'
+industry_references: '| System | Architecture | Key Contribution |
+
+  |--------|-------------|-----------------|
+
+  | MemGPT / Letta (Packer 2023) | Hierarchical: core + archival + recall | First formalized LLM OS with paging |
+
+  | Zep (2024) | Temporal knowledge graph | Entity tracking with time-awareness |
+
+  | mem0 (2024) | Selective extraction + vector store | Automatic memory from conversation |
+
+  | Cognee (2024) | Knowledge graph + ACL | Structured semantic memory with access control |
+
+  | LangMem | 4-layer: working/episodic/semantic/procedural | LangGraph-native memory framework |
+
+  | OpenAI Memory (2024) | Cross-session fact retention | Selective user-fact storage |
+
+  | Claude Projects | Cross-conversation context files | Document-based persistent context |
+
+  | A-MEM (2024) | Zettelkasten-inspired interconnected notes | Note-linking for associative retrieval |'
+memory_layer_matrix: '| Layer | Storage | Retrieval | Retention | Use Case |
+
+  |-------|---------|-----------|-----------|---------|
+
+  | Working | In-context | Immediate | Session-only | Active reasoning |
+
+  | Episodic | Vector DB | Semantic search | Configurable TTL | Conversation recall |
+
+  | Semantic | Graph + KV | Entity lookup | Persistent | Fact/entity queries |
+
+  | Procedural | KV / file | Exact match | Persistent | Skill execution |'
+commercial_tier_differentiation: '| Feature | Free | PRO | ENTERPRISE |
+
+  |---------|------|-----|------------|
+
+  | Working memory | Context window only | Extended paging | Multi-agent shared |
+
+  | Episodic memory | None | Last 30 sessions | Unlimited + searchable |
+
+  | Semantic memory | None | Auto-extraction | Knowledge graph |
+
+  | Procedural memory | None | Skill library | Versioned + team-shared |
+
+  | Consolidation | None | Basic TTL | Sleep-time + compliance |
+
+  | Retention policy | N/A | 90 days | Custom + data residency |'
 common_patterns:
-- Hierarchical memory organization with cache tiers.
-- Cache coherence protocols (e.g., MOESI) for multi-core systems.
-- Memory interleaving to improve bandwidth utilization.
-- NUMA-aware resource allocation in distributed systems.
-- Integration of persistent memory with traditional DRAM.
-- Use of ECC and parity checks for reliability.
+- 'Hierarchical paging: Virtual context management with in/out of context window.'
+- 'Dual-memory read/write: Separate pipelines for reading into context vs. writing after generation.'
+- 'Importance scoring: Weight memories by recency, frequency, and relevance before eviction.'
+- 'Async consolidation: Background jobs promote episodic -> semantic during idle periods.'
+- 'Multi-modal memory: Store text + embeddings + structured metadata per memory unit.'
 pitfalls:
-- Overlooking latency trade-offs in memory hierarchy design.
-- Inadequate cache coherence mechanisms in distributed systems.
-- Poor NUMA alignment leading to performance bottlenecks.
-- Neglecting error correction in mission-critical systems.
-- Failing to future-proof designs against emerging memory technologies.
+- Storing everything leads to noise and context bloat at retrieval time.
+- Missing temporal metadata makes time-sensitive fact updates impossible.
+- No eviction policy causes unbounded storage growth in long-running agents.
+- Flat memory (no hierarchy) forces full-scan retrieval, breaking latency budgets.
+- Conflating episodic (what happened) with semantic (what is true) creates stale fact errors.

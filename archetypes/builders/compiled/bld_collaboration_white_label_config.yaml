@@ -18,11 +18,23 @@ updated: '2026-04-14'
 density_score: 0.85
 crew_role: Handles white-label configuration templates, enabling customization of UI/UX elements without altering brand identity
   or runtime environments.
-receives_from: "| Builder       | What                  | Format      |  \n|---------------|-----------------------|-------------|\
-  \  \n| Branding Team | Brand guidelines      | JSON        |  \n| Environment Team | Environment variables | YAML      \
-  \  |  \n| Product Team  | Feature flag schemas  | CSV         |"
-produces_for: "| Builder       | What                  | Format      |  \n|---------------|-----------------------|-------------|\
-  \  \n| Deployment Team | Config files          | JSON        |  \n| QA Team       | Test scenario configs  | YAML      \
-  \  |  \n| Compliance Team | Audit trail templates | CSV         |"
+receives_from: '| Builder       | What                  | Format      |
+
+  |---------------|-----------------------|-------------|
+
+  | Branding Team | Brand guidelines      | JSON        |
+
+  | Environment Team | Environment variables | YAML        |
+
+  | Product Team  | Feature flag schemas  | CSV         |'
+produces_for: '| Builder       | What                  | Format      |
+
+  |---------------|-----------------------|-------------|
+
+  | Deployment Team | Config files          | JSON        |
+
+  | QA Team       | Test scenario configs  | YAML        |
+
+  | Compliance Team | Audit trail templates | CSV         |'
 boundary: Does NOT handle brand identity assets (logos, color schemes) or runtime environment variables. Branding Team manages
   identity; Environment Team manages runtime configs.

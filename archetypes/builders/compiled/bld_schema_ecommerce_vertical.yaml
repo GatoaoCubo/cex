@@ -17,22 +17,50 @@ created: '2026-04-14'
 updated: '2026-04-14'
 density_score: 0.85
 frontmatter_fields: ''
-required: "| Field | Type | Required | Default | Notes |  \n|---|---|---|---|---|  \n| id | string | yes | null | Must match\
-  \ ID Pattern |  \n| kind | string | yes | \"ecommerce_vertical\" | Fixed value |  \n| pillar | string | yes | \"P01\" |\
-  \ Fixed value |  \n| title | string | yes | null | Descriptive name |  \n| version | string | yes | \"1.0\" | Schema version\
-  \ |  \n| created | datetime | yes | null | ISO 8601 format |  \n| updated | datetime | yes | null | ISO 8601 format |  \n\
-  | author | string | yes | null | Owner/creator |  \n| domain | string | yes | \"ecommerce\" | Fixed value |  \n| quality\
-  \ | null | yes | null | Never self-score; peer review assigns |  \n| tags | array | yes | [] | Keywords for categorization\
-  \ |  \n| tldr | string | yes | null | Summary of core purpose |  \n| product_category | string | yes | null | E.g., \"apparel\"\
-  , \"electronics\" |  \n| sales_volume | number | yes | null | Monthly revenue in USD |"
-recommended: "| Field | Type | Notes |  \n|---|---|---|  \n| average_order_value | number | Optional metric |  \n| customer_segment\
-  \ | string | E.g., \"B2C\", \"B2B\" |"
+required: '| Field | Type | Required | Default | Notes |
+
+  |---|---|---|---|---|
+
+  | id | string | yes | null | Must match ID Pattern |
+
+  | kind | string | yes | "ecommerce_vertical" | Fixed value |
+
+  | pillar | string | yes | "P01" | Fixed value |
+
+  | title | string | yes | null | Descriptive name |
+
+  | version | string | yes | "1.0" | Schema version |
+
+  | created | datetime | yes | null | ISO 8601 format |
+
+  | updated | datetime | yes | null | ISO 8601 format |
+
+  | author | string | yes | null | Owner/creator |
+
+  | domain | string | yes | "ecommerce" | Fixed value |
+
+  | quality | null | yes | null | Never self-score; peer review assigns |
+
+  | tags | array | yes | [] | Keywords for categorization |
+
+  | tldr | string | yes | null | Summary of core purpose |
+
+  | product_category | string | yes | null | E.g., "apparel", "electronics" |
+
+  | sales_volume | number | yes | null | Monthly revenue in USD |'
+recommended: '| Field | Type | Notes |
+
+  |---|---|---|
+
+  | average_order_value | number | Optional metric |
+
+  | customer_segment | string | E.g., "B2C", "B2B" |'
 id_pattern: ^p01_ev_[a-z][a-z0-9_]+.md$
-body_structure: "1. Product Catalog Structure  \n   Define hierarchical categorization and metadata standards.  \n\n2. Sales\
-  \ Performance Metrics  \n   Include KPIs like conversion rate, CAC, and CLV.  \n\n3. Customer Behavior Analysis  \n   Segment\
-  \ users by purchase frequency, basket size, and preferences.  \n\n4. Marketing Channel Effectiveness  \n   Track ROI for\
-  \ ads, email campaigns, and referral programs.  \n\n5. Inventory Management Protocols  \n   Specify restocking thresholds\
-  \ and supplier SLAs.  \n\n6. Compliance and Data Privacy  \n   Align with GDPR, CCPA, and regional e-commerce laws."
+body_structure: "1. Product Catalog Structure\n   Define hierarchical categorization and metadata standards.\n\n2. Sales Performance\
+  \ Metrics\n   Include KPIs like conversion rate, CAC, and CLV.\n\n3. Customer Behavior Analysis\n   Segment users by purchase\
+  \ frequency, basket size, and preferences.\n\n4. Marketing Channel Effectiveness\n   Track ROI for ads, email campaigns,\
+  \ and referral programs.\n\n5. Inventory Management Protocols\n   Specify restocking thresholds and supplier SLAs.\n\n6.\
+  \ Compliance and Data Privacy\n   Align with GDPR, CCPA, and regional e-commerce laws."
 constraints:
 - All numeric fields must use ISO 4217 currency codes.
 - Product categories must adhere to a predefined taxonomy.

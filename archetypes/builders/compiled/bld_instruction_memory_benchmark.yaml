@@ -5,8 +5,8 @@ llm_function: REASON
 purpose: Step-by-step production process for memory_benchmark
 quality: null
 title: Instruction Memory Benchmark
-version: 1.0.0
-author: wave1_builder_gen_v2
+version: 1.1.0
+author: n05_operations
 tags:
 - memory_benchmark
 - builder
@@ -15,27 +15,29 @@ tldr: Step-by-step production process for memory_benchmark
 domain: memory_benchmark construction
 created: '2026-04-14'
 updated: '2026-04-14'
-density_score: 0.85
+density_score: 0.87
 phase_1_research:
-- 'Define memory evaluation criteria: latency, throughput, error rates, and consistency.'
-- Identify target memory systems (e.g., DRAM, SSD, persistent memory).
-- Review existing benchmarks (e.g., STREAM, MEMBENCH) for methodology gaps.
-- Analyze hardware/software requirements for test environments.
-- Select memory workloads (e.g., random access, sequential writes).
-- 'Document risks: false positives, environmental interference, scalability limits.'
+- 'Define the memory evaluation goal: retention, recall, consistency, or hallucination rate?'
+- 'Identify target agent architecture: pure in-context, RAG/external store, or hybrid?'
+- 'Review real benchmarks for methodology: LOCOMO, LongMemEval, MemGPT evals, MT-Bench-101.'
+- 'Select turn distance range: short (5-10 turns), medium (20-50), long (100+ or multi-session).'
+- 'Choose primary metrics: exact-match, F1, ROUGE-L, or LLM-judge; define hallucination detector.'
+- 'Document scope: what memory types are out of scope (hardware DRAM, caching layers, etc.).'
 phase_2_compose:
-- Set up development environment with SCHEMA.md constraints.
-- 'Define benchmark structure: test cases, metrics, and reporting formats.'
-- Write test cases for memory access patterns (sequential, random, burst).
-- Implement memory stress tests (e.g., sustained writes, read-modify-write cycles).
-- Integrate OUTPUT_TEMPLATE.md for result formatting (CSV, JSON, HTML).
-- 'Add metadata: test version, hardware specs, OS details.'
-- Write documentation for usage, configuration, and interpretation.
-- Conduct code review for compliance with SCHEMA.md and P07 standards.
-- Finalize artifact with version control and release notes.
+- Load bld_schema_memory_benchmark.md for required fields (memory_type, eval_distance).
+- 'Write frontmatter: id matching ^p07_mb_[a-z][a-z0-9_]+.md$, kind=memory_benchmark, pillar=P07.'
+- 'Write Overview: target system, memory type, scope boundary.'
+- 'Write Metrics section: for each metric, include name, formula, scale, and primary tool.'
+- 'Write Test Protocol: conversation generation method, fact planting, query turn distances.'
+- 'Write Reference Benchmarks: cite >= 1 real benchmark (LOCOMO, LongMemEval, MemGPT, NiH).'
+- 'Write Evaluation Criteria: pass/fail thresholds, hallucination budget, baseline.'
+- 'Add Notes: known failure modes, scope caveats.'
 phase_3_validate:
-- '[ ] Run unit tests for all memory operations (pass/fail).'
-- '[ ] Cross-validate results against industry benchmarks.'
-- '[ ] Test on 3+ hardware platforms (e.g., x86, ARM, FPGA).'
-- '[ ] Verify output matches OUTPUT_TEMPLATE.md structure.'
-- '[ ] Confirm governance compliance (P07, GOVERN function).'
+- '[ ] frontmatter YAML parses without error (H01).'
+- '[ ] id matches ^p07_mb_[a-z][a-z0-9_]+.md$ (H02).'
+- '[ ] kind == memory_benchmark (H03).'
+- '[ ] >= 2 metrics defined with formulas (H04, H05).'
+- '[ ] >= 1 real benchmark cited (H06) -- NOT hardware DRAM benchmarks.'
+- '[ ] No DRAM/SRAM/bandwidth/ECC references in body (H07).'
+- '[ ] Run: python _tools/cex_wave_validator.py --scope archetypes/builders/memory-benchmark-builder/'
+- '[ ] Run: python _tools/cex_compile.py {path}'

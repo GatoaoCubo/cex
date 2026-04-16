@@ -17,23 +17,48 @@ created: '2026-04-14'
 updated: '2026-04-14'
 density_score: 0.85
 frontmatter_fields: ''
-required: "| Field     | Type             | Required | Default | Notes                              |  \n|-----------|------------------|----------|---------|------------------------------------|\
-  \  \n| id        | string           | yes      | null    | Unique identifier                  |  \n| kind      | string\
-  \           | yes      | null    | Must be \"multimodal_prompt\"        |  \n| pillar    | string           | yes      |\
-  \ null    | P03                                |  \n| title     | string           | yes      | null    | Descriptive title\
-  \                  |  \n| version   | string           | yes      | \"1.0\"   | Version control                    |  \n\
-  | created   | datetime         | yes      | null    | ISO 8601                           |  \n| updated   | datetime   \
-  \      | yes      | null    | ISO 8601                           |  \n| author    | string           | yes      | null \
-  \   | Author name                        |  \n| domain    | string           | yes      | null    | Application domain \
-  \                |  \n| quality   | null             | yes      | null    | Never self-score; peer review assigns |  \n\
-  | tags      | array<string>    | yes      | []      | Keywords                           |  \n| tldr      | string     \
-  \      | yes      | null    | One-sentence summary               |  \n| modalities | array<string>   | yes      | null \
-  \   | Supported modalities (e.g., text, image) |  \n| prompt_type | string        | yes      | null    | Type (e.g., instruction,\
-  \ query)    |"
-recommended: "| Field           | Type             | Notes                          |  \n|------------------|------------------|--------------------------------|\
-  \  \n| license          | string           | Open-source license            |  \n| source           | string           |\
-  \ Original source                |  \n| related_works    | array<string>    | Cited works                    |  \n| validation_metrics\
-  \ | array<string> | Evaluation criteria            |"
+required: '| Field     | Type             | Required | Default | Notes                              |
+
+  |-----------|------------------|----------|---------|------------------------------------|
+
+  | id        | string           | yes      | null    | Unique identifier                  |
+
+  | kind      | string           | yes      | null    | Must be "multimodal_prompt"        |
+
+  | pillar    | string           | yes      | null    | P03                                |
+
+  | title     | string           | yes      | null    | Descriptive title                  |
+
+  | version   | string           | yes      | "1.0"   | Version control                    |
+
+  | created   | datetime         | yes      | null    | ISO 8601                           |
+
+  | updated   | datetime         | yes      | null    | ISO 8601                           |
+
+  | author    | string           | yes      | null    | Author name                        |
+
+  | domain    | string           | yes      | null    | Application domain                 |
+
+  | quality   | null             | yes      | null    | Never self-score; peer review assigns |
+
+  | tags      | array<string>    | yes      | []      | Keywords                           |
+
+  | tldr      | string           | yes      | null    | One-sentence summary               |
+
+  | modalities | array<string>   | yes      | null    | Supported modalities (e.g., text, image) |
+
+  | prompt_type | string        | yes      | null    | Type (e.g., instruction, query)    |'
+recommended: '| Field           | Type             | Notes                          |
+
+  |------------------|------------------|--------------------------------|
+
+  | license          | string           | Open-source license            |
+
+  | source           | string           | Original source                |
+
+  | related_works    | array<string>    | Cited works                    |
+
+  | validation_metrics | array<string> | Evaluation criteria            |'
 id_pattern: ^p03_mmp_[a-z][a-z0-9_]+.md$
 body_structure:
 - 'Introduction: Purpose and scope of the prompt.'
@@ -43,8 +68,8 @@ body_structure:
 - 'Validation: Metrics and peer review process.'
 constraints:
 - ID must match ^p03_mmp_[a-z][a-z0-9_]+.md$
-- Total size ≤ 4096 bytes
+- Total size <= 4096 bytes
 - All required fields must be present
 - Quality field is peer-reviewed only
 - ASCII-only characters required
-- ≤ 80 lines total
+- <= 80 lines total

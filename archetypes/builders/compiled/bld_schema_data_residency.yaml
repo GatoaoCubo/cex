@@ -17,24 +17,53 @@ created: '2026-04-14'
 updated: '2026-04-14'
 density_score: 0.85
 frontmatter_fields: ''
-required: "| Field | Type | Required | Default | Notes |  \n|---|---|---|---|---|  \n| id | string | yes |  | Unique identifier\
-  \ |  \n| kind | string | yes |  | Must be `data_residency` |  \n| pillar | string | yes |  | Must be `P09` |  \n| title\
-  \ | string | yes |  | Descriptive title |  \n| version | string | yes |  | Semantic version (e.g., `1.0.0`) |  \n| created\
-  \ | datetime | yes |  | ISO 8601 format |  \n| updated | datetime | yes |  | ISO 8601 format |  \n| author | string | yes\
-  \ |  | Responsible party |  \n| domain | string | yes |  | Data domain (e.g., `finance`) |  \n| quality | null | yes | null\
-  \ | Never self-score; peer review assigns |  \n| tags | list | yes |  | Keywords for categorization |  \n| tldr | string\
-  \ | yes |  | Summary of policy |  \n| data_location | string | yes |  | Jurisdiction where data resides |  \n| compliance_framework\
-  \ | string | yes |  | Regulatory standards (e.g., GDPR) |  \n| data_encryption | string | yes |  | Encryption protocols\
-  \ applied |"
-recommended: "| Field | Type | Notes |  \n|---|---|---|  \n| data_retention_policy | string | Retention duration rules | \
-  \ \n| third_party_sharing | boolean | Whether data is shared externally |  \n| audit_frequency | string | Scheduled audit\
-  \ intervals |"
-id_pattern: ^p09_dr_[a-z][a-z0-9_]+.yaml$
-body_structure: "1. Data Residency Policy  \n   Define legal and operational rules for data storage locations.  \n\n2. Compliance\
-  \ Frameworks  \n   List regulations (e.g., GDPR, CCPA) governing data residency.  \n\n3. Data Encryption Standards  \n \
-  \  Specify encryption algorithms and key management practices.  \n\n4. Data Location Mapping  \n   Map data categories to\
-  \ physical/jurisdictional storage locations.  \n\n5. Audit Requirements  \n   Outline procedures for verifying compliance\
-  \ with residency rules."
+required: '| Field | Type | Required | Default | Notes |
+
+  |---|---|---|---|---|
+
+  | id | string | yes |  | Unique identifier |
+
+  | kind | string | yes |  | Must be `data_residency` |
+
+  | pillar | string | yes |  | Must be `P09` |
+
+  | title | string | yes |  | Descriptive title |
+
+  | version | string | yes |  | Semantic version (e.g., `1.0.0`) |
+
+  | created | datetime | yes |  | ISO 8601 format |
+
+  | updated | datetime | yes |  | ISO 8601 format |
+
+  | author | string | yes |  | Responsible party |
+
+  | domain | string | yes |  | Data domain (e.g., `finance`) |
+
+  | quality | null | yes | null | Never self-score; peer review assigns |
+
+  | tags | list | yes |  | Keywords for categorization |
+
+  | tldr | string | yes |  | Summary of policy |
+
+  | data_location | string | yes |  | Jurisdiction where data resides |
+
+  | compliance_framework | string | yes |  | Regulatory standards (e.g., GDPR) |
+
+  | data_encryption | string | yes |  | Encryption protocols applied |'
+recommended: '| Field | Type | Notes |
+
+  |---|---|---|
+
+  | data_retention_policy | string | Retention duration rules |
+
+  | third_party_sharing | boolean | Whether data is shared externally |
+
+  | audit_frequency | string | Scheduled audit intervals |'
+id_pattern: ^p09_dr_[a-z][a-z0-9_]+.md$
+body_structure: "1. Data Residency Policy\n   Define legal and operational rules for data storage locations.\n\n2. Compliance\
+  \ Frameworks\n   List regulations (e.g., GDPR, CCPA) governing data residency.\n\n3. Data Encryption Standards\n   Specify\
+  \ encryption algorithms and key management practices.\n\n4. Data Location Mapping\n   Map data categories to physical/jurisdictional\
+  \ storage locations.\n\n5. Audit Requirements\n   Outline procedures for verifying compliance with residency rules."
 constraints:
 - Data location must be explicitly declared and verifiable.
 - Compliance frameworks must align with the data’s jurisdiction.

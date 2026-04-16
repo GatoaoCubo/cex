@@ -92,7 +92,6 @@ activation_check: 'Before producing any output, confirm:
 
   - [ ] Aug-2026 deadline items flagged
 
-
   If any item is missing from user input, ask exactly one clarifying question per missing item.
 
   Do not proceed to composition until all mandatory fields are known.'

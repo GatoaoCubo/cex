@@ -54,12 +54,9 @@ example_1_golden_score_9_5: 'Context: Medical research agent queried PubMed API 
 
   ---
 
-
   # Grounding Record -- Drug Interaction Query: Warfarin + SSRIs
 
-
   ## Inference Identity
-
 
   | Field                  | Value                                                          |
 
@@ -77,9 +74,7 @@ example_1_golden_score_9_5: 'Context: Medical research agent queried PubMed API 
 
   | otel_span_id           | 4bf92f3577b34da6                                               |
 
-
   ## Model
-
 
   | Field          | Value                                                          |
 
@@ -93,12 +88,9 @@ example_1_golden_score_9_5: 'Context: Medical research agent queried PubMed API 
 
   | model-signature| attest:v1:sha256:9a4c1d2e3f...b7c8d9e0f1                      |
 
-
   ## Tool Calls
 
-
   3 tool invocations during this inference run.
-
 
   | # | tool_name       | tool_input_hash (sha256)                                         | tool_output_hash (sha256)                                        |
   duration_ms | timestamp              | status  |
@@ -114,12 +106,9 @@ example_1_golden_score_9_5: 'Context: Medical research agent queried PubMed API 
   | 3 | drug_db_lookup  | e5f601234567...890abcdef01234567890abcdef01234567890abcdef0104  | f601234567890...abcdef01234567890abcdef01234567890abcdef012305  |
   156         | 2026-04-14T09:23:50Z   | success |
 
-
   ## RAG Chunks Retrieved
 
-
   5 chunks retrieved from internal clinical knowledge base.
-
 
   | # | chunk_id            | source_url                                                         | retrieval_score | content_hash
   (sha256)                                            |
@@ -138,9 +127,7 @@ example_1_golden_score_9_5: 'Context: Medical research agent queried PubMed API 
 
   | 5 | kb_chunk_0x3f2e     | https://internal.kb/clinical/dosing/inr-monitoring-protocol        | 0.79            | 5e6f01234567...890abcdef01234567890abcdef01234567890abcde05    |
 
-
   ## Integrity
-
 
   | Field             | Value                                                                            |
 
@@ -150,12 +137,9 @@ example_1_golden_score_9_5: 'Context: Medical research agent queried PubMed API 
 
   | c2pa_manifest_ref | https://c2pa.internal.kb/manifests/7f3a2c1b-e8d4-4f21-b9a3-1c2d3e4f5a6b.c2pa  |
 
-
   ## Audit Summary
 
-
   Inference task: Answer clinical question about warfarin + SSRI co-administration bleeding risk.
-
 
   Grounding sources:
 
@@ -163,19 +147,15 @@ example_1_golden_score_9_5: 'Context: Medical research agent queried PubMed API 
 
   - 3 tool calls: PubMed search, PubMed full-text fetch, drug DB lookup
 
-
   Traceability chain:
 
   Query -> PubMed API (3 calls) + KB retrieval (5 chunks) -> claude-sonnet-4-6 -> output (hash: 6f7a8b9c...)
-
 
   Coverage note: 0.92 -- 11 of 12 factual claims in the output are traceable to a RAG chunk or tool result.
 
   One general pharmacokinetic statement draws on model parametric knowledge (no external source).
 
-
   OTel linkage: This record is linked to OTel span 4bf92f3577b34da6. Full trace in Jaeger at trace ID 4bf92f3577b34da6a3c8f9e2d1b057c4.
-
 
   C2PA status: C2PA manifest registered at c2pa.internal.kb. Includes model assertion, training data assertion, and content
   binding to output_hash.
@@ -183,10 +163,7 @@ example_1_golden_score_9_5: 'Context: Medical research agent queried PubMed API 
 
   Why this scores 9.5: All hard gates pass. All 5 RAG chunks have source_url + content_hash. All 3 tool calls have input/output
   hashes + timestamps. output_hash present. c2pa_manifest_ref is a valid URI. grounding_coverage_pct is computed and explained.
-  Loses 0.5 for model-signature being abbreviated.
-
-
-  ---'
+  Loses 0.5 for model-signature being abbreviated.'
 example_2_anti_example_missing_output_hash_score_0_0_hard_gate_h05_fail: "---\nkind: agent_grounding_record\nid: p10_gr_bad_nohash\n\
   ...\n---\ninference_id: 3a4b5c6d-...\nmodel:\n  id: gpt-4o\n  provider: openai\ntool_calls:\n  - tool_name: web_search\n\
   \    timestamp: 2026-04-14T10:00:00Z\nrag_chunks:\n  - chunk_id: chunk_001\n    source_url: https://example.com/docs/page1\n\
@@ -195,7 +172,7 @@ example_2_anti_example_missing_output_hash_score_0_0_hard_gate_h05_fail: "---\nk
   \ prove the record corresponds to any specific output. Any post-market-monitoring audit based on this record would be invalid.\
   \ The record also lacks `tool_input_hash`, `tool_output_hash`, and `content_hash` on RAG chunks.\n\nFix: Recompute SHA-256\
   \ from raw model output bytes. If the raw output is no longer available, the inference run must be re-executed under proper\
-  \ instrumentation.\n\n---"
+  \ instrumentation."
 example_3_anti_example_rag_chunks_without_source_url_score_2_1_d2_0_0: "inference_id: 9b8a7c6d-...\nmodel:\n  id: claude-sonnet-4-6\n\
   \  provider: anthropic\nrag_chunks:\n  - chunk_id: chunk_abc\n    source_url: null      # <-- BREAKS TRACEABILITY\n    retrieval_score:\
   \ 0.91\n    content_hash: 1a2b3c...\n  - chunk_id: chunk_def\n    source_url: unknown   # <-- ALSO INVALID\n    retrieval_score:\
@@ -204,7 +181,7 @@ example_3_anti_example_rag_chunks_without_source_url_score_2_1_d2_0_0: "inferenc
   \ of RAG-chunk provenance is to trace the output back to a specific source document. Without source_url, the grounding record\
   \ cannot satisfy EU AI Act post-market-monitoring requirements or C2PA content credential binding.\n\nFix: Trace the chunk\
   \ back through the vector store to its originating document. If the vector store does not record source metadata, the RAG\
-  \ pipeline must be updated to capture it before grounding records can be generated.\n\n---"
+  \ pipeline must be updated to capture it before grounding records can be generated."
 example_scoring_summary: '| Example                             | H01-H08 | D1   | D2   | D3   | D4   | D5   | Overall |
 
   |-------------------------------------|---------|------|------|------|------|------|---------|

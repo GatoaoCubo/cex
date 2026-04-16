@@ -16,7 +16,8 @@ domain: competitive_matrix construction
 created: '2026-04-14'
 updated: '2026-04-14'
 density_score: 0.85
-naming_convention: 'Pattern: p01_cm_{{name}}.md (e.g., p01_cm_market_analysis.md)'
+naming_convention_competitive_matrix_artifacts: 'Pattern: p01_cm_{{name}}.md (e.g., p01_cm_market_analysis.md) for competitive
+  matrix outputs'
 paths: /artifacts/p01/cm/{{name}}.md
 limits: 'max_bytes: 5120 max_turns: 3 effort_level: high'
 hooks: 'pre_build: null post_build: null on_error: null on_quality_fail: null'

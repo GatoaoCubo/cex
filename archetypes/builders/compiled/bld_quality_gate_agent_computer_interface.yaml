@@ -1,0 +1,105 @@
+kind: quality_gate
+id: p11_qg_agent_computer_interface
+pillar: P11
+llm_function: GOVERN
+purpose: Quality gate with HARD and SOFT scoring for agent_computer_interface
+quality: null
+title: Quality Gate Agent Computer Interface
+version: 1.0.0
+author: n01_review
+tags:
+- agent_computer_interface
+- builder
+- quality_gate
+tldr: '10-gate quality check for agent_computer_interface: validates frontmatter, action space, error protocol, and domain
+  accuracy.'
+domain: agent_computer_interface construction
+created: '2026-04-13'
+updated: '2026-04-14'
+density_score: 0.88
+definition: '| Field | Value |
+
+  |-------|-------|
+
+  | metric | weighted soft score + all HARD gates pass |
+
+  | threshold | 7.0 to publish; 8.0 for pool; 9.0 for golden |
+
+  | operator | AND (all HARD) + weighted average (SOFT) |
+
+  | scope | any artifact with kind: agent_computer_interface |'
+hard_gates: 'All must pass. Any failure = immediate reject.
+
+  | ID | Check | Fail Condition |
+
+  |----|-------|----------------|
+
+  | H01 | Frontmatter parses as valid YAML | Parse error on any field |
+
+  | H02 | ID matches ^p08_aci_[a-z][a-z0-9_]+$ | Wrong prefix, uppercase, or bad chars |
+
+  | H03 | kind equals literal agent_computer_interface | Any other kind value |
+
+  | H04 | pillar equals P08 | Wrong pillar |
+
+  | H05 | quality field is null | Any non-null value |
+
+  | H06 | domain field is one of allowed enum values | terminal/browser/gui/api/file_system/code_execution |
+
+  | H07 | Action Space section present with >= 1 action row | Missing section or empty table |
+
+  | H08 | Error Protocol section present with >= 1 error code | Missing section or empty table |
+
+  | H09 | Total file size <= 7168 bytes | Exceeds size limit |
+
+  | H10 | No credentials, tokens, or secrets in any field | Credential detected |'
+soft_scoring: 'Total weights sum to 1.00.
+
+  | ID | Dimension | Weight | 10 pts | 5 pts | 0 pts |
+
+  |----|-----------|--------|--------|-------|-------|
+
+  | S01 | Action space completeness | 0.20 | >= 3 actions with input/output/error schemas | 1-2 actions, partial schemas |
+  No actions or schemas |
+
+  | S02 | Observation schema quality | 0.15 | All observation fields typed with source | Fields present, types missing | No
+  observation schema |
+
+  | S03 | Error protocol coverage | 0.15 | >= 3 error codes with recovery strategies | 1-2 codes, no recovery | No error codes
+  |
+
+  | S04 | Security constraints defined | 0.15 | Scope, auth, rate limit all specified | Partial security spec | No security
+  section |
+
+  | S05 | Protocol precision | 0.15 | Named protocol + transport + version | Protocol named, no transport | No protocol specified
+  |
+
+  | S06 | Domain accuracy | 0.10 | All content matches stated domain (e.g., terminal not browser) | Minor domain drift | Wrong
+  domain throughout |
+
+  | S07 | Density discipline | 0.05 | No padding prose, all content in tables | Minor prose padding | Mostly prose, low density
+  |
+
+  | S08 | tldr precision | 0.05 | tldr is a standalone sentence capturing the interface purpose | tldr too vague | tldr absent
+  or >160 chars |
+
+
+  Score = sum(pts  weight) / sum(max_pts  weight) * 10'
+actions: '| Score | Tier | Action |
+
+  |-------|------|--------|
+
+  | >= 9.0 | Golden | Publish as reference ACI spec |
+
+  | >= 8.0 | Skilled | Publish to pool + log pattern |
+
+  | >= 7.0 | Learning | Use but flag for improvement |
+
+  | < 7.0 | Rejected | Return to author with gate report |'
+bypass: '| Field | Value |
+
+  |-------|-------|
+
+  | Conditions | Experimental ACI for a novel interface type with no prior art |
+
+  | Approver | N03 builder or N01 researcher |'

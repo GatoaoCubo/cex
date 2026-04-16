@@ -1,16 +1,16 @@
-kind: learning_record
-id: p10_lr_reranker_config_builder
+kind: memory
+id: p10_mem_reranker_config_builder
 pillar: P10
 llm_function: INJECT
 purpose: Learned patterns and pitfalls for reranker_config construction
 quality: null
-title: Learning Record Reranker Config
+title: Memory Reranker Config
 version: 1.0.0
 author: wave1_builder_gen_v2
 tags:
 - reranker_config
 - builder
-- learning_record
+- memory
 tldr: Learned patterns and pitfalls for reranker_config construction
 domain: reranker_config construction
 created: '2026-04-14'

@@ -4,6 +4,7 @@ title: Speech-to-Text Provider Integration
 version: 1.0.0
 quality: null
 pillar: P01
+density_score: 1.0
 key_providers:
 - Google Cloud Speech-to-Text - High accuracy with 120+ languages
 - Amazon Transcribe - Seamless AWS integration with real-time transcription

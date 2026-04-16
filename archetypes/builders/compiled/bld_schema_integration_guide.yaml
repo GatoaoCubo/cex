@@ -16,14 +16,14 @@ domain: integration_guide construction
 created: '2026-04-14'
 updated: '2026-04-14'
 density_score: 0.85
-frontmatter_fields: ''
-required: "| Field      | Type   | Required | Default | Notes |  \n|------------|--------|----------|---------|-------|  \n\
-  | id         | string | yes      | null    | Must match ID Pattern |  \n| kind       | string | yes      | null    | Always\
-  \ 'integration_guide' |  \n| pillar     | string | yes      | null    | Always 'P05' |  \n| title      | string | yes  \
-  \    | null    | Descriptive title |  \n| version    | string | yes      | null    | Semantic version (e.g., 1.0.0) |  \n\
-  | created    | date   | yes      | null    | ISO 8601 format |  \n| updated    | date   | yes      | null    | ISO 8601\
-  \ format |  \n| author     | string | yes      | null    | Author name |  \n| domain     | string | yes      | null    |\
-  \ Integration domain (e.g., 'blockchain') |  \n| quality    | null   | yes      | null    | Never self-score; peer review\
+frontmatter_fields_integration_guide_schema: ''
+required_fields_for_an_integration_guide: "| Field      | Type   | Required | Default | Notes |  \n|------------|--------|----------|---------|-------|\
+  \  \n| id         | string | yes      | null    | Must match ID Pattern |  \n| kind       | string | yes      | null   \
+  \ | Always 'integration_guide' |  \n| pillar     | string | yes      | null    | Always 'P05' |  \n| title      | string\
+  \ | yes      | null    | Descriptive title |  \n| version    | string | yes      | null    | Semantic version (e.g., 1.0.0)\
+  \ |  \n| created    | date   | yes      | null    | ISO 8601 format |  \n| updated    | date   | yes      | null    | ISO\
+  \ 8601 format |  \n| author     | string | yes      | null    | Author name |  \n| domain     | string | yes      | null\
+  \    | Integration domain (e.g., 'payments') |  \n| quality    | null   | yes      | null    | Never self-score; peer review\
   \ assigns |  \n| tags       | list   | yes      | null    | Keywords for search |  \n| tldr       | string | yes      |\
   \ null    | Summary (≤256 chars) |  \n| integration_type | string | yes | null | Type of integration (e.g., 'API', 'SDK')\
   \ |  \n| api_endpoints | list | yes | null | List of required endpoints |"

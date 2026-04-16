@@ -11,6 +11,7 @@ tags:
 - content-monetization
 - crm
 - petshop
+density_score: 0.98
 pipeline_9_stages: ''
 pricing_strategy: "pricing:\n  strategy: freemium\n  floor_margin_pct: 0.33\n  trial_days: 7\n  tiers:\n    - name: \"Free\"\
   \n      price_monthly: 0\n      credits_monthly: 50\n      features: [customer_profile, appointment_scheduling]\n    - name:\

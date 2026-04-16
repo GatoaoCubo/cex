@@ -46,6 +46,7 @@ observation_types:
 quality: null
 title: Memory Finetune Config
 density_score: 0.9
+llm_function: INJECT
 summary: 'Fine-tuning configuration failures fall into two categories: quality failures (under-specified adapters produce
   weaker models) and reliability failures (missing or wrong compute parameters cause OOM crashes or non-reproducible runs).
   Explicit target_modules, documented effective batch size, and no placeholder values address both categories systematically.'

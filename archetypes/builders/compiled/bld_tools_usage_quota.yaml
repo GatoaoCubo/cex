@@ -16,17 +16,27 @@ domain: usage_quota construction
 created: '2026-04-14'
 updated: '2026-04-14'
 density_score: 0.85
-production_tools: "| Tool | Purpose | When |  \n|------|---------|------|  \n| cex_compile.py | Compiles usage quotas from\
-  \ raw data | Initializing quotas |  \n| cex_score.py | Scores resource usage against thresholds | Monitoring active systems\
-  \ |  \n| cex_retriever.py | Retrieves historical quota data | Auditing or reporting |  \n| cex_doctor.py | Diagnoses quota\
-  \ violations and suggests fixes | Resolving overage issues |  \n| cex_analyzer.py | Analyzes quota trends and predicts future\
-  \ usage | Capacity planning |  \n| cex_validator.py | Validates quota configurations for consistency | Deploying new quota\
-  \ rules |"
-validation_tools: "| Tool | Purpose | When |  \n|------|---------|------|  \n| val_checker.py | Verifies quota calculations\
-  \ for accuracy | Testing quota logic |  \n| val_simulator.py | Simulates usage scenarios to test quota limits | Stress-testing\
-  \ systems |  \n| val_reporter.py | Generates validation reports for stakeholders | Post-validation review |  \n| val_debugger.py\
-  \ | Debugs inconsistent quota behavior | Troubleshooting errors |"
+production_tools: '| Tool | Purpose | When |
+
+  |------|---------|------|
+
+  | cex_compile.py | Compile artifact .md to .yaml | After save |
+
+  | cex_score.py --apply | Peer review scoring (D1-D5 weighted) | Before publish |
+
+  | cex_doctor.py | Builder health check (validates all 13 ISOs) | Post-build |
+
+  | cex_retriever.py | TF-IDF similarity search (find similar artifacts) | F3 INJECT |'
+validation_tools: '| Tool | Purpose | When |
+
+  |------|---------|------|
+
+  | cex_wave_validator.py | Validates frontmatter + kind/pillar/llm_function | CI gate |
+
+  | cex_hooks.py pre-commit | ASCII enforcement + schema check | Pre-commit |
+
+  | cex_hygiene.py | Artifact CRUD + 8-rule enforcement | Pre-commit |'
 external_references:
-- QuotaManager API (for real-time quota tracking)
-- UsageAnalytics Framework (for data aggregation)
-- PolicyEngine Library (for rule-based quota enforcement)
+- Token bucket / leaky bucket algorithms -- RFC 6585 + IETF rate-limiting headers
+- Stripe metered billing -- tiered quota + usage-based pricing model
+- AWS API Gateway throttling -- 429 + X-RateLimit-Remaining + retry-after headers

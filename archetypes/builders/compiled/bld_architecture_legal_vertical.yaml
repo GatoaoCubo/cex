@@ -46,10 +46,19 @@ component_inventory: '| ISO Name             | Role                             
   | bld_memory           | Learned patterns and pitfalls             | P10    | memory           | Active |
 
   | bld_tools            | CEX tools + external references           | P04    | tools            | Active |'
-dependencies: "| From           | To              | Type       |  \n|----------------|-----------------|------------|  \n\
-  | bld_instruction| bld_schema      | Data       |  \n| bld_quality_gate| bld_config     | Configuration |  \n| bld_output_template|\
-  \ bld_schema | Data       |  \n| bld_tools      | legal_db        | External   |  \n| bld_memory     | bld_config      |\
-  \ Configuration |"
+dependencies: '| From           | To              | Type       |
+
+  |----------------|-----------------|------------|
+
+  | bld_instruction| bld_schema      | Data       |
+
+  | bld_quality_gate| bld_config     | Configuration |
+
+  | bld_output_template| bld_schema | Data       |
+
+  | bld_tools      | legal_db        | External   |
+
+  | bld_memory     | bld_config      | Configuration |'
 architectural_position: The legal_vertical-builder (P01) serves as the compliance and governance backbone of the CEX ecosystem,
   ensuring all legal workflows, standards, and enforcement mechanisms are rigorously encoded, validated, and integrated across
   the system.

@@ -1,16 +1,16 @@
-kind: learning_record
-id: p10_lr_memory_benchmark_builder
+kind: memory
+id: p10_mem_memory_benchmark_builder
 pillar: P10
 llm_function: INJECT
 purpose: Learned patterns and pitfalls for memory_benchmark construction
 quality: null
-title: Learning Record Memory Benchmark
+title: Memory Memory Benchmark Builder
 version: 1.0.0
 author: wave1_builder_gen_v2
 tags:
 - memory_benchmark
 - builder
-- learning_record
+- memory
 tldr: Learned patterns and pitfalls for memory_benchmark construction
 domain: memory_benchmark construction
 created: '2026-04-14'

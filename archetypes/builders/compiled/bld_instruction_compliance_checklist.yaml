@@ -24,18 +24,18 @@ phase_1_research:
 - Interview compliance officers and IT teams for operational context.
 - Document findings in a structured format for artifact development.
 phase_2_compose:
-- 'Define checklist structure using SCHEMA.md (sections: scope, controls, evidence).'
+- 'Define checklist structure using bld_schema_compliance_checklist.md (sections: scope, controls, evidence).'
 - Populate SOC2 Trust Principles (Security, Availability, Processing Integrity).
 - Add GDPR requirements (data minimization, consent, breach notification).
 - Insert HIPAA-specific controls (PHI safeguards, audit trails).
 - Align EU AI Act sections (risk assessment, transparency, human oversight).
-- Use OUTPUT_TEMPLATE.md to standardize language and formatting.
+- Use bld_output_template_compliance_checklist.md to standardize language and formatting.
 - Assign control IDs and reference audit standards (e.g., ISO 27001, NIST).
 - Include evidence types (e.g., policies, logs, certifications).
 - Review for regulatory overlap and ensure no duplication.
 phase_3_validate:
-- '[ ] ✅ Verify alignment with SOC2, GDPR, HIPAA, and EU AI Act mandates.'
-- '[ ] ✅ Confirm all controls are actionable and measurable.'
-- '[ ] ✅ Ensure terminology matches audit standards (e.g., "data subject" vs. "user").'
-- '[ ] ✅ Validate schema adherence (section headers, control IDs).'
-- '[ ] ✅ Obtain stakeholder approval (legal, compliance, IT).'
+- '[ ] [OK] Verify alignment with SOC2, GDPR, HIPAA, and EU AI Act mandates.'
+- '[ ] [OK] Confirm all controls are actionable and measurable.'
+- '[ ] [OK] Ensure terminology matches audit standards (e.g., "data subject" vs. "user").'
+- '[ ] [OK] Validate schema adherence (section headers, control IDs).'
+- '[ ] [OK] Obtain stakeholder approval (legal, compliance, IT).'

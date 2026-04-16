@@ -24,15 +24,15 @@ phase_1_research:
 - Define reranking strategy (e.g., hybrid scoring, query-dependent filtering).
 - Document findings in a research summary for stakeholder alignment.
 phase_2_compose:
-- Set up environment with dependencies from SCHEMA.md.
-- Define reranker_config structure using SCHEMA.md fields.
+- Set up environment with dependencies from bld_schema_reranker_config.md.
+- Define reranker_config structure using bld_schema_reranker_config.md fields.
 - Select model type (e.g., `bert`, `dpr`) and version.
 - Configure hyperparameters (e.g., `top_k`, `temperature`).
 - Implement reranking strategy logic (e.g., `hybrid`, `threshold`).
-- Integrate with retrieval pipeline using OUTPUT_TEMPLATE.md.
+- Integrate with retrieval pipeline using bld_output_template_reranker_config.md.
 - Add metadata (e.g., `created_by`, `last_modified`).
 - Write inline comments explaining non-obvious configurations.
 - Finalize config file with validation checks enabled.
-phase_3_validate: '[ ] ✅ Validate schema compliance with SCHEMA.md [ ] ✅ Confirm model compatibility with system requirements
-  [ ] ✅ Test reranking strategy on sample data [ ] ✅ Verify performance metrics (e.g., NDCG, latency) [ ] ✅ Ensure documentation
-  matches OUTPUT_TEMPLATE.md'
+phase_3_validate: '[ ] Validate schema compliance with bld_schema_reranker_config.md [ ] Confirm model compatibility with
+  system requirements [ ] Test reranking strategy on sample data [ ] Verify performance metrics (e.g., NDCG, latency) [ ]
+  Ensure documentation matches bld_output_template_reranker_config.md'

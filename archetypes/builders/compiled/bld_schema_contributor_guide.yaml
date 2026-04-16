@@ -17,16 +17,44 @@ created: '2026-04-14'
 updated: '2026-04-14'
 density_score: 0.85
 frontmatter_fields: ''
-required: "| Field | Type | Required | Default | Notes |  \n|---|---|---|---|---|  \n| id | string | yes | null | Must match\
-  \ ID Pattern |  \n| kind | string | yes | \"contributor_guide\" | Fixed value |  \n| pillar | string | yes | \"P05\" | Fixed\
-  \ value |  \n| title | string | yes | null | Descriptive title |  \n| version | string | yes | \"1.0\" | Semantic versioning\
-  \ |  \n| created | datetime | yes | null | ISO 8601 format |  \n| updated | datetime | yes | null | ISO 8601 format |  \n\
-  | author | string | yes | null | Maintainer name |  \n| domain | string | yes | null | e.g., \"engineering\" |  \n| quality\
-  \ | null | yes | null | Never self-score; peer review assigns |  \n| tags | list | yes | [] | Keywords for search |  \n\
-  | tldr | string | yes | null | Summary of guide |  \n| contribution_types | list | yes | [] | e.g., [\"code\", \"docs\"\
-  ] |  \n| onboarding_steps | list | yes | [] | e.g., [\"fork repo\", \"setup env\"] |"
-recommended: "| Field | Type | Notes |  \n|---|---|---|  \n| review_process | string | Describe peer review workflow |  \n\
-  | example_contributions | list | Sample pull requests/issues |"
+required: '| Field | Type | Required | Default | Notes |
+
+  |---|---|---|---|---|
+
+  | id | string | yes | null | Must match ID Pattern |
+
+  | kind | string | yes | "contributor_guide" | Fixed value |
+
+  | pillar | string | yes | "P05" | Fixed value |
+
+  | title | string | yes | null | Descriptive title |
+
+  | version | string | yes | "1.0" | Semantic versioning |
+
+  | created | datetime | yes | null | ISO 8601 format |
+
+  | updated | datetime | yes | null | ISO 8601 format |
+
+  | author | string | yes | null | Maintainer name |
+
+  | domain | string | yes | null | e.g., "engineering" |
+
+  | quality | null | yes | null | Never self-score; peer review assigns |
+
+  | tags | list | yes | [] | Keywords for search |
+
+  | tldr | string | yes | null | Summary of guide |
+
+  | contribution_types | list | yes | [] | e.g., ["code", "docs"] |
+
+  | onboarding_steps | list | yes | [] | e.g., ["fork repo", "setup env"] |'
+recommended: '| Field | Type | Notes |
+
+  |---|---|---|
+
+  | review_process | string | Describe peer review workflow |
+
+  | example_contributions | list | Sample pull requests/issues |'
 id_pattern: ^p05_cg_[a-z][a-z0-9_]+.md$
 body_structure:
 - Introduction

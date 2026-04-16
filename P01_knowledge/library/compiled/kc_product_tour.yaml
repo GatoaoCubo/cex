@@ -1,0 +1,30 @@
+id: kc_product_tour
+kind: knowledge_card
+title: Product Tour Guide
+version: 1.0.0
+quality: null
+pillar: P01
+density_score: 0.96
+overview: An in-app product tour is a guided walkthrough that helps users discover key features through contextual tooltips
+  and interactive triggers. This guide explains how to create and customize effective product tours.
+key_elements:
+- 'Steps: Sequential actions to demonstrate features'
+- 'Tooltips: Contextual explanations for each step'
+- 'Triggers: User actions that initiate the tour'
+step_specification:
+- 'Step 1: Welcome screen with tour activation button'
+- 'Step 2: Feature highlight with tooltip explanation'
+- 'Step 3: Interactive demo with user action trigger'
+- 'Step 4: Completion confirmation and feedback'
+tooltip_examples:
+- '"Tap here to access advanced settings"'
+- '"Swipe left to view additional options"'
+- '"Hold the icon for extended functionality"'
+trigger_mechanics:
+- 'On-page load: Automatic tour initiation'
+- 'User click: Manual tour activation'
+- 'Scroll detection: Triggered when user reaches specific section'
+best_practices:
+- Keep tooltips concise (max 3 sentences)
+- Use visual cues to highlight interactive elements
+- Allow users to skip or pause the tour at any time

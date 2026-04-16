@@ -16,7 +16,13 @@ domain: usage_report construction
 created: '2026-04-14'
 updated: '2026-04-14'
 density_score: 0.85
-naming_convention: "Pattern: `p07_ur_<report_name>.yaml`  \nExamples:  \n- `p07_ur_monthly.yaml`  \n- `p07_ur_q4.yaml`"
+naming_convention: 'Pattern: `p07_ur_<report_name>.yaml`
+
+  Examples:
+
+  - `p07_ur_monthly.yaml`
+
+  - `p07_ur_q4.yaml`'
 paths:
 - 'Artifacts: `/artifacts/reports/usage/`'
 - 'Raw data: `/artifacts/reports/usage/raw/`'

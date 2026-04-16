@@ -16,7 +16,13 @@ domain: changelog construction
 created: '2026-04-14'
 updated: '2026-04-14'
 density_score: 0.85
-naming_convention: "Pattern: `p01_ch_{{name}}.md`  \nExamples:  \n- `p01_ch_release_v1.0.md`  \n- `p01_ch_hotfix_20231001.md`"
+naming_convention: 'Pattern: `p01_ch_{{name}}.md`
+
+  Examples:
+
+  - `p01_ch_release_v1.0.md`
+
+  - `p01_ch_hotfix_20231001.md`'
 paths:
 - 'Artifacts: `/artifacts/changelogs/p01/`'
 - 'Sources: `/src/pillars/p01/`'

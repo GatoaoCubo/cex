@@ -16,24 +16,60 @@ domain: playground_config construction
 created: '2026-04-14'
 updated: '2026-04-14'
 density_score: 0.85
-definition: "| metric         | threshold                          | operator | scope  |  \n|----------------|------------------------------------|----------|--------|\
-  \  \n| schema_id      | ^p09_pg_[a-z][a-z0-9_]+.yaml$     | matches  | H02    |"
-hard_gates: "| ID  | Check                  | Fail Condition                                  |  \n|-----|------------------------|-------------------------------------------------|\
-  \  \n| H01 | YAML frontmatter valid | Missing or invalid YAML frontmatter             |  \n| H02 | ID matches pattern  \
-  \   | ID does not match ^p09_pg_[a-z][a-z0-9_]+.yaml$|  \n| H03 | kind field matches     | kind ≠ 'playground_config'  \
-  \                    |  \n| H04 | Required fields exist  | Missing 'name', 'description', or 'access_control'|  \n| H05\
-  \ | Timeout defined        | timeout < 1s or > 72h                           |  \n| H06 | Resource limits valid  | CPU/memory\
-  \ limits exceed 80% of system capacity |  \n| H07 | Audit logs enabled     | audit_logs not set to 'enabled'           \
-  \      |"
-soft_scoring: "| Dim | Dimension           | Weight | Scoring Guide                                  |  \n|-----|---------------------|--------|------------------------------------------------|\
-  \  \n| D01 | Configuration completeness | 0.15 | 100% required fields present                   |  \n| D02 | Security controls\
-  \    | 0.20 | 100% access control + encryption              |  \n| D03 | Usability            | 0.10 | Interactive features\
-  \ functional               |  \n| D04 | Documentation        | 0.15 | 100% API/usage guides complete                |  \n\
-  | D05 | Performance          | 0.10 | Latency < 500ms, error rate < 1%              |  \n| D06 | Compliance           |\
-  \ 0.10 | Meets data privacy and audit standards        |  \n| D07 | Scalability          | 0.10 | Supports 1000+ concurrent\
-  \ users               |  \n| D08 | Auditability         | 0.10 | Full traceability of user actions             |"
-actions: "| Score   | Action                        |  \n|---------|-------------------------------|  \n| ≥9.5    | Automate\
-  \ deployment           |  \n| ≥8.0    | Schedule review               |  \n| ≥7.0    | Manual QA verification        | \
-  \ \n| <7.0    | Reject and request revisions  |"
-bypass: "| conditions                          | approver | audit trail         |  \n|------------------------------------|----------|---------------------|\
-  \  \n| Urgent production fix required     | CISO     | Escalation log      |"
+definition: '| metric         | threshold                          | operator | scope  |
+
+  |----------------|------------------------------------|----------|--------|
+
+  | schema_id      | ^p09_pg_[a-z][a-z0-9_]+.yaml$     | matches  | H02    |'
+hard_gates: '| ID  | Check                  | Fail Condition                                  |
+
+  |-----|------------------------|-------------------------------------------------|
+
+  | H01 | YAML frontmatter valid | Missing or invalid YAML frontmatter             |
+
+  | H02 | ID matches pattern     | ID does not match ^p09_pg_[a-z][a-z0-9_]+.yaml$|
+
+  | H03 | kind field matches     | kind ≠ ''playground_config''                      |
+
+  | H04 | Required fields exist  | Missing ''name'', ''description'', or ''access_control''|
+
+  | H05 | Timeout defined        | timeout < 1s or > 72h                           |
+
+  | H06 | Resource limits valid  | CPU/memory limits exceed 80% of system capacity |
+
+  | H07 | Audit logs enabled     | audit_logs not set to ''enabled''                 |'
+soft_scoring: '| Dim | Dimension           | Weight | Scoring Guide                                  |
+
+  |-----|---------------------|--------|------------------------------------------------|
+
+  | D01 | Configuration completeness | 0.15 | 100% required fields present                   |
+
+  | D02 | Security controls    | 0.20 | 100% access control + encryption              |
+
+  | D03 | Usability            | 0.10 | Interactive features functional               |
+
+  | D04 | Documentation        | 0.15 | 100% API/usage guides complete                |
+
+  | D05 | Performance          | 0.10 | Latency < 500ms, error rate < 1%              |
+
+  | D06 | Compliance           | 0.10 | Meets data privacy and audit standards        |
+
+  | D07 | Scalability          | 0.10 | Supports 1000+ concurrent users               |
+
+  | D08 | Auditability         | 0.10 | Full traceability of user actions             |'
+actions: '| Score   | Action                        |
+
+  |---------|-------------------------------|
+
+  | ≥9.5    | Automate deployment           |
+
+  | ≥8.0    | Schedule review               |
+
+  | ≥7.0    | Manual QA verification        |
+
+  | <7.0    | Reject and request revisions  |'
+bypass: '| conditions                          | approver | audit trail         |
+
+  |------------------------------------|----------|---------------------|
+
+  | Urgent production fix required     | CISO     | Escalation log      |'

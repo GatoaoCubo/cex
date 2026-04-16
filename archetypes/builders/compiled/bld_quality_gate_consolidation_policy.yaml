@@ -4,37 +4,77 @@ pillar: P11
 llm_function: GOVERN
 purpose: Quality gate with HARD and SOFT scoring for consolidation_policy
 quality: null
-title: Quality Gate Consolidation Policy
-version: 1.0.0
-author: wave1_builder_gen_v2
+title: 'Quality Gate: consolidation_policy'
+version: 2.0.0
+author: n06_commercial
 tags:
 - consolidation_policy
 - builder
 - quality_gate
-tldr: Quality gate with HARD and SOFT scoring for consolidation_policy
-domain: consolidation_policy construction
+tldr: HARD gates enforce artifact structure (schema, ID, async flag, promotion rules). SOFT scoring weights domain accuracy,
+  eviction completeness, commercial differentiation, and compliance.
+domain: LLM agent memory consolidation
 created: '2026-04-14'
 updated: '2026-04-14'
-density_score: 0.85
-definition: "(Table: metric, threshold, operator, scope)  \n| Metric | Threshold | Operator | Scope |  \n|---|---|---|---|\
-  \  \n| Memory leak rate | 0.1% | <= | System-wide |  \n| Allocation tracking coverage | 100% | == | All memory pools | \
-  \ \n| Deallocation latency | 10ms | <= | Critical paths |  \n| Fragmentation ratio | 20% | <= | Heap memory |"
-hard_gates: "(Table: ID | Check | Fail Condition)  \n| ID | Check | Fail Condition |  \n|---|---|---|  \n| H01 | YAML frontmatter\
-  \ valid | Invalid YAML syntax |  \n| H02 | ID matches pattern ^p10_cp_[a-z][a-z0-9_]+.md$ | Invalid schema ID |  \n| H03\
-  \ | kind field matches 'consolidation_policy' | Incorrect policy type |  \n| H04 | Memory leak detection enabled | Missing\
-  \ leak detection mechanism |  \n| H05 | Allocation tracking logs retained for 90 days | Logs missing or incomplete |  \n\
-  | H06 | Deallocation hooks implemented for all allocators | Missing hooks in allocators |  \n| H07 | Fragmentation monitoring\
-  \ threshold configured | No threshold defined |  \n| H08 | Memory pool reuse rate >= 95% | Pool reuse below threshold |"
-soft_scoring: "(Table: Dim | Dimension | Weight | Scoring Guide)  \n| Dim | Dimension | Weight | Scoring Guide |  \n|---|---|---|---|\
-  \  \n| D1 | Memory safety | 0.20 | 1.0 for no leaks, 0.5 for minor leaks |  \n| D2 | Allocation efficiency | 0.15 | 1.0\
-  \ for 99%+ tracking, 0.25 for <80% |  \n| D3 | Fragmentation control | 0.15 | 1.0 for <=15% fragmentation, 0.5 for >25%\
-  \ |  \n| D4 | Monitoring completeness | 0.10 | 1.0 for full coverage, 0.25 for partial |  \n| D5 | Documentation clarity\
-  \ | 0.10 | 1.0 for complete docs, 0.5 for gaps |  \n| D6 | Error handling | 0.10 | 1.0 for robust handling, 0.25 for partial\
-  \ |  \n| D7 | Scalability | 0.10 | 1.0 for 100k+ allocations, 0.5 for <10k |  \n| D8 | Audit trail | 0.10 | 1.0 for full\
-  \ logs, 0.25 for partial |"
-actions: "(Table: Score | Action)  \n| Score | Action |  \n|---|---|  \n| GOLDEN >=9.5 | Auto-approve and deploy |  \n| PUBLISH\
-  \ >=8.0 | Manual review required |  \n| REVIEW >=7.0 | Escalate to senior engineers |  \n| REJECT <7.0 | Reject and require\
-  \ rework |"
-bypass: "(Table: conditions, approver, audit trail)  \n| conditions | approver | audit trail |  \n|---|---|---|  \n| Critical\
-  \ system downtime | CTO | Incident report |  \n| Emergency patch | CTO | Emergency approval log |  \n| Legacy system compatibility\
-  \ | CTO | Compatibility review |"
+density_score: 0.9
+definition: '| Metric | Threshold | Operator | Scope |
+
+  |--------|-----------|----------|-------|
+
+  | Required frontmatter fields | 100% | == | Artifact |
+
+  | consolidation_async | true | == | Artifact |
+
+  | Promotion Rules section present | true | == | Artifact |
+
+  | Eviction Rules section present | true | == | Artifact |'
+hard_gates: '| ID | Check | Fail Condition |
+
+  |----|-------|---------------|
+
+  | H01 | YAML frontmatter valid | Invalid YAML syntax or missing required fields |
+
+  | H02 | ID matches `^p10_cp_[a-z][a-z0-9_]+$` | ID absent or does not match pattern |
+
+  | H03 | kind field equals `consolidation_policy` | kind field absent, wrong, or misspelled |
+
+  | H04 | `consolidation_async: true` in frontmatter | Field absent or set to false |
+
+  | H05 | Promotion Rules section present with table | Section absent or table empty |
+
+  | H06 | Eviction Rules section present with table | Section absent or table empty |
+
+  | H07 | No OS memory management content (GC, slab, heap, TLB, fragmentation) | OS terminology present |'
+soft_scoring: '| Dim | Dimension | Weight | Scoring Guide |
+
+  |-----|-----------|--------|--------------|
+
+  | D1 | Domain accuracy | 0.25 | 1.0 = all content is LLM agent memory; 0.0 = OS/GC contamination |
+
+  | D2 | Promotion completeness | 0.20 | 1.0 = all tier transitions defined with conditions; 0.5 = partial; 0.0 = absent |
+
+  | D3 | Commercial differentiation | 0.20 | 1.0 = FREE/PRO/ENTERPRISE matrix with 5+ features; 0.5 = partial; 0.0 = absent
+  |
+
+  | D4 | Eviction coverage | 0.20 | 1.0 = eviction defined per layer with trigger + action; 0.5 = partial; 0.0 = absent |
+
+  | D5 | Compliance coverage | 0.15 | 1.0 = retention_days + gdpr_erasure + audit_trail; 0.5 = partial; 0.0 = absent (enterprise
+  penalized more) |'
+actions: '| Score | Action |
+
+  |-------|--------|
+
+  | >= 9.5 | GOLDEN -- archive as gold standard example |
+
+  | >= 8.0 | PUBLISH -- merge to main |
+
+  | >= 7.0 | REVIEW -- surgical fix before merge |
+
+  | < 7.0 | REJECT -- rebuild required |'
+bypass: '| Condition | Approver | Audit Trail |
+
+  |-----------|----------|------------|
+
+  | Emergency patching of agent memory incident | N07 + N06 | Incident report with justification |
+
+  | Free-tier artifact with no consolidation (correct behavior) | N06 | Tier=free annotation in frontmatter |'

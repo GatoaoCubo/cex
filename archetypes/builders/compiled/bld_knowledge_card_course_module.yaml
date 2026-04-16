@@ -24,15 +24,29 @@ domain_overview: Online course modules are structured units of instructional con
   data tracking across platforms. Effective course modules balance pedagogical rigor with technological feasibility, requiring
   clear learning objectives, scaffolded content, and assessments that measure mastery. The rise of microlearning and competency-based
   education has further shaped module design, prioritizing modular, reusable components and outcomes-driven progression.
-key_concepts: "| Concept | Definition | Source |  \n|--------|------------|--------|  \n| Learning Objectives | Measurable\
-  \ statements defining what learners should achieve | Bloom’s Taxonomy (1956) |  \n| Formative Assessment | Ongoing evaluations\
-  \ to guide learning progress | Kirkpatrick Model (1959) |  \n| SCORM | Standard for packaging and delivering e-learning\
-  \ content | ADL Initiative (2002) |  \n| xAPI | Framework for tracking learning experiences across contexts | Tin Can API\
-  \ (2013) |  \n| SAM (Successive Approximation Model) | Iterative instructional design process | Clark & Mayer (2016) | \
-  \ \n| ADDIE | Linear model for developing training programs | Dick & Carey (1996) |  \n| Bloom’s 2 Sigma Problem | Hypothesis\
-  \ on the impact of one-on-one tutoring | Bloom (1984) |  \n| UDL (Universal Design for Learning) | Framework for inclusive\
-  \ curriculum design | CAST (2018) |  \n| OER (Open Educational Resources) | Free, openly licensed learning materials | UNESCO\
-  \ (2017) |  \n| Competency-Based Education | Learning model focused on mastery of skills | AAC&U (2020) |"
+key_concepts: '| Concept | Definition | Source |
+
+  |--------|------------|--------|
+
+  | Learning Objectives | Measurable statements defining what learners should achieve | Bloom’s Taxonomy (1956) |
+
+  | Formative Assessment | Ongoing evaluations to guide learning progress | Kirkpatrick Model (1959) |
+
+  | SCORM | Standard for packaging and delivering e-learning content | ADL Initiative (2002) |
+
+  | xAPI | Framework for tracking learning experiences across contexts | Tin Can API (2013) |
+
+  | SAM (Successive Approximation Model) | Iterative instructional design process | Clark & Mayer (2016) |
+
+  | ADDIE | Linear model for developing training programs | Dick & Carey (1996) |
+
+  | Bloom’s 2 Sigma Problem | Hypothesis on the impact of one-on-one tutoring | Bloom (1984) |
+
+  | UDL (Universal Design for Learning) | Framework for inclusive curriculum design | CAST (2018) |
+
+  | OER (Open Educational Resources) | Free, openly licensed learning materials | UNESCO (2017) |
+
+  | Competency-Based Education | Learning model focused on mastery of skills | AAC&U (2020) |'
 industry_standards:
 - SCORM 2004
 - xAPI (Tin Can API)

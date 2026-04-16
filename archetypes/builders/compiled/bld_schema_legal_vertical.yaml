@@ -17,21 +17,49 @@ created: '2026-04-14'
 updated: '2026-04-14'
 density_score: 0.85
 frontmatter_fields: ''
-required: "| Field | Type | Required | Default | Notes |  \n|---|---|---|---|---|  \n| id | string | yes |  | Must match ID\
-  \ Pattern |  \n| kind | string | yes |  | Always \"legal_vertical\" |  \n| pillar | string | yes |  | Always \"P01\" | \
-  \ \n| title | string | yes |  | Legal document title |  \n| version | string | yes | \"1.0\" | Semantic versioning |  \n\
-  | created | datetime | yes |  | ISO 8601 format |  \n| updated | datetime | yes |  | ISO 8601 format |  \n| author | string\
-  \ | yes |  | Legal entity or individual |  \n| domain | string | yes |  | Jurisdiction or regulatory area |  \n| quality\
-  \ | null | yes | null | Never self-score; peer review assigns |  \n| tags | list | yes | [] | Keywords for classification\
-  \ |  \n| tldr | string | yes |  | Summary of legal implications |  \n| jurisdiction | string | yes |  | Governing legal\
-  \ territory |  \n| compliance_status | string | yes |  | \"pending\", \"approved\", \"revoked\" |"
-recommended: "| Field | Type | Notes |  \n|---|---|---|  \n| legal_framework | string | Reference to governing laws |  \n\
-  | regulatory_body | string | Authority overseeing document |"
+required: '| Field | Type | Required | Default | Notes |
+
+  |---|---|---|---|---|
+
+  | id | string | yes |  | Must match ID Pattern |
+
+  | kind | string | yes |  | Always "legal_vertical" |
+
+  | pillar | string | yes |  | Always "P01" |
+
+  | title | string | yes |  | Legal document title |
+
+  | version | string | yes | "1.0" | Semantic versioning |
+
+  | created | datetime | yes |  | ISO 8601 format |
+
+  | updated | datetime | yes |  | ISO 8601 format |
+
+  | author | string | yes |  | Legal entity or individual |
+
+  | domain | string | yes |  | Jurisdiction or regulatory area |
+
+  | quality | null | yes | null | Never self-score; peer review assigns |
+
+  | tags | list | yes | [] | Keywords for classification |
+
+  | tldr | string | yes |  | Summary of legal implications |
+
+  | jurisdiction | string | yes |  | Governing legal territory |
+
+  | compliance_status | string | yes |  | "pending", "approved", "revoked" |'
+recommended: '| Field | Type | Notes |
+
+  |---|---|---|
+
+  | legal_framework | string | Reference to governing laws |
+
+  | regulatory_body | string | Authority overseeing document |'
 id_pattern: ^p01_lv_[a-z][a-z0-9_]+.md$
-body_structure: "1. Overview  \n   Summary of legal vertical's purpose and scope.  \n\n2. Jurisdictional Scope  \n   Detailed\
-  \ description of applicable regions/laws.  \n\n3. Compliance Requirements  \n   Mandatory obligations for stakeholders.\
-  \  \n\n4. Legal Framework  \n   References to statutes, regulations, or treaties.  \n\n5. Regulatory Bodies  \n   Entities\
-  \ responsible for enforcement and oversight.  \n\n6. Amendment History  \n   Log of revisions with dates and rationale."
+body_structure: "1. Overview\n   Summary of legal vertical's purpose and scope.\n\n2. Jurisdictional Scope\n   Detailed description\
+  \ of applicable regions/laws.\n\n3. Compliance Requirements\n   Mandatory obligations for stakeholders.\n\n4. Legal Framework\n\
+  \   References to statutes, regulations, or treaties.\n\n5. Regulatory Bodies\n   Entities responsible for enforcement and\
+  \ oversight.\n\n6. Amendment History\n   Log of revisions with dates and rationale."
 constraints:
 - Jurisdiction must align with domain-specific field values.
 - All legal terms must use official terminology from governing bodies.

@@ -1,0 +1,48 @@
+id: kc_roi_calculator
+kind: knowledge_card
+title: ROI Calculator Specification
+version: 1.0.0
+quality: null
+pillar: P01
+language: en
+density_score: 1.0
+overview: ROI (Return on Investment) measures profitability of investments. This calculator helps economic buyers compare
+  financial outcomes of different options using standardized formulas and TCO analysis.
+inputs:
+- Initial investment cost
+- Annual revenue generated
+- Annual operational costs
+- Time period (years)
+- Discount rate (%)
+- Salvage value (optional)
+formulas: 'Basic ROI: `(Revenue - Costs) / Investment * 100%` Net Present Value (NPV): `Σ [(Cash Flow_t) / (1 + r)^t] - Initial
+  Investment` Internal Rate of Return (IRR): Solve for `r` where NPV = 0 Total Cost of Ownership (TCO): `Initial Cost + (Annual
+  Costs × Time) - Salvage Value`'
+tco_comparison: '| Category       | Fixed Costs       | Variable Costs    |
+
+  |----------------|-------------------|-------------------|
+
+  | Infrastructure | $50,000/year      | $100/unit         |
+
+  | Maintenance    | $20,000/year      | $50/unit          |
+
+  | Training       | $15,000/one-time  | $20/unit          |'
+checklist:
+- '[ ] Verify all financial data is accurate'
+- '[ ] Confirm time period matches business cycle'
+- '[ ] Include salvage value for long-term projects'
+- '[ ] Validate discount rate against market rates'
+example: 'Calculate ROI for a $200k project with:
+
+  - $120k annual revenue
+
+  - $60k costs
+
+  - 5-year lifespan
+
+  - 8% discount rate'
+tips:
+- Use NPV for multi-year projects
+- Compare IRR with required rate of return
+- Include opportunity cost in TCO analysis
+- Adjust discount rate for risk profiles

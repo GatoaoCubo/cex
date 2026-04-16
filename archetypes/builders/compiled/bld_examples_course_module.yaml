@@ -16,15 +16,97 @@ domain: course_module construction
 created: '2026-04-14'
 updated: '2026-04-14'
 density_score: 0.85
-golden_example: "---\ntitle: \"Introduction to Data Science\"\nvendor: \"edX\"\nversion: \"2.1\"\ntype: course_module\n---\n\
-  Learning Objectives  \n- Understand fundamental statistical concepts  \n- Apply Python for data analysis  \n- Interpret\
-  \ machine learning model outputs  \n\nContent  \nWeek 1: Statistics basics (mean, median, variance)  \nWeek 2: Python libraries\
-  \ (Pandas, NumPy)  \nWeek 3: Supervised learning algorithms  \n\nAssessments  \n- Weekly quizzes via Quizizz  \n- Final\
-  \ project: Analyze a public dataset using Jupyter Notebooks  \n- Peer reviews on Moodle  \n\nReferences  \n- \"Python for\
-  \ Data Analysis\" by Wes McKinney  \n- edX course materials"
-anti_example_1_missing_core_elements: "---\ntitle: \"Quick Python Guide\"  \nvendor: \"Udemy\"  \nversion: \"1.0\"  \ntype:\
-  \ course_module  \n---\nContent  \n- Basics of syntax  \n- Loops and functions  \n\nAssessments  \n- No assessments listed"
+golden_example: '---
+
+  title: "Introduction to Data Science"
+
+  vendor: "edX"
+
+  version: "2.1"
+
+  type: course_module
+
+  ---
+
+  Learning Objectives
+
+  - Understand fundamental statistical concepts
+
+  - Apply Python for data analysis
+
+  - Interpret machine learning model outputs
+
+
+  Content
+
+  Week 1: Statistics basics (mean, median, variance)
+
+  Week 2: Python libraries (Pandas, NumPy)
+
+  Week 3: Supervised learning algorithms
+
+
+  Assessments
+
+  - Weekly quizzes via Quizizz
+
+  - Final project: Analyze a public dataset using Jupyter Notebooks
+
+  - Peer reviews on Moodle
+
+
+  References
+
+  - "Python for Data Analysis" by Wes McKinney
+
+  - edX course materials'
+anti_example_1_missing_core_elements: '---
+
+  title: "Quick Python Guide"
+
+  vendor: "Udemy"
+
+  version: "1.0"
+
+  type: course_module
+
+  ---
+
+  Content
+
+  - Basics of syntax
+
+  - Loops and functions
+
+
+  Assessments
+
+  - No assessments listed'
 why_it_fails: Includes prompt templates, which are explicitly excluded from the course_module boundary.
-anti_example_2_boundary_violation: "---\ntitle: \"Prompt Engineering Basics\"  \nvendor: \"Coursera\"  \nversion: \"0.5\"\
-  \  \ntype: course_module  \n---\nLearning Objectives  \n- Create effective prompts for AI models  \n\nContent  \n- Prompt\
-  \ templates for different tasks  \n- Example: \"Act as a {role} and {task}\"  \n\nAssessments  \n- Self-assessment checklist"
+anti_example_2_boundary_violation: '---
+
+  title: "Prompt Engineering Basics"
+
+  vendor: "Coursera"
+
+  version: "0.5"
+
+  type: course_module
+
+  ---
+
+  Learning Objectives
+
+  - Create effective prompts for AI models
+
+
+  Content
+
+  - Prompt templates for different tasks
+
+  - Example: "Act as a {role} and {task}"
+
+
+  Assessments
+
+  - Self-assessment checklist'

@@ -49,15 +49,12 @@ cex_compile_py_grounding_record_specific_checks: 'When run against an agent_grou
 
   5. output_hash format check (64 hex chars)
 
-  6. otel_span_id format check (16 hex chars)
-
-
-  ---'
+  6. otel_span_id format check (16 hex chars)'
 validation_tools: ''
 hash_verification_tool: "Verifies that output_hash, content_hash, and tool I/O hashes are valid SHA-256 hex strings.\n\n#\
   \ Verify all hashes in a grounding record\npython tools/cex_compile.py P10_memory/grounding/p10_gr{{prefix}}.md --verify-hash\n\
-  \n# Compute output_hash from raw output file\npython -c \"\nimport hashlib\nwith open('raw_output.txt', 'rb') as f:\n  \
-  \  raw = f.read()\nprint(hashlib.sha256(raw).hexdigest())\n\"\n\n# Verify a specific hash value\npython -c \"\nimport hashlib,\
+  # Compute output_hash from raw output file\npython -c \"\nimport hashlib\nwith open('raw_output.txt', 'rb') as f:\n    raw\
+  \ = f.read()\nprint(hashlib.sha256(raw).hexdigest())\n\"\n# Verify a specific hash value\npython -c \"\nimport hashlib,\
   \ sys\ndata = sys.stdin.buffer.read()\nprint(hashlib.sha256(data).hexdigest())\n\" < raw_output.txt\n\nHash validation rules\
   \ enforced:\n- Length: exactly 64 characters\n- Charset: lowercase hexadecimal [0-9a-f] only\n- Algorithm: SHA-256 only\
   \ (no MD5, no SHA-1, no SHA-512)\n- Source: raw bytes before any post-processing"
@@ -72,8 +69,7 @@ otel_span_id_validator: "Validates that otel_span_id conforms to W3C Trace Conte
   \ ID from OTel SDK   |"
 uuid_validator_inference_id: "# Validate UUIDv4 format\npython -c \"\nimport re, sys\nuuid = sys.argv[1]\npattern = re.compile(r'^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$')\n\
   if pattern.match(uuid):\n    print('[OK] Valid UUIDv4: ' + uuid)\nelse:\n    print('[FAIL] Not a valid UUIDv4: ' + uuid)\n\
-  \    sys.exit(1)\n\" {{INFERENCE_ID}}\n\n# Generate a new UUIDv4\npython -c \"import uuid; print(str(uuid.uuid4()))\"\n\n\
-  ---"
+  \    sys.exit(1)\n\" {{INFERENCE_ID}}\n# Generate a new UUIDv4\npython -c \"import uuid; print(str(uuid.uuid4()))\""
 external_references: ''
 otel_genai_semantic_conventions: '| Resource                          | URL                                                                        |
   Use                                    |
@@ -128,10 +124,7 @@ sha_256_standard_reference: '| Resource                | Reference              
 
   | Python hashlib          | stdlib hashlib.sha256()          | Use this; do not use md5() or sha1()      |
 
-  | Hash comparison         | `hmac.compare_digest(a, b)`      | Use constant-time comparison for security |
-
-
-  ---'
+  | Hash comparison         | `hmac.compare_digest(a, b)`      | Use constant-time comparison for security |'
 tool_call_sequence_f5_call: 'Execute in this order during Phase 1 RESEARCH:
 
 
@@ -139,26 +132,21 @@ tool_call_sequence_f5_call: 'Execute in this order during Phase 1 RESEARCH:
 
   python _tools/cex_retriever.py --query "grounding provenance OTel per-inference" --limit 3
 
-
   # Step 2: Load builder ISOs (if not already loaded via F2 BECOME)
 
   # (ISOs are loaded as context, no shell command needed)
-
 
   # Step 3: After Phase 2 COMPOSE -- validate artifact
 
   python tools/cex_compile.py P10_memory/grounding/p10_gr{{prefix}}.md
 
-
   # Step 4: Score artifact
 
   python tools/cex_score.py --apply P10_memory/grounding/p10_gr{{prefix}}.md
 
-
   # Step 5: Signal completion
 
   python -c "from _tools.signal_writer import write_signal; write_signal(''n04'', ''complete'', {{SCORE}})"
-
 
   # Step 6: Commit
 

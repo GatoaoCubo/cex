@@ -55,17 +55,13 @@ golden_example_godaddy_customer_service_agent: 'Scenario: Production ANS registr
 
   ---
 
-
   # ANS Record: customer-service.godaddy.agents
-
 
   > IETF ANS registry-record for GoDaddy Customer Service Agent.
 
   > Registry operator: GoDaddy | Protocol adapters: MCP 2024-11-05, A2A 0.3
 
-
   ## Agent Identity
-
 
   | Field | Value |
 
@@ -85,9 +81,7 @@ golden_example_godaddy_customer_service_agent: 'Scenario: Production ANS registr
 
   | Spec | IETF draft-narajala-ans-00, CNCF draft-liang-agentdns-00 |
 
-
   ## Protocol Adapters
-
 
   | Protocol | Version | Endpoint | Auth | Status |
 
@@ -97,9 +91,7 @@ golden_example_godaddy_customer_service_agent: 'Scenario: Production ANS registr
 
   | a2a | 0.3 | https://agents.godaddy.com/customer-service/a2a | mtls | active |
 
-
   ## Capability Advertisement
-
 
   | Capability | Description |
 
@@ -111,9 +103,7 @@ golden_example_godaddy_customer_service_agent: 'Scenario: Production ANS registr
 
   | domain-transfer-status | Check status of in-progress transfers |
 
-
   Concurrency: max_concurrent = 50
-
 
   Supported task types:
 
@@ -123,12 +113,9 @@ golden_example_godaddy_customer_service_agent: 'Scenario: Production ANS registr
 
   - domain-status-check
 
-
   Performance: response_time_p95_ms = 340
 
-
   ## PKI Certificate
-
 
   | Field | Value |
 
@@ -140,9 +127,7 @@ golden_example_godaddy_customer_service_agent: 'Scenario: Production ANS registr
 
   | Expires | 2027-04-14 |
 
-
   ## Discovery Endpoint
-
 
   | Field | Value |
 
@@ -156,9 +141,7 @@ golden_example_godaddy_customer_service_agent: 'Scenario: Production ANS registr
 
   | CNCF AgentDNS | draft-liang-agentdns-00 |
 
-
   ## Lifecycle
-
 
   | Field | Value |
 
@@ -177,10 +160,7 @@ golden_example_godaddy_customer_service_agent: 'Scenario: Production ANS registr
 
   Score breakdown: D1=1.0, D2=1.0 (2 adapters), D3=1.0 (PKI-cert full), D4=1.0 (3 skills), D5=1.0
 
-  Final score: 10.0/10 -- all hard gates pass, all soft dimensions maxed.
-
-
-  ---'
+  Final score: 10.0/10 -- all hard gates pass, all soft dimensions maxed.'
 anti_example_1_invalid_ans_name_format: 'What went wrong: Name uses underscores instead of hyphens. Fails H04; invalid per
   IETF draft-narajala-ans-00.
 
@@ -221,18 +201,15 @@ anti_example_1_invalid_ans_name_format: 'What went wrong: Name uses underscores 
   Fix: Replace `billing_agent.acme_corp.agents` with `billing-agent.acme-corp.agents`
 
 
-  Lesson: ANS names follow DNS label syntax (RFC 1035): lowercase, hyphens only. snake_case does not apply.
-
-
-  ---'
+  Lesson: ANS names follow DNS label syntax (RFC 1035): lowercase, hyphens only. snake_case does not apply.'
 anti_example_2_missing_protocol_adapters: "What went wrong: Only an endpoint URL; no protocol-adapter entries. Useless --\
   \ no way to know how to connect.\n\n---\nkind: agent_name_service_record\nid: p04_ans_support_example\npillar: P04\nquality:\
   \ null\nagent_name: \"support.example.agents\"\nendpoint_url: \"https://agents.example.com/support\"\nregistry_operator:\
   \ \"self\"\ndiscovery_endpoint: \"https://example.com/.well-known/agent/support\"\nlifecycle:\n  registered: \"2026-04-14\"\
-  \n---\n\n# ANS Record: support.example.agents\n\nThe support agent is available at https://agents.example.com/support.\n\
-  Contact it for any help requests.\n\nFailure analysis:\n\n| Gate | Result | Reason |\n|------|--------|--------|\n| H06\
-  \ | FAIL | `protocol_adapters` array absent -- 0 adapters declared |\n| H08 | PASS | lifecycle.registered present |\n| H07\
-  \ | PASS | discovery_endpoint present |\n\nScore with H06 fixed (hypothetically):\n\n| Dimension | Score | Reason |\n|-----------|-------|--------|\n\
+  \n---\n# ANS Record: support.example.agents\nThe support agent is available at https://agents.example.com/support.\nContact\
+  \ it for any help requests.\n\nFailure analysis:\n\n| Gate | Result | Reason |\n|------|--------|--------|\n| H06 | FAIL\
+  \ | `protocol_adapters` array absent -- 0 adapters declared |\n| H08 | PASS | lifecycle.registered present |\n| H07 | PASS\
+  \ | discovery_endpoint present |\n\nScore with H06 fixed (hypothetically):\n\n| Dimension | Score | Reason |\n|-----------|-------|--------|\n\
   | D2 Protocol coverage | 0.0 | Still 0 adapters -- H06 was the symptom |\n| D3 PKI completeness | 0.0 | No pki_cert_reference,\
   \ self-hosted operator |\n| D4 Capability richness | 0.0 | No capability_advertisement block |\n| Overall | < 5.0 | Well\
   \ below publish threshold |\n\nFix: Add >=1 protocol-adapter (mcp|a2a), a capability_advertisement, and optionally a PKI-cert.\n\

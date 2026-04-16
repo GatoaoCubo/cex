@@ -16,7 +16,8 @@ domain: pitch_deck construction
 created: '2026-04-14'
 updated: '2026-04-14'
 density_score: 0.85
-naming_convention: 'Pattern: p05_pd_<project_name>.md (e.g., p05_pd_innovateX.md, p05_pd_neuroFlow.md)'
+naming_convention_pitch_deck_artifacts: 'Pattern: p05_pd_<project_name>.md (e.g., p05_pd_innovateX.md, p05_pd_neuroFlow.md)
+  for each pitch deck'
 paths: /artifacts/p05/pd/<project_name>/output.md
 limits: 'max_bytes: 6144 max_turns: 5 effort_level: high'
 hooks: 'pre_build: null post_build: null on_error: null on_quality_fail: null'

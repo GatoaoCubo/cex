@@ -1,16 +1,16 @@
-kind: learning_record
-id: p10_lr_app_directory_entry_builder
+kind: memory
+id: p10_mem_app_directory_entry_builder
 pillar: P10
 llm_function: INJECT
 purpose: Learned patterns and pitfalls for app_directory_entry construction
 quality: null
-title: Learning Record App Directory Entry
+title: Memory App Directory Entry
 version: 1.0.0
 author: wave1_builder_gen_v2
 tags:
 - app_directory_entry
 - builder
-- learning_record
+- memory
 tldr: Learned patterns and pitfalls for app_directory_entry construction
 domain: app_directory_entry construction
 created: '2026-04-14'

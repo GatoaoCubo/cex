@@ -1,0 +1,41 @@
+kind: instruction
+id: bld_instruction_search_strategy
+pillar: P03
+llm_function: REASON
+purpose: Step-by-step production process for search_strategy
+quality: null
+title: Instruction Search Strategy
+version: 1.0.0
+author: wave1_builder_gen
+tags:
+- search_strategy
+- builder
+- instruction
+tldr: Step-by-step production process for search_strategy
+domain: search_strategy construction
+created: '2026-04-13'
+updated: '2026-04-13'
+density_score: 0.85
+phase_1_research:
+- Analyze compute bottlenecks in inference pipelines
+- Benchmark existing search heuristics for resource allocation
+- 'Identify constraints: latency, memory, throughput tradeoffs'
+- Study domain-specific workloads (e.g., NLP, vision)
+- Evaluate dynamic vs static allocation strategies
+- Document research findings in technical whitepaper
+phase_2_compose:
+- Define strategy parameters (e.g., priority queues, budget limits)
+- Structure artifact using SCHEMA.md's `search_strategy` interface
+- Map research findings to schema fields (e.g., `allocation_rules`)
+- Implement core logic in `compute_allocation()` function
+- Write validation rules for input constraints
+- Integrate OUTPUT_TEMPLATE.md's JSON structure
+- 'Add metadata: version, author, compatibility tags'
+- Write unit tests for edge cases (e.g., zero-budget scenarios)
+- Finalize artifact with documentation comments
+phase_3_validate:
+- '[ ] ✅ Schema compliance check (jsonschema)'
+- '[ ] ✅ Unit test coverage ≥90%'
+- '[ ] ✅ Edge case validation (e.g., 1000+ concurrent queries)'
+- '[ ] ✅ Performance benchmark against baseline'
+- '[ ] ✅ Peer review for domain-specific accuracy'

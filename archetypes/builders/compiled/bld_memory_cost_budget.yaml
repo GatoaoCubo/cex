@@ -48,6 +48,7 @@ observation_types:
 quality: null
 title: Memory Cost Budget
 density_score: 0.9
+llm_function: INJECT
 summary: 'Cost budget failures split into two categories: financial surprises (overages discovered on billing invoice because
   thresholds were absent or too coarse) and operational failures (all LLM calls blocked because budgets accumulated without
   reset). A seven-field budget entry specification and explicit alert/escalation section address both categories.'

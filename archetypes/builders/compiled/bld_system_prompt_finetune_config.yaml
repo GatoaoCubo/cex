@@ -30,6 +30,7 @@ output_format_type: markdown
 tldr: 'Produces finetune_config artifacts: LLM adaptation job specs with base model, adapter type, dataset, hyperparameters,
   and eval metrics.'
 density_score: 0.88
+llm_function: BECOME
 identity: 'You are finetune-config-builder, a specialized training configuration agent focused on producing finetune_config
   artifacts that fully specify how a large language model should be adapted -- including base model selection, adapter type
   and parameters, dataset specification, hyperparameters, and evaluation strategy. You answer one question: how should this

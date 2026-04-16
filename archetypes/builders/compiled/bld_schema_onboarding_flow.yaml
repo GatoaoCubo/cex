@@ -17,23 +17,52 @@ created: '2026-04-14'
 updated: '2026-04-14'
 density_score: 0.85
 frontmatter_fields: ''
-required: "| Field | Type | Required | Default | Notes |  \n|---|---|---|---|---|  \n| id | string | yes | null | Must match\
-  \ ID Pattern |  \n| kind | string | yes | null | Always \"onboarding_flow\" |  \n| pillar | string | yes | null | Always\
-  \ \"P05\" |  \n| title | string | yes | null | Descriptive name |  \n| version | string | yes | \"1.0\" | Semantic versioning\
-  \ |  \n| created | datetime | yes | null | ISO 8601 format |  \n| updated | datetime | yes | null | ISO 8601 format |  \n\
-  | author | string | yes | null | Owner's name |  \n| domain | string | yes | null | CEX subsystem (e.g., \"KYC\") |  \n\
-  | quality | null | yes | null | Never self-score; peer review assigns |  \n| tags | list | yes | [] | Keywords for categorization\
-  \ |  \n| tldr | string | yes | null | Summary of flow purpose |  \n| steps | list | yes | [] | Ordered onboarding steps\
-  \ |  \n| user_journey | string | yes | null | High-level user path |"
-recommended: "| Field | Type | Notes |  \n|---|---|---|  \n| estimated_time | string | Approximate duration (e.g., \"10 mins\"\
-  ) |  \n| completion_rate | float | Target percentage (e.g., 95.0) |  \n| risk_assessment | string | Security/privacy impact\
-  \ summary |"
+required: '| Field | Type | Required | Default | Notes |
+
+  |---|---|---|---|---|
+
+  | id | string | yes | null | Must match ID Pattern |
+
+  | kind | string | yes | null | Always "onboarding_flow" |
+
+  | pillar | string | yes | null | Always "P05" |
+
+  | title | string | yes | null | Descriptive name |
+
+  | version | string | yes | "1.0" | Semantic versioning |
+
+  | created | datetime | yes | null | ISO 8601 format |
+
+  | updated | datetime | yes | null | ISO 8601 format |
+
+  | author | string | yes | null | Owner''s name |
+
+  | domain | string | yes | null | CEX subsystem (e.g., "KYC") |
+
+  | quality | null | yes | null | Never self-score; peer review assigns |
+
+  | tags | list | yes | [] | Keywords for categorization |
+
+  | tldr | string | yes | null | Summary of flow purpose |
+
+  | steps | list | yes | [] | Ordered onboarding steps |
+
+  | user_journey | string | yes | null | High-level user path |'
+recommended: '| Field | Type | Notes |
+
+  |---|---|---|
+
+  | estimated_time | string | Approximate duration (e.g., "10 mins") |
+
+  | completion_rate | float | Target percentage (e.g., 95.0) |
+
+  | risk_assessment | string | Security/privacy impact summary |'
 id_pattern: ^p05_of_[a-z][a-z0-9_]+.md$
-body_structure: "1. Purpose and Objectives  \n   Define the flow's goal, target audience, and alignment with CEX policies.\
-  \  \n\n2. Key Components and Requirements  \n   List mandatory fields, integrations, and technical dependencies.  \n\n3.\
-  \ User Journey Mapping  \n   Detail step-by-step interactions, UI/UX considerations, and friction points.  \n\n4. Success\
-  \ Metrics and KPIs  \n   Define measurable outcomes (e.g., conversion rates, error rates).  \n\n5. Compliance and Security\
-  \ Requirements  \n   Outline regulatory checks, data handling, and audit trails."
+body_structure: "1. Purpose and Objectives\n   Define the flow's goal, target audience, and alignment with CEX policies.\n\
+  \n2. Key Components and Requirements\n   List mandatory fields, integrations, and technical dependencies.\n\n3. User Journey\
+  \ Mapping\n   Detail step-by-step interactions, UI/UX considerations, and friction points.\n\n4. Success Metrics and KPIs\n\
+  \   Define measurable outcomes (e.g., conversion rates, error rates).\n\n5. Compliance and Security Requirements\n   Outline\
+  \ regulatory checks, data handling, and audit trails."
 constraints:
 - All required fields must be present and valid.
 - ID must match ^p05_of_[a-z][a-z0-9_]+.md$ exactly.

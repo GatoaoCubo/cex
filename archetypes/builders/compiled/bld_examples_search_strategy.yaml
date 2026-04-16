@@ -1,0 +1,36 @@
+kind: examples
+id: bld_examples_search_strategy
+pillar: P07
+llm_function: GOVERN
+purpose: Golden and anti-examples of search_strategy artifacts
+quality: null
+title: Examples Search Strategy
+version: 1.0.0
+author: wave1_builder_gen
+tags:
+- search_strategy
+- builder
+- examples
+tldr: Golden and anti-examples of search_strategy artifacts
+domain: search_strategy construction
+created: '2026-04-13'
+updated: '2026-04-13'
+density_score: 0.85
+golden_example: "---\ntitle: \"Dynamic Resource Allocation for Query Complexity\"\nauthor: \"AI Systems Team\"\ndate: \"2023-10-01\"\
+  \nkeywords: search_strategy, compute_allocation, inference_optimization\n---\n\nStrategy: Allocate compute resources based\
+  \ on query complexity during inference.  \nImplementation:  \n1. Preprocess queries to estimate complexity (e.g., length,\
+  \ entity count).  \n2. Use a tiered compute budget:  \n   - Low complexity: 1 GPU core, 2 threads.  \n   - Medium: 2 GPU\
+  \ cores, 4 threads.  \n   - High: 4 GPU cores, 8 threads.  \n3. Monitor latency and adjust budgets dynamically using feedback\
+  \ loops.  \nParameters: `max_threads`, `gpu_cores_per_tier`, `latency_threshold`.  \nBenefits: Balances speed and accuracy,\
+  \ adapts to workload variations."
+anti_example_1_confusing_with_reasoning_strategy: "---\ntitle: \"Prompt-Based Compute Allocation\"\nauthor: \"Novice Developer\"\
+  \ndate: \"2023-09-15\"\nkeywords: reasoning_strategy, prompt_tuning\n---\n\nStrategy: Use prompts like \"Use more compute\"\
+  \ to influence model behavior.  \nImplementation:  \n- Insert instruction: \"Allocate maximum resources for this query.\"\
+  \  \nParameters: None.  \nBenefits: \"Simplifies\" resource management through natural language."
+? why_it_fails_this_is_a_reasoning_strategy_prompt_technique_not_a_search_strategy_it_relies_on_model_interpretation_of_text_not_explicit_compute_allocation_logic
+: ''
+anti_example_2_vague_allocation_rules: "---\ntitle: \"Generic Compute Strategy\"\nauthor: \"Unspecified\"\ndate: \"2023-08-20\"\
+  \nkeywords: search_strategy\n---\n\nStrategy: \"Use more resources when needed.\"  \nImplementation:  \n- \"Sometimes increase\
+  \ GPU usage.\"  \nParameters: None.  \nBenefits: \"Flexible\" approach."
+? why_it_fails_no_actionable_rules_or_metrics_for_determining_need_lacks_parameters_tiers_or_feedback_mechanisms_making_it_unimplementable
+: ''

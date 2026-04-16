@@ -24,17 +24,17 @@ phase_1_research:
 - Compare schema normalization vs denormalization tradeoffs
 - Document security constraints for sensitive graph data
 phase_2_compose:
-- Initialize config with SCHEMA.md's base structure
-- Define node types per OUTPUT_TEMPLATE.md's entity hierarchy
+- Initialize config with bld_schema_graph_rag_config.md base structure
+- Define node types per bld_output_template_graph_rag_config.md entity hierarchy
 - Map data sources to graph injection endpoints
 - Configure edge weighting parameters (confidence, relevance)
 - Implement query injection patterns from schema
 - Set retrieval path limits (max hops, depth)
 - Embed validation hooks per schema constraints
-- Write config using OUTPUT_TEMPLATE.md's syntax
+- Write config using bld_output_template_graph_rag_config.md syntax
 - Add metadata for versioning and dependency tracking
 phase_3_validate:
-- '[ ] Schema compliance check against SCHEMA.md'
+- '[ ] Schema compliance check against bld_schema_graph_rag_config.md'
 - '[ ] Data integrity verification (node/edge consistency)'
 - '[ ] Injection point stress testing with sample queries'
 - '[ ] Retrieval accuracy benchmarking (precision/recall)'

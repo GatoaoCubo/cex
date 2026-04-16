@@ -72,7 +72,6 @@ pre_build_hook_f1_constrain: '# Verify output directory exists
 
   mkdir -p P04_tools/
 
-
   # Check for existing record (avoid duplicates)
 
   ls P04_tools/p04_ans_*.md 2>/dev/null | grep "{agent_slug}" && echo "WARNING: record exists"'
@@ -80,23 +79,19 @@ post_build_hook_f8_collaborate: '# Compile artifact to YAML
 
   python tools/cex_compile.py P04_tools/p04_ans{agent_slug}.md
 
-
   # Score the artifact
 
   python tools/cex_score.py --apply P04_tools/p04_ans{agent_slug}.md
 
-
   # Update search index
 
   python _tools/cex_index.py
-
 
   # Validate byte count
 
   wc -c P04_tools/p04_ans_{agent_slug}.md
 
   # if > 3072: trim capability_advertisement or lifecycle notes
-
 
   # Git commit
 

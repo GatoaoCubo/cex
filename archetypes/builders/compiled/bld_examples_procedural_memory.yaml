@@ -4,28 +4,78 @@ pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of procedural_memory artifacts
 quality: null
-title: Examples Procedural Memory
-version: 1.0.0
-author: wave1_builder_gen_v2
+title: 'Examples: procedural_memory artifacts'
+version: 2.0.0
+author: n06_commercial
 tags:
 - procedural_memory
 - builder
 - examples
-tldr: Golden and anti-examples of procedural_memory artifacts
-domain: procedural_memory construction
+tldr: 'Golden example: Voyager-style skill library with verification. Anti-examples: declarative memory (wrong kind) and enterprise
+  automation platform (wrong domain).'
+domain: LLM agent procedural memory
 created: '2026-04-14'
 updated: '2026-04-14'
-density_score: 0.85
-golden_example: "cex_kind: procedural_memory  \nname: \"Microsoft Power Automate Flow for Invoice Processing\"  \ndescription:\
-  \ \"Automates invoice data extraction and accounting entry creation.\"  \nbody:  \n  - trigger: \"Email received in 'Invoices'\
-  \ folder\"  \n  - action: \"Extract PDF text using Azure Cognitive Services\"  \n  - action: \"Parse structured data with\
-  \ Power Automate's AI Builder\"  \n  - action: \"Create accounting entry in Dynamics 365\"  \n  - validation: \"Send confirmation\
-  \ email with parsed data summary\"  "
-anti_example_1_confusing_with_declarative_knowledge: "cex_kind: procedural_memory  \nname: \"Salesforce Object Schema\"  \n\
-  description: \"Stores CRM entity definitions and field relationships.\"  \nbody:  \n  - entity: \"Account\"  \n  - fields:\
-  \ \"Name, Industry, Revenue\"  \n  - relationships: \"Account -> Contact (one-to-many)\"  "
-why_it_fails: Lacks specificity in actions, tools, or validation. No concrete procedures or automation logic, making retrieval
-  ineffective.
-anti_example_2_vague_unstructured_steps: "cex_kind: procedural_memory  \nname: \"Generic Task Management\"  \ndescription:\
-  \ \"Tracks user tasks without defined workflows.\"  \nbody:  \n  - step: \"User adds task\"  \n  - step: \"System assigns\
-  \ task\"  \n  - step: \"Task completed\"  "
+density_score: 0.9
+golden_example_coding_assistant_pro_tier: '---
+
+  id: p10_pm_coding_assistant_pro
+
+  kind: procedural_memory
+
+  pillar: P10
+
+  title: "Procedural Memory: Coding Assistant Agent (PRO)"
+
+  version: "1.0.0"
+
+  created: "2026-04-14"
+
+  author: n06_commercial
+
+  domain: coding-assistant
+
+  quality: null
+
+  tags: [procedural_memory, coding, pro, voyager_style]
+
+  tldr: "PRO skill library for coding agent: 8 verified Python skills with test-case gating, namespace coding.*, Redis KV
+  backend."
+
+  tier: pro
+
+  skill_format: code
+
+  skill_count: 8
+
+  verification: unit_test
+
+  namespace_pattern: "coding.{task}"
+
+  storage_backend: redis
+
+  reflexion_enabled: true
+
+  ---
+
+
+  Why golden: all required frontmatter, tier=pro, skill_format=code, verification=unit_test.
+
+  Body includes Skill Definitions table with 8 skills, hierarchical namespace `coding.*`,
+
+  Redis backend config, test-case gating (Voyager verify-before-store), Reflexion notes section,
+
+  and FREE/PRO/ENTERPRISE tier matrix. References Voyager (Wang 2023).'
+anti_example_1_declarative_memory_stored_in_procedural_kind_wrong_kind: "---\nid: p10_pm_salesforce_schema\nkind: procedural_memory\n\
+  title: \"Salesforce CRM Entity Definitions\"\nbody:\n  - entity: Account\n    fields: [Name, Industry, Revenue]\n    relationships:\
+  \ \"Account -> Contact (one-to-many)\"\n---\n\nWhy it fails:\n- Stores entity definitions (declarative/semantic memory)\
+  \ not skills or procedures\n- This belongs in `entity_memory` or `knowledge_card` kind, not `procedural_memory`\n- No `skill_format`,\
+  \ no `tier`, no `verification`\n- No Skill Definitions table, no Namespace, no Tier Matrix\n- Missing all required frontmatter\
+  \ fields"
+anti_example_2_enterprise_automation_platform_wrong_domain: "---\nid: p10_pm_power_automate_invoice\nkind: procedural_memory\n\
+  name: \"Microsoft Power Automate Flow for Invoice Processing\"\ndescription: \"Azure Cognitive Services + Dynamics 365 invoice\
+  \ workflow\"\nbody:\n  - trigger: \"Email received in Invoices folder\"\n  - action: \"Extract PDF with Azure Cognitive\
+  \ Services\"\n  - action: \"Create accounting entry in Dynamics 365\"\n---\n\nWhy it fails:\n- Describes enterprise software\
+  \ automation (Power Automate), not LLM agent skills\n- No LLM agent context: no prompts, no skill retrieval, no agent execution\n\
+  - `name` instead of `id`, missing `kind`, `pillar`, `tier`, `skill_format`\n- No Voyager/Reflexion references, wrong domain\
+  \ entirely\n- Would fail H01 (missing required fields), H02 (no ID), H04 (no skill_format)"

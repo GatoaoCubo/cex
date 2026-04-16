@@ -1,0 +1,47 @@
+id: kc_ai_rmf_profile
+kind: knowledge_card
+title: AI RMF Profile
+version: 1.0.0
+quality: null
+pillar: P01
+language: English
+density_score: 1.0
+overview: 'This artifact implements the NIST AI Risk Management Framework (AI RMF) profile, compliant with AI 600-1 standards.
+  It provides structured guidance for managing GenAI risks through four core functions:'
+4_core_functions:
+- GOVERN
+- Establish governance policies and accountability
+- Define risk appetite and decision-making authority
+- Integrate AI risk management into organizational strategy
+- MAP
+- Identify AI systems and their operational contexts
+- Map risk categories to specific AI capabilities
+- Develop risk scenarios and impact assessments
+- MEASURE
+- Quantify risk exposure using standardized metrics
+- Monitor AI system performance and bias patterns
+- Track compliance with regulatory requirements
+- MANAGE
+- Implement risk mitigation strategies
+- Continuously improve AI systems through feedback loops
+- Maintain documentation for audit and review
+13_genai_risk_categories:
+- Data Privacy
+- Model Bias
+- Intellectual Property
+- Security Vulnerabilities
+- Operational Reliability
+- Ethical Implications
+- Regulatory Compliance
+- System Interoperability
+- Human-AI Collaboration
+- Environmental Impact
+- Job Displacement Risks
+- Data Integrity
+- Transparency & Explainability
+action_id_mappings: "Each risk category is linked to specific remediation actions:  \n- Data Privacy: ACTION-001 (Data Anonymization),\
+  \ ACTION-002 (Access Controls)  \n- Model Bias: ACTION-003 (Bias Audits), ACTION-004 (Diverse Training Data)  \n- Security\
+  \ Vulnerabilities: ACTION-005 (Penetration Testing), ACTION-006 (Secure APIs)"
+compliance: "This profile aligns with NIST Special Publication 600-1 (AI Risk Management) and provides a structured approach\
+  \ to:  \n- Identify, assess, and mitigate AI-related risks  \n- Ensure ethical and compliant AI system development  \n-\
+  \ Support continuous improvement through measurement and feedback"

@@ -51,11 +51,28 @@ industry_standards:
 - JSON Schema (RFC 7396)
 - ISO 20252:2019 (Brand Management)
 common_patterns:
-- Configuration as Code – Store white-label settings in versioned files (e.g., YAML).
-- Modular UI Frameworks – Use component-based systems for dynamic theming.
-- Abstraction Layers – Isolate reseller-specific logic from core application code.
-- Runtime Injection – Load reseller configs at deployment via environment variables.
-- Policy-Driven Validation – Enforce schema rules for reseller input consistency.
+- Configuration as Code -- Store white-label settings in versioned YAML files.
+- Modular UI Frameworks -- CSS variable injection via theming API for runtime branding.
+- Abstraction Layers -- Isolate reseller logic from core application code.
+- Stripe Connect sub-accounts -- Platform fee model with connected account payouts.
+- Policy-Driven Validation -- Enforce schema rules for reseller input consistency.
+- Custom domain provisioning -- Automated CNAME + SSL cert issuance per reseller.
+- OEM licensing tiers -- Wholesale price + margin floor + retail pricing freedom for reseller.
+stripe_connect_sub_account_model: "White-label platforms commonly use Stripe Connect to manage reseller billing:  \n- Platform\
+  \ account: owns product, sets pricing floors, collects platform fees (1-3% typical).  \n- Connected (sub) account: reseller's\
+  \ Stripe account, receives payouts minus platform fee.  \n- Charge types: Direct charges (reseller controls UX), Destination\
+  \ charges (platform controls UX), Separate charges + transfers (split billing).  \n- OEM licensing model: platform licenses\
+  \ product to reseller at wholesale price; reseller sets retail price. Margin = retail - wholesale - platform fee.  \n- Config\
+  \ artifact must specify: `stripe_connect_type`, `platform_fee_percent`, `reseller_margin_floor`, `payout_schedule`."
+branding_components_must_configure_in_every_white_label_config: "| Component | Config Key | Notes |  \n|-----------|------------|-------|\
+  \  \n| Custom domain | `custom_domain` | e.g., app.reseller.com -- requires DNS CNAME |  \n| Branded email sender | `email_from_domain`\
+  \ | e.g., noreply@reseller.com -- requires SPF/DKIM |  \n| Logo (header) | `logo_url` | PNG/SVG, min 200x50px |  \n| Favicon\
+  \ | `favicon_url` | ICO/PNG 32x32 |  \n| Primary color | `brand_color_primary` | HEX, used in buttons/links |  \n| Co-branded\
+  \ footer | `cobrand_text` | \"Powered by [Platform]\" or fully white-labeled |  \n| Theming API | `theme_api_enabled` |\
+  \ Exposes CSS variable overrides to reseller |"
 pitfalls:
-- Hardcoding Branding – Embedding reseller-specific data directly into core code.
-- Insecure Credential Handling
+- Hardcoding Branding -- Embedding reseller-specific data directly into core code.
+- Insecure Credential Handling -- Storing Stripe Connect keys or API tokens in plaintext config.
+- Missing reseller margin floor -- Allowing resellers to price below cost, eroding platform revenue.
+- Single custom domain -- Not supporting multiple domains per reseller (multi-brand accounts).
+- No theming API versioning -- CSS variable changes breaking existing reseller themes on deploy.

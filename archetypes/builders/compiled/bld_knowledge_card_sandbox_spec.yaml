@@ -16,43 +16,53 @@ domain: sandbox_spec construction
 created: '2026-04-14'
 updated: '2026-04-14'
 density_score: 0.85
-domain_overview: Sandbox_spec artifacts define isolated, secure environments for evaluating enterprise procurement gates,
-  ensuring compliance with regulatory, security, and operational requirements. These specifications are critical in pilot
-  phases to validate third-party integrations, software, or infrastructure without exposing production systems. Industries
-  like finance, healthcare, and government rely on sandboxes to enforce strict boundary controls, audit trails, and resource
-  constraints, aligning with frameworks such as NIST and ISO 27001. Sandbox specs differ from playground_config (interactive
-  testing) and env_config (production deployment) by prioritizing immutability, strict access controls, and ephemeral lifecycles.
-  They often integrate with CI/CD pipelines for automated validation, ensuring artifacts meet procurement criteria before
-  deployment.
-key_concepts: "| Concept              | Definition                                                                 | Source\
-  \                          |  \n|----------------------|----------------------------------------------------------------------------|---------------------------------|\
-  \  \n| Isolation Boundary   | Logical separation between sandbox and external systems                    | NIST SP 800-190\
-  \                 |  \n| Resource Quotas      | Limits on CPU, memory, or storage allocated to sandbox workloads       \
-  \    | Kubernetes API Docs             |  \n| Compliance Profile   | Set of regulatory requirements (e.g., GDPR, HIPAA)\
-  \ enforced in sandbox     | ISO/IEC 27001                   |  \n| Network Segmentation | Isolated subnet for sandbox traffic,\
-  \ preventing lateral movement           | RFC 2196                        |  \n| Access Control       | Role-based permissions\
-  \ for sandbox users and systems                       | NIST 800-53                     |  \n| Audit Logging        | Mandatory\
-  \ recording of all sandbox activities for forensic analysis        | ISO 27001                       |  \n| Data Encryption\
-  \      | At-rest and in-transit encryption for sensitive data within sandbox        | NIST SP 800-57                  |\
-  \  \n| Ephemeral Lifespan   | Sandbox environment automatically destroyed after use or timeout           | CNCF Kubernetes\
-  \ Best Practices  |"
+domain_overview: 'Sandbox_spec artifacts define the isolated environment enterprise buyers and regulated industries require
+  before signing. Where playground_config optimizes for PLG conversion, sandbox_spec optimizes for procurement: separate tenant,
+  separate data, signed audit trail, compliance evidence. Reference implementations include Stripe test mode (dual-key pattern:
+  test_ vs live_ prefixes), AWS Firecracker micro-VMs (sub-125ms boot, KVM isolation), Google gVisor (user-space kernel),
+  and HIPAA/PCI-DSS mandated test environments. Sandbox is an enterprise procurement gate. Without a credible sandbox_spec,
+  deals stall in legal review for weeks. The spec must name the isolation technology, the data boundary, the compliance mapping,
+  and the teardown guarantee.'
+key_concepts: '| Concept | Definition | Source |
+
+  |---|---|---|
+
+  | Dual-key isolation | Test and live credentials share no blast radius | Stripe test mode |
+
+  | Micro-VM isolation | KVM-backed VM with <125ms boot | AWS Firecracker |
+
+  | User-space kernel | Syscall interception for container hardening | Google gVisor |
+
+  | Separate tenant | Distinct DB + compute + network per customer | Snowflake, AWS GovCloud |
+
+  | Compliance profile | Evidence bundle mapping controls to frameworks | ISO 27001 SoA, SOC 2 |
+
+  | Audit immutability | Append-only log with cryptographic chain | AWS CloudTrail, GCP Cloud Audit |
+
+  | Teardown policy | Automated destruction + cert of deletion | PCI-DSS 3.2.1 req 9.8 |
+
+  | Data residency | Region-locked storage + compute | GDPR Art 44, Schrems II |'
 industry_standards:
-- 'NIST SP 800-190: Secure System Development'
-- 'ISO/IEC 27001: Information Security Management'
-- 'RFC 2196: Site Security Handbook'
-- 'CIS Benchmarks: Configuration Hardening'
-- CNCF Kubernetes Security Best Practices
-- 'GDPR: Data Protection Requirements'
-- 'COBIT 2019: Enterprise Governance'
+- PCI-DSS v4.0 sandbox isolation and segmentation requirements
+- HIPAA 164.312 technical safeguards and 164.308 administrative safeguards
+- ISO/IEC 27001:2022 A.8.31 separation of development, test, production
+- SOC 2 Trust Services Criteria (CC6.1 logical access, CC7.1 change management)
+- NIST SP 800-190 application container security guide
+- NIST SP 800-53 Rev 5 AC-4 information flow enforcement
+- GDPR Article 32 security of processing
+- FedRAMP Moderate baseline (for US federal pilots)
 common_patterns:
-- Define strict isolation boundaries using network segmentation and containerization.
-- Enforce resource quotas to prevent sandbox sprawl and resource exhaustion.
-- Embed compliance profiles as mandatory checks during sandbox provisioning.
-- Use ephemeral lifespans with automated cleanup to reduce attack surfaces.
-- Implement audit logging for all user and system interactions.
+- Dual-key prefix scheme (test_ vs live_) enforced at API gateway.
+- Micro-VM per tenant for enterprise pilots (Firecracker or Nitro Enclaves).
+- Separate VPC + account for sandbox traffic, zero peering to prod.
+- Ephemeral lifecycle with automated teardown and deletion certificate.
+- Compliance evidence auto-exported (SOC 2 evidence collector pattern).
+- Read-only replica of anonymized prod data for realistic pilots.
+- Tamper-evident audit log with cryptographic chain (e.g., QLDB-style).
 pitfalls:
-- Overlooking compliance requirements leads to regulatory nonconformance.
-- Insufficient isolation allows data leakage between sandbox and production.
-- Misconfigured resource quotas cause performance degradation or denial-of-service.
-- Ignoring audit logging creates blind spots for forensic analysis.
-- Failing to align sandbox specs with procurement gate criteria delays approvals.
+- Sandbox shares credentials or network with prod -- instant procurement fail.
+- No teardown cert -- legal blocks renewal until proof of deletion arrives.
+- Compliance mapping absent -- buyer's security review returns with 40 questions.
+- Sandbox treated as playground (too permissive, no audit, fails SOC 2).
+- No data residency control -- blocks EU and regulated-sector deals.
+- Missing upgrade path from sandbox pilot to production tenant -- deal dies.

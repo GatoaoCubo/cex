@@ -1,5 +1,5 @@
-kind: learning_record
-id: p10_lr_white_label_config_builder
+kind: memory
+id: p10_mem_white_label_config_builder
 pillar: P10
 llm_function: INJECT
 purpose: Learned patterns and pitfalls for white_label_config construction

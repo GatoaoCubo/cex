@@ -3,7 +3,7 @@ kind: type_builder
 pillar: P01
 parent: null
 domain: ontology
-llm_function: CONSTRAIN
+llm_function: BECOME
 version: 1.0.0
 created: 2026-04-13
 updated: 2026-04-13

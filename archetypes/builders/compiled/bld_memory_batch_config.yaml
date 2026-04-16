@@ -50,6 +50,7 @@ observation_types:
 quality: null
 title: Memory Batch Config
 density_score: 0.9
+llm_function: INJECT
 summary: 'Batch processing configuration failures split into two categories: financial failures (runaway spend from missing
   cost caps or unbounded batch sizes) and reliability failures (data loss from missing retry policy, expiry handling, or dead-letter
   routing). Five mandatory controls address both systematically.'

@@ -1,0 +1,78 @@
+kind: examples
+id: bld_examples_kind
+pillar: P07
+llm_function: GOVERN
+purpose: Golden and anti-examples of builder package scaffolding
+pattern: few-shot learning -- LLM reads these before producing
+quality: null
+title: Examples Kind Builder
+version: 1.0.0
+author: n03_builder
+tags:
+- kind_builder
+- builder
+- examples
+- meta-builder
+tldr: Golden example of a complete builder manifest ISO + anti-example showing common scaffolding failures.
+domain: kind builder construction
+created: '2026-04-13'
+updated: '2026-04-13'
+density_score: 0.9
+golden_example: "INPUT: \"Create builder for kind: env_config (P09, GOVERN)\"\n\nOUTPUT (manifest ISO only -- showing quality\
+  \ standard for all 13):\n\n---\nid: env-config-builder\nkind: type_builder\npillar: P09\nparent: null\ndomain: env_config\n\
+  llm_function: GOVERN\nversion: 1.0.0\ncreated: 2026-03-26\nupdated: 2026-03-26\nauthor: builder_agent\ntags: [kind-builder,\
+  \ env-config, P09, config, environment, variables]\nkeywords: [env, environment, variable, config, secret, dotenv, envvar,\
+  \ settings]\ntriggers: [\"define environment variables\", \"create env config\", \"document system variables\"]\ncapabilities:\
+  \ >\n  L1: Specialist in building env_config artifacts.\n  L2: Define environment variables with scope, type, default, and\
+  \ sensitivity.\n  L3: When user needs to create or scaffold env config.\nquality: null\ntitle: \"Manifest Env Config\"\n\
+  tldr: \"Specialist in env_config artifacts: variable catalogs with scope, type, default, validation, sensitivity.\"\ndensity_score:\
+  \ 0.90\n---\n# env-config-builder\n## Identity\nSpecialist in building env_config artifacts -- specifications of environment\n\
+  variables for a system scope. Masters scoping (global, agent_group, service),\nsensitive var handling, defaults, validation\
+  \ rules, override precedence, and\nthe boundary between env_config (generic variables) and boot_config (P02,\nper-provider)\
+  \ or feature_flag (P09, logical on/off).\n## Capabilities\n1. Define environment variables with scope, type, default, and\
+  \ sensitivity\n2. Specify validation rules (regex, range, enum) per variable\n3. Document override precedence (env > file\
+  \ > default)\n4. Mark sensitive variables with masking rules\n5. Validate against quality gates (HARD + SOFT)\n6. Distinguish\
+  \ env_config from boot_config, feature_flag, path_config\n## Routing\nkeywords: [env, environment, variable, config, secret,\
+  \ dotenv]\ntriggers: \"define environment variables\", \"create env config\"\n## Crew Role\nIn a crew, I handle ENVIRONMENT\
+  \ VARIABLE SPECIFICATION.\nI answer: \"what environment variables does this scope need?\"\nI do NOT handle: boot_config,\
+  \ feature_flag, path_config, permission.\n\nWHY THIS IS GOLDEN:\n- quality: null (H01 pass -- never self-scored)\n- kind:\
+  \ type_builder (H02 pass -- correct meta-kind)\n- All required frontmatter fields present (H03 pass)\n- 6 capabilities listed,\
+  \ each specific to the domain (H04 pass)\n- Boundary section clearly states what this builder IS NOT (H05 pass)\n- Routing\
+  \ keywords match the kind's domain vocabulary (S01 pass)\n- Crew role defines scope and exclusions (S02 pass)\n- tldr is\
+  \ 82 chars, under 160 limit (S03 pass)\n- ASCII-only content, no emoji (S04 pass)"
+complete_package_checklist_all_13_files_for_env_config_builder: '| # | File | Exists | quality: null | Domain content |
+
+  |---|------|--------|---------------|----------------|
+
+  | 1 | bld_manifest_env_config.md | YES | YES | env_config identity + 6 capabilities |
+
+  | 2 | bld_schema_env_config.md | YES | YES | 15+ frontmatter fields + 4 body sections |
+
+  | 3 | bld_system_prompt_env_config.md | YES | YES | 13 rules for env_config production |
+
+  | 4 | bld_instruction_env_config.md | YES | YES | 3-phase process with 20+ steps |
+
+  | 5 | bld_output_template_env_config.md | YES | YES | YAML template + 4 body section templates |
+
+  | 6 | bld_examples_env_config.md | YES | YES | Golden + anti with gate analysis |
+
+  | 7 | bld_memory_env_config.md | YES | YES | 5-field variable pattern + evidence |
+
+  | 8 | bld_tools_env_config.md | YES | YES | brain_query, validate_artifact tools |
+
+  | 9 | bld_quality_gate_env_config.md | YES | YES | 10 HARD + 12 SOFT dimensions |
+
+  | 10 | bld_knowledge_card_env_config.md | YES | YES | 12-Factor, dotenv, K8s references |
+
+  | 11 | bld_architecture_env_config.md | YES | YES | 9 components + dependency graph |
+
+  | 12 | bld_collaboration_env_config.md | YES | YES | 2 crew compositions + handoff protocol |
+
+  | 13 | bld_config_env_config.md | YES | YES | naming, paths, size limits |'
+anti_example: "INPUT: \"Create builder for kind: env_config\"\n\nBAD OUTPUT:\n\narchetypes/builders/env-config-builder/\n\
+  \  bld_manifest_env_config.md    (3 lines, no frontmatter)\n  bld_schema_env_config.md      (empty)\n  bld_instruction_env_config.md\
+  \ (says \"TODO: fill in\")\n\nFAILURES:\n1. Only 3 of 13 files created -- H01 FAIL (incomplete package)\n2. bld_manifest\
+  \ has no YAML frontmatter -- H03 FAIL\n3. bld_schema is empty -- H04 FAIL (no domain content)\n4. bld_instruction has placeholder\
+  \ text -- H04 FAIL (generic filler)\n5. Missing 10 ISO files -- H01 FAIL\n6. No sub-agent file at .claude/agents/ -- H05\
+  \ FAIL\n7. No quality: null field anywhere -- H01 FAIL\n8. No boundary section in any file -- S05 FAIL\n9. No cross-reference\
+  \ to related kinds -- S06 FAIL\n10. No golden example to validate against gates -- S07 FAIL"

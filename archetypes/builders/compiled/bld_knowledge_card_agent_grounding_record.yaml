@@ -31,10 +31,7 @@ domain_overview: 'Per-inference provenance is the practice of recording, for eac
 
 
   The grounding record is the per-inference artifact that binds these four concerns into a single, structured, machine-verifiable
-  document.
-
-
-  ---'
+  document.'
 key_concepts: '| Concept               | Definition                                                                                             |
   CEX Field          |
 
@@ -74,10 +71,7 @@ key_concepts: '| Concept               | Definition                             
   downstream_use      |
 
   | grounding coverage    | The fraction of output claims that can be traced to an explicit grounding source                       |
-  grounding_coverage_pct |
-
-
-  ---'
+  grounding_coverage_pct |'
 industry_standards: '| Standard                          | Version     | Relevance                                                                              |
 
   |-----------------------------------|-------------|----------------------------------------------------------------------------------------|
@@ -97,10 +91,7 @@ industry_standards: '| Standard                          | Version     | Relevan
   format         |
 
   | EU AI Act                         | 2024/1689   | Articles 9 + 72 + 73: risk management + post-market-monitoring + incident
-  reporting    |
-
-
-  ---'
+  reporting    |'
 otel_genai_semantic_conventions_key_attributes: 'The grounding record maps to OTel GenAI semconv attributes. When instrumenting
   the inference pipeline, these OTel attributes SHOULD be captured and referenced in the grounding record.
 
@@ -128,10 +119,7 @@ otel_genai_semantic_conventions_key_attributes: 'The grounding record maps to OT
 
 
   The OTel span identified by `otel_span_id` SHOULD contain these attributes. The grounding record is a STRUCTURED PROVENANCE
-  LAYER built on top of the raw OTel span -- it is not a replacement for OTel instrumentation.
-
-
-  ---'
+  LAYER built on top of the raw OTel span -- it is not a replacement for OTel instrumentation.'
 c2pa_v2_3_ai_ml_guidance_key_concepts: 'C2PA v2.3 introduced specific guidance for AI-generated content. A C2PA manifest contains
   assertions that can be bound to an AI output.
 
@@ -158,10 +146,7 @@ c2pa_v2_3_ai_ml_guidance_key_concepts: 'C2PA v2.3 introduced specific guidance f
 
 
   The grounding record''s `output_hash` serves as the cryptographic anchor for C2PA hard-binding. The `c2pa_manifest_ref`
-  URI points to the full C2PA manifest that contains the broader content credential chain.
-
-
-  ---'
+  URI points to the full C2PA manifest that contains the broader content credential chain.'
 eu_ai_act_provenance_requirements_high_risk_systems: '| Article | Requirement                              | How Grounding
   Record Fulfills It                              |
 
@@ -177,10 +162,7 @@ eu_ai_act_provenance_requirements_high_risk_systems: '| Article | Requirement   
 
 
   Note: EU AI Act applicability depends on system classification. Consult legal counsel for classification decisions. These
-  grounding records provide the technical foundation for compliance -- they do not constitute legal compliance in themselves.
-
-
-  ---'
+  grounding records provide the technical foundation for compliance -- they do not constitute legal compliance in themselves.'
 relationship_to_adjacent_artifact_kinds: '| Kind             | Relationship                                                                                    |
 
   |------------------|-------------------------------------------------------------------------------------------------|
@@ -195,10 +177,7 @@ relationship_to_adjacent_artifact_kinds: '| Kind             | Relationship     
 
   | conformity_assessment | Uses grounding records as evidence for EU AI Act conformity assessment               |
 
-  | learning_record  | Captures learnings FROM grounding records -- pattern analysis across many records              |
-
-
-  ---'
+  | learning_record  | Captures learnings FROM grounding records -- pattern analysis across many records              |'
 common_pitfalls: '| Pitfall                                          | Consequence                                                    |
   Prevention                                    |
 

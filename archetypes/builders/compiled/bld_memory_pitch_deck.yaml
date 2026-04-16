@@ -1,16 +1,16 @@
-kind: learning_record
-id: p10_lr_pitch_deck_builder
+kind: memory
+id: p10_mem_pitch_deck_builder
 pillar: P10
 llm_function: INJECT
 purpose: Learned patterns and pitfalls for pitch_deck construction
 quality: null
-title: Learning Record Pitch Deck
+title: Memory Pitch Deck
 version: 1.0.0
 author: wave1_builder_gen_v2
 tags:
 - pitch_deck
 - builder
-- learning_record
+- memory
 tldr: Learned patterns and pitfalls for pitch_deck construction
 domain: pitch_deck construction
 created: '2026-04-14'

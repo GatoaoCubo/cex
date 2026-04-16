@@ -16,13 +16,26 @@ domain: marketplace_app_manifest construction
 created: '2026-04-14'
 updated: '2026-04-14'
 density_score: 0.85
-production_tools: "| Tool | Purpose | When |  \n|------|---------|------|  \n| cex_compile.py | Compiles app manifest from\
-  \ source files | During build process |  \n| cex_score.py | Evaluates manifest compliance with marketplace rules | Pre-deployment\
-  \ validation |  \n| cex_retriever.py | Fetches external dependencies for manifest | When resolving third-party assets |\
-  \  \n| cex_doctor.py | Diagnoses manifest errors and suggests fixes | Post-validation troubleshooting |"
-validation_tools: "| Tool | Purpose | When |  \n|------|---------|------|  \n| validate_manifest.py | Checks manifest syntax\
-  \ and structure | Pre-submission |  \n| schema_checker.py | Ensures adherence to marketplace schema | During development\
-  \ |  \n| linter_manifest.py | Enforces coding standards in manifest files | Continuous integration |"
+production_tools: '| Tool | Purpose | When |
+
+  |------|---------|------|
+
+  | cex_compile.py | Compiles app manifest from source files | During build process |
+
+  | cex_score.py | Evaluates manifest compliance with marketplace rules | Pre-deployment validation |
+
+  | cex_retriever.py | Fetches external dependencies for manifest | When resolving third-party assets |
+
+  | cex_doctor.py | Diagnoses manifest errors and suggests fixes | Post-validation troubleshooting |'
+validation_tools: '| Tool | Purpose | When |
+
+  |------|---------|------|
+
+  | validate_manifest.py | Checks manifest syntax and structure | Pre-submission |
+
+  | schema_checker.py | Ensures adherence to marketplace schema | During development |
+
+  | linter_manifest.py | Enforces coding standards in manifest files | Continuous integration |'
 external_references:
 - JSON Schema (for manifest structure validation)
 - PyYAML (for parsing manifest metadata)

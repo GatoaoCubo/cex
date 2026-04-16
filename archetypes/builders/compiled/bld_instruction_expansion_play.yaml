@@ -27,7 +27,7 @@ phase_1_research:
 - 'Review NRR benchmarks: current account NRR vs. target >120%.'
 - 'Pull QBR history: last expansion conversation, customer health score, champion strength.'
 phase_2_compose:
-- Reference SCHEMA.md for required fields (account_id, trigger_type, expansion_type, NRR_target).
+- Reference bld_schema_expansion_play.md for required fields (account_id, trigger_type, expansion_type, NRR_target).
 - 'Define the expansion motion: seat upsell, tier upgrade, add-on cross-sell, or usage-based ramp.'
 - 'Write the AE/CSM talk track: value narrative, business case, ROI calculation.'
 - Set trigger thresholds and automation rules (e.g., alert when seat utilization > 80% for 14 days).

@@ -17,16 +17,44 @@ created: '2026-04-14'
 updated: '2026-04-14'
 density_score: 0.85
 frontmatter_fields: ''
-required: "| Field     | Type   | Required | Default | Notes |  \n|-----------|--------|----------|---------|-------|  \n\
-  | id        | string | yes      |         |       |  \n| kind      | string | yes      |         |       |  \n| pillar \
-  \   | string | yes      |         |       |  \n| title     | string | yes      |         |       |  \n| version   | string\
-  \ | yes      |         |       |  \n| created   | date   | yes      |         |       |  \n| updated   | date   | yes  \
-  \    |         |       |  \n| author    | string | yes      |         |       |  \n| domain    | string | yes      |   \
-  \      |       |  \n| quality   | null   | yes      | null    | Never self-score; peer review assigns |  \n| tags      |\
-  \ list   | yes      |         |       |  \n| tldr      | string | yes      |         |       |  \n| prerequisites | list\
-  \ | yes |         |       |  \n| steps     | list   | yes      |         |       |"
-recommended: "| Field     | Type   | Notes |  \n|-----------|--------|-------|  \n| audience  | string |       |  \n| tools\
-  \     | list   |       |"
+required: '| Field     | Type   | Required | Default | Notes |
+
+  |-----------|--------|----------|---------|-------|
+
+  | id        | string | yes      |         |       |
+
+  | kind      | string | yes      |         |       |
+
+  | pillar    | string | yes      |         |       |
+
+  | title     | string | yes      |         |       |
+
+  | version   | string | yes      |         |       |
+
+  | created   | date   | yes      |         |       |
+
+  | updated   | date   | yes      |         |       |
+
+  | author    | string | yes      |         |       |
+
+  | domain    | string | yes      |         |       |
+
+  | quality   | null   | yes      | null    | Never self-score; peer review assigns |
+
+  | tags      | list   | yes      |         |       |
+
+  | tldr      | string | yes      |         |       |
+
+  | prerequisites | list | yes |         |       |
+
+  | steps     | list   | yes      |         |       |'
+recommended: '| Field     | Type   | Notes |
+
+  |-----------|--------|-------|
+
+  | audience  | string |       |
+
+  | tools     | list   |       |'
 id_pattern: ^p05_qs_[a-z][a-z0-9_]+.md$
 body_structure:
 - Introduction – Purpose and scope of the guide

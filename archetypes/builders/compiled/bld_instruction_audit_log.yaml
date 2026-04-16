@@ -24,15 +24,15 @@ phase_1_research:
 - Determine retention periods aligned with regulatory and organizational policies
 - Document audit control objectives from SOC2 Trust Service Criteria
 phase_2_compose:
-- 'Define log schema in SCHEMA.md with fields: timestamp, actor, action, resource, outcome, hash'
+- 'Define log schema in bld_schema_audit_log.md with fields: timestamp, actor, action, resource, outcome, hash'
 - Specify immutability via cryptographic hash chaining in log entries
-- Map SOC2 controls (e.g., CC7.1, CC11.2) to audit log events in CONTROL_MAP.md
-- Write log configuration using OUTPUT_TEMPLATE.md format with YAML anchors
-- Implement tamper-evident storage (e.g., write-once filesystem, blockchain anchoring)
+- Map SOC2 controls (e.g., CC7.1, CC11.2) to audit log events in bld_knowledge_card_audit_log.md
+- Write log configuration using bld_output_template_audit_log.md format with YAML anchors
+- Implement tamper-evident storage (e.g., write-once filesystem, WORM storage anchoring)
 - Embed log retention policy as a top-level attribute in the artifact
 - Add metadata for SOC2 attestation scope and audit trail scope
-- Reference SCHEMA.md in the artifact's $schema property
+- Reference bld_schema_audit_log.md in the artifact's $schema property
 - Finalize with cryptographic signature of the configuration file
-phase_3_validate: '[ ] ✅ Verify schema compliance using JSON Schema validator [ ] ✅ Confirm immutability mechanisms prevent
-  log modification [ ] ✅ Validate retention policy aligns with SOC2 Type II requirements [ ] ✅ Ensure all mapped controls
-  are represented in log events [ ] ✅ Confirm artifact passes SOC2 attestation checklist for audit logs'
+phase_3_validate: '[ ] [OK] Verify schema compliance using JSON Schema validator [ ] [OK] Confirm immutability mechanisms
+  prevent log modification [ ] [OK] Validate retention policy aligns with SOC2 Type II requirements [ ] [OK] Ensure all mapped
+  controls are represented in log events [ ] [OK] Confirm artifact passes SOC2 attestation checklist for audit logs'

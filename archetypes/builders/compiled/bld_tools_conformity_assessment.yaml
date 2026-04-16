@@ -23,17 +23,17 @@ production_tools: 'Tools called during 8F pipeline to produce and finalize the a
 
   |------|---------|---------|---------|
 
-  | cex_compile.py | python tools/cex_compile.py P11_govern/p11_ca{{slug}}.md | F8 | Compile .md to .yaml registry entry |
+  | cex_compile.py | python _tools/cex_compile.py P11_govern/p11_ca_SYSTEM.md | F8 | Compile .md to .yaml registry entry |
 
-  | cex_score.py | python tools/cex_score.py --apply P11_govern/p11_ca{{slug}}.md | F7 | Apply peer-review quality score |
+  | cex_score.py | python _tools/cex_score.py --apply P11_govern/p11_ca_SYSTEM.md | F7 | Apply peer-review quality score |
 
-  | cex_doctor.py | python tools/cex_doctor.py --file P11_govern/p11_ca{{slug}}.md | F7 | Health check on artifact structure
+  | cex_doctor.py | python _tools/cex_doctor.py --file P11_govern/p11_ca_SYSTEM.md | F7 | Health check on artifact structure
   |
 
-  | signal_writer | python -c "from _tools.signal_writer import write_signal; write_signal(''n03'', ''complete'', {{score}})"
-  | F8 | Send completion signal to N07 |
+  | signal_writer | python -c "from _tools.signal_writer import write_signal; write_signal(''n03'', ''complete'', 9.0)" |
+  F8 | Send completion signal to N07 |
 
-  | cex_sanitize.py | python tools/cex_sanitize.py --check --scope P11_govern/p11_ca{{slug}}.md | F8 | Verify ASCII-only compliance
+  | cex_sanitize.py | python _tools/cex_sanitize.py --check --scope P11_govern/p11_ca_SYSTEM.md | F8 | Verify ASCII-only compliance
   |'
 validation_tools: 'Tools that enforce quality gates and schema compliance.
 
@@ -47,8 +47,8 @@ validation_tools: 'Tools that enforce quality gates and schema compliance.
 
   | cex_hooks.py | python _tools/cex_hooks.py pre-commit | H01 | Pre-commit frontmatter validation |
 
-  | cex_retriever.py | python _tools/cex_retriever.py --kind conformity_assessment --query "{{system_name}}" | F5 | Find similar
-  existing artifacts |
+  | cex_retriever.py | python _tools/cex_retriever.py --kind conformity_assessment --query "high-risk AI triage" | F5 | Find
+  similar existing artifacts |
 
   | cex_memory_select.py | python _tools/cex_memory_select.py --query "EU AI Act conformity assessment" | F3 | Load relevant
   memory for injection |
@@ -142,9 +142,9 @@ tool_failure_handling: '| Tool | Failure Mode | Recovery |
   | cex_retriever.py | No results | Proceed without similar artifacts; note at F3 |'
 git_integration: '# Stage and commit conformity assessment artifact
 
-  git add P11_govern/p11_ca_{{system_slug}}.md
+  git add P11_govern/p11_ca_SYSTEM.md
 
-  git commit -m "[N03] conformity_assessment: {{system_name}} v{{version}} (score: {{score}}/10)"
+  git commit -m "[N03] conformity_assessment: medical_triage_system v1.0.0 (score: 9.0/10)"
 
 
   # Verify commit
@@ -154,12 +154,13 @@ debug_commands: '| Purpose | Command |
 
   |---------|---------|
 
-  | Check artifact word count | wc -w P11_govern/p11_ca_{{slug}}.md |
+  | Check artifact word count | wc -w P11_govern/p11_ca_SYSTEM.md |
 
-  | Verify no placeholders remain | grep -c "{{" P11_govern/p11_ca_{{slug}}.md |
+  | Verify no placeholders remain | python -c "import re,sys; txt=open(''P11_govern/p11_ca_SYSTEM.md'').read(); sys.exit(1
+  if re.search(r''\{\{'', txt) else 0)" |
 
-  | Check byte size | wc -c P11_govern/p11_ca_{{slug}}.md |
+  | Check byte size | wc -c P11_govern/p11_ca_SYSTEM.md |
 
-  | Verify ASCII only | python tools/cex_sanitize.py --check --scope P11_govern/p11_ca{{slug}}.md |
+  | Verify ASCII only | python _tools/cex_sanitize.py --check --scope P11_govern/p11_ca_SYSTEM.md |
 
   | List all conformity artifacts | ls P11_govern/p11_ca_*.md |'

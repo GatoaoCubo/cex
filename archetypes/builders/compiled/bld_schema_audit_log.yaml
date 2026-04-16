@@ -31,7 +31,7 @@ required: "| Field     | Type   | Required | Default | Notes                    
 recommended: "| Field         | Type   | Notes                          |  \n|---------------|--------|--------------------------------|\
   \  \n| reference_id  | string | Link to related audit trail    |  \n| impacted_user | string | User affected by the event\
   \     |"
-id_pattern: ^p11_al_[a-z][a-z0-9_]+.yaml$
+id_pattern: ^p11_al_[a-z][a-z0-9_]+.md$
 body_structure:
 - Audit Trail
 - Sequence of events with timestamps and actors.
@@ -43,7 +43,7 @@ body_structure:
 - Regulatory references and policy violations.
 constraints:
 - 'Max file size: 3072 bytes.'
-- ID must match `^p11_al_[a-z][a-z0-9_]+.yaml$`.
+- ID must match `^p11_al_[a-z][a-z0-9_]+.md$`.
 - '`event_type` and `log_level` must be predefined enums.'
 - '`created` and `updated` must be valid ISO 8601 timestamps.'
 - '`version` must follow semantic versioning (e.g., 1.2.3).'

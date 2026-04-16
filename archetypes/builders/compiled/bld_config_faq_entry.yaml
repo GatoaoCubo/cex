@@ -16,7 +16,13 @@ domain: faq_entry construction
 created: '2026-04-14'
 updated: '2026-04-14'
 density_score: 0.85
-naming_convention: "Pattern: p01_faq_<topic>_<identifier>.md  \nExamples:  \n- p01_faq_trading_limits.md  \n- p01_faq_support_contact.md"
+naming_convention: 'Pattern: p01_faq_<topic>_<identifier>.md
+
+  Examples:
+
+  - p01_faq_trading_limits.md
+
+  - p01_faq_support_contact.md'
 paths: /opt/cex/faq/entries/P01/
 limits: 'max_bytes: 3072 max_turns: 5 effort level: 3'
 hooks: 'pre_build: null post_build: null on_error: null on_quality_fail: null'

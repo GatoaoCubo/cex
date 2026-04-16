@@ -1,0 +1,37 @@
+kind: output_template
+id: bld_output_template_reasoning_strategy
+pillar: P05
+llm_function: PRODUCE
+purpose: Template with vars for reasoning_strategy production
+quality: null
+title: Output Template Reasoning Strategy
+version: 1.0.0
+author: wave1_builder_gen
+tags:
+- reasoning_strategy
+- builder
+- output_template
+tldr: Template with vars for reasoning_strategy production
+domain: reasoning_strategy construction
+created: '2026-04-13'
+updated: '2026-04-13'
+density_score: 0.85
+overview: 'This ISO selects a reasoning strategy (e.g. chain-of-thought) and the conditions under which it applies. <!-- Purpose:
+  what problem this reasoning strategy solves. Scope: what input types it applies to. Contrast: how it differs from similar
+  strategies. -->'
+core_components: "<!-- Numbered steps of the reasoning chain.\n     Each step: input -> transformation -> output.\n     Include\
+  \ decision points and branching conditions. -->\n| Step | Operation | Input | Output |\n|------|-----------|-------|--------|\n\
+  | 1 | `{{operation}}` | {{input_type}} | `{{output_type}}` |"
+validation_criteria: "<!-- Measurable checks that confirm the strategy worked correctly.\n     At least 3 concrete criteria\
+  \ with pass/fail conditions. -->\n- PASS: `{{concrete measurable condition}}`\n- FAIL: `{{failure indicator}}`"
+application_scope: "<!-- When to use: specific trigger conditions.\n     When NOT to use: boundary conditions and anti-patterns.\
+  \ -->\n| Use | Condition |\n|-----|-----------|\n| Apply | `{{specific trigger}}` |\n| Skip | `{{boundary condition}}` |"
+quality_metrics: '| Metric | Target | Method |
+
+  |--------|--------|--------|
+
+  | Logical soundness | 100% | Formal verification or peer review |
+
+  | Step completeness | All steps traced | Audit against schema |
+
+  | Domain coverage | >= 3 examples | Examples ISO cross-check |'

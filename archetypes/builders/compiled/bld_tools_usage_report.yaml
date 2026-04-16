@@ -16,15 +16,33 @@ domain: usage_report construction
 created: '2026-04-14'
 updated: '2026-04-14'
 density_score: 0.85
-production_tools: "| Tool | Purpose | When |  \n|------|---------|------|  \n| cex_compile.py | Aggregates raw usage data\
-  \ | Data collection phase |  \n| cex_score.py | Calculates usage metrics | Post-processing |  \n| cex_retriever.py | Fetches\
-  \ external data sources | Integration required |  \n| cex_doctor.py | Diagnoses report inconsistencies | Validation stage\
-  \ |  \n| cex_analyzer.py | Identifies usage patterns | Insight generation |  \n| cex_formatter.py | Structures output for\
-  \ delivery | Finalization |"
-validation_tools: "| Tool | Purpose | When |  \n|------|---------|------|  \n| val_checker.py | Validates data integrity |\
-  \ Pre-processing |  \n| val_validator.py | Ensures metric consistency | Post-scoring |  \n| val_reporter.py | Logs validation\
-  \ results | QA phase |"
+production_tools: '| Tool | Purpose | When |
+
+  |------|---------|------|
+
+  | cex_compile.py | Compile usage_report artifact to YAML + register in index | After authoring |
+
+  | cex_score.py | Score artifact quality (5D + HARD gates) | After compile |
+
+  | cex_retriever.py | Find similar usage report artifacts for template reuse | During F3 INJECT |
+
+  | cex_doctor.py | Validate all ISOs in builder for structural health | Post-build audit |
+
+  | cex_wave_validator.py | Batch-validate full usage-report-builder (39 ISOs) | CI gate |
+
+  | cex_hygiene.py | Enforce 8 hygiene rules (frontmatter, density, IDs) | Pre-commit |'
+validation_tools: '| Tool | Purpose | When |
+
+  |------|---------|------|
+
+  | cex_hooks.py | Pre-commit hook: block schema violations + ASCII errors | On git add |
+
+  | cex_sanitize.py | ASCII sanitize .py/.ps1 in builder scope | After code edits |
+
+  | cex_feedback.py | Track quality trends and archive low-score artifacts | After scoring |'
 external_references:
-- pandas (data manipulation)
-- Jupyter (interactive analysis)
-- Apache Airflow (orchestration)
+- Apache Airflow (orchestration for usage data pipelines)
+- Snowflake (data share for cross-org usage reporting)
+- Metabase / Looker (dashboard embedding for CFO/showback reports)
+- GDPR Article 30 (data lineage and retention requirements)
+- FinOps Foundation (chargeback vs. showback framework terminology)

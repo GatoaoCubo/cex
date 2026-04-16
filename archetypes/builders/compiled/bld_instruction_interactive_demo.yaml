@@ -24,10 +24,10 @@ phase_1_research:
 - Evaluate technical constraints (e.g., API limits, load times)
 - Gather feedback from stakeholders on demo scope
 phase_2_compose:
-- Outline demo structure using SCHEMA.md's `demo_flow` format
+- Outline demo structure using bld_schema_interactive_demo.md `demo_flow` format
 - Write talk track for each guided-tour step (max 2 sentences)
 - Embed interactive elements (buttons, sliders) with event handlers
-- Align content with OUTPUT_TEMPLATE.md's `step_template` format
+- Align content with bld_output_template_interactive_demo.md `step_template` format
 - Add branching logic for user-driven exploration paths
 - Integrate product API endpoints for real-time data display
 - Write error-handling scripts for failed interactions
@@ -35,7 +35,7 @@ phase_2_compose:
 - Finalize with demo metadata (duration, target audience)
 phase_3_validate:
 - '[ ] Conduct usability testing with 5+ users'
-- '[ ] Verify alignment with SCHEMA.md''s required fields'
+- '[ ] Verify alignment with bld_schema_interactive_demo.md required fields'
 - '[ ] Confirm interactive elements function across devices'
 - '[ ] Validate talk track matches scripted user scenarios'
 - '[ ] Ensure compliance with P05 accessibility standards'

@@ -18,12 +18,12 @@ domain: finetune_config construction
 created: '2026-04-13'
 updated: '2026-04-13'
 density_score: 0.9
-overview: '{{target_task_one_sentence}} {{base_model_choice_rationale_one_sentence}} {{adapter_type_justification_one_sentence}}'
+overview: '`{{target_task_one_sentence}}` `{{base_model_choice_rationale_one_sentence}}` `{{adapter_type_justification_one_sentence}}`'
 base_model: '| Field | Value |
 
   |-------|-------|
 
-  | model_id | {{huggingface_id_or_path}} |
+  | model_id | `{{huggingface_id_or_path}}` |
 
   | architecture | {{llama3|mistral|qwen2|phi3|gemma|other}} |
 
@@ -36,9 +36,9 @@ dataset: '| Field | Value |
 
   |-------|-------|
 
-  | path | {{dataset_path_or_hf_identifier}} |
+  | path | `{{dataset_path_or_hf_identifier}}` |
 
-  | size | {{N_rows}} rows |
+  | size | `{{N_rows}}` rows |
 
   | format | {{alpaca|sharegpt|custom|preference}} |
 
@@ -106,11 +106,11 @@ evaluation: '| Parameter | Value |
 
   | eval_strategy | {{steps|epoch}} |
 
-  | eval_steps | {{N or null}} |
+  | eval_steps | `{{N or null}}` |
 
   | save_strategy | {{steps|epoch}} |
 
-  | save_steps | {{N or null}} |
+  | save_steps | `{{N or null}}` |
 
   | save_total_limit | {{2|3|5}} |
 
@@ -118,8 +118,8 @@ evaluation: '| Parameter | Value |
 
   | metric_for_best_model | {{eval_loss|accuracy}} |
 
-  | early_stopping_patience | {{N or null}} |'
+  | early_stopping_patience | `{{N or null}}` |'
 references:
-- '{{base_model_paper_or_hf_page}}'
-- '{{dataset_source}}'
-- '{{framework_docs}}'
+- '`{{base_model_paper_or_hf_page}}`'
+- '`{{dataset_source}}`'
+- '`{{framework_docs}}`'

@@ -1,16 +1,16 @@
-kind: learning_record
-id: p10_lr_github_issue_template_builder
+kind: memory
+id: p10_mem_github_issue_template_builder
 pillar: P10
 llm_function: INJECT
 purpose: Learned patterns and pitfalls for github_issue_template construction
 quality: null
-title: Learning Record Github Issue Template
+title: Memory Github Issue Template
 version: 1.0.0
 author: wave1_builder_gen_v2
 tags:
 - github_issue_template
 - builder
-- learning_record
+- memory
 tldr: Learned patterns and pitfalls for github_issue_template construction
 domain: github_issue_template construction
 created: '2026-04-14'

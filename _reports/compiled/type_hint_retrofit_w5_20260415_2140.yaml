@@ -9,6 +9,7 @@ runtime: codex
 quality: null
 created: 2026-04-15
 updated: 2026-04-15
+density_score: 1.0
 scope: 'Handoff: `.cex/runtime/handoffs/n05_task_codex.md`
 
 

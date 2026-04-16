@@ -24,18 +24,30 @@ domain_overview: The eCommerce industry vertical centers on digital commerce, en
   Key challenges involve reconciling scalability with compliance, optimizing conversion rates through A/B testing, and mitigating
   risks from bot traffic and account takeover. Standards like PCI-DSS and frameworks like OWASP ASVS shape technical implementations,
   while machine learning models (e.g., collaborative filtering) power recommendation systems.
-key_concepts: "| Concept                | Definition                                                                 | Source\
-  \                              |  \n|-----------------------|----------------------------------------------------------------------------|-------------------------------------|\
-  \  \n| PCI-DSS               | Standards for securing payment data, including encryption and access controls | PCI Security\
-  \ Standards Council     |  \n| Collaborative Filtering | Recommendation technique using user-item interaction matrices \
-  \              | ACM RecSys Conference Papers       |  \n| Session Hijacking     | Unauthorized takeover of user sessions\
-  \ via token theft                      | OWASP Top 10                       |  \n| Basket Abandonment    | Cart abandonment\
-  \ rate > 70% (Baymard Institute 2022)                       | Baymard Institute                  |  \n| Tokenization   \
-  \       | Replacing sensitive data with tokens to reduce PCI scope                   | PCI-DSS v4.0                    \
-  \   |  \n| Real-Time Fraud Scoring | ML models assessing transaction risk using geolocation, device fingerprints | IEEE\
-  \ Fraud Detection Journal       |  \n| Headless Commerce     | Decoupling frontend from backend for omnichannel flexibility\
-  \                | Salesforce Commerce Cloud Docs     |  \n| API Gateway           | Centralized entry point for managing\
-  \ microservices and rate limiting        | Google Cloud API Management Guide  |"
+key_concepts: '| Concept                | Definition                                                                 | Source                              |
+
+  |-----------------------|----------------------------------------------------------------------------|-------------------------------------|
+
+  | PCI-DSS               | Standards for securing payment data, including encryption and access controls | PCI Security Standards
+  Council     |
+
+  | Collaborative Filtering | Recommendation technique using user-item interaction matrices               | ACM RecSys Conference
+  Papers       |
+
+  | Session Hijacking     | Unauthorized takeover of user sessions via token theft                      | OWASP Top 10                       |
+
+  | Basket Abandonment    | Cart abandonment rate > 70% (Baymard Institute 2022)                       | Baymard Institute                  |
+
+  | Tokenization          | Replacing sensitive data with tokens to reduce PCI scope                   | PCI-DSS v4.0                       |
+
+  | Real-Time Fraud Scoring | ML models assessing transaction risk using geolocation, device fingerprints | IEEE Fraud Detection
+  Journal       |
+
+  | Headless Commerce     | Decoupling frontend from backend for omnichannel flexibility                | Salesforce Commerce
+  Cloud Docs     |
+
+  | API Gateway           | Centralized entry point for managing microservices and rate limiting        | Google Cloud API
+  Management Guide  |'
 industry_standards:
 - PCI-DSS v4.0 (Payment Card Industry Data Security Standard)
 - GDPR (General Data Protection Regulation) for user data handling

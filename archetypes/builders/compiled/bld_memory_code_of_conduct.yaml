@@ -1,16 +1,16 @@
-kind: learning_record
-id: p10_lr_code_of_conduct_builder
+kind: memory
+id: p10_mem_code_of_conduct_builder
 pillar: P10
 llm_function: INJECT
 purpose: Learned patterns and pitfalls for code_of_conduct construction
 quality: null
-title: Learning Record Code of Conduct
+title: Memory Code of Conduct
 version: 1.0.0
 author: n04_knowledge
 tags:
 - code_of_conduct
 - builder
-- learning_record
+- memory
 tldr: Learned patterns and pitfalls for code_of_conduct construction
 domain: code_of_conduct construction
 created: '2026-04-14'

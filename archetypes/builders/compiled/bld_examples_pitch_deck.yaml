@@ -16,8 +16,13 @@ domain: pitch_deck construction
 created: '2026-04-14'
 updated: '2026-04-14'
 density_score: 0.85
-golden_example: "Title: Streamline HR with AI  \nSubtitle: Automating payroll and benefits for SMEs  \nAuthor: Jane Doe, CEO\
-  \ | HireFlow Inc.  \nDate: March 2024"
+golden_example_pitch_deck: 'Title: Streamline HR with AI
+
+  Subtitle: Automating payroll and benefits for SMEs
+
+  Author: Jane Doe, CEO | HireFlow Inc.
+
+  Date: March 2024'
 problem: Small businesses waste 20+ hours/month on manual payroll, leading to errors and compliance risks.
 solution: HireFlow automates payroll, tax filings, and benefits using AI, integrating with QuickBooks, Xero, and Slack.
 traction:
@@ -25,9 +30,25 @@ traction:
 - 50% YoY growth since 2022
 - 4.8/5 NPS score
 ask: $5M Series A to expand to Europe and build AI-driven benefits planning. ---
-anti_example_1_missing_problem_solution_structure: "Title: HireFlow – The Future of HR  \nBody:  \n- \"We offer a platform\
-  \ for payroll and benefits.\"  \n- \"Our users love our UI.\"  \n- \"We’ve grown 50% YoY.\""
+anti_example_1_missing_problem_solution_structure: 'Title: HireFlow – The Future of HR
+
+  Body:
+
+  - "We offer a platform for payroll and benefits."
+
+  - "Our users love our UI."
+
+  - "We’ve grown 50% YoY."'
 why_it_fails: Traction lacks quantifiable data (e.g., user numbers, growth rates). Investors can’t assess momentum or validate
   claims.
-anti_example_2_vague_traction_metrics: "Title: HireFlow – Automating HR  \nBody:  \n- \"Problem: Manual payroll is tedious.\"\
-  \  \n- \"Solution: AI-driven automation.\"  \n- \"Traction: We’re growing fast.\"  \n- \"Ask: $5M for expansion.\""
+anti_example_2_vague_traction_metrics: 'Title: HireFlow – Automating HR
+
+  Body:
+
+  - "Problem: Manual payroll is tedious."
+
+  - "Solution: AI-driven automation."
+
+  - "Traction: We’re growing fast."
+
+  - "Ask: $5M for expansion."'

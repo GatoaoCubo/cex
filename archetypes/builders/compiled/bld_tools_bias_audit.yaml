@@ -1,0 +1,50 @@
+kind: tools
+id: bld_tools_bias_audit
+pillar: P04
+llm_function: CALL
+purpose: Tools available for bias_audit production
+quality: null
+title: Tools Bias Audit
+version: 1.0.0
+author: wave1_builder_gen
+tags:
+- bias_audit
+- builder
+- tools
+tldr: Tools available for bias_audit production
+domain: bias_audit construction
+created: '2026-04-13'
+updated: '2026-04-13'
+density_score: 0.85
+production_tools: 'This ISO drives a bias audit: measuring fairness across demographic slices.
+
+  | Tool | Purpose | When |
+
+  |------|---------|------|
+
+  | cex_compile.py | Aggregates audit data from multiple sources | Pre-audit setup |
+
+  | cex_score.py | Quantifies bias metrics using statistical models | During audit execution |
+
+  | cex_retriever.py | Fetches training/test data for analysis | Pre-audit data collection |
+
+  | cex_doctor.py | Diagnoses inconsistent or missing audit inputs | Pre-audit validation |
+
+  | cex_analyzer.py | Identifies biased patterns in model outputs | During audit execution |
+
+  | cex_reporter.py | Generates bias audit summaries and visualizations | Post-audit completion |'
+validation_tools: '| Tool | Purpose | When |
+
+  |------|---------|------|
+
+  | val_checker.py | Validates audit tool inputs/outputs for consistency | Pre/post audit |
+
+  | val_crosschecker.py | Cross-references results with external benchmarks | Post-audit |
+
+  | val_profiler.py | Profiles data distribution for fairness gaps | Pre-audit |
+
+  | val_validator.py | Ensures compliance with regulatory fairness standards | Post-audit |'
+external_references:
+- 'Fairlearn (Microsoft): Framework for mitigating algorithmic bias'
+- 'IBM AI Fairness 360: Open-source toolkit for bias detection'
+- 'TensorFlow Data Validation: For data quality and bias analysis'

@@ -24,13 +24,13 @@ phase_1_research:
 - Consult compliance requirements (e.g., GDPR, SOC2).
 - Document stakeholder approval workflows for policy changes.
 phase_2_compose:
-- Use SCHEMA.md to structure policy JSON with `role`, `resource`, `action`, `tenant`.
+- Use bld_schema_rbac_policy.md to structure policy JSON with `role`, `resource`, `action`, `tenant`.
 - Define base roles (e.g., `tenant_admin`, `service_user`).
 - Assign permissions via `allow`/`deny` rules per resource type.
 - 'Scope policies to tenant identifiers (e.g., `tenant_id: "abc123"`).'
-- 'Reference OUTPUT_TEMPLATE.md for required fields: `policy_id`, `version`, `created_by`.'
+- 'Reference bld_output_template_rbac_policy.md for required fields: `policy_id`, `version`, `created_by`.'
 - Embed multi-tenant isolation rules using `tenant_scope` enum.
-- Validate against schema using JSON schema validator.
+- Validate against bld_schema_rbac_policy.md using JSON schema validator.
 - Write policy in YAML format with `---` separators.
 - Add comments for audit trails and change logs.
 phase_3_validate:

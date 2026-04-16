@@ -17,16 +17,44 @@ created: '2026-04-14'
 updated: '2026-04-14'
 density_score: 0.85
 frontmatter_fields: ''
-required: "| Field | Type | Required | Default | Notes |  \n|---|---|---|---|---|  \n| id | string | yes |  | Must match ID\
-  \ Pattern |  \n| kind | string | yes |  | Always \"govtech_vertical\" |  \n| pillar | string | yes |  | Always \"P01\" |\
-  \  \n| title | string | yes |  | Human-readable name |  \n| version | string | yes | \"1.0\" | Semantic versioning |  \n\
-  | created | datetime | yes |  | ISO 8601 format |  \n| updated | datetime | yes |  | ISO 8601 format |  \n| author | string\
-  \ | yes |  | Owner/organization |  \n| domain | string | yes |  | Govtech subdomain (e.g., \"digital_identity\") |  \n|\
-  \ quality | null | yes | null | Never self-score; peer review assigns |  \n| tags | list | yes | [] | Keywords for discovery\
-  \ |  \n| tldr | string | yes |  | Summary in 1 sentence |  \n| jurisdiction | string | yes |  | Legal territory of application\
-  \ |  \n| implementation_status | string | yes |  | \"draft\", \"pilot\", \"live\" |"
-recommended: "| Field | Type | Notes |  \n|---|---|---|  \n| stakeholder | list | Key organizations/roles involved |  \n|\
-  \ compliance_framework | string | Regulatory standards adhered to |"
+required: '| Field | Type | Required | Default | Notes |
+
+  |---|---|---|---|---|
+
+  | id | string | yes |  | Must match ID Pattern |
+
+  | kind | string | yes |  | Always "govtech_vertical" |
+
+  | pillar | string | yes |  | Always "P01" |
+
+  | title | string | yes |  | Human-readable name |
+
+  | version | string | yes | "1.0" | Semantic versioning |
+
+  | created | datetime | yes |  | ISO 8601 format |
+
+  | updated | datetime | yes |  | ISO 8601 format |
+
+  | author | string | yes |  | Owner/organization |
+
+  | domain | string | yes |  | Govtech subdomain (e.g., "digital_identity") |
+
+  | quality | null | yes | null | Never self-score; peer review assigns |
+
+  | tags | list | yes | [] | Keywords for discovery |
+
+  | tldr | string | yes |  | Summary in 1 sentence |
+
+  | jurisdiction | string | yes |  | Legal territory of application |
+
+  | implementation_status | string | yes |  | "draft", "pilot", "live" |'
+recommended: '| Field | Type | Notes |
+
+  |---|---|---|
+
+  | stakeholder | list | Key organizations/roles involved |
+
+  | compliance_framework | string | Regulatory standards adhered to |'
 id_pattern: ^p01_gv_[a-z][a-z0-9_]+.md$
 body_structure:
 - Overview

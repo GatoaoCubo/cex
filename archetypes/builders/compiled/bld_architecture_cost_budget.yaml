@@ -1,7 +1,7 @@
 kind: architecture
 id: bld_architecture_cost_budget
 pillar: P08
-llm_function: GOVERN
+llm_function: CONSTRAIN
 purpose: Component map of cost_budget -- inventory, dependencies, and architectural position
 quality: null
 title: Architecture Cost Budget

@@ -4,50 +4,106 @@ pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for procedural_memory production
 quality: null
-title: Knowledge Card Procedural Memory
-version: 1.0.0
-author: wave1_builder_gen_v2
+title: 'Knowledge Card: procedural_memory Builder'
+version: 2.0.0
+author: n06_commercial
 tags:
 - procedural_memory
 - builder
 - knowledge_card
-tldr: Domain knowledge for procedural_memory production
-domain: procedural_memory construction
+- voyager
+- reflexion
+- expel
+- skills
+tldr: 'LLM agent procedural memory: skill libraries (Voyager), self-reflection notes (Reflexion/ExpeL), code-as-policies,
+  skill composition, commercial tier gating (free=none, pro=shared library, enterprise=versioned+team)'
+domain: LLM agent procedural memory
 created: '2026-04-14'
 updated: '2026-04-14'
-density_score: 0.85
-domain_overview: Procedural memory systems underpin skill acquisition and automation in AI, robotics, and human-computer interaction.
-  These systems encode sequences of actions, motor skills, and conditional behaviors, often leveraging reinforcement learning,
-  neural networks, and cognitive architectures. Applications span autonomous vehicle control, robotic manipulation, and game
-  AI, where efficient retrieval of learned procedures is critical. Unlike declarative knowledge, procedural memory emphasizes
-  execution over representation, aligning with theories of embodied cognition and motor schema generalization.
-key_concepts: "| Concept                | Definition                                                                 | Source\
-  \                                  |  \n|-----------------------|----------------------------------------------------------------------------|-----------------------------------------|\
-  \  \n| Skill Acquisition      | Process of encoding action sequences through repetition and feedback        | Anderson’s\
-  \ ACT-R theory (1993)         |  \n| Motor Schema           | Abstract representation of movement patterns for task execution\
-  \             | Arbib’s Motor Schema framework (1992)  |  \n| Procedural Abstraction | Hierarchical decomposition of complex\
-  \ tasks into reusable subroutines       | Brooks’ subsumption architecture (1991)|  \n| Chunking               | Compression\
-  \ of procedural sequences into higher-level cognitive units       | Simon & Anderson’s chunking model (1962)|  \n| Reinforcement\
-  \ Learning | Training procedures via reward-based feedback loops                         | Sutton & Barto (2018)       \
-  \           |  \n| Habit Formation        | Automation of frequent actions through basal ganglia-mediated pathways     \
-  \ | Graybiel’s habit circuitry (2008)      |  \n| Contextual Binding     | Linking procedures to environmental cues for\
-  \ conditional retrieval          | Marr’s vision hierarchy (1982)         |  \n| Transfer Learning      | Reusing procedural\
-  \ knowledge across domains or tasks                        | Thrun et al. (2006)                    |"
-industry_standards:
-- ISO/IEC 23894:2021 (AI systems trustworthiness)
-- ROS 2 (Robot Operating System) actionlib framework
-- OpenCog Prime (Open-source cognitive architecture)
-- 'Sutton & Barto’s Reinforcement Learning: An Introduction (2018)'
-- IEEE 7000.1-2021 (Ethically aligned design for AI)
+density_score: 0.91
+domain_overview: 'Procedural memory in LLM agents stores how to do things: task sequences, tool-use patterns, learned workflows,
+  and skill definitions. Unlike episodic (what happened) or semantic (what is true) memory, procedural memory is about executable
+  knowledge that the agent can apply to new situations. The field was formalized by Voyager (Wang 2023), which introduced
+  a self-expanding skill library where GPT-4 agents write, verify, and reuse JavaScript skill functions in Minecraft. ExpeL
+  (Zhao 2023) extended this with cross-task experience transfer via success/failure extraction from prior trajectories. Reflexion
+  (Shinn 2023) adds self-notes that persist verbal reasoning about past failures for future guidance.'
+key_concepts: '| Concept | Definition | Source |
+
+  |---------|-----------|--------|
+
+  | Skill Library | Persistent store of reusable skill functions/definitions | Voyager (Wang 2023) |
+
+  | Skill Verification | Running generated skills against test cases before storing | Voyager |
+
+  | Self-Notes / Reflection | Verbal reasoning about past failures persisted for future use | Reflexion (Shinn 2023) |
+
+  | Experience Extraction | Mining success/failure patterns from trajectories into reusable insights | ExpeL (Zhao 2023) |
+
+  | Code-as-Policies | Executable code (Python/JS) as the procedural memory unit | Liang 2023 |
+
+  | Skill Composition | Combining existing skills to solve novel tasks without retraining | Voyager, Code-as-policies |
+
+  | Skill Namespace | Hierarchical key structure for skill lookup (domain.task.subtask) | CEX convention |
+
+  | Skill Versioning | Tracking skill evolution with backward-compatible updates | Production systems |
+
+  | Generalization | Abstracting from specific episodes to reusable skill templates | ExpeL |
+
+  | Skill Retrieval | Finding relevant skills by task description (semantic or exact match) | RAG + exact key |'
+industry_references: '| System | Architecture | Key Contribution |
+
+  |--------|-------------|-----------------|
+
+  | Voyager (Wang 2023) | GPT-4 + Minecraft env + JS skill library | First self-expanding LLM skill library |
+
+  | ExpeL (Zhao 2023) | Experience pool + LLM extraction | Cross-task procedural knowledge transfer |
+
+  | Reflexion (Shinn 2023) | Verbal self-reflection + memory store | Self-notes from failure for future guidance |
+
+  | Code-as-Policies (Liang 2023) | Python code as policy representation | Compositional code skills for robot/agent |
+
+  | GITM (Zhu 2023) | Goal-item tree + skill decomposition | Hierarchical procedural task planning |
+
+  | Ghost in the Minecraft (GITM) | Skill sub-goals with curriculum | Multi-level skill composition |
+
+  | LangMem procedural layer | Skill/SOP storage in LangGraph | Production LLM skill memory |'
+skill_storage_formats: '| Format | Pros | Cons | Best For |
+
+  |--------|------|------|---------|
+
+  | Code (Python/JS) | Executable + verifiable | Requires sandbox | Tool-use, API calls |
+
+  | YAML definition | Human-readable + editable | Not directly executable | SOP, workflow specs |
+
+  | Natural language note | Easy to generate | Not structured | Reflexion self-notes |
+
+  | Structured JSON | Parseable by agent | Verbose | Skill metadata + deps |'
+commercial_tier_differentiation: '| Feature | Free | PRO | ENTERPRISE |
+
+  |---------|------|-----|------------|
+
+  | Procedural memory | None | Shared skill library | Versioned + team-scoped |
+
+  | Skill count | 0 | Up to 100 per agent | Unlimited |
+
+  | Skill verification | N/A | Test-case gated | CI pipeline + rollback |
+
+  | Cross-agent sharing | N/A | Within workspace | Cross-organization |
+
+  | Skill versioning | N/A | Latest only | Full history + rollback |
+
+  | Reflexion notes | None | Per-session | Persistent + searchable |
+
+  | Code-as-policy | None | Python sandboxed | Enterprise sandbox + audit |'
 common_patterns:
-- Hierarchical Task Decomposition – Break complex procedures into modular subtasks.
-- Reinforcement Learning for Skill Refinement – Optimize procedural execution via reward signals.
-- Motor Schema Generalization – Apply learned movement patterns to novel contexts.
-- Procedural Chunking – Encode frequent action sequences as reusable units.
-- Contextual Binding Tables – Map procedures to environmental triggers for retrieval.
+- 'Skill-before-context: Check skill library before reasoning from scratch.'
+- 'Verify-before-store: Run new skills against test cases before persisting.'
+- 'Fail-extract-store: After failure, extract a self-note (Reflexion) for next time.'
+- 'Hierarchical namespace: `domain.task.subtask` keys for skill lookup scalability.'
+- 'Skill composition: Build complex tasks from primitive stored skills (Voyager pattern).'
 pitfalls:
-- Overfitting to narrow training contexts, reducing generalizability.
-- Neglecting transfer learning, leading to redundant skill retraining.
-- Overlooking cognitive load during procedural abstraction, causing brittleness.
-- Poor contextual binding, resulting in incorrect procedure activation.
-- Ignoring decay mechanisms, leading to outdated or obsolete skills.
+- Storing unverified skills causes procedural memory contamination (wrong procedures run).
+- No versioning means a skill update silently breaks dependent tasks.
+- Flat namespace (all skills in one list) becomes unsearchable at >50 skills.
+- No failure extraction (Reflexion pattern) means the agent repeats the same mistakes.
+- 'Free tier conflation: procedural memory is a PRO+ feature; free agents should degrade gracefully.'

@@ -80,10 +80,7 @@ phase_1_research_resolve_agent_identity: 'Goal: Gather all facts needed before w
 
   | 1.5.2 | Identify registry_operator: godaddy / salesforce / cncf / other | registry_operator |
 
-  | 1.5.3 | Check if operator requires additional metadata fields | extra_fields[] |
-
-
-  ---'
+  | 1.5.3 | Check if operator requires additional metadata fields | extra_fields[] |'
 phase_2_compose_populate_registry_record: 'Goal: Produce a complete, well-formed agent_name_service_record artifact.'
 2_1_frontmatter_block: '---
 
@@ -131,7 +128,6 @@ phase_2_compose_populate_registry_record: 'Goal: Produce a complete, well-formed
   | ## Lifecycle | YES | registered date, expires, renewal_policy |'
 2_3_protocol_adapters_block: '## Protocol Adapters
 
-
   | Protocol | Version | Endpoint | Status |
 
   |----------|---------|----------|--------|
@@ -142,7 +138,7 @@ phase_2_compose_populate_registry_record: 'Goal: Produce a complete, well-formed
 
   | grpc | 1.0 | grpc://agent.example.com:50051 | optional |'
 2_4_lifecycle_block: "lifecycle:\n  registered: \"YYYY-MM-DD\"\n  expires: \"YYYY-MM-DD\"\n  renewal_policy: auto  # auto\
-  \ | manual | none\n  last_verified: \"YYYY-MM-DD\"\n\n---"
+  \ | manual | none\n  last_verified: \"YYYY-MM-DD\""
 phase_3_validate_ans_agentdns_compliance: 'Goal: Confirm all hard gates pass before registry submission.'
 3_1_hard_gate_checklist: '| Gate | Check | Pass condition |
 

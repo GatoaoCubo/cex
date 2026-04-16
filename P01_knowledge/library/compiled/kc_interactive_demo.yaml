@@ -1,0 +1,18 @@
+id: kc_interactive_demo
+kind: knowledge_card
+title: Interactive Product Demo Script
+version: 1.0.0
+quality: null
+pillar: P01
+density_score: 0.83
+welcome_0_00_1_00: "1. Step 1: Greet user with product name and purpose  \n   Talk track: \"Welcome to [Product Name]! Today\
+  \ we'll walk through how this tool simplifies [specific task]\"\n\n2. Step 2: Show product interface  \n   Talk track: \"\
+  You'll notice our interface is designed for [key benefit] with [unique feature] at the core\""
+features_demo_1_00_4_00: "3. Step 3: Demonstrate core functionality  \n   Talk track: \"Let's see how [feature] works - simply\
+  \ [action], and our system automatically [outcome]\"\n\n4. Step 4: Show customization options  \n   Talk track: \"You can\
+  \ personalize this to fit your needs - from [option 1] to [option 2]\""
+benefits_visualization_4_00_6_00: "5. Step 5: Highlight time savings  \n   Talk track: \"This saves [X] hours weekly by [specific\
+  \ process] - let's quantify that\"\n\n6. Step 6: Show integration capabilities  \n   Talk track: \"Seamlessly connects with\
+  \ [tool A], [tool B], and [tool C] for a unified workflow\""
+call_to_action_6_00_7_00: "7. Step 7: Provide next steps  \n   Talk track: \"Ready to implement? Start with [step 1], then\
+  \ [step 2] - our support team is here to help\""

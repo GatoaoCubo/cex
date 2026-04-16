@@ -1,0 +1,75 @@
+kind: schema
+id: bld_schema_thinking_config
+pillar: P06
+llm_function: CONSTRAIN
+purpose: Formal schema -- SINGLE SOURCE OF TRUTH for thinking_config
+quality: null
+title: Schema Thinking Config
+version: 1.0.0
+author: wave1_builder_gen
+tags:
+- thinking_config
+- builder
+- schema
+tldr: Formal schema -- SINGLE SOURCE OF TRUTH for thinking_config
+domain: thinking_config construction
+created: '2026-04-13'
+updated: '2026-04-13'
+density_score: 0.85
+frontmatter_fields: 'This ISO configures a thinking budget: how many tokens the model may spend on internal reasoning before
+  emitting.'
+required: "| Field       | Type   | Required | Default | Notes                              |  \n|-------------|--------|----------|---------|------------------------------------|\
+  \  \n| id          | string | yes      | -       | Unique identifier                  |  \n| kind        | string | yes\
+  \      | \"thinking_config\" | CEX kind type           |  \n| pillar      | string | yes      | \"P09\"    | Pillar classification\
+  \              |  \n| title       | string | yes      | -       | Configuration title                |  \n| version    \
+  \ | string | yes      | \"1.0\"    | Schema version                     |  \n| created     | date   | yes      | -     \
+  \  | ISO 8601 creation date             |  \n| updated     | date   | yes      | -       | ISO 8601 last update date   \
+  \       |  \n| author      | string | yes      | -       | Author/owner                       |  \n| domain      | string\
+  \ | yes      | -       | Application domain                 |  \n| quality     | null   | yes      | null     | Always null\
+  \ at authoring time; peer review assigns score |  \n| tags        | list   | yes      | []       | Keywords for categorization\
+  \        |  \n| tldr        | string | yes      | -       | Summary of configuration purpose   |  \n| thinking_model | string\
+  \ | yes | \"default\" | AI model used for reasoning       |  \n| reasoning_depth | int | yes | 3 | Depth of logical steps\
+  \ (1-5)      |"
+recommended: "| Field              | Type   | Notes                          |  \n|--------------------|--------|--------------------------------|\
+  \  \n| validation_method  | string | Rule validation approach       |  \n| example_use_case   | string | Sample application\
+  \ scenario   |"
+id_pattern: ^p09_thk_[a-zA-Z0-9_]+\.yaml$
+body_structure:
+- Overview
+- Purpose, scope, and intended use of the configuration.
+- Configuration Parameters
+- Detailed breakdown of all configurable fields and their constraints.
+- Validation Rules
+- Logic for validating input data and ensuring consistency.
+- Example Use Cases
+- Real-world scenarios demonstrating configuration application.
+- Optimization Guidelines
+- Recommendations for performance tuning and resource allocation.
+constraints:
+- 'Max file size: 2048 bytes (UTF-8 encoded).'
+- All required fields must be present and non-empty.
+- '`thinking_model` must be a registered AI model name.'
+- '`reasoning_depth` must be an integer between 1 and 5.'
+- '`version` must follow semantic versioning (e.g., "1.2.3").'
+- '`created` and `updated` dates must be in ISO 8601 format (YYYY-MM-DD).'
+properties: '| Property | Value |
+
+  |----------|-------|
+
+  | Kind | `schema` |
+
+  | Pillar | P06 |
+
+  | Domain | thinking_config construction |
+
+  | Pipeline | 8F (F1-F8) |
+
+  | Scorer | cex_score.py |
+
+  | Compiler | cex_compile.py |
+
+  | Retriever | cex_retriever.py |
+
+  | Quality target | 9.0+ |
+
+  | Density target | 0.85+ |'

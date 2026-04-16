@@ -1,16 +1,16 @@
-kind: learning_record
-id: p10_lr_multimodal_prompt_builder
+kind: memory
+id: p10_mem_multimodal_prompt_builder
 pillar: P10
 llm_function: INJECT
 purpose: Learned patterns and pitfalls for multimodal_prompt construction
 quality: null
-title: Learning Record Multimodal Prompt
+title: Memory Multimodal Prompt
 version: 1.0.0
 author: wave1_builder_gen_v2
 tags:
 - multimodal_prompt
 - builder
-- learning_record
+- memory
 tldr: Learned patterns and pitfalls for multimodal_prompt construction
 domain: multimodal_prompt construction
 created: '2026-04-14'

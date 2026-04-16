@@ -17,6 +17,7 @@ tags:
 - audit
 tldr: 'Verified cex_builder_linter.py is present and catches structural builder defects, but it does not enforce full 8F compliance.
   Current repo state: 259 builder directories linted, 259 pass.'
+density_score: 0.94
 8f_trace: 'F1 CONSTRAIN: mission=LEVERAGE_MAP_V2, deliverable=verification decision record, target=n03 report artifact
 
   F2 BECOME: loaded N03 builder rules, 8F protocol, N03 agent docs, and active handoff

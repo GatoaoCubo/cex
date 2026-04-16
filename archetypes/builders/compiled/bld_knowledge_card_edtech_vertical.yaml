@@ -16,46 +16,71 @@ domain: edtech_vertical construction
 created: '2026-04-14'
 updated: '2026-04-14'
 density_score: 0.85
-domain_overview: The EdTech industry vertical focuses on digital tools and platforms that enhance teaching, learning, and
-  administrative processes in education. Key challenges include ensuring compliance with data privacy regulations (e.g., FERPA,
-  COPPA), seamless integration with Learning Management Systems (LMS) via standards like LTI, and safeguarding student data
-  across diverse use cases (e.g., adaptive learning, analytics, and assessment tools). As EdTech scales, balancing innovation
-  with regulatory adherence and interoperability becomes critical. EdTech solutions must navigate a complex ecosystem of stakeholders—schools,
-  districts, vendors, and students—each with distinct needs. For example, LMS integration requires adherence to LTI standards
-  to enable secure, standardized communication between third-party tools and platforms. Simultaneously, data privacy frameworks
-  mandate strict controls over Personally Identifiable Information (PII) and require mechanisms for data minimization, encryption,
-  and consent management.
-key_concepts: "| Concept         | Definition                                                                 | Source   \
-  \                           |  \n|------------------|----------------------------------------------------------------------------|-------------------------------------|\
-  \  \n| FERPA          | Federal law protecting student records in U.S. K-12 and higher education   | U.S. Department of\
-  \ Education        |  \n| COPPA          | U.S. law regulating online data collection from children under 13           |\
-  \ FTC Guidelines                      |  \n| LTI (LMS Tools Interoperability) | Standard for integrating third-party tools\
-  \ with LMS platforms         | IMS Global Learning Consortium    |  \n| PII            | Data that can identify a student\
-  \ (e.g., name, ID, grades)                  | NIST SP 800-115                     |  \n| Data Minimization | Collecting\
-  \ only essential student data for specific purposes             | GDPR Article 5(1)(c)               |  \n| Encryption \
-  \    | Securing data at rest and in transit to prevent unauthorized access        | NIST SP 800-115                    \
-  \ |  \n| Consent Management | Mechanisms to obtain and document parental or student consent for data use | COPPA FTC Guidelines\
-  \              |  \n| SSO (Single Sign-On) | Unified authentication across EdTech tools and LMS platforms            | IMS\
-  \ Global LTI 1.3                |  \n| Data Breach Notification | Mandatory disclosure of security incidents involving student\
-  \ data      | FERPA Compliance Guidelines       |"
+domain_overview: 'The EdTech vertical covers digital tools for K-12, higher education, and corporate L&D. The compliance stack
+  is layered: FERPA (student records privacy), COPPA (under-13 consent), and CIPA (internet filtering for K-12 schools receiving
+  E-rate funding). Integration is dominated by LTI 1.3 -- the IMS Global standard used by Canvas, Moodle, Blackboard, and
+  Google Classroom. Learning analytics use either xAPI (Experience API, formerly SCORM successor) or IMS Caliper 1.2. District
+  procurement is a significant barrier: most K-12 districts require state ed-tech approval list inclusion or ISTE Product
+  Certification before district-wide purchases. ACVs range $30K-$150K per district. Higher Ed procurement is faster (VP Academic
+  Technology decision) but requires Canvas/Moodle certification and an EDUCAUSE membership.'
+key_concepts: '| Concept | Definition | Source |
+
+  |---------|-----------|--------|
+
+  | FERPA | Protects educational records of K-12 and Higher Ed students; requires parental consent for disclosure | 20 USC
+  1232g; 34 CFR Part 99 |
+
+  | COPPA | Requires verifiable parental consent before collecting PII from children under 13 | 15 USC 6501; FTC 16 CFR Part
+  312 |
+
+  | CIPA | Mandates internet filtering for K-12 schools receiving E-rate; applies to devices and networks | 47 USC 254(h)
+  |
+
+  | LTI 1.3 | IMS Global standard for LMS tool integration; uses OAuth 2.0 + IMS Security Framework v1.0 | IMS Global LTI
+  1.3 Spec |
+
+  | xAPI (Experience API) | Learning activity tracking standard; captures statements (actor-verb-object) to LRS | ADL Initiative
+  / 1EdTech |
+
+  | IMS Caliper 1.2 | Sensor API for learning event data; event profiles include Assessment, Media, Session | 1EdTech (formerly
+  IMS Global) |
+
+  | 1EdTech | Standards body (formerly IMS Global); maintains LTI, xAPI, QTI, Common Cartridge | 1edtech.org |
+
+  | ISTE Product Certification | EdTech product quality certification by ISTE; frequently required in district procurement
+  | ISTE.org |
+
+  | SIS Integration | Student Information System sync (PowerSchool, Infinite Campus); roster data via OneRoster 1.2 | 1EdTech
+  OneRoster |
+
+  | EDUCAUSE | Higher Ed IT association; EduPerson attribute standard for campus identity federation | EDUCAUSE.edu |'
 industry_standards:
-- FERPA (Family Educational Rights and Privacy Act)
-- COPPA (Children’s Online Privacy Protection Act)
-- LTI 1.3 (IMS Global)
-- ISO/IEC 27001 (Information Security Management)
-- NIST SP 800-115 (Student Privacy in EdTech)
-- GDPR (General Data Protection Regulation)
-- COPPA FTC Guidelines (Federal Trade Commission)
-- U.S. Department of Education Student Privacy Policy
+- FERPA (20 USC 1232g) + 34 CFR Part 99 -- studentprivacy.ed.gov
+- COPPA (15 USC 6501) + FTC 16 CFR Part 312
+- CIPA (47 USC 254(h)) -- E-rate filtering requirement
+- LTI 1.3 + IMS Security Framework v1.0 (imsglobal.org/spec/lti/v1p3)
+- xAPI (Experience API) 1.0.3 -- adlnet.gov/projects/xapi
+- IMS Caliper 1.2 (1edtech.org/activity/caliper)
+- 1EdTech OneRoster 1.2 (roster/grade sync)
+- ISTE Product Certification (district procurement qualification)
+- ISO/IEC 27001 (information security management -- for enterprise EdTech)
 common_patterns:
-- Use LTI 1.3 for secure, standardized tool integration with LMS platforms.
-- Implement end-to-end encryption for student data transmission and storage.
-- Design consent workflows that align with FERPA and COPPA requirements.
-- Adopt modular architectures to support compliance with evolving regulations.
-- Conduct regular third-party audits for data privacy and security.
+- LTI 1.3 with IMS Security Framework v1.0 is the minimum integration requirement for Canvas, Moodle, and Blackboard -- earlier
+  versions (LTI 1.1) are being deprecated.
+- COPPA requires a "verifiable parental consent" mechanism -- email to parent + wait for consent is not sufficient; phone,
+  signed form, or credit card verification is required by FTC.
+- 'FERPA school official exception: vendors processing student data under DUSA (Data Use and Sharing Agreement) qualify as
+  "school officials" -- this is the standard SaaS EdTech contract model.'
+- xAPI LRS (Learning Record Store) must be configured to receive statements; Watershed, SCORM Cloud, and Learning Locker are
+  common LRS choices.
+- State ed-tech approval list inclusion (e.g., Texas TEA, California IIPPI) typically requires ISTE certification + FERPA/COPPA
+  compliance documentation + data privacy agreement.
+- OneRoster 1.2 is the dominant roster sync standard replacing CSV-based SIS imports; reduces onboarding time from weeks to
+  hours.
 pitfalls:
-- Overlooking FERPA/COPPA requirements during product design.
-- Using non-LTI-compliant tools, leading to integration and security risks.
-- Failing to encrypt PII, increasing exposure to data breaches.
-- Collecting excessive student data without clear purpose or consent.
-- Neglecting audit trails for data access and modification.
+- Using LTI 1.1 (deprecated) -- Canvas removing support in 2025; will break all tool launches.
+- COPPA "soft consent" (unchecked checkbox) -- FTC treats this as no consent; class action risk.
+- Collecting learning analytics without xAPI/Caliper standard -- district data audits will require export in standard format.
+- Missing ISTE Product Certification -- blocks entry into most state ed-tech approval lists.
+- FERPA records disclosure without signed DUSA -- every school requires this before first student data transfer.
+- Treating "educational use" as automatic COPPA exemption -- COPPA applies even to educational contexts for under-13 users.

@@ -1,16 +1,16 @@
-kind: learning_record
-id: p10_lr_interactive_demo_builder
+kind: memory
+id: p10_mem_interactive_demo_builder
 pillar: P10
 llm_function: INJECT
 purpose: Learned patterns and pitfalls for interactive_demo construction
 quality: null
-title: Learning Record Interactive Demo
+title: Memory Interactive Demo
 version: 1.0.0
 author: wave1_builder_gen_v2
 tags:
 - interactive_demo
 - builder
-- learning_record
+- memory
 tldr: Learned patterns and pitfalls for interactive_demo construction
 domain: interactive_demo construction
 created: '2026-04-14'

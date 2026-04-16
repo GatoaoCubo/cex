@@ -16,7 +16,13 @@ domain: compliance_checklist construction
 created: '2026-04-14'
 updated: '2026-04-14'
 density_score: 0.85
-naming_convention: "Pattern: `p11_cc_{{name}}.md`  \nExamples:  \n- `p11_cc_example.md`  \n- `p11_cc_compliance.md`"
+naming_convention: 'Pattern: `p11_cc_{{name}}.md`
+
+  Examples:
+
+  - `p11_cc_example.md`
+
+  - `p11_cc_compliance.md`'
 paths:
 - '`/artifacts/compliance_checklists/p11_cc_{{name}}.md`'
 - '`/reports/p11_cc_{{name}}_report.json`'

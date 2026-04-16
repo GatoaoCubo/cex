@@ -2,63 +2,87 @@ kind: architecture
 id: bld_architecture_memory_architecture
 pillar: P08
 llm_function: CONSTRAIN
-purpose: Component map of memory_architecture -- inventory, dependencies
+purpose: Component map of the memory_architecture-builder -- 13 ISOs, dependencies, position
 quality: null
-title: Architecture Memory Architecture
-version: 1.0.0
-author: wave1_builder_gen_v2
+title: 'Architecture: memory_architecture-builder'
+version: 2.0.0
+author: n06_commercial
 tags:
 - memory_architecture
 - builder
 - architecture
-tldr: Component map of memory_architecture -- inventory, dependencies
-domain: memory_architecture construction
+tldr: '13-ISO builder for LLM agent memory architecture artifacts: knowledge (P01), instructions (P03), schema (P06), quality
+  gate (P11), output template (P05), examples (P07), architecture (P08), collaboration (P12), config (P09), memory (P10),
+  tools (P04), manifest (P02), system_prompt (P03)'
+domain: LLM agent memory systems
 created: '2026-04-14'
 updated: '2026-04-14'
-density_score: 0.85
-component_inventory: '| ISO Name             | Role                          | Pillar | Status  |
+density_score: 0.9
+component_inventory: '| ISO File | Kind | Pillar | Role |
 
-  |----------------------|-------------------------------|--------|---------|
+  |----------|------|--------|------|
 
-  | bld_manifest         | Core configuration blueprint  | P10    | Active  |
+  | bld_manifest_memory_architecture.md | manifest | P02 | Builder registry entry + meta |
 
-  | bld_instruction      | Operational directive engine  | P10    | Active  |
+  | bld_instruction_memory_architecture.md | instruction | P03 | 3-phase production process (F4 REASON) |
 
-  | bld_system_prompt    | Cognitive interface template  | P10    | Active  |
+  | bld_system_prompt_memory_architecture.md | system_prompt | P03 | Builder persona (F2 BECOME) |
 
-  | bld_schema           | Data structure definition     | P10    | Active  |
+  | bld_schema_memory_architecture.md | schema | P06 | Frontmatter contract + body structure (F1 CONSTRAIN) |
 
-  | bld_quality_gate     | Validation enforcement        | P10    | Active  |
+  | bld_quality_gate_memory_architecture.md | quality_gate | P11 | HARD gates + SOFT scoring (F7 GOVERN) |
 
-  | bld_output_template  | Formatting specification      | P10    | Active  |
+  | bld_output_template_memory_architecture.md | output_template | P05 | Annotated template with vars (F6 PRODUCE) |
 
-  | bld_examples         | Pattern repository            | P10    | Active  |
+  | bld_examples_memory_architecture.md | examples | P07 | Golden + anti-examples (F3 INJECT) |
 
-  | bld_knowledge_card   | Contextual information hub    | P10    | Active  |
+  | bld_knowledge_card_memory_architecture.md | knowledge_card | P01 | Domain knowledge: MemGPT, Zep, mem0, tier matrix (F3
+  INJECT) |
 
-  | bld_architecture     | Structural definition         | P10    | Active  |
+  | bld_architecture_memory_architecture.md | architecture | P08 | This file -- component map |
 
-  | bld_collaboration    | Multi-agent coordination      | P10    | Active  |
+  | bld_collaboration_memory_architecture.md | collaboration_pattern | P12 | Multi-nucleus handoff protocol |
 
-  | bld_config           | Parameter management          | P10    | Active  |
+  | bld_config_memory_architecture.md | env_config | P09 | Builder runtime parameters |
 
-  | bld_memory           | Persistent state repository   | P10    | Active  |
+  | bld_memory_memory_architecture.md | memory | P10 | Learned patterns + pitfalls |
 
-  | bld_tools            | Utility function library      | P10    | Active  |'
-dependencies: '| From             | To               | Type         |
+  | bld_tools_memory_architecture.md | toolkit | P04 | Tools used during construction |'
+dependencies: '| Consumer ISO | Depends On | Dependency Type |
 
-  |------------------|------------------|--------------|
+  |---|---|---|
 
-  | bld_memory       | bld_config       | Configuration|
+  | bld_instruction | bld_schema | Must reference correct frontmatter fields |
 
-  | bld_instruction  | bld_schema       | Data         |
+  | bld_system_prompt | bld_knowledge_card | Persona grounded in domain knowledge |
 
-  | bld_quality_gate | bld_output_template | Validation |
+  | bld_quality_gate | bld_schema | H02 ID pattern comes from schema |
 
-  | bld_collaboration| bld_memory       | State        |
+  | bld_output_template | bld_schema | Template vars match schema required fields |
 
-  | bld_system_prompt| bld_knowledge_card | Context    |'
-architectural_position: memory_architecture serves as the persistent state backbone for P10, enabling cross-component memory
-  retention, contextual continuity, and historical traceability. It integrates with bld_config for parameter persistence,
-  bld_quality_gate for validation history, and bld_collaboration for shared state management, ensuring consistent execution
-  across the CEX pillar's operational lifecycle.
+  | bld_examples | bld_quality_gate | Golden examples must pass all HARD gates |
+
+  | bld_memory | bld_knowledge_card | Patterns grounded in domain evidence |'
+architectural_position: memory_architecture is a P10 (Memory) kind. It defines the structural blueprint for how an LLM agent
+  manages context across sessions. It is the parent artifact that consolidation_policy (eviction rules) and procedural_memory
+  (skill storage schema) operate within. An agent system typically has one memory_architecture artifact per agent type, with
+  consolidation_policy and procedural_memory artifacts as children.
+8f_stage_map: '| 8F Stage | Primary ISOs Used |
+
+  |---|---|
+
+  | F1 CONSTRAIN | bld_schema, bld_manifest |
+
+  | F2 BECOME | bld_system_prompt |
+
+  | F3 INJECT | bld_knowledge_card, bld_examples, bld_memory |
+
+  | F4 REASON | bld_instruction |
+
+  | F5 CALL | bld_tools, bld_config |
+
+  | F6 PRODUCE | bld_output_template |
+
+  | F7 GOVERN | bld_quality_gate |
+
+  | F8 COLLABORATE | bld_collaboration |'

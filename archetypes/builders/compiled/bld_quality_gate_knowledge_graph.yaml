@@ -19,6 +19,7 @@ tags:
 tldr: 'Gates for knowledge_graph artifacts: validates entity/relation lists, relation source/target consistency, storage and
   traversal enums, extraction config, and section completeness.'
 density_score: 0.92
+llm_function: GOVERN
 definition: '| Field | Value |
 
   |-------|-------|

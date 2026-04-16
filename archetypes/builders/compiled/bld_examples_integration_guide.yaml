@@ -24,10 +24,10 @@ prerequisites:
 - Stripe account with API keys (live/test)
 - AWS account with IAM roles configured
 - Node.js 16+ environment
-integration_steps: "1. API Setup  \n   Configure Stripe Webhook endpoints in AWS API Gateway with Lambda triggers for real-time\
-  \ payment events.\n\n2. Data Pipeline  \n   Use AWS Glue to transform Stripe's JSON events into Parquet format for storage\
-  \ in S3.\n\n3. Security  \n   Implement AWS KMS encryption for payment data at rest, with IAM policies restricting access\
-  \ to payment data.\n\n4. Monitoring  \n   Set up CloudWatch metrics for payment processing latency and error rates."
+integration_steps: "1. API Setup\n   Configure Stripe Webhook endpoints in AWS API Gateway with Lambda triggers for real-time\
+  \ payment events.\n\n2. Data Pipeline\n   Use AWS Glue to transform Stripe's JSON events into Parquet format for storage\
+  \ in S3.\n\n3. Security\n   Implement AWS KMS encryption for payment data at rest, with IAM policies restricting access\
+  \ to payment data.\n\n4. Monitoring\n   Set up CloudWatch metrics for payment processing latency and error rates."
 best_practices:
 - Use Stripe's Radar for fraud detection before AWS processing
 - Implement automated scaling in EC2 for high-volume payment periods

@@ -1,0 +1,28 @@
+kind: collaboration
+id: bld_collaboration_rl_algorithm
+pillar: P12
+llm_function: COLLABORATE
+purpose: How rl_algorithm-builder works in crews with other builders
+quality: null
+title: Collaboration Rl Algorithm
+version: 1.0.0
+author: wave1_builder_gen
+tags:
+- rl_algorithm
+- builder
+- collaboration
+tldr: How rl_algorithm-builder works in crews with other builders
+domain: rl_algorithm construction
+created: '2026-04-13'
+updated: '2026-04-13'
+density_score: 0.85
+crew_role: Designs and implements core reinforcement learning algorithms (e.g., policy gradient, Q-learning), ensuring compatibility
+  with environment interfaces and training protocols.
+receives_from: "| Builder          | What                  | Format      |  \n|------------------|-----------------------|-------------|\
+  \  \n| Environment      | Observation/action specs | YAML        |  \n| Reward_Model     | Reward function       | JSON\
+  \        |  \n| Training_Method  | Optimization strategy | Python module |"
+produces_for: "| Builder          | What                  | Format      |  \n|------------------|-----------------------|-------------|\
+  \  \n| Training_Method  | Algorithm interface   | Python class |  \n| Hyperparameter   | Configurable parameters | JSON\
+  \        |  \n| Evaluation       | Performance metrics   | CSV         |"
+boundary: Does NOT define training loops, hyperparameter schedules, or reward functions. Training_Method handles optimization,
+  Reward_Model defines reward logic, and Environment provides interaction specs.

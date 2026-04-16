@@ -1,30 +1,39 @@
-kind: learning_record
-id: p10_lr_procedural_memory_builder
+kind: memory
+id: p10_mem_procedural_memory_builder
 pillar: P10
 llm_function: INJECT
 purpose: Learned patterns and pitfalls for procedural_memory construction
 quality: null
-title: Learning Record Procedural Memory
-version: 1.0.0
-author: wave1_builder_gen_v2
+title: 'Memory: procedural_memory-builder patterns'
+version: 2.0.0
+author: n06_commercial
 tags:
 - procedural_memory
 - builder
-- learning_record
-tldr: Learned patterns and pitfalls for procedural_memory construction
-domain: procedural_memory construction
+- memory
+tldr: 'Key lessons: cite Voyager/Reflexion/ExpeL, always verify before storing, use hierarchical namespace, add tier matrix,
+  free tier = no procedural memory'
+domain: LLM agent procedural memory
 created: '2026-04-14'
 updated: '2026-04-14'
-density_score: 0.85
-observation: Common issues include vague steps, missing contextual cues, and over-reliance on abstract terms, leading to inconsistent
-  retrieval. Procedures often omit failure conditions or edge cases, reducing reliability.
-pattern: Effective artifacts use explicit, actionable verbs and define clear success/failure criteria. Modular breakdowns
-  with conditional branches improve adaptability and recall accuracy.
-evidence: Reviewed artifacts with explicit success/failure criteria showed 30% higher retrieval accuracy in tests. Modular
-  designs reduced errors by 25% during complex task simulations.
-recommendations:
-- Use consistent verb tenses and action-oriented language.
-- Include failure conditions and recovery steps explicitly.
-- Break procedures into atomic, testable sub-steps.
-- Annotate with contextual triggers (e.g., "if X, then Y").
-- Avoid blending procedural steps with declarative knowledge.
+density_score: 0.9
+observation: The original procedural_memory knowledge_card had partial domain relevance (skill acquisition, RL, procedural
+  abstraction) but was grounded in robotics/HCI literature (Anderson ACT-R, motor schemas, Brooks subsumption architecture)
+  rather than the LLM-specific systems that are the actual domain. The quality gate tested runtime metrics (retrieval latency,
+  error rate, recovery time) not artifact structure.
+pattern: "High-quality procedural_memory artifacts share four traits:\n1. Cite LLM-specific references: Voyager (Wang 2023)\
+  \ for skill library, Reflexion\n   (Shinn 2023) for self-notes, ExpeL (Zhao 2023) for experience extraction.\n2. Define\
+  \ skill_format explicitly: code (Python/JS), YAML, natural language, or JSON.\n3. Include skill verification: what checks\
+  \ prevent unverified skills from entering the library.\n4. Commercial tier matrix: FREE (no skills), PRO (shared library),\
+  \ ENTERPRISE (versioned + team)."
+evidence: "Wave 3 generation (qwen3:14b) produced partially relevant knowledge_card and reasonable\nsystem_prompt for procedural_memory,\
+  \ but:\n- knowledge_card cited Anderson ACT-R (1993), motor schemas, robotics frameworks -- not Voyager\n- quality_gate\
+  \ tested: retrieval latency <=200ms, error rate <=0.1%, recovery time <=5min\n  (D03: runtime metrics, not artifact structure)\n\
+  - quality_gate SOFT table had a broken format (3 columns for GOLDEN/PUBLISH/REVIEW/REJECT)\n- bld_memory had kind: learning_record\
+  \ instead of kind: memory (D02)"
+recommendations: "- The robotics/cognitive science framing is not wrong (procedural memory IS a cognitive\n  concept) but\
+  \ it misses the production-relevant literature. Always cite Voyager first.\n- Skill verification is the key differentiator\
+  \ between good and bad procedural memory\n  systems. Voyager's verify-before-store pattern prevents skill contamination.\n\
+  - Reflexion self-notes are a lighter alternative to full skill libraries for agents that\n  don't need executable code --\
+  \ document this as an option in the output_template.\n- Free tier: no procedural memory. Agents degrade gracefully by reasoning\
+  \ from scratch.\n  Document this explicitly; do not leave it ambiguous."

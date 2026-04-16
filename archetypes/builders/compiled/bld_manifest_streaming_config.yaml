@@ -3,7 +3,7 @@ kind: type_builder
 pillar: P05
 parent: null
 domain: streaming_config
-llm_function: PRODUCE
+llm_function: BECOME
 version: 1.0.0
 created: 2026-04-13
 updated: 2026-04-13

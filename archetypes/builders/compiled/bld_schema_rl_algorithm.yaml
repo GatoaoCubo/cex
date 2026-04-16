@@ -1,0 +1,51 @@
+kind: schema
+id: bld_schema_rl_algorithm
+pillar: P06
+llm_function: CONSTRAIN
+purpose: Formal schema -- SINGLE SOURCE OF TRUTH for rl_algorithm
+quality: null
+title: Schema Rl Algorithm
+version: 1.0.0
+author: wave1_builder_gen
+tags:
+- rl_algorithm
+- builder
+- schema
+tldr: Formal schema -- SINGLE SOURCE OF TRUTH for rl_algorithm
+domain: rl_algorithm construction
+created: '2026-04-13'
+updated: '2026-04-13'
+density_score: 0.85
+frontmatter_fields: ''
+required: "| Field      | Type   | Required | Default | Notes |  \n|------------|--------|----------|---------|-------|  \n\
+  | id         | string | yes      | -       | Unique identifier |  \n| kind       | string | yes      | \"rl_algorithm\"\
+  \ | CEX kind |  \n| pillar     | string | yes      | \"P02\"    | Pillar classification |  \n| title      | string | yes\
+  \      | -       | Algorithm name |  \n| version    | string | yes      | \"1.0\"    | Version number |  \n| created   \
+  \ | date   | yes      | -       | Creation date |  \n| updated    | date   | yes      | -       | Last update date |  \n\
+  | author     | string | yes      | -       | Author name |  \n| domain     | string | yes      | -       | Application domain\
+  \ |  \n| quality    | null   | yes      | null     | Never self-score -- peer review only |  \n| tags       | list   | yes\
+  \      | []      | Keywords |  \n| tldr       | string | yes      | -       | Summary |  \n| algorithm_type | string | yes\
+  \ | - | RL variant (e.g., DQN, PPO) |  \n| hyperparameters | map | yes | {} | Key-value parameter settings |"
+recommended: "| Field              | Type   | Notes |  \n|--------------------|--------|-------|  \n| environment        |\
+  \ string | Training environment |  \n| reward_function    | string | Reward definition |"
+id_pattern: ^p02_rla_[a-zA-Z0-9_]+\.md$
+body_structure:
+- Overview
+- Description of the algorithm's purpose and scope.
+- Algorithm Components
+- Key modules (e.g., policy, value function, exploration strategy).
+- Training Process
+- Steps for initialization, iteration, and convergence.
+- Evaluation Metrics
+- Performance indicators (e.g., reward, episode length).
+- Use Cases
+- Scenarios where the algorithm is applicable.
+- Constraints
+- Limitations or assumptions (e.g., computational requirements).
+constraints:
+- All required fields must be present and valid.
+- ID must match the regex pattern.
+- File size must not exceed 5120 bytes.
+- Domain-specific fields must align with RL terminology.
+- No markdown formatting in body sections.
+- Version must follow semantic versioning (e.g., "1.2.3").

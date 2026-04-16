@@ -23,22 +23,40 @@ domain_overview: Prompt_technique refers to methods for structuring input to lan
   Face, which emphasizes iterative refinement of prompts to improve model performance. Techniques are evaluated via metrics
   like BLEU, ROUGE, and task-specific accuracy, ensuring alignment with downstream applications in healthcare, finance, and
   education.
-key_concepts: "| Concept | Definition | Source |  \n|---|---|---|  \n| Chain-of-Thought (CoT) | Induces step-by-step reasoning\
-  \ via explicit intermediate steps | Brown et al. 2020 (https://arxiv.org/abs/2005.14140) |  \n| Role-playing | Assigns a\
-  \ persona or expertise to guide model behavior | OpenAI Prompt Engineering Guide (2023) |  \n| Few-shot Learning | Uses\
-  \ examples within the prompt to infer task patterns | Brown et al. 2020 (https://arxiv.org/abs/2005.14140) |  \n| Prompt\
-  \ Injection | Embeds hidden instructions to manipulate model outputs | Carlini et al. 2023 (https://arxiv.org/abs/2304.06136)\
-  \ |  \n| Retrieval-Augmented Generation (RAG) | Integrates external knowledge via database queries | Lewis et al. 2020 (https://arxiv.org/abs/2005.11980)\
-  \ |  \n| Counterfactual Reasoning | Explores \"what-if\" scenarios to test robustness | Hooker et al. 2021 (https://arxiv.org/abs/2103.03455)\
-  \ |  \n| Instruction Tuning | Refines model behavior via human-annotated examples | Zou et al. 2022 (https://arxiv.org/abs/2212.05458)\
-  \ |  \n| Alignment Verification | Ensures outputs conform to ethical or domain-specific rules | Anthropic Alignment Papers\
-  \ (2023) |"
-industry_standards:
-- Prompt Engineering Manifesto (OpenAI, 2023)
-- Hugging Face Transformers Documentation (2023)
-- ISO/IEC 23894:2021 (AI Trustworthiness)
-- RLHF (Reinforcement Learning from Human Feedback) (Stiennon et al., 2020)
-- Microsoft Prompt Tuning Framework (2022)
+key_concepts: '| Concept | Definition | Source |
+
+  |---|---|---|
+
+  | Chain-of-Thought (CoT) | Induces step-by-step reasoning via explicit intermediate steps | Wei et al. 2022 (NeurIPS 2022,
+  arxiv.org/abs/2201.11903) |
+
+  | Role-playing | Assigns a persona or expertise to guide model behavior | OpenAI Prompt Engineering Guide (2023) |
+
+  | Few-shot Learning | Uses examples within the prompt to infer task patterns | Brown et al. 2020 (https://arxiv.org/abs/2005.14140)
+  |
+
+  | Prompt Injection | Embeds hidden instructions to manipulate model outputs | Carlini et al. 2023 (https://arxiv.org/abs/2304.06136)
+  |
+
+  | Retrieval-Augmented Generation (RAG) | Integrates external knowledge via database queries | Lewis et al. 2020 (https://arxiv.org/abs/2005.11980)
+  |
+
+  | Counterfactual Reasoning | Explores "what-if" scenarios to test robustness | Hooker et al. 2021 (https://arxiv.org/abs/2103.03455)
+  |
+
+  | Instruction Tuning | Refines model behavior via human-annotated examples | Zou et al. 2022 (https://arxiv.org/abs/2212.05458)
+  |
+
+  | Alignment Verification | Ensures outputs conform to ethical or domain-specific rules | Anthropic Alignment Papers (2023)
+  |'
+industry_standards_and_key_papers:
+- 'Wei et al. (2022): Chain-of-Thought Prompting Elicits Reasoning in LLMs. NeurIPS 2022.'
+- 'Yao et al. (2022): ReAct: Synergizing Reasoning and Acting in Language Models. ICLR 2023.'
+- 'Yao et al. (2023): Tree of Thoughts: Deliberate Problem Solving with LLMs. NeurIPS 2023.'
+- 'Wang et al. (2022): Self-Consistency Improves Chain of Thought Reasoning in LLMs. ICLR 2023.'
+- 'Dhuliawala et al. (2023): Chain-of-Verification Reduces Hallucination in LLMs.'
+- 'OpenAI Prompt Engineering Guide (2023): Practical guide on few-shot, CoT, role prompting.'
+- ISO/IEC 23894:2021 (AI Risk Management -- Guidance on AI Trustworthiness)
 common_patterns:
 - 'Chain-of-Thought: Encourage step-by-step reasoning with explicit markers (e.g., "Reason step by step").'
 - 'Role Assignment: Define a persona (e.g., "Act as a medical expert").'

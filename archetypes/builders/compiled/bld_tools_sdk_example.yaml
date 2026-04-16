@@ -16,17 +16,27 @@ domain: sdk_example construction
 created: '2026-04-14'
 updated: '2026-04-14'
 density_score: 0.85
-production_tools: "| Tool | Purpose | When |  \n|------|---------|------|  \n| cex_compile.py | Compiles SDK examples into\
-  \ executable formats | During build phase |  \n| cex_score.py | Evaluates example quality using predefined metrics | Post-validation\
-  \ |  \n| cex_retriever.py | Fetches external data required for example execution | Pre-runtime setup |  \n| cex_doctor.py\
-  \ | Diagnoses and repairs common SDK configuration issues | On first run or deployment |  \n| cex_deployer.py | Packages\
-  \ examples for distribution across environments | Release preparation |  \n| cex_formatter.py | Standardizes code style\
-  \ and documentation in examples | Pre-commit checks |"
-validation_tools: "| Tool | Purpose | When |  \n|------|---------|------|  \n| val_check.py | Verifies example integrity and\
-  \ completeness | Pre-validation |  \n| val_validator.py | Enforces SDK-specific rules and constraints | During testing |\
-  \  \n| val_comparer.py | Compares example outputs against expected results | Post-execution |  \n| val_linter.py | Enforces\
-  \ code style and best practices | Pre-commit |"
+production_tools: '| Tool | Purpose | When |
+
+  |------|---------|------|
+
+  | cex_compile.py | Compiles ISOs to deployable artifact | During build phase |
+
+  | cex_score.py | Scores quality via 3-layer rubric | Post-validation |
+
+  | cex_retriever.py | Finds related SDK artifacts via TF-IDF | Pre-runtime setup |
+
+  | cex_doctor.py | Diagnoses frontmatter and structure issues | On first run or deployment |'
+validation_tools: '| Tool | Purpose | When |
+
+  |------|---------|------|
+
+  | cex_wave_validator.py | Validates frontmatter, ISO count, kind fields | Pre-commit |
+
+  | cex_hooks.py | Pre/post build validation hooks | On build events |
+
+  | cex_system_test.py | Full system validation (54 checks) | Release gate |'
 external_references:
-- 'ExampleML: Machine learning framework for SDK example generation'
-- 'ExampleDB: Database schema for storing example metadata'
-- 'ExampleTest: Unit testing framework for SDK validation scenarios'
+- Twilio Quickstart SDK style (auth + retry + pagination canonical patterns)
+- GitHub idiomatic code examples (language-specific README conventions)
+- PEP8 (Python) / Google Java Style / StandardJS (language style guides)

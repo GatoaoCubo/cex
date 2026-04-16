@@ -22,6 +22,7 @@ seo:
   description: Manage pet data, appointments, and inventory with our easy-to-use CRM. Free tier available. Boost your pet
     shop efficiency today.
   og_image: https://example.com/og-image.jpg
+density_score: 1.0
 design_tokens: '| Token | Value |
 
   |-------|-------|

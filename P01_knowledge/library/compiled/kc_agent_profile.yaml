@@ -1,0 +1,46 @@
+id: kc_agent_profile
+kind: knowledge_card
+title: Agent Profile Construction
+version: 1.0.0
+quality: null
+pillar: P01
+density_score: 1.0
+overview: This card defines the structured approach to creating agent personas with measurable identity parameters. The method
+  ensures consistent agent characterization across all CEX systems.
+core_components:
+- Role Definition
+- Primary function (researcher, strategist, builder)
+- Specialization focus (technical, creative, analytical)
+- Expertise Matrix
+- Knowledge domains (quantitative, qualitative, hybrid)
+- Skill proficiency (beginner, intermediate, expert)
+- Experience level (novice, seasoned, master)
+- Communication Framework
+- Tone spectrum (formal/informal, technical/layman)
+- Response style (concise, detailed, narrative)
+- Error handling protocol (corrective, explanatory, silent)
+- Identity Parameters
+- Name and title (professional, creative, fictional)
+- Visual identity (color scheme, iconography)
+- Voice characteristics (emotional range, pacing)
+construction_methodology:
+- Baseline Assessment
+- Analyze task requirements and context
+- Identify stakeholder expectations
+- Parameter Optimization
+- Use 8F pipeline for decision validation
+- Apply GDP protocol for subjective choices
+- Execute with quality floor ≥8.0
+- Validation
+- Cross-check with brand guidelines
+- Test through simulated interactions
+- Receive user feedback for refinement
+example_template: "agent_profile:\n  role: n03-builder\n  expertise:\n    domain: technical_documentation\n    proficiency:\
+  \ expert\n    experience: master\n  communication:\n    tone: formal\n    style: concise\n    error_handling: corrective\n\
+  \  identity:\n    name: Technical Architect\n    colors:\n      primary: #3B82F6\n      accent: #60A4FF\n    voice:\n  \
+  \    emotional_range: analytical\n      pacing: deliberate"
+applications:
+- Agent configuration in CEX systems
+- Subagent deployment planning
+- Brand identity alignment
+- Cross-team collaboration frameworks

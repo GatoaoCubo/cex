@@ -4,89 +4,117 @@ pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of memory_architecture artifacts
 quality: null
-title: Examples Memory Architecture
-version: 1.0.0
-author: wave1_builder_gen_v2
+title: 'Examples: memory_architecture artifacts'
+version: 2.0.0
+author: n06_commercial
 tags:
 - memory_architecture
 - builder
 - examples
-tldr: Golden and anti-examples of memory_architecture artifacts
-domain: memory_architecture construction
+tldr: 'Golden example: 4-layer MemGPT-style agent with tier matrix and eviction. Anti-examples: hardware memory (wrong domain)
+  and flat no-eviction design.'
+domain: LLM agent memory systems
 created: '2026-04-14'
 updated: '2026-04-14'
-density_score: 0.85
-golden_example: '---
+density_score: 0.9
+golden_example_customer_support_agent_pro_tier: '---
 
-  title: "Enterprise Memory Architecture with Intel Optane and DDR4"
+  id: p10_marc_customer_support_pro
 
-  description: "Hybrid memory system integrating persistent and volatile memory"
+  kind: memory_architecture
 
-  vendor: "Intel Corporation"
+  pillar: P10
 
-  tools: ["Intel Memory Latency Checker", "Micron Memory Test Tool"]
+  title: "Memory Architecture: Customer Support Agent (PRO)"
 
-  ---
+  version: "1.0.0"
 
-  This architecture combines Intel Optane DC Persistent Memory Module 300 series (3D XPoint technology) with DDR4-2666 RDIMMs.
-  The design includes:
+  created: "2026-04-14"
 
-  - 3-level hierarchy: CPU caches (L3) → DDR4 → Optane PMem
+  updated: "2026-04-14"
 
-  - Memory controller with Intel''s Persistent Memory Development Kit
+  author: n06_commercial
 
-  - ECC support across all memory types
+  domain: "customer-support"
 
-  - Interconnect via UPI 3.0 for multi-socket scalability
+  quality: null
 
-  - Error correction using Intel''s Memory Protection Technology
+  tags: [memory_architecture, customer_support, pro]
 
-  - Power management with dynamic voltage scaling'
-anti_example_1_single_memory_type_focus: '---
+  tldr: "4-layer memory for B2C support agent: working context + episodic (pgvector) + semantic (Redis JSON) + procedural
+  (Redis KV). PRO tier."
 
-  title: "DDR4-Only Memory System"
+  layers: [working, episodic, semantic, procedural]
 
-  description: "Monolithic DRAM-based architecture"
+  tier: pro
 
-  vendor: "Generic Vendor"
+  system_ref: memgpt
 
-  tools: ["Generic Memory Tester"]
+  retention_days: 90
 
-  ---
-
-  This design exclusively uses DDR4-2400 RDIMMs without any persistent memory or cache hierarchy. It lacks:
-
-  - Memory tiering strategy
-
-  - Error correction beyond standard ECC
-
-  - Support for non-volatile data retention
-
-  - Scalability beyond 2TB
-
-  Why it fails: Fails to address memory hierarchy requirements, resulting in poor performance for workloads requiring persistent
-  storage and limited scalability.'
-anti_example_2_ignored_reliability_features: '---
-
-  title: "Basic Memory Configuration"
-
-  description: "Minimalist DRAM setup"
-
-  vendor: "Unspecified Manufacturer"
-
-  tools: ["Basic Memory Diagnostic"]
+  consolidation_enabled: true
 
   ---
 
-  This architecture uses standard DDR3-1600 UDIMMs with no:
 
-  - Error correction (no ECC)
+  Why golden: all required frontmatter, 4 layers defined, tier=pro, system_ref cited,
 
-  - Redundancy mechanisms
+  retention_days set, consolidation_enabled. Body includes read/write pipelines, eviction
 
-  - Temperature monitoring
+  per layer, and FREE/PRO/ENTERPRISE tier matrix. No hardware memory content.'
+anti_example_1_hardware_memory_contamination_d04_domain_hallucination: '---
 
-  - Power fail protection
+  id: p10_marc_server_memory
 
-  Why it fails: Vulnerable to data corruption, lacks reliability features required for enterprise systems, and cannot meet
-  modern memory reliability standards.'
+  kind: memory_architecture
+
+  title: "DDR5 Memory Architecture with CXL 3.0"
+
+  memory_type: DRAM
+
+  capacity: 4294967296
+
+  access_time: 50.0
+
+  ---
+
+
+  Why it fails:
+
+  - `memory_type: DRAM` -- hardware memory field, not agent memory
+
+  - `capacity: bytes` -- byte capacity is for DRAM, not LLM context
+
+  - `access_time: nanoseconds` -- hardware latency, not retrieval latency
+
+  - No `layers` field, no `tier` field, no `system_ref`
+
+  - Content describes JEDEC DDR5, CXL interconnects -- wrong domain entirely'
+anti_example_2_flat_design_with_no_eviction_policy: '---
+
+  id: p10_marc_flat_no_eviction
+
+  kind: memory_architecture
+
+  title: "Agent Memory (everything stored forever)"
+
+  layers: [working]
+
+  ---
+
+  ## Memory
+
+  Store all conversations in a list. Never delete.
+
+
+  Why it fails:
+
+  - Only working layer -- no episodic/semantic persistence
+
+  - No eviction policy -- unbounded storage growth
+
+  - No tier matrix -- misses commercial differentiation
+
+  - No backend specified -- not implementable
+
+  - Fails H06 (no tier matrix) and scores 0.0 on D3 (commercial differentiation)'

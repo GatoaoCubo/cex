@@ -1,16 +1,16 @@
-kind: learning_record
-id: p10_lr_product_tour_builder
+kind: memory
+id: p10_mem_product_tour_builder
 pillar: P10
 llm_function: INJECT
 purpose: Learned patterns and pitfalls for product_tour construction
 quality: null
-title: Learning Record Product Tour
+title: Memory Product Tour
 version: 1.0.0
 author: wave1_builder_gen_v2
 tags:
 - product_tour
 - builder
-- learning_record
+- memory
 tldr: Learned patterns and pitfalls for product_tour construction
 domain: product_tour construction
 created: '2026-04-14'

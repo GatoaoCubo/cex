@@ -23,18 +23,26 @@ domain_overview: SDK examples serve as blueprints for integrating third-party se
   must balance simplicity and flexibility, avoiding vendor lock-in while providing sufficient abstractions for common use
   cases. They frequently incorporate authentication (OAuth 2.0, API keys), error handling (HTTP status codes, retries), and
   serialization (JSON, Protobuf). The goal is to reduce boilerplate code while maintaining idiomatic language constructs.
-key_concepts: "| Concept               | Definition                                                                 | Source\
-  \                          |  \n|-----------------------|----------------------------------------------------------------------------|---------------------------------|\
-  \  \n| RESTful Design        | Client-server architecture with stateless, resource-based interactions     | Fielding’s PhD\
-  \ dissertation     |  \n| OAuth 2.0             | Delegation protocol for secure API access                            \
-  \      | RFC 6749                        |  \n| OpenAPI Specification | Machine-readable API definition format         \
-  \                            | OpenAPI Initiative              |  \n| gRPC                  | High-performance RPC framework\
-  \ using HTTP/2 and Protobuf                  | Google’s gRPC documentation     |  \n| Circuit Breaker       | Pattern to\
-  \ prevent cascading failures in distributed systems               | Martin Fowler’s Patterns of Enterprise Application Architecture\
-  \ |  \n| Dependency Injection  | Technique to decouple SDK components from concrete implementations       | Wikipedia  \
-  \                     |  \n| JSON:API              | Standard for building JSON-based APIs with consistent resource modeling\
-  \  | JSON:API.org                    |  \n| Async/Await           | Language feature for non-blocking I/O operations   \
-  \                      | Python 3.5+ documentation       |"
+key_concepts: '| Concept               | Definition                                                                 | Source                          |
+
+  |-----------------------|----------------------------------------------------------------------------|---------------------------------|
+
+  | RESTful Design        | Client-server architecture with stateless, resource-based interactions     | Fielding’s PhD dissertation     |
+
+  | OAuth 2.0             | Delegation protocol for secure API access                                  | RFC 6749                        |
+
+  | OpenAPI Specification | Machine-readable API definition format                                     | OpenAPI Initiative              |
+
+  | gRPC                  | High-performance RPC framework using HTTP/2 and Protobuf                  | Google’s gRPC documentation     |
+
+  | Circuit Breaker       | Pattern to prevent cascading failures in distributed systems               | Martin Fowler’s Patterns
+  of Enterprise Application Architecture |
+
+  | Dependency Injection  | Technique to decouple SDK components from concrete implementations       | Wikipedia                       |
+
+  | JSON:API              | Standard for building JSON-based APIs with consistent resource modeling  | JSON:API.org                    |
+
+  | Async/Await           | Language feature for non-blocking I/O operations                         | Python 3.5+ documentation       |'
 industry_standards:
 - OpenAPI Specification (OAS)
 - gRPC (HTTP/2 + Protobuf)

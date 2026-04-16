@@ -1,16 +1,16 @@
-kind: learning_record
-id: p10_lr_usage_quota_builder
+kind: memory
+id: p10_mem_usage_quota_builder
 pillar: P10
 llm_function: INJECT
 purpose: Learned patterns and pitfalls for usage_quota construction
 quality: null
-title: Learning Record Usage Quota
+title: Memory Usage Quota
 version: 1.0.0
 author: wave1_builder_gen_v2
 tags:
 - usage_quota
 - builder
-- learning_record
+- memory
 tldr: Learned patterns and pitfalls for usage_quota construction
 domain: usage_quota construction
 created: '2026-04-14'

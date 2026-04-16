@@ -1,0 +1,27 @@
+kind: output_template
+id: bld_output_template_dataset_card
+pillar: P05
+llm_function: PRODUCE
+purpose: Template with vars for dataset_card production
+quality: null
+title: Output Template Dataset Card
+version: 1.0.0
+author: wave1_builder_gen
+tags:
+- dataset_card
+- builder
+- output_template
+tldr: Template with vars for dataset_card production
+domain: dataset_card construction
+created: '2026-04-13'
+updated: '2026-04-13'
+density_score: 0.85
+overview: '{{overview_summary}}'
+data_collection: '{{collection_methodology_and_sources}}'
+data_processing: '{{preprocessing_and_cleaning_steps}}'
+intended_use: '{{use_cases_and_applications}}'
+limitations_biases: '{{limitations_and_potential_biases}}'
+metadata:
+- 'Pillar: P01'
+- 'Template Type: dataset_card'
+- 'Naming Convention: p01_dc_{{name}}.md'

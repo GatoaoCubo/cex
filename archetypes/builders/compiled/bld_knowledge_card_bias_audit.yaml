@@ -24,12 +24,13 @@ domain: bias_audit construction
 created: '2026-04-13'
 updated: '2026-04-13'
 density_score: 0.93
-domain_overview: 'Bias audits evaluate whether AI systems produce systematically unfair outcomes across protected attributes
-  (race, gender, age, religion, disability, national origin, sexual orientation). The discipline spans three tiers: (1) statistical
-  disparity measurement (demographic parity, equalized odds), (2) benchmark evaluation (BBQ, WinoBias, StereoSet on standardized
-  test sets), and (3) regulatory compliance documentation (NYC LL144, Colorado SB 22-169). Audits are distinct from model
-  evaluations (overall accuracy) and from content filters (which categories are blocked). A bias audit asks: "For users in
-  group A vs group B, does the system treat them equitably?"'
+domain_overview: 'This ISO drives a bias audit: measuring fairness across demographic slices. Bias audits evaluate whether
+  AI systems produce systematically unfair outcomes across protected attributes (race, gender, age, religion, disability,
+  national origin, sexual orientation). The discipline spans three tiers: (1) statistical disparity measurement (demographic
+  parity, equalized odds), (2) benchmark evaluation (BBQ, WinoBias, StereoSet on standardized test sets), and (3) regulatory
+  compliance documentation (NYC LL144, Colorado SB 22-169). Audits are distinct from model evaluations (overall accuracy)
+  and from content filters (which categories are blocked). A bias audit asks: "For users in group A vs group B, does the system
+  treat them equitably?"'
 named_benchmarks: ''
 bbq_bias_benchmark_for_question_answering: 'Parrish et al., ACL 2022. 11 social categories, 58,492 examples.
 

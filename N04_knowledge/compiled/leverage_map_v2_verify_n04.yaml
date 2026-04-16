@@ -7,6 +7,7 @@ quality: null
 date: 2026-04-15
 mission: LEVERAGE_MAP_V2
 cycle: verify
+density_score: 1.0
 1_verification_reranker_tool: ''
 1_1_presence: '✅ CONFIRMED: `_tools/cex_reranker.py` exists (3287 bytes, 110 lines, executable) ✅ Committed: 26c92089a — "[N07]
   LEVERAGE_MAP_V2: 6 leverage tools + interactive 3x2 grid"'

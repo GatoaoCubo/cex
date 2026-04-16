@@ -16,7 +16,13 @@ domain: eval_metric construction
 created: '2026-04-14'
 updated: '2026-04-14'
 density_score: 0.85
-naming_convention: "Pattern: `p07_em_<metric_name>`  \nExamples:  \n- p07_em_accuracy  \n- p07_em_f1_score"
+naming_convention: 'Pattern: `p07_em_<metric_name>`
+
+  Examples:
+
+  - p07_em_accuracy
+
+  - p07_em_f1_score'
 paths: 'Artifacts: `/mnt/artifacts/p07/em/<metric_name>/` Checksum: `/mnt/checksums/p07/em/<metric_name>.sha256` Note: Use
   POSIX-compliant paths only'
 limits: 'max_bytes: 4096 max_turns: 100 effort_level: 3'

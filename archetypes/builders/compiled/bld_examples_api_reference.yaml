@@ -17,17 +17,50 @@ created: '2026-04-14'
 updated: '2026-04-14'
 density_score: 0.85
 golden_example: "---\ntitle: Stripe API Reference\ndescription: REST API for payment processing\nauth: API keys (https://stripe.com/docs/api/authentication)\n\
-  version: 2023-10-12\n---\n\n# Stripe API Reference\n\n## Customers\n\n### Create Customer\nMethod: POST  \nPath: /v1/customers\
-  \  \nParams:\n- `email` (required, string)\n- `name` (optional, string)\n- `payment_method` (optional, string)\n\nResponses:\n\
+  version: 2023-10-12\n---\n\n# Stripe API Reference\n\n## Customers\n\n### Create Customer\nMethod: POST\nPath: /v1/customers\n\
+  Params:\n- `email` (required, string)\n- `name` (optional, string)\n- `payment_method` (optional, string)\n\nResponses:\n\
   - 200: {\"id\": \"cus_123\", \"email\": \"user@example.com\"}\n- 400: {\"error\": \"Invalid email format\"}\n\nExample:\n\
   curl https://api.stripe.com/v1/customers \\\n  -u sk_test_123: \\\n  -d email=user@example.com\n\n## Repositories\n\n###\
-  \ List Repos\nMethod: GET  \nPath: /repos/{owner}/{repo}/branches  \nParams:\n- `owner` (required, string)\n- `repo` (required,\
+  \ List Repos\nMethod: GET\nPath: /repos/{owner}/{repo}/branches\nParams:\n- `owner` (required, string)\n- `repo` (required,\
   \ string)\n\nResponses:\n- 200: [{\"name\": \"main\", \"commit\": {\"sha\": \"abc123\"}}]\n- 404: {\"error\": \"Repository\
   \ not found\"}"
-anti_example_1_missing_authentication: "# GitHub API Reference\n\n## Repositories\n\n### List Repos\nMethod: GET  \nPath:\
-  \ /user/repos  \nParams:\n- `sort` (optional, string)\n\nResponses:\n- 200: [{\"name\": \"repo1\", \"owner\": \"user\"}]"
+anti_example_1_missing_authentication: '# GitHub API Reference
+
+
+  ## Repositories
+
+
+  ### List Repos
+
+  Method: GET
+
+  Path: /user/repos
+
+  Params:
+
+  - `sort` (optional, string)
+
+
+  Responses:
+
+  - 200: [{"name": "repo1", "owner": "user"}]'
 why_it_fails: Missing critical parameters like region, ACL settings, and encryption options. Developers can't fully configure
   bucket creation without essential details.
-anti_example_2_incomplete_parameters: "# AWS S3 API Reference\n\n## Create Bucket\n\nMethod: PUT  \nPath: /buckets/{bucketName}\
-  \  \nParams:\n- `bucketName` (required, string)\n\nResponses:\n- 200: {\"Location\": \"https://s3.amazonaws.com/bucketName\"\
-  }"
+anti_example_2_incomplete_parameters: '# AWS S3 API Reference
+
+
+  ## Create Bucket
+
+
+  Method: PUT
+
+  Path: /buckets/{bucketName}
+
+  Params:
+
+  - `bucketName` (required, string)
+
+
+  Responses:
+
+  - 200: {"Location": "https://s3.amazonaws.com/bucketName"}'

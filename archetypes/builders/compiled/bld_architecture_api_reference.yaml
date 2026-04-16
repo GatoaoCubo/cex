@@ -22,29 +22,29 @@ component_inventory: '| ISO Name              | Role                          | 
 
   | bld_manifest          | Core reference structure      | P06    | Active  |
 
-  | bld_instruction       | Content generation rules      | P06    | Active  |
+  | bld_instruction       | Content generation rules      | P03    | Active  |
 
-  | bld_system_prompt     | LLM guidance framework        | P06    | Active  |
+  | bld_system_prompt     | LLM guidance framework        | P03    | Active  |
 
   | bld_schema            | Data format validation        | P06    | Active  |
 
-  | bld_quality_gate      | Output verification           | P06    | Active  |
+  | bld_quality_gate      | Output verification           | P11    | Active  |
 
-  | bld_output_template   | Formatting standard           | P06    | Active  |
+  | bld_output_template   | Formatting standard           | P05    | Active  |
 
-  | bld_examples          | Sample implementation         | P06    | Active  |
+  | bld_examples          | Sample implementation         | P07    | Active  |
 
-  | bld_knowledge_card    | Contextual metadata           | P06    | Active  |
+  | bld_knowledge_card    | Contextual metadata           | P01    | Active  |
 
-  | bld_architecture      | Structural documentation      | P06    | Active  |
+  | bld_architecture      | Structural documentation      | P08    | Active  |
 
-  | bld_collaboration     | Team coordination             | P06    | Active  |
+  | bld_collaboration     | Team coordination             | P12    | Active  |
 
-  | bld_config            | Configuration management      | P06    | Active  |
+  | bld_config            | Configuration management      | P09    | Active  |
 
-  | bld_memory            | State retention              | P06    | Active  |
+  | bld_memory            | State retention               | P10    | Active  |
 
-  | bld_tools             | Utility functions             | P06    | Active  |'
+  | bld_tools             | Utility functions             | P04    | Active  |'
 dependencies: '| From          | To              | Type         |
 
   |---------------|-----------------|--------------|

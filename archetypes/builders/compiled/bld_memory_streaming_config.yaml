@@ -67,6 +67,7 @@ observation_types:
 - project
 - reference
 density_score: 0.9
+llm_function: INJECT
 summary: 'Streaming configuration failures fall into three categories: connection failures (stream silently dropped by proxy
   because no heartbeat), memory failures (server OOM because slow consumer has no backpressure), and UX failures (tokens arrive
   in bursts because flush interval is too large). Four required fields address all three systematically.'

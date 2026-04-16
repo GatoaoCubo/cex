@@ -62,10 +62,10 @@ recommended: '| Field | Type | Notes |
 
   | example_use_case | string | Sample application |'
 id_pattern: ^p11_roi_[a-z][a-z0-9_]+$
-body_structure: "1. Calculation Methodology  \n   Detailed description of ROI formula and logic\n\n2. Input Parameters  \n\
-  \   List of required variables with data types and ranges\n\n3. Output Metrics  \n   Definition of calculated values and\
-  \ their units\n\n4. Assumptions  \n   Conditions and limitations of the model\n\n5. Validation Procedures  \n   Steps for\
-  \ verifying accuracy and edge cases\n\n6. Example Use Case  \n   Practical scenario with sample input/output"
+body_structure: "1. Calculation Methodology\n   Detailed description of ROI formula and logic\n\n2. Input Parameters\n   List\
+  \ of required variables with data types and ranges\n\n3. Output Metrics\n   Definition of calculated values and their units\n\
+  \n4. Assumptions\n   Conditions and limitations of the model\n\n5. Validation Procedures\n   Steps for verifying accuracy\
+  \ and edge cases\n\n6. Example Use Case\n   Practical scenario with sample input/output"
 constraints:
 - ID must match exact regex pattern
 - All required fields must be present

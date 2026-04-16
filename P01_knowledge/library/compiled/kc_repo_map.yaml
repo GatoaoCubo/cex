@@ -1,0 +1,52 @@
+id: kc_repo_map
+kind: knowledge_card
+title: repo_map
+version: 1.0.0
+quality: null
+pillar: P01
+density_score: 0.99
+overview: repo_map is a structured approach to extract and visualize codebase context through systematic analysis of source
+  code, dependencies, and architectural patterns. It creates a navigable map of technical artifacts, enabling better understanding
+  and maintenance of complex systems.
+purpose:
+- Identify key components and their relationships
+- Visualize architectural patterns and data flows
+- Discover technical debt and improvement opportunities
+- Create documentation for onboarding new developers
+- Support refactoring decisions through dependency analysis
+extraction_strategy:
+- Code Parsing
+- Analyze file structures and naming conventions
+- Identify package/module hierarchies
+- Detect code duplication patterns
+- Dependency Mapping
+- Trace direct/indirect dependencies between modules
+- Visualize API usage patterns
+- Identify coupling/decoupling opportunities
+- Architecture Analysis
+- Map microservices, monoliths, or hybrid architectures
+- Identify data flow patterns (synchronous/asynchronous)
+- Detect anti-patterns like God Objects
+- Technical Debt Assessment
+- Quantify code complexity metrics (cyclomatic complexity, maintainability index)
+- Identify legacy code clusters
+- Flag potential security vulnerabilities
+- Documentation Generation
+- Auto-generate API reference docs
+- Create component diagrams and sequence diagrams
+- Maintain an up-to-date dependency graph
+use_cases:
+- Onboarding new developers to a large codebase
+- Pre-refactoring analysis to identify improvement areas
+- Documentation generation for technical specifications
+- Architecture review and optimization
+- Security audit through dependency analysis
+example_output: "[API Gateway]\n  └── User Service\n      ├── Auth Module (cyclomatic complexity: 22)\n      ├── Payment Processor\
+  \ (technical debt: 15%)\n      └── Session Manager\n          \n[Database]\n  ├── User DB (schema version: 3.2)\n  └── Transaction\
+  \ Log (retention period: 90 days)"
+tools:
+- Code metrics analyzers (SonarQube, CodeClimate)
+- Dependency graph tools (Dependabot, Argo)
+- Architecture visualization tools (PlantUML, Mermaid)
+- Static analysis tools (ESLint, Pylint)
+- Code mapping tools (CodeScene, CodeMaestro)

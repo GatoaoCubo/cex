@@ -16,35 +16,35 @@ domain: edtech_vertical construction
 created: '2026-04-14'
 updated: '2026-04-14'
 density_score: 0.85
-component_inventory: '| ISO Name             | Role                          | Pillar | Status  |
+component_inventory: '| ISO Name             | Role                                                   | Pillar | Status  |
 
-  |----------------------|-------------------------------|--------|---------|
+  |----------------------|--------------------------------------------------------|--------|---------|
 
-  | bld_manifest         | Core configuration            | P01    | Active  |
+  | bld_manifest         | Builder identity and routing metadata                  | P05    | Active  |
 
-  | bld_instruction      | Learning task definition      | P01    | Active  |
+  | bld_instruction      | 3-phase production process (Research/Compose/Validate) | P03    | Active  |
 
-  | bld_system_prompt    | AI behavior guidelines        | P01    | Active  |
+  | bld_system_prompt    | LLM persona: EdTech FERPA/LTI compliance builder       | P03    | Active  |
 
-  | bld_schema           | Data structure definitions    | P01    | Active  |
+  | bld_schema           | Edtech_vertical artifact data contract                 | P06    | Active  |
 
-  | bld_quality_gate     | Output validation rules       | P01    | Active  |
+  | bld_quality_gate     | HARD/SOFT validation (FERPA/COPPA/LTI 1.3 specificity) | P11    | Active  |
 
-  | bld_output_template  | Content formatting blueprint  | P01    | Active  |
+  | bld_output_template  | Artifact template with frontmatter + 6 sections        | P05    | Active  |
 
-  | bld_examples         | Sample learning materials     | P01    | Active  |
+  | bld_examples         | Golden and anti-examples for edtech artifacts          | P07    | Active  |
 
-  | bld_knowledge_card   | Concept encapsulation         | P01    | Active  |
+  | bld_knowledge_card   | FERPA/COPPA/LTI 1.3/1EdTech domain knowledge          | P01    | Active  |
 
-  | bld_architecture     | System blueprint              | P01    | Active  |
+  | bld_architecture     | System blueprint (this file)                           | P08    | Active  |
 
-  | bld_collaboration    | Multi-user interaction        | P01    | Active  |
+  | bld_collaboration    | Crew coordination: N01/N04/N06 hand-offs               | P12    | Active  |
 
-  | bld_config           | Runtime parameter store       | P01    | Active  |
+  | bld_config           | Naming conventions, paths, byte limits                 | P09    | Active  |
 
-  | bld_memory           | Session state management      | P01    | Active  |
+  | bld_memory           | Learned EdTech compliance patterns and pitfalls        | P10    | Active  |
 
-  | bld_tools            | Utility functions             | P01    | Active  |'
+  | bld_tools            | CEX production tools + EdTech external references      | P04    | Active  |'
 dependencies: '| From              | To                  | Type       |
 
   |-------------------|---------------------|------------|

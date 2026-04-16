@@ -1,0 +1,27 @@
+id: kc_oauth_app_config
+kind: knowledge_card
+title: OAuth 2.0 Application Configuration for Partner Integrations
+version: 1.0.0
+quality: null
+pillar: P01
+density_score: 1.0
+overview: This configuration defines the parameters required to register and manage OAuth 2.0 applications using PKCE (Proof
+  Key for Code Exchange) for secure partner integrations.
+core_parameters: "1. Scopes  \n   Define access permissions:  \n   - `openid` (user authentication)  \n   - `email` (user\
+  \ email access)  \n   - `profile` (user profile data)  \n   - `offline_access` (refresh token support)  \n\n2. Redirect\
+  \ URLs  \n   Must include:  \n   - `https://yourdomain.com/callback` (post-authorization endpoint)  \n   - `https://yourdomain.com/logout`\
+  \ (optional logout endpoint)  \n   Use HTTPS for secure communication.\n\n3. Token Lifetimes  \n   - Access Token: 1 hour\
+  \ (60 minutes)  \n   - Refresh Token: 7 days (168 hours)  \n   Tokens expire automatically unless refreshed.\n\n4. Refresh\
+  \ Policy  \n   - Automatic: Tokens are refreshed silently when nearing expiration  \n   - Manual: Users must explicitly\
+  \ request token renewal  \n   - None: Tokens expire without renewal (not recommended)"
+security_best_practices:
+- Always use HTTPS for redirect URLs
+- Store client secrets securely (never in client-side code)
+- Rotate secrets periodically
+- Monitor for suspicious activity in access logs
+example_configuration: "client_id: \"your-client-id\"\nclient_secret: \"your-client-secret\"\nredirect_uris:\n  - \"https://yourdomain.com/callback\"\
+  \nscopes:\n  - \"openid\"\n  - \"email\"\ntoken_endpoint_auth_method: \"client_secret_post\""
+troubleshooting:
+- 'Invalid Redirect URI: Ensure the URL matches exactly with registered endpoints'
+- 'Token Expired: Check clock synchronization between client and authorization server'
+- 'Scope Denied: Verify the requesting application has the required scopes granted'

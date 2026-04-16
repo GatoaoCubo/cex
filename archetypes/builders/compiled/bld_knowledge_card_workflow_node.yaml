@@ -5,59 +5,79 @@ llm_function: INJECT
 purpose: Domain knowledge for workflow_node production
 quality: null
 title: Knowledge Card Workflow Node
-version: 1.0.0
-author: wave1_builder_gen_v2
+version: 1.1.0
+author: n03_hybrid_review4
 tags:
 - workflow_node
 - builder
 - knowledge_card
-tldr: Domain knowledge for workflow_node production
+tldr: 'Workflow nodes are the atomic units of a DAG or state graph. Canonical references: LangGraph StateGraph, Prefect tasks,
+  Temporal activities, Dagster ops, Airflow operators.'
 domain: workflow_node construction
 created: '2026-04-14'
 updated: '2026-04-14'
-density_score: 0.85
-domain_overview: 'Workflow nodes are fundamental building blocks in systems that model processes as directed acyclic graphs
-  (DAGs). They encapsulate specific operations, data transformations, or control logic within larger workflows, enabling modularity
-  and reusability. Common applications include data pipeline orchestration (e.g., Apache Airflow), visual programming (e.g.,
-  KNIME), and business process management (BPMN). Nodes typically define inputs/outputs, execution semantics, and metadata
-  for integration with surrounding systems. The distinction between a workflow node and a full workflow is critical: nodes
-  are atomic, self-contained units, while workflows coordinate multiple nodes. This separation aligns with microservices principles,
-  allowing nodes to be developed, tested, and deployed independently. Standards like WfMC’s XPDL and BPMN 2.0 provide formal
-  definitions for node behavior and interoperability.'
-key_concepts: "| Concept             | Definition                                                                 | Source\
-  \                          |  \n|---------------------|----------------------------------------------------------------------------|---------------------------------|\
-  \  \n| Node Type           | Classification defining a node’s purpose (e.g., transform, decision).      | BPMN 2.0     \
-  \                   |  \n| Port                | Interface for data flow between nodes (input/output).                 \
-  \     | Apache Airflow Documentation    |  \n| Execution Context   | Runtime environment variables and dependencies for\
-  \ a node.                 | Workflow Management Coalition   |  \n| Data Schema         | Formal structure defining input/output\
-  \ data formats (e.g., JSON Schema).   | JSON Schema Specification       |  \n| Error Handling      | Mechanism for propagating\
-  \ and resolving failures within a node.            | WfMC Interoperability Standards |  \n| Serialization       | Method\
-  \ for converting node state to portable formats (e.g., XGBoost).      | Apache Flink Documentation      |  \n| Versioning\
-  \          | Tracking changes to node definitions over time (e.g., Docker image tags).  | Docker Best Practices        \
-  \   |  \n| Dependency Injection| Injection of external services or configurations into a node.              | Spring Framework\
-  \ Documentation  |  \n| State Persistence   | Saving transient node state for resuming execution (e.g., checkpointing).\
-  \  | Apache Flink Documentation      |  \n| Logging             | Structured recording of node activity for debugging and\
-  \ auditing.          | ELK Stack Documentation         |"
+density_score: 0.92
+domain_overview: 'A workflow_node is the atomic execution unit inside a directed workflow -- a DAG (Airflow, Prefect, Dagster),
+  a state graph (LangGraph), or a compensable activity graph (Temporal, AWS Step Functions). A node declares its inputs, outputs,
+  side effects, retry behavior, and its successors. The orchestrator owns scheduling, state persistence, and observability;
+  the node owns the atomic unit of work. In modern LLM agent systems, LangGraph made the state-graph model the de facto standard:
+  every node reads from and writes to a shared State object, and edges (including conditional edges) route control. Prior
+  art: Airflow operators, Prefect flows/tasks, Dagster ops/assets, Temporal activities, AWS Step Functions tasks. These systems
+  differ in state model (shared dict vs typed I/O), but share node primitives: typed in/out, retry_policy, timeout, conditional
+  routing.'
+key_concepts: '| Concept | Definition | Canonical Source |
+
+  |---------|-----------|------------------|
+
+  | Node | Atomic execution unit with typed inputs/outputs | LangGraph `StateGraph.add_node`, Airflow Operator |
+
+  | Edge | Transition from one node to the next | LangGraph `add_edge`, `add_conditional_edges` |
+
+  | State | Shared or passed-through data flowing through the graph | LangGraph State (TypedDict/Pydantic), Prefect Result
+  |
+
+  | Retry policy | Rules for re-invoking a failed node | Prefect `retries`+`retry_delay_seconds`, Temporal RetryPolicy |
+
+  | Timeout | Hard cap on node execution time | Airflow `execution_timeout`, Temporal schedule_to_close_timeout |
+
+  | Trigger rule | Predicate deciding if a node should run given upstream status | Airflow trigger_rule (all_success, one_failed,
+  ...) |
+
+  | Heartbeat | Long-running activity liveness signal | Temporal activity heartbeat |
+
+  | Compensation | Undo action for a failed saga | Temporal SAGA pattern, Step Functions catch/rollback |
+
+  | Cache key | Memoization key for deterministic nodes | Prefect cache_key_fn, Dagster @memoizable |
+
+  | Resource | Declared external dependency (DB conn, model client) | Dagster resource_defs, Airflow Connection |
+
+  | Fan-out / fan-in | Parallel node expansion + subsequent join | Dagster dynamic graphs, Airflow TaskGroup + dynamic task
+  mapping |
+
+  | Human-in-the-loop | Node awaiting human input | LangGraph interrupt, Step Functions Wait for task token |'
 industry_standards:
-- BPMN 2.0 (Business Process Model and Notation)
-- Apache Airflow (DAG and operator definitions)
-- WfMC XPDL (XML Process Definition Language)
-- JSON Schema (data validation for ports)
-- XGBoost (serialization for ML nodes)
-- Docker (versioning and containerization)
-- Spring Framework (dependency injection)
-- Apache Flink (state persistence)
-- ELK Stack (logging standards)
+- LangGraph (LangChain) -- dominant LLM agent state-graph framework
+- Prefect -- Python workflow engine (2.x flows/tasks model)
+- Temporal -- durable activity + workflow execution
+- Dagster -- asset-oriented data graph with typed I/O
+- Apache Airflow -- DAG + Operator + XCom
+- AWS Step Functions -- state machine (ASL JSON)
+- Google Cloud Workflows, Azure Durable Functions -- cloud-native equivalents
+- CNCF Argo Workflows -- Kubernetes-native DAG execution
 common_patterns:
-- Input/output port typing for strict data validation
-- Use of JSON Schema for defining port data formats
-- State checkpointing for fault tolerance
-- Error propagation via standardized exception hierarchies
-- Versioned node definitions with semantic versioning
-- Dependency injection for external service integration
+- Typed input/output contracts (Pydantic models or TypedDict) enforced at graph compile time
+- 'Explicit retry policy per node: max_attempts, backoff, retry_on_exception allow-list'
+- Conditional edges with named predicates over current state (LangGraph pattern)
+- Long-running activities use heartbeat + activity cancellation (Temporal pattern)
+- Compensation (undo) actions paired with forward actions for SAGA-style rollback
+- Human-in-the-loop interrupt nodes that pause the graph until resumed
+- Deterministic cache keys to memoize idempotent nodes and enable replay
 pitfalls:
-- Forgetting to validate input/output types, leading to runtime failures
-- Overlooking error handling, causing workflow interruptions
-- Poor versioning practices creating compatibility issues
-- Tight coupling between nodes and external systems
-- Inadequate logging making debugging and auditing difficult
+- Implicit state mutation -- nodes writing to shared state outside their declared state_update keys; breaks replay and causes
+  race conditions in parallel fan-outs
+- No retry_policy -- transient failures propagate as graph failures
+- Long-running sync calls without timeout_s or heartbeat -- hang the whole workflow
+- Missing compensation -- partial state leaks when a downstream node fails
+- Over-granular nodes (one per function call) explode the DAG; under-granular nodes hide retry boundaries
+- Routers without a catch-all / default edge leave state-space holes
+- Cross-node dependencies via global state instead of typed outputs break local reasoning

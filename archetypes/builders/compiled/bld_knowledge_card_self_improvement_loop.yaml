@@ -25,23 +25,38 @@ domain_overview: Self-improvement loops are critical in autonomous systems, enab
   agents, edge computing, and AI ethics frameworks, emphasizing safety, transparency, and scalability. Challenges include
   avoiding overfitting to narrow feedback signals, ensuring alignment with human values, and managing computational overhead
   during self-modification.
-key_concepts: "| Concept | Definition | Source |  \n|--------|------------|--------|  \n| Reinforcement Learning | Learning\
-  \ via reward signals to optimize long-term goals | Sutton & Barto (2018) |  \n| Meta-Learning | Learning to learn; improving\
-  \ learning algorithms across tasks | Finn et al. (2017) |  \n| Self-Optimizing Systems | Systems that autonomously adjust\
-  \ parameters for efficiency | ISO/IEC 23894:2021 |  \n| Online Learning | Continuous model updates using streaming data\
-  \ | Bottou (2010) |  \n| Adaptive Algorithms | Algorithms that modify behavior based on runtime feedback | Narendra & Annaswamy\
-  \ (1987) |  \n| Feedback Loops | Causal cycles linking system outputs to inputs for correction | Leveson (2012) |  \n| Goal\
-  \ Alignment | Ensuring self-improvement aligns with human intent | Amodei et al. (2016) |  \n| Safe Exploration | Strategies\
-  \ to avoid harmful actions during learning | Schulman et al. (2015) |  \n| Modular Self-Assessment | Decomposing self-evaluation\
-  \ into isolated components | Goertzel (2006) |  \n| Dynamic Prioritization | Adjusting improvement priorities based on system\
-  \ state | Zhang et al. (2020) |"
-industry_standards:
-- ISO/IEC 23894:2021 (AI Trustworthiness)
-- RFC 8611 (ML Metrics for Evaluation)
-- NeurIPS Workshops on Meta-Learning
-- IEEE P7000 Series (Ethical AI)
-- ML-Kits Framework (Google)
-- DARPA’s Lifelong Learning Machines (LLM) Program
+key_concepts: '| Concept | Definition | Source |
+
+  |--------|------------|--------|
+
+  | Reinforcement Learning | Learning via reward signals to optimize long-term goals | Sutton & Barto (2018) |
+
+  | Meta-Learning | Learning to learn; improving learning algorithms across tasks | Finn et al. (2017) |
+
+  | Self-Optimizing Systems | Systems that autonomously adjust parameters for efficiency | ISO/IEC 23894:2021 |
+
+  | Online Learning | Continuous model updates using streaming data | Bottou (2010) |
+
+  | Adaptive Algorithms | Algorithms that modify behavior based on runtime feedback | Narendra & Annaswamy (1987) |
+
+  | Feedback Loops | Causal cycles linking system outputs to inputs for correction | Leveson (2012) |
+
+  | Goal Alignment | Ensuring self-improvement aligns with human intent | Amodei et al. (2016) |
+
+  | Safe Exploration | Strategies to avoid harmful actions during learning | Schulman et al. (2015) |
+
+  | Modular Self-Assessment | Decomposing self-evaluation into isolated components | Goertzel (2006) |
+
+  | Dynamic Prioritization | Adjusting improvement priorities based on system state | Zhang et al. (2020) |'
+industry_standards_and_key_papers:
+- ISO/IEC 23894:2021 (AI Risk Management -- Guidance on AI Trustworthiness)
+- IEEE P7000 Series (Ethical AI system design standards)
+- 'STaR: Bootstrapping Reasoning with Reasoning (Zelikman et al., NeurIPS 2022)'
+- 'DSPy: Compiling Declarative LM Calls into Self-Improving Pipelines (Khattab et al., 2023)'
+- 'Self-Refine: Iterative Refinement with Self-Feedback (Madaan et al., NeurIPS 2023)'
+- 'Constitutional AI: Harmlessness from AI Feedback (Bai et al., Anthropic 2022)'
+- 'AlphaCode 2 (DeepMind, 2023): Self-improvement via competitive programming feedback loops'
+- 'DARPA Lifelong Learning Machines (L2M) Program: Continual learning without catastrophic forgetting'
 common_patterns:
 - Continuous Evaluation Loop – Periodic performance checks against benchmarks.
 - Adaptive Feedback Mechanisms – Dynamic adjustment of feedback sources and weights.

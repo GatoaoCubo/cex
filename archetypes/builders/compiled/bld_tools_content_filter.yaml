@@ -16,14 +16,32 @@ domain: content_filter construction
 created: '2026-04-13'
 updated: '2026-04-13'
 density_score: 0.85
-production_tools: "| Tool | Purpose | When |  \n|------|---------|------|  \n| cex_compile.py | Compiles content into standardized\
-  \ format | Pre-processing |  \n| cex_score.py | Assigns risk scores based on policy rules | Filtering |  \n| cex_retriever.py\
-  \ | Fetches external data for context checks | Validation |  \n| cex_doctor.py | Diagnoses content for harmful patterns\
-  \ | Post-processing |  \n| cex_analyzer.py | Parses metadata and language features | Initial screening |  \n| cex_optimizer.py\
-  \ | Refines filters for accuracy and efficiency | Deployment |"
-validation_tools: "| Tool | Purpose | When |  \n|------|---------|------|  \n| val_check.py | Verifies filter compliance with\
-  \ policies | Testing |  \n| val_compare.py | Cross-checks outputs against golden standards | QA |  \n| val_audit.py | Logs\
-  \ and reviews filter decisions | Auditing |"
+production_tools: 'This ISO defines a content filter -- the moderation rules that gate output or input.
+
+  | Tool | Purpose | When |
+
+  |------|---------|------|
+
+  | cex_compile.py | Compiles content into standardized format | Pre-processing |
+
+  | cex_score.py | Assigns risk scores based on policy rules | Filtering |
+
+  | cex_retriever.py | Fetches external data for context checks | Validation |
+
+  | cex_doctor.py | Diagnoses content for harmful patterns | Post-processing |
+
+  | cex_analyzer.py | Parses metadata and language features | Initial screening |
+
+  | cex_optimizer.py | Refines filters for accuracy and efficiency | Deployment |'
+validation_tools: '| Tool | Purpose | When |
+
+  |------|---------|------|
+
+  | val_check.py | Verifies filter compliance with policies | Testing |
+
+  | val_compare.py | Cross-checks outputs against golden standards | QA |
+
+  | val_audit.py | Logs and reviews filter decisions | Auditing |'
 external_classification_apis_real_production_grade: '| Tool | Provider | Use Case | Cost |
 
   |------|----------|----------|------|

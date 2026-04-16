@@ -2,32 +2,55 @@ kind: tools
 id: bld_tools_workflow_node
 pillar: P04
 llm_function: CALL
-purpose: Tools available for workflow_node production
+purpose: Real tools used during workflow_node production
 quality: null
 title: Tools Workflow Node
-version: 1.0.0
-author: wave1_builder_gen_v2
+version: 1.1.0
+author: n03_hybrid_review4
 tags:
 - workflow_node
 - builder
 - tools
-tldr: Tools available for workflow_node production
+tldr: Real CEX pipeline tools + real external frameworks used to author and validate workflow_node artifacts.
 domain: workflow_node construction
 created: '2026-04-14'
 updated: '2026-04-14'
-density_score: 0.85
-production_tools: "| Tool              | Purpose                     | When                          |  \n|-------------------|-----------------------------|-------------------------------|\
-  \  \n| cex_compile.py    | Compiles workflow nodes     | During node construction      |  \n| cex_score.py      | Evaluates\
-  \ node performance  | Post-execution validation     |  \n| cex_retriever.py  | Fetches external data       | When external\
-  \ inputs required |  \n| cex_doctor.py     | Debugs node errors          | During troubleshooting        |  \n| cex_executor.py\
-  \   | Runs compiled workflows     | Deployment phase              |  \n| cex_optimizer.py  | Optimizes node parameters \
-  \  | Performance tuning            |"
-validation_tools: "| Tool                  | Purpose                        | When                          |  \n|-----------------------|--------------------------------|-------------------------------|\
-  \  \n| val_integrity_check.py| Verifies data consistency      | Pre-deployment validation     |  \n| val_compatibility_test.py\
-  \ | Ensures node interoperability | Integration testing           |  \n| val_performance_monitor.py | Tracks resource usage\
-  \        | Runtime monitoring            |  \n| val_security_audit.py | Scans for vulnerabilities      | Security review\
-  \ phase         |"
-external_references:
-- Apache Airflow (workflow orchestration)
-- LangChain (LLM integration)
-- Great Expectations (data validation)
+density_score: 0.9
+production_tools_cex_pipeline_real_on_disk: '| Tool | Purpose | When |
+
+  |------|---------|------|
+
+  | _tools/cex_compile.py | Compile .md artifact to .yaml | After writing ISO, before commit |
+
+  | _tools/cex_doctor.py | Health check (builder completeness, schema drift) | Before dispatch |
+
+  | _tools/cex_score.py | Rubric + semantic scoring | After draft, before publish |
+
+  | _tools/cex_retriever.py | TF-IDF similarity over existing artifacts | During F3 INJECT (find examples) |
+
+  | _tools/cex_hooks.py | Pre-commit validation + ASCII check | git add hook |
+
+  | _tools/cex_wave_validator.py | Validate 13-ISO builder integrity | After builder generation |
+
+  | _tools/signal_writer.py (write_signal) | Nucleus completion signal | End of F8 COLLABORATE |'
+domain_tools_external_installable_real_projects: '| Tool | Purpose | When |
+
+  |------|---------|------|
+
+  | langgraph (pip) | Reference StateGraph node/edge patterns for LLM agent workflows | Drafting node_type + state_schema
+  |
+
+  | prefect (pip) | Task decorator semantics (retries, timeout, cache_key_fn) | Designing retry_policy |
+
+  | temporalio (pip) | Activity and workflow primitives (heartbeat, compensation) | Long-running node patterns |
+
+  | dagster (pip) | Op/asset graph with typed ins/outs and config_schema | Designing typed I/O contracts |
+
+  | apache-airflow (pip) | Operator + trigger_rule + XCom patterns | Cross-task state handoff |'
+mcp_filesystem_tools: '| Tool | Purpose |
+
+  |------|---------|
+
+  | Read, Write, Edit, Glob, Grep | Filesystem tools for loading ISOs and emitting artifacts |
+
+  | brain_query (MCP) | Semantic search across CEX knowledge base |'

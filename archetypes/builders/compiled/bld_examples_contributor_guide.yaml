@@ -16,12 +16,12 @@ domain: contributor_guide construction
 created: '2026-04-14'
 updated: '2026-04-14'
 density_score: 0.85
-golden_example: "---\nContributing to Kubernetes\n\nDeveloper Setup  \n1. Install Go 1.20+  \n2. Clone repo: `git clone https://github.com/kubernetes/kubernetes.git`\
-  \  \n3. Run: `make generate && make test`  \n\nPR Flow  \n1. Fork repo on GitHub  \n2. Create branch: `git checkout -b feature/your-fix`\
-  \  \n3. Commit with Conventional Commits  \n4. Submit PR to `main` with title prefix: `kind/`  \n\nCoding Standards  \n\
-  - Use GoFmt and golint  \n- 100% test coverage required  \n- No unreviewed dependencies  \n\nReview Process  \n- Requires\
-  \ 2 LGTMs from maintainers  \n- Code owners must approve  \n- Merge via GitHub squash  \n\nCLA  \nAll contributors must\
-  \ sign Apache 2.0 CLA"
+golden_example: "Contributing to Kubernetes\nDeveloper Setup  \n1. Install Go 1.20+  \n2. Clone repo: `git clone https://github.com/kubernetes/kubernetes.git`\
+  \  \n3. Run: `make generate && make test`  \nPR Flow  \n1. Fork repo on GitHub  \n2. Create branch: `git checkout -b feature/your-fix`\
+  \  \n3. Commit with Conventional Commits  \n4. Submit PR to `main` with title prefix: `kind/`  \nCoding Standards  \n- Use\
+  \ GoFmt and golint  \n- 100% test coverage required  \n- No unreviewed dependencies  \n\nReview Process  \n- Requires 2\
+  \ LGTMs from maintainers  \n- Code owners must approve  \n- Merge via GitHub squash  \n\nCLA  \nAll contributors must sign\
+  \ Apache 2.0 CLA"
 anti_example_1_missing_cla_section: Contributing to ExampleProject Developer Setup Install Node.js and run `npm install`.
   PR Flow Submit PRs to `develop` branch. Coding Standards Use ESLint and write tests. Review Process Maintainers will review
   within 7 days. Why it fails No CLA requirement specified. Contributors may submit code without legal agreement, risking

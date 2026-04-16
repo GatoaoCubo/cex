@@ -1,0 +1,15 @@
+id: kc_app_directory_entry
+kind: knowledge_card
+title: App Directory Entry Guide
+version: 1.0.0
+quality: null
+pillar: P01
+density_score: 0.76
+tagline: A concise description of the app's purpose and key features.
+screenshots: Include 3-5 screenshots showing the app in action, highlighting key features and user interface elements.
+install_steps:
+- Visit the official website or app store.
+- Download the installer or APK file.
+- Follow the on-screen instructions to complete the installation.
+- Launch the app and configure settings as needed.
+demo_link: Demo App

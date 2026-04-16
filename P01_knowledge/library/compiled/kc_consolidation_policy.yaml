@@ -1,0 +1,16 @@
+id: kc_consolidation_policy
+kind: knowledge_card
+title: Consolidation Policy
+version: 1.0.0
+quality: null
+pillar: P01
+density_score: 0.95
+consolidation_guidelines:
+- Consolidate redundant data weekly
+- 'Prioritize consolidation of:'
+- Duplicate entries
+- Obsolete formats
+- Low-value metadata
+- Maintain 30-day audit trail for all deletions
+- Use the `/consolidate` command for manual reviews
+- Automatic consolidation runs nightly with 15% buffer

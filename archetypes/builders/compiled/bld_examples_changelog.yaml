@@ -5,27 +5,79 @@ llm_function: GOVERN
 purpose: Golden and anti-examples of changelog artifacts
 quality: null
 title: Examples Changelog
-version: 1.0.0
+version: 1.1.0
 author: wave1_builder_gen_v2
 tags:
 - changelog
 - builder
 - examples
-tldr: Golden and anti-examples of changelog artifacts
+tldr: Golden and anti-examples of changelog artifacts -- Keep a Changelog format, SemVer 2.0
 domain: changelog construction
 created: '2026-04-14'
 updated: '2026-04-14'
 density_score: 0.85
-golden_example: 'Version: v2.7.1 Date: 2023-11-15'
-features:
-- Improved performance.
-- Added new functionality.
-fixes:
-- Fixed some bugs.
-breaking_changes:
-- Some APIs changed.
-anti_example_1_missing_semver_and_categorization: "Version: 2.7.1  \nDate: 2023-11-15  \n- Added real-time collaboration in\
-  \ Notion.  \n- Fixed PostgreSQL transaction issues.  \n- Removed old Stripe endpoints."
-why_it_fails: Descriptions are too generic ("improved performance" vs "GraphQL query optimization"). No specific tools/vendors
-  named, and no actionable details for users to migrate or adopt changes.
-anti_example_2_overly_vague_descriptions: 'Version: v2.7.1 Date: 2023-11-15'
+golden_example_keep_a_changelog_format: '---
+
+  id: p01_ch_myapp_2_7_1.md
+
+  kind: changelog
+
+  pillar: P01
+
+  title: "MyApp Changelog"
+
+  version: "2.7.1"
+
+  release_date: "2024-01-15"
+
+  author: "jsmith"
+
+  domain: "saas-platform"
+
+  quality: null
+
+  tags: [security, fix]
+
+  tldr: "Patch: fix race condition in auth, patch TLS requirement for Docker clients"
+
+  ---'
+'2_7_1_2024_01_15': ''
+fixed:
+- 'Fix race condition in PostgreSQL 15.2 transaction handling under high load (fixes #4521)'
+- 'Fix incorrect token expiration logic in Auth0 SDK v2.1 integration (fixes #4489)'
+security: '- Patch TLS requirement: Docker 24.0 now enforces TLS 1.3; older clients receive SSL_ERROR (CVE-2023-44487, affects
+  < 2.7.1)
+
+
+  ---'
+'2_7_0_2024_01_10': ''
+added:
+- 'Add real-time collaboration support via Notion API v3 (PR #4401)'
+- Add GraphQL query optimization in Hasura for improved data fetch latency
+changed:
+- Change authentication token refresh interval from 60m to 30m for security hardening
+deprecated:
+- Deprecate v1 REST endpoints -- removal scheduled for 3.0.0
+removed:
+- 'BREAKING: Remove deprecated `/api/v1/` endpoints -- migrate to `/api/v2/` per migration guide'
+anti_example_1_missing_keep_a_changelog_sections_and_vague_entries: 'Version: v2.7.1
+
+  Date: 2024-01-15
+
+  - Added real-time collaboration in Notion.
+
+  - Fixed PostgreSQL transaction issues.
+
+  - Removed old Stripe endpoints.
+
+
+  Why it fails: Uses informal section-free list. No Added/Changed/Fixed/Security structure. Entries vague ("transaction issues"
+  vs the specific race condition). No issue IDs. No CVE for the security patch.'
+anti_example_2_wrong_version_bump_no_migration_for_major: 'Version: 2.8.0'
+features: '- Removed legacy /api/v1/ endpoints.
+
+  - Added new auth system.
+
+
+  Why it fails: Removing endpoints is a BREAKING change requiring MAJOR bump (3.0.0 not 2.8.0). Section is called "Features"
+  not "Removed" (KAC standard). No Migration section for the breaking removal. Version uses 2-part not SemVer 3-part format.'

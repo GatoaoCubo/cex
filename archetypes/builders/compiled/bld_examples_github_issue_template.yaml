@@ -16,18 +16,117 @@ domain: github_issue_template construction
 created: '2026-04-14'
 updated: '2026-04-14'
 density_score: 0.85
-golden_example: "---\ntitle: \"Bug Report: Jenkins fails to deploy to PostgreSQL on Ubuntu 22.04\"\nlabels: bug, jenkins,\
-  \ postgresql\n---\nTitle:  \nBrief summary of the issue (e.g., \"Jenkins fails to deploy to PostgreSQL on Ubuntu 22.04\"\
-  )\n\nSteps to reproduce:  \n1. Install Jenkins 2.346 on Ubuntu 22.04  \n2. Configure PostgreSQL 14 as deployment target\
-  \  \n3. Trigger pipeline with `git commit`  \n\nExpected behavior:  \nSuccessful deployment with no errors in Jenkins logs\
-  \  \n\nActual behavior:  \nPipeline fails at \"Deploy to PostgreSQL\" stage with error: `Connection refused`  \n\nEnvironment:\
-  \  \n- Jenkins: 2.346  \n- PostgreSQL: 14.2  \n- OS: Ubuntu 22.04 LTS  \n- Docker: 24.0.5  \n\nAdditional context:  \n-\
-  \ Error occurs only when using `pg_dump` with `--inserts` flag  \n- No firewall rules blocking port 5432  "
-anti_example_1_missing_required_fields: "---\ntitle: \"Bug Report\"\nlabels: bug\n---\nTitle:  \nJenkins not working  \n\n\
-  Steps to reproduce:  \n1. Use Jenkins  \n2. Try to deploy  \n\nExpected behavior:  \nIt should work  \n\nActual behavior:\
-  \  \nIt doesn't work  \n\nEnvironment:  \n- Jenkins: 2.346  "
+golden_example: '---
+
+  title: "Bug Report: Jenkins fails to deploy to PostgreSQL on Ubuntu 22.04"
+
+  labels: bug, jenkins, postgresql
+
+  ---
+
+  Title:
+
+  Brief summary of the issue (e.g., "Jenkins fails to deploy to PostgreSQL on Ubuntu 22.04")
+
+
+  Steps to reproduce:
+
+  1. Install Jenkins 2.346 on Ubuntu 22.04
+
+  2. Configure PostgreSQL 14 as deployment target
+
+  3. Trigger pipeline with `git commit`
+
+
+  Expected behavior:
+
+  Successful deployment with no errors in Jenkins logs
+
+
+  Actual behavior:
+
+  Pipeline fails at "Deploy to PostgreSQL" stage with error: `Connection refused`
+
+
+  Environment:
+
+  - Jenkins: 2.346
+
+  - PostgreSQL: 14.2
+
+  - OS: Ubuntu 22.04 LTS
+
+  - Docker: 24.0.5
+
+
+  Additional context:
+
+  - Error occurs only when using `pg_dump` with `--inserts` flag
+
+  - No firewall rules blocking port 5432'
+anti_example_1_missing_required_fields: '---
+
+  title: "Bug Report"
+
+  labels: bug
+
+  ---
+
+  Title:
+
+  Jenkins not working
+
+
+  Steps to reproduce:
+
+  1. Use Jenkins
+
+  2. Try to deploy
+
+
+  Expected behavior:
+
+  It should work
+
+
+  Actual behavior:
+
+  It doesn''t work
+
+
+  Environment:
+
+  - Jenkins: 2.346'
 why_it_fails_explanation: Uses ambiguous language ("something cool", "nothing happens"). Optional fields like "Additional
   context" are missing. No clear structure for feature requests. Lacks required fields for reproducibility.
-anti_example_2_vague_optional_fields: "---\ntitle: \"Feature Request\"\nlabels: feature\n---\nTitle:  \nAdd something cool\
-  \  \n\nSteps to reproduce:  \nNot applicable  \n\nExpected behavior:  \nSomething happens  \n\nActual behavior:  \nNothing\
-  \ happens  \n\nEnvironment:  \n- Maybe Linux?  "
+anti_example_2_vague_optional_fields: '---
+
+  title: "Feature Request"
+
+  labels: feature
+
+  ---
+
+  Title:
+
+  Add something cool
+
+
+  Steps to reproduce:
+
+  Not applicable
+
+
+  Expected behavior:
+
+  Something happens
+
+
+  Actual behavior:
+
+  Nothing happens
+
+
+  Environment:
+
+  - Maybe Linux?'

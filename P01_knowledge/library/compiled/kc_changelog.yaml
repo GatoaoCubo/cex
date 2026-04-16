@@ -1,0 +1,41 @@
+id: kc_changelog
+kind: knowledge_card
+title: Changelog Entry
+version: 1.0.0
+quality: null
+pillar: P01
+density_score: 1.0
+semantic_versioning: 'Use `MAJOR.MINOR.PATCH` format:
+
+  - MAJOR: Breaking changes (e.g., 2.0.0)
+
+  - MINOR: New features (e.g., 1.1.0)
+
+  - PATCH: Bug fixes (e.g., 1.0.1)'
+entry_structure: '## [1.2.0] - 2023-10-15
+
+  ### Features
+
+  - Added dark mode support
+
+  - Improved search algorithm
+
+
+  ### Fixes
+
+  - Fixed login timeout issue
+
+  - Resolved CSS layout bug
+
+
+  ### Breaking Changes
+
+  - Removed deprecated API endpoints
+
+  - Changed configuration format to JSON'
+best_practices:
+- Use clear, concise language
+- Include release dates
+- Highlight security updates
+- Mention compatibility requirements
+- Keep entries ordered by date

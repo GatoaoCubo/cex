@@ -1,0 +1,47 @@
+kind: instruction
+id: bld_instruction_model_architecture
+pillar: P03
+llm_function: REASON
+purpose: Step-by-step production process for model_architecture
+quality: null
+title: Instruction Model Architecture
+version: 1.0.0
+author: wave1_builder_gen
+tags:
+- model_architecture
+- builder
+- instruction
+tldr: Step-by-step production process for model_architecture
+domain: model_architecture construction
+created: '2026-04-13'
+updated: '2026-04-13'
+density_score: 0.85
+phase_1_research:
+- 'Identify architecture type: transformer, cnn, rnn, mlp, diffusion, graph, or hybrid'
+- 'Define input/output modality: text, image, audio, video, multimodal, tabular'
+- 'Specify scale: parameter count (e.g., 7B, 340M), depth (layers), width (hidden dim)'
+- 'Map layer structure: encoder, decoder, encoder-decoder, causal, bidirectional'
+- 'Define connectivity: sequential, residual/skip connections, attention heads, pooling'
+- 'Determine compute profile: FLOPs per forward pass, memory footprint, inference latency'
+- Check existing model_architecture artifacts via retriever -- avoid duplicating same family
+phase_2_compose:
+- Read bld_schema_model_architecture.md -- source of truth for all required fields
+- 'Fill required frontmatter: id, kind, pillar, title, architecture_type, parameter_count, quality: null'
+- 'Write Overview: design goals, novelty vs prior work, target use cases'
+- 'Write Layer Structure: ordered table with layer type, count, hidden dim, activation'
+- 'Write Connectivity Pattern: attention patterns, residual connections, pooling strategy'
+- 'Write Parameter Profile: total params, breakdown by component (embedding, attention, FFN)'
+- 'Write Compute Profile: inference FLOPs, peak memory, throughput (tokens/s)'
+- 'Write Training Considerations: init strategy, optimizer recommendation, LR schedule'
+- Confirm body <= 4096 bytes
+phase_3_validate:
+- Confirm frontmatter parses without errors
+- Confirm `id` matches `^p02_ma_[a-z][a-z0-9_]+$`
+- Confirm `architecture_type` from allowed enum
+- Confirm `parameter_count` is explicit (not null or TBD)
+- Confirm Layer Structure table has at least 3 rows
+- Confirm Parameter Profile includes total count
+- Confirm no credentials, proprietary weights, or API keys appear
+- Confirm `quality` is null
+- 'Cross-check: structure spec -> model_architecture; training job -> finetune_config; deployed model docs -> model_card'
+- 'If score < 8.0: revise before outputting'

@@ -35,7 +35,7 @@ phase_2_compose:
 - 'Estimate token cost per scenario run: num_instances * (prompt_tokens + completion_tokens).'
 - Proofread for schema compliance and HELM naming conventions.
 phase_3_validate:
-- '[ ] scenario_id follows pattern p07_evs_{{subject}}_{{capability}}.md'
+- '[ ] scenario_id follows pattern `p07_evs_[subject]_[capability].md`'
 - '[ ] subject_area maps to recognized HELM taxonomy (or IBM extension)'
 - '[ ] capability is specific and testable, not a vague category'
 - '[ ] task_instance format is consistent (all MCQ, all open-ended, not mixed)'

@@ -25,9 +25,6 @@ template_usage: 'Copy the block below. Replace all `{{placeholder}}` tokens with
 
   ---
 
-
-  ---
-
   kind: webinar_script
 
   id: p03_ws_{{name}}
@@ -66,38 +63,27 @@ template_usage: 'Copy the block below. Replace all `{{placeholder}}` tokens with
 
   ---
 
-
   # {{webinar_title}}
-
 
   Platform: {{platform}} | Duration: {{duration_minutes}} min | Audience: {{target_audience}}
 
-
   ---
-
 
   ## [0:00] HOOK / OPENING (60 sec)
 
-
   [SLIDE 1: Title Slide]
-
 
   Speaker: "{{opening_hook}} -- by the end of this session, you will know {{key_outcome_1}},
 
   {{key_outcome_2}}, and {{key_outcome_3}}. Let''s get into it."
 
-
   [SPEAKER NOTE: High energy. Do not read from notes. Make eye contact with camera. Pause after stating outcomes.]
-
 
   ---
 
-
   ## [1:00] AGENDA PREVIEW (2 min)
 
-
   [SLIDE 2: Agenda]
-
 
   Speaker: "Here is exactly what we will cover today: {{agenda_item_1}}, {{agenda_item_2}},
 
@@ -107,130 +93,93 @@ template_usage: 'Copy the block below. Replace all `{{placeholder}}` tokens with
 
   in the chat any time and our moderator will queue them up."
 
-
   [SPEAKER NOTE: Keep this brisk. Two minutes maximum. Audience is still deciding whether to stay.]
-
 
   ---
 
-
   ## [3:00] SEGMENT 1: {{segment_1_title}} ({{seg1_minutes}} min)
 
-
   [SLIDE 3: {{segment_1_slide_title}}]
-
 
   Speaker: "{{segment_1_problem_statement}} Most {{target_audience}} we talk to tell us
 
   {{pain_point_quote}}. Here is what the data shows: {{key_stat_1}}."
 
-
   [SLIDE 4: {{segment_1_evidence_slide}}]
-
 
   Speaker: "{{segment_1_solution_statement}} The key insight is {{insight}}. Let me give
 
   you a concrete example: {{example_story}}."
 
-
   [SPEAKER NOTE: {{seg1_speaker_note}}. Target: {{seg1_minutes}} minutes. Watch the clock.]
 
-
   ---
-
 
   ## [{{seg2_start}}:00] SEGMENT 2: {{segment_2_title}} ({{seg2_minutes}} min)
 
-
   [SLIDE {{slide_num_seg2}}: {{segment_2_slide_title}}]
-
 
   Speaker: "{{segment_2_content}}"
 
-
   [SPEAKER NOTE: {{seg2_speaker_note}}]
-
 
   ---
 
-
   ## [{{demo_start}}:00] DEMO: {{demo_title}} ({{demo_minutes}} min)
 
-
   [SLIDE {{slide_num_demo}}: Live Demo]
-
 
   Speaker: "Now let me show you exactly how this works in practice. I am going to walk
 
   you through {{demo_scenario}} step by step."
 
-
   [SCREEN: Navigate to {{demo_url}} or open {{demo_app}}]
-
 
   Speaker: "Step 1 -- {{demo_step_1}}."
 
-
   [SCREEN: {{demo_step_1_action}}]
-
 
   Speaker: "Step 2 -- {{demo_step_2}}."
 
-
   [SCREEN: {{demo_step_2_action}}]
 
-
   Speaker: "Step 3 -- {{demo_step_3}}. And that is it. What you just saw was {{demo_outcome_summary}}."
-
 
   [SPEAKER NOTE: If live demo fails, say "Let me pull up the recording" and switch to {{recording_url}}. Do not apologize
   -- just keep moving.]
 
-
   ---
-
 
   ## [{{qa_start}}:00] Q&A FACILITATION (10 min)
 
-
   [SLIDE {{slide_num_qa}}: Q&A]
-
 
   Moderator: "We are opening Q&A now. {{presenter_name}}, I have a few questions from the chat.
 
   First question from the audience --"
 
-
   Seed Question 1: "{{seed_question_1}}"
 
   Suggested answer direction: {{seed_answer_direction_1}}
-
 
   Seed Question 2: "{{seed_question_2}}"
 
   Suggested answer direction: {{seed_answer_direction_2}}
 
-
   Seed Question 3: "{{seed_question_3}}"
 
   Suggested answer direction: {{seed_answer_direction_3}}
 
-
   Moderator (time close): "We have time for one more question. After this we will wrap up."
-
 
   [SPEAKER NOTE: If no audience questions in first 60 seconds, moderator reads Seed Question 1 immediately. Do not wait for
   the audience to break the silence.]
 
-
   ---
-
 
   ## [{{cta_start}}:00] CTA CLOSE (2 min)
 
-
   [SLIDE {{slide_num_cta}}: {{cta_slide_title}}]
-
 
   Speaker: "Before we close, here is what I want you to do right now. {{cta_action_sentence}}.
 
@@ -238,19 +187,13 @@ template_usage: 'Copy the block below. Replace all `{{placeholder}}` tokens with
 
   along with the recording."
 
-
   Speaker: "{{closing_value_restatement}} -- that is why {{cta_benefit_statement}}."
-
 
   Speaker: "Thank you for joining {{webinar_title}} today. I appreciate your time and attention.
 
   See you next session."
 
-
-  [SPEAKER NOTE: Smile. Pause after stating the URL. Repeat it once. End on high energy.]
-
-
-  ---'
+  [SPEAKER NOTE: Smile. Pause after stating the URL. Repeat it once. End on high energy.]'
 placeholder_reference: '| Placeholder | Type | Notes |
 
   |------------|------|-------|

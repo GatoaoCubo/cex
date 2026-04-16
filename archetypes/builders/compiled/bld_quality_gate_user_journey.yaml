@@ -16,20 +16,53 @@ domain: user_journey construction
 created: '2026-04-14'
 updated: '2026-04-14'
 density_score: 0.85
-definition: "(Table: metric, threshold, operator, scope)  \n| metric | threshold | operator | scope |  \n|---|---|---|---|\
-  \  \n| User journey map completeness | 100% | >= | Awareness to conversion |"
-hard_gates: "(Table: ID | Check | Fail Condition)  \n| ID | Check | Fail Condition |  \n|---|---|---|  \n| H01 | YAML frontmatter\
-  \ valid | Invalid or missing YAML |  \n| H02 | ID matches pattern ^p05_uj_[a-z][a-z0-9_]+.md$ | ID format mismatch |  \n\
-  | H03 | kind field matches 'user_journey' | Kind field incorrect |  \n| H04 | Journey map includes all 5 stages (awareness,\
-  \ interest, decision, purchase, retention) | Missing stage |  \n| H05 | User personas defined and aligned with journey |\
-  \ No personas or misalignment |  \n| H06 | Touchpoints mapped with >90% coverage | <90% coverage |  \n| H07 | Conversion\
-  \ rate benchmarks included | No benchmarks |"
-soft_scoring: "(Table: Dim | Dimension | Weight | Scoring Guide)  \n| Dim | Dimension | Weight | Scoring Guide |  \n|---|---|---|---|\
-  \  \n| D01 | Journey completeness | 0.15 | 1.0 (complete) to 0.0 (incomplete) |  \n| D02 | Persona alignment | 0.15 | 1.0\
-  \ (aligned) to 0.0 (misaligned) |  \n| D03 | Touchpoint coverage | 0.15 | 1.0 (90%+) to 0.0 (<50%) |  \n| D04 | Conversion\
-  \ benchmarks | 0.15 | 1.0 (realistic) to 0.0 (invalid) |  \n| D05 | Consistency across channels | 0.10 | 1.0 (consistent)\
-  \ to 0.0 (inconsistent) |  \n| D06 | Feedback integration | 0.10 | 1.0 (included) to 0.0 (missing) |  \n| D07 | Visual clarity\
-  \ | 0.10 | 1.0 (clear) to 0.0 (unclear) |  \n| D08 | Stakeholder alignment | 0.10 | 1.0 (aligned) to 0.0 (disaligned) |"
+definition: '(Table: metric, threshold, operator, scope)
+
+  | metric | threshold | operator | scope |
+
+  |---|---|---|---|
+
+  | User journey map completeness | 100% | >= | Awareness to conversion |'
+hard_gates: '(Table: ID | Check | Fail Condition)
+
+  | ID | Check | Fail Condition |
+
+  |---|---|---|
+
+  | H01 | YAML frontmatter valid | Invalid or missing YAML |
+
+  | H02 | ID matches pattern ^p05_uj_[a-z][a-z0-9_]+.md$ | ID format mismatch |
+
+  | H03 | kind field matches ''user_journey'' | Kind field incorrect |
+
+  | H04 | Journey map includes all 5 stages (awareness, interest, decision, purchase, retention) | Missing stage |
+
+  | H05 | User personas defined and aligned with journey | No personas or misalignment |
+
+  | H06 | Touchpoints mapped with >90% coverage | <90% coverage |
+
+  | H07 | Conversion rate benchmarks included | No benchmarks |'
+soft_scoring: '(Table: Dim | Dimension | Weight | Scoring Guide)
+
+  | Dim | Dimension | Weight | Scoring Guide |
+
+  |---|---|---|---|
+
+  | D01 | Journey completeness | 0.15 | 1.0 (complete) to 0.0 (incomplete) |
+
+  | D02 | Persona alignment | 0.15 | 1.0 (aligned) to 0.0 (misaligned) |
+
+  | D03 | Touchpoint coverage | 0.15 | 1.0 (90%+) to 0.0 (<50%) |
+
+  | D04 | Conversion benchmarks | 0.15 | 1.0 (realistic) to 0.0 (invalid) |
+
+  | D05 | Consistency across channels | 0.10 | 1.0 (consistent) to 0.0 (inconsistent) |
+
+  | D06 | Feedback integration | 0.10 | 1.0 (included) to 0.0 (missing) |
+
+  | D07 | Visual clarity | 0.10 | 1.0 (clear) to 0.0 (unclear) |
+
+  | D08 | Stakeholder alignment | 0.10 | 1.0 (aligned) to 0.0 (disaligned) |'
 actions: '(Table: Score | Action)
 
   | Score | Action |
@@ -43,5 +76,10 @@ actions: '(Table: Score | Action)
   | REVIEW (>=7.0) | Require stakeholder review |
 
   | REJECT (<7.0) | Reject; rework required |'
-bypass: "(Table: conditions, approver, audit trail)  \n| conditions | approver | audit trail |  \n|---|---|---|  \n| Critical\
-  \ feature launch with senior PM approval | Senior Product Manager | Email + Slack notification |"
+bypass: '(Table: conditions, approver, audit trail)
+
+  | conditions | approver | audit trail |
+
+  |---|---|---|
+
+  | Critical feature launch with senior PM approval | Senior Product Manager | Email + Slack notification |'

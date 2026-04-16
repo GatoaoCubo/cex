@@ -16,7 +16,13 @@ domain: prompt_technique construction
 created: '2026-04-14'
 updated: '2026-04-14'
 density_score: 0.85
-naming_convention: "Pattern: `p03_pt_{{name}}.md`  \nExamples:  \n- `p03_pt_summarization.md`  \n- `p03_pt_qa.md`"
+naming_convention: 'Pattern: `p03_pt_{{name}}.md`
+
+  Examples:
+
+  - `p03_pt_summarization.md`
+
+  - `p03_pt_qa.md`'
 paths: 'Artifacts stored in: `/opt/cex/techniques/p03/{{name}}.md`'
 limits:
 - 'max_bytes: 4096'

@@ -16,16 +16,21 @@ domain: data_residency construction
 created: '2026-04-14'
 updated: '2026-04-14'
 density_score: 0.85
-production_tools: "| Tool | Purpose | When |  \n|------|---------|------|  \n| cex_compile.py | Compiles data residency policies\
-  \ into enforceable rules | During policy creation |  \n| cex_score.py | Scores compliance against residency requirements\
-  \ | Post-policy validation |  \n| cex_retriever.py | Retrieves data residency metadata from storage systems | During data\
-  \ access requests |  \n| cex_doctor.py | Diagnoses residency violations in datasets | During audits or compliance checks\
-  \ |  \n| cex_transformer.py | Transforms data to meet residency constraints | Before cross-border transfers |  \n| cex_logger.py\
-  \ | Logs residency-related events for audit trails | Continuously during operations |"
-validation_tools: "| Tool | Purpose | When |  \n|------|---------|------|  \n| validator_check.py | Validates policy syntax\
-  \ and semantics | Pre-deployment |  \n| consistency_checker.py | Ensures policy alignment across systems | During multi-system\
-  \ integration |  \n| formatter.py | Standardizes residency metadata formats | When ingesting external data |"
+production_tools: '| Tool | Purpose | When |
+
+  |------|---------|------|
+
+  | cex_compile.py | Compiles data_residency artifact to .yaml | After each save |
+
+  | cex_score.py | Scores artifact against 5D quality dimensions | Post-production |
+
+  | cex_retriever.py | Retrieves similar residency specs and KCs | During F3 INJECT |
+
+  | cex_doctor.py | Validates builder ISO completeness and structure | During F7 GOVERN |
+
+  | cex_hygiene.py | Enforces frontmatter rules and naming conventions | During F7 GOVERN |'
 external_references:
-- GDPR (General Data Protection Regulation)
-- OpenPolicyAgent (for policy enforcement)
-- PyResidency (Python library for residency analysis)
+- GDPR Articles 44-50 (third-country transfers)
+- Schrems II ruling (C-311/18) and EU-US Data Privacy Framework 2023
+- ISO/IEC 27701:2019 (Privacy Information Management)
+- AWS Data Residency, Azure Sovereign Regions (regional data plane references)

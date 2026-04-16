@@ -24,15 +24,30 @@ domain_overview: Data residency ensures data is stored, processed, and transferr
   storage boundaries, data encryption at rest, and audit trails for data movement. These configurations are critical for multinational
   organizations to avoid legal exposure, fines, or service disruptions. They often integrate with compliance frameworks like
   ISO/IEC 27001 and NIST SP 800-188, which emphasize data governance and jurisdictional controls.
-key_concepts: "| Concept | Definition | Source |  \n|--------|------------|--------|  \n| Data Localization | Requirement\
-  \ to store data within specific geographic boundaries | GDPR Article 3 |  \n| Data Processing Agreement (DPA) | Contractual\
-  \ obligation between data controllers and processors for residency compliance | GDPR Article 28 |  \n| Data Sovereignty\
-  \ | Legal principle that data is subject to the laws of the jurisdiction where it resides | NIST SP 800-188 |  \n| Cross-Border\
-  \ Transfer Mechanism | Legal framework (e.g., SCCs) for transferring data outside the EU | GDPR Article 45 |  \n| Data Residency\
-  \ Boundary | Geographic or legal scope defining where data can be stored/processed | ISO/IEC 27001 |  \n| Data Replication\
-  \ Policy | Rules for replicating data across regions while maintaining residency compliance | RFC 8199 |  \n| Jurisdictional\
-  \ Scope | Legal authority over data based on its physical or logical location | EU-US Privacy Shield (invalidated) |  \n\
-  | Data Residency Audit | Verification process to ensure compliance with residency policies | APRA Prudential Standard |"
+key_concepts: '| Concept | Definition | Source |
+
+  |--------|------------|--------|
+
+  | Data Localization | Requirement to store data within specific geographic boundaries | GDPR Article 3 |
+
+  | Data Processing Agreement (DPA) | Contractual obligation between data controllers and processors for residency compliance
+  | GDPR Article 28 |
+
+  | Data Sovereignty | Legal principle that data is subject to the laws of the jurisdiction where it resides | NIST SP 800-188
+  |
+
+  | Cross-Border Transfer Mechanism | Legal framework (e.g., SCCs) for transferring data outside the EU | GDPR Article 45
+  |
+
+  | Data Residency Boundary | Geographic or legal scope defining where data can be stored/processed | ISO/IEC 27001 |
+
+  | Data Replication Policy | Rules for replicating data across regions while maintaining residency compliance | RFC 8199
+  |
+
+  | Jurisdictional Scope | Legal authority over data based on its physical or logical location | EU-US Privacy Shield (invalidated)
+  |
+
+  | Data Residency Audit | Verification process to ensure compliance with residency policies | APRA Prudential Standard |'
 industry_standards:
 - GDPR (General Data Protection Regulation)
 - ISO/IEC 27001:2022 (Information Security Management)

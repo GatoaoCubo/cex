@@ -24,18 +24,25 @@ domain_overview: Role-based access control (RBAC) is a foundational mechanism fo
   enforcement. For example, in a SaaS environment, roles like "Tenant Admin" or "Service User" are scoped to specific tenants,
   ensuring isolation through role-tenant mappings. Standards such as NIST SP 800-53 and ISO/IEC 27001 emphasize RBAC as a
   core control for securing shared infrastructure.
-key_concepts: "| Concept         | Definition                                                                 | Source   \
-  \                       |  \n|-----------------|----------------------------------------------------------------------------|---------------------------------|\
-  \  \n| Role            | A set of permissions grouped by function (e.g., \"Database Reader\").        | NIST SP 800-53 \
-  \                 |  \n| Permission      | An atomic right to perform an action (e.g., \"read /tenant/data\").         |\
-  \ XACML 3.0                       |  \n| Tenant          | A logical partition of resources isolated from other tenants.\
-  \             | Cloud Security Alliance         |  \n| Role Hierarchy  | Inheritance of permissions from higher-level roles\
-  \ (e.g., \"Manager\" → \"User\"). | ISO/IEC 27001                   |  \n| Separation of Duty | Ensuring no single role\
-  \ holds conflicting permissions.                  | NIST SP 800-53                  |  \n| Least Privilege | Granting only\
-  \ necessary permissions to fulfill a role’s purpose.          | RFC 7613                        |  \n| Role Tenant Mapping\
-  \ | Linking roles to specific tenants for isolation.                        | OASIS RBAC 3.0                  |  \n| Policy\
-  \ Rule     | A condition that governs role assignment or permission enforcement.       | XACML 3.0                     \
-  \  |"
+key_concepts: '| Concept         | Definition                                                                 | Source                          |
+
+  |-----------------|----------------------------------------------------------------------------|---------------------------------|
+
+  | Role            | A set of permissions grouped by function (e.g., "Database Reader").        | NIST SP 800-53                  |
+
+  | Permission      | An atomic right to perform an action (e.g., "read /tenant/data").         | XACML 3.0                       |
+
+  | Tenant          | A logical partition of resources isolated from other tenants.             | Cloud Security Alliance         |
+
+  | Role Hierarchy  | Inheritance of permissions from higher-level roles (e.g., "Manager" → "User"). | ISO/IEC 27001                   |
+
+  | Separation of Duty | Ensuring no single role holds conflicting permissions.                  | NIST SP 800-53                  |
+
+  | Least Privilege | Granting only necessary permissions to fulfill a role’s purpose.          | RFC 7613                        |
+
+  | Role Tenant Mapping | Linking roles to specific tenants for isolation.                        | OASIS RBAC 3.0                  |
+
+  | Policy Rule     | A condition that governs role assignment or permission enforcement.       | XACML 3.0                       |'
 industry_standards:
 - NIST SP 800-53 (Access Control and Authentication)
 - ISO/IEC 27001 (Information Security Management)

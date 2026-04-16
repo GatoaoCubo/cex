@@ -24,15 +24,15 @@ phase_1_research:
 - Analyze latency tradeoffs between retrieval depth and agent reasoning
 - Validate data provenance for hallucination-resistant injection
 phase_2_compose:
-- Define agent state schema in SCHEMA.md (include memory, context, intent)
+- Define agent state schema in bld_schema_agentic_rag.md (include memory, context, intent)
 - Implement retrieval module with vector DB and filter syntax
-- Write agent planner using P01 decision tree templates
-- Code injection handler with priority-based trigger evaluation
-- Integrate RAG results into agent's decision context
-- Use OUTPUT_TEMPLATE.md for structured response formatting
-- Add fallback logic for retrieval failures
+- Write agent planner using ReAct or Self-RAG retrieve->reflect->re-query loop
+- 'Configure reflection triggers: low-confidence retrieval, contradictory evidence'
+- Integrate RAG results into agent decision context with provenance tracking
+- Use bld_output_template_agentic_rag.md for structured response formatting
+- Add fallback logic for retrieval failures (CRAG corrective fallback)
 - Embed domain-specific prompt engineering in injection pipelines
 - Conduct unit tests for each RAG-agent interaction layer
-phase_3_validate: '[ ] ✅ Schema compliance with SCHEMA.md [ ] ✅ Agent retrieves >95% relevant docs under load [ ] ✅ Injection
-  triggers fire at defined thresholds [ ] ✅ Output matches OUTPUT_TEMPLATE.md structure [ ] ✅ Hallucination rate <1% in validation
-  corpus'
+phase_3_validate: '[ ] Schema compliance with bld_schema_agentic_rag.md [ ] Retrieve->reflect->re-query loop terminates within
+  max_reflection_iterations [ ] Injection triggers fire at defined thresholds [ ] Output matches bld_output_template_agentic_rag.md
+  structure [ ] Fallback chain activates on retrieval failure'

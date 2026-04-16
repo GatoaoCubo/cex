@@ -21,15 +21,29 @@ domain_overview: Sales playbooks are structured guides used in B2B sales to stan
   approaches. Unlike pitch decks, which focus on presentation, or discovery questions, which are subsets of research, playbooks
   integrate persona analysis, discovery flows, objection handling, and closing tactics into a cohesive framework. They are
   critical in consultative selling models, where alignment with buyer journeys and value-based messaging drive outcomes.
-key_concepts: "| Concept | Definition | Source |  \n| --- | --- | --- |  \n| Persona | A detailed profile of a buyer’s role,\
-  \ goals, and pain points | HubSpot’s Buyer Persona Methodology |  \n| Discovery Flow | A structured process to uncover client\
-  \ needs and challenges | SPIN Selling (Neil Rackham) |  \n| Objection Handling | Techniques to address buyer concerns and\
-  \ counter objections | BANT (Business Acumen, Authority, Need, Timeline) |  \n| Close Pattern | A repeatable sequence of\
-  \ actions to finalize a deal | Solution Selling (Stephen Covey) |  \n| Value Proposition | A clear statement of benefits\
-  \ tailored to a buyer’s priorities | Value Proposition Canvas (Strategyzer) |  \n| Consultative Selling | A method focused\
-  \ on solving client problems over product promotion | Harvard Business Review (1980s) |  \n| Account-Based Selling | A strategy\
-  \ targeting high-value accounts with personalized outreach | Demandbase’s ABM Framework |  \n| MEDDPIC | A framework for\
-  \ qualifying opportunities (Metrics, Economic Buyer, etc.) | OpenView Partners |"
+key_concepts: '| Concept | Definition | Source |
+
+  | --- | --- | --- |
+
+  | Persona | A detailed profile of a buyer’s role, goals, and pain points | HubSpot’s Buyer Persona Methodology |
+
+  | Discovery Flow | A structured process to uncover client needs and challenges | SPIN Selling (Neil Rackham) |
+
+  | Objection Handling | Techniques to address buyer concerns and counter objections | BANT (Business Acumen, Authority, Need,
+  Timeline) |
+
+  | Close Pattern | A repeatable sequence of actions to finalize a deal | Solution Selling (Stephen Covey) |
+
+  | Value Proposition | A clear statement of benefits tailored to a buyer’s priorities | Value Proposition Canvas (Strategyzer)
+  |
+
+  | Consultative Selling | A method focused on solving client problems over product promotion | Harvard Business Review (1980s)
+  |
+
+  | Account-Based Selling | A strategy targeting high-value accounts with personalized outreach | Demandbase’s ABM Framework
+  |
+
+  | MEDDPIC | A framework for qualifying opportunities (Metrics, Economic Buyer, etc.) | OpenView Partners |'
 industry_standards:
 - SPIN Selling (Neil Rackham, 1988)
 - Challenger Sale (CEB, 2011)

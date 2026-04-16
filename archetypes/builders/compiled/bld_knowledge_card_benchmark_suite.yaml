@@ -21,19 +21,31 @@ domain_overview: Benchmark suites are collections of interdependent tasks design
   they test scalability, latency, and reliability (e.g., SPEC). Suites enable holistic evaluation by combining synthetic and
   real-world tasks, ensuring systems are stress-tested under varied conditions. They are critical for comparing hardware,
   frameworks, and algorithms in competitive landscapes like cloud computing and autonomous systems.
-key_concepts: "| Concept               | Definition                                                                 | Source\
-  \                              |  \n|-----------------------|----------------------------------------------------------------------------|-------------------------------------|\
-  \  \n| Task Granularity      | Level of detail in individual tasks (e.g., microbenchmarks vs. end-to-end workflows) | MLPerf\
-  \ 2.0                          |  \n| Workload Characterization | Quantification of resource demands (CPU, memory, I/O)\
-  \ for each task         | SPEC CPU2017                        |  \n| Reproducibility       | Ensuring identical results\
-  \ across environments using versioned inputs/parameters | Reproducibility in ML (Amershi et al., 2019) |  \n| Portability\
-  \           | Ability to run benchmarks on heterogeneous hardware (CPU, GPU, FPGA)        | OpenBenchmarking.org       \
-  \         |  \n| Scalability Metrics   | Measures of performance as task size or concurrency increases               | ISO/IEC\
-  \ 25010:2011 (Software Quality) |  \n| Fairness Criteria     | Rules to prevent bias in task selection or scoring (e.g.,\
-  \ avoiding skewed datasets) | FAIR Principles ( Wilkinson et al., 2016) |  \n| Versioning            | Tracking changes\
-  \ in benchmarks over time to ensure backward compatibility   | BMark Framework (GitHub)            |  \n| Composability\
-  \         | Ability to combine tasks from different suites for custom evaluation scenarios | RFC 6713 (Benchmarking Terminology)\
-  \ |"
+key_concepts: '| Concept               | Definition                                                                 | Source                              |
+
+  |-----------------------|----------------------------------------------------------------------------|-------------------------------------|
+
+  | Task Granularity      | Level of detail in individual tasks (e.g., microbenchmarks vs. end-to-end workflows) | MLPerf
+  2.0                          |
+
+  | Workload Characterization | Quantification of resource demands (CPU, memory, I/O) for each task         | SPEC CPU2017                        |
+
+  | Reproducibility       | Ensuring identical results across environments using versioned inputs/parameters | Reproducibility
+  in ML (Amershi et al., 2019) |
+
+  | Portability           | Ability to run benchmarks on heterogeneous hardware (CPU, GPU, FPGA)        | OpenBenchmarking.org                |
+
+  | Scalability Metrics   | Measures of performance as task size or concurrency increases               | ISO/IEC 25010:2011
+  (Software Quality) |
+
+  | Fairness Criteria     | Rules to prevent bias in task selection or scoring (e.g., avoiding skewed datasets) | FAIR Principles
+  ( Wilkinson et al., 2016) |
+
+  | Versioning            | Tracking changes in benchmarks over time to ensure backward compatibility   | BMark Framework
+  (GitHub)            |
+
+  | Composability         | Ability to combine tasks from different suites for custom evaluation scenarios | RFC 6713 (Benchmarking
+  Terminology) |'
 industry_standards:
 - 'MLPerf (v2.0): AI benchmark suite for training and inference'
 - 'SPEC CPU2017: Standard for CPU performance evaluation'

@@ -24,15 +24,15 @@ phase_1_research:
 - Document use cases requiring simultaneous modality injection.
 - Evaluate prior prompt templates for adaptability.
 phase_2_compose:
-- 'Initialize schema with `modalities` array (ref: SCHEMA.md).'
+- 'Initialize schema with `modalities` array (ref: bld_schema_multimodal_prompt.md).'
 - 'Define `vision` parameters: resolution, object labels, spatial relations.'
 - 'Define `audio` parameters: duration, frequency ranges, semantic tags.'
 - 'Define `text` parameters: language, sentiment, entity references.'
 - Align modalities via `cross_ref` keys (e.g., `vision.id == audio.object_id`).
-- 'Structure prompt using `INJECT` syntax (ref: OUTPUT_TEMPLATE.md).'
+- 'Structure prompt using `INJECT` syntax (ref: bld_output_template_multimodal_prompt.md).'
 - 'Embed example triples: `<modality>:<value>:<context>`.'
-- Validate schema compliance with SCHEMA.md validation rules.
+- Validate schema compliance with bld_schema_multimodal_prompt.md validation rules.
 - Finalize with modality-specific placeholders for runtime injection.
-phase_3_validate: '[ ] ✅ All modalities present in `modalities` array [ ] ✅ Cross-modal references resolve consistently [
-  ] ✅ Technical constraints match dataset capabilities [ ] ✅ Example triples align with domain use cases [ ] ✅ Output conforms
-  to OUTPUT_TEMPLATE.md structure'
+phase_3_validate: '[ ] All modalities present in `modalities` array [ ] Cross-modal references resolve consistently [ ] Technical
+  constraints match dataset capabilities [ ] Example triples align with domain use cases [ ] Output conforms to bld_output_template_multimodal_prompt.md
+  structure'

@@ -1,16 +1,16 @@
-kind: learning_record
-id: p10_lr_data_residency_builder
+kind: memory
+id: p10_mem_data_residency_builder
 pillar: P10
 llm_function: INJECT
 purpose: Learned patterns and pitfalls for data_residency construction
 quality: null
-title: Learning Record Data Residency
+title: Memory Data Residency
 version: 1.0.0
 author: wave1_builder_gen_v2
 tags:
 - data_residency
 - builder
-- learning_record
+- memory
 tldr: Learned patterns and pitfalls for data_residency construction
 domain: data_residency construction
 created: '2026-04-14'

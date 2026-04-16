@@ -1,0 +1,50 @@
+kind: schema
+id: bld_schema_reasoning_strategy
+pillar: P06
+llm_function: CONSTRAIN
+purpose: Formal schema -- SINGLE SOURCE OF TRUTH for reasoning_strategy
+quality: null
+title: Schema Reasoning Strategy
+version: 1.0.0
+author: wave1_builder_gen
+tags:
+- reasoning_strategy
+- builder
+- schema
+tldr: Formal schema -- SINGLE SOURCE OF TRUTH for reasoning_strategy
+domain: reasoning_strategy construction
+created: '2026-04-13'
+updated: '2026-04-13'
+density_score: 0.85
+frontmatter_fields: This ISO selects a reasoning strategy (e.g. chain-of-thought) and the conditions under which it applies.
+required: "| Field        | Type       | Required | Default | Notes |  \n|--------------|------------|----------|---------|-------|\
+  \  \n| id           | string     | yes      | -       | Unique identifier |  \n| kind         | string     | yes      |\
+  \ \"reasoning_strategy\" | CEX type |  \n| pillar       | string     | yes      | \"P03\"   | Pillar classification |  \n\
+  | title        | string     | yes      | -       | Strategy name |  \n| version      | string     | yes      | \"1.0\" \
+  \  | Schema version |  \n| created      | datetime   | yes      | -       | Timestamp |  \n| updated      | datetime   |\
+  \ yes      | -       | Last modification |  \n| author       | string     | yes      | -       | Creator |  \n| domain \
+  \      | string     | yes      | -       | Application domain |  \n| quality      | null       | yes      | null    | Never\
+  \ self-score -- peer review only |  \n| tags         | array      | yes      | []      | Keywords |  \n| tldr         |\
+  \ string     | yes      | -       | Summary |  \n| reasoning_type | enum     | yes      | [\"deductive\", \"inductive\"\
+  , \"abductive\"] | Reasoning method |  \n| strategy_depth | integer | yes      | 1-5     | Complexity level |"
+recommended: "| Field              | Type   | Notes |  \n|--------------------|--------|-------|  \n| validation_method  |\
+  \ string | How strategy is validated |  \n| application_scope  | string | Use case boundaries |"
+id_pattern: '`^p03_rs_[a-zA-Z0-9]+$`'
+body_structure:
+- Overview
+- Description of the reasoning strategy's purpose and scope.
+- Core Components
+- Breakdown of logical steps, assumptions, and dependencies.
+- Validation Criteria
+- Metrics and tests to ensure strategy reliability.
+- Application Scope
+- Contexts where the strategy is applicable or restricted.
+- Quality Metrics
+- Evaluation framework for accuracy, robustness, and efficiency.
+constraints:
+- 'ID Uniqueness: No duplicate `id` values across strategies.'
+- 'Versioning: `version` must follow semantic versioning (e.g., "1.0.0").'
+- 'Domain Alignment: `domain` must match predefined taxonomies.'
+- 'Validation Method: Must be a recognized technique (e.g., "peer review", "empirical testing").'
+- 'Depth Range: `strategy_depth` must be between 1 (basic) and 5 (highly complex).'
+- 'Quality: `quality` must always be null -- never self-score, peer review assigns value.'

@@ -16,27 +16,3 @@ domain: faq_entry construction
 created: '2026-04-14'
 updated: '2026-04-14'
 density_score: 0.85
-example_questions_answers: '| Question                          | Answer                                                                 |
-
-  |----------------------------------|------------------------------------------------------------------------|
-
-  | How do I withdraw funds?         | {{withdrawal_steps}}                                                   |
-
-  | What are trading fees?           | {{fee_structure}}                                                      |
-
-
-  <!-- Withdrawal steps as markdown list -->
-
-  <!-- Fee structure as plain text -->
-
-
-  Answer Example:
-
-  1. Navigate to the ''Wallet'' section
-
-  2. Select ''Withdraw'' and choose asset
-
-  3. Enter amount and recipient address
-
-
-  <!-- Code block showing answer formatting -->'

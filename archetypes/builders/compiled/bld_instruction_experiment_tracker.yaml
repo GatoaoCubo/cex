@@ -1,0 +1,49 @@
+kind: instruction
+id: bld_instruction_experiment_tracker
+pillar: P03
+llm_function: REASON
+purpose: Step-by-step production process for experiment_tracker
+quality: null
+title: Instruction Experiment Tracker
+version: 1.1.0
+author: n03_hybrid_review3
+tags:
+- experiment_tracker
+- builder
+- instruction
+tldr: Step-by-step production process for experiment_tracker aligned with MLflow, W&B, Neptune schemas
+domain: experiment_tracker construction
+created: '2026-04-13'
+updated: '2026-04-14'
+density_score: 0.9
+phase_1_frame:
+- Define experiment_id (UUID or monotonic), experiment_name, project/workspace, owner.
+- Identify research question and falsifiable hypothesis (if/then structure).
+- Enumerate hyperparameters to sweep vs. hold constant; pick search strategy (grid, random, bayes).
+- Select primary metric (single scalar to optimize) and secondary metrics (observability).
+- Bind dataset_ref (point to dataset_card id + version) and model_architecture_ref.
+phase_2_instrument:
+- 'Declare metric schema: name, type (scalar/histogram/image), frequency (per-step/per-epoch), direction (min/max).'
+- 'Declare artifacts: checkpoints, configs, logs, predictions. Size budget per run.'
+- 'Capture environment: git SHA, python version, torch/jax version, GPU type, OS.'
+- 'Set tags: phase (dev/staging/prod), team, tracker-backend (mlflow/wandb/neptune/comet/dvc).'
+- Attach run to parent experiment; define sweep_id if parameter search.
+phase_3_execute:
+- Log params once at run start (immutable).
+- Log metrics continuously; flush at epoch boundaries to survive crashes.
+- Log artifacts at checkpoints and final state; version with content hash.
+- 'Emit STATUS transitions: QUEUED -> RUNNING -> FINISHED | FAILED | KILLED.'
+- 'On failure: log stack trace to artifacts, preserve last-known-good checkpoint.'
+phase_4_govern:
+- 'Enforce reproducibility: seeds logged, dataset version pinned, env captured.'
+- Validate metric schema stays stable across runs (schema drift prevention).
+- Link child runs to parent sweep; compute pareto-front for multi-metric sweeps.
+- Write frontmatter per bld_schema_experiment_tracker.md; populate body per bld_output_template_experiment_tracker.md.
+- Gate via bld_quality_gate_experiment_tracker.md; compile and commit.
+reference_standards:
+- MLflow Tracking API (runs, experiments, metrics, params, artifacts)
+- Weights & Biases (project, entity, run, sweep, artifacts)
+- Neptune.ai (experiment, run, series, namespace)
+- Comet ML (experiment key, workspace, logged assets)
+- TensorBoard (scalar, histogram, image, graph, hparams)
+- DVC (dvc.yaml stages, params.yaml, metrics.json)

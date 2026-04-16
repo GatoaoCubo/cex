@@ -16,23 +16,23 @@ domain: quickstart_guide construction
 created: '2026-04-14'
 updated: '2026-04-14'
 density_score: 0.85
-phase_1_research:
-- Identify target audience (developers, admins, etc.)
+phase_1_research_quickstart_guide_scoping:
+- Identify target audience for the quickstart guide (developers, admins, etc.)
 - Gather API endpoints, SDKs, and authentication methods
 - Collect prerequisite tools (CLI, SDK versions, dependencies)
 - Outline 5-minute onboarding workflow (setup → config → first call)
 - Review existing documentation for gaps or redundancies
 - Validate technical feasibility with engineering teams
 phase_2_compose:
-- 'Use SCHEMA.md to define structure: title, audience, prerequisites, steps'
+- 'Use bld_schema_quickstart_guide.md to define structure: title, audience, prerequisites, steps'
 - 'Write intro: purpose, time estimate, success metrics'
 - List prerequisites (software, account setup, API keys)
 - 'Step-by-step: install CLI, configure env vars, first API call'
 - 'Embed code snippets (language-specific: Python/JavaScript)'
 - 'Add troubleshooting: common errors, mitigation steps'
-- 'Format with OUTPUT_TEMPLATE.md: bullet points, code blocks, warnings'
+- 'Format with bld_output_template_quickstart_guide.md: bullet points, code blocks, warnings'
 - Reference API docs for accuracy (version, rate limits, auth)
 - 'Proofread for conciseness: remove jargon, ensure 5-minute completion'
-phase_3_validate: '[ ] ✅ All steps complete in <5 minutes with no blockers [ ] ✅ Code samples execute without errors in test
-  environments [ ] ✅ Prerequisites align with current SDK/CLI versions [ ] ✅ Language and terminology match target audience
-  (e.g., "endpoint" vs "URL") [ ] ✅ Schema and template compliance checked via automated linter'
+phase_3_validate: '[ ] All steps complete in <5 minutes with no blockers [ ] Code samples execute without errors in test environments
+  [ ] Prerequisites align with current SDK/CLI versions [ ] Language and terminology match target audience (e.g., "endpoint"
+  vs "URL") [ ] Schema and template compliance checked via automated linter'

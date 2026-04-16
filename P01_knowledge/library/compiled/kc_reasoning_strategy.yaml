@@ -1,0 +1,19 @@
+id: kc_reasoning_strategy
+kind: knowledge_card
+title: Reasoning Strategy
+version: 1.0.0
+quality: null
+pillar: P01
+density_score: 0.94
+overview: A structured prompting technique to guide LLMs through complex problem-solving by breaking tasks into logical steps,
+  ensuring systematic analysis and coherent outputs.
+key_components: "1. Structured Prompts  \n   Use explicit frameworks like \"Chain-of-Thought\" (CoT) or \"Tree of Thoughts\"\
+  \ to outline reasoning phases.\n\n2. Step-by-Step Breakdown  \n   Decompose tasks into:  \n   - Problem definition  \n \
+  \  - Assumptions analysis  \n   - Evidence gathering  \n   - Logical inference  \n   - Conclusion validation  \n\n3. Role\
+  \ Assignment  \n   Assign distinct roles to LLMs (e.g., \"Analyst\", \"Evaluator\") to simulate collaborative reasoning.\n\
+  \n4. Example Templates  \n   [Role]: [Task]  \n   1. [Step 1]  \n   2. [Step 2]  \n   ...  \n   Final Answer: [Result]\n\
+  \n5. Integration with Phases  \n   Align reasoning steps with phase lifecycle:  \n   - `discover`: Define problem scope\
+  \  \n   - `configure`: Set reasoning parameters  \n   - `execute`: Perform step-by-step analysis  \n   - `validate`: Cross-check\
+  \ logical consistency  \n   - `archive`: Store structured reasoning output  \n\n6. Best Practices  \n   - Use concrete examples\
+  \ for complex concepts  \n   - Include constraints to guide output format  \n   - Iterate with feedback loops for refinement\
+  \  \n   - Combine with visualization tools for abstract reasoning"
