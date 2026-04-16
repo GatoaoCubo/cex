@@ -40,6 +40,7 @@ Check `CEX_NUCLEUS`. N07 = Orchestrator. N03 = Builder. Not set = read and decid
 | **Kind KCs** | `P01_knowledge/library/kind/kc_{kind}.md` (131 files) |
 | **Kind registry** | `.cex/kinds_meta.json` (257 kinds) |
 | **Composable-crew rule** | `.claude/rules/composable-crew.md` (5 WAVE8 primitives + grid-of-crews) |
+| **Lazy skills (auto-fire)** | `.claude/skills/{cross_wave_cleanup,shared_file_proposal,new_nucleus_bootstrap,auto_accept_handoff}.md` -- mirrored to `.cex/skills/` for codex/gemini/ollama |
 | **Crew CLI** | `_tools/cex_crew.py` (list/show/run) |
 | **Example crew** | `N02_marketing/crews/p12_ct_product_launch.md` (4-role sequential) |
 | **Nucleus defs** | `N0[0-7]_*/architecture/nucleus_def_n0[0-7].md` (8 machine-readable identities) |

@@ -20,6 +20,8 @@ Usage:
     python _tools/cex_preflight.py --stats
     python _tools/cex_preflight.py --clean
     python _tools/cex_preflight.py --nucleus n03 --task "build agent" --dry-run
+    python _tools/cex_preflight.py --compress-boot --dry-run
+    python _tools/cex_preflight.py --compress-boot --in-place --ratio 0.7
 
 Exit codes: 0 = success, 1 = error, 2 = cache stale
 """
@@ -794,7 +796,24 @@ def main() -> int:
     parser.add_argument("--dry-run", action="store_true", help="Show selections without LLM calls")
     parser.add_argument("--force", action="store_true", help="Ignore cache, recompute")
     parser.add_argument("--json", action="store_true", help="Output as JSON")
+    parser.add_argument("--compress-boot", action="store_true",
+                        help="Run LLMLingua-2 on boot context (CLAUDE.md + .claude/rules/*.md) via cex_compress.py")
+    parser.add_argument("--ratio", type=float, default=0.7,
+                        help="Compression ratio for --compress-boot (default 0.7, lower = more aggressive)")
+    parser.add_argument("--in-place", action="store_true",
+                        help="With --compress-boot: rewrite source files (DESTRUCTIVE)")
     args = parser.parse_args()
+
+    # Compress-boot mode: thin pass-through to cex_compress.py
+    if args.compress_boot:
+        cmd = [sys.executable, str(Path(__file__).resolve().parent / "cex_compress.py"),
+               "--target", "boot", "--ratio", str(args.ratio)]
+        if args.dry_run:
+            cmd.append("--dry-run")
+        if args.in_place:
+            cmd.append("--in-place")
+        print("[preflight] delegating to cex_compress: %s" % " ".join(cmd[1:]))
+        return subprocess.run(cmd, check=False).returncode
 
     # Stats mode
     if args.stats:
