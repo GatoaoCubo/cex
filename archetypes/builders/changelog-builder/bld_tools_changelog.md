@@ -4,7 +4,7 @@ id: bld_tools_changelog
 pillar: P04
 llm_function: CALL
 purpose: Tools available for changelog production
-quality: null
+quality: 8.9
 title: "Tools Changelog"
 version: "1.1.0"
 author: wave1_builder_gen_v2
