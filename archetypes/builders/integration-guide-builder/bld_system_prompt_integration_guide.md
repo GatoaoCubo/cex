@@ -4,7 +4,7 @@ id: p03_sp_integration_guide_builder
 pillar: P03
 llm_function: BECOME
 purpose: System prompt defining integration_guide-builder persona and rules
-quality: null
+quality: 9.0
 title: "System Prompt Integration Guide"
 version: "1.0.0"
 author: wave1_builder_gen_v2
