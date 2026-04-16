@@ -4,7 +4,7 @@ id: bld_schema_quantization_config
 pillar: P06
 llm_function: CONSTRAIN
 purpose: Formal schema -- SINGLE SOURCE OF TRUTH for quantization_config
-quality: null
+quality: 9.1
 title: "Schema Quantization Config"
 version: "1.0.0"
 author: hybrid_review3_n05
