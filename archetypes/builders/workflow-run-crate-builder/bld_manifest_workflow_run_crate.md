@@ -4,7 +4,7 @@ id: workflow-run-crate-builder
 pillar: P10
 llm_function: BECOME
 purpose: Builder identity, capabilities, routing for workflow_run_crate
-quality: null
+quality: 8.9
 title: "Type Builder Workflow Run Crate"
 version: "1.0.0"
 author: n04_wave7
