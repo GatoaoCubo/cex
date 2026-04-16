@@ -3,7 +3,7 @@ kind: knowledge_card
 id: bld_knowledge_card_model_architecture
 pillar: P01
 llm_function: INJECT
-quality: null
+quality: 9.0
 title: "Knowledge Card: model_architecture"
 version: "1.0.0"
 author: n05_builder
