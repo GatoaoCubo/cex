@@ -4,7 +4,7 @@ id: p09_qg_usage_quota
 pillar: P11
 llm_function: GOVERN
 purpose: Quality gate with HARD and SOFT scoring for usage_quota
-quality: null
+quality: 9.1
 title: "Quality Gate Usage Quota"
 version: "1.0.0"
 author: wave1_builder_gen_v2
@@ -16,48 +16,48 @@ updated: "2026-04-14"
 density_score: 0.85
 ---
 
-## Definition  
-| metric              | threshold | operator | scope              |  
-|---------------------|-----------|----------|--------------------|  
-| required fields     | 4         | >=       | per artifact       |  
-| quota_limit present | true      | ==       | frontmatter        |  
-| reset_interval set  | true      | ==       | frontmatter        |  
+## Definition
+| metric              | threshold | operator | scope              |
+|---------------------|-----------|----------|--------------------|
+| required fields     | 4         | >=       | per artifact       |
+| quota_limit present | true      | ==       | frontmatter        |
+| reset_interval set  | true      | ==       | frontmatter        |
 
-## HARD Gates  
-| ID             | Check                          | Fail Condition                                      |  
-|----------------|--------------------------------|-----------------------------------------------------|  
-| H01            | YAML frontmatter valid         | Missing or invalid frontmatter                      |  
-| H02            | ID matches ^p09_uq_[a-z][a-z0-9_]+.yaml$ | ID does not match schema pattern                   |  
-| H03            | kind field matches 'usage_quota' | kind is not 'usage_quota'                          |  
-| H04            | Quota limits defined           | Missing or incomplete quota limits                 |  
-| H05            | enforcement_policy field present | enforcement_policy missing or not "hard"/"soft" |  
-| H06            | reset_interval is ISO 8601 duration | reset_interval format invalid (not P1D, PT1H, etc.) |  
-| H07            | quota_limit is positive number | quota_limit <= 0 or missing                      |  
-| H08            | usage_metric field present     | usage_metric field missing or empty              |  
+## HARD Gates
+| ID             | Check                          | Fail Condition                                      |
+|----------------|--------------------------------|-----------------------------------------------------|
+| H01            | YAML frontmatter valid         | Missing or invalid frontmatter                      |
+| H02            | ID matches ^p09_uq_[a-z][a-z0-9_]+.yaml$ | ID does not match schema pattern                   |
+| H03            | kind field matches 'usage_quota' | kind is not 'usage_quota'                          |
+| H04            | Quota limits defined           | Missing or incomplete quota limits                 |
+| H05            | enforcement_policy field present | enforcement_policy missing or not "hard"/"soft" |
+| H06            | reset_interval is ISO 8601 duration | reset_interval format invalid (not P1D, PT1H, etc.) |
+| H07            | quota_limit is positive number | quota_limit <= 0 or missing                      |
+| H08            | usage_metric field present     | usage_metric field missing or empty              |
 
-## SOFT Scoring  
-| Dim        | Dimension               | Weight | Scoring Guide                                      |  
-|------------|-------------------------|--------|----------------------------------------------------|  
-| D01        | Quota accuracy          | 0.20   | 1.0 if precise thresholds+units, 0.5 if approximate, 0.0 if missing |  
-| D02        | Fairness enforcement    | 0.20   | 1.0 if balanced+documented, 0.5 if partial, 0.0 if absent |  
-| D03        | Logging completeness    | 0.10   | 1.0 if full, 0.5 if partial, 0.0 if missing        |  
-| D04        | Scalability             | 0.10   | 1.0 if adaptive, 0.5 if static, 0.0 if non-functional |  
-| D05        | User notification       | 0.10   | 1.0 if clear, 0.5 if vague, 0.0 if absent          |  
-| D06        | Compliance with SLA     | 0.10   | 1.0 if aligned, 0.5 if partial, 0.0 if conflicting |  
-| D07        | Emergency override      | 0.10   | 1.0 if documented, 0.5 if implied, 0.0 if absent    |  
-| D08        | Documentation quality   | 0.10   | 1.0 if complete, 0.5 if partial, 0.0 if missing     |  
+## SOFT Scoring
+| Dim        | Dimension               | Weight | Scoring Guide                                      |
+|------------|-------------------------|--------|----------------------------------------------------|
+| D01        | Quota accuracy          | 0.20   | 1.0 if precise thresholds+units, 0.5 if approximate, 0.0 if missing |
+| D02        | Fairness enforcement    | 0.20   | 1.0 if balanced+documented, 0.5 if partial, 0.0 if absent |
+| D03        | Logging completeness    | 0.10   | 1.0 if full, 0.5 if partial, 0.0 if missing        |
+| D04        | Scalability             | 0.10   | 1.0 if adaptive, 0.5 if static, 0.0 if non-functional |
+| D05        | User notification       | 0.10   | 1.0 if clear, 0.5 if vague, 0.0 if absent          |
+| D06        | Compliance with SLA     | 0.10   | 1.0 if aligned, 0.5 if partial, 0.0 if conflicting |
+| D07        | Emergency override      | 0.10   | 1.0 if documented, 0.5 if implied, 0.0 if absent    |
+| D08        | Documentation quality   | 0.10   | 1.0 if complete, 0.5 if partial, 0.0 if missing     |
 
-## Actions  
-| Score     | Action                          |  
-|-----------|---------------------------------|  
-| GOLDEN    | >=9.5: Auto-approve             |  
-| PUBLISH   | >=8.0: Publish with review note |  
-| REVIEW    | >=7.0: Require manual review    |  
-| REJECT    | <7.0: Reject and rework         |  
+## Actions
+| Score     | Action                          |
+|-----------|---------------------------------|
+| GOLDEN    | >=9.5: Auto-approve             |
+| PUBLISH   | >=8.0: Publish with review note |
+| REVIEW    | >=7.0: Require manual review    |
+| REJECT    | <7.0: Reject and rework         |
 
-## Bypass  
-| conditions                  | approver         | audit trail                          |  
-|-----------------------------|------------------|--------------------------------------|  
-| Emergency system override   | CTO              | Requires written approval and log  |  
-| Regulatory compliance       | Legal team       | Documented in compliance audit     |  
+## Bypass
+| conditions                  | approver         | audit trail                          |
+|-----------------------------|------------------|--------------------------------------|
+| Emergency system override   | CTO              | Requires written approval and log  |
+| Regulatory compliance       | Legal team       | Documented in compliance audit     |
 | Critical bug fix            | SRE lead         | Requires post-implementation review|
