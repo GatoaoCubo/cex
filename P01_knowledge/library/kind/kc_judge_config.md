@@ -3,8 +3,9 @@ id: kc_judge_config
 kind: knowledge_card
 title: LLM Judge Configuration for Automated Evaluation
 version: 1.0.0
-quality: null
+quality: 8.7
 pillar: P01
+density_score: 0.87
 ---
 
 # LLM Judge Configuration for Automated Evaluation
