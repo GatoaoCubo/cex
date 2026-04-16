@@ -4,7 +4,7 @@ id: bld_output_template_role_assignment
 pillar: P05
 llm_function: PRODUCE
 purpose: Template with vars for role_assignment production
-quality: null
+quality: 9.0
 title: "Output Template Role Assignment"
 version: "1.0.0"
 author: n03_wave8_builder
