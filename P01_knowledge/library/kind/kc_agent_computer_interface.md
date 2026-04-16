@@ -3,8 +3,9 @@ id: kc_agent_computer_interface
 kind: knowledge_card
 title: Agent-Computer Interface
 version: 1.0.0
-quality: null
+quality: 8.9
 pillar: P01
+density_score: 0.99
 ---
 
 # Agent-Computer Interface Protocol
