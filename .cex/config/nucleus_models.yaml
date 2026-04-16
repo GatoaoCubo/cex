@@ -26,8 +26,8 @@ n07:
   # Primary fails (quota/offline/missing) -> next entry is tried.
   # Rule: never hardcode the CLI -- this YAML IS the config surface.
   fallback_chain:
-    - {cli: gemini, model: gemini-2.5-flash, flags: "--yolo"}
-    - {cli: codex,  model: gpt-5-codex,      flags: "--dangerously-bypass-approvals-and-sandbox"}
+    - {cli: gemini, model: gemini-2.5-flash-lite, flags: "--yolo"}
+    - {cli: codex,  model: gpt-5,             flags: "--dangerously-bypass-approvals-and-sandbox"}
     - {cli: ollama, model: gemma4:26b,        flags: ""}
     - {cli: ollama, model: qwen3:8b,         flags: ""}
   # Legacy single-fallback field -- kept for backward compat with older tools.
@@ -49,18 +49,18 @@ n01:
   mcps: ".mcp-n01.json"
   settings: ".claude/nucleus-settings/n01.json"
   fallback_chain:
-    - {cli: gemini, model: gemini-2.5-flash, flags: "--yolo"}
-    - {cli: codex,  model: gpt-5-codex,      flags: "--dangerously-bypass-approvals-and-sandbox"}
+    - {cli: gemini, model: gemini-2.5-flash-lite, flags: "--yolo"}
+    - {cli: codex,  model: gpt-5,             flags: "--dangerously-bypass-approvals-and-sandbox"}
     - {cli: ollama, model: gemma4:26b,        flags: ""}
     - {cli: ollama, model: qwen3:8b,         flags: ""}
   fallback:
     cli: gemini
-    model: gemini-2.5-flash
+    model: gemini-2.5-flash-lite
     flags: "--yolo"
   fallback_local:
     cli: ollama
     model: gemma4:26b
-  notes: "2026-04-13: opus->sonnet. Budget optimization: 5 Sonnet + 2 Opus. Preflight handles context compilation. Fallback uses gemini-2.5-flash."
+  notes: "2026-04-13: opus->sonnet. Budget optimization: 5 Sonnet + 2 Opus. Preflight handles context compilation. Fallback uses gemini-2.5-flash-lite."
 
 # --- N02: Marketing & Copy ---
 n02:
@@ -72,13 +72,13 @@ n02:
   mcps: ".mcp-n02.json"
   settings: ".claude/nucleus-settings/n02.json"
   fallback_chain:
-    - {cli: gemini, model: gemini-2.5-flash, flags: "--yolo"}
-    - {cli: codex,  model: gpt-5-codex,      flags: "--dangerously-bypass-approvals-and-sandbox"}
+    - {cli: gemini, model: gemini-2.5-flash-lite, flags: "--yolo"}
+    - {cli: codex,  model: gpt-5,             flags: "--dangerously-bypass-approvals-and-sandbox"}
     - {cli: ollama, model: gemma4:26b,        flags: ""}
     - {cli: ollama, model: qwen3:8b,         flags: ""}
   fallback:
     cli: gemini
-    model: gemini-2.5-flash
+    model: gemini-2.5-flash-lite
     flags: "--yolo"
   fallback_local:
     cli: ollama
@@ -95,18 +95,18 @@ n03:
   mcps: ".mcp-n03.json"
   settings: ".claude/nucleus-settings/n03.json"
   fallback_chain:
-    - {cli: codex,  model: gpt-5-codex,      flags: "--dangerously-bypass-approvals-and-sandbox"}
-    - {cli: gemini, model: gemini-2.5-flash, flags: "--yolo"}
+    - {cli: codex,  model: gpt-5,             flags: "--dangerously-bypass-approvals-and-sandbox"}
+    - {cli: gemini, model: gemini-2.5-flash-lite, flags: "--yolo"}
     - {cli: ollama, model: gemma4:26b,        flags: ""}
     - {cli: ollama, model: qwen3:14b,         flags: ""}
   fallback:
     cli: codex
-    model: gpt-5-codex
+    model: gpt-5
     flags: "--dangerously-bypass-approvals-and-sandbox"
   fallback_local:
     cli: ollama
     model: gemma4:26b
-  notes: "Opus primary. Gemma4 MoE as local fallback (4B active, better than qwen3:14b). 2026-04-13."
+  notes: "Opus primary. gpt-5 (not gpt-5-codex -- needs API key, not ChatGPT auth). Gemma4 MoE local fallback. 2026-04-16."
 
 # --- N04: Knowledge & RAG ---
 n04:
@@ -118,13 +118,13 @@ n04:
   mcps: ".mcp-n04.json"
   settings: ".claude/nucleus-settings/n04.json"
   fallback_chain:
-    - {cli: gemini, model: gemini-2.5-flash, flags: "--yolo"}
-    - {cli: codex,  model: gpt-5-codex,      flags: "--dangerously-bypass-approvals-and-sandbox"}
+    - {cli: gemini, model: gemini-2.5-flash-lite, flags: "--yolo"}
+    - {cli: codex,  model: gpt-5,             flags: "--dangerously-bypass-approvals-and-sandbox"}
     - {cli: ollama, model: gemma4:26b,        flags: ""}
     - {cli: ollama, model: qwen3:8b,         flags: ""}
   fallback:
     cli: gemini
-    model: gemini-2.5-flash
+    model: gemini-2.5-flash-lite
     flags: "--yolo"
   fallback_local:
     cli: ollama
@@ -141,17 +141,17 @@ n05:
   mcps: ".mcp-n05.json"
   settings: ".claude/nucleus-settings/n05.json"
   fallback_chain:
-    - {cli: codex,  model: gpt-5-codex,      flags: "--dangerously-bypass-approvals-and-sandbox"}
-    - {cli: gemini, model: gemini-2.5-flash, flags: "--yolo"}
+    - {cli: codex,  model: gpt-5,             flags: "--dangerously-bypass-approvals-and-sandbox"}
+    - {cli: gemini, model: gemini-2.5-flash-lite, flags: "--yolo"}
     - {cli: ollama, model: qwen3:8b,         flags: ""}
   fallback:
     cli: codex
-    model: gpt-5-codex
+    model: gpt-5
     flags: "--dangerously-bypass-approvals-and-sandbox"
   fallback_local:
     cli: ollama
     model: qwen3:8b
-  notes: "2026-04-13: opus->sonnet. Code review + CI/CD well-defined for Sonnet. Preflight pre-compiles."
+  notes: "2026-04-13: opus->sonnet. gpt-5 (ChatGPT auth compatible). Code review + CI/CD well-defined for Sonnet."
 
 # --- N06: Commercial & Brand ---
 n06:
@@ -163,13 +163,13 @@ n06:
   mcps: ".mcp-n06.json"
   settings: ".claude/nucleus-settings/n06.json"
   fallback_chain:
-    - {cli: gemini, model: gemini-2.5-flash, flags: "--yolo"}
-    - {cli: codex,  model: gpt-5-codex,      flags: "--dangerously-bypass-approvals-and-sandbox"}
+    - {cli: gemini, model: gemini-2.5-flash-lite, flags: "--yolo"}
+    - {cli: codex,  model: gpt-5,             flags: "--dangerously-bypass-approvals-and-sandbox"}
     - {cli: ollama, model: gemma4:26b,        flags: ""}
     - {cli: ollama, model: qwen3:8b,         flags: ""}
   fallback:
     cli: gemini
-    model: gemini-2.5-flash
+    model: gemini-2.5-flash-lite
     flags: "--yolo"
   fallback_local:
     cli: ollama

@@ -397,10 +397,23 @@ Your agent card: {agent_card}
 Follow 8F pipeline F1->F8. Save output, compile, commit, signal on complete.
 '@
 
+# Read handoff inline (bypasses CLI gitignore policy -- gemini respects .gitignore,
+# codex does not; this path works for both).
+$handoffPath = Join-Path $cexRoot ".cex/runtime/handoffs/{handoff_name.replace("${nucleus}", nucleus)}"
+if (Test-Path $handoffPath) {{
+    $handoffBody = Get-Content -Raw -LiteralPath $handoffPath
+}} else {{
+    $handoffBody = "(no handoff at $handoffPath -- report ready and exit)"
+}}
+
 $initialMsg = @"
-Read .cex/runtime/handoffs/{handoff_name.replace("${nucleus}", nucleus)} and execute the SELF_AUDIT mission.
-Produce the report at the path specified in the handoff frontmatter.
+Execute the task described in the handoff BELOW (embedded verbatim -- do NOT try to re-read the path).
+Follow its frontmatter (mission, kind, output path) exactly.
 Follow the 8F pipeline. Signal on complete.
+
+=== HANDOFF BEGIN ===
+$handoffBody
+=== HANDOFF END ===
 
 SYSTEM CONTEXT:
 $sysPrompt
@@ -419,7 +432,8 @@ def build_gemini_ps1(nucleus: str, cfg: dict, meta: dict) -> str:
     tpl = _simple_ps1(
         nucleus, cfg, meta,
         cli="gemini",
-        default_model="gemini-2.5-pro",
+        # 2026-04-16: default -> flash-lite (cheapest on oauth-personal; pro hangs per memory).
+        default_model="gemini-2.5-flash-lite",
         default_flags="--yolo",
         launch_cmd="gemini",
         task_suffix="_gemini",
@@ -431,11 +445,14 @@ def build_codex_ps1(nucleus: str, cfg: dict, meta: dict) -> str:
     tpl = _simple_ps1(
         nucleus, cfg, meta,
         cli="codex",
-        default_model="gpt-5-codex",
+        default_model="default",  # cosmetic only -- codex uses ChatGPT-auth default
         default_flags="--dangerously-bypass-approvals-and-sandbox",
         launch_cmd="codex exec",
         task_suffix="_codex",
     )
+    # Codex CLI on ChatGPT-plus auth rejects explicit --model (gpt-5/gpt-5-codex/o3/etc all 400).
+    # Strip the --model pair so codex uses its own internal default for the auth plan.
+    tpl = tpl.replace(', "--model", "default"', '')
     return tpl.replace("{extra_args}", '$cliArgs += "-C", $cexRoot')
 
 

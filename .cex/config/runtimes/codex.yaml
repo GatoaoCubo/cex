@@ -3,12 +3,12 @@ tier: mid
 provider: openai
 cli: codex
 models:
-  default: gpt-5-codex
+  default: gpt-5
   n01: gpt-5
   n02: gpt-5
-  n03: gpt-5-codex
+  n03: gpt-5
   n04: gpt-5
-  n05: gpt-5-codex
+  n05: gpt-5
   n06: gpt-5
   n07: gpt-5
 context_window: 256000
@@ -27,5 +27,6 @@ spawn_script: _spawn/spawn_grid.ps1
 cost_per_mtok_in: 5
 cost_per_mtok_out: 15
 notes: |
-  Codex CLI variant. gpt-5-codex optimized for code tasks (N03/N05).
+  Codex CLI variant. gpt-5 (ChatGPT auth compatible -- gpt-5-codex needs API key).
   Supports bash/shell natively -- can git commit autonomously.
+  2026-04-16: switched from gpt-5-codex to gpt-5 (auth mode: chatgpt).

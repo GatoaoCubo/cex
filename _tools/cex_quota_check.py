@@ -45,14 +45,14 @@ PROBES = {
         "auth_patterns": ["unauthorized", "401", "authenticate", "not logged in"],
     },
     "gemini": {
-        "cmd": ["gemini", "--yolo", "-m", "gemini-2.5-flash", "-p", "ping"],
+        "cmd": ["gemini", "--yolo", "-m", "gemini-2.5-flash-lite", "-p", "ping"],
         "timeout": 20,
         "quota_patterns": ["quota", "resourceexhausted", "rate limit", "429"],
         "auth_patterns": ["unauthorized", "401", "authenticate"],
     },
     "codex": {
         "cmd": ["codex", "exec", "--dangerously-bypass-approvals-and-sandbox",
-                "--model", "gpt-5-codex", "ping"],
+                "ping"],
         "timeout": 30,
         "quota_patterns": ["rate limit", "quota", "429", "exceeded"],
         "auth_patterns": ["unauthorized", "401", "authenticate"],

@@ -5,8 +5,8 @@ in grid dispatch. Each nucleus (N01-N06) produces a tiny signature artifact.
 
 Waves:
   W1 -- all ollama  (qwen3:8b, local, free)
-  W2 -- all gemini  (gemini-2.5-flash, cheapest cloud)
-  W3 -- all codex   (gpt-5-codex, cheapest OpenAI tier CLI)
+  W2 -- all gemini  (gemini-2.5-flash-lite, cheapest cloud)
+  W3 -- all codex   (gpt-5, cheapest OpenAI tier CLI -- gpt-5 needs API key)
   W4 -- all claude  (claude-haiku-4-5-20251001, cheapest Claude)
   W5 -- MIXED       (2 ollama + 2 gemini + 1 codex + 1 claude)
 
@@ -35,18 +35,18 @@ SHOWOFF_DIR = ROOT / "_showoff"
 NUCLEI = ["n01", "n02", "n03", "n04", "n05", "n06"]
 
 WAVES = [
-    {"n": 1, "runtime": "ollama", "model": "qwen3:8b",
-     "dispatch": ["bash", "_spawn/dispatch.sh", "grid-ollama", "SHOWOFF_W1", "qwen3:8b"],
+    {"n": 1, "runtime": "ollama", "model": "llama3.1:8b",
+     "dispatch": ["bash", "_spawn/dispatch.sh", "grid-ollama", "SHOWOFF_W1", "llama3.1:8b"],
      "handoff_suffix": "_ollama",
-     "mapping": {n: ("ollama", "qwen3:8b") for n in NUCLEI}},
-    {"n": 2, "runtime": "gemini", "model": "gemini-2.5-flash",
+     "mapping": {n: ("ollama", "llama3.1:8b") for n in NUCLEI}},
+    {"n": 2, "runtime": "gemini", "model": "gemini-2.5-flash-lite",
      "dispatch": ["bash", "_spawn/dispatch.sh", "grid-gemini", "SHOWOFF_W2"],
      "handoff_suffix": "_gemini",
-     "mapping": {n: ("gemini", "gemini-2.5-flash") for n in NUCLEI}},
-    {"n": 3, "runtime": "codex", "model": "gpt-5-codex",
+     "mapping": {n: ("gemini", "gemini-2.5-flash-lite") for n in NUCLEI}},
+    {"n": 3, "runtime": "codex", "model": "gpt-5",
      "dispatch": ["bash", "_spawn/dispatch.sh", "grid-codex", "SHOWOFF_W3"],
      "handoff_suffix": "_codex",
-     "mapping": {n: ("codex", "gpt-5-codex") for n in NUCLEI}},
+     "mapping": {n: ("codex", "gpt-5") for n in NUCLEI}},
     {"n": 4, "runtime": "claude", "model": "claude-haiku-4-5-20251001",
      "dispatch": ["bash", "_spawn/dispatch.sh", "grid-haiku", "SHOWOFF_W4"],
      "handoff_suffix": "",
@@ -55,12 +55,12 @@ WAVES = [
      "dispatch": None,  # manual mixed spawn
      "handoff_suffix": None,
      "mapping": {
-         "n01": ("ollama", "qwen3:8b"),
-         "n02": ("gemini", "gemini-2.5-flash"),
-         "n03": ("codex",  "gpt-5-codex"),
+         "n01": ("ollama", "llama3.1:8b"),
+         "n02": ("gemini", "gemini-2.5-flash-lite"),
+         "n03": ("codex",  "gpt-5"),
          "n04": ("claude", "claude-haiku-4-5-20251001"),
-         "n05": ("ollama", "qwen3:8b"),
-         "n06": ("gemini", "gemini-2.5-flash"),
+         "n05": ("ollama", "llama3.1:8b"),
+         "n06": ("gemini", "gemini-2.5-flash-lite"),
      }},
 ]
 
@@ -314,11 +314,17 @@ def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--wave", type=int, help="Run only wave N (1-5)")
     ap.add_argument("--dry-run", action="store_true", help="Print plan only")
+    ap.add_argument("--skip", default="", help="Comma-separated runtimes to skip (e.g. claude)")
     args = ap.parse_args()
 
     SHOWOFF_DIR.mkdir(exist_ok=True)
+    skip = {s.strip().lower() for s in args.skip.split(",") if s.strip()}
     results = []
-    waves = [w for w in WAVES if args.wave is None or w["n"] == args.wave]
+    waves = [w for w in WAVES
+             if (args.wave is None or w["n"] == args.wave)
+             and w["runtime"] not in skip]
+    if skip:
+        print(f"[SKIP] runtimes excluded: {sorted(skip)}")
     for wave in waves:
         ok = run_wave(wave, dry=args.dry_run)
         if not args.dry_run:
