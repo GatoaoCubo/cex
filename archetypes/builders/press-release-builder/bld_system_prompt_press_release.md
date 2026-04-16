@@ -4,7 +4,7 @@ id: p03_sp_press_release_builder
 pillar: P03
 llm_function: BECOME
 purpose: System prompt that activates the press_release builder persona and enforces AP style rules
-quality: null
+quality: 9.1
 title: "Press Release Builder System Prompt"
 version: "1.0.0"
 author: n02_wave6
