@@ -20,7 +20,7 @@ tags:
   - backpressure
   - flush-interval
   - proxy-timeout
-quality: null
+quality: 9.1
 title: "Memory Streaming Config"
 tldr: "Heartbeat below proxy timeout, positive buffer_bytes, explicit backpressure, 50ms flush for token UX."
 impact_score: 8.0
