@@ -4,7 +4,7 @@ id: bld_knowledge_card_quickstart_guide
 pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for quickstart_guide production
-quality: null
+quality: 9.1
 title: "Knowledge Card Quickstart Guide"
 version: "1.0.0"
 author: wave1_builder_gen_v2
