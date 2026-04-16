@@ -14,7 +14,7 @@ keywords: [planning_strategy, react, tree-of-thoughts, plan-and-execute, htn, re
 triggers: ["define ReAct loop for agent", "build Tree-of-Thoughts planner", "create HTN decomposition", "add Reflexion self-critique"]
 capabilities: >
   L1: Specialist in building planning_strategy -- agent planning algorithms (ReAct, ToT, Plan-and-Execute, HTN, Reflexion). L2: Select and parameterize decomposition pattern, branching, revision, and termination. L3: When user needs an agent to decompose a goal into executable steps.
-quality: null
+quality: 9.1
 title: "Manifest Planning Strategy"
 tldr: "Builder for planning_strategy -- HOW an agent decomposes a goal into steps. Covers Linear (ReAct/CoT), Tree (ToT/MCTS), Graph (LLMCompiler/DAG), Hierarchical (HTN/Plan-and-Execute), and Reflective (Reflexion/Self-Refine) classes."
 density_score: 0.90
