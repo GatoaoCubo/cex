@@ -4,7 +4,7 @@ id: p10_lr_incident_report_builder
 pillar: P10
 llm_function: INJECT
 purpose: Learned patterns and pitfalls for incident_report construction
-quality: null
+quality: 8.7
 title: "Learning Record Incident Report"
 version: "1.0.0"
 author: wave1_builder_gen
@@ -16,18 +16,18 @@ updated: "2026-04-13"
 density_score: 0.85
 ---
 
-## Observation  
-Incident reports often lack consistent structure, leading to incomplete root cause analysis or omitted mitigation steps. Teams may prioritize speed over depth, resulting in superficial documentation that fails to capture systemic issues.  
+## Observation
+Incident reports often lack consistent structure, leading to incomplete root cause analysis or omitted mitigation steps. Teams may prioritize speed over depth, resulting in superficial documentation that fails to capture systemic issues.
 
-## Pattern  
-Successful reports use standardized templates with mandatory sections (e.g., timeline, impact, resolution). Collaborative reviews ensure clarity and completeness, while integrating lessons learned into operational procedures.  
+## Pattern
+Successful reports use standardized templates with mandatory sections (e.g., timeline, impact, resolution). Collaborative reviews ensure clarity and completeness, while integrating lessons learned into operational procedures.
 
-## Evidence  
-Reviewed artifacts showed that reports with detailed timelines and stakeholder interviews had 3x higher resolution accuracy than those relying on fragmented notes. One post-mortem omitted root causes due to premature closure.  
+## Evidence
+Reviewed artifacts showed that reports with detailed timelines and stakeholder interviews had 3x higher resolution accuracy than those relying on fragmented notes. One post-mortem omitted root causes due to premature closure.
 
-## Recommendations  
-- Enforce template compliance with mandatory fields (e.g., "Root Cause," "Mitigation").  
-- Conduct peer reviews before finalizing reports to catch gaps.  
-- Link incident reports to actionable items in runbooks or improvement plans.  
-- Train teams on critical thinking for root cause analysis (e.g., 5 Whys).  
+## Recommendations
+- Enforce template compliance with mandatory fields (e.g., "Root Cause," "Mitigation").
+- Conduct peer reviews before finalizing reports to catch gaps.
+- Link incident reports to actionable items in runbooks or improvement plans.
+- Train teams on critical thinking for root cause analysis (e.g., 5 Whys).
 - Automate metadata capture (e.g., timestamps, affected systems) to reduce manual errors.
