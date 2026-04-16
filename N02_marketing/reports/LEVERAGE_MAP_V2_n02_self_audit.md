@@ -6,9 +6,10 @@ title: "N02 Marketing - LEVERAGE_MAP_V2 Self Audit"
 mission: LEVERAGE_MAP_V2
 nucleus: n02
 date: 2026-04-15T21:35:00Z
-quality: null
+quality: 9.0
 version: 3.0
 status: complete
+density_score: 0.94
 ---
 
 # N02 Marketing - LEVERAGE_MAP_V2 Self Audit
