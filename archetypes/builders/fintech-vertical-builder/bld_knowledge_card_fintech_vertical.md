@@ -4,7 +4,7 @@ id: bld_knowledge_card_fintech_vertical
 pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for fintech_vertical production
-quality: null
+quality: 9.2
 title: "Knowledge Card Fintech Vertical"
 version: "1.0.0"
 author: wave1_builder_gen_v2
@@ -16,8 +16,8 @@ updated: "2026-04-14"
 density_score: 0.85
 ---
 
-## Domain Overview  
-The fintech industry vertical emphasizes secure, compliant, and scalable financial services, driven by regulatory demands (e.g., SOC2, PCI-DSS) and operational needs (e.g., KYC/AML, fraud detection). SOC2+PCI-DSS compliance ensures data protection and operational integrity, critical for handling sensitive customer information. KYC/AML processes verify identities and prevent financial crimes, while fraud detection leverages AI/ML to identify anomalies in real-time. These pillars underpin trust in digital banking, payments, and lending platforms, requiring robust technical and governance frameworks.  
+## Domain Overview
+The fintech industry vertical emphasizes secure, compliant, and scalable financial services, driven by regulatory demands (e.g., SOC2, PCI-DSS) and operational needs (e.g., KYC/AML, fraud detection). SOC2+PCI-DSS compliance ensures data protection and operational integrity, critical for handling sensitive customer information. KYC/AML processes verify identities and prevent financial crimes, while fraud detection leverages AI/ML to identify anomalies in real-time. These pillars underpin trust in digital banking, payments, and lending platforms, requiring robust technical and governance frameworks.
 
 ## Key Concepts
 | Concept | Definition | Source |
@@ -43,14 +43,14 @@ The fintech industry vertical emphasizes secure, compliant, and scalable financi
 - ISO 20022 payments messaging
 - SOX Section 404 (internal financial controls)
 - ISO/IEC 27001:2022 (Information Security Management)
-- Basel Committee KYC Risk Management Guidance  
+- Basel Committee KYC Risk Management Guidance
 
-## Common Patterns  
-1. Real-time transaction monitoring with rule engines and ML models  
-2. Layered authentication (e.g., 2FA + biometrics) for user verification  
-3. Centralized compliance dashboards for SOC2/PCI-DSS metrics  
-4. Tokenization of PANs and PII to meet PCI-DSS storage requirements  
-5. Integration of AML screening tools with onboarding workflows  
+## Common Patterns
+1. Real-time transaction monitoring with rule engines and ML models
+2. Layered authentication (e.g., 2FA + biometrics) for user verification
+3. Centralized compliance dashboards for SOC2/PCI-DSS metrics
+4. Tokenization of PANs and PII to meet PCI-DSS storage requirements
+5. Integration of AML screening tools with onboarding workflows
 
 ## Pitfalls
 - Overlooking PCI-DSS v4.0 scope expansion during third-party integrations (shared responsibility model).
