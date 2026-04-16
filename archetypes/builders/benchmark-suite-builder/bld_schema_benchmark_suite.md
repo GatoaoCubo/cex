@@ -4,7 +4,7 @@ id: bld_schema_benchmark_suite
 pillar: P06
 llm_function: CONSTRAIN
 purpose: Formal schema -- SINGLE SOURCE OF TRUTH for benchmark_suite
-quality: null
+quality: 9.1
 title: "Schema Benchmark Suite"
 version: "1.0.0"
 author: wave1_builder_gen_v2
