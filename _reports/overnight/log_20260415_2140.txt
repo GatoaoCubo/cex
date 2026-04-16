@@ -38,3 +38,5 @@
 [22:41:29] Phase B cycle 11 mode=auto
 [22:41:48] Phase B cycle 11 done. Sleeping 180 s.
 [22:44:48] Phase B cycle 12 mode=evolve
+[22:44:51] Phase B cycle 12 done. Sleeping 180 s.
+[22:47:51] Phase B cycle 13 mode=auto
