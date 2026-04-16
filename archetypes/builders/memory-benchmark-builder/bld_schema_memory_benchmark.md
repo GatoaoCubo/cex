@@ -4,7 +4,7 @@ id: bld_schema_memory_benchmark
 pillar: P06
 llm_function: CONSTRAIN
 purpose: Formal schema -- SINGLE SOURCE OF TRUTH for memory_benchmark
-quality: null
+quality: 9.1
 title: "Schema Memory Benchmark"
 version: "1.1.0"
 author: n05_operations
