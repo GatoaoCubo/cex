@@ -4,7 +4,7 @@ id: bld_architecture_model_registry
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of model_registry -- inventory, dependencies
-quality: null
+quality: 8.9
 title: "Architecture Model Registry"
 version: "1.0.0"
 author: wave1_builder_gen
