@@ -4,7 +4,7 @@ id: bld_collaboration_ai_rmf_profile
 pillar: P12
 llm_function: COLLABORATE
 purpose: How ai_rmf_profile-builder works in crews with other builders
-quality: null
+quality: 8.9
 title: "Collaboration AI RMF Profile"
 version: "1.0.0"
 author: n01_wave7
