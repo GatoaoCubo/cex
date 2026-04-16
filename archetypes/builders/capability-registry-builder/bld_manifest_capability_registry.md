@@ -4,7 +4,7 @@ id: capability-registry-builder
 pillar: P08
 llm_function: BECOME
 purpose: Builder identity, capabilities, routing for capability_registry
-quality: null
+quality: 8.9
 title: "Type Builder Capability Registry"
 version: "1.0.0"
 author: n04_wave8
