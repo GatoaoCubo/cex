@@ -4,7 +4,7 @@ id: bld_architecture_threat_model
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of threat_model -- inventory, dependencies
-quality: null
+quality: 9.0
 title: "Architecture Threat Model"
 version: "1.1.0"
 author: n05_ops
