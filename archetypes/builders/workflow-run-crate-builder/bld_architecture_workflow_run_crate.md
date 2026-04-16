@@ -4,7 +4,7 @@ id: bld_architecture_workflow_run_crate
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of workflow_run_crate -- inventory, dependencies
-quality: null
+quality: 9.0
 title: "Architecture Workflow Run Crate"
 version: "1.0.0"
 author: n04_wave7
