@@ -3,8 +3,9 @@ id: kc_agentic_rag
 kind: knowledge_card
 title: Agentic RAG Pattern
 version: 1.0.0
-quality: null
+quality: 8.8
 pillar: P01
+density_score: 0.98
 ---
 
 # Agentic RAG Pattern
