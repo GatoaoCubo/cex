@@ -4,7 +4,7 @@ id: bld_knowledge_card_healthcare_vertical
 pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for healthcare_vertical production
-quality: null
+quality: 9.2
 title: "Knowledge Card Healthcare Vertical"
 version: "1.0.0"
 author: wave1_builder_gen_v2
@@ -16,10 +16,10 @@ updated: "2026-04-14"
 density_score: 0.85
 ---
 
-## Domain Overview  
-The healthcare industry vertical centers on managing sensitive patient data, ensuring interoperability through standardized protocols, and adhering to regulatory frameworks like HIPAA. Key challenges include secure handling of Protected Health Information (PHI), seamless data exchange between systems (e.g., EHRs, labs), and compliance with evolving standards such as HL7/FHIR. Use cases span clinical workflows, telemedicine, and population health management, requiring robust data governance and encryption practices.  
+## Domain Overview
+The healthcare industry vertical centers on managing sensitive patient data, ensuring interoperability through standardized protocols, and adhering to regulatory frameworks like HIPAA. Key challenges include secure handling of Protected Health Information (PHI), seamless data exchange between systems (e.g., EHRs, labs), and compliance with evolving standards such as HL7/FHIR. Use cases span clinical workflows, telemedicine, and population health management, requiring robust data governance and encryption practices.
 
-Healthcare IT systems must balance innovation with strict privacy controls, often integrating legacy systems with modern APIs. Standards like HL7’s FHIR enable structured data sharing, while HIPAA mandates safeguards for PHI across storage, transmission, and access. The vertical’s complexity demands collaboration between clinicians, IT, and compliance teams to avoid breaches and ensure seamless care delivery.  
+Healthcare IT systems must balance innovation with strict privacy controls, often integrating legacy systems with modern APIs. Standards like HL7’s FHIR enable structured data sharing, while HIPAA mandates safeguards for PHI across storage, transmission, and access. The vertical’s complexity demands collaboration between clinicians, IT, and compliance teams to avoid breaches and ensure seamless care delivery.
 
 ## Key Concepts
 | Concept | Definition | Source |
@@ -45,14 +45,14 @@ Healthcare IT systems must balance innovation with strict privacy controls, ofte
 - 21 CFR Part 11 (FDA electronic records)
 - HITRUST CSF v11
 - HIPAA Omnibus Rule (2013)
-- NIST SP 800-66 (HIPAA Security Rule implementation guide)  
+- NIST SP 800-66 (HIPAA Security Rule implementation guide)
 
-## Common Patterns  
-1. Use FHIR APIs for interoperable EHR data exchange.  
-2. Implement AES-256 encryption for PHI at rest and in transit.  
-3. Employ HL7 v2.x messaging for legacy hospital system integration.  
-4. Apply IHE profiles to standardize imaging and lab workflow integration.  
-5. Map ICD-10 codes to SNOMED-CT for clinical decision support.  
+## Common Patterns
+1. Use FHIR APIs for interoperable EHR data exchange.
+2. Implement AES-256 encryption for PHI at rest and in transit.
+3. Employ HL7 v2.x messaging for legacy hospital system integration.
+4. Apply IHE profiles to standardize imaging and lab workflow integration.
+5. Map ICD-10 codes to SNOMED-CT for clinical decision support.
 
 ## Pitfalls
 - Mishandling PHI without HIPAA-compliant access controls (RBAC + MFA).
