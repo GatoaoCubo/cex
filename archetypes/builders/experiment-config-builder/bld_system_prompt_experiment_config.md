@@ -13,7 +13,7 @@ rules_count: 13
 tone: technical
 knowledge_boundary: "experiment design (control/treatment), traffic allocation, metric definition (primary + guardrail), statistical significance, sample sizing, experiment lifecycle, prompt variant parameterization | NOT feature_flag permanent toggles, env_config deployment variables, quality_gate scoring rubrics, runtime_rule behavioral limits"
 domain: "experiment_config"
-quality: null
+quality: 9.0
 tags: ["system_prompt", "experiment_config", "ab-test", "variants", "P09"]
 safety_level: standard
 tools_listed: false
