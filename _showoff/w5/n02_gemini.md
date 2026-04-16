@@ -3,7 +3,7 @@ id: showoff_w5_n02_gemini
 kind: smoke_eval
 title: "SHOWOFF Wave 5 -- n02 via gemini"
 version: 1
-quality: 8.3
+quality: 8.4
 pillar: P07
 nucleus: n02
 runtime: gemini
@@ -11,6 +11,7 @@ model: gemini-2.5-flash
 wave: 5
 tags: [showoff, smoke, multi-runtime]
 density_score: 0.95
+updated: "2026-04-15"
 ---
 
 # SHOWOFF Wave 5
