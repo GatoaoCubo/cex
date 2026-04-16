@@ -4,7 +4,7 @@ id: bld_examples_competitive_matrix
 pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of competitive_matrix artifacts
-quality: null
+quality: 9.1
 title: "Examples Competitive Matrix"
 version: "1.0.0"
 author: wave1_builder_gen_v2
