@@ -4,7 +4,7 @@ id: p10_lr_ai_rmf_profile_builder
 pillar: P10
 llm_function: INJECT
 purpose: Learned patterns and pitfalls for ai_rmf_profile construction
-quality: null
+quality: 8.7
 title: "Learning Record AI RMF Profile"
 version: "1.0.0"
 author: n01_wave7
