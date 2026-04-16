@@ -3,7 +3,7 @@ kind: tools
 id: bld_tools_agent_computer_interface
 pillar: P04
 llm_function: CALL
-quality: null
+quality: 9.0
 title: "Tools Agent Computer Interface"
 version: "1.0.0"
 author: n05_builder
