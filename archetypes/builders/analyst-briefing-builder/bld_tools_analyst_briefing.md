@@ -4,7 +4,7 @@ id: bld_tools_analyst_briefing
 pillar: P04
 llm_function: CALL
 purpose: Tools available for analyst_briefing production
-quality: null
+quality: 8.9
 title: "Tools Analyst Briefing"
 version: "1.0.0"
 author: n01_wave6
