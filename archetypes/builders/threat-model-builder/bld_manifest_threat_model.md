@@ -4,7 +4,7 @@ id: threat-model-builder
 pillar: P11
 llm_function: BECOME
 purpose: Builder identity, capabilities, routing for threat_model
-quality: null
+quality: 9.0
 title: "Type Builder Threat Model"
 version: "1.0.0"
 author: wave1_builder_gen
