@@ -4,7 +4,7 @@ id: bld_examples_bias_audit
 pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of bias_audit artifacts
-quality: null
+quality: 9.1
 title: "Examples Bias Audit"
 version: "1.0.0"
 author: wave1_builder_gen
@@ -27,19 +27,19 @@ date: "2023-10-01"
 kind: "bias_audit"
 ---
 
-**Methodology**:  
-- Evaluated demographic parity and equalized odds across gender (male/female) using 10,000 loan applications.  
-- Used SHAP values to analyze feature contributions.  
-- Compared outcomes against baseline model (no fairness constraints).  
+**Methodology**:
+- Evaluated demographic parity and equalized odds across gender (male/female) using 10,000 loan applications.
+- Used SHAP values to analyze feature contributions.
+- Compared outcomes against baseline model (no fairness constraints).
 
-**Results**:  
-- Female applicants had 15% lower approval rates (p < 0.01).  
-- SHAP analysis revealed "credit score" was the primary driver, but interaction with gender was significant.  
-- Post-audit model reduced disparity by 70% via reweighting.  
+**Results**:
+- Female applicants had 15% lower approval rates (p < 0.01).
+- SHAP analysis revealed "credit score" was the primary driver, but interaction with gender was significant.
+- Post-audit model reduced disparity by 70% via reweighting.
 
-**Discussion**:  
-- Trade-offs between fairness and accuracy (2% drop in overall accuracy).  
-- Recommendations: Monitor gender-disparity metrics quarterly.  
+**Discussion**:
+- Trade-offs between fairness and accuracy (2% drop in overall accuracy).
+- Recommendations: Monitor gender-disparity metrics quarterly.
 ```
 
 ## Anti-Example 1: Missing Methodology
@@ -51,11 +51,11 @@ date: "2023-09-15"
 kind: "bias_audit"
 ---
 
-**Results**:  
-- "Found bias in age group 30-40."  
-- "Suggested adding age to fairness constraints."  
+**Results**:
+- "Found bias in age group 30-40."
+- "Suggested adding age to fairness constraints."
 ```
-## Why it fails  
+## Why it fails
 No explanation of evaluation methodology, metrics, or data sources. Cannot verify claims or reproduce analysis.
 
 ## Anti-Example 2: Single Metric Focus
@@ -67,13 +67,13 @@ date: "2023-08-20"
 kind: "bias_audit"
 ---
 
-**Methodology**:  
-- Evaluated model accuracy on test set.  
+**Methodology**:
+- Evaluated model accuracy on test set.
 
-**Results**:  
-- Accuracy: 85%.  
+**Results**:
+- Accuracy: 85%.
 ```
-## Why it fails  
+## Why it fails
 Confuses general performance evaluation with fairness audit. Ignores required fairness-specific metrics and analysis.
 
 ## Pattern Recognition
