@@ -4,7 +4,7 @@ id: p03_sp_customer_segment_builder
 pillar: P03
 llm_function: BECOME
 purpose: System prompt defining customer_segment-builder persona and rules
-quality: null
+quality: 9.0
 title: "System Prompt Customer Segment"
 version: "1.0.0"
 author: wave1_builder_gen_v2
