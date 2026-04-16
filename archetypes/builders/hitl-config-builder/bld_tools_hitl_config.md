@@ -4,7 +4,7 @@ id: bld_tools_hitl_config
 pillar: P04
 llm_function: CALL
 purpose: Tools and APIs available for hitl_config production
-quality: null
+quality: 9.1
 title: "Tools Hitl Config"
 version: "1.0.0"
 author: n03_builder
