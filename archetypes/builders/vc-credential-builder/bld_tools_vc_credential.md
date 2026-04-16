@@ -4,7 +4,7 @@ id: bld_tools_vc_credential
 pillar: P04
 llm_function: CALL
 purpose: Tools available for vc_credential production
-quality: null
+quality: 8.9
 title: "Tools VC Credential"
 version: "1.0.0"
 author: n04_wave7
