@@ -4,7 +4,7 @@ id: bld_config_nps_survey
 pillar: P09
 llm_function: CONSTRAIN
 purpose: Naming, paths, limits for nps_survey production
-quality: null
+quality: 8.6
 title: "Config Nps Survey"
 version: "1.0.0"
 author: n05_wave6
