@@ -4,7 +4,7 @@ id: bld_examples_rl_algorithm
 pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of rl_algorithm artifacts
-quality: null
+quality: 8.9
 title: "Examples Rl Algorithm"
 version: "1.0.0"
 author: wave1_builder_gen
@@ -31,11 +31,11 @@ keywords: ["policy gradient", "actor-critic", "on-policy"]
 - **Environment**: Continuous action space, episodic tasks
 - **Policy Update**: Clipped surrogate objective with trust region constraint
 - **Value Function**: Neural network approximator with TD error loss
-- **Training Loop**: 
+- **Training Loop**:
   1. Collect trajectories with current policy
   2. Compute advantages via generalized advantage estimation
   3. Update policy and value function via stochastic gradient ascent
-- **Hyperparameters**: 
+- **Hyperparameters**:
   - Clip range ε = 0.2
   - Generalized advantage estimation parameter λ = 0.95
   - Policy and value network learning rates
