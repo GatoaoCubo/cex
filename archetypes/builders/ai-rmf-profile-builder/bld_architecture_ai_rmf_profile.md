@@ -4,7 +4,7 @@ id: bld_architecture_ai_rmf_profile
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of ai_rmf_profile -- inventory, dependencies
-quality: null
+quality: 9.0
 title: "Architecture AI RMF Profile"
 version: "1.0.0"
 author: n01_wave7
