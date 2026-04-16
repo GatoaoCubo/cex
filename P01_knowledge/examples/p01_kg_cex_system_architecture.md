@@ -26,7 +26,7 @@ relation_types:
   - feeds
 storage_backend: in_memory
 traversal_strategy: hybrid
-quality: null
+quality: 9.1
 tags: [knowledge_graph, cex-architecture, graphrag, P01, system-design]
 tldr: "CEX system architecture graph: 6 entity types, 9 relation types, hybrid traversal, in_memory, leiden community detection"
 description: "Knowledge graph schema for CEX architecture covering nuclei (N00-N07), pillars (P01-P12), builders, kinds, artifacts, and their relationships"
@@ -37,6 +37,7 @@ community_detection: leiden
 extraction_prompt: "Schema-constrained LLM triplet extraction: entity types Nucleus/Pillar/Builder/Kind/Artifact/Pipeline with relation type whitelist"
 node_count_estimate: 60
 edge_count_estimate: 120
+density_score: 1.0
 ---
 
 ## Overview
