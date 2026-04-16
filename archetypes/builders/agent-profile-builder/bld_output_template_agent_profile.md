@@ -4,7 +4,7 @@ id: bld_output_template_agent_profile
 pillar: P05
 llm_function: PRODUCE
 purpose: Fillable scaffold for agent_profile artifacts (persona + identity vectors + constraints)
-quality: null
+quality: 9.0
 title: "Output Template Agent Profile"
 version: "1.1.0"
 author: n03_builder
