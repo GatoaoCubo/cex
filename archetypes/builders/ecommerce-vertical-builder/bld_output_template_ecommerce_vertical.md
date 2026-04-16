@@ -4,7 +4,7 @@ id: bld_output_template_ecommerce_vertical
 pillar: P05
 llm_function: PRODUCE
 purpose: Template with vars for ecommerce_vertical production
-quality: null
+quality: 9.1
 title: "Output Template Ecommerce Vertical"
 version: "1.0.0"
 author: wave1_builder_gen_v2
