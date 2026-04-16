@@ -4,7 +4,7 @@ id: p10_lr_vc_credential_builder
 pillar: P10
 llm_function: INJECT
 purpose: Learned patterns and pitfalls for vc_credential construction
-quality: null
+quality: 8.7
 title: "Learning Record VC Credential"
 version: "1.0.0"
 author: n04_wave7
