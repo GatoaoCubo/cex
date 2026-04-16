@@ -4,7 +4,7 @@ id: bld_manifest_agent_grounding_record
 pillar: P10
 llm_function: BECOME
 purpose: Define the identity, capabilities, and routing rules for the agent_grounding_record builder
-quality: null
+quality: 9.1
 title: "Agent Grounding Record Builder Manifest"
 version: "1.0.0"
 author: wave7_n05
