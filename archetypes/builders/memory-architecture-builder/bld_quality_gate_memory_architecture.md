@@ -4,7 +4,7 @@ id: p10_qg_memory_architecture
 pillar: P11
 llm_function: GOVERN
 purpose: Quality gate with HARD and SOFT scoring for memory_architecture
-quality: null
+quality: 9.0
 title: "Quality Gate: memory_architecture"
 version: "2.0.0"
 author: n06_commercial
