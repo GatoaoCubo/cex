@@ -1,0 +1,133 @@
+---
+report: n07_boots_smoke
+mission: VERTICAL_DISTILLATION_20260416
+nucleus: n05
+created: 2026-04-16T16:05:00-03:00
+quality: null
+---
+
+# N07 Boots Smoke Report
+
+## Scope
+
+Read-only smoke validation of:
+
+- `boot/n07_codex.ps1`
+- `boot/n07_gemini.ps1`
+- `boot/n07_ollama.ps1`
+
+Validation covered parse checks, expected diff deltas vs N06, ASCII scan, handoff path wiring, exit-signal safety net, `CEX_AUTO_ACCEPT` handling, and dry-run wrapper execution with mocked CLIs so no heavy runtime was launched.
+
+## 8F Pipeline
+
+```text
+=== 8F PIPELINE ===
+F1 CONSTRAIN: task=VERTICAL_DISTILLATION_WAVE_3, output=_reports/distillation/n07_boots_smoke.md
+F2 BECOME: loaded N05 operations rules + agent card
+F3 INJECT: handoff + manifest + plan + CLAUDE + N07/N05 rules + boot/shared scripts
+F4 REASON: validate parse, diffs, ASCII, handoff wiring, signal path, auto-accept, dry-run behavior
+F5 CALL: PowerShell parse tests, git diff --no-index, cex_sanitize, rg, mocked wrapper runs
+F6 PRODUCE: smoke report drafted with findings and evidence
+F7 GOVERN: overall=PARTIAL due Ollama handoff-path mismatch and missing boot-level auto-accept wiring
+F8 COLLABORATE: report saved, compiled, committed, signal pending
+===================
+```
+
+## Results
+
+### Parse Check
+
+| Boot | Result |
+|------|--------|
+| `boot/n07_codex.ps1` | OK |
+| `boot/n07_gemini.ps1` | OK |
+| `boot/n07_ollama.ps1` | OK |
+
+Summary: `3/3 OK`
+
+### Diff Summary vs N06
+
+| Pair | Added | Removed | Allowed deltas only |
+|------|-------|---------|---------------------|
+| `n06_codex -> n07_codex` | 9 | 9 | Yes |
+| `n06_gemini -> n07_gemini` | 9 | 9 | Yes |
+| `n06_ollama -> n07_ollama` | 16 | 16 | No |
+
+Notes:
+
+- `codex` and `gemini` only changed N06 to N07 identity, handoff suffix, rule wildcard, and agent card path.
+- `ollama` correctly changed N06 to N07 identity and `Strategic Greed` to `Orchestrating Sloth`, but it still points to `.cex/runtime/handoffs/n07_task.md` instead of the required runtime-specific `n07_task_ollama.md`.
+
+### ASCII Scan
+
+`python _tools/cex_sanitize.py --check` reported clean for the three target files.
+
+### Handoff Path Check
+
+| Boot | Expected | Observed | Result |
+|------|----------|----------|--------|
+| `n07_codex.ps1` | `n07_task_codex.md` | `n07_task_codex.md` | PASS |
+| `n07_gemini.ps1` | `n07_task_gemini.md` | `n07_task_gemini.md` | PASS |
+| `n07_ollama.ps1` | `n07_task_ollama.md` | `n07_task.md` | FAIL |
+
+Evidence:
+
+- `boot/n07_codex.ps1:44,55`
+- `boot/n07_gemini.ps1:44,55`
+- `boot/n07_ollama.ps1:67,131`
+
+### Exit Signal Dry-Run
+
+Dry-run execution was performed by shadowing `codex`, `gemini`, and the Ollama `python` launch path with in-session mock functions. This exercised the wrapper logic without launching a real heavyweight CLI.
+
+| Boot | Mocked launch intercepted | Safety-net exit signal path reached | Result |
+|------|---------------------------|-------------------------------------|--------|
+| `n07_codex.ps1` | Yes | Yes | PASS |
+| `n07_gemini.ps1` | Yes | Yes | PASS |
+| `n07_ollama.ps1` | Yes | Yes | PASS |
+
+Observed behavior:
+
+- watchdog armed/disarmed normally
+- mocked launcher received the expected prompt payload
+- `Emit-ExitSignal` executed after wrapper return
+
+### `CEX_AUTO_ACCEPT` Check
+
+Shared support exists in `boot/_shared/worktree_helpers.ps1:42-50`, where `Initialize-CexAutoAccept` sets `CEX_AUTO_ACCEPT=1`.
+
+Result: `PARTIAL`
+
+Reason:
+
+- the helper exists
+- none of the three N07 boot scripts source `worktree_helpers.ps1`
+- none of the three N07 boot scripts call `Initialize-CexAutoAccept`
+- dry-run mocks inherited a pre-set `CEX_AUTO_ACCEPT=1`, but the boot wrappers do not actively wire the feature themselves
+
+### Agent Card Presence
+
+`N07_admin/agent_card_n07.md` exists.
+
+## Findings
+
+1. `boot/n07_ollama.ps1` fails the runtime-specific handoff-path requirement. It reads `n07_task.md` and passes that same path into `ollama_nucleus.py`, so it does not match the required `n07_task_ollama.md` pattern.
+2. `CEX_AUTO_ACCEPT` support is not boot-wired for these N07 wrappers. The helper exists in shared code, but the new N07 scripts never import or call it, so the feature is only pass-through if the environment is already set externally.
+
+## Overall
+
+`OVERALL: PARTIAL`
+
+Passes:
+
+- parse check `3/3`
+- ASCII clean
+- codex/gemini handoff path wiring
+- dry-run wrapper interception without real CLI launch
+- exit-signal safety net path present and exercised
+- N07 agent card present
+
+Fails / gaps:
+
+- Ollama handoff path does not follow the required runtime-specific naming
+- `CEX_AUTO_ACCEPT` is not explicitly wired by the N07 boot wrappers

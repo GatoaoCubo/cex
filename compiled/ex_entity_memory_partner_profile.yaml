@@ -1,0 +1,81 @@
+id: ex_entity_memory_partner_profile
+kind: entity_memory
+pillar: P10
+version: 1.0.0
+title: Entity Memory -- B2B Partner Profile
+description: Entity memory schema for B2B partner profiles. Captures registration data, tier, activity history, and commercial
+  signals for CRM and AI-assisted sales workflows.
+domain: crm
+nucleus: N06
+quality: null
+tags:
+- entity-memory
+- crm
+- b2b
+- partner
+- profile
+- commercial
+brand_placeholders:
+- BRAND_NAME
+- BRAND_CRM_TABLE_PREFIX
+- BRAND_VERTICAL
+1_entity_schema: "entity_type: b2b_partner\nversion: 1.0.0\nstorage: supabase.{{BRAND_CRM_TABLE_PREFIX}}_partners\n\nfields:\n\
+  \  # Identity\n  id:           uuid       # system-generated\n  cnpj:         string     # Brazilian company ID (unique)\n\
+  \  company_name: string     # Legal or trade name\n  contact_name: string     # Primary contact full name\n  email:    \
+  \    string     # Primary email\n  whatsapp:     string     # WhatsApp number (with country code)\n  region:       string\
+  \     # State or city\n\n  # Commercial\n  tier:         enum       # starter | pro | enterprise\n  status:       enum \
+  \      # pending | active | suspended | cancelled\n  discount_pct: float      # Current negotiated discount (%)\n  monthly_volume:\
+  \ integer  # Average monthly units ordered (last 3 months)\n\n  # Engagement\n  last_order_at:  datetime\n  last_login_at:\
+  \  datetime\n  total_orders:   integer\n  lifetime_value: decimal  # Total GMV in {{BRAND_CURRENCY}}\n\n  # Signals\n  churn_risk:\
+  \    enum      # low | medium | high\n  growth_signal: enum      # stable | growing | declining\n  notes:         text \
+  \     # Free-form CRM notes\n\n---"
+2_entity_lifecycle: "REGISTRATION                                            ACTIVE PARTNER\n     |                      \
+  \                                 |\n  pending  -> (CNPJ validated + manual review) ->  active  <-> suspended -> cancelled\n\
+  \     |\n  auto-reject if CNPJ invalid\n\n---"
+3_memory_operations: ''
+3_1_create: "Triggered by: partner registration form submission.\n\n# Pseudocode\npartner = {\n    \"cnpj\": validated_cnpj,\n\
+  \    \"company_name\": form.company,\n    \"contact_name\": form.contact,\n    \"email\": form.email,\n    \"whatsapp\"\
+  : form.whatsapp,\n    \"tier\": \"starter\",\n    \"status\": \"pending\"\n}\nsupabase.table(\"{{BRAND_CRM_TABLE_PREFIX}}_partners\"\
+  ).insert(partner)\nnotify_admin(partner)"
+3_2_update_approval: "supabase.table(\"{{BRAND_CRM_TABLE_PREFIX}}_partners\")\n  .update({\"status\": \"active\", \"approved_at\"\
+  : now()})\n  .eq(\"id\", partner_id)\nnotify_partner(\"approval_email\", partner)"
+3_3_query_ai_sales_assistant: "# Load partner context for AI sales message generation\ndef load_partner_context(partner_id):\n\
+  \    partner = get_partner(partner_id)\n    recent_orders = get_orders(partner_id, limit=5)\n    return {\n        \"name\"\
+  : partner.contact_name,\n        \"company\": partner.company_name,\n        \"tier\": partner.tier,\n        \"discount\"\
+  : partner.discount_pct,\n        \"last_order\": recent_orders[0] if recent_orders else None,\n        \"growth_signal\"\
+  : partner.growth_signal\n    }\n\n---"
+4_crm_dashboard_signals: '| Signal | Logic | Action |
+
+  |--------|-------|--------|
+
+  | Churn risk HIGH | No orders in (30+ days) AND tier=starter | Flag for outreach |
+
+  | Growth signal GROWING | Orders +20% MoM for 2+ months | Upsell to Pro tier |
+
+  | Volume threshold | monthly_volume crosses tier minimum | Upgrade prompt |
+
+  | CNPJ expiry | CNPJ status check via API | Alert partner |
+
+
+  ---'
+5_integration_points: '| Consumer | How it uses this entity |
+
+  |----------|------------------------|
+
+  | B2B dashboard | Read partner profile + orders |
+
+  | AI sales assistant | Context injection for message generation |
+
+  | Admin CRM | Full CRUD + approval workflow |
+
+  | Email/WhatsApp automation | Event-triggered notifications |
+
+  | {{BRAND_ERP}} | Partner ID linkage for wholesale orders |
+
+
+  ---'
+6_privacy_compliance:
+- CNPJ is PII -- encrypted at rest in Supabase
+- Emails not shared with third parties without consent
+- LGPD consent captured at registration form
+- Partner can request data deletion via {{BRAND_PARTNER_EMAIL}}

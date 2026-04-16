@@ -1,0 +1,62 @@
+id: ex-integration-guide-bling
+kind: integration_guide
+pillar: P04
+title: Bling ERP Integration Guide
+version: 0.1.0
+quality: null
+status: template
+brand_placeholders:
+- BRAND_NAME
+- BRAND_BLING_CLIENT_ID
+- BRAND_BLING_CLIENT_SECRET
+- BRAND_BLING_ACCESS_TOKEN
+- BRAND_BLING_WEBHOOK_SECRET
+- BRAND_SUPABASE_PROJECT_REF
+tags:
+- commerce
+- template
+- distillation
+- bling
+- integration_guide
+purpose: Bind {{BRAND_NAME}} to Bling ERP for fiscal product registration, warehouse stock truth, order mirroring, and (optionally)
+  NF-e emission. This is the Brazilian fiscal backbone layer.
+when_to_use:
+- Brand sells in Brazil and needs fiscal compliance beyond the storefront.
+- Inventory-of-truth moves from Shopify to the ERP layer.
+- NF-e emission is required per sale (B2B default, B2C depending on regime).
+prerequisites:
+- Bling Plus or higher subscription (API access is not on free tier).
+- 'Bling dev app created at `https://developer.bling.com.br`: client_id, client_secret, redirect_uri whitelisted.'
+- 'Supabase tables: `products`, `inventory`, `orders_bling`, `invoices`, `webhook_inbox_bling`, `bling_tokens`.'
+architecture: "Bling ERP\n  |-- webhooks --> [bling-webhook]        --> Supabase.products/inventory/orders_bling/invoices\n\
+  \  |-- REST <-- [sync-bling-product]      <-- DB trigger\n  |-- REST <-- [sync-all-products-bling] <-- manual batch\n  |--\
+  \ REST <-- [bling-audit]             <-- daily cron\n  |-- REST <-- [bling-create-missing]    <-- reconciler\n  |\n  +--\
+  \ OAuth <-- [bling-oauth-callback]   <-- admin UI link\n  +-- OAuth refresh <-- [token-auto-refresh] <-- 5h55m cron"
+brand_variables_used: All listed in frontmatter; treat client secret and webhook secret as P0 secrets (Supabase vault, not
+  repo).
+setup_steps:
+- Create Bling dev app -- grant scopes listed in `ex_oauth_app_config_bling.md`.
+- Connect account -- user clicks "Connect Bling" in admin; browser -> authorize URL -> callback -> token stored.
+- 'Deploy edge functions:'
+- Schedule refresher -- `token-auto-refresh` cron every 5h55m; never let a token lapse silently.
+- 'Register webhook URL in Bling dashboard: `https://{{BRAND_SUPABASE_PROJECT_REF}}.functions.supabase.co/bling-webhook`.
+  Save HMAC key into `{{BRAND_BLING_WEBHOOK_SECRET}}`.'
+- Initial reconcile -- run `bling-audit` in `dry_run=true`; expect full diff report. Feed `bling-create-missing` with the
+  diff once reviewed.
+- Schedule nightly audit -- `bling-audit` cron 03:00 local; alert if diff > 1% of catalog.
+verification_checklist:
+- '[ ] `GET /Api/v3/situacoes/Produto` returns 200 with bearer token.'
+- '[ ] Test produto create via UI -> webhook lands within 20s -> Supabase `products` row has `source=bling`.'
+- '[ ] Token refresh: force-expire token (set `expires_at` to past) -> next API call refreshes silently.'
+- '[ ] Rate limit: trigger 10 concurrent `sync-bling-product` calls -> no 429 (client holds requests in bucket).'
+quirks_gotchas:
+- NCM code is required for every produto -- set default in `BRAND_DEFAULT_NCM` to avoid fiscal block.
+- Bling SKU (`codigo`) is the CROSS-SYSTEM key. Keep Shopify SKU == Bling codigo identical; mismatches cause duplicates.
+- '`estoque` is per-warehouse. `inventory-reconcile` MUST sum across the warehouses listed in `BRAND_BLING_DEPOSITS`.'
+- 'Deletion: prefer `situacao=I` (soft-delete) over hard delete; Bling retains fiscal history.'
+related_artifacts:
+- '`ex_api_client_bling.md`'
+- '`ex_webhook_bling.md`'
+- '`ex_oauth_app_config_bling.md`'
+- '`ex_workflow_inventory_reconcile.md`'
+- '`ex_workflow_multi_marketplace_sync.md`'

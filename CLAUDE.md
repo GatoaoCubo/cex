@@ -23,13 +23,15 @@ See `.claude/rules/brand-bootstrap.md` for the auto-detection protocol.
 
 Check `CEX_NUCLEUS`. N07 = Orchestrator. N03 = Builder. Not set = read and decide.
 
+**Nucleus self-load (mandatory at boot):** if `CEX_NUCLEUS` is `n01..n06`, your first action is to read `N{0X}_*/rules/n{0X}-*.md` (your identity + 8F rules + routing). N07 reads `.claude/rules/n07-*.md` only — it never pre-loads other nuclei's rules to keep the orchestrator boot lean. **Intent transmutation:** for any user input, resolve to `{kind, pillar, nucleus, verb}` via `P03_prompt/layers/p03_pc_cex_universal.md` (the `prompt_compiler` artifact) BEFORE acting. This is F1 CONSTRAIN, mandatory in every 8F run.
+
 ## Pointers
 
 | What | Where |
 |------|-------|
 | **8F pipeline** | `.claude/rules/8f-reasoning.md` |
 | **Orchestrator rules** | `.claude/rules/n07-orchestrator.md` |
-| **Nucleus rules** | `.claude/rules/n{01-06}-*.md` (1 per nucleus) |
+| **Nucleus rules** | `N0{1-6}_*/rules/n0{1-6}-*.md` (1 per nucleus, lazy-loaded by the nucleus on boot — N07 does not pre-load these) |
 | **Commands** | `.claude/commands/` → /build, /validate, /dispatch, /status, /doctor, /mission |
 | **Builders (source of truth)** | `archetypes/builders/{kind}-builder/` (13 ISOs each) |
 | **Sub-agents** | `.claude/agents/{kind}-builder.md` (125 files) |
@@ -38,6 +40,7 @@ Check `CEX_NUCLEUS`. N07 = Orchestrator. N03 = Builder. Not set = read and decid
 | **Kind KCs** | `P01_knowledge/library/kind/kc_{kind}.md` (131 files) |
 | **Kind registry** | `.cex/kinds_meta.json` (257 kinds) |
 | **Composable-crew rule** | `.claude/rules/composable-crew.md` (5 WAVE8 primitives + grid-of-crews) |
+| **Lazy skills (auto-fire)** | `.claude/skills/{cross_wave_cleanup,shared_file_proposal,new_nucleus_bootstrap,auto_accept_handoff}.md` -- mirrored to `.cex/skills/` for codex/gemini/ollama |
 | **Crew CLI** | `_tools/cex_crew.py` (list/show/run) |
 | **Example crew** | `N02_marketing/crews/p12_ct_product_launch.md` (4-role sequential) |
 | **Nucleus defs** | `N0[0-7]_*/architecture/nucleus_def_n0[0-7].md` (8 machine-readable identities) |
@@ -50,7 +53,7 @@ Check `CEX_NUCLEUS`. N07 = Orchestrator. N03 = Builder. Not set = read and decid
 | **Boot scripts** | `boot/cex.ps1` (N07) · `boot/n0{1-6}.ps1` (PowerShell-only) |
 | **Decision manifest** | `.cex/runtime/decisions/decision_manifest.yaml` |
 | **GDP skill** | `archetypes/builders/_shared/skill_guided_decisions.md` |
-| **Prompt Compiler** | `P03_prompt/layers/p03_pc_cex_universal.md` (seed artifact) |
+| **Prompt Compiler** (intent transmutation source-of-truth, 257 kinds, PT+EN) | `P03_prompt/layers/p03_pc_cex_universal.md` -- referenced by `n07-input-transmutation.md` |
 | **Intent Resolver** | `_tools/cex_intent_resolver.py` (Python-first, 0 tokens) |
 | **Setup Validator** | `_tools/cex_setup_validator.py` (new PC readiness check) |
 | **Hygiene Tool** | `_tools/cex_hygiene.py` (artifact CRUD, 8 rules) |

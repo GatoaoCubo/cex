@@ -1,0 +1,33 @@
+id: ex_tts_provider_brand_persona
+kind: tts_provider
+pillar: P04
+title: 'Example TTS Provider: Brand Persona Voice'
+version: 1.0.0
+created: 2026-04-16
+updated: 2026-04-16
+author: n02_marketing
+domain: brand_persona_chat
+quality: null
+brand_placeholders:
+- BRAND_NAME
+- BRAND_PERSONA_NAME
+- BRAND_VOICE
+- BRAND_TTS_VOICE_ID
+tags:
+- tts_provider
+- voice
+- audio
+- brand-persona
+- n02
+tldr: Provider contract for converting brand persona text into consistent spoken audio.
+density_score: 0.88
+provider_contract: "provider: \"{{TTS_PROVIDER_NAME}}\"\nvoice_id: \"{{BRAND_TTS_VOICE_ID}}\"\ninput:\n  text: string\n  tone:\
+  \ \"{{BRAND_VOICE}}\"\n  pace: medium\n  language: auto\noutput:\n  audio_format: mp3\n  sample_rate_hz: 44100\n  max_duration_seconds:\
+  \ 120\nretry_policy:\n  attempts: 2\n  fallback_voice_id: \"{{FALLBACK_VOICE_ID}}\""
+selection_rules:
+- Favor clarity over dramatic performance.
+- Keep cadence aligned with `{{BRAND_VOICE}}`.
+- Reject voices that distort product names or CTA phrases.
+new_brand_variables:
+- '`FALLBACK_VOICE_ID`: backup voice when the primary provider fails.'
+- '`TTS_PROVIDER_NAME`: vendor label used for routing and billing.'

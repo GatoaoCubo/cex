@@ -1,0 +1,25 @@
+id: ex_prompt_template_media_kit_copy
+kind: prompt_template
+pillar: P03
+title: 'Example Prompt Template: Media Kit Copy'
+version: 1.0.0
+created: 2026-04-16
+updated: 2026-04-16
+author: n02_marketing
+domain: media_kit_generator
+quality: null
+brand_placeholders:
+- BRAND_NAME
+- BRAND_VOICE
+- BRAND_TONE
+- BRAND_AUDIENCE
+- BRAND_DOMAIN
+tags:
+- prompt_template
+- media-kit
+- sales-enablement
+- n02
+tldr: Prompt for generating a compact media kit with copy blocks, proof points, and asset requirements.
+density_score: 0.9
+new_brand_variables:
+- '`OFFER_DETAILS`: structured summary of the product, service, or campaign being packaged.'

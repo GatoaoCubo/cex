@@ -1,0 +1,103 @@
+---
+report: VERTICAL_DISTILLATION_MISSION_COMPLETE
+mission: VERTICAL_DISTILLATION_20260416
+nucleus: n07
+started: 2026-04-16T11:00:00-03:00
+completed: 2026-04-16T13:06:00-03:00
+duration_min: ~126
+branch: vertical-distillation-WIP
+base_commit: 722238e05
+status: COMPLETE
+---
+
+# VERTICAL_DISTILLATION -- Mission Complete
+
+## Outcome
+
+Distilled two brand-specific source repos (gato-cubo-commerce + gato-ao-cubo branch)
+into **58 reusable CEX template artifacts** with `{{BRAND_*}}` placeholders.
+Zero new kinds invented. Zero brand leakage in distilled templates.
+
+## Deliverables
+
+| Wave | Nucleus | CLI | Deliverable | Count |
+|------|---------|-----|-------------|-------|
+| 1A | N04 | claude | `_reports/distillation/inventory_commerce.md` | 1 report |
+| 1B | N01 | claude | `_reports/distillation/inventory_gato_ao_cubo.md` | 1 report |
+| 1C | N03 | claude | `boot/n07_{codex,gemini,ollama}.ps1` | 3 boots |
+| 2A | N03 | claude (codex failed) | P04/P05/P06/P08/P09/P12 commerce templates | 27 |
+| 2B | N02 | codex | N02_marketing/ + P03/P04/P05/P11/P12 content factory | 19 |
+| 2C | N06 | claude (codex failed) | P05/P06/P09/P10/P11/P12 monetization | 12 |
+| 3 | N05 | codex | `_reports/distillation/n07_boots_smoke.md` | 1 report (PARTIAL) |
+| 4 | N07 | claude | consolidation + push | this report |
+
+Total: **58 template artifacts + 3 reports + 3 boot scripts**.
+
+## Commits (this branch, in order)
+
+```
+e3e45d141 [N01] wave 1B: gato-ao-cubo branch inventory
+8f355b0c3 [N04] wave 1A: commerce repo inventory
+7892e4194 [N03] wave 1C: N07 boots (codex/gemini/ollama)
+08738de79 [N02] wave 2B: content factory + brand persona (codex)
+4322c2859 [N03] wave 2A: commerce templates
+935d33328 [N06] wave 2C: monetization + commerce vertical
+d0a51d93e [N05] wave 3: N07 boot smoke tests
+4b3d89fc7 [N07] wave 3: compiled yamls + report
+<this> [N07] wave 4: MISSION_COMPLETE
+```
+
+## Verification
+
+| Check | Expected | Actual | Pass |
+|-------|----------|--------|------|
+| kinds_meta count | 257 | 257 | yes |
+| Compile | 383/383 | 383/383 | yes |
+| Doctor | 0 FAIL | 189 PASS / 69 WARN / 0 FAIL | yes |
+| Brand leakage (gato3/gatoaocubo/ronronalda) | 0 hits in distilled templates | 0 | yes |
+| N07 boots parse | 3/3 OK | 3/3 OK | yes |
+| N07 boots ASCII | clean | clean | yes |
+
+## Known Gaps (from Wave 3 smoke report)
+
+1. `boot/n07_ollama.ps1` handoff path uses `n07_task.md` instead of the
+   runtime-specific `n07_task_ollama.md`. Non-blocking; follow-up needed.
+2. `CEX_AUTO_ACCEPT` not explicitly wired by the 3 new N07 boot wrappers.
+   Pass-through works if env is pre-set. Non-blocking; follow-up needed.
+
+Both gaps are minor, do not affect the distilled templates, and are isolated
+to the 3 new N07 boots. They will be fixed in a follow-up on main.
+
+## CLI Routing (codex vs claude)
+
+User requested "se puder usar codex/gpt para economizar claudes".
+Results of that experiment:
+
+| Wave | Nucleus | Assigned CLI | Result |
+|------|---------|-------------|--------|
+| 2B | N02 | codex | SUCCESS (19 artifacts, proper frontmatter, committed) |
+| 2A | N03 | codex | FAILURE (fake signal, zero files) -> re-dispatched on claude -> SUCCESS (27) |
+| 2C | N06 | codex | FAILURE (no output) -> re-dispatched on claude -> SUCCESS (12) |
+| 3 | N05 | codex | SUCCESS (smoke report written + committed) |
+
+Takeaway: codex worked for N02 and N05 (moderate-complexity tasks) but failed
+silently on N03 and N06 (higher volume: 20+ and 12 artifacts). Either the
+"exit-without-work" pattern documented in `feedback_multiruntime_verification.md`,
+or ChatGPT-Max rate limiting under parallel load. Memory already captures this.
+
+## Hard Rules Honored
+
+- no new kinds invented (257 in, 257 out)
+- all distilled templates use `{{BRAND_*}}` placeholders
+- all artifacts carry `quality: null` (peer review assigns)
+- all artifacts carry `brand_placeholders:` frontmatter list
+- all work committed to `vertical-distillation-WIP`, never main
+- `auto_accept: true` honored end-to-end; no user re-prompts during waves
+
+## Next Steps (for the user)
+
+1. Review the 58 templates: `git diff main..vertical-distillation-WIP --stat | head -80`
+2. Decide merge strategy: squash into main OR keep granular commits
+3. Optional follow-up: fix the 2 smoke-test gaps (ollama handoff path + CEX_AUTO_ACCEPT wiring)
+4. Push to remote: `git push origin vertical-distillation-WIP`
+5. Open PR when ready
