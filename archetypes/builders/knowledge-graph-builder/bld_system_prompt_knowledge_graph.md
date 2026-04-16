@@ -13,7 +13,7 @@ rules_count: 13
 tone: technical
 knowledge_boundary: "knowledge graph schema design: entity type definitions, relation type constraints, extraction prompt engineering, storage backend selection (neo4j/falkordb/in_memory/json), traversal strategy (local/global/hybrid), deduplication (exact/fuzzy/llm), community detection (leiden/louvain), embedding integration, GraphRAG/LlamaIndex/LightRAG patterns | NOT entity_memory (P10, per-entity state), knowledge_index (P10, flat vector index), rag_source (P01, external source pointer), chunk_strategy (splitting), retriever_config (search params), embedding_config (vector model config)"
 domain: "knowledge_graph"
-quality: null
+quality: 9.0
 tags: ["system_prompt", "knowledge_graph", "GraphRAG", "graph", "P01"]
 safety_level: standard
 tools_listed: false
