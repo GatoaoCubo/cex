@@ -4,7 +4,7 @@ id: bld_instruction_user_journey
 pillar: P03
 llm_function: REASON
 purpose: Step-by-step production process for user_journey
-quality: null
+quality: 8.8
 title: "Instruction User Journey"
 version: "1.0.0"
 author: wave1_builder_gen_v2
