@@ -9,11 +9,12 @@ wave: W6
 runtime: codex
 domain: operations_refactor
 scope: Public-function type hint retrofit for three _tools modules plus verification and reporting.
-quality: null
+quality: 9.0
 created: 2026-04-15
 updated: 2026-04-15
 tags: [type_hint_retrofit, w6, n05, codex, report]
 tldr: "Added public-function type hints to three target tools, verified 100 percent coverage, and recorded per-file commits."
+density_score: 0.99
 ---
 
 # Type Hint Retrofit W6
