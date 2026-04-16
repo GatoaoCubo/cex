@@ -27,6 +27,7 @@ import os
 import sys
 import argparse
 from pathlib import Path
+from typing import Union
 
 # ---------------------------------------------------------------------------
 # Replacement maps -- MUST be 100% ASCII in this source file
@@ -195,7 +196,7 @@ SYMBOL_MAP = {
 }
 
 
-def build_full_map():
+def build_full_map() -> dict[int, str]:
     """Merge all maps into one lookup dict keyed by codepoint."""
     full = {}
     for m in [BOX_MAP, DASH_MAP, ARROW_MAP, EMOJI_MAP, ACCENT_MAP, SYMBOL_MAP]:
@@ -209,7 +210,7 @@ FULL_MAP = build_full_map()
 SCAN_EXTENSIONS = {".py", ".ps1", ".sh", ".cmd", ".bat"}
 
 
-def sanitize_char(ch):
+def sanitize_char(ch: str) -> str:
     """Replace a single non-ASCII character with its ASCII equivalent."""
     cp = ord(ch)
     if cp < 128:
@@ -223,7 +224,7 @@ def sanitize_char(ch):
     return "\\U%08x" % cp
 
 
-def sanitize_text(text):
+def sanitize_text(text: str) -> str:
     """Replace all non-ASCII characters in text with ASCII equivalents."""
     result = []
     for ch in text:
@@ -231,7 +232,7 @@ def sanitize_text(text):
     return "".join(result)
 
 
-def has_non_ascii(text):
+def has_non_ascii(text: str) -> bool:
     """Check if text contains any non-ASCII characters (except BOM at pos 0)."""
     for i, ch in enumerate(text):
         cp = ord(ch)
@@ -241,7 +242,7 @@ def has_non_ascii(text):
     return False
 
 
-def scan_file(filepath, allow_bom=False):
+def scan_file(filepath: str, allow_bom: bool = False) -> list[tuple[int, int, str, int, str]]:
     """Scan a single file for non-ASCII characters.
 
     Returns list of (line_num, col, char, codepoint, replacement) tuples.
@@ -266,7 +267,7 @@ def scan_file(filepath, allow_bom=False):
     return issues
 
 
-def fix_file(filepath, dry_run=False, allow_bom=False):
+def fix_file(filepath: str, dry_run: bool = False, allow_bom: bool = False) -> tuple[int, int, str]:
     """Fix all non-ASCII characters in a file.
 
     Returns (original_count, fixed_count, new_content).
@@ -315,7 +316,10 @@ def fix_file(filepath, dry_run=False, allow_bom=False):
     return (original_count, fixed, new_content)
 
 
-def collect_files(scope_path, extensions=None):
+def collect_files(
+    scope_path: Union[str, Path],
+    extensions: set[str] | None = None,
+) -> list[Path]:
     """Collect all scannable files under scope_path."""
     if extensions is None:
         extensions = SCAN_EXTENSIONS
@@ -341,7 +345,11 @@ def collect_files(scope_path, extensions=None):
     return sorted(files)
 
 
-def run_check(scope, extensions=None, verbose=False):
+def run_check(
+    scope: Union[str, Path],
+    extensions: set[str] | None = None,
+    verbose: bool = False,
+) -> int:
     """Check mode: report non-ASCII issues. Returns total issue count."""
     files = collect_files(scope, extensions)
     if not files:
@@ -391,7 +399,12 @@ def run_check(scope, extensions=None, verbose=False):
     return total_issues
 
 
-def run_fix(scope, dry_run=False, extensions=None, verbose=False):
+def run_fix(
+    scope: Union[str, Path],
+    dry_run: bool = False,
+    extensions: set[str] | None = None,
+    verbose: bool = False,
+) -> int:
     """Fix mode: replace non-ASCII chars. Returns total fixed count."""
     files = collect_files(scope, extensions)
     if not files:
@@ -437,7 +450,7 @@ def run_fix(scope, dry_run=False, extensions=None, verbose=False):
     return total_fixed
 
 
-def main():
+def main() -> None:
     parser = argparse.ArgumentParser(
         description="CEX non-ASCII sanitizer for executable code"
     )
