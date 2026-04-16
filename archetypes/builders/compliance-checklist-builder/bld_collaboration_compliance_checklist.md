@@ -4,7 +4,7 @@ id: bld_collaboration_compliance_checklist
 pillar: P12
 llm_function: COLLABORATE
 purpose: How compliance_checklist-builder works in crews with other builders
-quality: null
+quality: 8.9
 title: "Collaboration Compliance Checklist"
 version: "1.0.0"
 author: wave1_builder_gen_v2
