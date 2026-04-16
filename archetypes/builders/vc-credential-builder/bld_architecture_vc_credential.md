@@ -4,7 +4,7 @@ id: bld_architecture_vc_credential
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of vc_credential -- inventory, dependencies
-quality: null
+quality: 9.0
 title: "Architecture VC Credential"
 version: "1.0.0"
 author: n04_wave7
