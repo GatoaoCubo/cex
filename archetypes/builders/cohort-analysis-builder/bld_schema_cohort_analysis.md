@@ -4,7 +4,7 @@ id: bld_schema_cohort_analysis
 pillar: P06
 llm_function: CONSTRAIN
 purpose: Formal schema -- SINGLE SOURCE OF TRUTH for cohort_analysis
-quality: null
+quality: 9.1
 title: "Schema Cohort Analysis"
 version: "1.0.0"
 author: wave1_builder_gen_v2
