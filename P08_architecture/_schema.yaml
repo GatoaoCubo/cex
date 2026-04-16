@@ -3,8 +3,8 @@ name: Architecture
 description: COMO escala
 kinds:
   pattern:
-    description: 'Pattern reutilizavel (ex: continuous batching)'
-    boundary: Pattern reutilizavel de arquitetura. NAO eh law (inviolavel) nem workflow (P12, sequencia executavel).
+    description: 'Pattern reusable (ex: continuous batching)'
+    boundary: Reusable pattern architecture. NOT law (inviolable) nor workflow (P12, sequence executable).
     layer: content
     core: true
     machine_format: yaml
@@ -13,8 +13,8 @@ kinds:
       max_bytes: 4096
     llm_function: INJECT
   law:
-    description: Lei operacional (inviolavel)
-    boundary: Lei operacional inviolavel do sistema. NAO eh instruction (P03, flexivel) nem guardrail (P11, safety-focused).
+    description: Law operational (inviolable)
+    boundary: Law operational inviolable of the system. NOT instruction (P03, flexible) nor guardrail (P11, safety-focused).
     layer: governance
     core: true
     machine_format: yaml
@@ -23,8 +23,8 @@ kinds:
       max_bytes: 3072
     llm_function: CONSTRAIN
   diagram:
-    description: Diagrama de arquitetura (ASCII ou Mermaid)
-    boundary: Diagrama visual de arquitetura. NAO eh component_map (dados estruturados) nem pattern (sem prescricao).
+    description: Architecture diagram (ASCII ou Mermaid)
+    boundary: Visual diagram architecture. NOT component_map (dados structureds) nor pattern (sem prescricao).
     layer: content
     core: false
     machine_format: yaml
@@ -33,8 +33,8 @@ kinds:
       max_bytes: 4096
     llm_function: INJECT
   component_map:
-    description: Mapa de componentes (what connects to what)
-    boundary: Mapa estruturado de componentes e conexoes. NAO eh diagram (visual) nem agent_card (escopo de 1 agent_group).
+    description: Component map (what connects to what)
+    boundary: Mapa structured components and connections. NOT diagram (visual) nor agent_card (scope of one agent_group).
     layer: spec
     core: false
     machine_format: yaml
@@ -44,7 +44,7 @@ kinds:
     llm_function: INJECT
   agent_card:
     description: Deployment spec for autonomous agent — identity, model, tools, boot, dispatch, constraints
-    boundary: Agent deployment spec. NAO eh agent (P02, persona only) nem boot_config (P02, provider startup) nem spawn_config (P12, runtime launch).
+    boundary: Agent deployment spec. NOT agent (P02, persona only) nor boot_config (P02, provider startup) nor spawn_config (P12, runtime launch).
     layer: spec
     core: false
     machine_format: yaml
@@ -79,8 +79,8 @@ kinds:
     llm_function: REASON
     naming: ex_director_{topic}.md
   decision_record:
-    description: 'ADR: contexto, decisao, consequencias'
-    boundary: Registro. NAO eh law nem pattern.
+    description: 'ADR: contexto, decision, consequencias'
+    boundary: Record. NOT law nor pattern.
     layer: runtime
     core: true
     machine_format: yaml
@@ -95,8 +95,8 @@ kinds:
     - decision
     llm_function: REASON
   naming_rule:
-    description: Regra de nomenclatura
-    boundary: Regra de nomenclatura de artefatos. NAO eh validator (P06, valida conteudo) nem type_def (P06, define tipo).
+    description: Naming rule
+    boundary: Artifact naming rule. NOT validator (P06, valida content) nor type_def (P06, defines type).
     layer: governance
     core: false
     machine_format: yaml

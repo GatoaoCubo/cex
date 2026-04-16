@@ -1,10 +1,10 @@
 pillar: P09
 name: Config
-description: COMO configura
+description: HOW to configure
 kinds:
   env_config:
-    description: Variaveis de ambiente
-    boundary: Variaveis de ambiente do sistema. NAO eh boot_config (P02, per-provider) nem feature_flag (on/off logico).
+    description: Environment variables
+    boundary: System environment variables. NOT boot_config (P02, per-provider) nor feature_flag (on/off logical).
     layer: runtime
     core: true
     machine_format: yaml
@@ -13,8 +13,8 @@ kinds:
       max_bytes: 4096
     llm_function: GOVERN
   path_config:
-    description: Caminhos do sistema
-    boundary: Caminhos do sistema de arquivos. NAO eh env_config (variaveis genericas) nem permission (controle de acesso).
+    description: System paths
+    boundary: File system paths. NOT env_config (generic variables) nor permission (access control).
     layer: runtime
     core: true
     machine_format: yaml
@@ -23,8 +23,8 @@ kinds:
       max_bytes: 3072
     llm_function: GOVERN
   permission:
-    description: Regra de permissao (read/write/execute)
-    boundary: Regra de permissao de acesso. NAO eh guardrail (P11, safety boundary) nem feature_flag (on/off de feature).
+    description: Permission rule (read/write/execute)
+    boundary: Access permission rule. NOT guardrail (P11, safety boundary) nor feature_flag (on/off feature).
     layer: governance
     core: true
     machine_format: yaml
@@ -33,8 +33,8 @@ kinds:
       max_bytes: 3072
     llm_function: GOVERN
   feature_flag:
-    description: Flag de feature (on/off, gradual rollout)
-    boundary: Flag de feature on/off com rollout gradual. NAO eh permission (acesso) nem env_config (variavel generica).
+    description: Feature flag (on/off, gradual rollout)
+    boundary: Feature flag on/off with gradual rollout. NOT permission (access) nor env_config (generic variable).
     layer: runtime
     core: false
     machine_format: json
@@ -43,8 +43,8 @@ kinds:
       max_bytes: 1536
     llm_function: GOVERN
   runtime_rule:
-    description: Regra de runtime (timeouts, retries, limits)
-    boundary: Regra de runtime tecnica (timeouts, retries). NAO eh lifecycle_rule (P11, ciclo de vida) nem law (P08, inviolavel).
+    description: Runtime rule (timeouts, retries, limits)
+    boundary: Technical runtime rule (timeouts, retries). NOT lifecycle_rule (P11, lifecycle) nor law (P08, inviolable).
     layer: runtime
     core: false
     machine_format: yaml
@@ -53,8 +53,8 @@ kinds:
       max_bytes: 3072
     llm_function: GOVERN
   secret_config:
-    description: Gestao de secrets
-    boundary: Credenciais. NAO eh env_config.
+    description: Secret management
+    boundary: Credenciais. NOT env_config.
     layer: runtime
     core: true
     machine_format: yaml
@@ -69,7 +69,7 @@ kinds:
     llm_function: GOVERN
   rate_limit_config:
     description: 'Rate limiting: RPM, TPM, budget'
-    boundary: Limites. NAO eh runtime_rule.
+    boundary: Limites. NOT runtime_rule.
     layer: runtime
     core: true
     machine_format: yaml
@@ -87,7 +87,7 @@ kinds:
   effort_profile:
     description: Effort and thinking level configuration for builder execution
     llm_function: CONSTRAIN
-    boundary: effort_profile = QUAL modelo/thinking usar; runtime_rule = QUANDO/COMO executar
+    boundary: effort_profile = QUAL model/thinking usar; runtime_rule = QUANDO/COMO execute
     layer: content
     core: false
     machine_format: yaml

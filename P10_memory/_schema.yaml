@@ -1,11 +1,11 @@
 pillar: P10
 name: Memory
-description: O que LEMBRA
+description: WHAT to remember
 kinds:
   runtime_state:
-    description: Estado mental variavel por sessao (routing, decisoes em runtime)
-    boundary: Estado mental variavel acumulado em runtime. NAO eh mental_model P02 (identidade fixa do agente, imutavel) nem
-      session_state (efemero, snapshot).
+    description: Variable mental state per session (routing, runtime decisions)
+    boundary: Variable mental state accumulated at runtime. NOT mental_model P02 (fixed agent identity, immutable) nor
+      session_state (ephemeral, snapshot).
     layer: runtime
     core: true
     machine_format: yaml
@@ -14,8 +14,8 @@ kinds:
       max_bytes: 3072
     llm_function: INJECT
   knowledge_index:
-    description: Indice de busca (BM25, FAISS config)
-    boundary: Indice de busca semantica (BM25, FAISS). NAO eh embedding_config (P01, modelo) nem rag_source (P01, fonte).
+    description: Search index (BM25, FAISS config)
+    boundary: Search index semantic (BM25, FAISS). NOT embedding_config (P01, model) nor rag_source (P01, source).
     layer: runtime
     core: true
     machine_format: yaml
@@ -24,8 +24,8 @@ kinds:
       max_bytes: 3072
     llm_function: INJECT
   learning_record:
-    description: Registro de aprendizado (o que deu certo/errado)
-    boundary: Registro de aprendizado persistente. NAO eh session_state (efemero) nem axiom (imutavel, nao aprende).
+    description: Learning record (what worked/failed)
+    boundary: Persistent learning record. NOT session_state (ephemeral) nor axiom (immutable, does not learn).
     layer: content
     core: true
     machine_format: yaml
@@ -34,9 +34,9 @@ kinds:
       max_bytes: 3072
     llm_function: INJECT
   session_state:
-    description: Estado de sessao (efemero, snapshot)
-    boundary: Estado efemero de sessao (snapshot). NAO eh runtime_state (persistente entre sessoes) nem learning_record (nao
-      acumula).
+    description: Session state (ephemeral, snapshot)
+    boundary: Ephemeral session state (snapshot). NOT runtime_state (persistent across sessions) nor learning_record (does not
+      accumulate).
     layer: runtime
     core: false
     machine_format: yaml
@@ -45,8 +45,8 @@ kinds:
       max_bytes: 3072
     llm_function: INJECT
   memory_summary:
-    description: Resumo comprimido de memorias
-    boundary: Compressao. NAO eh session_state.
+    description: Compressed memory summary
+    boundary: Compressao. NOT session_state.
     layer: runtime
     core: true
     machine_format: yaml
@@ -61,7 +61,7 @@ kinds:
     llm_function: INJECT
   entity_memory:
     description: Memoria sobre entidades
-    boundary: Fatos sobre X. NAO eh learning_record.
+    boundary: Fatos sobre X. NOT learning_record.
     layer: runtime
     core: true
     machine_format: yaml
@@ -76,7 +76,7 @@ kinds:
     llm_function: INJECT
   prompt_cache:
     description: TTL, eviction, and invalidation config for cached LLM prompt/completion pairs
-    boundary: Cache config. NAO eh session_state (contexto efemero), memory_summary (historico), nem runtime_state (variaveis runtime).
+    boundary: Cache config. NOT session_state (contexto ephemeral), memory_summary (history), nor runtime_state (variables runtime).
     layer: runtime
     core: false
     machine_format: yaml

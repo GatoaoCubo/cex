@@ -30,7 +30,7 @@
   "action_prompt": {
     "boundary": "Tarefa especifica. O LLM EXECUTA isso.",
     "core": true,
-    "description": "Prompt de tarefa que o humano/orquestrador envia ao agente",
+    "description": "Task prompt sent by human/orchestrator to the agent",
     "llm_function": "INJECT",
     "max_bytes": 2048,
     "naming": "p03_up_{{task}}.md",
@@ -44,7 +44,7 @@
   "agent": {
     "boundary": "Definicao completa de agente (persona + capabilities). NAO eh skill (P04, habilidade executavel) nem system_prompt (P03, como fala).",
     "core": true,
-    "description": "Definicao de agente (persona + capabilities)",
+    "description": "Agent definition (persona + capabilities)",
     "llm_function": "BECOME",
     "max_bytes": 5120,
     "naming": "p02_agent_{{name}}.md + .yaml",
@@ -114,7 +114,7 @@
   "agent_package": {
     "boundary": "Pacote distribuivel de agente em formato ISO. NAO eh agent (spec do agente) \u00e2\u20ac\u201d agent_package eh o bundle portable.",
     "core": true,
-    "description": "Pacote portable de agente AI (ISO format) \u00e2\u20ac\u201d self-contained, LLM-agnostic",
+    "description": "Portable AI agent package (ISO format) -- self-contained, LLM-agnostic",
     "llm_function": "BECOME",
     "max_bytes": 4096,
     "naming": "agents/{{agent_name}}/manifest.yaml",
@@ -198,7 +198,7 @@
   "api_client": {
     "boundary": "Cliente unidirecional tipado. NAO eh db_connector nem mcp_server.",
     "core": false,
-    "description": "Cliente tipado de API REST/GraphQL/gRPC",
+    "description": "Typed REST/GraphQL/gRPC API client",
     "llm_function": "CALL",
     "max_bytes": 1024,
     "naming": "p04_api_{{service}}.md + .yaml",
@@ -240,7 +240,7 @@
   "audio_tool": {
     "boundary": "Processa input/output de audio. NAO eh vision_tool (visual) nem notifier (delivery de mensagem).",
     "core": false,
-    "description": "Speech-to-text, text-to-speech, analise de audio",
+    "description": "Speech-to-text, text-to-speech, audio analysis",
     "llm_function": "CALL",
     "max_bytes": 2048,
     "naming": "p04_audio_{{capability}}.md + .yaml",
@@ -296,7 +296,7 @@
   "benchmark": {
     "boundary": "Medicao de performance quantitativa. NAO eh eval (nao testa corretude) nem scoring_rubric (nao define criterios).",
     "core": false,
-    "description": "Medicao de performance (latencia, custo, qualidade)",
+    "description": "Performance measurement (latency, cost, quality)",
     "llm_function": "GOVERN",
     "max_bytes": 4096,
     "naming": "p07_bm_{{metric}}.md + .yaml",
@@ -338,7 +338,7 @@
   "boot_config": {
     "boundary": "Bootstrap por provider (claude, cursor, codex). NAO eh env_config (P09, variaveis genericas) nem spawn_config (P12, agent_groups).",
     "core": false,
-    "description": "Configuracao de inicializacao por provider",
+    "description": "Boot configuration per provider",
     "llm_function": "GOVERN",
     "max_bytes": 2048,
     "naming": "p02_boot_{{provider}}.md",
@@ -352,7 +352,7 @@
   "browser_tool": {
     "boundary": "Interage com paginas web via DOM. NAO eh computer_use (tela generica) nem search_tool (busca sem navegacao).",
     "core": true,
-    "description": "Automacao de browser: DOM parsing, navegacao, interacao, screenshot",
+    "description": "Browser automation: DOM parsing, navigation, interaction, screenshot",
     "llm_function": "CALL",
     "max_bytes": 2048,
     "naming": "p04_browser_{{target}}.md + .yaml",
@@ -366,7 +366,7 @@
   "bugloop": {
     "boundary": "Ciclo automatico detect>fix>verify. NAO eh unit_eval (P07, teste manual) nem optimizer (melhoria continua, nao correcao).",
     "core": false,
-    "description": "Ciclo de correcao automatica (detect > fix > verify)",
+    "description": "Automatic correction loop (detect > fix > verify)",
     "llm_function": "GOVERN",
     "max_bytes": 4096,
     "naming": "p11_bl_{{scope}}.md + .yaml",
@@ -408,7 +408,7 @@
   "chain": {
     "boundary": "Sequencia de PROMPTS. NAO eh workflow (P12, agentes+tools).",
     "core": false,
-    "description": "Sequencia de prompts encadeados (output A -> input B)",
+    "description": "Chained prompt sequence (output A -> input B)",
     "llm_function": "PRODUCE",
     "max_bytes": 6144,
     "naming": "p03_ch_{{pipeline}}.md",
@@ -436,7 +436,7 @@
   "checkpoint": {
     "boundary": "Estado salvo. NAO eh signal.",
     "core": true,
-    "description": "Snapshot de estado de workflow",
+    "description": "Workflow state snapshot",
     "llm_function": "GOVERN",
     "max_bytes": 2048,
     "naming": "p12_ckpt_{{name}}.md",
@@ -450,7 +450,7 @@
   "chunk_strategy": {
     "boundary": "Metodo de split. NAO eh embedding_config.",
     "core": true,
-    "description": "Estrategia de chunking",
+    "description": "Chunking strategy",
     "llm_function": "CONSTRAIN",
     "max_bytes": 2048,
     "naming": "p01_chunk_{{strategy}}.md",
@@ -506,7 +506,7 @@
   "code_executor": {
     "boundary": "Ambiente isolado que executa codigo. NAO eh cli_tool (comando shell pontual) nem daemon (processo persistente).",
     "core": true,
-    "description": "Runtime sandboxed para execucao de codigo (Docker, E2B, Jupyter)",
+    "description": "Sandboxed runtime for code execution (Docker, E2B, Jupyter)",
     "llm_function": "CALL",
     "max_bytes": 2048,
     "naming": "p04_exec_{{runtime}}.md + .yaml",
@@ -604,7 +604,7 @@
   "component_map": {
     "boundary": "Mapa estruturado de componentes e conexoes. NAO eh diagram (visual) nem agent_card (escopo de 1 agent_group).",
     "core": false,
-    "description": "Mapa de componentes (what connects to what)",
+    "description": "Component map (what connects to what)",
     "llm_function": "INJECT",
     "max_bytes": 3072,
     "naming": "p08_cmap_{{scope}}.yaml",
@@ -633,7 +633,7 @@
   "computer_use": {
     "boundary": "Interacao com interface grafica via automacao. NAO eh browser_tool (DOM) nem cli_tool (linha de comando).",
     "core": false,
-    "description": "Controle de tela, teclado e mouse por LLM (Anthropic, browser-use)",
+    "description": "Screen, keyboard, and mouse control by LLM (Anthropic, browser-use)",
     "llm_function": "CALL",
     "max_bytes": 2048,
     "naming": "p04_cu_{{target}}.md + .yaml",
@@ -675,7 +675,7 @@
   "constraint_spec": {
     "boundary": "Governa decoder. NAO eh validation_schema.",
     "core": true,
-    "description": "Regras de geracao constrained",
+    "description": "Constrained generation rules",
     "llm_function": "CONSTRAIN",
     "max_bytes": 2048,
     "naming": "p03_constraint_{{scope}}.md",
@@ -717,7 +717,7 @@
   "context_doc": {
     "boundary": "Contexto de dominio para hidratar prompts. NAO eh knowledge_card (sem density gate) nem glossary_entry (nao define termo).",
     "core": false,
-    "description": "Contexto de dominio",
+    "description": "Domain context",
     "llm_function": "INJECT",
     "max_bytes": 2048,
     "naming": "p01_ctx_{{topic}}.md + .yaml",
@@ -829,7 +829,7 @@
   "dag": {
     "boundary": "Grafo aciclico de dependencias entre tasks. NAO eh workflow (execucao direta) nem component_map (P08, componentes).",
     "core": false,
-    "description": "Grafo aciclico de dependencias",
+    "description": "Acyclic dependency graph",
     "llm_function": "PRODUCE",
     "max_bytes": 3072,
     "naming": "p12_dag_{{pipeline}}.yaml",
@@ -871,7 +871,7 @@
   "db_connector": {
     "boundary": "Acesso a dados estruturados. NAO eh api_client nem retriever.",
     "core": false,
-    "description": "Conector de banco/dados estruturados (SQL, GraphQL, REST-to-DB)",
+    "description": "Structured database connector (SQL, GraphQL, REST-to-DB)",
     "llm_function": "CALL",
     "max_bytes": 1024,
     "naming": "p04_db_{{source}}.md + .yaml",
@@ -899,7 +899,7 @@
   "diagram": {
     "boundary": "Diagrama visual de arquitetura. NAO eh component_map (dados estruturados) nem pattern (sem prescricao).",
     "core": false,
-    "description": "Diagrama de arquitetura (ASCII ou Mermaid)",
+    "description": "Architecture diagram (ASCII or Mermaid)",
     "llm_function": "INJECT",
     "max_bytes": 4096,
     "naming": "p08_diag_{{scope}}.md",
@@ -941,7 +941,7 @@
   "dispatch_rule": {
     "boundary": "Regra de despacho keyword>agent_group. NAO eh router (P02, task>model routing) nem workflow (nao executa, apenas roteia).",
     "core": false,
-    "description": "Regra de despacho (keyword > agent_group)",
+    "description": "Dispatch rule (keyword > agent_group)",
     "llm_function": "REASON",
     "max_bytes": 3072,
     "naming": "p12_dr_{{scope}}.yaml",
@@ -1068,7 +1068,7 @@
   "embedding_config": {
     "boundary": "Configuracao de modelo de embedding. NAO eh knowledge_index (P10) que configura o indice, apenas o modelo vetorial.",
     "core": false,
-    "description": "Configuracao de embedding model",
+    "description": "Embedding model configuration",
     "llm_function": "GOVERN",
     "max_bytes": 512,
     "naming": "p01_emb_{{model}}.yaml",
@@ -1124,7 +1124,7 @@
   "env_config": {
     "boundary": "Variaveis de ambiente do sistema. NAO eh boot_config (P02, per-provider) nem feature_flag (on/off logico).",
     "core": true,
-    "description": "Variaveis de ambiente",
+    "description": "Environment variables",
     "llm_function": "GOVERN",
     "max_bytes": 4096,
     "naming": "p09_env_{{scope}}.yaml",
@@ -1138,7 +1138,7 @@
   "eval_dataset": {
     "boundary": "Conjunto. NAO eh golden_test.",
     "core": true,
-    "description": "Colecao de test cases",
+    "description": "Test case collection",
     "llm_function": "GOVERN",
     "max_bytes": 4096,
     "naming": "p07_dataset_{{name}}.md",
@@ -1222,7 +1222,7 @@
   "fallback_chain": {
     "boundary": "Sequencia de fallback entre modelos LLM. NAO eh chain (P03, sequencia de prompts) nem router (task routing).",
     "core": false,
-    "description": "Sequencia de fallback (model A > B > C)",
+    "description": "Fallback sequence (model A > B > C)",
     "llm_function": "GOVERN",
     "max_bytes": 512,
     "naming": "p02_fb_{{chain}}.yaml",
@@ -1250,7 +1250,7 @@
   "feature_flag": {
     "boundary": "Flag de feature on/off com rollout gradual. NAO eh permission (acesso) nem env_config (variavel generica).",
     "core": false,
-    "description": "Flag de feature (on/off, gradual rollout)",
+    "description": "Feature flag (on/off, gradual rollout)",
     "llm_function": "GOVERN",
     "max_bytes": 1536,
     "naming": "p09_ff_{{feature}}.yaml",
@@ -1320,7 +1320,7 @@
   "formatter": {
     "boundary": "Transformador de formato de saida. NAO eh parser (nao extrai dados) nem response_format (nao define o que o LLM ve).",
     "core": false,
-    "description": "Formatador de saida (json, md, yaml)",
+    "description": "Output formatter (json, md, yaml)",
     "llm_function": "GOVERN",
     "max_bytes": 4096,
     "naming": "p05_fmt_{{format}}.md",
@@ -1334,7 +1334,7 @@
   "function_def": {
     "boundary": "Schema JSON de funcao que LLM pode chamar via tool_use. NAO eh mcp_server (protocolo completo) nem api_client (implementacao do client).",
     "core": true,
-    "description": "Definicao de funcao callable por LLM (JSON Schema tool)",
+    "description": "LLM-callable function definition (JSON Schema tool)",
     "llm_function": "CALL",
     "max_bytes": 2048,
     "naming": "p04_fn_{{name}}.md + .json",
@@ -1362,7 +1362,7 @@
   "glossary_entry": {
     "boundary": "Definicao curta de termo do dominio. NAO eh knowledge_card (sem densidade min) nem context_doc (sem escopo).",
     "core": false,
-    "description": "Definicao de termo",
+    "description": "Term definition",
     "llm_function": "INJECT",
     "max_bytes": 512,
     "naming": "p01_gl_{{term}}.md + .yaml",
@@ -1376,7 +1376,7 @@
   "golden_test": {
     "boundary": "Caso de teste referencia quality 9.5+. NAO eh few_shot_example (P01, exemplifica) nem unit_eval (qualquer quality).",
     "core": true,
-    "description": "Caso de teste referencia (quality 9.5+)",
+    "description": "Reference test case (quality 9.5+)",
     "llm_function": "GOVERN",
     "max_bytes": 4096,
     "naming": "p07_gt_{{case}}.md + .yaml",
@@ -1432,7 +1432,7 @@
   "guardrail": {
     "boundary": "Restricao de seguranca e safety boundary. NAO eh permission (P09, acesso) nem law (P08, operacional).",
     "core": true,
-    "description": "Restricao de seguranca (safety boundary)",
+    "description": "Safety restriction (safety boundary)",
     "llm_function": "CONSTRAIN",
     "max_bytes": 4096,
     "naming": "p11_gr_{{scope}}.yaml",
@@ -1446,7 +1446,7 @@
   "handoff": {
     "boundary": "Instrucao de handoff com task+context+commit. NAO eh action_prompt (P03, prompt puro) nem signal (evento simples).",
     "core": true,
-    "description": "Instrucao de handoff (task + context + commit)",
+    "description": "Handoff instruction (task + context + commit)",
     "llm_function": "COLLABORATE",
     "max_bytes": 4096,
     "naming": "p12_ho_{{task}}.md",
@@ -1460,7 +1460,7 @@
   "handoff_protocol": {
     "boundary": "Handoff A2A. NAO eh dispatch_rule.",
     "core": true,
-    "description": "Protocolo de transferencia entre agentes",
+    "description": "Agent-to-agent transfer protocol",
     "llm_function": "COLLABORATE",
     "max_bytes": 2048,
     "naming": "p02_handoff_{{protocol}}.md",
@@ -1544,7 +1544,7 @@
   "input_schema": {
     "boundary": "Contrato de entrada que define dados requeridos. NAO eh validation_schema (saida) nem type_def (definicao abstrata).",
     "core": true,
-    "description": "Contrato de entrada",
+    "description": "Input contract",
     "llm_function": "CONSTRAIN",
     "max_bytes": 3072,
     "naming": "p06_is_{{scope}}.yaml",
@@ -1600,7 +1600,7 @@
   "interface": {
     "boundary": "Contrato bilateral de integracao entre agentes. NAO eh input_schema (unilateral) nem signal (P12, evento simples).",
     "core": false,
-    "description": "Contrato de integracao entre agentes",
+    "description": "Agent-to-agent integration contract",
     "llm_function": "CONSTRAIN",
     "max_bytes": 3072,
     "naming": "p06_iface_{{contract}}.yaml",
@@ -1670,7 +1670,7 @@
   "knowledge_index": {
     "boundary": "Indice de busca semantica (BM25, FAISS). NAO eh embedding_config (P01, modelo) nem rag_source (P01, fonte).",
     "core": true,
-    "description": "Indice de busca (BM25, FAISS config)",
+    "description": "Search index (BM25, FAISS config)",
     "llm_function": "INJECT",
     "max_bytes": 3072,
     "naming": "p10_bi_{{index}}.yaml",
@@ -1710,7 +1710,7 @@
   "learning_record": {
     "boundary": "Registro de aprendizado persistente. NAO eh session_state (efemero) nem axiom (imutavel, nao aprende).",
     "core": true,
-    "description": "Registro de aprendizado (o que deu certo/errado)",
+    "description": "Learning record (what worked/failed)",
     "llm_function": "INJECT",
     "max_bytes": 3072,
     "naming": "p10_lr_{{topic}}.md + .yaml",
@@ -1752,7 +1752,7 @@
   "lifecycle_rule": {
     "boundary": "Regra declarativa de ciclo de vida. NAO eh hook (P04, codigo executavel) nem runtime_rule (P09, tecnico).",
     "core": true,
-    "description": "Regra de ciclo de vida (freshness, archive, promote)",
+    "description": "Lifecycle rule (freshness, archive, promote)",
     "llm_function": "GOVERN",
     "max_bytes": 4096,
     "naming": "p11_lc_{{rule}}.yaml",
@@ -1864,7 +1864,7 @@
   "memory_scope": {
     "boundary": "Qual memoria usar. NAO eh session_state.",
     "core": false,
-    "description": "Config de memoria de agente",
+    "description": "Agent memory configuration",
     "llm_function": "INJECT",
     "max_bytes": 2048,
     "naming": "p02_memscope_{{agent}}.md",
@@ -1878,7 +1878,7 @@
   "memory_summary": {
     "boundary": "Compressao. NAO eh session_state.",
     "core": true,
-    "description": "Resumo comprimido de memorias",
+    "description": "Compressed memory summary",
     "llm_function": "INJECT",
     "max_bytes": 2048,
     "naming": "p10_summary_{{scope}}.md",
@@ -1906,7 +1906,7 @@
   "mental_model": {
     "boundary": "Identidade fixa do agente com routing e decisoes. NAO eh mental_model P10 (estado variavel por sessao).",
     "core": true,
-    "description": "Mapa mental do agente (routing, decisoes)",
+    "description": "Agent mental model (routing, decisions)",
     "llm_function": "BECOME",
     "max_bytes": 2048,
     "naming": "p02_mm_{{agent}}.yaml",
@@ -1934,7 +1934,7 @@
   "model_card": {
     "boundary": "Spec de LLM (pricing, context window, capabilities). NAO eh agent (P02, quem usa o modelo) nem boot_config (como inicia).",
     "core": false,
-    "description": "Spec do LLM usado (pricing, context, capabilities)",
+    "description": "LLM spec in use (pricing, context, capabilities)",
     "llm_function": "GOVERN",
     "max_bytes": 2048,
     "naming": "p02_mc_{{model}}.md + .yaml",
@@ -2005,7 +2005,7 @@
   "naming_rule": {
     "boundary": "Regra de nomenclatura de artefatos. NAO eh validator (P06, valida conteudo) nem type_def (P06, define tipo).",
     "core": false,
-    "description": "Regra de nomenclatura",
+    "description": "Naming rule",
     "llm_function": "GOVERN",
     "max_bytes": 4096,
     "naming": "p08_nr_{{scope}}.md",
@@ -2019,7 +2019,7 @@
   "notifier": {
     "boundary": "Envia notificacao para usuario/sistema. NAO eh webhook (evento bidirecional) nem api_client (integracao completa).",
     "core": false,
-    "description": "Entrega de notificacao push (email, SMS, Slack, Discord)",
+    "description": "Push notification delivery (email, SMS, Slack, Discord)",
     "llm_function": "CALL",
     "max_bytes": 1024,
     "naming": "p04_notify_{{channel}}.md + .yaml",
@@ -2089,7 +2089,7 @@
   "optimizer": {
     "boundary": "Otimizador de processo metric>action. NAO eh bugloop (correcao pontual) nem benchmark (P07, medicao passiva).",
     "core": false,
-    "description": "Otimizador de processo (metric > action)",
+    "description": "Process optimizer (metric > action)",
     "llm_function": "GOVERN",
     "max_bytes": 4096,
     "naming": "p11_opt_{{target}}.md + .yaml",
@@ -2117,7 +2117,7 @@
   "parser": {
     "boundary": "Extrator de dados de saida bruta. NAO eh formatter (nao transforma formato) nem validator (P06, nao valida).",
     "core": false,
-    "description": "Extrator de dados de saida",
+    "description": "Output data extractor",
     "llm_function": "GOVERN",
     "max_bytes": 4096,
     "naming": "p05_parser_{{target}}.md + .yaml",
@@ -2145,7 +2145,7 @@
   "path_config": {
     "boundary": "Caminhos do sistema de arquivos. NAO eh env_config (variaveis genericas) nem permission (controle de acesso).",
     "core": true,
-    "description": "Caminhos do sistema",
+    "description": "System paths",
     "llm_function": "GOVERN",
     "max_bytes": 3072,
     "naming": "p09_path_{{scope}}.yaml",
@@ -2173,7 +2173,7 @@
   "permission": {
     "boundary": "Regra de permissao de acesso. NAO eh guardrail (P11, safety boundary) nem feature_flag (on/off de feature).",
     "core": true,
-    "description": "Regra de permissao (read/write/execute)",
+    "description": "Permission rule (read/write/execute)",
     "llm_function": "GOVERN",
     "max_bytes": 3072,
     "naming": "p09_perm_{{scope}}.yaml",
@@ -2355,7 +2355,7 @@
   "prompt_template": {
     "boundary": "Template com variaveis. NAO eh user_prompt (fixo) nem system_prompt (identidade).",
     "core": true,
-    "description": "Molde reusavel com {{vars}} para gerar prompts",
+    "description": "Reusable template with {{vars}} to generate prompts",
     "llm_function": "CONSTRAIN",
     "max_bytes": 8192,
     "naming": "p03_pt_{{topic}}.md",
@@ -2369,7 +2369,7 @@
   "prompt_version": {
     "boundary": "Versao imutavel. NAO eh prompt_template.",
     "core": false,
-    "description": "Snapshot versionado de prompt",
+    "description": "Versioned prompt snapshot",
     "llm_function": "GOVERN",
     "max_bytes": 2048,
     "naming": "p03_pv_{{version}}.md",
@@ -2397,7 +2397,7 @@
   "quality_gate": {
     "boundary": "Barreira de qualidade com score numerico. NAO eh validator (P06, tecnico pass/fail) nem scoring_rubric (P07, define criterios).",
     "core": true,
-    "description": "Barreira de qualidade (pass/fail com score)",
+    "description": "Quality barrier (pass/fail with score)",
     "llm_function": "GOVERN",
     "max_bytes": 4096,
     "naming": "p11_qg_{{gate}}.yaml",
@@ -2608,7 +2608,7 @@
   "research_pipeline": {
     "boundary": "Pipeline de pesquisa multi-fonte STORM+CRAG+CRITIC. NAO eh retriever (busca local) nem search_tool (busca web simples).",
     "core": false,
-    "description": "Motor de pesquisa 7-stage: INTENT>PLAN>RETRIEVE>RESOLVE>SCORE>SYNTHESIZE>VERIFY",
+    "description": "7-stage research engine: INTENT>PLAN>RETRIEVE>RESOLVE>SCORE>SYNTHESIZE>VERIFY",
     "llm_function": "PRODUCE",
     "max_bytes": 5120,
     "naming": "p04_rp_{{name}}.md",
@@ -2622,7 +2622,7 @@
   "response_format": {
     "boundary": "Formato de resposta injetado no prompt do LLM. NAO eh validation_schema P06 (contrato pos-geracao aplicado pelo sistema).",
     "core": true,
-    "description": "Formato de resposta do LLM (como o agente responde)",
+    "description": "LLM response format (how the agent responds)",
     "llm_function": "CONSTRAIN",
     "max_bytes": 4096,
     "naming": "p05_rf_{{format}}.yaml",
@@ -2650,7 +2650,7 @@
   "retriever_config": {
     "boundary": "Parametros de busca. NAO eh embedding_config.",
     "core": true,
-    "description": "Config de retrieval (top_k, hybrid, reranker)",
+    "description": "Retrieval configuration (top_k, hybrid, reranker)",
     "llm_function": "CONSTRAIN",
     "max_bytes": 2048,
     "naming": "p01_retr_cfg_{{store}}.md",
@@ -2678,7 +2678,7 @@
   "reward_signal": {
     "boundary": "Score. NAO eh quality_gate.",
     "core": true,
-    "description": "Sinal continuo de qualidade",
+    "description": "Continuous quality signal",
     "llm_function": "GOVERN",
     "max_bytes": 2048,
     "naming": "p11_reward_{{metric}}.md",
@@ -2734,7 +2734,7 @@
   "router": {
     "boundary": "Roteamento task-to-agent_group. NAO eh dispatch_rule (P12, keyword>agent_group) nem fallback_chain (modelo>modelo).",
     "core": true,
-    "description": "Regra de roteamento (task > agent_group)",
+    "description": "Routing rule (task > agent_group)",
     "llm_function": "REASON",
     "max_bytes": 1024,
     "naming": "p02_rt_{{scope}}.yaml",
@@ -2748,7 +2748,7 @@
   "runtime_rule": {
     "boundary": "Regra de runtime tecnica (timeouts, retries). NAO eh lifecycle_rule (P11, ciclo de vida) nem law (P08, inviolavel).",
     "core": false,
-    "description": "Regra de runtime (timeouts, retries, limits)",
+    "description": "Runtime rule (timeouts, retries, limits)",
     "llm_function": "GOVERN",
     "max_bytes": 3072,
     "naming": "p09_rr_{{rule}}.yaml",
@@ -2860,7 +2860,7 @@
   "scoring_rubric": {
     "boundary": "Criterio de avaliacao com framework. NAO eh benchmark (nao mede) nem quality_gate (P11, nao bloqueia).",
     "core": true,
-    "description": "Criterio de avaliacao (5D, 12LP, custom)",
+    "description": "Evaluation criterion (5D, 12LP, custom)",
     "llm_function": "GOVERN",
     "max_bytes": 5120,
     "naming": "p07_sr_{{framework}}.md + .yaml",
@@ -2916,7 +2916,7 @@
   "secret_config": {
     "boundary": "Credenciais. NAO eh env_config.",
     "core": true,
-    "description": "Gestao de secrets",
+    "description": "Secret management",
     "llm_function": "GOVERN",
     "max_bytes": 1024,
     "naming": "p09_secret_{{scope}}.md",
@@ -2959,7 +2959,7 @@
   "session_state": {
     "boundary": "Estado efemero de sessao (snapshot). NAO eh runtime_state (persistente entre sessoes) nem learning_record (nao acumula).",
     "core": false,
-    "description": "Estado de sessao (efemero, snapshot)",
+    "description": "Session state (ephemeral, snapshot)",
     "llm_function": "INJECT",
     "max_bytes": 3072,
     "naming": "p10_ss_{{session}}.yaml",
@@ -2973,7 +2973,7 @@
   "signal": {
     "boundary": "Sinal simples entre agentes (complete, error). NAO eh handoff (instrucao completa) nem interface (P06, contrato).",
     "core": true,
-    "description": "Sinal entre agentes (complete, error, progress)",
+    "description": "Inter-agent signal (complete, error, progress)",
     "llm_function": "COLLABORATE",
     "max_bytes": 4096,
     "naming": "p12_sig_{{event}}.json",
@@ -3006,7 +3006,7 @@
   "smoke_eval": {
     "boundary": "Teste rapido de sanidade em <30s. NAO eh unit_eval (profundo) nem benchmark (metricas continuas).",
     "core": false,
-    "description": "Teste rapido de sanidade (< 30s)",
+    "description": "Quick sanity test (< 30s)",
     "llm_function": "GOVERN",
     "max_bytes": 3072,
     "naming": "p07_se_{{scope}}.md",
@@ -3020,7 +3020,7 @@
   "social_publisher": {
     "boundary": "Pipeline de auto-posting em redes sociais. NAO eh notifier (alertas pontuais) nem schedule (agendamento generico).",
     "core": false,
-    "description": "Agente de publicacao automatica: LOAD>FETCH>SELECT>GENERATE>OPTIMIZE>HASHTAGS>PUBLISH>LOG>NOTIFY>ROTATE",
+    "description": "Automatic publishing agent: LOAD>FETCH>SELECT>GENERATE>OPTIMIZE>HASHTAGS>PUBLISH>LOG>NOTIFY>ROTATE",
     "llm_function": "PRODUCE",
     "max_bytes": 5120,
     "naming": "p04_sp_{{name}}.md",
@@ -3048,7 +3048,7 @@
   "spawn_config": {
     "boundary": "Configuracao de spawn de agent_groups. NAO eh boot_config (P02, per-provider) nem env_config (P09, variaveis).",
     "core": true,
-    "description": "Configuracao de spawn (solo, grid, continuous)",
+    "description": "Spawn configuration (solo, grid, continuous)",
     "llm_function": "GOVERN",
     "max_bytes": 3072,
     "naming": "p12_spawn_{{mode}}.yaml",
@@ -3146,7 +3146,7 @@
   "system_prompt": {
     "boundary": "Identidade + regras + formato. Lido PRIMEIRO pelo LLM.",
     "core": true,
-    "description": "Prompt de sistema que define identidade e regras do agente",
+    "description": "System prompt that defines agent identity and rules",
     "llm_function": "BECOME",
     "max_bytes": 4096,
     "naming": "p03_sp_{{agent}}.md",
@@ -3286,7 +3286,7 @@
   "type_def": {
     "boundary": "Definicao de tipo customizado no sistema. NAO eh input_schema (contrato de entrada) nem interface (contrato bilateral).",
     "core": true,
-    "description": "Definicao de tipo customizado",
+    "description": "Custom type definition",
     "llm_function": "GOVERN",
     "max_bytes": 3072,
     "naming": "p06_td_{{type}}.yaml",
@@ -3300,7 +3300,7 @@
   "unit_eval": {
     "boundary": "Teste unitario de agente ou prompt individual. NAO eh smoke_eval (rapido, sem profundidade) nem e2e_eval (pipeline completo).",
     "core": true,
-    "description": "Teste unitario de agente/prompt",
+    "description": "Agent/prompt unit test",
     "llm_function": "GOVERN",
     "max_bytes": 4096,
     "naming": "p07_ue_{{target}}.md + .yaml",
@@ -3370,7 +3370,7 @@
   "validation_schema": {
     "boundary": "Contrato formal aplicado pelo SISTEMA apos geracao. NAO eh response_format P05 (injetado no prompt, LLM ve).",
     "core": false,
-    "description": "Contrato de validacao pos-geracao (o sistema aplica, LLM nao ve)",
+    "description": "Post-generation validation contract (system applies, LLM does not see)",
     "llm_function": "GOVERN",
     "max_bytes": 3072,
     "naming": "p06_vs_{{scope}}.yaml",
@@ -3384,7 +3384,7 @@
   "validator": {
     "boundary": "Regra de validacao tecnica pass/fail. NAO eh quality_gate (P11, score numerico) nem scoring_rubric (P07, criterios).",
     "core": true,
-    "description": "Regra de validacao (pre-commit, quality gate)",
+    "description": "Validation rule (pre-commit, quality gate)",
     "llm_function": "GOVERN",
     "max_bytes": 3072,
     "naming": "p06_val_{{rule}}.yaml",
@@ -3427,7 +3427,7 @@
   "vision_tool": {
     "boundary": "Processa input visual e retorna dados estruturados. NAO eh browser_tool (interacao DOM) nem computer_use (controle de tela).",
     "core": false,
-    "description": "Analise de imagem, OCR, screenshot interpretation",
+    "description": "Image analysis, OCR, screenshot interpretation",
     "llm_function": "CALL",
     "max_bytes": 2048,
     "naming": "p04_vision_{{capability}}.md + .yaml",
@@ -3511,7 +3511,7 @@
   "workflow": {
     "boundary": "Fluxo de agentes+tools sequenciais/paralelos. NAO eh chain (P03, sequencia de prompts) nem dag (grafo de deps sem execucao).",
     "core": true,
-    "description": "Fluxo de trabalho (steps sequenciais/paralelos)",
+    "description": "Workflow (sequential/parallel steps)",
     "llm_function": "PRODUCE",
     "max_bytes": 3072,
     "naming": "p12_wf_{{name}}.md + .yaml",

@@ -266,7 +266,7 @@ kinds:
 
   multi_modal_config:
     description: Input format, resolution, encoding, and routing rules for multi-modal LLM interactions
-    boundary: Modality config. NAO eh vision_tool (analise visual), audio_tool (processa audio), nem model_card (capabilities).
+    boundary: Modality config. NOT vision_tool (analise visual), audio_tool (processa audio), nor model_card (capabilities).
     layer: spec
     core: false
     machine_format: yaml

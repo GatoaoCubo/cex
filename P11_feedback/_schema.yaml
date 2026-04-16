@@ -1,11 +1,11 @@
 pillar: P11
 name: Feedback
-description: COMO melhora
+description: HOW to improve
 kinds:
   quality_gate:
-    description: Barreira de qualidade (pass/fail com score)
-    boundary: Barreira de qualidade com score numerico. NAO eh validator (P06, tecnico pass/fail) nem scoring_rubric (P07,
-      define criterios).
+    description: Quality barrier (pass/fail with score)
+    boundary: Quality barrier with numeric score. NOT validator (P06, technical pass/fail) nor scoring_rubric (P07,
+      defines criteria).
     layer: governance
     core: true
     machine_format: yaml
@@ -14,9 +14,9 @@ kinds:
       max_bytes: 4096
     llm_function: GOVERN
   bugloop:
-    description: Ciclo de correcao automatica (detect > fix > verify)
-    boundary: Ciclo automatico detect>fix>verify. NAO eh unit_eval (P07, teste manual) nem optimizer (melhoria continua, nao
-      correcao).
+    description: Automatic correction loop (detect > fix > verify)
+    boundary: Automatic detect>fix>verify loop. NOT unit_eval (P07, manual test) nor optimizer (continuous improvement, not
+      correction).
     layer: governance
     core: false
     machine_format: yaml
@@ -25,8 +25,8 @@ kinds:
       max_bytes: 4096
     llm_function: GOVERN
   lifecycle_rule:
-    description: Regra de ciclo de vida (freshness, archive, promote)
-    boundary: Regra declarativa de ciclo de vida. NAO eh hook (P04, codigo executavel) nem runtime_rule (P09, tecnico).
+    description: Lifecycle rule (freshness, archive, promote)
+    boundary: Declarative lifecycle rule. NOT hook (P04, executable code) nor runtime_rule (P09, technical).
     layer: governance
     core: true
     machine_format: yaml
@@ -35,8 +35,8 @@ kinds:
       max_bytes: 4096
     llm_function: GOVERN
   guardrail:
-    description: Restricao de seguranca (safety boundary)
-    boundary: Restricao de seguranca e safety boundary. NAO eh permission (P09, acesso) nem law (P08, operacional).
+    description: Safety restriction (safety boundary)
+    boundary: Safety restriction and safety boundary. NOT permission (P09, access) nor law (P08, operational).
     layer: governance
     core: true
     machine_format: yaml
@@ -45,8 +45,8 @@ kinds:
       max_bytes: 4096
     llm_function: CONSTRAIN
   optimizer:
-    description: Otimizador de processo (metric > action)
-    boundary: Otimizador de processo metric>action. NAO eh bugloop (correcao pontual) nem benchmark (P07, medicao passiva).
+    description: Process optimizer (metric > action)
+    boundary: Process optimizer metric>action. NOT bugloop (correction pointwise) nor benchmark (P07, passive measurement).
     layer: governance
     core: false
     machine_format: yaml
@@ -55,8 +55,8 @@ kinds:
       max_bytes: 4096
     llm_function: GOVERN
   reward_signal:
-    description: Sinal continuo de qualidade
-    boundary: Score. NAO eh quality_gate.
+    description: Continuous quality signal
+    boundary: Score. NOT quality_gate.
     layer: runtime
     core: true
     machine_format: yaml

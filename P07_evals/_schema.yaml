@@ -1,11 +1,11 @@
 pillar: P07
 name: Evals
-description: COMO medir qualidade
+description: HOW to measure quality
 kinds:
   unit_eval:
-    description: Teste unitario de agente/prompt
-    boundary: Teste unitario de agente ou prompt individual. NAO eh smoke_eval (rapido, sem profundidade) nem e2e_eval (pipeline
-      completo).
+    description: Agent/prompt unit test
+    boundary: Unit test of a single agent or prompt. NOT smoke_eval (quick, no depth) nor e2e_eval (pipeline
+      complete).
     layer: governance
     core: true
     machine_format: yaml
@@ -14,8 +14,8 @@ kinds:
       max_bytes: 4096
     llm_function: GOVERN
   smoke_eval:
-    description: Teste rapido de sanidade (< 30s)
-    boundary: Teste rapido de sanidade em <30s. NAO eh unit_eval (profundo) nem benchmark (metricas continuas).
+    description: Quick sanity test (< 30s)
+    boundary: Quick sanity test in <30s. NOT unit_eval (deep) nor benchmark (metrics continuous).
     layer: governance
     core: false
     machine_format: yaml
@@ -24,8 +24,8 @@ kinds:
       max_bytes: 3072
     llm_function: GOVERN
   e2e_eval:
-    description: Teste end-to-end (pipeline completo)
-    boundary: Teste end-to-end de pipeline completo. NAO eh unit_eval (escopo isolado) nem benchmark (nao mede performance).
+    description: End-to-end test (full pipeline)
+    boundary: End-to-end test of full pipeline. NOT unit_eval (scope isolated) nor benchmark (does not measure performance).
     layer: governance
     core: false
     machine_format: yaml
@@ -34,8 +34,8 @@ kinds:
       max_bytes: 4096
     llm_function: GOVERN
   benchmark:
-    description: Medicao de performance (latencia, custo, qualidade)
-    boundary: Medicao de performance quantitativa. NAO eh eval (nao testa corretude) nem scoring_rubric (nao define criterios).
+    description: Performance measurement (latency, custo, quality)
+    boundary: Quantitative performance measurement. NOT eval (does not test correctness) nor scoring_rubric (does not define criteria).
     layer: governance
     core: false
     machine_format: yaml
@@ -44,8 +44,8 @@ kinds:
       max_bytes: 4096
     llm_function: GOVERN
   golden_test:
-    description: Caso de teste referencia (quality 9.5+)
-    boundary: Caso de teste referencia quality 9.5+. NAO eh few_shot_example (P01, exemplifica) nem unit_eval (qualquer quality).
+    description: Reference test case (quality 9.5+)
+    boundary: Reference test case quality 9.5+. NOT few_shot_example (P01, exemplifies) nor unit_eval (any quality).
     layer: governance
     core: true
     machine_format: yaml
@@ -54,8 +54,8 @@ kinds:
       max_bytes: 4096
     llm_function: GOVERN
   scoring_rubric:
-    description: Criterio de avaliacao (5D, 12LP, custom)
-    boundary: Criterio de avaliacao com framework. NAO eh benchmark (nao mede) nem quality_gate (P11, nao bloqueia).
+    description: Evaluation criterion (5D, 12LP, custom)
+    boundary: Evaluation criterion with framework. NOT benchmark (does not measure) nor quality_gate (P11, does not block).
     layer: governance
     core: true
     machine_format: yaml
@@ -64,8 +64,8 @@ kinds:
       max_bytes: 5120
     llm_function: GOVERN
   llm_judge:
-    description: Config LLM-as-Judge
-    boundary: Avaliador LLM. NAO eh scoring_rubric.
+    description: LLM-as-Judge config
+    boundary: LLM evaluator. NOT scoring_rubric.
     layer: runtime
     core: true
     machine_format: yaml
@@ -80,8 +80,8 @@ kinds:
     - scale
     llm_function: GOVERN
   eval_dataset:
-    description: Colecao de test cases
-    boundary: Conjunto. NAO eh golden_test.
+    description: Test case collection
+    boundary: Set. NOT golden_test.
     layer: runtime
     core: true
     machine_format: yaml
@@ -96,8 +96,8 @@ kinds:
     - version
     llm_function: GOVERN
   red_team_eval:
-    description: Teste adversarial
-    boundary: Eval seguranca. NAO eh e2e_eval.
+    description: Adversarial test
+    boundary: Safety eval. NOT e2e_eval.
     layer: runtime
     core: false
     machine_format: yaml
@@ -111,8 +111,8 @@ kinds:
     - target
     llm_function: GOVERN
   regression_check:
-    description: Comparacao contra baseline
-    boundary: Atual vs anterior. NAO eh benchmark.
+    description: Baseline comparison
+    boundary: Current vs previous. NOT benchmark.
     layer: runtime
     core: false
     machine_format: yaml

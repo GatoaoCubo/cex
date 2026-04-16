@@ -185,7 +185,7 @@ kinds:
     llm_function: CONSTRAIN
   citation:
     description: Structured source attribution with provenance, URL, date, and reliability metadata
-    boundary: Source reference with provenance. NAO eh knowledge_card (conteudo em si), rag_source (pipeline config), nem glossary_entry (definicao de termo).
+    boundary: Source reference with provenance. NOT knowledge_card (content em si), rag_source (pipeline config), nor glossary_entry (definition term).
     layer: content
     core: false
     machine_format: yaml

@@ -196,7 +196,7 @@ kinds:
     llm_function: GOVERN
   context_window_config:
     description: Token budget allocation, priority tiers, and overflow rules for prompt assembly
-    boundary: Budget allocation spec. NAO eh prompt_template (conteudo), system_prompt (identidade), nem model_card (capabilities).
+    boundary: Budget allocation spec. NOT prompt_template (content), system_prompt (identity), nor model_card (capabilities).
     layer: spec
     core: true
     machine_format: yaml
