@@ -4,7 +4,7 @@ id: bld_schema_dual_loop_architecture
 pillar: P06
 llm_function: CONSTRAIN
 purpose: Formal schema -- SINGLE SOURCE OF TRUTH for dual_loop_architecture
-quality: null
+quality: 9.1
 title: "Schema Dual Loop Architecture"
 version: "1.0.0"
 author: wave1_builder_gen
@@ -48,19 +48,19 @@ This ISO applies to the dual loop pattern, coordinating an outer orchestrator wi
 ^p08_dl_[a-zA-Z0-9_]+\.md$
 
 ## Body Structure
-1. **Architecture Overview**  
+1. **Architecture Overview**
    High-level description of dual-loop interactions and purpose.
 
-2. **Primary Loop Components**  
+2. **Primary Loop Components**
    Detailed breakdown of core processing elements and their roles.
 
-3. **Secondary Loop Components**  
+3. **Secondary Loop Components**
    Explanation of feedback mechanisms and supporting systems.
 
-4. **Integration Points**  
+4. **Integration Points**
    Mapping of interfaces between primary and secondary loops.
 
-5. **Validation Criteria**  
+5. **Validation Criteria**
    Metrics and tests ensuring loop synchronization and reliability.
 
 ## Constraints
