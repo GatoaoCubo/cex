@@ -4,7 +4,7 @@ id: bld_instruction_ai_rmf_profile
 pillar: P03
 llm_function: REASON
 purpose: Step-by-step production process for ai_rmf_profile
-quality: null
+quality: 8.9
 title: "Instruction AI RMF Profile"
 version: "1.0.0"
 author: n01_wave7
