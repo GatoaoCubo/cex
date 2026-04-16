@@ -3,8 +3,9 @@ id: kc_dual_loop_architecture
 kind: knowledge_card
 title: Dual Loop Architecture
 version: 1.0.0
-quality: null
+quality: 8.7
 pillar: P01
+density_score: 0.97
 ---
 
 # Dual Loop Architecture
