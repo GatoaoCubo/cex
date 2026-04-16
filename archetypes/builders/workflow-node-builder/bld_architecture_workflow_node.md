@@ -4,7 +4,7 @@ id: bld_architecture_workflow_node
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of workflow_node -- inventory, dependencies
-quality: null
+quality: 9.0
 title: "Architecture Workflow Node"
 version: "1.0.0"
 author: wave1_builder_gen_v2
