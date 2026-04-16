@@ -4,7 +4,7 @@ id: bld_knowledge_card_safety_hazard_taxonomy
 pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for safety_hazard_taxonomy production
-quality: null
+quality: 9.2
 title: "Knowledge Card Safety Hazard Taxonomy"
 version: "1.0.0"
 author: n01_wave7
