@@ -4,7 +4,7 @@ id: bld_knowledge_card_model_registry
 pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for model_registry production
-quality: null
+quality: 9.0
 title: "Knowledge Card Model Registry"
 version: "1.0.0"
 author: wave1_builder_gen
