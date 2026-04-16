@@ -4,7 +4,7 @@ id: p03_sp_product_tour_builder
 pillar: P03
 llm_function: BECOME
 purpose: System prompt defining product_tour-builder persona and rules
-quality: null
+quality: 8.8
 title: "System Prompt Product Tour"
 version: "1.0.0"
 author: wave1_builder_gen_v2
