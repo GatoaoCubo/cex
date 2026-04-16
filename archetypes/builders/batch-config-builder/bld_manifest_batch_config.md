@@ -14,7 +14,7 @@ keywords: [batch, async, bulk, api, openai, anthropic, message-batches, batch-ap
 triggers: ["configure batch processing", "set up async batch API", "bulk API job config", "OpenAI Batch config", "Anthropic Message Batches config"]
 capabilities: >
   L1: Specialist in building batch_config artifacts -- async bulk API processing configuration. L2: Define provider, model, endpoint, concurrency, cost controls, and retry policy for batch jobs. L3: When user needs to configure, build, or scaffold async batch processing for bulk LLM API operations.
-quality: null
+quality: 9.1
 title: "Manifest Batch Config"
 tldr: "Builder for batch_config artifacts -- async bulk API job configurations for OpenAI Batch API and Anthropic Message Batches."
 density_score: 0.90
