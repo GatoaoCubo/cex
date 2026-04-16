@@ -4,7 +4,7 @@ id: bld_instruction_agent_name_service_record
 pillar: P03
 llm_function: REASON
 purpose: Step-by-step build phases for constructing IETF ANS/AgentDNS registry records
-quality: null
+quality: 9.1
 title: "Agent Name Service Record Builder -- Instructions"
 version: "1.0.0"
 author: wave7_n05
