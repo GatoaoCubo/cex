@@ -19,6 +19,7 @@ import json
 import os
 import sys
 from pathlib import Path
+from typing import Any
 
 ROOT = Path(__file__).resolve().parent.parent
 BUILDERS_DIR = ROOT / "archetypes" / "builders"
@@ -26,12 +27,12 @@ KINDS_META = ROOT / ".cex" / "kinds_meta.json"
 DEFAULT_OUTPUT = ROOT / "_data" / "finetune" / "cex_builder_pairs.jsonl"
 
 
-def estimate_tokens(text):
+def estimate_tokens(text: str) -> int:
     """Rough token estimate: ~4 chars per token for English text."""
     return len(text) // 4
 
 
-def load_kinds_meta():
+def load_kinds_meta() -> dict[str, Any]:
     """Load the kinds registry."""
     if not KINDS_META.exists():
         print(f"[FAIL] kinds_meta.json not found: {KINDS_META}", file=sys.stderr)
@@ -39,7 +40,7 @@ def load_kinds_meta():
     return json.loads(KINDS_META.read_text(encoding="utf-8"))
 
 
-def find_builder_dirs():
+def find_builder_dirs() -> list[Path]:
     """Find all builder directories (exclude _shared, compiled, etc.)."""
     dirs = []
     for d in sorted(BUILDERS_DIR.iterdir()):
@@ -48,13 +49,13 @@ def find_builder_dirs():
     return dirs
 
 
-def extract_kind_from_builder_name(builder_name):
+def extract_kind_from_builder_name(builder_name: str) -> str:
     """agent-builder -> agent, knowledge-card-builder -> knowledge_card"""
     kind = builder_name.replace("-builder", "")
     return kind.replace("-", "_")
 
 
-def build_input(kind_name, meta_entry):
+def build_input(kind_name: str, meta_entry: dict[str, Any]) -> str:
     """Build the input side of a training pair."""
     parts = [
         f"Kind: {kind_name}",
@@ -69,7 +70,7 @@ def build_input(kind_name, meta_entry):
     return "\n".join(parts)
 
 
-def build_output(builder_dir, kind_name):
+def build_output(builder_dir: Path, kind_name: str) -> str | None:
     """Read the bld_instruction_{kind}.md file as output."""
     # Try exact name match
     instruction_file = builder_dir / f"bld_instruction_{kind_name}.md"
@@ -92,7 +93,7 @@ def build_output(builder_dir, kind_name):
         return None
 
 
-def main():
+def main() -> None:
     parser = argparse.ArgumentParser(description="CEX Fine-Tune Data Export")
     parser.add_argument("--output", default=str(DEFAULT_OUTPUT),
                         help=f"Output JSONL path (default: {DEFAULT_OUTPUT})")
