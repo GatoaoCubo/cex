@@ -5,7 +5,7 @@ title: "N06 LEVERAGE_MAP_V2 Verification Cycle - Commercial Tools Audit"
 nucleus: N06
 pillar: P01
 version: 1.1.0
-quality: null
+quality: 9.2
 density_score: 0.90
 created: 2026-04-15
 updated: 2026-04-15
