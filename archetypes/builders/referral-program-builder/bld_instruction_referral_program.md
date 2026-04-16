@@ -4,7 +4,7 @@ id: bld_instruction_referral_program
 pillar: P03
 llm_function: REASON
 purpose: Step-by-step production process for referral_program
-quality: null
+quality: 8.9
 title: "Instruction Referral Program"
 version: "1.0.0"
 author: wave1_builder_gen_v2
