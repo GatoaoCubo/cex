@@ -4,7 +4,7 @@ id: bld_output_template_integration_guide
 pillar: P05
 llm_function: PRODUCE
 purpose: Template with vars for integration_guide production
-quality: null
+quality: 8.9
 title: "Output Template Integration Guide"
 version: "1.0.0"
 author: wave1_builder_gen_v2
