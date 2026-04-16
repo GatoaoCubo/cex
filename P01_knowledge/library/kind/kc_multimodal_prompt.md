@@ -9,7 +9,7 @@ created: 2026-04-13
 updated: 2026-04-13
 author: n03_builder
 domain: multimodal_prompt
-quality: null
+quality: 9.1
 tags: [multimodal_prompt, P03, INJECT, kind-kc, vision, audio]
 tldr: "Cross-modal prompt pattern that interleaves text with vision, audio, or video inputs in a single structured request"
 when_to_use: "Building, reviewing, or reasoning about multimodal_prompt artifacts"
