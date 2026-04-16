@@ -4,7 +4,7 @@ id: bld_examples_marketplace_app_manifest
 pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of marketplace_app_manifest artifacts
-quality: null
+quality: 8.8
 title: "Examples Marketplace App Manifest"
 version: "1.0.0"
 author: wave1_builder_gen_v2
