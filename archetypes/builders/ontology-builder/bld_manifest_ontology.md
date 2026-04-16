@@ -14,7 +14,7 @@ keywords: [ontology, taxonomy, OWL, SKOS, schema.org, RDF, classification, hiera
 triggers: ["define ontology", "create taxonomy", "OWL definition", "SKOS vocabulary", "schema.org mapping", "formal classification", "build class hierarchy"]
 capabilities: >
   L1: Specialist in building ontology artifacts -- formal taxonomy and classification systems. L2: Define classes, properties, axioms, and semantic relationships using OWL, SKOS, and schema.org patterns. L3: When user needs to create, build, or scaffold a formal classification structure.
-quality: null
+quality: 9.1
 title: "Manifest Ontology"
 tldr: "Builder for ontology artifacts: formal taxonomy and classification definitions using OWL, SKOS, and schema.org patterns."
 density_score: 0.90
