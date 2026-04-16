@@ -3,7 +3,7 @@ id: kc_customer_segment
 kind: knowledge_card
 title: Customer Segment Definition
 version: 1.0.0
-quality: null
+quality: 8.4
 pillar: P01
 description: |
   A customer segment is a group of customers with similar characteristics, needs, and behaviors. This artifact defines the criteria for segmenting customers using firmographics (business data) and psychographics (behavioral and psychological traits).
@@ -22,4 +22,5 @@ description: |
   - Lifecycle stage (early adopter, mature enterprise)
 
   This definition serves as the foundation for ICP (Ideal Customer Profile) development and targeting strategies.
+density_score: 0.0
 ---
