@@ -4,7 +4,7 @@ id: p03_sp_pitch_deck_builder
 pillar: P03
 llm_function: BECOME
 purpose: System prompt defining pitch_deck-builder persona and rules
-quality: null
+quality: 8.9
 title: "System Prompt Pitch Deck"
 version: "1.0.0"
 author: wave1_builder_gen_v2
