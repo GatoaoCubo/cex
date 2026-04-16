@@ -131,7 +131,13 @@ def audit_L2() -> None:
                "WIRED" if compiled_count > 0 else "BROKEN", f"{compiled_count} artifacts")
 
     for i in range(1, 8):
+        # N07 lives in .claude/rules/ (orchestrator). N01-N06 live in N0X_*/rules/ (lazy-loaded).
         rules = list((CEX_ROOT / ".claude" / "rules").glob(f"n{i:02d}*"))
+        if not rules:
+            ndir = next((d for d in CEX_ROOT.iterdir()
+                         if d.is_dir() and d.name.startswith(f"N{i:02d}_")), None)
+            if ndir and (ndir / "rules").exists():
+                rules = list((ndir / "rules").glob(f"n{i:02d}*"))
         record("L2", f"N{i:02d}_rule", "WIRED" if rules else "PHANTOM",
                rules[0].name if rules else "")
 

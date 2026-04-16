@@ -59,7 +59,7 @@ def main() -> None:
               f"README should mention {actual_kinds} kinds")
 
     builders = [d for d in (CEX_ROOT / "archetypes" / "builders").iterdir()
-                if d.is_dir() and d.name != "_shared"]
+                if d.is_dir() and d.name.endswith("-builder")]
     check("readme:builders", str(len(builders)) in readme,
           f"README should mention {len(builders)} builders")
 
@@ -77,12 +77,14 @@ def main() -> None:
              "--include=*.cmd", "."],
             capture_output=True, text=True, cwd=str(CEX_ROOT)
         )
-        # Filter out known_versions in updater and compiled/
+        # Filter out known_versions in updater, compiled/, venvs, and self-refs
         real_hits = [l for l in hits.stdout.strip().split("\n")
                      if l.strip() and "known_versions" not in l
                      and "compiled/" not in l and "_backup_" not in l
                      and "cex_release_check" not in l
-                     and "cex_model_updater" not in l]
+                     and "cex_model_updater" not in l
+                     and ".venv" not in l and "site-packages" not in l
+                     and "_external" not in l]
         check(f"model:no_{stale[:20]}", len(real_hits) == 0,
               f"{len(real_hits)} stale refs found")
 

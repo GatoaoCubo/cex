@@ -1,5 +1,9 @@
 ---
+id: rule_n03_builder
+kind: rule
+pillar: P08
 glob: "N03_engineering/**"
+nucleus: N03
 description: "N03 Builder Nucleus -- Soberba Inventiva, artifact construction, 8F pipeline"
 quality: 9.0
 title: "N03-Builder"

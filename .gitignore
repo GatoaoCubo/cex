@@ -21,6 +21,13 @@ _config/token.json
 _reports/audit/
 _reports/leverage_map/
 _reports/gridtest_*/
+.cex/quality/audit_*.json
+
+# External projects cloned into workspace (not part of CEX)
+_external/
+
+# Auto-generated context dumps
+CLAUDE_GENERATED.md
 
 # IDE
 .obsidian/
