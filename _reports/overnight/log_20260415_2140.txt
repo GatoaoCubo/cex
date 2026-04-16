@@ -22,3 +22,5 @@
 [22:16:02] Phase B cycle 3 mode=auto
 [22:16:21] Phase B cycle 3 done. Sleeping 180 s.
 [22:19:21] Phase B cycle 4 mode=evolve
+[22:19:24] Phase B cycle 4 done. Sleeping 180 s.
+[22:22:24] Phase B cycle 5 mode=auto
