@@ -4,7 +4,7 @@ id: p03_sp_memory_benchmark_builder
 pillar: P03
 llm_function: BECOME
 purpose: System prompt defining memory_benchmark-builder persona and rules
-quality: null
+quality: 8.8
 title: "System Prompt Memory Benchmark"
 version: "1.1.0"
 author: n05_operations
