@@ -4,7 +4,7 @@ id: bld_instruction_agents_md
 pillar: P03
 llm_function: REASON
 purpose: Step-by-step production process for agents_md
-quality: null
+quality: 8.9
 title: "Instruction Agents Md"
 version: "1.0.0"
 author: wave7_n03_dev_manifests
