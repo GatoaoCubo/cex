@@ -4,7 +4,7 @@ id: p02_qg_agents_md
 pillar: P11
 llm_function: GOVERN
 purpose: Quality gate with HARD and SOFT scoring for agents_md
-quality: null
+quality: 9.1
 title: "Quality Gate Agents Md"
 version: "1.0.0"
 author: wave7_n03_dev_manifests
