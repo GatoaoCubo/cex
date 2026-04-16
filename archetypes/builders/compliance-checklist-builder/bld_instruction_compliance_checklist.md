@@ -4,7 +4,7 @@ id: bld_instruction_compliance_checklist
 pillar: P03
 llm_function: REASON
 purpose: Step-by-step production process for compliance_checklist
-quality: null
+quality: 8.9
 title: "Instruction Compliance Checklist"
 version: "1.0.0"
 author: wave1_builder_gen_v2
