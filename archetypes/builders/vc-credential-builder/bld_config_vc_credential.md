@@ -4,7 +4,7 @@ id: bld_config_vc_credential
 pillar: P09
 llm_function: CONSTRAIN
 purpose: Naming, paths, limits for vc_credential production
-quality: null
+quality: 8.6
 title: "Config VC Credential"
 version: "1.0.0"
 author: n04_wave7
