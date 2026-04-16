@@ -15,7 +15,7 @@ hooks:
   on_error: null
   on_quality_fail: null
 permission_scope: nucleus
-quality: null
+quality: 9.2
 title: "Config: knowledge_graph production rules"
 version: "1.0.0"
 author: n03_builder
