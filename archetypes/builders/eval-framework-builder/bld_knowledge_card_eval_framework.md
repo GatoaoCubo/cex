@@ -4,7 +4,7 @@ id: bld_knowledge_card_eval_framework
 pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for eval_framework production
-quality: null
+quality: 9.2
 title: "Knowledge Card Eval Framework"
 version: "1.1.0"
 author: n03_hybrid_review4
