@@ -4,7 +4,7 @@ id: bld_instruction_workflow_run_crate
 pillar: P03
 llm_function: REASON
 purpose: Step-by-step production process for workflow_run_crate
-quality: null
+quality: 8.9
 title: "Instruction Workflow Run Crate"
 version: "1.0.0"
 author: n04_wave7
