@@ -4,7 +4,7 @@ id: dual-loop-architecture-builder
 pillar: P08
 llm_function: BECOME
 purpose: Builder identity, capabilities, routing for dual_loop_architecture
-quality: null
+quality: 8.9
 title: "Type Builder Dual Loop Architecture"
 version: "1.0.0"
 author: wave1_builder_gen
