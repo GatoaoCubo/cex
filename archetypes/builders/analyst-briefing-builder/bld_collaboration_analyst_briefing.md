@@ -4,7 +4,7 @@ id: bld_collaboration_analyst_briefing
 pillar: P12
 llm_function: COLLABORATE
 purpose: How analyst_briefing-builder works in crews with other builders
-quality: null
+quality: 9.0
 title: "Collaboration Analyst Briefing"
 version: "1.0.0"
 author: n01_wave6
