@@ -4,7 +4,7 @@ id: bld_config_analyst_briefing
 pillar: P09
 llm_function: CONSTRAIN
 purpose: Naming, paths, limits for analyst_briefing production
-quality: null
+quality: 8.6
 title: "Config Analyst Briefing"
 version: "1.0.0"
 author: n01_wave6
