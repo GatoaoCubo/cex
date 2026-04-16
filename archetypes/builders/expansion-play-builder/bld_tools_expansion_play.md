@@ -4,7 +4,7 @@ id: bld_tools_expansion_play
 pillar: P04
 llm_function: CALL
 purpose: Tools available for expansion_play production
-quality: null
+quality: 9.0
 title: "Tools Expansion Play"
 version: "1.0.0"
 author: wave6_n06
