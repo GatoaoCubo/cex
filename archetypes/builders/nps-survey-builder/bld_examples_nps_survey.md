@@ -4,7 +4,7 @@ id: bld_examples_nps_survey
 pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of nps_survey artifacts
-quality: null
+quality: 8.9
 title: "Examples Nps Survey"
 version: "1.0.0"
 author: n05_wave6
