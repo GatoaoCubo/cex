@@ -4,7 +4,7 @@ id: bld_tools_role_assignment
 pillar: P04
 llm_function: CALL
 purpose: Tools available for role_assignment production
-quality: null
+quality: 9.0
 title: "Tools Role Assignment"
 version: "1.0.0"
 author: n03_wave8_builder
