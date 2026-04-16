@@ -5,7 +5,7 @@ pillar: P12
 llm_function: COLLABORATE
 purpose: How kind-builder works in crews with other builders and nuclei
 pattern: each builder must know its ROLE in a team, what it RECEIVES and PRODUCES
-quality: null
+quality: 9.1
 title: "Collaboration Kind Builder"
 version: "1.0.0"
 author: n03_builder
