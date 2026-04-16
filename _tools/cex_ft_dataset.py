@@ -21,6 +21,7 @@ import random
 import sys
 from dataclasses import dataclass, asdict
 from pathlib import Path
+from typing import Any
 
 ROOT = Path(__file__).resolve().parent.parent
 BUILDERS_DIR = ROOT / "archetypes" / "builders"
@@ -191,19 +192,19 @@ class TrainingPair:
     token_estimate: int
 
 
-def estimate_tokens(text):
+def estimate_tokens(text: str) -> int:
     """Rough token estimate: ~4 chars per token."""
     return len(text) // 4
 
 
-def load_kinds_meta():
+def load_kinds_meta() -> dict[str, Any]:
     if not KINDS_META.exists():
         print("[FAIL] kinds_meta.json not found", file=sys.stderr)
         sys.exit(1)
     return json.loads(KINDS_META.read_text(encoding="utf-8"))
 
 
-def resolve_nucleus(kind, meta):
+def resolve_nucleus(kind: str, meta: dict[str, Any]) -> str:
     """Resolve kind -> nucleus using 3-level lookup."""
     if kind in KIND_TO_NUCLEUS:
         return KIND_TO_NUCLEUS[kind]
@@ -213,14 +214,14 @@ def resolve_nucleus(kind, meta):
     return PILLAR_NUCLEUS_FALLBACK.get(pillar, "N03")
 
 
-def find_builder_dir(kind):
+def find_builder_dir(kind: str) -> Path | None:
     """Find builder directory for a kind."""
     hyphen = kind.replace("_", "-")
     d = BUILDERS_DIR / f"{hyphen}-builder"
     return d if d.exists() else None
 
 
-def read_iso(builder_dir, iso_type, kind):
+def read_iso(builder_dir: Path, iso_type: str, kind: str) -> str | None:
     """Read a builder ISO file. Returns content or None."""
     fname = f"bld_{iso_type}_{kind}.md"
     fpath = builder_dir / fname
@@ -236,7 +237,7 @@ def read_iso(builder_dir, iso_type, kind):
         return None
 
 
-def pick_instruction(category, kind, meta):
+def pick_instruction(category: str, kind: str, meta: dict[str, Any]) -> str:
     """Pick a random instruction template and fill it."""
     templates = INSTRUCTION_TEMPLATES.get(category, ["Describe {kind}"])
     tmpl = random.choice(templates)
@@ -247,7 +248,7 @@ def pick_instruction(category, kind, meta):
     )
 
 
-def build_context(kind, meta):
+def build_context(kind: str, meta: dict[str, Any]) -> str:
     """Build the input/context field from meta."""
     parts = [
         f"Kind: {kind}",
@@ -260,7 +261,7 @@ def build_context(kind, meta):
     return "\n".join(parts)
 
 
-def strip_frontmatter(text):
+def strip_frontmatter(text: str) -> str:
     """Remove YAML frontmatter from markdown."""
     if text.startswith("---"):
         end = text.find("---", 3)
@@ -269,7 +270,13 @@ def strip_frontmatter(text):
     return text.strip()
 
 
-def extract_from_iso(builder_dir, iso_type, kind, meta, category):
+def extract_from_iso(
+    builder_dir: Path,
+    iso_type: str,
+    kind: str,
+    meta: dict[str, Any],
+    category: str,
+) -> TrainingPair | None:
     """Generic extractor: read ISO, build pair."""
     content = read_iso(builder_dir, iso_type, kind)
     if not content or len(content) < 100:
@@ -298,7 +305,7 @@ def extract_from_iso(builder_dir, iso_type, kind, meta, category):
     )
 
 
-def extract_from_knowledge_card(kind, meta):
+def extract_from_knowledge_card(kind: str, meta: dict[str, Any]) -> list[TrainingPair]:
     """Extract pairs from P01 knowledge cards."""
     kc_path = KC_DIR / f"kc_{kind}.md"
     if not kc_path.exists():
@@ -326,7 +333,7 @@ def extract_from_knowledge_card(kind, meta):
     return pairs
 
 
-def extract_all_pairs(kind, meta):
+def extract_all_pairs(kind: str, meta: dict[str, Any]) -> list[TrainingPair]:
     """Extract all training pairs for a single kind."""
     pairs = []
     builder_dir = find_builder_dir(kind)
@@ -364,7 +371,7 @@ def extract_all_pairs(kind, meta):
     return pairs
 
 
-def extract_supplementary(nucleus):
+def extract_supplementary(nucleus: str) -> list[TrainingPair]:
     """Extract supplementary pairs from nucleus directories for thin nuclei."""
     pairs = []
     nuc_lower = nucleus.lower()
@@ -400,7 +407,7 @@ def extract_supplementary(nucleus):
     return pairs
 
 
-def group_by_nucleus(pairs):
+def group_by_nucleus(pairs: list[TrainingPair]) -> dict[str, list[TrainingPair]]:
     """Group training pairs by target nucleus."""
     groups = {}
     for p in pairs:
@@ -411,7 +418,7 @@ def group_by_nucleus(pairs):
     return groups
 
 
-def write_jsonl(pairs, output_path):
+def write_jsonl(pairs: list[TrainingPair], output_path: Path) -> int:
     """Write Alpaca-format JSONL."""
     output_path.parent.mkdir(parents=True, exist_ok=True)
     with open(output_path, "w", encoding="utf-8") as f:
@@ -425,7 +432,7 @@ def write_jsonl(pairs, output_path):
     return output_path.stat().st_size
 
 
-def print_stats(grouped, total_pairs):
+def print_stats(grouped: dict[str, list[TrainingPair]], total_pairs: int) -> None:
     """Print per-nucleus statistics."""
     print(f"\n{'='*60}")
     print(f"CEX FINE-TUNE DATASET SUMMARY")
@@ -449,7 +456,7 @@ def print_stats(grouped, total_pairs):
     print()
 
 
-def main():
+def main() -> None:
     parser = argparse.ArgumentParser(description="CEX Fine-Tune Dataset Builder v2")
     parser.add_argument("--output-dir", default=str(DEFAULT_OUTPUT_DIR),
                         help="Output directory for per-nucleus JSONL files")
