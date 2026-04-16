@@ -4,7 +4,7 @@ id: bld_architecture_team_charter
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of team_charter -- inventory, dependencies
-quality: null
+quality: 9.1
 title: "Architecture Team Charter"
 version: "1.0.0"
 author: n06_wave8
