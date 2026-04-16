@@ -14,7 +14,7 @@ keywords: [streaming, SSE, server-sent-events, websocket, chunked, response, rea
 triggers: ["configure streaming", "setup SSE", "configure WebSocket", "define chunked response", "streaming config"]
 capabilities: >
   L1: Specialist in building streaming_config artifacts -- SSE, WebSocket, and chunked response configurations. L2: Define transport protocol, buffer sizes, heartbeat intervals, backpressure policies, and error recovery. L3: When user needs to configure real-time data streaming for LLM token delivery, event broadcast, or chunked HTTP responses.
-quality: null
+quality: 9.1
 title: "Manifest Streaming Config"
 tldr: "Builder for streaming_config: SSE/WebSocket/chunked transport specs with buffer, heartbeat, and backpressure settings."
 density_score: 0.90
