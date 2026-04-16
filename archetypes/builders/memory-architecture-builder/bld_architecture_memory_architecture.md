@@ -4,7 +4,7 @@ id: bld_architecture_memory_architecture
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of the memory_architecture-builder -- 13 ISOs, dependencies, position
-quality: null
+quality: 9.0
 title: "Architecture: memory_architecture-builder"
 version: "2.0.0"
 author: n06_commercial
