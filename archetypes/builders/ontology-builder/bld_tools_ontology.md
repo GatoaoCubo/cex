@@ -4,7 +4,7 @@ id: bld_tools_ontology
 pillar: P04
 llm_function: CALL
 purpose: Tools and APIs available for ontology artifact production
-quality: null
+quality: 9.2
 title: "Tools Ontology"
 version: "1.0.0"
 author: n03_builder
