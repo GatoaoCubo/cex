@@ -4,7 +4,7 @@ id: bld_schema_crew_template
 pillar: P06
 llm_function: CONSTRAIN
 purpose: Formal schema -- SINGLE SOURCE OF TRUTH for crew_template
-quality: null
+quality: 9.1
 title: "Schema Crew Template"
 version: "1.0.0"
 author: n03_wave8_builder
