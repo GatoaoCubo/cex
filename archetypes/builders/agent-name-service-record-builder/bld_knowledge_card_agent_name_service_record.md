@@ -4,7 +4,7 @@ id: bld_knowledge_card_agent_name_service_record
 pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge about IETF ANS, CNCF AgentDNS, and related agent discovery standards
-quality: null
+quality: 9.1
 title: "Agent Name Service Record Builder -- Knowledge Card"
 version: "1.0.0"
 author: wave7_n05
