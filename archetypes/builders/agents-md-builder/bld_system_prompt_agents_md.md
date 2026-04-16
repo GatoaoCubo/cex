@@ -4,7 +4,7 @@ id: p03_sp_agents_md_builder
 pillar: P03
 llm_function: BECOME
 purpose: System prompt defining agents_md-builder persona and rules
-quality: null
+quality: 8.9
 title: "System Prompt Agents Md"
 version: "1.0.0"
 author: wave7_n03_dev_manifests
