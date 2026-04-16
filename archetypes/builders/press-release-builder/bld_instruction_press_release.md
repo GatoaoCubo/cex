@@ -4,7 +4,7 @@ id: bld_instruction_press_release
 pillar: P03
 llm_function: REASON
 purpose: Step-by-step construction instructions for producing AP-style press releases
-quality: null
+quality: 9.1
 title: "Press Release Builder Instructions"
 version: "1.0.0"
 author: n02_wave6
