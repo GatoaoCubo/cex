@@ -4,7 +4,7 @@ id: churn-prevention-playbook-builder
 pillar: P03
 llm_function: BECOME
 purpose: Builder identity, capabilities, routing for churn_prevention_playbook
-quality: null
+quality: 8.8
 title: "Type Builder Churn Prevention Playbook"
 version: "1.0.0"
 author: n05_wave6
