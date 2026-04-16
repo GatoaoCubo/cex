@@ -4,7 +4,7 @@ id: bld_collaboration_crew_template
 pillar: P12
 llm_function: COLLABORATE
 purpose: How crew_template-builder works in crews with other builders
-quality: null
+quality: 8.9
 title: "Collaboration Crew Template"
 version: "1.0.0"
 author: n03_wave8_builder
