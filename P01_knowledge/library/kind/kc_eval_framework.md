@@ -3,8 +3,9 @@ id: kc_eval_framework
 kind: knowledge_card
 title: Evaluation Framework Integration
 version: 1.0.0
-quality: null
+quality: 8.6
 pillar: P01
+density_score: 0.87
 ---
 
 # Evaluation Framework Integration
