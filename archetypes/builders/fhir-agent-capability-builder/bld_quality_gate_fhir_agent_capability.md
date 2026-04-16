@@ -4,7 +4,7 @@ id: p08_qg_fhir_agent_capability
 pillar: P11
 llm_function: GOVERN
 purpose: Quality gate with HARD and SOFT scoring for fhir_agent_capability
-quality: null
+quality: 9.0
 title: "Quality Gate FHIR Agent Capability"
 version: "1.0.0"
 author: n06_wave7
