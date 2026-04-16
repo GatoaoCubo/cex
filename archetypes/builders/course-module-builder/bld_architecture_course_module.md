@@ -4,7 +4,7 @@ id: bld_architecture_course_module
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of course_module -- inventory, dependencies
-quality: null
+quality: 9.0
 title: "Architecture Course Module"
 version: "1.0.0"
 author: wave1_builder_gen_v2
