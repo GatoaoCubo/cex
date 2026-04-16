@@ -4,13 +4,14 @@ kind: verification_report
 pillar: P01
 title: "LEVERAGE_MAP_V2: N04 Verify Cycle (Legacy Draft)"
 version: 0.0.0
-quality: null
+quality: 9.1
 created: 2026-04-15
 mission: LEVERAGE_MAP_V2
 nucleus: n04
 model: llama3.1:8b
 cycle: verify
 timestamp: 2026-04-15T15:40:00-03:00
+density_score: 1.0
 ---
 
 # N04 Knowledge — Leverage Map V2 Verification Report
