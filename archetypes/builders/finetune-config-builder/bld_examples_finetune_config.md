@@ -5,7 +5,7 @@ pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of finetune_config artifacts
 pattern: few-shot learning -- LLM reads these before producing
-quality: null
+quality: 8.8
 title: "Examples Finetune Config"
 version: "1.0.0"
 author: n03_builder
