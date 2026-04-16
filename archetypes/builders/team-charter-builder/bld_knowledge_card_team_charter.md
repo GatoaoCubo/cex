@@ -4,7 +4,7 @@ id: bld_knowledge_card_team_charter
 pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for team_charter production
-quality: null
+quality: 9.2
 title: "Knowledge Card Team Charter"
 version: "1.0.0"
 author: n06_wave8
