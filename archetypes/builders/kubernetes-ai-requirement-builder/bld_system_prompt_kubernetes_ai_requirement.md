@@ -4,7 +4,7 @@ id: p03_sp_kubernetes_ai_requirement_builder
 pillar: P03
 llm_function: BECOME
 purpose: System prompt defining kubernetes_ai_requirement-builder persona and rules
-quality: null
+quality: 9.0
 title: "System Prompt Kubernetes AI Requirement"
 version: "1.0.0"
 author: wave7_n03_dev_manifests
