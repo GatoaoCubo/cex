@@ -4,7 +4,7 @@ id: bld_schema_c2pa_manifest
 pillar: P06
 llm_function: CONSTRAIN
 purpose: Formal schema -- SINGLE SOURCE OF TRUTH for c2pa_manifest
-quality: null
+quality: 9.1
 title: "Schema C2PA Manifest"
 version: "1.0.0"
 author: n04_wave7
