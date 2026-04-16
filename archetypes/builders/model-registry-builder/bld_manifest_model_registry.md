@@ -4,7 +4,7 @@ id: model-registry-builder
 pillar: P10
 llm_function: BECOME
 purpose: Builder identity, capabilities, routing for model_registry
-quality: null
+quality: 8.8
 title: "Type Builder Model Registry"
 version: "1.0.0"
 author: wave1_builder_gen
