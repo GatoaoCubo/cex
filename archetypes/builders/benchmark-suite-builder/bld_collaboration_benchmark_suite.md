@@ -4,7 +4,7 @@ id: bld_collaboration_benchmark_suite
 pillar: P12
 llm_function: COLLABORATE
 purpose: How benchmark_suite-builder works in crews with other builders
-quality: null
+quality: 8.9
 title: "Collaboration Benchmark Suite"
 version: "1.0.0"
 author: wave1_builder_gen_v2
