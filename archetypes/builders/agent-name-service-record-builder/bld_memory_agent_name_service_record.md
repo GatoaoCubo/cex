@@ -4,7 +4,7 @@ id: bld_memory_agent_name_service_record
 pillar: P10
 llm_function: INJECT
 purpose: Accumulated observations, pitfalls, and recommendations for building ANS registry records
-quality: null
+quality: 9.0
 title: "Agent Name Service Record Builder -- Memory"
 version: "1.0.0"
 author: wave7_n05
