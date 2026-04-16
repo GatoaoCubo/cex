@@ -4,7 +4,7 @@ id: p05_qg_analyst_briefing
 pillar: P11
 llm_function: GOVERN
 purpose: Quality gate with HARD and SOFT scoring for analyst_briefing
-quality: null
+quality: 9.0
 title: "Quality Gate Analyst Briefing"
 version: "1.0.0"
 author: n01_wave6
