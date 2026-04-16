@@ -4,7 +4,7 @@ id: bld_instruction_roi_calculator
 pillar: P03
 llm_function: REASON
 purpose: Step-by-step production process for roi_calculator
-quality: null
+quality: 8.9
 title: "Instruction Roi Calculator"
 version: "1.0.0"
 author: wave1_builder_gen_v2
