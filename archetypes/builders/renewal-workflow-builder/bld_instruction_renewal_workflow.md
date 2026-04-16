@@ -4,7 +4,7 @@ id: bld_instruction_renewal_workflow
 pillar: P03
 llm_function: REASON
 purpose: Step-by-step production process for renewal_workflow
-quality: null
+quality: 8.9
 title: "Instruction Renewal Workflow"
 version: "1.0.0"
 author: wave6_n06
