@@ -49,7 +49,7 @@ Standard frontmatter (id, kind, pillar, nucleus, title, version, quality: null, 
 Body: structured markdown, min 80 lines, density >= 0.85, Properties table required.
 Apply **Analytical Envy** lens to every artifact (domain focus, not decoration).
 
-## 8F trace (HTML comment at top of each file)
+## 8F trace (HTML comment IMMEDIATELY BELOW the closing `---` of frontmatter, NEVER above it)
 
 ```html
 <!-- 8F: F1=<kind/pillar> F2=<builder> F3=<refs> F4=<approach>

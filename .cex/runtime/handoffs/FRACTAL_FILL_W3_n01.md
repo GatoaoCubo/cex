@@ -49,7 +49,7 @@ Standard frontmatter + structured body (min 80 lines, density >= 0.85).
 Agents: role, capabilities, tools, boundaries via **Analytical Envy** lens.
 Prompts: template vars, input/output schema, examples, constraints.
 
-## 8F trace HTML comment at top of each file.
+## 8F trace (HTML comment IMMEDIATELY BELOW the closing `---` of frontmatter, NEVER above it)
 
 ## ASCII rule: unaccented PT identifiers; no emoji in code fields.
 
