@@ -4,7 +4,7 @@ id: bld_instruction_quickstart_guide
 pillar: P03
 llm_function: REASON
 purpose: Step-by-step production process for quickstart_guide
-quality: null
+quality: 8.8
 title: "Instruction Quickstart Guide"
 version: "1.0.0"
 author: wave1_builder_gen_v2
