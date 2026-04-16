@@ -31,7 +31,7 @@ SKIP = 0
 RESULTS = []
 
 
-def test(name: str, passed: bool, detail: str = ""):
+def test(name: str, passed: bool, detail: str = "") -> None:
     """Record test result."""
     global PASS, FAIL
     status = "PASS" if passed else "FAIL"
@@ -47,7 +47,7 @@ def test(name: str, passed: bool, detail: str = ""):
     print(msg)
 
 
-def skip(name: str, reason: str = ""):
+def skip(name: str, reason: str = "") -> None:
     """Record skipped test."""
     global SKIP
     SKIP += 1
@@ -72,7 +72,7 @@ def run_cmd(cmd: list, timeout: int = 30) -> tuple[int, str, str]:
 # ============================================================
 
 
-def test_tools():
+def test_tools() -> None:
     """Test all CEX tools exist and are importable."""
     print("\n=== TOOLS ===")
     tools = [
@@ -86,7 +86,7 @@ def test_tools():
         test(f"tool:{t}", path.exists(), f"{path.stat().st_size}B" if path.exists() else "MISSING")
 
 
-def test_doctor():
+def test_doctor() -> None:
     """Run cex_doctor and check results."""
     print("\n=== DOCTOR ===")
     rc, out, err = run_cmd([sys.executable, "_tools/cex_doctor.py"])
@@ -103,7 +103,7 @@ def test_doctor():
         test("doctor:runs", False, "Could not parse output")
 
 
-def test_compile():
+def test_compile() -> None:
     """Test compilation works."""
     print("\n=== COMPILE ===")
     rc, out, err = run_cmd([sys.executable, "_tools/cex_compile.py", "--all"], timeout=60)
@@ -116,7 +116,7 @@ def test_compile():
         test("compile:runs", rc == 0, full[:100])
 
 
-def test_builders():
+def test_builders() -> None:
     """Validate builder archetypes."""
     print("\n=== BUILDERS ===")
     builder_dir = CEX_ROOT / "archetypes" / "builders"
@@ -133,7 +133,7 @@ def test_builders():
          f"{len(short_builders)} short: {', '.join(short_builders[:5])}" if short_builders else "all 13 specs")
 
 
-def test_nuclei():
+def test_nuclei() -> None:
     """Validate nucleus artifacts."""
     print("\n=== NUCLEI ===")
     nuclei = {
@@ -150,7 +150,7 @@ def test_nuclei():
         test(f"nucleus:{ndir}", len(mds) >= expected_min, f"{len(mds)} artifacts (min {expected_min})")
 
 
-def test_quality():
+def test_quality() -> None:
     """Check quality scores."""
     print("\n=== QUALITY ===")
     rc, out, err = run_cmd(["grep", "-r", "^quality: null", "--include=*.md"] +
@@ -165,7 +165,7 @@ def test_quality():
     test("quality:scored", scored >= 95, f"{scored} artifacts with quality score")
 
 
-def test_subagents():
+def test_subagents() -> None:
     """Check materialized sub-agents."""
     print("\n=== SUB-AGENTS ===")
     agents_dir = CEX_ROOT / ".claude" / "agents"
@@ -180,7 +180,7 @@ def test_subagents():
     test("subagents:materializer", mat.exists())
 
 
-def test_hooks():
+def test_hooks() -> None:
     """Test hooks system."""
     print("\n=== HOOKS ===")
     # validate-all
@@ -195,7 +195,7 @@ def test_hooks():
     test("hooks:git_precommit", hook.exists())
 
 
-def test_infra():
+def test_infra() -> None:
     """Test infrastructure files."""
     print("\n=== INFRASTRUCTURE ===")
     # Boot scripts
@@ -227,7 +227,7 @@ def test_infra():
         test("registry:kinds_meta", False, "MISSING")
 
 
-def test_runner_dryrun():
+def test_runner_dryrun() -> None:
     """Test 8F runner in dry-run mode."""
     print("\n=== 8F RUNNER (dry-run) ===")
     rc, out, err = run_cmd([
@@ -242,7 +242,7 @@ def test_runner_dryrun():
     test("runner:has_prompt", "CONSTRAINTS" in full or "IDENTITY" in full or "SYSTEM PROMPT" in full)
 
 
-def test_runner_execute(quick: bool = False):
+def test_runner_execute(quick: bool = False) -> None:
     """Test 8F runner in execute mode (calls LLM)."""
     print("\n=== 8F RUNNER (execute) ===")
     if quick:
@@ -272,7 +272,7 @@ def test_runner_execute(quick: bool = False):
         f.unlink()
 
 
-def test_kc_library():
+def test_kc_library() -> None:
     """Test KC library coverage."""
     print("\n=== KC LIBRARY ===")
     kc_dir = CEX_ROOT / "P01_knowledge" / "library" / "kind"
@@ -283,7 +283,7 @@ def test_kc_library():
         test("kc:dir", False, "library/kind/ not found")
 
 
-def test_e2e(quick: bool = True):
+def test_e2e(quick: bool = True) -> None:
     """Test E2E stress scenarios via cex_e2e_test.py."""
     print("\n=== E2E STRESS TESTS ===")
     e2e_script = CEX_ROOT / "_tools" / "cex_e2e_test.py"
@@ -322,7 +322,7 @@ def test_e2e(quick: bool = True):
     test("e2e:report_written", results_file.exists())
 
 
-def test_boot_templates():
+def test_boot_templates() -> None:
     """Smoke test: every boot/n0*.ps1 must contain vt_enable (prevents TUI regression)."""
     print("\n=== BOOT TEMPLATES ===")
     boot_dir = CEX_ROOT / "boot"
@@ -339,7 +339,7 @@ def test_boot_templates():
         test("signal:mission_phase_regex", False, str(e)[:60])
 
 
-def test_git():
+def test_git() -> None:
     """Test git state."""
     print("\n=== GIT ===")
     rc, out, _ = run_cmd(["git", "status", "--porcelain"])
@@ -355,7 +355,7 @@ def test_git():
 # ============================================================
 
 
-def main():
+def main() -> int:
     import argparse
     parser = argparse.ArgumentParser(description="CEX System Test")
     parser.add_argument("--quick", action="store_true", help="Skip LLM tests")
