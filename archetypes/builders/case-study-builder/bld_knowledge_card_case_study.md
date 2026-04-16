@@ -4,7 +4,7 @@ id: bld_knowledge_card_case_study
 pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for case_study production
-quality: null
+quality: 9.2
 title: "Knowledge Card Case Study"
 version: "1.1.0"
 author: wave1_builder_gen_v2
