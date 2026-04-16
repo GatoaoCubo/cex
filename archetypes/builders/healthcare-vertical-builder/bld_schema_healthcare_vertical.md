@@ -4,7 +4,7 @@ id: bld_schema_healthcare_vertical
 pillar: P06
 llm_function: CONSTRAIN
 purpose: Formal schema -- SINGLE SOURCE OF TRUTH for healthcare_vertical
-quality: null
+quality: 9.1
 title: "Schema Healthcare Vertical"
 version: "1.0.0"
 author: wave1_builder_gen_v2
