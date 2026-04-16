@@ -4,7 +4,7 @@ id: bld_collaboration_contributor_guide
 pillar: P12
 llm_function: COLLABORATE
 purpose: How contributor_guide-builder works in crews with other builders
-quality: null
+quality: 8.7
 title: "Collaboration Contributor Guide"
 version: "1.0.0"
 author: wave1_builder_gen_v2
