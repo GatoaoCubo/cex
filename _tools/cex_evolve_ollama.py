@@ -49,7 +49,7 @@ SKIP_DIRS = {'.git', 'node_modules', '.cex/cache', 'compiled', '_external'}
 # SCORING (reuse from cex_evolve.py)
 # ============================================================
 
-def read_frontmatter(filepath):
+def read_frontmatter(filepath: Path) -> dict[str, str]:
     text = filepath.read_text(encoding="utf-8", errors="ignore")
     match = re.match(r"^---\n(.*?)\n---", text, re.DOTALL)
     if not match:
@@ -62,7 +62,7 @@ def read_frontmatter(filepath):
     return fm
 
 
-def get_quality(filepath):
+def get_quality(filepath: Path) -> float | None:
     fm = read_frontmatter(filepath)
     q = fm.get("quality", "null")
     if q == "null" or not q:
@@ -73,7 +73,7 @@ def get_quality(filepath):
         return None
 
 
-def score_artifact(filepath):
+def score_artifact(filepath: Path) -> float | None:
     """Run cex_score.py and return score."""
     result = subprocess.run(
         [sys.executable, "_tools/cex_score.py", "--apply", str(filepath)],
@@ -87,7 +87,7 @@ def score_artifact(filepath):
     return get_quality(filepath)
 
 
-def compile_artifact(filepath):
+def compile_artifact(filepath: Path) -> bool:
     result = subprocess.run(
         [sys.executable, "_tools/cex_compile.py", str(filepath)],
         capture_output=True, text=True, timeout=30, cwd=str(CEX_ROOT)
@@ -99,7 +99,13 @@ def compile_artifact(filepath):
 # OLLAMA CLIENT
 # ============================================================
 
-def ollama_chat(model, system_msg, user_msg, max_tokens=6000, temperature=0.4):
+def ollama_chat(
+    model: str,
+    system_msg: str,
+    user_msg: str,
+    max_tokens: int = 6000,
+    temperature: float = 0.4,
+) -> str | None:
     """Call Ollama native API. Uses /no_think to disable qwen3 reasoning."""
     # Prepend /no_think to user message to disable thinking mode
     user_msg_patched = "/no_think\n" + user_msg
@@ -139,7 +145,7 @@ def ollama_chat(model, system_msg, user_msg, max_tokens=6000, temperature=0.4):
         return None
 
 
-def check_ollama(model):
+def check_ollama(model: str) -> bool:
     """Verify Ollama is running and model exists."""
     try:
         req = Request("http://localhost:11434/api/tags")
@@ -161,7 +167,7 @@ def check_ollama(model):
 # DISCOVERY
 # ============================================================
 
-def find_targets(target_score=9.0, scope=None):
+def find_targets(target_score: float = 9.0, scope: str | None = None) -> list[tuple[float, float, Path]]:
     """Find artifacts below target with numeric quality."""
     results = []
     for root, dirs, files in os.walk(CEX_ROOT):
@@ -221,7 +227,7 @@ Rules:
 10. Target: information density >= 0.85. Every line must carry signal."""
 
 
-def build_user_prompt(filepath, content, quality):
+def build_user_prompt(filepath: Path, content: str, quality: float) -> str:
     """Build the improvement prompt for a specific artifact."""
     fm = read_frontmatter(filepath)
     kind = fm.get("kind", "unknown")
@@ -263,7 +269,7 @@ Return the COMPLETE improved artifact (frontmatter + body). Nothing else."""
 # EVOLVE LOOP
 # ============================================================
 
-def evolve_one(filepath, model, target=9.0):
+def evolve_one(filepath: Path, model: str, target: float = 9.0) -> tuple[float | None, str]:
     """Send one artifact to Ollama, apply result, score, keep/discard."""
     content = filepath.read_text(encoding="utf-8", errors="ignore")
     quality = get_quality(filepath) or 0.0
@@ -327,7 +333,7 @@ def evolve_one(filepath, model, target=9.0):
 # MAIN
 # ============================================================
 
-def main():
+def main() -> None:
     parser = argparse.ArgumentParser(description="CEX Evolve via Ollama")
     parser.add_argument("--model", default="qwen3:14b",
                         help="Ollama model (default: qwen3:14b)")
