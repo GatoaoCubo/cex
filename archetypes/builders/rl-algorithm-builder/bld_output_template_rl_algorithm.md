@@ -4,7 +4,7 @@ id: bld_output_template_rl_algorithm
 pillar: P05
 llm_function: PRODUCE
 purpose: Template with vars for rl_algorithm production
-quality: null
+quality: 9.1
 title: "Output Template Rl Algorithm"
 version: "1.0.0"
 author: wave1_builder_gen
