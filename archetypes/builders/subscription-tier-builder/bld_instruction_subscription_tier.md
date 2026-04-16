@@ -4,7 +4,7 @@ id: bld_instruction_subscription_tier
 pillar: P03
 llm_function: REASON
 purpose: Step-by-step production process for subscription_tier
-quality: null
+quality: 8.9
 title: "Instruction Subscription Tier"
 version: "1.0.0"
 author: wave1_builder_gen_v2
