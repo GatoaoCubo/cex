@@ -4,7 +4,7 @@ id: bld_config_benchmark_suite
 pillar: P09
 llm_function: CONSTRAIN
 purpose: Naming, paths, limits for benchmark_suite production
-quality: null
+quality: 8.6
 title: "Config Benchmark Suite"
 version: "1.0.0"
 author: wave1_builder_gen_v2
@@ -16,23 +16,23 @@ updated: "2026-04-14"
 density_score: 0.85
 ---
 
-## Naming Convention  
-Pattern: `p07_bs_{{name}}.md`  
-Examples: `p07_bs_chat_completion.md`, `p07_bs_code_generation.md`  
-Note: `{{name}}` replaced by benchmark-specific identifier; pillar (P07) prefix enforced.  
+## Naming Convention
+Pattern: `p07_bs_{{name}}.md`
+Examples: `p07_bs_chat_completion.md`, `p07_bs_code_generation.md`
+Note: `{{name}}` replaced by benchmark-specific identifier; pillar (P07) prefix enforced.
 
-## Paths  
-Artifacts: `/mnt/data/benchmarks/p07/{{name}}/artifacts`  
-Logs: `/mnt/data/benchmarks/p07/{{name}}/logs`  
-Outputs: `/mnt/data/benchmarks/p07/{{name}}/outputs`  
+## Paths
+Artifacts: `/mnt/data/benchmarks/p07/{{name}}/artifacts`
+Logs: `/mnt/data/benchmarks/p07/{{name}}/logs`
+Outputs: `/mnt/data/benchmarks/p07/{{name}}/outputs`
 
-## Limits  
-max_bytes: 5120  
-max_turns: 20  
-effort_level: 3  
+## Limits
+max_bytes: 5120
+max_turns: 20
+effort_level: 3
 
-## Hooks  
-pre_build: null  
-post_build: null  
-on_error: null  
+## Hooks
+pre_build: null
+post_build: null
+on_error: null
 on_quality_fail: null
