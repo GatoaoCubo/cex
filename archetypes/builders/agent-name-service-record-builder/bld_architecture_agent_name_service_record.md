@@ -4,7 +4,7 @@ id: bld_architecture_agent_name_service_record
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component inventory and dependency map for the agent-name-service-record-builder
-quality: null
+quality: 9.1
 title: "Agent Name Service Record Builder -- Architecture"
 version: "1.0.0"
 author: wave7_n05
