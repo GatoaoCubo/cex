@@ -4,7 +4,7 @@ id: bld_collaboration_multimodal_prompt
 pillar: P12
 llm_function: COLLABORATE
 purpose: How multimodal_prompt-builder works in crews with other builders
-quality: null
+quality: 8.9
 title: "Collaboration Multimodal Prompt"
 version: "1.0.0"
 author: wave1_builder_gen_v2
