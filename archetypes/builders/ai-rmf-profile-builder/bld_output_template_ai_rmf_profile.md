@@ -4,7 +4,7 @@ id: bld_output_template_ai_rmf_profile
 pillar: P05
 llm_function: PRODUCE
 purpose: Template with vars for ai_rmf_profile production
-quality: null
+quality: 9.1
 title: "Output Template AI RMF Profile"
 version: "1.0.0"
 author: n01_wave7
