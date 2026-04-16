@@ -3,8 +3,9 @@ id: kc_nucleus_def
 kind: knowledge_card
 title: CEX Nucleus Definition (N00-N07)
 version: 1.0.0
-quality: null
+quality: 8.9
 pillar: P01
+density_score: 1.0
 ---
 
 # CEX Nucleus Definition (N00-N07)
