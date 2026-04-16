@@ -4,7 +4,7 @@ id: bld_architecture_reasoning_strategy
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of reasoning_strategy -- inventory, dependencies
-quality: null
+quality: 9.0
 title: "Architecture Reasoning Strategy"
 version: "1.0.0"
 author: wave1_builder_gen
