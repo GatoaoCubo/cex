@@ -4,7 +4,7 @@ id: bld_architecture_usage_report
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of usage_report -- inventory, dependencies
-quality: null
+quality: 9.0
 title: "Architecture Usage Report"
 version: "1.0.0"
 author: wave1_builder_gen_v2
