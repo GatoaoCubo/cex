@@ -1,0 +1,79 @@
+id: ex_db_connector_crm
+kind: db_connector
+pillar: P09
+version: 1.0.0
+title: CRM DB Connector Template -- Supabase B2B Partner Tables
+description: Supabase database connector for B2B CRM. Partner registration, contacts, orders, and activity log tables with
+  RLS policies and type-safe client patterns.
+domain: crm
+nucleus: N06
+quality: null
+tags:
+- db-connector
+- crm
+- supabase
+- b2b
+- partner
+- rls
+- typescript
+brand_placeholders:
+- BRAND_NAME
+- BRAND_CRM_TABLE_PREFIX
+- BRAND_SUPABASE_URL
+- BRAND_SUPABASE_ANON_KEY
+1_schema_definition: ''
+1_1_partners_table: "create table {{BRAND_CRM_TABLE_PREFIX}}_partners (\n  id          uuid primary key default gen_random_uuid(),\n\
+  \  cnpj        text unique not null,\n  company     text not null,\n  contact_name text not null,\n  email       text not\
+  \ null,\n  whatsapp    text,\n  region      text,\n  tier        text default 'starter' check (tier in ('starter', 'pro',\
+  \ 'enterprise')),\n  status      text default 'pending' check (status in ('pending', 'active', 'suspended', 'cancelled')),\n\
+  \  approved_at timestamp with time zone,\n  created_at  timestamp with time zone default now(),\n  updated_at  timestamp\
+  \ with time zone default now()\n);"
+1_2_partner_contacts_table: "create table {{BRAND_CRM_TABLE_PREFIX}}_partner_contacts (\n  id          uuid primary key default\
+  \ gen_random_uuid(),\n  partner_id  uuid references {{BRAND_CRM_TABLE_PREFIX}}_partners(id) on delete cascade,\n  name \
+  \       text not null,\n  email       text,\n  phone       text,\n  role        text,\n  is_primary  boolean default false,\n\
+  \  created_at  timestamp with time zone default now()\n);"
+1_3_partner_orders_table: "create table {{BRAND_CRM_TABLE_PREFIX}}_b2b_orders (\n  id          uuid primary key default gen_random_uuid(),\n\
+  \  partner_id  uuid references {{BRAND_CRM_TABLE_PREFIX}}_partners(id),\n  order_ref   text unique,\n  status      text\
+  \ default 'draft',\n  total_amount decimal(10,2),\n  discount_pct decimal(5,2),\n  notes       text,\n  created_at  timestamp\
+  \ with time zone default now(),\n  fulfilled_at timestamp with time zone\n);"
+1_4_activity_log_table: "create table {{BRAND_CRM_TABLE_PREFIX}}_partner_activity (\n  id          uuid primary key default\
+  \ gen_random_uuid(),\n  partner_id  uuid references {{BRAND_CRM_TABLE_PREFIX}}_partners(id),\n  event_type  text not null,\n\
+  \  payload     jsonb,\n  created_at  timestamp with time zone default now()\n);\n\n---"
+2_row_level_security_rls: "-- Partners: read own record only\nalter table {{BRAND_CRM_TABLE_PREFIX}}_partners enable row level\
+  \ security;\n\ncreate policy \"partners_read_own\"\n  on {{BRAND_CRM_TABLE_PREFIX}}_partners\n  for select using (auth.uid()\
+  \ = id);\n\n-- Admin: full access via service_role key\n-- Use SUPABASE_SERVICE_ROLE_KEY (not anon) for admin operations\n\
+  \n---"
+3_typescript_client_pattern: "import { createClient } from '@supabase/supabase-js'\n\nconst supabase = createClient(\n  process.env.BRAND_SUPABASE_URL!,\n\
+  \  process.env.BRAND_SUPABASE_ANON_KEY!\n)\n\n// Read partner by CNPJ\nasync function getPartnerByCnpj(cnpj: string) {\n\
+  \  const { data, error } = await supabase\n    .from('{{BRAND_CRM_TABLE_PREFIX}}_partners')\n    .select('*')\n    .eq('cnpj',\
+  \ cnpj)\n    .single()\n  if (error) throw error\n  return data\n}\n\n// Create partner record\nasync function createPartner(partner:\
+  \ PartnerInsert) {\n  const { data, error } = await supabase\n    .from('{{BRAND_CRM_TABLE_PREFIX}}_partners')\n    .insert(partner)\n\
+  \    .select()\n    .single()\n  if (error) throw error\n  return data\n}\n\n// Update partner status\nasync function approvePartner(id:\
+  \ string) {\n  const { error } = await supabase\n    .from('{{BRAND_CRM_TABLE_PREFIX}}_partners')\n    .update({ status:\
+  \ 'active', approved_at: new Date().toISOString() })\n    .eq('id', id)\n  if (error) throw error\n}\n\n---"
+4_integration_points: '| System | Direction | Trigger | Notes |
+
+  |--------|-----------|---------|-------|
+
+  | CNPJ validation API | inbound | On registration | ReceitaWS or equivalent |
+
+  | {{BRAND_ERP}} | outbound | On order creation | Push B2B order to ERP |
+
+  | Email/WhatsApp | outbound | On status change | Notify partner of approval |
+
+  | Admin dashboard | read | On demand | CRM tab in admin panel |
+
+
+  ---'
+5_environment_variables: 'BRAND_SUPABASE_URL=https://your-project.supabase.co
+
+  BRAND_SUPABASE_ANON_KEY=eyJ...    # public anon key (safe for frontend)
+
+  SUPABASE_SERVICE_ROLE_KEY=eyJ...  # private (server/edge functions only)
+
+
+  ---'
+new_brand_variables:
+- '`BRAND_CRM_TABLE_PREFIX` -- Supabase table prefix (e.g. "brand", "myco", "acme")'
+- '`BRAND_SUPABASE_URL` -- Supabase project URL'
+- '`BRAND_SUPABASE_ANON_KEY` -- Supabase anon key'
