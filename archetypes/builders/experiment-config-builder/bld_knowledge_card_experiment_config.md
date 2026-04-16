@@ -5,7 +5,7 @@ pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for experiment_config production -- A/B test and prompt experiment specification
 sources: "Kohavi et al. 'Trustworthy Online Controlled Experiments', Google ExP platform, Optimizely Stats Engine, Evan Miller sample size calculator"
-quality: null
+quality: 9.2
 title: "Knowledge Card Experiment Config"
 version: "1.0.0"
 author: n03_builder
