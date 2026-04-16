@@ -4,7 +4,7 @@ id: bld_architecture_mcp_app_extension
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of mcp_app_extension -- inventory, dependencies
-quality: null
+quality: 9.0
 title: "Architecture MCP App Extension"
 version: "1.0.0"
 author: wave7_n03_dev_manifests
