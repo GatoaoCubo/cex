@@ -4,7 +4,7 @@ id: bld_tools_customer_segment
 pillar: P04
 llm_function: CALL
 purpose: Tools available for customer_segment production
-quality: null
+quality: 8.9
 title: "Tools Customer Segment"
 version: "1.0.0"
 author: wave1_builder_gen_v2
