@@ -14040,3 +14040,5 @@ et
 2026-04-16 03:37:34	C:\Users\CEX\Documents\GitHub\cex\P11_feedback\templates\tpl_bugloop.md	2	0.0	0.00	crash	compile fail after: polished formatting (whitespace cleanup)
 2026-04-16 03:37:35	C:\Users\CEX\Documents\GitHub\cex\P11_feedback\templates\tpl_quality_gate.md	1	0.0	0.00	crash	compile fail after: analyzed: add_hard_gates: quality gates need hard pass/fail checks
 2026-04-16 03:37:35	C:\Users\CEX\Documents\GitHub\cex\P11_feedback\templates\tpl_quality_gate.md	2	0.0	0.00	crash	compile fail after: analyzed: add_hard_gates: quality gates need hard pass/fail checks
+2026-04-16 03:40:44	N04_knowledge\knowledge\p01_fse_kc_creation.md	0	9.1	0.96	skip	already at target
+2026-04-16 03:40:45	N06_commercial\architecture\agent_card_commercial.md	1	9.1	1.00	keep	tldr flagged for manual review
