@@ -4,7 +4,7 @@ id: bld_examples_nucleus_def
 pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of nucleus_def artifacts
-quality: null
+quality: 9.1
 title: "Examples Nucleus Def"
 version: "1.0.0"
 author: n05_wave8
