@@ -4,11 +4,12 @@ kind: self_audit
 pillar: P07
 title: N04 Knowledge Self-Audit
 version: 1.0.0
-quality: null
+quality: 9.0
 tags: [audit, self_review, n04, knowledge, rag, codex]
 created: 2026-04-15
 nucleus: n04
 density_score: 1.0
+updated: "2026-04-15"
 ---
 
 # N04 Knowledge Self-Audit (Codex)
