@@ -3,9 +3,10 @@ id: kc_reranker_config
 kind: knowledge_card
 title: Reranker Configuration
 version: 1.0.0
-quality: 8.4
+quality: 8.5
 pillar: P01
 density_score: 1.0
+updated: "2026-04-15"
 ---
 
 ## Reranker Configuration Parameters
