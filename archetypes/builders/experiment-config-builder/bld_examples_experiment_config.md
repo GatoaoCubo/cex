@@ -5,7 +5,7 @@ pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of experiment_config artifacts
 pattern: few-shot learning -- LLM reads these before producing
-quality: null
+quality: 9.2
 title: "Examples Experiment Config"
 version: "1.0.0"
 author: n03_builder
