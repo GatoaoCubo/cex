@@ -4,7 +4,7 @@ id: bld_tools_collaboration_pattern
 pillar: P04
 llm_function: CALL
 purpose: Tools available during collaboration_pattern artifact production
-quality: null
+quality: 9.1
 title: "Tools: collaboration-pattern-builder"
 version: "1.0.0"
 author: n02_reviewer
