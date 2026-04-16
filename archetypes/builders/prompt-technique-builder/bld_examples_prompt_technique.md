@@ -4,7 +4,7 @@ id: bld_examples_prompt_technique
 pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of prompt_technique artifacts
-quality: null
+quality: 8.8
 title: "Examples Prompt Technique"
 version: "1.0.0"
 author: wave1_builder_gen_v2
