@@ -4,7 +4,7 @@ id: bld_examples_agent_grounding_record
 pillar: P07
 llm_function: GOVERN
 purpose: Golden example and anti-examples for agent_grounding_record to calibrate quality scoring
-quality: null
+quality: 9.1
 title: "Agent Grounding Record -- Examples"
 version: "1.0.0"
 author: wave7_n05
