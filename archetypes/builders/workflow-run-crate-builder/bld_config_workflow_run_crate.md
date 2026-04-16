@@ -4,7 +4,7 @@ id: bld_config_workflow_run_crate
 pillar: P09
 llm_function: CONSTRAIN
 purpose: Naming, paths, limits for workflow_run_crate production
-quality: null
+quality: 8.6
 title: "Config Workflow Run Crate"
 version: "1.0.0"
 author: n04_wave7
