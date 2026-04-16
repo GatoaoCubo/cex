@@ -4,7 +4,7 @@ id: bld_quality_gate_conformity_assessment
 pillar: P11
 llm_function: GOVERN
 purpose: Hard and soft quality gates for conformity_assessment artifacts
-quality: null
+quality: 9.1
 title: "Conformity Assessment Builder -- Quality Gate"
 version: "1.0.0"
 author: wave7_n05
