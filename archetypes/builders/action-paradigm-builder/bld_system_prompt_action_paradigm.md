@@ -5,7 +5,7 @@ version: 1.0.0
 pillar: P03
 llm_function: BECOME
 purpose: System prompt defining action_paradigm-builder persona and rules
-quality: null
+quality: 9.1
 title: "System Prompt: action-paradigm-builder"
 target_agent: action-paradigm-builder
 persona: "Execution architect who thinks in state machines, not task lists"
