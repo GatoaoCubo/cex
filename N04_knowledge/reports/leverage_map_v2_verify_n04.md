@@ -4,10 +4,11 @@ kind: knowledge_card
 pillar: P01
 title: "LEVERAGE_MAP_V2: N04 Verification Cycle (Reranker + RAG Stack)"
 version: 1.0
-quality: null
+quality: 9.0
 date: 2026-04-15
 mission: LEVERAGE_MAP_V2
 cycle: verify
+density_score: 1.0
 ---
 
 # N04 Leverage Map V2 — Verification Cycle
