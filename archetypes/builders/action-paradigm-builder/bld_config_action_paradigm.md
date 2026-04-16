@@ -4,7 +4,7 @@ id: bld_config_action_paradigm
 pillar: P09
 llm_function: CONSTRAIN
 purpose: Naming, paths, limits for action_paradigm production
-quality: null
+quality: 8.8
 title: "Config Action Paradigm"
 version: "1.0.0"
 author: wave1_builder_gen
@@ -16,23 +16,23 @@ updated: "2026-04-13"
 density_score: 0.85
 ---
 
-## Naming Convention  
-Pattern: p04_act_<name> (lowercase alphanumeric, underscores allowed)  
-Examples: p04_act_data_flow, p04_act_error_handler  
+## Naming Convention
+Pattern: p04_act_<name> (lowercase alphanumeric, underscores allowed)
+Examples: p04_act_data_flow, p04_act_error_handler
 
-## Paths  
-Base: /artifacts/p04/actions/  
-Per-action: /artifacts/p04/actions/<name>/  
+## Paths
+Base: /artifacts/p04/actions/
+Per-action: /artifacts/p04/actions/<name>/
 
-## Limits  
-max_bytes: 4096  
-max_turns: 10  
-effort_level: 3  
+## Limits
+max_bytes: 4096
+max_turns: 10
+effort_level: 3
 
-## Hooks  
-pre_build: null  
-post_build: null  
-on_error: null  
+## Hooks
+pre_build: null
+post_build: null
+on_error: null
 on_quality_fail: null
 
 ## Properties
