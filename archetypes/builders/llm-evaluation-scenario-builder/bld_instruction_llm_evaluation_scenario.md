@@ -4,7 +4,7 @@ id: bld_instruction_llm_evaluation_scenario
 pillar: P03
 llm_function: REASON
 purpose: Step-by-step production process for llm_evaluation_scenario
-quality: null
+quality: 8.9
 title: "Instruction LLM Evaluation Scenario"
 version: "1.0.0"
 author: n06_wave7
