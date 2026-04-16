@@ -4,7 +4,7 @@ id: bld_output_template_planning_strategy
 pillar: P05
 llm_function: PRODUCE
 purpose: Template with vars for planning_strategy production
-quality: null
+quality: 9.1
 title: "Output Template Planning Strategy"
 version: "1.0.0"
 author: builder_agent
