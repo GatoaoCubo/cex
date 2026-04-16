@@ -4,7 +4,7 @@ id: bld_schema_ai_rmf_profile
 pillar: P06
 llm_function: CONSTRAIN
 purpose: Formal schema -- SINGLE SOURCE OF TRUTH for ai_rmf_profile
-quality: null
+quality: 9.1
 title: "Schema AI RMF Profile"
 version: "1.0.0"
 author: n01_wave7
