@@ -4,7 +4,7 @@ id: bld_collaboration_workflow_run_crate
 pillar: P12
 llm_function: COLLABORATE
 purpose: How workflow_run_crate-builder works in crews with other builders
-quality: null
+quality: 8.9
 title: "Collaboration Workflow Run Crate"
 version: "1.0.0"
 author: n04_wave7
