@@ -4,7 +4,7 @@ id: bld_knowledge_card_bias_audit
 pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for bias_audit production
-quality: null
+quality: 9.2
 title: "Knowledge Card Bias Audit"
 version: "1.1.0"
 author: n06_hybrid_review
