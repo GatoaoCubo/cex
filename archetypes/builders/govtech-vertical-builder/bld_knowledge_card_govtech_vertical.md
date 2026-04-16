@@ -4,7 +4,7 @@ id: bld_knowledge_card_govtech_vertical
 pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for govtech_vertical production
-quality: null
+quality: 9.2
 title: "Knowledge Card Govtech Vertical"
 version: "1.0.0"
 author: wave1_builder_gen_v2
