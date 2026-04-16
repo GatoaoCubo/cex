@@ -4,7 +4,7 @@ id: bld_collaboration_renewal_workflow
 pillar: P12
 llm_function: COLLABORATE
 purpose: How renewal_workflow-builder works in crews with other builders
-quality: null
+quality: 9.0
 title: "Collaboration Renewal Workflow"
 version: "1.0.0"
 author: wave6_n06
