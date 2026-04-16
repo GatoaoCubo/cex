@@ -4,7 +4,7 @@ id: bld_tools_prompt_technique
 pillar: P04
 llm_function: CALL
 purpose: Tools available for prompt_technique production
-quality: null
+quality: 8.9
 title: "Tools Prompt Technique"
 version: "1.1.0"
 author: n01_hybrid_review4
