@@ -4,7 +4,7 @@ id: bld_schema_competitive_matrix
 pillar: P06
 llm_function: CONSTRAIN
 purpose: Formal schema -- SINGLE SOURCE OF TRUTH for competitive_matrix
-quality: null
+quality: 9.1
 title: "Schema Competitive Matrix"
 version: "1.1.0"
 author: wave1_builder_gen_v2
