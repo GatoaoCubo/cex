@@ -4,7 +4,7 @@ id: bld_output_template_contributor_guide
 pillar: P05
 llm_function: PRODUCE
 purpose: Canonical Markdown template for contributor_guide artifacts with all required sections
-quality: null
+quality: 9.2
 title: "Contributor Guide Output Template"
 version: "1.1.0"
 author: n02_hybrid_review7
