@@ -4,7 +4,7 @@ id: bld_knowledge_card_crew_template
 pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for crew_template production
-quality: null
+quality: 9.2
 title: "Knowledge Card Crew Template"
 version: "1.0.0"
 author: n03_wave8_builder
