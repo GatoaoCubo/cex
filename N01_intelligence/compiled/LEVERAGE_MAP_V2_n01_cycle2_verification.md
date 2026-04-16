@@ -4,13 +4,14 @@ kind: knowledge_card
 pillar: P01
 title: "LEVERAGE_MAP_V2 - N01 Cycle 2: Web Fetch Verification"
 version: 1.1
-quality: null
+quality: 9.0
 tags:
   - leverage
   - tooling
   - n01
   - verification
   - cycle2
+density_score: 1.0
 ---
 
 # N01 Intelligence — Leverage Map V2 (Cycle 2)
