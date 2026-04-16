@@ -3,10 +3,11 @@ id: spec_token_budget_optimization
 kind: context_doc
 title: "Token Budget Optimization Spec"
 version: "1.0.0"
-quality: null
+quality: 9.1
 tags: [token-budget, optimization, prompt-engineering, context-window]
 pillar: P03
 created: 2026-04-13
+density_score: 1.0
 ---
 
 # Token Budget Optimization Spec
