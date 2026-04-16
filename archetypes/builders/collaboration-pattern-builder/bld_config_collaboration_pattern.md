@@ -4,7 +4,7 @@ id: bld_config_collaboration_pattern
 pillar: P09
 llm_function: CONSTRAIN
 purpose: Naming, paths, limits for collaboration_pattern production
-quality: null
+quality: 8.8
 title: "Config Collaboration Pattern"
 version: "1.0.0"
 author: wave1_builder_gen
@@ -16,22 +16,22 @@ updated: "2026-04-13"
 density_score: 0.85
 ---
 
-## Naming Convention  
-Pattern: p12_collab_{{name}}.md  
-Examples: p12_collab_projectA.md, p12_collab_featureX.md  
+## Naming Convention
+Pattern: p12_collab_{{name}}.md
+Examples: p12_collab_projectA.md, p12_collab_featureX.md
 
-## Paths  
-/artifacts/p12/collab/{{name}}/  
+## Paths
+/artifacts/p12/collab/{{name}}/
 
-## Limits  
-- max_bytes: 5120  
-- max_turns: 10  
-- effort_level: medium  
+## Limits
+- max_bytes: 5120
+- max_turns: 10
+- effort_level: medium
 
-## Hooks  
-- pre_build: null  
-- post_build: null  
-- on_error: null  
+## Hooks
+- pre_build: null
+- post_build: null
+- on_error: null
 - on_quality_fail: null
 
 ## Properties
