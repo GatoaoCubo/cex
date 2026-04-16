@@ -4,7 +4,7 @@ id: bld_instruction_github_issue_template
 pillar: P03
 llm_function: REASON
 purpose: Step-by-step production process for github_issue_template
-quality: null
+quality: 8.9
 title: "Instruction Github Issue Template"
 version: "1.0.0"
 author: wave1_builder_gen_v2
