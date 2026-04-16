@@ -4,7 +4,7 @@ id: p01_qg_govtech_vertical
 pillar: P11
 llm_function: GOVERN
 purpose: Quality gate with HARD and SOFT scoring for govtech_vertical
-quality: null
+quality: 9.0
 title: "Quality Gate Govtech Vertical"
 version: "1.0.0"
 author: wave1_builder_gen_v2
@@ -45,17 +45,17 @@ density_score: 0.85
 | D06 | Stakeholder mapping completeness | 0.10 | Agency + COR + ISSO + end-user roles mapped = 1.0, partial = 0.5, none = 0 |
 | D07 | Body section density (all 6 sections present) | 0.15 | All 6 sections = 1.0, 4-5 = 0.5, <4 = 0 |
 
-## Actions  
-(Table: Score | Action)  
-| Score | Action |  
-|---|---|  
-| >=9.5 | GOLDEN: Deploy immediately |  
-| >=8.0 | PUBLISH: Release with no changes |  
-| >=7.0 | REVIEW: QA review required |  
-| <7.0 | REJECT: Major fixes required |  
+## Actions
+(Table: Score | Action)
+| Score | Action |
+|---|---|
+| >=9.5 | GOLDEN: Deploy immediately |
+| >=8.0 | PUBLISH: Release with no changes |
+| >=7.0 | REVIEW: QA review required |
+| <7.0 | REJECT: Major fixes required |
 
-## Bypass  
-(Table: conditions, approver, audit trail)  
-| conditions | approver | audit trail |  
-|---|---|---|  
+## Bypass
+(Table: conditions, approver, audit trail)
+| conditions | approver | audit trail |
+|---|---|---|
 | Emergency use case | CIO | Bypass logged with justification |
