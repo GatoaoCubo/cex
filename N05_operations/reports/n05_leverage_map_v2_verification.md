@@ -6,10 +6,11 @@ nucleus: N05
 pillar: P01
 mission: LEVERAGE_MAP_V2
 version: 2.0.1
-quality: null
+quality: 9.1
 created: 2026-04-15
 updated: 2026-04-15
 tags: [operations, verification, leverage_map_v2, tooling, self_audit]
+density_score: 0.96
 ---
 
 # N05 Operations - LEVERAGE_MAP_V2 Verification
