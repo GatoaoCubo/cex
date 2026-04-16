@@ -4,7 +4,7 @@ id: bld_tools_code_of_conduct
 pillar: P04
 llm_function: CALL
 purpose: Tools available for code_of_conduct production
-quality: null
+quality: 8.9
 title: "Tools Code of Conduct"
 version: "1.0.0"
 author: n04_knowledge
