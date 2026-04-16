@@ -6,7 +6,7 @@ title: SELFHEAL W3 -- Heal Plan
 version: 1.0.0
 created: 2026-04-15
 author: n03_engineering
-quality: null
+quality: 9.0
 mission: SELFHEAL
 wave: 3
 nucleus: n03
@@ -14,6 +14,7 @@ picks: 10
 sources:
   - _reports/selfheal/w2_n01_diagnosis.md
   - _reports/selfheal/w2_n05_diagnosis.md
+density_score: 1.0
 ---
 
 # SELFHEAL W3 -- Heal Plan
