@@ -4,7 +4,7 @@ id: bld_schema_pitch_deck
 pillar: P06
 llm_function: CONSTRAIN
 purpose: Formal schema -- SINGLE SOURCE OF TRUTH for pitch_deck
-quality: null
+quality: 9.0
 title: "Schema Pitch Deck"
 version: "1.0.0"
 author: wave1_builder_gen_v2
