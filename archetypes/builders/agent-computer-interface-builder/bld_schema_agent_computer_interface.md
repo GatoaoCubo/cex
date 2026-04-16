@@ -4,7 +4,7 @@ id: bld_schema_agent_computer_interface
 pillar: P06
 llm_function: CONSTRAIN
 purpose: Formal schema -- SINGLE SOURCE OF TRUTH for agent_computer_interface
-quality: null
+quality: 9.0
 title: "Schema Agent Computer Interface"
 version: "1.0.0"
 author: n01_review
