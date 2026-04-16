@@ -4,7 +4,7 @@ id: bld_examples_product_tour
 pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of product_tour artifacts
-quality: null
+quality: 9.0
 title: "Examples Product Tour"
 version: "1.0.0"
 author: wave1_builder_gen_v2
