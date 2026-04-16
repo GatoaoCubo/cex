@@ -4,7 +4,7 @@ id: bld_examples_reasoning_strategy
 pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of reasoning_strategy artifacts
-quality: null
+quality: 9.0
 title: "Examples Reasoning Strategy"
 version: "1.0.0"
 author: wave1_builder_gen
