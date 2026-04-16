@@ -4,7 +4,7 @@ id: p11_qg_nps_survey
 pillar: P11
 llm_function: GOVERN
 purpose: Quality gate with HARD and SOFT scoring for nps_survey
-quality: null
+quality: 9.1
 title: "Quality Gate Nps Survey"
 version: "1.0.0"
 author: n05_wave6
