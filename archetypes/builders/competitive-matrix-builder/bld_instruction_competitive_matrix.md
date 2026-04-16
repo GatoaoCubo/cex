@@ -4,7 +4,7 @@ id: bld_instruction_competitive_matrix
 pillar: P03
 llm_function: REASON
 purpose: Step-by-step production process for competitive_matrix
-quality: null
+quality: 8.9
 title: "Instruction Competitive Matrix"
 version: "1.0.0"
 author: wave1_builder_gen_v2
