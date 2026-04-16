@@ -4,7 +4,7 @@ id: bld_schema_code_of_conduct
 pillar: P06
 llm_function: CONSTRAIN
 purpose: Formal schema -- SINGLE SOURCE OF TRUTH for code_of_conduct
-quality: null
+quality: 9.1
 title: "Schema Code of Conduct"
 version: "1.0.0"
 author: n04_knowledge
