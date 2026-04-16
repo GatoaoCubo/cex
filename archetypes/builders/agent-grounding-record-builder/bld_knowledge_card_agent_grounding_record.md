@@ -4,7 +4,7 @@ id: bld_knowledge_card_agent_grounding_record
 pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge reference for OTel GenAI semconv, C2PA, and per-inference provenance standards
-quality: null
+quality: 9.2
 title: "Agent Grounding Record -- Knowledge Card"
 version: "1.0.0"
 author: wave7_n05
