@@ -4,7 +4,7 @@ id: bld_examples_workflow_run_crate
 pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of workflow_run_crate artifacts
-quality: null
+quality: 9.0
 title: "Examples Workflow Run Crate"
 version: "1.0.0"
 author: n04_wave7
