@@ -4,7 +4,7 @@ id: bld_config_capability_registry
 pillar: P09
 llm_function: CONSTRAIN
 purpose: Naming, paths, limits for capability_registry production
-quality: null
+quality: 8.9
 title: "Config Capability Registry"
 version: "1.0.0"
 author: n04_wave8
