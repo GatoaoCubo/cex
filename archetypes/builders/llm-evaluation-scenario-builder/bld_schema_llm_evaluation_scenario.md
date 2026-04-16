@@ -4,7 +4,7 @@ id: bld_schema_llm_evaluation_scenario
 pillar: P06
 llm_function: CONSTRAIN
 purpose: Formal schema -- SINGLE SOURCE OF TRUTH for llm_evaluation_scenario
-quality: null
+quality: 9.2
 title: "Schema LLM Evaluation Scenario"
 version: "1.0.0"
 author: n06_wave7
