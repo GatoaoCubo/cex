@@ -4,7 +4,7 @@ id: p03_sp_cohort_analysis_builder
 pillar: P03
 llm_function: BECOME
 purpose: System prompt defining cohort_analysis-builder persona and rules
-quality: null
+quality: 8.8
 title: "System Prompt Cohort Analysis"
 version: "1.0.0"
 author: wave1_builder_gen_v2
