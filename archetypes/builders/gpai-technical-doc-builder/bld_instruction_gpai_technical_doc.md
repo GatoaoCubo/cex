@@ -4,7 +4,7 @@ id: bld_instruction_gpai_technical_doc
 pillar: P03
 llm_function: REASON
 purpose: Step-by-step production process for gpai_technical_doc
-quality: null
+quality: 8.9
 title: "Instruction GPAI Technical Doc"
 version: "1.0.0"
 author: n01_wave7
