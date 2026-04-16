@@ -4,7 +4,7 @@ id: p10_mem_usage_quota_builder
 pillar: P10
 llm_function: INJECT
 purpose: Learned patterns and pitfalls for usage_quota construction
-quality: null
+quality: 8.7
 title: "Memory Usage Quota"
 version: "1.0.0"
 author: wave1_builder_gen_v2
@@ -16,18 +16,18 @@ updated: "2026-04-14"
 density_score: 0.85
 ---
 
-## Observation  
-Misalignment between quota limits and enforcement logic often leads to overuse or underutilization. Inconsistent units (e.g., MB vs. GB) and unclear boundary definitions complicate configuration validation.  
+## Observation
+Misalignment between quota limits and enforcement logic often leads to overuse or underutilization. Inconsistent units (e.g., MB vs. GB) and unclear boundary definitions complicate configuration validation.
 
-## Pattern  
-Modular quota specs with explicit resource types and thresholds improve clarity. Separating hard limits from soft fair-use policies ensures enforceable rules.  
+## Pattern
+Modular quota specs with explicit resource types and thresholds improve clarity. Separating hard limits from soft fair-use policies ensures enforceable rules.
 
-## Evidence  
-Reviewed artifacts showed 70% used consistent units and modular structures, reducing enforcement errors by 40%.  
+## Evidence
+Reviewed artifacts showed 70% used consistent units and modular structures, reducing enforcement errors by 40%.
 
-## Recommendations  
-- Define quotas per resource type (e.g., API calls, storage) to avoid ambiguity.  
-- Use uniform units (e.g., MB, GB) across all quota definitions.  
-- Document enforcement triggers (e.g., threshold percentages).  
-- Test quota boundaries with edge-case scenarios (e.g., 0% or 100% usage).  
+## Recommendations
+- Define quotas per resource type (e.g., API calls, storage) to avoid ambiguity.
+- Use uniform units (e.g., MB, GB) across all quota definitions.
+- Document enforcement triggers (e.g., threshold percentages).
+- Test quota boundaries with edge-case scenarios (e.g., 0% or 100% usage).
 - Avoid conflating quota specs with rate-limiting or budgeting configurations.
