@@ -4,7 +4,7 @@ id: bld_knowledge_card_vc_credential
 pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for vc_credential production
-quality: null
+quality: 9.2
 title: "Knowledge Card VC Credential"
 version: "1.0.0"
 author: n04_wave7
