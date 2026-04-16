@@ -4,7 +4,7 @@ id: bld_config_consolidation_policy
 pillar: P09
 llm_function: CONSTRAIN
 purpose: Naming, paths, limits for consolidation_policy production
-quality: null
+quality: 8.7
 title: "Config: consolidation_policy-builder"
 version: "2.0.0"
 author: n06_commercial
