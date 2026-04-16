@@ -4,7 +4,7 @@ id: p03_sp_memory_architecture_builder
 pillar: P03
 llm_function: BECOME
 purpose: System prompt defining memory_architecture-builder persona and rules
-quality: null
+quality: 9.0
 title: "System Prompt: memory_architecture-builder"
 version: "2.0.0"
 author: n06_commercial
