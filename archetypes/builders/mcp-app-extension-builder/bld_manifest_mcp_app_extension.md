@@ -4,7 +4,7 @@ id: mcp-app-extension-builder
 pillar: P05
 llm_function: BECOME
 purpose: Builder identity, capabilities, routing for mcp_app_extension
-quality: null
+quality: 8.9
 title: "Type Builder MCP App Extension"
 version: "1.0.0"
 author: wave7_n03_dev_manifests
