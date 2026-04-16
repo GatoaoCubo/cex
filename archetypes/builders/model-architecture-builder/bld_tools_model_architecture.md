@@ -3,7 +3,7 @@ kind: tools
 id: bld_tools_model_architecture
 pillar: P04
 llm_function: CALL
-quality: null
+quality: 8.9
 title: "Tools Model Architecture"
 version: "1.0.0"
 author: n05_builder
