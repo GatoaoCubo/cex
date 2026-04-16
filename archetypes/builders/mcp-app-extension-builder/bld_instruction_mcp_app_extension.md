@@ -4,7 +4,7 @@ id: bld_instruction_mcp_app_extension
 pillar: P03
 llm_function: REASON
 purpose: Step-by-step production process for mcp_app_extension
-quality: null
+quality: 8.9
 title: "Instruction MCP App Extension"
 version: "1.0.0"
 author: wave7_n03_dev_manifests
