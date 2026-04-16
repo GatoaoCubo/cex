@@ -5,9 +5,10 @@ pillar: P01
 title: "N02 Marketing - LEVERAGE_MAP_V2 Verification"
 mission: LEVERAGE_MAP_V2
 nucleus: n02
-quality: null
+quality: 9.0
 status: complete
 created: 2026-04-15T20:30:00Z
+density_score: 1.0
 ---
 
 # N02 Marketing - LEVERAGE_MAP_V2 Verification
