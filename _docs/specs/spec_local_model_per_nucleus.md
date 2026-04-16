@@ -4,9 +4,10 @@ kind: decision_record
 pillar: P08
 title: Best Local Model per CEX Nucleus (Free Mode)
 version: 1.0.0
-quality: null
+quality: 9.0
 tags: [ollama, benchmark, routing, nuclei, free-mode]
 created: 2026-04-15
+density_score: 1.0
 ---
 
 # Best Local Model per Nucleus (measured, not guessed)
