@@ -4,7 +4,7 @@ id: p10_qg_workflow_run_crate
 pillar: P11
 llm_function: GOVERN
 purpose: Quality gate with HARD and SOFT scoring for workflow_run_crate
-quality: null
+quality: 9.0
 title: "Quality Gate Workflow Run Crate"
 version: "1.0.0"
 author: n04_wave7
