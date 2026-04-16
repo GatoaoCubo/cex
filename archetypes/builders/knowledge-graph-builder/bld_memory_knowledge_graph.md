@@ -19,7 +19,7 @@ tags:
   - deduplication
   - traversal-strategy
   - production-patterns
-quality: null
+quality: 9.2
 title: "Memory: knowledge_graph builder"
 tldr: "Constrain entity types (3-10), always dedup with fuzzy, always include extraction prompt, default hybrid traversal."
 impact_score: 8.5
