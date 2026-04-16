@@ -4,7 +4,7 @@ id: bld_collaboration_self_improvement_loop
 pillar: P12
 llm_function: COLLABORATE
 purpose: How self_improvement_loop-builder works in crews with other builders
-quality: null
+quality: 8.9
 title: "Collaboration Self Improvement Loop"
 version: "1.0.0"
 author: wave1_builder_gen_v2
