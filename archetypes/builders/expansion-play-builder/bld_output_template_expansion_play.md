@@ -4,7 +4,7 @@ id: bld_output_template_expansion_play
 pillar: P05
 llm_function: PRODUCE
 purpose: Template with vars for expansion_play production
-quality: null
+quality: 9.1
 title: "Output Template Expansion Play"
 version: "1.0.0"
 author: wave6_n06
