@@ -4,7 +4,7 @@ id: bld_schema_oauth_app_config
 pillar: P06
 llm_function: CONSTRAIN
 purpose: Formal schema -- SINGLE SOURCE OF TRUTH for oauth_app_config
-quality: null
+quality: 9.1
 title: "Schema Oauth App Config"
 version: "1.0.0"
 author: wave1_builder_gen_v2
@@ -46,16 +46,16 @@ density_score: 0.85
 ^p09_oauth_[a-z][a-z0-9_]+.yaml$
 
 ## Body Structure
-1. **Configuration Overview**  
+1. **Configuration Overview**
    Define app metadata, redirect URIs, and scope requirements.
 
-2. **Security Parameters**  
+2. **Security Parameters**
    Specify encryption standards, secret storage, and access controls.
 
-3. **Authorization Flow**  
+3. **Authorization Flow**
    Document grant types, token endpoints, and refresh mechanisms.
 
-4. **Metadata Schema**  
+4. **Metadata Schema**
    Include JSON structure for dynamic client registration.
 
 ## Constraints
