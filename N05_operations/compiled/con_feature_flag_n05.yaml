@@ -1,0 +1,102 @@
+id: con_feature_flag_n05
+kind: feature_flag
+pillar: P09
+nucleus: n05
+title: Ops Feature Flags
+version: 1.0
+quality: null
+tags:
+- config
+- flags
+- operations
+- rollout
+- safety
+purpose: '| Field | Value |
+
+  |---|---|
+
+  | Intent | Define the operational feature flags that gate risky rollout and recovery behaviors in N05. |
+
+  | Scope | Canary release automation, auto rollback, verbose tracing, expedited approvals, shadow traffic. |
+
+  | Gating Wrath Lens | Every flag must have an owner, kill switch, rollback expectation, and expiry discipline. |
+
+  | Default Posture | New flags start off unless required to preserve safety. |
+
+  | Lifecycle Rule | Add, ramp, audit, remove. Permanent flags are a control failure. |'
+values: '| Flag | Category | Default | Rollout | Owner | Kill Switch | Expiry Rule |
+
+  |---|---|---|---|---|---|---|
+
+  | ops_canary_auto_promote | release | off | 0% | release_manager_n05 | instant off | Remove after rollout system stabilizes.
+  |
+
+  | ops_auto_rollback | ops | on | 100% | incident_commander_n05 | manual override only | Keep permanent because it reduces
+  blast radius. |
+
+  | ops_shadow_traffic | experiment | off | 10% -> 50% -> 100% | perf_audit_n05 | instant off | Remove after traffic profile
+  is validated. |
+
+  | ops_fast_approval_lane | permission | off | named cohort only | qa_lead_n05 | instant off | Expire after incident or launch
+  window. |
+
+  | ops_verbose_deploy_trace | ops | off | environment scoped | sre_n05 | instant off | Disable when incident closes. |
+
+  | ops_freeze_manual_override | ops | on | 100% | release_manager_n05 | ticketed off | Permanent during freeze windows only.
+  |'
+targeting_rules: '| Flag | Eligible Scope | Blocked Scope | Reason |
+
+  |---|---|---|---|
+
+  | ops_canary_auto_promote | staging, prod canary | full prod direct | Broad rollout must stay human-gated. |
+
+  | ops_auto_rollback | staging, prod | none | Safety control should remain available everywhere. |
+
+  | ops_shadow_traffic | staging, low-risk prod cohort | incident state | Shadowing during instability distorts telemetry.
+  |
+
+  | ops_fast_approval_lane | named emergency roster | general operators | Prevent privilege drift. |
+
+  | ops_verbose_deploy_trace | on-call sessions | normal flow | High log volume can leak signal-to-noise. |
+
+  | ops_freeze_manual_override | freeze windows | non-freeze periods | Restrict discretionary movement during risk spikes.
+  |'
+rationale: '| Design Choice | Why It Exists | Gating Wrath Effect |
+
+  |---|---|---|
+
+  | Most flags default off | Untested behavior should not self-activate. | Reduces surprise pathways. |
+
+  | Auto rollback defaults on | Safety automation deserves fail-safe treatment. | Containment beats convenience. |
+
+  | Owner field is mandatory | Someone must retire or defend each flag. | Prevents orphaned toggles. |
+
+  | Expiry rule on every temporary flag | Old flags become hidden branches. | Forces cleanup and re-review. |
+
+  | Cohort-limited fast lane | Emergency acceleration must be narrow and named. | Stops broad privilege spread. |'
+example: "| Scenario | Flag State | Result |\n|---|---|---|\n| New canary controller release | `ops_canary_auto_promote=off`\
+  \ | Human promotion still required. |\n| Critical error spike in prod | `ops_auto_rollback=on` | Automatic rollback path\
+  \ remains armed. |\n| Incident war room active | `ops_verbose_deploy_trace=on` | Extra deployment trace collected for short\
+  \ interval. |\n\nflags:\n  ops_canary_auto_promote:\n    enabled: false\n    rollout_pct: 0\n    owner: release_manager_n05\n\
+  \    category: release\n  ops_auto_rollback:\n    enabled: true\n    rollout_pct: 100\n    owner: incident_commander_n05\n\
+  \    category: ops\n  ops_fast_approval_lane:\n    enabled: false\n    rollout_pct: 0\n    owner: qa_lead_n05\n    category:\
+  \ permission"
+properties: '| Property | Value |
+
+  |---|---|
+
+  | Kind | `feature_flag` |
+
+  | Pillar | `P09` |
+
+  | Nucleus | `n05` |
+
+  | Evaluation Point | Pre-deploy and runtime gate controllers |
+
+  | Kill Switch Standard | All flags must support immediate disable. |
+
+  | Audit Rule | Owner and expiry reviewed every release cycle. |
+
+  | Failure Mode | Unknown flag state resolves to disabled except `ops_auto_rollback`. |
+
+  | Sin Lens | Gating Wrath: flags exist to shrink risk, not to bypass controls. |'

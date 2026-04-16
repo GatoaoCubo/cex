@@ -1,0 +1,160 @@
+id: sch_type_def_n01
+kind: type_def
+pillar: P06
+nucleus: n01
+title: Competitive Insight Type
+version: 1.0
+quality: null
+tags:
+- type_def
+- insight
+- research
+- benchmark
+purpose: '| Item | Decision |
+
+  |------|----------|
+
+  | Type name | `CompetitiveInsightRecord` |
+
+  | Base type | object |
+
+  | Role | Reusable shape for any N01 claim that compares one subject against peers |
+
+  | Lens | Analytical Envy demands a durable object that stores delta, proof, and next action together |
+
+  | Reuse target | briefs, benchmark tables, notebooks, validators, and memory artifacts |'
+schema: '| Field | Type | Required | Nullable | Constraint | Meaning |
+
+  |------|------|----------|----------|------------|---------|
+
+  | `insight_id` | string | yes | no | `^ins_[a-z0-9_]+$` | stable identifier |
+
+  | `subject_entity` | string | yes | no | 2-80 chars | focal entity |
+
+  | `peer_entity` | string | yes | no | 2-80 chars | compared rival or baseline |
+
+  | `comparison_axis` | string | yes | no | 3-60 chars | dimension of competition |
+
+  | `observed_delta` | string | yes | no | 8-200 chars | plain-language difference |
+
+  | `delta_direction` | enum | yes | no | `ahead|behind|parity|unclear` | who appears stronger |
+
+  | `evidence_state` | enum | yes | no | `research_evidence_state` | maturity of support |
+
+  | `confidence_score` | number | yes | no | `0.0..1.0` | calibrated certainty |
+
+  | `source_refs` | list[string] | yes | no | 1-10 ids | links to proofs |
+
+  | `freshness_days` | integer | yes | no | `0..365` | age of newest supporting evidence |
+
+  | `actionability` | enum | yes | no | `watch|test|adopt|defer` | recommended next move |
+
+  | `rationale_summary` | string | yes | no | 24-280 chars | why the delta matters |
+
+  | `counter_signal` | string | no | yes | max 220 chars | strongest contradictory note |'
+composition: '| Mode | Value |
+
+  |------|-------|
+
+  | primary mode | record object |
+
+  | enum dependencies | `research_evidence_state`, `delta_direction`, `actionability` |
+
+  | list members | `source_refs` as ordered evidence pointers |
+
+  | nullable field | `counter_signal` only |
+
+  | inheritance | none; keep portable across N01 workflows |'
+constraints: '| Constraint | Rule | Why |
+
+  |-----------|------|-----|
+
+  | subject vs peer | cannot be identical | no self-comparison noise |
+
+  | confidence floor | if `evidence_state=decision_ready`, score must be `>= 0.8` | prevent inflated conclusions |
+
+  | freshness rule | if `freshness_days > 180`, `actionability` cannot be `adopt` | stale data weakens envy-driven moves |
+
+  | contradiction rule | if `delta_direction=unclear`, `counter_signal` becomes required | ambiguity must be visible |
+
+  | source rule | `benchmark_mapped` or above requires at least 2 `source_refs` | mature states need broader proof |'
+serialization: '| Format | Mapping |
+
+  |-------|---------|
+
+  | YAML | primary human-edit form for CEX artifacts |
+
+  | JSON | transport-safe for tools and APIs |
+
+  | Markdown table | view model for briefs and audits |
+
+  | Memory record | serializes as flat object plus source pointer array |'
+rationale: '| Design Choice | Why | Analytical Envy Interpretation |
+
+  |--------------|-----|--------------------------------|
+
+  | Store both subject and peer | Insight is meaningless without opposition | The type encodes rivalry directly |
+
+  | Keep `observed_delta` textual | Comparative nuance often resists one scalar | Envy lens values precise difference statements
+  |
+
+  | Add `confidence_score` and `evidence_state` | One says certainty, one says proof maturity | Confidence without proof is
+  vanity |
+
+  | Include `counter_signal` | Strong analysis records the best opposing evidence | Mature envy studies what might disprove
+  its edge |
+
+  | Actionability enum | Research should end in a move, not just a note | Comparative intelligence must shape decisions |'
+example: 'insight_id: ins_latency_gap_q2
+
+  subject_entity: n01_intelligence
+
+  peer_entity: n03_engineering
+
+  comparison_axis: response_latency
+
+  observed_delta: "N01 synthesis is deeper but slower on first pass than N03 execution loops."
+
+  delta_direction: behind
+
+  evidence_state: triangulated
+
+  confidence_score: 0.74
+
+  source_refs: ["src_rules_n01", "src_handoff_w1", "src_local_examples"]
+
+  freshness_days: 2
+
+  actionability: test
+
+  rationale_summary: "The slower pass is acceptable when higher evidence density changes downstream decisions."
+
+  counter_signal: "Latency shrinks when the request is tightly constrained to one kind."'
+example_reading: '| Interpretation Area | Observation |
+
+  |--------------------|-------------|
+
+  | rivalry | N01 is evaluated against N03, not in isolation |
+
+  | proof maturity | triangulated, not benchmark_mapped yet |
+
+  | decision path | run controlled tests before adopting a process change |'
+properties: '| Property | Value |
+
+  |----------|-------|
+
+  | Kind | `type_def` |
+
+  | Pillar | `P06` |
+
+  | Nucleus | `n01` |
+
+  | Base Type | `object` |
+
+  | Required Fields | `12` |
+
+  | Nullable Fields | `1` |
+
+  | Serialization | `yaml,json,markdown` |
+
+  | Quality Field | `null` |'
