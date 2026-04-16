@@ -4,7 +4,7 @@ id: bld_knowledge_card_playground_config
 pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for playground_config production
-quality: null
+quality: 9.2
 title: "Knowledge Card Playground Config"
 version: "1.0.0"
 author: wave1_builder_gen_v2
