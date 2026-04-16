@@ -4,7 +4,7 @@ id: bld_instruction_faq_entry
 pillar: P03
 llm_function: REASON
 purpose: Step-by-step production process for faq_entry
-quality: null
+quality: 8.9
 title: "Instruction Faq Entry"
 version: "1.0.0"
 author: wave1_builder_gen_v2
