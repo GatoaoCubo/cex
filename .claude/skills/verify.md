@@ -4,7 +4,8 @@ kind:
 pillar:
 title:
 version: 1.0.0
-quality: null
+quality: 8.6
+density_score: 1.0
 ---
 
 # N03 — 3 items only, 1 commit, then signal
