@@ -4,7 +4,7 @@ id: bld_tools_press_release
 pillar: P04
 llm_function: CALL
 purpose: Production, validation, and distribution tools for the press_release builder
-quality: null
+quality: 9.2
 title: "Press Release Builder Tools"
 version: "1.0.0"
 author: n02_wave6
