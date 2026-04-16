@@ -4,7 +4,7 @@ id: bld_config_experiment_tracker
 pillar: P09
 llm_function: CONSTRAIN
 purpose: Naming, paths, limits for experiment_tracker production
-quality: null
+quality: 8.6
 title: "Config Experiment Tracker"
 version: "1.0.0"
 author: wave1_builder_gen
