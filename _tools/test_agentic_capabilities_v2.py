@@ -19,6 +19,7 @@ import re
 import sys
 import time
 from pathlib import Path
+from typing import Any
 from urllib import request
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -26,7 +27,13 @@ OUT = ROOT / ".cex" / "runtime" / "benchmarks" / "agentic"
 OUT.mkdir(parents=True, exist_ok=True)
 
 
-def call_ollama(model, messages, fmt=None, timeout=180, num_predict=800):
+def call_ollama(
+    model: str,
+    messages: list[dict[str, str]],
+    fmt: str | None = None,
+    timeout: int = 180,
+    num_predict: int = 800,
+) -> dict[str, Any]:
     payload = {
         "model": model, "messages": messages, "stream": False,
         "options": {"num_predict": num_predict, "temperature": 0.2},
@@ -48,7 +55,7 @@ def call_ollama(model, messages, fmt=None, timeout=180, num_predict=800):
 
 
 # E7: Long context needle
-def e7_long_context(model):
+def e7_long_context(model: str) -> dict[str, Any]:
     filler = "The benchmark system tracks model performance over time. " * 60  # ~3K chars
     needle = "SECRET_CODE_ALPHA_47Q is the activation key."
     haystack = filler[:1500] + " " + needle + " " + filler[:1500]
@@ -64,7 +71,7 @@ def e7_long_context(model):
 
 
 # E8: Code correctness (generate fibonacci + we verify)
-def e8_code_correctness(model):
+def e8_code_correctness(model: str) -> dict[str, Any]:
     r = call_ollama(model, [
         {"role": "user", "content": "Write a Python function `fib(n)` that returns the nth Fibonacci number (0-indexed, fib(0)=0, fib(1)=1, fib(7)=13). Output ONLY the code, no explanation, no markdown fences."}
     ])
@@ -91,7 +98,7 @@ def e8_code_correctness(model):
 
 
 # E9: Error recovery
-def e9_error_recovery(model):
+def e9_error_recovery(model: str) -> dict[str, Any]:
     msgs = [
         {"role": "system", "content": "You are an agent. Use read_file(path) tool. Respond with Action: read_file(\"<path>\")"},
         {"role": "user", "content": "Get the contents of the config file at ./config.yaml"},
@@ -111,7 +118,7 @@ def e9_error_recovery(model):
 
 
 # E10: Planning decomposition
-def e10_planning(model):
+def e10_planning(model: str) -> dict[str, Any]:
     r = call_ollama(model, [
         {"role": "user", "content": "I need to build a web scraper that extracts product prices from a shopping site and saves to CSV. Break this into exactly 5 numbered steps (1-5). Format: '1. <step>'. Output ONLY the numbered list, no preamble."}
     ])
@@ -131,7 +138,7 @@ def e10_planning(model):
 
 
 # E11: Tool loop simulation (3-step ReAct)
-def e11_tool_loop(model):
+def e11_tool_loop(model: str) -> dict[str, Any]:
     sys_prompt = """You are an agent. Available tools:
   list_dir(path) -> list of filenames
   read_file(path) -> file contents
@@ -178,7 +185,7 @@ Do not add explanations after the Action. Wait for the observation before the ne
 
 
 # E12: Strict format adherence
-def e12_strict_format(model):
+def e12_strict_format(model: str) -> dict[str, Any]:
     r = call_ollama(model, [
         {"role": "user", "content": """Output EXACTLY this structure (markdown with these 4 sections in this order, nothing more):
 
@@ -221,7 +228,7 @@ EXPERIMENTS = [
 ]
 
 
-def main():
+def main() -> int:
     p = argparse.ArgumentParser()
     p.add_argument("--models", default="gemma2:9b,qwen3:14b,llama3.1:8b")
     args = p.parse_args()
