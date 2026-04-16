@@ -4,7 +4,7 @@ id: p03_sp_safety_policy_builder
 pillar: P03
 llm_function: BECOME
 purpose: System prompt defining safety_policy-builder persona and rules
-quality: null
+quality: 8.8
 title: "System Prompt Safety Policy"
 version: "1.0.0"
 author: wave1_builder_gen
