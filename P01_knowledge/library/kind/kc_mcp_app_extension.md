@@ -8,8 +8,9 @@ version: 1.0.0
 created: 2026-04-15
 updated: 2026-04-15
 author: n05_selfheal
-quality: null
+quality: 9.1
 tags: []
+density_score: 1.0
 ---
 
 # MCP App Extension Guide
