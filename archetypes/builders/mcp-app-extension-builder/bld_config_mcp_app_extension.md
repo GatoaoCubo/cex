@@ -4,7 +4,7 @@ id: bld_config_mcp_app_extension
 pillar: P09
 llm_function: CONSTRAIN
 purpose: Naming, paths, limits for mcp_app_extension production
-quality: null
+quality: 8.6
 title: "Config MCP App Extension"
 version: "1.0.0"
 author: wave7_n03_dev_manifests
