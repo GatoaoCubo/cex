@@ -121,10 +121,12 @@ def extract_topic(dirname: str) -> str:
 
 
 def expected_filename(kind: str, topic: str) -> str:
+    """Build the canonical filename for a builder ISO."""
     return f"bld_{kind}_{topic}.md"
 
 
 def parse_frontmatter(text: str) -> tuple[dict[str, Any] | None, str]:
+    """Split markdown into parsed frontmatter and body text."""
     fm, body = _shared_split_frontmatter(text)
     return (fm if fm else None), body
 
@@ -146,11 +148,13 @@ def calc_density(text: str) -> float:
 
 
 def fenced_block(text: str) -> str:
+    """Return the first fenced code block body from markdown text."""
     match = re.search(r"```(?:[a-zA-Z0-9_+-]+)?\n(.*?)```", text, flags=re.S)
     return match.group(1) if match else ""
 
 
 def extract_schema_fields(text: str) -> set[str]:
+    """Extract schema field names from tables and YAML or JSON examples."""
     fields: set[str] = set()
     for line in text.splitlines():
         line = line.strip()
@@ -169,6 +173,7 @@ def extract_schema_fields(text: str) -> set[str]:
 
 
 def extract_template_fields(text: str) -> set[str]:
+    """Extract field names from the template's first fenced block."""
     fields: set[str] = set()
     for line in fenced_block(text).splitlines():
         m = re.match(r'^\s*"?([A-Za-z_][A-Za-z0-9_]*)"?\s*:', line)
@@ -178,6 +183,7 @@ def extract_template_fields(text: str) -> set[str]:
 
 
 def extract_config_fields(text: str, candidates: set[str]) -> set[str]:
+    """Find schema field references mentioned in config prose or code spans."""
     found = {token for token in SNAKE_RE.findall(text) if token in candidates}
     for token in re.findall(r"`([A-Za-z_][A-Za-z0-9_]*)`", text):
         if token in candidates:
@@ -186,6 +192,7 @@ def extract_config_fields(text: str, candidates: set[str]) -> set[str]:
 
 
 def normalize_enum_values(raw: str) -> set[str]:
+    """Normalize an enum definition into comparable lowercase values."""
     raw = raw.strip().strip("`")
     if len(raw) > 200:
         return set()
@@ -199,6 +206,7 @@ def normalize_enum_values(raw: str) -> set[str]:
 
 
 def extract_named_enums_schema(text: str) -> dict[str, set[str]]:
+    """Extract named enums declared in the schema document."""
     enums: dict[str, set[str]] = {}
     for line in text.splitlines():
         m = re.search(r"\|\s*([A-Za-z_][A-Za-z0-9_]*)\s*\|\s*enum\s*\(([^)]+)\)", line)
@@ -210,6 +218,7 @@ def extract_named_enums_schema(text: str) -> dict[str, set[str]]:
 
 
 def extract_named_enums_template(text: str) -> dict[str, set[str]]:
+    """Extract named enums encoded as template placeholders."""
     enums: dict[str, set[str]] = {}
     for line in fenced_block(text).splitlines():
         m = re.search(r'^\s*"?([A-Za-z_][A-Za-z0-9_]*)"?\s*:\s*"?\{\{([^{}]+)\}\}"?', line)
@@ -222,6 +231,7 @@ def extract_named_enums_template(text: str) -> dict[str, set[str]]:
 
 
 def extract_named_enums_config(text: str) -> dict[str, set[str]]:
+    """Extract named enums documented in the config document."""
     enums: dict[str, set[str]] = {}
     current = ""
     for line in text.splitlines():
@@ -242,6 +252,7 @@ def extract_named_enums_config(text: str) -> dict[str, set[str]]:
 def collect_forward_refs(
     builder_dir: Path,
 ) -> tuple[list[tuple[str, str, bool]], list[tuple[str, str, bool]]]:
+    """Collect builder and tool references mentioned across builder files."""
     builder_refs: list[tuple[str, str, bool]] = []
     tool_refs: list[tuple[str, str, bool]] = []
     for path in sorted(builder_dir.glob("*.md")):
@@ -293,6 +304,7 @@ def find_file_by_kind(builder_dir: Path, kind: str, topic: str) -> Path | None:
 
 
 def validate_builder(builder_dir: Path) -> dict[str, Any]:
+    """Run the full structural and semantic validation suite for one builder."""
     checks: list[Check] = []
     issues: list[str] = []
     topic = extract_topic(builder_dir.name)
@@ -505,6 +517,7 @@ def validate_builder(builder_dir: Path) -> dict[str, Any]:
 
 
 def print_human(result: dict[str, Any]) -> None:
+    """Render one builder validation result in a compact terminal format."""
     sep = "=" * 72
     print(sep)
     print(
@@ -543,6 +556,7 @@ def get_changed_builders() -> list[Path]:
 
 
 def main() -> None:
+    """Validate one or more builders selected from the CLI."""
     parser = argparse.ArgumentParser(description="Validate CEX builder directories (v2).")
     parser.add_argument("builder", nargs="?", help="Path to builder directory")
     parser.add_argument("--json", action="store_true", help="Print JSON only")
