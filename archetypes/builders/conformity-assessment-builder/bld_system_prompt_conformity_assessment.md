@@ -4,7 +4,7 @@ id: bld_system_prompt_conformity_assessment
 pillar: P03
 llm_function: BECOME
 purpose: System prompt that activates the EU AI Act conformity assessment specialist identity
-quality: null
+quality: 9.1
 title: "Conformity Assessment Builder -- System Prompt"
 version: "1.0.0"
 author: wave7_n05
