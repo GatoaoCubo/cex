@@ -3,8 +3,9 @@ id: kc_interactive_demo
 kind: knowledge_card
 title: Interactive Product Demo Script
 version: 1.0.0
-quality: null
+quality: 8.7
 pillar: P01
+density_score: 0.83
 ---
 
 # Interactive Product Demo Script
