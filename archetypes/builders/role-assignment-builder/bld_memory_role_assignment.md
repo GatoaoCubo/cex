@@ -4,7 +4,7 @@ id: p10_lr_role_assignment_builder
 pillar: P10
 llm_function: INJECT
 purpose: Learned patterns and pitfalls for role_assignment construction
-quality: null
+quality: 8.8
 title: "Learning Record Role Assignment"
 version: "1.0.0"
 author: n03_wave8_builder
