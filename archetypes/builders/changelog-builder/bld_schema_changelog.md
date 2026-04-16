@@ -4,7 +4,7 @@ id: bld_schema_changelog
 pillar: P06
 llm_function: CONSTRAIN
 purpose: Formal schema -- SINGLE SOURCE OF TRUTH for changelog
-quality: null
+quality: 9.1
 title: "Schema Changelog"
 version: "1.1.0"
 author: wave1_builder_gen_v2
