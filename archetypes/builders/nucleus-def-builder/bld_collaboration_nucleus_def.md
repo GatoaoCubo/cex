@@ -4,7 +4,7 @@ id: bld_collaboration_nucleus_def
 pillar: P12
 llm_function: COLLABORATE
 purpose: How nucleus_def-builder works in crews with other builders
-quality: null
+quality: 9.1
 title: "Collaboration Nucleus Def"
 version: "1.0.0"
 author: n05_wave8
