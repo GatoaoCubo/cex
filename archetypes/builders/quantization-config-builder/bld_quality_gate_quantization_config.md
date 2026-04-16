@@ -4,7 +4,7 @@ id: p09_qg_quantization_config
 pillar: P11
 llm_function: GOVERN
 purpose: Quality gate with HARD and SOFT scoring for quantization_config
-quality: null
+quality: 9.0
 title: "Quality Gate Quantization Config"
 version: "1.0.0"
 author: hybrid_review3_n05
