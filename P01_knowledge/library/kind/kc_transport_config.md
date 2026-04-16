@@ -3,9 +3,10 @@ id: kc_transport_config
 kind: knowledge_card
 title: Transport Configuration for Real-Time Communication
 version: 1.0.0
-quality: null
+quality: 8.7
 pillar: P01
 language: en
+density_score: 1.0
 ---
 
 # Transport Configuration for Real-Time Communication
