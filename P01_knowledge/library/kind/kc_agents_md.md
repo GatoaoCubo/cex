@@ -3,10 +3,11 @@ id: kc_agents_md
 kind: knowledge_card
 title: Agents.md Project-Root Manifest
 version: 1.0.0
-quality: null
+quality: 8.5
 pillar: P01
 description: |
   Project-root manifest for AAIF/OpenAI AGENTS.md: setup/test/lint commands, PR format, deploy rules, coding-agent conventions
+density_score: 1.0
 ---
 
 ## Setup/Testing/Linting
