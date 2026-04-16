@@ -3,8 +3,9 @@ id: kc_consolidation_policy
 kind: knowledge_card
 title: Consolidation Policy
 version: 1.0.0
-quality: null
+quality: 8.7
 pillar: P01
+density_score: 0.95
 ---
 
 # Consolidation Policy
