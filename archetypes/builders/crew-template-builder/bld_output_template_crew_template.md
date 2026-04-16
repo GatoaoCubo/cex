@@ -4,7 +4,7 @@ id: bld_output_template_crew_template
 pillar: P05
 llm_function: PRODUCE
 purpose: Template with vars for crew_template production
-quality: null
+quality: 9.1
 title: "Output Template Crew Template"
 version: "1.0.0"
 author: n03_wave8_builder
