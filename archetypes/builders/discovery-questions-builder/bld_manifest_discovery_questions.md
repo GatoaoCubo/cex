@@ -4,7 +4,7 @@ id: discovery-questions-builder
 pillar: P01
 llm_function: BECOME
 purpose: Builder identity, capabilities, routing for discovery_questions
-quality: null
+quality: 8.8
 title: "Type Builder Discovery Questions"
 version: "1.0.0"
 author: wave1_builder_gen_v2
