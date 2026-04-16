@@ -4,7 +4,7 @@ id: bld_schema_mcp_app_extension
 pillar: P06
 llm_function: CONSTRAIN
 purpose: Formal schema -- SINGLE SOURCE OF TRUTH for mcp_app_extension
-quality: null
+quality: 9.1
 title: "Schema MCP App Extension"
 version: "1.0.0"
 author: wave7_n03_dev_manifests
