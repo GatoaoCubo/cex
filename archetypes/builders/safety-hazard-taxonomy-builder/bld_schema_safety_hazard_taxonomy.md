@@ -4,7 +4,7 @@ id: bld_schema_safety_hazard_taxonomy
 pillar: P06
 llm_function: CONSTRAIN
 purpose: Formal schema -- SINGLE SOURCE OF TRUTH for safety_hazard_taxonomy
-quality: null
+quality: 9.2
 title: "Schema Safety Hazard Taxonomy"
 version: "1.0.0"
 author: n01_wave7
