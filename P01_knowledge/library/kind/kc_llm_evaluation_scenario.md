@@ -3,8 +3,9 @@ id: kc_llm_evaluation_scenario
 kind: knowledge_card
 title: LLM Evaluation Scenario
 version: 1.0.0
-quality: null
+quality: 8.9
 pillar: P01
+density_score: 1.0
 ---
 
 # LLM Evaluation Scenario
