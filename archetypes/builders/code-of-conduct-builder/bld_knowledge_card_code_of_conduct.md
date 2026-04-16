@@ -4,7 +4,7 @@ id: bld_knowledge_card_code_of_conduct
 pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for code_of_conduct production
-quality: null
+quality: 9.2
 title: "Knowledge Card Code of Conduct"
 version: "1.0.0"
 author: n04_knowledge
