@@ -3,8 +3,9 @@ id: kc_quickstart_guide
 kind: knowledge_card
 title: Quickstart Guide
 version: 1.0.0
-quality: null
+quality: 8.6
 pillar: P01
+density_score: 0.9
 ---
 
 # Quickstart Guide
