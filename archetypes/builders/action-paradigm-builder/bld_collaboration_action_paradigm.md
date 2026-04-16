@@ -4,7 +4,7 @@ id: bld_collaboration_action_paradigm
 pillar: P12
 llm_function: COLLABORATE
 purpose: How action_paradigm-builder works in crews with other builders
-quality: null
+quality: 8.9
 title: "Collaboration Action Paradigm"
 version: "1.0.0"
 author: wave1_builder_gen
@@ -16,26 +16,26 @@ updated: "2026-04-13"
 density_score: 0.85
 ---
 
-## Crew Role  
-Orchestrates action execution workflows, decomposing high-level goals into executable steps, ensuring alignment with domain constraints and resource availability.  
+## Crew Role
+Orchestrates action execution workflows, decomposing high-level goals into executable steps, ensuring alignment with domain constraints and resource availability.
 
-## Receives From  
-| Builder       | What               | Format      |  
-|---------------|--------------------|-------------|  
-| Task Planner  | Goal definitions   | JSON        |  
-| ResourceMgr   | Available resources| YAML        |  
-| Validator     | Constraint rules   | Structured  |  
-| Monitor       | Status updates     | JSON        |  
+## Receives From
+| Builder       | What               | Format      |
+|---------------|--------------------|-------------|
+| Task Planner  | Goal definitions   | JSON        |
+| ResourceMgr   | Available resources| YAML        |
+| Validator     | Constraint rules   | Structured  |
+| Monitor       | Status updates     | JSON        |
 
-## Produces For  
-| Builder       | What               | Format      |  
-|---------------|--------------------|-------------|  
-| Executor      | Action plan        | JSON        |  
-| Logger        | Execution logs     | YAML        |  
-| FeedbackSys   | Completion signals | Structured  |  
-| ErrorHandler  | Failure reports    | JSON        |  
+## Produces For
+| Builder       | What               | Format      |
+|---------------|--------------------|-------------|
+| Executor      | Action plan        | JSON        |
+| Logger        | Execution logs     | YAML        |
+| FeedbackSys   | Completion signals | Structured  |
+| ErrorHandler  | Failure reports    | JSON        |
 
-## Boundary  
+## Boundary
 Does NOT execute actions directly (handled by cli_tool/api_client builders), manage user interfaces
 (handled by agent_computer_interface builder), or handle sequential task ordering (handled by
 workflow builder).
