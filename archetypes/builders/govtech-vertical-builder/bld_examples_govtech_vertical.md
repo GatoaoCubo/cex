@@ -4,7 +4,7 @@ id: bld_examples_govtech_vertical
 pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of govtech_vertical artifacts
-quality: null
+quality: 8.9
 title: "Examples Govtech Vertical"
 version: "1.0.0"
 author: wave1_builder_gen_v2
