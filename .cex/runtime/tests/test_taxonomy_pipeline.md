@@ -6,9 +6,10 @@ version: 1.0.0
 pillar: P01
 nucleus: n02
 mission: WAVE7
-quality: null
+quality: 9.1
 tags: [taxonomy, pipeline, test, scout, harvester, e2e]
 created: 2026-04-14
+density_score: 1.0
 ---
 
 # Taxonomy Pipeline End-to-End Test
