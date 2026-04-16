@@ -4,7 +4,7 @@ id: bld_instruction_pricing_page
 pillar: P03
 llm_function: REASON
 purpose: Step-by-step production process for pricing_page
-quality: null
+quality: 8.9
 title: "Instruction Pricing Page"
 version: "1.0.0"
 author: wave1_builder_gen_v2
