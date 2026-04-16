@@ -4,7 +4,7 @@ id: bld_examples_content_filter
 pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of content_filter artifacts
-quality: null
+quality: 8.9
 title: "Examples Content Filter"
 version: "1.0.0"
 author: wave1_builder_gen
