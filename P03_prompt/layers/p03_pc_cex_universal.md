@@ -2,17 +2,23 @@
 id: p03_pc_cex_universal
 kind: prompt_compiler
 pillar: P03
-version: 1.0.0
+version: 1.1.0
 created: "2026-04-12"
-updated: "2026-04-12"
+updated: "2026-04-16"
 author: n03_builder
 title: "CEX Universal Prompt Compiler"
 domain: intent_resolution
-coverage: 124
+coverage: 257
 languages: [pt-br, en]
-quality: 9.2
-tags: [prompt_compiler, intent-resolution, cex, bilingual, transmutation]
-tldr: "Resolves natural language input into {kind, pillar, nucleus, verb} for all 124 CEX kinds in PT-BR and EN"
+quality: null
+canonical_for: [n07-input-transmutation, F1_CONSTRAIN]
+referenced_by:
+  - .claude/rules/n07-input-transmutation.md
+  - .claude/rules/n07-technical-authority.md
+  - CLAUDE.md
+role: "N07's transmutation brain -- maps every user phrase (PT/EN) to {kind, pillar, nucleus, verb} before 8F starts. Source of CEX's 'senior AI engineer' leverage."
+tags: [prompt_compiler, intent-resolution, cex, bilingual, transmutation, n07-canonical, f1-constrain]
+tldr: "Source of truth for intent transmutation: maps natural-language input (PT/EN) into {kind, pillar, nucleus, verb} for all 257 CEX kinds. Loaded BEFORE every 8F run (F1 CONSTRAIN). Quality:null per CLAUDE.md rule -- peer review assigns score."
 density_score: 0.93
 ---
 
