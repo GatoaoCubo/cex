@@ -4,7 +4,7 @@ id: bld_instruction_model_architecture
 pillar: P03
 llm_function: REASON
 purpose: Step-by-step production process for model_architecture
-quality: null
+quality: 8.7
 title: "Instruction Model Architecture"
 version: "1.0.0"
 author: wave1_builder_gen
