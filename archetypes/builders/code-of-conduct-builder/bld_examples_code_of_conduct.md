@@ -4,7 +4,7 @@ id: bld_examples_code_of_conduct
 pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of code_of_conduct artifacts
-quality: null
+quality: 9.0
 title: "Examples Code of Conduct"
 version: "1.0.0"
 author: n04_knowledge
