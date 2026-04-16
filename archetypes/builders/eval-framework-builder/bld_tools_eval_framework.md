@@ -4,7 +4,7 @@ id: bld_tools_eval_framework
 pillar: P04
 llm_function: CALL
 purpose: Real tools used during eval_framework production
-quality: null
+quality: 9.0
 title: "Tools Eval Framework"
 version: "1.1.0"
 author: n03_hybrid_review4
