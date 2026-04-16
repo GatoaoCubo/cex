@@ -4,7 +4,7 @@ id: bld_architecture_compliance_framework
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of compliance_framework -- inventory, dependencies
-quality: null
+quality: 8.9
 title: "Architecture Compliance Framework"
 version: "1.1.0"
 author: n05_ops
