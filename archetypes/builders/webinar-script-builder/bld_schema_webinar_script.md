@@ -4,7 +4,7 @@ id: bld_schema_webinar_script
 pillar: P06
 llm_function: CONSTRAIN
 purpose: Define frontmatter schema, ID pattern, and body structure for webinar_script artifacts
-quality: null
+quality: 9.1
 title: "Webinar Script Schema"
 version: "1.0.0"
 author: n02_wave6
