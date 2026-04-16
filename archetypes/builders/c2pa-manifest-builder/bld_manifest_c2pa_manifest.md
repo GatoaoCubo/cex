@@ -4,7 +4,7 @@ id: c2pa-manifest-builder
 pillar: P10
 llm_function: BECOME
 purpose: Builder identity, capabilities, routing for c2pa_manifest
-quality: null
+quality: 8.9
 title: "Type Builder C2PA Manifest"
 version: "1.0.0"
 author: n04_wave7
