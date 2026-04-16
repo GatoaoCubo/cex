@@ -4,7 +4,7 @@ id: bld_architecture_press_release
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component inventory, dependency map, and architectural position of the press_release builder
-quality: null
+quality: 9.1
 title: "Press Release Builder Architecture"
 version: "1.0.0"
 author: n02_wave6
