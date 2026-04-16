@@ -4,7 +4,7 @@ id: bld_architecture_fhir_agent_capability
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of fhir_agent_capability -- inventory, dependencies
-quality: null
+quality: 9.0
 title: "Architecture FHIR Agent Capability"
 version: "1.0.0"
 author: n06_wave7
