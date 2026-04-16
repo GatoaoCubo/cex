@@ -4,7 +4,7 @@ id: bld_tools_fhir_agent_capability
 pillar: P04
 llm_function: CALL
 purpose: Tools available for fhir_agent_capability production
-quality: null
+quality: 9.0
 title: "Tools FHIR Agent Capability"
 version: "1.0.0"
 author: n06_wave7
