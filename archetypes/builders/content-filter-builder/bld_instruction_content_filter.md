@@ -4,7 +4,7 @@ id: bld_instruction_content_filter
 pillar: P03
 llm_function: REASON
 purpose: Step-by-step production process for content_filter
-quality: null
+quality: 8.9
 title: "Instruction Content Filter"
 version: "1.0.0"
 author: wave1_builder_gen
