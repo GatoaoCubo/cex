@@ -3,7 +3,7 @@ id: p10_lr_model_architecture_builder
 kind: memory
 pillar: P10
 version: 1.0.0
-quality: null
+quality: 8.9
 title: "Memory Model Architecture Builder"
 tags: [model_architecture, memory, learning_record, P10]
 tldr: "Learning record: boundary conditions, common mistakes, quality patterns for model_architecture."
