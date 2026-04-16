@@ -4,7 +4,7 @@ id: bld_tools_content_filter
 pillar: P04
 llm_function: CALL
 purpose: Tools available for content_filter production
-quality: null
+quality: 9.0
 title: "Tools Content Filter"
 version: "1.0.0"
 author: wave1_builder_gen
@@ -16,24 +16,24 @@ updated: "2026-04-13"
 density_score: 0.85
 ---
 
-## Production Tools  
+## Production Tools
 
 This ISO defines a content filter -- the moderation rules that gate output or input.
-| Tool | Purpose | When |  
-|------|---------|------|  
-| cex_compile.py | Compiles content into standardized format | Pre-processing |  
-| cex_score.py | Assigns risk scores based on policy rules | Filtering |  
-| cex_retriever.py | Fetches external data for context checks | Validation |  
-| cex_doctor.py | Diagnoses content for harmful patterns | Post-processing |  
-| cex_analyzer.py | Parses metadata and language features | Initial screening |  
-| cex_optimizer.py | Refines filters for accuracy and efficiency | Deployment |  
+| Tool | Purpose | When |
+|------|---------|------|
+| cex_compile.py | Compiles content into standardized format | Pre-processing |
+| cex_score.py | Assigns risk scores based on policy rules | Filtering |
+| cex_retriever.py | Fetches external data for context checks | Validation |
+| cex_doctor.py | Diagnoses content for harmful patterns | Post-processing |
+| cex_analyzer.py | Parses metadata and language features | Initial screening |
+| cex_optimizer.py | Refines filters for accuracy and efficiency | Deployment |
 
-## Validation Tools  
-| Tool | Purpose | When |  
-|------|---------|------|  
-| val_check.py | Verifies filter compliance with policies | Testing |  
-| val_compare.py | Cross-checks outputs against golden standards | QA |  
-| val_audit.py | Logs and reviews filter decisions | Auditing |  
+## Validation Tools
+| Tool | Purpose | When |
+|------|---------|------|
+| val_check.py | Verifies filter compliance with policies | Testing |
+| val_compare.py | Cross-checks outputs against golden standards | QA |
+| val_audit.py | Logs and reviews filter decisions | Auditing |
 
 ## External Classification APIs (real, production-grade)
 | Tool | Provider | Use Case | Cost |
