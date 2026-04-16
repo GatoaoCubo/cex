@@ -4,7 +4,7 @@ id: bld_knowledge_card_safety_policy
 pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for safety_policy production
-quality: null
+quality: 9.2
 title: "Knowledge Card Safety Policy"
 version: "1.1.0"
 author: n06_hybrid_review
