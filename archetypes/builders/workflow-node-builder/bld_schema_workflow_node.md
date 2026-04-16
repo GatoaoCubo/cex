@@ -4,7 +4,7 @@ id: bld_schema_workflow_node
 pillar: P06
 llm_function: CONSTRAIN
 purpose: Formal schema -- SINGLE SOURCE OF TRUTH for workflow_node artifacts
-quality: null
+quality: 9.2
 title: "Schema Workflow Node"
 version: "1.1.0"
 author: n03_hybrid_review4
