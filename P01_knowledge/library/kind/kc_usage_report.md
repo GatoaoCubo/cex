@@ -3,8 +3,9 @@ id: kc_usage_report
 kind: knowledge_card
 title: Usage Analytics Report Specification
 version: 1.0.0
-quality: null
+quality: 8.7
 pillar: P01
+density_score: 1.0
 ---
 
 # Usage Analytics Report Specification
