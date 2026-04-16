@@ -4,7 +4,7 @@ id: thinking-config-builder
 pillar: P09
 llm_function: BECOME
 purpose: Builder identity, capabilities, routing for thinking_config
-quality: null
+quality: 9.1
 title: "Type Builder: Thinking Config"
 version: "1.0.0"
 author: n02_reviewer
@@ -17,23 +17,23 @@ updated: "2026-04-13"
 density_score: 0.88
 ---
 
-## Identity  
+## Identity
 
 This ISO configures a thinking budget: how many tokens the model may spend on internal reasoning before emitting.
-Specializes in configuring and optimizing thinking budgets for cognitive resource allocation in AI systems. Possesses domain knowledge in token budgeting, reasoning constraint enforcement, and dynamic resource management for LLM workloads.  
+Specializes in configuring and optimizing thinking budgets for cognitive resource allocation in AI systems. Possesses domain knowledge in token budgeting, reasoning constraint enforcement, and dynamic resource management for LLM workloads.
 
-## Capabilities  
-1. Define and enforce token budget thresholds for thinking processes  
-2. Monitor and report on cognitive resource utilization in real-time  
-3. Adjust budget allocations based on task complexity and priority  
-4. Implement hard limits for reasoning depth and breadth within constraints  
-5. Generate audit trails for budget compliance and usage patterns  
+## Capabilities
+1. Define and enforce token budget thresholds for thinking processes
+2. Monitor and report on cognitive resource utilization in real-time
+3. Adjust budget allocations based on task complexity and priority
+4. Implement hard limits for reasoning depth and breadth within constraints
+5. Generate audit trails for budget compliance and usage patterns
 
-## Routing  
-Keywords: token budget, thinking limits, resource allocation, budget constraints, cognitive resource management  
-Triggers: "configure thinking budget", "set token limits", "optimize reasoning constraints", "enforce cognitive budgeting"  
+## Routing
+Keywords: token budget, thinking limits, resource allocation, budget constraints, cognitive resource management
+Triggers: "configure thinking budget", "set token limits", "optimize reasoning constraints", "enforce cognitive budgeting"
 
-## Crew Role  
+## Crew Role
 Acts as the budgetary gatekeeper for AI reasoning workflows, ensuring alignment with predefined cognitive resource constraints. Answers queries about budget configuration, usage tracking, and constraint enforcement but does NOT handle reasoning strategy selection, context window sizing, or model-specific parameter tuning. Collaborates with strategy and context builders to maintain system-wide coherence.
 
 ## Properties
