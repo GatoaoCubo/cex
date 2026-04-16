@@ -3,7 +3,7 @@ id: p08_dm_n03_leverage_v2_verification
 kind: decision_record
 title: "N03 LEVERAGE_MAP_V2: Builder Linter Verification + Next Builds"
 version: 1.1.0
-quality: null
+quality: 9.1
 pillar: P08
 mission: LEVERAGE_MAP_V2
 nucleus: n03
@@ -12,6 +12,7 @@ date: 2026-04-15
 author: n03
 tags: [n03, leverage_map_v2, builder_linter, verification, audit]
 tldr: "Verified cex_builder_linter.py is present and catches structural builder defects, but it does not enforce full 8F compliance. Current repo state: 259 builder directories linted, 259 pass."
+density_score: 0.94
 ---
 
 # N03 LEVERAGE_MAP_V2 Verification
