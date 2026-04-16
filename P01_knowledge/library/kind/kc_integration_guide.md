@@ -3,8 +3,9 @@ id: kc_integration_guide
 kind: knowledge_card
 title: Integration Guide for Platform Partners
 version: 1.0.0
-quality: null
+quality: 8.7
 pillar: P01
+density_score: 1.0
 ---
 
 # Integration Guide
