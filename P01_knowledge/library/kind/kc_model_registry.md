@@ -3,8 +3,9 @@ id: kc_model_registry
 kind: knowledge_card
 title: Model Registry
 version: 1.0.0
-quality: null
+quality: 8.7
 pillar: P01
+density_score: 0.98
 ---
 
 # Model Registry
