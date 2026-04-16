@@ -4,7 +4,7 @@ id: gpai-technical-doc-builder
 pillar: P11
 llm_function: BECOME
 purpose: Builder identity, capabilities, routing for gpai_technical_doc
-quality: null
+quality: 8.9
 title: "Type Builder GPAI Technical Doc"
 version: "1.0.0"
 author: n01_wave7
