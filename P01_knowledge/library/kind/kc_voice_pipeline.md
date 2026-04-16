@@ -3,8 +3,9 @@ id: kc_voice_pipeline
 kind: knowledge_card
 title: Voice Pipeline Architecture
 version: 1.0.0
-quality: null
+quality: 8.8
 pillar: P01
+density_score: 0.99
 ---
 
 # Voice Pipeline Architecture
