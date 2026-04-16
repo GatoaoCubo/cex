@@ -4,7 +4,7 @@ id: bld_schema_usage_quota
 pillar: P06
 llm_function: CONSTRAIN
 purpose: Formal schema -- SINGLE SOURCE OF TRUTH for usage_quota
-quality: null
+quality: 9.1
 title: "Schema Usage Quota"
 version: "1.0.0"
 author: wave1_builder_gen_v2
@@ -49,19 +49,19 @@ density_score: 0.85
 ^p09_uq_[a-z][a-z0-9_]+.yaml$
 
 ## Body Structure
-1. **Quota Limit Definition**  
+1. **Quota Limit Definition**
    Specify numerical limit and unit of measurement.
 
-2. **Usage Metric**  
+2. **Usage Metric**
    Define what usage is measured (e.g., API calls, data transfer).
 
-3. **Reset Interval**  
+3. **Reset Interval**
    Define timeframe for quota reset (e.g., daily, monthly).
 
-4. **Enforcement Policy**  
+4. **Enforcement Policy**
    Specify enforcement type (hard: block, soft: warn).
 
-5. **Quota Allocation**  
+5. **Quota Allocation**
    Describe how quotas are distributed across users/roles.
 
 ## Constraints
