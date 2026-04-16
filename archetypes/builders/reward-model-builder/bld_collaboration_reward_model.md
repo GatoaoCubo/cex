@@ -4,7 +4,7 @@ id: bld_collaboration_reward_model
 pillar: P12
 llm_function: COLLABORATE
 purpose: How reward_model-builder works in crews with other builders
-quality: null
+quality: 8.9
 title: "Collaboration Reward Model"
 version: "1.0.0"
 author: wave1_builder_gen
