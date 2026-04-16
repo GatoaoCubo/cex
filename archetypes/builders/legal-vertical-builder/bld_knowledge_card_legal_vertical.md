@@ -4,7 +4,7 @@ id: bld_knowledge_card_legal_vertical
 pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for legal_vertical production
-quality: null
+quality: 9.2
 title: "Knowledge Card Legal Vertical"
 version: "1.0.0"
 author: wave1_builder_gen_v2
@@ -16,10 +16,10 @@ updated: "2026-04-14"
 density_score: 0.85
 ---
 
-## Domain Overview  
-The legal vertical centers on specialized workflows critical to legal practice, including privilege management, billable hour tracking, and contract analysis. Privilege (e.g., attorney-client confidentiality) is foundational to legal work, governed by rules like the ABA Model Rules of Professional Conduct. Billable hour tracking remains a cornerstone of law firm billing, though challenges like time-padding and inefficiencies persist. Contract analysis involves parsing, negotiating, and monitoring agreements, often leveraging AI for clause extraction and risk identification. Use cases span litigation support, M&A due diligence, and compliance with regulatory frameworks.  
+## Domain Overview
+The legal vertical centers on specialized workflows critical to legal practice, including privilege management, billable hour tracking, and contract analysis. Privilege (e.g., attorney-client confidentiality) is foundational to legal work, governed by rules like the ABA Model Rules of Professional Conduct. Billable hour tracking remains a cornerstone of law firm billing, though challenges like time-padding and inefficiencies persist. Contract analysis involves parsing, negotiating, and monitoring agreements, often leveraging AI for clause extraction and risk identification. Use cases span litigation support, M&A due diligence, and compliance with regulatory frameworks.
 
-Legal tech innovations increasingly target automation in these areas, balancing efficiency with adherence to ethical and procedural standards. However, domain-specific nuances—such as privilege carve-outs or jurisdiction-specific contract laws—require careful integration into tools and workflows.  
+Legal tech innovations increasingly target automation in these areas, balancing efficiency with adherence to ethical and procedural standards. However, domain-specific nuances—such as privilege carve-outs or jurisdiction-specific contract laws—require careful integration into tools and workflows.
 
 ## Key Concepts
 | Concept | Definition | Source |
@@ -43,14 +43,14 @@ Legal tech innovations increasingly target automation in these areas, balancing 
 - UTBMS Code Set (task-based billing)
 - ISO/IEC 27001:2022 (information security for legal data)
 - ILTA (International Legal Technology Association) standards
-- State bar ethics opinions on AI use in legal practice  
+- State bar ethics opinions on AI use in legal practice
 
-## Common Patterns  
-1. Use privilege logs to document and manage claims of confidentiality.  
-2. Implement time-tracking systems with granular task categorization for billable hour accuracy.  
-3. Deploy NLP-driven contract analysis tools for clause extraction and risk scoring.  
-4. Integrate CLM platforms with ERP systems for end-to-end contract visibility.  
-5. Apply jurisdiction-specific templates in contract generation to avoid legal gaps.  
+## Common Patterns
+1. Use privilege logs to document and manage claims of confidentiality.
+2. Implement time-tracking systems with granular task categorization for billable hour accuracy.
+3. Deploy NLP-driven contract analysis tools for clause extraction and risk scoring.
+4. Integrate CLM platforms with ERP systems for end-to-end contract visibility.
+5. Apply jurisdiction-specific templates in contract generation to avoid legal gaps.
 
 ## Pitfalls
 - Overlooking privilege exceptions (crime-fraud doctrine, common-interest doctrine) in discovery.
