@@ -4,7 +4,7 @@ id: bld_output_template_llm_evaluation_scenario
 pillar: P05
 llm_function: PRODUCE
 purpose: Template with vars for llm_evaluation_scenario production
-quality: null
+quality: 9.1
 title: "Output Template LLM Evaluation Scenario"
 version: "1.0.0"
 author: n06_wave7
