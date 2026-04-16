@@ -4,7 +4,7 @@ id: bld_examples_agent_name_service_record
 pillar: P07
 llm_function: GOVERN
 purpose: Golden example and anti-examples for agent_name_service_record quality calibration
-quality: null
+quality: 9.1
 title: "Agent Name Service Record Builder -- Examples"
 version: "1.0.0"
 author: wave7_n05
