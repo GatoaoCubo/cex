@@ -4,7 +4,7 @@ id: bld_knowledge_card_workflow_run_crate
 pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for workflow_run_crate production
-quality: null
+quality: 9.2
 title: "Knowledge Card Workflow Run Crate"
 version: "1.0.0"
 author: n04_wave7
