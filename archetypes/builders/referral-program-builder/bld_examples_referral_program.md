@@ -4,7 +4,7 @@ id: bld_examples_referral_program
 pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of referral_program artifacts
-quality: null
+quality: 8.9
 title: "Examples Referral Program"
 version: "1.0.0"
 author: wave1_builder_gen_v2
