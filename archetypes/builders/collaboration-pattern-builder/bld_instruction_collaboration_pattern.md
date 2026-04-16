@@ -4,7 +4,7 @@ id: bld_instruction_collaboration_pattern
 pillar: P03
 llm_function: REASON
 purpose: Step-by-step production process for collaboration_pattern
-quality: null
+quality: 9.0
 title: "Instruction Collaboration Pattern"
 version: "1.0.0"
 author: wave1_builder_gen
