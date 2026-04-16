@@ -4,7 +4,7 @@ id: p03_sp_user_journey_builder
 pillar: P03
 llm_function: BECOME
 purpose: System prompt defining user_journey-builder persona and rules
-quality: null
+quality: 8.9
 title: "System Prompt User Journey"
 version: "1.0.0"
 author: wave1_builder_gen_v2
