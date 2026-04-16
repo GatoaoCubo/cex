@@ -3,8 +3,9 @@ id: kc_sandbox_spec
 kind: knowledge_card
 title: Sandbox Spec
 version: 1.0.0
-quality: null
+quality: 8.7
 pillar: P01
+density_score: 1.0
 ---
 
 # Sandbox Environment Specification for Enterprise Pilot Procurement Gates
