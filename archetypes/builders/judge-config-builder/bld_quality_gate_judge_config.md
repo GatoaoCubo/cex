@@ -4,7 +4,7 @@ id: p07_qg_judge_config
 pillar: P11
 llm_function: GOVERN
 purpose: Quality gate for judge_config ARTIFACTS (structure/fields, not runtime judgment accuracy)
-quality: null
+quality: 9.0
 title: "Quality Gate Judge Config"
 version: "1.1.0"
 author: n03_hybrid_review4
