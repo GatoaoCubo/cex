@@ -3,7 +3,7 @@ id: batch
 kind: instruction
 pillar: P12
 description: "Run many tasks in parallel worktrees. Usage: /batch <intents-file> [--workers N]"
-quality: null
+quality: 9.1
 title: "Batch"
 version: "1.0.0"
 author: n03_builder
