@@ -3,8 +3,9 @@ id: kc_collaboration_pattern
 kind: knowledge_card
 title: Collaboration Pattern
 version: 1.0.0
-quality: null
+quality: 8.7
 pillar: P01
+density_score: 1.0
 ---
 
 # Collaboration Pattern
