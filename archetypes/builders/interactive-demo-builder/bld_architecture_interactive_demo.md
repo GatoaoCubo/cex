@@ -4,7 +4,7 @@ id: bld_architecture_interactive_demo
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of interactive_demo -- inventory, dependencies
-quality: null
+quality: 9.0
 title: "Architecture Interactive Demo"
 version: "1.0.1"
 author: n02_marketing
