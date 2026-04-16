@@ -6,8 +6,9 @@ title: "N02 Marketing - LEVERAGE_MAP_V2 Verification Cycle 2"
 mission: LEVERAGE_MAP_V2
 nucleus: n02
 date: 2026-04-15T21:00:00Z
-quality: null
+quality: 9.0
 version: 2.0
+density_score: 1.0
 ---
 
 # N02 Marketing - LEVERAGE_MAP_V2 Verification Cycle 2
