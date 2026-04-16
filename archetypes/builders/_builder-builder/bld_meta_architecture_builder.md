@@ -68,15 +68,15 @@ Regra: "{{decision_question}}" -> {{type_name}}.
 ```text
 {{flow_diagram}}
 ```
-<!-- NOTE: Diagrama with setas mostrando etapas: -->
-<!-- - model_card: boot_config → model_card (layer 0) → system_prompt → agent -->
-<!-- - KC: Raw Source → Research → KC → Brain Index → Retrieval → Agent -->
-<!-- - signal: dispatch_rule → handoff → execution → signal → monitor -->
-<!-- - quality_gate: artifact produced → quality_gate check → publish/reject -->
-<!-- Indicar ONDE neste fluxo o type se posiciona -->
+<!-- NOTE: Diagram with arrows showing stages: -->
+<!-- - model_card: boot_config -> model_card (layer 0) -> system_prompt -> agent -->
+<!-- - KC: Raw Source -> Research -> KC -> Brain Index -> Retrieval -> Agent -->
+<!-- - signal: dispatch_rule -> handoff -> execution -> signal -> monitor -->
+<!-- - quality_gate: artifact produced -> quality_gate check -> publish/reject -->
+<!-- Indicate WHERE in this flow the type is positioned -->
 
 {{type_name}} is {{layer_description}}.
-<!-- NOTE: Descricao da camada: "INFRASTRUCTURE", "CONTENT LAYER", etc. -->
+<!-- NOTE: Layer description: "INFRASTRUCTURE", "CONTENT LAYER", etc. -->
 
 ## Dependency Graph
 

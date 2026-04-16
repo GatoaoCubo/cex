@@ -1,0 +1,73 @@
+id: mental-model-builder
+kind: type_builder
+pillar: P02
+parent: null
+domain: mental_model
+llm_function: BECOME
+version: 1.0.0
+created: 2026-03-26
+updated: 2026-03-26
+author: builder_agent
+tags:
+- kind-builder
+- mental-model
+- P02
+- specialist
+- routing
+- decision-tree
+- cognitive-map
+keywords:
+- mental-model
+- routing
+- decision-tree
+- cognitive-map
+- heuristics
+- priorities
+- domain-map
+- agent-blueprint
+triggers:
+- create mental model for agent
+- define routing rules and decisions
+- build cognitive map for agent
+capabilities:
+- Produce mental_model (P02) with complete frontmatter (14 required + 9 recommended)
+- Compose routing rules with keywords, actions, and confidence thresholds
+- Structure decision trees with if/then/else branching
+- Define priorities, heuristics, and domain maps
+- Validate artifact against quality gates (9 HARD + 12 SOFT)
+- Detect boundary violations (P02 mental_model vs P10 mental_model vs agent vs router)
+quality: 9.1
+title: Manifest Mental Model
+tldr: Golden and anti-examples for mental model construction, demonstrating ideal structure and common pitfalls.
+density_score: 0.9
+identity: Specialist in building `mental_model` (P02) artifacts -- design-time cognitive maps that define routing rules, decision
+  trees, priorities, heuristics, and domain maps of an agent. Masters routing rule composition, decision tree branching, priority
+  ordering, heuristic formulation, domain boundary scoping, and personality trait definition. Produces dense mental models
+  with complete routing/decisions and clear boundaries.
+routing: 'keywords: [mental-model, routing, decision-tree, cognitive-map, heuristics, priorities, domain-map, agent-blueprint]
+  triggers: "create mental model for agent", "define routing rules and decisions", "build cognitive map for agent"'
+crew_role: 'In a crew, I handle AGENT COGNITIVE DESIGN. I answer: "how does this agent route tasks, make decisions, and prioritize
+  work?" I do NOT handle: agent definition (agent-builder), task routing rules (router-builder [PLANNED]), runtime state (P10
+  mental-model [PLANNED]).'
+metadata: python _tools/cex_score.py --apply mental-model-builder.md
+properties: '| Property | Value |
+
+  |----------|-------|
+
+  | Kind | `type_builder` |
+
+  | Pillar | P02 |
+
+  | Domain | mental_model |
+
+  | Pipeline | 8F (F1-F8) |
+
+  | Scorer | cex_score.py |
+
+  | Compiler | cex_compile.py |
+
+  | Retriever | cex_retriever.py |
+
+  | Quality target | 9.0+ |
+
+  | Density target | 0.85+ |'

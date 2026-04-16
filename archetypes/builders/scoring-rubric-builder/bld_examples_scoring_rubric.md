@@ -59,7 +59,7 @@ This rubric provides the SOFT scoring framework for nuanced quality assessment.
 | Density | 25% | 0-10 | Ratio of concrete data to total text >= 0.80 | 0.93 density, zero filler phrases | 0.65 density, has "this document describes" |
 | Completeness | 25% | 0-10 | All required sections present, >= 3 bullets each | 7 sections, 4+ bullets, all fields filled | 4 sections, some empty, missing tags |
 | Actionability | 20% | 0-10 | Contains commands, code, or specific steps | 3 CLI commands, 2 code snippets, concrete steps | General advice, no specific commands |
-| Boundary | 15% | 0-10 | Clear EH/NAO EH, no drift to other types | Explicit boundary table, 3+ NAO EH rows | Vague scope, overlaps with other kinds |
+| Boundary | 15% | 0-10 | Clear IS/IS NOT, no drift to other types | Explicit boundary table, 3+ IS NOT rows | Vague scope, overlaps with other kinds |
 | References | 15% | 0-10 | >= 1 source URL, dates, verifiable claims | 3 URLs, all accessible, dated 2026 | No URLs, unverifiable claims |
 ## Thresholds
 | Tier | Score | Action |
@@ -79,7 +79,7 @@ This rubric provides the SOFT scoring framework for nuanced quality assessment.
 | Density | automated | validate_kc.py (char ratio calculation) |
 | Completeness | automated | validate_kc.py (section/field counting) |
 | Actionability | manual | Human review for command quality |
-| Boundary | semi-automated | Grep for EH/NAO EH patterns |
+| Boundary | semi-automated | Grep for IS/IS NOT patterns |
 | References | semi-automated | URL presence check + manual accessibility |
 ## References
 - AAC&U VALUE Rubrics: https://www.aacu.org/initiatives/value-initiative

@@ -59,7 +59,7 @@ Body size constraints: minimum 200 bytes (4+ sections with 3+ lines each), maxim
 
 ## Boundary
 
-Registro de aprendizado persistente. NAO eh session_state (efemero) nem axiom (imutavel, nao aprende).
+Persistent learning record. NOT session_state (ephemeral) nor axiom (immutable, does not learn).
 
 
 ## 8F Pipeline Function

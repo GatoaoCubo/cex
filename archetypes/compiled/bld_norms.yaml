@@ -1,7 +1,7 @@
 kind: norms
 id: bld_norms
 pillar: P08
-quality: null
+quality: 9.2
 title: Norms
 version: 1.0.0
 author: n03_builder
@@ -29,7 +29,7 @@ quality_floor:
 - Max 4KB per builder spec
 deep_review_learnings_waves_3_4:
 - 'INSTRUCTIONS.md steps: each numbered step = ONE action (no "and", "then", compound verbs)'
-- 'ARCHITECTURE.md boundary: MUST list ALL sibling kinds in same pillar as "NAO EH" rows'
+- 'ARCHITECTURE.md boundary: MUST list ALL sibling kinds in same pillar as "NOT" rows'
 - 'SCHEMA.md flags/enums: use GENERIC values, not runtime-specific (no --dangerously-skip-permissions)'
 - 'EXAMPLES.md golden IDs: use CEX-universal patterns, minimize framework-specific director names'
 - 'COLLABORATION.md cross-refs: if builder A refs builder B, builder B MUST ref builder A'

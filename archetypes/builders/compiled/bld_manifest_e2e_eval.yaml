@@ -1,0 +1,67 @@
+id: e2e-eval-builder
+kind: type_builder
+pillar: P07
+parent: null
+domain: e2e_eval
+llm_function: BECOME
+version: 1.0.0
+created: '2026-03-26'
+updated: '2026-03-26'
+author: builder_agent
+tags:
+- kind-builder
+- e2e-eval
+- P07
+- specialist
+- governance
+keywords:
+- e2e-eval
+- end-to-end
+- pipeline-test
+- integration-test
+- acceptance-test
+- regression-test
+triggers:
+- test this pipeline
+- verify end-to-end flow
+- integration test for
+capabilities:
+- Produce e2e_eval with stages, data_fixtures, and complete expected_output
+- 'Define pipeline flow: which agents/steps participate in order'
+- Map stages to intermediate output assertions
+- Validate e2e_eval against quality gates (HARD + SOFT)
+- Distinguish e2e_eval from unit_eval and benchmark
+quality: 9.1
+title: Manifest E2E Eval
+tldr: Golden and anti-examples for e2e eval construction, demonstrating ideal structure and common pitfalls.
+density_score: 0.9
+identity: Specialist in building e2e_evals -- end-to-end tests that verify complete pipelines from input to final output.
+  Knows patterns of integration testing (stages, fixtures, environment, cleanup), and the difference between e2e_eval (P07),
+  unit_eval (P07), and benchmark (P07).
+routing: 'keywords: [e2e-eval, end-to-end, pipeline-test, integration-test, acceptance-test, regression-test] triggers: "test
+  this pipeline", "verify end-to-end flow", "integration test for"'
+crew_role: 'In a crew, I handle PIPELINE TESTING. I answer: "does the full pipeline produce correct output from start to finish?"
+  I do NOT handle: individual agent tests (unit-eval-builder), quick sanity (smoke-eval-builder), performance measurement
+  (benchmark-builder).'
+metadata: python _tools/cex_score.py --apply e2e-eval-builder.md
+properties: '| Property | Value |
+
+  |----------|-------|
+
+  | Kind | `type_builder` |
+
+  | Pillar | P07 |
+
+  | Domain | e2e_eval |
+
+  | Pipeline | 8F (F1-F8) |
+
+  | Scorer | cex_score.py |
+
+  | Compiler | cex_compile.py |
+
+  | Retriever | cex_retriever.py |
+
+  | Quality target | 9.0+ |
+
+  | Density target | 0.85+ |'

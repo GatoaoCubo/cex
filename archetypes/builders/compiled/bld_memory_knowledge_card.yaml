@@ -71,7 +71,7 @@ observation_types:
 - project
 - reference
 llm_function: INJECT
-quality: null
+quality: 9.0
 title: Memory ISO - knowledge_card
 density_score: 0.95
 summary: 'Knowledge cards distill domain knowledge into high-density atomic facts. The primary quality gate is density >=
@@ -89,5 +89,5 @@ context: ''
 production_log:
 - '[20260331_214115] PASS kind=knowledge_card retries=0 gates=6/6'
 - '[20260331_214308] PASS kind=knowledge_card retries=0 gates=6/6'
-boundary: Registro de aprendizado persistente. NAO eh session_state (efemero) nem axiom (imutavel, nao aprende).
+boundary: Persistent learning record. NOT session_state (ephemeral) nor axiom (immutable, does not learn).
 8f_pipeline_function: 'Primary function: INJECT'

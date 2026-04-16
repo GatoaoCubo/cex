@@ -55,7 +55,7 @@ density_score: 0.92
 | Density | 25% | >= 0.80 |
 | Completeness | 25% | All required fields present |
 | Actionability | 20% | Concrete examples or commands |
-| Boundary | 15% | EH/NAO EH section |
+| Boundary | 15% | IS/IS NOT section |
 | References | 15% | >= 1 source URL |
 ## Actions
 | Result | Action | Escalation |
