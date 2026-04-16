@@ -4,7 +4,7 @@ id: bld_knowledge_card_c2pa_manifest
 pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for c2pa_manifest production
-quality: null
+quality: 9.2
 title: "Knowledge Card C2PA Manifest"
 version: "1.0.0"
 author: n04_wave7
