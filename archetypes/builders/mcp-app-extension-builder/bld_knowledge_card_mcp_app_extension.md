@@ -4,7 +4,7 @@ id: bld_knowledge_card_mcp_app_extension
 pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for mcp_app_extension production
-quality: null
+quality: 9.2
 title: "Knowledge Card MCP App Extension"
 version: "1.0.0"
 author: wave7_n03_dev_manifests
