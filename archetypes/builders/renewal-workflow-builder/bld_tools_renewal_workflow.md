@@ -4,7 +4,7 @@ id: bld_tools_renewal_workflow
 pillar: P04
 llm_function: CALL
 purpose: Tools available for renewal_workflow production
-quality: null
+quality: 9.0
 title: "Tools Renewal Workflow"
 version: "1.0.0"
 author: wave6_n06
