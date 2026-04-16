@@ -4,7 +4,7 @@ id: bld_tools_agent_profile
 pillar: P04
 llm_function: CALL
 purpose: Tools available for agent_profile production
-quality: null
+quality: 8.9
 title: "Tools Agent Profile"
 version: "1.0.0"
 author: wave1_builder_gen
