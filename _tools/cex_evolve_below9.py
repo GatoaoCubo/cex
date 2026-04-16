@@ -24,7 +24,7 @@ os.chdir(str(CEX_ROOT))
 SKIP_DIRS = {'.git', 'node_modules', '.cex/cache', 'compiled', '_external'}
 
 
-def find_below9(target=9.0):
+def find_below9(target: float = 9.0) -> list[tuple[float, Path]]:
     """Find all artifacts with numeric quality below target."""
     results = []
     for root, dirs, files in os.walk(CEX_ROOT):
@@ -47,7 +47,7 @@ def find_below9(target=9.0):
     return results
 
 
-def evolve_one(filepath):
+def evolve_one(filepath: Path) -> float | None:
     """Run cex_evolve.py single on one file. Returns new quality or None."""
     result = subprocess.run(
         [sys.executable, "_tools/cex_evolve.py", "single", str(filepath),
@@ -72,7 +72,7 @@ def evolve_one(filepath):
     return None
 
 
-def git_commit_batch(cycle, improved, total):
+def git_commit_batch(cycle: int, improved: int, total: int) -> None:
     """Commit the batch."""
     subprocess.run(["git", "add", "-A"], capture_output=True, cwd=str(CEX_ROOT))
     msg = f"[AUTO-BELOW9] cycle {cycle}: {improved}/{total} artifacts improved toward 9.0"
@@ -83,7 +83,7 @@ def git_commit_batch(cycle, improved, total):
     print(f"  [COMMIT] {msg}")
 
 
-def main():
+def main() -> None:
     import argparse
     parser = argparse.ArgumentParser()
     parser.add_argument('--batch', type=int, default=9)
