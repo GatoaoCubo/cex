@@ -3,8 +3,9 @@ id: kc_reasoning_strategy
 kind: knowledge_card
 title: Reasoning Strategy
 version: 1.0.0
-quality: null
+quality: 8.7
 pillar: P01
+density_score: 0.94
 ---
 
 # Reasoning Strategy
