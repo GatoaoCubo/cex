@@ -3,7 +3,7 @@ id: auto-accept-handoff
 kind: runtime_rule
 pillar: P12
 description: "--auto-accept semantics: after manifest, nucleus executes without re-prompting."
-quality: null
+quality: 9.1
 title: "Auto-Accept Handoff"
 version: "1.0.0"
 author: n03_builder
