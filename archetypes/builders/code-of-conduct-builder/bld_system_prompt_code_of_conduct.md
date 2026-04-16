@@ -4,7 +4,7 @@ id: p03_sp_code_of_conduct_builder
 pillar: P03
 llm_function: BECOME
 purpose: System prompt defining code_of_conduct-builder persona and rules
-quality: null
+quality: 9.0
 title: "System Prompt Code of Conduct"
 version: "1.0.0"
 author: n04_knowledge
