@@ -5,7 +5,7 @@ pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for streaming_config production -- SSE, WebSocket, chunked HTTP
 sources: W3C SSE Spec, RFC 6455 (WebSocket), RFC 7230 (Chunked Transfer), WHATWG EventSource
-quality: null
+quality: 9.1
 title: "Knowledge Card Streaming Config"
 version: "1.0.0"
 author: n03_builder
