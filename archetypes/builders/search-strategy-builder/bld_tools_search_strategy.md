@@ -4,7 +4,7 @@ id: bld_tools_search_strategy
 pillar: P04
 llm_function: CALL
 purpose: Tools available for search_strategy production
-quality: null
+quality: 8.9
 title: "Tools Search Strategy"
 version: "1.0.0"
 author: wave1_builder_gen
@@ -16,25 +16,25 @@ updated: "2026-04-13"
 density_score: 0.85
 ---
 
-## Production Tools  
-| Tool | Purpose | When |  
-|---|---|---|  
-| cex_compile.py | Compiles search strategies into executable code | During strategy development |  
-| cex_score.py | Evaluates strategy effectiveness using metrics | After strategy execution |  
-| cex_retriever.py | Fetches data from external sources | During query processing |  
-| cex_doctor.py | Diagnoses strategy errors and inefficiencies | During testing/iteration |  
-| cex_optimizer.py | Refines strategies for performance | Post-initial deployment |  
-| cex_executor.py | Runs compiled strategies in production | In live search operations |  
+## Production Tools
+| Tool | Purpose | When |
+|---|---|---|
+| cex_compile.py | Compiles search strategies into executable code | During strategy development |
+| cex_score.py | Evaluates strategy effectiveness using metrics | After strategy execution |
+| cex_retriever.py | Fetches data from external sources | During query processing |
+| cex_doctor.py | Diagnoses strategy errors and inefficiencies | During testing/iteration |
+| cex_optimizer.py | Refines strategies for performance | Post-initial deployment |
+| cex_executor.py | Runs compiled strategies in production | In live search operations |
 
-## Validation Tools  
-| Tool | Purpose | When |  
-|---|---|---|  
-| val_checker.py | Validates strategy syntax and logic | Pre-deployment |  
-| val_simulator.py | Simulates strategy behavior under stress | During QA |  
-| val_analyzer.py | Compares strategy outputs against benchmarks | Post-execution |  
-| val_reporter.py | Generates validation summary reports | After testing |  
+## Validation Tools
+| Tool | Purpose | When |
+|---|---|---|
+| val_checker.py | Validates strategy syntax and logic | Pre-deployment |
+| val_simulator.py | Simulates strategy behavior under stress | During QA |
+| val_analyzer.py | Compares strategy outputs against benchmarks | Post-execution |
+| val_reporter.py | Generates validation summary reports | After testing |
 
-## External References  
-- Elasticsearch: Full-text search and analytics engine  
-- LangChain: Framework for building LLM-powered search pipelines  
+## External References
+- Elasticsearch: Full-text search and analytics engine
+- LangChain: Framework for building LLM-powered search pipelines
 - Pandas: Data manipulation for strategy input/output processing
