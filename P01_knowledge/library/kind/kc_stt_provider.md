@@ -3,8 +3,9 @@ id: kc_stt_provider
 kind: knowledge_card
 title: Speech-to-Text Provider Integration
 version: 1.0.0
-quality: null
+quality: 8.7
 pillar: P01
+density_score: 1.0
 ---
 
 # Speech-to-Text Provider Integration
