@@ -4,7 +4,7 @@ id: bld_collaboration_thinking_config
 pillar: P12
 llm_function: COLLABORATE
 purpose: How thinking_config-builder works in crews with other builders
-quality: null
+quality: 8.9
 title: "Collaboration Thinking Config"
 version: "1.0.0"
 author: wave1_builder_gen
@@ -16,26 +16,26 @@ updated: "2026-04-13"
 density_score: 0.85
 ---
 
-## Crew Role  
+## Crew Role
 
 This ISO configures a thinking budget: how many tokens the model may spend on internal reasoning before emitting.
-Allocates and enforces thinking budget constraints (e.g., time, computational resources) for consistent reasoning execution.  
+Allocates and enforces thinking budget constraints (e.g., time, computational resources) for consistent reasoning execution.
 
-## Receives From  
-| Builder       | What             | Format  |  
-|---------------|------------------|---------|  
-| Planner       | Budget parameters | JSON    |  
-| Validator     | Constraint rules  | YAML    |  
-| Monitor       | Resource limits   | CSV     |  
+## Receives From
+| Builder       | What             | Format  |
+|---------------|------------------|---------|
+| Planner       | Budget parameters | JSON    |
+| Validator     | Constraint rules  | YAML    |
+| Monitor       | Resource limits   | CSV     |
 
-## Produces For  
-| Builder       | What               | Format  |  
-|---------------|--------------------|---------|  
-| Executor      | Thinking config    | JSON    |  
-| Reporter      | Budget report      | YAML    |  
-| Allocator     | Allocation plan    | CSV     |  
+## Produces For
+| Builder       | What               | Format  |
+|---------------|--------------------|---------|
+| Executor      | Thinking config    | JSON    |
+| Reporter      | Budget report      | YAML    |
+| Allocator     | Allocation plan    | CSV     |
 
-## Boundary  
+## Boundary
 Does NOT define reasoning techniques (handled by reasoning_strategy builder) or input token
 limits (handled by context_window_config builder) or task effort profiles (handled by
 effort_profile builder).
