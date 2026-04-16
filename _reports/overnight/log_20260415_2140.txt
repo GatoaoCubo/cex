@@ -8,3 +8,6 @@
 [21:49:11] Phase A wave W5 -- 6 files -- report=_reports/ops/type_hint_retrofit_w5_20260415_2140.md
 [21:49:14] Dispatched wave W5: [N05] Spawned PID:23592 CLI:codex Session:s1776000761 at (640,516)
 [21:53:14] Wave W5 result=COMPLETE
+[21:53:22] Phase A wave W6 -- 3 files -- report=_reports/ops/type_hint_retrofit_w6_20260415_2140.md
+[21:53:25] Dispatched wave W6: [N05] Spawned PID:38644 CLI:codex Session:s1776000761 at (640,516)
+[21:56:55] Wave W6 result=COMPLETE
