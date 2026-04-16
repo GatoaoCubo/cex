@@ -5,7 +5,7 @@ pillar: P08
 parent: dual-loop-architecture-builder
 llm_function: CONSTRAIN
 purpose: Component map of dual_loop_architecture -- inner/outer loops, memory bridge, cadence
-quality: null
+quality: 9.1
 title: "Architecture Dual Loop Architecture"
 version: "1.0.0"
 author: wave1_builder_gen
