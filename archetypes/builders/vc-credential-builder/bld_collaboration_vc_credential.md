@@ -4,7 +4,7 @@ id: bld_collaboration_vc_credential
 pillar: P12
 llm_function: COLLABORATE
 purpose: How vc_credential-builder works in crews with other builders
-quality: null
+quality: 8.9
 title: "Collaboration VC Credential"
 version: "1.0.0"
 author: n04_wave7
