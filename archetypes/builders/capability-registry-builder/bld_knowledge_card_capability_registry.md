@@ -4,7 +4,7 @@ id: bld_knowledge_card_capability_registry
 pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for capability_registry production
-quality: null
+quality: 9.2
 title: "Knowledge Card Capability Registry"
 version: "1.0.0"
 author: n04_wave8
