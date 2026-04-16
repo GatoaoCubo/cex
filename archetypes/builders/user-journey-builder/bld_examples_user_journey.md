@@ -4,7 +4,7 @@ id: bld_examples_user_journey
 pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of user_journey artifacts
-quality: null
+quality: 8.8
 title: "Examples User Journey"
 version: "1.0.0"
 author: wave1_builder_gen_v2
@@ -24,52 +24,52 @@ author: Jane Doe, UX Researcher
 date: 2023-10-15
 tools: HubSpot, Slack, Stripe, Zoom
 ---
-**Awareness**  
-- Touchpoint: LinkedIn ad (HubSpot)  
-- User Action: Clicks "Start Free Trial"  
-- Emotion: Curiosity  
-- Pain Point: No clear ROI from current tools  
+**Awareness**
+- Touchpoint: LinkedIn ad (HubSpot)
+- User Action: Clicks "Start Free Trial"
+- Emotion: Curiosity
+- Pain Point: No clear ROI from current tools
 
-**Consideration**  
-- Touchpoint: Demo request via Slack (Intercom)  
-- User Action: Schedules Zoom call with sales  
-- Emotion: Skepticism  
-- Pain Point: Unclear integration with existing workflows  
+**Consideration**
+- Touchpoint: Demo request via Slack (Intercom)
+- User Action: Schedules Zoom call with sales
+- Emotion: Skepticism
+- Pain Point: Unclear integration with existing workflows
 
-**Conversion**  
-- Touchpoint: Stripe payment page  
-- User Action: Completes 30-day trial  
-- Emotion: Excitement  
-- Pain Point: No immediate value visible  
+**Conversion**
+- Touchpoint: Stripe payment page
+- User Action: Completes 30-day trial
+- Emotion: Excitement
+- Pain Point: No immediate value visible
 
-**Retention**  
-- Touchpoint: Weekly onboarding emails (HubSpot)  
-- User Action: Completes 70% of tutorial  
-- Emotion: Frustration  
-- Pain Point: Missing key features  
+**Retention**
+- Touchpoint: Weekly onboarding emails (HubSpot)
+- User Action: Completes 70% of tutorial
+- Emotion: Frustration
+- Pain Point: Missing key features
 
-**Advocacy**  
-- Touchpoint: NPS survey (Delighted)  
-- User Action: Recommends to peers  
-- Emotion: Satisfaction  
-- Pain Point: None  
+**Advocacy**
+- Touchpoint: NPS survey (Delighted)
+- User Action: Recommends to peers
+- Emotion: Satisfaction
+- Pain Point: None
 
-## Anti-Example 1: Confusing journey with workflow  
+## Anti-Example 1: Confusing journey with workflow
 ---
-**Awareness**  
-- Touchpoint: Website homepage  
-- User Action: Clicks "Sign Up"  
-- Emotion: None  
-- Pain Point: None  
+**Awareness**
+- Touchpoint: Website homepage
+- User Action: Clicks "Sign Up"
+- Emotion: None
+- Pain Point: None
 
-**Why it fails**: Focuses only on a single action ("Sign Up") without mapping emotional states, touchpoints across channels, or long-term engagement. It’s a workflow, not a journey.  
+**Why it fails**: Focuses only on a single action ("Sign Up") without mapping emotional states, touchpoints across channels, or long-term engagement. It’s a workflow, not a journey.
 
-## Anti-Example 2: Generic placeholders  
+## Anti-Example 2: Generic placeholders
 ---
-**Awareness**  
-- Touchpoint: "ProviderA ad"  
-- User Action: "Clicks link"  
-- Emotion: "Curiosity"  
-- Pain Point: "No clear value"  
+**Awareness**
+- Touchpoint: "ProviderA ad"
+- User Action: "Clicks link"
+- Emotion: "Curiosity"
+- Pain Point: "No clear value"
 
 **Why it fails**: Uses vague terms like "ProviderA" and "no clear value" without context. Fails to specify real tools, user emotions, or actionable insights for improvement.
