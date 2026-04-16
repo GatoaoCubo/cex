@@ -4,7 +4,7 @@ id: bld_collaboration_code_of_conduct
 pillar: P12
 llm_function: COLLABORATE
 purpose: How code_of_conduct-builder works in crews with other builders
-quality: null
+quality: 8.9
 title: "Collaboration Code of Conduct"
 version: "1.0.0"
 author: n04_knowledge
