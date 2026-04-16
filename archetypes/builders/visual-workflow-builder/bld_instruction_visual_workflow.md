@@ -4,7 +4,7 @@ id: bld_instruction_visual_workflow
 pillar: P03
 llm_function: REASON
 purpose: Step-by-step production process for visual_workflow
-quality: null
+quality: 8.8
 title: "Instruction Visual Workflow"
 version: "1.0.0"
 author: wave1_builder_gen_v2
