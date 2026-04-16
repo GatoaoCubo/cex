@@ -4,7 +4,7 @@ id: bld_instruction_sdk_example
 pillar: P03
 llm_function: REASON
 purpose: Step-by-step production process for sdk_example
-quality: null
+quality: 8.9
 title: "Instruction Sdk Example"
 version: "1.0.0"
 author: wave1_builder_gen_v2
