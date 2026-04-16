@@ -4,7 +4,7 @@ id: p07_qg_llm_evaluation_scenario
 pillar: P11
 llm_function: GOVERN
 purpose: Quality gate with HARD and SOFT scoring for llm_evaluation_scenario
-quality: null
+quality: 9.0
 title: "Quality Gate LLM Evaluation Scenario"
 version: "1.0.0"
 author: n06_wave7
