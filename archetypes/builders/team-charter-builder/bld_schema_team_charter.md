@@ -4,7 +4,7 @@ id: bld_schema_team_charter
 pillar: P06
 llm_function: CONSTRAIN
 purpose: Formal schema -- SINGLE SOURCE OF TRUTH for team_charter
-quality: null
+quality: 9.2
 title: "Schema Team Charter"
 version: "1.0.0"
 author: n06_wave8
