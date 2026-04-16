@@ -4,7 +4,7 @@ id: bld_architecture_kind
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of kind-builder -- how builders fit in the CEX architecture
-quality: null
+quality: 9.1
 title: "Architecture Kind Builder"
 version: "1.0.0"
 author: n03_builder
