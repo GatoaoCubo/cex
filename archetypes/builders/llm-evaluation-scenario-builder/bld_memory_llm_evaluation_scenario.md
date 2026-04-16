@@ -4,7 +4,7 @@ id: p10_lr_llm_evaluation_scenario_builder
 pillar: P10
 llm_function: INJECT
 purpose: Learned patterns and pitfalls for llm_evaluation_scenario construction
-quality: null
+quality: 8.7
 title: "Learning Record LLM Evaluation Scenario"
 version: "1.0.0"
 author: n06_wave7
