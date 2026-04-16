@@ -4,7 +4,7 @@ id: bld_examples_reranker_config
 pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of reranker_config artifacts
-quality: null
+quality: 8.8
 title: "Examples Reranker Config"
 version: "1.0.0"
 author: wave1_builder_gen_v2
