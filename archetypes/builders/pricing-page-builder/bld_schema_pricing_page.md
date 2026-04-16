@@ -4,7 +4,7 @@ id: bld_schema_pricing_page
 pillar: P06
 llm_function: CONSTRAIN
 purpose: Formal schema -- SINGLE SOURCE OF TRUTH for pricing_page
-quality: null
+quality: 9.1
 title: "Schema Pricing Page"
 version: "1.0.0"
 author: wave1_builder_gen_v2
