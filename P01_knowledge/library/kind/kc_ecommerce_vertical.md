@@ -3,8 +3,9 @@ id: kc_ecommerce_vertical
 kind: knowledge_card
 title: eCommerce Vertical Knowledge Card
 version: 1.0.0
-quality: null
+quality: 8.8
 pillar: P01
+density_score: 1.0
 ---
 
 # 🛍️ eCommerce Vertical Knowledge Card
