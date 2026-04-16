@@ -4,7 +4,7 @@ id: bld_architecture_ab_test_config
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of ab_test_config -- inventory, dependencies
-quality: null
+quality: 9.0
 title: "Architecture Ab Test Config"
 version: "1.0.0"
 author: wave1_builder_gen_v2
