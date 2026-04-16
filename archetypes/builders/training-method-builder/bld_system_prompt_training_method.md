@@ -3,7 +3,7 @@ id: p03_sp_training_method_builder
 kind: system_prompt
 pillar: P03
 version: 1.0.0
-quality: null
+quality: 9.0
 title: "System Prompt Training Method Builder"
 tags: [training_method, system_prompt, builder, P03]
 tldr: "System prompt for training-method-builder: ML training paradigm specification specialist."
