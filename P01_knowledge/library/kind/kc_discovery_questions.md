@@ -3,8 +3,9 @@ id: kc_discovery_questions
 kind: knowledge_card
 title: MEDDIC/BANT Discovery Question Bank
 version: 1.0.0
-quality: null
+quality: 8.5
 pillar: P01
+density_score: 0.89
 ---
 
 **MEDDIC Framework Questions**  
