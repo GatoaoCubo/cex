@@ -3,8 +3,9 @@ id: kc_github_issue_template
 kind: knowledge_card
 title: GitHub Issue Template
 version: 1.0.0
-quality: null
+quality: 8.6
 pillar: P01
+density_score: 1.0
 ---
 
 # GitHub Issue Template
