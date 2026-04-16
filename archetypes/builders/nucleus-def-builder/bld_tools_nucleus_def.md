@@ -4,7 +4,7 @@ id: bld_tools_nucleus_def
 pillar: P04
 llm_function: CALL
 purpose: Tools available for nucleus_def production
-quality: null
+quality: 9.0
 title: "Tools Nucleus Def"
 version: "1.0.0"
 author: n05_wave8
