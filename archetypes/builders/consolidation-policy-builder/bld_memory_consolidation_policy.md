@@ -4,7 +4,7 @@ id: p10_mem_consolidation_policy_builder
 pillar: P10
 llm_function: INJECT
 purpose: Learned patterns and pitfalls for consolidation_policy construction
-quality: null
+quality: 8.9
 title: "Memory: consolidation_policy-builder patterns"
 version: "2.0.0"
 author: n06_commercial
