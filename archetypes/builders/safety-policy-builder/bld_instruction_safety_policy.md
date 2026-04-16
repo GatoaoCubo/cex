@@ -4,7 +4,7 @@ id: bld_instruction_safety_policy
 pillar: P03
 llm_function: REASON
 purpose: Step-by-step production process for safety_policy
-quality: null
+quality: 8.8
 title: "Instruction Safety Policy"
 version: "1.0.0"
 author: wave1_builder_gen
