@@ -4,7 +4,7 @@ id: p10_mem_analyst_briefing_builder
 pillar: P10
 llm_function: INJECT
 purpose: Learned patterns and pitfalls for analyst_briefing construction
-quality: null
+quality: 8.8
 title: "Learning Record Analyst Briefing"
 version: "1.0.0"
 author: n01_wave6
