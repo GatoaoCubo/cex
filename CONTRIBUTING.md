@@ -1,16 +1,22 @@
 # Contributing to CEX
 
 CEX follows the Shokunin standard: quality over speed, density over volume.
-Every contribution must pass `cex_doctor` before merging.
+Every contribution must pass `cex_doctor` **and** the 8F pipeline before merging.
+
+By participating, you agree to the [Code of Conduct](CODE_OF_CONDUCT.md).
+Security issues go through [SECURITY.md](SECURITY.md) — never in public issues.
 
 ---
 
 ## Prerequisites
 
 - Python 3.10+
-- Git with pre-commit hooks: `cd _tools && python setup_hooks.py`
+- Git with pre-commit hooks: `python _tools/cex_hooks.py install`
+- `gitleaks` installed (`brew install gitleaks` / `choco install gitleaks`) — the pre-commit scan runs it against `.github/gitleaks.toml`
 - Read `archetypes/CODEX.md` (DNA, naming, density rules)
 - Read `archetypes/MANDAMENTOS.md` (10 immutable laws)
+- Read [CLAUDE.md](CLAUDE.md) — the LLM entry point, explains nuclei + 8F pipeline
+- Read [`.claude/rules/8f-reasoning.md`](.claude/rules/8f-reasoning.md) — every artifact must show the F1→F8 trace
 
 ---
 
@@ -143,14 +149,35 @@ density_score: 0.88
 
 ## Quality Gate
 
-| Criteria | Threshold |
-|----------|-----------|
-| `cex_doctor` | 0 FAIL |
-| Density score | >= 0.80 |
-| Quality score | >= 8.0 (published), >= 7.0 (experimental) |
-| Naming | v2.0 compliant |
-| Frontmatter | All required fields present |
-| Dual output | `.md` + compiled counterpart |
+| Criteria | Threshold | Enforced by |
+|----------|-----------|-------------|
+| `cex_doctor` | 0 FAIL | `python _tools/cex_doctor.py` |
+| Density score | >= 0.80 | `python _tools/cex_score.py` |
+| Quality score | >= 8.0 (published), >= 7.0 (experimental) | Peer review — never self-scored |
+| Naming | v2.0 compliant | `python _tools/cex_hooks.py validate-all` |
+| Frontmatter | All required fields present | Pre-commit hook |
+| Dual output | `.md` + compiled counterpart | `python _tools/cex_compile.py --all` |
+| 8F trace | F1→F8 visible in commit or PR description | PR review |
+| ASCII-only code | `.py` / `.ps1` / `.sh` are ASCII (see `.claude/rules/ascii-code-rule.md`) | Pre-commit + `cex_sanitize.py` |
+| Secret scan | No credentials / keys leaked | `gitleaks` via `.github/gitleaks.toml` |
+
+### 8F Pipeline Requirement
+
+Every artifact built (not every doc tweak) must pass through the full 8F pipeline:
+
+```
+F1 CONSTRAIN  → resolve kind, load schema, set limits
+F2 BECOME     → load builder identity (13 ISO files)
+F3 INJECT     → pull KCs, examples, memory, brand
+F4 REASON     → plan approach, resolve ambiguity via GDP
+F5 CALL       → discover tools, cross-reference existing work
+F6 PRODUCE    → generate artifact with full context
+F7 GOVERN     → hard gates (structure, schema, rubric, semantics)
+F8 COLLABORATE→ save, compile, commit, signal downstream
+```
+
+Either run `python _tools/cex_8f_runner.py "your intent" --kind <kind> --execute`
+or document the F1–F8 reasoning in the PR description.
 
 ---
 
@@ -169,4 +196,29 @@ density_score: 0.88
 
 ---
 
-*CEX CONTRIBUTING v3.0 | 2026-03-30 | Quality: Shokunin*
+## Security
+
+- **Never** commit credentials, API keys, or `.env` files. The `gitleaks` pre-commit hook blocks common patterns.
+- Report vulnerabilities privately through [SECURITY.md](SECURITY.md), not in public issues.
+- When adding new secret-shaped variables, extend `.github/gitleaks.toml` with an allowlist entry + justification.
+
+---
+
+## Multi-runtime contract
+
+CEX runs on **Claude, Codex (OpenAI), Gemini, and Ollama**. Any code or
+artifact that changes runtime behavior must work across all four, or
+declare the exception explicitly in its frontmatter.
+
+Before opening a PR that touches dispatch, boot scripts, or hooks:
+
+```bash
+python _tools/cex_showoff.py --wave 1   # ollama smoke
+python _tools/cex_showoff.py --wave 4   # claude smoke
+```
+
+See `_docs/specs/spec_multi_runtime_features.md` for the compatibility matrix.
+
+---
+
+*CEX CONTRIBUTING v4.0 | 2026-04-16 | Quality: Shokunin*

@@ -210,7 +210,8 @@ N07 must know every step and apply it automatically:
 
 ## Example Transmutation
 
-User input: "quero melhorar os artefatos que estao ruins"
+User input (EN): "I want to fix the artifacts that turned out bad"
+User input (PT): "quero melhorar os artefatos que estao ruins"
 
 N07 resolves intent (industry: intent resolution):
 - Intent: improve low-quality artifacts

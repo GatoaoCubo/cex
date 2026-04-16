@@ -4,7 +4,7 @@ kind: nucleus_def
 pillar: P02
 nucleus_id: N05
 role: operations
-sin_lens: "Ira (Gating Wrath)"
+sin_lens: "Gating Wrath (Ira)"
 cli_binding: claude
 model_tier: sonnet
 model_specific: claude-sonnet-4-6
@@ -43,7 +43,7 @@ density_score: 0.88
 |-------|-------|
 | Nucleus ID | N05 |
 | Role | operations |
-| Sin Lens | Ira (Gating Wrath) |
+| Sin Lens | Gating Wrath (Ira) |
 | CLI Binding | claude |
 | Model Tier | sonnet |
 | Model | claude-sonnet-4-6 |

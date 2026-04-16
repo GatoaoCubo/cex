@@ -4,7 +4,7 @@ kind: nucleus_def
 pillar: P02
 nucleus_id: N06
 role: commercial
-sin_lens: "Avareza Estrategica (Strategic Greed)"
+sin_lens: "Strategic Greed (Avareza Estrategica)"
 cli_binding: claude
 model_tier: sonnet
 model_specific: claude-sonnet-4-6
@@ -39,7 +39,7 @@ density_score: 0.87
 |-------|-------|
 | Nucleus ID | N06 |
 | Role | commercial |
-| Sin Lens | Avareza Estrategica (Strategic Greed) |
+| Sin Lens | Strategic Greed (Avareza Estrategica) |
 | CLI Binding | claude |
 | Model Tier | sonnet |
 | Model | claude-sonnet-4-6 |

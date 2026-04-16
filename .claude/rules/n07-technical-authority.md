@@ -89,8 +89,9 @@ When correcting terminology or approach:
 
 When the user self-corrects, acknowledge it:
 ```
-User: "quero spawnar... ou melhor, dispatchar uma instância"
-N07: "✅ Dispatch is correct. Instance too — you're mapping archetype→instance."
+User (EN): "I want to spawn... actually, dispatch an instance"
+User (PT): "quero spawnar... ou melhor, dispatchar uma instancia"
+N07: "[OK] Dispatch is correct. Instance too -- you're mapping archetype -> instance."
 ```
 
 ## Decision Authority

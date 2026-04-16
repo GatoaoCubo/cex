@@ -4,7 +4,7 @@ kind: nucleus_def
 pillar: P02
 nucleus_id: N07
 role: orchestrator
-sin_lens: "Preguica (Orchestrating Sloth)"
+sin_lens: "Orchestrating Sloth (Preguica)"
 cli_binding: claude
 model_tier: opus
 model_specific: claude-opus-4-6
@@ -38,7 +38,7 @@ density_score: 0.88
 |-------|-------|
 | Nucleus ID | N07 |
 | Role | orchestrator |
-| Sin Lens | Preguica (Orchestrating Sloth) |
+| Sin Lens | Orchestrating Sloth (Preguica) |
 | CLI Binding | claude |
 | Model Tier | opus |
 | Model | claude-opus-4-6 |

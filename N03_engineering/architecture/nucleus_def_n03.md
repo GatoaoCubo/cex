@@ -4,7 +4,7 @@ kind: nucleus_def
 pillar: P02
 nucleus_id: N03
 role: builder
-sin_lens: "Soberba Inventiva (Inventive Pride)"
+sin_lens: "Inventive Pride (Soberba Inventiva)"
 cli_binding: claude
 model_tier: opus
 model_specific: claude-opus-4-6
@@ -41,7 +41,7 @@ density_score: 0.88
 |-------|-------|
 | Nucleus ID | N03 |
 | Role | builder |
-| Sin Lens | Soberba Inventiva |
+| Sin Lens | Inventive Pride (Soberba Inventiva) |
 | CLI Binding | claude |
 | Model Tier | opus |
 | Model | claude-opus-4-6 |

@@ -1,6 +1,39 @@
-# CEX — Typed Knowledge System for LLM Agents
+# CEX — Cognitive Enterprise X · Typed Knowledge System for LLM Agents
 
-> 257 kinds · 260 builders · 3381 ISOs · 12 pillars · 8 nuclei (N00-N07) · 8F pipeline · cex_sdk runtime · 82 tools
+> 257 kinds · 259 builders · 3381 ISOs · 12 pillars · 8 nuclei (N00-N07) · 8F pipeline · cex_sdk runtime · 152 tools · 4 runtimes (Claude / Codex / Gemini / Ollama)
+
+## Positioning
+
+**CEX is not an agent. It is an enterprise brain.**
+
+Most "AI agents" are a system prompt plus a few tools. CEX treats enterprise AI as typed
+infrastructure: every piece of knowledge is a kind, every kind has a builder, every builder
+follows the 8-function pipeline, and seven sin-driven nuclei collaborate through a governance
+layer that compounds over time.
+
+Three properties:
+
+- **Composable** — 8F × 12 pillars × 257 kinds = the factory floor. Spawn a nucleus in minutes.
+- **Sovereign** — runs on Claude, GPT, Gemini, or Ollama. Knowledge lives in *your* repo.
+- **Self-assimilating** — every conversation compiles into typed, governed, searchable assets.
+
+## The Seven Sins, The Seven Nuclei
+
+Each operational nucleus runs on one of the seven deadly sins. The sin is cultural DNA — it
+decides what the nucleus optimizes for when given ambiguous input. Values are verbatim from
+`N0X_*/architecture/nucleus_def_n0X.md`.
+
+| Nucleus | Role | Sin Lens | Model Tier |
+|---------|------|----------|------------|
+| N01 | intelligence | Analytical Envy *(Inveja Analítica)* | Sonnet |
+| N02 | marketing | Creative Lust *(Luxúria Criativa)* | Sonnet |
+| N03 | engineering | Inventive Pride *(Soberba Inventiva)* | **Opus** |
+| N04 | knowledge | Knowledge Gluttony *(Gula do Conhecimento)* | Sonnet |
+| N05 | operations | Gating Wrath *(Ira)* | Sonnet |
+| N06 | commercial | Strategic Greed *(Avareza Estratégica)* | Sonnet |
+| N07 | orchestrator | Orchestrating Sloth *(Preguiça Orquestradora)* | **Opus** |
+
+N00 Genesis is the pre-sin archetype — the template from which N01–N07 are born.
 
 ## Brand Identity
 
