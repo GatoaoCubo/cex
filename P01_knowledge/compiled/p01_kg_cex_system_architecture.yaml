@@ -50,7 +50,7 @@ relation_types: '| Name | Source Type | Target Type | Description | Directionali
   | feeds | Artifact | Artifact | One artifact is consumed as input when producing another artifact | directed |'
 storage_backend: in_memory
 traversal_strategy: hybrid
-quality: null
+quality: 9.1
 tags:
 - knowledge_graph
 - cex-architecture
