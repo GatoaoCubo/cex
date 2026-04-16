@@ -4,7 +4,7 @@ id: bld_output_template_healthcare_vertical
 pillar: P05
 llm_function: PRODUCE
 purpose: Template with vars for healthcare_vertical production
-quality: null
+quality: 8.7
 title: "Output Template Healthcare Vertical"
 version: "1.0.0"
 author: wave1_builder_gen_v2
