@@ -31,6 +31,7 @@ import os
 import sys
 import time
 from pathlib import Path
+from typing import Any
 
 try:
     import numpy as np
@@ -84,7 +85,7 @@ class VectorStore:
                 encoding="utf-8"
             )
 
-    def add(self, doc_id, vector, metadata=None):
+    def add(self, doc_id: str, vector: Any, metadata: dict[str, Any] | None = None) -> None:
         """Add a document vector to the store.
 
         Args:
@@ -119,7 +120,12 @@ class VectorStore:
         if metadata:
             self.metadata[doc_id] = metadata
 
-    def search(self, query_vector, top_k=5, threshold=0.0):
+    def search(
+        self,
+        query_vector: Any,
+        top_k: int = 5,
+        threshold: float = 0.0,
+    ) -> list[tuple[str, float, dict[str, Any]]]:
         """Search for most similar vectors.
 
         Args:
@@ -159,7 +165,7 @@ class VectorStore:
 
         return results
 
-    def remove(self, doc_id):
+    def remove(self, doc_id: str) -> bool:
         """Remove a document from the store."""
         if doc_id not in self.ids:
             return False
@@ -171,15 +177,15 @@ class VectorStore:
             self.vectors = None
         return True
 
-    def save(self):
+    def save(self) -> None:
         """Explicit save (also called by CLI commands)."""
         self._save()
 
-    def count(self):
+    def count(self) -> int:
         """Number of vectors in store."""
         return len(self.ids)
 
-    def dimensions(self):
+    def dimensions(self) -> int:
         """Embedding dimensions."""
         if self.vectors is not None:
             return self.vectors.shape[1]
@@ -190,7 +196,11 @@ class VectorStore:
 # Ollama Embedding Helper
 # ================================================================
 
-def get_embedding(text, model=EMBED_MODEL, base_url=OLLAMA_BASE):
+def get_embedding(
+    text: str,
+    model: str = EMBED_MODEL,
+    base_url: str = OLLAMA_BASE,
+) -> list[float] | None:
     """Get embedding vector from Ollama /api/embed endpoint.
 
     Args:
@@ -259,7 +269,7 @@ def _collect_artifacts():
     return artifacts
 
 
-def main():
+def main() -> None:
     parser = argparse.ArgumentParser(
         description="CEX Vector Store -- L2 semantic retriever (numpy cosine)"
     )
