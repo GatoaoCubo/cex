@@ -4,7 +4,7 @@ id: bld_knowledge_card_procedural_memory
 pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for procedural_memory production
-quality: null
+quality: 9.2
 title: "Knowledge Card: procedural_memory Builder"
 version: "2.0.0"
 author: n06_commercial
