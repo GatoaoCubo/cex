@@ -4,7 +4,7 @@ id: bld_output_template_model_registry
 pillar: P05
 llm_function: PRODUCE
 purpose: Template with vars for model_registry production
-quality: null
+quality: 9.1
 title: "Output Template Model Registry"
 version: "1.0.0"
 author: wave1_builder_gen
