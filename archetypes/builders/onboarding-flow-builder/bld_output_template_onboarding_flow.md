@@ -4,7 +4,7 @@ id: bld_output_template_onboarding_flow
 pillar: P05
 llm_function: PRODUCE
 purpose: Template with vars for onboarding_flow production
-quality: null
+quality: 8.9
 title: "Output Template Onboarding Flow"
 version: "1.0.0"
 author: wave1_builder_gen_v2
