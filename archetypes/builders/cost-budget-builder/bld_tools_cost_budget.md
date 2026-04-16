@@ -4,7 +4,7 @@ id: bld_tools_cost_budget
 pillar: P04
 llm_function: CALL
 purpose: Tools and APIs available for cost_budget production
-quality: null
+quality: 9.1
 title: "Tools Cost Budget"
 version: "1.0.0"
 author: n03_builder
