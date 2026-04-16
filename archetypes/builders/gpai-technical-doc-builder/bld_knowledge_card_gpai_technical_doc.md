@@ -4,7 +4,7 @@ id: bld_knowledge_card_gpai_technical_doc
 pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for gpai_technical_doc production
-quality: null
+quality: 9.2
 title: "Knowledge Card GPAI Technical Doc"
 version: "1.0.0"
 author: n01_wave7
