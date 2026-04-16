@@ -4,7 +4,7 @@ id: p01_qg_dataset_card
 pillar: P11
 llm_function: GOVERN
 purpose: Quality gate with HARD and SOFT scoring for dataset_card
-quality: null
+quality: 8.9
 title: "Quality Gate Dataset Card"
 version: "1.0.0"
 author: wave1_builder_gen
