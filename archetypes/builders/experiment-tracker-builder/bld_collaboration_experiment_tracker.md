@@ -4,7 +4,7 @@ id: bld_collaboration_experiment_tracker
 pillar: P12
 llm_function: COLLABORATE
 purpose: How experiment_tracker-builder works in crews with other builders
-quality: null
+quality: 8.9
 title: "Collaboration Experiment Tracker"
 version: "1.0.0"
 author: wave1_builder_gen
