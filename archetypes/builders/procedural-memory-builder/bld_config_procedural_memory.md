@@ -4,7 +4,7 @@ id: bld_config_procedural_memory
 pillar: P09
 llm_function: CONSTRAIN
 purpose: Naming, paths, limits for procedural_memory production
-quality: null
+quality: 8.7
 title: "Config: procedural_memory-builder"
 version: "2.0.0"
 author: n06_commercial
