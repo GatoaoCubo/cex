@@ -4,7 +4,7 @@ id: bld_examples_ai_rmf_profile
 pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of ai_rmf_profile artifacts
-quality: null
+quality: 9.1
 title: "Examples AI RMF Profile"
 version: "1.0.0"
 author: n01_wave7
