@@ -4,7 +4,7 @@ id: p03_sp_churn_prevention_playbook_builder
 pillar: P03
 llm_function: BECOME
 purpose: System prompt defining churn_prevention_playbook-builder persona and rules
-quality: null
+quality: 8.9
 title: "System Prompt Churn Prevention Playbook"
 version: "1.0.0"
 author: n05_wave6
