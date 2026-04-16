@@ -4,7 +4,7 @@ id: p03_sp_bias_audit_builder
 pillar: P03
 llm_function: BECOME
 purpose: System prompt defining bias_audit-builder persona and rules
-quality: null
+quality: 8.8
 title: "System Prompt Bias Audit"
 version: "1.0.0"
 author: wave1_builder_gen
