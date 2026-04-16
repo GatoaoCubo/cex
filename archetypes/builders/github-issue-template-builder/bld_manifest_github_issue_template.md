@@ -4,7 +4,7 @@ id: github-issue-template-builder
 pillar: P05
 llm_function: BECOME
 purpose: Builder identity, capabilities, routing for github_issue_template
-quality: null
+quality: 8.8
 title: "Type Builder Github Issue Template"
 version: "1.0.0"
 author: wave1_builder_gen_v2
