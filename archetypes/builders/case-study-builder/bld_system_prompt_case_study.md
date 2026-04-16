@@ -4,7 +4,7 @@ id: p03_sp_case_study_builder
 pillar: P03
 llm_function: BECOME
 purpose: System prompt defining case_study-builder persona and rules
-quality: null
+quality: 8.8
 title: "System Prompt Case Study"
 version: "1.0.0"
 author: wave1_builder_gen_v2
