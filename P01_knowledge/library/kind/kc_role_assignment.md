@@ -3,8 +3,9 @@ id: kc_role_assignment
 kind: knowledge_card
 title: Role Assignment
 version: 1.0.0
-quality: null
+quality: 8.7
 pillar: P01
+density_score: 0.96
 ---
 
 # Role Assignment
