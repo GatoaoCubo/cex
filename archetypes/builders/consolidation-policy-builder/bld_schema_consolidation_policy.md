@@ -4,7 +4,7 @@ id: bld_schema_consolidation_policy
 pillar: P06
 llm_function: CONSTRAIN
 purpose: Formal schema -- SINGLE SOURCE OF TRUTH for consolidation_policy
-quality: null
+quality: 9.2
 title: "Schema: consolidation_policy"
 version: "2.0.0"
 author: n06_commercial
