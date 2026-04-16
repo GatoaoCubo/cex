@@ -4,7 +4,7 @@ id: bld_instruction_role_assignment
 pillar: P03
 llm_function: REASON
 purpose: Step-by-step production process for role_assignment
-quality: null
+quality: 8.9
 title: "Instruction Role Assignment"
 version: "1.0.0"
 author: n03_wave8_builder
