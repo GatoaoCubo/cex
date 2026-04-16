@@ -4,7 +4,7 @@ id: bld_examples_renewal_workflow
 pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of renewal_workflow artifacts
-quality: null
+quality: 9.1
 title: "Examples Renewal Workflow"
 version: "1.0.0"
 author: wave6_n06
