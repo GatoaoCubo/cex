@@ -4,7 +4,7 @@ id: bld_knowledge_card_experiment_tracker
 pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for experiment_tracker production
-quality: null
+quality: 9.1
 title: "Knowledge Card Experiment Tracker"
 version: "1.0.0"
 author: wave1_builder_gen
