@@ -6,7 +6,7 @@ title: "LEVERAGE_MAP_V2: N05 Operations Tooling Audit"
 mission: LEVERAGE_MAP_V2
 nucleus: N05
 version: 2.0
-quality: null
+quality: 9.1
 status: complete
 tags:
   - operations
@@ -14,6 +14,7 @@ tags:
   - tooling
   - audit
 created: 2026-04-15T13:25:00-03:00
+density_score: 1.0
 ---
 
 # N05 Operations — Leverage Map V2 Verification Cycle
