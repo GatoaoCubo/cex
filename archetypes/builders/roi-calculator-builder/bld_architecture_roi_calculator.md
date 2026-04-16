@@ -4,7 +4,7 @@ id: bld_architecture_roi_calculator
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of roi_calculator -- inventory, dependencies
-quality: null
+quality: 9.0
 title: "Architecture Roi Calculator"
 version: "1.0.0"
 author: wave1_builder_gen_v2
