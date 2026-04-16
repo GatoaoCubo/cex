@@ -4,7 +4,7 @@ id: bld_knowledge_card_judge_config
 pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for judge_config production
-quality: null
+quality: 9.2
 title: "Knowledge Card Judge Config"
 version: "1.1.0"
 author: n03_hybrid_review4
