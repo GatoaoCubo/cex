@@ -4,7 +4,7 @@ id: p10_mem_code_of_conduct_builder
 pillar: P10
 llm_function: INJECT
 purpose: Learned patterns and pitfalls for code_of_conduct construction
-quality: null
+quality: 8.6
 title: "Memory Code of Conduct"
 version: "1.0.0"
 author: n04_knowledge
