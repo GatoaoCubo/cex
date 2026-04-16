@@ -3,8 +3,9 @@ id: kc_eval_metric
 kind: knowledge_card
 title: Evaluation Metric Definition
 version: 1.0.0
-quality: null
+quality: 8.7
 pillar: P01
+density_score: 0.96
 ---
 
 # Evaluation Metric Definition
