@@ -4,7 +4,7 @@ id: bld_output_template_competitive_matrix
 pillar: P05
 llm_function: PRODUCE
 purpose: Template with vars for competitive_matrix production
-quality: null
+quality: 9.2
 title: "Output Template Competitive Matrix"
 version: "1.1.0"
 author: wave1_builder_gen_v2
