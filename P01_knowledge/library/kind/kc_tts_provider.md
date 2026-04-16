@@ -3,8 +3,9 @@ id: kc_tts_provider
 kind: knowledge_card
 title: Text-to-Speech Provider Integration
 version: 1.0.0
-quality: null
+quality: 8.6
 pillar: P01
+density_score: 0.88
 ---
 
 # Text-to-Speech Provider Integration
