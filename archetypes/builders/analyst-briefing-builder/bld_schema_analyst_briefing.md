@@ -4,7 +4,7 @@ id: bld_schema_analyst_briefing
 pillar: P06
 llm_function: CONSTRAIN
 purpose: Formal schema -- SINGLE SOURCE OF TRUTH for analyst_briefing
-quality: null
+quality: 9.1
 title: "Schema Analyst Briefing"
 version: "1.0.0"
 author: n01_wave6
