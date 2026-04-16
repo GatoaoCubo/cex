@@ -4,7 +4,7 @@ id: p03_sp_interactive_demo_builder
 pillar: P03
 llm_function: BECOME
 purpose: System prompt defining interactive_demo-builder persona and rules
-quality: null
+quality: 8.8
 title: "System Prompt Interactive Demo"
 version: "1.0.0"
 author: wave1_builder_gen_v2
