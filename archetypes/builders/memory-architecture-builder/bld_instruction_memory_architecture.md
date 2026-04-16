@@ -4,7 +4,7 @@ id: bld_instruction_memory_architecture
 pillar: P03
 llm_function: REASON
 purpose: Step-by-step production process for memory_architecture
-quality: null
+quality: 8.9
 title: "Instruction: memory_architecture-builder"
 version: "2.0.0"
 author: n06_commercial
