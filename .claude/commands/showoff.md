@@ -13,10 +13,10 @@ one signature artifact under `_showoff/wN/{nucleus}_{runtime}.md`.
 
 | # | Runtime | Model | Cost | Notes |
 |---|---------|-------|------|-------|
-| 1 | ollama  | qwen3:8b                   | $0    | Local, free, slowest |
-| 2 | gemini  | gemini-2.5-flash           | cheap | Higher RPM than pro |
-| 3 | codex   | gpt-5-codex                | cheap | OpenAI CLI |
-| 4 | claude  | claude-haiku-4-5-20251001  | cheap | Cheapest Claude tier |
+| 1 | ollama  | llama3.1:8b                | $0    | Local, free, slowest |
+| 2 | gemini  | gemini-2.5-flash-lite      | cheap | Only model that responds on oauth-personal (pro hangs, 2.0-flash 404s) |
+| 3 | codex   | (auth default, no --model) | cheap | ChatGPT-plus auth rejects explicit models |
+| 4 | claude  | claude-haiku-4-5-20251001  | cheap | Cheapest Claude tier (skip with `--skip claude`) |
 | 5 | MIXED   | 2 ollama + 2 gemini + 1 codex + 1 claude | mix | Real multi-runtime grid |
 
 Each nucleus receives a trivial task (create 1 file + commit + signal),
@@ -52,7 +52,7 @@ python _tools/cex_showoff.py --dry-run
 ## When a wave PARTIAL-passes
 
 - ollama: model not pulled (`ollama pull qwen3:8b`) or service down.
-- gemini: quota exhausted on `gemini-2.5-flash` -- retry later.
+- gemini: quota exhausted on `gemini-2.5-flash-lite` -- retry later (oauth-personal only supports flash-lite; pro hangs, 2.0-flash 404s).
 - codex: auth expired -- `codex login` first.
 - claude: quota exhausted on haiku tier -- switch to sonnet in `nucleus_models.yaml`.
 
