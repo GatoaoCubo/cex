@@ -3,8 +3,9 @@ id: kc_vad_config
 kind: knowledge_card
 title: Voice Activity Detection (VAD) Configuration
 version: 1.0.0
-quality: null
+quality: 8.8
 pillar: P01
+density_score: 0.97
 ---
 
 # Voice Activity Detection (VAD) Configuration
