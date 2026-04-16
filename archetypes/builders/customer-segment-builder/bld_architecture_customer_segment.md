@@ -4,7 +4,7 @@ id: bld_architecture_customer_segment
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of customer_segment -- inventory, dependencies
-quality: null
+quality: 9.0
 title: "Architecture Customer Segment"
 version: "1.0.0"
 author: wave1_builder_gen_v2
