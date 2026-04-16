@@ -4,7 +4,7 @@ id: bld_schema_renewal_workflow
 pillar: P06
 llm_function: CONSTRAIN
 purpose: Formal schema -- SINGLE SOURCE OF TRUTH for renewal_workflow
-quality: null
+quality: 9.2
 title: "Schema Renewal Workflow"
 version: "1.0.0"
 author: wave6_n06
