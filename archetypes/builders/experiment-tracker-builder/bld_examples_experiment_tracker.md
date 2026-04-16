@@ -4,7 +4,7 @@ id: bld_examples_experiment_tracker
 pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of experiment_tracker artifacts
-quality: null
+quality: 8.8
 title: "Examples Experiment Tracker"
 version: "1.0.0"
 author: wave1_builder_gen
