@@ -4,7 +4,7 @@ id: p03_sp_roi_calculator_builder
 pillar: P03
 llm_function: BECOME
 purpose: System prompt defining roi_calculator-builder persona and rules
-quality: null
+quality: 8.8
 title: "System Prompt Roi Calculator"
 version: "1.0.0"
 author: wave1_builder_gen_v2
