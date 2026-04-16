@@ -4,7 +4,7 @@ id: bld_config_fhir_agent_capability
 pillar: P09
 llm_function: CONSTRAIN
 purpose: Naming, paths, limits for fhir_agent_capability production
-quality: null
+quality: 8.8
 title: "Config FHIR Agent Capability"
 version: "1.0.0"
 author: n06_wave7
