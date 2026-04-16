@@ -4,7 +4,7 @@ id: bld_tools_mcp_app_extension
 pillar: P04
 llm_function: CALL
 purpose: Tools available for mcp_app_extension production
-quality: null
+quality: 8.9
 title: "Tools MCP App Extension"
 version: "1.0.0"
 author: wave7_n03_dev_manifests
