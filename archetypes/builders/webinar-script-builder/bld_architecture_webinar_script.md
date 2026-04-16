@@ -4,7 +4,7 @@ id: bld_architecture_webinar_script
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component inventory, dependency map, and architectural position of the webinar_script builder
-quality: null
+quality: 9.1
 title: "Webinar Script Builder Architecture"
 version: "1.0.0"
 author: n02_wave6
