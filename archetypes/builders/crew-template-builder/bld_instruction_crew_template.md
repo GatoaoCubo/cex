@@ -4,7 +4,7 @@ id: bld_instruction_crew_template
 pillar: P03
 llm_function: REASON
 purpose: Step-by-step production process for crew_template
-quality: null
+quality: 8.9
 title: "Instruction Crew Template"
 version: "1.0.0"
 author: n03_wave8_builder
