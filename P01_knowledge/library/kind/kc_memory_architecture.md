@@ -3,9 +3,10 @@ id: kc_memory_architecture
 kind: knowledge_card
 title: Memory Architecture Design
 version: 1.0.0
-quality: null
+quality: 8.8
 pillar: P01
 language: en
+density_score: 1.0
 ---
 
 # Memory Architecture Design
