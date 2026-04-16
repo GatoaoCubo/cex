@@ -4,7 +4,7 @@ id: nucleus-def-builder
 pillar: P02
 llm_function: BECOME
 purpose: Builder identity, capabilities, routing for nucleus_def
-quality: null
+quality: 8.9
 title: "Type Builder Nucleus Def"
 version: "1.0.0"
 author: n05_wave8
