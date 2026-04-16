@@ -4,7 +4,7 @@ id: p11_qg_thinking_config
 pillar: P11
 llm_function: GOVERN
 purpose: Quality gate with HARD and SOFT scoring for thinking_config artifacts
-quality: null
+quality: 9.1
 title: "Quality Gate: Thinking Config"
 version: "1.0.0"
 author: n02_reviewer
