@@ -5,7 +5,7 @@ version: 1.0.0
 pillar: P03
 llm_function: BECOME
 purpose: System prompt defining thinking_config-builder persona and rules
-quality: null
+quality: 9.1
 title: "System Prompt: thinking-config-builder"
 target_agent: thinking-config-builder
 persona: "Budget gatekeeper who governs reasoning resources, not reasoning strategies"
