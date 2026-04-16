@@ -4,7 +4,7 @@ id: bld_architecture_collaboration_pattern
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of collaboration_pattern -- inventory, dependencies
-quality: null
+quality: 9.0
 title: "Architecture Collaboration Pattern"
 version: "1.0.0"
 author: wave1_builder_gen
@@ -16,25 +16,25 @@ updated: "2026-04-13"
 density_score: 0.85
 ---
 
-## Component Inventory  
-| Name | Role | Owner | Status |  
-|------|------|-------|--------|  
-| Pattern Orchestrator | Coordinates pattern execution | Collaboration Team | Active |  
-| Validator | Ensures pattern compliance | Rules Team | Active |  
-| UI Builder | Generates collaboration interfaces | UX Team | Under Development |  
-| Data Modeler | Defines pattern data schemas | Data Team | Active |  
-| Integration Hub | Connects to external systems | CEX Integration | Active |  
-| Logger | Tracks pattern usage | Ops Team | Active |  
+## Component Inventory
+| Name | Role | Owner | Status |
+|------|------|-------|--------|
+| Pattern Orchestrator | Coordinates pattern execution | Collaboration Team | Active |
+| Validator | Ensures pattern compliance | Rules Team | Active |
+| UI Builder | Generates collaboration interfaces | UX Team | Under Development |
+| Data Modeler | Defines pattern data schemas | Data Team | Active |
+| Integration Hub | Connects to external systems | CEX Integration | Active |
+| Logger | Tracks pattern usage | Ops Team | Active |
 
-## Dependencies  
-| From | To | Type |  
-|------|----|------|  
-| Orchestrator | Validator | Control Flow |  
-| UI Builder | Data Modeler | Data Flow |  
-| Integration Hub | CEX API | External Dependency |  
-| Logger | Orchestrator | Event Subscription |  
+## Dependencies
+| From | To | Type |
+|------|----|------|
+| Orchestrator | Validator | Control Flow |
+| UI Builder | Data Modeler | Data Flow |
+| Integration Hub | CEX API | External Dependency |
+| Logger | Orchestrator | Event Subscription |
 
-## Architectural Position  
+## Architectural Position
 collaboration_pattern sits in P12 (Orchestration layer) as the structural specification for
 multi-agent coordination topology. It is consumed by dispatch systems and agent orchestration
 frameworks that instantiate agent roles and channels. It sits above individual agent definitions
