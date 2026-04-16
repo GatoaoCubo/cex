@@ -4,7 +4,7 @@ id: bld_examples_safety_hazard_taxonomy
 pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of safety_hazard_taxonomy artifacts
-quality: null
+quality: 9.1
 title: "Examples Safety Hazard Taxonomy"
 version: "1.0.0"
 author: n01_wave7
