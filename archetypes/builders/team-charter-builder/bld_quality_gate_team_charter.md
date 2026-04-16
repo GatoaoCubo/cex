@@ -4,7 +4,7 @@ id: p12_qg_team_charter
 pillar: P11
 llm_function: GOVERN
 purpose: Quality gate with HARD and SOFT scoring for team_charter
-quality: null
+quality: 9.0
 title: "Quality Gate Team Charter"
 version: "1.0.0"
 author: n06_wave8
