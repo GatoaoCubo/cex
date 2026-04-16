@@ -4,7 +4,7 @@ id: bld_collaboration_press_release
 pillar: P12
 llm_function: COLLABORATE
 purpose: Define crew role, upstream inputs, downstream outputs, and boundaries for press_release builder
-quality: null
+quality: 9.2
 title: "Press Release Builder Collaboration"
 version: "1.0.0"
 author: n02_wave6
