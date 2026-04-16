@@ -24,6 +24,7 @@ import json
 import os
 import sys
 from pathlib import Path
+from typing import Any
 
 ROOT = Path(__file__).resolve().parent.parent
 FT_DIR = ROOT / "_data" / "ft"
@@ -96,7 +97,7 @@ NUCLEUS_ROLES = {
 }
 
 
-def count_pairs(jsonl_path):
+def count_pairs(jsonl_path: Path) -> int:
     """Count lines in JSONL file."""
     if not jsonl_path.exists():
         return 0
@@ -104,7 +105,7 @@ def count_pairs(jsonl_path):
         return sum(1 for _ in f)
 
 
-def show_config(nucleus, base_model, config):
+def show_config(nucleus: str, base_model: str, config: dict[str, Any]) -> int:
     """Display training configuration."""
     nuc_lower = nucleus.lower()
     jsonl_path = FT_DIR / f"ft_{nuc_lower}.jsonl"
@@ -134,7 +135,7 @@ def show_config(nucleus, base_model, config):
     return pairs
 
 
-def generate_modelfile(nucleus, base_model):
+def generate_modelfile(nucleus: str, base_model: str) -> Path:
     """Generate Ollama Modelfile for the fine-tuned model."""
     nuc_lower = nucleus.lower()
     name, role = NUCLEUS_ROLES.get(nucleus, (nucleus, "unknown"))
@@ -153,7 +154,7 @@ def generate_modelfile(nucleus, base_model):
     return modelfile_path
 
 
-def train_nucleus(nucleus, base_model, config):
+def train_nucleus(nucleus: str, base_model: str, config: dict[str, Any]) -> bool:
     """Train QLoRA adapter for a single nucleus."""
     nuc_lower = nucleus.lower()
     jsonl_path = FT_DIR / f"ft_{nuc_lower}.jsonl"
@@ -207,7 +208,7 @@ def train_nucleus(nucleus, base_model, config):
         dataset = load_dataset("json", data_files=str(jsonl_path), split="train")
 
         # Format as Alpaca
-        def format_alpaca(example):
+        def format_alpaca(example: dict[str, Any]) -> dict[str, str]:
             text = (
                 f"### Instruction:\n{example['instruction']}\n\n"
                 f"### Input:\n{example['input']}\n\n"
@@ -268,7 +269,7 @@ def train_nucleus(nucleus, base_model, config):
         return False
 
 
-def main():
+def main() -> None:
     parser = argparse.ArgumentParser(description="CEX QLoRA Fine-Tuning Trainer")
     parser.add_argument("--nucleus", default=None,
                         help="Target nucleus (e.g. N03)")
