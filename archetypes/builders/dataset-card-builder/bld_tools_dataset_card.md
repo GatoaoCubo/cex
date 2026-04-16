@@ -4,7 +4,7 @@ id: bld_tools_dataset_card
 pillar: P04
 llm_function: CALL
 purpose: Real CEX tools available for dataset_card production
-quality: null
+quality: 9.0
 title: "Tools Dataset Card"
 version: "1.1.0"
 author: n03_hybrid_review3
