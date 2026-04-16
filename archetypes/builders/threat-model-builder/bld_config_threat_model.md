@@ -4,7 +4,7 @@ id: bld_config_threat_model
 pillar: P09
 llm_function: CONSTRAIN
 purpose: Naming, paths, limits for threat_model production
-quality: null
+quality: 8.6
 title: "Config Threat Model"
 version: "1.0.0"
 author: wave1_builder_gen
