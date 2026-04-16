@@ -4,7 +4,7 @@ id: p10_mem_expansion_play_builder
 pillar: P10
 llm_function: INJECT
 purpose: Learned patterns and pitfalls for expansion_play construction
-quality: null
+quality: 8.8
 title: "Learning Record Expansion Play"
 version: "1.0.0"
 author: wave6_n06
