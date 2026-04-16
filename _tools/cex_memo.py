@@ -28,6 +28,7 @@ import os
 import sys
 import time
 from pathlib import Path
+from typing import Any, Callable
 
 ROOT = Path(__file__).resolve().parent.parent
 CACHE_DIR = ROOT / ".cex" / "cache" / "memo"
@@ -48,7 +49,7 @@ def _cache_path(key):
     return CACHE_DIR / ("%s.json" % key)
 
 
-def memo_get(prompt, ttl=DEFAULT_TTL):
+def memo_get(prompt: str, ttl: int = DEFAULT_TTL) -> dict[str, Any] | None:
     """Look up cached response for a prompt.
 
     Args:
@@ -78,7 +79,12 @@ def memo_get(prompt, ttl=DEFAULT_TTL):
     return data
 
 
-def memo_set(prompt, response, model="unknown", metadata=None):
+def memo_set(
+    prompt: str,
+    response: str,
+    model: str = "unknown",
+    metadata: dict[str, Any] | None = None,
+) -> str:
     """Cache a prompt->response pair.
 
     Args:
@@ -107,7 +113,12 @@ def memo_set(prompt, response, model="unknown", metadata=None):
     return key
 
 
-def memo_wrap(prompt, llm_fn, model="unknown", ttl=DEFAULT_TTL):
+def memo_wrap(
+    prompt: str,
+    llm_fn: Callable[[str], str],
+    model: str = "unknown",
+    ttl: int = DEFAULT_TTL,
+) -> tuple[str, bool]:
     """Memoized LLM call -- returns cached or calls llm_fn(prompt).
 
     Args:
@@ -128,7 +139,7 @@ def memo_wrap(prompt, llm_fn, model="unknown", ttl=DEFAULT_TTL):
     return response, False
 
 
-def memo_clear(all_entries=False, ttl=DEFAULT_TTL):
+def memo_clear(all_entries: bool = False, ttl: int = DEFAULT_TTL) -> tuple[int, int]:
     """Remove expired (or all) cache entries.
 
     Returns:
@@ -162,7 +173,7 @@ def memo_clear(all_entries=False, ttl=DEFAULT_TTL):
     return removed, remaining
 
 
-def memo_stats():
+def memo_stats() -> dict[str, int | float | None]:
     """Return cache statistics.
 
     Returns:
@@ -210,7 +221,7 @@ def memo_stats():
 # CLI
 # ================================================================
 
-def main():
+def main() -> None:
     parser = argparse.ArgumentParser(description="CEX Result Memoization")
     sub = parser.add_subparsers(dest="command")
 
