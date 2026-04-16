@@ -4,7 +4,7 @@ id: role-assignment-builder
 pillar: P02
 llm_function: BECOME
 purpose: Builder identity, capabilities, routing for role_assignment
-quality: null
+quality: 8.9
 title: "Type Builder Role Assignment"
 version: "1.0.0"
 author: n03_wave8_builder
