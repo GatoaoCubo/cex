@@ -3,11 +3,12 @@ id: smoke_test_gemini_20260415
 kind: smoke_eval
 title: Gemini Smoke Test 2026-04-15
 version: 1
-quality: null
+quality: 8.5
 pillar: P07
 nucleus: N04
 runtime: gemini-2.5-flash
 tags: [gemini, smoke-test, boris-merge, multi-runtime]
+density_score: 0.84
 ---
 
 # Gemini Smoke Test 2026-04-15
