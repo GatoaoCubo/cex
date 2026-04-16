@@ -4,7 +4,7 @@ id: bld_tools_safety_policy
 pillar: P04
 llm_function: CALL
 purpose: Tools available for safety_policy production
-quality: null
+quality: 9.1
 title: "Tools Safety Policy"
 version: "1.1.0"
 author: n06_hybrid_review
