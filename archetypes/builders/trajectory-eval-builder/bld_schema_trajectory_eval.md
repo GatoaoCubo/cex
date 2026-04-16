@@ -4,7 +4,7 @@ id: bld_schema_trajectory_eval
 pillar: P06
 llm_function: CONSTRAIN
 purpose: Formal schema -- SINGLE SOURCE OF TRUTH for trajectory_eval
-quality: null
+quality: 9.1
 title: "Schema Trajectory Eval"
 version: "1.1.0"
 author: n01_hybrid_review4
