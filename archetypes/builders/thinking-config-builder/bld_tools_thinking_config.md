@@ -4,7 +4,7 @@ id: bld_tools_thinking_config
 pillar: P04
 llm_function: CALL
 purpose: Tools available during thinking_config artifact production
-quality: null
+quality: 9.1
 title: "Tools: thinking-config-builder"
 version: "1.0.0"
 author: n02_reviewer
