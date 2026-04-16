@@ -3,8 +3,9 @@ id: kc_procedural_memory
 kind: knowledge_card
 title: Procedural Memory
 version: 1.0.0
-quality: null
+quality: 8.6
 pillar: P01
+density_score: 0.89
 ---
 
 Procedural memory is a type of long-term memory that encodes information about how to perform tasks and skills. It stores motor skills, reflexes, and habitual behaviors through neural pathways in the basal ganglia and cerebellum.
