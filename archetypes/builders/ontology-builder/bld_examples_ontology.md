@@ -5,7 +5,7 @@ pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of ontology artifacts
 pattern: few-shot learning -- LLM reads these before producing
-quality: null
+quality: 9.2
 title: "Examples Ontology"
 version: "1.0.0"
 author: n03_builder
