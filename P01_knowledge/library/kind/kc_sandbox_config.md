@@ -3,8 +3,9 @@ id: kc_sandbox_config
 kind: knowledge_card
 title: Sandbox Configuration
 version: 1.0.0
-quality: null
+quality: 8.6
 pillar: P01
+density_score: 1.0
 ---
 
 # Sandbox Configuration
