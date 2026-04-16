@@ -2,7 +2,7 @@
 kind: norms
 id: bld_norms
 pillar: P08
-quality: null
+quality: 9.2
 title: "Norms"
 version: "1.0.0"
 author: n03_builder
