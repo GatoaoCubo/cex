@@ -4,7 +4,7 @@ id: p01_qg_competitive_matrix
 pillar: P11
 llm_function: GOVERN
 purpose: Quality gate with HARD and SOFT scoring for competitive_matrix
-quality: null
+quality: 9.0
 title: "Quality Gate Competitive Matrix"
 version: "1.1.0"
 author: wave1_builder_gen_v2
