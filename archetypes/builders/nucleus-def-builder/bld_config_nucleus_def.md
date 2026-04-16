@@ -4,7 +4,7 @@ id: bld_config_nucleus_def
 pillar: P09
 llm_function: CONSTRAIN
 purpose: Naming, paths, limits for nucleus_def production
-quality: null
+quality: 8.9
 title: "Config Nucleus Def"
 version: "1.0.0"
 author: n05_wave8
