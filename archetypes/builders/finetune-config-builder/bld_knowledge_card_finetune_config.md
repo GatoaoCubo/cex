@@ -5,7 +5,7 @@ pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for finetune_config production -- LLM fine-tuning specification
 sources: LoRA paper (Hu et al. 2021), QLoRA paper (Dettmers et al. 2023), HuggingFace TRL docs, Axolotl docs
-quality: null
+quality: 9.0
 title: "Knowledge Card Finetune Config"
 version: "1.0.0"
 author: n03_builder
