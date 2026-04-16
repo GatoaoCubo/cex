@@ -4,7 +4,7 @@ id: bld_output_template_procedural_memory
 pillar: P05
 llm_function: PRODUCE
 purpose: Template with vars for procedural_memory production
-quality: null
+quality: 9.1
 title: "Output Template: procedural_memory"
 version: "2.0.0"
 author: n06_commercial
