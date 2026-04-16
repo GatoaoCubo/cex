@@ -4,7 +4,7 @@ id: bld_instruction_webinar_script
 pillar: P03
 llm_function: REASON
 purpose: Step-by-step production instructions for building webinar_script artifacts
-quality: null
+quality: 9.1
 title: "Webinar Script Builder Instructions"
 version: "1.0.0"
 author: n02_wave6
