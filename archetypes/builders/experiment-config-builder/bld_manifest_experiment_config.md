@@ -14,7 +14,7 @@ keywords: [experiment, ab-test, prompt, variant, traffic-split, metric, hypothes
 triggers: ["create experiment config", "define ab test", "configure prompt experiment", "set up variant test", "traffic split config"]
 capabilities: >
   L1: Specialist in building experiment_config artifacts -- A/B test and prompt experiment specifications. L2: Define variants, traffic splits, metrics, and hypothesis tracking with full lifecycle management. L3: When user needs to create, build, or scaffold experiment configs for LLM prompt or feature experiments.
-quality: null
+quality: 9.1
 title: "Manifest Experiment Config"
 tldr: "Builder for experiment_config: A/B test and prompt experiment configurations with variants, metrics, and traffic splits."
 density_score: 0.88
