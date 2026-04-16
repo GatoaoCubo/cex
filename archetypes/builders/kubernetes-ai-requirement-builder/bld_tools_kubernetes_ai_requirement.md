@@ -4,7 +4,7 @@ id: bld_tools_kubernetes_ai_requirement
 pillar: P04
 llm_function: CALL
 purpose: Tools available for kubernetes_ai_requirement production
-quality: null
+quality: 9.0
 title: "Tools Kubernetes AI Requirement"
 version: "1.0.0"
 author: wave7_n03_dev_manifests
