@@ -4,7 +4,7 @@ id: bld_output_template_trajectory_eval
 pillar: P05
 llm_function: PRODUCE
 purpose: Template with vars for trajectory_eval production
-quality: null
+quality: 9.1
 title: "Output Template Trajectory Eval"
 version: "1.1.0"
 author: n01_hybrid_review4
