@@ -4,7 +4,7 @@ id: bld_instruction_agent_profile
 pillar: P03
 llm_function: REASON
 purpose: Step-by-step production process for agent_profile (persona + identity vectors)
-quality: null
+quality: 9.0
 title: "Instruction Agent Profile"
 version: "1.1.0"
 author: n03_builder
