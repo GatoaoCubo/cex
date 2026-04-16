@@ -4,7 +4,7 @@ id: bld_collaboration_c2pa_manifest
 pillar: P12
 llm_function: COLLABORATE
 purpose: How c2pa_manifest-builder works in crews with other builders
-quality: null
+quality: 8.9
 title: "Collaboration C2PA Manifest"
 version: "1.0.0"
 author: n04_wave7
