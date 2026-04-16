@@ -3,7 +3,7 @@ kind: examples
 id: bld_examples_model_architecture
 pillar: P07
 llm_function: GOVERN
-quality: null
+quality: 9.1
 title: "Examples Model Architecture"
 version: "1.0.0"
 author: n05_builder
