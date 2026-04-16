@@ -4,7 +4,7 @@ id: bld_instruction_trajectory_eval
 pillar: P03
 llm_function: REASON
 purpose: Step-by-step production process for trajectory_eval
-quality: null
+quality: 8.9
 title: "Instruction Trajectory Eval"
 version: "1.0.0"
 author: wave1_builder_gen_v2
