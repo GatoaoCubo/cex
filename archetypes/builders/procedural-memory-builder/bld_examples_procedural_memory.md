@@ -4,7 +4,7 @@ id: bld_examples_procedural_memory
 pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of procedural_memory artifacts
-quality: null
+quality: 9.0
 title: "Examples: procedural_memory artifacts"
 version: "2.0.0"
 author: n06_commercial
