@@ -4,7 +4,7 @@ id: bld_schema_ab_test_config
 pillar: P06
 llm_function: CONSTRAIN
 purpose: Formal schema -- SINGLE SOURCE OF TRUTH for ab_test_config
-quality: null
+quality: 9.2
 title: "Schema Ab Test Config"
 version: "1.0.0"
 author: n03_builder
