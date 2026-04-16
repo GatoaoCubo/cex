@@ -4,7 +4,7 @@ id: bld_config_quantization_config
 pillar: P09
 llm_function: CONSTRAIN
 purpose: Naming, paths, limits for quantization_config production
-quality: null
+quality: 8.7
 title: "Config Quantization Config"
 version: "1.0.0"
 author: wave1_builder_gen
