@@ -3,9 +3,10 @@ id: kc_roi_calculator
 kind: knowledge_card
 title: ROI Calculator Specification
 version: 1.0.0
-quality: null
+quality: 8.8
 pillar: P01
 language: en
+density_score: 1.0
 ---
 
 # ROI Calculator Specification
