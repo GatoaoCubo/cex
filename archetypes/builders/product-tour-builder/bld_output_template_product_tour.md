@@ -4,7 +4,7 @@ id: bld_output_template_product_tour
 pillar: P05
 llm_function: PRODUCE
 purpose: Template with vars for product_tour production
-quality: null
+quality: 9.1
 title: "Output Template Product Tour"
 version: "1.0.1"
 author: n02_marketing
