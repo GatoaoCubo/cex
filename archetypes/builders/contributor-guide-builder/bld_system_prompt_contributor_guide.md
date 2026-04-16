@@ -4,7 +4,7 @@ id: p03_sp_contributor_guide_builder
 pillar: P03
 llm_function: BECOME
 purpose: System prompt that activates the contributor_guide builder persona and enforces OSS documentation rules
-quality: null
+quality: 9.1
 title: "Contributor Guide Builder System Prompt"
 version: "1.1.0"
 author: n02_hybrid_review7
