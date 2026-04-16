@@ -4,7 +4,7 @@ id: bld_tools_visual_workflow
 pillar: P04
 llm_function: CALL
 purpose: Tools available for visual_workflow production
-quality: null
+quality: 8.9
 title: "Tools Visual Workflow"
 version: "1.0.0"
 author: wave1_builder_gen_v2
@@ -16,25 +16,25 @@ updated: "2026-04-14"
 density_score: 0.85
 ---
 
-## Production Tools  
-| Tool | Purpose | When |  
-|---|---|---|  
-| cex_compile.py | Compile visual_workflow artifact to YAML output | After F6 PRODUCE |  
-| cex_score.py | Score artifact against 5D quality dimensions | After generation |  
-| cex_retriever.py | Retrieve similar visual_workflow examples for F3 INJECT | During context assembly |  
-| cex_doctor.py | Validate builder ISO completeness and frontmatter | During F7 GOVERN |  
+## Production Tools
+| Tool | Purpose | When |
+|---|---|---|
+| cex_compile.py | Compile visual_workflow artifact to YAML output | After F6 PRODUCE |
+| cex_score.py | Score artifact against 5D quality dimensions | After generation |
+| cex_retriever.py | Retrieve similar visual_workflow examples for F3 INJECT | During context assembly |
+| cex_doctor.py | Validate builder ISO completeness and frontmatter | During F7 GOVERN |
 
-## Validation Tools  
-| Tool | Purpose | When |  
-|---|---|---|  
-| cex_hooks.py | Pre-commit validation: ASCII check, frontmatter, schema | Before F8 COLLABORATE |  
-| cex_wave_validator.py | Validate all 13 ISOs in builder package | During audit cycles |  
+## Validation Tools
+| Tool | Purpose | When |
+|---|---|---|
+| cex_hooks.py | Pre-commit validation: ASCII check, frontmatter, schema | Before F8 COLLABORATE |
+| cex_wave_validator.py | Validate all 13 ISOs in builder package | During audit cycles |
 
-## Industry Reference Platforms  
-| Platform | Contribution to visual_workflow design |  
-|----------|---------------------------------------|  
-| Mermaid | Text-based diagram DSL -- node/edge schema reference |  
-| LangGraph Studio (LangChain) | Visual agent graph editor, state node pattern |  
-| Flowise | Open-source drag-and-drop LLM flow builder |  
-| n8n | Node-based workflow automation, trigger/action pattern |  
+## Industry Reference Platforms
+| Platform | Contribution to visual_workflow design |
+|----------|---------------------------------------|
+| Mermaid | Text-based diagram DSL -- node/edge schema reference |
+| LangGraph Studio (LangChain) | Visual agent graph editor, state node pattern |
+| Flowise | Open-source drag-and-drop LLM flow builder |
+| n8n | Node-based workflow automation, trigger/action pattern |
 | Dify | Visual LLM pipeline with typed input/output ports |
