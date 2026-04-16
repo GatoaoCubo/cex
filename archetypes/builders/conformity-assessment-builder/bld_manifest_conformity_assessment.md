@@ -4,7 +4,7 @@ id: bld_manifest_conformity_assessment
 pillar: P11
 llm_function: BECOME
 purpose: Define the identity, capabilities, and routing rules for the conformity-assessment-builder
-quality: null
+quality: 9.1
 title: "Conformity Assessment Builder -- Manifest"
 version: "1.0.0"
 author: wave7_n05
