@@ -4,7 +4,7 @@ id: bld_collaboration_fhir_agent_capability
 pillar: P12
 llm_function: COLLABORATE
 purpose: How fhir_agent_capability-builder works in crews with other builders
-quality: null
+quality: 8.9
 title: "Collaboration FHIR Agent Capability"
 version: "1.0.0"
 author: n06_wave7
