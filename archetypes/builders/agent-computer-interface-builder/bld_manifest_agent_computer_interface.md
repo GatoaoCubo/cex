@@ -4,7 +4,7 @@ id: agent-computer-interface-builder
 pillar: P08
 llm_function: BECOME
 purpose: Builder identity, capabilities, routing for agent_computer_interface
-quality: null
+quality: 8.8
 title: "Type Builder Agent Computer Interface"
 version: "1.0.0"
 author: wave1_builder_gen
