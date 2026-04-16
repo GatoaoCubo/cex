@@ -4,7 +4,7 @@ id: p03_sp_webinar_script_builder
 pillar: P03
 llm_function: BECOME
 purpose: System prompt that activates the webinar script builder persona and enforces quality rules
-quality: null
+quality: 9.0
 title: "Webinar Script Builder System Prompt"
 version: "1.0.0"
 author: n02_wave6
