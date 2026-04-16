@@ -4,7 +4,7 @@ id: bld_collaboration_expansion_play
 pillar: P12
 llm_function: COLLABORATE
 purpose: How expansion_play-builder works in crews with other builders
-quality: null
+quality: 8.9
 title: "Collaboration Expansion Play"
 version: "1.0.0"
 author: wave1_builder_gen_v2
