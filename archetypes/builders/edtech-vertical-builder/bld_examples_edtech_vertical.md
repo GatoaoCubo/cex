@@ -4,7 +4,7 @@ id: bld_examples_edtech_vertical
 pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of edtech_vertical artifacts
-quality: null
+quality: 8.9
 title: "Examples Edtech Vertical"
 version: "1.0.0"
 author: wave1_builder_gen_v2
