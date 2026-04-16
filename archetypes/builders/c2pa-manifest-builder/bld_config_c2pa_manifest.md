@@ -4,7 +4,7 @@ id: bld_config_c2pa_manifest
 pillar: P09
 llm_function: CONSTRAIN
 purpose: Naming, paths, limits for c2pa_manifest production
-quality: null
+quality: 8.6
 title: "Config C2PA Manifest"
 version: "1.0.0"
 author: n04_wave7
