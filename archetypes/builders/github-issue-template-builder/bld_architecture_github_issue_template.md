@@ -4,7 +4,7 @@ id: bld_architecture_github_issue_template
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of github_issue_template -- inventory, dependencies
-quality: null
+quality: 9.0
 title: "Architecture Github Issue Template"
 version: "1.0.0"
 author: wave1_builder_gen_v2
