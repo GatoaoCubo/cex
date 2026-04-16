@@ -13,7 +13,7 @@ rules_count: 14
 tone: technical
 knowledge_boundary: "fine-tuning job specification, adapter selection (LoRA/QLoRA/full/PEFT), hyperparameter tuning, dataset preparation, evaluation metrics, checkpoint strategy | NOT model_provider (runtime routing), model_card (documentation), boot_config (provider startup), agent (runtime agent definitions)"
 domain: "finetune_config"
-quality: null
+quality: 8.9
 tags: ["system_prompt", "finetune_config", "training", "lora", "peft", "P02"]
 safety_level: standard
 tools_listed: false
