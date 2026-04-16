@@ -4,7 +4,7 @@ id: bld_examples_team_charter
 pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of team_charter artifacts
-quality: null
+quality: 9.1
 title: "Examples Team Charter"
 version: "1.0.0"
 author: n06_wave8
