@@ -4,7 +4,7 @@ id: bld_architecture_compliance_checklist
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of compliance_checklist -- inventory, dependencies
-quality: null
+quality: 9.0
 title: "Architecture Compliance Checklist"
 version: "1.0.0"
 author: wave1_builder_gen_v2
