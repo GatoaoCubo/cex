@@ -4,7 +4,7 @@ id: bld_tools_interactive_demo
 pillar: P04
 llm_function: CALL
 purpose: Tools available for interactive_demo production
-quality: null
+quality: 8.9
 title: "Tools Interactive Demo"
 version: "1.0.1"
 author: n02_marketing
