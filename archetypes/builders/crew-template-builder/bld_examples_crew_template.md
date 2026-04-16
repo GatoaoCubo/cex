@@ -4,7 +4,7 @@ id: bld_examples_crew_template
 pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of crew_template artifacts
-quality: null
+quality: 9.1
 title: "Examples Crew Template"
 version: "1.0.0"
 author: n03_wave8_builder
