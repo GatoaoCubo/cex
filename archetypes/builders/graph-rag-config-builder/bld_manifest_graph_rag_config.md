@@ -4,7 +4,7 @@ id: graph-rag-config-builder
 pillar: P01
 llm_function: BECOME
 purpose: Builder identity, capabilities, routing for graph_rag_config
-quality: null
+quality: 8.8
 title: "Type Builder Graph Rag Config"
 version: "1.0.0"
 author: wave1_builder_gen_v2
