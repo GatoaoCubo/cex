@@ -3,8 +3,9 @@ id: kc_edit_format
 kind: knowledge_card
 title: Edit Format Specification
 version: 1.0.0
-quality: null
+quality: 8.7
 pillar: P01
+density_score: 1.0
 ---
 
 # LLM-to-Host File Change Format Specification
