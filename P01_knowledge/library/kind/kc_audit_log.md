@@ -3,8 +3,9 @@ id: kc_audit_log
 kind: knowledge_card
 title: Immutable Audit Log Configuration for SOC2 Type II Compliance
 version: 1.0.0
-quality: null
+quality: 8.9
 pillar: P01
+density_score: 1.0
 ---
 
 # Immutable Audit Log Configuration for SOC2 Type II Compliance
