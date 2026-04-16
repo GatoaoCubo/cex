@@ -4,7 +4,7 @@ id: p03_sp_llm_evaluation_scenario_builder
 pillar: P03
 llm_function: BECOME
 purpose: System prompt defining llm_evaluation_scenario-builder persona and rules
-quality: null
+quality: 9.0
 title: "System Prompt LLM Evaluation Scenario"
 version: "1.0.0"
 author: n06_wave7
