@@ -4,7 +4,7 @@ id: bld_architecture_prompt_technique
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of prompt_technique -- inventory, dependencies
-quality: null
+quality: 9.0
 title: "Architecture Prompt Technique"
 version: "1.0.0"
 author: wave1_builder_gen_v2
