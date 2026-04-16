@@ -9,7 +9,7 @@ created: "2026-04-13"
 updated: "2026-04-13"
 author: n03_builder
 domain: prompt_optimizer
-quality: null
+quality: 9.1
 tags: [prompt_optimizer, P03, GOVERN, kind-kc]
 tldr: "Automated prompt improvement via iterative scoring, mutation, and selection"
 when_to_use: "Building or reviewing prompt_optimizer artifacts"
