@@ -4,7 +4,7 @@ id: p11_qg_action_paradigm
 pillar: P11
 llm_function: GOVERN
 purpose: Quality gate with HARD and SOFT scoring for action_paradigm artifacts
-quality: null
+quality: 9.1
 title: "Quality Gate: Action Paradigm"
 version: "1.0.0"
 author: n02_reviewer
