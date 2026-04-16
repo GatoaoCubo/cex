@@ -4,7 +4,7 @@ id: bld_examples_visual_workflow
 pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of visual_workflow artifacts
-quality: null
+quality: 9.0
 title: "Examples Visual Workflow"
 version: "1.0.0"
 author: wave1_builder_gen_v2
