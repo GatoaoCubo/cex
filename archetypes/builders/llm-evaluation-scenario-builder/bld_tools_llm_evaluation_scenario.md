@@ -4,7 +4,7 @@ id: bld_tools_llm_evaluation_scenario
 pillar: P04
 llm_function: CALL
 purpose: Tools available for llm_evaluation_scenario production
-quality: null
+quality: 8.9
 title: "Tools LLM Evaluation Scenario"
 version: "1.0.0"
 author: n06_wave7
