@@ -4,7 +4,7 @@ id: crew-template-builder
 pillar: P12
 llm_function: BECOME
 purpose: Builder identity, capabilities, routing for crew_template
-quality: null
+quality: 8.9
 title: "Type Builder Crew Template"
 version: "1.0.0"
 author: n03_wave8_builder
