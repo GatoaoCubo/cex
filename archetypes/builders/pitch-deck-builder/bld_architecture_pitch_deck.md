@@ -4,7 +4,7 @@ id: bld_architecture_pitch_deck
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of pitch_deck -- inventory, dependencies
-quality: null
+quality: 9.0
 title: "Architecture Pitch Deck"
 version: "1.0.1"
 author: n02_marketing
