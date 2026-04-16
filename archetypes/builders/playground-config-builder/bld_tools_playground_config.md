@@ -4,7 +4,7 @@ id: bld_tools_playground_config
 pillar: P04
 llm_function: CALL
 purpose: Tools available for playground_config production
-quality: null
+quality: 8.9
 title: "Tools Playground Config"
 version: "1.0.0"
 author: wave1_builder_gen_v2
