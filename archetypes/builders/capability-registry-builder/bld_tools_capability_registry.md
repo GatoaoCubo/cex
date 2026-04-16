@@ -4,7 +4,7 @@ id: bld_tools_capability_registry
 pillar: P04
 llm_function: CALL
 purpose: Tools available for capability_registry production
-quality: null
+quality: 9.0
 title: "Tools Capability Registry"
 version: "1.0.0"
 author: n04_wave8
