@@ -8,7 +8,7 @@ created: "2026-04-13"
 updated: "2026-04-13"
 author: "builder_agent"
 domain: "cost_budget -- token budget allocation, spend tracking, and cost alert configuration per provider/model"
-quality: null
+quality: 9.1
 tags: [quality-gate, cost-budget, token-budget, spend-tracking, cost-alerts, P11]
 tldr: "Gates for cost_budget artifacts: validates budget catalog completeness, alert thresholds, reset policy, overage action, and provider accuracy."
 density_score: 0.92
