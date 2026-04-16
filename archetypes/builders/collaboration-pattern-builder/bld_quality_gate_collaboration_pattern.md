@@ -4,7 +4,7 @@ id: p11_qg_collaboration_pattern
 pillar: P11
 llm_function: GOVERN
 purpose: Quality gate with HARD and SOFT scoring for collaboration_pattern artifacts
-quality: null
+quality: 9.1
 title: "Quality Gate: Collaboration Pattern"
 version: "1.0.0"
 author: n02_reviewer
