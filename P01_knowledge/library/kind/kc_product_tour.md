@@ -3,8 +3,9 @@ id: kc_product_tour
 kind: knowledge_card
 title: Product Tour Guide
 version: 1.0.0
-quality: null
+quality: 8.7
 pillar: P01
+density_score: 0.96
 ---
 
 # Product Tour Guide
