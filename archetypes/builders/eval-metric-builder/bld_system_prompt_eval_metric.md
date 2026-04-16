@@ -4,7 +4,7 @@ id: p03_sp_eval_metric_builder
 pillar: P03
 llm_function: BECOME
 purpose: System prompt defining eval_metric-builder persona and rules
-quality: null
+quality: 8.8
 title: "System Prompt Eval Metric"
 version: "1.0.0"
 author: wave1_builder_gen_v2
