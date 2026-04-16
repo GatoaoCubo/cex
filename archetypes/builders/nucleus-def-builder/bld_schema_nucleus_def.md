@@ -4,7 +4,7 @@ id: bld_schema_nucleus_def
 pillar: P06
 llm_function: CONSTRAIN
 purpose: Formal schema -- SINGLE SOURCE OF TRUTH for nucleus_def
-quality: null
+quality: 9.2
 title: "Schema Nucleus Def"
 version: "1.0.0"
 author: n05_wave8
