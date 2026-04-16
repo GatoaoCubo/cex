@@ -4,7 +4,7 @@ id: p10_lr_team_charter_builder
 pillar: P10
 llm_function: INJECT
 purpose: Learned patterns and pitfalls for team_charter construction
-quality: null
+quality: 9.0
 title: "Learning Record Team Charter"
 version: "1.0.0"
 author: n06_wave8
