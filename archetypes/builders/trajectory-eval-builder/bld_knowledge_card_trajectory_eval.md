@@ -4,7 +4,7 @@ id: bld_knowledge_card_trajectory_eval
 pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for trajectory_eval production
-quality: null
+quality: 9.2
 title: "Knowledge Card Trajectory Eval"
 version: "1.1.0"
 author: n01_hybrid_review4
