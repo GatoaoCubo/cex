@@ -4,7 +4,7 @@ id: bld_examples_discovery_questions
 pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of discovery_questions artifacts
-quality: null
+quality: 8.9
 title: "Examples Discovery Questions"
 version: "1.0.0"
 author: wave1_builder_gen_v2
