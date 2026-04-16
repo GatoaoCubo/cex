@@ -4,7 +4,7 @@ id: bld_knowledge_card_ai_rmf_profile
 pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for ai_rmf_profile production
-quality: null
+quality: 9.2
 title: "Knowledge Card AI RMF Profile"
 version: "1.0.0"
 author: n01_wave7
