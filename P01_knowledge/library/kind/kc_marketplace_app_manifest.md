@@ -3,8 +3,9 @@ id: kc_marketplace_app_manifest
 kind: knowledge_card
 title: Marketplace App Manifest Specification
 version: 1.0.0
-quality: null
+quality: 8.7
 pillar: P01
+density_score: 0.94
 ---
 
 # Marketplace App Manifest Specification
