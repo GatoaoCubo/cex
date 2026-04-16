@@ -21,8 +21,9 @@ keywords: [prompt_cache, ttl, eviction, invalidation, cache_key, storage_backend
 memory_scope: project
 observation_types: [user, feedback, project, reference]
 llm_function: INJECT
-quality: null
+quality: 8.8
 title: Memory ISO - prompt_cache
+density_score: 0.98
 ---
 ## Summary
 Prompt caches reduce LLM latency and cost by reusing prompt/completion pairs. Primary failures are caching everything (pollution), no invalidation (stale), and excessive TTL (outdated).
