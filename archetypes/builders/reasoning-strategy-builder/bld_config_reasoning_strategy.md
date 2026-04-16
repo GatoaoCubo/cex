@@ -4,7 +4,7 @@ id: bld_config_reasoning_strategy
 pillar: P09
 llm_function: CONSTRAIN
 purpose: Naming, paths, limits for reasoning_strategy production
-quality: null
+quality: 8.6
 title: "Config Reasoning Strategy"
 version: "1.0.0"
 author: wave1_builder_gen
