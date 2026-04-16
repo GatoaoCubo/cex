@@ -4,7 +4,7 @@ id: bld_knowledge_card_llm_evaluation_scenario
 pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for llm_evaluation_scenario production
-quality: null
+quality: 9.2
 title: "Knowledge Card LLM Evaluation Scenario"
 version: "1.0.0"
 author: n06_wave7
