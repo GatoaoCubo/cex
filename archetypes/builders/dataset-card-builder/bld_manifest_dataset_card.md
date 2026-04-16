@@ -4,7 +4,7 @@ id: dataset-card-builder
 pillar: P01
 llm_function: BECOME
 purpose: Builder identity, capabilities, routing for dataset_card
-quality: null
+quality: 8.8
 title: "Type Builder Dataset Card"
 version: "1.0.0"
 author: wave1_builder_gen
