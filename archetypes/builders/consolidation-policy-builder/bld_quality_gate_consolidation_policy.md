@@ -4,7 +4,7 @@ id: p10_qg_consolidation_policy
 pillar: P11
 llm_function: GOVERN
 purpose: Quality gate with HARD and SOFT scoring for consolidation_policy
-quality: null
+quality: 9.0
 title: "Quality Gate: consolidation_policy"
 version: "2.0.0"
 author: n06_commercial
