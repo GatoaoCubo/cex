@@ -4,9 +4,10 @@ kind: decision_record
 pillar: P08
 title: Base Model Choice for 7-Nucleus FT Strategy
 version: 1.0.0
-quality: null
+quality: 9.1
 tags: [fine-tuning, gemma2, lora, benchmark, nuclei]
 created: 2026-04-15
+density_score: 1.0
 ---
 
 # Base Model for Per-Nucleus Fine-Tuning
