@@ -4,7 +4,7 @@ id: bld_architecture_consolidation_policy
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of the consolidation_policy-builder -- 13 ISOs, dependencies, position
-quality: null
+quality: 9.0
 title: "Architecture: consolidation_policy-builder"
 version: "2.0.0"
 author: n06_commercial
