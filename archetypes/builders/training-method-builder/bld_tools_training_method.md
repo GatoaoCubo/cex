@@ -3,7 +3,7 @@ kind: tools
 id: bld_tools_training_method
 pillar: P04
 llm_function: CALL
-quality: null
+quality: 9.0
 title: "Tools Training Method"
 version: "1.0.0"
 author: n05_builder
