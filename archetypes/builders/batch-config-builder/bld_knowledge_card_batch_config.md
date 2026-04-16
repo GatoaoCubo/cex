@@ -5,7 +5,7 @@ pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for batch_config production -- async bulk API job configuration
 sources: OpenAI Batch API docs, Anthropic Message Batches docs, AWS SQS batch patterns
-quality: null
+quality: 9.2
 title: "Knowledge Card Batch Config"
 version: "1.0.0"
 author: n03_builder
