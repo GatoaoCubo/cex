@@ -4,7 +4,7 @@ id: bld_instruction_experiment_tracker
 pillar: P03
 llm_function: REASON
 purpose: Step-by-step production process for experiment_tracker
-quality: null
+quality: 9.0
 title: "Instruction Experiment Tracker"
 version: "1.1.0"
 author: n03_hybrid_review3
