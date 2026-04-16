@@ -4,7 +4,7 @@ id: bld_collaboration_fintech_vertical
 pillar: P12
 llm_function: COLLABORATE
 purpose: How fintech_vertical-builder works in crews with other builders
-quality: null
+quality: 8.9
 title: "Collaboration Fintech Vertical"
 version: "1.0.0"
 author: wave1_builder_gen_v2
@@ -16,22 +16,22 @@ updated: "2026-04-14"
 density_score: 0.85
 ---
 
-## Crew Role  
-Builds vertical-specific fintech solutions (e.g., lending, payments) by integrating APIs, customizing features, and ensuring scalability within defined boundaries.  
+## Crew Role
+Builds vertical-specific fintech solutions (e.g., lending, payments) by integrating APIs, customizing features, and ensuring scalability within defined boundaries.
 
-## Receives From  
-| Builder       | What                  | Format         |  
-|---------------|-----------------------|----------------|  
-| Product Mgr   | Feature requirements  | Document       |  
-| API Provider  | Integration specs     | API docs       |  
-| Design Team   | UI/UX guidelines      | Figma/Zeplin   |  
+## Receives From
+| Builder       | What                  | Format         |
+|---------------|-----------------------|----------------|
+| Product Mgr   | Feature requirements  | Document       |
+| API Provider  | Integration specs     | API docs       |
+| Design Team   | UI/UX guidelines      | Figma/Zeplin   |
 
-## Produces For  
-| Builder         | What                  | Format         |  
-|-----------------|-----------------------|----------------|  
-| Compliance Bldr | Regulatory checklists | JSON           |  
-| Tech Bldr       | Architecture specs    | Diagrams       |  
-| UX Bldr         | Wireframes            | Figma          |  
+## Produces For
+| Builder         | What                  | Format         |
+|-----------------|-----------------------|----------------|
+| Compliance Bldr | Regulatory checklists | JSON           |
+| Tech Bldr       | Architecture specs    | Diagrams       |
+| UX Bldr         | Wireframes            | Figma          |
 
-## Boundary  
+## Boundary
 Does NOT handle compliance validation (Compliance Bldr), audit trails (Audit Bldr), or customer onboarding (Onboarding Bldr).
