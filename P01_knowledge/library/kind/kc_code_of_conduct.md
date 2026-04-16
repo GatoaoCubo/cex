@@ -3,9 +3,10 @@ id: kc_code_of_conduct
 kind: knowledge_card
 title: Code of Conduct
 version: 1.0.0
-quality: null
+quality: 8.7
 pillar: P01
 language: en
+density_score: 0.92
 ---
 
 # Code of Conduct
