@@ -4,7 +4,7 @@ id: bld_tools_subscription_tier
 pillar: P04
 llm_function: CALL
 purpose: Tools available for subscription_tier production
-quality: null
+quality: 8.9
 title: "Tools Subscription Tier"
 version: "1.0.0"
 author: wave1_builder_gen_v2
