@@ -4,7 +4,7 @@ id: bld_architecture_cost_budget
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of cost_budget -- inventory, dependencies, and architectural position
-quality: null
+quality: 9.1
 title: "Architecture Cost Budget"
 version: "1.0.0"
 author: n03_builder
