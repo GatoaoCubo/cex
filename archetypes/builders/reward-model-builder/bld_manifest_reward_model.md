@@ -4,7 +4,7 @@ id: reward-model-builder
 pillar: P07
 llm_function: BECOME
 purpose: Builder identity, capabilities, routing for reward_model
-quality: null
+quality: 8.8
 title: "Type Builder Reward Model"
 version: "1.0.0"
 author: wave1_builder_gen
