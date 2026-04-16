@@ -3,8 +3,9 @@ id: kc_pricing_page
 kind: knowledge_card
 title: Pricing Page
 version: 1.0.0
-quality: null
+quality: 8.4
 pillar: P01
+density_score: 1.0
 ---
 
 # Pricing Page
