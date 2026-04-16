@@ -4,7 +4,7 @@ id: bld_output_template_team_charter
 pillar: P05
 llm_function: PRODUCE
 purpose: Template with vars for team_charter production
-quality: null
+quality: 9.1
 title: "Output Template Team Charter"
 version: "1.0.0"
 author: n06_wave8
