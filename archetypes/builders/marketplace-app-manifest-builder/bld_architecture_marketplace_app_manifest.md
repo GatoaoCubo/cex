@@ -4,7 +4,7 @@ id: bld_architecture_marketplace_app_manifest
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of marketplace_app_manifest -- inventory, dependencies
-quality: null
+quality: 9.0
 title: "Architecture Marketplace App Manifest"
 version: "1.0.0"
 author: wave1_builder_gen_v2
@@ -16,31 +16,31 @@ updated: "2026-04-14"
 density_score: 0.85
 ---
 
-## Component Inventory  
-| ISO Name              | Role                     | Pillar | Status  |  
-|-----------------------|--------------------------|--------|---------|  
-| bld_manifest          | Core manifest definition | P09    | Active  |  
-| bld_instruction       | User guidance logic      | P09    | Active  |  
-| bld_system_prompt     | AI interaction framework | P09    | Active  |  
-| bld_schema            | Data structure validation| P09    | Active  |  
-| bld_quality_gate      | Compliance verification  | P09    | Active  |  
-| bld_output_template   | Formatting standard      | P09    | Active  |  
-| bld_examples          | Sample manifest library  | P09    | Active  |  
-| bld_knowledge_card    | Metadata repository      | P09    | Active  |  
-| bld_architecture      | Structural blueprint     | P09    | Active  |  
-| bld_collaboration     | Multi-party coordination | P09    | Active  |  
-| bld_config            | Parameter management     | P09    | Active  |  
-| bld_memory            | State persistence        | P09    | Active  |  
-| bld_tools             | Utility functions        | P09    | Active  |  
+## Component Inventory
+| ISO Name              | Role                     | Pillar | Status  |
+|-----------------------|--------------------------|--------|---------|
+| bld_manifest          | Core manifest definition | P09    | Active  |
+| bld_instruction       | User guidance logic      | P09    | Active  |
+| bld_system_prompt     | AI interaction framework | P09    | Active  |
+| bld_schema            | Data structure validation| P09    | Active  |
+| bld_quality_gate      | Compliance verification  | P09    | Active  |
+| bld_output_template   | Formatting standard      | P09    | Active  |
+| bld_examples          | Sample manifest library  | P09    | Active  |
+| bld_knowledge_card    | Metadata repository      | P09    | Active  |
+| bld_architecture      | Structural blueprint     | P09    | Active  |
+| bld_collaboration     | Multi-party coordination | P09    | Active  |
+| bld_config            | Parameter management     | P09    | Active  |
+| bld_memory            | State persistence        | P09    | Active  |
+| bld_tools             | Utility functions        | P09    | Active  |
 
-## Dependencies  
-| From              | To                  | Type         |  
-|-------------------|---------------------|--------------|  
-| bld_manifest      | bld_schema          | Validation   |  
-| bld_instruction   | bld_system_prompt   | Input        |  
-| bld_quality_gate  | bld_output_template | Formatting   |  
-| bld_config        | bld_memory          | Configuration|  
-| bld_tools         | YAML Validator      | External     |  
+## Dependencies
+| From              | To                  | Type         |
+|-------------------|---------------------|--------------|
+| bld_manifest      | bld_schema          | Validation   |
+| bld_instruction   | bld_system_prompt   | Input        |
+| bld_quality_gate  | bld_output_template | Formatting   |
+| bld_config        | bld_memory          | Configuration|
+| bld_tools         | YAML Validator      | External     |
 
-## Architectural Position  
+## Architectural Position
 marketplace_app_manifest serves as the foundational framework within CEX Pillar P09, standardizing application manifest creation through modular ISOs that enforce consistency, quality, and interoperability across marketplace ecosystems. It acts as a central orchestrator for manifest lifecycle management, ensuring alignment with P09's focus on structured data governance and collaborative tooling.
