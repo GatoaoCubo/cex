@@ -9,16 +9,16 @@
       "args": ["/c", "npx", "-y", "@modelcontextprotocol/server-puppeteer"]
     },
     "canva": {
-      "command": "npx",
-      "args": ["-y", "@mcp_factory/canva-mcp-server"],
+      "command": "cmd",
+      "args": ["/c", "npx", "-y", "@mcp_factory/canva-mcp-server"],
       "env": {
         "CANVA_CLIENT_ID": "${CANVA_CLIENT_ID}",
         "CANVA_CLIENT_SECRET": "${CANVA_CLIENT_SECRET}"
       }
     },
     "notebooklm": {
-      "command": "npx",
-      "args": ["-y", "notebooklm-mcp@latest"]
+      "command": "cmd",
+      "args": ["/c", "npx", "-y", "notebooklm-mcp@latest"]
     }
   }
 }

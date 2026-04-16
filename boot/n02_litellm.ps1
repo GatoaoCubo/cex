@@ -44,6 +44,9 @@ $env:CEX_NUCLEUS = "N02"
 $env:CEX_ROOT    = $cexRoot
 Set-Location $env:CEX_ROOT
 
+# Load .env (secrets for MCP servers, LLM providers). System env wins.
+. "$PSScriptRoot\_shared\load_dotenv.ps1"
+
 Write-Host "  [>>] Probing LiteLLM proxy at $proxyUrl ..." -ForegroundColor DarkGray
 try {
     $h = Invoke-RestMethod -Uri "$proxyUrl/health/liveliness" -TimeoutSec 5 -EA Stop

@@ -80,6 +80,9 @@ $env:CEX_ROOT = $cexRoot
 $env:CLAUDE_CODE_USE_POWERSHELL_TOOL = "1"
 Set-Location $env:CEX_ROOT
 
+# Load .env (secrets for MCP servers, LLM providers). System env wins.
+. "$PSScriptRoot\_shared\load_dotenv.ps1"
+
 # --- Launch CLI ---
 # System prompt (sin identity + domain role) injected via --append-system-prompt
 $sysPrompt = @'
@@ -96,8 +99,8 @@ $cliArgs = @("--dangerously-skip-permissions", "--permission-mode", "bypassPermi
 $cliArgs += "--append-system-prompt", "N03_engineering/agent_card_n03.md"
 $cliArgs += "--append-system-prompt", ".cex/config/context_self_select.md"
 $cliArgs += "--append-system-prompt", $sysPrompt
-$cliArgs += "--mcp-config", (Join-Path $cexRoot ".mcp-n03.json")
-$cliArgs += "--settings", (Join-Path $cexRoot ".claude/nucleus-settings/n03.json")
+$args += "--mcp-config", "C:\Users\CEX\Documents\GitHub\cex\.mcp-n03.json"
+$args += "--settings", "C:\Users\CEX\Documents\GitHub\cex\.claude/nucleus-settings/n03.json"
 $cliArgs += $initialMsg
 
 Set-CexTitle "RUNNING"

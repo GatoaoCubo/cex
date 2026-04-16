@@ -1,8 +1,8 @@
 {
   "mcpServers": {
     "firecrawl": {
-      "command": "npx",
-      "args": ["-y", "firecrawl-mcp"],
+      "command": "cmd",
+      "args": ["/c", "npx", "-y", "firecrawl-mcp"],
       "env": { "FIRECRAWL_API_KEY": "${FIRECRAWL_API_KEY}" }
     },
     "fetch": {
@@ -10,17 +10,17 @@
       "args": ["mcp-server-fetch", "--ignore-robots-txt"]
     },
     "markitdown": {
-      "command": "npx",
-      "args": ["-y", "markitdown-mcp"]
+      "command": "cmd",
+      "args": ["/c", "npx", "-y", "markitdown-mcp"]
     },
     "brave-search": {
-      "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-brave-search"],
+      "command": "cmd",
+      "args": ["/c", "npx", "-y", "@modelcontextprotocol/server-brave-search"],
       "env": { "BRAVE_API_KEY": "${BRAVE_API_KEY}" }
     },
     "notebooklm": {
-      "command": "npx",
-      "args": ["-y", "notebooklm-mcp@latest"]
+      "command": "cmd",
+      "args": ["/c", "npx", "-y", "notebooklm-mcp@latest"]
     }
   }
 }

@@ -256,6 +256,9 @@ $env:CEX_ROOT = $cexRoot
 $env:CLAUDE_CODE_USE_POWERSHELL_TOOL = "1"
 Set-Location $env:CEX_ROOT
 
+# Load .env (secrets for MCP servers, LLM providers). System env wins.
+. "$PSScriptRoot\_shared\load_dotenv.ps1"
+
 # --- Launch CLI ---
 # System prompt (sin identity + domain role) injected via --append-system-prompt
 $sysPrompt = @'
@@ -375,6 +378,9 @@ $env:{var_name} = "{var_val}"
 $env:CEX_ROOT = $cexRoot
 $env:CEX_CLI = "{cli}"
 Set-Location $env:CEX_ROOT
+
+# Load .env (secrets for MCP servers, LLM providers). System env wins.
+. "$PSScriptRoot\_shared\load_dotenv.ps1"
 
 # System context baked into prompt (no --append-system-prompt on {cli})
 $sysPrompt = @'

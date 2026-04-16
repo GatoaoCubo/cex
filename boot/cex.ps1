@@ -8,8 +8,10 @@
 
 # --- UX: Window title with mission + sin + status ---
 # Auto-detect root from script location (worktree-agnostic)
+. $PSScriptRoot/_shared/vt_enable.ps1  # Enable ANSI/VT for TUI (claude/gemini/codex/ollama)
 $cexRoot = Split-Path -Parent $PSScriptRoot
 $nucleus = "n07"
+. $PSScriptRoot/_shared/theme.ps1  # Per-nucleus theme (bg color, scrollback)
 $sinName = "Orchestrating Sloth"
 $modelShort = "claude-opus-4-6" -replace "claude-", ""
 
@@ -77,6 +79,9 @@ $env:CEX_NUCLEUS = "N07"
 $env:CEX_ROOT = $cexRoot
 $env:CLAUDE_CODE_USE_POWERSHELL_TOOL = "1"
 Set-Location $env:CEX_ROOT
+
+# Load .env (secrets for MCP servers, LLM providers). System env wins.
+. "$PSScriptRoot\_shared\load_dotenv.ps1"
 
 # --- Launch CLI ---
 # System prompt (sin identity + domain role) injected via --append-system-prompt

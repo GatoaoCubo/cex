@@ -56,6 +56,9 @@ $env:CEX_NUCLEUS = "N05"
 $env:CEX_ROOT = $cexRoot
 Set-Location $env:CEX_ROOT
 
+# Load .env (secrets for MCP servers, LLM providers). System env wins.
+. "$PSScriptRoot\_shared\load_dotenv.ps1"
+
 # --- Build task file for aider --message-file ---
 $sysPrompt = @'
 You are N05 Operations Nucleus of CEX, driven by Gating Wrath.
