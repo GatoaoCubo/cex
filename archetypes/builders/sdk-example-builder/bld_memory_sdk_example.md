@@ -4,7 +4,7 @@ id: p10_lr_sdk_example_builder
 pillar: P10
 llm_function: INJECT
 purpose: Learned patterns and pitfalls for sdk_example construction
-quality: null
+quality: 8.7
 title: "Learning Record Sdk Example"
 version: "1.0.0"
 author: wave1_builder_gen_v2
@@ -16,18 +16,18 @@ updated: "2026-04-14"
 density_score: 0.85
 ---
 
-## Observation  
-Common issues include inconsistent error handling, lack of parameter validation, and unclear documentation in example code. Language-specific nuances often lead to redundant boilerplate or misaligned integration patterns.  
+## Observation
+Common issues include inconsistent error handling, lack of parameter validation, and unclear documentation in example code. Language-specific nuances often lead to redundant boilerplate or misaligned integration patterns.
 
-## Pattern  
-Canonical examples prioritize idiomatic language usage, modular code structure, and explicit documentation. They abstract boilerplate into reusable components while exposing core SDK functionality clearly.  
+## Pattern
+Canonical examples prioritize idiomatic language usage, modular code structure, and explicit documentation. They abstract boilerplate into reusable components while exposing core SDK functionality clearly.
 
-## Evidence  
-Reviewed Python and JavaScript examples showed consistent error handling via exceptions and clear function signatures, respectively.  
+## Evidence
+Reviewed Python and JavaScript examples showed consistent error handling via exceptions and clear function signatures, respectively.
 
-## Recommendations  
-- Standardize error handling (e.g., exceptions, result objects) per language.  
-- Include parameter validation and default values in example functions.  
-- Use comments to demarcate SDK-specific logic vs. user implementation.  
-- Avoid hardcoding credentials or sensitive data in sample code.  
+## Recommendations
+- Standardize error handling (e.g., exceptions, result objects) per language.
+- Include parameter validation and default values in example functions.
+- Use comments to demarcate SDK-specific logic vs. user implementation.
+- Avoid hardcoding credentials or sensitive data in sample code.
 - Provide minimal, self-contained examples that highlight key integration steps.
