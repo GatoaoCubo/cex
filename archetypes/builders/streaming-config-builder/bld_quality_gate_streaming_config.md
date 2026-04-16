@@ -8,7 +8,7 @@ created: "2026-04-13"
 updated: "2026-04-13"
 author: "builder_agent"
 domain: "streaming_config -- SSE, WebSocket, and chunked HTTP transport specifications"
-quality: null
+quality: 9.1
 tags: [quality-gate, streaming-config, SSE, WebSocket, chunked, P11]
 tldr: "Gates for streaming_config: validates protocol enum, buffer positivity, heartbeat presence, lifecycle completeness."
 density_score: 0.92
