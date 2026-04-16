@@ -4,7 +4,7 @@ id: p03_sp_ab_test_config_builder
 pillar: P03
 llm_function: BECOME
 purpose: System prompt defining ab_test_config-builder persona and rules
-quality: null
+quality: 9.0
 title: "System Prompt Ab Test Config"
 version: "1.0.0"
 author: wave1_builder_gen_v2
