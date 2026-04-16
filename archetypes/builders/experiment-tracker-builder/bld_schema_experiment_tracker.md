@@ -4,7 +4,7 @@ id: bld_schema_experiment_tracker
 pillar: P06
 llm_function: CONSTRAIN
 purpose: Formal schema -- SINGLE SOURCE OF TRUTH for experiment_tracker
-quality: null
+quality: 8.9
 title: "Schema Experiment Tracker"
 version: "1.0.0"
 author: wave1_builder_gen
