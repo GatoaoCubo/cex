@@ -4,7 +4,7 @@ id: bld_output_template_mcp_app_extension
 pillar: P05
 llm_function: PRODUCE
 purpose: Template with vars for mcp_app_extension production
-quality: null
+quality: 9.0
 title: "Output Template MCP App Extension"
 version: "1.0.0"
 author: wave7_n03_dev_manifests
