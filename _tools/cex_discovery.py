@@ -16,16 +16,17 @@ import re
 import random
 import sys
 from pathlib import Path
+from typing import Any
 
 CEX_ROOT = Path(__file__).resolve().parent.parent
 KINDS_META = CEX_ROOT / ".cex" / "kinds_meta.json"
 
 
-def load_kinds():
+def load_kinds() -> dict[str, Any]:
     return json.loads(KINDS_META.read_text(encoding="utf-8"))
 
 
-def scan_artifacts():
+def scan_artifacts() -> list[dict[str, Any]]:
     """Scan all artifacts, extract metadata."""
     km = load_kinds()
     artifacts = []
@@ -70,7 +71,7 @@ def scan_artifacts():
     return artifacts
 
 
-def discover_opportunities(artifacts):
+def discover_opportunities(artifacts: list[dict[str, Any]]) -> list[dict[str, Any]]:
     """Find all improvement opportunities, ranked by value."""
     opportunities = []
 
@@ -128,7 +129,7 @@ def discover_opportunities(artifacts):
     return opportunities
 
 
-def generate_tasks(opportunities, n=6):
+def generate_tasks(opportunities: list[dict[str, Any]], n: int = 6) -> list[dict[str, Any]]:
     """Generate n task files from top opportunities."""
     km = load_kinds()
     nuclei = ['n01', 'n02', 'n03', 'n04', 'n05', 'n06']
@@ -170,7 +171,7 @@ def generate_tasks(opportunities, n=6):
     return tasks
 
 
-def cmd_stats():
+def cmd_stats() -> None:
     artifacts = scan_artifacts()
     opps = discover_opportunities(artifacts)
     total_score = sum(o['score'] for o in opps)
@@ -190,7 +191,7 @@ def cmd_stats():
         print(f"  {action:<20} {count:>5} opportunities")
 
 
-def cmd_next(n=6):
+def cmd_next(n: int = 6) -> None:
     artifacts = scan_artifacts()
     opps = discover_opportunities(artifacts)
     tasks = generate_tasks(opps, n)
