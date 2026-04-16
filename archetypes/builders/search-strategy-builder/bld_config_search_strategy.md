@@ -4,7 +4,7 @@ id: bld_config_search_strategy
 pillar: P09
 llm_function: CONSTRAIN
 purpose: Naming, paths, limits for search_strategy production
-quality: null
+quality: 8.6
 title: "Config Search Strategy"
 version: "1.0.0"
 author: wave1_builder_gen
@@ -16,20 +16,20 @@ updated: "2026-04-13"
 density_score: 0.85
 ---
 
-## Naming Convention  
-Pattern: `p04_ss_{{name}}.md`  
-Examples: `p04_ss_basic.md`, `p04_ss_advanced.md`  
+## Naming Convention
+Pattern: `p04_ss_{{name}}.md`
+Examples: `p04_ss_basic.md`, `p04_ss_advanced.md`
 
-## Paths  
-Artifacts stored in: `/artifacts/p04/search_strategies/{{name}}`  
+## Paths
+Artifacts stored in: `/artifacts/p04/search_strategies/{{name}}`
 
-## Limits  
-max_bytes: 4096  
-max_turns: 10  
-effort_level: 3  
+## Limits
+max_bytes: 4096
+max_turns: 10
+effort_level: 3
 
-## Hooks  
-pre_build: null  
-post_build: null  
-on_error: null  
+## Hooks
+pre_build: null
+post_build: null
+on_error: null
 on_quality_fail: null
