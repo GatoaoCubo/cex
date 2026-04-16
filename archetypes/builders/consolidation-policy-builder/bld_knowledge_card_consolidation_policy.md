@@ -4,7 +4,7 @@ id: bld_knowledge_card_consolidation_policy
 pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for consolidation_policy production
-quality: null
+quality: 9.2
 title: "Knowledge Card: consolidation_policy Builder"
 version: "2.0.0"
 author: n06_commercial
