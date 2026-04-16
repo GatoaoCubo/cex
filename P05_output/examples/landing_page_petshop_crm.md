@@ -6,7 +6,7 @@ title: "Pet Shop CRM - Manage Your Business Efficiently"
 version: 1.0.0
 created: 2023-10-15
 author: landing-page-builder
-quality: null
+quality: 8.9
 tags: [landing-page, petshop_crm, html, responsive, dark-mode]
 stack: html
 sections_count: 6
@@ -17,6 +17,7 @@ seo:
   title: "Pet Shop CRM - Streamline Your Pet Shop Operations"
   description: "Manage pet data, appointments, and inventory with our easy-to-use CRM. Free tier available. Boost your pet shop efficiency today."
   og_image: "https://example.com/og-image.jpg"
+density_score: 1.0
 ---
 
 # Landing Page: Pet Shop CRM
