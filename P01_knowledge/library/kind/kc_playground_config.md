@@ -3,8 +3,9 @@ id: kc_playground_config
 kind: knowledge_card
 title: Playground/Sandbox Configuration for Interactive Product Evaluation
 version: 1.0.0
-quality: null
+quality: 8.8
 pillar: P01
+density_score: 0.99
 ---
 
 # Playground Configuration Guide
