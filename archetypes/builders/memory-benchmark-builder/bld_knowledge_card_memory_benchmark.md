@@ -4,7 +4,7 @@ id: bld_knowledge_card_memory_benchmark
 pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for memory_benchmark production
-quality: null
+quality: 9.2
 title: "Knowledge Card Memory Benchmark"
 version: "1.1.0"
 author: n05_operations
