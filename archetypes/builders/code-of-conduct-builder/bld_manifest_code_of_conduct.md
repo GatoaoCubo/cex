@@ -4,7 +4,7 @@ id: code-of-conduct-builder
 pillar: P05
 llm_function: BECOME
 purpose: Builder identity, capabilities, routing for code_of_conduct
-quality: null
+quality: 8.8
 title: "Type Builder Code of Conduct"
 version: "1.0.0"
 author: n04_knowledge
