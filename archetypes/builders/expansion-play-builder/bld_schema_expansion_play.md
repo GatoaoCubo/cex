@@ -4,7 +4,7 @@ id: bld_schema_expansion_play
 pillar: P06
 llm_function: CONSTRAIN
 purpose: Formal schema -- SINGLE SOURCE OF TRUTH for expansion_play
-quality: null
+quality: 9.2
 title: "Schema Expansion Play"
 version: "1.0.0"
 author: wave6_n06
