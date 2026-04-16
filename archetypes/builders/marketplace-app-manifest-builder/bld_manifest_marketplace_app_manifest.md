@@ -4,7 +4,7 @@ id: marketplace-app-manifest-builder
 pillar: P09
 llm_function: BECOME
 purpose: Builder identity, capabilities, routing for marketplace_app_manifest
-quality: null
+quality: 8.8
 title: "Type Builder Marketplace App Manifest"
 version: "1.0.0"
 author: wave1_builder_gen_v2
