@@ -4,7 +4,7 @@ id: p10_lr_nps_survey_builder
 pillar: P10
 llm_function: INJECT
 purpose: Learned patterns and pitfalls for nps_survey construction
-quality: null
+quality: 8.8
 title: "Learning Record Nps Survey"
 version: "1.0.0"
 author: n05_wave6
