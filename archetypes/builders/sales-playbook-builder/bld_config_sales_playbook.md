@@ -4,7 +4,7 @@ id: bld_config_sales_playbook
 pillar: P09
 llm_function: CONSTRAIN
 purpose: Naming, paths, limits for sales_playbook production
-quality: null
+quality: 8.6
 title: "Config Sales Playbook"
 version: "1.0.0"
 author: wave1_builder_gen_v2
@@ -16,20 +16,20 @@ updated: "2026-04-14"
 density_score: 0.85
 ---
 
-## Naming Convention  
-Pattern: `p03_sp_{{name}}.md`  
-Examples: `p03_sp_onboarding.md`, `p03_sp_retention.md`  
+## Naming Convention
+Pattern: `p03_sp_{{name}}.md`
+Examples: `p03_sp_onboarding.md`, `p03_sp_retention.md`
 
-## Paths  
-Artifacts stored in: `/artifacts/sales_playbooks/p03/{{name}}.md`  
+## Paths
+Artifacts stored in: `/artifacts/sales_playbooks/p03/{{name}}.md`
 
-## Limits  
-max_bytes: 8192  
-max_turns: 5  
-effort_level: medium  
+## Limits
+max_bytes: 8192
+max_turns: 5
+effort_level: medium
 
-## Hooks  
-pre_build: null  
-post_build: null  
-on_error: null  
+## Hooks
+pre_build: null
+post_build: null
+on_error: null
 on_quality_fail: null
