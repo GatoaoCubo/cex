@@ -12,7 +12,7 @@ role: "Brand Architect & Revenue Engineer — discovers brand identity, codifies
 model: opus-4-6
 mcps: [fetch, stripe_mcp, hotmart_mcp, canva, notebooklm]
 domain_area: brand-identity-monetization
-quality: 9.0
+quality: 9.1
 tags: [agent_card, commercial, N06, brand, monetization, brand-architect]
 tldr: "N06 agent card: dual-role Brand Architect + Revenue Engineer. Boot sequence loads 10 KCs, system prompt, dispatch rule. Sonnet default, Opus escalation for brand-from-scratch."
 density_score: 0.94
