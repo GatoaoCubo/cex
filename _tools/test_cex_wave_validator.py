@@ -15,6 +15,7 @@ import shutil
 import sys
 import tempfile
 from pathlib import Path
+from typing import Any
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
@@ -49,7 +50,7 @@ def make_iso(
     return path
 
 
-def clean_fm(**overrides) -> dict:
+def clean_fm(**overrides: Any) -> dict[str, Any]:
     """Return a valid complete frontmatter, with optional overrides."""
     fm = {
         "id": "bld_system_prompt_voice_pipeline",
@@ -64,11 +65,11 @@ def clean_fm(**overrides) -> dict:
     return fm
 
 
-def assert_pass(errors: list, case: str):
+def assert_pass(errors: list[str], case: str) -> None:
     assert not errors, f"{case}: expected PASS, got errors: {errors}"
 
 
-def assert_fail(errors: list, case: str, hint: str = ""):
+def assert_fail(errors: list[str], case: str, hint: str = "") -> None:
     assert errors, f"{case}: expected FAIL, got PASS"
     if hint:
         joined = " | ".join(errors).lower()
@@ -81,7 +82,7 @@ def assert_fail(errors: list, case: str, hint: str = ""):
 # ---------------------------------------------------------------------------
 
 
-def test_c1_system_prompt_llm_function(tmp: Path):
+def test_c1_system_prompt_llm_function(tmp: Path) -> None:
     # FAIL: wrong llm_function for bld_system_prompt_*
     bad = make_iso(tmp, "bld_system_prompt_voice_pipeline.md",
                    clean_fm(llm_function="INJECT"),
@@ -97,7 +98,7 @@ def test_c1_system_prompt_llm_function(tmp: Path):
     assert_pass(errs, "C1 correct BECOME")
 
 
-def test_c2_schema_quality_null(tmp: Path):
+def test_c2_schema_quality_null(tmp: Path) -> None:
     # FAIL: out-of-range numeric
     bad = make_iso(tmp, "bld_schema_voice_pipeline.md",
                    clean_fm(id="bld_schema_voice_pipeline", kind="schema",
@@ -135,7 +136,7 @@ def test_c2_schema_quality_null(tmp: Path):
     assert_pass(errs, "C2 peer-reviewed quality 9.0")
 
 
-def test_c3_h02_id_pattern(tmp: Path):
+def test_c3_h02_id_pattern(tmp: Path) -> None:
     # FAIL: id with unrecognized shape
     bad = make_iso(tmp, "bld_architecture_voice_pipeline.md",
                    clean_fm(id="random_name_no_prefix",
@@ -155,7 +156,7 @@ def test_c3_h02_id_pattern(tmp: Path):
     assert_pass(errs, "C3 {slug}-builder id")
 
 
-def test_c4_domain_keywords_present(tmp: Path):
+def test_c4_domain_keywords_present(tmp: Path) -> None:
     # FAIL: no voice/audio/STT/TTS terms
     bad = make_iso(tmp, "bld_architecture_voice_pipeline.md",
                    clean_fm(id="bld_architecture_voice_pipeline",
@@ -175,7 +176,7 @@ def test_c4_domain_keywords_present(tmp: Path):
     assert_pass(errs, "C4 has STT/TTS/audio")
 
 
-def test_c5_no_wrong_domain_keywords(tmp: Path):
+def test_c5_no_wrong_domain_keywords(tmp: Path) -> None:
     # FAIL: crypto leakage in voice_pipeline
     bad = make_iso(tmp, "bld_instruction_voice_pipeline.md",
                    clean_fm(id="bld_instruction_voice_pipeline",
@@ -195,7 +196,7 @@ def test_c5_no_wrong_domain_keywords(tmp: Path):
     assert_pass(errs, "C5 'definitions' does not match 'DeFi'")
 
 
-def test_c6_placeholders_resolved(tmp: Path):
+def test_c6_placeholders_resolved(tmp: Path) -> None:
     # FAIL: unresolved placeholder in an instruction file (body)
     bad = make_iso(tmp, "bld_instruction_voice_pipeline.md",
                    clean_fm(id="bld_instruction_voice_pipeline",
@@ -224,7 +225,7 @@ def test_c6_placeholders_resolved(tmp: Path):
     assert_pass(errs, "C6 output_template exempt")
 
 
-def test_c7_frontmatter_complete(tmp: Path):
+def test_c7_frontmatter_complete(tmp: Path) -> None:
     # FAIL: missing title
     fm = clean_fm()
     del fm["title"]
@@ -255,7 +256,7 @@ def test_c7_frontmatter_complete(tmp: Path):
 # ---------------------------------------------------------------------------
 
 
-def test_integration_clean_dir(tmp: Path):
+def test_integration_clean_dir(tmp: Path) -> None:
     """Scan a known-good directory (voice-pipeline-builder) -- expect PASS."""
     target = wv.CEX_ROOT / "archetypes" / "builders" / "voice-pipeline-builder"
     if not target.exists():
@@ -268,7 +269,7 @@ def test_integration_clean_dir(tmp: Path):
         f"voice-pipeline-builder (known clean) had {fail_count} failures"
 
 
-def test_integration_bad_dir(tmp: Path):
+def test_integration_bad_dir(tmp: Path) -> None:
     """Build a directory with defects; expect >=1 fail per defect type."""
     bad_dir = tmp / "bad-builder"
     bad_dir.mkdir()
@@ -290,7 +291,7 @@ def test_integration_bad_dir(tmp: Path):
         f"expected 2 failures in bad-builder, got {len(failures)}"
 
 
-def test_runner_exit_codes(tmp: Path):
+def test_runner_exit_codes(tmp: Path) -> None:
     """run_validation returns 0 on clean, 1 on dirty."""
     good_dir = tmp / "good"
     good_dir.mkdir()
