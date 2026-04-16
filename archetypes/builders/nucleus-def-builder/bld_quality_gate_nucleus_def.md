@@ -4,7 +4,7 @@ id: p02_qg_nucleus_def
 pillar: P11
 llm_function: GOVERN
 purpose: Quality gate with HARD and SOFT scoring for nucleus_def
-quality: null
+quality: 9.0
 title: "Quality Gate Nucleus Def"
 version: "1.0.0"
 author: n05_wave8
