@@ -3,8 +3,9 @@ id: kc_expansion_play
 kind: knowledge_card
 title: Account Expansion Play
 version: 1.0.0
-quality: null
+quality: 8.8
 pillar: P01
+density_score: 1.0
 ---
 
 # Account Expansion Play
