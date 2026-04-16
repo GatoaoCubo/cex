@@ -8,7 +8,7 @@ created: "2026-04-13"
 updated: "2026-04-13"
 author: "builder_agent"
 domain: "batch_config -- async bulk API job configuration with cost controls, retry policy, and I/O format"
-quality: null
+quality: 9.1
 tags: [quality-gate, batch-config, async-api, cost-controls, P11]
 tldr: "Gates for batch_config artifacts: validates provider, cost cap, completion window, retry policy, credential hygiene, and body section completeness."
 density_score: 0.92
