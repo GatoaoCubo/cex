@@ -4,7 +4,7 @@ id: p11_qg_safety_hazard_taxonomy
 pillar: P11
 llm_function: GOVERN
 purpose: Quality gate with HARD and SOFT scoring for safety_hazard_taxonomy
-quality: null
+quality: 9.0
 title: "Quality Gate Safety Hazard Taxonomy"
 version: "1.0.0"
 author: n01_wave7
