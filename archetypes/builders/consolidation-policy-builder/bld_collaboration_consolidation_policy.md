@@ -4,7 +4,7 @@ id: bld_collaboration_consolidation_policy
 pillar: P12
 llm_function: COLLABORATE
 purpose: How consolidation_policy-builder works in crews with other CEX builders
-quality: null
+quality: 9.1
 title: "Collaboration: consolidation_policy-builder"
 version: "2.0.0"
 author: n06_commercial
