@@ -4,7 +4,7 @@ id: p10_lr_capability_registry_builder
 pillar: P10
 llm_function: INJECT
 purpose: Learned patterns and pitfalls for capability_registry construction
-quality: null
+quality: 8.8
 title: "Learning Record Capability Registry"
 version: "1.0.0"
 author: n04_wave8
