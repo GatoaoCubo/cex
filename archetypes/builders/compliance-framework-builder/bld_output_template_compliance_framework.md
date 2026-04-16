@@ -4,7 +4,7 @@ id: bld_output_template_compliance_framework
 pillar: P05
 llm_function: PRODUCE
 purpose: Template with vars for compliance_framework production
-quality: null
+quality: 9.1
 title: "Output Template Compliance Framework"
 version: "1.1.0"
 author: n05_ops
