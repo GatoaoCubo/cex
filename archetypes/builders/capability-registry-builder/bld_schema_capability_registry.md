@@ -4,7 +4,7 @@ id: bld_schema_capability_registry
 pillar: P06
 llm_function: CONSTRAIN
 purpose: Formal schema -- SINGLE SOURCE OF TRUTH for capability_registry
-quality: null
+quality: 9.1
 title: "Schema Capability Registry"
 version: "1.0.0"
 author: n04_wave8
