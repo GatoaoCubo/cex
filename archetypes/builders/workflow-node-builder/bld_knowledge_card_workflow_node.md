@@ -4,7 +4,7 @@ id: bld_knowledge_card_workflow_node
 pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for workflow_node production
-quality: null
+quality: 9.2
 title: "Knowledge Card Workflow Node"
 version: "1.1.0"
 author: n03_hybrid_review4
