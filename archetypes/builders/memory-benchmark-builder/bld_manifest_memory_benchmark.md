@@ -4,7 +4,7 @@ id: memory-benchmark-builder
 pillar: P07
 llm_function: BECOME
 purpose: Builder identity, capabilities, routing for memory_benchmark
-quality: null
+quality: 8.9
 title: "Type Builder Memory Benchmark"
 version: "1.1.0"
 author: n05_operations
