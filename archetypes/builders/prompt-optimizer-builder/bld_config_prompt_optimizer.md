@@ -4,7 +4,7 @@ id: bld_config_prompt_optimizer
 pillar: P09
 llm_function: CONSTRAIN
 purpose: Naming, paths, limits for prompt_optimizer production
-quality: null
+quality: 8.7
 title: "Config Prompt Optimizer"
 version: "1.0.0"
 author: wave1_builder_gen_v2
