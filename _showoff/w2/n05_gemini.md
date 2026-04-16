@@ -3,13 +3,14 @@ id: showoff_w2_n05_gemini
 kind: smoke_eval
 title: "SHOWOFF Wave 2 -- n05 via gemini"
 version: 1
-quality: null
+quality: 8.3
 pillar: P07
 nucleus: n05
 runtime: gemini
 model: gemini-2.5-flash
 wave: 2
 tags: [showoff, smoke, multi-runtime]
+density_score: 0.95
 ---
 
 # SHOWOFF Wave 2
