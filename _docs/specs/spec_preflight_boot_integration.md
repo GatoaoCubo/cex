@@ -3,9 +3,10 @@ id: spec_preflight_boot_integration
 kind: decision_record
 title: Preflight Boot Integration Spec
 version: 1.0.0
-quality: null
+quality: 9.0
 tags: [preflight, boot, optimization, token-budget]
 created: 2026-04-13
+density_score: 1.0
 ---
 
 # Preflight Boot Integration
