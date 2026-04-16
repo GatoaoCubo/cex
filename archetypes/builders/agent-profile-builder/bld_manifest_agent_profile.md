@@ -4,7 +4,7 @@ id: agent-profile-builder
 pillar: P02
 llm_function: BECOME
 purpose: Builder identity, capabilities, routing for agent_profile
-quality: null
+quality: 8.8
 title: "Type Builder Agent Profile"
 version: "1.0.0"
 author: wave1_builder_gen
