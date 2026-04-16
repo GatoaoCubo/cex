@@ -4,7 +4,7 @@ id: p10_lr_mcp_app_extension_builder
 pillar: P10
 llm_function: INJECT
 purpose: Learned patterns and pitfalls for mcp_app_extension construction
-quality: null
+quality: 8.8
 title: "Learning Record MCP App Extension"
 version: "1.0.0"
 author: wave7_n03_dev_manifests
