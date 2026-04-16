@@ -4,11 +4,12 @@ kind: knowledge_card
 pillar: P01
 title: "LEVERAGE_MAP_V2: N04 Verification Cycle (Iteration 2 — Reranker + Ecosystem State)"
 version: 2.0
-quality: null
+quality: 9.0
 date: 2026-04-15
 mission: LEVERAGE_MAP_V2
 cycle: verify
 iteration: 2
+density_score: 1.0
 ---
 
 # N04 Leverage Map V2 — Verification Cycle (Iteration 2)
