@@ -11,6 +11,7 @@ tags:
 - tools
 - gap-analysis
 - n01-intel
+density_score: 1.0
 verification: ''
 was_the_expected_tool_added_yes_no_evidence: 'YES. `_tools/cex_web_fetch.py` is present and functional.
 

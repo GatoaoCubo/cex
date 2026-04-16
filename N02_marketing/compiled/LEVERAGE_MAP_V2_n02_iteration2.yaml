@@ -7,6 +7,7 @@ nucleus: n02
 date: 2026-04-15 21:00:00+00:00
 quality: null
 version: 2.0
+density_score: 1.0
 executive_summary: 'Tool verification complete. `cex_social_publisher.py` confirmed operational and production-ready. API
   surface validated against N02 marketing workflow requirements. Gap analysis from Cycle 1 remains accurate — three critical
   tools still missing (A/B harness, analytics, image generation). No new tools wired since Cycle 1. Assessment: N02 has 30%

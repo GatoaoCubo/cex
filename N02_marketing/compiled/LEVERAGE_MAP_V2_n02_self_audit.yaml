@@ -8,6 +8,7 @@ date: 2026-04-15 21:35:00+00:00
 quality: null
 version: 3.0
 status: complete
+density_score: 0.94
 executive_summary: '`_tools/cex_social_publisher.py` is real, small, and immediately useful for N02. It closes the narrow
   gap of platform-sized copy formatting for X, LinkedIn, Instagram, Threads, Bluesky, and Mastodon. It does not close autonomous
   publishing, measurement, or optimization.

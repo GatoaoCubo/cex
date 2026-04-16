@@ -8,6 +8,7 @@ date: 2026-04-15 21:20:00+00:00
 quality: null
 version: 1.0
 status: complete
+density_score: 0.95
 executive_summary: '`_tools/cex_social_publisher.py` is present, small, and usable for N02''s immediate copy-formatting workflow.
   It closes the narrow gap of platform-sized text output, but it does not close deployment, testing, analytics, or visual
   production. Net result: N02 can now format posts for manual publishing, but still cannot run an autonomous marketing loop.'

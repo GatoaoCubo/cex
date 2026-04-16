@@ -15,6 +15,7 @@ tags:
 - w2
 - stale-fact
 - frontmatter
+density_score: 1.0
 executive_summary: 'Wave 2 scanned 566 files across N07_admin, P02-P08 pillars, and deep-diagnosed the 16 non-atlas stale_fact
   candidates from W1. Key verdict: **the system''s core directories are cleaner than W1 data suggested**. N07_admin is the
   best-maintained nucleus (100% of files at quality >= 8.9). P02-P08 show 97.1% quality field coverage with zero stale-content

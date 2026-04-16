@@ -9,6 +9,7 @@ tags:
 - tooling
 - n01
 - verification
+density_score: 0.89
 verification: "- Was the expected tool added? YES. `_tools/cex_web_fetch.py` exists in `_tools/` and is a standalone CLI fetcher.\n\
   - Evidence:\n  - `Get-ChildItem _tools` shows `cex_web_fetch.py` (2115 bytes)\n  - `_tools/cex_web_fetch.py` exposes `fetch()`,\
   \ `html_to_text()`, and `arxiv_url()`\n  - CLI surface: positional `url`, `--arxiv`, `--max-bytes`, `--raw`\n- Does its\

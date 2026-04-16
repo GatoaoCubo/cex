@@ -11251,3 +11251,11 @@ et
 2026-04-13 11:00:37	C:\Users\CEX\Documents\GitHub\cex\N04_knowledge\knowledge\p01_gl_taxonomy.md	1	8.7	0.84	discard	analyzed: increase_density: remove filler words, compress prose into tables
 2026-04-13 11:00:37	C:\Users\CEX\Documents\GitHub\cex\N04_knowledge\knowledge\p01_gl_taxonomy.md	2	8.7	0.84	discard	analyzed: increase_density: remove filler words, compress prose into tables
 2026-04-13 11:00:37	C:\Users\CEX\Documents\GitHub\cex\N04_knowledge\knowledge\p01_gl_taxonomy.md	3	8.7	0.84	discard	analyzed: increase_density: remove filler words, compress prose into tables
+2026-04-15 22:00:22	N01_intelligence\compiled\LEVERAGE_MAP_V2_n01_cycle2_verification.md	1	9.0	1.00	keep	added density_score: 1.0
+2026-04-15 22:00:22	N01_intelligence\LEVERAGE_MAP_V2_VERIFY_CYCLE.md	1	9.1	1.00	keep	added density_score: 1.0
+2026-04-15 22:00:23	N01_intelligence\reports\LEVERAGE_MAP_V2_n01_tool_verification.md	1	9.0	0.89	keep	added density_score: 0.89
+2026-04-15 22:00:23	N01_intelligence\reports\selfheal_w2_diagnosis.md	1	9.1	1.00	keep	added density_score: 1.0
+2026-04-15 22:00:23	N02_marketing\reports\LEVERAGE_MAP_V2_n02.md	1	9.0	1.00	keep	added density_score: 1.0
+2026-04-15 22:00:24	N02_marketing\reports\LEVERAGE_MAP_V2_n02_codex.md	1	9.0	0.95	keep	added density_score: 0.95
+2026-04-15 22:00:24	N02_marketing\reports\LEVERAGE_MAP_V2_n02_iteration2.md	1	9.0	1.00	keep	added density_score: 1.0
+2026-04-15 22:00:24	N02_marketing\reports\LEVERAGE_MAP_V2_n02_self_audit.md	1	9.0	0.94	keep	added density_score: 0.94
