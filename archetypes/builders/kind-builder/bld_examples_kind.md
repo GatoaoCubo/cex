@@ -5,7 +5,7 @@ pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of builder package scaffolding
 pattern: few-shot learning -- LLM reads these before producing
-quality: null
+quality: 9.0
 title: "Examples Kind Builder"
 version: "1.0.0"
 author: n03_builder
