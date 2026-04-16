@@ -4,7 +4,7 @@ id: bld_examples_github_issue_template
 pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of github_issue_template artifacts
-quality: null
+quality: 9.0
 title: "Examples Github Issue Template"
 version: "1.0.0"
 author: wave1_builder_gen_v2
@@ -22,29 +22,29 @@ density_score: 0.85
 title: "Bug Report: Jenkins fails to deploy to PostgreSQL on Ubuntu 22.04"
 labels: bug, jenkins, postgresql
 ---
-**Title**:  
+**Title**:
 Brief summary of the issue (e.g., "Jenkins fails to deploy to PostgreSQL on Ubuntu 22.04")
 
-**Steps to reproduce**:  
-1. Install Jenkins 2.346 on Ubuntu 22.04  
-2. Configure PostgreSQL 14 as deployment target  
-3. Trigger pipeline with `git commit`  
+**Steps to reproduce**:
+1. Install Jenkins 2.346 on Ubuntu 22.04
+2. Configure PostgreSQL 14 as deployment target
+3. Trigger pipeline with `git commit`
 
-**Expected behavior**:  
-Successful deployment with no errors in Jenkins logs  
+**Expected behavior**:
+Successful deployment with no errors in Jenkins logs
 
-**Actual behavior**:  
-Pipeline fails at "Deploy to PostgreSQL" stage with error: `Connection refused`  
+**Actual behavior**:
+Pipeline fails at "Deploy to PostgreSQL" stage with error: `Connection refused`
 
-**Environment**:  
-- Jenkins: 2.346  
-- PostgreSQL: 14.2  
-- OS: Ubuntu 22.04 LTS  
-- Docker: 24.0.5  
+**Environment**:
+- Jenkins: 2.346
+- PostgreSQL: 14.2
+- OS: Ubuntu 22.04 LTS
+- Docker: 24.0.5
 
-**Additional context**:  
-- Error occurs only when using `pg_dump` with `--inserts` flag  
-- No firewall rules blocking port 5432  
+**Additional context**:
+- Error occurs only when using `pg_dump` with `--inserts` flag
+- No firewall rules blocking port 5432
 ```
 
 ## Anti-Example 1: Missing required fields
@@ -53,21 +53,21 @@ Pipeline fails at "Deploy to PostgreSQL" stage with error: `Connection refused`
 title: "Bug Report"
 labels: bug
 ---
-**Title**:  
-Jenkins not working  
+**Title**:
+Jenkins not working
 
-**Steps to reproduce**:  
-1. Use Jenkins  
-2. Try to deploy  
+**Steps to reproduce**:
+1. Use Jenkins
+2. Try to deploy
 
-**Expected behavior**:  
-It should work  
+**Expected behavior**:
+It should work
 
-**Actual behavior**:  
-It doesn't work  
+**Actual behavior**:
+It doesn't work
 
-**Environment**:  
-- Jenkins: 2.346  
+**Environment**:
+- Jenkins: 2.346
 ```
 ## Why it fails explanation
 Lacks specificity in all sections. No labels for PostgreSQL or OS. Missing critical details like PostgreSQL version, error logs, and reproduction steps. Users cannot diagnose without context.
@@ -78,20 +78,20 @@ Lacks specificity in all sections. No labels for PostgreSQL or OS. Missing criti
 title: "Feature Request"
 labels: feature
 ---
-**Title**:  
-Add something cool  
+**Title**:
+Add something cool
 
-**Steps to reproduce**:  
-Not applicable  
+**Steps to reproduce**:
+Not applicable
 
-**Expected behavior**:  
-Something happens  
+**Expected behavior**:
+Something happens
 
-**Actual behavior**:  
-Nothing happens  
+**Actual behavior**:
+Nothing happens
 
-**Environment**:  
-- Maybe Linux?  
+**Environment**:
+- Maybe Linux?
 ```
 ## Why it fails explanation
 Uses ambiguous language ("something cool", "nothing happens"). Optional fields like "Additional context" are missing. No clear structure for feature requests. Lacks required fields for reproducibility.
