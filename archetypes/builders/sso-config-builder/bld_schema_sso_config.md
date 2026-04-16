@@ -4,7 +4,7 @@ id: bld_schema_sso_config
 pillar: P06
 llm_function: CONSTRAIN
 purpose: Formal schema -- SINGLE SOURCE OF TRUTH for sso_config
-quality: null
+quality: 9.1
 title: "Schema Sso Config"
 version: "1.0.0"
 author: wave1_builder_gen_v2
