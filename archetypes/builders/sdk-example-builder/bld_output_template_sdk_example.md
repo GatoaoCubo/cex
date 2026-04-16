@@ -4,7 +4,7 @@ id: bld_output_template_sdk_example
 pillar: P05
 llm_function: PRODUCE
 purpose: Template with vars for sdk_example production
-quality: null
+quality: 8.9
 title: "Output Template Sdk Example"
 version: "1.0.0"
 author: wave1_builder_gen_v2
