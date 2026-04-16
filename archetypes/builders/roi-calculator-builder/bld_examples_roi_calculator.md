@@ -4,7 +4,7 @@ id: bld_examples_roi_calculator
 pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of roi_calculator artifacts
-quality: null
+quality: 8.9
 title: "Examples Roi Calculator"
 version: "1.0.0"
 author: wave1_builder_gen_v2
