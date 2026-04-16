@@ -4,7 +4,7 @@ id: bld_tools_healthcare_vertical
 pillar: P04
 llm_function: CALL
 purpose: Tools available for healthcare_vertical production
-quality: null
+quality: 8.9
 title: "Tools Healthcare Vertical"
 version: "1.0.0"
 author: wave1_builder_gen_v2
