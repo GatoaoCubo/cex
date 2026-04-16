@@ -3,7 +3,7 @@ kind: knowledge_card
 id: bld_knowledge_card_training_method
 pillar: P01
 llm_function: INJECT
-quality: null
+quality: 9.1
 title: "Knowledge Card: training_method"
 version: "1.0.0"
 author: n05_builder
