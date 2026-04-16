@@ -4,7 +4,7 @@ id: bld_knowledge_card_renewal_workflow
 pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for renewal_workflow production
-quality: null
+quality: 9.2
 title: "Knowledge Card Renewal Workflow"
 version: "1.0.0"
 author: wave6_n06
