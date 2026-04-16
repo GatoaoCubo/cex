@@ -4,7 +4,7 @@ id: bld_examples_app_directory_entry
 pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of app_directory_entry artifacts
-quality: null
+quality: 8.8
 title: "Examples App Directory Entry"
 version: "1.0.0"
 author: wave1_builder_gen_v2
