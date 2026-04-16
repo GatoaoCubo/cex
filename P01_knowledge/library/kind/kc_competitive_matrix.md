@@ -3,8 +3,9 @@ id: kc_competitive_matrix
 kind: knowledge_card
 title: Competitive Matrix
 version: 1.0.0
-quality: null
+quality: 8.7
 pillar: P01
+density_score: 0.92
 ---
 
 # Competitive Matrix
