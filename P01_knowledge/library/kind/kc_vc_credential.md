@@ -3,8 +3,9 @@ id: kc_vc_credential
 kind: knowledge_card
 title: W3C Verifiable Credential 2.0 for AI Agents
 version: 1.0.0
-quality: null
+quality: 8.5
 pillar: P01
+density_score: 0.97
 ---
 
 A W3C Verifiable Credential 2.0 is a decentralized digital identity mechanism that establishes trust through cryptographic proofs. For AI agents, it enables:
