@@ -5,7 +5,7 @@ pillar: P12
 llm_function: COLLABORATE
 purpose: How finetune-config-builder works in crews with other builders
 pattern: each builder must know its ROLE in a team, what it RECEIVES and PRODUCES
-quality: null
+quality: 9.1
 title: "Collaboration Finetune Config"
 version: "1.0.0"
 author: n03_builder
