@@ -4,7 +4,7 @@ id: bld_schema_bias_audit
 pillar: P06
 llm_function: CONSTRAIN
 purpose: Formal schema -- SINGLE SOURCE OF TRUTH for bias_audit
-quality: null
+quality: 9.2
 title: "Schema Bias Audit"
 version: "1.1.0"
 author: n06_hybrid_review
