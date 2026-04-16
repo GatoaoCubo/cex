@@ -3,8 +3,9 @@ id: kc_thinking_config
 kind: knowledge_card
 title: Thinking Configuration Settings
 version: 1.0.0
-quality: null
+quality: 8.6
 pillar: P01
+density_score: 0.82
 ---
 
 # Thinking Configuration Settings
