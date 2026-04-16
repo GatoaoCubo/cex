@@ -4,7 +4,7 @@ id: bld_output_template_workflow_node
 pillar: P05
 llm_function: PRODUCE
 purpose: Template with vars for workflow_node production
-quality: null
+quality: 8.7
 title: "Output Template Workflow Node"
 version: "1.0.0"
 author: wave1_builder_gen_v2
