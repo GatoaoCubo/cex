@@ -4,7 +4,7 @@ id: bld_config_agent_name_service_record
 pillar: P09
 llm_function: CONSTRAIN
 purpose: Runtime configuration for the agent_name_service_record builder -- paths, limits, naming, hooks
-quality: null
+quality: 9.1
 title: "Agent Name Service Record Builder -- Config"
 version: "1.0.0"
 author: wave7_n05
