@@ -4,7 +4,7 @@ id: bld_schema_conformity_assessment
 pillar: P06
 llm_function: CONSTRAIN
 purpose: Data schema defining all required fields for a conformity_assessment artifact
-quality: null
+quality: 9.1
 title: "Conformity Assessment Builder -- Schema"
 version: "1.0.0"
 author: wave7_n05
