@@ -3,10 +3,11 @@ id: spec_vllm_lora_hotswap
 kind: spec
 title: "vLLM LoRA Hot-Swap Architecture"
 version: 1.0.0
-quality: null
+quality: 9.0
 tags: [vllm, lora, inference, wsl2, cuda, architecture]
 pillar: P08
 created: 2026-04-13
+density_score: 1.0
 ---
 
 # vLLM LoRA Hot-Swap Architecture
