@@ -13,7 +13,7 @@ rules_count: 13
 tone: technical
 knowledge_boundary: "async batch API configuration, provider-specific job parameters (OpenAI Batch API, Anthropic Message Batches), JSONL input/output, cost controls, retry and error policy, completion windows | NOT schedule (cron timing), workflow (multi-step orchestration), runtime_rule (per-request timeouts), env_config (generic env vars)"
 domain: "batch_config"
-quality: null
+quality: 9.0
 tags: ["system_prompt", "batch_config", "async", "bulk-api", "P09"]
 safety_level: standard
 tools_listed: false
