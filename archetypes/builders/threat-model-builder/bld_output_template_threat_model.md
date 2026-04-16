@@ -4,7 +4,7 @@ id: bld_output_template_threat_model
 pillar: P05
 llm_function: PRODUCE
 purpose: Template with vars for threat_model production
-quality: null
+quality: 9.1
 title: "Output Template Threat Model"
 version: "1.1.0"
 author: n05_ops
