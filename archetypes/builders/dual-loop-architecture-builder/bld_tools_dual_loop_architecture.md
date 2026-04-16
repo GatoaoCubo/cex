@@ -5,7 +5,7 @@ pillar: P04
 parent: dual-loop-architecture-builder
 llm_function: CALL
 purpose: Tools the dual_loop_architecture builder invokes -- scheduler, bridge, critic, router
-quality: null
+quality: 9.0
 title: "Tools Dual Loop Architecture"
 version: "1.0.0"
 author: wave1_builder_gen
