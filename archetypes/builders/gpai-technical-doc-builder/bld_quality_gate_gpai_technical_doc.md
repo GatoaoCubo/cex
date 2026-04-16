@@ -4,7 +4,7 @@ id: p11_qg_gpai_technical_doc
 pillar: P11
 llm_function: GOVERN
 purpose: Quality gate with HARD and SOFT scoring for gpai_technical_doc
-quality: null
+quality: 9.0
 title: "Quality Gate GPAI Technical Doc"
 version: "1.0.0"
 author: n01_wave7
