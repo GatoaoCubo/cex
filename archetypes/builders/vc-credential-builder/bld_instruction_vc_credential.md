@@ -4,7 +4,7 @@ id: bld_instruction_vc_credential
 pillar: P03
 llm_function: REASON
 purpose: Step-by-step production process for vc_credential
-quality: null
+quality: 8.9
 title: "Instruction VC Credential"
 version: "1.0.0"
 author: n04_wave7
