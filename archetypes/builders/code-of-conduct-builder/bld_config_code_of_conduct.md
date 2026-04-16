@@ -4,7 +4,7 @@ id: bld_config_code_of_conduct
 pillar: P09
 llm_function: CONSTRAIN
 purpose: Naming, paths, limits for code_of_conduct production
-quality: null
+quality: 8.6
 title: "Config Code of Conduct"
 version: "1.0.0"
 author: n04_knowledge
