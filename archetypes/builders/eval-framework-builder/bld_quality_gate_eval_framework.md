@@ -4,7 +4,7 @@ id: p07_qg_eval_framework
 pillar: P11
 llm_function: GOVERN
 purpose: Quality gate for eval_framework ARTIFACTS (structure/metadata, not runtime eval throughput)
-quality: null
+quality: 9.0
 title: "Quality Gate Eval Framework"
 version: "1.1.0"
 author: n03_hybrid_review4
