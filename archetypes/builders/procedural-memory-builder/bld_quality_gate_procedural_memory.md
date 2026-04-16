@@ -4,7 +4,7 @@ id: p10_qg_procedural_memory
 pillar: P11
 llm_function: GOVERN
 purpose: Quality gate with HARD and SOFT scoring for procedural_memory
-quality: null
+quality: 9.0
 title: "Quality Gate: procedural_memory"
 version: "2.0.0"
 author: n06_commercial
