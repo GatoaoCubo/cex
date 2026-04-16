@@ -4,7 +4,7 @@ id: rl-algorithm-builder
 pillar: P02
 llm_function: BECOME
 purpose: Builder identity, capabilities, routing for rl_algorithm
-quality: null
+quality: 8.8
 title: "Type Builder Rl Algorithm"
 version: "1.0.0"
 author: wave1_builder_gen
