@@ -5,7 +5,7 @@ pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for cost_budget production -- token and USD budget allocation per provider/model
 sources: OpenAI Usage Limits API, Anthropic Billing Tiers, AWS Bedrock Cost Controls, FinOps Foundation
-quality: null
+quality: 9.2
 title: "Knowledge Card Cost Budget"
 version: "1.0.0"
 author: n03_builder
