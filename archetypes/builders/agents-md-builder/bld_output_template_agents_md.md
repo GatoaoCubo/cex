@@ -4,7 +4,7 @@ id: bld_output_template_agents_md
 pillar: P05
 llm_function: PRODUCE
 purpose: Template with vars for agents_md production
-quality: null
+quality: 8.8
 title: "Output Template Agents Md"
 version: "1.0.0"
 author: wave7_n03_dev_manifests
