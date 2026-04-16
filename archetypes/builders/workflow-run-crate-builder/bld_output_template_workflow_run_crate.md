@@ -4,7 +4,7 @@ id: bld_output_template_workflow_run_crate
 pillar: P05
 llm_function: PRODUCE
 purpose: Template with vars for workflow_run_crate production
-quality: null
+quality: 8.9
 title: "Output Template Workflow Run Crate"
 version: "1.0.0"
 author: n04_wave7
