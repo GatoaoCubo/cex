@@ -4,7 +4,7 @@ id: bld_knowledge_card_usage_report
 pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for usage_report production
-quality: null
+quality: 9.2
 title: "Knowledge Card Usage Report"
 version: "1.0.0"
 author: wave1_builder_gen_v2
