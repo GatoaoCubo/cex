@@ -3,9 +3,10 @@ id: kc_referral_program
 kind: knowledge_card
 title: Referral Program Design
 version: 1.0.0
-quality: null
+quality: 8.7
 pillar: P01
 description: Referral program design with viral coefficient and reward structure
+density_score: 1.0
 ---
 
 # Referral Program Design
