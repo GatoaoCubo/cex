@@ -4,7 +4,7 @@ id: bld_config_churn_prevention_playbook
 pillar: P09
 llm_function: CONSTRAIN
 purpose: Naming, paths, limits for churn_prevention_playbook production
-quality: null
+quality: 8.6
 title: "Config Churn Prevention Playbook"
 version: "1.0.0"
 author: n05_wave6
