@@ -14,7 +14,7 @@ keywords: [training, supervised, unsupervised, reinforcement, self-supervised, t
 triggers: ["define training method", "specify learning paradigm", "document training approach", "create training spec", "describe how model is trained"]
 capabilities: >
   L1: Specialist in building training_method artifacts -- learning paradigm specifications for model training. L2: Define learning paradigm, compute intensity, hyperparameters, and dataset dependencies with validation. L3: When user needs to document or specify a training methodology for an ML model.
-quality: null
+quality: 9.1
 title: "Manifest Training Method"
 tldr: "Builder for training_method artifacts: ML training paradigm specs with learning type, compute profile, hyperparameters, and dataset dependencies."
 density_score: 0.90
