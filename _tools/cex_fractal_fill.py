@@ -18,6 +18,8 @@ Usage:
   python _tools/cex_fractal_fill.py --nucleus n06   # focus one nucleus
   python _tools/cex_fractal_fill.py --json out.json # dump machine report
   python _tools/cex_fractal_fill.py --core-only     # gaps for core kinds only
+  python _tools/cex_fractal_fill.py --plan          # emit fill plan (core+affinity
+                                                    #   minus per-nucleus exclusions)
 """
 from __future__ import annotations
 
@@ -103,6 +105,69 @@ SIN_AFFINITY: dict[str, set[str]] = {
         "workflow", "dispatch_rule", "schedule", "crew_template",
         "role_assignment", "capability_registry", "team_charter",
         "dag", "handoff_protocol",
+    },
+}
+
+# Per-nucleus kind EXCLUSIONS (applicability filter for --plan).
+# A kind is excluded when it's semantically irrelevant to the nucleus's
+# domain. N03 owns build/training/voice infra; other nuclei don't need
+# their own copies of those kinds. Keep conservative -- better to keep
+# a borderline kind than lose coverage.
+EXCLUSIONS: dict[str, set[str]] = {
+    "N00_genesis": set(),  # archetype: gets everything (template stubs)
+    "N01_intelligence": {
+        "rl_algorithm", "reward_model", "reward_signal", "finetune_config",
+        "quantization_config", "tts_provider", "stt_provider", "vad_config",
+        "prosody_config", "voice_pipeline", "realtime_session", "audio_tool",
+        "code_executor", "sandbox_spec", "sandbox_config",
+        "c2pa_manifest", "prosody_config",
+    },
+    "N02_marketing": {
+        "rl_algorithm", "reward_model", "reward_signal", "finetune_config",
+        "quantization_config", "code_executor", "sandbox_spec", "sandbox_config",
+        "tts_provider", "stt_provider", "vad_config", "prosody_config",
+        "voice_pipeline", "realtime_session", "audio_tool",
+        "model_architecture", "training_method", "rl_algorithm",
+    },
+    "N03_engineering": {
+        # N03 is build-central; almost nothing is off-limits. Only remove
+        # clearly commercial-domain kinds.
+        "subscription_tier", "pricing_page", "sales_playbook",
+        "customer_segment", "roi_calculator", "referral_program",
+        "expansion_play", "nps_survey", "churn_prevention_playbook",
+        "cohort_analysis", "renewal_workflow", "content_monetization",
+    },
+    "N04_knowledge": {
+        "rl_algorithm", "reward_model", "reward_signal", "finetune_config",
+        "quantization_config", "tts_provider", "stt_provider", "vad_config",
+        "prosody_config", "voice_pipeline", "realtime_session", "audio_tool",
+        "subscription_tier", "pricing_page", "sales_playbook",
+        "customer_segment", "roi_calculator", "referral_program",
+        "expansion_play", "nps_survey", "churn_prevention_playbook",
+    },
+    "N05_operations": {
+        "rl_algorithm", "reward_model", "finetune_config",
+        "tagline", "press_release", "landing_page", "pitch_deck",
+        "subscription_tier", "pricing_page", "sales_playbook",
+        "customer_segment", "roi_calculator", "referral_program",
+        "expansion_play", "nps_survey", "churn_prevention_playbook",
+    },
+    "N06_commercial": {
+        "rl_algorithm", "reward_model", "reward_signal", "finetune_config",
+        "quantization_config", "code_executor", "sandbox_spec", "sandbox_config",
+        "tts_provider", "stt_provider", "vad_config", "prosody_config",
+        "voice_pipeline", "realtime_session", "audio_tool",
+        "model_architecture", "training_method",
+    },
+    "N07_admin": {
+        "rl_algorithm", "reward_model", "reward_signal", "finetune_config",
+        "quantization_config", "tts_provider", "stt_provider", "vad_config",
+        "prosody_config", "voice_pipeline", "realtime_session", "audio_tool",
+        "model_architecture", "training_method",
+        "tagline", "press_release", "landing_page",
+        "subscription_tier", "pricing_page", "sales_playbook",
+        "customer_segment", "referral_program", "expansion_play",
+        "nps_survey", "churn_prevention_playbook",
     },
 }
 
@@ -295,6 +360,117 @@ def render_gaps(matrix: dict, meta: dict, focus: str | None = None) -> str:
     return "\n".join(lines)
 
 
+def build_plan(meta: dict, focus_nucleus: str | None = None) -> dict:
+    """Build a fill plan: per-nucleus applicable kinds minus what's already present.
+
+    Applicability rule per (nucleus, pillar):
+        applicable = core_kinds(pillar) + sin_affinity(nucleus)
+        applicable -= EXCLUSIONS[nucleus]
+    Every nucleus always has all 12 pillar dirs; only the KINDS inside vary.
+
+    Returns:
+        {
+          "nuclei": {
+            "N06_commercial": {
+              "sin": "Strategic Greed",
+              "applicable_total": 48,
+              "present_total": 14,
+              "to_create_total": 34,
+              "pillars": {
+                "P01": {"applicable": [...], "present": [...], "missing": [...]},
+                ...
+              }
+            }
+          },
+          "grand_total_to_create": 234
+        }
+    """
+    pillar_kinds = kinds_by_pillar(meta)
+    out: dict = {"nuclei": {}, "grand_total_to_create": 0}
+
+    for n in NUCLEI:
+        if focus_nucleus and not n.lower().startswith(focus_nucleus.lower()):
+            continue
+        ndir = ROOT / n
+        if not ndir.exists():
+            continue
+        excl = EXCLUSIONS.get(n, set())
+        affinity = SIN_AFFINITY.get(n, set())
+        node: dict = {
+            "sin": SIN.get(n, ""),
+            "applicable_total": 0,
+            "present_total": 0,
+            "to_create_total": 0,
+            "pillars": {},
+        }
+        for subdir, pid in PILLAR_SUBDIRS:
+            core_kinds = [
+                k for k in pillar_kinds.get(pid, [])
+                if meta[k].get("core")
+            ]
+            # applicable = core + affinity kinds that belong to this pillar
+            applicable = set(core_kinds)
+            for k in affinity:
+                if meta.get(k, {}).get("pillar") == pid:
+                    applicable.add(k)
+            applicable -= excl
+
+            present_counts = scan_pillar(ndir, subdir)
+            present = set(present_counts.keys()) & applicable
+            missing = sorted(applicable - present)
+
+            node["pillars"][pid] = {
+                "subdir": subdir,
+                "applicable": sorted(applicable),
+                "present": sorted(present),
+                "missing": missing,
+                "missing_count": len(missing),
+            }
+            node["applicable_total"] += len(applicable)
+            node["present_total"] += len(present)
+            node["to_create_total"] += len(missing)
+
+        out["nuclei"][n] = node
+        out["grand_total_to_create"] += node["to_create_total"]
+
+    return out
+
+
+def render_plan(plan: dict, meta: dict, verbose: bool = False) -> str:
+    """Human-readable plan: per-nucleus tally + optional per-kind list."""
+    lines = []
+    lines.append("=== Fractal Fill PLAN  (core + sin-affinity minus exclusions) ===")
+    lines.append("")
+    lines.append(f"{'nucleus':<18} {'sin':<24} {'present':>8} {'applicable':>11} {'to_create':>10} {'cov':>6}")
+    lines.append("-" * 82)
+    for n, node in plan["nuclei"].items():
+        cov = node["present_total"] / node["applicable_total"] if node["applicable_total"] else 0
+        lines.append(
+            f"{n:<18} {node['sin']:<24} "
+            f"{node['present_total']:>8} {node['applicable_total']:>11} "
+            f"{node['to_create_total']:>10} {cov:>5.0%}"
+        )
+    lines.append("-" * 82)
+    lines.append(f"{'GRAND TOTAL':<18} {'':<24} {'':>8} {'':>11} "
+                 f"{plan['grand_total_to_create']:>10}")
+    lines.append("")
+
+    if verbose:
+        for n, node in plan["nuclei"].items():
+            lines.append(f"\n== {n}  ({node['sin']}) ==")
+            for _, pid in PILLAR_SUBDIRS:
+                p = node["pillars"][pid]
+                if not p["missing"]:
+                    continue
+                lines.append(f"  {pid} {p['subdir']:<14} "
+                             f"[{len(p['present'])}/{len(p['applicable'])}]  "
+                             f"to create: {p['missing_count']}")
+                for k in p["missing"]:
+                    desc = meta.get(k, {}).get("description", "")[:56]
+                    lines.append(f"      - {k:<34} {desc}")
+    return "\n".join(lines)
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(
         description=__doc__,
@@ -307,9 +483,32 @@ def main() -> int:
                     help="Write machine-readable report to this path")
     ap.add_argument("--core-only", action="store_true",
                     help="Only count core kinds (ignores non-core extensions)")
+    ap.add_argument("--plan", action="store_true",
+                    help="Emit fill plan: applicable = core + sin-affinity - EXCLUSIONS")
+    ap.add_argument("--verbose", action="store_true",
+                    help="With --plan: list every kind to create per pillar")
     args = ap.parse_args()
 
     meta = load_kinds_meta()
+
+    # --plan mode: applicability-filtered fill list (not raw canonical gap)
+    if args.plan:
+        plan = build_plan(meta, focus_nucleus=args.nucleus)
+        print(render_plan(plan, meta, verbose=args.verbose))
+        if args.json_out:
+            out = Path(args.json_out)
+            out.parent.mkdir(parents=True, exist_ok=True)
+            payload = {
+                "generated_at": _dt.datetime.now().isoformat(),
+                "mode": "plan",
+                "plan": plan,
+            }
+            out.write_text(json.dumps(payload, indent=2, ensure_ascii=True),
+                           encoding="utf-8")
+            print(f"\n[OK] Plan JSON -> {out}")
+        return 0
+
+    # Default: raw audit matrix
     matrix = build_matrix(meta, core_only=args.core_only)
 
     scope = "CORE KINDS ONLY" if args.core_only else "ALL KINDS"
