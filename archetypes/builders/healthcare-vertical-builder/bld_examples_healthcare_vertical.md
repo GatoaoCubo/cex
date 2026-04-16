@@ -4,7 +4,7 @@ id: bld_examples_healthcare_vertical
 pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of healthcare_vertical artifacts
-quality: null
+quality: 8.9
 title: "Examples Healthcare Vertical"
 version: "1.0.0"
 author: wave1_builder_gen_v2
