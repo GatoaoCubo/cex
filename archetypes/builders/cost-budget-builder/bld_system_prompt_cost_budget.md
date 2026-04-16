@@ -13,7 +13,7 @@ rules_count: 13
 tone: technical
 knowledge_boundary: "token budget allocation, USD spend limits, alert thresholds, reset policies (daily/weekly/monthly/rolling), overage actions (block/warn/log), provider/model scoping | NOT rate_limit_config (RPM/TPM throughput), env_config (environment variables), feature_flag (on/off toggle), permission (access control), runtime_rule (timeouts/retries)"
 domain: "cost_budget"
-quality: null
+quality: 9.0
 tags: ["system_prompt", "cost_budget", "token-budget", "spend-tracking", "P09"]
 safety_level: standard
 tools_listed: false
