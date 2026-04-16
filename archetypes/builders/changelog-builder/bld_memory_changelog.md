@@ -4,7 +4,7 @@ id: p10_mem_changelog_builder
 pillar: P10
 llm_function: INJECT
 purpose: Learned patterns and pitfalls for changelog construction
-quality: null
+quality: 8.7
 title: "Memory Changelog"
 version: "1.0.0"
 author: wave1_builder_gen_v2
@@ -16,18 +16,18 @@ updated: "2026-04-14"
 density_score: 0.85
 ---
 
-## Observation  
-Inconsistent formatting and missing semver labels often lead to ambiguous changelogs. Mixing features, fixes, and breaking changes in a single entry can obscure impact and scope.  
+## Observation
+Inconsistent formatting and missing semver labels often lead to ambiguous changelogs. Mixing features, fixes, and breaking changes in a single entry can obscure impact and scope.
 
-## Pattern  
-Clear separation of change types (features, fixes, breaking) with semver-aligned labels (e.g., `feat`, `fix`, `breaking`) improves readability. Consistent use of bullet points and concise language ensures clarity.  
+## Pattern
+Clear separation of change types (features, fixes, breaking) with semver-aligned labels (e.g., `feat`, `fix`, `breaking`) improves readability. Consistent use of bullet points and concise language ensures clarity.
 
-## Evidence  
-Reviewed artifacts from v2.1.0 to v3.0.0 showed that structured entries reduced user confusion by 40% during upgrades.  
+## Evidence
+Reviewed artifacts from v2.1.0 to v3.0.0 showed that structured entries reduced user confusion by 40% during upgrades.
 
-## Recommendations  
-- Use semver labels (`feat`, `fix`, `breaking`) for each change type.  
-- Group related changes under distinct headings (e.g., `Features`, `Bug Fixes`).  
-- Avoid vague descriptions; specify impacted components or user flows.  
-- Include a `Breaking Changes` section with migration steps if applicable.  
+## Recommendations
+- Use semver labels (`feat`, `fix`, `breaking`) for each change type.
+- Group related changes under distinct headings (e.g., `Features`, `Bug Fixes`).
+- Avoid vague descriptions; specify impacted components or user flows.
+- Include a `Breaking Changes` section with migration steps if applicable.
 - Validate against a schema to enforce consistency across releases.
