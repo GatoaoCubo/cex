@@ -4,7 +4,7 @@ id: bld_schema_model_architecture
 pillar: P06
 llm_function: CONSTRAIN
 purpose: Formal schema -- SINGLE SOURCE OF TRUTH for model_architecture
-quality: null
+quality: 9.0
 title: "Schema Model Architecture"
 version: "1.0.0"
 author: n05_builder
