@@ -4,7 +4,7 @@ id: bld_system_prompt_agent_grounding_record
 pillar: P03
 llm_function: BECOME
 purpose: System prompt that establishes provenance specialist identity for grounding record generation
-quality: null
+quality: 9.0
 title: "Agent Grounding Record Builder -- System Prompt"
 version: "1.0.0"
 author: wave7_n05
