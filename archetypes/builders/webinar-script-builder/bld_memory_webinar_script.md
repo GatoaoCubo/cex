@@ -4,7 +4,7 @@ id: p10_lr_webinar_script_builder
 pillar: P10
 llm_function: INJECT
 purpose: Accumulated learning observations and recommendations for webinar_script builder calibration
-quality: null
+quality: 9.1
 title: "Webinar Script Builder Learning Record"
 version: "1.0.0"
 author: n02_wave6
