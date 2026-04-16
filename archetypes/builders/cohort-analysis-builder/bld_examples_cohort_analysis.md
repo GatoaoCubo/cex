@@ -4,7 +4,7 @@ id: bld_examples_cohort_analysis
 pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of cohort_analysis artifacts
-quality: null
+quality: 8.9
 title: "Examples Cohort Analysis"
 version: "1.0.0"
 author: wave1_builder_gen_v2
