@@ -4,7 +4,7 @@ id: bld_examples_c2pa_manifest
 pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of c2pa_manifest artifacts
-quality: null
+quality: 8.9
 title: "Examples C2PA Manifest"
 version: "1.0.0"
 author: n04_wave7
