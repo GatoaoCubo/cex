@@ -4,7 +4,7 @@ id: bld_knowledge_card_search_strategy
 pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for search_strategy production
-quality: null
+quality: 9.2
 title: "Knowledge Card Search Strategy"
 version: "1.0.0"
 author: wave1_builder_gen
