@@ -4,7 +4,7 @@ id: bld_architecture_dataset_card
 pillar: P08
 llm_function: CONSTRAIN
 purpose: 13-ISO component map of the dataset-card-builder
-quality: null
+quality: 9.1
 title: "Architecture Dataset Card"
 version: "1.1.0"
 author: n03_hybrid_review3
