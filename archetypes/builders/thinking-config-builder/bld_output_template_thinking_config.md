@@ -4,7 +4,7 @@ id: bld_output_template_thinking_config
 pillar: P05
 llm_function: PRODUCE
 purpose: Template with vars for thinking_config production
-quality: null
+quality: 8.5
 title: "Output Template Thinking Config"
 version: "1.0.0"
 author: wave1_builder_gen
