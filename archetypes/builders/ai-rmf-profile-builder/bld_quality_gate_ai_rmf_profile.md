@@ -4,7 +4,7 @@ id: p11_qg_ai_rmf_profile
 pillar: P11
 llm_function: GOVERN
 purpose: Quality gate with HARD and SOFT scoring for ai_rmf_profile
-quality: null
+quality: 9.0
 title: "Quality Gate AI RMF Profile"
 version: "1.0.0"
 author: n01_wave7
