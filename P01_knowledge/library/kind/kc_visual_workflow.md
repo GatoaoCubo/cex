@@ -3,8 +3,9 @@ id: kc_visual_workflow
 kind: knowledge_card
 title: Visual Workflow Editor Configuration
 version: 1.0.0
-quality: null
+quality: 8.7
 pillar: P01
+density_score: 0.97
 ---
 
 # Visual Workflow Editor Configuration
