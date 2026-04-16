@@ -28,6 +28,7 @@ from collections import defaultdict
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from pathlib import Path
+from typing import Any
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from cex_shared import CEX_ROOT, parse_frontmatter
@@ -87,7 +88,7 @@ class Issue:
     action: str  # DELETE, ARCHIVE, WARN, SKIP
     reason: str
 
-    def to_dict(self):
+    def to_dict(self) -> dict[str, str]:
         return {
             "rule": self.rule_id,
             "rule_name": self.rule_name,
@@ -100,28 +101,28 @@ class Issue:
 @dataclass
 class ScanResult:
     """Aggregated scan results -- importable API."""
-    issues: list = field(default_factory=list)
+    issues: list[Issue] = field(default_factory=list)
 
     @property
-    def critical_count(self):
+    def critical_count(self) -> int:
         return sum(1 for i in self.issues if i.action in ("DELETE", "ARCHIVE"))
 
     @property
-    def warn_count(self):
+    def warn_count(self) -> int:
         return sum(1 for i in self.issues if i.action == "WARN")
 
     @property
-    def skip_count(self):
+    def skip_count(self) -> int:
         return sum(1 for i in self.issues if i.action == "SKIP")
 
-    def by_rule(self):
+    def by_rule(self) -> dict[str, list[Issue]]:
         """Group issues by rule_id."""
-        grouped = defaultdict(list)
+        grouped: defaultdict[str, list[Issue]] = defaultdict(list)
         for issue in self.issues:
             grouped[issue.rule_id].append(issue)
         return dict(grouped)
 
-    def to_dict(self):
+    def to_dict(self) -> dict[str, Any]:
         return {
             "total": len(self.issues),
             "critical": self.critical_count,
@@ -135,7 +136,7 @@ class ScanResult:
 # Scan Rules
 # =============================================================================
 
-def rule_r01_temp_files(root):
+def rule_r01_temp_files(root: Path) -> list[Issue]:
     """R01: TEMP_FILES -- _tmp_* or tmp_* in repo root."""
     issues = []
     for pattern in ("_tmp_*", "tmp_*"):
@@ -150,7 +151,7 @@ def rule_r01_temp_files(root):
     return issues
 
 
-def rule_r02_empty_dirs(root):
+def rule_r02_empty_dirs(root: Path) -> list[Issue]:
     """R02: EMPTY_DIRS -- directories with 0 files (recursive)."""
     issues = []
     for d in sorted(root.rglob("*")):
@@ -184,7 +185,7 @@ def rule_r02_empty_dirs(root):
     return issues
 
 
-def rule_r03_nested_duplicates(root):
+def rule_r03_nested_duplicates(root: Path) -> list[Issue]:
     """R03: NESTED_DUPLICATES -- N0X_name/N0X_name/ double-nesting."""
     issues = []
     for d in sorted(root.iterdir()):
@@ -210,7 +211,7 @@ def rule_r03_nested_duplicates(root):
     return issues
 
 
-def rule_r04_stale_compiled(root):
+def rule_r04_stale_compiled(root: Path) -> list[Issue]:
     """R04: STALE_COMPILED -- .yaml in compiled/ without matching .md source."""
     issues = []
     compiled_dirs = list(root.rglob("compiled"))
@@ -250,7 +251,7 @@ def rule_r04_stale_compiled(root):
     return issues
 
 
-def rule_r05_report_accumulation(root):
+def rule_r05_report_accumulation(root: Path) -> list[Issue]:
     """R05: REPORT_ACCUMULATION -- multiple self_audit_*.md per nucleus."""
     issues = []
     for d in sorted(root.iterdir()):
@@ -274,7 +275,7 @@ def rule_r05_report_accumulation(root):
     return issues
 
 
-def rule_r06_superseded_docs(root):
+def rule_r06_superseded_docs(root: Path) -> list[Issue]:
     """R06: SUPERSEDED_DOCS -- _docs/X.md when _docs/X_v2.md exists."""
     issues = []
     docs_dir = root / "_docs"
@@ -294,7 +295,7 @@ def rule_r06_superseded_docs(root):
     return issues
 
 
-def _load_known_kinds():
+def _load_known_kinds() -> set[str]:
     """Load valid kind names from kinds_meta.json."""
     kinds_path = CEX_ROOT / ".cex" / "kinds_meta.json"
     if kinds_path.exists():
@@ -306,17 +307,17 @@ def _load_known_kinds():
     return set()
 
 
-_KNOWN_KINDS = None
+_KNOWN_KINDS: set[str] | None = None
 
 
-def _get_known_kinds():
+def _get_known_kinds() -> set[str]:
     global _KNOWN_KINDS
     if _KNOWN_KINDS is None:
         _KNOWN_KINDS = _load_known_kinds()
     return _KNOWN_KINDS
 
 
-def _is_user_project_file(path, root):
+def _is_user_project_file(path: Path, root: Path) -> bool:
     """Heuristic: does this file look like a user-project artifact?
 
     Three-layer check:
@@ -364,7 +365,7 @@ def _is_user_project_file(path, root):
     return False
 
 
-def rule_r07_user_project_artifacts(root):
+def rule_r07_user_project_artifacts(root: Path) -> list[Issue]:
     """R07: USER_PROJECT_ARTIFACTS -- user-project files in pillar examples/."""
     issues = []
     for d in sorted(root.iterdir()):
@@ -407,7 +408,7 @@ def rule_r07_user_project_artifacts(root):
     return issues
 
 
-def rule_r08_orphan_task_files(root):
+def rule_r08_orphan_task_files(root: Path) -> list[Issue]:
     """R08: ORPHAN_TASK_FILES -- n0X_task.md files in repo root."""
     issues = []
     for f in sorted(root.iterdir()):
@@ -437,7 +438,7 @@ ALL_RULES = [
 ]
 
 
-def run_scan(root=None):
+def run_scan(root: Path | None = None) -> ScanResult:
     """Run all 8 scan rules. Returns ScanResult (importable API)."""
     if root is None:
         root = CEX_ROOT
@@ -451,7 +452,9 @@ def run_scan(root=None):
 # Actions: archive, delete, log
 # =============================================================================
 
-def _log_action(action, path_str, rule_id, dest=None):
+def _log_action(
+    action: str, path_str: str, rule_id: str, dest: str | None = None
+) -> None:
     """Append to hygiene_log.jsonl."""
     HYGIENE_LOG.parent.mkdir(parents=True, exist_ok=True)
     entry = {
@@ -466,7 +469,7 @@ def _log_action(action, path_str, rule_id, dest=None):
         f.write(json.dumps(entry, ensure_ascii=True) + "\n")
 
 
-def _archive_file(src_path, archive_subdir, root):
+def _archive_file(src_path: Path, archive_subdir: str, root: Path) -> str:
     """Move file to .cex/archive/{subdir}/, handling name collisions."""
     dest_dir = ARCHIVE_DIR / archive_subdir
     dest_dir.mkdir(parents=True, exist_ok=True)
@@ -480,7 +483,7 @@ def _archive_file(src_path, archive_subdir, root):
     return str(dest.relative_to(root))
 
 
-def _delete_path(target, root):
+def _delete_path(target: Path, root: Path) -> None:
     """Delete a file or empty directory."""
     if target.is_file():
         target.unlink()
@@ -491,7 +494,9 @@ def _delete_path(target, root):
             shutil.rmtree(str(target))
 
 
-def execute_clean(result, root, dry_run=False):
+def execute_clean(
+    result: ScanResult, root: Path, dry_run: bool = False
+) -> tuple[int, int, int]:
     """Execute clean actions for all issues in a ScanResult."""
     archived = 0
     deleted = 0
@@ -534,7 +539,7 @@ def execute_clean(result, root, dry_run=False):
 # Subcommands
 # =============================================================================
 
-def cmd_scan(args):
+def cmd_scan(args: argparse.Namespace) -> int:
     """Scan and report hygiene issues."""
     result = run_scan()
     if args.json:
@@ -544,7 +549,7 @@ def cmd_scan(args):
     return 0 if result.critical_count == 0 else 1
 
 
-def cmd_clean(args):
+def cmd_clean(args: argparse.Namespace) -> int:
     """Archive + delete flagged items."""
     result = run_scan()
     if result.critical_count == 0:
@@ -563,7 +568,7 @@ def cmd_clean(args):
     return 1 if result.critical_count > 0 else 0
 
 
-def cmd_prune_reports(args):
+def cmd_prune_reports(args: argparse.Namespace) -> int:
     """Keep only latest self_audit per nucleus."""
     # Run just R05
     issues = rule_r05_report_accumulation(CEX_ROOT)
@@ -577,7 +582,7 @@ def cmd_prune_reports(args):
     return 0
 
 
-def cmd_prune_compiled(args):
+def cmd_prune_compiled(args: argparse.Namespace) -> int:
     """Remove compiled YAML without matching source .md."""
     issues = rule_r04_stale_compiled(CEX_ROOT)
     if not issues:
@@ -590,7 +595,7 @@ def cmd_prune_compiled(args):
     return 0
 
 
-def cmd_stats(args):
+def cmd_stats(args: argparse.Namespace) -> int:
     """Print repo hygiene metrics."""
     result = run_scan()
     by_rule = result.by_rule()
@@ -638,7 +643,7 @@ def cmd_stats(args):
 # Report Printer
 # =============================================================================
 
-def print_scan_report(result):
+def print_scan_report(result: ScanResult) -> None:
     """Print formatted scan report to stdout."""
     by_rule = result.by_rule()
     rule_order = [
@@ -683,7 +688,7 @@ def print_scan_report(result):
 # split_frontmatter fallback (if cex_shared not available)
 # =============================================================================
 
-def _split_frontmatter_fallback(text):
+def _split_frontmatter_fallback(text: str) -> dict[str, Any] | None:
     """Minimal frontmatter parser fallback."""
     import yaml as _yaml
     text = text.strip()
@@ -703,7 +708,7 @@ def _split_frontmatter_fallback(text):
 # CLI
 # =============================================================================
 
-def build_parser():
+def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         description="CEX Hygiene v1.0 -- Artifact garbage collector",
         formatter_class=argparse.RawDescriptionHelpFormatter,
@@ -732,7 +737,7 @@ def build_parser():
     return parser
 
 
-def main():
+def main() -> None:
     parser = build_parser()
     args = parser.parse_args()
 
