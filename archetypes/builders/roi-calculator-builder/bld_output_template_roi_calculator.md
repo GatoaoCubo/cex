@@ -4,7 +4,7 @@ id: bld_output_template_roi_calculator
 pillar: P05
 llm_function: PRODUCE
 purpose: Template with vars for roi_calculator production
-quality: null
+quality: 9.0
 title: "Output Template Roi Calculator"
 version: "1.0.0"
 author: wave1_builder_gen_v2
