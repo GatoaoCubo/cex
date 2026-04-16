@@ -3,8 +3,9 @@ id: kc_sso_config
 kind: knowledge_card
 title: SSO/SAML/OIDC Configuration Guide
 version: 1.0.0
-quality: null
+quality: 8.6
 pillar: P01
+density_score: 0.92
 ---
 
 **SSO/SAML/OIDC Configuration Overview**
