@@ -4,7 +4,7 @@ id: llm-evaluation-scenario-builder
 pillar: P07
 llm_function: BECOME
 purpose: Builder identity, capabilities, routing for llm_evaluation_scenario
-quality: null
+quality: 8.9
 title: "Type Builder LLM Evaluation Scenario"
 version: "1.0.0"
 author: n06_wave7
