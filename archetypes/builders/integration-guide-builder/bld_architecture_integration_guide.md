@@ -4,7 +4,7 @@ id: bld_architecture_integration_guide
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of integration_guide -- inventory, dependencies
-quality: null
+quality: 9.0
 title: "Architecture Integration Guide"
 version: "1.0.0"
 author: wave1_builder_gen_v2
