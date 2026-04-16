@@ -33,11 +33,13 @@ STUB_MD_MAX_BYTES = 200
 
 
 def is_excluded(p: Path) -> bool:
+    """Return whether a path lives under an excluded directory."""
     rel = p.relative_to(ROOT).as_posix()
     return any(rel == d or rel.startswith(d + "/") for d in EXCLUDE_DIRS)
 
 
 def find_pycache() -> list[Path]:
+    """Find Python bytecode cache directories outside excluded paths."""
     return [p for p in ROOT.rglob("__pycache__") if p.is_dir() and not is_excluded(p)]
 
 
@@ -45,6 +47,7 @@ PRESERVE_EMPTY = {".gitkeep", ".keep", ".gitignore", "__init__.py"}
 
 
 def find_empty_files() -> list[Path]:
+    """Find empty files that are not explicitly preserved."""
     hits = []
     for p in ROOT.rglob("*"):
         if not p.is_file() or is_excluded(p):
@@ -60,6 +63,7 @@ def find_empty_files() -> list[Path]:
 
 
 def find_stub_md() -> list[Path]:
+    """Find very small markdown files that contain only frontmatter stubs."""
     hits = []
     for p in ROOT.rglob("*.md"):
         if not p.is_file() or is_excluded(p):
@@ -81,6 +85,7 @@ def find_stub_md() -> list[Path]:
 
 
 def find_stale_runtime(days: int = DEFAULT_STALE_DAYS) -> list[Path]:
+    """Find runtime artifacts older than the configured age threshold."""
     cutoff = time.time() - (days * 86400)
     hits = []
     for sub in ("signals", "handoffs", "out"):
@@ -99,6 +104,7 @@ def find_stale_runtime(days: int = DEFAULT_STALE_DAYS) -> list[Path]:
 
 
 def find_empty_dirs() -> list[Path]:
+    """Find empty directories, walking deepest paths first."""
     hits = []
     for p in sorted(ROOT.rglob("*"), key=lambda x: -len(x.parts)):
         if not p.is_dir() or is_excluded(p) or p == ROOT:
@@ -112,6 +118,7 @@ def find_empty_dirs() -> list[Path]:
 
 
 def find_orphan_json() -> list[Path]:
+    """Find compiled JSON artifacts that no longer have a markdown sibling."""
     hits = []
     for p in ROOT.rglob("compiled/**/*.json"):
         if is_excluded(p):
@@ -134,6 +141,7 @@ CATEGORIES = {
 
 
 def path_size(p: Path) -> int:
+    """Measure the size of one file or the recursive size of one directory."""
     try:
         if p.is_file():
             return p.stat().st_size
@@ -145,6 +153,7 @@ def path_size(p: Path) -> int:
 
 
 def human(n: int) -> str:
+    """Format a byte count with binary size suffixes."""
     for unit in ("B", "K", "M", "G"):
         if n < 1024:
             return f"{n:.1f}{unit}"
@@ -153,6 +162,7 @@ def human(n: int) -> str:
 
 
 def cmd_scan(args) -> int:
+    """Print per-category janitor totals."""
     cats = [args.category] if args.category else list(CATEGORIES)
     total_size = 0
     total_count = 0
@@ -170,6 +180,7 @@ def cmd_scan(args) -> int:
 
 
 def cmd_inspect(args) -> int:
+    """List matching janitor targets for one category."""
     if args.category == "stale_runtime":
         items = find_stale_runtime(args.days)
     else:
@@ -184,6 +195,7 @@ def cmd_inspect(args) -> int:
 
 
 def cmd_rm(args) -> int:
+    """Delete janitor targets after dry-run and confirmation checks."""
     if args.category == "all":
         cats = list(CATEGORIES)
     else:
@@ -227,6 +239,7 @@ def cmd_rm(args) -> int:
 
 
 def main() -> int:
+    """Dispatch janitor subcommands from the CLI."""
     p = argparse.ArgumentParser()
     sub = p.add_subparsers(dest="cmd", required=True)
 
