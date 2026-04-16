@@ -4,7 +4,7 @@ id: bld_instruction_procedural_memory
 pillar: P03
 llm_function: REASON
 purpose: Step-by-step production process for procedural_memory
-quality: null
+quality: 8.9
 title: "Instruction: procedural_memory-builder"
 version: "2.0.0"
 author: n06_commercial
