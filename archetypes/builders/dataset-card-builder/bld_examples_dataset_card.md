@@ -4,7 +4,7 @@ id: bld_examples_dataset_card
 pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of dataset_card artifacts
-quality: null
+quality: 8.9
 title: "Examples Dataset Card"
 version: "1.0.0"
 author: wave1_builder_gen
