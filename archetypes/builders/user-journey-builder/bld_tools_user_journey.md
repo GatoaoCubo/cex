@@ -4,7 +4,7 @@ id: bld_tools_user_journey
 pillar: P04
 llm_function: CALL
 purpose: Tools available for user_journey production
-quality: null
+quality: 8.9
 title: "Tools User Journey"
 version: "1.0.0"
 author: wave1_builder_gen_v2
