@@ -4,7 +4,7 @@ id: press-release-builder
 pillar: P05
 llm_function: BECOME
 purpose: Define identity, capabilities, and routing for the press_release builder
-quality: null
+quality: 9.0
 title: "Press Release Builder Manifest"
 version: "1.0.0"
 author: n02_wave6
