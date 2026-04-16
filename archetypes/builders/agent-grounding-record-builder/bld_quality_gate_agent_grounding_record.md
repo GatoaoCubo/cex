@@ -4,7 +4,7 @@ id: bld_quality_gate_agent_grounding_record
 pillar: P11
 llm_function: GOVERN
 purpose: Define hard gates H01-H08 and soft scoring dimensions for agent_grounding_record quality control
-quality: null
+quality: 9.1
 title: "Agent Grounding Record -- Quality Gate"
 version: "1.0.0"
 author: wave7_n05
