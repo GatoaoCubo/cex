@@ -4,7 +4,7 @@ id: bld_examples_expansion_play
 pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of expansion_play artifacts
-quality: null
+quality: 9.1
 title: "Examples Expansion Play"
 version: "1.0.0"
 author: wave6_n06
