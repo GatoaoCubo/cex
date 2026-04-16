@@ -4,7 +4,7 @@ id: bld_collaboration_conformity_assessment
 pillar: P12
 llm_function: COLLABORATE
 purpose: Crew interfaces, handoff contracts, and boundary conditions for the conformity-assessment-builder
-quality: null
+quality: 9.2
 title: "Conformity Assessment Builder -- Collaboration"
 version: "1.0.0"
 author: wave7_n05
