@@ -4,7 +4,7 @@ id: p05_qg_user_journey
 pillar: P11
 llm_function: GOVERN
 purpose: Quality gate with HARD and SOFT scoring for user_journey
-quality: null
+quality: 9.0
 title: "Quality Gate User Journey"
 version: "1.0.0"
 author: wave1_builder_gen_v2
@@ -16,36 +16,36 @@ updated: "2026-04-14"
 density_score: 0.85
 ---
 
-## Definition  
-(Table: metric, threshold, operator, scope)  
-| metric | threshold | operator | scope |  
-|---|---|---|---|  
-| User journey map completeness | 100% | >= | Awareness to conversion |  
+## Definition
+(Table: metric, threshold, operator, scope)
+| metric | threshold | operator | scope |
+|---|---|---|---|
+| User journey map completeness | 100% | >= | Awareness to conversion |
 
-## HARD Gates  
-(Table: ID | Check | Fail Condition)  
-| ID | Check | Fail Condition |  
-|---|---|---|  
-| H01 | YAML frontmatter valid | Invalid or missing YAML |  
-| H02 | ID matches pattern ^p05_uj_[a-z][a-z0-9_]+.md$ | ID format mismatch |  
-| H03 | kind field matches 'user_journey' | Kind field incorrect |  
-| H04 | Journey map includes all 5 stages (awareness, interest, decision, purchase, retention) | Missing stage |  
-| H05 | User personas defined and aligned with journey | No personas or misalignment |  
-| H06 | Touchpoints mapped with >90% coverage | <90% coverage |  
-| H07 | Conversion rate benchmarks included | No benchmarks |  
+## HARD Gates
+(Table: ID | Check | Fail Condition)
+| ID | Check | Fail Condition |
+|---|---|---|
+| H01 | YAML frontmatter valid | Invalid or missing YAML |
+| H02 | ID matches pattern ^p05_uj_[a-z][a-z0-9_]+.md$ | ID format mismatch |
+| H03 | kind field matches 'user_journey' | Kind field incorrect |
+| H04 | Journey map includes all 5 stages (awareness, interest, decision, purchase, retention) | Missing stage |
+| H05 | User personas defined and aligned with journey | No personas or misalignment |
+| H06 | Touchpoints mapped with >90% coverage | <90% coverage |
+| H07 | Conversion rate benchmarks included | No benchmarks |
 
-## SOFT Scoring  
-(Table: Dim | Dimension | Weight | Scoring Guide)  
-| Dim | Dimension | Weight | Scoring Guide |  
-|---|---|---|---|  
-| D01 | Journey completeness | 0.15 | 1.0 (complete) to 0.0 (incomplete) |  
-| D02 | Persona alignment | 0.15 | 1.0 (aligned) to 0.0 (misaligned) |  
-| D03 | Touchpoint coverage | 0.15 | 1.0 (90%+) to 0.0 (<50%) |  
-| D04 | Conversion benchmarks | 0.15 | 1.0 (realistic) to 0.0 (invalid) |  
-| D05 | Consistency across channels | 0.10 | 1.0 (consistent) to 0.0 (inconsistent) |  
-| D06 | Feedback integration | 0.10 | 1.0 (included) to 0.0 (missing) |  
-| D07 | Visual clarity | 0.10 | 1.0 (clear) to 0.0 (unclear) |  
-| D08 | Stakeholder alignment | 0.10 | 1.0 (aligned) to 0.0 (disaligned) |  
+## SOFT Scoring
+(Table: Dim | Dimension | Weight | Scoring Guide)
+| Dim | Dimension | Weight | Scoring Guide |
+|---|---|---|---|
+| D01 | Journey completeness | 0.15 | 1.0 (complete) to 0.0 (incomplete) |
+| D02 | Persona alignment | 0.15 | 1.0 (aligned) to 0.0 (misaligned) |
+| D03 | Touchpoint coverage | 0.15 | 1.0 (90%+) to 0.0 (<50%) |
+| D04 | Conversion benchmarks | 0.15 | 1.0 (realistic) to 0.0 (invalid) |
+| D05 | Consistency across channels | 0.10 | 1.0 (consistent) to 0.0 (inconsistent) |
+| D06 | Feedback integration | 0.10 | 1.0 (included) to 0.0 (missing) |
+| D07 | Visual clarity | 0.10 | 1.0 (clear) to 0.0 (unclear) |
+| D08 | Stakeholder alignment | 0.10 | 1.0 (aligned) to 0.0 (disaligned) |
 
 ## Actions
 (Table: Score | Action)
@@ -56,8 +56,8 @@ density_score: 0.85
 | REVIEW (>=7.0) | Require stakeholder review |
 | REJECT (<7.0) | Reject; rework required |
 
-## Bypass  
-(Table: conditions, approver, audit trail)  
-| conditions | approver | audit trail |  
-|---|---|---|  
+## Bypass
+(Table: conditions, approver, audit trail)
+| conditions | approver | audit trail |
+|---|---|---|
 | Critical feature launch with senior PM approval | Senior Product Manager | Email + Slack notification |
