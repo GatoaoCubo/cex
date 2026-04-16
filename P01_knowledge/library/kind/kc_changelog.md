@@ -3,8 +3,9 @@ id: kc_changelog
 kind: knowledge_card
 title: Changelog Entry
 version: 1.0.0
-quality: null
+quality: 8.7
 pillar: P01
+density_score: 1.0
 ---
 
 # Changelog Entry
