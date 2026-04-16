@@ -4,7 +4,7 @@ id: bld_architecture_analyst_briefing
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of analyst_briefing -- inventory, dependencies
-quality: null
+quality: 9.0
 title: "Architecture Analyst Briefing"
 version: "1.0.0"
 author: n01_wave6
