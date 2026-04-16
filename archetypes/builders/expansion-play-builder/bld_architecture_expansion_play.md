@@ -4,7 +4,7 @@ id: bld_architecture_expansion_play
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of expansion_play -- inventory, dependencies
-quality: null
+quality: 9.0
 title: "Architecture Expansion Play"
 version: "1.0.0"
 author: wave6_n06
