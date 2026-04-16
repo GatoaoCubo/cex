@@ -4,7 +4,7 @@ id: p05_qg_pitch_deck
 pillar: P11
 llm_function: GOVERN
 purpose: Quality gate with HARD and SOFT scoring for pitch_deck
-quality: null
+quality: 8.9
 title: "Quality Gate Pitch Deck"
 version: "1.0.0"
 author: wave1_builder_gen_v2
