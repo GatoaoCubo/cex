@@ -4,7 +4,7 @@ id: p03_sp_marketplace_app_manifest_builder
 pillar: P03
 llm_function: BECOME
 purpose: System prompt defining marketplace_app_manifest-builder persona and rules
-quality: null
+quality: 8.8
 title: "System Prompt Marketplace App Manifest"
 version: "1.0.0"
 author: wave1_builder_gen_v2
