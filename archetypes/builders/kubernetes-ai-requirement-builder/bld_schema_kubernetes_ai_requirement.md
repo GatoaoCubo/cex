@@ -4,7 +4,7 @@ id: bld_schema_kubernetes_ai_requirement
 pillar: P06
 llm_function: CONSTRAIN
 purpose: Formal schema -- SINGLE SOURCE OF TRUTH for kubernetes_ai_requirement
-quality: null
+quality: 9.2
 title: "Schema Kubernetes AI Requirement"
 version: "1.0.0"
 author: wave7_n03_dev_manifests
