@@ -3,7 +3,7 @@ kind: config
 id: bld_config_model_architecture
 pillar: P09
 llm_function: CONSTRAIN
-quality: null
+quality: 8.9
 title: "Config Model Architecture"
 version: "1.0.0"
 author: n05_builder
