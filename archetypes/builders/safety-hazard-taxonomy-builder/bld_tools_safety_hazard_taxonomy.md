@@ -4,7 +4,7 @@ id: bld_tools_safety_hazard_taxonomy
 pillar: P04
 llm_function: CALL
 purpose: Tools available for safety_hazard_taxonomy production
-quality: null
+quality: 8.9
 title: "Tools Safety Hazard Taxonomy"
 version: "1.0.0"
 author: n01_wave7
