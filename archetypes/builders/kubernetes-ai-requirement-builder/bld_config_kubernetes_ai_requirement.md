@@ -4,7 +4,7 @@ id: bld_config_kubernetes_ai_requirement
 pillar: P09
 llm_function: CONSTRAIN
 purpose: Naming, paths, limits for kubernetes_ai_requirement production
-quality: null
+quality: 8.6
 title: "Config Kubernetes AI Requirement"
 version: "1.0.0"
 author: wave7_n03_dev_manifests
