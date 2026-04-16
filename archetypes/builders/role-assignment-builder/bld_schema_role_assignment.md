@@ -4,7 +4,7 @@ id: bld_schema_role_assignment
 pillar: P06
 llm_function: CONSTRAIN
 purpose: Formal schema -- SINGLE SOURCE OF TRUTH for role_assignment
-quality: null
+quality: 9.1
 title: "Schema Role Assignment"
 version: "1.0.0"
 author: n03_wave8_builder
