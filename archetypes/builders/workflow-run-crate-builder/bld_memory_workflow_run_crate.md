@@ -4,7 +4,7 @@ id: p10_lr_workflow_run_crate_builder
 pillar: P10
 llm_function: INJECT
 purpose: Learned patterns and pitfalls for workflow_run_crate construction
-quality: null
+quality: 8.8
 title: "Learning Record Workflow Run Crate"
 version: "1.0.0"
 author: n04_wave7
