@@ -3,7 +3,7 @@ kind: collaboration
 id: bld_collaboration_training_method
 pillar: P12
 llm_function: COLLABORATE
-quality: null
+quality: 9.1
 title: "Collaboration Training Method"
 version: "1.0.0"
 author: n05_builder
