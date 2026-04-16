@@ -4,7 +4,7 @@ id: bld_examples_threat_model
 pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of threat_model artifacts
-quality: null
+quality: 9.1
 title: "Examples Threat Model"
 version: "1.1.0"
 author: n05_ops
