@@ -4,7 +4,7 @@ id: p04_qg_search_strategy
 pillar: P11
 llm_function: GOVERN
 purpose: Quality gate with HARD and SOFT scoring for search_strategy
-quality: null
+quality: 9.0
 title: "Quality Gate Search Strategy"
 version: "1.0.0"
 author: wave1_builder_gen
@@ -16,46 +16,46 @@ updated: "2026-04-13"
 density_score: 0.85
 ---
 
-## Definition  
-| metric | threshold | operator | scope |  
-|---|---|---|---|  
-| Compute Allocation Efficiency | 90% | ≥ | All inference nodes |  
+## Definition
+| metric | threshold | operator | scope |
+|---|---|---|---|
+| Compute Allocation Efficiency | 90% | ≥ | All inference nodes |
 
-## HARD Gates  
-| ID | Check | Fail Condition |  
-|---|---|---|  
-| H01 | YAML valid | Invalid YAML syntax |  
-| H02 | ID matches pattern | ID does not match `^p04_ss_[a-zA-Z0-9_-]+$` |  
-| H03 | kind matches | kind ≠ `search_strategy` |  
-| H04 | Resource limits defined | Missing CPU/RAM limits |  
-| H05 | Strategy validity | Strategy not in `static`, `dynamic`, or `adaptive` |  
-| H06 | Versioning present | No version field in metadata |  
-| H07 | Documentation included | Missing user-facing documentation |  
-| H08 | Performance threshold | Latency > 500ms under load |  
+## HARD Gates
+| ID | Check | Fail Condition |
+|---|---|---|
+| H01 | YAML valid | Invalid YAML syntax |
+| H02 | ID matches pattern | ID does not match `^p04_ss_[a-zA-Z0-9_-]+$` |
+| H03 | kind matches | kind ≠ `search_strategy` |
+| H04 | Resource limits defined | Missing CPU/RAM limits |
+| H05 | Strategy validity | Strategy not in `static`, `dynamic`, or `adaptive` |
+| H06 | Versioning present | No version field in metadata |
+| H07 | Documentation included | Missing user-facing documentation |
+| H08 | Performance threshold | Latency > 500ms under load |
 
-## SOFT Scoring  
-| Dim | Dimension | Weight | Scoring Guide |  
-|---|---|---|---|  
-| D01 | Strategy clarity | 0.15 | Clear objective and constraints |  
-| D02 | Resource optimization | 0.12 | Efficient use of compute resources |  
-| D03 | Scalability | 0.10 | Handles 10x load increase |  
-| D04 | Error handling | 0.08 | Graceful fallback on failure |  
-| D05 | Documentation | 0.15 | Complete and actionable |  
-| D06 | Versioning | 0.08 | Semantic versioning compliant |  
-| D07 | Performance | 0.12 | Meets SLA under stress |  
-| D08 | Compliance | 0.10 | Adheres to security/privacy policies |  
-| D09 | Innovation | 0.08 | Novel approach to allocation |  
-| D10 | Maintainability | 0.02 | Easy to update/monitor |  
+## SOFT Scoring
+| Dim | Dimension | Weight | Scoring Guide |
+|---|---|---|---|
+| D01 | Strategy clarity | 0.15 | Clear objective and constraints |
+| D02 | Resource optimization | 0.12 | Efficient use of compute resources |
+| D03 | Scalability | 0.10 | Handles 10x load increase |
+| D04 | Error handling | 0.08 | Graceful fallback on failure |
+| D05 | Documentation | 0.15 | Complete and actionable |
+| D06 | Versioning | 0.08 | Semantic versioning compliant |
+| D07 | Performance | 0.12 | Meets SLA under stress |
+| D08 | Compliance | 0.10 | Adheres to security/privacy policies |
+| D09 | Innovation | 0.08 | Novel approach to allocation |
+| D10 | Maintainability | 0.02 | Easy to update/monitor |
 
-## Actions  
-| Score | Action |  
-|---|---|  
-| ≥9.5 | Automatically approve and deploy |  
-| ≥8.0 | Schedule for review by domain experts |  
-| ≥7.0 | Request changes and resubmit |  
-| <7.0 | Reject and require redesign |  
+## Actions
+| Score | Action |
+|---|---|
+| ≥9.5 | Automatically approve and deploy |
+| ≥8.0 | Schedule for review by domain experts |
+| ≥7.0 | Request changes and resubmit |
+| <7.0 | Reject and require redesign |
 
-## Bypass  
-| conditions | approver | audit trail |  
-|---|---|---|  
+## Bypass
+| conditions | approver | audit trail |
+|---|---|---|
 | Critical production issue | CTO | Bypass logged with justification |
