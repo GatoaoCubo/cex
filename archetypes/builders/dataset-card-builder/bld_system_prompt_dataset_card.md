@@ -4,7 +4,7 @@ id: p03_sp_dataset_card_builder
 pillar: P03
 llm_function: BECOME
 purpose: System prompt defining dataset_card-builder persona and rules
-quality: null
+quality: 8.8
 title: "System Prompt Dataset Card"
 version: "1.0.0"
 author: wave1_builder_gen
