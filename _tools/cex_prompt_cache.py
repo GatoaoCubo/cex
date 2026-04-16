@@ -26,6 +26,7 @@ import sys
 import time
 from datetime import datetime, timezone
 from pathlib import Path
+from typing import Any
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
@@ -73,7 +74,7 @@ def _max_mtime(paths):
     return max(mtimes) if mtimes else 0.0
 
 
-def list_builder_kinds():
+def list_builder_kinds() -> list[str]:
     """List all available builder kinds from archetypes/builders/."""
     if not BUILDERS_DIR.exists():
         return []
@@ -84,7 +85,7 @@ def list_builder_kinds():
     return kinds
 
 
-def compile_builder(kind):
+def compile_builder(kind: str) -> dict[str, Any] | None:
     """Compile all ISOs for a builder kind into a single cache entry.
 
     Returns the cache dict (also written to disk).
@@ -187,7 +188,7 @@ def compile_builder(kind):
     return cache_entry
 
 
-def get_cached(kind):
+def get_cached(kind: str) -> dict[str, Any] | None:
     """Load pre-compiled builder prompt from cache.
 
     Returns cache dict or None if not cached / stale.
@@ -217,7 +218,7 @@ def get_cached(kind):
     return entry
 
 
-def get_sections(kind, section_names=None):
+def get_sections(kind: str, section_names: list[str] | None = None) -> dict[str, str]:
     """Get specific prompt sections from cache.
 
     Args:
@@ -248,7 +249,7 @@ def get_sections(kind, section_names=None):
 # CLI Commands
 # =============================================================================
 
-def cmd_build(args):
+def cmd_build(args: argparse.Namespace) -> int:
     """Compile builder ISOs into cache."""
     if args.kind:
         kinds = [args.kind]
@@ -286,7 +287,7 @@ def cmd_build(args):
     return 0 if errors == 0 else 1
 
 
-def cmd_get(args):
+def cmd_get(args: argparse.Namespace) -> int:
     """Load and display a cached builder prompt."""
     entry = get_cached(args.kind)
     if entry is None:
@@ -311,7 +312,7 @@ def cmd_get(args):
     return 0
 
 
-def cmd_stats(args):
+def cmd_stats(args: argparse.Namespace) -> int:
     """Show cache statistics."""
     kinds = list_builder_kinds()
     total = len(kinds)
@@ -348,7 +349,7 @@ def cmd_stats(args):
     return 0
 
 
-def cmd_invalidate(args):
+def cmd_invalidate(args: argparse.Namespace) -> int:
     """Remove stale cache entries."""
     if not CACHE_DIR.exists():
         print("No cache directory.")
@@ -367,7 +368,7 @@ def cmd_invalidate(args):
     return 0
 
 
-def cmd_clean(args):
+def cmd_clean(args: argparse.Namespace) -> int:
     """Wipe entire cache."""
     if not CACHE_DIR.exists():
         print("No cache directory.")
@@ -386,7 +387,7 @@ def cmd_clean(args):
 # CLI
 # =============================================================================
 
-def main():
+def main() -> None:
     parser = argparse.ArgumentParser(
         description="CEX Prompt Cache v1.0 -- Pre-compiled builder ISO cache"
     )
