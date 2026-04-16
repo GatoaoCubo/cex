@@ -7,9 +7,10 @@ nucleus: N05
 mission: TYPE_HINT_RETROFIT
 wave: W5
 runtime: codex
-quality: null
+quality: 9.0
 created: 2026-04-15
 updated: 2026-04-15
+density_score: 1.0
 ---
 
 # Type Hint Retrofit W5
