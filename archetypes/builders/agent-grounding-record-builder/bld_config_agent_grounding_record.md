@@ -4,7 +4,7 @@ id: bld_config_agent_grounding_record
 pillar: P09
 llm_function: CONSTRAIN
 purpose: Naming convention, output paths, byte limits, and post-build hooks for agent_grounding_record artifacts
-quality: null
+quality: 9.1
 title: "Agent Grounding Record Builder -- Config"
 version: "1.0.0"
 author: wave7_n05
