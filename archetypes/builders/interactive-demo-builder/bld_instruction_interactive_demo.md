@@ -4,7 +4,7 @@ id: bld_instruction_interactive_demo
 pillar: P03
 llm_function: REASON
 purpose: Step-by-step production process for interactive_demo
-quality: null
+quality: 8.8
 title: "Instruction Interactive Demo"
 version: "1.0.0"
 author: wave1_builder_gen_v2
