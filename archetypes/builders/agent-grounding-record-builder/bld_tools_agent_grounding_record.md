@@ -4,7 +4,7 @@ id: bld_tools_agent_grounding_record
 pillar: P04
 llm_function: CALL
 purpose: Tool inventory for grounding record production -- hash verification, OTel validation, compile pipeline, external references
-quality: null
+quality: 9.2
 title: "Agent Grounding Record Builder -- Tools"
 version: "1.0.0"
 author: wave7_n05
