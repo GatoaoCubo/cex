@@ -3,8 +3,9 @@ id: kc_onboarding_flow
 kind: knowledge_card
 title: User Onboarding Flow
 version: 1.0.0
-quality: null
+quality: 8.7
 pillar: P01
+density_score: 0.99
 ---
 
 # User Onboarding Flow
