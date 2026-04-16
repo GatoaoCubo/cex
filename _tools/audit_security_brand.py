@@ -58,6 +58,18 @@ SAFE_DIRS = {".git", ".venv_litellm", ".aider.tags.cache.v4", "node_modules",
              ".cex/learning_records", ".cex/experiments",
              ".cex/overnight", ".cex/quality", ".cex/temp"}
 
+# Patterns whose matches must NEVER appear in the report verbatim.
+# Snippet redaction replaces the matched substring with <REDACTED-{name}> so
+# the audit can still report severity + file + line without leaking the secret.
+CRITICAL_REDACT_PATTERNS = {
+    "anthropic_key", "openai_key", "github_token", "aws_key",
+    "google_key", "private_key", "bearer_token", "generic_secret",
+}
+
+# Allowlist marker: lines containing this comment are skipped entirely.
+# Use for documented placeholder examples in builder ISOs.
+ALLOWLIST_MARKER = "allowlist-secret"
+
 # Prefix patterns: any path starting with one of these is excluded.
 # Used for historical run-output dirs that capture absolute paths in traces.
 SAFE_DIR_PREFIXES = ("_reports/leverage_map", "_reports/gridtest_")
@@ -107,8 +119,19 @@ def is_safe_match(pattern_name: str, snippet: str) -> bool:
     return any(s.search(snippet) for s in safelist)
 
 
+def redact_snippet(name: str, snippet: str, match: re.Match) -> str:
+    """Replace the matched secret substring with <REDACTED-{name}>.
+
+    Critical: the snippet is what ships in the report. Never let a real key
+    survive this function. Truncates to 140 chars after redaction.
+    """
+    if name in CRITICAL_REDACT_PATTERNS:
+        snippet = snippet.replace(match.group(0), f"<REDACTED-{name}>")
+    return snippet[:140]
+
+
 def scan_text(rel_path: str, text: str) -> list[tuple[str, int, str]]:
-    """Return list of (pattern_name, line_no, snippet)."""
+    """Return list of (pattern_name, line_no, redacted_snippet)."""
     findings = []
     lines = text.splitlines()
     is_brand_owner = rel_path in BRAND_OWNERS
@@ -118,11 +141,14 @@ def scan_text(rel_path: str, text: str) -> list[tuple[str, int, str]]:
         if is_brand_owner and name == "email_personal":
             continue
         for i, line in enumerate(lines, start=1):
+            if ALLOWLIST_MARKER in line:
+                continue
             m = pat.search(line)
             if m:
-                snippet = line.strip()[:140]
-                if is_safe_match(name, snippet):
+                raw = line.strip()
+                if is_safe_match(name, raw):
                     continue
+                snippet = redact_snippet(name, raw, m)
                 findings.append((name, i, snippet))
     return findings
 

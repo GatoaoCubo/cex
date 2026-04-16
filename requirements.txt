@@ -6,6 +6,10 @@
 pyyaml>=6.0
 tiktoken>=0.7.0
 
+# --- Required for tests/MANIFEST.yaml core tier ---
+# Without these a fresh-clone user cannot run the documented test suite.
+pytest>=7.0
+
 # --- Optional performance (retriever works without, but slower) ---
 # numpy and scikit-learn accelerate TF-IDF in cex_retriever.py.
 # The retriever has a pure-Python fallback, so these are not mandatory.

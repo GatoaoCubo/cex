@@ -11,7 +11,7 @@
   <img src="https://img.shields.io/badge/LLMs-Claude%20%7C%20GPT%20%7C%20Gemini%20%7C%20Ollama-8A2BE2" alt="LLMs">
   <img src="https://img.shields.io/badge/pillars-12-orange" alt="Pillars">
   <img src="https://img.shields.io/badge/artifact%20kinds-257-red" alt="Kinds">
-  <img src="https://img.shields.io/badge/tools-82-brightgreen" alt="Tools">
+  <img src="https://img.shields.io/badge/tools-113-brightgreen" alt="Tools">
 </p>
 
 ---
@@ -26,7 +26,7 @@ You describe **intent** in 8 tokens. CEX compiles it into a **governed prompt** 
 
 - **257 artifact kinds** across 12 pillars, each with typed frontmatter and validation
 - **8-function pipeline** (8F): CONSTRAIN > BECOME > INJECT > REASON > CALL > PRODUCE > GOVERN > COLLABORATE
-- **260 builder factories** with 3381 ISO files total (13 per kind: schema, prompt, examples, quality gate, ...)
+- **259 builder factories** with 3381 ISO files total (13 per kind: schema, prompt, examples, quality gate, ...)
 - **Multi-provider routing**: Claude, GPT, Gemini, Ollama -- with health checks and automatic fallback
 - **Reverse compiler**: export your knowledge base to CLAUDE.md, .cursorrules, CustomGPT JSON
 - **Self-healing**: model updater detects stale versions, flywheel audits doc-vs-practice integrity
@@ -89,12 +89,12 @@ python _tools/cex_8f_runner.py "your intent" --kind <kind> --dry-run --verbose
 ## Architecture
 
 ```
-Layer 0 — BUILDERS       262 factories x 13 ISOs = 3381 artifact constructors
+Layer 0 — BUILDERS       259 factories x 13 ISOs = 3381 artifact constructors
 Layer 1 — PILLARS        12 pillars x 257 kinds = the taxonomy
 Layer 2 — NUCLEI         8 business domains (N00 Genesis + N01-N07) = the organization
 Layer 3 — PIPELINE       8F functions = the assembly line
 Layer 4 — GOVERNANCE     hooks + doctor + quality gates = the quality bar
-Layer 5 — TOOLS          82 Python CLI tools = the runtime
+Layer 5 — TOOLS          113 Python CLI tools = the runtime
 Layer 6 — WIRING         SDK modules + flywheel = the nervous system
 ```
 
@@ -172,7 +172,7 @@ bash _spawn/dispatch.sh stop --all                              # Stop ALL (DANG
 
 ---
 
-## Tools (82 total)
+## Tools (113 total)
 
 ### Core Pipeline
 | Tool | Purpose |
@@ -236,10 +236,12 @@ bash _spawn/dispatch.sh stop --all                              # Stop ALL (DANG
 | Metric | Count |
 |--------|-------|
 | Artifact kinds | 257 |
-| Builders (factories) | 262 |
+| Builders (factories) | 259 |
 | Builder ISO files | 13 per kind (3381 total) |
-| Sub-agents | 125 |
-| CLI tools | 82 |
+| Sub-agents | 259 |
+| CLI tools | 113 |
+
+> Counts are live-verifiable: `python _tools/cex_stats.py`.
 | Pillars | 12 |
 | Business nuclei | 8 (N00-N07) |
 | 8F functions | 8 |

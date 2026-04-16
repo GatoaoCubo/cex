@@ -6,12 +6,21 @@ __pycache__/
 
 # Secrets
 .env
+.env.*
+!.env.example
+*.pem
+*.key
 _config/*.credentials
 _config/client_secret.json
 _config/token.json
 **/canva_token.json
 **/*_token.json
 **/*_credentials.json
+
+# Audit reports (may contain raw .env scan output -- NEVER commit)
+_reports/audit/
+_reports/leverage_map/
+_reports/gridtest_*/
 
 # IDE
 .obsidian/

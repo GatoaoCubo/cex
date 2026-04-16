@@ -27,8 +27,23 @@ env:
   PYTHON_VERSION: '3.12'
 
 jobs:
+  secret-scan:
+    name: Secret Scan (gitleaks)
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Run gitleaks
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITLEAKS_CONFIG: .github/gitleaks.toml
+
   lint:
     name: Lint (Ruff)
+    needs: secret-scan
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:

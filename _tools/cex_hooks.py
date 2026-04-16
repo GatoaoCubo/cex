@@ -694,11 +694,69 @@ def run_pre_commit() -> int:
     # 8. Root-write gate -- block generator-misfire orphans at repo root
     errors += check_root_writes(all_staged)
 
+    # 9. Secret scan -- block live API keys / tokens in staged files
+    errors += check_secret_scan(all_staged)
+
     if errors:
         print(f"\npre-commit: BLOCKED -- {errors} error(s). Fix before committing.")
     else:
         total = len(all_staged)
         print(f"\npre-commit: PASS -- {total} file(s) checked.")
+    return errors
+
+
+SECRET_PATTERNS = [
+    ("anthropic_key", re.compile(r"sk-ant-api\d{2}-[A-Za-z0-9_-]{60,}")),
+    ("openai_key", re.compile(r"sk-(?:proj-)?[A-Za-z0-9_-]{40,}")),
+    ("github_token", re.compile(r"ghp_[A-Za-z0-9]{36}|github_pat_[A-Za-z0-9_]{82}")),
+    ("aws_key", re.compile(r"AKIA[0-9A-Z]{16}")),
+    ("google_key", re.compile(r"AIzaSy[A-Za-z0-9_-]{33}")),
+    ("cerebras_key", re.compile(r"csk-[a-z0-9]{40,}")),
+    ("slack_token", re.compile(r"xox[bpa]-[A-Za-z0-9-]{50,}")),
+    ("private_key", re.compile(r"-----BEGIN (RSA |EC |OPENSSH |DSA )?PRIVATE KEY-----")),
+]
+SECRET_PLACEHOLDERS = {
+    "ghp_1234567890abcdef1234567890abcdef1234",
+    "AKIAXXXXXXXXXXXXXXXX",
+}
+SECRET_ALLOWLIST_MARKER = "allowlist-secret"
+SECRET_SAFE_PATH_PREFIXES = (
+    "archetypes/builders/",  # builder examples = documented placeholders
+    "_reports/audit/",       # gitignored but defensive
+    ".cex/retriever_index.json",
+)
+
+
+def check_secret_scan(staged: list[str]) -> int:
+    """Scan staged files for live API keys / tokens. Returns error count.
+
+    Allowlist:
+    - Files inside builder ISO example dirs (placeholders only).
+    - Lines containing the allowlist-secret marker.
+    - Known placeholder strings (ghp_1234..., AKIAXXX...).
+    """
+    errors = 0
+    for path in staged:
+        norm = path.replace("\\", "/")
+        if any(norm.startswith(p) or norm == p for p in SECRET_SAFE_PATH_PREFIXES):
+            continue
+        try:
+            text = Path(path).read_text(encoding="utf-8", errors="replace")
+        except OSError:
+            continue
+        for line_no, line in enumerate(text.splitlines(), start=1):
+            if SECRET_ALLOWLIST_MARKER in line:
+                continue
+            for name, pat in SECRET_PATTERNS:
+                m = pat.search(line)
+                if not m:
+                    continue
+                if m.group(0) in SECRET_PLACEHOLDERS:
+                    continue
+                print(f"  [FAIL] secret-scan: {name} match in {path}:{line_no}")
+                print(f"         Rotate the secret + remove from staged file.")
+                print(f"         Allowlist with '# {SECRET_ALLOWLIST_MARKER}' on the line if intentional.")
+                errors += 1
     return errors
 
 
