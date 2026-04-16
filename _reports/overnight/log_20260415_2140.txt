@@ -46,3 +46,5 @@
 [22:54:13] Phase B cycle 15 mode=auto
 [22:54:31] Phase B cycle 15 done. Sleeping 180 s.
 [22:57:32] Phase B cycle 16 mode=evolve
+[22:57:35] Phase B cycle 16 done. Sleeping 180 s.
+[23:00:35] Phase B cycle 17 mode=auto
