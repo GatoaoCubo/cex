@@ -4,7 +4,7 @@ id: bld_output_template_safety_policy
 pillar: P05
 llm_function: PRODUCE
 purpose: Template with vars for safety_policy production
-quality: null
+quality: 9.2
 title: "Output Template Safety Policy"
 version: "1.1.0"
 author: n06_hybrid_review
