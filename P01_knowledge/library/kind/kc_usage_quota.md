@@ -3,8 +3,9 @@ id: kc_usage_quota
 kind: knowledge_card
 title: Usage Quota and Fair-Use Enforcement
 version: 1.0.0
-quality: null
+quality: 8.8
 pillar: P01
+density_score: 0.97
 ---
 
 # Usage Quota and Fair-Use Enforcement
