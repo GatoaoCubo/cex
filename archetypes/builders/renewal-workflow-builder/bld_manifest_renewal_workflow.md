@@ -4,7 +4,7 @@ id: renewal-workflow-builder
 pillar: P12
 llm_function: BECOME
 purpose: Builder identity, capabilities, routing for renewal_workflow
-quality: null
+quality: 8.9
 title: "Type Builder Renewal Workflow"
 version: "1.0.0"
 author: wave6_n06
