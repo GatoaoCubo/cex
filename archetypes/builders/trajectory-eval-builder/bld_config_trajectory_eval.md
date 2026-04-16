@@ -4,7 +4,7 @@ id: bld_config_trajectory_eval
 pillar: P09
 llm_function: CONSTRAIN
 purpose: Naming, paths, limits for trajectory_eval production
-quality: null
+quality: 8.6
 title: "Config Trajectory Eval"
 version: "1.0.0"
 author: wave1_builder_gen_v2
@@ -23,15 +23,15 @@ Scope: trajectory_eval artifacts for LLM agent step-level path analysis
 
 ## Paths
 Artifacts: `P07_evaluation/trajectory_eval/`
-Logs: `.cex/runtime/logs/trajectory_eval/`  
+Logs: `.cex/runtime/logs/trajectory_eval/`
 
-## Limits  
-max_bytes: 5120  
-max_turns: 10  
-effort_level: 3  
+## Limits
+max_bytes: 5120
+max_turns: 10
+effort_level: 3
 
-## Hooks  
-pre_build: null  
-post_build: null  
-on_error: null  
+## Hooks
+pre_build: null
+post_build: null
+on_error: null
 on_quality_fail: null
