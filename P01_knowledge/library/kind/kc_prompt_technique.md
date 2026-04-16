@@ -3,8 +3,9 @@ id: kc_prompt_technique
 kind: knowledge_card
 title: Prompt Technique Patterns
 version: 1.0.0
-quality: null
+quality: 8.6
 pillar: P01
+density_score: 0.78
 ---
 
 # Prompt Technique Patterns
