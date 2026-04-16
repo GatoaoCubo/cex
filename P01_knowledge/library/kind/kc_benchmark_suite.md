@@ -3,8 +3,9 @@ id: kc_benchmark_suite
 kind: knowledge_card
 title: Benchmark Suite Definition
 version: 1.0.0
-quality: null
+quality: 9.0
 pillar: P01
+density_score: 1.0
 ---
 
 # Benchmark Suite Definition
