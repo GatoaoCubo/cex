@@ -27,7 +27,7 @@ decay_rate: 0.03
 agent_group: builder
 memory_scope: project
 observation_types: [feedback, reference, project]
-quality: null
+quality: 9.2
 title: "Memory Ontology"
 density_score: 0.90
 llm_function: INJECT
