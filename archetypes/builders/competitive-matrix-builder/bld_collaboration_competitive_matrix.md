@@ -4,7 +4,7 @@ id: bld_collaboration_competitive_matrix
 pillar: P12
 llm_function: COLLABORATE
 purpose: How competitive_matrix-builder works in crews with other builders
-quality: null
+quality: 8.9
 title: "Collaboration Competitive Matrix"
 version: "1.0.0"
 author: wave1_builder_gen_v2
