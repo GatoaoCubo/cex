@@ -4,7 +4,7 @@ id: usage-quota-builder
 pillar: P09
 llm_function: BECOME
 purpose: Builder identity, capabilities, routing for usage_quota
-quality: null
+quality: 8.8
 title: "Type Builder Usage Quota"
 version: "1.0.0"
 author: wave1_builder_gen_v2
