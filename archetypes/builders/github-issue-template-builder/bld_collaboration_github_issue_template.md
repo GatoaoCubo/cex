@@ -4,7 +4,7 @@ id: bld_collaboration_github_issue_template
 pillar: P12
 llm_function: COLLABORATE
 purpose: How github_issue_template-builder works in crews with other builders
-quality: null
+quality: 8.7
 title: "Collaboration Github Issue Template"
 version: "1.0.0"
 author: wave1_builder_gen_v2
