@@ -14,7 +14,7 @@ keywords: [finetune, fine-tune, lora, peft, qlora, training, adapter, hyperparam
 triggers: ["create fine-tune config", "define training job", "configure LoRA adapter", "set up PEFT training", "specify hyperparameters for finetuning"]
 capabilities: >
   L1: Specialist in building finetune_config artifacts -- training job specifications for LLM adaptation. L2: Define base model, dataset, adapter type (LoRA/QLoRA/full), and hyperparameters with validation. L3: When user needs to create, build, or scaffold a fine-tuning job configuration.
-quality: null
+quality: 9.1
 title: "Manifest Finetune Config"
 tldr: "Builder for finetune_config artifacts: LLM fine-tuning job specs with base model, dataset, adapter type, hyperparameters, and eval metrics."
 density_score: 0.90
