@@ -4,7 +4,7 @@ id: p07_qg_bias_audit
 pillar: P07
 llm_function: GOVERN
 purpose: Quality gate with HARD and SOFT scoring for bias_audit
-quality: null
+quality: 9.1
 title: "Quality Gate Bias Audit"
 version: "1.1.0"
 author: n06_hybrid_review
