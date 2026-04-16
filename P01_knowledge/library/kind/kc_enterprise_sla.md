@@ -3,8 +3,9 @@ id: kc_enterprise_sla
 kind: knowledge_card
 title: Enterprise SLA Template
 version: 1.0.0
-quality: null
+quality: 8.4
 pillar: P01
+density_score: 0.92
 ---
 
 # Enterprise SLA Template
