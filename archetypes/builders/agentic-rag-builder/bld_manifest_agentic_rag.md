@@ -4,7 +4,7 @@ id: agentic-rag-builder
 pillar: P01
 llm_function: BECOME
 purpose: Builder identity, capabilities, routing for agentic_rag
-quality: null
+quality: 8.8
 title: "Type Builder Agentic Rag"
 version: "1.0.0"
 author: wave1_builder_gen_v2
