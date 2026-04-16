@@ -4,7 +4,7 @@ id: changelog-builder
 pillar: P01
 llm_function: BECOME
 purpose: Builder identity, capabilities, routing for changelog
-quality: null
+quality: 8.8
 title: "Type Builder Changelog"
 version: "1.0.0"
 author: wave1_builder_gen_v2
