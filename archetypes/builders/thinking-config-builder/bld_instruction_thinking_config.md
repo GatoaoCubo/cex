@@ -4,7 +4,7 @@ id: bld_instruction_thinking_config
 pillar: P03
 llm_function: REASON
 purpose: Step-by-step production process for thinking_config
-quality: null
+quality: 9.0
 title: "Instruction Thinking Config"
 version: "1.0.0"
 author: wave1_builder_gen
