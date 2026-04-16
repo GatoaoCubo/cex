@@ -4,7 +4,7 @@ id: webinar-script-builder
 pillar: P03
 llm_function: BECOME
 purpose: Define builder identity, capabilities, and routing for webinar_script artifacts
-quality: null
+quality: 8.9
 title: "Webinar Script Builder Manifest"
 version: "1.0.0"
 author: n02_wave6
