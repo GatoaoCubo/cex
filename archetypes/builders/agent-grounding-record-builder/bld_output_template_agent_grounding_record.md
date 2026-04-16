@@ -4,7 +4,7 @@ id: bld_output_template_agent_grounding_record
 pillar: P05
 llm_function: PRODUCE
 purpose: Canonical output structure for agent_grounding_record artifacts ready for F6 PRODUCE rendering
-quality: null
+quality: 9.1
 title: "Agent Grounding Record -- Output Template"
 version: "1.0.0"
 author: wave7_n05
