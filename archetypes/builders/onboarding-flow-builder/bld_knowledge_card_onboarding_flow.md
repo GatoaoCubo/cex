@@ -4,7 +4,7 @@ id: bld_knowledge_card_onboarding_flow
 pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for onboarding_flow production
-quality: null
+quality: 9.1
 title: "Knowledge Card Onboarding Flow"
 version: "1.0.0"
 author: wave1_builder_gen_v2
