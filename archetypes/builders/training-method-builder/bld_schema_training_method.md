@@ -4,7 +4,7 @@ id: bld_schema_training_method
 pillar: P06
 llm_function: CONSTRAIN
 purpose: Formal schema -- SINGLE SOURCE OF TRUTH for training_method
-quality: null
+quality: 9.0
 title: "Schema Training Method"
 version: "1.0.0"
 author: n05_builder
