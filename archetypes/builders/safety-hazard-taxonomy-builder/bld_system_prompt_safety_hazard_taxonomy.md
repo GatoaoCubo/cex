@@ -4,7 +4,7 @@ id: p03_sp_safety_hazard_taxonomy_builder
 pillar: P03
 llm_function: BECOME
 purpose: System prompt defining safety_hazard_taxonomy-builder persona and rules
-quality: null
+quality: 9.0
 title: "System Prompt Safety Hazard Taxonomy"
 version: "1.0.0"
 author: n01_wave7
