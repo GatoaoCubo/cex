@@ -8,7 +8,7 @@ created: "2026-04-13"
 updated: "2026-04-13"
 author: "builder_agent"
 domain: "ontology -- formal taxonomy and classification definitions using OWL, SKOS, and schema.org patterns"
-quality: null
+quality: 9.1
 tags: [quality-gate, ontology, taxonomy, OWL, SKOS, P11]
 tldr: "Gates for ontology artifacts: validates class hierarchy completeness, property constraints, axiom declarations, and schema.org mapping."
 density_score: 0.92
