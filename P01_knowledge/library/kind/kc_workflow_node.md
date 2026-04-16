@@ -3,8 +3,9 @@ id: kc_workflow_node
 kind: knowledge_card
 title: Workflow Node
 version: 1.0.0
-quality: null
+quality: 8.5
 pillar: P01
+density_score: 1.0
 ---
 
 A workflow node is a typed entity representing a discrete operation in a visual/programmatic workflow. It encapsulates:
