@@ -4,7 +4,7 @@ id: bld_config_customer_segment
 pillar: P09
 llm_function: CONSTRAIN
 purpose: Naming, paths, limits for customer_segment production
-quality: null
+quality: 8.6
 title: "Config Customer Segment"
 version: "1.0.0"
 author: wave1_builder_gen_v2
@@ -16,21 +16,21 @@ updated: "2026-04-14"
 density_score: 0.85
 ---
 
-## Naming Convention  
-Pattern: `p02_cs_{{name}}`  
-Examples: `p02_cs_high_value`, `p02_cs_churn_risk`  
+## Naming Convention
+Pattern: `p02_cs_{{name}}`
+Examples: `p02_cs_high_value`, `p02_cs_churn_risk`
 
-## Paths  
-Artifacts: `/data/segments/p02/{{name}}/artifacts`  
-Logs: `/logs/p02/{{name}}`  
+## Paths
+Artifacts: `/data/segments/p02/{{name}}/artifacts`
+Logs: `/logs/p02/{{name}}`
 
-## Limits  
-max_bytes: 4096  
-max_turns: 10  
-effort_level: 3  
+## Limits
+max_bytes: 4096
+max_turns: 10
+effort_level: 3
 
-## Hooks  
-pre_build: null  
-post_build: null  
-on_error: null  
+## Hooks
+pre_build: null
+post_build: null
+on_error: null
 on_quality_fail: null
