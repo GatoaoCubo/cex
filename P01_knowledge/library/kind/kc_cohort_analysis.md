@@ -3,8 +3,9 @@ id: kc_cohort_analysis
 kind: knowledge_card
 title: Cohort Analysis for Retention and LTV Modeling
 version: 1.0.0
-quality: null
+quality: 8.5
 pillar: P01
+density_score: 1.0
 ---
 
 **Definition**: Cohort analysis is a statistical technique that groups users by shared characteristics (e.g., acquisition date, behavior patterns) to measure retention rates and lifetime value (LTV) over time.
