@@ -4,7 +4,7 @@ id: p03_sp_content_filter_builder
 pillar: P03
 llm_function: BECOME
 purpose: System prompt defining content_filter-builder persona and rules
-quality: null
+quality: 8.9
 title: "System Prompt Content Filter"
 version: "1.0.0"
 author: wave1_builder_gen
