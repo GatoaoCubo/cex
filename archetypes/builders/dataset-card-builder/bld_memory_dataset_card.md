@@ -4,7 +4,7 @@ id: p10_lr_dataset_card_builder
 pillar: P10
 llm_function: INJECT
 purpose: Learned patterns and pitfalls for dataset_card construction
-quality: null
+quality: 8.7
 title: "Learning Record Dataset Card"
 version: "1.0.0"
 author: wave1_builder_gen
