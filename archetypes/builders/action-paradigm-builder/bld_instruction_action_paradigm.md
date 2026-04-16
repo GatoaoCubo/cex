@@ -4,7 +4,7 @@ id: bld_instruction_action_paradigm
 pillar: P03
 llm_function: REASON
 purpose: Step-by-step production process for action_paradigm
-quality: null
+quality: 9.0
 title: "Instruction Action Paradigm"
 version: "1.0.0"
 author: wave1_builder_gen
