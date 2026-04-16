@@ -4,7 +4,7 @@ id: bld_schema_action_paradigm
 pillar: P06
 llm_function: CONSTRAIN
 purpose: Formal schema -- SINGLE SOURCE OF TRUTH for action_paradigm
-quality: null
+quality: 9.2
 title: "Schema Action Paradigm"
 version: "1.0.0"
 author: wave1_builder_gen
