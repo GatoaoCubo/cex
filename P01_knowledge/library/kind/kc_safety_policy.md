@@ -3,9 +3,10 @@ id: kc_safety_policy
 kind: knowledge_card
 title: Safety Policy
 version: 1.0.0
-quality: null
+quality: 8.8
 pillar: P01
 language: en
+density_score: 0.96
 ---
 
 # Safety Policy
