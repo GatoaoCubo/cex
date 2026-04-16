@@ -5,7 +5,7 @@ pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge about the CEX builder architecture -- the 13-ISO pattern
 sources: CEX architecture, convention-over-configuration (Rails), archetype pattern (GoF)
-quality: null
+quality: 9.2
 title: "Knowledge Card Kind Builder"
 version: "1.0.0"
 author: n03_builder
