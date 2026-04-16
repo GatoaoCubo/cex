@@ -4,7 +4,7 @@ id: p03_qg_churn_prevention_playbook
 pillar: P11
 llm_function: GOVERN
 purpose: Quality gate with HARD and SOFT scoring for churn_prevention_playbook
-quality: null
+quality: 9.1
 title: "Quality Gate Churn Prevention Playbook"
 version: "1.0.0"
 author: n05_wave6
