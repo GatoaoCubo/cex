@@ -4,7 +4,7 @@ id: bld_collaboration_cohort_analysis
 pillar: P12
 llm_function: COLLABORATE
 purpose: How cohort_analysis-builder works in crews with other builders
-quality: null
+quality: 8.9
 title: "Collaboration Cohort Analysis"
 version: "1.0.0"
 author: wave1_builder_gen_v2
