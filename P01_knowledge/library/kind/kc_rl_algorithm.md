@@ -3,8 +3,9 @@ id: kc_rl_algorithm
 kind: knowledge_card
 title: Reinforcement Learning Algorithm
 version: 1.0.0
-quality: null
+quality: 8.6
 pillar: P01
+density_score: 0.88
 ---
 
 A reinforcement learning (RL) algorithm is a type of machine learning where an agent learns to make decisions by performing actions in an environment to maximize some notion of cumulative reward. Key components include:
