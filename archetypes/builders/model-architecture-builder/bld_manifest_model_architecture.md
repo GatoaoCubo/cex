@@ -4,7 +4,7 @@ id: model-architecture-builder
 pillar: P02
 llm_function: BECOME
 purpose: Builder identity, capabilities, routing for model_architecture
-quality: null
+quality: 8.8
 title: "Type Builder Model Architecture"
 version: "1.0.0"
 author: wave1_builder_gen
