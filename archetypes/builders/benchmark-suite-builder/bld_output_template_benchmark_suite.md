@@ -4,7 +4,7 @@ id: bld_output_template_benchmark_suite
 pillar: P05
 llm_function: PRODUCE
 purpose: Template with vars for benchmark_suite production
-quality: null
+quality: 8.8
 title: "Output Template Benchmark Suite"
 version: "1.0.0"
 author: wave1_builder_gen_v2
