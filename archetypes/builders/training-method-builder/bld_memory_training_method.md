@@ -3,7 +3,7 @@ id: p10_lr_training_method_builder
 kind: memory
 pillar: P10
 version: 1.0.0
-quality: null
+quality: 9.0
 title: "Memory Training Method Builder"
 tags: [training_method, memory, learning_record, P10]
 tldr: "Learning record for training-method-builder: boundary conditions, common mistakes, quality patterns."
