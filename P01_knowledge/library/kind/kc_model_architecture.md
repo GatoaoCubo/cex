@@ -3,8 +3,9 @@ id: kc_model_architecture
 kind: knowledge_card
 title: Model Architecture
 version: 1.0.0
-quality: null
+quality: 8.5
 pillar: P01
+density_score: 0.88
 ---
 
 Model architecture refers to the structural design of artificial neural networks that defines how information flows through the system. Key components include:
