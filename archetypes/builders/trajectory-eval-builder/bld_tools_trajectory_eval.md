@@ -4,7 +4,7 @@ id: bld_tools_trajectory_eval
 pillar: P04
 llm_function: CALL
 purpose: Tools available for trajectory_eval production
-quality: null
+quality: 8.9
 title: "Tools Trajectory Eval"
 version: "1.1.0"
 author: n01_hybrid_review4
