@@ -6,7 +6,7 @@ file_position: 6/13
 pillar: P05
 llm_function: PRODUCE
 purpose: Meta-template for generating OUTPUT_TEMPLATE.md of any kind-builder
-quality: null
+quality: 9.2
 title: "Meta Output Template Builder"
 version: "1.0.0"
 author: n03_builder
