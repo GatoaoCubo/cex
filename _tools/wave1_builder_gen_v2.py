@@ -24,6 +24,7 @@ Usage:
 import json, os, sys, re, time, argparse, subprocess, requests
 from datetime import date
 from pathlib import Path
+from typing import Any
 
 OLLAMA_URL = "http://localhost:11434/api/generate"
 MODEL = "qwen3:14b"           # v2 default: qwen3:14b (better than gemma4:26b for domain fidelity)
@@ -214,7 +215,7 @@ ISO_COMPONENT_NAMES = [
 # FIX 4 + 5 + 6: Pre-commit ISO body validator
 # ============================================================
 
-def validate_iso_body(iso_type: str, kind: str, body: str) -> tuple:
+def validate_iso_body(iso_type: str, kind: str, body: str) -> tuple[bool, list[str]]:
     """
     Pre-commit validation of generated ISO body content.
     Returns (passed: bool, errors: list[str]).
@@ -296,7 +297,7 @@ def derive_id_pattern(naming: str, kind: str) -> str:
 # Ollama call (same as v1 with model override)
 # ============================================================
 
-def ollama_generate(prompt, max_tokens=2048, model=None):
+def ollama_generate(prompt: str, max_tokens: int = 2048, model: str | None = None) -> str | None:
     """Call Ollama with /no_think for fast structured output."""
     use_model = model or MODEL
     for attempt in range(3):
@@ -321,7 +322,7 @@ def ollama_generate(prompt, max_tokens=2048, model=None):
     return None
 
 
-def load_kind_meta(kind):
+def load_kind_meta(kind: str) -> dict[str, Any]:
     with open(META_PATH, "r", encoding="utf-8") as f:
         data = json.load(f)
     return data.get(kind, {})
@@ -331,7 +332,7 @@ def load_kind_meta(kind):
 # Prompt generators (updated with systemic fixes)
 # ============================================================
 
-def build_manifest_prompt(kind, meta):
+def build_manifest_prompt(kind: str, meta: dict[str, Any]) -> str:
     return (
         "You are generating a builder manifest for CEX kind '" + kind + "'.\n"
         "The kind belongs to pillar " + meta["pillar"] + " with llm_function " + meta["llm_function"] + ".\n"
@@ -350,7 +351,7 @@ def build_manifest_prompt(kind, meta):
     )
 
 
-def build_instruction_prompt(kind, meta):
+def build_instruction_prompt(kind: str, meta: dict[str, Any]) -> str:
     return (
         "Generate production instructions for building a '" + kind + "' artifact.\n"
         "Kind: " + kind + ", Pillar: " + meta["pillar"] + ", Function: " + meta["llm_function"] + "\n"
@@ -366,7 +367,7 @@ def build_instruction_prompt(kind, meta):
     )
 
 
-def build_system_prompt_prompt(kind, meta):
+def build_system_prompt_prompt(kind: str, meta: dict[str, Any]) -> str:
     # FIX 1: Explicitly instruct BECOME, not INJECT
     return (
         "Generate a system prompt for the " + kind + "-builder agent.\n"
@@ -389,7 +390,7 @@ def build_system_prompt_prompt(kind, meta):
     )
 
 
-def build_schema_prompt(kind, meta):
+def build_schema_prompt(kind: str, meta: dict[str, Any]) -> str:
     naming = meta.get("naming", "p00_x_{{name}}")
     id_pattern = derive_id_pattern(naming, kind)
     # FIX 2: Explicit quality field spec; FIX 3: pass derived ID pattern
@@ -417,7 +418,7 @@ def build_schema_prompt(kind, meta):
     )
 
 
-def build_quality_gate_prompt(kind, meta):
+def build_quality_gate_prompt(kind: str, meta: dict[str, Any]) -> str:
     naming = meta.get("naming", "p00_x_{{name}}")
     id_pattern = derive_id_pattern(naming, kind)
     # FIX 3: Pass actual ID pattern for H02
@@ -445,7 +446,7 @@ def build_quality_gate_prompt(kind, meta):
     )
 
 
-def build_output_template_prompt(kind, meta):
+def build_output_template_prompt(kind: str, meta: dict[str, Any]) -> str:
     naming = meta.get("naming", "p00_x_{{name}}")
     id_pattern = derive_id_pattern(naming, kind)
     # FIX 5: Require schema-backed context, not bare placeholders
@@ -466,7 +467,7 @@ def build_output_template_prompt(kind, meta):
     )
 
 
-def build_examples_prompt(kind, meta):
+def build_examples_prompt(kind: str, meta: dict[str, Any]) -> str:
     return (
         "Generate golden and anti-examples for CEX kind '" + kind + "'.\n"
         "Description: " + meta["description"] + "\n"
@@ -483,7 +484,7 @@ def build_examples_prompt(kind, meta):
     )
 
 
-def build_knowledge_card_prompt(kind, meta):
+def build_knowledge_card_prompt(kind: str, meta: dict[str, Any]) -> str:
     return (
         "Generate domain knowledge for building '" + kind + "' artifacts.\n"
         "Description: " + meta["description"] + "\n"
@@ -503,7 +504,7 @@ def build_knowledge_card_prompt(kind, meta):
     )
 
 
-def build_architecture_prompt(kind, meta):
+def build_architecture_prompt(kind: str, meta: dict[str, Any]) -> str:
     # FIX 6: Explicitly list 13 ISOs as components; forbid wrong-domain content
     iso_list = ", ".join(ISO_COMPONENT_NAMES)
     return (
@@ -525,7 +526,7 @@ def build_architecture_prompt(kind, meta):
     )
 
 
-def build_collaboration_prompt(kind, meta):
+def build_collaboration_prompt(kind: str, meta: dict[str, Any]) -> str:
     return (
         "Generate a collaboration spec for " + kind + "-builder.\n"
         "Kind: " + kind + ", Boundary: " + meta["boundary"] + "\n\n"
@@ -542,7 +543,7 @@ def build_collaboration_prompt(kind, meta):
     )
 
 
-def build_config_prompt(kind, meta):
+def build_config_prompt(kind: str, meta: dict[str, Any]) -> str:
     return (
         "Generate a config for " + kind + "-builder.\n"
         "Naming: " + meta.get("naming", "") + ", Max bytes: " + str(meta.get("max_bytes", 5120)) + ", Pillar: " + meta["pillar"] + "\n\n"
@@ -559,7 +560,7 @@ def build_config_prompt(kind, meta):
     )
 
 
-def build_memory_prompt(kind, meta):
+def build_memory_prompt(kind: str, meta: dict[str, Any]) -> str:
     return (
         "Generate a learning record (memory) for " + kind + "-builder.\n"
         "Description: " + meta["description"] + "\n"
@@ -577,7 +578,7 @@ def build_memory_prompt(kind, meta):
     )
 
 
-def build_tools_prompt(kind, meta):
+def build_tools_prompt(kind: str, meta: dict[str, Any]) -> str:
     return (
         "Generate a tools inventory for " + kind + "-builder.\n"
         "Kind: " + kind + "\n\n"
@@ -613,7 +614,9 @@ PROMPT_GENERATORS = [
 # Frontmatter generator (same logic as v1, verify BECOME on sp)
 # ============================================================
 
-def generate_frontmatter(iso_spec, kind, meta):
+def generate_frontmatter(
+    iso_spec: tuple[str, str, str, str, str], kind: str, meta: dict[str, Any]
+) -> str:
     """Generate YAML frontmatter for an ISO file."""
     fname_pattern, iso_kind, pillar_tpl, llm_func, purpose_tpl = iso_spec
     pillar = pillar_tpl.format(pillar=meta["pillar"])
@@ -659,7 +662,7 @@ def generate_frontmatter(iso_spec, kind, meta):
 # FIX 7: Compile after save
 # ============================================================
 
-def compile_iso(fpath):
+def compile_iso(fpath: str) -> bool:
     """Run cex_compile.py on a saved ISO to create matching .yaml."""
     try:
         result = subprocess.run(
@@ -679,7 +682,13 @@ def compile_iso(fpath):
 # Core generate function (updated with validation + compile)
 # ============================================================
 
-def generate_iso(kind, meta, iso_idx, dry_run=False, max_retries=2):
+def generate_iso(
+    kind: str,
+    meta: dict[str, Any],
+    iso_idx: int,
+    dry_run: bool = False,
+    max_retries: int = 2,
+) -> str | None:
     """
     Generate a single ISO file for a kind.
     v2 additions:
@@ -747,7 +756,7 @@ def generate_iso(kind, meta, iso_idx, dry_run=False, max_retries=2):
 # Validate-only mode: scan existing ISOs
 # ============================================================
 
-def validate_existing(kinds):
+def validate_existing(kinds: list[str]) -> None:
     """Scan existing ISO files and report validation issues without regenerating."""
     print("[VALIDATE-ONLY] Scanning existing ISOs...\n")
     total = 0
@@ -783,7 +792,7 @@ def validate_existing(kinds):
 # Main
 # ============================================================
 
-def main():
+def main() -> None:
     parser = argparse.ArgumentParser(description="CEX ISO generator v2 -- hardened with 7 fixes")
     parser.add_argument("--kind", help="Generate for specific kind only")
     parser.add_argument("--wave", default="1", help="Wave number: 1, 2, 3, or all")
