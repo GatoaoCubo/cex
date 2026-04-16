@@ -4,7 +4,7 @@ id: bld_examples_conformity_assessment
 pillar: P07
 llm_function: GOVERN
 purpose: Golden example and anti-examples for conformity_assessment artifacts
-quality: null
+quality: 9.2
 title: "Conformity Assessment Builder -- Examples"
 version: "1.0.0"
 author: wave7_n05
