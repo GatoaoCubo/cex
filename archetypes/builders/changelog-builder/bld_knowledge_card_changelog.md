@@ -4,7 +4,7 @@ id: bld_knowledge_card_changelog
 pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for changelog production
-quality: null
+quality: 9.2
 title: "Knowledge Card Changelog"
 version: "1.1.0"
 author: wave1_builder_gen_v2
