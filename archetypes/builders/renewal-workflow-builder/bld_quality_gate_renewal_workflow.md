@@ -4,7 +4,7 @@ id: p12_qg_renewal_workflow
 pillar: P11
 llm_function: GOVERN
 purpose: Quality gate with HARD and SOFT scoring for renewal_workflow
-quality: null
+quality: 9.1
 title: "Quality Gate Renewal Workflow"
 version: "1.0.0"
 author: wave6_n06
