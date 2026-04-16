@@ -4,7 +4,7 @@ id: bld_tools_model_registry
 pillar: P04
 llm_function: CALL
 purpose: Tools available for model_registry production
-quality: null
+quality: 8.8
 title: "Tools Model Registry"
 version: "1.0.0"
 author: wave1_builder_gen
