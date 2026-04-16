@@ -4,7 +4,7 @@ id: bld_collaboration_discovery_questions
 pillar: P12
 llm_function: COLLABORATE
 purpose: How discovery_questions-builder works in crews with other builders
-quality: null
+quality: 8.9
 title: "Collaboration Discovery Questions"
 version: "1.0.0"
 author: wave1_builder_gen_v2
