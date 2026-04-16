@@ -4,7 +4,7 @@ id: roi-calculator-builder
 pillar: P11
 llm_function: BECOME
 purpose: Builder identity, capabilities, routing for roi_calculator
-quality: null
+quality: 8.8
 title: "Type Builder Roi Calculator"
 version: "1.0.0"
 author: wave1_builder_gen_v2
