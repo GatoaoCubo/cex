@@ -8,7 +8,7 @@ created: "2026-04-13"
 updated: "2026-04-13"
 author: "builder_agent"
 domain: "hitl_config -- human-in-the-loop approval flow configuration with review triggers, escalation chains, and timeout/fallback behavior"
-quality: null
+quality: 9.0
 tags: [quality-gate, hitl-config, human-review, escalation, approval, P11]
 tldr: "Gates for hitl_config: validates review trigger precision, escalation chain completeness, approval flow validity, timeout > 0, and safe fallback."
 density_score: 0.92
