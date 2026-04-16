@@ -4,7 +4,7 @@ id: bld_quality_gate_agent_name_service_record
 pillar: P11
 llm_function: GOVERN
 purpose: Hard gates H01-H08 and soft scoring dimensions for agent_name_service_record artifacts
-quality: null
+quality: 9.1
 title: "Agent Name Service Record Builder -- Quality Gate"
 version: "1.0.0"
 author: wave7_n05
