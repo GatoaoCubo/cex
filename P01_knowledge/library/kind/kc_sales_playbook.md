@@ -3,8 +3,9 @@ id: kc_sales_playbook
 kind: knowledge_card
 title: Sales Playbook
 version: 1.0.0
-quality: null
+quality: 8.7
 pillar: P01
+density_score: 1.0
 ---
 
 # Sales Playbook
