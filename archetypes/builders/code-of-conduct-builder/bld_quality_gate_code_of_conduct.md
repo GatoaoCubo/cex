@@ -4,7 +4,7 @@ id: p05_qg_code_of_conduct
 pillar: P11
 llm_function: GOVERN
 purpose: Quality gate with HARD and SOFT scoring for code_of_conduct
-quality: null
+quality: 9.0
 title: "Quality Gate Code of Conduct"
 version: "1.0.0"
 author: n04_knowledge
