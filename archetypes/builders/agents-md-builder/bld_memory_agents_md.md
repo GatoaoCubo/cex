@@ -4,7 +4,7 @@ id: p10_lr_agents_md_builder
 pillar: P10
 llm_function: INJECT
 purpose: Learned patterns and pitfalls for agents_md construction
-quality: null
+quality: 8.7
 title: "Learning Record Agents Md"
 version: "1.0.0"
 author: wave7_n03_dev_manifests
