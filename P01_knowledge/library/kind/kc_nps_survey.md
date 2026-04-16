@@ -3,9 +3,10 @@ id: kc_nps_survey
 kind: knowledge_card
 title: NPS Survey Configuration
 version: 1.0.0
-quality: null
+quality: 8.6
 pillar: P01
 language: en
+density_score: 0.96
 ---
 
 # NPS Survey Configuration
