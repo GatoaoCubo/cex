@@ -4,7 +4,7 @@ id: bld_instruction_sales_playbook
 pillar: P03
 llm_function: REASON
 purpose: Step-by-step production process for sales_playbook
-quality: null
+quality: 8.9
 title: "Instruction Sales Playbook"
 version: "1.0.0"
 author: wave1_builder_gen_v2
