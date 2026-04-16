@@ -20,7 +20,7 @@ tags:
   - fallback
   - review-trigger
   - approval-flow
-quality: null
+quality: 9.2
 title: "Memory Hitl Config"
 tldr: "Timeout is mandatory. Two+ reviewers always. Trigger must be evaluable. Never bare accept as fallback. SLA per escalation level."
 impact_score: 8.2
