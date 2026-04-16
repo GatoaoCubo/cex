@@ -4,7 +4,7 @@ id: bld_tools_contributor_guide
 pillar: P04
 llm_function: CALL
 purpose: Production, validation, and reference tools for the contributor_guide builder
-quality: null
+quality: 9.1
 title: "Contributor Guide Builder Tools"
 version: "1.1.0"
 author: n02_hybrid_review7
