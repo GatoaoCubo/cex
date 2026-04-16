@@ -3,8 +3,9 @@ id: kc_compliance_framework
 kind: knowledge_card
 title: Compliance Framework
 version: 1.0.0
-quality: null
+quality: 8.5
 pillar: P01
+density_score: 0.87
 ---
 
 A compliance framework for AI systems is a structured approach to ensuring alignment with regulatory requirements, ethical standards, and organizational policies. It provides a systematic way to map AI operations to applicable regulations, assess risks, and implement controls.
