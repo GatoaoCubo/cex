@@ -4,7 +4,7 @@ id: bld_knowledge_card_agent_computer_interface
 pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for agent_computer_interface production
-quality: null
+quality: 9.1
 title: "Knowledge Card Agent Computer Interface"
 version: "1.0.0"
 author: n01_review
