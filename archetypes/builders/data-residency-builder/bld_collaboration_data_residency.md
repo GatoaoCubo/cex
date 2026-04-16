@@ -4,7 +4,7 @@ id: bld_collaboration_data_residency
 pillar: P12
 llm_function: COLLABORATE
 purpose: How data_residency-builder works in crews with other builders
-quality: null
+quality: 8.9
 title: "Collaboration Data Residency"
 version: "1.0.0"
 author: wave1_builder_gen_v2
