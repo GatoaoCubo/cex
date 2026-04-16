@@ -4,7 +4,7 @@ id: bld_tools_benchmark_suite
 pillar: P04
 llm_function: CALL
 purpose: Tools available for benchmark_suite production
-quality: null
+quality: 8.9
 title: "Tools Benchmark Suite"
 version: "1.0.0"
 author: wave1_builder_gen_v2
@@ -16,22 +16,22 @@ updated: "2026-04-14"
 density_score: 0.85
 ---
 
-## Production Tools  
-| Tool | Purpose | When |  
-|------|---------|------|  
-| cex_compile.py | Compile benchmark_suite artifact after save | F8 COLLABORATE |  
-| cex_score.py | Score artifact against quality gate (--apply flag) | F7 GOVERN |  
-| cex_retriever.py | Find similar benchmark_suite artifacts for reuse | F3 INJECT |  
-| cex_doctor.py | Validate builder health and ISO completeness | F7 GOVERN |  
-| cex_wave_validator.py | Run schema + frontmatter validation on builder ISOs | Pre-commit |  
+## Production Tools
+| Tool | Purpose | When |
+|------|---------|------|
+| cex_compile.py | Compile benchmark_suite artifact after save | F8 COLLABORATE |
+| cex_score.py | Score artifact against quality gate (--apply flag) | F7 GOVERN |
+| cex_retriever.py | Find similar benchmark_suite artifacts for reuse | F3 INJECT |
+| cex_doctor.py | Validate builder health and ISO completeness | F7 GOVERN |
+| cex_wave_validator.py | Run schema + frontmatter validation on builder ISOs | Pre-commit |
 
-## Validation Tools  
-| Tool | Purpose | When |  
-|------|---------|------|  
-| python -m pytest | Run unit tests for benchmark suite artifacts | CI gate |  
-| python _tools/cex_hooks.py pre-commit | Pre-commit hook: ASCII check + frontmatter | Before git add |  
+## Validation Tools
+| Tool | Purpose | When |
+|------|---------|------|
+| python -m pytest | Run unit tests for benchmark suite artifacts | CI gate |
+| python _tools/cex_hooks.py pre-commit | Pre-commit hook: ASCII check + frontmatter | Before git add |
 
-## External References  
-- MLPerf (mlcommons.org): Reference suite for AI benchmarking standards  
-- lm-evaluation-harness (EleutherAI): Framework for LLM benchmark execution  
+## External References
+- MLPerf (mlcommons.org): Reference suite for AI benchmarking standards
+- lm-evaluation-harness (EleutherAI): Framework for LLM benchmark execution
 - pytest-benchmark: For measuring benchmark execution performance
