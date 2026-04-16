@@ -4,7 +4,7 @@ id: bld_architecture_agent_grounding_record
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component inventory, dependency map, and system position for the agent_grounding_record builder
-quality: null
+quality: 9.1
 title: "Agent Grounding Record Builder -- Architecture"
 version: "1.0.0"
 author: wave7_n05
