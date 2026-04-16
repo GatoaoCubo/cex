@@ -4,7 +4,7 @@ id: bld_examples_fhir_agent_capability
 pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of fhir_agent_capability artifacts
-quality: null
+quality: 9.1
 title: "Examples FHIR Agent Capability"
 version: "1.0.0"
 author: n06_wave7
