@@ -4,7 +4,7 @@ id: fhir-agent-capability-builder
 pillar: P08
 llm_function: BECOME
 purpose: Builder identity, capabilities, routing for fhir_agent_capability
-quality: null
+quality: 8.9
 title: "Type Builder FHIR Agent Capability"
 version: "1.0.0"
 author: n06_wave7
