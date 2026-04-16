@@ -4,7 +4,7 @@ id: bld_schema_press_release
 pillar: P06
 llm_function: CONSTRAIN
 purpose: Define frontmatter fields, ID pattern, body structure, and size constraints for press_release artifacts
-quality: null
+quality: 9.1
 title: "Press Release Schema"
 version: "1.0.0"
 author: n02_wave6
