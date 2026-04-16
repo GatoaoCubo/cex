@@ -40,7 +40,7 @@ import time
 from datetime import datetime, timezone
 from enum import Enum
 from pathlib import Path
-from typing import Optional
+from typing import Any, Optional
 
 ROOT = Path(__file__).resolve().parent.parent
 STATE_DIR = ROOT / ".cex" / "runtime" / "mission_state"
@@ -121,7 +121,7 @@ class MissionState:
     # Mission lifecycle
     # ------------------------------------------------------------------
 
-    def start(self, total_waves: int = 0):
+    def start(self, total_waves: int = 0) -> None:
         """Mark mission as running."""
         self._state["status"] = Status.RUNNING.value
         self._state["started_at"] = _now()
@@ -129,7 +129,7 @@ class MissionState:
         self._event("mission_start", f"total_waves={total_waves}")
         self._flush()
 
-    def finish(self, status: Status = Status.COMPLETE):
+    def finish(self, status: Status = Status.COMPLETE) -> None:
         """Mark mission as finished (COMPLETE, FAILED, TIMED_OUT)."""
         self._state["status"] = status.value
         self._state["finished_at"] = _now()
@@ -165,7 +165,7 @@ class MissionState:
     # Wave lifecycle
     # ------------------------------------------------------------------
 
-    def start_wave(self, wave_num: int, nuclei: list):
+    def start_wave(self, wave_num: int, nuclei: list[str]) -> None:
         """Mark a wave as started with its nucleus assignments."""
         wid = str(wave_num)
         self._state["waves"][wid] = {
@@ -180,7 +180,7 @@ class MissionState:
         self._event("wave_start", f"wave={wave_num}, nuclei={nuclei}")
         self._flush()
 
-    def wave_watching(self, wave_num: int):
+    def wave_watching(self, wave_num: int) -> None:
         """Mark wave as in signal-watching state."""
         wid = str(wave_num)
         if wid in self._state["waves"]:
@@ -188,7 +188,7 @@ class MissionState:
             self._event("wave_watching", f"wave={wave_num}")
             self._flush()
 
-    def wave_gating(self, wave_num: int):
+    def wave_gating(self, wave_num: int) -> None:
         """Mark wave as in quality-gate state."""
         wid = str(wave_num)
         if wid in self._state["waves"]:
@@ -196,7 +196,7 @@ class MissionState:
             self._event("wave_gating", f"wave={wave_num}")
             self._flush()
 
-    def finish_wave(self, wave_num: int, status: Status = Status.DONE):
+    def finish_wave(self, wave_num: int, status: Status = Status.DONE) -> None:
         """Mark wave as finished."""
         wid = str(wave_num)
         if wid in self._state["waves"]:
@@ -210,7 +210,7 @@ class MissionState:
             self._event("wave_finish", f"wave={wave_num}, status={status.value}")
             self._flush()
 
-    def get_wave(self, wave_num: int) -> dict:
+    def get_wave(self, wave_num: int) -> dict[str, Any]:
         """Get wave state. Empty dict if not found."""
         return self._state["waves"].get(str(wave_num), {})
 
@@ -218,7 +218,7 @@ class MissionState:
     # Task (nucleus within a wave) lifecycle
     # ------------------------------------------------------------------
 
-    def task_running(self, wave_num: int, nucleus: str):
+    def task_running(self, wave_num: int, nucleus: str) -> None:
         """Mark a task within a wave as running."""
         wid = str(wave_num)
         wave = self._state["waves"].get(wid)
@@ -227,7 +227,13 @@ class MissionState:
             wave["nuclei"][nucleus]["started_at"] = _now()
             self._flush()
 
-    def task_complete(self, wave_num: int, nucleus: str, quality: float = 0.0, output: str = ""):
+    def task_complete(
+        self,
+        wave_num: int,
+        nucleus: str,
+        quality: float = 0.0,
+        output: str = "",
+    ) -> None:
         """Mark a task as complete with quality score."""
         wid = str(wave_num)
         wave = self._state["waves"].get(wid)
@@ -244,7 +250,7 @@ class MissionState:
             self._event("task_complete", f"wave={wave_num}, nucleus={nucleus}, quality={quality}")
             self._flush()
 
-    def task_failed(self, wave_num: int, nucleus: str, reason: str = ""):
+    def task_failed(self, wave_num: int, nucleus: str, reason: str = "") -> None:
         """Mark a task as failed."""
         wid = str(wave_num)
         wave = self._state["waves"].get(wid)
@@ -256,7 +262,7 @@ class MissionState:
             self._event("task_failed", f"wave={wave_num}, nucleus={nucleus}, reason={reason}")
             self._flush()
 
-    def task_crashed(self, wave_num: int, nucleus: str):
+    def task_crashed(self, wave_num: int, nucleus: str) -> None:
         """Mark a task as crashed (process died without signaling)."""
         wid = str(wave_num)
         wave = self._state["waves"].get(wid)
@@ -271,7 +277,7 @@ class MissionState:
     # Recovery
     # ------------------------------------------------------------------
 
-    def get_recovery_point(self) -> Optional[dict]:
+    def get_recovery_point(self) -> Optional[dict[str, Any]]:
         """Find where to resume after a crash.
 
         Returns dict with:
@@ -326,11 +332,11 @@ class MissionState:
     # Accessors
     # ------------------------------------------------------------------
 
-    def to_dict(self) -> dict:
+    def to_dict(self) -> dict[str, Any]:
         """Full state as dict."""
         return dict(self._state)
 
-    def summary(self) -> dict:
+    def summary(self) -> dict[str, Any]:
         """Compact summary for logging / display."""
         waves_done = sum(
             1 for w in self._state["waves"].values()
@@ -347,7 +353,7 @@ class MissionState:
             "quality": self._state.get("quality_summary", {}),
         }
 
-    def save(self):
+    def save(self) -> None:
         """Explicit save (also called automatically on every mutation)."""
         self._flush()
 
@@ -360,7 +366,7 @@ def _now() -> str:
 # Multi-mission listing
 # ======================================================================
 
-def list_missions(state_dir: Path = STATE_DIR) -> list:
+def list_missions(state_dir: Path = STATE_DIR) -> list[dict[str, Any]]:
     """List all known mission states."""
     results = []
     if not state_dir.exists():
@@ -386,7 +392,7 @@ def list_missions(state_dir: Path = STATE_DIR) -> list:
 # CLI
 # ======================================================================
 
-def main():
+def main() -> None:
     p = argparse.ArgumentParser(description="CEX Mission State Manager")
     p.add_argument("--mission", metavar="ID", help="Mission ID")
     p.add_argument("--status", action="store_true", help="Show mission status")
