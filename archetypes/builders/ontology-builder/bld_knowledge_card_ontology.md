@@ -5,7 +5,7 @@ pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for ontology production -- formal taxonomy and classification engineering
 sources: W3C OWL 2 Primer, W3C SKOS Reference, schema.org Vocabulary, Protege OWL Tutorial, BioPortal
-quality: null
+quality: 9.2
 title: "Knowledge Card Ontology"
 version: "1.0.0"
 author: n03_builder
