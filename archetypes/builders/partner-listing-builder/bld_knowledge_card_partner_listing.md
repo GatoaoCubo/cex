@@ -4,7 +4,7 @@ id: bld_knowledge_card_partner_listing
 pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for partner_listing production
-quality: null
+quality: 9.1
 title: "Knowledge Card Partner Listing"
 version: "1.0.0"
 author: wave1_builder_gen_v2
