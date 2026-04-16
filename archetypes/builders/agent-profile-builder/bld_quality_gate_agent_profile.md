@@ -4,7 +4,7 @@ id: p11_qg_agent_profile
 pillar: P11
 llm_function: GOVERN
 purpose: HARD gates and SOFT 5D scoring rubric for agent_profile artifacts
-quality: null
+quality: 9.2
 title: "Quality Gate Agent Profile"
 version: "1.1.0"
 author: n03_builder
