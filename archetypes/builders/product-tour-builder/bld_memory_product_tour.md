@@ -4,7 +4,7 @@ id: p10_mem_product_tour_builder
 pillar: P10
 llm_function: INJECT
 purpose: Learned patterns and pitfalls for product_tour construction
-quality: null
+quality: 8.7
 title: "Memory Product Tour"
 version: "1.0.0"
 author: wave1_builder_gen_v2
@@ -16,18 +16,18 @@ updated: "2026-04-14"
 density_score: 0.85
 ---
 
-## Observation  
-Common issues include misaligned tooltip positions, unclear trigger logic (e.g., scroll vs. click), and overloading steps with too much text. Tours often lack clear end goals, leading to user confusion.  
+## Observation
+Common issues include misaligned tooltip positions, unclear trigger logic (e.g., scroll vs. click), and overloading steps with too much text. Tours often lack clear end goals, leading to user confusion.
 
-## Pattern  
-Effective tours use concise, action-oriented steps with visual cues. Trigger specs are tightly coupled to user flows (e.g., "after form submission"), ensuring relevance.  
+## Pattern
+Effective tours use concise, action-oriented steps with visual cues. Trigger specs are tightly coupled to user flows (e.g., "after form submission"), ensuring relevance.
 
-## Evidence  
-Reviewed artifacts showed 30% higher completion rates when tooltips used icons + short text, and triggers were tied to specific UI interactions.  
+## Evidence
+Reviewed artifacts showed 30% higher completion rates when tooltips used icons + short text, and triggers were tied to specific UI interactions.
 
-## Recommendations  
-- Define triggers based on user behavior, not arbitrary timing.  
-- Limit steps to 5–7, focusing on critical features.  
-- Use consistent tooltip styling and placement (e.g., bottom-right).  
-- Include a clear "Skip" option for user control.  
+## Recommendations
+- Define triggers based on user behavior, not arbitrary timing.
+- Limit steps to 5–7, focusing on critical features.
+- Use consistent tooltip styling and placement (e.g., bottom-right).
+- Include a clear "Skip" option for user control.
 - Test tours with real users to validate flow clarity.
