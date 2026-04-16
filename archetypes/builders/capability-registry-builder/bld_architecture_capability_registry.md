@@ -4,7 +4,7 @@ id: bld_architecture_capability_registry
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of capability_registry -- inventory, dependencies
-quality: null
+quality: 9.1
 title: "Architecture Capability Registry"
 version: "1.0.0"
 author: n04_wave8
