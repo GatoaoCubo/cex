@@ -5,8 +5,9 @@ pillar: P08
 title: Agentic Capabilities Bench — Free Model Selection
 version: 1.0
 date: 2026-04-15
-quality: null
+quality: 9.1
 tags: [agentic, free-models, ollama, benchmark, fine-tuning]
+density_score: 1.0
 ---
 
 # Agentic Capabilities — 12-Experiment Bench
