@@ -4,7 +4,7 @@ id: bld_architecture_benchmark_suite
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of benchmark_suite -- inventory, dependencies
-quality: null
+quality: 9.0
 title: "Architecture Benchmark Suite"
 version: "1.0.0"
 author: wave1_builder_gen_v2
