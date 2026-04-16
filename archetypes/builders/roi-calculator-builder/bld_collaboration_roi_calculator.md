@@ -4,7 +4,7 @@ id: bld_collaboration_roi_calculator
 pillar: P12
 llm_function: COLLABORATE
 purpose: How roi_calculator-builder works in crews with other builders
-quality: null
+quality: 8.9
 title: "Collaboration Roi Calculator"
 version: "1.0.0"
 author: wave1_builder_gen_v2
