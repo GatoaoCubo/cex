@@ -4,7 +4,7 @@ id: nps-survey-builder
 pillar: P11
 llm_function: BECOME
 purpose: Builder identity, capabilities, routing for nps_survey
-quality: null
+quality: 8.8
 title: "Type Builder Nps Survey"
 version: "1.0.0"
 author: wave1_builder_gen_v2
