@@ -4,7 +4,7 @@ id: bld_output_template_reasoning_strategy
 pillar: P05
 llm_function: PRODUCE
 purpose: Template with vars for reasoning_strategy production
-quality: null
+quality: 9.1
 title: "Output Template Reasoning Strategy"
 version: "1.0.0"
 author: wave1_builder_gen
