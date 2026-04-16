@@ -3,8 +3,9 @@ id: kc_action_paradigm
 kind: knowledge_card
 title: Action Paradigm
 version: 1.0.0
-quality: null
+quality: 8.5
 pillar: P01
+density_score: 0.99
 ---
 
 Action Paradigm: How agents execute actions in environments
