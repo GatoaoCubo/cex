@@ -4,7 +4,7 @@ id: bld_examples_audit_log
 pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of audit_log artifacts
-quality: null
+quality: 8.8
 title: "Examples Audit Log"
 version: "1.0.0"
 author: wave1_builder_gen_v2
