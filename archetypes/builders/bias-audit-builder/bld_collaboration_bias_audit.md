@@ -4,7 +4,7 @@ id: bld_collaboration_bias_audit
 pillar: P12
 llm_function: COLLABORATE
 purpose: How bias_audit-builder works in crews with other builders
-quality: null
+quality: 8.9
 title: "Collaboration Bias Audit"
 version: "1.0.0"
 author: wave1_builder_gen
