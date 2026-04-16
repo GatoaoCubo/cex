@@ -4,7 +4,7 @@ id: p03_qg_expansion_play
 pillar: P11
 llm_function: GOVERN
 purpose: Quality gate with HARD and SOFT scoring for expansion_play
-quality: null
+quality: 9.1
 title: "Quality Gate Expansion Play"
 version: "1.0.0"
 author: wave6_n06
