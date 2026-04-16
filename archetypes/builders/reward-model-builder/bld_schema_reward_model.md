@@ -4,7 +4,7 @@ id: bld_schema_reward_model
 pillar: P06
 llm_function: CONSTRAIN
 purpose: Formal schema -- SINGLE SOURCE OF TRUTH for reward_model
-quality: null
+quality: 9.1
 title: "Schema Reward Model"
 version: "1.0.0"
 author: wave1_builder_gen
