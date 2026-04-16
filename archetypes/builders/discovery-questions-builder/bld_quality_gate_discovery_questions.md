@@ -4,7 +4,7 @@ id: p01_qg_discovery_questions
 pillar: P11
 llm_function: GOVERN
 purpose: Quality gate with HARD and SOFT scoring for discovery_questions
-quality: null
+quality: 8.9
 title: "Quality Gate Discovery Questions"
 version: "1.0.0"
 author: wave1_builder_gen_v2
