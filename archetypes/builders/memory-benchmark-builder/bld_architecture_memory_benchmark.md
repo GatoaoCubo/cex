@@ -4,7 +4,7 @@ id: bld_architecture_memory_benchmark
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of memory_benchmark -- inventory, dependencies
-quality: null
+quality: 9.0
 title: "Architecture Memory Benchmark"
 version: "1.0.0"
 author: wave1_builder_gen_v2
