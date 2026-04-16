@@ -4,7 +4,7 @@ id: bld_examples_data_residency
 pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of data_residency artifacts
-quality: null
+quality: 8.8
 title: "Examples Data Residency"
 version: "1.0.0"
 author: wave1_builder_gen_v2
