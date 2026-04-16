@@ -4,7 +4,7 @@ id: p03_sp_agent_computer_interface_builder
 pillar: P03
 llm_function: BECOME
 purpose: System prompt defining agent_computer_interface-builder persona and rules
-quality: null
+quality: 8.8
 title: "System Prompt Agent Computer Interface"
 version: "1.0.0"
 author: wave1_builder_gen
