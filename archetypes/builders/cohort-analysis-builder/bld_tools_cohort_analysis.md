@@ -4,7 +4,7 @@ id: bld_tools_cohort_analysis
 pillar: P04
 llm_function: CALL
 purpose: Tools available for cohort_analysis production
-quality: null
+quality: 8.9
 title: "Tools Cohort Analysis"
 version: "1.0.0"
 author: wave1_builder_gen_v2
