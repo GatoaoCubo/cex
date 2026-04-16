@@ -4,7 +4,7 @@ id: p02_qg_training_method
 pillar: P11
 llm_function: GOVERN
 purpose: Quality gate with HARD and SOFT scoring for training_method
-quality: null
+quality: 9.1
 title: "Quality Gate Training Method"
 version: "1.0.0"
 author: n01_review
