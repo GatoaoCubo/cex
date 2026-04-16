@@ -6,7 +6,7 @@ title: SELFHEAL W5 -- N05 Final Verification Report
 version: 1.0.0
 created: 2026-04-15
 author: n05_operations
-quality: null
+quality: 9.0
 mission: SELFHEAL
 wave: 5
 nucleus: n05
@@ -18,6 +18,7 @@ warn_before: 64
 warn_after: 68
 pass_before: 189
 pass_after: 190
+density_score: 1.0
 ---
 
 # SELFHEAL W5 -- N05 Final Verification Report
