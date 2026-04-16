@@ -4,7 +4,7 @@ id: ab-test-config-builder
 pillar: P11
 llm_function: BECOME
 purpose: Builder identity, capabilities, routing for ab_test_config
-quality: null
+quality: 8.8
 title: "Type Builder Ab Test Config"
 version: "1.0.0"
 author: wave1_builder_gen_v2
