@@ -4,7 +4,7 @@ id: bld_collaboration_team_charter
 pillar: P12
 llm_function: COLLABORATE
 purpose: How team_charter-builder works in crews with other builders
-quality: null
+quality: 9.1
 title: "Collaboration Team Charter"
 version: "1.0.0"
 author: n06_wave8
