@@ -4,7 +4,7 @@ id: bld_output_template_nps_survey
 pillar: P05
 llm_function: PRODUCE
 purpose: Template with vars for nps_survey production
-quality: null
+quality: 8.9
 title: "Output Template Nps Survey"
 version: "1.0.0"
 author: n05_wave6
