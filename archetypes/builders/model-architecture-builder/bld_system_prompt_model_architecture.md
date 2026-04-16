@@ -3,7 +3,7 @@ id: p03_sp_model_architecture_builder
 kind: system_prompt
 pillar: P03
 version: 1.0.0
-quality: null
+quality: 9.0
 title: "System Prompt Model Architecture Builder"
 tags: [model_architecture, system_prompt, builder, P03]
 tldr: "System prompt for model-architecture-builder: neural network structure specification specialist."
