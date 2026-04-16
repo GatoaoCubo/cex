@@ -4,7 +4,7 @@ id: p01_qg_fintech_vertical
 pillar: P11
 llm_function: GOVERN
 purpose: Quality gate with HARD and SOFT scoring for fintech_vertical
-quality: null
+quality: 9.0
 title: "Quality Gate Fintech Vertical"
 version: "1.0.0"
 author: wave1_builder_gen_v2
@@ -16,10 +16,10 @@ updated: "2026-04-14"
 density_score: 0.85
 ---
 
-## Definition  
-| metric | threshold | operator | scope |  
-|---|---|---|---|  
-| Fintech industry vertical | SOC2+PCI-DSS, KYC/AML, fraud detection, use cases | must meet | entire system |  
+## Definition
+| metric | threshold | operator | scope |
+|---|---|---|---|
+| Fintech industry vertical | SOC2+PCI-DSS, KYC/AML, fraud detection, use cases | must meet | entire system |
 
 ## HARD Gates
 | ID | Check | Fail Condition |
@@ -43,17 +43,17 @@ density_score: 0.85
 | D05 | Audit trail completeness | 0.10 | 1.00 = 100% traceable events documented |
 | D06 | Regulatory breadth | 0.10 | 1.00 = ISO 20022 + SOX 404 + FFIEC CAT addressed |
 | D07 | Integration specificity | 0.10 | 1.00 = specific API/platform patterns documented |
-| D08 | Documentation completeness | 0.05 | 1.00 = all required frontmatter fields populated |  
+| D08 | Documentation completeness | 0.05 | 1.00 = all required frontmatter fields populated |
 
-## Actions  
-| Score | Action |  
-|---|---|  
-| GOLDEN | >=9.5 | Auto-publish with CTO approval |  
-| PUBLISH | >=8.0 | Publish after QA sign-off |  
-| REVIEW | >=7.0 | Escalate to compliance team |  
-| REJECT | <7.0 | Block deployment, fix required |  
+## Actions
+| Score | Action |
+|---|---|
+| GOLDEN | >=9.5 | Auto-publish with CTO approval |
+| PUBLISH | >=8.0 | Publish after QA sign-off |
+| REVIEW | >=7.0 | Escalate to compliance team |
+| REJECT | <7.0 | Block deployment, fix required |
 
-## Bypass  
-| conditions | approver | audit trail |  
-|---|---|---|  
+## Bypass
+| conditions | approver | audit trail |
+|---|---|---|
 | Emergency hotfix | CTO | Documented in incident report |
