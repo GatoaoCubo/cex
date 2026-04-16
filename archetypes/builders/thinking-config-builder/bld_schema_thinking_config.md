@@ -4,7 +4,7 @@ id: bld_schema_thinking_config
 pillar: P06
 llm_function: CONSTRAIN
 purpose: Formal schema -- SINGLE SOURCE OF TRUTH for thinking_config
-quality: null
+quality: 9.2
 title: "Schema Thinking Config"
 version: "1.0.0"
 author: wave1_builder_gen
