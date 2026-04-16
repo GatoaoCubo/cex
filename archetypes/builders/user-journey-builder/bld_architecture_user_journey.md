@@ -4,7 +4,7 @@ id: bld_architecture_user_journey
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of user_journey -- inventory, dependencies
-quality: null
+quality: 9.0
 title: "Architecture User Journey"
 version: "1.0.0"
 author: wave1_builder_gen_v2
