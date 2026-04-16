@@ -3,8 +3,9 @@ id: kc_rbac_policy
 kind: knowledge_card
 title: RBAC Policy for Multi-Tenant Isolation
 version: 1.0.0
-quality: null
+quality: 8.9
 pillar: P01
+density_score: 0.97
 ---
 
 # Role-Based Access Control (RBAC) Policy for Multi-Tenant Isolation
