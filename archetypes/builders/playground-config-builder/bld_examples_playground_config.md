@@ -4,7 +4,7 @@ id: bld_examples_playground_config
 pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of playground_config artifacts
-quality: null
+quality: 9.0
 title: "Examples Playground Config"
 version: "1.0.0"
 author: wave1_builder_gen_v2
