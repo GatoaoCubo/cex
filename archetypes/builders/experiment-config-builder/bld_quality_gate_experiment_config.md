@@ -8,7 +8,7 @@ created: "2026-04-13"
 updated: "2026-04-13"
 author: "builder_agent"
 domain: "experiment_config -- A/B test and prompt experiment configurations with variants, metrics, and traffic splits"
-quality: null
+quality: 9.1
 tags: [quality-gate, experiment-config, ab-test, variants, metrics, P11]
 tldr: "Gates for experiment_config: validates variant structure, traffic splits, metric definitions, and statistical parameter completeness."
 density_score: 0.92
