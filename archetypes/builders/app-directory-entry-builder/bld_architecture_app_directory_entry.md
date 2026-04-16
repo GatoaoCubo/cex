@@ -4,7 +4,7 @@ id: bld_architecture_app_directory_entry
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of app_directory_entry -- inventory, dependencies
-quality: null
+quality: 9.0
 title: "Architecture App Directory Entry"
 version: "1.0.0"
 author: wave1_builder_gen_v2
@@ -42,5 +42,5 @@ density_score: 0.85
 | bld_config         | bld_memory           | Configuration|
 | bld_tools          | external API         | Integration  |
 
-## Architectural Position  
+## Architectural Position
 app_directory_entry serves as the central registry and coordination hub for P05's builder ISOs, enabling structured application development through standardized manifests, quality gates, and cross-component dependencies, aligning with CEX's focus on modular, reusable, and auditable software constructs.
