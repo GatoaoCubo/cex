@@ -4,7 +4,7 @@ id: p11_qg_subscription_tier
 pillar: P11
 llm_function: GOVERN
 purpose: Quality gate with HARD and SOFT scoring for subscription_tier
-quality: null
+quality: 9.1
 title: "Quality Gate Subscription Tier"
 version: "1.0.0"
 author: n03_builder
