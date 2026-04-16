@@ -4,7 +4,7 @@ id: bld_output_template_capability_registry
 pillar: P05
 llm_function: PRODUCE
 purpose: Template with vars for capability_registry production
-quality: null
+quality: 9.1
 title: "Output Template Capability Registry"
 version: "1.0.0"
 author: n04_wave8
