@@ -4,7 +4,7 @@ id: bld_architecture_crew_template
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of crew_template -- inventory, dependencies
-quality: null
+quality: 9.0
 title: "Architecture Crew Template"
 version: "1.0.0"
 author: n03_wave8_builder
