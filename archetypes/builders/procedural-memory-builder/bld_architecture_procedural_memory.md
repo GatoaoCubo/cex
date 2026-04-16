@@ -4,7 +4,7 @@ id: bld_architecture_procedural_memory
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of the procedural_memory-builder -- 13 ISOs, dependencies, position
-quality: null
+quality: 9.0
 title: "Architecture: procedural_memory-builder"
 version: "2.0.0"
 author: n06_commercial
