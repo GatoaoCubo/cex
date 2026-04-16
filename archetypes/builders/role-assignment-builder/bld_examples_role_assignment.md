@@ -4,7 +4,7 @@ id: bld_examples_role_assignment
 pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of role_assignment artifacts
-quality: null
+quality: 9.0
 title: "Examples Role Assignment"
 version: "1.0.0"
 author: n03_wave8_builder
