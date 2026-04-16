@@ -4,7 +4,7 @@ id: bld_collaboration_threat_model
 pillar: P12
 llm_function: COLLABORATE
 purpose: How threat_model-builder works in crews with other builders
-quality: null
+quality: 8.9
 title: "Collaboration Threat Model"
 version: "1.0.0"
 author: wave1_builder_gen
