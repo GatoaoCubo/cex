@@ -4,8 +4,9 @@ kind: knowledge_card
 pillar: P04
 title: LEVERAGE_MAP_V2 - N01 Tool Verification Cycle
 version: 1.0
-quality: null
+quality: 9.0
 tags: [leverage, tooling, n01, verification]
+density_score: 0.89
 ---
 
 # N01 Intelligence - Tool Leverage Verification
