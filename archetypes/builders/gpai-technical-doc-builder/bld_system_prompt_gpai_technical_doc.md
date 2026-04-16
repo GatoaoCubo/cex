@@ -4,7 +4,7 @@ id: p03_sp_gpai_technical_doc_builder
 pillar: P03
 llm_function: BECOME
 purpose: System prompt defining gpai_technical_doc-builder persona and rules
-quality: null
+quality: 9.0
 title: "System Prompt GPAI Technical Doc"
 version: "1.0.0"
 author: n01_wave7
