@@ -4,7 +4,7 @@ id: bld_architecture_api_reference
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of api_reference -- inventory, dependencies
-quality: null
+quality: 9.0
 title: "Architecture Api Reference"
 version: "1.0.0"
 author: wave1_builder_gen_v2
