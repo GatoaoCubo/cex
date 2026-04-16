@@ -4,7 +4,7 @@ id: bld_tools_kind
 pillar: P04
 llm_function: CALL
 purpose: Tools and data sources available for builder package production
-quality: null
+quality: 9.2
 title: "Tools Kind Builder"
 version: "1.0.0"
 author: n03_builder
