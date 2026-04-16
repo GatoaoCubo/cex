@@ -4,7 +4,7 @@ id: p03_sp_workflow_run_crate_builder
 pillar: P03
 llm_function: BECOME
 purpose: System prompt defining workflow_run_crate-builder persona and rules
-quality: null
+quality: 9.0
 title: "System Prompt Workflow Run Crate"
 version: "1.0.0"
 author: n04_wave7
