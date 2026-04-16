@@ -4,7 +4,7 @@ id: p03_qg_webinar_script
 pillar: P11
 llm_function: GOVERN
 purpose: Define HARD gates and SOFT scoring dimensions for webinar_script quality enforcement
-quality: null
+quality: 9.2
 title: "Webinar Script Quality Gate"
 version: "1.0.0"
 author: n02_wave6
