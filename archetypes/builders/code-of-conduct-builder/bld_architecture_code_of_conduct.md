@@ -4,7 +4,7 @@ id: bld_architecture_code_of_conduct
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of code_of_conduct -- inventory, dependencies
-quality: null
+quality: 9.0
 title: "Architecture Code of Conduct"
 version: "1.0.0"
 author: n04_knowledge
