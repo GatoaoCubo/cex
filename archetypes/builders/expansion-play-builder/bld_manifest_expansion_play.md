@@ -4,7 +4,7 @@ id: expansion-play-builder
 pillar: P03
 llm_function: BECOME
 purpose: Builder identity, capabilities, routing for expansion_play
-quality: null
+quality: 8.9
 title: "Type Builder Expansion Play"
 version: "1.0.0"
 author: wave6_n06
