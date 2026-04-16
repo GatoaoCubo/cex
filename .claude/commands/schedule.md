@@ -3,7 +3,7 @@ id: schedule
 kind: instruction
 pillar: P12
 description: "Create, list, update scheduled agents (cron). Usage: /schedule <cron> <command>"
-quality: null
+quality: 9.1
 title: "Schedule"
 version: "1.0.0"
 author: n03_builder
