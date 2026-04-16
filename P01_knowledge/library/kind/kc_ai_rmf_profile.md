@@ -3,9 +3,10 @@ id: kc_ai_rmf_profile
 kind: knowledge_card
 title: AI RMF Profile
 version: 1.0.0
-quality: null
+quality: 8.8
 pillar: P01
 language: English
+density_score: 1.0
 ---
 
 # AI RMF Profile (NIST AI RMF Artifact)
