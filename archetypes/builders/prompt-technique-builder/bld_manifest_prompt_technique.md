@@ -4,7 +4,7 @@ id: prompt-technique-builder
 pillar: P03
 llm_function: BECOME
 purpose: Builder identity, capabilities, routing for prompt_technique
-quality: null
+quality: 8.8
 title: "Type Builder Prompt Technique"
 version: "1.0.0"
 author: wave1_builder_gen_v2
