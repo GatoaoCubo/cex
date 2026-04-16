@@ -4,7 +4,7 @@ id: bld_collaboration_legal_vertical
 pillar: P12
 llm_function: COLLABORATE
 purpose: How legal_vertical-builder works in crews with other builders
-quality: null
+quality: 8.9
 title: "Collaboration Legal Vertical"
 version: "1.0.0"
 author: wave1_builder_gen_v2
