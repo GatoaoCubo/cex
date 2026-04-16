@@ -4,7 +4,7 @@ id: bld_architecture_kubernetes_ai_requirement
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of kubernetes_ai_requirement -- inventory, dependencies
-quality: null
+quality: 9.0
 title: "Architecture Kubernetes AI Requirement"
 version: "1.0.0"
 author: wave7_n03_dev_manifests
