@@ -4,7 +4,7 @@ id: partner-listing-builder
 pillar: P05
 llm_function: BECOME
 purpose: Builder identity, capabilities, routing for partner_listing
-quality: null
+quality: 8.8
 title: "Type Builder Partner Listing"
 version: "1.0.0"
 author: wave1_builder_gen_v2
