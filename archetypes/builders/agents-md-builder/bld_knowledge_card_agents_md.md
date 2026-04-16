@@ -4,7 +4,7 @@ id: bld_knowledge_card_agents_md
 pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for agents_md production
-quality: null
+quality: 9.2
 title: "Knowledge Card Agents Md"
 version: "1.0.0"
 author: wave7_n03_dev_manifests
