@@ -4,7 +4,7 @@ id: bld_examples_fintech_vertical
 pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of fintech_vertical artifacts
-quality: null
+quality: 9.0
 title: "Examples Fintech Vertical"
 version: "1.0.0"
 author: wave1_builder_gen_v2
