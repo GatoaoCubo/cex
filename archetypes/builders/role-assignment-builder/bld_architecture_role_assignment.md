@@ -4,7 +4,7 @@ id: bld_architecture_role_assignment
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of role_assignment -- inventory, dependencies
-quality: null
+quality: 9.0
 title: "Architecture Role Assignment"
 version: "1.0.0"
 author: n03_wave8_builder
