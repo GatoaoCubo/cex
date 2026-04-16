@@ -3,8 +3,9 @@ id: kc_repo_map
 kind: knowledge_card
 title: repo_map
 version: 1.0.0
-quality: null
+quality: 8.9
 pillar: P01
+density_score: 0.99
 ---
 
 # repo_map: Codebase Context Extraction Strategy
