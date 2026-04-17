@@ -8,7 +8,7 @@ created: 2026-04-13
 builders_reviewed: [vad-config-builder, tts-provider-builder]
 iso_count: 26
 pillar: P04, P09
-quality: 8.7
+quality: 7.9
 density_score: 0.96
 ---
 

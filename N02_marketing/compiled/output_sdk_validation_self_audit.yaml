@@ -6,7 +6,7 @@ version: 1.0.0
 date: 2026-04-06
 nucleus: N02
 mission: SDK_VALIDATION
-quality: null
+quality: 8.2
 tags:
 - audit
 - sdk-validation
@@ -53,8 +53,8 @@ t2_builder_isos_audit: '| Builder | ISOs | manifest (keywords/triggers/geo) | co
   | prompt-template-builder | 13/13 | keywords + triggers + capabilities | effort=medium, max_turns=25, permission=nucleus
   | PASS |
 
-  | action-prompt-builder | 13/13 | keywords + triggers + capabilities | effort=medium, max_turns=25, permission=nucleus
-  | PASS |
+  | action-prompt-builder | 13/13 | keywords + triggers + capabilities | effort=medium, max_turns=25, permission=nucleus |
+  PASS |
 
   | content-monetization-builder | 13/13 | keywords + triggers + capabilities | effort=high, max_turns=25, permission=nucleus
   | PASS |

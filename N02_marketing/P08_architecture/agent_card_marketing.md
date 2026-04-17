@@ -45,7 +45,7 @@ subscription_auth: anthropic_max
 mcp_config: .mcp-n02.json
 flags: []
 domain: visual_frontend_engineering_and_copywriting
-quality: 9.2
+quality: 9.1
 tags: [agent_card, visual-frontend, marketing, N02, tailwind, html, copywriting, sonnet]
 tldr: N02 deployment spec — claude-sonnet-4-6 (+opus fallback) on Anthropic Max, browser MCP, specializes in HTML/CSS generation AND conversion copy.
 density_score: 1.0

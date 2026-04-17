@@ -5,7 +5,7 @@ pillar: P01
 nucleus: n04
 title: "Mental Model -- CEX Architecture for Any LLM or Engineer"
 version: 1.0.0
-quality: null
+quality: 9.1
 tags: [mental_model, architecture, cex, 8F, nucleus, knowledge_management, ubiquitous_language, cross_synthesis]
 domain: knowledge management
 status: active

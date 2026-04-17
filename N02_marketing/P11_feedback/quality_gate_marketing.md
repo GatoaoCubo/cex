@@ -8,7 +8,7 @@ created: 2026-03-30
 updated: 2026-04-01
 author: n02_visual_frontend_marketing
 domain: visual_frontend_engineering_and_copywriting
-quality: 9.1
+quality: 8.8
 tags: [quality_gate, visual-frontend, marketing, html, tailwind, copy, N02, P11]
 tldr: 15 HARD gates (visual + copy + universal) + 8 SOFT dimensions for dual-role N02 — visual threshold Lighthouse 90+, copy threshold 8.0
 density_score: 0.96

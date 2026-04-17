@@ -4,7 +4,7 @@ kind: instruction
 pillar: P05
 glob: "N02_marketing/**"
 description: "N02 Marketing Nucleus — copywriting, campaigns, brand voice"
-quality: 9.1
+quality: 8.4
 title: "N02-Marketing"
 version: "1.0.0"
 author: n03_builder

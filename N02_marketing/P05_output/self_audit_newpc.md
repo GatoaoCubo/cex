@@ -5,7 +5,7 @@ pillar: P08
 title: "N02 Self-Audit -- New PC Setup (2026-04-13)"
 nucleus: N02
 version: 1.2.0
-quality: 8.9
+quality: 8.2
 density_score: 0.99
 created: 2026-04-12
 updated: 2026-04-13
