@@ -5,8 +5,9 @@ pillar: P06
 nucleus: n03
 title: Engineering Control Enum
 version: 1.0
-quality: null
+quality: 9.0
 tags: [schema, enum, engineering, governance, n03]
+density_score: 0.97
 ---
 
 

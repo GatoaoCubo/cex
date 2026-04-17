@@ -7,10 +7,11 @@ version: 1.0.0
 created: 2026-04-17
 author: n03_engineering
 domain: artifact-construction
-quality: null
+quality: 9.1
 tags: [interface, builder, protocol, contract, 8F, N03, interoperability]
 tldr: "Bilateral contract defining what every builder (any of the 259 builder agents) must EXPOSE and what every caller (N03, N07, grid dispatch) must PROVIDE. Enables LLM-to-LLM interoperability across all 4 runtimes."
 density_score: 0.92
+updated: "2026-04-17"
 ---
 
 # Interface: Builder Protocol Contract
