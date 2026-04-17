@@ -1,0 +1,158 @@
+id: search_strategy_n01
+kind: search_strategy
+pillar: P04
+nucleus: n01
+title: N01 Layered Search Strategy
+version: 1.0.0
+created: 2026-04-17
+author: n01_intelligence
+domain: research-intelligence
+quality: null
+tags:
+- search_strategy
+- research
+- triangulation
+- source_layering
+- n01
+- analytical_envy
+tldr: '3-layer search protocol: primary (semantic/web), secondary (academic/financial), fallback (regulatory/social). Every
+  query runs all layers; Analytical Envy demands competing sources, not single-source answers.'
+density_score: 0.92
+purpose: 'N01 Analytical Envy = insatiable need to find what OTHERS missed.
+
+  A single search is not research. Research is the intersection of:
+
+  1. What the obvious sources say
+
+  2. What the non-obvious sources say
+
+  3. Where they disagree (the alpha is always in the disagreement)
+
+
+  This strategy implements 3-layer search to force that intersection on every query.'
+layer_architecture: '| Layer | Label | Sources | Trigger | Confidence Contribution |
+
+  |-------|-------|---------|---------|------------------------|
+
+  | L1 | Primary | Brave Search + Exa AI | always | 40% |
+
+  | L2 | Secondary | Semantic Scholar + Alpha Vantage + SEC EDGAR | when L1 < 3 results or topic=technical/financial | 40%
+  |
+
+  | L3 | Fallback | SerpAPI + PubMed + job postings | when L1+L2 < 5 sources or claim contested | 20% |'
+query_construction_protocol: ''
+step_1_intent_decomposition: 'From the research goal, generate 3 query variants:
+
+
+  | Variant | Strategy | Example (goal: "Anthropic pricing") |
+
+  |---------|----------|-------------------------------------|
+
+  | Direct | exact entity + attribute | `"Anthropic" "Claude" "pricing" "API" 2025` |
+
+  | Comparative | entity vs. competitors | `Anthropic Claude pricing vs OpenAI GPT vs Google Gemini` |
+
+  | Signal | indirect evidence | `Anthropic revenue model enterprise contracts B2B` |
+
+
+  Analytical Envy rule: always run the comparative variant. Never research in isolation.'
+step_2_source_selection_matrix: '| Topic Type | L1 Sources | L2 Sources | L3 Trigger |
+
+  |-----------|-----------|-----------|------------|
+
+  | Competitive intelligence | Brave + Exa | SerpAPI + job postings | if no pricing data found |
+
+  | Technical / research | Exa (semantic) | Semantic Scholar | if < 2 papers |
+
+  | Financial / market | Brave | Alpha Vantage + SEC EDGAR | if no filing data |
+
+  | News / current events | Brave (freshness=pw) | Exa | if < 2 sources < 7 days |
+
+  | Product / UX | Brave + Exa | SerpAPI SERP | if < 3 structured results |'
+step_3_query_execution: "for variant in [direct, comparative, signal]:\n    for source in layer_sources:\n        results\
+  \ = api.query(source, variant, max=10)\n        pool.add(results, layer=source.layer)\n    if pool.size >= 5 and pool.triangulated:\n\
+  \        break\n    else:\n        escalate_to_next_layer()"
+deduplication_and_ranking: '| Step | Method | Threshold |
+
+  |------|--------|-----------|
+
+  | URL dedup | normalize domain + path | exact match |
+
+  | Semantic dedup | cosine similarity > 0.85 | remove duplicate |
+
+  | Freshness filter | published_date < 90 days preferred | warn if older |
+
+  | Relevance rank | source score + recency combined | top 10 per layer |
+
+  | Final pool | top 15 across all layers | for synthesis |'
+source_quality_scoring: 'Per `sch_validator_n01.md` validation rules:
+
+
+  | Source Type | Base Score | Adjustments |
+
+  |-------------|-----------|-------------|
+
+  | Primary source (company blog/filing) | 9/10 | +0.5 if < 30 days, -2 if > 1 year |
+
+  | Peer-reviewed paper | 8/10 | +1 if > 100 citations |
+
+  | Tier-1 news (Reuters, FT, WSJ) | 7/10 | +0.5 if < 7 days |
+
+  | Industry analyst (Gartner, CB Insights) | 7/10 | -1 if paywall-blocked |
+
+  | User forum / social | 4/10 | use only for sentiment signals |
+
+  | Unknown domain | 3/10 | require corroboration |'
+triangulation_gate: 'A claim is accepted only when:
+
+  - Sources >= 3 (hard gate, from quality_gate_intelligence.md H01)
+
+  - Sources from >= 2 different categories (web + academic, or web + financial)
+
+  - No source-date > 90 days unless explicitly flagged
+
+  - Competing claim flagged if sources disagree > 30%'
+fallback_chain: 'L1 exhausted (< 3 results) -> L2 auto-escalate
+
+  L2 exhausted (< 3 results) -> L3 auto-escalate
+
+  L3 exhausted -> flag research_gap, request human disambiguation
+
+  claim contested (sources disagree) -> report both positions with confidence delta'
+performance_benchmarks: '| Metric | Target | Alert Threshold |
+
+  |--------|--------|----------------|
+
+  | L1 latency | < 3s per query | > 5s |
+
+  | L2 latency | < 8s per query | > 15s |
+
+  | Total search time per claim | < 30s | > 60s |
+
+  | Source pool size (min) | 5 sources | < 3 = fail gate |
+
+  | Triangulation rate | > 90% of claims | < 75% = review strategy |'
+comparison_vs_alternatives: '| Approach | Depth | Cost | Speed | N01 Fit |
+
+  |----------|-------|------|-------|---------|
+
+  | Single-source (naive) | low | low | fast | fail -- no triangulation |
+
+  | Manual multi-source | high | high | slow | impractical at scale |
+
+  | This 3-layer strategy | high | medium | medium | optimal -- automated triangulation |
+
+  | AI web agent (Perplexity) | medium | low | fast | use as L3 supplement only |'
+related_artifacts: '| Artifact | Relationship |
+
+  |----------|-------------|
+
+  | `P06_schema/api_reference_research_apis.md` | API contracts for each source |
+
+  | `P04_tools/research_pipeline_n01.md` | orchestration layer using this strategy |
+
+  | `P04_tools/document_loader_n01.md` | loads documents found by this strategy |
+
+  | `P07_evals/eval_framework_n01.md` | evaluates search quality |
+
+  | `P11_feedback/bias_audit_n01.md` | audits search bias (selection, recency) |'

@@ -1,0 +1,99 @@
+id: data_extractor_n01
+kind: parser
+pillar: P04
+nucleus: n01
+title: N01 Structured Data Extractor
+version: 1.0.0
+created: 2026-04-17
+author: n01_intelligence
+domain: research-intelligence
+quality: null
+tags:
+- parser
+- data_extraction
+- structured_intelligence
+- n01
+- llm_extraction
+- competitive_data
+tldr: 'LLM-powered structured data extractor for N01: transforms raw research text into typed intelligence structures (CompetitorProfile,
+  MarketSignal, PricingData). Outputs match type_def_intelligence_types schema.'
+density_score: 0.89
+purpose: 'DocumentChunks from document_loader_n01 are unstructured text. Intelligence is structured data that can be compared,
+  ranked, and indexed. This extractor bridges the two: takes raw text, applies LLM extraction, outputs typed structures defined
+  in sch_type_def_n01.md.'
+target_structure_types: '| Type | Fields Extracted | Source Examples |
+
+  |------|----------------|----------------|
+
+  | CompetitorProfile | name, products, pricing, headcount, funding, strengths, weaknesses | pricing page, LinkedIn, Crunchbase
+  |
+
+  | PricingData | tiers, prices, billing_period, free_tier, enterprise | pricing page |
+
+  | MarketSignal | signal_type, entity, value, date, confidence | news, financial data |
+
+  | ResearchFinding | claim, confidence, sources, counter_evidence | synthesis output |
+
+  | HiringSignal | company, roles, count, growth_rate, domain | job postings |
+
+  | AcademicPaper | title, authors, year, abstract, citations, key_findings | papers |'
+extraction_pipeline: 'raw_text = DocumentChunk.content
+
+  target_type = determine_target_type(chunk.source_url, chunk.title)
+
+  prompt = build_extraction_prompt(raw_text, target_type.schema)
+
+  result = llm.extract(prompt, output_schema=target_type)
+
+  validated = validate(result, target_type.schema)
+
+  return validated'
+extraction_prompts_by_type: ''
+competitorprofile_extraction_prompt: "Extract a CompetitorProfile from the following text.\nOutput ONLY valid JSON matching\
+  \ the schema. No prose.\n\nSchema:\n{\n  \"name\": \"string\",\n  \"products\": [\"string\"],\n  \"pricing_tiers\": [{\"\
+  name\": \"string\", \"price_usd\": float, \"billing\": \"monthly|annual\"}],\n  \"free_tier_exists\": boolean,\n  \"headcount_est\"\
+  : int or null,\n  \"founded_year\": int or null,\n  \"key_differentiators\": [\"string\"],\n  \"known_weaknesses\": [\"\
+  string\"]\n}\n\nText: {raw_text}"
+pricingdata_extraction_prompt: "Extract all pricing information from the following text.\nReturn a JSON array of pricing tiers.\
+  \ Be precise with numbers.\n\nSchema per tier:\n{\"tier_name\": str, \"price_usd_monthly\": float, \"price_usd_annual\"\
+  : float or null,\n \"seats\": str, \"key_features\": [str], \"target_segment\": str}\n\nText: {raw_text}"
+validation_rules: '| Field | Validation |
+
+  |-------|-----------|
+
+  | Numeric prices | > 0 and < 100000 (sanity check) |
+
+  | Dates | ISO8601 format or null |
+
+  | Confidence | 0.0-1.0 |
+
+  | Lists | non-empty if present |
+
+  | Names | > 2 chars, < 200 chars |
+
+
+  If validation fails: return partial result with `extraction_confidence` = 0.4.
+
+  Never hallucinate missing fields -- use null.'
+performance_targets: '| Metric | Target |
+
+  |--------|--------|
+
+  | Extraction accuracy (vs. manual) | > 85% |
+
+  | False field fill (hallucination) | < 5% |
+
+  | Extraction time per chunk | < 3s |
+
+  | Validation pass rate | > 90% |'
+comparison_vs_alternatives: '| Approach | Accuracy | Speed | Structured? | N01 Fit |
+
+  |----------|---------|-------|-------------|---------|
+
+  | Manual extraction | 99% | very slow | yes | impractical |
+
+  | Regex / rules | 60% | fast | yes | brittle |
+
+  | This (LLM extraction) | 85%+ | medium | yes | optimal |
+
+  | Fine-tuned extractor | 95% | fast | yes | future state |'

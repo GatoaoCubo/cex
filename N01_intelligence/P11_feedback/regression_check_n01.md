@@ -1,0 +1,114 @@
+---
+id: regression_check_n01
+kind: regression_check
+pillar: P11
+nucleus: n01
+title: "N01 Research Quality Regression Check"
+version: 1.0.0
+created: 2026-04-17
+author: n01_intelligence
+domain: research-intelligence
+quality: null
+tags: [regression_check, quality_monitoring, n01, analytical_envy, trend_detection]
+tldr: "Detects quality regressions in N01 research outputs over time: tracks score trends, flags systematic degradation patterns, identifies bias drift. Runs weekly as part of self_improvement_loop_n01."
+density_score: 0.88
+---
+
+<!-- 8F: F1 constrain=P11/regression_check F2 become=regression-check-builder F3 inject=self_improvement_loop_n01+eval_framework_n01+quality_gate_intelligence F4 reason=Analytical Envy applies to self-assessment too -- N01 must detect when its own quality is declining, not just when others' is F5 call=cex_compile F6 produce=regression_check_n01.md F7 govern=frontmatter+ascii+tables F8 collaborate=N01_intelligence/P11_feedback/ -->
+
+## Purpose
+
+Quality does not stay constant. N01 research quality can regress when:
+- Source APIs degrade (fewer quality results)
+- Bias patterns creep in (recency bias from monitoring)
+- Template drift (copy-paste reduces analytical depth)
+- Vocabulary drift (metaphors replace industry terms)
+
+This check runs weekly, comparing current quality distribution against baseline.
+
+## Regression Signals
+
+| Signal | Measurement | Regression Threshold |
+|--------|-------------|---------------------|
+| Average quality score | mean(quality) over 30 days | drop > 0.5 from baseline |
+| D3 Comparative Coverage | mean(D3_score) | drop > 1.0 from baseline |
+| Source count per artifact | mean(source_count) | drop > 1 source/artifact |
+| Triangulation rate | % artifacts with >= 3 sources | drop > 10 percentage points |
+| Bias audit pass rate | % artifacts passing bias_audit | drop > 15% |
+| Vocabulary compliance | % canonical terms vs. metaphors | drop > 10% |
+
+## Baseline Establishment
+
+Baseline = 90-day rolling average of each signal.
+Reset baseline: after any major system change (new search API, new prompt, etc.)
+
+```
+baseline = {
+    "quality_avg": rolling_mean(quality_scores, window=90),
+    "D3_avg": rolling_mean(D3_scores, window=90),
+    "source_count_avg": rolling_mean(source_counts, window=90),
+    "triangulation_rate": rolling_rate(triangulated, window=90),
+    "bias_pass_rate": rolling_rate(bias_passed, window=90)
+}
+```
+
+## Regression Detection
+
+```
+current = {signal: measure_current(signal, window=7) for signal in signals}
+for signal in signals:
+    delta = current[signal] - baseline[signal]
+    if delta < -threshold[signal]:
+        flag_regression(signal, current[signal], baseline[signal], delta)
+```
+
+## Regression Severity Levels
+
+| Severity | Condition | Action |
+|----------|-----------|--------|
+| WATCH | delta between -threshold and -2*threshold | log, monitor |
+| WARN | delta > -2*threshold for 2+ consecutive weeks | alert N07, investigate |
+| CRITICAL | delta > -3*threshold OR quality_avg < 7.0 | halt new research, fix pipeline |
+
+## Root Cause Analysis Protocol
+
+When regression detected:
+
+| Step | Action |
+|------|--------|
+| 1 | Identify affected artifacts (lowest quality in regression window) |
+| 2 | Classify deficiency (D1-D7 from self_improvement_loop_n01.md) |
+| 3 | Check if systematic (single root cause) or distributed |
+| 4 | If systematic: fix root cause (API, prompt, search strategy) |
+| 5 | If distributed: queue for self_improvement_loop_n01 batch |
+| 6 | Re-measure after fix, confirm regression resolved |
+
+## Output Report Format
+
+```
+=== N01 REGRESSION CHECK {date} ===
+
+Baseline period: {start} - {end}
+Check period: last 7 days
+
+Signal                 | Baseline | Current | Delta | Status
+-----------------------|----------|---------|-------|-------
+Quality average        | 8.7      | 8.2     | -0.5  | WATCH
+D3 comparative         | 8.1      | 7.4     | -0.7  | WARN
+Source count/artifact  | 4.2      | 3.8     | -0.4  | OK
+Triangulation rate     | 94%      | 88%     | -6%   | OK
+Bias pass rate         | 89%      | 81%     | -8%   | WATCH
+
+Root cause hypothesis: search_strategy L1 returning fewer results (Brave API degradation?)
+Recommended action: test Brave API; fallback to Exa as L1
+```
+
+## Integration
+
+```
+self_improvement_loop_n01 (weekly):
+  -> run regression_check_n01 first
+  -> if CRITICAL: halt improvements, fix regression
+  -> if WARN: include regression root cause in improvement batch
+  -> if OK: proceed with standard improvement loop
+```

@@ -1,0 +1,102 @@
+id: chain_research_pipeline_n01
+kind: chain
+pillar: P03
+nucleus: n01
+title: N01 Research Pipeline Prompt Chain
+version: 1.0.0
+created: 2026-04-17
+author: n01_intelligence
+domain: research-intelligence
+quality: null
+tags:
+- chain
+- prompt_chain
+- research_pipeline
+- n01
+- sequential_prompting
+- analytical_envy
+tldr: '5-step prompt chain for N01 research: DECOMPOSE -> SOURCE -> TRIANGULATE -> SYNTHESIZE -> GOVERN. Each step uses a
+  discrete action prompt from action_prompt_n01.md. Chain output is a scored research brief.'
+density_score: 0.89
+purpose: 'A single LLM call cannot do deep research reliably.
+
+  This chain breaks the research pipeline into 5 discrete, controllable steps.
+
+  Each step has a clear input, output, and validation gate.
+
+
+  Benefits vs. single-shot:
+
+  - Error isolation (step 2 failure doesn''t corrupt step 5)
+
+  - Intermediate validation (catch bias before synthesis)
+
+  - Context management (each step uses relevant context, not full dump)
+
+  - Retry granularity (retry step 3 without re-running steps 1-2)'
+chain_definition: 'chain_id: research_pipeline_n01
+
+  kind: chain
+
+  steps: 5
+
+  max_tokens_per_step: 4000
+
+  retry_policy: max_2_retries_per_step'
+step_definitions: ''
+step_1_decompose: "step_id: decompose\naction_prompt: AP-01 (competitive analysis) or AP-02 (market sizing) per task type\n\
+  input:\n  - research_goal: string\n  - target_entity: string\n  - competitors: list[string] or null\noutput:\n  - atomic_questions:\
+  \ list[string]  # 5-10 questions\n  - query_variants: list[string]  # 3 per question (direct, comparative, signal)\n  -\
+  \ source_requirements: dict  # per question: required source categories\nvalidation:\n  - atomic_questions.length >= 5\n\
+  \  - each question has comparative variant\n  - source_requirements covers all question types\nretry_on_fail: yes"
+step_2_source: "step_id: source\naction_prompt: search_strategy_n01 + document_loader_n01\ninput:\n  - atomic_questions: (from\
+  \ Step 1)\n  - query_variants: (from Step 1)\n  - source_requirements: (from Step 1)\noutput:\n  - document_pool: list[DocumentChunk]\n\
+  \  - source_map: dict  # question -> [sources]\n  - coverage_report: dict  # % of questions with 3+ sources\nvalidation:\n\
+  \  - document_pool.length >= 10\n  - coverage_report.triangulated_pct >= 0.80\n  - all sources have URL and date\nretry_on_fail:\
+  \ yes (escalate to L2/L3 sources)"
+step_3_triangulate: "step_id: triangulate\naction_prompt: AP-04 (source triangulation)\ninput:\n  - document_pool: (from Step\
+  \ 2)\n  - source_map: (from Step 2)\noutput:\n  - verified_claims: list[VerifiedClaim]  # claim + confidence + sources\n\
+  \  - contested_claims: list[ContestedClaim]  # two-sided evidence\n  - unsupported_claims: list[str]  # flagged for removal\n\
+  validation:\n  - verified_claims.length >= 5\n  - all claims have confidence score\n  - no claim with 0 sources passes\n\
+  retry_on_fail: yes (add sources for failed claims)"
+step_4_synthesize: "step_id: synthesize\naction_prompt: AP-08 (research synthesis)\ninput:\n  - verified_claims: (from Step\
+  \ 3)\n  - contested_claims: (from Step 3)\n  - output_template: prompt_template_research_brief.md\noutput:\n  - draft_brief:\
+  \ structured research brief (markdown)\n  - comparison_table: if competitive analysis\n  - confidence_matrix: per-section\
+  \ confidence\nvalidation:\n  - draft_brief contains all template sections\n  - comparison_table.entity_count >= 2\n  - confidence_matrix\
+  \ populated for all key sections\nretry_on_fail: yes"
+step_5_govern: "step_id: govern\naction_prompt: quality_gate_advanced_n01 + bias_audit_n01\ninput:\n  - draft_brief: (from\
+  \ Step 4)\n  - verified_claims: (from Step 3)\noutput:\n  - quality_score: float\n  - gate_results: dict  # H01-H08 pass/fail\n\
+  \  - bias_scores: dict  # B1-B5 scores\n  - final_brief: brief (auto-fixed for H07, H08) or REVISION_REQUIRED\nvalidation:\n\
+  \  - all(H01-H08 pass)\n  - bias_score.overall >= 7.0\n  - quality_score >= 8.0\nretry_on_fail: return to Step 4 with specific\
+  \ remediation instructions (max 2)"
+chain_execution: "def run_research_chain(research_goal: str, entity: str, competitors: list) -> Brief:\n    context = {}\n\
+  \    for step in [decompose, source, triangulate, synthesize, govern]:\n        result = step.run(context)\n        if not\
+  \ step.validate(result):\n            result = step.retry(result, context)\n            if not step.validate(result):\n\
+  \                raise ResearchChainError(f\"Step {step.id} failed after 2 retries\")\n        context.update(result)\n\
+  \    return context[\"final_brief\"]"
+performance_targets: '| Step | Expected Tokens | Expected Time |
+
+  |------|----------------|--------------|
+
+  | Step 1 Decompose | 1000 | 10s |
+
+  | Step 2 Source | 500 + API calls | 60s |
+
+  | Step 3 Triangulate | 2000 | 20s |
+
+  | Step 4 Synthesize | 4000 | 40s |
+
+  | Step 5 Govern | 2000 | 20s |
+
+  | Total | ~10000 | ~2.5 min |'
+comparison_prompting_approaches: '| Approach | Error Isolation | Context Efficiency | N01 Fit |
+
+  |----------|----------------|-------------------|---------|
+
+  | Single-shot | none | good | fails on complex tasks |
+
+  | Manual multi-step | medium | poor | operator-dependent |
+
+  | This chain (automated) | high | excellent | optimal |
+
+  | ReAct (tool-use loop) | medium | medium | use for exploratory tasks |'
