@@ -1,4 +1,7 @@
----
+---pillar: P01
+kind: knowledge_card
+id: kc_test_dispatch_pattern
+
 title: Test Dispatch Pattern
 date: 2023-10-15
 author: CEX Team

@@ -1,4 +1,8 @@
----
+---quality: null
+pillar: P01
+kind: knowledge_card
+id: kc_test_signal_flow
+
 title: Test Signal Flow Documentation
 date: 2023-11-15
 author: CEX Team

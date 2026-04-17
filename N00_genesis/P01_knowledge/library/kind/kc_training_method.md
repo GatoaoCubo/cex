@@ -1,4 +1,8 @@
----
+---quality: null
+pillar: P01
+kind: knowledge_card
+id: kc_training_method
+
 title: Training Methodologies for Knowledge Systems
 description: Comprehensive guide to training methods for knowledge systems, including supervised, unsupervised, and hybrid approaches
 keywords: training methods, knowledge systems, machine learning, NLP, CEX

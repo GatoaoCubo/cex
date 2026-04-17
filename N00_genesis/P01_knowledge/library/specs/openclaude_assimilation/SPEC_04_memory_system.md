@@ -1,4 +1,5 @@
 ---
+id: spec_04_memory_system
 kind: spec
 pillar: P01
 title: "SPEC_04: Memory Aging/Relevance → cex_memory"

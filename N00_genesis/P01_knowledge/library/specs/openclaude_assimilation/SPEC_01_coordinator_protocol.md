@@ -1,4 +1,5 @@
 ---
+id: spec_01_coordinator_protocol
 kind: spec
 pillar: P01
 title: "SPEC_01: Coordinator Protocol → N07 Orchestrator"

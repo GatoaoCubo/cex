@@ -1,4 +1,8 @@
----
+---quality: null
+pillar: P01
+kind: knowledge_card
+id: kc_reward_model
+
 title: Reward Model Design and Implementation
 description: Comprehensive guide to reward model architecture, training, and application in reinforcement learning systems
 keywords: reward model, reinforcement learning, reward shaping, inverse reinforcement learning, sparse rewards

@@ -1,6 +1,7 @@
 ---
 id: kc_ontology
 kind: knowledge_card
+pillar: P01
 title: Ontology (P01)
 version: 1.0.0
 quality: 9.0

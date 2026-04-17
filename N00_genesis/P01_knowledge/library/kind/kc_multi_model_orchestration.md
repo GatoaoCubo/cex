@@ -4,7 +4,7 @@ kind: knowledge_card
 title: Multi-Model Orchestration Patterns for LLM Agents
 version: 1.0.0
 quality: 9.0
-pillar: null
+pillar: P01
 density_score: 1.0
 ---
 

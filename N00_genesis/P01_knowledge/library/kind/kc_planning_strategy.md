@@ -1,4 +1,6 @@
----
+---kind: knowledge_card
+id: kc_planning_strategy
+
 title: Planning Strategy Knowledge Core (KC)
 date: 2023-11-15
 author: CEX System

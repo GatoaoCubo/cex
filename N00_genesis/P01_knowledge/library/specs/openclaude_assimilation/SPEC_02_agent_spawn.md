@@ -1,4 +1,5 @@
 ---
+id: spec_02_agent_spawn
 kind: spec
 pillar: P01
 title: "SPEC_02: Agent Fork/Spawn → Dispatch System"

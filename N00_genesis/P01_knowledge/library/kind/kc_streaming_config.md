@@ -1,4 +1,6 @@
----
+---pillar: P01
+id: kc_streaming_config
+
 title: Streaming Configuration for P01 Knowledge (P05)
 description: Comprehensive guide to configuring streaming parameters for P01 knowledge artifacts
 keywords: streaming, configuration, P01, knowledge, parameters, setup, optimization

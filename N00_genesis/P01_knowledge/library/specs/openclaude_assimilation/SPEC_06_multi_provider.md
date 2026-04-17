@@ -1,4 +1,5 @@
 ---
+id: spec_06_multi_provider
 kind: spec
 pillar: P01
 title: "SPEC_06: Multi-Provider Router → Nucleus Routing"

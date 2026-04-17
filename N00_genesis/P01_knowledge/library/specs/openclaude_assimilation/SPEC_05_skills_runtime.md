@@ -1,4 +1,5 @@
 ---
+id: spec_05_skills_runtime
 kind: spec
 pillar: P01
 title: "SPEC_05: Skills Runtime → Builder ISO Loading"

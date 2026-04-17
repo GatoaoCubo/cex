@@ -1,4 +1,5 @@
 ---
+id: spec_07_gdp_enforcement
 kind: spec
 pillar: P01
 title: "SPEC_07: Permission Protocol → GDP Enforcement"

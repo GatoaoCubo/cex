@@ -1,6 +1,7 @@
 ---
 id: kc_analyst_briefing
 kind: knowledge_card
+pillar: P01
 title: Analyst Briefing
 version: 1.1.0
 created: 2026-04-02

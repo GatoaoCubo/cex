@@ -1,4 +1,5 @@
 ---
+id: spec_00_master
 kind: spec
 pillar: P01
 title: "OpenClaude→CEX Assimilation Master Spec"

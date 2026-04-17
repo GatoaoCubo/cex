@@ -1,4 +1,5 @@
 ---
+id: spec_03_token_budget
 kind: spec
 pillar: P01
 title: "SPEC_03: Token Budget Tracker → cex_token_budget"

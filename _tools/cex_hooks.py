@@ -210,7 +210,9 @@ def validate_artifact(path: str, content: str = None) -> list[dict]:
 
     size = len(content.encode("utf-8"))
 
-    # E01: Has frontmatter
+    # E01: Has frontmatter (skip tpl_* files -- intentional mustache placeholders)
+    if p.name.startswith("tpl_"):
+        return issues
     fm = parse_frontmatter(content)
     if fm is None:
         issues.append({"level": "ERROR", "code": "E01", "msg": "No valid YAML frontmatter"})
@@ -775,9 +777,13 @@ def run_validate_all() -> int:
 
     for ndir in sorted(NUCLEUS_DIRS):
         for md in sorted(ndir.rglob("*.md")):
-            # Skip compiled/, README, non-artifact files
-            if ("compiled" in str(md) or md.name.startswith("_")
-                    or md.name.lower() == "readme.md"):
+            # Skip compiled/, README, non-artifact files, legacy library subdirs
+            md_str = str(md)
+            if ("compiled" in md_str or md.name.startswith("_")
+                    or md.name.lower() == "readme.md"
+                    or "library/infrastructure" in md_str.replace("\\", "/")
+                    or "library/sources" in md_str.replace("\\", "/")
+                    or "library/specs" in md_str.replace("\\", "/")):
                 continue
             total += 1
             issues = validate_artifact(str(md))

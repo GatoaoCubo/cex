@@ -1,4 +1,8 @@
----
+---quality: null
+pillar: P01
+kind: knowledge_card
+id: kc_test_consolidate_loop
+
 title: Test Consolidate Loop
 description: "Guidelines for testing and validating consolidation loops in CEX systems"
 tags: ["testing", "consolidation", "loop-validation", "quality-assurance"]
