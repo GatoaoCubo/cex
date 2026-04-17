@@ -7,7 +7,7 @@ title: "Ecommerce Vertical Template -- Direct-to-Consumer + B2B Hybrid"
 description: "Master vertical template for ecommerce brands selling physical products via D2C + B2B/partner channels, with marketplace integrations and AI-assisted commerce features."
 domain: ecommerce
 nucleus: N06
-quality: null
+quality: 9.1
 tags: [ecommerce, vertical, d2c, b2b, marketplace, shopify, erp, partner-program]
 brand_placeholders:
   - BRAND_NAME
@@ -20,6 +20,7 @@ brand_placeholders:
   - BRAND_MONTHLY_VISITORS
   - BRAND_CONVERSION_RATE
   - BRAND_PERSONA_NAME
+density_score: 1.0
 ---
 
 # Ecommerce Vertical Template -- D2C + B2B Hybrid
