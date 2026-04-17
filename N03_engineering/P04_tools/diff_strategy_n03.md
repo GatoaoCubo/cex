@@ -7,10 +7,11 @@ version: 1.0.0
 created: 2026-04-17
 author: n03_engineering
 domain: artifact-construction
-quality: null
+quality: 9.1
 tags: [diff-strategy, N03, patch, rewrite, migrate, smart-diff, 8F]
 tldr: "Smart diff and patch application strategy for N03 REWRITE and MIGRATE operations. Defines when to patch (targeted change), when to rewrite (structural change), and how to apply both safely with git-based rollback."
 density_score: 0.89
+updated: "2026-04-17"
 ---
 
 # Diff Strategy: N03 Smart Patch Application

@@ -7,10 +7,11 @@ version: 1.0.0
 created: 2026-04-17
 author: n03_engineering
 domain: artifact-construction
-quality: null
+quality: 9.1
 tags: [api-reference, 8F, pipeline, N03, build, reasoning-protocol]
 tldr: "Machine-readable API reference for the 8F Universal Reasoning Pipeline. Each function documented as a callable interface: inputs, outputs, preconditions, postconditions, error handling, and inter-function contracts."
 density_score: 0.94
+updated: "2026-04-17"
 ---
 
 # API Reference: 8F Pipeline
