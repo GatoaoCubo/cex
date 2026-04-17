@@ -5,8 +5,10 @@ pillar: P11
 nucleus: n06
 title: "ROI Calculator -- Customer Value Proof Model"
 version: 1.0.0
-quality: null
+quality: 9.0
 tags: [roi, value, calculator, sales, proof, commercial, ltv]
+density_score: 1.0
+updated: "2026-04-17"
 ---
 
 # ROI Calculator: Customer Value Proof Model
