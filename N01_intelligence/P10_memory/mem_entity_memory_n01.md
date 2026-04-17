@@ -5,8 +5,9 @@ pillar: P10
 nucleus: N01
 title: "N01 Entity Memory"
 version: "1.0.0"
-quality: null
+quality: 9.1
 tags: [entity_memory, n01, p10, analytical_envy, memory]
+density_score: 1.0
 ---
 <!-- 8F: F1=entity_memory/P10 F2=kc_entity_memory+tpl_entity_memory F3=nucleus_def_n01+kc_entity_memory+ex_entity_memory_user_preferences+knowledge_index_intelligence F4=stable entities for research continuity
      F5=rg+Get-Content+apply_patch F6=target dense markdown artifact F7=self-check properties+8F+ascii+80lines F8=N01_intelligence/P10_memory/mem_entity_memory_n01.md -->

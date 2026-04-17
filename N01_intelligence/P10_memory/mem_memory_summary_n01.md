@@ -5,8 +5,9 @@ pillar: P10
 nucleus: N01
 title: "N01 Memory Summary"
 version: "1.0.0"
-quality: null
+quality: 9.1
 tags: [memory_summary, n01, p10, analytical_envy, compression]
+density_score: 0.99
 ---
 <!-- 8F: F1=memory_summary/P10 F2=kc_memory_summary+tpl_memory_summary F3=nucleus_def_n01+kc_memory_summary+ex_memory_summary_conversation_compress+research_pipeline_intelligence F4=compressed carry-forward for research work
      F5=rg+Get-Content+apply_patch F6=target dense markdown artifact F7=self-check properties+8F+ascii+80lines F8=N01_intelligence/P10_memory/mem_memory_summary_n01.md -->
