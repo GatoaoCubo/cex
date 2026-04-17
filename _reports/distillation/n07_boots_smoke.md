@@ -3,7 +3,8 @@ report: n07_boots_smoke
 mission: VERTICAL_DISTILLATION_20260416
 nucleus: n05
 created: 2026-04-16T16:05:00-03:00
-quality: null
+quality: 8.8
+density_score: 0.99
 ---
 
 # N07 Boots Smoke Report
