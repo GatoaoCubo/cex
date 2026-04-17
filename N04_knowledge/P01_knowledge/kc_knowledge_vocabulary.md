@@ -5,7 +5,7 @@ pillar: P01
 nucleus: n04
 title: "Knowledge Card -- N04 Controlled Vocabulary"
 version: "1.0.0"
-quality: null
+quality: 9.1
 tags: [vocabulary, controlled_vocabulary, rag, knowledge, taxonomy, n04, P01]
 domain: knowledge management
 type: controlled_vocabulary
