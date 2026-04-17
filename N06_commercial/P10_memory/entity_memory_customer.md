@@ -5,8 +5,9 @@ pillar: P10
 nucleus: n06
 title: "Entity Memory -- Customer Entity Schema and ICP Attributes"
 version: 1.0.0
-quality: null
+quality: 8.9
 tags: [entity-memory, customer, icp, health-score, churn-risk, commercial, memory]
+density_score: 1.0
 ---
 
 # Entity Memory: Customer Entity Schema
