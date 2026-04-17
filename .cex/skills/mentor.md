@@ -3,7 +3,7 @@ id: skill_mentor
 kind: skill
 pillar: P08
 description: "Cross-runtime mirror of /mentor -- CEX universal vocabulary navigator"
-quality: null
+quality: 9.0
 title: "Mentor Skill"
 version: "1.0.0"
 author: n07_orchestrator
