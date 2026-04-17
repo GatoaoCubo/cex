@@ -5,8 +5,9 @@ pillar: P11
 nucleus: n06
 title: "Learning Record -- N06 Commercial Session Learnings"
 version: 1.0.0
-quality: null
+quality: 8.9
 tags: [learning, record, commercial, feedback, session, evolution]
+density_score: 1.0
 ---
 
 # Learning Record: N06 Commercial Domain Learnings

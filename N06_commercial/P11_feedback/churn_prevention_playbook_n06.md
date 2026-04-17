@@ -5,8 +5,9 @@ pillar: P11
 nucleus: n06
 title: "Churn Prevention Playbook -- Retention Intervention by Signal and Tier"
 version: 1.0.0
-quality: null
+quality: 9.0
 tags: [churn, retention, playbook, intervention, commercial, revenue-defense]
+density_score: 1.0
 ---
 
 # Churn Prevention Playbook
