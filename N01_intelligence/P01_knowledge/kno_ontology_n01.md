@@ -5,8 +5,9 @@ pillar: P01
 nucleus: N01
 title: "N01 Ontology"
 version: "1.0.0"
-quality: null
+quality: 9.0
 tags: [ontology, n01, p01, analytical_envy, taxonomy]
+density_score: 0.96
 ---
 <!-- 8F: F1=ontology/P01 F2=ontology-builder+kc_ontology F3=nucleus_def_n01+kc_ontology+taxonomy_completeness_audit+source_quality_contract F4=formal taxonomy for comparative knowledge organization
      F5=rg+Get-Content+apply_patch F6=target dense markdown artifact F7=self-check properties+8F+ascii+80lines F8=N01_intelligence/P01_knowledge/kno_ontology_n01.md -->
