@@ -8,10 +8,11 @@ version: 1.0.0
 created: 2026-04-17
 author: n01_intelligence
 domain: research-intelligence
-quality: null
+quality: 9.1
 tags: [regression_check, quality_monitoring, n01, analytical_envy, trend_detection]
 tldr: "Detects quality regressions in N01 research outputs over time: tracks score trends, flags systematic degradation patterns, identifies bias drift. Runs weekly as part of self_improvement_loop_n01."
 density_score: 0.88
+updated: "2026-04-17"
 ---
 
 <!-- 8F: F1 constrain=P11/regression_check F2 become=regression-check-builder F3 inject=self_improvement_loop_n01+eval_framework_n01+quality_gate_intelligence F4 reason=Analytical Envy applies to self-assessment too -- N01 must detect when its own quality is declining, not just when others' is F5 call=cex_compile F6 produce=regression_check_n01.md F7 govern=frontmatter+ascii+tables F8 collaborate=N01_intelligence/P11_feedback/ -->

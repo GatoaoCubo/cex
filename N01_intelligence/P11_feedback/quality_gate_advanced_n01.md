@@ -8,10 +8,11 @@ version: 2.0.0
 created: 2026-04-17
 author: n01_intelligence
 domain: research-intelligence
-quality: null
+quality: 9.1
 tags: [quality_gate, advanced_validation, n01, analytical_envy, multi_layer_gate]
 tldr: "Advanced quality gate for N01 adding 3 new hard gates to the base quality_gate_intelligence: Analytical Envy check (comparison mandatory), Vocabulary compliance (no metaphors), and Confidence completeness (scores on all claims)."
 density_score: 0.88
+updated: "2026-04-17"
 ---
 
 <!-- 8F: F1 constrain=P11/quality_gate F2 become=quality-gate-builder F3 inject=quality_gate_intelligence+bias_audit_n01+eval_framework_n01+scoring_rubric_research F4 reason=the base quality_gate covers sources and freshness; this v2 adds Analytical Envy-specific gates that are unique to N01's identity F5 call=cex_compile F6 produce=quality_gate_advanced_n01.md F7 govern=frontmatter+ascii+tables F8 collaborate=N01_intelligence/P11_feedback/ -->
