@@ -5,8 +5,9 @@ pillar: P09
 nucleus: n04
 title: Knowledge Permission Matrix
 version: 1.0
-quality: null
+quality: 9.0
 tags: [config, permission, knowledge, access, governance]
+density_score: 1.0
 ---
 <!-- 8F: F1 constrain=P09/permission F2 become=permission-builder F3 inject=n04-knowledge+kc_permission+P09 examples+N04 ownership model F4 reason=least-privilege access for evidence-rich knowledge assets F5 call=shell,apply_patch F6 produce=4454 bytes F7 govern=frontmatter+ascii+density+80-line self-check F8 collaborate=N04_knowledge/P09_config/con_permission_n04.md -->
 # Knowledge Permission Matrix
