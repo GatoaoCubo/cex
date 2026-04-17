@@ -5,8 +5,9 @@ pillar: P03
 nucleus: n00
 title: "Multimodal Prompt -- Canonical Manifest"
 version: 1.0
-quality: null
+quality: 9.0
 tags: [manifest, multimodal_prompt, p03, n00, archetype, template]
+density_score: 0.99
 ---
 
 <!-- 8F: F1=knowledge_card P03 F2=knowledge-card-builder F3=kinds_meta+builder-manifest F4=plan F5=scan F6=produce F7=gate F8=save -->
