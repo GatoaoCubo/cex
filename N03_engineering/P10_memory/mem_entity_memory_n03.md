@@ -9,8 +9,9 @@ created: "2026-04-16"
 updated: "2026-04-16"
 author: n03_engineering
 domain: engineering operational memory
-quality: null
+quality: 9.1
 tags: [entity_memory, p10, n03, memory, engineering, inventive_pride]
+density_score: 0.99
 ---
 <!-- 8F: F1=entity_memory/P10 F2=entity-memory-builder F3=nucleus_def_n03+kc_entity_memory+P10_schema F4=high-signal memory for build entities
      F5=Get-Content+rg+apply_patch+cex_compile.py F6=bytes:5444 F7=self-check:frontmatter+8f+properties+80l+ascii F8=N03_engineering/P10_memory/mem_entity_memory_n03.md -->
