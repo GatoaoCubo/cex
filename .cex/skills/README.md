@@ -8,6 +8,7 @@ updated: 2026-04-15
 author: n03_builder
 mission: BORIS_MERGE
 runtime_agnostic: true
+density_score: 0.97
 ---
 
 # .cex/skills/ — runtime-agnostic skill mirror
