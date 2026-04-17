@@ -4,13 +4,14 @@ kind: dag
 pillar: P12
 title: Multi-Marketplace Sync DAG
 version: 0.1.0
-quality: null
+quality: 8.9
 status: template
 brand_placeholders:
   - BRAND_SHOPIFY_STORE_DOMAIN
   - BRAND_BLING_API_URL
   - BRAND_MELI_USER_ID
 tags: [commerce, template, distillation, orchestration, dag]
+density_score: 1.0
 ---
 
 # Multi-Marketplace Sync DAG
