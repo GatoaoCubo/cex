@@ -5,8 +5,9 @@ pillar: P11
 nucleus: n00
 title: "Compliance Checklist -- Canonical Manifest"
 version: 1.0
-quality: null
+quality: 8.9
 tags: [manifest, compliance_checklist, p11, n00, archetype, template]
+density_score: 1.0
 ---
 
 <!-- 8F: F1=knowledge_card P11 F2=knowledge-card-builder F3=kinds_meta+builder-manifest F4=plan F5=scan F6=produce F7=gate F8=save -->
