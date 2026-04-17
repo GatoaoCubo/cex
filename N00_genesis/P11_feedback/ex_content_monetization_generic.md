@@ -7,7 +7,7 @@ title: "Content Monetization Framework -- D2C Ecommerce Funnel"
 description: "Content-to-revenue funnel for D2C ecommerce brands. Maps content pillars to funnel stages, engagement targets, CTA types, and product mention rules. Generic template with {{BRAND_*}} placeholders."
 domain: content_monetization
 nucleus: N06
-quality: null
+quality: 9.0
 tags: [content-monetization, funnel, ecommerce, cta, attribution, d2c, revenue]
 brand_placeholders:
   - BRAND_NAME
@@ -19,6 +19,7 @@ brand_placeholders:
   - BRAND_AOV
   - BRAND_CONVERSION_RATE
   - BRAND_PERSONA_NAME
+density_score: 1.0
 ---
 
 # Content Monetization Framework -- D2C Ecommerce Funnel

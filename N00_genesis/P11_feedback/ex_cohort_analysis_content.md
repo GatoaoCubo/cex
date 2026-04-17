@@ -7,7 +7,7 @@ title: "Cohort Analysis -- Content-Driven Customer Acquisition"
 description: "Cohort analysis framework for D2C ecommerce brands using content as primary acquisition channel. Segments customers by acquisition source, measures LTV, retention, and content-to-purchase attribution by cohort."
 domain: analytics
 nucleus: N06
-quality: null
+quality: 9.0
 tags: [cohort-analysis, content, d2c, ltv, retention, acquisition, ecommerce]
 brand_placeholders:
   - BRAND_NAME
@@ -16,6 +16,7 @@ brand_placeholders:
   - BRAND_AOV
   - BRAND_UTM_SOURCE
   - BRAND_GA4_ID
+density_score: 1.0
 ---
 
 # Cohort Analysis -- Content-Driven Customer Acquisition
