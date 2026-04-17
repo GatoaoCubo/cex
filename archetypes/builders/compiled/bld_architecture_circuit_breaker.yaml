@@ -1,0 +1,55 @@
+kind: architecture
+id: bld_architecture_circuit_breaker
+pillar: P08
+llm_function: CONSTRAIN
+purpose: Component map of circuit_breaker
+quality: null
+title: Architecture Circuit Breaker
+version: 1.0.0
+author: n03_builder
+tags:
+- circuit_breaker
+- builder
+- architecture
+tldr: circuit_breaker is P09's resilience config for dependency failure isolation via three-state machine.
+domain: circuit breaker construction
+created: '2026-04-17'
+updated: '2026-04-17'
+density_score: 0.9
+component_inventory: '| Name | Role | Owner | Status |
+
+  |------|------|-------|--------|
+
+  | protected_dependency | Target service/API | circuit_breaker | required |
+
+  | failure_threshold | When to open the circuit | circuit_breaker | required |
+
+  | cooldown_period | Open-state duration before probing | circuit_breaker | required |
+
+  | half_open_probe | Recovery probe config | circuit_breaker | required |
+
+  | fallback_behavior | Open-circuit response | circuit_breaker | required |
+
+  | window_type | Count or time-based sliding window | circuit_breaker | required |
+
+  | state_machine | CLOSED/OPEN/HALF_OPEN transitions | runtime | external |
+
+  | fallback_chain | Ordered provider list -- distinct kind | P09 | sibling |
+
+  | rate_limit_config | Inbound throttle -- distinct kind | P09 | sibling |
+
+  | backpressure_policy | Consumer throughput -- distinct kind | P09 | sibling |'
+three_state_machine: "         failures >= threshold\nCLOSED -----------------------> OPEN\n  ^                          \
+  \    |\n  | probe success                | cooldown elapsed\n  |                              v\nCLOSED <------------ HALF_OPEN\
+  \ (send probe_count requests)\n        probe failure -> OPEN"
+boundary_table: '| circuit_breaker IS | circuit_breaker IS NOT |
+
+  |--------------------|-----------------------|
+
+  | Outbound dependency failure isolation | Inbound request throttle (rate_limit_config) |
+
+  | Three-state machine with cooldown | Ordered provider fallback list (fallback_chain) |
+
+  | Auto-disables failing downstream service | Consumer throughput control (backpressure_policy) |
+
+  | Resilience pattern (Hystrix/Resilience4j) | Connection pool configuration |'

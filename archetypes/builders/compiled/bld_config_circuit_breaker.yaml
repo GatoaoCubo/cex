@@ -1,0 +1,66 @@
+kind: config
+id: bld_config_circuit_breaker
+pillar: P09
+llm_function: CONSTRAIN
+purpose: Naming, paths, size limits for circuit_breaker
+effort: medium
+max_turns: 20
+quality: null
+title: Config Circuit Breaker
+version: 1.0.0
+author: n03_builder
+tags:
+- circuit_breaker
+- builder
+- config
+tldr: Naming, paths, defaults, and boundary rules for circuit_breaker production.
+domain: circuit breaker construction
+created: '2026-04-17'
+updated: '2026-04-17'
+density_score: 0.9
+naming_convention: '| Scope | Convention | Example |
+
+  |-------|-----------|---------|
+
+  | Artifact files | `p09_cb_{scope}.md` | `p09_cb_anthropic_api.md` |
+
+  | Builder directory | kebab-case | `circuit-breaker-builder/` |
+
+  | Fields | snake_case | `failure_rate_threshold`, `cooldown_duration`, `probe_count` |
+
+  | Service slug | snake_case | `anthropic_api`, `railway_postgres`, `firecrawl_api` |
+
+
+  Rule: id MUST equal filename stem.'
+file_paths:
+- 'Output: `N05_operations/P09_config/p09_cb_{scope}.md`'
+- 'Compiled: `N05_operations/P09_config/compiled/p09_cb_{scope}.yaml`'
+size_limits:
+- 'Body: max 3072 bytes'
+- 'Density: >= 0.80'
+threshold_defaults_resilience4j_inspired: '| Parameter | Recommended Default | Notes |
+
+  |-----------|---------------------|-------|
+
+  | failure_rate_threshold | 50 | % of calls in window |
+
+  | sliding_window_size | 10-100 | requests or seconds |
+
+  | minimum_number_of_calls | 5-10 | prevent premature tripping |
+
+  | cooldown_duration | 30-60 | seconds |
+
+  | probe_count | 2-5 | recovery reliability |
+
+  | slow_call_threshold_ms | 30000 | 30s for LLM APIs |'
+platform_enum: '| Value | Notes |
+
+  |-------|-------|
+
+  | Resilience4j | Java/Kotlin; production-proven; YAML config |
+
+  | Hystrix | Deprecated; migration to Resilience4j recommended |
+
+  | Polly | .NET; fluent API |
+
+  | custom | Document implementation in description |'

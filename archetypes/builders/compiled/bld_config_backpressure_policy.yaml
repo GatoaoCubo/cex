@@ -1,0 +1,62 @@
+kind: config
+id: bld_config_backpressure_policy
+pillar: P09
+llm_function: CONSTRAIN
+purpose: Naming, paths, size limits for backpressure_policy
+effort: low
+max_turns: 15
+quality: null
+title: Config Backpressure Policy
+version: 1.0.0
+author: n03_builder
+tags:
+- backpressure_policy
+- builder
+- config
+tldr: Naming, paths, and strategy enum constraints for backpressure_policy production.
+domain: backpressure policy construction
+created: '2026-04-17'
+updated: '2026-04-17'
+density_score: 0.9
+naming_convention: '| Scope | Convention | Example |
+
+  |-------|-----------|---------|
+
+  | Artifact files | `p09_bp_{scope}.md` | `p09_bp_n07_artifact_pipeline.md` |
+
+  | Builder directory | kebab-case | `backpressure-policy-builder/` |
+
+  | Fields | snake_case | `strategy`, `buffer_size`, `overflow_action` |
+
+  | Stream slug | snake_case | `n07_artifact_pipeline`, `api_ingest_stream` |
+
+
+  Rule: id MUST equal filename stem.'
+file_paths:
+- 'Output: `N05_operations/P09_config/p09_bp_{scope}.md`'
+- 'Compiled: `N05_operations/P09_config/compiled/p09_bp_{scope}.yaml`'
+size_limits:
+- 'Body: max 2048 bytes'
+- 'Density: >= 0.80'
+strategy_enum: '| Value | CEX Mapping |
+
+  |-------|------------|
+
+  | buffer | Hold in queue; drop on overflow |
+
+  | drop_oldest | Oldest items discarded first |
+
+  | drop_newest | New items rejected when full |
+
+  | throttle | Slow producer signal |
+
+  | block | Block producer until consumer ready |'
+buffer_size_guidelines: '| Pipeline Type | Buffer Size |
+
+  |--------------|------------|
+
+  | Agent task dispatch | 50-200 |
+
+  | Event stream ingest | 500-2000 |
+
+  | Real-time monitoring | 10-50 |'

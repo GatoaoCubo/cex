@@ -1,0 +1,80 @@
+kind: schema
+id: bld_schema_circuit_breaker
+pillar: P09
+llm_function: CONSTRAIN
+purpose: Formal schema for circuit_breaker
+quality: null
+title: Schema Circuit Breaker
+version: 1.0.0
+author: n03_builder
+tags:
+- circuit_breaker
+- builder
+- schema
+tldr: 'Schema for circuit_breaker: protected_dependency, failure_threshold, cooldown, half_open_probe, fallback.'
+domain: circuit breaker construction
+created: '2026-04-17'
+updated: '2026-04-17'
+density_score: 0.9
+frontmatter_fields: '| Field | Type | Required | Notes |
+
+  |-------|------|----------|-------|
+
+  | id | string (p09_cb_{slug}) | YES | Namespace compliance |
+
+  | kind | literal "circuit_breaker" | YES | Type integrity |
+
+  | pillar | literal "P09" | YES | |
+
+  | version | semver | YES | |
+
+  | created | date | YES | |
+
+  | updated | date | YES | |
+
+  | author | string | YES | |
+
+  | protected_dependency | string | YES | Service/API being protected |
+
+  | failure_threshold | {value: number, type: count|percentage} | YES | When circuit opens |
+
+  | cooldown_period | int (seconds) | YES | Time circuit stays open |
+
+  | half_open_probe | {count: int, success_threshold: int} | YES | Recovery probe config |
+
+  | fallback_behavior | string | YES | What to do when circuit is open |
+
+  | window_type | enum: count, time | YES | Sliding window type |
+
+  | window_size | {value: int, unit: requests|seconds} | YES | Window measurement |
+
+  | quality | null | YES | |
+
+  | tags | list[string], len >= 3 | YES | Must include "circuit_breaker" |
+
+  | tldr | string <= 160ch | YES | |
+
+  | platform | string | REC | Resilience4j, Hystrix, Polly, custom |
+
+  | monitored_exceptions | list[string] | REC | Exception types counted as failures |
+
+  | enabled | bool | REC | true | Active state |'
+id_pattern: 'Regex: `^p09_cb_[a-z][a-z0-9_]+$`'
+three_state_machine: 'CLOSED -> (failures >= threshold) -> OPEN
+
+  OPEN -> (cooldown elapsed) -> HALF_OPEN
+
+  HALF_OPEN -> (probe succeeds) -> CLOSED
+
+  HALF_OPEN -> (probe fails) -> OPEN'
+body_structure:
+- '`## Overview` -- protected dependency and failure scenario'
+- '`## State Machine` -- transitions with threshold values'
+- '`## Thresholds` -- failure rate, window, cooldown'
+- '`## Fallback` -- open-circuit behavior'
+constraints:
+- 'max_bytes: 3072'
+- failure_threshold MUST be numeric
+- cooldown_period MUST be numeric (seconds)
+- fallback_behavior MUST be non-empty string
+- 'quality: null always'

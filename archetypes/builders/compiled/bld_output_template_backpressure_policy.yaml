@@ -1,0 +1,25 @@
+kind: output_template
+id: bld_output_template_backpressure_policy
+pillar: P05
+llm_function: PRODUCE
+purpose: Template for backpressure_policy artifact production
+quality: null
+title: Output Template Backpressure Policy
+version: 1.0.0
+author: n03_builder
+tags:
+- backpressure_policy
+- builder
+- output_template
+tldr: Fill template to produce backpressure_policy with strategy, buffer, overflow, and consumer signal.
+domain: backpressure policy construction
+created: '2026-04-17'
+updated: '2026-04-17'
+density_score: 0.9
+overview: '`{{producer_consumer_mismatch_description}}` `{{why_this_strategy_was_chosen}}`'
+strategy: 'Strategy: `{{strategy}}` Rationale: `{{why_this_strategy_matches_the_use_case}}`'
+buffer_config: 'Size: `{{buffer_size}} items` Overflow: `{{overflow_action}}` Max pending: `{{max_pending}}` Behavior when
+  full: `{{what_happens}}`'
+consumer_signal: 'Mechanism: `{{pull|demand}}`
+
+  `{{how_consumer_signals_readiness_to_receive}}`'

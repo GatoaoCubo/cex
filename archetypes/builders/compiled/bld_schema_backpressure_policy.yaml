@@ -1,0 +1,69 @@
+kind: schema
+id: bld_schema_backpressure_policy
+pillar: P09
+llm_function: CONSTRAIN
+purpose: Formal schema for backpressure_policy
+quality: null
+title: Schema Backpressure Policy
+version: 1.0.0
+author: n03_builder
+tags:
+- backpressure_policy
+- builder
+- schema
+tldr: 'Schema for backpressure_policy: strategy, buffer_size, overflow_action, consumer_signal.'
+domain: backpressure policy construction
+created: '2026-04-17'
+updated: '2026-04-17'
+density_score: 0.9
+frontmatter_fields: '| Field | Type | Required | Notes |
+
+  |-------|------|----------|-------|
+
+  | id | string (p09_bp_{slug}) | YES | Namespace compliance |
+
+  | kind | literal "backpressure_policy" | YES | Type integrity |
+
+  | pillar | literal "P09" | YES | |
+
+  | version | semver | YES | |
+
+  | created | date | YES | |
+
+  | updated | date | YES | |
+
+  | author | string | YES | |
+
+  | strategy | enum: buffer, drop_oldest, drop_newest, throttle, block | YES | Flow control approach |
+
+  | buffer_size | int | YES | Max items in flight |
+
+  | overflow_action | enum: drop, error, block | YES | Buffer full behavior |
+
+  | consumer_signal | enum: pull, demand | YES | Reactive signal mechanism |
+
+  | quality | null | YES | |
+
+  | tags | list[string], len >= 3 | YES | Must include "backpressure_policy" |
+
+  | tldr | string <= 160ch | YES | |
+
+  | max_pending | int | REC | Max unacknowledged items |
+
+  | producer | string | REC | Producer component name |
+
+  | consumer | string | REC | Consumer component name |
+
+  | platform | string | REC | RxJava, Reactor, Akka, custom |'
+id_pattern: 'Regex: `^p09_bp_[a-z][a-z0-9_]+$`'
+body_structure:
+- '`## Overview` -- producer/consumer mismatch and chosen strategy'
+- '`## Strategy` -- selected approach and rationale'
+- '`## Buffer Config` -- size, overflow action, queue depth'
+- '`## Consumer Signal` -- PULL or DEMAND mechanism'
+constraints:
+- 'max_bytes: 2048'
+- strategy MUST be in enum
+- buffer_size MUST be numeric
+- overflow_action MUST be in enum
+- 'quality: null always'

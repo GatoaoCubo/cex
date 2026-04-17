@@ -1,0 +1,33 @@
+kind: examples
+id: bld_examples_prospective_memory
+pillar: P07
+llm_function: GOVERN
+purpose: Golden and anti-examples of prospective_memory artifacts
+quality: null
+title: Examples Prospective Memory
+version: 1.0.0
+author: n03_builder
+tags:
+- prospective_memory
+- builder
+- examples
+tldr: Golden and anti-examples for prospective_memory construction.
+domain: prospective memory construction
+created: '2026-04-17'
+updated: '2026-04-17'
+density_score: 0.9
+golden_example: "INPUT: \"Create prospective memory for N07 with weekly quality check and N01 dispatch on low score\"\nid:\
+  \ p10_pm_n07_quality_ops\nkind: prospective_memory\npillar: P10\nversion: \"1.0.0\"\ncreated: \"2026-04-17\"\nupdated: \"\
+  2026-04-17\"\nauthor: \"builder_agent\"\nowner: \"n07\"\nexecution_mechanism: polling\ncompletion_policy: re_schedule\n\
+  reminders:\n  - id: \"weekly_quality_audit\"\n    trigger_type: time\n    trigger_value: \"every Monday 09:00 UTC\"\n  \
+  \  action_payload: \"Run cex_doctor.py --full and compile quality report to N07_admin/P11_feedback/\"\n    priority: 2\n\
+  \    expiry: null\n    completion_policy: re_schedule\n    recurrence: \"0 9   1\"\n  - id: \"low_quality_dispatch\"\n \
+  \   trigger_type: condition\n    trigger_value: \"average quality_score < 7.5 in last 7 days\"\n    action_payload: \"Dispatch\
+  \ N01 to audit and improve lowest-scoring artifacts\"\n    priority: 1\n    expiry: null\n    completion_policy: mark_done\n\
+  \    recurrence: null\nquality: null\ntags: [prospective_memory, n07, quality_ops, P10]\ntldr: \"N07 quality ops prospective\
+  \ memory: weekly audit (time trigger) + N01 dispatch on low score (condition trigger).\"\n\nWHY THIS IS GOLDEN: owner declared,\
+  \ reminders array >= 1, trigger_type per reminder, action_payload specific, priority set, quality null, execution_mechanism\
+  \ declared."
+anti_example: "id: n07-reminders\nkind: schedule\nreminders:\n  - do: something later\nquality: 8.0\nFAILURES: hyphened id,\
+  \ wrong kind (schedule != prospective_memory), quality non-null, vague action_payload, missing owner, trigger_type, expiry,\
+  \ tags."

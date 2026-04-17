@@ -1,0 +1,36 @@
+kind: output_template
+id: bld_output_template_circuit_breaker
+pillar: P05
+llm_function: PRODUCE
+purpose: Template for circuit_breaker artifact production
+quality: null
+title: Output Template Circuit Breaker
+version: 1.0.0
+author: n03_builder
+tags:
+- circuit_breaker
+- builder
+- output_template
+tldr: Fill template to produce circuit_breaker with failure threshold, cooldown, probe, and fallback.
+domain: circuit breaker construction
+created: '2026-04-17'
+updated: '2026-04-17'
+density_score: 0.9
+overview: '`{{what_dependency_is_protected_and_why}}`'
+state_machine: '| State | Condition | Action |
+
+  |-------|-----------|--------|
+
+  | CLOSED | failure_rate < {{threshold}}% | Normal operation |
+
+  | OPEN | failure_rate >= {{threshold}}% in last {{window_size}} requests | Fail fast, return fallback |
+
+  | HALF_OPEN | After {{cooldown_duration}}s | Send {{probe_count}} probe requests |
+
+  | CLOSED | {{probe_count}} probes succeed | Resume normal operation |
+
+  | OPEN | Any probe fails | Reset cooldown |'
+cooldown: 'Duration: `{{cooldown_duration}} seconds` Probe: `{{probe_count}} requests` Recovery: `all probes must succeed`'
+fallback: 'Response while OPEN: `{{fallback_response}}`
+
+  Strategy: `{{fail_fast|cached_value|alternative_provider|default_value}}`'

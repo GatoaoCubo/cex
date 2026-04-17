@@ -1,0 +1,70 @@
+id: backpressure-policy-builder
+kind: type_builder
+pillar: P09
+parent: null
+domain: backpressure_policy
+llm_function: BECOME
+version: 1.0.0
+created: 2026-04-17
+updated: 2026-04-17
+author: builder_agent
+tags:
+- kind-builder
+- backpressure-policy
+- P09
+- config
+- reactive-streams
+- flow-control
+keywords:
+- backpressure
+- reactive streams
+- flow control
+- buffer
+- drop
+- throttle
+- consumer throughput
+triggers:
+- create backpressure policy
+- configure flow control
+- reactive streams backpressure
+- consumer throughput policy
+capabilities:
+- 'Select backpressure strategy: buffer, drop_oldest, drop_newest, throttle, block'
+- Configure buffer_size with overflow action
+- 'Define consumer_signal: PULL-based or demand-signaling mechanism'
+- Set max_pending and queue_depth limits
+- 'Declare overflow_action: what to do when buffer is full'
+- 'Map to platform: RxJava, Reactor, Akka Streams, or custom'
+- Validate artifact against quality gates
+- Distinguish from rate_limit_config and circuit_breaker
+quality: null
+title: Manifest Backpressure Policy
+tldr: Builds backpressure_policy artifacts -- defines how a system responds when downstream consumers cannot keep up with
+  upstream producers.
+density_score: 0.9
+identity: Specialist in building backpressure_policy artifacts -- flow control configurations that define how a system responds
+  when downstream consumers cannot process messages as fast as upstream producers emit them. Grounded in Reactive Streams
+  specification (RxJava, Project Reactor, Akka Streams). Masters strategy selection (buffer/drop/throttle/block), buffer sizing,
+  overflow behavior, and the boundary between backpressure_policy (consumer throughput control), rate_limit_config (inbound
+  throttle), and circuit_breaker (dependency failure).
+properties: '| Property | Value |
+
+  |----------|-------|
+
+  | Kind | `type_builder` |
+
+  | Pillar | P09 |
+
+  | Domain | backpressure_policy |
+
+  | Pipeline | 8F (F1-F8) |
+
+  | Scorer | cex_score.py |
+
+  | Compiler | cex_compile.py |
+
+  | Retriever | cex_retriever.py |
+
+  | Quality target | 9.0+ |
+
+  | Density target | 0.85+ |'

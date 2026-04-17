@@ -1,0 +1,54 @@
+id: p09_lr_circuit_breaker_builder
+kind: learning_record
+pillar: P11
+version: 1.0.0
+created: 2026-04-17
+updated: 2026-04-17
+author: builder_agent
+observation: Circuit breakers without fallback_response caused silent failures when circuits opened. Circuits with cooldown=0
+  oscillated between open/half-open faster than monitoring could detect. failure_threshold as string ('high') failed numeric
+  comparison in runtime.
+pattern:
+- 'failure_rate_threshold: integer 1-100 (not "high" or "50%")'
+- 'fallback_response: specific, non-empty string describing return value'
+- 'cooldown_duration: >= 30 seconds (Resilience4j default: 60)'
+- 'probe_count: >= 2 (single probe is statistically unreliable)'
+- 'monitored_exceptions: list specific exception types, not empty'
+confidence: 0.88
+outcome: SUCCESS
+domain: circuit_breaker
+tags:
+- circuit-breaker
+- failure-threshold
+- fallback
+- cooldown
+- probe
+tldr: Numeric threshold + fallback_response + cooldown >= 30s are load-bearing. String thresholds and missing fallback are
+  most common failures.
+impact_score: 8.5
+decay_rate: 0.02
+memory_scope: project
+quality: null
+title: Memory Circuit Breaker
+density_score: 0.9
+llm_function: INJECT
+summary: 'Circuit breakers fail at the configuration layer, not the runtime layer. Three root causes: threshold misconfigured
+  as string, no fallback declared (silent failure worse than open circuit), cooldown too short (oscillation). Well-configured
+  circuit breakers prevent cascade failures silently.'
+anti_pattern:
+- 'threshold: "high" -- fails numeric comparison in Resilience4j/Polly'
+- No fallback_response -- open circuit = unhandled exception propagation
+- cooldown = 0 -- oscillates faster than monitoring detects
+- probe_count = 1 -- single transient success closes circuit prematurely
+- Conflating with rate_limit_config -- different problems, different solutions
+properties: '| Property | Value |
+
+  |----------|-------|
+
+  | Kind | `learning_record` |
+
+  | Pillar | P09 |
+
+  | Domain | circuit_breaker |
+
+  | Target | 9.0+ |'

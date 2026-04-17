@@ -1,0 +1,56 @@
+---
+kind: config
+id: bld_config_prospective_memory
+pillar: P09
+llm_function: CONSTRAIN
+purpose: Naming, paths, size limits for prospective_memory
+effort: low
+max_turns: 15
+quality: null
+title: "Config Prospective Memory"
+version: "1.0.0"
+author: n03_builder
+tags: [prospective_memory, builder, config]
+tldr: "Naming, paths, size limits for prospective_memory production."
+domain: "prospective memory construction"
+created: "2026-04-17"
+updated: "2026-04-17"
+density_score: 0.90
+---
+# Config: prospective_memory Production Rules
+
+## Naming Convention
+| Scope | Convention | Example |
+|-------|-----------|---------|
+| Artifact files | `p10_pm_{scope}.md` | `p10_pm_n07_quality_ops.md` |
+| Builder directory | kebab-case | `prospective-memory-builder/` |
+| Fields | snake_case | `trigger_type`, `action_payload`, `completion_policy` |
+| Store slug | snake_case | `n07_quality_ops`, `n01_research_followup` |
+
+## File Paths
+- Output: `N0x_{domain}/P10_memory/p10_pm_{scope}.md`
+- Compiled: `N0x_{domain}/P10_memory/compiled/p10_pm_{scope}.yaml`
+
+## Size Limits
+- Body: max 2048 bytes
+- Density: >= 0.80
+
+## Trigger Type Enum
+| Value | Mechanism |
+|-------|-----------|
+| time | datetime or cron expression |
+| event | Signal file name or event identifier |
+| condition | State expression that evaluates true/false |
+
+## Completion Policy
+| Value | Meaning |
+|-------|---------|
+| mark_done | Execute once, remove from store |
+| re_schedule | Execute, then reschedule (recurring) |
+
+## Execution Mechanism
+| Value | CEX Tool |
+|-------|---------|
+| schedule_signal | Claude Code ScheduleWakeup |
+| polling | cex_signal_watch.py |
+| wake_notification | session-start boot check |

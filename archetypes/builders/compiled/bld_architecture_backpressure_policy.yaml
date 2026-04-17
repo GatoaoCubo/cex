@@ -1,0 +1,63 @@
+kind: architecture
+id: bld_architecture_backpressure_policy
+pillar: P08
+llm_function: CONSTRAIN
+purpose: Component map of backpressure_policy
+quality: null
+title: Architecture Backpressure Policy
+version: 1.0.0
+author: n03_builder
+tags:
+- backpressure_policy
+- builder
+- architecture
+tldr: backpressure_policy is P09 flow control for producer-consumer throughput mismatch, distinct from rate_limit and circuit_breaker.
+domain: backpressure policy construction
+created: '2026-04-17'
+updated: '2026-04-17'
+density_score: 0.9
+component_inventory: '| Name | Role | Owner | Status |
+
+  |------|------|-------|--------|
+
+  | strategy | Flow control approach | backpressure_policy | required |
+
+  | buffer_size | Max items in flight | backpressure_policy | required |
+
+  | overflow_action | Buffer full behavior | backpressure_policy | required |
+
+  | consumer_signal | Reactive signal mechanism | backpressure_policy | required |
+
+  | max_pending | Max unacked items | backpressure_policy | optional |
+
+  | rate_limit_config | Inbound quota throttle -- sibling | P09 | sibling |
+
+  | circuit_breaker | Dependency failure isolation -- sibling | P09 | sibling |'
+producer_consumer_model: "[Producer]  --emits-->  [Buffer (buffer_size)]  --consumed_by-->  [Consumer]\n               | \
+  \                 |\n               |                  | overflow: drop/error/block\n               |                  |\n\
+  \               +-- strategy ------+\n               |\n         consumer_signal (PULL/DEMAND)\n         Consumer signals\
+  \ producer to slow when buffer near full"
+strategy_decision_table: '| Strategy | When | Tradeoff |
+
+  |----------|------|---------|
+
+  | buffer | Consumer temporarily slow; bursts acceptable | Memory cost; drop risk if buffer fills |
+
+  | drop_oldest | Latest items most important | Oldest items silently lost |
+
+  | drop_newest | Historical order important | New items rejected until space frees |
+
+  | throttle | Producer can slow down cleanly | Lower throughput; no drops |
+
+  | block | Zero tolerance for loss | Producer stalls; latency increases |'
+boundary_table: '| backpressure_policy IS | backpressure_policy IS NOT |
+
+  |------------------------|---------------------------|
+
+  | Consumer throughput control | Inbound request quota (rate_limit_config) |
+
+  | Flow control for async streams | Dependency failure isolation (circuit_breaker) |
+
+  | Reactive Streams specification | Connection pool config |
+
+  | Buffer + drop + block strategies | Retry logic (runtime_rule) |'

@@ -1,0 +1,75 @@
+kind: knowledge_card
+id: bld_knowledge_card_backpressure_policy
+pillar: P01
+llm_function: INJECT
+purpose: Domain knowledge for backpressure_policy production
+sources: Reactive Streams spec (2014), RxJava BackpressureStrategy, Project Reactor, Akka Streams
+quality: null
+title: Knowledge Card Backpressure Policy
+version: 1.0.0
+author: n03_builder
+tags:
+- backpressure_policy
+- builder
+- knowledge_card
+tldr: Backpressure is the Reactive Streams mechanism where consumers signal producers to slow emission when they cannot keep
+  up with throughput.
+domain: backpressure policy construction
+created: '2026-04-17'
+updated: '2026-04-17'
+density_score: 0.9
+executive_summary: 'Backpressure (Reactive Streams, 2014) is the mechanism by which downstream consumers signal upstream producers
+  to reduce emission rate when they cannot process items fast enough. Without backpressure, fast producers overflow slow consumers,
+  causing buffer exhaustion, OOM errors, or dropped messages. The policy defines how to handle this mismatch: buffer, drop,
+  throttle, or block.'
+reactive_streams_specification: 'The Reactive Streams spec defines 4 interfaces: Publisher, Subscriber, Subscription, Processor.
+  Backpressure is implemented via `Subscription.request(n)` -- the consumer signals how many items it can handle. Publishers
+  MUST honor this demand signal.'
+strategy_comparison: '| Strategy | Behavior | Use Case | Risk |
+
+  |----------|----------|----------|------|
+
+  | buffer | Hold items until consumed | Temporary bursts | OOM if buffer fills |
+
+  | drop_oldest | Discard tail when buffer full | Latest items most important | Silent data loss |
+
+  | drop_newest | Reject new items when buffer full | Historical order critical | New items rejected |
+
+  | throttle | Slow producer emission rate | Both sides can slow | Reduced throughput |
+
+  | block | Suspend producer until consumer catches up | Zero loss tolerance | Producer stalls; latency |'
+platform_implementations: '| Platform | Strategy Enum |
+
+  |----------|--------------|
+
+  | RxJava 2/3 | BackpressureStrategy.BUFFER/DROP/LATEST/MISSING |
+
+  | Project Reactor | Flux.onBackpressureBuffer/Drop/Latest |
+
+  | Akka Streams | OverflowStrategy.dropHead/dropTail/backpressure |
+
+  | Kotlin Coroutines | Channel(capacity, onBufferOverflow) |'
+buffer_sizing_guidelines: '| Scenario | Buffer Size |
+
+  |----------|------------|
+
+  | Low-throughput agent tasks | 10-50 items |
+
+  | Medium-throughput pipelines | 100-1000 items |
+
+  | High-throughput streaming | 1000-10000 items |
+
+  | Zero tolerance for loss | 0 (use block strategy) |'
+anti_patterns: '| Anti-Pattern | Why it fails |
+
+  |-------------|-------------|
+
+  | No overflow_action declared | Default behavior varies by platform; implicit behavior |
+
+  | buffer_size = unlimited | OOM error when producer consistently outpaces consumer |
+
+  | Conflating with rate_limit | Backpressure = consumer controls producer. Rate limit = external quota. |
+
+  | drop without monitoring | Silent data loss; impossible to detect in production |
+
+  | block in real-time pipeline | Producer stalls propagate upstream; cascade latency |'

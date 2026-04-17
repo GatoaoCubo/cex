@@ -1,0 +1,47 @@
+kind: tools
+id: bld_tools_circuit_breaker
+pillar: P04
+llm_function: CALL
+purpose: Tools for circuit_breaker production
+quality: null
+title: Tools Circuit Breaker
+version: 1.0.0
+author: n03_builder
+tags:
+- circuit_breaker
+- builder
+- tools
+tldr: 'Tools for circuit_breaker production: discovery, scoring, platform reference.'
+domain: circuit breaker construction
+created: '2026-04-17'
+updated: '2026-04-17'
+density_score: 0.9
+production_tools: '| Tool | Purpose | When | Status |
+
+  |------|---------|------|--------|
+
+  | cex_retriever.py | Find existing circuit_breaker artifacts | Phase 1 | AVAILABLE |
+
+  | cex_score.py | Score artifact | Phase 3 | AVAILABLE |
+
+  | cex_compile.py | Compile to yaml | Phase 3 | AVAILABLE |'
+platform_reference: '| Platform | Config Format | Docs |
+
+  |----------|--------------|------|
+
+  | Resilience4j | YAML application config | resilience4j.readme.io |
+
+  | Hystrix (deprecated) | Java annotations + archaius properties | github.com/Netflix/Hystrix |
+
+  | Polly (.NET) | Fluent C# API | github.com/App-vNext/Polly |
+
+  | Pybreaker | Python class decorator | pybreaker.readthedocs.io |'
+tool_permissions: '| Category | Tools | Status |
+
+  |----------|-------|--------|
+
+  | ALLOWED | Read, Write, Edit, Bash, Glob, Grep | Permitted |
+
+  | EFFECTIVE | Bash, Edit, Glob, Grep, Read, Write | |'
+validation: id `^p09_cb_`, service non-empty, failure_rate_threshold integer 1-100, cooldown_duration positive integer, probe_count
+  positive integer, fallback_response non-empty, quality null, body <= 3072 bytes.

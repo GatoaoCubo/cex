@@ -1,0 +1,71 @@
+id: p09_qg_circuit_breaker
+kind: quality_gate
+pillar: P11
+title: 'Gate: circuit_breaker'
+version: 1.0.0
+created: '2026-04-17'
+updated: '2026-04-17'
+author: builder_agent
+domain: circuit_breaker -- resilience pattern for dependency failure isolation
+quality: null
+tags:
+- quality-gate
+- circuit-breaker
+- P09
+- resilience
+tldr: 'Gate for circuit_breaker: service, numeric threshold, cooldown, probe_count, fallback_response.'
+density_score: 0.9
+llm_function: GOVERN
+hard_gates: '| ID | Check | Fail Condition |
+
+  |---|---|---|
+
+  | H01 | Frontmatter parses as valid YAML | Parse error |
+
+  | H02 | ID matches `^p09_cb_[a-z][a-z0-9_]+$` | Wrong format |
+
+  | H03 | ID equals filename stem | Mismatch |
+
+  | H04 | Kind equals literal `circuit_breaker` | `kind: breaker` or other |
+
+  | H05 | Quality field is null | Non-null value |
+
+  | H06 | service declared and non-empty | Missing protected dependency |
+
+  | H07 | failure_rate_threshold is integer in [1, 100] | String value or out of range |
+
+  | H08 | cooldown_duration is positive integer (seconds) | Missing or string |
+
+  | H09 | probe_count is positive integer | Missing or zero |
+
+  | H10 | Tags >= 3 items and includes "circuit_breaker" | Too few or missing tag |'
+soft_scoring: '| Dimension | Weight | Criteria |
+
+  |---|---|---|
+
+  | Fallback specification | 2.0 | fallback_response non-empty, specific, actionable |
+
+  | Threshold calibration | 1.5 | failure_rate_threshold and cooldown appropriate for service SLA |
+
+  | Window configuration | 1.0 | sliding_window_type and sliding_window_size declared |
+
+  | Exception specification | 1.0 | monitored_exceptions lists specific error types |
+
+  | State machine completeness | 1.0 | All 3 state transitions described in body |
+
+  | Platform declaration | 0.5 | Platform field set |
+
+  | Boundary clarity | 0.5 | Not rate_limit_config, not fallback_chain |
+
+  | tldr quality | 0.5 | Includes service, threshold, cooldown |'
+actions: '| Score | Tier | Action |
+
+  |---|---|---|
+
+  | >= 9.5 | Golden | Reference circuit breaker config |
+
+  | >= 8.0 | Publish | Ready for runtime integration |
+
+  | >= 7.0 | Review | Add fallback or exception list |
+
+  | < 7.0 | Reject | Return with failures |'

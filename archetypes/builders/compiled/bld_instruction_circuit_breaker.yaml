@@ -1,0 +1,45 @@
+kind: instruction
+id: bld_instruction_circuit_breaker
+pillar: P03
+llm_function: REASON
+purpose: Step-by-step production process for circuit_breaker
+quality: null
+title: Instruction Circuit Breaker
+version: 1.0.0
+author: n03_builder
+tags:
+- circuit_breaker
+- builder
+- instruction
+tldr: '3-phase: scope dependency and failure threshold, compose state machine config, validate.'
+domain: circuit breaker construction
+created: '2026-04-17'
+updated: '2026-04-17'
+density_score: 0.9
+phase_1_scope:
+- Identify the protected dependency (service, API, model provider)
+- 'Determine failure types to count: timeout, error_rate, HTTP 5xx, connection_refused'
+- 'Set failure_threshold: number or percentage of failures in window that open the circuit'
+- 'Define window_type: count-based (last N requests) or time-based (last N seconds)'
+- 'Set cooldown_period: how long circuit stays open before probing (industry default: 30-60s)'
+- 'Configure half_open_probe: how many probe requests in half-open state before deciding'
+- 'Define fallback_behavior: what happens when circuit is open (return default, try alternative, fail fast)'
+- 'Identify platform: Resilience4j, Hystrix, Polly, or custom'
+phase_2_compose:
+- Read SCHEMA.md and OUTPUT_TEMPLATE.md
+- 'Fill frontmatter (quality: null)'
+- 'Write state_machine: CLOSED -> OPEN -> HALF_OPEN -> CLOSED transitions'
+- Declare failure_threshold with window_type
+- Write cooldown_period and half_open_probe
+- Declare fallback_behavior
+- 'Write Overview: what dependency and what failure scenario this protects'
+- Write State Transitions table
+- Verify body <= 3072 bytes
+phase_3_validate:
+- Confirm id matches `^p09_cb_[a-z][a-z0-9_]+$`
+- Confirm kind == circuit_breaker
+- Confirm failure_threshold is numeric
+- Confirm cooldown_period is numeric (seconds or duration string)
+- Confirm protected_dependency declared
+- 'Cross-check: not fallback_chain (ordered list), not rate_limit_config (inbound throttle)'
+- Revise if score < 8.0

@@ -1,0 +1,83 @@
+kind: examples
+id: bld_examples_circuit_breaker
+pillar: P07
+llm_function: GOVERN
+purpose: Golden and anti-examples of circuit_breaker artifacts
+quality: null
+title: Examples Circuit Breaker
+version: 1.0.0
+author: n03_builder
+tags:
+- circuit_breaker
+- builder
+- examples
+tldr: Golden and anti-examples for circuit_breaker construction.
+domain: circuit breaker construction
+created: '2026-04-17'
+updated: '2026-04-17'
+density_score: 0.9
+golden_example: 'INPUT: "Create circuit breaker for Anthropic API calls in CEX"
+
+  OUTPUT:
+
+  id: p09_cb_anthropic_api
+
+  kind: circuit_breaker
+
+  pillar: P09
+
+  version: "1.0.0"
+
+  created: "2026-04-17"
+
+  updated: "2026-04-17"
+
+  author: "builder_agent"
+
+  service: "Anthropic Claude API"
+
+  failure_rate_threshold: 50
+
+  sliding_window_type: COUNT_BASED
+
+  sliding_window_size: 20
+
+  minimum_number_of_calls: 5
+
+  cooldown_duration: 60
+
+  probe_count: 3
+
+  slow_call_threshold_ms: 30000
+
+  slow_call_rate_threshold: 80
+
+  fallback_response: "Use Ollama local model as fallback during Anthropic outage"
+
+  monitored_exceptions: [APIConnectionError, RateLimitError, APIStatusError]
+
+  platform: "custom"
+
+  enabled: true
+
+  quality: null
+
+  tags: [circuit_breaker, anthropic, llm_api, P09]
+
+  tldr: "Anthropic API circuit: 50% failure trips, 60s cooldown, 3 probes; falls back to Ollama when open."'
+overview: 'Protects CEX nuclei from cascade failure when Anthropic API is unavailable. Opens when 10+ of the last 20 calls
+  fail, serves Ollama fallback for 60 seconds, probes recovery with 3 calls. WHY THIS IS GOLDEN: service declared, failure_rate_threshold
+  numeric integer, cooldown_duration seconds, probe_count set, fallback_response specific, monitored_exceptions listed, quality
+  null.'
+anti_example: 'id: api-circuit
+
+  kind: breaker
+
+  threshold: high
+
+  cooldown: long
+
+  quality: 9.0
+
+  FAILURES: hyphened id, wrong kind, quality non-null, threshold string not numeric, cooldown string not seconds, service
+  missing, fallback missing, tags missing.'

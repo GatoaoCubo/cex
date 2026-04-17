@@ -1,0 +1,47 @@
+kind: tools
+id: bld_tools_backpressure_policy
+pillar: P04
+llm_function: CALL
+purpose: Tools for backpressure_policy production
+quality: null
+title: Tools Backpressure Policy
+version: 1.0.0
+author: n03_builder
+tags:
+- backpressure_policy
+- builder
+- tools
+tldr: Tools for backpressure_policy production.
+domain: backpressure policy construction
+created: '2026-04-17'
+updated: '2026-04-17'
+density_score: 0.9
+production_tools: '| Tool | Purpose | When | Status |
+
+  |------|---------|------|--------|
+
+  | cex_retriever.py | Find similar backpressure artifacts | Phase 1 | AVAILABLE |
+
+  | cex_score.py | Score artifact | Phase 3 | AVAILABLE |
+
+  | cex_compile.py | Compile to yaml | Phase 3 | AVAILABLE |'
+platform_reference: '| Platform | Strategy API | Docs |
+
+  |----------|-------------|------|
+
+  | RxJava 3 | Flowable.onBackpressureBuffer/Drop | reactivex.io |
+
+  | Project Reactor | Flux.onBackpressureBuffer/Drop/Latest | projectreactor.io |
+
+  | Akka Streams | OverflowStrategy | doc.akka.io |
+
+  | Kotlin Coroutines | Channel(capacity, onBufferOverflow) | kotlinlang.org |'
+tool_permissions: '| Category | Tools | Status |
+
+  |----------|-------|--------|
+
+  | ALLOWED | Read, Write, Edit, Bash, Glob, Grep | Permitted |
+
+  | EFFECTIVE | Bash, Edit, Glob, Grep, Read, Write | |'
+validation: id `^p09_bp_`, strategy in enum, buffer_size numeric, overflow_action in enum, consumer_signal in enum, quality
+  null, body <= 2048 bytes.

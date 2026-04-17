@@ -1,0 +1,47 @@
+kind: collaboration
+id: bld_collaboration_circuit_breaker
+pillar: P12
+llm_function: COLLABORATE
+purpose: How circuit-breaker-builder works in crews with other builders
+quality: null
+title: Collaboration Circuit Breaker
+version: 1.0.0
+author: n03_builder
+tags:
+- circuit_breaker
+- builder
+- collaboration
+tldr: circuit-breaker-builder provides dependency failure isolation in resilience crews.
+domain: circuit breaker construction
+created: '2026-04-17'
+updated: '2026-04-17'
+density_score: 0.9
+my_role_in_crews: I configure DEPENDENCY FAILURE ISOLATION for a named service. I do not throttle inbound requests (rate_limit_config).
+  I do not order provider alternatives (fallback_chain). I do not control consumer throughput (backpressure_policy).
+crew_compositions: ''
+crew_p09_resilience_config: "  1. rate-limit-config-builder -> \"inbound throttle per provider\"\n  2. circuit-breaker-builder\
+  \ -> \"outbound failure isolation\"\n  3. backpressure-policy-builder -> \"consumer throughput control\"\n  4. fallback-chain-builder\
+  \ -> \"ordered provider alternatives\""
+handoff_protocol: ''
+i_receive:
+- 'seeds: service name, expected failure patterns, SLA requirements'
+i_produce:
+- circuit_breaker artifact (.md)
+- 'committed to: `N05_operations/P09_config/p09_cb_{scope}.md`'
+builders_i_depend_on: '| Builder | Why |
+
+  |---------|-----|
+
+  | rate-limit-config-builder | Rate limits define expected load; informs threshold calibration |
+
+  | env-config-builder | Platform credentials and runtime config |'
+conflict_resolution: '| Scenario | Resolution |
+
+  |----------|-----------|
+
+  | Circuit vs rate limit | rate_limit_config = inbound quota. circuit_breaker = outbound failure. Both can coexist. |
+
+  | Circuit vs fallback_chain | circuit_breaker has state machine. fallback_chain is static list. Use circuit_breaker when
+  you need auto-disable. |
+
+  | Circuit vs retry | Retry happens inside CLOSED state. Circuit opens when retries aren''t enough. |'

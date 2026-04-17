@@ -1,0 +1,70 @@
+id: circuit-breaker-builder
+kind: type_builder
+pillar: P09
+parent: null
+domain: circuit_breaker
+llm_function: BECOME
+version: 1.0.0
+created: 2026-04-17
+updated: 2026-04-17
+author: builder_agent
+tags:
+- kind-builder
+- circuit-breaker
+- P09
+- config
+- resilience
+- hystrix
+- fault-tolerance
+keywords:
+- circuit breaker
+- fault tolerance
+- Hystrix
+- Resilience4j
+- failure threshold
+- cooldown
+- half-open
+triggers:
+- create circuit breaker
+- configure fault tolerance
+- auto-disable failing dependency
+- resilience pattern
+capabilities:
+- 'Define failure_threshold: count or percentage that opens the circuit'
+- 'Configure cooldown_period: how long circuit stays open before probing'
+- 'Specify half_open_probe: how many probe requests to send in half-open state'
+- Declare fallback behavior when circuit is open
+- 'Set window_type: count-based or time-based sliding window'
+- 'Map to platform: Resilience4j, Hystrix, Polly, custom implementation'
+- Validate artifact against quality gates
+- Distinguish circuit_breaker from fallback_chain and rate_limit_config
+quality: null
+title: Manifest Circuit Breaker
+tldr: Builds circuit_breaker artifacts -- resilience pattern that auto-disables failing dependencies and allows recovery after
+  a cooldown.
+density_score: 0.9
+identity: Specialist in building circuit_breaker artifacts -- resilience configuration for the circuit breaker pattern (Fowler,
+  2014; Netflix Hystrix, Resilience4j). Masters three-state machine (closed/open/half-open), failure threshold configuration,
+  cooldown periods, probe request design, and the boundary between circuit_breaker (dependency failure auto-disable), fallback_chain
+  (ordered provider fallback), and rate_limit_config (inbound throttle).
+properties: '| Property | Value |
+
+  |----------|-------|
+
+  | Kind | `type_builder` |
+
+  | Pillar | P09 |
+
+  | Domain | circuit_breaker |
+
+  | Pipeline | 8F (F1-F8) |
+
+  | Scorer | cex_score.py |
+
+  | Compiler | cex_compile.py |
+
+  | Retriever | cex_retriever.py |
+
+  | Quality target | 9.0+ |
+
+  | Density target | 0.85+ |'

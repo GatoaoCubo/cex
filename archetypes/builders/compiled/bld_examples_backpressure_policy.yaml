@@ -1,0 +1,70 @@
+kind: examples
+id: bld_examples_backpressure_policy
+pillar: P07
+llm_function: GOVERN
+purpose: Golden and anti-examples of backpressure_policy artifacts
+quality: null
+title: Examples Backpressure Policy
+version: 1.0.0
+author: n03_builder
+tags:
+- backpressure_policy
+- builder
+- examples
+tldr: Golden and anti-examples for backpressure_policy construction.
+domain: backpressure policy construction
+created: '2026-04-17'
+updated: '2026-04-17'
+density_score: 0.9
+golden_example: 'INPUT: "Create backpressure policy for N07 artifact pipeline stream"
+
+  id: p09_bp_n07_artifact_pipeline
+
+  kind: backpressure_policy
+
+  pillar: P09
+
+  version: "1.0.0"
+
+  created: "2026-04-17"
+
+  updated: "2026-04-17"
+
+  author: "builder_agent"
+
+  strategy: buffer
+
+  buffer_size: 100
+
+  overflow_action: drop
+
+  consumer_signal: demand
+
+  max_pending: 50
+
+  producer: "n07_mission_dispatcher"
+
+  consumer: "n03_artifact_builder"
+
+  platform: "custom"
+
+  quality: null
+
+  tags: [backpressure_policy, n07_pipeline, artifact_stream, P09]
+
+  tldr: "N07->N03 artifact pipeline: buffer 100 items, drop overflow, demand-based consumer signal."'
+overview: 'Controls flow from N07 mission dispatcher to N03 artifact builder. N07 emits build tasks faster than N03 can process
+  when running large missions. WHY THIS IS GOLDEN: strategy in enum, buffer_size numeric, overflow_action declared, consumer_signal
+  declared, quality null, tags >= 3 with backpressure_policy.'
+anti_example: 'id: pipeline-bp
+
+  kind: flow_control
+
+  strategy: "unlimited"
+
+  buffer: big
+
+  quality: 8.0
+
+  FAILURES: hyphened id, wrong kind, quality non-null, strategy invalid enum, buffer non-numeric, overflow_action missing,
+  consumer_signal missing, tags missing.'

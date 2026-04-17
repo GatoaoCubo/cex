@@ -1,0 +1,43 @@
+kind: instruction
+id: bld_instruction_backpressure_policy
+pillar: P03
+llm_function: REASON
+purpose: Step-by-step production process for backpressure_policy
+quality: null
+title: Instruction Backpressure Policy
+version: 1.0.0
+author: n03_builder
+tags:
+- backpressure_policy
+- builder
+- instruction
+tldr: '3-phase: select strategy and buffer config, compose overflow action and consumer signal, validate.'
+domain: backpressure policy construction
+created: '2026-04-17'
+updated: '2026-04-17'
+density_score: 0.9
+phase_1_scope:
+- Identify producer and consumer (what emits, what consumes)
+- 'Determine throughput mismatch: how much faster is producer than consumer?'
+- 'Select strategy: buffer (hold until consumed), drop_oldest (discard tail), drop_newest (discard head), throttle (slow producer),
+  block (block producer until consumer catches up)'
+- 'Set buffer_size: max items to hold in flight'
+- 'Define overflow_action: what happens when buffer is full (drop, error, block)'
+- 'Choose consumer_signal: PULL (consumer requests items) or reactive DEMAND (demand signals upstream)'
+- 'Determine max_pending: max items acknowledged but not yet processed'
+phase_2_compose:
+- Read SCHEMA.md and OUTPUT_TEMPLATE.md
+- 'Fill frontmatter (quality: null)'
+- Declare strategy and buffer_size
+- Write overflow_action and consumer_signal
+- 'Write Overview: producer/consumer mismatch and chosen strategy'
+- 'Write Strategy table: when each strategy is appropriate'
+- Verify body <= 2048 bytes
+phase_3_validate:
+- Confirm id matches `^p09_bp_[a-z][a-z0-9_]+$`
+- Confirm kind == backpressure_policy
+- Confirm strategy in enum
+- Confirm buffer_size is numeric
+- Confirm overflow_action declared
+- 'Cross-check: not rate_limit_config, not circuit_breaker'
+- Revise if score < 8.0

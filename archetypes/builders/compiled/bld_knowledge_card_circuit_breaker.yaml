@@ -1,0 +1,87 @@
+kind: knowledge_card
+id: bld_knowledge_card_circuit_breaker
+pillar: P01
+llm_function: INJECT
+purpose: Domain knowledge for circuit_breaker production
+sources: Fowler (2014) circuit breaker pattern, Netflix Hystrix, Resilience4j docs, Polly .NET
+quality: null
+title: Knowledge Card Circuit Breaker
+version: 1.0.0
+author: n03_builder
+tags:
+- circuit_breaker
+- builder
+- knowledge_card
+tldr: 'Circuit breaker auto-disables failing dependencies via a three-state machine: CLOSED (normal), OPEN (disabled), HALF_OPEN
+  (probing recovery).'
+domain: circuit breaker construction
+created: '2026-04-17'
+updated: '2026-04-17'
+density_score: 0.9
+executive_summary: 'The circuit breaker pattern (Fowler, 2014; Netflix Hystrix 2011; Resilience4j) prevents cascade failures
+  by auto-disabling a failing dependency. Three states: CLOSED (normal operation), OPEN (dependency bypassed, fallback served),
+  HALF_OPEN (probing whether dependency recovered). When failure rate exceeds threshold, circuit opens. After cooldown, it
+  probes recovery. On success, it closes; on failure, it opens again.'
+three_state_machine: '| State | Behavior | Transition |
+
+  |-------|---------|------------|
+
+  | CLOSED | All requests pass through | -> OPEN when failures >= threshold |
+
+  | OPEN | All requests fail fast (fallback) | -> HALF_OPEN after cooldown_period |
+
+  | HALF_OPEN | probe_count requests pass through | -> CLOSED on success; -> OPEN on failure |'
+threshold_configuration_resilience4j_defaults: '| Parameter | Default | Range | Notes |
+
+  |-----------|---------|-------|-------|
+
+  | failure_rate_threshold | 50% | 1-100% | % failures in window to open |
+
+  | sliding_window_type | COUNT_BASED | COUNT/TIME | Window type |
+
+  | sliding_window_size | 100 requests | 1-N | Window measurement |
+
+  | minimum_number_of_calls | 100 | 1-N | Min calls before rate computed |
+
+  | cooldown_period | 60 seconds | 1-N | Open state duration |
+
+  | permitted_calls_in_half_open | 10 | 1-N | Probe call count |
+
+  | slow_call_rate_threshold | 100% | 1-100% | Slow calls counted as failures |'
+platform_comparison: '| Platform | Language | Config Style |
+
+  |----------|---------|-------------|
+
+  | Resilience4j | Java/Kotlin | Declarative YAML/annotation |
+
+  | Netflix Hystrix | Java | Annotation + property file (deprecated) |
+
+  | Polly | .NET/C# | Fluent API policy builder |
+
+  | Pybreaker | Python | Class decorator |
+
+  | custom | Any | Direct state machine implementation |'
+fallback_patterns: '| Pattern | Example | When |
+
+  |---------|---------|------|
+
+  | Default value | Return empty list | Non-critical enrichment |
+
+  | Cached response | Return last known good | Read-heavy services |
+
+  | Alternative provider | Try backup LLM | Model provider failover |
+
+  | Fail fast with error | Raise CircuitOpenException | Critical path dependencies |'
+anti_patterns: '| Anti-Pattern | Why it fails |
+
+  |-------------|-------------|
+
+  | No fallback declared | Silent failure harder to debug than open circuit |
+
+  | cooldown = 0 | Circuit oscillates rapidly between open/half-open |
+
+  | failure_threshold = 0 | Every request opens circuit |
+
+  | No half_open_probe | Circuit never recovers; permanent degraded state |
+
+  | Conflating with rate_limit | Rate limit = inbound throttle; circuit = outbound failure |'

@@ -1,0 +1,69 @@
+id: p09_qg_backpressure_policy
+kind: quality_gate
+pillar: P11
+title: 'Gate: backpressure_policy'
+version: 1.0.0
+created: '2026-04-17'
+updated: '2026-04-17'
+author: builder_agent
+domain: backpressure_policy -- flow control for producer-consumer throughput mismatch
+quality: null
+tags:
+- quality-gate
+- backpressure-policy
+- P09
+- flow-control
+tldr: 'Gate for backpressure_policy: strategy, buffer_size, overflow_action, consumer_signal all required.'
+density_score: 0.9
+llm_function: GOVERN
+hard_gates: '| ID | Check | Fail Condition |
+
+  |---|---|---|
+
+  | H01 | Frontmatter parses as valid YAML | Parse error |
+
+  | H02 | ID matches `^p09_bp_[a-z][a-z0-9_]+$` | Wrong format |
+
+  | H03 | ID equals filename stem | Mismatch |
+
+  | H04 | Kind equals literal `backpressure_policy` | Wrong kind |
+
+  | H05 | Quality field is null | Non-null value |
+
+  | H06 | strategy is valid enum value | "unlimited" or invalid |
+
+  | H07 | buffer_size is numeric integer | String or missing |
+
+  | H08 | overflow_action is valid enum | Missing or invalid |
+
+  | H09 | consumer_signal is valid enum | Missing |
+
+  | H10 | Tags >= 3 items and includes "backpressure_policy" | Too few or missing |'
+soft_scoring: '| Dimension | Weight | Criteria |
+
+  |---|---|---|
+
+  | Strategy rationale | 2.0 | Strategy choice explained relative to use case |
+
+  | Buffer size calibration | 1.5 | Size justified against peak burst, not average |
+
+  | Overflow monitoring | 1.0 | Drop strategy accompanied by monitoring note |
+
+  | Producer/consumer declared | 0.5 | Both components named |
+
+  | Platform declaration | 0.5 | Platform field set |
+
+  | Boundary clarity | 1.0 | Not rate_limit_config, not circuit_breaker |
+
+  | tldr quality | 0.5 | Includes strategy and stream description |'
+actions: '| Score | Tier | Action |
+
+  |---|---|---|
+
+  | >= 9.5 | Golden | Reference backpressure spec |
+
+  | >= 8.0 | Publish | Ready for integration |
+
+  | >= 7.0 | Review | Add overflow monitoring or rationale |
+
+  | < 7.0 | Reject | Return with failures |'
