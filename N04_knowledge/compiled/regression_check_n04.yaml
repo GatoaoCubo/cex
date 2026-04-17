@@ -1,0 +1,106 @@
+id: p11_rc_n04_knowledge
+kind: regression_check
+pillar: P11
+nucleus: n04
+title: Regression Check -- N04 Retrieval and Knowledge Quality
+version: 1.0.0
+quality: null
+tags:
+- regression_check
+- n04
+- retrieval
+- quality
+- MRR
+- P11
+domain: knowledge management
+status: active
+created: '2026-04-17'
+updated: '2026-04-17'
+author: n04_knowledge
+tldr: 'Regression detection suite for N04: checks retrieval metrics (MRR, NDCG, latency), corpus integrity, and artifact quality
+  distribution against baselines from memory_benchmark_n04.md.'
+density_score: null
+purpose: Changes to embedding models, chunking strategies, or corpus composition can silently degrade retrieval quality. This
+  regression check suite detects those regressions before they reach production queries. ---
+check_suite: ''
+rc_01_mrr_10_regression: "python _tools/cex_retriever.py --mrr \\\n  --queries N04_knowledge/P07_evals/eval_dataset_n04.md\
+  \ \\\n  --mode hybrid_rerank \\\n  --threshold 0.75\n\n# PASS: MRR@10 >= 0.75\n# FAIL: MRR@10 < 0.75 -> alert N07, do not\
+  \ deploy embedding changes\n\nBaseline: 0.83 | Alert threshold: 0.75 | Revert threshold: < 0.70\n\n---"
+rc_02_corpus_coverage_check: 'python _tools/cex_doctor.py --check-index --nucleus n04
+
+
+  # PASS: >= 95% of N04 artifacts are indexed
+
+  # FAIL: < 95% indexed -> run cex_compile.py --all then reindex
+
+
+  Baseline: 100% | Alert threshold: < 95%
+
+
+  ---'
+rc_03_compile_error_check: 'python _tools/cex_compile.py N04_knowledge/ --check-only
+
+
+  # PASS: 0 compile errors
+
+  # FAIL: any error -> fix frontmatter before commit
+
+
+  Baseline: 0 errors | Alert threshold: any error
+
+
+  ---'
+rc_04_duplicate_detection: "python _tools/cex_retriever.py --deduplicate \\\n  --corpus N04_knowledge/ \\\n  --threshold 0.95\n\
+  \n# PASS: 0 near-duplicate pairs\n# FAIL: pairs found -> merge per consolidation_policy_n04.md\n\nBaseline: 0 duplicates\
+  \ | Alert threshold: any pair >= 0.97 similarity\n\n---"
+rc_05_quality_distribution_check: "python _tools/cex_score.py --scan N04_knowledge/ \\\n  --report-distribution\n\n# PASS:\
+  \ < 10% of scored artifacts below 8.0\n# WARN: 10-20% below 8.0 -> flag for improvement loop\n# FAIL: > 20% below 8.0 ->\
+  \ trigger full self_improvement_loop_n04.md run\n\n---"
+rc_06_retrieval_latency_check: "python _tools/cex_retriever.py --latency-check \\\n  --mode hybrid_rerank \\\n  --sample 10\
+  \ \\\n  --threshold-ms 1000\n\n# PASS: p95 latency < 1000ms\n# FAIL: p95 > 1000ms -> check backend availability, consider\
+  \ fallback\n\nBaseline: 480ms | Alert threshold: > 1000ms\n\n---"
+regression_check_schedule: '| Check | Frequency | Trigger |
+
+  |-------|-----------|---------|
+
+  | RC-01 (MRR) | Before any embedding config change | Pre-change gate |
+
+  | RC-02 (Coverage) | After every compile --all | Post-commit hook |
+
+  | RC-03 (Compile) | Every session end | Automatic |
+
+  | RC-04 (Dedup) | Weekly | Cron |
+
+  | RC-05 (Quality) | Monthly | Cron |
+
+  | RC-06 (Latency) | Before production deployment | Release gate |
+
+
+  ---'
+regression_response_protocol: '| Severity | Condition | Response |
+
+  |---------|-----------|---------|
+
+  | CRITICAL | MRR drops > 15% | Revert embedding change, escalate to N07 |
+
+  | HIGH | Corpus coverage < 95% | Run full reindex immediately |
+
+  | HIGH | > 5 compile errors | Fix all before next commit |
+
+  | MEDIUM | Quality distribution degrades | Queue for self_improvement_loop |
+
+  | LOW | 1-3 duplicates | Flag for next consolidation run |
+
+
+  ---'
+integration: '| Artifact | Role |
+
+  |---------|------|
+
+  | `memory_benchmark_n04.md` | Baseline values for all RC checks |
+
+  | `eval_dataset_n04.md` | Test queries for RC-01 |
+
+  | `self_improvement_loop_n04.md` | Response action when RC-05 fails |
+
+  | `consolidation_policy_n04.md` | Response action when RC-04 fails |'

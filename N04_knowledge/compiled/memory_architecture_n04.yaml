@@ -1,0 +1,150 @@
+id: p10_ma_n04_knowledge
+kind: memory_architecture
+pillar: P10
+nucleus: n04
+title: Memory Architecture -- N04 Knowledge Nucleus
+version: 1.0.0
+quality: null
+tags:
+- memory_architecture
+- n04
+- rag
+- episodic
+- semantic
+- procedural
+- working_memory
+- P10
+domain: knowledge management
+status: active
+created: '2026-04-17'
+updated: '2026-04-17'
+author: n04_knowledge
+tldr: 'Full memory system design for N04: working memory (context window), episodic (session transcripts), semantic (vector
+  store), and procedural (task procedures). Includes storage backends, read/write pipelines, eviction policies, and tier matrix.'
+density_score: null
+overview: 'N04 (Knowledge Gluttony) operates as the enterprise memory layer for CEX. Its sin lens demands that EVERYTHING
+  be remembered, indexed, and retrievable. This architecture implements 4 memory layers spanning hot (context window) to cold
+  (vector corpus), with pipelines that ensure nothing is lost. Reference architectures: MemGPT/Letta (hierarchical paging),
+  Zep (temporal graphs), mem0 (selective extraction), LangMem (session compression). ---'
+memory_layers: '| Layer | Backend | Retention | Tier Required | Active? |
+
+  |-------|---------|-----------|---------------|---------|
+
+  | Working | Context window (200K tokens) | Session duration | FREE | Always |
+
+  | Episodic | Supabase pgvector `session_memory` | 90 days | PRO | Yes |
+
+  | Semantic | Supabase pgvector `cex_artifacts` | Permanent | FREE | Always |
+
+  | Procedural | Markdown files in P10_memory/ | Permanent | FREE | Always |
+
+
+  ---'
+storage_backends: ''
+working_memory_layer_1:
+- 'Backend: Claude context window (200K tokens)'
+- 'Contents: current task, recent tool outputs, loaded KCs, active artifacts'
+- 'Management: `cex_prompt_layers.py` controls what enters working memory'
+- 'Overflow: trigger semantic lookup when context > 80% capacity'
+- 'Paging protocol: MemGPT-style -- compress least-recent content, archive to episodic'
+episodic_memory_layer_2:
+- 'Backend: pgvector `session_memory` namespace'
+- 'Contents: session transcripts, per-session learning records, conversation summaries'
+- 'Indexing: embedding per session summary + per-turn key facts'
+- 'Retention: 90-day TTL with importance decay (used sessions extend TTL)'
+- 'Access: semantic search across session history for relevant prior context'
+semantic_memory_layer_3_primary:
+- 'Backend: pgvector `cex_artifacts` namespace + `external_docs` namespace'
+- 'Contents: all 3381+ CEX ISOs, compiled KCs, artifacts, external ingested documents'
+- 'Indexing: text-embedding-3-small (1536 dim), BM25 index (sparse)'
+- 'Retrieval: hybrid (dense + sparse), reranked via cross-encoder'
+- 'Scale: 2184 documents at last index (cex_retriever.py TF-IDF as fallback)'
+- 'Updates: triggered on `cex_compile.py` run (new/updated artifacts auto-indexed)'
+procedural_memory_layer_4: '- Backend: Markdown files in `N04_knowledge/P10_memory/`
+
+  - Contents: how-to protocols, standard operating procedures, decision patterns
+
+  - Examples: `procedural_memory_n04.md` (this session), ingestion workflows, scoring procedures
+
+  - Access: loaded explicitly at session start via `cex_prompt_layers.py`
+
+  - Updates: append-only; versioned via git
+
+
+  ---'
+read_pipeline_retrieval: "User/Agent Query\n      |\n      v\n1. CONSTRAIN -- parse query via input_schema_knowledge_query.md\n\
+  \      |\n      v\n2. WORKING MEMORY CHECK -- is answer already in context? (O(1) lookup)\n      |\n      | Miss\n     \
+  \ v\n3. PROCEDURAL LOOKUP -- does this match a known procedure? (exact match)\n      |\n      | Miss\n      v\n4. EPISODIC\
+  \ LOOKUP -- did we encounter this in a recent session? (semantic search)\n      |\n      | Miss\n      v\n5. SEMANTIC SEARCH\
+  \ -- corpus search (hybrid: dense + BM25)\n   |-- dense: text-embedding-3-small cosine similarity\n   |-- sparse: BM25 TF-IDF\
+  \ on cex_retriever.py (2184 docs)\n   |-- merge: Reciprocal Rank Fusion (RRF)\n      |\n      v\n6. RERANK -- cross-encoder\
+  \ reranking (top-20 -> top-10)\n      |\n      v\n7. INJECT -- assemble context passages into working memory\n      |\n\
+  \      v\n8. RESPOND -- generate with grounded context\n\n---"
+write_pipeline_memory_formation: "After each significant generation\n      |\n      v\n1. EXTRACT -- identify facts, entities,\
+  \ procedures worth persisting\n      |\n      v\n2. CLASSIFY -- which memory layer is appropriate?\n   |-- new fact about\
+  \ the world -> semantic (new KC or update existing)\n   |-- session learning -> episodic (learning_record)\n   |-- new procedure\
+  \ -> procedural (new .md in P10_memory/)\n   |-- entity encountered -> entity_memory update\n      |\n      v\n3. DEDUPLICATE\
+  \ -- check if fact already exists (similarity search, threshold 0.95)\n      |\n      v\n4. PERSIST\n   |-- semantic: cex_compile.py\
+  \ -> auto-index via post-tool hook\n   |-- episodic: append to session learning_record\n   |-- procedural: write to P10_memory/{procedure_name}.md\n\
+  \   |-- entity: update entity_memory file\n      |\n      v\n5. SIGNAL (if cross-nucleus relevant) -- write_signal to N07\n\
+  \n---"
+eviction_policy: '| Layer | Strategy | Trigger |
+
+  |-------|----------|---------|
+
+  | Working | LRU + importance score | > 80% context window used |
+
+  | Working | Compress + archive | Session end |
+
+  | Episodic | TTL (90 days) + usage extension | Background cron (daily) |
+
+  | Episodic | Importance decay | Score < 0.2 after 30 days |
+
+  | Semantic | Never evicted | Permanent corpus (versioned in git) |
+
+  | Procedural | Never evicted | Superseded procedures marked deprecated |
+
+
+  Importance Score: composite of (retrieval frequency, recency, cross-nucleus citations)
+
+
+  ---'
+commercial_tier_matrix: '| Feature | FREE | PRO | ENTERPRISE |
+
+  |---------|------|-----|-----------|
+
+  | Working memory | 200K tokens | 200K tokens | 1M tokens |
+
+  | Semantic corpus | 2184 docs | Unlimited | Unlimited + private |
+
+  | Episodic retention | Session only | 90 days | 2 years |
+
+  | Episodic search | No | Yes | Yes + temporal graph |
+
+  | Procedural memory | 20 files | Unlimited | Unlimited + versioned |
+
+  | Auto-indexing | Manual | On compile | Real-time |
+
+  | Reranking | TF-IDF | Cross-encoder | Cross-encoder + LLM |
+
+  | Multi-corpus | No | 3 corpora | Unlimited |
+
+
+  ---'
+integration_points: '| Artifact | Role |
+
+  |---------|------|
+
+  | `consolidation_policy_n04.md` | When to merge/compress episodic memories |
+
+  | `procedural_memory_n04.md` | What N04 knows HOW to do (Layer 4 content) |
+
+  | `knowledge_memory_index.md` | Index of semantic corpus |
+
+  | `retriever_n04.md` | Implementation of the read pipeline (Layer 3) |
+
+  | `document_loader_n04.md` | Implementation of the write pipeline (ingestion) |
+
+  | `cex_memory_types.py` | 4-type taxonomy: correction/preference/convention/context |
+
+  | `cex_memory_age.py` | Freshness caveats + linear decay for episodic layer |'
