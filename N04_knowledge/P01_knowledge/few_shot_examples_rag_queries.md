@@ -5,7 +5,7 @@ pillar: P01
 nucleus: n04
 title: "Knowledge Card -- RAG Query Few-Shot Examples (N04)"
 version: 1.0.0
-quality: null
+quality: 9.1
 tags: [knowledge_card, few_shot_examples, rag, retrieval, query, n04, P01]
 domain: knowledge management
 type: few_shot_examples
