@@ -65,7 +65,8 @@ Check `CEX_NUCLEUS`. N07 = Orchestrator. N03 = Builder. Not set = read and decid
 | **8F pipeline** | `.claude/rules/8f-reasoning.md` |
 | **Orchestrator rules** | `.claude/rules/n07-orchestrator.md` |
 | **Nucleus rules** | `N0{1-6}_*/rules/n0{1-6}-*.md` (1 per nucleus, lazy-loaded by the nucleus on boot — N07 does not pre-load these) |
-| **Commands** | `.claude/commands/` → /build, /validate, /dispatch, /status, /doctor, /mission |
+| **Commands** | `.claude/commands/` → /build, /validate, /dispatch, /status, /doctor, /mission, /mentor |
+| **Mentor context** | `N00_genesis/boot/mentor_context.md` (pre-compiled 8F + 12P + 257K vocabulary) |
 | **Builders (source of truth)** | `archetypes/builders/{kind}-builder/` (13 ISOs each) |
 | **Sub-agents** | `.claude/P02_model/{kind}-builder.md` (125 files) |
 | **N00 Genesis (archetype)** | `N00_genesis/` + `P{01-12}_*/` + `archetypes/` |
@@ -141,6 +142,7 @@ User decides WHAT → LLM builds HOW → verify together.
 | `/doctor` | Full diagnostics |
 | `/consolidate` | Post-dispatch: verify + score + clean |
 | `/evolve [file\|all]` | **AutoResearch**: autonomous artifact improvement loop |
+| `/mentor [question]` | **Vocabulary**: 8F + 12P + 257K taxonomy navigator |
 | `/crew list\|show\|run <name>` | **Composable crew (WAVE8)**: list/inspect/run multi-role teams (sequential\|hierarchical\|consensus) |
 
 ### Composable Crews (WAVE8)
