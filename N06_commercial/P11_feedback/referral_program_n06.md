@@ -5,8 +5,10 @@ pillar: P11
 nucleus: n06
 title: "Referral Program -- Customer Acquisition via Word-of-Mouth Engine"
 version: 1.0.0
-quality: null
+quality: 9.1
 tags: [referral, acquisition, viral, growth, incentive, commercial]
+density_score: 1.0
+updated: "2026-04-17"
 ---
 
 # Referral Program: Word-of-Mouth Revenue Engine

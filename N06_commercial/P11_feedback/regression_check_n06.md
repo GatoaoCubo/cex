@@ -5,8 +5,10 @@ pillar: P11
 nucleus: n06
 title: "Regression Check -- Revenue Strategy Anti-Patterns and Failed Hypotheses"
 version: 1.0.0
-quality: null
+quality: 8.9
 tags: [regression, anti-pattern, commercial, revenue, failed-hypothesis]
+density_score: 0.91
+updated: "2026-04-17"
 ---
 
 # Regression Check: Revenue Strategy Anti-Patterns
