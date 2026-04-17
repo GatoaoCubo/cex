@@ -5,8 +5,9 @@ pillar: P03
 nucleus: n06
 title: "Action Prompt -- Upsell Trigger and Upgrade Conversation"
 version: 1.0.0
-quality: null
+quality: 8.9
 tags: [upsell, upgrade, action-prompt, conversion, expansion, commercial]
+density_score: 0.96
 ---
 
 # Action Prompt: Upsell Trigger and Upgrade Conversation

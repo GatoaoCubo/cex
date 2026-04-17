@@ -5,8 +5,9 @@ pillar: P10
 nucleus: N05
 title: "N05 Operations Learning Record"
 version: "1.0.0"
-quality: null
+quality: 9.0
 tags: [n05, operations, learning_record, gating_wrath, retrieval, release_gate, evidence]
+density_score: 0.97
 ---
 <!-- 8F: F1=learning_record/P10 F2=learning-record-builder F3=nucleus_def_n05+P10_schema+kc_learning_record+examples+retrieval stack docs F4=codify what worked and failed for ops retrieval
      F5=shell+apply_patch+cex_compile F6=approx-6KB dense markdown F7=self-check frontmatter+8F+80L+properties+ascii F8=N05_operations/P10_memory/mem_learning_record_n05.md -->
