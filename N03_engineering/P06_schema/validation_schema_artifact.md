@@ -7,10 +7,11 @@ version: 1.0.0
 created: 2026-04-17
 author: n03_engineering
 domain: artifact-construction
-quality: null
+quality: 8.9
 tags: [validation-schema, artifact, frontmatter, density, N03, 8F, quality-gate]
 tldr: "Validation rules for every artifact produced by N03. Enforces frontmatter contract, density target, structural requirements, and kind-specific constraints at F7 GOVERN."
 density_score: 0.93
+updated: "2026-04-17"
 ---
 
 # Validation Schema: Artifact Output

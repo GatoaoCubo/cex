@@ -7,10 +7,11 @@ version: 1.0.0
 created: 2026-04-17
 author: n03_engineering
 domain: artifact-construction
-quality: null
+quality: 9.1
 tags: [type-def, CEX, core-types, kind, pillar, nucleus, quality, pipeline, N03]
 tldr: "Canonical type definitions for the CEX typed knowledge system: Kind, Pillar, Nucleus, Quality, Pipeline, BuildAction, Signal. The source of truth for structural contracts across all 8 nuclei."
 density_score: 0.92
+updated: "2026-04-17"
 ---
 
 # Type Definitions: CEX Core Types
