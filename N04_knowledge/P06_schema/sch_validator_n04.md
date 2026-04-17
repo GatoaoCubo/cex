@@ -5,8 +5,9 @@ pillar: P06
 nucleus: n04
 title: Knowledge Intake Validator
 version: 1.0
-quality: null
+quality: 8.7
 tags: [schema, validator, knowledge, provenance, quality]
+density_score: 1.0
 ---
 <!-- 8F: F1 constrain=P06/validator F2 become=validator-builder F3 inject=n04-knowledge+kc_validator+P06 examples+N04 schema goals F4 reason=atomic pass-fail rule for provenance and freshness completeness F5 call=shell,apply_patch F6 produce=4841 bytes F7 govern=frontmatter+ascii+density+80-line self-check F8 collaborate=N04_knowledge/P06_schema/sch_validator_n04.md -->
 # Knowledge Intake Validator

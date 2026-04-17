@@ -5,7 +5,7 @@ pillar: P06
 nucleus: n04
 title: "Type Definition -- Document Type Taxonomy"
 version: "1.0.0"
-quality: null
+quality: 9.1
 tags: [type_def, document_types, taxonomy, rag, knowledge_card, n04, P06]
 domain: knowledge management
 status: active
