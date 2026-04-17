@@ -10,7 +10,7 @@ title: "CEX Universal Prompt Compiler"
 domain: intent_resolution
 coverage: 257
 languages: [pt-br, en]
-quality: null
+quality: 9.2
 canonical_for: [n07-input-transmutation, F1_CONSTRAIN]
 referenced_by:
   - .claude/rules/n07-input-transmutation.md
