@@ -5,8 +5,9 @@ pillar: P07
 nucleus: n06
 title: "Eval Metric -- Commercial KPI Framework"
 version: 1.0.0
-quality: null
+quality: 9.0
 tags: [eval-metric, kpi, commercial, mrr, arr, churn, ltv, cac, revenue]
+density_score: 1.0
 ---
 
 # Eval Metric: Commercial KPI Framework
