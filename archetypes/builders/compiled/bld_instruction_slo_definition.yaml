@@ -12,7 +12,7 @@ prerequisites:
 - Service or agent is identified
 - SLI metric type is known (availability, latency, throughput, error rate)
 - Measurement window is defined (rolling 30d, calendar month)
-quality: null
+quality: 6.6
 tags:
 - instruction
 - slo_definition

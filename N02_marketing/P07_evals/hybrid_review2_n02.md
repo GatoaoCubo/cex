@@ -8,8 +8,9 @@ created: 2026-04-13
 builders_reviewed: [vad-config-builder, tts-provider-builder]
 iso_count: 26
 pillar: P04, P09
-quality: 7.9
+quality: 8.0
 density_score: 0.96
+updated: "2026-04-17"
 ---
 
 # HYBRID_REVIEW2: N02 Audit Summary (26 ISOs, 2 Builders)

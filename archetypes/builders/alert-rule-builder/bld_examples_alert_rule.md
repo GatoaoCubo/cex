@@ -4,9 +4,11 @@ kind: few_shot_example
 pillar: P03
 llm_function: GOVERN
 version: 1.0.0
-quality: null
+quality: 5.1
 tags: [alert_rule, examples, few-shot]
 title: "Examples: alert_rule"
+density_score: 1.0
+updated: "2026-04-17"
 ---
 # Examples: alert_rule
 ## Example 1: API Error Rate Critical

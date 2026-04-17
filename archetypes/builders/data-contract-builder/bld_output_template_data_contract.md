@@ -4,9 +4,11 @@ kind: prompt_template
 pillar: P03
 llm_function: PRODUCE
 version: 1.0.0
-quality: null
+quality: 6.5
 tags: [data_contract, template, output]
 title: "Output Template: data_contract"
+density_score: 1.0
+updated: "2026-04-17"
 ---
 # Output Template: data_contract
 ```markdown

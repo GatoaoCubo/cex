@@ -8,9 +8,9 @@ created: "2026-04-17"
 updated: "2026-04-17"
 author: builder
 domain: canary_config
-quality: null
+quality: 5.4
 tags: [context_sources, canary_config, P09]
-llm_function: INJECT
+llm_function: CONSTRAIN
 tldr: "Ordered context sources for F3 INJECT in canary_config builds."
 density_score: null
 ---

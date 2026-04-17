@@ -4,12 +4,14 @@ kind: component_map
 pillar: P08
 title: Admin Dashboard Component Map
 version: 0.1.0
-quality: null
+quality: 8.0
 status: template
 brand_placeholders:
   - BRAND_NAME
   - BRAND_PRIMARY_COLOR
 tags: [commerce, template, distillation, component_map, admin, dashboard]
+density_score: 1.0
+updated: "2026-04-17"
 ---
 
 ## Purpose

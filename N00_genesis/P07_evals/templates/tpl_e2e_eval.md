@@ -1,4 +1,5 @@
 ---
+quality: 6.7
 # TEMPLATE: E2E Eval (P07 Evals)
 # Valide contra P07_evals/_schema.yaml (types.e2e_eval)
 # Max 4096 bytes

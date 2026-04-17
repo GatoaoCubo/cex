@@ -6,7 +6,7 @@ llm_function: CONSTRAIN
 purpose: Naming, paths, size limits for prospective_memory
 effort: low
 max_turns: 15
-quality: null
+quality: 6.8
 title: "Config Prospective Memory"
 version: "1.0.0"
 author: n03_builder

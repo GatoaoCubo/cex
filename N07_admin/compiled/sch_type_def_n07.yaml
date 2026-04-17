@@ -11,6 +11,7 @@ tags:
 - dispatch
 - wave
 - mission
+density_score: 1.0
 purpose: N07 orchestrates missions across nuclei. Without typed structures, every handoff re-describes the same fields in
   free prose, wasting tokens on re-parsing. These types define once, reference everywhere -- the sloth lens applied to data.
   ---

@@ -4,7 +4,7 @@ id: bld_architecture_episodic_memory
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of episodic_memory -- inventory, dependencies, architectural position
-quality: null
+quality: 7.9
 title: "Architecture Episodic Memory"
 version: "1.0.0"
 author: n03_builder

@@ -4,9 +4,11 @@ kind: prompt_template
 pillar: P03
 llm_function: PRODUCE
 version: 1.0.0
-quality: null
+quality: 5.4
 tags: [alert_rule, template, output]
 title: "Output Template: alert_rule"
+density_score: 1.0
+updated: "2026-04-17"
 ---
 # Output Template: alert_rule
 ```markdown

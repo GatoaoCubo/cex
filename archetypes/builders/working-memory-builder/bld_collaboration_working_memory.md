@@ -4,7 +4,7 @@ id: bld_collaboration_working_memory
 pillar: P12
 llm_function: COLLABORATE
 purpose: How working-memory-builder works in crews with other builders
-quality: null
+quality: 8.2
 title: "Collaboration Working Memory"
 version: "1.0.0"
 author: n03_builder

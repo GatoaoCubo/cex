@@ -13,7 +13,7 @@ rules_count: 8
 tone: technical
 knowledge_boundary: "Dependency failure isolation, state machine (closed/open/half-open), failure rate threshold, cooldown | NOT rate_limit_config (inbound throttle), fallback_chain (provider substitution), runtime_rule (retry logic)"
 domain: "circuit_breaker"
-quality: null
+quality: 6.7
 tags: ["system_prompt", "circuit_breaker", "resilience", "P09"]
 safety_level: standard
 output_format_type: markdown

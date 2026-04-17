@@ -2,7 +2,7 @@ kind: architecture
 id: bld_architecture_circuit_breaker
 pillar: P08
 llm_function: CONSTRAIN
-purpose: Component map of circuit_breaker
+purpose: Component map of circuit_breaker -- inventory, dependencies, and architectural position
 quality: null
 title: Architecture Circuit Breaker
 version: 1.0.0
@@ -11,7 +11,8 @@ tags:
 - circuit_breaker
 - builder
 - architecture
-tldr: circuit_breaker is P09's resilience config for dependency failure isolation via three-state machine.
+tldr: 'Component map: state machine (closed/open/half-open), failure window, cooldown, probe. External: rate_limit_config,
+  fallback_chain.'
 domain: circuit breaker construction
 created: '2026-04-17'
 updated: '2026-04-17'
@@ -20,36 +21,75 @@ component_inventory: '| Name | Role | Owner | Status |
 
   |------|------|-------|--------|
 
-  | protected_dependency | Target service/API | circuit_breaker | required |
+  | failure_rate_threshold | % of failures that trips the breaker from CLOSED to OPEN | circuit_breaker | required |
 
-  | failure_threshold | When to open the circuit | circuit_breaker | required |
+  | cooldown_duration | Seconds circuit stays OPEN before moving to HALF-OPEN | circuit_breaker | required |
 
-  | cooldown_period | Open-state duration before probing | circuit_breaker | required |
+  | probe_count | Number of test calls in HALF-OPEN before closing | circuit_breaker | required |
 
-  | half_open_probe | Recovery probe config | circuit_breaker | required |
+  | sliding_window_type | COUNT_BASED or TIME_BASED failure tracking | circuit_breaker | required |
 
-  | fallback_behavior | Open-circuit response | circuit_breaker | required |
+  | sliding_window_size | Number of calls or seconds in the observation window | circuit_breaker | required |
 
-  | window_type | Count or time-based sliding window | circuit_breaker | required |
+  | minimum_number_of_calls | Min calls before failure rate is meaningful | circuit_breaker | recommended |
 
-  | state_machine | CLOSED/OPEN/HALF_OPEN transitions | runtime | external |
+  | slow_call_threshold_ms | Call duration above which it counts as slow failure | circuit_breaker | recommended |
 
-  | fallback_chain | Ordered provider list -- distinct kind | P09 | sibling |
+  | fallback_response | Response returned while circuit is OPEN | circuit_breaker | recommended |
 
-  | rate_limit_config | Inbound throttle -- distinct kind | P09 | sibling |
+  | monitored_exceptions | Error types that increment failure counter | circuit_breaker | recommended |
 
-  | backpressure_policy | Consumer throughput -- distinct kind | P09 | sibling |'
-three_state_machine: "         failures >= threshold\nCLOSED -----------------------> OPEN\n  ^                          \
-  \    |\n  | probe success                | cooldown elapsed\n  |                              v\nCLOSED <------------ HALF_OPEN\
-  \ (send probe_count requests)\n        probe failure -> OPEN"
+  | rate_limit_config | Inbound throttle (RPM/TPM quotas) | P09 (separate kind) | external |
+
+  | fallback_chain | Ordered provider substitution list | P02 (separate kind) | external |
+
+  | runtime_rule | Retry logic and backoff strategy | P09 (separate kind) | external |
+
+  | agent | Orchestrator that wraps calls through circuit breaker | P02 | consumer |
+
+  | monitor | Observability layer that tracks circuit state transitions | P11 | consumer |'
+state_machine: "            failure_rate >= threshold\nCLOSED  ---------------------------------> OPEN\n  ^              \
+  \                            |\n  |                                          | after cooldown_duration\n  |        probe_count\
+  \ calls succeed         |\nHALF-OPEN <-------------------------------- HALF-OPEN\n  |\n  | any probe call fails\n  |\n \
+  \ v\nOPEN (reset cooldown)"
+dependency_graph: 'failure_rate_threshold  --trips-->       state: OPEN
+
+  cooldown_duration       --transitions--> state: HALF-OPEN
+
+  probe_count             --closes-->      state: CLOSED
+
+  sliding_window          --tracks-->      failure_rate
+
+  monitored_exceptions    --filter-->      failure_counter
+
+  fallback_response       --returns-->     caller (when OPEN)
+
+  rate_limit_config       --independent--> (parallel concern)
+
+  runtime_rule            --parallel-->   (retry after failure, not circuit)'
 boundary_table: '| circuit_breaker IS | circuit_breaker IS NOT |
 
-  |--------------------|-----------------------|
+  |---------------------|------------------------|
 
-  | Outbound dependency failure isolation | Inbound request throttle (rate_limit_config) |
+  | Dependency failure isolation via state machine | Inbound request throttle (that is rate_limit_config) |
 
-  | Three-state machine with cooldown | Ordered provider fallback list (fallback_chain) |
+  | Auto-disable + auto-recovery pattern | Ordered provider substitution (that is fallback_chain) |
 
-  | Auto-disables failing downstream service | Consumer throughput control (backpressure_policy) |
+  | Slow call detection and failure counting | Retry with backoff strategy (that is runtime_rule) |
 
-  | Resilience pattern (Hystrix/Resilience4j) | Connection pool configuration |'
+  | Service-level fault tolerance config | Generic environment variables (that is env_config) |
+
+  | Per-dependency resilience declaration | System-wide observability (that is trace_config) |'
+layer_map: '| Layer | Components | Purpose |
+
+  |-------|-----------|---------|
+
+  | detection | sliding_window, failure_rate_threshold, monitored_exceptions | Track and evaluate failure signal |
+
+  | state | CLOSED/OPEN/HALF-OPEN state machine | Control whether calls are allowed |
+
+  | recovery | cooldown_duration, probe_count | Govern return to healthy state |
+
+  | response | fallback_response | Serve callers during OPEN state |
+
+  | external | rate_limit_config, fallback_chain, runtime_rule | Adjacent concerns |'

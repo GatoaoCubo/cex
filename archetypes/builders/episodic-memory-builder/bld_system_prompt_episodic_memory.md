@@ -13,7 +13,7 @@ rules_count: 10
 tone: technical
 knowledge_boundary: "Episode schema, retrieval methods, decay policies, interaction history | NOT entity_memory (entity facts), memory_summary (compressed context), working_memory (task state)"
 domain: "episodic_memory"
-quality: null
+quality: 6.7
 tags: ["system_prompt", "episodic_memory", "memory", "P10"]
 safety_level: standard
 output_format_type: markdown

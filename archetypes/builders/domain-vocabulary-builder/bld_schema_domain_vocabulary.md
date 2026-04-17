@@ -4,9 +4,11 @@ kind: input_schema
 pillar: P06
 llm_function: CONSTRAIN
 version: 1.0.0
-quality: null
+quality: 6.8
 tags: [domain_vocabulary, schema, ubiquitous-language]
 title: "Schema Domain Vocabulary"
+density_score: 1.0
+updated: "2026-04-17"
 ---
 # Schema: domain_vocabulary
 ## Frontmatter Fields (Required)

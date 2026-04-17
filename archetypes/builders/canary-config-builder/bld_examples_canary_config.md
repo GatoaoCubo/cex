@@ -8,7 +8,7 @@ created: "2026-04-17"
 updated: "2026-04-17"
 author: builder
 domain: canary_config
-quality: null
+quality: 7.0
 tags: [examples, canary_config, P09]
 llm_function: GOVERN
 tldr: "Golden and anti-examples for canary_config construction."

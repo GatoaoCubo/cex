@@ -4,9 +4,11 @@ kind: knowledge_card
 pillar: P01
 title: "Domain Vocabulary Builder -- Tools"
 version: 1.0.0
-quality: null
+quality: 6.5
 llm_function: CALL
 tags: [builder, domain_vocabulary, tools]
+density_score: 1.0
+updated: "2026-04-17"
 ---
 
 # Domain Vocabulary Builder -- Tools

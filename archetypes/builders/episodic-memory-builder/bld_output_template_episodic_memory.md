@@ -4,7 +4,7 @@ id: bld_output_template_episodic_memory
 pillar: P05
 llm_function: PRODUCE
 purpose: Template with {{vars}} that the LLM fills to produce an episodic_memory artifact
-quality: null
+quality: 7.8
 title: "Output Template Episodic Memory"
 version: "1.0.0"
 author: n03_builder

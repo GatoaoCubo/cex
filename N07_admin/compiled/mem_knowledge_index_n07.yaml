@@ -47,7 +47,7 @@ scope: 'The N07 orchestration index covers all knowledge required for intent res
 algorithm: hybrid
 corpus_type: text
 domain: orchestration intent resolution
-quality: null
+quality: 8.4
 tags:
 - knowledge-index
 - n07

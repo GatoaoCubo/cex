@@ -4,9 +4,11 @@ kind: knowledge_card
 pillar: P01
 nucleus: n01
 domain: taxonomy-audit
-quality: null
+quality: 8.3
 tags: [ddd, ubiquitous-language, kind-taxonomy, gap-analysis, strategic-design]
 version: 1.0.0
+density_score: 1.0
+updated: "2026-04-17"
 ---
 
 # Kind Gap Analysis: DDD Ubiquitous Language x CEX 257 Kinds

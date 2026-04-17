@@ -8,7 +8,7 @@ created: "2026-04-17"
 updated: "2026-04-17"
 author: builder
 domain: saga
-quality: null
+quality: 7.0
 tags: [quality_gate, saga, P12]
 llm_function: GOVERN
 tldr: "Validates saga for compensation completeness, rollback sequence, and topology definition."

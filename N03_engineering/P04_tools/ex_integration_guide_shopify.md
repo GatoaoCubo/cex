@@ -4,7 +4,7 @@ kind: integration_guide
 pillar: P04
 title: Shopify Integration Guide
 version: 0.1.0
-quality: null
+quality: 8.3
 status: template
 brand_placeholders:
   - BRAND_SHOPIFY_DOMAIN
@@ -12,6 +12,8 @@ brand_placeholders:
   - BRAND_SHOPIFY_WEBHOOK_SECRET
   - BRAND_SUPABASE_PROJECT_REF
 tags: [commerce, template, distillation, shopify, integration]
+density_score: 1.0
+updated: "2026-04-17"
 ---
 
 ## Purpose

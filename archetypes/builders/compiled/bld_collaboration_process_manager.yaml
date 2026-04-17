@@ -1,0 +1,37 @@
+id: bld_rules_process_manager
+kind: knowledge_card
+pillar: P12
+title: Process Manager Builder -- Rules
+version: 1.0.0
+quality: 5.5
+tags:
+- builder
+- process_manager
+- rules
+llm_function: CONSTRAIN
+density_score: 0.81
+updated: '2026-04-17'
+absolute_rules_hard_never_violate:
+- Process manager holds state + correlation key ONLY. No business domain data.
+- Every forward command must have a compensation (undo) command.
+- Every waiting state must have a timeout action.
+- Start event must be defined -- one event creates a new process instance.
+- Terminal states must include at least one success state and one failure state.
+- Process manager issues only commands -- never queries, never direct service calls.
+- 'quality: null always -- never self-score.'
+soft_rules_recommend:
+- 'State count: prefer 3-7 states. More than 10 suggests splitting the process.'
+- Correlation key should be an immutable identifier (orderId, userId) not a mutable field.
+- 'Persistence: use database or event_sourced for production; in_memory for tests only.'
+- 'Idempotency key on every command: ensures at-most-once processing on retry.'
+boundary_rules:
+- 'THIS BUILDER handles: process_manager (P12)'
+- 'NOT this builder: workflow (step-sequential, DAG execution) -> workflow-builder'
+- 'NOT this builder: supervisor (agent hierarchy for LLM orchestration) -> supervisor-builder'
+- 'NOT this builder: dispatch_rule (keyword/intent routing) -> dispatch-rule-builder'
+- 'NOT this builder: schedule (time-triggered) -> schedule-builder'
+cex_specific_rules:
+- 'id pattern: p12_pm_{slug} -- always prefix p12_pm_'
+- 'Pillar: always P12 (Orchestration)'
+- 'Producing nucleus: N07 (Orchestrator) or N03 (Engineering)'
+- 'max_bytes: 4096'

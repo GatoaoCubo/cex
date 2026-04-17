@@ -5,7 +5,7 @@ pillar: P06
 llm_function: CONSTRAIN
 purpose: Formal schema -- SINGLE SOURCE OF TRUTH for backpressure_policy
 pattern: TEMPLATE derives from this. CONFIG restricts this.
-quality: null
+quality: 8.9
 title: "Schema Backpressure Policy"
 version: "1.0.0"
 author: n03_builder

@@ -4,7 +4,7 @@ id: bld_instruction_prospective_memory
 pillar: P03
 llm_function: REASON
 purpose: Step-by-step production process for prospective_memory
-quality: null
+quality: 6.6
 title: "Instruction Prospective Memory"
 version: "1.0.0"
 author: n03_builder

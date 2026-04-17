@@ -3,12 +3,14 @@ kind: knowledge_card
 pillar: P06
 title: Aggregate Root Builder -- Memory
 version: 1.0.0
-quality: null
+quality: 4.7
 tags:
 - builder
 - aggregate_root
 - memory
 llm_function: INJECT
+density_score: 0.9
+updated: '2026-04-17'
 session_patterns_to_remember:
 - 'Aggregate size: most production aggregates have 2-5 members. >7 is a smell.'
 - 'Invariant quality signal: if an invariant says "must be valid" -- it is not concrete. Push for specific field constraints.'

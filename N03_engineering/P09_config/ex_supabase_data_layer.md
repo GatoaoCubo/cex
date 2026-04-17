@@ -4,12 +4,14 @@ kind: supabase_data_layer
 pillar: P09
 title: Commerce Supabase Data Layer
 version: 0.1.0
-quality: null
+quality: 8.0
 status: template
 brand_placeholders:
   - BRAND_SUPABASE_PROJECT_REF
   - BRAND_NAME
 tags: [commerce, template, distillation, supabase, database, backend]
+density_score: 1.0
+updated: "2026-04-17"
 ---
 
 ## Purpose

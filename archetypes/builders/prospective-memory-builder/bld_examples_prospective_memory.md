@@ -4,7 +4,7 @@ id: bld_examples_prospective_memory
 pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of prospective_memory artifacts
-quality: null
+quality: 6.6
 title: "Examples Prospective Memory"
 version: "1.0.0"
 author: n03_builder

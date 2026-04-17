@@ -15,7 +15,7 @@ capabilities: >
   L1: Specialist in domain_vocabulary -- governed canonical term registries for bounded contexts.
   L2: Enforces Ubiquitous Language (Evans DDD) across agents sharing a bounded context.
   L3: When agents need consistent term definitions to prevent semantic drift.
-quality: null
+quality: 7.5
 title: "Manifest Domain Vocabulary Builder"
 tldr: "Builds domain_vocabulary registries that govern canonical terms for a bounded context, preventing semantic drift across LLM agents."
 density_score: 0.90

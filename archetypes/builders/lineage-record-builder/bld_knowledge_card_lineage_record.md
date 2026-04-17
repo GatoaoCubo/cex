@@ -8,7 +8,7 @@ created: "2026-04-17"
 updated: "2026-04-17"
 author: builder
 domain: lineage_record
-quality: null
+quality: 7.8
 tags: [knowledge_card, lineage_record, P01]
 llm_function: INJECT
 tldr: "Domain knowledge for lineage_record: PROV-O vocabulary, derivation types, and curation activities."

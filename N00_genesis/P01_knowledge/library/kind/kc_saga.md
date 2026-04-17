@@ -4,8 +4,10 @@ kind: knowledge_card
 pillar: P01
 nucleus: n00
 domain: kind-taxonomy
-quality: null
+quality: 7.9
 tags: [kind, taxonomy, saga, P12, orchestration, distributed_transaction]
+density_score: 0.99
+updated: "2026-04-17"
 ---
 
 # saga

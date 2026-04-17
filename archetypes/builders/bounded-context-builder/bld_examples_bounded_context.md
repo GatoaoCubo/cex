@@ -7,6 +7,8 @@ version: 1.0.0
 quality: null
 tags: [bounded_context, examples, few-shot]
 title: "Examples: bounded_context"
+density_score: 1.0
+updated: "2026-04-17"
 ---
 # Examples: bounded_context
 ## Example 1: E-commerce Sales BC

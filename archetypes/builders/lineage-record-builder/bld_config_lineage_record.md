@@ -8,9 +8,9 @@ created: "2026-04-17"
 updated: "2026-04-17"
 author: builder
 domain: lineage_record
-quality: null
+quality: 5.4
 tags: [context_sources, lineage_record, P01]
-llm_function: INJECT
+llm_function: CONSTRAIN
 tldr: "Ordered context sources for F3 INJECT in lineage_record builds."
 density_score: null
 ---

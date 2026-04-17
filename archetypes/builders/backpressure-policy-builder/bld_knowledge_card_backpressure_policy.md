@@ -4,7 +4,7 @@ kind: knowledge_card
 pillar: P01
 nucleus: n00
 domain: kind-taxonomy
-quality: null
+quality: 8.8
 title: "Backpressure Policy Builder -- Knowledge Card"
 llm_function: INJECT
 tags: [backpressure_policy, reactive-streams, flow-control, producer-consumer, P09]

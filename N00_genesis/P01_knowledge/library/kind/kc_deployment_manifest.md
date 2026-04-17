@@ -4,8 +4,10 @@ kind: knowledge_card
 pillar: P01
 nucleus: n00
 domain: kind-taxonomy
-quality: null
+quality: 8.2
 tags: [kind, taxonomy, deployment_manifest, P09, config]
+density_score: 1.0
+updated: "2026-04-17"
 ---
 
 # deployment_manifest

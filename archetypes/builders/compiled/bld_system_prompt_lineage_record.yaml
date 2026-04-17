@@ -11,7 +11,7 @@ persona: Knowledge provenance engineer who documents derivation chains using PRO
 rules_count: 10
 tone: technical
 domain: lineage_record
-quality: null
+quality: 6.2
 tags:
 - system_prompt
 - lineage_record

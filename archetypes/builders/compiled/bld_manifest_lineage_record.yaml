@@ -34,7 +34,7 @@ capabilities:
 - Encode derivation type (wasGeneratedBy, wasDerivedFrom, wasAttributedTo)
 - Track curation decisions and quality gates applied
 - Validate against quality gates (8 HARD + SOFT)
-quality: null
+quality: 7.9
 title: 'Manifest: lineage_record Builder'
 tldr: Builds lineage_record artifacts documenting provenance chains from source to derived artifact.
 density_score: null

@@ -32,7 +32,7 @@ tldr: episode_count + decay_policy + retrieval_keys are load-bearing. Unlimited 
 impact_score: 8.0
 decay_rate: 0.02
 memory_scope: project
-quality: null
+quality: 7.4
 title: Memory Episodic Memory
 density_score: 0.9
 llm_function: INJECT

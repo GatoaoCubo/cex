@@ -3,7 +3,7 @@ id: bld_examples_episodic_memory
 pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of episodic_memory artifacts
-quality: null
+quality: 7.5
 title: Examples Episodic Memory
 version: 1.0.0
 author: n03_builder

@@ -4,12 +4,14 @@ kind: knowledge_card
 pillar: P06
 title: "Value Object Builder -- Manifest"
 version: 1.0.0
-quality: null
+quality: 6.3
 tags: [builder, value_object, ddd, P06]
 domain: value_object
 llm_function: BECOME
 triggers: ["define value object", "create immutable type", "typed attribute without identity"]
 keywords: [value_object, ddd, immutable, equality, typed_attribute]
+density_score: 1.0
+updated: "2026-04-17"
 ---
 # value-object-builder
 ## Identity

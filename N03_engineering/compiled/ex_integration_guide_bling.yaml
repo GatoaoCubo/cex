@@ -3,7 +3,7 @@ kind: integration_guide
 pillar: P04
 title: Bling ERP Integration Guide
 version: 0.1.0
-quality: null
+quality: 8.2
 status: template
 brand_placeholders:
 - BRAND_BLING_API_KEY
@@ -17,6 +17,8 @@ tags:
 - bling
 - erp
 - integration
+density_score: 1.0
+updated: '2026-04-17'
 purpose: Step-by-step integration guide for connecting Bling ERP (Brazilian) to a Supabase product catalog — covers OAuth
   2.0 authorization, product sync via API v3, inbound webhooks for stock events, and scheduled token refresh.
 when_to_use:

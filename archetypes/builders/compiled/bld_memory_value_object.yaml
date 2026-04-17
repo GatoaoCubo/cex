@@ -3,12 +3,14 @@ kind: knowledge_card
 pillar: P06
 title: Value Object Builder -- Memory
 version: 1.0.0
-quality: null
+quality: 4.9
 tags:
 - builder
 - value_object
 - memory
 llm_function: INJECT
+density_score: 0.92
+updated: '2026-04-17'
 session_patterns:
 - 'Attribute count: most value objects have 1-3 attributes. >5 suggests decomposing.'
 - 'The "whole value" test: if you can construct an invalid instance, the value object is broken. All invariants must be checked

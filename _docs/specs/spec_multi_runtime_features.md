@@ -1,9 +1,12 @@
 ---
+quality: 7.6
 kind: spec
 pillar: P08
 created: 2026-04-15
 author: N03
 mission: BORIS_MERGE
+density_score: 1.0
+updated: "2026-04-17"
 ---
 
 # Spec: Multi-Runtime Feature Coverage

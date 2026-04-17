@@ -27,7 +27,7 @@ capabilities:
 - Reference the domain_vocabulary governing this context
 - 'Model integration patterns: Anti-Corruption Layer, Open Host Service, Conformist'
 - Document team ownership and upstream/downstream relationships
-quality: null
+quality: 7.5
 title: Manifest Bounded Context Builder
 tldr: Builds bounded_context definitions with domain model scope, vocabulary reference, integration patterns (ACL/OHS/CF),
   and team ownership.

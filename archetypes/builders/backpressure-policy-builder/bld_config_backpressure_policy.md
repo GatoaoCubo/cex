@@ -15,7 +15,7 @@ hooks:
   on_error: null
   on_quality_fail: null
 permission_scope: nucleus
-quality: null
+quality: 7.8
 title: "Config Backpressure Policy"
 version: "1.0.0"
 author: n03_builder

@@ -1,10 +1,11 @@
 ---
+quality: 7.9
 id: bld_schema_lineage_record
 kind: schema
 pillar: P06
 llm_function: CONSTRAIN
 purpose: "Formal schema -- SINGLE SOURCE OF TRUTH for lineage_record"
-quality: null
+quality: 7.4
 title: "Schema: lineage_record"
 version: "1.0.0"
 author: builder

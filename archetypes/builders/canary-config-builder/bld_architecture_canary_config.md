@@ -8,7 +8,7 @@ created: "2026-04-17"
 updated: "2026-04-17"
 author: builder
 domain: canary_config
-quality: null
+quality: 6.7
 tags: [architecture, canary_config, P09]
 llm_function: CONSTRAIN
 tldr: "How canary_config relates to deployment_manifest, slo_definition, feature_flag, and ab_test_config."

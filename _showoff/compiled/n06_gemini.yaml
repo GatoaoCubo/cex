@@ -2,7 +2,7 @@ id: showoff_w5_n06_gemini
 kind: smoke_eval
 title: SHOWOFF Wave 5 -- n06 via gemini
 version: 1
-quality: 8.3
+quality: 2.8
 pillar: P07
 nucleus: n06
 runtime: gemini

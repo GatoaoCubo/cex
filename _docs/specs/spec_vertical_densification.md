@@ -1,4 +1,5 @@
 ---
+quality: 9.1
 id: spec_vertical_densification
 kind: constraint_spec
 pillar: P06
@@ -14,6 +15,7 @@ depends_on: spec_nucleus_self_assembly
 tags: [spec, densification, karpathy-loop, coc, cross-synthesis, code-hygiene, quality-sweep]
 tldr: "Four-wave self-improvement: (1) fix 18 stale .py path refs, (2) Karpathy sweep on 308 unscored artifacts, (3) cross-nucleus KC synthesis into reusable shared artifacts, (4) CoC convergence via pattern/few_shot/reasoning_trace artifacts."
 density_score: 0.96
+updated: "2026-04-17"
 ---
 
 # Spec -- Vertical Densification

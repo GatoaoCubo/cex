@@ -7,6 +7,8 @@ version: 1.0.0
 quality: null
 tags: [builder, aggregate_root, memory]
 llm_function: INJECT
+density_score: 0.9
+updated: "2026-04-17"
 ---
 # Memory: aggregate_root
 ## Session Patterns to Remember

@@ -4,9 +4,11 @@ kind: knowledge_card
 pillar: P06
 title: "Value Object Builder -- Memory"
 version: 1.0.0
-quality: null
+quality: 5.0
 tags: [builder, value_object, memory]
 llm_function: INJECT
+density_score: 0.92
+updated: "2026-04-17"
 ---
 # Memory: value_object
 ## Session Patterns

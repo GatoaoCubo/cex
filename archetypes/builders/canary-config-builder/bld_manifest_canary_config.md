@@ -15,7 +15,7 @@ capabilities: >
   L1: Specialist in building `canary_config` -- gradual traffic rollout configs with auto rollback.
   L2: Encode traffic stages, rollback triggers, and analysis intervals.
   L3: When user needs progressive delivery with automatic rollback on SLO breach.
-quality: null
+quality: 7.9
 title: "Manifest: canary_config Builder"
 tldr: "Builds canary_config artifacts: staged traffic rollout with auto rollback triggers."
 density_score: null

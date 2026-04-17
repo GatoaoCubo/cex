@@ -13,7 +13,7 @@ rules_count: 8
 tone: technical
 knowledge_boundary: "Consumer lag management, overflow strategy, buffer sizing, watermarks, Reactive Streams demand | NOT circuit_breaker (dependency failure), rate_limit_config (inbound throttle), runtime_rule (retry)"
 domain: "backpressure_policy"
-quality: null
+quality: 6.7
 tags: ["system_prompt", "backpressure_policy", "reactive_streams", "P09"]
 safety_level: standard
 output_format_type: markdown

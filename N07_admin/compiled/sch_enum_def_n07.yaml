@@ -11,6 +11,7 @@ tags:
 - dispatch
 - wave
 - signal
+density_score: 1.0
 purpose: 'Canonical closed-set enumerations for N07 orchestration. These values are the only legal tokens in handoffs, signals,
   and mission plans. Consumers use exhaustive match — no unknown-value handling required (`extensible: false` on all).'
 enumerations: ''

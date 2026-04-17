@@ -1,0 +1,31 @@
+id: kc_diff_strategy
+kind: knowledge_card
+title: 'Diff Strategy: Change Application and Matching Algorithm'
+version: 1.0.0
+quality: 6.0
+pillar: P01
+density_score: 1.0
+purpose: Define systematic approach to apply changes and match algorithms for knowledge evolution.
+key_concepts:
+- 'Change Application: Process of implementing modifications to existing knowledge'
+- 'Matching Algorithm: Computational method to identify pattern similarities'
+application_process:
+- 'Validation Phase: Verify change relevance using quality gates'
+- 'Transformation: Convert changes to compatible format'
+- 'Integration: Merge with existing knowledge base'
+- 'Verification: Confirm structural integrity'
+matching_algorithm_types: '| Type        | Use Case                  | Complexity |
+
+  |-------------|---------------------------|------------|
+
+  | Exact Match | Identical pattern         | Low        |
+
+  | Fuzzy Match | Partial pattern similarity| Medium     |
+
+  | Heuristic   | Contextual pattern matching| High       |'
+best_practices:
+- Use exact matching for precise updates
+- Apply fuzzy matching for semantic similarity
+- Use heuristic for contextual pattern recognition
+- Always validate before integration
+- Maintain version history for traceability

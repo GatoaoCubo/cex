@@ -4,9 +4,11 @@ kind: input_schema
 pillar: P06
 llm_function: CONSTRAIN
 version: 1.0.0
-quality: null
+quality: 6.8
 tags: [data_contract, schema]
 title: "Schema Data Contract"
+density_score: 1.0
+updated: "2026-04-17"
 ---
 # Schema: data_contract
 ## Frontmatter Fields (Required)

@@ -3,7 +3,7 @@ kind: db_connector
 pillar: P09
 title: Supabase Database Connector
 version: 0.1.0
-quality: null
+quality: 7.9
 status: template
 brand_placeholders:
 - BRAND_SUPABASE_PROJECT_REF
@@ -14,6 +14,8 @@ tags:
 - supabase
 - db_connector
 - config
+density_score: 1.0
+updated: '2026-04-17'
 purpose: Connection configuration spec for Supabase PostgreSQL backend — defines connection parameters, pooling settings,
   auth modes, and environment variable schema for edge functions and frontend clients.
 when_to_use:

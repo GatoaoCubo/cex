@@ -3,12 +3,14 @@ kind: knowledge_card
 pillar: P06
 title: Value Object Builder -- Architecture
 version: 1.0.0
-quality: null
+quality: 6.3
 tags:
 - builder
 - value_object
 - architecture
 llm_function: CONSTRAIN
+density_score: 1.0
+updated: '2026-04-17'
 pattern_origin: 'Evans DDD (2003): Value Object = object that describes some characteristic of a thing. No identity. Two instances
   with same attribute values are interchangeable.'
 properties_from_evans:

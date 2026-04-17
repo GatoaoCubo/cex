@@ -3,12 +3,14 @@ kind: knowledge_card
 pillar: P06
 title: Aggregate Root Builder -- Knowledge Card
 version: 1.0.0
-quality: null
+quality: 5.3
 tags:
 - builder
 - aggregate_root
 - knowledge
 llm_function: INJECT
+density_score: 0.93
+updated: '2026-04-17'
 core_concept: Aggregate Root is the Evans DDD pattern for transactional consistency boundaries. The root is the ONLY object
   within its cluster accessible from outside. All mutations go through the root, which enforces domain invariants atomically.
 when_to_use:

@@ -8,7 +8,7 @@ created: "2026-04-17"
 updated: "2026-04-17"
 author: builder
 domain: saga
-quality: null
+quality: 6.6
 tags: [memory, saga, P12]
 llm_function: INJECT
 tldr: "Recalled patterns and corrections for saga builder sessions."

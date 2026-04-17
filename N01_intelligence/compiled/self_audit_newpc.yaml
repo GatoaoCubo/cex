@@ -4,10 +4,11 @@ title: N01 Self-Audit -- New PC Setup (2026-04-13)
 pillar: P01_knowledge
 nucleus: N01
 version: 3.0.0
-quality: null
+quality: 8.0
 created: 2026-04-12
 updated: 2026-04-13
 mission: NEWPC_SETUP
+density_score: 1.0
 phase_1_mcp_server_verification: '| # | Server | Binary | API Key | Verdict | vs. v2 |
 
   |---|--------|--------|---------|---------|--------|

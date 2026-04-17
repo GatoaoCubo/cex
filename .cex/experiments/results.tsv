@@ -16169,3 +16169,904 @@ et
 2026-04-17 15:47:50	N04_knowledge\P01_knowledge\few_shot_examples_rag_queries.md	1	9.1	1.00	keep	tldr flagged for manual review
 2026-04-17 15:51:14	N03_engineering\P03_prompt\action_paradigm_cex_build.md	1	8.8	1.00	keep	added updated: 2026-04-17
 2026-04-17 15:51:39	N03_engineering\P07_evals\reasoning_trace_8f_constrain.md	1	8.8	1.00	keep	added updated: 2026-04-17
+2026-04-17 18:19:48	C:\Users\CEX\Documents\GitHub\cex\.cex\runtime\out\gemma_grid_n02.md	1	2.6	0.97	keep	added updated: 2026-04-17
+2026-04-17 18:19:48	C:\Users\CEX\Documents\GitHub\cex\.cex\runtime\out\gemma_grid_n02.md	2	2.6	0.97	discard	tldr flagged for manual review
+2026-04-17 18:19:48	C:\Users\CEX\Documents\GitHub\cex\.cex\skills\README.md	1	6.6	0.97	keep	tldr flagged for manual review
+2026-04-17 18:19:48	C:\Users\CEX\Documents\GitHub\cex\.cex\skills\README.md	2	6.6	0.97	discard	tldr flagged for manual review
+2026-04-17 18:19:49	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\aggregate-root-builder\bld_architecture_aggregate_root.md	1	6.0	0.99	keep	added density_score: 0.99
+2026-04-17 18:19:49	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\aggregate-root-builder\bld_architecture_aggregate_root.md	2	6.2	0.99	keep	added updated: 2026-04-17
+2026-04-17 18:19:49	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\aggregate-root-builder\bld_collaboration_aggregate_root.md	1	5.5	0.82	keep	added density_score: 0.82
+2026-04-17 18:19:49	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\aggregate-root-builder\bld_collaboration_aggregate_root.md	2	5.7	0.82	keep	added updated: 2026-04-17
+2026-04-17 18:19:50	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\aggregate-root-builder\bld_config_aggregate_root.md	1	5.5	1.00	keep	added density_score: 1.0
+2026-04-17 18:19:50	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\aggregate-root-builder\bld_config_aggregate_root.md	2	5.7	1.00	keep	added updated: 2026-04-17
+2026-04-17 18:19:50	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\aggregate-root-builder\bld_examples_aggregate_root.md	1	5.0	1.00	keep	added density_score: 1.0
+2026-04-17 18:19:51	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\aggregate-root-builder\bld_examples_aggregate_root.md	2	5.1	1.00	keep	added updated: 2026-04-17
+2026-04-17 18:19:51	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\aggregate-root-builder\bld_instruction_aggregate_root.md	1	5.3	0.81	keep	added density_score: 0.81
+2026-04-17 18:19:51	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\aggregate-root-builder\bld_instruction_aggregate_root.md	2	5.4	0.81	keep	added updated: 2026-04-17
+2026-04-17 18:19:52	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\aggregate-root-builder\bld_knowledge_card_aggregate_root.md	1	5.1	0.93	keep	added density_score: 0.93
+2026-04-17 18:19:52	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\aggregate-root-builder\bld_knowledge_card_aggregate_root.md	2	5.3	0.93	keep	added updated: 2026-04-17
+2026-04-17 18:19:52	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\aggregate-root-builder\bld_manifest_aggregate_root.md	1	6.2	1.00	keep	added density_score: 1.0
+2026-04-17 18:19:52	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\aggregate-root-builder\bld_manifest_aggregate_root.md	2	6.3	1.00	keep	added updated: 2026-04-17
+2026-04-17 18:19:53	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\aggregate-root-builder\bld_memory_aggregate_root.md	1	4.6	0.90	keep	added density_score: 0.9
+2026-04-17 18:19:53	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\aggregate-root-builder\bld_memory_aggregate_root.md	2	4.7	0.90	keep	added updated: 2026-04-17
+2026-04-17 18:19:53	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\aggregate-root-builder\bld_output_template_aggregate_root.md	1	5.7	1.00	keep	added density_score: 1.0
+2026-04-17 18:19:54	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\aggregate-root-builder\bld_output_template_aggregate_root.md	2	5.8	1.00	keep	added updated: 2026-04-17
+2026-04-17 18:19:54	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\aggregate-root-builder\bld_quality_gate_aggregate_root.md	1	5.9	1.00	keep	added density_score: 1.0
+2026-04-17 18:19:54	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\aggregate-root-builder\bld_quality_gate_aggregate_root.md	2	6.0	1.00	keep	added updated: 2026-04-17
+2026-04-17 18:19:55	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\aggregate-root-builder\bld_schema_aggregate_root.md	1	6.5	1.00	keep	added density_score: 1.0
+2026-04-17 18:19:55	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\aggregate-root-builder\bld_schema_aggregate_root.md	2	6.6	1.00	keep	added updated: 2026-04-17
+2026-04-17 18:19:55	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\aggregate-root-builder\bld_system_prompt_aggregate_root.md	1	5.3	0.79	keep	added density_score: 0.79
+2026-04-17 18:19:56	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\aggregate-root-builder\bld_system_prompt_aggregate_root.md	2	5.4	0.79	keep	added updated: 2026-04-17
+2026-04-17 18:19:56	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\aggregate-root-builder\bld_tools_aggregate_root.md	1	6.3	1.00	keep	added density_score: 1.0
+2026-04-17 18:19:56	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\aggregate-root-builder\bld_tools_aggregate_root.md	2	6.5	1.00	keep	added updated: 2026-04-17
+2026-04-17 18:19:56	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\alert-rule-builder\bld_architecture_alert_rule.md	1	6.7	1.00	keep	added density_score: 1.0
+2026-04-17 18:19:57	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\alert-rule-builder\bld_architecture_alert_rule.md	2	6.8	1.00	keep	added updated: 2026-04-17
+2026-04-17 18:19:57	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\alert-rule-builder\bld_collaboration_alert_rule.md	1	6.3	1.00	keep	added density_score: 1.0
+2026-04-17 18:19:57	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\alert-rule-builder\bld_collaboration_alert_rule.md	2	6.5	1.00	keep	added updated: 2026-04-17
+2026-04-17 18:19:58	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\alert-rule-builder\bld_config_alert_rule.md	1	5.9	1.00	keep	added density_score: 1.0
+2026-04-17 18:19:58	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\alert-rule-builder\bld_config_alert_rule.md	2	6.0	1.00	keep	added updated: 2026-04-17
+2026-04-17 18:19:58	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\alert-rule-builder\bld_examples_alert_rule.md	1	5.0	1.00	keep	added density_score: 1.0
+2026-04-17 18:19:59	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\alert-rule-builder\bld_examples_alert_rule.md	2	5.1	1.00	keep	added updated: 2026-04-17
+2026-04-17 18:19:59	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\alert-rule-builder\bld_instruction_alert_rule.md	1	5.3	0.86	keep	added density_score: 0.86
+2026-04-17 18:19:59	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\alert-rule-builder\bld_instruction_alert_rule.md	2	5.4	0.86	keep	added updated: 2026-04-17
+2026-04-17 18:20:00	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\alert-rule-builder\bld_knowledge_card_alert_rule.md	1	6.3	1.00	keep	added density_score: 1.0
+2026-04-17 18:20:00	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\alert-rule-builder\bld_knowledge_card_alert_rule.md	2	6.5	1.00	keep	added updated: 2026-04-17
+2026-04-17 18:20:00	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\alert-rule-builder\bld_manifest_alert_rule.md	1	7.5	0.99	keep	polished formatting (whitespace cleanup)
+2026-04-17 18:20:00	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\alert-rule-builder\bld_manifest_alert_rule.md	2	7.5	0.99	discard	polished formatting (whitespace cleanup)
+2026-04-17 18:20:01	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\alert-rule-builder\bld_memory_alert_rule.md	1	6.0	1.00	keep	added density_score: 1.0
+2026-04-17 18:20:01	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\alert-rule-builder\bld_memory_alert_rule.md	2	6.2	1.00	keep	added updated: 2026-04-17
+2026-04-17 18:20:01	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\alert-rule-builder\bld_output_template_alert_rule.md	1	5.3	1.00	keep	added density_score: 1.0
+2026-04-17 18:20:02	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\alert-rule-builder\bld_output_template_alert_rule.md	2	5.4	1.00	keep	added updated: 2026-04-17
+2026-04-17 18:20:02	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\alert-rule-builder\bld_quality_gate_alert_rule.md	1	5.7	1.00	keep	added density_score: 1.0
+2026-04-17 18:20:02	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\alert-rule-builder\bld_quality_gate_alert_rule.md	2	5.8	1.00	keep	added updated: 2026-04-17
+2026-04-17 18:20:02	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\alert-rule-builder\bld_schema_alert_rule.md	1	6.3	1.00	keep	added density_score: 1.0
+2026-04-17 18:20:03	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\alert-rule-builder\bld_schema_alert_rule.md	2	6.5	1.00	keep	added updated: 2026-04-17
+2026-04-17 18:20:03	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\alert-rule-builder\bld_system_prompt_alert_rule.md	1	6.5	0.93	keep	added density_score: 0.93
+2026-04-17 18:20:03	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\alert-rule-builder\bld_system_prompt_alert_rule.md	2	6.5	0.93	discard	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:20:04	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\alert-rule-builder\bld_tools_alert_rule.md	1	6.3	1.00	keep	added density_score: 1.0
+2026-04-17 18:20:04	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\alert-rule-builder\bld_tools_alert_rule.md	2	6.5	1.00	keep	added updated: 2026-04-17
+2026-04-17 18:20:04	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\backpressure-policy-builder\bld_architecture_backpressure_policy.md	1	8.8	1.00	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:20:05	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\backpressure-policy-builder\bld_collaboration_backpressure_policy.md	1	7.9	1.00	keep	polished formatting (whitespace cleanup)
+2026-04-17 18:20:05	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\backpressure-policy-builder\bld_collaboration_backpressure_policy.md	2	7.9	1.00	discard	polished formatting (whitespace cleanup)
+2026-04-17 18:20:05	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\backpressure-policy-builder\bld_config_backpressure_policy.md	1	7.8	1.00	keep	polished formatting (whitespace cleanup)
+2026-04-17 18:20:05	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\backpressure-policy-builder\bld_config_backpressure_policy.md	2	7.8	1.00	discard	polished formatting (whitespace cleanup)
+2026-04-17 18:20:14	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\backpressure-policy-builder\bld_examples_backpressure_policy.md	1	8.6	1.00	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:20:14	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\backpressure-policy-builder\bld_instruction_backpressure_policy.md	1	7.1	0.87	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:20:14	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\backpressure-policy-builder\bld_instruction_backpressure_policy.md	2	7.1	0.87	discard	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:20:14	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\backpressure-policy-builder\bld_knowledge_card_backpressure_policy.md	1	8.8	1.00	keep	polished formatting (whitespace cleanup)
+2026-04-17 18:20:15	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\backpressure-policy-builder\bld_manifest_backpressure_policy.md	1	7.6	1.00	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:20:15	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\backpressure-policy-builder\bld_manifest_backpressure_policy.md	2	7.6	1.00	discard	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:20:15	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\backpressure-policy-builder\bld_memory_backpressure_policy.md	1	7.5	0.84	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:20:15	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\backpressure-policy-builder\bld_memory_backpressure_policy.md	2	7.5	0.84	discard	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:20:16	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\backpressure-policy-builder\bld_output_template_backpressure_policy.md	1	7.5	1.00	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:20:16	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\backpressure-policy-builder\bld_output_template_backpressure_policy.md	2	7.5	1.00	discard	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:20:16	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\backpressure-policy-builder\bld_quality_gate_backpressure_policy.md	1	8.0	1.00	keep	polished formatting (whitespace cleanup)
+2026-04-17 18:20:16	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\backpressure-policy-builder\bld_quality_gate_backpressure_policy.md	2	8.0	1.00	discard	polished formatting (whitespace cleanup)
+2026-04-17 18:20:16	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\backpressure-policy-builder\bld_schema_backpressure_policy.md	1	8.9	1.00	keep	polished formatting (whitespace cleanup)
+2026-04-17 18:20:17	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\backpressure-policy-builder\bld_system_prompt_backpressure_policy.md	1	6.7	0.94	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:20:17	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\backpressure-policy-builder\bld_system_prompt_backpressure_policy.md	2	6.7	0.94	discard	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:20:17	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\backpressure-policy-builder\bld_tools_backpressure_policy.md	1	8.3	1.00	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:20:17	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\backpressure-policy-builder\bld_tools_backpressure_policy.md	2	8.3	1.00	discard	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:20:18	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\bounded-context-builder\bld_architecture_bounded_context.md	1	7.2	1.00	keep	added density_score: 1.0
+2026-04-17 18:20:18	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\bounded-context-builder\bld_architecture_bounded_context.md	2	7.4	1.00	keep	added updated: 2026-04-17
+2026-04-17 18:20:18	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\bounded-context-builder\bld_collaboration_bounded_context.md	1	6.3	0.99	keep	added density_score: 0.99
+2026-04-17 18:20:19	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\bounded-context-builder\bld_collaboration_bounded_context.md	2	6.5	0.99	keep	added updated: 2026-04-17
+2026-04-17 18:20:19	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\bounded-context-builder\bld_config_bounded_context.md	1	5.9	1.00	keep	added density_score: 1.0
+2026-04-17 18:20:19	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\bounded-context-builder\bld_config_bounded_context.md	2	6.0	1.00	keep	added updated: 2026-04-17
+2026-04-17 18:20:20	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\bounded-context-builder\bld_examples_bounded_context.md	1	4.7	1.00	keep	added density_score: 1.0
+2026-04-17 18:20:20	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\bounded-context-builder\bld_examples_bounded_context.md	2	4.9	1.00	keep	added updated: 2026-04-17
+2026-04-17 18:20:20	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\bounded-context-builder\bld_instruction_bounded_context.md	1	4.9	0.84	keep	added density_score: 0.84
+2026-04-17 18:20:21	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\bounded-context-builder\bld_instruction_bounded_context.md	2	5.0	0.84	keep	added updated: 2026-04-17
+2026-04-17 18:20:21	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\bounded-context-builder\bld_knowledge_card_bounded_context.md	1	6.3	0.98	keep	added density_score: 0.98
+2026-04-17 18:20:21	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\bounded-context-builder\bld_knowledge_card_bounded_context.md	2	6.5	0.98	keep	added updated: 2026-04-17
+2026-04-17 18:20:22	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\bounded-context-builder\bld_manifest_bounded_context.md	1	7.5	0.99	keep	polished formatting (whitespace cleanup)
+2026-04-17 18:20:22	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\bounded-context-builder\bld_manifest_bounded_context.md	2	7.5	0.99	discard	polished formatting (whitespace cleanup)
+2026-04-17 18:20:22	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\bounded-context-builder\bld_memory_bounded_context.md	1	6.0	0.94	keep	added density_score: 0.94
+2026-04-17 18:20:22	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\bounded-context-builder\bld_memory_bounded_context.md	2	6.2	0.94	keep	added updated: 2026-04-17
+2026-04-17 18:20:23	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\bounded-context-builder\bld_output_template_bounded_context.md	1	6.3	1.00	keep	added density_score: 1.0
+2026-04-17 18:20:23	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\bounded-context-builder\bld_output_template_bounded_context.md	2	6.5	1.00	keep	added updated: 2026-04-17
+2026-04-17 18:20:23	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\bounded-context-builder\bld_quality_gate_bounded_context.md	1	5.7	1.00	keep	added density_score: 1.0
+2026-04-17 18:20:24	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\bounded-context-builder\bld_quality_gate_bounded_context.md	2	5.8	1.00	keep	added updated: 2026-04-17
+2026-04-17 18:20:24	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\bounded-context-builder\bld_schema_bounded_context.md	1	7.2	1.00	keep	added density_score: 1.0
+2026-04-17 18:20:24	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\bounded-context-builder\bld_schema_bounded_context.md	2	7.4	1.00	keep	added updated: 2026-04-17
+2026-04-17 18:20:25	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\bounded-context-builder\bld_system_prompt_bounded_context.md	1	6.5	0.91	keep	added density_score: 0.91
+2026-04-17 18:20:25	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\bounded-context-builder\bld_system_prompt_bounded_context.md	2	6.5	0.91	discard	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:20:25	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\bounded-context-builder\bld_tools_bounded_context.md	1	6.3	1.00	keep	added density_score: 1.0
+2026-04-17 18:20:25	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\bounded-context-builder\bld_tools_bounded_context.md	2	6.5	1.00	keep	added updated: 2026-04-17
+2026-04-17 18:20:26	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\canary-config-builder\bld_architecture_canary_config.md	1	6.7	1.00	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:20:26	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\canary-config-builder\bld_architecture_canary_config.md	2	6.7	1.00	discard	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:20:26	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\canary-config-builder\bld_collaboration_canary_config.md	1	7.1	0.99	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:20:26	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\canary-config-builder\bld_collaboration_canary_config.md	2	7.1	0.99	discard	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:20:27	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\canary-config-builder\bld_config_canary_config.md	1	5.4	1.00	keep	polished formatting (whitespace cleanup)
+2026-04-17 18:20:27	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\canary-config-builder\bld_config_canary_config.md	2	5.4	1.00	discard	polished formatting (whitespace cleanup)
+2026-04-17 18:20:27	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\canary-config-builder\bld_examples_canary_config.md	1	7.0	1.00	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:20:27	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\canary-config-builder\bld_examples_canary_config.md	2	7.0	1.00	discard	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:20:28	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\canary-config-builder\bld_instruction_canary_config.md	1	6.6	0.99	keep	polished formatting (whitespace cleanup)
+2026-04-17 18:20:28	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\canary-config-builder\bld_instruction_canary_config.md	2	6.6	0.99	discard	polished formatting (whitespace cleanup)
+2026-04-17 18:20:28	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\canary-config-builder\bld_knowledge_card_canary_config.md	1	7.8	1.00	keep	polished formatting (whitespace cleanup)
+2026-04-17 18:20:28	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\canary-config-builder\bld_knowledge_card_canary_config.md	2	7.8	1.00	discard	polished formatting (whitespace cleanup)
+2026-04-17 18:20:28	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\canary-config-builder\bld_manifest_canary_config.md	1	7.9	1.00	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:20:29	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\canary-config-builder\bld_manifest_canary_config.md	2	7.9	1.00	discard	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:20:29	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\canary-config-builder\bld_memory_canary_config.md	1	6.6	1.00	keep	polished formatting (whitespace cleanup)
+2026-04-17 18:20:29	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\canary-config-builder\bld_memory_canary_config.md	2	6.6	1.00	discard	polished formatting (whitespace cleanup)
+2026-04-17 18:20:29	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\canary-config-builder\bld_output_template_canary_config.md	1	7.0	1.00	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:20:29	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\canary-config-builder\bld_output_template_canary_config.md	2	7.0	1.00	discard	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:20:30	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\canary-config-builder\bld_quality_gate_canary_config.md	1	7.0	1.00	keep	polished formatting (whitespace cleanup)
+2026-04-17 18:20:30	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\canary-config-builder\bld_quality_gate_canary_config.md	2	7.0	1.00	discard	polished formatting (whitespace cleanup)
+2026-04-17 18:20:30	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\canary-config-builder\bld_schema_canary_config.md	1	7.9	1.00	keep	tldr flagged for manual review
+2026-04-17 18:20:30	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\canary-config-builder\bld_schema_canary_config.md	2	7.9	1.00	discard	tldr flagged for manual review
+2026-04-17 18:20:31	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\canary-config-builder\bld_system_prompt_canary_config.md	1	6.2	0.86	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:20:31	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\canary-config-builder\bld_system_prompt_canary_config.md	2	6.2	0.86	discard	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:20:31	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\canary-config-builder\bld_tools_canary_config.md	1	6.3	1.00	keep	added density_score: 1.0
+2026-04-17 18:20:31	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\canary-config-builder\bld_tools_canary_config.md	2	6.5	1.00	keep	added updated: 2026-04-17
+2026-04-17 18:20:32	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\circuit-breaker-builder\bld_architecture_circuit_breaker.md	1	8.8	1.00	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:20:32	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\circuit-breaker-builder\bld_collaboration_circuit_breaker.md	1	7.9	0.98	keep	polished formatting (whitespace cleanup)
+2026-04-17 18:20:32	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\circuit-breaker-builder\bld_collaboration_circuit_breaker.md	2	7.9	0.98	discard	polished formatting (whitespace cleanup)
+2026-04-17 18:20:33	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\circuit-breaker-builder\bld_config_circuit_breaker.md	1	7.8	1.00	keep	polished formatting (whitespace cleanup)
+2026-04-17 18:20:33	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\circuit-breaker-builder\bld_config_circuit_breaker.md	2	7.8	1.00	discard	polished formatting (whitespace cleanup)
+2026-04-17 18:20:33	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\circuit-breaker-builder\bld_examples_circuit_breaker.md	1	8.6	1.00	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:20:34	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\circuit-breaker-builder\bld_instruction_circuit_breaker.md	1	7.1	0.83	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:20:34	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\circuit-breaker-builder\bld_instruction_circuit_breaker.md	2	7.1	0.83	discard	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:20:34	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\circuit-breaker-builder\bld_knowledge_card_circuit_breaker.md	1	8.8	0.99	keep	polished formatting (whitespace cleanup)
+2026-04-17 18:20:34	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\circuit-breaker-builder\bld_manifest_circuit_breaker.md	1	7.6	0.99	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:20:34	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\circuit-breaker-builder\bld_manifest_circuit_breaker.md	2	7.6	0.99	discard	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:20:35	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\circuit-breaker-builder\bld_memory_circuit_breaker.md	1	7.5	0.83	keep	analyzed: increase_density: remove filler words, compress prose into tables
+2026-04-17 18:20:35	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\circuit-breaker-builder\bld_memory_circuit_breaker.md	2	7.5	0.83	discard	analyzed: increase_density: remove filler words, compress prose into tables
+2026-04-17 18:20:35	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\circuit-breaker-builder\bld_output_template_circuit_breaker.md	1	7.5	1.00	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:20:35	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\circuit-breaker-builder\bld_output_template_circuit_breaker.md	2	7.5	1.00	discard	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:20:36	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\circuit-breaker-builder\bld_quality_gate_circuit_breaker.md	1	8.4	1.00	keep	polished formatting (whitespace cleanup)
+2026-04-17 18:20:36	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\circuit-breaker-builder\bld_quality_gate_circuit_breaker.md	2	8.4	1.00	discard	polished formatting (whitespace cleanup)
+2026-04-17 18:20:36	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\circuit-breaker-builder\bld_schema_circuit_breaker.md	1	8.6	1.00	keep	polished formatting (whitespace cleanup)
+2026-04-17 18:20:37	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\circuit-breaker-builder\bld_system_prompt_circuit_breaker.md	1	6.7	0.90	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:20:37	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\circuit-breaker-builder\bld_system_prompt_circuit_breaker.md	2	6.7	0.90	discard	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:20:37	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\circuit-breaker-builder\bld_tools_circuit_breaker.md	1	8.3	1.00	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:20:37	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\circuit-breaker-builder\bld_tools_circuit_breaker.md	2	8.3	1.00	discard	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:20:38	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\constitutional-rule-builder\bld_architecture_constitutional_rule.md	1	6.8	0.92	keep	added density_score: 0.92
+2026-04-17 18:20:38	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\constitutional-rule-builder\bld_architecture_constitutional_rule.md	2	7.0	0.92	keep	added updated: 2026-04-17
+2026-04-17 18:20:38	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\constitutional-rule-builder\bld_collaboration_constitutional_rule.md	1	6.0	0.81	keep	added density_score: 0.81
+2026-04-17 18:20:39	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\constitutional-rule-builder\bld_collaboration_constitutional_rule.md	2	6.2	0.81	keep	added updated: 2026-04-17
+2026-04-17 18:20:39	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\constitutional-rule-builder\bld_config_constitutional_rule.md	1	5.3	1.00	keep	added density_score: 1.0
+2026-04-17 18:20:39	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\constitutional-rule-builder\bld_config_constitutional_rule.md	2	5.4	1.00	keep	added updated: 2026-04-17
+2026-04-17 18:20:40	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\constitutional-rule-builder\bld_examples_constitutional_rule.md	1	5.4	0.97	keep	added density_score: 0.97
+2026-04-17 18:20:40	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\constitutional-rule-builder\bld_examples_constitutional_rule.md	2	5.5	0.97	keep	added updated: 2026-04-17
+2026-04-17 18:20:40	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\constitutional-rule-builder\bld_instruction_constitutional_rule.md	1	5.3	0.76	keep	added density_score: 0.76
+2026-04-17 18:20:41	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\constitutional-rule-builder\bld_instruction_constitutional_rule.md	2	5.4	0.76	keep	added updated: 2026-04-17
+2026-04-17 18:20:41	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\constitutional-rule-builder\bld_knowledge_card_constitutional_rule.md	1	4.9	0.87	keep	added density_score: 0.87
+2026-04-17 18:20:41	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\constitutional-rule-builder\bld_knowledge_card_constitutional_rule.md	2	5.0	0.87	keep	added updated: 2026-04-17
+2026-04-17 18:20:42	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\constitutional-rule-builder\bld_manifest_constitutional_rule.md	1	6.2	0.99	keep	added density_score: 0.99
+2026-04-17 18:20:42	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\constitutional-rule-builder\bld_manifest_constitutional_rule.md	2	6.3	0.99	keep	added updated: 2026-04-17
+2026-04-17 18:20:43	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\constitutional-rule-builder\bld_memory_constitutional_rule.md	1	5.5	0.88	keep	added density_score: 0.88
+2026-04-17 18:20:43	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\constitutional-rule-builder\bld_memory_constitutional_rule.md	2	5.7	0.88	keep	added updated: 2026-04-17
+2026-04-17 18:20:43	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\constitutional-rule-builder\bld_output_template_constitutional_rule.md	1	6.3	0.87	keep	added density_score: 0.87
+2026-04-17 18:20:44	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\constitutional-rule-builder\bld_output_template_constitutional_rule.md	2	6.5	0.87	keep	added updated: 2026-04-17
+2026-04-17 18:20:44	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\constitutional-rule-builder\bld_quality_gate_constitutional_rule.md	1	5.9	1.00	keep	added density_score: 1.0
+2026-04-17 18:20:44	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\constitutional-rule-builder\bld_quality_gate_constitutional_rule.md	2	6.0	1.00	keep	added updated: 2026-04-17
+2026-04-17 18:20:45	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\constitutional-rule-builder\bld_schema_constitutional_rule.md	1	7.0	1.00	keep	added density_score: 1.0
+2026-04-17 18:20:45	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\constitutional-rule-builder\bld_schema_constitutional_rule.md	2	7.1	1.00	keep	added updated: 2026-04-17
+2026-04-17 18:20:46	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\constitutional-rule-builder\bld_system_prompt_constitutional_rule.md	1	5.8	0.77	keep	added density_score: 0.77
+2026-04-17 18:20:46	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\constitutional-rule-builder\bld_system_prompt_constitutional_rule.md	2	5.9	0.77	keep	added updated: 2026-04-17
+2026-04-17 18:20:46	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\constitutional-rule-builder\bld_tools_constitutional_rule.md	1	6.3	1.00	keep	added density_score: 1.0
+2026-04-17 18:20:47	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\constitutional-rule-builder\bld_tools_constitutional_rule.md	2	6.5	1.00	keep	added updated: 2026-04-17
+2026-04-17 18:20:47	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\data-contract-builder\bld_architecture_data_contract.md	1	6.7	1.00	keep	added density_score: 1.0
+2026-04-17 18:20:47	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\data-contract-builder\bld_architecture_data_contract.md	2	6.8	1.00	keep	added updated: 2026-04-17
+2026-04-17 18:20:48	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\data-contract-builder\bld_collaboration_data_contract.md	1	6.3	1.00	keep	added density_score: 1.0
+2026-04-17 18:20:48	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\data-contract-builder\bld_collaboration_data_contract.md	2	6.5	1.00	keep	added updated: 2026-04-17
+2026-04-17 18:20:49	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\data-contract-builder\bld_config_data_contract.md	1	5.9	1.00	keep	added density_score: 1.0
+2026-04-17 18:20:49	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\data-contract-builder\bld_config_data_contract.md	2	6.0	1.00	keep	added updated: 2026-04-17
+2026-04-17 18:20:49	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\data-contract-builder\bld_examples_data_contract.md	1	5.0	1.00	keep	added density_score: 1.0
+2026-04-17 18:20:50	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\data-contract-builder\bld_examples_data_contract.md	2	5.1	1.00	keep	added updated: 2026-04-17
+2026-04-17 18:20:50	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\data-contract-builder\bld_instruction_data_contract.md	1	4.9	0.83	keep	added density_score: 0.83
+2026-04-17 18:20:50	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\data-contract-builder\bld_instruction_data_contract.md	2	5.0	0.83	keep	added updated: 2026-04-17
+2026-04-17 18:20:51	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\data-contract-builder\bld_knowledge_card_data_contract.md	1	6.3	1.00	keep	added density_score: 1.0
+2026-04-17 18:20:51	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\data-contract-builder\bld_knowledge_card_data_contract.md	2	6.5	1.00	keep	added updated: 2026-04-17
+2026-04-17 18:20:52	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\data-contract-builder\bld_manifest_data_contract.md	1	7.5	1.00	keep	polished formatting (whitespace cleanup)
+2026-04-17 18:20:52	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\data-contract-builder\bld_manifest_data_contract.md	2	7.5	1.00	discard	polished formatting (whitespace cleanup)
+2026-04-17 18:20:52	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\data-contract-builder\bld_memory_data_contract.md	1	5.7	1.00	keep	added density_score: 1.0
+2026-04-17 18:20:52	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\data-contract-builder\bld_memory_data_contract.md	2	5.8	1.00	keep	added updated: 2026-04-17
+2026-04-17 18:20:53	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\data-contract-builder\bld_output_template_data_contract.md	1	6.3	1.00	keep	added density_score: 1.0
+2026-04-17 18:20:53	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\data-contract-builder\bld_output_template_data_contract.md	2	6.5	1.00	keep	added updated: 2026-04-17
+2026-04-17 18:20:53	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\data-contract-builder\bld_quality_gate_data_contract.md	1	5.7	1.00	keep	added density_score: 1.0
+2026-04-17 18:20:54	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\data-contract-builder\bld_quality_gate_data_contract.md	2	5.8	1.00	keep	added updated: 2026-04-17
+2026-04-17 18:20:54	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\data-contract-builder\bld_schema_data_contract.md	1	6.7	1.00	keep	added density_score: 1.0
+2026-04-17 18:20:55	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\data-contract-builder\bld_schema_data_contract.md	2	6.8	1.00	keep	added updated: 2026-04-17
+2026-04-17 18:20:55	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\data-contract-builder\bld_system_prompt_data_contract.md	1	6.5	0.95	keep	added density_score: 0.95
+2026-04-17 18:20:55	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\data-contract-builder\bld_system_prompt_data_contract.md	2	6.5	0.95	discard	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:20:55	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\data-contract-builder\bld_tools_data_contract.md	1	6.3	1.00	keep	added density_score: 1.0
+2026-04-17 18:20:56	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\data-contract-builder\bld_tools_data_contract.md	2	6.5	1.00	keep	added updated: 2026-04-17
+2026-04-17 18:20:56	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\deployment-manifest-builder\bld_architecture_deployment_manifest.md	1	7.8	1.00	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:20:56	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\deployment-manifest-builder\bld_architecture_deployment_manifest.md	2	7.8	1.00	discard	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:20:57	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\deployment-manifest-builder\bld_collaboration_deployment_manifest.md	1	8.3	0.98	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:20:57	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\deployment-manifest-builder\bld_collaboration_deployment_manifest.md	2	8.3	0.98	discard	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:20:57	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\deployment-manifest-builder\bld_config_deployment_manifest.md	1	6.6	1.00	keep	polished formatting (whitespace cleanup)
+2026-04-17 18:20:57	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\deployment-manifest-builder\bld_config_deployment_manifest.md	2	6.6	1.00	discard	polished formatting (whitespace cleanup)
+2026-04-17 18:20:58	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\deployment-manifest-builder\bld_examples_deployment_manifest.md	1	7.6	1.00	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:20:58	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\deployment-manifest-builder\bld_examples_deployment_manifest.md	2	7.6	1.00	discard	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:20:58	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\deployment-manifest-builder\bld_instruction_deployment_manifest.md	1	7.1	0.98	keep	polished formatting (whitespace cleanup)
+2026-04-17 18:20:58	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\deployment-manifest-builder\bld_instruction_deployment_manifest.md	2	7.1	0.98	discard	polished formatting (whitespace cleanup)
+2026-04-17 18:20:59	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\deployment-manifest-builder\bld_knowledge_card_deployment_manifest.md	1	7.8	1.00	keep	polished formatting (whitespace cleanup)
+2026-04-17 18:20:59	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\deployment-manifest-builder\bld_knowledge_card_deployment_manifest.md	2	7.8	1.00	discard	polished formatting (whitespace cleanup)
+2026-04-17 18:20:59	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\deployment-manifest-builder\bld_manifest_deployment_manifest.md	1	8.4	1.00	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:20:59	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\deployment-manifest-builder\bld_manifest_deployment_manifest.md	2	8.4	1.00	discard	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:21:00	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\deployment-manifest-builder\bld_memory_deployment_manifest.md	1	7.1	1.00	keep	polished formatting (whitespace cleanup)
+2026-04-17 18:21:00	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\deployment-manifest-builder\bld_memory_deployment_manifest.md	2	7.1	1.00	discard	polished formatting (whitespace cleanup)
+2026-04-17 18:21:00	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\deployment-manifest-builder\bld_output_template_deployment_manifest.md	1	7.0	1.00	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:21:00	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\deployment-manifest-builder\bld_output_template_deployment_manifest.md	2	7.0	1.00	discard	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:21:01	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\deployment-manifest-builder\bld_quality_gate_deployment_manifest.md	1	7.5	0.99	keep	polished formatting (whitespace cleanup)
+2026-04-17 18:21:01	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\deployment-manifest-builder\bld_quality_gate_deployment_manifest.md	2	7.5	0.99	discard	polished formatting (whitespace cleanup)
+2026-04-17 18:21:01	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\deployment-manifest-builder\bld_schema_deployment_manifest.md	1	7.9	1.00	keep	tldr flagged for manual review
+2026-04-17 18:21:01	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\deployment-manifest-builder\bld_schema_deployment_manifest.md	2	7.9	1.00	discard	tldr flagged for manual review
+2026-04-17 18:21:02	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\deployment-manifest-builder\bld_system_prompt_deployment_manifest.md	1	7.5	0.87	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:21:02	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\deployment-manifest-builder\bld_system_prompt_deployment_manifest.md	2	7.5	0.87	discard	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:21:02	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\deployment-manifest-builder\bld_tools_deployment_manifest.md	1	6.3	1.00	keep	added density_score: 1.0
+2026-04-17 18:21:02	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\deployment-manifest-builder\bld_tools_deployment_manifest.md	2	6.5	1.00	keep	added updated: 2026-04-17
+2026-04-17 18:21:03	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\domain-event-builder\bld_architecture_domain_event.md	1	6.7	1.00	keep	added density_score: 1.0
+2026-04-17 18:21:03	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\domain-event-builder\bld_architecture_domain_event.md	2	6.8	1.00	keep	added updated: 2026-04-17
+2026-04-17 18:21:04	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\domain-event-builder\bld_collaboration_domain_event.md	1	6.3	1.00	keep	added density_score: 1.0
+2026-04-17 18:21:04	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\domain-event-builder\bld_collaboration_domain_event.md	2	6.5	1.00	keep	added updated: 2026-04-17
+2026-04-17 18:21:04	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\domain-event-builder\bld_config_domain_event.md	1	5.9	1.00	keep	added density_score: 1.0
+2026-04-17 18:21:05	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\domain-event-builder\bld_config_domain_event.md	2	6.0	1.00	keep	added updated: 2026-04-17
+2026-04-17 18:21:05	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\domain-event-builder\bld_examples_domain_event.md	1	5.0	1.00	keep	added density_score: 1.0
+2026-04-17 18:21:06	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\domain-event-builder\bld_examples_domain_event.md	2	5.1	1.00	keep	added updated: 2026-04-17
+2026-04-17 18:21:06	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\domain-event-builder\bld_instruction_domain_event.md	1	4.9	0.81	keep	added density_score: 0.81
+2026-04-17 18:21:06	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\domain-event-builder\bld_instruction_domain_event.md	2	5.0	0.81	keep	added updated: 2026-04-17
+2026-04-17 18:21:07	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\domain-event-builder\bld_knowledge_card_domain_event.md	1	6.3	1.00	keep	added density_score: 1.0
+2026-04-17 18:21:07	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\domain-event-builder\bld_knowledge_card_domain_event.md	2	6.5	1.00	keep	added updated: 2026-04-17
+2026-04-17 18:21:08	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\domain-event-builder\bld_manifest_domain_event.md	1	7.5	1.00	keep	polished formatting (whitespace cleanup)
+2026-04-17 18:21:08	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\domain-event-builder\bld_manifest_domain_event.md	2	7.5	1.00	discard	polished formatting (whitespace cleanup)
+2026-04-17 18:21:08	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\domain-event-builder\bld_memory_domain_event.md	1	5.7	0.99	keep	added density_score: 0.99
+2026-04-17 18:21:09	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\domain-event-builder\bld_memory_domain_event.md	2	5.8	0.99	keep	added updated: 2026-04-17
+2026-04-17 18:21:09	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\domain-event-builder\bld_output_template_domain_event.md	1	6.0	1.00	keep	added density_score: 1.0
+2026-04-17 18:21:09	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\domain-event-builder\bld_output_template_domain_event.md	2	6.2	1.00	keep	added updated: 2026-04-17
+2026-04-17 18:21:10	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\domain-event-builder\bld_quality_gate_domain_event.md	1	5.7	1.00	keep	added density_score: 1.0
+2026-04-17 18:21:10	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\domain-event-builder\bld_quality_gate_domain_event.md	2	5.8	1.00	keep	added updated: 2026-04-17
+2026-04-17 18:21:10	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\domain-event-builder\bld_schema_domain_event.md	1	6.7	1.00	keep	added density_score: 1.0
+2026-04-17 18:21:11	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\domain-event-builder\bld_schema_domain_event.md	2	6.8	1.00	keep	added updated: 2026-04-17
+2026-04-17 18:21:11	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\domain-event-builder\bld_system_prompt_domain_event.md	1	6.5	0.89	keep	added density_score: 0.89
+2026-04-17 18:21:11	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\domain-event-builder\bld_system_prompt_domain_event.md	2	6.5	0.89	discard	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:21:12	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\domain-event-builder\bld_tools_domain_event.md	1	6.3	1.00	keep	added density_score: 1.0
+2026-04-17 18:21:12	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\domain-event-builder\bld_tools_domain_event.md	2	6.5	1.00	keep	added updated: 2026-04-17
+2026-04-17 18:21:12	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\domain-vocabulary-builder\bld_architecture_domain_vocabulary.md	1	7.0	1.00	keep	added density_score: 1.0
+2026-04-17 18:21:13	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\domain-vocabulary-builder\bld_architecture_domain_vocabulary.md	2	7.1	1.00	keep	added updated: 2026-04-17
+2026-04-17 18:21:13	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\domain-vocabulary-builder\bld_collaboration_domain_vocabulary.md	1	6.3	1.00	keep	added density_score: 1.0
+2026-04-17 18:21:14	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\domain-vocabulary-builder\bld_collaboration_domain_vocabulary.md	2	6.5	1.00	keep	added updated: 2026-04-17
+2026-04-17 18:21:14	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\domain-vocabulary-builder\bld_config_domain_vocabulary.md	1	5.9	1.00	keep	added density_score: 1.0
+2026-04-17 18:21:14	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\domain-vocabulary-builder\bld_config_domain_vocabulary.md	2	6.0	1.00	keep	added updated: 2026-04-17
+2026-04-17 18:21:15	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\domain-vocabulary-builder\bld_examples_domain_vocabulary.md	1	5.0	1.00	keep	added density_score: 1.0
+2026-04-17 18:21:15	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\domain-vocabulary-builder\bld_examples_domain_vocabulary.md	2	5.1	1.00	keep	added updated: 2026-04-17
+2026-04-17 18:21:16	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\domain-vocabulary-builder\bld_instruction_domain_vocabulary.md	1	4.9	0.82	keep	added density_score: 0.82
+2026-04-17 18:21:16	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\domain-vocabulary-builder\bld_instruction_domain_vocabulary.md	2	5.0	0.82	keep	added updated: 2026-04-17
+2026-04-17 18:21:16	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\domain-vocabulary-builder\bld_knowledge_card_domain_vocabulary.md	1	6.3	1.00	keep	added density_score: 1.0
+2026-04-17 18:21:17	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\domain-vocabulary-builder\bld_knowledge_card_domain_vocabulary.md	2	6.5	1.00	keep	added updated: 2026-04-17
+2026-04-17 18:21:17	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\domain-vocabulary-builder\bld_manifest_domain_vocabulary.md	1	7.5	0.99	keep	polished formatting (whitespace cleanup)
+2026-04-17 18:21:17	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\domain-vocabulary-builder\bld_manifest_domain_vocabulary.md	2	7.5	0.99	discard	polished formatting (whitespace cleanup)
+2026-04-17 18:21:18	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\domain-vocabulary-builder\bld_memory_domain_vocabulary.md	1	5.7	0.95	keep	added density_score: 0.95
+2026-04-17 18:21:18	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\domain-vocabulary-builder\bld_memory_domain_vocabulary.md	2	5.8	0.95	keep	added updated: 2026-04-17
+2026-04-17 18:21:19	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\domain-vocabulary-builder\bld_output_template_domain_vocabulary.md	1	6.3	1.00	keep	added density_score: 1.0
+2026-04-17 18:21:19	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\domain-vocabulary-builder\bld_output_template_domain_vocabulary.md	2	6.5	1.00	keep	added updated: 2026-04-17
+2026-04-17 18:21:19	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\domain-vocabulary-builder\bld_quality_gate_domain_vocabulary.md	1	5.7	1.00	keep	added density_score: 1.0
+2026-04-17 18:21:20	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\domain-vocabulary-builder\bld_quality_gate_domain_vocabulary.md	2	5.8	1.00	keep	added updated: 2026-04-17
+2026-04-17 18:21:20	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\domain-vocabulary-builder\bld_schema_domain_vocabulary.md	1	6.7	1.00	keep	added density_score: 1.0
+2026-04-17 18:21:21	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\domain-vocabulary-builder\bld_schema_domain_vocabulary.md	2	6.8	1.00	keep	added updated: 2026-04-17
+2026-04-17 18:21:21	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\domain-vocabulary-builder\bld_system_prompt_domain_vocabulary.md	1	6.5	0.91	keep	added density_score: 0.91
+2026-04-17 18:21:21	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\domain-vocabulary-builder\bld_system_prompt_domain_vocabulary.md	2	6.5	0.91	discard	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:21:21	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\domain-vocabulary-builder\bld_tools_domain_vocabulary.md	1	6.3	1.00	keep	added density_score: 1.0
+2026-04-17 18:21:22	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\domain-vocabulary-builder\bld_tools_domain_vocabulary.md	2	6.5	1.00	keep	added updated: 2026-04-17
+2026-04-17 18:21:22	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\drift-detector-builder\bld_architecture_drift_detector.md	1	8.3	1.00	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:21:22	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\drift-detector-builder\bld_architecture_drift_detector.md	2	8.3	1.00	discard	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:21:23	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\drift-detector-builder\bld_collaboration_drift_detector.md	1	8.6	1.00	keep	polished formatting (whitespace cleanup)
+2026-04-17 18:21:23	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\drift-detector-builder\bld_config_drift_detector.md	1	7.8	1.00	keep	polished formatting (whitespace cleanup)
+2026-04-17 18:21:23	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\drift-detector-builder\bld_config_drift_detector.md	2	7.8	1.00	discard	polished formatting (whitespace cleanup)
+2026-04-17 18:21:24	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\drift-detector-builder\bld_examples_drift_detector.md	1	8.6	1.00	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:21:24	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\drift-detector-builder\bld_instruction_drift_detector.md	1	7.1	0.85	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:21:24	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\drift-detector-builder\bld_instruction_drift_detector.md	2	7.1	0.85	discard	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:21:25	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\drift-detector-builder\bld_knowledge_card_drift_detector.md	1	8.4	1.00	keep	polished formatting (whitespace cleanup)
+2026-04-17 18:21:25	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\drift-detector-builder\bld_knowledge_card_drift_detector.md	2	8.4	1.00	discard	polished formatting (whitespace cleanup)
+2026-04-17 18:21:25	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\drift-detector-builder\bld_manifest_drift_detector.md	1	8.8	1.00	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:21:26	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\drift-detector-builder\bld_memory_drift_detector.md	1	8.0	1.00	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:21:26	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\drift-detector-builder\bld_memory_drift_detector.md	2	8.0	1.00	discard	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:21:26	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\drift-detector-builder\bld_output_template_drift_detector.md	1	7.8	1.00	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:21:26	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\drift-detector-builder\bld_output_template_drift_detector.md	2	7.8	1.00	discard	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:21:27	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\drift-detector-builder\bld_quality_gate_drift_detector.md	1	8.4	1.00	keep	polished formatting (whitespace cleanup)
+2026-04-17 18:21:27	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\drift-detector-builder\bld_quality_gate_drift_detector.md	2	8.4	1.00	discard	polished formatting (whitespace cleanup)
+2026-04-17 18:21:27	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\drift-detector-builder\bld_schema_drift_detector.md	1	8.3	1.00	keep	polished formatting (whitespace cleanup)
+2026-04-17 18:21:27	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\drift-detector-builder\bld_schema_drift_detector.md	2	8.3	1.00	discard	polished formatting (whitespace cleanup)
+2026-04-17 18:21:28	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\drift-detector-builder\bld_system_prompt_drift_detector.md	1	7.9	0.97	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:21:28	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\drift-detector-builder\bld_system_prompt_drift_detector.md	2	7.9	0.97	discard	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:21:28	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\drift-detector-builder\bld_tools_drift_detector.md	1	8.2	1.00	keep	polished formatting (whitespace cleanup)
+2026-04-17 18:21:28	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\drift-detector-builder\bld_tools_drift_detector.md	2	8.2	1.00	discard	polished formatting (whitespace cleanup)
+2026-04-17 18:21:29	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\episodic-memory-builder\bld_architecture_episodic_memory.md	1	7.9	1.00	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:21:29	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\episodic-memory-builder\bld_architecture_episodic_memory.md	2	7.9	1.00	discard	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:21:29	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\episodic-memory-builder\bld_collaboration_episodic_memory.md	1	8.2	0.99	keep	polished formatting (whitespace cleanup)
+2026-04-17 18:21:30	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\episodic-memory-builder\bld_collaboration_episodic_memory.md	2	8.2	0.99	discard	polished formatting (whitespace cleanup)
+2026-04-17 18:21:30	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\episodic-memory-builder\bld_config_episodic_memory.md	1	6.8	1.00	keep	polished formatting (whitespace cleanup)
+2026-04-17 18:21:30	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\episodic-memory-builder\bld_config_episodic_memory.md	2	6.8	1.00	discard	polished formatting (whitespace cleanup)
+2026-04-17 18:21:31	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\episodic-memory-builder\bld_examples_episodic_memory.md	1	7.5	1.00	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:21:31	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\episodic-memory-builder\bld_examples_episodic_memory.md	2	7.5	1.00	discard	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:21:31	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\episodic-memory-builder\bld_instruction_episodic_memory.md	1	7.1	0.84	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:21:31	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\episodic-memory-builder\bld_instruction_episodic_memory.md	2	7.1	0.84	discard	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:21:32	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\episodic-memory-builder\bld_knowledge_card_episodic_memory.md	1	8.4	1.00	keep	polished formatting (whitespace cleanup)
+2026-04-17 18:21:32	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\episodic-memory-builder\bld_knowledge_card_episodic_memory.md	2	8.4	1.00	discard	polished formatting (whitespace cleanup)
+2026-04-17 18:21:32	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\episodic-memory-builder\bld_manifest_episodic_memory.md	1	8.3	1.00	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:21:32	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\episodic-memory-builder\bld_manifest_episodic_memory.md	2	8.3	1.00	discard	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:21:33	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\episodic-memory-builder\bld_memory_episodic_memory.md	1	7.4	1.00	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:21:33	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\episodic-memory-builder\bld_memory_episodic_memory.md	2	7.4	1.00	discard	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:21:33	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\episodic-memory-builder\bld_output_template_episodic_memory.md	1	7.8	1.00	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:21:33	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\episodic-memory-builder\bld_output_template_episodic_memory.md	2	7.8	1.00	discard	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:21:34	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\episodic-memory-builder\bld_quality_gate_episodic_memory.md	1	7.5	1.00	keep	polished formatting (whitespace cleanup)
+2026-04-17 18:21:34	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\episodic-memory-builder\bld_quality_gate_episodic_memory.md	2	7.5	1.00	discard	polished formatting (whitespace cleanup)
+2026-04-17 18:21:34	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\episodic-memory-builder\bld_schema_episodic_memory.md	1	8.3	1.00	keep	polished formatting (whitespace cleanup)
+2026-04-17 18:21:34	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\episodic-memory-builder\bld_schema_episodic_memory.md	2	8.3	1.00	discard	polished formatting (whitespace cleanup)
+2026-04-17 18:21:35	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\episodic-memory-builder\bld_system_prompt_episodic_memory.md	1	6.7	0.94	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:21:35	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\episodic-memory-builder\bld_system_prompt_episodic_memory.md	2	6.7	0.94	discard	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:21:35	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\episodic-memory-builder\bld_tools_episodic_memory.md	1	6.8	1.00	keep	polished formatting (whitespace cleanup)
+2026-04-17 18:21:36	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\episodic-memory-builder\bld_tools_episodic_memory.md	2	6.8	1.00	discard	polished formatting (whitespace cleanup)
+2026-04-17 18:21:36	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\event-stream-builder\bld_architecture_event_stream.md	1	7.1	1.00	keep	added density_score: 1.0
+2026-04-17 18:21:36	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\event-stream-builder\bld_architecture_event_stream.md	2	7.2	1.00	keep	added updated: 2026-04-17
+2026-04-17 18:21:37	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\event-stream-builder\bld_collaboration_event_stream.md	1	5.5	0.82	keep	added density_score: 0.82
+2026-04-17 18:21:37	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\event-stream-builder\bld_collaboration_event_stream.md	2	5.7	0.82	keep	added updated: 2026-04-17
+2026-04-17 18:21:38	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\event-stream-builder\bld_config_event_stream.md	1	5.3	1.00	keep	added density_score: 1.0
+2026-04-17 18:21:38	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\event-stream-builder\bld_config_event_stream.md	2	5.4	1.00	keep	added updated: 2026-04-17
+2026-04-17 18:21:39	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\event-stream-builder\bld_examples_event_stream.md	1	5.0	1.00	keep	added density_score: 1.0
+2026-04-17 18:21:39	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\event-stream-builder\bld_examples_event_stream.md	2	5.1	1.00	keep	added updated: 2026-04-17
+2026-04-17 18:21:39	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\event-stream-builder\bld_instruction_event_stream.md	1	5.3	0.83	keep	added density_score: 0.83
+2026-04-17 18:21:40	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\event-stream-builder\bld_instruction_event_stream.md	2	5.4	0.83	keep	added updated: 2026-04-17
+2026-04-17 18:21:40	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\event-stream-builder\bld_knowledge_card_event_stream.md	1	5.1	1.00	keep	added density_score: 1.0
+2026-04-17 18:21:41	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\event-stream-builder\bld_knowledge_card_event_stream.md	2	5.3	1.00	keep	added updated: 2026-04-17
+2026-04-17 18:21:41	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\event-stream-builder\bld_manifest_event_stream.md	1	6.2	1.00	keep	added density_score: 1.0
+2026-04-17 18:21:42	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\event-stream-builder\bld_manifest_event_stream.md	2	6.3	1.00	keep	added updated: 2026-04-17
+2026-04-17 18:21:42	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\event-stream-builder\bld_memory_event_stream.md	1	5.7	0.97	keep	added density_score: 0.97
+2026-04-17 18:21:42	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\event-stream-builder\bld_memory_event_stream.md	2	5.8	0.97	keep	added updated: 2026-04-17
+2026-04-17 18:21:43	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\event-stream-builder\bld_output_template_event_stream.md	1	6.6	1.00	keep	added density_score: 1.0
+2026-04-17 18:21:43	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\event-stream-builder\bld_output_template_event_stream.md	2	6.7	1.00	keep	added updated: 2026-04-17
+2026-04-17 18:21:44	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\event-stream-builder\bld_quality_gate_event_stream.md	1	5.9	1.00	keep	added density_score: 1.0
+2026-04-17 18:21:44	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\event-stream-builder\bld_quality_gate_event_stream.md	2	6.0	1.00	keep	added updated: 2026-04-17
+2026-04-17 18:21:45	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\event-stream-builder\bld_schema_event_stream.md	1	7.0	1.00	keep	added density_score: 1.0
+2026-04-17 18:21:45	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\event-stream-builder\bld_schema_event_stream.md	2	7.1	1.00	keep	added updated: 2026-04-17
+2026-04-17 18:21:46	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\event-stream-builder\bld_system_prompt_event_stream.md	1	5.3	0.81	keep	added density_score: 0.81
+2026-04-17 18:21:46	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\event-stream-builder\bld_system_prompt_event_stream.md	2	5.4	0.81	keep	added updated: 2026-04-17
+2026-04-17 18:21:47	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\event-stream-builder\bld_tools_event_stream.md	1	6.3	1.00	keep	added density_score: 1.0
+2026-04-17 18:21:47	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\event-stream-builder\bld_tools_event_stream.md	2	6.5	1.00	keep	added updated: 2026-04-17
+2026-04-17 18:21:47	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\lineage-record-builder\bld_architecture_lineage_record.md	1	7.0	1.00	keep	polished formatting (whitespace cleanup)
+2026-04-17 18:21:47	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\lineage-record-builder\bld_architecture_lineage_record.md	2	7.0	1.00	discard	polished formatting (whitespace cleanup)
+2026-04-17 18:21:48	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\lineage-record-builder\bld_collaboration_lineage_record.md	1	7.1	1.00	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:21:48	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\lineage-record-builder\bld_collaboration_lineage_record.md	2	7.1	1.00	discard	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:21:48	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\lineage-record-builder\bld_config_lineage_record.md	1	5.4	1.00	keep	polished formatting (whitespace cleanup)
+2026-04-17 18:21:49	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\lineage-record-builder\bld_config_lineage_record.md	2	5.4	1.00	discard	polished formatting (whitespace cleanup)
+2026-04-17 18:21:49	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\lineage-record-builder\bld_examples_lineage_record.md	1	7.2	1.00	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:21:49	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\lineage-record-builder\bld_examples_lineage_record.md	2	7.2	1.00	discard	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:21:50	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\lineage-record-builder\bld_instruction_lineage_record.md	1	6.6	0.99	keep	polished formatting (whitespace cleanup)
+2026-04-17 18:21:50	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\lineage-record-builder\bld_instruction_lineage_record.md	2	6.6	0.99	discard	polished formatting (whitespace cleanup)
+2026-04-17 18:21:50	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\lineage-record-builder\bld_knowledge_card_lineage_record.md	1	7.8	0.97	keep	polished formatting (whitespace cleanup)
+2026-04-17 18:21:50	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\lineage-record-builder\bld_knowledge_card_lineage_record.md	2	7.8	0.97	discard	polished formatting (whitespace cleanup)
+2026-04-17 18:21:51	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\lineage-record-builder\bld_manifest_lineage_record.md	1	7.9	1.00	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:21:51	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\lineage-record-builder\bld_manifest_lineage_record.md	2	7.9	1.00	discard	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:21:51	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\lineage-record-builder\bld_memory_lineage_record.md	1	6.6	1.00	keep	polished formatting (whitespace cleanup)
+2026-04-17 18:21:51	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\lineage-record-builder\bld_memory_lineage_record.md	2	6.6	1.00	discard	polished formatting (whitespace cleanup)
+2026-04-17 18:21:52	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\lineage-record-builder\bld_output_template_lineage_record.md	1	7.2	1.00	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:21:52	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\lineage-record-builder\bld_output_template_lineage_record.md	2	7.2	1.00	discard	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:21:52	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\lineage-record-builder\bld_quality_gate_lineage_record.md	1	7.0	1.00	keep	polished formatting (whitespace cleanup)
+2026-04-17 18:21:52	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\lineage-record-builder\bld_quality_gate_lineage_record.md	2	7.0	1.00	discard	polished formatting (whitespace cleanup)
+2026-04-17 18:21:53	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\lineage-record-builder\bld_schema_lineage_record.md	1	7.4	1.00	keep	tldr flagged for manual review
+2026-04-17 18:21:53	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\lineage-record-builder\bld_schema_lineage_record.md	2	7.9	1.00	keep	tldr flagged for manual review
+2026-04-17 18:21:54	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\lineage-record-builder\bld_system_prompt_lineage_record.md	1	6.2	0.85	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:21:54	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\lineage-record-builder\bld_system_prompt_lineage_record.md	2	6.2	0.85	discard	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:21:54	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\lineage-record-builder\bld_tools_lineage_record.md	1	6.3	1.00	keep	added density_score: 1.0
+2026-04-17 18:21:55	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\lineage-record-builder\bld_tools_lineage_record.md	2	6.5	1.00	keep	added updated: 2026-04-17
+2026-04-17 18:21:55	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\preference-dataset-builder\bld_architecture_preference_dataset.md	1	8.3	1.00	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:21:55	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\preference-dataset-builder\bld_architecture_preference_dataset.md	2	8.3	1.00	discard	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:21:56	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\preference-dataset-builder\bld_collaboration_preference_dataset.md	1	8.6	1.00	keep	polished formatting (whitespace cleanup)
+2026-04-17 18:21:56	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\preference-dataset-builder\bld_config_preference_dataset.md	1	7.8	1.00	keep	polished formatting (whitespace cleanup)
+2026-04-17 18:21:56	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\preference-dataset-builder\bld_config_preference_dataset.md	2	7.8	1.00	discard	polished formatting (whitespace cleanup)
+2026-04-17 18:21:57	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\preference-dataset-builder\bld_examples_preference_dataset.md	1	9.1	1.00	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:21:57	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\preference-dataset-builder\bld_instruction_preference_dataset.md	1	7.1	0.87	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:21:57	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\preference-dataset-builder\bld_instruction_preference_dataset.md	2	7.1	0.87	discard	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:21:58	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\preference-dataset-builder\bld_knowledge_card_preference_dataset.md	1	8.4	1.00	keep	polished formatting (whitespace cleanup)
+2026-04-17 18:21:58	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\preference-dataset-builder\bld_knowledge_card_preference_dataset.md	2	8.4	1.00	discard	polished formatting (whitespace cleanup)
+2026-04-17 18:21:58	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\preference-dataset-builder\bld_manifest_preference_dataset.md	1	8.8	1.00	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:21:59	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\preference-dataset-builder\bld_memory_preference_dataset.md	1	8.7	1.00	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:21:59	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\preference-dataset-builder\bld_output_template_preference_dataset.md	1	7.8	1.00	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:21:59	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\preference-dataset-builder\bld_output_template_preference_dataset.md	2	7.8	1.00	discard	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:22:00	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\preference-dataset-builder\bld_quality_gate_preference_dataset.md	1	8.4	1.00	keep	polished formatting (whitespace cleanup)
+2026-04-17 18:22:00	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\preference-dataset-builder\bld_quality_gate_preference_dataset.md	2	8.4	1.00	discard	polished formatting (whitespace cleanup)
+2026-04-17 18:22:00	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\preference-dataset-builder\bld_schema_preference_dataset.md	1	9.1	1.00	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:22:01	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\preference-dataset-builder\bld_system_prompt_preference_dataset.md	1	8.2	0.99	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:22:01	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\preference-dataset-builder\bld_system_prompt_preference_dataset.md	2	8.2	0.99	discard	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:22:01	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\preference-dataset-builder\bld_tools_preference_dataset.md	1	7.8	1.00	keep	polished formatting (whitespace cleanup)
+2026-04-17 18:22:02	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\preference-dataset-builder\bld_tools_preference_dataset.md	2	7.8	1.00	discard	polished formatting (whitespace cleanup)
+2026-04-17 18:22:02	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\process-manager-builder\bld_architecture_process_manager.md	1	6.8	0.99	keep	added density_score: 0.99
+2026-04-17 18:22:03	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\process-manager-builder\bld_architecture_process_manager.md	2	7.0	0.99	keep	added updated: 2026-04-17
+2026-04-17 18:22:03	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\process-manager-builder\bld_collaboration_process_manager.md	1	5.5	0.81	keep	added density_score: 0.81
+2026-04-17 18:22:03	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\process-manager-builder\bld_collaboration_process_manager.md	2	5.7	0.81	keep	added updated: 2026-04-17
+2026-04-17 18:22:04	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\process-manager-builder\bld_config_process_manager.md	1	5.3	1.00	keep	added density_score: 1.0
+2026-04-17 18:22:04	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\process-manager-builder\bld_config_process_manager.md	2	5.4	1.00	keep	added updated: 2026-04-17
+2026-04-17 18:22:05	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\process-manager-builder\bld_examples_process_manager.md	1	5.0	1.00	keep	added density_score: 1.0
+2026-04-17 18:22:05	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\process-manager-builder\bld_examples_process_manager.md	2	5.1	1.00	keep	added updated: 2026-04-17
+2026-04-17 18:22:06	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\process-manager-builder\bld_instruction_process_manager.md	1	5.3	0.80	keep	added density_score: 0.8
+2026-04-17 18:22:06	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\process-manager-builder\bld_instruction_process_manager.md	2	5.4	0.80	keep	added updated: 2026-04-17
+2026-04-17 18:22:07	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\process-manager-builder\bld_knowledge_card_process_manager.md	1	5.1	0.96	keep	added density_score: 0.96
+2026-04-17 18:22:07	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\process-manager-builder\bld_knowledge_card_process_manager.md	2	5.3	0.96	keep	added updated: 2026-04-17
+2026-04-17 18:22:08	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\process-manager-builder\bld_manifest_process_manager.md	1	6.2	1.00	keep	added density_score: 1.0
+2026-04-17 18:22:08	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\process-manager-builder\bld_manifest_process_manager.md	2	6.3	1.00	keep	added updated: 2026-04-17
+2026-04-17 18:22:09	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\process-manager-builder\bld_memory_process_manager.md	1	4.9	0.95	keep	added density_score: 0.95
+2026-04-17 18:22:09	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\process-manager-builder\bld_memory_process_manager.md	2	5.0	0.95	keep	added updated: 2026-04-17
+2026-04-17 18:22:10	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\process-manager-builder\bld_output_template_process_manager.md	1	7.2	1.00	keep	added density_score: 1.0
+2026-04-17 18:22:10	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\process-manager-builder\bld_output_template_process_manager.md	2	7.4	1.00	keep	added updated: 2026-04-17
+2026-04-17 18:22:10	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\process-manager-builder\bld_quality_gate_process_manager.md	1	5.9	1.00	keep	added density_score: 1.0
+2026-04-17 18:22:11	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\process-manager-builder\bld_quality_gate_process_manager.md	2	6.0	1.00	keep	added updated: 2026-04-17
+2026-04-17 18:22:11	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\process-manager-builder\bld_schema_process_manager.md	1	7.0	1.00	keep	added density_score: 1.0
+2026-04-17 18:22:12	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\process-manager-builder\bld_schema_process_manager.md	2	7.1	1.00	keep	added updated: 2026-04-17
+2026-04-17 18:22:12	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\process-manager-builder\bld_system_prompt_process_manager.md	1	5.8	0.83	keep	added density_score: 0.83
+2026-04-17 18:22:13	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\process-manager-builder\bld_system_prompt_process_manager.md	2	5.9	0.83	keep	added updated: 2026-04-17
+2026-04-17 18:22:13	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\process-manager-builder\bld_tools_process_manager.md	1	6.3	1.00	keep	added density_score: 1.0
+2026-04-17 18:22:14	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\process-manager-builder\bld_tools_process_manager.md	2	6.5	1.00	keep	added updated: 2026-04-17
+2026-04-17 18:22:14	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\prospective-memory-builder\bld_architecture_prospective_memory.md	1	7.0	1.00	keep	polished formatting (whitespace cleanup)
+2026-04-17 18:22:14	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\prospective-memory-builder\bld_architecture_prospective_memory.md	2	7.0	1.00	discard	polished formatting (whitespace cleanup)
+2026-04-17 18:22:15	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\prospective-memory-builder\bld_collaboration_prospective_memory.md	1	7.2	1.00	keep	polished formatting (whitespace cleanup)
+2026-04-17 18:22:15	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\prospective-memory-builder\bld_collaboration_prospective_memory.md	2	7.2	1.00	discard	polished formatting (whitespace cleanup)
+2026-04-17 18:22:16	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\prospective-memory-builder\bld_config_prospective_memory.md	1	6.8	1.00	keep	polished formatting (whitespace cleanup)
+2026-04-17 18:22:16	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\prospective-memory-builder\bld_config_prospective_memory.md	2	6.8	1.00	discard	polished formatting (whitespace cleanup)
+2026-04-17 18:22:16	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\prospective-memory-builder\bld_examples_prospective_memory.md	1	6.6	1.00	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:22:16	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\prospective-memory-builder\bld_examples_prospective_memory.md	2	6.6	1.00	discard	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:22:17	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\prospective-memory-builder\bld_instruction_prospective_memory.md	1	6.6	0.81	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:22:17	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\prospective-memory-builder\bld_instruction_prospective_memory.md	2	6.6	0.81	discard	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:22:17	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\prospective-memory-builder\bld_knowledge_card_prospective_memory.md	1	7.8	0.99	keep	polished formatting (whitespace cleanup)
+2026-04-17 18:22:17	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\prospective-memory-builder\bld_knowledge_card_prospective_memory.md	2	7.8	0.99	discard	polished formatting (whitespace cleanup)
+2026-04-17 18:22:18	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\prospective-memory-builder\bld_manifest_prospective_memory.md	1	7.6	0.98	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:22:18	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\prospective-memory-builder\bld_manifest_prospective_memory.md	2	7.6	0.98	discard	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:22:19	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\prospective-memory-builder\bld_memory_prospective_memory.md	1	7.4	0.95	keep	polished formatting (whitespace cleanup)
+2026-04-17 18:22:19	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\prospective-memory-builder\bld_memory_prospective_memory.md	2	7.4	0.95	discard	polished formatting (whitespace cleanup)
+2026-04-17 18:22:19	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\prospective-memory-builder\bld_output_template_prospective_memory.md	1	7.2	1.00	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:22:19	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\prospective-memory-builder\bld_output_template_prospective_memory.md	2	7.2	1.00	discard	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:22:20	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\prospective-memory-builder\bld_quality_gate_prospective_memory.md	1	7.5	1.00	keep	polished formatting (whitespace cleanup)
+2026-04-17 18:22:20	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\prospective-memory-builder\bld_quality_gate_prospective_memory.md	2	7.5	1.00	discard	polished formatting (whitespace cleanup)
+2026-04-17 18:22:20	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\prospective-memory-builder\bld_schema_prospective_memory.md	1	7.6	1.00	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:22:20	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\prospective-memory-builder\bld_schema_prospective_memory.md	2	7.6	1.00	discard	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:22:21	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\prospective-memory-builder\bld_system_prompt_prospective_memory.md	1	6.7	0.88	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:22:21	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\prospective-memory-builder\bld_system_prompt_prospective_memory.md	2	6.7	0.88	discard	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:22:21	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\prospective-memory-builder\bld_tools_prospective_memory.md	1	6.8	1.00	keep	polished formatting (whitespace cleanup)
+2026-04-17 18:22:22	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\prospective-memory-builder\bld_tools_prospective_memory.md	2	6.8	1.00	discard	polished formatting (whitespace cleanup)
+2026-04-17 18:22:22	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\saga-builder\bld_architecture_saga.md	1	7.6	1.00	keep	polished formatting (whitespace cleanup)
+2026-04-17 18:22:22	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\saga-builder\bld_architecture_saga.md	2	7.6	1.00	discard	polished formatting (whitespace cleanup)
+2026-04-17 18:22:23	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\saga-builder\bld_collaboration_saga.md	1	7.1	0.99	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:22:23	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\saga-builder\bld_collaboration_saga.md	2	7.1	0.99	discard	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:22:23	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\saga-builder\bld_config_saga.md	1	5.4	1.00	keep	polished formatting (whitespace cleanup)
+2026-04-17 18:22:23	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\saga-builder\bld_config_saga.md	2	5.4	1.00	discard	polished formatting (whitespace cleanup)
+2026-04-17 18:22:24	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\saga-builder\bld_examples_saga.md	1	7.4	1.00	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:22:24	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\saga-builder\bld_examples_saga.md	2	7.4	1.00	discard	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:22:24	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\saga-builder\bld_instruction_saga.md	1	6.6	0.96	keep	polished formatting (whitespace cleanup)
+2026-04-17 18:22:24	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\saga-builder\bld_instruction_saga.md	2	6.6	0.96	discard	polished formatting (whitespace cleanup)
+2026-04-17 18:22:25	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\saga-builder\bld_knowledge_card_saga.md	1	7.8	0.96	keep	polished formatting (whitespace cleanup)
+2026-04-17 18:22:25	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\saga-builder\bld_knowledge_card_saga.md	2	7.8	0.96	discard	polished formatting (whitespace cleanup)
+2026-04-17 18:22:26	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\saga-builder\bld_manifest_saga.md	1	8.3	0.99	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:22:26	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\saga-builder\bld_manifest_saga.md	2	8.3	0.99	discard	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:22:26	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\saga-builder\bld_memory_saga.md	1	6.6	1.00	keep	polished formatting (whitespace cleanup)
+2026-04-17 18:22:26	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\saga-builder\bld_memory_saga.md	2	6.6	1.00	discard	polished formatting (whitespace cleanup)
+2026-04-17 18:22:27	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\saga-builder\bld_output_template_saga.md	1	7.0	1.00	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:22:27	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\saga-builder\bld_output_template_saga.md	2	7.0	1.00	discard	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:22:27	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\saga-builder\bld_quality_gate_saga.md	1	7.0	0.99	keep	polished formatting (whitespace cleanup)
+2026-04-17 18:22:27	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\saga-builder\bld_quality_gate_saga.md	2	7.0	0.99	discard	polished formatting (whitespace cleanup)
+2026-04-17 18:22:28	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\saga-builder\bld_schema_saga.md	1	7.4	1.00	keep	tldr flagged for manual review
+2026-04-17 18:22:28	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\saga-builder\bld_schema_saga.md	2	7.4	1.00	discard	tldr flagged for manual review
+2026-04-17 18:22:29	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\saga-builder\bld_system_prompt_saga.md	1	6.7	0.84	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:22:29	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\saga-builder\bld_system_prompt_saga.md	2	6.7	0.84	discard	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:22:29	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\saga-builder\bld_tools_saga.md	1	6.3	1.00	keep	added density_score: 1.0
+2026-04-17 18:22:30	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\saga-builder\bld_tools_saga.md	2	6.5	1.00	keep	added updated: 2026-04-17
+2026-04-17 18:22:30	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\slo-definition-builder\bld_architecture_slo_definition.md	1	7.0	1.00	keep	polished formatting (whitespace cleanup)
+2026-04-17 18:22:30	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\slo-definition-builder\bld_architecture_slo_definition.md	2	7.0	1.00	discard	polished formatting (whitespace cleanup)
+2026-04-17 18:22:31	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\slo-definition-builder\bld_collaboration_slo_definition.md	1	7.1	1.00	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:22:31	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\slo-definition-builder\bld_collaboration_slo_definition.md	2	7.1	1.00	discard	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:22:31	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\slo-definition-builder\bld_config_slo_definition.md	1	5.4	1.00	keep	polished formatting (whitespace cleanup)
+2026-04-17 18:22:31	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\slo-definition-builder\bld_config_slo_definition.md	2	5.4	1.00	discard	polished formatting (whitespace cleanup)
+2026-04-17 18:22:32	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\slo-definition-builder\bld_examples_slo_definition.md	1	7.0	1.00	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:22:32	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\slo-definition-builder\bld_examples_slo_definition.md	2	7.0	1.00	discard	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:22:32	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\slo-definition-builder\bld_instruction_slo_definition.md	1	6.6	0.99	keep	polished formatting (whitespace cleanup)
+2026-04-17 18:22:33	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\slo-definition-builder\bld_instruction_slo_definition.md	2	6.6	0.99	discard	polished formatting (whitespace cleanup)
+2026-04-17 18:22:33	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\slo-definition-builder\bld_knowledge_card_slo_definition.md	1	7.2	1.00	keep	polished formatting (whitespace cleanup)
+2026-04-17 18:22:33	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\slo-definition-builder\bld_knowledge_card_slo_definition.md	2	7.2	1.00	discard	polished formatting (whitespace cleanup)
+2026-04-17 18:22:34	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\slo-definition-builder\bld_manifest_slo_definition.md	1	8.3	1.00	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:22:34	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\slo-definition-builder\bld_manifest_slo_definition.md	2	8.3	1.00	discard	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:22:34	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\slo-definition-builder\bld_memory_slo_definition.md	1	7.1	1.00	keep	polished formatting (whitespace cleanup)
+2026-04-17 18:22:34	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\slo-definition-builder\bld_memory_slo_definition.md	2	7.1	1.00	discard	polished formatting (whitespace cleanup)
+2026-04-17 18:22:35	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\slo-definition-builder\bld_output_template_slo_definition.md	1	7.0	1.00	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:22:35	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\slo-definition-builder\bld_output_template_slo_definition.md	2	7.0	1.00	discard	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:22:35	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\slo-definition-builder\bld_quality_gate_slo_definition.md	1	7.0	1.00	keep	polished formatting (whitespace cleanup)
+2026-04-17 18:22:36	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\slo-definition-builder\bld_quality_gate_slo_definition.md	2	7.0	1.00	discard	polished formatting (whitespace cleanup)
+2026-04-17 18:22:36	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\slo-definition-builder\bld_schema_slo_definition.md	1	7.9	1.00	keep	tldr flagged for manual review
+2026-04-17 18:22:36	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\slo-definition-builder\bld_schema_slo_definition.md	2	7.9	1.00	discard	tldr flagged for manual review
+2026-04-17 18:22:37	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\slo-definition-builder\bld_system_prompt_slo_definition.md	1	6.7	0.85	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:22:37	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\slo-definition-builder\bld_system_prompt_slo_definition.md	2	6.7	0.85	discard	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:22:37	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\slo-definition-builder\bld_tools_slo_definition.md	1	6.3	1.00	keep	added density_score: 1.0
+2026-04-17 18:22:38	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\slo-definition-builder\bld_tools_slo_definition.md	2	6.5	1.00	keep	added updated: 2026-04-17
+2026-04-17 18:22:38	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\value-object-builder\bld_architecture_value_object.md	1	6.3	1.00	keep	added density_score: 1.0
+2026-04-17 18:22:39	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\value-object-builder\bld_architecture_value_object.md	2	6.5	1.00	keep	added updated: 2026-04-17
+2026-04-17 18:22:39	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\value-object-builder\bld_collaboration_value_object.md	1	5.5	0.81	keep	added density_score: 0.81
+2026-04-17 18:22:40	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\value-object-builder\bld_collaboration_value_object.md	2	5.7	0.81	keep	added updated: 2026-04-17
+2026-04-17 18:22:40	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\value-object-builder\bld_config_value_object.md	1	5.3	1.00	keep	added density_score: 1.0
+2026-04-17 18:22:41	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\value-object-builder\bld_config_value_object.md	2	5.4	1.00	keep	added updated: 2026-04-17
+2026-04-17 18:22:41	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\value-object-builder\bld_examples_value_object.md	1	5.0	1.00	keep	added density_score: 1.0
+2026-04-17 18:22:42	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\value-object-builder\bld_examples_value_object.md	2	5.1	1.00	keep	added updated: 2026-04-17
+2026-04-17 18:22:42	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\value-object-builder\bld_instruction_value_object.md	1	5.3	0.83	keep	added density_score: 0.83
+2026-04-17 18:22:43	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\value-object-builder\bld_instruction_value_object.md	2	5.4	0.83	keep	added updated: 2026-04-17
+2026-04-17 18:22:43	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\value-object-builder\bld_knowledge_card_value_object.md	1	5.1	0.96	keep	added density_score: 0.96
+2026-04-17 18:22:44	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\value-object-builder\bld_knowledge_card_value_object.md	2	5.3	0.96	keep	added updated: 2026-04-17
+2026-04-17 18:22:44	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\value-object-builder\bld_manifest_value_object.md	1	6.2	1.00	keep	added density_score: 1.0
+2026-04-17 18:22:45	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\value-object-builder\bld_manifest_value_object.md	2	6.3	1.00	keep	added updated: 2026-04-17
+2026-04-17 18:22:45	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\value-object-builder\bld_memory_value_object.md	1	4.9	0.92	keep	added density_score: 0.92
+2026-04-17 18:22:46	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\value-object-builder\bld_memory_value_object.md	2	5.0	0.92	keep	added updated: 2026-04-17
+2026-04-17 18:22:46	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\value-object-builder\bld_output_template_value_object.md	1	6.0	1.00	keep	added density_score: 1.0
+2026-04-17 18:22:47	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\value-object-builder\bld_output_template_value_object.md	2	6.2	1.00	keep	added updated: 2026-04-17
+2026-04-17 18:22:47	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\value-object-builder\bld_quality_gate_value_object.md	1	5.9	1.00	keep	added density_score: 1.0
+2026-04-17 18:22:48	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\value-object-builder\bld_quality_gate_value_object.md	2	6.0	1.00	keep	added updated: 2026-04-17
+2026-04-17 18:22:48	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\value-object-builder\bld_schema_value_object.md	1	6.5	1.00	keep	added density_score: 1.0
+2026-04-17 18:22:49	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\value-object-builder\bld_schema_value_object.md	2	6.6	1.00	keep	added updated: 2026-04-17
+2026-04-17 18:22:49	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\value-object-builder\bld_system_prompt_value_object.md	1	5.3	0.77	keep	added density_score: 0.77
+2026-04-17 18:22:50	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\value-object-builder\bld_system_prompt_value_object.md	2	5.4	0.77	keep	added updated: 2026-04-17
+2026-04-17 18:22:50	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\value-object-builder\bld_tools_value_object.md	1	6.3	1.00	keep	added density_score: 1.0
+2026-04-17 18:22:51	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\value-object-builder\bld_tools_value_object.md	2	6.5	1.00	keep	added updated: 2026-04-17
+2026-04-17 18:22:51	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\working-memory-builder\bld_architecture_working_memory.md	1	8.3	1.00	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:22:52	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\working-memory-builder\bld_architecture_working_memory.md	2	8.3	1.00	discard	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:22:52	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\working-memory-builder\bld_collaboration_working_memory.md	1	8.2	1.00	keep	polished formatting (whitespace cleanup)
+2026-04-17 18:22:52	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\working-memory-builder\bld_collaboration_working_memory.md	2	8.2	1.00	discard	polished formatting (whitespace cleanup)
+2026-04-17 18:22:53	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\working-memory-builder\bld_config_working_memory.md	1	6.8	1.00	keep	polished formatting (whitespace cleanup)
+2026-04-17 18:22:53	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\working-memory-builder\bld_config_working_memory.md	2	6.8	1.00	discard	polished formatting (whitespace cleanup)
+2026-04-17 18:22:53	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\working-memory-builder\bld_examples_working_memory.md	1	8.2	1.00	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:22:54	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\working-memory-builder\bld_examples_working_memory.md	2	8.2	1.00	discard	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:22:54	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\working-memory-builder\bld_instruction_working_memory.md	1	7.1	0.81	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:22:54	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\working-memory-builder\bld_instruction_working_memory.md	2	7.1	0.81	discard	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:22:55	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\working-memory-builder\bld_knowledge_card_working_memory.md	1	8.4	1.00	keep	polished formatting (whitespace cleanup)
+2026-04-17 18:22:55	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\working-memory-builder\bld_knowledge_card_working_memory.md	2	8.4	1.00	discard	polished formatting (whitespace cleanup)
+2026-04-17 18:22:55	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\working-memory-builder\bld_manifest_working_memory.md	1	8.3	1.00	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:22:55	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\working-memory-builder\bld_manifest_working_memory.md	2	8.3	1.00	discard	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:22:56	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\working-memory-builder\bld_memory_working_memory.md	1	7.8	0.98	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:22:56	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\working-memory-builder\bld_memory_working_memory.md	2	7.8	0.98	discard	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:22:57	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\working-memory-builder\bld_output_template_working_memory.md	1	7.5	1.00	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:22:57	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\working-memory-builder\bld_output_template_working_memory.md	2	7.5	1.00	discard	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:22:57	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\working-memory-builder\bld_quality_gate_working_memory.md	1	7.8	1.00	keep	polished formatting (whitespace cleanup)
+2026-04-17 18:22:57	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\working-memory-builder\bld_quality_gate_working_memory.md	2	7.8	1.00	discard	polished formatting (whitespace cleanup)
+2026-04-17 18:22:58	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\working-memory-builder\bld_schema_working_memory.md	1	8.9	1.00	keep	polished formatting (whitespace cleanup)
+2026-04-17 18:22:58	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\working-memory-builder\bld_system_prompt_working_memory.md	1	7.9	0.95	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:22:58	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\working-memory-builder\bld_system_prompt_working_memory.md	2	7.9	0.95	discard	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:22:59	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\working-memory-builder\bld_tools_working_memory.md	1	7.6	1.00	keep	polished formatting (whitespace cleanup)
+2026-04-17 18:22:59	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\working-memory-builder\bld_tools_working_memory.md	2	7.6	1.00	discard	polished formatting (whitespace cleanup)
+2026-04-17 18:23:00	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P01_knowledge\library\kind\kc_aggregate_root.md	1	7.9	0.92	keep	added density_score: 0.92
+2026-04-17 18:23:00	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P01_knowledge\library\kind\kc_aggregate_root.md	2	8.0	0.92	keep	added updated: 2026-04-17
+2026-04-17 18:23:01	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P01_knowledge\library\kind\kc_alert_rule.md	1	8.8	1.00	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:23:01	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P01_knowledge\library\kind\kc_backpressure_policy.md	1	8.8	1.00	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:23:02	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P01_knowledge\library\kind\kc_bounded_context.md	1	8.8	0.97	keep	polished formatting (whitespace cleanup)
+2026-04-17 18:23:02	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P01_knowledge\library\kind\kc_canary_config.md	1	7.8	1.00	keep	added density_score: 1.0
+2026-04-17 18:23:03	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P01_knowledge\library\kind\kc_canary_config.md	2	7.9	1.00	keep	added updated: 2026-04-17
+2026-04-17 18:23:03	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P01_knowledge\library\kind\kc_circuit_breaker.md	1	8.8	1.00	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:23:04	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P01_knowledge\library\kind\kc_constitutional_rule.md	1	8.0	0.93	keep	added density_score: 0.93
+2026-04-17 18:23:04	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P01_knowledge\library\kind\kc_constitutional_rule.md	2	8.2	0.93	keep	added updated: 2026-04-17
+2026-04-17 18:23:05	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P01_knowledge\library\kind\kc_data_contract.md	1	8.8	1.00	keep	polished formatting (whitespace cleanup)
+2026-04-17 18:23:05	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P01_knowledge\library\kind\kc_deployment_manifest.md	1	8.0	1.00	keep	added density_score: 1.0
+2026-04-17 18:23:06	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P01_knowledge\library\kind\kc_deployment_manifest.md	2	8.2	1.00	keep	added updated: 2026-04-17
+2026-04-17 18:23:06	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P01_knowledge\library\kind\kc_domain_event.md	1	8.8	0.97	keep	polished formatting (whitespace cleanup)
+2026-04-17 18:23:07	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P01_knowledge\library\kind\kc_domain_vocabulary.md	1	8.8	0.96	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:23:08	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P01_knowledge\library\kind\kc_drift_detector.md	1	8.8	1.00	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:23:08	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P01_knowledge\library\kind\kc_episodic_memory.md	1	8.8	1.00	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:23:09	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P01_knowledge\library\kind\kc_event_stream.md	1	7.9	0.97	keep	added density_score: 0.97
+2026-04-17 18:23:09	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P01_knowledge\library\kind\kc_event_stream.md	2	8.0	0.97	keep	added updated: 2026-04-17
+2026-04-17 18:23:10	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P01_knowledge\library\kind\kc_lineage_record.md	1	7.8	0.97	keep	added density_score: 0.97
+2026-04-17 18:23:10	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P01_knowledge\library\kind\kc_lineage_record.md	2	7.9	0.97	keep	added updated: 2026-04-17
+2026-04-17 18:23:11	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P01_knowledge\library\kind\kc_preference_dataset.md	1	8.8	1.00	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:23:11	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P01_knowledge\library\kind\kc_process_manager.md	1	7.9	0.95	keep	added density_score: 0.95
+2026-04-17 18:23:12	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P01_knowledge\library\kind\kc_process_manager.md	2	8.0	0.95	keep	added updated: 2026-04-17
+2026-04-17 18:23:12	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P01_knowledge\library\kind\kc_prospective_memory.md	1	8.8	1.00	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:23:13	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P01_knowledge\library\kind\kc_saga.md	1	7.8	0.99	keep	added density_score: 0.99
+2026-04-17 18:23:13	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P01_knowledge\library\kind\kc_saga.md	2	7.9	0.99	keep	added updated: 2026-04-17
+2026-04-17 18:23:14	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P01_knowledge\library\kind\kc_slo_definition.md	1	7.8	1.00	keep	added density_score: 1.0
+2026-04-17 18:23:15	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P01_knowledge\library\kind\kc_slo_definition.md	2	7.9	1.00	keep	added updated: 2026-04-17
+2026-04-17 18:23:15	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P01_knowledge\library\kind\kc_value_object.md	1	7.9	0.93	keep	added density_score: 0.93
+2026-04-17 18:23:16	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P01_knowledge\library\kind\kc_value_object.md	2	8.0	0.93	keep	added updated: 2026-04-17
+2026-04-17 18:23:16	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P01_knowledge\library\kind\kc_working_memory.md	1	8.8	1.00	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:23:16	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P01_knowledge\templates\tpl_context_doc.md	1	0.0	0.00	crash	compile fail after: added density_score: 1.0
+2026-04-17 18:23:16	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P01_knowledge\templates\tpl_context_doc.md	2	0.0	0.00	crash	compile fail after: added density_score: 1.0
+2026-04-17 18:23:16	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P01_knowledge\templates\tpl_knowledge_card.md	1	0.0	0.00	crash	compile fail after: polished formatting (whitespace cleanup)
+2026-04-17 18:23:16	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P01_knowledge\templates\tpl_knowledge_card.md	2	0.0	0.00	crash	compile fail after: polished formatting (whitespace cleanup)
+2026-04-17 18:23:17	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P02_model\templates\tpl_agent.md	1	8.3	1.00	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:23:17	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P02_model\templates\tpl_agent.md	2	8.3	1.00	discard	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:23:17	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P02_model\templates\tpl_mental_model.md	1	0.0	0.00	crash	compile fail after: added density_score: 1.0
+2026-04-17 18:23:17	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P02_model\templates\tpl_mental_model.md	2	0.0	0.00	crash	compile fail after: added density_score: 1.0
+2026-04-17 18:23:17	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P03_prompt\templates\tpl_prompt_template.md	1	0.0	0.00	crash	compile fail after: polished formatting (whitespace cleanup)
+2026-04-17 18:23:17	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P03_prompt\templates\tpl_prompt_template.md	2	0.0	0.00	crash	compile fail after: polished formatting (whitespace cleanup)
+2026-04-17 18:23:18	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P03_prompt\templates\tpl_system_prompt.md	1	6.2	1.00	keep	added updated: 2026-04-17
+2026-04-17 18:23:18	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P03_prompt\templates\tpl_system_prompt.md	2	6.2	1.00	discard	tldr flagged for manual review
+2026-04-17 18:23:18	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P04_tools\templates\tpl_api_client.md	1	0.0	0.00	crash	compile fail after: added density_score: 1.0
+2026-04-17 18:23:18	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P04_tools\templates\tpl_api_client.md	2	0.0	0.00	crash	compile fail after: added density_score: 1.0
+2026-04-17 18:23:18	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P05_output\templates\tpl_formatter.md	1	0.0	0.00	crash	compile fail after: polished formatting (whitespace cleanup)
+2026-04-17 18:23:18	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P05_output\templates\tpl_formatter.md	2	0.0	0.00	crash	compile fail after: polished formatting (whitespace cleanup)
+2026-04-17 18:23:18	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P05_output\templates\tpl_parser.md	1	0.0	0.00	crash	compile fail after: polished formatting (whitespace cleanup)
+2026-04-17 18:23:18	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P05_output\templates\tpl_parser.md	2	0.0	0.00	crash	compile fail after: polished formatting (whitespace cleanup)
+2026-04-17 18:23:18	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P06_schema\templates\tpl_input_schema.md	1	0.0	0.00	crash	compile fail after: polished formatting (whitespace cleanup)
+2026-04-17 18:23:18	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P06_schema\templates\tpl_input_schema.md	2	0.0	0.00	crash	compile fail after: polished formatting (whitespace cleanup)
+2026-04-17 18:23:18	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P06_schema\templates\tpl_interface.md	1	0.0	0.00	crash	compile fail after: polished formatting (whitespace cleanup)
+2026-04-17 18:23:19	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P06_schema\templates\tpl_interface.md	2	0.0	0.00	crash	compile fail after: polished formatting (whitespace cleanup)
+2026-04-17 18:23:19	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P06_schema\templates\tpl_type_def.md	1	0.0	0.00	crash	compile fail after: added density_score: 1.0
+2026-04-17 18:23:19	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P06_schema\templates\tpl_type_def.md	2	0.0	0.00	crash	compile fail after: added density_score: 1.0
+2026-04-17 18:23:19	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P06_schema\templates\tpl_validator.md	1	0.0	0.00	crash	compile fail after: polished formatting (whitespace cleanup)
+2026-04-17 18:23:19	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P06_schema\templates\tpl_validator.md	2	0.0	0.00	crash	compile fail after: polished formatting (whitespace cleanup)
+2026-04-17 18:23:19	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P07_evals\templates\tpl_benchmark.md	1	0.0	0.00	crash	compile fail after: added density_score: 1.0
+2026-04-17 18:23:19	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P07_evals\templates\tpl_benchmark.md	2	0.0	0.00	crash	compile fail after: added density_score: 1.0
+2026-04-17 18:23:19	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P07_evals\templates\tpl_e2e_eval.md	1	6.7	1.00	keep	polished formatting (whitespace cleanup)
+2026-04-17 18:23:20	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P07_evals\templates\tpl_e2e_eval.md	2	6.7	1.00	discard	polished formatting (whitespace cleanup)
+2026-04-17 18:23:20	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P07_evals\templates\tpl_golden_test.md	1	0.0	0.00	crash	compile fail after: polished formatting (whitespace cleanup)
+2026-04-17 18:23:20	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P07_evals\templates\tpl_golden_test.md	2	0.0	0.00	crash	compile fail after: polished formatting (whitespace cleanup)
+2026-04-17 18:23:20	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P07_evals\templates\tpl_scoring_rubric.md	1	0.0	0.00	crash	compile fail after: added density_score: 1.0
+2026-04-17 18:23:20	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P07_evals\templates\tpl_scoring_rubric.md	2	0.0	0.00	crash	compile fail after: added density_score: 1.0
+2026-04-17 18:23:20	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P07_evals\templates\tpl_unit_eval.md	1	0.0	0.00	crash	compile fail after: polished formatting (whitespace cleanup)
+2026-04-17 18:23:20	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P07_evals\templates\tpl_unit_eval.md	2	0.0	0.00	crash	compile fail after: polished formatting (whitespace cleanup)
+2026-04-17 18:23:20	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P08_architecture\templates\tpl_naming_rule.md	1	0.0	0.00	crash	compile fail after: polished formatting (whitespace cleanup)
+2026-04-17 18:23:20	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P08_architecture\templates\tpl_naming_rule.md	2	0.0	0.00	crash	compile fail after: polished formatting (whitespace cleanup)
+2026-04-17 18:23:20	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P08_architecture\templates\tpl_pattern.md	1	0.0	0.00	crash	compile fail after: polished formatting (whitespace cleanup)
+2026-04-17 18:23:20	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P08_architecture\templates\tpl_pattern.md	2	0.0	0.00	crash	compile fail after: polished formatting (whitespace cleanup)
+2026-04-17 18:23:20	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P09_config\templates\tpl_cost_budget.md	1	0.0	0.00	crash	compile fail after: polished formatting (whitespace cleanup)
+2026-04-17 18:23:20	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P09_config\templates\tpl_cost_budget.md	2	0.0	0.00	crash	compile fail after: polished formatting (whitespace cleanup)
+2026-04-17 18:23:20	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P09_config\templates\tpl_env_config.md	1	0.0	0.00	crash	compile fail after: polished formatting (whitespace cleanup)
+2026-04-17 18:23:20	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P09_config\templates\tpl_env_config.md	2	0.0	0.00	crash	compile fail after: polished formatting (whitespace cleanup)
+2026-04-17 18:23:21	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P09_config\templates\tpl_experiment_config.md	1	0.0	0.00	crash	compile fail after: polished formatting (whitespace cleanup)
+2026-04-17 18:23:21	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P09_config\templates\tpl_experiment_config.md	2	0.0	0.00	crash	compile fail after: polished formatting (whitespace cleanup)
+2026-04-17 18:23:21	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P09_config\templates\tpl_feature_flag.md	1	0.0	0.00	crash	compile fail after: polished formatting (whitespace cleanup)
+2026-04-17 18:23:21	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P09_config\templates\tpl_feature_flag.md	2	0.0	0.00	crash	compile fail after: polished formatting (whitespace cleanup)
+2026-04-17 18:23:21	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P09_config\templates\tpl_runtime_rule.md	1	0.0	0.00	crash	compile fail after: added density_score: 1.0
+2026-04-17 18:23:21	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P09_config\templates\tpl_runtime_rule.md	2	0.0	0.00	crash	compile fail after: added density_score: 1.0
+2026-04-17 18:23:21	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P10_memory\templates\tpl_brain_index.md	1	0.0	0.00	crash	compile fail after: added density_score: 1.0
+2026-04-17 18:23:21	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P10_memory\templates\tpl_brain_index.md	2	0.0	0.00	crash	compile fail after: added density_score: 1.0
+2026-04-17 18:23:21	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P10_memory\templates\tpl_learning_record.md	1	0.0	0.00	crash	compile fail after: polished formatting (whitespace cleanup)
+2026-04-17 18:23:21	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P10_memory\templates\tpl_learning_record.md	2	0.0	0.00	crash	compile fail after: polished formatting (whitespace cleanup)
+2026-04-17 18:23:22	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P10_memory\templates\tpl_session_state.md	1	7.1	1.00	keep	added density_score: 1.0
+2026-04-17 18:23:22	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P10_memory\templates\tpl_session_state.md	2	7.1	1.00	discard	polished formatting (whitespace cleanup)
+2026-04-17 18:23:22	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P12_orchestration\templates\tpl_dag.md	1	0.0	0.00	crash	compile fail after: added density_score: 1.0
+2026-04-17 18:23:22	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P12_orchestration\templates\tpl_dag.md	2	0.0	0.00	crash	compile fail after: added density_score: 1.0
+2026-04-17 18:23:22	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P12_orchestration\templates\tpl_dispatch_rule.md	1	0.0	0.00	crash	compile fail after: added density_score: 1.0
+2026-04-17 18:23:22	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P12_orchestration\templates\tpl_dispatch_rule.md	2	0.0	0.00	crash	compile fail after: added density_score: 1.0
+2026-04-17 18:23:22	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P12_orchestration\templates\tpl_handoff.md	1	0.0	0.00	crash	compile fail after: analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:23:22	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P12_orchestration\templates\tpl_handoff.md	2	0.0	0.00	crash	compile fail after: analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:23:22	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P12_orchestration\templates\tpl_signal.md	1	0.0	0.00	crash	compile fail after: added density_score: 1.0
+2026-04-17 18:23:22	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P12_orchestration\templates\tpl_signal.md	2	0.0	0.00	crash	compile fail after: added density_score: 1.0
+2026-04-17 18:23:22	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P12_orchestration\templates\tpl_spawn_config.md	1	0.0	0.00	crash	compile fail after: added density_score: 1.0
+2026-04-17 18:23:22	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P12_orchestration\templates\tpl_spawn_config.md	2	0.0	0.00	crash	compile fail after: added density_score: 1.0
+2026-04-17 18:23:22	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P12_orchestration\templates\tpl_workflow.md	1	0.0	0.00	crash	compile fail after: polished formatting (whitespace cleanup)
+2026-04-17 18:23:23	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P12_orchestration\templates\tpl_workflow.md	2	0.0	0.00	crash	compile fail after: polished formatting (whitespace cleanup)
+2026-04-17 18:23:23	C:\Users\CEX\Documents\GitHub\cex\N01_intelligence\P01_knowledge\kc_kind_gap_analysis.md	1	8.2	1.00	keep	added density_score: 1.0
+2026-04-17 18:23:24	C:\Users\CEX\Documents\GitHub\cex\N01_intelligence\P01_knowledge\kc_kind_gap_analysis.md	2	8.3	1.00	keep	added updated: 2026-04-17
+2026-04-17 18:23:24	C:\Users\CEX\Documents\GitHub\cex\N03_engineering\P04_tools\ex_api_client_bling.md	1	7.9	1.00	keep	added density_score: 1.0
+2026-04-17 18:23:25	C:\Users\CEX\Documents\GitHub\cex\N03_engineering\P04_tools\ex_api_client_bling.md	2	8.0	1.00	keep	added updated: 2026-04-17
+2026-04-17 18:23:25	C:\Users\CEX\Documents\GitHub\cex\N03_engineering\P04_tools\ex_api_client_meli.md	1	7.9	1.00	keep	added density_score: 1.0
+2026-04-17 18:23:26	C:\Users\CEX\Documents\GitHub\cex\N03_engineering\P04_tools\ex_api_client_meli.md	2	8.0	1.00	keep	added updated: 2026-04-17
+2026-04-17 18:23:26	C:\Users\CEX\Documents\GitHub\cex\N03_engineering\P04_tools\ex_api_client_shopify.md	1	7.9	1.00	keep	added density_score: 1.0
+2026-04-17 18:23:27	C:\Users\CEX\Documents\GitHub\cex\N03_engineering\P04_tools\ex_api_client_shopify.md	2	8.0	1.00	keep	added updated: 2026-04-17
+2026-04-17 18:23:27	C:\Users\CEX\Documents\GitHub\cex\N03_engineering\P04_tools\ex_browser_tool_marketplace_scrap.md	1	7.9	1.00	keep	added density_score: 1.0
+2026-04-17 18:23:28	C:\Users\CEX\Documents\GitHub\cex\N03_engineering\P04_tools\ex_browser_tool_marketplace_scrap.md	2	8.0	1.00	keep	added updated: 2026-04-17
+2026-04-17 18:23:28	C:\Users\CEX\Documents\GitHub\cex\N03_engineering\P04_tools\ex_integration_guide_bling.md	1	8.2	1.00	keep	added density_score: 1.0
+2026-04-17 18:23:29	C:\Users\CEX\Documents\GitHub\cex\N03_engineering\P04_tools\ex_integration_guide_bling.md	2	8.3	1.00	keep	added updated: 2026-04-17
+2026-04-17 18:23:30	C:\Users\CEX\Documents\GitHub\cex\N03_engineering\P04_tools\ex_integration_guide_meli.md	1	8.2	1.00	keep	added density_score: 1.0
+2026-04-17 18:23:30	C:\Users\CEX\Documents\GitHub\cex\N03_engineering\P04_tools\ex_integration_guide_meli.md	2	8.3	1.00	keep	added updated: 2026-04-17
+2026-04-17 18:23:31	C:\Users\CEX\Documents\GitHub\cex\N03_engineering\P04_tools\ex_integration_guide_shopify.md	1	8.2	1.00	keep	added density_score: 1.0
+2026-04-17 18:23:31	C:\Users\CEX\Documents\GitHub\cex\N03_engineering\P04_tools\ex_integration_guide_shopify.md	2	8.3	1.00	keep	added updated: 2026-04-17
+2026-04-17 18:23:32	C:\Users\CEX\Documents\GitHub\cex\N03_engineering\P04_tools\ex_notifier_webhook.md	1	7.9	1.00	keep	added density_score: 1.0
+2026-04-17 18:23:32	C:\Users\CEX\Documents\GitHub\cex\N03_engineering\P04_tools\ex_notifier_webhook.md	2	8.0	1.00	keep	added updated: 2026-04-17
+2026-04-17 18:23:33	C:\Users\CEX\Documents\GitHub\cex\N03_engineering\P04_tools\ex_oauth_app_config_bling.md	1	8.2	1.00	keep	added density_score: 1.0
+2026-04-17 18:23:33	C:\Users\CEX\Documents\GitHub\cex\N03_engineering\P04_tools\ex_oauth_app_config_bling.md	2	8.3	1.00	keep	added updated: 2026-04-17
+2026-04-17 18:23:34	C:\Users\CEX\Documents\GitHub\cex\N03_engineering\P04_tools\ex_oauth_app_config_meli.md	1	8.2	1.00	keep	added density_score: 1.0
+2026-04-17 18:23:34	C:\Users\CEX\Documents\GitHub\cex\N03_engineering\P04_tools\ex_oauth_app_config_meli.md	2	8.3	1.00	keep	added updated: 2026-04-17
+2026-04-17 18:23:35	C:\Users\CEX\Documents\GitHub\cex\N03_engineering\P04_tools\ex_oauth_app_config_shopify.md	1	8.2	1.00	keep	added density_score: 1.0
+2026-04-17 18:23:35	C:\Users\CEX\Documents\GitHub\cex\N03_engineering\P04_tools\ex_oauth_app_config_shopify.md	2	8.3	1.00	keep	added updated: 2026-04-17
+2026-04-17 18:23:36	C:\Users\CEX\Documents\GitHub\cex\N03_engineering\P04_tools\ex_research_pipeline_marketplace_scrap.md	1	7.9	1.00	keep	added density_score: 1.0
+2026-04-17 18:23:37	C:\Users\CEX\Documents\GitHub\cex\N03_engineering\P04_tools\ex_research_pipeline_marketplace_scrap.md	2	8.0	1.00	keep	added updated: 2026-04-17
+2026-04-17 18:23:37	C:\Users\CEX\Documents\GitHub\cex\N03_engineering\P04_tools\ex_webhook_bling.md	1	7.9	1.00	keep	added density_score: 1.0
+2026-04-17 18:23:38	C:\Users\CEX\Documents\GitHub\cex\N03_engineering\P04_tools\ex_webhook_bling.md	2	8.0	1.00	keep	added updated: 2026-04-17
+2026-04-17 18:23:38	C:\Users\CEX\Documents\GitHub\cex\N03_engineering\P04_tools\ex_webhook_manager.md	1	7.9	1.00	keep	added density_score: 1.0
+2026-04-17 18:23:39	C:\Users\CEX\Documents\GitHub\cex\N03_engineering\P04_tools\ex_webhook_manager.md	2	8.0	1.00	keep	added updated: 2026-04-17
+2026-04-17 18:23:39	C:\Users\CEX\Documents\GitHub\cex\N03_engineering\P04_tools\ex_webhook_shopify.md	1	7.9	1.00	keep	added density_score: 1.0
+2026-04-17 18:23:40	C:\Users\CEX\Documents\GitHub\cex\N03_engineering\P04_tools\ex_webhook_shopify.md	2	8.0	1.00	keep	added updated: 2026-04-17
+2026-04-17 18:23:40	C:\Users\CEX\Documents\GitHub\cex\N03_engineering\P05_output\ex_landing_page_admin_dashboard.md	1	7.9	1.00	keep	added density_score: 1.0
+2026-04-17 18:23:41	C:\Users\CEX\Documents\GitHub\cex\N03_engineering\P05_output\ex_landing_page_admin_dashboard.md	2	8.0	1.00	keep	added updated: 2026-04-17
+2026-04-17 18:23:41	C:\Users\CEX\Documents\GitHub\cex\N03_engineering\P06_schema\ex_interface_supabase_tables.md	1	7.9	1.00	keep	added density_score: 1.0
+2026-04-17 18:23:42	C:\Users\CEX\Documents\GitHub\cex\N03_engineering\P06_schema\ex_interface_supabase_tables.md	2	8.0	1.00	keep	added updated: 2026-04-17
+2026-04-17 18:23:43	C:\Users\CEX\Documents\GitHub\cex\N03_engineering\P06_schema\ex_validator_inventory_invariants.md	1	7.9	0.99	keep	added density_score: 0.99
+2026-04-17 18:23:43	C:\Users\CEX\Documents\GitHub\cex\N03_engineering\P06_schema\ex_validator_inventory_invariants.md	2	8.0	0.99	keep	added updated: 2026-04-17
+2026-04-17 18:23:44	C:\Users\CEX\Documents\GitHub\cex\N03_engineering\P07_evals\kind_gap_audit_m1.md	1	8.0	1.00	keep	added density_score: 1.0
+2026-04-17 18:23:44	C:\Users\CEX\Documents\GitHub\cex\N03_engineering\P07_evals\kind_gap_audit_m1.md	2	8.2	1.00	keep	added updated: 2026-04-17
+2026-04-17 18:23:45	C:\Users\CEX\Documents\GitHub\cex\N03_engineering\P08_architecture\ex_component_map_admin_dashboard.md	1	7.9	1.00	keep	added density_score: 1.0
+2026-04-17 18:23:45	C:\Users\CEX\Documents\GitHub\cex\N03_engineering\P08_architecture\ex_component_map_admin_dashboard.md	2	8.0	1.00	keep	added updated: 2026-04-17
+2026-04-17 18:23:46	C:\Users\CEX\Documents\GitHub\cex\N03_engineering\P09_config\ex_db_connector_supabase.md	1	7.9	1.00	keep	added density_score: 1.0
+2026-04-17 18:23:46	C:\Users\CEX\Documents\GitHub\cex\N03_engineering\P09_config\ex_db_connector_supabase.md	2	8.0	1.00	keep	added updated: 2026-04-17
+2026-04-17 18:23:47	C:\Users\CEX\Documents\GitHub\cex\N03_engineering\P09_config\ex_supabase_data_layer.md	1	7.9	1.00	keep	added density_score: 1.0
+2026-04-17 18:23:47	C:\Users\CEX\Documents\GitHub\cex\N03_engineering\P09_config\ex_supabase_data_layer.md	2	8.0	1.00	keep	added updated: 2026-04-17
+2026-04-17 18:23:48	C:\Users\CEX\Documents\GitHub\cex\N03_engineering\P12_orchestration\ex_dag_multi_marketplace_sync.md	1	7.9	1.00	keep	added density_score: 1.0
+2026-04-17 18:23:49	C:\Users\CEX\Documents\GitHub\cex\N03_engineering\P12_orchestration\ex_dag_multi_marketplace_sync.md	2	8.0	1.00	keep	added updated: 2026-04-17
+2026-04-17 18:23:49	C:\Users\CEX\Documents\GitHub\cex\N03_engineering\P12_orchestration\ex_dispatch_rule_multi_marketplace.md	1	7.9	1.00	keep	added density_score: 1.0
+2026-04-17 18:23:50	C:\Users\CEX\Documents\GitHub\cex\N03_engineering\P12_orchestration\ex_dispatch_rule_multi_marketplace.md	2	8.0	1.00	keep	added updated: 2026-04-17
+2026-04-17 18:23:50	C:\Users\CEX\Documents\GitHub\cex\N03_engineering\P12_orchestration\ex_workflow_inventory_reconcile.md	1	7.9	1.00	keep	added density_score: 1.0
+2026-04-17 18:23:51	C:\Users\CEX\Documents\GitHub\cex\N03_engineering\P12_orchestration\ex_workflow_inventory_reconcile.md	2	8.0	1.00	keep	added updated: 2026-04-17
+2026-04-17 18:23:51	C:\Users\CEX\Documents\GitHub\cex\N03_engineering\P12_orchestration\ex_workflow_multi_marketplace_sync.md	1	7.9	1.00	keep	added density_score: 1.0
+2026-04-17 18:23:52	C:\Users\CEX\Documents\GitHub\cex\N03_engineering\P12_orchestration\ex_workflow_multi_marketplace_sync.md	2	8.0	1.00	keep	added updated: 2026-04-17
+2026-04-17 18:23:52	C:\Users\CEX\Documents\GitHub\cex\N07_admin\P01_knowledge\kc_kind_gap_synthesis.md	1	8.8	1.00	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:23:53	C:\Users\CEX\Documents\GitHub\cex\_docs\specs\spec_mission_100pct_coverage.md	1	8.3	1.00	keep	added density_score: 1.0
+2026-04-17 18:23:54	C:\Users\CEX\Documents\GitHub\cex\_docs\specs\spec_mission_100pct_coverage.md	2	8.4	1.00	keep	added updated: 2026-04-17
+2026-04-17 18:23:54	C:\Users\CEX\Documents\GitHub\cex\_docs\specs\spec_multi_runtime_features.md	1	7.5	1.00	keep	added density_score: 1.0
+2026-04-17 18:23:55	C:\Users\CEX\Documents\GitHub\cex\_docs\specs\spec_multi_runtime_features.md	2	7.6	1.00	keep	added updated: 2026-04-17
+2026-04-17 18:23:55	C:\Users\CEX\Documents\GitHub\cex\_docs\specs\spec_nucleus_self_assembly.md	1	9.1	1.00	keep	added updated: 2026-04-17
+2026-04-17 18:23:56	C:\Users\CEX\Documents\GitHub\cex\_docs\specs\spec_structural_alignment_v1.md	1	8.6	1.00	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:23:56	C:\Users\CEX\Documents\GitHub\cex\_docs\specs\spec_structural_alignment_v2.md	1	9.1	1.00	keep	added updated: 2026-04-17
+2026-04-17 18:23:57	C:\Users\CEX\Documents\GitHub\cex\_docs\specs\spec_vertical_densification.md	1	9.1	0.99	keep	added updated: 2026-04-17
+2026-04-17 18:23:58	C:\Users\CEX\Documents\GitHub\cex\_reports\ops\type_hint_retrofit_w7_20260415_2140.md	1	6.8	1.00	keep	added density_score: 1.0
+2026-04-17 18:23:58	C:\Users\CEX\Documents\GitHub\cex\_reports\ops\type_hint_retrofit_w7_20260415_2140.md	2	6.8	1.00	discard	tldr flagged for manual review
+2026-04-17 18:23:58	C:\Users\CEX\Documents\GitHub\cex\.cex\runtime\out\gemma_grid_n02.md	1	2.6	0.97	discard	tldr flagged for manual review
+2026-04-17 18:23:58	C:\Users\CEX\Documents\GitHub\cex\.cex\runtime\out\gemma_grid_n02.md	2	2.6	0.97	discard	tldr flagged for manual review
+2026-04-17 18:23:58	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P01_knowledge\library\kind\kc_fintech_vertical.md	1	4.0	1.00	discard	added density_score: 1.0
+2026-04-17 18:23:58	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P01_knowledge\library\kind\kc_fintech_vertical.md	2	4.0	1.00	discard	added density_score: 1.0
+2026-04-17 18:23:58	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P01_knowledge\library\kind\kc_edtech_vertical.md	1	4.3	0.94	discard	added density_score: 0.94
+2026-04-17 18:23:58	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P01_knowledge\library\kind\kc_edtech_vertical.md	2	4.3	0.94	discard	added density_score: 0.94
+2026-04-17 18:23:59	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\aggregate-root-builder\bld_memory_aggregate_root.md	1	4.7	0.90	discard	tldr flagged for manual review
+2026-04-17 18:23:59	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\aggregate-root-builder\bld_memory_aggregate_root.md	2	4.7	0.90	discard	tldr flagged for manual review
+2026-04-17 18:23:59	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\aggregate-root-builder\bld_examples_aggregate_root.md	1	5.1	1.00	discard	tldr flagged for manual review
+2026-04-17 18:23:59	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\aggregate-root-builder\bld_examples_aggregate_root.md	2	5.1	1.00	discard	tldr flagged for manual review
+2026-04-17 18:23:59	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\alert-rule-builder\bld_examples_alert_rule.md	1	5.1	1.00	discard	tldr flagged for manual review
+2026-04-17 18:23:59	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\alert-rule-builder\bld_examples_alert_rule.md	2	5.1	1.00	discard	tldr flagged for manual review
+2026-04-17 18:23:59	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\aggregate-root-builder\bld_knowledge_card_aggregate_root.md	1	5.3	0.93	discard	tldr flagged for manual review
+2026-04-17 18:23:59	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\aggregate-root-builder\bld_knowledge_card_aggregate_root.md	2	5.3	0.93	discard	tldr flagged for manual review
+2026-04-17 18:23:59	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\aggregate-root-builder\bld_instruction_aggregate_root.md	1	5.4	0.81	discard	tldr flagged for manual review
+2026-04-17 18:23:59	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\aggregate-root-builder\bld_instruction_aggregate_root.md	2	5.4	0.81	discard	tldr flagged for manual review
+2026-04-17 18:24:00	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\aggregate-root-builder\bld_system_prompt_aggregate_root.md	1	5.4	0.79	discard	tldr flagged for manual review
+2026-04-17 18:24:00	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\aggregate-root-builder\bld_system_prompt_aggregate_root.md	2	5.4	0.79	discard	tldr flagged for manual review
+2026-04-17 18:24:00	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\alert-rule-builder\bld_instruction_alert_rule.md	1	5.4	0.86	discard	tldr flagged for manual review
+2026-04-17 18:24:00	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\alert-rule-builder\bld_instruction_alert_rule.md	2	5.4	0.86	discard	tldr flagged for manual review
+2026-04-17 18:24:00	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\alert-rule-builder\bld_output_template_alert_rule.md	1	5.4	1.00	discard	tldr flagged for manual review
+2026-04-17 18:24:00	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\alert-rule-builder\bld_output_template_alert_rule.md	2	5.4	1.00	discard	tldr flagged for manual review
+2026-04-17 18:24:00	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P01_knowledge\library\kind\kc_legal_vertical.md	1	5.5	1.00	discard	added density_score: 1.0
+2026-04-17 18:24:00	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P01_knowledge\library\kind\kc_legal_vertical.md	2	5.5	1.00	discard	added density_score: 1.0
+2026-04-17 18:24:00	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\aggregate-root-builder\bld_collaboration_aggregate_root.md	1	5.7	0.82	discard	tldr flagged for manual review
+2026-04-17 18:24:00	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\aggregate-root-builder\bld_collaboration_aggregate_root.md	2	5.7	0.82	discard	tldr flagged for manual review
+2026-04-17 18:24:01	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\aggregate-root-builder\bld_config_aggregate_root.md	1	5.7	1.00	discard	tldr flagged for manual review
+2026-04-17 18:24:01	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\aggregate-root-builder\bld_config_aggregate_root.md	2	5.7	1.00	discard	tldr flagged for manual review
+2026-04-17 18:24:01	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\aggregate-root-builder\bld_output_template_aggregate_root.md	1	5.8	1.00	discard	tldr flagged for manual review
+2026-04-17 18:24:01	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\aggregate-root-builder\bld_output_template_aggregate_root.md	2	5.8	1.00	discard	tldr flagged for manual review
+2026-04-17 18:24:01	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\alert-rule-builder\bld_quality_gate_alert_rule.md	1	5.8	1.00	discard	tldr flagged for manual review
+2026-04-17 18:24:01	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\alert-rule-builder\bld_quality_gate_alert_rule.md	2	5.8	1.00	discard	tldr flagged for manual review
+2026-04-17 18:24:01	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\aggregate-root-builder\bld_quality_gate_aggregate_root.md	1	6.0	1.00	discard	tldr flagged for manual review
+2026-04-17 18:24:01	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\aggregate-root-builder\bld_quality_gate_aggregate_root.md	2	6.0	1.00	discard	tldr flagged for manual review
+2026-04-17 18:24:01	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\alert-rule-builder\bld_config_alert_rule.md	1	6.0	1.00	discard	tldr flagged for manual review
+2026-04-17 18:24:02	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\alert-rule-builder\bld_config_alert_rule.md	2	6.0	1.00	discard	tldr flagged for manual review
+2026-04-17 18:24:02	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P01_knowledge\library\kind\kc_diff_strategy.md	1	6.0	1.00	discard	added density_score: 1.0
+2026-04-17 18:24:02	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P01_knowledge\library\kind\kc_diff_strategy.md	2	6.0	1.00	discard	added density_score: 1.0
+2026-04-17 18:24:02	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\aggregate-root-builder\bld_architecture_aggregate_root.md	1	6.2	0.99	discard	tldr flagged for manual review
+2026-04-17 18:24:02	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\aggregate-root-builder\bld_architecture_aggregate_root.md	2	6.2	0.99	discard	tldr flagged for manual review
+2026-04-17 18:24:02	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\alert-rule-builder\bld_memory_alert_rule.md	1	6.2	1.00	discard	tldr flagged for manual review
+2026-04-17 18:24:02	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\alert-rule-builder\bld_memory_alert_rule.md	2	6.2	1.00	discard	tldr flagged for manual review
+2026-04-17 18:24:02	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\aggregate-root-builder\bld_manifest_aggregate_root.md	1	6.3	1.00	discard	tldr flagged for manual review
+2026-04-17 18:24:02	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\aggregate-root-builder\bld_manifest_aggregate_root.md	2	6.3	1.00	discard	tldr flagged for manual review
+2026-04-17 18:24:02	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\aggregate-root-builder\bld_tools_aggregate_root.md	1	6.5	1.00	discard	tldr flagged for manual review
+2026-04-17 18:24:03	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\aggregate-root-builder\bld_tools_aggregate_root.md	2	6.5	1.00	discard	tldr flagged for manual review
+2026-04-17 18:24:03	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\alert-rule-builder\bld_collaboration_alert_rule.md	1	6.5	1.00	discard	tldr flagged for manual review
+2026-04-17 18:24:03	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\alert-rule-builder\bld_collaboration_alert_rule.md	2	6.5	1.00	discard	tldr flagged for manual review
+2026-04-17 18:24:03	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\alert-rule-builder\bld_knowledge_card_alert_rule.md	1	6.5	1.00	discard	tldr flagged for manual review
+2026-04-17 18:24:03	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\alert-rule-builder\bld_knowledge_card_alert_rule.md	2	6.5	1.00	discard	tldr flagged for manual review
+2026-04-17 18:24:03	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\alert-rule-builder\bld_schema_alert_rule.md	1	6.5	1.00	discard	tldr flagged for manual review
+2026-04-17 18:24:03	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\alert-rule-builder\bld_schema_alert_rule.md	2	6.5	1.00	discard	tldr flagged for manual review
+2026-04-17 18:24:03	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\alert-rule-builder\bld_system_prompt_alert_rule.md	1	6.5	0.93	discard	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:24:03	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\alert-rule-builder\bld_system_prompt_alert_rule.md	2	6.5	0.93	discard	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:24:03	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\alert-rule-builder\bld_tools_alert_rule.md	1	6.5	1.00	discard	tldr flagged for manual review
+2026-04-17 18:24:04	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\alert-rule-builder\bld_tools_alert_rule.md	2	6.5	1.00	discard	tldr flagged for manual review
+2026-04-17 18:24:04	C:\Users\CEX\Documents\GitHub\cex\.cex\skills\README.md	1	6.6	0.97	discard	tldr flagged for manual review
+2026-04-17 18:24:04	C:\Users\CEX\Documents\GitHub\cex\.cex\skills\README.md	2	6.6	0.97	discard	tldr flagged for manual review
+2026-04-17 18:24:04	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\aggregate-root-builder\bld_schema_aggregate_root.md	1	6.6	1.00	discard	tldr flagged for manual review
+2026-04-17 18:24:04	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\aggregate-root-builder\bld_schema_aggregate_root.md	2	6.6	1.00	discard	tldr flagged for manual review
+2026-04-17 18:24:05	C:\Users\CEX\Documents\GitHub\cex\N02_marketing\P07_evals\hybrid_review3_n02.md	1	6.7	1.00	keep	added updated: 2026-04-17
+2026-04-17 18:24:05	C:\Users\CEX\Documents\GitHub\cex\N02_marketing\P07_evals\hybrid_review3_n02.md	2	6.7	1.00	discard	tldr flagged for manual review
+2026-04-17 18:24:05	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P11_feedback\templates\tpl_quality_gate.md	1	6.7	1.00	discard	analyzed: add_hard_gates: quality gates need hard pass/fail checks
+2026-04-17 18:24:05	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P11_feedback\templates\tpl_quality_gate.md	2	6.7	1.00	discard	analyzed: add_hard_gates: quality gates need hard pass/fail checks
+2026-04-17 18:24:05	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\alert-rule-builder\bld_architecture_alert_rule.md	1	6.8	1.00	discard	tldr flagged for manual review
+2026-04-17 18:24:05	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\alert-rule-builder\bld_architecture_alert_rule.md	2	6.8	1.00	discard	tldr flagged for manual review
+2026-04-17 18:24:05	C:\Users\CEX\Documents\GitHub\cex\N01_intelligence\P07_evals\hybrid_review_n01.md	1	6.8	1.00	discard	added density_score: 1.0
+2026-04-17 18:24:05	C:\Users\CEX\Documents\GitHub\cex\N01_intelligence\P07_evals\hybrid_review_n01.md	2	6.8	1.00	discard	added density_score: 1.0
+2026-04-17 18:24:06	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\alert-rule-builder\bld_manifest_alert_rule.md	1	7.5	0.99	discard	polished formatting (whitespace cleanup)
+2026-04-17 18:24:06	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\alert-rule-builder\bld_manifest_alert_rule.md	2	7.5	0.99	discard	polished formatting (whitespace cleanup)
+2026-04-17 18:24:06	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P01_knowledge\library\kind\kc_training_method.md	1	7.5	0.97	discard	added density_score: 0.97
+2026-04-17 18:24:06	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P01_knowledge\library\kind\kc_training_method.md	2	7.5	0.97	discard	added density_score: 0.97
+2026-04-17 18:24:06	C:\Users\CEX\Documents\GitHub\cex\N07_admin\P01_knowledge\p01_chunk_n07_orchestration.md	1	7.5	1.00	discard	added density_score: 1.0
+2026-04-17 18:24:06	C:\Users\CEX\Documents\GitHub\cex\N07_admin\P01_knowledge\p01_chunk_n07_orchestration.md	2	7.5	1.00	discard	added density_score: 1.0
+2026-04-17 18:24:06	C:\Users\CEX\Documents\GitHub\cex\N07_admin\P06_schema\sch_enum_def_n07.md	1	7.5	1.00	discard	added density_score: 1.0
+2026-04-17 18:24:06	C:\Users\CEX\Documents\GitHub\cex\N07_admin\P06_schema\sch_enum_def_n07.md	2	7.5	1.00	discard	added density_score: 1.0
+2026-04-17 18:24:06	C:\Users\CEX\Documents\GitHub\cex\N07_admin\P09_config\con_secret_config_n07.md	1	7.5	1.00	discard	added density_score: 1.0
+2026-04-17 18:24:07	C:\Users\CEX\Documents\GitHub\cex\N07_admin\P09_config\con_secret_config_n07.md	2	7.5	1.00	discard	added density_score: 1.0
+2026-04-17 18:24:07	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P01_knowledge\library\kind\kc_reward_model.md	1	7.6	1.00	discard	added density_score: 1.0
+2026-04-17 18:24:07	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P01_knowledge\library\kind\kc_reward_model.md	2	7.6	1.00	discard	added density_score: 1.0
+2026-04-17 18:24:07	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P09_config\p09_cb_template.md	1	7.6	1.00	discard	polished formatting (whitespace cleanup)
+2026-04-17 18:24:07	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P09_config\p09_cb_template.md	2	7.6	1.00	discard	polished formatting (whitespace cleanup)
+2026-04-17 18:24:07	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\backpressure-policy-builder\bld_config_backpressure_policy.md	1	7.8	1.00	discard	polished formatting (whitespace cleanup)
+2026-04-17 18:24:07	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\backpressure-policy-builder\bld_config_backpressure_policy.md	2	7.8	1.00	discard	polished formatting (whitespace cleanup)
+2026-04-17 18:24:07	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\backpressure-policy-builder\bld_collaboration_backpressure_policy.md	1	7.9	1.00	discard	polished formatting (whitespace cleanup)
+2026-04-17 18:24:08	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\backpressure-policy-builder\bld_collaboration_backpressure_policy.md	2	7.9	1.00	discard	polished formatting (whitespace cleanup)
+2026-04-17 18:24:08	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P01_knowledge\library\kind\kc_trajectory_eval.md	1	8.0	1.00	keep	added updated: 2026-04-17
+2026-04-17 18:24:08	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P01_knowledge\library\kind\kc_trajectory_eval.md	2	8.0	1.00	discard	tldr flagged for manual review
+2026-04-17 18:24:09	C:\Users\CEX\Documents\GitHub\cex\N02_marketing\P06_schema\sch_validator_n02.md	1	8.0	1.00	keep	added updated: 2026-04-17
+2026-04-17 18:24:09	C:\Users\CEX\Documents\GitHub\cex\N02_marketing\P06_schema\sch_validator_n02.md	2	8.0	1.00	discard	tldr flagged for manual review
+2026-04-17 18:24:10	C:\Users\CEX\Documents\GitHub\cex\N02_marketing\P07_evals\audit_action_paradigm_builder.md	1	8.0	1.00	keep	added updated: 2026-04-17
+2026-04-17 18:24:10	C:\Users\CEX\Documents\GitHub\cex\N02_marketing\P07_evals\audit_action_paradigm_builder.md	2	8.0	1.00	discard	tldr flagged for manual review
+2026-04-17 18:24:10	C:\Users\CEX\Documents\GitHub\cex\N02_marketing\P07_evals\hybrid_review2_n02.md	1	8.0	1.00	keep	added updated: 2026-04-17
+2026-04-17 18:24:10	C:\Users\CEX\Documents\GitHub\cex\N02_marketing\P07_evals\hybrid_review2_n02.md	2	8.0	1.00	discard	tldr flagged for manual review
+2026-04-17 18:24:11	C:\Users\CEX\Documents\GitHub\cex\N07_admin\P06_schema\sch_type_def_n07.md	1	7.9	1.00	discard	added density_score: 1.0
+2026-04-17 18:24:11	C:\Users\CEX\Documents\GitHub\cex\N07_admin\P06_schema\sch_type_def_n07.md	2	7.9	1.00	discard	added density_score: 1.0
+2026-04-17 18:24:11	C:\Users\CEX\Documents\GitHub\cex\N07_admin\P09_config\con_env_config_n07.md	1	7.9	0.99	discard	added density_score: 0.99
+2026-04-17 18:24:11	C:\Users\CEX\Documents\GitHub\cex\N07_admin\P09_config\con_env_config_n07.md	2	7.9	0.99	discard	added density_score: 0.99
+2026-04-17 18:24:11	C:\Users\CEX\Documents\GitHub\cex\N07_admin\P09_config\con_rate_limit_config_n07.md	1	7.9	1.00	discard	added density_score: 1.0
+2026-04-17 18:24:11	C:\Users\CEX\Documents\GitHub\cex\N07_admin\P09_config\con_rate_limit_config_n07.md	2	7.9	1.00	discard	added density_score: 1.0
+2026-04-17 18:24:11	C:\Users\CEX\Documents\GitHub\cex\.cex\runtime\out\n06_output.md	1	5.5	1.00	discard	added density_score: 1.0
+2026-04-17 18:24:11	C:\Users\CEX\Documents\GitHub\cex\.cex\runtime\out\n06_output.md	2	5.7	1.00	discard	added updated: 2026-04-17
+2026-04-17 18:24:11	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P01_knowledge\library\kind\kc_test_consolidate_loop.md	1	8.0	1.00	discard	added density_score: 1.0
+2026-04-17 18:24:12	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P01_knowledge\library\kind\kc_test_consolidate_loop.md	2	8.0	1.00	discard	added density_score: 1.0
+2026-04-17 18:24:12	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P01_knowledge\library\kind\kc_test_ollama_wrapper.md	1	8.2	1.00	keep	added updated: 2026-04-17
+2026-04-17 18:24:12	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P01_knowledge\library\kind\kc_test_ollama_wrapper.md	2	8.2	1.00	discard	tldr flagged for manual review
+2026-04-17 18:24:12	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P11_feedback\templates\tpl_bugloop.md	1	8.0	1.00	discard	polished formatting (whitespace cleanup)
+2026-04-17 18:24:12	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P11_feedback\templates\tpl_bugloop.md	2	8.0	1.00	discard	polished formatting (whitespace cleanup)
+2026-04-17 18:24:13	C:\Users\CEX\Documents\GitHub\cex\N01_intelligence\P05_output\self_audit_newpc.md	1	8.0	1.00	discard	added density_score: 1.0
+2026-04-17 18:24:13	C:\Users\CEX\Documents\GitHub\cex\N01_intelligence\P05_output\self_audit_newpc.md	2	8.0	1.00	discard	added density_score: 1.0
+2026-04-17 18:24:13	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P01_knowledge\library\kind\kc_test_signal_flow.md	1	8.2	1.00	discard	added density_score: 1.0
+2026-04-17 18:24:13	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P01_knowledge\library\kind\kc_test_signal_flow.md	2	8.2	1.00	discard	added density_score: 1.0
+2026-04-17 18:24:13	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P01_knowledge\library\kind\kc_workflow_run_crate.md	1	8.3	0.99	keep	added updated: 2026-04-17
+2026-04-17 18:24:14	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P01_knowledge\library\kind\kc_workflow_run_crate.md	2	8.3	0.99	discard	tldr flagged for manual review
+2026-04-17 18:24:14	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P09_config\p09_ec_template.md	1	8.2	1.00	discard	polished formatting (whitespace cleanup)
+2026-04-17 18:24:14	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P09_config\p09_ec_template.md	2	8.2	1.00	discard	polished formatting (whitespace cleanup)
+2026-04-17 18:24:14	C:\Users\CEX\Documents\GitHub\cex\N01_intelligence\P01_knowledge\ontology_cex_vocabulary.md	1	8.2	1.00	discard	tldr flagged for manual review
+2026-04-17 18:24:14	C:\Users\CEX\Documents\GitHub\cex\N01_intelligence\P01_knowledge\ontology_cex_vocabulary.md	2	8.2	1.00	discard	tldr flagged for manual review
+2026-04-17 18:24:15	C:\Users\CEX\Documents\GitHub\cex\N01_intelligence\P05_output\selfheal_w2_diagnosis.md	1	8.3	1.00	keep	added updated: 2026-04-17
+2026-04-17 18:24:15	C:\Users\CEX\Documents\GitHub\cex\N01_intelligence\P05_output\selfheal_w2_diagnosis.md	2	8.3	1.00	discard	tldr flagged for manual review
+2026-04-17 18:24:15	C:\Users\CEX\Documents\GitHub\cex\N01_intelligence\P10_memory\knowledge_graph_cex_taxonomy.md	1	8.2	1.00	discard	tldr flagged for manual review
+2026-04-17 18:24:15	C:\Users\CEX\Documents\GitHub\cex\N01_intelligence\P10_memory\knowledge_graph_cex_taxonomy.md	2	8.2	1.00	discard	tldr flagged for manual review
+2026-04-17 18:24:15	C:\Users\CEX\Documents\GitHub\cex\N01_intelligence\reports\extraction_hnsw_memory.md	1	8.2	1.00	discard	added density_score: 1.0
+2026-04-17 18:24:15	C:\Users\CEX\Documents\GitHub\cex\N01_intelligence\reports\extraction_hnsw_memory.md	2	8.2	1.00	discard	added density_score: 1.0
+2026-04-17 18:24:16	C:\Users\CEX\Documents\GitHub\cex\N02_marketing\P05_output\output_sdk_validation_self_audit.md	1	8.3	1.00	keep	added updated: 2026-04-17
+2026-04-17 18:24:16	C:\Users\CEX\Documents\GitHub\cex\N02_marketing\P05_output\output_sdk_validation_self_audit.md	2	8.3	1.00	discard	tldr flagged for manual review
+2026-04-17 18:24:16	C:\Users\CEX\Documents\GitHub\cex\N02_marketing\P05_output\self_audit_newpc.md	1	8.2	1.00	discard	tldr flagged for manual review
+2026-04-17 18:24:16	C:\Users\CEX\Documents\GitHub\cex\N02_marketing\P05_output\self_audit_newpc.md	2	8.2	1.00	discard	tldr flagged for manual review
+2026-04-17 18:24:16	C:\Users\CEX\Documents\GitHub\cex\N07_admin\P12_orchestration\auto\wf_auto_review.md	1	8.2	1.00	discard	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:24:16	C:\Users\CEX\Documents\GitHub\cex\N07_admin\P12_orchestration\auto\wf_auto_review.md	2	8.2	1.00	discard	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:24:16	C:\Users\CEX\Documents\GitHub\cex\.cex\runtime\out\gemma_grid_n05.md	1	2.6	0.86	discard	tldr flagged for manual review
+2026-04-17 18:24:17	C:\Users\CEX\Documents\GitHub\cex\.cex\runtime\out\gemma_grid_n05.md	2	2.6	0.86	discard	tldr flagged for manual review
+2026-04-17 18:24:17	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P01_knowledge\library\kind\kc_white_label_config.md	1	8.4	1.00	keep	added updated: 2026-04-17
+2026-04-17 18:24:17	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P01_knowledge\library\kind\kc_white_label_config.md	2	8.4	1.00	discard	tldr flagged for manual review
+2026-04-17 18:24:17	C:\Users\CEX\Documents\GitHub\cex\N07_admin\P10_memory\p10_summary_n07.md	1	8.3	1.00	discard	added density_score: 1.0
+2026-04-17 18:24:17	C:\Users\CEX\Documents\GitHub\cex\N07_admin\P10_memory\p10_summary_n07.md	2	8.3	1.00	discard	added density_score: 1.0
+2026-04-17 18:24:18	C:\Users\CEX\Documents\GitHub\cex\_showoff\gemini_fix\n02_smoke.md	1	2.0	0.95	discard	tldr flagged for manual review
+2026-04-17 18:24:18	C:\Users\CEX\Documents\GitHub\cex\_showoff\gemini_fix\n02_smoke.md	2	2.0	0.95	discard	tldr flagged for manual review
+2026-04-17 18:24:18	C:\Users\CEX\Documents\GitHub\cex\.cex\runtime\out\gemma_grid_n06.md	1	3.0	1.00	discard	tldr flagged for manual review
+2026-04-17 18:24:18	C:\Users\CEX\Documents\GitHub\cex\.cex\runtime\out\gemma_grid_n06.md	2	3.0	1.00	discard	tldr flagged for manual review
+2026-04-17 18:24:18	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P01_knowledge\library\kind\kc_customer_segment.md	1	3.0	0.00	discard	added updated: 2026-04-17
+2026-04-17 18:24:18	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P01_knowledge\library\kind\kc_customer_segment.md	2	3.0	0.00	discard	added updated: 2026-04-17
+2026-04-17 18:24:18	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P01_knowledge\library\kind\kc_enterprise_sla.md	1	3.4	0.92	discard	added updated: 2026-04-17
+2026-04-17 18:24:18	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P01_knowledge\library\kind\kc_enterprise_sla.md	2	3.4	0.92	discard	added updated: 2026-04-17
+2026-04-17 18:24:18	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P01_knowledge\library\kind\kc_faq_entry.md	1	3.3	0.93	discard	added updated: 2026-04-17
+2026-04-17 18:24:18	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P01_knowledge\library\kind\kc_faq_entry.md	2	3.3	0.93	discard	added updated: 2026-04-17
+2026-04-17 18:24:19	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P01_knowledge\library\kind\kc_pricing_page.md	1	3.0	1.00	discard	added updated: 2026-04-17
+2026-04-17 18:24:19	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P01_knowledge\library\kind\kc_pricing_page.md	2	3.0	1.00	discard	added updated: 2026-04-17
+2026-04-17 18:24:19	C:\Users\CEX\Documents\GitHub\cex\N01_intelligence\reports\extraction_trust_tiers.md	1	8.4	1.00	discard	added density_score: 1.0
+2026-04-17 18:24:19	C:\Users\CEX\Documents\GitHub\cex\N01_intelligence\reports\extraction_trust_tiers.md	2	8.4	1.00	discard	added density_score: 1.0
+2026-04-17 18:24:19	C:\Users\CEX\Documents\GitHub\cex\N01_intelligence\rules\n01-intelligence.md	1	8.4	1.00	discard	polished formatting (whitespace cleanup)
+2026-04-17 18:24:19	C:\Users\CEX\Documents\GitHub\cex\N01_intelligence\rules\n01-intelligence.md	2	8.4	1.00	discard	polished formatting (whitespace cleanup)
+2026-04-17 18:24:19	C:\Users\CEX\Documents\GitHub\cex\N02_marketing\rules\n02-marketing.md	1	8.4	1.00	discard	polished formatting (whitespace cleanup)
+2026-04-17 18:24:19	C:\Users\CEX\Documents\GitHub\cex\N02_marketing\rules\n02-marketing.md	2	8.4	1.00	discard	polished formatting (whitespace cleanup)
+2026-04-17 18:24:20	C:\Users\CEX\Documents\GitHub\cex\N04_knowledge\P01_knowledge\p01_fse_kc_creation.md	1	8.6	0.96	keep	added updated: 2026-04-17
+2026-04-17 18:24:20	C:\Users\CEX\Documents\GitHub\cex\N07_admin\P10_memory\mem_knowledge_index_n07.md	1	8.4	1.00	discard	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:24:20	C:\Users\CEX\Documents\GitHub\cex\N07_admin\P10_memory\mem_knowledge_index_n07.md	2	8.4	1.00	discard	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 18:24:20	C:\Users\CEX\Documents\GitHub\cex\_showoff\w2\n05_gemini.md	1	2.8	0.95	discard	tldr flagged for manual review
+2026-04-17 18:24:20	C:\Users\CEX\Documents\GitHub\cex\_showoff\w2\n05_gemini.md	2	2.8	0.95	discard	tldr flagged for manual review
+2026-04-17 18:24:20	C:\Users\CEX\Documents\GitHub\cex\_showoff\w4\n01_claude.md	1	3.2	1.00	discard	tldr flagged for manual review
+2026-04-17 18:24:20	C:\Users\CEX\Documents\GitHub\cex\_showoff\w4\n01_claude.md	2	3.2	1.00	discard	tldr flagged for manual review
+2026-04-17 18:24:21	C:\Users\CEX\Documents\GitHub\cex\_showoff\w4\n02_claude.md	1	2.8	0.95	discard	tldr flagged for manual review
+2026-04-17 18:24:21	C:\Users\CEX\Documents\GitHub\cex\_showoff\w4\n02_claude.md	2	2.8	0.95	discard	tldr flagged for manual review
+2026-04-17 18:24:21	C:\Users\CEX\Documents\GitHub\cex\_showoff\w4\n03_claude.md	1	2.8	0.95	discard	tldr flagged for manual review
+2026-04-17 18:24:21	C:\Users\CEX\Documents\GitHub\cex\_showoff\w4\n03_claude.md	2	2.8	0.95	discard	tldr flagged for manual review
+2026-04-17 18:24:21	C:\Users\CEX\Documents\GitHub\cex\_showoff\w4\n04_claude.md	1	2.8	0.95	discard	tldr flagged for manual review
+2026-04-17 18:24:21	C:\Users\CEX\Documents\GitHub\cex\_showoff\w4\n04_claude.md	2	2.8	0.95	discard	tldr flagged for manual review
+2026-04-17 18:24:21	C:\Users\CEX\Documents\GitHub\cex\_showoff\w4\n05_claude.md	1	2.8	0.95	discard	tldr flagged for manual review
+2026-04-17 18:24:21	C:\Users\CEX\Documents\GitHub\cex\_showoff\w4\n05_claude.md	2	2.8	0.95	discard	tldr flagged for manual review
+2026-04-17 18:24:21	C:\Users\CEX\Documents\GitHub\cex\_showoff\w4\n06_claude.md	1	2.8	0.95	discard	tldr flagged for manual review
+2026-04-17 18:24:21	C:\Users\CEX\Documents\GitHub\cex\_showoff\w4\n06_claude.md	2	2.8	0.95	discard	tldr flagged for manual review
+2026-04-17 18:24:22	C:\Users\CEX\Documents\GitHub\cex\_showoff\w5\n02_gemini.md	1	2.8	0.95	discard	tldr flagged for manual review
+2026-04-17 18:24:22	C:\Users\CEX\Documents\GitHub\cex\_showoff\w5\n02_gemini.md	2	2.8	0.95	discard	tldr flagged for manual review
+2026-04-17 18:24:22	C:\Users\CEX\Documents\GitHub\cex\_showoff\w5\n04_claude.md	1	2.8	0.95	discard	tldr flagged for manual review
+2026-04-17 18:24:22	C:\Users\CEX\Documents\GitHub\cex\_showoff\w5\n04_claude.md	2	2.8	0.95	discard	tldr flagged for manual review
+2026-04-17 18:24:22	C:\Users\CEX\Documents\GitHub\cex\_showoff\w5\n06_gemini.md	1	2.8	0.95	discard	tldr flagged for manual review
+2026-04-17 18:24:22	C:\Users\CEX\Documents\GitHub\cex\_showoff\w5\n06_gemini.md	2	2.8	0.95	discard	tldr flagged for manual review

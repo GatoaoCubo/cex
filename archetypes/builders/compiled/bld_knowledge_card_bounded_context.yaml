@@ -3,13 +3,15 @@ kind: knowledge_card
 pillar: P01
 llm_function: INJECT
 version: 1.0.0
-quality: null
+quality: 6.3
 tags:
 - bounded_context
 - ddd
 - context-map
 - knowledge
 title: 'Knowledge: Bounded Context Pattern'
+density_score: 0.98
+updated: '2026-04-17'
 core_facts:
 - 'Evans DDD 2003 ch.14: explicit boundary where a domain model applies'
 - 'Within a BC: terms are unambiguous; rules hold consistently; one team owns it'

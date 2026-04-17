@@ -8,7 +8,7 @@ created: "2026-04-17"
 updated: "2026-04-17"
 author: builder
 domain: deployment_manifest
-quality: null
+quality: 7.5
 tags: [quality_gate, deployment_manifest, P09]
 llm_function: GOVERN
 tldr: "Validates deployment manifests for artifact pinning, rollback strategy, secrets handling, and environment targeting."

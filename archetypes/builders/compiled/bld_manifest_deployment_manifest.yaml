@@ -33,7 +33,7 @@ capabilities:
 - Define health-check endpoints and readiness gates
 - Specify rollback_to revision on failure
 - Validate artifact against quality gates (8 HARD + SOFT)
-quality: null
+quality: 8.4
 title: 'Manifest: deployment_manifest Builder'
 tldr: Builds deployment_manifest artifacts specifying what artifacts deploy to which environment with what configuration.
 density_score: null

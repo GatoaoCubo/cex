@@ -4,7 +4,7 @@ id: bld_collaboration_drift_detector
 pillar: P12
 llm_function: COLLABORATE
 purpose: How drift-detector-builder works in crews with other builders
-quality: null
+quality: 8.6
 title: "Collaboration Drift Detector"
 version: "1.0.0"
 author: n03_builder

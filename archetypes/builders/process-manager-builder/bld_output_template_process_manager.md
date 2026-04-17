@@ -4,9 +4,11 @@ kind: output_template
 pillar: P12
 title: "Process Manager Builder -- Output Template"
 version: 1.0.0
-quality: null
+quality: 7.4
 tags: [builder, process_manager, template]
 llm_function: PRODUCE
+density_score: 1.0
+updated: "2026-04-17"
 ---
 # Output Template: process_manager
 ```yaml

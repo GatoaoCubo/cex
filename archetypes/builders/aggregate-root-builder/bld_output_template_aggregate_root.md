@@ -4,9 +4,11 @@ kind: output_template
 pillar: P06
 title: "Aggregate Root Builder -- Output Template"
 version: 1.0.0
-quality: null
+quality: 5.8
 tags: [builder, aggregate_root, template]
 llm_function: PRODUCE
+density_score: 1.0
+updated: "2026-04-17"
 ---
 # Output Template: aggregate_root
 ```yaml

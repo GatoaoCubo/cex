@@ -8,7 +8,7 @@ created: "2026-04-17"
 updated: "2026-04-17"
 author: builder
 domain: lineage_record
-quality: null
+quality: 7.2
 tags: [examples, lineage_record, P01]
 llm_function: GOVERN
 tldr: "Golden example for lineage_record construction."

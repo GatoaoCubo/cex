@@ -1,4 +1,5 @@
 ---
+quality: 8.3
 id: n01_selfheal_w2_diagnosis
 kind: benchmark
 title: "SELFHEAL W2 Semantic Diagnosis"
@@ -11,6 +12,7 @@ quality: 8.2
 created: 2026-04-15
 tags: [selfheal, quality-audit, semantic-diagnosis, w2, stale-fact, frontmatter]
 density_score: 1.0
+updated: "2026-04-17"
 ---
 
 # SELFHEAL W2: Semantic Diagnosis Report

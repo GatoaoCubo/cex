@@ -4,9 +4,11 @@ kind: quality_gate
 pillar: P11
 llm_function: GOVERN
 version: 1.0.0
-quality: null
+quality: 5.8
 tags: [alert_rule, quality-gate, observability]
 title: "Quality Gate: alert_rule"
+density_score: 1.0
+updated: "2026-04-17"
 ---
 # Quality Gate: alert_rule
 ## HARD Gates

@@ -9,7 +9,7 @@ created: 2026-04-17
 updated: 2026-04-17
 author: builder_agent
 domain: data_contract
-quality: null
+quality: 8.8
 tags: [data_contract, p06, CONSTRAIN, kind-kc, schema, sla, published-language]
 tldr: "Schema-level agreement between data producer and consumer defining structure, semantics, and SLA; NOT dataset_card (metadata) nor validation_schema (LLM output)."
 when_to_use: "Formalizing data exchange between teams or systems that cross a bounded context boundary"

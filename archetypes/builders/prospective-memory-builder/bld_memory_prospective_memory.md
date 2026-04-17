@@ -16,7 +16,7 @@ tldr: "action_payload must be self-contained executable instructions, not vague 
 impact_score: 7.5
 decay_rate: 0.03
 memory_scope: project
-quality: null
+quality: 7.4
 title: "Memory Prospective Memory"
 density_score: 0.90
 llm_function: INJECT

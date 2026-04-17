@@ -20,7 +20,7 @@ agent_group: edison
 keywords: [circuit breaker, failure rate, cooldown, half-open, fallback, probe, resilience, fault tolerance]
 memory_scope: project
 observation_types: [feedback, project]
-quality: null
+quality: 7.5
 title: "Memory Circuit Breaker"
 density_score: 0.90
 llm_function: INJECT

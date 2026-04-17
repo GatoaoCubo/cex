@@ -8,9 +8,9 @@ created: "2026-04-17"
 updated: "2026-04-17"
 author: builder
 domain: deployment_manifest
-quality: null
+quality: 8.3
 tags: [rules, deployment_manifest, P09]
-llm_function: CONSTRAIN
+llm_function: COLLABORATE
 tldr: "Hard constraints and edge case handling for deployment_manifest builder."
 density_score: null
 ---

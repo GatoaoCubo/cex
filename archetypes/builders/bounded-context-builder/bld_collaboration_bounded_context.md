@@ -2,11 +2,13 @@
 id: bld_rules_bounded_context
 kind: guardrail
 pillar: P11
-llm_function: GOVERN
+llm_function: COLLABORATE
 version: 1.0.0
-quality: null
+quality: 6.5
 tags: [bounded_context, rules, guardrail]
 title: "Rules: bounded_context Builder"
+density_score: 0.99
+updated: "2026-04-17"
 ---
 # Builder Rules: bounded_context
 ## ALWAYS

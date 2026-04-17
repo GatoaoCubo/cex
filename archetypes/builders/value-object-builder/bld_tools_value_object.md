@@ -4,9 +4,11 @@ kind: knowledge_card
 pillar: P06
 title: "Value Object Builder -- Tools"
 version: 1.0.0
-quality: null
+quality: 6.5
 llm_function: CALL
 tags: [builder, value_object, tools]
+density_score: 1.0
+updated: "2026-04-17"
 ---
 
 # Value Object Builder -- Tools

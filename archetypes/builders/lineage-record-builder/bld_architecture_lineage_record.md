@@ -8,7 +8,7 @@ created: "2026-04-17"
 updated: "2026-04-17"
 author: builder
 domain: lineage_record
-quality: null
+quality: 7.0
 tags: [architecture, lineage_record, P01]
 llm_function: CONSTRAIN
 tldr: "How lineage_record relates to knowledge_card, citation, audit_log, and learning_record."

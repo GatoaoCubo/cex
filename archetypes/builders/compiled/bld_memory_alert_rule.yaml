@@ -3,12 +3,14 @@ kind: entity_memory
 pillar: P10
 llm_function: INJECT
 version: 1.0.0
-quality: null
+quality: 6.2
 tags:
 - alert_rule
 - memory
 - patterns
 title: 'Memory Patterns: alert_rule'
+density_score: 1.0
+updated: '2026-04-17'
 what_to_remember:
 - alert_rule GOVERNS observability (system threshold -> action)
 - NOT guardrail (LLM behavior) -- completely different concern

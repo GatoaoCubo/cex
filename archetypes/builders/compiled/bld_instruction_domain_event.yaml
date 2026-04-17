@@ -4,12 +4,14 @@ pillar: P03
 llm_function: REASON
 purpose: Step-by-step production process for domain_event
 version: 1.0.0
-quality: null
+quality: 4.9
 tags:
 - domain_event
 - builder
 - instruction
 title: Instruction Domain Event Builder
+density_score: 0.81
+updated: '2026-04-17'
 phase_1_identify:
 - 'Name the event in past tense: OrderPlaced, PaymentFailed, UserRegistered'
 - Identify the aggregate root that owns this event (Order, Payment, User)

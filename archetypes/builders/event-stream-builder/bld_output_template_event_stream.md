@@ -4,9 +4,11 @@ kind: output_template
 pillar: P04
 title: "Event Stream Builder -- Output Template"
 version: 1.0.0
-quality: null
+quality: 6.7
 tags: [builder, event_stream, template]
 llm_function: PRODUCE
+density_score: 1.0
+updated: "2026-04-17"
 ---
 # Output Template: event_stream
 ```yaml

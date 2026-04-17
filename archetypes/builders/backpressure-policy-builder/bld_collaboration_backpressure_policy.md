@@ -5,7 +5,7 @@ pillar: P12
 llm_function: COLLABORATE
 purpose: How backpressure-policy-builder works in crews with other builders
 pattern: each builder must know its ROLE in a team, what it RECEIVES and PRODUCES
-quality: null
+quality: 7.9
 title: "Collaboration Backpressure Policy"
 version: "1.0.0"
 author: n03_builder

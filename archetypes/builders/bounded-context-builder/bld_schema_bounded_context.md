@@ -1,12 +1,15 @@
 ---
+quality: 7.4
 id: bld_schema_bounded_context
 kind: input_schema
 pillar: P06
 llm_function: CONSTRAIN
 version: 1.0.0
-quality: null
+quality: 7.2
 tags: [bounded_context, schema, ddd]
 title: "Schema Bounded Context"
+density_score: 1.0
+updated: "2026-04-17"
 ---
 # Schema: bounded_context
 ## Frontmatter Fields (Required)

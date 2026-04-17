@@ -4,7 +4,7 @@ kind: schema
 pillar: P06
 llm_function: CONSTRAIN
 purpose: "Formal schema -- SINGLE SOURCE OF TRUTH for slo_definition"
-quality: null
+quality: 7.9
 title: "Schema: slo_definition"
 version: "1.0.0"
 author: builder

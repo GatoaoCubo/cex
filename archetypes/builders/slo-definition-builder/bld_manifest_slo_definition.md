@@ -15,7 +15,7 @@ capabilities: >
   L1: Specialist in building `slo_definition` -- measurable service level objectives with error budgets.
   L2: Encode SLI metric, threshold, window, and error budget consumption policy.
   L3: When user needs to define reliability targets for a service or agent.
-quality: null
+quality: 8.3
 title: "Manifest: slo_definition Builder"
 tldr: "Builds slo_definition artifacts with measurable target, error budget, and alerting thresholds."
 density_score: null

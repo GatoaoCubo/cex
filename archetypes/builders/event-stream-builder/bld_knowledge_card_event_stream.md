@@ -4,9 +4,11 @@ kind: knowledge_card
 pillar: P04
 title: "Event Stream Builder -- Knowledge Card"
 version: 1.0.0
-quality: null
+quality: 5.3
 tags: [builder, event_stream, knowledge]
 llm_function: INJECT
+density_score: 1.0
+updated: "2026-04-17"
 ---
 # Knowledge: event_stream
 ## Core Concept

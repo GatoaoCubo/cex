@@ -1,4 +1,5 @@
 ---
+quality: 6.2
 # TEMPLATE: System Prompt (P03 Prompt)
 # Valide contra P03_prompt/_schema.yaml (types.system_prompt)
 # Max 4096 bytes
@@ -10,6 +11,7 @@ title: [system_prompt_do_agente]
 target_agent: [agent_name]
 quality: [7.0_to_10.0]
 density_score: 1.0
+updated: "2026-04-17"
 ---
 
 <!-- Orchestrator system prompts: target <15% of context budget. -->

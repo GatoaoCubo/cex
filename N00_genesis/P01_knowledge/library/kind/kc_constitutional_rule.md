@@ -4,8 +4,10 @@ kind: knowledge_card
 pillar: P01
 nucleus: n00
 domain: kind-taxonomy
-quality: null
+quality: 8.2
 tags: [kind, taxonomy, constitutional_rule, cai, safety, P11]
+density_score: 0.93
+updated: "2026-04-17"
 ---
 # Knowledge Card: constitutional_rule
 

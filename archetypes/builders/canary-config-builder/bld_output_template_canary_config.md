@@ -8,7 +8,7 @@ created: "2026-04-17"
 updated: "2026-04-17"
 author: builder
 domain: canary_config
-quality: null
+quality: 7.0
 tags: [output_template, canary_config, P09]
 llm_function: PRODUCE
 tldr: "Canonical output template for canary_config artifacts."

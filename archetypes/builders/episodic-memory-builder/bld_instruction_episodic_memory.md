@@ -4,7 +4,7 @@ id: bld_instruction_episodic_memory
 pillar: P03
 llm_function: REASON
 purpose: Step-by-step production process for episodic_memory
-quality: null
+quality: 7.1
 title: "Instruction Episodic Memory"
 version: "1.0.0"
 author: n03_builder

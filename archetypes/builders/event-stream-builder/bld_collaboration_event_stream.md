@@ -4,9 +4,11 @@ kind: knowledge_card
 pillar: P04
 title: "Event Stream Builder -- Rules"
 version: 1.0.0
-quality: null
+quality: 5.7
 tags: [builder, event_stream, rules]
-llm_function: CONSTRAIN
+llm_function: COLLABORATE
+density_score: 0.82
+updated: "2026-04-17"
 ---
 # Rules: event_stream
 ## Absolute Rules (HARD -- never violate)

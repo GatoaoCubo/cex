@@ -3,12 +3,14 @@ kind: component_map
 pillar: P08
 llm_function: CONSTRAIN
 version: 1.0.0
-quality: null
+quality: 6.8
 tags:
 - alert_rule
 - architecture
 - observability
 title: Architecture Alert Rule
+density_score: 1.0
+updated: '2026-04-17'
 position_in_cex_kind_taxonomy: "P09 Config\n  alert_rule        <-- THIS KIND (threshold -> notification)\n  env_config  \
   \      (environment variables)\n  rate_limit_config (API rate limits)\n  feature_flag      (boolean toggles)\n\nP11 Feedback\n\
   \  guardrail         (LLM behavior constraint -- NOT alert_rule)\n  quality_gate      (artifact scoring -- NOT alert_rule)\n\

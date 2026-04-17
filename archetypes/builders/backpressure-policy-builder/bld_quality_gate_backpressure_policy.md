@@ -8,7 +8,7 @@ created: "2026-04-17"
 updated: "2026-04-17"
 author: "builder_agent"
 domain: "backpressure policy -- reactive streams flow control for producer-consumer pipelines"
-quality: null
+quality: 8.0
 tags: [quality-gate, backpressure-policy, P09, reactive-streams, flow-control]
 tldr: "Pass/fail gate for backpressure_policy: overflow strategy enum, buffer positivity, shed threshold range, watermark consistency."
 density_score: 0.90

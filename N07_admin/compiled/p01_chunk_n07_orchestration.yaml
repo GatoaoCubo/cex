@@ -27,7 +27,7 @@ method: 'Algorithm: `document_structure` (MarkdownHeaderTextSplitter variant).
 chunk_size: 256 tokens
 chunk_overlap: 32 tokens
 separators: '[\n## , \n### , \n\n, \n, . ]'
-quality: null
+quality: 7.5
 tags:
 - chunk_strategy
 - P01
@@ -40,6 +40,7 @@ tokenizer: cl100k_base
 min_chunk_size: 32 tokens
 strip_whitespace: 'true'
 keep_separator: 'true'
+density_score: 1.0
 overview: 'N07 runtime: handoff `.md` (500-2000B), mission plan `.md` (2000-8000B), decision manifest `.yaml` (500-3000B),
   signal `.json` (200-500B, single chunk). Document-structure preserves YAML/JSON block integrity; fixed-size splits corrupt
   structured fields. Chunk metadata (nucleus, mission, wave, timestamp, kind) enables filtered retrieval. Sloth lens: minimum

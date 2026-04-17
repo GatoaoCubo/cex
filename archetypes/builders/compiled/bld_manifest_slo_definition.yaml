@@ -34,7 +34,7 @@ capabilities:
 - Specify alerting policy on budget consumption
 - Link to slo_owner and incident escalation path
 - Validate against quality gates (8 HARD + SOFT)
-quality: null
+quality: 8.3
 title: 'Manifest: slo_definition Builder'
 tldr: Builds slo_definition artifacts with measurable target, error budget, and alerting thresholds.
 density_score: null

@@ -3,12 +3,14 @@ kind: knowledge_card
 pillar: P12
 title: Process Manager Builder -- Knowledge Card
 version: 1.0.0
-quality: null
+quality: 5.1
 tags:
 - builder
 - process_manager
 - knowledge
 llm_function: INJECT
+density_score: 0.96
+updated: '2026-04-17'
 core_concept: Process Manager is the EIP pattern for coordinating multi-step distributed processes. It subscribes to domain
   events, maintains a state machine per process instance (identified by correlation key), and dispatches commands to participants
   at each step.

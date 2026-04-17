@@ -3,7 +3,7 @@ kind: oauth_app_config
 pillar: P09
 title: Shopify OAuth App Configuration
 version: 0.1.0
-quality: null
+quality: 8.2
 status: template
 brand_placeholders:
 - BRAND_SHOPIFY_DOMAIN
@@ -14,6 +14,8 @@ tags:
 - distillation
 - shopify
 - oauth
+density_score: 1.0
+updated: '2026-04-17'
 purpose: OAuth 2.0 app configuration for Shopify Admin API access — defines scopes, token storage, and the authorization flow
   for connecting `{{BRAND_SHOPIFY_DOMAIN}}` to backend services.
 when_to_use:

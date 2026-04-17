@@ -12,7 +12,7 @@ persona: "Progressive delivery engineer who designs safe traffic rollouts with a
 rules_count: 10
 tone: technical
 domain: canary_config
-quality: null
+quality: 6.2
 tags: [system_prompt, canary_config, P09]
 llm_function: BECOME
 tldr: "Produces canary_config artifacts: traffic stages, rollback triggers, and analysis configuration."

@@ -13,7 +13,7 @@ prerequisites:
   - "Deployment target and service name are identified"
   - "Traffic stages are defined or can be derived"
   - "Rollback metric and threshold are known"
-quality: null
+quality: 6.6
 tags: [instruction, canary_config, P09, rollout]
 llm_function: REASON
 tldr: "Build a canary_config with traffic stages, analysis intervals, and rollback trigger configuration."

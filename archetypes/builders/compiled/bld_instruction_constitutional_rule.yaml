@@ -3,12 +3,14 @@ kind: instruction
 pillar: P11
 title: Constitutional Rule Builder -- Instruction
 version: 1.0.0
-quality: null
+quality: 5.3
 tags:
 - builder
 - constitutional_rule
 - instruction
 llm_function: REASON
+density_score: 0.76
+updated: '2026-04-17'
 phase_1_research:
 - 'Identify the absolute prohibition: what behavior must NEVER occur under ANY circumstances?'
 - 'Classify the constitutional basis: harm_prevention, honesty, autonomy_preservation, legality'

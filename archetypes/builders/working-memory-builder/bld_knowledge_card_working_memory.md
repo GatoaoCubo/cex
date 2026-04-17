@@ -5,7 +5,7 @@ pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for working_memory production
 sources: Baddeley & Hitch (1974) working memory model, LangChain ConversationBufferWindowMemory, DSPy state management
-quality: null
+quality: 8.4
 title: "Knowledge Card Working Memory"
 version: "1.0.0"
 author: n03_builder

@@ -4,11 +4,13 @@ kind: db_connector
 pillar: P09
 title: Supabase Database Connector
 version: 0.1.0
-quality: null
+quality: 8.0
 status: template
 brand_placeholders:
   - BRAND_SUPABASE_PROJECT_REF
 tags: [commerce, template, distillation, supabase, db_connector, config]
+density_score: 1.0
+updated: "2026-04-17"
 ---
 
 ## Purpose

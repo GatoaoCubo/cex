@@ -3,12 +3,14 @@ kind: knowledge_card
 pillar: P06
 title: Value Object Builder -- Examples
 version: 1.0.0
-quality: null
+quality: 5.0
 tags:
 - builder
 - value_object
 - examples
 llm_function: GOVERN
+density_score: 1.0
+updated: '2026-04-17'
 golden_example_money: "id: p06_vo_money\nkind: value_object\nattributes:\n  - name: amount\n    type: Decimal\n    constraint:\
   \ \"amount >= 0\"\n  - name: currency\n    type: string\n    constraint: \"ISO 4217 code, len == 3\"\nequality: structural\n\
   transformations:\n  - \"add(other: Money) -> Money: requires same currency, returns new Money(amount+other.amount, currency)\"\

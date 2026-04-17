@@ -4,9 +4,11 @@ kind: knowledge_card
 pillar: P06
 title: "Value Object Builder -- Architecture"
 version: 1.0.0
-quality: null
+quality: 6.5
 tags: [builder, value_object, architecture]
 llm_function: CONSTRAIN
+density_score: 1.0
+updated: "2026-04-17"
 ---
 # Architecture: value_object
 ## Pattern Origin

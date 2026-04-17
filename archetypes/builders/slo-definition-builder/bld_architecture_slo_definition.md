@@ -8,7 +8,7 @@ created: "2026-04-17"
 updated: "2026-04-17"
 author: builder
 domain: slo_definition
-quality: null
+quality: 7.0
 tags: [architecture, slo_definition, P09]
 llm_function: CONSTRAIN
 tldr: "How slo_definition relates to deployment_manifest, quality_gate, benchmark, and enterprise_sla."

@@ -27,7 +27,7 @@ capabilities:
 - Assign severity (critical/warning/info) with routing
 - Specify for/pending duration before firing
 - Define automated response actions (not just notifications)
-quality: null
+quality: 7.5
 title: Manifest Alert Rule Builder
 tldr: Builds alert_rule configs with metric expression, numeric threshold, severity label, routing target, and optional automated
   response.

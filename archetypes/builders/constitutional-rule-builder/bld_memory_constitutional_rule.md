@@ -4,9 +4,11 @@ kind: knowledge_card
 pillar: P11
 title: "Constitutional Rule Builder -- Memory"
 version: 1.0.0
-quality: null
+quality: 5.7
 tags: [builder, constitutional_rule, memory]
 llm_function: INJECT
+density_score: 0.88
+updated: "2026-04-17"
 ---
 # Memory: constitutional_rule
 ## Session Patterns

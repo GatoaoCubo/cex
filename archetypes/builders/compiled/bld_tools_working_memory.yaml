@@ -3,7 +3,7 @@ id: bld_tools_working_memory
 pillar: P04
 llm_function: CALL
 purpose: Tools for working_memory production
-quality: null
+quality: 7.6
 title: Tools Working Memory
 version: 1.0.0
 author: n03_builder

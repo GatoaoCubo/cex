@@ -16,7 +16,7 @@ tldr: "capacity_limit + typed slots + clear policy are load-bearing. Untyped unb
 impact_score: 8.0
 decay_rate: 0.02
 memory_scope: project
-quality: null
+quality: 7.8
 title: "Memory Working Memory"
 density_score: 0.90
 llm_function: INJECT

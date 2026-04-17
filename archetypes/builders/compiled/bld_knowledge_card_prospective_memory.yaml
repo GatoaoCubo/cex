@@ -4,7 +4,7 @@ pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for prospective_memory production
 sources: Ellis & Hertel (1994) prospective memory, ScheduleWakeup Claude Code, CEX cron system
-quality: null
+quality: 7.8
 title: Knowledge Card Prospective Memory
 version: 1.0.0
 author: n03_builder

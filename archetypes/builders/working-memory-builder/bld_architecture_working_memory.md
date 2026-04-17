@@ -4,7 +4,7 @@ id: bld_architecture_working_memory
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of working_memory -- inventory, dependencies, and cognitive science context
-quality: null
+quality: 8.3
 title: "Architecture Working Memory"
 version: "1.0.0"
 author: n03_builder

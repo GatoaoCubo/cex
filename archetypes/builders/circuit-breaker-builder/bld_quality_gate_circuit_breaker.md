@@ -8,7 +8,7 @@ created: "2026-04-17"
 updated: "2026-04-17"
 author: "builder_agent"
 domain: "circuit breaker -- resilience pattern for dependency fault isolation"
-quality: null
+quality: 8.4
 tags: [quality-gate, circuit-breaker, P09, resilience, fault-tolerance]
 tldr: "Pass/fail gate for circuit_breaker artifacts: failure threshold validity, cooldown positivity, probe count, state machine completeness."
 density_score: 0.90

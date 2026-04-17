@@ -4,8 +4,10 @@ kind: knowledge_card
 pillar: P01
 nucleus: n00
 domain: kind-taxonomy
-quality: null
+quality: 8.0
 tags: [kind, taxonomy, event_stream, kafka, kinesis, P04]
+density_score: 0.97
+updated: "2026-04-17"
 ---
 # Knowledge Card: event_stream
 

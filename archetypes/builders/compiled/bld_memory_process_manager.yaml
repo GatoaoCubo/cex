@@ -3,12 +3,14 @@ kind: knowledge_card
 pillar: P12
 title: Process Manager Builder -- Memory
 version: 1.0.0
-quality: null
+quality: 4.9
 tags:
 - builder
 - process_manager
 - memory
 llm_function: INJECT
+density_score: 0.95
+updated: '2026-04-17'
 session_patterns:
 - 'Correlation key: always ask "how do you find the right process instance when an event arrives?" -- this is the correlation
   key.'

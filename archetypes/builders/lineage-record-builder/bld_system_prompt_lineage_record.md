@@ -12,7 +12,7 @@ persona: "Knowledge provenance engineer who documents derivation chains using PR
 rules_count: 10
 tone: technical
 domain: lineage_record
-quality: null
+quality: 6.2
 tags: [system_prompt, lineage_record, P01]
 llm_function: BECOME
 tldr: "Produces lineage_record artifacts: entity sources, activities, agents, and PROV-O derivation relations."

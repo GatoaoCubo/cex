@@ -3,7 +3,7 @@ kind: webhook
 pillar: P04
 title: Shopify Webhook Handler
 version: 0.1.0
-quality: null
+quality: 7.9
 status: template
 brand_placeholders:
 - BRAND_SHOPIFY_DOMAIN
@@ -15,6 +15,8 @@ tags:
 - distillation
 - shopify
 - webhook
+density_score: 1.0
+updated: '2026-04-17'
 purpose: Inbound webhook handler for Shopify store events — validates HMAC-SHA256 signatures and processes `products/update`,
   `products/create`, `products/delete`, and `inventory_levels/update` payloads into the Supabase `products` table.
 when_to_use:

@@ -4,9 +4,11 @@ kind: input_schema
 pillar: P06
 llm_function: CONSTRAIN
 version: 1.0.0
-quality: null
+quality: 6.5
 tags: [alert_rule, schema, prometheus]
 title: "Schema Alert Rule"
+density_score: 1.0
+updated: "2026-04-17"
 ---
 # Schema: alert_rule
 ## Frontmatter Fields (Required)

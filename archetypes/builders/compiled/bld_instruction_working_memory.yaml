@@ -4,7 +4,7 @@ pillar: P03
 llm_function: REASON
 purpose: Step-by-step production process for working_memory
 pattern: 3-phase pipeline (scope -> compose -> validate)
-quality: null
+quality: 7.1
 title: Instruction Working Memory
 version: 1.0.0
 author: n03_builder

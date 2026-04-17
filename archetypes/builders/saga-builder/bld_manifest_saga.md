@@ -15,7 +15,7 @@ capabilities: >
   L1: Specialist in building `saga` -- long-running distributed transactions with compensating actions.
   L2: Encode steps, compensating actions, failure modes, and rollback sequence.
   L3: When user needs a multi-service transaction that must be reversible on partial failure.
-quality: null
+quality: 8.3
 title: "Manifest: saga Builder"
 tldr: "Builds saga artifacts: long-running distributed transactions with step-by-step compensating actions for rollback."
 density_score: null

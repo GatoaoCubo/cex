@@ -4,8 +4,10 @@ kind: knowledge_card
 pillar: P01
 nucleus: n00
 domain: kind-taxonomy
-quality: null
+quality: 8.0
 tags: [kind, taxonomy, aggregate_root, ddd, P06]
+density_score: 0.92
+updated: "2026-04-17"
 ---
 # Knowledge Card: aggregate_root
 

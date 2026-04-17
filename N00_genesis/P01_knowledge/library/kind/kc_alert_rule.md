@@ -9,7 +9,7 @@ created: 2026-04-17
 updated: 2026-04-17
 author: builder_agent
 domain: alert_rule
-quality: null
+quality: 8.8
 tags: [alert_rule, p09, GOVERN, kind-kc, prometheus, observability]
 tldr: "Observable threshold condition triggering notification or automated response; Prometheus alerting rule format; NOT guardrail (LLM) nor quality_gate (artifact scoring)."
 when_to_use: "Defining system conditions that should trigger on-call notification, ticket creation, or automated remediation"

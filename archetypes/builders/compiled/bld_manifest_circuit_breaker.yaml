@@ -12,41 +12,44 @@ tags:
 - kind-builder
 - circuit-breaker
 - P09
-- config
 - resilience
 - hystrix
+- resilience4j
 - fault-tolerance
 keywords:
 - circuit breaker
 - fault tolerance
-- Hystrix
-- Resilience4j
-- failure threshold
+- resilience
 - cooldown
 - half-open
+- hystrix
+- resilience4j
+- trip threshold
+- recovery
 triggers:
 - create circuit breaker
 - configure fault tolerance
+- add resilience pattern
+- circuit breaker config
 - auto-disable failing dependency
-- resilience pattern
 capabilities:
-- 'Define failure_threshold: count or percentage that opens the circuit'
-- 'Configure cooldown_period: how long circuit stays open before probing'
-- 'Specify half_open_probe: how many probe requests to send in half-open state'
-- Declare fallback behavior when circuit is open
-- 'Set window_type: count-based or time-based sliding window'
-- 'Map to platform: Resilience4j, Hystrix, Polly, custom implementation'
+- 'Define failure_rate_threshold: percentage of failures that trips the breaker'
+- 'Configure sliding_window: count-based or time-based failure tracking'
+- 'Set cooldown_duration: how long to stay open before attempting recovery'
+- 'Define probe_count: number of half-open test requests before closing'
+- 'Specify fallback_response: what to return while circuit is open'
+- 'Map monitored_exceptions: which error types count as failures'
 - Validate artifact against quality gates
-- Distinguish circuit_breaker from fallback_chain and rate_limit_config
-quality: null
+- Distinguish circuit_breaker from rate_limit_config, fallback_chain, runtime_rule
+quality: 7.6
 title: Manifest Circuit Breaker
 tldr: Builds circuit_breaker artifacts -- resilience pattern that auto-disables failing dependencies and allows recovery after
-  a cooldown.
+  cooldown.
 density_score: 0.9
-identity: Specialist in building circuit_breaker artifacts -- resilience configuration for the circuit breaker pattern (Fowler,
-  2014; Netflix Hystrix, Resilience4j). Masters three-state machine (closed/open/half-open), failure threshold configuration,
-  cooldown periods, probe request design, and the boundary between circuit_breaker (dependency failure auto-disable), fallback_chain
-  (ordered provider fallback), and rate_limit_config (inbound throttle).
+identity: Specialist in building circuit_breaker artifacts -- resilience configurations that auto-disable failing downstream
+  dependencies and allow recovery after a cooldown period. Grounded in the Hystrix and Resilience4j implementations. Masters
+  state machine design (closed/open/half-open), failure rate thresholds, sliding window types, and the boundary between circuit_breaker
+  (dependency failure) and rate_limit_config (inbound throttle) and fallback_chain (ordered provider fallback).
 properties: '| Property | Value |
 
   |----------|-------|

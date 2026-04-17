@@ -4,9 +4,11 @@ kind: knowledge_card
 pillar: P06
 title: "Aggregate Root Builder -- Rules"
 version: 1.0.0
-quality: null
+quality: 5.7
 tags: [builder, aggregate_root, rules]
-llm_function: CONSTRAIN
+llm_function: COLLABORATE
+density_score: 0.82
+updated: "2026-04-17"
 ---
 # Rules: aggregate_root
 ## Absolute Rules (HARD -- never violate)

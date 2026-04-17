@@ -5,7 +5,7 @@ pillar: P10
 llm_function: CONSTRAIN
 purpose: Formal schema -- SINGLE SOURCE OF TRUTH for working_memory
 pattern: TEMPLATE derives from this. CONFIG restricts this.
-quality: null
+quality: 8.9
 title: "Schema Working Memory"
 version: "1.0.0"
 author: n03_builder

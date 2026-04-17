@@ -1,0 +1,42 @@
+id: bld_context_sources_domain_vocabulary
+kind: rag_source
+pillar: P10
+llm_function: INJECT
+version: 1.0.0
+quality: 5.9
+tags:
+- domain_vocabulary
+- context
+- rag
+title: 'Context Sources: domain_vocabulary'
+density_score: 1.0
+updated: '2026-04-17'
+mandatory_sources_load_at_f3_inject: '| Source | Path | Why |
+
+  |--------|------|-----|
+
+  | Kind KC | N00_genesis/P01_knowledge/library/kind/kc_domain_vocabulary.md | Definition + boundary |
+
+  | Schema | archetypes/builders/domain-vocabulary-builder/bld_schema_domain_vocabulary.md | Required structure |
+
+  | Examples | archetypes/builders/domain-vocabulary-builder/bld_examples_domain_vocabulary.md | Golden patterns |
+
+  | UL rule | .claude/rules/ubiquitous-language.md | Loading protocol |'
+optional_sources_load_if_relevant: '| Source | Path | When to Load |
+
+  |--------|------|-------------|
+
+  | bounded_context KC | N00_genesis/P01_knowledge/library/kind/kc_bounded_context.md | BC scoping rules |
+
+  | Existing vocabulary | {nucleus}/P01_*/dv_*.md | Consistency with existing vocabs |
+
+  | Nucleus vocabulary KCs | N0X_{domain}/P01_knowledge/kc_{domain}_vocabulary.md | Maps to this kind |'
+search_queries_for_retrieval:
+- '"ubiquitous language domain model DDD bounded context"'
+- '"controlled vocabulary semantic drift prevention"'
+- '"term registry canonical terms anti-patterns"'
+- '"F2b SPEAK vocabulary loading protocol"'
+anti_sources_do_not_confuse_with:
+- glossary_entry (single term, not registry)
+- ontology (formal relations, not term registry)
+- knowledge_card (facts about domain, not term governance)

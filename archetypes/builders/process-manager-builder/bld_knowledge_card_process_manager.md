@@ -4,9 +4,11 @@ kind: knowledge_card
 pillar: P12
 title: "Process Manager Builder -- Knowledge Card"
 version: 1.0.0
-quality: null
+quality: 5.3
 tags: [builder, process_manager, knowledge]
 llm_function: INJECT
+density_score: 0.96
+updated: "2026-04-17"
 ---
 # Knowledge: process_manager
 ## Core Concept

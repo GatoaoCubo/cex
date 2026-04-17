@@ -3,7 +3,7 @@ kind: integration_guide
 pillar: P04
 title: Mercado Livre Integration Guide
 version: 0.1.0
-quality: null
+quality: 8.2
 status: template
 brand_placeholders:
 - BRAND_MELI_CLIENT_ID
@@ -16,6 +16,8 @@ tags:
 - mercadolivre
 - meli
 - integration
+density_score: 1.0
+updated: '2026-04-17'
 purpose: Step-by-step guide for integrating Mercado Livre (ML) API into a Supabase commerce stack — covers OAuth 2.0 authorization
   code flow, product enrichment via ML catalog, and long-lived token management with proactive refresh.
 when_to_use:

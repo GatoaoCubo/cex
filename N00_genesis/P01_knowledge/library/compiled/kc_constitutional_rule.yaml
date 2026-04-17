@@ -3,7 +3,7 @@ kind: knowledge_card
 pillar: P01
 nucleus: n00
 domain: kind-taxonomy
-quality: null
+quality: 8.0
 tags:
 - kind
 - taxonomy
@@ -11,6 +11,8 @@ tags:
 - cai
 - safety
 - P11
+density_score: 0.93
+updated: '2026-04-17'
 definition: 'A `constitutional_rule` is an absolute behavioral constraint for an agent that cannot be overridden by any instruction,
   context, or operator configuration. Distinguished from `guardrail` by a single critical property: `bypass_policy: none`.
   There is no approver, no override path, no escalation that unlocks the rule. It is the hardcoded floor of agent behavior.

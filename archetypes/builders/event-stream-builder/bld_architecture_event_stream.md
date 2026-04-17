@@ -4,9 +4,11 @@ kind: knowledge_card
 pillar: P04
 title: "Event Stream Builder -- Architecture"
 version: 1.0.0
-quality: null
+quality: 7.2
 tags: [builder, event_stream, architecture]
 llm_function: CONSTRAIN
+density_score: 1.0
+updated: "2026-04-17"
 ---
 # Architecture: event_stream
 ## Core Model

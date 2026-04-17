@@ -3,12 +3,14 @@ kind: knowledge_card
 pillar: P06
 title: Aggregate Root Builder -- Architecture
 version: 1.0.0
-quality: null
+quality: 6.2
 tags:
 - builder
 - aggregate_root
 - architecture
 llm_function: CONSTRAIN
+density_score: 0.99
+updated: '2026-04-17'
 pattern_origin: 'Evans DDD (2003): Aggregate = cluster of domain objects treated as a unit for data changes. Aggregate Root
   = single entity responsible for maintaining cluster invariants.'
 structural_topology: "AggregateRoot (identity + invariant enforcer)\n  |-- Entity_A (child, no direct external access)\n \

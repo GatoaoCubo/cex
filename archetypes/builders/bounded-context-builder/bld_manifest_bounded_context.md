@@ -15,7 +15,7 @@ capabilities: >
   L1: Specialist in bounded_context artifacts -- explicit domain model boundaries with vocabulary.
   L2: Defines what model applies within a boundary, its vocabulary, and integration patterns.
   L3: When modeling domain architecture for multi-team or multi-service systems.
-quality: null
+quality: 7.5
 title: "Manifest Bounded Context Builder"
 tldr: "Builds bounded_context definitions with domain model scope, vocabulary reference, integration patterns (ACL/OHS/CF), and team ownership."
 density_score: 0.88

@@ -4,9 +4,11 @@ kind: knowledge_card
 pillar: P01
 llm_function: INJECT
 version: 1.0.0
-quality: null
+quality: 6.5
 tags: [alert_rule, prometheus, observability, knowledge]
 title: "Knowledge: Alert Rule Pattern"
+density_score: 1.0
+updated: "2026-04-17"
 ---
 # Domain Knowledge: alert_rule
 ## Core Facts

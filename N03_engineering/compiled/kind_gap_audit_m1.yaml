@@ -3,7 +3,7 @@ kind: benchmark
 pillar: P07
 title: 'KIND_GAP_AUDIT M1: N03 Engineering Structural Gap Analysis'
 version: 1.0.0
-quality: null
+quality: 8.0
 status: complete
 nucleus: N03
 mission: KIND_GAP_AUDIT
@@ -15,6 +15,8 @@ tags:
 - kind-coverage
 - engineering
 - m1
+density_score: 1.0
+updated: '2026-04-17'
 executive_summary: 'N03 Engineering covers 62 of 257 kinds (24%) in the CEX taxonomy. Peer nuclei average ~1650 artifacts
   vs N03''s ~120 -- a 13x gap. Two root causes: (1) general kind under-representation across all pillars, (2) VERTICAL_DISTILLATION
   Wave 2A deliverables (22 commerce templates) never executed. ---'

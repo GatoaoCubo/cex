@@ -1,75 +1,112 @@
-kind: knowledge_card
 id: bld_knowledge_card_backpressure_policy
+kind: knowledge_card
 pillar: P01
-llm_function: INJECT
-purpose: Domain knowledge for backpressure_policy production
-sources: Reactive Streams spec (2014), RxJava BackpressureStrategy, Project Reactor, Akka Streams
+nucleus: n00
+domain: kind-taxonomy
 quality: null
-title: Knowledge Card Backpressure Policy
-version: 1.0.0
-author: n03_builder
+title: Backpressure Policy Builder -- Knowledge Card
+llm_function: INJECT
 tags:
 - backpressure_policy
-- builder
-- knowledge_card
-tldr: Backpressure is the Reactive Streams mechanism where consumers signal producers to slow emission when they cannot keep
-  up with throughput.
-domain: backpressure policy construction
+- reactive-streams
+- flow-control
+- producer-consumer
+- P09
+tldr: 'backpressure_policy: flow control config defining how a system responds when consumers lag behind producers (Reactive
+  Streams).'
 created: '2026-04-17'
 updated: '2026-04-17'
+version: 1.0.0
+author: n03_builder
 density_score: 0.9
-executive_summary: 'Backpressure (Reactive Streams, 2014) is the mechanism by which downstream consumers signal upstream producers
-  to reduce emission rate when they cannot process items fast enough. Without backpressure, fast producers overflow slow consumers,
-  causing buffer exhaustion, OOM errors, or dropped messages. The policy defines how to handle this mismatch: buffer, drop,
-  throttle, or block.'
-reactive_streams_specification: 'The Reactive Streams spec defines 4 interfaces: Publisher, Subscriber, Subscription, Processor.
-  Backpressure is implemented via `Subscription.request(n)` -- the consumer signals how many items it can handle. Publishers
-  MUST honor this demand signal.'
-strategy_comparison: '| Strategy | Behavior | Use Case | Risk |
+definition: A `backpressure_policy` is a flow control configuration artifact that defines how a system responds when downstream
+  consumers cannot keep up with upstream producers. It specifies the overflow strategy, buffer sizing, shedding thresholds,
+  and demand signaling to prevent queue exhaustion, out-of-memory errors, and cascade failure in async pipelines.
+origin:
+- 'Reactive Streams specification (2014): formal protocol for non-blocking async streams with backpressure'
+- 'TCP/IP flow control (RFC 793, 1981): window scaling as original backpressure mechanism'
+- 'Project Reactor / Spring WebFlux (2016): popularized reactive backpressure in JVM ecosystem'
+- 'RxJava (2013+): original reactive extension with MISSING and ERROR backpressure strategies'
+- 'Akka Streams (2015): demand-driven pull model based on Reactive Streams'
+- 'CEX pillar: P09 (Config) -- declarative policy consumed by queue managers and pipeline orchestrators'
+the_producer_consumer_problem: "PRODUCER (fast)  -->  [BUFFER]  -->  CONSUMER (slow)\n     |                  |          \
+  \       |\n     |                  |                 |\n  10 req/s           100 items          3 req/s\n              \
+  \      capacity\n\nWithout backpressure: buffer fills, producer blocks or crashes, data lost.\nWith backpressure_policy:\
+  \ defined overflow_strategy activates at shed_threshold."
+overflow_strategies: '| Strategy | Semantics | Use When | Data Loss |
 
-  |----------|----------|----------|------|
+  |----------|-----------|---------|-----------|
 
-  | buffer | Hold items until consumed | Temporary bursts | OOM if buffer fills |
+  | DROP_LATEST | Reject newest incoming items | Freshness > completeness (sensor data, metrics) | Yes -- new items |
 
-  | drop_oldest | Discard tail when buffer full | Latest items most important | Silent data loss |
+  | DROP_OLDEST | Evict oldest buffered items | Recency > in-flight work | Yes -- old items |
 
-  | drop_newest | Reject new items when buffer full | Historical order critical | New items rejected |
+  | BUFFER | Accumulate up to buffer_size | Bursty traffic, recoverable lag | No (until full) |
 
-  | throttle | Slow producer emission rate | Both sides can slow | Reduced throughput |
+  | THROTTLE | Signal producer to slow down | Producer rate is controllable | No |
 
-  | block | Suspend producer until consumer catches up | Zero loss tolerance | Producer stalls; latency |'
-platform_implementations: '| Platform | Strategy Enum |
+  | ERROR | Raise exception to caller | Caller must handle overflow | Caller decides |'
+key_fields: '| Field | Role | Example |
 
-  |----------|--------------|
+  |-------|------|---------|
 
-  | RxJava 2/3 | BackpressureStrategy.BUFFER/DROP/LATEST/MISSING |
+  | overflow_strategy | What happens on consumer lag | DROP_LATEST |
 
-  | Project Reactor | Flux.onBackpressureBuffer/Drop/Latest |
+  | buffer_size | Max items buffered | 100 |
 
-  | Akka Streams | OverflowStrategy.dropHead/dropTail/backpressure |
+  | shed_threshold | Fraction to start shedding | 0.8 (80%) |
 
-  | Kotlin Coroutines | Channel(capacity, onBufferOverflow) |'
-buffer_sizing_guidelines: '| Scenario | Buffer Size |
+  | high_watermark | Depth for active backpressure | 80 |
 
-  |----------|------------|
+  | low_watermark | Depth to resume normal flow | 40 |
 
-  | Low-throughput agent tasks | 10-50 items |
+  | request_batch_size | Items per demand signal | 5 |
 
-  | Medium-throughput pipelines | 100-1000 items |
+  | monitored_queue | Named queue this governs | "llm_job_queue" |'
+id_convention: 'Pattern: `p09_bp_{scope_slug}` where slug is lowercase snake_case. Examples: `p09_bp_llm_job_queue`, `p09_bp_event_ingest`,
+  `p09_bp_stream_processor`'
+boundary: '| backpressure_policy IS | backpressure_policy IS NOT |
 
-  | High-throughput streaming | 1000-10000 items |
+  |------------------------|---------------------------|
 
-  | Zero tolerance for loss | 0 (use block strategy) |'
-anti_patterns: '| Anti-Pattern | Why it fails |
+  | Consumer lag management | Dependency failure isolation -- that is circuit_breaker |
 
-  |-------------|-------------|
+  | Overflow strategy for producer-consumer imbalance | Inbound request throttle RPM/TPM -- that is rate_limit_config |
 
-  | No overflow_action declared | Default behavior varies by platform; implicit behavior |
+  | Buffer sizing and shedding policy | Retry / backoff after failure -- that is runtime_rule |
 
-  | buffer_size = unlimited | OOM error when producer consistently outpaces consumer |
+  | Reactive Streams demand signaling config | Service mesh load balancing -- that is load_balancer_config |'
+when_to_use:
+- Async job queue where consumers process slower than producers enqueue
+- Event streaming pipeline with variable throughput (Kafka consumer lag)
+- 'LLM inference pipeline: token generation slower than request arrival'
+- 'Real-time data ingestion: sensor stream faster than database writer'
+when_not_to_use:
+- Dependency is failing (not just slow) -- use circuit_breaker
+- Limiting total inbound requests per minute -- use rate_limit_config
+- Choosing between equivalent providers -- use fallback_chain
+- Managing retry delays after failures -- use runtime_rule
+watermark_hysteresis: 'Normal flow:        buffer depth < low_watermark
 
-  | Conflating with rate_limit | Backpressure = consumer controls producer. Rate limit = external quota. |
+  Backpressure:       buffer depth >= high_watermark
 
-  | drop without monitoring | Silent data loss; impossible to detect in production |
+  Recovery:           buffer depth drops back below low_watermark
 
-  | block in real-time pipeline | Producer stalls propagate upstream; cascade latency |'
+  Invalid:            low_watermark >= high_watermark (never configure this)
+
+  Hysteresis gap (high - low) prevents rapid oscillation between states.
+
+  Typical gap: 30-50% of buffer_size.'
+industry_implementations: '| Library | Language | Key Config |
+
+  |---------|----------|-----------|
+
+  | Project Reactor | Java | FluxSink.OverflowStrategy, onBackpressureDrop/Buffer/Error |
+
+  | RxJava | Java | BackpressureStrategy.DROP/BUFFER/LATEST/ERROR/MISSING |
+
+  | Akka Streams | Scala/Java | OverflowStrategy.dropHead/dropTail/dropBuffer/fail |
+
+  | Node.js streams | JavaScript | readable.pause()/resume(), highWaterMark option |
+
+  | Kafka consumer | Java | max.poll.records, fetch.max.bytes, session.timeout.ms |'

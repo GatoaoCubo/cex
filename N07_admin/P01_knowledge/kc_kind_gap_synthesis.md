@@ -8,7 +8,7 @@ created: "2026-04-17"
 updated: "2026-04-17"
 author: n07_orchestrator
 domain: taxonomy-audit
-quality: null
+quality: 8.8
 tags: [taxonomy, gap-analysis, kinds, ddd, nucleus-coverage]
 tldr: "257 CEX kinds: 10 new DDD/ops kinds needed; N03 has 62/257 kinds active (13x peer gap); P0 fix = VD Wave 2A (22 blocked commerce artifacts)."
 when_to_use: "Planning taxonomy expansions, prioritizing kind additions, auditing nucleus coverage, or reviewing DDD alignment of CEX 257-kind registry."

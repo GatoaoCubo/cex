@@ -8,7 +8,7 @@ created: "2026-04-17"
 updated: "2026-04-17"
 author: builder
 domain: deployment_manifest
-quality: null
+quality: 7.8
 tags: [architecture, deployment_manifest, P09]
 llm_function: CONSTRAIN
 tldr: "How deployment_manifest relates to env_config, canary_config, sandbox_spec, and workflow."

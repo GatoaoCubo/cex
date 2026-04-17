@@ -4,9 +4,11 @@ kind: knowledge_card
 pillar: P12
 title: "Process Manager Builder -- Memory"
 version: 1.0.0
-quality: null
+quality: 5.0
 tags: [builder, process_manager, memory]
 llm_function: INJECT
+density_score: 0.95
+updated: "2026-04-17"
 ---
 # Memory: process_manager
 ## Session Patterns

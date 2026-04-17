@@ -3,7 +3,7 @@ kind: webhook
 pillar: P04
 title: Shopify Webhook Manager
 version: 0.1.0
-quality: null
+quality: 7.9
 status: template
 brand_placeholders:
 - BRAND_SHOPIFY_DOMAIN
@@ -15,6 +15,8 @@ tags:
 - shopify
 - webhook
 - manager
+density_score: 1.0
+updated: '2026-04-17'
 purpose: CRUD management tool for Shopify webhook subscriptions — lists, registers, tests, and removes webhooks via Shopify
   Admin API, ensuring required product sync hooks are always active.
 when_to_use:

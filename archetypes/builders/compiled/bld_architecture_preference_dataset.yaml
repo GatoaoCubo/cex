@@ -3,7 +3,7 @@ id: bld_architecture_preference_dataset
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of preference_dataset -- inventory, dependencies, and architectural position
-quality: null
+quality: 8.3
 title: Architecture Preference Dataset
 version: 1.0.0
 author: n03_builder

@@ -3,7 +3,7 @@ kind: knowledge_card
 pillar: P12
 title: Process Manager Builder -- Manifest
 version: 1.0.0
-quality: null
+quality: 6.2
 tags:
 - builder
 - process_manager
@@ -22,6 +22,8 @@ keywords:
 - choreography
 - event_routing
 - command_dispatch
+density_score: 1.0
+updated: '2026-04-17'
 identity: Specialist in building `process_manager` artifacts -- event-driven coordinators that route domain events and issue
   commands across multi-step business processes. Knows EIP Process Manager pattern (Hohpe & Woolf), saga orchestration, state
   machine design, and the hard line between process_manager (P12), workflow (P12), and supervisor (P02).

@@ -15,7 +15,7 @@ capabilities: >
   L1: Specialist in domain_event artifacts -- immutable DDD domain facts.
   L2: Models significant domain occurrences as typed, versioned event records.
   L3: When user needs to capture what happened, not signal system state.
-quality: null
+quality: 7.5
 title: "Manifest Domain Event Builder"
 tldr: "Builds immutable DDD domain_event records that capture significant occurrences with typed payload, aggregate root, and causal chain."
 density_score: 0.88

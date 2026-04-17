@@ -4,12 +4,14 @@ pillar: P03
 llm_function: REASON
 purpose: Step-by-step production process for data_contract
 version: 1.0.0
-quality: null
+quality: 4.9
 tags:
 - data_contract
 - builder
 - instruction
 title: Instruction Data Contract Builder
+density_score: 0.83
+updated: '2026-04-17'
 phase_1_identify:
 - Name producer system and consumer system (teams or services)
 - Identify the data entity being exchanged (Event, Record, API response)

@@ -3,12 +3,14 @@ kind: component_map
 pillar: P08
 llm_function: CONSTRAIN
 version: 1.0.0
-quality: null
+quality: 6.7
 tags:
 - data_contract
 - architecture
 - published-language
 title: Architecture Data Contract
+density_score: 1.0
+updated: '2026-04-17'
 position_in_cex_kind_taxonomy: "P06 Schema\n  data_contract     <-- THIS KIND (cross-boundary agreement)\n  validation_schema\
   \ (LLM output validation -- different scope)\n  input_schema      (single system input spec)\n  type_def          (custom\
   \ type definitions)"

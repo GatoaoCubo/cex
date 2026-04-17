@@ -8,7 +8,7 @@ created: "2026-04-17"
 updated: "2026-04-17"
 author: builder
 domain: lineage_record
-quality: null
+quality: 6.6
 tags: [memory, lineage_record, P01]
 llm_function: INJECT
 tldr: "Recalled patterns and corrections for lineage_record builder sessions."

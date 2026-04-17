@@ -1,0 +1,46 @@
+kind: instruction
+id: bld_instruction_openapi_spec
+pillar: P03
+llm_function: REASON
+purpose: Step-by-step production process for openapi_spec
+pattern: 3-phase pipeline (define -> compose -> validate)
+quality: null
+title: Instruction OpenAPI Spec
+version: 1.0.0
+author: n03_builder
+tags:
+- openapi_spec
+- builder
+- instruction
+tldr: '3-phase: define API surface and security, compose OAS 3.x document with paths and components, validate compliance.'
+domain: openapi spec construction
+created: '2026-04-17'
+updated: '2026-04-17'
+density_score: 0.9
+phase_1_define:
+- Identify the API name and base URL (production + staging servers)
+- 'Enumerate all endpoints: path + HTTP method + brief purpose'
+- 'For each operation: identify path params, query params, request body shape'
+- 'For each operation: identify success response schema and error codes'
+- 'Determine authentication mechanism: JWT bearer, API key, OAuth2, or none'
+- List all unique data models that will be shared across operations
+- Identify which operations require auth and which are public
+- 'Determine OAS version: 3.1.0 preferred (3.0.3 if tooling requires)'
+phase_2_compose: "1. Read SCHEMA.md and OUTPUT_TEMPLATE.md\n2. Fill frontmatter: all required fields (quality: null)\n3. Set\
+  \ id: `p06_oas_{api_slug}` -- verify pattern `^p06_oas_[a-z][a-z0-9_]+$`\n4. Write OpenAPI document:\n   a. Set openapi\
+  \ version and info block\n   b. Define servers array (at least production)\n   c. For each path: write path item with operations\n\
+  \   d. For each operation: write operationId (camelCase), summary, tags\n   e. For each operation: write parameters array\
+  \ (path/query params)\n   f. For each operation: write requestBody if POST/PUT/PATCH\n   g. For each operation: write responses\
+  \ (success + error codes)\n   h. Move all schemas to components.schemas, use $ref\n   i. Move reusable responses to components.responses\n\
+  \   j. Define security schemes in components.securitySchemes\n   k. Set global security requirement\n5. Write Security section:\
+  \ auth method summary\n6. Write Error Responses table: code, meaning, schema\n7. Verify body <= 8192 bytes"
+phase_3_validate:
+- Confirm id matches `^p06_oas_[a-z][a-z0-9_]+$`
+- Confirm kind == openapi_spec
+- Confirm oas_version present and valid ("3.1.0" or "3.0.3")
+- Confirm servers array non-empty
+- Confirm paths non-empty with at least one operation
+- 'Confirm all 3 body sections present: OpenAPI Document, Security, Error Responses'
+- 'Cross-check: not api_reference (no prose tutorial), not api_client (no code)'
+- 'Confirm quality: null'
+- Revise if score < 8.0

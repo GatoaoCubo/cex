@@ -17,7 +17,7 @@ tldr: "Concrete preference_signal + agreement_rate >= 0.80 are load-bearing. Vag
 impact_score: 8.5
 decay_rate: 0.02
 memory_scope: project
-quality: null
+quality: 8.7
 title: "Memory Preference Dataset"
 density_score: 0.90
 llm_function: INJECT

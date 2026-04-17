@@ -3,12 +3,14 @@ kind: few_shot_example
 pillar: P03
 llm_function: GOVERN
 version: 1.0.0
-quality: null
+quality: 5.0
 tags:
 - data_contract
 - examples
 - few-shot
 title: 'Examples: data_contract'
+density_score: 1.0
+updated: '2026-04-17'
 example_1_sales_billing_order_contract: "id: dc_sales_billing_order\nkind: data_contract\npillar: P06\ntitle: \"Sales -> Billing:\
   \ Order Contract\"\nproducer_system: sales-service\nconsumer_system: billing-service\nentity: Order\ncontract_version: 1.2.0\n\
   effective_date: \"2026-04-01\"\nquality: null\ntags: [sales, billing, order, data-contract]\nSchema: order_id (uuid, non-null),\

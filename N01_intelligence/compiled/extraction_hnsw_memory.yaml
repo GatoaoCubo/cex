@@ -5,7 +5,7 @@ nucleus: N01
 domain: retrieval
 title: 'Extraction: HNSW Vector Memory (R1 -- ruflo)'
 version: 1.0
-quality: null
+quality: 8.2
 tags:
 - extraction
 - hnsw
@@ -20,6 +20,7 @@ source_files:
 - v3/@claude-flow/memory/src/agentdb-backend.ts
 - CLAUDE.md (intelligence pipeline section)
 port_priority: P0_HIGH
+density_score: 1.0
 1_what_ruflo_implements: 'Ruflo''s `@claude-flow/memory` package wraps AgentDB with HNSW (Hierarchical Navigable Small World)
   indexing for semantic recall at scale. The HNSW layer sits between the caller and a SQLite backend, providing O(log n) approximate
   nearest-neighbor search instead of O(n) brute-force. Claimed speedup: 150x--12,500x vs brute-force vector search (from ruflo

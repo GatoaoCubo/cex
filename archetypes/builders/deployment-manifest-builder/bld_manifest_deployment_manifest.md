@@ -15,7 +15,7 @@ capabilities: >
   L1: Specialist in building `deployment_manifest` -- what to deploy, where, and how.
   L2: Encode artifact lists, target environments, and configuration overrides.
   L3: When user needs to specify a deployment plan for an agent, service, or artifact set.
-quality: null
+quality: 8.4
 title: "Manifest: deployment_manifest Builder"
 tldr: "Builds deployment_manifest artifacts specifying what artifacts deploy to which environment with what configuration."
 density_score: null

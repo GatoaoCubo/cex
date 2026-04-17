@@ -4,9 +4,11 @@ kind: component_map
 pillar: P08
 llm_function: CONSTRAIN
 version: 1.0.0
-quality: null
+quality: 7.4
 tags: [bounded_context, architecture, ddd, context-map]
 title: "Architecture Bounded Context"
+density_score: 1.0
+updated: "2026-04-17"
 ---
 # Architecture: bounded_context
 ## Position in CEX Kind Taxonomy

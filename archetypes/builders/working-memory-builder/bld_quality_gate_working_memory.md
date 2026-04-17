@@ -8,7 +8,7 @@ created: "2026-04-17"
 updated: "2026-04-17"
 author: "builder_agent"
 domain: "working_memory -- short-term context store for a single active task, cleared after completion"
-quality: null
+quality: 7.8
 tags: [quality-gate, working-memory, P10, short-term]
 tldr: "Pass/fail gate for working_memory: task_id, typed slots, capacity_limit, expiry, clear policy."
 density_score: 0.90

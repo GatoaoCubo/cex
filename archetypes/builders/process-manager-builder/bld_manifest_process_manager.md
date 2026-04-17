@@ -4,12 +4,14 @@ kind: knowledge_card
 pillar: P12
 title: "Process Manager Builder -- Manifest"
 version: 1.0.0
-quality: null
+quality: 6.3
 tags: [builder, process_manager, eip, P12]
 domain: process_manager
 llm_function: BECOME
 triggers: ["define process manager", "route domain events", "coordinate multi-step process"]
 keywords: [process_manager, eip, saga, choreography, event_routing, command_dispatch]
+density_score: 1.0
+updated: "2026-04-17"
 ---
 # process-manager-builder
 ## Identity

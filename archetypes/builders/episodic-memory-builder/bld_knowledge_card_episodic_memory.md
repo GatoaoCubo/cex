@@ -5,7 +5,7 @@ pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for episodic_memory production
 sources: Tulving (1972) episodic memory theory, MemGPT (Packer et al. 2023), Zep memory, LangChain ConversationSummaryBufferMemory
-quality: null
+quality: 8.4
 title: "Knowledge Card Episodic Memory"
 version: "1.0.0"
 author: n03_builder

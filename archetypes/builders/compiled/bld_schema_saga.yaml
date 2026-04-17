@@ -3,7 +3,7 @@ kind: schema
 pillar: P06
 llm_function: CONSTRAIN
 purpose: Formal schema -- SINGLE SOURCE OF TRUTH for saga
-quality: null
+quality: 7.4
 title: 'Schema: saga'
 version: 1.0.0
 author: builder

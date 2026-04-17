@@ -9,7 +9,7 @@ created: 2026-04-17
 updated: 2026-04-17
 author: builder_agent
 domain: domain_vocabulary
-quality: null
+quality: 8.8
 tags: [domain_vocabulary, p01, INJECT, kind-kc, ubiquitous-language, ddd, core]
 tldr: "Governed registry of canonical terms for a bounded context; loaded at F2b SPEAK; prevents semantic drift across LLM agents; NOT glossary_entry nor ontology."
 when_to_use: "Establishing or loading the canonical vocabulary for a bounded context before generating any artifacts"

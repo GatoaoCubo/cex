@@ -8,7 +8,7 @@ created: "2026-04-17"
 updated: "2026-04-17"
 author: builder
 domain: canary_config
-quality: null
+quality: 7.0
 tags: [quality_gate, canary_config, P09]
 llm_function: GOVERN
 tldr: "Validates canary configs for gradual rollout, rollback triggers, and analysis configuration."

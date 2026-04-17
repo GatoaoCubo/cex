@@ -8,8 +8,9 @@ tags: [white-label, configuration, branding, customization]
 status: draft
 version: 1.1.0
 pillar: P01
-quality: 8.3
+quality: 8.4
 density_score: 1.0
+updated: "2026-04-17"
 ---
 
 # White-Label Configuration Guide

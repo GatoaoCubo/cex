@@ -4,12 +4,14 @@ pillar: P03
 llm_function: REASON
 purpose: Step-by-step production process for bounded_context
 version: 1.0.0
-quality: null
+quality: 4.9
 tags:
 - bounded_context
 - builder
 - instruction
 title: Instruction Bounded Context Builder
+density_score: 0.84
+updated: '2026-04-17'
 phase_1_scope:
 - Name the bounded context (noun phrase from domain language, not tech terms)
 - 'Write the scope statement: what domain model applies HERE (not in other BCs)'

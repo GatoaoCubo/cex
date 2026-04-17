@@ -8,9 +8,9 @@ created: "2026-04-17"
 updated: "2026-04-17"
 author: builder
 domain: slo_definition
-quality: null
+quality: 5.4
 tags: [context_sources, slo_definition, P09]
-llm_function: INJECT
+llm_function: CONSTRAIN
 tldr: "Ordered context sources for F3 INJECT in slo_definition builds."
 density_score: null
 ---

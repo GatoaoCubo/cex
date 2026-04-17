@@ -8,9 +8,9 @@ created: "2026-04-17"
 updated: "2026-04-17"
 author: builder
 domain: lineage_record
-quality: null
+quality: 7.1
 tags: [rules, lineage_record, P01]
-llm_function: CONSTRAIN
+llm_function: COLLABORATE
 tldr: "Hard constraints and edge cases for lineage_record builder."
 density_score: null
 ---

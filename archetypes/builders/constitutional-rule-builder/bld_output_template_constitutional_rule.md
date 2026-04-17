@@ -4,9 +4,11 @@ kind: output_template
 pillar: P11
 title: "Constitutional Rule Builder -- Output Template"
 version: 1.0.0
-quality: null
+quality: 6.5
 tags: [builder, constitutional_rule, template]
 llm_function: PRODUCE
+density_score: 0.87
+updated: "2026-04-17"
 ---
 # Output Template: constitutional_rule
 ```yaml

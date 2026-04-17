@@ -3,12 +3,14 @@ kind: schema
 pillar: P06
 title: Aggregate Root Builder -- Schema
 version: 1.0.0
-quality: null
+quality: 6.6
 tags:
 - builder
 - aggregate_root
 - schema
 llm_function: CONSTRAIN
+density_score: 1.0
+updated: '2026-04-17'
 frontmatter_fields: ''
 required: '| Field | Type | Notes |
 

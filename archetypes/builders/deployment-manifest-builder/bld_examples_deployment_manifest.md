@@ -8,7 +8,7 @@ created: "2026-04-17"
 updated: "2026-04-17"
 author: builder
 domain: deployment_manifest
-quality: null
+quality: 7.6
 tags: [examples, deployment_manifest, P09]
 llm_function: GOVERN
 tldr: "Golden and anti-examples for deployment_manifest construction."

@@ -4,7 +4,7 @@ kind: knowledge_card
 pillar: P01
 nucleus: n00
 domain: kind-taxonomy
-quality: null
+quality: 8.8
 title: "Circuit Breaker Builder -- Knowledge Card"
 llm_function: INJECT
 tags: [circuit_breaker, resilience, fault-tolerance, hystrix, resilience4j, P09]

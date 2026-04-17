@@ -11,7 +11,7 @@ persona: Progressive delivery engineer who designs safe traffic rollouts with au
 rules_count: 10
 tone: technical
 domain: canary_config
-quality: null
+quality: 6.2
 tags:
 - system_prompt
 - canary_config

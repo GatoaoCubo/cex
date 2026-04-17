@@ -14,7 +14,7 @@ keywords: [preference pairs, rlhf, dpo, reward model, human feedback, chosen, re
 triggers: ["create preference dataset", "build RLHF dataset", "curate preference pairs", "DPO training data"]
 capabilities: >
   L1: Specialist in building preference_dataset artifacts -- curated preference pairs for RLHF or DPO training. L2: Structure chosen/rejected pairs with metadata, quality scores, and annotation provenance. L3: When user needs to create, build, or scaffold preference datasets.
-quality: null
+quality: 8.8
 title: "Manifest Preference Dataset"
 tldr: "Builds preference_dataset artifacts -- curated human-labeled preference pairs for RLHF reward modeling or direct preference optimization."
 density_score: 0.90

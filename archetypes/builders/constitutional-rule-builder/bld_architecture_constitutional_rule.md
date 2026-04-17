@@ -4,9 +4,11 @@ kind: knowledge_card
 pillar: P11
 title: "Constitutional Rule Builder -- Architecture"
 version: 1.0.0
-quality: null
+quality: 7.0
 tags: [builder, constitutional_rule, architecture]
 llm_function: CONSTRAIN
+density_score: 0.92
+updated: "2026-04-17"
 ---
 # Architecture: constitutional_rule
 ## Pattern Origin

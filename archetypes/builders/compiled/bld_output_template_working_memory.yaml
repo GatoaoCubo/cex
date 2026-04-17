@@ -3,7 +3,7 @@ id: bld_output_template_working_memory
 pillar: P05
 llm_function: PRODUCE
 purpose: Template with {{vars}} that the LLM fills to produce a working_memory artifact
-quality: null
+quality: 7.5
 title: Output Template Working Memory
 version: 1.0.0
 author: n03_builder

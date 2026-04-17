@@ -37,7 +37,7 @@ capabilities:
 - Define promotion path from working_memory to episodic_memory
 - Validate artifact against quality gates (HARD + SOFT)
 - Distinguish episodic_memory from entity_memory and memory_summary
-quality: null
+quality: 8.3
 title: Manifest Episodic Memory
 tldr: Builds episodic_memory artifacts -- long-term stores of past interactions indexed by episode for retrieval and context
   injection.

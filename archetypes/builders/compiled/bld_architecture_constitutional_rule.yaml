@@ -3,12 +3,14 @@ kind: knowledge_card
 pillar: P11
 title: Constitutional Rule Builder -- Architecture
 version: 1.0.0
-quality: null
+quality: 6.8
 tags:
 - builder
 - constitutional_rule
 - architecture
 llm_function: CONSTRAIN
+density_score: 0.92
+updated: '2026-04-17'
 pattern_origin: 'Anthropic Constitutional AI (Bai et al. 2022): a set of principles used to evaluate and revise model outputs.
   Extended here: constitutional_rule = runtime-enforced absolute prohibition, not just an RLHF training signal.'
 the_absoluteness_property: 'A constitutional_rule has ONE property that distinguishes it from all other safety kinds: bypass_policy:

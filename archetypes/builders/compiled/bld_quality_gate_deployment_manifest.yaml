@@ -7,7 +7,7 @@ created: '2026-04-17'
 updated: '2026-04-17'
 author: builder
 domain: deployment_manifest
-quality: null
+quality: 7.5
 tags:
 - quality_gate
 - deployment_manifest

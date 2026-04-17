@@ -8,7 +8,7 @@ created: "2026-04-17"
 updated: "2026-04-17"
 author: "builder_agent"
 domain: "drift_detector -- statistical monitor for distribution shift in model inputs, outputs, or behavioral patterns"
-quality: null
+quality: 8.4
 tags: [quality-gate, drift-detector, P11, monitoring]
 tldr: "Pass/fail gate for drift_detector: detection_method, numeric threshold, named features, window_config, alert_rule."
 density_score: 0.90

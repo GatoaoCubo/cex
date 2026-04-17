@@ -8,9 +8,9 @@ created: "2026-04-17"
 updated: "2026-04-17"
 author: builder
 domain: saga
-quality: null
+quality: 7.1
 tags: [rules, saga, P12]
-llm_function: CONSTRAIN
+llm_function: COLLABORATE
 tldr: "Hard constraints and edge cases for saga builder."
 density_score: null
 ---

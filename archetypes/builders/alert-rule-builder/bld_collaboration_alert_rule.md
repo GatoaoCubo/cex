@@ -2,11 +2,13 @@
 id: bld_rules_alert_rule
 kind: guardrail
 pillar: P11
-llm_function: GOVERN
+llm_function: COLLABORATE
 version: 1.0.0
-quality: null
+quality: 6.5
 tags: [alert_rule, rules, guardrail]
 title: "Rules: alert_rule Builder"
+density_score: 1.0
+updated: "2026-04-17"
 ---
 # Builder Rules: alert_rule
 ## ALWAYS

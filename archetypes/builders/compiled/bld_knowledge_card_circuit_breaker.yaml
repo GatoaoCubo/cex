@@ -1,87 +1,117 @@
-kind: knowledge_card
 id: bld_knowledge_card_circuit_breaker
+kind: knowledge_card
 pillar: P01
-llm_function: INJECT
-purpose: Domain knowledge for circuit_breaker production
-sources: Fowler (2014) circuit breaker pattern, Netflix Hystrix, Resilience4j docs, Polly .NET
+nucleus: n00
+domain: kind-taxonomy
 quality: null
-title: Knowledge Card Circuit Breaker
-version: 1.0.0
-author: n03_builder
+title: Circuit Breaker Builder -- Knowledge Card
+llm_function: INJECT
 tags:
 - circuit_breaker
-- builder
-- knowledge_card
-tldr: 'Circuit breaker auto-disables failing dependencies via a three-state machine: CLOSED (normal), OPEN (disabled), HALF_OPEN
-  (probing recovery).'
-domain: circuit breaker construction
+- resilience
+- fault-tolerance
+- hystrix
+- resilience4j
+- P09
+tldr: 'circuit_breaker: resilience config that auto-disables failing dependencies via state machine (closed/open/half-open)
+  and recovers after cooldown.'
 created: '2026-04-17'
 updated: '2026-04-17'
+version: 1.0.0
+author: n03_builder
 density_score: 0.9
-executive_summary: 'The circuit breaker pattern (Fowler, 2014; Netflix Hystrix 2011; Resilience4j) prevents cascade failures
-  by auto-disabling a failing dependency. Three states: CLOSED (normal operation), OPEN (dependency bypassed, fallback served),
-  HALF_OPEN (probing whether dependency recovered). When failure rate exceeds threshold, circuit opens. After cooldown, it
-  probes recovery. On success, it closes; on failure, it opens again.'
-three_state_machine: '| State | Behavior | Transition |
+definition: A `circuit_breaker` is a resilience configuration artifact that auto-disables a failing downstream dependency
+  and allows controlled recovery after a cooldown period. It implements the classic circuit breaker design pattern from distributed
+  systems -- named after the electrical circuit breaker that cuts power when current exceeds safe limits.
+origin:
+- 'Michael Nygard -- "Release It!" (2007): first formal description of circuit breaker in software'
+- 'Netflix Hystrix (2012): popularized in microservices; open-sourced for JVM'
+- 'Resilience4j (2017): modern JVM implementation; influenced Spring Cloud, Quarkus'
+- 'Reactive Streams (2014): extended pattern with backpressure integration'
+- 'CEX pillar: P09 (Config) -- declarative config consumed by runtime agents'
+state_machine: 'Circuit breakers operate as a 3-state machine:
 
-  |-------|---------|------------|
 
-  | CLOSED | All requests pass through | -> OPEN when failures >= threshold |
+  | State | Meaning | Behavior |
 
-  | OPEN | All requests fail fast (fallback) | -> HALF_OPEN after cooldown_period |
+  |-------|---------|---------|
 
-  | HALF_OPEN | probe_count requests pass through | -> CLOSED on success; -> OPEN on failure |'
-threshold_configuration_resilience4j_defaults: '| Parameter | Default | Range | Notes |
+  | CLOSED | Normal operation | All calls pass through; failures tracked |
 
-  |-----------|---------|-------|-------|
+  | OPEN | Dependency disabled | All calls fail-fast with fallback_response |
 
-  | failure_rate_threshold | 50% | 1-100% | % failures in window to open |
+  | HALF-OPEN | Recovery probing | Limited test calls; close on success, reopen on failure |
 
-  | sliding_window_type | COUNT_BASED | COUNT/TIME | Window type |
 
-  | sliding_window_size | 100 requests | 1-N | Window measurement |
+  Transitions:
 
-  | minimum_number_of_calls | 100 | 1-N | Min calls before rate computed |
+  - CLOSED -> OPEN: when failure_rate >= failure_rate_threshold over the sliding window
 
-  | cooldown_period | 60 seconds | 1-N | Open state duration |
+  - OPEN -> HALF-OPEN: after cooldown_duration seconds
 
-  | permitted_calls_in_half_open | 10 | 1-N | Probe call count |
+  - HALF-OPEN -> CLOSED: if probe_count consecutive probes succeed
 
-  | slow_call_rate_threshold | 100% | 1-100% | Slow calls counted as failures |'
-platform_comparison: '| Platform | Language | Config Style |
+  - HALF-OPEN -> OPEN: if any probe fails (reset cooldown)'
+key_fields: '| Field | Role | Example |
 
-  |----------|---------|-------------|
+  |-------|------|---------|
 
-  | Resilience4j | Java/Kotlin | Declarative YAML/annotation |
+  | failure_rate_threshold | % failures to trip | 50 (50% of last 10 calls) |
 
-  | Netflix Hystrix | Java | Annotation + property file (deprecated) |
+  | cooldown_duration | Seconds OPEN | 60 |
 
-  | Polly | .NET/C# | Fluent API policy builder |
+  | probe_count | HALF-OPEN test calls | 3 |
 
-  | Pybreaker | Python | Class decorator |
+  | sliding_window_type | COUNT_BASED or TIME_BASED | COUNT_BASED |
 
-  | custom | Any | Direct state machine implementation |'
-fallback_patterns: '| Pattern | Example | When |
+  | sliding_window_size | Window size | 10 (calls) or 30 (seconds) |
 
-  |---------|---------|------|
+  | fallback_response | Response while OPEN | "Service unavailable. Retry in 60s." |
 
-  | Default value | Return empty list | Non-critical enrichment |
+  | monitored_exceptions | Failure types | [ConnectionError, HTTP_5xx] |'
+id_convention: 'Pattern: `p09_cb_{service_slug}` where slug is lowercase snake_case. Examples: `p09_cb_anthropic_api`, `p09_cb_postgres_primary`,
+  `p09_cb_stripe_payments`'
+boundary: '| circuit_breaker IS | circuit_breaker IS NOT |
 
-  | Cached response | Return last known good | Read-heavy services |
+  |--------------------|------------------------|
 
-  | Alternative provider | Try backup LLM | Model provider failover |
+  | Dependency failure isolation | Inbound request throttle -- that is rate_limit_config |
 
-  | Fail fast with error | Raise CircuitOpenException | Critical path dependencies |'
-anti_patterns: '| Anti-Pattern | Why it fails |
+  | State machine with cooldown recovery | Ordered provider substitution -- that is fallback_chain |
 
-  |-------------|-------------|
+  | Per-service resilience config | Retry / backoff logic -- that is runtime_rule |
 
-  | No fallback declared | Silent failure harder to debug than open circuit |
+  | Fault isolation + fast-fail | Generic environment config -- that is env_config |'
+when_to_use:
+- Downstream service has intermittent failures (5xx, timeout, network)
+- 'Cascading failure risk: one dependency failing causes caller chain to fail'
+- Need fast-fail behavior to preserve caller resources during outage
+- Want automatic recovery detection without manual intervention
+when_not_to_use:
+- Rate limiting inbound requests (use rate_limit_config)
+- Choosing between equivalent providers (use fallback_chain)
+- Configuring retry delays (use runtime_rule)
+- Service-to-service load balancing (use load_balancer_config)
+industry_implementations: '| Library | Language | Key Config |
 
-  | cooldown = 0 | Circuit oscillates rapidly between open/half-open |
+  |---------|----------|-----------|
 
-  | failure_threshold = 0 | Every request opens circuit |
+  | Hystrix | Java | circuitBreaker.requestVolumeThreshold, sleepWindowInMilliseconds |
 
-  | No half_open_probe | Circuit never recovers; permanent degraded state |
+  | Resilience4j | Java | failureRateThreshold, waitDurationInOpenState, permittedNumberOfCallsInHalfOpenState |
 
-  | Conflating with rate_limit | Rate limit = inbound throttle; circuit = outbound failure |'
+  | Polly | .NET | handledEventsAllowedBeforeBreaking, durationOfBreak |
+
+  | pybreaker | Python | fail_max, reset_timeout |
+
+  | opossum | Node.js | timeout, errorThresholdPercentage, resetTimeout |'
+cex_usage_pattern: '# In agent boot config or tool config:
+
+  circuit_breaker_ref: p09_cb_anthropic_api
+
+  # Agent reads this and wraps all API calls through the state machine
+
+
+  Circuit breakers are consumed by agents (P02) and tools (P04).
+
+  State changes should emit signals to monitor (P11) for observability.'

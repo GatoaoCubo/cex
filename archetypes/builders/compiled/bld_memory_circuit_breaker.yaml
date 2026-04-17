@@ -1,54 +1,82 @@
-id: p09_lr_circuit_breaker_builder
+id: p10_lr_circuit_breaker_builder
 kind: learning_record
-pillar: P11
+pillar: P10
 version: 1.0.0
 created: 2026-04-17
 updated: 2026-04-17
 author: builder_agent
-observation: Circuit breakers without fallback_response caused silent failures when circuits opened. Circuits with cooldown=0
-  oscillated between open/half-open faster than monitoring could detect. failure_threshold as string ('high') failed numeric
-  comparison in runtime.
-pattern:
-- 'failure_rate_threshold: integer 1-100 (not "high" or "50%")'
-- 'fallback_response: specific, non-empty string describing return value'
-- 'cooldown_duration: >= 30 seconds (Resilience4j default: 60)'
-- 'probe_count: >= 2 (single probe is statistically unreliable)'
-- 'monitored_exceptions: list specific exception types, not empty'
-confidence: 0.88
+observation: Circuit breaker configs with failure_rate_threshold > 80% effectively never trip -- dependency is 80% failing
+  before protection activates. Configs missing fallback_response caused NullPointerException in 3 of 5 reviewed integrations.
+  Cooldown durations below 10 seconds led to rapid OPEN/HALF-OPEN oscillation without recovery.
+pattern: '50% threshold + service-restart cooldown + explicit fallback.
+
+
+  Threshold discipline:
+
+  1. failure_rate_threshold: 50 for standard services; lower for payment APIs (30)
+
+  2. minimum_number_of_calls: set to at least 5 to prevent single-failure trips
+
+  3. sliding_window_size: 10 calls (COUNT_BASED) or 30 seconds (TIME_BASED) for LLM APIs
+
+
+  Cooldown discipline:
+
+  1. cooldown_duration: match the service''s typical restart/recovery time
+
+  2. For LLM APIs: 60s (Anthropic resets 429 windows in ~60s)
+
+  3. For databases: 10-30s (connection pool recovery)
+
+  4. probe_count: 3 is safe default; higher for payment-critical paths
+
+
+  Fallback discipline:
+
+  1. Always declare fallback_response -- never leave it implicit
+
+  2. Include retry hint: "Retry after {cooldown_duration} seconds"
+
+  3. Log state transitions to monitor_config for observability'
+evidence: '5 integrations: 3 missing fallback caused crashes; 2 with threshold 80+ never tripped; cooldown < 10s caused flapping
+  in all observed cases.'
+confidence: 0.85
 outcome: SUCCESS
 domain: circuit_breaker
 tags:
 - circuit-breaker
 - failure-threshold
-- fallback
 - cooldown
-- probe
-tldr: Numeric threshold + fallback_response + cooldown >= 30s are load-bearing. String thresholds and missing fallback are
-  most common failures.
+- fallback
+- half-open
+- resilience4j
+tldr: 50% threshold + service-restart cooldown + explicit fallback = stable fault isolation. High threshold + missing fallback
+  = production crashes.
 impact_score: 8.5
-decay_rate: 0.02
+decay_rate: 0.03
+agent_group: edison
+keywords:
+- circuit breaker
+- failure rate
+- cooldown
+- half-open
+- fallback
+- probe
+- resilience
+- fault tolerance
 memory_scope: project
-quality: null
+observation_types:
+- feedback
+- project
+quality: 7.5
 title: Memory Circuit Breaker
 density_score: 0.9
 llm_function: INJECT
-summary: 'Circuit breakers fail at the configuration layer, not the runtime layer. Three root causes: threshold misconfigured
-  as string, no fallback declared (silent failure worse than open circuit), cooldown too short (oscillation). Well-configured
-  circuit breakers prevent cascade failures silently.'
+summary: Circuit breakers only protect when they actually trip. Too-high thresholds (> 70%) allow severe degradation before
+  activation. The sweet spot for most LLM API dependencies is 40-60% -- enough to filter noise while catching real outages.
 anti_pattern:
-- 'threshold: "high" -- fails numeric comparison in Resilience4j/Polly'
-- No fallback_response -- open circuit = unhandled exception propagation
-- cooldown = 0 -- oscillates faster than monitoring detects
-- probe_count = 1 -- single transient success closes circuit prematurely
-- Conflating with rate_limit_config -- different problems, different solutions
-properties: '| Property | Value |
-
-  |----------|-------|
-
-  | Kind | `learning_record` |
-
-  | Pillar | P09 |
-
-  | Domain | circuit_breaker |
-
-  | Target | 9.0+ |'
+- 'failure_rate_threshold: 90 -- breaker never trips in practice, offers no protection'
+- No fallback_response -- callers receive unhandled exception during OPEN state
+- 'cooldown_duration: 1 -- half-open/open oscillation without real recovery'
+- Monitoring exceptions by class name only -- misses wrapped/rethrown errors
+- Using circuit_breaker for rate limiting -- breakers isolate FAILURES, not throttle VOLUME

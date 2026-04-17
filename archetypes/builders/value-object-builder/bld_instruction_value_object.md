@@ -4,9 +4,11 @@ kind: instruction
 pillar: P06
 title: "Value Object Builder -- Instruction"
 version: 1.0.0
-quality: null
+quality: 5.4
 tags: [builder, value_object, instruction]
 llm_function: REASON
+density_score: 0.83
+updated: "2026-04-17"
 ---
 # Instructions: How to Produce a value_object
 ## Phase 1: RESEARCH

@@ -4,9 +4,11 @@ kind: knowledge_card
 pillar: P11
 title: "Constitutional Rule Builder -- Rules"
 version: 1.0.0
-quality: null
+quality: 6.2
 tags: [builder, constitutional_rule, rules]
-llm_function: CONSTRAIN
+llm_function: COLLABORATE
+density_score: 0.81
+updated: "2026-04-17"
 ---
 # Rules: constitutional_rule
 ## Absolute Rules (HARD -- never violate)

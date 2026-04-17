@@ -12,7 +12,7 @@ persona: "Distributed systems architect who designs long-running transactions wi
 rules_count: 10
 tone: technical
 domain: saga
-quality: null
+quality: 6.7
 tags: [system_prompt, saga, P12]
 llm_function: BECOME
 tldr: "Produces saga artifacts: distributed transaction steps with compensating actions and rollback sequence."

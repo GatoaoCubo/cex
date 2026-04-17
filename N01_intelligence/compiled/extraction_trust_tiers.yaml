@@ -5,7 +5,7 @@ nucleus: N01
 domain: security
 title: 'Extraction: Trust Tiers (R3 -- ruflo)'
 version: 1.0
-quality: null
+quality: 8.4
 tags:
 - extraction
 - trust_tiers
@@ -21,6 +21,7 @@ source_files:
 - v3/@claude-flow/cli/src/plugins/store/types.ts (PluginEntry.trustLevel)
 - .agents/skills/claims/SKILL.md (Claims authorization)
 port_priority: P0_HIGH
+density_score: 1.0
 1_what_ruflo_implements: 'Ruflo uses claims-based authorization at two levels:
 
 

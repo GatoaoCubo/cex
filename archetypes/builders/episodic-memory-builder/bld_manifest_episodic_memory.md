@@ -14,7 +14,7 @@ keywords: [episodic memory, interaction history, episode, past interactions, ret
 triggers: ["create episodic memory", "store interaction history", "episode log", "past interaction store"]
 capabilities: >
   L1: Specialist in building episodic_memory artifacts -- long-term stores of past interactions indexed by episode. L2: Structure episodes with timestamp, context, outcome, and retrieval keys. L3: When user needs to create, build, or scaffold episodic memory for interaction history.
-quality: null
+quality: 8.3
 title: "Manifest Episodic Memory"
 tldr: "Builds episodic_memory artifacts -- long-term stores of past interactions indexed by episode for retrieval and context injection."
 density_score: 0.90

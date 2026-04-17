@@ -3,7 +3,7 @@ id: bld_schema_episodic_memory
 pillar: P10
 llm_function: CONSTRAIN
 purpose: Formal schema -- SINGLE SOURCE OF TRUTH for episodic_memory
-quality: null
+quality: 8.3
 title: Schema Episodic Memory
 version: 1.0.0
 author: n03_builder

@@ -3,7 +3,8 @@ id: bld_instruction_circuit_breaker
 pillar: P03
 llm_function: REASON
 purpose: Step-by-step production process for circuit_breaker
-quality: null
+pattern: 3-phase pipeline (define -> compose -> validate)
+quality: 7.1
 title: Instruction Circuit Breaker
 version: 1.0.0
 author: n03_builder
@@ -11,35 +12,38 @@ tags:
 - circuit_breaker
 - builder
 - instruction
-tldr: '3-phase: scope dependency and failure threshold, compose state machine config, validate.'
+tldr: '3-phase: define failure thresholds and state machine, compose with cooldown and probe config, validate gates.'
 domain: circuit breaker construction
 created: '2026-04-17'
 updated: '2026-04-17'
 density_score: 0.9
-phase_1_scope:
-- Identify the protected dependency (service, API, model provider)
-- 'Determine failure types to count: timeout, error_rate, HTTP 5xx, connection_refused'
-- 'Set failure_threshold: number or percentage of failures in window that open the circuit'
-- 'Define window_type: count-based (last N requests) or time-based (last N seconds)'
-- 'Set cooldown_period: how long circuit stays open before probing (industry default: 30-60s)'
-- 'Configure half_open_probe: how many probe requests in half-open state before deciding'
-- 'Define fallback_behavior: what happens when circuit is open (return default, try alternative, fail fast)'
-- 'Identify platform: Resilience4j, Hystrix, Polly, or custom'
+phase_1_define:
+- Identify the dependency being protected (API name, service, model provider)
+- 'Determine failure_rate_threshold: percentage of calls that must fail to trip (e.g. 50%)'
+- 'Choose sliding_window_type: COUNT_BASED (last N calls) or TIME_BASED (last N seconds)'
+- 'Set sliding_window_size: number of calls or seconds for the window'
+- 'Set minimum_number_of_calls: minimum calls before failure rate is computed'
+- 'Set cooldown_duration: seconds/minutes circuit stays OPEN before half-open probe'
+- 'Define probe_count: how many test calls in HALF-OPEN state before closing'
+- 'Specify fallback_response: what to return while circuit is OPEN (error msg, cached value, default)'
+- 'List monitored_exceptions: which error types count as failures (e.g. HTTP 5xx, timeout, ConnectionError)'
+- 'Define slow_call_threshold: duration in ms above which call is counted as slow failure (optional)'
 phase_2_compose:
 - Read SCHEMA.md and OUTPUT_TEMPLATE.md
-- 'Fill frontmatter (quality: null)'
-- 'Write state_machine: CLOSED -> OPEN -> HALF_OPEN -> CLOSED transitions'
-- Declare failure_threshold with window_type
-- Write cooldown_period and half_open_probe
-- Declare fallback_behavior
-- 'Write Overview: what dependency and what failure scenario this protects'
-- Write State Transitions table
+- 'Fill frontmatter: all required fields (quality: null)'
+- 'Set id: `p09_cb_{service_slug}` -- verify pattern `^p09_cb_[a-z][a-z0-9_]+$`'
+- 'Write Overview section: what dependency is protected and why'
+- 'Write State Machine section: CLOSED/OPEN/HALF-OPEN transitions with thresholds'
+- 'Write Cooldown section: duration, probe count, recovery criteria'
+- 'Write Fallback section: what is returned during open state'
 - Verify body <= 3072 bytes
 phase_3_validate:
 - Confirm id matches `^p09_cb_[a-z][a-z0-9_]+$`
 - Confirm kind == circuit_breaker
-- Confirm failure_threshold is numeric
-- Confirm cooldown_period is numeric (seconds or duration string)
-- Confirm protected_dependency declared
-- 'Cross-check: not fallback_chain (ordered list), not rate_limit_config (inbound throttle)'
+- Confirm failure_rate_threshold is a positive integer in range [1, 100]
+- Confirm cooldown_duration is a positive integer (seconds)
+- Confirm probe_count is a positive integer
+- 'Confirm all 4 body sections present: Overview, State Machine, Cooldown, Fallback'
+- 'Cross-check: not rate_limit_config (no RPM/TPM quotas), not fallback_chain (not ordered provider list)'
+- 'Confirm quality: null'
 - Revise if score < 8.0

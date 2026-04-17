@@ -9,7 +9,7 @@ created: 2026-04-17
 updated: 2026-04-17
 author: builder_agent
 domain: bounded_context
-quality: null
+quality: 8.8
 tags: [bounded_context, p08, CONSTRAIN, kind-kc, ddd, context-map]
 tldr: "Explicit semantic boundary where a domain model applies with its own vocabulary; Evans DDD ch.14; NOT component_map (deployment) nor namespace (code)."
 when_to_use: "Modeling domain architecture for multi-team or multi-service systems; defining team ownership boundaries"

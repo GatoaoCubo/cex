@@ -9,7 +9,7 @@ created: 2026-04-17
 updated: 2026-04-17
 author: builder_agent
 domain: backpressure_policy
-quality: null
+quality: 8.8
 tags: [backpressure_policy, P09, GOVERN, kind-kc, reactive-streams, flow-control]
 tldr: "backpressure_policy defines how a pipeline responds when consumers lag behind producers: overflow strategy, buffer, watermarks. NOT circuit_breaker or rate_limit_config."
 when_to_use: "Building, reviewing, or reasoning about backpressure_policy artifacts"

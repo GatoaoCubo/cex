@@ -1,4 +1,5 @@
 ---
+quality: 7.1
 # TEMPLATE: Session State (P10 Memory)
 # Valide contra P10_memory/_schema.yaml (types.session_state)
 # Max 3072 bytes
@@ -14,6 +15,7 @@ author: [agent_group_name]
 quality: [7.0_to_10.0]
 tags: [[tag1], [tag2], session, memory]
 tldr: [estado_atual_da_sessao_em_uma_frase]
+density_score: 1.0
 ---
 
 # Session State: [session_slug]

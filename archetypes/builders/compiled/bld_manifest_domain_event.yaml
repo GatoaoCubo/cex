@@ -27,7 +27,7 @@ capabilities:
 - Identify correct aggregate root and bounded context ownership
 - Enforce causal chain (causation_id -> correlation_id -> event_id)
 - Distinguish domain_event from signal, audit_log, workflow trigger
-quality: null
+quality: 7.5
 title: Manifest Domain Event Builder
 tldr: Builds immutable DDD domain_event records that capture significant occurrences with typed payload, aggregate root, and
   causal chain.

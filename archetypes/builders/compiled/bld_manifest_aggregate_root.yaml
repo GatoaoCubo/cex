@@ -3,7 +3,7 @@ kind: knowledge_card
 pillar: P06
 title: Aggregate Root Builder -- Manifest
 version: 1.0.0
-quality: null
+quality: 6.3
 tags:
 - builder
 - aggregate_root
@@ -22,6 +22,8 @@ keywords:
 - invariant
 - entity
 - consistency_boundary
+density_score: 1.0
+updated: '2026-04-17'
 identity: Specialist in building `aggregate_root` artifacts -- DDD entry-point entities that own a consistency boundary, enforce
   invariants, and control all access to their cluster. Knows Evans DDD patterns, CQRS aggregate design, event sourcing aggregate
   roots, and the hard line between aggregate_root (P06), interface (P06), and input_schema (P06).

@@ -8,7 +8,7 @@ created: "2026-04-17"
 updated: "2026-04-17"
 author: builder
 domain: canary_config
-quality: null
+quality: 7.8
 tags: [knowledge_card, canary_config, P09]
 llm_function: INJECT
 tldr: "Domain knowledge for canary_config: traffic stages, rollback triggers, Argo Rollouts, Flagger."

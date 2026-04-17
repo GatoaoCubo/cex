@@ -5,9 +5,11 @@ pillar: P03
 llm_function: REASON
 purpose: Step-by-step production process for data_contract
 version: 1.0.0
-quality: null
+quality: 5.0
 tags: [data_contract, builder, instruction]
 title: "Instruction Data Contract Builder"
+density_score: 0.83
+updated: "2026-04-17"
 ---
 # Instructions: How to Produce a data_contract
 ## Phase 1: IDENTIFY

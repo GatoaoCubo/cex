@@ -3,12 +3,14 @@ kind: knowledge_card
 pillar: P12
 title: Process Manager Builder -- Examples
 version: 1.0.0
-quality: null
+quality: 5.0
 tags:
 - builder
 - process_manager
 - examples
 llm_function: GOVERN
+density_score: 1.0
+updated: '2026-04-17'
 golden_example_order_fulfillment: "id: p12_pm_order_fulfillment\nkind: process_manager\ncorrelation_key: orderId\nstart_event:\
   \ OrderPlaced\nterminal_states: [FULFILLED, CANCELLED]\nstates: [PAYMENT_PENDING, INVENTORY_PENDING, SHIPPING_PENDING, FULFILLED,\
   \ CANCELLED]\nsubscribed_events: [OrderPlaced, PaymentConfirmed, InventoryReserved, ShipmentCreated, PaymentFailed]\ncommands_issued:\n\

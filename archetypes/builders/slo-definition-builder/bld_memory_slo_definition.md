@@ -8,7 +8,7 @@ created: "2026-04-17"
 updated: "2026-04-17"
 author: builder
 domain: slo_definition
-quality: null
+quality: 7.1
 tags: [memory, slo_definition, P09]
 llm_function: INJECT
 tldr: "Recalled patterns and corrections for slo_definition builder sessions."

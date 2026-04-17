@@ -5,9 +5,11 @@ pillar: P06
 llm_function: CONSTRAIN
 purpose: Formal schema for domain_event
 version: 1.0.0
-quality: null
+quality: 6.8
 tags: [domain_event, schema, ddd]
 title: "Schema Domain Event"
+density_score: 1.0
+updated: "2026-04-17"
 ---
 # Schema: domain_event
 ## Frontmatter Fields (Required)

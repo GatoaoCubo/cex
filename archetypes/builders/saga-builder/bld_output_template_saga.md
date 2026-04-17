@@ -8,7 +8,7 @@ created: "2026-04-17"
 updated: "2026-04-17"
 author: builder
 domain: saga
-quality: null
+quality: 7.0
 tags: [output_template, saga, P12]
 llm_function: PRODUCE
 tldr: "Canonical output template for saga artifacts."

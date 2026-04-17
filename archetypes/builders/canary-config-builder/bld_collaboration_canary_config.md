@@ -8,9 +8,9 @@ created: "2026-04-17"
 updated: "2026-04-17"
 author: builder
 domain: canary_config
-quality: null
+quality: 7.1
 tags: [rules, canary_config, P09]
-llm_function: CONSTRAIN
+llm_function: COLLABORATE
 tldr: "Hard constraints and edge cases for canary_config builder."
 density_score: null
 ---

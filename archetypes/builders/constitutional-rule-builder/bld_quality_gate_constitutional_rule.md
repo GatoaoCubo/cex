@@ -4,9 +4,11 @@ kind: quality_gate
 pillar: P11
 title: "Constitutional Rule Builder -- Quality Gate"
 version: 1.0.0
-quality: null
+quality: 6.0
 tags: [builder, constitutional_rule, quality_gate]
 llm_function: GOVERN
+density_score: 1.0
+updated: "2026-04-17"
 ---
 # Gate: constitutional_rule
 ## Threshold

@@ -9,7 +9,7 @@ created: 2026-04-17
 updated: 2026-04-17
 author: builder_agent
 domain: preference_dataset
-quality: null
+quality: 8.8
 tags: [preference_dataset, P11, GOVERN, kind-kc, rlhf, dpo, alignment]
 tldr: "preference_dataset curates (prompt, chosen, rejected) triplets for LLM alignment training via RLHF, DPO, KTO, or Constitutional AI."
 when_to_use: "Building, reviewing, or reasoning about preference_dataset artifacts"

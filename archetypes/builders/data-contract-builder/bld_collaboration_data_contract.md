@@ -2,11 +2,13 @@
 id: bld_rules_data_contract
 kind: guardrail
 pillar: P11
-llm_function: GOVERN
+llm_function: COLLABORATE
 version: 1.0.0
-quality: null
+quality: 6.5
 tags: [data_contract, rules, guardrail]
 title: "Rules: data_contract Builder"
+density_score: 1.0
+updated: "2026-04-17"
 ---
 # Builder Rules: data_contract
 ## ALWAYS

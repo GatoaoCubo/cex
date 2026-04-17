@@ -8,9 +8,9 @@ created: "2026-04-17"
 updated: "2026-04-17"
 author: builder
 domain: saga
-quality: null
+quality: 5.4
 tags: [context_sources, saga, P12]
-llm_function: INJECT
+llm_function: CONSTRAIN
 tldr: "Ordered context sources for F3 INJECT in saga builds."
 density_score: null
 ---

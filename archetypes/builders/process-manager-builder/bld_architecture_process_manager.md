@@ -4,9 +4,11 @@ kind: knowledge_card
 pillar: P12
 title: "Process Manager Builder -- Architecture"
 version: 1.0.0
-quality: null
+quality: 7.0
 tags: [builder, process_manager, architecture]
 llm_function: CONSTRAIN
+density_score: 0.99
+updated: "2026-04-17"
 ---
 # Architecture: process_manager
 ## Pattern Origin

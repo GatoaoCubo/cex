@@ -4,9 +4,11 @@ kind: knowledge_card
 pillar: P04
 title: "Event Stream Builder -- Memory"
 version: 1.0.0
-quality: null
+quality: 5.8
 tags: [builder, event_stream, memory]
 llm_function: INJECT
+density_score: 0.97
+updated: "2026-04-17"
 ---
 # Memory: event_stream
 ## Session Patterns

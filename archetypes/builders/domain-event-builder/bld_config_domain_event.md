@@ -2,11 +2,13 @@
 id: bld_context_sources_domain_event
 kind: rag_source
 pillar: P10
-llm_function: INJECT
+llm_function: CONSTRAIN
 version: 1.0.0
-quality: null
+quality: 6.0
 tags: [domain_event, context, rag]
 title: "Context Sources: domain_event"
+density_score: 1.0
+updated: "2026-04-17"
 ---
 # Context Sources: domain_event
 ## Mandatory Sources (load at F3 INJECT)

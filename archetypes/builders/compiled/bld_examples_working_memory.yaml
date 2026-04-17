@@ -3,7 +3,7 @@ id: bld_examples_working_memory
 pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of working_memory artifacts
-quality: null
+quality: 8.2
 title: Examples Working Memory
 version: 1.0.0
 author: n03_builder

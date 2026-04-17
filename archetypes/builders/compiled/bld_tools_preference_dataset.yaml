@@ -3,7 +3,7 @@ id: bld_tools_preference_dataset
 pillar: P04
 llm_function: CALL
 purpose: Tools and APIs available for preference_dataset production
-quality: null
+quality: 7.8
 title: Tools Preference Dataset
 version: 1.0.0
 author: n03_builder

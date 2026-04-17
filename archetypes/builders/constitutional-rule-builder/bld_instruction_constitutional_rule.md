@@ -4,9 +4,11 @@ kind: instruction
 pillar: P11
 title: "Constitutional Rule Builder -- Instruction"
 version: 1.0.0
-quality: null
+quality: 5.4
 tags: [builder, constitutional_rule, instruction]
 llm_function: REASON
+density_score: 0.76
+updated: "2026-04-17"
 ---
 # Instructions: How to Produce a constitutional_rule
 ## Phase 1: RESEARCH

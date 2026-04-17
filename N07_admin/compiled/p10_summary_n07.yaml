@@ -10,7 +10,7 @@ author: memory-summary-builder
 name: N07 Orchestration History Summary
 source_type: multi_session
 compression_method: hybrid
-quality: null
+quality: 8.3
 tags:
 - memory_summary
 - orchestration
@@ -29,6 +29,7 @@ description: Hybrid-compressed orchestration history for N07 boot context. Cover
   lessons, and token economy.
 last_updated: '2026-04-17'
 staleness_flag: auto-flag if updated > 7 days ago
+density_score: 1.0
 overview: 'Compressed orchestration memory for N07 boot context injection. Covers the last 30 days of multi-session mission
   activity. Consumed by N07 at session start instead of replaying hundreds of individual handoffs and signal files. Fires
   after each mission consolidation or every 7 days, whichever is sooner. Staleness guard: if `last_updated` is more than 7

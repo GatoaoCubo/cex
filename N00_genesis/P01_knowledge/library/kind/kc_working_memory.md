@@ -9,7 +9,7 @@ created: 2026-04-17
 updated: 2026-04-17
 author: builder_agent
 domain: working_memory
-quality: null
+quality: 8.8
 tags: [working_memory, P10, INJECT, kind-kc, agent-memory, task-state]
 tldr: "working_memory holds active task state in typed slots with capacity limits and task-scoped expiry. NOT episodic (past) or entity (persistent facts)."
 when_to_use: "Building, reviewing, or reasoning about working_memory artifacts"

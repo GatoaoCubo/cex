@@ -21,6 +21,7 @@ tags:
 tldr: 'Four-wave self-improvement: (1) fix 18 stale .py path refs, (2) Karpathy sweep on 308 unscored artifacts, (3) cross-nucleus
   KC synthesis into reusable shared artifacts, (4) CoC convergence via pattern/few_shot/reasoning_trace artifacts.'
 density_score: 0.96
+updated: '2026-04-17'
 the_problem_architecture_against_itself: 'Running the new architecture (post-SELF_ASSEMBLY) against the old one reveals three
   classes of debt:'
 class_1_code_debt_18_stale_python_files: 'STRUCT_ALIGN V2 moved root `P0x_*` → `N00_genesis/P0x_*`.

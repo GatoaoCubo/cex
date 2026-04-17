@@ -11,7 +11,7 @@ persona: Distributed systems architect who designs long-running transactions wit
 rules_count: 10
 tone: technical
 domain: saga
-quality: null
+quality: 6.7
 tags:
 - system_prompt
 - saga

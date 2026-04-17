@@ -19,6 +19,7 @@ tags:
 - merge
 tldr: Move root P01-P12 dirs into N00_genesis -- N00 becomes the single pillar registry.
 density_score: 0.95
+updated: '2026-04-17'
 problem: "After STRUCT_ALIGN V1, there is a structural duality:\n\ncex/\n  P01_knowledge/       root level -- _schema, library,\
   \ examples, templates\n  N00_genesis/\n    P01_knowledge/     N00 level -- kind manifests, kind indexes (W4)\n  N01_intelligence/\n\
   \    P01_knowledge/     nucleus level -- N01 artifacts\n\nThree layers where two would suffice. N00 IS the pillar registry\

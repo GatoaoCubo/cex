@@ -4,9 +4,11 @@ kind: knowledge_card
 pillar: P11
 title: "Constitutional Rule Builder -- Context Sources"
 version: 1.0.0
-quality: null
+quality: 5.4
 tags: [builder, constitutional_rule, context]
-llm_function: INJECT
+llm_function: CONSTRAIN
+density_score: 1.0
+updated: "2026-04-17"
 ---
 # Context Sources: constitutional_rule
 ## Mandatory Loads (F3 INJECT)

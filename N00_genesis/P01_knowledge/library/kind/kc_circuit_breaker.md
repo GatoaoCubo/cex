@@ -9,7 +9,7 @@ created: 2026-04-17
 updated: 2026-04-17
 author: builder_agent
 domain: circuit_breaker
-quality: null
+quality: 8.8
 tags: [circuit_breaker, P09, GOVERN, kind-kc, resilience, fault-tolerance]
 tldr: "circuit_breaker auto-disables failing dependencies via state machine (closed/open/half-open) and allows recovery after cooldown. NOT rate_limit_config or fallback_chain."
 when_to_use: "Building, reviewing, or reasoning about circuit_breaker artifacts"

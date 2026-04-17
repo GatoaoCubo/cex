@@ -4,8 +4,10 @@ kind: knowledge_card
 pillar: P01
 nucleus: n00
 domain: kind-taxonomy
-quality: null
+quality: 7.9
 tags: [kind, taxonomy, lineage_record, P01, knowledge, provenance]
+density_score: 0.97
+updated: "2026-04-17"
 ---
 
 # lineage_record

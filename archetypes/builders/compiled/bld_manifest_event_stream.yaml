@@ -3,7 +3,7 @@ kind: knowledge_card
 pillar: P04
 title: Event Stream Builder -- Manifest
 version: 1.0.0
-quality: null
+quality: 6.2
 tags:
 - builder
 - event_stream
@@ -24,6 +24,8 @@ keywords:
 - partitioning
 - consumer_group
 - retention
+density_score: 1.0
+updated: '2026-04-17'
 identity: Specialist in building `event_stream` artifacts -- configurations for real-time ordered sequences of domain events
   consumed by one or more subscribers. Knows Kafka topic config, Kinesis stream config, event sourcing log patterns, and the
   hard line between event_stream (P04), webhook (single outbound call), and signal (internal nucleus signal).

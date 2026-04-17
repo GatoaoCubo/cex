@@ -4,9 +4,11 @@ kind: knowledge_card
 pillar: P01
 llm_function: INJECT
 version: 1.0.0
-quality: null
+quality: 6.5
 tags: [bounded_context, ddd, context-map, knowledge]
 title: "Knowledge: Bounded Context Pattern"
+density_score: 0.98
+updated: "2026-04-17"
 ---
 # Domain Knowledge: bounded_context
 ## Core Facts

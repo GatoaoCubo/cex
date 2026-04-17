@@ -4,12 +4,14 @@ pillar: P03
 llm_function: REASON
 purpose: Step-by-step production process for alert_rule
 version: 1.0.0
-quality: null
+quality: 5.4
 tags:
 - alert_rule
 - builder
 - instruction
 title: Instruction Alert Rule Builder
+density_score: 0.86
+updated: '2026-04-17'
 phase_1_identify:
 - Name the condition being monitored (what metric or signal)
 - Determine the numeric threshold (>= 95%, < 100ms, > 500)

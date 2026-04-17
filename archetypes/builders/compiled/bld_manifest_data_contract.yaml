@@ -27,7 +27,7 @@ capabilities:
 - 'Specify SLA: freshness, latency, availability, error rate thresholds'
 - Version contracts independently from producer implementation
 - Distinguish from dataset_card (metadata) and validation_schema (output validation)
-quality: null
+quality: 7.5
 title: Manifest Data Contract Builder
 tldr: Builds data_contract artifacts defining schema, semantics, SLA, and versioning agreements between data producers and
   consumers.

@@ -3,12 +3,14 @@ kind: instruction
 pillar: P04
 title: Event Stream Builder -- Instruction
 version: 1.0.0
-quality: null
+quality: 5.3
 tags:
 - builder
 - event_stream
 - instruction
 llm_function: REASON
+density_score: 0.83
+updated: '2026-04-17'
 phase_1_research:
 - Identify the domain events flowing through this stream -- what facts are being published?
 - 'Determine the producer: which service or aggregate emits events to this stream?'

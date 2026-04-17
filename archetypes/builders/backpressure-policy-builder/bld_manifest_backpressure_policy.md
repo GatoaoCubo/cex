@@ -14,7 +14,7 @@ keywords: [backpressure, reactive streams, flow control, producer consumer, buff
 triggers: ["create backpressure policy", "configure flow control", "handle slow consumer", "reactive streams policy", "overflow policy"]
 capabilities: >
   L1: Specialist in building backpressure_policy artifacts -- policies defining how a system responds when downstream consumers cannot keep up with upstream producers. L2: Define overflow strategies (drop, buffer, throttle, error), buffer sizes, and shed thresholds. L3: When user needs to create, build, or scaffold backpressure policy for producer-consumer flow control.
-quality: null
+quality: 7.6
 title: "Manifest Backpressure Policy"
 tldr: "Builds backpressure_policy artifacts -- reactive streams flow control policy when consumers lag behind producers."
 density_score: 0.90

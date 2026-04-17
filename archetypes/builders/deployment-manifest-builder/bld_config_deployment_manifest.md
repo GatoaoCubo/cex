@@ -8,9 +8,9 @@ created: "2026-04-17"
 updated: "2026-04-17"
 author: builder
 domain: deployment_manifest
-quality: null
+quality: 6.6
 tags: [context_sources, deployment_manifest, P09]
-llm_function: INJECT
+llm_function: CONSTRAIN
 tldr: "Ordered list of context sources to inject at F3 INJECT for deployment_manifest builds."
 density_score: null
 ---

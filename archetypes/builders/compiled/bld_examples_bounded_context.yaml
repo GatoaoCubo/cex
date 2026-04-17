@@ -3,12 +3,14 @@ kind: few_shot_example
 pillar: P03
 llm_function: GOVERN
 version: 1.0.0
-quality: null
+quality: 4.7
 tags:
 - bounded_context
 - examples
 - few-shot
 title: 'Examples: bounded_context'
+density_score: 1.0
+updated: '2026-04-17'
 example_1_e_commerce_sales_bc: "id: bc_sales\nkind: bounded_context\npillar: P08\ntitle: \"Sales Bounded Context\"\ncontext_name:\
   \ Sales\nteam_owner: sales-squad\nscope_statement: \"Customer purchase intent to confirmed order; pricing and discount rules\
   \ apply here.\"\ndomain_vocabulary: dv_sales_vocabulary\nquality: null\ntags: [sales, ecommerce, bounded-context]\nAggregates:\

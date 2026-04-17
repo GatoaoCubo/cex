@@ -4,9 +4,11 @@ kind: instruction
 pillar: P04
 title: "Event Stream Builder -- Instruction"
 version: 1.0.0
-quality: null
+quality: 5.4
 tags: [builder, event_stream, instruction]
 llm_function: REASON
+density_score: 0.83
+updated: "2026-04-17"
 ---
 # Instructions: How to Produce an event_stream
 ## Phase 1: RESEARCH

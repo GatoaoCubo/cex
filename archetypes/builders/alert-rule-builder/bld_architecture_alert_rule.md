@@ -4,9 +4,11 @@ kind: component_map
 pillar: P08
 llm_function: CONSTRAIN
 version: 1.0.0
-quality: null
+quality: 6.8
 tags: [alert_rule, architecture, observability]
 title: "Architecture Alert Rule"
+density_score: 1.0
+updated: "2026-04-17"
 ---
 # Architecture: alert_rule
 ## Position in CEX Kind Taxonomy

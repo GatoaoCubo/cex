@@ -3,7 +3,7 @@ id: bld_architecture_drift_detector
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of drift_detector -- inventory, dependencies, and architectural position
-quality: null
+quality: 8.3
 title: Architecture Drift Detector
 version: 1.0.0
 author: n03_builder

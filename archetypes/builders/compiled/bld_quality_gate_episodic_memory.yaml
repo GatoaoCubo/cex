@@ -7,7 +7,7 @@ created: '2026-04-17'
 updated: '2026-04-17'
 author: builder_agent
 domain: episodic_memory -- long-term temporally-indexed past interaction store
-quality: null
+quality: 7.5
 tags:
 - quality-gate
 - episodic-memory

@@ -3,7 +3,7 @@ id: bld_collaboration_episodic_memory
 pillar: P12
 llm_function: COLLABORATE
 purpose: How episodic-memory-builder works in crews with other builders
-quality: null
+quality: 8.2
 title: Collaboration Episodic Memory
 version: 1.0.0
 author: n03_builder

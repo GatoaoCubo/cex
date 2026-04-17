@@ -5,7 +5,7 @@ pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of backpressure_policy artifacts
 pattern: few-shot learning -- LLM reads these before producing
-quality: null
+quality: 8.6
 title: "Examples Backpressure Policy"
 version: "1.0.0"
 author: n03_builder

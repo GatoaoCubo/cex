@@ -2,11 +2,13 @@
 id: bld_context_sources_bounded_context
 kind: rag_source
 pillar: P10
-llm_function: INJECT
+llm_function: CONSTRAIN
 version: 1.0.0
-quality: null
+quality: 6.0
 tags: [bounded_context, context, rag]
 title: "Context Sources: bounded_context"
+density_score: 1.0
+updated: "2026-04-17"
 ---
 # Context Sources: bounded_context
 ## Mandatory Sources (load at F3 INJECT)

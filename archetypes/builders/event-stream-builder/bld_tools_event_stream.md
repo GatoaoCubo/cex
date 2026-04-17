@@ -4,9 +4,11 @@ kind: knowledge_card
 pillar: P04
 title: "Event Stream Builder -- Tools"
 version: 1.0.0
-quality: null
+quality: 6.5
 llm_function: CALL
 tags: [builder, event_stream, tools]
+density_score: 1.0
+updated: "2026-04-17"
 ---
 
 # Event Stream Builder -- Tools

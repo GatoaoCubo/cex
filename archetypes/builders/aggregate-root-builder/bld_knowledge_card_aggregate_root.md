@@ -4,9 +4,11 @@ kind: knowledge_card
 pillar: P06
 title: "Aggregate Root Builder -- Knowledge Card"
 version: 1.0.0
-quality: null
+quality: 5.3
 tags: [builder, aggregate_root, knowledge]
 llm_function: INJECT
+density_score: 0.93
+updated: "2026-04-17"
 ---
 # Knowledge: aggregate_root
 ## Core Concept

@@ -15,7 +15,7 @@ capabilities: >
   L1: Specialist in data_contract artifacts -- schema-level producer/consumer agreements.
   L2: Defines structure, semantics, SLA, and versioning between data producer and consumer.
   L3: When data crosses team or system boundaries and a formal agreement is needed.
-quality: null
+quality: 7.5
 title: "Manifest Data Contract Builder"
 tldr: "Builds data_contract artifacts defining schema, semantics, SLA, and versioning agreements between data producers and consumers."
 density_score: 0.88

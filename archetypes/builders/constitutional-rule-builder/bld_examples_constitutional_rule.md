@@ -4,9 +4,11 @@ kind: knowledge_card
 pillar: P11
 title: "Constitutional Rule Builder -- Examples"
 version: 1.0.0
-quality: null
+quality: 5.5
 tags: [builder, constitutional_rule, examples]
 llm_function: GOVERN
+density_score: 0.97
+updated: "2026-04-17"
 ---
 # Examples: constitutional_rule
 ## Golden Example: AI Identity Honesty

@@ -4,9 +4,11 @@ kind: few_shot_example
 pillar: P03
 llm_function: GOVERN
 version: 1.0.0
-quality: null
+quality: 5.1
 tags: [domain_event, examples, few-shot]
 title: "Examples: domain_event"
+density_score: 1.0
+updated: "2026-04-17"
 ---
 # Examples: domain_event
 ## Example 1: E-commerce OrderPlaced

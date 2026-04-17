@@ -3,12 +3,14 @@ kind: quality_gate
 pillar: P04
 title: Event Stream Builder -- Quality Gate
 version: 1.0.0
-quality: null
+quality: 5.9
 tags:
 - builder
 - event_stream
 - quality_gate
 llm_function: GOVERN
+density_score: 1.0
+updated: '2026-04-17'
 threshold: '>= 7.0 to publish; >= 9.0 for reference'
 hard_gates: '| ID | Check | Fail Condition |
 

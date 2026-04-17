@@ -14,7 +14,7 @@ knowledge_boundary: 'Artifact enumeration, target environment specs, config over
   strategies, Kubernetes manifests, Helm values | Does NOT: env_config (runtime env vars only), sandbox_spec (ephemeral test
   envs), canary_config (traffic splits)'
 domain: deployment_manifest
-quality: null
+quality: 7.5
 tags:
 - system_prompt
 - deployment_manifest

@@ -4,9 +4,11 @@ kind: knowledge_card
 pillar: P04
 title: "Event Stream Builder -- Examples"
 version: 1.0.0
-quality: null
+quality: 5.1
 tags: [builder, event_stream, examples]
 llm_function: GOVERN
+density_score: 1.0
+updated: "2026-04-17"
 ---
 # Examples: event_stream
 ## Golden Example: Order Events

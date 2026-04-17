@@ -8,7 +8,7 @@ created: "2026-04-17"
 updated: "2026-04-17"
 author: builder
 domain: lineage_record
-quality: null
+quality: 7.2
 tags: [output_template, lineage_record, P01]
 llm_function: PRODUCE
 tldr: "Canonical output template for lineage_record artifacts."

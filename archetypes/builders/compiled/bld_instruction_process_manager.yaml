@@ -3,12 +3,14 @@ kind: instruction
 pillar: P12
 title: Process Manager Builder -- Instruction
 version: 1.0.0
-quality: null
+quality: 5.3
 tags:
 - builder
 - process_manager
 - instruction
 llm_function: REASON
+density_score: 0.8
+updated: '2026-04-17'
 phase_1_research:
 - Identify the business process being coordinated -- what multi-step operation spans multiple services or aggregates?
 - 'Define the correlation key: what identifier ties all events/commands in one process instance together?'

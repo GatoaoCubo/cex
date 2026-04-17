@@ -8,7 +8,7 @@ created: "2026-04-17"
 updated: "2026-04-17"
 author: builder
 domain: deployment_manifest
-quality: null
+quality: 7.8
 tags: [knowledge_card, deployment_manifest, P09]
 llm_function: INJECT
 tldr: "Domain knowledge for building deployment_manifest artifacts: patterns, anti-patterns, and decision rules."

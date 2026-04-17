@@ -3,7 +3,7 @@ id: bld_schema_prospective_memory
 pillar: P10
 llm_function: CONSTRAIN
 purpose: Formal schema for prospective_memory
-quality: null
+quality: 7.6
 title: Schema Prospective Memory
 version: 1.0.0
 author: n03_builder

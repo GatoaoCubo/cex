@@ -33,7 +33,7 @@ capabilities:
 - Specify choreography vs orchestration topology
 - Validate for compensation completeness (every step has a compensating action)
 - 'Quality gate: all gates pass'
-quality: null
+quality: 8.3
 title: 'Manifest: saga Builder'
 tldr: 'Builds saga artifacts: long-running distributed transactions with step-by-step compensating actions for rollback.'
 density_score: null

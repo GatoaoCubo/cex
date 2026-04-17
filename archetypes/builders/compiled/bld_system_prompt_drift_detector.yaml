@@ -13,7 +13,7 @@ tone: technical
 knowledge_boundary: Distribution shift, statistical tests (PSI/KS/chi-square/JS), windowing, alerting, Evidently AI, Arize,
   Whylogs | NOT regression_check (code test assertions), benchmark (point-in-time eval score), quality_gate (artifact quality)
 domain: drift_detector
-quality: null
+quality: 7.9
 tags:
 - system_prompt
 - drift_detector

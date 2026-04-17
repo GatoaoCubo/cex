@@ -8,7 +8,7 @@ created: "2026-04-17"
 updated: "2026-04-17"
 author: "builder_agent"
 domain: "prospective_memory -- agent store of future intentions and reminders"
-quality: null
+quality: 7.5
 tags: [quality-gate, prospective-memory, P10, future-actions]
 tldr: "Gate for prospective_memory: owner, reminders array, trigger_type, action_payload, execution_mechanism."
 density_score: 0.90

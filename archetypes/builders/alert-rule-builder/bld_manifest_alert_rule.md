@@ -15,7 +15,7 @@ capabilities: >
   L1: Specialist in alert_rule artifacts -- observable threshold conditions with notification actions.
   L2: Defines metric expression, severity, routing, and automated response.
   L3: When a system condition must trigger a notification or automated remediation.
-quality: null
+quality: 7.5
 title: "Manifest Alert Rule Builder"
 tldr: "Builds alert_rule configs with metric expression, numeric threshold, severity label, routing target, and optional automated response."
 density_score: 0.87

@@ -20,7 +20,7 @@ agent_group: edison
 keywords: [backpressure, overflow strategy, buffer, watermark, shed threshold, reactive streams, consumer lag]
 memory_scope: project
 observation_types: [feedback, project]
-quality: null
+quality: 7.5
 title: "Memory Backpressure Policy"
 density_score: 0.90
 llm_function: INJECT

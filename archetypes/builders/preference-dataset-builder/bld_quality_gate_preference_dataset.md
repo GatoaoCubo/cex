@@ -8,7 +8,7 @@ created: "2026-04-17"
 updated: "2026-04-17"
 author: "builder_agent"
 domain: "preference_dataset -- curated preference pairs for RLHF/DPO/KTO alignment training"
-quality: null
+quality: 8.4
 tags: [quality-gate, preference-dataset, P11, rlhf, dpo]
 tldr: "Pass/fail gate for preference_dataset: signal clarity, agreement_rate, rater_count, pair presence, training_objective."
 density_score: 0.90

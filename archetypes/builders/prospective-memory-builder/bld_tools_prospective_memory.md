@@ -4,7 +4,7 @@ id: bld_tools_prospective_memory
 pillar: P04
 llm_function: CALL
 purpose: Tools for prospective_memory production
-quality: null
+quality: 6.8
 title: "Tools Prospective Memory"
 version: "1.0.0"
 author: n03_builder

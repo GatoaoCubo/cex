@@ -4,11 +4,12 @@ kind: knowledge_card
 pillar: P01
 title: "HYBRID_REVIEW3 Audit: model_architecture (N02)"
 version: 1.0.0
-quality: 6.6
+quality: 6.7
 density_score: 0.95
 tags: [audit, hybrid_review3, model_architecture, gemma4, wave2]
 domain: ML architecture quality assurance
 created: "2026-04-14"
+updated: "2026-04-17"
 ---
 
 # HYBRID_REVIEW3 Audit: model_architecture (N02)

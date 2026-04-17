@@ -21,6 +21,7 @@ tags:
 tldr: Each nucleus (N01-N06) auto-constructs its typed artifact portfolio using sin-lens-driven portfolio archetypes, kind
   synergy patterns, and a self-assembly loop -- turning 5-word tasks into outperforming execution.
 density_score: 0.96
+updated: '2026-04-17'
 the_problem: "CEX has 258 builders, 257 kinds, and 8 nuclei -- but each nucleus is a partial portfolio.\n\nCurrent gap matrix\
   \ (artifacts per pillar per nucleus, empirically measured):\n\n       P01  P02  P03  P04  P05  P06  P07  P08  P09  P10 \
   \ P11  P12\nN01:    60    4    4    5   31    0   21    3    6    9    2    5   total=150\nN02:    23    2    8    4   26\

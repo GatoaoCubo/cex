@@ -15,7 +15,7 @@ capabilities: >
   L1: Specialist in building `lineage_record` -- provenance chains for knowledge artifacts.
   L2: Encode derivation steps, transformation agents, and curation decisions.
   L3: When user needs to document how a knowledge artifact was created from sources.
-quality: null
+quality: 7.9
 title: "Manifest: lineage_record Builder"
 tldr: "Builds lineage_record artifacts documenting provenance chains from source to derived artifact."
 density_score: null

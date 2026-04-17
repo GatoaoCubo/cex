@@ -3,7 +3,7 @@ kind: knowledge_card
 pillar: P01
 nucleus: n01
 domain: taxonomy-audit
-quality: null
+quality: 8.2
 tags:
 - ddd
 - ubiquitous-language
@@ -11,6 +11,8 @@ tags:
 - gap-analysis
 - strategic-design
 version: 1.0.0
+density_score: 1.0
+updated: '2026-04-17'
 1_ddd_coverage_map: 'Scoring: COVERED = direct kind, no ambiguity | PARTIAL = closest kind covers 50-80% of
 
   DDD semantics | MISSING = no kind within 2 semantic degrees'

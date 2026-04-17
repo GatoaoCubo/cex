@@ -8,7 +8,7 @@ created: "2026-04-17"
 updated: "2026-04-17"
 author: builder
 domain: canary_config
-quality: null
+quality: 6.6
 tags: [memory, canary_config, P09]
 llm_function: INJECT
 tldr: "Recalled patterns and corrections for canary_config builder sessions."

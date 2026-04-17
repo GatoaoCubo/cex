@@ -9,7 +9,7 @@ created: 2026-04-17
 updated: 2026-04-17
 author: builder_agent
 domain: prospective_memory
-quality: null
+quality: 8.8
 tags: [prospective_memory, P10, COLLABORATE, kind-kc, agent-memory, future-actions]
 tldr: "prospective_memory stores future-directed intentions for LLM agents: triggers, action payloads, expiry. NOT schedule (workflow config) or working_memory (current task)."
 when_to_use: "Building, reviewing, or reasoning about prospective_memory artifacts"

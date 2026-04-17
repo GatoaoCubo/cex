@@ -9,9 +9,10 @@ tags:
 - api
 kind: knowledge_card
 pillar: P01
-quality: null
+quality: 8.2
 priority: 1
 density_score: 1.0
+updated: '2026-04-17'
 overview: The Ollama wrapper test suite provides standardized procedures for validating integrations between CEX systems and
   Ollama's API. This guide covers testing scenarios, configuration options, and validation criteria for ensuring compatibility
   with Ollama's inference and model management capabilities. The framework supports model compatibility testing, API endpoint

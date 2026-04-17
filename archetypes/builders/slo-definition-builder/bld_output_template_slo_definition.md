@@ -8,7 +8,7 @@ created: "2026-04-17"
 updated: "2026-04-17"
 author: builder
 domain: slo_definition
-quality: null
+quality: 7.0
 tags: [output_template, slo_definition, P09]
 llm_function: PRODUCE
 tldr: "Canonical output template for slo_definition artifacts."

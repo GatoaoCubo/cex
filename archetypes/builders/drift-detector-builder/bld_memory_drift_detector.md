@@ -17,7 +17,7 @@ tldr: "Named features + numeric threshold + suppression_window are load-bearing 
 impact_score: 8.0
 decay_rate: 0.02
 memory_scope: project
-quality: null
+quality: 8.0
 title: "Memory Drift Detector"
 density_score: 0.90
 llm_function: INJECT

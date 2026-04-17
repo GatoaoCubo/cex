@@ -14,7 +14,7 @@ keywords: [prospective memory, future actions, reminders, scheduled tasks, defer
 triggers: ["create prospective memory", "schedule future action", "agent reminder", "deferred task store"]
 capabilities: >
   L1: Specialist in building prospective_memory artifacts -- stores of scheduled future actions and reminders for agents. L2: Define trigger conditions, scheduled times, action payloads, and expiry policies. L3: When user needs to create, build, or scaffold prospective memory for agent reminders.
-quality: null
+quality: 7.6
 title: "Manifest Prospective Memory"
 tldr: "Builds prospective_memory artifacts -- scheduled future actions and reminders an agent must execute at a future time or trigger condition."
 density_score: 0.90

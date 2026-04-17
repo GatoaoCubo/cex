@@ -12,7 +12,7 @@ prerequisites:
 - Target artifact (the thing whose lineage is being recorded) is identified
 - At least one source entity is known
 - The transformation activity is describable
-quality: null
+quality: 6.6
 tags:
 - instruction
 - lineage_record

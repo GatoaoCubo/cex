@@ -5,7 +5,7 @@ pillar: P11
 llm_function: CONSTRAIN
 purpose: Formal schema -- SINGLE SOURCE OF TRUTH for drift_detector
 pattern: TEMPLATE derives from this. CONFIG restricts this.
-quality: null
+quality: 8.3
 title: "Schema Drift Detector"
 version: "1.0.0"
 author: n03_builder

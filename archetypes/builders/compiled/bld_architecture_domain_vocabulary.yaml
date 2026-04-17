@@ -3,12 +3,14 @@ kind: component_map
 pillar: P08
 llm_function: CONSTRAIN
 version: 1.0.0
-quality: null
+quality: 7.0
 tags:
 - domain_vocabulary
 - architecture
 - ubiquitous-language
 title: Architecture Domain Vocabulary
+density_score: 1.0
+updated: '2026-04-17'
 position_in_cex_kind_taxonomy: "P01 Knowledge\n  knowledge_card    (atomic facts)\n  domain_vocabulary <-- THIS KIND (canonical\
   \ term registry for a BC)\n  glossary_entry    (single term definition)\n  context_doc       (broad domain background)"
 relationships: '| Relation | Kind | Direction | Notes |

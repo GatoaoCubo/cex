@@ -4,9 +4,11 @@ kind: knowledge_card
 pillar: P06
 title: "Value Object Builder -- Context Sources"
 version: 1.0.0
-quality: null
+quality: 5.4
 tags: [builder, value_object, context]
-llm_function: INJECT
+llm_function: CONSTRAIN
+density_score: 1.0
+updated: "2026-04-17"
 ---
 # Context Sources: value_object
 ## Mandatory Loads (F3 INJECT)

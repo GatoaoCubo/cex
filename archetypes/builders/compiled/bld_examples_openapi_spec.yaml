@@ -1,0 +1,112 @@
+kind: examples
+id: bld_examples_openapi_spec
+pillar: P07
+llm_function: GOVERN
+purpose: Golden and anti-examples of openapi_spec artifacts
+pattern: few-shot learning -- LLM reads these before producing
+quality: null
+title: Examples OpenAPI Spec
+version: 1.0.0
+author: n03_builder
+tags:
+- openapi_spec
+- builder
+- examples
+tldr: 'Golden and anti-examples for openapi_spec construction: paths, schemas, security, error responses.'
+domain: openapi spec construction
+created: '2026-04-17'
+updated: '2026-04-17'
+density_score: 0.9
+golden_example: 'INPUT: "Create OpenAPI spec for a User Management API with JWT auth"
+
+
+  WHY THIS IS GOLDEN:
+
+  - id matches `^p06_oas_[a-z][a-z0-9_]+$` -- H02 pass
+
+  - oas_version declared as 3.1.0 -- H03 pass
+
+  - servers array present -- H04 pass
+
+  - paths with at least one operation -- H05 pass
+
+  - All 3 body sections present -- H06 pass
+
+  - quality: null -- H01 pass
+
+  - components.schemas referenced via $ref -- best practice
+
+  - securitySchemes with global security -- H07 pass
+
+
+  id: p06_oas_user_management_api
+
+  kind: openapi_spec
+
+  pillar: P06
+
+  version: "1.0.0"
+
+  created: "2026-04-17"
+
+  updated: "2026-04-17"
+
+  author: "builder_agent"
+
+  api_name: "User Management API"
+
+  oas_version: "3.1.0"
+
+  quality: null
+
+  tags: [openapi_spec, user_management, jwt_auth]
+
+  tldr: "OAS 3.1 spec for User Management API: CRUD users, JWT bearer auth, standard error responses"'
+openapi_document: "openapi: \"3.1.0\"\ninfo:\n  title: User Management API\n  version: \"1.0.0\"\n  description: CRUD operations\
+  \ for user lifecycle management\nservers:\n  - url: https://api.example.com/v1\n    description: Production\n  - url: https://staging-api.example.com/v1\n\
+  \    description: Staging\npaths:\n  /users:\n    get:\n      operationId: listUsers\n      summary: List all users\n  \
+  \    tags: [users]\n      parameters:\n        - name: page\n          in: query\n          schema: {type: integer, default:\
+  \ 1}\n        - name: limit\n          in: query\n          schema: {type: integer, default: 20, maximum: 100}\n      responses:\n\
+  \        \"200\":\n          description: User list\n          content:\n            application/json:\n              schema:\n\
+  \                $ref: \"#/components/schemas/UserList\"\n        \"401\":\n          $ref: \"#/components/responses/Unauthorized\"\
+  \n    post:\n      operationId: createUser\n      summary: Create user\n      tags: [users]\n      requestBody:\n      \
+  \  required: true\n        content:\n          application/json:\n            schema:\n              $ref: \"#/components/schemas/CreateUserRequest\"\
+  \n      responses:\n        \"201\":\n          description: Created\n          content:\n            application/json:\n\
+  \              schema:\n                $ref: \"#/components/schemas/User\"\n        \"400\":\n          $ref: \"#/components/responses/BadRequest\"\
+  \n  /users/{id}:\n    get:\n      operationId: getUser\n      summary: Get user by ID\n      tags: [users]\n      parameters:\n\
+  \        - name: id\n          in: path\n          required: true\n          schema: {type: string, format: uuid}\n    \
+  \  responses:\n        \"200\":\n          description: User found\n          content:\n            application/json:\n\
+  \              schema:\n                $ref: \"#/components/schemas/User\"\n        \"404\":\n          $ref: \"#/components/responses/NotFound\"\
+  \ncomponents:\n  schemas:\n    User:\n      type: object\n      required: [id, email, created_at]\n      properties:\n \
+  \       id: {type: string, format: uuid}\n        email: {type: string, format: email}\n        name: {type: string}\n \
+  \       created_at: {type: string, format: date-time}\n    UserList:\n      type: object\n      properties:\n        items:\n\
+  \          type: array\n          items: {$ref: \"#/components/schemas/User\"}\n        total: {type: integer}\n    CreateUserRequest:\n\
+  \      type: object\n      required: [email]\n      properties:\n        email: {type: string, format: email}\n        name:\
+  \ {type: string}\n    ErrorResponse:\n      type: object\n      required: [code, message]\n      properties:\n        code:\
+  \ {type: string}\n        message: {type: string}\n  responses:\n    BadRequest:\n      description: Invalid request\n \
+  \     content:\n        application/json:\n          schema: {$ref: \"#/components/schemas/ErrorResponse\"}\n    Unauthorized:\n\
+  \      description: Authentication required\n      content:\n        application/json:\n          schema: {$ref: \"#/components/schemas/ErrorResponse\"\
+  }\n    NotFound:\n      description: Resource not found\n      content:\n        application/json:\n          schema: {$ref:\
+  \ \"#/components/schemas/ErrorResponse\"}\n  securitySchemes:\n    bearerAuth:\n      type: http\n      scheme: bearer\n\
+  \      bearerFormat: JWT\nsecurity:\n  - bearerAuth: []"
+security: 'JWT bearer authentication. Declare `Authorization: Bearer <token>` on all requests. Security override per-operation:
+  `security: []` for public endpoints (e.g. /health).'
+error_responses: '| Code | Meaning | Schema |
+
+  |------|---------|--------|
+
+  | 400 | Validation error | ErrorResponse |
+
+  | 401 | Missing/invalid JWT | ErrorResponse |
+
+  | 404 | Resource not found | ErrorResponse |
+
+  | 500 | Internal server error | ErrorResponse |
+
+
+  ---'
+anti_example: "INPUT: \"Create API spec for users\"\nBAD OUTPUT:\nid: users-api\nkind: api_spec\npaths:\n  /users:\n    get:\n\
+  \      responses:\n        200:\n          description: ok\nquality: 8.0\n\nFAILURES:\n1. id: \"users-api\" has hyphens,\
+  \ no p06_oas_ prefix -> H02 FAIL\n2. kind: \"api_spec\" not \"openapi_spec\" -> H04 FAIL\n3. Missing oas_version, servers,\
+  \ components -> H03/H04 FAIL\n4. No security scheme declared -> H07 FAIL\n5. quality: 8.0 (not null) -> H01 FAIL\n6. Missing\
+  \ all 3 body sections -> H06 FAIL\n7. Response schema missing content/schema -> incomplete spec"

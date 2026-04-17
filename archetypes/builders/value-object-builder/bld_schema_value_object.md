@@ -4,9 +4,11 @@ kind: schema
 pillar: P06
 title: "Value Object Builder -- Schema"
 version: 1.0.0
-quality: null
+quality: 6.6
 tags: [builder, value_object, schema]
 llm_function: CONSTRAIN
+density_score: 1.0
+updated: "2026-04-17"
 ---
 # Schema: value_object
 ## Frontmatter Fields

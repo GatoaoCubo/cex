@@ -3,7 +3,7 @@ kind: integration_guide
 pillar: P04
 title: Shopify Integration Guide
 version: 0.1.0
-quality: null
+quality: 8.2
 status: template
 brand_placeholders:
 - BRAND_SHOPIFY_DOMAIN
@@ -16,6 +16,8 @@ tags:
 - distillation
 - shopify
 - integration
+density_score: 1.0
+updated: '2026-04-17'
 purpose: Step-by-step integration guide for connecting a {{BRAND_SHOPIFY_DOMAIN}} Shopify store to a Supabase backend, enabling
   bidirectional product sync, webhook-driven inventory updates, and OAuth-authenticated admin operations.
 when_to_use:

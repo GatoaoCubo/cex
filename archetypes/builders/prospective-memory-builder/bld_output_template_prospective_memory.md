@@ -4,7 +4,7 @@ id: bld_output_template_prospective_memory
 pillar: P05
 llm_function: PRODUCE
 purpose: Template for prospective_memory artifact production
-quality: null
+quality: 7.2
 title: "Output Template Prospective Memory"
 version: "1.0.0"
 author: n03_builder

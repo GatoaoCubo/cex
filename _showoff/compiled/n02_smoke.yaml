@@ -3,6 +3,6 @@ kind: smoke_eval
 nucleus: n02
 runtime: gemini
 mission: GEMINI_FIX_SMOKE
-quality: 8.2
+quality: 2.0
 density_score: 0.95
 updated: '2026-04-17'

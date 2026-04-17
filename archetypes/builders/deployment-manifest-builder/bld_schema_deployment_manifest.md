@@ -5,7 +5,7 @@ pillar: P06
 llm_function: CONSTRAIN
 purpose: "Formal schema -- SINGLE SOURCE OF TRUTH for deployment_manifest"
 pattern: "TEMPLATE derives from this. CONFIG restricts this."
-quality: null
+quality: 7.9
 title: "Schema: deployment_manifest"
 version: "1.0.0"
 author: builder

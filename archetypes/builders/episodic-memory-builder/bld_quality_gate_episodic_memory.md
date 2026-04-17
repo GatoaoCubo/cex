@@ -8,7 +8,7 @@ created: "2026-04-17"
 updated: "2026-04-17"
 author: "builder_agent"
 domain: "episodic_memory -- long-term temporally-indexed past interaction store"
-quality: null
+quality: 7.5
 tags: [quality-gate, episodic-memory, P10, long-term]
 tldr: "Pass/fail gate for episodic_memory: episode_schema with timestamp, retrieval_method, episode_count, decay_policy, owner."
 density_score: 0.90

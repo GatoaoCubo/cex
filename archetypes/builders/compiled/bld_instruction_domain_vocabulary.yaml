@@ -4,12 +4,14 @@ pillar: P03
 llm_function: REASON
 purpose: Step-by-step production process for domain_vocabulary
 version: 1.0.0
-quality: null
+quality: 4.9
 tags:
 - domain_vocabulary
 - builder
 - instruction
 title: Instruction Domain Vocabulary Builder
+density_score: 0.82
+updated: '2026-04-17'
 phase_1_scope:
 - Identify the bounded context this vocabulary governs (e.g., sales, billing, identity)
 - List the agents/nuclei that share this context and need consistent terms

@@ -4,9 +4,11 @@ kind: prompt_template
 pillar: P03
 llm_function: PRODUCE
 version: 1.0.0
-quality: null
+quality: 6.2
 tags: [domain_event, template, output]
 title: "Output Template: domain_event"
+density_score: 1.0
+updated: "2026-04-17"
 ---
 # Output Template: domain_event
 ```markdown

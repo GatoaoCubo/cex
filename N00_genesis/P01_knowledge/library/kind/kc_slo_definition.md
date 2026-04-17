@@ -4,8 +4,10 @@ kind: knowledge_card
 pillar: P01
 nucleus: n00
 domain: kind-taxonomy
-quality: null
+quality: 7.9
 tags: [kind, taxonomy, slo_definition, P09, reliability]
+density_score: 1.0
+updated: "2026-04-17"
 ---
 
 # slo_definition

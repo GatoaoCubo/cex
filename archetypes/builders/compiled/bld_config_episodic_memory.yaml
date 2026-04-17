@@ -5,7 +5,7 @@ llm_function: CONSTRAIN
 purpose: Naming, paths, size limits for episodic_memory production
 effort: medium
 max_turns: 20
-quality: null
+quality: 6.8
 title: Config Episodic Memory
 version: 1.0.0
 author: n03_builder

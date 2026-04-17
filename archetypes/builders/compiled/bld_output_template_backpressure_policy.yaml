@@ -2,8 +2,9 @@ kind: output_template
 id: bld_output_template_backpressure_policy
 pillar: P05
 llm_function: PRODUCE
-purpose: Template for backpressure_policy artifact production
-quality: null
+purpose: Template with {{vars}} that the LLM fills to produce a backpressure_policy artifact
+pattern: every field here exists in SCHEMA.md -- template derives, never invents
+quality: 7.5
 title: Output Template Backpressure Policy
 version: 1.0.0
 author: n03_builder
@@ -11,15 +12,29 @@ tags:
 - backpressure_policy
 - builder
 - output_template
-tldr: Fill template to produce backpressure_policy with strategy, buffer, overflow, and consumer signal.
+tldr: 'Fill-in template for backpressure_policy: overflow strategy, buffer, shed threshold, watermarks, batch size.'
 domain: backpressure policy construction
 created: '2026-04-17'
 updated: '2026-04-17'
 density_score: 0.9
-overview: '`{{producer_consumer_mismatch_description}}` `{{why_this_strategy_was_chosen}}`'
-strategy: 'Strategy: `{{strategy}}` Rationale: `{{why_this_strategy_matches_the_use_case}}`'
-buffer_config: 'Size: `{{buffer_size}} items` Overflow: `{{overflow_action}}` Max pending: `{{max_pending}}` Behavior when
-  full: `{{what_happens}}`'
-consumer_signal: 'Mechanism: `{{pull|demand}}`
+overview: '`{{producer_consumer_context_why_backpressure_needed_1_to_2_sentences}}`'
+strategy: 'Overflow strategy: `{{overflow_strategy}}`
 
-  `{{how_consumer_signals_readiness_to_receive}}`'
+  Rationale: `{{why_this_strategy_fits_this_use_case}}`
+
+
+  | Strategy | Behavior | Data loss risk |
+
+  |----------|----------|---------------|
+
+  | `{{overflow_strategy}}` | `{{what_happens_when_applied}}` | `{{loss_risk_level}}` |'
+thresholds:
+- 'Buffer capacity: `{{buffer_size}}` items'
+- 'Shedding begins at: `{{shed_threshold  100}}`% (`{{buffer_size  shed_threshold}}` items)'
+- 'Active backpressure (high watermark): `{{high_watermark}}` items'
+- 'Normal flow resumes (low watermark): `{{low_watermark}}` items'
+flow:
+- 'Demand signal batch size: `{{request_batch_size}}` items per request'
+- 'Protocol: `{{Reactive Streams|polling|push-pull}}`'
+- 'Queue monitored: `{{monitored_queue}}`'
+- 'Consumer lag SLA: `{{acceptable_lag_description}}`'

@@ -37,7 +37,7 @@ capabilities:
 - Map to execution mechanism (schedule, wake_signal, polling)
 - Validate artifact against quality gates
 - Distinguish prospective_memory from schedule and session_state
-quality: null
+quality: 7.6
 title: Manifest Prospective Memory
 tldr: Builds prospective_memory artifacts -- scheduled future actions and reminders an agent must execute at a future time
   or trigger condition.

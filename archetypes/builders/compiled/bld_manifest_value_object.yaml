@@ -3,7 +3,7 @@ kind: knowledge_card
 pillar: P06
 title: Value Object Builder -- Manifest
 version: 1.0.0
-quality: null
+quality: 6.2
 tags:
 - builder
 - value_object
@@ -21,6 +21,8 @@ keywords:
 - immutable
 - equality
 - typed_attribute
+density_score: 1.0
+updated: '2026-04-17'
 identity: Specialist in building `value_object` artifacts -- immutable typed values defined entirely by their attributes with
   structural equality (not identity). Knows Evans DDD value object patterns, immutability guarantees, and the line between
   value_object (P06), type_def (generic type), and enum_def (enumeration).

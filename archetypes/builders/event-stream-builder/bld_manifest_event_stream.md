@@ -4,12 +4,14 @@ kind: knowledge_card
 pillar: P04
 title: "Event Stream Builder -- Manifest"
 version: 1.0.0
-quality: null
+quality: 6.3
 tags: [builder, event_stream, kafka, P04]
 domain: event_stream
 llm_function: BECOME
 triggers: ["define event stream", "configure kafka topic", "set up kinesis stream", "real-time event feed"]
 keywords: [event_stream, kafka, kinesis, topic, partitioning, consumer_group, retention]
+density_score: 1.0
+updated: "2026-04-17"
 ---
 # event-stream-builder
 ## Identity

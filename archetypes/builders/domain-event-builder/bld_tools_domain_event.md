@@ -4,9 +4,11 @@ kind: knowledge_card
 pillar: P12
 title: "Domain Event Builder -- Tools"
 version: 1.0.0
-quality: null
+quality: 6.5
 llm_function: CALL
 tags: [builder, domain_event, tools]
+density_score: 1.0
+updated: "2026-04-17"
 ---
 
 # Domain Event Builder -- Tools

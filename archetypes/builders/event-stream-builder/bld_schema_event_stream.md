@@ -4,9 +4,11 @@ kind: schema
 pillar: P04
 title: "Event Stream Builder -- Schema"
 version: 1.0.0
-quality: null
+quality: 7.1
 tags: [builder, event_stream, schema]
 llm_function: CONSTRAIN
+density_score: 1.0
+updated: "2026-04-17"
 ---
 # Schema: event_stream
 ## Frontmatter Fields

@@ -8,7 +8,7 @@ created: "2026-04-17"
 updated: "2026-04-17"
 author: builder
 domain: saga
-quality: null
+quality: 7.8
 tags: [knowledge_card, saga, P12]
 llm_function: INJECT
 tldr: "Domain knowledge for saga: Garcia-Molina 1987, compensation chains, and choreography vs orchestration."

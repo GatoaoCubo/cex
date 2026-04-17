@@ -3,12 +3,14 @@ kind: knowledge_card
 pillar: P04
 title: Event Stream Builder -- Architecture
 version: 1.0.0
-quality: null
+quality: 7.1
 tags:
 - builder
 - event_stream
 - architecture
 llm_function: CONSTRAIN
+density_score: 1.0
+updated: '2026-04-17'
 core_model: 'An event_stream is a durable, ordered, append-only log of domain events. Multiple consumers read from it independently
   (each tracks its own offset). Industry implementations: Kafka topic, AWS Kinesis stream, Azure Event Hub, Pulsar topic.'
 structural_topology: "Producer(s) --> [event_stream: ordered, partitioned, retained]\n                       |\n         \

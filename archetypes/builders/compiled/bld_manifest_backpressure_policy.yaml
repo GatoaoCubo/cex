@@ -12,41 +12,43 @@ tags:
 - kind-builder
 - backpressure-policy
 - P09
-- config
 - reactive-streams
 - flow-control
+- producer-consumer
 keywords:
 - backpressure
 - reactive streams
 - flow control
+- producer consumer
 - buffer
 - drop
 - throttle
-- consumer throughput
+- overflow
+- queue
 triggers:
 - create backpressure policy
 - configure flow control
-- reactive streams backpressure
-- consumer throughput policy
+- handle slow consumer
+- reactive streams policy
+- overflow policy
 capabilities:
-- 'Select backpressure strategy: buffer, drop_oldest, drop_newest, throttle, block'
-- Configure buffer_size with overflow action
-- 'Define consumer_signal: PULL-based or demand-signaling mechanism'
-- Set max_pending and queue_depth limits
-- 'Declare overflow_action: what to do when buffer is full'
-- 'Map to platform: RxJava, Reactor, Akka Streams, or custom'
+- 'Define overflow_strategy: DROP_LATEST, DROP_OLDEST, BUFFER, THROTTLE, ERROR'
+- 'Set buffer_size: max items held before overflow strategy activates'
+- 'Configure shed_threshold: percentage of capacity at which to start shedding'
+- 'Specify request_batch_size: items requested per demand signal (Reactive Streams protocol)'
+- Set high_watermark and low_watermark for adaptive flow control
+- Declare monitored_queue for which queue/channel this policy governs
 - Validate artifact against quality gates
-- Distinguish from rate_limit_config and circuit_breaker
-quality: null
+- Distinguish backpressure_policy from circuit_breaker, rate_limit_config, runtime_rule
+quality: 7.6
 title: Manifest Backpressure Policy
-tldr: Builds backpressure_policy artifacts -- defines how a system responds when downstream consumers cannot keep up with
-  upstream producers.
+tldr: Builds backpressure_policy artifacts -- reactive streams flow control policy when consumers lag behind producers.
 density_score: 0.9
-identity: Specialist in building backpressure_policy artifacts -- flow control configurations that define how a system responds
-  when downstream consumers cannot process messages as fast as upstream producers emit them. Grounded in Reactive Streams
-  specification (RxJava, Project Reactor, Akka Streams). Masters strategy selection (buffer/drop/throttle/block), buffer sizing,
-  overflow behavior, and the boundary between backpressure_policy (consumer throughput control), rate_limit_config (inbound
-  throttle), and circuit_breaker (dependency failure).
+identity: Specialist in building backpressure_policy artifacts -- policies that define how a system responds when downstream
+  consumers cannot keep up with upstream producers. Grounded in Reactive Streams specification (2014), Project Reactor, RxJava,
+  and Akka Streams. Masters overflow strategy selection (drop/buffer/throttle/error), buffer sizing, shed thresholds, and
+  the boundary between backpressure_policy (consumer lag) and circuit_breaker (dependency failure) and rate_limit_config (inbound
+  throttle).
 properties: '| Property | Value |
 
   |----------|-------|

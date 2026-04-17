@@ -5,9 +5,11 @@ pillar: P03
 llm_function: REASON
 purpose: Step-by-step production process for alert_rule
 version: 1.0.0
-quality: null
+quality: 5.4
 tags: [alert_rule, builder, instruction]
 title: "Instruction Alert Rule Builder"
+density_score: 0.86
+updated: "2026-04-17"
 ---
 # Instructions: How to Produce an alert_rule
 ## Phase 1: IDENTIFY

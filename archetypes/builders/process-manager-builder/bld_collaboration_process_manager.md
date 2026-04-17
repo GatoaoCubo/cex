@@ -4,9 +4,11 @@ kind: knowledge_card
 pillar: P12
 title: "Process Manager Builder -- Rules"
 version: 1.0.0
-quality: null
+quality: 5.7
 tags: [builder, process_manager, rules]
-llm_function: CONSTRAIN
+llm_function: COLLABORATE
+density_score: 0.81
+updated: "2026-04-17"
 ---
 # Rules: process_manager
 ## Absolute Rules (HARD -- never violate)

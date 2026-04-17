@@ -1,3 +1,4 @@
+quality: 6.8
 id: type_hint_retrofit_w7_w7_report
 kind: report
 title: Type Hint Retrofit W7 Report
@@ -8,6 +9,7 @@ runtime: codex
 created: 2026-04-15
 updated: 2026-04-15
 status: complete
+density_score: 1.0
 8f_pipeline: 'F1 CONSTRAIN: kind=mechanical_refactor, scope=7 listed `_tools/*.py` targets plus this report, boundary=annotations
   only on public functions. F2 BECOME: Loaded N05 agent card and N05/N07/8F rules; role=operations mechanical refactor executor.
   F3 INJECT: Read handoff frontmatter, target files, and compiler behavior; matched the requested public-function type-hint

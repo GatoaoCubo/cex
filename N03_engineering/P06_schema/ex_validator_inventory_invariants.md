@@ -4,11 +4,13 @@ kind: validator
 pillar: P06
 title: Inventory Invariants Validator
 version: 0.1.0
-quality: null
+quality: 8.0
 status: template
 brand_placeholders:
   - BRAND_SUPABASE_PROJECT_REF
 tags: [commerce, template, distillation, validator, inventory, invariants]
+density_score: 0.99
+updated: "2026-04-17"
 ---
 
 ## Purpose

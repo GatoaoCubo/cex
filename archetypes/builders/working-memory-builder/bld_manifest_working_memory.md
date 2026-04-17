@@ -14,7 +14,7 @@ keywords: [working memory, short-term context, task state, active task, scratchp
 triggers: ["create working memory", "task context store", "short-term memory", "active task state"]
 capabilities: >
   L1: Specialist in building working_memory artifacts -- short-term context stores for a single active task. L2: Structure task_id, context slots, expiry, and clear-on-complete policy. L3: When user needs to create, build, or scaffold working memory for an active task.
-quality: null
+quality: 8.3
 title: "Manifest Working Memory"
 tldr: "Builds working_memory artifacts -- short-term context stores for a single active task, cleared after task completion."
 density_score: 0.90

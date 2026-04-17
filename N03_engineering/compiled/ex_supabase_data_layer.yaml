@@ -3,7 +3,7 @@ kind: supabase_data_layer
 pillar: P09
 title: Commerce Supabase Data Layer
 version: 0.1.0
-quality: null
+quality: 7.9
 status: template
 brand_placeholders:
 - BRAND_SUPABASE_PROJECT_REF
@@ -15,6 +15,8 @@ tags:
 - supabase
 - database
 - backend
+density_score: 1.0
+updated: '2026-04-17'
 purpose: Supabase backend specification for a multi-marketplace commerce platform — defines the core tables, RLS policies,
   storage buckets, edge function auth, and client singleton pattern for `{{BRAND_NAME}}` backend services.
 when_to_use:

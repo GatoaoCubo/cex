@@ -5,9 +5,11 @@ pillar: P03
 llm_function: REASON
 purpose: Step-by-step production process for bounded_context
 version: 1.0.0
-quality: null
+quality: 5.0
 tags: [bounded_context, builder, instruction]
 title: "Instruction Bounded Context Builder"
+density_score: 0.84
+updated: "2026-04-17"
 ---
 # Instructions: How to Produce a bounded_context
 ## Phase 1: SCOPE

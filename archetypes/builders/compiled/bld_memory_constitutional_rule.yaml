@@ -3,12 +3,14 @@ kind: knowledge_card
 pillar: P11
 title: Constitutional Rule Builder -- Memory
 version: 1.0.0
-quality: null
+quality: 5.5
 tags:
 - builder
 - constitutional_rule
 - memory
 llm_function: INJECT
+density_score: 0.88
+updated: '2026-04-17'
 session_patterns:
 - 'Bypass test first: before writing any constitutional_rule, ask "is there ANY bypass scenario?" If yes -> guardrail, not
   constitutional_rule.'

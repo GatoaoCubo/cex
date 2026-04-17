@@ -13,7 +13,7 @@ prerequisites:
   - "Business transaction is identified (what must succeed end-to-end)"
   - "At least 2 participant services or nuclei are known"
   - "Compensating action for each step is definable"
-quality: null
+quality: 6.6
 tags: [instruction, saga, P12, distributed_transaction]
 llm_function: REASON
 tldr: "Build a saga with forward steps, compensating actions, failure modes, and rollback sequence."

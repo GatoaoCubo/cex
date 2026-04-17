@@ -1,4 +1,5 @@
 ---
+quality: 9.1
 id: spec_structural_alignment_v2
 kind: constraint_spec
 pillar: P06
@@ -14,6 +15,7 @@ depends_on: spec_structural_alignment_v1 (DONE)
 tags: [spec, structural, alignment, n00, pillars, merge]
 tldr: "Move root P01-P12 dirs into N00_genesis -- N00 becomes the single pillar registry."
 density_score: 0.95
+updated: "2026-04-17"
 ---
 
 <!-- 8F: F1=constraint_spec P06 F2=spec-builder F3=V1+explore F4=autonomous F5=scan F6=write F7=9.0 F8=save -->

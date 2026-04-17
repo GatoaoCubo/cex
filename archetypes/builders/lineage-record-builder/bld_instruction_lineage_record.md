@@ -13,7 +13,7 @@ prerequisites:
   - "Target artifact (the thing whose lineage is being recorded) is identified"
   - "At least one source entity is known"
   - "The transformation activity is describable"
-quality: null
+quality: 6.6
 tags: [instruction, lineage_record, P01, provenance]
 llm_function: REASON
 tldr: "Build a lineage_record documenting entity sources, transformation activities, agents, and derivation relations."

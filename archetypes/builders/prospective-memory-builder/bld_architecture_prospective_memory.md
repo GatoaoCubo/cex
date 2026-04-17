@@ -4,7 +4,7 @@ id: bld_architecture_prospective_memory
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of prospective_memory
-quality: null
+quality: 7.0
 title: "Architecture Prospective Memory"
 version: "1.0.0"
 author: n03_builder

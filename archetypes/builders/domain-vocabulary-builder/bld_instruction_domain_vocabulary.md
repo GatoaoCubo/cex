@@ -5,9 +5,11 @@ pillar: P03
 llm_function: REASON
 purpose: Step-by-step production process for domain_vocabulary
 version: 1.0.0
-quality: null
+quality: 5.0
 tags: [domain_vocabulary, builder, instruction]
 title: "Instruction Domain Vocabulary Builder"
+density_score: 0.82
+updated: "2026-04-17"
 ---
 # Instructions: How to Produce a domain_vocabulary
 ## Phase 1: SCOPE

@@ -4,9 +4,11 @@ kind: knowledge_card
 pillar: P06
 title: "Value Object Builder -- Examples"
 version: 1.0.0
-quality: null
+quality: 5.1
 tags: [builder, value_object, examples]
 llm_function: GOVERN
+density_score: 1.0
+updated: "2026-04-17"
 ---
 # Examples: value_object
 ## Golden Example: Money

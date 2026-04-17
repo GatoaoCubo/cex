@@ -4,13 +4,15 @@ kind: knowledge_card
 pillar: P11
 title: "Constitutional Rule Builder -- Manifest"
 version: 1.0.0
-quality: null
+quality: 6.3
 tags: [builder, constitutional_rule, anthropic_cai, P11]
 domain: constitutional_rule
 llm_function: BECOME
 triggers: ["define constitutional rule", "absolute agent constraint", "cannot be overridden"]
 keywords: [constitutional_rule, cai, hard_constraint, absolute, non_overridable, anthropic]
 core: true
+density_score: 0.99
+updated: "2026-04-17"
 ---
 # constitutional-rule-builder
 ## Identity

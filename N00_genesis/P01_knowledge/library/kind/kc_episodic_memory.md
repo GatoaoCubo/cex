@@ -9,7 +9,7 @@ created: 2026-04-17
 updated: 2026-04-17
 author: builder_agent
 domain: episodic_memory
-quality: null
+quality: 8.8
 tags: [episodic_memory, P10, INJECT, kind-kc, agent-memory, interaction-history]
 tldr: "episodic_memory stores temporally-indexed past interaction episodes (Tulving 1972) for LLM agent recall. NOT working_memory (current task) or entity_memory (persistent facts)."
 when_to_use: "Building, reviewing, or reasoning about episodic_memory artifacts"

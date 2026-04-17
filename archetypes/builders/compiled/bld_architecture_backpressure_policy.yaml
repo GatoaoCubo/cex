@@ -2,7 +2,7 @@ kind: architecture
 id: bld_architecture_backpressure_policy
 pillar: P08
 llm_function: CONSTRAIN
-purpose: Component map of backpressure_policy
+purpose: Component map of backpressure_policy -- inventory, dependencies, and architectural position
 quality: null
 title: Architecture Backpressure Policy
 version: 1.0.0
@@ -11,7 +11,7 @@ tags:
 - backpressure_policy
 - builder
 - architecture
-tldr: backpressure_policy is P09 flow control for producer-consumer throughput mismatch, distinct from rate_limit and circuit_breaker.
+tldr: 'Component map: overflow_strategy, buffer, watermarks, request_batch. External: circuit_breaker, rate_limit_config.'
 domain: backpressure policy construction
 created: '2026-04-17'
 updated: '2026-04-17'
@@ -20,44 +20,77 @@ component_inventory: '| Name | Role | Owner | Status |
 
   |------|------|-------|--------|
 
-  | strategy | Flow control approach | backpressure_policy | required |
+  | overflow_strategy | Policy when consumer cannot keep up | backpressure_policy | required |
 
-  | buffer_size | Max items in flight | backpressure_policy | required |
+  | buffer_size | Max items queued before overflow activates | backpressure_policy | required |
 
-  | overflow_action | Buffer full behavior | backpressure_policy | required |
+  | shed_threshold | Fraction of buffer capacity to begin shedding | backpressure_policy | required |
 
-  | consumer_signal | Reactive signal mechanism | backpressure_policy | required |
+  | high_watermark | Absolute depth triggering active backpressure | backpressure_policy | recommended |
 
-  | max_pending | Max unacked items | backpressure_policy | optional |
+  | low_watermark | Depth at which normal flow resumes | backpressure_policy | recommended |
 
-  | rate_limit_config | Inbound quota throttle -- sibling | P09 | sibling |
+  | request_batch_size | Items requested per demand signal (Reactive Streams) | backpressure_policy | recommended |
 
-  | circuit_breaker | Dependency failure isolation -- sibling | P09 | sibling |'
-producer_consumer_model: "[Producer]  --emits-->  [Buffer (buffer_size)]  --consumed_by-->  [Consumer]\n               | \
-  \                 |\n               |                  | overflow: drop/error/block\n               |                  |\n\
-  \               +-- strategy ------+\n               |\n         consumer_signal (PULL/DEMAND)\n         Consumer signals\
-  \ producer to slow when buffer near full"
-strategy_decision_table: '| Strategy | When | Tradeoff |
+  | monitored_queue | Queue/channel this policy governs | backpressure_policy | recommended |
 
-  |----------|------|---------|
+  | circuit_breaker | Dependency failure isolation (separate concern) | P09 (separate kind) | external |
 
-  | buffer | Consumer temporarily slow; bursts acceptable | Memory cost; drop risk if buffer fills |
+  | rate_limit_config | Inbound request throttle (RPM/TPM) | P09 (separate kind) | external |
 
-  | drop_oldest | Latest items most important | Oldest items silently lost |
+  | runtime_rule | Retry and backoff strategy | P09 (separate kind) | external |
 
-  | drop_newest | Historical order important | New items rejected until space frees |
+  | producer | Upstream data source | P04 (tool/agent) | producer |
 
-  | throttle | Producer can slow down cleanly | Lower throughput; no drops |
+  | consumer | Downstream processor | P02 (agent) | consumer |'
+flow_model: "PRODUCER                    BUFFER                    CONSUMER\n  |                           |             \
+  \              |\n  |--emit(item)-->            |                           |\n  |                     buffer_size     \
+  \                  |\n  |               shed_threshold (e.g. 80%)               |\n  |               high_watermark (absolute)\
+  \               |\n  |                           |                           |\n  |                  If buffer >= shed_threshold:\
+  \         |\n  |                  apply overflow_strategy:             |\n  |                    DROP_LATEST: discard new\
+  \           |\n  |                    DROP_OLDEST: discard old           |\n  |                    THROTTLE: slow producer\
+  \            |\n  |                    ERROR: raise to caller             |\n  |                           |           \
+  \                |\n  |                           |--request(batch_size)-->   |\n  |                           |<--process(items)----------\n\
+  \  |                    if depth <= low_watermark:         |\n  |                    resume normal emission            \
+  \ |"
+dependency_graph: 'overflow_strategy  --governs-->   buffer overflow behavior
 
-  | block | Zero tolerance for loss | Producer stalls; latency increases |'
+  buffer_size        --limits-->    queue depth
+
+  shed_threshold     --triggers-->  overflow_strategy activation
+
+  high_watermark     --triggers-->  active backpressure signal
+
+  low_watermark      --releases-->  backpressure (resume normal)
+
+  request_batch_size --controls-->  consumer demand rate
+
+  circuit_breaker    --parallel-->  handles FAILURES (not lag)
+
+  rate_limit_config  --parallel-->  handles INBOUND RATE (not consumer lag)'
 boundary_table: '| backpressure_policy IS | backpressure_policy IS NOT |
 
   |------------------------|---------------------------|
 
-  | Consumer throughput control | Inbound request quota (rate_limit_config) |
+  | Consumer lag management | Dependency failure isolation (that is circuit_breaker) |
 
-  | Flow control for async streams | Dependency failure isolation (circuit_breaker) |
+  | Buffer + overflow strategy declaration | Inbound request throttle RPM/TPM (that is rate_limit_config) |
 
-  | Reactive Streams specification | Connection pool config |
+  | Reactive Streams demand signaling config | Retry/backoff strategy (that is runtime_rule) |
 
-  | Buffer + drop + block strategies | Retry logic (runtime_rule) |'
+  | Producer-consumer flow contract | Observability (that is trace_config/monitor) |
+
+  | Queue/channel overflow policy | Authentication/authorization (that is env_config) |'
+layer_map: '| Layer | Components | Purpose |
+
+  |-------|-----------|---------|
+
+  | detection | shed_threshold, high_watermark | Detect consumer lag early |
+
+  | control | overflow_strategy | Define response to overflow |
+
+  | buffering | buffer_size, monitored_queue | Absorb bursts within limit |
+
+  | signaling | request_batch_size, low_watermark | Control demand and resume |
+
+  | external | circuit_breaker, rate_limit_config | Adjacent, non-overlapping concerns |'

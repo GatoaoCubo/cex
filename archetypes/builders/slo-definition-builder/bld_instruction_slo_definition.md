@@ -13,7 +13,7 @@ prerequisites:
   - "Service or agent is identified"
   - "SLI metric type is known (availability, latency, throughput, error rate)"
   - "Measurement window is defined (rolling 30d, calendar month)"
-quality: null
+quality: 6.6
 tags: [instruction, slo_definition, P09, reliability]
 llm_function: REASON
 tldr: "Build an slo_definition with SLI metric, target threshold, error budget, and alerting policy."

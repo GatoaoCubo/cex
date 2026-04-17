@@ -1,0 +1,42 @@
+id: bld_rules_constitutional_rule
+kind: knowledge_card
+pillar: P11
+title: Constitutional Rule Builder -- Rules
+version: 1.0.0
+quality: 6.0
+tags:
+- builder
+- constitutional_rule
+- rules
+llm_function: CONSTRAIN
+density_score: 0.81
+updated: '2026-04-17'
+absolute_rules_hard_never_violate:
+- bypass_policy MUST be "none" -- any other value means this is a guardrail, not a constitutional rule.
+- core MUST be true -- constitutional rules apply to all agents and cannot be scoped away.
+- severity MUST be critical -- constitutional rules are always the highest severity.
+- One rule, one prohibition -- never bundle multiple prohibitions in a single artifact.
+- Principle must be concrete and testable -- abstract values ("be helpful") are not rules.
+- 'quality: null always -- never self-score.'
+soft_rules_recommend:
+- detection_method should be specified to make enforcement practical.
+- Cite a cai_reference or external ethical framework (EU AI Act, NIST AI RMF) for grounding.
+- 'Violation examples: 2 minimum, prefer 3 covering different attack surfaces.'
+- Rationale should address the most compelling "edge case" argument and rebut it.
+boundary_rules:
+- 'THIS BUILDER handles: constitutional_rule (P11) -- absolute, no bypass'
+- 'NOT this builder: guardrail (soft, has bypass) -> guardrail-builder'
+- 'NOT this builder: quality_gate (output quality) -> quality-gate-builder'
+- 'NOT this builder: permission (access control) -> permission-builder'
+- 'NOT a kind: safety_policy (document) -- there is no safety-policy-builder in CEX'
+the_bypass_test_mandatory_before_building: '"Is there ANY legitimate scenario where this rule should be bypassed?"
+
+  - YES: use guardrail-builder instead
+
+  - NO: proceed with constitutional-rule-builder'
+cex_specific_rules:
+- 'id pattern: p11_cr_{slug} -- always prefix p11_cr_'
+- 'Pillar: always P11 (Feedback)'
+- 'Producing nucleus: N07 (Orchestrator) -- core rules come from the orchestrator level'
+- 'max_bytes: 2048'
+- 'Publish threshold: >= 8.0 (higher than standard 7.0 for safety-critical artifacts)'

@@ -9,8 +9,9 @@ builders_reviewed:
 - tts-provider-builder
 iso_count: 26
 pillar: P04, P09
-quality: 7.9
+quality: 8.0
 density_score: 0.96
+updated: '2026-04-17'
 executive_summary: '26 ISOs reviewed. 14 passing (54%). 11 fixed via surgical edit. 1 rebuilt (output_template_tts). 0 below
   6.0.
 

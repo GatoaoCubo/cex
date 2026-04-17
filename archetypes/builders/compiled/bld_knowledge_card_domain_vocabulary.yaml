@@ -3,13 +3,15 @@ kind: knowledge_card
 pillar: P01
 llm_function: INJECT
 version: 1.0.0
-quality: null
+quality: 6.3
 tags:
 - domain_vocabulary
 - ubiquitous-language
 - ddd
 - knowledge
 title: 'Knowledge: Domain Vocabulary Pattern'
+density_score: 1.0
+updated: '2026-04-17'
 core_facts:
 - 'DDD Ubiquitous Language (Evans 2003 ch.2): shared language between domain experts + developers'
 - domain_vocabulary = the registry artifact that GOVERNS this shared language

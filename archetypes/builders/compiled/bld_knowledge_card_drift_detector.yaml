@@ -4,7 +4,7 @@ pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for drift_detector production
 sources: Evidently AI docs, Arize Phoenix, Whylogs, "Failing Loudly" (Rabanser et al. 2019), PSI reference
-quality: null
+quality: 8.4
 title: Knowledge Card Drift Detector
 version: 1.0.0
 author: n03_builder

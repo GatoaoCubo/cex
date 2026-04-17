@@ -3,12 +3,14 @@ kind: instruction
 pillar: P06
 title: Aggregate Root Builder -- Instruction
 version: 1.0.0
-quality: null
+quality: 5.4
 tags:
 - builder
 - aggregate_root
 - instruction
 llm_function: REASON
+density_score: 0.81
+updated: '2026-04-17'
 phase_1_research:
 - Identify the domain concept this aggregate owns -- what real-world entity is the root?
 - 'Map the cluster: which child entities and value objects fall inside this boundary?'

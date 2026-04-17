@@ -4,9 +4,11 @@ kind: knowledge_card
 pillar: P09
 title: "Slo Definition Builder -- Tools"
 version: 1.0.0
-quality: null
+quality: 6.5
 llm_function: CALL
 tags: [builder, slo_definition, tools]
+density_score: 1.0
+updated: "2026-04-17"
 ---
 
 # Slo Definition Builder -- Tools

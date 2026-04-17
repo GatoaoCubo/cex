@@ -4,13 +4,15 @@ kind: oauth_app_config
 pillar: P09
 title: Bling ERP OAuth 2.0 App Configuration
 version: 0.1.0
-quality: null
+quality: 8.3
 status: template
 brand_placeholders:
   - BRAND_BLING_CLIENT_ID
   - BRAND_BLING_CLIENT_SECRET
   - BRAND_SUPABASE_PROJECT_REF
 tags: [commerce, template, distillation, bling, erp, oauth]
+density_score: 1.0
+updated: "2026-04-17"
 ---
 
 ## Purpose

@@ -14,7 +14,7 @@ keywords: [drift detection, distribution shift, data drift, concept drift, model
 triggers: ["detect drift", "monitor distribution shift", "model monitoring config", "input drift detector"]
 capabilities: >
   L1: Specialist in building drift_detector artifacts -- monitors for input/output/behavioral distribution shift. L2: Configure detection methods, thresholds, alert rules, and statistical tests. L3: When user needs to create, build, or scaffold a drift detection monitor.
-quality: null
+quality: 8.8
 title: "Manifest Drift Detector"
 tldr: "Builds drift_detector artifacts -- monitors that detect distribution shift in model inputs, outputs, or behavioral patterns over time."
 density_score: 0.90

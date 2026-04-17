@@ -4,7 +4,7 @@ pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for preference_dataset production
 sources: InstructGPT RLHF (2022), DPO Rafailov et al. (2023), Constitutional AI Anthropic (2022), KTO Ethayarajh et al. (2023)
-quality: null
+quality: 8.4
 title: Knowledge Card Preference Dataset
 version: 1.0.0
 author: n03_builder

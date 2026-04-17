@@ -3,12 +3,14 @@ kind: component_map
 pillar: P08
 llm_function: CONSTRAIN
 version: 1.0.0
-quality: null
+quality: 6.7
 tags:
 - domain_event
 - architecture
 - ddd
 title: Architecture Domain Event
+density_score: 1.0
+updated: '2026-04-17'
 position_in_cex_kind_taxonomy: "P12 Orchestration\n  domain_event      <-- THIS KIND (what happened)\n  workflow         \
   \ (what to do next)\n  schedule          (when to do it)\n  dispatch_rule     (who handles it)\n\nP11 Feedback\n  signal\
   \            (system telemetry -- NOT domain_event)\n  audit_log         (compliance record -- NOT domain_event)"

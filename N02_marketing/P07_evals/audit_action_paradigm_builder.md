@@ -8,7 +8,8 @@ kind_audited: action_paradigm
 wave: review
 created: "2026-04-13"
 author: n02_reviewer
-quality: 7.9
+quality: 8.0
+updated: "2026-04-17"
 ---
 
 # Audit: action-paradigm-builder (13 ISOs)

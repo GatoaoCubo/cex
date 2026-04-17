@@ -4,9 +4,11 @@ kind: knowledge_card
 pillar: P04
 title: "Event Stream Builder -- Context Sources"
 version: 1.0.0
-quality: null
+quality: 5.4
 tags: [builder, event_stream, context]
-llm_function: INJECT
+llm_function: CONSTRAIN
+density_score: 1.0
+updated: "2026-04-17"
 ---
 # Context Sources: event_stream
 ## Mandatory Loads (F3 INJECT)

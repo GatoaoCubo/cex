@@ -13,7 +13,7 @@ rules_count: 10
 tone: technical
 knowledge_boundary: "Short-term task state, context slots, capacity limits, expiry, clear-on-complete | NOT session_state (multi-turn session), entity_memory (long-term facts), episodic_memory (past episodes)"
 domain: "working_memory"
-quality: null
+quality: 7.9
 tags: ["system_prompt", "working_memory", "short_term", "P10"]
 safety_level: standard
 output_format_type: markdown

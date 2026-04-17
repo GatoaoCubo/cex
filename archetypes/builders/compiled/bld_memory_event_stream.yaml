@@ -3,12 +3,14 @@ kind: knowledge_card
 pillar: P04
 title: Event Stream Builder -- Memory
 version: 1.0.0
-quality: null
+quality: 5.7
 tags:
 - builder
 - event_stream
 - memory
 llm_function: INJECT
+density_score: 0.97
+updated: '2026-04-17'
 session_patterns:
 - 'Partition key selection: ask "what entity needs ordered processing?" -- that field is the partition key.'
 - 'Retention sizing: retention_hours should cover at least the slowest consumer''s replay window. 7 days (168h) is a safe

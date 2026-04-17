@@ -5,7 +5,7 @@ pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of preference_dataset artifacts
 pattern: few-shot learning -- LLM reads these before producing
-quality: null
+quality: 9.1
 title: "Examples Preference Dataset"
 version: "1.0.0"
 author: n03_builder

@@ -4,12 +4,14 @@ kind: dispatch_rule
 pillar: P12
 title: Multi-Marketplace Dispatch Rule
 version: 0.1.0
-quality: null
+quality: 8.0
 status: template
 brand_placeholders:
   - BRAND_SHOPIFY_DOMAIN
   - BRAND_VERTICAL
 tags: [commerce, template, distillation, dispatch, marketplace, routing]
+density_score: 1.0
+updated: "2026-04-17"
 ---
 
 ## Purpose

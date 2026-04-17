@@ -3,7 +3,7 @@ kind: validator
 pillar: P06
 title: Inventory Invariants Validator
 version: 0.1.0
-quality: null
+quality: 7.9
 status: template
 brand_placeholders:
 - BRAND_SUPABASE_PROJECT_REF
@@ -14,6 +14,8 @@ tags:
 - validator
 - inventory
 - invariants
+density_score: 0.99
+updated: '2026-04-17'
 purpose: Validates business invariants for product inventory records — enforces non-negative stock, price floor, SKU format,
   and encoding integrity constraints before any write to Supabase, Shopify, or Bling.
 when_to_use:

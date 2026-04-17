@@ -1,4 +1,5 @@
 ---
+quality: 8.4
 id: spec_mission_100pct_coverage
 title: "Mission Spec: 100% LLM Vocabulary Coverage"
 kind: decision_record
@@ -13,6 +14,8 @@ raw_gaps_identified: 2068
 consolidated_new_kinds: 52
 total_kinds_after: 184
 target_coverage: "95%+"
+density_score: 1.0
+updated: "2026-04-17"
 ---
 
 # Mission Spec: 100% LLM Vocabulary Coverage

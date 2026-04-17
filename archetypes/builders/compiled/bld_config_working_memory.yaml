@@ -6,7 +6,7 @@ purpose: Naming, paths, size limits, and operational constraints for working_mem
 effort: low
 max_turns: 15
 disallowed_tools: []
-quality: null
+quality: 6.8
 title: Config Working Memory
 version: 1.0.0
 author: n03_builder

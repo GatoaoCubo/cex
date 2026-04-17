@@ -2,11 +2,13 @@
 id: bld_context_sources_alert_rule
 kind: rag_source
 pillar: P10
-llm_function: INJECT
+llm_function: CONSTRAIN
 version: 1.0.0
-quality: null
+quality: 6.0
 tags: [alert_rule, context, rag]
 title: "Context Sources: alert_rule"
+density_score: 1.0
+updated: "2026-04-17"
 ---
 # Context Sources: alert_rule
 ## Mandatory Sources (load at F3 INJECT)

@@ -3,7 +3,7 @@ kind: oauth_app_config
 pillar: P09
 title: Mercado Livre OAuth 2.0 App Configuration
 version: 0.1.0
-quality: null
+quality: 8.2
 status: template
 brand_placeholders:
 - BRAND_MELI_CLIENT_ID
@@ -16,6 +16,8 @@ tags:
 - mercadolivre
 - meli
 - oauth
+density_score: 1.0
+updated: '2026-04-17'
 purpose: OAuth 2.0 app configuration for Mercado Livre (MLB) API — defines the authorization code flow, token storage schema,
   and 6-hour access token refresh strategy for `{{BRAND_MELI_CLIENT_ID}}`.
 when_to_use:

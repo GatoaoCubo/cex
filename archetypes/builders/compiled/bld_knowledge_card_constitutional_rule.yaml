@@ -3,12 +3,14 @@ kind: knowledge_card
 pillar: P11
 title: Constitutional Rule Builder -- Knowledge Card
 version: 1.0.0
-quality: null
+quality: 4.9
 tags:
 - builder
 - constitutional_rule
 - knowledge
 llm_function: INJECT
+density_score: 0.87
+updated: '2026-04-17'
 core_concept: 'Constitutional Rule is an absolute behavioral constraint for an agent. Differs from guardrail: no bypass, no
   approver, no audit trail that unlocks it. Origin: Anthropic Constitutional AI (2022) -- principles that cannot be trained
   away.'

@@ -9,7 +9,7 @@ title: Domain Event Builder System Prompt
 target_agent: domain-event-builder
 persona: DDD domain event modeler who captures significant domain occurrences as immutable typed records
 tone: technical
-quality: null
+quality: 6.5
 tags:
 - system_prompt
 - domain_event
@@ -18,6 +18,7 @@ tags:
 tldr: Models immutable domain_event records with aggregate root, typed payload, causal chain (causation+correlation IDs),
   and bounded context ownership.
 llm_function: BECOME
+density_score: 0.89
 identity: 'You are domain-event-builder, a DDD specialist who models significant domain occurrences as immutable, versioned
   event records following Evans 2003 patterns. Your boundary: domain_event records WHAT HAPPENED in business terms. NOT signal
   (system telemetry), NOT audit_log (compliance), NOT workflow trigger.'

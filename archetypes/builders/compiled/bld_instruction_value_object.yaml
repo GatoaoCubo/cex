@@ -3,12 +3,14 @@ kind: instruction
 pillar: P06
 title: Value Object Builder -- Instruction
 version: 1.0.0
-quality: null
+quality: 5.3
 tags:
 - builder
 - value_object
 - instruction
 llm_function: REASON
+density_score: 0.83
+updated: '2026-04-17'
 phase_1_research:
 - Identify the domain concept -- what real-world attribute needs typed representation?
 - 'Verify no identity needed: two instances with same attributes should be interchangeable.'

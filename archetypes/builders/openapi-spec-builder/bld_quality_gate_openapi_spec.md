@@ -1,0 +1,67 @@
+---
+id: p11_qg_openapi_spec
+kind: quality_gate
+pillar: P11
+title: "Gate: openapi_spec"
+version: "1.0.0"
+created: "2026-04-17"
+updated: "2026-04-17"
+author: "builder_agent"
+domain: "openapi spec -- machine-readable OAS 3.x API contract"
+quality: null
+tags: [quality-gate, openapi-spec, P06, oas3, api-contract]
+tldr: "Pass/fail gate for openapi_spec artifacts: id pattern, oas_version, servers, paths, security scheme, error responses."
+density_score: 0.90
+llm_function: GOVERN
+---
+
+# Gate: openapi_spec
+
+## Definition
+
+| Field | Value |
+|---|---|
+| metric | openapi_spec artifact quality score |
+| threshold | 7.0 (publish >= 8.0, golden >= 9.5) |
+| operator | weighted_sum |
+| scope | all artifacts with `kind: openapi_spec` |
+
+## HARD Gates
+
+All must pass (AND logic). Any single failure = REJECT.
+
+| ID | Check | Fail Condition |
+|---|---|---|
+| H01 | Frontmatter parses as valid YAML | Parse error on frontmatter block |
+| H02 | ID matches `^p06_oas_[a-z][a-z0-9_]+$` | ID contains uppercase, hyphens, or missing prefix |
+| H03 | ID equals filename stem | id: p06_oas_foo but file is p06_oas_bar.md |
+| H04 | Kind equals literal `openapi_spec` | kind: api_spec or any other value |
+| H05 | Quality field is null | quality: 8.0 or any non-null value |
+| H06 | oas_version present and valid | Missing or value not in ["3.0.3","3.1.0"] |
+| H07 | servers array non-empty | Missing or empty servers |
+| H08 | paths non-empty | Missing or empty paths |
+| H09 | Body has all 3 required sections | Missing ## OpenAPI Document, ## Security, or ## Error Responses |
+
+## SOFT Scoring
+
+| Dimension | Weight | Criteria |
+|---|---|---|
+| Path completeness | 1.0 | All expected endpoints documented |
+| Schema reuse | 1.0 | Shared schemas in components.schemas, not inline duplicated |
+| Security scheme | 1.0 | securitySchemes defined and global security set |
+| Error coverage | 1.0 | 400/401/404/500 defined for authenticated operations |
+| operationId quality | 1.0 | All operations have camelCase operationId |
+| Request/response schemas | 1.0 | All bodies have schema definitions |
+| Parameter documentation | 0.5 | Path and query params described with type |
+| OAS 3.1.0 preference | 0.5 | Using 3.1.0 over deprecated 3.0.x |
+| Boundary clarity | 1.0 | Explicitly NOT api_reference, NOT api_client |
+| tldr quality | 0.5 | tldr <= 160ch, includes API name and auth method |
+
+## Actions
+
+| Score | Tier | Action |
+|---|---|---|
+| >= 9.5 | Golden | Publish to pool as golden reference |
+| >= 8.0 | Publish | Publish to pool, add to routing index |
+| >= 7.0 | Review | Flag for improvement before publish |
+| < 7.0 | Reject | Return to author with specific gate failures |

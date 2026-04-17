@@ -4,7 +4,7 @@ id: bld_architecture_backpressure_policy
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of backpressure_policy -- inventory, dependencies, and architectural position
-quality: null
+quality: 8.8
 title: "Architecture Backpressure Policy"
 version: "1.0.0"
 author: n03_builder

@@ -835,6 +835,20 @@
     "status": "stable",
     "upstream_source": null
   },
+  "context_map": {
+    "pillar": "P08",
+    "llm_function": "CONSTRAIN",
+    "naming": "p08_cm_{{name}}.md",
+    "max_bytes": 4096,
+    "core": false,
+    "description": "DDD diagram of relationships and integration patterns between bounded contexts (upstream/downstream, ACL, OHS)",
+    "boundary": "BC relationship map. NOT bounded_context (single BC definition) nor component_map (deployment structure). Evans DDD context mapping.",
+    "status": "stable",
+    "upstream_source": "Evans DDD 2003",
+    "spec_version": null,
+    "last_reviewed": "2026-04-17",
+    "deprecated_by": null
+  },
   "context_window_config": {
     "boundary": "Budget allocation spec. NAO eh prompt_template (conteudo), system_prompt (identidade), nem model_card (capabilities).",
     "core": true,
@@ -1367,6 +1381,20 @@
     "spec_version": null,
     "status": "stable",
     "upstream_source": null
+  },
+  "event_schema": {
+    "pillar": "P06",
+    "llm_function": "CONSTRAIN",
+    "naming": "p06_evs_{{name}}.md",
+    "max_bytes": 4096,
+    "core": false,
+    "description": "AsyncAPI / CloudEvents schema for event payloads defining structure, versioning, and routing metadata",
+    "boundary": "Event payload schema. NOT data_contract (producer-consumer SLA) nor event_stream (infrastructure config). CloudEvents 1.0 / AsyncAPI 3.0.",
+    "status": "stable",
+    "upstream_source": "CloudEvents 1.0 / AsyncAPI 3.0",
+    "spec_version": null,
+    "last_reviewed": "2026-04-17",
+    "deprecated_by": null
   },
   "event_stream": {
     "boundary": "Real-time event stream config. NOT webhook (single outbound call) nor signal (internal nucleus signal). Industry: Kafka topic, Kinesis stream.",
@@ -2319,6 +2347,20 @@
     "status": "stable",
     "upstream_source": null
   },
+  "openapi_spec": {
+    "pillar": "P06",
+    "llm_function": "CONSTRAIN",
+    "naming": "p06_oas_{{name}}.md",
+    "max_bytes": 8192,
+    "core": false,
+    "description": "Machine-readable API contract following OpenAPI Specification 3.x defining paths, schemas, and security",
+    "boundary": "Machine-readable API contract. NOT api_reference (human-readable docs) nor api_client (SDK implementation). OpenAPI Initiative OAS 3.x.",
+    "status": "stable",
+    "upstream_source": "OpenAPI Initiative 2017",
+    "spec_version": null,
+    "last_reviewed": "2026-04-17",
+    "deprecated_by": null
+  },
   "optimizer": {
     "boundary": "Otimizador de processo metric>action. NAO eh bugloop (correcao pontual) nem benchmark (P07, medicao passiva).",
     "core": false,
@@ -2936,6 +2978,20 @@
     "status": "stable",
     "upstream_source": null
   },
+  "retry_policy": {
+    "pillar": "P09",
+    "llm_function": "GOVERN",
+    "naming": "p09_rtp_{{name}}.md",
+    "max_bytes": 2048,
+    "core": false,
+    "description": "Backoff, jitter, and budget configuration for retrying failed operations -- separate from circuit breaker",
+    "boundary": "Retry backoff config. NOT circuit_breaker (open/closed state machine) nor rate_limit_config (inbound throttle). AWS SDK Retry / Polly.",
+    "status": "stable",
+    "upstream_source": "AWS SDK Retry / Polly",
+    "spec_version": null,
+    "last_reviewed": "2026-04-17",
+    "deprecated_by": null
+  },
   "reward_model": {
     "boundary": "Reward model config. NOT rl_algorithm (training algo) nor scoring_rubric (human eval rubric).",
     "core": false,
@@ -3375,6 +3431,20 @@
     "spec_version": null,
     "status": "stable",
     "upstream_source": null
+  },
+  "state_machine": {
+    "pillar": "P12",
+    "llm_function": "COLLABORATE",
+    "naming": "p12_sm_{{name}}.md",
+    "max_bytes": 4096,
+    "core": false,
+    "description": "Formal finite state machine with states, transitions, guards, and actions governing entity lifecycle",
+    "boundary": "Formal FSM. NOT workflow (DAG of steps) nor process_manager (event coordinator). UML statechart / XState.",
+    "status": "stable",
+    "upstream_source": "UML 2.5 / XState 5.0",
+    "spec_version": null,
+    "last_reviewed": "2026-04-17",
+    "deprecated_by": null
   },
   "streaming_config": {
     "boundary": "Transport-level streaming config. NOT a response_format (output structure) nor a rate_limit_config (throughput). This controls HOW output is delivered.",

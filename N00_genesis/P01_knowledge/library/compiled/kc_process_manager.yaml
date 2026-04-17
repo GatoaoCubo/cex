@@ -3,7 +3,7 @@ kind: knowledge_card
 pillar: P01
 nucleus: n00
 domain: kind-taxonomy
-quality: null
+quality: 7.9
 tags:
 - kind
 - taxonomy
@@ -11,6 +11,8 @@ tags:
 - eip
 - saga
 - P12
+density_score: 0.95
+updated: '2026-04-17'
 definition: 'A `process_manager` is an event-driven coordinator for multi-step distributed processes. It subscribes to domain
   events, maintains a state machine per process instance (identified by a correlation key), and dispatches commands to participants
   at each step. Pattern origin: Hohpe & Woolf Enterprise Integration Patterns (2003). Also known as "Saga Orchestrator" in

@@ -4,9 +4,11 @@ kind: quality_gate
 pillar: P11
 llm_function: GOVERN
 version: 1.0.0
-quality: null
+quality: 5.8
 tags: [bounded_context, quality-gate, ddd]
 title: "Quality Gate: bounded_context"
+density_score: 1.0
+updated: "2026-04-17"
 ---
 # Quality Gate: bounded_context
 ## HARD Gates

@@ -3,7 +3,7 @@ kind: knowledge_card
 pillar: P11
 title: Constitutional Rule Builder -- Manifest
 version: 1.0.0
-quality: null
+quality: 6.2
 tags:
 - builder
 - constitutional_rule
@@ -23,6 +23,8 @@ keywords:
 - non_overridable
 - anthropic
 core: true
+density_score: 0.99
+updated: '2026-04-17'
 identity: Specialist in building `constitutional_rule` artifacts -- absolute behavioral constraints for agents that cannot
   be overridden by any instruction, context, or operator configuration. Knows Anthropic Constitutional AI (CAI), absolute
   vs soft safety constraints, and the hard line between constitutional_rule (P11), guardrail (soft constraint with fallback),

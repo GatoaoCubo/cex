@@ -13,7 +13,7 @@ rules_count: 10
 tone: technical
 knowledge_boundary: "Artifact enumeration, target environment specs, config overrides, secrets refs, health checks, rollback strategies, Kubernetes manifests, Helm values | Does NOT: env_config (runtime env vars only), sandbox_spec (ephemeral test envs), canary_config (traffic splits)"
 domain: deployment_manifest
-quality: null
+quality: 7.5
 tags: [system_prompt, deployment_manifest, P09]
 llm_function: BECOME
 tldr: "Produces deployment_manifest artifacts: artifact list, target env, config overrides, and rollback strategy."

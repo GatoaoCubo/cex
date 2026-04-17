@@ -4,9 +4,10 @@ title: Trajectory Evaluation in Knowledge Systems
 description: Comprehensive guide to evaluating knowledge trajectories in CEX systems
 kind: knowledge_card
 pillar: P01
-quality: 7.9
+quality: 8.0
 tags: evaluation, trajectory, knowledge, CEX, system
 density_score: 1.0
+updated: "2026-04-17"
 ---
 
 # Trajectory Evaluation in Knowledge Systems

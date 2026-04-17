@@ -4,9 +4,11 @@ kind: knowledge_card
 pillar: P12
 title: "Process Manager Builder -- Examples"
 version: 1.0.0
-quality: null
+quality: 5.1
 tags: [builder, process_manager, examples]
 llm_function: GOVERN
+density_score: 1.0
+updated: "2026-04-17"
 ---
 # Examples: process_manager
 ## Golden Example: Order Fulfillment

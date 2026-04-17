@@ -3,7 +3,7 @@ kind: api_client
 pillar: P04
 title: Shopify Admin API Client
 version: 0.1.0
-quality: null
+quality: 7.9
 status: template
 brand_placeholders:
 - BRAND_SHOPIFY_DOMAIN
@@ -14,6 +14,8 @@ tags:
 - distillation
 - shopify
 - api_client
+density_score: 1.0
+updated: '2026-04-17'
 purpose: HTTP client specification for Shopify Admin REST API — covers product CRUD, inventory management, and bulk sync operations
   against `{{BRAND_SHOPIFY_DOMAIN}}`.
 when_to_use:

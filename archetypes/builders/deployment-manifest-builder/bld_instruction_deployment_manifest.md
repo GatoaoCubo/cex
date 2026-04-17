@@ -15,7 +15,7 @@ prerequisites:
   - "Rollback revision or strategy is specified"
 validation_method: checklist
 domain: deployment_manifest
-quality: null
+quality: 7.1
 tags: [instruction, deployment_manifest, P09, config]
 llm_function: REASON
 tldr: "Build a deployment_manifest that specifies artifact list, target environment, config overrides, and rollback strategy."

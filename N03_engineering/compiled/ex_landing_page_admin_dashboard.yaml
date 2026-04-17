@@ -3,7 +3,7 @@ kind: landing_page
 pillar: P05
 title: Admin Dashboard Landing Page
 version: 0.1.0
-quality: null
+quality: 7.9
 status: template
 brand_placeholders:
 - BRAND_NAME
@@ -15,6 +15,8 @@ tags:
 - admin
 - dashboard
 - landing_page
+density_score: 1.0
+updated: '2026-04-17'
 purpose: Admin hub page for the commerce platform — displays KPI summary cards, navigation links to all admin modules (Products,
   Shopify Sync, Integrations, CRM, Sales), and real-time sync status indicators.
 when_to_use:

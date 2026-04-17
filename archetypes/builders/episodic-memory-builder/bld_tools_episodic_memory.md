@@ -4,7 +4,7 @@ id: bld_tools_episodic_memory
 pillar: P04
 llm_function: CALL
 purpose: Tools for episodic_memory production
-quality: null
+quality: 6.8
 title: "Tools Episodic Memory"
 version: "1.0.0"
 author: n03_builder

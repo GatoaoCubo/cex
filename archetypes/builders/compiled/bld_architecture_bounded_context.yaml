@@ -3,13 +3,15 @@ kind: component_map
 pillar: P08
 llm_function: CONSTRAIN
 version: 1.0.0
-quality: null
+quality: 7.2
 tags:
 - bounded_context
 - architecture
 - ddd
 - context-map
 title: Architecture Bounded Context
+density_score: 1.0
+updated: '2026-04-17'
 position_in_cex_kind_taxonomy: "P08 Architecture\n  bounded_context   <-- THIS KIND (semantic boundary)\n  component_map \
   \    (deployment topology -- NOT bounded_context)\n  decision_record   (ADR -- architecture decisions)\n  interface    \
   \     (integration contract spec)\n  agent_card        (agent capability definition)"

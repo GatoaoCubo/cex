@@ -4,9 +4,11 @@ kind: knowledge_card
 pillar: P06
 title: "Value Object Builder -- Knowledge Card"
 version: 1.0.0
-quality: null
+quality: 5.3
 tags: [builder, value_object, knowledge]
 llm_function: INJECT
+density_score: 0.96
+updated: "2026-04-17"
 ---
 # Knowledge: value_object
 ## Core Concept

@@ -1,0 +1,69 @@
+id: p09_ec_{{EXPERIMENT_SLUG}}
+kind: experiment_config
+pillar: P09
+title: 'Experiment: {{EXPERIMENT_NAME}}'
+version: 1.0.0
+created: '{{ISO_DATE}}'
+updated: '{{ISO_DATE}}'
+author: '{{AGENT_OR_TEAM}}'
+quality: 8.2
+tags: '[{{TAG1}}, experiment, ab_test, P09]'
+tldr: '{{ONE_SENTENCE_HYPOTHESIS_AND_METRIC}}'
+density_score: '{{0.85_TO_1.00}}'
+hypothesis: '{{WHAT_YOU_EXPECT_AND_WHY}} -- measured by {{PRIMARY_METRIC}}.'
+config: '| Property | Value |
+
+  |----------|-------|
+
+  | Experiment ID | `{{EXPERIMENT_SLUG}}` |
+
+  | Type | {{prompt_ab / model_ab / param_sweep / bandit}} |
+
+  | Owner | {{TEAM_OR_PERSON}} |
+
+  | Duration | {{START_ISO}} -> {{END_ISO}} |
+
+  | Traffic allocation | {{PERCENT_OF_TRAFFIC}}% of eligible requests |
+
+  | Stopping rule | {{FIXED_DURATION / BAYESIAN_WIN / MIN_SAMPLES}} |'
+variants: '| Variant | Split | Description | Artifact |
+
+  |---------|-------|-------------|----------|
+
+  | `control` | {{50}}% | {{BASELINE_DESCRIPTION}} | {{PATH_OR_ID}} |
+
+  | `treatment_a` | {{25}}% | {{CHANGE_DESCRIPTION}} | {{PATH_OR_ID}} |
+
+  | `treatment_b` | {{25}}% | {{CHANGE_DESCRIPTION}} | {{PATH_OR_ID}} |'
+metrics: '| Metric | Role | Direction | Target delta | Guardrail |
+
+  |--------|------|-----------|--------------|-----------|
+
+  | `{{PRIMARY_METRIC}}` | primary | {{higher_is_better}} | +{{X}}% | -- |
+
+  | `{{SECONDARY_METRIC}}` | secondary | {{higher_is_better}} | +{{Y}}% | -- |
+
+  | `{{GUARDRAIL_METRIC}}` | guardrail | {{lower_is_better}} | -- | max +{{Z}}% |
+
+  | `cost_per_call_usd` | guardrail | lower_is_better | -- | max +10% |'
+success_criteria:
+- Primary metric lift >= {{X}}% with p < {{0.05}} (or Bayesian P(winner) >= {{0.95}})
+- No guardrail metric regresses beyond its cap
+- 'Minimum sample size: {{N}} per variant'
+segmentation:
+- 'Include: {{USER_SEGMENTS_OR_NUCLEI}}'
+- 'Exclude: {{EXCLUSION_RULES}}'
+- 'Randomization unit: {{user_id / request_id / session_id}}'
+analysis:
+- 'Tool: {{statsig / growthbook / eppo / custom}}'
+- 'Method: {{frequentist_ttest / bayesian / sequential_testing}}'
+- 'Review cadence: {{daily / weekly}}'
+rollout:
+- Launch at {{START_ISO}} at {{INITIAL_TRAFFIC}}% traffic
+- Ramp to {{FULL_TRAFFIC}}% after {{BURN_IN_PERIOD}} if guardrails hold
+- Winner decision at {{END_ISO}} -- promote to default via {{feature_flag_id}}
+- Losing variants archived to `.cex/experiments/archive/`
+anti_patterns:
+- NOT a `feature_flag` (boolean toggle, no metrics)
+- NOT a `benchmark` (one-time eval, not live traffic)
+- NOT a `regression_check` (regression prevention, not hypothesis testing)

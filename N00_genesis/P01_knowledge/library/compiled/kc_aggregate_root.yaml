@@ -3,13 +3,15 @@ kind: knowledge_card
 pillar: P01
 nucleus: n00
 domain: kind-taxonomy
-quality: null
+quality: 7.9
 tags:
 - kind
 - taxonomy
 - aggregate_root
 - ddd
 - P06
+density_score: 0.92
+updated: '2026-04-17'
 definition: An `aggregate_root` is a DDD entry-point entity that owns a consistency boundary (the "aggregate cluster"), enforces
   domain invariants, and controls all external access to the objects within its boundary. Coined by Eric Evans in Domain-Driven
   Design (2003). The root is the ONLY object in the cluster that external code may hold a reference to -- all mutations go

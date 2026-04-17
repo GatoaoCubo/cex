@@ -8,7 +8,7 @@ created: "2026-04-17"
 updated: "2026-04-17"
 author: builder
 domain: deployment_manifest
-quality: null
+quality: 7.0
 tags: [output_template, deployment_manifest, P09]
 llm_function: PRODUCE
 tldr: "Canonical output template for deployment_manifest artifacts with all required placeholders."

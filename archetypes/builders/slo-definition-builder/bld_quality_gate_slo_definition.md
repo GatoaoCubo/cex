@@ -8,7 +8,7 @@ created: "2026-04-17"
 updated: "2026-04-17"
 author: builder
 domain: slo_definition
-quality: null
+quality: 7.0
 tags: [quality_gate, slo_definition, P09]
 llm_function: GOVERN
 tldr: "Validates SLO definitions for measurability, error budget math, and alerting completeness."

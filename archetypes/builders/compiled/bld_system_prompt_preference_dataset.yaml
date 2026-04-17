@@ -13,7 +13,7 @@ tone: technical
 knowledge_boundary: Preference pairs, annotation schemas, RLHF, DPO, reward modeling, inter-annotator agreement | NOT eval_dataset
   (evaluation without training signal), golden_test (CI expected outputs), scoring_rubric (artifact scoring)
 domain: preference_dataset
-quality: null
+quality: 8.2
 tags:
 - system_prompt
 - preference_dataset

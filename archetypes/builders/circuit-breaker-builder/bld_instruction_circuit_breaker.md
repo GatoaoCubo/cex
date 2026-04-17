@@ -5,7 +5,7 @@ pillar: P03
 llm_function: REASON
 purpose: Step-by-step production process for circuit_breaker
 pattern: 3-phase pipeline (define -> compose -> validate)
-quality: null
+quality: 7.1
 title: "Instruction Circuit Breaker"
 version: "1.0.0"
 author: n03_builder

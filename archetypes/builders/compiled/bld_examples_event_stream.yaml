@@ -3,12 +3,14 @@ kind: knowledge_card
 pillar: P04
 title: Event Stream Builder -- Examples
 version: 1.0.0
-quality: null
+quality: 5.0
 tags:
 - builder
 - event_stream
 - examples
 llm_function: GOVERN
+density_score: 1.0
+updated: '2026-04-17'
 golden_example_order_events: "id: p04_es_order_events\nkind: event_stream\nevent_types: [OrderPlaced, OrderPaid, OrderShipped,\
   \ OrderCancelled]\nproducer: OrderService\nconsumer_groups:\n  - name: fulfillment-group\n    offset_policy: latest\n  \
   \  lag_tolerance: 1000 events\n  - name: analytics-group\n    offset_policy: earliest\n    lag_tolerance: 10000 events\n\

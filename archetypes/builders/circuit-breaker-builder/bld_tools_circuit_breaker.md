@@ -4,7 +4,7 @@ id: bld_tools_circuit_breaker
 pillar: P04
 llm_function: CALL
 purpose: Tools and APIs available for circuit_breaker production
-quality: null
+quality: 8.3
 title: "Tools Circuit Breaker"
 version: "1.0.0"
 author: n03_builder

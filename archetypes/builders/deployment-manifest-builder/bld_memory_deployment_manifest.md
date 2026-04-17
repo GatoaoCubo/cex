@@ -8,7 +8,7 @@ created: "2026-04-17"
 updated: "2026-04-17"
 author: builder
 domain: deployment_manifest
-quality: null
+quality: 7.1
 tags: [memory, deployment_manifest, P09]
 llm_function: INJECT
 tldr: "Recalled patterns and corrections for deployment_manifest builder sessions."

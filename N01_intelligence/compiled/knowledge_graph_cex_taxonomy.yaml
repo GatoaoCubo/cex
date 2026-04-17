@@ -4,7 +4,7 @@ pillar: P10
 nucleus: N01
 title: CEX Taxonomy Knowledge Graph
 version: '1.0'
-quality: null
+quality: 8.2
 density_score: 0.97
 tags:
 - taxonomy

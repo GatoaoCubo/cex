@@ -3,7 +3,7 @@ id: bld_collaboration_prospective_memory
 pillar: P12
 llm_function: COLLABORATE
 purpose: How prospective-memory-builder works in crews with other builders
-quality: null
+quality: 7.2
 title: Collaboration Prospective Memory
 version: 1.0.0
 author: n03_builder

@@ -8,7 +8,7 @@ created: "2026-04-17"
 updated: "2026-04-17"
 author: builder
 domain: saga
-quality: null
+quality: 7.4
 tags: [examples, saga, P12]
 llm_function: GOVERN
 tldr: "Golden and anti-examples for saga construction."

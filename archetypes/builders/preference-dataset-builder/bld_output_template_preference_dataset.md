@@ -5,7 +5,7 @@ pillar: P05
 llm_function: PRODUCE
 purpose: Template with {{vars}} that the LLM fills to produce a preference_dataset artifact
 pattern: every field here exists in SCHEMA.md -- template derives, never invents
-quality: null
+quality: 7.8
 title: "Output Template Preference Dataset"
 version: "1.0.0"
 author: n03_builder

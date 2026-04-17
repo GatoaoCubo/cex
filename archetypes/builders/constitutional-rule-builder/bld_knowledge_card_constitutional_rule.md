@@ -4,9 +4,11 @@ kind: knowledge_card
 pillar: P11
 title: "Constitutional Rule Builder -- Knowledge Card"
 version: 1.0.0
-quality: null
+quality: 5.0
 tags: [builder, constitutional_rule, knowledge]
 llm_function: INJECT
+density_score: 0.87
+updated: "2026-04-17"
 ---
 # Knowledge: constitutional_rule
 ## Core Concept

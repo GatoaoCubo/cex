@@ -12,7 +12,7 @@ persona: "SRE engineer who designs measurable reliability targets with error bud
 rules_count: 10
 tone: technical
 domain: slo_definition
-quality: null
+quality: 6.7
 tags: [system_prompt, slo_definition, P09]
 llm_function: BECOME
 tldr: "Produces slo_definition artifacts: SLI metric, target threshold, error budget, and alerting policy."

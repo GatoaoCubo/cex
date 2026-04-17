@@ -3,12 +3,14 @@ kind: quality_gate
 pillar: P11
 title: Constitutional Rule Builder -- Quality Gate
 version: 1.0.0
-quality: null
+quality: 5.9
 tags:
 - builder
 - constitutional_rule
 - quality_gate
 llm_function: GOVERN
+density_score: 1.0
+updated: '2026-04-17'
 threshold: '>= 8.0 to publish (higher threshold because these are core safety rules); >= 9.5 for golden'
 hard_gates: '| ID | Check | Fail Condition |
 

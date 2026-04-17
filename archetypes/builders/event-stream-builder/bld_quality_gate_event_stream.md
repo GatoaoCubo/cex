@@ -4,9 +4,11 @@ kind: quality_gate
 pillar: P04
 title: "Event Stream Builder -- Quality Gate"
 version: 1.0.0
-quality: null
+quality: 6.0
 tags: [builder, event_stream, quality_gate]
 llm_function: GOVERN
+density_score: 1.0
+updated: "2026-04-17"
 ---
 # Gate: event_stream
 ## Threshold

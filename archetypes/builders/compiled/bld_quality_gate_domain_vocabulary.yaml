@@ -3,12 +3,14 @@ kind: quality_gate
 pillar: P11
 llm_function: GOVERN
 version: 1.0.0
-quality: null
+quality: 5.7
 tags:
 - domain_vocabulary
 - quality-gate
 - ubiquitous-language
 title: 'Quality Gate: domain_vocabulary'
+density_score: 1.0
+updated: '2026-04-17'
 hard_gates: '| ID | Check | Fail Condition |
 
   |----|-------|----------------|

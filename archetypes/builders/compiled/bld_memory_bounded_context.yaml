@@ -3,12 +3,14 @@ kind: entity_memory
 pillar: P10
 llm_function: INJECT
 version: 1.0.0
-quality: null
+quality: 6.0
 tags:
 - bounded_context
 - memory
 - ddd
 title: 'Memory Patterns: bounded_context'
+density_score: 0.94
+updated: '2026-04-17'
 what_to_remember:
 - bounded_context = SEMANTIC boundary, not technical (not service, not namespace)
 - Each BC has its own model; same word means different things in different BCs

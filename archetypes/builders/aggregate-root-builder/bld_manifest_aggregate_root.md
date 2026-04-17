@@ -4,12 +4,14 @@ kind: knowledge_card
 pillar: P06
 title: "Aggregate Root Builder -- Manifest"
 version: 1.0.0
-quality: null
+quality: 6.3
 tags: [builder, aggregate_root, ddd, P06]
 domain: aggregate_root
 llm_function: BECOME
 triggers: ["define aggregate root", "create domain entity", "enforce domain invariants"]
 keywords: [aggregate_root, ddd, domain, invariant, entity, consistency_boundary]
+density_score: 1.0
+updated: "2026-04-17"
 ---
 # aggregate-root-builder
 ## Identity

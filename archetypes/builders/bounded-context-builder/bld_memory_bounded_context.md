@@ -4,9 +4,11 @@ kind: entity_memory
 pillar: P10
 llm_function: INJECT
 version: 1.0.0
-quality: null
+quality: 6.2
 tags: [bounded_context, memory, ddd]
 title: "Memory Patterns: bounded_context"
+density_score: 0.94
+updated: "2026-04-17"
 ---
 # Memory Patterns: bounded_context
 ## What to Remember

@@ -9,7 +9,7 @@ created: 2026-04-17
 updated: 2026-04-17
 author: builder_agent
 domain: drift_detector
-quality: null
+quality: 8.8
 tags: [drift_detector, P11, GOVERN, kind-kc, distribution-shift, monitoring, mlops]
 tldr: "drift_detector applies statistical tests (KS, PSI, chi-square) to compare reference vs live distributions, firing alerts when divergence exceeds thresholds."
 when_to_use: "Building, reviewing, or reasoning about drift_detector artifacts"

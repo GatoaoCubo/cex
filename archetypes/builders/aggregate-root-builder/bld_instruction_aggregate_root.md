@@ -4,9 +4,11 @@ kind: instruction
 pillar: P06
 title: "Aggregate Root Builder -- Instruction"
 version: 1.0.0
-quality: null
+quality: 5.4
 tags: [builder, aggregate_root, instruction]
 llm_function: REASON
+density_score: 0.81
+updated: "2026-04-17"
 ---
 # Instructions: How to Produce an aggregate_root
 ## Phase 1: RESEARCH

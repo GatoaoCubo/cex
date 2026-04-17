@@ -3,12 +3,14 @@ kind: knowledge_card
 pillar: P06
 title: Value Object Builder -- Knowledge Card
 version: 1.0.0
-quality: null
+quality: 5.1
 tags:
 - builder
 - value_object
 - knowledge
 llm_function: INJECT
+density_score: 0.96
+updated: '2026-04-17'
 core_concept: 'Value Object is the Evans DDD pattern for domain attributes that have no identity. Equality is structural:
   two Money(10, USD) instances are identical and interchangeable. Immutability is absolute: to change a value, construct a
   new instance.'

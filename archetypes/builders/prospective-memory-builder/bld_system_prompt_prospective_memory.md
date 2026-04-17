@@ -13,7 +13,7 @@ rules_count: 8
 tone: technical
 knowledge_boundary: "Future actions, trigger conditions, reminders, deferred execution | NOT schedule (workflow config), session_state (current session), working_memory (active task)"
 domain: "prospective_memory"
-quality: null
+quality: 6.7
 tags: ["system_prompt", "prospective_memory", "reminders", "P10"]
 safety_level: standard
 output_format_type: markdown

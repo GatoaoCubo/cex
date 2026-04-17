@@ -23,6 +23,7 @@ rpd: 480
 tldr: 'N07 orchestration rate limits: 6 concurrent nuclei, $50/hr Opus ceiling, 60-90s polling, 5-wave max per mission.'
 description: Rate limits and dispatch budgets for N07 orchestrator -- governs nucleus spawns, provider quotas, wave cadence,
   and token spend per mission.
+density_score: 1.0
 purpose: 'N07 orchestrates up to 6 parallel nuclei across 4 providers. Without declared limits, a runaway mission can exhaust
   hourly API quota or exceed budget in a single wave. This config is the single source of truth for what N07 may dispatch,
   at what rate, and when to abort. Boundary: this artifact declares WHAT the limits are. Runtime enforcement (backoff, circuit-break)

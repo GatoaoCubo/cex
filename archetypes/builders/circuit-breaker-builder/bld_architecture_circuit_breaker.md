@@ -4,7 +4,7 @@ id: bld_architecture_circuit_breaker
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of circuit_breaker -- inventory, dependencies, and architectural position
-quality: null
+quality: 8.8
 title: "Architecture Circuit Breaker"
 version: "1.0.0"
 author: n03_builder

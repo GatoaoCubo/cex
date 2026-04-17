@@ -3,7 +3,7 @@ kind: api_client
 pillar: P04
 title: Mercado Livre API Client
 version: 0.1.0
-quality: null
+quality: 7.9
 status: template
 brand_placeholders:
 - BRAND_MELI_CLIENT_ID
@@ -14,6 +14,8 @@ tags:
 - mercadolivre
 - meli
 - api_client
+density_score: 1.0
+updated: '2026-04-17'
 purpose: HTTP client specification for Mercado Livre (MLB) REST API — covers product catalog search, item detail retrieval,
   and product enrichment operations with OAuth 2.0 bearer token authentication.
 when_to_use:

@@ -4,9 +4,11 @@ kind: component_map
 pillar: P08
 llm_function: CONSTRAIN
 version: 1.0.0
-quality: null
+quality: 7.1
 tags: [domain_vocabulary, architecture, ubiquitous-language]
 title: "Architecture Domain Vocabulary"
+density_score: 1.0
+updated: "2026-04-17"
 ---
 # Architecture: domain_vocabulary
 ## Position in CEX Kind Taxonomy

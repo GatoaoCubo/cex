@@ -9,7 +9,7 @@ created: 2026-04-17
 updated: 2026-04-17
 author: builder_agent
 domain: domain_event
-quality: null
+quality: 8.8
 tags: [domain_event, p12, CALL, kind-kc, ddd, event-sourcing]
 tldr: "Immutable DDD domain event recording a significant business occurrence; owns aggregate root + causal chain; NOT signal (system) nor audit_log (compliance)."
 when_to_use: "Building, reviewing, or reasoning about domain_event artifacts in any bounded context"

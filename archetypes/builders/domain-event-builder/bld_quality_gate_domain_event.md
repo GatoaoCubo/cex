@@ -4,9 +4,11 @@ kind: quality_gate
 pillar: P11
 llm_function: GOVERN
 version: 1.0.0
-quality: null
+quality: 5.8
 tags: [domain_event, quality-gate, ddd]
 title: "Quality Gate: domain_event"
+density_score: 1.0
+updated: "2026-04-17"
 ---
 # Quality Gate: domain_event
 ## HARD Gates (all must pass)

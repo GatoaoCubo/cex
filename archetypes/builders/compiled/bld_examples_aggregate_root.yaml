@@ -3,12 +3,14 @@ kind: knowledge_card
 pillar: P06
 title: Aggregate Root Builder -- Examples
 version: 1.0.0
-quality: null
+quality: 5.1
 tags:
 - builder
 - aggregate_root
 - examples
 llm_function: GOVERN
+density_score: 1.0
+updated: '2026-04-17'
 golden_example_order: "id: p06_ar_order\nkind: aggregate_root\nbounded_context: sales\ninvariants:\n  - \"Total price equals\
   \ sum of all line items * quantity\"\n  - \"Order cannot be shipped if payment status is not confirmed\"\ncommands:\n  -\
   \ \"AddItem(productId, qty): pre=order.status==draft, post=lineItems contains item\"\n  - \"ConfirmPayment(paymentRef):\

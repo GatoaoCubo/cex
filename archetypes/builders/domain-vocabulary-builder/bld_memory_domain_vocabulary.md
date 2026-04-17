@@ -4,9 +4,11 @@ kind: entity_memory
 pillar: P10
 llm_function: INJECT
 version: 1.0.0
-quality: null
+quality: 5.8
 tags: [domain_vocabulary, memory, patterns]
 title: "Memory Patterns: domain_vocabulary"
+density_score: 0.95
+updated: "2026-04-17"
 ---
 # Memory Patterns: domain_vocabulary
 ## What to Remember

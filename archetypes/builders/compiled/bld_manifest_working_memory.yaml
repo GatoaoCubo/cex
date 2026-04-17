@@ -36,7 +36,7 @@ capabilities:
 - Declare what persists after clear (promote to entity_memory or episodic_memory)
 - Validate artifact against quality gates (HARD + SOFT)
 - Distinguish working_memory from session_state and entity_memory
-quality: null
+quality: 8.3
 title: Manifest Working Memory
 tldr: Builds working_memory artifacts -- short-term context stores for a single active task, cleared after task completion.
 density_score: 0.9

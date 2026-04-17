@@ -14,7 +14,7 @@ keywords: [circuit breaker, fault tolerance, resilience, cooldown, half-open, hy
 triggers: ["create circuit breaker", "configure fault tolerance", "add resilience pattern", "circuit breaker config", "auto-disable failing dependency"]
 capabilities: >
   L1: Specialist in building circuit_breaker artifacts -- resilience configs that auto-disable failing dependencies and allow recovery after cooldown. L2: Define trip thresholds, state machine (closed/open/half-open), cooldown periods, and recovery probes. L3: When user needs to create, build, or scaffold circuit breaker for dependency fault isolation.
-quality: null
+quality: 7.6
 title: "Manifest Circuit Breaker"
 tldr: "Builds circuit_breaker artifacts -- resilience pattern that auto-disables failing dependencies and allows recovery after cooldown."
 density_score: 0.90

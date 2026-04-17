@@ -1,4 +1,5 @@
 ---
+quality: 9.1
 id: spec_nucleus_self_assembly
 kind: constraint_spec
 pillar: P06
@@ -14,6 +15,7 @@ depends_on: null
 tags: [spec, self-assembly, portfolio-assembly, kind-synergy, portfolio-archetype, flywheel, nucleus-composition]
 tldr: "Each nucleus (N01-N06) auto-constructs its typed artifact portfolio using sin-lens-driven portfolio archetypes, kind synergy patterns, and a self-assembly loop -- turning 5-word tasks into outperforming execution."
 density_score: 0.96
+updated: "2026-04-17"
 ---
 
 # Spec -- Nucleus Self-Assembly Flywheel

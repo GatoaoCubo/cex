@@ -3,7 +3,7 @@ kind: oauth_app_config
 pillar: P09
 title: Bling ERP OAuth 2.0 App Configuration
 version: 0.1.0
-quality: null
+quality: 8.2
 status: template
 brand_placeholders:
 - BRAND_BLING_CLIENT_ID
@@ -16,6 +16,8 @@ tags:
 - bling
 - erp
 - oauth
+density_score: 1.0
+updated: '2026-04-17'
 purpose: OAuth 2.0 configuration for Bling ERP API v3 — defines the authorization code flow, token storage schema, and proactive
   refresh strategy for maintaining a valid access token against `{{BRAND_BLING_CLIENT_ID}}`.
 when_to_use:

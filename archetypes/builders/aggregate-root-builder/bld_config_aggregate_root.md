@@ -4,9 +4,11 @@ kind: knowledge_card
 pillar: P06
 title: "Aggregate Root Builder -- Context Sources"
 version: 1.0.0
-quality: null
+quality: 5.7
 tags: [builder, aggregate_root, context]
-llm_function: INJECT
+llm_function: CONSTRAIN
+density_score: 1.0
+updated: "2026-04-17"
 ---
 # Context Sources: aggregate_root
 ## Mandatory Loads (F3 INJECT)

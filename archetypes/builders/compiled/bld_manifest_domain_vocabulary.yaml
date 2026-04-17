@@ -28,7 +28,7 @@ capabilities:
 - Map each term to industry standard, anti-patterns, and usage rules
 - Enforce term consistency across multiple agents in the same BC
 - 'Track term evolution: proposed -> active -> deprecated lifecycle'
-quality: null
+quality: 7.5
 title: Manifest Domain Vocabulary Builder
 tldr: Builds domain_vocabulary registries that govern canonical terms for a bounded context, preventing semantic drift across
   LLM agents.

@@ -3,13 +3,15 @@ kind: knowledge_card
 pillar: P01
 nucleus: n00
 domain: kind-taxonomy
-quality: null
+quality: 7.9
 tags:
 - kind
 - taxonomy
 - value_object
 - ddd
 - P06
+density_score: 0.93
+updated: '2026-04-17'
 definition: A `value_object` is an immutable domain type without identity, defined entirely by its attributes and structural
   equality. Coined by Eric Evans in Domain-Driven Design (2003). Two value_object instances are equal if and only if all their
   attributes are equal -- there is no notion of "this specific instance" vs "that specific instance."

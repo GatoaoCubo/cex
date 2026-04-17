@@ -4,9 +4,11 @@ kind: schema
 pillar: P11
 title: "Constitutional Rule Builder -- Schema"
 version: 1.0.0
-quality: null
+quality: 7.1
 tags: [builder, constitutional_rule, schema]
 llm_function: CONSTRAIN
+density_score: 1.0
+updated: "2026-04-17"
 ---
 # Schema: constitutional_rule
 ## Frontmatter Fields

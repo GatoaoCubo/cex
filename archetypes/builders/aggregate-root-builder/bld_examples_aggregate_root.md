@@ -4,9 +4,11 @@ kind: knowledge_card
 pillar: P06
 title: "Aggregate Root Builder -- Examples"
 version: 1.0.0
-quality: null
+quality: 5.1
 tags: [builder, aggregate_root, examples]
 llm_function: GOVERN
+density_score: 1.0
+updated: "2026-04-17"
 ---
 # Examples: aggregate_root
 ## Golden Example: Order
