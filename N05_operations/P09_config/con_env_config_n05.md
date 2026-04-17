@@ -5,8 +5,9 @@ pillar: P09
 nucleus: n05
 title: Ops Env Contract
 version: 1.0
-quality: null
+quality: 9.0
 tags: [config, env, operations, ci, deploy]
+density_score: 1.0
 ---
 <!-- 8F: F1 constrain=P09/env_config F2 become=env-config-builder F3 inject=nucleus_def_n05+n05-operations+kc_env_config+P09_config+N05 env examples
      F4 reason=environment contract with strict precedence and fail-closed validation F5 call=apply_patch F6 produce=5202 bytes

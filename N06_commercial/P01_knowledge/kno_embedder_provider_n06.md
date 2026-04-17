@@ -5,8 +5,9 @@ pillar: P01
 nucleus: n06
 title: Commercial Embedder Provider
 version: 1.0
-quality: null
+quality: 9.0
 tags: [knowledge, embedder_provider, vectors, pricing, retrieval, monetization]
+density_score: 1.0
 ---
 <!-- 8F: F1=P01/embedder_provider F2=embedder-provider-builder F3=nucleus_def_n06.md,kc_embedder_provider.md,P01_knowledge/_schema.yaml,N06 W1 config/schema F4=high_precision_embeddings_for_revenue_adjacent_semantic_search F5=apply_patch;python _tools/cex_compile.py F6=author_dense_markdown_artifact F7=frontmatter_ascii_density_linecount_review F8=N06_commercial/P01_knowledge/kno_embedder_provider_n06.md -->
 
