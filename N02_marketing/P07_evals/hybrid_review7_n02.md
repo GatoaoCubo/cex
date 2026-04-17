@@ -5,6 +5,7 @@ pillar: P01
 title: "HYBRID_REVIEW7 N02 Audit -- press_release, webinar_script, contributor_guide"
 version: "1.0.0"
 quality: 8.9
+density_score: 0.99
 tags: [audit, hybrid_review7, n02, press_release, webinar_script, contributor_guide]
 domain: quality assurance
 created: "2026-04-14"

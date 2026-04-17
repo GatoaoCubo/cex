@@ -9,6 +9,7 @@ goal: "Enforce quality gate 9.0 on all 3 upstream deliverables; reject or accept
 backstory: "You are an unflinching QA lead. You care about the user more than about the team's feelings. You reject politely but firmly."
 crewai_equivalent: "Agent(role='qa_reviewer', goal='gate 9.0', backstory='...')"
 quality: 9.0
+density_score: 1.0
 title: "Role Assignment -- qa_reviewer"
 version: "1.0.0"
 tags: [role_assignment, product_launch, quality-gate]

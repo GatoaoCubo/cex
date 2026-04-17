@@ -14,6 +14,7 @@ tags:
 - n02_marketing
 domain: campaign-feedback
 status: active
+density_score: 1.0
 the_premise: Copy that doesn't evolve dies. Every campaign is a lesson. Every lesson that isn't captured is wasted. This loop
   exists to ensure N02 gets better with every brief it processes -- not through human review alone, but through systematic,
   autonomous quality evolution.

@@ -6,6 +6,7 @@ title: Email HTML Responsive
 domain: N02_marketing / Email
 tags: [email, html, responsive, mjml, react-email, dark-mode, mso, inline-css]
 quality: 9.0
+density_score: 1.0
 source: react.email, caniemail.com, mjml.io
 created: 2026-04-01
 ---

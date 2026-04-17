@@ -14,6 +14,7 @@ tags:
 - n02_marketing
 domain: audience-intelligence
 status: active
+density_score: 0.99
 purpose: Generic copy performs generically. Segment-aware copy converts. These ICP-typed segment definitions are the lens
   through which N02 views every brief -- not "who is this for?" but "which segment has the highest message-market fit for
   this copy approach?"

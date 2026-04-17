@@ -14,6 +14,7 @@ tags:
 - n02_marketing
 domain: content-governance
 status: active
+density_score: 1.0
 purpose: 'Not everything that can be published should be published. This filter is N02''s immune system: it catches copy that
   violates brand standards, platform policies, and legal constraints before it reaches the distribution layer. One viral mistake
   costs more than a thousand great campaigns.'

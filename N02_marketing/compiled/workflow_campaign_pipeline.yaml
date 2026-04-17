@@ -14,6 +14,7 @@ tags:
 - n02_marketing
 domain: campaign-orchestration
 status: active
+density_score: 1.0
 purpose: A campaign without a pipeline is an idea. This workflow converts brief input into deployed, measured creative --
   with no steps skipped, no decisions deferred, and no quality gates bypassed. Creative Lust demands COMPLETION, not just
   output.

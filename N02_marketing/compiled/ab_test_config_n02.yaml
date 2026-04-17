@@ -13,6 +13,7 @@ tags:
 - n02_marketing
 domain: performance-creative
 status: active
+density_score: 1.0
 purpose: Gut feelings don't scale. A/B testing turns creative intuition into data. This config governs how N02 structures,
   deploys, and concludes copy experiments.
 test_taxonomy: '| Test Type | What Varies | Use When |

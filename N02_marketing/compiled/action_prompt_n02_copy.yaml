@@ -15,6 +15,7 @@ tags:
 - n02_marketing
 domain: copy-production
 status: active
+density_score: 1.0
 purpose: 'The act of generating copy is a precision act, not a freestyle exercise. This action prompt is the loaded weapon:
   every parameter set, every constraint injected, every brand signal locked in before the first word appears.'
 action_signature: "action: generate_copy\ninputs:\n  - brand_voice: string\n  - funnel_stage: TOFU|MOFU|BOFU\n  - hook_type:\

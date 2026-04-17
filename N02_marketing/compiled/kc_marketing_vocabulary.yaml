@@ -15,6 +15,7 @@ tags:
 domain: marketing
 type: controlled_vocabulary
 status: active
+density_score: 0.97
 purpose: This is N02's language model. Every artifact N02 generates uses THESE terms -- not synonyms, not creative alternatives,
   not industry jargon from competing frameworks. Vocabulary drift is how smart systems accumulate confusion. This KC prevents
   it. Load at F2b SPEAK before any artifact generation. ---

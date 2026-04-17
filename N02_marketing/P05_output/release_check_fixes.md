@@ -7,6 +7,7 @@ mission: POLISH_WAVE2
 title: Release Check Fixes -- POLISH_WAVE2
 created: "2026-04-13"
 quality: 8.8
+density_score: 0.97
 ---
 
 # Release Check Fixes -- POLISH_WAVE2

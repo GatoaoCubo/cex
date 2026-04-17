@@ -13,6 +13,7 @@ tags:
 - n02_marketing
 domain: audience-intelligence
 status: active
+density_score: 1.0
 purpose: 'Not all audiences respond to the same copy. Cohort analysis answers: WHO is converting, WHEN they convert, and WHY
   certain segments disengage. Without this, N02 produces copy that averages across segments -- and average copy converts no
   one.'

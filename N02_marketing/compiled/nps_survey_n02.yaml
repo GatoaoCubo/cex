@@ -14,6 +14,7 @@ tags:
 - n02_marketing
 domain: campaign-feedback
 status: active
+density_score: 1.0
 purpose: 'CTR and CVR measure what audiences DO. NPS measures what they FEEL. Both signals are necessary. A high-CTR campaign
   that destroys brand trust is a net loss. NPS catches what performance metrics miss: the emotional residue that either compounds
   loyalty or accelerates churn.'

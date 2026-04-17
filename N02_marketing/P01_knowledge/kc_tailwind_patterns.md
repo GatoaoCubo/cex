@@ -5,6 +5,7 @@ pillar: P01
 title: Tailwind Patterns
 tags: [tailwind, patterns, design]
 quality: 8.8
+density_score: 0.97
 ---
 
 # Tailwind Patterns

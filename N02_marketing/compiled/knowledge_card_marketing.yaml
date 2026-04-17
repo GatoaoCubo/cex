@@ -1,203 +1,209 @@
-id: p01_kc_marketing_nucleus
+id: knowledge_card_marketing
 kind: knowledge_card
 pillar: P01
-title: Marketing & Copywriting — Core Knowledge Card
-version: 3.0.0
-created: 2026-03-30
-updated: 2026-03-31
-author: n02_marketing
-domain: copywriting_and_campaigns
-quality: null
+nucleus: N02
+title: Knowledge Card -- Marketing Domain (N02)
+version: 2.0.0
+quality: 9.1
+density_score: 0.99
 tags:
 - knowledge_card
 - marketing
-- copywriting
-- campaigns
-- N02
-tldr: Distilled copywriting formulas, CTA patterns, headline frameworks, funnel stages — operational knowledge for N02.
-when_to_use: Load before any copy-writing task. Reference formulas, then adapt to product/audience.
-keywords:
-- copywriting
-- AIDA
-- PAS
-- headline
-- CTA
-- funnel
-- landing page
-- email
-- brand voice
-- A/B testing
-long_tails:
-- How to write a high-converting landing page headline
-- AIDA vs PAS — which formula to use for cold traffic
-- What makes a CTA convert — specificity and friction reduction
-- How to define brand voice in 4 dimensions
-axioms:
-- ALWAYS identify funnel stage before writing — awareness copy ≠ decision copy
-- ALWAYS lead with the reader's desire, not the product's features
-- NEVER use a vague CTA — specificity increases CTR by 20–30%
-linked_artifacts:
-  primary: p02_agent_marketing_nucleus
-  related:
-  - p03_sp_marketing_nucleus
-  - p03_pt_marketing_message
-density_score: 0.91
-data_source: internal_distillation
-quick_reference: 'domain: copywriting_and_campaigns
+- copy
+- campaign
+- brand
+- n02
+- creative_lust
+domain: marketing
+tldr: 'Canonical knowledge base for N02: copy theory, campaign structure, channel mix, conversion mechanics, quality gates.'
+created: '2026-04-17'
+updated: '2026-04-17'
+domain_identity: '| Property | Value |
 
-  nucleus: N02
+  |----------|-------|
 
-  model: claude-sonnet-4-6
+  | Nucleus | N02 -- Marketing |
 
-  cli: claude (Anthropic subscription)
+  | Sin lens | Creative Lust (Luxuria Criativa) |
 
-  core_formulas: [AIDA, PAS, BAB, 4U, FAB]
+  | Core drive | Make the reader WANT, not just KNOW |
 
-  funnel_stages: [awareness, consideration, decision]
+  | Quality floor | 9.0 |
 
-  channels: [ads, email, landing_page, social, brand]'
-copywriting_formulas: ''
-aida_awareness_interest_desire_action: 'Use for: cold traffic ads, email subject lines, landing page above-the-fold
+  | Density target | 0.85+ |
 
-  A — Hook that grabs attention (bold claim, question, surprising stat)
 
-  I — Build interest with the problem or opportunity
+  ---'
+1_copy_theory: 'Marketing copy converts attention into action. N02 applies three laws:
 
-  D — Create desire with transformation story or benefit stack
 
-  A — CTA with single clear next step'
-pas_problem_agitate_solution: 'Use for: Facebook ads, cold email, sales pages targeting pain-aware audiences
+  | Law | Principle | Failure mode |
 
-  P — Name the exact pain point the reader already feels
+  |-----|-----------|-------------|
 
-  A — Deepen it: consequences, missed opportunities, future if nothing changes
+  | Desire before logic | Emotion opens the door; reason locks the deal | Pure feature list = ignored |
 
-  S — Present your solution as the relief'
-bab_before_after_bridge: 'Use for: testimonials structure, case study copy, social proof sections
+  | Specificity beats superlatives | "23% lift in demos" > "best results ever" | Vague claims erode trust |
 
-  Before: Reader''s current state (problem, frustration, limitation)
+  | One CTA per unit | Clarity of action = higher conversion | Multiple CTAs = decision paralysis |'
+persuasion_architecture_aida: "Attention -> Interest -> Desire -> Action -> Retention\n     |              |          |  \
+  \       |\n  headline      proof      urgency     CTA      loop\n\nEvery piece of copy N02 produces maps to at least one\
+  \ AIDA+ stage.\n\n---"
+2_campaign_structure: ''
+anatomy_of_a_campaign: '| Component | Function | Artifact |
 
-  After: Desired future state (what life looks like after solving it)
+  |-----------|----------|---------|
 
-  Bridge: Your product/service as the mechanism to cross'
-4u_headline_formula: 'Use for: all headlines. Score each dimension 1–3, aim for total >= 8.
+  | Brief | audience + offer + proof + constraints | input_schema_campaign_brief |
 
-  Useful — Does it promise a benefit?
+  | Copy variants | 3+ angle variants per asset | prompt_template_marketing |
 
-  Urgent — Does it create time pressure or consequence for inaction?
+  | Distribution plan | channel x timing x audience | tpl_content_distribution_plan |
 
-  Unique — Could only your offer say this?
+  | Quality gate | score >= 9.0 before publish | quality_gate_marketing |
 
-  Ultra-specific — Does it name a number, name, or concrete outcome?'
-fab_features_advantages_benefits: 'Use for: product description copy, email body, landing page benefit section
+  | Signal | campaign_complete -> N06/N07 | dispatch_rule_marketing |'
+funnel_stage_vocabulary: '| Stage | Audience state | Copy job | Banned |
 
-  Feature: What it IS (e.g., "AI-powered headline scorer")
+  |-------|---------------|----------|--------|
 
-  Advantage: What it DOES (e.g., "scores 10 variants in 3 seconds")
+  | TOFU | Problem-unaware | Educate, frame pain | Hard CTAs |
 
-  Benefit: What it MEANS for reader (e.g., "you ship copy 2x faster")'
-headline_patterns_high_ctr: '| Pattern | Example |
+  | MOFU | Solution-aware | Differentiate, prove | Vague claims |
 
-  |---------|---------|
+  | BOFU | Decision-ready | Remove risk, close | "Maybe", "might" |
 
-  | Number + Outcome | "7 Headlines That Doubled Our Conversion Rate" |
 
-  | How to [Outcome] Without [Pain] | "How to Launch Ads Without Wasting Budget" |
+  ---'
+3_channel_mix: '| Channel | Format | Max length | Primary metric |
 
-  | The [Secret/Method/System] | "The 3-Word CTA That Gets More Clicks" |
+  |---------|--------|-----------|----------------|
 
-  | Question with implied answer | "Still Writing Weak CTAs? This Changes Everything." |
+  | LinkedIn (B2B) | post + carousel | 3,000 chars | impressions -> connections |
 
-  | Specific result + timeframe | "Get 3x More Leads in 30 Days" |'
-cta_patterns: '| Weak (Banned) | Strong (Use) | Why |
+  | Instagram (D2C) | caption + reel | 2,200 chars | saves + shares |
 
-  |---------------|-------------|-----|
+  | Email | subject + body | 40 chars subject | open rate + click |
 
-  | Click here | Get my free audit | Specific benefit |
+  | Landing page | full page | above-fold CTA | conversion rate |
 
-  | Learn more | See how it works (2 min) | Specificity + low friction |
+  | Blog | SEO post | 1,500+ words | organic traffic |
 
-  | Submit | Yes, send my guide | First-person + desire |
 
-  | Buy now | Start my 14-day trial | Framing as start, not spend |
+  ---'
+4_conversion_mechanics: ''
+copy_quality_indicators_measurable: '| Indicator | Target | Tooling |
 
-  | Sign up | Join 4,000+ marketers | Social proof embedded |'
-funnel_stage_matrix: '| Stage | Awareness | Consideration | Decision |
+  |-----------|--------|---------|
 
-  |-------|-----------|---------------|----------|
+  | Specific proof present | >= 1 stat or testimonial | copy_analyzer.md |
 
-  | Reader knows | Has a problem | Has a solution category | Has your brand |
+  | CTA present | exactly 1 per unit | quality_gate_marketing |
 
-  | Goal | Stop the scroll | Build preference | Remove final objection |
+  | Brand voice match | 80%+ vocabulary overlap | brand_voice_templates.md |
 
-  | Formula | AIDA / hook | BAB / comparison | Offer + urgency |
+  | Readability | Flesch >= 60 | headline_scorer.md |
 
-  | CTA | Soft (learn more) | Medium (see demo) | Hard (buy / start) |
+  | Hook in first 2 sentences | yes | copy_analyzer.md |'
+headline_scoring_model: '| Score range | Signal | Action |
 
-  | Tone | Curious, bold | Educational, credible | Confident, urgent |'
-brand_voice_4_dimensions: '1. TONE: formal ←——→ casual (e.g., "We help" vs "Let''s fix this")
+  |------------|--------|--------|
 
-  2. VOCABULARY: technical ←——→ plain (e.g., "ROI optimization" vs "more sales")
+  | 9.0-10 | Publish | -- |
 
-  3. PERSON: third-person ←——→ first-person (e.g., "the company" vs "we/you")
+  | 8.0-8.9 | Improve one element | add proof OR sharpen CTA |
 
-  4. ENERGY: calm ←——→ bold (e.g., "reliable solution" vs "this changes everything")
+  | 7.0-7.9 | Major revision | rewrite hook |
 
-  For each client/product: score each dimension 1–5. Document 3 banned words + 3 signature phrases.'
-email_sequence_skeletons: ''
-cold_outreach_5_email:
-- Hook email — problem statement + social proof hook (no pitch)
-- Value email — one insight/tip relevant to their problem (no pitch)
-- Case study email — BAB story of a similar client
-- Offer email — clear pitch with CTA
-- Breakup email — creates urgency via absence ("Last email...")
-nurture_welcome_3_email:
-- Welcome — deliver promised lead magnet + brand story
-- Quick win — teach one thing they can apply today
-- Invitation — offer next step (trial, call, product)
-flow: '[Audience pain/desire] → [Formula selection] → [Hook draft]
+  | < 7.0 | Discard | rebuild from brief |
 
-  → [Body with FAB/BAB] → [CTA specificity check] → [A/B variants]
 
-  → [Readability score >= 60] → [Brand voice match] → [Publish]'
-ad_copy_character_limits_platform_reference: '| Platform | Headline | Primary Text | Description |
+  ---'
+5_brand_voice_system: 'N02 loads brand context from `.cex/brand/brand_config.yaml` at F3 INJECT:
 
-  |----------|---------|-------------|-------------|
 
-  | Facebook/Instagram | 40 chars | 125 chars | 30 chars |
+  | Brand field | Marketing use |
 
-  | Google Search | 30 chars × 3 | — | 90 chars × 2 |
+  |-------------|---------------|
 
-  | LinkedIn | — | 150 chars | — |
+  | BRAND_VOICE | Tone and personality for all copy |
 
-  | Twitter/X | — | 280 chars | — |'
-psychological_triggers_use_1_per_piece: '| Trigger | Application | Example |
+  | BRAND_PRIMARY_COLOR | Anchor for visual copy decisions |
 
-  |---------|------------|---------|
+  | BRAND_VERTICAL | Industry language and norms |
 
-  | Specificity | Numbers beat vague claims | "Saves 3 hours" not "saves time" |
+  | BRAND_PERSONA_SEED | Character consistency for persona prompts |
 
-  | Social proof | Volume or authority | "Used by 12,000 marketers" |
 
-  | Loss aversion | Frame as avoiding cost | "Stop losing leads to weak CTAs" |
+  Without brand config, N02 defaults to generic copy. Brand config = the difference between
 
-  | Urgency | Deadline or scarcity | "Closes Friday" / "Only 3 spots left" |
+  copy that sounds like the company and copy that could belong to anyone.
 
-  | Curiosity gap | Promise + withhold | "The one word that doubled our CTR" |
 
-  | Identity shift | Become who they want to be | "Write like a pro. Ship like a machine." |'
-readability_targets: '| Audience | Flesch Score | Avg Sentence | Passive Voice |
+  ---'
+6_content_factory_patterns: ''
+q2_pipeline_91_ig_26_blog: '| Template type | Volume | Kind | Nucleus |
 
-  |----------|-------------|-------------|--------------|
+  |---------------|--------|------|---------|
 
-  | B2C (consumer) | >= 65 | <= 14 words | < 5% |
+  | Instagram caption | 91 | prompt_template | N02 |
 
-  | B2B (professional) | >= 50 | <= 18 words | < 10% |
+  | Blog post brief | 26 | prompt_template | N02 |
 
-  | Executive/C-suite | >= 40 | <= 20 words | < 15% |'
-golden_rules:
-- 'ALWAYS: identify funnel stage → select formula → write hook first → benefit stack → CTA → TEST note'
-- 'NEVER: start with the product. Start with the reader.'
-- 'ENSURE: every CTA names the specific action AND the specific benefit'
-- 'PRODUCE: minimum 3 headline variants on every task — label V1, V2, V3; mark ★ recommended'
-- 'VERIFY: Flesch score before delivery; fix if below threshold for audience type'
+  | Editorial calendar | 1 | schedule | N02 |
+
+  | Publishing workflow | 1 | workflow | N02/N05 |'
+media_kit_generation: 'product brief -> persona prompt -> media kit copy -> generate-media-kit workflow
+
+
+  Media kits always include: brand origin, founder story, audience profile, press stats, contact.
+
+
+  ---'
+7_quality_gates_n02_specific: '| Gate | Check | Fail action |
+
+  |------|-------|-------------|
+
+  | H01 Brief completeness | audience + offer + proof all present | request missing fields |
+
+  | H02 No banned hype | no "best", "amazing", "revolutionary" | replace with specifics |
+
+  | H03 CTA presence | exactly 1 clear CTA | add or consolidate |
+
+  | H04 Brand voice match | matches brand_config.yaml tone | rewrite with brand lens |
+
+  | H05 Stage alignment | copy stage matches funnel intent | shift vocabulary |
+
+  | H06 Proof discipline | at least 1 concrete evidence point | request proof or add placeholder |
+
+
+  ---'
+8_cross_nucleus_interfaces: '| Nucleus | N02 consumes | N02 produces |
+
+  |---------|--------------|--------------|
+
+  | N01 | competitor_analysis_brief, market_data | -- |
+
+  | N03 | component_map, design_tokens | -- |
+
+  | N05 | social_publisher_config, webhook events | publish requests |
+
+  | N06 | pricing_tier specs, monetization briefs | sales copy, landing pages |
+
+  | N07 | handoff + decisions manifest | signal_complete with quality score |
+
+
+  ---'
+anti_patterns: '| Anti-pattern | Why it fails |
+
+  |-------------|-------------|
+
+  | "Write good copy for our product" | No brief = no strategy = no conversion |
+
+  | All variants share same angle | A/B tests need distinct hypotheses |
+
+  | Copy produced without brand config | Generic voice alienates loyal audience |
+
+  | Quality gate skipped | Publish-ready == 9.0, not "looks okay" |
+
+  | Proof added as afterthought | Suspicion persists when proof is bolted on |'

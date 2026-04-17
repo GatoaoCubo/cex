@@ -14,6 +14,7 @@ tags:
 - n02_marketing
 domain: content-validation
 status: active
+density_score: 1.0
 purpose: Every piece of copy N02 generates MUST pass this schema before leaving the pipeline. Character limits are not suggestions.
   Tone rules are not preferences. They are gates. Bad copy that ships is worse than no copy at all.
 platform_character_limits: '| Platform | Asset Type | Headline | Body | CTA | Hashtags |

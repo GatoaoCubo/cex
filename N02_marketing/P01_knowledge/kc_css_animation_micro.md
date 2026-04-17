@@ -6,6 +6,7 @@ title: CSS Animation & Micro-interactions
 domain: N02_marketing / Frontend
 tags: [css, animation, transitions, framer-motion, accessibility, micro-interactions, gpu]
 quality: 9.1
+density_score: 1.0
 source: motion.dev, joshwcomeau.com, web.dev
 created: 2026-04-01
 ---

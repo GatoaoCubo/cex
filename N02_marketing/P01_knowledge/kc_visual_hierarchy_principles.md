@@ -5,6 +5,7 @@ pillar: P01
 title: Visual Hierarchy Principles
 tags: [visual, hierarchy, design]
 quality: 8.8
+density_score: 0.97
 ---
 
 # Visual Hierarchy Principles

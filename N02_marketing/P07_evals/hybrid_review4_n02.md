@@ -5,6 +5,7 @@ pillar: P01
 title: "HYBRID_REVIEW4 N02 Audit: multimodal_prompt + prompt_optimizer + visual_workflow"
 version: "1.0.0"
 quality: 8.9
+density_score: 0.99
 author: n02_marketing
 mission: HYBRID_REVIEW4
 wave: review

@@ -21,6 +21,7 @@ stakeholders: ["{{BRAND_NAME}}", n07_orchestrator, n02_marketing]
 escalation_protocol: "If any role crosses budget ceiling, escalate to n07 via signal; do NOT silently truncate."
 termination_criteria: "ANY of: (1) qa_reviewer signals launch-approved; (2) budget exhausted; (3) deadline passed; (4) 3 consecutive QA rejects on same artifact."
 quality: 8.9
+density_score: 0.99
 title: "Team Charter -- Launch Demo"
 version: "1.0.0"
 tags: [team_charter, product_launch, demo]

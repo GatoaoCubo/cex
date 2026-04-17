@@ -6,6 +6,7 @@ title: Responsive Layout Systems
 domain: N02_marketing / Frontend
 tags: [css, grid, flexbox, responsive, mobile-first, typography, container-queries]
 quality: 9.0
+density_score: 1.0
 source: every-layout.dev, css-tricks.com, web.dev/learn/css
 created: 2026-04-01
 ---

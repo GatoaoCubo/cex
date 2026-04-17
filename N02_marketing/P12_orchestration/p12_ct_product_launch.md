@@ -11,6 +11,7 @@ autogen_equivalent: "GroupChat.round_robin"
 swarm_equivalent: "researcher -> copywriter -> designer -> qa"
 handoff_protocol_id: a2a-task-sequential
 quality: 9.1
+density_score: 1.0
 title: "Product Launch Crew Template"
 version: "1.0.0"
 author: n07_crewwiring

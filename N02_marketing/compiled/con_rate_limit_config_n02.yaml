@@ -1,0 +1,103 @@
+id: con_rate_limit_config_n02
+kind: rate_limit_config
+pillar: P09
+nucleus: n02
+title: Marketing Rate Limits
+version: 1.0
+quality: null
+tags:
+- config
+- rate_limit
+- budget
+- marketing
+- runtime
+density_score: 1.0
+values: '| Profile | Provider | RPM | TPM | Daily Budget USD | Backoff |
+
+  |---------|----------|-----|-----|------------------|---------|
+
+  | draft_fast | openai | 24 | 120000 | 12 | exponential_jitter |
+
+  | review_strict | openai | 12 | 60000 | 8 | exponential_jitter |
+
+  | batch_variant | openai | 8 | 90000 | 10 | exponential_jitter |
+
+  | fallback_low | anthropic | 6 | 40000 | 6 | exponential_jitter |'
+allocation_rules: '| Rule | Value |
+
+  |------|-------|
+
+  | default_profile | draft_fast |
+
+  | max_parallel_jobs | 2 |
+
+  | conservation_trigger | 80 percent of daily budget |
+
+  | hard_stop_trigger | 100 percent of daily budget |
+
+  | retry_limit_on_429 | 4 |
+
+  | cooldown_after_hard_stop | 24h |'
+budget_intent: '| Workflow | Preferred Profile | Why |
+
+  |----------|-------------------|-----|
+
+  | single artifact drafting | draft_fast | Keeps ideation lively without opening floodgates |
+
+  | validator or rule review | review_strict | Lower volume, higher precision |
+
+  | multi-variant ad generation | batch_variant | Supports controlled A/B exploration |
+
+  | provider degradation mode | fallback_low | Maintains delivery when primary capacity tightens |'
+rationale: '| Decision | Reason |
+
+  |----------|--------|
+
+  | Separate draft and review profiles | Seductive ideation and strict governance have different throughput needs |
+
+  | Two parallel jobs max | Enough speed for wave work without creating token spikes |
+
+  | Exponential jitter only | Prevents synchronized retries during provider stress |
+
+  | Budget caps under 12 USD per profile | Keeps nucleus experimentation disciplined |
+
+  | Conservation trigger at 80 percent | Encourages graceful slowdown before a hard stop |'
+example: "rate_limit_run:\n  workflow: multi_variant_ad_generation\n  profile: batch_variant\n  provider: openai\n  rpm: 8\n\
+  \  tpm: 90000\n  daily_budget_usd: 10\n  backoff: exponential_jitter\n\n| Example Event | Expected Action | Result |\n|---------------|-----------------|--------|\n\
+  | Spend reaches 81 percent | switch to review_strict or fallback_low | slowdown |\n| Four 429 errors in a row | stop retries\
+  \ | preserve quota |\n| Warm day with low spend | keep draft_fast | normal throughput |\n| Hard budget hit | suspend generation\
+  \ | zero overspend |"
+monitoring_signals: '| Signal | Threshold | Response |
+
+  |--------|-----------|----------|
+
+  | rpm_usage | > 90 percent for 3 min | reduce concurrency |
+
+  | tpm_usage | > 85 percent for 2 min | shorten batch size |
+
+  | spend_today | > 80 percent | enter conservation mode |
+
+  | spend_today | >= 100 percent | hard stop and alert |'
+properties: '| Property | Value |
+
+  |----------|-------|
+
+  | Kind | rate_limit_config |
+
+  | Pillar | P09 |
+
+  | Nucleus | n02 |
+
+  | Provider count | 2 |
+
+  | Profile count | 4 |
+
+  | Backoff style | exponential_jitter |
+
+  | Budget control | hard cap plus conservation mode |
+
+  | Main risk prevented | runaway spend from variant overproduction |
+
+  | Operational mood | bold but bounded |
+
+  | Save path | N02_marketing/P09_config/con_rate_limit_config_n02.md |'

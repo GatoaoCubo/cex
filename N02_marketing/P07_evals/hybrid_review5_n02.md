@@ -5,6 +5,7 @@ pillar: P01
 title: "HYBRID_REVIEW5 N02 Audit: pricing_page + referral_program + onboarding_flow"
 version: "1.0.0"
 quality: 8.9
+density_score: 0.99
 tags: [audit, hybrid_review5, wave4, pricing_page, referral_program, onboarding_flow, n02]
 tldr: "39 ISOs audited across 3 Wave 4 marketing/PLG builders. 14 defects found and fixed. All 39/39 pass wave validator post-fix."
 domain: "audit quality assurance"

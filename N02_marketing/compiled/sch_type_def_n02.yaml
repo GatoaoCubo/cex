@@ -1,0 +1,141 @@
+id: sch_type_def_n02
+kind: type_def
+pillar: P06
+nucleus: n02
+title: Campaign Desire Type
+version: 1.0
+quality: null
+tags:
+- type
+- schema
+- campaign
+- copy
+- marketing
+density_score: 1.0
+schema: '| Field | Type | Required | Description |
+
+  |-------|------|----------|-------------|
+
+  | asset_id | string | yes | Stable identifier for the copy unit |
+
+  | audience_segment | string | yes | Named audience slice with shared desire pattern |
+
+  | messaging_stage | enum_ref: sch_enum_def_n02.messaging_stage | yes | Funnel stage of the copy |
+
+  | emotional_trigger | enum_ref: sch_enum_def_n02.emotional_trigger | yes | Core desire driver |
+
+  | promise | string | yes | Outcome the reader wants |
+
+  | friction | string | yes | Objection or emotional resistance |
+
+  | proof_style | enum_ref: sch_enum_def_n02.proof_style | yes | Proof format used to intensify trust |
+
+  | proof_payload | string | yes | Exact fact, quote, or contrast asset |
+
+  | cta_force | enum_ref: sch_enum_def_n02.cta_force | yes | CTA intensity level |
+
+  | cta_line | string | yes | Final action line shown to user |
+
+  | channel | string | yes | Email, ad, landing_page, social, or nurture |
+
+  | compliance_note | string | no | Legal or brand caveat for publication |
+
+  | review_outcome | enum_ref: sch_enum_def_n02.review_outcome | yes | Status after validation |'
+field_semantics: '| Field | Constraint | Lust Lens Guidance |
+
+  |-------|------------|--------------------|
+
+  | asset_id | snake_case, <= 48 chars | Clear IDs protect reuse and testing discipline |
+
+  | audience_segment | concrete noun phrase | Desire is stronger when the target feels seen |
+
+  | promise | one sentence, <= 120 chars | Promise should seduce with result, not jargon |
+
+  | friction | one sentence, <= 120 chars | Name the hesitation that blocks motion |
+
+  | proof_payload | fact-rich, source-ready | Seduction without evidence becomes cheap hype |
+
+  | cta_line | imperative, <= 70 chars | Ask with confidence matched to funnel heat |
+
+  | channel | controlled label | Channel shapes tone, width, and urgency |
+
+  | compliance_note | optional | Used when desire must be tempered by policy |'
+object_contract: '| Rule | Value |
+
+  |------|-------|
+
+  | Root type | object |
+
+  | Additional fields | blocked |
+
+  | Required field count | 12 |
+
+  | Optional field count | 1 |
+
+  | Nested objects | none |
+
+  | Enum dependencies | 5 references to sch_enum_def_n02 |
+
+  | Serialization target | yaml or json |
+
+  | Reuse target | 3 or more N02 artifacts |'
+validation_map: '| Check | Method | Fail Condition |
+
+  |-------|--------|----------------|
+
+  | required_fields_present | structural | any required field missing |
+
+  | enum_values_valid | enum lookup | value not in shared set |
+
+  | promise_specificity | semantic review | promise is generic or empty-calorie |
+
+  | proof_alignment | semantic review | proof does not support promise |
+
+  | cta_heat_match | rule check | hard_close used in attract stage |
+
+  | review_status_present | structural | review outcome omitted |'
+rationale: '| Decision | Reason |
+
+  |----------|--------|
+
+  | Flat object design | Easier to reuse in prompts, forms, and validators |
+
+  | Promise plus friction pairing | Desire strengthens when aspiration and resistance are both visible |
+
+  | Separate proof_style and proof_payload | Keeps form reusable while allowing rich evidence |
+
+  | Single CTA field | Forces the asset toward one decisive move |
+
+  | Optional compliance_note | Preserves agility without hiding legal friction |'
+example: "campaign_desire_unit:\n  asset_id: launch_demo_wave_a\n  audience_segment: founder_led_saas\n  messaging_stage:\
+  \ intensify\n  emotional_trigger: relief\n  promise: Replace launch chaos with a repeatable campaign engine.\n  friction:\
+  \ The buyer fears another noisy launch that burns attention.\n  proof_style: contrast_demo\n  proof_payload: Before CEX,\
+  \ launches stalled in ad hoc docs; after adoption, every wave shipped with tracked handoffs.\n  cta_force: guided_step\n\
+  \  cta_line: See the launch system in action.\n  channel: landing_page\n  compliance_note: Claims must match published case\
+  \ material.\n  review_outcome: pass\n\n| Example Signal | Value | Interpretation |\n|----------------|-------|----------------|\n\
+  | Desire vector | relief | The copy sells calm control, not raw prestige |\n| Proof choice | contrast_demo | The gap is\
+  \ made vivid and memorable |\n| CTA heat | guided_step | Warm invitation without premature hard close |\n| Review status\
+  \ | pass | Structurally valid and lens-consistent |"
+properties: '| Property | Value |
+
+  |----------|-------|
+
+  | Kind | type_def |
+
+  | Pillar | P06 |
+
+  | Nucleus | n02 |
+
+  | Root shape | flat reusable object |
+
+  | Consumer set | prompts, configs, validators, review docs |
+
+  | Emotional design | desire plus friction plus proof |
+
+  | Governance design | enum-backed and no extra fields |
+
+  | Change tolerance | medium |
+
+  | Primary risk prevented | inconsistent campaign packet shape |
+
+  | Save path | N02_marketing/P06_schema/sch_type_def_n02.md |'

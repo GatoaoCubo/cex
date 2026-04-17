@@ -5,6 +5,7 @@ pillar: P01
 title: Developer Experience Patterns
 tags: [developer, experience, patterns]
 quality: 8.8
+density_score: 0.97
 ---
 
 # Developer Experience Patterns

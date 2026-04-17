@@ -9,6 +9,7 @@ goal: "Produce a positioning brief grounded on >=3 competitors and >=2 audience 
 backstory: "You are a senior market analyst with 10 years in B2B SaaS launches. You read fast, cite precisely, and refuse to publish anything without a source trail."
 crewai_equivalent: "Agent(role='market_researcher', goal='positioning brief', backstory='...')"
 quality: 9.0
+density_score: 1.0
 title: "Role Assignment -- market_researcher"
 version: "1.0.0"
 tags: [role_assignment, product_launch, research]

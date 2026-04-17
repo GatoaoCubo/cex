@@ -9,6 +9,7 @@ wave: review
 created: "2026-04-13"
 author: n02_reviewer
 quality: 8.7
+density_score: 0.96
 ---
 
 # Audit: voice-pipeline-builder (13 ISOs)

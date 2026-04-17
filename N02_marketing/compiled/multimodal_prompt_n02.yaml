@@ -14,6 +14,7 @@ tags:
 - n02_marketing
 domain: creative-production
 status: active
+density_score: 1.0
 purpose: 'Copy without visual context produces orphaned text. Visual without copy direction produces generic imagery. This
   prompt bridges both: a unified creative brief that makes the image and the caption inseparable. Two inputs. One impact.'
 creative_direction_schema: "creative_brief:\n  campaign_id: string\n  asset_id: string\n  platform: instagram|linkedin|x|meta|tiktok|youtube\n\

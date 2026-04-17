@@ -5,6 +5,7 @@ pillar: P01
 title: "HYBRID_REVIEW3 Audit: model_architecture (N02)"
 version: 1.0.0
 quality: 8.6
+density_score: 0.95
 tags: [audit, hybrid_review3, model_architecture, gemma4, wave2]
 domain: ML architecture quality assurance
 created: "2026-04-14"

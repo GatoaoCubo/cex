@@ -16,6 +16,7 @@ tags:
 - n02_marketing
 domain: social-distribution
 status: active
+density_score: 1.0
 purpose: N02 distributes content. Distribution requires platform contracts. This reference defines the posting APIs, rate
   limits, authentication, and payload schemas for the three primary B2B+B2C social platforms. `social_publisher_n02.md` consumes
   this directly. ---

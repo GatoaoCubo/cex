@@ -1,0 +1,114 @@
+id: con_permission_n02
+kind: permission
+pillar: P09
+nucleus: n02
+title: Marketing Permission Rule
+version: 1.0
+quality: null
+tags:
+- config
+- permission
+- access
+- marketing
+- governance
+density_score: 1.0
+values: '| Subject | Resource | Actions Allowed | Explicit Deny |
+
+  |---------|----------|-----------------|---------------|
+
+  | n02_builder | N02_marketing/P06_schema/** | read, write | delete |
+
+  | n02_builder | N02_marketing/P09_config/** | read, write | delete |
+
+  | n02_builder | N02_marketing/P05_output/** | read, write | execute |
+
+  | n02_builder | N02_marketing/P01_knowledge/** | read | write, delete |
+
+  | n02_builder | N02_marketing/rules/** | read | write, delete |
+
+  | n02_builder | P01_knowledge/library/kind/** | read | write, delete |
+
+  | n02_builder | .cex/runtime/handoffs/** | read | write, delete |
+
+  | n02_builder | _tools/cex_compile.py | execute, read | write |
+
+  | n02_builder | git commit operations | none | execute |
+
+  | external_subject | N02_marketing/** | read_only_by_handoff | write, delete, execute |'
+access_principles: '| Principle | Enforcement |
+
+  |-----------|-------------|
+
+  | deny overrides allow | If a path is listed in deny, it stays blocked |
+
+  | minimum viable write set | Write only where the handoff requires output |
+
+  | no destructive cleanup | Delete is denied by default |
+
+  | compile optionality | Execute compile only when mission rules require it |
+
+  | no commit authority | N07 owns commit after verification |'
+tool_permission_map: '| Tool Class | Status | Reason |
+
+  |------------|--------|--------|
+
+  | shell read commands | allow | Needed for context gathering |
+
+  | apply_patch | allow | Required for controlled file creation and updates |
+
+  | git add or commit | deny | Handoff blocks commit authority |
+
+  | destructive filesystem commands | deny | Violates safety and task scope |
+
+  | network fetch | allow_when_needed | Only if primary sources are required |'
+rationale: '| Decision | Reason |
+
+  |----------|--------|
+
+  | Delete denied everywhere | Protects reference and source assets from accidental loss |
+
+  | Knowledge and rules read-only | Strategy should inform seductive output, not be mutated during production |
+
+  | Compile write denied on source files | Generated artifacts must not replace source truth |
+
+  | Git commit denied | Preserves orchestrator ownership of final repo history |
+
+  | External subject default deny | Prevents cross-nucleus contamination without explicit routing |'
+example: "permission_check:\n  subject: n02_builder\n  resource: N02_marketing/P09_config/con_rate_limit_config_n02.md\n \
+  \ action: write\n  result: allow\n\n| Example Attempt | Result | Why |\n|-----------------|--------|-----|\n| Read KC from\
+  \ P01 | allow | Shared knowledge is a reference source |\n| Write new schema in N02 | allow | Deliverable path is in scope\
+  \ |\n| Delete old config | deny | Destructive action blocked |\n| Commit changes | deny | Reserved for N07 |"
+escalation_policy: '| Condition | Response |
+
+  |-----------|----------|
+
+  | Need cross-nucleus write | request explicit handoff update |
+
+  | Need delete permission | require user approval and narrow target |
+
+  | Need commit | stop and leave for N07 |
+
+  | Need secret exposure | deny and route through secret_config |'
+properties: '| Property | Value |
+
+  |----------|-------|
+
+  | Kind | permission |
+
+  | Pillar | P09 |
+
+  | Nucleus | n02 |
+
+  | Subject model | n02_builder plus external_subject |
+
+  | Access style | allow list with explicit deny |
+
+  | Delete policy | deny by default |
+
+  | Commit policy | denied |
+
+  | Main risk prevented | uncontrolled mutation of marketing system assets |
+
+  | Enforcement target | workspace behavior |
+
+  | Save path | N02_marketing/P09_config/con_permission_n02.md |'

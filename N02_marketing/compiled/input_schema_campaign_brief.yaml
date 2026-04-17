@@ -13,6 +13,7 @@ tags:
 - n02_marketing
 domain: campaign-intake
 status: active
+density_score: 1.0
 purpose: Canonical contract between brief-giver and N02. Every campaign begins here. No schema compliance = no execution.
   Zero ambiguity. Zero wasted creative cycles.
 required_fields: '| Field | Type | Constraints | Description |

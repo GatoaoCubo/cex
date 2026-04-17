@@ -9,6 +9,7 @@ wave: review
 created: "2026-04-13"
 author: n02_reviewer
 quality: 8.6
+density_score: 0.95
 ---
 
 # Audit: collaboration-pattern-builder (13 ISOs)
