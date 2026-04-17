@@ -8,10 +8,11 @@ version: 1.0.0
 created: 2026-04-17
 author: n01_intelligence
 domain: competitive-intelligence
-quality: null
+quality: 9.2
 tags: [competitive_intelligence, CI_methods, analytical_framework, porter, SWOT, war_gaming]
 tldr: "Taxonomy of competitive intelligence methods: primary (interviews, surveys), secondary (reports, databases), and tertiary (social signals, hiring). Maps methods to use cases, evidence quality, and N01 automation level."
 density_score: 0.92
+updated: "2026-04-17"
 ---
 
 <!-- 8F: F1 constrain=P01/knowledge_card F2 become=knowledge-card-builder F3 inject=reasoning_strategy_n01+bias_audit_n01+search_strategy_n01 F4 reason=Analytical Envy demands knowing ALL available CI methods, not just the ones currently implemented F5 call=cex_compile F6 produce=kc_competitive_intelligence_methods.md F7 govern=frontmatter+ascii+tables F8 collaborate=N01_intelligence/P01_knowledge/ -->

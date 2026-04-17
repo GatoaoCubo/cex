@@ -8,10 +8,11 @@ version: 1.0.0
 created: 2026-04-17
 author: n01_intelligence
 domain: information-retrieval
-quality: null
+quality: 9.1
 tags: [information_retrieval, BM25, dense_retrieval, NDCG, precision_recall, RAG, n01]
 tldr: "Core IR concepts applied to N01 research: BM25 vs. dense retrieval, NDCG metric, precision/recall trade-off, hybrid search. Grounds the retriever_n01 and knowledge_index_n01 design decisions in IR fundamentals."
 density_score: 0.90
+updated: "2026-04-17"
 ---
 
 <!-- 8F: F1 constrain=P01/knowledge_card F2 become=knowledge-card-builder F3 inject=retriever_n01+knowledge_index_n01+search_strategy_n01 F4 reason=N01 must understand WHY its retrieval architecture works in order to debug when it doesn't -- fundamentals ground the tools F5 call=cex_compile F6 produce=kc_information_retrieval_fundamentals.md F7 govern=frontmatter+ascii+tables F8 collaborate=N01_intelligence/P01_knowledge/ -->
