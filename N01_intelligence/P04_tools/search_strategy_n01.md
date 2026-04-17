@@ -8,10 +8,11 @@ version: 1.0.0
 created: 2026-04-17
 author: n01_intelligence
 domain: research-intelligence
-quality: null
+quality: 9.2
 tags: [search_strategy, research, triangulation, source_layering, n01, analytical_envy]
 tldr: "3-layer search protocol: primary (semantic/web), secondary (academic/financial), fallback (regulatory/social). Every query runs all layers; Analytical Envy demands competing sources, not single-source answers."
 density_score: 0.92
+updated: "2026-04-17"
 ---
 
 <!-- 8F: F1 constrain=P04/search_strategy F2 become=search-strategy-builder F3 inject=api_reference_research_apis+sch_input_schema_n01+search_config_intelligence+kc_research F4 reason=3-layer architecture matches N01 sin lens: always compare, never trust single source F5 call=cex_compile F6 produce=search_strategy_n01.md F7 govern=frontmatter+ascii+tables+alt-comparison F8 collaborate=N01_intelligence/P04_tools/ -->

@@ -8,10 +8,11 @@ version: 1.0.0
 created: 2026-04-17
 author: n01_intelligence
 domain: research-intelligence
-quality: null
+quality: 9.1
 tags: [search_tool, trend_detection, market_signals, n01, analytical_envy, time_series]
 tldr: "Trend detection tool for N01: detects rising / falling / plateauing signals across competitor metrics, hiring, search volume, and social velocity. Outputs ranked trend signals with statistical confidence."
 density_score: 0.88
+updated: "2026-04-17"
 ---
 
 <!-- 8F: F1 constrain=P04/search_tool F2 become=search-tool-builder F3 inject=competitor_monitor_n01+search_strategy_n01+data_extractor_n01+api_reference_research_apis F4 reason=Analytical Envy demands seeing trends BEFORE competitors do -- trend detection is forward-looking intelligence, not backward-looking reporting F5 call=cex_compile F6 produce=trend_detector_n01.md F7 govern=frontmatter+ascii+tables F8 collaborate=N01_intelligence/P04_tools/ -->
