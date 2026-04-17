@@ -5,8 +5,9 @@ pillar: P06
 nucleus: n04
 title: Knowledge Record Type
 version: 1.0
-quality: null
+quality: 9.0
 tags: [schema, type, knowledge, provenance, index]
+density_score: 1.0
 ---
 <!-- 8F: F1 constrain=P06/type_def F2 become=type-def-builder F3 inject=n04-knowledge+kc_type_def+P06 examples+N04 schema contracts F4 reason=reusable typed record for provenance-heavy knowledge objects F5 call=shell,apply_patch F6 produce=6018 bytes F7 govern=frontmatter+ascii+density+80-line self-check F8 collaborate=N04_knowledge/P06_schema/sch_type_def_n04.md -->
 # Knowledge Record Type

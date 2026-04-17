@@ -5,8 +5,9 @@ pillar: P06
 nucleus: n04
 title: Knowledge Intake Schema
 version: 1.0
-quality: null
+quality: 8.8
 tags: [schema, input, knowledge, ingestion, retrieval]
+density_score: 1.0
 ---
 <!-- 8F: F1 constrain=P06/input_schema F2 become=input-schema-builder F3 inject=n04-knowledge+kc_input_schema+P06 examples+N03/N05 contracts F4 reason=strict intake contract for evidence-hungry ingestion F5 call=shell,apply_patch F6 produce=7006 bytes F7 govern=frontmatter+ascii+density+80-line self-check F8 collaborate=N04_knowledge/P06_schema/sch_input_schema_n04.md -->
 # Knowledge Intake Schema
