@@ -1,0 +1,51 @@
+kind: instruction
+id: bld_instruction_retry_policy
+pillar: P03
+llm_function: REASON
+purpose: Step-by-step production process for retry_policy
+pattern: 3-phase pipeline (define -> compose -> validate)
+quality: null
+title: Instruction Retry Policy
+version: 1.0.0
+author: n03_builder
+tags:
+- retry_policy
+- builder
+- instruction
+tldr: '3-phase: classify errors and set attempt limits, configure backoff and jitter, validate ranges and anti-patterns.'
+domain: retry policy construction
+created: '2026-04-17'
+updated: '2026-04-17'
+density_score: 0.9
+phase_1_define:
+- Identify the operation being retried (API call, DB query, HTTP request)
+- 'Classify errors: which are transient (retry) vs. permanent (fail immediately)?'
+- 'Transient: 429, 503, 504, ConnectionError, TimeoutError'
+- 'Permanent: 400, 401, 403, InvalidRequestError, ValidationError'
+- 'Determine max_attempts: typically 3-5 (1 initial + 2-4 retries)'
+- 'Choose backoff_strategy: exponential (default), linear, fixed, or decorrelated'
+- 'Set initial_interval (ms): first retry delay (100-2000ms typical)'
+- Set backoff_multiplier if exponential (2.0 standard)
+- 'Set max_interval (ms): cap delay (10000-60000ms typical)'
+- 'Choose jitter: FULL or DECORRELATED (prevents thundering herd)'
+- 'Set retry_budget: max concurrent retries (prevent retry storm)'
+phase_2_compose:
+- Read SCHEMA.md and OUTPUT_TEMPLATE.md
+- 'Fill frontmatter: all required fields (quality: null)'
+- 'Set id: `p09_rtp_{operation_slug}` -- verify pattern `^p09_rtp_[a-z][a-z0-9_]+$`'
+- 'Write Retry Behavior section: parameter table'
+- 'Write Backoff Calculation section: delay per attempt table with jitter'
+- 'Write Error Classification section: retryable vs non-retryable table'
+- Verify body <= 2048 bytes (compact config artifact)
+phase_3_validate:
+- Confirm id matches `^p09_rtp_[a-z][a-z0-9_]+$`
+- Confirm kind == retry_policy
+- Confirm max_attempts is positive integer (3-10 range recommended)
+- Confirm initial_interval is positive integer (milliseconds)
+- Confirm max_interval >= initial_interval
+- Confirm jitter is not NONE (thundering herd risk)
+- Confirm retryable_errors does NOT include 400/401/403
+- Confirm all 3 body sections present
+- 'Cross-check: not circuit_breaker (no state machine), not rate_limit_config'
+- 'Confirm quality: null'
+- Revise if score < 8.0

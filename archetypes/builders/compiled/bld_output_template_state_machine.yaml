@@ -1,0 +1,43 @@
+kind: output_template
+id: bld_output_template_state_machine
+pillar: P05
+llm_function: PRODUCE
+purpose: Template with {{vars}} that the LLM fills to produce a state_machine artifact
+pattern: every field here exists in SCHEMA.md -- template derives, never invents
+quality: null
+title: Output Template State Machine
+version: 1.0.0
+author: n03_builder
+tags:
+- state_machine
+- builder
+- output_template
+tldr: 'Fill-in template for state_machine: states table, transitions with guards/actions, guard definitions, action definitions.'
+domain: state machine construction
+created: '2026-04-17'
+updated: '2026-04-17'
+density_score: 0.9
+states: '| State | Type | Description |
+
+  |-------|------|-------------|
+
+  | {{STATE_1}} | initial | {{description}} |
+
+  | {{STATE_2}} | intermediate | {{description}} |
+
+  | {{STATE_N}} | final | {{description}} |'
+transitions: '| from_state | event | to_state | guard | action |
+
+  |------------|-------|----------|-------|--------|
+
+  | {{FROM}} | {{EVENT}} | {{TO}} | {{guard_name()||"-"}} | {{action_name()||"-"}} |'
+guards: '| Guard | Expression | Notes |
+
+  |-------|-----------|-------|
+
+  | {{guardName()}} | {{boolean_expression}} | {{when_it_is_true}} |'
+actions: '| Action | Trigger | Effect |
+
+  |--------|---------|--------|
+
+  | {{actionName()}} | {{from_state}} -> {{to_state}} | {{what_happens}} |'

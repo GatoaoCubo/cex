@@ -1,0 +1,123 @@
+id: p10_lr_event_schema_builder
+kind: learning_record
+pillar: P10
+version: 1.0.0
+created: 2026-04-17
+updated: 2026-04-17
+author: builder_agent
+observation: Event schemas without version in event_type cause consumer failures on schema evolution. Schemas missing required
+  field list force consumers to be overly defensive. Event schemas conflated with data_contracts create governance confusion
+  -- schema defines structure, contract defines obligations.
+pattern: 'Versioned event_type + required JSON Schema fields + separation from data_contract.
+
+
+  Versioning discipline:
+
+  1. event_type ALWAYS ends in .v{major}: `com.acme.order.created.v1`
+
+  2. Minor changes: same event_type, bump schema_version minor (1.0.0 -> 1.1.0)
+
+  3. Breaking changes: new event_type version (v1 -> v2), run in parallel during migration
+
+  4. Never delete old version until all consumers confirmed migrated
+
+
+  JSON Schema discipline:
+
+  1. Always declare `required: [field1, field2, ...]` explicitly
+
+  2. Use specific types (string/uuid format, number min 0) not generic object
+
+  3. Add `$schema` declaration for JSON Schema version compatibility
+
+
+  Separation discipline:
+
+  1. event_schema = structure only (what fields, what types)
+
+  2. data_contract = obligations (who produces, SLA, compatibility guarantee)
+
+  3. event_stream = infrastructure (topic name, partitions, retention)
+
+  4. Keep these as separate artifacts; they evolve at different rates'
+evidence: '6 event-driven system reviews: 4 had version-less event types causing consumer breaks; 3 had no required fields
+  causing silent null handling bugs.'
+confidence: 0.88
+outcome: SUCCESS
+domain: event_schema
+tags:
+- event-schema
+- CloudEvents
+- asyncapi
+- versioning
+- json-schema
+- domain-events
+tldr: Versioned event_type + required fields in JSON Schema + separate from data_contract = maintainable event-driven system.
+impact_score: 8.5
+decay_rate: 0.03
+agent_group: edison
+keywords:
+- event schema
+- CloudEvents
+- AsyncAPI
+- domain event
+- versioning
+- JSON Schema
+- kafka
+- event-driven
+memory_scope: project
+observation_types:
+- feedback
+- project
+quality: null
+title: Memory Event Schema
+density_score: 0.9
+llm_function: INJECT
+summary: 'Event schemas fail at scale when they omit versioning in the event type name. Without `.v{N}` in the type, any breaking
+  schema change silently breaks all consumers. The three disciplines prevent this: versioned type, required fields, and separation
+  from contract.'
+anti_pattern:
+- 'event_type without version: `com.acme.order.created` -- breaks on schema evolution'
+- 'Generic payload schema `{type: object}` -- no enforcement, consumers guess fields'
+- Mixing SLA obligations into event_schema -- conflates schema with contract
+- Deleting old event_type version -- breaks consumers that haven't migrated
+- Using field list instead of JSON Schema -- not machine-validatable
+evidence_table: '| Issue | Impact | Fix |
+
+  |-------|--------|-----|
+
+  | 4/6: version-less event_type | Consumer breaks on any schema change | Always suffix .v{major} |
+
+  | 3/6: no required fields | Silent null handling bugs in consumers | Declare required: [...] in JSON Schema |
+
+  | 2/6: SLA in event_schema | Governance confusion; contract drift | Separate data_contract artifact |'
+compatibility_matrix: '| Change | ADDITIVE_ONLY | VERSIONED_TYPE |
+
+  |--------|---------------|---------------|
+
+  | Add optional field | YES (minor version) | Not needed |
+
+  | Add required field | NO -- breaking | YES -- new .v{N+1} |
+
+  | Remove field | NO -- breaking | YES -- new .v{N+1} |
+
+  | Change field type | NO -- breaking | YES -- new .v{N+1} |
+
+  | Add enum value | YES (minor version) | Not needed if consumers ignore unknowns |'
+application_checklist: '| Check | Question | Pass Condition |
+
+  |-------|----------|----------------|
+
+  | event_type versioned | Ends with .v{N}? | Yes |
+
+  | required fields | JSON Schema required array present? | Yes |
+
+  | consumers documented | At least one consumer listed? | Yes |
+
+  | separation | SLA in data_contract, not here? | Yes |
+
+  | payload format | JSON Schema (not field list)? | Yes |
+
+  | consumers | At least one consumer? | Yes |
+
+  | payload_schema | JSON Schema format used? | Yes, not field list |'

@@ -1,0 +1,79 @@
+kind: schema
+id: bld_schema_state_machine
+pillar: P06
+llm_function: CONSTRAIN
+purpose: Formal schema -- SINGLE SOURCE OF TRUTH for state_machine
+pattern: TEMPLATE derives from this. CONFIG restricts this.
+quality: null
+title: Schema State Machine
+version: 1.0.0
+author: n03_builder
+tags:
+- state_machine
+- builder
+- schema
+tldr: 'Schema for state_machine: entity, initial/final states, transitions table (from/event/to/guard/action).'
+domain: state machine construction
+created: '2026-04-17'
+updated: '2026-04-17'
+density_score: 0.9
+frontmatter_fields: '| Field | Type | Required | Default | Notes |
+
+  |-------|------|----------|---------|-------|
+
+  | id | string (p12_sm_{slug}) | YES | - | Namespace compliance |
+
+  | kind | literal "state_machine" | YES | - | Type integrity |
+
+  | pillar | literal "P12" | YES | - | Pillar assignment |
+
+  | version | semver string | YES | "1.0.0" | Artifact version |
+
+  | created | date YYYY-MM-DD | YES | - | Creation date |
+
+  | updated | date YYYY-MM-DD | YES | - | Last update |
+
+  | author | string | YES | - | Producer identity |
+
+  | entity | string | YES | - | Entity whose lifecycle is modeled |
+
+  | initial_state | string | YES | - | Starting state name |
+
+  | final_states | list[string] | YES | - | Terminal state names |
+
+  | states_count | integer | YES | - | Total number of states |
+
+  | transitions_count | integer | YES | - | Total number of transitions |
+
+  | quality | null | YES | null | Never self-score |
+
+  | tags | list[string], len >= 3 | YES | - | Must include "state_machine" |
+
+  | tldr | string <= 160ch | YES | - | Dense summary |'
+id_pattern: 'Regex: `^p12_sm_[a-z][a-z0-9_]+$` Rule: id MUST equal filename stem.'
+body_structure_required_sections:
+- '`## States` -- table of all states with type and description'
+- '`## Transitions` -- table with from_state, event, to_state, guard, action'
+- '`## Guards` -- definition of guard conditions'
+- '`## Actions` -- definition of entry/exit/transition actions'
+transition_table_fields: '| Field | Type | Required | Notes |
+
+  |-------|------|----------|-------|
+
+  | from_state | string | YES | Must exist in states |
+
+  | event | string | YES | Trigger event name |
+
+  | to_state | string | YES | Must exist in states |
+
+  | guard | string | OPT | Boolean condition expression |
+
+  | action | string | OPT | Side-effect to execute |'
+constraints:
+- 'max_bytes: 4096 (body only)'
+- initial_state must appear in states list
+- final_states must all appear in states list
+- No two transitions from same (from_state, event) pair -- deterministic FSM
+- states_count and transitions_count must match body
+- 'quality: null always'
+- NOT workflow (no DAG), NOT process_manager (no event orchestration)

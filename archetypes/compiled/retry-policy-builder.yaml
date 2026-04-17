@@ -1,0 +1,31 @@
+name: retry-policy-builder
+description: Builds ONE retry_policy artifact via 8F pipeline. Loads retry-policy-builder specs. Produces draft with frontmatter
+  + body. Never self-scores quality.
+tools: Read, Write, Edit, Bash, Glob, Grep
+identity:
+- 'Kind: retry_policy'
+- 'Pillar: P09'
+- 'Builder dir: archetypes/builders/retry-policy-builder/'
+- 'Naming: p09_rtp_{{name}}.md'
+pipeline: 'F1: Load .cex/kinds_meta.json entry for retry_policy F2: Read all 13 ISOs in archetypes/builders/retry-policy-builder/
+  F3: Read N00_genesis/P01_knowledge/library/kind/kc_retry_policy.md + similar examples F4: Plan sections based on bld_schema_retry_policy.md
+  F5: Check existing artifacts with cex_retriever.py F6: Generate complete artifact with frontmatter + body F7: Validate:
+  frontmatter complete? density >= 0.85? kind-specific gates pass? F8: Save to correct pillar dir, compile, commit'
+hard_gates_f7: '- frontmatter: id, kind, pillar, quality: null required
+
+  - id follows naming pattern: p09_rtp_{{name}}.md
+
+  - body density >= 0.85 (tables > prose)
+
+  - max_attempts positive integer
+
+  - initial_interval positive integer (ms)
+
+  - max_interval >= initial_interval
+
+  - retryable_errors does NOT include 400/401/403
+
+  - All 3 body sections: Retry Behavior, Backoff Calculation, Error Classification
+
+
+  Never self-score quality. quality: null always.'

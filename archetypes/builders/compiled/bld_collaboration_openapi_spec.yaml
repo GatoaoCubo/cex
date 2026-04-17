@@ -17,9 +17,15 @@ domain: openapi spec construction
 created: '2026-04-17'
 updated: '2026-04-17'
 density_score: 0.9
-my_role_in_crews: 'I am an API CONTRACT SPECIALIST. I answer ONE question: "what is the machine-readable surface of this REST
-  API?" I do not write SDK code. I do not write human documentation. I do not handle async events. I declare the API contract
-  in OAS 3.x format consumed by tooling.'
+my_role_in_crews: '| Responsibility | What I Answer | What I DON''T Do |
+
+  |----------------|---------------|-----------------|
+
+  | API CONTRACT SPECIALIST | "What is the machine-readable surface of this REST API?" | Write SDK code |
+
+  | OAS 3.x specification | Paths, operations, schemas, security | Write human documentation |
+
+  | Contract layer | Machine-readable for tooling | Handle async event APIs |'
 crew_compositions: ''
 crew_api_first_development: "  1. openapi-spec-builder    -> \"OAS 3.x contract (machine-readable)\"\n  2. api-reference-builder\
   \   -> \"human-readable docs from spec\"\n  3. api-client-builder      -> \"SDK implementation from spec\"\n  4. event-schema-builder\
@@ -30,19 +36,29 @@ crew_integration_package: "  1. data-contract-builder   -> \"producer-consumer S
 crew_api_gateway_configuration: "  1. openapi-spec-builder    -> \"API contract for gateway import\"\n  2. rate-limit-config-builder\
   \ -> \"inbound throttle per endpoint\"\n  3. env-config-builder      -> \"API keys, base URLs, timeouts\""
 handoff_protocol: ''
-i_receive:
-- 'seeds: API name, base URL, list of endpoints with purpose'
-- 'data models: entity names and their key fields'
-- 'auth requirement: JWT, API key, OAuth2, or public'
-- 'error handling requirements: what status codes are expected'
-i_produce:
-- openapi_spec artifact (.md with YAML frontmatter + OAS document)
-- 'committed to: `N0X_{domain}/P06_schema/p06_oas_{api_slug}.md`'
-i_signal:
-- 'signal: complete (with quality score)'
-- 'if quality < 8.0: signal retry with gate failures listed'
-builders_i_depend_on: None for contract definition -- independent builder (layer 0). May reference data_contract for shared
-  schema definitions.
+i_receive: '| Input | Type | Notes |
+
+  |-------|------|-------|
+
+  | API name and base URL | string | Production + staging servers |
+
+  | Endpoint list | table | Path + method + purpose |
+
+  | Data models | table | Entity names and key fields |
+
+  | Auth requirement | enum | JWT, API key, OAuth2, or public |'
+i_produce: '| Output | Format | Destination |
+
+  |--------|--------|-------------|
+
+  | openapi_spec artifact | .md with YAML frontmatter + OAS document | N0X_{domain}/P06_schema/ |
+
+  | Compilation signal | complete with quality score | .cex/runtime/signals/ |'
+builders_i_depend_on: '| Builder | Why | Dependency Type |
+
+  |---------|-----|----------------|
+
+  | None | Independent builder (layer 0) | -- |'
 builders_that_depend_on_me: '| Builder | Why |
 
   |---------|-----|
@@ -54,3 +70,20 @@ builders_that_depend_on_me: '| Builder | Why |
   | agent-builder | Agents reference spec for tool configuration |
 
   | env-config-builder | API base URLs defined in servers section |'
+quality_checklist_before_signal: '| Check | Pass Condition |
+
+  |-------|---------------|
+
+  | id pattern | ^p06_oas_[a-z][a-z0-9_]+$ |
+
+  | servers | non-empty array |
+
+  | paths | at least one operation |
+
+  | security | scheme declared + global security set |
+
+  | error responses | 400/401/404/500 defined |
+
+  | operationId | all operations have camelCase id |
+
+  | $ref usage | schemas used 2+ times in components.schemas |'

@@ -1,0 +1,54 @@
+kind: output_template
+id: bld_output_template_event_schema
+pillar: P05
+llm_function: PRODUCE
+purpose: Template with {{vars}} that the LLM fills to produce an event_schema artifact
+pattern: every field here exists in SCHEMA.md -- template derives, never invents
+quality: null
+title: Output Template Event Schema
+version: 1.0.0
+author: n03_builder
+tags:
+- event_schema
+- builder
+- output_template
+tldr: 'Fill-in template for event_schema: CloudEvents envelope, JSON Schema payload, versioning strategy, consumer table.'
+domain: event schema construction
+created: '2026-04-17'
+updated: '2026-04-17'
+density_score: 0.9
+cloudevents_attributes: '| Attribute | Value | Required | Notes |
+
+  |-----------|-------|----------|-------|
+
+  | specversion | "1.0" | YES | CloudEvents spec version |
+
+  | id | UUID | YES | Unique per event |
+
+  | type | "{{event_type}}" | YES | Reverse-DNS + version |
+
+  | source | "{{source}}" | YES | Producer URI |
+
+  | subject | {{subject_field_description}} | REC | Entity identifier |
+
+  | time | RFC3339 timestamp | REC | Event occurrence time |
+
+  | datacontenttype | "application/json" | YES | Payload format |'
+payload_schema: "{\n  \"$schema\": \"https://json-schema.org/draft/2020-12\",\n  \"type\": \"object\",\n  \"required\": [\"\
+  {{required_field_1}}\", \"{{required_field_2}}\"],\n  \"properties\": {\n    \"{{field_1}}\": {\n      \"type\": \"{{string|number|integer|boolean}}\"\
+  ,\n      \"format\": \"{{uuid|date-time|email|optional}}\",\n      \"description\": \"{{field_description}}\"\n    },\n\
+  \    \"{{field_2}}\": {\n      \"type\": \"{{type}}\",\n      \"description\": \"{{description}}\"\n    }\n  }\n}"
+versioning: '| Strategy | {{ADDITIVE_ONLY|VERSIONED_TYPE}} | Notes |
+
+  |----------|----------------------------------|-------|
+
+  | Add optional field | ALLOWED | Bump schema_version minor |
+
+  | Add required field | PROHIBITED | Create v{{major+1}} event_type |
+
+  | Remove/rename field | PROHIBITED | Create v{{major+1}} event_type |'
+consumers: '| Consumer | Context | Action |
+
+  |----------|---------|--------|
+
+  | {{ConsumerService}} | {{context}} | {{what_consumer_does}} |'

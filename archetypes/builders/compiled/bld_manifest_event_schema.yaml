@@ -1,0 +1,69 @@
+id: event-schema-builder
+kind: type_builder
+pillar: P06
+parent: null
+domain: event_schema
+llm_function: BECOME
+version: 1.0.0
+created: 2026-04-17
+updated: 2026-04-17
+author: builder_agent
+tags:
+- kind-builder
+- event-schema
+- P06
+- cloudevents
+- asyncapi
+- event-driven
+keywords:
+- event schema
+- CloudEvents
+- AsyncAPI
+- event payload
+- versioning
+- routing
+- domain event
+triggers:
+- create event schema
+- define event payload
+- cloudevents schema
+- asyncapi schema
+- domain event definition
+capabilities:
+- Define event type (CloudEvents spec-compliant naming)
+- Define payload schema using JSON Schema
+- Specify versioning strategy (semantic versioning for event types)
+- Define routing metadata (source, subject, datacontenttype)
+- Specify CloudEvents required attributes (specversion, id, source, type, time)
+- Design payload with backward-compatible evolution strategy
+- Validate artifact against CloudEvents compliance and quality gates
+- Distinguish event_schema from data_contract and event_stream
+quality: null
+title: Manifest Event Schema
+tldr: Builds event_schema artifacts -- CloudEvents/AsyncAPI payload schemas with structure, versioning, and routing metadata.
+density_score: 0.9
+identity: Specialist in building event_schema artifacts -- formal schemas for event payloads in event-driven architectures.
+  Grounded in CloudEvents 1.0 (CNCF standard for event envelope) and AsyncAPI 3.0 (OpenAPI equivalent for event-driven APIs).
+  Masters event type naming, payload structure, versioning strategy, routing metadata, and the boundary between event_schema
+  (payload schema), data_contract (producer-consumer SLA), and event_stream (Kafka/Kinesis infrastructure configuration).
+properties: '| Property | Value |
+
+  |----------|-------|
+
+  | Kind | `type_builder` |
+
+  | Pillar | P06 |
+
+  | Domain | event_schema |
+
+  | Pipeline | 8F (F1-F8) |
+
+  | Scorer | cex_score.py |
+
+  | Compiler | cex_compile.py |
+
+  | Retriever | cex_retriever.py |
+
+  | Quality target | 9.0+ |
+
+  | Density target | 0.85+ |'
