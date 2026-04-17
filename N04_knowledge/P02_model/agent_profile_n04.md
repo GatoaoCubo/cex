@@ -5,7 +5,7 @@ pillar: P02
 nucleus: n04
 title: "Agent Profile -- N04 Knowledge Nucleus"
 version: "1.0.0"
-quality: null
+quality: 9.1
 tags: [agent_profile, n04, knowledge, rag, capability_discovery, P02]
 domain: knowledge management
 status: active

@@ -5,7 +5,7 @@ pillar: P01
 nucleus: n04
 title: N04 Vector Store
 version: "1.0.0"
-quality: null
+quality: 9.1
 tags: [vector_store, n04, qdrant, retrieval, knowledge_gluttony]
 backend: qdrant
 connection:
@@ -37,6 +37,7 @@ cloud_region: null
 pricing: null
 domain: vector_storage
 tldr: "Qdrant HNSW store for high-recall N04 semantic search with disciplined metadata filtering."
+density_score: 1.0
 ---
 <!-- 8F: F1=vector_store/P01 F2=vector-store-builder F3=nucleus_def_n04+kc_vector_store+N04 env/path config+knowledge lifecycle KC F4=template-first local-first Qdrant profile for dense hungry retrieval
      F5=shell,apply_patch,cex_compile F6=author markdown artifact F7=frontmatter+metric-dimension coherence+ascii+self-check F8=N04_knowledge/P01_knowledge/kno_vector_store_n04.md -->
