@@ -5,7 +5,7 @@ pillar: P07
 nucleus: n04
 title: "Eval Dataset -- N04 RAG Evaluation Question-Answer Pairs"
 version: "1.0.0"
-quality: null
+quality: 9.1
 tags: [eval_dataset, n04, rag_eval, ground_truth, retrieval, P07]
 domain: knowledge management
 status: active

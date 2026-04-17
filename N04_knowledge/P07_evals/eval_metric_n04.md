@@ -5,7 +5,7 @@ pillar: P07
 nucleus: n04
 title: "Eval Metric -- N04 Retrieval Quality Metrics"
 version: "1.0.0"
-quality: null
+quality: 9.1
 tags: [eval_metric, n04, MRR, NDCG, precision, recall, P07, retrieval]
 domain: knowledge management
 status: active
