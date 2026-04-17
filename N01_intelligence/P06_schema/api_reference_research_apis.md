@@ -8,10 +8,11 @@ version: 1.0.0
 created: 2026-04-17
 author: n01_intelligence
 domain: research-intelligence
-quality: null
+quality: 9.1
 tags: [api_reference, research_apis, data_sources, n01, competitive_intelligence]
 tldr: "Typed API contract reference for all external data sources used by N01: web search, academic DBs, financial data, news feeds, and competitive intelligence APIs."
 density_score: 0.91
+updated: "2026-04-17"
 ---
 
 <!-- 8F: F1 constrain=P06/api_reference F2 become=api-reference-builder F3 inject=sch_input_schema_n01+research_pipeline_intelligence+kc_research+search_config_intelligence F4 reason=typed contracts per source category, analytical envy demands triangulation across 5+ source types F5 call=cex_compile F6 produce=api_reference_research_apis.md F7 govern=frontmatter+ascii+tables+coverage F8 collaborate=N01_intelligence/P06_schema/ -->

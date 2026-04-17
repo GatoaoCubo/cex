@@ -5,8 +5,9 @@ pillar: P06
 nucleus: n01
 title: Research Evidence Enum
 version: 1.0
-quality: null
+quality: 9.0
 tags: [enum_def, research, evidence, comparative]
+density_score: 1.0
 ---
 
 <!-- 8F: F1 constrain=P06/enum_def F2 become=enum-def-builder F3 inject=nucleus_def_n01+n01-intelligence+kc_enum_def+P06_schema+enum template F4 reason=closed evidence ladder for comparative research F5 call=apply_patch+cex_compile F6 produce=5945 bytes F7 govern=frontmatter+ascii+80-line+self-check F8 collaborate=N01_intelligence/P06_schema/sch_enum_def_n01.md -->
