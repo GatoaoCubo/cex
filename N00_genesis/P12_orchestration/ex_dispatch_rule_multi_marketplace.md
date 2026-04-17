@@ -4,11 +4,12 @@ kind: dispatch_rule
 pillar: P12
 title: Multi-Marketplace Authority Dispatch Rules
 version: 0.1.0
-quality: null
+quality: 9.0
 status: template
 brand_placeholders:
   - BRAND_NAME
 tags: [commerce, template, distillation, orchestration, dispatch_rule]
+density_score: 1.0
 ---
 
 # Multi-Marketplace Authority Dispatch Rules
