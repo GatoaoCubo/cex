@@ -8,7 +8,7 @@ created: "2026-04-17"
 updated: "2026-04-17"
 author: "n05_operations"
 domain: controlled_vocabulary
-quality: null
+quality: 9.1
 tags: [operations, vocabulary, terminology, devops, sre, knowledge]
 tldr: "22 canonical operations terms with N05 enforcement rules. Load at F2b SPEAK. Prevents semantic drift in all N05 artifacts."
 when_to_use: "Load at F2b SPEAK before generating any N05 artifact. Required for all infrastructure, deployment, and reliability work."

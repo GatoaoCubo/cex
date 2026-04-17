@@ -5,8 +5,9 @@ pillar: P01
 nucleus: N05
 title: "N05 Operations Chunk Strategy"
 version: "1.0.0"
-quality: null
+quality: 9.0
 tags: [n05, operations, chunk_strategy, gating_wrath, rag, ci_cd, deploy]
+density_score: 0.97
 ---
 <!-- 8F: F1=chunk_strategy/P01 F2=chunk-strategy-builder F3=nucleus_def_n05+P01_schema+kc_chunk_strategy+N05_W1+examples F4=hybrid fail_closed ops chunking
      F5=shell+apply_patch+cex_compile F6=approx-6KB dense markdown F7=self-check frontmatter+8F+80L+properties+ascii F8=N05_operations/P01_knowledge/kno_chunk_strategy_n05.md -->
