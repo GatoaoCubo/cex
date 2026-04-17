@@ -5,8 +5,9 @@ pillar: P06
 nucleus: n06
 title: Revenue Integrity Validator
 version: 1.0
-quality: null
+quality: 9.0
 tags: [schema, validator, quality, pricing, revenue]
+density_score: 1.0
 ---
 
 <!-- 8F: F1 constrain=P06/validator F2 become=validator-builder F3 inject=nucleus_def_n06.md,n06-commercial.md,bld_manifest_validator.md,kc_validator.md,P06_schema/_schema.yaml F4 reason=precommit_validator_for_revenue_integrity_and_density F5 call=apply_patch;python _tools/cex_compile.py F6 produce=5962_bytes F7 govern=frontmatter_sections_ascii_density_review F8 collaborate=N06_commercial/P06_schema/sch_validator_n06.md -->

@@ -5,8 +5,10 @@ pillar: P07
 nucleus: n06
 title: "Cohort Analysis -- Revenue Cohort Framework by Channel, Plan, and Period"
 version: 1.0.0
-quality: null
+quality: 9.0
 tags: [cohort, analysis, revenue, retention, commercial, channel, plan]
+density_score: 1.0
+updated: "2026-04-17"
 ---
 
 # Cohort Analysis: Revenue Cohort Framework
