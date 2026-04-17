@@ -17,7 +17,7 @@ timeout: 30000
 javascript: true
 cookies: true
 stealth: false
-quality: null
+quality: 9.0
 tags: [browser_tool, supabase, dashboard, playwright, P04, devops]
 tldr: "Playwright automator for Supabase dashboard: project CRUD, env vars, schema setup, RLS policies, edge functions deploy"
 description: "Automates Supabase Studio UI for project lifecycle, database config, RLS policy management, and edge function deployment"
@@ -25,6 +25,7 @@ credentials:
   source: secret_config
   keys: [SUPABASE_URL, SUPABASE_ANON_KEY, SUPABASE_SERVICE_ROLE_KEY]
   injection: env_var
+density_score: 0.91
 ---
 
 ## Overview

@@ -17,7 +17,7 @@ timeout: 30000
 javascript: true
 cookies: true
 stealth: false
-quality: null
+quality: 9.0
 tags: [browser_tool, railway, dashboard, playwright, P04, deploy]
 tldr: "Playwright automator for Railway dashboard: service creation, env var config, domain assignment, deploy trigger, log tailing"
 description: "Automates Railway UI for service lifecycle, environment config, custom domain setup, deploy management, and log access"
@@ -25,6 +25,7 @@ credentials:
   source: secret_config
   keys: [RAILWAY_TOKEN]
   injection: env_var
+density_score: 0.92
 ---
 
 ## Overview
