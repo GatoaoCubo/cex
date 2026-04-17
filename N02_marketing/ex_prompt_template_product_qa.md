@@ -8,7 +8,7 @@ created: 2026-04-16
 updated: 2026-04-16
 author: n02_marketing
 domain: brand_persona_chat
-quality: null
+quality: 8.9
 brand_placeholders:
   - BRAND_NAME
   - BRAND_PERSONA_NAME
