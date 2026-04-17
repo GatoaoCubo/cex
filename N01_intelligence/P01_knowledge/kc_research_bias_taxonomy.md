@@ -8,10 +8,11 @@ version: 1.0.0
 created: 2026-04-17
 author: n01_intelligence
 domain: research-intelligence
-quality: null
+quality: 9.1
 tags: [research_bias, cognitive_bias, selection_bias, confirmation_bias, n01, analytical_envy]
 tldr: "Complete taxonomy of cognitive and research biases affecting intelligence analysis: 12 bias types with detection signatures, impact severity, and mitigation strategies. Grounds the bias_audit_n01 detection protocol."
 density_score: 0.92
+updated: "2026-04-17"
 ---
 
 <!-- 8F: F1 constrain=P01/knowledge_card F2 become=knowledge-card-builder F3 inject=bias_audit_n01+reasoning_strategy_n01+eval_framework_n01 F4 reason=Analytical Envy demands we know ALL the ways we can be wrong, not just the obvious ones -- this taxonomy makes bias detection comprehensive F5 call=cex_compile F6 produce=kc_research_bias_taxonomy.md F7 govern=frontmatter+ascii+tables F8 collaborate=N01_intelligence/P01_knowledge/ -->
