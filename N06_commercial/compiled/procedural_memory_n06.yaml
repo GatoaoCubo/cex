@@ -1,0 +1,74 @@
+id: procedural_memory_n06
+kind: procedural_memory
+pillar: P10
+nucleus: n06
+title: Procedural Memory -- N06 Commercial Standard Operating Procedures
+version: 1.0.0
+quality: null
+tags:
+- procedural-memory
+- sop
+- commercial
+- deals
+- escalation
+- renewal
+- operations
+purpose: Encodes N06's repeatable commercial procedures as procedural memory. When N06 encounters a known commercial scenario
+  (new deal, renewal, escalation, pricing question), this memory provides the exact step sequence without re-deriving it each
+  time.
+procedure_registry: ''
+proc_001_new_lead_qualification: "Trigger: New inbound lead (form, trial signup, or outbound response)\n\nSteps:\n  1. Check\
+  \ lead vs ICP criteria (entity_memory icp_dimensions)\n  2. Score MEDDIC: M+E+D+D+I+C (6 dimensions, 0-1 each)\n  3. Route\
+  \ based on score:\n     - Score >= 5: Hot -> CSM assignment within 2h\n     - Score 3-4: Warm -> Automated nurture + follow-up\
+  \ in 48h\n     - Score < 3: Cold -> Nurture sequence only\n  4. Create customer entity (entity_memory_customer schema)\n\
+  \  5. Log acquisition channel + UTM\n  6. Schedule discovery call (hot leads) OR enter nurture sequence\n\nTime budget:\
+  \ <15 minutes for qualification decision\nResponsible: N06 (automated) + CSM for hot leads"
+proc_002_demo_request_handling: "Trigger: Customer requests demo\n\nSteps:\n  1. Pre-demo prep (30 min before):\n     a. Pull\
+  \ customer entity\n     b. Research company (size, industry, recent news)\n     c. Prepare ROI calculator with industry\
+  \ defaults for their size\n     d. Select use case most relevant to their role/industry\n     e. Prepare 2 objection handlers\
+  \ for most common in their industry\n  \n  2. Demo execution (45 min):\n     a. SITUATION questions (5 min)\n     b. PROBLEM\
+  \ + IMPLICATION questions (10 min)\n     c. ROI calculation with their numbers (5 min)\n     d. Live build (15 min) -- THEIR\
+  \ use case, not generic\n     e. Tier recommendation (5 min)\n     f. Next steps + close (5 min)\n  \n  3. Post-demo (within\
+  \ 1h):\n     a. Update customer entity (pain points, decision process, timeline)\n     b. Send follow-up: ROI one-pager\
+  \ + relevant case study\n     c. Create next-step calendar invite\n     d. Log in CRM\n\nTime budget: 45 min demo + 30 min\
+  \ prep + 30 min follow-up\nResponsible: CSM (PRO/ENTERPRISE) or automated (STARTER)"
+proc_003_upgrade_offer_execution: "Trigger: expansion_play trigger event (from expansion_play_n06)\n\nSteps:\n  1. Identify\
+  \ trigger type (quota / feature gate / seat / lifecycle)\n  2. Select appropriate action_prompt_upsell template\n  3. Populate\
+  \ template with customer-specific data\n  4. Channel selection:\n     - Quota/feature trigger: in-app first, email if not\
+  \ acted in 48h\n     - Seat trigger: in-app modal (immediate)\n     - Enterprise trigger: CSM touchpoint (no self-serve)\n\
+  \  5. Track: message_sent, cta_clicked, upgrade_completed, dismissed\n  6. If dismissed: suppress same message for 7 days\n\
+  \  7. If 3 dismissals: escalate to different play or CSM\n\nTime budget: automated (< 30 seconds to generate and send)"
+proc_004_renewal_management: "Trigger: renewal_date - 30 days\n\nSteps:\n  Day -30: Customer receives \"Your renewal is coming\
+  \ up\" email\n           Content: usage recap + value summary + tier recommendation\n           CTA: Annual upgrade offer\
+  \ ($savings prominent)\n  \n  Day -14: If not renewed AND annual offer not taken:\n           CSM review of customer entity\n\
+  \           If health_score < 60: CSM proactive outreach\n           If health_score >= 60: No action (self-service OK)\n\
+  \  \n  Day -7:  If churn_risk >= \"medium\":\n           CSM save call scheduled\n           Prepare: best offer available\
+  \ (annual + bonus)\n  \n  Day -3:  Final renewal reminder\n           CTA: Renew now OR contact support\n  \n  Day 0:  \
+  \ Renewal invoice sent by Stripe\n  \n  Day +3:  If unpaid: payment failure flow (PROC-005)\n  \nPost-renewal: Update entity,\
+  \ send \"thanks for renewing\" + usage tips\n\nResponsible: Automated (day -30, -3, 0) + CSM (day -14, -7 if flagged)"
+proc_005_payment_failure_recovery: "Trigger: invoice.payment_failed Stripe webhook\n\nSteps:\n  Hour 0: Update entity (invoices_failed++,\
+  \ churn_risk escalated)\n          Send \"Payment issue\" email (PLAY 2, churn_prevention_playbook)\n          Generate\
+  \ Stripe Customer Portal link\n  \n  Hour 24: Reminder email if not resolved\n  \n  Hour 48: Account warning + SMS if available\n\
+  \           Log to CSM queue\n  \n  Hour 72: Downgrade to FREE (preserve all data)\n           Email: \"Account paused --\
+  \ data safe for 30 days\"\n           Freeze: no new builds, read-only access\n  \n  Day 30:  Final data warning\n  Day\
+  \ 60:  Archive data (recoverable 6 months by support)\n\nEscalation: CSM reviews any account > $500 ARR that fails payment\
+  \ at Hour 48\n\nResponsible: Automated + CSM escalation"
+proc_006_refund_request_handling: "Trigger: Customer requests refund\n\nSteps:\n  1. Retrieve customer entity + invoice history\n\
+  \  2. Classify:\n     - Technical failure (CEX bug caused loss): auto-approve + apologize\n     - Buyer's remorse within\
+  \ 7 days: approve once (policy)\n     - Buyer's remorse > 7 days: evaluate case-by-case\n     - Disputed charge: escalate\
+  \ to legal\n  \n  3. If approving:\n     a. Issue refund via Stripe\n     b. Update entity (refunds history)\n     c. Flag\
+  \ for bugloop_revenue if technical failure\n     d. Check if refund = churn signal -> trigger save attempt\n  \n  4. Response\
+  \ to customer: within 4 business hours\n  5. Log for cohort analysis (refund_rate by plan + channel)\n\nResponsible: Support\
+  \ + N06 automation for auto-approvals"
+procedure_update_protocol: 'When a procedure fails or a better sequence is discovered:
+
+  1. Document in `learning_record_n06.md`
+
+  2. Update this procedure (version + date)
+
+  3. Log update to `regression_check_n06.md` if old procedure caused revenue loss'
+related_artifacts:
+- '`sales_playbook_n06.md` -- PROC-002 demo execution'
+- '`churn_prevention_playbook_n06.md` -- PROC-005 payment failure'
+- '`renewal_workflow_n06.md` -- PROC-004 renewal management detail'
+- '`entity_memory_customer.md` -- all procedures update customer entity'

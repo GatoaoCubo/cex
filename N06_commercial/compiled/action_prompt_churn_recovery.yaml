@@ -1,0 +1,72 @@
+id: action_prompt_churn_recovery
+kind: action_prompt
+pillar: P03
+nucleus: n06
+title: Action Prompt -- Churn Recovery and Win-Back Messaging
+version: 1.0.0
+quality: null
+tags:
+- churn
+- recovery
+- win-back
+- action-prompt
+- retention
+- commercial
+purpose: 'Generates personalized recovery messages for customers at various churn stages: cancel intent, post-cancel, and
+  win-back sequences. Each template is calibrated for the emotional state of a customer who is leaving -- neither desperate
+  nor dismissive.'
+template_1_cancel_intent_exit_survey_response: "Trigger: Customer selects cancel AND completes exit survey\n\nSystem: You\
+  \ are N06 Commercial writing a cancel-response email.\n  Customer: {{customer_name}}\n  Plan: {{current_tier}} at ${{price}}/month\n\
+  \  Cancellation reason: {{cancel_reason}}\n  Customer health_score: {{health_score}}\n  Tenure: {{months_as_customer}} months\n\
+  \nBased on the cancellation reason, write a 60-80 word email that:\n  - Acknowledges their specific reason (not generic\
+  \ \"sorry to see you go\")\n  - Offers ONE specific alternative to hard cancel\n  - Makes the alternative feel easy, not\
+  \ a commitment\n  - Includes NO guilt-tripping or desperation language\n\nAlternatives by reason:\n  too_expensive -> offer\
+  \ annual plan at 20% off\n  not_using_enough -> offer 2-month pause at 50% price\n  missing_feature -> offer to stay and\
+  \ get early access when feature ships\n  project_ended -> offer pause option + data preservation assurance\n  switching_competitor\
+  \ -> ask what they need that CEX doesn't have (1 question)\n  other -> ask 1 open question, offer 15-min call\n\nTone: Calm,\
+  \ genuine, direct. No exclamation marks. No \"we're devastated\".\n\n---"
+template_2_soft_cancel_confirmation: "Trigger: Cancel confirmed (cancel_at_period_end = true, not yet churned)\n\nSystem:\
+  \ You are N06 writing a soft-cancel confirmation.\n  Customer: {{customer_name}}\n  Plan ends: {{period_end_date}}\n  Features\
+  \ they used most: {{top_features_list}}\n\nWrite a 50-word confirmation that:\n  1. Confirms access continues until {{period_end_date}}\n\
+  \  2. Mentions what they'll still have access to (specific features)\n  3. Makes reactivation feel easy (\"you can come\
+  \ back anytime\")\n  4. Does NOT include a sales pitch\n\nTone: Respectful, no-pressure. This is a goodbye, not a last pitch.\n\
+  \n---"
+template_3_win_back_email_day_30_post_churn: "Trigger: 30 days after cancellation\n\nSystem: You are N06 writing a win-back\
+  \ email at day 30 post-churn.\n  Former customer: {{customer_name}}\n  Former plan: {{former_tier}}\n  Months with CEX:\
+  \ {{months_as_customer}}\n  Builds they ran: {{total_builds}}\n  Cancel reason recorded: {{cancel_reason}}\n  Product improvements\
+  \ since cancel: {{new_features_list}}\n\nWrite a 80-100 word email that:\n  1. Opens with what's new (not \"we miss you\"\
+  )\n  2. Mentions 1-2 improvements most relevant to their cancel reason\n  3. References their past usage (makes it personal)\n\
+  \  4. Includes a soft CTA -- \"see what's new\" not \"come back now\"\n  5. No win-back offer yet -- this is awareness,\
+  \ not a push\n\nSubject line: Max 8 words, curiosity-driven, no promotion language\nTone: Confident (product improved),\
+  \ not needy.\n\n---"
+template_4_win_back_offer_day_60_post_churn: "Trigger: 60 days after cancellation, if day 30 email was opened but no reactivation\n\
+  \nSystem: You are N06 writing a win-back offer email at day 60.\n  Former customer: {{customer_name}}\n  Former plan: {{former_tier}}\n\
+  \  Former monthly price: ${{former_price}}\n  Win-back offer: 50% off first month (${{discounted_price}})\n  Offer expires:\
+  \ {{offer_expiry_date}} (48h from send)\n  Data status: all builds and brand_config preserved\n\nWrite a 70-word email that:\n\
+  \  1. Opens with the specific offer (no buildup)\n  2. States what they get back (mention their preserved data)\n  3. Makes\
+  \ the 48h deadline feel real but not pressured\n  4. Single CTA: \"Reactivate at ${{discounted_price}}\"\n\nTone: Direct,\
+  \ generous, time-bound. This is the one commercial push.\n\n---"
+template_5_csm_save_call_script: "Trigger: High-value customer (ARR > $500) with cancel intent -- CSM intervention\n\nSystem:\
+  \ You are N06 generating a CSM save call script.\n  Customer: {{customer_name}}, {{company}}\n  Plan: {{tier}} at ${{mrr}}/month\
+  \ ARR: ${{arr}}\n  Tenure: {{months}} months\n  Health score: {{health_score}}\n  Cancel reason: {{cancel_reason}}\n  Builds\
+  \ in last 30 days: {{recent_builds}}\n  Best save offer available: {{best_offer}}\n\nGenerate:\n  1. Opening: 2 sentences\
+  \ to acknowledge without guilt-trip\n  2. Discovery question: 1 open question to understand true pain\n  3. Response options:\
+  \ 3 paths based on what they might say\n     - Path A: budget issue -> offer structure\n     - Path B: product gap -> roadmap\
+  \ response\n     - Path C: not using it -> usage enablement offer\n  4. Close: 1 sentence to move to next step\n\nFormat:\
+  \ Labeled sections. Under 200 words total.\n\n---"
+generation_parameters: 'model: claude-sonnet-4-6
+
+  temperature: 0.4       # slight variance for natural tone, not repetitive
+
+  max_tokens: 400
+
+  system_note: "N06 rule: churn recovery is about genuine value re-demonstration, not pressure. Zero guilt-trip. Zero desperation.
+  Strategic Greed wins patients back by proving value, not by begging."'
+quality_gates: "PASS if:\n  - Addresses specific cancel reason (not generic)\n  - Single clear CTA\n  - Tone is calm and direct\
+  \ (not desperate)\n  - Word count within template bounds\n  - No phrase: \"we miss you\", \"we're so sorry\", \"please come\
+  \ back\"\n\nFAIL if:\n  - Generic \"sorry to see you go\" opening\n  - Multiple competing offers in one message\n  - Discount\
+  \ offered in Day 30 email (premature)\n  - Exclamation marks"
+related_artifacts:
+- '`churn_prevention_playbook_n06.md` -- defines triggers and plays; this generates the messages'
+- '`renewal_workflow_n06.md` -- win-back sequence referenced in post-churn section'
+- '`entity_memory_customer.md` -- cancel reason, tenure, usage data used in templates'

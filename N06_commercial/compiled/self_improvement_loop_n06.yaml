@@ -1,0 +1,115 @@
+id: self_improvement_loop_n06
+kind: self_improvement_loop
+pillar: P11
+nucleus: n06
+title: Self-Improvement Loop -- N06 Autonomous Revenue Strategy Evolution
+version: 1.0.0
+quality: null
+tags:
+- self-improvement
+- evolution
+- feedback
+- autonomous
+- commercial
+- revenue
+purpose: N06's commercial portfolio must evolve faster than the market. This artifact defines the autonomous loop by which
+  N06 scans revenue performance, identifies strategy gaps, generates improvement hypotheses, tests them, and integrates validated
+  improvements back into its artifact portfolio.
+loop_architecture: "SCAN (weekly)\n  |\n  v\nDIAGNOSE (identify gaps vs targets)\n  |\n  v\nHYPOTHESIZE (generate improvement\
+  \ candidates)\n  |\n  v\nRANK (by expected revenue impact / effort)\n  |\n  v\nDISPATCH (to N06 or N02/N01 via N07)\n  |\n\
+  \  v\nMEASURE (A/B test or before/after)\n  |\n  v\nINTEGRATE (update artifacts) or DISCARD (log as failed hypothesis)\n\
+  \  |\n  v\nSCAN (next cycle)"
+scan_metrics_to_monitor: "revenue_signals:\n  core_metrics:\n    - mrr_growth_pct_mom           # target: >10%\n    - churn_rate_pct\
+  \               # target: <2%\n    - net_revenue_retention_pct    # target: >110%\n    - trial_to_paid_conversion_pct #\
+  \ target: >25%\n    - cac_by_channel               # target: <90 days payback\n    - expansion_revenue_pct        # target:\
+  \ >20% of new MRR\n  \n  funnel_signals:\n    - pricing_page_ctr_to_checkout # target: >8%\n    - checkout_completion_rate\
+  \     # target: >70%\n    - free_to_starter_activation   # target: >8%\n    - starter_to_pro_upgrade_rate  # target: >15%\n\
+  \    \n  engagement_signals:\n    - builds_per_active_user_week  # target: >5\n    - feature_adoption_breadth     # target:\
+  \ >3 features used\n    - time_to_first_build_minutes  # target: <30 min\n    - nps_score                    # target: >50"
+diagnose_gap_detection_rules: "def diagnose_gaps(metrics: dict) -> list[str]:\n    gaps = []\n    \n    if metrics[\"churn_rate_pct\"\
+  ] > 3.0:\n        gaps.append(\"HIGH_CHURN: run churn_prevention_playbook analysis\")\n    \n    if metrics[\"trial_to_paid_conversion_pct\"\
+  ] < 20.0:\n        gaps.append(\"LOW_CONVERSION: audit onboarding + value delivery in trial\")\n    \n    if metrics[\"\
+  net_revenue_retention_pct\"] < 100.0:\n        gaps.append(\"NEGATIVE_NRR: expansion < churn, fix retention before acquisition\"\
+  )\n    \n    if metrics[\"expansion_revenue_pct\"] < 15.0:\n        gaps.append(\"LOW_EXPANSION: expansion_play underperforming,\
+  \ audit upgrade triggers\")\n    \n    if metrics[\"checkout_completion_rate\"] < 60.0:\n        gaps.append(\"CHECKOUT_ABANDONMENT:\
+  \ pricing friction or UX issue\")\n    \n    if metrics[\"time_to_first_build_minutes\"] > 60:\n        gaps.append(\"SLOW_ONBOARDING:\
+  \ high activation friction, users churning before value\")\n    \n    return gaps"
+hypothesize_improvement_playbook: '| Gap | Hypothesis | Artifact to Update | Test Type |
+
+  |-----|-----------|-------------------|-----------|
+
+  | HIGH_CHURN | Proactive CSM outreach at day 30 reduces churn 20% | churn_prevention_playbook_n06 | A/B |
+
+  | LOW_CONVERSION | Adding ROI calculator to pricing page increases conversion 15% | pricing_page + roi_calculator | A/B
+  |
+
+  | LOW_EXPANSION | In-app usage bar at 80% quota increases upgrades 30% | expansion_play_n06 | A/B |
+
+  | CHECKOUT_ABANDONMENT | Removing credit card for trial increases trial starts 40% | input_schema_checkout | A/B |
+
+  | SLOW_ONBOARDING | Interactive walkthrough reduces time-to-first-build by 50% | onboarding_flow (N05) | Before/After |
+
+  | NEGATIVE_NRR | Pause option reduces cancellations 25% vs hard cancel | churn_prevention_playbook | A/B |'
+rank_prioritization_matrix: 'Score each hypothesis: `(revenue_impact * probability_of_success) / effort`
+
+
+  HIGH impact: >$10K ARR potential per month
+
+  MED impact: $1K-$10K ARR potential per month
+
+  LOW impact: <$1K ARR potential per month
+
+
+  HIGH probability: historical evidence or industry data
+
+  MED probability: logical but untested
+
+  LOW probability: speculative
+
+
+  HIGH effort: >40 engineer hours
+
+  MED effort: 8-40 engineer hours
+
+  LOW effort: <8 engineer hours
+
+
+  Priority = (impact_score * probability_score) / effort_score
+
+  Run highest priority first.'
+measure_success_criteria: "experiment_success_criteria:\n  minimum_sample_size: 100_per_arm\n  minimum_duration_days: 14\n\
+  \  statistical_significance: 95_pct\n  primary_metric: conversion_rate_or_churn_rate\n  guardrail_metrics:\n    - revenue_per_user_must_not_decrease\n\
+  \    - nps_must_not_decrease_by_5_points"
+integrate_artifact_update_protocol: 'When hypothesis validated:
+
+  1. Update the relevant N06 artifact (e.g., `churn_prevention_playbook_n06.md`)
+
+  2. Update `eval_metric_commercial.md` with new baseline
+
+  3. Add to `reward_signal_n06.md` as validated pattern
+
+  4. Log to `.cex/experiments/results.tsv` with: `date | hypothesis | metric | result | artifact_updated`
+
+  5. If pattern is generalizable: propose to N07 for cross-nucleus adoption
+
+
+  When hypothesis fails:
+
+  1. Log to `regression_check_n06.md` as failed pattern
+
+  2. Document WHY it failed (counter-intuitive learning is high value)
+
+  3. Keep experiment data for future meta-analysis'
+loop_cadence: 'Weekly: SCAN + DIAGNOSE (automated, N06 reads metrics + runs diagnose_gaps())
+
+  Bi-weekly: HYPOTHESIZE + RANK (N06 proposes top-3 experiments to N07)
+
+  Monthly: INTEGRATE / DISCARD (review running experiments, integrate winners)
+
+  Quarterly: Strategic portfolio review (which artifacts need full rebuild vs patch)'
+related_artifacts:
+- '`eval_metric_commercial.md` -- metrics data source for SCAN'
+- '`cohort_analysis_n06.md` -- cohort segmentation for DIAGNOSE'
+- '`reward_signal_n06.md` -- validated patterns library'
+- '`regression_check_n06.md` -- failed patterns library'
+- '`churn_prevention_playbook_n06.md` -- primary improvement target'

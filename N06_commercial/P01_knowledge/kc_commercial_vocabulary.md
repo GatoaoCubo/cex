@@ -1,0 +1,89 @@
+---
+id: kc_commercial_vocabulary
+kind: knowledge_card
+pillar: P01
+nucleus: n06
+title: "Knowledge Card -- N06 Commercial Controlled Vocabulary"
+version: 1.0.0
+quality: null
+tags: [vocabulary, controlled-vocabulary, commercial, ubiquitous-language, terminology, revenue]
+type: controlled_vocabulary
+---
+
+# N06 Commercial Controlled Vocabulary
+
+## Purpose
+
+Canonical controlled vocabulary for N06 Commercial nucleus. Loaded at F2b SPEAK before every artifact generation. Prevents semantic drift, enforces industry-standard terminology, and enables precise LLM-to-LLM communication across nuclei.
+
+## Canonical Terms
+
+| Term | Definition | N06 Application | Anti-pattern |
+|------|-----------|-----------------|-------------|
+| **unit_economics** | Revenue, cost, and margin metrics per customer unit | Evaluate CAC/LTV per tier and channel to validate acquisition strategy | "per customer numbers", "customer economics" |
+| **LTV_CAC_ratio** | Lifetime Value divided by Customer Acquisition Cost; healthy SaaS: >3x | Primary signal for acquisition channel viability; below 3x = acquisition unsustainable | "value over cost", "ROI on customers" |
+| **payback_period** | Months to recover CAC from gross margin; healthy SaaS: <12 months | Determines how aggressively to invest in paid acquisition | "time to ROI", "breakeven" |
+| **MRR** | Monthly Recurring Revenue; sum of all active subscription amounts normalized to monthly | Primary revenue KPI; excludes one-time fees, trials, paused subscriptions | "monthly revenue", "subscription income" |
+| **ARR** | Annual Recurring Revenue; MRR * 12 or sum of annual commitments | Milestone metric for funding conversations and enterprise sales | "annual revenue" |
+| **churn_rate** | Percentage of customers (or MRR) lost in a period; monthly = churned/start * 100 | Core retention health metric; <2% monthly target for N06 | "cancellation rate", "dropout rate" |
+| **expansion_revenue** | MRR gained from upgrades and seat additions from existing customers | Measures how well N06's expansion plays work; target >20% of new MRR | "upsell revenue", "upgrade MRR" |
+| **net_revenue_retention** | (MRR_end - churn + expansion - contraction) / MRR_start * 100 | NRR > 100% means base grows without new acquisition; holy grail >110% | "dollar retention", "net dollar retention" |
+| **pricing_psychology** | Behavioral economics applied to price perception and packaging decisions | Used when designing tier anchoring, annual framing ("months free" vs "% off"), feature gating | "pricing tricks", "price games" |
+| **value_metric** | The unit customers pay for that scales naturally with their usage | For CEX: builds/month; determines where to put usage limits and expansion triggers | "usage metric", "billing unit" |
+| **good_better_best_packaging** | Three-tier pricing architecture where each tier is a credible upgrade for a defined persona | N06's FREE/STARTER/PRO/ENTERPRISE implements this with persona-specific feature gates | "tiered pricing", "3-tier model" |
+| **freemium_conversion** | Rate at which free users convert to paid; healthy: 2-5% (PLG) to 8-15% (hybrid) | Measures effectiveness of free tier design; requires clear value wall | "free to paid rate" |
+| **product_led_growth** | Go-to-market where the product itself is the primary acquisition and retention driver | FREE tier design and in-app upgrade prompts are N06's PLG layer | "PLG", "self-serve growth" |
+| **sales_assisted** | Revenue acquired through direct sales process (CSM, demo, proposal) | Used for ENTERPRISE tier and large PRO accounts; complements PLG | "sales-led", "high-touch" |
+| **land_and_expand** | Close a small initial deal, then grow account revenue through expansion plays | N06 strategy: STARTER entry, expand to PRO via quota hits, then Enterprise via SSO/seats | "start small and grow", "foot in the door" |
+| **JTBD** | Jobs To Be Done: the underlying goal a customer is hiring your product to accomplish | Used in discovery to identify true pain (not stated feature request, but underlying job) | "customer needs", "use cases" |
+| **willingness_to_pay** | Maximum price a customer segment will pay before switching; measured via van Westendorp or conjoint | Informs tier price points; N06 tests via pricing page A/B and conversation probing | "price sensitivity", "price ceiling" |
+| **price_elasticity** | Degree to which demand changes with price; elastic = price-sensitive, inelastic = price-insensitive | Enterprise buyers are more inelastic; indie users highly elastic -- informs discount strategy | "price sensitivity" |
+| **competitive_moat** | Sustainable advantage that prevents competitors from eroding market share | CEX moat: 257-kind taxonomy + 8F pipeline + typed knowledge infrastructure -- not replicable | "competitive advantage", "defensibility" |
+| **ideal_customer_profile** | Specific company and persona characteristics that predict high LTV and low CAC | N06 ICP scoring in entity_memory uses 5 dimensions; score < 33 = disqualify | "ICP", "target customer", "best fit customer" |
+| **total_addressable_market** | Maximum revenue opportunity if 100% market share; used for growth planning | N06 uses TAM to prioritize vertical expansion plays and pricing ceiling | "TAM", "market size" |
+| **revenue_operations** | Cross-functional alignment of sales, marketing, and CS ops to maximize revenue efficiency | N06 is N06's RevOps layer within CEX: data, process, tooling | "RevOps", "growth operations" |
+
+## Domain-Specific Extensions (N06 Only)
+
+| Term | Definition | CEX-Specific Usage |
+|------|-----------|-------------------|
+| **strategic_greed** | N06's sin lens: optimize every commercial decision for maximum revenue leverage | Drives N06's artifact selection: always ask "what's the ROI per hour of artifact build?" |
+| **commercial_portfolio** | The set of N06 artifacts providing full commercial coverage across pillars | Gap analysis drives self-assembly: identify which commercial scenarios lack artifact coverage |
+| **revenue_architecture** | The designed system of tiers, pricing, triggers, and flows that generates compound revenue | Refers to the full N06 artifact set working together as a system, not individual artifacts |
+| **expansion_play** | Specific trigger event paired with a response action designed to drive tier upgrade | N06's expansion_play_n06.md maps 15+ triggers to automated or CSM-driven responses |
+| **churn_signal** | Observable customer behavior indicating elevated risk of cancellation | N06 tracks 12 behavioral + financial signals in entity_memory_customer.md |
+| **save_rate** | Percentage of churn-intent customers successfully retained; target >40% | Measures effectiveness of churn_prevention_playbook interventions |
+
+## Cross-Nucleus Shared Terms (DO NOT REDEFINE)
+
+These terms are defined in N00_genesis and must not be redefined in N06 KCs:
+- `8F pipeline (F1-F8)`: canonical reasoning protocol
+- `kind`: atomic artifact type from the 257-kind taxonomy
+- `pillar`: P01-P12 domain grouping
+- `nucleus`: N00-N07 operational agent
+- `quality_gate`: F7 GOVERN validation
+- `signal`: F8 COLLABORATE completion notification
+- `entity_memory`: typed memory artifact for persistent entity state
+- `knowledge_card`: canonical document artifact for domain knowledge
+
+## Vocabulary Enforcement
+
+```python
+ANTI_PATTERNS = {
+    "monthly revenue": "MRR",
+    "price tricks": "pricing_psychology",
+    "cancellation rate": "churn_rate",
+    "customer lifetime value": "LTV",
+    "cost to acquire": "CAC",
+    "upsell revenue": "expansion_revenue",
+    "target market": "ideal_customer_profile",
+    "competitive advantage": "competitive_moat",
+}
+
+def enforce_vocabulary(text: str) -> str:
+    for anti_pattern, canonical in ANTI_PATTERNS.items():
+        if anti_pattern in text.lower():
+            log_vocabulary_drift(anti_pattern, canonical)
+            # Do not auto-replace -- flag for human review
+    return text
+```

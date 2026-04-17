@@ -1,0 +1,71 @@
+id: roi_calculator_n06
+kind: roi_calculator
+pillar: P11
+nucleus: n06
+title: ROI Calculator -- Customer Value Proof Model
+version: 1.0.0
+quality: null
+tags:
+- roi
+- value
+- calculator
+- sales
+- proof
+- commercial
+- ltv
+purpose: 'Quantifies the value CEX delivers to customers by tier and persona. Used in sales conversations, pricing pages,
+  and renewal negotiations. Strategic Greed principle: customers buy when value > price is undeniable.'
+input_variables: "inputs:\n  # Customer profile\n  team_size: integer          # number of people who would use CEX\n  hourly_rate_usd:\
+  \ integer    # average hourly fully-loaded cost per person\n  \n  # Current state (before CEX)\n  builds_per_week: integer\
+  \    # artifacts/content pieces produced manually\n  hours_per_build: float      # avg hours to produce one artifact manually\n\
+  \  revision_cycles: integer    # avg revision rounds per artifact\n  hours_per_revision: float   # avg hours per revision\
+  \ round\n  \n  # CEX performance\n  cex_build_time_hours: float         # default: 0.05 (3 minutes)\n  cex_revision_time_hours:\
+  \ float      # default: 0.02 (1 minute with 8F)\n  cex_quality_improvement_pct: float  # default: 40% (fewer revision cycles)"
+calculation_model: "def calculate_roi(inputs: dict, tier_price_monthly: int) -> dict:\n    # Weekly time saved per build\n\
+  \    manual_build_time = (\n        inputs[\"hours_per_build\"] + \n        (inputs[\"revision_cycles\"] * inputs[\"hours_per_revision\"\
+  ])\n    )\n    cex_build_time = (\n        inputs[\"cex_build_time_hours\"] + \n        (inputs[\"revision_cycles\"] * (1\
+  \ - inputs[\"cex_quality_improvement_pct\"] / 100) \n         * inputs[\"cex_revision_time_hours\"])\n    )\n    hours_saved_per_build\
+  \ = manual_build_time - cex_build_time\n    \n    # Monthly savings\n    builds_per_month = inputs[\"builds_per_week\"]\
+  \ * 4.33\n    hours_saved_per_month = hours_saved_per_build * builds_per_month\n    dollar_saved_per_month = hours_saved_per_month\
+  \ * inputs[\"hourly_rate_usd\"]\n    \n    # ROI\n    net_value = dollar_saved_per_month - tier_price_monthly\n    roi_pct\
+  \ = (net_value / tier_price_monthly) * 100\n    payback_days = (tier_price_monthly / dollar_saved_per_month) * 30\n    \n\
+  \    return {\n        \"hours_saved_monthly\": round(hours_saved_per_month, 1),\n        \"dollar_saved_monthly\": round(dollar_saved_per_month,\
+  \ 0),\n        \"net_value_monthly\": round(net_value, 0),\n        \"roi_pct\": round(roi_pct, 0),\n        \"payback_days\"\
+  : round(payback_days, 0),\n        \"annual_savings\": round(dollar_saved_per_month * 12, 0)\n    }"
+pre_computed_scenarios: ''
+solo_consultant_starter_target: "Inputs: team=1, rate=$75/hr, builds=10/week, hours_per_build=2.5, revisions=2, rev_hours=1\n\
+  Result:\n  Hours saved/month: 92 hours\n  Dollar saved/month: $6,900\n  CEX cost (STARTER): $49/month\n  ROI: 13,978% |\
+  \ Payback: <1 day\n  Annual savings vs CEX: $82,212"
+marketing_team_3_5_people_pro_target: "Inputs: team=4, rate=$65/hr, builds=30/week, hours_per_build=3, revisions=3, rev_hours=1.5\n\
+  Result:\n  Hours saved/month: 450 hours\n  Dollar saved/month: $29,250\n  CEX cost (PRO): $149/month\n  ROI: 19,530% | Payback:\
+  \ <1 day\n  Annual savings vs CEX: $350,412"
+enterprise_marketing_dept_20_people_enterprise_target: "Inputs: team=20, rate=$80/hr, builds=200/week, hours_per_build=4,\
+  \ revisions=4, rev_hours=2\nResult:\n  Hours saved/month: 7,800 hours\n  Dollar saved/month: $624,000\n  CEX cost (ENTERPRISE):\
+  \ $2,000/month (example)\n  ROI: 31,100% | Payback: <1 hour\n  Annual savings vs CEX: $7,464,000"
+sales_conversation_script: "\"Let me show you the math on YOUR situation.\n \n [Input their numbers]\n \n So right now, your\
+  \ team spends [X] hours/month on [artifact type].\n At [$Y] fully loaded cost, that's [$Z] per month.\n \n With CEX, that\
+  \ drops to [X * 0.05] hours -- the 8F pipeline handles the rest.\n You'd save [$savings] per month. CEX costs [$price].\n\
+  \ \n That's a [ROI%] return. Your payback period: [days].\n \n Even if we're only half right, you're still up [net_value/2].\n\
+  \ \n The question isn't whether CEX pays for itself -- it's how much faster\n you want to capture [annual_savings] in annual\
+  \ value.\""
+objection_handlers_by_roi_band: '| ROI Band | Typical Objection | Response |
+
+  |----------|-------------------|---------|
+
+  | <500% | "Not sure if it''s worth it" | Focus on non-quantified value: quality, consistency, brand voice |
+
+  | 500-2000% | "Seems high, is this realistic?" | Share scenario most similar to their size. Offer trial. |
+
+  | >2000% | "I need to show this to my manager" | Offer ROI one-pager export. Offer pilot on 1 use case. |'
+pricing_page_integration: 'The calculator embeds on the pricing page with default values pre-filled by detected company size
+  (from IP lookup or signup form):
+
+  - Solo -> default: team=1, rate=75, builds=10/week
+
+  - SMB -> default: team=5, rate=65, builds=25/week
+
+  - Enterprise -> default: team=20, rate=80, builds=100/week'
+related_artifacts:
+- '`subscription_tier_n06.md` -- tier prices used in calculation'
+- '`discovery_questions_n06.md` -- collects input variables during sales call'
+- '`sales_playbook_n06.md` -- ROI calculator is slide 3 in demo sequence'

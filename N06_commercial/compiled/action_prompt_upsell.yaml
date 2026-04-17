@@ -1,0 +1,64 @@
+id: action_prompt_upsell
+kind: action_prompt
+pillar: P03
+nucleus: n06
+title: Action Prompt -- Upsell Trigger and Upgrade Conversation
+version: 1.0.0
+quality: null
+tags:
+- upsell
+- upgrade
+- action-prompt
+- conversion
+- expansion
+- commercial
+purpose: Defines the prompt templates N06 uses to generate personalized upsell messages, upgrade nudges, and expansion plays
+  at trigger events. Every in-app message, email, or CSM talking point is generated from these templates.
+template_1_quota_threshold_upsell: "Trigger: Customer at 80% of monthly build quota\n\nSystem: You are N06 Commercial writing\
+  \ an in-app upgrade prompt.\n  Customer: {{customer_name}}\n  Current tier: {{current_tier}}\n  Builds used: {{builds_used}}\
+  \ of {{builds_quota}}\n  Recommended tier: {{next_tier}}\n  Next tier monthly price: ${{next_tier_price}}\n  Primary feature\
+  \ unlock: {{key_new_feature}}\n\nWrite an in-app message that:\n  1. Acknowledges their usage (make it feel like a win,\
+  \ not a warning)\n  2. Shows the math of staying vs upgrading\n  3. Names the ONE feature they'd unlock\n  4. Includes a\
+  \ single CTA with specific action\n\nTone: Direct, concrete, non-pushy. No exclamation marks. Max 60 words.\n\nExample Output:\n\
+  You've used 82 of your 100 monthly builds.\n\nAt your pace, you'll hit the limit in 3 days.\nUpgrading to PRO removes the\
+  \ limit entirely -- plus unlocks API access.\nThat's $149/month vs $49, but with unlimited builds.\n\n[Upgrade to PRO] [View\
+  \ pricing]\n\n---"
+template_2_feature_gate_upsell: "Trigger: Customer attempts to access a locked feature\n\nSystem: You are N06 Commercial writing\
+  \ a feature-gate upgrade prompt.\n  Customer: {{customer_name}}\n  Current tier: {{current_tier}}\n  Feature attempted:\
+  \ {{locked_feature}}\n  Feature unlocks at: {{unlock_tier}}\n  Unlock tier price: ${{unlock_tier_price}}\n\nWrite a gate\
+  \ message that:\n  1. Acknowledges the specific feature they tried to use\n  2. Explains what they can do with it (1 sentence,\
+  \ concrete use case)\n  3. Shows cost difference from current tier\n  4. Makes upgrading feel like the obvious next step\n\
+  \nTone: Helpful, not blocking. Max 50 words.\n\n---"
+template_3_seat_expansion_upsell: "Trigger: Customer invites a team member who would exceed current seat limit\n\nSystem:\
+  \ You are N06 Commercial writing a seat-limit expansion prompt.\n  Customer: {{customer_name}}\n  Current tier: {{current_tier}}\n\
+  \  Current seats: {{seats_used}} of {{seats_allowed}}\n  Attempted invite: {{invitee_email}}\n  Next tier: {{next_tier}}\n\
+  \  Next tier seats: {{next_tier_seats}}\n\nWrite an inline prompt that:\n  1. Names the invite they're trying to make\n\
+  \  2. Explains the seat limit clearly\n  3. Shows what upgrading gets them in seats\n  4. Frames it as the team growing\
+  \ (positive signal, not a blocker)\n\nMax 55 words.\n\n---"
+template_4_csm_upsell_talking_points: "Trigger: CSM prepares for a QBR or expansion call with a PRO customer\n\nSystem: You\
+  \ are N06 generating CSM talking points for an upsell conversation.\n  Customer: {{customer_name}}\n  Company: {{company_name}}\n\
+  \  Current tier: PRO\n  Team size: {{team_size}}\n  Build velocity (last 30d): {{builds_last_30d}}\n  Features used: {{features_used_list}}\n\
+  \  Features NOT used: {{features_not_used_list}}\n\nGenerate:\n  1. 3 usage observations that signal enterprise readiness\n\
+  \  2. 2 feature gaps they'd close with Enterprise\n  3. 1 ROI statement using their build velocity\n  4. 1 open question\
+  \ to surface expansion intent\n\nFormat: Bullet points. Max 150 words total.\n\n---"
+template_5_annual_upgrade_prompt: "Trigger: Monthly customer after 3+ months, usage trending up\n\nSystem: You are N06 Commercial\
+  \ writing an annual upgrade prompt.\n  Customer: {{customer_name}}\n  Current: {{tier}} monthly at ${{current_monthly_price}}/mo\n\
+  \  Annual equivalent: ${{annual_price}}/yr (save ${{annual_savings}})\n  Savings framing: {{months_free}} months free\n\n\
+  Write an email subject and body that:\n  1. Opens with their specific savings number (not percentage)\n  2. Uses \"months\
+  \ free\" framing, not \"% off\"\n  3. Creates urgency (limited time or price lock)\n  4. Single CTA\n\nSubject: max 8 words\n\
+  Body: max 80 words\nTone: Direct, concrete, honest. No fluff."
+generation_parameters: 'model: claude-sonnet-4-6
+
+  temperature: 0.3          # low variance for commercial messaging
+
+  max_tokens: 300           # upsell messages stay short
+
+  system_note: "Strategic Greed: maximize conversion per message, zero wasted words"'
+quality_gates_for_generated_messages: "PASS if:\n  - Word count within specified max\n  - Contains exactly 1 CTA\n  - No exclamation\
+  \ marks\n  - Price/savings figure is accurate\n  - Tone is direct (not pushy, not apologetic)\n\nFAIL if:\n  - Generic messaging\
+  \ (no customer name or specific data)\n  - Multiple CTAs\n  - Discount framed as percentage (must be $ or months)\n  - Claims\
+  \ about competitor products"
+related_artifacts:
+- '`expansion_play_n06.md` -- trigger conditions that fire these prompts'
+- '`subscription_tier_n06.md` -- tier features referenced in templates'
+- '`roi_calculator_n06.md` -- calculates the $ savings figures in Template 5'
