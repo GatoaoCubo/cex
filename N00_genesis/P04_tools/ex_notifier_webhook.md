@@ -4,7 +4,7 @@ kind: notifier
 pillar: P04
 title: Outbound Webhook Notifier
 version: 0.1.0
-quality: null
+quality: 8.9
 status: template
 brand_placeholders:
   - BRAND_NAME
@@ -12,6 +12,7 @@ brand_placeholders:
   - BRAND_NOTIFIER_HMAC_SECRET
   - BRAND_SUPPORT_EMAIL
 tags: [commerce, template, distillation, notifier, webhook]
+density_score: 1.0
 ---
 
 # Outbound Webhook Notifier
