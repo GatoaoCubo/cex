@@ -86,3 +86,5 @@ boot/n01-claude.cmd
 .aider*
 unsloth_compiled_cache/
 .venv_litellm/
+_reports/distillation/inventory_*.md
+_reports/compiled/inventory_*.yaml
