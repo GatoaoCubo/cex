@@ -4,7 +4,7 @@ kind: supabase_data_layer
 pillar: P09
 title: Supabase Data Layer
 version: 0.1.0
-quality: null
+quality: 9.0
 status: template
 brand_placeholders:
   - BRAND_NAME
@@ -13,6 +13,7 @@ brand_placeholders:
   - BRAND_SUPABASE_ANON_KEY
   - BRAND_SUPABASE_SERVICE_ROLE_KEY
 tags: [commerce, template, distillation, supabase, data_layer]
+density_score: 1.0
 ---
 
 # Supabase Data Layer

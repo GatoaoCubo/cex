@@ -4,13 +4,14 @@ kind: db_connector
 pillar: P09
 title: Supabase DB Connector
 version: 0.1.0
-quality: null
+quality: 8.9
 status: template
 brand_placeholders:
   - BRAND_SUPABASE_URL
   - BRAND_SUPABASE_SERVICE_ROLE_KEY
   - BRAND_SUPABASE_ANON_KEY
 tags: [commerce, template, distillation, supabase, db_connector]
+density_score: 1.0
 ---
 
 # Supabase DB Connector
