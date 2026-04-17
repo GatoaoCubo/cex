@@ -4,7 +4,7 @@ kind: oauth_app_config
 pillar: P04
 title: Mercado Livre OAuth App Config
 version: 0.1.0
-quality: null
+quality: 8.8
 status: template
 brand_placeholders:
   - BRAND_MELI_CLIENT_ID
@@ -12,6 +12,7 @@ brand_placeholders:
   - BRAND_DOMAIN
   - BRAND_MELI_AUTH_URL
 tags: [commerce, template, distillation, mercado_livre, oauth]
+density_score: 1.0
 ---
 
 # Mercado Livre OAuth App Config

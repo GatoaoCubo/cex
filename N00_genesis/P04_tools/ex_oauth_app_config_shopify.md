@@ -4,7 +4,7 @@ kind: oauth_app_config
 pillar: P04
 title: Shopify OAuth App Config
 version: 0.1.0
-quality: null
+quality: 9.0
 status: template
 brand_placeholders:
   - BRAND_SHOPIFY_APP_CLIENT_ID
@@ -12,6 +12,7 @@ brand_placeholders:
   - BRAND_SHOPIFY_STORE_DOMAIN
   - BRAND_DOMAIN
 tags: [commerce, template, distillation, shopify, oauth]
+density_score: 0.99
 ---
 
 # Shopify OAuth App Config
