@@ -1,0 +1,113 @@
+id: p01_kc_preference_dataset
+kind: knowledge_card
+type: kind
+pillar: P11
+title: Preference Dataset -- Deep Knowledge for preference_dataset
+version: 1.0.0
+created: 2026-04-17
+updated: 2026-04-17
+author: builder_agent
+domain: preference_dataset
+quality: null
+tags:
+- preference_dataset
+- P11
+- GOVERN
+- kind-kc
+- rlhf
+- dpo
+- alignment
+tldr: preference_dataset curates (prompt, chosen, rejected) triplets for LLM alignment training via RLHF, DPO, KTO, or Constitutional
+  AI.
+when_to_use: Building, reviewing, or reasoning about preference_dataset artifacts
+keywords:
+- preference_dataset
+- rlhf
+- dpo
+- kto
+- alignment
+- chosen_rejected
+- annotation
+- instructgpt
+feeds_kinds:
+- preference_dataset
+density_score: 0.92
+linked_artifacts:
+  primary: null
+  related: []
+spec: 'kind: preference_dataset
+
+  pillar: P11
+
+  llm_function: GOVERN
+
+  max_bytes: 4096
+
+  naming: p11_pd_{scope}.md
+
+  core: true'
+what_it_is: 'A preference_dataset is a curated collection of (prompt, chosen_response, rejected_response) triplets annotated
+  with human or model-assisted preference labels. These datasets are the training signal for LLM alignment techniques: RLHF,
+  DPO, KTO, Constitutional AI, and SPIN.'
+alignment_technique_map: '| Technique | Dataset Format | Key Paper |
+
+  |-----------|---------------|-----------|
+
+  | RLHF | (prompt, chosen, rejected) -> reward model | InstructGPT 2022 |
+
+  | DPO | (prompt, chosen, rejected) directly | Rafailov et al. 2023 |
+
+  | KTO | (prompt, response, label: desirable/undesirable) | Ethayarajh et al. 2023 |
+
+  | Constitutional AI | (prompt, principle-revised response, original) | Anthropic 2022 |
+
+  | SPIN | Self-play iteration on own outputs | Chen et al. 2024 |'
+key_parameters: '| Parameter | Type | Notes |
+
+  |-----------|------|-------|
+
+  | training_objective | enum | rlhf, dpo, kto, constitutional, custom |
+
+  | annotation_method | enum | human, model_assisted, constitutional, hybrid |
+
+  | agreement_rate | float [0,1] | Annotator consistency; publish >= 0.75 |
+
+  | pairs_count | int | Dataset size in (prompt, chosen, rejected) triplets |
+
+  | domains | list[string] | Subject domains covered |
+
+  | preference_criteria | list[string] | What annotators evaluated (helpfulness, safety, etc.) |'
+annotation_quality_gates: '| Gate | Threshold | Description |
+
+  |------|-----------|-------------|
+
+  | Publish | agreement_rate >= 0.75 | Minimum annotator consistency for training |
+
+  | Golden | agreement_rate >= 0.85 | High-quality alignment signal |
+
+  | Reject | agreement_rate < 0.60 | Re-annotate -- signal is noise |'
+patterns: '| Pattern | When to Use | Config |
+
+  |---------|-------------|--------|
+
+  | Human-annotated | High-stakes alignment | annotation_method: human, pairs: 1000+ |
+
+  | Model-assisted | Speed + scale | annotation_method: model_assisted, human_review: 10% |
+
+  | Constitutional | Principle-driven | annotation_method: constitutional, principles: [...] |
+
+  | Domain-specific | Narrow fine-tuning | domains: [medical], annotation: specialist |'
+anti_patterns: '| Anti-Pattern | Why It Fails | Fix |
+
+  |-------------|-------------|-----|
+
+  | No preference_criteria | Annotators choose inconsistently | Define explicit criteria before annotation |
+
+  | Low agreement_rate | Noisy signal degrades model | Clarify criteria, re-annotate, raise pay |
+
+  | Single-domain only | Model learns domain bias | Balanced multi-domain sampling |
+
+  | chosen == rejected | Zero learning signal | Validate pairs are meaningfully different |'
+integration_graph: "annotation_pipeline --> [preference_dataset] --> reward_model training (RLHF)\n                      \
+  \         |              --> DPO fine-tuning\n                        scoring_rubric          --> KTO training\n       \
+  \                 quality_gate (agreement_rate check)"

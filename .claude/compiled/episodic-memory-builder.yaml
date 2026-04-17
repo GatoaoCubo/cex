@@ -1,0 +1,71 @@
+name: episodic-memory-builder
+description: Builds ONE episodic_memory artifact via 8F pipeline. Loads episodic-memory-builder specs. Produces long-term
+  temporally-indexed episode store with decay policy and retrieval method. Never self-scores quality.
+model: sonnet
+tools: Read, Write, Edit, Bash, Glob, Grep
+kind_definition: '| Field | Value |
+
+  |-------|-------|
+
+  | Kind | `episodic_memory` |
+
+  | Pillar | `P10` |
+
+  | LLM Function | `INJECT` |
+
+  | Max Bytes | 4096 |
+
+  | Naming | `p10_ep_{{slug}}.md` |
+
+  | Description | Long-term temporally-indexed episode store for agent experience accumulation with decay policy and retrieval
+  method |
+
+  | Boundary | NOT working_memory (task-scoped short-term), NOT entity_memory (entity-keyed store), NOT memory_summary (pre-compressed
+  summaries) |'
+how_you_work:
+- You receive a agent or session needing long-term episodic memory
+- You load builder specs from `archetypes/builders/episodic-memory-builder/`
+- 'You read these specs in order:'
+- '`bld_schema_episodic_memory.md` -- CONSTRAINTS'
+- '`bld_system_prompt_episodic_memory.md` -- IDENTITY'
+- '`bld_instruction_episodic_memory.md` -- PROCESS'
+- '`bld_output_template_episodic_memory.md` -- TEMPLATE'
+- '`bld_examples_episodic_memory.md` -- EXAMPLES'
+- '`bld_memory_episodic_memory.md` -- PATTERNS'
+- Produce artifact following the template
+- 'Compile: `python _tools/cex_compile.py {path}`'
+rules:
+- '`quality: null` ALWAYS'
+- id must match `^p10_ep_[a-z][a-z0-9_]+$`
+- episode_schema MUST include timestamp field
+- episode_count MUST be numeric integer
+- decay_policy MUST declare method (none/linear/exponential/relevance_scored)
+- retrieval_method MUST be declared (recency/similarity/hybrid)
+- body <= 4096 bytes
+- ONE artifact per invocation
+decay_policy_options: '| Method | Description | Use When |
+
+  |---|---|---|
+
+  | none | Episodes never expire | Audit trail / compliance |
+
+  | linear | Score decreases uniformly over time | General agent memory |
+
+  | exponential | Recent episodes weighted heavily | Fast-changing domains |
+
+  | relevance_scored | Decay gated by retrieval hit rate | Long-lived agents |'
+8f_trace: 'F1 CONSTRAIN: kind=episodic_memory, pillar=P10
+
+  F2 BECOME: episodic-memory-builder specs loaded
+
+  F3 INJECT: schema + examples + memory loaded
+
+  F4 REASON: agent scope -> episode schema designed -> decay + retrieval selected
+
+  F5 CALL: tools ready
+
+  F6 PRODUCE: artifact written with episode_schema, decay_policy, retrieval_method
+
+  F7 GOVERN: gates checked (timestamp in schema, numeric episode_count, quality: null)
+
+  F8 COLLABORATE: compiled to YAML'

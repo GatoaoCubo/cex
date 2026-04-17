@@ -1,0 +1,148 @@
+id: p01_kc_drift_detector
+kind: knowledge_card
+type: kind
+pillar: P11
+title: Drift Detector -- Deep Knowledge for drift_detector
+version: 1.0.0
+created: 2026-04-17
+updated: 2026-04-17
+author: n07_orchestrator
+domain: drift_detector
+quality: null
+tags:
+- drift_detector
+- P11
+- GOVERN
+- kind-kc
+- MLOps
+- data_drift
+tldr: drift_detector configures statistical tests (PSI/KS/chi-square/JS/embedding) to detect data and concept drift in ML
+  pipelines -- NOT a monitor (alerting system), NOT a benchmark (performance comparison), NOT a quality_gate (output validation).
+when_to_use: Building, reviewing, or reasoning about drift_detector artifacts
+keywords:
+- PSI
+- KolmogorovSmirnov
+- chi_square
+- distribution_shift
+- MLOps
+- data_drift
+feeds_kinds:
+- drift_detector
+density_score: null
+aliases:
+- drift monitor
+- distribution shift detector
+- data drift config
+- covariate shift detector
+- concept drift detector
+user_says:
+- detect drift
+- monitor data distribution
+- configure drift detection
+- PSI monitor
+- distribution shift alert
+long_tails:
+- configure PSI threshold to alert when feature distribution drifts from training baseline
+- detect concept drift in LLM output quality over time using KS test
+- monitor embedding cosine distance to detect semantic drift in production inputs
+cross_provider:
+  evidently: DataDriftPreset with per-feature test selection
+  arize: Monitor config with PSI/KS thresholds per feature
+  whylogs: DatasetProfileView with drift metrics
+  alibi_detect: MMDDrift, KSDrift, ChiSquareDrift detectors
+  nannyml: UnivariateDriftCalculator with detection method
+  seldon: Alibi Detect integration for drift monitoring
+spec: 'kind: drift_detector
+
+  pillar: P11
+
+  llm_function: GOVERN
+
+  max_bytes: 3072
+
+  naming: p11_dd_{slug}.md
+
+  core: false'
+what_it_is: A drift_detector configures a statistical test to detect distribution shift between a reference (training) distribution
+  and a production window. It specifies the detection method, per-feature thresholds (warning/critical), window configuration,
+  and suppression policy. It is NOT a monitor (which handles operational alerting infrastructure), NOT a benchmark (which
+  compares model performance on fixed test sets), and NOT a quality_gate (which validates LLM output quality post-generation).
+detection_method_reference: '| Method | Full Name | Feature Type | PSI Warning | PSI Critical |
+
+  |--------|-----------|-------------|-------------|-------------|
+
+  | psi | Population Stability Index | Score/probability | 0.10 | 0.20 |
+
+  | ks | Kolmogorov-Smirnov | Continuous numerical | 0.05 | 0.10 |
+
+  | chi_square | Chi-Squared test | Categorical | 0.05 (p-value) | 0.01 (p-value) |
+
+  | js_divergence | Jensen-Shannon Divergence | Any distribution | 0.05 | 0.10 |
+
+  | embedding_distance | Cosine distance | Embeddings/vectors | 0.15 | 0.30 |'
+psi_interpretation_table: '| PSI Value | Interpretation | Action |
+
+  |-----------|---------------|--------|
+
+  | < 0.10 | No significant shift | Monitor normally |
+
+  | 0.10 - 0.20 | Moderate shift (WARNING) | Investigate features |
+
+  | > 0.20 | Major shift (CRITICAL) | Retrain or rollback |'
+cross_framework_map: '| Framework/Provider | Class/Concept | Notes |
+
+  |-------------------|---------------|-------|
+
+  | Evidently AI | `DataDriftPreset` | Column-level test suite with thresholds |
+
+  | Arize Phoenix | Monitor config | PSI/KS per feature with webhook alerts |
+
+  | WhyLogs | `DatasetProfile` | Statistical profiles for distribution comparison |
+
+  | Alibi Detect | `KSDrift`, `MMDDrift` | Statistical drift detectors (online + offline) |
+
+  | NannyML | `UnivariateDriftCalculator` | CBPE-based drift without labels |
+
+  | Seldon | Alibi Detect integration | Real-time drift in Kubernetes deployments |'
+key_parameters: '| Parameter | Type | Required | Notes |
+
+  |-----------|------|----------|-------|
+
+  | detection_method | enum | YES | psi, ks, chi_square, js_divergence, embedding_distance |
+
+  | reference_distribution | string | YES | Path or identifier of training baseline |
+
+  | feature_columns | list[string] | YES | Named list of monitored features |
+
+  | threshold.warning | float | YES | First alert level |
+
+  | threshold.critical | float | YES | Escalation level; must be > warning |
+
+  | window_config | object | REC | size (int) + type (rolling/tumbling) |
+
+  | suppression_window | string | REC | Cooldown after alert (e.g., "1h") |'
+anti_patterns: '| Anti-Pattern | Why It Fails | Fix |
+
+  |-------------|-------------|-----|
+
+  | Threshold as string | "moderate" is not testable -- monitoring tools need numeric | threshold.warning: 0.10, threshold.critical:
+  0.20 |
+
+  | No named feature_columns | Unlabeled monitoring = impossible to diagnose | Always list specific column names |
+
+  | No suppression_window | Alert storms when drift persists | Set suppression_window: "1h" minimum |
+
+  | Wrong method for feature type | KS on categorical = invalid p-values | Match method to feature type via selection guide
+  |'
+integration_graph: "training_data --> [drift_detector] --> alert --> retrain pipeline\n                        |\n       \
+  \        monitor, learning_record, quality_gate"
+decision_tree:
+- 'IF continuous numerical feature: detection_method=ks'
+- 'IF categorical feature: detection_method=chi_square'
+- 'IF score/probability output: detection_method=psi'
+- 'IF embedding/vector feature: detection_method=embedding_distance'
+- 'DEFAULT: psi, warning=0.10, critical=0.20, suppression_window=1h'
+quality_criteria:
+- 'GOOD: detection_method from enum, numeric thresholds, named feature_columns'
+- 'GREAT: window_config with size+type, suppression_window, reference_distribution path'
+- 'FAIL: threshold as string, empty feature_columns, no critical level defined'
