@@ -4,9 +4,10 @@ kind: knowledge_card
 pillar: P06
 title: "Aggregate Root Builder -- Architecture"
 version: 1.0.0
-quality: null
+quality: 6.0
 tags: [builder, aggregate_root, architecture]
 llm_function: CONSTRAIN
+density_score: 0.99
 ---
 # Architecture: aggregate_root
 ## Pattern Origin
