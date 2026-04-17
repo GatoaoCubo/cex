@@ -1,4 +1,5 @@
----quality: null
+---
+quality: 8.0
 pillar: P01
 kind: knowledge_card
 id: kc_test_consolidate_loop

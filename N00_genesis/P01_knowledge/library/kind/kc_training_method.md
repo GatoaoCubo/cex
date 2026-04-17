@@ -1,4 +1,5 @@
----quality: null
+---
+quality: 7.5
 pillar: P01
 kind: knowledge_card
 id: kc_training_method
