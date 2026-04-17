@@ -51,7 +51,6 @@ runtime: claude
 subscription: anthropic_max
 flags: []
 domain: brand-identity-monetization
-quality: null
 tags: [agent_card, commercial, N06, brand, identity, monetization, opus]
 tldr: "brand_architect: Opus 4.6 model, Anthropic Max subscription. Phase 1 = Brand Discovery (12-15 Qs -> brand book -> brand_config.yaml -> propagate). Phase 2 = Revenue (pricing, funnels, courses -- all brand-aligned)."
 density_score: 0.94
