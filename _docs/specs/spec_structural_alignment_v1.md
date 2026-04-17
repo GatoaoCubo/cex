@@ -243,7 +243,7 @@ pillar: P{xx}
 nucleus: n00
 title: "P{xx} {Name} -- Kind Index"
 version: 1.0
-quality: null
+quality: 8.6
 tags: [index, p{xx}, kinds, archetype]
 ---
 
