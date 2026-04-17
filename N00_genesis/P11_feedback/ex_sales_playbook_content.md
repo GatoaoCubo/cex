@@ -7,7 +7,7 @@ title: "Sales Playbook -- Content-Driven Product Integration"
 description: "Sales playbook for integrating products into content-first ecommerce. Covers product mention rules by content type, WhatsApp/email sales scripts, AI-assisted message generation, and B2B pitch flows."
 domain: sales
 nucleus: N06
-quality: null
+quality: 9.0
 tags: [sales-playbook, content-integration, whatsapp, email, b2b, d2c, ai-sales]
 brand_placeholders:
   - BRAND_NAME
@@ -18,6 +18,7 @@ brand_placeholders:
   - BRAND_PERSONA_NAME
   - BRAND_WHATSAPP_B2B
   - BRAND_PARTNER_EMAIL
+density_score: 1.0
 ---
 
 # Sales Playbook -- Content-Driven Product Integration

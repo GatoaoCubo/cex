@@ -7,7 +7,7 @@ title: "ROI Calculator -- Content Factory / AI Content Platform"
 description: "ROI calculator for content-as-a-service customers. Inputs: team size, hourly rate, content volume, current tool spend. Outputs: monthly savings, revenue potential, break-even point."
 domain: content_monetization
 nucleus: N06
-quality: null
+quality: 9.0
 tags: [roi-calculator, content-factory, cost-savings, break-even, hours-saved, saas]
 brand_placeholders:
   - BRAND_NAME
@@ -15,6 +15,7 @@ brand_placeholders:
   - BRAND_TEAM_SIZE
   - BRAND_HOURLY_RATE
   - BRAND_SUBSCRIPTION_PRICE_TIER_2
+density_score: 1.0
 ---
 
 # ROI Calculator -- Content Factory / AI Platform
