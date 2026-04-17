@@ -1,0 +1,4 @@
+name: domain-vocabulary-builder
+description: Builds ONE domain_vocabulary artifact via 8F pipeline. Loads domain-vocabulary-builder specs. Produces governed
+  canonical term registry for a bounded context enforcing Ubiquitous Language. Never self-scores quality.
+tools: Read, Write, Edit, Bash, Glob, Grep

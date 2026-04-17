@@ -1,0 +1,4 @@
+name: alert-rule-builder
+description: Builds ONE alert_rule artifact via 8F pipeline. Loads alert-rule-builder specs. Produces observable threshold
+  condition with PromQL-style expression, severity, routing, and automated response. Never self-scores quality.
+tools: Read, Write, Edit, Bash, Glob, Grep

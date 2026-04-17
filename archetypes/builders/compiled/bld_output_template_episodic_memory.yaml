@@ -1,0 +1,38 @@
+kind: output_template
+id: bld_output_template_episodic_memory
+pillar: P05
+llm_function: PRODUCE
+purpose: Template with {{vars}} that the LLM fills to produce an episodic_memory artifact
+quality: null
+title: Output Template Episodic Memory
+version: 1.0.0
+author: n03_builder
+tags:
+- episodic_memory
+- builder
+- output_template
+tldr: Fill {{vars}} to produce an episodic_memory artifact with episode schema, retrieval config, and decay.
+domain: episodic memory construction
+created: '2026-04-17'
+updated: '2026-04-17'
+density_score: 0.9
+overview: '`{{what_agent_this_serves_1_to_2_sentences}}` `{{why_episodic_memory_is_needed}}`'
+episode_schema: '| Field | Type | Purpose |
+
+  |-------|------|---------|
+
+  | timestamp | datetime | Temporal indexing for decay and retrieval |
+
+  | context | string | Situational context when episode occurred |
+
+  | task | string | Task being performed |
+
+  | outcome | string | Result or conclusion |
+
+  | retrieval_keys | list[string] | Topics/entities enabling future retrieval |
+
+  | confidence | float | Reliability of stored episode |'
+retrieval_config: 'Method: `{{retrieval_method}}` Index: `{{index_method}}` Retrieval keys: `{{key_list}}`'
+decay_policy: 'Method: `{{decay_method}}` Rate: `{{decay_rate}}` Pruning: `{{what_happens_to_pruned_episodes}}`'
+example_episodes: "- timestamp: \"{{YYYY-MM-DDTHH:MM:SSZ}}\"\n  context: \"{{what_was_happening}}\"\n  task: \"{{what_agent_was_doing}}\"\
+  \n  outcome: \"{{what_happened}}\"\n  retrieval_keys: [{{topic_1}}, {{topic_2}}]\n  confidence: {{float}}"

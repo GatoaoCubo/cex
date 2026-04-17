@@ -1,0 +1,59 @@
+kind: examples
+id: bld_examples_episodic_memory
+pillar: P07
+llm_function: GOVERN
+purpose: Golden and anti-examples of episodic_memory artifacts
+quality: null
+title: Examples Episodic Memory
+version: 1.0.0
+author: n03_builder
+tags:
+- episodic_memory
+- builder
+- examples
+tldr: Golden and anti-examples for episodic_memory construction.
+domain: episodic memory construction
+created: '2026-04-17'
+updated: '2026-04-17'
+density_score: 0.9
+golden_example: "INPUT: \"Create episodic memory store for N07 orchestration sessions\"\nOUTPUT:\nid: p10_ep_n07_orchestration\n\
+  kind: episodic_memory\npillar: P10\nversion: \"1.0.0\"\ncreated: \"2026-04-17\"\nupdated: \"2026-04-17\"\nauthor: \"builder_agent\"\
+  \nowner: \"n07\"\nepisode_schema:\n  timestamp: \"datetime\"\n  context: \"string\"\n  mission: \"string\"\n  nuclei_dispatched:\
+  \ \"list[string]\"\n  outcome: \"string\"\n  quality_scores: \"list[float]\"\n  retrieval_keys: \"list[string]\"\n  confidence:\
+  \ \"float\"\nretrieval_method: hybrid\nepisode_count: 200\ndecay_policy:\n  method: time\n  rate: \"90 days -- orchestration\
+  \ context stays relevant for 3 months\"\nretrieval_keys: [mission_name, nucleus, kind, outcome]\nindex_method: hybrid\n\
+  promotion_sources: [p10_wm_n07_mission_runner]\nquality: null\ntags: [episodic_memory, n07, orchestration, P10]\ntldr: \"\
+  N07 orchestration episodic store: 200 episodes, 90-day decay, hybrid retrieval by mission/nucleus/kind.\"\ndescription:\
+  \ \"Episodic store for N07 mission orchestration sessions -- enables recall of past dispatch patterns.\"\n\nWHY THIS IS\
+  \ GOLDEN:\n- quality: null (H05 pass)\n- id matches `^p10_ep_` (H02 pass)\n- episode_schema has timestamp + 7 fields (H06\
+  \ pass)\n- retrieval_method: hybrid (H07 pass)\n- episode_count: 200 (H08 pass)\n- decay_policy declared (H09 pass)\n- owner:\
+  \ n07 (H10 pass)"
+anti_example: 'BAD OUTPUT:
+
+  id: n07-history
+
+  kind: history
+
+  owner: n07
+
+  episodes: unlimited
+
+  decay: none
+
+  quality: 8.0
+
+  FAILURES:
+
+  1. id: "n07-history" has hyphen, no `p10_ep_` prefix -> H02 FAIL
+
+  2. kind: "history" not "episodic_memory" -> H04 FAIL
+
+  3. quality: 8.0 (not null) -> H05 FAIL
+
+  4. episode_schema missing entirely -> H06 FAIL
+
+  5. episodes: unlimited -- no count limit -> H08 FAIL
+
+  6. decay: none -- no policy -> H09 FAIL
+
+  7. Missing retrieval_method, tags, tldr, version, pillar -> H multiple FAIL'

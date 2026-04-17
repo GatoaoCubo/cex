@@ -1,0 +1,4 @@
+name: domain-event-builder
+description: Builds ONE domain_event artifact via 8F pipeline. Loads domain-event-builder specs. Produces immutable DDD domain
+  event record with aggregate root, typed payload, and causal chain. Never self-scores quality.
+tools: Read, Write, Edit, Bash, Glob, Grep
