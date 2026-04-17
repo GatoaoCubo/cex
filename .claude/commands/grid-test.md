@@ -11,10 +11,10 @@
 ### Step 1: VERIFY mission + runtimes
 ```bash
 # Mission must exist
-ls .cex/config/missions/{MISSION}/mission.yaml
+ls .cex/P09_config/missions/{MISSION}/mission.yaml
 
 # Runtimes you want must exist
-ls .cex/config/runtimes/
+ls .cex/P09_config/runtimes/
 
 # Handoffs must exist for the mission (6 files, one per nucleus)
 ls .cex/runtime/handoffs/ | grep {MISSION_UPPER}

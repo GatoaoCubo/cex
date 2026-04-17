@@ -1,7 +1,7 @@
 # CEX N01 LiteLLM -- routes via proxy on :4000
 # Mirrors boot/n01_ollama.ps1 but talks to the LiteLLM proxy instead of
 # Ollama directly. Model alias: cex-n01 -- proxy decides backend (Anthropic
-# -> Gemini -> Ollama gemma4:26b -> qwen3) per .cex/config/litellm_config.yaml.
+# -> Gemini -> Ollama gemma4:26b -> qwen3) per .cex/P09_config/litellm_config.yaml.
 
 . $PSScriptRoot/_shared/vt_enable.ps1  # Enable ANSI/VT for TUI (claude/gemini/codex/ollama)
 . $PSScriptRoot/_shared/emit_exit_signal.ps1

@@ -139,7 +139,7 @@ Sin lens drives every choice: be coherent with your nucleus's identity.
 
 ## Context (READ FIRST)
 
-1. `{nuc_dir}/architecture/nucleus_def_{nuc}.md` -- your identity + sin lens
+1. `{nuc_dir}/P08_architecture/nucleus_def_{nuc}.md` -- your identity + sin lens
 2. Prior waves in `{nuc_dir}/` -- {prior_waves}
 3. `archetypes/builders/{{kind}}-builder/` per kind (13 ISOs each)
 4. Pillar schemas: {', '.join(pillars)} under `P*/`

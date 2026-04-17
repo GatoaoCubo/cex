@@ -44,7 +44,7 @@ All three are active in every 8F run. This rule primarily covers **intent resolu
 holds the bilingual PT/EN pattern table for all 257 kinds + verb resolution + ambiguity rules. The
 tables below in this rule are an N07-curated **summary** -- when a kind is missing here, defer to the
 prompt_compiler artifact (it is the source of truth, version-controlled, peer-scored). The legacy
-`N03_engineering/knowledge/kc_intent_resolution_map.md` (123 kinds) is superseded.
+`N03_engineering/P01_knowledge/kc_intent_resolution_map.md` (123 kinds) is superseded.
 
 **Behavioral contract:** every user input flows through the prompt_compiler BEFORE 8F starts. Output
 is the tuple `{kind, pillar, nucleus, verb}`. If confidence <60%, present top-3 via GDP. This is what
@@ -233,7 +233,7 @@ When user uses a metaphor:
 3. If first time: add one-line teaching in parentheses
 4. If already taught: just use the term, no explanation
 
-Track taught terms in: `N07_admin/memory/user_directive_technical_authority.md`
+Track taught terms in: `N07_admin/P10_memory/user_directive_technical_authority.md`
 
 ## N07 Self-Check Before Every Action
 

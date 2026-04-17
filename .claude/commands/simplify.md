@@ -8,7 +8,7 @@ title: "Simplify"
 version: "1.0.0"
 author: n03_builder
 tags: [instruction, command, audit, boris_merge]
-tldr: "Review changed code, apply reuse/quality/efficiency fixes via simplify skill."
+tldr: "Review changed code, apply reuse/P07_evals/efficiency fixes via simplify skill."
 domain: "CEX system"
 created: "2026-04-15"
 updated: "2026-04-15"

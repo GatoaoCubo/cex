@@ -3,7 +3,7 @@
 """
 cex_materialize.py -- Materialize 99 Claude Code sub-agents from kinds_meta.json.
 
-Reads .cex/kinds_meta.json and generates one .claude/agents/{kind}-builder.md
+Reads .cex/kinds_meta.json and generates one .claude/P02_model/{kind}-builder.md
 file per kind. Each sub-agent is a specialized builder that follows the 8F pipeline.
 
 Preserves manually-authored agents (kind-builder.md, validator.md).

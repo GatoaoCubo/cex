@@ -17,8 +17,8 @@ You are N07_admin (Orchestrating Sloth). Fill P02 (agents) and P03 (prompts) pil
 
 ## Context (READ)
 
-1. `N07_admin/architecture/nucleus_def_n07.md`
-2. `N07_admin/schemas/`, `N07_admin/config/`, `N07_admin/knowledge/`, `N07_admin/memory/` -- prior waves
+1. `N07_admin/P08_architecture/nucleus_def_n07.md`
+2. `N07_admin/P06_schema/`, `N07_admin/P09_config/`, `N07_admin/P01_knowledge/`, `N07_admin/P10_memory/` -- prior waves
 3. `archetypes/builders/{kind}-builder/` per kind
 4. `P02_model/_schema.yaml`, `P03_prompt/_schema.yaml`
 5. `P01_knowledge/library/kind/kc_{kind}.md`
@@ -27,23 +27,23 @@ You are N07_admin (Orchestrating Sloth). Fill P02 (agents) and P03 (prompts) pil
 
 ### P02 (agents) -- 8 artifacts
 
-1. `N07_admin/agents/age_agent_package_n07.md` -- kind=`agent_package` -- Portable AI agent package (ISO format) -- self-contained, LLM-agnostic
-2. `N07_admin/agents/age_axiom_n07.md` -- kind=`axiom` -- Principio fundamental imutavel â€” parte da identidade profunda da entidade
-3. `N07_admin/agents/age_handoff_protocol_n07.md` -- kind=`handoff_protocol` -- Agent-to-agent transfer protocol
-4. `N07_admin/agents/age_mental_model_n07.md` -- kind=`mental_model` -- Agent mental model (routing, decisions)
-5. `N07_admin/agents/age_model_provider_n07.md` -- kind=`model_provider` -- LLM provider adapter (Claude, GPT, Gemini, Ollama, OpenRouter, LiteLLM)
-6. `N07_admin/agents/age_nucleus_def_n07.md` -- kind=`nucleus_def` -- Formal definition of a CEX nucleus (N00-N07). Fields: nucleus_id, role, pillars_owned, sin_lens, cli
-7. `N07_admin/agents/age_role_assignment_n07.md` -- kind=`role_assignment` -- CrewAI Agent-style binding: role -> agent + responsibilities + delegation + backstory
-8. `N07_admin/agents/age_router_n07.md` -- kind=`router` -- Routing rule (task > agent_group)
+1. `N07_admin/P02_model/age_agent_package_n07.md` -- kind=`agent_package` -- Portable AI agent package (ISO format) -- self-contained, LLM-agnostic
+2. `N07_admin/P02_model/age_axiom_n07.md` -- kind=`axiom` -- Principio fundamental imutavel â€” parte da identidade profunda da entidade
+3. `N07_admin/P02_model/age_handoff_protocol_n07.md` -- kind=`handoff_protocol` -- Agent-to-agent transfer protocol
+4. `N07_admin/P02_model/age_mental_model_n07.md` -- kind=`mental_model` -- Agent mental model (routing, decisions)
+5. `N07_admin/P02_model/age_model_provider_n07.md` -- kind=`model_provider` -- LLM provider adapter (Claude, GPT, Gemini, Ollama, OpenRouter, LiteLLM)
+6. `N07_admin/P02_model/age_nucleus_def_n07.md` -- kind=`nucleus_def` -- Formal definition of a CEX nucleus (N00-N07). Fields: nucleus_id, role, pillars_owned, sin_lens, cli
+7. `N07_admin/P02_model/age_role_assignment_n07.md` -- kind=`role_assignment` -- CrewAI Agent-style binding: role -> agent + responsibilities + delegation + backstory
+8. `N07_admin/P02_model/age_router_n07.md` -- kind=`router` -- Routing rule (task > agent_group)
 
 ### P03 (prompts) -- 6 artifacts
 
-9. `N07_admin/prompts/pro_action_prompt_n07.md` -- kind=`action_prompt` -- Task prompt sent by human/orchestrator to the agent
-10. `N07_admin/prompts/pro_constraint_spec_n07.md` -- kind=`constraint_spec` -- Constrained generation rules
-11. `N07_admin/prompts/pro_context_window_config_n07.md` -- kind=`context_window_config` -- Token budget allocation, priority tiers, and overflow rules for prompt assembly
-12. `N07_admin/prompts/pro_prompt_compiler_n07.md` -- kind=`prompt_compiler` -- Intent-to-artifact transmutation rules. Compiles vague user input into structured {kind, pillar, nuc
-13. `N07_admin/prompts/pro_prompt_template_n07.md` -- kind=`prompt_template` -- Reusable template with {{vars}} to generate prompts
-14. `N07_admin/prompts/pro_reasoning_trace_n07.md` -- kind=`reasoning_trace` -- Structured chain-of-thought reasoning with confidence scores
+9. `N07_admin/P03_prompt/pro_action_prompt_n07.md` -- kind=`action_prompt` -- Task prompt sent by human/orchestrator to the agent
+10. `N07_admin/P03_prompt/pro_constraint_spec_n07.md` -- kind=`constraint_spec` -- Constrained generation rules
+11. `N07_admin/P03_prompt/pro_context_window_config_n07.md` -- kind=`context_window_config` -- Token budget allocation, priority tiers, and overflow rules for prompt assembly
+12. `N07_admin/P03_prompt/pro_prompt_compiler_n07.md` -- kind=`prompt_compiler` -- Intent-to-artifact transmutation rules. Compiles vague user input into structured {kind, pillar, nuc
+13. `N07_admin/P03_prompt/pro_prompt_template_n07.md` -- kind=`prompt_template` -- Reusable template with {{vars}} to generate prompts
+14. `N07_admin/P03_prompt/pro_reasoning_trace_n07.md` -- kind=`reasoning_trace` -- Structured chain-of-thought reasoning with confidence scores
 
 ## Format
 

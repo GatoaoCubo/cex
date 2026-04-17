@@ -12,10 +12,10 @@ Hooks:
   install           -- Install git pre-commit hook
 
 Usage:
-  python _tools/cex_hooks.py pre-save N07_admin/agents/agent_admin.md
-  python _tools/cex_hooks.py post-save N01_intelligence/agents/agent_intelligence.md
+  python _tools/cex_hooks.py pre-save N07_admin/P02_model/agent_admin.md
+  python _tools/cex_hooks.py post-save N01_intelligence/P02_model/agent_intelligence.md
   python _tools/cex_hooks.py pre-commit
-  python _tools/cex_hooks.py validate N07_admin/agents/agent_admin.md
+  python _tools/cex_hooks.py validate N07_admin/P02_model/agent_admin.md
   python _tools/cex_hooks.py validate-all
   python _tools/cex_hooks.py install
 """

@@ -5,7 +5,7 @@ cex_source_harvester.py -- Repo-Wide Source Reference Extractor
 Scans CEX repo files for external source references (URLs, arXiv IDs, RFC
 numbers, GitHub slugs, W3C TRs, IETF drafts, ISO/IEEE/NIST standards,
 HuggingFace models, DOI references) and merges them into:
-  .cex/config/taxonomy_sources.yaml
+  .cex/P09_config/taxonomy_sources.yaml
 
 Deduplicates via URL canonicalization + fuzzy Levenshtein match.
 Tags each entry with the file it was harvested from.

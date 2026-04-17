@@ -10,7 +10,7 @@ For every (nucleus, pillar) pair, this tool:
 No dispatch. Read-only audit. Output:
   - stdout: coverage matrix (rows=nuclei, cols=pillars, cells=present/total)
   - --detail: per-nucleus gap list sorted by (core-first, pillar-order)
-  - --json:   machine-readable gap report to .cex/quality/fractal_fill_*.json
+  - --json:   machine-readable gap report to .cex/P07_evals/fractal_fill_*.json
 
 Usage:
   python _tools/cex_fractal_fill.py                 # summary matrix

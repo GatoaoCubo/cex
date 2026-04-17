@@ -21,7 +21,7 @@ Three properties:
 
 Each operational nucleus runs on one of the seven deadly sins. The sin is cultural DNA — it
 decides what the nucleus optimizes for when given ambiguous input. Values are verbatim from
-`N0X_*/architecture/nucleus_def_n0X.md`.
+`N0X_*/P08_architecture/nucleus_def_n0X.md`.
 
 | Nucleus | Role | Sin Lens | Model Tier |
 |---------|------|----------|------------|
@@ -67,7 +67,7 @@ Check `CEX_NUCLEUS`. N07 = Orchestrator. N03 = Builder. Not set = read and decid
 | **Nucleus rules** | `N0{1-6}_*/rules/n0{1-6}-*.md` (1 per nucleus, lazy-loaded by the nucleus on boot — N07 does not pre-load these) |
 | **Commands** | `.claude/commands/` → /build, /validate, /dispatch, /status, /doctor, /mission |
 | **Builders (source of truth)** | `archetypes/builders/{kind}-builder/` (13 ISOs each) |
-| **Sub-agents** | `.claude/agents/{kind}-builder.md` (125 files) |
+| **Sub-agents** | `.claude/P02_model/{kind}-builder.md` (125 files) |
 | **N00 Genesis (archetype)** | `N00_genesis/` + `P{01-12}_*/` + `archetypes/` |
 | **Pillar schemas** | `P{01-12}_*/_schema.yaml` (all descriptions in EN) |
 | **Kind KCs** | `P01_knowledge/library/kind/kc_{kind}.md` (131 files) |
@@ -76,11 +76,11 @@ Check `CEX_NUCLEUS`. N07 = Orchestrator. N03 = Builder. Not set = read and decid
 | **Lazy skills (auto-fire)** | `.claude/skills/{cross_wave_cleanup,shared_file_proposal,new_nucleus_bootstrap,auto_accept_handoff}.md` -- mirrored to `.cex/skills/` for codex/gemini/ollama |
 | **Crew CLI** | `_tools/cex_crew.py` (list/show/run) |
 | **Example crew** | `N02_marketing/crews/p12_ct_product_launch.md` (4-role sequential) |
-| **Nucleus defs** | `N0[0-7]_*/architecture/nucleus_def_n0[0-7].md` (8 machine-readable identities) |
+| **Nucleus defs** | `N0[0-7]_*/P08_architecture/nucleus_def_n0[0-7].md` (8 machine-readable identities) |
 | **Terminology** | `_docs/specs/spec_metaphor_dictionary.md` + Rosetta Stone KC |
 | **N07 tech authority** | `.claude/rules/n07-technical-authority.md` |
 | **Infinite loop spec** | `_docs/specs/spec_infinite_bootstrap_loop.md` |
-| **Subagent definitions** | `.claude/agents/` (259 builder sub-agents) |
+| **Subagent definitions** | `.claude/P02_model/` (259 builder sub-agents) |
 | **Nucleus fractals** | `N{01-07}_*/` (13 subdirs each, mirrors N00's 12 pillars) |
 | **SDK runtime** | `cex_sdk/` (78 .py, 4504 lines) |
 | **Boot scripts** | `boot/cex.ps1` (N07) · `boot/n0{1-6}.ps1` (PowerShell-only) |
@@ -224,7 +224,7 @@ bash _spawn/dispatch.sh stop --dry-run    # preview what would die
 
 ## Nucleus Routing
 
-> Budget-optimized: 2 Opus + 5 Sonnet + preflight (2026-04-13). Config: `.cex/config/nucleus_models.yaml`
+> Budget-optimized: 2 Opus + 5 Sonnet + preflight (2026-04-13). Config: `.cex/P09_config/nucleus_models.yaml`
 
 | Domain | Nucleus | CLI | Model | Context | Tier |
 |--------|---------|-----|-------|---------| -----|

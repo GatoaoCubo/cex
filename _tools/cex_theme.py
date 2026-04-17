@@ -13,7 +13,7 @@ Usage:
   python _tools/cex_theme.py --banner n03              # print sin banner for N03
   python _tools/cex_theme.py --all-banners             # print all 7 banners
 
-Reads: .cex/config/nucleus_sins.yaml
+Reads: .cex/P09_config/nucleus_sins.yaml
 """
 import argparse
 import sys

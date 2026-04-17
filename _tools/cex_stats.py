@@ -42,7 +42,7 @@ def count_kcs() -> int:
 
 
 def count_subagents() -> int:
-    """.md files under .claude/agents/."""
+    """.md files under .claude/P02_model/."""
     agents = ROOT / ".claude" / "agents"
     if not agents.exists():
         return 0

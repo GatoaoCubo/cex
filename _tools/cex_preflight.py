@@ -10,7 +10,7 @@ Architecture:
   Phase 1 (LOCAL, $0): TF-IDF ranking + file scanning via Ollama
   Phase 2 (CLOUD, cheap): Haiku semantic rerank (only if local uncertain)
 
-Config: .cex/config/nucleus_models.yaml -> preflight: section
+Config: .cex/P09_config/nucleus_models.yaml -> preflight: section
 Output: .cex/cache/preflight/{nucleus}_{task_hash}.json
 
 Usage:

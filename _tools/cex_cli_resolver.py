@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """CEX CLI Resolver -- YAML-driven CLI selection with fallback chain.
 
-Reads .cex/config/nucleus_models.yaml and resolves which CLI/model/flags
+Reads .cex/P09_config/nucleus_models.yaml and resolves which CLI/model/flags
 to use for a given nucleus. Supports:
   - Primary CLI (first working from fallback_chain)
   - --prefer override (operator picks a CLI explicitly)

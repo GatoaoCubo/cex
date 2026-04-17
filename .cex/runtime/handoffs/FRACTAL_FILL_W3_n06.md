@@ -17,8 +17,8 @@ You are N06_commercial (Strategic Greed). Fill P02 (agents) and P03 (prompts) pi
 
 ## Context (READ)
 
-1. `N06_commercial/architecture/nucleus_def_n06.md`
-2. `N06_commercial/schemas/`, `N06_commercial/config/`, `N06_commercial/knowledge/`, `N06_commercial/memory/` -- prior waves
+1. `N06_commercial/P08_architecture/nucleus_def_n06.md`
+2. `N06_commercial/P06_schema/`, `N06_commercial/P09_config/`, `N06_commercial/P01_knowledge/`, `N06_commercial/P10_memory/` -- prior waves
 3. `archetypes/builders/{kind}-builder/` per kind
 4. `P02_model/_schema.yaml`, `P03_prompt/_schema.yaml`
 5. `P01_knowledge/library/kind/kc_{kind}.md`
@@ -27,22 +27,22 @@ You are N06_commercial (Strategic Greed). Fill P02 (agents) and P03 (prompts) pi
 
 ### P02 (agents) -- 6 artifacts
 
-1. `N06_commercial/agents/age_agent_package_n06.md` -- kind=`agent_package` -- Portable AI agent package (ISO format) -- self-contained, LLM-agnostic
-2. `N06_commercial/agents/age_customer_segment_n06.md` -- kind=`customer_segment` -- Customer segment/ICP definition artifact with firmographics and needs
-3. `N06_commercial/agents/age_handoff_protocol_n06.md` -- kind=`handoff_protocol` -- Agent-to-agent transfer protocol
-4. `N06_commercial/agents/age_model_provider_n06.md` -- kind=`model_provider` -- LLM provider adapter (Claude, GPT, Gemini, Ollama, OpenRouter, LiteLLM)
-5. `N06_commercial/agents/age_nucleus_def_n06.md` -- kind=`nucleus_def` -- Formal definition of a CEX nucleus (N00-N07). Fields: nucleus_id, role, pillars_owned, sin_lens, cli
-6. `N06_commercial/agents/age_router_n06.md` -- kind=`router` -- Routing rule (task > agent_group)
+1. `N06_commercial/P02_model/age_agent_package_n06.md` -- kind=`agent_package` -- Portable AI agent package (ISO format) -- self-contained, LLM-agnostic
+2. `N06_commercial/P02_model/age_customer_segment_n06.md` -- kind=`customer_segment` -- Customer segment/ICP definition artifact with firmographics and needs
+3. `N06_commercial/P02_model/age_handoff_protocol_n06.md` -- kind=`handoff_protocol` -- Agent-to-agent transfer protocol
+4. `N06_commercial/P02_model/age_model_provider_n06.md` -- kind=`model_provider` -- LLM provider adapter (Claude, GPT, Gemini, Ollama, OpenRouter, LiteLLM)
+5. `N06_commercial/P02_model/age_nucleus_def_n06.md` -- kind=`nucleus_def` -- Formal definition of a CEX nucleus (N00-N07). Fields: nucleus_id, role, pillars_owned, sin_lens, cli
+6. `N06_commercial/P02_model/age_router_n06.md` -- kind=`router` -- Routing rule (task > agent_group)
 
 ### P03 (prompts) -- 7 artifacts
 
-7. `N06_commercial/prompts/pro_action_prompt_n06.md` -- kind=`action_prompt` -- Task prompt sent by human/orchestrator to the agent
-8. `N06_commercial/prompts/pro_constraint_spec_n06.md` -- kind=`constraint_spec` -- Constrained generation rules
-9. `N06_commercial/prompts/pro_context_window_config_n06.md` -- kind=`context_window_config` -- Token budget allocation, priority tiers, and overflow rules for prompt assembly
-10. `N06_commercial/prompts/pro_expansion_play_n06.md` -- kind=`expansion_play` -- Account expansion play: upsell triggers, cross-sell map, NRR mechanics, AE talk track
-11. `N06_commercial/prompts/pro_prompt_compiler_n06.md` -- kind=`prompt_compiler` -- Intent-to-artifact transmutation rules. Compiles vague user input into structured {kind, pillar, nuc
-12. `N06_commercial/prompts/pro_reasoning_trace_n06.md` -- kind=`reasoning_trace` -- Structured chain-of-thought reasoning with confidence scores
-13. `N06_commercial/prompts/pro_sales_playbook_n06.md` -- kind=`sales_playbook` -- Sales playbook with personas, discovery flow, objection handling, close patterns
+7. `N06_commercial/P03_prompt/pro_action_prompt_n06.md` -- kind=`action_prompt` -- Task prompt sent by human/orchestrator to the agent
+8. `N06_commercial/P03_prompt/pro_constraint_spec_n06.md` -- kind=`constraint_spec` -- Constrained generation rules
+9. `N06_commercial/P03_prompt/pro_context_window_config_n06.md` -- kind=`context_window_config` -- Token budget allocation, priority tiers, and overflow rules for prompt assembly
+10. `N06_commercial/P03_prompt/pro_expansion_play_n06.md` -- kind=`expansion_play` -- Account expansion play: upsell triggers, cross-sell map, NRR mechanics, AE talk track
+11. `N06_commercial/P03_prompt/pro_prompt_compiler_n06.md` -- kind=`prompt_compiler` -- Intent-to-artifact transmutation rules. Compiles vague user input into structured {kind, pillar, nuc
+12. `N06_commercial/P03_prompt/pro_reasoning_trace_n06.md` -- kind=`reasoning_trace` -- Structured chain-of-thought reasoning with confidence scores
+13. `N06_commercial/P03_prompt/pro_sales_playbook_n06.md` -- kind=`sales_playbook` -- Sales playbook with personas, discovery flow, objection handling, close patterns
 
 ## Format
 

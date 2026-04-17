@@ -14,7 +14,7 @@ Usage:
   python _tools/cex_taxonomy_scout.py --deprecate kind_name --successor new_kind
   python _tools/cex_taxonomy_scout.py --recheck-all --since 180
 
-Config: .cex/config/taxonomy_sources.yaml
+Config: .cex/P09_config/taxonomy_sources.yaml
 Output: .cex/runtime/taxonomy_candidates/YYYY-MM-DD_{source}_{slug}.md
 Log:    .cex/runtime/taxonomy_candidates/scout_log.tsv
 

@@ -2,8 +2,8 @@
 """cex_mission_dispatch.py: unified /mission entry. Runtime-agnostic dispatcher.
 
 Reads:
-  .cex/config/missions/{mission}/mission.yaml  (what to do)
-  .cex/config/runtimes/{runtime}.yaml          (who does it)
+  .cex/P09_config/missions/{mission}/mission.yaml  (what to do)
+  .cex/P09_config/runtimes/{runtime}.yaml          (who does it)
 
 Dispatches the right grid/solo spawn per runtime, same handoffs across all.
 
@@ -126,8 +126,8 @@ DISPATCHERS = {
 
 def main() -> int:
     p = argparse.ArgumentParser()
-    p.add_argument("--mission", help="mission name (dir under .cex/config/missions/)")
-    p.add_argument("--runtime", help="runtime name (yaml stem under .cex/config/runtimes/)")
+    p.add_argument("--mission", help="mission name (dir under .cex/P09_config/missions/)")
+    p.add_argument("--runtime", help="runtime name (yaml stem under .cex/P09_config/runtimes/)")
     p.add_argument("--output-tag", default="",
                    help="suffix for _reports/{mission}_{tag}/ (default: runtime name)")
     p.add_argument("--list-runtimes", action="store_true")

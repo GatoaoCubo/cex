@@ -109,7 +109,7 @@ def e9_error_recovery(model: str) -> dict[str, Any]:
     if not r.get("ok"):
         return {"score": 0, "verdict": "FAIL_CALL"}
     content = r["content"].lower()
-    # Good recovery: tries different path (e.g. /etc, /config/, src/)
+    # Good recovery: tries different path (e.g. /etc, /P09_config/, src/)
     adapted = bool(re.search(r'read_file\(["\'][^"\']+\.ya?ml["\']\)', r["content"], re.IGNORECASE))
     tried_different_path = adapted and "./config.yaml" not in r["content"]
     return {"score": 1.0 if tried_different_path else 0.5 if adapted else 0,

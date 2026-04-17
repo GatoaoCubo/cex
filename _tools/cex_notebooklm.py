@@ -14,7 +14,7 @@ Subcommands:
   --reauth              Re-authenticate Google session
 
 Spec: _docs/specs/spec_notebooklm_pipeline.md
-Config: .cex/config/notebooklm_notebooks.yaml
+Config: .cex/P09_config/notebooklm_notebooks.yaml
 
 Usage:
   python _tools/cex_notebooklm.py --upload P01_knowledge/library/kind/kc_agent.md
@@ -963,7 +963,7 @@ def main() -> None:
             "  %(prog)s --reauth\n"
             "  %(prog)s --auth-check\n"
             "\n"
-            "Config: .cex/config/notebooklm_notebooks.yaml\n"
+            "Config: .cex/P09_config/notebooklm_notebooks.yaml\n"
             "Spec: _docs/specs/spec_notebooklm_pipeline.md\n"
         ),
     )

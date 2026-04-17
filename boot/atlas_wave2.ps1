@@ -110,7 +110,7 @@ created: $(Get-Date -Format "yyyy-MM-dd HH:mm:ss")
 You are N01 Research Nucleus. ENRICH an existing research atom with deeper implementation-level detail.
 
 ## Existing Atom
-Read: N01_intelligence/knowledge/atlas/$file
+Read: N01_intelligence/P01_knowledge/atlas/$file
 
 ## Deep-Dive Instructions
 $task
@@ -120,7 +120,7 @@ $task
 2. Add new sections or expand existing ones with implementation detail
 3. Every claim must have a source URL
 4. quality: null in frontmatter (never self-score)
-5. After writing, compile: python _tools/cex_compile.py N01_intelligence/knowledge/atlas/$file
+5. After writing, compile: python _tools/cex_compile.py N01_intelligence/P01_knowledge/atlas/$file
 6. git add and commit with message: [N01-ATLAS] hydrate atom_$id $topic
 
 ## Context
@@ -128,7 +128,7 @@ This is part of a 32-agent parallel hydration wave. You are one of 32 N01 instan
 each enriching one atom. Work autonomously. Do not wait for other agents.
 
 ## ON COMPLETION
-1. Commit your work: git add N01_intelligence/knowledge/atlas/$file N01_intelligence/compiled/ && git commit -m "[N01-ATLAS] hydrate atom_$id $topic"
+1. Commit your work: git add N01_intelligence/P01_knowledge/atlas/$file N01_intelligence/compiled/ && git commit -m "[N01-ATLAS] hydrate atom_$id $topic"
 2. Signal complete:
 
 ## SIGNAL

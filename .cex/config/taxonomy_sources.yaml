@@ -31,7 +31,7 @@ github:
     extract_patterns:
       - "interface\\s+[A-Z][a-zA-Z]+"
       - "\"\\$defs\":\\s*\\{"
-      - "components/schemas/[A-Z][a-zA-Z]+"
+      - "components/P06_schema/[A-Z][a-zA-Z]+"
     cadence: weekly
     priority: critical
     tags: [mcp, tool-use, context-protocol]
@@ -104,7 +104,7 @@ github:
   - name: openai-agents
     type: github
     url: https://github.com/openai/openai-agents-python
-    watch_paths: [docs/, src/agents/]
+    watch_paths: [docs/, src/P02_model/]
     extract_patterns:
       - "class\\s+[A-Z][a-zA-Z]+(Agent|Tool|Runner|Hook)"
       - "@dataclass"
@@ -547,7 +547,7 @@ harvested:
 
   - name: modelcontextprotocol-io-docs-tools-inspector
     type: website
-    url: "https://modelcontextprotocol.io/docs/tools/inspector"
+    url: "https://modelcontextprotocol.io/docs/P04_tools/inspector"
     watch_paths: []
     extract_patterns: []
     cadence: monthly
@@ -1196,7 +1196,7 @@ harvested:
 
   - name: docs-ag2-ai-latest-docs-user-guide-advanced-concep
     type: website
-    url: "https://docs.ag2.ai/latest/docs/user-guide/advanced-concepts/orchestration/group-chat/patterns"
+    url: "https://docs.ag2.ai/latest/docs/user-guide/advanced-concepts/P12_orchestration/group-chat/patterns"
     watch_paths: []
     extract_patterns: []
     cadence: monthly
@@ -1207,7 +1207,7 @@ harvested:
 
   - name: docs-ag2-ai-latest-docs-user-guide-advanced-concep
     type: website
-    url: "https://docs.ag2.ai/latest/docs/user-guide/advanced-concepts/orchestration/swarm/deprecation"
+    url: "https://docs.ag2.ai/latest/docs/user-guide/advanced-concepts/P12_orchestration/swarm/deprecation"
     watch_paths: []
     extract_patterns: []
     cadence: monthly
@@ -1240,7 +1240,7 @@ harvested:
 
   - name: learn-microsoft-com-en-us-agent-framework-agents-d
     type: website
-    url: "https://learn.microsoft.com/en-us/agent-framework/agents/declarative"
+    url: "https://learn.microsoft.com/en-us/agent-framework/P02_model/declarative"
     watch_paths: []
     extract_patterns: []
     cadence: monthly
@@ -1526,7 +1526,7 @@ harvested:
 
   - name: docs-dify-ai-en-use-dify-knowledge-knowledge-pipel
     type: website
-    url: "https://docs.dify.ai/en/use-dify/knowledge/knowledge-pipeline/knowledge-pipeline-orchestration"
+    url: "https://docs.dify.ai/en/use-dify/P01_knowledge/knowledge-pipeline/knowledge-pipeline-orchestration"
     watch_paths: []
     extract_patterns: []
     cadence: monthly
@@ -1537,7 +1537,7 @@ harvested:
 
   - name: docs-dify-ai-en-use-dify-knowledge-create-knowledg
     type: website
-    url: "https://docs.dify.ai/en/use-dify/knowledge/create-knowledge/setting-indexing-methods"
+    url: "https://docs.dify.ai/en/use-dify/P01_knowledge/create-knowledge/setting-indexing-methods"
     watch_paths: []
     extract_patterns: []
     cadence: monthly
@@ -1669,7 +1669,7 @@ harvested:
 
   - name: docs-dify-ai-en-use-dify-knowledge-knowledge-pipel
     type: website
-    url: "https://docs.dify.ai/en/use-dify/knowledge/knowledge-pipeline/create-knowledge-pipeline"
+    url: "https://docs.dify.ai/en/use-dify/P01_knowledge/knowledge-pipeline/create-knowledge-pipeline"
     watch_paths: []
     extract_patterns: []
     cadence: monthly
@@ -2604,7 +2604,7 @@ harvested:
 
   - name: telecomlead-com-telecom-services-sk-telecom-showca
     type: website
-    url: "https://telecomlead.com/telecom-services/sk-telecom-showcases-full-stack-ai-strategy-at-mwc-2026-with-a-x-k1-model-and-ai-infrastructure-innovations-124676"
+    url: "https://telecomlead.com/telecom-services/sk-telecom-showcases-full-stack-ai-strategy-at-mwc-2026-with-a-x-k1-model-and-ai-infrastructure-innovations-124676" # allowlist-secret
     watch_paths: []
     extract_patterns: []
     cadence: monthly
@@ -2615,7 +2615,7 @@ harvested:
 
   - name: prnewswire-com-news-releases-sk-telecom-unveils-ax
     type: website
-    url: "https://www.prnewswire.com/news-releases/sk-telecom-unveils-ax-k1-koreas-first-500b-scale-hyperscale-ai-model-302649835.html"
+    url: "https://www.prnewswire.com/news-releases/sk-telecom-unveils-ax-k1-koreas-first-500b-scale-hyperscale-ai-model-302649835.html" # allowlist-secret
     watch_paths: []
     extract_patterns: []
     cadence: monthly
@@ -4111,7 +4111,7 @@ harvested:
 
   - name: artificialanalysis-ai-agents-coding
     type: website
-    url: "https://artificialanalysis.ai/agents/coding"
+    url: "https://artificialanalysis.ai/P02_model/coding"
     watch_paths: []
     extract_patterns: []
     cadence: monthly
@@ -4243,7 +4243,7 @@ harvested:
 
   - name: docs-livekit-io-agents-logic-turns-vad
     type: website
-    url: "https://docs.livekit.io/agents/logic/turns/vad"
+    url: "https://docs.livekit.io/P02_model/logic/turns/vad"
     watch_paths: []
     extract_patterns: []
     cadence: monthly
@@ -4254,7 +4254,7 @@ harvested:
 
   - name: docs-livekit-io-agents-build-turns-turn-detector
     type: website
-    url: "https://docs.livekit.io/agents/build/turns/turn-detector"
+    url: "https://docs.livekit.io/P02_model/build/turns/turn-detector"
     watch_paths: []
     extract_patterns: []
     cadence: monthly

@@ -82,8 +82,8 @@ For EVERY artifact, specify:
 
 | Action | Path | Kind | Est. Size | Notes |
 |--------|------|------|-----------|-------|
-| CREATE | N06_commercial/prompts/brand_interview.md | prompt_template | 4KB | 15 questions |
-| REWRITE | N06_commercial/agents/agent_commercial.md | agent | 3KB | Add brand caps |
+| CREATE | N06_commercial/P03_prompt/brand_interview.md | prompt_template | 4KB | 15 questions |
+| REWRITE | N06_commercial/P02_model/agent_commercial.md | agent | 3KB | Add brand caps |
 ```
 
 Actions: CREATE (new file), REWRITE (existing file changes), MIGRATE (move+adapt)

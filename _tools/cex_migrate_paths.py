@@ -55,8 +55,8 @@ REF_UPDATE_GLOBS = [
     "CLAUDE.md",
     ".claude/rules/*.md",
     ".claude/commands/*.md",
-    ".cex/config/*.yaml",
-    ".cex/config/*.yml",
+    ".cex/P09_config/*.yaml",
+    ".cex/P09_config/*.yml",
 ]
 
 HANDOFF_GLOB = ".cex/runtime/handoffs/*.md"

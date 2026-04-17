@@ -173,7 +173,7 @@ def test_subagents() -> None:
         agents = list(agents_dir.glob("*.md"))
         test("subagents:count", len(agents) >= 99, f"{len(agents)} sub-agents")
     else:
-        test("subagents:dir", False, ".claude/agents/ not found")
+        test("subagents:dir", False, ".claude/P02_model/ not found")
 
     # Check materialize tool
     mat = CEX_ROOT / "_tools" / "cex_materialize.py"

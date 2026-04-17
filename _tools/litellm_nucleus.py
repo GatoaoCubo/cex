@@ -8,7 +8,7 @@ talks to the LiteLLM proxy on http://localhost:4000 using the OpenAI-compatible
 /v1/chat/completions endpoint and the cex-n0X virtual model alias.
 
 This means:
-- Routing decisions live in .cex/config/litellm_config.yaml (single source).
+- Routing decisions live in .cex/P09_config/litellm_config.yaml (single source).
 - Fallback chains (Anthropic -> Gemini -> Ollama gemma4:26b -> qwen3:14b) are
   enforced by the proxy, not duplicated in spawn scripts.
 - Every call can be logged for QLoRA fine-tuning later (LiteLLM callbacks).

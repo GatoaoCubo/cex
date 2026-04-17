@@ -69,7 +69,7 @@ For heterogenous batches, /batch writes handoffs to
 ## Concurrency Guardrails
 
 1. `--workers` clamps to `[1, 6]` (Claude Code) or `[1, 20]` (Ollama local)
-2. Rate-limit-aware: reads `.cex/config/rate_limits.yaml` before spawn
+2. Rate-limit-aware: reads `.cex/P09_config/rate_limits.yaml` before spawn
 3. Auto-degrades: Sonnet -> Haiku if pool near cap (N01-N04 eligible)
 4. Worktree count never exceeds `git worktree list` max (default 100)
 

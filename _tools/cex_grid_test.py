@@ -355,7 +355,7 @@ def write_matrix(archive_root: Path, waves: list[dict]) -> Path:
 
 def main() -> int:
     p = argparse.ArgumentParser()
-    p.add_argument("--mission", required=True, help="mission dir name under .cex/config/missions/")
+    p.add_argument("--mission", required=True, help="mission dir name under .cex/P09_config/missions/")
     p.add_argument("--runtimes", default=",".join(DEFAULT_RUNTIMES),
                    help="comma-separated runtime names (in order)")
     p.add_argument("--wave-timeout", type=int, default=900,

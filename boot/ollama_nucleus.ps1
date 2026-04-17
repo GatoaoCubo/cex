@@ -27,7 +27,7 @@ Set-Location $cexRoot
 # --- Resolve model ---
 if (-not $Model) {
     # Read from nucleus_models.yaml fallback_local or fallback_chain
-    $yamlPath = "$cexRoot\.cex\config\nucleus_models.yaml"
+    $yamlPath = "$cexRoot\.cex\P09_config\nucleus_models.yaml"
     if (Test-Path $yamlPath) {
         $content = Get-Content $yamlPath -Raw
         # Simple regex extraction for this nucleus's fallback_local model
@@ -105,7 +105,7 @@ if (Test-Path $agentCard) {
 
 # --- Read sin prompt injection ---
 $sinPrompt = ""
-$sinsFile = "$cexRoot\.cex\config\nucleus_sins.yaml"
+$sinsFile = "$cexRoot\.cex\P09_config\nucleus_sins.yaml"
 if (Test-Path $sinsFile) {
     $inNuc = $false
     $inPrompt = $false

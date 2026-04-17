@@ -56,7 +56,7 @@ python _tools/cex_crew.py run product_launch \
    python _tools/cex_capability_index.py --query "research"
    ```
 2. **Write role_assignments** (one per role) in `N0x/crews/p02_ra_{role}.md`.
-   Each binds `role_name -> agent_id` with goal/backstory/tools/delegation.
+   Each binds `role_name -> agent_id` with goal/backstory/P04_tools/delegation.
 3. **Write crew_template** in `N0x/crews/p12_ct_{name}.md` with the Roles
    table referencing your role_assignments and a `process:` topology.
 4. **Write team_charter** (instance-specific) with mission/budget/deadline/gate.

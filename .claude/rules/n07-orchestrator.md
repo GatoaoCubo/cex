@@ -170,7 +170,7 @@ powershell.exe (wrapper -- what -PassThru returns)
 | L2 auto | `spawn_grid.ps1 -cli auto` | Per-nucleus resolver reads `nucleus_models.yaml` fallback_chain, probes binaries, picks first healthy |
 | L3 smart | `cex_router.py` (via `cex_mission_runner.py`) | Full health-checked providers with quota + retry budgets |
 
-**Config is YAML.** Never hardcode a CLI. Every nucleus has a `fallback_chain:` in `.cex/config/nucleus_models.yaml`. To change routing, edit YAML -- don't patch the spawn script.
+**Config is YAML.** Never hardcode a CLI. Every nucleus has a `fallback_chain:` in `.cex/P09_config/nucleus_models.yaml`. To change routing, edit YAML -- don't patch the spawn script.
 
 **Quota pre-flight.** Before heavy grid dispatches, run `python _tools/cex_quota_check.py --all --cache` to detect exhausted providers. Pool-specific gotcha: `gemini-2.5-pro` has aggressive free-tier RPM; `gemini-2.5-flash` has a separate, higher-ceiling pool.
 

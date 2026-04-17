@@ -9,7 +9,7 @@
 # with model: "cex-n0X" -- LiteLLM routes to correct provider.
 
 $cexRoot = Split-Path -Parent $PSScriptRoot
-$configPath = "$cexRoot\.cex\config\litellm_config.yaml"
+$configPath = "$cexRoot\.cex\P09_config\litellm_config.yaml"
 $venvPython = "$cexRoot\.venv_litellm\Scripts\python.exe"
 
 if (-not (Test-Path $configPath)) {

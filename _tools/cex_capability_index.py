@@ -3,11 +3,11 @@
 Scans the full CEX agent pool (3 sources) and emits a single registry JSON
 that any nucleus can query to assemble a crew:
 
-  1. .claude/agents/*.md            Claude Code-spawnable sub-agents (builders)
-  2. N0{1..7}_*/agents/*.md         Nucleus domain agents (non-builder)
+  1. .claude/P02_model/*.md            Claude Code-spawnable sub-agents (builders)
+  2. N0{1..7}_*/P02_model/*.md         Nucleus domain agents (non-builder)
   3. N0{1..7}_*/agent_card_*.md     Nucleus-level agent cards (A2A)
 
-Output: .cex/config/capability_registry.json
+Output: .cex/P09_config/capability_registry.json
 
 Fields per entry:
   - id: canonical ID
@@ -67,7 +67,7 @@ def parse_fm(text: str) -> dict:
 
 
 def scan_builder_subagents() -> list[dict]:
-    """Parse .claude/agents/*.md (builder sub-agents)."""
+    """Parse .claude/P02_model/*.md (builder sub-agents)."""
     entries: list[dict] = []
     for p in sorted((ROOT / ".claude" / "agents").glob("*.md")):
         text = p.read_text(encoding="utf-8", errors="replace")
@@ -97,7 +97,7 @@ def scan_builder_subagents() -> list[dict]:
 
 
 def scan_domain_agents() -> list[dict]:
-    """Parse N0x/agents/agent_*.md (nucleus domain agents)."""
+    """Parse N0x/P02_model/agent_*.md (nucleus domain agents)."""
     entries: list[dict] = []
     for nuc_dir in sorted(ROOT.glob("N0*_*")):
         agents_dir = nuc_dir / "agents"
@@ -163,9 +163,9 @@ def scan_nucleus_cards() -> list[dict]:
 
 
 def scan_role_assignments() -> list[dict]:
-    """Parse N0*/orchestration/p02_ra_*.md (role_assignment bindings for composable crews)."""
+    """Parse N0*/P12_orchestration/p02_ra_*.md (role_assignment bindings for composable crews)."""
     entries: list[dict] = []
-    for p in sorted(ROOT.glob("N0*_*/orchestration/p02_ra_*.md")):
+    for p in sorted(ROOT.glob("N0*_*/P12_orchestration/p02_ra_*.md")):
         text = p.read_text(encoding="utf-8", errors="replace")
         fm = parse_fm(text)
         nucleus = p.parents[1].name[:3].lower()
@@ -186,9 +186,9 @@ def scan_role_assignments() -> list[dict]:
 
 
 def scan_crew_templates() -> list[dict]:
-    """Parse N0*/orchestration/p12_ct_*.md (crew_template recipes)."""
+    """Parse N0*/P12_orchestration/p12_ct_*.md (crew_template recipes)."""
     entries: list[dict] = []
-    for p in sorted(ROOT.glob("N0*_*/orchestration/p12_ct_*.md")):
+    for p in sorted(ROOT.glob("N0*_*/P12_orchestration/p12_ct_*.md")):
         text = p.read_text(encoding="utf-8", errors="replace")
         fm = parse_fm(text)
         nucleus = p.parents[1].name[:3].lower()
@@ -209,9 +209,9 @@ def scan_crew_templates() -> list[dict]:
 
 
 def scan_nucleus_defs() -> list[dict]:
-    """Parse N0*/architecture/nucleus_def_*.md (machine-readable nucleus identities)."""
+    """Parse N0*/P08_architecture/nucleus_def_*.md (machine-readable nucleus identities)."""
     entries: list[dict] = []
-    for p in sorted(ROOT.glob("N0*_*/architecture/nucleus_def_*.md")):
+    for p in sorted(ROOT.glob("N0*_*/P08_architecture/nucleus_def_*.md")):
         text = p.read_text(encoding="utf-8", errors="replace")
         fm = parse_fm(text)
         nucleus_id = fm.get("nucleus_id", "").lower() or p.stem[-3:].lower()

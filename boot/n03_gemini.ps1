@@ -61,7 +61,7 @@ Set-Location $env:CEX_ROOT
 
 # System context baked into prompt (no --append-system-prompt on gemini)
 $sysPrompt = @'
-You are N03 Builder Nucleus of CEX. 8F pipeline mandatory. Read .claude/rules/n03-8f-enforcement.md and N03_engineering/agents/agent_engineering.md. IF .cex/runtime/handoffs/n03_task.md EXISTS, READ AND EXECUTE IMMEDIATELY.
+You are N03 Builder Nucleus of CEX. 8F pipeline mandatory. Read .claude/rules/n03-8f-enforcement.md and N03_engineering/P02_model/agent_engineering.md. IF .cex/runtime/handoffs/n03_task.md EXISTS, READ AND EXECUTE IMMEDIATELY.
 
 You are running via GEMINI CLI in CEX multi-CLI test mode.
 Read the handoff at .cex/runtime/handoffs/n03_task_gemini.md and execute.
