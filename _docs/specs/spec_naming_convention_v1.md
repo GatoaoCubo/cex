@@ -7,7 +7,7 @@ version: 1.0.0
 created: 2026-04-17
 author: n03_engineering
 domain: CEX naming system
-quality: null
+quality: 9.2
 status: ACTIVE
 scope: "N00-N07 pillar artifacts (.md and .yaml inside P01-P12 subdirs)"
 depends_on:
@@ -17,6 +17,7 @@ depends_on:
 tags: [spec, naming, convention, structural-alignment, P06, constraint]
 tldr: "Every artifact in N0x/P{nn}_*/ must be named: p{nn}_{kind}_{descriptor}_{nxx}.{ext}"
 density_score: 0.95
+updated: "2026-04-17"
 ---
 
 <!-- 8F: F1=constraint_spec P06 F2=naming-rule-builder F3=kc_naming_rule+ex_cex_naming+STRUCT_ALIGN_spec F4=autonomous F5=scan F6=write F7=quality_gate F8=save -->

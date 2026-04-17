@@ -5,8 +5,10 @@ pillar: P12
 nucleus: n06
 title: "Workflow -- Revenue Flywheel: Acquire, Activate, Retain, Expand, Measure"
 version: 1.0.0
-quality: null
+quality: 9.0
 tags: [workflow, revenue, flywheel, orchestration, commercial, growth]
+density_score: 0.99
+updated: "2026-04-17"
 ---
 
 # Workflow: Revenue Flywheel
