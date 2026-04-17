@@ -3,7 +3,7 @@ id: mentor
 kind: instruction
 pillar: P08
 description: "Universal CEX vocabulary mentor -- 8F + 12P + 257K. Usage: /mentor [question]"
-quality: null
+quality: 9.0
 title: "Mentor"
 version: "1.0.0"
 author: n07_orchestrator
