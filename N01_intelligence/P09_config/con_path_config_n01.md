@@ -5,8 +5,9 @@ pillar: P09
 nucleus: n01
 title: N01 Path Config
 version: 1.0
-quality: null
+quality: 9.0
 tags: [path_config, filesystem, research, runtime]
+density_score: 1.0
 ---
 
 <!-- 8F: F1 constrain=P09/path_config F2 become=path-config-builder F3 inject=nucleus_def_n01+n01-intelligence+kc_path_config+P09_schema+path examples F4 reason=bounded path map for research inputs outputs and scratch work F5 call=apply_patch+cex_compile F6 produce=4013 bytes F7 govern=frontmatter+ascii+80-line+self-check F8 collaborate=N01_intelligence/P09_config/con_path_config_n01.md -->

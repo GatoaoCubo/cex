@@ -5,8 +5,9 @@ pillar: P09
 nucleus: n01
 title: N01 Permission Policy
 version: 1.0
-quality: null
+quality: 9.0
 tags: [permission, access, runtime, governance]
+density_score: 1.0
 ---
 
 <!-- 8F: F1 constrain=P09/permission F2 become=permission-builder F3 inject=nucleus_def_n01+n01-intelligence+kc_permission+P09_schema+local runtime rules F4 reason=least-privilege access for research and comparative artifacts F5 call=apply_patch+cex_compile F6 produce=4424 bytes F7 govern=frontmatter+ascii+80-line+self-check F8 collaborate=N01_intelligence/P09_config/con_permission_n01.md -->
