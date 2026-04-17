@@ -27,11 +27,11 @@ CEX_ROOT = Path(__file__).resolve().parent.parent
 
 # Pillar directories that contain compiled artifacts
 PILLAR_COMPILED_DIRS = [
-    CEX_ROOT / "P03_prompt" / "compiled",
-    CEX_ROOT / "P04_tools" / "compiled",
-    CEX_ROOT / "P08_architecture" / "compiled",
-    CEX_ROOT / "P11_feedback" / "compiled",
-    CEX_ROOT / "P12_orchestration" / "compiled",
+    CEX_ROOT / "N00_genesis" / "P03_prompt" / "compiled",
+    CEX_ROOT / "N00_genesis" / "P04_tools" / "compiled",
+    CEX_ROOT / "N00_genesis" / "P08_architecture" / "compiled",
+    CEX_ROOT / "N00_genesis" / "P11_feedback" / "compiled",
+    CEX_ROOT / "N00_genesis" / "P12_orchestration" / "compiled",
 ]
 
 
