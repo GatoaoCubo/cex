@@ -5,9 +5,10 @@ pillar: P01
 nucleus: n06
 title: "Knowledge Card -- N06 Commercial Controlled Vocabulary"
 version: 1.0.0
-quality: null
+quality: 9.0
 tags: [vocabulary, controlled-vocabulary, commercial, ubiquitous-language, terminology, revenue]
 type: controlled_vocabulary
+density_score: 0.99
 ---
 
 # N06 Commercial Controlled Vocabulary

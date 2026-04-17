@@ -29,7 +29,7 @@ fallback_per_builder:
   resource-monitor: alert
 llm_function: ORCHESTRATE
 domain: "supervision, monitoring, failover"
-quality: null
+quality: 9.0
 tags: [supervisor, operations, monitoring, failover, P08, N05]
 tldr: "N05 health supervisor: parallel process+signal+resource checks then artifact audit. Actions: ALERT/RESTART/ESCALATE/QUARANTINE."
 density_score: 0.91

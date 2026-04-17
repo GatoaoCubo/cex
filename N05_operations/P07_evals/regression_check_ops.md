@@ -16,7 +16,7 @@ metrics:
   - self_scoring
   - cross_nucleus_write
   - compile_drift
-quality: null
+quality: 9.0
 tags: [regression_check, n05_operations, known_failure, P07]
 tldr: "Six known-failure patterns for N05 ops. Zero-tolerance (threshold=0). Blocks on any detection. Sin lens: Gating Wrath."
 description: "Known-failure registry for N05 operations nucleus. Each pattern has a detection command, prevention control, severity, and source incident."
@@ -26,6 +26,7 @@ fail_action: block
 notify: [n07_orchestrator, n05_ops_owner]
 cadence: on_pr
 scope: "N05_operations nucleus -- all .py tools and dispatch workflows"
+density_score: 1.0
 ---
 
 ## Overview
