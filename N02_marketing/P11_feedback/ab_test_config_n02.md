@@ -5,10 +5,11 @@ pillar: P11
 nucleus: n02
 title: "A/B Test Configuration -- Copy Variant Testing"
 version: 1.0.0
-quality: null
+quality: 9.0
 tags: [ab_test_config, copy_variants, conversion_optimization, P11, n02_marketing]
 domain: performance-creative
 status: active
+density_score: 1.0
 ---
 
 # A/B Test Configuration -- Copy Variant Testing

@@ -5,10 +5,11 @@ pillar: P11
 nucleus: n02
 title: "Campaign Audience Cohort Analysis"
 version: 1.0.0
-quality: null
+quality: 9.0
 tags: [cohort_analysis, audience_segmentation, campaign_performance, P11, n02_marketing]
 domain: audience-intelligence
 status: active
+density_score: 1.0
 ---
 
 # Campaign Audience Cohort Analysis
