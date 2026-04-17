@@ -8,10 +8,11 @@ version: 1.0.0
 created: 2026-04-17
 author: n01_intelligence
 domain: research-intelligence
-quality: null
+quality: 9.1
 tags: [reward_signal, quality_feedback, n01, rl_feedback, analytical_envy, quality_optimization]
 tldr: "Reward signal definition for N01 research quality optimization: composite signal from eval_framework (D1-D5) + bias audit + stakeholder satisfaction. Used by self_improvement_loop to guide artifact evolution direction."
 density_score: 0.88
+updated: "2026-04-17"
 ---
 
 <!-- 8F: F1 constrain=P11/reward_signal F2 become=reward-signal-builder F3 inject=eval_framework_n01+bias_audit_n01+self_improvement_loop_n01+learning_record_n01 F4 reason=the self-improvement loop needs a clear optimization target -- reward signal defines what "better" means for N01 research F5 call=cex_compile F6 produce=reward_signal_n01.md F7 govern=frontmatter+ascii+tables F8 collaborate=N01_intelligence/P11_feedback/ -->

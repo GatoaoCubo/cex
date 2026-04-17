@@ -8,10 +8,11 @@ version: 1.0.0
 created: 2026-04-17
 author: n01_intelligence
 domain: research-intelligence
-quality: null
+quality: 9.1
 tags: [scoring_rubric, research_quality, n01, peer_review, analytical_envy]
 tldr: "Peer-review scoring rubric for N01 research outputs: 5 dimensions with behavioral anchors at 1, 4, 7, 10. Used by llm_judge_n01 and human reviewers to assign quality scores consistently."
 density_score: 0.90
+updated: "2026-04-17"
 ---
 
 <!-- 8F: F1 constrain=P11/scoring_rubric F2 become=scoring-rubric-builder F3 inject=eval_framework_n01+llm_judge_n01+quality_gate_intelligence+scoring_rubric_intelligence F4 reason=eval_framework defines dimensions; scoring rubric makes them operationalizable with behavioral anchors that any reviewer can apply consistently F5 call=cex_compile F6 produce=scoring_rubric_research.md F7 govern=frontmatter+ascii+tables F8 collaborate=N01_intelligence/P11_feedback/ -->
