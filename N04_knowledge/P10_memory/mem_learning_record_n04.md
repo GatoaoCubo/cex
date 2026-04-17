@@ -5,7 +5,7 @@ pillar: P10
 nucleus: n04
 title: N04 Learning Record
 version: "1.0.0"
-quality: null
+quality: 9.1
 tags: [learning_record, n04, wave2, memory, knowledge_gluttony]
 domain: n04_knowledge_operations
 tldr: "High-value N04 output improves when builder contracts, local schemas, and examples are loaded before drafting."
@@ -22,6 +22,7 @@ keywords: [template_first, builder_alignment, local_contracts, wave_execution]
 linked_artifacts:
   primary: kno_knowledge_graph_n04
   related: [kno_embedder_provider_n04, kno_vector_store_n04, mem_runtime_state_n04]
+density_score: 0.95
 ---
 <!-- 8F: F1=learning_record/P10 F2=learning-record-builder F3=nucleus_def_n04+P10 schema+kc_learning_record+N04 schema/config examples F4=retrospective capture of what produced coherent Wave 2 artifacts
      F5=shell,apply_patch,cex_compile F6=author markdown artifact F7=frontmatter+outcome-score-body density+self-check F8=N04_knowledge/P10_memory/mem_learning_record_n04.md -->

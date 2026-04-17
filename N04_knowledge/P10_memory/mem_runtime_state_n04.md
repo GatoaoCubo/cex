@@ -5,7 +5,7 @@ pillar: P10
 nucleus: n04
 title: N04 Runtime State
 version: "1.0.0"
-quality: null
+quality: 9.1
 tags: [runtime_state, n04, routing, memory, knowledge_gluttony]
 agent: n04_knowledge
 persistence: cross_session
@@ -20,6 +20,7 @@ constraint_count: 5
 linked_artifacts:
   primary: N04_knowledge/agent_card_n04.md
   related: [kno_embedder_provider_n04, kno_knowledge_graph_n04, kno_vector_store_n04, mem_learning_record_n04]
+updated: "2026-04-17"
 ---
 <!-- 8F: F1=runtime_state/P10 F2=runtime-state-builder F3=nucleus_def_n04+agent_card_n04+kc_runtime_state+N04 configs/schemas F4=runtime decision map for knowledge routing, retrieval, and memory persistence
      F5=shell,apply_patch,cex_compile F6=author markdown artifact F7=frontmatter+routing-decision coherence+ascii+self-check F8=N04_knowledge/P10_memory/mem_runtime_state_n04.md -->
