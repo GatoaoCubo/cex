@@ -5,8 +5,9 @@ pillar: P09
 nucleus: n01
 title: N01 Secret Config
 version: 1.0
-quality: null
+quality: 9.0
 tags: [secret_config, credentials, rotation, research]
+density_score: 1.0
 ---
 
 <!-- 8F: F1 constrain=P09/secret_config F2 become=secret-config-builder F3 inject=nucleus_def_n01+n01-intelligence+kc_secret_config+P09_schema+secret template F4 reason=pointer registry for research credentials and rotation hygiene F5 call=apply_patch+cex_compile F6 produce=4090 bytes F7 govern=frontmatter+ascii+80-line+self-check F8 collaborate=N01_intelligence/P09_config/con_secret_config_n01.md -->
