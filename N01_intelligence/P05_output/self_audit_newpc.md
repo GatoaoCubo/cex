@@ -5,7 +5,7 @@ title: N01 Self-Audit -- New PC Setup (2026-04-13)
 pillar: P01_knowledge
 nucleus: N01
 version: 3.0.0
-quality: 8.9
+quality: 8.0
 created: 2026-04-12
 updated: 2026-04-13
 mission: NEWPC_SETUP

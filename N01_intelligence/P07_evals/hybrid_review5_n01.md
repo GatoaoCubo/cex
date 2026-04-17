@@ -4,7 +4,7 @@ kind: knowledge_card
 pillar: P01
 title: "HYBRID_REVIEW5 N01 Audit: customer_segment + cohort_analysis + user_journey"
 version: "1.0.0"
-quality: 8.9
+quality: 9.1
 tags: [audit, hybrid_review5, wave4, customer_segment, cohort_analysis, user_journey, analytics]
 domain: "builder quality assurance"
 created: "2026-04-14"

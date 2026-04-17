@@ -7,7 +7,7 @@ created: "2026-04-06"
 updated: "2026-04-06"
 author: "n01_intelligence"
 domain: "content_factory"
-quality: 9.1
+quality: 8.7
 tags: [output, content-factory, wave2, dags, constraint-specs]
 tldr: "N01 wave2 output: 6 DAGs (64 nodes) + 6 constraint specs for Content Factory autonomous pipeline"
 density_score: 1.0

@@ -8,7 +8,7 @@ wave: 1
 title: "Research OUT — Landscape de Ferramentas para Content Factory Autonoma"
 created: 2026-04-06T14:30:00-03:00
 author: n01_research_analyst
-quality: 9.2
+quality: 9.1
 tags: [research, content-factory, tools, APIs, automation, video, course, audio, presentation, PDF, orchestration]
 sources: 48
 tools_evaluated: 52

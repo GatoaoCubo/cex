@@ -4,7 +4,7 @@ kind: instruction
 pillar: P08
 glob: "N01_intelligence/**"
 description: "N01 Intelligence Nucleus — research, analysis, competitive intel"
-quality: 9.1
+quality: 8.4
 title: "N01-Intelligence"
 version: "1.0.0"
 author: n03_builder

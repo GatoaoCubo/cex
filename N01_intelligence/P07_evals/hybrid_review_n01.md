@@ -8,7 +8,7 @@ created: 2026-04-13
 builders_reviewed: [reasoning-strategy-builder, rl-algorithm-builder, reward-model-builder, search-strategy-builder]
 iso_count: 52
 pillar: P01
-quality: 8.6
+quality: 6.8
 ---
 
 # HYBRID_REVIEW: N01 Audit Summary (52 ISOs, 4 Builders)

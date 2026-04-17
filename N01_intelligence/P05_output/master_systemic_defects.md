@@ -4,7 +4,7 @@ kind: knowledge_card
 pillar: P01
 title: Master systemic defects across 12 HYBRID_REVIEW audits
 version: 1.0.0
-quality: 8.9
+quality: 9.1
 tags: [audit, systemic, generator-fix, wave1_builder_gen, qwen3, gemma4]
 domain: generator quality assurance
 created: "2026-04-13"
