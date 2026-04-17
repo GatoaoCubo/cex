@@ -27,7 +27,7 @@ span_attributes:
   - cex.quality.score
   - cex.signal.status
 retention_days: 7
-quality: null
+quality: 9.1
 tags: [trace_config, n05_operations, observability, distributed-tracing, P07]
 tldr: "N05 ops tracing: 10% success / 100% error sample, json_file export, 7d hot + archive, 8F spans + dispatch/signal/compile"
 description: "Distributed tracing config for CEX N05 operations nucleus. Spans cover dispatch, 8F pipeline, signal, compile, and tool_call across nucleus boundaries."

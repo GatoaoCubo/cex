@@ -42,7 +42,7 @@ teardown: "rm -rf /tmp/cex_ue_ops/; git restore --staged .; rm -f .cex/runtime/s
 edge_case: false
 coverage_scope: "cex_compile, signal_writer, cex_sanitize, cex_hooks, cex_doctor, cex_score, cex_token_budget"
 domain: "unit testing, tool validation"
-quality: null
+quality: 9.1
 tags: [unit-eval, cli-tool, n05-operations, tool-validation, exit-code]
 tldr: "10-case isolation suite for N05 CLI tools: compile/sanitize/hooks/doctor/score/token_budget -- exit codes + output structure"
 density_score: 0.91
