@@ -5,10 +5,11 @@ pillar: P02
 nucleus: n02
 title: "ICP-Typed Audience Segment Definitions"
 version: 1.0.0
-quality: null
+quality: 8.9
 tags: [customer_segment, ICP, audience_segments, message_market_fit, P02, n02_marketing]
 domain: audience-intelligence
 status: active
+density_score: 0.99
 ---
 
 # ICP-Typed Audience Segment Definitions
