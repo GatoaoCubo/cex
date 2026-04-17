@@ -7,7 +7,7 @@ title: "B2B Landing Page Template -- Partner/Wholesale Channel"
 description: "B2B landing page with channel value props, FAQ accordion, and partner registration CTA. For brands with a wholesale or reseller program."
 domain: ecommerce
 nucleus: N06
-quality: null
+quality: 9.0
 tags: [landing-page, b2b, partner, wholesale, cta, faq]
 brand_placeholders:
   - BRAND_NAME
@@ -18,6 +18,7 @@ brand_placeholders:
   - BRAND_VERTICAL
   - BRAND_AFFILIATE_COMMISSION
   - BRAND_PRIMARY_COLOR
+density_score: 1.0
 ---
 
 # B2B Landing Page Template

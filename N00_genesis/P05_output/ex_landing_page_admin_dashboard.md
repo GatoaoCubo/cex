@@ -4,7 +4,7 @@ kind: landing_page
 pillar: P05
 title: Admin Dashboard Landing Page
 version: 0.1.0
-quality: null
+quality: 9.0
 status: template
 brand_placeholders:
   - BRAND_NAME
@@ -12,6 +12,7 @@ brand_placeholders:
   - BRAND_LOGO_URL
   - BRAND_SUPPORT_EMAIL
 tags: [commerce, template, distillation, admin, landing_page]
+density_score: 1.0
 ---
 
 # Admin Dashboard Landing Page
