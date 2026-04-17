@@ -1,0 +1,130 @@
+---
+id: p01_retr_n07
+kind: retriever_config
+pillar: P01
+nucleus: N07
+title: "N07 Orchestrator Retriever Config"
+version: "1.0.0"
+created: "2026-04-17"
+updated: "2026-04-17"
+author: "retriever-config-builder"
+name: "N07 Orchestrator Retriever"
+store_type: "hybrid (BM25 + vector)"
+top_k: "varies by doc_type (see Parameters)"
+search_type: "hybrid"
+hybrid_ratio: "0.4 dense / 0.6 sparse"
+reranker: "cross-encoder/ms-marco-MiniLM-L-6-v2"
+fetch_k: "20"
+score_threshold: "0.35"
+filters: "nucleus, mission, date_range, kind"
+quality: 9.1
+tags: [retriever_config, P01, N07, orchestrator, hybrid]
+tldr: "Hybrid BM25+vector retriever for N07: precise, low-latency dispatch context over handoffs, signals, KCs, and decision manifests."
+description: "Retrieval config for the N07 orchestrator nucleus. Optimized for fast, precise lookup of operational context -- handoffs, signals, mission plans, decisions, and 257-kind taxonomy. Orchestrating Sloth lens: never over-fetch, always hit threshold, cache the taxonomy."
+density_score: 1.0
+---
+<!-- 8F TRACE
+F1 CONSTRAIN: kind=retriever_config, pillar=P01, max_bytes=2048, id=p01_retr_n07
+F2 BECOME: retriever-config-builder (13 ISOs loaded). Identity: precision retriever architect.
+F3 INJECT: schema + output_template + examples + memory. Template match: 100%.
+F4 REASON: hybrid ratio sparse-dominant (kind/nucleus names are exact keywords), per-doctype top_k, cross-encoder rerank on 20, cache taxonomy + recent handoffs.
+F5 CALL: Write + cex_compile.py ready.
+F6 PRODUCE: artifact written below.
+F7 GOVERN: quality=null, id matches p01_retr_*, kind=retriever_config, 4 sections, parameters table with rationale.
+F8 COLLABORATE: saved N07_admin/P01_knowledge/kno_retriever_config_n07.md, compile pending.
+-->
+
+## Overview
+
+N07 Orchestrator retrieves operational context across five document collections:
+handoff history, signal archive, mission plans, decision manifests, and the
+257-kind taxonomy. Retrieval drives dispatch decisions -- every millisecond
+of latency compounds across the full pipeline. The Orchestrating Sloth sin
+lens enforces precision over recall: never fetch more than the dispatcher
+needs, always enforce a score floor, cache the taxonomy cold-start.
+
+Collections and their query profiles:
+
+| Collection | Query type | top_k | Primary signal |
+|------------|-----------|-------|----------------|
+| Handoffs | nucleus name + mission ID (keyword) | 5 | BM25 exact match |
+| Signals | nucleus + timestamp range (filter + keyword) | 10 | Filter then BM25 |
+| Knowledge cards (KCs) | semantic intent (vector) | 3 | Dense similarity |
+| Decision manifests | keyword: GDP field names | 3 | BM25 exact match |
+| 257-kind taxonomy | kind/pillar lookup (cache-first) | 1 | Cache hit, else BM25 |
+
+## Search Strategy
+
+Algorithm: hybrid reciprocal rank fusion (RRF), k=60.
+Sparse leg: BM25 over raw text -- preferred for exact kind/nucleus/mission names.
+Dense leg: vector cosine on nomic-embed-text -- preferred for semantic intent matching.
+Fusion weights: sparse=0.6, dense=0.4 (keyword precision dominates in orchestration).
+
+Reranker: cross-encoder/ms-marco-MiniLM-L-6-v2 applied to top-20 RRF candidates,
+outputs final top_k per doc_type. Reranker is skipped for taxonomy lookups
+(cache-first, exact match, no semantic ambiguity).
+
+Cache layer: LRU cache, TTL=300s.
+- Cached: 257-kind taxonomy (full load at session start), last-5 handoffs per nucleus.
+- Evicted: signals older than TTL, stale mission plans after consolidation.
+
+Score floor: 0.35 minimum similarity after rerank. Results below floor are dropped
+rather than injected as weak context -- weak context causes wrong dispatch.
+
+## Parameters
+
+| Parameter | Value | Rationale |
+|-----------|-------|-----------|
+| store_type | BM25 + FAISS vector | BM25 for exact ops names; FAISS for semantic fallback |
+| search_type | hybrid | Orchestration mixes exact (nucleus/kind) and semantic (intent) queries |
+| hybrid_ratio | 0.4 dense / 0.6 sparse | Keyword precision dominates in dispatch context |
+| top_k (handoffs) | 5 | 5 most recent/relevant handoffs = sufficient dispatch context |
+| top_k (signals) | 10 | Signal fan-out from 6 nuclei; need full wave visibility |
+| top_k (KCs) | 3 | Token budget: 3 KCs per dispatch round is the context cap |
+| top_k (decisions) | 3 | GDP manifests are compact; 3 covers most mission scopes |
+| top_k (taxonomy) | 1 (cache) | Kind/pillar lookups are exact; cache eliminates retrieval entirely |
+| fetch_k | 20 | 4x max top_k (signals=10); feeds reranker with sufficient candidates |
+| reranker | cross-encoder/ms-marco-MiniLM-L-6-v2 | <50ms cross-encoder; accurate enough, fast enough for dispatcher |
+| score_threshold | 0.35 | Drops irrelevant docs; wrong-nucleus context causes bad dispatch |
+| cache_ttl | 300s | Handoff updates are infrequent within a wave; 5 min is safe |
+
+## Filters
+
+Applied before retrieval to reduce candidate space:
+
+| Filter | Type | Applied to |
+|--------|------|------------|
+| nucleus | enum (n01..n07) | Handoffs, signals, KCs |
+| mission | string match | Handoffs, decision manifests |
+| date_range | ISO 8601 window | Signals (last wave only by default) |
+| kind | enum (257 kinds) | KCs, taxonomy lookups |
+| status | enum (pending, complete, failed) | Signals |
+
+Filter precedence: nucleus > mission > date_range > kind > status.
+Filters are pre-retrieval (applied to index, not post-rerank).
+
+## Integration
+
+- Input: query string + optional filter dict `{nucleus, mission, date_range, kind}`
+- Output: list of `(Document, score)` tuples, ranked by cross-encoder score
+- Upstream: `cex_retriever.py` (TF-IDF + vector backend), `.cex/runtime/handoffs/`, `.cex/runtime/signals/`
+- Downstream: N07 F3 INJECT context assembly, handoff writer, wave planner
+- Cache backend: in-process LRU (`cex_memory_select.py` keyword layer)
+- Taxonomy source: `.cex/kinds_meta.json` (loaded once at session start, never re-fetched)
+- Fallback: if score_threshold produces zero results, relax to 0.20 and re-query once; if still empty, return empty and log miss
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `retriever_config` |
+| Pillar | P01 |
+| Nucleus | N07 |
+| Domain | orchestrator retrieval |
+| Sin lens | Orchestrating Sloth -- precise, low-latency, never over-fetch |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |
