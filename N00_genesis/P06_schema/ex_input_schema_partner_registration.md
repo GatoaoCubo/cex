@@ -7,12 +7,13 @@ title: "Input Schema -- B2B Partner Registration Form"
 description: "Validation schema for B2B partner registration. CNPJ validation, field constraints, error messages, and multi-step form flow spec."
 domain: crm
 nucleus: N06
-quality: null
+quality: 9.1
 tags: [input-schema, partner-registration, b2b, cnpj, validation, form]
 brand_placeholders:
   - BRAND_NAME
   - BRAND_PARTNER_EMAIL
   - BRAND_DOMAIN
+density_score: 1.0
 ---
 
 # Input Schema -- B2B Partner Registration Form
