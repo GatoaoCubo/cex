@@ -5,10 +5,11 @@ pillar: P06
 nucleus: n02
 title: "Content Format Validation Schema"
 version: 1.0.0
-quality: null
+quality: 9.0
 tags: [validation_schema, content_spec, format_rules, character_limits, P06, n02_marketing]
 domain: content-validation
 status: active
+density_score: 1.0
 ---
 
 # Content Format Validation Schema

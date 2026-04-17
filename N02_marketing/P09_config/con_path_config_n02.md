@@ -5,8 +5,9 @@ pillar: P09
 nucleus: n02
 title: Marketing Path Config
 version: 1.0
-quality: null
+quality: 9.0
 tags: [config, paths, workspace, marketing, runtime]
+density_score: 1.0
 ---
 
 
