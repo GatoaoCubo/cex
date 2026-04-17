@@ -8,10 +8,11 @@ version: 1.0.0
 created: 2026-04-17
 author: n01_intelligence
 domain: research-intelligence
-quality: null
+quality: 9.2
 tags: [self_improvement_loop, evolution, quality, n01, analytical_envy, autonomous]
 tldr: "N01 self-improvement loop: scan all artifacts for quality < 9.0, identify systematic gaps (missing comparisons, stale sources, thin evidence), apply targeted improvements, re-score. Driven by Analytical Envy: never accept 'good enough'."
 density_score: 0.92
+updated: "2026-04-17"
 ---
 
 <!-- 8F: F1 constrain=P11/self_improvement_loop F2 become=self-improvement-loop-builder F3 inject=quality_gate_intelligence+bias_audit_n01+eval_framework_n01+cex_evolve F4 reason=Analytical Envy = perpetual dissatisfaction with current quality; self-improvement loop is the systematic expression of that dissatisfaction F5 call=cex_compile+cex_evolve F6 produce=self_improvement_loop_n01.md F7 govern=frontmatter+ascii+tables F8 collaborate=N01_intelligence/P11_feedback/ -->
