@@ -5,10 +5,11 @@ pillar: P11
 nucleus: n02
 title: "Audience Satisfaction NPS Survey -- N02 Marketing"
 version: 1.0.0
-quality: null
+quality: 9.0
 tags: [nps_survey, audience_satisfaction, brand_sentiment, retention, P11, n02_marketing]
 domain: campaign-feedback
 status: active
+density_score: 1.0
 ---
 
 # Audience Satisfaction NPS Survey
