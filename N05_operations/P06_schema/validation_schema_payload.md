@@ -13,7 +13,7 @@ fields_count: 22
 on_failure: "reject"
 strict: false
 domain: "operations-payload"
-quality: null
+quality: 9.2
 tags: [validation-schema, operations, payload, N05, P06, contract]
 tldr: "Post-generation contract for all N05 operational payloads: frontmatter, signal, handoff, config, compile output, and git commit messages."
 coercion: true
