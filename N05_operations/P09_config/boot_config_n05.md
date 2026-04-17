@@ -50,7 +50,7 @@ permissions:
     - bash
 system_prompt_ref: "p03_sp_n05_operations"
 domain: "nucleus boot -- operations, testing, CI/CD, quality gates"
-quality: null
+quality: 9.1
 tags:
   - boot-config
   - n05

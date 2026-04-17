@@ -16,10 +16,11 @@ concurrency: 3
 retry_policy: "max 2 retries, fixed backoff 5s, continue on partial failure"
 input_format: "jsonl"
 output_format: "jsonl"
-quality: null
+quality: 9.0
 tags: [batch_config, N05, operations, P09, mass-ops]
 tldr: "N05 bulk ops: compile_all/doctor_all/sanitize_all/evolve_batch/score_batch -- local CLI, 4h window, retry 2x, progress every 10 items"
 description: "Batch execution config for N05 operations nucleus mass ops: compile, health check, sanitize, evolve, and score."
+density_score: 1.0
 ---
 
 ## Overview
