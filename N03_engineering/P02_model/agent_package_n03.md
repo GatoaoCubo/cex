@@ -7,10 +7,11 @@ version: 1.0.0
 created: 2026-04-17
 author: n03_engineering
 domain: artifact-construction
-quality: null
+quality: 9.1
 tags: [agent-package, N03, packaging, deployment, configuration, 8F, opus]
 tldr: "Complete packaged configuration for the N03 Engineering nucleus. Bundles identity, model config, capability registry, tool list, boot parameters, and runtime constraints into a deployable agent unit."
 density_score: 0.90
+updated: "2026-04-17"
 ---
 
 # Agent Package: N03 Engineering Nucleus

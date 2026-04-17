@@ -7,10 +7,11 @@ version: 1.0.0
 created: 2026-04-17
 author: n03_engineering
 domain: artifact-construction
-quality: null
+quality: 9.2
 tags: [reasoning-strategy, N03, depth, 8F, engineering, construction, quality]
 tldr: "N03's engineering reasoning strategy: how to apply the 8F pipeline at maximum depth using 1M context. Covers construction triad selection, quality-first planning, contract-before-code discipline, and invariant-driven validation."
 density_score: 0.90
+updated: "2026-04-17"
 ---
 
 # Reasoning Strategy: N03 Engineering Depth
