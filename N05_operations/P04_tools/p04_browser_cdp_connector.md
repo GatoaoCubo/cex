@@ -17,10 +17,11 @@ timeout: 30000
 javascript: true
 cookies: true
 stealth: false
-quality: null
+quality: 9.1
 tags: [browser_tool, cdp, chrome, connector, playwright, P04, automation]
 tldr: "Generic CDP connector for user Chrome: setup, connect, navigate, interact. Base layer for all browser_tool specs."
 description: "Connects to user Chrome via CDP WebSocket on localhost:9222. Provides navigate/click/type/read/screenshot primitives."
+density_score: 1.0
 ---
 
 ## Overview

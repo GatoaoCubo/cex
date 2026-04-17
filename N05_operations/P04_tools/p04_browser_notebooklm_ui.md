@@ -17,7 +17,7 @@ timeout: 60000
 javascript: true
 cookies: true
 stealth: false
-quality: null
+quality: 9.0
 tags: [browser_tool, notebooklm, google, playwright, P04, research]
 tldr: "Playwright automator for NotebookLM: notebook select, source upload, prompt compose, Audio Overview submit, status poll, output retrieval"
 description: "Automates NotebookLM UI for source management, prompt-driven research, Audio Overview generation, and output extraction"
@@ -25,6 +25,7 @@ credentials:
   source: secret_config
   keys: [GOOGLE_AUTH_TOKEN]
   injection: env_var
+density_score: 0.92
 ---
 
 ## Overview
