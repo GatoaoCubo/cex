@@ -5,7 +5,7 @@ pillar: P01
 nucleus: n04
 title: N04 Knowledge Graph
 version: "1.0.0"
-quality: null
+quality: 9.1
 tags: [knowledge_graph, n04, graphrag, taxonomy, knowledge_gluttony]
 domain: cex_knowledge_topology
 entity_types:
@@ -34,6 +34,7 @@ dedup_strategy: fuzzy
 community_detection: leiden
 extraction_prompt: schema_constrained_triplet_extraction_n04
 tldr: "GraphRAG schema for CEX artifacts, builders, contracts, and memory paths across N04-owned knowledge."
+density_score: 1.0
 ---
 <!-- 8F: F1=knowledge_graph/P01 F2=knowledge-graph-builder F3=nucleus_def_n04+kc_knowledge_graph+N04 schemas/configs+N04 knowledge memory examples F4=template-first graph schema for artifact-rich GraphRAG over CEX knowledge
      F5=shell,apply_patch,cex_compile F6=author markdown artifact F7=frontmatter+entity-relation coherence+ascii+self-check F8=N04_knowledge/P01_knowledge/kno_knowledge_graph_n04.md -->

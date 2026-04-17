@@ -5,7 +5,7 @@ pillar: P01
 nucleus: n04
 title: N04 Embedder Provider
 version: "1.0.0"
-quality: null
+quality: 9.1
 tags: [embedder_provider, n04, rag, embeddings, knowledge_gluttony]
 provider: openai
 model: text-embedding-3-large
@@ -22,6 +22,7 @@ api_key_env: OPENAI_API_KEY
 api_base_url: https://api.openai.com/v1
 domain: rag_indexing
 tldr: "High-fidelity dense embedder for N04 retrieval, graph augmentation, and memory recall."
+density_score: 1.0
 ---
 <!-- 8F: F1=embedder_provider/P01 F2=embedder-provider-builder F3=nucleus_def_n04+P01/P10 schema+kc_embedder_provider+N04 configs F4=template-first OpenAI dense retrieval profile for knowledge-hungry N04
      F5=shell,apply_patch,cex_compile F6=author markdown artifact F7=frontmatter+ascii+line-count+self-check F8=N04_knowledge/P01_knowledge/kno_embedder_provider_n04.md -->
