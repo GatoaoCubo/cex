@@ -5,8 +5,9 @@ pillar: P11
 nucleus: n06
 title: "Reward Signal -- Validated High-ROI Commercial Patterns"
 version: 1.0.0
-quality: null
+quality: 8.9
 tags: [reward, signal, pattern, commercial, revenue, validated]
+density_score: 0.99
 ---
 
 # Reward Signal: Validated High-ROI Commercial Patterns
