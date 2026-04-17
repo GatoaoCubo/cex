@@ -5,7 +5,7 @@ pillar: P11
 nucleus: n04
 title: "Learning Record -- N04 Knowledge Nucleus"
 version: "1.0.0"
-quality: null
+quality: 9.1
 tags: [learning_record, n04, knowledge, rag, retrieval, P11]
 domain: knowledge management
 status: active

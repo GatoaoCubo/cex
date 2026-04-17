@@ -5,7 +5,7 @@ pillar: P10
 nucleus: n04
 title: "Procedural Memory -- N04 Standard Operating Procedures"
 version: "1.0.0"
-quality: null
+quality: 9.1
 tags: [procedural_memory, n04, sop, rag, knowledge_card, indexing, P10]
 domain: knowledge management
 status: active
