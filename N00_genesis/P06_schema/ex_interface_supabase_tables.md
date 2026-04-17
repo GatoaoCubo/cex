@@ -4,11 +4,12 @@ kind: interface
 pillar: P06
 title: Supabase Tables Interface
 version: 0.1.0
-quality: null
+quality: 9.0
 status: template
 brand_placeholders:
   - BRAND_SUPABASE_PROJECT_REF
 tags: [commerce, template, distillation, supabase, interface, schema]
+density_score: 1.0
 ---
 
 # Supabase Tables Interface

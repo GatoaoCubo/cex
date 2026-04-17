@@ -4,13 +4,14 @@ kind: validator
 pillar: P06
 title: Inventory Invariants Validator
 version: 0.1.0
-quality: null
+quality: 8.9
 status: template
 brand_placeholders:
   - BRAND_NAME
   - BRAND_RECONCILE_TOLERANCE
   - BRAND_BLING_DEPOSITS
 tags: [commerce, template, distillation, validator, inventory, invariants]
+density_score: 0.94
 ---
 
 # Inventory Invariants Validator
