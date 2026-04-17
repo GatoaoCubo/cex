@@ -5,11 +5,12 @@ pillar: P01
 nucleus: n02
 title: "N02 Marketing Controlled Vocabulary -- Canonical Terms"
 version: 1.0.0
-quality: null
+quality: 9.0
 tags: [knowledge_card, controlled_vocabulary, marketing_terms, ubiquitous_language, P01, n02_marketing]
 domain: marketing
 type: controlled_vocabulary
 status: active
+density_score: 0.97
 ---
 
 # N02 Marketing Controlled Vocabulary
