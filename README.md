@@ -11,8 +11,8 @@
   <img src="https://img.shields.io/badge/LLMs-Claude%20%7C%20GPT%20%7C%20Gemini%20%7C%20Ollama-8A2BE2" alt="LLMs">
   <img src="https://img.shields.io/badge/pillars-12-orange" alt="Pillars">
   <img src="https://img.shields.io/badge/nuclei-7+1-crimson" alt="Nuclei">
-  <img src="https://img.shields.io/badge/kinds-279-red" alt="Kinds">
-  <img src="https://img.shields.io/badge/builders-284-brightgreen" alt="Builders">
+  <img src="https://img.shields.io/badge/kinds-284-red" alt="Kinds">
+  <img src="https://img.shields.io/badge/builders-289-brightgreen" alt="Builders">
   <img src="https://img.shields.io/badge/tools-124-informational" alt="Tools">
 </p>
 
@@ -28,7 +28,7 @@ The result is not a chatbot. It is an **enterprise brain**: modular enough to gr
 
 ### Three properties
 
-- **Composable** — 8 functions × 12 pillars × 279 artifact kinds = the factory floor. Spawn a new nucleus, a new kind, or a new archetype in minutes.
+- **Composable** — 8 functions × 12 pillars × 284 artifact kinds = the factory floor. Spawn a new nucleus, a new kind, or a new archetype in minutes.
 - **Sovereign** — runs on Claude, GPT, Gemini, or Ollama. Your knowledge lives in *your* repo, under *your* git history. No vendor owns your brain.
 - **Self-assimilating** — every conversation, decision, and artifact compiles into typed, governed, searchable assets. Your institutional memory compounds like capital.
 
@@ -48,7 +48,7 @@ The 12 pillars are the maturity axes. A basic agent covers 1–2 of them. A CEX 
 | Model (P02) | Single provider | Fallback chain across Claude / GPT / Gemini / Ollama |
 | Prompt (P03) | One system prompt | Templates + chains + compiler + version control |
 | Tools (P04) | Flat list | MCP servers + API clients + browser scrapers + search pipelines |
-| Output (P05) | Free text | 279 typed artifact kinds + formatters + parsers |
+| Output (P05) | Free text | 284 typed artifact kinds + formatters + parsers |
 | Schema (P06) | None | Input / output schemas + validators + interface contracts |
 | Evaluation (P07) | Output as-is | Quality gates + scoring rubrics + LLM judges + benchmarks |
 | Architecture (P08) | None | Agent cards + component maps + decision records |
@@ -229,7 +229,7 @@ CEX becomes the **single source of truth** for your AI knowledge.
 
 ```
 Layer 0 — BUILDERS       284 factories × 13 ISOs each = 3,692 artifact constructors
-Layer 1 — PILLARS        12 pillars × 279 kinds = the taxonomy
+Layer 1 — PILLARS        12 pillars × 284 kinds = the taxonomy
 Layer 2 — NUCLEI         8 nuclei (N00 archetype + N01–N07 operational) = the organization
 Layer 3 — PIPELINE       8F functions = the assembly line
 Layer 4 — GOVERNANCE     hooks + doctor + quality gates + flywheel audit = the quality bar

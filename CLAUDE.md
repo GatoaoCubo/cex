@@ -1,6 +1,6 @@
 # CEX — Cognitive Enterprise X · Typed Knowledge System for LLM Agents
 
-> 279 kinds · 284 builders · 3692 ISOs · 12 pillars · 8 nuclei (N00-N07) · 8F pipeline · cex_sdk runtime · 152 tools · 4 runtimes (Claude / Codex / Gemini / Ollama)
+> 284 kinds · 289 builders · 3757 ISOs · 12 pillars · 8 nuclei (N00-N07) · 8F pipeline · cex_sdk runtime · 152 tools · 4 runtimes (Claude / Codex / Gemini / Ollama)
 
 ## Positioning
 
