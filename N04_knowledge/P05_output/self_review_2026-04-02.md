@@ -42,7 +42,7 @@ updated: 2026-04-07
    - Critical system files corrupted - data integrity compromised
 
 4. **Empty Memory System**:
-   - `N04_knowledge/memory/` directory exists but completely empty
+   - `N04_knowledge/P10_memory/` directory exists but completely empty
    - No persistent memory accumulation across sessions
 
 5. **Non-functional Memory Selection**:
@@ -110,7 +110,7 @@ updated: 2026-04-07
    - Create mapping table for translation
 
 4. **CRITICAL: Populate Memory System**
-   - Create knowledge memory artifacts in `N04_knowledge/memory/`
+   - Create knowledge memory artifacts in `N04_knowledge/P10_memory/`
    - Fix `cex_memory_select.py` functionality
    - Establish memory persistence patterns
 

@@ -215,7 +215,7 @@ User --> boot/cex.ps1 --> claude (Opus 4.6, 1M context)
 | Pillars | 12 (P01-P12) |
 | Kinds | 123 |
 | Builders | 123 (x 13 ISOs = 1,599 files) |
-| Sub-agents | 125 (.claude/agents/) |
+| Sub-agents | 125 (.claude/P02_model/) |
 | Tools | 91 Python scripts (_tools/) |
 | Knowledge cards | 98+ (P01_knowledge/library/) |
 | Pillar schemas | 12 (_schema.yaml) |

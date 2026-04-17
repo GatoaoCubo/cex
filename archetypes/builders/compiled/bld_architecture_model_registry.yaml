@@ -24,7 +24,7 @@ component_inventory: '| Name | Role | CEX Nucleus | Status |
 
   | Schema Validator | Frontmatter + field validation (cex_compile.py) | N05 Operations | Active |
 
-  | Artifact URI Store | Pointer to weights/config/tokenizer on blob storage | N03 Build | Active |
+  | Artifact URI Store | Pointer to weights/P09_config/tokenizer on blob storage | N03 Build | Active |
 
   | Quality Gate | 5D scoring, HARD/SOFT gates (cex_score.py) | N07 Orchestrator | Active |
 

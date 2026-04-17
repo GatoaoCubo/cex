@@ -81,7 +81,7 @@ tier_thresholds: '| Tier | Score | Action |
 
   |------|-------|--------|
 
-  | GOLDEN | >= 9.5 | Save as canonical example in `N02_marketing/output/examples/` |
+  | GOLDEN | >= 9.5 | Save as canonical example in `N02_marketing/P05_output/examples/` |
 
   | PUBLISH | >= 8.0 | Deliver to client or deploy to campaign |
 

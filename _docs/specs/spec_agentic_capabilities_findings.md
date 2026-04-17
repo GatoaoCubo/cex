@@ -136,7 +136,7 @@ N07 Orchestrator (Claude opus-4-6)
 
 1. Build `_tools/cex_agentic_nucleus.py` — ReAct loop on llama3.1:8b with per-nucleus tool allowlist
 2. Create `.cex/config/nucleus_tools.yaml` — which tools each nucleus (N01-N07) can invoke
-3. Update `.cex/config/litellm_config.yaml` — add `llama3.1:8b` as alternate `ollama_agentic` model
+3. Update `.cex/P09_config/litellm_config.yaml` — add `llama3.1:8b` as alternate `ollama_agentic` model
 4. Capture FT data from agentic runs into `.cex/runtime/ft_data/n0X_agentic.jsonl`
 
 ## Source Data

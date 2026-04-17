@@ -40,7 +40,7 @@ Never guess these values -- always read the source files first.
 
 ## Recommendations
 - Always read nucleus_models.yaml before setting cli_binding or model_tier.
-- Verify pillars_owned by scanning N0{X}_*/output/ for actual artifact kinds.
+- Verify pillars_owned by scanning N0{X}_*/P05_output/ for actual artifact kinds.
 - List domain_agents by running: `ls N0{X}_*/agents/*.md` and reading agent IDs.
 - Keep crew_templates_exposed lean (2-5 templates) -- overly broad lists mislead N07.
 - After writing nucleus_def, run cex_doctor.py to verify the boot_script path exists.

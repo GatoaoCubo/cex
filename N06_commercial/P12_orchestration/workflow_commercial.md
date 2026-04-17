@@ -110,7 +110,7 @@ BRAND_BOOK → EXTRACT_PRICING → ALIGN_FUNNEL → PRICE_BY_ARCHETYPE → DELIV
 | Artifact | Location |
 |----------|----------|
 | brand_config.yaml | .cex/brand/brand_config.yaml |
-| Brand Book | N06_commercial/output/ |
-| Pricing artifacts | N06_commercial/output/ |
+| Brand Book | N06_commercial/P05_output/ |
+| Pricing artifacts | N06_commercial/P05_output/ |
 | Propagation | N0X_*/config/brand_context.md |
 | Signal | .cex/runtime/signals/n06_complete.json |

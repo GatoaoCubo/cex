@@ -13,11 +13,11 @@ tags: [spawn-config, orchestrator, N07, multi-cli]
 tldr: Multi-CLI orchestration -- each nucleus uses the best LLM provider for its domain.
 density_score: 0.90
 linked_artifacts:
-  primary: "N07_admin/orchestration/workflow_admin.md"
+  primary: "N07_admin/P12_orchestration/workflow_admin.md"
   related:
-    - N07_admin/orchestration/handoff_admin.md
-    - N07_admin/orchestration/signal_admin.md
-    - N07_admin/memory/grid_orchestration_mastery.md
+    - N07_admin/P12_orchestration/handoff_admin.md
+    - N07_admin/P12_orchestration/signal_admin.md
+    - N07_admin/P10_memory/grid_orchestration_mastery.md
 ---
 
 # Spawn Config: N07 Orchestrator

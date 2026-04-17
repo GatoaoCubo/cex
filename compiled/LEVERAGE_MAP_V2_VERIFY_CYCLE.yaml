@@ -88,7 +88,7 @@ secondary_integration_points: '`cex_taxonomy_scout.py` (existing, now has fetch 
 
   - Deduplicates via URL canonicalization + fuzzy matching
 
-  - Output: `.cex/config/taxonomy_sources.yaml`
+  - Output: `.cex/P09_config/taxonomy_sources.yaml`
 
 
   `cex_research.py` (existing, now has fetch foundation)
@@ -197,7 +197,7 @@ next_iteration_prioritized: ''
 integration_points: "Once built, these tools should wire into:\n\n1. N01 Research Pipeline\n   - `cex_research.py` output\
   \ (src_*.md) → auto-extract citations → store in `N01_intelligence/research/citations/`\n\n2. N04 Knowledge Base\n   - Citation\
   \ validator flags new entities → suggest new KCs\n   - Citation formatter generates formatted references for KC outputs\n\
-  \n3. Continuous Monitoring\n   - Nightly job: re-validate all citations in `.cex/config/taxonomy_sources.yaml`\n   - Report\
+  \n3. Continuous Monitoring\n   - Nightly job: re-validate all citations in `.cex/P09_config/taxonomy_sources.yaml`\n   - Report\
   \ broken links + suggest archival (Wayback Machine) or removal\n\n4. Memory & Learning\n   - Track citation patterns per\
   \ domain (ML papers cite arXiv, management cite LinkedIn, etc.)\n   - Learn domain-specific citation formats for future\
   \ generation\n\n---"

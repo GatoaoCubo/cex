@@ -89,7 +89,7 @@ agents/software_project_manifest/
 
 ### Output
 
-- Primary: validated manifest bundle (`.toml` / `.json`) + audit report committed to `N05_operations/output/`
+- Primary: validated manifest bundle (`.toml` / `.json`) + audit report committed to `N05_operations/P05_output/`
 - Secondary: compiled `.yaml` manifest artifact, gap report with fix commands, completion signal to N07
 
 ## Quality Gates
@@ -100,7 +100,7 @@ SOFT: `tldr <= 160ch` (153ch ✓), `tags >= 3` with "agent" (5 tags ✓), `capab
 ## Common Issues
 
 - **Lock file missing**: `poetry.lock` absent → run `poetry lock --no-update`; never commit `pyproject.toml` changes without regenerating lock
-- **railway.toml healthcheckPath mismatch**: path in toml doesn't match FastAPI router prefix → cross-check against `N05_operations/schemas/railway_toml_schema.md`
+- **railway.toml healthcheckPath mismatch**: path in toml doesn't match FastAPI router prefix → cross-check against `N05_operations/P06_schema/railway_toml_schema.md`
 - **Env variable divergence**: `.env.example` and `railway.toml [variables]` out of sync → run cross-manifest consistency check before handing off to Railway Superintendent
 - **Manifest byte overflow**: Generated artifact body > 5120B → compress Common Issues; collapse tool table to 5 core entries
 - **F7 gate failure on first draft**: Score < 8.0 → re-validate frontmatter YAML syntax; confirm `capabilities_count` matches body; retry F6 max 2×

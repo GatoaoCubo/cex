@@ -43,7 +43,7 @@ density_score: 1.0
 | 6 | `P11_feedback/templates/tpl_optimizer.md` | `quality: {{QUALITY_8_TO_10}}` placeholder; missing `version` | Set `quality: null`; added `version: 1.0.0` | LOW |
 | 7 | `P11_feedback/templates/tpl_quality_gate.md` | `quality: {{QUALITY_8_TO_10}}` placeholder in frontmatter | Set to `quality: null` | LOW |
 | 8 | `P11_feedback/examples/ex_content_monetization_*.md` (3 files) + `tpl_content_monetization.md` | `kind: function_def` (wrong; should be `content_monetization`) | Changed to `kind: content_monetization` on 4 files | MEDIUM |
-| 9 | `N04_knowledge/knowledge/rag_source_knowledge.md` | `last_checked: 2024-03-30` stale (W3 Rank 2) | Updated to `last_checked: 2026-04-15` | LOW |
+| 9 | `N04_knowledge/P01_knowledge/rag_source_knowledge.md` | `last_checked: 2024-03-30` stale (W3 Rank 2) | Updated to `last_checked: 2026-04-15` | LOW |
 
 ## Quality Gate Drift Summary
 

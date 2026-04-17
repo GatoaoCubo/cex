@@ -13,7 +13,7 @@ quality: null
 tags: [chunk_strategy, p01, n03, engineering, retrieval, inventive_pride]
 ---
 <!-- 8F: F1=chunk_strategy/P01 F2=chunk-strategy-builder F3=nucleus_def_n03+kc_chunk_strategy+P01_schema F4=hybrid defaults for engineering docs
-     F5=Get-Content+rg+apply_patch+cex_compile.py F6=bytes:6228 F7=self-check:frontmatter+8f+properties+80l+ascii F8=N03_engineering/knowledge/kno_chunk_strategy_n03.md -->
+     F5=Get-Content+rg+apply_patch+cex_compile.py F6=bytes:6228 F7=self-check:frontmatter+8f+properties+80l+ascii F8=N03_engineering/P01_knowledge/kno_chunk_strategy_n03.md -->
 
 # N03 Chunk Strategy
 

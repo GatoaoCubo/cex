@@ -9,7 +9,7 @@ quality: null
 tags: [validator, quality_gate, evidence, research]
 ---
 
-<!-- 8F: F1 constrain=P06/validator F2 become=validator-builder F3 inject=nucleus_def_n01+n01-intelligence+kc_validator+P06_schema+validator template F4 reason=pre-commit gate for comparative evidence discipline F5 call=apply_patch+cex_compile F6 produce=4503 bytes F7 govern=frontmatter+ascii+80-line+self-check F8 collaborate=N01_intelligence/schemas/sch_validator_n01.md -->
+<!-- 8F: F1 constrain=P06/validator F2 become=validator-builder F3 inject=nucleus_def_n01+n01-intelligence+kc_validator+P06_schema+validator template F4 reason=pre-commit gate for comparative evidence discipline F5 call=apply_patch+cex_compile F6 produce=4503 bytes F7 govern=frontmatter+ascii+80-line+self-check F8 collaborate=N01_intelligence/P06_schema/sch_validator_n01.md -->
 
 ## Purpose
 
@@ -79,7 +79,7 @@ tags: [validator, quality_gate, evidence, research]
 
 ```yaml
 validator_result:
-  target_file: N01_intelligence/schemas/sch_input_schema_n01.md
+  target_file: N01_intelligence/P06_schema/sch_input_schema_n01.md
   status: pass
   matched_conditions: [c01, c02, c03, c04, c05, c06, c07, c08, c09, c10]
   note: "Artifact names comparison pressure, evidence thresholds, and retains quality null."

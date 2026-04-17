@@ -78,6 +78,6 @@ tools: '| Tool | Command | When |
 
   | Signal | `python -c "from _tools.signal_writer import write_signal; ..."` | Emit signals |'
 references:
-- 'Agent definition: N07_admin/agents/agent_admin.md'
-- 'Dispatch rules: N07_admin/orchestration/dispatch_rule_admin.md'
-- 'Spawn config: N07_admin/orchestration/spawn_config_admin.md'
+- 'Agent definition: N07_admin/P02_model/agent_admin.md'
+- 'Dispatch rules: N07_admin/P12_orchestration/dispatch_rule_admin.md'
+- 'Spawn config: N07_admin/P12_orchestration/spawn_config_admin.md'

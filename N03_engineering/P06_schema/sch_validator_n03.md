@@ -12,7 +12,7 @@ tags: [schema, validator, governance, pre_commit, n03]
 
 <!-- 8F: F1 constrain=P06/validator F2 become=validator-builder F3 inject=nucleus_def_n03, n03-builder, kc_validator, P06_schema, quality patterns
      F4 reason=pre-commit validator for N03 foundational artifact discipline F5 call=rg, Get-Content, apply_patch F6 produce=5317 bytes
-     F7 govern=frontmatter+sections+tables+ascii+self-check F8 collaborate=save N03_engineering/schemas/sch_validator_n03.md -->
+     F7 govern=frontmatter+sections+tables+ascii+self-check F8 collaborate=save N03_engineering/P06_schema/sch_validator_n03.md -->
 
 # Foundation Artifact Validator
 
@@ -35,7 +35,7 @@ tags: [schema, validator, governance, pre_commit, n03]
 | rule_type | string | yes | `structural_governance` | Structure must fail fast |
 | severity | string | yes | `error` | Foundation drift is not a warning |
 | on_fail | string | yes | `block` | Weak artifacts do not pass by persuasion |
-| scope | list[string] | yes | `N03_engineering/schemas/*.md`, `N03_engineering/config/*.md` | Narrow ownership keeps enforcement honest |
+| scope | list[string] | yes | `N03_engineering/P06_schema/*.md`, `N03_engineering/P09_config/*.md` | Narrow ownership keeps enforcement honest |
 | auto_fix | boolean | yes | `false` | Pride rejects hidden mutation of authored meaning |
 | audit_trail | boolean | yes | `true` | Every block should be explainable |
 | retry_policy | string | yes | `author_revision_only` | The author must repair the design intentionally |
@@ -72,8 +72,8 @@ rule_type: structural_governance
 severity: error
 on_fail: block
 scope:
-  - N03_engineering/schemas/*.md
-  - N03_engineering/config/*.md
+  - N03_engineering/P06_schema/*.md
+  - N03_engineering/P09_config/*.md
 checks:
   - id: V01
     condition: frontmatter_present

@@ -8,7 +8,7 @@ version: "1.0.0"
 quality: null
 tags: [few_shot_example, marketing, prompting, copy, creative_lust, n02]
 ---
-<!-- 8F: F1=few_shot_example/P01 F2=few-shot-example-builder F3=nucleus_def_n02+kc_campaign+ab_testing_framework+N02_memory+P01_schema F4=example_for_marketing_prompt_input_output_shape F5=shell_command,apply_patch F6=approx_6kb F7=frontmatter+8F+80_lines+dense_tables+self_check_pass F8=N02_marketing/knowledge/kno_few_shot_example_n02.md -->
+<!-- 8F: F1=few_shot_example/P01 F2=few-shot-example-builder F3=nucleus_def_n02+kc_campaign+ab_testing_framework+N02_memory+P01_schema F4=example_for_marketing_prompt_input_output_shape F5=shell_command,apply_patch F6=approx_6kb F7=frontmatter+8F+80_lines+dense_tables+self_check_pass F8=N02_marketing/P01_knowledge/kno_few_shot_example_n02.md -->
 
 # Purpose
 
@@ -165,4 +165,4 @@ few_shot_skeleton:
 | Output style | structured YAML-like variant pack |
 | Main teaching | desire plus proof plus CTA |
 | Risk prevented | flashy but untestable responses |
-| Save path | N02_marketing/knowledge/kno_few_shot_example_n02.md |
+| Save path | N02_marketing/P01_knowledge/kno_few_shot_example_n02.md |

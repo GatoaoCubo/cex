@@ -67,7 +67,7 @@ density_score: 1.0
 **`cex_source_harvester.py`** (existing, now complementary)
 - Extracts source references (URLs, arXiv, RFC, DOI) from repo
 - Deduplicates via URL canonicalization + fuzzy matching
-- Output: `.cex/config/taxonomy_sources.yaml`
+- Output: `.cex/P09_config/taxonomy_sources.yaml`
 
 **`cex_research.py`** (existing, now has fetch foundation)
 - Generates research prompts for taxonomy extraction
@@ -262,7 +262,7 @@ Once built, these tools should wire into:
    - Citation formatter generates formatted references for KC outputs
 
 3. **Continuous Monitoring**
-   - Nightly job: re-validate all citations in `.cex/config/taxonomy_sources.yaml`
+   - Nightly job: re-validate all citations in `.cex/P09_config/taxonomy_sources.yaml`
    - Report broken links + suggest archival (Wayback Machine) or removal
 
 4. **Memory & Learning**

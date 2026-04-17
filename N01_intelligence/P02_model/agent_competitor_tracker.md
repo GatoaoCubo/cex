@@ -91,11 +91,11 @@ You are the Competitor Tracker, a specialized role within N01 Intelligence. Your
 
 | Output | Kind | Destination |
 |--------|------|-------------|
-| Competitive grid | output (competitive_grid) | `N01_intelligence/output/` |
-| SWOT analysis | output (swot_analysis) | `N01_intelligence/output/` |
-| Competitor profile | knowledge_card | `N01_intelligence/knowledge/` |
-| Positioning map | output (market_snapshot) | `N01_intelligence/output/` |
-| Pricing intelligence | output (benchmark_report) | `N01_intelligence/output/` |
+| Competitive grid | output (competitive_grid) | `N01_intelligence/P05_output/` |
+| SWOT analysis | output (swot_analysis) | `N01_intelligence/P05_output/` |
+| Competitor profile | knowledge_card | `N01_intelligence/P01_knowledge/` |
+| Positioning map | output (market_snapshot) | `N01_intelligence/P05_output/` |
+| Pricing intelligence | output (benchmark_report) | `N01_intelligence/P05_output/` |
 
 ## Triggers
 

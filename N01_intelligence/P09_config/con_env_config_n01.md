@@ -9,7 +9,7 @@ quality: null
 tags: [env_config, runtime, research, governance]
 ---
 
-<!-- 8F: F1 constrain=P09/env_config F2 become=env-config-builder F3 inject=nucleus_def_n01+n01-intelligence+kc_env_config+P09_schema+env template F4 reason=runtime variables for research operations and evidence discipline F5 call=apply_patch+cex_compile F6 produce=5142 bytes F7 govern=frontmatter+ascii+80-line+self-check F8 collaborate=N01_intelligence/config/con_env_config_n01.md -->
+<!-- 8F: F1 constrain=P09/env_config F2 become=env-config-builder F3 inject=nucleus_def_n01+n01-intelligence+kc_env_config+P09_schema+env template F4 reason=runtime variables for research operations and evidence discipline F5 call=apply_patch+cex_compile F6 produce=5142 bytes F7 govern=frontmatter+ascii+80-line+self-check F8 collaborate=N01_intelligence/P09_config/con_env_config_n01.md -->
 
 ## Purpose
 

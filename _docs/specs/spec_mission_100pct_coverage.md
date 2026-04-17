@@ -252,7 +252,7 @@ Each new kind requires:
 | `kinds_meta.json` entry | 1 | N07 | id, pillar, boundary, naming, llm_function, max_bytes |
 | Builder scaffold (13 ISOs) | 13 | N03 | manifest, instruction, system_prompt, schema, few_shot, quality_gate, golden_test, etc. |
 | Knowledge card | 1 | N04 | `kc_{kind}.md` documenting the kind with examples |
-| Sub-agent definition | 1 | N03 | `.claude/agents/{kind}-builder.md` |
+| Sub-agent definition | 1 | N03 | `.claude/P02_model/{kind}-builder.md` |
 | Golden example | 1 | N03 | Production-quality instance artifact |
 
 **Total per kind**: 17 artifacts

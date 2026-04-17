@@ -63,8 +63,8 @@ density_score: 0.87
 
 | Agent | Purpose | Path |
 |-------|---------|------|
-| agent_market_analyst | Competitive analysis | `N01_intelligence/agents/` |
-| agent_paper_reader | Academic paper synthesis | `N01_intelligence/agents/` |
+| agent_market_analyst | Competitive analysis | `N01_intelligence/P02_model/` |
+| agent_paper_reader | Academic paper synthesis | `N01_intelligence/P02_model/` |
 
 ## Boot Contract
 

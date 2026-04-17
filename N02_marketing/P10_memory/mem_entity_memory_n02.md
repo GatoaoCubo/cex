@@ -8,7 +8,7 @@ version: "1.0.0"
 quality: null
 tags: [entity_memory, marketing, entities, campaign_memory, creative_lust, n02]
 ---
-<!-- 8F: F1=entity_memory/P10 F2=entity-memory-builder F3=nucleus_def_n02+kc_campaign+campaign_performance_memory+copy_optimization_insights+P10_schema F4=entity_map_for_marketing_runtime_recall F5=shell_command,apply_patch F6=approx_6kb F7=frontmatter+8F+80_lines+dense_tables+self_check_pass F8=N02_marketing/memory/mem_entity_memory_n02.md -->
+<!-- 8F: F1=entity_memory/P10 F2=entity-memory-builder F3=nucleus_def_n02+kc_campaign+campaign_performance_memory+copy_optimization_insights+P10_schema F4=entity_map_for_marketing_runtime_recall F5=shell_command,apply_patch F6=approx_6kb F7=frontmatter+8F+80_lines+dense_tables+self_check_pass F8=N02_marketing/P10_memory/mem_entity_memory_n02.md -->
 
 # Purpose
 
@@ -158,4 +158,4 @@ For each audience or offer entity, store:
 | Expiry stance | 90d review for performance facts |
 | Main runtime value | better hook, proof, and CTA fit |
 | Main risk prevented | forgetting durable audience and offer behavior |
-| Save path | N02_marketing/memory/mem_entity_memory_n02.md |
+| Save path | N02_marketing/P10_memory/mem_entity_memory_n02.md |

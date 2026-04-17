@@ -9,7 +9,7 @@ quality: null
 tags: [rate_limit_config, budget, throughput, research]
 ---
 
-<!-- 8F: F1 constrain=P09/rate_limit_config F2 become=rate-limit-config-builder F3 inject=nucleus_def_n01+n01-intelligence+kc_rate_limit_config+P09_schema+rate examples F4 reason=internal ceilings for deep research cost and throughput F5 call=apply_patch+cex_compile F6 produce=3528 bytes F7 govern=frontmatter+ascii+80-line+self-check F8 collaborate=N01_intelligence/config/con_rate_limit_config_n01.md -->
+<!-- 8F: F1 constrain=P09/rate_limit_config F2 become=rate-limit-config-builder F3 inject=nucleus_def_n01+n01-intelligence+kc_rate_limit_config+P09_schema+rate examples F4 reason=internal ceilings for deep research cost and throughput F5 call=apply_patch+cex_compile F6 produce=3528 bytes F7 govern=frontmatter+ascii+80-line+self-check F8 collaborate=N01_intelligence/P09_config/con_rate_limit_config_n01.md -->
 
 ## Purpose
 

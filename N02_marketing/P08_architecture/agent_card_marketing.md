@@ -16,8 +16,8 @@ api_cost: zero
 mcps: [markitdown, puppeteer_browser]
 domain_area: visual_frontend_engineering_and_copywriting
 boot_sequence:
-  - load_system_prompt: N02_marketing/prompts/system_prompt_marketing.md
-  - inject_knowledge: N02_marketing/knowledge/knowledge_card_marketing.md
+  - load_system_prompt: N02_marketing/P03_prompt/system_prompt_marketing.md
+  - inject_knowledge: N02_marketing/P01_knowledge/knowledge_card_marketing.md
   - load_mcp: markitdown (web content ingestion)
   - load_mcp: puppeteer_browser (visual testing, screenshots)
   - load_frontend_kcs: 10 frontend KCs from P01_knowledge/library/frontend/

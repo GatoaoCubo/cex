@@ -24,7 +24,7 @@ linked_artifacts:
   related: [kno_embedder_provider_n04, kno_vector_store_n04, mem_runtime_state_n04]
 ---
 <!-- 8F: F1=learning_record/P10 F2=learning-record-builder F3=nucleus_def_n04+P10 schema+kc_learning_record+N04 schema/config examples F4=retrospective capture of what produced coherent Wave 2 artifacts
-     F5=shell,apply_patch,cex_compile F6=author markdown artifact F7=frontmatter+outcome-score-body density+self-check F8=N04_knowledge/memory/mem_learning_record_n04.md -->
+     F5=shell,apply_patch,cex_compile F6=author markdown artifact F7=frontmatter+outcome-score-body density+self-check F8=N04_knowledge/P10_memory/mem_learning_record_n04.md -->
 # Summary
 The most reliable way to execute N04 knowledge work was to read the builder contract, kind KC, pillar schema, and nearby nucleus examples before drafting.
 That sequence kept the artifacts inside the correct boundaries while still allowing the Knowledge Gluttony lens to make them broad, connected, and information-dense.
@@ -84,8 +84,8 @@ The practical win was less rewrite pressure: structure decisions stabilized earl
 1. `archetypes/builders/learning-record-builder/bld_instruction_learning_record.md`
 2. `P01_knowledge/library/kind/kc_learning_record.md`
 3. `N04_knowledge/architecture/nucleus_def_n04.md`
-4. `N04_knowledge/schemas/sch_input_schema_n04.md`
-5. `N04_knowledge/config/con_path_config_n04.md`
+4. `N04_knowledge/P06_schema/sch_input_schema_n04.md`
+5. `N04_knowledge/P09_config/con_path_config_n04.md`
 
 ## Properties
 | Property | Value |

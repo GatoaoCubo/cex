@@ -35,10 +35,10 @@ keywords:
 - dispatch
 - task-packaging
 linked_artifacts:
-  primary: N07_admin/orchestration/dispatch_rule_admin.md
+  primary: N07_admin/P12_orchestration/dispatch_rule_admin.md
   related:
-  - N07_admin/orchestration/workflow_admin.md
-  - N07_admin/orchestration/signal_admin.md
+  - N07_admin/P12_orchestration/workflow_admin.md
+  - N07_admin/P12_orchestration/signal_admin.md
 density_score: 0.91
 handoff_structure: 'Every handoff written by N07 MUST contain these sections:
 
@@ -157,5 +157,5 @@ example_bootstrap_f1_handoff: '# N03 Task: Rebuild N07 Orchestrator
 
   python -c "from _tools.signal_writer import write_signal; write_signal(''n03'', ''complete'', 9.0, ''bootstrap_f1'')"'
 references:
-- 'Dispatch rules: N07_admin/orchestration/dispatch_rule_admin.md'
-- 'Signal protocol: N07_admin/orchestration/signal_admin.md'
+- 'Dispatch rules: N07_admin/P12_orchestration/dispatch_rule_admin.md'
+- 'Signal protocol: N07_admin/P12_orchestration/signal_admin.md'

@@ -134,7 +134,7 @@ Total: 8 nuclei x 12 renames = **96 git mv operations**
 
 **cex_repo_align.py behavior:**
 - Scans N00-N07 for semantic subdir names
-- Reports: `[WRONG] N01/knowledge/ should be P01_knowledge/`
+- Reports: `[WRONG] N01/P01_knowledge/ should be P01_knowledge/`
 - Reports: `[MISSING] N01/P04_tools/ not found`
 - Exit 0 = clean, exit 1 = gaps found
 

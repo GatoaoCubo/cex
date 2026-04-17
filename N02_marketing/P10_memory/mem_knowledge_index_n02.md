@@ -8,7 +8,7 @@ version: "1.0.0"
 quality: null
 tags: [knowledge_index, marketing, hybrid_search, memory, creative_lust, n02]
 ---
-<!-- 8F: F1=knowledge_index/P10 F2=knowledge-index-builder F3=nucleus_def_n02+con_path_config_n02+campaign_performance_memory+copy_optimization_insights+P10_schema F4=index_plan_for_n02_corpus_search F5=shell_command,apply_patch F6=approx_6kb F7=frontmatter+8F+80_lines+dense_tables+self_check_pass F8=N02_marketing/memory/mem_knowledge_index_n02.md -->
+<!-- 8F: F1=knowledge_index/P10 F2=knowledge-index-builder F3=nucleus_def_n02+con_path_config_n02+campaign_performance_memory+copy_optimization_insights+P10_schema F4=index_plan_for_n02_corpus_search F5=shell_command,apply_patch F6=approx_6kb F7=frontmatter+8F+80_lines+dense_tables+self_check_pass F8=N02_marketing/P10_memory/mem_knowledge_index_n02.md -->
 
 # Purpose
 
@@ -25,15 +25,15 @@ tags: [knowledge_index, marketing, hybrid_search, memory, creative_lust, n02]
 
 | Include path | Why |
 |--------------|-----|
-| N02_marketing/knowledge/ | core strategy and marketing knowledge |
-| N02_marketing/memory/ | performance and learning carry proof signals |
-| N02_marketing/config/ | runtime constraints and provider boundaries |
-| N02_marketing/schemas/ | validation and contract cues |
+| N02_marketing/P01_knowledge/ | core strategy and marketing knowledge |
+| N02_marketing/P10_memory/ | performance and learning carry proof signals |
+| N02_marketing/P09_config/ | runtime constraints and provider boundaries |
+| N02_marketing/P06_schema/ | validation and contract cues |
 
 | Exclude path | Why |
 |--------------|-----|
 | N02_marketing/compiled/ | derived artifacts, not source truth |
-| N02_marketing/output/ | campaign deliverables may be ephemeral |
+| N02_marketing/P05_output/ | campaign deliverables may be ephemeral |
 | .cex/runtime/handoffs/ | instructions, not reusable knowledge corpus |
 
 ## Corpus Shape
@@ -151,4 +151,4 @@ If the index returns only conceptual marketing notes, it has failed N02.
 | Rebuild style | event plus nightly |
 | Main quality guard | proof-aware reranking |
 | Main risk prevented | retrieval that sounds smart but sells weakly |
-| Save path | N02_marketing/memory/mem_knowledge_index_n02.md |
+| Save path | N02_marketing/P10_memory/mem_knowledge_index_n02.md |

@@ -38,18 +38,18 @@ FAISS-only misses exact-match needs (e.g., searching for "text-embedding-004" or
 ## Scope
 
 ### Include Paths
-- `N01_intelligence/output/*.md` — 15 research deliverables (primary search corpus)
-- `N01_intelligence/knowledge/*.md` — 6 knowledge cards (domain reference)
-- `N01_intelligence/schemas/*.md` — 6 schema contracts (methodology reference)
-- `N01_intelligence/agents/*.md` — 1 agent definition
-- `N01_intelligence/prompts/*.md` — 2 prompt artifacts
+- `N01_intelligence/P05_output/*.md` — 15 research deliverables (primary search corpus)
+- `N01_intelligence/P01_knowledge/*.md` — 6 knowledge cards (domain reference)
+- `N01_intelligence/P06_schema/*.md` — 6 schema contracts (methodology reference)
+- `N01_intelligence/P02_model/*.md` — 1 agent definition
+- `N01_intelligence/P03_prompt/*.md` — 2 prompt artifacts
 - `N01_intelligence/quality/*.md` — 3 quality artifacts
-- `N01_intelligence/memory/*.md` — memory artifacts (self-referential for meta-queries)
+- `N01_intelligence/P10_memory/*.md` — memory artifacts (self-referential for meta-queries)
 
 ### Exclude Paths
 - `N01_intelligence/compiled/*.yaml` — compiled versions are derivative, not source
-- `N01_intelligence/feedback/` — transient quality gate logs
-- `N01_intelligence/tools/` — tool configs are not searchable content
+- `N01_intelligence/P11_feedback/` — transient quality gate logs
+- `N01_intelligence/P04_tools/` — tool configs are not searchable content
 
 ### File Types
 - `.md` only — YAML compiled versions excluded to avoid duplicate indexing

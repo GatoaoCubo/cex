@@ -222,7 +222,7 @@ Created by N03 (commit `74bb7481`). These are **brand-parametric** — filled by
 
 | Template | Path | Variables | Origin (gato) |
 |----------|------|-----------|----------------|
-| `tpl_crm_dashboard.html` | `P05_output/templates/` | BRAND_NAME, BRAND_COLORS.*, MAP_CENTER_LAT, MAP_CENTER_LNG, MAP_ZOOM, CRM_DATA_SOURCE | `N06_commercial/output/dashboard.html` |
+| `tpl_crm_dashboard.html` | `P05_output/templates/` | BRAND_NAME, BRAND_COLORS.*, MAP_CENTER_LAT, MAP_CENTER_LNG, MAP_ZOOM, CRM_DATA_SOURCE | `N06_commercial/P05_output/dashboard.html` |
 
 ### Category C: Research Pipeline (2 templates) — P04
 
@@ -244,7 +244,7 @@ Created by N03 (commit `74bb7481`). These are **brand-parametric** — filled by
 | Template | Path | Variables | Origin (gato) |
 |----------|------|-----------|----------------|
 | `tpl_learning_record_autonomy.md` | `P11_feedback/templates/` | MISSION, NUCLEUS, PHASE, FINDINGS, METRICS, RECOMMENDATIONS | `emergent_autonomy_20260403/*.md` |
-| `tpl_brand_context_nucleus.md` | `P12_orchestration/templates/` | NUCLEUS_ID, NUCLEUS_NAME, BRAND_* | `N01_research/config/brand_context.md` |
+| `tpl_brand_context_nucleus.md` | `P12_orchestration/templates/` | NUCLEUS_ID, NUCLEUS_NAME, BRAND_* | `N01_research/P09_config/brand_context.md` |
 
 ---
 
@@ -341,7 +341,7 @@ User runs /init
 │
 ├── Step 5: Resolved artifacts created in branch
 │   ├── tpl_crm_mission_plan.md → crm_mission/MISSION_PLAN.md
-│   ├── tpl_crm_dashboard.html  → N06_commercial/output/dashboard.html
+│   ├── tpl_crm_dashboard.html  → N06_commercial/P05_output/dashboard.html
 │   └── (each template → concrete artifact with brand data)
 │
 └── Step 6: N07 dispatches first mission

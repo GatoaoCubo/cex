@@ -9,7 +9,7 @@ quality: null
 tags: [n05, operations, memory_summary, gating_wrath, compression, session, retrieval]
 ---
 <!-- 8F: F1=memory_summary/P10 F2=memory-summary-builder F3=nucleus_def_n05+P10_schema+kc_memory_summary+examples+N05 retrieval docs F4=compressed briefing for next ops session
-     F5=shell+apply_patch+cex_compile F6=approx-5KB dense markdown F7=self-check frontmatter+8F+80L+properties+ascii F8=N05_operations/memory/mem_memory_summary_n05.md -->
+     F5=shell+apply_patch+cex_compile F6=approx-5KB dense markdown F7=self-check frontmatter+8F+80L+properties+ascii F8=N05_operations/P10_memory/mem_memory_summary_n05.md -->
 
 # N05 Operations Memory Summary
 

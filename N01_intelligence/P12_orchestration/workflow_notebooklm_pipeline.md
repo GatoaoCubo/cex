@@ -111,7 +111,7 @@ Compared to alternatives:
 - **Output**: pipeline execution report
 - **Actions**:
   1. Update `notebooklm_notebooks.yaml` with new sources + outputs
-  2. Write execution report to `N01_intelligence/output/`
+  2. Write execution report to `N01_intelligence/P05_output/`
   3. Signal N07 with completion status + quality metrics
 - **Tool**: `cex_notebooklm.py --status <notebook_id>`
 - **Signal**: complete (with notebook_id + output manifest)

@@ -12,7 +12,7 @@ provider: openai
 rpm: 180
 tpm: 900000
 ---
-<!-- 8F: F1 constrain=P09/rate_limit_config F2 become=rate-limit-config-builder F3 inject=n04-knowledge+kc_rate_limit_config+P09 examples+N04 embedding usage F4 reason=throughput and budget guardrails for indexing-heavy knowledge work F5 call=shell,apply_patch F6 produce=4735 bytes F7 govern=frontmatter+ascii+density+80-line self-check F8 collaborate=N04_knowledge/config/con_rate_limit_config_n04.md -->
+<!-- 8F: F1 constrain=P09/rate_limit_config F2 become=rate-limit-config-builder F3 inject=n04-knowledge+kc_rate_limit_config+P09 examples+N04 embedding usage F4 reason=throughput and budget guardrails for indexing-heavy knowledge work F5 call=shell,apply_patch F6 produce=4735 bytes F7 govern=frontmatter+ascii+density+80-line self-check F8 collaborate=N04_knowledge/P09_config/con_rate_limit_config_n04.md -->
 # Knowledge Rate Limit Config
 ## Purpose
 N04 can generate large indexing bursts: embeddings, reranking, metadata enrichment, and freshness sweeps all compete for provider quota.

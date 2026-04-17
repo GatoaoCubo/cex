@@ -10,7 +10,7 @@ tags: [schema, enum, knowledge, taxonomy, governance]
 name: knowledge_signal_state
 values: [raw_capture, normalized, enriched, contested, stale, archived, rejected]
 ---
-<!-- 8F: F1 constrain=P06/enum_def F2 become=enum-def-builder F3 inject=n04-knowledge+kc_enum_def+P06 examples+P06 schema F4 reason=closed-set vocabulary for knowledge ingestion rigor F5 call=shell,apply_patch F6 produce=5908 bytes F7 govern=frontmatter+ascii+density+80-line self-check F8 collaborate=N04_knowledge/schemas/sch_enum_def_n04.md -->
+<!-- 8F: F1 constrain=P06/enum_def F2 become=enum-def-builder F3 inject=n04-knowledge+kc_enum_def+P06 examples+P06 schema F4 reason=closed-set vocabulary for knowledge ingestion rigor F5 call=shell,apply_patch F6 produce=5908 bytes F7 govern=frontmatter+ascii+density+80-line self-check F8 collaborate=N04_knowledge/P06_schema/sch_enum_def_n04.md -->
 # Knowledge Signal Enum
 ## Purpose
 N04 works under the Knowledge Gluttony lens: capture more signal than the minimum, but capture it in a finite, auditable vocabulary so retrieval, indexing, and validator layers do not drown in synonyms.

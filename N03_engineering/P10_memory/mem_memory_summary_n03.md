@@ -13,7 +13,7 @@ quality: null
 tags: [memory_summary, p10, n03, compression, context, inventive_pride]
 ---
 <!-- 8F: F1=memory_summary/P10 F2=memory-summary-builder F3=nucleus_def_n03+kc_memory_summary+P10_schema F4=lossy but high-dignity summary policy
-     F5=Get-Content+rg+apply_patch+cex_compile.py F6=bytes:5093 F7=self-check:frontmatter+8f+properties+80l+ascii F8=N03_engineering/memory/mem_memory_summary_n03.md -->
+     F5=Get-Content+rg+apply_patch+cex_compile.py F6=bytes:5093 F7=self-check:frontmatter+8f+properties+80l+ascii F8=N03_engineering/P10_memory/mem_memory_summary_n03.md -->
 
 # N03 Memory Summary
 

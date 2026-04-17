@@ -12,7 +12,7 @@ tags: [enum, schema, marketing, voice, governance]
 
 <!-- 8F: F1 constrain=P06/enum_def F2 become=enum_def-builder F3 inject=nucleus_def_n02+n02_rules+kc_enum_def+P06_schema
      F4 reason=closed_sets_for_seductive_marketing_system F5 call=shell_command,apply_patch F6 produce=6117 bytes
-     F7 govern=frontmatter_sections_ascii_density_linecount F8 collaborate=N02_marketing/schemas/sch_enum_def_n02.md -->
+     F7 govern=frontmatter_sections_ascii_density_linecount F8 collaborate=N02_marketing/P06_schema/sch_enum_def_n02.md -->
 
 # Purpose
 
@@ -116,4 +116,4 @@ campaign_angle:
 | Validation mode | Closed set selection |
 | Default consumer | schemas, prompts, config, validators |
 | Primary risk prevented | vocabulary drift |
-| Save path | N02_marketing/schemas/sch_enum_def_n02.md |
+| Save path | N02_marketing/P06_schema/sch_enum_def_n02.md |

@@ -169,7 +169,7 @@ implementation_roadmap: '| Step | What | Nucleus | Depends on | Effort |
 
   | 4 | Proposal pattern for shared files | N07 (rule) | Step 3 | EXISTS |
 
-  | 5 | Agent tool sub-agent definitions | -- | -- | EXISTS (125 in .claude/agents/) |
+  | 5 | Agent tool sub-agent definitions | -- | -- | EXISTS (125 in .claude/P02_model/) |
 
   | 6 | Boot scripts with Claude Code CLI | N05 | -- | EXISTS (boot/n0X.cmd) |
 

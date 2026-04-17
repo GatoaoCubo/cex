@@ -120,5 +120,5 @@ On quality rejection at `accept_or_reject`:
 
 ## References
 
-- Dispatch rules: N07_admin/orchestration/dispatch_rule_admin.md
-- Workflow: N07_admin/orchestration/workflow_admin.md
+- Dispatch rules: N07_admin/P12_orchestration/dispatch_rule_admin.md
+- Workflow: N07_admin/P12_orchestration/workflow_admin.md

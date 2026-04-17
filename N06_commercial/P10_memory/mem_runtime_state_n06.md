@@ -8,7 +8,7 @@ version: 1.0
 quality: null
 tags: [memory, runtime_state, routing, decisions, pricing, funnels]
 ---
-<!-- 8F: F1=P10/runtime_state F2=runtime-state-builder F3=nucleus_def_n06.md,kc_runtime_state.md,P10_memory/_schema.yaml,N06 commercial knowledge set F4=runtime_routing_state_for_cash_near_commercial_decisions F5=apply_patch;python _tools/cex_compile.py F6=author_dense_markdown_artifact F7=frontmatter_ascii_density_linecount_review F8=N06_commercial/memory/mem_runtime_state_n06.md -->
+<!-- 8F: F1=P10/runtime_state F2=runtime-state-builder F3=nucleus_def_n06.md,kc_runtime_state.md,P10_memory/_schema.yaml,N06 commercial knowledge set F4=runtime_routing_state_for_cash_near_commercial_decisions F5=apply_patch;python _tools/cex_compile.py F6=author_dense_markdown_artifact F7=frontmatter_ascii_density_linecount_review F8=N06_commercial/P10_memory/mem_runtime_state_n06.md -->
 
 # Commercial Runtime State
 

@@ -12,7 +12,7 @@ tags: [config, rate_limit, budget, engineering, n03]
 
 <!-- 8F: F1 constrain=P09/rate_limit_config F2 become=rate-limit-config-builder F3 inject=nucleus_def_n03, kc_rate_limit_config, P09_config, builder runtime context
      F4 reason=protect build throughput, token budget, and mission spend for N03 work F5 call=rg, Get-Content, apply_patch F6 produce=4384 bytes
-     F7 govern=frontmatter+sections+tables+ascii+self-check F8 collaborate=save N03_engineering/config/con_rate_limit_config_n03.md -->
+     F7 govern=frontmatter+sections+tables+ascii+self-check F8 collaborate=save N03_engineering/P09_config/con_rate_limit_config_n03.md -->
 
 # Engineering Rate Limit Config
 

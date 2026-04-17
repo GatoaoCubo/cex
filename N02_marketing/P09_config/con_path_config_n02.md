@@ -12,7 +12,7 @@ tags: [config, paths, workspace, marketing, runtime]
 
 <!-- 8F: F1 constrain=P09/path_config F2 become=path_config-builder F3 inject=nucleus_def_n02+n02_rules+kc_path_config+P09_schema
      F4 reason=bounded_workspace_paths_for_marketing_delivery F5 call=shell_command,apply_patch F6 produce=5074 bytes
-     F7 govern=frontmatter_sections_ascii_density_linecount F8 collaborate=N02_marketing/config/con_path_config_n02.md -->
+     F7 govern=frontmatter_sections_ascii_density_linecount F8 collaborate=N02_marketing/P09_config/con_path_config_n02.md -->
 
 # Purpose
 
@@ -30,11 +30,11 @@ tags: [config, paths, workspace, marketing, runtime]
 |-----|------|------|--------|
 | base_dir | C:/Users/CEX/Documents/GitHub/cex | anchor | Shared root for all relative paths |
 | nucleus_root | N02_marketing/ | read_write | Main N02 workspace |
-| schemas_dir | N02_marketing/schemas/ | read_write | Reusable P06 contracts |
-| config_dir | N02_marketing/config/ | read_write | Runtime and governance config |
-| prompts_dir | N02_marketing/prompts/ | read_write | Seduction patterns and task prompts |
-| output_dir | N02_marketing/output/ | read_write | Campaign-ready deliverables |
-| knowledge_dir | N02_marketing/knowledge/ | read_only | Source context for tone and strategy |
+| schemas_dir | N02_marketing/P06_schema/ | read_write | Reusable P06 contracts |
+| config_dir | N02_marketing/P09_config/ | read_write | Runtime and governance config |
+| prompts_dir | N02_marketing/P03_prompt/ | read_write | Seduction patterns and task prompts |
+| output_dir | N02_marketing/P05_output/ | read_write | Campaign-ready deliverables |
+| knowledge_dir | N02_marketing/P01_knowledge/ | read_only | Source context for tone and strategy |
 | rules_dir | N02_marketing/rules/ | read_only | Nucleus operating laws |
 | architecture_dir | N02_marketing/architecture/ | read_only | Identity and system design |
 | compiled_dir | N02_marketing/compiled/ | read_write | Generated compile targets |
@@ -91,8 +91,8 @@ path_resolution:
     - N02_marketing/architecture/nucleus_def_n02.md
     - P01_knowledge/library/kind/kc_type_def.md
   source_write:
-    - N02_marketing/schemas/sch_type_def_n02.md
-    - N02_marketing/config/con_secret_config_n02.md
+    - N02_marketing/P06_schema/sch_type_def_n02.md
+    - N02_marketing/P09_config/con_secret_config_n02.md
 ```
 
 | Example Action | Path Key | Expected Result |
@@ -115,4 +115,4 @@ path_resolution:
 | Writable path groups | 5 |
 | Primary risk prevented | filesystem sprawl and accidental overwrite |
 | Human intent | keep seductive production assets organized |
-| Save path | N02_marketing/config/con_path_config_n02.md |
+| Save path | N02_marketing/P09_config/con_path_config_n02.md |

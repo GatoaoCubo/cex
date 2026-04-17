@@ -9,7 +9,7 @@ quality: null
 tags: [config, path, pricing, assets, audit]
 ---
 
-<!-- 8F: F1 constrain=P09/path_config F2 become=path-config-builder F3 inject=nucleus_def_n06.md,n06-commercial.md,bld_manifest_path_config.md,kc_path_config.md,P09_config/_schema.yaml F4 reason=bounded_paths_for_commercial_assets_and_revenue_audit_trails F5 call=apply_patch;python _tools/cex_compile.py F6 produce=5121_bytes F7 govern=frontmatter_sections_ascii_density_review F8 collaborate=N06_commercial/config/con_path_config_n06.md -->
+<!-- 8F: F1 constrain=P09/path_config F2 become=path-config-builder F3 inject=nucleus_def_n06.md,n06-commercial.md,bld_manifest_path_config.md,kc_path_config.md,P09_config/_schema.yaml F4 reason=bounded_paths_for_commercial_assets_and_revenue_audit_trails F5 call=apply_patch;python _tools/cex_compile.py F6 produce=5121_bytes F7 govern=frontmatter_sections_ascii_density_review F8 collaborate=N06_commercial/P09_config/con_path_config_n06.md -->
 
 # Commercial Path Config
 

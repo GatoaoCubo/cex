@@ -124,7 +124,7 @@ DONE — KC knowledge is now live across all channels
 
 **Pre-flight checks**:
 1. KC exists and has valid frontmatter (`kind`, `domain`, `title`)
-2. NotebookLM config exists (`.cex/config/notebooklm_notebooks.yaml`)
+2. NotebookLM config exists (`.cex/P09_config/notebooklm_notebooks.yaml`)
 3. Auth cookies valid (`check_auth_valid()`)
 4. Source count < 45 for target notebook (warn at 45, block at 50)
 
@@ -228,7 +228,7 @@ Each publishing workflow is independent and runs in parallel:
 | Newsletter opens | Email provider | 6h, 24h | <20% open: test new subject line |
 | Flashcard imports | Supabase tracking | 48h | <10: promote in next newsletter |
 
-**Feedback loop**: Top-performing content formats and hooks are logged to `N02_marketing/memory/campaign_performance_memory.md` for future optimization.
+**Feedback loop**: Top-performing content formats and hooks are logged to `N02_marketing/P10_memory/campaign_performance_memory.md` for future optimization.
 
 ## Integration Points
 

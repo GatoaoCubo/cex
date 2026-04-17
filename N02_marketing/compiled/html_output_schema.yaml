@@ -177,7 +177,7 @@ quality_assurance_checklist: 'Before Output Delivery:
 integration_with_cex_system: ''
 compilation: '# After HTML generation, compile to YAML for CEX system
 
-  python _tools/cex_compile.py N02_marketing/output/component_name.md
+  python _tools/cex_compile.py N02_marketing/P05_output/component_name.md
 
 
   # Validation pipeline

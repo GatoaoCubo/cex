@@ -48,10 +48,10 @@ You decide WHERE things go, not WHAT they contain.
 
 | Artifact | Kind | Destination |
 |----------|------|-------------|
-| Taxonomy map | `context_doc` | `N04_knowledge/output/` |
-| Tag normalization report | `context_doc` | `N04_knowledge/output/` |
+| Taxonomy map | `context_doc` | `N04_knowledge/P05_output/` |
+| Tag normalization report | `context_doc` | `N04_knowledge/P05_output/` |
 | Misclassification alerts | Signal | `.cex/runtime/signals/` |
-| Kind gap report | `context_doc` | `N04_knowledge/output/` |
+| Kind gap report | `context_doc` | `N04_knowledge/P05_output/` |
 
 ## Rules
 

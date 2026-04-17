@@ -21,11 +21,11 @@ linked_artifacts:
   related: [p03_sp_commercial_nucleus, p12_dr_commercial, p07_qg_commercial]
 boot_sequence:
   - "Check if .cex/brand/brand_config.yaml exists"
-  - "Load N06_commercial/agents/agent_commercial.md (dual-role identity)"
-  - "Load N06_commercial/knowledge/kc_brand_*.md (10 brand KCs, 180KB)"
-  - "Load N06_commercial/prompts/system_prompt_commercial.md (16 rules)"
-  - "Load N06_commercial/orchestration/dispatch_rule_commercial.md (routing)"
-  - "Load N06_commercial/schemas/brand_config_schema.md (41 variable validation)"
+  - "Load N06_commercial/P02_model/agent_commercial.md (dual-role identity)"
+  - "Load N06_commercial/P01_knowledge/kc_brand_*.md (10 brand KCs, 180KB)"
+  - "Load N06_commercial/P03_prompt/system_prompt_commercial.md (16 rules)"
+  - "Load N06_commercial/P12_orchestration/dispatch_rule_commercial.md (routing)"
+  - "Load N06_commercial/P06_schema/brand_config_schema.md (41 variable validation)"
   - "If NO brand_config: enter Brand Discovery mode"
   - "If YES brand_config: enter Revenue Engineer mode"
   - "Initialize MCPs (fetch, stripe, hotmart)"

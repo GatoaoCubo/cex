@@ -139,8 +139,8 @@ anti_patterns:
 references:
 - '`archetypes/builders/vector-store-builder/bld_instruction_vector_store.md`'
 - '`P01_knowledge/library/kind/kc_vector_store.md`'
-- '`N04_knowledge/config/con_env_config_n04.md`'
-- '`N04_knowledge/knowledge/knowledge_card_knowledge.md`'
+- '`N04_knowledge/P09_config/con_env_config_n04.md`'
+- '`N04_knowledge/P01_knowledge/knowledge_card_knowledge.md`'
 properties: '| Property | Value |
 
   |----------|-------|

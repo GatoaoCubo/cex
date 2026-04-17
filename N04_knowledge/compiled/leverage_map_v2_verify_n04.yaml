@@ -126,7 +126,7 @@ build_1_hybrid_search_orchestrator_highest_impact: "Kind: `retriever_config` (P0
   \ + vector_store + reranker  \nWhy #1: 30% boost to F3 accuracy. Trivial to wire. Ship in 2 hours.\n\nInput: query string\n\
   \  |\n  +-- L1: cex_retriever.py (TF-IDF) → 100 candidates\n  |\n  +-- L2: cex_vector_store.py (semantic) → rank by embedding\
   \ similarity\n  |\n  +-- L2.5: cex_reranker.py (BM25 rerank) → final sort by lexical match\n  |\nOutput: top 10 merged-ranked\
-  \ artifacts\n\nArtifact: `P01_knowledge/config/retriever_config_hybrid_v2.md`  \nOutput: Python tool `_tools/cex_hybrid_retriever.py`\
+  \ artifacts\n\nArtifact: `P01_knowledge/P09_config/retriever_config_hybrid_v2.md`  \nOutput: Python tool `_tools/cex_hybrid_retriever.py`\
   \ (orchestrator)\n\n---"
 build_2_sqlite_vector_database_production_readiness: "Kind: `vector_store` (P01)  \nNucleus: N04  \nGoal: Replace .npz with\
   \ SQLite (ACID, concurrent read, persistence)  \nWhy #2: cex_vector_store.py is memory-based. Prod needs:\n  - Concurrent\
@@ -135,7 +135,7 @@ build_2_sqlite_vector_database_production_readiness: "Kind: `vector_store` (P01)
   \ pillar, timestamp)\n\n---"
 build_3_embedding_provider_auto_select_resilience: 'Kind: `embedder_provider` (P01) Nucleus: N04 Goal: Fallback chain — Ollama
   → Claude Haiku → error Why #3: Ollama crashes = F3 injection fails = all 8F builds blocked. 0.5 day build. Current: Hardcoded
-  Ollama qwen3:14b Target: Auto-detect healthy provider, fallback gracefully Artifact: `P01_knowledge/config/embedder_provider_fallback.md`
+  Ollama qwen3:14b Target: Auto-detect healthy provider, fallback gracefully Artifact: `P01_knowledge/P09_config/embedder_provider_fallback.md`
   Tool: Update `_tools/cex_vector_store.py` to probe providers ---'
 5_quality_assessment: '| Dimension | Score | Comment |
 

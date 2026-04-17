@@ -148,7 +148,7 @@ CEX Repo (git clone)
   |     +-- n01.cmd - n06.cmd (nucleus boot scripts)
   |
   +-- .mcp-n0X.json           (MCP server configs, 1 per nucleus)
-  +-- .cex/config/
+  +-- .cex/P09_config/
   |     +-- nucleus_models.yaml (model routing: cli + model + flags)
   |
   +-- _tools/                 (59 Python tools)

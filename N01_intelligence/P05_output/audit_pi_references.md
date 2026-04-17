@@ -72,8 +72,8 @@ These contain design-time context. PI refs here are misleading but not actively 
 |---|------|---------|--------------|---------------|
 | 10 | `_docs/specs/spec_n07_bootstrap_context.md` | 72, 238, 239 | `cex-pi-package` x3, "Pi skills", "pi themes" | Full rewrite needed -- replace PI package refs with Claude Code equivalents |
 | 11 | `_docs/specs/spec_infinite_bootstrap_loop.md` | 48, 65, 78, 80, 116, 124, 139-140, 213, 215, 218, 226, 275, 278, 281, 284, 378 | 16+ PI refs: `pi --continue`, `pi --model`, `.pi/agents/`, `pi compact()`, `pi /handoff`, `pi subagent extension` | HEAVIEST FILE -- needs full rewrite or archive. Entire architecture assumes PI |
-| 12 | `N03_builder/orchestration/spawn_config_builder.md` | 13, 54 | "pi CLI", `pi --model opus-4-6` | Replace with `claude CLI`, `claude --model opus-4-6` |
-| 13 | `N04_knowledge/orchestration/spawn_config_knowledge.md` | 31 | `pi --model opus-4-6` | Replace with `claude --model opus-4-6` |
+| 12 | `N03_builder/P12_orchestration/spawn_config_builder.md` | 13, 54 | "pi CLI", `pi --model opus-4-6` | Replace with `claude CLI`, `claude --model opus-4-6` |
+| 13 | `N04_knowledge/P12_orchestration/spawn_config_knowledge.md` | 31 | `pi --model opus-4-6` | Replace with `claude --model opus-4-6` |
 | 14 | `_tmp_prose_audit.py` | 11 | `"cex-pi-package"` in skip filter | Remove cex-pi-package from skip list (or delete temp file) |
 | 15 | `extensions/ollama-provider/index.ts` | 12 | `import type { ExtensionAPI } from "@mariozechner/pi-coding-agent"` | Archive entire extensions/ directory -- PI extension system is dead |
 | 16 | `P01_knowledge/library/domain/compiled/kc_cex_orchestration_architecture.yaml` | 64 | `N07 (pi CLI)` | Auto-fixes when source .md (#7) is fixed and recompiled |

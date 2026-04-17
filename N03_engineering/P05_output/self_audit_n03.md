@@ -116,11 +116,11 @@ No agent references PI subagent mechanisms. The `Agent` tool's `subagent_type` p
 
 | File | Change | Task |
 |------|--------|------|
-| `N03_builder/orchestration/spawn_config_builder.md` | `pi` -> `claude` (3 refs) | Task 1 |
-| `N04_knowledge/orchestration/spawn_config_knowledge.md` | `pi` -> `claude` (1 ref) | Task 1 |
-| `N07_admin/orchestration/spawn_config_admin.md` | `pi + claude` -> `claude` (1 ref) | Task 1 |
+| `N03_builder/P12_orchestration/spawn_config_builder.md` | `pi` -> `claude` (3 refs) | Task 1 |
+| `N04_knowledge/P12_orchestration/spawn_config_knowledge.md` | `pi` -> `claude` (1 ref) | Task 1 |
+| `N07_admin/P12_orchestration/spawn_config_admin.md` | `pi + claude` -> `claude` (1 ref) | Task 1 |
 | `.claude/rules/n07-autonomous-lifecycle.md` | `pi` -> `claude` (3 refs) | Task 4 |
-| `N03_engineering/output/self_audit_n03.md` | Created (this file) | Task 5 |
+| `N03_engineering/P05_output/self_audit_n03.md` | Created (this file) | Task 5 |
 
 ## 6. Spawn Config PI Cleanup Summary
 

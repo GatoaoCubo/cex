@@ -8,7 +8,7 @@ version: 1.0
 quality: null
 tags: [knowledge, embedder_provider, vectors, pricing, retrieval, monetization]
 ---
-<!-- 8F: F1=P01/embedder_provider F2=embedder-provider-builder F3=nucleus_def_n06.md,kc_embedder_provider.md,P01_knowledge/_schema.yaml,N06 W1 config/schema F4=high_precision_embeddings_for_revenue_adjacent_semantic_search F5=apply_patch;python _tools/cex_compile.py F6=author_dense_markdown_artifact F7=frontmatter_ascii_density_linecount_review F8=N06_commercial/knowledge/kno_embedder_provider_n06.md -->
+<!-- 8F: F1=P01/embedder_provider F2=embedder-provider-builder F3=nucleus_def_n06.md,kc_embedder_provider.md,P01_knowledge/_schema.yaml,N06 W1 config/schema F4=high_precision_embeddings_for_revenue_adjacent_semantic_search F5=apply_patch;python _tools/cex_compile.py F6=author_dense_markdown_artifact F7=frontmatter_ascii_density_linecount_review F8=N06_commercial/P01_knowledge/kno_embedder_provider_n06.md -->
 
 # Commercial Embedder Provider
 

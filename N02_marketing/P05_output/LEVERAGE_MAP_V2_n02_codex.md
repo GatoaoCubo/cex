@@ -78,7 +78,7 @@ Related wiring already present around it:
 
 - `_tools/cex_8f_motor.py` maps `social_publisher` and social intents
 - `_tools/cex_schema_hydrate.py` includes `social-publisher-builder`
-- `N02_marketing/tools/social_publisher_marketing.md` documents the broader publishing shape
+- `N02_marketing/P04_tools/social_publisher_marketing.md` documents the broader publishing shape
 
 This means the codebase now has:
 

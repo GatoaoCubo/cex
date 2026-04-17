@@ -56,7 +56,7 @@ kind-builder --produces--> .claude/agents/{kind}-builder.md (sub-agent)
 {kind}-builder/ --compiled_by--> cex_compile.py (structural validation)
 
 .claude/agents/{kind}-builder.md --used_by--> N07 dispatch (nucleus routing)
-.claude/agents/{kind}-builder.md --used_by--> _spawn/dispatch.sh (process spawning)
+.claude/P02_model/{kind}-builder.md --used_by--> _spawn/dispatch.sh (process spawning)
 ```
 
 | From | To | Type | Data |

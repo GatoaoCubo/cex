@@ -25,7 +25,7 @@ density_score: 0.94
 | Python | >= 3.11 |
 | CEX SDK | `cex_score.py`, `cex_compile.py`, `cex_retriever.py` operational |
 | MCP servers | brave-search, firecrawl, markitdown, fetch accessible |
-| Corpus | N01_intelligence/output/ contains >= 10 research outputs |
+| Corpus | N01_intelligence/P05_output/ contains >= 10 research outputs |
 | Scoring rubric | `scoring_rubric_intelligence.md` loaded |
 | Source quality contract | `source_quality_contract.md` loaded |
 
@@ -63,10 +63,10 @@ density_score: 0.94
 
 ```bash
 # Run full benchmark suite
-python _tools/cex_score.py --benchmark N01_intelligence/output/ \
+python _tools/cex_score.py --benchmark N01_intelligence/P05_output/ \
   --rubric N01_intelligence/quality/scoring_rubric_intelligence.md \
   --iterations 10 \
-  --output N01_intelligence/output/benchmark_results.yaml
+  --output N01_intelligence/P05_output/benchmark_results.yaml
 
 # Run single metric: source density
 python -c "

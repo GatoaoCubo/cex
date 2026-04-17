@@ -13,7 +13,7 @@ quality: null
 tags: [knowledge_index, p10, n03, bm25, faiss, hybrid, inventive_pride]
 ---
 <!-- 8F: F1=knowledge_index/P10 F2=knowledge-index-builder F3=nucleus_def_n03+kc_knowledge_index+P10_schema F4=hybrid index memory tuned for builder corpus
-     F5=Get-Content+rg+apply_patch+cex_compile.py F6=bytes:5452 F7=self-check:frontmatter+8f+properties+80l+ascii F8=N03_engineering/memory/mem_knowledge_index_n03.md -->
+     F5=Get-Content+rg+apply_patch+cex_compile.py F6=bytes:5452 F7=self-check:frontmatter+8f+properties+80l+ascii F8=N03_engineering/P10_memory/mem_knowledge_index_n03.md -->
 
 # N03 Knowledge Index
 

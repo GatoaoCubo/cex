@@ -9,7 +9,7 @@ quality: null
 tags: [permission, access, runtime, governance]
 ---
 
-<!-- 8F: F1 constrain=P09/permission F2 become=permission-builder F3 inject=nucleus_def_n01+n01-intelligence+kc_permission+P09_schema+local runtime rules F4 reason=least-privilege access for research and comparative artifacts F5 call=apply_patch+cex_compile F6 produce=4424 bytes F7 govern=frontmatter+ascii+80-line+self-check F8 collaborate=N01_intelligence/config/con_permission_n01.md -->
+<!-- 8F: F1 constrain=P09/permission F2 become=permission-builder F3 inject=nucleus_def_n01+n01-intelligence+kc_permission+P09_schema+local runtime rules F4 reason=least-privilege access for research and comparative artifacts F5 call=apply_patch+cex_compile F6 produce=4424 bytes F7 govern=frontmatter+ascii+80-line+self-check F8 collaborate=N01_intelligence/P09_config/con_permission_n01.md -->
 
 ## Purpose
 
@@ -25,16 +25,16 @@ tags: [permission, access, runtime, governance]
 
 | Subject | Resource | Read | Write | Execute | Notes |
 |--------|----------|------|-------|---------|-------|
-| `n01_runtime` | `N01_intelligence/knowledge/**` | allow | allow | no | research notes can evolve |
-| `n01_runtime` | `N01_intelligence/output/**` | allow | allow | no | final deliverables |
-| `n01_runtime` | `N01_intelligence/schemas/**` | allow | allow | no | owned typed contracts |
-| `n01_runtime` | `N01_intelligence/config/**` | allow | allow | no | owned runtime config |
+| `n01_runtime` | `N01_intelligence/P01_knowledge/**` | allow | allow | no | research notes can evolve |
+| `n01_runtime` | `N01_intelligence/P05_output/**` | allow | allow | no | final deliverables |
+| `n01_runtime` | `N01_intelligence/P06_schema/**` | allow | allow | no | owned typed contracts |
+| `n01_runtime` | `N01_intelligence/P09_config/**` | allow | allow | no | owned runtime config |
 | `n01_runtime` | `N01_intelligence/architecture/**` | allow | deny | no | identity is inspectable but stable |
 | `n01_runtime` | `N01_intelligence/rules/**` | allow | deny | no | rules are upstream governed |
 | `n01_runtime` | `_tools/**` | allow | deny | execute_limited | may run approved tooling only |
 | `n07_orchestrator` | `N01_intelligence/**` | allow | allow | allow | escalation owner |
-| `other_nuclei` | `N01_intelligence/output/**` | allow | deny | no | consume outputs, not internals |
-| `other_nuclei` | `N01_intelligence/config/**` | deny | deny | no | config stays local |
+| `other_nuclei` | `N01_intelligence/P05_output/**` | allow | deny | no | consume outputs, not internals |
+| `other_nuclei` | `N01_intelligence/P09_config/**` | deny | deny | no | config stays local |
 
 ## Deny Overrides
 
@@ -42,8 +42,8 @@ tags: [permission, access, runtime, governance]
 |--------|----------|-------------|
 | `n01_runtime` | `.git/**` | no direct git authority in this policy |
 | `n01_runtime` | `N01_intelligence/agent_card_n01.md` | identity file must stay stable |
-| `other_nuclei` | `N01_intelligence/schemas/**` | prevents silent contract drift |
-| `other_nuclei` | `N01_intelligence/knowledge/**` | avoids cross-nucleus edits without handoff |
+| `other_nuclei` | `N01_intelligence/P06_schema/**` | prevents silent contract drift |
+| `other_nuclei` | `N01_intelligence/P01_knowledge/**` | avoids cross-nucleus edits without handoff |
 
 ## Execution Allowlist
 
@@ -77,7 +77,7 @@ tags: [permission, access, runtime, governance]
 ```yaml
 subject: n01_runtime
 action: write
-resource: N01_intelligence/schemas/sch_input_schema_n01.md
+resource: N01_intelligence/P06_schema/sch_input_schema_n01.md
 decision: allow
 because: "Owned contract path under N01 schemas."
 ```

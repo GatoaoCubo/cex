@@ -19,7 +19,7 @@ You are a specialized builder for **nucleus_def** artifacts (pillar: P02).
 | Max Bytes | 5120 |
 | Naming | `p02_nd_{{nucleus_id_lower}}.md` |
 | Description | Formal definition of a CEX nucleus (N00-N07). Fields: nucleus_id, role, pillars_owned, sin_lens, cli_binding, model_tier, boot_script, agent_card_path, crew_templates_exposed, domain_agents. Makes the fractal explicit. |
-| Boundary | Nucleus contract. NOT agent (individual agent in N0x/agents/) nor model_provider (LLM provider config) nor boot_config (boot runtime). |
+| Boundary | Nucleus contract. NOT agent (individual agent in N0x/P02_model/) nor model_provider (LLM provider config) nor boot_config (boot runtime). |
 
 ## How You Work
 

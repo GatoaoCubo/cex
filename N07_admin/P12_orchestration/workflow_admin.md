@@ -121,9 +121,9 @@ python _tools/cex_doctor.py
 
 ## Dependencies
 
-- Dispatch rules: N07_admin/orchestration/dispatch_rule_admin.md
-- Spawn config: N07_admin/orchestration/spawn_config_admin.md
-- DAG: N07_admin/orchestration/dag_admin.md
+- Dispatch rules: N07_admin/P12_orchestration/dispatch_rule_admin.md
+- Spawn config: N07_admin/P12_orchestration/spawn_config_admin.md
+- DAG: N07_admin/P12_orchestration/dag_admin.md
 
 ## Signals
 
@@ -133,6 +133,6 @@ python _tools/cex_doctor.py
 
 ## References
 
-- DAG definition: N07_admin/orchestration/dag_admin.md
-- Spawn config: N07_admin/orchestration/spawn_config_admin.md
-- Grid ops (positions, recovery, crashes): N07_admin/memory/grid_orchestration_mastery.md
+- DAG definition: N07_admin/P12_orchestration/dag_admin.md
+- Spawn config: N07_admin/P12_orchestration/spawn_config_admin.md
+- Grid ops (positions, recovery, crashes): N07_admin/P10_memory/grid_orchestration_mastery.md

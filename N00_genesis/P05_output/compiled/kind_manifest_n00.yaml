@@ -1,0 +1,61 @@
+id: n00_contributor_guide_manifest
+kind: knowledge_card
+pillar: P05 -- Output
+nucleus: n00
+title: Contributor Guide -- Canonical Manifest
+version: 1.0
+quality: null
+tags:
+- manifest
+- contributor_guide
+- p05
+- n00
+- archetype
+- template
+purpose: 'Contributor guide produces an OSS CONTRIBUTING.md specification that covers the full contributor lifecycle: environment
+  setup, coding standards, PR workflow, testing requirements, review process, and maintainer decision authority. It reduces
+  onboarding friction and ensures consistent contribution quality across the project.'
+schema_key_fields: '| Field | Type | Required | Description |
+
+  |-------|------|----------|-------------|
+
+  | id | string | yes | Unique artifact identifier |
+
+  | kind | string | yes | Always `contributor_guide` |
+
+  | pillar | string | yes | Always `P05` |
+
+  | title | string | yes | Project name + "Contributing Guide" |
+
+  | version | semver | yes | Artifact version |
+
+  | quality | float\|null | yes | Peer-review score (null until reviewed) |
+
+  | setup_steps | list | yes | Numbered environment setup instructions |
+
+  | coding_standards | string | yes | Style guide reference or inline rules |
+
+  | pr_requirements | list | yes | Checklist for pull request acceptance |
+
+  | review_process | string | yes | How PRs are reviewed and merged |
+
+  | maintainer_contact | string | yes | How to reach maintainers for questions |'
+when_to_use:
+- Setting up a new open-source repository that expects external contributions
+- Onboarding a new engineering team to contribution norms
+- Updating contribution guidelines after process or toolchain changes
+builder: '`archetypes/builders/contributor_guide-builder/` Run: `python _tools/cex_8f_runner.py "your intent" --kind contributor_guide
+  --execute`'
+template_variables_open_for_instantiation:
+- '`{{NUCLEUS_ROLE}}` -- N04 knowledge or N05 operations manages contributor docs'
+- '`{{SIN_LENS}}` -- Knowledge Gluttony: thorough, unambiguous specification'
+- '`{{TARGET_AUDIENCE}}` -- external contributors and new team members'
+- '`{{DOMAIN_CONTEXT}}` -- language, toolchain, test framework, CI/CD pipeline'
+example_minimal: "---\nid: contributor_guide_cex_oss\nkind: contributor_guide\npillar: P05\nnucleus: n04\ntitle: \"CEX Platform\
+  \ -- Contributing Guide\"\nversion: 1.0\nquality: null\n---\nsetup_steps:\n  - \"git clone + python -m venv\"\n  - \"pip\
+  \ install -r requirements.txt\"\n  - \"python _tools/cex_doctor.py --quick\"\npr_requirements: [tests pass, 8F trace in\
+  \ PR description, quality >= 8.0]"
+related_kinds:
+- '`code_of_conduct` (P05) -- companion community governance document'
+- '`github_issue_template` (P05) -- enforces contribution process at issue creation'
+- '`quickstart_guide` (P05) -- first-contact doc that links to contributor guide'

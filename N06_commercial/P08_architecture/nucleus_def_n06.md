@@ -66,8 +66,8 @@ density_score: 0.87
 
 | Agent | Purpose | Path |
 |-------|---------|------|
-| agent_pricing_strategist | Tier + bundle design | `N06_commercial/agents/` |
-| agent_funnel_optimizer | Conversion funnel | `N06_commercial/agents/` |
+| agent_pricing_strategist | Tier + bundle design | `N06_commercial/P02_model/` |
+| agent_funnel_optimizer | Conversion funnel | `N06_commercial/P02_model/` |
 
 ## Boot Contract
 

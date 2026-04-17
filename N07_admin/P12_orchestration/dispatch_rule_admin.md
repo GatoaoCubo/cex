@@ -117,6 +117,6 @@ when a task touches multiple domains. Stemming is applied for bilingual matching
 
 ## References
 
-- Workflow: N07_admin/orchestration/workflow_admin.md
-- Spawn config: N07_admin/orchestration/spawn_config_admin.md
-- Grid ops (fallbacks, recovery): N07_admin/memory/grid_orchestration_mastery.md
+- Workflow: N07_admin/P12_orchestration/workflow_admin.md
+- Spawn config: N07_admin/P12_orchestration/spawn_config_admin.md
+- Grid ops (fallbacks, recovery): N07_admin/P10_memory/grid_orchestration_mastery.md

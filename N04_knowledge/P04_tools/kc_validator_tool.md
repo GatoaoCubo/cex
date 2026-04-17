@@ -32,7 +32,7 @@ python _tools/kc_validator.py validate P01_knowledge/library/kind/ --recursive
 python _tools/kc_validator.py density path/to/kc.md
 
 # Generate validation report
-python _tools/kc_validator.py report --output N04_knowledge/output/kc_validation_report.md
+python _tools/kc_validator.py report --output N04_knowledge/P05_output/kc_validation_report.md
 ```
 
 ## Checks Performed

@@ -23,7 +23,7 @@ Constructs, maintains, and audits the CEX taxonomy. Turns the flat kind registry
 
 ```bash
 # Generate taxonomy tree (visual)
-python _tools/taxonomy_builder.py tree --output N04_knowledge/output/taxonomy_tree.md
+python _tools/taxonomy_builder.py tree --output N04_knowledge/P05_output/taxonomy_tree.md
 
 # Normalize tags across all artifacts
 python _tools/taxonomy_builder.py normalize --scope P01_knowledge/ --dry-run
@@ -32,7 +32,7 @@ python _tools/taxonomy_builder.py normalize --scope P01_knowledge/ --dry-run
 python _tools/taxonomy_builder.py orphans --all
 
 # Pillar coverage report
-python _tools/taxonomy_builder.py coverage --output N04_knowledge/output/pillar_coverage.md
+python _tools/taxonomy_builder.py coverage --output N04_knowledge/P05_output/pillar_coverage.md
 
 # Kind distribution (count per kind)
 python _tools/taxonomy_builder.py distribution

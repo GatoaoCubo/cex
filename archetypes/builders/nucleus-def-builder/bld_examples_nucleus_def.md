@@ -78,7 +78,7 @@ tags: [nucleus_def, n05, operations, composable]
 - cli_binding verified against nucleus_models.yaml.
 - pillars_owned reflects actual artifact production (P07/P08/P09/P11).
 - crew_templates_exposed names concrete patterns (ci_cd_review_crew).
-- domain_agents lists real agent files from N05_operations/agents/.
+- domain_agents lists real agent files from N05_operations/P02_model/.
 
 ---
 

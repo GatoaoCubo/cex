@@ -13,7 +13,7 @@ model: "claude-opus-4-6"
 mcps: [filesystem, git, spawn]
 domain_area: orchestration
 boot_sequence:
-  - "Load system prompt from N07_admin/prompts/system_prompt_admin.md"
+  - "Load system prompt from N07_admin/P03_prompt/system_prompt_admin.md"
   - "Initialize dispatch.sh availability check"
   - "Load routing rules from dispatch_rule_admin.md"
   - "Verify .cex/runtime/ directory structure (handoffs, signals)"
@@ -66,9 +66,9 @@ directly — it coordinates the work of N01-N06.
 
 ## Boot Sequence
 
-1. Load system prompt from `N07_admin/prompts/system_prompt_admin.md` (~2s)
+1. Load system prompt from `N07_admin/P03_prompt/system_prompt_admin.md` (~2s)
 2. Verify `_spawn/dispatch.sh` exists and is executable (~1s)
-3. Load routing rules from `N07_admin/orchestration/dispatch_rule_admin.md` (~1s)
+3. Load routing rules from `N07_admin/P12_orchestration/dispatch_rule_admin.md` (~1s)
 4. Verify `.cex/runtime/` directory structure: handoffs, signals, pids (~1s)
 5. Ready — total boot time ~5s
 
@@ -119,7 +119,7 @@ directly — it coordinates the work of N01-N06.
 
 ## References
 
-- Agent definition: N07_admin/agents/agent_admin.md
-- System prompt: N07_admin/prompts/system_prompt_admin.md
-- Dispatch rules: N07_admin/orchestration/dispatch_rule_admin.md
-- Spawn config: N07_admin/orchestration/spawn_config_admin.md
+- Agent definition: N07_admin/P02_model/agent_admin.md
+- System prompt: N07_admin/P03_prompt/system_prompt_admin.md
+- Dispatch rules: N07_admin/P12_orchestration/dispatch_rule_admin.md
+- Spawn config: N07_admin/P12_orchestration/spawn_config_admin.md

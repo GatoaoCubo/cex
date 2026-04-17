@@ -54,9 +54,9 @@ python -c "from _tools.signal_writer import write_signal; write_signal('{nucleus
   "timestamp": "2026-03-30T14:00:00Z",
   "task": "bootstrap_f1",
   "artifacts": [
-    "N07_admin/agents/agent_admin.md",
-    "N07_admin/prompts/system_prompt_admin.md",
-    "N07_admin/knowledge/knowledge_card_admin.md"
+    "N07_admin/P02_model/agent_admin.md",
+    "N07_admin/P03_prompt/system_prompt_admin.md",
+    "N07_admin/P01_knowledge/knowledge_card_admin.md"
   ],
   "artifacts_count": 3,
   "commit_hash": "abc123def"
@@ -135,6 +135,6 @@ N07 reads signals to:
 ## References
 
 - Signal writer: _tools/signal_writer.py
-- Handoff protocol: N07_admin/orchestration/handoff_admin.md
-- Quality gate: N07_admin/feedback/quality_gate_admin.md
-- Grid ops (diagnostics, crash detection): N07_admin/memory/grid_orchestration_mastery.md
+- Handoff protocol: N07_admin/P12_orchestration/handoff_admin.md
+- Quality gate: N07_admin/P11_feedback/quality_gate_admin.md
+- Grid ops (diagnostics, crash detection): N07_admin/P10_memory/grid_orchestration_mastery.md

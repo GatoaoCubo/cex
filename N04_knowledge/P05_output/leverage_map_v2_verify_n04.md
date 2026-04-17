@@ -136,7 +136,7 @@ Input: query string
 Output: top 10 merged-ranked artifacts
 ```
 
-**Artifact**: `P01_knowledge/config/retriever_config_hybrid_v2.md`  
+**Artifact**: `P01_knowledge/P09_config/retriever_config_hybrid_v2.md`  
 **Output**: Python tool `_tools/cex_hybrid_retriever.py` (orchestrator)
 
 ---
@@ -166,7 +166,7 @@ Output: top 10 merged-ranked artifacts
 **Current**: Hardcoded Ollama qwen3:14b  
 **Target**: Auto-detect healthy provider, fallback gracefully
 
-**Artifact**: `P01_knowledge/config/embedder_provider_fallback.md`  
+**Artifact**: `P01_knowledge/P09_config/embedder_provider_fallback.md`  
 **Tool**: Update `_tools/cex_vector_store.py` to probe providers
 
 ---

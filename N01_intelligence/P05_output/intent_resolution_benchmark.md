@@ -27,12 +27,12 @@ axioms:
 feeds_kinds: [router, guardrail, quality_gate, eval_dataset, instruction, knowledge_card]
 linked_artifacts:
   related:
-    - N01_intelligence/output/report_input_intent_resolution.md
+    - N01_intelligence/P05_output/report_input_intent_resolution.md
     - _tools/cex_8f_motor.py
     - _tools/cex_query.py
     - _tools/cex_retriever.py
     - .claude/rules/n07-input-transmutation.md
-    - N03_engineering/knowledge/kc_intent_resolution_map.md
+    - N03_engineering/P01_knowledge/kc_intent_resolution_map.md
 density_score: 0.91
 ---
 

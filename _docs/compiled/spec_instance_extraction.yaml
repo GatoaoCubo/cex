@@ -52,7 +52,7 @@ extraction_map_gato_ao_cubo_main_templates: ''
 
   |---------------|----------------|-----------|
 
-  | `N06_commercial/output/dashboard.html` | `P05_output/templates/tpl_crm_dashboard.html` | {{BRAND_NAME}}, {{BRAND_COLORS.*}},
+  | `N06_commercial/P05_output/dashboard.html` | `P05_output/templates/tpl_crm_dashboard.html` | {{BRAND_NAME}}, {{BRAND_COLORS.*}},
   {{MAP_CENTER_LAT}}, {{MAP_CENTER_LNG}}, {{MAP_ZOOM}}, {{CRM_DATA_SOURCE}} |'
 4_crm_admin_spec: '| Source (gato) | Template (main) | Variables |
 

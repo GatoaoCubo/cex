@@ -88,6 +88,6 @@ If asked to write copy, I dispatch to N02. If asked to deploy, I dispatch to N05
 
 ## References
 
-- Agent definition: N07_admin/agents/agent_admin.md
-- Dispatch rules: N07_admin/orchestration/dispatch_rule_admin.md
-- Spawn config: N07_admin/orchestration/spawn_config_admin.md
+- Agent definition: N07_admin/P02_model/agent_admin.md
+- Dispatch rules: N07_admin/P12_orchestration/dispatch_rule_admin.md
+- Spawn config: N07_admin/P12_orchestration/spawn_config_admin.md

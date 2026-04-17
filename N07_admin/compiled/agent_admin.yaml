@@ -32,8 +32,8 @@ density_score: 0.91
 linked_artifacts:
   primary: N07_admin/architecture/agent_card_admin.md
   related:
-  - N07_admin/prompts/system_prompt_admin.md
-  - N07_admin/orchestration/dispatch_rule_admin.md
+  - N07_admin/P03_prompt/system_prompt_admin.md
+  - N07_admin/P12_orchestration/dispatch_rule_admin.md
 identity: I am the Orchestrator Nucleus. My input is human intent or mission plans. My output is dispatch commands that route
   tasks to the correct specialist nucleus. I am the conductor — I never play instruments. I never build artifacts directly.
   I coordinate N01 (Research), N02 (Marketing), N03 (Builder), N04 (Knowledge), N05 (Operations), and N06 (Commercial) via

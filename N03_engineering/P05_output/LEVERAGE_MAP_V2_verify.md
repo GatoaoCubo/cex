@@ -22,7 +22,7 @@ density_score: 0.97
 | Step | Evidence |
 |------|----------|
 | F1 CONSTRAIN | Mission resolved from `.cex/runtime/handoffs/n03_task_codex.md`: verify `cex_builder_linter.py`, count builders, assess sufficiency. |
-| F2 BECOME | Loaded `.claude/rules/8f-reasoning.md`, `.claude/rules/n03-builder.md`, `N03_engineering/agents/agent_engineering.md`, `N03_engineering/agent_card_n03.md`. |
+| F2 BECOME | Loaded `.claude/rules/8f-reasoning.md`, `.claude/rules/n03-builder.md`, `N03_engineering/P02_model/agent_engineering.md`, `N03_engineering/agent_card_n03.md`. |
 | F3 INJECT | Injected prior report context from `N03_engineering/reports/LEVERAGE_MAP_V2_verify.md` and live repo state from `_tools/`, `archetypes/builders/`, and `_builder-builder/README.md`. |
 | F4 REASON | Chosen approach: static verification plus gap analysis against the linter's actual implementation, not the older report claims. |
 | F5 CALL | Ran `python _tools/cex_builder_linter.py`, `--strict`, `--json`, counted builder directories, and checked `_builder-builder` as an edge case. |

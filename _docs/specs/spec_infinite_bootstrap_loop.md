@@ -266,7 +266,7 @@ goto loop
 | 2 | `overnight_infinite.cmd` (auto-restart loop) | N05 | Step 1 | 1 dispatch |
 | 3 | `cex_lock.py` (shared file locking) | N05 | -- | EXISTS |
 | 4 | Proposal pattern for shared files | N07 (rule) | Step 3 | EXISTS |
-| 5 | Agent tool sub-agent definitions | -- | -- | EXISTS (125 in .claude/agents/) |
+| 5 | Agent tool sub-agent definitions | -- | -- | EXISTS (125 in .claude/P02_model/) |
 | 6 | Boot scripts with Claude Code CLI | N05 | -- | EXISTS (boot/n0X.cmd) |
 | 7 | `--continuous` mode in mission_runner | N05 | Steps 1,3 | 1 dispatch |
 | 8 | Task queue file + auto-prioritization | N05 | Step 7 | 1 dispatch |

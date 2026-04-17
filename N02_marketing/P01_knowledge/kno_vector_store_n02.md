@@ -8,7 +8,7 @@ version: "1.0.0"
 quality: null
 tags: [vector_store, marketing, qdrant, retrieval, creative_lust, n02]
 ---
-<!-- 8F: F1=vector_store/P01 F2=vector-store-builder F3=nucleus_def_n02+con_path_config_n02+con_permission_n02+con_secret_config_n02+P01_schema+P10_schema F4=vector_backend_for_marketing_similarity_search F5=shell_command,apply_patch F6=approx_6kb F7=frontmatter+8F+80_lines+dense_tables+self_check_pass F8=N02_marketing/knowledge/kno_vector_store_n02.md -->
+<!-- 8F: F1=vector_store/P01 F2=vector-store-builder F3=nucleus_def_n02+con_path_config_n02+con_permission_n02+con_secret_config_n02+P01_schema+P10_schema F4=vector_backend_for_marketing_similarity_search F5=shell_command,apply_patch F6=approx_6kb F7=frontmatter+8F+80_lines+dense_tables+self_check_pass F8=N02_marketing/P01_knowledge/kno_vector_store_n02.md -->
 
 # Purpose
 
@@ -171,4 +171,4 @@ collection_profile:
 | Metric | cosine |
 | Metadata stance | required and first-class |
 | Main risk prevented | semantically close but tactically unusable recall |
-| Save path | N02_marketing/knowledge/kno_vector_store_n02.md |
+| Save path | N02_marketing/P01_knowledge/kno_vector_store_n02.md |

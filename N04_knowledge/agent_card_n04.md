@@ -164,7 +164,7 @@ N04 has the most MCP servers of any nucleus (5) because knowledge work requires 
 
 6. **5 MCP Servers**: Most connected nucleus. Ingestion (firecrawl + fetch) -> storage (supabase + postgres) -> transformation (notebooklm). This pipeline turns raw web content into indexed, retrievable, transformable knowledge.
 
-7. **20 Sub-Agent Definitions**: Every domain kind has a dedicated builder agent in `.claude/agents/`, each loading 13 ISOs. This means N04 can dispatch specialized builders for any knowledge or memory artifact type.
+7. **20 Sub-Agent Definitions**: Every domain kind has a dedicated builder agent in `.claude/P02_model/`, each loading 13 ISOs. This means N04 can dispatch specialized builders for any knowledge or memory artifact type.
 
 8. **P01 Library Depth**: The P01 compiled directory holds 197 example artifacts -- the largest example corpus of any pillar. These serve as F3 injection sources for template-first construction.
 

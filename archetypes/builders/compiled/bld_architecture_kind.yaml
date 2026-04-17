@@ -79,7 +79,7 @@ dependency_graph: 'kinds_meta.json --feeds--> kind-builder (reads target kind me
 
   .claude/agents/{kind}-builder.md --used_by--> N07 dispatch (nucleus routing)
 
-  .claude/agents/{kind}-builder.md --used_by--> _spawn/dispatch.sh (process spawning)
+  .claude/P02_model/{kind}-builder.md --used_by--> _spawn/dispatch.sh (process spawning)
 
 
   | From | To | Type | Data |

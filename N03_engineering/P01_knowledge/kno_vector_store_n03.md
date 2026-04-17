@@ -13,7 +13,7 @@ quality: null
 tags: [vector_store, p01, n03, pgvector, metadata, inventive_pride]
 ---
 <!-- 8F: F1=vector_store/P01 F2=vector-store-builder F3=nucleus_def_n03+kc_vector_store+P01_schema F4=metadata-rich store for engineering retrieval
-     F5=Get-Content+rg+apply_patch+cex_compile.py F6=bytes:5830 F7=self-check:frontmatter+8f+properties+80l+ascii F8=N03_engineering/knowledge/kno_vector_store_n03.md -->
+     F5=Get-Content+rg+apply_patch+cex_compile.py F6=bytes:5830 F7=self-check:frontmatter+8f+properties+80l+ascii F8=N03_engineering/P01_knowledge/kno_vector_store_n03.md -->
 
 # N03 Vector Store
 

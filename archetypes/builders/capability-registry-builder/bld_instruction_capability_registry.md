@@ -18,7 +18,7 @@ density_score: 0.85
 
 ## Phase 1: RESEARCH
 1. Scan `.claude/agents/` directory -- list all 252 builder sub-agent files.
-2. Scan `N01_intelligence/agents/`, `N02_marketing/agents/`, `N03_engineering/agents/`, `N04_knowledge/agents/`, `N05_operations/agents/`, `N06_commercial/agents/` for nucleus domain agents.
+2. Scan `N01_intelligence/P02_model/`, `N02_marketing/P02_model/`, `N03_engineering/P02_model/`, `N04_knowledge/P02_model/`, `N05_operations/P02_model/`, `N06_commercial/P02_model/` for nucleus domain agents.
 3. Read each agent card (`N0x_*/agent_card_n0x.md`) for nucleus-level capabilities.
 4. Extract from each agent: id, domain, capabilities list, tools list, input kinds, output kinds.
 5. Map each agent to relevant query keywords (from domain + capabilities).

@@ -335,7 +335,7 @@ when_not_to_teach: '| Scenario | What to do instead |
   | Teaching would delay a time-sensitive operation | Do first, explain after |
 
   | The term is universally understood (e.g., "deploy") | No teaching needed |'
-tracking_what_was_taught: "Storage: `N07_admin/memory/user_directive_technical_authority.md`\n\nFormat:\n\ntaught_terms:\n\
+tracking_what_was_taught: "Storage: `N07_admin/P10_memory/user_directive_technical_authority.md`\n\nFormat:\n\ntaught_terms:\n\
   \  - term: \"grid\"\n    mapped_to: \"multi-agent orchestration\"\n    taught_on: 2026-04-08\n    context: \"first grid\
   \ dispatch\"\n  - term: \"card\"\n    mapped_to: \"artifact\"\n    taught_on: 2026-04-07\n    context: \"explaining knowledge\
   \ cards\"\n\nRules:\n1. Check the taught list BEFORE teaching -- never repeat\n2. Update the list AFTER teaching -- always\

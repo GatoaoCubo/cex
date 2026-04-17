@@ -53,17 +53,17 @@ outputs: '| Artifact | Kind | Destination |
 
   |----------|------|-------------|
 
-  | Embedding config | `embedding_config` | `N04_knowledge/knowledge/` |
+  | Embedding config | `embedding_config` | `N04_knowledge/P01_knowledge/` |
 
-  | Chunk strategy | `chunk_strategy` | `N04_knowledge/knowledge/` |
+  | Chunk strategy | `chunk_strategy` | `N04_knowledge/P01_knowledge/` |
 
-  | Vector store config | `vector_store` | `N04_knowledge/knowledge/` |
+  | Vector store config | `vector_store` | `N04_knowledge/P01_knowledge/` |
 
-  | Batch processing report | `context_doc` | `N04_knowledge/output/` |'
+  | Batch processing report | `context_doc` | `N04_knowledge/P05_output/` |'
 benchmarking_protocol:
 - Select 50 representative KCs across all pillars
 - Embed with candidate model
 - Run 20 retrieval queries (known-answer)
 - 'Measure: Recall@5, Recall@10, MRR, latency_p50, latency_p99'
 - Compare against TF-IDF baseline (`cex_retriever.py`)
-- Document results in `N04_knowledge/output/output_embedding_benchmark.md`
+- Document results in `N04_knowledge/P05_output/output_embedding_benchmark.md`

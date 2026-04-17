@@ -32,9 +32,9 @@ domain_agents: '| Agent | Purpose | Path |
 
   |-------|---------|------|
 
-  | agent_builder_architect | Builder design | `N03_engineering/agents/` |
+  | agent_builder_architect | Builder design | `N03_engineering/P02_model/` |
 
-  | agent_schema_designer | Data contract design | `N03_engineering/agents/` |'
+  | agent_schema_designer | Data contract design | `N03_engineering/P02_model/` |'
 fallback_cli: codex
 title: Nucleus Def N03
 version: 1.0.0

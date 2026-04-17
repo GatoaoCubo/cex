@@ -118,7 +118,7 @@ Command: `_tools` listing filtered for operations/test/release utilities
 
 ### 3.2 Output surface snapshot
 
-Command: frontmatter scan over `N05_operations/output/*.md`
+Command: frontmatter scan over `N05_operations/P05_output/*.md`
 
 | Output kind | Count | Read |
 |---|---:|---|

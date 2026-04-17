@@ -38,7 +38,7 @@ why_it_succeeds: '- nucleus_id is canonical (N05).
 
   - crew_templates_exposed names concrete patterns (ci_cd_review_crew).
 
-  - domain_agents lists real agent files from N05_operations/agents/.
+  - domain_agents lists real agent files from N05_operations/P02_model/.
 
 
   ---'

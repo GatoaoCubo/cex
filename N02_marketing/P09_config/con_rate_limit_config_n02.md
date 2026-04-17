@@ -12,7 +12,7 @@ tags: [config, rate_limit, budget, marketing, runtime]
 
 <!-- 8F: F1 constrain=P09/rate_limit_config F2 become=rate_limit_config-builder F3 inject=nucleus_def_n02+n02_rules+kc_rate_limit_config+P09_schema
      F4 reason=throttle_cost_and_provider_pressure_for_marketing_runs F5 call=shell_command,apply_patch F6 produce=4048 bytes
-     F7 govern=frontmatter_sections_ascii_density_linecount F8 collaborate=N02_marketing/config/con_rate_limit_config_n02.md -->
+     F7 govern=frontmatter_sections_ascii_density_linecount F8 collaborate=N02_marketing/P09_config/con_rate_limit_config_n02.md -->
 
 # Purpose
 
@@ -105,4 +105,4 @@ rate_limit_run:
 | Budget control | hard cap plus conservation mode |
 | Main risk prevented | runaway spend from variant overproduction |
 | Operational mood | bold but bounded |
-| Save path | N02_marketing/config/con_rate_limit_config_n02.md |
+| Save path | N02_marketing/P09_config/con_rate_limit_config_n02.md |

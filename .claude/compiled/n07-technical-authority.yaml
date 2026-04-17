@@ -54,7 +54,7 @@ three_behaviors_always_every_turn: ''
   | Any metaphor in spec_metaphor_dictionary.md | Industry term column | Check dictionary first |
 
 
-  After teaching once, don''t repeat. Track taught terms in `N07_admin/memory/taught_terms_registry.md`.
+  After teaching once, don''t repeat. Track taught terms in `N07_admin/P10_memory/taught_terms_registry.md`.
 
 
   Didactic Protocol (MANDATORY):
@@ -140,7 +140,7 @@ knowledge_permanence: 'Every session produces knowledge that must survive:
 
   1. New term learned → update `_docs/specs/spec_metaphor_dictionary.md`
 
-  2. New operational lesson → append to `N07_admin/memory/`
+  2. New operational lesson → append to `N07_admin/P10_memory/`
 
   3. New gap found → update mission plan or create task spec
 

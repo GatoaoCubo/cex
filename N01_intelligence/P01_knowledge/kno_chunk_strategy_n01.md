@@ -9,7 +9,7 @@ quality: null
 tags: [chunk_strategy, n01, p01, analytical_envy, retrieval]
 ---
 <!-- 8F: F1=chunk_strategy/P01 F2=kc_chunk_strategy+tpl_chunk_strategy F3=nucleus_def_n01+kc_chunk_strategy+ex_chunk_strategy_recursive_1000+source_quality_contract F4=hybrid comparative ingestion spec
-     F5=rg+Get-Content+apply_patch F6=target dense markdown artifact F7=self-check properties+8F+ascii+80lines F8=N01_intelligence/knowledge/kno_chunk_strategy_n01.md -->
+     F5=rg+Get-Content+apply_patch F6=target dense markdown artifact F7=self-check properties+8F+ascii+80lines F8=N01_intelligence/P01_knowledge/kno_chunk_strategy_n01.md -->
 
 # N01 Chunk Strategy
 

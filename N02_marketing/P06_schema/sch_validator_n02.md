@@ -12,7 +12,7 @@ tags: [validator, quality, marketing, precommit, governance]
 
 <!-- 8F: F1 constrain=P06/validator F2 become=validator-builder F3 inject=nucleus_def_n02+n02_rules+kc_validator+P06_schema
      F4 reason=binary_gate_for_marketing_artifacts_before_commit F5 call=shell_command,apply_patch F6 produce=5360 bytes
-     F7 govern=frontmatter_sections_ascii_density_linecount F8 collaborate=N02_marketing/schemas/sch_validator_n02.md -->
+     F7 govern=frontmatter_sections_ascii_density_linecount F8 collaborate=N02_marketing/P06_schema/sch_validator_n02.md -->
 
 # Purpose
 
@@ -76,7 +76,7 @@ tags: [validator, quality, marketing, precommit, governance]
 
 ```yaml
 validator_run:
-  artifact_path: N02_marketing/config/con_rate_limit_config_n02.md
+  artifact_path: N02_marketing/P09_config/con_rate_limit_config_n02.md
   result: pass
   failed_rules: []
   warnings:
@@ -113,5 +113,5 @@ validator_run:
 | Primary audience | N02 builders and reviewers |
 | Main risk prevented | persuasive drift with weak governance |
 | Retry expectation | max 2 revisions before escalation |
-| Save path | N02_marketing/schemas/sch_validator_n02.md |
+| Save path | N02_marketing/P06_schema/sch_validator_n02.md |
 | Depends on | sch_enum_def_n02, sch_type_def_n02 |

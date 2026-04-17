@@ -144,5 +144,5 @@ The user (and internal docs) use metaphors to explain concepts. LLMs and artifac
 2. **User input**: accept "User says" column, translate silently.
 3. **This dictionary**: the ONLY place both columns coexist.
 4. **Llama-7B test**: if the term needs this dictionary to be understood, it's wrong for artifacts.
-5. **Rename cascade**: changing a term requires CRUD across all files that reference it. See `N07_admin/memory/terminology_standardization.md` for the full map.
-6. **Didactic protocol**: check `N07_admin/memory/taught_terms_registry.md` before teaching. Teach once per term, never repeat. See N02's didactic protocol spec for format guidelines.
+5. **Rename cascade**: changing a term requires CRUD across all files that reference it. See `N07_admin/P10_memory/terminology_standardization.md` for the full map.
+6. **Didactic protocol**: check `N07_admin/P10_memory/taught_terms_registry.md` before teaching. Teach once per term, never repeat. See N02's didactic protocol spec for format guidelines.

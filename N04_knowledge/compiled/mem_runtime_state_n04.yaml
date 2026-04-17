@@ -129,7 +129,7 @@ references:
 - '`P01_knowledge/library/kind/kc_runtime_state.md`'
 - '`N04_knowledge/agent_card_n04.md`'
 - '`N04_knowledge/architecture/nucleus_def_n04.md`'
-- '`N04_knowledge/config/con_env_config_n04.md`'
+- '`N04_knowledge/P09_config/con_env_config_n04.md`'
 properties: '| Property | Value |
 
   |----------|-------|

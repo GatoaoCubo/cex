@@ -12,7 +12,7 @@ tags: [type, schema, campaign, copy, marketing]
 
 <!-- 8F: F1 constrain=P06/type_def F2 become=type_def-builder F3 inject=nucleus_def_n02+n02_rules+kc_type_def+P06_schema
      F4 reason=reusable_shape_for_desire_driven_copy_objects F5 call=shell_command,apply_patch F6 produce=5745 bytes
-     F7 govern=frontmatter_sections_ascii_density_linecount F8 collaborate=N02_marketing/schemas/sch_type_def_n02.md -->
+     F7 govern=frontmatter_sections_ascii_density_linecount F8 collaborate=N02_marketing/P06_schema/sch_type_def_n02.md -->
 
 # Purpose
 
@@ -128,4 +128,4 @@ campaign_desire_unit:
 | Governance design | enum-backed and no extra fields |
 | Change tolerance | medium |
 | Primary risk prevented | inconsistent campaign packet shape |
-| Save path | N02_marketing/schemas/sch_type_def_n02.md |
+| Save path | N02_marketing/P06_schema/sch_type_def_n02.md |

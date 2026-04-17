@@ -94,9 +94,9 @@ A sample stdin run succeeded, but PowerShell here-string input introduced a lead
 
 | Item | Status | Notes |
 |------|--------|------|
-| `N02_marketing/tools/social_publisher_marketing.md` | Wired | Documents a fuller social publishing workflow |
-| `N02_marketing/knowledge/knowledge_card_social_publishing.md` | Wired | Captures the social publishing domain model |
-| `N02_marketing/orchestration/dispatch_rule_social_publisher.md` | Wired | Routes social publishing work into N02 |
+| `N02_marketing/P04_tools/social_publisher_marketing.md` | Wired | Documents a fuller social publishing workflow |
+| `N02_marketing/P01_knowledge/knowledge_card_social_publishing.md` | Wired | Captures the social publishing domain model |
+| `N02_marketing/P12_orchestration/dispatch_rule_social_publisher.md` | Wired | Routes social publishing work into N02 |
 | `_tools/cex_8f_motor.py` | Wired | Maps `social_publisher` intent into the N02 call path |
 | `_tools/cex_schema_hydrate.py` | Wired | Includes `social-publisher-builder` metadata |
 

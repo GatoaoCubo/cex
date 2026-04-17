@@ -22,7 +22,7 @@ density_score: 0.85
 | :--- | :--- | :--- | :--- |
 | Registry Entry | Versioned artifact record (frontmatter + lineage) | N04 Knowledge | Active |
 | Schema Validator | Frontmatter + field validation (cex_compile.py) | N05 Operations | Active |
-| Artifact URI Store | Pointer to weights/config/tokenizer on blob storage | N03 Build | Active |
+| Artifact URI Store | Pointer to weights/P09_config/tokenizer on blob storage | N03 Build | Active |
 | Quality Gate | 5D scoring, HARD/SOFT gates (cex_score.py) | N07 Orchestrator | Active |
 | Audit Trail | Git history + commit messages per registry entry | N05 Operations | Active |
 | Lineage Graph | base_model -> parent_version -> training_pipeline chain | N01 Research | Active |

@@ -10,7 +10,7 @@ tags: [schema, type, operations, release, audit]
 ---
 <!-- 8F: F1 constrain=P06/type_def F2 become=type-def-builder F3 inject=nucleus_def_n05+n05-operations+kc_type_def+P06_schema+N05 schema examples
      F4 reason=typed release decision record with explicit evidence and rollback gates F5 call=apply_patch F6 produce=5661 bytes
-     F7 govern=self-check headings+tables+gating_wrath+ascii+80_lines F8 collaborate=N05_operations/schemas/sch_type_def_n05.md -->
+     F7 govern=self-check headings+tables+gating_wrath+ascii+80_lines F8 collaborate=N05_operations/P06_schema/sch_type_def_n05.md -->
 
 # Release Decision Type
 

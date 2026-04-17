@@ -50,7 +50,7 @@ industry_terms_for_this_protocol: 'CEX calls this "transmutation" internally (in
 
   prompt_compiler artifact (it is the source of truth, version-controlled, peer-scored). The legacy
 
-  `N03_engineering/knowledge/kc_intent_resolution_map.md` (123 kinds) is superseded.
+  `N03_engineering/P01_knowledge/kc_intent_resolution_map.md` (123 kinds) is superseded.
 
 
   Behavioral contract: every user input flows through the prompt_compiler BEFORE 8F starts. Output
@@ -319,7 +319,7 @@ terminology_enforcement_mandatory: 'Every N07 output — chat, handoff, artifact
   4. If already taught: just use the term, no explanation
 
 
-  Track taught terms in: `N07_admin/memory/user_directive_technical_authority.md`'
+  Track taught terms in: `N07_admin/P10_memory/user_directive_technical_authority.md`'
 n07_self_check_before_every_action: 'Before executing anything, verify:
 
   - [ ] Did I kill idle processes? (lesson #1)

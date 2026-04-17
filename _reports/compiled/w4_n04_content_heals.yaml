@@ -39,7 +39,7 @@ defects_fixed: '| rank | file | defect | fix | severity |
   | 8 | `P11_feedback/examples/ex_content_monetization_*.md` (3 files) + `tpl_content_monetization.md` | `kind: function_def`
   (wrong; should be `content_monetization`) | Changed to `kind: content_monetization` on 4 files | MEDIUM |
 
-  | 9 | `N04_knowledge/knowledge/rag_source_knowledge.md` | `last_checked: 2024-03-30` stale (W3 Rank 2) | Updated to `last_checked:
+  | 9 | `N04_knowledge/P01_knowledge/rag_source_knowledge.md` | `last_checked: 2024-03-30` stale (W3 Rank 2) | Updated to `last_checked:
   2026-04-15` | LOW |'
 density_score: 1.0
 scan_coverage: '| Directory | Files | Defects | Fixed |

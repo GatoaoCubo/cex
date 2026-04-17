@@ -98,8 +98,8 @@ references:
 - '`archetypes/builders/learning-record-builder/bld_instruction_learning_record.md`'
 - '`P01_knowledge/library/kind/kc_learning_record.md`'
 - '`N04_knowledge/architecture/nucleus_def_n04.md`'
-- '`N04_knowledge/schemas/sch_input_schema_n04.md`'
-- '`N04_knowledge/config/con_path_config_n04.md`'
+- '`N04_knowledge/P06_schema/sch_input_schema_n04.md`'
+- '`N04_knowledge/P09_config/con_path_config_n04.md`'
 properties: '| Property | Value |
 
   |----------|-------|

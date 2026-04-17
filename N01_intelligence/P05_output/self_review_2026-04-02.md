@@ -11,7 +11,7 @@ title: "Self Review 2026 04 02"
 version: 1.0.0
 author: N01
 tags: [context-doc, intelligence, output]
-tldr: "1.  **Pillar P09 (Config) is Empty**: The `N01_intelligence/config/` directory contains no artifacts. A nucleus's config pillar is essential for holding..."
+tldr: "1.  **Pillar P09 (Config) is Empty**: The `N01_intelligence/P09_config/` directory contains no artifacts. A nucleus's config pillar is essential for holding..."
 domain: intelligence
 created: 2026-04-06
 updated: 2026-04-07
@@ -26,10 +26,10 @@ updated: 2026-04-07
 - Broken references: 0
 
 ## CRITICAL Gaps (must fix)
-1.  **Pillar P09 (Config) is Empty**: The `N01_intelligence/config/` directory contains no artifacts. A nucleus's config pillar is essential for holding runtime rules, feature flags, and other configurations. This violates the established fractal architecture pattern and must be remediated by creating a default config artifact.
+1.  **Pillar P09 (Config) is Empty**: The `N01_intelligence/P09_config/` directory contains no artifacts. A nucleus's config pillar is essential for holding runtime rules, feature flags, and other configurations. This violates the established fractal architecture pattern and must be remediated by creating a default config artifact.
 
 ## WARN Gaps (should fix)
-1.  **Ambiguous `P10_memory` Directory Content**: The files in `N01_intelligence/memory/` define the RAG *system configuration* (ingestion sources and embedding models), not "learning records" or runtime memories. While the content itself is high-quality, the pillar's purpose could be misinterpreted. It's unclear where runtime learning records for N01 are stored. This should be clarified in the documentation to avoid confusion.
+1.  **Ambiguous `P10_memory` Directory Content**: The files in `N01_intelligence/P10_memory/` define the RAG *system configuration* (ingestion sources and embedding models), not "learning records" or runtime memories. While the content itself is high-quality, the pillar's purpose could be misinterpreted. It's unclear where runtime learning records for N01 are stored. This should be clarified in the documentation to avoid confusion.
 
 ## Improvement Opportunities
 1.  **Create a dedicated `eval-dataset` Schema**: The system has excellent schemas for benchmarks and scoring rubrics. To further improve the evaluation framework (`P07_evals`), a dedicated `eval-dataset` schema could be created to formalize the structure of golden datasets used for testing and validation.
@@ -39,6 +39,6 @@ updated: 2026-04-07
 The P09 config gap and P10 memory ambiguity reveal a **fractal architecture drift** where nuclei deviate from the established 12-pillar pattern without triggering auto-healing mechanisms. This suggests the `cex_auto.py` self-healing system may lack adequate **structural validators** that enforce pillar completeness across all nuclei. The pattern indicates that while content quality remains high (95% domain-specific), **architectural consistency** is not being automatically maintained. This creates a vulnerability where nuclei can silently drift from the canonical fractal structure, potentially leading to integration failures during cross-nucleus handoffs. The auto-healing flywheel appears optimized for content quality but under-engineered for structural integrity validation.
 
 ## Recommended Actions (priority order)
-1.  **[High]** Create a default configuration artifact (e.g., `config.md`) inside `N01_intelligence/config/` with baseline settings for the nucleus.
-2.  **[Medium]** Add a `README.md` to the `N01_intelligence/memory/` directory explaining that it contains the configuration for the memory system, not the memory state itself.
+1.  **[High]** Create a default configuration artifact (e.g., `config.md`) inside `N01_intelligence/P09_config/` with baseline settings for the nucleus.
+2.  **[Medium]** Add a `README.md` to the `N01_intelligence/P10_memory/` directory explaining that it contains the configuration for the memory system, not the memory state itself.
 3.  **[Low]** Investigate the feasibility of creating a new `eval-dataset` schema and artifact type within the `P06_schema` and `P07_evals` pillars.

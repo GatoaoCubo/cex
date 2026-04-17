@@ -30,9 +30,9 @@ values: '| Subject | Resource | Read | Write | Execute | Notes |
 
   |---------|----------|------|-------|---------|-------|
 
-  | `n03_builder` | `N03_engineering/schemas/**` | yes | yes | no | Owns schema markdown |
+  | `n03_builder` | `N03_engineering/P06_schema/**` | yes | yes | no | Owns schema markdown |
 
-  | `n03_builder` | `N03_engineering/config/**` | yes | yes | no | Owns config markdown |
+  | `n03_builder` | `N03_engineering/P09_config/**` | yes | yes | no | Owns config markdown |
 
   | `n03_builder` | `N03_engineering/compiled/**` | yes | yes | no | Writes via compile flow |
 
@@ -87,7 +87,7 @@ rationale: '| Design choice | Why it exists | Pride expression |
   | Secret-value deny | Config authorship must never become secret handling | Pride refuses sloppy leakage |'
 example: "policy_name: n03_engineering_permission_policy\nmode: whitelist\nsubjects:\n  - name: n03_builder\n    allow:\n\
   \      read:\n        - N03_engineering/**\n        - archetypes/builders/**\n        - P01_knowledge/library/**\n     \
-  \   - .cex/runtime/handoffs/**\n      write:\n        - N03_engineering/schemas/**\n        - N03_engineering/config/**\n\
+  \   - .cex/runtime/handoffs/**\n      write:\n        - N03_engineering/P06_schema/**\n        - N03_engineering/P09_config/**\n\
   \        - N03_engineering/compiled/**\n      execute:\n        - _tools/cex_compile.py\n        - _tools/cex_index.py\n\
   \        - _tools/signal_writer.py\ndeny_overrides: true"
 properties: '| Property | Value |

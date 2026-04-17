@@ -21,7 +21,7 @@ density_score: 0.88
 | Field | Value |
 |-------|-------|
 | Target Nucleus | N01_intelligence |
-| Target Tool | N01_intelligence/tools/research_pipeline_intelligence.md |
+| Target Tool | N01_intelligence/P04_tools/research_pipeline_intelligence.md |
 | Builder | archetypes/builders/research-pipeline-builder/ |
 | Priority | high |
 

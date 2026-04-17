@@ -9,7 +9,7 @@ quality: null
 tags: [runtime_state, n01, p10, analytical_envy, routing]
 ---
 <!-- 8F: F1=runtime_state/P10 F2=kc_runtime_state+tpl_runtime_state F3=nucleus_def_n01+kc_runtime_state+ex_runtime_state_conversation+workflow_intelligence F4=session-variable state for research execution
-     F5=rg+Get-Content+apply_patch F6=target dense markdown artifact F7=self-check properties+8F+ascii+80lines F8=N01_intelligence/memory/mem_runtime_state_n01.md -->
+     F5=rg+Get-Content+apply_patch F6=target dense markdown artifact F7=self-check properties+8F+ascii+80lines F8=N01_intelligence/P10_memory/mem_runtime_state_n01.md -->
 
 # N01 Runtime State
 

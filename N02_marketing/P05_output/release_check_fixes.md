@@ -48,20 +48,20 @@ Fixed 10 files with malformed/incomplete frontmatter:
 | `N02_marketing/audits/audit_collaboration_pattern_builder.md` | Missing `pillar` | Added `pillar: P07` |
 | `N02_marketing/audits/audit_thinking_config_builder.md` | Missing `pillar` | Added `pillar: P07` |
 | `N02_marketing/audits/audit_voice_pipeline_builder.md` | Missing `pillar` | Added `pillar: P07` |
-| `N02_marketing/knowledge/kc_developer_experience_patterns.md` | Non-CEX frontmatter | Replaced with full CEX frontmatter |
-| `N02_marketing/knowledge/kc_tailwind_patterns.md` | Non-CEX frontmatter | Replaced with full CEX frontmatter |
-| `N02_marketing/knowledge/kc_visual_hierarchy_principles.md` | Non-CEX frontmatter | Replaced with full CEX frontmatter |
-| `N02_marketing/knowledge/knowledge_card_marketing.md` | Non-CEX frontmatter | Replaced with full CEX frontmatter |
-| `N01_intelligence/knowledge/embedding_config_intelligence.md` | Non-CEX frontmatter | Replaced with full CEX frontmatter |
-| `N01_intelligence/knowledge/kc_model_context_protocol.md` | Non-CEX frontmatter | Replaced with full CEX frontmatter |
+| `N02_marketing/P01_knowledge/kc_developer_experience_patterns.md` | Non-CEX frontmatter | Replaced with full CEX frontmatter |
+| `N02_marketing/P01_knowledge/kc_tailwind_patterns.md` | Non-CEX frontmatter | Replaced with full CEX frontmatter |
+| `N02_marketing/P01_knowledge/kc_visual_hierarchy_principles.md` | Non-CEX frontmatter | Replaced with full CEX frontmatter |
+| `N02_marketing/P01_knowledge/knowledge_card_marketing.md` | Non-CEX frontmatter | Replaced with full CEX frontmatter |
+| `N01_intelligence/P01_knowledge/embedding_config_intelligence.md` | Non-CEX frontmatter | Replaced with full CEX frontmatter |
+| `N01_intelligence/P01_knowledge/kc_model_context_protocol.md` | Non-CEX frontmatter | Replaced with full CEX frontmatter |
 
 Result: 537 artifacts validated, 0 errors (was 28).
 
 ### 5. health:flywheel_100pct (99%) -- FIXED
-- **Root cause**: `N03_builder/output/` directory missing
+- **Root cause**: `N03_builder/P05_output/` directory missing
   (flywheel expects 10 standard subdirs per nucleus; `CEX_ROOT.iterdir()` finds `N03_builder`
   alphabetically before `N03_engineering`)
-- **Fix**: Created `N03_builder/output/.gitkeep`
+- **Fix**: Created `N03_builder/P05_output/.gitkeep`
 - **Result**: Flywheel 99% -> 100% (109/109 checks WIRED)
 
 ---

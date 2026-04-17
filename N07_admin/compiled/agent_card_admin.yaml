@@ -16,9 +16,9 @@ mcps:
 - spawn
 domain_area: orchestration
 boot_sequence:
-- Load system prompt from `N07_admin/prompts/system_prompt_admin.md` (~2s)
+- Load system prompt from `N07_admin/P03_prompt/system_prompt_admin.md` (~2s)
 - Verify `_spawn/dispatch.sh` exists and is executable (~1s)
-- Load routing rules from `N07_admin/orchestration/dispatch_rule_admin.md` (~1s)
+- Load routing rules from `N07_admin/P12_orchestration/dispatch_rule_admin.md` (~1s)
 - 'Verify `.cex/runtime/` directory structure: handoffs, signals, pids (~1s)'
 - Ready — total boot time ~5s
 constraints: ''
@@ -130,7 +130,7 @@ scaling_monitoring: '| Property | Value |
 
   | Log level | info |'
 references:
-- 'Agent definition: N07_admin/agents/agent_admin.md'
-- 'System prompt: N07_admin/prompts/system_prompt_admin.md'
-- 'Dispatch rules: N07_admin/orchestration/dispatch_rule_admin.md'
-- 'Spawn config: N07_admin/orchestration/spawn_config_admin.md'
+- 'Agent definition: N07_admin/P02_model/agent_admin.md'
+- 'System prompt: N07_admin/P03_prompt/system_prompt_admin.md'
+- 'Dispatch rules: N07_admin/P12_orchestration/dispatch_rule_admin.md'
+- 'Spawn config: N07_admin/P12_orchestration/spawn_config_admin.md'

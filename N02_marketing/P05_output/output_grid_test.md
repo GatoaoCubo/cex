@@ -42,7 +42,7 @@ N02 received the dispatch from N07, parsed the decision manifest, confirmed arti
 | Instagram Gold | `_docs/tests/e2e_gold/instagram_marketing.md` | ✅ Present |
 | Docs Gold | `_docs/tests/e2e_gold/docs_marketing.md` | ✅ Present |
 | Quality Rubric | `_docs/tests/e2e_gold/quality_rubric.md` | ✅ Present |
-| CF Actions output | `N02_marketing/output/output_cf_actions_and_distribution.md` | ✅ Present |
+| CF Actions output | `N02_marketing/P05_output/output_cf_actions_and_distribution.md` | ✅ Present |
 
 ## Decision Manifest Summary
 

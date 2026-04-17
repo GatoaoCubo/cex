@@ -59,7 +59,7 @@ Arquivos afetados:
 
 ### 2. Sem output templates de funil
 
-`N06_commercial/output/` tem 9 templates — nenhum para:
+`N06_commercial/P05_output/` tem 9 templates — nenhum para:
 - **VSL** (Video Sales Letter) — estrutura de 8 seções documentada em `knowledge_card_commercial.md`, mas sem template output
 - **Email sequence** — onboarding, upsell, churn prevention documentados nos ISOs do content-monetization-builder, sem template standalone
 - **Landing page** (long-form sales page) — ausente
@@ -137,9 +137,9 @@ O path de ingest via YAML (usado pelo PATH B do `/init`) não foi testado. É o 
 
 1. **[CRITICAL] Fix Unicode crash nas 3 brand tools** — Substituir emojis por ASCII nos prints de `brand_validate.py`, `brand_propagate.py`, `brand_audit.py`. Afeta todo cliente Windows no primeiro contato com o produto.
 
-2. **[HIGH] Criar template VSL** — `N06_commercial/output/output_vsl_template.md` com as 8 seções (hook, problem, revelation, proof, offer, CTA, guarantee, scarcity). Conhecimento existe no KC, falta o artefato output.
+2. **[HIGH] Criar template VSL** — `N06_commercial/P05_output/output_vsl_template.md` com as 8 seções (hook, problem, revelation, proof, offer, CTA, guarantee, scarcity). Conhecimento existe no KC, falta o artefato output.
 
-3. **[HIGH] Criar template email sequence** — `N06_commercial/output/output_email_sequence.md` para onboarding, upsell, churn prevention. Coberto nos ISOs mas sem template standalone.
+3. **[HIGH] Criar template email sequence** — `N06_commercial/P05_output/output_email_sequence.md` para onboarding, upsell, churn prevention. Coberto nos ISOs mas sem template standalone.
 
 4. **[MEDIUM] Formalizar handoff social-publisher → N02** — Adicionar N02_marketing como crew partner direto em `bld_collaboration_social_publisher.md` com protocolo explícito: social-publisher-builder produz schedule → N02 escreve captions no brand voice do cliente.
 

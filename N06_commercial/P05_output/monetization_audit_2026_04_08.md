@@ -97,7 +97,7 @@ density_score: 0.96
 
 **Revenue potential**: Revenue enabler -- if courses generate R$180K, affiliates add R$27-36K in attributed sales.
 
-**Action**: Recommended for next wave. Kind: content_monetization, path: N06_commercial/output/affiliate_program.md.
+**Action**: Recommended for next wave. Kind: content_monetization, path: N06_commercial/P05_output/affiliate_program.md.
 
 ### GAP #3: Retention/Anti-Churn Program (MEDIUM PRIORITY)
 
@@ -116,7 +116,7 @@ density_score: 0.96
 
 **Revenue potential**: Revenue protector -- saves R$50-100K/year in otherwise-churned MRR at scale.
 
-**Action**: Recommended for next wave. Kind: content_monetization, path: N06_commercial/output/retention_program.md.
+**Action**: Recommended for next wave. Kind: content_monetization, path: N06_commercial/P05_output/retention_program.md.
 
 ---
 

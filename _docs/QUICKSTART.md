@@ -129,7 +129,7 @@ cex/
   N01_intelligence/ .. N07_admin/       # 7 runtime nuclei (domain instances)
   _tools/                       # 59 Python tools (8F engine, quality, retrieval)
   boot/                         # Boot scripts (1 per nucleus + N07 orchestrator)
-  .claude/agents/               # 125 builder sub-agents
+  .claude/P02_model/               # 125 builder sub-agents
   .claude/rules/                # Behavioral rules (auto-loaded per session)
   .claude/commands/             # Custom /commands (/build, /mission, etc.)
   .cex/                         # Runtime state (kinds_meta, config, signals)

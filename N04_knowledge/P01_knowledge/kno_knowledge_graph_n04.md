@@ -36,7 +36,7 @@ extraction_prompt: schema_constrained_triplet_extraction_n04
 tldr: "GraphRAG schema for CEX artifacts, builders, contracts, and memory paths across N04-owned knowledge."
 ---
 <!-- 8F: F1=knowledge_graph/P01 F2=knowledge-graph-builder F3=nucleus_def_n04+kc_knowledge_graph+N04 schemas/configs+N04 knowledge memory examples F4=template-first graph schema for artifact-rich GraphRAG over CEX knowledge
-     F5=shell,apply_patch,cex_compile F6=author markdown artifact F7=frontmatter+entity-relation coherence+ascii+self-check F8=N04_knowledge/knowledge/kno_knowledge_graph_n04.md -->
+     F5=shell,apply_patch,cex_compile F6=author markdown artifact F7=frontmatter+entity-relation coherence+ascii+self-check F8=N04_knowledge/P01_knowledge/kno_knowledge_graph_n04.md -->
 # Overview
 N04 should not stop at flat similarity search.
 Knowledge Gluttony means consuming not only isolated facts but also the connective tissue between artifacts, kinds, builders, constraints, and remembered runtime decisions.
@@ -143,8 +143,8 @@ Text: {text}
 ## References
 1. `archetypes/builders/knowledge-graph-builder/bld_instruction_knowledge_graph.md`
 2. `P01_knowledge/library/kind/kc_knowledge_graph.md`
-3. `N04_knowledge/knowledge/knowledge_card_knowledge.md`
-4. `N04_knowledge/memory/knowledge_memory_index.md`
+3. `N04_knowledge/P01_knowledge/knowledge_card_knowledge.md`
+4. `N04_knowledge/P10_memory/knowledge_memory_index.md`
 
 ## Properties
 | Property | Value |

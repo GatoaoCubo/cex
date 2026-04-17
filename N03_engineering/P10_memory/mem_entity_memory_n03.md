@@ -13,7 +13,7 @@ quality: null
 tags: [entity_memory, p10, n03, memory, engineering, inventive_pride]
 ---
 <!-- 8F: F1=entity_memory/P10 F2=entity-memory-builder F3=nucleus_def_n03+kc_entity_memory+P10_schema F4=high-signal memory for build entities
-     F5=Get-Content+rg+apply_patch+cex_compile.py F6=bytes:5444 F7=self-check:frontmatter+8f+properties+80l+ascii F8=N03_engineering/memory/mem_entity_memory_n03.md -->
+     F5=Get-Content+rg+apply_patch+cex_compile.py F6=bytes:5444 F7=self-check:frontmatter+8f+properties+80l+ascii F8=N03_engineering/P10_memory/mem_entity_memory_n03.md -->
 
 # N03 Entity Memory
 

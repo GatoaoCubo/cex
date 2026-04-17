@@ -37,47 +37,47 @@ unmapped_count: 4
 
 | Path on branch | Kind | Target path Wave 2 | `{{BRAND_*}}` vars |
 |----------------|------|---------------------|--------------------|
-| `N04_knowledge/wiki/00_Home.md` | `knowledge_index` | `N04_knowledge/memory/knowledge_index_wiki.md` | `{{BRAND_NAME}}`, `{{BRAND_TAGLINE}}` |
+| `N04_knowledge/wiki/00_Home.md` | `knowledge_index` | `N04_knowledge/P10_memory/knowledge_index_wiki.md` | `{{BRAND_NAME}}`, `{{BRAND_TAGLINE}}` |
 
 ### Section 01: Brand (5 pages)
 
 | Path on branch | Kind | Target path Wave 2 | `{{BRAND_*}}` vars |
 |----------------|------|---------------------|--------------------|
-| `N04_knowledge/wiki/01_Brand/Brand_Identity.md` | `knowledge_card` | `N04_knowledge/knowledge/kc_brand_identity.md` | `{{BRAND_NAME}}`, `{{BRAND_MISSION}}`, `{{BRAND_VERTICAL}}` |
-| `N04_knowledge/wiki/01_Brand/Brand_Positioning.md` | `knowledge_card` | `N04_knowledge/knowledge/kc_brand_positioning.md` | `{{BRAND_NAME}}`, `{{BRAND_UVP}}`, `{{BRAND_VERTICAL}}` |
-| `N04_knowledge/wiki/01_Brand/Brand_Voice.md` | `knowledge_card` | `N04_knowledge/knowledge/kc_brand_voice.md` | `{{BRAND_NAME}}`, `{{BRAND_VOICE}}`, `{{BRAND_PERSONA}}` |
-| `N04_knowledge/wiki/01_Brand/Persona_Ro.md` | `knowledge_card` | `N04_knowledge/knowledge/kc_brand_persona.md` | `{{BRAND_PERSONA}}`, `{{BRAND_VOICE}}`, `{{BRAND_NAME}}` |
-| `N04_knowledge/wiki/01_Brand/Visual_Identity.md` | `knowledge_card` | `N04_knowledge/knowledge/kc_visual_identity.md` | `{{BRAND_PRIMARY_COLOR}}`, `{{BRAND_FONT}}`, `{{BRAND_AESTHETIC}}` |
+| `N04_knowledge/wiki/01_Brand/Brand_Identity.md` | `knowledge_card` | `N04_knowledge/P01_knowledge/kc_brand_identity.md` | `{{BRAND_NAME}}`, `{{BRAND_MISSION}}`, `{{BRAND_VERTICAL}}` |
+| `N04_knowledge/wiki/01_Brand/Brand_Positioning.md` | `knowledge_card` | `N04_knowledge/P01_knowledge/kc_brand_positioning.md` | `{{BRAND_NAME}}`, `{{BRAND_UVP}}`, `{{BRAND_VERTICAL}}` |
+| `N04_knowledge/wiki/01_Brand/Brand_Voice.md` | `knowledge_card` | `N04_knowledge/P01_knowledge/kc_brand_voice.md` | `{{BRAND_NAME}}`, `{{BRAND_VOICE}}`, `{{BRAND_PERSONA}}` |
+| `N04_knowledge/wiki/01_Brand/Persona_Ro.md` | `knowledge_card` | `N04_knowledge/P01_knowledge/kc_brand_persona.md` | `{{BRAND_PERSONA}}`, `{{BRAND_VOICE}}`, `{{BRAND_NAME}}` |
+| `N04_knowledge/wiki/01_Brand/Visual_Identity.md` | `knowledge_card` | `N04_knowledge/P01_knowledge/kc_visual_identity.md` | `{{BRAND_PRIMARY_COLOR}}`, `{{BRAND_FONT}}`, `{{BRAND_AESTHETIC}}` |
 
 ### Section 02: Products (9 pages)
 
 | Path on branch | Kind | Target path Wave 2 | `{{BRAND_*}}` vars |
 |----------------|------|---------------------|--------------------|
-| `N04_knowledge/wiki/02_Products/Product_Index.md` | `knowledge_index` | `N04_knowledge/memory/knowledge_index_products.md` | `{{BRAND_NAME}}`, `{{BRAND_VERTICAL}}` |
-| `N04_knowledge/wiki/02_Products/Donut_GATO3.md` | `knowledge_card` | `N04_knowledge/knowledge/kc_product_hero.md` | `{{BRAND_PRODUCT_HERO}}`, `{{BRAND_NAME}}` |
-| `N04_knowledge/wiki/02_Products/Cama_Suspensa_Janela.md` | `knowledge_card` | `N04_knowledge/knowledge/kc_product_02.md` | `{{BRAND_PRODUCT_02}}`, `{{BRAND_NAME}}` |
-| `N04_knowledge/wiki/02_Products/Bola_Inteligente.md` | `knowledge_card` | `N04_knowledge/knowledge/kc_product_03.md` | `{{BRAND_PRODUCT_03}}`, `{{BRAND_NAME}}` |
-| `N04_knowledge/wiki/02_Products/Escova_Autolimpante.md` | `knowledge_card` | `N04_knowledge/knowledge/kc_product_04.md` | `{{BRAND_PRODUCT_04}}`, `{{BRAND_NAME}}` |
-| `N04_knowledge/wiki/02_Products/Fonte_Agua_Automatica.md` | `knowledge_card` | `N04_knowledge/knowledge/kc_product_05.md` | `{{BRAND_PRODUCT_05}}`, `{{BRAND_NAME}}` |
-| `N04_knowledge/wiki/02_Products/Mochila_Capsula.md` | `knowledge_card` | `N04_knowledge/knowledge/kc_product_06.md` | `{{BRAND_PRODUCT_06}}`, `{{BRAND_NAME}}` |
-| `N04_knowledge/wiki/02_Products/Tapete_Gelado.md` | `knowledge_card` | `N04_knowledge/knowledge/kc_product_07.md` | `{{BRAND_PRODUCT_07}}`, `{{BRAND_NAME}}` |
-| `N04_knowledge/wiki/02_Products/Tela_Protecao.md` | `knowledge_card` | `N04_knowledge/knowledge/kc_product_08.md` | `{{BRAND_PRODUCT_08}}`, `{{BRAND_NAME}}` |
-| `N04_knowledge/wiki/02_Products/Toca_Feltro_Tunel.md` | `knowledge_card` | `N04_knowledge/knowledge/kc_product_09.md` | `{{BRAND_PRODUCT_09}}`, `{{BRAND_NAME}}` |
+| `N04_knowledge/wiki/02_Products/Product_Index.md` | `knowledge_index` | `N04_knowledge/P10_memory/knowledge_index_products.md` | `{{BRAND_NAME}}`, `{{BRAND_VERTICAL}}` |
+| `N04_knowledge/wiki/02_Products/Donut_GATO3.md` | `knowledge_card` | `N04_knowledge/P01_knowledge/kc_product_hero.md` | `{{BRAND_PRODUCT_HERO}}`, `{{BRAND_NAME}}` |
+| `N04_knowledge/wiki/02_Products/Cama_Suspensa_Janela.md` | `knowledge_card` | `N04_knowledge/P01_knowledge/kc_product_02.md` | `{{BRAND_PRODUCT_02}}`, `{{BRAND_NAME}}` |
+| `N04_knowledge/wiki/02_Products/Bola_Inteligente.md` | `knowledge_card` | `N04_knowledge/P01_knowledge/kc_product_03.md` | `{{BRAND_PRODUCT_03}}`, `{{BRAND_NAME}}` |
+| `N04_knowledge/wiki/02_Products/Escova_Autolimpante.md` | `knowledge_card` | `N04_knowledge/P01_knowledge/kc_product_04.md` | `{{BRAND_PRODUCT_04}}`, `{{BRAND_NAME}}` |
+| `N04_knowledge/wiki/02_Products/Fonte_Agua_Automatica.md` | `knowledge_card` | `N04_knowledge/P01_knowledge/kc_product_05.md` | `{{BRAND_PRODUCT_05}}`, `{{BRAND_NAME}}` |
+| `N04_knowledge/wiki/02_Products/Mochila_Capsula.md` | `knowledge_card` | `N04_knowledge/P01_knowledge/kc_product_06.md` | `{{BRAND_PRODUCT_06}}`, `{{BRAND_NAME}}` |
+| `N04_knowledge/wiki/02_Products/Tapete_Gelado.md` | `knowledge_card` | `N04_knowledge/P01_knowledge/kc_product_07.md` | `{{BRAND_PRODUCT_07}}`, `{{BRAND_NAME}}` |
+| `N04_knowledge/wiki/02_Products/Tela_Protecao.md` | `knowledge_card` | `N04_knowledge/P01_knowledge/kc_product_08.md` | `{{BRAND_PRODUCT_08}}`, `{{BRAND_NAME}}` |
+| `N04_knowledge/wiki/02_Products/Toca_Feltro_Tunel.md` | `knowledge_card` | `N04_knowledge/P01_knowledge/kc_product_09.md` | `{{BRAND_PRODUCT_09}}`, `{{BRAND_NAME}}` |
 
 ### Section 03: Content Strategy (8 pages)
 
 | Path on branch | Kind | Target path Wave 2 | `{{BRAND_*}}` vars |
 |----------------|------|---------------------|--------------------|
-| `N04_knowledge/wiki/03_Content_Strategy/Content_Strategy_Index.md` | `knowledge_index` | `N04_knowledge/memory/knowledge_index_content_strategy.md` | `{{BRAND_NAME}}`, `{{BRAND_VERTICAL}}` |
+| `N04_knowledge/wiki/03_Content_Strategy/Content_Strategy_Index.md` | `knowledge_index` | `N04_knowledge/P10_memory/knowledge_index_content_strategy.md` | `{{BRAND_NAME}}`, `{{BRAND_VERTICAL}}` |
 | `N04_knowledge/wiki/03_Content_Strategy/Editorial_Calendar_Q2.md` | `schedule` | `N02_marketing/content_pipeline/editorial_calendar_q2.md` | `{{BRAND_NAME}}`, `{{BRAND_VERTICAL}}`, `{{BRAND_QUARTER}}` |
-| `N04_knowledge/wiki/03_Content_Strategy/Content_Quality_Rubric.md` | `knowledge_card` | `N04_knowledge/knowledge/kc_content_quality_rubric.md` | `{{BRAND_VOICE}}`, `{{BRAND_VERTICAL}}` |
-| `N04_knowledge/wiki/03_Content_Strategy/Format_Blog.md` | `knowledge_card` | `N04_knowledge/knowledge/kc_format_blog.md` | `{{BRAND_VERTICAL}}`, `{{BRAND_VOICE}}` |
-| `N04_knowledge/wiki/03_Content_Strategy/Format_Instagram.md` | `knowledge_card` | `N04_knowledge/knowledge/kc_format_instagram.md` | `{{BRAND_VERTICAL}}`, `{{BRAND_VOICE}}` |
-| `N04_knowledge/wiki/03_Content_Strategy/Hashtag_Strategy.md` | `knowledge_card` | `N04_knowledge/knowledge/kc_hashtag_strategy.md` | `{{BRAND_NAME}}`, `{{BRAND_VERTICAL}}`, `{{BRAND_NICHE}}` |
-| `N04_knowledge/wiki/03_Content_Strategy/Pillar_Educativo.md` | `knowledge_card` | `N04_knowledge/knowledge/kc_content_pillar_educational.md` | `{{BRAND_VERTICAL}}`, `{{BRAND_VOICE}}` |
-| `N04_knowledge/wiki/03_Content_Strategy/Pillar_Humor.md` | `knowledge_card` | `N04_knowledge/knowledge/kc_content_pillar_humor.md` | `{{BRAND_VERTICAL}}`, `{{BRAND_VOICE}}`, `{{BRAND_PERSONA}}` |
-| `N04_knowledge/wiki/03_Content_Strategy/Pillar_Produto.md` | `knowledge_card` | `N04_knowledge/knowledge/kc_content_pillar_product.md` | `{{BRAND_VERTICAL}}`, `{{BRAND_PRODUCT_CATALOG}}` |
-| `N04_knowledge/wiki/03_Content_Strategy/Pillar_Seasonal.md` | `knowledge_card` | `N04_knowledge/knowledge/kc_content_pillar_seasonal.md` | `{{BRAND_VERTICAL}}`, `{{BRAND_REGION}}` |
+| `N04_knowledge/wiki/03_Content_Strategy/Content_Quality_Rubric.md` | `knowledge_card` | `N04_knowledge/P01_knowledge/kc_content_quality_rubric.md` | `{{BRAND_VOICE}}`, `{{BRAND_VERTICAL}}` |
+| `N04_knowledge/wiki/03_Content_Strategy/Format_Blog.md` | `knowledge_card` | `N04_knowledge/P01_knowledge/kc_format_blog.md` | `{{BRAND_VERTICAL}}`, `{{BRAND_VOICE}}` |
+| `N04_knowledge/wiki/03_Content_Strategy/Format_Instagram.md` | `knowledge_card` | `N04_knowledge/P01_knowledge/kc_format_instagram.md` | `{{BRAND_VERTICAL}}`, `{{BRAND_VOICE}}` |
+| `N04_knowledge/wiki/03_Content_Strategy/Hashtag_Strategy.md` | `knowledge_card` | `N04_knowledge/P01_knowledge/kc_hashtag_strategy.md` | `{{BRAND_NAME}}`, `{{BRAND_VERTICAL}}`, `{{BRAND_NICHE}}` |
+| `N04_knowledge/wiki/03_Content_Strategy/Pillar_Educativo.md` | `knowledge_card` | `N04_knowledge/P01_knowledge/kc_content_pillar_educational.md` | `{{BRAND_VERTICAL}}`, `{{BRAND_VOICE}}` |
+| `N04_knowledge/wiki/03_Content_Strategy/Pillar_Humor.md` | `knowledge_card` | `N04_knowledge/P01_knowledge/kc_content_pillar_humor.md` | `{{BRAND_VERTICAL}}`, `{{BRAND_VOICE}}`, `{{BRAND_PERSONA}}` |
+| `N04_knowledge/wiki/03_Content_Strategy/Pillar_Produto.md` | `knowledge_card` | `N04_knowledge/P01_knowledge/kc_content_pillar_product.md` | `{{BRAND_VERTICAL}}`, `{{BRAND_PRODUCT_CATALOG}}` |
+| `N04_knowledge/wiki/03_Content_Strategy/Pillar_Seasonal.md` | `knowledge_card` | `N04_knowledge/P01_knowledge/kc_content_pillar_seasonal.md` | `{{BRAND_VERTICAL}}`, `{{BRAND_REGION}}` |
 
 ### Section 04: Cat Science (9 pages)
 
@@ -85,43 +85,43 @@ unmapped_count: 4
 
 | Path on branch | Kind | Target path Wave 2 | `{{BRAND_*}}` vars |
 |----------------|------|---------------------|--------------------|
-| `N04_knowledge/wiki/04_Cat_Science/Cat_Science_Index.md` | `knowledge_index` | `N04_knowledge/memory/knowledge_index_vertical.md` | `{{BRAND_VERTICAL}}` |
-| `N04_knowledge/wiki/04_Cat_Science/Body_Language.md` | `knowledge_card` | `N04_knowledge/knowledge/kc_vertical_body_language.md` | `{{BRAND_VERTICAL}}` |
-| `N04_knowledge/wiki/04_Cat_Science/Environmental_Enrichment.md` | `knowledge_card` | `N04_knowledge/knowledge/kc_vertical_enrichment.md` | `{{BRAND_VERTICAL}}` |
-| `N04_knowledge/wiki/04_Cat_Science/Kitten_Development.md` | `knowledge_card` | `N04_knowledge/knowledge/kc_vertical_development.md` | `{{BRAND_VERTICAL}}` |
-| `N04_knowledge/wiki/04_Cat_Science/Multi_Cat_Dynamics.md` | `knowledge_card` | `N04_knowledge/knowledge/kc_vertical_multi_dynamics.md` | `{{BRAND_VERTICAL}}` |
-| `N04_knowledge/wiki/04_Cat_Science/Nutrition.md` | `knowledge_card` | `N04_knowledge/knowledge/kc_vertical_nutrition.md` | `{{BRAND_VERTICAL}}` |
-| `N04_knowledge/wiki/04_Cat_Science/Senior_Cat_Care.md` | `knowledge_card` | `N04_knowledge/knowledge/kc_vertical_senior_care.md` | `{{BRAND_VERTICAL}}` |
-| `N04_knowledge/wiki/04_Cat_Science/Sleep_Patterns.md` | `knowledge_card` | `N04_knowledge/knowledge/kc_vertical_sleep.md` | `{{BRAND_VERTICAL}}` |
-| `N04_knowledge/wiki/04_Cat_Science/Stress_Signals.md` | `knowledge_card` | `N04_knowledge/knowledge/kc_vertical_stress.md` | `{{BRAND_VERTICAL}}` |
+| `N04_knowledge/wiki/04_Cat_Science/Cat_Science_Index.md` | `knowledge_index` | `N04_knowledge/P10_memory/knowledge_index_vertical.md` | `{{BRAND_VERTICAL}}` |
+| `N04_knowledge/wiki/04_Cat_Science/Body_Language.md` | `knowledge_card` | `N04_knowledge/P01_knowledge/kc_vertical_body_language.md` | `{{BRAND_VERTICAL}}` |
+| `N04_knowledge/wiki/04_Cat_Science/Environmental_Enrichment.md` | `knowledge_card` | `N04_knowledge/P01_knowledge/kc_vertical_enrichment.md` | `{{BRAND_VERTICAL}}` |
+| `N04_knowledge/wiki/04_Cat_Science/Kitten_Development.md` | `knowledge_card` | `N04_knowledge/P01_knowledge/kc_vertical_development.md` | `{{BRAND_VERTICAL}}` |
+| `N04_knowledge/wiki/04_Cat_Science/Multi_Cat_Dynamics.md` | `knowledge_card` | `N04_knowledge/P01_knowledge/kc_vertical_multi_dynamics.md` | `{{BRAND_VERTICAL}}` |
+| `N04_knowledge/wiki/04_Cat_Science/Nutrition.md` | `knowledge_card` | `N04_knowledge/P01_knowledge/kc_vertical_nutrition.md` | `{{BRAND_VERTICAL}}` |
+| `N04_knowledge/wiki/04_Cat_Science/Senior_Cat_Care.md` | `knowledge_card` | `N04_knowledge/P01_knowledge/kc_vertical_senior_care.md` | `{{BRAND_VERTICAL}}` |
+| `N04_knowledge/wiki/04_Cat_Science/Sleep_Patterns.md` | `knowledge_card` | `N04_knowledge/P01_knowledge/kc_vertical_sleep.md` | `{{BRAND_VERTICAL}}` |
+| `N04_knowledge/wiki/04_Cat_Science/Stress_Signals.md` | `knowledge_card` | `N04_knowledge/P01_knowledge/kc_vertical_stress.md` | `{{BRAND_VERTICAL}}` |
 
 ### Section 05: Competitors (7 pages)
 
 | Path on branch | Kind | Target path Wave 2 | `{{BRAND_*}}` vars |
 |----------------|------|---------------------|--------------------|
-| `N04_knowledge/wiki/05_Competitors/Competitor_Index.md` | `knowledge_index` | `N01_intelligence/knowledge/knowledge_index_competitors.md` | `{{BRAND_VERTICAL}}`, `{{BRAND_MARKET}}` |
-| `N04_knowledge/wiki/05_Competitors/CatMyPet.md` | `competitive_matrix` | `N01_intelligence/knowledge/kc_competitor_01.md` | `{{BRAND_COMPETITOR_01}}`, `{{BRAND_VERTICAL}}` |
-| `N04_knowledge/wiki/05_Competitors/Catit.md` | `competitive_matrix` | `N01_intelligence/knowledge/kc_competitor_02.md` | `{{BRAND_COMPETITOR_02}}`, `{{BRAND_VERTICAL}}` |
-| `N04_knowledge/wiki/05_Competitors/Jackson_Galaxy.md` | `competitive_matrix` | `N01_intelligence/knowledge/kc_competitor_03.md` | `{{BRAND_COMPETITOR_03}}`, `{{BRAND_VERTICAL}}` |
-| `N04_knowledge/wiki/05_Competitors/Petlove.md` | `competitive_matrix` | `N01_intelligence/knowledge/kc_competitor_04.md` | `{{BRAND_COMPETITOR_04}}`, `{{BRAND_VERTICAL}}` |
-| `N04_knowledge/wiki/05_Competitors/Tuft_Paw.md` | `competitive_matrix` | `N01_intelligence/knowledge/kc_competitor_05.md` | `{{BRAND_COMPETITOR_05}}`, `{{BRAND_VERTICAL}}` |
-| `N04_knowledge/wiki/05_Competitors/ZeeDog_ZeeCat.md` | `competitive_matrix` | `N01_intelligence/knowledge/kc_competitor_06.md` | `{{BRAND_COMPETITOR_06}}`, `{{BRAND_VERTICAL}}` |
+| `N04_knowledge/wiki/05_Competitors/Competitor_Index.md` | `knowledge_index` | `N01_intelligence/P01_knowledge/knowledge_index_competitors.md` | `{{BRAND_VERTICAL}}`, `{{BRAND_MARKET}}` |
+| `N04_knowledge/wiki/05_Competitors/CatMyPet.md` | `competitive_matrix` | `N01_intelligence/P01_knowledge/kc_competitor_01.md` | `{{BRAND_COMPETITOR_01}}`, `{{BRAND_VERTICAL}}` |
+| `N04_knowledge/wiki/05_Competitors/Catit.md` | `competitive_matrix` | `N01_intelligence/P01_knowledge/kc_competitor_02.md` | `{{BRAND_COMPETITOR_02}}`, `{{BRAND_VERTICAL}}` |
+| `N04_knowledge/wiki/05_Competitors/Jackson_Galaxy.md` | `competitive_matrix` | `N01_intelligence/P01_knowledge/kc_competitor_03.md` | `{{BRAND_COMPETITOR_03}}`, `{{BRAND_VERTICAL}}` |
+| `N04_knowledge/wiki/05_Competitors/Petlove.md` | `competitive_matrix` | `N01_intelligence/P01_knowledge/kc_competitor_04.md` | `{{BRAND_COMPETITOR_04}}`, `{{BRAND_VERTICAL}}` |
+| `N04_knowledge/wiki/05_Competitors/Tuft_Paw.md` | `competitive_matrix` | `N01_intelligence/P01_knowledge/kc_competitor_05.md` | `{{BRAND_COMPETITOR_05}}`, `{{BRAND_VERTICAL}}` |
+| `N04_knowledge/wiki/05_Competitors/ZeeDog_ZeeCat.md` | `competitive_matrix` | `N01_intelligence/P01_knowledge/kc_competitor_06.md` | `{{BRAND_COMPETITOR_06}}`, `{{BRAND_VERTICAL}}` |
 
 ### Section 06: Sources (4 pages)
 
 | Path on branch | Kind | Target path Wave 2 | `{{BRAND_*}}` vars |
 |----------------|------|---------------------|--------------------|
-| `N04_knowledge/wiki/06_Sources/Source_Index.md` | `knowledge_index` | `N04_knowledge/memory/knowledge_index_sources.md` | `{{BRAND_VERTICAL}}` |
-| `N04_knowledge/wiki/06_Sources/Tier_1_Academic.md` | `rag_source` | `N04_knowledge/knowledge/rag_source_tier1_academic.md` | `{{BRAND_VERTICAL}}` |
-| `N04_knowledge/wiki/06_Sources/Tier_2_Industry.md` | `rag_source` | `N04_knowledge/knowledge/rag_source_tier2_industry.md` | `{{BRAND_VERTICAL}}` |
-| `N04_knowledge/wiki/06_Sources/Tier_3_Creative.md` | `rag_source` | `N04_knowledge/knowledge/rag_source_tier3_creative.md` | `{{BRAND_VERTICAL}}` |
+| `N04_knowledge/wiki/06_Sources/Source_Index.md` | `knowledge_index` | `N04_knowledge/P10_memory/knowledge_index_sources.md` | `{{BRAND_VERTICAL}}` |
+| `N04_knowledge/wiki/06_Sources/Tier_1_Academic.md` | `rag_source` | `N04_knowledge/P01_knowledge/rag_source_tier1_academic.md` | `{{BRAND_VERTICAL}}` |
+| `N04_knowledge/wiki/06_Sources/Tier_2_Industry.md` | `rag_source` | `N04_knowledge/P01_knowledge/rag_source_tier2_industry.md` | `{{BRAND_VERTICAL}}` |
+| `N04_knowledge/wiki/06_Sources/Tier_3_Creative.md` | `rag_source` | `N04_knowledge/P01_knowledge/rag_source_tier3_creative.md` | `{{BRAND_VERTICAL}}` |
 
 ### Section 07: Audience (2 pages)
 
 | Path on branch | Kind | Target path Wave 2 | `{{BRAND_*}}` vars |
 |----------------|------|---------------------|--------------------|
-| `N04_knowledge/wiki/07_Audience/Audience_Segments.md` | `knowledge_card` | `N04_knowledge/knowledge/kc_audience_segments.md` | `{{BRAND_VERTICAL}}`, `{{BRAND_ICP}}`, `{{BRAND_MARKET}}` |
-| `N04_knowledge/wiki/07_Audience/ICP_Profile.md` | `knowledge_card` | `N04_knowledge/knowledge/kc_icp_profile.md` | `{{BRAND_ICP}}`, `{{BRAND_VERTICAL}}`, `{{BRAND_MARKET}}` |
+| `N04_knowledge/wiki/07_Audience/Audience_Segments.md` | `knowledge_card` | `N04_knowledge/P01_knowledge/kc_audience_segments.md` | `{{BRAND_VERTICAL}}`, `{{BRAND_ICP}}`, `{{BRAND_MARKET}}` |
+| `N04_knowledge/wiki/07_Audience/ICP_Profile.md` | `knowledge_card` | `N04_knowledge/P01_knowledge/kc_icp_profile.md` | `{{BRAND_ICP}}`, `{{BRAND_VERTICAL}}`, `{{BRAND_MARKET}}` |
 
 ### Section 08: Templates (3 pages)
 
@@ -246,16 +246,16 @@ unmapped_count: 4
 | Path | Kind | Target path | Notes |
 |------|------|-------------|-------|
 | `N05_operations/specs/spec_marketplace_sync.md` | `e2e_eval` | `N05_operations/quality/tpl_spec_marketplace_sync.md` | `{{BRAND_MARKETPLACE_A}}`, `{{BRAND_MARKETPLACE_B}}`, `{{BRAND_ERP}}` |
-| `N05_operations/reports/sync_health_gato3.md` | `competitive_matrix` | `N01_intelligence/knowledge/tpl_marketplace_sync_health.md` | `{{BRAND_MARKETPLACE_A/B/C}}`, `{{BRAND_ERP}}` |
-| `N05_operations/output/sync_fix_report_20260410.md` | `case_study` | `N05_operations/output/tpl_sync_fix_case_study.md` | `{{BRAND_ERP}}`, `{{BRAND_MARKETPLACE_*}}` |
+| `N05_operations/reports/sync_health_gato3.md` | `competitive_matrix` | `N01_intelligence/P01_knowledge/tpl_marketplace_sync_health.md` | `{{BRAND_MARKETPLACE_A/B/C}}`, `{{BRAND_ERP}}` |
+| `N05_operations/P05_output/sync_fix_report_20260410.md` | `case_study` | `N05_operations/P05_output/tpl_sync_fix_case_study.md` | `{{BRAND_ERP}}`, `{{BRAND_MARKETPLACE_*}}` |
 
 > Additional N06 ROI / Pricing artifacts (from output/ directory):
 
 | Path | Kind | Target path | Notes |
 |------|------|-------------|-------|
-| `N06_commercial/output/roi_content_factory.md` | `roi_calculator` | `N06_commercial/output/tpl_roi_content_factory.md` | `{{BRAND_TEAM_SIZE}}`, `{{BRAND_HOURLY_RATE}}`, `{{BRAND_CURRENCY}}` |
-| `N06_commercial/output/content_factory_pricing.md` | `subscription_tier` | `N06_commercial/output/tpl_subscription_tiers.md` | `{{BRAND_CURRENCY}}`, `{{BRAND_TIER_NAMES}}` |
-| `N06_commercial/output/api_access_pricing.md` | `subscription_tier` | `N06_commercial/output/tpl_api_access_tiers.md` | `{{BRAND_CURRENCY}}`, `{{BRAND_RATE_LIMITS}}` |
+| `N06_commercial/P05_output/roi_content_factory.md` | `roi_calculator` | `N06_commercial/P05_output/tpl_roi_content_factory.md` | `{{BRAND_TEAM_SIZE}}`, `{{BRAND_HOURLY_RATE}}`, `{{BRAND_CURRENCY}}` |
+| `N06_commercial/P05_output/content_factory_pricing.md` | `subscription_tier` | `N06_commercial/P05_output/tpl_subscription_tiers.md` | `{{BRAND_CURRENCY}}`, `{{BRAND_TIER_NAMES}}` |
+| `N06_commercial/P05_output/api_access_pricing.md` | `subscription_tier` | `N06_commercial/P05_output/tpl_api_access_tiers.md` | `{{BRAND_CURRENCY}}`, `{{BRAND_RATE_LIMITS}}` |
 
 ---
 
@@ -263,7 +263,7 @@ unmapped_count: 4
 
 | Path | Why | Suggestion |
 |------|-----|------------|
-| `N01_research/output/data/*.json` (10 files) | Raw CRM data for GATO3-specific businesses; not a CEX template kind | Delete from distilled repo; replace with `entity_memory` template stub |
+| `N01_research/P05_output/data/*.json` (10 files) | Raw CRM data for GATO3-specific businesses; not a CEX template kind | Delete from distilled repo; replace with `entity_memory` template stub |
 | `_tmp_*.html/_tmp_*.py/_tmp_*.txt` (5 files) | Temporary build artifacts; no CEX kind, no frontmatter | Delete; these are session scratch files |
 | `.pi/agents/*.md` (6 files) | Legacy PI wrapper agent configs; superseded by Claude-native boot system | Archive to `.cex/archive/pi_legacy/`; not distillable as standard kind |
 | `_tmp_crm_data.json` | Root-level CRM data dump (GATO3-specific businesses) | Delete from distilled repo |

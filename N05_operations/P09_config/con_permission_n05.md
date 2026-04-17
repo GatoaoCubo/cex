@@ -10,7 +10,7 @@ tags: [config, permission, operations, access, governance]
 ---
 <!-- 8F: F1 constrain=P09/permission F2 become=permission-builder F3 inject=nucleus_def_n05+n05-operations+kc_permission+P09_config+N05 workflow boundaries
      F4 reason=minimum necessary access for review deploy rollback flows F5 call=apply_patch F6 produce=4710 bytes
-     F7 govern=self-check headings+tables+gating_wrath+ascii+80_lines F8 collaborate=N05_operations/config/con_permission_n05.md -->
+     F7 govern=self-check headings+tables+gating_wrath+ascii+80_lines F8 collaborate=N05_operations/P09_config/con_permission_n05.md -->
 
 # Ops Permission Matrix
 
@@ -28,7 +28,7 @@ tags: [config, permission, operations, access, governance]
 
 | Subject | Resources | Allowed Actions | Denied Actions | Reason |
 |---|---|---|---|---|
-| release_manager_n05 | `N05_operations/config/*`, `N05_operations/schemas/*`, `.cex_signals/*` | read, write, approve | delete on source roots | Can author and signal, but not destructively rewrite history. |
+| release_manager_n05 | `N05_operations/P09_config/*`, `N05_operations/P06_schema/*`, `.cex_signals/*` | read, write, approve | delete on source roots | Can author and signal, but not destructively rewrite history. |
 | qa_reviewer_n05 | `N05_operations/*`, `_reports/*` | read, comment, approve | deploy, delete | Reviews quality without mutating runtime state. |
 | deployer_n05 | `compiled/*`, `.cex_signals/*`, deploy endpoints | read, execute, write | source delete, permission override | Executes approved rollout only. |
 | incident_commander_n05 | `_reports/*`, `.cex_signals/*`, rollback controls | read, execute, write, rollback | source authoring | Can contain incidents fast without broad author rights. |
@@ -70,8 +70,8 @@ subjects:
   release_manager_n05:
     allow: [read, write, approve]
     resources:
-      - N05_operations/config/*
-      - N05_operations/schemas/*
+      - N05_operations/P09_config/*
+      - N05_operations/P06_schema/*
       - .cex_signals/*
     deny: [delete]
   deployer_n05:

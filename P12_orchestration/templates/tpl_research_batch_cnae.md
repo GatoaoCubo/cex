@@ -17,7 +17,7 @@ updated: "2026-04-13"
 
 # BATCH F — Tax Registry / Business Classification Deep Harvest
 
-**Output**: `N01_research/output/data/{{OUTPUT_FILE | default: 'crm_batch_f_registry.json'}}`
+**Output**: `N01_research/P05_output/data/{{OUTPUT_FILE | default: 'crm_batch_f_registry.json'}}`
 **Signal**: `python _tools/signal_writer.py n01 complete 9.0 {{SIGNAL_TAG | default: 'BATCH_F_REGISTRY'}}`
 
 ---

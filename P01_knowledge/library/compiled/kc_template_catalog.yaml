@@ -319,7 +319,7 @@ category_b_dashboard_1_template_p05: '| Template | Path | Variables | Origin (ga
   |----------|------|-----------|----------------|
 
   | `tpl_crm_dashboard.html` | `P05_output/templates/` | BRAND_NAME, BRAND_COLORS.*, MAP_CENTER_LAT, MAP_CENTER_LNG, MAP_ZOOM,
-  CRM_DATA_SOURCE | `N06_commercial/output/dashboard.html` |'
+  CRM_DATA_SOURCE | `N06_commercial/P05_output/dashboard.html` |'
 category_c_research_pipeline_2_templates_p04: '| Template | Path | Variables | Origin (gato) |
 
   |----------|------|-----------|----------------|
@@ -348,7 +348,7 @@ category_e_learning_config_2_templates_p11_p12: '| Template | Path | Variables |
   | `tpl_learning_record_autonomy.md` | `P11_feedback/templates/` | MISSION, NUCLEUS, PHASE, FINDINGS, METRICS, RECOMMENDATIONS
   | `emergent_autonomy_20260403/*.md` |
 
-  | `tpl_brand_context_nucleus.md` | `P12_orchestration/templates/` | NUCLEUS_ID, NUCLEUS_NAME, BRAND_* | `N01_research/config/brand_context.md`
+  | `tpl_brand_context_nucleus.md` | `P12_orchestration/templates/` | NUCLEUS_ID, NUCLEUS_NAME, BRAND_* | `N01_research/P09_config/brand_context.md`
   |
 
 
@@ -441,7 +441,7 @@ variable_cross_dependency_map: 'BRAND_REGION ──→ REGION ──→ CITIES (
   \ files in P*/templates/\n│   ├── Replaces {{VARIABLE}} with config values\n│   └── Writes resolved artifacts to output\
   \ paths\n│\n├── Step 4: git checkout -b <brand-slug>\n│   ├── Branch created from main\n│   └── Templates remain in main\
   \ (never touched)\n│\n├── Step 5: Resolved artifacts created in branch\n│   ├── tpl_crm_mission_plan.md → crm_mission/MISSION_PLAN.md\n\
-  │   ├── tpl_crm_dashboard.html  → N06_commercial/output/dashboard.html\n│   └── (each template → concrete artifact with\
+  │   ├── tpl_crm_dashboard.html  → N06_commercial/P05_output/dashboard.html\n│   └── (each template → concrete artifact with\
   \ brand data)\n│\n└── Step 6: N07 dispatches first mission\n    ├── Research pipeline runs with brand context\n    ├── CRM\
   \ populates with real contacts\n    └── Dashboard shows real data"
 template_lifecycle: 'ARCHETYPE (main)          INSTANCE (brand branch)         PRIVATE (never in main)

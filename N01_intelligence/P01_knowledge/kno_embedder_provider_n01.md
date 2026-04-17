@@ -9,7 +9,7 @@ quality: null
 tags: [embedder_provider, n01, p01, analytical_envy, retrieval]
 ---
 <!-- 8F: F1=embedder_provider/P01 F2=kc_embedder_provider+example_embedder_provider F3=nucleus_def_n01+kc_embedder_provider+ex_embedder_provider_openai_ada+search_config_intelligence F4=provider selection for comparative retrieval
-     F5=rg+Get-Content+apply_patch F6=target dense markdown artifact F7=self-check properties+8F+ascii+80lines F8=N01_intelligence/knowledge/kno_embedder_provider_n01.md -->
+     F5=rg+Get-Content+apply_patch F6=target dense markdown artifact F7=self-check properties+8F+ascii+80lines F8=N01_intelligence/P01_knowledge/kno_embedder_provider_n01.md -->
 
 # N01 Embedder Provider
 

@@ -31,8 +31,8 @@ n05_fix_grid_ux_boot_script_hardening: "1. MoveWindow timing fix: `_spawn/spawn_
   5. Validate: Run `bash _spawn/dispatch.sh stop --dry-run` after fixes.\n6. Self-audit: What native Claude Code tools/features\
   \ should N05 have\n   in its MCP config or settings that it currently lacks? Check:\n   - GitHub MCP server (for CI/CD integration)\n\
   \   - Any missing --flags that improve operations"
-n03_clean_pi_from_builders_shared_isos: "1. Spawn configs: Fix `N03_builder/orchestration/spawn_config_builder.md`\n   and\
-  \ `N04_knowledge/orchestration/spawn_config_knowledge.md` — replace\n   `pi --model` with `claude --model`.\n2. Shared ISOs:\
+n03_clean_pi_from_builders_shared_isos: "1. Spawn configs: Fix `N03_builder/P12_orchestration/spawn_config_builder.md`\n   and\
+  \ `N04_knowledge/P12_orchestration/spawn_config_knowledge.md` — replace\n   `pi --model` with `claude --model`.\n2. Shared ISOs:\
   \ Scan `archetypes/builders/_shared/` for PI references.\n3. Agent definitions: Scan `.claude/agents/` for any PI-specific\
   \ patterns.\n4. Self-audit: What native Claude Code capabilities should builders use\n   that they currently don't? Check\
   \ if `.claude/agents/*.md` reference the\n   right sub-agent tools and capabilities.\n5. Compile all changed files."

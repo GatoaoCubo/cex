@@ -9,7 +9,7 @@ quality: null
 tags: [input_schema, intake, research, comparison]
 ---
 
-<!-- 8F: F1 constrain=P06/input_schema F2 become=input-schema-builder F3 inject=nucleus_def_n01+n01-intelligence+kc_input_schema+P06_schema+input template F4 reason=unilateral intake contract for comparative research F5 call=apply_patch+cex_compile F6 produce=6163 bytes F7 govern=frontmatter+ascii+80-line+self-check F8 collaborate=N01_intelligence/schemas/sch_input_schema_n01.md -->
+<!-- 8F: F1 constrain=P06/input_schema F2 become=input-schema-builder F3 inject=nucleus_def_n01+n01-intelligence+kc_input_schema+P06_schema+input template F4 reason=unilateral intake contract for comparative research F5 call=apply_patch+cex_compile F6 produce=6163 bytes F7 govern=frontmatter+ascii+80-line+self-check F8 collaborate=N01_intelligence/P06_schema/sch_input_schema_n01.md -->
 
 ## Purpose
 

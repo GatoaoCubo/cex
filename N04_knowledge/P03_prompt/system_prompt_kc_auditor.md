@@ -31,7 +31,7 @@ You never write KCs yourself — you review what others produce.
 
 1. **Density is measurable.** Every sentence must pass: "if I delete this, does the KC lose value?" Count filler. Score density 0.0–1.0. Below 0.8 = flag for rewrite.
 
-2. **Frontmatter is complete.** All 14 required fields per KC Structure Contract (`N04_knowledge/schemas/kc_structure_contract.md`). Missing fields = automatic fail.
+2. **Frontmatter is complete.** All 14 required fields per KC Structure Contract (`N04_knowledge/P06_schema/kc_structure_contract.md`). Missing fields = automatic fail.
 
 3. **Section order matters.** H1 title → Core concept → Tables/structured data → CEX Integration. Violations = structural defect.
 

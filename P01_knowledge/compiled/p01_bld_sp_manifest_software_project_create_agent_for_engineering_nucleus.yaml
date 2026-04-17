@@ -88,7 +88,7 @@ input:
 - 'Required: project root path or intent description specifying stack (Python/Node/mixed)'
 - 'Optional: existing manifest files for diff/audit, target environment (dev/staging/prod), GDP decision manifest'
 output:
-- 'Primary: validated manifest bundle (`.toml` / `.json`) + audit report committed to `N05_operations/output/`'
+- 'Primary: validated manifest bundle (`.toml` / `.json`) + audit report committed to `N05_operations/P05_output/`'
 - 'Secondary: compiled `.yaml` manifest artifact, gap report with fix commands, completion signal to N07'
 quality_gates: 'HARD: `id` matches `^p02_agent_[a-z][a-z0-9_]+$`, `kind == agent`, `quality == null`, all 10 required frontmatter
   fields present, `agent_package >= 10` files listed, `llm_function == BECOME`, `agent_group` assigned and non-blank. SOFT:
@@ -97,7 +97,7 @@ quality_gates: 'HARD: `id` matches `^p02_agent_[a-z][a-z0-9_]+$`, `kind == agent
 common_issues:
 - 'Lock file missing: `poetry.lock` absent → run `poetry lock --no-update`; never commit `pyproject.toml` changes without
   regenerating lock'
-- 'railway.toml healthcheckPath mismatch: path in toml doesn''t match FastAPI router prefix → cross-check against `N05_operations/schemas/railway_toml_schema.md`'
+- 'railway.toml healthcheckPath mismatch: path in toml doesn''t match FastAPI router prefix → cross-check against `N05_operations/P06_schema/railway_toml_schema.md`'
 - 'Env variable divergence: `.env.example` and `railway.toml [variables]` out of sync → run cross-manifest consistency check
   before handing off to Railway Superintendent'
 - 'Manifest byte overflow: Generated artifact body > 5120B → compress Common Issues; collapse tool table to 5 core entries'

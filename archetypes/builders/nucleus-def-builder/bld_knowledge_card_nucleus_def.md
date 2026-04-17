@@ -40,7 +40,7 @@ cex_router.py (CLI selection), and spawn_grid.ps1 (boot orchestration).
 | Model Tier | Capability level: opus (deep reasoning), sonnet (structured), local | nucleus_models.yaml |
 | Pillars Owned | Which of P01-P12 this nucleus actually produces artifacts for | agent_card files |
 | Crew Template | Composable multi-agent pattern this nucleus can assemble | N07 dispatch rules |
-| Domain Agent | Non-builder agent in N0{X}_*/agents/ (e.g., railway_superintendent) | agent directories |
+| Domain Agent | Non-builder agent in N0{X}_*/P02_model/ (e.g., railway_superintendent) | agent directories |
 | Boot Contract | boot_script + handoff file convention + signal format | dispatch.sh docs |
 | Composability | Nucleus declares upstream inputs + downstream outputs for orchestration | P12 orchestration |
 | Agent Card | N0{X}_*/agent_card_n0{X}.md -- capability manifest read by N07 | N0{X} directories |
@@ -87,7 +87,7 @@ cex_router.py (CLI selection), and spawn_grid.ps1 (boot orchestration).
 1. Set pillars_owned to reflect actual artifact output, not aspirational scope.
 2. Verify cli_binding from nucleus_models.yaml before writing -- never guess.
 3. crew_templates_exposed must name patterns that exist or are planned in N07.
-4. domain_agents should enumerate all .md files in N0{X}_*/agents/ directory.
+4. domain_agents should enumerate all .md files in N0{X}_*/P02_model/ directory.
 5. Boot contract must reference the real handoff file path (n0{X}_task.md).
 
 ## Pitfalls

@@ -8,7 +8,7 @@ version: 1.0
 quality: null
 tags: [memory, knowledge_index, hybrid, bm25, pgvector, retrieval]
 ---
-<!-- 8F: F1=P10/knowledge_index F2=knowledge-index-builder F3=nucleus_def_n06.md,kc_knowledge_index.md,P10_memory/_schema.yaml,N06 commercial knowledge set F4=hybrid_index_topology_for_revenue_weighted_search F5=apply_patch;python _tools/cex_compile.py F6=author_dense_markdown_artifact F7=frontmatter_ascii_density_linecount_review F8=N06_commercial/memory/mem_knowledge_index_n06.md -->
+<!-- 8F: F1=P10/knowledge_index F2=knowledge-index-builder F3=nucleus_def_n06.md,kc_knowledge_index.md,P10_memory/_schema.yaml,N06 commercial knowledge set F4=hybrid_index_topology_for_revenue_weighted_search F5=apply_patch;python _tools/cex_compile.py F6=author_dense_markdown_artifact F7=frontmatter_ascii_density_linecount_review F8=N06_commercial/P10_memory/mem_knowledge_index_n06.md -->
 
 # Commercial Knowledge Index
 

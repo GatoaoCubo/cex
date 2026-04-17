@@ -246,7 +246,7 @@ artifacts_produced: '| File | Kind | Size |
 
   | `_data/finetune/cex_builder_pairs.jsonl` | Training data | 554 KB, 123 pairs |
 
-  | `N05_operations/output/continuous_batching_report.md` | This report | -- |
+  | `N05_operations/P05_output/continuous_batching_report.md` | This report | -- |
 
   | `.cex/runtime/task_queue.yaml` | Test queue | 3 tasks |
 

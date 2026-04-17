@@ -84,13 +84,13 @@ bash _spawn/dispatch.sh solo n01 "BATCH_E_REPUTATION"
 
 ```bash
 # 1. Dry-run check
-python N01_research/output/data/merge_batches.py --all --dry-run
+python N01_research/P05_output/data/merge_batches.py --all --dry-run
 
 # 2. Merge
-python N01_research/output/data/merge_batches.py --all
+python N01_research/P05_output/data/merge_batches.py --all
 
 # 3. Commit
-git add N01_research/output/data/ && git commit -m "[N07] merge batches → {N} contacts"
+git add N01_research/P05_output/data/ && git commit -m "[N07] merge batches → {N} contacts"
 ```
 
 ---

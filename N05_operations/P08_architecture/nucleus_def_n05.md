@@ -72,9 +72,9 @@ density_score: 0.88
 
 | Agent | Purpose | Path |
 |-------|---------|------|
-| agent_tester | Test generation + execution | `N05_operations/agents/` |
-| agent_deployer | Deploy automation | `N05_operations/agents/` |
-| agent_reviewer | Code review | `N05_operations/agents/` |
+| agent_tester | Test generation + execution | `N05_operations/P02_model/` |
+| agent_deployer | Deploy automation | `N05_operations/P02_model/` |
+| agent_reviewer | Code review | `N05_operations/P02_model/` |
 
 ## Boot Contract
 

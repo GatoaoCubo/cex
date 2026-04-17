@@ -149,7 +149,7 @@ density_score: 1.0
 
   | 29 Brand Variables ({{BRAND_*}}) | brand_config.yaml | PRONTO | CRITICA |
 
-  | 12 Knowledge Cards | N06_commercial/knowledge/ | PRONTO | ALTA |
+  | 12 Knowledge Cards | N06_commercial/P01_knowledge/ | PRONTO | ALTA |
 
   | Dispatch Rule (priority 10) | orchestration/ | PRONTO | ALTA |
 

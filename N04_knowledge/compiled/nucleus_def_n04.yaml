@@ -30,9 +30,9 @@ domain_agents: '| Agent | Purpose | Path |
 
   |-------|---------|------|
 
-  | agent_librarian | Taxonomy coherence | `N04_knowledge/agents/` |
+  | agent_librarian | Taxonomy coherence | `N04_knowledge/P02_model/` |
 
-  | agent_indexer | Retrieval index maintenance | `N04_knowledge/agents/` |'
+  | agent_indexer | Retrieval index maintenance | `N04_knowledge/P02_model/` |'
 fallback_cli: codex
 title: Nucleus Def N04
 version: 1.0.0

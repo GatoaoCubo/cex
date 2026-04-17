@@ -38,7 +38,7 @@ schema: '| Property | Type | Required | Value or Rule | Inventive Pride decision
 
   | on_fail | string | yes | `block` | Weak artifacts do not pass by persuasion |
 
-  | scope | list[string] | yes | `N03_engineering/schemas/.md`, `N03_engineering/config/.md` | Narrow ownership keeps enforcement
+  | scope | list[string] | yes | `N03_engineering/P06_schema/.md`, `N03_engineering/P09_config/.md` | Narrow ownership keeps enforcement
   honest |
 
   | auto_fix | boolean | yes | `false` | Pride rejects hidden mutation of authored meaning |
@@ -85,7 +85,7 @@ rationale: '| Design choice | Why it exists | Pride expression |
 
   | Narrow file scope | Validators should own precise terrain | Governance with boundaries |'
 example: "validator_name: n03_foundation_artifact_guard\nrule_type: structural_governance\nseverity: error\non_fail: block\n\
-  scope:\n  - N03_engineering/schemas/*.md\n  - N03_engineering/config/*.md\nchecks:\n  - id: V01\n    condition: frontmatter_present\n\
+  scope:\n  - N03_engineering/P06_schema/*.md\n  - N03_engineering/P09_config/*.md\nchecks:\n  - id: V01\n    condition: frontmatter_present\n\
   \    expected: true\n  - id: V03\n    condition: required_sections_present\n    expected:\n      - Purpose\n      - Rationale\n\
   \      - Example\n      - Properties\n  - id: V05\n    condition: min_line_count\n    expected: 80\n  - id: V06\n    condition:\
   \ lens_phrase_present\n    expected: Inventive Pride\naudit_trail: true\nauto_fix: false"

@@ -1,0 +1,84 @@
+id: n00_agent_grounding_record_manifest
+kind: knowledge_card
+pillar: P10 -- memory
+nucleus: n00
+title: Agent Grounding Record -- Canonical Manifest
+version: 1.0
+quality: null
+tags:
+- manifest
+- agent_grounding_record
+- p10
+- n00
+- archetype
+- template
+purpose: 'An agent_grounding_record captures per-inference provenance: which tool calls were made, which RAG chunks were retrieved,
+  and which model version signed the output. It enables reproducibility, auditability, and debugging of agent decisions at
+  the individual inference level.'
+schema_key_fields: '| Field | Type | Required | Description |
+
+  |-------|------|----------|-------------|
+
+  | id | string | yes | Unique artifact identifier |
+
+  | kind | string | yes | Always `agent_grounding_record` |
+
+  | pillar | string | yes | Always `P10` |
+
+  | title | string | yes | Human-readable name |
+
+  | version | semver | yes | Artifact version |
+
+  | quality | float\|null | yes | Peer-review score (null until reviewed) |
+
+  | inference_id | string | yes | Unique ID for the inference run |
+
+  | model_signature | string | yes | Model name + version that produced the output |
+
+  | tool_calls | array | yes | List of tool invocations with inputs/outputs |
+
+  | rag_chunks | array | no | Retrieved document chunks with scores and sources |
+
+  | timestamp | datetime | yes | ISO-8601 timestamp of inference |
+
+  | nucleus | string | yes | Nucleus that ran the inference |'
+when_to_use:
+- When you need to audit why an agent produced a specific output
+- When debugging RAG pipelines or tool call failures
+- When building compliance reports that require inference-level provenance
+builder: '`archetypes/builders/agent_grounding_record-builder/` Run: `python _tools/cex_8f_runner.py "your intent" --kind
+  agent_grounding_record --execute`'
+template_variables_open_for_instantiation:
+- '`{{NUCLEUS_ROLE}}` -- which nucleus domain owns this'
+- '`{{SIN_LENS}}` -- cultural DNA driving the artifact'
+- '`{{TARGET_AUDIENCE}}` -- who this serves'
+- '`{{DOMAIN_CONTEXT}}` -- business/technical context'
+example_minimal: '---
+
+  id: agr_n04_session_001
+
+  kind: agent_grounding_record
+
+  pillar: P10
+
+  nucleus: n04
+
+  title: "Example Agent Grounding Record"
+
+  version: 1.0
+
+  quality: null
+
+  ---
+
+  # Inference Provenance
+
+  inference_id: inf_20260417_001
+
+  model_signature: claude-sonnet-4-6
+
+  tool_calls: [{tool: read_file, input: kc_agent.md, output: "200 chars"}]'
+related_kinds:
+- '`learning_record` (P10) -- captures what worked/failed after grounding is analyzed'
+- '`audit_log` (P11) -- immutable audit trail that may reference grounding records'
+- '`runtime_state` (P10) -- session-level state that grounding records augment'

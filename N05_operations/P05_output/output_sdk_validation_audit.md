@@ -120,7 +120,7 @@ All consistent with nucleus_models.yaml config.
 
 Working tree clean except expected items:
 - `M CLAUDE_GENERATED.md` — tracked, modified (expected)
-- `?? N04_knowledge/output/output_content_factory_internal_audit.md` — new untracked (expected from N04 run)
+- `?? N04_knowledge/P05_output/output_content_factory_internal_audit.md` — new untracked (expected from N04 run)
 
 Recent commits show healthy progression:
 1. `dd5fc47` — opus-4-6 upgrade (config-driven)

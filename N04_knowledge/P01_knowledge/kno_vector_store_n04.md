@@ -39,7 +39,7 @@ domain: vector_storage
 tldr: "Qdrant HNSW store for high-recall N04 semantic search with disciplined metadata filtering."
 ---
 <!-- 8F: F1=vector_store/P01 F2=vector-store-builder F3=nucleus_def_n04+kc_vector_store+N04 env/path config+knowledge lifecycle KC F4=template-first local-first Qdrant profile for dense hungry retrieval
-     F5=shell,apply_patch,cex_compile F6=author markdown artifact F7=frontmatter+metric-dimension coherence+ascii+self-check F8=N04_knowledge/knowledge/kno_vector_store_n04.md -->
+     F5=shell,apply_patch,cex_compile F6=author markdown artifact F7=frontmatter+metric-dimension coherence+ascii+self-check F8=N04_knowledge/P01_knowledge/kno_vector_store_n04.md -->
 # Overview
 N04 needs a store that can keep many dense vectors without giving up filter discipline.
 Knowledge Gluttony pushes toward broad ingestion, but a hungry index becomes noisy if pillar, kind, and freshness boundaries cannot be enforced cheaply at query time.
@@ -124,8 +124,8 @@ Scale guidance:
 ## References
 1. `archetypes/builders/vector-store-builder/bld_instruction_vector_store.md`
 2. `P01_knowledge/library/kind/kc_vector_store.md`
-3. `N04_knowledge/config/con_env_config_n04.md`
-4. `N04_knowledge/knowledge/knowledge_card_knowledge.md`
+3. `N04_knowledge/P09_config/con_env_config_n04.md`
+4. `N04_knowledge/P01_knowledge/knowledge_card_knowledge.md`
 
 ## Properties
 | Property | Value |

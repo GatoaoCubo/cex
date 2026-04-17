@@ -30,16 +30,16 @@ heal_plan_ranked: '| rank | path | defect | decision | command | rationale |
   | 1 | `P11_feedback/examples/p11_content_monetization_faz_um_crm_pra_pet_shop.md` | missing `quality` key (has id/kind/pillar)
   | patch | `edit frontmatter: add ''quality: null''` | trivial; 1-line fix; unblocks P11 example scan |
 
-  | 2 | `N04_knowledge/knowledge/rag_source_knowledge.md` | `last_checked: 2024-03-30` stale for live RAG source | patch |
+  | 2 | `N04_knowledge/P01_knowledge/rag_source_knowledge.md` | `last_checked: 2024-03-30` stale for live RAG source | patch |
   `edit frontmatter: set last_checked: 2026-04-15` | trivial; freshness field; no content change |
 
-  | 3 | `N05_operations/knowledge/kc_ollama_deployment_guide.md` | hardcoded `v0.3.7` (Apr 2024); Ollama now v0.6.x | patch
+  | 3 | `N05_operations/P01_knowledge/kc_ollama_deployment_guide.md` | hardcoded `v0.3.7` (Apr 2024); Ollama now v0.6.x | patch
   | `edit body: remove version pin, reference "latest stable"` | medium; version drift; avoids future re-stale |
 
-  | 4 | `N06_commercial/knowledge/kc_ai_saas_monetization.md` | 2023 Gartner/Forrester/IDC stats unqualified | patch | `edit
+  | 4 | `N06_commercial/P01_knowledge/kc_ai_saas_monetization.md` | 2023 Gartner/Forrester/IDC stats unqualified | patch | `edit
   body: append "as of 2023" to all % claims + Gartner 2025 note` | medium; H semver drift (72%->84% usage-based) |
 
-  | 5 | `N06_commercial/knowledge/kc_ai_compliance_gdpr.md` | EU AI Act (2025) absent from GDPR coverage | patch | `edit body:
+  | 5 | `N06_commercial/P01_knowledge/kc_ai_compliance_gdpr.md` | EU AI Act (2025) absent from GDPR coverage | patch | `edit body:
   add 1-line section "EU AI Act (2025) -- high-risk AI systems"` | medium; compliance gap; legal risk if cited |
 
   | 6 | `archetypes/builders/agent-grounding-record-builder/` | density <0.78 on 3 ISOs; 2 files >6144B | regenerate | `python

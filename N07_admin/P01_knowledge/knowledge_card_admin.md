@@ -22,10 +22,10 @@ axioms:
   - "NEVER dispatch below quality 8.0 — return to builder with feedback"
   - "IF multi-domain mission THEN use grid dispatch with per-nucleus handoffs"
 linked_artifacts:
-  primary: "N07_admin/agents/agent_admin.md"
-  related: [N07_admin/orchestration/dispatch_rule_admin.md, N07_admin/orchestration/spawn_config_admin.md]
+  primary: "N07_admin/P02_model/agent_admin.md"
+  related: [N07_admin/P12_orchestration/dispatch_rule_admin.md, N07_admin/P12_orchestration/spawn_config_admin.md]
 density_score: 1.0
-data_source: "N07_admin/orchestration/spawn_config_admin.md"
+data_source: "N07_admin/P12_orchestration/spawn_config_admin.md"
 ---
 
 # CEX Orchestration — Multi-CLI Dispatch
@@ -84,7 +84,7 @@ bash _spawn/dispatch.sh stop
   "quality_score": 9.0,
   "timestamp": "2026-03-30T14:00:00Z",
   "task": "bootstrap_f1",
-  "artifacts": ["N07_admin/agents/agent_admin.md"],
+  "artifacts": ["N07_admin/P02_model/agent_admin.md"],
   "artifacts_count": 1
 }
 ```
@@ -107,9 +107,9 @@ bash _spawn/dispatch.sh stop
 
 ## References
 
-- Spawn config: N07_admin/orchestration/spawn_config_admin.md
-- Fallback chain: N07_admin/agents/fallback_chain_admin.md
-- Mission plan: N07_admin/orchestration/mission_bootstrap_2026Q1.md
+- Spawn config: N07_admin/P12_orchestration/spawn_config_admin.md
+- Fallback chain: N07_admin/P02_model/fallback_chain_admin.md
+- Mission plan: N07_admin/P12_orchestration/mission_bootstrap_2026Q1.md
 
 
 ## Anti-Patterns

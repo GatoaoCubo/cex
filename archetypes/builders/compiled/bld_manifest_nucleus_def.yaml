@@ -21,7 +21,7 @@ identity: Specializes in formally defining CEX nuclei (N00-N07) as composable fr
   composition.
 capabilities: "1. Generates formal nucleus_def artifacts covering all required fields: nucleus_id, role,\n   pillars_owned,\
   \ sin_lens, cli_binding, model_tier, boot_script, agent_card_path.\n2. Maps each nucleus to its crew_templates_exposed (which\
-  \ crew patterns it can assemble).\n3. Enumerates domain_agents (non-builder agents within the nucleus N0x/agents/ directory).\n\
+  \ crew patterns it can assemble).\n3. Enumerates domain_agents (non-builder agents within the nucleus N0x/P02_model/ directory).\n\
   4. Makes the fractal explicit: N00 Genesis defines what can exist; N01-N07 are concrete instantiations.\n5. Enforces composability\
   \ contracts: every nucleus_def declares its upstream producers\n   and downstream consumers in the orchestration graph."
 routing: 'Keywords: nucleus definition, fractal primitive, N00, N01-N07, genesis, pillar ownership, sin-lens, CLI-binding,

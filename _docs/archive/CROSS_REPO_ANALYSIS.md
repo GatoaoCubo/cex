@@ -118,14 +118,14 @@ codexa-core also has spawn_continuous.ps1 and spawn_pool_manager.ps1.
 - Anti-Pattern: Isolated Sessions
 - Anti-Pattern (generic)
 
-**Operations Patterns (move to N05/knowledge/):**
+**Operations Patterns (move to N05/P01_knowledge/):**
 - Zero Touch Execution Patterns
 - Error Handling Recovery Patterns
 - Test Automation Strategy
 - Quality Gate Implementation
 - Production Monitoring Alerting
 
-**Orchestration Patterns (move to N07/knowledge/ or P12):**
+**Orchestration Patterns (move to N07/P01_knowledge/ or P12):**
 - Orchestration Coordination Patterns
 - Orchestration Enterprise Patterns
 - Memory Consolidation Pattern

@@ -49,7 +49,7 @@ lives in main. Private data stays in the branch.
 
 | Source (gato) | Template (main) | Variables |
 |---------------|----------------|-----------|
-| `N06_commercial/output/dashboard.html` | `P05_output/templates/tpl_crm_dashboard.html` | {{BRAND_NAME}}, {{BRAND_COLORS.*}}, {{MAP_CENTER_LAT}}, {{MAP_CENTER_LNG}}, {{MAP_ZOOM}}, {{CRM_DATA_SOURCE}} |
+| `N06_commercial/P05_output/dashboard.html` | `P05_output/templates/tpl_crm_dashboard.html` | {{BRAND_NAME}}, {{BRAND_COLORS.*}}, {{MAP_CENTER_LAT}}, {{MAP_CENTER_LNG}}, {{MAP_ZOOM}}, {{CRM_DATA_SOURCE}} |
 
 ### 4. CRM Admin Spec
 

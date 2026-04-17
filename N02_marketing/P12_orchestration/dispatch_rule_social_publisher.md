@@ -21,7 +21,7 @@ density_score: 0.88
 | Field | Value |
 |-------|-------|
 | Target Nucleus | N02_marketing |
-| Target Tool | N02_marketing/tools/social_publisher_marketing.md |
+| Target Tool | N02_marketing/P04_tools/social_publisher_marketing.md |
 | Builder | archetypes/builders/social-publisher-builder/ |
 | Priority | standard |
 

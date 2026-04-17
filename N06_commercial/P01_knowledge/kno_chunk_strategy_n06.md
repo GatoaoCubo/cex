@@ -8,7 +8,7 @@ version: 1.0
 quality: null
 tags: [knowledge, chunk_strategy, rag, pricing, funnels, monetization]
 ---
-<!-- 8F: F1=P01/chunk_strategy F2=chunk-strategy-builder F3=nucleus_def_n06.md,kc_chunk_strategy.md,P01_knowledge/_schema.yaml,N06 W1 config/schema F4=revenue_weighted_recursive_chunking_for_commercial_retrieval F5=apply_patch;python _tools/cex_compile.py F6=author_dense_markdown_artifact F7=frontmatter_ascii_density_linecount_review F8=N06_commercial/knowledge/kno_chunk_strategy_n06.md -->
+<!-- 8F: F1=P01/chunk_strategy F2=chunk-strategy-builder F3=nucleus_def_n06.md,kc_chunk_strategy.md,P01_knowledge/_schema.yaml,N06 W1 config/schema F4=revenue_weighted_recursive_chunking_for_commercial_retrieval F5=apply_patch;python _tools/cex_compile.py F6=author_dense_markdown_artifact F7=frontmatter_ascii_density_linecount_review F8=N06_commercial/P01_knowledge/kno_chunk_strategy_n06.md -->
 
 # Commercial Chunk Strategy
 

@@ -12,7 +12,7 @@ tags: [config, paths, engineering, filesystem, n03]
 
 <!-- 8F: F1 constrain=P09/path_config F2 become=path-config-builder F3 inject=nucleus_def_n03, kc_path_config, P09_config, sibling config examples
      F4 reason=authoritative filesystem map for N03 build and validation surfaces F5 call=rg, Get-Content, apply_patch F6 produce=4770 bytes
-     F7 govern=frontmatter+sections+tables+ascii+self-check F8 collaborate=save N03_engineering/config/con_path_config_n03.md -->
+     F7 govern=frontmatter+sections+tables+ascii+self-check F8 collaborate=save N03_engineering/P09_config/con_path_config_n03.md -->
 
 # Engineering Path Config
 
@@ -32,11 +32,11 @@ tags: [config, paths, engineering, filesystem, n03]
 | Alias | Relative path | Mode | Scope | Rule |
 |-------|---------------|------|-------|------|
 | `n03_root` | `N03_engineering/` | read_write | all | Home boundary for nucleus-owned artifacts |
-| `n03_schemas` | `N03_engineering/schemas/` | read_write | schema builds | Source markdown for P06 outputs |
-| `n03_config` | `N03_engineering/config/` | read_write | config builds | Source markdown for P09 outputs |
+| `n03_schemas` | `N03_engineering/P06_schema/` | read_write | schema builds | Source markdown for P06 outputs |
+| `n03_config` | `N03_engineering/P09_config/` | read_write | config builds | Source markdown for P09 outputs |
 | `n03_compiled` | `N03_engineering/compiled/` | read_write | compile stage | Generated YAML output only |
 | `n03_quality` | `N03_engineering/quality/` | read_write | review | Quality artifacts and audits |
-| `n03_output` | `N03_engineering/output/` | read_write | reports | Human-oriented generated reports |
+| `n03_output` | `N03_engineering/P05_output/` | read_write | reports | Human-oriented generated reports |
 | `handoff_root` | `.cex/runtime/handoffs/` | read_only | mission | Upstream task source |
 | `signal_root` | `.cex/runtime/signals/` | read_write | mission | Completion signaling |
 | `builder_root` | `archetypes/builders/` | read_only | context load | Builder manifests and ISOs |
@@ -72,8 +72,8 @@ tags: [config, paths, engineering, filesystem, n03]
 base_dir: ${CEX_ROOT}
 paths:
   n03_root: N03_engineering/
-  n03_schemas: N03_engineering/schemas/
-  n03_config: N03_engineering/config/
+  n03_schemas: N03_engineering/P06_schema/
+  n03_config: N03_engineering/P09_config/
   n03_compiled: N03_engineering/compiled/
   handoff_root: .cex/runtime/handoffs/
   signal_root: .cex/runtime/signals/

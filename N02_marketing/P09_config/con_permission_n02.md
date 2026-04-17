@@ -12,7 +12,7 @@ tags: [config, permission, access, marketing, governance]
 
 <!-- 8F: F1 constrain=P09/permission F2 become=permission-builder F3 inject=nucleus_def_n02+n02_rules+kc_permission+P09_schema
      F4 reason=minimum_viable_access_control_for_marketing_nucleus F5 call=shell_command,apply_patch F6 produce=4506 bytes
-     F7 govern=frontmatter_sections_ascii_density_linecount F8 collaborate=N02_marketing/config/con_permission_n02.md -->
+     F7 govern=frontmatter_sections_ascii_density_linecount F8 collaborate=N02_marketing/P09_config/con_permission_n02.md -->
 
 # Purpose
 
@@ -28,10 +28,10 @@ tags: [config, permission, access, marketing, governance]
 
 | Subject | Resource | Actions Allowed | Explicit Deny |
 |---------|----------|-----------------|---------------|
-| n02_builder | N02_marketing/schemas/** | read, write | delete |
-| n02_builder | N02_marketing/config/** | read, write | delete |
-| n02_builder | N02_marketing/output/** | read, write | execute |
-| n02_builder | N02_marketing/knowledge/** | read | write, delete |
+| n02_builder | N02_marketing/P06_schema/** | read, write | delete |
+| n02_builder | N02_marketing/P09_config/** | read, write | delete |
+| n02_builder | N02_marketing/P05_output/** | read, write | execute |
+| n02_builder | N02_marketing/P01_knowledge/** | read | write, delete |
 | n02_builder | N02_marketing/rules/** | read | write, delete |
 | n02_builder | P01_knowledge/library/kind/** | read | write, delete |
 | n02_builder | .cex/runtime/handoffs/** | read | write, delete |
@@ -74,7 +74,7 @@ tags: [config, permission, access, marketing, governance]
 ```yaml
 permission_check:
   subject: n02_builder
-  resource: N02_marketing/config/con_rate_limit_config_n02.md
+  resource: N02_marketing/P09_config/con_rate_limit_config_n02.md
   action: write
   result: allow
 ```
@@ -108,4 +108,4 @@ permission_check:
 | Commit policy | denied |
 | Main risk prevented | uncontrolled mutation of marketing system assets |
 | Enforcement target | workspace behavior |
-| Save path | N02_marketing/config/con_permission_n02.md |
+| Save path | N02_marketing/P09_config/con_permission_n02.md |

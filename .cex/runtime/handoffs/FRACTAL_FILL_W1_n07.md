@@ -19,29 +19,29 @@ pipeline and ASCII-only rule (see .claude/rules/8f-reasoning.md and
 
 ## Context (READ THESE FIRST)
 
-1. `N07_admin/architecture/nucleus_def_n07.md` -- your identity + sin lens
+1. `N07_admin/P08_architecture/nucleus_def_n07.md` -- your identity + sin lens
 2. `N07_admin/rules/` -- your nucleus rules
 3. `archetypes/builders/{kind}-builder/bld_manifest_{kind}.md` -- per-kind builder
 4. `P01_knowledge/library/kind/kc_{kind}.md` -- kind knowledge cards (when present)
 5. `P06_schema/_schema.yaml`, `P09_config/_schema.yaml` -- pillar schemas
-6. Similar artifacts in other nuclei: `N0*/schemas/`, `N0*/config/` (read 2-3 as examples)
+6. Similar artifacts in other nuclei: `N0*/P06_schema/`, `N0*/P09_config/` (read 2-3 as examples)
 
 ## Deliverables (exact paths)
 
 ### P06 (schemas) -- 4 artifacts
 
-1. `N07_admin/schemas/sch_enum_def_n07.md` -- kind=`enum_def` -- Enumeracao reutilizavel
-2. `N07_admin/schemas/sch_input_schema_n07.md` -- kind=`input_schema` -- Input contract
-3. `N07_admin/schemas/sch_type_def_n07.md` -- kind=`type_def` -- Custom type definition
-4. `N07_admin/schemas/sch_validator_n07.md` -- kind=`validator` -- Validation rule (pre-commit, quality gate)
+1. `N07_admin/P06_schema/sch_enum_def_n07.md` -- kind=`enum_def` -- Enumeracao reutilizavel
+2. `N07_admin/P06_schema/sch_input_schema_n07.md` -- kind=`input_schema` -- Input contract
+3. `N07_admin/P06_schema/sch_type_def_n07.md` -- kind=`type_def` -- Custom type definition
+4. `N07_admin/P06_schema/sch_validator_n07.md` -- kind=`validator` -- Validation rule (pre-commit, quality gate)
 
 ### P09 (config) -- 5 artifacts
 
-5. `N07_admin/config/con_env_config_n07.md` -- kind=`env_config` -- Environment variables
-6. `N07_admin/config/con_path_config_n07.md` -- kind=`path_config` -- System paths
-7. `N07_admin/config/con_permission_n07.md` -- kind=`permission` -- Permission rule (read/write/execute)
-8. `N07_admin/config/con_rate_limit_config_n07.md` -- kind=`rate_limit_config` -- Rate limiting: RPM, TPM, budget
-9. `N07_admin/config/con_secret_config_n07.md` -- kind=`secret_config` -- Secret management
+5. `N07_admin/P09_config/con_env_config_n07.md` -- kind=`env_config` -- Environment variables
+6. `N07_admin/P09_config/con_path_config_n07.md` -- kind=`path_config` -- System paths
+7. `N07_admin/P09_config/con_permission_n07.md` -- kind=`permission` -- Permission rule (read/write/execute)
+8. `N07_admin/P09_config/con_rate_limit_config_n07.md` -- kind=`rate_limit_config` -- Rate limiting: RPM, TPM, budget
+9. `N07_admin/P09_config/con_secret_config_n07.md` -- kind=`secret_config` -- Secret management
 
 ## Format (every file)
 

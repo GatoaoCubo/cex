@@ -96,7 +96,7 @@ rationale: '| Design Choice | Why | Analytical Envy Interpretation |
   | Use one warning only | Thin drafts may exist briefly | Quality pressure stays high without freezing work |
 
   | Filename and quality checks | Governance consistency supports automation | Formal rigor amplifies analytical rigor |'
-example: "validator_result:\n  target_file: N01_intelligence/schemas/sch_input_schema_n01.md\n  status: pass\n  matched_conditions:\
+example: "validator_result:\n  target_file: N01_intelligence/P06_schema/sch_input_schema_n01.md\n  status: pass\n  matched_conditions:\
   \ [c01, c02, c03, c04, c05, c06, c07, c08, c09, c10]\n  note: \"Artifact names comparison pressure, evidence thresholds,\
   \ and retains quality null.\""
 example_failure: '| Missing Signal | Validator Response |

@@ -19,7 +19,7 @@ tldr: Multi-CLI orchestrator that dispatches tasks to 6 specialized nuclei via s
 density_score: 0.91
 linked_artifacts:
   primary: "N07_admin/architecture/agent_card_admin.md"
-  related: [N07_admin/prompts/system_prompt_admin.md, N07_admin/orchestration/dispatch_rule_admin.md]
+  related: [N07_admin/P03_prompt/system_prompt_admin.md, N07_admin/P12_orchestration/dispatch_rule_admin.md]
 ---
 
 # Orchestrator Nucleus Agent (N07)

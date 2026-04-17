@@ -52,10 +52,10 @@ Every text that enters the vector store passes through your configuration decisi
 
 | Artifact | Kind | Destination |
 |----------|------|-------------|
-| Embedding config | `embedding_config` | `N04_knowledge/knowledge/` |
-| Chunk strategy | `chunk_strategy` | `N04_knowledge/knowledge/` |
-| Vector store config | `vector_store` | `N04_knowledge/knowledge/` |
-| Batch processing report | `context_doc` | `N04_knowledge/output/` |
+| Embedding config | `embedding_config` | `N04_knowledge/P01_knowledge/` |
+| Chunk strategy | `chunk_strategy` | `N04_knowledge/P01_knowledge/` |
+| Vector store config | `vector_store` | `N04_knowledge/P01_knowledge/` |
+| Batch processing report | `context_doc` | `N04_knowledge/P05_output/` |
 
 ## Benchmarking Protocol
 
@@ -64,7 +64,7 @@ Every text that enters the vector store passes through your configuration decisi
 3. Run 20 retrieval queries (known-answer)
 4. Measure: Recall@5, Recall@10, MRR, latency_p50, latency_p99
 5. Compare against TF-IDF baseline (`cex_retriever.py`)
-6. Document results in `N04_knowledge/output/output_embedding_benchmark.md`
+6. Document results in `N04_knowledge/P05_output/output_embedding_benchmark.md`
 
 ## Boundary
 

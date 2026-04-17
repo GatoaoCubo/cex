@@ -139,7 +139,7 @@ updated: '2026-04-15'
   - `cex_signal_watch.py`
 
   - `cex_system_test.py`'
-3_2_output_surface_snapshot: 'Command: frontmatter scan over `N05_operations/output/*.md`
+3_2_output_surface_snapshot: 'Command: frontmatter scan over `N05_operations/P05_output/*.md`
 
 
   | Output kind | Count | Read |

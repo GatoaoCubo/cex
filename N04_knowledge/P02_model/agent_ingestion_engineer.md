@@ -79,7 +79,7 @@ Source → Fetch/Crawl → Clean → Deduplicate → Normalize → Register → 
 
 | Artifact | Kind | Destination |
 |----------|------|-------------|
-| RAG source registry | `rag_source` | `N04_knowledge/knowledge/` |
-| Document loader config | `document_loader` | `N04_knowledge/knowledge/` |
-| Ingestion report | `context_doc` | `N04_knowledge/output/` |
+| RAG source registry | `rag_source` | `N04_knowledge/P01_knowledge/` |
+| Document loader config | `document_loader` | `N04_knowledge/P01_knowledge/` |
+| Ingestion report | `context_doc` | `N04_knowledge/P05_output/` |
 | Freshness alerts | Signal | `.cex/runtime/signals/` |

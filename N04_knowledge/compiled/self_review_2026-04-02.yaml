@@ -25,7 +25,7 @@ critical_gaps_must_fix:
 - '`.cex/retriever_index.json` has unicode decode errors'
 - Critical system files corrupted - data integrity compromised
 - 'Empty Memory System:'
-- '`N04_knowledge/memory/` directory exists but completely empty'
+- '`N04_knowledge/P10_memory/` directory exists but completely empty'
 - No persistent memory accumulation across sessions
 - 'Non-functional Memory Selection:'
 - '`cex_memory_select.py` tool fails to execute'
@@ -71,7 +71,7 @@ recommended_actions_priority_order:
 - Update tooling to handle both formats transitionally
 - Create mapping table for translation
 - 'CRITICAL: Populate Memory System'
-- Create knowledge memory artifacts in `N04_knowledge/memory/`
+- Create knowledge memory artifacts in `N04_knowledge/P10_memory/`
 - Fix `cex_memory_select.py` functionality
 - Establish memory persistence patterns
 - 'HIGH: Verify Cross-Nucleus Integration'

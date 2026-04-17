@@ -9,7 +9,7 @@ quality: null
 tags: [config, permission, access, premium, governance]
 ---
 
-<!-- 8F: F1 constrain=P09/permission F2 become=permission-builder F3 inject=nucleus_def_n06.md,n06-commercial.md,bld_manifest_permission.md,kc_permission.md,P09_config/_schema.yaml F4 reason=least_privilege_access_for_high_value_commercial_resources F5 call=apply_patch;python _tools/cex_compile.py F6 produce=5152_bytes F7 govern=frontmatter_sections_ascii_density_review F8 collaborate=N06_commercial/config/con_permission_n06.md -->
+<!-- 8F: F1 constrain=P09/permission F2 become=permission-builder F3 inject=nucleus_def_n06.md,n06-commercial.md,bld_manifest_permission.md,kc_permission.md,P09_config/_schema.yaml F4 reason=least_privilege_access_for_high_value_commercial_resources F5 call=apply_patch;python _tools/cex_compile.py F6 produce=5152_bytes F7 govern=frontmatter_sections_ascii_density_review F8 collaborate=N06_commercial/P09_config/con_permission_n06.md -->
 
 # Commercial Permission Model
 
@@ -30,21 +30,21 @@ tags: [config, permission, access, premium, governance]
 |------|----------|------|-------|---------|-----------|
 | n06_owner | `N06_commercial/**` | yes | yes | yes | core commercial operator |
 | n07_orchestrator | `N06_commercial/**` | yes | limited | yes | coordination and validation authority |
-| revenue_analyst | `N06_commercial/output/**` | yes | yes | no | can refine business artifacts, not runtime behavior |
-| pricing_reviewer | `N06_commercial/schemas/**` | yes | propose_only | no | review contracts without direct mutation |
+| revenue_analyst | `N06_commercial/P05_output/**` | yes | yes | no | can refine business artifacts, not runtime behavior |
+| pricing_reviewer | `N06_commercial/P06_schema/**` | yes | propose_only | no | review contracts without direct mutation |
 | runtime_compiler | `N06_commercial/compiled/**` | yes | yes | yes | compile path requires write and run |
-| market_reader | `N06_commercial/knowledge/**` | yes | no | no | reference access only |
-| generic_agent | `N06_commercial/config/**` | no | no | no | config is too sensitive for blanket access |
+| market_reader | `N06_commercial/P01_knowledge/**` | yes | no | no | reference access only |
+| generic_agent | `N06_commercial/P09_config/**` | no | no | no | config is too sensitive for blanket access |
 | audit_process | `_reports/**` | yes | yes | yes | can produce revenue diagnostics |
 
 ## Deny Rules
 
 | Deny ID | Subject | Resource | Deny | Why |
 |---------|---------|----------|------|-----|
-| DP01 | all_non_n06 | `N06_commercial/config/con_secret_config_n06.md` | read_write_execute | secret policy must stay tightly bounded |
-| DP02 | all_non_n06_owner | `N06_commercial/config/con_rate_limit_config_n06.md` | write | spend policy changes alter monetization economics |
-| DP03 | all_non_n06_owner | `N06_commercial/schemas/sch_type_def_n06.md` | write | type drift breaks pricing telemetry |
-| DP04 | generic_agent | `N06_commercial/output/**` | write | low-context edits can weaken offers |
+| DP01 | all_non_n06 | `N06_commercial/P09_config/con_secret_config_n06.md` | read_write_execute | secret policy must stay tightly bounded |
+| DP02 | all_non_n06_owner | `N06_commercial/P09_config/con_rate_limit_config_n06.md` | write | spend policy changes alter monetization economics |
+| DP03 | all_non_n06_owner | `N06_commercial/P06_schema/sch_type_def_n06.md` | write | type drift breaks pricing telemetry |
+| DP04 | generic_agent | `N06_commercial/P05_output/**` | write | low-context edits can weaken offers |
 | DP05 | all_roles | `.git/**` | execute_delete | this config does not grant repo-destructive power |
 
 ## Escalation Rules
@@ -82,7 +82,7 @@ roles:
   - pricing_reviewer
 denies:
   - subject: all_non_n06
-    resource: N06_commercial/config/con_secret_config_n06.md
+    resource: N06_commercial/P09_config/con_secret_config_n06.md
     actions: [read, write, execute]
 ```
 

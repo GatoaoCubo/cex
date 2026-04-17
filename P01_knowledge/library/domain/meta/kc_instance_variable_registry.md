@@ -74,7 +74,7 @@ Extracted from: `crm_mission/MISSION_PLAN.md`, `batch_a` through `batch_f`
 
 ## Category 3: Dashboard Rendering (4 new variables)
 
-Extracted from: `N02_marketing/output/{{BRAND_NAME}}_crm_dashboard.html`, `N06_commercial/output/`
+Extracted from: `N02_marketing/P05_output/{{BRAND_NAME}}_crm_dashboard.html`, `N06_commercial/P05_output/`
 
 | Variable | Type | Example (gato) | Template Target |
 |----------|------|-----------------|-----------------|

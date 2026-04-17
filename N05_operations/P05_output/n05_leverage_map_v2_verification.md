@@ -57,9 +57,9 @@ derived naming prefix.
 
 Concrete mismatch:
 
-- `N05_operations/output/smoke_eval_deploy.md` has `kind: smoke_eval`
-- `N05_operations/output/regression_check_operations.md` has `kind: regression_check`
-- `N05_operations/output/benchmark_api_latency.md` has `kind: benchmark`
+- `N05_operations/P05_output/smoke_eval_deploy.md` has `kind: smoke_eval`
+- `N05_operations/P05_output/regression_check_operations.md` has `kind: regression_check`
+- `N05_operations/P05_output/benchmark_api_latency.md` has `kind: benchmark`
 - `cex_coverage.py` still reported `P07` coverage as `0 / 23`
 
 Conclusion: the math is correct, but the artifact discovery method is too weak,

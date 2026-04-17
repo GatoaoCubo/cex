@@ -11,9 +11,9 @@ tags: [seed-words, intent-resolution, trigger-phrases, NLU, routing, bilingual]
 tldr: "Complete catalog of EN+PT trigger phrases that activate CEX intent resolution. Maps each phrase to kind, pillar, nucleus, and builder. Reference for cex_8f_motor.py synonym expansion."
 density_score: 0.93
 sources:
-  - N02_marketing/output/report_intent_resolution_value_prop.md
+  - N02_marketing/P05_output/report_intent_resolution_value_prop.md
   - .claude/rules/n07-input-transmutation.md
-  - N03_engineering/knowledge/kc_intent_resolution_map.md
+  - N03_engineering/P01_knowledge/kc_intent_resolution_map.md
 updated: "2026-04-13"
 ---
 

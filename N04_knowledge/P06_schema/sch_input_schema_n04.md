@@ -8,7 +8,7 @@ version: 1.0
 quality: null
 tags: [schema, input, knowledge, ingestion, retrieval]
 ---
-<!-- 8F: F1 constrain=P06/input_schema F2 become=input-schema-builder F3 inject=n04-knowledge+kc_input_schema+P06 examples+N03/N05 contracts F4 reason=strict intake contract for evidence-hungry ingestion F5 call=shell,apply_patch F6 produce=7006 bytes F7 govern=frontmatter+ascii+density+80-line self-check F8 collaborate=N04_knowledge/schemas/sch_input_schema_n04.md -->
+<!-- 8F: F1 constrain=P06/input_schema F2 become=input-schema-builder F3 inject=n04-knowledge+kc_input_schema+P06 examples+N03/N05 contracts F4 reason=strict intake contract for evidence-hungry ingestion F5 call=shell,apply_patch F6 produce=7006 bytes F7 govern=frontmatter+ascii+density+80-line self-check F8 collaborate=N04_knowledge/P06_schema/sch_input_schema_n04.md -->
 # Knowledge Intake Schema
 ## Purpose
 N04 does not accept vague payloads. Under the Knowledge Gluttony lens, every intake should preserve enough context to support re-ranking, provenance tracing, freshness review, and taxonomy repair later.

@@ -9,7 +9,7 @@ quality: null
 tags: [path_config, filesystem, research, runtime]
 ---
 
-<!-- 8F: F1 constrain=P09/path_config F2 become=path-config-builder F3 inject=nucleus_def_n01+n01-intelligence+kc_path_config+P09_schema+path examples F4 reason=bounded path map for research inputs outputs and scratch work F5 call=apply_patch+cex_compile F6 produce=4013 bytes F7 govern=frontmatter+ascii+80-line+self-check F8 collaborate=N01_intelligence/config/con_path_config_n01.md -->
+<!-- 8F: F1 constrain=P09/path_config F2 become=path-config-builder F3 inject=nucleus_def_n01+n01-intelligence+kc_path_config+P09_schema+path examples F4 reason=bounded path map for research inputs outputs and scratch work F5 call=apply_patch+cex_compile F6 produce=4013 bytes F7 govern=frontmatter+ascii+80-line+self-check F8 collaborate=N01_intelligence/P09_config/con_path_config_n01.md -->
 
 ## Purpose
 
@@ -28,11 +28,11 @@ tags: [path_config, filesystem, research, runtime]
 | `base_dir` | dir | `N01_intelligence/` | yes | no | root anchor |
 | `architecture_dir` | dir | `N01_intelligence/architecture/` | yes | yes | identity reference |
 | `rules_dir` | dir | `N01_intelligence/rules/` | yes | yes | nucleus governance |
-| `knowledge_dir` | dir | `N01_intelligence/knowledge/` | yes | no | reusable research notes |
-| `schemas_dir` | dir | `N01_intelligence/schemas/` | yes | no | typed contracts |
-| `config_dir` | dir | `N01_intelligence/config/` | yes | no | runtime settings |
+| `knowledge_dir` | dir | `N01_intelligence/P01_knowledge/` | yes | no | reusable research notes |
+| `schemas_dir` | dir | `N01_intelligence/P06_schema/` | yes | no | typed contracts |
+| `config_dir` | dir | `N01_intelligence/P09_config/` | yes | no | runtime settings |
 | `compiled_dir` | dir | `N01_intelligence/compiled/` | no | no | compiler outputs |
-| `output_dir` | dir | `N01_intelligence/output/` | no | no | finished reports |
+| `output_dir` | dir | `N01_intelligence/P05_output/` | no | no | finished reports |
 | `scratch_dir` | dir | `N01_intelligence/_scratch/` | no | no | disposable comparison work |
 | `source_cache_dir` | dir | `N01_intelligence/_cache/sources/` | no | no | fetched material cache |
 | `benchmark_dir` | dir | `N01_intelligence/_benchmarks/` | no | no | side-by-side evidence tables |

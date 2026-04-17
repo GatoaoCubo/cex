@@ -111,7 +111,7 @@ ELSE:
 
 ## References
 
-- `N03_engineering/knowledge/kc_intent_resolution_map.md` -- exhaustive 123-kind mapping
+- `N03_engineering/P01_knowledge/kc_intent_resolution_map.md` -- exhaustive 123-kind mapping
 - `_tools/cex_8f_motor.py` -- OBJECT_TO_KINDS and parse_intent()
 - `_tools/cex_query.py` -- TF-IDF fallback
 - `.claude/rules/n07-input-transmutation.md` -- intent resolution protocol

@@ -108,7 +108,7 @@ example: "type_name: engineering_artifact_record\ncategory: composite_object\nnu
   \  - json\n  - markdown_table\nfields:\n  artifact_id: sch_type_def_n03\n  artifact_kind: type_def\n  artifact_pillar: P06\n\
   \  title: Engineering Artifact Type\n  owner_nucleus: n03\n  control_state: implementing\n  inputs_used:\n    - N03_engineering/architecture/nucleus_def_n03.md\n\
   \    - P01_knowledge/library/kind/kc_type_def.md\n  design_rationale: Shared contract for evidence-backed engineering artifacts\n\
-  \  evidence_paths:\n    - N03_engineering/schemas/sch_type_def_n03.md\n  review_required: true"
+  \  evidence_paths:\n    - N03_engineering/P06_schema/sch_type_def_n03.md\n  review_required: true"
 integration_notes: '| Consumer | How it uses this type | Constraint carried forward |
 
   |----------|-----------------------|----------------------------|

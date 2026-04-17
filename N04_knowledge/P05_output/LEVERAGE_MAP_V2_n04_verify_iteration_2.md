@@ -128,7 +128,7 @@ Input: query string
   └─→ Output: top 10 merged-ranked (confidence + diversity)
 ```
 
-**Artifact**: `P01_knowledge/config/retriever_config_hybrid_v2.md`  
+**Artifact**: `P01_knowledge/P09_config/retriever_config_hybrid_v2.md`  
 **Tool**: `_tools/cex_hybrid_retriever.py` (new)  
 **Integration**: Wire into `cex_8f_runner.py` F3 INJECT step
 

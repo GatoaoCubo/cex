@@ -8,7 +8,7 @@ version: 1.0
 quality: null
 tags: [knowledge, few_shot_example, prompting, pricing, offers, sales]
 ---
-<!-- 8F: F1=P01/few_shot_example F2=few-shot-example-builder F3=nucleus_def_n06.md,kc_few_shot_example.md,P01_knowledge/_schema.yaml,N06 commercial knowledge examples F4=teach_commercial_prompt_output_with_revenue_ranked_reasoning F5=apply_patch;python _tools/cex_compile.py F6=author_dense_markdown_artifact F7=frontmatter_ascii_density_linecount_review F8=N06_commercial/knowledge/kno_few_shot_example_n06.md -->
+<!-- 8F: F1=P01/few_shot_example F2=few-shot-example-builder F3=nucleus_def_n06.md,kc_few_shot_example.md,P01_knowledge/_schema.yaml,N06 commercial knowledge examples F4=teach_commercial_prompt_output_with_revenue_ranked_reasoning F5=apply_patch;python _tools/cex_compile.py F6=author_dense_markdown_artifact F7=frontmatter_ascii_density_linecount_review F8=N06_commercial/P01_knowledge/kno_few_shot_example_n06.md -->
 
 # Commercial Few Shot Example
 

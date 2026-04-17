@@ -88,7 +88,7 @@ inheritance_note: '`{{REGION}}` and `{{PLATFORMS}}` overlap with `BRAND_REGION` 
   - `{{REGION}}` → derives from `BRAND_REGION` + `BRAND_EXPANSION_RINGS`
 
   - `{{PLATFORMS}}` → derives from `BRAND_CHANNELS` (subset: social only)'
-category_3_dashboard_rendering_4_new_variables: 'Extracted from: `N02_marketing/output/{{BRAND_NAME}}_crm_dashboard.html`, `N06_commercial/output/`
+category_3_dashboard_rendering_4_new_variables: 'Extracted from: `N02_marketing/P05_output/{{BRAND_NAME}}_crm_dashboard.html`, `N06_commercial/P05_output/`
 
 
   | Variable | Type | Example (gato) | Template Target |

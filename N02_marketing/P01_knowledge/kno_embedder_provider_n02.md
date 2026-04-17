@@ -8,7 +8,7 @@ version: "1.0.0"
 quality: null
 tags: [embedder_provider, marketing, embeddings, retrieval, creative_lust, n02]
 ---
-<!-- 8F: F1=embedder_provider/P01 F2=embedder-provider-builder F3=nucleus_def_n02+kc_campaign+ab_testing_framework+P01_schema+N02_memory F4=provider_choice_for_conversion_copy_similarity F5=shell_command,apply_patch F6=approx_6kb F7=frontmatter+8F+80_lines+dense_tables+self_check_pass F8=N02_marketing/knowledge/kno_embedder_provider_n02.md -->
+<!-- 8F: F1=embedder_provider/P01 F2=embedder-provider-builder F3=nucleus_def_n02+kc_campaign+ab_testing_framework+P01_schema+N02_memory F4=provider_choice_for_conversion_copy_similarity F5=shell_command,apply_patch F6=approx_6kb F7=frontmatter+8F+80_lines+dense_tables+self_check_pass F8=N02_marketing/P01_knowledge/kno_embedder_provider_n02.md -->
 
 # Purpose
 
@@ -169,4 +169,4 @@ embedding_flow:
 | Main retrieval gain | better tone, stage, and proof matching |
 | Main operational guard | spend-aware rebuild tiers |
 | Main risk prevented | semantically similar but tactically wrong recalls |
-| Save path | N02_marketing/knowledge/kno_embedder_provider_n02.md |
+| Save path | N02_marketing/P01_knowledge/kno_embedder_provider_n02.md |

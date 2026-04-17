@@ -10,7 +10,7 @@ tags: [config, path, operations, filesystem, boundaries]
 ---
 <!-- 8F: F1 constrain=P09/path_config F2 become=path-config-builder F3 inject=nucleus_def_n05+n05-operations+kc_path_config+P09_config+N05 path usage
      F4 reason=filesystem boundaries for ops artifacts with explicit readonly and write zones F5 call=apply_patch F6 produce=4634 bytes
-     F7 govern=self-check headings+tables+gating_wrath+ascii+80_lines F8 collaborate=N05_operations/config/con_path_config_n05.md -->
+     F7 govern=self-check headings+tables+gating_wrath+ascii+80_lines F8 collaborate=N05_operations/P09_config/con_path_config_n05.md -->
 
 # Ops Path Map
 
@@ -30,8 +30,8 @@ tags: [config, path, operations, filesystem, boundaries]
 |---|---|---|---|---|---|
 | repo_root | `.` | anchor | no | must exist | Stable base for all other paths. |
 | n05_root | `N05_operations/` | source | no | must exist | Protects authored nucleus files. |
-| n05_schemas | `N05_operations/schemas/` | source | controlled | must exist | Schema artifacts live here. |
-| n05_config | `N05_operations/config/` | source | controlled | must exist | Config artifacts live here. |
+| n05_schemas | `N05_operations/P06_schema/` | source | controlled | must exist | Schema artifacts live here. |
+| n05_config | `N05_operations/P09_config/` | source | controlled | must exist | Config artifacts live here. |
 | compiled_root | `compiled/` | output | yes | create if missing | Compiled artifacts and indexes. |
 | signal_root | `.cex_signals/` | output | yes | create if missing | Status and completion signaling. |
 | handoff_root | `.cex/runtime/handoffs/` | input | no | must exist | Read-only task intake. |
@@ -73,8 +73,8 @@ base_dir: .
 paths:
   repo_root: .
   n05_root: N05_operations/
-  n05_schemas: N05_operations/schemas/
-  n05_config: N05_operations/config/
+  n05_schemas: N05_operations/P06_schema/
+  n05_config: N05_operations/P09_config/
   compiled_root: compiled/
   signal_root: .cex_signals/
   handoff_root: .cex/runtime/handoffs/

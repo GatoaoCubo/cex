@@ -278,7 +278,7 @@ Before Output Delivery:
 
 ```bash
 # After HTML generation, compile to YAML for CEX system
-python _tools/cex_compile.py N02_marketing/output/component_name.md
+python _tools/cex_compile.py N02_marketing/P05_output/component_name.md
 
 # Validation pipeline
 python _tools/cex_doctor.py  # Health check

@@ -208,7 +208,7 @@ my_strengths:
   age, core). N04 owns the memory lifecycle: creation, classification, decay, pruning, and summarization.'
 - '5 MCP Servers: Most connected nucleus. Ingestion (firecrawl + fetch) -> storage (supabase + postgres) -> transformation
   (notebooklm). This pipeline turns raw web content into indexed, retrievable, transformable knowledge.'
-- '20 Sub-Agent Definitions: Every domain kind has a dedicated builder agent in `.claude/agents/`, each loading 13 ISOs. This
+- '20 Sub-Agent Definitions: Every domain kind has a dedicated builder agent in `.claude/P02_model/`, each loading 13 ISOs. This
   means N04 can dispatch specialized builders for any knowledge or memory artifact type.'
 - 'P01 Library Depth: The P01 compiled directory holds 197 example artifacts -- the largest example corpus of any pillar.
   These serve as F3 injection sources for template-first construction.'

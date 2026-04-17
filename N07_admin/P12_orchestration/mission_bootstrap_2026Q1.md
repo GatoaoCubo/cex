@@ -57,91 +57,91 @@ foi a oficina que produziu a arquitetura CEX. Agora o CEX é autônomo.
 
 | # | Kind | Path | Bytes | Status |
 |---|------|------|-------|--------|
-| 1 | agent | N07_admin/agents/agent_admin.md | 3338 | null |
-| 2 | system_prompt | N07_admin/prompts/system_prompt_admin.md | 2549 | null |
-| 3 | knowledge_card | N07_admin/knowledge/knowledge_card_admin.md | 2344 | null |
-| 4 | dispatch_rule | N07_admin/orchestration/dispatch_rule_admin.md | 1496 | null |
-| 5 | dag | N07_admin/orchestration/dag_admin.md | 1330 | null |
-| 6 | workflow | N07_admin/orchestration/workflow_admin.md | 2198 | null |
-| 7 | handoff | N07_admin/orchestration/handoff_admin.md | 1930 | null |
-| 8 | quality_gate | N07_admin/feedback/quality_gate_admin.md | 2177 | null |
+| 1 | agent | N07_admin/P02_model/agent_admin.md | 3338 | null |
+| 2 | system_prompt | N07_admin/P03_prompt/system_prompt_admin.md | 2549 | null |
+| 3 | knowledge_card | N07_admin/P01_knowledge/knowledge_card_admin.md | 2344 | null |
+| 4 | dispatch_rule | N07_admin/P12_orchestration/dispatch_rule_admin.md | 1496 | null |
+| 5 | dag | N07_admin/P12_orchestration/dag_admin.md | 1330 | null |
+| 6 | workflow | N07_admin/P12_orchestration/workflow_admin.md | 2198 | null |
+| 7 | handoff | N07_admin/P12_orchestration/handoff_admin.md | 1930 | null |
+| 8 | quality_gate | N07_admin/P11_feedback/quality_gate_admin.md | 2177 | null |
 | 9 | agent_card | N07_admin/architecture/agent_card_admin.md | 3270 | null |
-| 10 | signal | N07_admin/orchestration/signal_admin.md | 3281 | SEM FIELD |
+| 10 | signal | N07_admin/P12_orchestration/signal_admin.md | 3281 | SEM FIELD |
 
 #### N01 Intelligence (11 artefatos null)
 
 | # | Kind | Path |
 |---|------|------|
-| 1 | agent | N01_intelligence/agents/agent_intelligence.md |
+| 1 | agent | N01_intelligence/P02_model/agent_intelligence.md |
 | 2 | agent_card | N01_intelligence/architecture/agent_card_intelligence.md |
-| 3 | quality_gate | N01_intelligence/feedback/quality_gate_intelligence.md |
-| 4 | embedding_config | N01_intelligence/knowledge/embedding_config_intelligence.md |
-| 5 | knowledge_card | N01_intelligence/knowledge/knowledge_card_intelligence.md |
-| 6 | rag_source | N01_intelligence/knowledge/rag_source_intelligence.md |
-| 7 | dispatch_rule | N01_intelligence/orchestration/dispatch_rule_intelligence.md |
-| 8 | workflow | N01_intelligence/orchestration/workflow_intelligence.md |
-| 9 | prompt_template | N01_intelligence/prompts/prompt_template_intelligence.md |
-| 10 | system_prompt | N01_intelligence/prompts/system_prompt_intelligence.md |
+| 3 | quality_gate | N01_intelligence/P11_feedback/quality_gate_intelligence.md |
+| 4 | embedding_config | N01_intelligence/P01_knowledge/embedding_config_intelligence.md |
+| 5 | knowledge_card | N01_intelligence/P01_knowledge/knowledge_card_intelligence.md |
+| 6 | rag_source | N01_intelligence/P01_knowledge/rag_source_intelligence.md |
+| 7 | dispatch_rule | N01_intelligence/P12_orchestration/dispatch_rule_intelligence.md |
+| 8 | workflow | N01_intelligence/P12_orchestration/workflow_intelligence.md |
+| 9 | prompt_template | N01_intelligence/P03_prompt/prompt_template_intelligence.md |
+| 10 | system_prompt | N01_intelligence/P03_prompt/system_prompt_intelligence.md |
 | 11 | scoring_rubric | N01_intelligence/quality/scoring_rubric_intelligence.md |
 
 #### N02 Marketing (10 artefatos null)
 
 | # | Kind | Path |
 |---|------|------|
-| 1 | agent | N02_marketing/agents/agent_marketing.md |
+| 1 | agent | N02_marketing/P02_model/agent_marketing.md |
 | 2 | agent_card | N02_marketing/architecture/agent_card_marketing.md |
-| 3 | quality_gate | N02_marketing/feedback/quality_gate_marketing.md |
-| 4 | knowledge_card | N02_marketing/knowledge/knowledge_card_marketing.md |
-| 5 | dispatch_rule | N02_marketing/orchestration/dispatch_rule_marketing.md |
-| 6 | workflow | N02_marketing/orchestration/workflow_marketing.md |
-| 7 | action_prompt | N02_marketing/prompts/action_prompt_marketing.md |
-| 8 | prompt_template | N02_marketing/prompts/prompt_template_marketing.md |
-| 9 | system_prompt | N02_marketing/prompts/system_prompt_marketing.md |
+| 3 | quality_gate | N02_marketing/P11_feedback/quality_gate_marketing.md |
+| 4 | knowledge_card | N02_marketing/P01_knowledge/knowledge_card_marketing.md |
+| 5 | dispatch_rule | N02_marketing/P12_orchestration/dispatch_rule_marketing.md |
+| 6 | workflow | N02_marketing/P12_orchestration/workflow_marketing.md |
+| 7 | action_prompt | N02_marketing/P03_prompt/action_prompt_marketing.md |
+| 8 | prompt_template | N02_marketing/P03_prompt/prompt_template_marketing.md |
+| 9 | system_prompt | N02_marketing/P03_prompt/system_prompt_marketing.md |
 | 10 | scoring_rubric | N02_marketing/quality/scoring_rubric_marketing.md |
 
 #### N04 Knowledge (12 artefatos null)
 
 | # | Kind | Path |
 |---|------|------|
-| 1 | agent | N04_knowledge/agents/agent_knowledge.md |
+| 1 | agent | N04_knowledge/P02_model/agent_knowledge.md |
 | 2 | agent_card | N04_knowledge/architecture/agent_card_knowledge.md |
-| 3 | quality_gate | N04_knowledge/feedback/quality_gate_knowledge.md |
-| 4 | chunk_strategy | N04_knowledge/knowledge/chunk_strategy_knowledge.md |
-| 5 | embedding_config | N04_knowledge/knowledge/embedding_config_knowledge.md |
-| 6 | knowledge_card | N04_knowledge/knowledge/knowledge_card_knowledge.md |
-| 7 | rag_source | N04_knowledge/knowledge/rag_source_knowledge.md |
-| 8 | retriever_config | N04_knowledge/knowledge/retriever_config_knowledge.md |
-| 9 | dispatch_rule | N04_knowledge/orchestration/dispatch_rule_knowledge.md |
-| 10 | workflow | N04_knowledge/orchestration/workflow_knowledge.md |
-| 11 | system_prompt | N04_knowledge/prompts/system_prompt_knowledge.md |
+| 3 | quality_gate | N04_knowledge/P11_feedback/quality_gate_knowledge.md |
+| 4 | chunk_strategy | N04_knowledge/P01_knowledge/chunk_strategy_knowledge.md |
+| 5 | embedding_config | N04_knowledge/P01_knowledge/embedding_config_knowledge.md |
+| 6 | knowledge_card | N04_knowledge/P01_knowledge/knowledge_card_knowledge.md |
+| 7 | rag_source | N04_knowledge/P01_knowledge/rag_source_knowledge.md |
+| 8 | retriever_config | N04_knowledge/P01_knowledge/retriever_config_knowledge.md |
+| 9 | dispatch_rule | N04_knowledge/P12_orchestration/dispatch_rule_knowledge.md |
+| 10 | workflow | N04_knowledge/P12_orchestration/workflow_knowledge.md |
+| 11 | system_prompt | N04_knowledge/P03_prompt/system_prompt_knowledge.md |
 | 12 | scoring_rubric | N04_knowledge/quality/scoring_rubric_knowledge.md |
 
 #### N05 Operations (9 artefatos null)
 
 | # | Kind | Path |
 |---|------|------|
-| 1 | agent | N05_operations/agents/agent_operations.md |
+| 1 | agent | N05_operations/P02_model/agent_operations.md |
 | 2 | agent_card | N05_operations/architecture/agent_card_operations.md |
-| 3 | quality_gate | N05_operations/feedback/quality_gate_operations.md |
-| 4 | knowledge_card | N05_operations/knowledge/knowledge_card_operations.md |
-| 5 | checkpoint | N05_operations/memory/checkpoint_operations.md |
-| 6 | dispatch_rule | N05_operations/orchestration/dispatch_rule_operations.md |
-| 7 | spawn_config | N05_operations/orchestration/spawn_config_operations.md |
-| 8 | workflow | N05_operations/orchestration/workflow_operations.md |
-| 9 | system_prompt | N05_operations/prompts/system_prompt_operations.md |
+| 3 | quality_gate | N05_operations/P11_feedback/quality_gate_operations.md |
+| 4 | knowledge_card | N05_operations/P01_knowledge/knowledge_card_operations.md |
+| 5 | checkpoint | N05_operations/P10_memory/checkpoint_operations.md |
+| 6 | dispatch_rule | N05_operations/P12_orchestration/dispatch_rule_operations.md |
+| 7 | spawn_config | N05_operations/P12_orchestration/spawn_config_operations.md |
+| 8 | workflow | N05_operations/P12_orchestration/workflow_operations.md |
+| 9 | system_prompt | N05_operations/P03_prompt/system_prompt_operations.md |
 
 #### N06 Commercial (9 artefatos null)
 
 | # | Kind | Path |
 |---|------|------|
-| 1 | agent | N06_commercial/agents/agent_commercial.md |
+| 1 | agent | N06_commercial/P02_model/agent_commercial.md |
 | 2 | agent_card | N06_commercial/architecture/agent_card_commercial.md |
-| 3 | quality_gate | N06_commercial/feedback/quality_gate_commercial.md |
-| 4 | knowledge_card | N06_commercial/knowledge/knowledge_card_commercial.md |
-| 5 | dispatch_rule | N06_commercial/orchestration/dispatch_rule_commercial.md |
-| 6 | workflow | N06_commercial/orchestration/workflow_commercial.md |
-| 7 | prompt_template | N06_commercial/prompts/prompt_template_commercial.md |
-| 8 | system_prompt | N06_commercial/prompts/system_prompt_commercial.md |
+| 3 | quality_gate | N06_commercial/P11_feedback/quality_gate_commercial.md |
+| 4 | knowledge_card | N06_commercial/P01_knowledge/knowledge_card_commercial.md |
+| 5 | dispatch_rule | N06_commercial/P12_orchestration/dispatch_rule_commercial.md |
+| 6 | workflow | N06_commercial/P12_orchestration/workflow_commercial.md |
+| 7 | prompt_template | N06_commercial/P03_prompt/prompt_template_commercial.md |
+| 8 | system_prompt | N06_commercial/P03_prompt/system_prompt_commercial.md |
 | 9 | scoring_rubric | N06_commercial/quality/scoring_rubric_commercial.md |
 
 ### Builder Archetypes
@@ -213,7 +213,7 @@ Além disso, `$active[$nucleus]` usa nucleus como chave do dicionário. Se todos
 
 ```bash
 # Test 1: Compile um artefato golden existente
-python _tools/cex_compile.py N03_engineering/agents/agent_engineering.md
+python _tools/cex_compile.py N03_engineering/P02_model/agent_engineering.md
 
 # Test 2: Index rebuild + stats
 python _tools/cex_index.py --stats
@@ -250,27 +250,27 @@ nodes:
     label: "Rebuild agent_admin.md — identidade de orquestrador multi-CLI"
     kind: agent
     priority: 1
-    target: N07_admin/agents/agent_admin.md
-    reference: N03_engineering/agents/agent_engineering.md (golden, 9.0)
+    target: N07_admin/P02_model/agent_admin.md
+    reference: N03_engineering/P02_model/agent_engineering.md (golden, 9.0)
     
   - id: f1_system_prompt
     label: "Rebuild system_prompt_admin.md — regras de dispatch, nunca construir"
     kind: system_prompt
     priority: 2
-    target: N07_admin/prompts/system_prompt_admin.md
+    target: N07_admin/P03_prompt/system_prompt_admin.md
     depends_on: [f1_agent]
     
   - id: f1_knowledge_card
     label: "Rebuild knowledge_card_admin.md — KC do domínio orchestration"
     kind: knowledge_card
     priority: 3
-    target: N07_admin/knowledge/knowledge_card_admin.md
+    target: N07_admin/P01_knowledge/knowledge_card_admin.md
     
   - id: f1_dispatch_rule
     label: "Rebuild dispatch_rule_admin.md — routing table N01-N06 real"
     kind: dispatch_rule
     priority: 4
-    target: N07_admin/orchestration/dispatch_rule_admin.md
+    target: N07_admin/P12_orchestration/dispatch_rule_admin.md
     depends_on: [f1_agent]
     context: "Routing baseado em spawn_config_admin.md (quality 9.0)"
     
@@ -278,13 +278,13 @@ nodes:
     label: "Rebuild dag_admin.md — DAG de orchestração com nodes reais"
     kind: dag
     priority: 5
-    target: N07_admin/orchestration/dag_admin.md
+    target: N07_admin/P12_orchestration/dag_admin.md
     
   - id: f1_workflow
     label: "Rebuild workflow_admin.md — solo/grid/monitor workflow"
     kind: workflow
     priority: 6
-    target: N07_admin/orchestration/workflow_admin.md
+    target: N07_admin/P12_orchestration/workflow_admin.md
     depends_on: [f1_dispatch_rule]
     context: "Descrever os 3 modos: solo, grid static, grid continuous"
     
@@ -292,14 +292,14 @@ nodes:
     label: "Rebuild handoff_admin.md — template de handoff real com exemplos"
     kind: handoff
     priority: 7
-    target: N07_admin/orchestration/handoff_admin.md
+    target: N07_admin/P12_orchestration/handoff_admin.md
     context: "Incluir formato markdown, campos obrigatórios, exemplo real"
     
   - id: f1_quality_gate
     label: "Rebuild quality_gate_admin.md — gates para orchestration"
     kind: quality_gate
     priority: 8
-    target: N07_admin/feedback/quality_gate_admin.md
+    target: N07_admin/P11_feedback/quality_gate_admin.md
     
   - id: f1_agent_card
     label: "Rebuild agent_card_admin.md — deployment spec N07"
@@ -312,7 +312,7 @@ nodes:
     label: "Rebuild signal_admin.md — ADICIONAR frontmatter quality, enriquecer"
     kind: signal
     priority: 10
-    target: N07_admin/orchestration/signal_admin.md
+    target: N07_admin/P12_orchestration/signal_admin.md
     context: "Arquivo existe mas sem campo quality: no frontmatter. Completar."
 ```
 
@@ -321,9 +321,9 @@ nodes:
 **Handoff**: `.cex/runtime/handoffs/bootstrap_f1_n03.md` (conteúdo abaixo)
 
 **Regras para N03**:
-1. Ler N03_engineering/agents/agent_engineering.md como referência de quality 9.0
-2. Ler N07_admin/orchestration/spawn_config_admin.md (9.0) como referência de estilo N07
-3. Ler N07_admin/agents/fallback_chain_admin.md (9.0) como referência de estilo N07
+1. Ler N03_engineering/P02_model/agent_engineering.md como referência de quality 9.0
+2. Ler N07_admin/P12_orchestration/spawn_config_admin.md (9.0) como referência de estilo N07
+3. Ler N07_admin/P02_model/fallback_chain_admin.md (9.0) como referência de estilo N07
 4. Identidade N07 = orquestrador multi-CLI, dispatch via spawn, NUNCA constrói
 5. Cada artefato DEVE seguir 8F pipeline completo com builder ISOs
 6. Compilar cada artefato após salvar: `python _tools/cex_compile.py PATH`
@@ -531,7 +531,7 @@ Fase 0 ──→ Fase 1 ──→ Fase 2 ──→ Fase 3
 
 ### Fase 0 (N07 direto)
 ```bash
-python _tools/cex_compile.py N03_engineering/agents/agent_engineering.md
+python _tools/cex_compile.py N03_engineering/P02_model/agent_engineering.md
 python _tools/cex_index.py --stats
 python _tools/cex_8f_runner.py --kind knowledge_card --dry-run --verbose
 python _tools/cex_8f_runner.py --kind agent --dry-run --verbose

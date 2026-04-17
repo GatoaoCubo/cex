@@ -66,8 +66,8 @@ density_score: 0.87
 
 | Agent | Purpose | Path |
 |-------|---------|------|
-| agent_librarian | Taxonomy coherence | `N04_knowledge/agents/` |
-| agent_indexer | Retrieval index maintenance | `N04_knowledge/agents/` |
+| agent_librarian | Taxonomy coherence | `N04_knowledge/P02_model/` |
+| agent_indexer | Retrieval index maintenance | `N04_knowledge/P02_model/` |
 
 ## Boot Contract
 

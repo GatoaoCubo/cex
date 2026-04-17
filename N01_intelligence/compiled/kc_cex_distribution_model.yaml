@@ -160,7 +160,7 @@ architecture_after_pivot: "CEX Repo (git clone)\n  |\n  +-- CLAUDE.md           
   \  |     +-- rules/            (16 behavioral rules, auto-loaded)\n  |     +-- commands/         (13+ custom /commands)\n\
   \  |     +-- agents/           (125 builder sub-agents)\n  |     +-- nucleus-settings/ (per-nucleus JSON configs)\n  |\n\
   \  +-- boot/\n  |     +-- cex.cmd           (N07 orchestrator boot)\n  |     +-- n01.cmd - n06.cmd (nucleus boot scripts)\n\
-  \  |\n  +-- .mcp-n0X.json           (MCP server configs, 1 per nucleus)\n  +-- .cex/config/\n  |     +-- nucleus_models.yaml\
+  \  |\n  +-- .mcp-n0X.json           (MCP server configs, 1 per nucleus)\n  +-- .cex/P09_config/\n  |     +-- nucleus_models.yaml\
   \ (model routing: cli + model + flags)\n  |\n  +-- _tools/                 (59 Python tools)\n  +-- setup.cmd          \
   \     (fresh machine bootstrap)\n\nEach boot script calls:\nclaude --model claude-opus-4-6 --append-system-prompt \"N0X_*/agent_card_n0X.md\"\
   \ ...\n\nNo PI. No extensions. No themes. Just Claude Code + repo structure."

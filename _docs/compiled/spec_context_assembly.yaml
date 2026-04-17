@@ -56,7 +56,7 @@ how_context_gets_selected: ''
 orchestrator_selection_phase_2: "Intent: \"create landing page for pet shop\"\n  |\n  F1 CONSTRAIN: kind=landing_page, pillar=P05\n\
   \  |\n  Select from base layer:\n    archetypes/builders/landing-page-builder/   (13 components)\n    P01_knowledge/library/kind/kc_landing_page.md\n\
   \    P05_output/templates/tpl_landing_page.md\n    P06_schema/contracts/landing_page_schema.yaml\n  |\n  Select from instance\
-  \ layer (if target agent = N02):\n    N02_marketing/knowledge/kc_*.md (relevant domain KCs)\n    N02_marketing/output/ (examples\
+  \ layer (if target agent = N02):\n    N02_marketing/P01_knowledge/kc_*.md (relevant domain KCs)\n    N02_marketing/P05_output/ (examples\
   \ of prior output)\n  |\n  Assemble handoff with all references\n  |\n  Dispatch to agent"
 agent_self_selection_phase_1_during_task: "Agent boots with deck (knows capabilities)\n  |\n  Reads handoff (knows task +\
   \ references)\n  |\n  Pipeline step F3 INJECT:\n    Load referenced builder components (13 files)\n    Load referenced KCs\n\

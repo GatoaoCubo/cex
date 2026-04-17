@@ -77,7 +77,7 @@ anti_example_2_phantom_agent_reference: '| capability_name | provider_agent | ..
 
   |----------------|----------------|
 
-  | Build dashboards | .claude/agents/dashboard-builder.md | ...'
+  | Build dashboards | .claude/P02_model/dashboard-builder.md | ...'
 anti_example_3_invented_quality_scores: '| capability_name | quality_baseline |
 
   |----------------|-----------------|
@@ -89,7 +89,7 @@ anti_example_4_flat_list_without_layer_separation: '| capability_name | provider
 
   | Build landing page | .claude/agents/landing-page-builder.md | active |
 
-  | Knowledge management | N04_knowledge/agents/agent_knowledge.md | active |
+  | Knowledge management | N04_knowledge/P02_model/agent_knowledge.md | active |
 
   | Orchestration | N07_admin/agent_card_n07.md | active |'
 key_distinctions: '| Aspect | Good Registry Entry | Bad Registry Entry |

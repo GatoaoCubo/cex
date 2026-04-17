@@ -8,7 +8,7 @@ version: 1.0
 quality: null
 tags: [config, permission, knowledge, access, governance]
 ---
-<!-- 8F: F1 constrain=P09/permission F2 become=permission-builder F3 inject=n04-knowledge+kc_permission+P09 examples+N04 ownership model F4 reason=least-privilege access for evidence-rich knowledge assets F5 call=shell,apply_patch F6 produce=4454 bytes F7 govern=frontmatter+ascii+density+80-line self-check F8 collaborate=N04_knowledge/config/con_permission_n04.md -->
+<!-- 8F: F1 constrain=P09/permission F2 become=permission-builder F3 inject=n04-knowledge+kc_permission+P09 examples+N04 ownership model F4 reason=least-privilege access for evidence-rich knowledge assets F5 call=shell,apply_patch F6 produce=4454 bytes F7 govern=frontmatter+ascii+density+80-line self-check F8 collaborate=N04_knowledge/P09_config/con_permission_n04.md -->
 # Knowledge Permission Matrix
 ## Purpose
 Knowledge assets are valuable because they accumulate evidence, provenance, and organizational memory.

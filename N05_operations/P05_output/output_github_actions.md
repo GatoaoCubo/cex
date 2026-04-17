@@ -134,7 +134,7 @@ jobs:
         run: railway up --detach
 
       - name: Smoke eval (30s budget)
-        run: bash N05_operations/output/smoke_eval_deploy.sh ${{ vars.API_URL }}
+        run: bash N05_operations/P05_output/smoke_eval_deploy.sh ${{ vars.API_URL }}
         timeout-minutes: 1
 
       - name: Post-deploy health verification

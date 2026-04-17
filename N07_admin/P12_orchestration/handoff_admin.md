@@ -19,8 +19,8 @@ dependencies: []
 seeds: [handoff, dispatch, task, context, scope_fence, commit, signal, autonomy, quality]
 keywords: [handoff, delegation, dispatch, task-packaging]
 linked_artifacts:
-  primary: "N07_admin/orchestration/dispatch_rule_admin.md"
-  related: [N07_admin/orchestration/workflow_admin.md, N07_admin/orchestration/signal_admin.md]
+  primary: "N07_admin/P12_orchestration/dispatch_rule_admin.md"
+  related: [N07_admin/P12_orchestration/workflow_admin.md, N07_admin/P12_orchestration/signal_admin.md]
 density_score: 0.91
 ---
 
@@ -124,6 +124,6 @@ python -c "from _tools.signal_writer import write_signal; write_signal('n03', 'c
 
 ## References
 
-- Dispatch rules: N07_admin/orchestration/dispatch_rule_admin.md
-- Signal protocol: N07_admin/orchestration/signal_admin.md
-- Grid ops (recovery, fallbacks): N07_admin/memory/grid_orchestration_mastery.md
+- Dispatch rules: N07_admin/P12_orchestration/dispatch_rule_admin.md
+- Signal protocol: N07_admin/P12_orchestration/signal_admin.md
+- Grid ops (recovery, fallbacks): N07_admin/P10_memory/grid_orchestration_mastery.md

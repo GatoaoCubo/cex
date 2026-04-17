@@ -12,7 +12,7 @@ tags: [config, env, engineering, runtime, n03]
 
 <!-- 8F: F1 constrain=P09/env_config F2 become=env-config-builder F3 inject=nucleus_def_n03, agent_engineering, kc_env_config, P09_config, boot_config example
      F4 reason=environment variable catalog for disciplined N03 execution F5 call=rg, Get-Content, apply_patch F6 produce=5093 bytes
-     F7 govern=frontmatter+sections+tables+ascii+self-check F8 collaborate=save N03_engineering/config/con_env_config_n03.md -->
+     F7 govern=frontmatter+sections+tables+ascii+self-check F8 collaborate=save N03_engineering/P09_config/con_env_config_n03.md -->
 
 # Engineering Environment Config
 

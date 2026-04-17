@@ -12,7 +12,7 @@ tags: [config, secrets, security, marketing, runtime]
 
 <!-- 8F: F1 constrain=P09/secret_config F2 become=secret_config-builder F3 inject=nucleus_def_n02+n02_rules+kc_secret_config+P09_schema
      F4 reason=pointer_registry_for_sensitive_marketing_integrations F5 call=shell_command,apply_patch F6 produce=3985 bytes
-     F7 govern=frontmatter_sections_ascii_density_linecount F8 collaborate=N02_marketing/config/con_secret_config_n02.md -->
+     F7 govern=frontmatter_sections_ascii_density_linecount F8 collaborate=N02_marketing/P09_config/con_secret_config_n02.md -->
 
 # Purpose
 
@@ -104,4 +104,4 @@ secret_reference:
 | Value retention | none in source |
 | Main risk prevented | credential leakage during campaign operations |
 | Governance mode | registry plus rotation policy |
-| Save path | N02_marketing/config/con_secret_config_n02.md |
+| Save path | N02_marketing/P09_config/con_secret_config_n02.md |

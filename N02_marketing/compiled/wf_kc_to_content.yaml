@@ -112,7 +112,7 @@ step_1_upload_sequential: 'Tool: `python _tools/cex_notebooklm.py --upload <kc_p
 
   1. KC exists and has valid frontmatter (`kind`, `domain`, `title`)
 
-  2. NotebookLM config exists (`.cex/config/notebooklm_notebooks.yaml`)
+  2. NotebookLM config exists (`.cex/P09_config/notebooklm_notebooks.yaml`)
 
   3. Auth cookies valid (`check_auth_valid()`)
 
@@ -233,7 +233,7 @@ step_7_track_ongoing_48h_window: '| Metric | Source | Check Interval | Action Th
   | Flashcard imports | Supabase tracking | 48h | <10: promote in next newsletter |
 
 
-  Feedback loop: Top-performing content formats and hooks are logged to `N02_marketing/memory/campaign_performance_memory.md`
+  Feedback loop: Top-performing content formats and hooks are logged to `N02_marketing/P10_memory/campaign_performance_memory.md`
   for future optimization.'
 integration_points: '| System | Role | Interface |
 

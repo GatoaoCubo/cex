@@ -39,7 +39,7 @@ artifacts_verified: '| Artifact | Path | Exists |
 
   | Quality Rubric | `_docs/tests/e2e_gold/quality_rubric.md` | ✅ |
 
-  | CF Actions & Dist | `N02_marketing/output/output_cf_actions_and_distribution.md` | ✅ |'
+  | CF Actions & Dist | `N02_marketing/P05_output/output_cf_actions_and_distribution.md` | ✅ |'
 decision_manifest_summary: 'Loaded from `FULLGRID_20260406`:
 
   - NotebookLM: domain scope, auto-publish, chrome_local, {{BRAND_EMAIL}}

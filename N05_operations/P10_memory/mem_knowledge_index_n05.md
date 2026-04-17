@@ -9,7 +9,7 @@ quality: null
 tags: [n05, operations, knowledge_index, gating_wrath, bm25, pgvector, hybrid]
 ---
 <!-- 8F: F1=knowledge_index/P10 F2=knowledge-index-builder F3=nucleus_def_n05+P10_schema+kc_knowledge_index+examples+N05 W1 contracts F4=hybrid index policy for ops corpus
-     F5=shell+apply_patch+cex_compile F6=approx-7KB dense markdown F7=self-check frontmatter+8F+80L+properties+ascii F8=N05_operations/memory/mem_knowledge_index_n05.md -->
+     F5=shell+apply_patch+cex_compile F6=approx-7KB dense markdown F7=self-check frontmatter+8F+80L+properties+ascii F8=N05_operations/P10_memory/mem_knowledge_index_n05.md -->
 
 # N05 Operations Knowledge Index
 

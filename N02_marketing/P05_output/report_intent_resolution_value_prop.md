@@ -271,7 +271,7 @@ CEX: "Correct terminology -- dispatching N03 with builder instance."
 
 ### Tracking What Was Taught
 
-**Storage**: `N07_admin/memory/user_directive_technical_authority.md`
+**Storage**: `N07_admin/P10_memory/user_directive_technical_authority.md`
 
 **Format**:
 

@@ -118,7 +118,7 @@ PASS = all HARD gates pass AND final_score >= 8.5 AND Lighthouse >= 90
 ### VISUAL Mode
 | Tier | Score | Lighthouse | Action |
 |------|-------|------------|--------|
-| GOLDEN | >= 9.5 | >= 95 | Save as example in N02_marketing/output/examples/ |
+| GOLDEN | >= 9.5 | >= 95 | Save as example in N02_marketing/P05_output/examples/ |
 | PUBLISH | >= 9.0 | >= 90 | Approve for production deployment |
 | REVIEW | >= 8.0 | >= 85 | Return to F6 with specific visual feedback |
 | REJECT | < 8.0 | < 85 | Full visual redesign required |
@@ -126,7 +126,7 @@ PASS = all HARD gates pass AND final_score >= 8.5 AND Lighthouse >= 90
 ### COPY Mode
 | Tier | Score | Action |
 |------|-------|--------|
-| GOLDEN | >= 9.5 | Save as example in N02_marketing/output/examples/ |
+| GOLDEN | >= 9.5 | Save as example in N02_marketing/P05_output/examples/ |
 | PUBLISH | >= 8.0 | Approve for delivery to client/campaign |
 | REVIEW | >= 7.0 | Return to F6 with specific copy feedback |
 | REJECT | < 7.0 | Full rewrite — restart F4 with new formula |
@@ -203,7 +203,7 @@ Each evaluation logs:
 - Score by dimension
 - Revision instructions for S-gate failures
 
-Retention: logs kept in `N02_marketing/output/` per mission.
+Retention: logs kept in `N02_marketing/P05_output/` per mission.
 
 ## Common Failure Patterns
 

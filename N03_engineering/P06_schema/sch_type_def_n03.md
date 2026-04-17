@@ -12,7 +12,7 @@ tags: [schema, type, engineering, contract, n03]
 
 <!-- 8F: F1 constrain=P06/type_def F2 become=type-def-builder F3 inject=nucleus_def_n03, agent_engineering, kc_type_def, P06_schema, sibling schemas
      F4 reason=reusable engineering artifact contract with strict lifecycle and evidence fields F5 call=rg, Get-Content, apply_patch F6 produce=6569 bytes
-     F7 govern=frontmatter+sections+tables+ascii+self-check F8 collaborate=save N03_engineering/schemas/sch_type_def_n03.md -->
+     F7 govern=frontmatter+sections+tables+ascii+self-check F8 collaborate=save N03_engineering/P06_schema/sch_type_def_n03.md -->
 
 # Engineering Artifact Type
 
@@ -101,7 +101,7 @@ fields:
     - P01_knowledge/library/kind/kc_type_def.md
   design_rationale: Shared contract for evidence-backed engineering artifacts
   evidence_paths:
-    - N03_engineering/schemas/sch_type_def_n03.md
+    - N03_engineering/P06_schema/sch_type_def_n03.md
   review_required: true
 ```
 

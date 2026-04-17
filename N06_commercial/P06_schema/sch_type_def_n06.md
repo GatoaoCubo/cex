@@ -9,7 +9,7 @@ quality: null
 tags: [schema, type, monetization, pricing, events]
 ---
 
-<!-- 8F: F1 constrain=P06/type_def F2 become=type-def-builder F3 inject=nucleus_def_n06.md,n06-commercial.md,bld_manifest_type_def.md,kc_type_def.md,P06_schema/_schema.yaml F4 reason=reusable_type_for_monetization_events_with_margin_controls F5 call=apply_patch;python _tools/cex_compile.py F6 produce=7680_bytes F7 govern=frontmatter_sections_ascii_density_review F8 collaborate=N06_commercial/schemas/sch_type_def_n06.md -->
+<!-- 8F: F1 constrain=P06/type_def F2 become=type-def-builder F3 inject=nucleus_def_n06.md,n06-commercial.md,bld_manifest_type_def.md,kc_type_def.md,P06_schema/_schema.yaml F4 reason=reusable_type_for_monetization_events_with_margin_controls F5 call=apply_patch;python _tools/cex_compile.py F6 produce=7680_bytes F7 govern=frontmatter_sections_ascii_density_review F8 collaborate=N06_commercial/P06_schema/sch_type_def_n06.md -->
 
 # Commercial Event Type
 

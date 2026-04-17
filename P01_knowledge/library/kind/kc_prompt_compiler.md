@@ -20,7 +20,7 @@ linked_artifacts:
   primary: P03_prompt/p03_pc_cex_universal.md
   related:
     - .claude/rules/n07-input-transmutation.md
-    - N03_engineering/knowledge/kc_intent_resolution_map.md
+    - N03_engineering/P01_knowledge/kc_intent_resolution_map.md
 ---
 
 # Prompt Compiler

@@ -12,7 +12,7 @@ tags: [schema, enum, engineering, governance, n03]
 
 <!-- 8F: F1 constrain=P06/enum_def F2 become=enum-def-builder F3 inject=nucleus_def_n03, n03-builder, kc_enum_def, P06_schema, sibling schemas
      F4 reason=closed-set runtime enum for engineering handoffs and governance F5 call=rg, Get-Content, apply_patch F6 produce=5883 bytes
-     F7 govern=frontmatter+sections+tables+ascii+self-check F8 collaborate=save N03_engineering/schemas/sch_enum_def_n03.md -->
+     F7 govern=frontmatter+sections+tables+ascii+self-check F8 collaborate=save N03_engineering/P06_schema/sch_enum_def_n03.md -->
 
 # Engineering Control Enum
 

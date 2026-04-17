@@ -42,10 +42,10 @@ tech_debt:
 agent_identity:
   source_of_truth: .cex/config/nucleus_sins.yaml
   targets:
-    - N05_operations/agents/agent_operations.md
-    - N05_operations/prompts/system_prompt_operations.md
-    - N07_admin/agents/agent_admin.md
-    - N07_admin/prompts/system_prompt_admin.md
+    - N05_operations/P02_model/agent_operations.md
+    - N05_operations/P03_prompt/system_prompt_operations.md
+    - N07_admin/P02_model/agent_admin.md
+    - N07_admin/P03_prompt/system_prompt_admin.md
 
 # New PC Setup (2026-04-12)
 newpc_setup:

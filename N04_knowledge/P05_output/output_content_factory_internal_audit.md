@@ -98,7 +98,7 @@ os builders existentes numa esteira de producao.
 | Asset | Local | Status | Relevancia CF |
 |-------|-------|--------|--------------|
 | 29 Brand Variables ({{BRAND_*}}) | brand_config.yaml | PRONTO | CRITICA |
-| 12 Knowledge Cards | N06_commercial/knowledge/ | PRONTO | ALTA |
+| 12 Knowledge Cards | N06_commercial/P01_knowledge/ | PRONTO | ALTA |
 | Dispatch Rule (priority 10) | orchestration/ | PRONTO | ALTA |
 | Brand Propagation (W3C DTCG) | kc_brand_propagation_arch.md | PRONTO | ALTA |
 | Monetization Models KC | kc_brand_monetization_models.md | PRONTO | ALTA |

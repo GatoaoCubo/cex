@@ -34,11 +34,11 @@ domain_agents: '| Agent | Purpose | Path |
 
   |-------|---------|------|
 
-  | agent_tester | Test generation + execution | `N05_operations/agents/` |
+  | agent_tester | Test generation + execution | `N05_operations/P02_model/` |
 
-  | agent_deployer | Deploy automation | `N05_operations/agents/` |
+  | agent_deployer | Deploy automation | `N05_operations/P02_model/` |
 
-  | agent_reviewer | Code review | `N05_operations/agents/` |'
+  | agent_reviewer | Code review | `N05_operations/P02_model/` |'
 fallback_cli: codex
 title: Nucleus Def N05
 version: 1.0.0

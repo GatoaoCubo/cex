@@ -7,7 +7,7 @@ version: 1.0.0
 quality: 9.1
 created: 2026-04-07
 author: n03_builder
-origin: gato-ao-cubo/N07_admin/output/output_crm_pipeline_evidence.md
+origin: gato-ao-cubo/N07_admin/P05_output/output_crm_pipeline_evidence.md
 variables: [BRAND_NAME, PIPELINE_NAME, BATCHES, FINAL_STATS, CITIES, TARGET_COUNT]
 density_score: 0.95
 tags: [template, pipeline-evidence, mission-report, crm, consolidation, instance-extraction]

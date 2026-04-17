@@ -95,7 +95,7 @@ build_1_hybrid_search_orchestrator_highest_impact: "Kind: `retriever_config` (P0
   Payoff: 30% boost to F3 accuracy + auto-chaining  \nStatus: \U0001F7E5 NOT STARTED\n\nSpecification:\nInput: query string\n\
   \  |\n  ├─→ L1: cex_retriever.py (TF-IDF) → 100 candidates (0.3s)\n  │\n  ├─→ L2: cex_vector_store.py (semantic) → rank\
   \ by similarity\n  │\n  ├─→ L2.5: cex_reranker.py (BM25) → rerank top 20 by lexical\n  │\n  └─→ Output: top 10 merged-ranked\
-  \ (confidence + diversity)\n\nArtifact: `P01_knowledge/config/retriever_config_hybrid_v2.md`  \nTool: `_tools/cex_hybrid_retriever.py`\
+  \ (confidence + diversity)\n\nArtifact: `P01_knowledge/P09_config/retriever_config_hybrid_v2.md`  \nTool: `_tools/cex_hybrid_retriever.py`\
   \ (new)  \nIntegration: Wire into `cex_8f_runner.py` F3 INJECT step\n\n---"
 build_2_sqlite_vector_database_production_grade: "Kind: `vector_store` (P01)  \nNucleus: N04  \nEffort: 1-2 days  \nPayoff:\
   \ ACID durability, concurrent read/write, query filters  \nStatus: \U0001F7E5 NOT STARTED\n\nSpecification:\nCREATE TABLE\

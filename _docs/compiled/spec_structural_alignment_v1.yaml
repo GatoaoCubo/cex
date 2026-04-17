@@ -147,7 +147,7 @@ wave_1_migration_tooling_2_files_n05: '| Action | Path | Kind | Est. Size | Note
 
   - Scans N00-N07 for semantic subdir names
 
-  - Reports: `[WRONG] N01/knowledge/ should be P01_knowledge/`
+  - Reports: `[WRONG] N01/P01_knowledge/ should be P01_knowledge/`
 
   - Reports: `[MISSING] N01/P04_tools/ not found`
 

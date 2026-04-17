@@ -33,7 +33,7 @@ Read:
 - `.claude/rules/8f-reasoning.md`
 - `.claude/rules/n07-orchestrator.md`
 - `CLAUDE.md`
-- `N03_engineering/agents/agent_engineering.md`
+- `N03_engineering/P02_model/agent_engineering.md`
 - `N03_engineering/agent_card_n03.md`
 
 Ran:

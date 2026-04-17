@@ -10,7 +10,7 @@ tags: [config, rate-limit, operations, budget, provider]
 ---
 <!-- 8F: F1 constrain=P09/rate_limit_config F2 become=rate-limit-config-builder F3 inject=nucleus_def_n05+n05-operations+kc_rate_limit_config+P09_config+N05 provider control
      F4 reason=cost and throughput ceilings for ops tooling with rollback-safe throttling F5 call=apply_patch F6 produce=4320 bytes
-     F7 govern=self-check headings+tables+gating_wrath+ascii+80_lines F8 collaborate=N05_operations/config/con_rate_limit_config_n05.md -->
+     F7 govern=self-check headings+tables+gating_wrath+ascii+80_lines F8 collaborate=N05_operations/P09_config/con_rate_limit_config_n05.md -->
 
 # Ops Rate Limits
 

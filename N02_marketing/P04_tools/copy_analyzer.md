@@ -50,7 +50,7 @@ INPUT ─► PARSE structure ─► READABILITY score
 python copy_analyzer.py --input N02_marketing/artifacts/email_sequence_template.md
 
 # Analyze all copy in a directory
-python copy_analyzer.py --input N02_marketing/output/ --recursive
+python copy_analyzer.py --input N02_marketing/P05_output/ --recursive
 
 # Analyze with specific audience target
 python copy_analyzer.py --input copy.md --audience b2c --funnel tofu

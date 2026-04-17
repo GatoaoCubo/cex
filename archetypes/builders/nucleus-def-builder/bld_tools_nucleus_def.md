@@ -59,7 +59,7 @@ After creating nucleus-def-builder, add to kinds_meta.json:
   "max_bytes": 5120,
   "core": true,
   "description": "Formal definition of a CEX nucleus (N00-N07). Fields: nucleus_id, role, pillars_owned, sin_lens, cli_binding, model_tier, boot_script, agent_card_path, crew_templates_exposed, domain_agents.",
-  "boundary": "Nucleus contract. NOT agent (individual agent in N0x/agents/) nor model_provider (LLM provider config).",
+  "boundary": "Nucleus contract. NOT agent (individual agent in N0x/P02_model/) nor model_provider (LLM provider config).",
   "status": "stable"
 }
 ```

@@ -106,7 +106,7 @@ visual_mode: '| Tier | Score | Lighthouse | Action |
 
   |------|-------|------------|--------|
 
-  | GOLDEN | >= 9.5 | >= 95 | Save as example in N02_marketing/output/examples/ |
+  | GOLDEN | >= 9.5 | >= 95 | Save as example in N02_marketing/P05_output/examples/ |
 
   | PUBLISH | >= 9.0 | >= 90 | Approve for production deployment |
 
@@ -117,7 +117,7 @@ copy_mode: '| Tier | Score | Action |
 
   |------|-------|--------|
 
-  | GOLDEN | >= 9.5 | Save as example in N02_marketing/output/examples/ |
+  | GOLDEN | >= 9.5 | Save as example in N02_marketing/P05_output/examples/ |
 
   | PUBLISH | >= 8.0 | Approve for delivery to client/campaign |
 
@@ -168,7 +168,7 @@ audit_trail: 'Each evaluation logs:
   - Revision instructions for S-gate failures
 
 
-  Retention: logs kept in `N02_marketing/output/` per mission.'
+  Retention: logs kept in `N02_marketing/P05_output/` per mission.'
 common_failure_patterns: ''
 visual_mode_failures: '| Failure | Gate | Most Common Cause | Fix |
 

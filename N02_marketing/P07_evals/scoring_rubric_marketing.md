@@ -108,7 +108,7 @@ COPY DIMENSIONS (50% weight):
 ### VISUAL Mode
 | Tier | Score | Lighthouse | Action |
 |------|-------|------------|--------|
-| GOLDEN | >= 9.5 | >= 95 | Save as canonical example in `N02_marketing/output/examples/` |
+| GOLDEN | >= 9.5 | >= 95 | Save as canonical example in `N02_marketing/P05_output/examples/` |
 | PUBLISH | >= 9.0 | >= 90 | Deploy to production, approve for client delivery |
 | REVIEW | >= 7.0 | >= 85 | Return with specific visual dimension feedback |
 | REJECT | < 7.0 | < 85 | Full visual redesign required |

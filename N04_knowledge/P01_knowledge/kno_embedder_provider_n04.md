@@ -24,7 +24,7 @@ domain: rag_indexing
 tldr: "High-fidelity dense embedder for N04 retrieval, graph augmentation, and memory recall."
 ---
 <!-- 8F: F1=embedder_provider/P01 F2=embedder-provider-builder F3=nucleus_def_n04+P01/P10 schema+kc_embedder_provider+N04 configs F4=template-first OpenAI dense retrieval profile for knowledge-hungry N04
-     F5=shell,apply_patch,cex_compile F6=author markdown artifact F7=frontmatter+ascii+line-count+self-check F8=N04_knowledge/knowledge/kno_embedder_provider_n04.md -->
+     F5=shell,apply_patch,cex_compile F6=author markdown artifact F7=frontmatter+ascii+line-count+self-check F8=N04_knowledge/P01_knowledge/kno_embedder_provider_n04.md -->
 # Overview
 N04 needs an embedder that rewards breadth without collapsing precision.
 Knowledge Gluttony means indexing more domains, more entity variants, and more relation hints, but every extra chunk only helps if its vector remains comparable across the whole corpus.
@@ -117,7 +117,7 @@ def embed_texts(texts, dimensions=3072):
 1. `archetypes/builders/embedder-provider-builder/bld_instruction_embedder_provider.md`
 2. `P01_knowledge/library/kind/kc_embedder_provider.md`
 3. `N04_knowledge/architecture/nucleus_def_n04.md`
-4. `N04_knowledge/config/con_env_config_n04.md`
+4. `N04_knowledge/P09_config/con_env_config_n04.md`
 
 ## Properties
 | Property | Value |

@@ -12,7 +12,7 @@ tags: [config, secrets, security, engineering, n03]
 
 <!-- 8F: F1 constrain=P09/secret_config F2 become=secret-config-builder F3 inject=nucleus_def_n03, kc_secret_config, kc_env_config, P09_config, runtime context
      F4 reason=pointer registry for N03 secrets without storing secret values F5 call=rg, Get-Content, apply_patch F6 produce=4279 bytes
-     F7 govern=frontmatter+sections+tables+ascii+self-check F8 collaborate=save N03_engineering/config/con_secret_config_n03.md -->
+     F7 govern=frontmatter+sections+tables+ascii+self-check F8 collaborate=save N03_engineering/P09_config/con_secret_config_n03.md -->
 
 # Engineering Secret Config
 

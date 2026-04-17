@@ -20,11 +20,11 @@ scope: N01-N06 (N07+ and P01-P12 not reached due to bound)
 | N04_knowledge/README.md | no_frontmatter | high |
 | N05_operations/README.md | no_frontmatter | high |
 | N01_intelligence/audits/hybrid_review2_n01.md | stale_fact:2024_or_2025_ref | low |
-| N01_intelligence/knowledge/knowledge_card_research_methods.md | stale_fact:2024_or_2025_ref | low |
-| N01_intelligence/knowledge/p01_kc_fontes_dados_pesquisa_mercado_pet_brasil.md | stale_fact:2024_or_2025_ref | low |
-| N01_intelligence/output/intent_resolution_benchmark.md | stale_fact:2024_or_2025_ref | low |
-| N01_intelligence/output/output_executive_summary.md | stale_fact:2024_or_2025_ref | low |
-| N01_intelligence/prompts/prompt_template_intelligence.md | stale_fact:2024_or_2025_ref | low |
+| N01_intelligence/P01_knowledge/knowledge_card_research_methods.md | stale_fact:2024_or_2025_ref | low |
+| N01_intelligence/P01_knowledge/p01_kc_fontes_dados_pesquisa_mercado_pet_brasil.md | stale_fact:2024_or_2025_ref | low |
+| N01_intelligence/P05_output/intent_resolution_benchmark.md | stale_fact:2024_or_2025_ref | low |
+| N01_intelligence/P05_output/output_executive_summary.md | stale_fact:2024_or_2025_ref | low |
+| N01_intelligence/P03_prompt/prompt_template_intelligence.md | stale_fact:2024_or_2025_ref | low |
 | N01_intelligence/quality/p07_eval_dataset_research_outputs.md | stale_fact:2024_or_2025_ref | low |
 | N01_intelligence/quality/p07_scoring_rubric_create_a_scoring_rubric_for_intelligence.md | stale_fact:2024_or_2025_ref | low |
 | N01_intelligence/quality/scoring_rubric_intelligence.md | stale_fact:2024_or_2025_ref | low |
@@ -50,19 +50,19 @@ scope: N01-N06 (N07+ and P01-P12 not reached due to bound)
 | N01_intelligence/research/atlas/atom_27_computer_browser_agents.md | stale_fact:2024_or_2025_ref | low |
 | N01_intelligence/research/atlas/atom_28_code_agents.md | stale_fact:2024_or_2025_ref | low |
 | N01_intelligence/research/atlas/atom_32_vendor_glossaries_adk.md | stale_fact:2024_or_2025_ref | low |
-| N01_intelligence/schemas/citation_format_contract.md | stale_fact:2024_or_2025_ref | low |
-| N01_intelligence/schemas/research_brief_contract.md | stale_fact:2024_or_2025_ref | low |
-| N01_intelligence/schemas/research_depth_levels.md | stale_fact:2024_or_2025_ref | low |
-| N01_intelligence/tools/search_config_intelligence.md | stale_fact:2024_or_2025_ref | low |
-| N02_marketing/knowledge/kc_accessibility_a11y.md | stale_fact:2024_or_2025_ref | low |
+| N01_intelligence/P06_schema/citation_format_contract.md | stale_fact:2024_or_2025_ref | low |
+| N01_intelligence/P06_schema/research_brief_contract.md | stale_fact:2024_or_2025_ref | low |
+| N01_intelligence/P06_schema/research_depth_levels.md | stale_fact:2024_or_2025_ref | low |
+| N01_intelligence/P04_tools/search_config_intelligence.md | stale_fact:2024_or_2025_ref | low |
+| N02_marketing/P01_knowledge/kc_accessibility_a11y.md | stale_fact:2024_or_2025_ref | low |
 | N04_knowledge/audits/audit_tts_provider_builder.md | stale_fact:2024_or_2025_ref | low |
 | N04_knowledge/audits/audit_vad_config_builder.md | stale_fact:2024_or_2025_ref | low |
 | N04_knowledge/audits/hybrid_review4_n04.md | stale_fact:2024_or_2025_ref | low |
-| N04_knowledge/knowledge/rag_source_knowledge.md | stale_fact:2024_or_2025_ref | low |
-| N04_knowledge/knowledge/retriever_config_knowledge.md | stale_fact:2024_or_2025_ref | low |
-| N05_operations/knowledge/kc_ollama_deployment_guide.md | stale_fact:2024_or_2025_ref | low |
+| N04_knowledge/P01_knowledge/rag_source_knowledge.md | stale_fact:2024_or_2025_ref | low |
+| N04_knowledge/P01_knowledge/retriever_config_knowledge.md | stale_fact:2024_or_2025_ref | low |
+| N05_operations/P01_knowledge/kc_ollama_deployment_guide.md | stale_fact:2024_or_2025_ref | low |
 | N06_commercial/audits/audit_bias_audit_builder.md | stale_fact:2024_or_2025_ref | low |
-| N06_commercial/knowledge/kc_ai_saas_monetization.md | stale_fact:2024_or_2025_ref | low |
+| N06_commercial/P01_knowledge/kc_ai_saas_monetization.md | stale_fact:2024_or_2025_ref | low |
 
 ## Summary
 

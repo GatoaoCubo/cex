@@ -9,7 +9,7 @@ quality: null
 tags: [vector_store, n01, p01, analytical_envy, storage]
 ---
 <!-- 8F: F1=vector_store/P01 F2=kc_vector_store+example_vector_store F3=nucleus_def_n01+kc_vector_store+ex_vector_store_pinecone+con_path_config_n01 F4=backend strategy for comparative retrieval
-     F5=rg+Get-Content+apply_patch F6=target dense markdown artifact F7=self-check properties+8F+ascii+80lines F8=N01_intelligence/knowledge/kno_vector_store_n01.md -->
+     F5=rg+Get-Content+apply_patch F6=target dense markdown artifact F7=self-check properties+8F+ascii+80lines F8=N01_intelligence/P01_knowledge/kno_vector_store_n01.md -->
 
 # N01 Vector Store
 

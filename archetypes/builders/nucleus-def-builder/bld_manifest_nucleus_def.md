@@ -25,7 +25,7 @@ framework, CLI-binding patterns, model-tier assignments, and crew-template compo
 1. Generates formal nucleus_def artifacts covering all required fields: nucleus_id, role,
    pillars_owned, sin_lens, cli_binding, model_tier, boot_script, agent_card_path.
 2. Maps each nucleus to its crew_templates_exposed (which crew patterns it can assemble).
-3. Enumerates domain_agents (non-builder agents within the nucleus N0x/agents/ directory).
+3. Enumerates domain_agents (non-builder agents within the nucleus N0x/P02_model/ directory).
 4. Makes the fractal explicit: N00 Genesis defines what can exist; N01-N07 are concrete instantiations.
 5. Enforces composability contracts: every nucleus_def declares its upstream producers
    and downstream consumers in the orchestration graph.

@@ -69,9 +69,9 @@ cycle. Lesson: nuclei that self-report quality maintain higher discipline.
 
 | File | Issue | Severity | Action |
 |------|-------|----------|--------|
-| `N06_commercial/knowledge/kc_ai_saas_monetization.md` | 2023 Gartner/Forrester/IDC stats; GPT-3.5 pricing outdated | HIGH | Add "as of 2023" qualifiers to all % claims |
-| `N05_operations/knowledge/kc_ollama_deployment_guide.md` | v0.3.7 (2024-04-01) pinned; Ollama now v0.6.x with new capabilities | MEDIUM | Remove hardcoded version pin |
-| `N04_knowledge/knowledge/rag_source_knowledge.md` | last_checked: 2024-03-30 for a live codebase RAG source | LOW | Update last_checked field |
+| `N06_commercial/P01_knowledge/kc_ai_saas_monetization.md` | 2023 Gartner/Forrester/IDC stats; GPT-3.5 pricing outdated | HIGH | Add "as of 2023" qualifiers to all % claims |
+| `N05_operations/P01_knowledge/kc_ollama_deployment_guide.md` | v0.3.7 (2024-04-01) pinned; Ollama now v0.6.x with new capabilities | MEDIUM | Remove hardcoded version pin |
+| `N04_knowledge/P01_knowledge/rag_source_knowledge.md` | last_checked: 2024-03-30 for a live codebase RAG source | LOW | Update last_checked field |
 
 **Competitive benchmark**: vs. LlamaIndex source freshness: live RAG sources should
 have dynamic timestamps. vs. Gartner 2025 data: usage-based pricing adoption jumped
@@ -81,8 +81,8 @@ from 72% (2023) to 84% (2025) -- a 12pp shift that makes the existing stat misle
 
 | File | Issue | Action |
 |------|-------|--------|
-| `N06_commercial/knowledge/kc_ai_compliance_gdpr.md` | EU AI Act (2025) not covered | Add one-line note |
-| `N02_marketing/knowledge/kc_email_html_responsive.md` | 2024 email client shares | Add "as of 2024" qualifier |
+| `N06_commercial/P01_knowledge/kc_ai_compliance_gdpr.md` | EU AI Act (2025) not covered | Add one-line note |
+| `N02_marketing/P01_knowledge/kc_email_html_responsive.md` | 2024 email client shares | Add "as of 2024" qualifier |
 
 ### Skip (11 files)
 

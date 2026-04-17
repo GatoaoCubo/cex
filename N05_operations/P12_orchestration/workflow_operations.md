@@ -42,7 +42,7 @@ validate_toml → validate_env → validate_migrations → health_local
 ### Step 1: validate_toml
 ```yaml
 action: "Validate railway.toml against schema"
-schema: "N05_operations/schemas/railway_toml_schema.md"
+schema: "N05_operations/P06_schema/railway_toml_schema.md"
 checks:
   - "[deploy].startCommand contains --host 0.0.0.0"
   - "[deploy].startCommand contains $PORT"
@@ -55,7 +55,7 @@ on_fail: ABORT ("Fix railway.toml before deploy")
 ### Step 2: validate_env
 ```yaml
 action: "Validate environment variables against contract"
-schema: "N05_operations/schemas/env_contract_schema.md"
+schema: "N05_operations/P06_schema/env_contract_schema.md"
 checks:
   - "5 REQUIRED vars present (DATABASE_URL, PORT, ENV, SECRET_KEY, APP_URL)"
   - "63 total vars categorized (required/optional/mock)"
@@ -91,7 +91,7 @@ on_fail: ABORT ("Local health check failed — fix before deploying")
 ### Step 5: create_rollback_plan
 ```yaml
 action: "Generate rollback plan for affected services"
-template: "N05_operations/output/rollback_plan_template.md"
+template: "N05_operations/P05_output/rollback_plan_template.md"
 covers:
   - "Which service(s) being deployed"
   - "Blast radius (dependent services, CORS impact, auth impact)"
@@ -180,7 +180,7 @@ on_any_step_failure:
 
 ```yaml
 resume:
-  checkpoint_file: "N05_operations/memory/checkpoint_operations.md"
+  checkpoint_file: "N05_operations/P10_memory/checkpoint_operations.md"
   saves: [step_number, service_name, commit_sha, rollback_plan_path]
   resume_from: "last successful step + 1"
   cleanup: "delete checkpoint after step 10 confirmed"

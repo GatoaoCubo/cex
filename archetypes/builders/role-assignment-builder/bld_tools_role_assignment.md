@@ -29,7 +29,7 @@ density_score: 0.86
 ## Validation Tools
 | Tool                      | Purpose                                      | When      |
 |---------------------------|----------------------------------------------|-----------|
-| cex_validate_agent_id.py  | Resolve .claude/agents/*.md or N0x/agents/  | Pre-commit|
+| cex_validate_agent_id.py  | Resolve .claude/P02_model/*.md or N0x/agents/  | Pre-commit|
 | cex_tools_subset.py       | Verify tools_allowed is subset of agent native| F7 GOVERN|
 | cex_delegation_lint.py    | Check can_delegate_to uses role_names only   | F7 GOVERN |
 | cex_backstory_lint.py     | Flag generic backstories (no domain nouns)   | F7 GOVERN |

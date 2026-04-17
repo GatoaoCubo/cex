@@ -133,7 +133,7 @@ t6_git_health_pass: 'Working tree clean except expected items:
 
   - `M CLAUDE_GENERATED.md` — tracked, modified (expected)
 
-  - `?? N04_knowledge/output/output_content_factory_internal_audit.md` — new untracked (expected from N04 run)
+  - `?? N04_knowledge/P05_output/output_content_factory_internal_audit.md` — new untracked (expected from N04 run)
 
 
   Recent commits show healthy progression:

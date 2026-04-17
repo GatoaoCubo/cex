@@ -78,7 +78,7 @@ updated: "2026-04-07"
 | Component | Type | Path | Status |
 |-----------|------|------|--------|
 | `cex_notebooklm.py` | Unified CLI tool | `_tools/cex_notebooklm.py` | TO BUILD (N03) |
-| `notebooklm_notebooks.yaml` | Config registry | `.cex/config/notebooklm_notebooks.yaml` | TO BUILD (N04 draft) |
+| `notebooklm_notebooks.yaml` | Config registry | `.cex/P09_config/notebooklm_notebooks.yaml` | TO BUILD (N04 draft) |
 | `notebooklm_create.py` | Prototype (create notebook) | `_tools/notebooklm_create.py` | EXISTS (PoC) |
 | `notebooklm_paste.py` | Prototype (paste into notebook) | `_tools/notebooklm_paste.py` | EXISTS (PoC) |
 | NotebookLM MCP | 17 tools (query, list, search) | `.mcp-n04.json` | EXISTS (auth expires) |

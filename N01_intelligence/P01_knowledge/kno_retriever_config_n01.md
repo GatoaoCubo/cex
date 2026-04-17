@@ -9,7 +9,7 @@ quality: null
 tags: [retriever_config, n01, p01, analytical_envy, hybrid_search]
 ---
 <!-- 8F: F1=retriever_config/P01 F2=kc_retriever_config+tpl_retriever_config F3=nucleus_def_n01+kc_retriever_config+ex_retriever_config_hybrid_rag+search_config_intelligence F4=hybrid retrieval for competitive evidence
-     F5=rg+Get-Content+apply_patch F6=target dense markdown artifact F7=self-check properties+8F+ascii+80lines F8=N01_intelligence/knowledge/kno_retriever_config_n01.md -->
+     F5=rg+Get-Content+apply_patch F6=target dense markdown artifact F7=self-check properties+8F+ascii+80lines F8=N01_intelligence/P01_knowledge/kno_retriever_config_n01.md -->
 
 # N01 Retriever Config
 

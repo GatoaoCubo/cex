@@ -46,7 +46,7 @@ density_score: 0.85
 | Field                   | Type   | Notes |
 |-------------------------|--------|-------|
 | crew_templates_exposed  | array  | Composable crew patterns this nucleus can assemble |
-| domain_agents           | array  | Non-builder agents in N0{X}_*/agents/ |
+| domain_agents           | array  | Non-builder agents in N0{X}_*/P02_model/ |
 | model_specific          | string | Full model identifier (e.g., claude-opus-4-6) |
 | context_tokens          | int    | Max context tokens (e.g., 200000 or 1000000) |
 | fallback_cli            | string | First fallback CLI if primary fails |

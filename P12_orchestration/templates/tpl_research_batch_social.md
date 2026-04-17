@@ -17,7 +17,7 @@ updated: "2026-04-13"
 
 # BATCH C — Social Media Discovery
 
-**Output**: `N01_research/output/data/{{OUTPUT_FILE | default: 'crm_batch_c_social.json'}}`
+**Output**: `N01_research/P05_output/data/{{OUTPUT_FILE | default: 'crm_batch_c_social.json'}}`
 **Signal**: `python _tools/signal_writer.py n01 complete 9.0 {{SIGNAL_TAG | default: 'BATCH_C_SOCIAL'}}`
 
 ---

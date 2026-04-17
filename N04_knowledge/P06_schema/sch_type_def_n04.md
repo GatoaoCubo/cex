@@ -8,7 +8,7 @@ version: 1.0
 quality: null
 tags: [schema, type, knowledge, provenance, index]
 ---
-<!-- 8F: F1 constrain=P06/type_def F2 become=type-def-builder F3 inject=n04-knowledge+kc_type_def+P06 examples+N04 schema contracts F4 reason=reusable typed record for provenance-heavy knowledge objects F5 call=shell,apply_patch F6 produce=6018 bytes F7 govern=frontmatter+ascii+density+80-line self-check F8 collaborate=N04_knowledge/schemas/sch_type_def_n04.md -->
+<!-- 8F: F1 constrain=P06/type_def F2 become=type-def-builder F3 inject=n04-knowledge+kc_type_def+P06 examples+N04 schema contracts F4 reason=reusable typed record for provenance-heavy knowledge objects F5 call=shell,apply_patch F6 produce=6018 bytes F7 govern=frontmatter+ascii+density+80-line self-check F8 collaborate=N04_knowledge/P06_schema/sch_type_def_n04.md -->
 # Knowledge Record Type
 ## Purpose
 N04 needs a reusable object type for facts that survive beyond one prompt or one batch.

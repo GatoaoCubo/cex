@@ -10,7 +10,7 @@ tags: [config, secret, operations, vault, rotation]
 ---
 <!-- 8F: F1 constrain=P09/secret_config F2 become=secret-config-builder F3 inject=nucleus_def_n05+n05-operations+kc_secret_config+P09_config+N05 secret patterns
      F4 reason=secret registry with rotation and retrieval discipline for ops workflows F5 call=apply_patch F6 produce=4521 bytes
-     F7 govern=self-check headings+tables+gating_wrath+ascii+80_lines F8 collaborate=N05_operations/config/con_secret_config_n05.md -->
+     F7 govern=self-check headings+tables+gating_wrath+ascii+80_lines F8 collaborate=N05_operations/P09_config/con_secret_config_n05.md -->
 
 # Ops Secret Registry
 

@@ -22,7 +22,7 @@ linked_artifacts:
   related: [kno_embedder_provider_n04, kno_knowledge_graph_n04, kno_vector_store_n04, mem_learning_record_n04]
 ---
 <!-- 8F: F1=runtime_state/P10 F2=runtime-state-builder F3=nucleus_def_n04+agent_card_n04+kc_runtime_state+N04 configs/schemas F4=runtime decision map for knowledge routing, retrieval, and memory persistence
-     F5=shell,apply_patch,cex_compile F6=author markdown artifact F7=frontmatter+routing-decision coherence+ascii+self-check F8=N04_knowledge/memory/mem_runtime_state_n04.md -->
+     F5=shell,apply_patch,cex_compile F6=author markdown artifact F7=frontmatter+routing-decision coherence+ascii+self-check F8=N04_knowledge/P10_memory/mem_runtime_state_n04.md -->
 # Agent Context
 N04 operates at the point where raw repository content becomes indexed knowledge, structured relations, and durable memory.
 Knowledge Gluttony at runtime means preferring to capture useful evidence, relation candidates, and retrieval hints before discarding them.
@@ -113,7 +113,7 @@ If compilation reveals format issues, N04 fixes the source artifact rather than 
 2. `P01_knowledge/library/kind/kc_runtime_state.md`
 3. `N04_knowledge/agent_card_n04.md`
 4. `N04_knowledge/architecture/nucleus_def_n04.md`
-5. `N04_knowledge/config/con_env_config_n04.md`
+5. `N04_knowledge/P09_config/con_env_config_n04.md`
 
 ## Properties
 | Property | Value |

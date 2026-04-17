@@ -58,7 +58,7 @@ stale_fact_diagnosis:
   heal_recommended:
     count: 3
     files:
-      - path: N06_commercial/knowledge/kc_ai_saas_monetization.md
+      - path: N06_commercial/P01_knowledge/kc_ai_saas_monetization.md
         issue: "2023 Gartner (72%), Forrester (65%), IDC (48%) stats. GPT-3.5 pricing ($0.002/token) outdated."
         severity: HIGH
         action: "Add 'as of 2023' qualifier to all percentage claims OR update to 2025 data"
@@ -66,7 +66,7 @@ stale_fact_diagnosis:
           vs. Gartner 2025: usage-based pricing adoption at 84%. vs. OpenAI 2025 pricing:
           gpt-4o-mini is the cost baseline now, not GPT-3.5. Delta = 12pp adoption rate shift.
 
-      - path: N05_operations/knowledge/kc_ollama_deployment_guide.md
+      - path: N05_operations/P01_knowledge/kc_ollama_deployment_guide.md
         issue: "References v0.3.7 (2024-04-01). Ollama is now v0.6.x. Ubuntu 22.04+ note is outdated."
         severity: MEDIUM
         action: "Update version reference. Remove hard-coded binary version. Use 'see ollama.com/download for current version'."
@@ -74,7 +74,7 @@ stale_fact_diagnosis:
           vs. Ollama docs (2026): v0.6+ adds multi-modal support, GPU memory splitting,
           Windows native binary. v0.3.7 reference will mislead users on capabilities.
 
-      - path: N04_knowledge/knowledge/rag_source_knowledge.md
+      - path: N04_knowledge/P01_knowledge/rag_source_knowledge.md
         issue: "last_checked: 2024-03-30. File creation date 2024-03-30 for a live codebase RAG source."
         severity: LOW
         action: "Update last_checked field to 2026-04-15. Add 'auto-updated on each CEX session' note."
@@ -85,13 +85,13 @@ stale_fact_diagnosis:
   add_qualifier_borderline:
     count: 2
     files:
-      - path: N06_commercial/knowledge/kc_ai_compliance_gdpr.md
+      - path: N06_commercial/P01_knowledge/kc_ai_compliance_gdpr.md
         issue: "GDPR regulatory content -- principles stable, but EU AI Act (2025) is not covered."
         severity: LOW
         action: "Add note: 'EU AI Act effective 2025 adds requirements for high-risk AI systems'"
         verdict: add_qualifier
 
-      - path: N02_marketing/knowledge/kc_email_html_responsive.md
+      - path: N02_marketing/P01_knowledge/kc_email_html_responsive.md
         issue: "2024/2025 email client stat references. Email client market shares shift 2-3% annually."
         severity: VERY_LOW
         action: "Add 'as of 2024' qualifier to client market share percentages"
@@ -178,29 +178,29 @@ heal_queue:
       executor: N04
       effort: LOW
 
-    - path: N06_commercial/knowledge/kc_ai_saas_monetization.md
+    - path: N06_commercial/P01_knowledge/kc_ai_saas_monetization.md
       action: add_as_of_2023_qualifiers
       executor: N04
       effort: LOW
 
   p2_soon:
-    - path: N05_operations/knowledge/kc_ollama_deployment_guide.md
+    - path: N05_operations/P01_knowledge/kc_ollama_deployment_guide.md
       action: remove_hardcoded_version_pin
       executor: N05
       effort: VERY_LOW
 
-    - path: N04_knowledge/knowledge/rag_source_knowledge.md
+    - path: N04_knowledge/P01_knowledge/rag_source_knowledge.md
       action: update_last_checked_field
       executor: N04
       effort: VERY_LOW
 
   p3_optional:
-    - path: N06_commercial/knowledge/kc_ai_compliance_gdpr.md
+    - path: N06_commercial/P01_knowledge/kc_ai_compliance_gdpr.md
       action: add_eu_ai_act_note
       executor: N04
       effort: LOW
 
-    - path: N02_marketing/knowledge/kc_email_html_responsive.md
+    - path: N02_marketing/P01_knowledge/kc_email_html_responsive.md
       action: add_as_of_2024_qualifier
       executor: N04
       effort: VERY_LOW

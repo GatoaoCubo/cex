@@ -69,8 +69,8 @@ density_score: 0.88
 
 | Agent | Purpose | Path |
 |-------|---------|------|
-| agent_builder_architect | Builder design | `N03_engineering/agents/` |
-| agent_schema_designer | Data contract design | `N03_engineering/agents/` |
+| agent_builder_architect | Builder design | `N03_engineering/P02_model/` |
+| agent_schema_designer | Data contract design | `N03_engineering/P02_model/` |
 
 ## Boot Contract
 

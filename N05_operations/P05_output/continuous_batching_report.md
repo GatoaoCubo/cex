@@ -231,7 +231,7 @@ The core infrastructure (builders, schemas, tools, boot, spawn, runtime) is 100%
 | `_tools/cex_mission_runner.py` | Modified (v2.0) | +250 lines |
 | `_tools/cex_finetune_export.py` | New tool | 170 lines |
 | `_data/finetune/cex_builder_pairs.jsonl` | Training data | 554 KB, 123 pairs |
-| `N05_operations/output/continuous_batching_report.md` | This report | -- |
+| `N05_operations/P05_output/continuous_batching_report.md` | This report | -- |
 | `.cex/runtime/task_queue.yaml` | Test queue | 3 tasks |
 | `.cex/runtime/plans/plan_test_continuous.md` | Test plan | 1 wave |
 

@@ -138,7 +138,7 @@ mission: NEWPC_SETUP
 
 **ROI of inaction**: Without min-margin and max-discount guardrails, pricing decisions can erode revenue. A 5% margin undercut across 100 deals = significant revenue leak. No guard = no floor.
 
-**Recommendation**: Build `N06_commercial/feedback/p11_gr_pricing_guardrails.md` -- floor margins, discount caps, bundle rules.
+**Recommendation**: Build `N06_commercial/P11_feedback/p11_gr_pricing_guardrails.md` -- floor margins, discount caps, bundle rules.
 
 **Estimated build cost**: 1 artifact, N06 solo, 8F pipeline.
 
@@ -146,7 +146,7 @@ mission: NEWPC_SETUP
 
 **ROI of inaction**: When a funnel underperforms (conversion < threshold), there is no automated detect-fix-verify cycle. Every manual diagnosis = N06 context burn + human time.
 
-**Recommendation**: Build `N06_commercial/feedback/p11_bl_funnel_performance.md` -- detect conversion drops, suggest fixes, verify after change.
+**Recommendation**: Build `N06_commercial/P11_feedback/p11_bl_funnel_performance.md` -- detect conversion drops, suggest fixes, verify after change.
 
 ### Gap 3: 3 Payment/Design MCPs Non-Functional (API Keys Missing)
 

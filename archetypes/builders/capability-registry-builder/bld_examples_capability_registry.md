@@ -60,7 +60,7 @@ Missing input_schema, output_schema, cost_tokens, quality_baseline, availability
 ```markdown
 | capability_name | provider_agent | ...
 |----------------|----------------|
-| Build dashboards | .claude/agents/dashboard-builder.md | ...
+| Build dashboards | .claude/P02_model/dashboard-builder.md | ...
 ```
 
 ### Why it fails:
@@ -82,8 +82,8 @@ The landing-page-builder has `quality: null` (unscored). Inventing a score of 8.
 ```markdown
 | capability_name | provider_agent | availability |
 |----------------|----------------|--------------|
-| Build landing page | .claude/agents/landing-page-builder.md | active |
-| Knowledge management | N04_knowledge/agents/agent_knowledge.md | active |
+| Build landing page | .claude/P02_model/landing-page-builder.md | active |
+| Knowledge management | N04_knowledge/P02_model/agent_knowledge.md | active |
 | Orchestration | N07_admin/agent_card_n07.md | active |
 ```
 

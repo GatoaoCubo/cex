@@ -65,8 +65,8 @@ density_score: 0.87
 
 | Agent | Purpose | Path |
 |-------|---------|------|
-| agent_copywriter | Conversion copy | `N02_marketing/agents/` |
-| agent_brand_voice | Brand consistency | `N02_marketing/agents/` |
+| agent_copywriter | Conversion copy | `N02_marketing/P02_model/` |
+| agent_brand_voice | Brand consistency | `N02_marketing/P02_model/` |
 
 ## Boot Contract
 

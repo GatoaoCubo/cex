@@ -7,7 +7,7 @@ version: 1.0.0
 quality: 9.2
 created: 2026-04-07
 author: n03_builder
-origin: gato-ao-cubo/N01_research/config/brand_context.md
+origin: gato-ao-cubo/N01_research/P09_config/brand_context.md
 variables: [NUCLEUS_ID, NUCLEUS_NAME, BRAND_*]
 density_score: 0.95
 tags: [template, brand-context, nucleus, config, instance-extraction]

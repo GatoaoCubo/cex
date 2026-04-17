@@ -42,7 +42,7 @@ workflow_3_deploy_on_merge_to_main_manual_trigger: "# .github/workflows/deploy.y
   \ Railway CLI\n        run: npm install -g @railway/cli\n\n      - name: Pre-flight checks\n        run: |\n          python\
   \ _tools/cex_release_check.py\n          python _tools/cex_hooks.py --all\n\n      - name: Deploy to Railway\n        env:\n\
   \          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}\n        run: railway up --detach\n\n      - name: Smoke eval (30s\
-  \ budget)\n        run: bash N05_operations/output/smoke_eval_deploy.sh ${{ vars.API_URL }}\n        timeout-minutes: 1\n\
+  \ budget)\n        run: bash N05_operations/P05_output/smoke_eval_deploy.sh ${{ vars.API_URL }}\n        timeout-minutes: 1\n\
   \n      - name: Post-deploy health verification\n        run: |\n          sleep 10\n          curl -sf ${{ vars.API_URL\
   \ }}/health | jq ."
 branch_protection_rules: '| rule | value |

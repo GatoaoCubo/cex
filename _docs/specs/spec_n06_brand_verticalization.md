@@ -245,16 +245,16 @@ def inject_brand(template: str, brand_config: dict) -> str:
 ### From Legacy Package (_archive/packages_legacy/marca/)
 | Asset | Size | Status |
 |-------|------|--------|
-| brand_archetypes.yaml | 12 archetypes, 40+ fields each | MIGRATE to N06/knowledge/ |
-| brand_frameworks.yaml | Ries and Trout, UVP, differentiation | MIGRATE to N06/knowledge/ |
-| brand_discovery.md | 3-phase discovery prompt | MIGRATE to N06/prompts/ |
-| brand_positioning.md | Positioning + competitive mapping | MIGRATE to N06/prompts/ |
+| brand_archetypes.yaml | 12 archetypes, 40+ fields each | MIGRATE to N06/P01_knowledge/ |
+| brand_frameworks.yaml | Ries and Trout, UVP, differentiation | MIGRATE to N06/P01_knowledge/ |
+| brand_discovery.md | 3-phase discovery prompt | MIGRATE to N06/P03_prompt/ |
+| brand_positioning.md | Positioning + competitive mapping | MIGRATE to N06/P03_prompt/ |
 
 ### From Examples (P01/P12)
 | Asset | Status |
 |-------|--------|
-| ex_workflow_brand_propagation.md | MIGRATE to N06/orchestration/ |
-| ex_knowledge_card_brand_skill.md | MIGRATE to N06/knowledge/ |
+| ex_workflow_brand_propagation.md | MIGRATE to N06/P12_orchestration/ |
+| ex_knowledge_card_brand_skill.md | MIGRATE to N06/P01_knowledge/ |
 
 ### From Real Codebase (fresh-start/)
 | Asset | Value |
@@ -271,8 +271,8 @@ def inject_brand(template: str, brand_config: dict) -> str:
 ### Wave 1: Identity (6 REWRITE)
 | # | File | Pillar | Action |
 |---|------|--------|--------|
-| 1 | N06/agents/agent_commercial.md | P02 | REWRITE -> Brand Architect + Revenue Engineer |
-| 2 | N06/prompts/system_prompt_commercial.md | P03 | REWRITE -> brand-first, dual-role |
+| 1 | N06/P02_model/agent_commercial.md | P02 | REWRITE -> Brand Architect + Revenue Engineer |
+| 2 | N06/P03_prompt/system_prompt_commercial.md | P03 | REWRITE -> brand-first, dual-role |
 | 3 | N06/architecture/agent_card_commercial.md | P08 | REWRITE -> brand propagation architecture |
 | 4 | boot/n06.ps1 | P09 | REWRITE -> Brand Architect identity |
 | 5 | .mcp-n06.json | P09 | REWRITE -> add stripe/hotmart MCPs |
@@ -281,26 +281,26 @@ def inject_brand(template: str, brand_config: dict) -> str:
 ### Wave 2: Knowledge (7 NEW KCs via SHAKA + 3 MIGRATE)
 | # | File | Action | Source |
 |---|------|--------|--------|
-| 7 | N06/knowledge/kc_brand_book_patterns.md | CREATE | SHAKA research |
-| 8 | N06/knowledge/kc_brand_voice_systems.md | CREATE | SHAKA research |
-| 9 | N06/knowledge/kc_icp_frameworks.md | CREATE | SHAKA research |
-| 10 | N06/knowledge/kc_brand_propagation_arch.md | CREATE | SHAKA research |
-| 11 | N06/knowledge/kc_competitive_positioning.md | CREATE | SHAKA research |
-| 12 | N06/knowledge/kc_brand_naming_patterns.md | CREATE | SHAKA research |
-| 13 | N06/knowledge/kc_brand_monetization_models.md | CREATE | SHAKA research |
-| 14 | N06/knowledge/kc_brand_archetypes.md | MIGRATE | legacy archetypes.yaml |
-| 15 | N06/knowledge/kc_brand_frameworks.md | MIGRATE | legacy frameworks.yaml |
-| 16 | N06/knowledge/kc_brand_tokens_pipeline.md | MIGRATE | ex_brand_skill KC |
+| 7 | N06/P01_knowledge/kc_brand_book_patterns.md | CREATE | SHAKA research |
+| 8 | N06/P01_knowledge/kc_brand_voice_systems.md | CREATE | SHAKA research |
+| 9 | N06/P01_knowledge/kc_icp_frameworks.md | CREATE | SHAKA research |
+| 10 | N06/P01_knowledge/kc_brand_propagation_arch.md | CREATE | SHAKA research |
+| 11 | N06/P01_knowledge/kc_competitive_positioning.md | CREATE | SHAKA research |
+| 12 | N06/P01_knowledge/kc_brand_naming_patterns.md | CREATE | SHAKA research |
+| 13 | N06/P01_knowledge/kc_brand_monetization_models.md | CREATE | SHAKA research |
+| 14 | N06/P01_knowledge/kc_brand_archetypes.md | MIGRATE | legacy archetypes.yaml |
+| 15 | N06/P01_knowledge/kc_brand_frameworks.md | MIGRATE | legacy frameworks.yaml |
+| 16 | N06/P01_knowledge/kc_brand_tokens_pipeline.md | MIGRATE | ex_brand_skill KC |
 
 ### Wave 3: Core Artifacts (10 CREATE)
 | # | File | Pillar | Action |
 |---|------|--------|--------|
 | 17 | .cex/brand/brand_config_schema.yaml | P06 | CREATE (validates brand_config) |
 | 18 | .cex/brand/brand_config_template.yaml | P06 | CREATE (empty mustache template) |
-| 19 | N06/prompts/brand_discovery_interview.md | P03 | CREATE (12-15 Q progressive) |
-| 20 | N06/prompts/brand_book_generator.md | P03 | CREATE (answers -> document) |
-| 21 | N06/prompts/brand_config_extractor.md | P03 | CREATE (book -> YAML) |
-| 22 | N06/prompts/brand_audit.md | P03 | CREATE (score alignment) |
+| 19 | N06/P03_prompt/brand_discovery_interview.md | P03 | CREATE (12-15 Q progressive) |
+| 20 | N06/P03_prompt/brand_book_generator.md | P03 | CREATE (answers -> document) |
+| 21 | N06/P03_prompt/brand_config_extractor.md | P03 | CREATE (book -> YAML) |
+| 22 | N06/P03_prompt/brand_audit.md | P03 | CREATE (score alignment) |
 | 23 | _tools/brand_inject.py | P04 | CREATE (BRAND_* replacer) |
 | 24 | _tools/brand_validate.py | P04 | CREATE (schema validator) |
 | 25 | _tools/brand_propagate.py | P04 | CREATE (push to all nuclei) |
@@ -327,7 +327,7 @@ Part 2 (output templates, quality gates, orchestration) = separate Spec after Wa
 
 ```
 1. SHAKA grid (3 slots): research 7 new KCs for brand domain
-2. MIGRATE 3 legacy assets -> N06/knowledge/
+2. MIGRATE 3 legacy assets -> N06/P01_knowledge/
 3. REWRITE 6 identity artifacts (agent, prompt, card, boot, mcp, seed)
 4. CREATE 4 prompts (discovery, generator, extractor, audit)
 5. CREATE 4 tools (inject, validate, propagate, audit)

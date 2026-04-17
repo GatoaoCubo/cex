@@ -8,7 +8,7 @@ version: "1.0.0"
 quality: null
 tags: [retriever_config, marketing, hybrid_search, retrieval, creative_lust, n02]
 ---
-<!-- 8F: F1=retriever_config/P01 F2=retriever-config-builder F3=nucleus_def_n02+kc_campaign+ab_testing_framework+campaign_performance_memory+P01_schema+P10_schema F4=hybrid_ranker_for_marketing_generation F5=shell_command,apply_patch F6=approx_6kb F7=frontmatter+8F+80_lines+dense_tables+self_check_pass F8=N02_marketing/knowledge/kno_retriever_config_n02.md -->
+<!-- 8F: F1=retriever_config/P01 F2=retriever-config-builder F3=nucleus_def_n02+kc_campaign+ab_testing_framework+campaign_performance_memory+P01_schema+P10_schema F4=hybrid_ranker_for_marketing_generation F5=shell_command,apply_patch F6=approx_6kb F7=frontmatter+8F+80_lines+dense_tables+self_check_pass F8=N02_marketing/P01_knowledge/kno_retriever_config_n02.md -->
 
 # Purpose
 
@@ -165,4 +165,4 @@ retrieval_example:
 | Candidate pool | 24 |
 | Strongest bias | stage and audience fit |
 | Main risk prevented | generic recall that weakens conversion quality |
-| Save path | N02_marketing/knowledge/kno_retriever_config_n02.md |
+| Save path | N02_marketing/P01_knowledge/kno_retriever_config_n02.md |

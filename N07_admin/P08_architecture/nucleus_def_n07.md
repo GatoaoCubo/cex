@@ -63,8 +63,8 @@ density_score: 0.88
 
 | Agent | Purpose | Path |
 |-------|---------|------|
-| agent_dispatcher | Spawn + monitor nuclei | `N07_admin/agents/` |
-| agent_consolidator | Post-wave verify + archive | `N07_admin/agents/` |
+| agent_dispatcher | Spawn + monitor nuclei | `N07_admin/P02_model/` |
+| agent_consolidator | Post-wave verify + archive | `N07_admin/P02_model/` |
 
 ## Boot Contract
 

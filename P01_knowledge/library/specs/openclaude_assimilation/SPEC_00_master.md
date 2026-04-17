@@ -23,7 +23,7 @@ dependencies: [SPEC_01, SPEC_02, SPEC_03, SPEC_04, SPEC_05, SPEC_06, SPEC_07]
 | # | OpenClaude Module | Lines | CEX Target | Sub-Spec |
 |---|-------------------|-------|------------|----------|
 | 1 | `src/coordinator/` + coordinator prompts | ~600 | N07 orchestrator rules + cex_mission_runner.py | SPEC_01 |
-| 2 | `src/tools/AgentTool/` (fork/spawn/run) | ~2800 | _spawn/ + cex_crew_runner.py | SPEC_02 |
+| 2 | `src/P04_tools/AgentTool/` (fork/spawn/run) | ~2800 | _spawn/ + cex_crew_runner.py | SPEC_02 |
 | 3 | `src/query/tokenBudget.ts` + BudgetTracker | ~100 | _tools/cex_token_budget.py | SPEC_03 |
 | 4 | `src/memdir/` (scan/age/relevance/types) | ~900 | _tools/cex_memory_*.py | SPEC_04 |
 | 5 | `src/skills/` (bundled/load/dynamic) | ~1200 | builder ISO runtime loader | SPEC_05 |

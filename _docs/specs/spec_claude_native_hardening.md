@@ -48,8 +48,8 @@ Must complete before Wave 2. Fixes the runtime and tools other nuclei depend on.
    - Any missing --flags that improve operations
 
 ### N03: Clean PI from Builders + Shared ISOs
-1. **Spawn configs**: Fix `N03_builder/orchestration/spawn_config_builder.md`
-   and `N04_knowledge/orchestration/spawn_config_knowledge.md` — replace
+1. **Spawn configs**: Fix `N03_builder/P12_orchestration/spawn_config_builder.md`
+   and `N04_knowledge/P12_orchestration/spawn_config_knowledge.md` — replace
    `pi --model` with `claude --model`.
 2. **Shared ISOs**: Scan `archetypes/builders/_shared/` for PI references.
 3. **Agent definitions**: Scan `.claude/agents/` for any PI-specific patterns.

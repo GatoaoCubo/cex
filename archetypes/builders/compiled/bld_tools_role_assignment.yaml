@@ -37,7 +37,7 @@ validation_tools: '| Tool                      | Purpose                        
 
   |---------------------------|----------------------------------------------|-----------|
 
-  | cex_validate_agent_id.py  | Resolve .claude/agents/*.md or N0x/agents/  | Pre-commit|
+  | cex_validate_agent_id.py  | Resolve .claude/P02_model/*.md or N0x/agents/  | Pre-commit|
 
   | cex_tools_subset.py       | Verify tools_allowed is subset of agent native| F7 GOVERN|
 

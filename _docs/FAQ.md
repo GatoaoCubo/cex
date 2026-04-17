@@ -191,7 +191,7 @@ This happens via a multi-stage pipeline:
 4. **Confidence scoring**: high confidence (> 80%) executes; low confidence asks
 5. **Verb resolution**: 14 PT/EN verb pairs mapped to canonical actions (create, improve, analyze...)
 
-The full mapping of all 123 kinds is in `N03_engineering/knowledge/kc_intent_resolution_map.md`.
+The full mapping of all 123 kinds is in `N03_engineering/P01_knowledge/kc_intent_resolution_map.md`.
 
 ### 15. How does CEX handle ambiguous requests?
 

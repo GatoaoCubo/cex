@@ -28,7 +28,7 @@ linked_artifacts:
     - P01_knowledge/library/domain/_reference/kc_terminology_openai_canonical.md
     - P01_knowledge/library/domain/_reference/kc_terminology_google_mcp_canonical.md
     - .cex/runtime/decisions/decision_terminology_standardization.yaml
-    - N07_admin/memory/industry_terminology_audit.md
+    - N07_admin/P10_memory/industry_terminology_audit.md
 density_score: 0.95
 ---
 

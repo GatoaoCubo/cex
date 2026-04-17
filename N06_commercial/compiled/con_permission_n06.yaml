@@ -35,31 +35,31 @@ values: '| Role | Resource | Read | Write | Execute | Rationale |
 
   | n07_orchestrator | `N06_commercial/**` | yes | limited | yes | coordination and validation authority |
 
-  | revenue_analyst | `N06_commercial/output/**` | yes | yes | no | can refine business artifacts, not runtime behavior |
+  | revenue_analyst | `N06_commercial/P05_output/**` | yes | yes | no | can refine business artifacts, not runtime behavior |
 
-  | pricing_reviewer | `N06_commercial/schemas/**` | yes | propose_only | no | review contracts without direct mutation |
+  | pricing_reviewer | `N06_commercial/P06_schema/**` | yes | propose_only | no | review contracts without direct mutation |
 
   | runtime_compiler | `N06_commercial/compiled/**` | yes | yes | yes | compile path requires write and run |
 
-  | market_reader | `N06_commercial/knowledge/**` | yes | no | no | reference access only |
+  | market_reader | `N06_commercial/P01_knowledge/**` | yes | no | no | reference access only |
 
-  | generic_agent | `N06_commercial/config/**` | no | no | no | config is too sensitive for blanket access |
+  | generic_agent | `N06_commercial/P09_config/**` | no | no | no | config is too sensitive for blanket access |
 
   | audit_process | `_reports/**` | yes | yes | yes | can produce revenue diagnostics |'
 deny_rules: '| Deny ID | Subject | Resource | Deny | Why |
 
   |---------|---------|----------|------|-----|
 
-  | DP01 | all_non_n06 | `N06_commercial/config/con_secret_config_n06.md` | read_write_execute | secret policy must stay tightly
+  | DP01 | all_non_n06 | `N06_commercial/P09_config/con_secret_config_n06.md` | read_write_execute | secret policy must stay tightly
   bounded |
 
-  | DP02 | all_non_n06_owner | `N06_commercial/config/con_rate_limit_config_n06.md` | write | spend policy changes alter monetization
+  | DP02 | all_non_n06_owner | `N06_commercial/P09_config/con_rate_limit_config_n06.md` | write | spend policy changes alter monetization
   economics |
 
-  | DP03 | all_non_n06_owner | `N06_commercial/schemas/sch_type_def_n06.md` | write | type drift breaks pricing telemetry
+  | DP03 | all_non_n06_owner | `N06_commercial/P06_schema/sch_type_def_n06.md` | write | type drift breaks pricing telemetry
   |
 
-  | DP04 | generic_agent | `N06_commercial/output/**` | write | low-context edits can weaken offers |
+  | DP04 | generic_agent | `N06_commercial/P05_output/**` | write | low-context edits can weaken offers |
 
   | DP05 | all_roles | `.git/**` | execute_delete | this config does not grant repo-destructive power |'
 escalation_rules: '| Case | Escalation Path | Reason |
@@ -90,7 +90,7 @@ example: "| Request | Result | Reason |\n|---------|--------|--------|\n| `gener
   \ | deny | spend policy too sensitive |\n| `runtime_compiler` writes compiled YAML | allow | required for artifact pipeline\
   \ |\n| `pricing_reviewer` proposes changes to `sch_enum_def_n06.md` | read and comment only | contract safety over speed\
   \ |\n\ndefault_policy: deny\nroles:\n  - n06_owner\n  - n07_orchestrator\n  - revenue_analyst\n  - pricing_reviewer\ndenies:\n\
-  \  - subject: all_non_n06\n    resource: N06_commercial/config/con_secret_config_n06.md\n    actions: [read, write, execute]"
+  \  - subject: all_non_n06\n    resource: N06_commercial/P09_config/con_secret_config_n06.md\n    actions: [read, write, execute]"
 properties: '| Property | Value |
 
   |----------|-------|

@@ -9,7 +9,7 @@ quality: null
 tags: [type_def, insight, research, benchmark]
 ---
 
-<!-- 8F: F1 constrain=P06/type_def F2 become=type-def-builder F3 inject=nucleus_def_n01+n01-intelligence+kc_type_def+P06_schema+type examples F4 reason=reusable object for comparative insight records F5 call=apply_patch+cex_compile F6 produce=5308 bytes F7 govern=frontmatter+ascii+80-line+self-check F8 collaborate=N01_intelligence/schemas/sch_type_def_n01.md -->
+<!-- 8F: F1 constrain=P06/type_def F2 become=type-def-builder F3 inject=nucleus_def_n01+n01-intelligence+kc_type_def+P06_schema+type examples F4 reason=reusable object for comparative insight records F5 call=apply_patch+cex_compile F6 produce=5308 bytes F7 govern=frontmatter+ascii+80-line+self-check F8 collaborate=N01_intelligence/P06_schema/sch_type_def_n01.md -->
 
 ## Purpose
 

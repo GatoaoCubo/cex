@@ -34,15 +34,15 @@ values: '| Path Alias | Type | Default | Required | Readonly | Notes |
 
   | `rules_dir` | dir | `N01_intelligence/rules/` | yes | yes | nucleus governance |
 
-  | `knowledge_dir` | dir | `N01_intelligence/knowledge/` | yes | no | reusable research notes |
+  | `knowledge_dir` | dir | `N01_intelligence/P01_knowledge/` | yes | no | reusable research notes |
 
-  | `schemas_dir` | dir | `N01_intelligence/schemas/` | yes | no | typed contracts |
+  | `schemas_dir` | dir | `N01_intelligence/P06_schema/` | yes | no | typed contracts |
 
-  | `config_dir` | dir | `N01_intelligence/config/` | yes | no | runtime settings |
+  | `config_dir` | dir | `N01_intelligence/P09_config/` | yes | no | runtime settings |
 
   | `compiled_dir` | dir | `N01_intelligence/compiled/` | no | no | compiler outputs |
 
-  | `output_dir` | dir | `N01_intelligence/output/` | no | no | finished reports |
+  | `output_dir` | dir | `N01_intelligence/P05_output/` | no | no | finished reports |
 
   | `scratch_dir` | dir | `N01_intelligence/_scratch/` | no | no | disposable comparison work |
 

@@ -26,10 +26,10 @@ tags: [polish, fixes, validation, n05]
 
 | # | Error Type | Files Affected | Fix | Verification |
 |---|-----------|---------------|-----|-------------|
-| 1 | Missing frontmatter (id, kind, pillar, quality) | N01_intelligence/knowledge/embedding_config_intelligence.md | Added missing fields (concurrent nucleus fixed before N05 intervention) | hooks validate: PASS |
-| 2 | Missing frontmatter (id, kind, pillar, quality) | N01_intelligence/knowledge/kc_model_context_protocol.md | Added missing fields (concurrent nucleus fixed before N05 intervention) | hooks validate: PASS |
+| 1 | Missing frontmatter (id, kind, pillar, quality) | N01_intelligence/P01_knowledge/embedding_config_intelligence.md | Added missing fields (concurrent nucleus fixed before N05 intervention) | hooks validate: PASS |
+| 2 | Missing frontmatter (id, kind, pillar, quality) | N01_intelligence/P01_knowledge/kc_model_context_protocol.md | Added missing fields (concurrent nucleus fixed before N05 intervention) | hooks validate: PASS |
 | 3 | Missing pillar in audit files | N02_marketing/audits/* (4 files) | Added pillar: P07 (concurrent nucleus fixed) | hooks validate: PASS |
-| 4 | Missing frontmatter in knowledge files | N02_marketing/knowledge/* (4 files) | Added id, kind, pillar, quality (concurrent nucleus fixed) | hooks validate: PASS |
+| 4 | Missing frontmatter in knowledge files | N02_marketing/P01_knowledge/* (4 files) | Added id, kind, pillar, quality (concurrent nucleus fixed) | hooks validate: PASS |
 | 5 | training-method-builder: missing 12 ISOs | archetypes/builders/training-method-builder/ | Created all 12 missing ISOs (manifest, instruction, schema, system_prompt, knowledge_card, examples, tools, memory, architecture, collaboration, config, output_template, quality_gate) | doctor: PASS |
 | 6 | agent-computer-interface-builder: missing ISO | archetypes/builders/agent-computer-interface-builder/bld_tools_agent_computer_interface.md | Created missing tools ISO | doctor: PASS |
 | 7 | bias-audit-builder: 4 low-density ISOs | bld_output_template, bld_examples, bld_manifest, bld_memory | Appended dense reference tables to push density above 0.78 | doctor: WARN (acceptable) |

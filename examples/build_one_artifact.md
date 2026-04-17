@@ -74,7 +74,7 @@ python _tools/cex_run.py "create simple agent" --execute
 Agent outputs for N03 live under `N03_engineering/`. Existing examples in this repo include:
 
 ```text
-N03_engineering/agents/agent_engineering.md
+N03_engineering/P02_model/agent_engineering.md
 N03_engineering/compiled/agent_engineering.yaml
 ```
 
@@ -94,7 +94,7 @@ llm_function: BECOME
 
 After a successful `--execute` run, expect:
 
-- a new or updated `.md` artifact in `N03_engineering/agents/`
+- a new or updated `.md` artifact in `N03_engineering/P02_model/`
 - a compiled `.yaml` alongside it in `N03_engineering/compiled/`
 - a git diff you can review before commit
 

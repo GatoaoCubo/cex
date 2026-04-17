@@ -12,7 +12,7 @@ tags: [config, permission, governance, access, n03]
 
 <!-- 8F: F1 constrain=P09/permission F2 become=permission-builder F3 inject=nucleus_def_n03, kc_permission, P09_config, N03 runtime context
      F4 reason=minimum necessary read/write/execute rights for N03 artifact work F5 call=rg, Get-Content, apply_patch F6 produce=4798 bytes
-     F7 govern=frontmatter+sections+tables+ascii+self-check F8 collaborate=save N03_engineering/config/con_permission_n03.md -->
+     F7 govern=frontmatter+sections+tables+ascii+self-check F8 collaborate=save N03_engineering/P09_config/con_permission_n03.md -->
 
 # Engineering Permission Policy
 
@@ -31,8 +31,8 @@ tags: [config, permission, governance, access, n03]
 
 | Subject | Resource | Read | Write | Execute | Notes |
 |---------|----------|------|-------|---------|-------|
-| `n03_builder` | `N03_engineering/schemas/**` | yes | yes | no | Owns schema markdown |
-| `n03_builder` | `N03_engineering/config/**` | yes | yes | no | Owns config markdown |
+| `n03_builder` | `N03_engineering/P06_schema/**` | yes | yes | no | Owns schema markdown |
+| `n03_builder` | `N03_engineering/P09_config/**` | yes | yes | no | Owns config markdown |
 | `n03_builder` | `N03_engineering/compiled/**` | yes | yes | no | Writes via compile flow |
 | `n03_builder` | `archetypes/builders/**` | yes | no | no | Context only |
 | `n03_builder` | `P01_knowledge/library/**` | yes | no | no | Context only |
@@ -80,8 +80,8 @@ subjects:
         - P01_knowledge/library/**
         - .cex/runtime/handoffs/**
       write:
-        - N03_engineering/schemas/**
-        - N03_engineering/config/**
+        - N03_engineering/P06_schema/**
+        - N03_engineering/P09_config/**
         - N03_engineering/compiled/**
       execute:
         - _tools/cex_compile.py

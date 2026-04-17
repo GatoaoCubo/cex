@@ -11,7 +11,7 @@ name: knowledge_provider_secrets
 provider: vault_or_platform_env
 rotation_policy: mixed_60d_90d_120d
 ---
-<!-- 8F: F1 constrain=P09/secret_config F2 become=secret-config-builder F3 inject=n04-knowledge+kc_secret_config+P09 examples+repo env patterns F4 reason=pointer registry for secrets used by knowledge indexing services F5 call=shell,apply_patch F6 produce=4757 bytes F7 govern=frontmatter+ascii+density+80-line self-check F8 collaborate=N04_knowledge/config/con_secret_config_n04.md -->
+<!-- 8F: F1 constrain=P09/secret_config F2 become=secret-config-builder F3 inject=n04-knowledge+kc_secret_config+P09 examples+repo env patterns F4 reason=pointer registry for secrets used by knowledge indexing services F5 call=shell,apply_patch F6 produce=4757 bytes F7 govern=frontmatter+ascii+density+80-line self-check F8 collaborate=N04_knowledge/P09_config/con_secret_config_n04.md -->
 # Knowledge Secret Config
 ## Purpose
 N04 touches embedding providers, vector stores, and export channels that all require credentials.

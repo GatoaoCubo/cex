@@ -122,7 +122,7 @@ tags: [intent-resolution, cex-8f-motor, fixes, verification]
 ## Files Modified
 
 - `_tools/cex_8f_motor.py` -- VERB_TABLE (+79 entries), VERB_EXTRA_BUILDERS (+3 actions), OBJECT_TO_KINDS (+65 entries), AND regex fix, fuzzy matching, confidence scoring, --dry-run alias
-- `N05_operations/output/intent_resolution_fixes_results.md` -- this report
+- `N05_operations/P05_output/intent_resolution_fixes_results.md` -- this report
 
 ## Boundary
 

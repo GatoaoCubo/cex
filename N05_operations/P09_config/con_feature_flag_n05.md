@@ -10,7 +10,7 @@ tags: [config, flags, operations, rollout, safety]
 ---
 <!-- 8F: F1 constrain=P09/feature_flag F2 become=feature-flag-builder F3 inject=nucleus_def_n05+n05-operations+kc_feature_flag+P09_config+N05 rollout patterns
      F4 reason=feature gates for risky operational pathways with immediate kill switches F5 call=apply_patch F6 produce=4640 bytes
-     F7 govern=self-check headings+tables+gating_wrath+ascii+80_lines F8 collaborate=N05_operations/config/con_feature_flag_n05.md -->
+     F7 govern=self-check headings+tables+gating_wrath+ascii+80_lines F8 collaborate=N05_operations/P09_config/con_feature_flag_n05.md -->
 
 # Ops Feature Flags
 
