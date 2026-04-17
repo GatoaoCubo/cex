@@ -5,8 +5,9 @@ pillar: P06
 nucleus: n06
 title: "Input Schema -- Checkout and Order Flow Contract"
 version: 1.0.0
-quality: null
+quality: 9.0
 tags: [checkout, order, schema, payment, commercial, contract]
+density_score: 1.0
 ---
 
 # Input Schema: Checkout and Order Flow Contract

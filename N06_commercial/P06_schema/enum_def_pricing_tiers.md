@@ -5,8 +5,9 @@ pillar: P06
 nucleus: n06
 title: "Enum Definition -- Pricing Tier Taxonomy"
 version: 1.0.0
-quality: null
+quality: 9.0
 tags: [pricing, tiers, enum, commercial, saas, packaging]
+density_score: 1.0
 ---
 
 # Enum Definition: Pricing Tier Taxonomy
