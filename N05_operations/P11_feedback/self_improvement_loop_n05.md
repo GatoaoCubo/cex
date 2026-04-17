@@ -8,7 +8,7 @@ created: "2026-04-17"
 updated: "2026-04-17"
 author: n05_operations
 domain: quality-gate-enforcement
-quality: null
+quality: 9.1
 tags: [self_improvement_loop, operations, quality, N05, slo, shift_left, gating_wrath]
 tldr: "Autonomous loop: scan artifacts below SLO, trigger cex_evolve.py, update thresholds from failure rates, push validation earlier in pipeline."
 loop_stages:
@@ -23,6 +23,7 @@ frequency: daily
 slo_threshold: 8.5
 escalation_threshold: 7.0
 max_retries: 2
+density_score: 1.0
 ---
 
 # N05 Quality Gate Evolution Loop

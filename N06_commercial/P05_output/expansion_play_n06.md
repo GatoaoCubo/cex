@@ -5,8 +5,9 @@ pillar: P05
 nucleus: n06
 title: "Expansion Play -- Upsell and Cross-Sell Trigger Conditions"
 version: 1.0.0
-quality: null
+quality: 9.0
 tags: [expansion, upsell, cross-sell, revenue, upgrade, commercial, growth]
+density_score: 1.0
 ---
 
 # Expansion Play: Upsell and Cross-Sell Trigger Conditions
