@@ -9,8 +9,9 @@ created: "2026-04-16"
 updated: "2026-04-16"
 author: n03_engineering
 domain: engineering operational memory
-quality: null
+quality: 9.1
 tags: [runtime_state, p10, n03, routing, decisions, inventive_pride]
+density_score: 0.99
 ---
 <!-- 8F: F1=runtime_state/P10 F2=runtime-state-builder F3=nucleus_def_n03+kc_runtime_state+P10_schema F4=runtime state for routing and active build defaults
      F5=Get-Content+rg+apply_patch+cex_compile.py F6=bytes:5385 F7=self-check:frontmatter+8f+properties+80l+ascii F8=N03_engineering/P10_memory/mem_runtime_state_n03.md -->
