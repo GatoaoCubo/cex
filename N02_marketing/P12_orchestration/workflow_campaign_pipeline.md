@@ -5,10 +5,11 @@ pillar: P12
 nucleus: n02
 title: "End-to-End Campaign Workflow Pipeline"
 version: 1.0.0
-quality: null
+quality: 8.9
 tags: [workflow, campaign_pipeline, brief_to_publish, orchestration, P12, n02_marketing]
 domain: campaign-orchestration
 status: active
+density_score: 1.0
 ---
 
 # End-to-End Campaign Workflow Pipeline

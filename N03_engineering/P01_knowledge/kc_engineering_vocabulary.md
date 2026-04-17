@@ -7,10 +7,11 @@ version: 1.0.0
 created: 2026-04-17
 author: n03_engineering
 domain: artifact-construction
-quality: null
+quality: 9.2
 tags: [knowledge-card, vocabulary, N03, controlled-vocabulary, engineering, 8F, ubiquitous-language]
 tldr: "N03's controlled vocabulary KC. 22 canonical engineering terms with definitions, CEX applications, anti-patterns, and industry sources. Loaded at F2b SPEAK to enforce ubiquitous language in all N03 outputs."
 density_score: 0.92
+updated: "2026-04-17"
 ---
 
 # Knowledge Card: Engineering Vocabulary (N03 Controlled)
