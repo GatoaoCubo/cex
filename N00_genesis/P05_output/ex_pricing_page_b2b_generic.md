@@ -7,7 +7,7 @@ title: "B2B Pricing Page Template -- Subscription Tiers + Volume Discounts"
 description: "Pricing page for B2B/partner channel. Three subscription tiers, volume discount table, feature comparison matrix, and annual discount CTA."
 domain: ecommerce
 nucleus: N06
-quality: null
+quality: 9.0
 tags: [pricing-page, b2b, subscription, tiers, feature-matrix, volume-discount]
 brand_placeholders:
   - BRAND_NAME
@@ -18,6 +18,7 @@ brand_placeholders:
   - BRAND_SUBSCRIPTION_PRICE_TIER_3
   - BRAND_PARTNER_EMAIL
   - BRAND_WHATSAPP_B2B
+density_score: 1.0
 ---
 
 # B2B Pricing Page Template
