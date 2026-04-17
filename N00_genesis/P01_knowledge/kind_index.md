@@ -5,8 +5,9 @@ pillar: P01
 nucleus: n00
 title: "P01 Knowledge -- Kind Index"
 version: 1.0
-quality: null
+quality: 9.0
 tags: [index, p01, archetype, n00]
+density_score: 1.0
 ---
 
 <!-- 8F: F1=knowledge_card P01 F2=knowledge-card-builder F3=kinds_meta+schema F4=plan F5=scan F6=produce F7=gate F8=save -->
