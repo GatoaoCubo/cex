@@ -6,7 +6,7 @@ nucleus: n00
 title: "CEX Universal Vocabulary -- Mentor Context"
 version: "1.0.0"
 author: n07_orchestrator
-quality: null
+quality: 9.1
 tags: [mentor, vocabulary, taxonomy, 8f, pillars, kinds, nuclei, archetype]
 tldr: "Pre-compiled reference for /mentor: 8F pipeline + 12 pillars + 257 kinds + 8 nuclei."
 domain: "CEX system"
