@@ -5,10 +5,11 @@ pillar: P04
 nucleus: n02
 title: "Brand Voice Compliance Filter -- Content Safety and Quality Gate"
 version: 1.0.0
-quality: null
+quality: 8.9
 tags: [content_filter, brand_voice, compliance, content_safety, P04, n02_marketing]
 domain: content-governance
 status: active
+density_score: 1.0
 ---
 
 # Brand Voice Compliance Filter

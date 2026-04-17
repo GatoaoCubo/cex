@@ -5,10 +5,11 @@ pillar: P04
 nucleus: n02
 title: "Social Publisher -- Multi-Channel Content Publishing Tool"
 version: 1.0.0
-quality: null
+quality: 8.9
 tags: [browser_tool, social_publisher, multi_channel, distribution, publishing, P04, n02_marketing]
 domain: content-distribution
 status: active
+density_score: 1.0
 ---
 
 # Social Publisher -- Multi-Channel Content Distribution Tool
