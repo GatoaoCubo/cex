@@ -4,7 +4,7 @@ kind: workflow
 pillar: P12
 title: Multi-Marketplace Sync Workflow
 version: 0.1.0
-quality: null
+quality: 8.9
 status: template
 brand_placeholders:
   - BRAND_NAME
@@ -13,6 +13,7 @@ brand_placeholders:
   - BRAND_MELI_USER_ID
   - BRAND_SUPABASE_PROJECT_REF
 tags: [commerce, template, distillation, orchestration, sync, multi_marketplace]
+density_score: 0.99
 ---
 
 # Multi-Marketplace Sync Workflow
