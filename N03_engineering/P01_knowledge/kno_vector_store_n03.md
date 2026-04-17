@@ -9,8 +9,9 @@ created: "2026-04-16"
 updated: "2026-04-16"
 author: n03_engineering
 domain: engineering retrieval architecture
-quality: null
+quality: 9.1
 tags: [vector_store, p01, n03, pgvector, metadata, inventive_pride]
+density_score: 0.98
 ---
 <!-- 8F: F1=vector_store/P01 F2=vector-store-builder F3=nucleus_def_n03+kc_vector_store+P01_schema F4=metadata-rich store for engineering retrieval
      F5=Get-Content+rg+apply_patch+cex_compile.py F6=bytes:5830 F7=self-check:frontmatter+8f+properties+80l+ascii F8=N03_engineering/P01_knowledge/kno_vector_store_n03.md -->

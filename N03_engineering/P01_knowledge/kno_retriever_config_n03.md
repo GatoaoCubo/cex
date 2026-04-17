@@ -9,8 +9,9 @@ created: "2026-04-16"
 updated: "2026-04-16"
 author: n03_engineering
 domain: engineering retrieval architecture
-quality: null
+quality: 9.1
 tags: [retriever_config, p01, n03, hybrid_search, reranking, inventive_pride]
+density_score: 1.0
 ---
 <!-- 8F: F1=retriever_config/P01 F2=retriever-config-builder F3=nucleus_def_n03+kc_retriever_config+P01_schema F4=hybrid retrieval tuned for builder precision
      F5=Get-Content+rg+apply_patch+cex_compile.py F6=bytes:6085 F7=self-check:frontmatter+8f+properties+80l+ascii F8=N03_engineering/P01_knowledge/kno_retriever_config_n03.md -->
