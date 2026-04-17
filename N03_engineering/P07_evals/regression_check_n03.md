@@ -7,7 +7,7 @@ version: 1.0.0
 created: 2026-04-17
 author: n03_engineering
 domain: artifact-construction
-quality: null
+quality: 9.1
 tags: [regression-check, N03, quality, build, drift-detection, 8F]
 tldr: "Regression detection protocol for N03 artifact quality. Tracks quality trends per kind, flags score drops >= 0.5 from rolling baseline, detects vocabulary drift, and identifies structural regressions after schema migrations."
 density_score: 0.89

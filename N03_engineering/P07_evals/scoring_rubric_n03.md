@@ -7,10 +7,11 @@ version: 1.0.0
 created: 2026-04-17
 author: n03_engineering
 domain: artifact-construction
-quality: null
+quality: 8.9
 tags: [scoring-rubric, N03, quality, 5D, evaluation, 8F, governance]
 tldr: "5-dimension weighted scoring rubric for all artifacts produced by N03. D1=Structural, D2=Semantic, D3=Density, D4=Invariant, D5=Coverage. Target score >= 9.0 for production."
 density_score: 0.91
+updated: "2026-04-17"
 ---
 
 # Scoring Rubric: N03 Artifact Quality
