@@ -8,10 +8,11 @@ version: 1.0.0
 created: 2026-04-17
 author: n01_intelligence
 domain: research-intelligence
-quality: null
+quality: 8.8
 tags: [benchmark_suite, research_benchmarks, n01, analytical_envy, ground_truth, performance]
 tldr: "Benchmark suite for N01 research capability: 5 benchmark categories with 20 test cases each, covering competitive analysis accuracy, source retrieval quality, synthesis depth, bias detection, and time-to-insight."
 density_score: 0.91
+updated: "2026-04-17"
 ---
 
 <!-- 8F: F1 constrain=P07/benchmark_suite F2 become=benchmark-suite-builder F3 inject=eval_framework_n01+llm_judge_n01+scoring_rubric_research+benchmark_research_quality F4 reason=Analytical Envy is not self-congratulatory -- N01 must benchmark its own performance against ground truth and competing approaches F5 call=cex_compile F6 produce=benchmark_suite_n01.md F7 govern=frontmatter+ascii+tables F8 collaborate=N01_intelligence/P07_evals/ -->
