@@ -42,7 +42,9 @@
     },
     "playwright": {
       "command": "cmd",
-      "args": ["/c", "npx", "-y", "@playwright/mcp", "--cdp-endpoint", "http://localhost:9222"]
+      "args": ["/c", "npx", "-y", "@playwright/mcp", "--cdp-endpoint", "http://localhost:9222"],
+      "disabled": true,
+      "_setup": "Run boot/chrome_cdp.ps1 first, then set disabled: false"
     }
   }
 }
