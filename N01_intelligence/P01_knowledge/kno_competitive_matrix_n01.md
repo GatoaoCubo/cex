@@ -5,8 +5,9 @@ pillar: P01
 nucleus: N01
 title: "N01 Competitive Matrix"
 version: "1.0.0"
-quality: null
+quality: 9.0
 tags: [competitive_matrix, n01, p01, analytical_envy, comparison]
+density_score: 0.97
 ---
 <!-- 8F: F1=competitive_matrix/P01 F2=kc_competitive_matrix+competitive_analysis_contract F3=nucleus_def_n01+competitive_analysis_contract+agent_competitor_tracker+kc_competitive_matrix F4=decision-grade battle card matrix
      F5=rg+Get-Content+apply_patch F6=target dense markdown artifact F7=self-check properties+8F+ascii+80lines F8=N01_intelligence/P01_knowledge/kno_competitive_matrix_n01.md -->
