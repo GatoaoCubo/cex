@@ -5,8 +5,9 @@ pillar: P01
 nucleus: n06
 title: Commercial Vector Store
 version: 1.0
-quality: null
+quality: 9.0
 tags: [knowledge, vector_store, pgvector, search, pricing, monetization]
+density_score: 1.0
 ---
 <!-- 8F: F1=P01/vector_store F2=vector-store-builder F3=nucleus_def_n06.md,kc_vector_store.md,P01_knowledge/_schema.yaml,N06 W1 config/schema F4=pgvector_backed_storage_for_revenue_scoped_similarity_search F5=apply_patch;python _tools/cex_compile.py F6=author_dense_markdown_artifact F7=frontmatter_ascii_density_linecount_review F8=N06_commercial/P01_knowledge/kno_vector_store_n06.md -->
 
