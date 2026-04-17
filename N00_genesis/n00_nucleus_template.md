@@ -5,8 +5,9 @@ pillar: P02
 nucleus: n00
 title: "N00 Nucleus Template -- Blank Instantiation Contract"
 version: 1.0
-quality: null
+quality: 9.0
 tags: [n00, template, nucleus_def, archetype, instantiation]
+density_score: 1.0
 ---
 
 <!-- 8F: F1=nucleus_def P02 F2=nucleus-def-builder F3=kinds_meta+nucleus_defs F4=plan F5=scan F6=produce F7=gate F8=save -->
