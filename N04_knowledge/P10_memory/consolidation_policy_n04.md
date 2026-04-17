@@ -5,7 +5,7 @@ pillar: P10
 nucleus: n04
 title: "Consolidation Policy -- N04 Memory Consolidation Rules"
 version: "1.0.0"
-quality: null
+quality: 9.2
 tags: [consolidation_policy, memory, episodic, n04, P10, TTL, similarity]
 domain: knowledge management
 status: active
