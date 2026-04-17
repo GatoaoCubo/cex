@@ -7,10 +7,11 @@ version: 1.0.0
 created: 2026-04-17
 author: n03_engineering
 domain: artifact-construction
-quality: null
+quality: 9.2
 tags: [llm-judge, N03, peer-review, quality, evaluation, semantic]
 tldr: "LLM-as-judge configuration for N03 artifact peer review. Applied when L1+L2 structural+rubric score >= 8.5. Semantic evaluation across 3 criteria: domain accuracy, vocabulary compliance, engineering craft."
 density_score: 0.90
+updated: "2026-04-17"
 ---
 
 # LLM Judge: N03 Artifact Peer Review

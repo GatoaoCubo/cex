@@ -7,10 +7,11 @@ version: 1.0.0
 created: 2026-04-17
 author: n03_engineering
 domain: artifact-construction
-quality: null
+quality: 8.8
 tags: [golden-test, N03, builder, expected-output, regression, 8F]
 tldr: "Golden output tests for N03's primary builders. Each test case defines: input intent, expected kind, expected frontmatter fields, structural assertions, and forbidden patterns. Run before any builder ISO update."
 density_score: 0.91
+updated: "2026-04-17"
 ---
 
 # Golden Tests: N03 Builder Outputs
