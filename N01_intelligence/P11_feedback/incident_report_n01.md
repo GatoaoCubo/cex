@@ -8,10 +8,11 @@ version: 1.0.0
 created: 2026-04-17
 author: n01_intelligence
 domain: research-intelligence
-quality: null
+quality: 9.2
 tags: [incident_report, research_failure, n01, post_mortem, quality_failure]
 tldr: "Incident report template for N01 research quality failures: captures what went wrong, root cause, impact, and systematic fix. Filed when any research output scores < 7.0 or causes downstream harm."
 density_score: 0.86
+updated: "2026-04-17"
 ---
 
 <!-- 8F: F1 constrain=P11/incident_report F2 become=incident-report-builder F3 inject=regression_check_n01+learning_record_n01+quality_gate_intelligence+eval_framework_n01 F4 reason=Analytical Envy demands we learn from failures -- an incident without a post-mortem is just accepted degradation F5 call=cex_compile F6 produce=incident_report_n01.md F7 govern=frontmatter+ascii+tables F8 collaborate=N01_intelligence/P11_feedback/ -->
