@@ -7,10 +7,11 @@ version: 1.0.0
 created: 2026-04-17
 author: n03_engineering
 domain: artifact-construction
-quality: null
+quality: 9.1
 tags: [code-executor, N03, sandbox, validation, build, compile, 8F]
 tldr: "Sandboxed code execution environment for N03 build validation. Executes cex_compile.py, cex_doctor.py, cex_sanitize.py, and cex_score.py in a controlled context. Captures stdout/stderr, enforces timeout, and reports structured results to F7 GOVERN."
 density_score: 0.90
+updated: "2026-04-17"
 ---
 
 # Code Executor: N03 Sandboxed Build Validation

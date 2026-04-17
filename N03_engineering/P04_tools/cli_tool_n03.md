@@ -7,10 +7,11 @@ version: 1.0.0
 created: 2026-04-17
 author: n03_engineering
 domain: artifact-construction
-quality: null
+quality: 9.1
 tags: [cli-tool, N03, build, interface, cex-build, 8F, dispatch]
 tldr: "CLI interface contract for cex_build.py -- N03's primary build entry point. Documents all flags, subcommands, exit codes, and integration with the 8F pipeline. Used by N07 dispatch and direct human invocation."
 density_score: 0.91
+updated: "2026-04-17"
 ---
 
 # CLI Tool: N03 Build Interface (cex_build)
