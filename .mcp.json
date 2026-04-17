@@ -17,7 +17,7 @@
     },
     "markitdown": {
       "command": "cmd",
-      "args": ["/c", "npx", "-y", "markitdown-mcp"]
+      "args": ["/c", "npx", "-y", "markitdown-mcp-npx"]
     },
     "brave-search": {
       "command": "cmd",
@@ -39,6 +39,10 @@
         "CANVA_CLIENT_ID": "${CANVA_CLIENT_ID}",
         "CANVA_CLIENT_SECRET": "${CANVA_CLIENT_SECRET}"
       }
+    },
+    "playwright": {
+      "command": "cmd",
+      "args": ["/c", "npx", "-y", "@playwright/mcp", "--cdp-endpoint", "http://localhost:9222"]
     }
   }
 }

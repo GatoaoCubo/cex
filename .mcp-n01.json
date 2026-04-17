@@ -11,7 +11,7 @@
     },
     "markitdown": {
       "command": "cmd",
-      "args": ["/c", "npx", "-y", "markitdown-mcp"]
+      "args": ["/c", "npx", "-y", "markitdown-mcp-npx"]
     },
     "brave-search": {
       "command": "cmd",

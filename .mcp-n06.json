@@ -6,21 +6,12 @@
     },
     "markitdown": {
       "command": "cmd",
-      "args": ["/c", "npx", "-y", "markitdown-mcp"]
+      "args": ["/c", "npx", "-y", "markitdown-mcp-npx"]
     },
     "stripe": {
       "command": "cmd",
       "args": ["/c", "npx", "-y", "@stripe/mcp"],
       "env": { "STRIPE_SECRET_KEY": "${STRIPE_SECRET_KEY}" }
-    },
-    "hotmart": {
-      "command": "cmd",
-      "args": ["/c", "npx", "-y", "mcp-server-hotmart"],
-      "env": {
-        "HOTMART_CLIENT_ID": "${HOTMART_CLIENT_ID}",
-        "HOTMART_CLIENT_SECRET": "${HOTMART_CLIENT_SECRET}",
-        "HOTMART_BASIC_AUTH": "${HOTMART_BASIC_AUTH}"
-      }
     },
     "canva": {
       "command": "cmd",

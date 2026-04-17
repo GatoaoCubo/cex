@@ -6,8 +6,8 @@
       "env": { "GITHUB_TOKEN": "${GITHUB_TOKEN}" }
     },
     "fetch": {
-      "command": "cmd",
-      "args": ["/c", "npx", "-y", "@anthropic-ai/sdk-mcp-fetch"]
+      "command": "uvx",
+      "args": ["mcp-server-fetch", "--ignore-robots-txt"]
     },
     "canva": {
       "command": "cmd",
