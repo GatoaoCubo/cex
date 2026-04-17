@@ -5,8 +5,9 @@ pillar: P09
 nucleus: n06
 title: Commercial Permission Model
 version: 1.0
-quality: null
+quality: 9.0
 tags: [config, permission, access, premium, governance]
+density_score: 1.0
 ---
 
 <!-- 8F: F1 constrain=P09/permission F2 become=permission-builder F3 inject=nucleus_def_n06.md,n06-commercial.md,bld_manifest_permission.md,kc_permission.md,P09_config/_schema.yaml F4 reason=least_privilege_access_for_high_value_commercial_resources F5 call=apply_patch;python _tools/cex_compile.py F6 produce=5152_bytes F7 govern=frontmatter_sections_ascii_density_review F8 collaborate=N06_commercial/P09_config/con_permission_n06.md -->
