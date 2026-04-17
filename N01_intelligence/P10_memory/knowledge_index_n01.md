@@ -8,10 +8,11 @@ version: 1.0.0
 created: 2026-04-17
 author: n01_intelligence
 domain: research-intelligence
-quality: null
+quality: 9.2
 tags: [knowledge_index, corpus_index, n01, retrieval, search, analytical_envy]
 tldr: "Master index of the N01 intelligence corpus: 60+ knowledge cards, entity profiles, research outputs, and compiled artifacts. Enables retriever_n01 to perform sub-500ms corpus queries. Updated on every F8 COLLABORATE."
 density_score: 0.90
+updated: "2026-04-17"
 ---
 
 <!-- 8F: F1 constrain=P10/knowledge_index F2 become=knowledge-index-builder F3 inject=knowledge_index_intelligence+retriever_n01+entity_memory_n01+embedding_config_intelligence F4 reason=Analytical Envy = insatiable data hunger; an unindexed corpus is data you cannot use -- the index IS the intelligence F5 call=cex_compile F6 produce=knowledge_index_n01.md F7 govern=frontmatter+ascii+tables F8 collaborate=N01_intelligence/P10_memory/ -->

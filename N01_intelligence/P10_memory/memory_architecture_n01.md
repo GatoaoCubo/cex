@@ -8,10 +8,11 @@ version: 1.0.0
 created: 2026-04-17
 author: n01_intelligence
 domain: research-intelligence
-quality: null
+quality: 9.2
 tags: [memory_architecture, n01, memory_layers, persistence, retrieval, analytical_envy]
 tldr: "4-layer memory architecture for N01: working (session context), episodic (research sessions), semantic (KCs + entities), procedural (methods). Maps storage, retrieval, and decay rules for each layer."
 density_score: 0.91
+updated: "2026-04-17"
 ---
 
 <!-- 8F: F1 constrain=P10/memory_architecture F2 become=memory-architecture-builder F3 inject=knowledge_index_n01+entity_memory_n01+mem_memory_summary_n01+mem_runtime_state_n01 F4 reason=Analytical Envy compounding requires a memory architecture, not just ad-hoc storage -- the structure IS the strategic advantage F5 call=cex_compile F6 produce=memory_architecture_n01.md F7 govern=frontmatter+ascii+tables F8 collaborate=N01_intelligence/P10_memory/ -->
