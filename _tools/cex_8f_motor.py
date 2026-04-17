@@ -136,7 +136,7 @@ except ImportError:
 
 CEX_ROOT = Path(__file__).resolve().parent.parent
 BUILDER_MAP_PATH = CEX_ROOT / "_docs" / "8F_BUILDER_MAP.yaml"
-KC_LIBRARY_PATH = CEX_ROOT / "P01_knowledge" / "library"
+KC_LIBRARY_PATH = CEX_ROOT / "N00_genesis" / "P01_knowledge" / "library"
 KC_DOMAIN_PATH = KC_LIBRARY_PATH / "domain"
 KC_KIND_PATH = KC_LIBRARY_PATH / "kind"
 KC_INDEX_PATH = KC_LIBRARY_PATH / "index.yaml"

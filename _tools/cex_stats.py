@@ -38,7 +38,7 @@ def count_kinds() -> int:
 
 def count_kcs() -> int:
     """kc_*.md files in P01_knowledge."""
-    return sum(1 for _ in (ROOT / "P01_knowledge").rglob("kc_*.md"))
+    return sum(1 for _ in (ROOT / "N00_genesis" / "P01_knowledge").rglob("kc_*.md"))
 
 
 def count_subagents() -> int:

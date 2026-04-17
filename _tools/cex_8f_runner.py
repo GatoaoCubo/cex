@@ -1378,7 +1378,7 @@ class EightFRunner:
         else:
             # Execute mode: save artifact
             out_dir = self.output_dir or (
-                CEX_ROOT / PILLAR_DIRS.get(self.state.pillar, "P01_knowledge") / "examples"
+                CEX_ROOT / PILLAR_DIRS.get(self.state.pillar, "N00_genesis/P01_knowledge") / "examples"
             )
             out_dir = Path(out_dir)
             out_dir.mkdir(parents=True, exist_ok=True)

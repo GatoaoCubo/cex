@@ -780,7 +780,7 @@ class CrewRunner:
         search_dirs = [
             crew_path.parent,
             *sorted((cex_root).glob("N0*/crews")),
-            *sorted((cex_root).glob("P02_*")),
+            *sorted((cex_root / "N00_genesis").glob("P02_*")),
         ]
         for role in roles:
             aid = role["assignment_id"].strip()

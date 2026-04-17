@@ -26,7 +26,7 @@ from typing import Any
 ROOT = Path(__file__).resolve().parent.parent
 BUILDERS_DIR = ROOT / "archetypes" / "builders"
 KINDS_META = ROOT / ".cex" / "kinds_meta.json"
-KC_DIR = ROOT / "P01_knowledge" / "library" / "kind"
+KC_DIR = ROOT / "N00_genesis" / "P01_knowledge" / "library" / "kind"
 DEFAULT_OUTPUT_DIR = ROOT / "_data" / "ft"
 
 # Canonical kind -> nucleus mapping from kc_intent_resolution_map.md

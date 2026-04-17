@@ -47,7 +47,7 @@ HARVESTED_FOOTER = "# =============== HARVESTED SECTION END ==============="
 
 SCAN_TARGETS: List[Tuple[Path, str]] = [
     (CEX_ROOT / "N01_intelligence" / "research", "**/*.md"),
-    (CEX_ROOT / "P01_knowledge" / "library", "**/*.md"),
+    (CEX_ROOT / "N00_genesis" / "P01_knowledge" / "library", "**/*.md"),
     (CEX_ROOT / "_docs" / "specs", "**/*.md"),
     (CEX_ROOT / "archetypes" / "builders", "**/bld_knowledge_card_*.md"),
     (CEX_ROOT / ".claude" / "rules", "*.md"),

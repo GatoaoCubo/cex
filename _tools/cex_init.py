@@ -27,18 +27,18 @@ CEX_ROOT = Path(__file__).resolve().parent.parent
 # -- Constants ----------------------------------------------------------------
 
 ALL_PILLARS = [
-    "P01_knowledge",
-    "P02_model",
-    "P03_prompt",
-    "P04_tools",
-    "P05_output",
-    "P06_schema",
-    "P07_evals",
-    "P08_architecture",
-    "P09_config",
-    "P10_memory",
-    "P11_feedback",
-    "P12_orchestration",
+    "N00_genesis/P01_knowledge",
+    "N00_genesis/P02_model",
+    "N00_genesis/P03_prompt",
+    "N00_genesis/P04_tools",
+    "N00_genesis/P05_output",
+    "N00_genesis/P06_schema",
+    "N00_genesis/P07_evals",
+    "N00_genesis/P08_architecture",
+    "N00_genesis/P09_config",
+    "N00_genesis/P10_memory",
+    "N00_genesis/P11_feedback",
+    "N00_genesis/P12_orchestration",
 ]
 
 PILLAR_DESCRIPTIONS = {

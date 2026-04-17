@@ -28,7 +28,7 @@ from pathlib import Path
 import yaml
 
 CEX_ROOT = Path(__file__).parent.parent
-LIBRARY_DIR = CEX_ROOT / "P01_knowledge" / "library"
+LIBRARY_DIR = CEX_ROOT / "N00_genesis" / "P01_knowledge" / "library"
 SOURCES_DIR = LIBRARY_DIR / "sources"
 INDEX_PATH = LIBRARY_DIR / "index.yaml"
 

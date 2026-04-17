@@ -88,7 +88,7 @@ def main() -> int:
     if args.paths:
         doc_paths = [Path(x) for x in args.paths]
     else:
-        lib = ROOT / "P01_knowledge" / "library"
+        lib = ROOT / "N00_genesis" / "P01_knowledge" / "library"
         doc_paths = list(lib.rglob("*.md")) if lib.exists() else []
 
     if not doc_paths:

@@ -24,13 +24,13 @@ import yaml
 
 # Map artifact type -> template file
 TYPE_TO_TEMPLATE = {
-    "knowledge_card": "P01_knowledge/templates/tpl_knowledge_card_domain.md",
-    "knowledge_card_meta": "P01_knowledge/templates/tpl_knowledge_card_meta.md",
-    "knowledge_card_test": "P01_knowledge/templates/tpl_knowledge_card_test.md",
+    "knowledge_card": "N00_genesis/P01_knowledge/templates/tpl_knowledge_card_domain.md",
+    "knowledge_card_meta": "N00_genesis/P01_knowledge/templates/tpl_knowledge_card_meta.md",
+    "knowledge_card_test": "N00_genesis/P01_knowledge/templates/tpl_knowledge_card_test.md",
 }
 
 CEX_ROOT = Path(__file__).parent.parent  # _tools/ -> CEX/
-LIBRARY_DIR = CEX_ROOT / "P01_knowledge" / "library"
+LIBRARY_DIR = CEX_ROOT / "N00_genesis" / "P01_knowledge" / "library"
 INDEX_PATH = LIBRARY_DIR / "index.yaml"
 
 

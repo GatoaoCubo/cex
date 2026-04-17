@@ -62,7 +62,7 @@ from cex_shared import (
 CONFIG_PATH = CEX_ROOT / ".cex" / "config" / "nucleus_models.yaml"
 CACHE_DIR = CEX_ROOT / ".cex" / "cache" / "preflight"
 HANDOFFS_DIR = CEX_ROOT / ".cex" / "runtime" / "handoffs"
-KC_DIR = CEX_ROOT / "P01_knowledge" / "library" / "kind"
+KC_DIR = CEX_ROOT / "N00_genesis" / "P01_knowledge" / "library" / "kind"
 
 # TF-IDF stopwords (EN minimal set for ranking)
 _STOPWORDS = frozenset([

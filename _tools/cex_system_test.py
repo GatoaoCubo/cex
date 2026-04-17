@@ -268,14 +268,14 @@ def test_runner_execute(quick: bool = False) -> None:
         test("runner:learning_record", False, "no learning_records dir")
 
     # Cleanup test artifact
-    for f in (CEX_ROOT / "P01_knowledge" / "examples").glob("p01_knowledge_card_create_a*"):
+    for f in (CEX_ROOT / "N00_genesis" / "P01_knowledge" / "examples").glob("p01_knowledge_card_create_a*"):
         f.unlink()
 
 
 def test_kc_library() -> None:
     """Test KC library coverage."""
     print("\n=== KC LIBRARY ===")
-    kc_dir = CEX_ROOT / "P01_knowledge" / "library" / "kind"
+    kc_dir = CEX_ROOT / "N00_genesis" / "P01_knowledge" / "library" / "kind"
     if kc_dir.exists():
         kcs = list(kc_dir.glob("kc_*.md"))
         test("kc:count", len(kcs) >= 98, f"{len(kcs)}/98 kind KCs")
