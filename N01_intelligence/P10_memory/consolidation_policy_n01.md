@@ -8,10 +8,11 @@ version: 1.0.0
 created: 2026-04-17
 author: n01_intelligence
 domain: research-intelligence
-quality: null
+quality: 9.1
 tags: [consolidation_policy, memory_management, n01, decay, archival, compaction]
 tldr: "Rules for N01 memory consolidation: when to merge duplicate entities, when to archive stale KCs, how to compact session records, and when to rebuild the knowledge index. Prevents corpus bloat while preserving compound intelligence."
 density_score: 0.88
+updated: "2026-04-17"
 ---
 
 <!-- 8F: F1 constrain=P10/consolidation_policy F2 become=N00 generic builder pattern F3 inject=memory_architecture_n01+knowledge_index_n01+entity_memory_n01+mem_memory_summary_n01 F4 reason=without consolidation, the corpus grows unboundedly and retrieval quality degrades F5 call=cex_compile F6 produce=consolidation_policy_n01.md F7 govern=frontmatter+ascii+tables F8 collaborate=N01_intelligence/P10_memory/ -->

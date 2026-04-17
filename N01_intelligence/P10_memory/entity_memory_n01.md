@@ -8,10 +8,11 @@ version: 1.0.0
 created: 2026-04-17
 author: n01_intelligence
 domain: research-intelligence
-quality: null
+quality: 9.2
 tags: [entity_memory, n01, entities, research, competitor_tracking, persistence]
 tldr: "Typed entity memory for N01: tracks companies, people, products, papers, and market events across research sessions. Prevents re-researching known entities. Enables compound intelligence over time."
 density_score: 0.89
+updated: "2026-04-17"
 ---
 
 <!-- 8F: F1 constrain=P10/entity_memory F2 become=entity-memory-builder F3 inject=mem_entity_memory_n01+knowledge_index_intelligence+retriever_n01 F4 reason=Analytical Envy demands compounding -- each session builds on prior; entity memory prevents N01 from starting from zero each time F5 call=cex_compile F6 produce=entity_memory_n01.md F7 govern=frontmatter+ascii+tables F8 collaborate=N01_intelligence/P10_memory/ -->
