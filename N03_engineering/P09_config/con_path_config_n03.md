@@ -5,8 +5,9 @@ pillar: P09
 nucleus: n03
 title: Engineering Path Config
 version: 1.0
-quality: null
+quality: 9.0
 tags: [config, paths, engineering, filesystem, n03]
+density_score: 1.0
 ---
 
 

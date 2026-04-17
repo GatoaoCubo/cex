@@ -5,8 +5,9 @@ pillar: P09
 nucleus: n03
 title: Engineering Permission Policy
 version: 1.0
-quality: null
+quality: 9.0
 tags: [config, permission, governance, access, n03]
+density_score: 1.0
 ---
 
 
