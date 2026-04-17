@@ -5,7 +5,7 @@ pillar: P11
 nucleus: n04
 title: "Regression Check -- N04 Retrieval and Knowledge Quality"
 version: "1.0.0"
-quality: null
+quality: 9.1
 tags: [regression_check, n04, retrieval, quality, MRR, P11]
 domain: knowledge management
 status: active

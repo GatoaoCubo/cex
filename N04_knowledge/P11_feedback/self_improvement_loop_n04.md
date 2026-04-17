@@ -5,7 +5,7 @@ pillar: P11
 nucleus: n04
 title: "Self-Improvement Loop -- N04 Knowledge Evolution Protocol"
 version: "1.0.0"
-quality: null
+quality: 9.2
 tags: [self_improvement_loop, n04, knowledge_evolution, retrieval_quality, P11]
 domain: knowledge management
 status: active
