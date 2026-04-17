@@ -6,7 +6,7 @@ nucleus: N01
 domain: security
 title: "Extraction: Trust Tiers (R3 -- ruflo)"
 version: 1.0
-quality: null
+quality: 8.4
 tags: [extraction, trust_tiers, security, agent_card, dispatch_guard, ruflo, port_plan]
 created: 2026-04-17
 source: C:/Users/CEX/Documents/GitHub/_external/ruflo/

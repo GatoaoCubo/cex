@@ -6,7 +6,7 @@ nucleus: N01
 domain: retrieval
 title: "Extraction: HNSW Vector Memory (R1 -- ruflo)"
 version: 1.0
-quality: null
+quality: 8.2
 tags: [extraction, hnsw, vector_memory, retrieval, ruflo, port_plan]
 created: 2026-04-17
 source: C:/Users/CEX/Documents/GitHub/_external/ruflo/

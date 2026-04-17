@@ -5,7 +5,7 @@ pillar: P01
 nucleus: N01
 title: CEX Domain Formal Ontology
 version: "1.0"
-quality: null
+quality: 8.2
 density_score: 0.96
 tags: [ontology, vocabulary, cex-core, cross-synthesis, owl, formal-semantics, ubiquitous-language]
 created: 2026-04-17

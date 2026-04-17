@@ -5,7 +5,7 @@ pillar: P10
 nucleus: N01
 title: CEX Taxonomy Knowledge Graph
 version: "1.0"
-quality: null
+quality: 8.2
 density_score: 0.97
 tags: [taxonomy, knowledge-graph, cex-core, cross-synthesis, 257-kinds, 12-pillars, 8-nuclei]
 created: 2026-04-17
