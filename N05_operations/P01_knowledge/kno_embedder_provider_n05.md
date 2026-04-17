@@ -5,8 +5,9 @@ pillar: P01
 nucleus: N05
 title: "N05 Operations Embedder Provider"
 version: "1.0.0"
-quality: null
+quality: 9.0
 tags: [n05, operations, embedder_provider, gating_wrath, retrieval, ci_cd, evidence]
+density_score: 0.96
 ---
 <!-- 8F: F1=embedder_provider/P01 F2=embedder-provider-builder F3=nucleus_def_n05+P01_schema+kc_embedder_provider+examples+W1 contracts F4=managed primary with strict fallback gates
      F5=shell+apply_patch+cex_compile F6=approx-6KB dense markdown F7=self-check frontmatter+8F+80L+properties+ascii F8=N05_operations/P01_knowledge/kno_embedder_provider_n05.md -->
