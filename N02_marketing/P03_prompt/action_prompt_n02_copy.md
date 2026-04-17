@@ -5,10 +5,11 @@ pillar: P03
 nucleus: n02
 title: "Copy Generation Action Prompt -- Headline, Body, CTA Variants"
 version: 1.0.0
-quality: null
+quality: 9.1
 tags: [action_prompt, copy_generation, headline, cta_variants, creative_lust, P03, n02_marketing]
 domain: copy-production
 status: active
+density_score: 1.0
 ---
 
 # Copy Generation Action Prompt

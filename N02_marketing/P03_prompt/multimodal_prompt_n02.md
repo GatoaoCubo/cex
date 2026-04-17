@@ -5,10 +5,11 @@ pillar: P03
 nucleus: n02
 title: "Visual + Copy Coordination Prompt -- Image Brief + Caption Combo"
 version: 1.0.0
-quality: null
+quality: 9.0
 tags: [multimodal_prompt, visual_brief, image_copy, creative_direction, P03, n02_marketing]
 domain: creative-production
 status: active
+density_score: 1.0
 ---
 
 # Multimodal Prompt -- Visual + Copy Coordination
