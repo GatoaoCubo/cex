@@ -4,7 +4,7 @@ kind: webhook
 pillar: P04
 title: Shopify Webhook Manager
 version: 0.1.0
-quality: null
+quality: 9.1
 status: template
 brand_placeholders:
   - BRAND_SHOPIFY_STORE_DOMAIN
@@ -12,6 +12,7 @@ brand_placeholders:
   - BRAND_SUPABASE_PROJECT_REF
   - BRAND_SHOPIFY_WEBHOOK_SECRET
 tags: [commerce, template, distillation, shopify, webhook, management]
+density_score: 0.98
 ---
 
 # Shopify Webhook Manager
