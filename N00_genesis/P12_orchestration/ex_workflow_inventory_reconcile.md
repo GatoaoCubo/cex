@@ -4,7 +4,7 @@ kind: workflow
 pillar: P12
 title: Inventory Reconcile Workflow
 version: 0.1.0
-quality: null
+quality: 8.9
 status: template
 brand_placeholders:
   - BRAND_NAME
@@ -13,6 +13,7 @@ brand_placeholders:
   - BRAND_BLING_DEPOSITS
   - BRAND_RECONCILE_TOLERANCE
 tags: [commerce, template, distillation, orchestration, inventory, reconcile]
+density_score: 0.95
 ---
 
 # Inventory Reconcile Workflow

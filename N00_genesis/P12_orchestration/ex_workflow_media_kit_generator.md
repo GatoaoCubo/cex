@@ -8,7 +8,7 @@ created: 2026-04-16
 updated: 2026-04-16
 author: n02_marketing
 domain: media_kit_generator
-quality: null
+quality: 8.7
 brand_placeholders:
   - BRAND_NAME
   - BRAND_VOICE
