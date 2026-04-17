@@ -5,8 +5,10 @@ pillar: P09
 nucleus: n06
 title: Commercial Secret Config
 version: 1.0
-quality: null
+quality: 9.0
 tags: [config, secret, payments, rotation, security]
+density_score: 1.0
+updated: "2026-04-17"
 ---
 
 <!-- 8F: F1 constrain=P09/secret_config F2 become=secret-config-builder F3 inject=nucleus_def_n06.md,n06-commercial.md,bld_manifest_secret_config.md,kc_secret_config.md,P09_config/_schema.yaml F4 reason=secret_registry_for_payment_alert_and_revenue_control_credentials F5 call=apply_patch;python _tools/cex_compile.py F6 produce=4811_bytes F7 govern=frontmatter_sections_ascii_density_review F8 collaborate=N06_commercial/P09_config/con_secret_config_n06.md -->
