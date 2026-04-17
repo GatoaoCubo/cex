@@ -17,9 +17,10 @@ output_reserve: 27000
 overflow_strategy: compress
 priority_tiers: [system, query, context, examples]
 domain: operations
-quality: null
+quality: 9.0
 tags: [context_window_config, n05, operations, token-budget]
 tldr: "N05 200K: 50% working-memory, 13.5% tool-buf, 16.5% context, 10% ISOs, 10% system"
+density_score: 1.0
 ---
 
 ## Budget Allocation
