@@ -17,7 +17,7 @@ from typing import Any
 
 ROOT = Path(__file__).resolve().parent.parent
 BUILDERS_DIR = ROOT / "archetypes" / "builders"
-LIBRARY_DIR = ROOT / "P01_knowledge" / "library"
+LIBRARY_DIR = ROOT / "N00_genesis" / "P01_knowledge" / "library"
 FIX_MODE = "--fix" in sys.argv
 
 # -- Constants ----------------------------------------------------------------

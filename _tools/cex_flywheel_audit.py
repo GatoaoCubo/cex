@@ -173,8 +173,8 @@ def audit_L3() -> None:
 def audit_L4() -> None:
     """Audit knowledge-card coverage across kind and domain libraries."""
     print("\n=== L4: Knowledge Library ===")
-    kind_dir = CEX_ROOT / "P01_knowledge" / "library" / "kind"
-    domain_dir = CEX_ROOT / "P01_knowledge" / "library" / "domain"
+    kind_dir = CEX_ROOT / "N00_genesis" / "P01_knowledge" / "library" / "kind"
+    domain_dir = CEX_ROOT / "N00_genesis" / "P01_knowledge" / "library" / "domain"
 
     kc_count = len(list(kind_dir.glob("kc_*.md"))) if kind_dir.exists() else 0
     record("L4", "kind_KCs", "WIRED" if kc_count >= 108 else "BROKEN", f"{kc_count} KCs")
@@ -333,7 +333,7 @@ def audit_cascades() -> None:
     except Exception as e:
         record("CASCADE", "C2_quality", "BROKEN", str(e)[:80])
 
-    kc = CEX_ROOT / "P01_knowledge" / "library" / "kind" / "kc_agent.md"
+    kc = CEX_ROOT / "N00_genesis" / "P01_knowledge" / "library" / "kind" / "kc_agent.md"
     bk = CEX_ROOT / "archetypes" / "builders" / "agent-builder" / "bld_knowledge_card_agent.md"
     record("CASCADE", "C3_knowledge", "WIRED" if kc.exists() and bk.exists() else "BROKEN")
 

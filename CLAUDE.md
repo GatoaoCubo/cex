@@ -56,7 +56,7 @@ See `.claude/rules/brand-bootstrap.md` for the auto-detection protocol.
 
 Check `CEX_NUCLEUS`. N07 = Orchestrator. N03 = Builder. Not set = read and decide.
 
-**Nucleus self-load (mandatory at boot):** if `CEX_NUCLEUS` is `n01..n06`, your first action is to read `N{0X}_*/rules/n{0X}-*.md` (your identity + 8F rules + routing). N07 reads `.claude/rules/n07-*.md` only — it never pre-loads other nuclei's rules to keep the orchestrator boot lean. **Intent transmutation:** for any user input, resolve to `{kind, pillar, nucleus, verb}` via `P03_prompt/layers/p03_pc_cex_universal.md` (the `prompt_compiler` artifact) BEFORE acting. This is F1 CONSTRAIN, mandatory in every 8F run.
+**Nucleus self-load (mandatory at boot):** if `CEX_NUCLEUS` is `n01..n06`, your first action is to read `N{0X}_*/rules/n{0X}-*.md` (your identity + 8F rules + routing). N07 reads `.claude/rules/n07-*.md` only — it never pre-loads other nuclei's rules to keep the orchestrator boot lean. **Intent transmutation:** for any user input, resolve to `{kind, pillar, nucleus, verb}` via `N00_genesis/P03_prompt/layers/p03_pc_cex_universal.md` (the `prompt_compiler` artifact) BEFORE acting. This is F1 CONSTRAIN, mandatory in every 8F run.
 
 ## Pointers
 
@@ -68,10 +68,10 @@ Check `CEX_NUCLEUS`. N07 = Orchestrator. N03 = Builder. Not set = read and decid
 | **Commands** | `.claude/commands/` → /build, /validate, /dispatch, /status, /doctor, /mission, /mentor |
 | **Mentor context** | `N00_genesis/boot/mentor_context.md` (pre-compiled 8F + 12P + 257K vocabulary) |
 | **Builders (source of truth)** | `archetypes/builders/{kind}-builder/` (13 ISOs each) |
-| **Sub-agents** | `.claude/P02_model/{kind}-builder.md` (125 files) |
-| **N00 Genesis (archetype)** | `N00_genesis/` + `P{01-12}_*/` + `archetypes/` |
-| **Pillar schemas** | `P{01-12}_*/_schema.yaml` (all descriptions in EN) |
-| **Kind KCs** | `P01_knowledge/library/kind/kc_{kind}.md` (131 files) |
+| **Sub-agents** | `.claude/agents/{kind}-builder.md` (125 files) |
+| **N00 Genesis (archetype)** | `N00_genesis/` + `N00_genesis/P{01-12}_*/` + `archetypes/` |
+| **Pillar schemas** | `N00_genesis/P{01-12}_*/_schema.yaml` (all descriptions in EN) |
+| **Kind KCs** | `N00_genesis/P01_knowledge/library/kind/kc_{kind}.md` (424 files) |
 | **Kind registry** | `.cex/kinds_meta.json` (257 kinds) |
 | **Composable-crew rule** | `.claude/rules/composable-crew.md` (5 WAVE8 primitives + grid-of-crews) |
 | **Lazy skills (auto-fire)** | `.claude/skills/{cross_wave_cleanup,shared_file_proposal,new_nucleus_bootstrap,auto_accept_handoff}.md` -- mirrored to `.cex/skills/` for codex/gemini/ollama |
@@ -81,13 +81,13 @@ Check `CEX_NUCLEUS`. N07 = Orchestrator. N03 = Builder. Not set = read and decid
 | **Terminology** | `_docs/specs/spec_metaphor_dictionary.md` + Rosetta Stone KC |
 | **N07 tech authority** | `.claude/rules/n07-technical-authority.md` |
 | **Infinite loop spec** | `_docs/specs/spec_infinite_bootstrap_loop.md` |
-| **Subagent definitions** | `.claude/P02_model/` (259 builder sub-agents) |
+| **Subagent definitions** | `.claude/agents/` (259 builder sub-agents) |
 | **Nucleus fractals** | `N{01-07}_*/` (13 subdirs each, mirrors N00's 12 pillars) |
 | **SDK runtime** | `cex_sdk/` (78 .py, 4504 lines) |
 | **Boot scripts** | `boot/cex.ps1` (N07) · `boot/n0{1-6}.ps1` (PowerShell-only) |
 | **Decision manifest** | `.cex/runtime/decisions/decision_manifest.yaml` |
 | **GDP skill** | `archetypes/builders/_shared/skill_guided_decisions.md` |
-| **Prompt Compiler** (intent transmutation source-of-truth, 257 kinds, PT+EN) | `P03_prompt/layers/p03_pc_cex_universal.md` -- referenced by `n07-input-transmutation.md` |
+| **Prompt Compiler** (intent transmutation source-of-truth, 257 kinds, PT+EN) | `N00_genesis/P03_prompt/layers/p03_pc_cex_universal.md` -- referenced by `n07-input-transmutation.md` |
 | **Intent Resolver** | `_tools/cex_intent_resolver.py` (Python-first, 0 tokens) |
 | **Setup Validator** | `_tools/cex_setup_validator.py` (new PC readiness check) |
 | **Hygiene Tool** | `_tools/cex_hygiene.py` (artifact CRUD, 8 rules) |
@@ -226,7 +226,7 @@ bash _spawn/dispatch.sh stop --dry-run    # preview what would die
 
 ## Nucleus Routing
 
-> Budget-optimized: 2 Opus + 5 Sonnet + preflight (2026-04-13). Config: `.cex/P09_config/nucleus_models.yaml`
+> Budget-optimized: 2 Opus + 5 Sonnet + preflight (2026-04-13). Config: `.cex/config/nucleus_models.yaml`
 
 | Domain | Nucleus | CLI | Model | Context | Tier |
 |--------|---------|-----|-------|---------| -----|

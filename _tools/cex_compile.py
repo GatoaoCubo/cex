@@ -27,18 +27,18 @@ class CEXEncoder(json.JSONEncoder):
 CEX_ROOT = Path(__file__).resolve().parent.parent
 
 LP_DIRS = [
-    "P01_knowledge",
-    "P02_model",
-    "P03_prompt",
-    "P04_tools",
-    "P05_output",
-    "P06_schema",
-    "P07_evals",
-    "P08_architecture",
-    "P09_config",
-    "P10_memory",
-    "P11_feedback",
-    "P12_orchestration",
+    "N00_genesis/P01_knowledge",
+    "N00_genesis/P02_model",
+    "N00_genesis/P03_prompt",
+    "N00_genesis/P04_tools",
+    "N00_genesis/P05_output",
+    "N00_genesis/P06_schema",
+    "N00_genesis/P07_evals",
+    "N00_genesis/P08_architecture",
+    "N00_genesis/P09_config",
+    "N00_genesis/P10_memory",
+    "N00_genesis/P11_feedback",
+    "N00_genesis/P12_orchestration",
 ]
 
 
@@ -248,7 +248,9 @@ def compile_md(md_path: Path, schema_formats: dict) -> tuple[dict, str, str]:
 def get_lp_dir_for_lp(lp_code: str) -> Path | None:
     """Find LP directory matching code like 'P03'."""
     for lp_dir_name in LP_DIRS:
-        if lp_dir_name.startswith(lp_code + "_") or lp_dir_name == lp_code:
+        # lp_dir_name is e.g. "N00_genesis/P03_prompt"; basename starts with pillar code
+        basename = lp_dir_name.split("/")[-1]
+        if basename.startswith(lp_code + "_") or basename == lp_code:
             return CEX_ROOT / lp_dir_name
     return None
 
@@ -324,7 +326,7 @@ def _load_compiled_artifacts(pillars=None):
         pillars = ["P03", "P04", "P08", "P11"]
     artifacts = []
     for lp_name in LP_DIRS:
-        code = lp_name.split("_")[0]
+        code = lp_name.split("/")[-1].split("_")[0]
         if code not in pillars:
             continue
         compiled_dir = CEX_ROOT / lp_name / "compiled"
@@ -548,7 +550,7 @@ def main():
             examples = find_examples(lp_dir)
             if not examples:
                 continue
-            lp_code = lp_dir_name.split("_")[0]
+            lp_code = lp_dir_name.split("/")[-1].split("_")[0]
             print(f"\n=== {lp_code} ({len(examples)} examples) ===")
             for md_path in examples:
                 total += 1

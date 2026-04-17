@@ -168,11 +168,13 @@ for _ep in [CEX_ROOT / ".env", CEX_ROOT.parent / "organization-core" / ".env"]:
 BUILDER_DIR = CEX_ROOT / "archetypes" / "builders"
 
 # Pillar directory names keyed by code (e.g. "P01" -> "P01_knowledge")
+# Root P01-P12 dirs are now under N00_genesis/
 PILLAR_DIRS = {}
-for d in sorted(CEX_ROOT.glob("P[0-9][0-9]_*")):
+_n00 = CEX_ROOT / "N00_genesis"
+for d in sorted(_n00.glob("P[0-9][0-9]_*")):
     if d.is_dir():
         code = d.name[:3]  # e.g. "P01"
-        PILLAR_DIRS[code] = d.name
+        PILLAR_DIRS[code] = "N00_genesis/" + d.name
 
 # Builder spec prefix -> function mapping
 ISO_TO_FUNCTION = {
@@ -497,7 +499,7 @@ class EightFRunner:
                 self._log("F3", "bld_knowledge_card loaded")
 
         # 2. Dedicated kind KC (primary -- 1:1 per kind)
-        kind_kc_path = CEX_ROOT / "P01_knowledge" / "library" / "kind" / f"kc_{self.kind_slug}.md"
+        kind_kc_path = CEX_ROOT / "N00_genesis" / "P01_knowledge" / "library" / "kind" / f"kc_{self.kind_slug}.md"
         if kind_kc_path.exists():
             text = kind_kc_path.read_text(encoding="utf-8")
             body = strip_frontmatter(text)
