@@ -5,8 +5,9 @@ pillar: P10
 nucleus: N02
 title: "N02 Marketing Runtime State"
 version: "1.0.0"
-quality: null
+quality: 9.1
 tags: [runtime_state, marketing, routing, memory, creative_lust, n02]
+density_score: 1.0
 ---
 <!-- 8F: F1=runtime_state/P10 F2=runtime-state-builder F3=nucleus_def_n02+agent_card_n02+kc_campaign+campaign_performance_memory+copy_optimization_insights+P10_schema F4=runtime_routing_logic_for_marketing_nucleus F5=shell_command,apply_patch F6=approx_6kb F7=frontmatter+8F+80_lines+dense_tables+self_check_pass F8=N02_marketing/P10_memory/mem_runtime_state_n02.md -->
 
