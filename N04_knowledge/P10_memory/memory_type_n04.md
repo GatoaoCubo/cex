@@ -5,7 +5,7 @@ pillar: P10
 nucleus: n04
 title: "Memory Type -- N04 Memory Classification System"
 version: "1.0.0"
-quality: null
+quality: 9.1
 tags: [memory_type, n04, classification, correction, preference, convention, context, P10]
 domain: knowledge management
 status: active

@@ -5,7 +5,7 @@ pillar: P10
 nucleus: n04
 title: "Memory Summary -- N04 Knowledge Nucleus Session Compression Protocol"
 version: "1.0.0"
-quality: null
+quality: 9.2
 tags: [memory_summary, compression, episodic, session, n04, P10]
 domain: knowledge management
 status: active
