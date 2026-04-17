@@ -5,8 +5,9 @@ pillar: P05
 nucleus: n00
 title: "Streaming Config -- Canonical Manifest"
 version: 1.0
-quality: null
+quality: 9.0
 tags: [manifest, streaming_config, p05, n00, archetype, template]
+density_score: 1.0
 ---
 
 <!-- 8F: F1=knowledge_card P05 F2=knowledge-card-builder F3=kinds_meta+builder-manifest F4=plan F5=scan F6=produce F7=gate F8=save -->
