@@ -8,10 +8,11 @@ version: 1.0.0
 created: 2026-04-17
 author: n01_intelligence
 domain: research-intelligence
-quality: null
+quality: 9.1
 tags: [parser, data_extraction, structured_intelligence, n01, llm_extraction, competitive_data]
 tldr: "LLM-powered structured data extractor for N01: transforms raw research text into typed intelligence structures (CompetitorProfile, MarketSignal, PricingData). Outputs match type_def_intelligence_types schema."
 density_score: 0.89
+updated: "2026-04-17"
 ---
 
 <!-- 8F: F1 constrain=P04/parser F2 become=parser-builder F3 inject=sch_type_def_n01+document_loader_n01+search_strategy_n01+api_reference_research_apis F4 reason=raw text is not intelligence; N01 must extract structured signals from unstructured sources to enable comparison and indexing F5 call=cex_compile F6 produce=data_extractor_n01.md F7 govern=frontmatter+ascii+tables F8 collaborate=N01_intelligence/P04_tools/ -->

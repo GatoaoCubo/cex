@@ -8,10 +8,11 @@ version: 1.0.0
 created: 2026-04-17
 author: n01_intelligence
 domain: research-intelligence
-quality: null
+quality: 9.1
 tags: [daemon, competitor_monitor, continuous_intelligence, n01, alerts, change_detection]
 tldr: "Background daemon for continuous competitor monitoring: pricing changes, product updates, hiring signals, and blog posts. Runs on configurable schedule, writes signals to .cex/runtime/signals/ on change detection."
 density_score: 0.88
+updated: "2026-04-17"
 ---
 
 <!-- 8F: F1 constrain=P04/daemon F2 become=daemon-builder F3 inject=search_strategy_n01+browser_tool_n01+api_reference_research_apis+research_pipeline_n01 F4 reason=Analytical Envy is chronic -- not a one-shot -- continuous monitoring closes information gaps before they cost N01 alpha F5 call=cex_compile F6 produce=competitor_monitor_n01.md F7 govern=frontmatter+ascii+tables F8 collaborate=N01_intelligence/P04_tools/ -->
