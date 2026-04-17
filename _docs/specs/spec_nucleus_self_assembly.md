@@ -11,8 +11,8 @@ quality_target: 9.0
 status: SPEC
 scope: N01-N06
 depends_on: null
-tags: [spec, self-assembly, portfolio-assembly, kind-synergy, deck-archetype, flywheel, nucleus-composition]
-tldr: "Each nucleus (N01-N06) auto-constructs its own artifact portfolio using sin-lens-driven deck archetypes, kind synergy combos, and a self-assembly loop -- turning 5-word tasks into outperforming execution."
+tags: [spec, self-assembly, portfolio-assembly, kind-synergy, portfolio-archetype, flywheel, nucleus-composition]
+tldr: "Each nucleus (N01-N06) auto-constructs its typed artifact portfolio using sin-lens-driven portfolio archetypes, kind synergy patterns, and a self-assembly loop -- turning 5-word tasks into outperforming execution."
 density_score: 0.96
 ---
 
@@ -20,7 +20,7 @@ density_score: 0.96
 
 ## THE PROBLEM
 
-CEX has 258 builders, 257 kinds, and 8 nuclei -- but each nucleus is a **partial deck**.
+CEX has 258 builders, 257 kinds, and 8 nuclei -- but each nucleus is a **partial portfolio**.
 
 Current gap matrix (artifacts per pillar per nucleus, empirically measured):
 
@@ -46,7 +46,7 @@ Three structural gaps visible immediately:
 
 3. **P01-heavy imbalance** -- knowledge_card dominates. N01 alone has 60 KCs.
    But most nuclei lack the TOOLING (P04), SCHEMA (P06), and MEMORY (P10)
-   to ACT on that knowledge. A deck full of lands but no spells.
+   to ACT on that knowledge. Knowledge artifacts without tooling, schema, or memory is inert data.
 
 The deeper problem: artifacts were built AD HOC, not strategically.
 A nucleus is a brain, not a library. The difference is COMPOSITION -- kinds that
@@ -54,22 +54,28 @@ reinforce each other via synergy patterns, not isolated documents.
 
 ---
 
-## THE VISION: NUCLEUS AS TCG DECK
+## THE VISION: NUCLEUS AS TYPED ARTIFACT PORTFOLIO
 
 Each nucleus is a **typed artifact portfolio** -- a curated set of kinds selected
 for their synergistic value within that nucleus's sin lens and domain.
 
-### Industry Term Mapping
+The vocabulary this spec uses is **ubiquitous language** (Eric Evans, DDD 2003):
+a canonical controlled vocabulary shared across all nucleus boundaries, preventing
+semantic drift and taxonomic invention. Every term maps to an industry standard.
+This is the LLM-to-LLM interoperability layer that allows CEX to grow without
+accumulating technical debt from invented metaphors.
 
-| Metaphor (PT) | Industry Term | Technical Definition |
-|--------------|--------------|---------------------|
-| baralho / deck | nucleus composition | the complete set of typed artifacts defining a nucleus's capability surface |
-| carta | typed artifact (kind) | atomic unit of knowledge/capability, typed by the 257-kind taxonomy |
-| combo | kind synergy pattern | 2-4 kinds that together produce emergent capability not achievable by any alone |
-| montar o deck | portfolio assembly | selecting the right kinds per pillar per nucleus (or per task -- see Dynamic mode) |
-| flywheel de auto construcao | self-assembly loop | gap scan -> rank by combo completeness -> dispatch -> score -> loop |
-| molde preenchivel (N00) | archetype mold | N00_genesis is the canonical pillar structure; each nucleus instantiates it |
-| semente tecnica | seed word | a technical term planted in P01/P03 KCs so the nucleus auto-uses CEX vocabulary |
+### Canonical Vocabulary
+
+| Term | Definition |
+|------|-----------|
+| nucleus composition | the complete set of typed artifacts defining a nucleus's capability surface |
+| typed artifact (kind) | atomic unit of knowledge/capability, typed by the 257-kind taxonomy |
+| kind synergy pattern | 2-4 kinds that together produce emergent capability not achievable by any alone |
+| portfolio assembly | selecting the right kinds per pillar per nucleus (or per task -- see Dynamic mode) |
+| self-assembly loop | gap scan -> rank by combo completeness -> dispatch -> score -> loop |
+| archetype mold | N00_genesis canonical pillar structure; each nucleus instantiates it |
+| controlled vocabulary | domain-specific terms planted in P01 KCs so nucleus auto-uses canonical language |
 
 ### Two Modes of Portfolio Assembly
 
