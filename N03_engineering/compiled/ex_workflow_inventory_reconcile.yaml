@@ -1,0 +1,83 @@
+id: ex_workflow_inventory_reconcile
+kind: workflow
+pillar: P12
+title: Inventory Reconciliation Workflow
+version: 0.1.0
+quality: null
+status: template
+brand_placeholders:
+- BRAND_SHOPIFY_DOMAIN
+- BRAND_SUPABASE_PROJECT_REF
+tags:
+- commerce
+- template
+- distillation
+- inventory
+- reconcile
+- workflow
+purpose: Compares stock quantities across Supabase, Bling ERP, and Shopify — detects discrepancies, generates a reconciliation
+  report, and optionally auto-corrects to a designated source of truth.
+when_to_use:
+- Running a daily or weekly stock audit to catch sync drift.
+- Resolving inventory discrepancies after a webhook outage.
+- Before major sales events (Black Friday, etc.) to ensure stock accuracy.
+- Post-migration validation after importing a new catalog.
+workflow_steps: "INPUT: { source_of_truth, auto_correct, threshold_pct }\n  |\n  v\nSTEP 1: FETCH\n  |-- Fetch Supabase products\
+  \ with stock > 0\n  |-- Fetch Bling stock levels (via /estoques)\n  |-- Fetch Shopify inventory levels (via /inventory_levels.json)\n\
+  \  |\n  v\nSTEP 2: JOIN\n  |-- Match by code/SKU across all three sources\n  |-- Unmatched products -> unmapped_items[]\n\
+  \  |\n  v\nSTEP 3: DIFF\n  |-- For each matched product:\n  |     |-- Compare quantities (supabase vs bling vs shopify)\n\
+  \  |     |-- Flag if max-min deviation > threshold_pct\n  |     |-- Classify: OK | MISMATCH | MISSING_IN_SOURCE\n  |\n \
+  \ v\nSTEP 4: REPORT\n  |-- Write reconciliation_report.json to Supabase storage\n  |-- Insert summary row into inventory_audits\
+  \ table\n  |\n  v\nSTEP 5: CORRECT (conditional: auto_correct == true)\n  |-- For each MISMATCH:\n  |     |-- Apply source_of_truth\
+  \ stock to all other platforms\n  |     |-- Log correction applied\n  |-- For MISSING_IN_SOURCE:\n  |     |-- Skip (requires\
+  \ human review)\n  |\n  v\nSTEP 6: NOTIFY\n  |-- If corrections > 0: send summary email\n  |-- If unmapped_items > 5: alert\
+  \ for catalog cleanup"
+configuration: "workflow:\n  source_of_truth: supabase       # supabase | bling | shopify\n  auto_correct: false         \
+  \    # true enables write corrections\n  threshold_pct: 10               # flag if stock differs by > 10%\n  notify_email:\
+  \ \"{{BRAND_SUPPORT_EMAIL}}\"\n  supabase:\n    project_ref: \"{{BRAND_SUPABASE_PROJECT_REF}}\"\n  shopify:\n    store_domain:\
+  \ \"{{BRAND_SHOPIFY_DOMAIN}}\"\n  report:\n    storage_bucket: \"audit-reports\"\n    retention_days: 90"
+report_schema: "{\n  \"run_at\": \"2026-04-17T03:00:00Z\",\n  \"source_of_truth\": \"supabase\",\n  \"threshold_pct\": 10,\n\
+  \  \"summary\": {\n    \"total_products\": 312,\n    \"ok\": 289,\n    \"mismatch\": 15,\n    \"missing_in_bling\": 4,\n\
+  \    \"missing_in_shopify\": 2,\n    \"unmapped\": 2\n  },\n  \"mismatches\": [\n    {\n      \"sku\": \"CAT-005\",\n  \
+  \    \"supabase_stock\": 10,\n      \"bling_stock\": 3,\n      \"shopify_stock\": 10,\n      \"deviation_pct\": 70,\n  \
+  \    \"auto_corrected\": false\n    }\n  ]\n}"
+interface: '| Input | Type | Description |
+
+  |-------|------|-------------|
+
+  | `source_of_truth` | enum | Which platform''s stock is authoritative |
+
+  | `auto_correct` | bool | Whether to apply corrections automatically |
+
+  | `threshold_pct` | int | Minimum deviation % to flag as mismatch |
+
+
+  | Output | Type | Description |
+
+  |--------|------|-------------|
+
+  | `reconciliation_report` | JSON (storage) | Full discrepancy dataset |
+
+  | `inventory_audits` row | DB | Summary metrics |
+
+  | `corrections_applied` | int | Number of auto-corrections made |'
+brand_variables_used: '| Variable | Purpose |
+
+  |----------|---------|
+
+  | `{{BRAND_SHOPIFY_DOMAIN}}` | Shopify store for inventory levels |
+
+  | `{{BRAND_SUPABASE_PROJECT_REF}}` | Supabase project for DB + storage |'
+related_artifacts: '| Artifact | Kind | Role |
+
+  |----------|------|------|
+
+  | `ex_validator_inventory_invariants.md` | validator | Business rule validation |
+
+  | `ex_research_pipeline_marketplace_scrap.md` | research_pipeline | Broader catalog audit |
+
+  | `ex_api_client_shopify.md` | api_client | Shopify inventory source |
+
+  | `ex_api_client_bling.md` | api_client | Bling stock source |
+
+  | `ex_workflow_multi_marketplace_sync.md` | workflow | Sync that feeds this reconciliation |'

@@ -1,0 +1,94 @@
+id: ex_component_map_admin_dashboard
+kind: component_map
+pillar: P08
+title: Admin Dashboard Component Map
+version: 0.1.0
+quality: null
+status: template
+brand_placeholders:
+- BRAND_NAME
+- BRAND_PRIMARY_COLOR
+tags:
+- commerce
+- template
+- distillation
+- component_map
+- admin
+- dashboard
+purpose: React component architecture map for the admin dashboard page (`/admin`) — defines component boundaries, prop contracts,
+  data flows, and reuse relationships across all admin modules.
+when_to_use:
+- Planning a new admin module that reuses shared components.
+- Debugging rendering issues by tracing component boundaries.
+- Onboarding a frontend developer to the admin UI architecture.
+- Spec'ing a UI design handoff for the admin hub.
+component_tree: "<AdminLayout>                          # shared: sidebar + header\n  <AdminDashboard>                   \
+  \  # route: /admin\n    <DashboardHeader>                  # title + refresh button\n    <StatsGrid>                   \
+  \     # 4-column KPI row\n      <StatCard x4>                    # count + label + icon\n    <IntegrationStatusRow>    \
+  \         # badge row\n      <IntegrationBadge x3>            # shopify | bling | meli\n    <QuickActionsPanel>        \
+  \        # 4 action buttons\n      <QuickActionButton x4>\n    <NavCardGrid>                      # 6 module entry points\n\
+  \      <NavCard x6>"
+component_contracts: ''
+adminlayout: "interface AdminLayoutProps {\n  children: React.ReactNode;\n}\n// Renders: sidebar (fixed, 240px) + main content\
+  \ area\n// Context: AuthContext (reads user for nav items)\n// Route: wraps all /admin/* routes"
+statcard: "interface StatCardProps {\n  icon:    LucideIcon;\n  label:   string;\n  count:   number;\n  color?:  'default'\
+  \ | 'green' | 'amber' | 'red';\n  loading?: boolean;\n}"
+integrationbadge: "interface IntegrationBadgeProps {\n  name:        'Shopify' | 'Bling' | 'Mercado Livre';\n  status:   \
+  \   'connected' | 'token_expiring' | 'error' | 'not_configured';\n  expiresAt?:  string;  // ISO 8601 — shown when status\
+  \ == token_expiring\n}\n// Data source: meli_tokens + bling_tokens tables\n// Refresh: on page mount + every 5 min (polling)"
+quickactionbutton: "interface QuickActionButtonProps {\n  label:    string;\n  icon:     LucideIcon;\n  endpoint: string;\
+  \       // Edge function URL\n  method:   'GET' | 'POST';\n  body?:    object;\n  onSuccess?: (result: unknown) => void;\n\
+  }\n// Shows loading spinner during call; toast on success/error"
+navcard: "interface NavCardProps {\n  label: string;\n  description: string;\n  icon:  LucideIcon;\n  href:  string;\n  badge?:\
+  \ string;  // e.g., \"15 pending\" for sync status\n}"
+data_flows: "Page mount\n  |\n  v\n[useEffect] parallel:\n  |-- fetchDashboardStats() -> StatsGrid (count queries)\n  |--\
+  \ fetchTokenStatuses()  -> IntegrationStatusRow (token expiry check)\n  |-- fetchPendingCount()   -> NavCard \"Products\"\
+  \ badge\n  |\n  v\nUser clicks \"Sync All\"\n  |\n  v\nQuickActionButton:\n  |-- POST /unified-sync { mode: \"bidirectional\"\
+  \ }\n  |-- loading=true -> spinner\n  |-- on response -> toast (\"Synced 23 products, 0 errors\")\n  |-- refresh StatsGrid"
+routing: '| Route | Component | Guard |
+
+  |-------|-----------|-------|
+
+  | `/admin` | `AdminDashboard` | `ProtectedRoute adminOnly` |
+
+  | `/admin/products` | `ProductsAdmin` | `ProtectedRoute adminOnly` |
+
+  | `/admin/shopify-sync` | `ShopifySync` | `ProtectedRoute adminOnly` |
+
+  | `/admin/integracoes` | `Integracoes` | `ProtectedRoute adminOnly` |
+
+  | `/admin/crm` | `CRM` | `ProtectedRoute adminOnly` |
+
+  | `/admin/vendas` | `Vendas` | `ProtectedRoute adminOnly` |'
+state_management: '| State | Location | Persistence |
+
+  |-------|----------|-------------|
+
+  | Auth session | `AuthContext` + Supabase auth | sessionStorage |
+
+  | Dashboard stats | Local `useState` | None (refetched on mount) |
+
+  | Integration status | Local `useState` | None (refetched on mount) |
+
+  | Toast notifications | Global `ToastContext` | Session-scoped |'
+theming: "// Primary brand color applied to:\n// - Active nav item background\n// - QuickActionButton hover\n// - StatCard\
+  \ accent bar\nconst theme = {\n  primary: '{{BRAND_PRIMARY_COLOR}}',  // e.g., #C71585\n  sidebar_bg: '#1E1E2E',\n  header_bg:\
+  \ '#FFFFFF',\n};"
+brand_variables_used: '| Variable | Purpose |
+
+  |----------|---------|
+
+  | `{{BRAND_NAME}}` | Page title + sidebar header |
+
+  | `{{BRAND_PRIMARY_COLOR}}` | Active state + accent color |'
+related_artifacts: '| Artifact | Kind | Role |
+
+  |----------|------|------|
+
+  | `ex_landing_page_admin_dashboard.md` | landing_page | Page spec and content |
+
+  | `ex_supabase_data_layer.md` | supabase_data_layer | Data source for all stats |
+
+  | `ex_workflow_multi_marketplace_sync.md` | workflow | Quick Action target |
+
+  | `ex_interface_supabase_tables.md` | interface | TypeScript types for data queries |'

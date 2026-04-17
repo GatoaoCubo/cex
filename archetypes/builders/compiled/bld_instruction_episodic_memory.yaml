@@ -27,7 +27,7 @@ phase_1_design:
 - Check for existing episodic_memory artifacts with overlapping scope
 phase_2_compose:
 - Read SCHEMA.md -- source of truth
-- Read OUTPUT_TEMPLATE.md -- fill {{vars}}
+- Read OUTPUT_TEMPLATE.md -- fill all template fields
 - 'Fill frontmatter: all required fields (quality: null)'
 - 'Write episode_schema: field table with types'
 - 'Write retrieval_config: method and parameters'

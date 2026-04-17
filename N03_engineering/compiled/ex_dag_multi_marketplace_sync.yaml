@@ -1,0 +1,96 @@
+id: ex_dag_multi_marketplace_sync
+kind: dag
+pillar: P12
+title: Multi-Marketplace Sync DAG
+version: 0.1.0
+quality: null
+status: template
+brand_placeholders:
+- BRAND_SHOPIFY_DOMAIN
+- BRAND_SUPABASE_PROJECT_REF
+tags:
+- commerce
+- template
+- distillation
+- dag
+- sync
+- marketplace
+purpose: Directed Acyclic Graph (DAG) definition for multi-marketplace product sync — maps the dependency order of sync stages
+  to enable parallel execution where possible and guarantee correct sequencing for dependent steps.
+when_to_use:
+- Implementing the unified-sync function as a structured pipeline with explicit stage dependencies.
+- Visualizing the sync execution plan for debugging or monitoring.
+- Extending the sync with new stages (e.g., Mercado Livre push) without breaking existing order.
+dag_definition: "dag:\n  id: multi_marketplace_sync\n  description: Bidirectional product sync across Shopify, Bling, Supabase\n\
+  \  schedule: \"0 3   *\"   # nightly at 03:00 local\n  concurrency: 3\n\nnodes:\n  - id: validate_tokens\n    type: task\n\
+  \    fn: checkActiveTokens\n    inputs: [shopify, bling, meli]\n    outputs: [token_status]\n\n  - id: fetch_shopify\n \
+  \   type: task\n    fn: fetchShopifyProducts\n    depends_on: [validate_tokens]\n    inputs: [shopify_config]\n    outputs:\
+  \ [shopify_products]\n\n  - id: fetch_supabase\n    type: task\n    fn: fetchSupabaseProducts\n    depends_on: [validate_tokens]\n\
+  \    inputs: [supabase_config]\n    outputs: [supabase_products]\n\n  - id: diff_shopify_supabase\n    type: task\n    fn:\
+  \ computeDiff\n    depends_on: [fetch_shopify, fetch_supabase]\n    inputs: [shopify_products, supabase_products]\n    outputs:\
+  \ [to_pull, to_push, in_sync]\n\n  - id: pull_to_supabase\n    type: task\n    fn: upsertToSupabase\n    depends_on: [diff_shopify_supabase]\n\
+  \    condition: \"to_pull.length > 0\"\n    inputs: [to_pull]\n    outputs: [pull_result]\n\n  - id: push_to_shopify\n \
+  \   type: task\n    fn: pushToShopify\n    depends_on: [diff_shopify_supabase]\n    condition: \"to_push.length > 0\"\n\
+  \    inputs: [to_push]\n    outputs: [push_result]\n\n  - id: push_to_bling\n    type: task\n    fn: pushToBling\n    depends_on:\
+  \ [pull_to_supabase]   # Bling gets fresh Supabase data\n    condition: \"bling.enabled\"\n    inputs: [supabase_products_updated]\n\
+  \    outputs: [bling_result]\n\n  - id: write_sync_log\n    type: task\n    fn: writeSyncLog\n    depends_on: [pull_to_supabase,\
+  \ push_to_shopify, push_to_bling]\n    inputs: [pull_result, push_result, bling_result]\n    outputs: [sync_log_id]\n\n\
+  \  - id: notify_on_error\n    type: task\n    fn: sendErrorNotification\n    depends_on: [write_sync_log]\n    condition:\
+  \ \"sync_log.errors > 0\"\n    inputs: [sync_log_id]\n    outputs: []"
+execution_graph_ascii: "validate_tokens\n  |\n  +-- fetch_shopify ---+\n  |                    |\n  +-- fetch_supabase --+--\
+  \ diff_shopify_supabase\n                              |\n                  +-----------+-----------+\n                \
+  \  |                       |\n           pull_to_supabase       push_to_shopify\n                  |\n           push_to_bling\n\
+  \                  |\n           write_sync_log\n                  |\n           notify_on_error (conditional)"
+stage_timings_expected: '| Stage | Expected Duration | Parallel |
+
+  |-------|-----------------|---------|
+
+  | `validate_tokens` | < 1s | No |
+
+  | `fetch_shopify` | 5-60s (250 products/page) | Yes (with fetch_supabase) |
+
+  | `fetch_supabase` | 1-5s | Yes (with fetch_shopify) |
+
+  | `diff_shopify_supabase` | < 1s | No |
+
+  | `pull_to_supabase` | 2-10s | No |
+
+  | `push_to_shopify` | 5-30s (rate-limited) | No |
+
+  | `push_to_bling` | 10-60s (3 req/s limit) | No |
+
+  | `write_sync_log` | < 1s | No |
+
+
+  Total: 30-180s depending on catalog size.'
+error_handling: '| Stage Failure | Behavior |
+
+  |--------------|---------|
+
+  | `validate_tokens` | Abort all; no sync runs without valid tokens |
+
+  | `fetch_shopify` | Abort pull stages; push stages can still run |
+
+  | `pull_to_supabase` | Log errors per item; continue with next |
+
+  | `push_to_shopify` | Log errors per item; Bling push still runs |
+
+  | `push_to_bling` | Log errors; sync_log marks Bling as partial |'
+brand_variables_used: '| Variable | Purpose |
+
+  |----------|---------|
+
+  | `{{BRAND_SHOPIFY_DOMAIN}}` | Shopify store domain |
+
+  | `{{BRAND_SUPABASE_PROJECT_REF}}` | Supabase project reference |'
+related_artifacts: '| Artifact | Kind | Role |
+
+  |----------|------|------|
+
+  | `ex_workflow_multi_marketplace_sync.md` | workflow | High-level workflow spec |
+
+  | `ex_dispatch_rule_multi_marketplace.md` | dispatch_rule | Marketplace routing logic |
+
+  | `ex_api_client_shopify.md` | api_client | Shopify fetch/push |
+
+  | `ex_api_client_bling.md` | api_client | Bling push |'

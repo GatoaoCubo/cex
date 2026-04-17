@@ -1,0 +1,94 @@
+id: ex_webhook_bling
+kind: webhook
+pillar: P04
+title: Bling ERP Webhook Handler
+version: 0.1.0
+quality: null
+status: template
+brand_placeholders:
+- BRAND_BLING_WEBHOOK_SECRET
+- BRAND_SUPABASE_PROJECT_REF
+tags:
+- commerce
+- template
+- distillation
+- bling
+- erp
+- webhook
+purpose: Inbound webhook handler for Bling ERP events — validates signatures and processes `produto_alterado`, `estoque_alterado`
+  payloads to update Supabase product and stock records in real time.
+when_to_use:
+- Reacting to stock level changes in Bling ERP without polling.
+- Keeping Supabase inventory in sync when Bling is the stock source of truth.
+- Triggering reconciliation workflows after bulk Bling operations.
+events: '| Event Type | Trigger Condition | Key Payload Fields |
+
+  |------------|------------------|-------------------|
+
+  | `produto_alterado` | Product fields updated in Bling | `id`, `codigo`, `nome`, `preco`, `situacao` |
+
+  | `produto_inserido` | New product created in Bling | Same as `produto_alterado` |
+
+  | `produto_excluido` | Product deleted from Bling | `id` |
+
+  | `estoque_alterado` | Stock quantity changed | `id`, `codigo`, `estoqueAtual` |'
+verification: "| Field | Value |\n|-------|-------|\n| Method | HMAC-SHA256 (check Bling docs for current scheme) |\n| Header\
+  \ | `X-Bling-Signature` (or equivalent) |\n| Secret env | `{{BRAND_BLING_WEBHOOK_SECRET}}` |\n\n> Note: Bling webhook signature\
+  \ scheme may vary by plan and version. Verify against current Bling developer documentation. If signature verification is\
+  \ unavailable, restrict the endpoint by IP allowlist (Bling's known IP ranges).\n\nasync function verifyBlingSignature(req:\
+  \ Request, secret: string): Promise<boolean> {\n  const sig = req.headers.get('X-Bling-Signature') ?? '';\n  const body\
+  \ = await req.text();\n  const key = await crypto.subtle.importKey('raw', new TextEncoder().encode(secret),\n    { name:\
+  \ 'HMAC', hash: 'SHA-256' }, false, ['sign']);\n  const mac = await crypto.subtle.sign('HMAC', key, new TextEncoder().encode(body));\n\
+  \  const computed = btoa(String.fromCharCode(...new Uint8Array(mac)));\n  return computed === sig;\n}"
+retry_and_delivery: '| Field | Value |
+
+  |-------|-------|
+
+  | Direction | Inbound |
+
+  | Delivery guarantee | At-least-once (Bling retries on non-2xx) |
+
+  | Idempotency key | `id` field in payload combined with event type |
+
+  | Response timeout | Respond within 5 seconds; async heavy work |'
+interface: '| Input | Type | Description |
+
+  |-------|------|-------------|
+
+  | `X-Bling-Signature` | header | HMAC signature (if available) |
+
+  | Request body | JSON | Bling event payload |
+
+
+  | Output | Description |
+
+  |--------|-------------|
+
+  | `200 OK` | Accepted |
+
+  | `401` | Signature invalid |
+
+  | Supabase update | Product/stock row updated |'
+brand_variables_used: '| Variable | Purpose |
+
+  |----------|---------|
+
+  | `{{BRAND_BLING_WEBHOOK_SECRET}}` | HMAC secret env name |
+
+  | `{{BRAND_SUPABASE_PROJECT_REF}}` | Target Supabase project |'
+example_handler: "Deno.serve(async (req) => {\n  const body = await req.text();\n  const payload = JSON.parse(body);\n  const\
+  \ event = payload.event ?? 'unknown';\n\n  switch (event) {\n    case 'produto_alterado':\n    case 'produto_inserido':\n\
+  \      await supabase.from('products')\n        .upsert({ bling_id: payload.id, bling_code: payload.codigo,\n          \
+  \        bling_stock: payload.estoque, bling_synced_at: new Date().toISOString() },\n                 { onConflict: 'bling_id'\
+  \ });\n      break;\n    case 'estoque_alterado':\n      await supabase.from('products')\n        .update({ bling_stock:\
+  \ payload.estoqueAtual, bling_synced_at: new Date().toISOString() })\n        .eq('bling_id', payload.id);\n      break;\n\
+  \  }\n  return new Response('OK');\n});"
+related_artifacts: '| Artifact | Kind | Role |
+
+  |----------|------|------|
+
+  | `ex_api_client_bling.md` | api_client | Outbound calls to Bling |
+
+  | `ex_integration_guide_bling.md` | integration_guide | Full setup guide |
+
+  | `ex_workflow_inventory_reconcile.md` | workflow | Inventory reconciliation |'

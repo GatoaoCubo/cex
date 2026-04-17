@@ -1,0 +1,113 @@
+id: ex_supabase_data_layer
+kind: supabase_data_layer
+pillar: P09
+title: Commerce Supabase Data Layer
+version: 0.1.0
+quality: null
+status: template
+brand_placeholders:
+- BRAND_SUPABASE_PROJECT_REF
+- BRAND_NAME
+tags:
+- commerce
+- template
+- distillation
+- supabase
+- database
+- backend
+purpose: Supabase backend specification for a multi-marketplace commerce platform — defines the core tables, RLS policies,
+  storage buckets, edge function auth, and client singleton pattern for `{{BRAND_NAME}}` backend services.
+when_to_use:
+- Bootstrapping a new Supabase project for commerce operations.
+- Documenting the data layer for onboarding new developers.
+- Reviewing RLS policies during security audits.
+- Referencing table schemas when writing edge functions or migrations.
+project_configuration: '| Field | Value |
+
+  |-------|-------|
+
+  | Project ref | `{{BRAND_SUPABASE_PROJECT_REF}}` |
+
+  | Region | `sa-east-1` (São Paulo, Brazil) |
+
+  | Database version | PostgreSQL 15+ |
+
+  | Auth | Email + magic link + Google OAuth |
+
+  | Storage | Supabase Storage (S3-compatible) |
+
+  | Edge Functions | Deno runtime |
+
+  | Realtime | Enabled on `products` table |'
+core_tables: ''
+products: "Primary catalog table. Source of truth for all product data.\n\ncreate table products (\n  id              uuid\
+  \ primary key default gen_random_uuid(),\n  sku             text not null unique,\n  title           text not null check\
+  \ (char_length(title) between 3 and 255),\n  description     text,\n  price           numeric(10,2) not null check (price\
+  \ > 0),\n  stock           integer not null default 0 check (stock >= 0),\n  status          text not null default 'draft'\
+  \ check (status in ('active','draft','archived')),\n  category        text,\n  images          jsonb default '[]',\n  shopify_id\
+  \      bigint unique,\n  bling_id        bigint unique,\n  meli_id         text,\n  shopify_synced_at timestamptz,\n  bling_synced_at\
+  \   timestamptz,\n  created_at      timestamptz default now(),\n  updated_at      timestamptz default now()\n);\ncreate\
+  \ index idx_products_sku on products(sku);\ncreate index idx_products_status on products(status);"
+bling_tokens: "OAuth token storage for Bling ERP.\n\ncreate table bling_tokens (\n  id            uuid primary key default\
+  \ gen_random_uuid(),\n  access_token  text not null,\n  refresh_token text not null,\n  expires_at    timestamptz not null,\n\
+  \  updated_at    timestamptz default now()\n);"
+meli_tokens: "OAuth token storage for Mercado Livre.\n\ncreate table meli_tokens (\n  id            uuid primary key default\
+  \ gen_random_uuid(),\n  access_token  text not null,\n  refresh_token text not null,\n  expires_at    timestamptz not null,\n\
+  \  user_id       bigint,\n  updated_at    timestamptz default now()\n);"
+sync_log: "Audit trail for all sync operations.\n\ncreate table sync_log (\n  id          uuid primary key default gen_random_uuid(),\n\
+  \  source      text not null,    -- shopify | bling | meli\n  mode        text not null,    -- pull | push | bidirectional\
+  \ | single\n  synced      integer default 0,\n  errors      integer default 0,\n  skipped     integer default 0,\n  run_at\
+  \      timestamptz default now()\n);"
+webhook_errors: "Persistent log of failed webhook deliveries.\n\ncreate table webhook_errors (\n  id          uuid primary\
+  \ key default gen_random_uuid(),\n  source      text,\n  topic       text,\n  delivery_id text,\n  error       text,\n \
+  \ occurred_at timestamptz default now()\n);"
+rls_policies: '-- Products: service role full access, anon read-only for active
+
+  alter table products enable row level security;
+
+  create policy "public_read_active" on products for select using (status = ''active'');
+
+  create policy "service_full_access" on products using (auth.role() = ''service_role'');
+
+
+  -- Tokens: service role only (no public access)
+
+  alter table bling_tokens enable row level security;
+
+  create policy "service_only" on bling_tokens using (auth.role() = ''service_role'');
+
+  alter table meli_tokens enable row level security;
+
+  create policy "service_only" on meli_tokens using (auth.role() = ''service_role'');'
+storage_buckets: '| Bucket | Access | Purpose |
+
+  |--------|--------|---------|
+
+  | `product-images` | Public read, service write | Product image CDN |
+
+  | `audit-reports` | Service only | Reconciliation JSON reports |
+
+  | `media-kits` | Public read | Downloadable product media kits |'
+client_singleton_pattern: "// src/integrations/supabase/client.ts\nimport { createClient } from '@supabase/supabase-js';\n\
+  import type { Database } from './types';\n\nconst supabaseUrl = import.meta.env.VITE_SUPABASE_URL;\nconst supabaseAnonKey\
+  \ = import.meta.env.VITE_SUPABASE_ANON_KEY;\n\nexport const supabase = createClient<Database>(supabaseUrl, supabaseAnonKey);\n\
+  \nFor edge functions, use the service role client:\n\nconst supabase = createClient(\n  Deno.env.get('SUPABASE_URL')!,\n\
+  \  Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!,\n);"
+brand_variables_used: '| Variable | Purpose |
+
+  |----------|---------|
+
+  | `{{BRAND_SUPABASE_PROJECT_REF}}` | Supabase project reference ID |
+
+  | `{{BRAND_NAME}}` | Brand name for project naming |'
+related_artifacts: '| Artifact | Kind | Role |
+
+  |----------|------|------|
+
+  | `ex_db_connector_supabase.md` | db_connector | Connection configuration |
+
+  | `ex_interface_supabase_tables.md` | interface | Table contracts and type definitions |
+
+  | `ex_validator_inventory_invariants.md` | validator | Business rule enforcement |
+
+  | `ex_workflow_multi_marketplace_sync.md` | workflow | Primary consumer of this data layer |'

@@ -1,0 +1,97 @@
+id: ex_landing_page_admin_dashboard
+kind: landing_page
+pillar: P05
+title: Admin Dashboard Landing Page
+version: 0.1.0
+quality: null
+status: template
+brand_placeholders:
+- BRAND_NAME
+- BRAND_PRIMARY_COLOR
+tags:
+- commerce
+- template
+- distillation
+- admin
+- dashboard
+- landing_page
+purpose: Admin hub page for the commerce platform — displays KPI summary cards, navigation links to all admin modules (Products,
+  Shopify Sync, Integrations, CRM, Sales), and real-time sync status indicators.
+when_to_use:
+- Serving as the entry point after admin login at `/admin`.
+- Providing a high-level overview of platform health (sync status, product count, error alerts).
+- Navigating to specialized admin modules without memorizing deep URLs.
+page_structure: "/admin (AdminDashboard.tsx)\n  |\n  +-- [Header] {{BRAND_NAME}} Admin — logo + nav + user menu\n  |\n  +--\
+  \ [Stats Row] 4 KPI cards\n  |     |-- Total Products (from Supabase)\n  |     |-- Shopify Synced (shopify_id IS NOT NULL)\n\
+  \  |     |-- Bling Synced (bling_id IS NOT NULL)\n  |     |-- Pending Sync (shopify_synced_at < updated_at)\n  |\n  +--\
+  \ [Integration Status] Badge row\n  |     |-- Shopify: connected | error | not_configured\n  |     |-- Bling: connected\
+  \ | token_expiring | error\n  |     |-- ML: connected | token_expiring | not_connected\n  |\n  +-- [Quick Actions] Button\
+  \ grid\n  |     |-- \"Sync All\" -> POST /unified-sync (bidirectional)\n  |     |-- \"Reconcile Inventory\" -> POST /inventory-reconcile\
+  \ (dry_run=true)\n  |     |-- \"Audit Catalog\" -> POST /bling-audit (dry_run=true)\n  |     |-- \"Manage Webhooks\" ->\
+  \ GET /webhook-manager?action=list\n  |\n  +-- [Navigation Cards] Grid (2x3)\n        |-- Products (/admin/products)\n \
+  \       |-- Shopify Sync (/admin/shopify-sync)\n        |-- Integrations (/admin/integracoes)\n        |-- CRM (/admin/crm)\n\
+  \        |-- Sales Composer (/admin/vendas)\n        |-- Orders (/admin/b2b-orders)"
+kpi_data_queries: "// Stats loaded on page mount\nconst { data: stats } = await supabase.rpc('get_dashboard_stats');\n\n//\
+  \ Or equivalent manual queries:\nconst { count: total } = await supabase.from('products').select('*', { count: 'exact',\
+  \ head: true });\nconst { count: shopifySynced } = await supabase.from('products')\n  .select('*', { count: 'exact', head:\
+  \ true }).not('shopify_id', 'is', null);\nconst { count: blingSynced } = await supabase.from('products')\n  .select('*',\
+  \ { count: 'exact', head: true }).not('bling_id', 'is', null);\nconst { count: pending } = await supabase.from('products')\n\
+  \  .select('*', { count: 'exact', head: true })\n  .lt('shopify_synced_at', 'updated_at');"
+component_architecture: '| Component | Type | Purpose |
+
+  |-----------|------|---------|
+
+  | `StatCard` | presentational | Single KPI with icon + count + label |
+
+  | `IntegrationBadge` | smart | Checks token expiry from DB; shows status color |
+
+  | `QuickAction` | smart | Button that calls edge function + shows result toast |
+
+  | `NavCard` | presentational | Large click target with icon + module name |
+
+  | `AdminLayout` | layout | Sidebar + header wrapper (shared by all /admin/* pages) |'
+styling_contract: '| Token | Value |
+
+  |-------|-------|
+
+  | Primary color | `{{BRAND_PRIMARY_COLOR}}` |
+
+  | Background | `#FAFAFA` |
+
+  | Card shadow | `0 1px 3px rgba(0,0,0,0.1)` |
+
+  | Stat card width | 25% of container (4-column grid, responsive 2-column mobile) |
+
+  | Nav card size | 160x160px minimum |'
+auth_guard: "This page requires admin authentication. Wrap the route with `ProtectedRoute`:\n\n<Route\n  path=\"/admin\"\n\
+  \  element={\n    <ProtectedRoute adminOnly={true}>\n      <AdminDashboard />\n    </ProtectedRoute>\n  }\n/>"
+brand_variables_used: '| Variable | Purpose |
+
+  |----------|---------|
+
+  | `{{BRAND_NAME}}` | App name shown in header + page title |
+
+  | `{{BRAND_PRIMARY_COLOR}}` | Primary button and active state color |'
+example_mock_render: '// Stat cards
+
+  <StatCard icon={Package} label="Total Products" count={312} />
+
+  <StatCard icon={CheckCircle} label="Shopify Synced" count={289} color="green" />
+
+  <StatCard icon={AlertTriangle} label="Pending Sync" count={15} color="amber" />
+
+
+  // Integration badges
+
+  <IntegrationBadge name="Shopify" status="connected" />
+
+  <IntegrationBadge name="Bling" status="token_expiring" warningAt="2026-04-20" />'
+related_artifacts: '| Artifact | Kind | Role |
+
+  |----------|------|------|
+
+  | `ex_component_map_admin_dashboard.md` | component_map | Component layout map |
+
+  | `ex_supabase_data_layer.md` | supabase_data_layer | Data source for KPIs |
+
+  | `ex_workflow_multi_marketplace_sync.md` | workflow | Quick Action target |'
