@@ -10,7 +10,7 @@ author: builder
 domain: canary_config
 quality: null
 tags: [examples, canary_config, P09]
-llm_function: INJECT
+llm_function: GOVERN
 tldr: "Golden and anti-examples for canary_config construction."
 density_score: null
 ---

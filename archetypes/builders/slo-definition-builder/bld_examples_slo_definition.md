@@ -10,7 +10,7 @@ author: builder
 domain: slo_definition
 quality: null
 tags: [examples, slo_definition, P09]
-llm_function: INJECT
+llm_function: GOVERN
 tldr: "Golden and anti-examples for slo_definition construction."
 density_score: null
 ---

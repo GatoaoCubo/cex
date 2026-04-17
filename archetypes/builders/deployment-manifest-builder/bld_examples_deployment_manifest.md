@@ -10,7 +10,7 @@ author: builder
 domain: deployment_manifest
 quality: null
 tags: [examples, deployment_manifest, P09]
-llm_function: INJECT
+llm_function: GOVERN
 tldr: "Golden and anti-examples for deployment_manifest construction."
 density_score: null
 ---

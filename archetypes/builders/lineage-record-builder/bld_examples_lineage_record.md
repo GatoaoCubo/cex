@@ -10,7 +10,7 @@ author: builder
 domain: lineage_record
 quality: null
 tags: [examples, lineage_record, P01]
-llm_function: INJECT
+llm_function: GOVERN
 tldr: "Golden example for lineage_record construction."
 density_score: null
 ---

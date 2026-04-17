@@ -10,7 +10,7 @@ author: builder
 domain: saga
 quality: null
 tags: [examples, saga, P12]
-llm_function: INJECT
+llm_function: GOVERN
 tldr: "Golden and anti-examples for saga construction."
 density_score: null
 ---
