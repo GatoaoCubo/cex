@@ -134,12 +134,13 @@ n04:
 # --- N05: Operations & DevOps ---
 n05:
   cli: claude
-  model: claude-sonnet-4-6
-  flags: "--dangerously-skip-permissions --permission-mode bypassPermissions --no-chrome"
-  context: 200000
+  model: claude-opus-4-6
+  flags: "--dangerously-skip-permissions --permission-mode bypassPermissions"
+  context: 1000000
   domain: operations
   mcps: ".mcp-n05.json"
   settings: ".claude/nucleus-settings/n05.json"
+  # chrome: enabled -- no --no-chrome flag; claude-in-chrome extension handles browser_tool + computer_use
   fallback_chain:
     - {cli: codex,  model: gpt-5,             flags: "--dangerously-bypass-approvals-and-sandbox"}
     - {cli: gemini, model: gemini-2.5-flash-lite, flags: "--yolo"}
@@ -151,7 +152,7 @@ n05:
   fallback_local:
     cli: ollama
     model: qwen3:8b
-  notes: "2026-04-13: opus->sonnet. gpt-5 (ChatGPT auth compatible). Code review + CI/CD well-defined for Sonnet."
+  notes: "2026-04-17: sonnet->opus. Promoted for browser_tool + computer_use (UI automation: Supabase, Railway, NotebookLM). Chrome enabled (no --no-chrome). 1M context for multi-step browser sessions."
 
 # --- N06: Commercial & Brand ---
 n06:
@@ -179,8 +180,8 @@ n06:
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 # GRID LOAD DISTRIBUTION (6 simultaneous during /grid):
 #
-#   Claude/Opus:  N03 + N07       = 2 (deep reasoning, quality-critical)
-#   Claude/Sonnet: N01 + N02 + N04 + N05 + N06 = 5 (structured tasks, 5x throughput)
+#   Claude/Opus:  N03 + N05 + N07 = 3 (deep reasoning + browser automation)
+#   Claude/Sonnet: N01 + N02 + N04 + N06 = 4 (structured tasks)
 #   N07 runs in separate session (doesn't compete with grid)
 #
 # 2026-04-13: Budget optimization. 7 Opus -> 2 Opus + 5 Sonnet.

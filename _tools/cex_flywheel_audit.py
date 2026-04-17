@@ -84,39 +84,40 @@ def audit_L0() -> None:
 # --- L1: Pillars ---
 def audit_L1() -> None:
     """Audit pillar directories, schemas, and compiled outputs."""
-    print("\n=== L1: Pillars (P01-P12) ===")
+    print("\n=== L1: Pillars (P01-P12 in N00_genesis) ===")
+    n00 = CEX_ROOT / "N00_genesis"
     for i in range(1, 13):
         pdir = None
-        for d in CEX_ROOT.iterdir():
-            if d.is_dir() and d.name.startswith(f"P{i:02d}_"):
-                pdir = d
-                break
+        if n00.exists():
+            for d in n00.iterdir():
+                if d.is_dir() and d.name.startswith(f"P{i:02d}_"):
+                    pdir = d
+                    break
         if not pdir:
-            record("L1", f"P{i:02d}", "PHANTOM", "pillar dir missing")
+            record("L1", f"P{i:02d}", "PHANTOM", "pillar dir missing in N00_genesis")
             continue
 
         schema = pdir / "_schema.yaml"
-        record("L1", f"{pdir.name}/_schema", "WIRED" if schema.exists() else "PHANTOM")
+        record("L1", f"N00_genesis/{pdir.name}/_schema", "WIRED" if schema.exists() else "PHANTOM")
 
         compiled = pdir / "compiled"
         if compiled.exists():
             count = len(list(compiled.glob("*")))
-            record("L1", f"{pdir.name}/compiled", "WIRED" if count > 0 else "BROKEN", f"{count} files")
+            record("L1", f"N00_genesis/{pdir.name}/compiled", "WIRED" if count > 0 else "BROKEN", f"{count} files")
         else:
-            record("L1", f"{pdir.name}/compiled", "PHANTOM")
+            record("L1", f"N00_genesis/{pdir.name}/compiled", "PHANTOM")
 
 
 # --- L2: Nuclei ---
 def audit_L2() -> None:
     """Audit nucleus directory structure, compiled outputs, and rules."""
     print("\n=== L2: Nuclei (N01-N07) ===")
-    # Canonical 12-pillar fractal: every nucleus mirrors all 12 pillars.
-    # knowledge=P01, agents=P02, prompts=P03, tools=P04, output=P05, schemas=P06,
-    # quality=P07, architecture=P08, config=P09, memory=P10, feedback=P11,
-    # orchestration=P12. Plus "compiled" (auto-gen) and "rules" (nucleus-scoped).
-    expected = ["agents", "architecture", "compiled", "config", "feedback",
-                "knowledge", "memory", "orchestration", "output", "prompts",
-                "quality", "rules", "schemas", "tools"]
+    # Canonical 12-pillar convention-over-configuration hierarchy: every nucleus mirrors all 12 pillars.
+    # P-numbered since STRUCT_ALIGN V1. Plus "compiled" (auto-gen) and "rules" (nucleus-scoped).
+    expected = ["P01_knowledge", "P02_model", "P03_prompt", "P04_tools", "P05_output",
+                "P06_schema", "P07_evals", "P08_architecture", "P09_config",
+                "P10_memory", "P11_feedback", "P12_orchestration",
+                "compiled", "rules"]
     for i in range(1, 8):
         ndir = None
         for d in CEX_ROOT.iterdir():

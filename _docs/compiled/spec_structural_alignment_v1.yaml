@@ -7,7 +7,7 @@ created: 2026-04-17
 author: n07_orchestrator
 domain: CEX system architecture
 quality_target: 9.0
-status: SPEC
+status: DONE
 scope: N00-N07 + archetypes + tools + commands
 depends_on: null
 tags:
