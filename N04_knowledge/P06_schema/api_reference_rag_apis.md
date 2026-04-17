@@ -5,7 +5,7 @@ pillar: P06
 nucleus: n04
 title: "API Reference -- RAG and Vector Store APIs"
 version: "1.0.0"
-quality: null
+quality: 9.1
 tags: [api_reference, rag, vector_store, supabase, pinecone, chroma, pgvector, n04, P06]
 domain: knowledge retrieval APIs
 status: active

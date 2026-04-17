@@ -5,7 +5,7 @@ pillar: P04
 nucleus: n04
 title: "Search Tool -- N04 Knowledge Corpus Search"
 version: "1.0.0"
-quality: null
+quality: 9.2
 tags: [search_tool, n04, hybrid_search, semantic, lexical, BM25, reranker, P04]
 domain: knowledge management
 status: active
