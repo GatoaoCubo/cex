@@ -5,8 +5,9 @@ pillar: P06
 nucleus: n03
 title: Foundation Artifact Validator
 version: 1.0
-quality: null
+quality: 9.0
 tags: [schema, validator, governance, pre_commit, n03]
+density_score: 1.0
 ---
 
 

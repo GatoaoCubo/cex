@@ -5,8 +5,9 @@ pillar: P06
 nucleus: n03
 title: Engineering Artifact Type
 version: 1.0
-quality: null
+quality: 9.0
 tags: [schema, type, engineering, contract, n03]
+density_score: 1.0
 ---
 
 
