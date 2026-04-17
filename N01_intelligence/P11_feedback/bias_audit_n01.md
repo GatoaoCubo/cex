@@ -8,10 +8,11 @@ version: 1.0.0
 created: 2026-04-17
 author: n01_intelligence
 domain: research-intelligence
-quality: null
+quality: 9.1
 tags: [bias_audit, research_bias, analytical_envy, n01, selection_bias, confirmation_bias]
 tldr: "Systematic bias detection for N01 research outputs: selection bias (source coverage), confirmation bias (conclusion direction), recency bias (temporal skew), and availability bias (easy-to-find favored). Runs as F7 GOVERN sub-check."
 density_score: 0.91
+updated: "2026-04-17"
 ---
 
 <!-- 8F: F1 constrain=P11/bias_audit F2 become=bias-audit-builder F3 inject=quality_gate_intelligence+search_strategy_n01+eval_framework_n01+sch_validator_n01 F4 reason=Analytical Envy is worthless if N01 only finds evidence supporting what it already believes -- bias audit is intellectual integrity F5 call=cex_compile F6 produce=bias_audit_n01.md F7 govern=frontmatter+ascii+tables F8 collaborate=N01_intelligence/P11_feedback/ -->
