@@ -5,7 +5,7 @@ pillar: P06
 nucleus: n04
 title: "Input Schema -- Knowledge Query Contract"
 version: "1.0.0"
-quality: null
+quality: 9.1
 tags: [input_schema, knowledge_query, rag, retrieval, n04, P06]
 domain: knowledge retrieval
 status: active

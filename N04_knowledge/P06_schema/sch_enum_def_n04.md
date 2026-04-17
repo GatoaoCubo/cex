@@ -5,10 +5,11 @@ pillar: P06
 nucleus: n04
 title: Knowledge Signal Enum
 version: 1.0
-quality: null
+quality: 9.0
 tags: [schema, enum, knowledge, taxonomy, governance]
 name: knowledge_signal_state
 values: [raw_capture, normalized, enriched, contested, stale, archived, rejected]
+density_score: 1.0
 ---
 <!-- 8F: F1 constrain=P06/enum_def F2 become=enum-def-builder F3 inject=n04-knowledge+kc_enum_def+P06 examples+P06 schema F4 reason=closed-set vocabulary for knowledge ingestion rigor F5 call=shell,apply_patch F6 produce=5908 bytes F7 govern=frontmatter+ascii+density+80-line self-check F8 collaborate=N04_knowledge/P06_schema/sch_enum_def_n04.md -->
 # Knowledge Signal Enum
