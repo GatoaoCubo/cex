@@ -2,7 +2,7 @@
 # Opens N07 Orchestrator on the cex (gato-ao-cubo) worktree
 # Usage: gato3 [subcommand] [args...]  (same as cex)
 
-$CexRoot = 'C:\Users\PC\Documents\GitHub\cex'
+$CexRoot = 'C:\Users\CEX\Documents\GitHub\gato3'
 Set-Location $CexRoot
 
 if ($args.Count -eq 0) {
