@@ -5,8 +5,9 @@ pillar: P06
 nucleus: n01
 title: Competitive Insight Type
 version: 1.0
-quality: null
+quality: 9.0
 tags: [type_def, insight, research, benchmark]
+density_score: 1.0
 ---
 
 <!-- 8F: F1 constrain=P06/type_def F2 become=type-def-builder F3 inject=nucleus_def_n01+n01-intelligence+kc_type_def+P06_schema+type examples F4 reason=reusable object for comparative insight records F5 call=apply_patch+cex_compile F6 produce=5308 bytes F7 govern=frontmatter+ascii+80-line+self-check F8 collaborate=N01_intelligence/P06_schema/sch_type_def_n01.md -->
