@@ -8,10 +8,11 @@ version: 1.0.0
 created: 2026-04-17
 author: n01_intelligence
 domain: research-intelligence
-quality: null
+quality: 9.2
 tags: [few_shot_example, in_context_learning, n01, research_quality, analytical_envy]
 tldr: "4 labeled few-shot examples for N01 research quality calibration: 2 high-quality (score 9+) and 2 low-quality (score 6-7) with annotations explaining the difference. Used to ground llm_judge_n01 scoring."
 density_score: 0.89
+updated: "2026-04-17"
 ---
 
 <!-- 8F: F1 constrain=P03/few_shot_example F2 become=few-shot-example-builder F3 inject=scoring_rubric_research+eval_framework_n01+llm_judge_n01 F4 reason=calibration examples make the rubric operational -- without concrete examples of what 9.0 and 6.0 look like, judges drift; few-shot examples anchor the scale F5 call=cex_compile F6 produce=few_shot_example_research.md F7 govern=frontmatter+ascii+tables F8 collaborate=N01_intelligence/P03_prompt/ -->
