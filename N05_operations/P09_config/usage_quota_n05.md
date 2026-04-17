@@ -5,7 +5,7 @@ pillar: P09
 nucleus: n05
 title: N05 Operations Resource Quota
 version: 1.0.0
-quality: null
+quality: 9.0
 created: "2026-04-17"
 updated: "2026-04-17"
 author: usage-quota-builder
@@ -16,6 +16,7 @@ reset_interval: PT1H
 enforcement_policy: hard
 tldr: N05 resource ceilings -- 7 dimensions, soft-warn at 80%, hard-block at 100%, operator override only.
 tags: [usage_quota, operations, n05, resource-management, enforcement, gating-wrath]
+density_score: 1.0
 ---
 
 # N05 Operations Resource Quota

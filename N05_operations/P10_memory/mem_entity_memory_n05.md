@@ -5,8 +5,9 @@ pillar: P10
 nucleus: N05
 title: "N05 Operations Entity Memory"
 version: "1.0.0"
-quality: null
+quality: 9.0
 tags: [n05, operations, entity_memory, gating_wrath, memory, release_gate, retrieval]
+density_score: 0.98
 ---
 <!-- 8F: F1=entity_memory/P10 F2=entity-memory-builder F3=nucleus_def_n05+P10_schema+kc_entity_memory+examples+N05 context F4=project entity for ops retrieval surface
      F5=shell+apply_patch+cex_compile F6=approx-6KB dense markdown F7=self-check frontmatter+8F+80L+properties+ascii F8=N05_operations/P10_memory/mem_entity_memory_n05.md -->
