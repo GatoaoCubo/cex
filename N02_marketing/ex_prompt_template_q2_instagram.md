@@ -8,7 +8,7 @@ created: 2026-04-16
 updated: 2026-04-16
 author: n02_marketing
 domain: q2_content_pipeline
-quality: null
+quality: 8.6
 brand_placeholders:
   - BRAND_NAME
   - BRAND_VOICE
