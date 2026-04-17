@@ -7,10 +7,11 @@ version: 1.0.0
 created: 2026-04-17
 author: n03_engineering
 domain: artifact-construction
-quality: null
+quality: 9.1
 tags: [enum-def, build-actions, N03, constants, pillar, nucleus, verb]
 tldr: "Canonical enumerations for all CEX build-time constants: BUILD_ACTION, PILLAR, NUCLEUS, MODEL_TIER, SIGNAL_EVENT, QUALITY_TIER, PIPELINE_FUNCTION. Machine-parseable source of truth for all 259 builders."
 density_score: 0.93
+updated: "2026-04-17"
 ---
 
 # Enum Definitions: Build Actions and CEX Constants

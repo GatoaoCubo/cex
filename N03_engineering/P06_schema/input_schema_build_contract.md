@@ -7,10 +7,11 @@ version: 1.0.0
 created: 2026-04-17
 author: n03_engineering
 domain: artifact-construction
-quality: null
+quality: 9.2
 tags: [input-schema, build-contract, N03, 8F, task-dispatch]
 tldr: "Canonical input contract for any artifact build task dispatched to N03. Defines kind, pillar, nucleus, verb, quality_target, and execution flags."
 density_score: 0.91
+updated: "2026-04-17"
 ---
 
 # Input Schema: Build Task Contract
