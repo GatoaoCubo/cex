@@ -17,7 +17,7 @@ warmup: 3
 percentiles: [50, 95, 99]
 environment: "Windows 11 Pro 10.0.26200, Python 3.12, bash via Git-for-Windows, Claude Max Opus"
 domain: "operations_pipeline"
-quality: null
+quality: 9.1
 tags: [benchmark, latency, operations, compile, dispatch, signal, pipeline, P07]
 tldr: "Ops pipeline benchmark: compile_single <2s, compile_all <60s, doctor <30s, signal_write <0.1s, dispatch_solo <10s, dispatch_grid <30s"
 comparison_subjects: [baseline_target, degraded_threshold]

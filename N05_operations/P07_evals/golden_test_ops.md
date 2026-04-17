@@ -16,7 +16,7 @@ edge_case: true
 reviewer: "n07_orchestrator"
 approval_date: "2026-04-17"
 domain: "operations"
-quality: null
+quality: 9.1
 tags: [golden-test, n05-operations, compile, signal, frontmatter, sanitize, doctor]
 tldr: "8 N05 ops golden fixtures: compile->yaml, signal->json, frontmatter pass/fail, doctor healthy, sanitize pass/fail, commit hook accept."
 density_score: 0.91
