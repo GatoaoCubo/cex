@@ -7,7 +7,7 @@ title: "Attribution Framework -- Content + Promo Multi-Touch"
 description: "Multi-touch attribution framework for content-driven ecommerce. Defines attribution models, UTM taxonomy, GA4 event contracts, and cohort segmentation by promo participation."
 domain: analytics
 nucleus: N06
-quality: null
+quality: 9.0
 tags: [cohort-analysis, attribution, multi-touch, utm, ga4, promo, content, ecommerce]
 brand_placeholders:
   - BRAND_DOMAIN
@@ -15,6 +15,7 @@ brand_placeholders:
   - BRAND_GA4_ID
   - BRAND_CURRENCY
   - BRAND_PROMO_DATES
+density_score: 1.0
 ---
 
 # Attribution Framework -- Content + Promo Multi-Touch
