@@ -7,10 +7,11 @@ version: 1.0.0
 created: 2026-04-17
 author: n03_engineering
 domain: artifact-construction
-quality: null
+quality: 8.8
 tags: [action_paradigm, build, 8F, input-to-artifact, coc, N03, execution-model]
 tldr: "Execution model for the CEX build action: maps any user input to a typed artifact via the 8F pipeline. Defines the precondition stack, execution phases, postconditions, and error recovery protocols."
 density_score: 0.90
+updated: "2026-04-17"
 ---
 
 # Action Paradigm: CEX Build
