@@ -7,7 +7,7 @@ title: "Subscription Tier Template -- Content Factory / AI Platform"
 description: "Three-tier subscription model for content-as-a-service or AI platform products. Free/Creator/Pro/Enterprise with per-format credits, usage limits, and annual discount."
 domain: content_monetization
 nucleus: N06
-quality: null
+quality: 9.0
 tags: [subscription-tier, content-factory, pricing, saas, credits, freemium, ai-platform]
 brand_placeholders:
   - BRAND_NAME
@@ -17,6 +17,7 @@ brand_placeholders:
   - BRAND_SUBSCRIPTION_PRICE_TIER_3
   - BRAND_DOMAIN
   - BRAND_PARTNER_EMAIL
+density_score: 1.0
 ---
 
 # Subscription Tier Template -- Content Factory / AI Platform
