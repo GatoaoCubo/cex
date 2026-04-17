@@ -1,0 +1,81 @@
+id: p11_bl_n03
+kind: bugloop
+pillar: P11
+title: Bugloop -- N03 Autonomous Build Error Detection
+version: 1.0.0
+created: 2026-04-17
+author: n03_engineering
+domain: artifact-construction
+quality: null
+tags:
+- bugloop
+- N03
+- autonomous
+- error-detection
+- self-healing
+- 8F
+- quality
+tldr: Autonomous bug detection and fix loop for N03 build errors. Scans for compile failures, frontmatter violations, vocabulary
+  drift, and quality regressions. Applies heuristic fixes first, LLM rewrites as fallback.
+density_score: 0.9
+purpose: 'The bugloop is N03''s self-healing mechanism. After every build batch, it scans for defects and applies corrections
+  autonomously -- no N07 intervention needed for routine failures. Escalates only when heuristic + LLM fix both fail. Inventive
+  Pride: bugs are an insult to craft. The bugloop runs until the build is clean.'
+trigger_conditions: '| Trigger | Condition | Priority |
+
+  |---------|-----------|---------|
+
+  | Compile failure | `cex_compile.py` exits non-zero | CRITICAL |
+
+  | Frontmatter parse error | YAML invalid in produced artifact | HIGH |
+
+  | Hard gate failure (H01-H07) | Any hard gate fails at F7 | HIGH |
+
+  | Quality below floor | final_score < 7.0 after 2 retries | MEDIUM |
+
+  | Vocabulary drift | > 2 non-canonical terms detected | MEDIUM |
+
+  | Density below floor | density_score < 0.80 | LOW |'
+fix_strategy_matrix: '| Bug Type | Heuristic Fix | LLM Fix | Escalate |
+
+  |----------|--------------|---------|---------|
+
+  | YAML syntax error | regex patch closing tags | rewrite frontmatter block | if still invalid |
+
+  | Missing required field | inject field with null/default | regenerate frontmatter | never (always fixable) |
+
+  | quality != null | set quality: null | N/A (deterministic) | never |
+
+  | Placeholder text | remove matched pattern | context-aware replacement | if semantics unclear |
+
+  | Density < 0.80 | convert prose lists to tables | full F6 rewrite with density emphasis | after 2 LLM retries |
+
+  | Vocabulary drift | replace via spec_metaphor_dictionary | inject vocab KC + rewrite section | after 2 LLM retries |
+
+  | Compile error | fix path/frontmatter issues | full artifact rewrite | after 2 full rewrites |'
+loop_protocol: "SCAN phase (after each build batch):\n  1. python _tools/cex_compile.py {artifact_path} -> collect errors\n\
+  \  2. python _tools/cex_doctor.py --file {artifact_path} -> collect gate failures\n  3. python _tools/cex_retriever.py --vocab-check\
+  \ {artifact_path} -> vocabulary drift\n  4. For each error found: classify -> queue fix\n\nFIX phase (ordered by priority):\n\
+  \  1. Apply heuristic fix (deterministic, 0 tokens)\n  2. Re-run compile + doctor\n  3. If still failing: apply LLM fix\
+  \ (inject error context into F6)\n  4. Re-run compile + doctor (max 2 LLM attempts per error)\n  5. If still failing after\
+  \ 2 LLM attempts: escalate to N07\n\nVERIFY phase:\n  1. All artifacts in batch must pass cex_compile.py\n  2. No hard gate\
+  \ failures\n  3. vocabulary drift check passes\n  4. Write bugloop report to .cex/runtime/signals/bugloop_n03_{timestamp}.json"
+bugloop_report_format: "timestamp: 2026-04-17T14:30:00\nnucleus: n03\nbatch_size: 6\nerrors_found: 2\nerrors_fixed_heuristic:\
+  \ 1\nerrors_fixed_llm: 1\nerrors_escalated: 0\nartifacts:\n  - path: N03_engineering/P06_schema/input_schema_build_contract.md\n\
+  \    status: clean\n  - path: N03_engineering/P06_schema/type_def_cex_types.md\n    status: fixed_heuristic\n    fix: \"\
+  added missing density_score field\"\n  - path: N03_engineering/P07_evals/scoring_rubric_n03.md\n    status: fixed_llm\n\
+  \    fix: \"weights did not sum to 100; redistributed D3+D4\""
+escalation_criteria: 'Escalate to N07 (write signal, do not retry) when:
+
+  - Compile error persists after 2 heuristic + 2 LLM attempts
+
+  - Artifact kind is unresolvable (not in kinds_meta.json)
+
+  - output_path is outside repo root (security violation)
+
+  - Session token budget exhausted before fix complete'
+heuristic_fix_library: "HEURISTIC_FIXES = {\n    \"quality_not_null\": lambda text: re.sub(r'quality:\\s*[\\d.]+', 'quality:\
+  \ null', text),\n    \"placeholder_removal\": lambda text: re.sub(r'\\{\\{[a-zA-Z_]+\\}\\}', '', text),\n    \"density_score_missing\"\
+  : lambda text: text.replace(\n        'tags:', 'density_score: 0.85\\ntags:'\n    ) if 'density_score' not in text else\
+  \ text,\n    \"version_format\": lambda text: re.sub(\n        r'version:\\s*\"?(\\d+)\"?', r'version: \\1.0.0', text\n\
+  \    ),\n}"

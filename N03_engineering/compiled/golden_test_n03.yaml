@@ -1,0 +1,88 @@
+id: p07_gt_n03
+kind: golden_test
+pillar: P07
+title: Golden Tests -- N03 Builder Outputs
+version: 1.0.0
+created: 2026-04-17
+author: n03_engineering
+domain: artifact-construction
+quality: null
+tags:
+- golden-test
+- N03
+- builder
+- expected-output
+- regression
+- 8F
+tldr: 'Golden output tests for N03''s primary builders. Each test case defines: input intent, expected kind, expected frontmatter
+  fields, structural assertions, and forbidden patterns. Run before any builder ISO update.'
+density_score: 0.91
+purpose: Golden tests capture the EXPECTED output of N03's builders. When a builder ISO is updated, golden tests detect unintended
+  regressions. These are NOT unit tests -- they test end-to-end builder output shape, not logic.
+test_execution: 'python _tools/cex_system_test.py --golden --nucleus n03
+
+  # Or specific kind:
+
+  python _tools/cex_system_test.py --golden --kind input_schema
+
+
+  Pass condition: all assertions match for every test case.
+
+  Fail condition: any assertion fails OR frontmatter field missing.
+
+  Regression: test that previously passed now fails.'
+golden_test_format: "Each test case:\ntest_id: gt_n03_{kind}_{variant}\nkind: string                    # target kind\nintent:\
+  \ string                  # input to builder\nexpected:\n  frontmatter:\n    kind: string                # must match exactly\n\
+  \    pillar: string              # must match exactly\n    quality: null               # always null\n    density_score:\
+  \ \">= 0.85\"    # numeric assertion\n  body:\n    min_sections: integer       # H2 count minimum\n    must_contain: string[]\
+  \      # required strings in body\n    must_not_contain: string[]  # forbidden patterns\n    density_floor: 0.80\n  compile:\n\
+  \    exit_code: 0                # cex_compile.py must succeed"
+test_cases: ''
+gt_n03_001_input_schema_basic: "test_id: gt_n03_input_schema_basic\nkind: input_schema\nintent: \"create an input schema for\
+  \ a build task\"\nexpected:\n  frontmatter:\n    kind: input_schema\n    pillar: P06\n    quality: null\n    density_score:\
+  \ \">= 0.85\"\n  body:\n    min_sections: 3\n    must_contain:\n      - \"## Fields\"\n      - \"| Field |\"\n      - \"\
+  | Type |\"\n      - \"## Validation Rules\"\n      - \"## Examples\"\n    must_not_contain:\n      - \"TODO\"\n      - \"\
+  TBD\"\n      - \"{{placeholder}}\"\n      - quality: 9  # self-scoring\n    density_floor: 0.82\n  compile:\n    exit_code:\
+  \ 0"
+gt_n03_002_knowledge_card_with_domain: "test_id: gt_n03_knowledge_card_domain\nkind: knowledge_card\nintent: \"create a knowledge\
+  \ card about embedding strategies\"\nexpected:\n  frontmatter:\n    kind: knowledge_card\n    pillar: P01\n    quality:\
+  \ null\n  body:\n    min_sections: 4\n    must_contain:\n      - \"## Definition\"\n      - \"## Application\"\n    must_not_contain:\n\
+  \      - \"I don't know\"\n      - \"Not applicable\"\n    density_floor: 0.80\n  compile:\n    exit_code: 0"
+gt_n03_003_workflow_with_steps: "test_id: gt_n03_workflow_steps\nkind: workflow\nintent: \"create a workflow for artifact\
+  \ build pipeline\"\nexpected:\n  frontmatter:\n    kind: workflow\n    pillar: P12\n    quality: null\n  body:\n    min_sections:\
+  \ 3\n    must_contain:\n      - \"## Steps\"\n      - \"## Trigger\"\n    density_floor: 0.80\n  compile:\n    exit_code:\
+  \ 0"
+gt_n03_004_scoring_rubric_weight_sum: "test_id: gt_n03_scoring_rubric_weights\nkind: scoring_rubric\nintent: \"create a scoring\
+  \ rubric for artifact quality\"\nexpected:\n  frontmatter:\n    kind: scoring_rubric\n    pillar: P07\n    quality: null\n\
+  \  body:\n    min_sections: 3\n    must_contain:\n      - \"| Weight |\"\n      - \"100%\"      # weights must sum to 100\n\
+  \    density_floor: 0.82\n  assertions:\n    - type: weight_sum\n      target: 100\n      tolerance: 0\n  compile:\n   \
+  \ exit_code: 0"
+gt_n03_005_agent_frontmatter_completeness: "test_id: gt_n03_agent_completeness\nkind: agent\nintent: \"create an agent for\
+  \ research tasks\"\nexpected:\n  frontmatter:\n    kind: agent\n    pillar: P02\n    quality: null\n  body:\n    min_sections:\
+  \ 4\n    must_contain:\n      - \"## Capabilities\"\n      - \"## Tools\"\n      - \"## Sin Lens\"\n    density_floor: 0.80\n\
+  \  compile:\n    exit_code: 0"
+forbidden_pattern_library: 'These patterns, if found in any N03 output, fail the golden test:
+
+
+  | Pattern | Reason |
+
+  |---------|--------|
+
+  | `quality: [0-9]` | Self-scoring violation |
+
+  | `TODO` / `TBD` / `FIXME` | Placeholder in production output |
+
+  | `{{[a-zA-Z_]+}}` | Unresolved template variable |
+
+  | `research card` | Vocabulary drift (should be knowledge_card) |
+
+  | `brain query` | Vocabulary drift (should be cex_retriever.py) |
+
+  | `N/A` as only content of a section | Empty section placeholder |
+
+  | Non-ASCII chars in .py/.ps1 code blocks | ASCII rule violation |'
+test_maintenance:
+- Run golden tests before ANY change to builder ISOs
+- 'If output legitimately changes (spec update): update golden test first, then update ISO'
+- Golden tests are the CONTRACT between spec writers and builders
+- Never delete a golden test without a spec change justifying the removal

@@ -1,0 +1,128 @@
+---
+id: p07_rc_n03
+kind: regression_check
+pillar: P07
+title: "Regression Check -- N03 Build Quality"
+version: 1.0.0
+created: 2026-04-17
+author: n03_engineering
+domain: artifact-construction
+quality: null
+tags: [regression-check, N03, quality, build, drift-detection, 8F]
+tldr: "Regression detection protocol for N03 artifact quality. Tracks quality trends per kind, flags score drops >= 0.5 from rolling baseline, detects vocabulary drift, and identifies structural regressions after schema migrations."
+density_score: 0.89
+---
+
+# Regression Check: N03 Build Quality
+
+## Purpose
+
+Detects when artifact quality DEGRADES over build iterations.
+Run automatically at F7b LEARN after every scored artifact.
+Primary defense against quality rot in high-churn pillars (P03, P06, P08).
+
+## Regression Triggers
+
+| Trigger | Threshold | Severity |
+|---------|-----------|---------|
+| Score drop from baseline | >= 0.5 point drop | HIGH |
+| Vocabulary drift rate | > 2 non-canonical terms in batch of 5 | MEDIUM |
+| Density regression | density_score drops >= 0.10 from kind average | MEDIUM |
+| Frontmatter field loss | Required field absent after schema migration | HIGH |
+| id naming pattern violation | 2+ violations in rolling window of 10 | LOW |
+| Compile error rate | > 1 compile error per 10 builds | HIGH |
+
+## Baseline Management
+
+### Score Baseline per Kind
+
+```yaml
+baseline:
+  kind: input_schema
+  window: 10                   # rolling window of last N artifacts
+  baseline_score: 9.1          # rolling average
+  min_score: 8.8               # floor in window
+  last_updated: 2026-04-17
+  trend: stable                # stable | improving | degrading
+```
+
+Baseline updated after every build:
+```python
+baseline = (0.8 * previous_baseline) + (0.2 * new_score)
+```
+
+### Trend Classification
+
+| Trend | Condition |
+|-------|----------|
+| improving | 3 consecutive scores > baseline |
+| stable | scores within +/- 0.3 of baseline |
+| degrading | 2 consecutive scores < (baseline - 0.5) |
+| volatile | standard deviation > 1.0 in window |
+
+## Regression Types
+
+### R1: Score Regression (HIGH)
+
+```
+condition: new_score < (baseline - 0.5)
+action: BLOCK build; write regression signal; notify N07
+signal: {type: "regression", kind: "{kind}", severity: "HIGH", delta: {score_delta}, baseline: {baseline}}
+```
+
+### R2: Vocabulary Drift (MEDIUM)
+
+```
+condition: non_canonical_term_count > 2 in last 5 artifacts of same kind
+action: WARN; inject vocabulary KC into next F3 INJECT call; update taught_terms_registry
+signal: {type: "vocab_drift", kind: "{kind}", severity: "MEDIUM", terms: [...]}
+```
+
+### R3: Density Regression (MEDIUM)
+
+```
+condition: density_score < (kind_average_density - 0.10)
+action: WARN; flag for F6 retry with density emphasis
+signal: {type: "density_regression", kind: "{kind}", current: {score}, average: {average}}
+```
+
+### R4: Structural Regression (HIGH)
+
+```
+condition: required_field missing OR yaml_parse_error after schema migration
+action: BLOCK; rollback artifact to previous version; alert N07
+signal: {type: "structural_regression", kind: "{kind}", missing_field: "{field}"}
+```
+
+## Detection Protocol
+
+```
+AFTER F7 GOVERN:
+  1. Load baseline for this kind from .cex/experiments/results.tsv
+  2. Compare new_score against baseline
+     -> if drop >= 0.5: R1 trigger
+  3. Scan body for non-canonical terms (load spec_metaphor_dictionary)
+     -> if count > 2 in last 5: R2 trigger
+  4. Compare density_score against kind running average
+     -> if drop >= 0.10: R3 trigger
+  5. Compare frontmatter fields against validation_schema
+     -> if required field missing: R4 trigger
+  6. Update baseline (exponential moving average)
+  7. Write row to .cex/experiments/results.tsv: timestamp, kind, score, density, flags
+```
+
+## Output Format
+
+```yaml
+# .cex/experiments/results.tsv column headers:
+# timestamp | nucleus | kind | artifact_id | score | density | regression_flags | action
+2026-04-17T14:23:11 | n03 | input_schema | p06_is_build_contract | null | 0.91 | [] | approved
+```
+
+## Suppression Rules
+
+Regression checks are suppressed for:
+- `verb=MIGRATE` (structural changes expected; only check for parse errors)
+- `dry_run=true`
+- First artifact of a kind (no baseline yet; initialize baseline from score)
+- Audit logs and changelog artifacts (quality not tracked for ephemeral kinds)

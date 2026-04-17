@@ -1,0 +1,79 @@
+id: p08_cm_n03
+kind: component_map
+pillar: P08
+title: Component Map -- N03 Engineering System
+version: 1.0.0
+created: 2026-04-17
+author: n03_engineering
+domain: artifact-construction
+quality: null
+tags:
+- component-map
+- N03
+- architecture
+- dependencies
+- 8F
+- builders
+- system
+tldr: 'Dependency map of all N03 engineering system components: builders (259), SDK tools (78), quality infrastructure, schema
+  layer, and runtime artifacts. Shows how components compose to produce the 8F pipeline execution.'
+density_score: 0.92
+system_overview: N03's engineering system is a layered composition of builders, tools, schemas, and protocols. This map shows
+  dependencies, not just inventory. Understanding the dependency graph prevents build failures from missing prerequisites
+  and enables confident refactoring.
+layer_0_identity_sin_lens_layer: "N03_engineering/P02_model/agent_engineering.md\n  |-- nucleus_def_n03.md          (machine-readable\
+  \ identity)\n  |-- agent_card_n03.md           (deployment card)\n  `-- agent_package_n03.md        (packaged configuration)\n\
+  \nN03_engineering/rules/n03-8f-enforcement.md\n  |-- Enforces: 8F mandatory for all builds\n  `-- Source: .claude/rules/8f-reasoning.md"
+layer_1_schema_foundation_p06: "The schema layer is the CONTRACT layer. All other layers depend on it.\n\nP06_schema/\n  |--\
+  \ input_schema_build_contract.md   <- BUILD ENTRY POINT CONTRACT\n  |-- validation_schema_artifact.md    <- OUTPUT VALIDATION\
+  \ CONTRACT\n  |-- type_def_cex_types.md            <- TYPE SYSTEM (Kind, Pillar, Nucleus, Quality...)\n  |-- interface_builder_protocol.md\
+  \    <- BUILDER BILATERAL CONTRACT\n  |-- enum_def_build_actions.md        <- CONSTANTS (BUILD_ACTION, PILLAR, NUCLEUS...)\n\
+  \  `-- api_reference_8f_pipeline.md     <- F1-F8 CALLABLE INTERFACE\n\nDependencies: none (foundation layer)\nDepended on\
+  \ by: ALL other layers"
+layer_2_builder_runtime_archetypes: "The builders are the execution engine. 259 builders, each with 13 ISOs.\n\narchetypes/builders/\n\
+  \  {kind}-builder/                    (259 directories)\n    |-- bld_manifest_{kind}.md       (F1: kind constraints)\n \
+  \   |-- bld_instruction_{kind}.md    (F4: production instructions)\n    |-- bld_system_prompt_{kind}.md  (F2: builder identity)\n\
+  \    |-- bld_schema_{kind}.md         (F1: validation schema)\n    |-- bld_template_{kind}.md       (F6: output template)\n\
+  \    |-- bld_quality_gates_{kind}.md  (F7: quality gates)\n    |-- bld_examples_{kind}.md       (F3: positive examples)\n\
+  \    |-- bld_anti_examples_{kind}.md  (F3: anti-examples)\n    |-- bld_knowledge_{kind}.md      (F3: domain knowledge)\n\
+  \    |-- bld_prompt_cache_{kind}.md   (F5: cached context)\n    |-- bld_compiler_{kind}.md       (F8: compilation rules)\n\
+  \    |-- bld_scorer_{kind}.md         (F7: scoring rubric)\n    `-- bld_memory_{kind}.md         (F3b: memory injection)\n\
+  \nDependencies: P06 schema layer (contracts), N00_genesis (archetypes)"
+layer_3_sdk_motor_cex_sdk: "Python tools that execute the pipeline and manage artifacts.\n\ncex_sdk/\n  |-- cex_8f_motor.py\
+  \          (intent -> kind -> plan; 1385L)\n  |-- cex_8f_runner.py         (full 8F execution; F1->F8)\n  |-- cex_compile.py\
+  \           (.md -> .yaml; post-F8)\n  |-- cex_doctor.py            (artifact health scan)\n  |-- cex_retriever.py     \
+  \    (TF-IDF similarity; F3 INJECT)\n  |-- cex_score.py             (5D scoring; F7 GOVERN)\n  |-- cex_hooks.py        \
+  \     (pre-commit validation)\n  |-- signal_writer.py         (F8 signal write)\n  |-- cex_sanitize.py          (ASCII compliance)\n\
+  \  `-- cex_query.py             (TF-IDF builder discovery)\n\nDependencies: P06 type_def, enum_def; .cex/kinds_meta.json"
+layer_4_quality_infrastructure_p07_p11: "P07_evals/\n  |-- scoring_rubric_n03.md    (5D scoring model)\n  |-- llm_judge_n03.md\
+  \         (L3 semantic evaluation)\n  |-- regression_check_n03.md  (drift detection)\n  `-- golden_test_n03.md       (expected\
+  \ output tests)\n\nP11_feedback/\n  |-- quality_gate_n03.md      (H01-H07 hard gates + 12LP)\n  |-- bugloop_n03.md     \
+  \      (autonomous error correction)\n  `-- self_improvement_loop_n03.md  (quality flywheel)\n\nDependencies: P06 validation_schema;\
+  \ cex_sdk motor+score\nDepended on by: every F7 GOVERN call"
+layer_5_knowledge_base_p01: "P01_knowledge/\n  |-- kc_8f_pipeline_implementation.md  (8F implementation details)\n  |-- kc_construction_laws.md\
+  \           (build quality laws)\n  |-- kc_cex_tooling_master.md          (tool reference)\n  |-- kc_engineering_vocabulary.md\
+  \      (controlled vocabulary KC)\n  `-- [+ 10 more KCs]\n\nN00_genesis/P01_knowledge/library/kind/\n  |-- kc_{kind}.md\
+  \  (424 kind KCs; loaded at F3 INJECT)\n\nDependencies: none (base layer)\nDepended on by: F3 INJECT in every 8F run"
+dependency_flow_build_request_artifact: "User/N07 intent\n    |\n    v\ncex_8f_motor.py (intent -> kind + plan)\n    |\n \
+  \   v [F1 CONSTRAIN]\n.cex/kinds_meta.json + P06 type_def + P06 enum_def\n    |\n    v [F2 BECOME]\narchetypes/builders/{kind}-builder/\
+  \ (13 ISOs)\n    |\n    v [F3 INJECT]\nP01_knowledge/kc_{kind}.md + examples + brand_config\n    |\n    v [F6 PRODUCE]\n\
+  draft artifact (frontmatter + body)\n    |\n    v [F7 GOVERN]\nP11_feedback/quality_gate_n03.md -> P07_evals/scoring_rubric_n03.md\n\
+  \    |\n    v [F8 COLLABORATE]\nN03_engineering/P{xx}/{kind}_{name}.md (saved artifact)\n    |\n    cex_compile.py -> compiled/.yaml\n\
+  \    signal_writer.py -> .cex/runtime/signals/\n    git commit"
+component_count_summary: '| Layer | Component Type | Count |
+
+  |-------|---------------|-------|
+
+  | L0 | Identity artifacts | 3 |
+
+  | L1 | Schema contracts | 6+ |
+
+  | L2 | Builder ISOs (13 per builder) | 259 builders x 13 = 3367 |
+
+  | L3 | SDK Python tools | 78 |
+
+  | L4 | Quality infrastructure artifacts | 7 |
+
+  | L5 | Knowledge cards | 424+ |
+
+  | Runtime | Handoffs, signals, PIDs | variable |'

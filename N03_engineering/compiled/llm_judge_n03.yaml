@@ -1,0 +1,146 @@
+id: p07_lj_n03
+kind: llm_judge
+pillar: P07
+title: LLM Judge -- N03 Artifact Peer Review
+version: 1.0.0
+created: 2026-04-17
+author: n03_engineering
+domain: artifact-construction
+quality: null
+tags:
+- llm-judge
+- N03
+- peer-review
+- quality
+- evaluation
+- semantic
+tldr: 'LLM-as-judge configuration for N03 artifact peer review. Applied when L1+L2 structural+rubric score >= 8.5. Semantic
+  evaluation across 3 criteria: domain accuracy, vocabulary compliance, engineering craft.'
+density_score: 0.9
+purpose: 'The LLM judge is the L3 (semantic) layer of N03 quality validation. Activated ONLY when L1 (structural) + L2 (rubric)
+  composite score >= 8.5. Prevents wasting LLM tokens on structurally deficient artifacts. Trigger condition: `l1_score +
+  l2_score >= 8.5 AND kind in PRIMARY_PILLAR_KINDS`'
+judge_configuration: '| Parameter | Value |
+
+  |-----------|-------|
+
+  | Model | claude-sonnet-4-6 (N03 uses opus for builds; judge uses sonnet to save budget) |
+
+  | Temperature | 0.1 (deterministic evaluation) |
+
+  | Max tokens | 2048 |
+
+  | Role | Senior AI engineer reviewing artifact for production readiness |
+
+  | Output format | JSON: {criteria: [{id, score, rationale}], overall: float, recommendation: string} |'
+evaluation_criteria: ''
+c1_domain_accuracy_weight_40: 'Question: Is every claim in this artifact factually accurate within the CEX engineering domain?
+
+
+  | Score | Rubric |
+
+  |-------|--------|
+
+  | 9.5-10.0 | All claims verifiable; no ambiguity; cross-references accurate |
+
+  | 8.0-9.4 | All claims accurate; 1-2 could be clearer but not wrong |
+
+  | 6.0-7.9 | Mostly accurate; 1-2 claims need verification or are overly broad |
+
+  | < 6.0 | Factual error OR claim that contradicts canonical specs |
+
+
+  Probe questions:
+
+  - Do field types match CEX canonical definitions?
+
+  - Do file paths exist in the repo?
+
+  - Do referenced kinds exist in kinds_meta.json?
+
+  - Are 8F functions described correctly?'
+c2_vocabulary_compliance_weight_35: 'Question: Does this artifact use canonical CEX vocabulary throughout, with zero semantic
+  drift?
+
+
+  | Score | Rubric |
+
+  |-------|--------|
+
+  | 9.5-10.0 | 100% canonical; every term maps to spec_metaphor_dictionary or kinds_meta |
+
+  | 8.0-9.4 | One non-canonical term present but not misleading |
+
+  | 6.0-7.9 | 2-3 non-canonical terms; no invented kinds or pillars |
+
+  | < 6.0 | Invented synonym for a canonical kind OR pillar misassignment |
+
+
+  Red flags:
+
+  - "research card" (should be knowledge_card)
+
+  - "brain query" (should be cex_retriever.py)
+
+  - "deck" used for artifact (should be agent_card or artifact)
+
+  - Custom quality score (should be quality: null + 5D model)'
+c3_engineering_craft_weight_25: 'Question: Would a senior AI engineer use this artifact as a production contract?
+
+
+  | Score | Rubric |
+
+  |-------|--------|
+
+  | 9.5-10.0 | Artifact is immediately usable; precise, dense, no gaps |
+
+  | 8.0-9.4 | Usable with minor additions; 1 section thin |
+
+  | 6.0-7.9 | Needs work; important edge cases missing |
+
+  | < 6.0 | Cannot be used as a contract; too abstract or incomplete |
+
+
+  Craft signals:
+
+  - Error handling documented (not assumed)
+
+  - Default values explicit, not "sensible"
+
+  - Examples use real CEX artifacts, not generic placeholders
+
+  - Edge cases addressed (empty input, conflicts, retries)'
+judge_prompt_template: "You are a senior AI engineer performing quality review on a CEX artifact.\nCEX is a typed knowledge\
+  \ system with 257 kinds, 12 pillars, 8 nuclei, and the 8F pipeline.\n\nARTIFACT TO REVIEW:\n---\n{artifact_content}\n---\n\
+  \nEVALUATION CONTEXT:\n- Kind: {kind}\n- Pillar: {pillar}\n- Builder: N03 (Engineering, Inventive Pride)\n- L1+L2 score:\
+  \ {l1_l2_score} (passed gate for semantic review)\n\nEVALUATE on exactly 3 criteria:\n1. Domain Accuracy (0-10): Are all\
+  \ facts correct within CEX engineering domain?\n2. Vocabulary Compliance (0-10): Does it use canonical CEX vocabulary throughout?\n\
+  3. Engineering Craft (0-10): Is this a production-quality engineering contract?\n\nOUTPUT JSON only:\n{\n  \"criteria\"\
+  : [\n    {\"id\": \"C1\", \"score\": float, \"rationale\": \"one sentence\"},\n    {\"id\": \"C2\", \"score\": float, \"\
+  rationale\": \"one sentence\"},\n    {\"id\": \"C3\", \"score\": float, \"rationale\": \"one sentence\"}\n  ],\n  \"overall\"\
+  : float,\n  \"recommendation\": \"approve|revise|reject\",\n  \"revision_notes\": \"what specifically to fix if revise/reject\"\
+  \n}"
+composite_with_l1_l2: 'Final quality score formula when LLM judge runs:
+
+
+  final = (l1_score  0.30) + (l2_score  0.30) + (llm_score * 0.40)
+
+
+  | Recommendation | Action |
+
+  |----------------|--------|
+
+  | approve | Set artifact status=approved; mark quality: null (peer-reviewed by N07 later) |
+
+  | revise | Return to F6 with revision_notes injected; retry_count++ |
+
+  | reject | Write to signals/ as error; escalate to N07 |'
+budget_guard: 'LLM judge is skipped if:
+
+  - `dry_run=true`
+
+  - Artifact kind is in `LOW_PRIORITY_KINDS` (audit logs, changelogs, temp artifacts)
+
+  - Session token budget < 10K remaining
+
+  - Retry count > 0 (already revised once; accept with warning)'
