@@ -8,10 +8,11 @@ version: 1.0.0
 created: 2026-04-17
 author: n01_intelligence
 domain: research-intelligence
-quality: null
+quality: 9.1
 tags: [action_prompt, research_actions, n01, analytical_envy, structured_prompts]
 tldr: "Library of 8 action prompts for N01 research operations: competitive analysis, market sizing, literature review, source triangulation, entity extraction, bias check, trend detection, synthesis. Each enforces Analytical Envy lens."
 density_score: 0.90
+updated: "2026-04-17"
 ---
 
 <!-- 8F: F1 constrain=P03/action_prompt F2 become=action-prompt-builder F3 inject=system_prompt_n01_research+reasoning_strategy_n01+prompt_template_intelligence F4 reason=discrete action prompts are reusable, testable, and composable -- they operationalize the system_prompt into specific executable instructions F5 call=cex_compile F6 produce=action_prompt_n01.md F7 govern=frontmatter+ascii+tables F8 collaborate=N01_intelligence/P03_prompt/ -->
