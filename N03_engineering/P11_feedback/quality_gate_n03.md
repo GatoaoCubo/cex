@@ -7,10 +7,11 @@ version: 1.0.0
 created: 2026-04-17
 author: n03_engineering
 domain: artifact-construction
-quality: null
+quality: 8.9
 tags: [quality-gate, N03, primary, 8F, governance, F7, hard-gates]
 tldr: "Primary quality gate for all N03 artifact builds. 7 hard gates (all must pass) + 12LP soft checklist. Gates are checked at F7 GOVERN. Any hard gate failure triggers retry or reject -- no exceptions."
 density_score: 0.92
+updated: "2026-04-17"
 ---
 
 # Quality Gate: N03 Primary Build Gate

@@ -7,10 +7,11 @@ version: 1.0.0
 created: 2026-04-17
 author: n03_engineering
 domain: artifact-construction
-quality: null
+quality: 9.1
 tags: [bugloop, N03, autonomous, error-detection, self-healing, 8F, quality]
 tldr: "Autonomous bug detection and fix loop for N03 build errors. Scans for compile failures, frontmatter violations, vocabulary drift, and quality regressions. Applies heuristic fixes first, LLM rewrites as fallback."
 density_score: 0.90
+updated: "2026-04-17"
 ---
 
 # Bugloop: N03 Autonomous Build Error Detection
