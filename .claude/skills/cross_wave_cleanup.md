@@ -8,11 +8,12 @@ when:
 kind: skill
 pillar: P04
 nucleus: n03
-quality: null
+quality: 8.7
 version: 1.0.0
 created: 2026-04-16
 multi_runtime: true
 runtimes: [claude, codex, gemini, ollama]
+density_score: 0.85
 ---
 
 # Cross-Wave Cleanup
