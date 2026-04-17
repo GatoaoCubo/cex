@@ -10,7 +10,7 @@ updated: "2026-04-13"
 tags: [audit, planning_strategy, builder-family, qwen3-8b-weak-model]
 tldr: "Family produced by qwen3:8b is catastrophically off-domain: describes corporate/business strategy (KPIs, PMBOK, CTO overrides) instead of agent planning algorithms (ReAct, ToT, HTN). 3 lowest files rewritten."
 domain: "builder audit"
-quality: 8.9
+quality: 9.2
 density_score: 0.90
 ---
 

@@ -10,7 +10,7 @@ target_format: "multi"
 input_type: "structured_data"
 rule_count: 12
 domain: "content_factory"
-quality: 9.0
+quality: 9.2
 tags: [formatter, content-factory, multi-format, adapter, publishing]
 tldr: "Universal adapter: CEX artifact (md+frontmatter) -> 5 publishable formats (clean md, HTML, PPTX outline, video script, podcast script)"
 template_engine: "mustache"

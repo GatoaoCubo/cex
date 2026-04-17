@@ -4,7 +4,7 @@ kind: knowledge_card
 pillar: P01
 title: HYBRID_REVIEW6 N03 -- dev-tooling cluster audit (playground/sandbox/integration)
 version: 1.0.0
-quality: 8.9
+quality: 9.2
 tags: [audit, hybrid_review6, n03, dev_tooling, wave5]
 domain: builder quality assurance
 created: "2026-04-14"

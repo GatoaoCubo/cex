@@ -6,7 +6,7 @@ version: 1.0.0
 created: 2026-04-17
 author: n03_engineering
 domain: artifact-construction
-quality: null
+quality: 8.9
 tags:
 - validation-schema
 - artifact
@@ -18,6 +18,7 @@ tags:
 tldr: Validation rules for every artifact produced by N03. Enforces frontmatter contract, density target, structural requirements,
   and kind-specific constraints at F7 GOVERN.
 density_score: 0.93
+updated: '2026-04-17'
 purpose: Applied at F7 GOVERN for every artifact produced by N03. This schema defines what makes an artifact VALID before
   it can be saved, compiled, and signaled. It is the machine-readable companion to the 12LP quality checklist.
 layer_1_frontmatter_validation_hard_gates_all_must_pass: '| Rule | Check | Error if Fail |

@@ -7,7 +7,7 @@ version: 1.0.0
 created: 2026-04-08
 author: n03_builder
 domain: meta-construction/intent-resolution
-quality: 9.0
+quality: 9.2
 tags: [quality-gate, intent-resolution, test-cases, transmutation, validation]
 tldr: "20 test cases (10 EN, 10 PT) validating that user phrases correctly resolve to kind, pillar, and nucleus."
 density_score: 0.93

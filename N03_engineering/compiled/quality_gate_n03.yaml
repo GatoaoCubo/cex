@@ -6,7 +6,7 @@ version: 1.0.0
 created: 2026-04-17
 author: n03_engineering
 domain: artifact-construction
-quality: null
+quality: 8.9
 tags:
 - quality-gate
 - N03
@@ -18,6 +18,7 @@ tags:
 tldr: Primary quality gate for all N03 artifact builds. 7 hard gates (all must pass) + 12LP soft checklist. Gates are checked
   at F7 GOVERN. Any hard gate failure triggers retry or reject -- no exceptions.
 density_score: 0.92
+updated: '2026-04-17'
 purpose: 'The quality gate is the last defense before an artifact is saved and signaled. Applied at F7 GOVERN for EVERY artifact.
   No artifact exits N03 without passing. Inventive Pride rule: if it''s not gate-worthy, it does not ship.'
 hard_gates_h01_h07_all_must_pass: 'Failure of ANY hard gate blocks the artifact. No retry credit used -- F6 must fix it.

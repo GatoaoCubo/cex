@@ -50,6 +50,7 @@ tags:
 tldr: 'Canonical enumerations for all CEX build-time constants: BUILD_ACTION, PILLAR, NUCLEUS, MODEL_TIER, SIGNAL_EVENT, QUALITY_TIER,
   PIPELINE_FUNCTION. Machine-parseable source of truth for all 259 builders.'
 density_score: 0.93
+updated: '2026-04-17'
 build_action: "Controls how N03 treats the target artifact path during a build task.\n\n| Value | Description | Behavior |\n\
   |-------|-------------|---------|\n| CREATE | Produce new artifact from scratch | Fail if file exists unless `force=true`\
   \ |\n| REWRITE | Discard existing, build fresh | Overwrites unconditionally; preserves git history |\n| MIGRATE | Update\

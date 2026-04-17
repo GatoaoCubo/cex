@@ -19,6 +19,7 @@ tags:
 tldr: 'Three canonical build patterns for N03: Template-First (score >= 0.60), Hybrid (0.30-0.60), Fresh (<0.30). Selection
   is automatic via F4 REASON based on template match score. Each pattern has distinct F6 instructions and quality expectations.'
 density_score: 0.9
+updated: '2026-04-17'
 purpose: The Construction Triad defines HOW N03 executes F6 PRODUCE. Inventive Pride means choosing the right strategy --
   not always building from scratch, but not always copying a template either. Context determines craft.
 the_construction_triad: ''

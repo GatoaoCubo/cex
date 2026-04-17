@@ -19,6 +19,7 @@ tldr: Sandboxed code execution environment for N03 build validation. Executes ce
   and cex_score.py in a controlled context. Captures stdout/stderr, enforces timeout, and reports structured results to F7
   GOVERN.
 density_score: 0.9
+updated: '2026-04-17'
 purpose: N03 produces artifacts and VALIDATES them by executing Python tools. The code executor defines HOW those tools run
   -- what's sandboxed, what's timeout-enforced, what counts as a pass, and how results feed back into the pipeline.
 execution_contexts: '| Context | When Used | Tools | Timeout |

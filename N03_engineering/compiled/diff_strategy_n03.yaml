@@ -18,6 +18,7 @@ tags:
 tldr: Smart diff and patch application strategy for N03 REWRITE and MIGRATE operations. Defines when to patch (targeted change),
   when to rewrite (structural change), and how to apply both safely with git-based rollback.
 density_score: 0.89
+updated: '2026-04-17'
 purpose: 'N03 handles 3 build verbs that modify EXISTING artifacts: REWRITE, MIGRATE, IMPROVE. Each requires a different diff
   strategy. Wrong strategy = data loss or incoherent artifacts. Inventive Pride rule: never overwrite without knowing what
   you''re replacing.'

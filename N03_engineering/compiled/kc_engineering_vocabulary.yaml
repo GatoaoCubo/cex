@@ -18,6 +18,7 @@ tags:
 tldr: N03's controlled vocabulary KC. 22 canonical engineering terms with definitions, CEX applications, anti-patterns, and
   industry sources. Loaded at F2b SPEAK to enforce ubiquitous language in all N03 outputs.
 density_score: 0.92
+updated: '2026-04-17'
 purpose: This is N03's LANGUAGE MODEL -- the terms it thinks and speaks in. Loaded at F2b SPEAK before every F3-F8 execution.
   Zero tolerance for vocabulary drift once this KC is loaded.
 canonical_terms: '| Term | Industry Definition | CEX Application | Anti-Pattern |

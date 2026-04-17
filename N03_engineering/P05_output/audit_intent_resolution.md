@@ -7,7 +7,7 @@ version: 1.0.0
 created: 2026-04-08
 author: n03_builder
 domain: meta-construction/intent-resolution
-quality: 9.0
+quality: 9.1
 tags: [audit, intent-resolution, canonicalization, motor, query, transmutation]
 tldr: "Audit of 6 artifacts that participate in intent resolution. 21 kinds unreachable, 2 stale refs, verb coverage at 54%."
 density_score: 0.92

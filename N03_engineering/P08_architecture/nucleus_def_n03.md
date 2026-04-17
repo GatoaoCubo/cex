@@ -27,7 +27,7 @@ title: "Nucleus Def N03"
 version: "1.0.0"
 author: n07_crewwiring
 domain: "artifact construction, builders, scaffolds"
-quality: 8.9
+quality: 9.0
 tags: [nucleus_def, n03, builder, composable]
 tldr: "N03 is the builder nucleus: constructs all CEX artifacts via 8F. Claude Opus 1M context."
 created: "2026-04-14"

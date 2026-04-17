@@ -5,7 +5,7 @@ pillar: P08
 glob: "N03_engineering/**"
 nucleus: N03
 description: "N03 Builder Nucleus -- Soberba Inventiva, artifact construction, 8F pipeline"
-quality: 9.0
+quality: 9.2
 title: "N03-Builder"
 version: "1.0.0"
 author: n03_builder

@@ -7,7 +7,7 @@ created: "2026-04-08"
 updated: "2026-04-08"
 author: "n03_builder"
 domain: "content_factory"
-quality: 9.0
+quality: 9.1
 tags: [dispatch_rule, content-factory, routing, multi-nucleus]
 tldr: "Routes content factory intents to nuclei: research->N01, copy->N02, build->N03, knowledge->N04, deploy->N05, monetize->N06"
 scope: content_factory

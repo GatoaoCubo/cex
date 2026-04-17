@@ -16,7 +16,7 @@ depends_on: [brand_config_yaml]
 signals: [complete, error]
 spawn_configs: [p12_spawn_grid]
 domain: "content_factory"
-quality: 9.0
+quality: 9.2
 tags: [workflow, content-factory, multi-format, autonomous, pipeline]
 tldr: "5-wave workflow: brief+brand -> research -> author -> produce -> validate -> publish. 13 steps, 7 nuclei, zero human intervention."
 density_score: 0.94

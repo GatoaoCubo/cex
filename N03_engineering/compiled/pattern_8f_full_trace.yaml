@@ -1,0 +1,126 @@
+id: p08_pat_8f_full_trace
+kind: pattern
+pillar: P08
+title: Pattern -- 8F Full Trace Template (CoC)
+version: 1.0.0
+created: 2026-04-17
+author: n03_engineering
+domain: artifact-construction
+quality: null
+tags:
+- pattern
+- 8F
+- full-trace
+- coc
+- convention
+- f2-become
+- loadable-iso
+tldr: Convention-over-Configuration pattern for the complete 8F pipeline trace. Loadable as a F2 BECOME ISO. Any nucleus that
+  loads this pattern produces structurally compliant 8F traces without re-deriving conventions.
+density_score: 0.91
+purpose: 'The 8F pipeline has 8 functions (F1-F8) plus 3 optional sub-steps (F3b, F3c, F7b).
+
+  Every nucleus executes 8F, but without a shared trace template the outputs diverge:
+
+  - Some nuclei skip F3b, others invent new sub-steps
+
+  - F7 GOVERN scores vary in format, making cross-nucleus comparisons impossible
+
+  - F8 signals lack standardized fields
+
+
+  This pattern freezes the output format. Every 8F run produces the same trace structure.'
+trace_template: "Every 8F execution writes this trace to stdout:\n\n=== 8F PIPELINE: {nucleus} | {kind} | {task_slug} ===\n\
+  \nF1 CONSTRAIN\n  kind       : {kind}\n  pillar     : P{xx}\n  schema     : {schema_path}\n  max_bytes  : {N}\n  naming\
+  \     : {pattern}\n  confidence : {0-100}%\n\nF2 BECOME\n  builder    : archetypes/builders/{kind}-builder/\n  ISOs loaded:\
+  \ {N}/13\n  sin_lens   : {nucleus_sin}\n  identity   : {builder_role}\n\nF2b SPEAK [optional]\n  vocabulary : {kc_vocabulary_path}\n\
+  \  terms      : {N} canonical terms loaded\n  drift_guard: active\n\nF3 INJECT\n  sources    : {N} (kc={n1}, examples={n2},\
+  \ brand={n3}, memory={n4})\n  match      : {template_match_score}% ({approach}: template|hybrid|fresh)\n  top_source : {path}\n\
+  \nF3b PERSIST [optional]\n  entities   : {N} new entity memories queued\n  facts      : {N} fact updates queued\n  learnings\
+  \  : {N} session learnings queued\n\nF3c GROUND [optional]\n  sources    : {N} grounded\n  avg_conf   : {X}%\n  freshness\
+  \  : {oldest_source_date}\n\nF4 REASON\n  sections   : {N}\n  approach   : {template|hybrid|fresh}\n  gdp_needed : {yes|no}\n\
+  \  plan       : {brief}\n\nF5 CALL\n  tools      : {list}\n  similar    : {N} artifacts found (scores: {range})\n  pre_checks\
+  \ : {pass|fail}\n\nF6 PRODUCE\n  bytes      : {N}\n  sections   : {N}\n  density    : {score}\n  draft_path : {path}\n\n\
+  F7 GOVERN\n  h01        : {pass|fail} frontmatter complete\n  h02        : {pass|fail} kind matches pillar\n  h03      \
+  \  : {pass|fail} id globally unique\n  h04        : {pass|fail} quality = null\n  h05        : {pass|fail} density >= 0.85\n\
+  \  h06        : {pass|fail} no filler prose\n  h07        : {pass|fail} cross-reference present\n  gates      : {N}/{total}\
+  \ passed\n  12LP       : {N}/12 passed\n  score      : {X}/10\n  retry      : {N} (max 2)\n\nF7b LEARN [optional]\n  rewards\
+  \    : {N} signals\n  regressions: {N} detected\n  trend      : {improving|stable|declining}\n\nF8 COLLABORATE\n  saved\
+  \      : {path}\n  compiled   : {yes|no|skipped}\n  committed  : {yes|no}\n  signal     : {yes|no} (score={X})\n\n=== END\
+  \ 8F | elapsed={Xs} | quality=null | density={X} ==="
+field_contracts: '| Field | Type | Required | Invariant |
+
+  |-------|------|----------|-----------|
+
+  | `kind` | string | YES | Must exist in kinds_meta.json |
+
+  | `pillar` | P01-P12 | YES | Must match kind''s canonical pillar |
+
+  | `gates` | N/total | YES | total = 7 (H01-H07) |
+
+  | `12LP` | N/12 | YES | total = 12 |
+
+  | `score` | float 0-10 | YES | F7 score, NOT quality field |
+
+  | `quality` | null | YES | Never self-assign; peer review only |
+
+  | `density` | float 0-1 | YES | >= 0.85 to pass H05 |
+
+  | `retry` | int | YES | Increments if F7 fails; max = 2 |
+
+  | `compiled` | yes|no|skipped | YES | skipped = no cex_compile.py available |
+
+  | `signal` | yes|no | YES | must be yes on F8 success |'
+gate_definitions_h01_h07: '| Gate | Rule | Auto-check |
+
+  |------|------|-----------|
+
+  | H01 | Frontmatter has: id, kind, pillar, title, version, created, author, domain, quality, tags, tldr | grep frontmatter
+  fields |
+
+  | H02 | `kind` value exists in kinds_meta.json AND pillar matches schema | cex_doctor.py --kind |
+
+  | H03 | `id` is unique across all .md files in repo | cex_doctor.py --ids |
+
+  | H04 | `quality: null` exactly | grep "quality:" |
+
+  | H05 | density_score >= 0.85 | cex_score.py field |
+
+  | H06 | No filler: "This {kind} defines", "The purpose of this artifact is" | grep filler_patterns |
+
+  | H07 | >= 1 cross-reference to another artifact in same nucleus | grep relative_path |'
+coc_application: 'Loading this pattern at F2 BECOME removes ambiguity:
+
+  - Every trace has the same field names in the same order
+
+  - Missing optional steps are marked `[skipped]`, not omitted
+
+  - Gate pass/fail is binary, never "partial"
+
+  - Score line is the last F7 output
+
+
+  F2 BECOME: load p08_pat_8f_full_trace.md
+
+  -> replaces: "figure out how to format my trace"
+
+  -> with: "fill in the trace template"'
+anti_patterns: '| Anti-Pattern | Issue | Fix |
+
+  |--------------|-------|-----|
+
+  | Inventing new sub-steps (F3d, F4a) | Breaks cross-nucleus comparison | Use optional sub-steps F3b, F3c, F7b only |
+
+  | Omitting F7 gate details | Quality score is unverifiable | Always list H01-H07 individually |
+
+  | `quality: 9.0` in F8 output | Self-scoring violation (INV-03) | quality is always null in artifacts; score is in trace
+  only |
+
+  | Skipping F8 COLLABORATE | N07 never learns nucleus completed | Signal is mandatory if signal=true |
+
+  | Vague F3 sources | Grounding unverifiable | List each source with path + match% |'
+cross_references:
+- '`N03_engineering/P08_architecture/invariant_n03.md` — INV-01, INV-02, INV-04 enforce trace sequencing'
+- '`N03_engineering/P07_evals/reasoning_trace_8f_constrain.md` — F1 CONSTRAIN live example'
+- '`N03_engineering/P07_evals/reasoning_trace_8f_govern.md` — F7 GOVERN live example'
+- '`.claude/rules/8f-reasoning.md` — authoritative 8F specification'

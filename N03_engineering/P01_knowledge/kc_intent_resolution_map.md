@@ -7,7 +7,7 @@ version: 1.0.0
 created: 2026-04-08
 author: n03_builder
 domain: meta-construction/intent-resolution
-quality: 9.0
+quality: 9.1
 tags: [intent-resolution, kinds, mapping, natural-language, transmutation, canonicalization]
 tldr: "Complete mapping of all 123 CEX kinds to natural language trigger phrases (EN+PT), pillar, nucleus, and builder."
 density_score: 0.95

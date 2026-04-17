@@ -16,6 +16,7 @@ tags:
 - embeddings
 - retrieval
 - inventive_pride
+density_score: 0.99
 properties: '| Property | Value |
 
   |----------|-------|

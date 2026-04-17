@@ -16,6 +16,7 @@ tags:
 tldr: Canonical input contract for any artifact build task dispatched to N03. Defines kind, pillar, nucleus, verb, quality_target,
   and execution flags.
 density_score: 0.91
+updated: '2026-04-17'
 purpose: Every artifact build dispatched to N03 must conform to this contract. This schema defines what the build task RECEIVER
   (N03 / any builder nucleus) accepts as input. Enforced at F1 CONSTRAIN before any pipeline execution begins.
 fields: '| Field | Type | Required | Default | Description |

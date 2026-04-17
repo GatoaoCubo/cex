@@ -18,6 +18,7 @@ tags:
 tldr: CLI interface contract for cex_build.py -- N03's primary build entry point. Documents all flags, subcommands, exit codes,
   and integration with the 8F pipeline. Used by N07 dispatch and direct human invocation.
 density_score: 0.91
+updated: '2026-04-17'
 overview: '`cex_build.py` is N03''s primary CLI. It accepts a build contract, executes the full 8F pipeline, and outputs a
   structured result. All N07 dispatches to N03 route through this interface or its equivalent cex_8f_runner.py.'
 base_command: 'python cex_sdk/cex_8f_runner.py [OPTIONS]

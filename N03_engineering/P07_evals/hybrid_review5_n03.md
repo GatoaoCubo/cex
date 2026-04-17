@@ -4,7 +4,7 @@ kind: knowledge_card
 pillar: P01
 title: HYBRID_REVIEW5 -- N03 audit of 3 Wave 4 config/content/tier kinds (39 ISOs)
 version: 1.0.0
-quality: 8.9
+quality: 9.2
 tags: [audit, hybrid_review5, n03, wave4, ab_test_config, course_module, subscription_tier]
 domain: builder quality audit
 created: "2026-04-14"

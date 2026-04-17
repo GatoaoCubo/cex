@@ -18,6 +18,7 @@ tags:
 tldr: 'N03''s engineering reasoning strategy: how to apply the 8F pipeline at maximum depth using 1M context. Covers construction
   triad selection, quality-first planning, contract-before-code discipline, and invariant-driven validation.'
 density_score: 0.9
+updated: '2026-04-17'
 purpose: N03 has 1M context and uses all of it. This strategy defines HOW N03 thinks, not just WHAT it produces. Inventive
   Pride demands reasoning that produces architecture-grade output from 5-word input.
 core_reasoning_principles: ''

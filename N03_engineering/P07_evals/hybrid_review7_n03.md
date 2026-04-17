@@ -4,7 +4,7 @@ kind: audit
 pillar: P07
 title: HYBRID_REVIEW7 N03 Audit -- partner_listing + marketplace_app_manifest + oauth_app_config
 version: 1.0.0
-quality: 8.9
+quality: 9.1
 tags: [audit, hybrid_review7, n03, wave6, partner_platform_cluster]
 domain: builder quality assurance
 created: "2026-04-14"

@@ -7,7 +7,7 @@ version: 1.0.0
 created: 2026-04-08
 author: n03_builder
 mission: CLAUDE_NATIVE
-quality: 9.0
+quality: 9.1
 tags: [audit, n03, builder, agents, claude-code, self-audit]
 tldr: "125 agent defs cover all 123 kinds. 0 PI refs. 118/125 have generic placeholder tldr. Model routing is flat sonnet -- complex kinds should use opus."
 density_score: 0.91

@@ -11,6 +11,7 @@ tags:
 - governance
 - pre_commit
 - n03
+density_score: 1.0
 purpose: '| Field | Value |
 
   |-------|-------|
@@ -38,8 +39,8 @@ schema: '| Property | Type | Required | Value or Rule | Inventive Pride decision
 
   | on_fail | string | yes | `block` | Weak artifacts do not pass by persuasion |
 
-  | scope | list[string] | yes | `N03_engineering/P06_schema/.md`, `N03_engineering/P09_config/.md` | Narrow ownership keeps enforcement
-  honest |
+  | scope | list[string] | yes | `N03_engineering/P06_schema/.md`, `N03_engineering/P09_config/.md` | Narrow ownership keeps
+  enforcement honest |
 
   | auto_fix | boolean | yes | `false` | Pride rejects hidden mutation of authored meaning |
 

@@ -18,6 +18,7 @@ tags:
 tldr: Autonomous quality evolution protocol for N03. Scans all N03 artifacts for quality < 9.0, ranks by improvement ROI,
   applies heuristic + LLM improvement passes, and compounds quality over time via the Inventive Pride flywheel.
 density_score: 0.91
+updated: '2026-04-17'
 purpose: 'N03 does not just BUILD -- it IMPROVES what it has built. Inventive Pride demands that the portfolio gets better
   over time, not just bigger. This loop is the mechanism: scan -> rank -> improve -> verify -> repeat. Target: all N03 artifacts
   reach quality >= 9.0 or are flagged for human review.'

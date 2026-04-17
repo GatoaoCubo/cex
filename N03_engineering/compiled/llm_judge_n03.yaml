@@ -17,6 +17,7 @@ tags:
 tldr: 'LLM-as-judge configuration for N03 artifact peer review. Applied when L1+L2 structural+rubric score >= 8.5. Semantic
   evaluation across 3 criteria: domain accuracy, vocabulary compliance, engineering craft.'
 density_score: 0.9
+updated: '2026-04-17'
 purpose: 'The LLM judge is the L3 (semantic) layer of N03 quality validation. Activated ONLY when L1 (structural) + L2 (rubric)
   composite score >= 8.5. Prevents wasting LLM tokens on structurally deficient artifacts. Trigger condition: `l1_score +
   l2_score >= 8.5 AND kind in PRIMARY_PILLAR_KINDS`'

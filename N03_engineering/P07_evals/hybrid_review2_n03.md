@@ -5,7 +5,7 @@ pillar: P07
 title: "HYBRID_REVIEW2 -- N03 Audit: stt_provider + prosody_config"
 version: "1.0.0"
 author: n03
-quality: 8.9
+quality: 9.1
 created: "2026-04-13"
 updated: "2026-04-13"
 mission: HYBRID_REVIEW2

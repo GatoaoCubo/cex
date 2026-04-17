@@ -18,6 +18,7 @@ tags:
 tldr: 'Dependency map of all N03 engineering system components: builders (259), SDK tools (78), quality infrastructure, schema
   layer, and runtime artifacts. Shows how components compose to produce the 8F pipeline execution.'
 density_score: 0.92
+updated: '2026-04-17'
 system_overview: N03's engineering system is a layered composition of builders, tools, schemas, and protocols. This map shows
   dependencies, not just inventory. Understanding the dependency graph prevents build failures from missing prerequisites
   and enables confident refactoring.

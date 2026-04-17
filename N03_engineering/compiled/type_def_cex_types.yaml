@@ -36,6 +36,7 @@ tags:
 tldr: 'Canonical type definitions for the CEX typed knowledge system: Kind, Pillar, Nucleus, Quality, Pipeline, BuildAction,
   Signal. The source of truth for structural contracts across all 8 nuclei.'
 density_score: 0.92
+updated: '2026-04-17'
 purpose: Defines the canonical structural types used throughout the CEX system. Every artifact, builder, nucleus, and signal
   maps to one or more of these types. These definitions are the machine-readable ground truth for the 257-kind taxonomy.
 core_types: ''

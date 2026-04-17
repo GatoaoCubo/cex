@@ -1,0 +1,104 @@
+id: p07_rt_8f_constrain
+kind: reasoning_trace
+pillar: P07
+title: Reasoning Trace -- F1 CONSTRAIN Live Example
+version: 1.0.0
+created: 2026-04-17
+author: n03_engineering
+domain: pipeline-reasoning
+quality: null
+tags:
+- reasoning_trace
+- F1
+- CONSTRAIN
+- intent-resolution
+- 8F
+- example
+- coc
+tldr: 'Live F1 CONSTRAIN trace for input: ''build a landing page for my SaaS''. Shows intent resolution, kind mapping, schema
+  load, and ambiguity handling. Loadable as F2 BECOME ISO to teach any LLM how CONSTRAIN works.'
+density_score: 0.9
+f_annotation_f1_constrain: 'F1 is intent resolution. It transforms raw user input into a typed tuple: `{kind, pillar, nucleus,
+  verb, constraints}`. Without F1, F2-F8 operate on ambiguous input. F1 is the "type safety" of the pipeline. ---'
+step_1_verb_resolution: '| Input token | Candidate verbs | Resolution |
+
+  |------------|----------------|-----------|
+
+  | "build" | create, scaffold, generate, design | `verb = create` (artifact construction) |
+
+  | "landing page" | (direct kind match) | `kind = landing_page` |
+
+  | "SaaS" | context tag | `domain = saas, vertical = b2b_software` |
+
+
+  Resolution confidence: 91% (direct kind match)
+
+
+  ---'
+step_2_kind_lookup: "cex_intent_resolver.py: \"build landing page\"\n  -> pattern match: \"landing page\" -> landing_page\
+  \ (kinds_meta.json)\n  -> pillar: P05 (Output)\n  -> nucleus: N03 (Engineering / builder)\n  -> max_bytes: 16384\n  -> naming:\
+  \ landing_page_{domain}.md\n  -> confidence: 91%\n\nVerified against `N00_genesis/P05_output/_schema.yaml`:\n- kind: landing_page\n\
+  - pillar: P05\n- builder: `archetypes/builders/landing-page-builder/`\n- isolation: worktree (heavy builder, per frontmatter)\n\
+  \n---"
+step_3_schema_load: "# From N00_genesis/P05_output/_schema.yaml\nkind: landing_page\npillar: P05\nrequired_fields:\n  - id\n\
+  \  - kind\n  - title\n  - version\n  - created\n  - author\n  - domain\n  - quality\n  - tags\n  - tldr\n  - target_audience\n\
+  \  - cta_primary\noptional_fields:\n  - cta_secondary\n  - brand_voice\n  - sections[]\nmax_bytes: 16384\n\n---"
+step_4_ambiguity_resolution: '| Ambiguity | Options considered | Resolution |
+
+  |-----------|-------------------|-----------|
+
+  | "SaaS" — product or company? | (a) product landing page, (b) company homepage | Need GDP decision: "Is this for a specific
+  product or the company?" |
+
+  | Audience unclear | (a) developers, (b) business buyers, (c) end users | GDP: "Who is the primary visitor?" |
+
+  | CTA unclear | (a) free trial, (b) demo, (c) contact sales | Inferred from SaaS context: likely free_trial |
+
+
+  GDP gate: 2 decisions needed (audience + product scope).
+
+  If running autonomously with decision_manifest.yaml: check manifest for `landing_page.target_audience`.
+
+  If no manifest entry: use `★ Recommended` = `b2b_software_buyers` + flag for user review.
+
+
+  ---'
+step_5_constrain_output: "F1 CONSTRAIN\n  kind       : landing_page\n  pillar     : P05\n  schema     : N00_genesis/P05_output/_schema.yaml\n\
+  \  max_bytes  : 16384\n  naming     : landing_page_saas_product.md\n  confidence : 91%\n  ambiguities: target_audience (defaulted:\
+  \ b2b_software_buyers), cta (defaulted: free_trial)\n  gdp_needed : yes (2 decisions -- flag in F4 if no manifest)\n  nucleus\
+  \    : N03 (builder)\n\n---"
+step_6_what_constrain_ruled_out: '| Rejected interpretation | Why rejected |
+
+  |------------------------|-------------|
+
+  | `kind = component_map` | "landing page" is not a component map |
+
+  | `kind = pitch_deck` | "landing" implies web page, not slide deck |
+
+  | `nucleus = N06` | N06 handles pricing/commercial; N03 handles build/scaffold |
+
+  | `kind = pricing_page` | SaaS context without "pricing" keyword -> landing_page first |
+
+
+  ---'
+key_insights_what_f1_teaches: '| Principle | Demonstrated here |
+
+  |-----------|-------------------|
+
+  | Direct match wins | "landing page" -> `landing_page` without fuzzy search |
+
+  | Context narrows pillar | "build" -> P05 Output (production artifacts) |
+
+  | Ambiguity is explicit | 2 GDP decisions flagged, not silently assumed |
+
+  | Confidence score matters | 91% = proceed; <60% = GDP first |
+
+  | Schema is loaded, not recalled | Every F1 reads `_schema.yaml`; no cached assumptions |
+
+
+  ---'
+cross_references:
+- '`N00_genesis/P03_prompt/layers/p03_pc_cex_universal.md` — authoritative kind-to-pillar map'
+- '`N03_engineering/P08_architecture/pattern_8f_full_trace.md` — F1 field format in full trace'
+- '`N03_engineering/P07_evals/reasoning_trace_8f_govern.md` — F7 trace complement'
+- '`N03_engineering/P01_knowledge/kc_intent_resolution_map.md` — 123-kind resolution table'

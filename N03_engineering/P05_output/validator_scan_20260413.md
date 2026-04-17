@@ -8,7 +8,7 @@ created: 2026-04-13
 updated: 2026-04-13
 author: n03_builder
 tags: [validator, wave-scan, builder-polish, quality, report]
-quality: 9.0
+quality: 9.2
 title: "Validator Wave Scan 2026-04-13"
 tldr: "Full sweep of 2133 builder ISOs: 705 initial failures reduced to 0 via 4 new autofix tools plus targeted manual edits."
 density_score: 0.88

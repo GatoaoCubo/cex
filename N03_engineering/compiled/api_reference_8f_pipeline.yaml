@@ -17,6 +17,7 @@ tags:
 tldr: 'Machine-readable API reference for the 8F Universal Reasoning Pipeline. Each function documented as a callable interface:
   inputs, outputs, preconditions, postconditions, error handling, and inter-function contracts.'
 density_score: 0.94
+updated: '2026-04-17'
 overview: 'The 8F pipeline is CEX''s universal reasoning protocol. Every nucleus, every task, every artifact flows through
   F1->F8 in sequence. This document is the MACHINE-READABLE reference for builders that need to introspect, instrument, or
   extend the pipeline. Protocol source of truth: `.claude/rules/8f-reasoning.md` Python implementation: `cex_sdk/cex_8f_runner.py`

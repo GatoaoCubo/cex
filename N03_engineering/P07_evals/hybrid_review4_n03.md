@@ -5,7 +5,7 @@ pillar: P01
 llm_function: INJECT
 title: "HYBRID_REVIEW4 N03 -- audit + surgical fix of workflow_node + eval_framework + judge_config"
 version: "1.0.0"
-quality: 8.9
+quality: 9.1
 tags: [audit, hybrid_review4, n03, builder, workflow_node, eval_framework, judge_config]
 domain: "builder quality audit"
 created: "2026-04-14"

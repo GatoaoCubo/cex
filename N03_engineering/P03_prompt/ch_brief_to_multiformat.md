@@ -14,7 +14,7 @@ output_format: "7 format-specific content drafts (course outline, video script, 
 context_passing: full
 error_strategy: fail_fast
 domain: "content_factory"
-quality: 9.0
+quality: 9.2
 tags: [chain, content-factory, multi-format, brief-expansion, prompt-pipeline]
 tldr: "7-step prompt chain: raw brief -> validated brief -> research prompt -> content plan -> longform draft -> format fan-out -> format-specific drafts"
 density_score: 0.92

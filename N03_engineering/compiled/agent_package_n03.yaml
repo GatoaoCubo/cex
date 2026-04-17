@@ -18,6 +18,7 @@ tags:
 tldr: Complete packaged configuration for the N03 Engineering nucleus. Bundles identity, model config, capability registry,
   tool list, boot parameters, and runtime constraints into a deployable agent unit.
 density_score: 0.9
+updated: '2026-04-17'
 package_identity: '| Field | Value |
 
   |-------|-------|

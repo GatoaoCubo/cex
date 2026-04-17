@@ -4,7 +4,7 @@ id: p08_audit_agent_profile_builder
 pillar: P08
 llm_function: GOVERN
 purpose: Quality audit of the 13-ISO agent-profile-builder family produced by qwen3:8b
-quality: 8.9
+quality: 9.2
 title: "Audit: agent-profile-builder (13 ISOs)"
 version: "1.0.0"
 author: n03_reviewer

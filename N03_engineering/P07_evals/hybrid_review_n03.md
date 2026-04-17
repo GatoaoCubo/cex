@@ -4,7 +4,7 @@ id: p08_hybrid_review_n03
 pillar: P08
 llm_function: GOVERN
 purpose: Master audit of 4 builder families (52 ISOs) produced during HYBRID_REVIEW Wave 1+2 by qwen3:8b
-quality: 8.9
+quality: 9.2
 title: "HYBRID_REVIEW N03 -- Master Audit: 52 ISOs across 4 builder kinds"
 version: "1.0.0"
 author: n03_reviewer

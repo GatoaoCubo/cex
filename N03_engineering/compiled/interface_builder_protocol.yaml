@@ -18,6 +18,7 @@ tags:
 tldr: Bilateral contract defining what every builder (any of the 259 builder agents) must EXPOSE and what every caller (N03,
   N07, grid dispatch) must PROVIDE. Enables LLM-to-LLM interoperability across all 4 runtimes.
 density_score: 0.92
+updated: '2026-04-17'
 purpose: A builder is not a free-form agent. It is a CONTRACT-BOUND component. This interface defines the bilateral agreement
   between BUILDER (any builder agent) and CALLER (N03 dispatcher, N07 orchestrator, or direct human invocation). Implementing
   this interface is what makes a builder a first-class CEX component. Violating it produces orphan artifacts with no quality

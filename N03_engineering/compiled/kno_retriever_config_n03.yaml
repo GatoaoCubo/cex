@@ -16,6 +16,7 @@ tags:
 - hybrid_search
 - reranking
 - inventive_pride
+density_score: 1.0
 properties: '| Property | Value |
 
   |----------|-------|

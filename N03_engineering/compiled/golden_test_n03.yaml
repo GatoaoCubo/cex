@@ -6,7 +6,7 @@ version: 1.0.0
 created: 2026-04-17
 author: n03_engineering
 domain: artifact-construction
-quality: null
+quality: 8.8
 tags:
 - golden-test
 - N03
@@ -17,6 +17,7 @@ tags:
 tldr: 'Golden output tests for N03''s primary builders. Each test case defines: input intent, expected kind, expected frontmatter
   fields, structural assertions, and forbidden patterns. Run before any builder ISO update.'
 density_score: 0.91
+updated: '2026-04-17'
 purpose: Golden tests capture the EXPECTED output of N03's builders. When a builder ISO is updated, golden tests detect unintended
   regressions. These are NOT unit tests -- they test end-to-end builder output shape, not logic.
 test_execution: 'python _tools/cex_system_test.py --golden --nucleus n03

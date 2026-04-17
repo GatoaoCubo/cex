@@ -18,6 +18,7 @@ tags:
 tldr: Autonomous bug detection and fix loop for N03 build errors. Scans for compile failures, frontmatter violations, vocabulary
   drift, and quality regressions. Applies heuristic fixes first, LLM rewrites as fallback.
 density_score: 0.9
+updated: '2026-04-17'
 purpose: 'The bugloop is N03''s self-healing mechanism. After every build batch, it scans for defects and applies corrections
   autonomously -- no N07 intervention needed for routine failures. Escalates only when heuristic + LLM fix both fail. Inventive
   Pride: bugs are an insult to craft. The bugloop runs until the build is clean.'
