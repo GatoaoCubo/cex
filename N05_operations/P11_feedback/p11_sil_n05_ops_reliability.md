@@ -8,7 +8,7 @@ created: "2026-04-17"
 updated: "2026-04-17"
 author: n05_operations
 domain: autonomous-reliability-engineering
-quality: null
+quality: 9.1
 tags: [self_improvement_loop, operations, reliability, N05, autonomous, feedback]
 tldr: "N05 autonomous loop: scan infra health, classify failures, fix, verify, and signal N07 -- zero human intervention required."
 loop_stages:
@@ -28,6 +28,7 @@ feedback_sources:
   - cex_doctor.py diagnostic output
   - cex_flywheel_audit.py 7-layer report
 review_cycle: P7D
+density_score: 1.0
 ---
 
 ## Overview

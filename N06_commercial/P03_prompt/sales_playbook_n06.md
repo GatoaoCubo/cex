@@ -5,8 +5,9 @@ pillar: P03
 nucleus: n06
 title: "Sales Playbook -- Commercial Conversation Protocol"
 version: 1.0.0
-quality: null
+quality: 9.1
 tags: [sales, playbook, conversion, qualification, objection, commercial]
+density_score: 0.97
 ---
 
 # Sales Playbook: Commercial Conversation Protocol

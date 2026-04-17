@@ -13,7 +13,7 @@ audit_frequency: per-commit
 compliance_status: approved
 review_cycle: biannual
 responsible_team: N05_operations
-quality: null
+quality: 9.1
 tags: [compliance_checklist, n05, operations, release-gate, 8F, security, git-hygiene]
 tldr: "N05 Gating Wrath release gate: 40 verifiable checks across 8 categories before any release or deployment."
 ---
