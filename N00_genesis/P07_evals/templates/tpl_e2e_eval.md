@@ -14,6 +14,7 @@ author: [agent_group_name]
 quality: [8.0_to_10.0]
 tags: [[tag1], [tag2], e2e, eval]
 tldr: [o_que_o_pipeline_valida]
+density_score: 1.0
 ---
 
 # E2E Eval: [pipeline_slug]

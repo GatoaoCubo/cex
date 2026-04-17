@@ -9,6 +9,7 @@ pillar: P03
 title: [system_prompt_do_agente]
 target_agent: [agent_name]
 quality: [7.0_to_10.0]
+density_score: 1.0
 ---
 
 <!-- Orchestrator system prompts: target <15% of context budget. -->

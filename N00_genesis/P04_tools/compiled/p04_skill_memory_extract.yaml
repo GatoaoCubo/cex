@@ -1,0 +1,53 @@
+id: p04_skill_memory_extract
+kind: skill
+pillar: P04
+title: 'Skill: Memory Extraction'
+version: 1.0.0
+quality: 9.0
+tags:
+- skill
+- memory
+- extraction
+- learning
+- persistence
+tldr: Memory extraction skill for identifying and persisting valuable information from conversation context into long-term
+  memory files.
+domain: tools
+author: n03_builder
+created: '2026-04-12'
+updated: '2026-04-12'
+density_score: 0.9
+trigger_conditions: Memory extraction runs periodically (every 5 tool executions) and at conversation end. It scans recent
+  context for persistable knowledge.
+what_to_extract: ''
+user_preferences_type_feedback:
+- 'Corrections to approach: "don''t do X, do Y instead"'
+- 'Confirmed approaches: "yes, that''s exactly right"'
+- 'Style preferences: terse vs verbose, formal vs casual'
+- 'Tool preferences: preferred editors, frameworks, workflows'
+project_context_type_project:
+- Ongoing initiatives and their status
+- Deadlines and milestones (convert relative dates to absolute)
+- Team members and their responsibilities
+- Technical decisions and their rationale
+user_profile_type_user:
+- Role and expertise level
+- Domain knowledge areas
+- Technologies they work with
+- How they prefer to collaborate
+external_references_type_reference:
+- URLs to dashboards, docs, or tools mentioned
+- External system locations (Linear, Slack, Grafana)
+- API endpoints and service locations
+- Documentation sources
+extraction_protocol:
+- Scan recent conversation turns for extractable information
+- Check existing memory files for duplicates
+- Categorize by memory type (user/feedback/project/reference)
+- Write memory file with frontmatter (name, description, type)
+- Update MEMORY.md index with one-line pointer
+quality_rules:
+- Do not extract ephemeral task state (use tasks instead)
+- Do not extract information derivable from code or git
+- Always include WHY context for feedback and project memories
+- Convert relative dates to absolute dates before saving

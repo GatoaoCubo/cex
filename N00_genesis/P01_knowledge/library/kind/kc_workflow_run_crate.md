@@ -1,11 +1,15 @@
 ---
+id: kc_workflow_run_crate
 title: Workflow Run Crate
-kind: workflow
+kind: knowledge_card
+pillar: P01
+quality: null
 description: A structured framework for orchestrating multi-step processes with modular components, error handling, and parallel execution
 tags: [automation, orchestration, pipeline, taskflow]
 priority: 8
 author: CEX Team
 date: 2023-10-15
+density_score: 0.99
 ---
 
 # Workflow Run Crate

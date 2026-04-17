@@ -1,9 +1,13 @@
 ---
+id: kc_test_ollama_wrapper
 title: Ollama Wrapper Test Guide
 description: Comprehensive documentation for testing and validating Ollama wrapper integrations in CEX systems
 tags: ["ollama", "wrapper", "testing", "integration", "api"]
-kind: test
+kind: knowledge_card
+pillar: P01
+quality: null
 priority: 1
+density_score: 1.0
 ---
 
 # Ollama Wrapper Test Guide

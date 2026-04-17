@@ -19,6 +19,7 @@ quality: [7.0_to_10.0]
 tags: [[tag1], [tag2], [tag3]]
 tldr: [uma_frase_densa_do_que_faz]
 when_to_use: [condicao_principal_de_uso]
+density_score: 1.0
 ---
 
 # [titulo_descritivo]
