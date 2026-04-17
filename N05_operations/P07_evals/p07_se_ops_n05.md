@@ -71,7 +71,7 @@ health_check: "python -c \"from _tools import signal_writer\" && test -d .cex"
 frequency: "pre-commit, pre-dispatch"
 alerting: "stdout -- failing check id + exit code"
 domain: "operations, smoke testing"
-quality: null
+quality: 9.1
 tags: [smoke-eval, n05-operations, fast-fail, pre-commit, P07]
 tldr: "25s smoke gate for N05: repo intact, tools importable, compile works, doctor starts, signal writable, git clean, hooks active, ascii clean."
 density_score: 0.91

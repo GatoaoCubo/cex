@@ -29,7 +29,7 @@ threshold_publish: 8.0
 threshold_review: 7.0
 automation_status: "semi-automated"
 domain: "operations"
-quality: null
+quality: 9.1
 tags: [scoring-rubric, ops, operations, n05, 3-layer, gating-wrath]
 tldr: "3-layer rubric for N05 ops artifacts: structural 30%, rubric 30%, semantic 40%. Gating Wrath bias: reject if not production-trustworthy."
 density_score: 0.91
