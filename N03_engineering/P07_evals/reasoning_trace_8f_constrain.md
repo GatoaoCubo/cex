@@ -7,10 +7,11 @@ version: 1.0.0
 created: 2026-04-17
 author: n03_engineering
 domain: pipeline-reasoning
-quality: null
+quality: 8.8
 tags: [reasoning_trace, F1, CONSTRAIN, intent-resolution, 8F, example, coc]
 tldr: "Live F1 CONSTRAIN trace for input: 'build a landing page for my SaaS'. Shows intent resolution, kind mapping, schema load, and ambiguity handling. Loadable as F2 BECOME ISO to teach any LLM how CONSTRAIN works."
 density_score: 0.90
+updated: "2026-04-17"
 ---
 
 # Reasoning Trace: F1 CONSTRAIN
