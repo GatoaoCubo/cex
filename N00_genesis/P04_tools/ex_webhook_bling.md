@@ -4,12 +4,13 @@ kind: webhook
 pillar: P04
 title: Bling ERP Webhook Handler
 version: 0.1.0
-quality: null
+quality: 8.9
 status: template
 brand_placeholders:
   - BRAND_BLING_WEBHOOK_SECRET
   - BRAND_SUPABASE_PROJECT_REF
 tags: [commerce, template, distillation, bling, webhook]
+density_score: 1.0
 ---
 
 # Bling ERP Webhook Handler
