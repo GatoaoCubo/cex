@@ -5,8 +5,10 @@ pillar: P12
 nucleus: n06
 title: "Renewal Workflow -- Automated Renewal and Retention Orchestration"
 version: 1.0.0
-quality: null
+quality: 9.0
 tags: [renewal, workflow, retention, orchestration, commercial, automated]
+density_score: 1.0
+updated: "2026-04-17"
 ---
 
 # Renewal Workflow: Automated Renewal and Retention Orchestration

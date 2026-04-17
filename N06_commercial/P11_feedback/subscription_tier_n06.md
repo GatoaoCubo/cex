@@ -5,8 +5,9 @@ pillar: P11
 nucleus: n06
 title: "Subscription Tier Architecture -- Revenue Model and Upgrade Logic"
 version: 1.0.0
-quality: null
+quality: 9.1
 tags: [subscription, tier, pricing, revenue, saas, upgrade, expansion]
+density_score: 1.0
 ---
 
 # Subscription Tier Architecture
