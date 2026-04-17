@@ -8,7 +8,7 @@ created: "2026-04-17"
 updated: "2026-04-17"
 author: n05_eval_framework_builder
 domain: operations
-quality: null
+quality: 9.1
 tags: [eval_framework, n05, operations, test_pyramid, ci, smoke, regression]
 tldr: "End-to-end evaluation framework for N05 operations: test pyramid from unit to E2E, with CI/manual/overnight execution modes."
 framework_type: agent_eval
