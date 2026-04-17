@@ -8,10 +8,11 @@ version: 1.0.0
 created: 2026-04-17
 author: n01_intelligence
 domain: research-intelligence
-quality: null
+quality: 9.1
 tags: [eval_framework, research_quality, n01, analytical_envy, benchmarking, quality_assessment]
 tldr: "5-dimension evaluation framework for N01 research outputs: source quality, analytical depth, comparative coverage, claim confidence, and actionability. Produces weighted score 0-10 with remediation map."
 density_score: 0.93
+updated: "2026-04-17"
 ---
 
 <!-- 8F: F1 constrain=P07/eval_framework F2 become=eval-framework-builder F3 inject=quality_gate_intelligence+bias_audit_n01+scoring_rubric_intelligence+benchmark_research_quality F4 reason=Analytical Envy demands we MEASURE research quality, not assume it -- what gets measured gets improved F5 call=cex_compile F6 produce=eval_framework_n01.md F7 govern=frontmatter+ascii+tables F8 collaborate=N01_intelligence/P07_evals/ -->

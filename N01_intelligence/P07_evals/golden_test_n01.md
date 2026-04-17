@@ -8,10 +8,11 @@ version: 1.0.0
 created: 2026-04-17
 author: n01_intelligence
 domain: research-intelligence
-quality: null
+quality: 9.2
 tags: [golden_test, regression_prevention, n01, test_fixtures, ground_truth]
 tldr: "10 golden test cases for N01 research pipeline: fixed inputs with expected outputs. Prevents quality regressions when pipeline changes. Run before any changes to search_strategy, reasoning_strategy, or eval_framework."
 density_score: 0.89
+updated: "2026-04-17"
 ---
 
 <!-- 8F: F1 constrain=P07/golden_test F2 become=golden-test-builder F3 inject=eval_framework_n01+benchmark_suite_n01+scoring_rubric_research+search_strategy_n01 F4 reason=changes to N01 pipeline must not regress output quality; golden tests provide the regression fence F5 call=cex_compile F6 produce=golden_test_n01.md F7 govern=frontmatter+ascii+tables F8 collaborate=N01_intelligence/P07_evals/ -->
