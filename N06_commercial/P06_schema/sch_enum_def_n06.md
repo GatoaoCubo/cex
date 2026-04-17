@@ -5,8 +5,10 @@ pillar: P06
 nucleus: n06
 title: Revenue State Enum
 version: 1.0
-quality: null
+quality: 9.0
 tags: [schema, enum, pricing, funnel, revenue]
+density_score: 1.0
+updated: "2026-04-17"
 ---
 
 <!-- 8F: F1 constrain=P06/enum_def F2 become=enum-def-builder F3 inject=nucleus_def_n06.md,n06-commercial.md,bld_manifest_enum_def.md,kc_enum_def.md,P06_schema/_schema.yaml F4 reason=closed_set_enum_for_revenue_states_and_offer_control F5 call=apply_patch;python _tools/cex_compile.py F6 produce=7186_bytes F7 govern=frontmatter_sections_ascii_density_review F8 collaborate=N06_commercial/P06_schema/sch_enum_def_n06.md -->
