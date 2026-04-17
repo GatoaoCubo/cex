@@ -1,0 +1,107 @@
+id: p02_agent_[name_slug]
+kind: agent
+pillar: P02
+title:
+- titulo_descritivo
+version: 1.0.0
+created:
+- yyyy-mm-dd
+updated:
+- yyyy-mm-dd
+author:
+- agent_group_name
+agent_group:
+- agent_group_que_opera
+role:
+- planner|plan_checker|verifier|executor|researcher|orchestrator
+domain:
+- domain
+quality:
+- 7.0_to_10.0
+tags:
+- - tag1
+- - tag2
+- - tag3
+tldr:
+- uma_frase_densa_do_que_faz
+when_to_use: '<!-- INSTRUCAO: tabela YES/NO objetiva. -->
+
+  | Cenario | Usar? |
+
+  |---------|-------|
+
+  | [cenario_sim_1] | SIM |
+
+  | [cenario_sim_2] | SIM |
+
+  | [cenario_nao_1] | NAO -> use [alternativa_1] |
+
+  | [cenario_nao_2] | NAO -> use [alternativa_2] |'
+density_score: 1.0
+overview: '<!-- INSTRUCAO: 2 frases. Identidade, escopo e resultado. Density hint: 180-240 chars. --> [nome_do_agente] e o
+  agente de [papel_especifico]. Atua quando [cenario_principal] e entrega [resultado_principal].'
+architecture: '<!-- INSTRUCAO: fluxograma ASCII ou tabela curta. -->
+
+  [entrada] -> [modulo_1] -> [modulo_2] -> [saida]'
+file_structure: '<!-- INSTRUCAO: mapear pasta/arquivos nucleares; incluir kit ISO quando existir. -->
+
+  - `manifest.yaml`: [papel_no_pacote]
+
+  - `system_instruction.md`: [identidade_e_guardrails]
+
+  - `instructions.md`: [operacao_passo_a_passo]
+
+  - `[arquivo_extra]`: [funcao]'
+input_output: "<!-- INSTRUCAO: contrato minimo de entrada e saida. -->\ninput:\n  [campo_1]: [tipo]  # [descricao]\n  [campo_2]:\
+  \ [tipo]  # [descricao]\noutput:\n  [resultado_1]: [tipo]  # [descricao]\n  [resultado_2]: [tipo]  # [descricao]"
+integration: '<!-- INSTRUCAO: upstream, downstream e dependencias externas. -->
+
+  - Upstream: [quem_chama]
+
+  - Downstream: [quem_recebe]
+
+  - Dependencies: [tool_ou_mcp_1], [tool_ou_mcp_2]'
+tool_constraints: '<!-- INSTRUCAO: definir ferramentas permitidas/proibidas por role. -->
+
+  | Role | Allowed | Forbidden |
+
+  |------|---------|-----------|
+
+  | planner | Read, Grep, Glob, WebSearch | Write, Edit, Bash |
+
+  | plan_checker | Read, Grep, Glob | Write, Edit, Bash, WebSearch |
+
+  | verifier | Read, Grep, Glob, Bash (read-only) | Write, Edit |
+
+  | executor | Read, Write, Edit, Bash, Glob, Grep | WebSearch |
+
+  | researcher | Read, Grep, Glob, WebSearch, WebFetch | Write, Edit |
+
+  | orchestrator | Read, Grep, Glob, Task, Agent | Write, Edit, Bash |'
+quality_gates: '<!-- INSTRUCAO: 3-5 gates mensuraveis. -->
+
+  - [gate_1]: [threshold]
+
+  - [gate_2]: [threshold]
+
+  - [gate_3]: [threshold]
+
+  - Tool compliance: tool set used matches declared role constraints
+
+  - No faz-tudo: agent declares max 2 roles (single-purpose preferred)'
+common_issues: '<!-- INSTRUCAO: falhas reais, nao abstratas. -->
+
+  - [falha_1] -> [mitigacao_1]
+
+  - [falha_2] -> [mitigacao_2]'
+invocation: '<!-- INSTRUCAO: mostrar comando, prompt ou API call. -->
+
+  [comando_ou_prompt_de_invocacao]'
+related_agents: '<!-- INSTRUCAO: relacoes operacionais, nao apenas nomes. -->
+
+  - [agente_relacionado_1]: [como_interage]
+
+  - [agente_relacionado_2]: [como_interage]'
+footer: '<!-- INSTRUCAO: repetir agent_group e score final para leitura rapida. -->
+
+  Agent_group: [agent_group_name] | Quality: [quality] | Domain: [domain]'

@@ -1,118 +1,125 @@
 ---
-mission: VERTICAL_DENSIFICATION
+mission: SCORE_REFORM
 nucleus: n05
-wave: W1
+wave: M1
 created: 2026-04-17
 priority: CRITICAL
 effort: opus_high
 ---
 
-# N05 VERTICAL_DENSIFICATION W1: Path Correction + Self-Improvement Loop
+# N05 SCORE_REFORM M1: Reformulate cex_score.py
 
-## SPEC REFERENCE
-Read first: `_docs/specs/spec_vertical_densification.md`
-Your wave: W1 (sequential -- must complete before W2 launches)
+## CONTEXT
 
-## TASK 1: Fix 18 Stale Python Path References (BLOCKING)
+cex_score.py has 4 critical bugs that inflate scores and make the quality gate
+meaningless as a pre-publish filter. Your job: fix all 4 in _tools/cex_score.py.
 
-STRUCT_ALIGN V2 moved root P01-P12 dirs into N00_genesis/.
-18 Python files in `_tools/` still use the old flat paths.
+Read the full file first: `_tools/cex_score.py` (765 lines)
 
-### Verification (run first):
-```bash
-grep -rn '"P0[0-9]' _tools/*.py | grep -v "N00_genesis" | grep -v "compiled" | grep -v ".pyc"
-```
-This should list ~18+ stale references.
+## BUG 1: Artificial floor 7.0 on all layers (lines 502-514, 560-562)
 
-### The Fix Pattern:
-Every occurrence of:
+Current code clamps every layer score to min 7.0:
 ```python
-"P01_knowledge"   ->  "N00_genesis/P01_knowledge"
-"P02_model"       ->  "N00_genesis/P02_model"
-"P03_prompt"      ->  "N00_genesis/P03_prompt"
-"P04_tools"       ->  "N00_genesis/P04_tools"
-"P05_output"      ->  "N00_genesis/P05_output"
-"P06_schema"      ->  "N00_genesis/P06_schema"
-"P07_evals"       ->  "N00_genesis/P07_evals"
-"P08_architecture" -> "N00_genesis/P08_architecture"
-"P09_config"      ->  "N00_genesis/P09_config"
-"P10_memory"      ->  "N00_genesis/P10_memory"
-"P11_feedback"    ->  "N00_genesis/P11_feedback"
-"P12_orchestration" -> "N00_genesis/P12_orchestration"
+structural = max(structural, 7.0)
+rubric = max(rubric, 7.0)
+semantic = max(semantic, 7.0)
 ```
 
-Known files with stale refs (verify + fix all):
-- `_tools/cex_pipeline.py`
-- `_tools/cex_forge.py`
-- `_tools/cex_init.py`
-- `_tools/cex_feedback.py`
-- `_tools/cex_retriever.py`
-- `_tools/cex_schema_hydrate.py`
-- `_tools/cex_prompt_layers.py`
-- `_tools/cex_skill_loader.py`
-- `_tools/cex_auto.py`
-- `_tools/cex_8f_motor.py`
-- `_tools/cex_8f_runner.py`
-- `_tools/cex_run.py`
-- `_tools/cex_compile.py`
-- `_tools/cex_doctor.py`
-- `_tools/cex_memory_select.py`
-- `_tools/cex_quality_monitor.py`
-- `_tools/cex_prompt_cache.py`
-- `_tools/cex_flywheel_audit.py`
+Fix: remove all `max(..., 7.0)` clamps. Let scores be real (0-10).
+Also adjust the normalization formula at line 502:
+  `structural = round(8.0 + (struct_raw / 10.0) * 1.3, 2)`
+This compresses everything into 8.0-9.3. Replace with linear mapping:
+  `structural = round(struct_raw, 2)`  -- use raw score directly
+Same for rubric (line 511) and semantic (line 560).
 
-### Verification after fix:
+## BUG 2: Kind-score inheritance contaminates scores (lines 540-553)
+
+Current code: if L1+L2 >= 8.8, find ANY cached artifact of same kind with
+semantic >= 9.0 and inherit its semantic score. This means one good artifact
+of kind=knowledge_card makes ALL knowledge_cards inherit 9.0 semantic regardless
+of content quality.
+
+Fix: remove the kind-inheritance optimization entirely (lines 531-553).
+Replace with: if avg_12 >= 8.8 AND content hash matches a cached entry,
+use the cached score. Otherwise always call the LLM.
+The token savings are not worth score contamination.
+
+## BUG 3: No batch/nucleus mode (CLI, line 676+)
+
+Add these CLI flags to main():
+  `--nucleus N01`     -- score only artifacts in N01_intelligence/
+  `--null-only`       -- skip artifacts that already have quality != null
+  `--apply-null-only` -- shorthand for --apply --null-only
+
+Usage after fix:
 ```bash
-grep -rn '"P0[0-9]' _tools/*.py | grep -v "N00_genesis" | grep -v "compiled" | grep -v ".pyc"
+python _tools/cex_score.py --hybrid --apply --null-only N01_intelligence/
+python _tools/cex_score.py --hybrid --apply --nucleus n01 --null-only
 ```
-MUST return empty (0 lines).
 
-### Run system test:
-```bash
-python _tools/cex_system_test.py
+Implementation: in the file-discovery section (line 688-698), when --null-only
+is set, filter `args.files` to only those where `quality: null` appears in frontmatter.
+When --nucleus is set, restrict search to `N0{N}_{name}/` directory.
+
+## BUG 4: L2 rubric has 80% passthrough (lines 218-243)
+
+Most hard gate checks fall through to `passed = True` because the check
+string doesn't match any known pattern. Expand programmatic checks:
+
+Add these patterns to the hard gate checker (insert after line 243):
+```python
+elif "tldr" in check and "present" in check:
+    tldr = re.search(r'tldr:\s*.+', fm)
+    passed = tldr is not None and len(tldr.group(0)) > 10
+elif "tags" in check and ("list" in check or "present" in check):
+    passed = bool(re.search(r'tags:\s*\[.+\]', fm))
+elif "version" in check:
+    passed = bool(re.search(r'version:\s*\d+\.\d+', fm))
+elif "no placeholder" in check or "no todo" in check:
+    bad = len(re.findall(r'(?i)\b(TODO|TBD|FIXME|insert here|add later)\b', body))
+    passed = bad == 0
+elif "has example" in check or "example" in check:
+    passed = bool(re.search(r'(?i)## (Example|Usage|Sample)', body))
+elif "has table" in check or "table" in check:
+    passed = bool(re.search(r'^\|.*\|', body, re.MULTILINE))
+elif "code block" in check or "```" in check:
+    passed = "```" in body
+elif "body length" in check or "min" in check and "words" in check:
+    words = len(body.split())
+    passed = words >= 100
+elif "no filler" in check or "filler" in check:
+    fillers = re.findall(r'(?i)\b(this document|in summary|it.?s worth noting|as mentioned)\b', body)
+    passed = len(fillers) == 0
 ```
-Fix any failures introduced by the path corrections.
 
-## TASK 2: Create self_improvement_loop for N05 (gap from SELF_ASSEMBLY)
+## VERIFICATION
 
-N05 SELF_ASSEMBLY did not produce `self_improvement_loop_n05.md`. Create it now.
+After all fixes:
+```bash
+# Test on 3 artifacts: a good one, a bad one, a quality:null one
+python _tools/cex_score.py --hybrid --verbose N01_intelligence/P01_knowledge/kc_intelligence_vocabulary.md
+python _tools/cex_score.py --hybrid --apply --null-only --nucleus n06 --dry-run
 
-Save path: `N05_operations/P11_feedback/self_improvement_loop_n05.md`
+# Sanity check: a minimal artifact (< 500 bytes, no content) should score < 6.0
+# A rich artifact (>3KB, tables, examples) should score > 8.5
+python _tools/cex_sanitize.py --check --scope _tools/
+```
 
-Kind: self_improvement_loop
-Pillar: P11
-Nucleus: N05
-Sin lens: Gating Wrath -- nothing passes without meeting SLO
-
-Content: autonomous reliability evolution loop that:
-- Scans for quality < 8.5 in P07/P09 artifacts
-- Triggers re-evaluation via cex_evolve.py
-- Updates SLO thresholds based on empirical failure rates
-- Enforces shift-left: push validation earlier in the pipeline
-
-## COMPLETION SEQUENCE
+## COMPLETION
 
 ```bash
-# 1. Verify stale paths fixed
-grep -rn '"P0[0-9]' _tools/*.py | grep -v "N00_genesis" | grep -v "compiled"
-# Must return 0 lines
-
-# 2. Compile
-python _tools/cex_compile.py --all
-
-# 3. System test
-python _tools/cex_system_test.py
-
-# 4. Commit
-git add _tools/ N05_operations/ && git commit -m "[N05] VERTICAL_DENSIFICATION W1: fix 18 stale P0x paths -> N00_genesis/P0x + self_improvement_loop"
-
-# 5. Signal
-python -c "from _tools.signal_writer import write_signal; write_signal('n05', 'vert_dens_w1_complete', 9.0)"
+python _tools/cex_compile.py _tools/cex_score.py 2>/dev/null || true
+git add _tools/cex_score.py
+git commit -m "[N05] SCORE_REFORM M1: fix floor/contamination/batch/rubric in cex_score.py"
+python -c "from _tools.signal_writer import write_signal; write_signal('n05', 'score_reform_complete', 9.0)"
 ```
 
 ## COMPLETION CRITERIA
-- [ ] grep returns 0 stale path refs in _tools/*.py
-- [ ] cex_system_test.py passes (or regression count does not increase)
-- [ ] N05_operations/P11_feedback/self_improvement_loop_n05.md created
-- [ ] git commit with [N05] VERTICAL_DENSIFICATION W1 message
-- [ ] signal sent: n05 -> vert_dens_w1_complete
+- [ ] No `max(..., 7.0)` clamps on layer scores
+- [ ] Kind-inheritance optimization removed
+- [ ] --null-only and --nucleus flags added to CLI
+- [ ] >= 5 new programmatic hard gate checks added to L2
+- [ ] A minimal artifact scores < 6.0 (verified via --verbose)
+- [ ] cex_sanitize.py passes (ASCII-only code)
+- [ ] git commit [N05] SCORE_REFORM M1
+- [ ] signal sent: n05 -> score_reform_complete

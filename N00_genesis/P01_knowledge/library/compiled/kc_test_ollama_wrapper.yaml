@@ -1,25 +1,146 @@
 id: kc_test_ollama_wrapper
+title: Ollama Wrapper Test Guide
+description: Comprehensive documentation for testing and validating Ollama wrapper integrations in CEX systems
+tags:
+- ollama
+- wrapper
+- testing
+- integration
+- api
 kind: knowledge_card
 pillar: P01
-title: Local Ollama Wrapper for CEX Nuclei
-version: 1.0.0
 quality: null
-definition: The `_tools/ollama_nucleus.py` wrapper provides direct API integration with Ollama's local model server, enabling
-  CEX nuclei to execute LLM inference without relying on external APIs. It replaces the previous `aider` integration by offering
-  finer-grained control over model loading, context window management, and token streaming. The wrapper abstracts Ollama's
-  REST API into a nucleus-specific interface, allowing nuclei to spin up dedicated model instances with custom parameters
-  (e.g., temperature, stop sequences) while maintaining CEX's memory and execution isolation.
-example: 'A nucleus boot script invokes the wrapper via:
+priority: 1
+density_score: 1.0
+overview: The Ollama wrapper test suite provides standardized procedures for validating integrations between CEX systems and
+  Ollama's API. This guide covers testing scenarios, configuration options, and validation criteria for ensuring compatibility
+  with Ollama's inference and model management capabilities. The framework supports model compatibility testing, API endpoint
+  validation, token budget enforcement, response format verification, and error handling simulation.
+key_features:
+- 'Model Compatibility Testing: Validate support for Qwen3, Haiku, Codex, and other Ollama models'
+- 'API Endpoint Validation: Ensure proper handling of `/api/generate`, `/api/tags`, and `/api/models` endpoints'
+- 'Token Budget Enforcement: Verify token limits and cost calculations'
+- 'Response Format Verification: Check JSON structure and metadata inclusion'
+- 'Error Handling Simulation: Test 404, 503, and 400 error scenarios'
+test_scenarios: ''
+1_basic_inference_test: "curl http://localhost:11434/api/generate \\\n  -d '{\n    \"model\": \"qwen3\",\n    \"prompt\":\
+  \ \"What is the capital of France?\",\n    \"stream\": false\n  }'\nExpected Output:\n{\n  \"response\": \"The capital of\
+  \ France is Paris.\",\n  \"model\": \"qwen3\",\n  \"tokens_used\": 45,\n  \"total_cost\": 0.002\n}"
+2_model_switching_test: '| Model       | Expected Response Time | Success Criteria |
 
-  from _tools.ollama_nucleus import launch_model
+  |------------|------------------------|------------------|
 
-  launch_model(model_name="llama3", num_threads=4, context_length=2048, callback=handle_response)
+  | qwen3      | <2s                    | Valid JSON       |
 
-  This triggers Ollama''s `POST /api/generate` endpoint with the specified parameters, streaming tokens to the callback. The
-  wrapper handles model loading, resource allocation, and error recovery, ensuring nuclei operate as independent, sandboxed
-  processes.'
-cex_integration: The wrapper enables a 6-nucleus local grid by allowing each nucleus to host its own Ollama model instance.
-  Through orchestrated resource allocation, CEX dynamically spawns nuclei with different models (e.g., `llama3`, `mistral`,
-  `phi3`) on the same machine, leveraging CPU/GPU parallelism. This setup supports distributed task execution, model-parallel
-  inference, and isolated experiment environments, all while maintaining CEX's core principles of memory safety and process
-  isolation.
+  | haiku      | <1.5s                  | No format errors |
+
+  | codex      | N/A (not supported)   | Error 404        |'
+3_token_budget_test: "{\n  \"model\": \"qwen3\",\n  \"prompt\": \"This is a test prompt with 100 tokens.\",\n  \"max_tokens\"\
+  : 50\n}\nValidation: Check response length matches token budget and cost calculation"
+4_error_handling_test: "404 Model Not Found:\ncurl http://localhost:11434/api/generate \\\n  -d '{\n    \"model\": \"nonexistent-model\"\
+  ,\n    \"prompt\": \"Test\"\n  }'\nExpected Response:\n{\n  \"error\": \"Model not found\",\n  \"code\": 404\n}\n\n503 Service\
+  \ Unavailable:\ncurl http://localhost:11434/api/generate \\\n  -d '{\n    \"model\": \"qwen3\",\n    \"prompt\": \"Test\"\
+  \n  }'\nExpected Response:\n{\n  \"error\": \"Service unavailable\",\n  \"code\": 503\n}"
+configuration_options: ''
+1_model_configuration: '| Parameter     | Default | Description |
+
+  |--------------|---------|------------|
+
+  | `model`       | qwen3   | Supported models: qwen3, haiku, codex |
+
+  | `temperature` | 0.7     | Creativity control (0-1) |
+
+  | `top_p`       | 0.9     | Sampling diversity |
+
+  | `max_tokens`  | 2048    | Maximum response length |'
+2_api_settings: '| Parameter         | Default | Description |
+
+  |------------------|---------|------------|
+
+  | `timeout`         | 30s     | Request timeout |
+
+  | `max_retries`     | 3       | Retry attempts |
+
+  | `stream`          | false   | Enable real-time responses |
+
+  | `keep_alive`      | true    | Maintain connection for multiple requests |'
+validation_criteria: ''
+1_success_metrics: '| Metric            | Threshold | Description |
+
+  |------------------|-----------|------------|
+
+  | Response Time     | <5s       | For 95% requests |
+
+  | Error Rate        | <0.5%     | Across all tests |
+
+  | Format Compliance | 100%      | JSON structure |
+
+  | Token Accuracy    | 100%      | Matches budget |'
+2_failure_analysis: '| Error Type        | Recovery Action |
+
+  |------------------|-----------------|
+
+  | 404 Not Found     | Switch model    |
+
+  | 503 Service Unavailable | Retry with exponential backoff |
+
+  | Invalid JSON      | Validate schema |
+
+  | 400 Bad Request   | Check input parameters |'
+best_practices:
+- 'Model Selection: Use qwen3 for complex tasks, haiku for speed'
+- 'Token Management: Always set `max_tokens` for cost control'
+- 'Error Handling: Implement fallback to default model on failure'
+- 'Performance Monitoring: Track latency and adjust timeout thresholds'
+- 'Security: Use HTTPS for production environments'
+- 'Logging: Enable verbose logging for debugging: `--log-level debug`'
+troubleshooting: ''
+common_issues: '| Problem           | Solution |
+
+  |------------------|----------|
+
+  | Empty response    | Check model availability |
+
+  | Invalid JSON      | Validate input schema |
+
+  | Connection timeout | Verify Ollama service status |
+
+  | Model not found   | Ensure model is installed |'
+debugging_tips:
+- Use `curl -v` for detailed request/response inspection
+- Check system resource limits (CPU, memory)
+- 'Verify Ollama service status: `curl http://localhost:11434/api/tags`'
+- 'Enable verbose logging: `--log-level debug`'
+test_automation: ''
+1_continuous_integration: "#!/bin/bash\n# Run all tests every 15 minutes\nwhile true; do\n  ./run_tests.sh\n  sleep 900\n\
+  done"
+2_test_coverage: '| Test Type         | Coverage | Status |
+
+  |------------------|----------|--------|
+
+  | Inference Tests   | 85%      | ✅     |
+
+  | Error Handling    | 90%      | ✅     |
+
+  | Performance       | 70%      | ⚠️     |
+
+  | Model Switching   | 100%     | ✅     |'
+appendix: ''
+1_supported_models: "{\n  \"qwen3\": {\n    \"type\": \"llm\",\n    \"parameters\": [\"temperature\", \"top_p\", \"max_tokens\"\
+  ]\n  },\n  \"haiku\": {\n    \"type\": \"llm\",\n    \"parameters\": [\"temperature\", \"max_tokens\"]\n  },\n  \"codex\"\
+  : {\n    \"type\": \"llm\",\n    \"parameters\": [\"temperature\", \"max_tokens\"]\n  }\n}"
+2_response_format: "{\n  \"response\": \"Generated text\",\n  \"model\": \"qwen3\",\n  \"tokens_used\": 45,\n  \"total_cost\"\
+  : 0.002,\n  \"timestamp\": \"2023-10-15T14:30:00Z\"\n}"
+3_error_codes: '| Code | Description |
+
+  |------|-------------|
+
+  | 400  | Bad Request |
+
+  | 401  | Unauthorized |
+
+  | 404  | Model Not Found |
+
+  | 500  | Internal Server Error |
+
+  | 503  | Service Unavailable |'

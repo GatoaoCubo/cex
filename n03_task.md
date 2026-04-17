@@ -1,74 +1,136 @@
 ---
-mission: VERTICAL_DENSIFICATION
+mission: SCORE_REFORM
 nucleus: n03
-wave: W2
+wave: M1b
 created: 2026-04-17
-priority: HIGH
+priority: CRITICAL
 effort: opus_high
 ---
 
-# N03 VERTICAL_DENSIFICATION W2: Karpathy Quality Sweep + CoC Convergence
+# N03 SCORE_REFORM M1b: Fix cex_evolve.py -- heuristic->quality + sweep priority
 
-## SPEC REFERENCE
-Read first: `_docs/specs/spec_vertical_densification.md`
-Your wave: W2 (parallel with N01, N02, N04-N06)
+## CONTEXT
 
-## TASK 1: Karpathy Sweep -- 99 quality:null artifacts in N03_engineering/
+cex_score.py was already fixed by N05 (commit 7eb7b96d1).
+Your job: fix _tools/cex_evolve.py only.
 
-Inventive Pride lens: nothing leaves N03 without being architecturally sound.
+Read the FULL file first: `_tools/cex_evolve.py`
+Also read: `_tools/cex_score.py` (to understand update_quality, score_structural, score_rubric)
 
-```bash
-# Heuristic pass:
-python _tools/cex_evolve.py sweep --nucleus n03 --target 8.5 --max-rounds 1 --mode heuristic
+## THE PROBLEM
 
-# Agent pass on worst 15:
-python _tools/cex_evolve.py sweep --nucleus n03 --target 8.5 --max-rounds 2 --mode agent --limit 15
+cex_evolve.py heuristic mode improves artifacts but NEVER writes the quality score.
+After a full heuristic sweep, 587 files still have `quality: null` even though
+they were touched and improved. The Karpathy loop is broken because it cannot
+see its own output.
+
+## FIX 1: heuristic mode writes quality after improvement
+
+In `cex_evolve.py`, find the function(s) that apply heuristic improvements
+and write the modified file to disk.
+
+After the file write, add:
+```python
+# Import at top of file (add if not present):
+from cex_score import score_structural, score_rubric, update_quality
+
+# After each heuristic file write:
+try:
+    struct_raw, _ = score_structural(str(filepath))
+    rubric_raw, _, _ = score_rubric(str(filepath))
+    heuristic_q = round((struct_raw + rubric_raw) / 2, 1)
+    update_quality(str(filepath), heuristic_q)
+except Exception:
+    pass  # score failure must never break the evolve loop
 ```
 
-## TASK 2: CoC Convergence -- Convention-over-Configuration Artifacts
+This closes the loop: heuristic improves content -> scores it -> writes quality field.
+The quality field is now observable by subsequent runs.
 
-N03 owns the architectural primitives. Create 3 artifacts that codify
-how the 8F pipeline (the CoC default) manifests in practice -- portable
-across any LLM, any runtime, any nucleus.
+## FIX 2: sweep prioritizes quality:null files first
 
-### Artifact 1: pattern_8f_full_trace.md
-Save: `N03_engineering/P08_architecture/pattern_8f_full_trace.md`
-Kind: pattern
-Content: canonical 8F full-trace pattern -- the standard template for how any
-nucleus executes F1-F8 with evidence output at each step. Includes:
-- Exact output format per step (text templates with placeholders)
-- Construction Triad decision tree (Template-First >= 60% | Hybrid 30-60% | Fresh < 30%)
-- Anti-patterns (skip F7, missing F8 signal, no 12LP checklist)
-Source: .claude/rules/8f-reasoning.md
+In the sweep function, find where candidate files are collected/sorted.
+Add a sort key so quality:null files come first:
 
-### Artifact 2: action_paradigm_cex_dispatch.md
-Save: `N03_engineering/P12_orchestration/action_paradigm_cex_dispatch.md`
-Kind: action_paradigm
-Content: the CEX dispatch paradigm -- the sequence of decisions N07 makes when
-routing work to nuclei. Includes: intent resolution -> GDP check -> kind resolution
--> nucleus selection -> handoff format -> signal protocol. Machine-readable decision tree.
-Source: .claude/rules/n07-input-transmutation.md + .claude/rules/guided-decisions.md
+```python
+def _sweep_priority(fp: Path) -> float:
+    """Sort key: null=0 (highest priority), then ascending by quality."""
+    q = get_current_quality(fp)
+    if q is None:
+        return 0.0   # null = score first
+    return q         # lower score = higher priority
 
-### Artifact 3: reasoning_trace_8f_example.md
-Save: `N03_engineering/P08_architecture/reasoning_trace_8f_example.md`
-Kind: reasoning_trace
-Content: a complete worked 8F reasoning trace for a real task: "create agent for N03".
-Shows every thought, every file read, every decision made at F1-F8. Pure pedagogical
-artifact -- any LLM can read this and understand how to execute 8F correctly.
-Source: real N03 execution trace pattern
+# Apply before the sweep loop:
+files_to_process = sorted(candidates, key=_sweep_priority)
+```
 
-## COMPLETION SEQUENCE
+## FIX 3: add --apply-scores flag to sweep subcommand
+
+At end of sweep(), when --apply-scores flag is set, run a scoring pass on
+all files that were modified during the sweep:
+
+```python
+# Track modified files during sweep (add to the loop):
+modified_files = []
+# ... in the improvement loop, after writing:
+modified_files.append(fp)
+
+# After loop ends, if --apply-scores:
+if getattr(args, 'apply_scores', False):
+    from cex_score import score_structural, score_rubric, update_quality
+    print(f"\n[SCORE] Applying scores to {len(modified_files)} modified files...")
+    for fp in modified_files:
+        try:
+            struct_raw, _ = score_structural(str(fp))
+            rubric_raw, _, _ = score_rubric(str(fp))
+            q = round((struct_raw + rubric_raw) / 2, 1)
+            update_quality(str(fp), q)
+            print(f"  {fp.name}: {q}")
+        except Exception as e:
+            print(f"  {fp.name}: score failed ({e})")
+```
+
+Add the argparse flag:
+```python
+sweep_parser.add_argument('--apply-scores', action='store_true',
+    help='After sweep, write quality scores to all modified artifacts')
+```
+
+## VERIFICATION
 
 ```bash
-python _tools/cex_compile.py --all
-git add N03_engineering/ && git commit -m "[N03] VERTICAL_DENSIFICATION W2: quality sweep 99 artifacts + CoC convergence patterns"
-python -c "from _tools.signal_writer import write_signal; write_signal('n03', 'vert_dens_w2_complete', 9.0)"
+# Test: pick 3 quality:null files and run heuristic evolve on them
+# They should have quality: X.X after (not null)
+
+# Find 3 null files in N02:
+NULL_FILES=$(grep -rl "quality: null" N02_marketing/ | head -3 | tr '\n' ' ')
+python _tools/cex_evolve.py single $(echo $NULL_FILES | cut -d' ' -f1) --target 9.0 --max-rounds 1
+
+# Verify quality was written:
+head -20 $(echo $NULL_FILES | cut -d' ' -f1) | grep quality
+
+# Sanitize:
+python _tools/cex_sanitize.py --check --scope _tools/
+```
+
+## IMPORTANT: ASCII-only rule
+
+All code must be ASCII-only (0x00-0x7F). No emoji, no accented chars,
+no smart quotes in the Python source. Use [OK], [FAIL], [WARN] instead of emoji.
+Run `python _tools/cex_sanitize.py --check --scope _tools/` before committing.
+
+## COMPLETION
+
+```bash
+git add _tools/cex_evolve.py
+git commit -m "[N03] SCORE_REFORM M1b: heuristic->quality write + sweep priority + --apply-scores"
+python -c "from _tools.signal_writer import write_signal; write_signal('n03', 'score_reform_m1b_complete', 9.0)"
 ```
 
 ## COMPLETION CRITERIA
-- [ ] cex_evolve.py sweep completed on N03_engineering/
-- [ ] quality:null reduced >= 80%
-- [ ] pattern_8f_full_trace.md created
-- [ ] action_paradigm_cex_dispatch.md created
-- [ ] reasoning_trace_8f_example.md created
-- [ ] signal sent: n03 -> vert_dens_w2_complete
+- [ ] heuristic mode writes quality: X.X after each file improvement
+- [ ] sweep sorts quality:null files first
+- [ ] --apply-scores flag added and functional
+- [ ] 3 test artifacts go from quality:null to quality: X.X
+- [ ] cex_sanitize.py passes
+- [ ] signal sent: n03 -> score_reform_m1b_complete
