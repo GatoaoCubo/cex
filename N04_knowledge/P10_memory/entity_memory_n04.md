@@ -5,7 +5,7 @@ pillar: P10
 nucleus: n04
 title: "Entity Memory -- N04 Knowledge Domain Entities"
 version: "1.0.0"
-quality: null
+quality: 9.2
 tags: [entity_memory, n04, knowledge, rag, taxonomy, P10]
 domain: knowledge management
 status: active

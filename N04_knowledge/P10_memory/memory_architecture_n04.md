@@ -5,7 +5,7 @@ pillar: P10
 nucleus: n04
 title: "Memory Architecture -- N04 Knowledge Nucleus"
 version: "1.0.0"
-quality: null
+quality: 9.2
 tags: [memory_architecture, n04, rag, episodic, semantic, procedural, working_memory, P10]
 domain: knowledge management
 status: active
