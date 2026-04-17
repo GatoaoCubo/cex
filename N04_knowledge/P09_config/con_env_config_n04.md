@@ -5,8 +5,9 @@ pillar: P09
 nucleus: n04
 title: Knowledge Environment Config
 version: 1.0
-quality: null
+quality: 9.0
 tags: [config, env, knowledge, indexing, retrieval]
+density_score: 1.0
 ---
 <!-- 8F: F1 constrain=P09/env_config F2 become=env-config-builder F3 inject=n04-knowledge+kc_env_config+P09 examples+repo env hints F4 reason=environment catalog for knowledge indexing and retrieval control F5 call=shell,apply_patch F6 produce=5269 bytes F7 govern=frontmatter+ascii+density+80-line self-check F8 collaborate=N04_knowledge/P09_config/con_env_config_n04.md -->
 # Knowledge Environment Config

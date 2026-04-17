@@ -5,8 +5,9 @@ pillar: P09
 nucleus: n04
 title: Knowledge Path Config
 version: 1.0
-quality: null
+quality: 9.0
 tags: [config, path, knowledge, storage, index]
+density_score: 1.0
 ---
 <!-- 8F: F1 constrain=P09/path_config F2 become=path-config-builder F3 inject=n04-knowledge+kc_path_config+P09 examples+repo layout F4 reason=bounded filesystem map for hungry but disciplined knowledge storage F5 call=shell,apply_patch F6 produce=4879 bytes F7 govern=frontmatter+ascii+density+80-line self-check F8 collaborate=N04_knowledge/P09_config/con_path_config_n04.md -->
 # Knowledge Path Config
