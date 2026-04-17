@@ -5,8 +5,10 @@ pillar: P10
 nucleus: n06
 title: Commercial Knowledge Index
 version: 1.0
-quality: null
+quality: 9.0
 tags: [memory, knowledge_index, hybrid, bm25, pgvector, retrieval]
+density_score: 1.0
+updated: "2026-04-17"
 ---
 <!-- 8F: F1=P10/knowledge_index F2=knowledge-index-builder F3=nucleus_def_n06.md,kc_knowledge_index.md,P10_memory/_schema.yaml,N06 commercial knowledge set F4=hybrid_index_topology_for_revenue_weighted_search F5=apply_patch;python _tools/cex_compile.py F6=author_dense_markdown_artifact F7=frontmatter_ascii_density_linecount_review F8=N06_commercial/P10_memory/mem_knowledge_index_n06.md -->
 
