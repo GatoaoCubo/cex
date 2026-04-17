@@ -8,10 +8,11 @@ version: 1.0.0
 created: 2026-04-17
 author: n01_intelligence
 domain: research-intelligence
-quality: null
+quality: 9.1
 tags: [search_tool, citation_tracking, academic_research, knowledge_graph, n01, analytical_envy]
 tldr: "Citation network tracker for N01: maps paper-to-paper citation graphs, identifies seminal works, tracks citation velocity, and discovers emerging research frontiers. Uses Semantic Scholar API."
 density_score: 0.87
+updated: "2026-04-17"
 ---
 
 <!-- 8F: F1 constrain=P04/search_tool F2 become=search-tool-builder F3 inject=api_reference_research_apis+search_strategy_n01+document_loader_n01 F4 reason=Analytical Envy in academic research = knowing which papers have become the foundation of a field, not just reading the latest -- citation graph reveals intellectual precedence and research momentum F5 call=cex_compile F6 produce=citation_tracker_n01.md F7 govern=frontmatter+ascii+tables F8 collaborate=N01_intelligence/P04_tools/ -->

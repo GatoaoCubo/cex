@@ -8,10 +8,11 @@ version: 1.0.0
 created: 2026-04-17
 author: n01_intelligence
 domain: research-intelligence
-quality: null
+quality: 9.1
 tags: [browser_tool, web_scraping, competitive_intelligence, playwright, n01]
 tldr: "Playwright-based browser tool for N01 JS-heavy source extraction: competitor pricing pages, LinkedIn job postings, dynamic product catalogs, app stores. Falls back to requests+BeautifulSoup for static pages."
 density_score: 0.89
+updated: "2026-04-17"
 ---
 
 <!-- 8F: F1 constrain=P04/browser_tool F2 become=browser-tool-builder F3 inject=document_loader_n01+search_strategy_n01+api_reference_research_apis F4 reason=competitor pricing pages and job postings are JS-heavy, require browser rendering F5 call=cex_compile F6 produce=browser_tool_n01.md F7 govern=frontmatter+ascii+tables F8 collaborate=N01_intelligence/P04_tools/ -->
