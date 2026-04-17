@@ -1,0 +1,38 @@
+kind: instruction
+id: bld_instruction_enterprise_sla
+pillar: P03
+llm_function: REASON
+purpose: Step-by-step production process for enterprise_sla
+quality: null
+title: Instruction Enterprise Sla
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- enterprise_sla
+- builder
+- instruction
+tldr: Step-by-step production process for enterprise_sla
+domain: enterprise_sla construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+phase_1_research:
+- Identify stakeholder uptime requirements (e.g., 99.99% annual availability).
+- Analyze industry benchmarks for latency thresholds (e.g., <50ms for critical services).
+- Review existing support SLAs (response/resolve times, escalation paths).
+- Assess infrastructure capacity to meet proposed SLA metrics.
+- Evaluate legal and compliance constraints (data residency, audit requirements).
+- Document business impact of SLA non-compliance (financial, operational).
+phase_2_compose:
+- 'Align SLA structure with bld_schema_enterprise_sla.md (sections: scope, metrics, penalties).'
+- Define uptime targets (e.g., 99.95% monthly, with credit tiers).
+- Specify latency metrics (e.g., P99 <200ms for API endpoints).
+- 'Draft support commitments (response time: 15 mins; resolution: 4 hrs).'
+- Outline escalation procedures (Tier 1–3 support roles, contact channels).
+- Include penalty clauses (service credits, termination thresholds).
+- Reference bld_output_template_enterprise_sla.md for formatting (tables, definitions).
+- Add compliance clauses (GDPR, SOC2, etc.) per research phase.
+- Finalize with stakeholder sign-off and version control.
+phase_3_validate: '[ ] ✅ Verify schema alignment (bld_schema_enterprise_sla.md) [ ] ✅ Confirm metric feasibility (infrastructure
+  capacity checks) [ ] ✅ Stakeholder alignment (sign-off on targets/penalties) [ ] ✅ Legal review (compliance, liability clauses)
+  [ ] ✅ Test with sample data (template rendering, edge cases)'

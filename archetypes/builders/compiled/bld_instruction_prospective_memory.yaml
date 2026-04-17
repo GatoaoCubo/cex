@@ -1,0 +1,44 @@
+kind: instruction
+id: bld_instruction_prospective_memory
+pillar: P03
+llm_function: REASON
+purpose: Step-by-step production process for prospective_memory
+quality: 6.6
+title: Instruction Prospective Memory
+version: 1.0.0
+author: n03_builder
+tags:
+- prospective_memory
+- builder
+- instruction
+tldr: '3-phase: define triggers and action payloads, compose with priority and expiry, validate gates.'
+domain: prospective memory construction
+created: '2026-04-17'
+updated: '2026-04-17'
+density_score: 0.9
+phase_1_define:
+- Identify the agent that owns this prospective memory store
+- List the future actions/reminders to schedule
+- 'For each action, determine trigger_type: time (cron/datetime), event (signal received), condition (state meets criterion)'
+- 'Define action_payload for each: what should the agent do when triggered'
+- Set priority for ordering concurrent triggers
+- 'Determine expiry: when does the reminder become irrelevant'
+- 'Define completion_policy: mark_done (one-shot) or re_schedule (recurring)'
+- 'Identify execution_mechanism: CEX schedule signal, polling, wake notification'
+phase_2_compose:
+- Read SCHEMA.md and OUTPUT_TEMPLATE.md
+- 'Fill frontmatter with all required fields (quality: null)'
+- 'Write reminders array: each entry has trigger, action_payload, priority, expiry'
+- Declare owner and execution_mechanism
+- 'Write Overview: what agent and what kinds of future actions'
+- 'Write Reminders table: trigger type, action, priority, expiry'
+- 'Write Execution section: how reminders are checked and fired'
+- Verify body <= 2048 bytes
+phase_3_validate:
+- Confirm id matches `^p10_pm_[a-z][a-z0-9_]+$`
+- Confirm kind == prospective_memory
+- Confirm reminders array has >= 1 entry
+- Confirm each reminder has trigger_type and action_payload
+- Confirm owner declared
+- 'Cross-check: not schedule kind (no cron workflow config), not session_state (not current session)'
+- Revise if score < 8.0

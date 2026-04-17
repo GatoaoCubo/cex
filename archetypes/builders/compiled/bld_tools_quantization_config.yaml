@@ -1,0 +1,42 @@
+kind: tools
+id: bld_tools_quantization_config
+pillar: P04
+llm_function: CALL
+purpose: Tools available for quantization_config production
+quality: null
+title: Tools Quantization Config
+version: 1.0.0
+author: wave1_builder_gen
+tags:
+- quantization_config
+- builder
+- tools
+tldr: Tools available for quantization_config production
+domain: quantization_config construction
+created: '2026-04-13'
+updated: '2026-04-13'
+density_score: 0.85
+production_tools: '| Tool | Purpose | When |
+
+  | :--- | :--- | :--- |
+
+  | cex_compile.py | Generate quantized configs | Model compression |
+
+  | cex_score.py | Evaluate accuracy metrics | Post-quantization |
+
+  | cex_retriever.py | Fetch optimal hyperparams | Config search |
+
+  | cex_doctor.py | Debug config mismatches | Deployment prep |
+
+  | cex_optimizer.py | Fine-tune bit-width | Optimization loop |'
+external_references: '| Library | Purpose | When |
+
+  | :--- | :--- | :--- |
+
+  | AutoGPTQ | GPTQ quantization via Python API | GPTQ config validation |
+
+  | AutoAWQ | AWQ quantization via Python API | AWQ config validation |
+
+  | bitsandbytes | int8/int4 quantization (nf4, fp4) | bitsandbytes config |
+
+  | llama.cpp / GGUF | GGUF format generation and inference | GGUF config |'

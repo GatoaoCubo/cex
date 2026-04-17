@@ -12,8 +12,8 @@ quality: 9.0
 tags: [quality-gate, golden-test, calibration, evaluation, quality-baseline, P11]
 tldr: "Validates golden_test artifacts: verified 9.5+ source quality, rationale-to-gate mapping, and non-self-referential target kind."
 density_score: 0.93
+llm_function: GOVERN
 ---
-
 # Gate: golden_test
 ## Definition
 | Field     | Value |

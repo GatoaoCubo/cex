@@ -1,0 +1,153 @@
+id: ex_cohort_analysis_attribution
+kind: cohort_analysis
+pillar: P11
+version: 1.0.0
+title: Attribution Framework -- Content + Promo Multi-Touch
+description: Multi-touch attribution framework for content-driven ecommerce. Defines attribution models, UTM taxonomy, GA4
+  event contracts, and cohort segmentation by promo participation.
+domain: analytics
+nucleus: N06
+quality: null
+tags:
+- cohort-analysis
+- attribution
+- multi-touch
+- utm
+- ga4
+- promo
+- content
+- ecommerce
+brand_placeholders:
+- BRAND_DOMAIN
+- BRAND_UTM_SOURCE
+- BRAND_GA4_ID
+- BRAND_CURRENCY
+- BRAND_PROMO_DATES
+density_score: 1.0
+1_attribution_models_supported: '| Model | Logic | Best for |
+
+  |-------|-------|---------|
+
+  | Last-click | 100% credit to final touchpoint before purchase | Evaluating closing channels |
+
+  | First-click | 100% credit to acquisition touchpoint | Evaluating awareness channels |
+
+  | Linear | Equal credit across all touchpoints | Balanced view |
+
+  | Time-decay | More credit to recent touchpoints | Short sales cycles |
+
+  | Position-based (40/20/40) | 40% first + 20% middle + 40% last | Content brands (recommended) |
+
+  | Content-first (30/40/30) | 30% first + 40% middle (content) + 30% last | When content is primary mid-funnel driver |
+
+
+  > Recommended for {{BRAND_NAME}}: Content-first (30/40/30).
+
+  > Rationale: content drives consideration; retargeting/promo closes. Last-click alone
+
+  > undervalues content investment by attributing sales to closing ads.
+
+
+  ---'
+2_utm_taxonomy_full_spec: "# UTM parameter spec for {{BRAND_DOMAIN}}\nutm_parameters:\n  utm_source:\n    description: \"\
+  Primary acquisition channel\"\n    allowed_values:\n      - instagram       # Instagram organic + promoted\n      - facebook\
+  \        # Facebook organic + promoted\n      - blog            # {{BRAND_DOMAIN}}/blog referral\n      - email        \
+  \   # Email campaign\n      - whatsapp        # WhatsApp broadcast\n      - youtube         # YouTube channel\n      - google\
+  \          # Google organic search\n      - paid_google     # Google Ads\n      - paid_meta       # Meta Ads (unified)\n\
+  \      - affiliate       # Affiliate / partner link\n      - direct          # Typed URL / unknown\n\n  utm_medium:\n  \
+  \  allowed_values:\n      - social          # Organic social\n      - paid            # Paid media\n      - email      \
+  \     # Email\n      - sms             # SMS\n      - messaging       # WhatsApp / DM\n      - organic         # Organic\
+  \ search\n      - referral        # External site link\n      - affiliate       # Affiliate program\n\n  utm_campaign:\n\
+  \    format: \"{pillar}_{YYYY-MM}\"\n    examples:\n      - educational_2026-04\n      - black_friday_2026\n      - mothers_day_2026\n\
+  \      - product_launch_donut_2026\n\n  utm_content:\n    format: \"{format}_{sequence}\"\n    examples:\n      - reel_01\n\
+  \      - carousel_03\n      - email_subject_A\n      - blog_post_enrichment\n\n  utm_term:\n    description: \"Optional.\
+  \ Used for paid keyword or discount code.\"\n    examples:\n      - 20off\n      - feline_anxiety\n\n---"
+3_event_contract_ga4: ''
+3_1_required_events: '| Event name | Trigger | Required params |
+
+  |------------|---------|----------------|
+
+  | `page_view` | Every page | page_path, page_title |
+
+  | `content_view` | Blog post open | content_id, pillar, utm_source |
+
+  | `product_view` | Product page open | product_id, product_name, value |
+
+  | `add_to_cart` | Cart add | product_id, value, utm_source |
+
+  | `begin_checkout` | Checkout start | cart_value, num_items |
+
+  | `purchase` | Order confirmed | transaction_id, value, items[], coupon |'
+3_2_custom_events_content_attribution: '| Event name | Trigger | Params |
+
+  |------------|---------|--------|
+
+  | `content_product_click` | Product link clicked inside blog post | content_id, product_id |
+
+  | `persona_chat_start` | AI persona chat opened | source_page |
+
+  | `persona_recommendation_click` | Product rec clicked in chat | product_id, recommendation_rank |
+
+  | `promo_banner_view` | Promo banner rendered | promo_id, placement |
+
+  | `affiliate_link_click` | Affiliate UTM link clicked | affiliate_id, product_id |'
+3_3_ga4_configuration: "// Measurement ID: {{BRAND_GA4_ID}}\n// Recommended: enable Google Signals + User-ID for cross-device\n\
+  \ngtag('config', '{{BRAND_GA4_ID}}', {\n  send_page_view: true,\n  user_id: '<authenticated_user_id>',  // when logged in\n\
+  \  custom_map: {\n    dimension1: 'acquisition_source',\n    dimension2: 'content_pillar',\n    metric1: 'content_influenced_revenue'\n\
+  \  }\n})\n\n---"
+4_promo_cohort_segmentation: ''
+4_1_cohort_types: '| Cohort | Definition | Metric hypothesis |
+
+  |--------|-----------|-------------------|
+
+  | Promo-acquired | First purchase during a promo event | Higher CAC, lower LTV |
+
+  | Organic-acquired | First purchase without promo code | Lower CAC, higher LTV |
+
+  | Content-acquired (blog) | First session via blog UTM | Premium AOV, high M6 retention |
+
+  | Influencer-acquired | First session via affiliate UTM | Variable quality, track individually |'
+4_2_promo_participation_cohorts: '| Cohort | Definition |
+
+  |--------|-----------|
+
+  | Promo-only buyers | Purchased exclusively during promo windows |
+
+  | Full-price buyers | Never used a promo code |
+
+  | Occasional promo | Mixed behavior |
+
+
+  Key insight to track: LTV of promo-only cohort vs full-price cohort over 12 months.
+
+  If promo-only LTV < 2x CAC, promo strategy is value-destructive.
+
+
+  ---'
+5_attribution_sql_template: "-- Multi-touch attribution by UTM source\n-- Replace {{BRAND_CRM_TABLE_PREFIX}}\n\nWITH sessions_ranked\
+  \ AS (\n  SELECT\n    session_id,\n    customer_id,\n    utm_source,\n    utm_campaign,\n    session_time,\n    ROW_NUMBER()\
+  \ OVER (PARTITION BY customer_id ORDER BY session_time ASC)  AS first_rank,\n    ROW_NUMBER() OVER (PARTITION BY customer_id\
+  \ ORDER BY session_time DESC) AS last_rank,\n    COUNT(*) OVER (PARTITION BY customer_id) AS total_sessions\n  FROM {{BRAND_CRM_TABLE_PREFIX}}_sessions\n\
+  \  WHERE customer_id IN (SELECT customer_id FROM {{BRAND_CRM_TABLE_PREFIX}}_orders)\n)\nSELECT\n  utm_source,\n  utm_campaign,\n\
+  \  COUNT(DISTINCT customer_id) AS customers,\n  ROUND(AVG(order_value), 2) AS avg_order_value,\n  SUM(order_value) AS total_revenue,\n\
+  \  -- Position-based credit (40/20/40 simplified)\n  ROUND(SUM(order_value) * CASE\n    WHEN first_rank = 1 THEN 0.4\n \
+  \   WHEN last_rank = 1  THEN 0.4\n    ELSE 0.2 / NULLIF(total_sessions - 2, 0)\n  END, 2) AS attributed_revenue\nFROM sessions_ranked\n\
+  JOIN {{BRAND_CRM_TABLE_PREFIX}}_orders USING (customer_id)\nGROUP BY 1, 2\nORDER BY attributed_revenue DESC;\n\n---"
+6_reporting_cadence: '| Report | Frequency | Audience | Key metrics |
+
+  |--------|-----------|---------|-------------|
+
+  | Channel attribution summary | Weekly | Marketing | Revenue by UTM source (last-click) |
+
+  | Content LTV comparison | Monthly | Leadership | Blog vs paid cohort LTV at M3/M6 |
+
+  | Promo cohort analysis | Post-promo | Commercial | Promo buyer retention + repeat rate |
+
+  | Full attribution model compare | Quarterly | Strategy | All models side-by-side |
+
+
+  ---'
+new_brand_variables:
+- '`BRAND_UTM_SOURCE` -- default UTM source for primary content channel'
+- '`BRAND_GA4_ID` -- GA4 measurement ID'
+- '`BRAND_PROMO_DATES` -- list of planned promo dates for cohort labeling'

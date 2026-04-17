@@ -1,0 +1,82 @@
+kind: quality_gate
+id: p12_qg_workflow_node
+pillar: P11
+llm_function: GOVERN
+purpose: Quality gate with HARD and SOFT scoring for workflow_node ARTIFACTS (not runtime)
+quality: null
+title: Quality Gate Workflow Node
+version: 1.1.0
+author: n03_hybrid_review4
+tags:
+- workflow_node
+- builder
+- quality_gate
+tldr: Tests the workflow_node artifact structure (frontmatter + body sections), not runtime behavior.
+domain: workflow_node construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.9
+definition: '| Metric | Threshold | Operator | Scope |
+
+  |--------|-----------|----------|-------|
+
+  | ID pattern match | ^p12_wn_[a-z][a-z0-9_]+\.md$ | matches | frontmatter.id |
+
+  | Max bytes | 4096 | <= | file size |
+
+  | Required sections | 5 | >= | body |
+
+  | Edge declaration present | 1 | >= | body: Edges/Transitions |'
+hard_gates: '| ID | Check | Fail Condition |
+
+  |----|-------|----------------|
+
+  | H01 | Valid YAML frontmatter | YAML parse error or missing frontmatter |
+
+  | H02 | ID matches ^p12_wn_[a-z][a-z0-9_]+\.md$ | ID does not match pattern |
+
+  | H03 | kind == "workflow_node" | kind field missing or != "workflow_node" |
+
+  | H04 | pillar == "P12" | pillar != "P12" |
+
+  | H05 | quality == null | quality self-scored (must be null) |
+
+  | H06 | node_type in enum | node_type not in [agent, tool, router, condition, parallel, start, end, human] |
+
+  | H07 | Body contains "## Inputs" and "## Outputs" sections | Either section missing |
+
+  | H08 | Body contains "## Edges" or "## Next Nodes" section | No transition declaration |
+
+  | H09 | state_schema reference or input/output types declared | Missing type contract |'
+soft_scoring: '| Dim | Dimension | Weight | Scoring Guide |
+
+  |-----|-----------|--------|---------------|
+
+  | D1 | Schema compliance | 0.25 | All required frontmatter fields present with correct types |
+
+  | D2 | Edge/transition clarity | 0.20 | Next-node routing explicit (conditional vs unconditional edges named) |
+
+  | D3 | Contract rigor | 0.20 | Input/output types declared, state_schema referenced |
+
+  | D4 | Industry alignment | 0.20 | Uses LangGraph/Prefect/Temporal/Dagster/Airflow terminology correctly |
+
+  | D5 | Documentation density | 0.15 | tldr + description + example invocation present |
+
+
+  Weight check: 0.25 + 0.20 + 0.20 + 0.20 + 0.15 = 1.00'
+actions: '| Score | Action |
+
+  |-------|--------|
+
+  | GOLDEN (>= 9.5) | Auto-approve, promote to examples library |
+
+  | PUBLISH (>= 8.0) | Approve as-is |
+
+  | REVIEW (>= 7.0) | Peer review required before publish |
+
+  | REJECT (< 7.0) | Rework; fix all HARD failures and re-submit |'
+bypass: '| Conditions | Approver | Audit Trail |
+
+  |------------|----------|-------------|
+
+  | Emergency hotfix to existing node | Pillar owner (P12) | Log bypass with reason + version diff in git commit |'

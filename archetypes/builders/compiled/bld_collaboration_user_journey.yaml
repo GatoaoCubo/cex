@@ -1,0 +1,28 @@
+kind: collaboration
+id: bld_collaboration_user_journey
+pillar: P12
+llm_function: COLLABORATE
+purpose: How user_journey-builder works in crews with other builders
+quality: null
+title: Collaboration User Journey
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- user_journey
+- builder
+- collaboration
+tldr: How user_journey-builder works in crews with other builders
+domain: user_journey construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+crew_role: Maps end-to-end user experiences across touchpoints, aligning with business goals and user needs. Collaborates
+  with researchers, designers, and strategists to ensure holistic journey insights.
+receives_from: "| Builder       | What                  | Format         |  \n|---------------|-----------------------|----------------|\
+  \  \n| User Research | Raw interview data    | Documents      |  \n| Product Team  | Feature requirements  | Spreadsheets\
+  \   |  \n| Customer Support | Feedback tickets    | Ticketing system |"
+produces_for: "| Builder       | What                  | Format         |  \n|---------------|-----------------------|----------------|\
+  \  \n| Design Team   | Visual journey map    | Diagram tool   |  \n| Strategists   | Journey insights      | Report    \
+  \     |  \n| Product Team  | User personas         | Document       |"
+boundary: Does NOT handle technical implementation (engineers), workflow automation (system workflow builder), or onboarding-specific
+  steps (onboarding_flow builder).

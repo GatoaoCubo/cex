@@ -1,25 +1,25 @@
 {
   "mcpServers": {
     "supabase": {
-      "command": "npx",
-      "args": ["-y", "@supabase/mcp-server-supabase", "--access-token", "${SUPABASE_ACCESS_TOKEN}"]
+      "command": "cmd",
+      "args": ["/c", "npx", "-y", "@supabase/mcp-server-supabase", "--access-token", "${SUPABASE_ACCESS_TOKEN}"]
     },
     "postgres": {
-      "command": "npx",
-      "args": ["-y", "@anthropic/mcp-server-postgres", "${SUPABASE_POSTGRES_URL}"]
+      "command": "cmd",
+      "args": ["/c", "npx", "-y", "@modelcontextprotocol/server-postgres", "${SUPABASE_POSTGRES_URL}"]
     },
     "fetch": {
       "command": "uvx",
       "args": ["mcp-server-fetch", "--ignore-robots-txt"]
     },
     "firecrawl": {
-      "command": "npx",
-      "args": ["-y", "firecrawl-mcp"],
+      "command": "cmd",
+      "args": ["/c", "npx", "-y", "firecrawl-mcp"],
       "env": { "FIRECRAWL_API_KEY": "${FIRECRAWL_API_KEY}" }
     },
     "notebooklm": {
-      "command": "npx",
-      "args": ["-y", "notebooklm-mcp@latest"]
+      "command": "cmd",
+      "args": ["/c", "npx", "-y", "notebooklm-mcp@latest"]
     }
   }
 }

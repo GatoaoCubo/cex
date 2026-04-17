@@ -28,7 +28,7 @@ updated: "2026-04-07"
 
 ---
 
-## WAVE 3A: SCHEMAS (P06) -- 6 CREATE em N05/schemas/
+## WAVE 3A: SCHEMAS (P06) -- 6 CREATE em N05/P06_schema/
 
 ### 3.1 railway_toml_schema.yaml
 Valida railway.toml antes de deploy. Baseado em api/railway.toml real.
@@ -51,7 +51,7 @@ Baseado no HealthResponse Pydantic model real. /health GET (no auth): {status: h
 
 ---
 
-## WAVE 3B: OUTPUT TEMPLATES (P05) -- 6 CREATE em N05/output/
+## WAVE 3B: OUTPUT TEMPLATES (P05) -- 6 CREATE em N05/P05_output/
 
 ### 3.7 output_railway_toml.md
 Template padrao railway.toml para novos servicos. Inclui: [build] nixpacks + buildCommand, [deploy] startCommand + healthcheckPath + restart + replicas, [env] PYTHONUNBUFFERED + ENV. Variantes: python_api (uvicorn), node_spa (serve dist), gateway (python -m). Cada variante com comentarios explicativos.

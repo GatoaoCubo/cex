@@ -1,0 +1,51 @@
+kind: schema
+id: bld_schema_sandbox_config
+pillar: P06
+llm_function: CONSTRAIN
+purpose: Formal schema -- SINGLE SOURCE OF TRUTH for sandbox_config
+quality: null
+title: Schema Sandbox Config
+version: 1.0.0
+author: wave1_builder_gen
+tags:
+- sandbox_config
+- builder
+- schema
+tldr: Formal schema -- SINGLE SOURCE OF TRUTH for sandbox_config
+domain: sandbox_config construction
+created: '2026-04-13'
+updated: '2026-04-13'
+density_score: 0.85
+frontmatter_fields: ''
+required: "| Field      | Type   | Required | Default | Notes |  \n|------------|--------|----------|---------|-------|  \n\
+  | id         | string | Yes      | -       | Must match ID pattern |  \n| kind       | string | Yes      | -       | \"\
+  sandbox_config\" |  \n| pillar     | string | Yes      | -       | \"P09\" |  \n| title      | string | Yes      | -   \
+  \    | Human-readable name |  \n| version    | string | Yes      | \"1.0.0\" | Semantic versioning |  \n| created    | date\
+  \   | Yes      | -       | ISO 8601 format |  \n| updated    | date   | Yes      | -       | ISO 8601 format |  \n| author\
+  \     | string | Yes      | -       | Owner email |  \n| domain     | string | Yes      | -       | CEX domain (e.g., \"\
+  sandbox.example.com\") |  \n| quality    | string | Yes      | \"draft\" | \"draft\", \"review\", \"production\" |  \n|\
+  \ tags       | list   | Yes      | []      | Keywords (lowercase) |  \n| tldr       | string | Yes      | -       | Summary\
+  \ (max 256 chars) |  \n| sandbox_type | string | Yes | - | \"isolated\", \"shared\", \"hybrid\" |  \n| resource_limits |\
+  \ map | Yes | - | CPU, memory, storage limits |"
+recommended: "| Field          | Type   | Notes |  \n|----------------|--------|-------|  \n| description    | string | Optional\
+  \ summary |  \n| environment    | string | \"dev\", \"test\", \"prod\" |  \n| dependencies   | list   | Required external\
+  \ services |"
+id_pattern: '`^p09_sb_[a-zA-Z0-9_-]+\.yaml$`'
+body_structure:
+- Configuration Overview
+- Purpose, scope, and use cases.
+- Resource Limits
+- CPU, memory, storage, and time constraints.
+- Access Control
+- Authentication, roles, and permissions.
+- Monitoring & Logging
+- Metrics, alerts, and log retention policies.
+- Network Isolation
+- Firewall rules, VPC, and egress policies.
+constraints:
+- 'Max file size: 2048 bytes.'
+- ID must match regex pattern.
+- Required fields must be present.
+- Version must follow semantic versioning (e.g., "1.2.3").
+- Tags must be lowercase and unique.
+- Domain must resolve to a valid CEX sandbox endpoint.

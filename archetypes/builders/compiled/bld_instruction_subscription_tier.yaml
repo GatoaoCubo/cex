@@ -1,0 +1,41 @@
+kind: instruction
+id: bld_instruction_subscription_tier
+pillar: P03
+llm_function: REASON
+purpose: Step-by-step production process for subscription_tier
+quality: null
+title: Instruction Subscription Tier
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- subscription_tier
+- builder
+- instruction
+tldr: Step-by-step production process for subscription_tier
+domain: subscription_tier construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+phase_1_research:
+- Analyze market trends for SaaS pricing models (e.g., freemium, tiered).
+- Benchmark competitors’ subscription tiers for feature parity and pricing.
+- Identify core features to include in each tier (e.g., API calls, storage limits).
+- Prioritize features based on customer value and technical feasibility.
+- Segment target users by usage patterns (light, medium, enterprise).
+- Review legal requirements for pricing (e.g., tax compliance, refund policies).
+phase_2_compose:
+- Define tier name using SCHEMA.md’s `name` field (e.g., “Basic”, “Pro”).
+- Set pricing structure with `price_id`, `currency`, and `recurring_interval`.
+- Map features to tiers in `feature_matrix` (e.g., “unlimited users” → “Pro”).
+- Specify constraints via `constraints` (e.g., “max 100 API calls/month”).
+- Link to payment gateway configurations in `external_ids`.
+- Add tier description using OUTPUT_TEMPLATE.md’s `summary` section.
+- Validate feature dependencies (e.g., “Pro” requires “Basic” features).
+- Document onboarding workflows for each tier in `user_journey`.
+- Finalize artifact with metadata from SCHEMA.md’s `created_at` and `updated_at`.
+phase_3_validate:
+- '[ ] ✅ Check schema compliance via JSON schema validator.'
+- '[ ] ✅ Confirm pricing consistency across all tiers and currencies.'
+- '[ ] ✅ Ensure feature matrix aligns with technical implementation.'
+- '[ ] ✅ Verify constraint enforcement logic in backend systems.'
+- '[ ] ✅ Conduct user testing with sample tier configurations.'

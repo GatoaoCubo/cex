@@ -5,6 +5,53 @@ Format follows [Keep a Changelog](https://keepachangelog.com/).
 
 ---
 
+## [10.2.0] - 2026-04-16 — Open-Source Hardening + Multi-Runtime Grid
+
+### Added
+- **Four-runtime grid dispatch** — `dispatch.sh grid-{claude,codex,gemini,ollama,haiku,litellm}` plus mixed-runtime swarms
+- **`/showoff` skill** (`_tools/cex_showoff.py`) — 5-wave smoke validation across all 4 runtimes with auto-consolidate + signal safety-net
+- **21 Boris-isms** (BORIS_MERGE) — native skills (`/commit`, `/simplify`, `/loop`, `/schedule`, `/batch`, `/btw`, `/verify`, `/dream`), `isolation: worktree` frontmatter on heavy builders, `settings.json` hooks, `--bare` startup, `swarm N kind`, `-w` worktree dispatch, `@.claude learn` PR-comment learning loop
+- **Composable crews (WAVE8)** — 5 new primitives (`crew_template` P12, `role_assignment` P02, `capability_registry` P08, `nucleus_def` P02, `team_charter` P12) + `cex_crew.py` list/show/run CLI + grid-of-crews composition
+- **LiteLLM dispatch layer** — 7 boot wrappers + JSONL fine-tune logging on every call; proven free-tier grid on Ollama-only (6/6 clean, zero crashes)
+- **Hybrid routing** — `cex_router_v2.py` picks Claude vs Ollama per task signature based on 7-nucleus benchmarks (llama3.1:8b wins 5/7, qwen3:14b wins N03+N04, gemma2:9b wins structural synthesis sweep)
+- **`cex_release_check.py`** — public-release gate (README, deps, CI, versions)
+- **`cex_flywheel_audit.py`** — 109-check doc-vs-practice audit across 7 layers × 7 wires × 7 cascades
+- **Reverse compiler** — `cex_compile.py --target {claude-md,cursorrules,customgpt,mcp-server}` makes CEX the single source of truth for any LLM
+- **Gitleaks gate** — `.github/gitleaks.toml` + pre-commit scan; audit dumps untracked
+- **`.gemini/settings.json`** — `respectGitIgnore: false` so Gemini nuclei can see `.cex/runtime/handoffs/`
+
+### Changed
+- **Kind count**: 202 → 257 (REPO_AUDIT_OPENSOURCE 9 waves + OPENSOURCE_FIX follow-ups + TOKEN_TRIM_V1 A/B/C + VERTICAL_DISTILLATION waves 1–4 landed 58 new templates)
+- **Builder count**: 207 → 259 (builder-per-kind invariant restored across all new kinds)
+- **Builder ISOs**: 2666 → 3381 (13-per-builder pattern enforced)
+- **MCP + boot consolidation** — consolidated root `.mcp.json` with per-nucleus overlays (still win)
+- **N07_SPAWN_PROBE** — session-aware PID tracking with wrapper → worker resolution via `Win32_Process` BFS; tree-kill is the only reliable stop
+- **Codex on ChatGPT-plus auth** — omit `--model` entirely (any explicit model returns HTTP 400); fix landed in `cex_boot_gen.py:build_codex_ps1`
+- **Gemini on oauth-personal** — locked to `gemini-2.5-flash-lite` across all 7 nuclei; pro hangs, 2.0-flash 404s
+- **`boot_gen` SELF_AUDIT hardcode removed** — codex/gemini `initialMsg` now defers to handoff frontmatter
+- **README rewritten** — new positioning ("Cognitive Enterprise X · Seven deadly sins, twelve pillars, one typed brain"); maturity-gap table contrasting basic agents vs 12-pillar nuclei; sin-lens table sourced verbatim from `nucleus_def_n0X.md`
+- **100% English repo** — open-source pass translates README / CHANGELOG / CONTRIBUTING / CLAUDE.md / 8 nucleus_defs / 38 rules+skills+commands
+
+### Fixed
+- **OPENSOURCE_FIX** — 2/5 blockers clean, 2/5 partial, 1/5 skipped (commits `72edab54e`, `7109cde29`, `722238e05`)
+- **Showoff runtime fixes (2026-04-16)** — codex model flag, gemini gitignore scope, boot_gen mission names, `--skip` flag for exhausted runtimes
+- **Window title truncation** — switched from `MainWindowTitle` to `Win32_Process.CommandLine` for nucleus wrapper identification
+- **`$pid` PowerShell reserved-variable bug** — replaced with `$procId` across spawn scripts
+- **Gemini kill target** — there is no `gemini.exe`; orphan cleanup now targets `node.exe` by parent-dead
+- **Doc drift** — builder count (259 not 260), tool count (152 not 113), pillar count corrected across README/CLAUDE.md
+
+### Removed
+- Legacy Portuguese-only operational docs (migrated to English for open-source); brand configs and personal memory remain in user's native language by design
+
+### Stats
+- 257 kinds × 259 builders × 13 ISOs = 3,381 artifact constructors
+- 152 Python CLI tools (up from 113)
+- 12 pillars × 8 nuclei (N00 archetype + N01–N07 operational) × 8F pipeline
+- 109 flywheel checks (100% WIRED)
+- 4 supported runtimes: Claude (Anthropic), Codex (OpenAI), Gemini (Google), Ollama (local)
+
+---
+
 ## [10.1.0] - 2026-04-07 — G13 Terminology Unification
 
 ### Changed

@@ -39,7 +39,17 @@ CEX calls this "transmutation" internally (industry: **intent resolution**). The
 | **Prompt optimization** | LLM (DSPy "prompt compilation") | User intent -> optimized LLM prompt | F6 PRODUCE |
 
 All three are active in every 8F run. This rule primarily covers **intent resolution** (F1).
-The exhaustive reference is `N03_engineering/knowledge/kc_intent_resolution_map.md` (123 kinds mapped).
+
+**Canonical mapping artifact (CEX `prompt_compiler` kind):** `P03_prompt/layers/p03_pc_cex_universal.md`
+holds the bilingual PT/EN pattern table for all 257 kinds + verb resolution + ambiguity rules. The
+tables below in this rule are an N07-curated **summary** -- when a kind is missing here, defer to the
+prompt_compiler artifact (it is the source of truth, version-controlled, peer-scored). The legacy
+`N03_engineering/P01_knowledge/kc_intent_resolution_map.md` (123 kinds) is superseded.
+
+**Behavioral contract:** every user input flows through the prompt_compiler BEFORE 8F starts. Output
+is the tuple `{kind, pillar, nucleus, verb}`. If confidence <60%, present top-3 via GDP. This is what
+makes 5-word user input transmute into precise builder dispatch -- the source of N07's "senior AI
+engineer" leverage and the reason CEX outperforms raw Claude.
 
 ## Mapping Table (by Pillar)
 
@@ -200,7 +210,8 @@ N07 must know every step and apply it automatically:
 
 ## Example Transmutation
 
-User input: "quero melhorar os artefatos que estao ruins"
+User input (EN): "I want to fix the artifacts that turned out bad"
+User input (PT): "quero melhorar os artefatos que estao ruins"
 
 N07 resolves intent (industry: intent resolution):
 - Intent: improve low-quality artifacts
@@ -222,7 +233,7 @@ When user uses a metaphor:
 3. If first time: add one-line teaching in parentheses
 4. If already taught: just use the term, no explanation
 
-Track taught terms in: `N07_admin/memory/user_directive_technical_authority.md`
+Track taught terms in: `N07_admin/P10_memory/user_directive_technical_authority.md`
 
 ## N07 Self-Check Before Every Action
 

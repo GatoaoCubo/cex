@@ -2,7 +2,7 @@
 kind: instruction
 id: bld_instruction_memory_type
 pillar: P03
-llm_function: PRODUCE
+llm_function: REASON
 quality: 9.0
 title: "Instruction Memory Type"
 version: "1.0.0"
@@ -14,7 +14,6 @@ created: "2026-04-07"
 updated: "2026-04-07"
 density_score: 0.90
 ---
-
 # Instruction: Build a memory_type artifact
 
 ## Phase 1: Classify

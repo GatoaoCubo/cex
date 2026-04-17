@@ -1,0 +1,18 @@
+kind: output_template
+id: bld_output_template_product_tour
+pillar: P05
+llm_function: PRODUCE
+purpose: Template with vars for product_tour production
+quality: null
+title: Output Template Product Tour
+version: 1.0.1
+author: n02_marketing
+tags:
+- product_tour
+- builder
+- output_template
+tldr: Template with vars for product_tour production
+domain: product_tour construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85

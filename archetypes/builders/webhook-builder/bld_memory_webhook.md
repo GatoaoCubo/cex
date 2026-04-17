@@ -2,7 +2,7 @@
 kind: memory
 id: bld_memory_webhook
 pillar: P06
-llm_function: CONTEXT
+llm_function: INJECT
 version: 1.0.0
 created: 2026-03-28
 updated: 2026-03-28
@@ -13,6 +13,7 @@ tldr: "Learned patterns from webhook artifact production: security invariants, d
 memory_scope: project
 observation_types: [user, feedback, project, reference]
 density_score: 0.98
+title: Memory ISO - webhook
 ---
 # Memory: webhook-builder
 ## Critical Invariants (learned from failures)

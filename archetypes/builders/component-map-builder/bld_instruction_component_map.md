@@ -28,7 +28,7 @@ density_score: 0.90
 7. Verify component count and connection count are consistent with scope
 ## Phase 2: COMPOSE
 1. Read SCHEMA.md — source of truth for all fields
-2. Read OUTPUT_TEMPLATE.md — fill {{vars}} following SCHEMA constraints
+2. Read OUTPUT_TEMPLATE.md — fill `{{vars}}` following SCHEMA constraints
 3. Fill frontmatter: all 19 required fields (quality: null — never self-score)
 4. Write Components section: for each component list name, type, owner, health status, and description
 5. Write Connections section: for each connection list source, target, protocol, and data type

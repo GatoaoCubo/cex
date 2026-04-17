@@ -1,0 +1,29 @@
+kind: collaboration
+id: bld_collaboration_referral_program
+pillar: P12
+llm_function: COLLABORATE
+purpose: How referral_program-builder works in crews with other builders
+quality: null
+title: Collaboration Referral Program
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- referral_program
+- builder
+- collaboration
+tldr: How referral_program-builder works in crews with other builders
+domain: referral_program construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+crew_role: Designs and manages referral program logic, tracking, and integration with external systems.
+receives_from: "| Builder                   | What                              | Format  |  \n|---------------------------|-----------------------------------|---------|\
+  \  \n| content_monetization-builder | Pricing tier data (LTV, CAC ratios) | YAML  |  \n| landing_page-builder      | Campaign\
+  \ landing page spec        | YAML    |  \n| onboarding_flow-builder   | Aha-moment trigger points for invite hooks | YAML\
+  \ |"
+produces_for: "| Builder                   | What                              | Format  |  \n|---------------------------|-----------------------------------|---------|\
+  \  \n| landing_page-builder      | Referral CTA copy and reward spec | YAML    |  \n| onboarding_flow-builder   | Invite\
+  \ hook config (step, trigger, reward) | YAML |  \n| content_monetization-builder | Viral k-factor input for revenue model\
+  \ | YAML |"
+boundary: Does NOT handle A/B test configurations (experiment_config-builder) or pricing models (content_monetization-builder).
+  Referral program produces the reward spec; monetization determines whether the CAC is sustainable.

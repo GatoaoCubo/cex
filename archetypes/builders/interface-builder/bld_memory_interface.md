@@ -23,6 +23,7 @@ observation_types: [user, feedback, project, reference]
 quality: 9.2
 title: "Memory Interface"
 density_score: 0.90
+llm_function: INJECT
 ---
 ## Summary
 Interfaces define bilateral contracts between a provider and a consumer. The most damaging failure is treating an interface as unilateral — defining only one party. The second most damaging failure is incrementing a version number without declaring what happens to old methods. Both failures cause breaking changes that are expensive to debug after deployment.

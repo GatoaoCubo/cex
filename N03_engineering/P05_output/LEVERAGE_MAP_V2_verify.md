@@ -1,0 +1,163 @@
+---
+id: leverage_map_v2_verify_2026_04_15
+kind: verification_report
+pillar: P08
+title: LEVERAGE_MAP_V2 Verification - N03 Builder Linter
+nucleus: N03
+mission: LEVERAGE_MAP_V2
+version: 2.0.0
+quality: 9.2
+created: 2026-04-15
+updated: 2026-04-15
+author: codex_n03
+tags: [leverage-map, verification, builder-linter, n03, 8f]
+tldr: "Verified _tools/cex_builder_linter.py is present and useful for structural builder checks, but it does not yet validate full 8F compliance or exact 13-ISO contracts."
+density_score: 0.97
+---
+
+# LEVERAGE_MAP_V2 Verification - N03 Builder Linter
+
+## 8F Trace
+
+| Step | Evidence |
+|------|----------|
+| F1 CONSTRAIN | Mission resolved from `.cex/runtime/handoffs/n03_task_codex.md`: verify `cex_builder_linter.py`, count builders, assess sufficiency. |
+| F2 BECOME | Loaded `.claude/rules/8f-reasoning.md`, `.claude/rules/n03-builder.md`, `N03_engineering/P02_model/agent_engineering.md`, `N03_engineering/agent_card_n03.md`. |
+| F3 INJECT | Injected prior report context from `N03_engineering/reports/LEVERAGE_MAP_V2_verify.md` and live repo state from `_tools/`, `archetypes/builders/`, and `_builder-builder/README.md`. |
+| F4 REASON | Chosen approach: static verification plus gap analysis against the linter's actual implementation, not the older report claims. |
+| F5 CALL | Ran `python _tools/cex_builder_linter.py`, `--strict`, `--json`, counted builder directories, and checked `_builder-builder` as an edge case. |
+| F6 PRODUCE | Rewrote this report with current counts, live outputs, and sufficiency analysis. |
+| F7 GOVERN | Cross-checked builder counts against directory inventory and linter JSON summary; verified claim drift in prior report. |
+| F8 COLLABORATE | Saved report, compiled artifact, committed only report outputs, emitted completion signal. |
+
+## Verification
+
+### Tool Added
+
+`_tools/cex_builder_linter.py` is present and executable.
+
+### Live Results
+
+| Check | Result |
+|------|--------|
+| Total dirs in `archetypes/builders/` | 261 |
+| Actual builder dirs (`*-builder`) | 259 |
+| Non-builder helper dirs | `compiled`, `_shared` |
+| Linter default run | `Linted 259 builders: 259 PASS, 0 FAIL` |
+| Linter strict run | `Linted 259 builders: 259 PASS, 0 FAIL` |
+| JSON mode | Works; returns summary + per-builder results |
+
+### API Confirmed
+
+```bash
+python _tools/cex_builder_linter.py
+python _tools/cex_builder_linter.py --builder agent-builder
+python _tools/cex_builder_linter.py --strict
+python _tools/cex_builder_linter.py --json
+python _tools/cex_builder_linter.py --show-passing
+```
+
+### What It Actually Checks
+
+1. Builder directory exists under `archetypes/builders/`.
+2. At least one file exists for each of these prefixes:
+   `bld_manifest_`, `bld_instruction_`, `bld_system_prompt_`.
+3. At least 13 `bld_*.md` files exist.
+4. Every `*.md` file in the builder directory has YAML frontmatter.
+5. Frontmatter contains `id`, `kind`, `title`, `version`.
+6. In `--strict` mode, body length after frontmatter is at least 200 bytes.
+
+### Does It Catch Real Builder Issues?
+
+Yes, for structural regressions.
+
+It would catch:
+- missing required ISO prefixes
+- builder folders with fewer than 13 `bld_*.md` files
+- missing frontmatter
+- missing core frontmatter keys
+- trivially empty bodies in strict mode
+
+It is already proving value because the prior report's failing cases are now gone and the current run is clean. That means the tool is suitable as a fast static guard in CI or pre-commit.
+
+## Linter Sufficiency
+
+### Sufficient For
+
+| Area | Verdict | Notes |
+|------|---------|-------|
+| Fast structural validation | PASS | Cheap static scan across all 259 builders. |
+| Frontmatter hygiene | PASS | Enforces a small but real required key set. |
+| Minimum ISO presence | PASS | Good first-line defense against incomplete builders. |
+| CI friendliness | PASS | `--json` output is easy to wire into automation. |
+
+### Not Sufficient For
+
+| Gap | Why it matters |
+|-----|----------------|
+| Exact 13-ISO contract | It only enforces `>= 13`, not the exact expected ISO set. `_builder-builder` has 26 ISO files and still passes. |
+| Full 8F section validation | The docstring claims checks for CONSTRAIN/BECOME/INJECT/etc, but the implementation does not inspect section headings or semantic coverage. |
+| Canonical ISO inventory | It checks only three prefixes, not the full 13 expected ISO filenames. A malformed builder could still pass if it has enough extra `bld_*.md` files. |
+| Schema-aware validation | It does not verify pillar, kind naming, or alignment to `kinds_meta` / schema rules. |
+| Content quality | Body length is a proxy only; low-quality or placeholder content can still pass. |
+| Broken cross-file dependencies | It does not verify that manifest, schema, examples, and quality gates agree with one another. |
+
+### Bottom Line
+
+`cex_builder_linter.py` is a real improvement, but it is a structural linter, not a builder correctness harness. The main risk now is false confidence from the docstring implying broader 8F validation than the code actually performs.
+
+## New Wired Tools (Since V1)
+
+| Tool | Status | Value |
+|------|--------|-------|
+| `cex_builder_linter.py` | NEW and working | Fast static validation for all builder folders. |
+| `cex_schema_hydrate.py` | Already present | Helps inject universal schema/frontmatter fields across ISO types. |
+| `validate_schema.py` | Already present | Validates pillar schema structure, complementary to builder linting. |
+
+## Still Missing
+
+| Missing capability | Priority | Reason |
+|-------------------|----------|--------|
+| `cex_builder_scaffold.py` | High | New builder creation is still manual and copy-heavy. |
+| `cex_schema_autogen.py` | High | Schema sync remains manual and drift-prone. |
+| Builder test harness (`cex_builder_test.py`) | High | No automated proof that builders produce good artifacts through 8F. |
+| Exact ISO contract validator | Medium | Current linter cannot prove the full 13-file set is correct. |
+| Cross-ISO dependency validator | Medium | No check that schema, template, examples, and gates agree. |
+| Semantic placeholder detector | Medium | Strict mode can pass thin or placeholder-heavy content. |
+
+## Next Iteration
+
+### 1. Build `cex_builder_scaffold.py`
+
+Highest leverage. It removes manual builder bootstrapping and reduces the chance of structural drift at creation time.
+
+### 2. Extend `cex_builder_linter.py` into an exact-contract validator
+
+Add canonical checks for the full 13 ISO filenames, section expectations, and explicit `_builder-builder` handling.
+
+### 3. Build `cex_builder_test.py`
+
+Run builders through 8F generation and score outputs. This closes the current gap between "builder folder looks valid" and "builder actually works."
+
+## Commands Used
+
+```bash
+Get-ChildItem _tools
+Get-Content -Raw _tools/cex_builder_linter.py
+(Get-ChildItem archetypes/builders -Directory | Measure-Object).Count
+Get-ChildItem archetypes/builders -Directory | Where-Object { $_.Name -like '*-builder' } | Measure-Object
+python _tools/cex_builder_linter.py
+python _tools/cex_builder_linter.py --strict
+python _tools/cex_builder_linter.py --json
+Get-Content -Raw archetypes/builders/_builder-builder/README.md
+```
+
+## Verdict
+
+Verification complete.
+
+- Tool added: yes
+- Tool operational: yes
+- Catches real issues: yes, structural only
+- Remaining gap: exact-contract + semantic 8F validation
+

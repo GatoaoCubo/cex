@@ -31,7 +31,7 @@ environment: '| Component | Requirement |
 
   | MCP servers | brave-search, firecrawl, markitdown, fetch accessible |
 
-  | Corpus | N01_intelligence/output/ contains >= 10 research outputs |
+  | Corpus | N01_intelligence/P05_output/ contains >= 10 research outputs |
 
   | Scoring rubric | `scoring_rubric_intelligence.md` loaded |
 
@@ -75,8 +75,8 @@ metrics: '| Metric | Unit | Baseline | Target | Direction |
   | Schema compliance | % outputs passing schema contracts | 85% | 100% | higher_is_better |
 
   | Context window utilization | % of 1M tokens used per session | 60% | 40% | lower_is_better |'
-execution: "# Run full benchmark suite\npython _tools/cex_score.py --benchmark N01_intelligence/output/ \\\n  --rubric N01_intelligence/quality/scoring_rubric_intelligence.md\
-  \ \\\n  --iterations 10 \\\n  --output N01_intelligence/output/benchmark_results.yaml\n\n# Run single metric: source density\n\
+execution: "# Run full benchmark suite\npython _tools/cex_score.py --benchmark N01_intelligence/P05_output/ \\\n  --rubric N01_intelligence/quality/scoring_rubric_intelligence.md\
+  \ \\\n  --iterations 10 \\\n  --output N01_intelligence/P05_output/benchmark_results.yaml\n\n# Run single metric: source density\n\
   python -c \"\nfrom pathlib import Path\nimport yaml\noutputs = list(Path('N01_intelligence/output').glob('output_*.md'))\n\
   for f in outputs:\n    content = f.read_text(encoding='utf-8')\n    # Count source references (URLs, citations, 'Source:'\
   \ tags)\n    import re\n    sources = len(re.findall(r'https?://|Source:|\\\\[\\\\d+\\\\]|\\\\(\\\\d{4}\\\\)', content))\n\

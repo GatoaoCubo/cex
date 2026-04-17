@@ -4,7 +4,7 @@ kind: type_builder
 pillar: P04
 parent: null
 domain: connector
-llm_function: CALL
+llm_function: BECOME
 version: 1.0.0
 created: 2026-03-26
 updated: 2026-03-26
@@ -20,6 +20,8 @@ tldr: "Golden and anti-examples for db connector construction, demonstrating ide
 density_score: 0.90
 ---
 # db-connector-builder
+
+This ISO addresses the database connector domain: connection pooling, query execution, and SQL dialect handling.
 ## Identity
 Specialist in building connector artifacts — connectors bidirecionais de services
 externos that integram sistemas via REST, WebSocket, gRPC, or MQTT. Masters auth strategies,

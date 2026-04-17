@@ -12,8 +12,8 @@ quality: 9.0
 tags: [quality-gate, constraint-spec, P03]
 tldr: "Pass/fail gate for constraint_spec artifacts: required fields, id pattern, body sections, parameter completeness."
 density_score: 1.0
+llm_function: GOVERN
 ---
-
 # Gate: constraint_spec
 ## Definition
 | Field | Value |

@@ -1,0 +1,76 @@
+kind: output_template
+id: bld_output_template_customer_segment
+pillar: P05
+llm_function: PRODUCE
+purpose: Template with vars for customer_segment production
+quality: null
+title: Output Template Customer Segment
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- customer_segment
+- builder
+- output_template
+tldr: Template with vars for customer_segment production
+domain: customer_segment construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+overview: '{{segment_overview}} <!-- segment_overview: 2-3 sentences describing who this segment is and why they matter -->'
+firmographics: '| Attribute | Value | Source |
+
+  |-----------|-------|--------|
+
+  | Industry vertical | {{industry}} | {{data_source}} |
+
+  | Company size | {{employee_range}} | {{data_source}} |
+
+  | Annual revenue | {{revenue_range}} | {{data_source}} |
+
+  | Geography | {{geography}} | {{data_source}} |
+
+  | Tech stack | {{tech_indicators}} | {{data_source}} |
+
+
+  <!-- industry: e.g., "SaaS", "Healthcare", "Manufacturing" -->
+
+  <!-- employee_range: e.g., "50-500 employees" -->
+
+  <!-- revenue_range: e.g., "$5M-$50M ARR" -->
+
+  <!-- geography: e.g., "North America, Western Europe" -->
+
+  <!-- tech_indicators: technographic signals (e.g., "Salesforce, Slack") -->'
+customer_needs_jobs_to_be_done: '| Job | Pain Point | Success Metric |
+
+  |-----|-----------|----------------|
+
+  | {{job_1}} | {{pain_1}} | {{metric_1}} |
+
+  | {{job_2}} | {{pain_2}} | {{metric_2}} |'
+icp_signals: '| Signal Type | Indicator | Score Weight |
+
+  |-------------|-----------|-------------|
+
+  | BANT - Budget | {{budget_signal}} | {{weight}} |
+
+  | BANT - Authority | {{authority_signal}} | {{weight}} |
+
+  | BANT - Need | {{need_signal}} | {{weight}} |
+
+  | BANT - Timeline | {{timeline_signal}} | {{weight}} |
+
+  | PLG signal | {{product_led_signal}} | {{weight}} |'
+use_cases:
+- '{{use_case_1}}'
+- '{{use_case_2}}'
+- '{{use_case_3}}'
+key_metrics: '| Metric | Target | Benchmark |
+
+  |--------|--------|-----------|
+
+  | CAC | {{cac_target}} | {{industry_benchmark}} |
+
+  | LTV | {{ltv_target}} | {{industry_benchmark}} |
+
+  | LTV:CAC ratio | {{ratio_target}} | 3:1 (industry standard) |'

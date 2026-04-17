@@ -61,6 +61,49 @@ LLM_MODEL = "sonnet"
 LLM_MAX_TOKENS = 8000
 FORK_OUTPUT_DIR = CEX_ROOT / ".cex" / "temp" / "fork_outputs"
 
+_FM_RE = re.compile(r"^---\n(.*?)\n---", re.DOTALL)
+
+
+def _parse_md_frontmatter(text: str) -> dict:
+    """YAML frontmatter parser.
+
+    Prefers PyYAML when available (handles nested mappings like budget: {tokens, usd}).
+    Falls back to a minimal parser (scalar keys + simple lists only) when PyYAML
+    is missing, so callers never crash in bare environments.
+    """
+    m = _FM_RE.match(text)
+    if not m:
+        return {}
+    raw = m.group(1)
+    try:
+        import yaml  # type: ignore
+        loaded = yaml.safe_load(raw)
+        return loaded if isinstance(loaded, dict) else {}
+    except Exception:
+        pass
+    fm: dict = {}
+    key = None
+    for line in raw.splitlines():
+        stripped = line.strip()
+        if not stripped or stripped.startswith("#"):
+            continue
+        if line.startswith("  - ") and key:
+            val = line[4:].strip().strip('"').strip("'")
+            if not isinstance(fm.get(key), list):
+                fm[key] = []
+            fm[key].append(val)
+        elif ":" in line and not line.startswith(" "):
+            k, _, v = line.partition(":")
+            k = k.strip()
+            v = v.strip()
+            key = k
+            if not v:
+                fm[k] = []
+            else:
+                fm[k] = v.strip('"').strip("'")
+    return fm
+
+
 # ---------------------------------------------------------------------------
 # Prompt Layers (compiled artifacts from pillar directories)
 # ---------------------------------------------------------------------------
@@ -511,6 +554,14 @@ def compose_prompt(
                 parts.append(verify_skill)
                 parts.append("")
 
+    # --- Wire: Prompt Compiler (F1 CONSTRAIN injection) ---
+    if layers and function_name.upper() == "CONSTRAIN":
+        pc_body = layers.get("p03_pc_cex_universal")
+        if pc_body:
+            parts.append("## Prompt Compiler (Intent Resolution -- F1 CONSTRAIN)")
+            parts.append(pc_body)
+            parts.append("")
+
     # --- Header ---
     parts.append(f"# CEX Crew Runner -- Builder Execution")
     parts.append(f"**Builder**: `{builder_id}`")
@@ -561,23 +612,39 @@ def compose_prompt(
         except ImportError:
             pass  # brand_inject not available, skip silently
 
-    # --- Knowledge Card Injection (semantic search via Supabase pgvector) ---
+    # ================================================================
+    # F3 INJECT: Synapse 8-Layer Context Envelope (A1 pattern)
+    #
+    # Canonical ordering ensures deterministic prompt structure:
+    #   L0 Rules     -- .claude/rules/ (already injected above via Wire 1)
+    #   L1 Global    -- brand config, nucleus identity (already injected above)
+    #   L2 Agent     -- builder specs (already injected above)
+    #   L3 Workflow   -- prior outputs from earlier pipeline steps
+    #   L4 Task      -- intent context, retry feedback
+    #   L5 (reserved) -- user session context (future)
+    #   L6 Retrieval -- KCs, memory, auto-retrieved context
+    #   L7 Commands  -- execution instructions (injected below)
+    # ================================================================
+
+    # --- L6 Retrieval: Knowledge Cards ---
     kc_block = _load_relevant_kcs(intent, parsed)
     if kc_block:
+        parts.append("## [L6] Knowledge Card Context")
         parts.append(kc_block)
 
-    # --- Builder Memory (per-builder, not shared) ---
+    # --- L6 Retrieval: Builder Memory ---
     memory_block = _load_builder_memories(builder_id, intent)
     if memory_block:
+        parts.append("## [L6] Builder Memory")
         parts.append(memory_block)
 
-    # --- F5 Auto-Retrieved Context (tool execution outputs) ---
+    # --- L6 Retrieval: Auto-Retrieved Context (F5 CALL outputs) ---
     if hasattr(state, "tool_results") and state.tool_results.get("enrichment_text"):
-        parts.append("## Auto-Retrieved Context (F5 CALL)")
+        parts.append("## [L6] Auto-Retrieved Context (F5 CALL)")
         parts.append(state.tool_results["enrichment_text"])
         parts.append("")
 
-    # --- Prior Outputs ---
+    # --- L3 Workflow: Prior Outputs ---
     # Only inject outputs from completed earlier steps (not current function)
     prior = {
         bid: out
@@ -587,7 +654,7 @@ def compose_prompt(
         and not out.content.startswith("[DRY-RUN]")
     }
     if prior:
-        parts.append("## Prior Builder Outputs")
+        parts.append("## [L3] Prior Builder Outputs")
         parts.append("These outputs were produced by earlier pipeline steps.")
         parts.append("Use them as context -- do not repeat their work.")
         parts.append("")
@@ -599,15 +666,15 @@ def compose_prompt(
             parts.append(content)
             parts.append("")
 
-    # --- Retry Feedback ---
+    # --- L4 Task: Retry Feedback ---
     if retry_feedback:
-        parts.append("## Retry Feedback")
+        parts.append("## [L4] Retry Feedback")
         parts.append("Your previous attempt did not pass the quality gate.")
         parts.append(retry_feedback)
         parts.append("")
 
-    # --- Execution Instructions ---
-    parts.append("## Execution Instructions")
+    # --- L7 Commands: Execution Instructions ---
+    parts.append("## [L7] Execution Instructions")
     parts.append(
         f"1. You are executing builder `{builder_id}` for pipeline function `{function_name}`."
     )
@@ -638,6 +705,202 @@ class CrewRunner:
         self.parsed = plan.get("parsed", {})
         self.functions = plan.get("functions", [])
         self.quality_target = self.parsed.get("quality", 9.0)
+
+    # ------------------------------------------------------------------
+    # Composable-crew loader (Phase 2 of crew-wiring mini-wave)
+    # ------------------------------------------------------------------
+    @classmethod
+    def load_from_crew_template(
+        cls,
+        crew_path: Path,
+        charter_path: Path | None = None,
+        cex_root: Path = CEX_ROOT,
+    ) -> dict:
+        """Parse a crew_template.md + optional team_charter.md into a runnable plan.
+
+        crew_template.md shape (from archetypes/builders/crew-template-builder):
+          frontmatter: crew_name, purpose, process, handoff_protocol_id, ...
+          body `## Roles` table: | Role | Role Assignment ID | Reason |
+
+        Each `Role Assignment ID` (e.g. `p02_ra_researcher.md`) is resolved by:
+          1. sibling dir of crew file (e.g. N02_marketing/P12_orchestration/)
+          2. cex_root glob N0*/P12_orchestration/<id>
+          3. cex_root glob N0*/P02_model/<id>
+          4. cex_root glob P02_*/**/<id>
+
+        The role_assignment's frontmatter `agent_id` points to a builder
+        or nucleus agent -- that becomes a builder entry in the plan.
+
+        Returns a plan dict compatible with CrewRunner.run().
+        """
+        import re as _re
+
+        # --- 1. Parse crew_template ---
+        text = crew_path.read_text(encoding="utf-8", errors="replace")
+        fm = _parse_md_frontmatter(text)
+        body = text.split("---", 2)[-1] if text.startswith("---") else text
+
+        crew_name = fm.get("crew_name", crew_path.stem)
+        process = (fm.get("process") or "sequential").strip().lower()
+        purpose = fm.get("purpose", f"Execute crew {crew_name}")
+        handoff_proto = fm.get("handoff_protocol_id", "a2a-task")
+
+        # --- 2. Parse `## Roles` table ---
+        roles: list[dict] = []
+        in_roles = False
+        for line in body.splitlines():
+            low = line.strip().lower()
+            if low.startswith("## "):
+                in_roles = low.startswith("## roles")
+                continue
+            if not in_roles:
+                continue
+            if not line.strip().startswith("|"):
+                continue
+            cells = [c.strip() for c in line.strip().strip("|").split("|")]
+            if len(cells) < 3:
+                continue
+            # skip header + separator rows
+            if cells[0].lower() in ("role", "---", ":---"):
+                continue
+            if _re.match(r"^[-: ]+$", cells[0]):
+                continue
+            roles.append(
+                {"role_name": cells[0], "assignment_id": cells[1], "reason": cells[2]}
+            )
+
+        if not roles:
+            raise ValueError(
+                f"crew_template {crew_path.name} has no `## Roles` rows -- "
+                "cannot build plan"
+            )
+
+        # --- 3. Resolve each role_assignment.md ---
+        resolved: list[dict] = []
+        search_dirs = [
+            crew_path.parent,
+            *sorted((cex_root).glob("N0*/crews")),
+            *sorted((cex_root / "N00_genesis").glob("P02_*")),
+        ]
+        for role in roles:
+            aid = role["assignment_id"].strip()
+            # strip template placeholder braces if any
+            aid = _re.sub(r"\{\{.*?\}\}", "", aid).strip()
+            if not aid or aid.startswith("<!--"):
+                continue
+            ra_path = None
+            for d in search_dirs:
+                candidate = d / aid
+                if candidate.exists():
+                    ra_path = candidate
+                    break
+                # glob fallback for pillar subdirs
+                matches = list(d.rglob(aid)) if d.is_dir() else []
+                if matches:
+                    ra_path = matches[0]
+                    break
+            ra_fm: dict = {}
+            agent_id = None
+            if ra_path and ra_path.exists():
+                ra_text = ra_path.read_text(encoding="utf-8", errors="replace")
+                ra_fm = _parse_md_frontmatter(ra_text)
+                agent_id = ra_fm.get("agent_id")
+            # fallback: derive agent from role_name
+            if not agent_id:
+                agent_id = (
+                    ra_fm.get("role_name", role["role_name"])
+                    .lower()
+                    .replace(" ", "-")
+                    + "-builder"
+                )
+            resolved.append(
+                {
+                    "role_name": role["role_name"],
+                    "assignment_id": aid,
+                    "assignment_path": str(ra_path.resolve().relative_to(cex_root.resolve()))
+                    if ra_path
+                    else None,
+                    "agent_id": agent_id,
+                    "goal": ra_fm.get("goal", ""),
+                    "backstory": ra_fm.get("backstory", ""),
+                    "tools": ra_fm.get("tools", []),
+                }
+            )
+
+        # --- 4. Optional charter merge ---
+        charter_fm: dict = {}
+        if charter_path and charter_path.exists():
+            charter_fm = _parse_md_frontmatter(
+                charter_path.read_text(encoding="utf-8", errors="replace")
+            )
+
+        # --- 5. Build plan.functions ---
+        # sequential -> one step per role (ordered)
+        # hierarchical -> one step, manager first then workers parallel
+        # consensus -> one step, all parallel
+        parallel = process != "sequential"
+        builders = []
+        for i, r in enumerate(resolved):
+            agent_slug = (
+                r["agent_id"]
+                .replace(".md", "")
+                .split("/")[-1]
+            )
+            builders.append(
+                {
+                    "id": agent_slug,
+                    "tier": "primary",
+                    "active": True,
+                    "reason": f"role '{r['role_name']}' bound via {r['assignment_id']}",
+                    "role_name": r["role_name"],
+                    "order": i,
+                    "goal": r["goal"],
+                    "backstory": r["backstory"],
+                }
+            )
+
+        function_entry = {
+            "name": "CREW",
+            "position": 6,  # PRODUCE slot
+            "builders": builders,
+            "deps": [],
+            "parallel": parallel,
+            "estimated_tokens": 4096 * len(builders),
+            "process": process,
+        }
+
+        plan = {
+            "intent": purpose,
+            "parsed": {
+                "verb": "execute",
+                "object": crew_name,
+                "domain": "crew",
+                "quality": charter_fm.get("quality_gate", 9.0),
+                "multi_object": False,
+            },
+            "classified_kinds": [],
+            "functions": [function_entry],
+            "total_builders": len(builders),
+            "estimated_tokens": 4096 * len(builders),
+            "turn_budgets": {b["id"]: 25 for b in builders},
+            "warnings": [],
+            "crew_meta": {
+                "crew_name": crew_name,
+                "process": process,
+                "handoff_protocol": handoff_proto,
+                "roles": resolved,
+                "charter": {
+                    "mission": charter_fm.get("mission_statement", ""),
+                    "deliverables": charter_fm.get("deliverables", []),
+                    "deadline": charter_fm.get("deadline", ""),
+                    "budget": charter_fm.get("budget", {}),
+                }
+                if charter_fm
+                else None,
+                "source_template": str(crew_path.resolve().relative_to(cex_root.resolve())),
+            },
+        }
+        return plan
 
     def _get_active_builders(self, step: dict) -> list[dict]:
         """Filter to only active builders in a step."""
@@ -1198,7 +1461,15 @@ Examples:
   python cex_crew_runner.py --plan /tmp/plan.json --output-dir /tmp/crew/
         """,
     )
-    parser.add_argument("--plan", required=True, help="Path to Motor 8F plan JSON")
+    parser.add_argument("--plan", help="Path to Motor 8F plan JSON")
+    parser.add_argument(
+        "--crew",
+        help="Path to crew_template.md (alternative to --plan; parses roles into plan dict)",
+    )
+    parser.add_argument(
+        "--charter",
+        help="Optional team_charter.md path -- merged as mission/deliverables into the plan",
+    )
     parser.add_argument("--output-dir", help="Output directory for prompts/outputs")
     parser.add_argument("--step", type=int, help="Execute only this step (by position 1-8)")
     parser.add_argument(
@@ -1213,14 +1484,31 @@ Examples:
 
     args = parser.parse_args()
 
-    # Load plan
-    plan_path = Path(args.plan)
-    if not plan_path.exists():
-        print(f"ERROR: Plan file not found: {plan_path}", file=sys.stderr)
+    # Load plan (either from JSON or by compiling a crew_template.md)
+    if not args.plan and not args.crew:
+        print("ERROR: provide --plan <json> OR --crew <crew_template.md>", file=sys.stderr)
         sys.exit(1)
 
-    with open(plan_path, "r", encoding="utf-8") as f:
-        plan = json.load(f)
+    if args.crew:
+        crew_path = Path(args.crew)
+        if not crew_path.exists():
+            print(f"ERROR: crew_template not found: {crew_path}", file=sys.stderr)
+            sys.exit(1)
+        charter_path = Path(args.charter) if args.charter else None
+        plan = CrewRunner.load_from_crew_template(crew_path, charter_path=charter_path)
+        print(
+            f"[CREW] loaded {crew_path.name}: "
+            f"process={plan['crew_meta']['process']}, "
+            f"roles={len(plan['crew_meta']['roles'])}, "
+            f"active_builders={plan['total_builders']}"
+        )
+    else:
+        plan_path = Path(args.plan)
+        if not plan_path.exists():
+            print(f"ERROR: Plan file not found: {plan_path}", file=sys.stderr)
+            sys.exit(1)
+        with open(plan_path, "r", encoding="utf-8") as f:
+            plan = json.load(f)
 
     # Validate plan has expected structure
     if "functions" not in plan:

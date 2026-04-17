@@ -1,0 +1,30 @@
+---
+id: bld_memory_aggregate_root
+kind: knowledge_card
+pillar: P06
+title: "Aggregate Root Builder -- Memory"
+version: 1.0.0
+quality: null
+tags: [builder, aggregate_root, memory]
+llm_function: INJECT
+density_score: 0.9
+updated: "2026-04-17"
+---
+# Memory: aggregate_root
+## Session Patterns to Remember
+- Aggregate size: most production aggregates have 2-5 members. >7 is a smell.
+- Invariant quality signal: if an invariant says "must be valid" -- it is not concrete. Push for specific field constraints.
+- Repository rule: find_by_id and save are the only methods on the aggregate repository. Queries belong in read models.
+- Concurrency: optimistic locking (version field) is the default. Use pessimistic only when contention is proven high.
+- Event sourcing: if the domain uses event sourcing, `commands` list becomes `apply(event)` handlers.
+## Common Mistakes Seen
+- Defining repository with list/query methods: redirect to read model or query service
+- Putting domain logic in the repository: domain logic belongs in the root, not the repo
+- Forgetting to list domain_events: every command that changes state emits at least one event
+- Using service IDs as cluster members: cluster_members must be entities or value objects, not foreign aggregates
+## Boundary Vocabulary
+- "Cluster" = set of objects inside the aggregate boundary
+- "Root" = the single entity with global identity that owns the cluster
+- "Invariant" = a business rule that must hold true after every command
+- "Command" = a request to change state (may fail if invariant would be violated)
+- "Domain event" = a fact that state changed (never fails, past tense)

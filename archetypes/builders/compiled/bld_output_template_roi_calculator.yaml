@@ -1,0 +1,58 @@
+kind: output_template
+id: bld_output_template_roi_calculator
+pillar: P05
+llm_function: PRODUCE
+purpose: Template with vars for roi_calculator production
+quality: null
+title: Output Template Roi Calculator
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- roi_calculator
+- builder
+- output_template
+tldr: Template with vars for roi_calculator production
+domain: roi_calculator construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+input_parameters: '| Parameter | Type | Unit | Description | Required |
+
+  |-----------|------|------|-------------|----------|
+
+  | initial_investment | float | USD | Total upfront cost | yes |
+
+  | annual_savings | float | USD | Yearly cost reduction | yes |
+
+  | implementation_cost | float | USD | One-time setup cost | yes |
+
+  | time_horizon | int | years | Evaluation period | yes |
+
+  | discount_rate | float | % | Cost of capital (NPV) | yes |
+
+  | annual_maintenance | float | USD | Recurring platform costs | yes |'
+output_metrics: '| Metric | Formula | Threshold |
+
+  |--------|---------|-----------|
+
+  | ROI % | (Net Profit / Total Investment) * 100 | >= 15% |
+
+  | Payback Period | Total Investment / Annual Savings | <= 24 months |
+
+  | NPV | Sum(Savings / (1+r)^t) - Investment | > 0 |
+
+  | TCO Reduction | Baseline TCO - New TCO | > 20% |'
+scenario_comparison: '| Scenario | Year 1 | Year 2 | Year 3 | ROI % |
+
+  |----------|--------|--------|--------|-------|
+
+  | Conservative | {{y1_cons}} | {{y2_cons}} | {{y3_cons}} | {{roi_cons}} |
+
+  | Base Case | {{y1_base}} | {{y2_base}} | {{y3_base}} | {{roi_base}} |
+
+  | Optimistic | {{y1_opt}} | {{y2_opt}} | {{y3_opt}} | {{roi_opt}} |'
+assumptions:
+- 'Discount rate: {{discount_rate}}% (WACC or cost of capital)'
+- 'Savings realization: {{ramp_months}} months ramp-up'
+- 'Maintenance growth: {{maintenance_growth}}% annually'
+- 'Source: Forrester TEI methodology / customer-validated data'

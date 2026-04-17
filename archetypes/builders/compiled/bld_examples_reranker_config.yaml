@@ -1,0 +1,27 @@
+kind: examples
+id: bld_examples_reranker_config
+pillar: P07
+llm_function: GOVERN
+purpose: Golden and anti-examples of reranker_config artifacts
+quality: null
+title: Examples Reranker Config
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- reranker_config
+- builder
+- examples
+tldr: Golden and anti-examples of reranker_config artifacts
+domain: reranker_config construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+golden_example: "---\nmodel: \"rerank-english-v2.0\"\nprovider: \"Cohere\"\nstrategy: \"cross-encoder\"\nparameters:\n  top_k:\
+  \ 10\n  temperature: 0.7\n---\nReranker config for Cohere's English reranking model. Uses cross-encoder strategy to re-score\
+  \ top 10 candidates from initial retrieval. Temperature controls softmax sharpness during scoring."
+anti_example_1_confusing_retriever_and_reranker_models: "---\nmodel: \"BM25\"\nprovider: \"Elasticsearch\"\nstrategy: \"vector-similarity\"\
+  \nparameters:\n  top_k: 100\n---"
+why_it_fails: The config lacks a "strategy" field which is required for reranking. Without specifying how the model will re-score
+  documents (e.g., "cross-encoder", "dot-product"), the system cannot execute reranking logic properly.
+anti_example_2_missing_essential_strategy_definition: "---\nmodel: \"cross-encoder/ms-marco-MiniLM-2-4\"\nprovider: \"HuggingFace\"\
+  \nparameters:\n  top_k: 5\n---"

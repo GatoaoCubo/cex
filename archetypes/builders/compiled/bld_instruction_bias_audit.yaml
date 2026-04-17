@@ -1,0 +1,39 @@
+kind: instruction
+id: bld_instruction_bias_audit
+pillar: P03
+llm_function: REASON
+purpose: Step-by-step production process for bias_audit
+quality: null
+title: Instruction Bias Audit
+version: 1.0.0
+author: wave1_builder_gen
+tags:
+- bias_audit
+- builder
+- instruction
+tldr: Step-by-step production process for bias_audit
+domain: bias_audit construction
+created: '2026-04-13'
+updated: '2026-04-13'
+density_score: 0.85
+phase_1_research: "This ISO drives a bias audit: measuring fairness across demographic slices.\n1. Define audit scope: identify\
+  \ systems, datasets, and decision points under evaluation.  \n2. Collect training/validation data and model outputs for\
+  \ analysis.  \n3. Identify sensitive attributes (e.g., race, gender) and protected groups.  \n4. Select fairness metrics\
+  \ (e.g., demographic parity, equalized odds).  \n5. Conduct statistical analysis to detect disparities in model outcomes.\
+  \  \n6. Document methodology, assumptions, and limitations of the audit."
+phase_2_compose:
+- 'Outline artifact structure using SCHEMA.md (sections: methodology, metrics, results).'
+- Write audit objectives and scope based on research findings.
+- Describe data sources, preprocessing steps, and model versions analyzed.
+- Define fairness metrics and thresholds from SCHEMA.md.
+- Populate results tables with quantitative fairness evaluations.
+- Insert visualizations (e.g., disparity heatmaps) from OUTPUT_TEMPLATE.md.
+- Discuss implications of findings, including trade-offs between fairness and performance.
+- Reference audit tools, libraries, and validation procedures used.
+- Finalize artifact using OUTPUT_TEMPLATE.md formatting guidelines.
+phase_3_validate:
+- '[ ] Verify all SCHEMA.md requirements are addressed.'
+- '[ ] Confirm data accuracy and alignment with research phase.'
+- '[ ] Ensure metrics match definitions in Phase 1 and SCHEMA.md.'
+- '[ ] Check compliance with OUTPUT_TEMPLATE.md structure.'
+- '[ ] Obtain peer review for methodological rigor and clarity.'

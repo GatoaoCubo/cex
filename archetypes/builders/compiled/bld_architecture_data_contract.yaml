@@ -1,0 +1,51 @@
+id: bld_architecture_data_contract
+kind: component_map
+pillar: P08
+llm_function: CONSTRAIN
+version: 1.0.0
+quality: 6.7
+tags:
+- data_contract
+- architecture
+- published-language
+title: Architecture Data Contract
+density_score: 1.0
+updated: '2026-04-17'
+position_in_cex_kind_taxonomy: "P06 Schema\n  data_contract     <-- THIS KIND (cross-boundary agreement)\n  validation_schema\
+  \ (LLM output validation -- different scope)\n  input_schema      (single system input spec)\n  type_def          (custom\
+  \ type definitions)"
+relationships: '| Relation | Kind | Direction | Notes |
+
+  |----------|------|-----------|-------|
+
+  | formalizes | domain_event schema | one-to-one | Events crossing BCs need contracts |
+
+  | constrains | dataset_card | downstream | Contract precedes dataset catalog |
+
+  | referenced by | bounded_context | many-to-one | BCs publish contracts |
+
+  | validated by | validation_schema | optional | Consumer validates incoming data |'
+ddd_published_language_pattern: "data_contract IS the DDD Published Language: an explicit schema shared between\nbounded contexts\
+  \ that reduces coupling and enables independent evolution.\n\nBounded Context A (Producer)\n  +-- domain_event (what happened\
+  \ internally)\n  +-- data_contract (what A exposes to outside world)\n        |\n        v\nBounded Context B (Consumer)\n\
+  \  +-- data_contract (what B accepts)\n  +-- validation_schema (B validates incoming against contract)"
+when_to_use: '| Scenario | Use |
+
+  |----------|-----|
+
+  | Data crosses team/system boundary | data_contract |
+
+  | Validating LLM output format | validation_schema |
+
+  | Cataloging a dataset asset | dataset_card |
+
+  | Single system input spec | input_schema |'
+schema_registry_integration: 'data_contract maps to Apache Avro schema, Protobuf IDL, JSON Schema, or OpenAPI:
+
+  - Avro: schema + registry subject name
+
+  - Protobuf: .proto message definition
+
+  - JSON Schema: $schema + properties
+
+  - OpenAPI: components/schemas entry'

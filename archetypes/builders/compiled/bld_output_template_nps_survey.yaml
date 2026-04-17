@@ -1,0 +1,18 @@
+kind: output_template
+id: bld_output_template_nps_survey
+pillar: P05
+llm_function: PRODUCE
+purpose: Template with vars for nps_survey production
+quality: null
+title: Output Template Nps Survey
+version: 1.0.0
+author: n05_wave6
+tags:
+- nps_survey
+- builder
+- output_template
+tldr: Template with vars for nps_survey production
+domain: nps_survey construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85

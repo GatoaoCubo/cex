@@ -1,0 +1,30 @@
+kind: examples
+id: bld_examples_sdk_example
+pillar: P07
+llm_function: GOVERN
+purpose: Golden and anti-examples of sdk_example artifacts
+quality: null
+title: Examples Sdk Example
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- sdk_example
+- builder
+- examples
+tldr: Golden and anti-examples of sdk_example artifacts
+domain: sdk_example construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+golden_example: "import boto3\nimport os\n\ndef upload_to_s3(file_path, bucket_name, object_key):\n    \"\"\"Upload file to\
+  \ S3 bucket.\"\"\"\n    try:\n        s3_client = boto3.client('s3')\n        s3_client.upload_file(file_path, bucket_name,\
+  \ object_key)\n        print(f\"Uploaded {file_path} to s3://{bucket_name}/{object_key}\")\n    except Exception as e:\n\
+  \        print(f\"Error uploading file: {e}\")\n        raise"
+anti_example_1_missing_error_handling: "import boto3\n\ndef upload_to_s3(file_path, bucket_name, object_key):\n    s3_client\
+  \ = boto3.client('s3')\n    s3_client.upload_file(file_path, bucket_name, object_key)\n    print(f\"Uploaded {file_path}\
+  \ to s3://{bucket_name}/{object_key}\")"
+why_it_fails: Hardcoding credentials violates security best practices. It exposes sensitive information in code repositories
+  and increases risk of credential leakage. Proper approach uses environment variables or IAM roles.
+anti_example_2_hardcoded_credentials: "import boto3\n\ndef upload_to_s3(file_path, bucket_name, object_key):\n    s3_client\
+  \ = boto3.client('s3', aws_access_key_id='AKIAXXXXXXXXXXXXXXXX',\n                             aws_secret_access_key='XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX')\n\
+  \    s3_client.upload_file(file_path, bucket_name, object_key)"

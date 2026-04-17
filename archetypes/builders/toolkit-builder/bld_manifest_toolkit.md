@@ -3,7 +3,7 @@ id: toolkit-builder
 kind: type_builder
 pillar: P04
 domain: toolkit
-llm_function: CALL
+llm_function: BECOME
 version: 1.0.0
 created: 2026-04-06
 updated: 2026-04-06

@@ -1,0 +1,46 @@
+---
+kind: architecture
+id: bld_architecture_c2pa_manifest
+pillar: P08
+llm_function: CONSTRAIN
+purpose: Component map of c2pa_manifest -- inventory, dependencies
+quality: 9.0
+title: "Architecture C2PA Manifest"
+version: "1.0.0"
+author: n04_wave7
+tags: [c2pa_manifest, builder, architecture, C2PA, JUMBF, COSE, claim, assertion]
+tldr: "Component map of c2pa_manifest -- inventory, dependencies"
+domain: "c2pa_manifest construction"
+created: "2026-04-14"
+updated: "2026-04-14"
+density_score: 0.85
+---
+
+## Component Inventory
+| ISO Name            | Role                                | Pillar | Status  |
+|---------------------|-------------------------------------|--------|---------|
+| bld_manifest        | Builder identity and routing        | P05    | Active  |
+| bld_instruction     | JUMBF assembly process              | P03    | Active  |
+| bld_system_prompt   | LLM C2PA specialist persona         | P03    | Active  |
+| bld_schema          | C2PA 2.3 manifest data schema       | P06    | Active  |
+| bld_quality_gate    | C2PA compliance validation          | P11    | Active  |
+| bld_output_template | Manifest JSON + embedding template  | P05    | Active  |
+| bld_examples        | Golden and anti-examples            | P07    | Active  |
+| bld_knowledge_card  | C2PA 2.3 domain knowledge           | P01    | Active  |
+| bld_architecture    | Component map                       | P08    | Active  |
+| bld_collaboration   | Workflow with model-card-builder    | P12    | Active  |
+| bld_config          | Naming, paths, limits               | P09    | Active  |
+| bld_memory          | Learned C2PA patterns               | P10    | Active  |
+| bld_tools           | COSE signing, JUMBF tools           | P04    | Active  |
+
+## Dependencies
+| From                | To                                  | Type           |
+|---------------------|-------------------------------------|----------------|
+| bld_schema          | C2PA 2.3 spec + ISO 19566-5         | normative      |
+| bld_output_template | bld_schema                          | constraint     |
+| bld_quality_gate    | bld_schema + bld_examples           | validation     |
+| bld_collaboration   | model-card-builder (P02)            | coordination   |
+| bld_tools           | c2pa-rs library (external)          | integration    |
+
+## Architectural Position
+c2pa_manifest occupies the P10 content provenance layer. It is the media-side complement to vc_credential (agent identity side). While vc_credential attests WHO the agent is, c2pa_manifest attests WHAT the agent produced. Together they form the full provenance chain: issuer identity (VC) -> generation context (C2PA manifest) -> output content. Upstream: model-card (P02) for model attribution. Downstream: content distribution platforms, compliance auditors, CAI verification portal.

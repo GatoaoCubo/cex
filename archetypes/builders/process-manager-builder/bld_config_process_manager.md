@@ -1,0 +1,34 @@
+---
+id: bld_context_sources_process_manager
+kind: knowledge_card
+pillar: P12
+title: "Process Manager Builder -- Context Sources"
+version: 1.0.0
+quality: 5.4
+tags: [builder, process_manager, context]
+llm_function: CONSTRAIN
+density_score: 1.0
+updated: "2026-04-17"
+---
+# Context Sources: process_manager
+## Mandatory Loads (F3 INJECT)
+| Source | Path | Purpose |
+|--------|------|---------|
+| Kind KC | N00_genesis/P01_knowledge/library/kind/kc_process_manager.md | Primary definition |
+| Schema | archetypes/builders/process-manager-builder/bld_schema_process_manager.md | Field constraints |
+| Template | archetypes/builders/process-manager-builder/bld_output_template_process_manager.md | Structure |
+| Examples | archetypes/builders/process-manager-builder/bld_examples_process_manager.md | Golden patterns |
+| Pillar schema | N00_genesis/P12_orchestration/_schema.yaml | Pillar constraints |
+## Related Kind KCs
+| KC | Relationship |
+|----|-------------|
+| kc_workflow.md | sequential step execution (alternative pattern) |
+| kc_domain_event.md | events that process_manager subscribes to |
+| kc_dispatch_rule.md | keyword routing (simpler alternative) |
+| kc_schedule.md | time-triggered orchestration |
+## External References
+| Source | Relevance |
+|--------|----------|
+| Hohpe & Woolf EIP (2003) | Process Manager pattern definition |
+| Garcia-Molina Sagas (1987) | Compensation / long-running transactions |
+| Richardson Microservices Patterns (2019) | Saga orchestrator implementation |

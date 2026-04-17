@@ -1,0 +1,34 @@
+---
+id: bld_context_sources_value_object
+kind: knowledge_card
+pillar: P06
+title: "Value Object Builder -- Context Sources"
+version: 1.0.0
+quality: 5.4
+tags: [builder, value_object, context]
+llm_function: CONSTRAIN
+density_score: 1.0
+updated: "2026-04-17"
+---
+# Context Sources: value_object
+## Mandatory Loads (F3 INJECT)
+| Source | Path | Purpose |
+|--------|------|---------|
+| Kind KC | N00_genesis/P01_knowledge/library/kind/kc_value_object.md | Primary definition |
+| Schema | archetypes/builders/value-object-builder/bld_schema_value_object.md | Field constraints |
+| Template | archetypes/builders/value-object-builder/bld_output_template_value_object.md | Structure |
+| Examples | archetypes/builders/value-object-builder/bld_examples_value_object.md | Golden patterns |
+| Pillar schema | N00_genesis/P06_schema/_schema.yaml | Pillar constraints |
+## Related Kind KCs
+| KC | Relationship |
+|----|-------------|
+| kc_aggregate_root.md | aggregate that contains this value object |
+| kc_type_def.md | simpler type alias (no DDD contract) |
+| kc_enum_def.md | fixed-set constant type |
+| kc_input_schema.md | raw input validation before constructing value objects |
+## External References
+| Source | Relevance |
+|--------|----------|
+| Evans DDD (2003) Ch. 5 | Original value object definition |
+| Vernon IDDD (2013) Ch. 6 | Implementation patterns for value objects |
+| Functional domain modeling | Immutable data types + smart constructors |

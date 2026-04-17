@@ -12,8 +12,8 @@ quality: 9.0
 tags: [quality-gate, benchmark, P11, P07, governance, performance, measurement]
 tldr: "Gates for benchmark artifacts — quantitative performance measurements with methodology and reproducibility."
 density_score: 0.91
+llm_function: GOVERN
 ---
-
 # Gate: benchmark
 ## Definition
 | Field     | Value                                                    |

@@ -55,29 +55,29 @@ tldr: "{{dense_summary_max_160ch}}"
 density_score: {{0.80-1.00}}
 ```
 ## Provider Overview
-{{provider_name}} runtime for {{agent_role}} agents.
-{{one_sentence_runtime_characteristics}}
+`{{provider_name}}` runtime for `{{agent_role}}` agents.
+`{{one_sentence_runtime_characteristics}}`
 ## Identity Block
-Name: {{agent_display_name}}
-Role: {{primary_role}}
-Agent_group: {{agent_group_name}}
+Name: `{{agent_display_name}}`
+Role: `{{primary_role}}`
+Agent_group: `{{agent_group_name}}`
 ## Constraints
 | Parameter | Value | Rationale |
 |-----------|-------|-----------|
-| max_tokens | {{value}} | {{why}} |
-| context_window | {{value}} | {{why}} |
-| timeout_seconds | {{value}} | {{why}} |
-| max_retries | {{value}} | {{why}} |
+| max_tokens | `{{value}}` | `{{why}}` |
+| context_window | `{{value}}` | `{{why}}` |
+| timeout_seconds | `{{value}}` | `{{why}}` |
+| max_retries | `{{value}}` | `{{why}}` |
 ## Tools Configuration
 | Tool | Type | Purpose |
 |------|------|---------|
-| {{tool_1}} | {{mcp|cli|api}} | {{purpose_1}} |
-| {{tool_2}} | {{mcp|cli|api}} | {{purpose_2}} |
+| `{{tool_1}}` | {{mcp|cli|api}} | `{{purpose_1}}` |
+| `{{tool_2}}` | {{mcp|cli|api}} | `{{purpose_2}}` |
 ## Flags
 | Flag | Purpose |
 |------|---------|
-| {{flag_1}} | {{purpose_1}} |
-| {{flag_2}} | {{purpose_2}} |
+| `{{flag_1}}` | `{{purpose_1}}` |
+| `{{flag_2}}` | `{{purpose_2}}` |
 ## References
-- Provider docs: {{provider_doc_url}}
-- Related config: {{related_boot_config_or_none}}
+- Provider docs: `{{provider_doc_url}}`
+- Related config: `{{related_boot_config_or_none}}`

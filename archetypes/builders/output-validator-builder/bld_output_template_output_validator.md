@@ -39,13 +39,13 @@ severity: "{{severity}}}}"
 applies_to: "{{applies_to}}}}"
 ```
 ## Overview
-{{overview_content}}
+`{{overview_content}}`
 ## Checks
-{{checks_content}}
+`{{checks_content}}`
 ## Failure Actions
-{{failure_actions_content}}
+`{{failure_actions_content}}`
 ## Integration
-{{integration_content}}
+`{{integration_content}}`
 
 ## Template Standards
 

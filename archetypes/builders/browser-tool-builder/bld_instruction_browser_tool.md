@@ -30,7 +30,7 @@ density_score: 0.90
 9. Confirm target slug for id: snake_case, lowercase, no hyphens
 ## Phase 2: COMPOSE
 1. Read SCHEMA.md — source of truth for all fields
-2. Read OUTPUT_TEMPLATE.md — fill {{vars}} following SCHEMA constraints
+2. Read OUTPUT_TEMPLATE.md — fill `{{vars}}` following SCHEMA constraints
 3. Fill frontmatter: all required fields (quality: null — never self-score)
 4. Write Overview section: target site, automation purpose, who/what triggers this tool
 5. Write Engine section: engine name, headless config, viewport, timeout, javascript flag

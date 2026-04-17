@@ -23,6 +23,7 @@ observation_types: [user, feedback, project, reference]
 quality: 9.1
 title: "Memory Hook Config"
 density_score: 0.90
+llm_function: INJECT
 ---
 ## Summary
 Hook lifecycle configuration — declares which hooks fire at each build phase. The difference between a useful hook_config and a useless one is clean declaration

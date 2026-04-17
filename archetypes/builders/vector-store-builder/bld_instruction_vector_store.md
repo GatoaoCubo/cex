@@ -24,8 +24,8 @@ dependencies: []
 logging: true
 tldr: Configure a vector database backend's connection, index type, HNSW parameters, and namespace strategy from official sources into a complete vector_store artifact.
 density_score: 0.91
+llm_function: REASON
 ---
-
 ## Context
 The vector-store-builder produces `vector_store` artifacts (P01) — vector database storage configurations for RAG pipelines. Configs specify the backend type, connection details, collection naming, dimension contract, distance metric, index type and parameters, metadata filtering, and lifecycle operations. A vector_store is a storage config, not an embedder_provider (embedding model), not a model_provider (LLM routing), and not a retriever (query pipeline).
 **Inputs:**

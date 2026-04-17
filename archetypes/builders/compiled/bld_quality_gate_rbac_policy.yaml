@@ -1,0 +1,75 @@
+kind: quality_gate
+id: p09_qg_rbac_policy
+pillar: P11
+llm_function: GOVERN
+purpose: Quality gate with HARD and SOFT scoring for rbac_policy
+quality: null
+title: Quality Gate Rbac Policy
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- rbac_policy
+- builder
+- quality_gate
+tldr: Quality gate with HARD and SOFT scoring for rbac_policy
+domain: rbac_policy construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+definition: '| metric         | threshold | operator | scope      |
+
+  |----------------|-----------|----------|------------|
+
+  | Policy Count   | ≥1        | ≥         | per tenant |'
+hard_gates: '| ID  | Check                          | Fail Condition                                      |
+
+  |-----|--------------------------------|-----------------------------------------------------|
+
+  | H01 | YAML frontmatter valid         | Missing or invalid frontmatter                      |
+
+  | H02 | ID matches pattern             | ID does not match ^p09_rbac_[a-z][a-z0-9_]+.yaml$ |
+
+  | H03 | kind field matches ''rbac_policy'' | kind ≠ ''rbac_policy''                               |
+
+  | H04 | role field present             | role missing                                        |
+
+  | H05 | resource field present         | resource missing                                  |
+
+  | H06 | action field present           | action missing                                    |
+
+  | H07 | tenant isolation enforced      | tenant field missing or wildcard used             |
+
+  | H08 | no wildcard permissions        | action contains '''' or resource contains ''''      |'
+soft_scoring: '| Dim       | Dimension             | Weight | Scoring Guide                                      |
+
+  |-----------|-----------------------|--------|----------------------------------------------------|
+
+  | D01       | Completeness          | 0.20   | All required fields present (role, resource, action)|
+
+  | D02       | Isolation             | 0.20   | Tenant-specific isolation enforced                 |
+
+  | D03       | Specificity           | 0.15   | No wildcard permissions                            |
+
+  | D04       | Syntax                | 0.15   | Valid YAML and field formatting                    |
+
+  | D05       | Clarity               | 0.10   | Descriptive role/resource/action names             |
+
+  | D06       | Coverage              | 0.10   | Policies cover all critical operations             |
+
+  | D07       | Consistency           | 0.10   | Uniform naming and structure across policies       |'
+actions: '| Score   | Action       |
+
+  |---------|--------------|
+
+  | ≥9.5    | GOLDEN       |
+
+  | ≥8.0    | PUBLISH      |
+
+  | ≥7.0    | REVIEW       |
+
+  | <7.0    | REJECT       |'
+bypass: '| conditions                          | approver   | audit trail         |
+
+  |-------------------------------------|------------|---------------------|
+
+  | Critical tenant isolation override  | CTO        | documented in JIRA  |'

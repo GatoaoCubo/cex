@@ -1,0 +1,712 @@
+---
+id: atom_16_minimax_kimi_glm
+kind: knowledge_card
+pillar: P01
+title: "MiniMax M2/M2.7 + Kimi K2.5 + GLM-5.1 -- Chinese Agentic Tool-Calling Paradigms"
+version: 0.2.0
+quality: 8.8
+tags: [minimax, kimi, moonshot, zhipu, glm, tool-calling, interleaved-thinking, agent-swarm, all-tools, cispo, parl, chinese-ai, self-evolution, decentralized-agents]
+sources:
+  - https://www.minimax.io/news/why-is-interleaved-thinking-important-for-m2
+  - https://platform.minimax.io/docs/guides/text-m2-function-call
+  - https://www.minimax.io/news/post-training-experience-and-insights-for-agent-models
+  - https://github.com/MiniMax-AI/MiniMax-M2
+  - https://www.minimax.io/news/minimax-m25
+  - https://www.minimax.io/news/minimax-m27-en
+  - https://arxiv.org/pdf/2506.13585
+  - https://swift.readthedocs.io/en/latest/Instruction/GRPO/AdvancedResearch/CISPO.html
+  - https://github.com/MiniMax-AI/Mini-Agent
+  - https://github.com/MoonshotAI/Kimi-K2.5
+  - https://arxiv.org/html/2602.02276v1
+  - https://www.kimi.com/blog/kimi-k2-5
+  - https://medium.com/@kimi_moonshot/meet-ok-computer-the-agent-mode-in-kimi-2fb0dbf05ce0
+  - https://aiagentindex.mit.edu/2025/kimi-ok-computer/
+  - https://www.analyticsvidhya.com/blog/2026/04/glm-5-1/
+  - https://lushbinary.com/blog/glm-5-1-vectordbbench-6000-tool-calls-21k-qps/
+  - https://lushbinary.com/blog/glm-5-1-developer-guide-long-horizon-agentic-coding/
+  - https://www.emergentmind.com/topics/cispo-algorithm
+  - https://developer.nvidia.com/blog/minimax-m2-7-advances-scalable-agentic-workflows-on-nvidia-platforms-for-complex-ai-applications/
+  - https://www.marktechpost.com/2026/04/12/minimax-just-open-sourced-minimax-m2-7-a-self-evolving-agent-model-that-scores-56.22-on-swe-pro-and-57.0-on-terminal-bench-2/
+date: 2026-04-13
+---
+
+# MiniMax M2/M2.7 + Kimi K2.5 + GLM-5.1 -- Chinese Agentic Tool-Calling Paradigms
+
+Three Chinese AI labs have independently developed tool-calling paradigms that
+diverge significantly from the OpenAI/Anthropic/Google function-calling standard.
+Each introduces vocabulary, training methods, and architectural patterns with no
+direct Western equivalent. This atom catalogs those unique concepts.
+
+---
+
+## 1. Model Summary
+
+| Dimension | MiniMax M2/M2.5/M2.7 | Kimi K2.5 | GLM-5.1 (Z.ai) |
+|-----------|----------------------|-----------|-----------------|
+| Org | MiniMax (Beijing) | Moonshot AI (Beijing) | Z.ai / Zhipu AI (Beijing) |
+| Release | Oct 2025 (M2), Feb 2026 (M2.5), Apr 2026 (M2.7) | Jan 2026 | Apr 2026 |
+| Architecture | MoE 230B total, 10B active | MoE 1T total, 32B active | MoE 744B total, 40B active |
+| Context | 128K (M2), 1M (M2.5), 200K (M2.7) | 256K | 200K (202,752 tokens) |
+| Key innovation | Interleaved Thinking + CISPO + Self-Evolution | Agent Swarm + 300-step chains | All Tools + 6000+ tool calls |
+| SWE-Bench Verified | 69.4% (M2), 80.2% (M2.5) | 76.8% | 58.4% (SWE-Bench Pro) |
+| SWE-Pro | 56.22% (M2.7) | -- | 58.4% |
+| BrowseComp | 44.0% (M2), 76.3% (M2.5) | 78.4% (swarm) | 90.6% (GLM-4.5 web) |
+| Cost model | $1/hr at 100 tok/s (M2.5), open-weight (M2.7) | 76% cheaper than Opus 4.5 | Open-weight (self-host) |
+
+---
+
+## 2. MiniMax M2 -- Interleaved Thinking
+
+### 2.1 Core Concept: Interleaved Thinking
+
+Standard chain-of-thought (CoT) front-loads all reasoning before action. MiniMax
+M2 interleaves reasoning tokens between tool calls: **plan -> act -> reflect**,
+carrying accumulated state across turns.
+
+| Pattern | Standard CoT | Interleaved Thinking |
+|---------|-------------|---------------------|
+| Sequence | think...think...think -> act | think -> act -> think -> act -> think |
+| State | Discarded between turns | Preserved across all turns |
+| Failure mode | Must re-derive context each turn | Accumulated understanding compounds |
+| Wrapping | N/A | `<think>...</think>` tags in output |
+
+**Critical requirement**: The entire `response_message` including `reasoning_details`
+MUST be preserved in conversation history. Dropping thinking state causes:
+- State drift (cumulative understanding breaks down)
+- Self-correction weakens
+- Planning degrades
+
+NOTE: M2.7's reasoning is significantly impaired if the `<think>` tag is removed
+from the assistant's historical conversation turns -- even one missing tag causes
+quality regression in subsequent turns.
+
+Source: https://www.minimax.io/news/why-is-interleaved-thinking-important-for-m2
+
+**Benchmark impact of preserving thinking state:**
+
+| Benchmark | With state | Without state | Delta |
+|-----------|-----------|---------------|-------|
+| SWE-Bench Verified | 69.4% | 67.2% | +3.3% |
+| Tau-2 | 87 | 64 | +35.9% |
+| BrowseComp | 44.0% | 31.4% | +40.1% |
+| GAIA | 75.7% | 67.9% | +11.5% |
+| xBench | 72.0% | 66.0% | +9.1% |
+
+The BrowseComp +40% delta demonstrates interleaved thinking is disproportionately
+valuable for multi-step agentic tasks over single-turn reasoning.
+
+### 2.2 API Integration
+
+Three SDK formats for thinking content:
+
+| SDK | Format | How thinking appears |
+|-----|--------|---------------------|
+| Anthropic SDK | Content block `type: "thinking"` | Separate block in `response.content` list |
+| OpenAI SDK | `<think>` tags in content string | Inline, parse manually |
+| OpenAI SDK + split | `extra_body={"reasoning_split": True}` | Separate `reasoning_details` field |
+
+**Mini-Agent reference implementation**: MiniMax open-sourced a minimal demo
+(https://github.com/MiniMax-AI/Mini-Agent) using Anthropic-compatible API with
+full interleaved thinking support. Treats the agent loop as: parse response ->
+extract thinking blocks -> execute tool calls -> append full message (with thinking)
+-> repeat. This is the reference for production-grade interleaved thinking clients.
+
+### 2.3 CISPO Training Method
+
+**CISPO = Clipped IS-weight Policy Optimization**
+
+Proposed in MiniMax-M1 paper (arXiv:2506.13585). Full RL training run: 512 H800
+GPUs, 3 weeks, total compute cost $534,700. Replacing PPO/GRPO for training
+agentic models on long-horizon tool call chains.
+
+| Dimension | PPO/GRPO | CISPO |
+|-----------|----------|-------|
+| What gets clipped | Individual token probabilities | Importance sampling weights (whole-sequence) |
+| Gradient coverage | Low-probability tokens get zero gradient | ALL tokens contribute to gradients |
+| Stability | Unstable on long structured output | Stable on code generation + tool chains |
+| Speed | Baseline | 2x faster than DAPO |
+| Quality | Baseline | Matches DAPO at 50% training steps |
+| Trust region | Hard PPO trust region constraint | Abandoned; IS-weight clipping provides stability |
+
+**Loss function (formal):**
+
+```
+L_CISPO(theta) = -E[ detach(min(r_t(theta), epsilon_high)) * A_t * log pi_theta(a_t|s_t) ]
+
+where:
+  r_t(theta) = pi_theta(a_t|s_t) / pi_theta_old(a_t|s_t)   # IS ratio
+  epsilon_high = upper clip bound (hyperparameter, typically 2.0-3.0)
+  A_t = advantage estimate (GRPO-style group relative)
+```
+
+**PyTorch pseudo-code (from Swift docs):**
+```python
+log_ratio = per_token_logps - old_per_token_logps
+importance_weights = torch.exp(log_ratio)
+# .detach() critical: clamped weights are CONSTANTS, NOT gradient nodes
+clamped_ratios = torch.clamp(importance_weights, max=epsilon_high).detach()
+per_token_loss = -clamped_ratios * advantages.unsqueeze(1) * per_token_logps
+```
+
+The `.detach()` call is the mechanistic key: clamped IS weights serve as
+constant coefficients only. Gradients flow exclusively through the `log pi_theta`
+term, so ALL tokens contribute gradients -- including rare tokens critical for
+multi-step agentic reasoning chains. This prevents the gradient masking that
+causes GRPO to underperform on long structured outputs (tool-call chains, code
+generation).
+
+Sources: https://swift.readthedocs.io/en/latest/Instruction/GRPO/AdvancedResearch/CISPO.html |
+https://arxiv.org/pdf/2506.13585
+
+CISPO is critical for MoE training stability. MiniMax continued using CISPO through
+M2.1 and M2.5 releases.
+
+**M2.1 enhancements**: Added multiple importance sampling (MIS) and PPO-based
+trajectory filtering to handle external environment noise from tool call results.
+This filters anomalous long-tail statistics caused by unpredictable tool outputs.
+
+**FP32 precision fix**: A non-obvious discovery -- the prediction layer (LLM head)
+must run at FP32 precision. Lower precision causes training-inference inconsistency,
+preventing sustained reward gains during RL.
+
+### 2.4 WebExplorer Framework
+
+A two-phase synthetic data pipeline for training web agents:
+
+| Phase | What happens | Output |
+|-------|-------------|--------|
+| Exploration | Agents freely browse the web, constructing information-rich seed questions | Seed question bank |
+| Evolution | Iterative complexity increases via removal, obfuscation, substitution | Complex queries (7.9 -> 9.9 avg reasoning turns) |
+
+WebExplorer is combined with a Playwright-based browser tool suite for evaluation.
+Used for BrowseComp and GAIA benchmarks. The same framework is used in M2.5 with
+context management improvements achieving 76.3% BrowseComp.
+
+### 2.5 Post-Training Data Categories
+
+| Category | Method | Source |
+|----------|--------|--------|
+| SWE Scaling | Real-data-driven | GitHub PRs -> Docker environments -> verifiable tasks |
+| AppDev | Expert-driven | Full-stack dev with expert-in-the-loop rubric rewards |
+| WebExplorer | Synthetic | Long-horizon web search with evolved complexity |
+
+### 2.6 Unique Vocabulary
+
+| Term | Definition | Western equivalent |
+|------|-----------|-------------------|
+| **Interleaved Thinking** | CoT woven between tool calls, state preserved | No direct equivalent (closest: ReAct, but ReAct discards state) |
+| **CISPO** | RL algorithm clipping IS-weights not tokens | Alternative to PPO/GRPO (no Western adoption yet) |
+| **State drift** | Degradation from dropping prior reasoning context | Context window fragmentation |
+| **Reasoning snapshots** | Explainable checkpoints within problem-solving | N/A |
+| **WebExplorer** | Synthetic web-agent training data pipeline | No direct equivalent |
+| **Forge** | MiniMax internal RL framework for arbitrary agent scaffolds | N/A (proprietary) |
+| **Agent-as-a-Verifier** | Using agent execution for dynamic verification vs static LLM judge | N/A |
+| **Multi-scaffold training** | Training across different context management patterns | N/A |
+| **Office Skills** | Standardized tool modules for Word/PPT/Excel loaded by file type | N/A |
+| **Agent Teams** | Native multi-agent collaboration with decentralized coordination | Closest: AutoGen teams, but M2.7 is RL-native not scaffolded |
+
+---
+
+## 3. Kimi K2.5 -- Long-Chain Tool Calling + Agent Swarm
+
+### 3.1 Core Concept: 300-Step Tool Chains
+
+Most Western models degrade after 30-50 sequential tool calls. Kimi K2.5
+maintains stable execution across 200-300 sequential tool calls without drift.
+
+The model executes dynamic cycles:
+```
+think -> search -> browser -> think -> code -> think -> verify -> ...
+```
+
+Each cycle generates and refines hypotheses, verifies evidence, and constructs
+coherent answers. This interleaved reasoning decomposes ambiguous, open-ended
+problems into clear, actionable subtasks across hundreds of steps.
+
+Source: https://arxiv.org/html/2602.02276v1
+
+### 3.2 Agent Swarm Architecture
+
+| Component | Specification |
+|-----------|--------------|
+| Max sub-agents | 100 dynamically instantiated |
+| Orchestrator steps | 15 max |
+| Sub-agent steps | 100 max each |
+| Parallelization gain | 4.5x execution time reduction |
+| Runtime reduction | 80% end-to-end runtime reduction (internal eval) |
+| BrowseComp lift | 60.6% -> 78.4% (+29% from parallelization alone) |
+| Critical path reduction | 3x-4.5x fewer minimum steps vs single-agent |
+
+The orchestrator dynamically spawns specialized sub-agents (e.g., AI Researcher,
+Physics Researcher, Fact Checker) based on task requirements -- NOT predefined types.
+Sub-agents are frozen (not updated during training); only the orchestrator is trainable.
+This is self-directed, coordinated swarm-like execution.
+
+Source: https://www.kimi.com/blog/kimi-k2-5
+
+### 3.3 PARL Training Technique
+
+**PARL = Parallel-Agent Reinforcement Learning**
+
+A novel RL method for training concurrent multi-agent orchestration.
+Architecture: trainable orchestrator agent + frozen sub-agents (independent,
+parallel execution of assigned subtasks).
+
+| Training phase | Reward type | Signal | Purpose |
+|---------------|------------|--------|---------|
+| Early | reward_parallel | Incentivize sub-agent instantiation | Prevent serial collapse |
+| Late | finish reward (80%) + critical_steps metric (20%) | Task completion quality | Prevent spurious parallelism |
+
+**Two failure modes PARL explicitly defends against:**
+
+1. **Serial collapse**: Orchestrator defaults to single-agent execution despite
+   parallel capacity -- a local optimum that avoids coordination complexity.
+   `reward_parallel` incentivizes exploration of concurrent scheduling.
+
+2. **Spurious parallelism**: Orchestrator spawns many sub-agents without
+   meaningful task decomposition, gaming parallel metrics without improving outcomes.
+   `finish reward` ensures sub-agents complete substantive work.
+
+**Critical steps metric**: Measures the slowest sub-agent per stage (critical path
+from project management). The metric prevents the swarm from splitting tasks
+arbitrarily without actual performance benefit. Training progress is measured by:
+- Increasing cumulative reward over time
+- Increasing level of parallelism during training
+- Decreasing critical steps per task
+
+Source: https://arxiv.org/html/2602.02276v1
+
+### 3.4 OK Computer -- Native Virtual Computer Agent Mode
+
+Launched September 2025 (gray testing). Transforms Kimi from chatbot into
+autonomous agent with its own virtual computer.
+
+| Capability | Detail |
+|-----------|--------|
+| Tools | 20+ integrated: file system, browser, terminal, code interpreter, image gen, audio gen |
+| Model | Powered by K2 Turbo |
+| Training | End-to-end RL (native agent, not prompt-engineered scaffold) |
+| Execution | Dozens of reasoning cycles + tool calls per task |
+| Task decomposition | Parses prompt -> to-do list -> subtasks -> sequential virtual env execution |
+| Deliverables | Websites, web apps, presentations, data visualizations |
+| Pricing | Free (up to 3 requests, grayscale rollout) |
+
+**Native training vs scaffold distinction:**
+
+| Dimension | OK Computer (Kimi) | LangChain/CrewAI agents |
+|-----------|-------------------|------------------------|
+| Architecture | Model IS the agent (RL-trained) | Prompt scaffold around base model |
+| Tool use learning | Emergent from RL training on tools | Prompted via system message |
+| Multi-step planning | Intrinsic capability | Prompt chain management |
+| Tool error recovery | Trained recovery behavior | Scripted retry logic |
+| Generalization | Novel tool combinations from training | Limited to scaffold design |
+
+Sources: https://medium.com/@kimi_moonshot/meet-ok-computer-the-agent-mode-in-kimi-2fb0dbf05ce0 |
+https://aiagentindex.mit.edu/2025/kimi-ok-computer/
+
+### 3.5 Four Operating Modes
+
+| Mode | Behavior | Tool budget |
+|------|----------|-------------|
+| Instant | Fast response, no reasoning | Minimal |
+| Thinking | Extended CoT, temp=0.6 | Moderate |
+| Agent | Single-agent with tool access | 200-300 steps |
+| Agent Swarm | Multi-agent parallel execution | 100 agents x 100 steps |
+
+### 3.6 Unique Vocabulary
+
+| Term | Definition | Western equivalent |
+|------|-----------|-------------------|
+| **Agent Swarm** | Dynamic multi-agent parallel decomposition | Closest: AutoGen/CrewAI, but those are scaffolds not native |
+| **PARL** | Parallel-Agent Reinforcement Learning | No equivalent (multi-agent RL for orchestration) |
+| **OK Computer** | Virtual computer agent mode with native tool access | Closest: Claude computer use, but OK Computer is RL-trained |
+| **Serial collapse** | Failure mode where swarm degenerates into sequential execution | N/A |
+| **Spurious parallelism** | Reward-hacking: spawning many agents without real task decomposition | N/A |
+| **Critical steps metric** | Slowest sub-agent per stage (critical path) | Critical path analysis (borrowed from PM) |
+| **Native agent** | Model trained end-to-end as agent, not scaffolded | N/A (Western agents are scaffolded) |
+| **Kimi Code** | Open-source coding CLI tool | Equivalent: Claude Code, Gemini CLI |
+| **WideSearch** | Deep search mode, 100 steps for both main and sub-agents | Deep Research (Google/OpenAI) |
+| **reward_parallel** | Training signal incentivizing sub-agent instantiation | N/A |
+| **finish reward** | Training signal for substantive task completion quality | N/A |
+
+---
+
+## 4. GLM-5.1 (Z.ai / Zhipu) -- All Tools Paradigm
+
+### 4.1 Core Concept: All Tools
+
+Introduced in GLM-4 (2024), matured through GLM-4.5/4.6/5.1. The model
+autonomously decides which tools to deploy and when, without explicit
+function-calling instructions.
+
+| Dimension | Standard function calling (OpenAI) | All Tools (GLM) |
+|-----------|------------------------------------|-----------------|
+| Tool selection | User provides tool list, model picks | Model autonomously determines need |
+| Invocation trigger | Explicit `function_call` parameter | Thinking mode decides during generation |
+| Tool tokens | Standard output tokens | Special `[tool_call]` tokens in architecture |
+| Execution model | Sequential call-response | Iterative: call -> feedback -> refine -> call |
+| Prior best tool budget | 50-turn cap (previous models) | 600+ iterations, 6,000+ calls |
+
+The model doesn't need to be told WHEN to call a tool. It figures that out as
+part of its token generation process (thinking mode).
+
+Source: https://milvus.io/ai-quick-reference/does-glm5-support-function-calling-or-tool-use
+
+### 4.2 Architecture: GLM-5.1
+
+| Component | Specification |
+|-----------|--------------|
+| Total parameters | 744B |
+| Active per token | 40B (top-8 routing + 1 shared expert) |
+| Expert count | 256 |
+| Layers | 78 (3 dense + 75 sparse MoE) |
+| Hidden size | 6144 |
+| Attention heads | 96 |
+| Attention type | Multi-head Latent Attention + DeepSeek Sparse Attention |
+| Context | 200K (202,752 tokens) |
+| Training data | 15T general text + 7-8T code/QA tokens |
+| Inference optimization | Speculative Decoding via Multi-Token Prediction (MTP) |
+
+### 4.3 Thinking Mode (Autonomous Tool Selection)
+
+When `"thinking": {"type": "enabled"}` is set:
+1. Model plans the solving process step by step
+2. Autonomously determines if tools are needed
+3. Outputs structured JSON for each tool call
+4. Integrates external tool results into reasoning
+5. Revises strategy based on tool feedback
+6. Synthesizes final answer
+
+This is distinct from Western "tool use" where the developer explicitly enables
+and describes tools. GLM's thinking mode makes tool selection an emergent property
+of the reasoning process.
+
+### 4.4 Long-Horizon Agentic Performance: VectorDBBench Case Study
+
+GLM-5.1 pushes sustained tool use far beyond typical Western limits:
+
+| Metric | Value | Context |
+|--------|-------|---------|
+| VectorDBBench iterations | 600+ | Previous models capped at 50 turns |
+| Tool functions executed | 6,000+ | More than any published Western result |
+| Previous best QPS (50-turn cap) | 3,547 QPS | Hard ceiling from tool budget |
+| GLM-5.1 final QPS | 21,500 QPS | 6x improvement over previous best |
+| KernelBench ML gain | 3.6x (vs GLM-5's 2.6x) | 38% improvement over prior generation |
+| Linux desktop build | 8 hours autonomous | Plan -> test -> debug full cycle |
+
+**VectorDBBench task setup** (source: https://lushbinary.com/blog/glm-5-1-vectordbbench-6000-tool-calls-21k-qps/):
+
+- Input: Rust skeleton with HTTP API endpoints + empty implementation stubs
+- Tools: read/write files, compile, test, profile (tool-call-based agents)
+- Dataset: SIFT-1M (1 million 128-dimensional vectors)
+- Constraint: Recall >= 95%
+- Objective: Maximize queries per second (QPS)
+
+**6-Stage Optimization Staircase** -- each transition initiated by the model after
+analyzing its own benchmark logs:
+
+| Stage | Strategy | QPS |
+|-------|----------|-----|
+| Baseline | Empty stubs | ~1,000 |
+| 1 | IVF cluster probing with f16 compression | 6,400 |
+| 2 | Nested parallelism removal | 10,400 |
+| 3 | Two-stage u8/f16 pipeline | 13,400 |
+| 4 | Budget trimming | 15,500 |
+| 5 | Hierarchical routing | 18,400 |
+| 6 | Quantized routing with early pruning | 21,500 |
+
+Each transition is a structural architectural change -- not parameter tuning.
+The model analyzes benchmark output logs, identifies the binding constraint,
+and redesigns the relevant component. This is "sustained engineering iteration"
+not "parameter search."
+
+Source: https://lushbinary.com/blog/glm-5-1-vectordbbench-6000-tool-calls-21k-qps/
+
+### 4.5 "Boring Magic" -- Reliability Philosophy
+
+GLM's unique engineering philosophy for tool calling:
+- Correct JSON keys every time
+- Proper argument types, no hallucinated params
+- Well-formed outputs, refuses unknown tools
+- Zero hallucination target in tool calls
+
+This contrasts with Western models that prioritize capability breadth over
+call-by-call reliability. Reliability is the prerequisite for 6,000-call sessions --
+one malformed call in a long chain causes cascade failure.
+
+### 4.6 Training Lineage
+
+| Method | What it does |
+|--------|-------------|
+| AgentTuning | Custom instruction-tuning with high-quality agent-environment interaction trajectories |
+| LongAlign | Proprietary long-context alignment recipe (128K-1M) |
+| SFT | From authentic human prompts + interactions |
+| RLHF | Addresses response rejection, safety, bilingual coherence, multi-turn stability |
+
+**AgentTuning** is unique: it uses structured trajectory data from real agent
+interactions with environments, not just conversation pairs. This trains the model
+on the full cycle of plan -> tool call -> observe result -> adapt.
+
+### 4.7 GLMs Platform (Custom Agents)
+
+Z.ai's equivalent of GPT Builder, but with deeper functional integration:
+- Users create custom agents with embedded or external tools
+- Tools are first-class citizens, not add-ons
+- The "All Tools" paradigm extends to user-created agents
+
+### 4.8 Unique Vocabulary
+
+| Term | Definition | Western equivalent |
+|------|-----------|-------------------|
+| **All Tools** | Model autonomously decides tool use during generation | No equivalent (Western models need explicit tool lists) |
+| **Thinking Mode** | Dual-operation state: CoT reasoning + autonomous tool selection | Closest: extended thinking, but without autonomous tool trigger |
+| **[tool_call] tokens** | Special tokens in architecture for tight tool coupling | Function calling tokens (but architectural, not prompt-level) |
+| **Boring Magic** | Reliability-first philosophy for tool calling | N/A (Western focus is capability, not reliability) |
+| **Agent Brain** | Model as autonomous orchestrator of external services | N/A |
+| **AgentTuning** | SFT on agent-environment interaction trajectories | No equivalent (RLHF focuses on conversations, not tool trajectories) |
+| **LongAlign** | Proprietary long-context alignment recipe | RoPE scaling / YaRN (but LongAlign is alignment, not positional encoding) |
+| **GLMs** | Custom agent creation platform with deep tool integration | GPT Builder / Gems (but deeper tool integration) |
+| **Speculative Decoding / MTP** | Multi-token prediction head for parallel token generation | N/A (architectural) |
+| **Staircase optimization** | Sequential structural redesign across 600+ iterations | N/A |
+
+---
+
+## 5. MiniMax M2.7 -- Self-Evolution + Decentralized Agent Teams
+
+Released April 12, 2026. Open-sourced. MoE 230B total, 10B active, 200K context.
+
+Source: https://www.minimax.io/news/minimax-m27-en |
+https://www.marktechpost.com/2026/04/12/minimax-just-open-sourced-minimax-m2-7-a-self-evolving-agent-model-that-scores-56.22-on-swe-pro-and-57.0-on-terminal-bench-2/
+
+### 5.1 Self-Evolution Architecture
+
+M2.7 can autonomously improve its own agent scaffolds via a self-directed loop:
+
+```
+analyze failure trajectories
+  -> plan changes
+  -> modify scaffold code
+  -> run evaluations
+  -> compare results
+  -> decide: keep or revert
+  -> repeat (100+ rounds)
+```
+
+**Outcome of self-evolution run on agent evaluation harness**:
+- 30% performance improvement on internal evaluation sets
+- Discoveries: optimal sampling parameter combinations, specific workflow guidelines,
+  loop detection optimizations
+- Process was fully autonomous (no human intervention during the loop)
+
+**Production deployment**: Within MiniMax's own RL engineering team, M2.7 handles
+30%-50% of the end-to-end research workflow autonomously (data pipelines, training
+environments, infrastructure, cross-team collaboration, persistent memory).
+
+Source: https://developer.nvidia.com/blog/minimax-m2-7-advances-scalable-agentic-workflows-on-nvidia-platforms-for-complex-ai-applications/
+
+### 5.2 Decentralized Agent Teams
+
+M2.7 core capability: reliable management of decentralized Agent Teams.
+
+| Metric | Value |
+|--------|-------|
+| Instructional compliance reliability | 97% |
+| Skills executed simultaneously | 40+ (each >2,000 tokens) |
+| GDPval-AA ELO | 1495 (highest among open-source models) |
+| Dynamic tool search | Autonomous discovery of relevant tools at runtime |
+
+**Agent Teams vs Western orchestration:**
+
+| Dimension | M2.7 Agent Teams | CrewAI/AutoGen/LangGraph |
+|-----------|-----------------|--------------------------|
+| Coordination | Decentralized (agents self-coordinate) | Centralized orchestrator |
+| Skill length | 2,000+ token skills simultaneously | Short tool descriptions |
+| Reliability at scale | 97% at 40 concurrent skills | Degrades with scale |
+| Tool discovery | Dynamic at runtime | Pre-registered at init |
+| Learning from runs | Persistent memory across sessions | Per-session only |
+
+### 5.3 Benchmark Performance (M2.7)
+
+| Benchmark | M2.7 | Context |
+|-----------|------|---------|
+| SWE-Pro | 56.22% | Near Opus 4.6 level |
+| Terminal Bench 2 | 57.0% | Complex engineering systems |
+| VIBE-Pro | 55.6% | End-to-end full project delivery |
+| GDPval-AA ELO | 1495 | Highest open-source (NVIDIA eval) |
+
+### 5.4 Unique M2.7 Vocabulary
+
+| Term | Definition | Western equivalent |
+|------|-----------|-------------------|
+| **Self-evolution** | Model autonomously modifies and improves its own agent scaffolds | N/A (closest: AutoML, but for agent code not hyperparams) |
+| **Decentralized Agent Teams** | Agents self-coordinate without central orchestrator | Centralized orchestration only in Western frameworks |
+| **Dynamic tool search** | Model discovers relevant tools at runtime, not pre-registered | N/A |
+| **Failure trajectory analysis** | Model analyzes its own past failures to plan improvements | N/A (requires self-modification capability) |
+
+---
+
+## 6. Cross-Framework Comparison: What's NOT in Western Models
+
+### 6.1 Concepts With No Western Equivalent
+
+| Concept | Origin | Why it matters |
+|---------|--------|---------------|
+| **Interleaved Thinking** | MiniMax M2 | State preservation across tool calls. Western ReAct discards reasoning between steps. |
+| **CISPO** | MiniMax | RL that clips IS-weights not tokens. Enables stable MoE training for agentic models. |
+| **Agent Swarm (native)** | Kimi K2.5 | RL-trained multi-agent orchestration. Western swarms are scaffolded (CrewAI, AutoGen). |
+| **PARL** | Kimi K2.5 | RL specifically for training parallel agent coordination. No Western research equivalent. |
+| **OK Computer** | Kimi | Model-as-agent with virtual computer. Western agents are scaffolds around models. |
+| **All Tools** | GLM-4/5.1 | Autonomous tool selection during generation. Western models require explicit tool lists. |
+| **[tool_call] tokens** | GLM-4.6 | Architectural-level tool integration. Western tool calling is prompt-level. |
+| **AgentTuning** | GLM-4 | SFT on agent-environment trajectories. Western RLHF trains on conversations. |
+| **300-step chains** | Kimi K2 | Stable execution across 200-300 tool calls. Western models degrade after 30-50. |
+| **6000+ tool calls** | GLM-5.1 | Sustained improvement across thousands of iterations. No Western equivalent tested. |
+| **Self-evolution** | MiniMax M2.7 | Model modifies its own scaffolds autonomously. No Western equivalent. |
+| **Decentralized Agent Teams** | MiniMax M2.7 | 40+ concurrent 2K-token skills at 97% reliability. No Western equivalent at this scale. |
+
+### 6.2 Thinking Mode Integration Spectrum
+
+| Model | Thinking integration | Tool trigger |
+|-------|---------------------|-------------|
+| OpenAI o3 | Think first, act after | Explicit function_call parameter |
+| Anthropic Claude | Extended thinking block, then response | Tool use blocks in response |
+| Google Gemini | Think then act | Function declarations in config |
+| MiniMax M2 | **Interleaved** (think-act-think-act) | Standard function calling |
+| MiniMax M2.7 | **Interleaved** + self-modifying scaffold | Standard function calling |
+| Kimi K2.5 | **Interleaved** (think-search-think-code) | Native agent training |
+| GLM-5.1 | **Autonomous** (thinking mode decides) | `[tool_call]` tokens emerge from generation |
+
+### 6.3 Training Method Comparison
+
+| Method | Model | What's different |
+|--------|-------|-----------------|
+| RLHF/DPO | Western standard | Trains on conversation preference pairs |
+| CISPO | MiniMax | Clips IS-weights, not tokens. 2x faster. $534K for full run. |
+| PARL | Kimi | Multi-agent parallel RL. Prevents serial collapse AND spurious parallelism. |
+| AgentTuning | GLM | SFT on agent-environment trajectories, not conversations |
+| WebExplorer | MiniMax | Synthetic complexity evolution for web search training |
+| Self-evolution loop | MiniMax M2.7 | Model improves its own training scaffolds |
+
+### 6.4 Scale of Tool Use
+
+| Model | Max sequential calls | Max parallel agents | Sustained iterations | Reliability |
+|-------|---------------------|--------------------|--------------------|-------------|
+| Claude (Anthropic) | ~20-50 (practical limit) | 1 (MCP-based) | Limited | High (per-call) |
+| GPT-4 (OpenAI) | ~20-30 (practical limit) | 1 (parallel function calls) | Limited | High (per-call) |
+| MiniMax M2.5 | 100 (WebExplorer scaffold) | 1 | Hundreds | High |
+| MiniMax M2.7 | 100+ | 40+ concurrent skills | Self-improving | 97% at scale |
+| Kimi K2.5 | 200-300 | 100 (Agent Swarm) | 1,500 total via swarm | High |
+| GLM-5.1 | 1,000+ | 1 (autonomous) | 6,000+ tool functions | "Boring Magic" (reliability-first) |
+
+---
+
+## 7. Implications for CEX Architecture
+
+### 7.1 Interleaved Thinking (MiniMax)
+
+CEX's 8F pipeline runs F1-F8 sequentially. Interleaved thinking suggests a
+revision where reasoning (F4) re-enters after each tool call (F5), not just once.
+Pattern: F1 -> F2 -> F3 -> F4 -> F5 -> **F4b** -> F5b -> **F4c** -> F6 -> F7 -> F8.
+
+### 7.2 Agent Swarm (Kimi)
+
+CEX's grid dispatch is a static wave model. Kimi's Agent Swarm uses dynamic
+instantiation based on task analysis. Potential: N07 could dynamically create
+sub-agent types per task rather than routing to fixed N01-N06 nuclei.
+
+### 7.3 All Tools (GLM)
+
+CEX requires explicit tool specification in handoffs. GLM's All Tools approach
+suggests nuclei could autonomously discover and invoke tools based on task context,
+reducing handoff verbosity.
+
+### 7.4 300-Step Chains + 6000-Call Sessions (Kimi + GLM)
+
+Current CEX dispatches are shallow (3-10 tool calls typical). Kimi demonstrates
+stable 200-300 step execution. GLM demonstrates 6,000+ call sessions with staircase
+optimization. Both validate the dispatch-depth rule's push for deeper nucleus utilization.
+
+### 7.5 CISPO for Local Models
+
+If CEX ever fine-tunes local models (Ollama), CISPO's 2x training speed advantage
+over DAPO makes it the preferred RL algorithm for agentic fine-tuning.
+Cost reference: $534,700 at 512 H800s for 3 weeks.
+
+### 7.6 Self-Evolution Loop (M2.7)
+
+CEX's /evolve command is the architectural analog. M2.7 demonstrates that
+self-evolution loops with 100+ rounds produce 30% quality improvement.
+This validates deeper autonomous cycling (CEX currently runs ~5-10 cycles).
+
+---
+
+## 8. Key Benchmarks (Side-by-Side)
+
+| Benchmark | MiniMax M2.5 | MiniMax M2.7 | Kimi K2.5 | GLM-5.1 | Claude Opus 4.6 |
+|-----------|-------------|-------------|-----------|---------|----------------|
+| SWE-Bench Verified | 80.2% | -- | 76.8% | -- | -- |
+| SWE-Bench Pro | -- | 56.22% | -- | 58.4% | 57.3% |
+| Terminal Bench 2 | -- | 57.0% | -- | -- | -- |
+| VIBE-Pro | -- | 55.6% | -- | -- | -- |
+| AIME 2025 | -- | -- | 96.1% | 95.3% | -- |
+| GPQA Diamond | -- | -- | 87.6% | 86.2% | -- |
+| BrowseComp | 76.3% | -- | 78.4% (swarm) | 90.6% (GLM-4.5) | -- |
+| GDPval-AA ELO | -- | 1495 (open-source #1) | -- | -- | -- |
+| KernelBench | -- | -- | -- | 3.6x gain | -- |
+| Tau-2 | 87 | -- | -- | -- | -- |
+| VectorDBBench QPS | -- | -- | -- | 21,500 (6x) | -- |
+
+---
+
+## 9. Complete Vocabulary Registry
+
+### 9.1 MiniMax Vocabulary
+
+| Term | Category | Definition |
+|------|----------|-----------|
+| Interleaved Thinking | Reasoning | CoT tokens woven between tool calls with state preservation |
+| CISPO | Training | Clipped IS-weight Policy Optimization -- RL clipping IS-weights not tokens |
+| State drift | Failure mode | Degradation from dropping prior reasoning context between turns |
+| Reasoning snapshots | Observability | Explainable checkpoints within multi-step problem-solving |
+| WebExplorer | Data pipeline | Synthetic web-search training via exploration + complexity evolution |
+| Forge | Infrastructure | Internal RL framework supporting arbitrary agent scaffolds |
+| Agent-as-a-Verifier | Evaluation | Dynamic verification via agent execution vs static LLM judgment |
+| Multi-scaffold training | Training | Training across different context management and execution patterns |
+| Office Skills | Product | Standardized tool modules for office formats, loaded by file type |
+| MIS | Training | Multiple Importance Sampling for handling tool-call noise |
+| reasoning_split | API | Parameter to separate thinking into dedicated field vs inline tags |
+| Self-evolution | Architecture | Model autonomously modifies and improves its own agent scaffolds (M2.7) |
+| Agent Teams | Architecture | Decentralized multi-agent collaboration with dynamic tool search (M2.7) |
+| Failure trajectory analysis | Training | Model analyzing its own past failures to plan scaffold improvements (M2.7) |
+
+### 9.2 Kimi Vocabulary
+
+| Term | Category | Definition |
+|------|----------|-----------|
+| Agent Swarm | Architecture | Dynamic multi-agent parallel decomposition with up to 100 sub-agents |
+| PARL | Training | Parallel-Agent Reinforcement Learning for concurrent orchestration |
+| OK Computer | Product | Virtual computer agent mode with 20+ native tools |
+| Serial collapse | Failure mode | Swarm degenerating into sequential single-agent execution |
+| Spurious parallelism | Failure mode | Reward-hacking: spawning agents without real task decomposition |
+| Critical steps metric | Evaluation | Slowest sub-agent per stage, borrowed from critical path analysis |
+| reward_parallel | Training | Signal incentivizing sub-agent instantiation to prevent serial collapse |
+| finish reward | Training | Signal for substantive completion quality to prevent spurious parallelism |
+| Native agent | Architecture | Model trained end-to-end as agent (not scaffolded around base model) |
+| WideSearch | Feature | Deep search mode allowing 100 steps for main + sub-agents |
+| Kimi Code | Product | Open-source coding CLI (equivalent to Claude Code) |
+| Vision-grounded coding | Capability | Generating code from UI designs and video workflows |
+
+### 9.3 GLM / Z.ai Vocabulary
+
+| Term | Category | Definition |
+|------|----------|-----------|
+| All Tools | Paradigm | Model autonomously decides tool use during generation without explicit lists |
+| Thinking Mode | Architecture | Dual-operation state enabling CoT + autonomous tool selection |
+| [tool_call] tokens | Architecture | Special tokens for architectural-level tool coupling |
+| Boring Magic | Philosophy | Reliability-first approach: correct JSON, proper types, zero hallucination |
+| Agent Brain | Architecture | Model as autonomous orchestrator of external services |
+| AgentTuning | Training | SFT on structured agent-environment interaction trajectories |
+| LongAlign | Training | Proprietary long-context alignment recipe for 128K-1M tokens |
+| GLMs | Product | Custom agent creation platform with deep tool integration |
+| Speculative Decoding / MTP | Inference | Multi-token prediction head for parallel token generation |
+| Staircase optimization | Behavior | Sequential structural redesign across 600+ iterations (VectorDBBench) |

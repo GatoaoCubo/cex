@@ -39,7 +39,7 @@ triggers: "create action prompt for task", "build task prompt with defined I/O",
 ## Crew Role
 In a crew, I handle TASK PROMPT DEFINITION.
 I answer: "what prompt should be injected to make the agent execute this specific task?"
-I do NOT handle: agent identity (system_prompt), step-by-step recipes (instruction), reusable templates with {{vars}} (prompt_template).
+I do NOT handle: agent identity (system_prompt), step-by-step recipes (instruction), reusable templates with `{{vars}}` (prompt_template).
 
 ## Metadata
 

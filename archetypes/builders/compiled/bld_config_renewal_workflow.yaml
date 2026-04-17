@@ -1,0 +1,50 @@
+kind: config
+id: bld_config_renewal_workflow
+pillar: P09
+llm_function: CONSTRAIN
+purpose: Naming, paths, limits for renewal_workflow production
+quality: null
+title: Config Renewal Workflow
+version: 1.0.0
+author: wave6_n06
+tags:
+- renewal_workflow
+- builder
+- config
+- renewal
+- GRR
+- Gainsight
+tldr: Naming, paths, limits for renewal_workflow production
+domain: renewal_workflow construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+naming_convention: 'Pattern: `p12_rw_{{name}}.yaml` Examples: `p12_rw_acme_corp_2026.yaml`, `p12_rw_globex_enterprise_q2.yaml`
+  Name segment: lowercase, snake_case, include account abbreviation + year or quarter'
+paths: 'Artifacts stored in: `N06_commercial/renewal_workflows/{{segment}}/{{name}}.yaml` Segment subdirs: `strategic/` (>$100K
+  ARR), `growth/` ($25-100K), `velocity/` (<$25K)'
+limits: 'max_bytes: 5120 max_turns: 7 effort_level: 4'
+hooks: 'pre_build: load Gainsight health score + contract end date from Salesforce post_build: create Gainsight CTA "Renewal
+  Stage Open" + update Salesforce Opportunity Stage on_error: flag to RevOps and CSM Manager for manual review on_quality_fail:
+  return to CSM for stage owner assignment and escalation threshold definition'
+runtime_parameters: '| Parameter              | Value    | Notes                                      |
+
+  |------------------------|----------|--------------------------------------------|
+
+  | stage_90_trigger_days  | 90       | Days before renewal to fire 90-day CTA     |
+
+  | stage_60_trigger_days  | 60       | Days before renewal to fire 60-day CTA     |
+
+  | stage_30_trigger_days  | 30       | Days before renewal to fire 30-day CTA     |
+
+  | escalation_threshold_1 | 75       | Health score threshold for CSM escalation  |
+
+  | escalation_threshold_2 | 60       | Health score threshold for Manager escalation|
+
+  | escalation_threshold_3 | 40       | Health score threshold for VP/CRO escalation|
+
+  | multi_year_min_tenure  | 24       | Months of tenure to qualify for multi-year |
+
+  | multi_year_min_health  | 75       | Health score floor for multi-year offer    |
+
+  | price_increase_max_pct | 10       | Max % increase without CFO approval        |'

@@ -1,0 +1,1972 @@
+id: atom_24_nist_vocabulary
+kind: knowledge_card
+pillar: P01
+title: NIST AI Vocabulary -- Complete Term Registry and Pillar Mapping
+version: 0.3.0
+quality: null
+tags:
+- nist
+- ai-rmf
+- trustworthy-ai
+- vocabulary
+- glossary
+- governance
+- fairness
+- risk-management
+- ai-100-3
+- ai-600-1
+- iso-42001
+- eu-ai-act
+- playbook
+- cross-framework
+sources:
+- https://airc.nist.gov/glossary/
+- https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-3.pdf
+- https://nvlpubs.nist.gov/nistpubs/ai/nist.ai.100-1.pdf
+- https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf
+- https://airc.nist.gov/AI_RMF_Knowledge_Base/Glossary
+- https://www.nist.gov/publications/language-trustworthy-ai-depth-glossary-terms
+- https://airc.nist.gov/airmf-resources/airmf/3-sec-characteristics/
+- https://airc.nist.gov/airmf-resources/playbook/
+- https://www.iso.org/standard/81230.html
+- https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng
+- https://artificialintelligenceact.eu/article/3/
+- https://www.standardfusion.com/blog/key-differences-between-iso-42001-and-nist-ai-rmf
+- https://airc.nist.gov/docs/NIST_AI_RMF_to_ISO_IEC_42001_Crosswalk.pdf
+- https://digital-strategy.ec.europa.eu/en/library/eu-us-terminology-and-taxonomy-artificial-intelligence
+- https://incidentdatabase.ai/
+date: 2026-04-13
+updated: 2026-04-13
+document_ids:
+- NIST AI 100-1 (AI RMF 1.0)
+- NIST AI 100-3 (Language of Trustworthy AI)
+- NIST AI 600-1 (GenAI Profile)
+- ISO/IEC 42001:2023 (AI Management System)
+- EU AI Act Regulation (EU) 2024/1689
+total_terms_cataloged: 511
+enrichment_wave: atlas_wave2
+1_document_landscape: 'NIST maintains three primary vocabulary sources for AI/ML:
+
+
+  | Document | ID | Terms | Focus |
+
+  |----------|----|-------|-------|
+
+  | AI Risk Management Framework | NIST AI 100-1 | ~50 core | 4 functions (Govern, Map, Measure, Manage), 7 trustworthiness
+  characteristics |
+
+  | Language of Trustworthy AI | NIST AI 100-3 | 511 | Cross-disciplinary glossary spanning AI, ML, data, governance, fairness,
+  security |
+
+  | GenAI Profile | NIST AI 600-1 | ~30 + 12 risks | Generative AI-specific risks and mitigations |
+
+
+  Authors: Daniel Atherton, Reva Schwartz, Peter Fontana, Patrick Hall (AI 100-3);
+
+  Chloe Autio, Reva Schwartz, Jesse Dunietz, Shomik Jain, Martin Stanley, Elham Tabassi (AI 600-1).
+
+
+  The glossary is "non-sector specific and use-case agnostic" -- designed for all
+
+  organizations seeking to operationalize trustworthy AI through the AI RMF.
+
+
+  ---'
+2_ai_rmf_core_framework_terms: ''
+2_1_four_functions: '| Function | Definition | CEX Pillar |
+
+  |----------|-----------|------------|
+
+  | GOVERN | Cultivate and implement culture of risk management across the organization | P11 Feedback |
+
+  | MAP | Contextualize risks relative to AI system and its domain | P01 Knowledge |
+
+  | MEASURE | Employ quantitative/qualitative tools to analyze and monitor AI risks | P07 Evaluation |
+
+  | MANAGE | Allocate resources to mapped and measured risks on regular basis | P12 Orchestration |'
+2_2_seven_trustworthiness_characteristics: '| Characteristic | Definition | CEX Pillar |
+
+  |----------------|-----------|------------|
+
+  | Valid and Reliable | Deployment of models meeting requirements, with consistent results across conditions | P07 Evaluation
+  |
+
+  | Safe | AI systems not causing conditions leading to physical or psychological harm | P11 Feedback |
+
+  | Secure and Resilient | Protection against unauthorized access and ability to recover from disruptions | P09 Config |
+
+  | Accountable and Transparent | Clear disclosure of AI system capabilities, limitations, and decision processes | P08 Architecture
+  |
+
+  | Explainable and Interpretable | Representation of mechanisms underlying AI operation and meaning of outputs | P07 Evaluation
+  |
+
+  | Privacy-Enhanced | Protection of personal information throughout AI lifecycle | P09 Config |
+
+  | Fair with Harmful Bias Managed | Equity and equality in AI treatment across demographic groups | P11 Feedback |'
+2_3_ai_rmf_structural_terms: '| Term | Definition | CEX Pillar |
+
+  |------|-----------|------------|
+
+  | AI System | Engineered system generating outputs (predictions, recommendations, decisions) influencing real/virtual environments
+  | P02 Model |
+
+  | AI Actor | Participant across the AI lifecycle responsible for identifying and managing risks | P02 Model |
+
+  | AI Lifecycle | Complete sequence of phases from conception through retirement of AI system | P12 Orchestration |
+
+  | AI RMF Profile | Use-case implementation of framework functions tailored to specific settings | P08 Architecture |
+
+  | Risk | Composite measure of event probability and magnitude of consequences | P11 Feedback |
+
+  | Trustworthiness | Quality of being worthy of reliance through demonstrated reliability and integrity | P07 Evaluation
+  |
+
+  | Impact Assessment | Risk management tool ensuring organization has considered benefits/costs before implementation | P07
+  Evaluation |
+
+
+  ---'
+3_nist_ai_600_1_genai_specific_terms: ''
+3_1_twelve_genai_risk_categories: '| # | Risk Category | Definition | CEX Pillar |
+
+  |---|--------------|-----------|------------|
+
+  | 1 | CBRN Information/Capabilities | GenAI may lower barriers to accessing chemical, biological, radiological, nuclear
+  threat information | P11 Feedback |
+
+  | 2 | Confabulation | Production of confidently stated but false or internally inconsistent outputs ("hallucinations") |
+  P07 Evaluation |
+
+  | 3 | Data Privacy | Models may leak, generate, or correctly infer sensitive information about individuals (data memorization)
+  | P09 Config |
+
+  | 4 | Environmental Impacts | Energy consumption and carbon footprint of training and running large models | P11 Feedback
+  |
+
+  | 5 | Harmful Bias and Homogenization | Systematic unfairness in outputs, amplification of stereotypes, reduction of diversity
+  | P11 Feedback |
+
+  | 6 | Human-AI Configuration | Risks from improper calibration of human oversight, automation bias, over-reliance | P02
+  Model |
+
+  | 7 | Information Integrity | Generation of synthetic media undermining trust in authentic information ecosystems | P11
+  Feedback |
+
+  | 8 | Information Security | Expanded attack surface including prompt injection, model extraction, training data poisoning
+  | P09 Config |
+
+  | 9 | Intellectual Property | Training on copyrighted material, generation of outputs infringing existing IP | P11 Feedback
+  |
+
+  | 10 | Obscene/Degrading Content | Generation of content that is violent, hateful, sexually explicit, or degrading | P11
+  Feedback |
+
+  | 11 | Dangerous/Violent/Hateful Content | Generation of content promoting violence, extremism, or discrimination | P11
+  Feedback |
+
+  | 12 | Value Chain/Component Integration | Risks from third-party models, APIs, and data dependencies in supply chain |
+  P12 Orchestration |'
+3_2_genai_specific_vocabulary: '| Term | Definition | CEX Pillar |
+
+  |------|-----------|------------|
+
+  | Generative AI (GAI) | AI capable of generating text, images, audio, video, code, or other content | P02 Model |
+
+  | Foundation Model | Large model trained on broad data that can be adapted to downstream tasks | P02 Model |
+
+  | Prompt Injection | Attack manipulating model behavior by inserting adversarial instructions into input | P09 Config |
+
+  | Data Memorization | Model retaining and potentially reproducing specific training examples | P10 Memory |
+
+  | Confabulation | Model generating plausible but factually incorrect output with high confidence | P07 Evaluation |
+
+  | Deepfake | AI-generated or manipulated media falsely appearing authentic or truthful | P05 Output |
+
+  | Alignment | Ensuring AI system behavior properly aligns with human values and intentions | P11 Feedback |
+
+  | Red-Teaming | Structured adversarial testing to discover system vulnerabilities and failure modes | P07 Evaluation |
+
+  | Guardrail | Constraint or filter preventing AI system from producing harmful outputs | P11 Feedback |
+
+  | Synthetic Data | Artificially generated data mimicking characteristics of real data | P01 Knowledge |
+
+
+  ---'
+4_complete_nist_ai_100_3_glossary_511_terms: ''
+4_1_domain_distribution: '| Domain | Count | CEX Pillar(s) |
+
+  |--------|-------|---------------|
+
+  | Machine Learning | 98 | P02 Model, P07 Evaluation |
+
+  | Data Science / Analytics | 62 | P01 Knowledge |
+
+  | Security / Cybersecurity | 45 | P09 Config |
+
+  | Governance / Compliance | 42 | P11 Feedback, P12 Orchestration |
+
+  | Fairness / Bias | 35 | P11 Feedback |
+
+  | Privacy | 28 | P09 Config |
+
+  | Software Engineering | 27 | P05 Output |
+
+  | Interpretability / Explainability | 22 | P07 Evaluation |
+
+  | Statistics / Probability | 20 | P07 Evaluation |
+
+  | NLP | 18 | P03 Prompt |
+
+  | Operations / Automation | 16 | P12 Orchestration |
+
+  | Systems Engineering | 15 | P08 Architecture |
+
+  | Research / Methodology | 14 | P01 Knowledge |
+
+  | Computing / Hardware | 12 | P04 Tools |
+
+  | Business / Process | 11 | P06 Schema |
+
+  | Legal / Ethics | 10 | P11 Feedback |
+
+  | Human Factors / Psychology | 8 | P02 Model |
+
+  | Risk Management | 7 | P11 Feedback |
+
+  | Quality / Reliability | 7 | P07 Evaluation |
+
+  | Other (roles, general) | 14 | -- |'
+4_2_full_term_catalog_a: '| # | Term | Definition (first sentence) | Domain | CEX Pillar |
+
+  |---|------|-----------------------------|--------|------------|
+
+  | 1 | Accountability | Obligation to account for activities, accept responsibility, and disclose results transparently |
+  Governance | P11 |
+
+  | 2 | Accuracy | Closeness of computations to exact or true values | Measurement | P07 |
+
+  | 3 | Active Learning | Algorithm chooses training data to improve performance with less data needed | ML | P02 |
+
+  | 4 | Active Learning Agent | ML algorithm deciding what actions to take regarding training data | ML | P02 |
+
+  | 5 | Activity | Work using business processes; can be singular or compound | Business | P06 |
+
+  | 6 | Adaptive Dynamic Programming | Learning transition models and solving corresponding Markov decision processes | ML
+  | P02 |
+
+  | 7 | Adaptive Learning | Updating predictive models online during operation to react to concept drifts | ML | P02 |
+
+  | 8 | Adversarial Example | Input sample with intentional perturbation causing model to output incorrect answer | Security
+  | P09 |
+
+  | 9 | Adverse Action Notice | Notification of credit refusal, account termination, or unfavorable term changes | Legal |
+  P11 |
+
+  | 10 | Adverse Impact Ratio | Metric quantifying different outcomes between privileged and unprivileged groups | Fairness
+  | P11 |
+
+  | 11 | Agile | Development approach delivering software incrementally following agile principles | Development | P05 |
+
+  | 12 | AI Principles | Overarching values guiding AI development: growth, fairness, transparency, security, accountability
+  | Governance | P11 |
+
+  | 13 | AI System | Engineered system generating outputs like predictions influencing real/virtual environments | AI | P02
+  |
+
+  | 14 | Algorithm | Set of computational rules to solve mathematical problems or processes | Computing | P04 |
+
+  | 15 | Algorithmic Aversion | Biased negative assessment of algorithms compared to human agents | Behavioral | P11 |
+
+  | 16 | Alignment | Ensuring powerful AI properly aligns with human values and principles | Ethics | P11 |
+
+  | 17 | Amplification | Disparity amplification increases prediction disparities between groups | Fairness | P11 |
+
+  | 18 | Analytics | Application of scientific methods to study complex systems (descriptive, predictive, prescriptive) |
+  Data Science | P01 |
+
+  | 19 | Annotation | Further documentation accompanying requirements or critical explanatory notes | Documentation | P01
+  |
+
+  | 20 | Anomaly | System occurrence deviating from expectations based on verified products or standards | Testing | P07 |
+
+  | 21 | Anonymization | Process altering identifiable data so it cannot be related to individuals | Privacy | P09 |
+
+  | 22 | Anthropomorphism | Attribution of human-like feelings and characteristics to inanimate objects | Psychology | P02
+  |
+
+  | 23 | API (Application Programming Interface) | Software contract expressing available functions between application and
+  client | Computing | P04 |
+
+  | 24 | Application | Software program or hardware/software system satisfying particular requirements | Computing | P04 |
+
+  | 25 | Artificial Intelligence Learning | Ingestion and semantic mapping of data yielding inference and predictive capabilities
+  | ML | P02 |
+
+  | 26 | ANI (Artificial Narrow Intelligence) | AI system designed for specific problem-solving or reasoning tasks | AI |
+  P02 |
+
+  | 27 | Artificial Neural Networks | Computing system with interconnected processing elements responding to external inputs
+  | ML | P02 |
+
+  | 28 | Assessment | Action applying documented criteria to determine acceptance or release of software | Testing | P07 |
+
+  | 29 | Attack | Action targeting learning system to cause malfunction or disrupt systems | Security | P09 |
+
+  | 30 | Attribute | Property of real/abstract things that is characteristic of interest | Data | P06 |
+
+  | 31 | Audit | Systematic, independent process for obtaining records and assessing compliance | Governance | P07 |
+
+  | 32 | Audit Log | Chronological record of system activities and operations in given period | Logging | P09 |
+
+  | 33 | Authenticity | Property that entity is what it claims to be | Security | P09 |
+
+  | 34 | Automation | Independent machine-managed choreography of digital system operation | Computing | P12 |
+
+  | 35 | Automation Bias | Over-relying on outputs of AI systems | Behavioral | P11 |
+
+  | 36 | Autonomic | MAPE system sensing environments, making decisions, self-managing operations | Computing | P12 |
+
+  | 37 | Autonomous Vehicle | Automobile capable of sensing environment and moving safely with minimal human input | Application
+  | P05 |
+
+  | 38 | Autonomy | System''s level of independence from human involvement during operation | AI | P02 |
+
+  | 39 | Availability | Ensuring timely, reliable access to and use of information by authorized persons | Security | P09
+  |'
+4_3_full_term_catalog_b: '| # | Term | Definition | Domain | CEX Pillar |
+
+  |---|------|-----------------------------|--------|------------|
+
+  | 40 | Back-Testing | Comparison of actual outcomes with modeled forecasts during development periods | Validation | P07
+  |
+
+  | 41 | Batched Automation | Process automation of intentionally segregated work irrespective of contextual placement | Automation
+  | P12 |
+
+  | 42 | Benchmark | Standard against which results measured; procedure comparing systems to standard | Testing | P07 |
+
+  | 43 | Bias | Systematic error; unwanted bias places privileged groups at systematic advantage | Fairness | P11 |
+
+  | 44 | Bias Mitigation Algorithm | Procedure reducing unwanted bias in training data or models | ML | P11 |
+
+  | 45 | Bias Testing | Statistical tests evaluating evidence of disparate impact across protected classes | Testing | P11
+  |
+
+  | 46 | Big Data | Extensive datasets (volume, variety, velocity) requiring scalable architecture | Data | P01 |
+
+  | 47 | Binning | Technique lumping small value ranges into categories to reduce variability | Data Processing | P01 |
+
+  | 48 | Biometric Data | Personal data from technical processing of physical/physiological characteristics | Privacy | P09
+  |
+
+  | 49 | Boosting | ML technique iteratively combining weak classifiers into strong classifier | ML | P02 |
+
+  | 50 | Breach | Loss of control or unauthorized disclosure of personally identifiable information | Security | P09 |
+
+  | 51 | Broad AI | Complex automation system providing analytics exceeding human expertise | AI | P02 |
+
+  | 52 | Bug-Bounty | Reward given to researchers discovering exploitable vulnerabilities | Security | P09 |
+
+  | 53 | Built-In Test | Equipment/software embedded in components performing verification tests | Testing | P07 |
+
+  | 54 | Business Process | Defined set of activities representing steps required achieving business objective | Business
+  | P06 |
+
+  | 55 | Business Process Management | Discipline combining modeling, automation, execution, control of activity flows | Business
+  | P12 |
+
+  | 56 | Business Rule | Definition, constraint, or decision criteria determining task execution method | Business | P06 |'
+4_4_full_term_catalog_c: '| # | Term | Definition | Domain | CEX Pillar |
+
+  |---|------|-----------------------------|--------|------------|
+
+  | 57 | Calibration | Comparison between device under test and established standard | Measurement | P07 |
+
+  | 58 | Capability | Measure of capacity and ability of entity achieving objectives | Management | P08 |
+
+  | 59 | Chatbot | Conversational agent dialoguing with user for example in customer relations | Application | P03 |
+
+  | 60 | Choreography | Ordered sequence of system-to-system message exchanges between participants | Computing | P12 |
+
+  | 61 | Classification | Learning problem where output is finite set of values; assigning data to categories | ML | P02 |
+
+  | 62 | Classifier | Model predicting categorical labels from features | ML | P02 |
+
+  | 63 | Clustering | Detecting potentially useful clusters of input examples; partitioning similar groups | ML | P02 |
+
+  | 64 | Cognitive Automation | Application of ML algorithms leveraging domain knowledge and reasoning | ML | P12 |
+
+  | 65 | Cognitive Computing | Complex systems designed to sense, comprehend, act comparable to human brain | AI | P02 |
+
+  | 66 | Computer Vision | Digital process perceiving and learning visual tasks to interpret the world | AI | P02 |
+
+  | 67 | Concept Drift | Use of system outside planned domain or when input/target relation changes over time | ML | P07 |
+
+  | 68 | Confidentiality | Preventing unauthorized disclosure; preserving restrictions on information access | Security |
+  P09 |
+
+  | 69 | Confusion Matrix | Matrix showing predicted and actual classifications | ML Eval | P07 |
+
+  | 70 | Consent | Freely given, specific, informed, unambiguous indication of wishes by data subject | Privacy | P09 |
+
+  | 71 | Construct Validity | Degree to which application of constructs to phenomena is warranted | Research | P07 |
+
+  | 72 | Content Validity | Extent measure thoroughly assesses skills/characteristics intended | Research | P07 |
+
+  | 73 | Context | Circumstances, purpose, perspective under which object is defined or used | General | P01 |
+
+  | 74 | Contextual Learning | Computing system with sufficient knowledge understanding source of data | ML | P10 |
+
+  | 75 | Context-of-Use | Actual conditions under which artifact is used in normal working situation | Design | P05 |
+
+  | 76 | Controllability | Property allowing human/external agent to intervene in system functioning | Systems | P11 |
+
+  | 77 | Controller | Natural/legal person determining purposes and means of personal data processing | Privacy | P09 |
+
+  | 78 | Copilot | AI-powered software assisting users with tasks using language models | Application | P03 |
+
+  | 79 | Corpus | Deliberately assembled collection of knowledge and data on topics | Data | P01 |
+
+  | 80 | Correlation | Interdependence between quantitative or qualitative data; association between variables | Statistics
+  | P07 |
+
+  | 81 | Counterfactual Explanation | Statements indicating what output would result if inputs had different values | Interpretability
+  | P07 |
+
+  | 82 | Counterfactual Fairness | Checking if classifier produces same result for identical individuals except protected
+  attributes | Fairness | P11 |
+
+  | 83 | Countermeasure | Actions/devices/procedures reducing system vulnerability | Security | P09 |
+
+  | 84 | Criterion Validity | Index of test correlation with established standard | Research | P07 |
+
+  | 85 | Crowdsource | Participative online activity where group undertakes voluntary task via open call | Collaboration |
+  P12 |
+
+  | 86 | Customer | Beneficiary of automated task, process, or service execution | Business | P06 |
+
+  | 87 | Cybersecurity | Prevention, protection of systems ensuring availability, integrity, confidentiality | Security |
+  P09 |'
+4_5_full_term_catalog_d: '| # | Term | Definition | Domain | CEX Pillar |
+
+  |---|------|-----------------------------|--------|------------|
+
+  | 88 | Dark Pattern | User interface designed to subvert or impair user autonomy and choice | UX/Ethics | P11 |
+
+  | 89 | Data | Characteristics or information usually numerical collected through observation | General | P01 |
+
+  | 90 | Data Analytics | Process applying techniques to summarize observations or find patterns | Analytics | P01 |
+
+  | 91 | Data Cleaning | Process identifying, correcting, or removing inaccurate data records | Data Processing | P01 |
+
+  | 92 | Data Control | Management oversight of information policies | Governance | P11 |
+
+  | 93 | Data Dredging | Statistical bias testing huge hypotheses yielding spurious significance | Statistics | P07 |
+
+  | 94 | Data Drift | Change in model input data leading to performance degradation | ML | P07 |
+
+  | 95 | Data-Driven | Basing decisions on data analysis rather than intuition | Analytics | P01 |
+
+  | 96 | Data Fabric | Data corpus after semantic mapping and seeding for AI/ML | Data | P01 |
+
+  | 97 | Data Fusion | Process integrating data from multiple sensory sources | Data Processing | P01 |
+
+  | 98 | Data Governance | Set of processes ensuring data assets formally managed throughout enterprise | Governance | P11
+  |
+
+  | 99 | Data Mining | Computational process extracting patterns by analyzing data | Analytics | P01 |
+
+  | 100 | Data Point | Discrete unit of information | Data | P01 |
+
+  | 101 | Data Preparation | Set of preprocessing operations in data pipeline | Data Processing | P01 |
+
+  | 102 | Data Proxy | Data closely related to and serving in place of immeasurable data | Data | P01 |
+
+  | 103 | Data Quality | Degree to which data characteristics satisfy stated needs | Quality | P07 |
+
+  | 104 | Data Science | Methodology synthesizing useful knowledge from data | Analytics | P01 |
+
+  | 105 | Data Scientist | Practitioner with knowledge in business needs, analytics, engineering | Role | -- |
+
+  | 106 | Data Seeding | Intentional introduction of initial conditions influencing outcomes | Data Processing | P01 |
+
+  | 107 | Data Wrangling | Process identifying, extracting, cleaning, integrating data for analysis | Data Processing | P01
+  |
+
+  | 108 | Decision | Conclusion reached after consideration of business rules and data | Process | P06 |
+
+  | 109 | Decision Point | Point in process where flow can take alternative paths | Process | P06 |
+
+  | 110 | Decision Tree | Tree-structure with nodes representing attribute tests | ML | P02 |
+
+  | 111 | Decision-Making | Cognitive process selecting belief or course of action among alternatives | Psychology | P02 |
+
+  | 112 | Decision Support System | Computer program analyzing data for informed decisions | Application | P04 |
+
+  | 113 | Decommission | Removal of existing components from production minimizing risks | Operations | P12 |
+
+  | 114 | Deductive Analytics | Insights answering "What would likely happen IF?" | Analytics | P01 |
+
+  | 115 | Deep Learning | Techniques with hypotheses as complex algebraic circuits in many layers | ML | P02 |
+
+  | 116 | Deepfake | AI-generated or manipulated media falsely appearing authentic | Security | P05 |
+
+  | 117 | Deletion | Action of destroying an instantiated object | Data Management | P01 |
+
+  | 118 | Denial-of-Service | Prevention of authorized access or delaying time-critical operations | Security | P09 |
+
+  | 119 | Dependability | Ability to perform as required (availability, reliability, maintainability) | Quality | P07 |
+
+  | 120 | Deployment | Phase putting system into operation and resolving cutover issues | Operations | P12 |
+
+  | 121 | Descriptive Analytics | Insights determining cause(s) of event(s) | Analytics | P01 |
+
+  | 122 | Deterministic | Producing consistent outcomes for given inputs | Computing | P04 |
+
+  | 123 | Deterministic Algorithm | Algorithm producing same outputs given same inputs | Computing | P04 |
+
+  | 124 | Developer | General term for developers, manufacturers, integrators, vendors | Role | -- |
+
+  | 125 | Diagnostic Analytics | Insights determining cause(s) of event(s) | Analytics | P01 |
+
+  | 126 | Diagnostics | Pertaining to detection and isolation of faults or failures | Testing | P07 |
+
+  | 127 | Differential Privacy | Method measuring information output reveals about individual via noise injection | Privacy
+  | P09 |
+
+  | 128 | Differential Validity | Unequal validities in two applicant populations | Research | P07 |
+
+  | 129 | Digital Labor | Digital automation delivering work output previously performed by humans | Automation | P12 |
+
+  | 130 | Digital Workforce | Collective suite of automation technologies delivering business work | Automation | P12 |
+
+  | 131 | Dimension | Topological measure or distinct components of multidimensional construct | Data | P01 |
+
+  | 132 | Dimension Reduction | Taking high dimensional data and mapping to smaller dimensionality | ML | P02 |
+
+  | 133 | Disparate Impact | Metric quantifying differential group outcomes | Fairness | P11 |
+
+  | 134 | Disparate Treatment | Intentional discrimination based on protected characteristics | Fairness | P11 |
+
+  | 135 | Distributional Robustness | Optimizing accuracy for whole class of distributions | ML | P02 |
+
+  | 136 | Diversity | Practice including many communities, identities, backgrounds | Equity | P11 |
+
+  | 137 | Documentation | Collection of documents describing/specifying subject | General | P01 |
+
+  | 138 | Domain | Distinct scope exhibiting common characteristics and sharing rules | General | P01 |
+
+  | 139 | Domain Expertise | Knowledge of essential aspects of specific field | Knowledge | P01 |
+
+  | 140 | Domain Shift | Differences between source and target domain data | ML | P07 |
+
+  | 141 | Dynamic Process | Process where paths may be utilized based on conditions | Process | P12 |'
+4_6_full_term_catalog_e: '| # | Term | Definition | Domain | CEX Pillar |
+
+  |---|------|-----------------------------|--------|------------|
+
+  | 142 | Edge Case | Problem at highest/lowest end of range or extreme situations | Testing | P07 |
+
+  | 143 | Embedding | Representation preserving connectivity/algebraic properties | ML | P02 |
+
+  | 144 | Emulation | Using data processing system to imitate another | Computing | P04 |
+
+  | 145 | End Event | Activity defining process conclusion | Process | P12 |
+
+  | 146 | Ensemble | ML paradigm combining multiple models for better results | ML | P02 |
+
+  | 147 | Environment | Anything affecting or affected by subject system | Systems | P08 |
+
+  | 148 | Equality of Odds | Predictor satisfying equal TPR/FPR across protected groups | Fairness | P11 |
+
+  | 149 | Equality of Opportunity | Binary predictor with equal positive outcome probability across groups | Fairness | P11
+  |
+
+  | 150 | Error | Difference between observed/computed and true/correct value | Measurement | P07 |
+
+  | 151 | Error Propagation | Way uncertainties in variables affect calculated results | Measurement | P07 |
+
+  | 152 | Ethics | Set of moral principles, theory of moral values | Philosophy | P11 |
+
+  | 153 | Ethics by Design | Approach integrating ethics in design/development stage | Ethics | P11 |
+
+  | 154 | Evaluation | Systematic determination of extent entity meets criteria | Assessment | P07 |
+
+  | 155 | Exception | Event during process causing diversion from normal flow | Process | P11 |
+
+  | 156 | Experiment | Series of observations under controlled conditions | Research | P07 |
+
+  | 157 | Expert System | Form of AI replicating human expertise with knowledge base and rules | AI | P02 |
+
+  | 158 | Explainability | Ability providing human interpretable explanation for ML prediction | Interpretability | P07 |
+
+  | 159 | Explainer | Functionality providing details on fairness metric results | Interpretability | P07 |
+
+  | 160 | Explanation | Systems deliver accompanying evidence or reasons for outputs | Interpretability | P07 |
+
+  | 161 | Exploratory Data Analysis | Employing techniques maximizing insight, uncovering structure | Data Analysis | P01
+  |
+
+  | 162 | External Validity | Extent results generalize beyond sample | Research | P07 |'
+4_7_full_term_catalog_f: '| # | Term | Definition | Domain | CEX Pillar |
+
+  |---|------|-----------------------------|--------|------------|
+
+  | 163 | Facial Recognition | Algorithms converting face images to identity vectors | Computer Vision | P02 |
+
+  | 164 | Fairness Metric | Quantification of unwanted bias; mathematical definition of fairness | Fairness | P11 |
+
+  | 165 | False Negative | Example mistakenly classified as negative; Type II error | ML Eval | P07 |
+
+  | 166 | False Positive | Example mistakenly classified as positive; Type I error | ML Eval | P07 |
+
+  | 167 | Fault Tolerance | Ability continuing normal operation despite faults | Reliability | P09 |
+
+  | 168 | Favorable Label | Label value corresponding to outcome providing advantage | ML | P11 |
+
+  | 169 | Feature | Attribute containing information for predicting label | ML | P02 |
+
+  | 170 | Feature Extraction | Developing transformation to low-dimensional subspace | ML | P02 |
+
+  | 171 | Feature Importance | Measure of individual contribution of feature for classifier | ML | P07 |
+
+  | 172 | Feature Shift | Change in conditional distribution of features | ML | P07 |
+
+  | 173 | Federated Learning | ML addressing privacy by training collaboratively without transferring data | ML/Privacy |
+  P09 |
+
+  | 174 | Feedback Loop | Process leveraging AI output retraining models over time | ML | P11 |
+
+  | 175 | Fitting | Process verifying data value is in specified interval | Data | P07 |
+
+  | 176 | Forecasting | Estimate of future conditions based on past performance | Analytics | P01 |
+
+  | 177 | Fraud Detection | Monitoring populations estimating or detecting undesirable behavior | Security | P09 |
+
+  | 178 | Fully Autonomous | Accomplishes mission without human intervention | Autonomy | P02 |'
+4_8_full_term_catalog_g: '| # | Term | Definition | Domain | CEX Pillar |
+
+  |---|------|-----------------------------|--------|------------|
+
+  | 179 | GAN (Generative Adversarial Network) | Pair of jointly trained networks; generator creates, discriminator detects
+  | ML | P02 |
+
+  | 180 | Global Explanation | Producing model approximating non-interpretable model | Interpretability | P07 |
+
+  | 181 | Governance | System of laws, policies, frameworks ensuring stakeholder needs evaluated | Management | P11 |
+
+  | 182 | GPU (Graphical Processing Unit) | Specialized chip for highly parallel processing optimized for ML | Hardware |
+  P04 |
+
+  | 183 | Graph | Diagram representing variation; finite set of nodes with connections | Data | P01 |
+
+  | 184 | Ground Truth | Information from direct observation; value of target variable for labeled data | Data | P07 |
+
+  | 185 | Group Fairness | Goal of groups defined by protected attributes receiving similar treatments | Fairness | P11 |'
+4_9_full_term_catalog_h: '| # | Term | Definition | Domain | CEX Pillar |
+
+  |---|------|-----------------------------|--------|------------|
+
+  | 186 | Hacker | Unauthorized user attempting access to information system | Security | P09 |
+
+  | 187 | Harm | Undesired outcome whose cost exceeds threshold | Safety | P11 |
+
+  | 188 | Harmful Bias | Bias leading to negative evaluation based on characteristics | Fairness | P11 |
+
+  | 189 | Human-Assisted | Human interactions needed at task plan detail level | Autonomy | P02 |
+
+  | 190 | HCI (Human-Computer Interaction) | Methods designing user interfaces and human-computer interactions | Design |
+  P05 |
+
+  | 191 | Human-Cognitive Bias | Systematic error in judgment common to humans | Psychology | P11 |
+
+  | 192 | Human-Enabled ML | Detection/correlation from machine observation of human operation | ML | P02 |
+
+  | 193 | Human-in-the-Loop | AI system requiring human interaction | Autonomy | P02 |
+
+  | 194 | HMT (Human-Machine Teaming) | Humans and AI working together with seamless handoff | Collaboration | P12 |
+
+  | 195 | Human-Operator-Intervention | Need for human interaction in normally autonomous behavior | Autonomy | P02 |
+
+  | 196 | Human Subjects | Living individual about whom investigator obtains information | Research | P07 |
+
+  | 197 | HSI (Human System Integration) | Methods testing human-related considerations at system level | Design | P08 |
+
+  | 198 | Hyperparameters | Parameters used configuring ML model or algorithm | ML | P02 |
+
+  | 199 | Hypothesis Testing | Testing significance when specific alternatives considered | Statistics | P07 |'
+4_10_full_term_catalog_i: '| # | Term | Definition | Domain | CEX Pillar |
+
+  |---|------|-----------------------------|--------|------------|
+
+  | 200 | Impact Assessment | Risk management tool for benefits/costs consideration | Assessment | P07 |
+
+  | 201 | Impersonation | Malicious individual impersonating legitimate data subject | Security | P09 |
+
+  | 202 | In-Processing | Techniques modifying algorithms mitigating bias during training | ML | P11 |
+
+  | 203 | In-Processing Algorithm | Bias mitigation algorithm applied during model training | ML | P11 |
+
+  | 204 | Incident | Situation where AI caused or nearly caused real-world harm | Security | P11 |
+
+  | 205 | Incident Response | Public response from entity responsible for AI system | Governance | P11 |
+
+  | 206 | Independence | SQA free from technical/managerial/financial influences | Quality | P07 |
+
+  | 207 | Individual Fairness | Goal of similar individuals receiving similar treatments | Fairness | P11 |
+
+  | 208 | Inference | Stage where model applied to task producing classification | ML | P02 |
+
+  | 209 | Information Security | Preservation of confidentiality, integrity, availability | Security | P09 |
+
+  | 210 | Input | Data received from external source | Computing | P06 |
+
+  | 211 | Insider Attack | Attack by individuals within organization with authorized access | Security | P09 |
+
+  | 212 | Instance | Discrete bounded thing with intrinsic unique identity | Data | P06 |
+
+  | 213 | Instance Weight | Numerical value multiplying contribution of data point | ML | P02 |
+
+  | 214 | Integrity | Preventing unauthorized modification; unaltered information | Security | P09 |
+
+  | 215 | Intelligent Process Automation | Software combining business rules, context logic, decisions | Automation | P12
+  |
+
+  | 216 | Interaction | Action with participation of object''s environment | Systems | P08 |
+
+  | 217 | Internal Validity | Degree study free from internal structure flaws | Research | P07 |
+
+  | 218 | Interoperability | Ability of systems operating together with minimal effort | Computing | P08 |
+
+  | 219 | Interpretability | Ability understanding value/accuracy of system output | Interpretability | P07 |
+
+  | 220 | Interpretable Model | ML model obeying constraints for easier human understanding | ML | P07 |
+
+  | 221 | Intervenability | Property that intervention possible concerning data processing | Privacy | P09 |'
+4_11_full_term_catalog_k_l: '| # | Term | Definition | Domain | CEX Pillar |
+
+  |---|------|-----------------------------|--------|------------|
+
+  | 222 | Knowledge | Sum of information derived from analytics in computing system | AI | P01 |
+
+  | 223 | Label | Value corresponding to outcome; target variable assigned to sample | ML | P02 |
+
+  | 224 | Label Shift | Label distribution changes but class-conditional distributions do not | ML | P07 |
+
+  | 225 | Large Language Model (LLM) | Deep-learning model trained on massive textual datasets | ML | P02 |
+
+  | 226 | Language Model | Pattern description capturing regularities in natural language | NLP | P03 |
+
+  | 227 | Learning | Procedure improving AI performance through knowledge from practice | ML | P02 |
+
+  | 228 | Least Privilege | Principle granting minimum resources/authorizations needed | Security | P09 |
+
+  | 229 | Lemmatization | Grouping inflected word forms for analysis as single item | NLP | P03 |
+
+  | 230 | Liability | Legal responsibility for damages; AI accountability concerns | Legal | P11 |
+
+  | 231 | Lifecycle | Stages from conception through retirement | Systems | P12 |
+
+  | 232 | Likelihood | Probability or chance of event occurring | Statistics | P07 |
+
+  | 233 | Local Explanation | Model-generated explanation for specific prediction instance | Interpretability | P07 |
+
+  | 234 | Loss Function | Function measuring difference between predicted and actual values | ML | P02 |'
+4_12_full_term_catalog_m: '| # | Term | Definition | Domain | CEX Pillar |
+
+  |---|------|-----------------------------|--------|------------|
+
+  | 235 | Machine Learning (ML) | Computational method enabling systems to learn from data without explicit programming |
+  ML | P02 |
+
+  | 236 | Machine Learning Model | Mathematical representation learned from training data | ML | P02 |
+
+  | 237 | Machine Learning System | Integrated system applying ML to solve problems | ML | P02 |
+
+  | 238 | Maintainability | Degree system can be modified, corrected, or enhanced | Quality | P07 |
+
+  | 239 | Malware | Malicious software designed to harm or gain unauthorized access | Security | P09 |
+
+  | 240 | Manifold | Topological space enabling dimensionality reduction | Mathematics | P02 |
+
+  | 241 | Manipulation | Deliberate alteration or deception of data, systems, or users | Security | P09 |
+
+  | 242 | Mapping | Establishing relationships between data elements or concepts | Data Processing | P01 |
+
+  | 243 | Markup Language | Standardized system using tags for annotating text | Computing | P04 |
+
+  | 244 | Masking | Technique obscuring sensitive data by replacing identifying info | Privacy | P09 |
+
+  | 245 | Master Data | Authoritative centralized data source across enterprise | Data Management | P01 |
+
+  | 246 | Matching | Comparing data elements against reference standards | Data Analysis | P01 |
+
+  | 247 | Mathematical Model | Formal representation using equations describing system behavior | Modeling | P02 |
+
+  | 248 | Membership Inference | Attack determining if data was in training dataset | Security | P09 |
+
+  | 249 | Memory | Computing component storing data; retaining learned information | Computing | P10 |
+
+  | 250 | Metadata | Information describing characteristics of other data | Data Management | P01 |
+
+  | 251 | Metric | Quantifiable measure assessing performance or quality | Evaluation | P07 |
+
+  | 252 | Mitigation | Actions reducing severity or impact of identified risks | Risk Management | P11 |
+
+  | 253 | Model | Mathematical/computational representation for prediction | ML | P02 |
+
+  | 254 | Model Card | Documentation summarizing model performance and intended use | ML Governance | P08 |
+
+  | 255 | Model Drift | Degradation in performance due to data/environment changes | ML Ops | P07 |
+
+  | 256 | Model Explainability | Capacity providing understandable explanations for predictions | Interpretability | P07 |
+
+  | 257 | Model Monitoring | Continuous observation of model performance in production | ML Ops | P07 |
+
+  | 258 | Model Performance | Measurement of prediction accuracy and effectiveness | Evaluation | P07 |
+
+  | 259 | Model Transparency | Degree internal workings are understandable | Interpretability | P07 |
+
+  | 260 | Monitoring | Continuous observation of system status and compliance | Operations | P07 |
+
+  | 261 | Multi-Armed Bandit | Optimization problem balancing exploration with exploitation | ML | P02 |
+
+  | 262 | Multimodal | System processing and integrating multiple types of input | ML | P02 |
+
+  | 263 | Multiple Imputation | Replacing missing values with multiple plausible alternatives | Statistics | P01 |
+
+  | 264 | Multitask Learning | Training single model to perform multiple related tasks | ML | P02 |
+
+  | 265 | Mutual Information | Measure quantifying dependency between variables | Information Theory | P07 |'
+4_13_full_term_catalog_n: '| # | Term | Definition | Domain | CEX Pillar |
+
+  |---|------|-----------------------------|--------|------------|
+
+  | 266 | Naive Bayes | Probabilistic classifier assuming feature independence | ML | P02 |
+
+  | 267 | Narrow AI | AI designed for specific limited tasks or domains | AI | P02 |
+
+  | 268 | Natural Language | Human communication language vs artificial languages | NLP | P03 |
+
+  | 269 | Natural Language Generation (NLG) | Automatically producing human-readable text from data | NLP | P03 |
+
+  | 270 | Natural Language Processing (NLP) | Enabling computers to understand and generate human language | AI/NLP | P03
+  |
+
+  | 271 | Neural Network | Computing system of interconnected processing elements | ML | P02 |
+
+  | 272 | Node | Individual processing unit in neural network or graph | ML | P02 |
+
+  | 273 | Noise | Random variation degrading signal quality or measurement accuracy | Data Science | P07 |
+
+  | 274 | Noisy Label | Training labels containing errors from annotation/measurement | Data Quality | P07 |
+
+  | 275 | Non-Repudiation | Security property preventing entity from denying its actions | Security | P09 |
+
+  | 276 | Normalization | Adjusting data to standard range or distribution | Data Processing | P01 |
+
+  | 277 | Null Hypothesis | Statistical assumption that no relationship exists between variables | Statistics | P07 |'
+4_14_full_term_catalog_o: '| # | Term | Definition | Domain | CEX Pillar |
+
+  |---|------|-----------------------------|--------|------------|
+
+  | 278 | Obfuscation | Deliberate concealment of code, logic, or information | Security | P09 |
+
+  | 279 | Objective | Goal or intended outcome system is designed to achieve | General | P06 |
+
+  | 280 | Observation | Data point collected through measurement or empirical investigation | Data Science | P01 |
+
+  | 281 | Ontology | Formal representation of concepts and relationships in a domain | Knowledge | P01 |
+
+  | 282 | Operational Technology (OT) | Hardware/software controlling physical devices and industrial processes | Technology
+  | P04 |
+
+  | 283 | Optimization | Adjusting parameters to achieve best possible performance | ML | P02 |
+
+  | 284 | Orchestration | Coordinated arrangement and execution of multiple automated processes | Operations | P12 |
+
+  | 285 | Outlier | Data point significantly deviating from expected patterns | Data Science | P07 |
+
+  | 286 | Output | Result, prediction, or decision produced by system | General | P05 |
+
+  | 287 | Overfitting | Model learns training data too precisely, reducing generalization | ML | P07 |'
+4_15_full_term_catalog_p: '| # | Term | Definition | Domain | CEX Pillar |
+
+  |---|------|-----------------------------|--------|------------|
+
+  | 288 | Parameter | Adjustable variable within model determining behavior | ML | P02 |
+
+  | 289 | Pattern Recognition | Identification of regularities and meaningful relationships in data | ML | P02 |
+
+  | 290 | Performance Metric | Quantifiable measure evaluating system objective achievement | Evaluation | P07 |
+
+  | 291 | Personally Identifiable Information (PII) | Data enabling identification of specific individual | Privacy | P09
+  |
+
+  | 292 | Perturbation | Intentional small modification for testing system robustness | ML/Security | P07 |
+
+  | 293 | Policy | Documented principles governing organizational decisions | Governance | P11 |
+
+  | 294 | Predictive Analytics | Forecasting future conditions based on historical patterns | Data Science | P01 |
+
+  | 295 | Predictive Validity | Extent measurement forecasts future outcomes accurately | Evaluation | P07 |
+
+  | 296 | Preprocessing | Data transformation/cleaning before model training | Data Science | P01 |
+
+  | 297 | Privacy | Right of controlling personal information disclosure | Privacy | P09 |
+
+  | 298 | Privacy-Enhancing Technology | Methods protecting personal information while enabling analysis | Privacy | P09 |
+
+  | 299 | Processor | Entity processing personal data on behalf of controller | Privacy | P09 |
+
+  | 300 | Production | Operational environment with real-world workloads | Operations | P12 |
+
+  | 301 | Profiling | Systematic analysis creating detailed patterns or classifications | Analytics | P01 |
+
+  | 302 | Protected Attribute | Characteristic requiring fairness protections in AI decisions | Fairness | P11 |
+
+  | 303 | Protected Class | Group sharing characteristic with legal discrimination protections | Fairness | P11 |
+
+  | 304 | Protocol | Established procedures governing communication between systems | Technology | P06 |
+
+  | 305 | Proxy Variable | Data used as substitute for unobservable target | Data Science | P01 |'
+4_16_full_term_catalog_q_r: '| # | Term | Definition | Domain | CEX Pillar |
+
+  |---|------|-----------------------------|--------|------------|
+
+  | 306 | Quantization | Reducing precision of values or mapping continuous to discrete levels | ML | P02 |
+
+  | 307 | Query | Request for information retrieval using specific criteria | Data | P04 |
+
+  | 308 | Random Forest | Ensemble method combining multiple decision trees | ML | P02 |
+
+  | 309 | Randomization | Introducing controlled randomness for unbiased results | Research | P07 |
+
+  | 310 | Ranking | Ordering entities according to measured values or preferences | Data Science | P01 |
+
+  | 311 | Recall | Proportion of actual positive instances correctly identified | ML Eval | P07 |
+
+  | 312 | Recommendation System | Algorithm suggesting items likely appealing to users | ML | P02 |
+
+  | 313 | Record | Structured collection of related data fields | Data | P06 |
+
+  | 314 | Recurrent Neural Network (RNN) | Neural network with feedback connections for sequential data | ML | P02 |
+
+  | 315 | Reduction | Decreasing dimensionality or complexity while preserving essentials | Data Science | P01 |
+
+  | 316 | Reference Model | Standardized model for comparison or guidance | Governance | P08 |
+
+  | 317 | Regression | Predicting continuous numerical values from input features | ML | P02 |
+
+  | 318 | Regulation | Official rules governing conduct or system operations | Governance | P11 |
+
+  | 319 | Regulatory Compliance | Adherence to laws and requirements established by authorities | Governance | P11 |
+
+  | 320 | Reinforcement Learning | Learning optimal behavior through reward and penalty feedback | ML | P02 |
+
+  | 321 | Reliability | Consistency of system producing correct results over time | Quality | P07 |
+
+  | 322 | Remediation | Correcting identified problems or deficiencies | Operations | P11 |
+
+  | 323 | Replication | Reproduction of findings under controlled conditions | Research | P07 |
+
+  | 324 | Representation | Formal encoding of information in processable formats | Knowledge | P01 |
+
+  | 325 | Resilience | Capacity to withstand disruptions and recover from failures | Operations | P09 |
+
+  | 326 | Risk | Potential for adverse outcome from threats or uncertainties | Risk Management | P11 |
+
+  | 327 | Risk Assessment | Systematic evaluation identifying and quantifying potential risks | Risk Management | P11 |
+
+  | 328 | Robustness | Maintaining functionality despite perturbations or errors | ML | P07 |
+
+  | 329 | Root Cause Analysis | Investigative method identifying underlying reasons for failures | Problem-Solving | P07 |
+
+  | 330 | Rule-Based System | System applying predefined logical rules for decisions | AI | P02 |'
+4_17_full_term_catalog_s: '| # | Term | Definition | Domain | CEX Pillar |
+
+  |---|------|-----------------------------|--------|------------|
+
+  | 331 | Scalability | Capacity to handle increasing workload or complexity efficiently | Software | P08 |
+
+  | 332 | Schema | Blueprint defining organization and constraints of data | Data | P06 |
+
+  | 333 | Scope | Defined boundaries or extent of system or analysis | Management | P08 |
+
+  | 334 | Scoring | Assigning numerical values to classify or rank items | ML | P07 |
+
+  | 335 | Search Algorithm | Method systematically exploring solution space | Computing | P04 |
+
+  | 336 | Security | Protection from unauthorized access, damage, or disclosure | Security | P09 |
+
+  | 337 | Seed | Initial value for reproducible random number generation | ML | P02 |
+
+  | 338 | Segmentation | Dividing population into distinct groups with shared characteristics | Analytics | P01 |
+
+  | 339 | Semantic | Relating to meaning and understanding of language | Linguistics | P03 |
+
+  | 340 | Sensitivity | Proportion of actual positives correctly identified (recall/TPR) | ML Eval | P07 |
+
+  | 341 | Sentiment Analysis | NLP technique determining emotional tone in text | NLP | P03 |
+
+  | 342 | Shapley Value | Game theory concept assigning feature contribution to prediction | ML Explainability | P07 |
+
+  | 343 | Shift Detection | Monitoring identifying changes in data distributions | ML Ops | P07 |
+
+  | 344 | Signal | Meaningful information extracted from raw data | Data Science | P01 |
+
+  | 345 | Significance | Statistical determination result unlikely occurred by chance | Statistics | P07 |
+
+  | 346 | Simulation | Computational representation mimicking system behavior | Modeling | P07 |
+
+  | 347 | Slicing | Partitioning data into subsets for focused analysis | Data Science | P01 |
+
+  | 348 | Specificity | Proportion of actual negatives correctly identified (TNR) | ML Eval | P07 |
+
+  | 349 | Speech Recognition | Converting spoken words to machine-readable text | NLP | P03 |
+
+  | 350 | Stakeholder | Individual or group affected by system development/deployment | Governance | P11 |
+
+  | 351 | Standard | Established benchmark defining acceptable quality | Governance | P07 |
+
+  | 352 | Standardization | Conforming to established benchmarks for consistency | Governance | P07 |
+
+  | 353 | Statistical Significance | Result unlikely due to chance at given confidence level | Statistics | P07 |
+
+  | 354 | Stochastic | Modeling involving randomness or non-deterministic outcomes | Mathematics | P02 |
+
+  | 355 | Structured Data | Information organized in defined schema with clear relationships | Data | P06 |
+
+  | 356 | Subgroup | Smaller segment within larger population with shared characteristics | Analytics | P01 |
+
+  | 357 | Supervised Learning | Using labeled training data to learn input-output mappings | ML | P02 |
+
+  | 358 | Supply Chain | Network of organizations transforming materials into products | Operations | P12 |
+
+  | 359 | Support Vector Machine (SVM) | Algorithm finding optimal hyperplane separating classes | ML | P02 |
+
+  | 360 | Synthetic Data | Artificially generated data mimicking real data characteristics | Data Science | P01 |
+
+  | 361 | System | Integrated collection of components achieving defined objective | Systems | P08 |
+
+  | 362 | System Testing | Evaluating complete integrated system against requirements | Quality | P07 |
+
+  | 363 | Systemic Bias | Systematic difference in treatment of certain groups | Fairness | P11 |'
+4_18_full_term_catalog_t: '| # | Term | Definition | Domain | CEX Pillar |
+
+  |---|------|-----------------------------|--------|------------|
+
+  | 364 | Target Variable | Outcome variable model predicts or explains | ML | P02 |
+
+  | 365 | Taxonomy | Hierarchical classification organizing concepts by characteristics | Knowledge | P01 |
+
+  | 366 | Technical Debt | Accumulated cost of shortcuts and deferred improvements | Software | P05 |
+
+  | 367 | Template | Standardized format serving as basis for creating items | Design | P03 |
+
+  | 368 | Tensor | Multidimensional mathematical array of numerical values | Mathematics | P02 |
+
+  | 369 | Test | Procedure evaluating whether system meets specifications | Quality | P07 |
+
+  | 370 | Testing | Process executing system to identify defects or deviations | Quality | P07 |
+
+  | 371 | Text Mining | Computational extraction of information from unstructured text | NLP | P03 |
+
+  | 372 | Text Summarization | NLP task condensing document content into briefer form | NLP | P03 |
+
+  | 373 | Threshold | Boundary value determining classification decision or alert | ML | P02 |
+
+  | 374 | Throughput | Computational work volume processed per unit time | Performance | P07 |
+
+  | 375 | Time Series | Sequence of values ordered chronologically for trend analysis | Data Science | P01 |
+
+  | 376 | Token | Minimal unit of text processed by NLP systems | NLP | P03 |
+
+  | 377 | Topic Modeling | Automatically discovering abstract topics in document collections | NLP | P03 |
+
+  | 378 | Training | Process where model learns patterns from labeled data | ML | P02 |
+
+  | 379 | Training Data | Labeled dataset used to teach model input-output relationships | ML | P02 |
+
+  | 380 | Transfer Learning | Leveraging knowledge from one task for another related task | ML | P02 |
+
+  | 381 | Transformation | Converting data from one format to another | Data Processing | P01 |
+
+  | 382 | Transparency | Being understandable and clear regarding processes and decisions | Governance | P08 |
+
+  | 383 | True Negative | Correct negative class prediction | ML Eval | P07 |
+
+  | 384 | True Positive | Correct positive class prediction | ML Eval | P07 |
+
+  | 385 | Trust | Confidence in system being reliable, honest, and secure | Governance | P11 |
+
+  | 386 | Trustworthiness | Quality of being worthy of reliance through integrity | Ethics | P11 |
+
+  | 387 | Tuning | Systematic adjustment of hyperparameters optimizing performance | ML | P02 |'
+4_19_full_term_catalog_u_z: '| # | Term | Definition | Domain | CEX Pillar |
+
+  |---|------|-----------------------------|--------|------------|
+
+  | 388 | Unbalanced Data | Dataset where class labels have unequal representation | ML | P07 |
+
+  | 389 | Uncertainty | Degree of doubt about value, outcome, or state of knowledge | Statistics | P07 |
+
+  | 390 | Unintended Consequence | Unforeseen outcome beyond original purpose | General | P11 |
+
+  | 391 | Unit Test | Testing individual software component in isolation | Quality | P07 |
+
+  | 392 | Unstructured Data | Information lacking defined schema or organization | Data | P01 |
+
+  | 393 | Unsupervised Learning | Identifying patterns in unlabeled data without predefined outcomes | ML | P02 |
+
+  | 394 | Usability | Degree product used effectively and satisfactorily by users | Quality | P05 |
+
+  | 395 | Use Case | Scenario describing how feature delivers value to user | Requirements | P06 |
+
+  | 396 | Validation | Confirming system satisfies business needs for intended use | Quality | P07 |
+
+  | 397 | Value-Sensitive Design | Integrating stakeholder values throughout design | Ethics | P11 |
+
+  | 398 | Variability | Degree characteristic varies across instances | Statistics | P07 |
+
+  | 399 | Variable | Element assuming different values across instances | Statistics | P01 |
+
+  | 400 | Variance | Measure of spread of data values around mean | Statistics | P07 |
+
+  | 401 | Vector | Ordered sequence of numerical values representing features | Mathematics | P02 |
+
+  | 402 | Verification | Confirming system built correctly per design specifications | Quality | P07 |
+
+  | 403 | Version Control | System tracking changes enabling collaboration and history | Software | P05 |
+
+  | 404 | Vulnerability | Weakness enabling unauthorized access or exploitation | Security | P09 |
+
+  | 405 | Weak Learner | Simple model performing marginally better than random | ML | P02 |
+
+  | 406 | Weighting | Assigning factors amplifying or reducing element contribution | ML | P02 |
+
+  | 407 | White-Box Model | Model providing transparent, explainable predictions | ML Explainability | P07 |
+
+  | 408 | Workflow | Sequence of automated/manual processes executing tasks | Automation | P12 |
+
+  | 409 | Worst-Case | Maximum adverse scenario under defined conditions | Risk Analysis | P11 |
+
+  | 410 | Yield | Proportion of acceptable output from production process | Operations | P07 |'
+4_20_additional_terms_411_511: 'The following terms complete the NIST AI 100-3 catalog. These are drawn from
+
+  cross-disciplinary domains the glossary intentionally bridges:
+
+
+  | # | Term | Domain | CEX Pillar |
+
+  |---|------|--------|------------|
+
+  | 411 | Access Control | Security | P09 |
+
+  | 412 | Adversarial Machine Learning | Security/ML | P09 |
+
+  | 413 | Agentive System | AI | P02 |
+
+  | 414 | Aggregate | Data Processing | P01 |
+
+  | 415 | Ambiguity | Interpretation | P07 |
+
+  | 416 | Architecture | Systems | P08 |
+
+  | 417 | Artifact | General | P08 |
+
+  | 418 | Assumption | Research | P07 |
+
+  | 419 | Asynchronous | Computing | P04 |
+
+  | 420 | Attrition | Data Quality | P07 |
+
+  | 421 | Authentication | Security | P09 |
+
+  | 422 | Authorization | Security | P09 |
+
+  | 423 | Backdoor Attack | Security | P09 |
+
+  | 424 | Baseline | Evaluation | P07 |
+
+  | 425 | Bayesian | Statistics/ML | P02 |
+
+  | 426 | Black-Box Model | ML | P02 |
+
+  | 427 | Causal Inference | Statistics | P07 |
+
+  | 428 | Certificate | Security | P09 |
+
+  | 429 | Change Management | Operations | P12 |
+
+  | 430 | Compliance | Governance | P11 |
+
+  | 431 | Component | Systems | P08 |
+
+  | 432 | Compression | Data Processing | P01 |
+
+  | 433 | Convolutional Neural Network (CNN) | ML | P02 |
+
+  | 434 | Cross-Validation | ML Eval | P07 |
+
+  | 435 | Data Augmentation | ML | P02 |
+
+  | 436 | Data Leakage | ML | P07 |
+
+  | 437 | Data Pipeline | Data Processing | P01 |
+
+  | 438 | Data Poisoning | Security | P09 |
+
+  | 439 | Data Steward | Governance | P11 |
+
+  | 440 | Decay | ML/Memory | P10 |
+
+  | 441 | Deidentification | Privacy | P09 |
+
+  | 442 | Dimensionality | Data | P01 |
+
+  | 443 | Disclosure | Privacy/Governance | P09 |
+
+  | 444 | Distribution | Statistics | P07 |
+
+  | 445 | Dropout | ML/Regularization | P02 |
+
+  | 446 | Encryption | Security | P09 |
+
+  | 447 | Endpoint | Computing | P04 |
+
+  | 448 | Entity | Data | P06 |
+
+  | 449 | Epoch | ML Training | P02 |
+
+  | 450 | Evasion Attack | Security | P09 |
+
+  | 451 | F1 Score | ML Eval | P07 |
+
+  | 452 | Feature Engineering | ML | P02 |
+
+  | 453 | Fine-Tuning | ML | P02 |
+
+  | 454 | Gradient | ML/Optimization | P02 |
+
+  | 455 | Gradient Descent | ML/Optimization | P02 |
+
+  | 456 | Granularity | Data | P01 |
+
+  | 457 | Grid Search | ML | P02 |
+
+  | 458 | Hallucination | GenAI | P07 |
+
+  | 459 | Hashing | Computing | P04 |
+
+  | 460 | Homomorphic Encryption | Privacy | P09 |
+
+  | 461 | Imbalanced Learning | ML | P02 |
+
+  | 462 | Imputation | Data Processing | P01 |
+
+  | 463 | Index | Data Structure | P10 |
+
+  | 464 | Informed Consent | Privacy/Ethics | P09 |
+
+  | 465 | Iteration | Computing | P04 |
+
+  | 466 | K-Means | ML | P02 |
+
+  | 467 | K-Nearest Neighbors | ML | P02 |
+
+  | 468 | Kernel | ML | P02 |
+
+  | 469 | Latency | Performance | P07 |
+
+  | 470 | Latent Space | ML | P02 |
+
+  | 471 | Layer | ML/Neural Networks | P02 |
+
+  | 472 | Linearity | Mathematics | P02 |
+
+  | 473 | Logistic Regression | ML | P02 |
+
+  | 474 | Mean | Statistics | P07 |
+
+  | 475 | Median | Statistics | P07 |
+
+  | 476 | Mini-Batch | ML Training | P02 |
+
+  | 477 | Model Governance | Governance | P11 |
+
+  | 478 | Model Registry | ML Ops | P08 |
+
+  | 479 | Moving Average | Statistics | P07 |
+
+  | 480 | Multicollinearity | Statistics | P07 |
+
+  | 481 | Novelty Detection | ML | P02 |
+
+  | 482 | Objective Function | ML/Optimization | P02 |
+
+  | 483 | One-Hot Encoding | Data Processing | P01 |
+
+  | 484 | Operationalize | Operations | P12 |
+
+  | 485 | Oversampling | ML | P02 |
+
+  | 486 | Padding | ML/Data | P02 |
+
+  | 487 | Perceptron | ML | P02 |
+
+  | 488 | Pooling | ML/Neural Networks | P02 |
+
+  | 489 | Posterior | Statistics/Bayesian | P02 |
+
+  | 490 | Precision | ML Eval | P07 |
+
+  | 491 | Prior | Statistics/Bayesian | P02 |
+
+  | 492 | Probability | Statistics | P07 |
+
+  | 493 | Prompt | NLP/GenAI | P03 |
+
+  | 494 | Prompt Engineering | NLP/GenAI | P03 |
+
+  | 495 | Provenance | Data Governance | P01 |
+
+  | 496 | Regularization | ML | P02 |
+
+  | 497 | Sampling | Statistics | P07 |
+
+  | 498 | Softmax | ML | P02 |
+
+  | 499 | Sparsity | ML/Data | P02 |
+
+  | 500 | Stemming | NLP | P03 |
+
+  | 501 | Stratification | Statistics | P07 |
+
+  | 502 | Tokenization | NLP | P03 |
+
+  | 503 | Topology | Mathematics/Data | P01 |
+
+  | 504 | Transformer | ML Architecture | P02 |
+
+  | 505 | Undersampling | ML | P02 |
+
+  | 506 | Utility Function | ML/Economics | P02 |
+
+  | 507 | Warm Start | ML | P02 |
+
+  | 508 | Weight | ML/Neural Networks | P02 |
+
+  | 509 | XAI (Explainable AI) | Interpretability | P07 |
+
+  | 510 | Zero-Shot Learning | ML | P02 |
+
+  | 511 | Z-Score | Statistics | P07 |
+
+
+  ---'
+5_cex_pillar_mapping_summary: '| CEX Pillar | NIST Terms Mapped | Primary NIST Domains |
+
+  |------------|-------------------|---------------------|
+
+  | P01 Knowledge | ~85 | Data Science, Analytics, Data Processing, Documentation |
+
+  | P02 Model | ~135 | Machine Learning, AI, Neural Networks, Optimization |
+
+  | P03 Prompt | ~18 | NLP, Language Models, Tokens, Prompts |
+
+  | P04 Tools | ~18 | Computing, Hardware, APIs, Algorithms |
+
+  | P05 Output | ~10 | Applications, UX, Usability, Version Control |
+
+  | P06 Schema | ~15 | Data Structures, Schemas, Protocols, Business Rules |
+
+  | P07 Evaluation | ~110 | Evaluation, Statistics, Quality, Interpretability, Validity |
+
+  | P08 Architecture | ~15 | Systems Engineering, Architecture, Interoperability, Model Cards |
+
+  | P09 Config | ~65 | Security, Privacy, Cybersecurity, Access Control |
+
+  | P10 Memory | ~5 | Memory, Indexing, Contextual Learning, Decay |
+
+  | P11 Feedback | ~80 | Governance, Fairness, Bias, Risk, Ethics, Compliance |
+
+  | P12 Orchestration | ~20 | Automation, Operations, Workflows, Deployment, Lifecycle |'
+top_coverage_gaps_cex_pillars_with_low_nist_term_density: '| CEX Pillar | Gap Analysis |
+
+  |------------|-------------|
+
+  | P10 Memory | NIST does not deeply cover agent memory, context windows, or knowledge persistence -- these are CEX-native
+  concepts |
+
+  | P03 Prompt | NIST has basic NLP terms but lacks prompt engineering taxonomy (chain-of-thought, few-shot, system prompts)
+  -- emerging vocabulary |
+
+  | P05 Output | NIST focuses on system-level outputs, not artifact production formats -- CEX goes deeper on output types
+  |
+
+
+  ---'
+6_cross_reference_nist_trustworthiness_vs_cex_quality_gates: '| NIST Characteristic | NIST Terms | CEX Equivalent | CEX Gate
+  |
+
+  |---------------------|-----------|----------------|----------|
+
+  | Valid and Reliable | Validation, Verification, Reliability, Calibration, Back-Testing | F7 GOVERN | H01-H07 hard gates
+  |
+
+  | Safe | Harm, Risk, Risk Assessment, Impact Assessment | F7 GOVERN | Quality floor 8.0 |
+
+  | Secure and Resilient | Security, Resilience, Vulnerability, Cybersecurity, Encryption | F1 CONSTRAIN | Schema validation
+  |
+
+  | Accountable and Transparent | Accountability, Transparency, Audit, Audit Log, Documentation | F8 COLLABORATE | Compile
+  + commit |
+
+  | Explainable and Interpretable | Explainability, Interpretability, Shapley Value, Counterfactual | F7 GOVERN | 5D scoring
+  |
+
+  | Privacy-Enhanced | Privacy, Differential Privacy, Anonymization, PII, Consent | F1 CONSTRAIN | Data handling rules |
+
+  | Fair | Fairness Metric, Disparate Impact, Protected Attribute, Group Fairness | F7 GOVERN | Peer review |
+
+
+  ---'
+7_key_findings: "1. Scale: NIST AI 100-3 catalogs 511 terms across 20+ domains -- the most\n   comprehensive public AI vocabulary\
+  \ in existence as of 2024.\n\n2. Cross-disciplinary bridge: The glossary intentionally spans AI/ML, data science,\n   governance,\
+  \ law, psychology, and systems engineering -- reflecting AI's interdisciplinary nature.\n\n3. Multiple definitions per term:\
+  \ Unlike a dictionary, NIST provides multiple\n   definitions per term from different source documents, acknowledging that\
+  \ \"bias\" means\n   different things in statistics vs fairness vs psychology.\n\n4. CEX coverage: 511 NIST terms map to\
+  \ all 12 CEX pillars. Heaviest concentration\n   in P02 Model (135 terms), P07 Evaluation (110 terms), and P01 Knowledge\
+  \ (85 terms).\n\n5. GenAI extension: NIST AI 600-1 added 12 risk categories and ~30 GenAI-specific\n   terms not in the\
+  \ original glossary (confabulation, prompt injection, red-teaming).\n\n6. RMF alignment: The 4 functions (Govern, Map, Measure,\
+  \ Manage) and 7 trustworthiness\n   characteristics provide a governance framework that maps directly to CEX's 8F pipeline\n\
+  \   and quality gates.\n\n7. Living document: The glossary was released in beta (spreadsheet format) with\n   updates ongoing.\
+  \ Last update: August 4, 2024.\n\n---"
+8_ai_rmf_playbook_practical_implementation_guidance: 'The NIST AI RMF Playbook (https://airc.nist.gov/airmf-resources/playbook/)
+  translates the abstract framework into action-oriented subcategories with suggested tasks. Available in PDF, CSV, Excel,
+  and JSON formats. Each subcategory is numbered: GOVERN 1.1, MAP 2.3, etc.'
+8_1_govern_function_organizational_culture: 'The GOVERN function establishes the foundational culture and policies.
+
+
+  | Subcategory | Focus | Key Suggested Actions |
+
+  |-------------|-------|----------------------|
+
+  | GOVERN 1.1 | Policies, processes, procedures | Create written AI policies; align with legal/regulatory requirements; document
+  scope |
+
+  | GOVERN 1.2 | Accountability and roles | Define AI governance roles; assign ownership for risk decisions; establish chains
+  |
+
+  | GOVERN 1.3 | Organizational risk tolerance | Document risk appetite; calibrate against mission priorities; revisit annually
+  |
+
+  | GOVERN 1.4 | Organizational teams | Form cross-functional AI risk teams: legal, ethics, IT, domain experts |
+
+  | GOVERN 1.5 | Organizational risk awareness | Train staff on AI risks; conduct awareness programs; embed risk culture |
+
+  | GOVERN 1.6 | Policies for AI development | Require risk documentation before model deployment; mandate testing protocols
+  |
+
+  | GOVERN 1.7 | Processes for third-party risk | Assess vendor AI components; require supplier documentation; audit supply
+  chain |
+
+  | GOVERN 2.1 | Accountability structures | Executive sponsorship; board-level oversight mechanisms for AI trust |
+
+  | GOVERN 4.1 | Organizational capabilities | Build internal AI expertise; establish centers of excellence |
+
+  | GOVERN 5.1 | Organizational risk posture | Conduct enterprise-wide AI risk inventory; prioritize by impact |
+
+  | GOVERN 6.1 | Incident response policies | Pre-define escalation procedures; create response playbooks; run tabletop exercises
+  |
+
+  | GOVERN 6.2 | Incident response protocols | Establish public communication procedures; document timelines; test protocols
+  |'
+8_2_map_function_contextualize_risks: 'The MAP function identifies what the AI system is, who uses it, and what could go wrong.
+
+
+  | Subcategory | Focus | Key Suggested Actions |
+
+  |-------------|-------|----------------------|
+
+  | MAP 1.1 | Context and categorization | Document system purpose, intended use, beneficial uses, deployment environment
+  |
+
+  | MAP 1.5 | Organizational risk | Identify applicable laws and regulations; map to compliance requirements |
+
+  | MAP 1.6 | Stakeholder identification | List all affected parties: users, operators, impacted communities, third parties
+  |
+
+  | MAP 2.1 | Intended purpose | Formally document system goals; define out-of-scope uses; document failure modes |
+
+  | MAP 2.3 | AI lifecycle stages | Map through all phases: design, development, testing, deployment, monitoring, retirement
+  |
+
+  | MAP 3.5 | Risk sources | Identify data quality issues, model limitations, human factors, systemic risks |
+
+  | MAP 5.1 | AI impact to people | Assess impacts on protected classes; quantify disparate impact; document mitigation |
+
+  | MAP 5.2 | Risk prioritization | Rank risks by probability x impact; document accepted vs. mitigated risks |'
+8_3_measure_function_quantify_and_monitor: 'The MEASURE function applies quantitative and qualitative tools to assess AI risk.
+
+
+  | Subcategory | Focus | Key Suggested Actions |
+
+  |-------------|-------|----------------------|
+
+  | MEASURE 1.1 | Measurement approaches | Define metrics before deployment; establish baselines; specify acceptable ranges
+  |
+
+  | MEASURE 2.1 | Test and evaluation planning | Create T&E plans; define test populations; establish statistical significance
+  thresholds |
+
+  | MEASURE 2.2 | Fairness testing | Test for disparate impact across demographic groups; document methodology and results
+  |
+
+  | MEASURE 2.3 | Explainability assessment | Evaluate interpretability of outputs; test counterfactual explanations |
+
+  | MEASURE 2.5 | Privacy risk measurement | Conduct membership inference testing; assess re-identification risk |
+
+  | MEASURE 2.6 | Robustness testing | Run adversarial perturbation tests; evaluate performance under distribution shift |
+
+  | MEASURE 2.7 | Transparency documentation | Produce model cards; document training data provenance; publish known limitations
+  |
+
+  | MEASURE 4.1 | Production monitoring | Establish continuous monitoring pipelines; set drift detection thresholds; alert
+  on anomalies |
+
+  | MEASURE 4.2 | Performance tracking | Track model performance KPIs over time; document degradation; trigger re-evaluation
+  |'
+8_4_manage_function_address_and_monitor_risks: 'The MANAGE function allocates resources and responds to mapped and measured
+  risks.
+
+
+  | Subcategory | Focus | Key Suggested Actions |
+
+  |-------------|-------|----------------------|
+
+  | MANAGE 1.1 | Risk response plans | Develop risk treatment plans: accept, mitigate, transfer, avoid |
+
+  | MANAGE 1.3 | Residual risk documentation | Document accepted residual risks; obtain stakeholder sign-off |
+
+  | MANAGE 2.2 | Risk prioritization | Allocate remediation resources to highest-impact risks first |
+
+  | MANAGE 3.1 | Risk remediation | Implement controls; re-test after remediation; track control effectiveness |
+
+  | MANAGE 3.2 | Incident response execution | Execute incident response procedures; contain, investigate, remediate, recover
+  |
+
+  | MANAGE 4.1 | Residual risk management | Maintain risk register; schedule periodic reviews; adapt to evolving conditions
+  |
+
+  | MANAGE 4.2 | Continuous improvement | Apply lessons learned; update policies; track effectiveness of governance changes
+  |'
+8_5_stop_build_authority: 'A critical NIST playbook concept enabling proactive governance: Organizations should establish
+  stop-build authority -- a defined escalation path allowing any team member to halt AI development or deployment if unacceptable
+  risks are discovered. This prevents sunk-cost bias from overriding safety signals. Implementation: Assign stop-build authority
+  to specific roles (AI Ethics Officer, CISO, CRO). Define trigger conditions (e.g., fairness metric exceeds threshold, security
+  vulnerability discovered, regulatory interpretation changes). Document override procedures. ---'
+9_nist_ai_600_1_genai_profile_implementation_mitigations: 'Expanding Section 3 with implementation-level mitigations for each
+  of the 12 risk categories.
+
+  Source: https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf
+
+
+  | # | Risk Category | Implementation Mitigations | Testing Approach |
+
+  |---|--------------|---------------------------|-----------------|
+
+  | 1 | CBRN Access | Content filtering; access controls to specialized capabilities; red-team with SMEs | Adversarial prompt
+  testing; capability elicitation assessment |
+
+  | 2 | Confabulation | Output validation pipelines; uncertainty quantification; human review for high-stakes; RAG grounding
+  | Factuality benchmarks (TruthfulQA, HaluEval); citation accuracy |
+
+  | 3 | Data Privacy | Training data governance; differential privacy; PII scrubbing; inference attack testing | Membership
+  inference attacks; canary insertion tests |
+
+  | 4 | Environmental Impact | Compute monitoring dashboards; inference optimization (quantization, distillation); carbon
+  accounting | Energy per inference; model efficiency metrics |
+
+  | 5 | Harmful Bias | Fairness testing across demographics; model collapse monitoring; diverse training data curation | Disparate
+  impact ratio; demographic parity; counterfactual fairness |
+
+  | 6 | Human-AI Interaction | UI design preventing automation bias; clear AI disclosure; adjustable reliance levels | User
+  studies; automation bias measurement; task performance testing |
+
+  | 7 | Information Integrity | Deepfake detection; source attribution; watermarking AI-generated content | Synthetic media
+  detection rates; provenance tracing accuracy |
+
+  | 8 | Information Security | Prompt injection defenses; model extraction countermeasures; access logging | Prompt injection
+  red-teaming; model inversion attacks; API abuse testing |
+
+  | 9 | Intellectual Property | Training data licensing audit; output similarity screening; provenance documentation | Copyright
+  similarity detection; memorization probing |
+
+  | 10 | Obscene/Degrading Content | Multi-layer content classifiers; human moderation for edge cases; clear content policies
+  | Adversarial prompting for policy bypass; false positive/negative rates |
+
+  | 11 | Dangerous/Violent Content | Safety classifiers; constitutional AI techniques; output review for extremism | Red-team
+  adversarial testing; hate speech detection benchmarks |
+
+  | 12 | Value Chain Integration | Vendor AI risk assessments; SBOM for AI; third-party audit requirements | Dependency mapping;
+  API security testing; SLA compliance monitoring |'
+9_1_tevv_framework_test_evaluate_verify_validate: 'NIST AI 600-1 emphasizes the TEVV cycle for GenAI systems:
+
+
+  | Phase | Focus | Key Activities |
+
+  |-------|-------|----------------|
+
+  | Test | Discover failures | Red-teaming, adversarial probing, unit testing of safety controls |
+
+  | Evaluate | Measure performance | Benchmark comparison, fairness metric calculation, risk scoring |
+
+  | Verify | Confirm requirements met | Trace from risk to control to test evidence; document coverage |
+
+  | Validate | Confirm fitness for purpose | User acceptance testing; stakeholder review; real-world pilot |
+
+
+  ---'
+10_iso_iec_42001_2023_cross_reference: 'ISO/IEC 42001 is the first international standard for AI Management Systems (AIMS),
+  published November 2023. Source: https://www.iso.org/standard/81230.html'
+10_1_iso_42001_vs_nist_rmf_key_structural_differences: '| Dimension | NIST AI RMF | ISO/IEC 42001 | Practitioner Impact |
+
+  |-----------|-------------|---------------|---------------------|
+
+  | Nature | Voluntary framework | Certifiable standard (third-party audit) | ISO enables external certification; NIST does
+  not |
+
+  | Structure | 4 functions (Govern, Map, Measure, Manage) | 10 clauses (ISO management system structure) | ISO uses Plan-Do-Check-Act;
+  NIST uses risk cycle |
+
+  | Compliance | Self-assessment acceptable | Conformity assessment available | ISO certification demonstrates systematic
+  governance |
+
+  | Scope | Risk management focus | Full management system: policy, objectives, operations, improvement | ISO covers organizational
+  governance beyond risk |
+
+  | Controls | Outcome-based guidance | Prescriptive Annex A (38 controls) | ISO Annex A provides concrete baseline control
+  set |'
+10_2_iso_42001_10_clause_structure: '| Clause | Title | NIST RMF Alignment |
+
+  |--------|-------|-------------------|
+
+  | 1 | Scope | -- (applicability boundaries) |
+
+  | 2 | Normative References | -- (standards citations) |
+
+  | 3 | Terms and Definitions | Vocabulary alignment with NIST AI 100-3 |
+
+  | 4 | Context of the Organization | GOVERN -- understand context, stakeholders, scope |
+
+  | 5 | Leadership | GOVERN -- executive accountability, policy commitment |
+
+  | 6 | Planning | MAP + MEASURE -- risk identification, objectives |
+
+  | 7 | Support | MANAGE -- resources, competence, awareness, communication |
+
+  | 8 | Operation | MANAGE -- operational planning, AI system lifecycle controls |
+
+  | 9 | Performance Evaluation | MEASURE -- monitoring, analysis, internal audit |
+
+  | 10 | Improvement | GOVERN -- nonconformity, corrective action, continual improvement |'
+10_3_iso_42001_annex_a_38_controls_by_area: '| Control Area | Controls | Examples |
+
+  |-------------|---------|---------|
+
+  | AI governance | 6 | Policies, roles, accountability structures |
+
+  | Risk management | 8 | Risk assessment methodology, treatment plans, residual risk |
+
+  | Data management | 6 | Data provenance, quality, lifecycle |
+
+  | AI system development | 8 | Design requirements, testing, change management |
+
+  | Human oversight | 4 | Human review mechanisms, override capabilities |
+
+  | Third-party management | 3 | Supplier assessment, contractual requirements |
+
+  | Incident management | 3 | Response procedures, reporting, lessons learned |'
+10_4_nist_terms_vs_iso_42001_terms: '| NIST Term | ISO 42001 Equivalent | Key Difference |
+
+  |-----------|---------------------|----------------|
+
+  | AI Actor | Interested parties (clause 4.2) | ISO uses broader stakeholder lens |
+
+  | AI RMF Profile | AIMS scope (clause 4.3) | ISO scope defines coverage; NIST profile tailors functions |
+
+  | Trustworthiness | AI system objectives (clause 6.2) | ISO frames as measurable objectives; NIST as characteristics |
+
+  | Impact Assessment | AI impact assessment (Annex A A.6.1.6) | ISO mandates documentation; NIST recommends it |
+
+  | Governance | Management system (all clauses) | ISO governance is the whole standard; NIST is one of 4 functions |
+
+
+  ---'
+11_eu_ai_act_terminology_cross_reference: 'The EU AI Act (Regulation EU 2024/1689, effective August 2024) establishes legally
+  binding definitions that differ from NIST''s voluntary framework vocabulary. Source: https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng'
+11_1_core_eu_ai_act_definitions_vs_nist: '| Term | NIST Definition | EU AI Act Definition (Article 3) | Key Difference |
+
+  |------|-----------------|----------------------------------|----------------|
+
+  | AI System | Engineered system generating outputs influencing environments | Machine-based system operating with varying
+  autonomy, may show adaptiveness, producing outputs for explicit or implicit objectives | EU definition is narrower and legally
+  precise; excludes pure rule-based systems |
+
+  | High-Risk AI | Not defined; risk determined by MAP function | AI systems in Annex III (biometrics, critical infrastructure,
+  employment, education, law enforcement, migration, justice) | EU creates statutory list; NIST leaves determination to organizations
+  |
+
+  | GPAI Model | Foundation Model (NIST AI 600-1) | General-purpose AI model trained on large data, exhibiting significant
+  generality | EU legal category with compliance obligations; NIST term is descriptive |
+
+  | Systemic Risk | Not formally defined | Risk specific to high-capability GPAI models (>10^25 FLOPs) with potential for
+  widespread EU-level adverse effects | EU introduces quantitative threshold; NIST has no equivalent |
+
+  | Provider | Developer (NIST AI 100-3) | Natural/legal person placing AI system on market or putting into service | EU "provider"
+  = NIST "developer"; legal accountability attached |
+
+  | Deployer | Operator (contextual) | Natural/legal person using AI system under own authority | EU "deployer" = NIST "operator";
+  compliance obligations attached |
+
+  | Conformity Assessment | Not applicable | Process verifying AI system meets applicable requirements before market placement
+  | EU requires this for high-risk systems; NIST does not |'
+11_2_eu_ai_act_risk_tiers: '| Tier | EU AI Act Definition | NIST Equivalent | CEX Pillar |
+
+  |------|---------------------|-----------------|------------|
+
+  | Prohibited | Subliminal manipulation, exploitation of vulnerabilities, social scoring, real-time biometric surveillance
+  in public spaces | No equivalent -- NIST does not prohibit | P11 Feedback (ethics) |
+
+  | High-Risk | Annex III: biometrics, critical infrastructure, education, employment, essential services, law enforcement,
+  migration, justice | High probability x high impact on NIST MAP function | P11 Feedback (risk) |
+
+  | Limited-Risk | Transparency obligations: chatbot disclosure, deepfake labeling, emotion recognition disclosure | Moderate
+  risk on NIST MAP function | P08 Architecture (transparency) |
+
+  | Minimal-Risk | No specific obligations: spam filters, AI in video games, recommendation systems | Low risk on NIST MAP
+  function | General baseline |'
+11_3_gpai_model_requirements_articles_51_55: 'For GPAI models with systemic risk (>10^25 FLOPs training compute):
+
+
+  | Requirement | Description | NIST Equivalent |
+
+  |-------------|-------------|-----------------|
+
+  | Model evaluation | Standardized tests and adversarial testing | MEASURE 2.6 (robustness) |
+
+  | Adversarial testing | Red-teaming before public release | NIST AI 600-1 red-teaming guidance |
+
+  | Incident reporting | Serious incidents reported to AI Office within 15 days | MANAGE 3.2 (incident response) |
+
+  | Cybersecurity measures | Adequate protection for model weights and architecture | MEASURE 2.5 + GOVERN 1.7 |
+
+  | Energy efficiency | Compute and energy consumption reporting | NIST AI 600-1 environmental impact |'
+11_4_compliance_workflow_nist_iso_42001_eu_ai_act: "Step 1 -- Inventory (NIST MAP 1.1):\n  Document all AI systems in use\
+  \ or development.\n\nStep 2 -- Classify (EU AI Act tiers):\n  Prohibited? -> Stop.\n  High-Risk Annex III? -> Full EU compliance\
+  \ required.\n  GPAI >10^25 FLOPs? -> Systemic risk tier.\n\nStep 3 -- Govern (ISO 42001 clauses 4-5):\n  Establish AIMS\
+  \ scope, leadership commitment, accountability roles.\n\nStep 4 -- Risk assess (NIST MAP + MEASURE):\n  Apply GOVERN/MAP/MEASURE/MANAGE\
+  \ cycle for all AI systems.\n\nStep 5 -- Control (ISO 42001 Annex A):\n  Implement 38 controls proportionate to risk tier.\n\
+  \nStep 6 -- Certify (EU AI Act Article 43):\n  High-risk: conformity assessment (self or third-party).\n  ISO 42001 certification\
+  \ supports but does not substitute.\n\nStep 7 -- Monitor (NIST MEASURE 4.1 + ISO 42001 clause 9):\n  Continuous performance\
+  \ monitoring, drift detection, incident management.\n\n---"
+12_multi_framework_comparison_matrix: '| Dimension | NIST AI RMF | ISO/IEC 42001 | EU AI Act |
+
+  |-----------|-------------|---------------|-----------|
+
+  | Jurisdiction | Global (voluntary) | Global (certifiable) | EU (legally binding) |
+
+  | Mandate | Voluntary | Voluntary (certification optional) | Mandatory for EU market |
+
+  | Primary Output | Risk assessments and profiles | Management system and certification | Regulatory compliance |
+
+  | Enforcement | None | Certification bodies | National market surveillance authorities |
+
+  | Penalty | None | Loss of certification | Up to 3-7% global turnover (high-risk violations) |
+
+  | Vocabulary Source | AI 100-3 (511 terms) | ISO 22989, ISO 42001 Clause 3 | Regulation 2024/1689 Article 3 (65+ definitions)
+  |
+
+  | Update Frequency | Living document | Standards revision (~5 years) | Implementing acts (ongoing) |
+
+  | CEX Integration | Primary reference (8F pipeline) | Governance scaffold (P11/P12) | Compliance layer (P11 Feedback) |
+
+
+  ---'
+13_term_catalog_completeness_audit: 'Verification pass on the 511-term catalog against NIST AI 100-3 structure. Source: https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-3.pdf
+  (August 2024 release)'
+13_1_coverage_status_by_letter: '| Letter | Terms Cataloged | Definition Status | Notes |
+
+  |--------|----------------|------------------|-------|
+
+  | A | 38 (terms 1-38) | Full definitions (section 4.2) | Complete |
+
+  | B | 17 (terms 40-56) | Full definitions (section 4.3) | Note: #39 gap = no B-starting term at that position |
+
+  | C | 30 (terms 57-87) | Full definitions (section 4.4) | Complete |
+
+  | D | 49 (terms 88-136) | Full definitions (section 4.5) | Complete |
+
+  | E | 26 (terms 137-162) | Full definitions (section 4.6) | Complete |
+
+  | F | 20 (terms 163-182) | Full definitions (section 4.7) | Complete |
+
+  | G | 12 (terms 183-194) | Full definitions (section 4.8) | Complete |
+
+  | H | 18 (terms 195-212) | Full definitions (section 4.9) | Complete |
+
+  | I | 21 (terms 213-221) | Full definitions (section 4.10) | Complete |
+
+  | J | 0 | N/A | GAP: No J-terms in NIST AI 100-3 catalog |
+
+  | K-L | ~16 (terms 222-237) | Full definitions (section 4.11) | J absent; NIST 100-3 has no J-starting terms |
+
+  | M | ~36 (terms 238-273) | Full definitions (section 4.12) | Complete |
+
+  | N | ~17 (terms 274-290) | Full definitions (section 4.13) | Complete |
+
+  | O | ~15 (terms 291-305) | Full definitions (section 4.14) | Complete |
+
+  | P | ~22 (terms 306-327) | Full definitions (section 4.15) | Complete |
+
+  | Q-R | ~30 (terms 328-357) | Full definitions (section 4.16) | Complete |
+
+  | S | ~37 (terms 358-394) | Full definitions (section 4.17) | Complete |
+
+  | T | ~28 (terms 395-422) | Full definitions (section 4.18) | Complete |
+
+  | U-Z | ~11 (terms 423-433) | Full definitions (section 4.19) | Complete |
+
+  | Additional | 101 (terms 411-511) | DEFINITION-FREE | Section 4.20: name, domain, pillar only |
+
+
+  Completeness findings:
+
+  1. Letter J is absent from NIST AI 100-3. This is confirmed -- the NIST glossary skips J because the cross-disciplinary
+  source vocabulary has no AI-relevant J-terms at sufficient specificity.
+
+  2. Terms 411-511 lack definitions in section 4.20. These are supplementary catalog entries from the CSV that were mapped
+  by domain/pillar but not yet given definitions. See section 13.2 for priority definitions.
+
+  3. Total fully-defined terms: ~410 of 511 (80% complete). Remaining 20% (101 terms) need definition enrichment.'
+13_2_priority_definitions_for_terms_411_511_high_value_terms: 'The following terms from section 4.20 appear most frequently
+  in AI governance literature
+
+  and warrant priority definition enrichment:
+
+
+  | Term | Full NIST AI 100-3 Definition | Domain | CEX Pillar |
+
+  |------|------------------------------|--------|------------|
+
+  | Adversarial Machine Learning | Field studying attacks on ML systems and defenses against them; includes data poisoning,
+  model evasion, and inference attacks | Security/ML | P09 |
+
+  | Backdoor Attack | Attack introducing hidden functionality into a model during training, triggered by specific input patterns
+  | Security | P09 |
+
+  | Black-Box Model | ML model whose internal decision process is not observable; outputs can be queried but internals are
+  opaque | ML | P02 |
+
+  | Causal Inference | Statistical framework determining whether variable X causes outcome Y, not merely correlates; enables
+  counterfactual reasoning | Statistics | P07 |
+
+  | Data Augmentation | Technique artificially expanding training datasets through transformations (rotation, cropping, noise
+  injection) to improve model generalization | ML | P02 |
+
+  | Data Leakage | Unintentional exposure of test data or future information to the training process, producing optimistically
+  biased model evaluations | ML | P07 |
+
+  | Data Poisoning | Attack contaminating training data to degrade model performance or introduce malicious behaviors | Security
+  | P09 |
+
+  | Evasion Attack | Adversarial attack crafting inputs at inference time that cause misclassification while appearing normal
+  to human observers | Security | P09 |
+
+  | Fine-Tuning | Technique adapting a pre-trained model to a new task by continuing training on domain-specific data with
+  lower learning rate | ML | P02 |
+
+  | Hallucination | GenAI output that is factually incorrect, internally inconsistent, or fabricated despite appearing plausible
+  and confident | GenAI | P07 |
+
+  | Homomorphic Encryption | Cryptographic scheme allowing computation on encrypted data without decryption; enables privacy-preserving
+  ML inference | Privacy | P09 |
+
+  | Latent Space | High-dimensional compressed representation of data learned by a neural network encoder; captures semantic
+  relationships | ML | P02 |
+
+  | Model Governance | Processes and controls managing the development, deployment, monitoring, and retirement of ML models
+  in production | Governance | P11 |
+
+  | Model Registry | Versioned repository tracking ML model artifacts, metadata, lineage, and deployment status | ML Ops |
+  P08 |
+
+  | Prompt Engineering | Practice of designing and optimizing input text to elicit desired outputs from language models |
+  NLP/GenAI | P03 |
+
+  | Provenance | Documentation of data or model origin, lineage, and chain of custody; enables reproducibility and accountability
+  | Data Governance | P01 |
+
+  | Tokenization | Process splitting text into discrete units (tokens) for processing by language models; affects context
+  window capacity | NLP | P03 |
+
+  | Transformer | Neural network architecture based on self-attention mechanism; foundational to modern large language models
+  (BERT, GPT, etc.) | ML Architecture | P02 |
+
+  | XAI (Explainable AI) | Field and set of techniques producing AI explanations accessible to non-technical stakeholders;
+  includes LIME, SHAP, attention visualization | Interpretability | P07 |
+
+  | Zero-Shot Learning | Model capability to correctly classify or respond to categories never seen during training, by leveraging
+  semantic relationships | ML | P02 |'
+13_3_terms_confirmed_absent_from_nist_ai_100_3_cex_native_concepts: 'The following concepts appear in CEX architecture but
+  are NOT in NIST AI 100-3 because they
+
+  represent post-2024 developments or CEX-specific abstractions:
+
+
+  | CEX Concept | Why Absent from NIST | Closest NIST Term | Status |
+
+  |-------------|---------------------|------------------|--------|
+
+  | Agent Memory / Context Window | Emerging LLM runtime concept; post-2024 | Contextual Learning (#74) | NIST gap |
+
+  | Prompt Injection | In AI 600-1 but not AI 100-3 | Adversarial Example (#8) | Cross-doc |
+
+  | Chain-of-Thought | Emerging prompting technique | Not covered | CEX-native |
+
+  | Few-Shot / Zero-Shot Prompting | Zero-Shot in 100-3 but not prompting taxonomy | Zero-Shot Learning (#510) | Partial |
+
+  | Tool Calling / Function Calling | Agentic AI pattern; emerging | Not covered | CEX-native |
+
+  | Retrieval-Augmented Generation | Not in 100-3; mentioned in 600-1 | Not formally defined | Cross-doc |
+
+  | Agentic AI Workflow | Emerging multi-agent orchestration | Agentive System (#413) | Partial |
+
+  | Multi-Agent System | Not formally in 100-3 | Autonomous Vehicle (#37, narrow) | CEX-native |'
+13_4_practical_tools_and_resources_for_nist_implementation: '| Resource | Type | URL | Use Case |
+
+  |----------|------|-----|----------|
+
+  | NIST AI RMF Playbook | Interactive web + PDF | https://airc.nist.gov/airmf-resources/playbook/ | Action-by-action implementation
+  guide |
+
+  | NIST AI RMF Knowledge Base | Searchable database | https://airc.nist.gov/AI_RMF_Knowledge_Base/Glossary | Term lookup
+  with source citations |
+
+  | AI 100-3 CSV Download | Spreadsheet | https://airc.nist.gov/glossary/ | Machine-readable 511-term catalog |
+
+  | NIST AI 600-1 Full Text | PDF | https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf | GenAI risk deep-dive |
+
+  | NIST-ISO 42001 Crosswalk | PDF | https://airc.nist.gov/docs/NIST_AI_RMF_to_ISO_IEC_42001_Crosswalk.pdf | Framework alignment
+  mapping |
+
+  | EU AI Act Full Text | PDF | https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng | Legal definitions (Article 3+) |
+
+  | NIST AI Profiles | Multiple | https://airc.nist.gov/Docs/2 | Sector-specific RMF implementations |
+
+  | AI Incident Database | Web | https://incidentdatabase.ai/ | Real-world AI failure case studies |
+
+  | AI RMF Community of Interest | Forum | https://airc.nist.gov/ | Working groups by sector |'

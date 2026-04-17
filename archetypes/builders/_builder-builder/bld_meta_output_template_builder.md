@@ -1,10 +1,12 @@
 ---
+id: bld_meta_output_template_builder
+kind: builder_meta
 meta: true
 file_position: 6/13
 pillar: P05
 llm_function: PRODUCE
 purpose: Meta-template for generating OUTPUT_TEMPLATE.md of any kind-builder
-quality: 9.1
+quality: 9.2
 title: "Meta Output Template Builder"
 version: "1.0.0"
 author: n03_builder

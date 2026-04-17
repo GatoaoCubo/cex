@@ -1,0 +1,43 @@
+kind: instruction
+id: bld_instruction_legal_vertical
+pillar: P03
+llm_function: REASON
+purpose: Step-by-step production process for legal_vertical
+quality: null
+title: Instruction Legal Vertical
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- legal_vertical
+- builder
+- instruction
+tldr: Step-by-step production process for legal_vertical
+domain: legal_vertical construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+phase_1_research:
+- Analyze privilege logs for attorney-client confidentiality patterns
+- Map billable hour tracking methods across law firm accounting systems
+- Audit contract clauses for recurring legal terminology in M&A agreements
+- Identify use cases for privilege in litigation discovery processes
+- Benchmark contract analysis tools against legal tech industry standards
+- Document regulatory frameworks affecting billable hour reporting
+phase_2_compose:
+- Align artifact structure with bld_schema_legal_vertical.md's legal_vertical hierarchy.
+- Write privilege section covering attorney-client privilege (ABA Rule 1.6) and work-product doctrine (FRCP 26(b)(3)).
+- Implement billable hour tracking logic with UTBMS task/activity codes in JSON format per schema.
+- Extract contract analysis patterns from sample NDAs and SLAs; map to EDRM model for eDiscovery use cases.
+- Embed use case examples in "litigation", "compliance", and "matter management" subsections.
+- Reference ABA Model Rule 5.3 (supervision of non-lawyer assistants) for AI tool use cases.
+- Cross-reference schema requirements with bld_output_template_legal_vertical.md metadata fields.
+- Add iManage/NetDocuments DMS integration patterns for document management.
+- Include legal hold / litigation hold procedures and document retention policies.
+- Finalize artifact with P01 pillar metadata and legal_vertical classification.
+phase_3_validate:
+- '[ ] [OK] Verify schema compliance with bld_schema_legal_vertical.md''s required fields.'
+- '[ ] [OK] Confirm billable hour calculations use UTBMS codes and match industry benchmarks.'
+- '[ ] [OK] Ensure privilege section covers both A-C privilege and work-product doctrine.'
+- '[ ] [OK] Validate eDiscovery workflows against EDRM model phases.'
+- '[ ] [OK] Confirm ABA Rule 5.3 compliance documented for AI assistant use cases.'
+- '[ ] [OK] Validate contract analysis outputs against bld_output_template_legal_vertical.md structure.'

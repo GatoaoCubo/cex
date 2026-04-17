@@ -152,18 +152,34 @@ def _parse_soft_dimensions(gate_content: str) -> list[dict]:
 
 
 def _parse_hard_gates(gate_content: str) -> list[dict]:
-    """Extract hard gates from quality gate file."""
+    """Extract hard gates from quality gate file.
+
+    Supports optional severity column: | H01 | check | fail_cond | CRITICAL |
+    Severity levels: CRITICAL (blocks), HIGH (warns), MEDIUM (documents), LOW (ignored).
+    If no severity column, defaults to HIGH.
+    """
     gates = []
     for m in re.finditer(
-        r'^\|\s*(H\d+)\s*\|\s*(.*?)\s*\|\s*(.*?)\s*\|',
+        r'^\|\s*(H\d+)\s*\|\s*(.*?)\s*\|\s*(.*?)\s*(?:\|\s*(CRITICAL|HIGH|MEDIUM|LOW)\s*)?\|',
         gate_content, re.MULTILINE
     ):
+        severity = m.group(4).upper() if m.group(4) else "HIGH"
         gates.append({
             "id": m.group(1),
             "check": m.group(2).strip(),
             "fail_condition": m.group(3).strip(),
+            "severity": severity,
         })
     return gates
+
+
+# Severity weights for scoring impact
+SEVERITY_WEIGHTS = {
+    "CRITICAL": 1.0,   # full impact -- blocks publish
+    "HIGH": 0.7,       # strong impact -- warns
+    "MEDIUM": 0.3,     # partial impact -- documents
+    "LOW": 0.0,        # no scoring impact -- informational
+}
 
 
 def score_rubric(path: str) -> tuple[float, list[dict], list[str]]:
@@ -223,15 +239,45 @@ def score_rubric(path: str) -> tuple[float, list[dict], list[str]]:
         elif "tldr" in check and "160" in check:
             tldr = re.search(r'tldr:\s*["\']?(.*?)["\']?\s*$', fm, re.MULTILINE)
             passed = tldr is not None and len(tldr.group(1)) <= 160
+        elif "tldr" in check and "present" in check:
+            tldr = re.search(r'tldr:\s*.+', fm)
+            passed = tldr is not None and len(tldr.group(0)) > 10
+        elif "tags" in check and ("list" in check or "present" in check):
+            passed = bool(re.search(r'tags:\s*\[.+\]', fm))
+        elif "version" in check:
+            passed = bool(re.search(r'version:\s*\d+\.\d+', fm))
+        elif "no placeholder" in check or "no todo" in check:
+            bad = len(re.findall(r'(?i)\b(TODO|TBD|FIXME|insert here|add later)\b', body))
+            passed = bad == 0
+        elif "has example" in check or "example" in check:
+            passed = bool(re.search(r'(?i)## (Example|Usage|Sample)', body))
+        elif "has table" in check or "table" in check:
+            passed = bool(re.search(r'^\|.*\|', body, re.MULTILINE))
+        elif "code block" in check or "```" in check:
+            passed = "```" in body
+        elif "body length" in check or ("min" in check and "words" in check):
+            words = len(body.split())
+            passed = words >= 100
+        elif "no filler" in check or "filler" in check:
+            fillers = re.findall(r'(?i)\b(this document|in summary|it.?s worth noting|as mentioned)\b', body)
+            passed = len(fillers) == 0
         else:
-            passed = True  # can't check programmatically, assume pass
+            passed = True
+
+        severity = gate.get("severity", "HIGH")
+        weight = SEVERITY_WEIGHTS.get(severity, 0.7)
 
         if passed:
-            hard_pass += 1
+            hard_pass += weight
         else:
-            notes.append(f"FAIL {gate['id']}: {gate['check'][:50]}")
+            if severity == "CRITICAL":
+                notes.append(f"BLOCK {gate['id']} [{severity}]: {gate['check'][:50]}")
+            elif severity != "LOW":
+                notes.append(f"FAIL {gate['id']} [{severity}]: {gate['check'][:50]}")
 
-    hard_ratio = hard_pass / max(len(hard_gates), 1)
+    max_weight = sum(SEVERITY_WEIGHTS.get(g.get("severity", "HIGH"), 0.7)
+                     for g in hard_gates) or 1.0
+    hard_ratio = hard_pass / max_weight
 
     # Soft dimensions -- pattern-based scoring
     soft_dims = _parse_soft_dimensions(gate_content)
@@ -475,18 +521,14 @@ def score_hybrid(path: str, use_cache: bool = True, force_semantic: bool = False
 
     # Layer 1: Structural (always)
     struct_raw, struct_notes = score_structural(path)
-    structural = round(8.0 + (struct_raw / 10.0) * 1.3, 2)
-    structural = min(structural, 9.3)
-    structural = max(structural, 7.0)
+    structural = round(struct_raw, 2)
 
     if verbose:
         print(f"  [L1] structural: {structural}")
 
     # Layer 2: Rubric (always)
     rubric_raw, rubric_dims, rubric_notes = score_rubric(path)
-    rubric = round(8.0 + (rubric_raw / 10.0) * 1.3, 2)
-    rubric = min(rubric, 9.5)
-    rubric = max(rubric, 7.0)
+    rubric = round(rubric_raw, 2)
 
     if verbose:
         print(f"  [L2] rubric: {rubric} ({len(rubric_dims)} dims)")
@@ -504,38 +546,25 @@ def score_hybrid(path: str, use_cache: bool = True, force_semantic: bool = False
     suggestion = ""
 
     if force_semantic or avg_12 >= 8.5:
-        # Token gate: skip LLM if L1+L2 are strong AND kind has cached 9.0+ scores
+        # Cache hit only if exact content hash matches (no kind-inheritance)
         skip_llm = False
-        if not force_semantic and avg_12 >= 8.8:
+        if not force_semantic and use_cache:
             cache = _load_cache()
-            fm_match_inner = re.match(r'^---\n(.*?)\n---', open(path, 'r', encoding='utf-8').read(), re.DOTALL)
-            if fm_match_inner:
-                kind_m = re.search(r'kind:\s*(\S+)', fm_match_inner.group(1))
-                if kind_m:
-                    this_kind = kind_m.group(1).strip().strip('"\'')
-                    # Find any cached score for same kind with semantic >= 9.0
-                    for ck, cv in cache.items():
-                        if cv.get("semantic") and cv["semantic"] >= 9.0:
-                            # Check if same kind
-                            cached_path = ck.split(":")[0] if ":" in ck else ck
-                            if this_kind in cached_path or cv.get("kind") == this_kind:
-                                # Inherit semantic score (saves ~2K tokens)
-                                semantic_raw = cv["semantic"]
-                                sem_dims = cv.get("dimensions", {})
-                                reason = "inherited from same-kind cache (token optimization)"
-                                skip_llm = True
-                                if verbose:
-                                    print(f"  [L3] semantic: INHERITED from cache (avg_12={avg_12:.1f}, kind={this_kind})")
-                                break
+            h = _content_hash(path)
+            cache_key = f"{path}:{h}"
+            if cache_key in cache and cache[cache_key].get("semantic") is not None:
+                semantic_raw = cache[cache_key]["semantic"]
+                sem_dims = cache[cache_key].get("dimensions", {})
+                reason = "exact content-hash cache hit"
+                skip_llm = True
+                if verbose:
+                    print(f"  [L3] semantic: CACHED (exact hash match)")
 
         if not skip_llm:
             if verbose:
                 print(f"  [L3] semantic: calling LLM (avg_12={avg_12:.1f})...")
             semantic_raw, sem_dims, reason = score_semantic(path, structural, rubric_dims)
-        # Normalize to same scale
-        semantic = round(8.0 + (semantic_raw / 10.0) * 1.3, 2)
-        semantic = min(semantic, 9.5)
-        semantic = max(semantic, 7.0)
+        semantic = round(semantic_raw, 2)
 
         if verbose:
             print(f"  [L3] semantic: {semantic} ({reason[:60]})")
@@ -562,8 +591,7 @@ def score_hybrid(path: str, use_cache: bool = True, force_semantic: bool = False
         if verbose:
             print(f"  [L3] semantic: SKIPPED (avg_12={avg_12:.1f} < 8.5)")
 
-    final = round(min(final, 9.5), 1)
-    final = max(final, 7.0)
+    final = round(min(final, 10.0), 1)
 
     # Merge dimension info
     dimensions = {}
@@ -624,9 +652,7 @@ def score_artifact(path, hybrid: bool = False) -> tuple[float, str]:
             return (0.0, "MISSING")
         if "NO_FRONTMATTER" in notes:
             return (round(raw * 0.5, 1), "no frontmatter")
-        score = 8.0 + (raw / 10.0) * 1.3
-        score = round(min(score, 9.3), 1)
-        score = max(score, 7.0)
+        score = round(raw, 1)
         return (score, "; ".join(notes) if notes else "OK")
 
 
@@ -657,8 +683,37 @@ def main():
     parser.add_argument('--hybrid', action='store_true', help='Use 3-layer hybrid scoring (includes LLM)')
     parser.add_argument('--verbose', '-v', action='store_true', help='Show scoring details')
     parser.add_argument('--no-cache', action='store_true', help='Skip score cache')
+    parser.add_argument('--nucleus', type=str, help='Score only artifacts in N0X_*/ directory (e.g. n01)')
+    parser.add_argument('--null-only', action='store_true', help='Skip artifacts that already have quality != null')
+    parser.add_argument('--apply-null-only', action='store_true', help='Shorthand for --apply --null-only')
     parser.add_argument('files', nargs='*', help='Files to score (default: all N0* artifacts)')
     args = parser.parse_args()
+
+    if args.apply_null_only:
+        args.apply = True
+        args.null_only = True
+
+    # Restrict to specific nucleus directory if --nucleus given
+    if args.nucleus and not args.files:
+        nuc = args.nucleus.lower().replace('n', 'n0') if not args.nucleus.lower().startswith('n0') else args.nucleus.lower()
+        nuc_num = nuc.replace('n', '').replace('0', '', 1) if len(nuc) == 3 else nuc[-1]
+        nuc_dirs = [d for d in os.listdir('.') if d.lower().startswith(f'n0{nuc_num}') and os.path.isdir(d)]
+        if not nuc_dirs:
+            print(f"No directory found for nucleus {args.nucleus}")
+            return
+        args.files = []
+        for nd in nuc_dirs:
+            for root_dir, _dirs, fnames in os.walk(nd):
+                for fn in fnames:
+                    if fn.endswith('.md'):
+                        fpath = os.path.join(root_dir, fn)
+                        try:
+                            head = open(fpath, 'r', encoding='utf-8').read(2000)
+                            if 'quality:' in head:
+                                args.files.append(fpath)
+                        except (OSError, UnicodeDecodeError):
+                            pass
+        args.files.sort()
 
     # Find files if none specified
     if not args.files:
@@ -672,6 +727,21 @@ def main():
             capture_output=True, text=True
         )
         args.files = sorted(set(result.stdout.strip().split('\n'))) if result.stdout.strip() else []
+
+    # Filter to null-only if requested (frontmatter only)
+    if args.null_only and args.files:
+        filtered = []
+        for f in args.files:
+            try:
+                content = open(f, 'r', encoding='utf-8').read()
+                fm_match = re.match(r'^---\s*\n(.*?)\n---', content, re.DOTALL)
+                if fm_match:
+                    fm = fm_match.group(1)
+                    if re.search(r'^quality:\s*null\s*$', fm, re.MULTILINE):
+                        filtered.append(f)
+            except (OSError, UnicodeDecodeError):
+                pass
+        args.files = filtered
 
     if not args.files:
         print("No artifacts found.")

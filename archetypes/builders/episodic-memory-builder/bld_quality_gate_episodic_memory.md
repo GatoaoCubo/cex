@@ -1,0 +1,51 @@
+---
+id: p10_qg_episodic_memory
+kind: quality_gate
+pillar: P11
+title: "Gate: episodic_memory"
+version: "1.0.0"
+created: "2026-04-17"
+updated: "2026-04-17"
+author: "builder_agent"
+domain: "episodic_memory -- long-term temporally-indexed past interaction store"
+quality: 7.5
+tags: [quality-gate, episodic-memory, P10, long-term]
+tldr: "Pass/fail gate for episodic_memory: episode_schema with timestamp, retrieval_method, episode_count, decay_policy, owner."
+density_score: 0.90
+llm_function: GOVERN
+---
+# Gate: episodic_memory
+
+## HARD Gates
+| ID | Check | Fail Condition |
+|---|---|---|
+| H01 | Frontmatter parses as valid YAML | Parse error |
+| H02 | ID matches `^p10_ep_[a-z][a-z0-9_]+$` | Hyphens, uppercase, or missing prefix |
+| H03 | ID equals filename stem | id vs filename mismatch |
+| H04 | Kind equals literal `episodic_memory` | `kind: memory` or other |
+| H05 | Quality field is null | Non-null value |
+| H06 | episode_schema has >= 3 fields | Too few fields |
+| H07 | episode_schema includes timestamp field | Missing temporal index |
+| H08 | retrieval_method is declared enum value | Missing or invalid |
+| H09 | episode_count is numeric integer | Missing or "unlimited" |
+| H10 | decay_policy declared with method | Missing or empty |
+
+## SOFT Scoring
+| Dimension | Weight | Criteria |
+|---|---|---|
+| Episode schema completeness | 1.5 | context, task, outcome, retrieval_keys all present |
+| Retrieval configuration | 1.5 | retrieval_keys and index_method declared |
+| Decay policy detail | 1.0 | Rate/threshold numeric value, not just method name |
+| Episode count calibration | 1.0 | Count appropriate for agent complexity |
+| Promotion sources | 0.5 | working_memory promotion path declared |
+| Boundary clarity | 1.0 | Not entity_memory (no entity_type), not working_memory (no task_id) |
+| Owner declaration | 0.5 | nucleus/agent binding declared |
+| tldr quality | 0.5 | <= 160 chars, includes owner and episode_count |
+
+## Actions
+| Score | Tier | Action |
+|---|---|---|
+| >= 9.5 | Golden | Reference episodic store spec |
+| >= 8.0 | Publish | Deploy for agent integration |
+| >= 7.0 | Review | Add decay details or retrieval keys |
+| < 7.0 | Reject | Return with gate failures |

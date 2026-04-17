@@ -1,0 +1,57 @@
+id: bld_meta_output_template_builder
+kind: builder_meta
+meta: true
+file_position: 6/13
+pillar: P05
+llm_function: PRODUCE
+purpose: Meta-template for generating OUTPUT_TEMPLATE.md of any kind-builder
+quality: null
+title: Meta Output Template Builder
+version: 1.0.0
+author: n03_builder
+tags:
+- _builder
+- builder
+- examples
+tldr: Golden and anti-examples for _builder construction, demonstrating ideal structure and common pitfalls.
+domain: _builder construction
+created: '2026-04-07'
+updated: '2026-04-07'
+density_score: 0.9
+body_section_1_name: '<!-- NOTE: Copiar estrutura da section de SCHEMA.md --> <!-- Incluir tabelas, bullets, code blocks conforme
+  o type exige --> {{body_section_1_content_with_vars}}'
+body_section_2_name: '{{body_section_2_content_with_vars}}'
+body_section_3_name: "{{body_section_3_content_with_vars}}\n\n<!-- NOTE: Numero de sections varia per type: -->\n<!-- - model_card:\
+  \ 4 sections (Boundary, Specifications, Capabilities, When to Use, References) -->\n<!-- - knowledge_card: 7 sections domain_kc\
+  \ OU 6 sections meta_kc -->\n<!-- - signal: 0 sections body (JSON puro, only Derivation Notes) -->\n<!-- - quality_gate:\
+  \ 5 sections (Definition, Checklist, Scoring, Actions, Bypass) -->\n\n<!-- ====== FORMATO JSON (signal e types machine-only)\
+  \ ====== -->\n<!-- Se machine_format == json, usar template JSON ao inves de YAML+MD: -->\n<!--\n{\n  \"{{required_field_1}}\"\
+  : \"{{value_placeholder}}\",\n  \"{{required_field_2}}\": {{numeric_placeholder}},\n  \"{{optional_field_1}}\": \"{{value_or_omit}}\"\
+  \n}\nDerivation Notes:\n1. First N fields are required minimum from SCHEMA.md\n2. Remaining fields are optional extensions\n\
+  3. Omit absent optional fields instead of using placeholders\n-->\n\n<!-- SECAO UNIVERSAL (todos os types md): -->"
+references: '1. {{reference_1}}
+
+  2. {{reference_2}}
+
+  <!-- NOTE: Formato varia: source URL, artifact ref, pricing page, etc. -->'
+properties: '| Property | Value |
+
+  |----------|-------|
+
+  | Kind | `` |
+
+  | Pillar | P05 |
+
+  | Domain | _builder construction |
+
+  | Pipeline | 8F (F1-F8) |
+
+  | Scorer | cex_score.py |
+
+  | Compiler | cex_compile.py |
+
+  | Retriever | cex_retriever.py |
+
+  | Quality target | 9.0+ |
+
+  | Density target | 0.85+ |'

@@ -1,0 +1,69 @@
+kind: output_template
+id: bld_output_template_batch_config
+pillar: P05
+llm_function: PRODUCE
+purpose: Template with {{vars}} that the LLM fills to produce a batch_config artifact
+pattern: every field here exists in SCHEMA.md -- template derives, never invents
+quality: null
+title: Output Template Batch Config
+version: 1.0.0
+author: n03_builder
+tags:
+- batch_config
+- builder
+- template
+- P09
+tldr: 'Fill-in-the-blank template for batch_config artifacts: frontmatter + 5 required body sections.'
+domain: batch config construction
+created: '2026-04-13'
+updated: '2026-04-13'
+density_score: 0.9
+overview: '`{{purpose_of_this_batch_job_1_to_2_sentences}}` Triggered by: `{{who_or_what_triggers_this_batch}}` Credential
+  env var: `{{PROVIDER_API_KEY_ENV_VAR_NAME}}`'
+job_parameters: '| Parameter | Value | Description |
+
+  |-----------|-------|-------------|
+
+  | provider | {{openai|anthropic|azure_openai|custom}} | API provider for batch inference |
+
+  | model | `{{model_id}}` | Model to use for all requests in batch |
+
+  | endpoint | {{/v1/endpoint}} | API endpoint path for batch submission |
+
+  | max_requests | `{{N}}` | Maximum requests per batch file submission |
+
+  | completion_window | `{{Nh}}` | Provider SLA for batch completion |
+
+  | concurrency | `{{N}}` | Max in-flight requests at one time |'
+cost_controls: '| Control | Value | Notes |
+
+  |---------|-------|-------|
+
+  | cost_cap_usd | $`{{N}}` | Job halts if projected spend exceeds cap |
+
+  | sync_api_discount | ~50% | Batch pricing vs synchronous equivalent |
+
+  | token_budget | `{{N}}` tokens | Max tokens per request (input + output) |
+
+  | alert_threshold_usd | $`{{N}}` | Alert if cumulative cost exceeds this |'
+retry_and_error_policy: '| Setting | Value | Description |
+
+  |---------|-------|-------------|
+
+  | max_retries | `{{N}}` | Retries per failed request |
+
+  | backoff | {{exponential|fixed}} | Retry backoff strategy |
+
+  | backoff_base_s | `{{N}}` | Base wait in seconds before first retry |
+
+  | partial_failure | {{continue|halt}} | Behavior when some requests in batch fail |
+
+  | dead_letter | `{{path_or_null}}` | Storage for permanently failed requests |'
+input_output_format:
+- 'Input format: `{{JSONL}}` -- one JSON object per line, each with `custom_id`, `method`, `url`, `body`'
+- 'Output format: `{{JSONL}}` -- one result per line with `id`, `custom_id`, `response`, `error`'
+- 'Input path: `{{storage_path_or_bucket}}`'
+- 'Output path: `{{storage_path_or_bucket}}`'
+references:
+- '`{{provider_batch_api_docs_url}}`'
+- '`{{related_artifact_or_env_config}}`'

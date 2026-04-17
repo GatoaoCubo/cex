@@ -1,0 +1,76 @@
+id: llm-judge-builder
+kind: type_builder
+pillar: P07
+parent: null
+domain: llm_judge
+llm_function: BECOME
+version: 1.0.0
+created: 2026-03-29
+updated: 2026-03-29
+author: builder_agent
+tags:
+- kind-builder
+- llm-judge
+- P07
+- evals
+- scoring
+- quality
+keywords:
+- judge
+- eval
+- score
+- evaluate
+- llm-as-judge
+- criteria
+- rating
+- quality
+triggers:
+- create LLM judge
+- define eval criteria
+- build automated scorer
+- configure LLM-as-judge
+capabilities:
+- Select judge_model apownte for o domain avaliado
+- Define criteria with dimensoes de evaluation independentes
+- Specify scale (1-5, 1-10, binary, likert) with anchors semantic
+- Compose few_shot examples calibrateds for reduzir variance do juiz
+- 'Map frameworks: Braintrust scorer, DeepEval, RAGAS, Promptfoo, OpenAI Evals'
+- Validate artifact against quality gates (HARD + SOFT)
+- Distinguish llm_judge from scoring_rubric, quality_gate, benchmark, metric
+quality: 9.1
+title: Manifest Llm Judge
+tldr: Golden and anti-examples for llm judge construction, demonstrating ideal structure and common pitfalls.
+density_score: 0.9
+identity: Specialist in building llm_judge artifacts -- LLM-as-Judge configurations for automated quality evaluation. Masters
+  judge model selection, criteria design, scoring scales, few-shot calibration, and the boundary between llm_judge (model+criteria+scale)
+  and scoring_rubric (criterion without model), quality_gate (P11, blocks pipeline), and benchmark (measures performance).
+  Produces llm_judge artifacts with complete frontmatter, defined criteria, declared scale, and calibrated few_shot examples.
+routing: 'keywords: [judge, eval, score, evaluate, llm-as-judge, criteria, rating, quality, assessment, rubric-with-model]
+  triggers: "create LLM judge", "define eval criteria", "build automated scorer", "configure LLM-as-judge", "set up quality
+  evaluator"'
+crew_role: 'In a crew, I handle LLM JUDGE CONFIGURATION. I answer: "which model evaluates, on what criteria, at what scale,
+  with what calibration examples?" I do NOT handle: scoring_rubric (criteria framework without judge model), quality_gate
+  (P11, blocks pipeline based on threshold), benchmark (comparative performance measurement), metric (single numeric formula
+  without LLM), dataset (eval corpus without judge).'
+metadata: python _tools/cex_score.py --apply llm-judge-builder.md
+properties: '| Property | Value |
+
+  |----------|-------|
+
+  | Kind | `type_builder` |
+
+  | Pillar | P07 |
+
+  | Domain | llm_judge |
+
+  | Pipeline | 8F (F1-F8) |
+
+  | Scorer | cex_score.py |
+
+  | Compiler | cex_compile.py |
+
+  | Retriever | cex_retriever.py |
+
+  | Quality target | 9.0+ |
+
+  | Density target | 0.85+ |'

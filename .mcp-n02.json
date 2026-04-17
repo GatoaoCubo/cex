@@ -2,23 +2,23 @@
   "mcpServers": {
     "markitdown": {
       "command": "cmd",
-      "args": ["/c", "npx", "-y", "markitdown-mcp"]
+      "args": ["/c", "npx", "-y", "markitdown-mcp-npx"]
     },
     "browser": {
       "command": "cmd",
-      "args": ["/c", "npx", "-y", "@anthropic-ai/mcp-server-puppeteer"]
+      "args": ["/c", "npx", "-y", "@modelcontextprotocol/server-puppeteer"]
     },
     "canva": {
-      "command": "npx",
-      "args": ["-y", "@mcp_factory/canva-mcp-server"],
+      "command": "cmd",
+      "args": ["/c", "npx", "-y", "@mcp_factory/canva-mcp-server"],
       "env": {
         "CANVA_CLIENT_ID": "${CANVA_CLIENT_ID}",
         "CANVA_CLIENT_SECRET": "${CANVA_CLIENT_SECRET}"
       }
     },
     "notebooklm": {
-      "command": "npx",
-      "args": ["-y", "notebooklm-mcp@latest"]
+      "command": "cmd",
+      "args": ["/c", "npx", "-y", "notebooklm-mcp@latest"]
     }
   }
 }

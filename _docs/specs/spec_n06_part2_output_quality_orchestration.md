@@ -33,7 +33,7 @@ updated: "2026-04-07"
 
 ---
 
-## WAVE 3A: SCHEMAS (P06) -- 4 CREATE em N06/schemas/
+## WAVE 3A: SCHEMAS (P06) -- 4 CREATE em N06/P06_schema/
 
 ### 3.1 brand_config_schema.yaml
 Validates .cex/brand/brand_config.yaml. 7 sections:
@@ -65,7 +65,7 @@ Audit dimensions: archetype_alignment(0.25), voice_consistency(0.20), visual_coh
 
 ---
 
-## WAVE 3B: OUTPUT TEMPLATES (P05) -- 8 CREATE em N06/output/
+## WAVE 3B: OUTPUT TEMPLATES (P05) -- 8 CREATE em N06/P05_output/
 
 ### 3.5 output_brand_book.md
 Crown jewel. 32-block Brand Book (brunasena universalized). S1 Identity(5): names, taglines, archetype, traits, essence. S2 Positioning(5): UVP, segment, differentiation, promise, Ries-Trout. S3 Voice(5): 5D scale, language, dos, donts, 10 phrases. S4 Visual(4): palette(HEX+RGB), typography, mood board 3x3, guidelines. S5 Narrative(5): origin, mission, vision, values, manifesto. S6 Guidelines(4): extended dos/donts, compliance BR, checklist. S7 Validation(4): consistency >= 0.85, uniqueness >= 8.0, audit, integration. All fill-in variables. Zero hardcoded.

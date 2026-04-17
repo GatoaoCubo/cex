@@ -1,0 +1,92 @@
+id: nps_survey_n02
+kind: nps_survey
+pillar: P11
+nucleus: n02
+title: Audience Satisfaction NPS Survey -- N02 Marketing
+version: 1.0.0
+quality: null
+tags:
+- nps_survey
+- audience_satisfaction
+- brand_sentiment
+- retention
+- P11
+- n02_marketing
+domain: campaign-feedback
+status: active
+density_score: 1.0
+purpose: 'CTR and CVR measure what audiences DO. NPS measures what they FEEL. Both signals are necessary. A high-CTR campaign
+  that destroys brand trust is a net loss. NPS catches what performance metrics miss: the emotional residue that either compounds
+  loyalty or accelerates churn.'
+core_nps_question: '> "How likely are you to recommend [Brand/Product/Content] to a colleague or friend?"
+
+  > Scale: 0 (not at all likely) to 10 (extremely likely)
+
+
+  Scoring:
+
+  - Promoters (9-10): Loyal, will amplify brand
+
+  - Passives (7-8): Satisfied but switchable
+
+  - Detractors (0-6): At risk, potentially vocal
+
+
+  Formula: NPS = % Promoters - % Detractors
+
+  Target: >= 40 (good), >= 60 (excellent), >= 70 (world-class)'
+survey_configuration_schema: "nps_survey:\n  id: \"nps_{campaign_id}_{wave}\"\n  trigger:\n    type: post_purchase|post_content|post_campaign|periodic|behavioral\n\
+  \    delay_after_trigger_hours: 24    # minimum respect window\n    max_surveys_per_user_per_month: 1\n  channel: email|in_app|sms|linkedin_message\n\
+  \  language: string\n\n  questions:\n    primary:\n      text: \"How likely are you to recommend [brand] to a colleague?\"\
+  \n      type: nps_scale_0_10\n    follow_up_promoter:\n      condition: score >= 9\n      text: \"What made you give us\
+  \ that score? What do you value most?\"\n      type: open_text\n      max_chars: 500\n    follow_up_passive:\n      condition:\
+  \ score in [7,8]\n      text: \"What would make you an even bigger fan?\"\n      type: open_text\n      max_chars: 500\n\
+  \    follow_up_detractor:\n      condition: score <= 6\n      text: \"We're sorry to hear that. What went wrong?\"\n   \
+  \   type: open_text\n      max_chars: 500\n    optional_segment:\n      text: \"What best describes you?\"\n      type:\
+  \ single_choice\n      options: [\"Founder/CEO\", \"Marketing Lead\", \"Developer\", \"Other\"]\n\n  design:\n    estimated_completion_seconds:\
+  \ 45\n    mobile_first: true\n    brand_voice_applied: true\n    skip_allowed: true"
+response_collection_schema: "nps_response:\n  survey_id: string\n  respondent_id: string (anonymized)\n  cohort_id: string\
+  \ (from cohort_analysis_n02.md)\n  channel_acquired: string\n  campaign_id: string (nullable)\n  score: integer (0-10)\n\
+  \  category: promoter|passive|detractor\n  follow_up_text: string (nullable)\n  submitted_at: ISO 8601 datetime\n  icp_segment:\
+  \ string (nullable)"
+aggregation_reporting: "nps_report:\n  period: string\n  campaign_id: string (nullable, for campaign-specific reports)\n \
+  \ sample_size: integer\n  response_rate: float\n  nps_score: float                    # -100 to +100\n  promoter_pct: float\n\
+  \  passive_pct: float\n  detractor_pct: float\n  trend:\n    vs_previous_period: float\n    vs_industry_benchmark: float\
+  \      # marketing software avg NPS: ~41\n  qualitative_themes:\n    promoter_themes: array[string]    # extracted from\
+  \ follow-up text\n    detractor_themes: array[string]\n  segment_breakdown:\n    by_icp_segment: {segment: nps_score}\n\
+  \    by_channel: {channel: nps_score}\n    by_campaign: {campaign_id: nps_score}"
+industry_benchmarks: '| Category | NPS Benchmark |
+
+  |---------|--------------|
+
+  | B2B SaaS | 30-40 |
+
+  | Marketing Agency | 25-35 |
+
+  | Content Media | 35-50 |
+
+  | E-commerce | 45-60 |
+
+  | Enterprise Software | 20-30 |'
+copy_implications_from_nps_data: '| NPS Signal | Copy Action |
+
+  |-----------|------------|
+
+  | Promoter theme: "saves time" | Lead all TOFU with time-savings hook |
+
+  | Detractor theme: "too promotional" | Reduce direct-response frequency; increase value content |
+
+  | Passive theme: "good but generic" | Personalization lift: segment-specific copy |
+
+  | Score drop post-campaign | Campaign fatigue signal: reduce frequency or refresh creative |
+
+  | High NPS low CVR | Trust is there; friction is somewhere else -- test CTA and landing page |'
+closed_loop_actions: "auto_actions:\n  detractor:\n    if score <= 4:\n      trigger: customer_success_alert         # human\
+  \ review\n    if score in [5,6]:\n      trigger: retention_sequence_email        # automated nurture\n  promoter:\n    if\
+  \ score >= 9:\n      trigger: referral_ask_sequence           # harvesting advocacy\n    if score >= 10:\n      trigger:\
+  \ testimonial_request_email       # social proof capture"
+integration:
+- 'Feeds into: `cohort_analysis_n02.md` (satisfaction by cohort)'
+- 'Feeds into: `self_improvement_loop_n02.md` (brand sentiment signal)'
+- 'Triggers: `workflow_campaign_pipeline.md` (post-campaign measurement step)'
+- 'Referenced by: `customer_segment_n02.md` (segment satisfaction profiling)'

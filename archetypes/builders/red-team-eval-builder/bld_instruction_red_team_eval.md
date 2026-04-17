@@ -30,7 +30,7 @@ density_score: 0.90
 9. Confirm slug for id: snake_case, lowercase, no hyphens, prefix p07_rt_
 ## Phase 2: COMPOSE
 1. Read SCHEMA.md — source of truth for all fields and attack_type enum values
-2. Read OUTPUT_TEMPLATE.md — fill {{vars}} following SCHEMA constraints
+2. Read OUTPUT_TEMPLATE.md — fill `{{vars}}` following SCHEMA constraints
 3. Fill frontmatter: all required fields (quality: null — never self-score)
 4. Write Overview section: what is being tested, threat model summary, who runs this eval and when
 5. Write Attack Scenarios section: for each attack_type, provide:

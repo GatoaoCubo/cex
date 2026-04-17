@@ -1,0 +1,56 @@
+---
+id: bld_examples_domain_vocabulary
+kind: few_shot_example
+pillar: P03
+llm_function: GOVERN
+version: 1.0.0
+quality: 5.1
+tags: [domain_vocabulary, examples, few-shot]
+title: "Examples: domain_vocabulary"
+density_score: 1.0
+updated: "2026-04-17"
+---
+# Examples: domain_vocabulary
+## Example 1: E-commerce Sales Vocabulary
+```yaml
+id: dv_sales_vocabulary
+kind: domain_vocabulary
+pillar: P01
+title: "Sales Domain Vocabulary"
+bounded_context: sales
+governed_agents: [n01-intelligence, n06-commercial]
+term_count: 4
+quality: null
+tags: [sales, vocabulary, ubiquitous-language]
+```
+Terms:
+- Order: confirmed purchase with payment intent (NOT "cart" or "basket")
+- Customer: person with active purchase history (NOT "user" or "client")
+- Discount: price reduction with business rule (NOT "promo" or "deal")
+- Fulfillment: physical/digital delivery process (NOT "shipping" alone)
+
+## Example 2: CEX Core Vocabulary (partial)
+```yaml
+id: dv_cex_core_vocabulary
+kind: domain_vocabulary
+pillar: P01
+title: "CEX Core Vocabulary"
+bounded_context: cex-system
+governed_agents: [n00-genesis, n07-orchestrator]
+term_count: 6
+quality: null
+tags: [cex, vocabulary, core, ubiquitous-language]
+```
+Terms:
+- kind: atomic artifact type (NOT "type" or "category")
+- pillar: P01-P12 domain grouping (NOT "module" or "section")
+- nucleus: N00-N07 operational agent (NOT "team" or "service")
+- 8F: 8-function reasoning pipeline (NOT "workflow" or "checklist")
+
+## Anti-example (WRONG)
+```yaml
+id: global_glossary        # WRONG: too broad, not scoped to BC
+kind: domain_vocabulary    # WRONG intent: this would be a glossary or ontology
+bounded_context: all       # WRONG: must be single BC
+# Only 1 term            # WRONG: min 3 required
+```

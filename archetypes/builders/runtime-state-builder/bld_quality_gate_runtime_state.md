@@ -17,8 +17,8 @@ tags:
   - agent-state
   - routing
 tldr: "Quality gate for agent runtime mental state: verifies routing rules, state transitions, persistence scope, and conflict resolution."
+llm_function: GOVERN
 ---
-
 ## Definition
 A runtime state artifact captures the live decision-making configuration of an agent: its routing rules (with conditions and confidence), state transitions (with trigger events), priority ordering, and heuristics. It applies only during execution — it contains no design-time content such as capability descriptions or architectural diagrams. Persistence scope declares whether state survives across sessions or resets each time.
 Scope: files with `kind: runtime_state`. Does not apply to mental models (design-time identity), system prompts (static instructions), or session state (ephemeral task context).

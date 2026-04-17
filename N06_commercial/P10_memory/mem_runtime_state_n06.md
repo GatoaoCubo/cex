@@ -1,0 +1,135 @@
+---
+id: mem_runtime_state_n06
+kind: runtime_state
+pillar: P10
+nucleus: n06
+title: Commercial Runtime State
+version: 1.0
+quality: 9.0
+tags: [memory, runtime_state, routing, decisions, pricing, funnels]
+density_score: 1.0
+---
+<!-- 8F: F1=P10/runtime_state F2=runtime-state-builder F3=nucleus_def_n06.md,kc_runtime_state.md,P10_memory/_schema.yaml,N06 commercial knowledge set F4=runtime_routing_state_for_cash_near_commercial_decisions F5=apply_patch;python _tools/cex_compile.py F6=author_dense_markdown_artifact F7=frontmatter_ascii_density_linecount_review F8=N06_commercial/P10_memory/mem_runtime_state_n06.md -->
+
+# Commercial Runtime State
+
+## Purpose
+
+| Field | Value |
+|-------|-------|
+| Goal | Capture the mutable decision state N06 uses while executing commercial tasks across a session |
+| Business Lens | Strategic Greed keeps live attention on the paths closest to cash and degrades low-yield work first |
+| Primary Use | runtime routing for pricing requests, offer generation, retention rescue, and experiment triage |
+| Failure Prevented | flat task handling where premium opportunities wait behind low-value analysis |
+| Persistence Mode | cross-session until next deliberate reset |
+| State Principle | mutable heuristics, counters, and queues only |
+
+## Core State Fields
+
+| Field | Type | Example | Why |
+|-------|------|---------|-----|
+| active_mode | string | `expand_revenue` | tells N06 what commercial objective dominates |
+| priority_queue | list | `enterprise_save,annual_upgrade,pricing_refresh` | orders work by expected return |
+| routing_decisions | map | `renewal_risk -> retention_playbook` | avoids re-deciding obvious branches |
+| counters | map | `discount_exception_requests: 2` | tracks runtime pressure |
+| guardrails | map | `max_discount_pct: 15` | keeps margin discipline live |
+| context_focus | list | `offer,proof,segment` | limits prompt hydration to what matters |
+| stale_flags | list | `competitor_index_review_due` | prompts refresh before bad decisions spread |
+
+## Default Priority Order
+
+| Rank | Work Type | Why It Leads |
+|------|-----------|--------------|
+| 1 | renewal rescue for high-value accounts | retained revenue is cheapest revenue |
+| 2 | expansion for near-quota customers | cash is near and evidence is available |
+| 3 | enterprise proposal shaping | high ACV justifies deep reasoning |
+| 4 | pricing refresh | strategic but not always immediate |
+| 5 | broad exploration | useful only when core revenue paths are healthy |
+
+## Routing Heuristics
+
+| Trigger | Route | Reason |
+|---------|------|--------|
+| usage above 80 percent and procurement ready | annual_upgrade_path | expansion signal is strong |
+| renewal risk within 14 days | retention_playbook_path | save flow outranks prospecting |
+| competitor named in prompt | competitive_counter_path | retrieval must include battlecards |
+| margin floor threatened | profit_defense_path | growth without margin is weak revenue |
+| user asks for many options | narrow to top 2 | too many options lowers close probability |
+
+## Runtime Guards
+
+| Guard | Value | Effect |
+|-------|-------|--------|
+| max_parallel_experiments | 3 | keeps monetization tests manageable |
+| discount_exception_limit | 2 per session | stops concession creep |
+| low_value_research_budget | 1 slot | curiosity cannot crowd revenue work |
+| stale_competitor_tolerance_days | 30 | prevents overuse of rotten market intel |
+| proof_gap_threshold | 2 | missing proof beyond this forces evidence request |
+
+## State Transitions
+
+| From | Trigger | To | Commercial Meaning |
+|------|---------|----|-------------------|
+| idle | pricing request arrives | price_shape | preparing monetization move |
+| price_shape | buyer signal shows urgency | close_path | move from analysis to action |
+| close_path | renewal threat appears | retain_path | existing cash outranks expansion |
+| retain_path | account stabilized | expand_revenue | return to growth mode |
+| any | margin breach detected | profit_defense | greed protects quality of revenue |
+
+## What Gets Persisted
+
+| Persist | Why |
+|---------|-----|
+| routing choices that repeat across similar tasks | reduces decision latency |
+| counters for exceptions and retries | informs stricter runtime behavior |
+| known stale flags | forces future refresh attention |
+| active priority queue | preserves session continuity |
+
+## What Stays Out
+
+| Exclusion | Why |
+|-----------|-----|
+| fixed N06 identity | belongs in nucleus definition, not runtime |
+| raw knowledge content | belongs in knowledge and index artifacts |
+| secret values | belongs in config only |
+| long-term lessons | belongs in learning record, not mutable state |
+
+## Rationale
+
+| Design Choice | Why It Exists | Strategic Greed Impact |
+|---------------|---------------|------------------------|
+| explicit priority queue | revenue work should not rely on vague intent | closer-to-cash tasks stay first |
+| discount counter | concession drift is a silent margin killer | keeps discipline visible |
+| proof-gap threshold | selling without evidence burns trust | forces retrieval or research before push |
+| stale flags | runtime should know when memory is risky | prevents bad commercial advice |
+| narrow-to-top-2 heuristic | choice overload hurts conversion | supports decisive selling |
+
+## Example Snapshot
+
+```yaml
+active_mode: expand_revenue
+priority_queue:
+  - enterprise_save
+  - annual_upgrade
+  - pricing_refresh
+routing_decisions:
+  renewal_risk: retention_playbook_path
+  usage_over_80: annual_upgrade_path
+counters:
+  discount_exception_requests: 1
+guardrails:
+  max_discount_pct: 15
+  margin_floor_pct: 65
+```
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Owner | N06 Commercial |
+| Kind | `runtime_state` |
+| Main Objective | cash-near routing |
+| Queue Policy | retained and expansion revenue first |
+| Guardrail Focus | discount and margin discipline |
+| Persistence Scope | cross-session until explicit reset |
+| Related Artifacts | `mem_entity_memory_n06`, `kno_retriever_config_n06`, `commercial_learning_record.md` |

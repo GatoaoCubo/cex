@@ -1,0 +1,18 @@
+kind: output_template
+id: bld_output_template_cohort_analysis
+pillar: P05
+llm_function: PRODUCE
+purpose: Template with vars for cohort_analysis production
+quality: null
+title: Output Template Cohort Analysis
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- cohort_analysis
+- builder
+- output_template
+tldr: Template with vars for cohort_analysis production
+domain: cohort_analysis construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85

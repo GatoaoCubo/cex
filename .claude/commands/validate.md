@@ -22,7 +22,7 @@ Run validation hooks on artifacts.
 ## Usage
 
 1. `/validate all` — validate all 101 nucleus artifacts
-2. `/validate N07_admin/agents/agent_admin.md` — validate specific file
+2. `/validate N07_admin/P02_model/agent_admin.md` — validate specific file
 3. `/validate` (no args) — validate all staged git files
 
 ## Steps

@@ -1,0 +1,48 @@
+id: bld_architecture_event_stream
+kind: knowledge_card
+pillar: P04
+title: Event Stream Builder -- Architecture
+version: 1.0.0
+quality: 7.1
+tags:
+- builder
+- event_stream
+- architecture
+llm_function: CONSTRAIN
+density_score: 1.0
+updated: '2026-04-17'
+core_model: 'An event_stream is a durable, ordered, append-only log of domain events. Multiple consumers read from it independently
+  (each tracks its own offset). Industry implementations: Kafka topic, AWS Kinesis stream, Azure Event Hub, Pulsar topic.'
+structural_topology: "Producer(s) --> [event_stream: ordered, partitioned, retained]\n                       |\n         \
+  \ [Consumer Group A: offset=latest]\n          [Consumer Group B: offset=earliest (reprocessing)]\n          [Consumer Group\
+  \ C: offset=checkpoint]"
+key_properties:
+- 'Ordered: within a partition, events are ordered by arrival time'
+- 'Durable: retained for configurable time/bytes (survives consumer restart)'
+- 'Replayable: consumers can seek to any offset (replay window = retention)'
+- 'Multi-consumer: many consumer groups, each with independent offset'
+- 'Partitioned: parallel consumption via partition key (e.g., orderId)'
+relationship_to_other_kinds: '| Kind | Relationship |
+
+  |------|-------------|
+
+  | webhook | single outbound HTTP push (not ordered, not replayable, 1 consumer) |
+
+  | signal | internal CEX nucleus completion signal (not domain events, not persisted as stream) |
+
+  | process_manager | subscribes to event streams to drive process transitions |
+
+  | domain_event | schema definition for events flowing through the stream |'
+delivery_semantics: '| Semantic | When | Tradeoff |
+
+  |----------|------|----------|
+
+  | at_most_once | fire-and-forget, low latency OK | may lose events |
+
+  | at_least_once | retries on failure | may duplicate; consumers must be idempotent |
+
+  | exactly_once | Kafka transactions / idempotent producer | highest cost, use for financial data |'
+partition_design:
+- 'High cardinality key (userId, orderId): balanced load, high parallelism'
+- 'Low cardinality key (region, type): easy global ordering, less parallelism'
+- 'No key: round-robin, no ordering guarantee per entity'

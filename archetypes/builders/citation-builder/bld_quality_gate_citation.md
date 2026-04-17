@@ -12,8 +12,8 @@ quality: 9.0
 tags: [quality-gate, citation, provenance, attribution, reliability]
 tldr: "Gates ensuring citation artifacts have verifiable provenance, reliability tier, excerpt, and temporal freshness."
 density_score: 0.90
+llm_function: GOVERN
 ---
-
 # Gate: Citation
 ## Definition
 | Field     | Value |

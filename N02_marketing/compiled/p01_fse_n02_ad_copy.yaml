@@ -1,0 +1,133 @@
+id: p01_fse_n02_ad_copy
+kind: few_shot_example
+pillar: P01
+nucleus: N02
+title: Few-Shot Example -- N02 Ad Copy via 8F Pipeline
+version: 1.0.0
+created: '2026-04-17'
+updated: '2026-04-17'
+author: few-shot-example-builder
+domain: marketing
+difficulty: medium
+edge_case: false
+format: 8F pipeline trace + input/output pairs for paid ad copy
+quality: 9.1
+tags:
+- few-shot
+- ad-copy
+- marketing
+- 8f-pipeline
+- n02
+- creative_lust
+tldr: '4 input/output pairs teaching N02 how to run the 8F pipeline for paid ad copy: brief -> angles -> variants -> quality
+  gate.'
+keywords:
+- ad-copy
+- paid-ads
+- linkedin
+- instagram
+- 8f
+- campaign
+- cta
+- funnel
+density_score: 1.0
+explanation: 'N02''s 8F pipeline transforms a marketing brief into seductive, testable ad copy. These 4 examples calibrate
+  easy (one platform, clear brief) through hard (multi-platform retargeting with restricted vocabulary). Each output shows
+  the exact structured form: angles declared first, copy variants second, quality metadata last. The sin lens is active on
+  every example: output must make the reader WANT, not just KNOW. ---'
+example_1_easy_linkedin_b2b_mofu_single_platform: "Input brief\ntask: create_3_linkedin_ad_variants\naudience: b2b_saas_founders\n\
+  funnel_stage: mofu\noffer: ai_agent_platform\npromise: ship agents 10x faster than coding from scratch\nproof:\n  stat:\
+  \ \"customers shipped first agent in under 2 hours\"\n  basis: \"median across 47 beta customers\"\nconstraints:\n  max_chars:\
+  \ 240\n  tone: direct_confident\n  cta: start_free_trial\n  banned: [hype_adjectives, passive_voice]\n\n8F trace (abbreviated)\n\
+  F1: kind=prompt_template/P03, pillar=P03, constraint=240 chars, tone=direct_confident\nF2: N02 loaded. Creative Lust lens\
+  \ active -- desire before logic.\nF3: kc_campaign (MOFU stage = differentiate+prove), brand_config, copy_analyzer\nF4: angles\
+  \ -> pain_to_proof, aspiration, objection_break\nF6: 3 variants, each = angle + copy + CTA\nF7: proof present x3, CTA present\
+  \ x3, no hype, brand match = pass\n\nOutput\nvariants:\n  - angle: pain_to_proof\n    copy: \"Most agent builds stall at\
+  \ integration hell. Our customers bypass it. Median time to first live agent: under 2 hours. 47 teams confirmed it. Start\
+  \ your free trial.\"\n    cta: \"Start free trial\"\n\n  - angle: aspiration\n    copy: \"The best AI teams are not writing\
+  \ more code. They are composing agents from typed infrastructure. First one ships in hours. Start your free trial and see\
+  \ the gap.\"\n    cta: \"Start free trial\"\n\n  - angle: objection_break\n    copy: \"If you think agent development is\
+  \ weeks of plumbing, you are pricing the wrong stack. 47 teams shipped in under 2 hours each. Start your free trial before\
+  \ the next sprint.\"\n    cta: \"Start free trial\"\n\nquality_check:\n  proof_present: true\n  cta_count: 1 per variant\n\
+  \  hype_words: 0\n  stage_alignment: mofu (differentiate + prove)\n\n---"
+example_2_medium_instagram_d2c_tofu_visual_first: "Input brief\ntask: create_2_instagram_caption_variants\naudience: fashion_conscious_women_25_35\n\
+  funnel_stage: tofu\noffer: sustainable_streetwear_brand\npromise: look good without the guilt trip\nproof:\n  visual: hero_product_image_attached\n\
+  \  social: \"12,000 orders shipped carbon-neutral\"\nconstraints:\n  max_chars: 150\n  tone: warm_irreverent\n  cta: link_in_bio\n\
+  \  banned: [climate_doom_language, corporate_speak]\n\n8F trace (abbreviated)\nF1: kind=prompt_template/P03, pillar=P03,\
+  \ constraint=150 chars, tone=warm_irreverent\nF2: N02 loaded. Short-form Instagram = hook dominates. Desire before explanation.\n\
+  F3: kc_campaign (TOFU = educate, frame), brand_config, kc_visual_hierarchy_principles\nF4: angles -> identity_mirror, proof_by_number\n\
+  F6: 2 variants, warm_irreverent voice, emoji allowed\nF7: hook in first line, no doom language, CTA present = pass\n\nOutput\n\
+  variants:\n  - angle: identity_mirror\n    copy: \"Streetwear that does not cost the planet a favor. 12,000 orders shipped.\
+  \ All carbon-neutral. Link in bio.\"\n    cta: \"Link in bio\"\n\n  - angle: proof_by_number\n    copy: \"12,000 orders.\
+  \ Zero carbon guilt. Your next fit is here. Link in bio.\"\n    cta: \"Link in bio\"\n\nquality_check:\n  proof_present:\
+  \ true\n  cta_count: 1 per variant\n  doom_language: 0\n  hook_position: line_1\n\n---"
+example_3_medium_hard_email_subject_line_a_b_batch_bofu: "Input brief\ntask: create_5_email_subject_line_variants\naudience:\
+  \ free_tier_saas_users_30_days_active\nfunnel_stage: bofu\noffer: pro_plan_upgrade\npromise: unlock team collaboration +\
+  \ advanced analytics\nproof:\n  stat: \"Pro users retain 41% longer\"\n  basis: \"internal cohort data Q1\"\nconstraints:\n\
+  \  max_chars: 50\n  tone: friendly_urgent\n  cta: implicit_in_subject\n  banned: [spam_triggers, ALL_CAPS, excessive_punctuation]\n\
+  \  test_hypothesis: \"urgency vs. curiosity vs. social_proof\"\n\n8F trace (abbreviated)\nF1: kind=prompt_template/P03,\
+  \ constraint=50 chars, test_hypothesis present\nF2: N02. BOFU = remove risk, close. Email subject = first filter.\nF3: kc_email_sequence\
+  \ (subject line patterns), campaign quality gate\nF4: 3 hypothesis angles (urgency, curiosity, social_proof) + 2 hybrid\n\
+  F6: 5 variants mapped to hypothesis angles\nF7: no spam triggers, no ALL_CAPS, CTA implicit, < 50 chars x5 = pass\n\nOutput\n\
+  variants:\n  - angle: urgency\n    subject: \"Your 30-day trial ends soon -- here is what you lose\"\n    chars: 48\n  \
+  \  hypothesis: urgency\n\n  - angle: curiosity\n    subject: \"What Pro users see that free users miss\"\n    chars: 38\n\
+  \    hypothesis: curiosity\n\n  - angle: social_proof\n    subject: \"Pro users stay 41% longer. Here is why.\"\n    chars:\
+  \ 38\n    hypothesis: social_proof\n\n  - angle: hybrid_urgency_proof\n    subject: \"41% retention lift. Your upgrade window\
+  \ closes Friday.\"\n    chars: 51\n    note: \"1 char over limit -- trim: remove 'lift'\"\n    chars_fixed: 50\n\n  - angle:\
+  \ hybrid_curiosity_proof\n    subject: \"Why do Pro users stay? One number explains it.\"\n    chars: 46\n    hypothesis:\
+  \ curiosity_plus_proof\n\nquality_check:\n  spam_trigger_words: 0\n  ALL_CAPS: false\n  char_limit_pass: 4 of 5 (1 flagged\
+  \ with fix)\n  stage_alignment: bofu\n\n---"
+example_4_hard_multi_platform_retargeting_restricted_vocabulary: "Input brief\ntask: create_retargeting_copy_pack\naudience:\
+  \ website_visitors_no_purchase_72h\nfunnel_stage: bofu\noffer: limited_cohort_enrollment\npromise: last 3 seats in live\
+  \ coaching cohort\nproof:\n  stat: \"87% of graduates hit revenue goal within 90 days\"\n  testimonial: \"I closed my first\
+  \ 5-figure deal in week 3. -- Ana S.\"\nconstraints:\n  platforms: [instagram_story, linkedin_sponsored, email_drip]\n \
+  \ max_chars:\n    instagram_story: 80\n    linkedin_sponsored: 300\n    email_drip: 60_char_subject_200_char_preview\n \
+  \ tone: warm_scarce\n  cta: secure_my_seat\n  banned: [fake_scarcity, income_claims_unsubstantiated, pressure_manipulation]\n\
+  \  legal_note: \"87% stat must include basis in email only, not in ad copy\"\n\n8F trace (abbreviated)\nF1: kind=prompt_template/P03,\
+  \ 3 platforms, different char limits, legal constraint\nF2: N02. Multi-platform = one brief, adapted output per channel.\
+  \ Legal constraints active.\nF3: kc_campaign, kc_email_sequence, brand_config, quality_gate (legal flag: stat basis email-only)\n\
+  F4: unified angle = authentic_scarcity + peer_proof; adapt per channel length\nF6: 3 platform packs, each with legal compliance\
+  \ note\nF7: no fake_scarcity, stat basis in email only, warm_scarce tone consistent = pass\n\nOutput\ninstagram_story:\n\
+  \  copy: \"3 seats left. Ana closed her first 5-figure deal in week 3. Secure yours.\"\n  cta: \"Secure my seat\"\n  chars:\
+  \ 74\n\nlinkedin_sponsored:\n  copy: \"87% of our graduates hit their revenue goal within 90 days. We have 3 seats left\
+  \ in the next live cohort. Ana closed her first 5-figure deal in week 3. If you have been on the list, now is the time.\
+  \ Secure my seat.\"\n  cta: \"Secure my seat\"\n  chars: 213\n  note: \"Stat basis omitted per legal constraint (not substantiated\
+  \ in ad format)\"\n\nemail_drip:\n  subject: \"3 seats left -- Ana's story (and yours?)\"\n  subject_chars: 41\n  preview:\
+  \ \"87% of graduates hit revenue goal in 90 days (Q1 cohort data). Ana closed her first 5-figure deal in week 3. You are\
+  \ next.\"\n  preview_chars: 122\n  note: \"Stat basis included in preview (email format approved for disclosure)\"\n\nquality_check:\n\
+  \  fake_scarcity: false (3 seats confirmed real)\n  income_claim_unsubstantiated: false (stat + testimonial both present)\n\
+  \  legal_compliance: pass (stat basis in email only)\n  platform_char_limits: all within limits\n  tone_consistency: warm_scarce\
+  \ across all 3 platforms\n\n---"
+format_lessons: '| Lesson | What the model learns |
+
+  |--------|-----------------------|
+
+  | Declare angles before copy | Angle names make A/B testing trackable |
+
+  | Include quality_check block | Self-govern before delivery; surface failures early |
+
+  | Adapt per platform, not per angle | Brief defines desire; channel defines length + format |
+
+  | Legal constraints are copy constraints | Never omit banned/legal from the brief |
+
+  | Proof discipline | Every variant carries evidence -- never decoration |'
+prompting_rules_derived_from_these_examples:
+- 'Every brief must include: audience, funnel_stage, offer, promise, proof, constraints.'
+- Declare test_hypothesis when running A/B -- angles need names, not just copy.
+- Include platform-specific char limits explicitly; let the model adapt.
+- Legal constraints belong in the brief `banned` or `legal_note` field.
+- 'Output format: angle + copy + cta + quality_check per variant.'
+- 'For multi-platform: one brief, per-channel adaptation section.'
+anti_patterns: '| Anti-pattern | Failure |
+
+  |-------------|---------|
+
+  | No proof in brief | Copy inflates -> trust gap |
+
+  | No angle declared | Copy is not testable; cannot iterate |
+
+  | Single variant only | A/B testing is impossible |
+
+  | Char limits omitted | Copy goes over; platform truncates; CTA lost |
+
+  | Legal constraints undeclared | Compliance failure in publish stage |'

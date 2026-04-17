@@ -56,24 +56,24 @@ tldr: "{{dense_summary_max_160ch}}"
 density_score: {{0.80_to_1.00}}
 ```
 ## Rule Definition
-{{plain_language_description_of_what_is_checked}}
+`{{plain_language_description_of_what_is_checked}}`
 ## Conditions
 | # | Field | Operator | Value | Target |
 |---|-------|----------|-------|--------|
-| 1 | {{field}} | {{op}} | {{val}} | {{target}} |
-| 2 | {{field}} | {{op}} | {{val}} | {{target}} |
+| 1 | `{{field}}` | {{op}} | {{val}} | `{{target}}` |
+| 2 | `{{field}}` | {{op}} | {{val}} | `{{target}}` |
 ## Error Handling
-1. **Message**: {{error_message}}
-2. **Severity**: {{severity}}
-3. **Auto-fix**: {{yes_no_and_how}}
-4. **Remediation**: {{steps_to_fix_manually}}
+1. **Message**: `{{error_message}}`
+2. **Severity**: `{{severity}}`
+3. **Auto-fix**: `{{yes_no_and_how}}`
+4. **Remediation**: `{{steps_to_fix_manually}}`
 ## Bypass Policy
-1. **Conditions**: {{when_bypass_is_allowed}}
-2. **Approver**: {{who_can_approve}}
+1. **Conditions**: `{{when_bypass_is_allowed}}`
+2. **Approver**: `{{who_can_approve}}`
 3. **Audit**: always logged
 ## References
-1. {{reference_1}}
-2. {{reference_2}}
+1. `{{reference_1}}`
+2. `{{reference_2}}`
 
 ## Properties
 

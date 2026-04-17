@@ -18,6 +18,7 @@ tldr: "Key lessons from document_loader builds: overlap is mandatory, metadata i
 memory_scope: project
 observation_types: [user, feedback, project, reference]
 density_score: 0.99
+title: Memory ISO - document_loader
 ---
 ## Summary
 Chunk strategy and metadata preservation are the two highest-leverage decisions in

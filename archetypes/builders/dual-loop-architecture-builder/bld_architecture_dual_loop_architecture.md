@@ -1,0 +1,55 @@
+---
+kind: architecture
+id: bld_architecture_dual_loop_architecture
+pillar: P08
+parent: dual-loop-architecture-builder
+llm_function: CONSTRAIN
+purpose: Component map of dual_loop_architecture -- inner/outer loops, memory bridge, cadence
+quality: 9.1
+title: "Architecture Dual Loop Architecture"
+version: "1.0.0"
+author: wave1_builder_gen
+tags: [dual_loop_architecture, builder, architecture, system1_system2, fast_slow]
+keywords: [inner_loop, outer_loop, tick, cadence, memory_bridge, reflexion, ooda]
+tldr: "Components of a dual-loop LLM agent: fast reactive loop + slow reflective loop + shared state bridge."
+domain: "dual_loop_architecture construction"
+created: "2026-04-13"
+updated: "2026-04-13"
+density_score: 0.88
+references:
+  - Kahneman 2011 (Thinking Fast and Slow -- System 1/System 2)
+  - Shinn et al 2023 (Reflexion: Language Agents with Verbal RL)
+  - Boyd 1987 (OODA loop)
+  - Ning et al 2023 (Skeleton-of-Thought)
+---
+
+## Component Inventory
+
+This ISO applies to the dual loop pattern, coordinating an outer orchestrator with one or more inner worker loops.
+
+| Name | Role | Loop | Cadence | Model tier | Status |
+|------|------|------|---------|------------|--------|
+| InnerLoopRunner | Reactive step executor -- consumes observations, emits actions | inner | tick_ms (50-500ms) | small/fast (Haiku, Sonnet, GPT-4o-mini) | core |
+| OuterLoopPlanner | Reflective planner -- revises strategy, critiques trajectory | outer | cadence_s (5-60s) or N ticks | large/reasoning (Opus, o1, R1) | core |
+| MemoryBridge | Shared working state: scratchpad + trajectory + plan slot | both | on every tick + planner write | n/a (KV store) | core |
+| PlanSlot | Current outer-loop plan -- guides inner loop until replaced | both r / outer w | read hot, write slow | n/a | core |
+| Checkpointer | Snapshots (obs, action, reward) triples for replay/critique | inner w | every tick | n/a | core |
+| Critic | Scores trajectory, triggers early re-plan if regret > threshold | outer | per cadence | small LLM or rule | optional |
+| BridgeQueue | Inbox for outer-loop to push revised plans without stalling inner | both | async | n/a (mpsc channel) | core |
+| Governor | Budget tracker: halts outer loop on token/time/cost cap | outer | per cadence | n/a | optional |
+
+## Dependencies
+
+| From | To | Type | Protocol |
+|------|----|----|----------|
+| InnerLoopRunner | MemoryBridge | sync (read PlanSlot, write trajectory) | in-process ref |
+| InnerLoopRunner | Checkpointer | sync (append) | append-only log |
+| Checkpointer | OuterLoopPlanner | async (read last N) | ring buffer |
+| OuterLoopPlanner | BridgeQueue | async (push new Plan) | mpsc channel |
+| BridgeQueue | InnerLoopRunner | async (swap PlanSlot between ticks) | atomic pointer |
+| Critic | OuterLoopPlanner | sync (regret signal triggers early wake) | callback |
+| Governor | OuterLoopPlanner | sync (halt/resume gate) | semaphore |
+
+## Architectural Position
+
+Dual-loop is a two-tier agent topology that decouples latency from intelligence. The inner loop runs a small model at high frequency (reactive, System-1-like) and must never block on the outer loop. The outer loop runs a large/reasoning model at low frequency (deliberative, System-2-like) and revises the Plan that the inner loop consumes. The MemoryBridge is the ONLY shared state -- no direct calls between loops. This pattern generalizes OODA (Observe-Orient-Decide-Act with Orient/Decide at slow cadence), Reflexion (episodic self-critique), and Skeleton-of-Thought (outline fast, fill in parallel). Sits above agent (P02) and below workflow (P12) in the CEX stack.

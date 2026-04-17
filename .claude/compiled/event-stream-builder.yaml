@@ -1,0 +1,4 @@
+name: event-stream-builder
+description: Builds ONE event_stream artifact via 8F pipeline. Loads event-stream-builder specs. Produces draft with frontmatter
+  + body. Never self-scores quality.
+tools: Read, Write, Edit, Bash, Glob, Grep

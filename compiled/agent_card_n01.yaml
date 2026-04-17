@@ -30,12 +30,14 @@ identity: '| Field | Value |
   8F is the reasoning protocol for every task -- research briefs, competitive grids, trend reports all pass F1-F8.
 
 
-  Comparative positioning: N01 has closed its artifact gaps. With 53 artifacts, 3 agents, 4 tool configs, and 5 quality artifacts
-  (including benchmark + eval dataset), N01 now matches N05''s infrastructure maturity while maintaining unique depth in external
-  research via 5 MCP servers and 6 schema contracts.'
+  Comparative positioning: N01 has 110 source artifacts, 3 agents, 4 tool configs, and 5 quality artifacts (including benchmark
+  + eval dataset). N01 leads the nucleus fleet in research depth with 34 atlas research files, 15 KCs, and 5 MCP servers.
+  Retriever: 2983 docs, 17142 vocab terms.'
 my_artifacts: '| Subdir | Count | Purpose |
 
   |--------|------:|---------|
+
+  | research | 34 | Atlas atoms (A15-A33), LLM vocabulary whitepaper, compiled atlas |
 
   | agents | 3 | Main agent + competitor tracker sub-agent + paper reviewer sub-agent |
 
@@ -43,16 +45,17 @@ my_artifacts: '| Subdir | Count | Purpose |
 
   | feedback | 1 | Quality gate for intelligence outputs |
 
-  | knowledge | 6 | KCs: intelligence domain, research methods, source catalog, pet market, embedding config, RAG source |
+  | knowledge | 15 | KCs: intelligence domain, research methods, source catalog, pet market, embedding, RAG, prompt taxonomy,
+  overnight evolve, LLM vocab, model context, synthetic data |
 
   | memory | 5 | Learning record, checkpoint, knowledge index, embedding config, RAG source |
 
-  | orchestration | 3 | Dispatch rules (intelligence routing, research pipeline) + workflow |
+  | orchestration | 4 | Dispatch rules (intelligence routing, research pipeline) + 2 workflows |
 
-  | output | 16 | Research deliverables: competitive grids, SWOT, market snapshots, trend reports, benchmark reports, executive
-  summaries, SDK audits, content factory landscape, monetization research |
+  | output | 20 | Research deliverables: competitive grids, SWOT, market snapshots, trend reports, benchmark reports, executive
+  summaries, SDK audits, content factory landscape, monetization research, KC quality audit |
 
-  | prompts | 2 | System prompt + prompt template for intelligence tasks |
+  | prompts | 3 | System prompt + prompt template + chain |
 
   | quality | 5 | Quality gate + 2 scoring rubrics + benchmark + eval dataset |
 
@@ -61,7 +64,9 @@ my_artifacts: '| Subdir | Count | Purpose |
 
   | tools | 4 | Research pipeline + scraping config + search config + MCP server orchestration |
 
-  | TOTAL | 53 | |'
+  | reports | 7 | Self-audit reports (v1-v3), taxonomy audit, token efficiency map, extraction reports |
+
+  | TOTAL | 110 | |'
 kinds_i_can_build: ''
 p01_knowledge_primary_domain_all_10_kinds: '| Kind | Naming Pattern | Status |
 
@@ -129,7 +134,7 @@ tools_i_use: '| Tool | Purpose | N01 Relevance |
 
   |------|---------|---------------|
 
-  | `cex_retriever.py` | TF-IDF artifact similarity (2184 docs, 12K vocab) | Find related intelligence across all pillars
+  | `cex_retriever.py` | TF-IDF artifact similarity (2983 docs, 17K vocab) | Find related intelligence across all pillars
   |
 
   | `cex_query.py` | Builder discovery via TF-IDF | Resolve which builder handles a research intent |
@@ -232,7 +237,7 @@ agent_card_summary: '| Category | Count |
 
   |----------|------:|
 
-  | Artifacts in N01_intelligence/ | 53 |
+  | Artifacts in N01_intelligence/ | 110 |
 
   | Kinds I can build | 20 |
 
@@ -242,10 +247,10 @@ agent_card_summary: '| Category | Count |
 
   | MCP servers | 5 |
 
-  | Total cards in agent card | 94 |
+  | Total cards in agent card | 138 |
 
 
-  Competitive context: N01 (94) is now competitive with N05 (107). The remaining gap vs N02 (110) and N06 (138) reflects specialization,
-  not deficiency. N01''s unique strengths (5 MCP servers, 6 schema contracts, 20 test cases in eval dataset) are unmatched.
-  The memory layer (5 artifacts) now enables cross-session research accumulation. The quality measurement infrastructure (benchmark
-  + eval dataset + 2 scoring rubrics) provides self-assessment capability that most nuclei lack.'
+  Competitive context: N01 (138) now leads the fleet by artifact count. The 44-artifact growth since v2 audit (2026-04-12)
+  is driven by the research/atlas/ directory -- 34 LLM vocabulary and competitive intelligence atoms. N01''s unique strengths:
+  5 MCP servers (deepest external research stack), 6 schema contracts, 34-atom atlas library, 15 KCs, and 110 total source
+  artifacts. Doctor: 133 PASS, 21 WARN, 1 FAIL (1 failure under investigation).'

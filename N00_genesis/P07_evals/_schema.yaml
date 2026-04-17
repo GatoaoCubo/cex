@@ -1,0 +1,127 @@
+pillar: P07
+name: Evals
+description: HOW to measure quality
+kinds:
+  unit_eval:
+    description: Agent/prompt unit test
+    boundary: Unit test of a single agent or prompt. NOT smoke_eval (quick, no depth) nor e2e_eval (pipeline
+      complete).
+    layer: governance
+    core: true
+    machine_format: yaml
+    naming: p07_ue_{{target}}.md + .yaml
+    constraints:
+      max_bytes: 4096
+    llm_function: GOVERN
+  smoke_eval:
+    description: Quick sanity test (< 30s)
+    boundary: Quick sanity test in <30s. NOT unit_eval (deep) nor benchmark (metrics continuous).
+    layer: governance
+    core: false
+    machine_format: yaml
+    naming: p07_se_{{scope}}.md
+    constraints:
+      max_bytes: 3072
+    llm_function: GOVERN
+  e2e_eval:
+    description: End-to-end test (full pipeline)
+    boundary: End-to-end test of full pipeline. NOT unit_eval (scope isolated) nor benchmark (does not measure performance).
+    layer: governance
+    core: false
+    machine_format: yaml
+    naming: p07_e2e_{{pipeline}}.md + .yaml
+    constraints:
+      max_bytes: 4096
+    llm_function: GOVERN
+  benchmark:
+    description: Performance measurement (latency, custo, quality)
+    boundary: Quantitative performance measurement. NOT eval (does not test correctness) nor scoring_rubric (does not define criteria).
+    layer: governance
+    core: false
+    machine_format: yaml
+    naming: p07_bm_{{metric}}.md + .yaml
+    constraints:
+      max_bytes: 4096
+    llm_function: GOVERN
+  golden_test:
+    description: Reference test case (quality 9.5+)
+    boundary: Reference test case quality 9.5+. NOT few_shot_example (P01, exemplifies) nor unit_eval (any quality).
+    layer: governance
+    core: true
+    machine_format: yaml
+    naming: p07_gt_{{case}}.md + .yaml
+    constraints:
+      max_bytes: 4096
+    llm_function: GOVERN
+  scoring_rubric:
+    description: Evaluation criterion (5D, 12LP, custom)
+    boundary: Evaluation criterion with framework. NOT benchmark (does not measure) nor quality_gate (P11, does not block).
+    layer: governance
+    core: true
+    machine_format: yaml
+    naming: p07_sr_{{framework}}.md + .yaml
+    constraints:
+      max_bytes: 5120
+    llm_function: GOVERN
+  llm_judge:
+    description: LLM-as-Judge config
+    boundary: LLM evaluator. NOT scoring_rubric.
+    layer: runtime
+    core: true
+    machine_format: yaml
+    naming: p07_judge.md
+    constraints:
+      max_bytes: 2048
+    frontmatter_required:
+    - id
+    - name
+    - judge_model
+    - criteria
+    - scale
+    llm_function: GOVERN
+  eval_dataset:
+    description: Test case collection
+    boundary: Set. NOT golden_test.
+    layer: runtime
+    core: true
+    machine_format: yaml
+    naming: p07_dataset.md
+    constraints:
+      max_bytes: 4096
+    frontmatter_required:
+    - id
+    - name
+    - size
+    - splits
+    - version
+    llm_function: GOVERN
+  red_team_eval:
+    description: Adversarial test
+    boundary: Safety eval. NOT e2e_eval.
+    layer: runtime
+    core: false
+    machine_format: yaml
+    naming: p07_redteam.md
+    constraints:
+      max_bytes: 2048
+    frontmatter_required:
+    - id
+    - name
+    - attack_types
+    - target
+    llm_function: GOVERN
+  regression_check:
+    description: Baseline comparison
+    boundary: Current vs previous. NOT benchmark.
+    layer: runtime
+    core: false
+    machine_format: yaml
+    naming: p07_regcheck.md
+    constraints:
+      max_bytes: 2048
+    frontmatter_required:
+    - id
+    - name
+    - baseline_ref
+    - threshold
+    llm_function: GOVERN

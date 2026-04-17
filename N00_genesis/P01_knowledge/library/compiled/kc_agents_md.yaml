@@ -1,0 +1,33 @@
+id: kc_agents_md
+kind: knowledge_card
+title: Agents.md Project-Root Manifest
+version: 1.0.0
+quality: null
+pillar: P01
+description: 'Project-root manifest for AAIF/OpenAI AGENTS.md: setup/test/lint commands, PR format, deploy rules, coding-agent
+  conventions
+
+  '
+density_score: 1.0
+setup_testing_linting:
+- '`npm install` - Install dependencies'
+- '`npm test` - Run unit tests'
+- '`npm lint` - Lint code with ESLint'
+- '`npm format` - Format code with Prettier'
+pr_format:
+- 'Title: `[TYPE]: brief description` (e.g., `feat: add agent registry`)'
+- 'Description:'
+- Motivation
+- Proposed solution
+- Testing instructions
+- Related issues
+deploy_rules:
+- 'Staging: `npm run deploy:staging`'
+- 'Production: `npm run deploy:production`'
+- Requires 2 approvals for production deploys
+coding_agent_conventions:
+- Use `// TODO` for pending tasks
+- Document API endpoints in `docs/api.md`
+- Follow 2-space indentation
+- Add type annotations to all functions
+- Include error handling for all API calls

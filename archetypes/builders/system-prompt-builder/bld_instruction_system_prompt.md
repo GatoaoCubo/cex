@@ -25,8 +25,8 @@ dependencies: []
 logging: true
 tldr: "Build a dense system_prompt YAML that transforms a generic LLM into a focused specialist with clear identity, ALWAYS/NEVER rules, and output format."
 density_score: 0.94
+llm_function: REASON
 ---
-
 ## Context
 The system-prompt-builder produces a `system_prompt` artifact -- a structured YAML containing the full system message injected at the top of every LLM conversation for a specific agent. This prompt defines who the agent is, what it knows, what it must always do, what it must never do, and how it formats responses.
 **Critical distinction**: a system_prompt governs agent identity and standing rules. It is NOT a task prompt (action_prompt), a step-by-step recipe (instruction), or a prompt template with variables (prompt_template). Confusing these types produces broken agents.

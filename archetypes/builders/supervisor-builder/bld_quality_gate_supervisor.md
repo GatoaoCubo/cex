@@ -12,8 +12,8 @@ quality: 9.0
 tags: [quality-gate, supervisor, P11, P08, governance, orchestration, dispatch]
 tldr: "Gates for supervisor artifacts — wave topology + dispatch config + signal protocol ready for multi-builder coordination."
 density_score: 0.90
+llm_function: GOVERN
 ---
-
 # Gate: supervisor
 ## Definition
 | Field     | Value                                               |

@@ -1,0 +1,29 @@
+kind: collaboration
+id: bld_collaboration_visual_workflow
+pillar: P12
+llm_function: COLLABORATE
+purpose: How visual_workflow-builder works in crews with other builders
+quality: null
+title: Collaboration Visual Workflow
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- visual_workflow
+- builder
+- collaboration
+tldr: How visual_workflow-builder works in crews with other builders
+domain: visual_workflow construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+crew_role: Enables non-technical team members to design, visualize, and iterate on workflow logic through drag-and-drop interfaces,
+  ensuring alignment with business goals and technical constraints.
+receives_from: "| Builder       | What                  | Format      |  \n|---------------|-----------------------|-------------|\
+  \  \n| Data Source   | Raw input data        | JSON        |  \n| Logic Builder | Rule definitions      | YAML        |\
+  \  \n| UI Builder    | UI component specs    | XML         |  \n| Validation    | Constraint rules      | CSV         |"
+produces_for: "| Builder           | What                  | Format      |  \n|-------------------|-----------------------|-------------|\
+  \  \n| Deployment        | Visual workflow diagram | SVG/PNG     |  \n| Documentation     | Workflow description  | Markdown\
+  \    |  \n| Testing           | Testable workflow spec| JSON        |  \n| Version Control   | Workflow file         | YAML\
+  \        |"
+boundary: Does NOT execute workflows (Code Executor), store data (Data Storage Manager), validate logic (Validation Engine),
+  or deploy workflows (Deployment Manager).

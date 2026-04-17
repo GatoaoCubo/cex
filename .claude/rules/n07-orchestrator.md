@@ -129,9 +129,50 @@ This avoids nested-quote hell that kills CMD.
 
 ## Known Behaviors
 
-- **All nuclei are Claude/Opus**: Fully autonomous — commit and signal on their own.
-- **PID tracking**: Session-tagged. Format: `{pid} {nucleus} {cli} {session_id} {timestamp}`. File: `.cex/runtime/pids/spawn_pids.txt`
+- **All nuclei default to Claude/Opus** (overridable via `-cli auto` + YAML fallback_chain): Fully autonomous — commit and signal on their own.
+- **PID tracking**: Session-tagged. Format: `{wrapper_pid} {nucleus} {cli} {session_id} {timestamp} {worker_pids}`. File: `.cex/runtime/pids/spawn_pids.txt`
 - **Multi-N07 safe**: `stop` only kills YOUR session. Other N07 orchestrators are untouched.
+
+## Wrapper PID Pitfall (learned 2026-04-11)
+
+`Start-Process -PassThru` returns the **powershell.exe wrapper** PID, NOT the actual worker (`claude.exe` / `codex.exe` / `gemini.exe` / `node.exe`). The worker is a grandchild of the wrapper.
+
+Process tree during a dispatch:
+```
+powershell.exe (wrapper -- what -PassThru returns)
+  |
+  +-- boot/n0X.ps1 (loads env, calls the CLI)
+        |
+        +-- claude.exe  <-- REAL WORKER
+              |
+              +-- node.exe (MCP servers)
+              +-- uvx, python (sub-tools)
+```
+
+**Implications:**
+- Killing the wrapper PID does NOT kill the worker (orphans claude.exe).
+- Polling wrapper liveness tells you nothing about nucleus liveness.
+- `status` command needs worker PIDs, not wrapper PIDs.
+
+**Fix (in spawn_grid.ps1 since 2026-04-11):**
+- `Get-DescendantPids` walks `Win32_Process` via CIM, BFS through `ParentProcessId` chains.
+- `Find-WorkerPids` filters descendants by process name (`claude`/`codex`/`gemini`/`node`).
+- Post-launch enrichment pass rewrites the pid file with `{wrapper} ... {worker_pids}` column.
+- `taskkill /F /PID <pid> /T` (tree-kill) is the ONLY reliable way to kill a nucleus -- kills parent and ALL descendants.
+
+**DO NOT use `Stop-Process -Id <pid>` on a wrapper PID** -- it orphans the worker tree.
+
+## Multi-CLI Routing (3 levels)
+
+| Level | How | When |
+|-------|-----|------|
+| L1 explicit | `spawn_grid.ps1 -cli claude\|gemini\|codex` | Operator override, whole grid uses one CLI |
+| L2 auto | `spawn_grid.ps1 -cli auto` | Per-nucleus resolver reads `nucleus_models.yaml` fallback_chain, probes binaries, picks first healthy |
+| L3 smart | `cex_router.py` (via `cex_mission_runner.py`) | Full health-checked providers with quota + retry budgets |
+
+**Config is YAML.** Never hardcode a CLI. Every nucleus has a `fallback_chain:` in `.cex/P09_config/nucleus_models.yaml`. To change routing, edit YAML -- don't patch the spawn script.
+
+**Quota pre-flight.** Before heavy grid dispatches, run `python _tools/cex_quota_check.py --all --cache` to detect exhausted providers. Pool-specific gotcha: `gemini-2.5-pro` has aggressive free-tier RPM; `gemini-2.5-flash` has a separate, higher-ceiling pool.
 
 ## Routing
 
@@ -143,6 +184,37 @@ This avoids nested-quote hell that kills CMD.
 | Knowledge/docs | N04 | RAG, indexing, knowledge cards |
 | Code/test/deploy | N05 | Debug, test, CI/CD, code review |
 | Sales/pricing | N06 | Courses, pricing, funnels |
+
+## Composable Crews (WAVE8 primitives)
+
+When work needs a **package** (not one artifact, not N parallel independents),
+assemble a **crew**: `crew_template` (roles + topology) + `role_assignment`
+(agent binding per role) + `team_charter` (mission contract).
+
+```bash
+python _tools/cex_crew.py list                      # discover
+python _tools/cex_crew.py show <name>               # inspect plan
+python _tools/cex_crew.py run <name> --charter ...  # dry-run
+python _tools/cex_crew.py run <name> --execute      # real LLM
+```
+
+### Grid + Crew composition (N07 pattern)
+
+Combine the two: dispatch a **grid** where each cell is itself a **crew
+instance**. Example -- simultaneous launch of 3 products:
+
+```
+grid dispatch:
+  |-- cell 1: crew(product_launch) + charter_A    -> N02 owns
+  |-- cell 2: crew(product_launch) + charter_B    -> N02 owns
+  `-- cell 3: crew(product_launch) + charter_C    -> N02 owns
+```
+
+Each crew runs its own sequential roles; the grid parallelizes the three
+charters. Handoffs stay a2a-task signals per crew; N07 consolidates after
+all grid cells signal complete.
+
+See `.claude/rules/composable-crew.md` for full protocol.
 
 ## NEVER DO
 - Build artifacts directly (route to N03)

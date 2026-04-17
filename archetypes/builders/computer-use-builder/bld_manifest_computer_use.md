@@ -4,7 +4,7 @@ kind: type_builder
 pillar: P04
 parent: null
 domain: computer_use
-llm_function: CALL
+llm_function: BECOME
 version: 1.0.0
 created: 2026-03-28
 updated: 2026-03-28
@@ -20,6 +20,8 @@ tldr: "Golden and anti-examples for computer use construction, demonstrating ide
 density_score: 0.90
 ---
 # computer-use-builder
+
+This ISO governs computer use: screen capture, mouse, and keyboard actions taken on behalf of the agent.
 ## Identity
 Specialist in building computer_use artifacts — interfaces de control de tela, teclado e mouse that permitem LLMs interagir with ambientes graficos. Masters coordinate systems, screenshot capture, action sequences, resolution constraints, and the boundary between computer_use (control de GUI) e browser_tool (DOM manipulation), cli_tool (linha de comando). Produces computer_use artifacts with frontmatter complete, actions_supported listed, resolution defined, and target specified.
 ## Capabilities

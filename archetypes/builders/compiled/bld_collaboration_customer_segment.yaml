@@ -1,0 +1,28 @@
+kind: collaboration
+id: bld_collaboration_customer_segment
+pillar: P12
+llm_function: COLLABORATE
+purpose: How customer_segment-builder works in crews with other builders
+quality: null
+title: Collaboration Customer Segment
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- customer_segment
+- builder
+- collaboration
+tldr: How customer_segment-builder works in crews with other builders
+domain: customer_segment construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+crew_role: Defines and refines customer segments based on ICP (Ideal Customer Profile) data, ensuring alignment with business
+  goals and market realities. Collaborates with product, marketing, and sales to validate segment relevance.
+receives_from: "| Builder       | What                  | Format  |  \n|---------------|-----------------------|---------|\
+  \  \n| ICP_Definer   | ICP criteria          | JSON    |  \n| Support_Team  | Customer feedback     | CSV     |  \n| Marketing_Team|\
+  \ Market research       | PDF     |"
+produces_for: "| Builder       | What                  | Format  |  \n|---------------|-----------------------|---------|\
+  \  \n| Product_Team  | Refined segments      | JSON    |  \n| Sales_Team    | Segment reports       | PDF     |  \n| Persona_Builder|\
+  \ Segment inputs      | CSV     |"
+boundary: Does NOT collect raw data (handled by Data_Engineers), validate ICP criteria (handled by ICP_Validation_Team), or
+  execute campaigns (handled by Marketing_Team).

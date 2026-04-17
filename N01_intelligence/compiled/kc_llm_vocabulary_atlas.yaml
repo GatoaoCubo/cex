@@ -1,0 +1,45 @@
+title: CEX Kind Taxonomy and Ingestion Roadmap
+author:
+- Your Name
+date:
+- Date
+1_introduction: "This document defines the CEX Kind Taxonomy—a structured framework for categorizing technical artifacts,\
+  \ configurations, and concepts across AI systems, workflows, and platforms. It includes:  \n- A comprehensive CEX Kind Taxonomy\
+  \ with 124 kinds across 12 pillars.  \n- A cross-language term map for multilingual alignment.  \n- An ingestion roadmap\
+  \ for integrating external standards and specifications.  \n- Strategic recommendations for artifact curation and pipeline\
+  \ optimization.  \n\n---"
+2_core_concepts: ''
+2_1_cex_kind_taxonomy: "The CEX Kind Taxonomy organizes technical artifacts into 12 pillars, each with core and non-core kinds.\
+  \ Key pillars include:  \n\n| Pillar | Core Kinds (6) | Non-Core Kinds (7) |  \n|--------|----------------|--------------------|\
+  \  \n| P01 Knowledge | `knowledge_card`, `embedding_config` | `retriever`, `glossary_entry` |  \n| P02 Model | `agent`,\
+  \ `model_card` | `agent_registry`, `finetune_config` |  \n| P03 Prompt | `prompt_template`, `reasoning_trace` | `thinking_budget`,\
+  \ `streaming_config` |  \n| P04 Tools | `function_def`, `tool_config` | `browser_session`, `dom_distiller` |  \n| P05 Output\
+  \ | `formatter`, `response_format` | `edit_format`, `output_parser` |  \n\nTotal Unique Kinds: 132 (62 core + 62 non-core).\
+  \  \n\n---"
+3_cross_platform_compatibility: ''
+3_1_cross_language_term_map: "A mapping of key terms across English, Chinese, Japanese, Korean, and CEX Kind:  \n\n| English\
+  \ | Chinese (zh) | Japanese (ja) | Korean (ko) | CEX Kind |  \n|---------|--------------|----------------|--------------|----------|\
+  \  \n| Agent | 智能体 / 代理 | エージェント | 에이전트 | `agent` |  \n| Tool | 工具 | ツール | 도구 | `function_def` |  \n| Memory | 记忆 | メモリ\
+  \ | 메모리 | `entity_memory` |  \n| Workflow | 工作流 | ワークフロー | 워크플로우 | `workflow` |  \n| Retrieval | 检索 | 検索 | 검색 | `retriever`\
+  \ |  \n\nNote: Romanized forms shown for readability. Actual CJK characters available in YAML data files.  \n\n---"
+4_ingestion_roadmap: ''
+4_1_prioritized_sources: "Ranked by signal density, machine-readability, and strategic value:  \n\n| Rank | Source | Format\
+  \ | Term Count | Action | Effort |  \n|------|--------|--------|------------|--------|--------|  \n| 1 | NIST AI Glossary\
+  \ (CSV) | CSV | 511 | Parse CSV → `glossary_entry` | LOW |  \n| 2 | A2A .proto files | Protobuf | ~30 | Parse → `interface`\
+  \ + `type_def` | LOW |  \n| 3 | MCP JSON Schema | JSON Schema | ~25 | Parse → `input_schema` + `function_def` | LOW |  \n\
+  | 4 | OpenAI OpenAPI spec | OpenAPI 3.x | ~40 | Parse → `api_client` + `type_def` | LOW |  \n| 5 | LangChain concepts docs\
+  \ | Markdown | ~60 | Parse h2/h3 → `glossary_entry` | MEDIUM |  \n| 6 | ML Ontology (OWL/RDF) | RDF | N/A | Parse → `glossary_entry`\
+  \ + `knowledge_card` | HIGH |"
+4_2_ingestion_pipeline: "Recommended workflow:  \n1. Fetch source files (CSV, Protobuf, JSON, Markdown).  \n2. Parse and normalize\
+  \ data using schema-specific parsers.  \n3. Map terms to CEX Kinds using the cross-language term map.  \n4. Validate against\
+  \ the CEX Kind Taxonomy.  \n5. Store in a unified artifact repository.  \n\n---"
+5_strategic_recommendations: ''
+5_1_artifact_curation:
+- Prioritize sources with high signal density (e.g., NIST, OpenAPI).
+- Validate cross-language mappings for consistency.
+- Automate ingestion pipelines for scalability.
+5_2_future_work: "- Expand the CEX Kind Taxonomy to include non-English standards.  \n- Integrate AI-driven term alignment\
+  \ for multilingual support.  \n- Develop tooling for real-time artifact validation.  \n\n---"
+6_conclusion: The CEX Kind Taxonomy provides a scalable framework for organizing technical artifacts. By leveraging the ingestion
+  roadmap and cross-language mappings, teams can ensure consistency, interoperability, and extensibility across AI systems
+  and platforms. --- End of Document

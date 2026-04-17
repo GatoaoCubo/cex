@@ -1,0 +1,45 @@
+---
+id: bld_quality_gate_event_stream
+kind: quality_gate
+pillar: P04
+title: "Event Stream Builder -- Quality Gate"
+version: 1.0.0
+quality: 6.0
+tags: [builder, event_stream, quality_gate]
+llm_function: GOVERN
+density_score: 1.0
+updated: "2026-04-17"
+---
+# Gate: event_stream
+## Threshold
+>= 7.0 to publish; >= 9.0 for reference
+## HARD Gates
+| ID | Check | Fail Condition |
+|----|-------|----------------|
+| H01 | Frontmatter parses as valid YAML | Syntax error |
+| H02 | id matches `^p04_es_[a-z][a-z0-9_]+$` | Wrong pattern |
+| H03 | id equals filename stem | Mismatch |
+| H04 | kind == `event_stream` | Any other value |
+| H05 | quality == null | Non-null |
+| H06 | event_types list has >= 1 entry | Empty |
+| H07 | producer defined | Missing |
+| H08 | consumer_groups has >= 1 entry | Empty |
+| H09 | partition_key defined | Missing |
+| H10 | delivery enum value valid | Invalid value |
+## SOFT Scoring
+| Dim | Check | Weight |
+|-----|-------|--------|
+| S01 | Partition count and ordering guarantee specified | 0.15 |
+| S02 | Retention hours AND bytes both specified | 0.20 |
+| S03 | Schema format and compatibility mode defined | 0.20 |
+| S04 | Each consumer group has offset_policy and lag_tolerance | 0.15 |
+| S05 | Throughput estimate present | 0.10 |
+| S06 | Monitoring thresholds defined | 0.10 |
+| S07 | Boundary from webhook and signal stated in tldr or notes | 0.10 |
+**Weight sum: 1.00**
+## Actions
+| Score | Action |
+|-------|--------|
+| >= 9.0 | PUBLISH |
+| >= 7.0 | REVIEW |
+| < 7.0 | REJECT |

@@ -71,9 +71,9 @@ density_score: 0.90
 | Template | P04_tools/templates/ | P04 |
 | Examples | P04_tools/examples/ | P04 |
 | Compiled | P04_tools/compiled/ | P04 |
-| Nucleus tool | N01_intelligence/tools/ | P04 |
-| Nucleus KCs | N01_intelligence/knowledge/ | P01 |
-| Dispatch rule | N01_intelligence/orchestration/ | P12 |
+| Nucleus tool | N01_intelligence/P04_tools/ | P04 |
+| Nucleus KCs | N01_intelligence/P01_knowledge/ | P01 |
+| Dispatch rule | N01_intelligence/P12_orchestration/ | P12 |
 | Company config | _instances/{co}/N01_intelligence/ | instance |
 
 ## Security Rules

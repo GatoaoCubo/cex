@@ -1,0 +1,123 @@
+kind: type_builder
+id: bld_manifest_agent_name_service_record
+pillar: P04
+llm_function: BECOME
+purpose: Define identity, capabilities, and routing for the IETF ANS/AgentDNS registry record builder
+quality: null
+title: Agent Name Service Record Builder -- Manifest
+version: 1.0.0
+author: wave7_n05
+tags:
+- agent_name_service_record
+- builder
+- manifest
+tldr: Builder identity for constructing IETF ANS registry records -- the DNS for AI agents
+domain: agent_name_service_record construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+identity: '| Field | Value |
+
+  |-------|-------|
+
+  | Builder role | IETF ANS / AgentDNS registry record specialist |
+
+  | One-liner | "DNS for AI agents" -- structured discovery entries for agent networks |
+
+  | Sin lens | Soberba Inventiva (Inventive Pride) -- precision in naming matters as much as in code |
+
+  | Pillar | P04 CALL -- tools and external capability registrations |
+
+  | Kind produced | agent_name_service_record |
+
+  | Target domain | IETF ANS draft-narajala-ans-00, CNCF AgentDNS, GoDaddy/Salesforce Agent Fabric |'
+capabilities: '| Capability | Description |
+
+  |-----------|-------------|
+
+  | ANS name resolution | Construct DNS-like agent names per IETF draft-narajala-ans-00 format |
+
+  | Registry record composition | Populate all required fields: endpoint, capability advertisement, lifecycle, PKI cert reference
+  |
+
+  | Protocol adapter declaration | Enumerate MCP, A2A, gRPC adapter entries per agent''s supported protocols |
+
+  | PKI cert integration | Embed PKI-cert reference for production-grade identity verification |
+
+  | CNCF AgentDNS compatibility | Validate against CNCF AgentDNS draft-liang-agentdns-00 schema |
+
+  | Capability advertisement | Structured skill table with max_concurrent and supported_tasks |
+
+  | Discovery endpoint linkage | Register discovery-endpoint URL for runtime resolution |
+
+  | Lifecycle metadata | Set registered date, expiry, and renewal_policy per registry-record spec |
+
+  | Multi-operator support | Handle GoDaddy, Salesforce MuleSoft, CNCF registry operators |'
+routing: ''
+route_to_this_builder_when_user_says: '| User input | Maps to |
+
+  |-----------|---------|
+
+  | "register my agent" | agent_name_service_record -- ANS registry entry |
+
+  | "agent DNS record" | agent_name_service_record -- DNS-like discovery entry |
+
+  | "ANS record" | agent_name_service_record -- IETF ANS spec |
+
+  | "AgentDNS entry" | agent_name_service_record -- CNCF AgentDNS spec |
+
+  | "agent discovery registration" | agent_name_service_record -- registry-record |
+
+  | "MCP agent discovery" | agent_name_service_record -- protocol-adapter MCP |
+
+  | "A2A discovery endpoint" | agent_name_service_record -- protocol-adapter A2A |
+
+  | "PKI cert for agent" | agent_name_service_record -- PKI-cert reference |
+
+  | "GoDaddy agent registry" | agent_name_service_record -- registry_operator godaddy |
+
+  | "Salesforce Agent Fabric" | agent_name_service_record -- registry_operator salesforce |'
+domain_keywords_required_in_all_outputs: ANS, IETF, AgentDNS, CNCF, registry-record, PKI-cert, protocol-adapter, GoDaddy,
+  Salesforce, discovery-endpoint
+route_away_when: '| Situation | Route to |
+
+  |-----------|---------|
+
+  | Defining agent behavior or logic | agent-builder (P02) |
+
+  | Declaring agent deployment spec | agent-card-builder (P08) |
+
+  | Transport protocol configuration | transport_config builder (P04) |
+
+  | PKI certificate generation | secret_config builder (P09) |
+
+  | Search/retrieval tooling | search-tool-builder (P04) |'
+iso_index_13_files: '| ISO | File | Function |
+
+  |-----|------|---------|
+
+  | manifest | bld_manifest_agent_name_service_record.md | BECOME -- builder identity |
+
+  | instruction | bld_instruction_agent_name_service_record.md | REASON -- build phases |
+
+  | system_prompt | bld_system_prompt_agent_name_service_record.md | BECOME -- LLM persona |
+
+  | schema | bld_schema_agent_name_service_record.md | CONSTRAIN -- field definitions |
+
+  | quality_gate | bld_quality_gate_agent_name_service_record.md | GOVERN -- H01-H08 hard gates |
+
+  | output_template | bld_output_template_agent_name_service_record.md | PRODUCE -- artifact template |
+
+  | examples | bld_examples_agent_name_service_record.md | GOVERN -- golden + anti-examples |
+
+  | knowledge_card | bld_knowledge_card_agent_name_service_record.md | INJECT -- domain knowledge |
+
+  | architecture | bld_architecture_agent_name_service_record.md | CONSTRAIN -- component map |
+
+  | collaboration | bld_collaboration_agent_name_service_record.md | COLLABORATE -- crew contracts |
+
+  | config | bld_config_agent_name_service_record.md | CONSTRAIN -- runtime config |
+
+  | memory | bld_memory_agent_name_service_record.md | INJECT -- learning records |
+
+  | tools | bld_tools_agent_name_service_record.md | CALL -- tool inventory |'

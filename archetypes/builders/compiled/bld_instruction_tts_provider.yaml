@@ -1,0 +1,41 @@
+kind: instruction
+id: bld_instruction_tts_provider
+pillar: P03
+llm_function: REASON
+purpose: Step-by-step production process for tts_provider
+quality: null
+title: Instruction Tts Provider
+version: 1.0.0
+author: wave1_builder_gen
+tags:
+- tts_provider
+- builder
+- instruction
+tldr: Step-by-step production process for tts_provider
+domain: tts_provider construction
+created: '2026-04-13'
+updated: '2026-04-13'
+density_score: 0.85
+phase_1_research:
+- Identify TTS provider API requirements (authentication, endpoints, rate limits)
+- Research available TTS providers (AWS Polly, Google Cloud TTS, Azure Cognitive Services)
+- Evaluate voice models, language support, and audio format compatibility
+- Analyze schema in SCHEMA.md for required input/output parameters
+- Review use cases for text-to-speech integration (e.g., IVR, accessibility features)
+- Document provider-specific error codes and fallback strategies
+phase_2_compose:
+- Set up development environment with provider SDKs and dependencies
+- Implement provider class per SCHEMA.md (e.g., `class TTSProvider`)
+- Write method to convert text to speech using provider API
+- Add authentication handling (API keys, OAuth tokens)
+- Integrate audio format conversion per OUTPUT_TEMPLATE.md
+- Implement error handling for network failures and invalid inputs
+- Write unit tests for core functionality (text-to-speech conversion)
+- Document API usage in README.md with code examples
+- Final code review against SCHEMA.md and OUTPUT_TEMPLATE.md
+phase_3_validate:
+- '[ ] Validate audio output matches OUTPUT_TEMPLATE.md format'
+- '[ ] Test provider API authentication and error recovery'
+- '[ ] Verify compatibility with all supported languages/voices'
+- '[ ] Confirm schema compliance for input/output parameters'
+- '[ ] Run end-to-end integration tests with mock and live providers'

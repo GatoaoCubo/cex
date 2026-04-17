@@ -52,26 +52,26 @@ tldr: "{{dense_summary_max_160ch}}"
 description: "{{what_executor_does_max_200ch}}"
 ```
 ## Overview
-{{what_this_executor_provides_1_to_2_sentences}}
-{{primary_use_case_and_who_uses_it}}
+`{{what_this_executor_provides_1_to_2_sentences}}`
+`{{primary_use_case_and_who_uses_it}}`
 ## Sandbox
-Isolation: {{sandbox_type}} — {{security_boundary_description}}
-Escape prevention: {{how_code_is_prevented_from_escaping_sandbox}}
-Session: {{ephemeral_or_persistent}} — {{state_handling}}
+Isolation: `{{sandbox_type}}` — `{{security_boundary_description}}`
+Escape prevention: `{{how_code_is_prevented_from_escaping_sandbox}}`
+Session: `{{ephemeral_or_persistent}}` — `{{state_handling}}`
 ## Languages
-### {{language_1}}
-Version: {{version_constraint}}
-Libraries: {{pre_installed_libraries_if_any}}
-### {{language_2}}
-Version: {{version_constraint}}
-Libraries: {{pre_installed_libraries_if_any}}
+### `{{language_1}}`
+Version: `{{version_constraint}}`
+Libraries: `{{pre_installed_libraries_if_any}}`
+### `{{language_2}}`
+Version: `{{version_constraint}}`
+Libraries: `{{pre_installed_libraries_if_any}}`
 ## Limits
-1. Timeout: {{timeout_seconds}}s per invocation
-2. CPU: {{cpu_limit}}
-3. Memory: {{memory_limit}}
-4. Disk: {{disk_limit}}
-5. Network: {{allowed|blocked}} — {{network_policy_detail}}
-6. File I/O: {{read-write|read-only|none}} — {{file_access_scope}}
+1. Timeout: `{{timeout_seconds}}`s per invocation
+2. CPU: `{{cpu_limit}}`
+3. Memory: `{{memory_limit}}`
+4. Disk: `{{disk_limit}}`
+5. Network: {{allowed|blocked}} — `{{network_policy_detail}}`
+6. File I/O: {{read-write|read-only|none}} — `{{file_access_scope}}`
 
 ## Properties
 

@@ -1,0 +1,31 @@
+kind: examples
+id: bld_examples_visual_workflow
+pillar: P07
+llm_function: GOVERN
+purpose: Golden and anti-examples of visual_workflow artifacts
+quality: null
+title: Examples Visual Workflow
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- visual_workflow
+- builder
+- examples
+tldr: Golden and anti-examples of visual_workflow artifacts
+domain: visual_workflow construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+golden_example: "---\nkind: visual_workflow\nname: CustomerOnboardingProcess\ndescription: End-to-end customer onboarding\
+  \ workflow using Apache NiFi\n---\n\nTool: Apache NiFi  \nWorkflow Steps:\n1. GetFile - Ingest CSV data from SFTP server\n\
+  2. ConvertRecord - Parse CSV to JSON using Avro schema\n3. ExecuteSQL - Validate customer data against PostgreSQL database\n\
+  4. PutDatabase - Insert validated records into MongoDB cluster\n5. EmailProcessor - Send confirmation email via SendGrid\
+  \ API"
+anti_example_1_code_defined_workflow: "---\nkind: visual_workflow\nname: FraudDetectionPipeline\ndescription: Fraud detection\
+  \ using Apache Airflow\n---\n\nTool: Apache Airflow  \nWorkflow Steps:\n- [PythonOperator] Load data from S3\n- [BashOperator]\
+  \ Run Spark job on EMR\n- [EmailOperator] Notify results via SMTP"
+why_it_fails: Apache Luigi is a DAG-based system that requires code configuration. The artifact incorrectly categorizes a
+  directed acyclic graph (DAG) workflow as a visual workflow, which is a fundamentally different paradigm.
+anti_example_2_dag_based_workflow: "---\nkind: visual_workflow\nname: DataProcessingPipeline\ndescription: ETL process using\
+  \ Apache Luigi\n---\n\nTool: Apache Luigi  \nWorkflow Steps:\n- Task1: Extract data from MySQL\n- Task2: Transform data\
+  \ with Pandas\n- Task3: Load to Redshift"

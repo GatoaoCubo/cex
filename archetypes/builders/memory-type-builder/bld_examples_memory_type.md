@@ -2,7 +2,7 @@
 kind: examples
 id: bld_examples_memory_type
 pillar: P07
-llm_function: INJECT
+llm_function: GOVERN
 quality: 9.0
 title: "Examples Memory Type"
 version: "1.0.0"
@@ -14,7 +14,6 @@ created: "2026-04-07"
 updated: "2026-04-07"
 density_score: 0.90
 ---
-
 # Examples: memory_type
 
 ## Golden: Correction

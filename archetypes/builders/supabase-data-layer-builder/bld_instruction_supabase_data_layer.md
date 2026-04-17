@@ -11,8 +11,8 @@ domain: data_platform
 quality: 9.0
 tags: [builder, supabase, data-layer, instruction, pipeline]
 density_score: 0.89
+llm_function: REASON
 ---
-
 # Instructions: Supabase Data Layer Pipeline
 
 ## Phase 1: INTAKE — Read Config

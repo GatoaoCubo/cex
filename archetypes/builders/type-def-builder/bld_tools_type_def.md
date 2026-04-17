@@ -1,5 +1,5 @@
 ---
-id: type-def-builder-tools
+id: bld_tools_type_def
 kind: tools
 pillar: P04
 llm_function: CALL

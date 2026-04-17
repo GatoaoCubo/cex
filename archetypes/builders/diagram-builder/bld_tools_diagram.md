@@ -1,6 +1,6 @@
 ---
 pillar: P00
-id: diagram-builder-tools
+id: bld_tools_diagram
 kind: tools
 builder: diagram-builder
 version: 1.0.0
@@ -13,8 +13,8 @@ domain: "diagram construction"
 created: "2026-04-07"
 updated: "2026-04-07"
 density_score: 0.90
+llm_function: CALL
 ---
-
 # diagram-builder — TOOLS
 ## Production Tools
 | Tool | Purpose | When | Status |

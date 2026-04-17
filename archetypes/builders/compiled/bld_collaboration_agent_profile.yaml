@@ -1,0 +1,25 @@
+kind: collaboration
+id: bld_collaboration_agent_profile
+pillar: P12
+llm_function: COLLABORATE
+purpose: How agent_profile-builder works in crews with other builders
+quality: null
+title: Collaboration Agent Profile
+version: 1.0.0
+author: wave1_builder_gen
+tags:
+- agent_profile
+- builder
+- collaboration
+tldr: How agent_profile-builder works in crews with other builders
+domain: agent_profile construction
+created: '2026-04-13'
+updated: '2026-04-13'
+density_score: 0.85
+crew_role: Crafts agent personas by synthesizing input constraints, mission statements, and role-specific traits into coherent,
+  boundary-compliant profiles.
+receives_from: "Builder | What | Format  \n--- | --- | ---  \nMissionStmt | High-level mission statement | Text  \nRoleDesc\
+  \ | Role-specific responsibilities | JSON  \nConstraints | Ethical/operational limits | YAML"
+produces_for: "Builder | What | Format  \n--- | --- | ---  \nPersonaDraft | Structured persona outline | JSON  \nValidationReport\
+  \ | Compliance check against constraints | Markdown  \nSummary | Key traits and boundaries | CSV"
+boundary: Does NOT define full agent capabilities (handled by `agent_full-builder`) or refine system prompts (handled by `system_prompt-refiner`).

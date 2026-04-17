@@ -1,0 +1,37 @@
+---
+kind: config
+id: bld_config_trajectory_eval
+pillar: P09
+llm_function: CONSTRAIN
+purpose: Naming, paths, limits for trajectory_eval production
+quality: 8.6
+title: "Config Trajectory Eval"
+version: "1.0.0"
+author: wave1_builder_gen_v2
+tags: [trajectory_eval, builder, config]
+tldr: "Naming, paths, limits for trajectory_eval production"
+domain: "trajectory_eval construction"
+created: "2026-04-14"
+updated: "2026-04-14"
+density_score: 0.85
+---
+
+## Naming Convention
+Pattern: `p07_te_<agent>_<task_slug>`
+Examples: `p07_te_gpt4o_webArena_045`, `p07_te_claude_swebench_12`
+Scope: trajectory_eval artifacts for LLM agent step-level path analysis
+
+## Paths
+Artifacts: `P07_evaluation/trajectory_eval/`
+Logs: `.cex/runtime/logs/trajectory_eval/`
+
+## Limits
+max_bytes: 5120
+max_turns: 10
+effort_level: 3
+
+## Hooks
+pre_build: null
+post_build: null
+on_error: null
+on_quality_fail: null

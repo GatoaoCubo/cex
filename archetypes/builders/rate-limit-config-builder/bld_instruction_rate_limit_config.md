@@ -18,6 +18,8 @@ density_score: 0.90
 ---
 
 # Instructions: How to Produce a rate_limit_config
+
+This ISO encodes a rate limit policy -- throttle bounds, quota windows, and backoff behavior.
 ## Phase 1: RESEARCH
 1. Identify the provider (anthropic, openai, litellm, azure_openai, google_vertex)
 2. Identify the tier (free, build, scale, enterprise, or provider-specific tier name)
@@ -31,7 +33,7 @@ density_score: 0.90
 10. Confirm provider slug for id: snake_case, lowercase, no hyphens
 ## Phase 2: COMPOSE
 1. Read SCHEMA.md — source of truth for all fields
-2. Read OUTPUT_TEMPLATE.md — fill {{vars}} following SCHEMA constraints
+2. Read OUTPUT_TEMPLATE.md — fill `{{vars}}` following SCHEMA constraints
 3. Fill frontmatter: all required fields (quality: null — never self-score)
 4. Set id: `p09_rl_{provider_slug}` — verify it matches `^p09_rl_[a-z][a-z0-9_]+$`
 5. Write Overview section: provider name, tier, primary use case (1–2 sentences)

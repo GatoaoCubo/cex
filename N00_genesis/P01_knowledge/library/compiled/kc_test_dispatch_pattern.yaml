@@ -1,0 +1,19 @@
+id: kc_test_dispatch_pattern
+kind: knowledge_card
+pillar: P01
+title: Dispatch Pattern
+version: 1.0.0
+quality: null
+definition: The Dispatch Pattern describes how orchestrators assign workloads to nuclei (processing units) in a distributed
+  system. It involves dynamic task routing based on factors like resource availability, load balancing, and fault tolerance.
+  Orchestrators act as central coordinators, ensuring efficient utilization of nuclei while maintaining system reliability.
+  Key aspects include workload prioritization, real-time monitoring, and adaptive scaling to match demand.
+example: In a microservices architecture, a load balancer (orchestrator) dispatches incoming HTTP requests to backend services
+  (nuclei). If one service experiences high latency, the orchestrator reroutes traffic to healthier instances. For example,
+  during a traffic spike, the orchestrator might spin up additional nuclei or redirect requests to underutilized nodes, ensuring
+  consistent performance and preventing overloads.
+cex_integration: CEX integrates the Dispatch Pattern via its orchestrator layer, which dynamically assigns tasks to nuclei
+  based on real-time metrics. The orchestrator evaluates factors like CPU usage, memory thresholds, and network latency to
+  optimize task distribution. Features include auto-scaling nuclei during peak loads, health checks to isolate failing nodes,
+  and load balancing algorithms to prevent bottlenecks. This ensures CEX systems maintain high availability, efficient resource
+  use, and resilience against failures.

@@ -1,0 +1,41 @@
+kind: instruction
+id: bld_instruction_reward_model
+pillar: P03
+llm_function: REASON
+purpose: Step-by-step production process for reward_model
+quality: null
+title: Instruction Reward Model
+version: 1.0.0
+author: wave1_builder_gen
+tags:
+- reward_model
+- builder
+- instruction
+tldr: Step-by-step production process for reward_model
+domain: reward_model construction
+created: '2026-04-13'
+updated: '2026-04-13'
+density_score: 0.85
+phase_1_research:
+- 'Define reward_model objectives: align with P07 governance metrics.'
+- 'Gather stakeholder input: identify process/outcome prioritization weights.'
+- 'Analyze historical data: extract reward triggers and scaling factors.'
+- 'Review existing schemas: map to SCHEMA.md’s reward_model structure.'
+- 'Identify edge cases: e.g., conflicting outcomes, zero-impact scenarios.'
+- 'Validate assumptions: confirm alignment with domain-specific governance rules.'
+phase_2_compose:
+- 'Set up environment: install dependencies from SCHEMA.md’s toolchain.'
+- 'Define reward_model schema: use SCHEMA.md’s `reward_config` structure.'
+- 'Map variables: assign process/outcome keys to `metrics` array in OUTPUT_TEMPLATE.md.'
+- 'Write configuration: populate `weights`, `thresholds`, and `scaling_functions`.'
+- 'Align with template: ensure `version` and `governance_rules` match OUTPUT_TEMPLATE.md.'
+- 'Integrate validation: add `preconditions` and `postconditions` per SCHEMA.md.'
+- 'Document parameters: describe each metric’s purpose in `metadata` section.'
+- 'Test with sample data: simulate outcomes using OUTPUT_TEMPLATE.md’s examples.'
+- 'Finalize model: export as YAML/JSON per SCHEMA.md’s format specifications.'
+phase_3_validate:
+- '[ ] ✅ Check schema compliance: validate against SCHEMA.md’s `reward_model` spec.'
+- '[ ] ✅ Verify data alignment: ensure metrics match stakeholder-defined priorities.'
+- '[ ] ✅ Test edge cases: confirm zero-impact and conflicting-outcome handling.'
+- '[ ] ✅ Audit governance rules: ensure `governance_rules` align with P07 pillars.'
+- '[ ] ✅ Peer review: cross-check with domain experts for logic consistency.'

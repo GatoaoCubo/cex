@@ -1,0 +1,79 @@
+id: p04_ds_n03
+kind: diff_strategy
+pillar: P04
+title: Diff Strategy -- N03 Smart Patch Application
+version: 1.0.0
+created: 2026-04-17
+author: n03_engineering
+domain: artifact-construction
+quality: null
+tags:
+- diff-strategy
+- N03
+- patch
+- rewrite
+- migrate
+- smart-diff
+- 8F
+tldr: Smart diff and patch application strategy for N03 REWRITE and MIGRATE operations. Defines when to patch (targeted change),
+  when to rewrite (structural change), and how to apply both safely with git-based rollback.
+density_score: 0.89
+updated: '2026-04-17'
+purpose: 'N03 handles 3 build verbs that modify EXISTING artifacts: REWRITE, MIGRATE, IMPROVE. Each requires a different diff
+  strategy. Wrong strategy = data loss or incoherent artifacts. Inventive Pride rule: never overwrite without knowing what
+  you''re replacing.'
+strategy_selection_matrix: '| Verb | Change Size | Structure Change | Strategy |
+
+  |------|-------------|-----------------|---------|
+
+  | IMPROVE | < 30% of body | no | targeted_patch |
+
+  | REWRITE | any | possible | section_by_section |
+
+  | MIGRATE | < 50% | yes (schema change) | schema_migration |
+
+  | REWRITE | > 70% different | yes | full_rewrite |'
+strategy_1_targeted_patch: "When: IMPROVE verb + change confined to 1-2 sections\n\nProtocol:\n1. Load existing artifact (git\
+  \ HEAD version)\n2. Identify target sections from improvement rationale\n3. Generate replacement content for ONLY those\
+  \ sections\n4. Apply using sed-equivalent: match H2 heading -> replace until next H2\n5. Verify: diff --unified shows only\
+  \ intended sections changed\n6. Run cex_compile.py + quality_gate check\n\nSafety: `git stash` before patching; restore\
+  \ if compile fails\n\ndef targeted_patch(artifact_path: str, target_sections: list[str], new_content: dict) -> str:\n  \
+  \  \"\"\"Replace specific H2 sections while preserving the rest.\"\"\"\n    with open(artifact_path) as f:\n        original\
+  \ = f.read()\n    \n    result = original\n    for section_title in target_sections:\n        pattern = rf'(## {re.escape(section_title)}\\\
+  n)(.*?)(?=\\n## |\\Z)'\n        replacement = f'## {section_title}\\n{new_content[section_title]}'\n        result = re.sub(pattern,\
+  \ replacement, result, flags=re.DOTALL)\n    \n    return result"
+strategy_2_section_by_section_rewrite: "When: REWRITE verb OR > 30% change with no structural migration\n\nProtocol:\n1. Load\
+  \ existing artifact + F4 plan for new version\n2. Map old sections -> new sections (keep/adapt/drop/add)\n3. For each new\
+  \ section: keep if unchanged, write if changed, skip if dropped\n4. Frontmatter: preserve all existing fields; update only\
+  \ `updated` date and modified fields\n5. Write full artifact\n6. Run full F7 GOVERN (not just compile)\n\nSection mapping:\n\
+  section_map:\n  \"## Purpose\":        keep          # stable sections preserved\n  \"## Fields\":         adapt       \
+  \  # table updated\n  \"## Validation\":     rewrite       # logic changed\n  \"## Examples\":       add           # new\
+  \ section added\n  \"## Legacy Notes\":   drop          # removed from spec"
+strategy_3_schema_migration: "When: MIGRATE verb (schema version bump, frontmatter field changes)\n\nProtocol:\n1. Load old\
+  \ artifact (current)\n2. Load new schema (validation_schema_artifact.md)\n3. Apply migration script:\n   - Add new required\
+  \ fields with defaults\n   - Rename fields per migration map\n   - Remove deprecated fields\n   - Update `version` in frontmatter\n\
+  4. Preserve body content unchanged\n5. Run L1 hard gates ONLY (body is trusted; frontmatter changed)\n\nMigration map format:\n\
+  migration_v1_to_v2:\n  add:\n    - field: density_score\n      default: 0.85\n  rename:\n    - from: updated_at\n      to:\
+  \ updated\n  remove:\n    - field: legacy_id\n  version_bump: minor  # 1.0.0 -> 1.1.0"
+rollback_protocol: 'Every modification is protected by git:
+
+
+  # Before any patch/rewrite:
+
+  git stash push -m "pre-patch backup: {artifact_id}"
+
+
+  # After successful patch:
+
+  git stash drop
+
+
+  # On failure (compile error or gate failure):
+
+  git stash pop    # restore original
+
+  # Then: apply bugloop or escalate'
+diff_output_format: "diff_result:\n  strategy: targeted_patch\n  artifact: N03_engineering/P06_schema/input_schema_build_contract.md\n\
+  \  sections_changed: [\"## Validation Rules\"]\n  sections_added: []\n  sections_removed: []\n  lines_changed: 8\n  lines_added:\
+  \ 3\n  lines_removed: 2\n  frontmatter_fields_changed: [\"updated\"]\n  compile_result: pass\n  quality_gate_result: pass\n\
+  \  rollback_available: true\n  stash_ref: \"stash@{0}\""

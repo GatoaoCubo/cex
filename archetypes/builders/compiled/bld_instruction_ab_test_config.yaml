@@ -1,0 +1,41 @@
+kind: instruction
+id: bld_instruction_ab_test_config
+pillar: P03
+llm_function: REASON
+purpose: Step-by-step production process for ab_test_config
+quality: null
+title: Instruction Ab Test Config
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- ab_test_config
+- builder
+- instruction
+tldr: Step-by-step production process for ab_test_config
+domain: ab_test_config construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+phase_1_research:
+- Identify conversion goal (e.g., CTR, form submission rate).
+- Analyze historical data for baseline metrics.
+- Define success metrics and statistical significance thresholds.
+- Determine test variables (e.g., button color, copy text).
+- Assess technical feasibility (e.g., tracking, variant rendering).
+- Secure stakeholder alignment on experiment scope.
+phase_2_compose:
+- Set config structure using SCHEMA.md (experiment ID, start/end dates).
+- Define primary and secondary metrics (e.g., conversion rate, bounce rate).
+- Specify variant groups (control, treatment A/B) with unique identifiers.
+- Align variable changes with OUTPUT_TEMPLATE.md (e.g., HTML/CSS modifications).
+- Assign traffic allocation percentages (e.g., 50% control, 25% each variant).
+- Document hypothesis and expected impact (e.g., "Red button increases CTR by 15%").
+- Add technical implementation notes (e.g., A/B script tags, cookie domains).
+- 'Validate schema compliance (required fields: experiment_name, variant_weights).'
+- 'Finalize config with version control commit message (e.g., "AB-123: Launch checkout flow test").'
+phase_3_validate:
+- '[ ] ✅ Schema fields (experiment_name, start_date) present and valid.'
+- '[ ] ✅ Variant weights sum to 100% with no negative values.'
+- '[ ] ✅ Metrics align with RESEARCH phase goals (e.g., form submissions).'
+- '[ ] ✅ Technical notes include tracking implementation details.'
+- '[ ] ✅ No conflicting variables in variant definitions (e.g., duplicate CSS classes).'

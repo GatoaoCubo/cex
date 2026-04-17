@@ -1,4 +1,4 @@
-# CEX Spawn Monitor v1.0
+# CEX Spawn Monitor v1.1 -- auto-prunes dead PIDs older than 30min
 $root = Split-Path $PSScriptRoot -Parent
 $pidFile = "$root\.cex\runtime\pids\spawn_pids.txt"
 $signalDir = "$root\.cex\runtime\signals"
@@ -11,6 +11,9 @@ $fileMTime = (Get-Item $pidFile).LastWriteTime
 Write-Output ""
 Write-Output "  NUCLEUS   STATUS     QUALITY  TIME"
 Write-Output "  --------- ---------- -------  ----"
+
+$survivors = @()  # lines to keep (alive OR recent)
+$pruned = 0
 
 foreach ($line in $lines) {
     $parts = $line.Trim().Split(' ')
@@ -42,5 +45,24 @@ foreach ($line in $lines) {
     if (-not $alive -and $status -eq 'RUNNING') { $status = 'CRASHED' }
 
     $age = [math]::Round(((Get-Date) - $procSpawn).TotalMinutes)
+
+    # Prune: dead PID AND age > 30min = drop from file (stale cruft)
+    if (-not $alive -and $age -gt 30) {
+        $pruned += 1
+        continue  # don't print, don't keep
+    }
+
     Write-Output "  $($upper.PadRight(9)) $($status.PadRight(10)) $($quality.ToString().PadRight(7))  ${age}min"
+    $survivors += $line
+}
+
+# Rewrite pid file if we pruned anything
+if ($pruned -gt 0) {
+    if ($survivors.Count -gt 0) {
+        $survivors | Set-Content $pidFile -Encoding UTF8
+    } else {
+        Remove-Item $pidFile -Force
+    }
+    Write-Output ""
+    Write-Output "  [PRUNED $pruned stale entries (dead PID, age > 30min)]"
 }

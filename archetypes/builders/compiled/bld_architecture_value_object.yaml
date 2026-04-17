@@ -1,0 +1,45 @@
+id: bld_architecture_value_object
+kind: knowledge_card
+pillar: P06
+title: Value Object Builder -- Architecture
+version: 1.0.0
+quality: 6.3
+tags:
+- builder
+- value_object
+- architecture
+llm_function: CONSTRAIN
+density_score: 1.0
+updated: '2026-04-17'
+pattern_origin: 'Evans DDD (2003): Value Object = object that describes some characteristic of a thing. No identity. Two instances
+  with same attribute values are interchangeable.'
+properties_from_evans:
+- No conceptual identity (not tracked as "this specific thing")
+- Immutable (never changed after creation)
+- Structural equality (equal if all attributes equal)
+- Self-contained (carries its own validation at construction time)
+- Side-effect-free (transformation methods return new instances)
+structural_topology: "ValueObject {\n  attribute_1: Type (constraint)\n  attribute_2: Type (constraint)\n  equals(other) ->\
+  \ bool  -- structural equality\n  hashCode() -> int      -- if hashable\n  withX(x) -> ValueObject  -- transformation (new\
+  \ instance)\n}"
+relationship_to_other_kinds: '| Kind | Relationship |
+
+  |------|-------------|
+
+  | aggregate_root | uses value_objects as typed attributes |
+
+  | type_def | generic type alias, no domain semantics, no DDD contract |
+
+  | enum_def | fixed set of named constants, subset of value object concept |
+
+  | input_schema | validates raw input BEFORE constructing value objects |'
+common_value_object_examples:
+- 'Money(amount: Decimal, currency: ISO4217)'
+- 'Email(address: string, matches: RFC5322)'
+- Address(street, city, country, zip)
+- 'DateRange(start: Date, end: Date, invariant: start <= end)'
+- 'Coordinates(lat: float, lng: float)'
+anti_patterns:
+- 'Mutable value object: breaks referential transparency'
+- 'Value object with identity field: use entity instead'
+- 'Large value object (>5 attributes): consider decomposing'

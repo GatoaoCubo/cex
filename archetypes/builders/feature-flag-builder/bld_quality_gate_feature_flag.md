@@ -12,8 +12,8 @@ quality: 9.0
 tags: [quality-gate, feature-flag, toggle, rollout, P11]
 tldr: "Validates feature_flag artifacts: toggle semantics, rollout strategy completeness, and kill switch safety."
 density_score: 0.91
+llm_function: GOVERN
 ---
-
 # Gate: feature_flag
 ## Definition
 | Field     | Value |

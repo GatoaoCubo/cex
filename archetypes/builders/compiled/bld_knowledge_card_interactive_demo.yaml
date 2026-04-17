@@ -1,0 +1,79 @@
+kind: knowledge_card
+id: bld_knowledge_card_interactive_demo
+pillar: P01
+llm_function: INJECT
+purpose: Domain knowledge for interactive_demo production
+quality: null
+title: Knowledge Card Interactive Demo
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- interactive_demo
+- builder
+- knowledge_card
+tldr: Domain knowledge for interactive_demo production
+domain: interactive_demo construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+domain_overview: Interactive demos are critical for product onboarding, marketing, and training, enabling users to explore
+  features through guided scenarios. Unlike in-app tours, they operate as standalone experiences, often embedded in websites
+  or external platforms. Success hinges on balancing instructional clarity with engagement, leveraging storytelling, and aligning
+  with user goals. Key challenges include maintaining narrative flow, ensuring technical reliability, and adapting to diverse
+  user contexts.
+key_concepts: "| Concept                | Definition                                                                 | Source\
+  \                                  |  \n|-----------------------|----------------------------------------------------------------------------|-----------------------------------------|\
+  \  \n| User Journey Mapping  | Visualizing user interactions and decision points within the demo         | Nielsen Norman\
+  \ Group (2018)           |  \n| Script Branching      | Conditional navigation based on user input or choices          \
+  \           | Interactive Fiction Tech Foundation   |  \n| Talk Track            | Pre-recorded or live narration synchronized\
+  \ with demo steps               | UX Design Patterns (2020)             |  \n| State Persistence     | Saving user progress\
+  \ across demo sessions                                 | ISO/IEC 25010 (Quality Attributes)    |  \n| Accessibility Layers\
+  \  | Inclusive design elements (e.g., screen readers, keyboard navigation)    | W3C CUI Guidelines (2021)             |\
+  \  \n| Performance Metrics   | KPIs like completion rate, drop-off points, and engagement time          | IEEE 12207 (Software\
+  \ Lifecycle)       |  \n| Modular Components    | Reusable demo segments for scalability and maintenance               \
+  \    | Component-Based UI Design (2019)      |  \n| Analytics Integration | Embedding tracking to measure user behavior\
+  \ and demo effectiveness      | Google Analytics for Firebase         |"
+platform_patterns_demo_platforms: '| Platform | Model | Key Pattern |
+
+  |---|---|---|
+
+  | Demostack | HTML-cloned sandbox | Full product replica; sales team customizes per prospect |
+
+  | Reprise | Live-capture overlay | Record prod UI; add branching overlays on top |
+
+  | Navattic | No-code click-through | Screenshot-based; embed in website/email |
+
+  | Arcade | Screenshot walkthroughs | Fastest to build; best for top-of-funnel |
+
+  | Supademo | Screenshot + annotation | Built-in analytics on step drop-off |'
+presales_se_playbook_structure: 'A demo script is not a feature tour. It follows a sales narrative:
+
+  1. Discovery -- confirm pain points before showing product
+
+  2. Setup -- position the demo context ("Let me show you how X solves Y")
+
+  3. Core demo -- 3-5 features maximum, each tied to a discovered pain
+
+  4. Proof -- customer reference, metric, or third-party validation
+
+  5. Objection handling -- pre-planned responses to common pushback
+
+  6. CTA -- clear next step (trial, POC, follow-up call)'
+industry_standards:
+- MEDDIC / MEDDPIC qualification framework (demo targeting)
+- W3C Web Content Accessibility Guidelines (WCAG 2.1)
+- Presales Collective best practices (talk track templates)
+- Challenger Sale methodology (teach-tailor-take-control)
+- ISO/IEC 25010:2011 (quality attributes for interactive systems)
+common_patterns:
+- 'Linear progression: Sequential steps with minimal user choice.'
+- 'Branching scenarios: Conditional paths based on user decisions.'
+- 'Multimedia integration: Combining video, audio, and interactive elements.'
+- 'Accessibility-first design: Prioritizing keyboard navigation and screen reader support.'
+- 'Micro-interactions: Feedback mechanisms for user actions.'
+pitfalls:
+- Overloading demos with too many features, causing cognitive overload.
+- Ignoring user feedback loops during demo creation.
+- Inconsistent pacing between scripted steps, leading to disengagement.
+- Poor localization for non-English audiences.
+- Lack of analytics to measure demo effectiveness.

@@ -1,0 +1,169 @@
+id: entity_memory_n01
+kind: entity_memory
+pillar: P10
+nucleus: n01
+title: N01 Research Entity Memory
+version: 1.0.0
+created: 2026-04-17
+author: n01_intelligence
+domain: research-intelligence
+quality: null
+tags:
+- entity_memory
+- n01
+- entities
+- research
+- competitor_tracking
+- persistence
+tldr: 'Typed entity memory for N01: tracks companies, people, products, papers, and market events across research sessions.
+  Prevents re-researching known entities. Enables compound intelligence over time.'
+density_score: 0.89
+updated: '2026-04-17'
+purpose: 'Without entity memory, N01 researches the same companies from scratch every session.
+
+  This erases the compound advantage that Analytical Envy demands.
+
+
+  Entity memory creates persistent profiles for:
+
+  - Companies (competitors, partners, targets)
+
+  - People (founders, executives, key voices)
+
+  - Products (tracked over time)
+
+  - Papers (known academic works)
+
+  - Events (funding rounds, acquisitions, launches)'
+entity_schema: ''
+company_entity: '| Field | Type | Description |
+
+  |-------|------|-------------|
+
+  | `entity_id` | string | `co_{slug}` |
+
+  | `name` | string | canonical company name |
+
+  | `slug` | string | URL-safe lowercase |
+
+  | `category` | string | competitor / partner / target / supplier |
+
+  | `domain` | string | primary business domain |
+
+  | `founded` | year | founding year |
+
+  | `stage` | string | seed / series-A / ... / public |
+
+  | `employees` | int | last known count |
+
+  | `funding_total` | USD | total funding raised |
+
+  | `last_funding` | ISO8601 | date of last funding round |
+
+  | `products` | string[] | product names |
+
+  | `pricing_tier` | string | free / freemium / paid / enterprise |
+
+  | `pricing_snapshot` | dict | pricing at last observation |
+
+  | `pricing_date` | ISO8601 | when pricing was captured |
+
+  | `strengths` | string[] | analytical strengths |
+
+  | `weaknesses` | string[] | analytical weaknesses |
+
+  | `strategic_moves` | event[] | tracked strategic events |
+
+  | `hiring_signals` | signal[] | job posting trends |
+
+  | `last_updated` | ISO8601 | entity last updated |
+
+  | `sources` | string[] | URLs used to populate |'
+person_entity: '| Field | Type | Description |
+
+  |-------|------|-------------|
+
+  | `entity_id` | string | `pe_{slug}` |
+
+  | `name` | string | full name |
+
+  | `current_role` | string | title at current company |
+
+  | `current_company` | string | company entity_id |
+
+  | `domain_expertise` | string[] | areas of expertise |
+
+  | `publications` | string[] | notable papers/posts |
+
+  | `social_profiles` | dict | linkedin / twitter / github |
+
+  | `influence_score` | float | 0-1 estimate |'
+market_event: '| Field | Type | Description |
+
+  |-------|------|-------------|
+
+  | `event_id` | string | `ev_{type}{slug}{date}` |
+
+  | `event_type` | string | funding / acquisition / launch / partnership |
+
+  | `entities` | string[] | companies involved |
+
+  | `date` | ISO8601 | event date |
+
+  | `summary` | string | 1-paragraph summary |
+
+  | `sources` | string[] | source URLs |
+
+  | `implications` | string | N01 analysis of implications |'
+storage: '| Location | Format | Index |
+
+  |----------|--------|-------|
+
+  | `N01_intelligence/P10_memory/entities/co_{slug}.yaml` | YAML | `knowledge_index_n01.md` |
+
+  | `N01_intelligence/P10_memory/entities/pe_{slug}.yaml` | YAML | `knowledge_index_n01.md` |
+
+  | `N01_intelligence/P10_memory/events/ev_{type}_{date}.yaml` | YAML | `knowledge_index_n01.md` |'
+write_protocol: 'When N01 researches a company for the first time:
+
+  1. Check entity memory: `retriever.query(company_name)`
+
+  2. If found: LOAD existing profile, update with new findings
+
+  3. If not found: CREATE new entity profile from research
+
+  4. After session: SAVE updated profile with new `last_updated`
+
+
+  Entity update policy:
+
+  - Overwrite: pricing, employee count, stage, last_funding
+
+  - Append: strategic_moves, hiring_signals, products, sources
+
+  - Merge: strengths, weaknesses (union, not replace)'
+retrieval_protocol: "get_entity(name: str) -> Entity | None:\n  # 1. exact match on slug\n  slug = slugify(name)\n  if exists(f\"\
+  entities/co_{slug}.yaml\"):\n    return load(f\"entities/co_{slug}.yaml\")\n  # 2. fuzzy match via retriever\n  results\
+  \ = retriever.query(name, top_k=3)\n  if results[0].score > 0.85:\n    return load(results[0].doc_id)\n  return None"
+anti_staleness: '| Field Age | Action |
+
+  |-----------|--------|
+
+  | < 30 days | use without warning |
+
+  | 30-90 days | use with [POSSIBLY STALE] tag |
+
+  | > 90 days | trigger re-research for that entity |
+
+  | > 365 days | archive, re-research from scratch |'
+related_artifacts: '| Artifact | Relationship |
+
+  |----------|-------------|
+
+  | `P10_memory/knowledge_index_n01.md` | indexes all entities |
+
+  | `P04_tools/retriever_n01.md` | retrieves entities by query |
+
+  | `P04_tools/competitor_monitor_n01.md` | updates company entities from monitoring |
+
+  | `P10_memory/mem_entity_memory_n01.md` | predecessor, generic entity schema |'

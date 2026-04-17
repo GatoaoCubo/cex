@@ -59,17 +59,17 @@ tldr: "{{dense_summary_max_160ch}}"
 density_score: {{0.80_to_1.00}}
 ```
 ## Contract Definition
-{{what_this_interface_enables_between_provider_and_consumer}}
+`{{what_this_interface_enables_between_provider_and_consumer}}`
 ## Methods
 | # | Name | Input | Output | Description |
 |---|------|-------|--------|-------------|
-| 1 | {{method}} | {{input}} | {{output}} | {{desc}} |
-| 2 | {{method}} | {{input}} | {{output}} | {{desc}} |
+| 1 | `{{method}}` | {{input}} | {{output}} | `{{desc}}` |
+| 2 | `{{method}}` | {{input}} | {{output}} | `{{desc}}` |
 ## Versioning
-1. **Version**: {{current_version}}
-2. **Backward compatible**: {{yes_no}}
-3. **Changes from previous**: {{changelog_or_initial}}
-4. **Migration notes**: {{migration_or_none}}
+1. **Version**: `{{current_version}}`
+2. **Backward compatible**: `{{yes_no}}`
+3. **Changes from previous**: `{{changelog_or_initial}}`
+4. **Migration notes**: `{{migration_or_none}}`
 ## Mock Specification
 ```json
 {
@@ -80,8 +80,8 @@ density_score: {{0.80_to_1.00}}
 }
 ```
 ## References
-1. {{reference_1}}
-2. {{reference_2}}
+1. `{{reference_1}}`
+2. `{{reference_2}}`
 
 ## Properties
 

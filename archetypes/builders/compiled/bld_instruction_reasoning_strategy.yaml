@@ -1,0 +1,39 @@
+kind: instruction
+id: bld_instruction_reasoning_strategy
+pillar: P03
+llm_function: REASON
+purpose: Step-by-step production process for reasoning_strategy
+quality: null
+title: Instruction Reasoning Strategy
+version: 1.0.0
+author: wave1_builder_gen
+tags:
+- reasoning_strategy
+- builder
+- instruction
+tldr: Step-by-step production process for reasoning_strategy
+domain: reasoning_strategy construction
+created: '2026-04-13'
+updated: '2026-04-13'
+density_score: 0.85
+phase_1_research: "This ISO selects a reasoning strategy (e.g. chain-of-thought) and the conditions under which it applies.\n\
+  1. Define problem scope and target domain for reasoning tasks.  \n2. Analyze existing structured reasoning frameworks (e.g.,\
+  \ CoT, ReAct).  \n3. Map gaps in current strategies for the specified domain.  \n4. Identify key reasoning patterns (e.g.,\
+  \ deduction, induction, abduction).  \n5. Evaluate trade-offs between complexity and interpretability.  \n6. Validate feasibility\
+  \ via small-scale prototype testing."
+phase_2_compose:
+- 'Outline artifact structure per SCHEMA.md (sections: purpose, steps, constraints).'
+- Draft reasoning phases with explicit input/output formats.
+- Align language with OUTPUT_TEMPLATE.md (e.g., "Given X, infer Y via Z").
+- Embed domain-specific examples (e.g., legal, medical, engineering).
+- Specify constraints (e.g., data sources, computational limits).
+- Refine steps for clarity and actionability.
+- 'Add metadata: version, author, validation metrics.'
+- Cross-reference with schema to ensure completeness.
+- Finalize artifact with consistent terminology.
+phase_3_validate:
+- '[ ] ✅ Schema alignment: All required fields present.'
+- '[ ] ✅ Logical coherence: Steps produce valid inferences.'
+- '[ ] ✅ Example efficacy: Test cases pass domain benchmarks.'
+- '[ ] ✅ Clarity: No ambiguous language or missing context.'
+- '[ ] ✅ Robustness: Handles edge cases per constraints.'

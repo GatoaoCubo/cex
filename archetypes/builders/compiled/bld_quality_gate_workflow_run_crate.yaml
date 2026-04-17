@@ -1,0 +1,81 @@
+kind: quality_gate
+id: p10_qg_workflow_run_crate
+pillar: P11
+llm_function: GOVERN
+purpose: Quality gate with HARD and SOFT scoring for workflow_run_crate
+quality: null
+title: Quality Gate Workflow Run Crate
+version: 1.0.0
+author: n04_wave7
+tags:
+- workflow_run_crate
+- builder
+- quality_gate
+- RO-Crate
+- workflow-run
+- CreateAction
+- provenance-graph
+- ORCID
+- Galaxy
+- FAIR
+tldr: Quality gate with HARD and SOFT scoring for workflow_run_crate
+domain: workflow_run_crate construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+definition: '| Metric | Threshold | Operator | Scope |
+
+  |--------|-----------|----------|-------|
+
+  | RO-Crate 1.2 Workflow Run Crate compliance | 100% | equals | All HARD gates |'
+hard_gates: '| ID  | Check | Fail Condition |
+
+  |-----|-------|----------------|
+
+  | H01 | YAML frontmatter valid | Invalid YAML syntax or missing fields |
+
+  | H02 | ID matches pattern ^p10_wrc_[a-z][a-z0-9_]+\.md$ | ID format mismatch |
+
+  | H03 | kind field is "workflow_run_crate" | Kind field incorrect or missing |
+
+  | H04 | @context includes RO-Crate 1.2 context URL | Missing or wrong context |
+
+  | H05 | CreateAction entity present with instrument, object, result, agent | Missing or incomplete provenance graph |
+
+  | H06 | agent_orcid is valid ORCID URL format | Non-ORCID or local IRI |
+
+  | H07 | At least one input Dataset with sha256 or md5 | Missing checksum on input datasets |'
+soft_scoring: '| Dim | Dimension | Weight | Scoring Guide |
+
+  |-----|-----------|--------|---------------|
+
+  | D01 | CreateAction completeness (instrument, object, result, agent, startTime, endTime) | 0.30 | All present = 1.0, partial
+  = 0.5, missing critical = 0 |
+
+  | D02 | Dataset coverage (all inputs + outputs have checksums and encodingFormat) | 0.25 | Complete = 1.0, partial = 0.5,
+  absent = 0 |
+
+  | D03 | Author attribution (ORCID Person entity with name and affiliation) | 0.20 | Full ORCID record = 1.0, ORCID only
+  = 0.7, absent = 0 |
+
+  | D04 | Software environment (SoftwareApplication entities for workflow tools) | 0.15 | All tools documented = 1.0, partial
+  = 0.5, absent = 0 |
+
+  | D05 | Domain keyword density (RO-Crate, workflow-run, provenance-graph, ORCID, Galaxy, input-dataset, output-dataset)
+  | 0.10 | 7+ keywords = 1.0, 5-6 = 0.7, <5 = 0.3 |'
+actions: '| Score | Action |
+
+  |-------|--------|
+
+  | GOLDEN | >=9.5 | Auto-publish with no review |
+
+  | PUBLISH | >=8.0 | Auto-publish after validation |
+
+  | REVIEW  | >=7.0 | Require manual review |
+
+  | REJECT  | <7.0  | Reject and flag for correction |'
+bypass: '| Conditions | Approver | Audit Trail |
+
+  |------------|----------|-------------|
+
+  | Draft crate (no live run data yet) | N07 orchestrator | Escalation log with DRAFT tag |'

@@ -1,0 +1,97 @@
+id: ex_workflow_multi_marketplace_sync
+kind: workflow
+pillar: P12
+title: Multi-Marketplace Bidirectional Sync Workflow
+version: 0.1.0
+quality: 7.9
+status: template
+brand_placeholders:
+- BRAND_SHOPIFY_DOMAIN
+- BRAND_SUPABASE_PROJECT_REF
+tags:
+- commerce
+- template
+- distillation
+- sync
+- workflow
+- marketplace
+density_score: 1.0
+updated: '2026-04-17'
+purpose: Orchestrates bidirectional product synchronization across Shopify, Bling ERP, and Supabase — supports modes `pull`,
+  `push`, `bidirectional`, and `single` for granular control over sync direction and scope.
+when_to_use:
+- Bulk-pulling all Shopify products into Supabase on initial setup.
+- Pushing approved Supabase products to Shopify and Bling simultaneously.
+- Running a nightly full-sync cron to catch any missed webhook events.
+- Syncing a single product by ID after a manual edit.
+workflow_steps: "INPUT: { mode, product_id?, shopify_api_version }\n  |\n  v\nSTEP 1: VALIDATE\n  |-- Check mode is one of:\
+  \ pull | push | bidirectional | single\n  |-- If mode == single: require product_id\n  |-- Verify active tokens for Shopify\
+  \ + Bling + ML (if needed)\n  |\n  v\nSTEP 2: COLLECT\n  |-- [pull / bidirectional] Fetch Shopify catalog (paginated)\n\
+  \  |-- [push / bidirectional] Fetch Supabase catalog (active products)\n  |-- [single] Fetch one product from both sources\n\
+  \  |\n  v\nSTEP 3: DIFF\n  |-- Identify new items (in Shopify, not in Supabase)\n  |-- Identify updated items (shopify_updated_at\
+  \ > supabase_updated_at)\n  |-- Identify items to push (supabase_updated_at > shopify_synced_at)\n  |-- Apply de-duplication\
+  \ by shopify_id\n  |\n  v\nSTEP 4: EXECUTE\n  |-- [pull] Upsert Shopify items into Supabase products table\n  |-- [push]\
+  \ PUT updated fields to Shopify Admin API\n  |-- [bidirectional] Pull first, then push non-conflicting changes\n  |-- [single]\
+  \ Sync one item both directions\n  |\n  v\nSTEP 5: REPORT\n  |-- Update sync_log table with counts + errors\n  |-- Emit\
+  \ result: { synced, errors, skipped }"
+sync_modes: '| Mode | Direction | Use Case |
+
+  |------|-----------|---------|
+
+  | `pull` | Shopify -> Supabase | Initial seed, recovery after Supabase wipe |
+
+  | `push` | Supabase -> Shopify | Bulk title/SEO update from internal catalog |
+
+  | `bidirectional` | Both | Nightly cron; catch all drifts |
+
+  | `single` | Both (one product) | Debug or manual product sync |'
+configuration: "workflow:\n  mode: bidirectional           # pull | push | bidirectional | single\n  product_id: null    \
+  \          # required if mode == single\n  shopify:\n    store_domain: \"{{BRAND_SHOPIFY_DOMAIN}}\"\n    api_version: \"\
+  2024-01\"\n    page_size: 250\n  bling:\n    enabled: true\n    batch_size: 10              # Bling rate limit: 3 req/s\n\
+  \  supabase:\n    project_ref: \"{{BRAND_SUPABASE_PROJECT_REF}}\"\n    products_table: \"products\"\n    sync_log_table:\
+  \ \"sync_log\"\n  conflict_resolution: shopify_wins  # shopify_wins | supabase_wins | newest_wins\n  dry_run: false"
+interface: '| Input | Type | Description |
+
+  |-------|------|-------------|
+
+  | `mode` | enum | Sync direction |
+
+  | `product_id` | uuid? | Supabase product UUID (single mode) |
+
+  | `dry_run` | bool | Simulate without writing |
+
+
+  | Output | Type | Description |
+
+  |--------|------|-------------|
+
+  | `synced` | int | Products successfully synced |
+
+  | `errors` | int | Products that failed |
+
+  | `skipped` | int | Products already in sync |
+
+  | `sync_log` | DB row | Persisted sync result |'
+brand_variables_used: '| Variable | Purpose |
+
+  |----------|---------|
+
+  | `{{BRAND_SHOPIFY_DOMAIN}}` | Shopify store to sync with |
+
+  | `{{BRAND_SUPABASE_PROJECT_REF}}` | Supabase project reference |'
+example_invocation: "# Nightly full bidirectional sync\ncurl -X POST \\\n  https://{{BRAND_SUPABASE_PROJECT_REF}}.supabase.co/functions/v1/unified-sync\
+  \ \\\n  -H \"Authorization: Bearer $SUPABASE_SERVICE_KEY\" \\\n  -d '{\"mode\": \"bidirectional\"}'\n\n# Sync one product\n\
+  curl -X POST ... -d '{\"mode\": \"single\", \"product_id\": \"uuid-here\"}'"
+related_artifacts: '| Artifact | Kind | Role |
+
+  |----------|------|------|
+
+  | `ex_dag_multi_marketplace_sync.md` | dag | Stage-by-stage execution graph |
+
+  | `ex_dispatch_rule_multi_marketplace.md` | dispatch_rule | Routing per marketplace |
+
+  | `ex_api_client_shopify.md` | api_client | Shopify data source |
+
+  | `ex_api_client_bling.md` | api_client | Bling data source |
+
+  | `ex_workflow_inventory_reconcile.md` | workflow | Post-sync inventory check |'

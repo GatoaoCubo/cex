@@ -1,0 +1,41 @@
+kind: instruction
+id: bld_instruction_sdk_example
+pillar: P03
+llm_function: REASON
+purpose: Step-by-step production process for sdk_example
+quality: null
+title: Instruction Sdk Example
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- sdk_example
+- builder
+- instruction
+tldr: Step-by-step production process for sdk_example
+domain: sdk_example construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+phase_1_research:
+- Identify target programming languages for SDK examples (e.g., Python, Java, JS).
+- Analyze existing SDKs for canonical integration patterns (authentication, API calls, error handling).
+- Gather use cases from P04 domain (e.g., payment processing, user management).
+- Map use cases to language-specific implementation requirements.
+- Research language-specific best practices (e.g., Python’s async, Java’s exceptions).
+- Document research findings into a requirements matrix.
+phase_2_compose:
+- Create project structure per bld_schema_sdk_example.md (e.g., `examples/`, `tests/`, `docs/`).
+- Write code examples for each language, aligning with mapped use cases.
+- Implement authentication flow using P04-standard tokens (refer to bld_schema_sdk_example.md).
+- Use bld_output_template_sdk_example.md for code formatting (indentation, comments, variable names).
+- Add error handling per language conventions (e.g., Python’s `try/except`, JS’s `try/catch`).
+- Write unit tests for each example (e.g., mock API responses, validate edge cases).
+- Generate documentation stubs in `docs/` (API references, usage examples).
+- Conduct code review against bld_schema_sdk_example.md compliance and P04 domain rules.
+- Package artifact with versioning (e.g., `sdk_example-v1.0.0.tar.gz`).
+phase_3_validate:
+- '[ ] All code examples conform to bld_schema_sdk_example.md structure and P04 function specs.'
+- '[ ] Unit tests pass for all languages (coverage >=90%).'
+- '[ ] Error handling matches language-specific best practices.'
+- '[ ] Documentation in `docs/` aligns with bld_output_template_sdk_example.md.'
+- '[ ] Artifact builds successfully across target languages (CI/CD pipeline).'

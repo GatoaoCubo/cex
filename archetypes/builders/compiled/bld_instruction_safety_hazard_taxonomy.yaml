@@ -1,0 +1,52 @@
+kind: instruction
+id: bld_instruction_safety_hazard_taxonomy
+pillar: P03
+llm_function: REASON
+purpose: Step-by-step production process for safety_hazard_taxonomy
+quality: null
+title: Instruction Safety Hazard Taxonomy
+version: 1.0.0
+author: n01_wave7
+tags:
+- safety_hazard_taxonomy
+- builder
+- instruction
+- MLCommons
+- AILuminate
+- Llama-Guard
+- hazard-category
+- CBRN
+- severity-level
+- response-template
+tldr: Step-by-step production process for safety_hazard_taxonomy
+domain: safety_hazard_taxonomy construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+phase_1_research:
+- 'Identify the taxonomy scope: full AILuminate v1.0 (12 categories) or domain-restricted subset.'
+- Retrieve MLCommons AILuminate v1.0 hazard category definitions and boundary conditions.
+- Map categories to Llama Guard 4 output label equivalents for implementation alignment.
+- 'Gather organizational context: deployment domain, user population, regional legal constraints.'
+- Identify severity escalation thresholds relevant to deployment context (e.g., consumer vs. enterprise API).
+- Collect existing response templates or refusal patterns from the organization's safety system.
+phase_2_compose:
+- Reference SCHEMA for required fields (taxonomy scope, version, hazard-category table, severity-level definitions).
+- 'For each of 12 hazard categories, define: category name, AILuminate code, formal definition, boundary conditions.'
+- 'Assign severity-level per category variant: low (informational query), medium (borderline), high (explicit harm), critical
+  (imminent/CBRN).'
+- Map each category to Llama Guard 4 output label (e.g., S1=Violent Crimes, S13=Elections).
+- 'Write response-template for each severity level per category: refusal text, safe-completion path, escalation trigger.'
+- Document boundary conditions distinguishing adjacent categories (e.g., Violent Crimes vs. Hate Speech).
+- Add false-positive risk notes per category (common benign queries that trigger the category).
+- Include MLCommons AILuminate v1.0 reference and Llama Guard 4 model card citation.
+- Tag each category with applicable jurisdictional regulations (GDPR, CSAM laws, CBRN export controls).
+phase_3_validate:
+- '[ ] All 12 AILuminate hazard categories present with formal definitions.'
+- '[ ] Each category has 4 severity levels (low/medium/high/critical) defined.'
+- '[ ] Llama Guard 4 label mapping present for each category.'
+- '[ ] Response-template provided for each hazard category at minimum high severity.'
+- '[ ] Boundary conditions documented between adjacent hazard categories.'
+- '[ ] CBRN category includes specific sub-categories (Chemical/Biological/Radiological/Nuclear).'
+- '[ ] MLCommons AILuminate v1.0 and Llama Guard 4 sources cited.'
+- '[ ] taxonomy-scope field declares coverage (full-12 or subset with justification).'

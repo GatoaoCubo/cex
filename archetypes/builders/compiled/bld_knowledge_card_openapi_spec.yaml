@@ -1,0 +1,108 @@
+id: bld_knowledge_card_openapi_spec
+kind: knowledge_card
+pillar: P01
+nucleus: n00
+domain: kind-taxonomy
+quality: null
+title: OpenAPI Spec Builder -- Knowledge Card
+llm_function: INJECT
+tags:
+- openapi_spec
+- api-contract
+- oas3
+- P06
+- openapi-initiative
+tldr: 'openapi_spec: machine-readable OAS 3.x API contract defining paths, schemas, and security. NOT api_reference (human
+  docs) nor api_client (SDK).'
+created: '2026-04-17'
+updated: '2026-04-17'
+version: 1.0.0
+author: n03_builder
+density_score: 0.9
+definition: 'An `openapi_spec` is a machine-readable API contract following the OpenAPI Specification 3.x (OAS 3.x) standard,
+  published by the OpenAPI Initiative (Linux Foundation). It defines the surface of a REST API: paths, HTTP operations, request/response
+  schemas, and security schemes. Consumed by code generators, mock servers, validation middleware, and API documentation tools.'
+origin:
+- 'Swagger 2.0 (2014): SmartBear, later donated to OpenAPI Initiative'
+- 'OAS 3.0 (2017): OpenAPI Initiative, major restructure from Swagger 2'
+- 'OAS 3.1 (2021): Full JSON Schema alignment, webhooks support'
+- 'CEX pillar: P06 (Schema) -- machine-readable contracts consumed by tooling'
+key_fields: '| Field | Type | Required | Description |
+
+  |-------|------|----------|-------------|
+
+  | openapi | string | YES | OAS version: "3.1.0" |
+
+  | info.title | string | YES | API name |
+
+  | info.version | string | YES | API version (semver or date-based) |
+
+  | servers | array | YES | Base URL(s) for the API |
+
+  | paths | object | YES | API endpoints and their operations |
+
+  | components.schemas | object | REC | Reusable JSON Schema definitions |
+
+  | components.securitySchemes | object | REC | Auth method definitions |
+
+  | security | array | OPT | Global security requirement |
+
+  | tags | array | OPT | Operation grouping |'
+when_to_use: '| Scenario | Use openapi_spec? |
+
+  |----------|-------------------|
+
+  | Define REST API surface for code generation | YES |
+
+  | Create API mocking / stub server | YES |
+
+  | Configure API gateway routing rules | YES |
+
+  | Generate SDK client libraries (Python, JS, Go) | YES |
+
+  | Document event-driven / async API | NO -- use event_schema + AsyncAPI |
+
+  | Define producer-consumer data SLA | NO -- use data_contract |
+
+  | Write human-readable API guide | NO -- use api_reference |'
+cross_framework_map: '| Tool/Standard | Equivalent | Notes |
+
+  |---------------|-----------|-------|
+
+  | Swagger 2.0 | openapi_spec (legacy) | Superseded by OAS 3.x |
+
+  | RAML 1.0 | openapi_spec (competitor) | Less tooling support |
+
+  | API Blueprint | openapi_spec (competitor) | Markdown-based, discontinued |
+
+  | GraphQL SDL | openapi_spec (different paradigm) | For graph APIs, not REST |
+
+  | gRPC .proto | openapi_spec (different transport) | For gRPC APIs |
+
+  | JSON:API | openapi_spec (constraint layer) | Can be described via OAS |'
+anti_patterns: '| Anti-Pattern | Why It Fails | Fix |
+
+  |-------------|-------------|-----|
+
+  | Inline all schemas, no $ref | Duplication, drift, hard to maintain | Use components.schemas + $ref |
+
+  | Missing error responses | Clients cannot handle failures | Define 400/401/404/500 for every operation |
+
+  | No security scheme | API appears unauthenticated to tools | Declare securitySchemes + global security |
+
+  | Using OAS 2 (Swagger) format | Missing $ref features, less JSON Schema support | Migrate to OAS 3.1 |
+
+  | Mixing documentation prose in spec | Clutters machine-readable contract | Move prose to api_reference |'
+decision_tree: "Need to describe a REST API?\n  |-- YES: openapi_spec\n  |       Is it event-driven (Kafka, WebSocket)?\n\
+  \  |         YES -> event_schema (AsyncAPI format)\n  |         NO  -> openapi_spec (OAS 3.x)\n  |-- NO:\n       Is it a\
+  \ data exchange SLA?\n         YES -> data_contract\n         Is it for code gen only?\n           YES -> api_client (SDK)"
+integration_graph: "openapi_spec (P06)\n  |\n  |-- consumed by --> api_client (P04) -- code generation\n  |-- consumed by\
+  \ --> api_reference (P01) -- human docs\n  |-- consumed by --> api_gateway config (P09) -- routing rules\n  |-- consumed\
+  \ by --> mock_server (P05) -- testing stubs\n  |-- references --> data_contract (P06) -- schema definitions\n  |-- secured\
+  \ by --> security scheme (inline) -- OAuth2/apiKey"
+oas_3_x_structure_summary: "openapi: \"3.1.0\"\ninfo:\n  title: \"My API\"\n  version: \"1.0.0\"\nservers:\n  - url: \"https://api.example.com/v1\"\
+  \npaths:\n  /users/{id}:\n    get:\n      operationId: getUser\n      parameters:\n        - name: id\n          in: path\n\
+  \          required: true\n          schema:\n            type: string\n      responses:\n        \"200\":\n          description:\
+  \ User found\n          content:\n            application/json:\n              schema:\n                $ref: \"#/components/schemas/User\"\
+  \ncomponents:\n  schemas:\n    User:\n      type: object\n      properties:\n        id: {type: string}\n        name: {type:\
+  \ string}\n  securitySchemes:\n    bearerAuth:\n      type: http\n      scheme: bearer\nsecurity:\n  - bearerAuth: []"

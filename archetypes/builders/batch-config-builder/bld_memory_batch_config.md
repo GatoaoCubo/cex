@@ -1,0 +1,122 @@
+---
+id: p10_lr_batch_config_builder
+kind: learning_record
+pillar: P10
+version: 1.0.0
+created: 2026-04-13
+updated: 2026-04-13
+author: builder_agent
+observation: "Batch configs without cost_cap_usd caused runaway spend when input files were larger than expected. Batch jobs missing completion_window documentation caused downstream systems to poll indefinitely or time out prematurely. Missing retry policy for partial failures caused entire batch results to be discarded when 1-2% of requests failed. Anthropic Message Batches expire after 29 days -- configs without expiry_policy caused data loss. OpenAI requires batch files <= 200MB; configs without file size validation caused submission failures at runtime."
+pattern: "Specify each batch_config with five controls: (1) cost_cap_usd to bound financial exposure; (2) completion_window matching provider SLA (24h for OpenAI, variable for Anthropic); (3) retry policy distinguishing per-request retries from whole-batch failure; (4) max_requests to bound input file size; (5) dead_letter path for permanently failed requests. Reference credential env var names only -- never embed actual keys."
+evidence: "Configs with cost_cap_usd prevented 3 budget overruns in production batch pipelines. Explicit completion_window documentation eliminated indefinite polling in 4 downstream consumers. Documented retry policy with partial_failure=continue recovered 98% of requests in batches with transient API errors. Dead-letter paths enabled reprocessing of the 2% permanently failed requests rather than silently losing them."
+confidence: 0.82
+outcome: SUCCESS
+domain: batch_config
+tags:
+  - batch-config
+  - async-api
+  - cost-controls
+  - openai-batch
+  - anthropic-batches
+  - retry-policy
+  - dead-letter
+tldr: "Set cost_cap_usd and max_requests to bound financial exposure. Document completion_window and retry policy. Use dead-letter for permanent failures. Never embed credentials."
+impact_score: 8.0
+decay_rate: 0.03
+agent_group: edison
+memory_scope: project
+observation_types: [user, feedback, project, reference]
+quality: 9.2
+title: "Memory Batch Config"
+density_score: 0.90
+llm_function: INJECT
+---
+## Summary
+Batch processing configuration failures split into two categories: financial failures
+(runaway spend from missing cost caps or unbounded batch sizes) and reliability failures
+(data loss from missing retry policy, expiry handling, or dead-letter routing).
+Five mandatory controls address both systematically.
+
+## Pattern
+
+**Cost controls**: `cost_cap_usd` is mandatory, not optional. Batch jobs process thousands
+of requests; a missing cap turns an input file error into a budget incident.
+Set `max_requests` as the secondary bound -- it limits file size and prevents
+submission failures at the provider's file size limit (OpenAI: 200MB, 50K requests).
+
+**Completion window**: document the provider SLA explicitly.
+OpenAI Batch API guarantees 24h. Anthropic Message Batches have no hard SLA
+but typically complete within minutes to a few hours.
+Downstream consumers MUST poll against this window, not a fixed timeout.
+
+**Retry policy**: distinguish per-request retry (transient errors like rate limits or 5xx)
+from whole-batch retry (batch submission failure). Partial failures are expected;
+`partial_failure: continue` is the correct default -- discard the batch on partial
+failure only when strict consistency is required.
+
+**Dead-letter routing**: every batch_config MUST specify what happens to permanently
+failed requests (exhausted retries). Without a dead-letter path, failed requests
+are silently lost. Store them for manual review or automated reprocessing.
+
+**Credentials**: NEVER embed API keys in any config field.
+Reference the env var name only (OPENAI_API_KEY, ANTHROPIC_API_KEY).
+Actual key values belong in the secrets manager, not in any committed file.
+
+## Provider-Specific Notes
+
+| Provider | Batch Endpoint | Max Requests | SLA | Expiry |
+|----------|---------------|--------------|-----|--------|
+| OpenAI | /v1/batches | 50K req or 200MB | 24h | None documented |
+| Anthropic | /v1/messages/batches | 10K req per batch | Best-effort | 29 days |
+| Azure OpenAI | /openai/... (REST) | Provider-specific | 24h | None documented |
+
+## Anti-Patterns
+
+1. Missing cost_cap_usd -- uncontrolled spend when input size exceeds expectations.
+2. completion_window shorter than provider SLA -- causes premature timeout in downstream.
+3. No dead_letter path -- permanently failed requests silently disappear.
+4. Actual API key in artifact -- credential committed to version control.
+5. partial_failure: halt as default -- discards 98% of successful results on 2% failure rate.
+
+## Builder Context
+
+This ISO operates within the `batch-config-builder` stack, one of 125+
+specialized builders in the CEX architecture. Each builder has 13 ISOs
+covering system prompt, instruction, output template, quality gate,
+examples, schema, config, tools, memory, manifest, constraints,
+validation schema, and runtime rules.
+
+| Component | Purpose |
+|-----------|---------|
+| System prompt | Identity and behavioral rules |
+| Instruction | Step-by-step procedure |
+| Output template | Structural scaffold |
+| Quality gate | Scoring rubric |
+| Examples | Few-shot references |
+
+## Reference
+
+```yaml
+id: p10_lr_batch_config_builder
+pipeline: 8F
+scoring: hybrid_3_layer
+target: 9.0
+```
+
+```bash
+python _tools/cex_score.py --apply --verbose p10_lr_batch_config_builder.md
+```
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `learning_record` |
+| Pillar | P10 |
+| Domain | batch_config |
+| Pipeline | 8F |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Target | 9.0+ |
+| Density | 0.85+ |

@@ -1,0 +1,105 @@
+id: ex-interface-supabase-tables
+kind: interface
+pillar: P06
+title: Supabase Tables Interface
+version: 0.1.0
+quality: null
+status: template
+brand_placeholders:
+- BRAND_SUPABASE_PROJECT_REF
+tags:
+- commerce
+- template
+- distillation
+- supabase
+- interface
+- schema
+density_score: 1.0
+purpose: 'Canonical interface definitions for the tables that every commerce edge function, page, and component depends on.
+  This is the contract between schema and code: if a table changes shape, this doc changes first, then `types.ts` is regenerated,
+  then code is updated.'
+when_to_use:
+- New table is being designed -- define its columns here before running the migration.
+- Consumer needs to know "what columns can I expect on `products`?".
+- Cross-nucleus handoff where the downstream team needs the table contract.
+brand_variables_used:
+- '`{{BRAND_SUPABASE_PROJECT_REF}}` -- namespace tag on the generated types; no other brand specifics leak into schema.'
+tables_essential_columns: ''
+products: '| Column | Type | Nullable | Notes |
+
+  |--------|------|----------|-------|
+
+  | id | uuid | no | pk, default `gen_random_uuid()` |
+
+  | sku | text | no | unique, cross-channel key |
+
+  | bling_id | bigint | yes | populated once Bling accepts the SKU |
+
+  | shopify_id | text | yes | Shopify GID as text |
+
+  | meli_id | text | yes | `MLB...` listing id |
+
+  | title | text | no |  |
+
+  | description | text | yes |  |
+
+  | price_cents | int | no | store in cents to avoid float |
+
+  | currency | text | no | default `BRL` |
+
+  | stock | int | no | aggregated across warehouses |
+
+  | status | text | no | `active` \| `inactive` \| `archived` |
+
+  | dirty | bool | no | set true by any mutation; cleared post-push |
+
+  | source | text | yes | `shopify` \| `bling` \| `meli` \| `manual` |
+
+  | updated_at | timestamptz | no | default `now()` |
+
+  | created_at | timestamptz | no | default `now()` |'
+inventory: '| Column | Type | Notes |
+
+  |--------|------|-------|
+
+  | sku | text | fk -> products.sku |
+
+  | warehouse | text | deposito identifier |
+
+  | quantity | int | >= 0 |
+
+  | updated_at | timestamptz |  |
+
+  | primary key | (sku, warehouse) |'
+orders: '| Column | Type | Notes |
+
+  |--------|------|-------|
+
+  | id | uuid | pk |
+
+  | external_id | text | channel-native id |
+
+  | channel | text | `shopify` \| `bling` \| `meli` |
+
+  | customer_id | uuid | nullable for guest checkout |
+
+  | total_cents | int |  |
+
+  | status | text | `created` \| `paid` \| `fulfilled` \| `cancelled` |
+
+  | raw | jsonb | channel payload for replay |
+
+  | created_at | timestamptz |  |'
+webhook_inbox_channel: One table per channel for idempotency keys, 48-hour TTL cleanup.
+sync_runs: 'Run audit for workflows. Columns: `id, workflow, started_at, ended_at, outcome, report jsonb`.'
+sync_conflicts: 'Unresolved mismatches caught by `dispatch_rule`. Columns: `id, entity, key, field, channel_values jsonb,
+  authority, resolved_at`.'
+invariants_enforced_by_constraints_triggers:
+- '`products.price_cents >= 0`.'
+- '`inventory.quantity >= 0`; negative values are programming errors.'
+- '`orders.channel` must match the channel of its stored `external_id` format.'
+- '`products.dirty=true` persists until a successful push clears it.'
+related_artifacts:
+- '`ex_supabase_data_layer.md`'
+- '`ex_db_connector_supabase.md`'
+- '`ex_validator_inventory_invariants.md`'

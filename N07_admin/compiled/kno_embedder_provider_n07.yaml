@@ -1,0 +1,172 @@
+id: p01_emb_openai_text_embedding_3_small
+kind: embedder_provider
+pillar: P01
+nucleus: N07
+version: 1.0.0
+created: '2026-04-17'
+updated: '2026-04-17'
+author: embedder-provider-builder
+provider: openai
+model: text-embedding-3-small
+dimensions: 1536
+dimensions_override: 512
+max_tokens: 8191
+batch_size: 2048
+normalize: true
+truncate: true
+distance_metric: cosine
+matryoshka: true
+sparse_support: false
+api_key_env: OPENAI_API_KEY
+api_base_url: null
+pricing:
+  per_1m_tokens: 0.02
+  per_request: null
+  currency: USD
+mteb_score: 62.3
+domain: embedding
+quality: null
+tags:
+- embedder-provider
+- openai
+- orchestration
+- semantic-search
+- handoff-retrieval
+tldr: text-embedding-3-small for N07 orchestration corpus -- 512d MRL, $0.02/1M tokens, Ollama fallback for cost-zero ops
+keywords:
+- openai
+- text-embedding-3-small
+- handoff
+- signal
+- mission-plan
+- orchestration
+- nomic-embed-text
+linked_artifacts:
+  primary: null
+  related:
+  - p01_emb_local_nomic_embed_text
+data_source: https://platform.openai.com/docs/guides/embeddings
+density_score: 1.0
+boundary: 'embedder_provider IS: connection config for text-embedding-3-small used by N07 to embed and retrieve operational
+  documents (handoffs, signal JSONs, mission plans, decision manifests, wave schedules) via cex_retriever.py. embedder_provider
+  IS NOT: vector_store, model_provider, retriever pipeline, chunker, or LLM inference config. It does not govern how documents
+  are split or ranked -- only the embedding connection contract.'
+configuration_matrix: '| Parameter | Value | Source |
+
+  |-----------|-------|--------|
+
+  | Provider | openai | https://platform.openai.com/docs/guides/embeddings |
+
+  | Model | text-embedding-3-small | https://platform.openai.com/docs/models |
+
+  | Dimensions | 1536 (native), 512 (MRL) | https://platform.openai.com/docs/guides/embeddings |
+
+  | Max Tokens | 8191 | https://platform.openai.com/docs/guides/embeddings |
+
+  | Batch Size | 2048 texts/request | https://platform.openai.com/docs/guides/embeddings |
+
+  | Normalize | true (L2-normalized by default) | https://platform.openai.com/docs/guides/embeddings |
+
+  | Truncate | true (auto-truncates to max_tokens) | https://platform.openai.com/docs/api-reference/embeddings |
+
+  | Distance Metric | cosine (correct for L2-normalized output) | Mathematical property |
+
+  | Pricing | $0.02 per 1M tokens | https://platform.openai.com/docs/pricing |
+
+  | Fallback Model | nomic-embed-text (Ollama local) | https://ollama.com/library/nomic-embed-text |
+
+  | Fallback Dimensions | 768 (separate index required) | https://docs.nomic.ai/reference/endpoints/nomic-embed-text |
+
+  | Fallback Cost | null (local, no token cost) | local inference |'
+dimension_tradeoffs: 'N07 corpus: handoff files (~800 tokens), signal JSONs (~200 tokens), mission plans (~1200 tokens),
+
+  decision manifests (~600 tokens). Short operational documents -- 512d MRL is optimal.
+
+
+  | Dimensions | MTEB Avg | Storage/vec | Latency | Use Case |
+
+  |------------|----------|-------------|---------|----------|
+
+  | 1536 (native) | 62.3% | 6.1 KB | baseline | Full-fidelity retrieval, rarely needed for short ops docs |
+
+  | 512 (MRL) | 61.6% | 2.0 KB | -30% | N07 primary: operational doc retrieval, 65% cost reduction |
+
+  | 256 (MRL) | 59.8% | 1.0 KB | -50% | Classification only -- not recommended for N07 retrieval |
+
+  | 768 (nomic) | 54.9% | 3.1 KB | local | Fallback: zero cost, acceptable recall for signal corpus |
+
+
+  Sloth lens decision: 512d MRL loses 0.7% MTEB vs native but cuts storage and cost by 65%.
+
+  For N07 operational corpus (never >5K documents), this is the correct tradeoff.'
+batch_embedding_strategy: 'N07 embeds four corpus types on different schedules:
+
+
+  | Corpus | Avg Tokens | Batch Trigger | Batch Size | Provider |
+
+  |--------|-----------|---------------|------------|----------|
+
+  | Handoff files (.cex/runtime/handoffs/) | ~800 | on write (F8) | 32 | openai primary |
+
+  | Signal JSONs (.cex/runtime/signals/) | ~200 | on write (F8) | 128 | openai primary |
+
+  | Mission plans (.cex/runtime/plans/) | ~1200 | on write (F8) | 16 | openai primary |
+
+  | Decision manifests (.cex/runtime/decisions/) | ~600 | on write (F8) | 64 | openai primary |
+
+
+  Fallback routing: if OPENAI_API_KEY absent or API returns 429/503, route to Ollama
+
+  nomic-embed-text. Fallback index is separate (768d vs 512d -- incompatible vector spaces).
+
+  Never mix openai and nomic vectors in the same index.'
+integration_pattern: "# cex_retriever.py integration -- N07 orchestration corpus\nfrom openai import OpenAI\nimport os\n\n\
+  # Primary: OpenAI text-embedding-3-small at 512d MRL\nclient = OpenAI()  # reads OPENAI_API_KEY from env\n\ndef embed_n07(texts:\
+  \ list[str], use_fallback: bool = False) -> list[list[float]]:\n    if use_fallback:\n        # Ollama nomic-embed-text\
+  \ -- separate 768d index\n        import requests\n        resp = requests.post(\n            \"http://localhost:11434/api/embeddings\"\
+  ,\n            json={\"model\": \"nomic-embed-text\", \"prompt\": texts[0]}\n        )\n        return [resp.json()[\"embedding\"\
+  ]]\n    # Primary path: 512d MRL via dimensions param\n    response = client.embeddings.create(\n        model=\"text-embedding-3-small\"\
+  ,\n        input=texts,           # up to 2048 texts per call\n        dimensions=512         # MRL reduction from native\
+  \ 1536\n    )\n    return [item.embedding for item in response.data]\n\n# Batch embed the N07 handoff corpus\ndef index_handoffs(paths:\
+  \ list[str]) -> None:\n    texts = [open(p).read() for p in paths]\n    for i in range(0, len(texts), 2048):\n        batch\
+  \ = texts[i:i+2048]\n        vectors = embed_n07(batch)\n        # store in vector_store with path metadata"
+anti_patterns:
+- Using 1536d native when 512d MRL is available -- N07 corpus is short docs; 512d saves 65% storage with <1% recall loss.
+- Mixing openai (512d) and nomic-embed-text (768d) vectors in the same index -- incompatible vector spaces, similarity scores
+  become meaningless.
+- Triggering re-embed on every N07 session start -- embed on write (F8 signal), not on read; avoids redundant API spend.
+- Setting batch_size > 2048 for openai -- provider enforces server-side limit; silent truncation or 429 errors stall the pipeline.
+- Hardcoding OPENAI_API_KEY in cex_retriever.py config -- always read from env var; key exposure breaks CI/CD and security
+  posture.
+- Falling back to nomic without routing to a separate index -- nomic is 768d, openai is 512d; same-index mixed vectors corrupt
+  all similarity scores.
+references:
+- 'embeddings guide: https://platform.openai.com/docs/guides/embeddings'
+- 'model list: https://platform.openai.com/docs/models'
+- 'pricing: https://platform.openai.com/docs/pricing'
+- 'MTEB leaderboard: https://huggingface.co/spaces/mteb/leaderboard'
+- 'nomic-embed-text: https://ollama.com/library/nomic-embed-text'
+- 'MRL paper: https://arxiv.org/abs/2205.13147'
+properties: '| Property | Value |
+
+  |----------|-------|
+
+  | Kind | `embedder_provider` |
+
+  | Pillar | P01 |
+
+  | Nucleus | N07 |
+
+  | Domain | embedding / orchestration retrieval |
+
+  | Pipeline | 8F (F1-F8) |
+
+  | Scorer | cex_score.py |
+
+  | Compiler | cex_compile.py |
+
+  | Retriever | cex_retriever.py |
+
+  | Quality target | 9.0+ |
+
+  | Density target | 0.85+ |'

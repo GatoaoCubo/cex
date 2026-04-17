@@ -12,8 +12,8 @@ quality: 9.0
 tags: [quality-gate, embedding-config, vector, rag, chunking, P11]
 tldr: "Gates for embedding_config artifacts: validates model spec, dimension accuracy, chunk size sanity, distance metric validity, and normalization settings."
 density_score: 0.90
+llm_function: GOVERN
 ---
-
 # Gate: embedding_config
 ## Definition
 | Field     | Value |

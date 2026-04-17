@@ -1,0 +1,42 @@
+id: bld_instruction_alert_rule
+kind: instruction
+pillar: P03
+llm_function: REASON
+purpose: Step-by-step production process for alert_rule
+version: 1.0.0
+quality: 5.4
+tags:
+- alert_rule
+- builder
+- instruction
+title: Instruction Alert Rule Builder
+density_score: 0.86
+updated: '2026-04-17'
+phase_1_identify:
+- Name the condition being monitored (what metric or signal)
+- Determine the numeric threshold (>= 95%, < 100ms, > 500)
+- 'Select severity: critical (page now), warning (ticket), info (log only)'
+- 'Determine for duration: how long must condition hold before firing (0s = instant)'
+- 'Identify routing target: who or what handles this alert'
+- Determine if automated response is possible (restart, scale, rollback)
+phase_2_compose:
+- Read bld_schema_alert_rule.md for required fields
+- 'Set id: ar_{system}{metric}{condition} (snake_case)'
+- Write metric_expression as a PromQL-style or logical expression
+- 'Set severity from controlled list: critical | warning | info'
+- 'Set for_duration: ISO duration (0s, 5m, 15m, 1h)'
+- 'Set routing: team channel, PagerDuty policy, or webhook'
+- 'Set quality: null -- never self-score'
+phase_3_validate:
+- 'HARD gates:'
+- id follows pattern ar_{system}_{metric}
+- kind == alert_rule
+- quality == null
+- metric_expression present with numeric threshold
+- severity from controlled list
+- routing target present
+- 'SOFT gates:'
+- for_duration prevents flapping (>= 1m recommended for non-critical)
+- runbook_url or remediation_steps present
+- automated_response defined (auto-scale, restart, etc.)
+- labels/annotations for Prometheus compatibility

@@ -18,6 +18,8 @@ density_score: 0.90
 ---
 
 # Instructions: How to Produce a connector
+
+This ISO addresses the database connector domain: connection pooling, query execution, and SQL dialect handling.
 ## Phase 1: RESEARCH
 1. Identify the external service to integrate and its domain (payment, CRM, messaging, etc.)
 2. Determine protocol: rest, websocket, grpc, or mqtt
@@ -29,7 +31,7 @@ density_score: 0.90
 8. Confirm service slug for id: snake_case, lowercase, no hyphens
 ## Phase 2: COMPOSE
 1. Read SCHEMA.md — source of truth for all fields
-2. Read OUTPUT_TEMPLATE.md — fill {{vars}} following SCHEMA constraints
+2. Read OUTPUT_TEMPLATE.md — fill `{{vars}}` following SCHEMA constraints
 3. Fill frontmatter: all required fields (quality: null — never self-score)
 4. Write Service Configuration section: service name, protocol, auth strategy, base_url
 5. Write Endpoints section: for each endpoint list direction (inbound/outbound), path or topic, and data transform reference

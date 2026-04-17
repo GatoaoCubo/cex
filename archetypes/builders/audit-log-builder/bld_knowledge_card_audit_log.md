@@ -1,0 +1,59 @@
+---
+kind: knowledge_card
+id: bld_knowledge_card_audit_log
+pillar: P01
+llm_function: INJECT
+purpose: Domain knowledge for audit_log production
+quality: 9.2
+title: "Knowledge Card Audit Log"
+version: "1.0.0"
+author: wave1_builder_gen_v2
+tags: [audit_log, builder, knowledge_card]
+tldr: "Domain knowledge for audit_log production"
+domain: "audit_log construction"
+created: "2026-04-14"
+updated: "2026-04-14"
+density_score: 0.85
+---
+
+## Domain Overview
+Audit logs are critical for SOC2 Type II compliance, ensuring data integrity, accountability, and traceability of system activities. They capture immutable records of user actions, system events, and configuration changes, enabling auditors to verify controls over security, availability, processing integrity, confidentiality, and privacy. SOC2 Type II requirements emphasize the need for logs that are tamper-evident, timestamped, and accessible for review, aligning with industry standards for forensic analysis and regulatory reporting.
+
+Immutable audit logs prevent unauthorized modification, a key defense against data breaches and compliance failures. They must be designed to resist tampering through cryptographic hashing, versioning, or write-once storage mechanisms. Properly configured logs also support incident response by providing a chronological, unaltered record of events for investigation and remediation.
+
+## Key Concepts
+| Concept              | Definition                                                                 | Source                          |
+|----------------------|----------------------------------------------------------------------------|---------------------------------|
+| Immutable Log        | Log entry that cannot be altered after creation.                           | NIST SP 800-92                  |
+| Event Timestamp      | UTC timestamp with millisecond precision, aligned with system clocks.      | ISO 8601                        |
+| Log Enrichment       | Inclusion of contextual metadata (e.g., user ID, IP, session ID).         | SOC 2 Trust Services Criteria   |
+| Tamper Evidence      | Mechanism (e.g., cryptographic hash chains) to detect unauthorized changes. | ISO 27001 A.12.5.1              |
+| Log Retention        | Storage duration mandated by compliance frameworks (e.g., 3–7 years).      | GDPR Art. 30                    |
+| Log Integrity Check  | Periodic verification of log consistency using cryptographic hashes.       | NIST SP 800-53 Rev. 4           |
+| Log Aggregation      | Centralized collection of logs from distributed systems.                   | HIPAA Security Rule             |
+| Log Correlation      | Mapping log entries to security events for analysis.                       | MITRE ATT&CK                  |
+
+## Industry Standards
+- SOC 2 Type II Trust Services Criteria
+- ISO/IEC 27001:2013 Information Security Management
+- NIST SP 800-92: Guide to Security Monitoring
+- GDPR (General Data Protection Regulation)
+- HIPAA Security Rule
+- RFC 5246: TLS 1.2 (for secure log transmission)
+- COBIT 2019 (IT Governance)
+- PCI DSS v4.0 (Payment Card Industry Data Security Standards)
+- Open Web Application Security Project (OWASP) Logging Guidelines
+
+## Common Patterns
+1. Use cryptographic hashing (e.g., SHA-256) for log immutability.
+2. Store logs in write-once, append-only storage (e.g., WORM drives).
+3. Enforce strict schema validation for log entries.
+4. Correlate logs with user identity and session context.
+5. Implement automated integrity checks via log monitoring tools.
+
+## Pitfalls
+- Allowing log rotation or deletion without tamper-evidence mechanisms.
+- Omitting critical fields (e.g., user identity, action type) in log entries.
+- Using unencrypted storage for logs, risking exposure of sensitive data.
+- Failing to align log retention policies with compliance requirements.
+- Overlooking clock synchronization (NTP) for accurate timestamps.

@@ -1,0 +1,91 @@
+---
+id: con_secret_config_n07
+kind: secret_config
+pillar: P09
+nucleus: n07
+title: "Orchestrator Secret Management"
+version: 1.0
+quality: 7.5
+tags: [secret-config, orchestration, credentials, api-keys, security]
+---
+<!-- 8F: F1=P09/secret_config F2=secret-config-builder F3=nucleus_def_n07+n07-orchestrator F4=reason F5=call F6=produce F7=govern F8=collaborate -->
+
+# Orchestrator Secret Management
+
+## Purpose
+
+| Field | Value |
+|---|---|
+| Intent | Govern which credentials N07 needs, where they live, and how they are accessed during dispatch. |
+| Scope | Multi-provider dispatch, grid orchestration, git operations, webhook notifications, proxy routing. |
+| Sloth Lens | Secrets are someone else's problem to store -- N07 only needs to know WHERE they are, never WHAT they contain. |
+| Access Pattern | env (platform-injected at boot; never fetched at runtime via vault call). |
+| Failure Mode | Abort on missing required secrets; abort with masked error on invalid format. |
+
+## Secret Registry
+
+| Secret ID | Source | Required | Scope | Rotation | Masking |
+|---|---|---|---|---|---|
+| ANTHROPIC_API_KEY | env | yes | all nuclei dispatch | 90d | show last 4 only (****abcd) |
+| GOOGLE_AI_API_KEY | env | no | gemini-tier nuclei | 90d | full mask (****) |
+| OPENAI_API_KEY | env | no | codex fallback nuclei | 90d | full mask (****) |
+| GITHUB_TOKEN | env | no | git push, PR ops | 30d | full mask (****) |
+| OLLAMA_HOST | env | no | local model routing | never | none (not sensitive) |
+| CEX_WEBHOOK_SECRET | env | no | completion notifications | 180d | full mask (****) |
+| LITELLM_MASTER_KEY | env | no | LiteLLM proxy routing | 90d | full mask (****) |
+
+## Access Rules
+
+| Nucleus | Can Read | Can Write | Rationale |
+|---|---|---|---|
+| N07 | all keys listed above | none | Orchestrator reads to validate and pass to dispatch; never stores or logs values. |
+| N01-N06 | own provider key only (injected via handoff env block) | none | Least privilege -- each nucleus receives only the key its CLI needs. |
+| _tools/ scripts | provider key per invocation (reads env at runtime) | none | Tool reads env directly; N07 never passes raw value in CLI args or file content. |
+
+## Security Policies
+
+| Policy | Value | Rationale |
+|---|---|---|
+| never_log_secrets | true | No secret value appears in any log file, signal JSON, handoff .md, or git diff. |
+| never_commit_secrets | true | Pre-commit hook (cex_hooks.py) rejects any staged .env or file containing key patterns. |
+| mask_in_error_messages | true | On failure, log "ANTHROPIC_API_KEY=****abcd" (last 4 visible); full value is suppressed. |
+| rotation_alert_days | 14 | Warn operator 14 days before any secret reaches its rotation deadline. |
+| fallback_on_missing | abort | Required secrets have no fallback; missing == hard abort before first handoff write. |
+| optional_on_missing | warn | Optional secrets (GOOGLE_AI_API_KEY etc.) produce a routing warn; dispatch continues on alternate provider. |
+
+## Injection Flow
+
+| Step | Actor | Action | Secret Touched |
+|---|---|---|---|
+| 1 | Platform / shell | Export vars into N07 process environment at boot. | All keys in registry. |
+| 2 | N07 boot | Validate ANTHROPIC_API_KEY present and non-empty; abort if missing. | ANTHROPIC_API_KEY |
+| 3 | N07 dispatch | Pass per-nucleus key into handoff env block (masked in log, plaintext only inside spawned process). | Provider key for target nucleus. |
+| 4 | Nucleus boot | Reads own provider key from inherited env; no vault call required. | Single provider key. |
+| 5 | Tool invocation | _tools/ scripts read env at runtime; key never written to disk. | Provider key per invocation. |
+| 6 | Signal / git | Completion signals and commits contain no secret values; masking applied before write. | None exposed. |
+
+## Rationale
+
+| Design Choice | Why It Exists | Sloth Effect |
+|---|---|---|
+| access_pattern: env | N07 has no vault sidecar; env injection is the zero-infrastructure option. | No Vault dependency at orchestrator layer. |
+| ANTHROPIC_API_KEY required | Claude/Opus is the default for all nuclei; without it, zero dispatch is possible. | One guard prevents entire grid failure. |
+| All others optional | Gemini, Codex, Ollama, git, webhook, proxy are fallback or optional features. | Missing optional key degrades gracefully; does not abort mission. |
+| Last-4 masking for ANTHROPIC_API_KEY | Rotation verification needs partial visibility without exposing the secret. | Operator can confirm rotation happened without reading the value. |
+| 30d rotation for GITHUB_TOKEN | GitHub PATs have shorter default expiry; tighter rotation window reduces breach window. | Aligns with GitHub token expiry best practice. |
+| OLLAMA_HOST not masked | Hostname:port is not a credential; it is a routing address. | Avoids unnecessary redaction that breaks debug logs. |
+
+## Properties
+
+| Property | Value |
+|---|---|
+| Kind | `secret_config` |
+| Pillar | `P09` |
+| Nucleus | `n07` |
+| Access Pattern | `env` |
+| Encryption at Rest | platform-managed (OS env, CI secret store) |
+| Encryption in Transit | TLS 1.3 (provider API calls) |
+| Audit Log | via pre-commit hook + dispatch log masking |
+| Required Secrets | 1 (ANTHROPIC_API_KEY) |
+| Optional Secrets | 6 |
+| Sin Lens | Orchestrating Sloth: WHERE secrets live, not WHAT they contain. |

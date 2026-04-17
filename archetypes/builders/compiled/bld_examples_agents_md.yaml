@@ -1,0 +1,115 @@
+kind: examples
+id: bld_examples_agents_md
+pillar: P07
+llm_function: GOVERN
+purpose: Golden and anti-examples of agents_md artifacts
+quality: null
+title: Examples Agents Md
+version: 1.0.0
+author: wave7_n03_dev_manifests
+tags:
+- agents_md
+- builder
+- examples
+tldr: Golden and anti-examples of AGENTS.md artifacts
+domain: agents_md construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+golden_example: '---
+
+  id: p02_am_acme_api.md
+
+  kind: agents_md
+
+  pillar: P05
+
+  project_root: /repos/acme-api
+
+  primary_stack: python+typescript
+
+  quality: null
+
+  ---
+
+
+  # AGENTS.md -- acme-api
+
+
+  Python FastAPI backend with a TypeScript SDK client. Entry points: `api/main.py` and `sdk/index.ts`.
+
+
+  ## Setup commands
+
+  pip install -e ".[dev]"
+
+  npm --prefix sdk ci
+
+
+  ## Test commands
+
+  pytest -q
+
+  npm --prefix sdk test
+
+
+  ## Lint commands
+
+  ruff check .
+
+  npm --prefix sdk run lint
+
+
+  ## PR format
+
+  - Commit grammar: Conventional Commits (feat:, fix:, chore:)
+
+  - Branch prefix: feat/, fix/, chore/
+
+  - Review: 1 approval + CI green required
+
+
+  ## Deploy rules
+
+  - Approver: on-call SRE
+
+  - Rollback: `kubectl rollout undo deploy/acme-api`
+
+
+  ## Security rules
+
+  - NEVER force-push to main
+
+  - NEVER delete protected branches
+
+  - NEVER commit secrets (.env, credentials.json)'
+anti_example_1_readme_md_pretending_to_be_agents_md: '---
+
+  kind: agents_md
+
+  title: Acme API -- the fastest data pipeline on the internet
+
+  ---
+
+  !screenshot
+
+
+  Acme API is a blazing-fast, developer-loved data pipeline trusted by 10,000+ engineers.
+
+  Contributors: @alice, @bob, @carol. Join our Discord!'
+why_it_fails: Every directive here is Claude-Code-specific (slash skills, ~/.claude/ paths, claude CLI flags). AGENTS.md is
+  vendor-neutral -- Codex CLI, Aider, Cursor, and goose cannot parse these. Claude-only rules belong in CLAUDE.md, which sits
+  alongside AGENTS.md as a complementary vendor file, not inside it.
+anti_example_2_claude_md_leaked_into_agents_md: '---
+
+  kind: agents_md
+
+  title: Acme AGENTS.md
+
+  ---
+
+  # Claude Code rules
+
+  Use the /commit skill after every edit. Read ~/.claude/memory/preferences.md before starting.
+
+  MCP servers: enable filesystem and github. Run `claude --dangerously-skip-permissions` for CI.'

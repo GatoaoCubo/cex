@@ -1,0 +1,38 @@
+kind: instruction
+id: bld_instruction_audit_log
+pillar: P03
+llm_function: REASON
+purpose: Step-by-step production process for audit_log
+quality: null
+title: Instruction Audit Log
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- audit_log
+- builder
+- instruction
+tldr: Step-by-step production process for audit_log
+domain: audit_log construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+phase_1_research:
+- Identify SOC2 Type II audit requirements for log immutability and retention
+- Map system components requiring audit logging (e.g., user access, configuration changes)
+- Analyze existing log formats and storage mechanisms for compliance gaps
+- Evaluate cryptographic hashing requirements for log integrity verification
+- Determine retention periods aligned with regulatory and organizational policies
+- Document audit control objectives from SOC2 Trust Service Criteria
+phase_2_compose:
+- 'Define log schema in bld_schema_audit_log.md with fields: timestamp, actor, action, resource, outcome, hash'
+- Specify immutability via cryptographic hash chaining in log entries
+- Map SOC2 controls (e.g., CC7.1, CC11.2) to audit log events in bld_knowledge_card_audit_log.md
+- Write log configuration using bld_output_template_audit_log.md format with YAML anchors
+- Implement tamper-evident storage (e.g., write-once filesystem, WORM storage anchoring)
+- Embed log retention policy as a top-level attribute in the artifact
+- Add metadata for SOC2 attestation scope and audit trail scope
+- Reference bld_schema_audit_log.md in the artifact's $schema property
+- Finalize with cryptographic signature of the configuration file
+phase_3_validate: '[ ] [OK] Verify schema compliance using JSON Schema validator [ ] [OK] Confirm immutability mechanisms
+  prevent log modification [ ] [OK] Validate retention policy aligns with SOC2 Type II requirements [ ] [OK] Ensure all mapped
+  controls are represented in log events [ ] [OK] Confirm artifact passes SOC2 attestation checklist for audit logs'

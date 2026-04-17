@@ -1,0 +1,41 @@
+kind: instruction
+id: bld_instruction_user_journey
+pillar: P03
+llm_function: REASON
+purpose: Step-by-step production process for user_journey
+quality: null
+title: Instruction User Journey
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- user_journey
+- builder
+- instruction
+tldr: Step-by-step production process for user_journey
+domain: user_journey construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+phase_1_research:
+- Define user journey objectives (e.g., conversion rate improvement).
+- Conduct 5+ stakeholder interviews to identify business goals.
+- Perform 10+ user interviews to map pain points and motivations.
+- Analyze competitors’ touchpoints and conversion funnels.
+- Log 50+ user interactions across channels (website, app, email).
+- Synthesize insights into persona-specific journey stages.
+phase_2_compose:
+- 'Structure artifact using bld_schema_user_journey.md: stages, emotions, actions.'
+- Write "Awareness" stage with triggers (ads, SEO) and user goals.
+- Map "Consideration" touchpoints (product demos, reviews).
+- Detail "Conversion" barriers (pricing, UX friction).
+- Add "Post-purchase" retention strategies (onboarding, support).
+- Reference bld_output_template_user_journey.md for formatting (tables, flowcharts).
+- Insert empathy maps for each persona (emotions, needs, pain points).
+- Align with business KPIs (e.g., CAC, LTV) in conversion metrics.
+- Finalize narrative with actionable insights for each journey phase.
+phase_3_validate:
+- '[ ] [OK] Stakeholders confirm alignment with business goals.'
+- '[ ] [OK] Users validate journey accuracy via usability testing.'
+- '[ ] [OK] Cross-check against bld_schema_user_journey.md for completeness.'
+- '[ ] [OK] Formatting consistent with bld_output_template_user_journey.md.'
+- '[ ] [OK] Journey covers all stages: awareness, consideration, conversion, retention, advocacy.'

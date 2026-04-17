@@ -16,8 +16,8 @@ tags:
   - orchestration
   - P12
 tldr: "Validates multi-step orchestration flows for steps, dependency ordering, completion signals, and recovery."
+llm_function: GOVERN
 ---
-
 ## Definition
 A workflow defines a multi-step orchestration: ordered or parallel steps, the agent assigned to each, dependencies between steps, and completion signals. Workflows must be executable by automated runners without human interpretation. This gate ensures every workflow is acyclic, complete, and safe to run end-to-end.
 ## HARD Gates

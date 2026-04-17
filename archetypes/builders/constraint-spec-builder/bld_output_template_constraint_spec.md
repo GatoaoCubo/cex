@@ -39,13 +39,13 @@ temperature_override: "{{temperature_override}}}}"
 max_tokens: "{{max_tokens}}}}"
 ```
 ## Overview
-{{overview_content}}
+`{{overview_content}}`
 ## Constraint Definition
-{{constraint_definition_content}}
+`{{constraint_definition_content}}`
 ## Provider Compatibility
-{{provider_compatibility_content}}
+`{{provider_compatibility_content}}`
 ## Integration
-{{integration_content}}
+`{{integration_content}}`
 
 ## Template Standards
 

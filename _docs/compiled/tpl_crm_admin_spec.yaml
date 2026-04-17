@@ -1,0 +1,155 @@
+id: tpl_crm_admin_spec
+kind: template
+pillar: P12
+title: CRM Admin Panel — Specification Template
+version: 1.0.0
+quality: null
+created: 2026-04-07
+author: n03_builder
+origin: gato-ao-cubo commit 1744e921 (CRM_ADMIN mission)
+variables:
+- BRAND_NAME
+- DB_PROVIDER
+- TABLES
+- MAP_PROVIDER
+- AUTH_METHOD
+- FRAMEWORK
+- REGION
+density_score: 0.95
+tags:
+- template
+- crm
+- admin
+- specification
+- fullstack
+- instance-extraction
+tldr: CRM admin panel spec — database schema, frontend components, map integration, auth. Any brand fills slots.
+updated: '2026-04-13'
+architecture_decision_record: '| Decision | Choice | Alternatives Considered |
+
+  |----------|--------|------------------------|
+
+  | Database | {{DB_PROVIDER | default: ''Supabase''}} | Firebase, PlanetScale, Neon, self-hosted Postgres |
+
+  | Frontend | {{FRAMEWORK | default: ''React + Vite''}} | Next.js, SvelteKit, Astro |
+
+  | Map | {{MAP_PROVIDER | default: ''Leaflet + OpenStreetMap''}} | Google Maps API, Mapbox |
+
+  | Auth | {{AUTH_METHOD | default: ''Row-Level Security''}} | JWT, NextAuth, Clerk |
+
+  | Styling | Tailwind CSS + shadcn/ui | MUI, Chakra, Ant Design |
+
+
+  ---'
+database_schema: ''
+tables_contacts_default_crm_contacts: "CREATE TABLE {{TABLES.contacts | default: 'crm_contacts'}} (\n  id UUID DEFAULT gen_random_uuid()\
+  \ PRIMARY KEY,\n  cnpj TEXT,\n  razao_social TEXT,\n  nome_fantasia TEXT NOT NULL,\n  segmento TEXT NOT NULL,\n  sub_segmento\
+  \ TEXT,\n  endereco TEXT,\n  cidade TEXT NOT NULL,\n  uf TEXT DEFAULT '{{STATE | default: 'SP'}}',\n  cep TEXT,\n  telefone\
+  \ TEXT,\n  whatsapp TEXT,\n  email TEXT,\n  website TEXT,\n  instagram TEXT,\n  google_maps_url TEXT,\n  google_rating NUMERIC(2,1),\n\
+  \  google_reviews INTEGER DEFAULT 0,\n  lat NUMERIC(10,7),\n  lng NUMERIC(10,7),\n  porte TEXT CHECK (porte IN ('MEI','ME','EPP','medio','grande')),\n\
+  \  potencial_b2b TEXT CHECK (potencial_b2b IN ('S+','S','A','B','C')),\n  status TEXT DEFAULT 'prospect' CHECK (status IN\
+  \ ('prospect','contacted','negotiating','partner','inactive')),\n  fonte TEXT,\n  notas TEXT,\n  created_at TIMESTAMPTZ\
+  \ DEFAULT NOW(),\n  updated_at TIMESTAMPTZ DEFAULT NOW()\n);\n\n-- Indexes for common queries\nCREATE INDEX idx_contacts_cidade\
+  \ ON {{TABLES.contacts}}(cidade);\nCREATE INDEX idx_contacts_segmento ON {{TABLES.contacts}}(segmento);\nCREATE INDEX idx_contacts_status\
+  \ ON {{TABLES.contacts}}(status);\nCREATE INDEX idx_contacts_potencial ON {{TABLES.contacts}}(potencial_b2b);\n\n-- Row-Level\
+  \ Security\nALTER TABLE {{TABLES.contacts}} ENABLE ROW LEVEL SECURITY;\n\nCREATE POLICY \"team_read\" ON {{TABLES.contacts}}\n\
+  \  FOR SELECT USING (auth.role() = 'authenticated');\n\nCREATE POLICY \"team_write\" ON {{TABLES.contacts}}\n  FOR ALL USING\
+  \ (auth.role() = 'authenticated');\n\n---"
+frontend_components: ''
+tab_structure: '| Tab | Component | Description |
+
+  |-----|-----------|-------------|
+
+  | Dashboard | `<CRMDashboard />` | KPIs, charts, pipeline funnel |
+
+  | Contacts | `<CRMContacts />` | Table + filters + detail panel |
+
+  | Map | `<CRMMap />` | Leaflet map with clustered markers |'
+dashboard_tab: '┌─────────────────────────────────────────┐
+
+  │  KPI Cards (6): Total │ Phone │ Email │ │
+
+  │  │ Address │ Partners │ Prospects       │
+
+  ├─────────────────────────────────────────┤
+
+  │  Chart: Contacts by City (bar)          │
+
+  │  Chart: Pipeline Funnel (horizontal)    │
+
+  │  Chart: Segment Distribution (donut)    │
+
+  └─────────────────────────────────────────┘'
+contacts_tab: '┌─────────────────────────────────────────┐
+
+  │  Search │ Filter: City │ Segment │Status│
+
+  ├─────────────────────────────────────────┤
+
+  │  Table: sortable, paginated             │
+
+  │  Click row → Detail Panel (slide-in)    │
+
+  │    → Edit fields inline                 │
+
+  │    → Add notes                          │
+
+  │    → Change status                      │
+
+  └─────────────────────────────────────────┘'
+map_tab: '┌─────────────────────────────────────────┐
+
+  │  Leaflet Map                            │
+
+  │  Center: {{MAP_CENTER_LAT}}, {{MAP_CENTER_LNG}} │
+
+  │  Zoom: {{MAP_ZOOM | default: ''12''}}     │
+
+  │  Markers: clustered by proximity        │
+
+  │  Click marker → popup with contact info │
+
+  │  Color by: segment or status            │
+
+  └─────────────────────────────────────────┘
+
+
+  ---'
+hooks_react: '| Hook | Purpose |
+
+  |------|---------|
+
+  | `useCRMContacts()` | Fetch + filter + paginate contacts |
+
+  | `useCRMStats()` | Aggregate KPIs and chart data |
+
+  | `useCRMUpdate()` | Optimistic update + revalidation |
+
+
+  ---'
+seed_migration: "-- Seed from JSON export\n-- Generate via: python _build_crm_seed.py > seed.sql\nINSERT INTO {{TABLES.contacts}}\
+  \ (nome_fantasia, segmento, cidade, uf, telefone, lat, lng, fonte)\nVALUES\n  ('Example Business', '{{INDUSTRY}}', '{{CITY}}',\
+  \ '{{STATE}}', '+55 11 99999-0000', -23.62, -46.55, 'seed');\n\n---"
+route_configuration: '/admin/crm           → CRM page (protected)
+
+  /admin/crm/dashboard → Dashboard tab (default)
+
+  /admin/crm/contacts  → Contacts tab
+
+  /admin/crm/map       → Map tab
+
+
+  ---'
+dependencies: '| Package | Version | Purpose |
+
+  |---------|---------|---------|
+
+  | react-leaflet | ^4.x | Map component |
+
+  | leaflet | ^1.9.x | Map engine |
+
+  | leaflet.markercluster | ^1.5.x | Marker clustering |
+
+  | recharts | ^2.x | Charts |
+
+  | @supabase/supabase-js | ^2.x | Database client |'

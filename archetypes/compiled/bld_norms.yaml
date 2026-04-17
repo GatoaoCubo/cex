@@ -1,0 +1,69 @@
+kind: norms
+id: bld_norms
+pillar: P08
+quality: 9.2
+title: Norms
+version: 1.0.0
+author: n03_builder
+tags:
+- artifact
+- builder
+- examples
+tldr: Golden and anti-examples for CEX system, demonstrating ideal structure and common pitfalls.
+domain: CEX system
+created: '2026-04-07'
+updated: '2026-04-07'
+density_score: 0.9
+mandatory_rules_learned_from_deep_review:
+- 'MANIFEST.md parent: set `parent: null` — never reference [PLANNED] builders'
+- 'TOOLS.md brain_query: mark as `CONDITIONAL` not `ACTIVE` — add `[MCP]` tag'
+- 'INSTRUCTIONS.md brain_query: write `brain_query [IF MCP]` — not all runtimes have MCP'
+- 'ARCHITECTURE.md: MUST include `## Dependency Graph` with `-->` arrows showing receives/produces_for/independent'
+- 'EXAMPLES.md: golden must have 19+ fields. Anti-example must list 8+ numbered FAILURES with gate refs'
+- 'OUTPUT_TEMPLATE.md: NO instructions inside template (no "repeat for N"). Only `{{vars}}` and structure'
+- 'SCHEMA.md: every required field MUST appear in OUTPUT_TEMPLATE.md — zero drift allowed'
+quality_floor:
+- 'HARD gates: all must pass (YAML parses, id pattern, kind literal, quality null, required fields)'
+- 'SOFT gates: score >= 8.0 minimum'
+- 'Density: >= 0.80 (no filler phrases)'
+- Max 4KB per builder spec
+deep_review_learnings_waves_3_4:
+- 'INSTRUCTIONS.md steps: each numbered step = ONE action (no "and", "then", compound verbs)'
+- 'ARCHITECTURE.md boundary: MUST list ALL sibling kinds in same pillar as "NOT" rows'
+- 'SCHEMA.md flags/enums: use GENERIC values, not runtime-specific (no --dangerously-skip-permissions)'
+- 'EXAMPLES.md golden IDs: use CEX-universal patterns, minimize framework-specific director names'
+- 'COLLABORATION.md cross-refs: if builder A refs builder B, builder B MUST ref builder A'
+universal_schema_rules_v1_0:
+- 'MANIFEST.md keywords: 4-8 terms in frontmatter, extracted from ## Routing body'
+- 'MANIFEST.md triggers: 2-4 natural language phrases in frontmatter'
+- 'MANIFEST.md capabilities: >= 50 chars, 3 layers (L1=what, L2=how, L3=when)'
+- 'MEMORY.md memory_scope: must be user | project | local (default: project)'
+- 'MEMORY.md observation_types: must be [user, feedback, project, reference] — never alter'
+- 'MEMORY.md observation: each observation MUST have type: field matching one of 4 types'
+- 'CONFIG.md effort: must be low | medium | high | max (default: medium)'
+- 'CONFIG.md max_turns: integer 1-100 (default: 25)'
+- 'CONFIG.md disallowed_tools: list of blocked tools (empty list = all allowed)'
+- 'CONFIG.md permission_scope: must be nucleus | pillar | global | restricted (default: nucleus)'
+- 'TOOLS.md Tool Permissions: ## Tool Permissions section required with ALLOWED/DENIED/EFFECTIVE'
+metadata: python _tools/cex_score.py --apply bld-norms.md
+properties: '| Property | Value |
+
+  |----------|-------|
+
+  | Kind | `norms` |
+
+  | Pillar |  |
+
+  | Domain | CEX system |
+
+  | Pipeline | 8F (F1-F8) |
+
+  | Scorer | cex_score.py |
+
+  | Compiler | cex_compile.py |
+
+  | Retriever | cex_retriever.py |
+
+  | Quality target | 9.0+ |
+
+  | Density target | 0.85+ |'

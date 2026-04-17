@@ -1,19 +1,16 @@
-# /cex — Ponto de Entrada do CEX
+# /cex -- CEX Entry Point
 
-Quando o usuario digitar `/cex` ou quando esta session iniciar sem contexto,
-execute este protocolo:
+When the user types `/cex` or a session starts without context, run this protocol.
 
 ## 1. SCAN (10s)
 
-Leia o estado real do repo:
+Read the real repo state:
 
 ```bash
-cd C:/Users/PC/Documents/GitHub/cex
-
-# Builders prontos
+# Builders ready
 ls archetypes/builders/ | grep -v "^_"
 
-# Fill rate dos nucleos
+# Fill rate per nucleus
 for n in N0*; do
   filled=$(find "$n" -name "*.md" ! -name "README.md" ! -name "NUCLEUS.md" 2>/dev/null | wc -l)
   total=$(find "$n" -type d -name "examples" | wc -l)
@@ -25,29 +22,29 @@ for lp in P{01..12}_*; do
   echo "$lp: $(find "$lp/examples" -name "*.md" | wc -l) examples"
 done
 
-# Ultimo commit
+# Last commit
 git log --oneline -5
 ```
 
 ## 2. REPORT (dashboard)
 
-Apresente ao usuario:
+Present to the user:
 
 ```
-CEX STATUS — {data}
-═══════════════════════════════════
-MOLDE (Architecture v2.0)
-  Nucleos:    7/7  ✅
-  LPs:        84/84 ✅
-  Kind dirs:  546/546 ✅
-  Schemas:    84/84 ✅
+CEX STATUS -- {date}
+===================================
+ARCHITECTURE
+  Nuclei:     8 (N00 archetype + N01-N07 operational)
+  Pillars:    12 (P01-P12)
+  Kinds:      257
+  Schemas:    12/12
 
 BUILDERS (archetypes/builders/)
-  Prontos:    {N}/78
-  Pendentes:  {78-N}
-  Meta:       builder-builder ✅
+  Ready:      259
+  ISOs:       3,381 (13 per builder)
+  Meta:       builder-builder [OK]
 
-CONTEUDO (N01..N07 fill rate)
+CONTENT (N01..N07 fill rate)
   N01 intelligence:  {X}/{Y}
   N02 marketing:     {X}/{Y}
   N03 engineering:   {X}/{Y}
@@ -59,44 +56,44 @@ CONTEUDO (N01..N07 fill rate)
 ROOT EXAMPLES (P01..P12)
   Total: {sum} across 12 pillars
 
-ULTIMO COMMIT: {hash} {msg}
-═══════════════════════════════════
+LAST COMMIT: {hash} {msg}
+===================================
 ```
 
-## 3. DOCS DE REFERENCIA
+## 3. REFERENCE DOCS
 
-Sempre aponte pro usuario antes de qualquer trabalho:
+Always point the user to these before starting work:
 
-| Doc | Path | O que |
-|-----|------|-------|
+| Doc | Path | What |
+|-----|------|------|
 | INDEX | `INDEX.md` | Navigation map |
-| Whitepaper | `_docs/WHITEPAPER_CEX.md` | Visao humana do CEX |
-| Architecture | `_docs/ARCHITECTURE.md` | Molde inviolavel (regras) |
-| CODEX | `archetypes/CODEX.md` | Biblia de meta-construcao |
-| Mandamentos | `archetypes/MANDAMENTOS.md` | 10 leis |
-| Taxonomy | `archetypes/TAXONOMY_LAYERS.yaml` | 78 kinds em 5 camadas |
-| Variance | `archetypes/VARIANCE_ANALYSIS.md` | Que files sao universais vs especificos |
-| Wave Plan | `archetypes/PHASE3_WAVE_PLAN.md` | Plano de 22 waves |
-| Builder-Builder | `archetypes/builders/_builder-builder/README.md` | Como gerar novos builders |
+| Whitepaper | `_docs/WHITEPAPER_CEX.md` | Human-readable vision |
+| Architecture | `_docs/ARCHITECTURE.md` | Inviolable structure (rules) |
+| CODEX | `archetypes/CODEX.md` | Meta-construction bible |
+| Mandamentos | `archetypes/MANDAMENTOS.md` | 10 immutable laws |
+| Taxonomy | `archetypes/TAXONOMY_LAYERS.yaml` | Kinds registry |
+| Variance | `archetypes/VARIANCE_ANALYSIS.md` | Universal vs specific files |
+| Wave Plan | `archetypes/PHASE3_WAVE_PLAN.md` | Wave execution plan |
+| Builder-Builder | `archetypes/builders/_builder-builder/README.md` | How to generate new builders |
 
 ## 4. ASK
 
-Pergunte ao usuario:
+Ask the user:
 
-> O que voce quer fazer?
+> What do you want to do?
 >
-> 1. **Construir builders** (Phase 3 — 74 faltam)
-> 2. **Preencher conteudo** em um nucleo (N01..N07)
-> 3. **Revisar/auditar** o que existe
-> 4. **Expandir** a arquitetura (novos types, novos nucleos)
-> 5. **Outro** — descreva
+> 1. **Build artifacts** (run `/build` or `/mission`)
+> 2. **Fill content** in a nucleus (N01..N07)
+> 3. **Review/audit** what exists (`/doctor`)
+> 4. **Expand** architecture (new kinds, new nuclei)
+> 5. **Other** -- describe
 
-## 5. REGRAS INVIOLAVEIS (sempre ativas)
+## 5. INVIOLABLE RULES (always active)
 
-- Path = endereco: `N{XX}/P{NN}/{type}/` — nunca criar fora
-- Dual output: `.md` + `compiled/.yaml` pra artefatos
-- Schema inheritance: nucleo herda do root, nunca remove
+- Path = address: `N{XX}/P{NN}/{kind}/` -- never create outside
+- Dual output: `.md` + `compiled/.yaml` for artifacts
+- Schema inheritance: nucleus inherits from root, never removes
 - Density >= 0.8
-- Quality >= 7.0
-- Builder constroi, humano revisa
-- CEX = diamante (produto). organization-core = workshop (infra)
+- Quality >= 8.0 (published), >= 7.0 (experimental)
+- Builder builds, human reviews, peer-reviewed quality
+- CEX = product (diamond). Brand configs = workshop (infra).

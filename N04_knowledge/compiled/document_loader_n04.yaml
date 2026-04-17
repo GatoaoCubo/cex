@@ -1,0 +1,124 @@
+id: p04_dl_n04_knowledge
+kind: document_loader
+pillar: P04
+nucleus: n04
+title: Document Loader -- N04 Multi-Format Ingestion Pipeline
+version: 1.0.0
+quality: null
+tags:
+- document_loader
+- n04
+- ingestion
+- pdf
+- markdown
+- html
+- docx
+- repo
+- P04
+domain: knowledge management
+status: active
+created: '2026-04-17'
+updated: '2026-04-17'
+author: n04_knowledge
+tldr: 'Multi-format document loader for N04: handles PDF, Markdown, HTML, DOCX, code repos, and API sources. Each format has
+  a dedicated extraction pipeline, chunking strategy, and metadata enrichment step before embedding and indexing.'
+density_score: null
+overview: N04's Knowledge Gluttony demands that EVERY document format be ingestible. This loader is the entry point for all
+  external knowledge into the semantic corpus. It normalizes diverse formats into the `Document` type defined in `type_def_document_types.md`.
+  ---
+supported_formats: '| Format | Extractor | Chunking | Notes |
+
+  |--------|----------|---------|-------|
+
+  | Markdown (.md) | native | whole-doc for KC, heading-based for long | Primary CEX format |
+
+  | PDF | PyMuPDF or pdfplumber | 512-token sliding, 128-overlap | Check OCR quality >= 0.7 |
+
+  | HTML/Web | BeautifulSoup | paragraph-based | Strip nav/footer/ads |
+
+  | DOCX | python-docx | heading-based | Preserve heading hierarchy |
+
+  | Code repo | tree-sitter | function/class-level | Include docstrings |
+
+  | JSONL/CSV | pandas | row-based or fixed 512-token | Flatten to text per row |
+
+  | API (REST) | httpx | response-level | Rate-limit aware |
+
+  | YouTube transcript | yt-dlp | 512-token sliding | Auto-generated captions only if quality flag set |
+
+
+  ---'
+per_format_pipeline: ''
+markdown_primary: "def load_markdown(path: str) -> Document:\n    content = open(path).read()\n    frontmatter = parse_yaml_frontmatter(content)\n\
+  \n    doc_type = (\n        DocumentType.KNOWLEDGE_CARD if frontmatter.get(\"kind\") == \"knowledge_card\"\n        else\
+  \ DocumentType.ARTIFACT\n    )\n\n    return Document(\n        id=uuid4(),\n        type=doc_type,\n        content=content,\n\
+  \        metadata={\n            \"kind\": frontmatter.get(\"kind\"),\n            \"pillar\": frontmatter.get(\"pillar\"\
+  ),\n            \"nucleus\": frontmatter.get(\"nucleus\"),\n            \"path\": path,\n            \"quality\": frontmatter.get(\"\
+  quality\"),\n        }\n    )\n\nChunking: whole document if < 8KB; heading-based split for larger docs."
+pdf: "def load_pdf(path: str, trust_level: int = 3) -> list[Document]:\n    # Extract text via PyMuPDF\n    doc = fitz.open(path)\n\
+  \    pages = [page.get_text() for page in doc]\n    text = \"\\n\\n\".join(pages)\n\n    # Quality check: OCR artifacts\n\
+  \    if count_ocr_artifacts(text) > 0.05:\n        raise LowQualityExtractionError(f\"OCR quality too low for {path}\")\n\
+  \n    # Chunk\n    chunks = sliding_window(text, size=512, overlap=128)\n\n    return [Document(\n        id=uuid4(),\n\
+  \        type=DocumentType.CHUNK,\n        content=chunk,\n        metadata={\"source_type\": \"pdf\", \"path\": path, \"\
+  trust_level\": trust_level}\n    ) for chunk in chunks]"
+code_repository: "def load_repo(repo_path: str, language: str) -> list[Document]:\n    # Use tree-sitter for function/class-level\
+  \ parsing\n    parser = get_parser(language)\n    files = glob_files(repo_path, f\"*.{language}\")\n\n    documents = []\n\
+  \    for file in files:\n        tree = parser.parse(open(file).read().encode())\n        for node in extract_function_nodes(tree):\n\
+  \            documents.append(Document(\n                id=uuid4(),\n                type=DocumentType.CHUNK,\n       \
+  \         content=node.text,\n                metadata={\n                    \"source_type\": \"code\",\n             \
+  \       \"language\": language,\n                    \"file\": file,\n                    \"function\": node.name\n    \
+  \            }\n            ))\n    return documents\n\n---"
+metadata_enrichment: 'After extraction, N04 enriches every document with:
+
+
+  | Field | Source | Notes |
+
+  |-------|--------|-------|
+
+  | `ingestion_date` | now() | ISO 8601 UTC |
+
+  | `corpus` | caller-specified | default: `cex_artifacts` |
+
+  | `trust_level` | config or caller | 1-5, affects retrieval weight |
+
+  | `language` | langdetect | ISO 639-1 code |
+
+  | `token_count` | tiktoken | cl100k_base tokenizer |
+
+  | `embedding_model` | config | default: text-embedding-3-small |
+
+
+  ---'
+batch_ingestion: "For large-scale ingestion (> 100 documents):\n\npython _tools/cex_retriever.py --ingest \\\n  --source /path/to/docs/\
+  \ \\\n  --format markdown \\\n  --corpus cex_artifacts \\\n  --batch-size 50 \\\n  --workers 4\n\nRate limits: max 500 embeddings/min\
+  \ (OpenAI), max 100 upserts/min (pgvector free tier).\nBatch processor respects limits via `con_rate_limit_config_n04.md`\
+  \ (P09).\n\n---"
+error_handling: '| Error | Cause | Recovery |
+
+  |-------|-------|---------|
+
+  | `LowQualityExtractionError` | OCR quality < 0.7 | Skip document, log to `P07_evals/` |
+
+  | `EmbeddingDimensionMismatch` | Wrong model | Fail fast, check `embedding_config_knowledge.md` |
+
+  | `RateLimitExceeded` | API throttle | Exponential backoff: 1s, 2s, 4s |
+
+  | `DocumentTooLarge` | > 200K tokens | Reject, request chunked version |
+
+  | `DuplicateDetected` | Similarity >= 0.97 | Skip upsert, log dedup event |
+
+
+  ---'
+integration: '| Artifact | Role |
+
+  |---------|------|
+
+  | `input_schema_knowledge_query.md` | `corpus` field maps to loader target namespaces |
+
+  | `type_def_document_types.md` | Document type classification |
+
+  | `chunk_strategy_knowledge.md` | Chunking parameters per document type |
+
+  | `api_reference_rag_apis.md` | Upsert endpoint specs |
+
+  | `workflow_rag_ingestion.md` | End-to-end orchestration of this loader |'

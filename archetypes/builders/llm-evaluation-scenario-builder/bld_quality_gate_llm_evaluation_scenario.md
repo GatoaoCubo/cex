@@ -1,0 +1,56 @@
+---
+kind: quality_gate
+id: p07_qg_llm_evaluation_scenario
+pillar: P11
+llm_function: GOVERN
+purpose: Quality gate with HARD and SOFT scoring for llm_evaluation_scenario
+quality: 9.0
+title: "Quality Gate LLM Evaluation Scenario"
+version: "1.0.0"
+author: n06_wave7
+tags: [llm_evaluation_scenario, builder, quality_gate, helm]
+tldr: "Quality gate with HARD and SOFT scoring for llm_evaluation_scenario"
+domain: "llm_evaluation_scenario construction"
+created: "2026-04-14"
+updated: "2026-04-14"
+density_score: 0.85
+---
+
+## Definition
+| Metric | Threshold | Operator | Scope |
+|--------|-----------|----------|-------|
+| Scenario reproducibility | 100% | equals | All HELM-compatible runners |
+
+## HARD Gates
+| ID  | Check | Fail Condition |
+|-----|-------|----------------|
+| H01 | YAML frontmatter valid | Invalid YAML syntax or missing required fields |
+| H02 | ID matches pattern `^p07_evs_[a-z][a-z0-9_]+\.md$` | Pattern mismatch |
+| H03 | kind = "llm_evaluation_scenario" | Kind field incorrect or absent |
+| H04 | subject_area in HELM taxonomy | Unrecognized or missing subject_area |
+| H05 | capability is specific and falsifiable | Vague or missing capability description |
+| H06 | task_format is homogeneous | Mixed MCQ + open-ended in same scenario |
+| H07 | primary_metric maps to HELM family | Unknown or missing metric |
+| H08 | canonicalization_fn referenced by name | Inline code or missing canonicalization |
+
+## SOFT Scoring
+| Dim | Dimension | Weight | Scoring Guide |
+|-----|-----------|--------|---------------|
+| D01 | Schema completeness (all required + recommended fields) | 0.25 | All present = 1.0, missing recommended = 0.7, missing required = 0 |
+| D02 | Subject-area depth (IBM extension domains vs. generic) | 0.20 | Domain-specific with IBM extension = 1.0, standard HELM only = 0.7, vague = 0.3 |
+| D03 | Adapter precision (concrete param values, prompt_template ref) | 0.20 | All concrete = 1.0, partial = 0.5, missing = 0 |
+| D04 | Few-shot pool quality (size >= num_few_shot, diverse examples) | 0.15 | Sufficient + diverse = 1.0, sufficient only = 0.7, insufficient = 0 |
+| D05 | Token cost estimate accuracy (within 20% of actual) | 0.20 | Documented + accurate = 1.0, documented only = 0.5, missing = 0 |
+
+## Actions
+| Label | Score | Action |
+|-------|-------|--------|
+| GOLDEN  | >= 9.5 | Auto-publish to HELM scenario registry |
+| PUBLISH | >= 8.0 | Publish after peer validation |
+| REVIEW  | >= 7.0 | Manual review required |
+| REJECT  | < 7.0  | Return to builder with failure report |
+
+## Bypass
+| Condition | Approver | Audit Trail |
+|-----------|----------|-------------|
+| IBM Enterprise extension pilot | Head of Evaluation | Escalation log in N05_operations/ |

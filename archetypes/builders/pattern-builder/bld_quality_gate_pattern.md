@@ -12,8 +12,8 @@ quality: 9.0
 tags: [quality-gate, pattern, P11, P08, governance, architecture, reuse]
 tldr: "Gates for pattern artifacts — recurring problem, concrete solution, balanced forces, and documented anti-pattern."
 density_score: 0.85
+llm_function: GOVERN
 ---
-
 # Gate: pattern
 ## Definition
 | Field     | Value                                              |

@@ -43,27 +43,27 @@ retry_count: {{integer}}
 error: {{null|"error_message_string"}}
 ```
 ## Overview
-{{what_workflow_state_this_checkpoint_captures_1_to_2_sentences}}
-{{which_workflow_and_step_plus_why_this_point_matters}}
+`{{what_workflow_state_this_checkpoint_captures_1_to_2_sentences}}`
+`{{which_workflow_and_step_plus_why_this_point_matters}}`
 ## State
 | Key | Type | Size | Description |
 |-----|------|------|-------------|
-| {{key_1}} | {{type}} | {{bytes_or_count}} | {{what_this_value_represents}} |
-| {{key_2}} | {{type}} | {{bytes_or_count}} | {{what_this_value_represents}} |
+| `{{key_1}}` | {{type}} | {{bytes_or_count}} | `{{what_this_value_represents}}` |
+| `{{key_2}}` | {{type}} | {{bytes_or_count}} | `{{what_this_value_represents}}` |
 Serialization format: {{yaml|json}}
-Total state budget: {{N}} bytes (max 2048)
+Total state budget: `{{N}}` bytes (max 2048)
 ## Resume
 Prerequisites:
-- {{prerequisite_1}} (e.g., external service available, auth token valid)
-- {{prerequisite_2}}
+- `{{prerequisite_1}}` (e.g., external service available, auth token valid)
+- `{{prerequisite_2}}`
 Resume steps:
 1. Load checkpoint by id: `{{p12_ck_slug}}`
-2. Restore state keys: {{key_list}}
+2. Restore state keys: `{{key_list}}`
 3. Re-enter workflow at step: `{{step_name}}`
-4. Validate state integrity: {{validation_check}}
-Idempotent: {{yes|no}} — {{reason}}
+4. Validate state integrity: `{{validation_check}}`
+Idempotent: {{yes|no}} — `{{reason}}`
 ## Lifecycle
-TTL: {{value}} — {{why_this_duration}}
+TTL: `{{value}}` — `{{why_this_duration}}`
 Cleanup: {{auto_delete|archive|manual}} after TTL expiry
-Archival: {{path_or_policy}}
-Chain: {{parent_checkpoint}} -> this -> {{next_checkpoint_if_known}}
+Archival: `{{path_or_policy}}`
+Chain: `{{parent_checkpoint}}` -> this -> `{{next_checkpoint_if_known}}`

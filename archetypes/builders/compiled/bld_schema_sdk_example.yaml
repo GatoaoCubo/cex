@@ -1,0 +1,55 @@
+kind: schema
+id: bld_schema_sdk_example
+pillar: P06
+llm_function: CONSTRAIN
+purpose: Formal schema -- SINGLE SOURCE OF TRUTH for sdk_example
+quality: null
+title: Schema Sdk Example
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- sdk_example
+- builder
+- schema
+tldr: Formal schema -- SINGLE SOURCE OF TRUTH for sdk_example
+domain: sdk_example construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+frontmatter_fields_sdk_example_schema: ''
+required_fields_for_an_sdk_example: "| Field     | Type   | Required | Default | Notes                              |  \n\
+  |-----------|--------|----------|---------|------------------------------------|  \n| id        | string | yes      | null\
+  \    | Must match ID Pattern              |  \n| kind      | string | yes      | null    | Always \"sdk_example\"      \
+  \         |  \n| pillar    | string | yes      | null    | Always \"P04\"                       |  \n| title     | string\
+  \ | yes      | null    | Descriptive SDK name               |  \n| version   | string | yes      | null    | Semantic versioning\
+  \ (e.g., 1.0.0)  |  \n| created   | date   | yes      | null    | ISO 8601 format                    |  \n| updated   |\
+  \ date   | yes      | null    | ISO 8601 format                    |  \n| author    | string | yes      | null    | Maintainer\
+  \ name                    |  \n| domain    | string | yes      | null    | SDK target domain (e.g., \"payments\") |  \n\
+  | quality   | null   | yes      | null    | Never self-score; peer review assigns |  \n| tags      | array  | yes      |\
+  \ null    | Keywords for discovery             |  \n| tldr      | string | yes      | null    | One-sentence SDK purpose\
+  \           |  \n| language  | string | yes      | null    | Primary programming language       |  \n| dependencies | array\
+  \ | yes | null | Required libraries/dependencies  |"
+recommended: "| Field              | Type   | Notes                          |  \n|--------------------|--------|--------------------------------|\
+  \  \n| example_usage      | string | Code snippet demonstrating SDK |  \n| license            | string | Open-source license\
+  \ type       |"
+id_pattern: ^p04_sdk_[a-z][a-z0-9_]+.md$
+body_structure:
+- Overview
+- Purpose, target audience, and use cases.
+- Key Features
+- Core functionalities and differentiators.
+- Installation
+- Step-by-step setup instructions.
+- Usage Examples
+- Code samples for common tasks.
+- Dependencies
+- External libraries and system requirements.
+- Compatibility
+- Supported platforms, languages, and versions.
+constraints:
+- ID must strictly follow ^p04_sdk_[a-z][a-z0-9_]+.md$
+- All required fields must be present and valid
+- Version must adhere to semantic versioning (e.g., 1.2.3)
+- Language must be a valid programming language name
+- Dependencies must list exact package names and versions
+- TLDR must be ≤ 200 characters and actionable

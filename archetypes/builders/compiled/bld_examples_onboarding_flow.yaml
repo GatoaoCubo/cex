@@ -1,0 +1,45 @@
+kind: examples
+id: bld_examples_onboarding_flow
+pillar: P07
+llm_function: GOVERN
+purpose: Golden and anti-examples of onboarding_flow artifacts
+quality: null
+title: Examples Onboarding Flow
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- onboarding_flow
+- builder
+- examples
+tldr: Golden and anti-examples of onboarding_flow artifacts
+domain: onboarding_flow construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+golden_example: "Title: Notion Onboarding Flow -- \"Create Your First Page\" Aha-Moment  \nKind: onboarding_flow  \nDescription:\
+  \ A 4-step PLG activation flow that engineers the aha-moment at the first collaborative doc creation, driving team invites\
+  \ and habit formation.  \nBoundary: Account creation -> first shared workspace (activation, not retention).  \n\nSteps:\
+  \  \n1. Sign-up: Email or Google SSO. Single screen, no password confirmation required. Time-to-screen: <30s.  \n2. Use-case\
+  \ selection: \"What will you use Notion for?\" (3 choices: Personal, Team, Work). Pre-populates workspace template. Reduces\
+  \ blank-canvas paralysis.  \n3. First page creation: Pre-filled template based on use-case. User edits one field. Aha-moment\
+  \ trigger: real-time collaborative cursor appears after 10s, showing \"You could invite your team here.\"  \n4. Invite hook:\
+  \ \"Notion is better with your team -- add 2 colleagues to unlock 1,000 AI credits.\" Double reward: social proof + tangible\
+  \ value.  \n\nAha-Moment Design:  \n- Trigger: first edit saved (Sean Ellis activation event).  \n- Signal: empty-state\
+  \ replaced with a filled page + teammate ghost cursor.  \n- CTA: \"Share this page\" appears above fold, no scroll required.\
+  \  \n- Time-to-aha target: <2 minutes from sign-up.  \n\nWhy it works:  \n- Mirrors Reforge activation framework: reduce\
+  \ friction, deliver value before asking for commitment.  \n- Invite hook at aha-moment maximizes k-factor (viral coefficient).\
+  \  \n- Progress bar (3 of 4 steps complete) reduces abandonment via Zeigarnik effect."
+anti_example_1_missing_aha_moment_slack_circa_2018: "Title: Slack Onboarding -- Team-First Dead-End  \nKind: onboarding_flow\
+  \  \nDescription: Flow that gates all value behind team setup, leaving solo sign-ups with an empty workspace and no activation\
+  \ path.  \nBoundary: Activation flow.  \n\nSteps:  \n1. Sign-up with email.  \n2. Create workspace name.  \n3. Invite teammates\
+  \ (mandatory, 3 email fields).  \n4. End flow -- empty #general channel.  \n\nWhy it fails:  \n- Solo users who skip step\
+  \ 3 land on an empty channel with zero value. No aha-moment, no product tour, no template.  \n- Mandatory invite field blocks\
+  \ 40%+ of sign-ups who don’t have emails ready.  \n- No progress indicator -- users don’t know how close they are to finishing."
+anti_example_2_feature_tour_overload_legacy_saas_pattern: "Title: Generic SaaS 12-Step Product Tour  \nKind: onboarding_flow\
+  \  \nDescription: Modal-driven feature tour that explains every capability before the user has created anything.  \nBoundary:\
+  \ Activation flow.  \n\nSteps:  \n1. \"Welcome to [Product]!\" modal -- Dismiss or Next.  \n2. \"Here is your dashboard\"\
+  \ tooltip.  \n3. \"Here is the sidebar\" tooltip.  \n4. \"Here are your settings\" tooltip.  \n5-12. (Eight more tooltips\
+  \ explaining UI chrome)  \n\nWhy it fails:  \n- Time-to-first-value (TTV) exceeds 10 minutes. Users abandon before aha-moment.\
+  \  \n- Feature explanations before value delivery violate Reforge activation principle: earn trust through value, then teach\
+  \ features.  \n- 60%+ of users skip the tour immediately -- zero activation benefit.  \n- No empty-state design: after tour,\
+  \ user still faces blank canvas with no next action."

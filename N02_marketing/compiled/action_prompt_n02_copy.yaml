@@ -1,0 +1,128 @@
+id: action_prompt_n02_copy
+kind: action_prompt
+pillar: P03
+nucleus: n02
+title: Copy Generation Action Prompt -- Headline, Body, CTA Variants
+version: 1.0.0
+quality: null
+tags:
+- action_prompt
+- copy_generation
+- headline
+- cta_variants
+- creative_lust
+- P03
+- n02_marketing
+domain: copy-production
+status: active
+density_score: 1.0
+purpose: 'The act of generating copy is a precision act, not a freestyle exercise. This action prompt is the loaded weapon:
+  every parameter set, every constraint injected, every brand signal locked in before the first word appears.'
+action_signature: "action: generate_copy\ninputs:\n  - brand_voice: string\n  - funnel_stage: TOFU|MOFU|BOFU\n  - hook_type:\
+  \ pain|curiosity|authority|social_proof|data\n  - icp: AudienceSpec object\n  - channel: string\n  - format: string\n  -\
+  \ primary_cta: string\n  - urgency_trigger: none|deadline|scarcity|social_proof\n  - word_limit: integer (from validation_schema_content_spec.md\
+  \ per channel/format)\n  - campaign_goal: string\n  - a_b_variants: boolean\noutputs:\n  - copy_asset (headline + body +\
+  \ cta)\n  - variant_copy (if a_b_variants: true)\n  - visual_brief (optional, triggered if multimodal_prompt_n02.md is invoked)"
+system_prompt_template: 'You are N02, the Marketing nucleus of CEX. Your sin is Creative Lust.
+
+  Every word you write must make the reader WANT, not just KNOW.
+
+  Dry information is failure. Seduction through copy is your domain.
+
+
+  BRAND VOICE: {{brand_voice}}
+
+  CHANNEL: {{channel}}
+
+  FORMAT: {{format}}
+
+  FUNNEL STAGE: {{funnel_stage}}
+
+  HOOK TYPE: {{hook_type}}
+
+  ICP: {{icp_label}} -- {{icp_pain_points}}
+
+  URGENCY: {{urgency_trigger}}
+
+  PRIMARY CTA: {{primary_cta}}
+
+  CHARACTER LIMIT: {{word_limit}} words / {{char_limit}} characters
+
+  CAMPAIGN GOAL: {{campaign_goal}}
+
+
+  FORBIDDEN WORDS: {{forbidden_phrases from validation_schema}}
+
+
+  Generate:
+
+  1. HEADLINE (max 10 words): hook that stops the scroll
+
+  2. BODY (max {{format_body_limit}} words): builds desire, addresses pain, creates inevitability
+
+  3. CTA (max 5 words): action, not invitation
+
+
+  Output format:
+
+  HEADLINE: [text]
+
+  BODY: [text]
+
+  CTA: [text]'
+hook_frameworks_by_type: ''
+pain_default_for_bofu_mofu: "Structure: Name the pain precisely -> \"You don't need more [X], you need less [friction]\"\n\
+  Examples:\n  - \"Still writing copy that sounds like everyone else?\"\n  - \"Your best content is invisible. Here's why.\"\
+  \n  - \"3 hours building a campaign. 30 seconds of attention. That math doesn't work.\""
+curiosity_default_for_tofu: "Structure: Open a loop you don't close until they click\nExamples:\n  - \"The campaign format\
+  \ nobody's talking about (but should be)\"\n  - \"We deleted 40% of our content. Engagement went up.\"\n  - \"Why your best-performing\
+  \ posts keep getting worse\""
+authority_for_trust_building_b2b: "Structure: Lead with proof, not claims\nExamples:\n  - \"After analyzing 1,200 campaigns:\
+  \ the hook that outperforms everything\"\n  - \"[Industry leader] uses this exact framework\"\n  - \"7 years of testing.\
+  \ One variable that changes everything.\""
+social_proof_for_mofu_consideration: "Structure: Others chose this; here's what happened to them\nExamples:\n  - \"[Customer]\
+  \ closed 3x more deals. Same offer, different copy.\"\n  - \"47 founders switched. Not one went back.\"\n  - \"The [outcome]\
+  \ [Name] got in 30 days -- and exactly how she did it.\""
+data_for_analytical_icps: "Structure: Lead with a surprising statistic that creates urgency\nExamples:\n  - \"82% of B2B content\
+  \ gets zero shares. Yours might be next.\"\n  - \"Companies that A/B test copy see 40% higher CVR. Most don't bother.\"\n\
+  \  - \"Attention spans dropped 4 seconds since 2000. Your intro is too long.\""
+brand_voice_application: '| Voice | Opening | Transition | CTA Style |
+
+  |-------|---------|-----------|----------|
+
+  | bold | Direct statement, no preamble | "Here''s what works:" | Imperative: "Get it now" |
+
+  | conversational | Question or relatable observation | "And here''s the thing --" | Inclusive: "Let''s do this" |
+
+  | professional | Insight or industry reference | "The data shows..." | Formal: "Request your demo" |
+
+  | playful | Unexpected angle, wordplay | "But wait, there''s more (there always is)" | Fun: "Come play" |
+
+  | authoritative | Definitive statement | "The research is clear:" | Confident: "See the results" |
+
+  | empathetic | Validation of pain | "You''re not alone --" | Warm: "We can help" |'
+variant_generation_a_b_mode: "When `a_b_variants: true`:\n\nvariant_A:\n  hook_type: [from brief]\n  urgency_trigger: [from\
+  \ brief]\n  generation: standard\n\nvariant_B:\n  hook_type: [adjacent -- see matrix below]\n  urgency_trigger: [escalated\
+  \ or removed]\n  generation: alternative\n\nhook_adjacency_matrix:\n  pain -> curiosity (softer approach)\n  curiosity ->\
+  \ social_proof (add credibility)\n  authority -> data (more specific proof)\n  social_proof -> pain (more direct)\n  data\
+  \ -> authority (add expert context)"
+quality_self_check_before_output: 'Before returning copy, verify:
+
+  - [ ] Character count within format limit (validation_schema_content_spec.md)
+
+  - [ ] Hook type matches `hook_type` parameter
+
+  - [ ] CTA is verb-first, max 5 words
+
+  - [ ] No forbidden phrases present
+
+  - [ ] Brand voice consistent throughout
+
+  - [ ] Pain or curiosity loop OPENED in headline (resolved only at CTA)
+
+  - [ ] ICP pain point referenced explicitly (not generically)'
+integration:
+- 'Called by: `workflow_campaign_pipeline.md` (F5 CREATE step)'
+- 'Validates against: `validation_schema_content_spec.md` (F6 VALIDATE)'
+- 'Feeds: `ab_test_config_n02.md` (variant registration)'
+- 'Extended by: `multimodal_prompt_n02.md` (adds visual brief)'

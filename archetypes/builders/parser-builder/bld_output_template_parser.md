@@ -49,38 +49,38 @@ density_score: {{0.80_to_1.00}}
 ## Extraction Rules
 | Name | Target | Method | Pattern | Required | Default |
 |------|--------|--------|---------|----------|---------|
-| {{rule_name_1}} | {{target_field_1}} | {{method_1}} | {{pattern_1}} | {{true|false}} | {{default_or_dash}} |
-| {{rule_name_2}} | {{target_field_2}} | {{method_2}} | {{pattern_2}} | {{true|false}} | {{default_or_dash}} |
+| `{{rule_name_1}}` | {{target_field_1}} | {{method_1}} | {{pattern_1}} | {{true|false}} | `{{default_or_dash}}` |
+| `{{rule_name_2}}` | {{target_field_2}} | {{method_2}} | {{pattern_2}} | {{true|false}} | `{{default_or_dash}}` |
 ## Input Specification
-Format: {{input_format}}
-Structure: {{description_of_expected_input}}
+Format: `{{input_format}}`
+Structure: `{{description_of_expected_input}}`
 Example:
-```{{input_format}}
+``{{input_format}}`
 {{sample_input}}
 ```
 ## Output Specification
-Format: {{output_format}}
+Format: `{{output_format}}`
 Schema:
-```{{output_format}}
+``{{output_format}}`
 {{output_schema_with_types}}
 ```
 Example:
-```{{output_format}}
+``{{output_format}}`
 {{sample_output}}
 ```
 ## Error Handling
-Strategy: {{error_strategy}}
-1. On extraction failure: {{failure_behavior}}
-2. On malformed input: {{malformed_behavior}}
-3. On partial match: {{partial_behavior}}
-Fallback extraction: {{fallback_method_or_none}}
+Strategy: `{{error_strategy}}`
+1. On extraction failure: `{{failure_behavior}}`
+2. On malformed input: `{{malformed_behavior}}`
+3. On partial match: `{{partial_behavior}}`
+Fallback extraction: `{{fallback_method_or_none}}`
 ## Normalization
 Pipeline (applied in order after extraction):
-1. {{normalize_step_1}}: {{description}}
-2. {{normalize_step_2}}: {{description}}
+1. `{{normalize_step_1}}`: `{{description}}`
+2. `{{normalize_step_2}}`: `{{description}}`
 ## References
-1. {{reference_1}}
-2. {{reference_2}}
+1. `{{reference_1}}`
+2. `{{reference_2}}`
 
 ## Properties
 

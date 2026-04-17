@@ -1,0 +1,41 @@
+kind: instruction
+id: bld_instruction_agents_md
+pillar: P03
+llm_function: REASON
+purpose: Step-by-step production process for agents_md
+quality: null
+title: Instruction Agents Md
+version: 1.0.0
+author: wave7_n03_dev_manifests
+tags:
+- agents_md
+- builder
+- instruction
+tldr: Step-by-step production process for AGENTS.md project-root manifests
+domain: agents_md construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+phase_1_research:
+- 'Inspect project-root files: package.json, pyproject.toml, Cargo.toml, Makefile, CI config.'
+- Extract actual setup-command, test-command, lint-command invocations in use.
+- Locate existing CLAUDE.md or .cursorrules to port rules to the AAIF AGENTS.md standard.
+- Read repo PR history to infer pr-format conventions (commit style, branch naming).
+- Identify deploy-rule constraints (CI gates, approval matrix, rollback path).
+- Catalog security rules coding-agents MUST NOT violate (force push, delete main, rewrite history).
+phase_2_compose:
+- Place the file at project-root as `AGENTS.md`, sibling to README.md.
+- 'Open with a one-paragraph repo summary: language, purpose, primary entry points.'
+- Add `## Setup commands` block with copy-pasteable shell commands.
+- Add `## Test commands` block, one invocation per suite (unit, integration, e2e).
+- Add `## Lint commands` block including formatters (prettier, ruff, gofmt).
+- 'Add `## PR format` block: commit grammar, branch prefix, review checklist.'
+- 'Add `## Deploy rules` block: who/when/how, rollback step.'
+- 'Add `## Conventions` block: code style, naming, error handling.'
+- 'Add `## Security rules` block: NEVER force-push, NEVER delete protected branches.'
+phase_3_validate:
+- '[ ] File lives at project-root (not in docs/, not nested).'
+- '[ ] Each command block is copy-paste runnable in a fresh clone.'
+- '[ ] No vendor-specific syntax (no Claude-only, no Cursor-only directives).'
+- '[ ] pr-format and deploy-rule match current CI reality.'
+- '[ ] Security rules explicitly list forbidden operations.'

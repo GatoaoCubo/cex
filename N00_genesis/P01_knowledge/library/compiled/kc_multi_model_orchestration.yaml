@@ -1,0 +1,57 @@
+id: multi_model_orchestration
+kind: knowledge_card
+title: Multi-Model Orchestration Patterns for LLM Agents
+version: 1.0.0
+quality: 9.2
+pillar: null
+density_score: 1.0
+boundary: This artifact defines orchestration patterns for deploying multiple LLMs in agent systems, focusing on cost, latency,
+  and reliability tradeoffs. It is not about model training, deployment infrastructure, or general AI architecture principles.
+related_kinds:
+- Model Selection Frameworks - Define criteria for choosing models based on task requirements
+- Cost Optimization Strategies - Focus on reducing inference costs through batching and pricing models
+- Hybrid AI Architectures - Combine LLMs with traditional rule-based systems for specific use cases
+- Error Handling Protocols - Define fallback mechanisms and retry policies for failed requests
+- Model Fine-Tuning Guidelines - Provide best practices for domain-specific model adaptation
+padr_es_industriais_de_orquestra_o_multi_modelo: "1. Inferência em Cascata  \n- Utiliza modelos baratos como primeira linha\
+  \ de defesa  \n- Escalada para modelos caros apenas em caso de falha (threshold de erro configurável)  \n- Reduz custos\
+  \ em 60-75% em tarefas de baixa complexidade  \n- Exemplo: Moderador de conteúdo (modelo gratuito) → Revisão jurídica (modelo\
+  \ premium)  \n- Implementation Detail: Thresholds typically set at 15-20% error rate for escalation  \n\n2. Roteamento por\
+  \ Complexidade da Tarefa  \n| Task Complexity | Model Tier | Cost Range | Latency Range | Use Case Examples |\n|------------------|------------|------------|----------------|-------------------|\n\
+  | Low (Simple)     | LiteLLM    | $0.001-0.005 | 50-100ms | Text classification, summarization |\n| Medium (Moderate)| Not\
+  \ Diamond| $0.01-0.03 | 150-300ms | Data analysis, code generation |\n| High (Complex)   | Martian    | $0.05-0.15 | 500-1000ms\
+  \ | Strategic planning, complex problem solving |\n- Metrics: Complexity scored using token count, reasoning depth, and\
+  \ error risk  \n- Implementation Detail: Requires dynamic scoring engine with 95%+ accuracy  \n\n3. Cadeias de Fallback\
+  \  \n- Sequência de provedores: A → B → C (com retries configuráveis)  \n- Prioriza disponibilidade sobre custo em cenários\
+  \ críticos  \n- Exemplo: Provedor A (cloud) → Provedor B (edge) → Provedor C (local)  \n- Monitoramento em tempo real de\
+  \ latência e taxa de sucesso  \n- Performance Data: 99.9% SLA achieved with 3-tier fallback in financial services  \n\n\
+  4. Dispatch Otimizado por Custo  \n- Batch API: Descontos de 20-40% para lotes de 100+ requisições  \n- Local vs Cloud:\
+  \  \n  - Local: Latência <100ms, custo fixo mensal ($500-2000)  \n  - Cloud: Escalabilidade infinita, custo variável ($0.001-0.015\
+  \ per request)  \n- Exemplo: Processamento de imagens em local (GPU dedicada) + NLP em cloud  \n- Cost Analysis: Batch processing\
+  \ reduces costs by 30-45% in e-commerce use cases  \n\n5. Modelos Especialistas Fine-Tuned  \n- Modelos treinados em domínios\
+  \ específicos (jurídico, médico, financeiro)  \n- Integração com modelos gerais para contexto ampliado  \n- Melhora acurácia\
+  \ em 35-50% em tarefas especializadas  \n- Exemplo: Modelo médico (fine-tuned) + modelo geral para histórico do paciente\
+  \  \n- Performance Data: 42% accuracy improvement in legal document analysis"
+implementation_challenges: '| Challenge | Solution | Impact | Example |
+
+  |----------|----------|--------|---------|
+
+  | Model versioning | Git-based model registry | 30% faster deployment | LegalTech firm reduced deployment time by 25% |
+
+  | Resource contention | Dynamic resource allocation | 20% cost reduction | Healthcare provider cut costs by 18% |
+
+  | Latency spikes | Edge caching + predictive scaling | 50% latency reduction | E-commerce platform improved response time
+  by 40% |
+
+  | Compliance risks | Automated audit trails | 90% compliance rate | Financial institution achieved 95% compliance |
+
+  | Model drift | Continuous monitoring + retraining | 25% accuracy improvement | Customer service chatbot improved NPS by
+  30% |'
+considera_es_finais: "A escolha do padrão depende de:  \n- Orçamento disponível (budget allocation)  \n- Nível de criticidade\
+  \ da tarefa (task criticality)  \n- Requisitos de latência (latency constraints)  \n- Disponibilidade de infraestrutura\
+  \ (infrastructure availability)  \n- Necessidade de conformidade regulatória (regulatory compliance)  \n\nCase Study Data:\
+  \  \n- Healthcare: 35% cost reduction using cascading inference + fallback chains  \n- Finance: 40% latency improvement\
+  \ through optimized dispatch  \n- Legal: 50% accuracy boost with fine-tuned models  \n- Retail: 25% cost savings via batch\
+  \ processing  \n- Manufacturing: 99.95% SLA achieved with hybrid fallback systems  \n\nOs sistemas modernos combinam múltiplos\
+  \ padrões em cascata para equilibrar custo, qualidade e disponibilidade. Best Practice: Implement a centralized orchestration\
+  \ engine with dynamic rule configuration and real-time metrics visualization."

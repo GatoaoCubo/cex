@@ -1,0 +1,126 @@
+---
+kind: quality_gate
+id: bld_quality_gate_agent_name_service_record
+pillar: P11
+llm_function: GOVERN
+purpose: Hard gates H01-H08 and soft scoring dimensions for agent_name_service_record artifacts
+quality: 9.1
+title: "Agent Name Service Record Builder -- Quality Gate"
+version: "1.0.0"
+author: wave7_n05
+tags: [agent_name_service_record, builder, quality_gate]
+tldr: "8 hard gates + 5 soft dimensions. Minimum 8.0 to publish, target 9.0+."
+domain: "agent_name_service_record construction"
+created: "2026-04-14"
+updated: "2026-04-14"
+density_score: 0.85
+---
+
+# Agent Name Service Record Builder -- Quality Gate
+
+> Governs IETF ANS / CNCF AgentDNS registry-record quality. Hard gates enforce DNS-like name format, protocol-adapter presence, discovery-endpoint validity. Soft dimensions score PKI-cert + capability richness for GoDaddy, Salesforce, CNCF operators.
+
+## Hard Gates (H01-H08)
+
+All 8 must pass. Any failure blocks publication.
+
+| ID | Gate | Check | Pass | Fix |
+|----|------|-------|------|-----|
+| H01 | Frontmatter | YAML parses | No errors, required fields present | Fix YAML |
+| H02 | ID pattern | Regex on `id` | `^p04_ans_[a-z0-9_]+$` | Rename |
+| H03 | Kind | String match | `kind=="agent_name_service_record"` | Correct |
+| H04 | ANS name | DNS-like | lowercase, hyphens, ends `.agents`, no underscores | Reformat |
+| H05 | Endpoint | URL check | HTTPS, not localhost, not empty | Add prod URL |
+| H06 | Adapters | Array size | `protocol_adapters` >=1 | Declare MCP/A2A/gRPC |
+| H07 | Discovery | Field + URL | `discovery_endpoint` present, HTTPS | Add well-known URL |
+| H08 | Lifecycle | Date format | `lifecycle.registered` ISO 8601 | Add date |
+
+**Logic**: H01 -> H08 sequential. Any FAIL -> BLOCK (do not publish). ALL PASS -> soft scoring.
+
+## Soft Scoring Dimensions (5D)
+
+**Used when all hard gates pass. Weighted sum targets 9.0+**
+
+### D1: Name Resolution Quality (weight: 0.25)
+
+| Score | Condition |
+|-------|-----------|
+| 1.0 | ANS name follows `{agent}.{org}.agents` 3-segment hierarchy, org matches registry_operator domain |
+| 0.8 | 3-segment hierarchy correct, org does not clearly match registry_operator |
+| 0.6 | 2-segment hierarchy (missing org segment) |
+| 0.4 | 1 segment only, but lowercase and ends in `.agents` |
+| 0.0 | Name fails DNS-like format (uppercase, underscore, wrong suffix) |
+
+### D2: Protocol Coverage (weight: 0.25)
+
+| Score | Condition |
+|-------|-----------|
+| 1.0 | 3+ protocol adapters declared (e.g., MCP + A2A + gRPC) |
+| 0.8 | 2 protocol adapters declared (e.g., MCP + A2A) |
+| 0.6 | 1 protocol adapter, current version pinned |
+| 0.4 | 1 protocol adapter, version not specified |
+| 0.0 | No protocol adapters (should have failed H06) |
+
+### D3: PKI Completeness (weight: 0.20)
+
+| Score | Condition |
+|-------|-----------|
+| 1.0 | PKI-cert reference present with issuer + SHA256 fingerprint, expiry in lifecycle |
+| 0.8 | PKI-cert reference present, issuer only (no fingerprint) |
+| 0.6 | PKI-cert field present but value is placeholder or empty string |
+| 0.2 | PKI-cert field absent but record is for non-production operator (`self`) |
+| 0.0 | PKI-cert field absent for GoDaddy or Salesforce registry operator |
+
+### D4: Capability Richness (weight: 0.20)
+
+| Score | Condition |
+|-------|-----------|
+| 1.0 | 3+ skills, max_concurrent >= 1, supported_tasks non-empty, response_time_p95_ms present |
+| 0.8 | 3+ skills, max_concurrent >= 1, supported_tasks non-empty |
+| 0.6 | 1-2 skills, max_concurrent present |
+| 0.4 | skills array present but empty |
+| 0.0 | capability_advertisement block absent entirely |
+
+### D5: Lifecycle Completeness (weight: 0.10)
+
+| Score | Condition |
+|-------|-----------|
+| 1.0 | registered + expires + renewal_policy + last_verified all present |
+| 0.8 | registered + expires + renewal_policy present |
+| 0.6 | registered + expires present, renewal_policy missing |
+| 0.4 | registered only |
+| 0.0 | lifecycle block absent (should have failed H08) |
+
+## Scoring Formula
+
+```
+raw_score = (D1 * 0.25) + (D2 * 0.25) + (D3 * 0.20) + (D4 * 0.20) + (D5 * 0.10)
+final_score = raw_score * 10
+```
+
+**Thresholds:**
+
+| Score | Status | Action |
+|-------|--------|--------|
+| 9.0 - 10.0 | PUBLISH | Ready for registry submission |
+| 8.0 - 8.9 | PUBLISH with warning | Acceptable, note soft gaps |
+| 7.0 - 7.9 | REVISE | Return to Phase 2 COMPOSE, address D1+D2+D3 gaps |
+| < 7.0 | REJECT | Full rebuild required -- review instruction ISO |
+
+## Common Failure Patterns
+
+| Failure | Root cause | Fix |
+|---------|-----------|-----|
+| H04 fail: ANS name has underscore | agent_slug copied from Python variable name | Replace `_` with `-` |
+| H06 fail: no protocol adapters | Builder skipped Phase 1.2 | Go back to instruction ISO Phase 1.2 |
+| D3 = 0.0: missing PKI-cert for GoDaddy | Forgot GoDaddy requirement | Add PKI-cert reference from secret_config |
+| D4 < 0.6: empty skills | capability_advertisement block not populated | Enumerate at least 3 skills from agent spec |
+| D2 = 0.6: only 1 protocol | Agent only exposes HTTP endpoint | Investigate if MCP server is available |
+
+## Tooling
+
+| Tool | Command | When |
+|------|---------|------|
+| Score artifact | `python _tools/cex_score.py --apply {path}` | After Phase 3 VALIDATE |
+| Check gates only | `python _tools/cex_score.py --gates-only {path}` | Quick validation during composition |
+| Doctor check | `python _tools/cex_doctor.py` | Full system health post-build |

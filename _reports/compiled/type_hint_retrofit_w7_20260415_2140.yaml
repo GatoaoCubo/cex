@@ -1,0 +1,62 @@
+quality: 6.8
+id: type_hint_retrofit_w7_w7_report
+kind: report
+title: Type Hint Retrofit W7 Report
+nucleus: n05
+mission: TYPE_HINT_RETROFIT
+wave: W7
+runtime: codex
+created: 2026-04-15
+updated: 2026-04-15
+status: complete
+density_score: 1.0
+8f_pipeline: 'F1 CONSTRAIN: kind=mechanical_refactor, scope=7 listed `_tools/*.py` targets plus this report, boundary=annotations
+  only on public functions. F2 BECOME: Loaded N05 agent card and N05/N07/8F rules; role=operations mechanical refactor executor.
+  F3 INJECT: Read handoff frontmatter, target files, and compiler behavior; matched the requested public-function type-hint
+  retrofit shape exactly. F4 REASON: Planned a signature-only pass, then AST coverage verification, import and CLI sanity
+  checks, report, compile, commits, and signal. F5 CALL: Used local shell, `apply_patch`, AST inspection, `git`, `cex_compile.py`,
+  and `signal_writer`. F6 PRODUCE: Added type hints to all public functions in the 7 target files without body, decorator,
+  or name changes. F7 GOVERN: Verified 100 percent public-function coverage in every target and ran import or `--help` sanity
+  checks successfully. F8 COLLABORATE: Saved this report, compiled it, committed one commit per target file, and sent completion
+  signal.'
+coverage_delta: '| File | Before | After |
+
+  |------|--------|-------|
+
+  | `_tools/cex_overnight.py` | 3/12 | 12/12 |
+
+  | `_tools/brand_validate.py` | 1/4 | 4/4 |
+
+  | `_tools/cex_continuous.py` | 2/6 | 6/6 |
+
+  | `_tools/cex_mission_state.py` | 8/20 | 20/20 |
+
+  | `_tools/cex_mission_runner.py` | 9/20 | 20/20 |
+
+  | `_tools/cex_index.py` | 5/11 | 11/11 |
+
+  | `_tools/cex_notebooklm.py` | 6/13 | 13/13 |'
+sanity_checks:
+- AST coverage check passed for all 7 files at 100 percent.
+- '`python -c "import _tools.cex_overnight, _tools.brand_validate, _tools.cex_continuous, _tools.cex_mission_state, _tools.cex_mission_runner,
+  _tools.cex_index, _tools.cex_notebooklm"` passed.'
+- '`python _tools/cex_overnight.py --help` passed.'
+- '`python _tools/brand_validate.py --help` passed.'
+- '`python _tools/cex_continuous.py --help` passed.'
+- '`python _tools/cex_mission_state.py --help` passed.'
+- '`python _tools/cex_mission_runner.py --help` passed.'
+- '`python _tools/cex_index.py --help` passed.'
+- '`python _tools/cex_notebooklm.py --help` passed.'
+commit_list:
+- '`refactor(cex_overnight): add type hints to public functions`'
+- '`refactor(brand_validate): add type hints to public functions`'
+- '`refactor(cex_continuous): add type hints to public functions`'
+- '`refactor(cex_mission_state): add type hints to public functions`'
+- '`refactor(cex_mission_runner): add type hints to public functions`'
+- '`refactor(cex_index): add type hints to public functions`'
+- '`refactor(cex_notebooklm): add type hints to public functions`'
+notes:
+- Added `typing.Any` only where signatures were genuinely ambiguous.
+- Used builtin generics and `X | None` unions where the files already run on modern Python.
+- No logic, control flow, decorator, or naming changes were made.
+type_hint_retrofit_w7_pass: ''

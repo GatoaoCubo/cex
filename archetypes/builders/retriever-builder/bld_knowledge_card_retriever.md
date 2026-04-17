@@ -20,6 +20,7 @@ axioms:
 linked_artifacts:
   primary: null
   related: []
+title: Knowledge Card ISO - retriever
 ---
 # Domain Knowledge: retriever
 

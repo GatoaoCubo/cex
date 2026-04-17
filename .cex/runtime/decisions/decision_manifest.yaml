@@ -42,7 +42,257 @@ tech_debt:
 agent_identity:
   source_of_truth: .cex/config/nucleus_sins.yaml
   targets:
-    - N05_operations/agents/agent_operations.md
-    - N05_operations/prompts/system_prompt_operations.md
-    - N07_admin/agents/agent_admin.md
-    - N07_admin/prompts/system_prompt_admin.md
+    - N05_operations/P02_model/agent_operations.md
+    - N05_operations/P03_prompt/system_prompt_operations.md
+    - N07_admin/P02_model/agent_admin.md
+    - N07_admin/P03_prompt/system_prompt_admin.md
+
+# New PC Setup (2026-04-12)
+newpc_setup:
+  brand_bootstrap: skip              # dev repo, no brand identity
+  user_project_artifacts: archive    # preserve in .cex/archive/examples/
+  setup_validator: full_tool         # cex_setup_validator.py (N05)
+  hygiene_tool: full_crud_with_gate  # cex_hygiene.py (N03) + pre-grid gate
+  doc_consolidation: full_rewrite    # QUICKSTART + spec_zero_install + ONBOARDING (N04)
+  power_settings: never_sleep        # disabled sleep/hibernate/screen timeout
+  mcp_migration: done                # @anthropic/* -> @modelcontextprotocol/*
+  missing_deps: fixed                # uv, numpy, scikit-learn installed
+
+# ====================================================================
+# VERTICAL_DISTILLATION mission (2026-04-16)
+# Distill 2 source repos into open CEX templates with {{BRAND_*}} mustache
+# Source A: gato-ao-cubo branch (THIS repo)  -- content + monetization + Obsidian wiki
+# Source B: github.com/GatoaoCubo/gato-cubo-commerce  -- Vite+React+Supabase commerce
+# Workstream B (parallel): N07 multi-runtime parity (codex/gemini/ollama boots)
+# ====================================================================
+vertical_distillation:
+  mission: VERTICAL_DISTILLATION_20260416
+  created: 2026-04-16T00:00:00-03:00
+  decided_by: gato3_via_n07
+
+  # DP1 -- BRAND_VARIABLE_STRATEGY
+  # The X in CEX is open. Every GATO3-specific value becomes {{BRAND_*}}
+  brand_variable_strategy:
+    placeholder_engine: mustache             # {{BRAND_NAME}}, {{BRAND_SLUG}}, ...
+    base_inject_tool: _tools/brand_inject.py  # already exists, extend if needed
+    config_source: .cex/brand/brand_config.yaml
+    new_brand_vars:                          # add to brand_config schema
+      - BRAND_DOMAIN                         # gatoaocubo3.com
+      - BRAND_VOICE                          # Ronronalda persona seed
+      - BRAND_PRIMARY_COLOR                  # #C71585 -> {{BRAND_PRIMARY_COLOR}}
+      - BRAND_VERTICAL                       # ecommerce | edtech | fintech | ...
+      - BRAND_SUPABASE_PROJECT_REF           # placeholder
+      - BRAND_SHOPIFY_DOMAIN                 # placeholder
+      - BRAND_BLING_API_KEY                  # secret -> .env
+      - BRAND_AYRSHARE_API_KEY               # secret -> .env
+
+  # DP2 -- DISTRIBUTION (locked: option 2)
+  # Use existing pillars (P01-P12), do NOT create new pillar/nucleus
+  distribution:
+    mode: existing_pillars_only
+    new_pillars: false
+    new_nuclei: false
+
+  # DP3 -- SCOPE (locked: option 3)
+  # Full distillation: extract REUSABLE templates of code + content + workflows
+  scope:
+    level: full_with_reusable_code
+    extract_supabase_functions: true       # ~30 edge functions -> templates
+    extract_react_components: true         # admin dashboard, b2b pages
+    extract_obsidian_wiki: true            # 51-page knowledge wiki
+    extract_q2_pipeline: true              # 91 IG + 26 blog templates
+    extract_monetization: true             # funnel, playbook, attribution
+    sanitize_brand: true                   # strip GATO3, replace with {{BRAND_*}}
+
+  # DP4 -- AUTONOMY (locked: option 3)
+  # Full autonomous mission to completion, no checkpoints
+  autonomy:
+    mode: full_autonomous
+    auto_accept: true                      # all handoffs get auto_accept: true
+    user_checkpoints: none
+    quality_floor: 8.5
+    quality_target: 9.0
+
+  # KIND VOCABULARY -- USE EXISTING UNIVERSAL KINDS ONLY
+  # User directive: "nao invente kinds. vamos manter fieis ao vacabulary
+  #   ia padrao e universal pra qualquer llm entender"
+  # All 257 kinds in .cex/kinds_meta.json are the only source of truth.
+  feature_to_kind_mapping:
+    # === COMMERCE FEATURES (gato-cubo-commerce repo) ===
+    ecommerce_overall:
+      kind: ecommerce_vertical            # EXISTS
+      pillar: P11                         # vertical specialization
+      nucleus: N06
+    shopify_integration:
+      kinds:                              # ALL EXIST
+        - integration_guide               # P04 -- how to wire Shopify
+        - api_client                      # P04 -- the HTTP client
+        - webhook                         # P04 -- inbound product/order webhooks
+        - oauth_app_config                # P04 -- OAuth flow config
+      nucleus: N05
+    bling_erp_integration:
+      kinds:
+        - integration_guide
+        - api_client
+        - webhook                         # bling-webhook edge function
+        - oauth_app_config                # bling-oauth-callback edge function
+      nucleus: N05
+    mercado_livre_integration:
+      kinds:
+        - integration_guide
+        - api_client
+        - oauth_app_config                # meli-oauth-callback edge function
+      nucleus: N05
+    multi_marketplace_sync:
+      kinds:
+        - workflow                        # unified-sync edge function
+        - dag                             # sync orchestration
+        - dispatch_rule                   # which marketplace gets what
+      nucleus: N05
+    supabase_backend:
+      kinds:
+        - supabase_data_layer             # EXISTS as standard kind
+        - db_connector                    # P09
+        - interface                       # P06 -- table/RPC contracts
+      nucleus: N05
+    ronronalda_brand_persona:
+      kinds:
+        - agent                           # P02 -- the chat agent
+        - system_prompt                   # P03 -- persona prompt
+        - prompt_template                 # P03 -- product Q&A templates
+        - tts_provider                    # P04 -- ronronalda-tts edge function
+      nucleus: N02
+    content_factory_pipeline:
+      kinds:
+        - workflow                        # produce -> approve -> publish
+        - dag                             # multi-stage content gen
+        - chain                           # research -> draft -> edit -> approve
+        - social_publisher                # EXISTS -- Ayrshare wrapper
+        - quality_gate                    # approve/reject HTML stage
+        - output_validator                # validates publishable HTML
+      nucleus: N02
+    photo_video_editing_with_narration:
+      kinds:
+        - multi_modal_config              # P03 -- multimodal pipeline
+        - vision_tool                     # P04 -- image generation/edit
+        - audio_tool                      # P04 -- audio narration
+      nucleus: N02
+    crm_partner_registration:
+      kinds:
+        - db_connector                    # CRM tables
+        - entity_memory                   # P10 -- partner profiles
+        - input_schema                    # P06 -- registration form
+      nucleus: N06
+    admin_dashboard:
+      kinds:
+        - landing_page                    # P05 -- the dashboard UI
+        - component_map                   # P08 -- React component layout
+      nucleus: N03
+    b2b_pages:
+      kinds:
+        - landing_page
+        - pricing_page                    # EXISTS -- B2B pricing
+      nucleus: N06
+    scrap_pipeline:
+      kinds:
+        - research_pipeline               # EXISTS -- regional data gathering
+        - browser_tool                    # P04 -- scraper tool
+      nucleus: N01
+    webhook_management:
+      kinds:
+        - webhook                         # EXISTS
+        - notifier                        # P04 -- webhook delivery
+      nucleus: N05
+    inventory_reconcile:
+      kinds:
+        - workflow                        # inventory-reconcile edge function
+        - validator                       # P06 -- inventory invariants
+      nucleus: N05
+    media_kit_generator:
+      kinds:
+        - workflow                        # generate-media-kit edge function
+        - prompt_template                 # P03 -- media kit copy template
+      nucleus: N02
+
+    # === CONTENT FEATURES (gato-ao-cubo branch) ===
+    obsidian_knowledge_wiki:
+      kinds:
+        - knowledge_card                  # EXISTS -- 51 KCs already exist
+        - knowledge_graph                 # P10 -- wiki-link graph
+        - knowledge_index                 # P10 -- index for retrieval
+      nucleus: N04
+    q2_content_pipeline_91_IG_26_blog:
+      kinds:
+        - prompt_template                 # P03 -- 117 templates
+        - schedule                        # P12 -- editorial calendar
+        - workflow                        # P12 -- content production flow
+      nucleus: N02
+    monetization_strategy:
+      kinds:
+        - content_monetization            # EXISTS -- P11
+        - sales_playbook                  # EXISTS -- P11
+        - subscription_tier               # EXISTS -- P11
+        - roi_calculator                  # EXISTS -- P11
+        - cohort_analysis                 # EXISTS -- P11
+      nucleus: N06
+    promo_calendar_attribution:
+      kinds:
+        - schedule                        # P12 -- promo calendar
+        - cohort_analysis                 # P11 -- attribution
+      nucleus: N06
+
+  # WORKSTREAM B -- N07 multi-runtime parity
+  workstream_b:
+    purpose: validate_n07_multi_model_spawning
+    current_state: only_n07_litellm_exists
+    n07_boot_gaps:
+      - boot/n07_codex.ps1                 # MISSING -- create
+      - boot/n07_gemini.ps1                # MISSING -- create
+      - boot/n07_ollama.ps1                # MISSING -- create
+    test_strategy:
+      - smoke_spawn_each_runtime           # validate boot wrapper works
+      - validate_handoff_read              # nucleus reads handoff file
+      - validate_signal_emit               # nucleus signals on completion
+      - validate_auto_accept_propagation   # CEX_AUTO_ACCEPT env carries through
+    fallback_chain:
+      - claude                             # primary (Opus 4.6)
+      - codex                              # if Anthropic exhausted
+      - gemini                             # if both exhausted
+      - ollama                             # local fallback (qwen3:14b)
+    nucleus: N03_creates_boots + N05_smoke_tests
+
+  # SOURCE REPOS
+  sources:
+    repo_a:
+      type: branch_of_this_repo
+      ref: gato-ao-cubo
+      content: "Obsidian wiki + Q2 pipeline + monetization + marketplace audit"
+    repo_b:
+      type: external_clone
+      url: https://github.com/GatoaoCubo/gato-cubo-commerce
+      local_path: _external/gato-cubo-commerce/
+      stack: vite+react+typescript+tailwind+supabase
+      content: "30+ edge functions, multi-marketplace, Ronronalda persona, content factory"
+
+  # WAVE PLAN
+  waves:
+    wave_1:
+      parallel:
+        - n04_inventory_commerce_repo      # catalog edge functions + components
+        - n01_inventory_gato_ao_cubo_branch # catalog content + monetization
+        - n03_create_n07_codex_gemini_ollama_boots
+    wave_2:
+      parallel:
+        - n03_design_template_extraction_workflows  # MAP to existing kinds (no inventing)
+        - n02_extract_content_factory_templates
+        - n06_extract_shopify_crm_monetization_templates
+    wave_3:
+      sequential:
+        - n05_smoke_test_n07_multi_model_spawns
+        - n07_consolidation
+    wave_4:
+      sequential:
+        - compile_all
+        - doctor
+        - quality_gate_check
+        - commit_consolidation

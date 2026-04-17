@@ -53,23 +53,23 @@ tldr: "{{dense_summary_max_160ch}}"
 density_score: {{0.80_to_1.00}}
 ```
 ## Contract Definition
-{{what_operation_this_input_serves_and_who_provides_data}}
+`{{what_operation_this_input_serves_and_who_provides_data}}`
 ## Fields
 | # | Name | Type | Required | Default | Description |
 |---|------|------|----------|---------|-------------|
-| 1 | {{name}} | {{type}} | {{Y/N}} | {{default}} | {{desc}} |
-| 2 | {{name}} | {{type}} | {{Y/N}} | {{default}} | {{desc}} |
+| 1 | {{name}} | `{{type}}` | {{Y/N}} | {{default}} | `{{desc}}` |
+| 2 | {{name}} | `{{type}}` | {{Y/N}} | {{default}} | `{{desc}}` |
 ## Coercion Rules
 | From | To | Rule |
 |------|----|------|
-| {{source}} | {{target}} | {{conversion}} |
+| `{{source}}` | {{target}} | `{{conversion}}` |
 ## Examples
 ```json
 {{valid_example_payload}}
 ```
 ## References
-1. {{reference_1}}
-2. {{reference_2}}
+1. `{{reference_1}}`
+2. `{{reference_2}}`
 
 ## Template Standards
 

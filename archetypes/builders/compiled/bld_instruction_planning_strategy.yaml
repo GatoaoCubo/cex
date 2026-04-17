@@ -1,0 +1,41 @@
+kind: instruction
+id: bld_instruction_planning_strategy
+pillar: P03
+llm_function: REASON
+purpose: Step-by-step production process for planning_strategy
+quality: null
+title: Instruction Planning Strategy
+version: 1.0.0
+author: wave1_builder_gen
+tags:
+- planning_strategy
+- builder
+- instruction
+tldr: Step-by-step production process for planning_strategy
+domain: planning_strategy construction
+created: '2026-04-13'
+updated: '2026-04-13'
+density_score: 0.85
+phase_1_research:
+- Analyze domain-specific constraints and objectives for the planning strategy.
+- Identify existing planning frameworks relevant to the agent’s operational environment.
+- Conduct trade-off analysis between computational efficiency and strategy completeness.
+- Map agent capabilities to required planning outcomes (e.g., real-time vs. batch processing).
+- Evaluate historical performance data of similar strategies in analogous scenarios.
+- Document research findings into a structured requirements matrix.
+phase_2_compose:
+- Outline strategy structure using SCHEMA.md’s hierarchical framework.
+- Define planning scope (e.g., reactive, deliberative, hybrid) per OUTPUT_TEMPLATE.md.
+- Specify decision-making heuristics and prioritization rules.
+- Draft step-by-step execution logic with conditional branching.
+- Integrate domain-specific parameters from research phase into template placeholders.
+- Align artifact with SCHEMA.md’s required metadata fields (e.g., version, author).
+- Refine language for clarity and precision, avoiding ambiguous phrasing.
+- Add example use cases from Phase 1 research to illustrate strategy application.
+- Perform final syntax check against OUTPUT_TEMPLATE.md formatting rules.
+phase_3_validate:
+- '[ ] ✅ Confirm schema compliance via automated validation tool.'
+- '[ ] ✅ Verify logical consistency in decision trees and prioritization rules.'
+- '[ ] ✅ Ensure all research-derived constraints are explicitly addressed.'
+- '[ ] ✅ Cross-check artifact against OUTPUT_TEMPLATE.md for formatting accuracy.'
+- '[ ] ✅ Obtain stakeholder approval for strategy alignment with operational goals.'

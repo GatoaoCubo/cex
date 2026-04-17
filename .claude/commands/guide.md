@@ -24,7 +24,24 @@ Any of these activate guided mode:
 - `/guide` (alone) — "guide me through whatever comes next"
 - `/guide build a landing page` — "guide me through the decisions for THIS goal"
 - `/guide brand` — "guide me through brand setup" (same as `/init`)
+- `/guide --plan-loop <goal>` — iterate the plan with user until approved (new)
 - Natural language: "guide me", "ask me first", "let's do this together"
+
+## --plan-loop (BORIS_MERGE B5)
+
+Use `--plan-loop` when the user wants to iterate on the **spec/plan** itself
+before any dispatch. Loop exits only when user says "approved", "go", "dispatch",
+or `/auto`. Typical flow:
+
+1. Draft initial plan (waves, nuclei, artifacts) from goal.
+2. Show plan; collect feedback (adds/cuts/reorders).
+3. Revise plan; show diff.
+4. Repeat 2-3 until user approves.
+5. Write final spec to `.cex/runtime/plans/plan_<name>.md` and decision manifest.
+6. Hand off to `/grid` or `/mission` for execution.
+
+The loop never produces artifacts -- only the plan/spec. Guardrail: max 8
+iterations before forcing a summary and requiring explicit continue.
 
 ## Behavior
 

@@ -1,0 +1,107 @@
+kind: knowledge_card
+id: bld_knowledge_card_consolidation_policy
+pillar: P01
+llm_function: INJECT
+purpose: Domain knowledge for consolidation_policy production
+quality: null
+title: 'Knowledge Card: consolidation_policy Builder'
+version: 2.0.0
+author: n06_commercial
+tags:
+- consolidation_policy
+- builder
+- knowledge_card
+- memgpt
+- letta
+- memory_consolidation
+tldr: 'LLM agent memory consolidation: working->episodic->semantic promotion, LRU/LFU/importance eviction, sleep-time consolidation,
+  replay-based memory, enterprise retention compliance'
+domain: LLM agent memory consolidation
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.91
+domain_overview: 'Memory consolidation in LLM agents governs when and how memories move between tiers (working -> episodic
+  -> semantic), get evicted, merged, or archived. Unlike OS garbage collection or hardware memory compaction, agent memory
+  consolidation is about *information value*: should this interaction be remembered? At what granularity? For how long? MemGPT/Letta
+  (Packer 2023) introduced the consolidation pipeline as an explicit agent function: after each conversation, a background
+  job scores episodic entries, promotes high-value facts to semantic memory, and archives or deletes low-value entries. This
+  "sleep-time consolidation" mirrors neuroscience models of memory offline replay.'
+key_concepts: '| Concept | Definition | Source |
+
+  |---------|-----------|--------|
+
+  | Working -> Episodic Promotion | Saving in-context interaction to episodic store after session ends | MemGPT/Letta |
+
+  | Episodic -> Semantic Promotion | Extracting durable facts from interaction history into semantic store | MemGPT consolidation
+  pipeline |
+
+  | Importance Scoring | Assigning a retention priority to each memory unit (0-1 float) | mem0 (2024) |
+
+  | Sleep-Time Consolidation | Background job runs when agent is idle to consolidate memories | MemGPT/Letta (Packer 2023)
+  |
+
+  | Replay-Based Memory | Re-processing old episodic entries to extract missed semantic facts | Episodic memory research |
+
+  | LRU Eviction | Remove least recently accessed memories when storage budget exceeded | Cache theory |
+
+  | LFU Eviction | Remove least frequently accessed memories | Cache theory |
+
+  | TTL (Time-To-Live) | Fixed expiry time per memory unit (e.g., 90 days) | Standard practice |
+
+  | Memory Merging | Deduplicating similar episodic entries into a single canonical record | Zep (2024) |
+
+  | Forgetting Curve | Exponential decay of memory importance over time without reinforcement | Ebbinghaus (1885) |
+
+  | Retention Policy | Rule set defining what to keep, for how long, and under what conditions | Enterprise compliance |'
+consolidation_pipeline_memgpt_model: "[Session ends]\n     |\n     v\n[Episodic buffer] -- (async job triggered)\n     |\n\
+  \     +-- Score each entry (recency + relevance + user_feedback)\n     |\n     +-- High score (>0.7) --> Promote to semantic\
+  \ memory\n     |       |\n     |       +-- Deduplicate against existing semantic entries\n     |       +-- Merge if similarity\
+  \ > 0.92\n     |       +-- Write new entity/fact to graph or KV store\n     |\n     +-- Medium score (0.3-0.7) --> Archive\
+  \ to cold storage\n     |\n     +-- Low score (<0.3) --> Delete (or soft-delete for compliance)"
+eviction_strategies: '| Strategy | Trigger | Best For |
+
+  |----------|---------|---------|
+
+  | TTL | Age > N days | Time-sensitive facts, compliance |
+
+  | LRU | Storage > budget, remove oldest accessed | General episodic memory |
+
+  | LFU | Storage > budget, remove least queried | Semantic entity store |
+
+  | Importance threshold | Importance < floor (e.g., 0.3) | Mixed TTL + value |
+
+  | Generational | N interactions old, no semantic promotion | Conversation logs |'
+commercial_tier_differentiation: '| Feature | Free | PRO | ENTERPRISE |
+
+  |---------|------|-----|------------|
+
+  | Consolidation | None | Basic TTL (90 days) | Configurable + compliance |
+
+  | Episodic retention | None | 90 days | Custom (1y / indefinite) |
+
+  | Semantic promotion | None | Auto (LLM-driven) | Scheduled + audited |
+
+  | Sleep-time consolidation | None | On session end | Continuous + scheduled |
+
+  | Retention policy | N/A | Fixed | Custom rules + data residency |
+
+  | Audit trail | None | Read | Write + export + GDPR |
+
+  | Merge/dedup | None | Similarity-based | LLM-driven + manual review |'
+enterprise_compliance_considerations:
+- 'GDPR Art. 17 (right to erasure): consolidation must support hard-delete, not just archive'
+- 'HIPAA: retention period for health-related agent memories may be governed by law'
+- 'Data residency: consolidation jobs must not transfer memories across regions'
+- 'Audit trail: every promotion/eviction event should be logged with timestamp + reason'
+common_patterns:
+- 'Session-end consolidation: trigger pipeline after every conversation ends.'
+- 'Importance-gated promotion: only promote episodic entries with score > threshold.'
+- 'Merge-before-write: check semantic memory for duplicates before adding new facts.'
+- 'Cold archival: TTL-expired entries move to cold storage before hard delete.'
+- 'Replay sweep: periodic re-processing of episodic archive for missed semantic facts.'
+pitfalls:
+- Consolidating everything wastes semantic memory with low-signal facts.
+- No deduplication creates semantic memory bloat with conflicting versions of the same fact.
+- Ignoring compliance requirements exposes the system to data retention violations.
+- Synchronous consolidation blocks agent response time; always run async.
+- No audit trail makes GDPR erasure requests impossible to verify.

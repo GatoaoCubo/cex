@@ -1,0 +1,113 @@
+id: ex_integration_guide_meli
+kind: integration_guide
+pillar: P04
+title: Mercado Livre Integration Guide
+version: 0.1.0
+quality: 8.2
+status: template
+brand_placeholders:
+- BRAND_MELI_CLIENT_ID
+- BRAND_MELI_CLIENT_SECRET
+- BRAND_SUPABASE_PROJECT_REF
+tags:
+- commerce
+- template
+- distillation
+- mercadolivre
+- meli
+- integration
+density_score: 1.0
+updated: '2026-04-17'
+purpose: Step-by-step guide for integrating Mercado Livre (ML) API into a Supabase commerce stack — covers OAuth 2.0 authorization
+  code flow, product enrichment via ML catalog, and long-lived token management with proactive refresh.
+when_to_use:
+- Enriching product data gaps in Supabase using Mercado Livre's public catalog.
+- Connecting ML as a sales channel alongside Shopify and Bling.
+- Pulling ML product titles, descriptions, or images to fill incomplete catalog entries.
+prerequisites: '| Requirement | Value |
+
+  |-------------|-------|
+
+  | ML Developer account | `https://developers.mercadolivre.com.br` |
+
+  | Application | Registered ML app with redirect URI |
+
+  | Country | Brazil (`MLB` site ID) |
+
+  | API base | `https://api.mercadolibre.com` |
+
+  | Supabase project | `{{BRAND_SUPABASE_PROJECT_REF}}` |
+
+  | OAuth callback | `https://{{BRAND_SUPABASE_PROJECT_REF}}.supabase.co/functions/v1/meli-oauth-callback` |'
+architecture: "Mercado Livre API\n      |\n      |-- Product catalog search -> edge function: product-enrich\n      |\n  \
+  \    |-- OAuth 2.0  -----------> edge function: meli-oauth-callback\n      |\n      |-- Token refresh ----------> edge function:\
+  \ token-auto-refresh (cron, shared)\n      |\nSupabase DB (products, meli_tokens tables)"
+oauth_2_0_authorization_flow: ''
+step_1_register_application:
+- Go to `https://developers.mercadolivre.com.br/devcenter` → Create App.
+- 'Set redirect URI: `https://{{BRAND_SUPABASE_PROJECT_REF}}.supabase.co/functions/v1/meli-oauth-callback`.'
+- Copy `client_id` and `client_secret`.
+step_2_authorization_redirect: "GET https://auth.mercadolibre.com.br/authorization\n  ?response_type=code\n  &client_id={{BRAND_MELI_CLIENT_ID}}\n\
+  \  &redirect_uri=https://{{BRAND_SUPABASE_PROJECT_REF}}.supabase.co/functions/v1/meli-oauth-callback\n  &state={nonce}"
+step_3_token_exchange_meli_oauth_callback: "const res = await fetch('https://api.mercadolibre.com/oauth/token', {\n  method:\
+  \ 'POST',\n  headers: { Accept: 'application/json', 'Content-Type': 'application/x-www-form-urlencoded' },\n  body: new\
+  \ URLSearchParams({\n    grant_type: 'authorization_code', code,\n    redirect_uri: REDIRECT_URI,\n    client_id: Deno.env.get('MELI_CLIENT_ID')!,\n\
+  \    client_secret: Deno.env.get('MELI_CLIENT_SECRET')!,\n  }),\n});\nconst { access_token, refresh_token, expires_in }\
+  \ = await res.json();\n// Store tokens; ML access token TTL: 6 hours; refresh: ~6 months"
+step_4_deploy_functions: 'supabase functions deploy meli-oauth-callback
+
+  supabase functions deploy product-enrich'
+step_5_product_enrichment: "The `product-enrich` function queries ML catalog by keyword or EAN to fill missing fields:\n\n\
+  curl -X POST \\\n  https://{{BRAND_SUPABASE_PROJECT_REF}}.supabase.co/functions/v1/product-enrich \\\n  -H \"Authorization:\
+  \ Bearer $SUPABASE_SERVICE_KEY\" \\\n  -d '{\"supabase_product_id\": \"uuid-here\"}'"
+token_ttl_and_refresh: '| Token | TTL | Refresh strategy |
+
+  |-------|-----|-----------------|
+
+  | Access token | 21600s (6h) | Proactive refresh at 5h 55m |
+
+  | Refresh token | ~180 days | Re-authorize if expired |
+
+
+  Add ML refresh to the shared `token-auto-refresh` cron or schedule separately:
+
+
+  select cron.schedule(''meli-token-refresh'', ''55 5   *'', ...);'
+interface: '| Input | Type | Description |
+
+  |-------|------|-------------|
+
+  | `MELI_CLIENT_ID` | env secret | ML OAuth app client ID |
+
+  | `MELI_CLIENT_SECRET` | env secret | ML OAuth app client secret |
+
+  | `MELI_ACCESS_TOKEN` | DB | Current access token |
+
+
+  | Output | Description |
+
+  |--------|-------------|
+
+  | Enriched Supabase product rows | Title, description, images from ML |
+
+  | ML access token | Stored in `meli_tokens` table |'
+brand_variables_used: '| Variable | Purpose |
+
+  |----------|---------|
+
+  | `{{BRAND_MELI_CLIENT_ID}}` | ML OAuth client ID env name |
+
+  | `{{BRAND_MELI_CLIENT_SECRET}}` | ML OAuth client secret env name |
+
+  | `{{BRAND_SUPABASE_PROJECT_REF}}` | Supabase project for callback + DB |'
+related_artifacts: '| Artifact | Kind | Role |
+
+  |----------|------|------|
+
+  | `ex_api_client_meli.md` | api_client | HTTP client spec for ML API |
+
+  | `ex_oauth_app_config_meli.md` | oauth_app_config | OAuth flow config |
+
+  | `ex_workflow_multi_marketplace_sync.md` | workflow | Multi-marketplace orchestration |
+
+  | `ex_research_pipeline_marketplace_scrap.md` | research_pipeline | Automated ML catalog audit |'

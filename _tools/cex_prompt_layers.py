@@ -27,55 +27,107 @@ CEX_ROOT = Path(__file__).resolve().parent.parent
 
 # Pillar directories that contain compiled artifacts
 PILLAR_COMPILED_DIRS = [
-    CEX_ROOT / "P03_prompt" / "compiled",
-    CEX_ROOT / "P04_tools" / "compiled",
-    CEX_ROOT / "P08_architecture" / "compiled",
-    CEX_ROOT / "P11_feedback" / "compiled",
-    CEX_ROOT / "P12_orchestration" / "compiled",
+    CEX_ROOT / "N00_genesis" / "P03_prompt" / "compiled",
+    CEX_ROOT / "N00_genesis" / "P04_tools" / "compiled",
+    CEX_ROOT / "N00_genesis" / "P08_architecture" / "compiled",
+    CEX_ROOT / "N00_genesis" / "P11_feedback" / "compiled",
+    CEX_ROOT / "N00_genesis" / "P12_orchestration" / "compiled",
 ]
 
 
-def _parse_yaml_frontmatter(text: str) -> tuple:
-    """Parse YAML frontmatter from text. Returns (metadata_dict, body_text)."""
-    if not text.startswith("---"):
-        return {}, text
-
-    end = text.find("---", 3)
-    if end < 0:
-        return {}, text
-
-    fm_text = text[3:end].strip()
-    body = text[end + 3:].strip()
-
-    # Minimal YAML parser (no PyYAML dependency)
+def _parse_simple_meta(text: str) -> dict:
+    """Parse simple key:value lines from text. Stops at complex values."""
     meta = {}
-    for line in fm_text.split("\n"):
-        line = line.strip()
-        if not line or line.startswith("#"):
+    for line in text.split("\n"):
+        stripped = line.strip()
+        if not stripped or stripped.startswith("#"):
             continue
-        if ":" in line:
-            key, _, val = line.partition(":")
-            key = key.strip()
-            val = val.strip()
-            # Strip quotes
-            if val and val[0] in ('"', "'") and val[-1] == val[0]:
-                val = val[1:-1]
-            # Handle lists like [a, b, c]
-            if val.startswith("[") and val.endswith("]"):
-                val = [v.strip().strip("'\"") for v in val[1:-1].split(",")]
-            # Handle booleans/nulls
-            elif val.lower() == "null":
-                val = None
-            elif val.lower() == "true":
-                val = True
-            elif val.lower() == "false":
-                val = False
-            # Handle numbers
-            elif val.replace(".", "", 1).isdigit():
-                val = float(val) if "." in val else int(val)
-            meta[key] = val
+        if ":" not in stripped:
+            continue
+        key, _, val = stripped.partition(":")
+        key = key.strip()
+        val = val.strip()
+        # Skip multi-line or complex keys
+        if key in ("body",):
+            break
+        # Strip quotes
+        if val and val[0] in ('"', "'") and val[-1] == val[0]:
+            val = val[1:-1]
+        # Handle lists like [a, b, c]
+        if val.startswith("[") and val.endswith("]"):
+            val = [v.strip().strip("'\"") for v in val[1:-1].split(",")]
+        elif val.lower() == "null":
+            val = None
+        elif val.lower() == "true":
+            val = True
+        elif val.lower() == "false":
+            val = False
+        elif val.replace(".", "", 1).isdigit():
+            val = float(val) if "." in val else int(val)
+        meta[key] = val
+    return meta
 
-    return meta, body
+
+_META_KEYS = {
+    "id", "kind", "pillar", "version", "created", "updated", "author",
+    "title", "domain", "coverage", "languages", "quality", "tags",
+    "tldr", "density_score", "severity", "enforcement",
+}
+
+
+def _try_yaml_safe_load(text: str) -> tuple:
+    """Try parsing flat YAML with PyYAML. Returns (meta_dict, body_str) or None."""
+    try:
+        import yaml
+        data = yaml.safe_load(text)
+        if not isinstance(data, dict) or not data.get("id"):
+            return None
+        if data.get("body"):
+            body = str(data.pop("body", ""))
+            return data, body
+        # Reconstruct body from non-metadata keys (compiled artifacts
+        # without explicit 'body' key, e.g. prompt_compiler)
+        if data.get("kind"):
+            body_parts = []
+            meta = {}
+            for k, v in data.items():
+                if k in _META_KEYS:
+                    meta[k] = v
+                else:
+                    body_parts.append(f"## {k}\n{v}")
+            if body_parts:
+                return meta, "\n\n".join(body_parts)
+    except Exception:
+        pass
+    return None
+
+
+def _parse_yaml_frontmatter(text: str) -> tuple:
+    """Parse YAML frontmatter from text. Returns (metadata_dict, body_text).
+
+    Supports two formats:
+    1. --- delimited frontmatter (markdown style)
+    2. Flat YAML with a 'body' key containing prompt content (via PyYAML)
+    """
+    if text.startswith("---"):
+        end = text.find("---", 3)
+        if end >= 0:
+            fm_text = text[3:end].strip()
+            body = text[end + 3:].strip()
+            meta = _parse_simple_meta(fm_text)
+            return meta, body
+
+    # Flat YAML format: use PyYAML for robust parsing
+    result = _try_yaml_safe_load(text)
+    if result:
+        return result
+
+    # Fallback: try simple metadata extraction
+    meta = _parse_simple_meta(text)
+    if meta.get("id") and meta.get("kind"):
+        return meta, ""
+
+    return {}, text
 
 
 class PromptLayers:

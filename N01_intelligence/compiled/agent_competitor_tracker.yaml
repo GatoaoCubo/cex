@@ -70,15 +70,15 @@ output_artifacts: '| Output | Kind | Destination |
 
   |--------|------|-------------|
 
-  | Competitive grid | output (competitive_grid) | `N01_intelligence/output/` |
+  | Competitive grid | output (competitive_grid) | `N01_intelligence/P05_output/` |
 
-  | SWOT analysis | output (swot_analysis) | `N01_intelligence/output/` |
+  | SWOT analysis | output (swot_analysis) | `N01_intelligence/P05_output/` |
 
-  | Competitor profile | knowledge_card | `N01_intelligence/knowledge/` |
+  | Competitor profile | knowledge_card | `N01_intelligence/P01_knowledge/` |
 
-  | Positioning map | output (market_snapshot) | `N01_intelligence/output/` |
+  | Positioning map | output (market_snapshot) | `N01_intelligence/P05_output/` |
 
-  | Pricing intelligence | output (benchmark_report) | `N01_intelligence/output/` |'
+  | Pricing intelligence | output (benchmark_report) | `N01_intelligence/P05_output/` |'
 triggers: '| Event | Action |
 
   |-------|--------|

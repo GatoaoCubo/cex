@@ -39,34 +39,35 @@ my_artifacts: '| Subdir | Count | Purpose |
 
   |--------|------:|---------|
 
-  | agents | 1 | Agent definition for knowledge nucleus (`agent_knowledge.md`) |
+  | agents | 4 | Agent definitions for knowledge nucleus |
 
-  | architecture | 1 | Agent card with routing + capabilities (`agent_card_knowledge.md`) |
+  | architecture | 4 | Agent cards + capability maps |
 
-  | feedback | 1 | Quality gate feedback records (`quality_gate_knowledge.md`) |
+  | feedback | 2 | Quality gate feedback records |
 
-  | knowledge | 8 | Core domain: chunk strategy, 2 embedding configs (knowledge + Supabase), 2 KCs (knowledge + Supabase data
-  layer), 2 RAG sources (knowledge + Supabase), retriever config |
+  | knowledge | 13 | Core domain: chunk strategy, embedding configs, KCs, RAG sources, retriever config |
 
-  | memory | 2 | Knowledge memory index + RAG pipeline memory |
+  | memory | 5 | Knowledge memory index + RAG pipeline memory + scopes |
 
-  | orchestration | 4 | Dispatch rules (knowledge + Supabase), workflows (knowledge + Supabase setup) |
+  | orchestration | 5 | Dispatch rules + workflows (knowledge + Supabase) |
 
-  | output | 15 | KC audits, gap reports, embedding batches, taxonomy maps, knowledge graphs, finetune datasets, SQL migrations,
-  competitive intel, monetization curriculum, SDK validation, content factory audit, self-review |
+  | output | 19 | KC audits, gap reports, taxonomy maps, knowledge graphs, finetune datasets, SQL migrations, competitive
+  intel, self-reviews |
 
-  | prompts | 1 | System prompt for N04 persona (`system_prompt_knowledge.md`) |
+  | prompts | 3 | System prompts for N04 persona and tasks |
 
   | quality | 2 | Quality gate + scoring rubric for knowledge artifacts |
 
   | schemas | 7 | Contracts: database schema, embedding, export format, freshness, KC structure, naming convention, taxonomy
   |
 
-  | tools | 1 | Supabase data layer tool |
+  | tools | 4 | Supabase data layer + utilities |
 
-  | compiled | 42 | YAML compilations of source artifacts |
+  | compiled | 65 | YAML compilations of source artifacts |
 
-  | TOTAL | 43 source + 42 compiled | |'
+  | reports | 1 | Self-audit report (newpc 2026-04-13) |
+
+  | TOTAL | 69 source + 65 compiled | |'
 kinds_i_build: '22 kinds across 4 pillars fall within N04''s domain (P01 Knowledge + P10 Memory + select P02/P04):'
 p01_knowledge_10_kinds: '| Kind | Naming Pattern | Builder |
 
@@ -207,7 +208,7 @@ my_strengths:
   age, core). N04 owns the memory lifecycle: creation, classification, decay, pruning, and summarization.'
 - '5 MCP Servers: Most connected nucleus. Ingestion (firecrawl + fetch) -> storage (supabase + postgres) -> transformation
   (notebooklm). This pipeline turns raw web content into indexed, retrievable, transformable knowledge.'
-- '20 Sub-Agent Definitions: Every domain kind has a dedicated builder agent in `.claude/agents/`, each loading 13 ISOs. This
+- '20 Sub-Agent Definitions: Every domain kind has a dedicated builder agent in `.claude/P02_model/`, each loading 13 ISOs. This
   means N04 can dispatch specialized builders for any knowledge or memory artifact type.'
 - 'P01 Library Depth: The P01 compiled directory holds 197 example artifacts -- the largest example corpus of any pillar.
   These serve as F3 injection sources for template-first construction.'
@@ -248,9 +249,9 @@ cards_in_my_agent_card: '| Category | Count |
 
   |----------|------:|
 
-  | Source artifacts (in N04_knowledge/) | 43 |
+  | Source artifacts (in N04_knowledge/) | 69 |
 
-  | Compiled artifacts (.yaml) | 42 |
+  | Compiled artifacts (.yaml) | 65 |
 
   | Kinds I can build | 22 |
 
@@ -270,7 +271,7 @@ cards_in_my_agent_card: '| Category | Count |
 
   | Domain KCs (in P01 library) | 20 |
 
-  | TOTAL CARDS | 404 |
+  | TOTAL CARDS | 432 |
 
 
   N04 is the knowledge infrastructure of CEX. Where N03 builds any artifact and N01 researches any topic, N04 owns the substrate:

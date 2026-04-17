@@ -12,9 +12,11 @@ quality: 9.1
 tags: [builder, quality-gate, software-project, validation]
 tldr: "8 hard gates for software projects: syntax valid, tests pass, lint clean, no secrets, Docker builds, CI valid, health endpoint exists, deps audited. Must pass all 8 for ≥8.0."
 density_score: 1.0
+llm_function: GOVERN
 ---
-
 # Quality Gates
+
+This ISO describes a software project: its repository layout, modules, and build graph.
 
 ## 8 Hard Gates
 

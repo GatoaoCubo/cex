@@ -1,0 +1,50 @@
+kind: output_template
+id: bld_output_template_openapi_spec
+pillar: P05
+llm_function: PRODUCE
+purpose: Template with {{vars}} that the LLM fills to produce an openapi_spec artifact
+pattern: every field here exists in SCHEMA.md -- template derives, never invents
+quality: null
+title: Output Template OpenAPI Spec
+version: 1.0.0
+author: n03_builder
+tags:
+- openapi_spec
+- builder
+- output_template
+tldr: 'Fill-in template for openapi_spec: OAS 3.1 document, security scheme, error response table.'
+domain: openapi spec construction
+created: '2026-04-17'
+updated: '2026-04-17'
+density_score: 0.9
+openapi_document: "openapi: \"3.1.0\"\ninfo:\n  title: {{api_name}}\n  version: \"{{api_version}}\"\n  description: {{api_description_one_line}}\n\
+  servers:\n  - url: {{production_base_url}}\n    description: Production\npaths:\n  {{path_1}}:\n    {{method_1}}:\n    \
+  \  operationId: {{camelCaseOperationId}}\n      summary: {{short_imperative_phrase}}\n      tags: [{{tag}}]\n      parameters:\n\
+  \        - name: {{param_name}}\n          in: {{path|query|header|cookie}}\n          required: {{true|false}}\n      \
+  \    schema:\n            type: {{string|integer|boolean}}\n      requestBody:\n        required: true\n        content:\n\
+  \          application/json:\n            schema:\n              $ref: \"#/components/schemas/{{RequestSchema}}\"\n    \
+  \  responses:\n        \"{{success_code}}\":\n          description: {{success_description}}\n          content:\n     \
+  \       application/json:\n              schema:\n                $ref: \"#/components/schemas/{{ResponseSchema}}\"\n  \
+  \      \"400\":\n          $ref: \"#/components/responses/BadRequest\"\n        \"401\":\n          $ref: \"#/components/responses/Unauthorized\"\
+  \n        \"404\":\n          $ref: \"#/components/responses/NotFound\"\ncomponents:\n  schemas:\n    {{ModelName}}:\n \
+  \     type: object\n      required: [{{required_fields}}]\n      properties:\n        {{field_name}}:\n          type: {{type}}\n\
+  \          format: {{format_optional}}\n    ErrorResponse:\n      type: object\n      required: [code, message]\n      properties:\n\
+  \        code: {type: string}\n        message: {type: string}\n  responses:\n    BadRequest:\n      description: Invalid\
+  \ request parameters\n      content:\n        application/json:\n          schema: {$ref: \"#/components/schemas/ErrorResponse\"\
+  }\n    Unauthorized:\n      description: Authentication required or invalid\n      content:\n        application/json:\n\
+  \          schema: {$ref: \"#/components/schemas/ErrorResponse\"}\n    NotFound:\n      description: Resource not found\n\
+  \      content:\n        application/json:\n          schema: {$ref: \"#/components/schemas/ErrorResponse\"}\n  securitySchemes:\n\
+  \    {{scheme_name}}:\n      type: {{http|apiKey|oauth2|openIdConnect}}\n      scheme: {{bearer|basic}}\n      bearerFormat:\
+  \ {{JWT|optional}}\nsecurity:\n  - {{scheme_name}}: []"
+security: '`{{auth_method_description_1_sentence}}` Operations without auth: `{{list_public_paths_or_none}}`'
+error_responses: '| Code | Meaning | Schema |
+
+  |------|---------|--------|
+
+  | 400 | {{validation_error_description}} | ErrorResponse |
+
+  | 401 | {{auth_error_description}} | ErrorResponse |
+
+  | 404 | {{not_found_description}} | ErrorResponse |
+
+  | 500 | Internal server error | ErrorResponse |'

@@ -12,8 +12,8 @@ quality: 9.0
 tags: [quality-gate, multi-modal-config, modality, routing, resolution]
 tldr: "Gates ensuring multi_modal_config artifacts have explicit modalities, format constraints, routing, and cost estimates."
 density_score: 0.90
+llm_function: GOVERN
 ---
-
 # Gate: Multi-Modal Config
 ## Definition
 | Field     | Value |

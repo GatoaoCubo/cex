@@ -134,11 +134,13 @@ OUTPUT_PREFIXES = {"example": "ex", "template": "tpl", "builder": "bld"}
 
 
 def load_yaml_file(path: Path) -> dict:
+    """Load and return a YAML file as a dictionary."""
     with open(path, "r", encoding="utf-8") as f:
         return yaml.safe_load(f) or {}
 
 
 def slugify(text: str) -> str:
+    """Convert free text into a lowercase underscore slug."""
     slug = text.strip().lower()
     slug = re.sub(r"[^a-z0-9]+", "_", slug)
     slug = slug.strip("_")
@@ -146,6 +148,7 @@ def slugify(text: str) -> str:
 
 
 def load_schema(pillar: str) -> dict:
+    """Load the schema document for one pillar code."""
     lp_dir = LP_DIRS.get(pillar)
     if not lp_dir:
         print(f"ERROR: Invalid pillar. Use P01-P12.", file=sys.stderr)
@@ -158,6 +161,7 @@ def load_schema(pillar: str) -> dict:
 
 
 def find_pillar_for_type(type_name: str) -> str | None:
+    """Find the pillar whose schema declares the requested artifact type."""
     for pillar, dirname in LP_DIRS.items():
         schema_path = CEX_ROOT / dirname / "_schema.yaml"
         if not schema_path.exists():
@@ -172,6 +176,7 @@ def find_pillar_for_type(type_name: str) -> str | None:
 
 
 def capture_cli(args) -> dict:
+    """Capture pipeline input from parsed CLI arguments."""
     return {
         "type": args.type,
         "topic": args.topic,
@@ -184,6 +189,7 @@ def capture_cli(args) -> dict:
 
 
 def capture_interactive() -> dict:
+    """Capture pipeline input through an interactive terminal session."""
     print("\n=== CEX Pipeline: Interactive Mode ===\n")
     print("Available pillars:")
     for lp, dirname in LP_DIRS.items():
@@ -234,6 +240,7 @@ def capture_interactive() -> dict:
 
 
 def capture_from_file(filepath: str) -> dict:
+    """Capture pipeline input from a markdown file with optional frontmatter."""
     path = Path(filepath)
     if not path.exists():
         print(f"ERROR: File not found: {filepath}", file=sys.stderr)
@@ -265,6 +272,7 @@ def capture_from_file(filepath: str) -> dict:
 
 
 def decompose(input_data: dict) -> dict:
+    """Resolve schema metadata and constraints for the requested artifact type."""
     pillar = input_data.get("pillar")
     type_name = input_data["type"]
 
@@ -308,6 +316,7 @@ def decompose(input_data: dict) -> dict:
 
 
 def hydrate(data: dict) -> dict:
+    """Assemble frontmatter defaults and a first-pass body draft."""
     pillar = data["pillar"]
     type_name = data["type"]
     topic = data["topic"]
@@ -468,6 +477,7 @@ def _build_body(data: dict, template: str | None, knowledge: str | None) -> str:
 
 
 def compile_artifact(data: dict) -> dict:
+    """Render the markdown artifact and compute validation metadata."""
     frontmatter = data["frontmatter"]
     body = data["body"]
     constraints = data.get("constraints", {})
@@ -547,6 +557,7 @@ def _render_md(frontmatter: dict, body: str) -> str:
 
 
 def envelope(data: dict, dry_run: bool = False) -> dict:
+    """Choose output paths, print the pipeline report, and write files when enabled."""
     pillar = data["pillar"]
     type_name = data["type"]
     topic_slug = data["topic_slug"]
@@ -683,6 +694,7 @@ def _section_value(content: str):
 
 
 def run_pipeline(input_data: dict, dry_run: bool = False) -> dict:
+    """Run the full five-stage pipeline for one input payload."""
     if not input_data.get("type"):
         print("ERROR: --type required.", file=sys.stderr)
         sys.exit(1)
@@ -697,6 +709,7 @@ def run_pipeline(input_data: dict, dry_run: bool = False) -> dict:
 
 
 def main():
+    """Parse CLI arguments, capture input, and execute the pipeline."""
     parser = argparse.ArgumentParser(
         description="CEX Pipeline: 5-stage build engine (CAPTURE > DECOMPOSE > HYDRATE > COMPILE > ENVELOPE)"
     )

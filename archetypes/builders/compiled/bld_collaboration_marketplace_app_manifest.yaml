@@ -1,0 +1,25 @@
+kind: collaboration
+id: bld_collaboration_marketplace_app_manifest
+pillar: P12
+llm_function: COLLABORATE
+purpose: How marketplace_app_manifest-builder works in crews with other builders
+quality: null
+title: Collaboration Marketplace App Manifest
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- marketplace_app_manifest
+- builder
+- collaboration
+tldr: How marketplace_app_manifest-builder works in crews with other builders
+domain: marketplace_app_manifest construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+crew_role: Generates and validates marketplace app manifests, ensuring compliance with marketplace schema and metadata requirements.
+receives_from: "Builder | What | Format  \n--- | --- | ---  \nApp Developer | App metadata | JSON  \nConfig Manager | Marketplace\
+  \ schema | YAML  \nDependency Tracker | External service references | CSV"
+produces_for: "Builder | What | Format  \n--- | --- | ---  \nMarketplace Validator | Parsed manifest | JSON  \nDocumentation\
+  \ Team | Manifest summary | Markdown  \nDeployment System | Validated manifest | XML"
+boundary: Does NOT handle plugin loading or app directory entries. Plugin loading is managed by `plugin_loader`, and app directory
+  entries are handled by `app_directory_manager`.

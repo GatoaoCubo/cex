@@ -1,0 +1,87 @@
+id: p09_uq_n05_operations
+kind: usage_quota
+pillar: P09
+nucleus: n05
+title: N05 Operations Resource Quota
+version: 1.0.0
+quality: null
+created: '2026-04-17'
+updated: '2026-04-17'
+author: usage-quota-builder
+domain: resource management
+quota_limit: multi-dimensional
+usage_metric: calls/tokens/spawns/ops/bytes
+reset_interval: PT1H
+enforcement_policy: hard
+tldr: N05 resource ceilings -- 7 dimensions, soft-warn at 80%, hard-block at 100%, operator override only.
+tags:
+- usage_quota
+- operations
+- n05
+- resource-management
+- enforcement
+- gating-wrath
+density_score: 1.0
+purpose: '| Field | Value |
+
+  |---|---|
+
+  | Scope | All N05 sub-agents, pipelines, and automated ops tooling. |
+
+  | Sin Lens | Gating Wrath -- block runaway consumption before it becomes an incident. |
+
+  | Boundary | Quota only. NOT RPM (rate_limit_config) nor spend (cost_budget). |
+
+  | Owner | N05 runtime; operator_human required for hard-limit override. |'
+quota_dimensions: '| Dimension | Metric | Soft Limit (80%) | Hard Limit (100%) | Reset |
+
+  |---|---|---|---|---|
+
+  | api_calls_anthropic | calls/h | 160 | 200 | PT1H |
+
+  | api_calls_ollama | calls/h | 400 | 500 | PT1H |
+
+  | api_calls_gemini | calls/h | 80 | 100 | PT1H |
+
+  | tokens_session | input+output/session | 192000 | 240000 | session |
+
+  | agent_spawns | concurrent | 4 | 5 | session |
+
+  | git_ops | commits+pushes/min | 4 | 5 | PT1M |
+
+  | compile_ops | calls/h | 80 | 100 | PT1H |
+
+  | disk_usage | bytes/nucleus dir | 409600000 | 512000000 | P1D |
+
+  | signal_writes | writes/min | 8 | 10 | PT1M |'
+enforcement_tiers: '| Tier | Trigger | Action | Who Can Unblock |
+
+  |---|---|---|---|
+
+  | soft_warn | >= 80% | log WARNING + continue | auto-recovers on reset |
+
+  | hard_block | >= 100% | block + emit quota_exceeded signal | operator_human only |
+
+  | emergency_override | operator_human bypass token | lift hard_block for 1 reset cycle | operator_human |'
+allocation_rules: '| Rule | Detail |
+
+  |---|---|
+
+  | nucleus isolation | N05 tracked independently; cannot consume N01-N04 quota pools. |
+
+  | sub-agent inheritance | Each sub-agent shares the parent nucleus pool (5 concurrent max). |
+
+  | provider separation | Anthropic / Ollama / Gemini pools independent; exhausting one does not affect others. |
+
+  | session boundary | Session ends on stop signal or clean exit; per-session counters reset. |
+
+  | disk_usage scope | All files under N05_operations/ plus .cex/runtime/ entries owned by N05 PIDs. |'
+signal_override: '| Event | Emitted To | Override Tool | Validity |
+
+  |---|---|---|---|
+
+  | quota_exceeded (hard) | .cex/runtime/signals/ | cex_quota_override.py --nucleus n05 --dimension dim | 1 reset cycle |
+
+  | quota_warn (soft) | log only | n/a | auto-clears |
+
+  | override_issued | decision_manifest.yaml | operator_human role only | 1 reset cycle |'

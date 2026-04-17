@@ -1,0 +1,78 @@
+kind: schema
+id: bld_schema_content_filter
+pillar: P06
+llm_function: CONSTRAIN
+purpose: Formal schema -- SINGLE SOURCE OF TRUTH for content_filter
+quality: null
+title: Schema Content Filter
+version: 1.0.0
+author: wave1_builder_gen
+tags:
+- content_filter
+- builder
+- schema
+tldr: Formal schema -- SINGLE SOURCE OF TRUTH for content_filter
+domain: content_filter construction
+created: '2026-04-13'
+updated: '2026-04-13'
+density_score: 0.85
+frontmatter_fields: This ISO defines a content filter -- the moderation rules that gate output or input.
+required: '| Field      | Type   | Required | Default | Notes |
+
+  |------------|--------|----------|---------|-------|
+
+  | id         | string | yes      | -       | Unique identifier |
+
+  | kind       | string | yes      | "content_filter" | CEX kind |
+
+  | pillar     | string | yes      | "P11"    | Pillar classification |
+
+  | title      | string | yes      | -       | Human-readable name |
+
+  | version    | string | yes      | "1.0"   | Schema version |
+
+  | created    | date   | yes      | -       | ISO 8601 date |
+
+  | updated    | date   | yes      | -       | ISO 8601 date |
+
+  | author     | string | yes      | -       | Owner/creator |
+
+  | domain     | string | yes      | -       | Application domain |
+
+  | quality    | string | yes      | "draft" | Quality status |
+
+  | tags       | list   | yes      | []      | Metadata tags |
+
+  | tldr       | string | yes      | -       | Summary |
+
+  | filter_type | string | yes      | -       | Filter category (e.g., "moderation") |
+
+  | sensitivity_level | integer | yes | 1 | 1-5 sensitivity rating |'
+recommended: '| Field              | Type   | Notes |
+
+  |--------------------|--------|-------|
+
+  | review_status      | string | "pending" / "approved" |
+
+  | deprecated         | bool   | False |
+
+  | last_reviewed      | date   | ISO 8601 date |'
+id_pattern: ^p11_cf_[a-zA-Z0-9_]+\.md$
+body_structure:
+- Overview
+- Purpose, scope, and use case for the content filter.
+- Filter Rules
+- Detailed list of patterns, keywords, or criteria to block/allow.
+- Scope
+- Contexts where the filter applies (e.g., user input, URLs).
+- Enforcement
+- Technical implementation details (e.g., regex, API checks).
+- Examples
+- Sample inputs/outputs demonstrating filter behavior.
+constraints:
+- ID must match naming pattern and be unique.
+- Required fields must be present and valid.
+- File size must not exceed 4096 bytes.
+- Sensitivity_level must be integer between 1-5.
+- Filter rules must be non-empty and syntactically valid.
+- Domain must align with application context.

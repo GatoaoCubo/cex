@@ -1,0 +1,41 @@
+kind: instruction
+id: bld_instruction_self_improvement_loop
+pillar: P03
+llm_function: REASON
+purpose: Step-by-step production process for self_improvement_loop
+quality: null
+title: Instruction Self Improvement Loop
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- self_improvement_loop
+- builder
+- instruction
+tldr: Step-by-step production process for self_improvement_loop
+domain: self_improvement_loop construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+phase_1_research:
+- Define self-evolution objectives (e.g., adaptability, efficiency).
+- Collect system performance metrics and failure modes.
+- Analyze feedback mechanisms from prior iterations.
+- Identify gaps in current governance policies.
+- Design evolutionary triggers (e.g., error thresholds, performance drops).
+- Simulate loop behavior using historical data.
+phase_2_compose:
+- Reference bld_schema_self_improvement_loop.md for structural requirements.
+- Define feedback loop components (sensor, evaluator, modifier).
+- Write sensor module to capture real-time system data.
+- Implement evaluator using metrics from Phase 1.
+- Code modifier to apply governance rules (see bld_output_template_self_improvement_loop.md).
+- Integrate loop with existing system architecture.
+- Embed versioning to track iterative changes.
+- Add safety guards to prevent destabilizing updates.
+- Finalize documentation per OUTPUT_TEMPLATE.md.
+phase_3_validate:
+- '[ ] Verify schema compliance (bld_schema_self_improvement_loop.md).'
+- '[ ] Test loop with synthetic failure scenarios.'
+- '[ ] Confirm feedback accuracy via metric cross-checks.'
+- '[ ] Ensure governance rules align with P11 Pillar.'
+- '[ ] Conduct peer review for logical consistency.'

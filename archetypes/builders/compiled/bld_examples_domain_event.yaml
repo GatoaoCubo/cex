@@ -1,0 +1,26 @@
+id: bld_examples_domain_event
+kind: few_shot_example
+pillar: P03
+llm_function: GOVERN
+version: 1.0.0
+quality: 5.0
+tags:
+- domain_event
+- examples
+- few-shot
+title: 'Examples: domain_event'
+density_score: 1.0
+updated: '2026-04-17'
+example_1_e_commerce_orderplaced: "id: de_order_placed\nkind: domain_event\npillar: P12\ntitle: \"OrderPlaced\"\naggregate_root:\
+  \ Order\nbounded_context: sales\nevent_version: v1\noccurred_at: \"2026-04-17T14:32:01Z\"\ncausation_id: \"cmd_place_order_abc123\"\
+  \ncorrelation_id: \"saga_checkout_xyz789\"\nquality: null\ntags: [order, sales, domain-event]\nPayload: order_id (uuid),\
+  \ customer_id (uuid), total_amount (decimal),\n         currency (ISO-4217), line_items (list[{sku, qty, price}])"
+example_2_saas_paymentfailed: "id: de_payment_failed\nkind: domain_event\npillar: P12\ntitle: \"PaymentFailed\"\naggregate_root:\
+  \ Payment\nbounded_context: billing\nevent_version: v1\noccurred_at: \"2026-04-17T15:00:00Z\"\ncausation_id: \"cmd_charge_card_def456\"\
+  \ncorrelation_id: \"saga_subscription_renewal_001\"\nquality: null\ntags: [payment, billing, domain-event, failure]\nPayload:\
+  \ payment_id (uuid), customer_id (uuid), amount (decimal),\n         failure_reason (enum: insufficient_funds|card_expired|fraud_detected)"
+anti_example_wrong: 'id: heartbeat_received   # WRONG: system event, not domain
+
+  kind: domain_event       # WRONG: should be signal
+
+  # No aggregate_root      # WRONG: missing required field'

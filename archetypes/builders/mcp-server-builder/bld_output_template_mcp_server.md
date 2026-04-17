@@ -44,31 +44,31 @@ tags: [mcp_server, {{tag_2}}, {{tag_3}}]
 tldr: "{{dense_summary_max_160ch}}"
 ```
 ## Overview
-{{what_the_server_does_1_to_2_sentences}}
-{{who_consumes_it_and_primary_use_case}}
+`{{what_the_server_does_1_to_2_sentences}}`
+`{{who_consumes_it_and_primary_use_case}}`
 ## Tools
-### {{tool_name_1}}
-{{tool_description}}
+### `{{tool_name_1}}`
+`{{tool_description}}`
 Parameters:
-1. `{{param_1}}` ({{type}}, {{required|optional}}): {{param_description}}
-2. `{{param_2}}` ({{type}}, {{required|optional}}): {{param_description}}
-Returns: {{return_description}}
-### {{tool_name_2}}
-{{tool_description}}
+1. `{{param_1}}` ({{type}}, {{required|optional}}): `{{param_description}}`
+2. `{{param_2}}` ({{type}}, {{required|optional}}): `{{param_description}}`
+Returns: `{{return_description}}`
+### `{{tool_name_2}}`
+`{{tool_description}}`
 Parameters:
-- `{{param_1}}` ({{type}}, {{required|optional}}): {{param_description}}
-Returns: {{return_description}}
+- `{{param_1}}` ({{type}}, {{required|optional}}): `{{param_description}}`
+Returns: `{{return_description}}`
 ## Resources
-### {{uri_template_1}}
-Content-Type: {{mime_type}}
-{{resource_description}}
-### {{uri_template_2}}
-Content-Type: {{mime_type}}
-{{resource_description}}
+### `{{uri_template_1}}`
+Content-Type: `{{mime_type}}`
+`{{resource_description}}`
+### `{{uri_template_2}}`
+Content-Type: `{{mime_type}}`
+`{{resource_description}}`
 ## Transport & Auth
 Transport: {{stdio|sse|http}}
-{{transport_connection_details}}
-Auth: {{auth_method_and_config}}
+`{{transport_connection_details}}`
+Auth: `{{auth_method_and_config}}`
 
 ## Template Standards
 

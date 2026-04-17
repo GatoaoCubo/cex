@@ -1,0 +1,36 @@
+mission: OPENSOURCE_FIX
+nucleus: n04
+generated: 2026-04-16
+files_created: 5
+8f_pipeline: '=== 8F PIPELINE ===
+
+  F1 CONSTRAIN: task=examples_and_community, deliverables=3 examples + 2 top-level community files + 1 report
+
+  F2 BECOME: N04 knowledge/docs role loaded from local rules and agent card
+
+  F3 INJECT: handoff + docs UX audit + verified local commands + official Contributor Covenant 2.1 source
+
+  F4 REASON: plan=write runnable docs with real commands, expected outputs, and minimal repo-specific assumptions
+
+  F5 CALL: tools used=cex_doctor, cex_run, cex_8f_runner, dispatch.sh, audit_docs_ux
+
+  F6 PRODUCE: created examples/, SECURITY.md, CODE_OF_CONDUCT.md, and this report
+
+  F7 GOVERN: validated paths, line counts, placeholder emails, and docs UX audit pass conditions
+
+  F8 COLLABORATE: saved files, re-ran audit, compiled report, committed, signaled
+
+  ==================='
+files:
+- '`examples/quickstart.md` -- 89 lines'
+- '`examples/build_one_artifact.md` -- 108 lines'
+- '`examples/run_grid.md` -- 92 lines'
+- '`SECURITY.md` -- 43 lines'
+- '`CODE_OF_CONDUCT.md` -- 125 lines'
+sanity_checks:
+- Examples reference real existing tools? YES -- verified locally with `python _tools/cex_doctor.py`, `python _tools/cex_run.py
+  --help`, `python _tools/cex_run.py --plan "create simple agent"`, `python _tools/cex_8f_runner.py "create simple agent"
+  --kind agent --dry-run --verbose`, and `bash _spawn/dispatch.sh status`
+- Community files use placeholder emails (not real)? YES -- `security@<your-domain>` in `SECURITY.md` and `community@<your-domain>`
+  in `CODE_OF_CONDUCT.md`
+examples_community_pass: ''

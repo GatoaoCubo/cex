@@ -1,0 +1,152 @@
+id: mem_entity_memory_n01
+kind: entity_memory
+pillar: P10
+nucleus: N01
+title: N01 Entity Memory
+version: 1.0.0
+quality: null
+tags:
+- entity_memory
+- n01
+- p10
+- analytical_envy
+- memory
+density_score: 1.0
+purpose: N01 entity memory stores stable facts about the entities that repeatedly shape research. Analytical Envy means the
+  memory should preserve what makes an entity strategically distinct, not every incidental mention. If memory fills with trivia,
+  future comparisons get weaker.
+properties: '| Property | Value |
+
+  |----------|-------|
+
+  | Kind | `entity_memory` |
+
+  | Pillar | `P10` |
+
+  | Nucleus | `N01` |
+
+  | Lens | `Analytical Envy` |
+
+  | Primary entities | vendor, product, source, analyst, market segment |
+
+  | Memory goal | durable comparative context |
+
+  | Update mode | merge with citation-aware revision |
+
+  | TTL stance | per attribute, not one blanket rule |
+
+  | Max fact density | prioritize decision-relevant attributes |
+
+  | Main risk | storing volatile observations as stable truth |'
+memory_thesis: 'N01 should remember the facts that reduce research startup cost:
+
+  - canonical vendor identity
+
+  - product aliases
+
+  - core positioning
+
+  - stable market segment
+
+  - recurring reliability patterns of important sources
+
+  - important entity relationships
+
+
+  It should not turn entity memory into a diary.'
+entity_types: '| Type | Example | Why store |
+
+  |------|---------|-----------|
+
+  | vendor | company under analysis | recurring competitor work |
+
+  | product | named offering or plan | feature and pricing comparisons |
+
+  | source | recurring publication or database | trust calibration |
+
+  | analyst | repeated author or firm | bias and authority tracking |
+
+  | segment | buyer class or market slice | context for comparisons |'
+attribute_model: 'Each fact should include value, confidence, source, and update time.
+
+
+  | Attribute family | Example |
+
+  |------------------|---------|
+
+  | identity | official name, aliases, parent org |
+
+  | commercial | pricing model, target segment |
+
+  | technical | deployment model, core capability category |
+
+  | trust | source authority pattern, known bias |
+
+  | relational | competes_with, publishes_about, serves_segment |'
+update_rules:
+- Stable identity facts can be long-lived.
+- Pricing model facts should be refreshed more often.
+- Weakly sourced claims should not overwrite stronger facts.
+- Conflicts should be recorded until resolved, not silently merged.
+- Attribute-level TTL beats entity-level TTL.
+example_entity_shape: "entity: vendor_openai\nentity_type: vendor\nattributes:\n  official_name: {value: \"OpenAI\", confidence:\
+  \ 0.98, source: \"tier_1\", updated: \"2026-04-16\"}\n  pricing_model: {value: \"subscription_and_usage\", confidence: 0.82,\
+  \ source: \"tier_2\", updated: \"2026-04-16\"}\nrelationships:\n  - relation: competes_with\n    target: vendor_anthropic\n\
+  \    confidence: 0.95"
+n01_specific_memory_targets: '| Target | Why it matters |
+
+  |--------|----------------|
+
+  | competitor alias maps | avoids duplicate rows in matrices |
+
+  | source trust profiles | speeds citation triage |
+
+  | recurring comparison axes per entity | improves retrieval focus |
+
+  | segment fit notes | better positioning synthesis |
+
+  | known contradiction zones | warns future analysts early |'
+memory_hygiene: 'Analytical Envy requires selective retention.
+
+
+  | Keep | Reject |
+
+  |------|--------|
+
+  | enduring identity | momentary chatter |
+
+  | repeated market role | one-off speculation |
+
+  | stable relationship | uncertain rumor |
+
+  | trust pattern | isolated emotional review |
+
+  | canonical naming | transient campaign slogan |'
+integration_with_research_flow: 'Entity memory should be consulted during:
+
+  - query expansion
+
+  - alias normalization
+
+  - matrix row construction
+
+  - source reliability weighting
+
+  - synthesis conflict review
+
+
+  It should be updated after:
+
+  - repeated reuse across tasks
+
+  - confirmed source triangulation
+
+  - major vendor or product changes'
+anti_patterns:
+- storing every article headline as an entity fact
+- overwriting tier_1 facts with fresher but weaker gossip
+- no distinction between product and vendor
+- no alias memory, causing duplicate competitor rows
+- no confidence scores
+n01_decision: N01 entity memory exists to preserve structural advantage. It keeps the durable facts that make each future
+  comparison start from a stronger baseline than the last one.

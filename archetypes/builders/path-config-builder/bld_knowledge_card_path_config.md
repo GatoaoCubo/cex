@@ -37,7 +37,7 @@ Path configs are filesystem path catalogs that define every directory and file p
 ## Patterns
 | Pattern | Application |
 |---------|-------------|
-| Expandable variables | Use $HOME, {{USER_DIR}}, $XDG_DATA_HOME — never hardcoded user paths |
+| Expandable variables | Use $HOME, `{{USER_DIR}}`, $XDG_DATA_HOME — never hardcoded user paths |
 | Platform normalization | Define with forward slashes; resolve per-platform at runtime |
 | Directory hierarchy | base_dir -> {data, config, cache, logs, temp} as tree |
 | Required vs optional | Required paths block startup if missing; optional created on demand |

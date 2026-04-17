@@ -1,0 +1,28 @@
+kind: collaboration
+id: bld_collaboration_course_module
+pillar: P12
+llm_function: COLLABORATE
+purpose: How course_module-builder works in crews with other builders
+quality: null
+title: Collaboration Course Module
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- course_module
+- builder
+- collaboration
+tldr: How course_module-builder works in crews with other builders
+domain: course_module construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+crew_role: Coordinates creation of structured course modules, integrating content, assessments, and media into cohesive learning
+  units.
+receives_from: "| Builder         | What                  | Format      |  \n|-----------------|-----------------------|-------------|\
+  \  \n| Content Curator | Learning objectives   | Text        |  \n| Assessment Builder | Quizzes/exercises   | JSON    \
+  \    |  \n| Media Collector | Video/illustration links | URLs        |"
+produces_for: "| Builder           | What                  | Format      |  \n|-------------------|-----------------------|-------------|\
+  \  \n| Content Reviewer  | Draft module          | Markdown    |  \n| LMS Integrator    | Configured module     | YAML \
+  \       |  \n| Analytics Tracker | Usage metrics         | CSV         |"
+boundary: Does NOT handle user authentication, enrollment management, or prompt/knowledge card creation. These are managed
+  by LMS, enrollment_system, and prompt_template/knowledge_card builders respectively.

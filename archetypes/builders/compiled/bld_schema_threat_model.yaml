@@ -1,0 +1,52 @@
+kind: schema
+id: bld_schema_threat_model
+pillar: P06
+llm_function: CONSTRAIN
+purpose: Formal schema -- SINGLE SOURCE OF TRUTH for threat_model
+quality: null
+title: Schema Threat Model
+version: 1.1.0
+author: n05_ops
+tags:
+- threat_model
+- builder
+- schema
+tldr: Formal schema -- SINGLE SOURCE OF TRUTH for threat_model
+domain: threat_model construction
+created: '2026-04-13'
+updated: '2026-04-13'
+density_score: 0.85
+frontmatter_fields: 'This ISO records a threat model: the assets worth protecting and the attacker profiles that target them.'
+required: "| Field      | Type   | Required | Default | Notes                          |  \n|------------|--------|----------|---------|--------------------------------|\
+  \  \n| id         | string | yes      | -       | Unique identifier              |  \n| kind       | string | yes      |\
+  \ \"threat_model\" | CEX kind                 |  \n| pillar     | string | yes      | \"P11\"    | Pillar              \
+  \           |  \n| title      | string | yes      | -       | Threat model name              |  \n| version    | string\
+  \ | yes      | \"1.0\"   | Schema version                 |  \n| created    | date   | yes      | -       | Creation date\
+  \                  |  \n| updated    | date   | yes      | -       | Last update date               |  \n| author     |\
+  \ string | yes      | -       | Author                         |  \n| domain     | string | yes      | -       | Domain\
+  \ of application          |  \n| quality    | string | yes      | \"draft\" | Quality status                 |  \n| tags\
+  \       | list   | yes      | []      | Keywords                       |  \n| tldr       | string | yes      | -       |\
+  \ Summary (≤256 chars)           |  \n| threat_level | int  | yes      | 0       | 1-5 severity                   |  \n\
+  | mitigation_status | string | yes | \"unaddressed\" | Status of mitigations |"
+recommended: "| Field              | Type   | Notes                          |  \n|--------------------|--------|--------------------------------|\
+  \  \n| description        | string | Detailed threat model summary  |  \n| reference          | string | External documentation\
+  \ link    |  \n| status             | string | \"active\", \"deprecated\", etc.   |"
+id_pattern: ^p11_tm_[a-zA-Z0-9_-]+\.md$
+body_structure:
+- Scope and System Description -- boundaries, stakeholders, out-of-scope items
+- Asset Inventory -- assets with sensitivity classification and owner
+- Threat Actors -- actor table with motivation, capability, access level
+- STRIDE Threat Analysis -- one subsection per STRIDE category (S/T/R/I/D/E), each with threat table and mitigations
+- Risk Priority Matrix -- all threats ranked by risk score (likelihood x impact)
+- Mitigation Strategies -- controls mapped to threats with NIST CSF/ISO 27001 references
+- AI-Specific Threat Addendum -- MITRE ATLAS threats if ML pipeline in scope
+- Assumptions and Limitations -- what was assumed or excluded
+- Open Issues -- unresolved risks with owner and due date
+- References -- STRIDE, MITRE ATT&CK, MITRE ATLAS, NIST AI RMF, ISO/IEC 23894
+constraints:
+- All required fields must be present and valid.
+- ID must conform to the regex pattern.
+- Version must follow semantic versioning (e.g., "1.0.0").
+- Threat_level must be an integer between 1-5.
+- TLDR must be ≤256 characters and in plain text.
+- Domain-specific fields must align with the defined schema.

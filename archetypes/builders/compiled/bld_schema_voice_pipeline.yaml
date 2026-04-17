@@ -1,0 +1,73 @@
+kind: schema
+id: bld_schema_voice_pipeline
+pillar: P06
+llm_function: CONSTRAIN
+purpose: Formal schema -- SINGLE SOURCE OF TRUTH for voice_pipeline
+quality: null
+title: Schema Voice Pipeline
+version: 1.0.0
+author: wave1_builder_gen
+tags:
+- voice_pipeline
+- builder
+- schema
+tldr: Formal schema -- SINGLE SOURCE OF TRUTH for voice_pipeline
+domain: voice_pipeline construction
+created: '2026-04-13'
+updated: '2026-04-13'
+density_score: 0.85
+frontmatter_fields: ''
+required: "| Field      | Type   | Required | Default | Notes |  \n|------------|--------|----------|---------|-------|  \n\
+  | id         | string | yes      | -       | Unique identifier |  \n| kind       | string | yes      | \"voice_pipeline\"\
+  \ | CEX type |  \n| pillar     | string | yes      | \"P04\"    | Pillar classification |  \n| title      | string | yes\
+  \      | -       | Pipeline name |  \n| version    | string | yes      | \"1.0\"   | Version number |  \n| created    |\
+  \ date   | yes      | -       | Creation date |  \n| updated    | date   | yes      | -       | Last update date |  \n|\
+  \ author     | string | yes      | -       | Owner |  \n| domain     | string | yes      | -       | Application domain\
+  \ |  \n| quality    | null   | yes      | null    | Always null at authoring time; peer review assigns score |  \n| tags\
+  \       | list   | yes      | []      | Keywords |  \n| tldr       | string | yes      | -       | Summary |  \n| language\
+  \   | string | yes      | \"en\"    | Supported language |  \n| sample_rate| int    | yes      | 16000   | Audio sampling\
+  \ rate |"
+recommended: "| Field          | Type   | Notes |  \n|----------------|--------|-------|  \n| use_case       | string | Primary\
+  \ application |  \n| dependencies   | list   | Required libraries |  \n| license        | string | Usage terms |"
+id_pattern: '`^p04_vp_[a-z0-9]+$`'
+body_structure:
+- Introduction
+- Purpose and scope of the pipeline
+- Technical Specifications
+- Language, sample rate, and encoding details
+- Use Cases
+- Target applications and scenarios
+- Pipeline Stages
+- Preprocessing, processing, postprocessing steps
+- Quality Metrics
+- Accuracy, latency, error rates
+- Compliance
+- Data privacy and regulatory adherence
+constraints:
+- 'Max file size: 5120 bytes'
+- ID must follow `p04_vp_{{name}}` format
+- Required fields must be present and valid
+- Domain-specific fields (language, sample_rate) are mandatory
+- Version must follow semantic versioning (e.g., 1.0.0)
+- All dates must be ISO 8601 formatted (YYYY-MM-DD)
+properties: '| Property | Value |
+
+  |----------|-------|
+
+  | Kind | `schema` |
+
+  | Pillar | P06 |
+
+  | Domain | voice_pipeline construction |
+
+  | Pipeline | 8F (F1-F8) |
+
+  | Scorer | cex_score.py |
+
+  | Compiler | cex_compile.py |
+
+  | Retriever | cex_retriever.py |
+
+  | Quality target | 9.0+ |
+
+  | Density target | 0.85+ |'

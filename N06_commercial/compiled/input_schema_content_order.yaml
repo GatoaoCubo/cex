@@ -1,0 +1,80 @@
+title: input_schema_content_order
+description: Schema for creating and validating content orders in the CEX 8F pipeline
+version: 1.0
+generated_by: N06 Commercial Nucleus
+1_schema_definition: "topic: \"Introduction to Python type hints for beginners\"\naudience:\n  segment: developer\n  skill_level:\
+  \ beginner\nformats:\n  - blog_post\n  - social_media_set\n# Credits: 8 + 12 = 20 (within free tier limits)\n\n---"
+2_validation_rules: ''
+2_1_pre_pipeline_gates: '| # | Rule | Error Code | Message |
+
+  |---|------|-----------|---------|
+
+  | V1 | `topic.length >= 10` | TOPIC_TOO_SHORT | "Topic must be at least 10 characters. Be specific." |
+
+  | V2 | `audience` object present | AUDIENCE_MISSING | "Who is this for? Specify segment and skill_level." |
+
+  | V3 | `formats` has >= 1 item | NO_FORMATS | "Select at least 1 output format." |
+
+  | V4 | `course_config` present if `course_module` in formats | COURSE_CONFIG_MISSING | "Course module selected but no course_config
+  provided." |
+
+  | V5 | `billing.credits_available >= billing.credits_required` | INSUFFICIENT_CREDITS | "Not enough credits. Need {required},
+  have {available}." |
+
+  | V6 | `brand_config` file exists (if not ''auto'') | BRAND_NOT_FOUND | "Brand config file not found at specified path."
+  |
+
+  | V7 | No duplicate formats in array | DUPLICATE_FORMAT | "Format ''{format}'' listed twice." |
+
+  | V8 | `video_produced_*` requires tier >= creator | VIDEO_REQUIRES_PAID | "Video production requires Creator tier or above."
+  |
+
+  | V9 | `course_module` requires tier >= pro | COURSE_REQUIRES_PRO | "Course modules require Pro tier or above." |'
+2_2_credit_calculation: "def calculate_credits(order):\n    CREDIT_MAP = {\n        \"blog_post\": 8,\n        \"social_media_set\"\
+  : 12,\n        \"video_script\": 5,\n        \"video_produced_short\": 25,\n        \"video_produced_long\": 45,\n     \
+  \   \"podcast_episode\": 10,\n        \"course_module\": 30,\n        \"ebook_chapter\": 10,\n        \"presentation\":\
+  \ 12,\n        \"email_sequence\": 8,\n        \"landing_page\": 15,\n    }\n    \n    base = sum(CREDIT_MAP[f] for f in\
+  \ order[\"formats\"])\n    \n    # Course modules multiply by count\n    if \"course_module\" in order[\"formats\"]:\n \
+  \       modules = order.get(\"course_config\", {}).get(\"modules\", 8)\n        base += CREDIT_MAP[\"course_module\"] *\
+  \ (modules - 1)  # first already counted\n    \n    # Rush surcharge\n    if order.get(\"delivery\", {}).get(\"priority\"\
+  ) == \"rush\":\n        base = int(base * 1.5)\n    \n    # Bundle discount (4+ formats = 20% off)\n    if len(order[\"\
+  formats\"]) >= 4:\n        base = int(base * 0.80)\n    \n    return base\n\n---"
+3_example_orders: ''
+3_1_minimal_order_free_tier: "topic: \"Introduction to Python type hints for beginners\"\naudience:\n  segment: developer\n\
+  \  skill_level: beginner\nformats:\n  - blog_post\n  - social_media_set\n# Credits: 8 + 12 = 20 (within free tier limits)"
+3_2_standard_order_pro_tier: "topic: \"How to build a content pipeline using CEX 8F\"\naudience:\n  segment: developer\n \
+  \ skill_level: intermediate\nformats:\n  - blog_post\n  - social_media_set\n  - video_produced_short\n  - podcast_episode\n\
+  \  - presentation\n  - email_sequence\nlanguage: pt-BR\ntone: technical\ndepth: standard\nsocial_config:\n  platforms: [instagram,\
+  \ linkedin, twitter_x, youtube]\n  posts_per_platform: 3\n  include_canva_designs: true\nvideo_config:\n  voice: elevenlabs_default\n\
+  \  subtitles: true\n  aspect_ratio: \"9:16\"\ndelivery:\n  priority: normal\n# Credits: (8 + 12 + 25 + 10 + 12 + 8) = 75"
+3_3_enterprise_order_studio_tier: "topic: \"Advanced AI Ethics in Content Creation\"\naudience:\n  segment: enterprise\n \
+  \ skill_level: expert\nformats:\n  - video_produced_long\n  - course_module\n  - landing_page\n  - ebook_chapter\ndelivery:\n\
+  \  priority: rush\n# Credits: (45 + 30 + 15 + 10) * 1.5 = 146.25\n\n---"
+4_order_lifecycle: "graph TD\n    A[Submit Order] --> B{Validation}\n    B -->|Success| C[Queue for Processing]\n    B -->|Failure|\
+  \ D[Return Error to User]\n    C --> E[Content Creation]\n    E --> F[Quality Check]\n    F --> G[Delivery]\n    G --> H[User\
+  \ Notification]\n\n---"
+5_related_kinds: '- validation_schema: Defines output validation rules that ensure the input conforms to system constraints.
+  This schema is validated against a separate validation_schema to confirm compliance before processing.
+
+
+  - pricing_engine: Uses format selections and tier information to calculate credit costs. The pricing_engine relies on this
+  schema''s fields to estimate required credits for each order.
+
+
+  - orchestrator: Manages the order lifecycle stages (submit, validate, execute, deliver). The orchestrator uses this schema
+  to route orders through the pipeline based on their configuration.
+
+
+  - billing: Processes payment based on the `credits_required` field calculated by the pricing_engine. The billing system
+  interacts with this schema to confirm sufficient credits before authorizing order execution.
+
+
+  ---'
+6_api_endpoint_mapping: "POST /api/v1/orders:\n  description: Create a new content order\n  request_body: input_schema_content_order\n\
+  \  response: { \"order_id\": \"string\", \"status\": \"string\", \"credits_required\": \"number\" }\n\nGET /api/v1/orders/{order_id}:\n\
+  \  description: Retrieve order details\n  response: { \"order_id\": \"string\", \"status\": \"string\", \"content\": \"\
+  array\", \"credits_used\": \"number\" }\n\nPATCH /api/v1/orders/{order_id}:\n  description: Update order configuration\n\
+  \  request_body: { \"format\": \"array\", \"delivery\": \"object\" }\n  response: { \"order_id\": \"string\", \"status\"\
+  : \"string\", \"credits_required\": \"number\" }\n\n---"
+boundary: Contrato de entrada que define dados requeridos. NÃO é validation_schema (saida) nem type_def (definição abstrata).
+8f_pipeline_function: 'Primary function: CONSTRAIN'

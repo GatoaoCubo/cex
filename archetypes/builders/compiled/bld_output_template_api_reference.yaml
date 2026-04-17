@@ -1,0 +1,24 @@
+kind: output_template
+id: bld_output_template_api_reference
+pillar: P05
+llm_function: PRODUCE
+purpose: Template with vars for api_reference production
+quality: null
+title: Output Template Api Reference
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- api_reference
+- builder
+- output_template
+tldr: Template with vars for api_reference production
+domain: api_reference construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+endpoints: "| Path | Method | Description |\n|------|--------|-------------|\n| /{{endpoint}} | {{method}} | {{endpoint_description}}\
+  \ |\n\n{{method}} /{{endpoint}} HTTP/1.1\nHost: {{host}}\nContent-Type: application/json\n\n{{request_body}}\n\n{\n  \"\
+  status\": \"{{status}}\",\n  \"data\": {{data}}\n}\n\n<!-- {{endpoint}}: API endpoint path -->\n<!-- {{method}}: HTTP method\
+  \ (GET/POST/PUT/DELETE) -->\n<!-- {{endpoint_description}}: Purpose of the endpoint -->\n<!-- {{host}}: API domain -->\n\
+  <!-- {{request_body}}: Example request payload -->\n<!-- {{status}}: Expected HTTP status code -->\n<!-- {{data}}: Example\
+  \ response data structure -->"

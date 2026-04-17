@@ -1,0 +1,46 @@
+kind: output_template
+id: bld_output_template_c2pa_manifest
+pillar: P05
+llm_function: PRODUCE
+purpose: Template with vars for c2pa_manifest production
+quality: null
+title: Output Template C2PA Manifest
+version: 1.0.0
+author: n04_wave7
+tags:
+- c2pa_manifest
+- builder
+- output_template
+- C2PA
+- claim
+- assertion
+- AI-ML-generator
+tldr: Template with vars for c2pa_manifest production
+domain: c2pa_manifest construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+manifest_store_jumbf_structure: "{\n  \"manifests\": {\n    \"{{manifest_label}}\": {\n      \"claim_generator\": \"{{generator_name}}/{{generator_version}}\
+  \ c2pa-rs/{{sdk_version}}\",\n      \"claim_generator_info\": [\n        {\n          \"name\": \"{{generator_name}}\",\n\
+  \          \"version\": \"{{generator_version}}\"\n        }\n      ],\n      \"title\": \"{{content_title}}\",\n      \"\
+  format\": \"{{mime_type}}\",\n      \"instance_id\": \"xmp:iid:{{uuid}}\",\n      \"ingredients\": [],\n      \"assertions\"\
+  : [\n        {\n          \"label\": \"c2pa.ai_generator\",\n          \"data\": {\n            \"digitalSourceType\": \"\
+  {{digital_source_type}}\",\n            \"generatorModel\": {\n              \"name\": \"{{model_name}}\",\n           \
+  \   \"version\": \"{{model_version}}\"\n            },\n            \"promptText\": \"{{prompt_text}}\"\n          }\n \
+  \       }\n      ],\n      \"signature_info\": {\n        \"issuer\": \"{{signer_cn_or_did}}\",\n        \"cert_serial_number\"\
+  : \"{{serial}}\"\n      }\n    }\n  },\n  \"active_manifest\": \"{{manifest_label}}\"\n}"
+ingredient_assertion_template: "{\n  \"label\": \"c2pa.ingredient\",\n  \"data\": {\n    \"title\": \"{{ingredient_title}}\"\
+  ,\n    \"format\": \"{{ingredient_mime}}\",\n    \"relationship\": \"{{parentOf|componentOf}}\",\n    \"thumbnail\": {\n\
+  \      \"identifier\": \"{{thumbnail_id}}\",\n      \"format\": \"image/jpeg\"\n    },\n    \"hash\": \"{{sha256_hex}}\"\
+  \n  }\n}"
+embedding_target_formats: '| Format | Embedding Method | C2PA Box Location |
+
+  |--------|-----------------|-------------------|
+
+  | JPEG   | Exif/APP11      | After SOI marker  |
+
+  | PNG    | iTXt chunk      | Before IDAT       |
+
+  | MP4    | moov box        | uuid box in moov  |
+
+  | PDF    | xpacket         | File trailer      |'

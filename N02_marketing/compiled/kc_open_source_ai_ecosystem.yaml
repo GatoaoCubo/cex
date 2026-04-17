@@ -1,0 +1,50 @@
+id: kc_open_source_ai_ecosystem
+kind: knowledge_card
+title: Open Source AI Ecosystem 2026
+version: 1.0.0
+quality: 8.9
+pillar: P01
+density_score: 1.0
+updated: '2026-04-13'
+major_platforms:
+- Ollama
+- 'Focus: Lightweight, easy-to-deploy models'
+- 'Hosting: Cloud (Ollama Cloud), Self-hosted (Ollama Server)'
+- 'Pricing: Free tier with limited models; paid plans for enterprise access'
+- vLLM
+- 'Focus: High-throughput inference optimization'
+- 'Hosting: Self-hosted (via Docker), Cloud (integrations with AWS/GCP)'
+- 'Pricing: Open source with optional commercial support'
+- llama.cpp
+- 'Focus: Portable, efficient model execution'
+- 'Hosting: Self-hosted (Linux/macOS), WebAssembly (WASM)'
+- 'Pricing: Completely free and open source'
+- Hugging Face
+- 'Focus: Model sharing and collaboration'
+- 'Hosting: Cloud (Inference API), Self-hosted (Docker)'
+- 'Pricing: Free tier with 100k tokens/month; paid plans for higher limits'
+- Together.ai
+- 'Focus: Enterprise-grade model hosting'
+- 'Hosting: Cloud (Together API), Self-hosted (custom deployments)'
+- 'Pricing: Free tier with 100k tokens/month; paid plans for business use'
+- Groq
+- 'Focus: Low-latency, high-throughput inference'
+- 'Hosting: Cloud (Groq API), Self-hosted (experimental)'
+- 'Pricing: Free tier with 100k tokens/month; paid plans for production use'
+model_hosting_comparison: '| Platform       | Hosting Options       | Pricing                          |
+
+  |----------------|-----------------------|----------------------------------|
+
+  | Ollama     | Cloud, Self-hosted    | Free tier; paid enterprise plans |
+
+  | vLLM       | Self-hosted, Cloud    | Open source with commercial support |
+
+  | llama.cpp  | Self-hosted, WASM     | Completely free                 |
+
+  | Hugging Face| Cloud, Self-hosted    | Free tier; paid for higher limits |
+
+  | Together.ai| Cloud, Self-hosted    | Free tier; business plans        |
+
+  | Groq       | Cloud, Self-hosted    | Free tier; production plans      |'
+boundary: Conhecimento destilado, estatico, versionado. NAO eh instrucao, template, ou configuracao.
+8f_pipeline_function: 'Primary function: INJECT'

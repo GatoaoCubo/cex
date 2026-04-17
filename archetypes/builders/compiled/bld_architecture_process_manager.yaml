@@ -1,0 +1,44 @@
+id: bld_architecture_process_manager
+kind: knowledge_card
+pillar: P12
+title: Process Manager Builder -- Architecture
+version: 1.0.0
+quality: 6.8
+tags:
+- builder
+- process_manager
+- architecture
+llm_function: CONSTRAIN
+density_score: 0.99
+updated: '2026-04-17'
+pattern_origin: 'Hohpe & Woolf Enterprise Integration Patterns (2003): Process Manager = stateful event router. Also known
+  as "Saga Orchestrator" in microservices contexts.'
+structural_topology: "[Domain Event] --> ProcessManager (corr_key lookup)\n                        |\n              [state\
+  \ machine transition]\n                        |\n                [Command dispatch] --> [Service/Aggregate]\n         \
+  \               |\n                [Wait for next event or timeout]"
+key_properties:
+- 'Stateful: tracks position in process via state machine'
+- 'Event-reactive: progresses only when events arrive (not polling)'
+- 'Command-issuing: only output is commands to other services'
+- 'No business data: holds only process state + correlation key'
+- 'Compensatable: each forward step has a corresponding undo command'
+relationship_to_other_kinds: '| Kind | Relationship |
+
+  |------|-------------|
+
+  | workflow | sequential step execution (push model); process_manager is event-driven (pull/reactive) |
+
+  | supervisor | manages agent hierarchies for LLM workflows; process_manager routes domain events |
+
+  | dispatch_rule | routes by keyword/intent; process_manager routes by domain event + state |
+
+  | domain_event | inputs consumed by process_manager; outputs emitted by aggregates |'
+eip_vs_saga:
+- 'EIP Process Manager: routes events AND holds coordination state (stateful router)'
+- 'Saga Orchestrator: same pattern, called "saga" in microservices contexts'
+- 'Saga Choreography: no central coordinator; aggregates react to each other''s events'
+anti_patterns:
+- 'Process manager that holds business data: only state + correlation key allowed'
+- 'Process manager that polls: it reacts to events, never polls'
+- 'Missing compensation: every forward step needs an undo path'
+- 'Single process manager for all flows: split by business process boundary'

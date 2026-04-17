@@ -1,0 +1,75 @@
+kind: schema
+id: bld_schema_roi_calculator
+pillar: P06
+llm_function: CONSTRAIN
+purpose: Formal schema -- SINGLE SOURCE OF TRUTH for roi_calculator
+quality: null
+title: Schema Roi Calculator
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- roi_calculator
+- builder
+- schema
+tldr: Formal schema -- SINGLE SOURCE OF TRUTH for roi_calculator
+domain: roi_calculator construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+frontmatter_fields: ''
+required: '| Field | Type | Required | Default | Notes |
+
+  |------|------|----------|---------|-------|
+
+  | id | string | yes | null | Must match ID Pattern |
+
+  | kind | string | yes | "roi_calculator" | CEX kind identifier |
+
+  | pillar | string | yes | "P11" | Pillar classification |
+
+  | title | string | yes | null | Descriptive title |
+
+  | version | string | yes | "1.0.0" | Semantic versioning |
+
+  | created | datetime | yes | null | ISO 8601 format |
+
+  | updated | datetime | yes | null | ISO 8601 format |
+
+  | author | string | yes | null | Responsible party |
+
+  | domain | string | yes | "roi" | Domain context |
+
+  | quality | null | yes | null | Never self-score; peer review assigns |
+
+  | tags | list | yes | [] | Keyword metadata |
+
+  | tldr | string | yes | null | Summary of purpose |
+
+  | calculation_method | string | yes | null | ROI formula/algorithm |
+
+  | input_parameters | list | yes | [] | Required variables |
+
+  | output_metrics | list | yes | [] | Resulting values |'
+recommended: '| Field | Type | Notes |
+
+  |------|------|-------|
+
+  | last_reviewed | datetime | Peer review timestamp |
+
+  | reviewers | list | Reviewer identifiers |
+
+  | validation_status | string | "pending"/"approved" |
+
+  | example_use_case | string | Sample application |'
+id_pattern: ^p11_roi_[a-z][a-z0-9_]+$
+body_structure: "1. Calculation Methodology\n   Detailed description of ROI formula and logic\n\n2. Input Parameters\n   List\
+  \ of required variables with data types and ranges\n\n3. Output Metrics\n   Definition of calculated values and their units\n\
+  \n4. Assumptions\n   Conditions and limitations of the model\n\n5. Validation Procedures\n   Steps for verifying accuracy\
+  \ and edge cases\n\n6. Example Use Case\n   Practical scenario with sample input/output"
+constraints:
+- ID must match exact regex pattern
+- All required fields must be present
+- YAML must be valid and under 4096 bytes
+- Domain-specific fields must follow schema
+- Quality field must be peer-reviewed
+- Versioning must follow semantic format

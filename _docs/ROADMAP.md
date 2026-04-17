@@ -3,10 +3,11 @@ id: roadmap_cex
 kind: context_doc
 title: "CEX Roadmap — What Was Done, What's Next"
 version: 5.0.0
-quality: null
+quality: 8.9
 created: 2026-04-07
 updated: 2026-04-08
 purpose: Single source of truth for CEX progress and next steps
+density_score: 1.0
 ---
 
 # CEX Roadmap
@@ -95,10 +96,10 @@ purpose: Single source of truth for CEX progress and next steps
 | Technical authority rule | .claude/rules/n07-technical-authority.md | ✅ Active |
 | Non-blocking lifecycle | .claude/rules/n07-autonomous-lifecycle.md | ✅ Updated |
 | Input transmutation | .claude/rules/n07-input-transmutation.md | ✅ Enhanced |
-| User directive memory | N07_admin/memory/user_directive_technical_authority.md | ✅ Permanent |
-| Industry audit memory | N07_admin/memory/industry_terminology_audit.md | ✅ Permanent |
-| Architecture audit memory | N07_admin/memory/deep_architecture_audit.md | ✅ Permanent |
-| Terminology map memory | N07_admin/memory/terminology_standardization.md | ✅ Permanent |
+| User directive memory | N07_admin/P10_memory/user_directive_technical_authority.md | ✅ Permanent |
+| Industry audit memory | N07_admin/P10_memory/industry_terminology_audit.md | ✅ Permanent |
+| Architecture audit memory | N07_admin/P10_memory/deep_architecture_audit.md | ✅ Permanent |
+| Terminology map memory | N07_admin/P10_memory/terminology_standardization.md | ✅ Permanent |
 
 ---
 

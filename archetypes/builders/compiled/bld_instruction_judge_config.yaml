@@ -1,0 +1,41 @@
+kind: instruction
+id: bld_instruction_judge_config
+pillar: P03
+llm_function: REASON
+purpose: Step-by-step production process for judge_config
+quality: null
+title: Instruction Judge Config
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- judge_config
+- builder
+- instruction
+tldr: Step-by-step production process for judge_config
+domain: judge_config construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+phase_1_research:
+- Identify evaluation criteria (accuracy, fairness, compliance).
+- Analyze existing judge_config templates for P07.
+- Determine governance rules (scoring thresholds, escalation paths).
+- Map LLM output types to evaluation metrics.
+- Review schema constraints from SCHEMA.md.
+- Document use cases for automated evaluation scenarios.
+phase_2_compose:
+- 'Define config structure: `judge_id`, `version`, `criteria`.'
+- Specify evaluation parameters (weightings, tolerances).
+- 'Align with SCHEMA.md: ensure required fields are present.'
+- Populate `criteria` array with metric names and descriptions.
+- 'Configure `governance` block: rules, thresholds, escalation.'
+- Integrate `output_template` from OUTPUT_TEMPLATE.md.
+- Add `validation_rules` for schema compliance checks.
+- 'Write `metadata` section: author, date, revision history.'
+- Finalize config with YAML/JSON syntax and comments.
+phase_3_validate:
+- '[ ] ✅ Validate schema compliance using SCHEMA.md'
+- '[ ] ✅ Check completeness of all required fields'
+- '[ ] ✅ Confirm governance rules align with P07 policies'
+- '[ ] ✅ Test config against sample LLM outputs'
+- '[ ] ✅ Obtain stakeholder approval for deployment'

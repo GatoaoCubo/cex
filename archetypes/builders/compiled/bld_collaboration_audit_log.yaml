@@ -1,0 +1,28 @@
+kind: collaboration
+id: bld_collaboration_audit_log
+pillar: P12
+llm_function: COLLABORATE
+purpose: How audit_log-builder works in crews with other builders
+quality: null
+title: Collaboration Audit Log
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- audit_log
+- builder
+- collaboration
+tldr: How audit_log-builder works in crews with other builders
+domain: audit_log construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+crew_role: Collects, formats, and stores system events for compliance, security, and operational auditing. Ensures logs are
+  immutable, searchable, and traceable to specific actions or users.
+receives_from: "| Builder       | What                  | Format      |  \n|---------------|-----------------------|-------------|\
+  \  \n| Application   | User actions          | JSON        |  \n| Security      | Authentication events | XML         |\
+  \  \n| System        | Infrastructure alerts | Syslog      |"
+produces_for: "| Builder       | What                  | Format        |  \n|---------------|-----------------------|---------------|\
+  \  \n| Compliance    | Audit reports         | Structured log |  \n| Security      | Incident investigation  | API endpoint\
+  \  |  \n| Operations    | Log aggregation       | SIEM-compatible |"
+boundary: Does NOT handle trace configuration (observability) or regression checks (quality). Trace_config is managed by observability
+  tools; regression_check is handled by QA/Testing teams.

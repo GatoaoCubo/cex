@@ -2,7 +2,7 @@
 kind: schema
 id: bld_schema_bugloop
 pillar: P11
-llm_function: GOVERN
+llm_function: CONSTRAIN
 purpose: Formal schema — SINGLE SOURCE OF TRUTH for bugloop
 pattern: TEMPLATE derives from this. CONFIG restricts this.
 quality: 9.1
@@ -16,7 +16,6 @@ created: "2026-04-07"
 updated: "2026-04-07"
 density_score: 0.90
 ---
-
 # Schema: bugloop
 ## Frontmatter Fields
 | Field | Type | Required | Default |

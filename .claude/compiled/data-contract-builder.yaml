@@ -1,0 +1,4 @@
+name: data-contract-builder
+description: Builds ONE data_contract artifact via 8F pipeline. Loads data-contract-builder specs. Produces schema-level producer/consumer
+  agreement with typed fields, numeric SLAs, and versioning policy. Never self-scores quality.
+tools: Read, Write, Edit, Bash, Glob, Grep

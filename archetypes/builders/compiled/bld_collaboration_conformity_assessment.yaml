@@ -1,0 +1,181 @@
+kind: collaboration
+id: bld_collaboration_conformity_assessment
+pillar: P12
+llm_function: COLLABORATE
+purpose: Crew interfaces, handoff contracts, and boundary conditions for the conformity-assessment-builder
+quality: null
+title: Conformity Assessment Builder -- Collaboration
+version: 1.0.0
+author: wave7_n05
+tags:
+- conformity_assessment
+- builder
+- collaboration
+tldr: Crew role definition, input/output contracts, and what this builder does NOT do
+domain: conformity_assessment construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+crew_role: '| Attribute | Value |
+
+  |-----------|-------|
+
+  | Role in crew | EU AI Act Annex-IV technical documentation producer |
+
+  | Nucleus | N03 (Builder) |
+
+  | Triggers | Dispatch from N07 with conformity_assessment intent |
+
+  | Output | Complete Annex-IV package as conformity_assessment artifact |
+
+  | Signal | write_signal(''n03'', ''complete'', score) on F8 |'
+receives_from: '| Source | Artifact/Data | Format | Required? |
+
+  |--------|--------------|--------|----------|
+
+  | Legal team / user | System requirements and compliance brief | JSON or free-text | MANDATORY |
+
+  | N01 Intelligence | EU AI Act research KCs (kc_eu_ai_act_*.md) | .md knowledge cards | STRONGLY RECOMMENDED |
+
+  | N05 Operations | System audit logs, accuracy test results, pentest summary | .md or .csv | MANDATORY (for accuracy/cybersecurity)
+  |
+
+  | N06 Commercial | Budget context for compliance investment | Handoff note | OPTIONAL |
+
+  | User / provider | Provider name, address, contact | Form fields | MANDATORY |
+
+  | User / provider | Annex III category determination | Enum value | MANDATORY (or derived by builder) |
+
+  | User / provider | Technical documentation reference | File path or URL | MANDATORY |
+
+  | User / provider | Declaration date | ISO date | MANDATORY |'
+produces_for: '| Consumer | Artifact | Format | When |
+
+  |----------|---------|--------|------|
+
+  | Legal team | Annex-IV conformity package | p11_ca_[system].md | On F8 complete |
+
+  | N06 Commercial | Compliance cost estimates input | Signal note in handoff | On F8 complete |
+
+  | N04 Knowledge | Conformity KC for library | Pointer to artifact | On F8 complete |
+
+  | N07 Orchestrator | Completion signal | write_signal + quality score | On F8 complete |
+
+  | Registry | Compiled YAML | _tools/cex_compile.py output | On F8 compile step |'
+handoff_contract: ''
+incoming_handoff_what_n07_writes_to_trigger_this_builder: '## Task
+
+  Produce a conformity_assessment artifact for [SYSTEM_NAME] v[VERSION].
+
+
+  ## Context
+
+  - Annex III category: [CATEGORY]
+
+  - Article 43 procedure: [internal_check or notified_body]
+
+  - Provider: [PROVIDER_NAME], [ADDRESS]
+
+  - Technical doc reference: [REF]
+
+  - Declaration date target: [DATE]
+
+
+  ## Relevant artifacts (READ before producing)
+
+  1. archetypes/builders/conformity-assessment-builder/ (13 ISOs)
+
+  2. P01_knowledge/library/kind/kc_conformity_assessment.md
+
+  3. N01_intelligence/ (any EU AI Act KCs)
+
+  4. N05_operations/ (audit logs, accuracy test results for this system)
+
+
+  ## Expected output
+
+  1. File: P11_govern/p11_ca_[system_slug].md
+
+  2. Kind: conformity_assessment
+
+  3. Quality gate: H01-H08 all pass, score >= 9.0
+
+  4. Signal: write_signal(''n03'', ''complete'', score)
+
+  5. Commit: git add P11_govern/p11_ca_[system_slug].md && git commit -m "[N03] conformity_assessment: [system_name]"
+
+
+  ## Aug-2026 context
+
+  Flag all mandatory items with [AUG-2026-DEADLINE].
+
+  If declaration_date > 2026-08-01, add warning.'
+outgoing_signal_what_this_builder_writes_on_completion: 'from _tools.signal_writer import write_signal
+
+  write_signal(''n03'', ''complete'', 9.2)
+
+  # Payload includes: artifact_path, system_name, annex_iii_category, score, gates_passed'
+boundary_conditions: ''
+in_scope_this_builder_handles: '| Scope Item | Detail |
+
+  |------------|--------|
+
+  | Annex-IV package production | All 7 sections per Art. 11 |
+
+  | RMS documentation | Per Art. 9 -- identification, estimation, mitigation |
+
+  | Data-governance documentation | Per Art. 10 -- training, validation, bias, provenance |
+
+  | Human-oversight documentation | Per Art. 14 -- override, interpretability, training |
+
+  | Post-market-monitoring plan | Per Art. 72 -- KPIs, collection, SIR procedure |
+
+  | Annex-III category identification | Based on user input or derivation from system description |
+
+  | Article-43 route determination | Internal check vs. notified body based on category |
+
+  | EU AI Act citation | Article and annex references in all sections |
+
+  | Aug-2026 deadline flagging | All mandatory items labeled [AUG-2026-DEADLINE] |'
+out_of_scope_route_elsewhere: '| Out of Scope | Route To |
+
+  |-------------|----------|
+
+  | CE marking physical affixing | Legal + notified body |
+
+  | EU Declaration of Conformity (Art. 47 DoC) | Legal team |
+
+  | GDPR compliance | DPO / legal |
+
+  | ISO 42001 certification | Quality management |
+
+  | Non-high-risk AI systems | Not applicable |
+
+  | General-purpose AI (GPAI, Chapter V) | GPAI procedure |
+
+  | Annex I embedded products (Aug 2027) | Annex I procedure |
+
+  | Post-market incident investigation | N05 Operations |
+
+  | Financial penalty assessment | Legal / N06 |'
+escalation_protocol: '| Situation | Action |
+
+  |-----------|--------|
+
+  | Annex III category ambiguous | Ask user one clarifying question; do not guess |
+
+  | Notified body ID not provided but required | Block output at H02/H03; request NB ID |
+
+  | RMS evidence missing (no risk register) | Include empty table with [EVIDENCE REQUIRED] flags; do not fabricate |
+
+  | PMM plan impossible (pre-deployment system) | Note "PMM plan will be established at deployment"; flag [AUG-2026-DEADLINE]
+  |
+
+  | System not in Annex III | Stop builder; inform user this is not a high-risk system per Annex III |
+
+  | Score < 8.0 after two F6 retries | Flag for N07 review; output current draft with DRAFT watermark |'
+communication_protocol: ''
+with_n07: "Signal format:\n{nucleus: n03, status: complete, score: 9.2,\n artifact: P11_govern/p11_ca_{system}.md,\n annex_iii_category:\
+  \ essential_services,\n article_43_procedure: internal_check,\n timestamp: ISO8601}"
+with_legal_team: 'Deliver: compiled .md artifact path + link to technical documentation reference. Do NOT deliver: legal opinions,
+  compliance declarations, or liability assessments.'

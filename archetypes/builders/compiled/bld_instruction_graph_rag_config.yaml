@@ -1,0 +1,41 @@
+kind: instruction
+id: bld_instruction_graph_rag_config
+pillar: P03
+llm_function: REASON
+purpose: Step-by-step production process for graph_rag_config
+quality: null
+title: Instruction Graph Rag Config
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- graph_rag_config
+- builder
+- instruction
+tldr: Step-by-step production process for graph_rag_config
+domain: graph_rag_config construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+phase_1_research:
+- Analyze graph database schema requirements for RAG nodes/edges
+- Evaluate data source compatibility (vector DB, knowledge graphs, relational tables)
+- Benchmark graph traversal algorithms for retrieval efficiency
+- Study injection point placement in query pipelines
+- Compare schema normalization vs denormalization tradeoffs
+- Document security constraints for sensitive graph data
+phase_2_compose:
+- Initialize config with bld_schema_graph_rag_config.md base structure
+- Define node types per bld_output_template_graph_rag_config.md entity hierarchy
+- Map data sources to graph injection endpoints
+- Configure edge weighting parameters (confidence, relevance)
+- Implement query injection patterns from schema
+- Set retrieval path limits (max hops, depth)
+- Embed validation hooks per schema constraints
+- Write config using bld_output_template_graph_rag_config.md syntax
+- Add metadata for versioning and dependency tracking
+phase_3_validate:
+- '[ ] Schema compliance check against bld_schema_graph_rag_config.md'
+- '[ ] Data integrity verification (node/edge consistency)'
+- '[ ] Injection point stress testing with sample queries'
+- '[ ] Retrieval accuracy benchmarking (precision/recall)'
+- '[ ] Performance validation (latency, throughput)'

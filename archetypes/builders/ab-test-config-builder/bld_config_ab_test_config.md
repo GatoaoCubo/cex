@@ -1,0 +1,35 @@
+---
+kind: config
+id: bld_config_ab_test_config
+pillar: P09
+llm_function: CONSTRAIN
+purpose: Naming, paths, limits for ab_test_config production
+quality: 8.6
+title: "Config Ab Test Config"
+version: "1.0.0"
+author: wave1_builder_gen_v2
+tags: [ab_test_config, builder, config]
+tldr: "Naming, paths, limits for ab_test_config production"
+domain: "ab_test_config construction"
+created: "2026-04-14"
+updated: "2026-04-14"
+density_score: 0.85
+---
+
+## Naming Convention
+Pattern: `p11_abt_{{name}}.yaml`
+Examples: `p11_abt_feature_flag.yaml`, `p11_abt_button_color.yaml`
+
+## Paths
+Artifacts: `/mnt/artifacts/pillar/P11/ab_tests/{{name}}.yaml`
+
+## Limits
+max_bytes: 4096
+max_turns: 100
+effort_level: 3
+
+## Hooks
+pre_build: null
+post_build: null
+on_error: null
+on_quality_fail: null

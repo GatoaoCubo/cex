@@ -1,0 +1,37 @@
+---
+kind: config
+id: bld_config_reasoning_strategy
+pillar: P09
+llm_function: CONSTRAIN
+purpose: Naming, paths, limits for reasoning_strategy production
+quality: 8.6
+title: "Config Reasoning Strategy"
+version: "1.0.0"
+author: wave1_builder_gen
+tags: [reasoning_strategy, builder, config]
+tldr: "Naming, paths, limits for reasoning_strategy production"
+domain: "reasoning_strategy construction"
+created: "2026-04-13"
+updated: "2026-04-13"
+density_score: 0.85
+---
+
+## Naming Convention  
+
+This ISO selects a reasoning strategy (e.g. chain-of-thought) and the conditions under which it applies.
+Pattern: `p03_rs_{{name}}.md`  
+Examples: `p03_rs_basic.md`, `p03_rs_advanced.md`  
+
+## Paths  
+Artifacts stored in: `/artifacts/p03/rs/{{name}}/`  
+
+## Limits  
+max_bytes: 5120  
+max_turns: 10  
+effort_level: 3  
+
+## Hooks  
+pre_build: null  
+post_build: null  
+on_error: null  
+on_quality_fail: null

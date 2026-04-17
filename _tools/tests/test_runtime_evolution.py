@@ -242,7 +242,7 @@ def test_permission_scope_blocks():
     assert allowed is True
 
     allowed, reason = check_permission_scope(
-        "agent-builder", "N03_engineering/agents/foo.md", "restricted"
+        "agent-builder", "N03_engineering/P02_model/foo.md", "restricted"
     )
     assert allowed is False
 

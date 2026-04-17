@@ -1,0 +1,42 @@
+---
+id: bld_qg_bounded_context
+kind: quality_gate
+pillar: P11
+llm_function: GOVERN
+version: 1.0.0
+quality: 5.8
+tags: [bounded_context, quality-gate, ddd]
+title: "Quality Gate: bounded_context"
+density_score: 1.0
+updated: "2026-04-17"
+---
+# Quality Gate: bounded_context
+## HARD Gates
+| ID | Check | Fail Condition |
+|----|-------|----------------|
+| H01 | Frontmatter parses as valid YAML | Parse error |
+| H02 | id matches `^bc_[a-z][a-z0-9_]+$` | Wrong prefix or format |
+| H03 | kind == "bounded_context" | Wrong kind |
+| H04 | quality == null | Non-null value |
+| H05 | context_name present (PascalCase) | Missing or snake_case |
+| H06 | team_owner present and non-empty | Missing |
+| H07 | scope_statement present (> 20 chars) | Missing or stub |
+| H08 | Aggregates section with >= 1 aggregate | Missing section |
+| H09 | scope_statement is SEMANTIC (not technical) | "handles HTTP" or "service that..." |
+| H10 | Total file size <= 4096 bytes | Exceeds max_bytes |
+
+## SOFT Scoring
+| ID | Dimension | Weight | 10pts | 5pts | 0pts |
+|----|-----------|--------|-------|------|------|
+| S01 | Integration patterns documented | 1.0 | >= 1 pattern with rationale | Patterns listed, no rationale | Absent |
+| S02 | domain_vocabulary referenced | 0.9 | dv_{context}_vocabulary present | Reference exists | Absent |
+| S03 | Business rules stated | 0.8 | >= 1 invariant within BC | Implied by aggregates | Absent |
+| S04 | Domain events published | 0.7 | Events listed with consumers | Events listed | Absent |
+| S05 | Context map position | 0.6 | Upstream + downstream neighbors named | One direction | Absent |
+
+## Score Tiers
+| Score | Action |
+|-------|--------|
+| >= 9.0 | Publish to architecture docs; add to context map |
+| >= 7.0 | Use for planning; improve integration patterns |
+| < 7.0 | Return: add scope statement, aggregates, integration patterns |

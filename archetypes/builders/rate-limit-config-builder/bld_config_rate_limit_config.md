@@ -27,6 +27,8 @@ updated: "2026-04-07"
 density_score: 0.90
 ---
 # Config: rate_limit_config Production Rules
+
+This ISO encodes a rate limit policy -- throttle bounds, quota windows, and backoff behavior.
 ## Naming Convention
 | Scope | Convention | Example |
 |-------|-----------|---------|

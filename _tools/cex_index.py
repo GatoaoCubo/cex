@@ -10,6 +10,7 @@ import sqlite3
 import sys
 import time
 from pathlib import Path
+from typing import Any
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from cex_shared import parse_frontmatter as _shared_parse_frontmatter
@@ -42,7 +43,7 @@ def compute_density(text: str) -> float:
     return round(len(stripped) / len(text), 3) if len(text) > 0 else 0.0
 
 
-def init_db(conn: sqlite3.Connection):
+def init_db(conn: sqlite3.Connection) -> None:
     """Create tables if they don't exist."""
     conn.executescript("""
         DROP TABLE IF EXISTS files;
@@ -91,7 +92,7 @@ def scan_files(root: Path) -> list[Path]:
     return results
 
 
-def index_file(filepath: Path, root: Path) -> tuple[dict, list[tuple]]:
+def index_file(filepath: Path, root: Path) -> tuple[dict[str, Any], list[tuple[str, str, str]]]:
     """Parse a single file, return (file_row, edge_rows)."""
     rel = filepath.relative_to(root).as_posix()
     stat = filepath.stat()
@@ -149,7 +150,7 @@ def index_file(filepath: Path, root: Path) -> tuple[dict, list[tuple]]:
     return file_row, edge_rows
 
 
-def rebuild(verbose: bool = False):
+def rebuild(verbose: bool = False) -> None:
     """Full rebuild of the index."""
     DB_DIR.mkdir(parents=True, exist_ok=True)
     conn = sqlite3.connect(str(DB_PATH))
@@ -195,7 +196,7 @@ def rebuild(verbose: bool = False):
     conn.close()
 
 
-def show_stats():
+def show_stats() -> None:
     """Print index statistics."""
     conn = sqlite3.connect(str(DB_PATH))
     total = conn.execute("SELECT COUNT(*) FROM files").fetchone()[0]
@@ -240,7 +241,7 @@ def show_stats():
     conn.close()
 
 
-def query(expression: str):
+def query(expression: str) -> None:
     """Run a simple field=value query against the files table."""
     conn = sqlite3.connect(str(DB_PATH))
     # Parse simple expressions: field=value, field>value, field<value
@@ -286,7 +287,7 @@ def query(expression: str):
     conn.close()
 
 
-def orphans():
+def orphans() -> None:
     """Find files with no incoming wikilinks."""
     conn = sqlite3.connect(str(DB_PATH))
     rows = conn.execute("""
@@ -303,7 +304,7 @@ def orphans():
     conn.close()
 
 
-def main():
+def main() -> None:
     parser = argparse.ArgumentParser(description="CEX SQLite Indexer")
     parser.add_argument("--query", "-q", help="Query: field=value (e.g. type=knowledge_card)")
     parser.add_argument("--orphans", action="store_true", help="Show files with no incoming links")

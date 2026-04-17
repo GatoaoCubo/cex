@@ -19,6 +19,7 @@ hooks:
   on_error: null
   on_quality_fail: null
 permission_scope: nucleus
+title: Config ISO - retriever
 ---
 # Config: retriever Production Rules
 

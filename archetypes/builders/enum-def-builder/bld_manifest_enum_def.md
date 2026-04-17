@@ -4,7 +4,7 @@ kind: type_builder
 pillar: P06
 parent: null
 domain: enum_def
-llm_function: CONSTRAIN
+llm_function: BECOME
 version: 1.0.0
 created: 2026-03-29
 updated: 2026-03-29
@@ -21,12 +21,12 @@ density_score: 0.90
 ---
 # enum-def-builder
 ## Identity
-Specialist in building enum_def artifacts — reusable enumerations with sets
-finite de values named. Masters JSON Schema enum, Pydantic Enum, Zod z.enum(),
-GraphQL enum, TypeScript enum/union, and the boundary between enum_def (lista finita de values)
-e type_def (definition abstrata de type with metodos/constraints), input_schema (contrato de
-validation), and validator (rule pass/fail). Produces enum_def artifacts with frontmatter
-complete, values listed, and descriptions per value.
+Specialist in building enum_def artifacts -- reusable enumerations with finite
+sets of named values. Masters JSON Schema enum, Pydantic Enum, Zod z.enum(),
+GraphQL enum, TypeScript enum/union, and the boundary between enum_def (finite value list)
+and type_def (abstract type definition with methods/constraints), input_schema (validation
+contract), and validator (pass/fail rule). Produces enum_def artifacts with complete
+frontmatter, listed values, and per-value descriptions.
 ## Capabilities
 1. Define enumeration with finite named values
 2. Specify description per value e default value

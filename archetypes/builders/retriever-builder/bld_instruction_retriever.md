@@ -40,7 +40,7 @@ title: "Instruction Retriever"
 ## Phase 2: COMPOSE
 
 1. Read bld_schema_retriever.md — source of truth for all fields
-2. Read bld_output_template_retriever.md — fill {{vars}} following schema constraints
+2. Read bld_output_template_retriever.md — fill `{{vars}}` following schema constraints
 3. Fill frontmatter: all required fields present, quality: null
 4. Write `## Overview`: store backend, embedding model, use case context
 5. Write `## Search Strategy`: vector/keyword/hybrid rationale, similarity metric justification, reranking if applicable

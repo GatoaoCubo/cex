@@ -3,11 +3,12 @@ id: spec_claude_native_hardening
 kind: context_doc
 title: "Mission CLAUDE_NATIVE: Harden CEX for Claude Code Runtime"
 version: 1.0.0
-quality: null
+quality: 9.0
 created: 2026-04-08
 mission: CLAUDE_NATIVE
 waves: 3
 nuclei: [n01, n02, n03, n04, n05, n06]
+density_score: 0.93
 ---
 
 # Mission: CLAUDE_NATIVE_HARDENING
@@ -47,8 +48,8 @@ Must complete before Wave 2. Fixes the runtime and tools other nuclei depend on.
    - Any missing --flags that improve operations
 
 ### N03: Clean PI from Builders + Shared ISOs
-1. **Spawn configs**: Fix `N03_builder/orchestration/spawn_config_builder.md`
-   and `N04_knowledge/orchestration/spawn_config_knowledge.md` — replace
+1. **Spawn configs**: Fix `N03_builder/P12_orchestration/spawn_config_builder.md`
+   and `N04_knowledge/P12_orchestration/spawn_config_knowledge.md` — replace
    `pi --model` with `claude --model`.
 2. **Shared ISOs**: Scan `archetypes/builders/_shared/` for PI references.
 3. **Agent definitions**: Scan `.claude/agents/` for any PI-specific patterns.

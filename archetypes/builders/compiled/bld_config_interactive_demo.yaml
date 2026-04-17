@@ -1,0 +1,22 @@
+kind: config
+id: bld_config_interactive_demo
+pillar: P09
+llm_function: CONSTRAIN
+purpose: Naming, paths, limits for interactive_demo production
+quality: null
+title: Config Interactive Demo
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- interactive_demo
+- builder
+- config
+tldr: Naming, paths, limits for interactive_demo production
+domain: interactive_demo construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+naming_convention: 'Pattern: `p05_id_{{name}}.md` Examples: `p05_id_demo1.md`, `p05_id_userflow.md`'
+paths: 'Artifacts: `/artifacts/p05/demos/{{name}}` Logs: `/logs/p05/{{name}}_build.log`'
+limits: 'max_bytes: 6144 max_turns: 10 effort_level: 3'
+hooks: 'pre_build: null post_build: null on_error: null on_quality_fail: null'

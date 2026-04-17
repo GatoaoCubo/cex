@@ -1,0 +1,1322 @@
+id: atom_28_code_agents
+kind: knowledge_card
+pillar: P01
+title: Code Agent Vocabulary Atlas -- Complete Taxonomy of AI Coding Agent Concepts
+version: 1.0.0
+created: 2026-04-13
+author: N01
+domain: code-agents
+quality: 8.9
+tags:
+- code-agent
+- edit-format
+- repo-map
+- sandbox
+- SWE-bench
+- Claude-Code
+- Codex
+- Aider
+- Cursor
+- Devin
+- Windsurf
+- OpenHands
+- subagent
+- lint-fix-loop
+- spec-to-code
+- claude-agent-sdk
+- pagerank
+- vm-isolation
+- decision-tree
+tldr: 'Complete vocabulary of the code agent ecosystem (2024-2026): 9 major platforms, 9 edit format families with code examples,
+  4 sandbox models, 3 context strategies, 2 inter-agent protocols. Maps 140+ terms to CEX kinds and proposes 8 new kinds.
+  Includes Agent SDK API, Aider PageRank internals, Cursor VM architecture, and agent selection decision tree.'
+1_platforms_surveyed: '| Platform | Vendor | Type | Open Source | Key Innovation |
+
+  |----------|--------|------|-------------|----------------|
+
+  | Claude Code | Anthropic | CLI agent | No | Subagents, hooks, CLAUDE.md, SDK headless mode |
+
+  | Codex CLI | OpenAI | CLI agent | Yes (Rust) | Sandbox modes, AGENTS.md hierarchy, CSV batch spawn |
+
+  | Aider | Paul Gauthier | Terminal pair programmer | Yes | 6 edit formats, repo map (tree-sitter + PageRank), architect
+  mode |
+
+  | Cursor | Anysphere | IDE agent | No | Background agents in VMs, Apply model, worktree isolation |
+
+  | Windsurf | Cognition (ex-Codeium) | IDE agent | No | Cascade flow awareness, implicit memory, multi-pane agents |
+
+  | Devin | Cognition | Autonomous agent | No | Full desktop environment, dynamic re-planning, PR merge rate |
+
+  | SWE-Agent | Princeton NLP | Research agent | Yes | Agent-Computer Interface (ACI), trajectory recording, YAML config |
+
+  | OpenHands | All Hands AI | Platform | Yes (MIT) | CodeAct unified action space, event-stream architecture, Docker sandbox
+  |
+
+  | Augment Code | Augment | Context engine | Partial (MCP) | Semantic dependency graph, 400K+ file indexing, cross-repo |
+
+
+  ---'
+2_edit_formats_complete_taxonomy: The mechanism by which an LLM communicates file changes to the host system.
+2_1_format_families: '| Format | Origin | Mechanism | Pros | Cons |
+
+  |--------|--------|-----------|------|------|
+
+  | Whole file | Aider | LLM returns entire file content | Simple, no matching errors | Slow, expensive for large files, encourages
+  lazy elision |
+
+  | Search/replace blocks | Aider (`diff`) | `<<<<<<< SEARCH` / `=======` / `>>>>>>> REPLACE` markers | Precise, compact |
+  Pattern matching can break with code evolution |
+
+  | Unified diff (udiff) | Aider | Modified `diff -U0` format with `@@` hunks | Standard tooling compatibility, reduces lazy
+  coding | High technical complexity for LLMs |
+
+  | Diff-fenced | Aider (Gemini) | Search/replace with filepath inside fence | Gemini-compatible | Gemini-specific workaround
+  |
+
+  | Editor-diff / editor-whole | Aider | Streamlined variants for architect mode | Separates planning from editing | Two-model
+  overhead |
+
+  | OpenAI patch | Codex | ` Begin Patch` / ` End Patch` with `@@` context | No line-number dependency | Codex-specific format
+  |
+
+  | Tool-based edits | Claude Code, OpenHands | Function calls (Read, Edit, Write tools) | Structured, validated, atomic |
+  Requires tool infrastructure |
+
+  | Sketch + Apply model | Cursor | Primary LLM sketches change; dedicated 7B model applies | Fast (10.5K tok/s), 98% accuracy
+  | Two-model pipeline |
+
+  | Semantic edit | Morph | AST-aware transformations, not text-based | 98% accuracy, scope-aware | Proprietary, limited availability
+  |'
+2_2_edit_application_strategies: '| Strategy | Used By | Description |
+
+  |----------|---------|-------------|
+
+  | Exact match | Aider, Codex | Search string must match file content exactly |
+
+  | Fuzzy match (Levenshtein) | RooCode, Aider fallback | Tolerate small differences in search block |
+
+  | Layered matching | RooCode | Exact -> whitespace-insensitive -> fuzzy cascade |
+
+  | Indentation-relative replacement | RooCode | Preserve surrounding indent context |
+
+  | Middle-out fuzzy | RooCode | Match from center of block outward |
+
+  | Fast Apply model | Cursor, Morph | Dedicated small model (7B) trained for code merge at 10.5K tok/s |
+
+  | Speculative decoding | Morph Fast Apply | CUDA-kernel-level optimization for apply speed |'
+2_3_concrete_format_examples_all_9_families: "1. Whole file — LLM returns the complete file after changes:\nshow_greeting.py\n\
+  ` ` `python\nimport sys\ndef greeting(name):\n    print(\"Hey\", name)\nif name == 'main':\n    greeting(sys.argv[1])\n\
+  ` ` `\n\n2. Search/replace (Aider `diff`) — most common Aider format:\nmathweb/flask/app.py\n` ` `python\n<<<<<<< SEARCH\n\
+  from flask import Flask\n=======\nimport math\nfrom flask import Flask\n>>>>>>> REPLACE\n` ` `\n\n3. Unified diff (`udiff`)\
+  \ — standard `-U0` variant:\n--- mathweb/flask/app.py\n+++ mathweb/flask/app.py\n@@ ... @@\n-class MathWeb:\n+import sympy\n\
+  +\n+class MathWeb:\n\n4. Diff-fenced — search/replace with filepath inside fence (Gemini variant):\n# filepath: mathweb/flask/app.py\n\
+  <<<<<<< SEARCH\nfrom flask import Flask\n=======\nimport math\nfrom flask import Flask\n>>>>>>> REPLACE\n\n5. Editor-diff\
+  \ / editor-whole — Same syntax as formats 2/1 but produced by a second, smaller model in Aider architect mode. Architect\
+  \ outputs plan; editor model produces final diffs.\n\n6. OpenAI patch (Codex):\n* Begin Patch\n* Update File: src/utils.py\n\
+  @@ def add(a, b):\n-    return a + b\n+    return int(a) + int(b)\n* End Patch\nNo line-number dependency; context lines\
+  \ anchor the hunk.\n\n7. Tool-based edits (Claude Code, OpenHands):\n{\"tool\": \"Edit\", \"file_path\": \"src/utils.py\"\
+  ,\n \"old_string\": \"return a + b\",\n \"new_string\": \"return int(a) + int(b)\"}\nStructured function call. Atomic. No\
+  \ diff syntax needed.\n\n8. Sketch + Apply model (Cursor):\n- Primary LLM outputs a \"sketch\" (loose prose description\
+  \ of the change)\n- Dedicated 7B apply model reads sketch + original file, produces merged output at 10.5K tok/s\n\n9. Semantic\
+  \ edit (Morph):\n- LLM specifies the change at the AST level (e.g., rename parameter in function scope)\n- Apply model transforms\
+  \ the AST -- scope-aware, 98% accuracy, robust to code evolution\n\n---"
+2_4_architect_mode_two_phase_editing: "Aider pioneered this pattern; Cursor and others adopted it.\n\nPhase 1: ARCHITECT (large\
+  \ model)     Phase 2: EDITOR (same or smaller model)\n  - Reads full context                 - Receives architect's plan\n\
+  \  - Reasons about approach             - Produces actual file edits\n  - Outputs high-level plan            - Uses editor-diff\
+  \ or editor-whole format\n  - Does NOT touch files               - Applies changes atomically\n\nCEX parallel: N07 (orchestrator/architect)\
+  \ dispatches to N03/N05 (editor/builder).\n\n---"
+3_codebase_context_strategies: How agents understand the repository beyond the current file.
+3_1_repo_map_aider: '| Component | Technology | Purpose |
+
+  |-----------|-----------|---------|
+
+  | AST parsing | Tree-sitter | Extract function/class definitions and references |
+
+  | Dependency graph | Custom graph builder | Map call relationships between symbols |
+
+  | Ranking | PageRank | Prioritize most-connected symbols |
+
+  | Output | Condensed text map | Fits in context window, provides symbol-level visibility |
+
+
+  The repo map provides symbol-level visibility without loading full file content. Aider automatically selects relevant context
+  based on the current chat.
+
+
+  #### 3.1a PageRank Algorithm — Implementation Detail
+
+
+  The repo map is the core reason Aider achieves higher edit accuracy than agents using naive file inclusion. The algorithm
+  runs in 5 stages:
+
+
+  Stage 1 — Tag extraction via tree-sitter
+
+  Each supported language has a `tags.scm` query file defining what counts as a definition (function/class declared) vs. a
+  reference (called/imported). Tree-sitter parses all files into ASTs; the query files extract tagged symbols with line numbers.
+  130+ languages supported.
+
+
+  Stage 2 — Multigraph construction
+
+  A directed multigraph is built:
+
+  - Node = file or symbol
+
+  - Edge = reference from one symbol to another
+
+  - Self-loop edges (weight=0.1) added for definitions with zero references (prevents isolated nodes from being ignored by
+  PageRank)
+
+
+  Stage 3 — Personalized PageRank via NetworkX
+
+  # Simplified from aider/repomap.py
+
+  import networkx as nx
+
+
+  G = build_reference_graph(tags)           # multigraph
+
+  personalization = {f: 1.0 for f in chat_files}  # files in current chat
+
+  ranked = nx.pagerank(G, personalization=personalization, weight="weight")
+
+  # Result: dict {symbol -> float score}, higher = more central
+
+  Files currently in the chat window receive boosted personalization scores, causing their callers/callees to rank higher
+  — context expands outward from current work.
+
+
+  Stage 4 — Token budget allocation via binary search
+
+  The ranked symbol list is too large for the context window. Aider uses binary search over the inclusion threshold to find
+  the largest subset that fits the token budget (configurable via `--map-tokens`, default 1024).
+
+
+  Stage 5 — Compact text output
+
+  Selected symbols are rendered as a tree outline (file path + function signatures only, no bodies). This gives the LLM structural
+  awareness of 10K+ symbol codebases in ~1K tokens.
+
+
+  | Metric | Value |
+
+  |--------|-------|
+
+  | Languages supported | 130+ |
+
+  | Default map token budget | 1,024 tokens |
+
+  | Graph algorithm | NetworkX `pagerank()` with personalization |
+
+  | Self-loop weight (isolated nodes) | 0.1 |
+
+  | Benchmark improvement vs no map | Significantly higher edit accuracy |
+
+
+  Source: Building a better repository map with tree-sitter'
+3_2_codebase_indexing_cursor_augment: '| Approach | Vendor | Scale | Method |
+
+  |----------|--------|-------|--------|
+
+  | Hybrid semantic-lexical | Cursor | Full project | Embedding + keyword index at project open |
+
+  | Semantic dependency graph | Augment Code | 400K+ files | Call graphs, dependency chains, cross-repo |
+
+  | Three-tier retrieval | Cline | Per-query | ripgrep (lexical) + fzf (fuzzy) + tree-sitter (AST) |
+
+  | Knowledge graph | Codebase-Memory MCP | 66 languages | Tree-sitter -> SQLite graph, 14 MCP query tools |
+
+  | Code review graph | code-review-graph | Per-repo | Persistent map, 6.8x fewer tokens on reviews |'
+3_3_context_window_management: '| Technique | Description | Used By |
+
+  |-----------|-------------|---------|
+
+  | Context pruning | Drop older/irrelevant messages from conversation | All agents |
+
+  | Subagent delegation | Offload research to separate context window | Claude Code, Codex |
+
+  | Repo map injection | Add condensed codebase overview to system prompt | Aider |
+
+  | Semantic retrieval | Query embeddings for relevant code chunks | Cursor, Augment |
+
+  | File watching | Re-index only changed files (content-hash based) | Augment, Codebase-Memory |
+
+
+  ---'
+4_task_files_configuration_as_context: 'Files that persist instructions across sessions, read by agents at startup.
+
+
+  | File | Agent | Location | Hierarchy |
+
+  |------|-------|----------|-----------|
+
+  | CLAUDE.md | Claude Code | Root, `.claude/`, `~/.claude/` | Project > directory > user-level |
+
+  | AGENTS.md | Codex CLI | Root + subdirectories | Global -> project root -> cwd (walk down) |
+
+  | AGENTS.override.md | Codex CLI | Same locations | Overrides AGENTS.md at same level |
+
+  | .cursorrules | Cursor | Project root | Single file (legacy) |
+
+  | .cursor/rules/*.mdc | Cursor | Project `.cursor/` dir | Multiple rule files, versioned |
+
+  | Rules & Memory | Windsurf | Settings | Cascade learns conventions over ~48h |
+
+  | .windsurfrules | Windsurf | Project root | Project-level instructions |
+
+  | config.yaml | SWE-Agent | Repo root | Single YAML governs entire agent behavior |'
+key_design_patterns: '| Pattern | Description | Example |
+
+  |---------|-------------|---------|
+
+  | Hierarchical override | More specific files override general ones | Codex: global AGENTS.md < project AGENTS.md < subdir
+  AGENTS.md |
+
+  | Separation of concerns | Different file for different rule types | Cursor: project rules, user rules, team rules, agent
+  rules |
+
+  | Implicit learning | Agent builds memory from usage patterns | Windsurf: ~48h to learn architecture patterns |
+
+  | Compound memory | Multiple channels persist knowledge | AGENTS.md + git history + progress logs + task JSON |
+
+
+  ---'
+5_sandbox_and_isolation_models: 'How agents execute code safely.
+
+
+  | Model | Agent | Isolation | Network | Persistence |
+
+  |-------|-------|-----------|---------|-------------|
+
+  | Local sandbox (macOS Seatbelt/Linux Landlock) | Codex CLI | OS-level policy per command | Configurable (deny/allow) |
+  Working directory only |
+
+  | Docker container | OpenHands, SWE-Agent | Container per session | Configurable | Ephemeral by default |
+
+  | Cloud VM | Cursor Background Agents, Devin | Ubuntu VM per agent | Full internet | Branch + PR output |
+
+  | Git worktree | Cursor, Claude Code | Filesystem isolation via git | Local | Separate branch |
+
+  | Approval gates | Claude Code, Codex | Human-in-the-loop before dangerous ops | N/A | N/A |'
+codex_sandbox_modes: '| Mode | Reads | Writes | Commands | Network |
+
+  |------|-------|--------|----------|---------|
+
+  | Read-only | Yes | Approval needed | Approval needed | No |
+
+  | Auto (default) | Yes | Yes (in workdir) | Yes (in workdir) | No |
+
+  | Full access | Yes | Yes (anywhere) | Yes (anywhere) | Yes |
+
+  | YOLO | Yes | Yes | Yes (no approval) | Yes |'
+cursor_background_agent_architecture: "User starts task in Cursor\n  |\n  v\nCloud VM provisioned (Ubuntu on AWS)\n  |-- Repo\
+  \ cloned from GitHub\n  |-- Dockerfile applied (custom base image, optional)\n  |-- setup.sh executed (deps installed, services\
+  \ started)\n  |-- Agent works on feature branch\n  |-- Tests executed in VM\n  |-- Video recording of session (since Feb\
+  \ 2026)\n  |-- Browser / Computer Use access (since Feb 2026)\n  |\n  v\nPR created on GitHub\n  |-- User reviews in Cursor\
+  \ or GitHub\n  |-- Up to 8 parallel agents\n\n#### VM Isolation Specification\n\n| Property | Value |\n|----------|-------|\n\
+  | Infrastructure | AWS (Ubuntu-based VMs) |\n| Network | Full internet access (configurable) |\n| Storage | Ephemeral VM\
+  \ disk; output via PR |\n| Configuration file | `.cursor/environment.json` (committable) |\n| Custom base image | Dockerfile\
+  \ supported |\n| Post-checkout setup | `setup.sh` script |\n| Docker-in-Docker | Supported via `sudo service docker start`\
+  \ in setup.sh |\n| Parallel agents | Up to 8 per project |\n| Computer Use | Browser + video recording (Feb 2026 update)\
+  \ |\n| Secrets injection | Via Cursor settings, NOT in Dockerfile |\n\n`.cursor/environment.json` example:\n{\n  \"build\"\
+  : {\n    \"dockerfile\": \".cursor/Dockerfile\"\n  },\n  \"startScript\": \".cursor/setup.sh\"\n}\n\nKey isolation properties\
+  \ vs alternatives:\n- More persistent than Codex sandbox (VM survives across steps; Codex resets per command)\n- More capable\
+  \ than Claude Code worktree (full OS, not just filesystem branch)\n- Less controllable than OpenHands Docker (no direct\
+  \ container config beyond Dockerfile)\n\nSource: Cursor Background Agents docs\n\n---"
+6_multi_file_edit_coordination: 'Patterns for agents editing multiple files in a single task.
+
+
+  | Pattern | Description | Used By |
+
+  |---------|-------------|---------|
+
+  | Atomic multi-file commit | All file changes committed together | Claude Code (git add + commit) |
+
+  | Fan-out edit | Single intent produces edits across N files | Aider (auto-adds related files via repo map) |
+
+  | Worktree isolation | Each agent works in separate git worktree | Cursor 3 (`/worktree` command) |
+
+  | Proposal pattern | Write `.proposal` files, merge post-wave | CEX (shared-file-proposal rule) |
+
+  | Sequential file processing | Edit files one-by-one with tool calls | Claude Code, Codex (tool-based edits) |
+
+  | Sketch-then-apply | Plan all changes first, apply in batch | Cursor (architect + apply model) |
+
+  | Dependency-aware ordering | Edit in topological order of imports | Augment Code (dependency graph) |
+
+
+  ---'
+7_agent_loop_patterns: The core execution cycle of code agents.
+7_1_standard_agent_loop_react: 'OBSERVE  ->  THINK  ->  ACT  ->  OBSERVE  ->  ...
+
+  (read file)  (plan)  (edit/run)  (check result)'
+7_2_named_loop_variants: '| Pattern | Description | Source |
+
+  |---------|-------------|-------|
+
+  | Lint-fix loop | Run linter -> collect errors -> fix -> re-run until clean | Common in all agents |
+
+  | Test-repair cycle | Run tests -> parse failures -> fix code -> re-test -> commit | RepairAgent, SWE-Agent |
+
+  | Spec-to-code | Read specification -> generate code -> validate against spec | Intent (Augment), Devin |
+
+  | Bugloop | Detect bug -> localize fault -> generate patch -> verify fix | CEX bugloop kind, RepairAgent |
+
+  | Self-evaluation loop | Generate -> score own output -> revise if below threshold | Claude Code (8F F7 GOVERN) |
+
+  | Backtracking loop | Generate -> detect syntax error -> revert -> retry with context | ROCODE |
+
+  | Ralph Wiggum technique | Pick task -> implement -> validate -> commit -> reset context -> next task | Addy Osmani blog
+  |
+
+  | Continuous coding loop | Task selection -> implementation -> validation -> commit -> progress log -> repeat | Self-improving
+  agents pattern |'
+7_3_multi_agent_orchestration_patterns: '| Pattern | Description | Used By |
+
+  |---------|-------------|---------|
+
+  | Planner-Worker | Planner agent strategizes; worker agents implement | Devin, CEX (N07 + N01-N06) |
+
+  | Best-of-N | N agents generate competing solutions; pick best | Cursor 3 |
+
+  | Wave dispatch | Groups of agents run in dependency-ordered waves | CEX (mission_runner) |
+
+  | Parallel worktree | Each agent in isolated git worktree, merged after | Cursor, Intent |
+
+  | Hierarchical delegation | Parent spawns child agents for subtasks | Claude Code subagents, Codex subagents |
+
+  | Compound loops | Analysis -> Planning -> Execution chained across agents | Multi-agent pattern |
+
+
+  ---'
+8_background_headless_autonomous_agents: '| Capability | Claude Code | Codex CLI | Cursor | Devin |
+
+  |-----------|-------------|-----------|--------|-------|
+
+  | Headless mode | `-p` flag (stdout, exit) | `exec` subcommand | Background agents | Always headless |
+
+  | SDK integration | Claude Agent SDK | Agents SDK | API (limited) | Slack/web interface |
+
+  | Parallel agents | Subagents (5 per nucleus) | `max_threads: 6` | 8 worktree agents | 1 per session |
+
+  | Session persistence | Context window | Transcript + plan history | VM state + branch | Full environment |
+
+  | Output mechanism | Files + git commits | Files + git commits | PR on GitHub | PR on GitHub |
+
+  | Monitoring | Hooks (PreToolUse, PostToolUse, Stop) | Approval queue | Agent dashboard | Session playback |
+
+
+  ---'
+9_code_review_agent_patterns: '| Pattern | Description | Tools |
+
+  |---------|-------------|-------|
+
+  | Diff review | Analyze uncommitted changes or branch diff | Codex (`--review`), Claude Code |
+
+  | PR review | Comment on pull request changes | GitHub Copilot, Claude Code (gh CLI) |
+
+  | Inline annotation | Add comments at specific lines | Cursor, Copilot |
+
+  | Security scan | Check for vulnerabilities in changes | Augment, SonarQube integration |
+
+  | Style enforcement | Verify code matches project conventions | .cursorrules, CLAUDE.md rules |
+
+  | Graph-aware review | Use dependency graph to assess impact | Augment Context Engine, code-review-graph |
+
+
+  ---'
+10_inter_agent_protocols: '| Protocol | Scope | Purpose | Status (2026) |
+
+  |----------|-------|---------|---------------|
+
+  | MCP (Model Context Protocol) | Agent <-> Tools | Standardize tool access for LLMs | Anthropic standard, widely adopted
+  |
+
+  | A2A (Agent2Agent Protocol) | Agent <-> Agent | Inter-agent communication and task delegation | Google/Linux Foundation,
+  v0.3, 150+ orgs |
+
+  | Agent Cards (A2A) | Discovery | JSON-LD metadata describing agent capabilities | Part of A2A spec |
+
+  | Signals (CEX) | Nucleus <-> Nucleus | Completion/status notification via JSON files | CEX internal |
+
+  | Handoffs (CEX) | N07 <-> N0x | Task delegation with full context | CEX internal |
+
+
+  ---'
+11_benchmarks_and_evaluation: '| Benchmark | Focus | Scale | Key Metric |
+
+  |-----------|-------|-------|------------|
+
+  | SWE-bench | GitHub issue resolution | 2,294 issue-PR pairs, 12 Python repos | % issues resolved |
+
+  | SWE-bench Verified | Curated subset | ~500 verified instances | % resolved (top: ~75%) |
+
+  | SWE-bench++ | Multi-language | 11 languages, 3,971 repos, 11,133 instances | Cross-language resolution |
+
+  | SWE-EVO | Long-horizon evolution | Multi-commit sequences | Sustained quality over time |
+
+  | DPAI Arena | Developer productivity | JetBrains, multi-language | Comparative agent ranking |
+
+  | Aider edit leaderboard | Edit accuracy per model | All major LLMs | % correct edits, cost per edit |
+
+
+  ---'
+12_complete_glossary_140_terms: ''
+a: '| Term | Definition | Domain |
+
+  |------|-----------|--------|
+
+  | ACI (Agent-Computer Interface) | The set of tools/commands available to an agent for interacting with code | SWE-Agent
+  |
+
+  | Action space | Range of operations an agent can perform (edit, run, navigate, git) | SWE-Agent, RL |
+
+  | AGENTS.md | Instruction file for Codex CLI, hierarchical override support | Codex |
+
+  | AGENTS.override.md | Higher-priority override for AGENTS.md at same directory level | Codex |
+
+  | Agent card | JSON-LD metadata describing agent capabilities (A2A protocol) | A2A, CEX |
+
+  | Agent teams | Multiple agents coordinating across separate sessions | Claude Code |
+
+  | Apply model | Dedicated small model (7B) that merges LLM edits into files | Cursor, Morph |
+
+  | Approval gate | Human-in-the-loop checkpoint before dangerous operations | Codex, Claude Code |
+
+  | Architect mode | Two-phase: large model plans, smaller model edits | Aider |'
+b: '| Term | Definition | Domain |
+
+  |------|-----------|--------|
+
+  | Background agent | Agent running asynchronously in cloud VM or separate process | Cursor, Devin |
+
+  | Backtracking | Reverting failed edit and retrying with error context | ROCODE |
+
+  | Best-of-N | Generate N competing solutions, select best | Cursor 3 |
+
+  | Bugloop | Automated detect -> fix -> verify cycle for defects | CEX kind |'
+c: '| Term | Definition | Domain |
+
+  |------|-----------|--------|
+
+  | Cascade | Windsurf''s AI agent engine with flow awareness | Windsurf |
+
+  | CLAUDE.md | Persistent instruction file for Claude Code sessions | Claude Code |
+
+  | CodeAct | Unified code action space -- all agent actions expressed as code | OpenHands |
+
+  | Compound learning | 4 memory channels: git + logs + task JSON + knowledge base | Self-improving agents |
+
+  | Context pruning | Removing older/irrelevant messages to fit context window | All agents |
+
+  | Context window | Maximum token capacity of the model during a session | All LLMs |
+
+  | Continuous coding loop | Select task -> implement -> validate -> commit -> log -> repeat | Pattern |
+
+  | .cursorrules | Project-level instruction file for Cursor (legacy) | Cursor |'
+d: '| Term | Definition | Domain |
+
+  |------|-----------|--------|
+
+  | Diff-fenced | Aider edit format with filepath inside code fence (for Gemini) | Aider |
+
+  | Diff review | Analyzing code changes (staged, unstaged, or branch diff) | Codex, all |
+
+  | Draft editor | LLM-based line-range targeting edit mode | OpenHands |
+
+  | Dynamic re-planning | Changing execution strategy mid-task when blocked | Devin v3 |'
+e: '| Term | Definition | Domain |
+
+  |------|-----------|--------|
+
+  | Edit format | The protocol by which an LLM communicates file changes | Aider, all |
+
+  | Editor-diff | Streamlined diff variant for architect mode | Aider |
+
+  | Event-stream architecture | Modeling agent-environment interaction as event sequence | OpenHands |'
+f: '| Term | Definition | Domain |
+
+  |------|-----------|--------|
+
+  | Fan-out edit | Single intent producing edits across multiple files | Aider, Cursor |
+
+  | Fast Apply | 7B model merging edits at 10.5K tok/s with 98% accuracy | Morph |
+
+  | Flow awareness | Tracking user actions (edits, commands, clipboard) to infer intent | Windsurf |
+
+  | Full access mode | Sandbox mode with unrestricted file/network permissions | Codex |
+
+  | Function calling | Structured tool invocation (vs free-form text output) | Claude Code, OpenHands |
+
+  | Fuzzy matching | Tolerating small differences when locating edit targets | RooCode, Aider |'
+g: '| Term | Definition | Domain |
+
+  |------|-----------|--------|
+
+  | Git worktree | Isolated working directory on separate branch for parallel work | Cursor 3, git |'
+h: '| Term | Definition | Domain |
+
+  |------|-----------|--------|
+
+  | Handoff | Task delegation document with full context (CEX: N07 -> N0x) | CEX, multi-agent |
+
+  | Headless mode | Agent running without UI, output via stdout or files | Claude Code (`-p`), Codex (`exec`) |
+
+  | Hooks | Event callbacks (PreToolUse, PostToolUse, Stop) for agent control | Claude Code, Codex |
+
+  | Human-in-the-loop | Requiring user approval at defined checkpoints | All agents |'
+i_k: '| Term | Definition | Domain |
+
+  |------|-----------|--------|
+
+  | Implicit memory | Agent learning conventions from usage without explicit instruction | Windsurf (~48h) |
+
+  | Intent resolution | Mapping vague user input to structured action (kind, pillar, tool) | CEX, NLU |'
+l: '| Term | Definition | Domain |
+
+  |------|-----------|--------|
+
+  | Layered matching | Exact -> whitespace-insensitive -> fuzzy cascade for edit application | RooCode |
+
+  | Lint-fix loop | Run linter -> parse errors -> fix -> re-lint until clean | All agents |'
+m: '| Term | Definition | Domain |
+
+  |------|-----------|--------|
+
+  | MCP (Model Context Protocol) | Standard for LLM-tool interop (Anthropic) | Anthropic, ecosystem |
+
+  | Middle-out fuzzy | Matching from center of code block outward | RooCode |
+
+  | Multi-file coordination | Editing multiple files atomically in single task | All agents |'
+n_o: '| Term | Definition | Domain |
+
+  |------|-----------|--------|
+
+  | Non-interactive execution | Running agent without user confirmation prompts | Codex (`exec`), Claude Code (`-p`) |
+
+  | Observation space | Information returned from tool execution (file content, errors, state) | SWE-Agent, RL |
+
+  | OpenAI patch format | ` Begin Patch` / ` End Patch` edit syntax | Codex |'
+p: '| Term | Definition | Domain |
+
+  |------|-----------|--------|
+
+  | PageRank (repo map) | Ranking symbols by graph connectivity for context selection | Aider |
+
+  | Plan approval | User reviews agent''s plan before execution begins | Codex, Cursor |
+
+  | Planner-Worker model | Hierarchical: planner strategizes, workers implement | Devin, CEX |
+
+  | Proposal pattern | Writing change proposals for post-wave merge (concurrent safety) | CEX |'
+r: '| Term | Definition | Domain |
+
+  |------|-----------|--------|
+
+  | ReAct loop | Observe -> Think -> Act -> Observe cycle | Standard agent pattern |
+
+  | Repo map | Condensed representation of codebase structure for context | Aider (tree-sitter + PageRank) |'
+s: '| Term | Definition | Domain |
+
+  |------|-----------|--------|
+
+  | Sandbox | Isolated execution environment for agent-generated code | All agents |
+
+  | Search/replace block | Edit format using `SEARCH`/`REPLACE` markers | Aider `diff` format |
+
+  | Semantic dependency graph | AST-level mapping of code relationships across files | Augment Code |
+
+  | Semantic edit | Code transformation based on AST understanding, not text | Morph |
+
+  | Session resumption | Restoring agent state from prior conversation | Codex, Claude Code |
+
+  | Sketch + Apply | Two-phase: LLM sketches change, small model applies it | Cursor |
+
+  | Spec-to-code | Generating implementation from specification document | Intent, Devin |
+
+  | Speculative decoding | CUDA-level optimization predicting likely next tokens | Morph Fast Apply |
+
+  | Subagent | Specialized child agent with own context window and tools | Claude Code, Codex |
+
+  | SWE-bench | Benchmark: resolve real GitHub issues in Python repos | Princeton NLP |'
+t: '| Term | Definition | Domain |
+
+  |------|-----------|--------|
+
+  | Task file | Persistent instruction file read at agent startup | CLAUDE.md, AGENTS.md, .cursorrules |
+
+  | Test-repair cycle | Run tests -> parse failures -> fix -> re-test until green | RepairAgent, all |
+
+  | Tool-based edit | File changes via structured function calls (Read, Edit, Write) | Claude Code |
+
+  | Trajectory | Complete record of agent actions for a task (states + actions + observations) | SWE-Agent |
+
+  | Tree-sitter | Incremental parser generator for AST extraction (66+ languages) | Aider, Cline, Codebase-Memory |'
+u_w: '| Term | Definition | Domain |
+
+  |------|-----------|--------|
+
+  | Unified diff (udiff) | Standard patch format adapted for LLM edits | Aider |
+
+  | Wave dispatch | Dependency-ordered groups of parallel agent executions | CEX |
+
+  | Whole file format | LLM returns complete file content as edit mechanism | Aider |
+
+  | Worktree isolation | Each parallel agent in separate git worktree | Cursor 3 |
+
+  | Writable roots | Multiple project directories an agent can modify | Codex (`--add-dir`) |'
+y: '| Term | Definition | Domain |
+
+  |------|-----------|--------|
+
+  | YOLO mode | No approval, no sandbox, full access | Codex CLI |
+
+
+  ---'
+13_cex_kind_mapping: ''
+existing_cex_kinds_that_map_directly: '| Industry Term | CEX Kind | Pillar | Notes |
+
+  |---------------|----------|--------|-------|
+
+  | Sandbox / code executor | `code_executor` | P04 | Docker, E2B, Jupyter runtime |
+
+  | Lint-fix loop / test-repair cycle | `bugloop` | P11 | Detect -> fix -> verify |
+
+  | CLI agent tool | `cli_tool` | P04 | Aider, Codex CLI as tools |
+
+  | Agent definition | `agent` | P02 | Persona + capabilities |
+
+  | Agent deployment spec | `agent_card` | P08 | A2A-compatible capability card |
+
+  | Background process | `daemon` | P04 | Background agent process |
+
+  | MCP tool server | `mcp_server` | P04 | Tool provider for agents |
+
+  | Browser automation | `browser_tool` | P04 | Devin desktop use, browser agents |
+
+  | Desktop automation | `computer_use` | P04 | Devin 2.2 desktop capability |
+
+  | Quality validation | `quality_gate` | P11 | F7 GOVERN pattern |
+
+  | Task scheduling | `schedule` | P12 | Wave dispatch timing |
+
+  | Workflow definition | `workflow` | P12 | Agent loop orchestration |
+
+  | Process optimizer | `optimizer` | P11 | Self-improving agent patterns |
+
+  | System prompt | `system_prompt` | P03 | CLAUDE.md, AGENTS.md content |
+
+  | Scoring criteria | `scoring_rubric` | P07 | SWE-bench evaluation |
+
+  | Benchmark | `benchmark` | P07 | SWE-bench, DPAI Arena |'
+proposed_new_cex_kinds_8: '| Proposed Kind | Pillar | Description | Boundary | Industry Source |
+
+  |---------------|--------|-------------|----------|----------------|
+
+  | `edit_format` | P06 | Schema defining how LLM communicates file changes (search/replace, udiff, whole, patch) | NOT a
+  formatter (P05, output rendering) nor a parser (P05, input parsing). Defines the wire protocol between LLM and file system.
+  | Aider 6 formats, Codex patch, Cursor sketch |
+
+  | `repo_map` | P10 | Condensed codebase representation for context injection (tree-sitter AST + PageRank ranking) | NOT
+  an embedding_config (vector index) nor a knowledge_index (text search). Graph-based symbol map. | Aider repo map, Augment
+  dependency graph |
+
+  | `sandbox_config` | P09 | Execution environment isolation policy (permissions, network, filesystem scope) | NOT an env_config
+  (runtime vars) nor a rate_limit_config (throttling). Defines security boundary. | Codex sandbox modes, Docker, VM isolation
+  |
+
+  | `task_file` | P03 | Persistent instruction file read by agents at session start (CLAUDE.md, AGENTS.md, .cursorrules) |
+  NOT a system_prompt (injected per-call) nor a context_doc (reference material). File-based agent configuration. | Claude
+  Code, Codex, Cursor, Windsurf |
+
+  | `apply_model` | P02 | Specialized small model trained to merge LLM edits into source files accurately and fast | NOT a
+  model_provider (API config) nor a fallback_chain (routing). Purpose-trained edit applicator. | Morph Fast Apply 7B, Cursor
+  apply model |
+
+  | `trajectory` | P07 | Complete recorded sequence of agent actions for replay, evaluation, or training | NOT a learning_record
+  (post-hoc lesson) nor a trace_config (logging setup). Full state-action-observation sequence. | SWE-Agent trajectory, OpenHands
+  events |
+
+  | `agent_protocol` | P06 | Inter-agent communication standard (A2A, MCP, signals) | NOT an interface (code contract) nor
+  a webhook (HTTP callback). Protocol spec for agent interop. | Google A2A, Anthropic MCP |
+
+  | `worktree_config` | P09 | Git worktree isolation configuration for parallel agent execution | NOT a spawn_config (process
+  launch) nor a path_config (directory layout). Branch isolation for concurrent agents. | Cursor 3 /worktree, git worktree
+  |
+
+
+  ---'
+14_cross_reference_cex_8f_pipeline_vs_industry_patterns: '| CEX 8F Stage | Industry Pattern | Agents Using It |
+
+  |--------------|-----------------|-----------------|
+
+  | F1 CONSTRAIN | Intent resolution, query rewriting | All (implicit) |
+
+  | F2 BECOME | Agent persona loading, system prompt injection | Claude Code (subagent .md), Codex (AGENTS.md) |
+
+  | F3 INJECT | Repo map, semantic retrieval, RAG, codebase indexing | Aider, Cursor, Augment |
+
+  | F4 REASON | Plan generation, architect mode, ReAct reasoning | Aider architect, Cursor planning, Devin |
+
+  | F5 CALL | Tool use (MCP), function calling, shell execution | All agents |
+
+  | F6 PRODUCE | Code generation via edit format (diff, whole, tool-based) | All agents |
+
+  | F7 GOVERN | Lint-fix loop, test-repair cycle, self-evaluation | All agents (implicit or explicit) |
+
+  | F8 COLLABORATE | Git commit, PR creation, signal completion | All agents |
+
+
+  ---'
+15_maturity_landscape_april_2026: '| Capability | Mature | Emerging | Early |
+
+  |-----------|--------|----------|-------|
+
+  | Single-file edits | All agents | - | - |
+
+  | Multi-file coordination | Claude Code, Cursor, Aider | Codex, OpenHands | - |
+
+  | Background/headless | Cursor, Devin, Claude Code SDK | Codex exec | OpenHands |
+
+  | Parallel agents | Cursor (8), Claude Code (subagents) | Codex (6 threads) | SWE-Agent |
+
+  | Codebase understanding | Augment (400K files) | Cursor index, Aider repo map | SWE-Agent |
+
+  | Inter-agent protocol | MCP (tools) | A2A v0.3 (agents) | CEX signals |
+
+  | Self-improving loops | Pattern documented | Claude Code 8F, Aider architect | RepairAgent |
+
+  | Semantic edits | Morph (98%) | Cursor apply model | Research |
+
+
+  ---'
+16_claude_code_agent_sdk_api_reference: The Claude Code SDK was renamed to the Claude Agent SDK (Q1 2026), with docs reorganized
+  to reflect broader agent capabilities beyond coding tasks.
+16_1_headless_cli_p_print_flag: '# Single-shot: prompt via flag, output to stdout, exit
+
+  claude -p "Review this diff and list all bugs" < diff.txt
+
+
+  # Structured output (machine-readable)
+
+  claude -p "List all TODO comments" --output-format json
+
+
+  # Real-time streaming (newline-delimited JSON events)
+
+  claude -p "Refactor this function" --output-format stream-json
+
+
+  # Remote mode: headless server controlled via REST/WebSocket (Q1 2026)
+
+  claude --remote --api-key $MY_API_KEY
+
+
+  | Flag | Behavior |
+
+  |------|----------|
+
+  | `-p` / `--print` | Non-interactive; print to stdout, exit |
+
+  | `--output-format text` | Plain text (default) |
+
+  | `--output-format json` | Final JSON result block |
+
+  | `--output-format stream-json` | Newline-delimited JSON event stream |
+
+  | `--remote` | Start headless server with REST + WebSocket API |
+
+  | `--no-conversation` | Bare mode (recommended for scripts, future default for `-p`) |'
+16_2_python_sdk: "import asyncio\nfrom claude_agent_sdk import query, ClaudeAgentOptions  # renamed from ClaudeCodeOptions\n\
+  \nasync def main():\n    options = ClaudeAgentOptions(\n        max_turns=10,\n        system_prompt=\"You are a security-focused\
+  \ code reviewer.\",\n        allowed_tools=[\"Read\", \"Grep\", \"Bash\"],\n        include_partial_messages=True,  # required\
+  \ for streaming events\n    )\n    async for message in query(\n        prompt=\"Review all Python files in src/ for SQL\
+  \ injection\",\n        options=options,\n    ):\n        if message.type == \"assistant\":\n            print(message.content)\n\
+  \        elif message.type == \"result\":\n            print(f\"Done. Cost: {message.usage}\")\n\nasyncio.run(main())\n\n\
+  Requirements: Python 3.10+, Node.js, Claude Code CLI installed."
+16_3_typescript_sdk: "import { query, ClaudeAgentOptions } from \"@anthropic-ai/claude-agent-sdk\";\n\nconst options: ClaudeAgentOptions\
+  \ = {\n  maxTurns: 10,\n  systemPrompt: \"Security-focused code reviewer\",\n  allowedTools: [\"Read\", \"Grep\"],\n};\n\
+  \nfor await (const message of query({\n  prompt: \"Find all hardcoded credentials in this repo\",\n  options,\n})) {\n \
+  \ if (message.type === \"assistant\") {\n    console.log(message.content);\n  }\n}\n\nSimplified `send()` / `stream()` patterns\
+  \ available for single-call use."
+16_4_ci_cd_integration: "# .github/workflows/ai-review.yml\njobs:\n  ai-review:\n    runs-on: ubuntu-latest\n    steps:\n\
+  \      - uses: actions/checkout@v4\n      - run: npm install -g @anthropic-ai/claude-code\n      - run: claude -p \"Review\
+  \ the diff for bugs\" --output-format json\n        env:\n          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}"
+16_5_sdk_vs_cli_comparison: '| Dimension | CLI (`-p`) | SDK (Python/TS) | Remote (`--remote`) |
+
+  |-----------|-----------|-----------------|---------------------|
+
+  | Invocation | Shell command | Library call | HTTP / WebSocket |
+
+  | Multi-turn | No | Yes (max_turns) | Yes (stateful) |
+
+  | Streaming | `stream-json` flag | Event loop | WebSocket stream |
+
+  | Subagents | Yes (default) | Yes (via tools) | Yes |
+
+  | Best for | Scripts, CI/CD | Embedded agents | Server deployments |
+
+
+  ---'
+17_code_agent_selection_decision_tree: ''
+17_1_by_primary_workflow: "What is your primary workflow?\n  |\n  +-- IDE-based daily coding\n  |     -> Cursor (best UX,\
+  \ inline completions, background agents, $20/mo)\n  |     -> Windsurf (implicit memory, multi-pane, if Cascade flow matters)\n\
+  \  |     -> GitHub Copilot (team already on GitHub, $10/mo flat)\n  |\n  +-- Terminal / CLI preference\n  |     -> Claude\
+  \ Code (best reasoning, 1M context, complex multi-file)\n  |     -> Aider (git-native, free, open source, strong edit formats)\n\
+  \  |     -> Codex CLI (OpenAI ecosystem, open source Rust binary)\n  |\n  +-- Fully autonomous / fire-and-forget\n  |  \
+  \   -> Devin (most autonomous, full desktop env, PR output)\n  |     -> Cursor Background Agents (async VM on AWS, up to\
+  \ 8 parallel)\n  |     -> OpenHands (open source, Docker, CodeAct action space)\n  |\n  +-- Research / reproducible benchmarking\n\
+  \        -> SWE-Agent (trajectory recording, YAML config, academic)\n        -> OpenHands (MIT license, reproducible Docker\
+  \ experiments)"
+17_2_by_project_type: '| Project Type | Agent | Reason |
+
+  |-------------|-------|--------|
+
+  | Small script / single file | Copilot, Aider | Simple edits; overkill to use heavy agents |
+
+  | Daily feature development | Cursor | IDE completions + background agents |
+
+  | Large repo, multi-file refactor | Claude Code | 1M context, no chunking |
+
+  | End-to-end feature (0 to PR) | Devin / Cursor BG | Full VM, autonomous loop |
+
+  | Open source / budget-constrained | Aider + open LLM | Free tool, BYOM pricing |
+
+  | Security-sensitive code | Claude Code | Approval gates, no external upload |
+
+  | Multi-language polyglot repo | Augment Code | 400K file semantic graph |
+
+  | Research / trajectory collection | SWE-Agent | Reproducible YAML-driven experiments |
+
+  | CEX artifact production | N03 (Claude SDK) | 8F pipeline, 1M context, 13 builder ISOs |'
+17_3_by_autonomy_level: '| Level | Description | Best Agent |
+
+  |-------|-------------|-----------|
+
+  | Inline suggestion | Autocomplete while typing | Copilot, Cursor tab |
+
+  | Interactive pair | LLM responds in conversation | Aider, Claude Code interactive |
+
+  | Supervised | Reviews plan before execution | Cursor plan approval, Codex CLI |
+
+  | Async autonomous | Runs in background, returns PR | Devin, Cursor BG Agents |
+
+  | Multi-agent orchestration | Parallel waves, dependency-ordered | Claude Code SDK, CEX grid |'
+17_4_pricing_matrix_april_2026: '| Tool | Base | Heavy Use | Model |
+
+  |------|------|-----------|-------|
+
+  | GitHub Copilot | $10/mo | Flat | GPT-4o (fixed) |
+
+  | Aider | Free | LLM API cost | BYOM |
+
+  | Cursor | $20/mo | Flat (usage limits) | Claude / GPT / Gemini |
+
+  | Claude Code | $20/mo | $100-200/mo | Opus / Sonnet |
+
+  | Devin | $20/mo | Variable (ACUs) | Proprietary |
+
+  | OpenHands | Free (self-hosted) | Server + LLM | BYOM |
+
+  | Codex CLI | Free (OSS) | API cost | OpenAI |'
+17_5_cex_internal_routing: "Task arrives at N07\n  |\n  +-- Single artifact build  -> N03 (Claude SDK subagent, Opus-4.6 1M)\n\
+  \  +-- Research / analysis    -> N01 (Claude SDK subagent, Sonnet-4.6 200K)\n  +-- Code review / test     -> N05 (Claude\
+  \ SDK subagent, Sonnet-4.6 200K)\n  +-- Brand / pricing        -> N06 (Claude SDK subagent, Sonnet-4.6 200K)\n  +-- Parallel\
+  \ wave (6 max)  -> grid dispatch (N01-N06 via spawn_grid.ps1)\n  +-- Overnight evolution    -> cex_evolve.py --mode agent\
+  \ (headless SDK loop)\n\n---"
+18_aider_repo_map_pagerank_algorithm_specification: ''
+18_1_architecture: "The repo map converts a codebase into a token-budgeted, PageRank-ranked symbol graph that fits inside\
+  \ the model context window while maximizing relevance to the current chat.\n\nSource files\n    |\n[Tree-sitter] -- language\
+  \ detection + AST parsing (130+ languages)\n    |\n[Tag Extraction] -- definitions (@name.definition.) + references (@name.reference.)\n\
+  \    |\n[Graph Builder] -- directed edges: referencing_file -> defining_file\n    |\n[Personalization Vector] -- chat files\
+  \ + mentioned identifiers get 100x boost\n    |\n[NetworkX PageRank] -- biased random walk favoring chat-relevant files\n\
+  \    |\n[Token Budget Enforcer] -- accumulate files descending by score, stop at limit\n    |\n[to_tree()] -- render as\
+  \ indented symbol list, inject into system prompt"
+18_2_graph_construction_rules: '| Condition | Edge Direction | Weight |
+
+  |-----------|---------------|--------|
+
+  | File B references an identifier defined in file A | B -> A | 1.0 |
+
+  | File A has definitions but receives zero incoming references | A -> A (self-loop) | 0.1 |
+
+
+  Self-loops prevent isolated definition files from scoring zero and disappearing from the map.'
+18_3_personalization_vector: 'The PageRank personalization vector biases the random walk toward files relevant to the current
+  conversation:
+
+
+  | File Category | Boost Value |
+
+  |--------------|-------------|
+
+  | Files open in current chat | `100 / len(chat_fnames)` |
+
+  | Files whose identifiers were mentioned by user | `100 / len(mentioned_fnames)` |
+
+  | All other files | `1 / len(all_fnames)` |
+
+
+  This means a chat file with 10 files open gets 10x boost vs its neighbors, while unmentioned files contribute baseline noise
+  only.'
+18_4_tree_sitter_query_system: "Location: `aider/queries/{language}/tags.scm`\n\n; Example Python query file\n(function_definition\n\
+  \  name: (identifier) @name.definition.function)\n\n(decorated_definition\n  definition: (function_definition\n    name:\
+  \ (identifier) @name.definition.function))\n\n(call\n  function: (identifier) @name.reference.call)\n\n(call\n  function:\
+  \ (attribute\n    attribute: (identifier) @name.reference.call))\n\n| Capture Pattern | Purpose |\n|----------------|---------|\n\
+  | `@name.definition.*` | Functions, classes, structs, traits, impls, modules |\n| `@name.reference.*` | Calls, type usage,\
+  \ imports, attribute access |\n\n- 130+ languages supported via tree-sitter detection\n- 40+ languages have dedicated `.scm`\
+  \ query files for full definition/reference extraction\n- Fallback: Pygments lexer extracts bare identifiers when no `.scm`\
+  \ query exists"
+18_5_token_budget_algorithm: "target_tokens = min(\n    max_map_tokens  map_mul_no_files,    # default: 1024  8 = 8192\n \
+  \   max_context_window - 4096             # reserve space for other prompt components\n)\n\n| Parameter | Default | CLI\
+  \ Override |\n|-----------|---------|-------------|\n| `max_map_tokens` | 1024 | `--map-tokens N` |\n| `map_mul_no_files`\
+  \ | 8 | `--map-multiplier-no-files N` |\n| Reserved padding | 4096 | Hardcoded |\n\nToken counting uses sampling on large\
+  \ texts to avoid O(n) overhead per file."
+18_6_caching_system: '| Property | Value |
+
+  |----------|-------|
+
+  | Backend | `diskcache.Cache` (SQLite-backed) |
+
+  | Location | `.aider.tags.cache.v{VERSION}/` at repo root |
+
+  | Cache key | Absolute file path (string) |
+
+  | Cache value | `{"mtime": float, "data": [Tag, ...]}` |
+
+  | Invalidation | `mtime != current file modification time` |
+
+  | Version bump | When tag extraction logic changes (prevents stale AST data) |'
+18_7_refresh_strategies: '| Strategy | Trigger | Use Case |
+
+  |----------|---------|---------|
+
+  | `auto` (default) | File changes OR user mentions identifier | Standard development |
+
+  | `always` | Before every LLM call | Maximum accuracy, slower |
+
+  | `files` | Only when chat files change | Stable codebase, targeted edits |
+
+  | `manual` | Never (user-triggered only) | Testing, performance-critical pipelines |'
+18_8_full_ranking_pipeline: "# Step 1: Tag extraction per file\ntags = get_ranked_tags(fnames, chat_fnames, mentioned_idents)\n\
+  # -> Uses tree-sitter queries; builds defines={} and references={} dicts\n\n# Step 2: Graph building\nG = nx.DiGraph()\n\
+  for ref_file in references:\n    for ident in references[ref_file]:\n        for def_file in defines.get(ident, []):\n \
+  \           G.add_edge(ref_file, def_file, weight=1.0)\n# Self-loop for isolated definition files\nfor f in defines:\n \
+  \   if f not in G:\n        G.add_edge(f, f, weight=0.1)\n\n# Step 3: PageRank with personalization\npersonalization = build_personalization_vector(chat_fnames,\
+  \ mentioned_fnames)\nscores = nx.pagerank(G, personalization=personalization)\n\n# Step 4: Format output within token budget\n\
+  output = to_tree(sorted(scores, key=scores.get, reverse=True), token_budget)\n\n---"
+19_cursor_cloud_agents_vm_architecture_deep: ''
+19_1_infrastructure_specifications: '| Property | Value |
+
+  |----------|-------|
+
+  | Cloud provider | AWS |
+
+  | Base OS | Ubuntu (isolated per agent) |
+
+  | Provisioning | On-demand at task start |
+
+  | Lifetime | Task duration + async review buffer |
+
+  | Code storage | VM disk (ephemeral; cleared on agent termination) |
+
+  | Custom environments | Dockerfile supported for project-specific system requirements |
+
+  | Parallel agents | Unlimited (no hard cap as of Q1 2026) |'
+19_2_capability_timeline: '| Date | Milestone |
+
+  |------|----------|
+
+  | Mid-2025 | Background agents launch with Cursor 1.0 |
+
+  | Feb 2026 | Cloud Agents v2: full Ubuntu desktop + Chromium browser per VM |
+
+  | Mar 2026 | Self-hosted Cloud Agents for enterprise (code stays on-prem) |'
+19_3_network_access_policy: 'Three outbound connectivity modes, configurable per user; enterprise admins can lock org-wide
+  defaults:
+
+
+  | Mode | Allowed Destinations |
+
+  |------|---------------------|
+
+  | Allow all | Unrestricted internet |
+
+  | Default + allowlist | Preconfigured safe domains + custom entries |
+
+  | Allowlist only | ONLY explicitly permitted domains (maximum isolation) |'
+19_4_security_model: '| Mechanism | Implementation |
+
+  |-----------|---------------|
+
+  | VM isolation | Each agent in its own isolated VM; cross-agent access blocked |
+
+  | Commit signing | HSM-backed Ed25519 keys; GitHub/GitLab display "Verified" badge automatically |
+
+  | Secrets at rest | AES-256 encrypted on VM disk |
+
+  | Secrets in transit | TLS 1.3 |
+
+  | Secret scanning | "Redacted" mode scans commit messages and staged files; blocks any containing secrets |
+
+  | Privacy Mode | ON = code not used for model training; OFF = prompts + dev environments collectible |
+
+  | Prompt injection risk | Auto-executing agents can be tricked into exfiltrating data; mitigate with allowlist-only network
+  |'
+19_5_agent_capabilities_february_2026: 'Each cloud agent VM provides:
+
+
+  | Capability | Available |
+
+  |-----------|----------|
+
+  | Terminal (full shell) | Yes |
+
+  | Browser (Chromium) | Yes (Cloud Agents v2) |
+
+  | Desktop GUI (computer use) | Yes (Cloud Agents v2) |
+
+  | Repo clone + dep install | Yes |
+
+  | Test execution | Yes |
+
+  | Feature branch creation | Yes |
+
+  | PR push on completion | Yes |
+
+  | Session video recording | Yes |
+
+  | MCP server (HTTP + stdio) | Yes |'
+19_6_self_hosted_option_enterprise_march_2026: '| Property | Self-Hosted | Cloud (AWS) |
+
+  |----------|-------------|-------------|
+
+  | Code leaves customer network | Never | Stored on AWS VM disk |
+
+  | Isolated VMs | Yes (on-prem infra) | Yes (AWS) |
+
+  | Full desktop + browser | Yes | Yes |
+
+  | Secrets exposure surface | Internal only | Encrypted at rest (AWS) |
+
+  | Model routing control | Customer-controlled | Cursor-controlled |
+
+  | Compliance use cases | SOC 2, HIPAA possible | Standard Cursor terms |'
+19_7_background_agent_vs_cloud_agent_comparison: '| Feature | Background Agent (Original) | Cloud Agent (Feb 2026+) |
+
+  |---------|----------------------------|------------------------|
+
+  | VM type | Lightweight cloud container | Full Ubuntu VM |
+
+  | Browser | No | Yes (Chromium) |
+
+  | Desktop GUI | No | Yes |
+
+  | Video recording | No | Yes |
+
+  | Self-hosted option | No | Yes (enterprise) |
+
+  | Parallel limit | 8 | Unlimited |
+
+  | Network policy | Fixed | Configurable (3 modes) |
+
+  | Commit signing | No | HSM Ed25519 |
+
+
+  ---'
+20_edit_format_reference_9_families_with_code_examples: ''
+family_1_whole_file: "LLM returns the complete file content verbatim.\n\nshow_greeting.py\nimport sys\n\ndef greeting(name):\n\
+  \    print(\"Hey\", name)\n\nif name == \"main\":\n    greeting(sys.argv[1])\n\nTrade-off: Zero matching errors; expensive\
+  \ for large files; LLM may elide sections with `# ... rest unchanged`.\n\n---"
+family_2_search_replace_block_diff: 'Conflict-marker blocks identify exact old and new content within a file.
+
+
+  mathweb/flask/app.py
+
+  <<<<<<< SEARCH
+
+  from flask import Flask
+
+  =======
+
+  import math
+
+  from flask import Flask
+
+  >>>>>>> REPLACE
+
+
+  Multiple blocks per file allowed. Match cascade: exact -> whitespace-insensitive -> Levenshtein fuzzy.
+
+
+  ---'
+family_3_diff_fenced_gemini_variant: 'File path placed inside the code fence. Gemini models cannot reliably emit content before
+  a fence.
+
+
+  mathweb/flask/app.py
+
+  <<<<<<< SEARCH
+
+  from flask import Flask
+
+  =======
+
+  import math
+
+  from flask import Flask
+
+  >>>>>>> REPLACE
+
+
+  Used by Aider when `--model gemini-*` is active; functionally identical to Family 2.
+
+
+  ---'
+family_4_unified_diff_udiff: "Standard `diff -U0` format with `@@` context hunks.\n\n--- mathweb/flask/app.py\n+++ mathweb/flask/app.py\n\
+  @@ -1,3 +1,4 @@\n+import math\n from flask import Flask\n from flask import render_template\n\nUsed with GPT-4 Turbo family\
+  \ to suppress lazy output. Highest LLM difficulty; requires correct surrounding context lines.\n\n---"
+family_5_editor_diff_editor_whole_architect_mode: 'Two-model pipeline: architect reasons, editor produces edits. Prompt is
+  stripped to edit-only instructions.
+
+
+  # Architect (large model) output:
+
+  Add ''import math'' before the flask import in app.py.
+
+
+  # Editor (same or smaller model) receives ONLY:
+
+  Edit app.py to add math import before flask import.
+
+
+  # Editor produces (editor-diff format):
+
+  mathweb/flask/app.py
+
+  <<<<<<< SEARCH
+
+  from flask import Flask
+
+  =======
+
+  import math
+
+  from flask import Flask
+
+  >>>>>>> REPLACE
+
+
+  CEX parallel: N07 (architect) -> N03 (editor).
+
+
+  ---'
+family_6_openai_patch_format: 'Codex CLI proprietary format. No line numbers; uses context lines for matching.
+
+
+  * Begin Patch
+
+  * Update File: mathweb/flask/app.py
+
+  @@
+
+  -from flask import Flask
+
+  +import math
+
+  +from flask import Flask
+
+  * End Patch
+
+
+  Robust to line-number drift. Codex CLI-specific; not interoperable with other tools.
+
+
+  ---'
+family_7_tool_based_edits_function_calling: "LLM invokes structured tool calls. No text markers; edits are atomic JSON operations.\n\
+  \n{\n  \"tool\": \"Edit\",\n  \"input\": {\n    \"file_path\": \"mathweb/flask/app.py\",\n    \"old_string\": \"from flask\
+  \ import Flask\",\n    \"new_string\": \"import math\\nfrom flask import Flask\"\n  }\n}\n\nUsed by Claude Code (Agent SDK)\
+  \ and OpenHands CodeAct. Requires tool execution infrastructure; validated at the API boundary.\n\n---"
+family_8_sketch_apply_model_two_phase: 'Primary LLM sketches the change in natural language; a dedicated 7B apply model merges
+  the sketch into the actual file.
+
+
+  # Phase 1 (primary LLM sketch -- free-form natural language or rough diff):
+
+  "Insert ''import math'' as the first import in app.py, before flask"
+
+
+  # Phase 2 (apply model -- Morph Fast Apply 7B or Cursor internal):
+
+  [Modified file bytes written directly; no intermediate format exposed to user]
+
+
+  Performance (Morph A100): 10,500 tokens/second. Accuracy: 98% on edit benchmarks vs ~85% for search/replace.
+
+
+  ---'
+family_9_semantic_edit_ast_aware: "Transformations target AST nodes, not text bytes. Immune to whitespace/comment drift and\
+  \ false positives.\n\n# Conceptual wire format (Morph internal representation):\nSemanticEdit(\n  target_file=\"mathweb/flask/app.py\"\
+  ,\n  operation=INSERT_BEFORE,\n  anchor=ImportStatement(module=\"flask\"),\n  content=ImportStatement(module=\"math\")\n\
+  )\n\nProviders: Morph (proprietary). Language coverage: subset of tree-sitter languages. Eliminates text-matching failure\
+  \ mode entirely.\n\n---"
+edit_format_comparison_matrix: '| Format | Token Cost | Match Failure Risk | LLM Difficulty | Best For |
+
+  |--------|-----------|-------------------|----------------|---------|
+
+  | Whole file (F1) | High | None | Low | Small files, full rewrites |
+
+  | Search/replace (F2) | Low-Medium | Code drift | Medium | Targeted edits, stable code |
+
+  | Diff-fenced (F3) | Low-Medium | Code drift | Medium | Gemini models |
+
+  | Unified diff (F4) | Low | Wrong context | High | Large diffs, GPT-4 family |
+
+  | Editor-diff/whole (F5) | Medium | Two-model desync | Low | Architect mode, CEX N07->N03 |
+
+  | OpenAI patch (F6) | Low | Ambiguous context | Medium | Codex CLI pipelines |
+
+  | Tool-based (F7) | Medium | None (validated) | Low | Production agents, audit trails |
+
+  | Sketch+apply (F8) | Medium | Apply model miss | Very Low | Speed-critical pipelines |
+
+  | Semantic (F9) | Low | None (AST-level) | Very Low | Future-proof, scope-safe edits |
+
+
+  ---'
+sources:
+- Aider edit formats
+- Codex CLI features
+- Codex AGENTS.md guide
+- Codex subagents
+- Claude Code subagents
+- Claude Code CLAUDE.md guide
+- SWE-Agent GitHub
+- Cursor background agents
+- Cursor 3 worktrees
+- Windsurf Cascade
+- Devin AI
+- Devin 2025 review
+- OpenHands CodeAct 2.1
+- Augment Code Context Engine
+- A2A Protocol
+- Morph Fast Apply
+- Morph edit formats guide
+- 'Code surgery: how AI assistants make edits'
+- Self-improving coding agents
+- SWE-EVO benchmark
+- Codebase-Memory MCP
+- Building a better repo map with tree-sitter
+- Aider repository mapping system (DeepWiki)
+- Run Claude Code programmatically
+- Claude Agent SDK overview
+- Claude Agent SDK Python reference
+- Claude Agent SDK TypeScript reference
+- Claude Code Q1 2026 update roundup
+- Cursor Background Agents docs
+- Cursor Background Agents complete guide 2026
+- Artificial Analysis coding agent comparison
+- 15 AI coding agents tested 2026 (Morph)
+- Cursor vs Claude Code 2026 (NxCode)
+- Diff format explained (Morph)

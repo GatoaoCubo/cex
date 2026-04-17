@@ -50,34 +50,34 @@ density_score: {{0.80_to_1.00}}
 ## Formatting Rules
 | Name | Input Field | Transform | Pattern | Options |
 |------|-------------|-----------|---------|---------|
-| {{rule_name_1}} | {{input_field_1}} | {{transform_1}} | {{pattern_1}} | {{options_1}} |
-| {{rule_name_2}} | {{input_field_2}} | {{transform_2}} | {{pattern_2}} | {{options_2}} |
+| `{{rule_name_1}}` | {{input_field_1}} | {{transform_1}} | {{pattern_1}} | `{{options_1}}` |
+| `{{rule_name_2}}` | {{input_field_2}} | {{transform_2}} | {{pattern_2}} | `{{options_2}}` |
 ## Input Specification
-Type: {{input_type}}
-Structure: {{description_of_expected_input}}
+Type: `{{input_type}}`
+Structure: `{{description_of_expected_input}}`
 Example:
-```{{input_format}}
+``{{input_format}}`
 {{sample_input}}
 ```
 ## Output Specification
-Format: {{target_format}}
+Format: `{{target_format}}`
 Example:
-```{{target_format}}
+``{{target_format}}`
 {{sample_output}}
 ```
 ## Template
-Engine: {{template_engine}}
-```{{template_syntax}}
+Engine: `{{template_engine}}`
+``{{template_syntax}}`
 {{formatting_template}}
 ```
 ## Edge Cases
-1. Null values: {{null_handling}}
-2. Empty strings: {{empty_handling}}
-3. Special characters: {{special_char_handling}}
-4. Overflow: {{overflow_handling}}
+1. Null values: `{{null_handling}}`
+2. Empty strings: `{{empty_handling}}`
+3. Special characters: `{{special_char_handling}}`
+4. Overflow: `{{overflow_handling}}`
 ## References
-1. {{reference_1}}
-2. {{reference_2}}
+1. `{{reference_1}}`
+2. `{{reference_2}}`
 
 ## Properties
 

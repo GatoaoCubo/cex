@@ -12,8 +12,8 @@ quality: 9.0
 tags: [quality-gate, dag, dependency-graph, topological-order, P11]
 tldr: "Gates for dag artifacts: validates acyclicity, node naming, edge correctness, topological ordering, and parallelism opportunities."
 density_score: 0.89
+llm_function: GOVERN
 ---
-
 # Gate: dag
 ## Definition
 | Field     | Value |

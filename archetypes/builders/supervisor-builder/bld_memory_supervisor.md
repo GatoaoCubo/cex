@@ -23,6 +23,7 @@ observation_types: [user, feedback, project, reference]
 quality: 9.0
 title: "Memory Supervisor"
 density_score: 0.90
+llm_function: INJECT
 ---
 ## Summary
 A supervisor definition has one job: coordinate builders. It specifies who runs, when, in what order, what signals to wait for, and what to do when something fails. It does NOT contain the actual task instructions — those travel in handoff files written at dispatch time.

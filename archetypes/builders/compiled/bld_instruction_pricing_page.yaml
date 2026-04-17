@@ -1,0 +1,38 @@
+kind: instruction
+id: bld_instruction_pricing_page
+pillar: P03
+llm_function: REASON
+purpose: Step-by-step production process for pricing_page
+quality: null
+title: Instruction Pricing Page
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- pricing_page
+- builder
+- instruction
+tldr: Step-by-step production process for pricing_page
+domain: pricing_page construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+phase_1_research:
+- Analyze competitor pricing pages for tier structure and value proposition placement.
+- Identify product/service unique selling points (USPs) relevant to each pricing tier.
+- Map customer segments to pricing tiers based on usage patterns and willingness to pay.
+- Gather data on pricing models (e.g., subscription, freemium, tiered licensing).
+- Create user personas for each tier to tailor conversion copy.
+- Benchmark industry-standard pricing metrics (e.g., cost per feature, ROI benchmarks).
+phase_2_compose:
+- 'Outline structure using bld_schema_pricing_page.md: header, tier comparison table, feature breakdown, CTA.'
+- Define tier names (e.g., Basic, Pro, Enterprise) and corresponding pricing.
+- Write value propositions for each tier, emphasizing USPs and ROI.
+- Draft conversion copy (e.g., "Upgrade to unlock X feature") aligned with bld_output_template_pricing_page.md.
+- Populate tier comparison table with features, pricing, and benefits.
+- Insert pricing table with currency, billing cycles, and discounts.
+- Add CTAs (e.g., "Start free trial," "Contact sales") for each tier.
+- Ensure consistency with brand voice and schema-defined content blocks.
+- Review for clarity, conciseness, and alignment with research findings.
+phase_3_validate: '[ ] [OK] Tier comparison table accurately reflects feature differences. [ ] [OK] Conversion copy includes
+  clear value propositions and CTAs. [ ] [OK] Pricing aligns with research benchmarks and customer personas. [ ] [OK] Mobile
+  responsiveness tested for tables and CTAs. [ ] [OK] Accessibility checked (e.g., contrast ratios, screen reader compatibility).'

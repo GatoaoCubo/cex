@@ -1,0 +1,62 @@
+---
+kind: knowledge_card
+id: bld_knowledge_card_sso_config
+pillar: P01
+llm_function: INJECT
+purpose: Domain knowledge for sso_config production
+quality: 9.2
+title: "Knowledge Card Sso Config"
+version: "1.0.0"
+author: wave1_builder_gen_v2
+tags: [sso_config, builder, knowledge_card]
+tldr: "Domain knowledge for sso_config production"
+domain: "sso_config construction"
+created: "2026-04-14"
+updated: "2026-04-14"
+density_score: 0.85
+---
+
+## Domain Overview  
+SSO (Single Sign-On) configurations enable users to authenticate once across multiple applications using standardized protocols like SAML (Security Assertion Markup Language) and OIDC (OpenID Connect). These configurations define how identity providers (IdPs) and service providers (SPs) exchange authentication and authorization data securely. As organizations adopt cloud services and zero-trust architectures, robust SSO configurations are critical for balancing user convenience with enterprise security. Misconfigurations here can lead to insecure access, data leaks, or failed integrations.  
+
+SSO configurations typically involve metadata exchange, protocol bindings (e.g., HTTP POST, SAML Artifact), and attribute mapping to align IdP claims with SP requirements. They must comply with industry standards to ensure interoperability across vendors and platforms. This domain focuses on the technical setup, not policy enforcement or credential storage.  
+
+## Key Concepts  
+| Concept                | Definition                                                                 | Source                              |  
+|-----------------------|----------------------------------------------------------------------------|-------------------------------------|  
+| Identity Provider     | Entity issuing authentication assertions to SPs                            | SAML 2.0 Core (RFC 7521)           |  
+| Service Provider      | Application relying on IdP for user authentication                         | OIDC Core (RFC 8252)               |  
+| Assertion             | XML/JSON token containing user attributes and authentication context       | SAML 2.0 (Section 3.1)             |  
+| SAML Response         | Encapsulates assertions sent from IdP to SP via HTTP POST or Artifact Bindings | SAML 2.0 (Section 3.4.1)           |  
+| OIDC ID Token         | JWT containing user claims and authentication status                       | OIDC Core (RFC 8252, Section 1.5)  |  
+| Metadata              | XML/JSON document describing IdP/SP endpoints, certificates, and protocols | SAML 2.0 (Section 6)               |  
+| Federation            | Trust relationship between IdPs and SPs via shared metadata and protocols  | NIST SP 800-63B (Section 5.3)       |  
+| Attribute Mapping     | Alignment of IdP claims (e.g., `email`) to SP attribute requirements       | Shibboleth Technical Overview       |  
+| Protocol Binding      | Transport method for SSO messages (e.g., HTTP Redirect, POST)             | SAML 2.0 (Section 3.3)             |  
+| SP-Initiated Flow     | User initiates SSO from SP to IdP                                          | OIDC Core (RFC 8252, Section 1.4)  |  
+| Single Logout (SLO)   | Mechanism to terminate sessions across SPs and IdP                         | SAML 2.0 (Section 4.3)             |  
+
+## Industry Standards  
+- SAML 2.0 Core (RFC 7521)  
+- OpenID Connect 1.0 (RFC 8252)  
+- OAuth 2.0 (RFC 6749)  
+- WS-Federation (MSFT specification)  
+- Shibboleth Technical Overview  
+- NIST SP 800-63B (Authentication and Lifecycle Management)  
+- RFC 7522 (OAuth 2.0 for SAML 2.0)  
+- IETF RFC 8297 (OAuth 2.0 Multiple Response Types)  
+
+## Common Patterns  
+1. Use metadata URLs instead of hardcoded endpoints for dynamic discovery.  
+2. Configure protocol bindings (e.g., HTTP POST) based on SP/IdP compatibility.  
+3. Map IdP attributes (e.g., `eduPersonAffiliation`) to SP-specific claims.  
+4. Prioritize SP-initiated flows for user-centric SSO experiences.  
+5. Implement federated identity for cross-organization access.  
+6. Enforce SLO via SAML 2.0 or OIDC Frontchannel/Backchannel logout.  
+
+## Pitfalls  
+- Hardcoding metadata instead of using auto-discovery URLs.  
+- Ignoring certificate validation for assertions and metadata.  
+- Misconfiguring protocol bindings (e.g., using HTTP Redirect for SPs requiring POST).  
+- Overlooking attribute mapping, leading to incomplete user profiles.  
+- Failing to implement SLO, risking session persistence across systems.

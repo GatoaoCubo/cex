@@ -1,6 +1,8 @@
 # CEX Onboarding Guide
 
-> Everything you need to go from zero to your first working agent.
+> Everything you need to understand CEX and build your first agent.
+
+**For installation, see [QUICKSTART.md](QUICKSTART.md).**
 
 ---
 
@@ -19,62 +21,7 @@ models, or any tool that can read structured text files. No vendor lock-in.
 
 ---
 
-## 2. Five-Minute Setup
-
-### Prerequisites
-
-- Python 3.10+
-- Git
-- Any code editor
-
-### Install
-
-```bash
-git clone https://github.com/your-org/cex.git
-cd cex
-```
-
-### Bootstrap a new project
-
-```bash
-# Interactive bootstrap via Claude Code CLI
-python _tools/cex_bootstrap.py
-
-# Or via the boot script (auto-detects first run)
-boot/cex.ps1
-```
-
-This configures CEX for your brand: asks ~6 questions, writes `brand_config.yaml`,
-and propagates brand context to all nuclei. For full brand discovery:
-
-```bash
-boot/n06.ps1
-```
-
-### Validate the structure
-
-```bash
-python _tools/cex_doctor.py
-```
-
-Doctor checks folder structure, schema presence, and naming compliance.
-
-### Create your first artifact
-
-```bash
-cp MyProject/P01_knowledge/templates/tpl_knowledge_card_domain.md \
-   MyProject/P01_knowledge/my_first_card.md
-```
-
-Edit the file, fill in the YAML frontmatter, and compile:
-
-```bash
-python _tools/cex_compile.py --all
-```
-
----
-
-## 3. Architecture
+## 2. Architecture
 
 CEX has 5 layers, 12 pillars, and 8 nuclei (N00 Genesis + 7 business nuclei).
 
@@ -129,7 +76,7 @@ live. Builders define HOW artifacts are created (13 ISO files = factory blueprin
 
 ---
 
-## 4. Your First Agent
+## 3. Your First Agent
 
 ### Step 1: Find the agent builder
 
@@ -213,7 +160,7 @@ Density must be >= 0.85. No prose blocks longer than 3 lines. Bullets max 80 cha
 
 ---
 
-## 5. IDE Setup
+## 4. IDE Setup
 
 ### VS Code
 
@@ -258,7 +205,7 @@ are Python scripts in `_tools/` — run them from your terminal of choice.
 
 ---
 
-## 6. How CEX Understands You
+## 5. How CEX Understands You
 
 You type 5 words. CEX delivers a professional artifact. Here's the trick nobody told you about every other AI tool: **they forward your words to the LLM as-is.** That's like handing a contractor a napkin sketch and expecting a skyscraper.
 
@@ -309,7 +256,7 @@ You never need to know these steps exist. You just type what you want. The pipel
 
 ---
 
-## 7. What You Can Say
+## 6. What You Can Say
 
 CEX understands natural language in English and Portuguese. No special syntax needed. Here are the 20 most powerful trigger phrases -- each one activates a different part of the system:
 
@@ -362,7 +309,7 @@ CEX understands natural language in English and Portuguese. No special syntax ne
 
 ---
 
-## 8. CEX Teaches As It Works
+## 7. CEX Teaches As It Works
 
 Most AI tools are black boxes. You get output. You don't get smarter. CEX is different.
 
@@ -401,4 +348,4 @@ Day 1: functional. Day 30: expert. Day 365: irreplaceable.
 
 ---
 
-*CEX Onboarding v3.0 -- Updated 2026-04-08*
+*CEX Onboarding v4.0 -- Updated 2026-04-12. Install moved to [QUICKSTART.md](QUICKSTART.md).*

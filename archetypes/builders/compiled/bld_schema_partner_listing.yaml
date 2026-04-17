@@ -1,0 +1,51 @@
+kind: schema
+id: bld_schema_partner_listing
+pillar: P06
+llm_function: CONSTRAIN
+purpose: Formal schema -- SINGLE SOURCE OF TRUTH for partner_listing
+quality: null
+title: Schema Partner Listing
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- partner_listing
+- builder
+- schema
+tldr: Formal schema -- SINGLE SOURCE OF TRUTH for partner_listing
+domain: partner_listing construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+frontmatter_fields: ''
+required: "| Field     | Type   | Required | Default | Notes |  \n|-----------|--------|----------|---------|-------|  \n\
+  | id        | string | yes      |         |       |  \n| kind      | string | yes      |         |       |  \n| pillar \
+  \   | string | yes      |         |       |  \n| title     | string | yes      |         |       |  \n| version   | string\
+  \ | yes      |         |       |  \n| created   | date   | yes      |         |       |  \n| updated   | date   | yes  \
+  \    |         |       |  \n| author    | string | yes      |         |       |  \n| domain    | string | yes      |   \
+  \      |       |  \n| quality   | null   | yes      | null    | Never self-score; peer review assigns |  \n| tags      |\
+  \ array  | yes      |         |       |  \n| tldr      | string | yes      |         |       |  \n| partner_name | string\
+  \ | yes |         |       |  \n| partner_type | string | yes |         |       |  \n| listing_status | string | yes |  \
+  \       |       |  \n| start_date | date | yes |         |       |"
+recommended: "| Field        | Type   | Notes |  \n|--------------|--------|-------|  \n| description  | string |       |\
+  \  \n| website      | url    |       |  \n| contact_info | string |       |"
+id_pattern: ^p05_pl_[a-z][a-z0-9_]+.md$
+body_structure:
+- Overview
+- Summary of the partner listing purpose and scope.
+- Partner Details
+- Name, type, and key attributes of the partner.
+- Listing Status
+- Current status (e.g., active, pending, suspended).
+- Terms & Conditions
+- Legal and operational requirements for listing.
+- Compliance
+- Regulatory checks and certifications.
+- Additional Information
+- Notes, links, or supplementary data.
+constraints:
+- All required fields must be present and valid.
+- '`id` must match the regex pattern exactly.'
+- '`listing_status` must be one of: active, pending, suspended.'
+- '`start_date` must be a valid date in ISO format.'
+- '`partner_name` must be unique across all listings.'
+- '`domain` must align with the CEX''s operational scope.'

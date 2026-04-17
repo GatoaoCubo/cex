@@ -43,7 +43,7 @@ import sys
 import time
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Optional
+from typing import Any
 
 ROOT = Path(__file__).resolve().parent.parent
 TOOLS = ROOT / "_tools"
@@ -64,13 +64,13 @@ def _handle_signal(signum, frame):
     log("Shutdown signal received. Finishing current cycle...")
 
 
-def log(msg: str, level: str = "INFO"):
+def log(msg: str, level: str = "INFO") -> None:
     ts = datetime.now().strftime("%H:%M:%S")
     safe = str(msg).encode("ascii", "replace").decode("ascii")
     print(f"[{ts}] [CONTINUOUS/{level}] {safe}", flush=True)
 
 
-def parse_args():
+def parse_args() -> argparse.Namespace:
     p = argparse.ArgumentParser(description="CEX Continuous Mode -- auto-dispatch loop")
     p.add_argument("--mode", choices=["scan", "loop", "daemon"], default="scan",
                    help="scan=one-shot, loop=continuous, daemon=background")
@@ -88,7 +88,7 @@ def parse_args():
 # Handoff Scanner
 # ======================================================================
 
-def scan_handoffs(filter_nuclei: set = None) -> list:
+def scan_handoffs(filter_nuclei: set[str] | None = None) -> list[dict[str, Any]]:
     """Find pending handoff task files.
 
     Returns list of dicts: [{nucleus, path, size}]
@@ -121,12 +121,12 @@ def scan_handoffs(filter_nuclei: set = None) -> list:
 # ======================================================================
 
 def dispatch_cycle(
-    tasks: list,
+    tasks: list[dict[str, Any]],
     timeout: int = 1800,
     signal_poll: int = 30,
     quality_floor: float = 8.0,
     dry_run: bool = False,
-) -> dict:
+) -> dict[str, Any]:
     """Execute one dispatch cycle: dispatch -> watch -> gate -> consolidate.
 
     Returns: {status, nuclei, quality, duration_s}
@@ -294,7 +294,7 @@ def _consolidate(nuclei: list, cycle_id: str):
 # Main Loop
 # ======================================================================
 
-def run_continuous(args):
+def run_continuous(args: argparse.Namespace) -> int:
     """Main continuous mode entry point."""
     global _shutdown
 
@@ -411,7 +411,7 @@ def _interruptible_sleep(seconds: float):
 # CLI
 # ======================================================================
 
-def main():
+def main() -> None:
     args = parse_args()
     sys.exit(run_continuous(args))
 

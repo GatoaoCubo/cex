@@ -1,0 +1,42 @@
+id: kc_quantization_config
+kind: knowledge_card
+title: Quantization Configuration
+version: 1.0.0
+quality: null
+pillar: P01
+density_score: 1.0
+1_bitwidth_settings:
+- '8-bit: 128 levels (0-255)'
+- '4-bit: 16 levels (0-15)'
+- '2-bit: 4 levels (0-3)'
+- '1-bit: 2 levels (0-1)'
+2_compression_ratios:
+- '4x: 75% size reduction'
+- '8x: 87.5% size reduction'
+- '16x: 93.75% size reduction'
+- '32x: 96.875% size reduction'
+3_optimization_techniques:
+- Dynamic range compression
+- Weight pruning thresholds (0.01-0.99)
+- Activation clipping
+- Quantization-aware training
+4_deployment_parameters:
+- GPU acceleration flags
+- CPU execution modes
+- Memory optimization levels
+- Precision fallback thresholds
+5_tradeoffs:
+- '8-bit: 2-5x speed boost, 40-70% accuracy loss'
+- '4-bit: 5-10x speed boost, 60-85% accuracy loss'
+- '2-bit: 10-15x speed boost, 70-90% accuracy loss'
+- '1-bit: 15-20x speed boost, 80-95% accuracy loss'
+6_framework_compatibility:
+- TensorFlow Lite
+- PyTorch Mobile
+- ONNX Runtime
+- WebAssembly (WASM)
+7_validation_metrics:
+- Mean Absolute Error (MAE)
+- Signal-to-Noise Ratio (SNR)
+- Latency benchmarks
+- Throughput measurements

@@ -26,10 +26,10 @@ atomic: false
 rollback: "Delete the produced naming_rule artifact file; no system state changes occur"
 dependencies: []
 logging: true
-tldr: "Classify naming scope, derive regex pattern and collision strategy, validate and write a naming_rule artifact to p05_nr_{{scope}}.md."
+tldr: "Classify naming scope, derive regex pattern and collision strategy, validate and write a naming_rule artifact to `p05_nr_{{scope}}.md`."
 density_score: 0.88
+llm_function: REASON
 ---
-
 ## Context
 The naming-rule-builder receives a **scope definition** and produces a `naming_rule` artifact encoding the naming convention for that scope.
 **Input variables**:
@@ -76,7 +76,7 @@ constraints_map = {
 10. Generate 2 **invalid** names that violate the regex. For each, state the specific constraint it breaks.
 11. Test all input `{{examples}}` against the regex. If any fail, revise `constraints_map` in step 6 and rebuild the regex.
 12. Set `{{collision_strategy}}` to one of: `append_sequence`, `append_hash`, `append_date`, `reject`, `namespace_qualify`. Document: uniqueness scope, detection mechanism, automation level, and reserved name segments.
-13. Write `tldr` as one sentence: "Naming rule for {{scope}} artifacts following {{pattern_summary}}."
+13. Write `tldr` as one sentence: "Naming rule for `{{scope}}` artifacts following `{{pattern_summary}}`."
 14. Assign 5–8 `keywords` covering scope, kind, and pattern elements.
 15. Set `quality: null` and `density_score: REC`.
 **Exit**: regex matches all 3 valid examples, rejects all 2 invalid examples, and matches all input `{{examples}}`.
@@ -91,33 +91,33 @@ constraints_map = {
 22. Write the final artifact using the Output Contract template below.
 ## Output Contract
 ```
-id: p05_nr_{{scope}}
+id: `p05_nr_{{scope}}`
 kind: naming_rule
 pillar: P05
-domain: {{scope}}
+domain: `{{scope}}`
 version: 1.0.0
-created: {{date}}
+created: `{{date}}`
 author: naming-rule-builder
-scope: {{scope_description}}
-pattern: "{{regex_pattern}}"
-case_style: {{case_style}}
-separator: "{{separator_char}}"
-max_length: {{max_length}}
+scope: `{{scope_description}}`
+pattern: "`{{regex_pattern}}`"
+case_style: `{{case_style}}`
+separator: "`{{separator_char}}`"
+max_length: `{{max_length}}`
 versioning: {{true|false}}
-collision_strategy: {{collision_strategy}}
+collision_strategy: `{{collision_strategy}}`
 quality: null
-tags: [naming-rule, {{scope}}, convention]
+tags: [naming-rule, `{{scope}}`, convention]
 ## Pattern
 `{{regex_pattern}}`
-**Case style**: {{case_style}} | **Separator**: `{{separator_char}}` | **Max length**: {{max_length}}
+**Case style**: `{{case_style}}` | **Separator**: `{{separator_char}}` | **Max length**: `{{max_length}}`
 ## Constraints
 | Dimension | Rule |
 |-----------|------|
-| Prefix | {{prefix_rule}} |
-| Suffix | {{suffix_rule}} |
-| Versioning | {{versioning_rule}} |
-| Reserved words | {{reserved_words_list}} |
-| Platform | {{platform}} |
+| Prefix | `{{prefix_rule}}` |
+| Suffix | `{{suffix_rule}}` |
+| Versioning | `{{versioning_rule}}` |
+| Reserved words | `{{reserved_words_list}}` |
+| Platform | `{{platform}}` |
 ## Examples
 **Valid**: `{{example_valid_1}}`, `{{example_valid_2}}`, `{{example_valid_3}}`
 **Invalid**:

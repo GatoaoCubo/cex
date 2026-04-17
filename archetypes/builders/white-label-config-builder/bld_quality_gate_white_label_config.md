@@ -1,0 +1,57 @@
+---
+kind: quality_gate
+id: p11_qg_white_label_config
+pillar: P11
+llm_function: GOVERN
+purpose: Quality gate with HARD and SOFT scoring for white_label_config
+quality: 9.1
+title: "Quality Gate White Label Config"
+version: "1.0.0"
+author: wave1_builder_gen_v2
+tags: [white_label_config, builder, quality_gate]
+tldr: "Quality gate with HARD and SOFT scoring for white_label_config"
+domain: "white_label_config construction"
+created: "2026-04-14"
+updated: "2026-04-14"
+density_score: 0.85
+---
+
+## Definition
+| metric         | threshold                              | operator | scope         |
+|----------------|----------------------------------------|----------|---------------|
+| schema_id      | ^p09_wl_[a-z][a-z0-9_]+.yaml$         | matches  | all YAML files|
+
+## HARD Gates
+| ID  | Check                          | Fail Condition                                      |
+|-----|--------------------------------|-----------------------------------------------------|
+| H01 | YAML frontmatter valid       | Missing or invalid YAML frontmatter                 |
+| H02 | ID matches pattern           | ID does not match ^p09_wl_[a-z][a-z0-9_]+.yaml$    |
+| H03 | kind field matches           | kind ≠ 'white_label_config'                       |
+| H04 | brand_name field present     | brand_name missing or empty                       |
+| H05 | reseller_id field present    | reseller_id missing or invalid                    |
+| H06 | custom_logo_url valid        | URL invalid or unreachable                        |
+| H07 | allowed_domains field valid  | allowed_domains missing or not a list             |
+
+## SOFT Scoring
+| Dim | Dimension                  | Weight | Scoring Guide                                                          |
+|-----|----------------------------|--------|------------------------------------------------------------------------|
+| D01 | Branding completeness      | 0.15   | 1.0=logo+colors+favicon+custom domain all defined; 0.5=partial; 0.0=none |
+| D02 | Reseller model accuracy    | 0.15   | 1.0=sub-account+margins+OEM licensing defined; 0.5=partial; 0.0=absent  |
+| D03 | Customization depth        | 0.15   | 1.0=theming API+custom emails+co-branded UI; 0.5=one element; 0.0=none  |
+| D04 | Compliance settings        | 0.15   | 1.0=GDPR+regional flags defined; 0.5=one standard; 0.0=absent           |
+| D05 | Schema validation          | 0.15   | 1.0=SemVer+strict types+backward compat; 0.5=partial; 0.0=absent        |
+| D06 | Security posture           | 0.10   | 1.0=encrypted secrets+RBAC+audit trail; 0.5=partial; 0.0=plaintext      |
+| D07 | Documentation quality      | 0.15   | 1.0=all fields documented+changelog; 0.5=partial; 0.0=absent            |
+
+## Actions
+| Score   | Action                          |
+|---------|---------------------------------|
+| ≥9.5    | GOLDEN: Auto-approve            |
+| ≥8.0    | PUBLISH: Deploy with review     |
+| ≥7.0    | REVIEW: Manual QA required      |
+| <7.0    | REJECT: Fix and resubmit        |
+
+## Bypass
+| conditions                          | approver | audit trail         |
+|-----------------------------------|----------|---------------------|
+| Urgent deployment with CTO approval | CTO      | Ticket #WL-XXXX     |

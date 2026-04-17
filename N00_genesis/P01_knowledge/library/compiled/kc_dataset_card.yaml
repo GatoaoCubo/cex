@@ -1,0 +1,136 @@
+id: p01_kc_dataset_card
+kind: knowledge_card
+type: kind
+pillar: P01
+title: Dataset Card -- Deep Knowledge for dataset_card
+version: 1.0.0
+created: 2026-04-15
+updated: 2026-04-15
+author: n05_selfheal
+quality: null
+tags: []
+density_score: 0.99
+overview: A Dataset Card is a standardized metadata document that describes the characteristics, provenance, and usage guidelines
+  of a machine learning dataset. It follows the Datasets Library Standard and includes technical, ethical, and practical information
+  to ensure responsible dataset usage. Dataset cards are critical for maintaining transparency, reproducibility, and accountability
+  in data-driven workflows.
+key_components: 'A complete Dataset Card includes the following sections:
+
+
+  | Section | Description | Example |
+
+  |--------|-------------|---------|
+
+  | 1. Dataset Description | Summary of the dataset''s purpose, scope, and domain | "A multilingual dataset of 10,000 news
+  articles for sentiment analysis across 12 languages" |
+
+  | 2. Dataset Structure | Format, size, and organization | "JSONL format with 10,000 entries, organized by language code
+  (en, es, fr, etc.)" |
+
+  | 3. Data Sources | Origin, collection methods, and licensing | "Collected from public news archives under CC-BY 4.0 license"
+  |
+
+  | 4. Technical Details | Encoding, sampling, and preprocessing | "UTF-8 encoding, stratified sampling, tokenized text" |
+
+  | 5. Usage Guidelines | Recommended tasks, limitations, and warnings | "Suitable for text classification; contains potential
+  biases in political topics" |
+
+  | 6. Citation | Proper attribution format | "Smith et al. (2022). Multilingual News Corpus. arXiv:2205.01234" |'
+best_practices:
+- Use standardized formats (JSON, YAML, CSV) for metadata
+- Include versioning information for dataset updates
+- Document data provenance with timestamps and source URLs
+- Specify license terms clearly (CC-BY, MIT, etc.)
+- Highlight potential biases and ethical considerations
+- Provide benchmark metrics for performance evaluation
+- Include data quality metrics (e.g., completeness, accuracy)
+- Document preprocessing steps for reproducibility
+- Use consistent naming conventions for files and fields
+- Include accessibility information for diverse user groups
+example_dataset_card: "dataset_name: multilingual_news_corpus\ndescription: |\n  A curated collection of 10,000 news articles\
+  \ across 12 languages, annotated for sentiment analysis.\n  Contains articles from 2010-2022 with metadata including publication\
+  \ date, source, and language code.\nlanguage: en,es,fr,de,it,pt,ru,zh,ja,ko,ar,sw\nlicense: CC-BY-4.0\nversion: 1.0.0\n\
+  release_date: 2023-10-15\ncitation: |\n  @article{smith2022multilingual,\n    title={Multilingual News Corpus for Sentiment\
+  \ Analysis},\n    author={Smith, John and Lee, Minji},\n    journal={arXiv preprint arXiv:2205.01234},\n    year={2022}\n\
+  \  }\nsize_in_bytes: 25000000\nnum_samples: 10000\nsampling_method: stratified"
+common_attributes: '| Attribute | Description | Format |
+
+  |----------|-------------|--------|
+
+  | `dataset_name` | Unique identifier | String |
+
+  | `language` | Supported languages | Array of strings |
+
+  | `license` | Legal terms | String (URL or license name) |
+
+  | `version` | Version number | Semver format |
+
+  | `release_date` | Publication date | YYYY-MM-DD |
+
+  | `citation` | Academic reference | BibTeX format |
+
+  | `size_in_bytes` | Storage requirements | Integer |
+
+  | `num_samples` | Total entries | Integer |
+
+  | `sampling_method` | Selection criteria | String |
+
+  | `data_sources` | Origin and collection methods | String |
+
+  | `technical_details` | Encoding and preprocessing | String |
+
+  | `usage_guidelines` | Recommended tasks and warnings | String |
+
+  | `ethical_considerations` | Bias and privacy information | String |'
+ethical_considerations:
+- 'Bias mitigation: Document any known biases in the dataset (e.g., gender, racial, or geographic representation)'
+- 'Privacy protection: Include anonymization methods for personal data'
+- 'Fair use: Specify acceptable use cases and restrictions'
+- 'Accessibility: Ensure metadata is available in multiple languages'
+- 'Transparency: Disclose data collection methods and potential conflicts of interest'
+- 'Accountability: Provide contact information for dataset creators'
+technical_requirements:
+- 'Encoding: UTF-8 or ASCII'
+- 'File format: JSONL, CSV, or Parquet'
+- 'Compression: Optional (gzip, bz2)'
+- 'Indexing: Include language code and date metadata'
+- 'Validation: Use schema validation tools for consistency'
+- 'Data types: Specify numeric, categorical, and text fields'
+- 'Sampling: Document stratification, randomization, or clustering methods'
+- 'Preprocessing: Describe normalization, tokenization, or feature extraction steps'
+usage_examples:
+- 'Research: "We used the multilingual_news_corpus dataset to train a cross-lingual sentiment analysis model"'
+- 'Industry: "The dataset is ideal for building multilingual customer support chatbots"'
+- 'Education: "Students can use this dataset to practice text classification techniques"'
+- 'Healthcare: "Researchers applied this dataset to analyze medical text for diagnostic purposes"'
+- 'Finance: "The dataset was used to train models for sentiment analysis in financial news"'
+related_resources:
+- Datasets Library Standard
+- FAIR Data Principles
+- Open Data Commons License
+- Ethical AI Guidelines
+- Data Management Plan Template
+version_history: '| Version | Date | Changes |
+
+  |--------|------|---------|
+
+  | 1.0.0 | 2023-10-15 | Initial release |
+
+  | 1.1.0 | 2023-11-01 | Added ethical considerations section |
+
+  | 1.2.0 | 2023-11-15 | Expanded technical requirements and examples |'
+appendix: ''
+glossary:
+- 'Dataset: A collection of structured data used for machine learning'
+- 'Metadata: Data about data, describing characteristics and context'
+- 'Provenance: Record of an object''s origin and history'
+- 'Bias: Systematic error in data that affects model performance'
+- 'Anonymization: Process of removing personally identifiable information'
+- 'Stratification: Sampling method that preserves population proportions'
+- 'Tokenization: Process of splitting text into individual words or phrases'
+references:
+- '"The FAIR Data Point: A Framework for the Management of Data in the Research Lifecycle" (2016)'
+- '"Ethical AI: A Guide for Developers" (2021)'
+- '"Best Practices for Responsible Machine Learning" (2022)'
+- '"Data Management for Machine Learning" (2023)'
+- '"Open Science Framework: Data Sharing and Collaboration" (2020)'

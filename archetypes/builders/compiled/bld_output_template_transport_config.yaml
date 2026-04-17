@@ -1,0 +1,59 @@
+kind: output_template
+id: bld_output_template_transport_config
+pillar: P05
+llm_function: PRODUCE
+purpose: Template with vars for transport_config production
+quality: null
+title: Output Template Transport Config
+version: 1.1.0
+author: n04_hybrid_review2
+tags:
+- transport_config
+- builder
+- output_template
+tldr: Template with vars for transport_config production — WebRTC/WebSocket/SSE/gRPC variants
+domain: transport_config construction
+created: '2026-04-13'
+updated: '2026-04-13'
+density_score: 0.9
+variant_a_webrtc_transport_config: "---\nid: p09_tc_{{name}}\nkind: transport_config\npillar: P09\ntitle: \"{{title}}\"\n\
+  version: \"1.0.0\"\ntransport_type: webrtc\ncreated: \"{{date}}\"\nupdated: \"{{date}}\"\nauthor: \"{{author}}\"\ndomain:\
+  \ \"{{domain}}\"\nquality: null\ntags: [transport_config, webrtc]\ntldr: \"{{tldr}}\"\n---\n\ntransport_type: webrtc\nprotocol:\
+  \ dtls-srtp\n\nice_servers:\n  - urls:\n      - \"stun:{{stun_host}}:3478\"\n    # STUN-only entry -- no credentials needed\n\
+  \  - urls:\n      - \"turn:{{turn_host}}:3478?transport=udp\"\n      - \"turn:{{turn_host}}:5349?transport=tcp\"\n    username:\
+  \ \"{{turn_username}}\"\n    credential: \"{{turn_credential}}\"\n\nice_transport_policy: \"all\"       # \"relay\" to force\
+  \ TURN only\nbundle_policy: \"max-bundle\"       # single DTLS connection for all tracks\nrtcp_mux_policy: \"require\" \
+  \       # multiplex RTP and RTCP on same port\ndtls_role: \"auto\"                 # auto-negotiate client/server role\n\
+  \nqos:\n  dscp_audio: 46      # EF -- Expedited Forwarding for voice\n  dscp_video: 34      # AF41 for video\n  dscp_data:\
+  \ 0        # Best-effort for data channels\n\ntls:\n  min_version: \"1.2\"\n  preferred_version: \"1.3\"\n  dtls_fingerprint_algorithm:\
+  \ \"sha-256\"\n\nnotes: \"{{additional_notes}}\""
+variant_b_websocket_transport_config: "---\nid: p09_tc_{{name}}\nkind: transport_config\npillar: P09\ntitle: \"{{title}}\"\
+  \nversion: \"1.0.0\"\ntransport_type: websocket\ncreated: \"{{date}}\"\nupdated: \"{{date}}\"\nauthor: \"{{author}}\"\n\
+  domain: \"{{domain}}\"\nquality: null\ntags: [transport_config, websocket]\ntldr: \"{{tldr}}\"\n---\n\ntransport_type: websocket\n\
+  protocol: rfc6455\n\nendpoint: \"wss://{{host}}:{{port}}{{path}}\"\nsubprotocols:\n  - \"{{subprotocol}}\"   # e.g., \"\
+  graphql-ws\", \"mqtt\", \"v4.json.rabbitmq.com\"\n\nkeepalive:\n  ping_interval_ms: 30000\n  ping_timeout_ms: 10000\n  max_missed_pings:\
+  \ 2\n\nframing:\n  max_message_size_bytes: 1048576   # 1 MB\n  compression:\n    enabled: true\n    algorithm: \"permessage-deflate\"\
+  \  # RFC 7692\n    client_max_window_bits: 15\n    server_max_window_bits: 15\n\ntls:\n  version: \"1.3\"\n  verify_peer:\
+  \ true\n\nreconnect:\n  initial_delay_ms: 1000\n  max_delay_ms: 30000\n  backoff_multiplier: 2.0\n  max_attempts: 10\n\n\
+  notes: \"{{additional_notes}}\""
+variant_c_sse_transport_config: "---\nid: p09_tc_{{name}}\nkind: transport_config\npillar: P09\ntitle: \"{{title}}\"\nversion:\
+  \ \"1.0.0\"\ntransport_type: sse\ncreated: \"{{date}}\"\nupdated: \"{{date}}\"\nauthor: \"{{author}}\"\ndomain: \"{{domain}}\"\
+  \nquality: null\ntags: [transport_config, sse]\ntldr: \"{{tldr}}\"\n---\n\ntransport_type: sse\nprotocol: w3c-sse\n\nendpoint:\
+  \ \"https://{{host}}:{{port}}{{path}}\"\ncontent_type: \"text/event-stream; charset=utf-8\"\n\nkeepalive:\n  heartbeat_interval_ms:\
+  \ 15000    # Empty comment line \": \\n\\n\" to bypass proxy buffering\n\nbuffering:\n  max_event_size_bytes: 65536\n  buffer_timeout_ms:\
+  \ 100          # Server flush interval (0 = immediate)\n\nreconnection:\n  retry_ms: 3000                   # Sent via \"\
+  retry:\" field to client\n  last_event_id_header: \"Last-Event-ID\"\n\ntls:\n  version: \"1.3\"\n  verify_peer: true\n\n\
+  notes: \"{{additional_notes}}\""
+variant_d_grpc_streaming_transport_config: "---\nid: p09_tc_{{name}}\nkind: transport_config\npillar: P09\ntitle: \"{{title}}\"\
+  \nversion: \"1.0.0\"\ntransport_type: grpc_streaming\ncreated: \"{{date}}\"\nupdated: \"{{date}}\"\nauthor: \"{{author}}\"\
+  \ndomain: \"{{domain}}\"\nquality: null\ntags: [transport_config, grpc]\ntldr: \"{{tldr}}\"\n---\n\ntransport_type: grpc_streaming\n\
+  protocol: grpc-over-http2      # HTTP/2 RFC 9113\n\nserver_endpoint: \"{{host}}:{{port}}\"\nstreaming_type: \"{{streaming_type}}\"\
+  \   # server | client | bidirectional\n\nkeepalive:\n  time_ms: 30000               # GRPC_ARG_KEEPALIVE_TIME_MS\n  timeout_ms:\
+  \ 10000            # GRPC_ARG_KEEPALIVE_TIMEOUT_MS\n  permit_without_calls: false  # GRPC_ARG_KEEPALIVE_PERMIT_WITHOUT_CALLS\n\
+  \nmessage_limits:\n  max_receive_message_length_bytes: 4194304   # 4 MB\n  max_send_message_length_bytes: 4194304\n\nflow_control:\n\
+  \  initial_window_size_bytes: 65535            # HTTP/2 default; increase for high-throughput\n  initial_connection_window_size_bytes:\
+  \ 1048576\n\ndeadline_ms: {{deadline_ms}}    # Per-call deadline; 0 = no deadline (not recommended)\n\ntls:\n  version:\
+  \ \"1.3\"\n  cert_file: \"{{cert_path}}\"\n  key_file: \"{{key_path}}\"\n  ca_file: \"{{ca_path}}\"\n\nservice_config: |\n\
+  \  {\n    \"methodConfig\": [{\n      \"name\": [{\"service\": \"{{service_name}}\"}],\n      \"retryPolicy\": {\n     \
+  \   \"maxAttempts\": 3,\n        \"initialBackoff\": \"0.1s\",\n        \"maxBackoff\": \"1s\",\n        \"backoffMultiplier\"\
+  : 2,\n        \"retryableStatusCodes\": [\"UNAVAILABLE\"]\n      }\n    }]\n  }\n\nnotes: \"{{additional_notes}}\""

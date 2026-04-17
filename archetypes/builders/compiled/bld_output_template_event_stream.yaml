@@ -1,0 +1,13 @@
+id: bld_output_template_event_stream
+kind: output_template
+pillar: P04
+title: Event Stream Builder -- Output Template
+version: 1.0.0
+quality: 6.6
+tags:
+- builder
+- event_stream
+- template
+llm_function: PRODUCE
+density_score: 1.0
+updated: '2026-04-17'

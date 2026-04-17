@@ -1,0 +1,85 @@
+id: kc_container_deployment_llm
+kind: knowledge_card
+title: Container Deployment for LLM Apps
+version: 1.0.0
+quality: 8.8
+pillar: P01
+language: en
+key_concepts:
+- 'Docker: Package models and dependencies into portable containers'
+- 'Kubernetes: Orchestrate containerized workloads at scale'
+- 'GPU Scheduling: Optimize resource allocation for compute-intensive tasks'
+- 'Model Serving: Deploy inference pipelines with vLLM, TGI, or Ollama'
+- 'Health Checks: Monitor service availability and auto-restart failed containers'
+- 'Autoscaling: Dynamically adjust resources based on workload demand'
+docker_best_practices: '| Practice | Description | Example | Benefit |
+
+  |---------|-------------|---------|---------|
+
+  | Multi-stage builds | Reduce image size by separating build and runtime stages | `FROM golang:1.20 AS builder` | Smaller
+  production images |
+
+  | GPU device plugin | Enable GPU access in containers | `--gpus all` flag | Utilize GPU resources |
+
+  | Base image selection | Use optimized base images | `nvidia/cuda:12.1.0` | Pre-installed CUDA libraries |
+
+  | Resource limits | Define memory and CPU limits | `resources: { limits: { memory: "4Gi" } }` | Prevent resource starvation
+  |
+
+  | Image scanning | Detect vulnerabilities in container images | Trivy or Clair tools | Improve security posture |'
+kubernetes_configuration: "apiVersion: apps/v1\nkind: Deployment\nmetadata:\n  name: llm-service\nspec:\n  replicas: 3\n \
+  \ selector:\n    matchLabels:\n      app: llm\n  template:\n    metadata:\n      labels:\n        app: llm\n    spec:\n\
+  \      containers:\n      - name: llm-container\n        image: your-llm-image:latest\n        resources:\n          limits:\n\
+  \            nvidia.com/gpu: 1"
+model_serving_options: '| Framework | Features | Use Case | Throughput (QPS) | Latency (ms) |
+
+  |----------|----------|----------|------------------|--------------|
+
+  | vLLM     | High-throughput inference | Production-scale deployments | 100,000+ | 1-5 |
+
+  | TGI      | Text generation inference | Chatbots and conversational AI | 50,000 | 5-10 |
+
+  | Ollama   | Local model serving | Development and testing | 10,000 | 10-20 |
+
+  | TorchServe | Model serving with PyTorch | Research and prototyping | 20,000 | 5-15 |
+
+  | HuggingFace Transformers | Easy model deployment | NLP tasks | 30,000 | 8-12 |'
+health_check_implementation: 'curl -I http://localhost:8000/health
+
+  Expected response:
+
+  HTTP/1.1 200 OK
+
+  Content-Type: application/json
+
+  {"status": "healthy", "timestamp": "2023-10-05T14:30:00Z"}'
+autoscaling_setup: "resource \"kubernetes_horizontal_pod_autoscaler\" \"llm_scaler\" {\n  metadata {\n    name = \"llm-autoscaler\"\
+  \n  }\n  spec {\n    scale_target_ref {\n      api_version = \"apps/v1\"\n      kind       = \"Deployment\"\n      name\
+  \       = \"llm-service\"\n    }\n    min_replicas = 1\n    max_replicas = 10\n    target_cpu_utilization_percentage = 80\n\
+  \  }\n}"
+monitoring_stack: '| Tool | Purpose | Integration | Example Query |
+
+  |-----|---------|-------------|---------------|
+
+  | Prometheus | Metrics collection | Kubernetes | `container_cpu_usage_seconds_total` |
+
+  | Grafana | Visualization | Prometheus | CPU usage dashboard |
+
+  | Alertmanager | Incident management | Prometheus | CPU threshold alerts |
+
+  | Loki | Log aggregation | Kubernetes | `container_log_line` |
+
+  | Tempo | Distributed tracing | OpenTelemetry | Request latency traces |'
+security_considerations:
+- 'GPU-specific security contexts: Restrict GPU access to authorized containers only'
+- 'Network policies: Implement Calico or Cilium policies to control container communication'
+- 'Secret management: Use Kubernetes Secrets or HashiCorp Vault for API key storage'
+- 'Image scanning: Regularly scan images with Clair or Trivy for vulnerabilities'
+- 'Resource limits: Set strict limits on CPU, memory, and GPU usage to prevent abuse'
+related_kinds:
+- 'kc_model_serving: Focuses on deploying models via frameworks like vLLM, TGI, and Ollama'
+- 'kc_kubernetes_ops: Covers Kubernetes orchestration, including deployments and autoscaling'
+- 'kc_gpu_optimization: Deals with GPU resource allocation, scheduling, and performance tuning'
+- 'kc_ci_cd_pipeline: Involves CI/CD processes for containerized applications'
+- 'kc_security_best_practices: Includes security measures for container environments'
+boundary: Static, versioned distilled knowledge. Not instruction, template, or configuration.

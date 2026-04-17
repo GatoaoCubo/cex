@@ -24,9 +24,11 @@ dependencies: []
 logging: true
 tldr: Build a cognitive map for an agent defining routing rules, decision trees, priorities, heuristics, domain boundaries, and fallback behavior.
 density_score: 0.95
+llm_function: REASON
 ---
-
 ## Context
+
+This ISO operationalizes a mental model -- a compact analogy or abstraction that guides reasoning.
 The mental-model-builder produces `mental_model` artifacts (P02) — design-time cognitive maps that define how an agent routes tasks, makes decisions, and prioritizes work. Mental models differ from agent definitions (identity and capabilities), runtime state (P10, ephemeral), and router artifacts (pure task dispatchers): a mental model encodes the thinking patterns an agent uses during execution.
 **Inputs:**
 - `$agent_name (required) - string - "The agent this mental model belongs to (e.g. 'scout-agent', 'invariant-builder')"`

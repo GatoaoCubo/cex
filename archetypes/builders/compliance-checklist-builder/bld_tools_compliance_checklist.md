@@ -1,0 +1,32 @@
+---
+kind: tools
+id: bld_tools_compliance_checklist
+pillar: P04
+llm_function: CALL
+purpose: Tools available for compliance_checklist production
+quality: 8.7
+title: "Tools Compliance Checklist"
+version: "1.0.0"
+author: wave1_builder_gen_v2
+tags: [compliance_checklist, builder, tools]
+tldr: "Tools available for compliance_checklist production"
+domain: "compliance_checklist construction"
+created: "2026-04-14"
+updated: "2026-04-14"
+density_score: 0.85
+---
+
+## Production Tools
+| Tool | Purpose | When |
+|------|---------|------|
+| cex_compile.py | Compiles checklist artifact to .yaml | After each save |
+| cex_score.py | Scores artifact against 5D quality dimensions | Post-production |
+| cex_retriever.py | Retrieves similar checklists and regulatory KCs | During F3 INJECT |
+| cex_doctor.py | Validates builder ISO completeness and structure | During F7 GOVERN |
+| cex_hygiene.py | Enforces frontmatter rules and naming conventions | During F7 GOVERN |
+
+## External References
+- SOC2 Trust Services Criteria (AICPA TSC 2017)
+- ISO/IEC 27001:2022 Annex A controls
+- GDPR Articles 5-32 (controller obligations)
+- HIPAA Security Rule 45 CFR Part 164

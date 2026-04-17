@@ -1,0 +1,38 @@
+kind: instruction
+id: bld_instruction_incident_report
+pillar: P03
+llm_function: REASON
+purpose: Step-by-step production process for incident_report
+quality: null
+title: Instruction Incident Report
+version: 1.0.0
+author: wave1_builder_gen
+tags:
+- incident_report
+- builder
+- instruction
+tldr: Step-by-step production process for incident_report
+domain: incident_report construction
+created: '2026-04-13'
+updated: '2026-04-13'
+density_score: 0.85
+phase_1_research:
+- 'Gather incident details: date, time, affected systems, and user impact.'
+- 'Identify stakeholders: developers, operators, and compliance officers involved.'
+- Collect logs, error traces, and AI model outputs from the incident window.
+- 'Analyze root cause: code defects, data drift, or misconfigured governance rules.'
+- 'Document timeline: sequence of events with timestamps and responsible parties.'
+- Review AI governance policies and incident response protocols.
+phase_2_compose:
+- 'Outline sections per SCHEMA.md: summary, timeline, root cause, corrective actions.'
+- 'Draft incident summary: impact, severity, and initial hypothesis.'
+- Write detailed timeline using OUTPUT_TEMPLATE.md’s chronological format.
+- Describe root cause with technical specifics and policy violations.
+- 'Propose corrective actions: code fixes, model retraining, or policy updates.'
+- 'List lessons learned: systemic gaps and recommendations for prevention.'
+- 'Attach evidence: logs, model outputs, and stakeholder statements.'
+- Peer-review draft for clarity, completeness, and alignment with SCHEMA.md.
+- Finalize report with version control and metadata (author, date, incident ID).
+phase_3_validate: □ All required fields in SCHEMA.md are present. □ Timeline aligns with logs and stakeholder accounts. □
+  Root cause analysis cites specific technical or policy failures. □ Corrective actions are actionable and measurable. □ Report
+  passes compliance check for P11 governance standards.

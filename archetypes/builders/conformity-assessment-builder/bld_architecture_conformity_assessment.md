@@ -1,0 +1,90 @@
+---
+kind: architecture
+id: bld_architecture_conformity_assessment
+pillar: P08
+llm_function: CONSTRAIN
+purpose: Component inventory and dependency map for the conformity-assessment-builder
+quality: 9.1
+title: "Conformity Assessment Builder -- Architecture"
+version: "1.0.0"
+author: wave7_n05
+tags: [conformity_assessment, builder, architecture]
+tldr: "13-ISO component inventory with roles, dependencies, and data flow for conformity assessment production"
+domain: "conformity_assessment construction"
+created: "2026-04-14"
+updated: "2026-04-14"
+density_score: 0.85
+---
+
+# Conformity Assessment Builder -- Architecture
+
+## Component Inventory (13 ISOs)
+
+| # | ISO File | Kind | Pillar | LLM Function | Role in Pipeline |
+|---|----------|------|--------|-------------|-----------------|
+| 1 | bld_manifest_conformity_assessment.md | type_builder | P11 | BECOME | Activates builder identity, routing, capabilities |
+| 2 | bld_instruction_conformity_assessment.md | instruction | P03 | REASON | Drives F1-F8 execution steps; 3-phase protocol |
+| 3 | bld_system_prompt_conformity_assessment.md | system_prompt | P03 | BECOME | Sets identity, scope, ALWAYS/NEVER rules |
+| 4 | bld_schema_conformity_assessment.md | schema | P06 | CONSTRAIN | Field definitions, types, validation rules |
+| 5 | bld_quality_gate_conformity_assessment.md | quality_gate | P11 | GOVERN | H01-H08 hard gates + D01-D05 soft scoring |
+| 6 | bld_output_template_conformity_assessment.md | output_template | P05 | PRODUCE | Fill-in-the-blanks Annex-IV template |
+| 7 | bld_examples_conformity_assessment.md | examples | P07 | GOVERN | Golden example (MedTriage) + 2 anti-examples |
+| 8 | bld_knowledge_card_conformity_assessment.md | knowledge_card | P01 | INJECT | EU AI Act domain knowledge, Annex III map |
+| 9 | bld_architecture_conformity_assessment.md | architecture | P08 | CONSTRAIN | This file -- component map and dependencies |
+| 10 | bld_collaboration_conformity_assessment.md | collaboration | P12 | COLLABORATE | Crew interfaces, handoffs, boundary conditions |
+| 11 | bld_config_conformity_assessment.md | config | P09 | CONSTRAIN | Naming conventions, paths, limits, hooks |
+| 12 | bld_memory_conformity_assessment.md | learning_record | P10 | INJECT | Observed pitfalls, patterns, evidence from prior runs |
+| 13 | bld_tools_conformity_assessment.md | tools | P04 | CALL | Production, validation, and external reference tools |
+
+## 8F Pipeline Mapping
+
+| 8F Stage | ISOs Active | Purpose |
+|----------|------------|---------|
+| F1 CONSTRAIN | manifest, schema, config, architecture | Resolve kind, pillar, naming, field constraints |
+| F2 BECOME | manifest, system_prompt | Activate specialist identity and scope rules |
+| F3 INJECT | knowledge_card, memory, examples | Load EU AI Act domain knowledge and learned patterns |
+| F4 REASON | instruction | Drive 3-phase protocol: RESEARCH, COMPOSE, VALIDATE |
+| F5 CALL | tools | Execute cex_compile, cex_score, cex_doctor; check schema |
+| F6 PRODUCE | output_template, instruction | Generate Annex-IV artifact using template + research |
+| F7 GOVERN | quality_gate, examples | Apply H01-H08 gates and D01-D05 scoring; compare to examples |
+| F8 COLLABORATE | collaboration, tools | Save, compile, commit, signal; deliver to crew partners |
+
+## Dependency Graph
+
+```
+manifest ------> system_prompt (activates)
+manifest ------> collaboration (routing triggers)
+schema ---------> quality_gate (field counts for H-gates)
+schema ---------> output_template (field placeholders)
+knowledge_card -> instruction (domain terms)
+knowledge_card -> examples (regulatory basis for examples)
+instruction ----> output_template (which sections to populate)
+examples -------> quality_gate (D-score calibration)
+memory ---------> instruction (learned pitfall avoidance)
+config ---------> schema (naming pattern)
+config ---------> tools (path config for compile/score)
+tools ----------> quality_gate (score execution)
+architecture ---> collaboration (component interfaces)
+```
+
+## File Naming Architecture
+
+| Pattern | Example | Used For |
+|---------|---------|---------|
+| p11_ca_[system].md | p11_ca_medtriage_v2.md | Conformity assessment artifacts |
+| bld_[iso]_conformity_assessment.md | bld_manifest_conformity_assessment.md | Builder ISOs (this directory) |
+| p11_ca_[system]_annex_iv.pdf | p11_ca_medtriage_v2_annex_iv.pdf | Export package (out of scope for builder) |
+
+## Integration Points
+
+| External System | Interface | Direction |
+|----------------|-----------|-----------|
+| Legal team | Annex IV package (.md + compiled) | OUT |
+| N01 Intelligence | AI Act research KCs | IN |
+| N05 Operations | System audit logs, accuracy test results | IN |
+| N06 Commercial | Compliance cost estimates | OUT |
+| N04 Knowledge | Conformity KCs for knowledge library | OUT |
+| cex_compile.py | Artifact compilation | OUT |
+| cex_score.py | Quality scoring | IN/OUT |
+| cex_doctor.py | System health validation | IN |
+| cex_retriever.py | Similar artifact discovery | IN |

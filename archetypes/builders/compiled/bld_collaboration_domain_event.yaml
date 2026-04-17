@@ -1,0 +1,47 @@
+id: bld_rules_domain_event
+kind: guardrail
+pillar: P11
+llm_function: GOVERN
+version: 1.0.0
+quality: 6.3
+tags:
+- domain_event
+- rules
+- guardrail
+title: 'Rules: domain_event Builder'
+density_score: 1.0
+updated: '2026-04-17'
+always:
+- ALWAYS name events in past tense (OrderPlaced, UserRegistered, PaymentFailed)
+- ALWAYS identify the aggregate root -- events belong to aggregates, not services
+- 'ALWAYS set quality: null'
+- ALWAYS include occurred_at with ISO-8601 UTC timestamp
+- ALWAYS populate payload with at least 1 typed field
+never:
+- NEVER name an event as a command (ProcessOrder, CreateUser)
+- NEVER include mutable state in payload (no foreign key lookups at read time)
+- NEVER conflate domain_event with signal (signal = system, domain_event = business)
+- NEVER conflate domain_event with audit_log (audit = compliance, event = domain model)
+- NEVER assign an event to a service -- only aggregates emit domain events
+edge_cases: '| Case | Rule |
+
+  |------|------|
+
+  | Event spans multiple aggregates | Split into N events, one per aggregate |
+
+  | Event carries sensitive PII | Add pii_fields list; note retention policy |
+
+  | Event schema changes | Increment event_version (v1 -> v2), keep old version alive |
+
+  | Saga spans multiple BCs | Use correlation_id to link related events |'
+naming_conventions: '| Pattern | Example |
+
+  |---------|---------|
+
+  | Entity + past verb | OrderPlaced, UserDeactivated |
+
+  | With qualifier | PaymentFailedDueToFraud (only when ambiguous) |
+
+  | ID prefix in file | de_{aggregate}_{verb}.md |'
+size_budget: 'max_bytes: 3072 (payload schema + causal chain + consumers = ~2KB typical) Payload table preferred over inline
+  YAML for density.'

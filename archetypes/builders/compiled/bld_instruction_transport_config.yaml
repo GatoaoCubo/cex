@@ -1,0 +1,41 @@
+kind: instruction
+id: bld_instruction_transport_config
+pillar: P03
+llm_function: REASON
+purpose: Step-by-step production process for transport_config
+quality: null
+title: Instruction Transport Config
+version: 1.0.0
+author: wave1_builder_gen
+tags:
+- transport_config
+- builder
+- instruction
+tldr: Step-by-step production process for transport_config
+domain: transport_config construction
+created: '2026-04-13'
+updated: '2026-04-13'
+density_score: 0.85
+phase_1_research:
+- Analyze real-time protocol requirements (e.g., UDP, TCP, QUIC).
+- Benchmark latency, throughput, and packet loss tolerance.
+- Identify security constraints (encryption, authentication).
+- Evaluate compatibility with existing network infrastructure.
+- Define Quality of Service (QoS) parameters.
+- Review industry standards (RFCs, IETF specs).
+phase_2_compose:
+- Set up working directory with SCHEMA.md and OUTPUT_TEMPLATE.md.
+- Define transport layer parameters (port ranges, MTU).
+- Map schema fields to config artifact structure.
+- Write config using template syntax (YAML/JSON).
+- Apply CONSTRAIN rules from Pillar P09.
+- Embed protocol-specific settings (e.g., QUIC version).
+- Add error handling for invalid configurations.
+- Document config with inline comments.
+- Finalize artifact with versioning and metadata.
+phase_3_validate:
+- '[ ] Validate schema compliance using SCHEMA.md.'
+- '[ ] Check constraint enforcement (P09 rules).'
+- '[ ] Simulate real-time traffic for performance.'
+- '[ ] Audit security parameters (encryption, auth).'
+- '[ ] Confirm compatibility with target infrastructure.'

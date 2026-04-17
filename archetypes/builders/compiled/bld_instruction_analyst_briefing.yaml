@@ -1,0 +1,43 @@
+kind: instruction
+id: bld_instruction_analyst_briefing
+pillar: P03
+llm_function: REASON
+purpose: Step-by-step production process for analyst_briefing
+quality: null
+title: Instruction Analyst Briefing
+version: 1.0.0
+author: n01_wave6
+tags:
+- analyst_briefing
+- builder
+- instruction
+tldr: Step-by-step production process for analyst_briefing
+domain: analyst_briefing construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+phase_1_research:
+- Identify the target analyst firm (Gartner, Forrester, IDC) and specific research track (Magic Quadrant, Wave, MarketScape).
+- Pull the firm's published evaluation criteria for the relevant research area.
+- Audit existing vendor positioning artifacts (pitch decks, case studies, win/loss data).
+- 'Collect quantified proof points: ARR, YoY growth, NPS score, customer retention rate, competitive win rate.'
+- Map current product capabilities against analyst evaluation dimensions.
+- Identify coverage gaps where proof points are weak or missing.
+phase_2_compose:
+- Reference bld_schema_analyst_briefing.md for required fields (company_overview, market_position, product_strengths, competitive_landscape,
+  roadmap, analyst_questions).
+- Write a concise company overview (max 150 words) positioning the vendor within the analyst's target market.
+- Articulate market position with Gartner/Forrester/IDC framework language (e.g., "Visionary," "Leader," "Strong Performer").
+- List 5-7 quantified product strengths mapped to analyst evaluation criteria.
+- 'Document competitive landscape: 3-5 named competitors with differentiation points.'
+- Outline 12-month roadmap at briefable detail level (no under-NDA specifics without embargo flag).
+- Prepare 8-10 anticipated analyst questions with pre-approved one-paragraph responses.
+- Validate all proof points against approved data sources (no unverified claims).
+phase_3_validate:
+- '[ ] All required fields present (company_overview, market_position, product_strengths, competitive_landscape, roadmap,
+  analyst_questions).'
+- '[ ] Proof points are quantified and sourced (no unverified claims).'
+- '[ ] Analyst firm and research track clearly identified (gartner, forrester, or idc).'
+- '[ ] Competitive landscape names at least 2 competitors with differentiation.'
+- '[ ] Roadmap section carries NDA/embargo flag if forward-looking specifics included.'
+- '[ ] Analyst questions section contains at least 5 anticipated questions with answers.'

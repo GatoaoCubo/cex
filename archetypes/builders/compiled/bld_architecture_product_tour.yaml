@@ -1,0 +1,70 @@
+kind: architecture
+id: bld_architecture_product_tour
+pillar: P08
+llm_function: CONSTRAIN
+purpose: Component map of product_tour -- inventory, dependencies
+quality: null
+title: Architecture Product Tour
+version: 1.0.1
+author: n02_marketing
+tags:
+- product_tour
+- builder
+- architecture
+tldr: Component map of product_tour -- inventory, dependencies
+domain: product_tour construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+component_inventory: '| ISO Name | Role | Pillar | llm_function | Status |
+
+  |---|---|---|---|---|
+
+  | bld_manifest_product_tour | Builder identity, capabilities, routing | P05 | BECOME | Active |
+
+  | bld_instruction_product_tour | Step-by-step production process (Research/Compose/Validate) | P03 | REASON | Active |
+
+  | bld_system_prompt_product_tour | Agent persona, scope rules, quality constraints | P03 | BECOME | Active |
+
+  | bld_schema_product_tour | YAML frontmatter spec and field validation rules | P06 | CONSTRAIN | Active |
+
+  | bld_quality_gate_product_tour | HARD gates + SOFT 5D scoring rubric | P11 | GOVERN | Active |
+
+  | bld_output_template_product_tour | Tour step template with (template variables), trigger and tooltip fields | P05 | PRODUCE
+  | Active |
+
+  | bld_examples_product_tour | Reference tour specs for few-shot guidance | P05 | INJECT | Active |
+
+  | bld_knowledge_card_product_tour | Domain knowledge: Pendo/Appcues/WalkMe patterns, TTV metrics | P01 | INJECT | Active
+  |
+
+  | bld_architecture_product_tour | This file: component map and dependency graph | P08 | CONSTRAIN | Active |
+
+  | bld_collaboration_product_tour | Crew roles: receives-from / produces-for boundaries | P12 | COLLABORATE | Active |
+
+  | bld_config_product_tour | Runtime parameters: defaults, limits, toggles | P09 | CONSTRAIN | Active |
+
+  | bld_memory_product_tour | Learned patterns and pitfalls for product_tour | P10 | INJECT | Active |
+
+  | bld_tools_product_tour | CEX tools and external references | P04 | CALL | Active |'
+dependencies: '| From | To | Type |
+
+  |---|---|---|
+
+  | bld_instruction_product_tour | bld_schema_product_tour | reference (COMPOSE step 1) |
+
+  | bld_instruction_product_tour | bld_output_template_product_tour | reference (COMPOSE step 5, 7) |
+
+  | bld_quality_gate_product_tour | bld_schema_product_tour | validation (H02 ID pattern) |
+
+  | bld_quality_gate_product_tour | bld_examples_product_tour | calibration (SOFT scoring) |
+
+  | bld_output_template_product_tour | bld_schema_product_tour | structural alignment |
+
+  | bld_system_prompt_product_tour | bld_knowledge_card_product_tour | domain injection |
+
+  | bld_memory_product_tour | bld_knowledge_card_product_tour | pattern reinforcement |'
+architectural_position: 'product_tour is a P05 output builder producing in-app tour specifications (tooltip sequences, step
+  triggers, ARIA annotations). It occupies the post-purchase activation layer: after a user signs up, product_tour drives
+  time-to-value by surfacing critical features at contextually relevant moments. Primary platforms: Pendo, Appcues, WalkMe,
+  Intercom Product Tours.'

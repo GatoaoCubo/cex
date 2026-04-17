@@ -1,0 +1,26 @@
+kind: output_template
+id: bld_output_template_dual_loop_architecture
+pillar: P05
+llm_function: PRODUCE
+purpose: Template with vars for dual_loop_architecture production
+quality: null
+title: Output Template Dual Loop Architecture
+version: 1.0.0
+author: wave1_builder_gen
+tags:
+- dual_loop_architecture
+- builder
+- output_template
+tldr: Template with vars for dual_loop_architecture production
+domain: dual_loop_architecture construction
+created: '2026-04-13'
+updated: '2026-04-13'
+density_score: 0.85
+overview: This ISO applies to the dual loop pattern, coordinating an outer orchestrator with one or more inner worker loops.
+  `{{placeholder_content}}`
+loop_1_loop1_name: '`{{placeholder_content}}`'
+loop_2_loop2_name: '`{{placeholder_content}}`'
+integration: '`{{placeholder_content}}`'
+use_cases: '`{{placeholder_content}}`'
+validation: '`{{placeholder_content}}`'
+notes: '`{{placeholder_content}}`'

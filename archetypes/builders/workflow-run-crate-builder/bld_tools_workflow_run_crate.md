@@ -1,0 +1,43 @@
+---
+kind: tools
+id: bld_tools_workflow_run_crate
+pillar: P04
+llm_function: CALL
+purpose: Tools available for workflow_run_crate production
+quality: 8.9
+title: "Tools Workflow Run Crate"
+version: "1.0.0"
+author: n04_wave7
+tags: [workflow_run_crate, builder, tools, RO-Crate, Galaxy, rocrate-py, FAIR]
+tldr: "Tools available for workflow_run_crate production"
+domain: "workflow_run_crate construction"
+created: "2026-04-14"
+updated: "2026-04-14"
+density_score: 0.85
+---
+
+## Production Tools
+| Tool             | Purpose                                  | When                          |
+|------------------|------------------------------------------|-------------------------------|
+| cex_compile.py   | Compile crate YAML to JSON-LD            | After draft produced          |
+| cex_score.py     | Score crate against quality gates        | Post-production validation    |
+| cex_retriever.py | Fetch similar workflow run crate examples| During context assembly       |
+| cex_doctor.py    | Validate crate structure and fields      | Pre-commit check              |
+| cex_validator.py | JSON-LD context and entity validation    | Schema compliance check       |
+
+## Validation Tools
+| Tool               | Purpose                                  | When                          |
+|--------------------|------------------------------------------|-------------------------------|
+| rocrate-py         | Python RO-Crate library + validator      | Crate creation and validation |
+| ro-crate-validator | JSON-LD schema conformance checker       | Profile conformance check     |
+| Galaxy export      | Built-in History -> RO-Crate export      | Galaxy run provenance capture |
+| WorkflowHub upload | Registry submission + validation         | FAIR publication              |
+| orcid_resolver     | Validate ORCID URL format and existence  | Author entity validation      |
+
+## External References
+- RO-Crate 1.2 spec: https://www.researchobject.org/ro-crate/specification/1.2/
+- Workflow Run Crate: https://w3id.org/ro/terms/workflow-run
+- rocrate-py: https://github.com/researchobject/ro-crate-py
+- WorkflowHub.eu: https://workflowhub.eu
+- Galaxy: https://galaxyproject.org
+- BioSchemas ComputationalWorkflow: https://bioschemas.org/profiles/ComputationalWorkflow/

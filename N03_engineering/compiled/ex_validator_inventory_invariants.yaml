@@ -1,0 +1,91 @@
+id: ex_validator_inventory_invariants
+kind: validator
+pillar: P06
+title: Inventory Invariants Validator
+version: 0.1.0
+quality: 7.9
+status: template
+brand_placeholders:
+- BRAND_SUPABASE_PROJECT_REF
+tags:
+- commerce
+- template
+- distillation
+- validator
+- inventory
+- invariants
+density_score: 0.99
+updated: '2026-04-17'
+purpose: Validates business invariants for product inventory records — enforces non-negative stock, price floor, SKU format,
+  and encoding integrity constraints before any write to Supabase, Shopify, or Bling.
+when_to_use:
+- Before inserting or updating a product in any marketplace.
+- During inventory reconciliation to flag records that violate business rules.
+- As a pre-flight check in sync workflows to prevent corrupted data propagation.
+- To detect and fix double-UTF-8 encoding in product strings.
+invariants: ''
+inv_01_non_negative_stock: 'stock >= 0
+
+
+  Negative stock is a data error. Log and reject. Do not propagate to Shopify or Bling.'
+inv_02_price_floor: 'price > 0
+
+
+  Zero-price products are treated as incomplete catalog entries. Block publishing until corrected.'
+inv_03_sku_format: 'sku matches /^[A-Z0-9][A-Z0-9\-]{2,29}$/
+
+
+  SKUs must be uppercase alphanumeric with optional hyphens, 3-30 chars. Reject free-form strings.'
+inv_04_encoding_integrity_utf_8: "Product titles and descriptions must not contain double-encoded UTF-8 sequences.\n\nfunction\
+  \ hasDoubleEncoding(str: string): boolean {\n  const badPatterns = [/Ã£/, /Ã§/, /Ã£/, /Ã©/, /Ã/, /Ã\\u00a3/];\n  return\
+  \ badPatterns.some(p => p.test(str));\n}\n\nfunction fixDoubleEncoding(str: string): string {\n  // Double-decode: treat\
+  \ the string as Latin-1 and re-encode as UTF-8\n  return decodeURIComponent(escape(str));\n}\n\nCommon double-encoded sequences\
+  \ from Shopify pull:\n| Broken | Correct |\n|--------|---------|\n| `PortÃ£o` | `Portão` |\n| `RetrÃ¡til` | `Retrátil` |\n\
+  | `RaÃ§Ã£o` | `Ração` |"
+inv_05_title_length: 'title.length >= 3 && title.length <= 255
+
+
+  Shopify and Bling both enforce a 255-character title limit. Truncate at import with a warning.'
+inv_06_shopify_id_consistency: 'If `shopify_id` is set, it must be a positive integer. Null is valid (product not yet in Shopify).
+
+
+  shopify_id === null || (Number.isInteger(shopify_id) && shopify_id > 0)'
+validator_schema: "interface InventoryRecord {\n  sku: string;\n  title: string;\n  price: number;\n  stock: number;\n  shopify_id:\
+  \ number | null;\n  bling_id: number | null;\n}\n\nfunction validateInventoryRecord(record: InventoryRecord): ValidationResult\
+  \ {\n  const errors: string[] = [];\n\n  if (record.stock < 0) errors.push(`INV-01: stock=${record.stock} is negative`);\n\
+  \  if (record.price <= 0) errors.push(`INV-02: price=${record.price} is not positive`);\n  if (!/^[A-Z0-9][A-Z0-9\\-]{2,29}$/.test(record.sku))\
+  \ errors.push(`INV-03: invalid SKU format: ${record.sku}`);\n  if (hasDoubleEncoding(record.title)) errors.push(`INV-04:\
+  \ double-encoding detected in title`);\n  if (record.title.length < 3 || record.title.length > 255) errors.push(`INV-05:\
+  \ title length out of range`);\n  if (record.shopify_id !== null && (!Number.isInteger(record.shopify_id) || record.shopify_id\
+  \ <= 0))\n    errors.push(`INV-06: invalid shopify_id: ${record.shopify_id}`);\n\n  return { valid: errors.length === 0,\
+  \ errors };\n}"
+validation_result: "{\n  \"valid\": false,\n  \"errors\": [\n    \"INV-04: double-encoding detected in title\",\n    \"INV-02:\
+  \ price=0 is not positive\"\n  ],\n  \"record_id\": \"uuid-here\",\n  \"fixable\": [\"INV-04\"],\n  \"requires_human\":\
+  \ [\"INV-02\"]\n}"
+auto_fix_scope: '| Invariant | Auto-fixable | Method |
+
+  |-----------|-------------|--------|
+
+  | INV-04 encoding | YES | `fixDoubleEncoding(title)` |
+
+  | INV-05 title too long | YES | Truncate to 255 |
+
+  | INV-01 negative stock | NO | Requires human review |
+
+  | INV-02 zero price | NO | Requires human review |
+
+  | INV-03 bad SKU | NO | Requires human review |'
+brand_variables_used: '| Variable | Purpose |
+
+  |----------|---------|
+
+  | `{{BRAND_SUPABASE_PROJECT_REF}}` | Supabase project for validation logs |'
+related_artifacts: '| Artifact | Kind | Role |
+
+  |----------|------|------|
+
+  | `ex_workflow_inventory_reconcile.md` | workflow | Calls this validator |
+
+  | `ex_interface_supabase_tables.md` | interface | Products table schema being validated |
+
+  | `ex_api_client_shopify.md` | api_client | Shopify data (source of encoding bugs) |'

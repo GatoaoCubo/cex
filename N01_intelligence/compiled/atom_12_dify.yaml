@@ -1,0 +1,1137 @@
+id: atom_12_dify
+kind: knowledge_card
+pillar: P01
+title: Dify (LangGenius) Platform -- Deep Vocabulary Atlas
+version: 1.2.0
+quality: null
+tags:
+- dify
+- langgenius
+- workflow
+- agent
+- rag
+- knowledge-pipeline
+- low-code
+- agentic-workflow
+- plugin-sdk
+- mcp-server
+- reverse-invocation
+- variable-syntax
+- agent-strategy
+date: 2026-04-13
+sources:
+- https://docs.dify.ai/
+- https://github.com/langgenius/dify
+- https://docs.dify.ai/en/use-dify/getting-started/key-concepts
+- https://docs.dify.ai/en/use-dify/nodes/agent
+- https://dify.ai/blog/dify-agent-node-introduction-when-workflows-learn-autonomous-reasoning
+- https://docs.dify.ai/en/use-dify/knowledge/knowledge-pipeline/knowledge-pipeline-orchestration
+- https://docs.dify.ai/en/use-dify/knowledge/create-knowledge/setting-indexing-methods
+- https://langgenius.github.io/dify-plugin-sdks/schema/
+- https://legacy-docs.dify.ai/plugins/schema-definition/manifest
+- https://docs.dify.ai/en/develop-plugin/dev-guides-and-walkthroughs/tool-plugin
+- https://docs.dify.ai/en/develop-plugin/features-and-specs/plugin-types/persistent-storage-kv
+- https://docs.dify.ai/en/develop-plugin/features-and-specs/advanced-development/reverse-invocation-tool
+- https://docs.dify.ai/en/use-dify/publish/publish-mcp
+- https://dify.ai/blog/v1-6-0-built-in-two-way-mcp-support
+- https://docs.dify.ai/versions/3-0-x/en/user-guide/workflow/variables
+- https://legacy-docs.dify.ai/plugins/schema-definition/agent
+- https://docs.dify.ai/en/develop-plugin/dev-guides-and-walkthroughs/agent-strategy-plugin
+- https://docs.dify.ai/en/develop-plugin/features-and-specs/plugin-types/general-specifications
+- https://docs.dify.ai/en/use-dify/nodes/template
+- https://legacy-docs.dify.ai/guides/workflow/variables
+- https://docs.dify.ai/en/use-dify/knowledge/knowledge-pipeline/create-knowledge-pipeline
+1_platform_overview: '| Dimension | Detail |
+
+  |-----------|--------|
+
+  | Org | LangGenius Inc. |
+
+  | Repo | `langgenius/dify` (Apache 2.0 + additional conditions) |
+
+  | Stars | 138K+ (2026-04) |
+
+  | Stack | Python (API), TypeScript/React (Web), Docker, pnpm, Vite |
+
+  | Core pitch | Open-source LLM app development platform: visual workflow builder + RAG pipeline + agent capabilities + model
+  management + observability |
+
+  | Deployment | Dify Cloud (SaaS), Docker Compose self-hosted, Kubernetes (Helm charts), AWS/Azure/GCP Terraform, AWS Marketplace
+  AMI |
+
+  | Plugin system | Marketplace + open community: Model, Tool, Extension, Agent Strategy |
+
+  | DSL format | YAML (Dify DSL) -- export/import apps across instances |'
+architecture_layers: "Publishing Layer       Web App | API | MCP Server | Embedding | Marketplace\n                      \
+  \   |\nApplication Layer      Chatbot | Agent | Text Generator | Chatflow | Workflow\n                         |\nOrchestration\
+  \ Layer    Visual Canvas (DAG editor) + Node Library\n                         |\nKnowledge Layer        Knowledge Pipeline\
+  \ + RAG (Vector/Full-Text/Hybrid)\n                         |\nModel Layer            Multi-provider routing (hundreds of\
+  \ LLMs)\n                         |\nPlugin Layer           Model | Tool | Extension | Agent Strategy\n                \
+  \         |\nObservability Layer    Logs | Dashboard | Annotations | Integrations\n\n---"
+2_application_types: 'Dify offers 5 application types. Workflow and Chatflow are the current recommended types; the other
+  three are legacy interfaces on the same engine.
+
+
+  | Type | Turn model | Memory | End node | Trigger support | Use case |
+
+  |------|-----------|--------|----------|----------------|----------|
+
+  | Workflow | Single-run (start-to-finish) | None (variables reset per run) | End / Output | User Input, Webhook, Schedule,
+  Plugin | Report generation, batch processing, data pipelines |
+
+  | Chatflow | Multi-turn conversation | Conversation variables persist across turns | Answer (streaming) | User Input only
+  | Chatbots, assistants, customer service |
+
+  | Chatbot | Multi-turn | Built-in | -- | -- | Legacy simple chatbot |
+
+  | Agent | Multi-turn | Built-in | -- | -- | Legacy agent (ReAct/FC) |
+
+  | Text Generator | Single-turn | None | -- | -- | Legacy completion interface |'
+chatflow_vs_workflow_key_differences: '| Dimension | Workflow | Chatflow |
+
+  |-----------|----------|----------|
+
+  | System vars | `sys.user_id`, `sys.app_id`, `sys.workflow_id`, `sys.workflow_run_id`, `sys.timestamp` | All of the above
+  + `sys.query`, `sys.files`, `sys.dialogue_count`, `sys.conversation_id` |
+
+  | Conversation variables | Not available | String, Number, Object, Array -- persist across turns |
+
+  | Variable Assigner | N/A | Writes to conversation variables (overwrite, append, arithmetic, etc.) |
+
+  | Output node | End / Output | Answer (streaming with variable ordering) |
+
+  | Trigger nodes | User Input, Webhook, Schedule, Plugin | User Input only |
+
+  | Memory in LLM nodes | Not available | TokenBufferMemory -- retains conversation history |
+
+
+  ---'
+3_complete_node_type_registry: ''
+3_1_start_trigger_nodes: '| Node | Description | Available in |
+
+  |------|-------------|-------------|
+
+  | User Input | Defines input fields (text, paragraph, select, number, checkbox, JSON, file, file list) collected from end
+  users | Workflow + Chatflow |
+
+  | Webhook Trigger | Listens for external HTTP requests; extracts query params, headers, body; supports JSON, form-data,
+  multipart, text/plain | Workflow only |
+
+  | Schedule Trigger | Runs workflow on cron schedule | Workflow only |
+
+  | Plugin Trigger | Custom trigger via installed plugin | Workflow only |
+
+
+  Webhook details: Configurable HTTP method, content-type, parameter extraction (query/header/body), custom response codes
+  (200-399), auth handling, parallel triggers supported.'
+3_2_llm_reasoning_nodes: '| Node | Description | Key config |
+
+  |------|-------------|-----------|
+
+  | LLM | Core language model invocation: system/user/assistant messages, Jinja2 templating, context variables for RAG, structured
+  output (JSON Schema), streaming, vision/multimodal, memory (Chatflow only) | Model selection, temperature, top_p, frequency/presence
+  penalty, presets (Precise/Balanced/Creative), retry + fallback (default value, error route, alt model) |
+
+  | Agent | Autonomous reasoning node: LLM + tool calling in iterative loop (Think-Act-Observe) | Strategy (Function Calling
+  / ReAct / custom plugin), tool list, max iterations (3-15), TokenBufferMemory, output: final answer + tool outputs + reasoning
+  trace + iteration count |
+
+  | Question Classifier | LLM-based semantic routing: classifies input into user-defined categories, each category becomes
+  a distinct output path | Model selection, category labels + descriptions, classification instructions for edge cases |
+
+  | Parameter Extractor | Extracts structured JSON from unstructured text via LLM | Parameter definitions (name, type, required),
+  inference mode (Function Call / Prompt-based), memory toggle, output: `is_success` + `reason` |'
+3_3_knowledge_retrieval_nodes: '| Node | Description | Key config |
+
+  |------|-------------|-----------|
+
+  | Knowledge Retrieval | Queries one or more knowledge bases simultaneously, returns ranked document chunks | Text/image
+  query, multiple KB selection, rerank settings (Weighted Score / Rerank Model), Top K, score threshold, metadata filtering
+  (manual/auto) |
+
+
+  Output: `result` -- array of `{content, metadata, title, ...}`, optional `files` for images.'
+3_4_data_processing_nodes: '| Node | Description | Key config |
+
+  |------|-------------|-----------|
+
+  | Code | Python or JavaScript in sandboxed execution; access to json, math, datetime, re, numpy, pandas, lodash, moment
+  | Input/output variable declaration; limits: 80K char strings, numbers -999999999..999999999, 5-level nesting max; retry
+  up to 10x |
+
+  | Template | Jinja2 templating: variable substitution, conditionals, loops, filters (upper, round, replace, strftime, default)
+  | Input variables from any upstream node; max output 80K chars (configurable via `TEMPLATE_TRANSFORM_MAX_LENGTH`) |
+
+  | Document Extractor | Converts uploaded files to text: TXT, MD, HTML, DOCX, DOC (Unstructured API), PDF (pypdfium2), Excel,
+  CSV, PPT, EML, MSG, EPUB, VTT, JSON, YAML | Single file (string) or multiple (array); output: `text` string or array |
+
+  | HTTP Request | External API calls: GET, HEAD, POST, PUT, PATCH, DELETE; variable substitution in URL/headers/body; nested
+  access `{{api_response.data.items[0].id}}` | Auth (None/Basic/Bearer/Custom/API Key), timeout (connect/read/write), body
+  types (JSON/Form/Binary/Raw), SSL toggle, retry up to 10x, error paths |
+
+  | Tool | Connects to external services via installed tools (built-in, third-party, custom) | Auth credentials, tool description,
+  parameter config (auto-generated or manual) |
+
+  | List Operator | Array manipulation: filter (content type, MIME, extension, size, filename, transfer method), sort (asc/desc),
+  select (first/last N items, first/last record) | Input: `array[string\|number\|file\|boolean]`; output: `result`, `first_record`,
+  `last_record` |'
+3_5_flow_control_nodes: '| Node | Description | Key config |
+
+  |------|-------------|-----------|
+
+  | If-Else | Conditional branching: IF / ELIF (multiple) / ELSE paths | Operators: contains, not contains, starts with, ends
+  with, is, is not, is empty, is not empty, >, <, =, !=; combine with AND/OR logic |
+
+  | Iteration | Processes arrays by applying workflow steps to each element; parallel mode (up to 10 concurrent) or sequential
+  | Input: array variable; built-in: `items` (current element), `index` (position); error handling: terminate / continue on
+  error / remove failed; output: result array |
+
+  | Loop | Progressive refinement: each cycle builds on previous results; state persists across cycles | Loop variables (persist
+  + accumulate), termination condition (expression-based, e.g. `quality_score > 0.9`), max loop count (safety limit), Exit
+  Loop node |
+
+  | Variable Aggregator | Merges outputs from multiple conditional branches into single variable reference | All inputs must
+  share same data type; outputs whichever branch actually executed; multi-group support (v0.6.10+) |
+
+  | Variable Assigner | Writes to conversation variables (Chatflow only): overwrite, clear, set, arithmetic (+,-,*,/), append,
+  extend, remove first/last | String ops, Number arithmetic, Boolean set, Object overwrite, Array CRUD |'
+3_6_output_interaction_nodes: '| Node | Description | Key config |
+
+  |------|-------------|-----------|
+
+  | Answer | Chatflow output: streaming text + images + files; variable sequence determines streaming order; multiple Answer
+  nodes per chatflow; supports markdown | `{{variable}}` substitution, citation tracking from Knowledge Retrieval |
+
+  | Output / End | Workflow terminal: returns final results | Output variable mapping |
+
+  | Human Input | Pauses workflow for human review/approval: customizable form via web app or email, action buttons for routing
+  (approve/reject/regenerate), timeout with fallback | Delivery: web app / email; markdown forms; pre-filled fields; first-response-wins;
+  timeout handling |
+
+
+  ---'
+4_agent_strategies_full_registry: ''
+built_in_strategies: '| Strategy | Mechanism | Best for |
+
+  |----------|-----------|----------|
+
+  | Function Calling | Passes tool definitions via model''s native `tools` parameter; model selects and parameterizes functions
+  directly | GPT-4, Claude 3.5+, models with robust FC support |
+
+  | ReAct (Reason + Act) | Structured prompt: Thought -> Action -> Observation cycle; explicit reasoning trace | Models without
+  native FC; when reasoning visibility needed |'
+plugin_extensible_strategies_via_marketplace: '| Strategy | Abbreviation | Description |
+
+  |----------|-------------|-------------|
+
+  | Chain-of-Thought | CoT | Sequential reasoning steps before final answer |
+
+  | Tree-of-Thought | ToT | Branching exploration of multiple reasoning paths |
+
+  | Graph-of-Thought | GoT | Non-linear reasoning with backtracking and merging |
+
+  | Backbone-of-Thought | BoT | Structured problem decomposition framework |
+
+  | Semantic Kernel | SK | Microsoft''s planner/skill architecture |
+
+  | Custom | -- | Developer-defined via Agent Strategy Plugin SDK |'
+agent_node_execution_phases: "1. INITIALIZATION\n   |-- Establish parameters, tools, context\n   |-- Load strategy plugin\n\
+  \   |\n2. ITERATIVE LOOP (up to max_iterations)\n   |-- LLM receives prompt + available tools\n   |-- Parse response for\
+  \ tool requirements\n   |-- Execute tool(s) with parameters\n   |-- Update context with observations\n   |-- Check completion\
+  \ condition\n   |\n3. FINAL RESPONSE\n   |-- Return completed result\n   |-- OR hit iteration limit -> return partial"
+agent_output_variables: '| Variable | Description |
+
+  |----------|-------------|
+
+  | `final_answer` | Agent''s completed response |
+
+  | `tool_outputs` | Results from each tool call |
+
+  | `reasoning_trace` | Detailed thought chain (ReAct) |
+
+  | `iteration_count` | Number of loops executed |
+
+  | `success_status` | Whether agent completed successfully |
+
+  | `agent_logs` | Metadata for debugging |
+
+
+  ---'
+5_knowledge_system_full_vocabulary: ''
+5_1_knowledge_base_lifecycle: Data Source -> Knowledge Pipeline -> Knowledge Base -> Knowledge Retrieval Node -> LLM Node
+  (context)
+5_2_data_sources: '| Source | Method |
+
+  |--------|--------|
+
+  | File Upload | Local files via drag-and-drop (max 50 files, 15MB each) |
+
+  | Notion | Online document sync with automatic updates |
+
+  | Web Crawler | Jina Reader, Firecrawl -- web content to markdown |
+
+  | Online Drive | Google Drive, Dropbox, OneDrive integration |
+
+  | API | External Knowledge API for custom data sources |'
+5_3_knowledge_pipeline_nodes: 'The Knowledge Pipeline is a visual workflow for data ingestion and processing (introduced v1.9.0).
+
+
+  | Pipeline Node | Purpose | Options |
+
+  |---------------|---------|---------|
+
+  | Data Source | Ingest raw data | File Upload, Notion, Web Crawler, Online Drive |
+
+  | Dify Extractor | Built-in document parser | DOC, PDF, images; optimized for complex layouts |
+
+  | Unstructured | Third-party extraction | Customizable strategies, element-level metadata |
+
+  | Generic Doc Processor | Standard format parsing | PDF, XLSX, DOCX |
+
+  | General Chunker | Fixed-size segmentation | Customizable delimiters, chunk size, overlap |
+
+  | Parent-Child Chunker | Dual-layer chunking | Parent (broad context) + Child (precise match) |
+
+  | Q&A Processor | Spreadsheet Q&A pairs | Specialized for FAQ-style knowledge |
+
+  | Knowledge Base Node | Storage + retrieval config | Chunk structure, index method, retrieval settings |'
+5_4_indexing_methods: '| Method | How it works | Cost |
+
+  |--------|-------------|------|
+
+  | High Quality | Embedding-based vectorization using configured embedding model | Higher (API calls to embedding model)
+  |
+
+  | Economical | Keyword extraction (top 10 keywords per chunk) via inverted index | Lower (no embedding model needed) |'
+5_5_retrieval_modes: '| Mode | Mechanism | Reranking |
+
+  |------|-----------|-----------|
+
+  | Vector Search | Embed query -> cosine/dot similarity against chunk vectors; finds semantic matches even without keyword
+  overlap | Optional Rerank Model |
+
+  | Full-Text Search | Inverted index keyword matching (standard search engine technique); exact term matching | No reranking
+  |
+
+  | Hybrid Search | Runs both Vector + Full-Text simultaneously; merges results | Weighted Score (semantic vs keyword balance
+  slider) OR Rerank Model |'
+5_6_retrieval_configuration: '| Parameter | Description |
+
+  |-----------|-------------|
+
+  | Top K | Maximum number of chunks to return after reranking |
+
+  | Score Threshold | Minimum similarity score to include a chunk |
+
+  | Rerank Model | Third-party model for result re-ordering (e.g., Cohere rerank) |
+
+  | Weighted Score | Semantic vs keyword balance (0.0-1.0 slider) in Hybrid mode |
+
+  | Metadata Filtering | Manual or automatic filtering by document metadata fields |'
+5_7_chunk_structure_types: '| Structure | Description |
+
+  |-----------|-------------|
+
+  | General | Standard flat chunks with configurable size |
+
+  | Parent-Child | Hierarchical: parent chunks for context, child chunks for precision |
+
+  | Q&A | Question-answer pairs extracted from spreadsheets |'
+5_8_multimodal_knowledge: Vision-capable embedding models enable cross-modal image-text retrieval. Images in documents are
+  embedded alongside text chunks. ---
+6_variable_system: ''
+6_1_variable_categories: '| Category | Scope | Mutability | Available in |
+
+  |----------|-------|-----------|-------------|
+
+  | Input Variables | Set at app start by end user | Immutable during run | Workflow + Chatflow |
+
+  | Output Variables | Generated by node execution | Immutable (per node) | Workflow + Chatflow |
+
+  | Environment Variables | App-level sensitive data (API keys) | Read-only | Workflow + Chatflow |
+
+  | Conversation Variables | Session-persistent across turns | Writable via Variable Assigner | Chatflow only |'
+6_2_system_variables_workflow: '| Variable | Type | Description |
+
+  |----------|------|-------------|
+
+  | `sys.user_id` | String | Unique user identifier |
+
+  | `sys.app_id` | String | Application identifier |
+
+  | `sys.workflow_id` | String | Workflow definition ID |
+
+  | `sys.workflow_run_id` | String | Runtime execution ID |
+
+  | `sys.timestamp` | Number | Execution timestamp |
+
+  | `sys.files` | Array[File] | Legacy file upload variable |'
+6_3_system_variables_chatflow_specific_additions: '| Variable | Type | Description |
+
+  |----------|------|-------------|
+
+  | `sys.query` | String | User''s chat message content |
+
+  | `sys.files` | Array[File] | User-uploaded files (when enabled) |
+
+  | `sys.dialogue_count` | Number | Conversation turn counter |
+
+  | `sys.conversation_id` | String | Session identifier |'
+6_4_variable_referencing: '- Dropdown selector in node config UI
+
+  - `/` slash notation in text inputs
+
+  - `{{variable_name}}` in prompts and templates
+
+  - Dot notation for nested access: `{{node.output.field}}`
+
+  - Bracket notation for arrays: `{{items[0].title}}`
+
+
+  ---'
+7_plugin_system: ''
+7_1_plugin_types: '| Type | Purpose | Extensibility |
+
+  |------|---------|--------------|
+
+  | Model | Add LLM/embedding/rerank providers (OpenAI, Anthropic, local) | Cannot extend other plugin types |
+
+  | Tool | External service integration (search, DB, API) + optional endpoint | Most common plugin type |
+
+  | Agent Strategy | Custom reasoning algorithms (CoT, ToT, GoT, BoT) | Defines standard I/O + reasoning loop |
+
+  | Extension | Simple HTTP service to extend platform | Lightweight, endpoint-only |'
+7_2_plugin_development:
+- CLI scaffolding tools for all 4 types
+- Configuration forms (YAML manifest)
+- Visualization components
+- Persistent storage API
+- Reverse invocation of Dify services (App, Model, Node, Tool)
+- Plugin signing for third-party verification
+- Marketplace publishing or GitHub distribution
+7_3_marketplace_ecosystem: '- Official plugins (LangGenius maintained)
+
+  - Partner solutions (verified)
+
+  - Community contributions (open PR-based publishing)
+
+  - Categories: Models, Tools, Agent Strategies, Extensions, Bundles
+
+
+  ---'
+8_publishing_deployment: '| Method | Description | Auth |
+
+  |--------|-------------|------|
+
+  | Web App (Chat) | Hosted chat interface with conversation history | Configurable access control |
+
+  | Web App (Workflow) | Single-run form interface | Configurable access control |
+
+  | API | RESTful endpoints for all app types (chat, completion, workflow) | API key based |
+
+  | MCP Server | Expose app as MCP server for Claude Desktop, Cursor, etc. | MCP protocol |
+
+  | Website Embedding | iframe/script embed: floating button, inline, or custom styled | Configurable |
+
+  | Marketplace | Publish app for discovery by other Dify users | Review process |
+
+
+  ---'
+9_observability_monitoring: '| Feature | Description |
+
+  |---------|-------------|
+
+  | Dashboard | Usage metrics, token consumption, response times |
+
+  | Logs | Full execution traces per workflow run |
+
+  | Run History | Replay past executions with input/output snapshots |
+
+  | Single Node Debug | Test individual nodes in isolation |
+
+  | Variable Inspector | Real-time data flow visualization |
+
+  | Annotation System | Human feedback loop for quality improvement |
+
+  | External Integrations | LangSmith, Langfuse, Arize, Phoenix, Opik, W&B Weave, Alibaba Cloud |
+
+
+  ---'
+10_error_handling: '| Node | Error strategy |
+
+  |------|---------------|
+
+  | LLM | Retry (count, interval, backoff), fallback: default value / error route / alternative model |
+
+  | Code | Retry up to 10x (max 5000ms interval), fallback path |
+
+  | HTTP Request | Retry up to 10x, error branch routing |
+
+  | Iteration | Terminate / Continue on Error / Remove Failed |
+
+  | Loop | Max iteration limit as safety valve |
+
+  | Agent | Max iterations cap to prevent infinite loops |
+
+
+  ---'
+11_cex_mapping: ''
+11_1_concept_mapping: '| Dify Term | CEX Equivalent | Notes |
+
+  |-----------|---------------|-------|
+
+  | Workflow | 8F Pipeline | Both are DAG-based processing chains |
+
+  | Chatflow | Chatflow has no direct CEX analog | CEX is artifact-centric, not conversation-centric |
+
+  | Node | 8F Function (F1-F8) | Dify nodes are visual; CEX functions are reasoning steps |
+
+  | Agent Node | Nucleus (N01-N06) | Both delegate autonomous reasoning to specialized units |
+
+  | Agent Strategy | 8F reasoning protocol | Dify pluggable; CEX fixed (8F) but extensible per domain |
+
+  | Knowledge Base | P01_knowledge library | Both store structured knowledge for retrieval |
+
+  | Knowledge Retrieval Node | F3 INJECT | Both retrieve context before reasoning |
+
+  | Knowledge Pipeline | cex_compile.py + cex_retriever.py | Data ingestion + indexing pipelines |
+
+  | LLM Node | F6 PRODUCE | Core generation step |
+
+  | Question Classifier | F1 CONSTRAIN (intent resolution) | Both route input to correct handler |
+
+  | If-Else | GDP decision gates | Conditional routing based on context |
+
+  | Iteration / Loop | cex_evolve.py cycles | Iterative refinement patterns |
+
+  | Variable Aggregator | Signal consolidation | Merge outputs from parallel branches |
+
+  | Human Input | GDP (Guided Decision Protocol) | Both pause for human judgment |
+
+  | Tool Node | F5 CALL | External capability invocation |
+
+  | Code Node | _tools/*.py | Custom data transformation |
+
+  | Template Node | Jinja2 in cex_crew_runner.py | Prompt composition via templating |
+
+  | Document Extractor | cex_retriever.py ingestion | File-to-text conversion |
+
+  | HTTP Request | api_client kind (P04) | External API integration |
+
+  | Parameter Extractor | cex_8f_motor.py intent parser | Structured extraction from natural language |
+
+  | Answer / Output | F8 COLLABORATE output | Final artifact delivery |
+
+  | Webhook Trigger | _spawn/dispatch.sh | External event triggering execution |
+
+  | Plugin (Model) | .cex/config/nucleus_models.yaml | Model provider configuration |
+
+  | Plugin (Tool) | P04_tools builders | Tool integration layer |
+
+  | Plugin (Agent Strategy) | .claude/rules/8f-reasoning.md | Reasoning protocol definition |
+
+  | Dify DSL (YAML) | CEX frontmatter + compiled YAML | Portable artifact representation |
+
+  | Conversation Variable | .cex/runtime/ session state | Persistent state across interactions |
+
+  | Environment Variable | .cex/config/ | Sensitive configuration |
+
+  | Reranking | cex_retriever.py TF-IDF ranking | Result quality optimization |
+
+  | Marketplace | archetypes/builders/ | Reusable component library |'
+11_2_architectural_parallels: '| Pattern | Dify | CEX |
+
+  |---------|------|-----|
+
+  | Visual orchestration | Canvas DAG editor | /mission + /grid dispatch |
+
+  | Autonomous reasoning | Agent Node (ReAct/FC) | Nucleus with 8F pipeline |
+
+  | Knowledge injection | Knowledge Retrieval -> LLM context | F3 INJECT -> F6 PRODUCE |
+
+  | Quality loop | Loop node with score threshold | F7 GOVERN retry (max 2) |
+
+  | Human-in-the-loop | Human Input node | GDP (Guided Decision Protocol) |
+
+  | Multi-agent | Multiple Agent nodes in workflow | Grid dispatch (up to 6 parallel nuclei) |
+
+  | Plugin extensibility | 4 plugin types + Marketplace | Builders (125) + archetypes |
+
+  | Error resilience | Per-node retry + fallback chains | cex_router.py fallback chains |'
+11_3_gaps_what_dify_has_that_cex_lacks: '| Dify capability | CEX status |
+
+  |----------------|------------|
+
+  | Visual DAG canvas | No GUI -- CLI/file-based orchestration |
+
+  | Real-time streaming Answer | No streaming -- batch artifact output |
+
+  | Webhook/Schedule triggers | Manual dispatch only (dispatch.sh) |
+
+  | Conversation memory across turns | Session state in .cex/runtime/ (simpler) |
+
+  | Marketplace for plugins | No marketplace -- git-based sharing |
+
+  | Web app hosting built-in | No hosting -- artifacts are files |
+
+  | MCP Server publishing | MCP consumer only (not publisher) |'
+11_4_gaps_what_cex_has_that_dify_lacks: '| CEX capability | Dify status |
+
+  |---------------|------------|
+
+  | Typed artifact system (130 kinds) | Untyped -- all outputs are strings/JSON |
+
+  | Quality scoring (3-layer: structural + rubric + semantic) | No built-in quality gates |
+
+  | Builder archetypes (13 ISOs per kind) | No builder specialization |
+
+  | Fractal nucleus architecture (7 specialized domains) | Flat -- all agents are equal |
+
+  | Brand injection across all outputs | No brand awareness |
+
+  | 8F mandatory reasoning trace | Optional -- depends on prompt design |
+
+  | Autonomous evolution (cex_evolve.py) | No self-improvement loop |
+
+  | Git-native version control per artifact | Version control at app level only |
+
+
+  ---'
+12_model_provider_ecosystem: 'Dify supports "hundreds of proprietary/open-source LLMs from dozens of inference providers"
+  via the Model Plugin system:
+
+
+  | Category | Examples |
+
+  |----------|---------|
+
+  | Proprietary | OpenAI (GPT-4/4o), Anthropic (Claude 3.5/4), Google (Gemini), Mistral |
+
+  | Open-source | Llama 3, Qwen, DeepSeek, Yi |
+
+  | Local inference | Ollama, LocalAI, Xinference, vLLM |
+
+  | Embedding | OpenAI Ada, Cohere Embed, local models |
+
+  | Reranking | Cohere Rerank, cross-encoder models |
+
+  | Speech | Whisper (STT), TTS providers |
+
+  | Vision | GPT-4V, Claude vision, multimodal models |
+
+
+  ---'
+13_quick_reference_all_node_types_sorted: '| # | Node | Category | Workflow | Chatflow |
+
+  |---|------|----------|----------|----------|
+
+  | 1 | User Input | Start | Yes | Yes |
+
+  | 2 | Webhook Trigger | Start | Yes | No |
+
+  | 3 | Schedule Trigger | Start | Yes | No |
+
+  | 4 | Plugin Trigger | Start | Yes | No |
+
+  | 5 | LLM | Reasoning | Yes | Yes |
+
+  | 6 | Agent | Reasoning | Yes | Yes |
+
+  | 7 | Question Classifier | Reasoning | Yes | Yes |
+
+  | 8 | Parameter Extractor | Reasoning | Yes | Yes |
+
+  | 9 | Knowledge Retrieval | Knowledge | Yes | Yes |
+
+  | 10 | Code | Processing | Yes | Yes |
+
+  | 11 | Template | Processing | Yes | Yes |
+
+  | 12 | Document Extractor | Processing | Yes | Yes |
+
+  | 13 | HTTP Request | Processing | Yes | Yes |
+
+  | 14 | Tool | Processing | Yes | Yes |
+
+  | 15 | List Operator | Processing | Yes | Yes |
+
+  | 16 | If-Else | Flow Control | Yes | Yes |
+
+  | 17 | Iteration | Flow Control | Yes | Yes |
+
+  | 18 | Loop | Flow Control | Yes | Yes |
+
+  | 19 | Variable Aggregator | Flow Control | Yes | Yes |
+
+  | 20 | Variable Assigner | Flow Control | No | Yes |
+
+  | 21 | Answer | Output | No | Yes |
+
+  | 22 | Output / End | Output | Yes | No |
+
+  | 23 | Human Input | Interaction | Yes | Yes |
+
+
+  Total: 23 node types across 6 categories.
+
+
+  ---'
+14_plugin_development_sdk_full_schema_reference: ''
+14_1_manifest_schema_root: '| Field | Type | Required | Constraints |
+
+  |-------|------|----------|-------------|
+
+  | `version` | string (semver) | Yes | e.g. `0.0.1` |
+
+  | `type` | string | Yes | Always `"plugin"` (future: `"bundle"`) |
+
+  | `author` | string | Yes | Marketplace org identifier |
+
+  | `name` | string | Yes | Pattern: `^[a-z0-9_-]{1,128}$` |
+
+  | `label` | I18nObject | Yes | Multi-lang display names |
+
+  | `description` | I18nObject | Yes | Multi-lang descriptions |
+
+  | `icon` | string | Yes | Asset path (e.g. `"icon.svg"`) |
+
+  | `icon_dark` | string | No | Dark-mode variant |
+
+  | `created_at` | RFC3339 datetime | Yes | Must not exceed current time |
+
+  | `repo` | string | No | Repository URL |
+
+  | `resource` | PluginResourceRequirements | No | Memory + permission config |
+
+  | `plugins` | Plugins | Yes | Extension manifests (see 14.2) |
+
+  | `meta` | Meta | Yes | Runtime metadata |
+
+  | `privacy` | string | No | Path or URL to privacy policy |
+
+
+  I18nObject supported locales: `en_US`, `zh_Hans`, `ja_JP`, `pt_BR`'
+14_2_plugins_object: "plugins:\n  tools:            # list[string] -- paths to provider YAML files\n  models:           #\
+  \ list[string] -- paths to model YAML files\n  endpoints:        # list[string] -- paths to endpoint YAML files\n  agent_strategies:\
+  \ # list[string] -- paths to strategy YAML files\n\nConstraints:\n- Cannot declare both `tools` AND `models` simultaneously\n\
+  - Cannot declare both `models` AND `endpoints` simultaneously\n- Minimum one extension type required\n- One provider per\
+  \ extension type (v1.x)"
+14_3_resource_object: "resource:\n  memory: 10485760          # bytes (int64)\n  permission:\n    tool:\n      enabled: true\n\
+  \    model:\n      enabled: true\n      llm: true\n      text_embedding: true\n      rerank: true\n      tts: true\n   \
+  \   speech2text: true\n      moderation: true\n    endpoint:\n      enabled: true\n    app:\n      enabled: true\n    storage:\n\
+  \      enabled: true\n      size: 1048576          # bytes (int64)"
+14_4_meta_object: "meta:\n  version: \"0.0.1\"\n  arch: [amd64, arm64]\n  runner:\n    language: python\n    version: \"3.12\"\
+  \n    entrypoint: \"main\""
+14_5_tool_plugin_file_layout: "plugin_name/\n  _assets/icon.svg\n  provider/\n    {provider_name}.yaml    # provider config\n\
+  \    {provider_name}.py      # ToolProvider subclass\n  tools/\n    {tool_name}.yaml        # tool config\n    {tool_name}.py\
+  \          # Tool subclass\n  manifest.yaml\n  requirements.txt\n\nProvider YAML fields:\n\n| Field | Type | Description\
+  \ |\n|-------|------|-------------|\n| `identity.author` | string | Plugin author |\n| `identity.name` | string | Provider\
+  \ identifier |\n| `identity.label` | I18nObject | Display name |\n| `identity.description` | I18nObject | Human + LLM descriptions\
+  \ |\n| `identity.icon` | string | Asset path |\n| `identity.tags` | list[string] | Marketplace categories |\n| `credentials_for_provider`\
+  \ | map[name: ProviderConfig] | Auth fields |\n| `tools` | list[string] | Tool YAML file paths |\n| `extra.python.source`\
+  \ | string | Provider implementation path |\n\nTool YAML fields:\n\n| Field | Type | Description |\n|-------|------|-------------|\n\
+  | `identity.name` | string | Tool identifier |\n| `identity.author` | string | Plugin author |\n| `identity.label` | I18nObject\
+  \ | Display name |\n| `description.human` | I18nObject | Human-readable description |\n| `description.llm` | string | LLM-facing\
+  \ usage instruction |\n| `parameters` | list[ToolParameter] | Input specs |\n| `output_schema` | JSON Schema dict | Structured\
+  \ output definition |\n| `has_runtime_parameters` | bool | Dynamic params flag |\n| `extra.python.source` | string | Implementation\
+  \ file path |"
+14_6_toolparameter_types_full_enum: '| Type | Description |
+
+  |------|-------------|
+
+  | `string` | Plain text |
+
+  | `number` | Numeric (supports min/max/precision) |
+
+  | `boolean` | True/false |
+
+  | `select` | Dropdown with options list |
+
+  | `secret-input` | Masked credential field |
+
+  | `text-input` | Multi-line text |
+
+  | `file` | Single file upload |
+
+  | `files` | Multiple file upload |
+
+  | `app-selector` | Select a Dify app |
+
+  | `model-selector` | Select a model config (scoped by model type) |
+
+  | `array[tools]` | Array of ToolEntity references |
+
+  | `any` | Untyped passthrough |
+
+  | `object` | Structured JSON object |
+
+  | `array` | Generic array |
+
+  | `dynamic-select` | Dynamically populated dropdown |
+
+  | `checkbox` | Boolean checkbox |
+
+
+  Parameter `form` values:
+
+  - `llm` -- agent-inferred (not shown in UI, sent to model as tool param)
+
+  - `form` -- user-input (shown in configuration form)
+
+  - `schema` -- validated against JSON schema'
+14_7_credential_form_types_providerconfig: '| Type | Behavior | Use case |
+
+  |------|----------|----------|
+
+  | `text-input` | Visible text field | Usernames, endpoint URLs |
+
+  | `secret-input` | Masked/encrypted storage | API keys, passwords, tokens |
+
+  | `select` | Dropdown from predefined options | Region, model tier |
+
+  | `radio` | Radio button group | Mutually exclusive config |
+
+  | `switch` | Toggle boolean | Feature flags, enable/disable |'
+14_8_tool_implementation_python: "from collections.abc import Generator\nfrom dify_plugin import Tool\nfrom dify_plugin.entities.tool\
+  \ import ToolInvokeMessage\n\nclass GoogleSearchTool(Tool):\n    def _invoke(self, tool_parameters: dict) -> Generator[ToolInvokeMessage]:\n\
+  \        query = tool_parameters.get(\"query\")\n        results = self._do_search(query)\n        yield self.create_json_message({\"\
+  results\": results})\n        # Other return types:\n        # yield self.create_text_message(\"plain text result\")\n \
+  \       # yield self.create_link_message(\"https://example.com\")\n        # yield self.create_image_message(image_bytes,\
+  \ \"image/png\")\n        # yield self.create_blob_message(data_bytes, \"application/pdf\")\n\nProvider credential validation:\n\
+  \nfrom dify_plugin import ToolProvider\nfrom dify_plugin.errors.tool import ToolProviderCredentialValidationError\n\nclass\
+  \ GoogleProvider(ToolProvider):\n    def _validate_credentials(self, credentials: dict) -> None:\n        try:\n       \
+  \     GoogleSearchTool.from_credentials(credentials).invoke(\n                tool_parameters={\"query\": \"test\", \"num_results\"\
+  : 1}\n            )\n        except Exception as e:\n            raise ToolProviderCredentialValidationError(str(e))"
+14_9_model_provider_plugin_schema: 'AIModelEntity fields:
+
+
+  | Field | Type | Description |
+
+  |-------|------|-------------|
+
+  | `model` | string | Model identifier |
+
+  | `model_type` | ModelType enum | llm / text-embedding / rerank / tts / speech2text / moderation / text2img |
+
+  | `features` | list[string] | tool-call, vision, stream-tool-call, document, video, audio, structured-output |
+
+  | `fetch_from` | enum | `predefined-model` or `customizable-model` |
+
+  | `model_properties.context_size` | int | Max context window tokens |
+
+  | `model_properties.max_chunks` | int | For embedding models |
+
+  | `parameter_rules` | list[ParameterRule] | temperature, top_p, top_k, penalties, max_tokens |
+
+  | `pricing.input` | decimal | Cost per 1K input tokens |
+
+  | `pricing.output` | decimal | Cost per 1K output tokens |
+
+  | `pricing.currency` | string | e.g. `"USD"` |
+
+
+  ---'
+15_reverse_invocation_api: Plugins call back into Dify via `self.session.*`, gaining access to all models, tools, apps, and
+  nodes configured in the workspace.
+15_1_tool_invocation_session_tool: "# Built-in tool (format: org/plugin/provider)\nresults = self.session.tool.invoke_builtin_tool(\n\
+  \    provider=\"langgenius/google/google\",\n    tool_name=\"google_search\",\n    parameters={\"query\": \"AI news\", \"\
+  num_results\": 5}\n)\n\n# Workflow-as-tool\nresults = self.session.tool.invoke_workflow_tool(\n    provider=\"workflow_provider_id\"\
+  ,\n    tool_name=\"tool_name\",\n    parameters={\"key\": \"value\"}\n)\n\n# Custom/API tool (OpenAPI spec operation_id)\n\
+  results = self.session.tool.invoke_api_tool(\n    provider=\"custom_provider_id\",\n    tool_name=\"operation_id\",\n  \
+  \  parameters={\"param\": \"value\"}\n)\n\nAll return `Generator[ToolInvokeMessage, None, None]`."
+15_2_model_invocation_session_model: "# LLM\nresponse = self.session.model.llm.invoke(\n    model_config=LLMModelConfig(\n\
+  \        provider=\"openai\", model=\"gpt-4o\", mode=\"chat\",\n        completion_params={\"temperature\": 0.7}\n    ),\n\
+  \    prompt_messages=[\n        SystemPromptMessage(content=\"You are helpful\"),\n        UserPromptMessage(content=\"\
+  Hello\")\n    ],\n    tools=None, stream=True\n)\n# Also available:\nself.session.model.text_embedding.invoke(model_config,\
+  \ texts)\nself.session.model.rerank.invoke(model_config, query, docs)\nself.session.model.tts.invoke(model_config, ...)\n\
+  self.session.model.speech2text.invoke(model_config, ...)\nself.session.model.moderation.invoke(model_config, ...)"
+15_3_app_invocation_session_app: "# Chatflow/Chatbot\nresponse = self.session.app.chat.invoke(\n    app_id=\"app-uuid\",\n\
+  \    inputs={\"key\": \"value\"},\n    query=\"user question\",\n    response_mode=\"blocking\",    # or \"streaming\"\n\
+  \    conversation_id=None         # None = new conversation\n)\n\n# Workflow\nresult = self.session.app.workflow.invoke(\n\
+  \    app_id=\"app-uuid\",\n    inputs={\"field\": \"value\"}\n)"
+15_4_persistent_storage_session_storage: "# Set (value must be bytes)\nself.session.storage.set(\"cache_key\", json.dumps(data).encode(\"\
+  utf-8\"))\n\n# Get (returns bytes or None)\nraw = self.session.storage.get(\"cache_key\")\nif raw:\n    data = json.loads(raw.decode(\"\
+  utf-8\"))\n\n# Delete\nself.session.storage.delete(\"cache_key\")\n\nConstraints:\n- Values must be `bytes`; encode strings\
+  \ via `.encode(\"utf-8\")`\n- Scope: workspace-level (shared across plugin instances in same workspace)\n- Size limit: declared\
+  \ via `resource.permission.storage.size` in manifest (int64 bytes)\n- No TTL -- data persists until explicitly deleted\n\
+  \n---"
+16_agent_strategy_plugin_schema: ''
+16_1_strategy_yaml_structure: "identity:\n  author: langgenius\n  name: function_calling\n  label:\n    en_US: Function Calling\n\
+  \  description:\n    en_US: \"Tool-native FC strategy for models with native function calling support\"\n  icon: icon.svg\n\
+  parameters:\n  - name: model\n    type: model-selector\n    scope: tool-call&llm         # restricts to FC-capable models\n\
+  \    required: true\n    label:\n      en_US: Model\n  - name: tools\n    type: array[tools]\n    required: true\n    label:\n\
+  \      en_US: Tools\n  - name: query\n    type: string\n    required: true\n    label:\n      en_US: Query\n  - name: max_iterations\n\
+  \    type: number\n    required: false\n    default: 5\n    min: 1\n    max: 50\n    label:\n      en_US: Max Iterations\n\
+  features:\n  - history-messages             # injects conversation history into context\noutput_schema:\n  type: object\n\
+  \  properties:\n    text:\n      type: string\n    files:\n      type: array\nhas_runtime_parameters: false\nextra:\n  python:\n\
+  \    source: strategies/function_calling.py"
+16_2_strategy_implementation: "from collections.abc import Generator\nfrom dify_plugin import AgentStrategy\nfrom dify_plugin.entities.agent\
+  \ import AgentInvokeMessage, LogMessageStatus\n\nclass FunctionCallingStrategy(AgentStrategy):\n    def _invoke(self, parameters:\
+  \ dict) -> Generator[AgentInvokeMessage]:\n        query = parameters[\"query\"]\n        model_config = parameters[\"model\"\
+  ]\n        tools = parameters[\"tools\"]\n        max_iterations = parameters.get(\"max_iterations\", 5)\n        history\
+  \ = parameters.get(\"history\", [])  # from history-messages feature\n\n        messages = self._build_messages(query, history)\n\
+  \n        for iteration in range(max_iterations):\n            log = self.create_log_message(\n                label=f\"\
+  Iteration {iteration + 1}\",\n                data={\"iteration\": iteration},\n                status=LogMessageStatus.START\n\
+  \            )\n            yield log\n\n            response = self.session.model.llm.invoke(\n                model_config=model_config,\n\
+  \                prompt_messages=messages,\n                tools=tools,\n                stream=False\n            )\n\n\
+  \            if response.message.tool_calls:\n                for tc in response.message.tool_calls:\n                 \
+  \   yield self.finish_log_message(log, status=LogMessageStatus.SUCCESS)\n                    # invoke tool and add observation\
+  \ to messages\n                    tool_result = self.session.tool.invoke_builtin_tool(\n                        provider=tc.function.name,\n\
+  \                        tool_name=tc.function.name,\n                        parameters=tc.function.arguments\n       \
+  \             )\n                    messages.append(AssistantPromptMessage(tool_calls=[tc]))\n                    messages.append(ToolPromptMessage(content=str(tool_result)))\n\
+  \            else:\n                yield self.finish_log_message(log, status=LogMessageStatus.SUCCESS)\n              \
+  \  yield self.create_text_message(response.message.content)\n                return\n\n        yield self.create_text_message(\"\
+  Max iterations reached.\")"
+16_3_agentinvokemessage_types: '| Type | Factory method | Purpose |
+
+  |------|---------------|---------|
+
+  | TextMessage | `create_text_message(text)` | Final answer text |
+
+  | LogMessage | `create_log_message(label, data, status)` | UI tree visualization node |
+
+  | ToolInvokeMessage | from `session.tool.*` calls | Tool result passthrough |
+
+
+  LogMessageStatus values: `START`, `SUCCESS`, `ERROR`, `STOP`
+
+
+  ---'
+17_mcp_two_way_support_v1_6_0: ''
+17_1_architecture_overview: "Dify supports bidirectional MCP since v1.6.0 (2025):\n\n[External MCP Client]              [Dify]\
+  \                [External MCP Server]\n  Claude Desktop  <--MCP Server--  Dify Workflow/Chat\n  Cursor          <--MCP\
+  \ Server--  Dify Workflow/Chat\n                                   Dify Tools >---MCP Client-->  Linear\n              \
+  \                                 >---MCP Client-->  Notion\n                                               >---MCP Client-->\
+  \  Zapier (8000+ apps)\n                                               >---MCP Client-->  Composio"
+17_2_dify_as_mcp_server_publishing_workflows: 'Configuration steps:
+
+  1. Open app > Publish > MCP Server
+
+  2. Enable the module (off by default)
+
+  3. Set endpoint name and describe input parameters in JSON schema
+
+  4. Dify issues unique server URL containing embedded auth token
+
+  5. Treat URL as an API key -- regenerate button invalidates previous URL
+
+
+  Client integration:
+
+
+  | Client | Config method |
+
+  |--------|--------------|
+
+  | Claude Desktop | Profile > Settings > Integrations > Add > paste server URL |
+
+  | Cursor | `.cursor/mcp.json` with `{ "mcpServers": { "name": { "url": "..." } } }` |
+
+  | Any MCP client | HTTP SSE or StreamableHTTP transport with server URL |
+
+
+  Supported app types: Both Workflow and Chatflow apps
+
+  Protocol version: `2025-03-26`
+
+  Best practices: Specific parameter descriptions improve AI invocation quality; split complex workflows for lower latency'
+17_3_dify_as_mcp_client_consuming_external_servers: 'Setup: Tools > MCP > Add MCP Server
+
+  Transport: HTTP-based only (no stdio/local)
+
+
+  In-workflow usage:
+
+
+  | Usage pattern | Node type | When to use |
+
+  |---------------|-----------|-------------|
+
+  | Dynamic tool selection | Agent node | Complex tasks where AI chooses which MCP tool to invoke |
+
+  | Precise invocation | MCP node (standalone) | Standardized, strictly-ordered tool calls |
+
+
+  ---'
+18_knowledge_pipeline_internal_data_flow: ''
+18_1_full_pipeline_sequence: "[Data Source Node]\n        |\n        | raw documents\n        v\n[Extractor Node]        \
+  \           choose one:\n  - Dify Extractor                   built-in; PDF/DOCX/images; complex layouts\n  - Unstructured\
+  \                     strategy: auto | hi_res | fast | ocr_only\n  - Generic Doc Processor            standard: PDF, XLSX,\
+  \ DOCX\n        |\n        | {x} Content (structured text + optional image refs)\n        v\n[Chunker Node]            \
+  \         choose one:\n  - General Chunker               -> Array[Chunk]      (flat segments)\n  - Parent-Child Chunker\
+  \          -> Array[ParentChunk] (hierarchical)\n  - Q&A Processor                 -> Array[QAChunk]    (question-answer\
+  \ pairs)\n        |\n        | typed array of chunks\n        v\n[Knowledge Base Node]              indexing + vector/keyword\
+  \ storage\n        |\n        v\n[User Input Node]                  optional: per-pipeline input fields\n        |\n   \
+  \     v\n[Test & Publish]                   validation + single-file test run"
+18_2_chunker_configuration: 'General Chunker:
+
+
+  | Parameter | Type | Description |
+
+  |-----------|------|-------------|
+
+  | `chunk_size` | int | Max characters per chunk |
+
+  | `chunk_overlap` | int | Overlap chars between adjacent chunks |
+
+  | `separators` | list[string] | Custom delimiters (e.g. `["\n\n", "\n", " "]`) |
+
+  | `preprocessing_rules` | list | Remove extra whitespace, URLs, emails |
+
+
+  Parent-Child Chunker:
+
+
+  | Parameter | Type | Options |
+
+  |-----------|------|---------|
+
+  | `parent_mode` | enum | `full_doc` (whole doc as parent) or `paragraph` (paragraph as parent) |
+
+  | `child_chunk_size` | int | Max chars for child (retrieval) chunks |
+
+
+  Q&A Processor: Input is a spreadsheet with Question/Answer columns. Each Q-A pair becomes one QAChunk. Questions are embedded
+  for retrieval; answers are the returned content.'
+18_3_knowledge_base_node_config_schema: '| Parameter | Options | Description |
+
+  |-----------|---------|-------------|
+
+  | `indexing_technique` | `high_quality`, `economy` | Embedding vs keyword index |
+
+  | `retrieval_model` | `semantic_search`, `full_text_search`, `hybrid_search` | Query matching strategy |
+
+  | `reranking_enable` | bool | Enable post-retrieval reranking |
+
+  | `reranking_mode` | `reranking_model`, `weighted_score` | Rerank method |
+
+  | `weights.semantic_weight` | float 0.0-1.0 | Hybrid mode semantic component weight |
+
+  | `weights.keyword_weight` | float 0.0-1.0 | Hybrid mode keyword component weight |
+
+  | `top_k` | int | Max chunks returned per query |
+
+  | `score_threshold_enabled` | bool | Enable minimum similarity filter |
+
+  | `score_threshold` | float 0.0-1.0 | Min similarity to include a chunk |
+
+  | `summary_enabled` | bool | Auto-generate chunk summary |
+
+
+  Multimodal constraints: Vision-capable embedding model required for image retrieval; vision rerank model required for image
+  reranking; max 10 images per chunk.
+
+
+  Immutability: Chunk structure (General/Parent-Child/Q&A) cannot be changed after publishing. Re-create the pipeline to change
+  structure.'
+18_4_user_input_node_pipeline_specific: 'Scope types:
+
+
+  | Scope | Availability |
+
+  |-------|-------------|
+
+  | Unique | Only for the connected data source node |
+
+  | Global | Accessible by all nodes in the pipeline |
+
+
+  Supported field types: Text (max 256 chars), Paragraph, Select, Boolean, Number, Single file, File List
+
+
+  Each field: `variable_name`, `display_name`, `required/optional`, `default_value`, `placeholder`, `tooltip`
+
+
+  ---'
+19_variable_system_complete_syntax_reference: ''
+19_1_referencing_syntax_forms: '| Form | Syntax | Example |
+
+  |------|--------|---------|
+
+  | Simple node output | `{{node_name.output_var}}` | `{{llm_1.text}}` |
+
+  | Dot notation (nested) | `{{node.var.field}}` | `{{http_req.body.data.items}}` |
+
+  | Array bracket access | `{{node.var[n]}}` | `{{results[0].title}}` |
+
+  | Chained deep access | `{{node.var[n].field.sub}}` | `{{api.response[2].meta.url}}` |
+
+  | System variable | `{{sys.var_name}}` | `{{sys.query}}`, `{{sys.conversation_id}}` |
+
+  | Environment variable | `{{env.VAR_NAME}}` | `{{env.OPENAI_API_KEY}}` |
+
+  | Conversation variable | `{{conv_var_name}}` | `{{user_language}}` (Chatflow only) |
+
+  | Slash UI trigger | `/` then select | Node config dropdown picker |
+
+
+  In Jinja2 contexts (Template node, LLM prompt fields):
+
+  {{ start.user_input | upper }}
+
+  {{ items | length }}
+
+  {{ data | default("fallback_value") }}
+
+  {{ timestamp | strftime("%Y-%m-%d") }}
+
+  {% for item in results %}{{ item.title }}{% endfor %}
+
+  {% if score > 0.9 %}High confidence{% else %}Low confidence{% endif %}'
+19_2_variable_scoping_rules: '| Category | Read scope | Write scope | Persists |
+
+  |----------|-----------|-------------|---------|
+
+  | Input variables (start node) | All nodes downstream | Immutable | Per run |
+
+  | Node output variables | All downstream nodes | Set by node only | Per run |
+
+  | System variables (`sys.*`) | All nodes globally | Platform-managed | Per run |
+
+  | Environment variables (`env.*`) | All nodes globally | Read-only | Permanent |
+
+  | Conversation variables | All nodes globally | Variable Assigner node | Per session |
+
+
+  Naming rules: Node names must be unique within an app to prevent variable reference collisions.'
+19_3_variable_assigner_write_operations: '| Data type | Available operations |
+
+  |-----------|---------------------|
+
+  | String | Overwrite, Clear, Set (if empty), Append (concatenate) |
+
+  | Number | Overwrite, Clear, Set (if empty), +, -, *, / arithmetic |
+
+  | Boolean | Set to true or false |
+
+  | Object | Overwrite entire object |
+
+  | Array[any] | Append item, Extend (concat arrays), Remove first, Remove last |'
+19_4_node_output_variable_reference: '| Node | Output variable | Type |
+
+  |------|--------------|----|
+
+  | LLM | `text`, `usage`, `finish_reason` | string, object, string |
+
+  | Agent | `final_answer`, `tool_outputs`, `reasoning_trace`, `iteration_count`, `success_status`, `agent_logs` | string,
+  array, string, number, bool, array |
+
+  | Knowledge Retrieval | `result`, `files` | array[chunk], array[file] |
+
+  | Code | User-declared outputs | any |
+
+  | Template | `output` | string |
+
+  | HTTP Request | `body`, `status_code`, `headers` | string/object, number, object |
+
+  | Parameter Extractor | Declared params + `is_success`, `reason` | mixed, bool, string |
+
+  | Question Classifier | `class_name` | string |
+
+  | Iteration | `output` | array |
+
+  | Document Extractor | `text` | string or array[string] |
+
+  | List Operator | `result`, `first_record`, `last_record` | array, item, item |
+
+  | Variable Aggregator | `output` | type of active branch |'

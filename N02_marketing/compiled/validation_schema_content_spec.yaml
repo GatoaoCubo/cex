@@ -1,0 +1,88 @@
+id: validation_schema_content_spec
+kind: validation_schema
+pillar: P06
+nucleus: n02
+title: Content Format Validation Schema
+version: 1.0.0
+quality: null
+tags:
+- validation_schema
+- content_spec
+- format_rules
+- character_limits
+- P06
+- n02_marketing
+domain: content-validation
+status: active
+density_score: 1.0
+purpose: Every piece of copy N02 generates MUST pass this schema before leaving the pipeline. Character limits are not suggestions.
+  Tone rules are not preferences. They are gates. Bad copy that ships is worse than no copy at all.
+platform_character_limits: '| Platform | Asset Type | Headline | Body | CTA | Hashtags |
+
+  |----------|-----------|---------|------|-----|---------|
+
+  | Instagram | Post | 125 (above fold) | 2200 max | N/A | 30 max |
+
+  | Instagram | Story | N/A | 250 max | 25 (button label) | 10 |
+
+  | Instagram | Reel | 150 | 2200 | N/A | 30 |
+
+  | LinkedIn | Post | 150 | 3000 | N/A | 5 recommended |
+
+  | LinkedIn | Article | 150 | 120000 | N/A | 5 max |
+
+  | LinkedIn | Ad | 150 | 600 | 25 | N/A |
+
+  | X (Twitter) | Post | N/A | 280 | N/A | 2 recommended |
+
+  | Meta Ads | Headline | 40 | 125 | 25 | N/A |
+
+  | Meta Ads | Carousel | 40 per card | 125 | 25 | N/A |
+
+  | Email | Subject | 50 (40 mobile) | unlimited | 45 (button) | N/A |
+
+  | TikTok | Caption | N/A | 2200 | N/A | 30 max |
+
+  | YouTube | Title | 100 (70 visible) | unlimited | N/A | 15 max |'
+tone_rule_matrix: '| Brand Voice | Allowed Patterns | Blocked Patterns |
+
+  |------------|-----------------|-----------------|
+
+  | `bold` | Direct imperatives, strong verbs, short punchy sentences | Passive constructions, qualifiers ("might", "could"),
+  apologies |
+
+  | `conversational` | First-person plural, questions, contractions | Jargon, corporate-speak, passive voice |
+
+  | `professional` | Third-person or formal second, credentials, data citations | Slang, emoji overuse, exclamation marks
+  |
+
+  | `playful` | Wordplay, alliteration, pop culture refs, emoji | Dry statistics, legal disclaimers as primary content |
+
+  | `authoritative` | Definitive statements, industry statistics, expert quotes | Hedging, uncertainty language, "we believe"
+  |
+
+  | `empathetic` | Validation language, pain-point mirroring, second person warm | Prescriptive commands, statistics without
+  context |'
+cta_requirements: "cta_rules:\n  required_when:\n    - campaign_goal: [conversion, consideration]\n  format:\n    - verb_first:\
+  \ true               # \"Get\", \"Start\", \"Discover\" -- not \"Our product lets you...\"\n    - max_words: 5         \
+  \          # \"Start your free trial today\" = OK; longer = truncate\n    - no_passive: true\n    - urgency_alignment: true\
+  \        # if urgency_trigger=deadline -> CTA includes time signal\n  forbidden_ctas:\n    - \"Click here\"\n    - \"Learn\
+  \ more\" (standalone, no context)\n    - \"Submit\"\n    - \"Buy now\" (unless ecommerce with explicit product)\n  recommended_patterns:\n\
+  \    awareness: [\"Discover [benefit]\", \"See how [outcome]\", \"Meet [product]\"]\n    consideration: [\"Get the [resource]\"\
+  , \"Watch the [demo]\", \"Read the [case study]\"]\n    conversion: [\"Start [trial/free/today]\", \"Claim your [offer]\"\
+  , \"Book a [demo/call]\"]\n    retention: [\"Unlock [feature]\", \"Upgrade to [tier]\", \"Renew and [benefit]\"]"
+brand_voice_compliance_rules: "voice_compliance:\n  readability_target: \"Flesch-Kincaid grade 8 or below for B2C; 10 or below\
+  \ for B2B\"\n  sentence_length_max: 25 words (soft limit)\n  paragraph_length_max: 3 sentences for social; 5 for email\n\
+  \  active_voice_ratio: \"> 80% of sentences\"\n  emoji_rules:\n    playful: 1-3 per post, thematically relevant\n    conversational:\
+  \ 0-2 per post\n    professional: 0-1 per post (decorative only)\n    bold: 0-1 per post\n    authoritative: 0 (never)\n\
+  \    empathetic: 0-2 per post\n  forbidden_phrases:\n    - \"game-changer\"\n    - \"revolutionary\"\n    - \"world-class\"\
+  \n    - \"synergy\"\n    - \"leverage\" (as noun)\n    - \"solutions\" (standalone)\n    - \"seamlessly\"\n    - \"cutting-edge\""
+validation_output_schema: "validation_result:\n  passed: boolean\n  score: float (0.0-1.0)\n  violations:\n    - field: string\n\
+  \      rule: string\n      severity: error|warning\n      detail: string\n      suggestion: string\n  platform_compliance:\n\
+  \    - channel: string\n      format: string\n      compliant: boolean\n      overages: {field: chars_over}\n  tone_score:\
+  \ float (0.0-1.0)\n  cta_present: boolean\n  cta_compliant: boolean"
+downstream_consumers:
+- '`workflow_campaign_pipeline.md` -- validation gate at F7 GOVERN step'
+- '`content_filter_n02.md` -- reads this schema for automated filtering'
+- '`ab_test_config_n02.md` -- validates each variant before registering test'
+- '`self_improvement_loop_n02.md` -- uses violation patterns as learning signal'

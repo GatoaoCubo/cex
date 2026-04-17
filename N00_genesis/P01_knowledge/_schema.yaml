@@ -1,0 +1,205 @@
+pillar: P01
+name: Knowledge
+description: What the agent KNOWS
+kinds:
+  knowledge_card:
+    description: Searchable atomic fact (density > 0.8)
+    boundary: Distilled, static, versioned knowledge. NOT an instruction, template, or configuration.
+    layer: content
+    core: true
+    machine_format: yaml
+    naming: p01_kc_{{topic}}.md + .yaml
+    constraints:
+      max_bytes: 5120
+      min_bullets: 3
+      density_min: 0.8
+      quality_min: 7.0
+    frontmatter_required:
+    - id
+    - kind
+    - pillar
+    - title
+    - version
+    - created
+    - updated
+    - author
+    - domain
+    - quality
+    - tags
+    - tldr
+    - when_to_use
+    frontmatter_cex:
+    - keywords
+    - long_tails
+    - axioms
+    - linked_artifacts
+    - density_score
+    - data_source
+    body_structure:
+      domain_kc:
+      - quick_reference
+      - key_concepts
+      - strategy_phases
+      - golden_rules
+      - visual_flow
+      - comparison
+      - artifacts
+      meta_kc:
+      - executive_summary
+      - spec_table
+      - patterns
+      - anti_patterns
+      - application
+      - references
+      kind_kc:
+      - spec
+      - what_it_is
+      - cross_framework_map
+      - key_parameters
+      - patterns
+      - anti_patterns
+      - integration_graph
+      - decision_tree
+      - quality_criteria
+    validation:
+    - content_hash not empty (auto SHA256)
+    - id == filename stem
+    - quality YAML +/- 1.0 of body
+    - tags = list of strings (never list-in-string)
+    - each bullet max 80 chars
+    - sections with < 3 lines: expand or remove
+    llm_function: INJECT
+    frontmatter_optional:
+    - type
+    - origin
+    - feeds_kinds
+  rag_source:
+    description: Indexable external source
+    boundary: Pointer to indexable external source. NOT the content itself, only reference with URL and freshness.
+    layer: content
+    core: false
+    machine_format: yaml
+    naming: p01_rs_{{source}}.md + .yaml
+    constraints:
+      max_bytes: 1024
+    frontmatter_required:
+    - id
+    - kind
+    - url
+    - domain
+    - last_checked
+    llm_function: INJECT
+  glossary_entry:
+    description: Term definition
+    boundary: Short domain term definition. NOT a knowledge_card (no min density) nor context_doc (no scope).
+    layer: content
+    core: false
+    machine_format: yaml
+    naming: p01_gl_{{term}}.md + .yaml
+    constraints:
+      max_bytes: 512
+      max_definition_lines: 3
+    frontmatter_required:
+    - id
+    - term
+    - definition
+    - synonyms
+    llm_function: INJECT
+  context_doc:
+    description: Domain context document
+    boundary: Domain context for hydrating prompts. NOT a knowledge_card (no density gate) nor glossary_entry (does not define a term).
+    layer: content
+    core: false
+    machine_format: yaml
+    naming: p01_ctx_{{topic}}.md + .yaml
+    constraints:
+      max_bytes: 2048
+    frontmatter_required:
+    - id
+    - kind
+    - domain
+    - scope
+    llm_function: INJECT
+  embedding_config:
+    description: Embedding model configuration
+    boundary: Embedding model configuration. NOT a knowledge_index (P10) which configures the index, only the vector model.
+    layer: spec
+    core: false
+    machine_format: yaml
+    naming: p01_emb_{{model}}.yaml
+    constraints:
+      max_bytes: 512
+    frontmatter_required:
+    - id
+    - model_name
+    - dimensions
+    - chunk_size
+    llm_function: GOVERN
+  few_shot_example:
+    description: Input/output example for prompt
+    boundary: Input/output pair for few-shot learning. NOT a golden_test (P07) which evaluates quality, only exemplifies format.
+    layer: prompt
+    core: true
+    machine_format: yaml
+    naming: p01_fse_{{topic}}.md + .yaml
+    constraints:
+      max_bytes: 1024
+    frontmatter_required:
+    - id
+    - kind
+    - input
+    - output
+    - quality
+    llm_function: INJECT
+  chunk_strategy:
+    description: Chunking strategy
+    boundary: Split method. NOT embedding_config.
+    layer: runtime
+    core: true
+    machine_format: yaml
+    naming: p01_chunk.md
+    constraints:
+      max_bytes: 2048
+    frontmatter_required:
+    - id
+    - name
+    - method
+    - chunk_size
+    - chunk_overlap
+    llm_function: CONSTRAIN
+  retriever_config:
+    description: Retrieval config (top_k, hybrid, reranker)
+    boundary: Search parameters. NOT embedding_config.
+    layer: runtime
+    core: true
+    machine_format: yaml
+    naming: p01_retr_cfg.md
+    constraints:
+      max_bytes: 2048
+    frontmatter_required:
+    - id
+    - name
+    - store_type
+    - top_k
+    - search_type
+    llm_function: CONSTRAIN
+  citation:
+    description: Structured source attribution with provenance, URL, date, and reliability metadata
+    boundary: Source reference with provenance. NOT knowledge_card (content em si), rag_source (pipeline config), nor glossary_entry (definition term).
+    layer: content
+    core: false
+    machine_format: yaml
+    naming: p01_cit_{{topic}}.md
+    constraints:
+      max_bytes: 2048
+    frontmatter_required:
+    - id
+    - kind
+    - pillar
+    - source_type
+    - reliability_tier
+    - url
+    - date_accessed
+    - title
+    - excerpt
+    llm_function: INJECT

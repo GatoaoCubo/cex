@@ -1,0 +1,60 @@
+---
+kind: knowledge_card
+id: bld_knowledge_card_competitive_matrix
+pillar: P01
+llm_function: INJECT
+purpose: Domain knowledge for competitive_matrix production
+quality: 9.2
+title: "Knowledge Card Competitive Matrix"
+version: "1.1.0"
+author: wave1_builder_gen_v2
+tags: [competitive_matrix, builder, knowledge_card]
+tldr: "Gartner MQ, Forrester Wave, G2 Grid, feature-parity grid, battle card, anti-FUD guidelines"
+domain: "competitive_matrix construction"
+created: "2026-04-14"
+updated: "2026-04-14"
+density_score: 0.85
+---
+
+## Domain Overview
+Competitive matrices are structured analytical artifacts used in sales battle cards and procurement evaluations. They compare products across quantifiable dimensions to support go/no-go decisions. Three major analyst frameworks shape the industry standard: Gartner Magic Quadrant (2-axis: ability to execute x completeness of vision), Forrester Wave (weighted criteria scoring across Current Offering, Strategy, Market Presence), and G2 Grid (verified user reviews plotted on Satisfaction x Market Presence).
+
+Battle cards are per-competitor derivatives: 1-pager with us-vs-them per capability, objection-counter pairs, and win/loss rationale. Anti-FUD guidelines govern how to respond to competitor market claims with verifiable data.
+
+## Key Concepts
+| Concept | Definition | Source |
+|---------|-----------|--------|
+| Feature parity grid | Table comparing Yes/No/Partial/Roadmap across vendors for each capability | Sales enablement best practice |
+| Gartner Magic Quadrant | 2-axis plot: Ability to Execute (y) x Completeness of Vision (x); four quadrants | Gartner MQ methodology |
+| Forrester Wave | Weighted scoring across Current Offering, Strategy, Market Presence dimensions | Forrester Wave methodology |
+| G2 Grid | User-review-based positioning: Satisfaction (y) x Market Presence (x) | G2 Grid methodology |
+| Battle card | Per-competitor 1-pager: features, pricing, objections, win reasons | Sales enablement standard |
+| TCO (Total Cost of Ownership) | Full lifecycle cost: license + implementation + training + support + migration | Gartner TCO methodology |
+| Anti-FUD | Factual, source-cited responses to competitor fear/uncertainty/doubt claims | Competitive intelligence ethics |
+| Win/Loss rationale | Data-driven reason why deals are won or lost against a specific competitor | CRM-derived competitive intelligence |
+| Feature weighting | Assigning priority scores to capabilities based on buyer requirements | Kano model + RFP scoring matrices |
+| Roadmap item | Feature not yet shipping; always labeled with target quarter (Q# YYYY) | Product management convention |
+
+## Industry Standards
+- Gartner Magic Quadrant (ability to execute x completeness of vision positioning)
+- Forrester Wave (weighted multi-criteria scoring with vendor briefs)
+- G2 Grid (verified user review positioning -- not analyst opinion)
+- IDC MarketScape (2-axis similar to MQ but with capability scores)
+- SCIP (Strategic and Competitive Intelligence Professionals) ethical guidelines
+- Battlecard.io / Klue / Crayon (battle card structure conventions)
+
+## Common Patterns
+1. Feature parity grid: rows = capabilities, cols = us + competitors; values = Yes/No/Partial/Roadmap Q# YYYY.
+2. Gartner-style positioning: place vendors on 2x2 with rationale for each axis score.
+3. Battle card per competitor: us vs them on 5-8 key capabilities, 2-3 objection-counter pairs.
+4. Pricing comparison table: entry/mid/enterprise tiers + pricing model (per-user/flat/usage).
+5. Anti-FUD section: list top 3 competitor claims with factual counter and primary source.
+6. Data freshness: every claim dated; flag items older than 12 months as potentially stale.
+
+## Pitfalls
+- Vague capability values: "Fast" vs "Slow" (use "< 100ms p99 latency" vs "> 500ms p99 latency").
+- Roadmap items presented as shipping: always tag roadmap with Q# YYYY.
+- Missing anti-FUD: if competitors make claims in your deals, ignoring them is a loss risk.
+- Single-analyst reliance: cross-reference Gartner with G2 user reviews and Forrester Wave.
+- Outdated data: competitive intelligence degrades fast; date every claim.
+- Superlatives without citations: "industry-leading" is FUD without an analyst quote or benchmark.

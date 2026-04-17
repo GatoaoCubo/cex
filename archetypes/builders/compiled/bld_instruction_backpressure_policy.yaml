@@ -1,0 +1,52 @@
+kind: instruction
+id: bld_instruction_backpressure_policy
+pillar: P03
+llm_function: REASON
+purpose: Step-by-step production process for backpressure_policy
+pattern: 3-phase pipeline (define -> compose -> validate)
+quality: 7.1
+title: Instruction Backpressure Policy
+version: 1.0.0
+author: n03_builder
+tags:
+- backpressure_policy
+- builder
+- instruction
+tldr: '3-phase: define overflow strategy and buffer, compose with thresholds, validate boundary vs circuit_breaker.'
+domain: backpressure policy construction
+created: '2026-04-17'
+updated: '2026-04-17'
+density_score: 0.9
+phase_1_define:
+- Identify the producer-consumer pair (e.g. event queue -> LLM processor, API ingest -> database writer)
+- 'Determine overflow_strategy: what happens when consumer cannot keep up:'
+- 'DROP_LATEST: discard newest items (prefer freshness over completeness)'
+- 'DROP_OLDEST: discard oldest items (prefer recency)'
+- 'BUFFER: accumulate up to buffer_size, then overflow'
+- 'THROTTLE: slow producer to match consumer rate'
+- 'ERROR: raise exception and let caller handle'
+- 'Set buffer_size: maximum items to buffer before overflow activates'
+- 'Set shed_threshold: percentage of buffer capacity at which to start shedding (e.g. 0.8 = start at 80%)'
+- 'Define high_watermark: absolute queue depth triggering active backpressure'
+- 'Define low_watermark: queue depth at which normal flow resumes'
+- 'Set request_batch_size: items requested per demand signal (Reactive Streams model)'
+- 'Specify monitored_queue: which queue/channel/topic this policy governs'
+phase_2_compose:
+- Read SCHEMA.md and OUTPUT_TEMPLATE.md
+- 'Fill frontmatter: all required fields (quality: null)'
+- 'Set id: `p09_bp_{scope_slug}` -- verify pattern `^p09_bp_[a-z][a-z0-9_]+$`'
+- 'Write Overview section: producer-consumer context and why backpressure is needed'
+- 'Write Strategy section: overflow_strategy with rationale'
+- 'Write Thresholds section: buffer_size, shed_threshold, watermarks'
+- 'Write Flow section: request_batch_size, demand signaling protocol'
+- Verify body <= 2048 bytes
+phase_3_validate:
+- Confirm id matches `^p09_bp_[a-z][a-z0-9_]+$`
+- Confirm kind == backpressure_policy
+- 'Confirm overflow_strategy is one of: DROP_LATEST, DROP_OLDEST, BUFFER, THROTTLE, ERROR'
+- Confirm buffer_size is positive integer
+- Confirm shed_threshold is float in [0.0, 1.0]
+- 'Confirm all 4 body sections present: Overview, Strategy, Thresholds, Flow'
+- 'Cross-check: not circuit_breaker (no state machine), not rate_limit_config (no RPM/TPM)'
+- 'Confirm quality: null'
+- Revise if score < 8.0

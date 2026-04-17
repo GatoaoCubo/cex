@@ -2,7 +2,7 @@
 kind: architecture
 id: bld_architecture_memory_type
 pillar: P08
-llm_function: INJECT
+llm_function: CONSTRAIN
 quality: 9.0
 title: "Architecture Memory Type"
 version: "1.0.0"
@@ -14,7 +14,6 @@ created: "2026-04-07"
 updated: "2026-04-07"
 density_score: 0.90
 ---
-
 # Architecture: memory_type
 
 | Layer | Component | Role | Wire |

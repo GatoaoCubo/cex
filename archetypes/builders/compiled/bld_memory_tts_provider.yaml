@@ -1,0 +1,30 @@
+kind: learning_record
+id: p10_lr_tts_provider_builder
+pillar: P10
+llm_function: INJECT
+purpose: Learned patterns and pitfalls for tts_provider construction
+quality: null
+title: Learning Record Tts Provider
+version: 1.0.0
+author: wave1_builder_gen
+tags:
+- tts_provider
+- builder
+- learning_record
+tldr: Learned patterns and pitfalls for tts_provider construction
+domain: tts_provider construction
+created: '2026-04-13'
+updated: '2026-04-13'
+density_score: 0.85
+observation: Common issues include inconsistent API handling across providers, leading to duplicated code, and misaligned
+  audio format support (e.g., WAV vs. MP3). Configuration mismatches often cause runtime errors during synthesis.
+pattern: Modular design with provider-specific adapters improves maintainability. Centralized configuration management ensures
+  consistent parameter handling across different TTS backends.
+evidence: Reviewed artifacts using `tts_provider_builder` with AWS Polly and Azure Cognitive Services showed reduced duplication
+  via interface abstraction and config-driven initialization.
+recommendations:
+- Define strict interfaces for provider-specific operations (e.g., `synthesize_text()`).
+- Use configuration files to decouple provider parameters from implementation logic.
+- Validate audio format compatibility during artifact construction.
+- Implement fallback mechanisms for unsupported features in legacy providers.
+- Document required parameters per provider to avoid runtime configuration errors.

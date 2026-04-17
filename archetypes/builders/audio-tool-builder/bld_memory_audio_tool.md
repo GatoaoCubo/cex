@@ -23,6 +23,7 @@ observation_types: [user, feedback, project, reference]
 quality: 9.2
 title: "Memory Audio Tool"
 density_score: 0.90
+llm_function: INJECT
 ---
 ## Summary
 Audio tools are consumed by voice interfaces, content pipelines, and agents that select STT or TTS paths at runtime. The difference between a tool that routes correctly and one that causes silent format mismatches comes down to three decisions made at spec time: direction declaration, BCP-47 language codes, and explicit model identifiers matching provider documentation.

@@ -1,0 +1,81 @@
+---
+kind: knowledge_card
+id: bld_knowledge_card_webinar_script
+pillar: P01
+llm_function: INJECT
+purpose: Domain knowledge injection for webinar_script builder -- benchmarks, frameworks, patterns, pitfalls
+quality: 9.1
+title: "Webinar Script Knowledge Card"
+version: "1.0.0"
+author: n02_wave6
+tags: [webinar_script, builder, knowledge_card]
+tldr: "Domain knowledge for webinar script construction: benchmarks, key concepts, platform standards, patterns, and pitfalls."
+domain: "webinar_script construction"
+created: "2026-04-14"
+updated: "2026-04-14"
+density_score: 0.85
+---
+## Domain Overview
+Webinars are top-funnel awareness and mid-funnel conversion tools. Live interactivity -- real-time Q&A, live demos, co-presence -- is what email and video cannot replicate.
+**Market (2024)**:
+- 73% B2B marketers: webinars = best lead-gen format (CMI).
+- Attendance: 40-50% of registrants (ON24).
+- Structured hooks: 2.3x completion (ON24). Explicit CTAs: 3x conversion (GoToWebinar 2023).
+- Optimal duration: 45-60 min. <30 min underdelivers; >90 min loses 60% of live audience.
+**Platforms**:
+- Zoom Webinars: largest share, 100-10K attendees, built-in Q&A + polls.
+- GoToWebinar: enterprise analytics, automated follow-ups.
+- MS Teams Live Events: M365 integration, up to 10K attendees.
+- ON24: enterprise automation, CRM + content hub.
+---
+## Key Concepts
+| Concept | Definition | Source |
+|---------|-----------|--------|
+| Hook | Benefit statement in first 60s; commits audience to stay | Cialdini, Influence |
+| Inverted Attention Curve | Engagement peaks at start + end, trough mid. Front-load value; close with momentum. | ON24 2024 |
+| Agenda Preview | Session structure stated in first 3 min; reduces drop-off by setting expectations. | GoToWebinar |
+| Speaker Note | Presenter-facing cue for pacing/emphasis/energy; imperative tone. | Internal |
+| Slide Cue | [SLIDE X: title] marker syncing narration to display; prevents desync. | Presentation std |
+| Seed Question | Pre-written Q if no attendee asks within 60s; prevents dead air. | Facilitation |
+| Q&A Facilitation | Active moderation: queue, paraphrase, time-box, close. | Zoom Guide |
+| CTA | Explicit close action (trial, booking, download, next webinar) with URL. | CRO |
+| Registration Page | Pre-event LP capturing intent; hooks + bios + agenda drive conversion. | HubSpot Playbook |
+| Dead Air | Silence >5s during live, usually in Q&A; caused by no seed Qs or slow mod. | Live event prod |
+| 150 WPM | Avg spoken rate for paced delivery; used for segment word budgets. | Toastmasters |
+| Demo Fallback | Pre-recorded screen capture when live demo fails; must load pre-session. | Contingency |
+
+---
+
+## Industry Standards
+
+| Standard | Source | Key Metric |
+|---------|--------|-----------|
+| ON24 Webinar Benchmarks 2024 | ON24 platform analytics across 100K+ webinars | 57 min average engagement time for live webinars |
+| GoToWebinar Engagement Guidelines | GoToWebinar product team | Polls increase engagement by 24%; Q&A sections with moderators retain 30% more attendees |
+| Zoom Webinar Best Practices | Zoom Video Communications | Optimal slide change frequency: every 2-3 minutes; static slides >5 min = 15% drop-off |
+| Content Marketing Institute B2B Report 2024 | CMI annual survey | 73% of B2B marketers: webinars = best lead gen format |
+| HubSpot Webinar Playbook | HubSpot Academy | Email reminder sequence: 1 week before + 1 day before + 1 hour before = 40% increase in attendance |
+
+---
+
+## Common Patterns
+
+| Pattern | Description | When to Use |
+|---------|-------------|-------------|
+| 3-2-1 Hook | "In the next 60 minutes, you will get 3 frameworks, 2 live demos, and 1 action you can take today." | Any webinar goal; high-specificity hook that signals value density. |
+| Value-Before-Pitch | Deliver 80% pure education content before mentioning product in demo segment. | Trust-building with cold or cold-warm audiences. |
+| Demo Sandwich | Place demo between two value segments, not at the end. Segment 1 -> Demo -> Segment 2 -> CTA. | Product demos where audience needs context before seeing the product. |
+| Pain-Agitate-Solution Hook | Open with shared pain, intensify it with a stat, then pivot to solution preview. | Audiences with strong, known pain points (ops efficiency, compliance, churn). |
+| Q&A Bridge | Use the moderator to "bridge" from Q&A back to CTA: "That is a great question and it actually connects to the trial offer we have for you today." | High-conversion webinars where Q&A can be turned into CTA momentum. |
+
+---
+
+## Pitfalls
+
+| Pitfall | Effect | Prevention |
+|---------|--------|-----------|
+| Missing hook (company bio opener) | 30% audience drop-off in first 2 minutes | Write hook first; benefit statement must be in first 2 sentences |
+| No slide cues | Presenter-visual desync; attendees see wrong slides during narration | Add [SLIDE X] marker at every transition before delivery review |
+| Unmoderated Q&A | Dead air within 60 seconds; audience disengages | Write 3 seed questions; assign dedicated moderator to chat queue |
+| CTA buried in segment | <1% conversion vs 3x with dedicated CTA close | Always place CTA in its own closing section with dedicated slide |
+| Running over time | Attendees drop at scheduled end time regardless of content quality | Calculate word count budget; set speaker note timers every 10 minutes |

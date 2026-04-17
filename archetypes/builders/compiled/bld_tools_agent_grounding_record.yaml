@@ -1,0 +1,155 @@
+kind: tools
+id: bld_tools_agent_grounding_record
+pillar: P04
+llm_function: CALL
+purpose: Tool inventory for grounding record production -- hash verification, OTel validation, compile pipeline, external
+  references
+quality: null
+title: Agent Grounding Record Builder -- Tools
+version: 1.0.0
+author: wave7_n05
+tags:
+- agent_grounding_record
+- builder
+- tools
+tldr: 'Production: cex_compile + cex_score + cex_retriever. Validation: hash-verify + span-validator. External: OTel semconv
+  + C2PA v2.3 spec.'
+domain: agent_grounding_record construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+production_tools_cex_core: '| Tool                   | Command                                                                 |
+  8F Stage | Purpose                                                  |
+
+  |------------------------|-------------------------------------------------------------------------|----------|----------------------------------------------------------|
+
+  | cex_compile.py         | `python tools/cex_compile.py P10_memory/grounding/p10_gr{{prefix}}.md` | F8     | Compile .md
+  to .yaml, check frontmatter, validate size   |
+
+  | cex_score.py           | `python tools/cex_score.py --apply P10_memory/grounding/p10_gr{{prefix}}.md` | F7 | Run 3-layer
+  scoring (structural + rubric + semantic) |
+
+  | cex_retriever.py       | `python _tools/cex_retriever.py --query "grounding provenance OTel"` | F3      | Find similar
+  grounding records for context injection     |
+
+  | cex_doctor.py          | `python _tools/cex_doctor.py --pillar P10`                             | F8       | Health check
+  on all P10 memory artifacts                 |
+
+  | cex_compile.py --all   | `python _tools/cex_compile.py --all`                                   | F8       | Recompile
+  entire artifact library after batch production |'
+cex_compile_py_grounding_record_specific_checks: 'When run against an agent_grounding_record artifact, cex_compile.py performs:
+
+  1. YAML frontmatter parse check
+
+  2. ID naming regex validation: ^p10_gr_[a-z0-9_]+\.md$
+
+  3. kind field = "agent_grounding_record" check
+
+  4. Byte size <= 4096 check
+
+  5. output_hash format check (64 hex chars)
+
+  6. otel_span_id format check (16 hex chars)'
+validation_tools: ''
+hash_verification_tool: "Verifies that output_hash, content_hash, and tool I/O hashes are valid SHA-256 hex strings.\n\n#\
+  \ Verify all hashes in a grounding record\npython tools/cex_compile.py P10_memory/grounding/p10_gr{{prefix}}.md --verify-hash\n\
+  # Compute output_hash from raw output file\npython -c \"\nimport hashlib\nwith open('raw_output.txt', 'rb') as f:\n    raw\
+  \ = f.read()\nprint(hashlib.sha256(raw).hexdigest())\n\"\n# Verify a specific hash value\npython -c \"\nimport hashlib,\
+  \ sys\ndata = sys.stdin.buffer.read()\nprint(hashlib.sha256(data).hexdigest())\n\" < raw_output.txt\n\nHash validation rules\
+  \ enforced:\n- Length: exactly 64 characters\n- Charset: lowercase hexadecimal [0-9a-f] only\n- Algorithm: SHA-256 only\
+  \ (no MD5, no SHA-1, no SHA-512)\n- Source: raw bytes before any post-processing"
+otel_span_id_validator: "Validates that otel_span_id conforms to W3C Trace Context format.\n\n# Validate span ID format (W3C:\
+  \ 16 lowercase hex chars)\npython -c \"\nimport re, sys\nspan_id = sys.argv[1]\npattern = re.compile(r'^[0-9a-f]{16}$')\n\
+  if pattern.match(span_id):\n    print('[OK] Valid W3C span ID: ' + span_id)\nelse:\n    print('[FAIL] Invalid span ID format:\
+  \ ' + span_id)\n    print('Expected: 16 lowercase hex characters')\n    sys.exit(1)\n\" {{OTEL_SPAN_ID}}\n\nCommon span\
+  \ ID format errors:\n\n| Error Pattern           | Example              | Fix                                      |\n|-------------------------|----------------------|------------------------------------------|\n\
+  | 32 chars (trace ID)     | 4bf92f3577b34da6...  | Use the span ID (16 chars), not trace ID |\n| Uppercase letters     \
+  \  | 4BF92F3577B34DA6     | Convert to lowercase                     |\n| Hyphens (UUID format)   | 4bf9-2f35-77b3-4da6\
+  \  | Remove hyphens                           |\n| Shorter than 16 chars   | 4bf92f35            | Retrieve correct span\
+  \ ID from OTel SDK   |"
+uuid_validator_inference_id: "# Validate UUIDv4 format\npython -c \"\nimport re, sys\nuuid = sys.argv[1]\npattern = re.compile(r'^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$')\n\
+  if pattern.match(uuid):\n    print('[OK] Valid UUIDv4: ' + uuid)\nelse:\n    print('[FAIL] Not a valid UUIDv4: ' + uuid)\n\
+  \    sys.exit(1)\n\" {{INFERENCE_ID}}\n# Generate a new UUIDv4\npython -c \"import uuid; print(str(uuid.uuid4()))\""
+external_references: ''
+otel_genai_semantic_conventions: '| Resource                          | URL                                                                        |
+  Use                                    |
+
+  |-----------------------------------|----------------------------------------------------------------------------|----------------------------------------|
+
+  | OTel GenAI semconv spec           | https://opentelemetry.io/docs/specs/semconv/gen-ai/                       | Canonical
+  attribute names and values   |
+
+  | OTel Python SDK                   | https://github.com/open-telemetry/opentelemetry-python                    | SDK for
+  span ID retrieval in Python    |
+
+  | OTel GenAI WG (active)            | https://github.com/open-telemetry/semantic-conventions/tree/main/docs/gen-ai | WG
+  discussions and in-progress changes |
+
+  | W3C Trace Context Level 2         | https://www.w3.org/TR/trace-context-2/                                    | span ID
+  format specification           |
+
+
+  Key OTel GenAI attributes for grounding record production:
+
+
+  | OTel Attribute           | Python Access                                     | Grounding Record Mapping |
+
+  |--------------------------|---------------------------------------------------|--------------------------|
+
+  | span.span_id             | span.get_span_context().span_id (as hex)         | otel_span_id             |
+
+  | gen_ai.response.model    | span.attributes.get("gen_ai.response.model")     | model.id                 |
+
+  | gen_ai.system            | span.attributes.get("gen_ai.system")             | model.provider           |
+
+  | gen_ai.tool.call.id      | event attributes on tool call span events        | tool_calls[*].tool_name  |'
+c2pa_v2_3_specification: "| Resource                          | URL                                                      \
+  \                  | Use                                    |\n|-----------------------------------|----------------------------------------------------------------------------|----------------------------------------|\n\
+  | C2PA v2.3 spec                    | https://c2pa.org/specifications/specifications/2.3/specs/C2PA_Specification.html |\
+  \ Full spec for manifest format  |\n| C2PA AI-ML guidance               | https://c2pa.org/specifications/specifications/2.3/ai-ml/\
+  \                 | AI-specific assertions and guidance    |\n| C2PA Python library               | https://github.com/contentauth/c2pa-python\
+  \                                | Python SDK for manifest creation       |\n| C2PA training-mining assertion    | Section\
+  \ 19.8 of C2PA v2.3 spec                                            | Training data disclosure assertion     |\n\nC2PA manifest\
+  \ integration pattern:\n\n# Example: creating a C2PA manifest reference after output_hash is known\n# (Using c2pa-python\
+  \ library -- install: pip install c2pa-python)\nimport c2pa\nbuilder = c2pa.Builder({\n    \"claim_generator\": \"cex_grounding_record_builder/1.0\"\
+  ,\n    \"assertions\": [\n        {\"label\": \"c2pa.actions\", \"data\": {\n            \"actions\": [{\"action\": \"c2pa.created\"\
+  , \"softwareAgent\": \"{{MODEL_ID}}\"}]\n        }},\n        {\"label\": \"c2pa.hash.data\", \"data\": {\n            \"\
+  name\": \"output\", \"alg\": \"sha256\", \"hash\": \"{{OUTPUT_HASH_BASE64}}\"\n        }}\n    ]\n})\n# manifest_ref = builder.sign_file(output_path,\
+  \ signed_path, signer)\n\nNote: Convert output_hash from hex to base64 for C2PA: `base64.b64encode(bytes.fromhex(output_hash)).decode()`"
+sha_256_standard_reference: '| Resource                | Reference                        | Notes                                     |
+
+  |-------------------------|----------------------------------|-------------------------------------------|
+
+  | FIPS 180-4              | NIST FIPS 180-4 (2015)           | SHA-256 standard; all hashes must comply  |
+
+  | Python hashlib          | stdlib hashlib.sha256()          | Use this; do not use md5() or sha1()      |
+
+  | Hash comparison         | `hmac.compare_digest(a, b)`      | Use constant-time comparison for security |'
+tool_call_sequence_f5_call: 'Execute in this order during Phase 1 RESEARCH:
+
+
+  # Step 1: Retrieve similar grounding records for context
+
+  python _tools/cex_retriever.py --query "grounding provenance OTel per-inference" --limit 3
+
+  # Step 2: Load builder ISOs (if not already loaded via F2 BECOME)
+
+  # (ISOs are loaded as context, no shell command needed)
+
+  # Step 3: After Phase 2 COMPOSE -- validate artifact
+
+  python tools/cex_compile.py P10_memory/grounding/p10_gr{{prefix}}.md
+
+  # Step 4: Score artifact
+
+  python tools/cex_score.py --apply P10_memory/grounding/p10_gr{{prefix}}.md
+
+  # Step 5: Signal completion
+
+  python -c "from _tools.signal_writer import write_signal; write_signal(''n04'', ''complete'', {{SCORE}})"
+
+  # Step 6: Commit
+
+  git add P10_memory/grounding/p10_gr_{{prefix}}.md
+
+  git commit -m "[N04] add grounding record p10_gr_{{prefix}}: {{INFERENCE_DESCRIPTION}}"'

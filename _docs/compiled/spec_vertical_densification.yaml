@@ -1,0 +1,337 @@
+id: spec_vertical_densification
+kind: constraint_spec
+pillar: P06
+title: 'Spec -- Vertical Densification: Architecture Self-Audit, Karpathy Sweep, Cross-Synthesis, CoC Convergence'
+version: 1.0.0
+created: 2026-04-17
+author: n07_orchestrator
+domain: system-quality
+quality_target: 9.0
+status: SPEC
+scope: N01-N06 + N05 (code hygiene)
+depends_on: spec_nucleus_self_assembly
+tags:
+- spec
+- densification
+- karpathy-loop
+- coc
+- cross-synthesis
+- code-hygiene
+- quality-sweep
+tldr: 'Four-wave self-improvement: (1) fix 18 stale .py path refs, (2) Karpathy sweep on 308 unscored artifacts, (3) cross-nucleus
+  KC synthesis into reusable shared artifacts, (4) CoC convergence via pattern/few_shot/reasoning_trace artifacts.'
+density_score: 0.96
+updated: '2026-04-17'
+the_problem_architecture_against_itself: 'Running the new architecture (post-SELF_ASSEMBLY) against the old one reveals three
+  classes of debt:'
+class_1_code_debt_18_stale_python_files: 'STRUCT_ALIGN V2 moved root `P0x_*` → `N00_genesis/P0x_*`.
+
+  18 Python tools still point at the old paths:
+
+
+  | File | Stale refs | Impact |
+
+  |------|-----------|--------|
+
+  | `cex_pipeline.py` | 9 | pillar routing broken |
+
+  | `cex_forge.py` | 9 | artifact creation broken |
+
+  | `cex_init.py` | 9 | init flow broken |
+
+  | `cex_feedback.py` | 9 | quality tracking broken |
+
+  | `cex_prompt_layers.py` | 3 | layer loading fails |
+
+  | `cex_run.py` | 3 | unified entry broken |
+
+  | `cex_system_test.py` | 3 | 3 test assertions wrong |
+
+  | `cex_8f_motor.py` | 1 | KC library path wrong |
+
+  | + 10 more | 1-2 each | silent failures |
+
+
+  Pattern in stale code: `PILLAR_MAP = {"P01": "P01_knowledge", ...}` without `N00_genesis/` prefix.
+
+  Fix: `PILLAR_MAP = {"P01": "N00_genesis/P01_knowledge", ...}` — mechanical, no logic change.'
+class_2_quality_debt_308_unscored_artifacts: "Every artifact built in SELF_ASSEMBLY W1 has `quality: null`.\nCEX rule: quality\
+  \ is assigned by peer review, never self-scored.\nBut `cex_evolve.py` provides the Karpathy loop for autonomous improvement\
+  \ before peer review.\n\nDistribution of 308 unscored artifacts:\nP01: 42  P06: 39  P09: 38  P07: 36  P10: 33  P11: 32\n\
+  P04: 22  P05: 18  P03: 15  P08: 7   P12: 5   P02: 3\n\nThe Karpathy formula (already in CEX):\nprogram.md (strategy hints,\
+  \ read-only)\n    +\ntarget artifact (the one being improved)\n    +\ncex_score.py (immutable metric)\n    =\nagent loop:\
+  \ hypothesis → apply → score → keep if better\n\nModes: `heuristic` (free, mechanical fixes) → `auto` (heuristic + agent\
+  \ if needed) → `agent` (full LLM loop, budget-tracked)"
+class_3_cross_synthesis_gap_isolated_nuclei: 'Each nucleus built its own KCs in isolation. No artifact yet exists that:
+
+  - Synthesizes patterns ACROSS N01-N06 (cross-domain knowledge graph)
+
+  - Encodes the 8F pipeline as a reusable `few_shot_example` any LLM can follow
+
+  - Defines the CoC conventions as a `pattern` artifact (not a rule document, but a BUILD PATTERN)
+
+  - Creates shared `mental_model` artifacts readable by Claude/Codex/Gemini/Ollama equally
+
+
+  This is the LLM-reusability gap: artifacts are CEX-specific, not cross-runtime portable.
+
+
+  ---'
+the_formulas_already_in_cex_apply_them: ''
+formula_1_karpathy_loop: "# cex_evolve.py agent <file> --budget 30000 --target 9.0\n# For each artifact below quality threshold:\n\
+  score_before = cex_score(artifact)\nfor round in range(max_rounds=3):\n    hypothesis = llm_generate(program_hints + artifact\
+  \ + \"improve to 9.0\")\n    apply(hypothesis, artifact)\n    score_after = cex_score(artifact)\n    if score_after > score_before:\n\
+  \        keep(); break\n    else:\n        discard(); try_next_hypothesis()\n\nApply to: all 308 quality:null artifacts\
+  \ in W1 batches per nucleus."
+formula_2_construction_triad_f4_reason: "Template-First (60%+ match):\n  Find similar artifact in N00_genesis/P{xx}/examples/\
+  \ or N0x/P{xx}/\n  Adapt it: replace domain-specific content, keep structure\n  Density gain: +0.08-0.12 vs fresh generation\n\
+  \nHybrid (30-60% match):\n  Merge template sections with fresh domain content\n  Use N00 archetype as structural skeleton\n\
+  \nFresh (<30% match):\n  Generate from scratch using builder ISOs\n  Reference 3+ existing artifacts for grounding\n\nApply\
+  \ to: new cross-synthesis artifacts in Wave 3."
+formula_3_density_optimization: "density_score = (unique_content_units / total_content_units) × coverage_factor\nTarget: >=\
+  \ 0.85\n\nLow density causes:\n  - Filler sentences (\"This artifact defines...\")\n  - Repeated headers without content\n\
+  \  - Prose where tables would work\n  - Missing cross-references\n\nFix: replace prose with tables, add cross-refs, remove\
+  \ filler, add examples\n\nApply to: any artifact with density_score < 0.85 in W1 batch."
+formula_4_convention_over_configuration_coc: "Convention: every artifact follows N00_genesis structure WITHOUT explicit config\n\
+  Configuration: when a nucleus OVERRIDES a convention, it must be explicit\n\nCoC compliance check:\n  - Frontmatter fields\
+  \ match N00_genesis/_schema.yaml\n  - File naming: {kind}_{domain_suffix}.md\n  - Pillar placement: N0X_{domain}/P{xx}{name}/{kind}{domain}.md\n\
+  \  - Cross-reference format: relative path, not absolute\n  - Kind names: from kinds_meta.json only (no invented kinds)\n\
+  \nApply to: every new artifact via F7 GOVERN + new `pattern` artifacts that encode the convention.\n\n---"
+the_vision: 'After this spec executes:
+
+
+  1. All 18 stale .py files updated → pillar routing works correctly for all tools
+
+  2. 308 artifacts scored and improved → quality baseline established
+
+  3. Cross-nucleus synthesis artifacts → shared knowledge graph + universal patterns that any LLM runtime can consume
+
+  4. Purposeful lines in every artifact → no filler, tables > prose, cross-references present
+
+  5. CoC pattern artifacts → the conventions are encoded as BUILD ARTIFACTS, not just documentation
+
+
+  The distinction at (3): artifacts written in ubiquitous language (F2b SPEAK protocol) are portable across runtimes. An artifact
+  that says "use the 8F pipeline" is CEX-specific. An artifact that says "use this intent_resolution → retrieval → generation
+  → validation sequence with these interfaces" is universally readable.
+
+
+  ---'
+wave_structure: ''
+wave_0_n07_orchestration_15_min: 'Pre-dispatch work: write per-nucleus handoffs, verify tool state.
+
+
+  # Verify 18 stale files list
+
+  python _tools/cex_migrate_paths.py --dry-run   # if exists
+
+  # else: manual grep audit per file
+
+
+  # Verify evolve tool functional
+
+  python _tools/cex_evolve.py report'
+wave_1_n05_code_hygiene_30_min_sequential_prerequisite: "Fix all 18 stale Python files. This unblocks cex_pipeline, cex_forge,\
+  \ cex_init, cex_run.\n\nMechanical fix pattern (no logic change — only the dict/constant changes):\n\n# BEFORE (stale pattern\
+  \ in all 18 files):\nPILLAR_MAP = {\n    \"P01\": \"P01_knowledge\",\n    \"P02\": \"P02_model\",\n    ...\n}\n# or:\npillar_path\
+  \ = CEX_ROOT / \"P01_knowledge\" / ...\n# or:\ndirs = [\"P01_knowledge\", \"P02_model\", ...]\n\n# AFTER:\nPILLAR_MAP =\
+  \ {\n    \"P01\": \"N00_genesis/P01_knowledge\",\n    \"P02\": \"N00_genesis/P02_model\",\n    ...\n}\n# or:\npillar_path\
+  \ = CEX_ROOT / \"N00_genesis\" / \"P01_knowledge\" / ...\n# or:\ndirs = [\"N00_genesis/P01_knowledge\", \"N00_genesis/P02_model\"\
+  , ...]\n\nAfter fixing: run `python _tools/cex_system_test.py` to verify 0 new failures.\n\nFiles to fix:\n\n| File | Stale\
+  \ refs | Fix type |\n|------|-----------|---------|\n| `_tools/cex_pipeline.py` | 9 | PILLAR_MAP dict |\n| `_tools/cex_forge.py`\
+  \ | 9 | PILLAR_MAP dict |\n| `_tools/cex_init.py` | 9 | PILLAR_MAP dict |\n| `_tools/cex_feedback.py` | 9 | PILLAR_MAP dict\
+  \ |\n| `_tools/cex_prompt_layers.py` | 3 | pillar dir list |\n| `_tools/cex_run.py` | 3 | pillar dir refs |\n| `_tools/cex_system_test.py`\
+  \ | 3 | test assertions |\n| `_tools/cex_8f_motor.py` | 1 | KC_LIBRARY_PATH |\n| `_tools/cex_ft_dataset.py` | 1 | pillar\
+  \ path |\n| `_tools/cex_handoff_composer.py` | 2 | pillar refs |\n| `_tools/cex_preflight.py` | 2 | pillar scan |\n| `_tools/cex_reranker.py`\
+  \ | 1 | pillar path |\n| `_tools/cex_research.py` | 1 | pillar ref |\n| `_tools/cex_source_harvester.py` | 2 | pillar scan\
+  \ |\n| `_tools/cex_stats.py` | 2 | pillar count |\n| `_tools/distill.py` | 5 | pillar dirs |\n| `_tools/notebooklm_create.py`\
+  \ | 1 | path ref |\n| `_tools/notebooklm_paste.py` | 1 | path ref |\n\nCommit: `[N05] code-hygiene: update 18 stale P0x\
+  \ paths to N00_genesis/P0x`"
+wave_2_quality_sweep_karpathy_loop_all_nuclei_parallel_60_min: "Each nucleus runs the Karpathy loop on its own W1 artifacts.\n\
+  \nPer nucleus execution:\n# Step 1: heuristic pass (free, mechanical fixes)\nfind N0X_{domain} -name \".md\" -not -path\
+  \ \"/compiled/*\" \\\n  | xargs -I{} python _tools/cex_evolve.py heuristic {}\n\n# Step 2: score all (assigns numeric quality\
+  \ score)\nfind N0X_{domain} -name \".md\" -not -path \"/compiled/*\" \\\n  | python _tools/cex_score.py --apply\n\n# Step\
+  \ 3: agent loop on artifacts still below 8.5\nfind N0X_{domain} -name \".md\" -not -path \"/compiled/*\" \\\n  | xargs grep\
+  \ -l \"quality: null\\|quality: 0\\.\" 2>/dev/null \\\n  | head -20 \\\n  | xargs -I{} python _tools/cex_evolve.py auto\
+  \ {} --budget 20000 --target 8.5\n\n# Step 4: compile + signal\npython _tools/cex_compile.py --all\npython -c \"from _tools.signal_writer\
+  \ import write_signal; write_signal('n0X', 'complete', 9.0)\"\n\nDensification rules (apply during agent loop):\n1. Replace\
+  \ prose paragraphs with structured tables where content is tabular\n2. Add cross-references: every artifact must reference\
+  \ >= 1 related artifact in its nucleus\n3. Remove filler: \"This {kind} defines...\", \"The purpose of this artifact is...\"\
+  \ → delete\n4. Add examples: if `kind=knowledge_card` and no example block → add `## Example` section\n5. Add anti-patterns:\
+  \ if `kind=knowledge_card` → add `## Anti-Patterns` with 2-3 entries"
+wave_3_cross_nucleus_synthesis_n04_primary_n01_support_45_min: "Create shared artifacts synthesized FROM existing nucleus\
+  \ KCs — not invented, derived.\nThese are the \"reusable by any LLM\" artifacts.\n\nSynthesis method (Template-First):\n\
+  Source: collect all kc_{domain}_vocabulary.md files (N01-N06)\n         + top KCs from each nucleus P01 (ranked by density_score)\n\
+  Method:  find overlapping concepts across >= 3 nuclei\n         → synthesize into a shared artifact\n         → place in\
+  \ N04_knowledge (the knowledge nucleus owns cross-domain synthesis)\n\nArtifacts to create:\n\n| Action | Path | Kind |\
+  \ Source | Notes |\n|--------|------|------|--------|-------|\n| CREATE | N04_knowledge/P01_knowledge/knowledge_graph_cex_domains.md\
+  \ | knowledge_graph | N01-N06 vocab KCs | Cross-domain concept map |\n| CREATE | N04_knowledge/P01_knowledge/ontology_cex_taxonomy.md\
+  \ | ontology | kinds_meta.json + pillar schemas | Formal CEX taxonomy for any LLM |\n| CREATE | N00_genesis/P03_prompt/few_shot_example_8f_research.md\
+  \ | few_shot_example | N01 artifacts | 8F applied to research task |\n| CREATE | N00_genesis/P03_prompt/few_shot_example_8f_build.md\
+  \ | few_shot_example | N03 artifacts | 8F applied to build task |\n| CREATE | N00_genesis/P03_prompt/few_shot_example_8f_deploy.md\
+  \ | few_shot_example | N05 artifacts | 8F applied to ops task |\n| CREATE | N00_genesis/P08_architecture/pattern_coc_nucleus.md\
+  \ | pattern | N00 structure | CoC convention for nucleus structure |\n| CREATE | N00_genesis/P08_architecture/pattern_portfolio_assembly.md\
+  \ | pattern | spec_nucleus_self_assembly | Portfolio assembly build pattern |\n| CREATE | N04_knowledge/P10_memory/knowledge_graph_cross_nucleus.md\
+  \ | knowledge_graph | all nuclei P01 | Shared entity graph N01-N06 |\n| CREATE | N00_genesis/P02_model/mental_model_8f_pipeline.md\
+  \ | mental_model | 8f-reasoning.md | 8F as a mental model for any LLM |\n| CREATE | N00_genesis/P02_model/mental_model_cex_architecture.md\
+  \ | mental_model | CLAUDE.md + nucleus_defs | CEX system model for any runtime |\n\nWhat makes these \"reusable by any LLM\"\
+  :\n- Written in ubiquitous language (no CEX-internal metaphors)\n- Self-contained: every term is defined in the artifact\
+  \ itself\n- Structured data: tables over prose, explicit interfaces\n- No assumed context: a model that has never seen CEX\
+  \ before can follow them\n- Portable format: valid markdown + frontmatter → readable by Claude/Codex/Gemini/Ollama"
+wave_4_coc_convergence_n03_30_min: 'Create the build patterns that ENCODE the conventions — not as documentation, but as executable
+  artifacts that F2 BECOME can load.
+
+
+  Convention artifacts:
+
+  A pattern artifact answers: "given this input, produce this output following these conventions"
+
+  A few_shot_example answers: "here is what a correct execution looks like"
+
+  A reasoning_trace answers: "here is how I thought through this"
+
+
+  | Action | Path | Kind | Notes |
+
+  |--------|------|------|-------|
+
+  | CREATE | N03_engineering/P08_architecture/pattern_8f_full_trace.md | pattern | Complete 8F trace template |
+
+  | CREATE | N03_engineering/P08_architecture/pattern_nucleus_instantiation.md | pattern | How to instantiate N00 mold into
+  a nucleus |
+
+  | CREATE | N03_engineering/P07_evals/reasoning_trace_8f_constrain.md | reasoning_trace | F1 CONSTRAIN example trace |
+
+  | CREATE | N03_engineering/P07_evals/reasoning_trace_8f_govern.md | reasoning_trace | F7 GOVERN example trace |
+
+  | CREATE | N03_engineering/P03_prompt/few_shot_example_schema_design.md | few_shot_example | P06 schema design example |
+
+  | CREATE | N03_engineering/P03_prompt/action_paradigm_cex_build.md | action_paradigm | Build action paradigm: input→8F→artifact
+  |
+
+  | REWRITE | N03_engineering/P08_architecture/invariant_n03.md | invariant | Add F2b SPEAK + ubiquitous language invariants
+  |'
+wave_5_n07_consolidation_15_min: '# Final quality sweep
+
+  python _tools/cex_evolve.py sweep --target 9.0 --max-rounds 1
+
+
+  # Verify doctor
+
+  python _tools/cex_doctor.py
+
+
+  # Compile all
+
+  python _tools/cex_compile.py --all
+
+
+  # Verify system tests pass with new paths
+
+  python _tools/cex_system_test.py
+
+
+  # Commit
+
+  git add -A && git commit -m "[N07] VERTICAL_DENSIFICATION: 308 scored, 18 paths fixed, 10 cross-synthesis artifacts, CoC
+  patterns"
+
+
+  ---'
+decisions_autonomous: '| Decision | Authority | Rationale |
+
+  |----------|-----------|-----------|
+
+  | heuristic before agent | N07 (cost) | heuristic is free; agent only if still below 8.5 |
+
+  | N04 owns cross-synthesis | N07 (arch) | Knowledge Gluttony nucleus owns the synthesis layer |
+
+  | few_shot_examples in N00_genesis | N07 (arch) | Shared resources belong in the archetype, not a nucleus |
+
+  | pattern artifacts in N03_engineering | N07 (arch) | Engineering nucleus defines build conventions |
+
+  | Wave 1 sequential | N07 (dependency) | Stale paths block tools used in Waves 2-4 |
+
+  | No new kinds invented | All nuclei | Only kinds from kinds_meta.json; if new kind needed → add to kinds_meta first |
+
+
+  ---'
+acceptance_criteria: "Wave 1:\n  - [ ] 18 Python files updated (grep for old pattern returns 0)\n  - [ ] python _tools/cex_system_test.py\
+  \ passes with no new failures\n  - [ ] cex_pipeline.py pillar routing returns N00_genesis paths\n\nWave 2:\n  - [ ] quality:\
+  \ null artifact count drops from 308 to < 50\n  - [ ] avg density_score across W1 artifacts >= 0.85\n  - [ ] 0 artifacts\
+  \ with density < 0.75\n\nWave 3:\n  - [ ] 10 cross-synthesis artifacts created\n  - [ ] knowledge_graph_cex_domains.md covers\
+  \ >= 6 domain nodes\n  - [ ] ontology_cex_taxonomy.md covers all 12 pillars + 257 kinds\n  - [ ] few_shot_examples pass\
+  \ cex_compile.py without error\n\nWave 4:\n  - [ ] pattern_8f_full_trace.md loadable as F2 BECOME ISO\n  - [ ] action_paradigm_cex_build.md\
+  \ covers all 8F functions\n  - [ ] reasoning_traces have >= 3 steps with explicit F-annotation\n\nFinal:\n  - [ ] cex_doctor.py:\
+  \ 0 FAIL (currently 0)\n  - [ ] cex_flywheel_audit.py: >= 97% (currently 94%)\n  - [ ] All new artifacts compile without\
+  \ error\n  - [ ] git log shows structured wave commits\n\n---"
+addressing_the_broader_question: '"ir alem criando possivelmente mais do que so os gaps restantes"
+
+
+  The cross-synthesis phase (Wave 3) goes beyond gap-filling.
+
+  It creates artifacts that DIDN''T EXIST in the original architecture:
+
+  - A `knowledge_graph` that maps ALL nucleus domains against each other
+
+  - `few_shot_examples` for the 8F pipeline (previously only documented, never exemplified)
+
+  - `mental_model` artifacts for CEX''s architecture (any LLM can load these to understand CEX)
+
+  - An `ontology` that formalizes the 257-kind taxonomy as a navigable structure
+
+
+  These are not filling gaps — they are EMERGENT artifacts from synthesis.
+
+  They exist because we now have enough nucleus-specific KCs to triangulate shared patterns.
+
+  Cross-nucleus data yields artifacts no single nucleus could produce alone.
+
+
+  "sem alucinacoes, aprimoramento verticalizado"
+
+
+  Anti-hallucination rule for all nuclei in this spec:
+
+  1. Every new artifact MUST cite >= 1 source artifact from its nucleus (chain of custody)
+
+  2. No statistics without a source KC backing them
+
+  3. No "best practices" without referencing which pillar/kind encodes them
+
+  4. Template-First: if >= 60% match exists, ADAPT it — don''t invent
+
+
+  "convergir tudo para se conectar durante a 8F e alem pelo CoC"
+
+
+  The CoC convergence (Wave 4) encodes the conventions as artifacts.
+
+  Once `pattern_8f_full_trace.md` exists, it becomes a F2 BECOME loadable ISO.
+
+  Every nucleus that runs 8F can load this pattern and follow it exactly —
+
+  not because they were told to, but because the pattern IS the convention.
+
+
+  This is CoC in practice: the convention is in the code (artifacts), not in documentation.
+
+
+  ---'
+properties: '| Property | Value |
+
+  |----------|-------|
+
+  | Total artifacts | 308 improved + 18 files fixed + 17 new artifacts |
+
+  | Waves | 5 (W0 N07, W1 N05 sequential, W2 all parallel, W3 N04+N01, W4 N03, W5 N07) |
+
+  | Est. execution time | 3-4 hours total |
+
+  | Model | Opus (N03, N07) + Sonnet (N01, N02, N04, N05, N06) |
+
+  | Quality gate | heuristic pass: free | agent pass: 20K tokens budget per nucleus |
+
+  | Blocking | Wave 1 (path fix) must complete before Wave 2 |
+
+  | Anti-hallucination | every artifact cites >= 1 source; no invented kinds |'

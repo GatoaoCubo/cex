@@ -23,8 +23,11 @@ observation_types: [user, feedback, project, reference]
 quality: 9.1
 title: "Memory Rate Limit Config"
 density_score: 0.90
+llm_function: INJECT
 ---
 ## Summary
+
+This ISO encodes a rate limit policy -- throttle bounds, quota windows, and backoff behavior.
 Rate limit configs are only as good as the accuracy of their numbers. A config with fictional limits creates a false sense of capacity — the runtime enforces the wrong ceiling, and real provider 429s arrive unexpectedly. The second most common failure is missing budget alerts: without alert_threshold, the first signal of overspend is the billing invoice.
 
 ## Pattern

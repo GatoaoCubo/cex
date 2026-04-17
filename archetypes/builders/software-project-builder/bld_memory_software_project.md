@@ -14,8 +14,11 @@ tldr: "Learnings from codexa-core (145K lines): CORS must be outermost middlewar
 density_score: 0.89
 memory_scope: project
 observation_types: [user, feedback, project, reference]
+llm_function: INJECT
 ---
 # Memory — Learnings
+
+This ISO describes a software project: its repository layout, modules, and build graph.
 
 ## From codexa-core (Production)
 

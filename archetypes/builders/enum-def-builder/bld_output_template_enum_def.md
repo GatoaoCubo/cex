@@ -51,15 +51,15 @@ representations:
   typescript: 'type {{TypeName}} = {{quoted_values_pipe_separated}};'
 ```
 ## Overview
-{{what_the_enum_represents_1_to_2_sentences}}
-{{who_uses_it_and_primary_domain_context}}
+`{{what_the_enum_represents_1_to_2_sentences}}`
+`{{who_uses_it_and_primary_domain_context}}`
 ## Values
-### {{VALUE_1}}
-{{description_of_this_value_and_when_to_use_it}}
-### {{VALUE_2}}
-{{description_of_this_value_and_when_to_use_it}}
-### {{VALUE_3}}
-{{description_of_this_value_and_when_to_use_it}}
+### `{{VALUE_1}}`
+`{{description_of_this_value_and_when_to_use_it}}`
+### `{{VALUE_2}}`
+`{{description_of_this_value_and_when_to_use_it}}`
+### `{{VALUE_3}}`
+`{{description_of_this_value_and_when_to_use_it}}`
 ## Usage
 JSON Schema: `{"enum": [{{quoted_values_csv}}]}`
 Pydantic: `class {{PydanticEnumClassName}}(str, Enum): {{VALUE_1}} = "{{VALUE_1}}"`

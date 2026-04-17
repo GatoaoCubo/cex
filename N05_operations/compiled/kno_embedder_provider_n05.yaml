@@ -1,0 +1,234 @@
+id: kno_embedder_provider_n05
+kind: embedder_provider
+pillar: P01
+nucleus: N05
+title: N05 Operations Embedder Provider
+version: 1.0.0
+quality: null
+tags:
+- n05
+- operations
+- embedder_provider
+- gating_wrath
+- retrieval
+- ci_cd
+- evidence
+density_score: 0.96
+intent: 'N05 needs embeddings that survive the language mix of code review comments, CI logs, traceback text, deploy notes,
+  shell commands, YAML keys, and short policy fragments.
+
+
+  The provider choice must optimize for:
+
+
+  - reliable semantic search on operational evidence
+
+  - predictable dimension contracts for the vector store
+
+  - low enough cost to reindex after config or schema changes
+
+  - strict handling of failures instead of silent degraded writes'
+properties: '| Property | Value |
+
+  |----------|-------|
+
+  | Kind | `embedder_provider` |
+
+  | Pillar | `P01` |
+
+  | Nucleus | `N05` |
+
+  | Provider | `openai` |
+
+  | Model | `text-embedding-3-small` |
+
+  | Dimensions | `1536` |
+
+  | Normalization | `true` |
+
+  | Batch size | `96` |
+
+  | Failure stance | `fail_closed_on_mismatch` |'
+primary_decision: 'Use `text-embedding-3-small` as the primary embedder for N05 knowledge and memory retrieval.
+
+
+  Why this fits the Gating Wrath lens:
+
+
+  - high enough semantic quality for terse operational text
+
+  - low enough cost to support rebuilds after major ingest fixes
+
+  - explicit dimension control that makes validation simple
+
+  - mature API behavior suitable for CI environments
+
+
+  N05 does not need the most expensive model. It needs a provider that can be audited, pinned, and rejected on mismatch.'
+configuration_table: '| Parameter | Value | Rationale |
+
+  |-----------|-------|-----------|
+
+  | provider | `openai` | stable hosted API with clear model IDs |
+
+  | model | `text-embedding-3-small` | strong quality per cost for mixed operational text |
+
+  | dimensions | `1536` | keeps fidelity for logs plus policy text |
+
+  | max_tokens | `8191` | safely exceeds N05 chunk targets |
+
+  | batch_size | `96` | conservative for CI rate control |
+
+  | normalize | `true` | cosine search requires consistent vector scale |
+
+  | api_key_env | `OPENAI_API_KEY` | no inline secrets |
+
+  | timeout_seconds | `20` | avoids hung indexing workers |
+
+  | retry_policy | `2 tries, jittered backoff` | enough for transient API hiccups, not enough to hide systemic outage |'
+input_profile: 'The embedder must handle these text classes:
+
+
+  - code review rationale with short sentences and filenames
+
+  - stack traces with repeated module paths
+
+  - test assertions with exact expected and actual text
+
+  - deploy phase descriptions
+
+  - runbook prose and checklist bullets
+
+  - config snippets and env keys
+
+
+  Dense retrieval works only if the provider can cluster semantically related failures without erasing exact terms like service
+  names, gate IDs, and command strings.'
+gating_wrath_guards: 'Hard rules for N05 indexing:
+
+
+  1. Reject writes when the returned dimension is not exactly `1536`.
+
+  2. Reject writes when the provider omits vectors for any input row.
+
+  3. Reject writes when normalization fails or produces NaN values.
+
+  4. Reject a batch if more than `2%` of rows error.
+
+  5. Stop reindex if rate limiting persists beyond the defined retry budget.
+
+
+  N05 prefers a delayed rebuild over a corrupted index.'
+fallback_policy: 'Fallback exists, but it is controlled:
+
+
+  - fallback model: `nomic-embed-text` via local Ollama
+
+  - fallback trigger: explicit operator override or documented OpenAI outage
+
+  - fallback scope: temporary query path or emergency rebuild, not silent production switch
+
+  - fallback warning: all mixed-model collections must be rebuilt from zero before normal service resumes
+
+
+  This is a critical gate. Mixing vectors from different models in the same collection is treated as index corruption.'
+cost_and_rebuild_posture: '| Scenario | Expected behavior |
+
+  |----------|-------------------|
+
+  | minor content delta | batch incremental upserts |
+
+  | schema change affecting chunk shape | full re-embed of affected namespace |
+
+  | dimension or model change | destroy and rebuild namespace |
+
+  | provider outage | pause dense writes, use sparse retrieval only if approved |
+
+
+  N05 should not optimize away rebuilds that preserve correctness. Operational evidence must stay trustworthy.'
+quality_notes: '`text-embedding-3-small` is favored here because N05 queries are not mostly literary. They are short, sharp,
+  and operational:
+
+
+  - "why did release gate fail after migration"
+
+  - "deploy health check loops on startup"
+
+  - "pytest import cycle after container refactor"
+
+  - "which runbook matches this rollback symptom"
+
+
+  These are semantic enough to benefit from dense retrieval, but concrete enough that a cheaper model still performs well
+  when chunking and hybrid retrieval are done correctly.'
+failure_modes: '| Failure mode | Symptom | Gate |
+
+  |--------------|---------|------|
+
+  | dimension drift | vector store rejects inserts later | validate dimension before write |
+
+  | silent partial batch | missing evidence in retrieval | require row-count parity |
+
+  | mixed model collection | strange nearest neighbors | hard namespace rebuild |
+
+  | overaggressive retries | CI timeouts and hidden outage | cap retries and surface error |
+
+  | no normalization | cosine ranking unstable | normalize every vector |'
+operational_validation: 'Before promoting a rebuild:
+
+
+  - embed a fixed probe set of N05 documents
+
+  - confirm all vectors share the same dimension
+
+  - verify nearest neighbors for known probe queries
+
+  - compare recall on incident, test, and deploy samples
+
+  - log model id and rebuild timestamp into index metadata
+
+
+  The probe set should include:
+
+
+  - one traceback chunk
+
+  - one deploy checklist chunk
+
+  - one health gate chunk
+
+  - one rollback lesson
+
+  - one CI failure summary'
+integration_contract: 'This embedder provider assumes:
+
+
+  - chunking from `kno_chunk_strategy_n05.md`
+
+  - `pgvector` storage from `kno_vector_store_n05.md`
+
+  - hybrid ranking from `kno_retriever_config_n05.md`
+
+  - freshness and rebuild rules from `mem_knowledge_index_n05.md`
+
+
+  The provider is not a free-floating preference. It is part of a gated retrieval chain.'
+decision_summary: 'Primary provider:
+
+
+  - `openai/text-embedding-3-small`
+
+
+  Acceptable emergency fallback:
+
+
+  - `ollama/nomic-embed-text`
+
+
+  Non-negotiable rule:
+
+
+  - any model swap requires an explicit rebuild boundary and index metadata update
+
+
+  That rule is the N05 expression of Gating Wrath: no silent drift, no mixed evidence, no optimistic corruption.'

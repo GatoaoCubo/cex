@@ -12,8 +12,8 @@ quality: 9.0
 tags: [quality-gate, decision-record, P08, ADR, architecture, status-lifecycle]
 tldr: "Pass/fail gate for decision_record artifacts: context completeness, options coverage, consequence honesty, and status lifecycle integrity."
 density_score: 0.90
+llm_function: GOVERN
 ---
-
 # Gate: decision_record
 ## Definition
 | Field | Value |

@@ -16,8 +16,8 @@ tags:
   - orchestration
   - p11
 tldr: "Gates ensuring workflow primitives define typed I/O, enforce composition rules (parallel-merge, loop max_iter, gate threshold), and contain no full workflow graphs or DAG edges."
+llm_function: GOVERN
 ---
-
 ## Definition
 A workflow_primitive is an atomic orchestration building block — one of seven types (step, condition, loop, parallel, router, gate, merge) with typed inputs and outputs. It passes this gate when its type is valid, inputs and outputs are typed, type-specific guards are present (max_iter for loops, threshold for gates, merge_ref for parallel), and the primitive contains no full workflow graphs or DAG edges.
 ## HARD Gates

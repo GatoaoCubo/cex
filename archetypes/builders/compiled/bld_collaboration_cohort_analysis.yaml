@@ -1,0 +1,28 @@
+kind: collaboration
+id: bld_collaboration_cohort_analysis
+pillar: P12
+llm_function: COLLABORATE
+purpose: How cohort_analysis-builder works in crews with other builders
+quality: null
+title: Collaboration Cohort Analysis
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- cohort_analysis
+- builder
+- collaboration
+tldr: How cohort_analysis-builder works in crews with other builders
+domain: cohort_analysis construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+crew_role: Defines and analyzes user cohorts to identify trends and patterns, providing actionable insights for product and
+  marketing teams.
+receives_from: "| Builder       | What                  | Format      |  \n|---------------|-----------------------|-------------|\
+  \  \n| Data Warehouse| Raw user event data   | CSV/Parquet |  \n| Product Team  | Cohort definition rules | JSON      |\
+  \  \n| Analyst       | Analysis parameters   | SQL         |"
+produces_for: "| Builder       | What                  | Format      |  \n|---------------|-----------------------|-------------|\
+  \  \n| Product Team  | Cohort trend reports  | PDF/Excel   |  \n| Marketing Team| Engagement metrics    | JSON        |\
+  \  \n| Data Team     | Visualization assets  | PNG         |"
+boundary: Does NOT handle model evaluation (benchmark-builder) or billing data (usage_report-builder). Data pipeline issues
+  are handled by data engineering.

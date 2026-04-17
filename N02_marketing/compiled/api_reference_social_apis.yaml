@@ -1,0 +1,103 @@
+id: api_reference_social_apis
+kind: api_reference
+pillar: P06
+nucleus: n02
+title: Social Platform API Reference -- Meta, LinkedIn, X
+version: 1.0.0
+quality: null
+tags:
+- api_reference
+- social_apis
+- meta
+- linkedin
+- x_twitter
+- publishing_contract
+- P06
+- n02_marketing
+domain: social-distribution
+status: active
+density_score: 1.0
+purpose: N02 distributes content. Distribution requires platform contracts. This reference defines the posting APIs, rate
+  limits, authentication, and payload schemas for the three primary B2B+B2C social platforms. `social_publisher_n02.md` consumes
+  this directly. ---
+meta_graph_api_instagram_facebook: ''
+authentication: 'Type: OAuth 2.0 (PKCE) or OAuth 1.0a
+
+  Scopes: tweet.read, tweet.write, users.read, offline.access
+
+  Base URL: https://api.twitter.com/2/'
+instagram_publishing_flow: "Step 1 -- Create Media Container:\nPOST /{ig-user-id}/media\nPayload:\n  image_url: string (public\
+  \ URL, JPEG/PNG, max 8MB)\n  caption: string (max 2200 chars)\n  location_id: string (optional)\n  user_tags: array (optional)\n\
+  \  hashtags: embedded in caption\n\nStep 2 -- Publish Container:\nPOST /{ig-user-id}/media_publish\nPayload:\n  creation_id:\
+  \ string (from Step 1 response)\n\nResponse:\n  id: string (published media ID)"
+meta_ads_api_campaign_creation: "POST /act_{ad-account-id}/campaigns\nPayload:\n  name: string\n  objective: OUTCOME_AWARENESS|OUTCOME_TRAFFIC|OUTCOME_ENGAGEMENT|\n\
+  \             OUTCOME_LEADS|OUTCOME_APP_PROMOTION|OUTCOME_SALES\n  status: ACTIVE|PAUSED\n  special_ad_categories: array\
+  \ (HOUSING|CREDIT|EMPLOYMENT|[] for none)\n  budget_optimization: {budget_rebalance_flag: true}\n\nPOST /act_{ad-account-id}/adsets\n\
+  POST /act_{ad-account-id}/ads\nPOST /act_{ad-account-id}/adcreatives"
+rate_limits_meta: '| Endpoint Class | Limit | Window |
+
+  |---------------|-------|--------|
+
+  | Graph API | 200 calls | per user per hour |
+
+  | Instagram Content Publish | 25 posts | per 24 hours |
+
+  | Ads API | 100 calls | per user per hour |
+
+  | Business Discovery API | 200 calls | per app per hour |
+
+
+  ---'
+linkedin_api: ''
+post_creation_ugc_api: "POST /ugcPosts\nHeaders:\n  Authorization: Bearer {access_token}\n  Content-Type: application/json\n\
+  \  X-Restli-Protocol-Version: 2.0.0\n\nPayload:\n  author: \"urn:li:person:{personId}\" | \"urn:li:organization:{orgId}\"\
+  \n  lifecycleState: PUBLISHED\n  specificContent:\n    com.linkedin.ugc.ShareContent:\n      shareCommentary:\n        text:\
+  \ string (max 3000 chars)\n      shareMediaCategory: NONE|ARTICLE|IMAGE|VIDEO|RICH\n      media: array (if image/video)\n\
+  \  visibility:\n    com.linkedin.ugc.MemberNetworkVisibility: PUBLIC|CONNECTIONS"
+image_upload_2_step: "Step 1 -- Initialize Upload:\nPOST /assets?action=registerUpload\nPayload:\n  registerUploadRequest:\n\
+  \    recipes: [\"urn:li:digitalmediaRecipe:feedshare-image\"]\n    owner: \"urn:li:person:{personId}\"\n    serviceRelationships:\
+  \ [{relationshipType: OWNER, identifier: urn:li:userGeneratedContent}]\n\nStep 2 -- Binary Upload:\nPUT {uploadUrl} (from\
+  \ Step 1 response)\nBody: binary image data\nContent-Type: image/jpeg|image/png"
+rate_limits_linkedin: '| Endpoint | Limit | Window |
+
+  |---------|-------|--------|
+
+  | UGC Posts | 150 posts | per day per member |
+
+  | Video Uploads | 50 | per day |
+
+  | API Calls | 100,000 | per day per app |
+
+  | Throttle | 3 req/sec | sustained |
+
+
+  ---'
+x_twitter_api_v2: ''
+tweet_creation: "POST /tweets\nHeaders:\n  Authorization: Bearer {access_token}\n  Content-Type: application/json\n\nPayload:\n\
+  \  text: string (max 280 chars; URLs = 23 chars each)\n  media:\n    media_ids: array[string]\n    tagged_user_ids: array[string]\n\
+  \  poll:\n    options: array[string] (2-4 options)\n    duration_minutes: integer (5-10080)\n  reply:\n    in_reply_to_tweet_id:\
+  \ string\n  quote_tweet_id: string"
+media_upload: "POST https://upload.twitter.com/1.1/media/upload.json\nMethod: INIT + APPEND + FINALIZE (chunked for video)\n\
+  \nINIT:\n  command: INIT\n  total_bytes: integer\n  media_type: image/jpeg|image/png|image/gif|video/mp4\n\nFINALIZE:\n\
+  \  command: FINALIZE\n  media_id_string: string (from INIT)"
+rate_limits_x: '| Tier | Monthly Tweets | Per-Request |
+
+  |------|-------------|-------------|
+
+  | Free | 1,500 | 1 req/15min writes |
+
+  | Basic ($100/mo) | 3,000 | 100 tweets/day |
+
+  | Pro ($5000/mo) | 300,000 | enterprise SLAs |
+
+
+  ---'
+error_handling_contract: "social_api_error:\n  platform: meta|linkedin|x\n  error_code: string\n  error_message: string\n\
+  \  retry_eligible: boolean\n  backoff_seconds: integer\n  fallback_action: skip|queue|draft|alert\n\ncommon_errors:\n  -\
+  \ code: \"190\" (Meta): token expired -> refresh flow\n  - code: \"32\" (X): token invalid -> re-auth\n  - code: \"429\"\
+  : rate limit -> exponential backoff (30s, 60s, 120s)\n  - code: \"400\": payload invalid -> validate against schema before\
+  \ retry"
+integration_reference:
+- 'Consumed by: `social_publisher_n02.md` (publishing tool)'
+- 'Validated against: `validation_schema_content_spec.md` (before payload construction)'
+- 'Scheduled via: `workflow_campaign_pipeline.md` (F8 COLLABORATE step)'

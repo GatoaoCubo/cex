@@ -2,7 +2,7 @@
 kind: output_template
 id: bld_output_template_webhook
 pillar: P04
-llm_function: GENERATE
+llm_function: PRODUCE
 purpose: Fill-in template for webhook artifact production
 version: 1.0.0
 created: 2026-03-28
@@ -73,8 +73,8 @@ what triggers this webhook and what system receives it.}}
 **Payload example**:
 ```json
 {
-  "{{field_1}}": "{{example_value}}",
-  "{{field_2}}": {{example_value}}
+  "`{{field_1}}`": "`{{example_value}}`",
+  "`{{field_2}}`": `{{example_value}}`
 }
 ```
 
@@ -102,7 +102,7 @@ what triggers this webhook and what system receives it.}}
 
 #- END TEMPLATE
 #- Verify: body <= 1024 bytes after removing template comments
-#- Verify: id == filename stem (p04_webhook_{{event_slug}}.md)
+#- Verify: id == filename stem (p04_webhook_`{{event_slug}}`.md)
 
 ## Cross-References
 

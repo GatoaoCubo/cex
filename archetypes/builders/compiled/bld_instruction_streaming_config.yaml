@@ -1,0 +1,44 @@
+kind: instruction
+id: bld_instruction_streaming_config
+pillar: P03
+llm_function: REASON
+purpose: Step-by-step production process for streaming_config
+pattern: 3-phase pipeline (research -> compose -> validate)
+quality: null
+title: Instruction Streaming Config
+version: 1.0.0
+author: n03_builder
+tags:
+- streaming_config
+- builder
+- instruction
+- P03
+tldr: '3-phase process: research transport needs, compose spec with buffer/heartbeat/backpressure, validate gates.'
+domain: streaming config construction
+created: '2026-04-13'
+updated: '2026-04-13'
+density_score: 0.9
+phase_1_research: "1. Identify the streaming use case: LLM token delivery, event broadcast, file download,\n   bidirectional\
+  \ chat, live dashboard, or progressive rendering\n2. Select the protocol:\n   - SSE: unidirectional, HTTP/1.1, auto-reconnect,\
+  \ ideal for LLM token streams\n   - WebSocket: bidirectional, upgraded TCP, ideal for interactive chat\n   - Chunked: one-shot\
+  \ large response, no persistent connection\n   - Auto: let server negotiate; document decision criteria\n3. Determine data\
+  \ volume and velocity: tokens/sec, message rate, payload size per frame\n4. Identify proxy and load balancer constraints:\
+  \ timeout limits, buffering behavior,\n   whether they support long-lived connections (SSE/WS need 60s+ keepalive)\n5. Determine\
+  \ backpressure requirements: can slow consumers drop events (drop), block\n   producers (block), or buffer overflow (buffer\
+  \ with limit)?\n6. Check existing streaming_configs via brain_query [IF MCP] -- do not duplicate a config\n   that already\
+  \ covers this transport use case"
+phase_2_compose: "1. Read SCHEMA.md -- source of truth for all fields\n2. Read OUTPUT_TEMPLATE.md -- fill the template following\
+  \ SCHEMA constraints\n3. Fill all required frontmatter fields; set `quality: null` -- never self-score\n4. Write Overview\
+  \ section: protocol, purpose, producer identity, consumer identity\n5. Write Protocol Settings section: table with all protocol-specific\
+  \ parameters\n   (event format for SSE, frame type for WebSocket, chunk size for chunked)\n6. Write Flow Control section:\
+  \ buffer_bytes, flush_interval_ms, backpressure_strategy,\n   max_connections, and overflow behavior\n7. Write Lifecycle\
+  \ section: heartbeat_interval_ms, timeout_ms, reconnect_delay_ms,\n   max_reconnect_attempts, graceful shutdown procedure\n\
+  8. Confirm body <= 2048 bytes"
+phase_3_validate: "1. Check QUALITY_GATES.md -- verify each HARD gate manually\n2. Confirm YAML frontmatter parses without\
+  \ errors\n3. Confirm `id` matches `^p05_sc_[a-z][a-z0-9_]+$`\n4. Confirm `protocol` is one of: sse, websocket, chunked,\
+  \ auto\n5. Confirm `buffer_bytes` is positive integer (not zero, not absent for SSE/WS)\n6. Confirm `heartbeat_interval_ms`\
+  \ is present for SSE and WebSocket protocols\n7. Confirm no actual credentials or endpoint secrets appear in the artifact\n\
+  8. Confirm `quality` is null\n9. Confirm body <= 2048 bytes\n10. Cross-check: is this a transport configuration? If this\
+  \ defines response JSON shape,\n    it belongs in `output_template`. If it defines data serialization, it belongs in\n \
+  \   `formatter`. If it defines observability, it belongs in `trace_config`.\n11. If score < 8.0: revise in the same pass\
+  \ before outputting"

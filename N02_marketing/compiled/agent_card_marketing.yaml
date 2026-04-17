@@ -77,7 +77,7 @@ subscription_auth: anthropic_max
 mcp_config: .mcp-n02.json
 flags: []
 domain: visual_frontend_engineering_and_copywriting
-quality: 8.9
+quality: 9.1
 tags:
 - agent_card
 - visual-frontend

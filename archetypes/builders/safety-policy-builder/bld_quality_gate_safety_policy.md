@@ -1,0 +1,58 @@
+---
+kind: quality_gate
+id: p11_qg_safety_policy
+pillar: P11
+llm_function: GOVERN
+purpose: Quality gate with HARD and SOFT scoring for safety_policy
+quality: 9.1
+title: "Quality Gate Safety Policy"
+version: "1.0.0"
+author: wave1_builder_gen
+tags: [safety_policy, builder, quality_gate]
+tldr: "Quality gate with HARD and SOFT scoring for safety_policy"
+domain: "safety_policy construction"
+created: "2026-04-13"
+updated: "2026-04-13"
+density_score: 0.85
+---
+
+## Definition
+| metric       | threshold | operator | scope                          |
+|--------------|-----------|----------|--------------------------------|
+| safety_policy | P11       | matches  | all AI safety governance rules |
+
+## HARD Gates
+| ID   | Check                  | Fail Condition                                      |
+|------|------------------------|-----------------------------------------------------|
+| H01  | YAML valid             | Invalid YAML syntax                                 |
+| H02  | ID matches pattern     | ID does not match `P[0-9]{2}-[A-Z]{3}-[0-9]{4}`    |
+| H03  | kind matches           | kind is not `safety_policy`                       |
+| H04  | Policy version exists  | Missing version field                             |
+| H05  | Signed by CTO          | No CTO signature                                  |
+| H06  | Risk assessment included | Missing risk assessment section               |
+| H07  | Approval date present  | No approval date                                  |
+
+## SOFT Scoring
+| Dim | Dimension            | Weight | Scoring Guide                                      |
+|-----|----------------------|--------|----------------------------------------------------|
+| D1  | Completeness         | 0.15   | 100% complete = 1.0; missing sections = 0.5        |
+| D2  | Clarity              | 0.15   | Unambiguous language = 1.0; ambiguous = 0.5        |
+| D3  | Alignment with P11   | 0.10   | Fully aligned = 1.0; partial = 0.5                 |
+| D4  | Risk coverage        | 0.15   | Comprehensive risks = 1.0; incomplete = 0.5        |
+| D5  | Stakeholder input    | 0.10   | Includes all required stakeholders = 1.0; missing = 0.5 |
+| D6  | Update frequency     | 0.10   | Updated annually = 1.0; outdated = 0.5             |
+| D7  | Enforcement          | 0.10   | Clear enforcement rules = 1.0; vague = 0.5         |
+| D8  | Audit trail          | 0.15   | Full audit logs = 1.0; partial = 0.5               |
+
+## Actions
+| Score     | Action                                      |
+|-----------|---------------------------------------------|
+| GOLDEN    | >=9.5: Auto-approve, no further review      |
+| PUBLISH   | >=8.0: Publish with CTO approval            |
+| REVIEW    | >=7.0: Require stakeholder review           |
+| REJECT    | <7.0: Reject, mandatory rewrite required    |
+
+## Bypass
+| conditions                          | approver | audit trail                          |
+|------------------------------------|----------|--------------------------------------|
+| Emergency, CTO override            | CTO      | Document reason, approval timestamp |

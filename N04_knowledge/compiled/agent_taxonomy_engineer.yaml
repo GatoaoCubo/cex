@@ -47,13 +47,13 @@ outputs: '| Artifact | Kind | Destination |
 
   |----------|------|-------------|
 
-  | Taxonomy map | `context_doc` | `N04_knowledge/output/` |
+  | Taxonomy map | `context_doc` | `N04_knowledge/P05_output/` |
 
-  | Tag normalization report | `context_doc` | `N04_knowledge/output/` |
+  | Tag normalization report | `context_doc` | `N04_knowledge/P05_output/` |
 
   | Misclassification alerts | Signal | `.cex/runtime/signals/` |
 
-  | Kind gap report | `context_doc` | `N04_knowledge/output/` |'
+  | Kind gap report | `context_doc` | `N04_knowledge/P05_output/` |'
 rules:
 - 'Canonical tag form: `lowercase-kebab-case`, max 3 words'
 - Every artifact must have exactly one `kind` and one `pillar`

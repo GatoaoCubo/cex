@@ -34,6 +34,7 @@ import sys
 import time
 from datetime import datetime, timezone, timedelta
 from pathlib import Path
+from typing import Any
 
 ROOT = Path(__file__).resolve().parent.parent
 TOOLS = ROOT / "_tools"
@@ -53,7 +54,7 @@ def _handle_signal(signum, frame):
     _shutdown = True
 
 
-def log(msg: str, level: str = "INFO"):
+def log(msg: str, level: str = "INFO") -> None:
     ts = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     safe = str(msg).encode("ascii", "replace").decode("ascii")
     line = f"[{ts}] [OVERNIGHT/{level}] {safe}"
@@ -68,7 +69,7 @@ def log(msg: str, level: str = "INFO"):
         pass
 
 
-def parse_args():
+def parse_args() -> argparse.Namespace:
     p = argparse.ArgumentParser(description="CEX Overnight Infinite Runner")
     p.add_argument("--hours", type=float, default=0, help="Run for N hours (0=infinite)")
     p.add_argument("--until", metavar="HH:MM", help="Run until time (24h format, e.g. 08:00)")
@@ -87,7 +88,7 @@ def parse_args():
 # Time Boundary
 # ======================================================================
 
-def compute_deadline(args) -> float:
+def compute_deadline(args: argparse.Namespace) -> float:
     """Compute Unix timestamp for when to stop. Returns 0 for infinite."""
     now = time.time()
 
@@ -132,13 +133,13 @@ class HealthStatus:
         self.warnings = []
         self.blockers = []
 
-    def add(self, name: str, ok: bool, detail: str = ""):
+    def add(self, name: str, ok: bool, detail: str = "") -> None:
         self.checks[name] = {"ok": ok, "detail": detail}
         if not ok:
             self.ok = False
             self.blockers.append(f"{name}: {detail}")
 
-    def warn(self, msg: str):
+    def warn(self, msg: str) -> None:
         self.warnings.append(msg)
 
 
@@ -199,7 +200,7 @@ SIGNAL_DIR = ROOT / ".cex" / "runtime" / "signals"
 # Mission Queue
 # ======================================================================
 
-def load_queue(queue_file: str) -> list:
+def load_queue(queue_file: str) -> list[str]:
     """Load mission queue from file. One mission ID per line."""
     if not queue_file or not Path(queue_file).exists():
         return []
@@ -207,7 +208,7 @@ def load_queue(queue_file: str) -> list:
     return [l.strip() for l in lines if l.strip() and not l.startswith("#")]
 
 
-def process_queued_mission(mission_id: str, args) -> dict:
+def process_queued_mission(mission_id: str, args: argparse.Namespace) -> dict[str, Any]:
     """Process one queued mission via mission_runner."""
     log(f"Processing queued mission: {mission_id}")
 
@@ -244,7 +245,7 @@ def process_queued_mission(mission_id: str, args) -> dict:
 # Heartbeat
 # ======================================================================
 
-def write_heartbeat(cycle: int, deadline: float, stats: dict):
+def write_heartbeat(cycle: int, deadline: float, stats: dict[str, Any]) -> None:
     """Write heartbeat file so external monitors can check liveness."""
     heartbeat = {
         "pid": os.getpid(),
@@ -267,7 +268,7 @@ def write_heartbeat(cycle: int, deadline: float, stats: dict):
 # Main Runner
 # ======================================================================
 
-def run_overnight(args):
+def run_overnight(args: argparse.Namespace) -> int:
     global _shutdown
 
     signal.signal(signal.SIGINT, _handle_signal)
@@ -473,7 +474,7 @@ def _interruptible_sleep(seconds: float):
 # CLI
 # ======================================================================
 
-def main():
+def main() -> None:
     args = parse_args()
     if not args.hours and not args.until:
         log("WARNING: No time limit set. Runner will run until interrupted or all work is done.", "WARN")

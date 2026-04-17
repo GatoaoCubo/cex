@@ -1,0 +1,286 @@
+id: spec_seed_words
+kind: context_doc
+title: Seed Words Specification -- Intent Resolution Trigger Phrases
+version: 1.0.0
+pillar: P01
+created: 2026-04-08
+author: n03_builder
+quality: null
+tags:
+- seed-words
+- intent-resolution
+- trigger-phrases
+- NLU
+- routing
+- bilingual
+tldr: Complete catalog of EN+PT trigger phrases that activate CEX intent resolution. Maps each phrase to kind, pillar, nucleus,
+  and builder. Reference for cex_8f_motor.py synonym expansion.
+density_score: 0.93
+sources:
+- N02_marketing/P05_output/report_intent_resolution_value_prop.md
+- .claude/rules/n07-input-transmutation.md
+- N03_engineering/P01_knowledge/kc_intent_resolution_map.md
+updated: '2026-04-13'
+purpose: This spec catalogs every trigger phrase (EN + PT) that activates CEX intent resolution. It is the reference for `cex_8f_motor.py`
+  synonym expansion and `cex_query.py` TF-IDF vocabulary enrichment.
+how_to_use_this_spec: '| Consumer | Usage |
+
+  |----------|-------|
+
+  | `cex_8f_motor.py` | Match user input against seed words -> resolve to kind + pillar |
+
+  | `cex_query.py` | Expand TF-IDF vocabulary with seed word synonyms |
+
+  | `cex_retriever.py` | Add seed words to retrieval corpus for better recall |
+
+  | N07 orchestrator | Map user intent to dispatch target (nucleus + kind) |
+
+  | Kind KCs | Populate `user_says` and `long_tails` frontmatter fields |'
+seed_word_catalog: ''
+domain_1_build_route_to_n03_or_target_nucleus: '| EN Trigger | PT Trigger | Canonical Action | Resolves To | Primary 8F |
+
+  |------------|-----------|------------------|-------------|------------|
+
+  | make | fazer, faz | create | kind resolution + builder dispatch | F6 PRODUCE |
+
+  | create | criar, cria | create | kind resolution + builder dispatch | F6 PRODUCE |
+
+  | build | construir, constroi | create | kind resolution + builder dispatch | F6 PRODUCE |
+
+  | scaffold | montar, estruturar | scaffold | multi-artifact creation from template | F6 PRODUCE |
+
+  | generate | gerar | create | kind resolution + F6 PRODUCE | F6 PRODUCE |
+
+  | write | escrever, escreve | create | kind resolution (context determines nucleus) | F6 PRODUCE |
+
+  | design | desenhar, projetar | create | kind=diagram or landing_page or component_map | F6 PRODUCE |
+
+  | draft | rascunhar | draft | kind resolution + quality=draft (skip F7 gate) | F6 PRODUCE |
+
+  | template | template, modelo | create | tpl_ prefix artifact in target pillar | F6 PRODUCE |
+
+  | new | novo, nova | create | kind resolution + fresh instance creation | F6 PRODUCE |'
+domain_2_research_route_to_n01: '| EN Trigger | PT Trigger | Canonical Action | Resolves To | Primary 8F |
+
+  |------------|-----------|------------------|-------------|------------|
+
+  | find | encontrar, achar | retrieve | retrieval query (cex_retriever.py or web) | F3 INJECT |
+
+  | compare | comparar | analyze | kind=knowledge_card, domain=competitive | F4 REASON |
+
+  | analyze | analisar | analyze | kind=knowledge_card, deep-research mode | F4 REASON |
+
+  | research | pesquisar | research | nucleus=N01, multi-source intelligence brief | F3 INJECT |
+
+  | benchmark | benchmarkar | evaluate | kind=benchmark, pillar=P07 | F7 GOVERN |
+
+  | investigate | investigar | research | N01 deep dive, 1M context leverage | F3 INJECT |
+
+  | study | estudar | research | kind=knowledge_card, academic/paper sources | F3 INJECT |
+
+  | trend | tendencia | analyze | N01 trend analysis, time-series if available | F4 REASON |
+
+  | competitor | concorrente | analyze | N01 competitive intel, pricing + feature matrix | F3 INJECT |
+
+  | market | mercado | analyze | N01 market analysis, TAM/SAM/SOM if relevant | F3 INJECT |'
+domain_3_marketing_route_to_n02: '| EN Trigger | PT Trigger | Canonical Action | Resolves To | Primary 8F |
+
+  |------------|-----------|------------------|-------------|------------|
+
+  | ad | anuncio | create | kind=prompt_template, AIDA/PAS framework | F6 PRODUCE |
+
+  | copy | copy, texto | create | N02 copy mode, brand voice + funnel stage | F6 PRODUCE |
+
+  | headline | titulo, manchete | create | 3+ A/B variants, hook in first 10 words | F6 PRODUCE |
+
+  | campaign | campanha | create | multi-artifact: schedule + templates + briefs | F6 PRODUCE |
+
+  | email | email | create | kind=prompt_template, email sequence structure | F6 PRODUCE |
+
+  | social | social, rede social | create | platform-specific constraints + content calendar | F6 PRODUCE |
+
+  | landing | landing, pagina | create | kind=landing_page, DUAL mode (visual + copy) | F6 PRODUCE |
+
+  | CTA | CTA, chamada | create | benefit-first call-to-action, never generic | F6 PRODUCE |
+
+  | brand | marca | configure | brand_config.yaml injection, voice alignment | F1 CONSTRAIN |
+
+  | funnel | funil | create | stage-aware copy (awareness/consideration/decision) | F4 REASON |'
+domain_4_deploy_route_to_n05: '| EN Trigger | PT Trigger | Canonical Action | Resolves To | Primary 8F |
+
+  |------------|-----------|------------------|-------------|------------|
+
+  | launch | lancar | deploy | deployment pipeline + pre-flight checks | F8 COLLABORATE |
+
+  | publish | publicar | deploy | release gate (cex_release_check.py, 28 checks) | F8 COLLABORATE |
+
+  | deploy | deploy, implantar | deploy | N05 CI/CD pipeline execution | F8 COLLABORATE |
+
+  | ship | entregar | deploy | release gate + version bump + changelog | F8 COLLABORATE |
+
+  | test | testar | test | N05 test suite execution (unit/e2e/system) | F7 GOVERN |
+
+  | fix | corrigir, arrumar | fix | N05 debug mode, error diagnosis first | F5 CALL |
+
+  | debug | debugar | fix | N05 systematic diagnosis, logs + stack trace | F5 CALL |
+
+  | review | revisar | analyze | N05 code review, quality + security scan | F7 GOVERN |
+
+  | CI | CI, integracao | configure | N05 pipeline configuration | F1 CONSTRAIN |
+
+  | monitor | monitorar | monitor | N05 observability setup | F5 CALL |'
+domain_5_quality_route_to_tools_or_n07: '| EN Trigger | PT Trigger | Canonical Action | Resolves To | Primary 8F |
+
+  |------------|-----------|------------------|-------------|------------|
+
+  | improve | melhorar | improve | cex_evolve.py (heuristic then agent mode) | F7 GOVERN |
+
+  | upgrade | atualizar, upgradar | improve | cex_evolve.py --target specific artifact | F7 GOVERN |
+
+  | evolve | evoluir | improve | cex_evolve.py --sweep (batch evolution) | F7 GOVERN |
+
+  | fix | consertar | fix | direct edit if known, N05 if code | F5 CALL |
+
+  | clean | limpar | sanitize | cex_sanitize.py (ASCII compliance) | F7 GOVERN |
+
+  | validate | validar | validate | cex_doctor.py + cex_score.py | F7 GOVERN |
+
+  | score | pontuar, avaliar | evaluate | cex_score.py --apply (3-layer scoring) | F7 GOVERN |
+
+  | audit | auditar | audit | cex_flywheel_audit.py (109 checks) | F7 GOVERN |
+
+  | optimize | otimizar | optimize | cex_prompt_optimizer.py (builder ISO analysis) | F7 GOVERN |
+
+  | gate | gate, portao | create | quality_gate kind, pillar=P07 | F6 PRODUCE |'
+domain_6_meta_route_to_n07_self_management: '| EN Trigger | PT Trigger | Canonical Action | Resolves To | Primary 8F |
+
+  |------------|-----------|------------------|-------------|------------|
+
+  | status | status | monitor | cex_doctor.py + dispatch.sh status | F5 CALL |
+
+  | health | saude | monitor | cex_doctor.py + cex_flywheel_audit.py | F5 CALL |
+
+  | check | checar, verificar | validate | context-dependent: code=N05, artifact=doctor | F7 GOVERN |
+
+  | plan | planejar | plan | /plan command, goal decomposition | F4 REASON |
+
+  | mission | missao | orchestrate | /mission command, full lifecycle | F1-F8 |
+
+  | overnight | noturno | batch | overnight_h1.cmd (evolve + audit batch) | F7 GOVERN |
+
+  | grid | grid | orchestrate | multi-agent dispatch (up to 6 parallel) | F8 COLLABORATE |
+
+  | stop | parar | terminate | dispatch.sh stop (session-aware kill) | F8 COLLABORATE |
+
+  | consolidate | consolidar | validate | verify + score + clean + commit | F7 GOVERN |'
+domain_7_knowledge_route_to_n04: '| EN Trigger | PT Trigger | Canonical Action | Resolves To | Primary 8F |
+
+  |------------|-----------|------------------|-------------|------------|
+
+  | document | documentar | create | kind=knowledge_card or context_doc | F6 PRODUCE |
+
+  | index | indexar | index | cex_index.py, knowledge_index kind | F5 CALL |
+
+  | organize | organizar | restructure | taxonomy review, pillar assignment | F4 REASON |
+
+  | tag | taguear | annotate | frontmatter tags update | F1 CONSTRAIN |
+
+  | embed | embedar | configure | embedding_config kind, vector store setup | F1 CONSTRAIN |
+
+  | chunk | chunkar | configure | chunk_strategy kind, RAG optimization | F1 CONSTRAIN |
+
+  | retrieve | recuperar | retrieve | retriever_config kind, search tuning | F3 INJECT |
+
+  | catalog | catalogar | index | knowledge_index + registry update | F5 CALL |
+
+  | classify | classificar | resolve | kind resolution from untyped content | F1 CONSTRAIN |
+
+  | glossary | glossario | create | glossary_entry kind, pillar=P01 | F6 PRODUCE |'
+domain_8_commercial_route_to_n06: '| EN Trigger | PT Trigger | Canonical Action | Resolves To | Primary 8F |
+
+  |------------|-----------|------------------|-------------|------------|
+
+  | price | precar, precificar | create | kind=content_monetization, pricing model | F6 PRODUCE |
+
+  | monetize | monetizar | create | N06 revenue strategy, funnel + pricing | F6 PRODUCE |
+
+  | course | curso | create | course structure + pricing + launch plan | F6 PRODUCE |
+
+  | tier | tier, plano | create | pricing tier design (free/pro/enterprise) | F6 PRODUCE |
+
+  | subscription | assinatura | create | recurring revenue model design | F6 PRODUCE |
+
+  | revenue | receita, faturamento | analyze | revenue projection + optimization | F4 REASON |
+
+  | conversion | conversao | optimize | funnel optimization, N02+N06 collaboration | F7 GOVERN |
+
+  | upsell | upsell | create | tier migration strategy | F6 PRODUCE |
+
+  | bundle | pacote | create | product bundling strategy | F6 PRODUCE |
+
+  | discount | desconto | create | promotional pricing structure | F6 PRODUCE |'
+verb_resolution_matrix: 'Maps user verbs (EN + PT) to canonical actions that inform 8F function emphasis.
+
+
+  | PT Verb | EN Verb | Canonical Action | Primary 8F | Secondary 8F |
+
+  |---------|---------|------------------|------------|--------------|
+
+  | criar, crie, cria | create, build, make | create | F6 PRODUCE | F2 BECOME |
+
+  | melhorar, melhore | improve, enhance, evolve | improve | F7 GOVERN | F6 PRODUCE |
+
+  | reconstruir, reconstroi | rebuild, recreate | rebuild | F2 BECOME | F6 PRODUCE |
+
+  | analisar, analise | analyze, review, audit | analyze | F3 INJECT | F4 REASON |
+
+  | validar, valide | validate, verify, check | validate | F7 GOVERN | F5 CALL |
+
+  | documentar, documente | document, describe | document | F6 PRODUCE | F3 INJECT |
+
+  | integrar, integre | integrate, connect | integrate | F5 CALL | F1 CONSTRAIN |
+
+  | testar, teste | test, evaluate | test | F7 GOVERN | F5 CALL |
+
+  | implantar, implante | deploy, ship, release | deploy | F8 COLLABORATE | F7 GOVERN |
+
+  | configurar, configure | configure, setup | configure | F1 CONSTRAIN | F5 CALL |
+
+  | otimizar, otimize | optimize, tune | optimize | F7 GOVERN | F4 REASON |
+
+  | auditar, audite | audit, inspect | audit | F3 INJECT | F7 GOVERN |
+
+  | agendar, agende | schedule, plan, time | schedule | F8 COLLABORATE | F4 REASON |
+
+  | monitorar, monitore | monitor, watch, observe | monitor | F5 CALL | F7 GOVERN |'
+summary_statistics: '| Metric | Value |
+
+  |--------|-------|
+
+  | Total seed word domains | 8 |
+
+  | Total EN trigger phrases | 89 |
+
+  | Total PT trigger phrases | 89+ (some phrases have multiple PT variants) |
+
+  | Verb resolution entries | 14 |
+
+  | Unique canonical actions | 14 (create, scaffold, draft, retrieve, analyze, research, evaluate, fix, deploy, configure,
+  monitor, improve, sanitize, orchestrate, ...) |
+
+  | Unique 8F function targets | 7 (F1-F8 except F2 as primary) |
+
+  | Nuclei covered | 7 (N01-N07) |
+
+  | Pillars covered | 12 (P01-P12) |'
+integration_roadmap: '| Phase | Action | Impact |
+
+  |-------|--------|--------|
+
+  | 1 (immediate) | `cex_8f_motor.py` loads this spec as synonym dictionary | +40% intent resolution recall |
+
+  | 2 (next sprint) | Add `user_says` field to all 123 kind KCs using this data | +60% kind disambiguation |
+
+  | 3 (future) | `cex_query.py` indexes seed words into TF-IDF corpus | Semantic discovery of builders |
+
+  | 4 (future) | Embedding-based matching over seed word + long_tail corpus | Near-human intent resolution |'

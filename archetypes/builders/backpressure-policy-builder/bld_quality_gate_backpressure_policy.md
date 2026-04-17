@@ -1,0 +1,61 @@
+---
+id: p11_qg_backpressure_policy
+kind: quality_gate
+pillar: P11
+title: "Gate: backpressure_policy"
+version: "1.0.0"
+created: "2026-04-17"
+updated: "2026-04-17"
+author: "builder_agent"
+domain: "backpressure policy -- reactive streams flow control for producer-consumer pipelines"
+quality: 8.0
+tags: [quality-gate, backpressure-policy, P09, reactive-streams, flow-control]
+tldr: "Pass/fail gate for backpressure_policy: overflow strategy enum, buffer positivity, shed threshold range, watermark consistency."
+density_score: 0.90
+llm_function: GOVERN
+---
+# Gate: backpressure_policy
+
+## Definition
+| Field | Value |
+|---|---|
+| metric | backpressure_policy artifact quality score |
+| threshold | 7.0 (publish >= 8.0, golden >= 9.5) |
+| operator | weighted_sum |
+| scope | all artifacts with `kind: backpressure_policy` |
+
+## HARD Gates
+All must pass (AND logic). Any single failure = REJECT.
+| ID | Check | Fail Condition |
+|---|---|---|
+| H01 | Frontmatter parses as valid YAML | Parse error on frontmatter block |
+| H02 | ID matches `^p09_bp_[a-z][a-z0-9_]+$` | ID contains uppercase, hyphens, or missing prefix |
+| H03 | ID equals filename stem | id: p09_bp_foo but file is p09_bp_bar.md |
+| H04 | Kind equals literal `backpressure_policy` | kind: flow-policy or any other value |
+| H05 | Quality field is null | quality: 8.0 or any non-null value |
+| H06 | All required fields present | Missing overflow_strategy, buffer_size, or shed_threshold |
+| H07 | overflow_strategy is valid enum | Not one of: DROP_LATEST, DROP_OLDEST, BUFFER, THROTTLE, ERROR |
+| H08 | buffer_size is positive integer | -1, 0, "big", absent |
+| H09 | shed_threshold is float in [0.0, 1.0] | 1.5, -0.1, "high", absent |
+| H10 | Body has all 4 required sections | Missing ## Overview, ## Strategy, ## Thresholds, or ## Flow |
+
+## SOFT Scoring
+| Dimension | Weight | Criteria |
+|---|---|---|
+| Strategy rationale | 1.0 | overflow_strategy choice justified with use case reasoning |
+| Threshold coherence | 1.0 | high_watermark <= buffer_size AND low_watermark < high_watermark |
+| Watermark presence | 1.0 | Both high_watermark and low_watermark declared |
+| Queue identification | 1.0 | monitored_queue names specific queue/channel/topic |
+| Batch sizing | 0.5 | request_batch_size tuned to consumer capacity |
+| Data loss acknowledgment | 1.0 | DROP strategies explicitly document data loss risk |
+| Consumer lag SLA | 0.5 | Acceptable lag documented |
+| Boundary clarity | 1.0 | Explicitly NOT circuit_breaker, NOT rate_limit_config |
+| tldr quality | 1.0 | tldr <= 160ch, includes strategy + key thresholds |
+
+## Actions
+| Score | Tier | Action |
+|---|---|---|
+| >= 9.5 | Golden | Publish to pool as golden reference |
+| >= 8.0 | Publish | Publish to pool, add to routing index |
+| >= 7.0 | Review | Flag for improvement before publish |
+| < 7.0 | Reject | Return to author with specific gate failures |

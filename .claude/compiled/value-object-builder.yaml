@@ -1,0 +1,4 @@
+name: value-object-builder
+description: Builds ONE value_object artifact via 8F pipeline. Loads value-object-builder specs. Produces draft with frontmatter
+  + body. Never self-scores quality.
+tools: Read, Write, Edit, Bash, Glob, Grep

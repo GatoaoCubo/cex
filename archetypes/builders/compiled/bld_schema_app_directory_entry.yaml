@@ -1,0 +1,50 @@
+kind: schema
+id: bld_schema_app_directory_entry
+pillar: P06
+llm_function: CONSTRAIN
+purpose: Formal schema -- SINGLE SOURCE OF TRUTH for app_directory_entry
+quality: null
+title: Schema App Directory Entry
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- app_directory_entry
+- builder
+- schema
+tldr: Formal schema -- SINGLE SOURCE OF TRUTH for app_directory_entry
+domain: app_directory_entry construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+frontmatter_fields: ''
+required: "| Field     | Type   | Required | Default | Notes |  \n|-----------|--------|----------|---------|-------|  \n\
+  | id        | string | yes      | null    | Must match ID Pattern |  \n| kind      | string | yes      | null    | Always\
+  \ \"app_directory_entry\" |  \n| pillar    | string | yes      | null    | Always \"P05\" |  \n| title     | string | yes\
+  \      | null    | Human-readable name |  \n| version   | string | yes      | null    | Semantic versioning (e.g., 1.0.0)\
+  \ |  \n| created   | date   | yes      | null    | ISO 8601 format (e.g., 2023-01-01) |  \n| updated   | date   | yes  \
+  \    | null    | ISO 8601 format (e.g., 2023-01-01) |  \n| author    | string | yes      | null    | Maintainer's identifier\
+  \ |  \n| domain    | string | yes      | null    | Application category (e.g., \"wallet\") |  \n| quality   | null   | yes\
+  \      | null    | Never self-score; peer review assigns |  \n| tags      | array  | yes      | null    | Keywords (lowercase,\
+  \ no spaces) |  \n| tldr      | string | yes      | null    | One-sentence summary |  \n| app_id    | string | yes     \
+  \ | null    | Unique app identifier |  \n| description | string | yes | null | Brief functional overview |"
+recommended: "| Field     | Type   | Notes |  \n|-----------|--------|-------|  \n| license   | string | Open source license\
+  \ (e.g., MIT) |  \n| category  | string | Subdomain classification (e.g., \"decentralized\") |"
+id_pattern: ^p05_ade_[a-z][a-z0-9_]+.md$
+body_structure:
+- Overview
+- Purpose, target users, and core features.
+- Technical Details
+- Architecture, dependencies, and API endpoints.
+- Usage
+- Installation, configuration, and example commands.
+- Compliance
+- Regulatory adherence and security audits.
+- Community
+- Support channels, governance model, and contribution guidelines.
+constraints:
+- ID must match ^p05_ade_[a-z][a-z0-9_]+.md$ exactly.
+- Quality must be assigned by peer review; self-scoring is prohibited.
+- Version must follow semantic versioning (major.minor.patch).
+- Tags must be lowercase alphanumeric with underscores (no spaces).
+- Domain-specific fields (app_id, description) are mandatory.
+- File size must not exceed 4096 bytes.

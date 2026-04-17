@@ -1,0 +1,48 @@
+kind: output_template
+id: bld_output_template_workflow_run_crate
+pillar: P05
+llm_function: PRODUCE
+purpose: Template with vars for workflow_run_crate production
+quality: null
+title: Output Template Workflow Run Crate
+version: 1.0.0
+author: n04_wave7
+tags:
+- workflow_run_crate
+- builder
+- output_template
+- RO-Crate
+- CreateAction
+- provenance-graph
+- ORCID
+tldr: Template with vars for workflow_run_crate production
+domain: workflow_run_crate construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+ro_crate_metadata_ro_crate_metadata_json: "{\n  \"@context\": [\n    \"https://www.researchobject.org/ro-crate/1.2/context\"\
+  ,\n    \"https://w3id.org/ro/terms/workflow-run\"\n  ],\n  \"@graph\": [\n    {\n      \"@type\": \"CreativeWork\",\n  \
+  \    \"@id\": \"ro-crate-metadata.json\",\n      \"about\": {\"@id\": \"./\"},\n      \"conformsTo\": [\n        {\"@id\"\
+  : \"https://w3id.org/ro/crate/1.2\"},\n        {\"@id\": \"https://w3id.org/workflowhub/workflow-ro-crate/1.0\"}\n     \
+  \ ]\n    },\n    {\n      \"@type\": \"Dataset\",\n      \"@id\": \"./\",\n      \"name\": \"{{workflow_name}} Run {{run_id}}\"\
+  ,\n      \"description\": \"{{description}}\",\n      \"datePublished\": \"{{date}}\",\n      \"license\": {\"@id\": \"\
+  {{license_url}}\"},\n      \"hasPart\": [\n        {\"@id\": \"{{workflow_file}}\"},\n        {\"@id\": \"{{run_id}}-provenance.json\"\
+  }\n      ]\n    },\n    {\n      \"@type\": [\"File\", \"SoftwareSourceCode\", \"ComputationalWorkflow\"],\n      \"@id\"\
+  : \"{{workflow_file}}\",\n      \"name\": \"{{workflow_name}}\",\n      \"programmingLanguage\": {\"@id\": \"#{{workflow_language_id}}\"\
+  },\n      \"url\": \"{{workflow_url}}\",\n      \"version\": \"{{workflow_version}}\"\n    },\n    {\n      \"@type\": \"\
+  CreateAction\",\n      \"@id\": \"#run-{{run_id}}\",\n      \"name\": \"Run of {{workflow_name}}\",\n      \"startTime\"\
+  : \"{{start_time}}\",\n      \"endTime\": \"{{end_time}}\",\n      \"instrument\": {\"@id\": \"{{workflow_file}}\"},\n \
+  \     \"object\": [{\"@id\": \"{{input_dataset_id}}\"}],\n      \"result\": [{\"@id\": \"{{output_dataset_id}}\"}],\n  \
+  \    \"agent\": {\"@id\": \"{{orcid_url}}\"}\n    },\n    {\n      \"@type\": \"Person\",\n      \"@id\": \"{{orcid_url}}\"\
+  ,\n      \"name\": \"{{researcher_name}}\",\n      \"affiliation\": {\"@id\": \"#{{institution_id}}\"}\n    },\n    {\n\
+  \      \"@type\": \"Dataset\",\n      \"@id\": \"{{input_dataset_id}}\",\n      \"name\": \"{{input_name}}\",\n      \"\
+  encodingFormat\": \"{{input_mime}}\",\n      \"contentSize\": \"{{input_bytes}}\",\n      \"sha256\": \"{{input_sha256}}\"\
+  ,\n      \"license\": {\"@id\": \"{{input_license}}\"}\n    },\n    {\n      \"@type\": \"Dataset\",\n      \"@id\": \"\
+  {{output_dataset_id}}\",\n      \"name\": \"{{output_name}}\",\n      \"encodingFormat\": \"{{output_mime}}\",\n      \"\
+  contentSize\": \"{{output_bytes}}\",\n      \"sha256\": \"{{output_sha256}}\",\n      \"dateCreated\": \"{{end_time}}\"\n\
+  \    }\n  ]\n}"
+fair_signposting: 'Link: <{{crate_url}}>; rel="cite-as"
+
+  Link: <{{metadata_url}}>; rel="describedby"; type="application/ld+json"
+
+  Link: <{{license_url}}>; rel="license"'

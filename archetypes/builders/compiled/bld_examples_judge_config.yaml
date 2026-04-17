@@ -1,0 +1,27 @@
+kind: examples
+id: bld_examples_judge_config
+pillar: P07
+llm_function: GOVERN
+purpose: Golden and anti-examples of judge_config artifacts
+quality: null
+title: Examples Judge Config
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- judge_config
+- builder
+- examples
+tldr: Golden and anti-examples of judge_config artifacts
+domain: judge_config construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+golden_example: "---\nkind: judge_config\nname: llm_judge_automated_eval\n---\nmodel: \"gpt-4o\"\ncriteria:\n  - relevance\n\
+  \  - coherence\n  - factual_accuracy\nscoring:\n  threshold: 0.75\n  scale: 1-5\napi:\n  endpoint: \"https://api.openai.com/v1/engines/gpt-4o/completions\"\
+  \n  auth: \"Bearer <API_KEY>\"\n  timeout: 30"
+anti_example_1_missing_essential_parameters: "---\nkind: judge_config\nname: incomplete_judge\n---\nmodel: \"gpt-4o\"\ncriteria:\
+  \ []\nscoring:\n  threshold: 0.75"
+why_it_fails: Mixes automated judge config with human rubric elements (letter grades, explicit feedback instructions). Contradicts
+  boundary requirement to exclude scoring_rubric content.
+anti_example_2_human_rubric_contamination: "---\nkind: judge_config\nname: hybrid_judge\n---\nmodel: \"gpt-4o\"\ncriteria:\n\
+  \  - \"Use 3-point rubric for grammar\"\n  - \"Apply human-style feedback\"\nscoring:\n  threshold: 0.5\n  scale: \"A-F\""

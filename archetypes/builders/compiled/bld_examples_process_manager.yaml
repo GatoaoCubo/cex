@@ -1,0 +1,32 @@
+id: bld_examples_process_manager
+kind: knowledge_card
+pillar: P12
+title: Process Manager Builder -- Examples
+version: 1.0.0
+quality: 5.0
+tags:
+- builder
+- process_manager
+- examples
+llm_function: GOVERN
+density_score: 1.0
+updated: '2026-04-17'
+golden_example_order_fulfillment: "id: p12_pm_order_fulfillment\nkind: process_manager\ncorrelation_key: orderId\nstart_event:\
+  \ OrderPlaced\nterminal_states: [FULFILLED, CANCELLED]\nstates: [PAYMENT_PENDING, INVENTORY_PENDING, SHIPPING_PENDING, FULFILLED,\
+  \ CANCELLED]\nsubscribed_events: [OrderPlaced, PaymentConfirmed, InventoryReserved, ShipmentCreated, PaymentFailed]\ncommands_issued:\n\
+  \  - \"ProcessPayment -> PaymentService\"\n  - \"ReserveInventory -> InventoryService\"\n  - \"CreateShipment -> ShippingService\"\
+  \n  - \"ReleaseInventory -> InventoryService (compensation)\"\n  - \"RefundPayment -> PaymentService (compensation)\""
+golden_example_user_onboarding: "id: p12_pm_user_onboarding\nkind: process_manager\ncorrelation_key: userId\nstart_event:\
+  \ UserRegistered\nterminal_states: [ONBOARDED, REJECTED]\nsubscribed_events: [UserRegistered, EmailVerified, ProfileCompleted,\
+  \ KycApproved, KycRejected]\ncommands_issued:\n  - \"SendVerificationEmail -> NotificationService\"\n  - \"InitiateKyc ->\
+  \ KycService\"\n  - \"ActivateAccount -> AccountService\"\n  - \"NotifyRejection -> NotificationService (compensation)\""
+anti_pattern_process_manager_with_business_data: '# WRONG -- storing customer data in process manager
+
+  states: [CREATED, PROCESSING, DONE]
+
+  customer_email: "user@example.com"  # belongs in domain, not here
+
+  # CORRECT: process manager holds correlation_key + state only'
+anti_pattern_missing_compensation: "# WRONG -- no rollback on failure\ncommands_issued: [\"ProcessPayment -> PaymentService\"\
+  ]\ncompensation: []\n# CORRECT: every forward step needs a compensating command\ncompensation:\n  - \"On CANCELLED: RefundPayment\
+  \ -> PaymentService\""

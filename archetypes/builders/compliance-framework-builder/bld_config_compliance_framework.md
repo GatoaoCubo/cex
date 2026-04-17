@@ -1,0 +1,35 @@
+---
+kind: config
+id: bld_config_compliance_framework
+pillar: P09
+llm_function: CONSTRAIN
+purpose: Naming, paths, limits for compliance_framework production
+quality: 8.6
+title: "Config Compliance Framework"
+version: "1.0.0"
+author: wave1_builder_gen
+tags: [compliance_framework, builder, config]
+tldr: "Naming, paths, limits for compliance_framework production"
+domain: "compliance_framework construction"
+created: "2026-04-13"
+updated: "2026-04-13"
+density_score: 0.85
+---
+
+## Naming Convention
+Pattern: `p11_cfw_<name>_<version>.md` (e.g., `p11_cfw_compliance_policy_v1.md`, `p11_cfw_data_protection_v2.md`)
+
+## Paths
+Artifacts stored in: `/artifacts/p11/cfw/{{name}}/`
+Root reference: `/compliance_frameworks/p11/`
+
+## Limits
+max_bytes: 5120
+max_turns: 10
+effort_level: medium
+
+## Hooks
+pre_build: null
+post_build: null
+on_error: null
+on_quality_fail: null

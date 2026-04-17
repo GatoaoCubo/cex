@@ -2,7 +2,7 @@
 kind: examples
 id: bld_examples_webhook
 pillar: P04
-llm_function: DEMONSTRATE
+llm_function: GOVERN
 version: 1.0.0
 created: 2026-03-28
 updated: 2026-03-28

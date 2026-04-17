@@ -1,0 +1,41 @@
+kind: instruction
+id: bld_instruction_onboarding_flow
+pillar: P03
+llm_function: REASON
+purpose: Step-by-step production process for onboarding_flow
+quality: null
+title: Instruction Onboarding Flow
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- onboarding_flow
+- builder
+- instruction
+tldr: Step-by-step production process for onboarding_flow
+domain: onboarding_flow construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+phase_1_research:
+- Conduct user interviews to identify pain points during onboarding.
+- Map current onboarding journey, noting drop-off points and friction.
+- Define activation milestones (e.g., profile setup, first task completion).
+- Identify aha-moments by analyzing user behavior post-onboarding.
+- Benchmark competitors’ onboarding flows for best practices.
+- Synthesize insights into a user persona and journey map.
+phase_2_compose:
+- Define flow structure using SCHEMA.md (e.g., steps, triggers, success metrics).
+- Align activation milestones with product goals in OUTPUT_TEMPLATE.md.
+- Design aha-moments with micro-interactions and clear value propositions.
+- Write copy for each step, emphasizing clarity and user empowerment.
+- Integrate conditional logic for personalized onboarding paths.
+- Embed progress indicators (e.g., percentage complete, milestone badges).
+- Validate against SCHEMA.md for consistency in data flow and UI elements.
+- Use OUTPUT_TEMPLATE.md to format artifacts for engineering and design.
+- Add analytics hooks for tracking milestone completion and drop-offs.
+phase_3_validate:
+- '[ ] Conduct usability testing with 10+ users to identify friction points.'
+- '[ ] Verify all activation milestones are achievable within 30 days.'
+- '[ ] Confirm aha-moments trigger measurable engagement (e.g., 20% increase in task completion).'
+- '[ ] Ensure artifact complies with SCHEMA.md and OUTPUT_TEMPLATE.md standards.'
+- '[ ] Obtain stakeholder approval for final flow and success metrics.'

@@ -78,7 +78,7 @@ updated: "2026-04-07"
 | Component | Type | Path | Status |
 |-----------|------|------|--------|
 | `cex_notebooklm.py` | Unified CLI tool | `_tools/cex_notebooklm.py` | TO BUILD (N03) |
-| `notebooklm_notebooks.yaml` | Config registry | `.cex/config/notebooklm_notebooks.yaml` | TO BUILD (N04 draft) |
+| `notebooklm_notebooks.yaml` | Config registry | `.cex/P09_config/notebooklm_notebooks.yaml` | TO BUILD (N04 draft) |
 | `notebooklm_create.py` | Prototype (create notebook) | `_tools/notebooklm_create.py` | EXISTS (PoC) |
 | `notebooklm_paste.py` | Prototype (paste into notebook) | `_tools/notebooklm_paste.py` | EXISTS (PoC) |
 | NotebookLM MCP | 17 tools (query, list, search) | `.mcp-n04.json` | EXISTS (auth expires) |
@@ -309,7 +309,7 @@ Known selectors (validated in PoC):
 # GDP D1: 1 notebook per DOMAIN (reusable, not per-mission)
 
 version: 1
-google_account: financeiro@gatoaocubo3.com   # GDP D5
+google_account: {{BRAND_EMAIL}}   # GDP D5
 publish_mode: auto                            # GDP D3
 browser_engine: chrome_local                  # GDP D4
 default_outputs:                              # GDP D2
@@ -494,7 +494,7 @@ N04's NotebookLM work runs in parallel with N03's tool-based production. No depe
 ### 5.1 Cookie Architecture
 
 ```
-Google Account (financeiro@gatoaocubo3.com)
+Google Account ({{BRAND_EMAIL}})
     │
     ▼
 NotebookLM MCP Server (Puppeteer-based)
@@ -566,7 +566,7 @@ When auth expires:
 ### 5.5 Security Notes
 
 - Cookies are stored locally in `%LOCALAPPDATA%` (user-scoped, not world-readable).
-- Google account `financeiro@gatoaocubo3.com` is a dedicated automation account (not personal).
+- Google account `{{BRAND_EMAIL}}` is a dedicated automation account (not personal).
 - The `--dangerously-skip-permissions` flag is only needed when spawning Chrome MCP clones, not for Playwright uploads.
 - No credentials are stored in the CEX repository. Cookie state is machine-local.
 

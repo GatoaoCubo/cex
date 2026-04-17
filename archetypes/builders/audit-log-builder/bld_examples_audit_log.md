@@ -1,0 +1,66 @@
+---
+kind: examples
+id: bld_examples_audit_log
+pillar: P07
+llm_function: GOVERN
+purpose: Golden and anti-examples of audit_log artifacts
+quality: 8.8
+title: "Examples Audit Log"
+version: "1.0.0"
+author: wave1_builder_gen_v2
+tags: [audit_log, builder, examples]
+tldr: "Golden and anti-examples of audit_log artifacts"
+domain: "audit_log construction"
+created: "2026-04-14"
+updated: "2026-04-14"
+density_score: 0.85
+---
+
+## Golden Example
+```yaml
+spec: audit_log
+vendor: AWS
+product: CloudTrail
+version: 2.0
+compliance: SOC2 Type II
+---
+log_retention: 730 days
+encryption_at_rest: AES-256 (managed by AWS KMS)
+access_controls: IAM roles with least privilege, multi-factor authentication required
+immutability: Enabled via S3 versioning and CloudTrail log integrity checks
+audit_coverage: All API calls, user activity, configuration changes
+```
+
+## Anti-Example 1: Missing Immutability
+```yaml
+spec: audit_log
+vendor: Azure
+product: Log Analytics
+version: 1.5
+compliance: SOC2 Type II
+---
+log_retention: 365 days
+encryption_at_rest: AES-256
+access_controls: RBAC with admin overrides
+immutability: Not enforced
+audit_coverage: System events only
+```
+## Why it fails
+Lacks immutability guarantees required for SOC2. Logs can be modified or deleted by admins, violating integrity requirements.
+
+## Anti-Example 2: Incomplete Retention
+```yaml
+spec: audit_log
+vendor: Google Cloud
+product: Cloud Audit Logs
+version: 3.1
+compliance: SOC2 Type II
+---
+log_retention: 90 days
+encryption_at_rest: AES-256
+access_controls: IAM with audit logging
+immutability: Enabled
+audit_coverage: All administrative actions
+```
+## Why it fails
+Retention period (90 days) is insufficient for SOC2 compliance, which typically requires 3-5 years of log retention for audit trails.

@@ -1,0 +1,47 @@
+id: bld_kc_domain_event
+kind: knowledge_card
+pillar: P01
+llm_function: INJECT
+version: 1.0.0
+quality: 6.3
+tags:
+- domain_event
+- ddd
+- event-sourcing
+- knowledge
+title: 'Knowledge: Domain Event Pattern'
+density_score: 1.0
+updated: '2026-04-17'
+core_facts:
+- 'DDD Domain Event (Evans 2003 ch.8): immutable record of domain-significant occurrence'
+- 'Named in past tense: OrderPlaced, PaymentFailed, CustomerUpgraded'
+- Carries snapshot payload -- data at time of occurrence, not current state
+- 'Owned by aggregate root: Order emits OrderPlaced, not PaymentService'
+- Versioned independently (v1, v2) to support consumer schema evolution
+- 'Three IDs: event_id (self), causation_id (what caused it), correlation_id (saga)'
+boundary_vs_similar_kinds: '| Aspect | domain_event | signal | audit_log |
+
+  |--------|-------------|--------|-----------|
+
+  | Origin | Domain layer | Infrastructure | Compliance layer |
+
+  | Immutable | YES | YES | YES |
+
+  | Business meaning | YES | NO | PARTIAL |
+
+  | Consumer | Other BCs | Monitoring | Auditors |
+
+  | Pattern | DDD | Observability | SOX/GDPR |'
+event_schema_evolution_rules:
+- 'v1 -> v2: additive fields only (never remove, never rename)'
+- Breaking change requires new event type, not version bump
+- Consumers must handle unknown fields (schema registry pattern)
+anti_patterns: '| Anti-Pattern | Correct Approach |
+
+  |-------------|-----------------|
+
+  | Mutable event (update payload after fact) | Events are immutable; emit corrective event |
+
+  | System event as domain event (HeartbeatReceived) | signal kind, not domain_event |
+
+  | Command disguised as event (PlaceOrder) | Events are past tense; commands are imperative |'

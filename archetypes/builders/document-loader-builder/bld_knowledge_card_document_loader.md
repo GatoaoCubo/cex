@@ -17,8 +17,8 @@ keywords: [knowledge-card, spec, summary, domain, document_loader]
 linked_artifacts:
   primary: null
   related: []
+title: Knowledge Card ISO - document_loader
 ---
-
 # Domain Knowledge: document_loader
 
 ## Executive Summary

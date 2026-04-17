@@ -1,0 +1,71 @@
+id: entity_memory_customer
+kind: entity_memory
+pillar: P10
+nucleus: n06
+title: Entity Memory -- Customer Entity Schema and ICP Attributes
+version: 1.0.0
+quality: null
+tags:
+- entity-memory
+- customer
+- icp
+- health-score
+- churn-risk
+- commercial
+- memory
+density_score: 1.0
+purpose: 'Defines the canonical customer entity that N06 maintains per account. This is the commercial brain''s memory of
+  each customer -- not just contact data, but the full commercial intelligence picture: health, risk, potential, relationship
+  history, and signals.'
+customer_entity_schema: "customer_entity:\n  # Identity\n  id: cus_stripe_id_or_internal\n  name: string\n  email: string\n\
+  \  company: string\n  domain: string                    # email domain for org matching\n  country: string             \
+  \      # ISO 2-letter\n  \n  # Commercial Position\n  plan_tier: free | starter | pro | enterprise | custom\n  billing_cycle:\
+  \ monthly | annual\n  mrr_cents: integer               # current monthly recurring revenue\n  arr_cents: integer       \
+  \        # annual equivalent\n  plan_start_date: date\n  renewal_date: date\n  trial_end_date: date | null\n  \n  # ICP\
+  \ Scoring\n  icp_score: 0-100                 # ideal customer profile match\n  icp_dimensions:\n    company_size: 1-10\
+  \ | 11-50 | 51-200 | 201-1000 | 1000+\n    industry: string               # edtech | fintech | agency | saas | ecommerce\
+  \ | other\n    role: founder | marketing | sales | operations | engineering | other\n    use_case: brand | content | commercial\
+  \ | knowledge | all\n    budget_signal: low | medium | high | enterprise\n  \n  # Health Score (0-100)\n  health_score:\
+  \ integer\n  health_components:\n    builds_per_week: integer       # weight: 30%\n    login_frequency_per_week: integer\
+  \  # weight: 20%\n    feature_breadth: integer       # nuclei used, out of available  # weight: 20%\n    support_ticket_count:\
+  \ integer  # weight: 10% (negative)\n    nps_score: integer | null      # weight: 20%\n  health_trend: improving | stable\
+  \ | declining\n  \n  # Churn Risk\n  churn_risk: low | medium | high | critical\n  churn_risk_signals:\n    - signal_type:\
+  \ string\n      detected_at: datetime\n      severity: low | medium | high\n  days_since_last_build: integer\n  cancel_intent_detected:\
+  \ boolean\n  \n  # Revenue Potential\n  expansion_potential: low | medium | high\n  expansion_plays_eligible:\n    - play_name:\
+  \ string\n      trigger_met: boolean\n      recommended_tier: string\n  estimated_lifetime_value_cents: integer\n  \n  #\
+  \ Acquisition\n  acquisition_channel: organic | paid_search | paid_social | referral | outbound | event | other\n  referral_code_used:\
+  \ string | null\n  utm_source: string | null\n  utm_campaign: string | null\n  \n  # Relationship\n  csm_assigned: string\
+  \ | null\n  last_csm_touchpoint: datetime | null\n  qbr_scheduled: boolean\n  case_study_candidate: boolean\n  champion_name:\
+  \ string | null\n  economic_buyer_name: string | null\n  \n  # Interaction History\n  support_tickets: list[ticket_id]\n\
+  \  last_support_ticket_date: datetime | null\n  nps_responses: list[{score: int, date: date, verbatim: string}]\n  upgrade_attempts:\
+  \ list[{date: date, from_tier: str, to_tier: str, outcome: str}]\n  \n  # Commercial History\n  invoices_paid: integer\n\
+  \  invoices_failed: integer\n  refunds: list[{amount_cents: int, date: date, reason: str}]\n  lifetime_revenue_cents: integer"
+health_score_calculation: "def calculate_health_score(customer: dict) -> int:\n    score = 0\n    \n    # Builds per week\
+  \ (30 points)\n    builds = customer[\"builds_per_week\"]\n    if builds >= 10:   score += 30\n    elif builds >= 5:  score\
+  \ += 22\n    elif builds >= 2:  score += 12\n    elif builds >= 1:  score += 5\n    else:              score += 0   # dormant\n\
+  \    \n    # Login frequency (20 points)\n    logins = customer[\"login_frequency_per_week\"]\n    if logins >= 5:    score\
+  \ += 20\n    elif logins >= 3:  score += 15\n    elif logins >= 1:  score += 8\n    else:              score += 0   # inactive\n\
+  \    \n    # Feature breadth (20 points)\n    max_nuclei = {\"free\": 1, \"starter\": 4, \"pro\": 6, \"enterprise\": 7}\n\
+  \    available = max_nuclei.get(customer[\"plan_tier\"], 1)\n    used = customer[\"feature_breadth\"]\n    breadth_pct =\
+  \ used / available\n    score += int(breadth_pct * 20)\n    \n    # Support tickets (10 points, negative)\n    tickets =\
+  \ customer[\"support_ticket_count\"]\n    if tickets == 0:   score += 10\n    elif tickets <= 2: score += 5\n    elif tickets\
+  \ <= 5: score += 0\n    else:              score -= 5   # chronic issues\n    \n    # NPS score (20 points)\n    nps = customer.get(\"\
+  nps_score\")\n    if nps is None:    score += 10   # neutral (no data)\n    elif nps >= 9:     score += 20   # promoter\n\
+  \    elif nps >= 7:     score += 12   # passive\n    else:              score += 0    # detractor\n    \n    return min(100,\
+  \ max(0, score))"
+churn_risk_classification: "def classify_churn_risk(customer: dict) -> str:\n    risk_points = 0\n    \n    if customer[\"\
+  days_since_last_build\"] > 14:     risk_points += 3\n    if customer[\"health_score\"] < 40:               risk_points +=\
+  \ 3\n    if customer[\"cancel_intent_detected\"]:          risk_points += 5\n    if customer[\"invoices_failed\"] > 0: \
+  \            risk_points += 4\n    if customer[\"health_trend\"] == \"declining\":     risk_points += 2\n    if customer[\"\
+  nps_score\"] and customer[\"nps_score\"] < 7: risk_points += 2\n    \n    if risk_points >= 8:   return \"critical\"\n \
+  \   elif risk_points >= 5: return \"high\"\n    elif risk_points >= 2: return \"medium\"\n    else:                  return\
+  \ \"low\""
+memory_update_triggers: "update_on:\n  - stripe_event: any      # billing status always current\n  - build_completed     \
+  \   # health score recalculated\n  - login                  # frequency tracking\n  - support_ticket_opened  # ticket count\
+  \ + health impact\n  - nps_survey_response    # NPS + health update\n  - cancel_intent_detected # churn risk escalated\n\
+  \  - upgrade_completed      # tier and MRR updated"
+related_artifacts:
+- '`churn_prevention_playbook_n06.md` -- acts on churn_risk signals'
+- '`expansion_play_n06.md` -- acts on expansion_plays_eligible'
+- '`referral_program_n06.md` -- uses referral_code_used for attribution'
+- '`eval_metric_commercial.md` -- aggregated health score distribution tracked'

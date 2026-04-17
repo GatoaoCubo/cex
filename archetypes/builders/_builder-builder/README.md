@@ -1,3 +1,17 @@
+---
+kind: knowledge_card
+id: p01_kc_builder_builder_meta
+title: "_builder-builder: Meta-Template for Generating Any Type-Builder"
+version: 1.0.0
+quality: 9.1
+domain: builder_architecture
+created: 2026-03-26
+author: builder_agent
+source: "Extracted from 4 existing builders (model-card, knowledge-card, signal, quality-gate)"
+tags: [meta, builder, template, generator]
+density_score: 1.0
+---
+
 # _builder-builder: Meta-Template for Generating Any Type-Builder
 
 **Version**: 1.0.0 | **Author**: builder_agent | **Created**: 2026-03-26

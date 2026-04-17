@@ -46,17 +46,17 @@ tags: [glossary, {{domain_tag}}, {{term_tag}}]
 tldr: "{{dense_summary_max_160ch}}"
 ```
 ## Definition
-{{concise_definition_1_to_3_lines}}
+`{{concise_definition_1_to_3_lines}}`
 ## Usage
-{{where_and_how_this_term_appears_in_forctice}}
+`{{where_and_how_this_term_appears_in_forctice}}`
 ## Disambiguation
-{{how_this_term_differs_from_commonly_confused_terms}}
+`{{how_this_term_differs_from_commonly_confused_terms}}`
 ## Related Terms
-1. {{related_term_1}}: {{brief_relation}}
-2. {{related_term_2}}: {{brief_relation}}
+1. `{{related_term_1}}`: `{{brief_relation}}`
+2. `{{related_term_2}}`: `{{brief_relation}}`
 ## References
-1. {{reference_1}}
-2. {{reference_2}}
+1. `{{reference_1}}`
+2. `{{reference_2}}`
 
 ## Properties
 

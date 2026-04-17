@@ -18,6 +18,8 @@ density_score: 0.90
 ---
 
 # Domain Knowledge: computer_use
+
+This ISO governs computer use: screen capture, mouse, and keyboard actions taken on behalf of the agent.
 ## Executive Summary
 Computer use tools enable LLMs to interact with graphical interfaces by capturing screenshots, interpreting visual content, and performing mouse/keyboard actions at specific coordinates. The observe-act loop (screenshot -> interpret -> act -> screenshot) is the core pattern. The computer_use artifact specifies what the LLM can see and do on screen.
 ## Spec Table

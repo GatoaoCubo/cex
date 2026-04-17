@@ -1,0 +1,128 @@
+kind: tools
+id: bld_tools_realtime_session
+pillar: P04
+llm_function: CALL
+purpose: Tools available during realtime_session artifact production
+quality: null
+title: 'Tools: realtime-session-builder'
+version: 1.1.0
+author: n01_audit
+tags:
+- realtime_session
+- builder
+- tools
+- P04
+tldr: 'Tool registry for realtime-session-builder: CEX pipeline tools and FS operations for session config production.'
+domain: realtime_session construction
+created: '2026-04-13'
+updated: '2026-04-13'
+density_score: 0.9
+tool_registry: '| Tool | Status | Tag | Purpose |
+
+  |------|--------|-----|---------|
+
+  | Read | ACTIVE | [FS] | Read schema, output_template, sibling examples |
+
+  | Glob | ACTIVE | [FS] | Find existing p04_rs_* files in pool |
+
+  | Grep | ACTIVE | [FS] | Search for provider/model patterns in existing artifacts |
+
+  | Write | ACTIVE | [FS] | Produce final realtime_session artifact |
+
+  | Edit | ACTIVE | [FS] | Patch frontmatter or session config during VALIDATE phase |
+
+  | brain_query | CONDITIONAL | [MCP] | Discover existing realtime_session artifacts and patterns |'
+tool_descriptions: ''
+read_fs_active: 'Read before composing:
+
+  - `bld_schema_realtime_session.md` -- ID pattern, required fields, body structure
+
+  - `bld_output_template_realtime_session.md` -- session config JSON + latency table structure
+
+  - `bld_quality_gate_realtime_session.md` -- H01-H10 gates to validate against
+
+  - `bld_knowledge_card_realtime_session.md` -- provider/model pairs, event types'
+glob_fs_active: 'P04_tools/realtime_session/p04_rs_*.md
+
+  archetypes/builders/realtime-session-builder/
+
+
+  Check for ID collisions before assigning new `id`.'
+grep_fs_active: 'grep pattern: "provider: openai"        -- find openai realtime examples
+
+  grep pattern: "server_vad"              -- check VAD config patterns
+
+  grep pattern: "kind: realtime_session"  -- inventory existing artifacts
+
+  grep pattern: "ephemeral"               -- verify auth patterns'
+write_fs_active: Final delivery. Write completed artifact to `P04_tools/realtime_session/` or caller-specified path.
+edit_fs_active: Use during VALIDATE phase to patch specific fields (model version, VAD threshold, latency targets) without
+  rewriting full file.
+brain_query_mcp_conditional: 'Available when Brain MCP server is running. Use to:
+
+  - Find existing `realtime_session` artifacts for the target provider
+
+  - Retrieve VAD threshold patterns used across deployments
+
+  - Identify barge-in handler implementations already documented
+
+
+  brain_query("realtime_session provider:openai transport:websocket")
+
+  brain_query("VAD threshold server_vad barge-in handler")
+
+  brain_query("p04_rs LLM streaming ephemeral token")'
+cex_pipeline_tools: '| Tool | Purpose | When |
+
+  |------|---------|------|
+
+  | cex_compile.py | Compile .md artifact to .yaml | After Write (F8) |
+
+  | cex_score.py | Peer-review quality scoring | After production (F7) |
+
+  | cex_retriever.py | Discover similar artifacts by TF-IDF | During F3 INJECT |
+
+  | cex_doctor.py | Health check builder ISOs | Before dispatch |'
+data_sources: '| Source | Content | When to use |
+
+  |--------|---------|-------------|
+
+  | bld_schema_realtime_session.md | ID pattern, required fields | Every production run |
+
+  | bld_output_template_realtime_session.md | Session config JSON structure | Every production run |
+
+  | bld_quality_gate_realtime_session.md | H01-H10 HARD gates | Every validation run |
+
+  | bld_knowledge_card_realtime_session.md | Provider/model pairs, events, latency targets | During F3 INJECT |
+
+  | bld_memory_realtime_session.md | VAD tuning, barge-in patterns, anti-patterns | When stuck or producing variant |'
+tool_permissions: '| Category | Tools | Status |
+
+  |----------|-------|--------|
+
+  | ALLOWED | Read, Write, Edit, Bash, Glob, Grep | Explicitly permitted |
+
+  | DENIED | (none) | Explicitly blocked |
+
+  | EFFECTIVE | Bash, Edit, Glob, Grep, Read, Write | ALLOWED minus DENIED |'
+properties: '| Property | Value |
+
+  |----------|-------|
+
+  | Kind | `tools` |
+
+  | Pillar | P04 |
+
+  | Domain | realtime_session construction |
+
+  | Pipeline | 8F (F1-F8) |
+
+  | Scorer | cex_score.py |
+
+  | Compiler | cex_compile.py |
+
+  | Retriever | cex_retriever.py |
+
+  | Quality target | 9.0+ |
+
+  | Density target | 0.85+ |'

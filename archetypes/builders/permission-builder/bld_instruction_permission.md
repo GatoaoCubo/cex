@@ -28,8 +28,8 @@ dependencies: []
 logging: true
 tldr: "Research scope and roles, compose read/write/execute rules with allow/deny lists and audit trail, validate precedence and gates, write permission artifact."
 density_score: 0.84
+llm_function: REASON
 ---
-
 ## Context
 The permission-builder receives a **resource or artifact description** and produces a `permission` artifact encoding thand access control rules for that scope — who can read, write, and execute it, under what conditions, and how access is inherited.
 **Input variables**:

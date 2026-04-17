@@ -1,0 +1,67 @@
+---
+id: p11_qg_preference_dataset
+kind: quality_gate
+pillar: P11
+title: "Gate: preference_dataset"
+version: "1.0.0"
+created: "2026-04-17"
+updated: "2026-04-17"
+author: "builder_agent"
+domain: "preference_dataset -- curated preference pairs for RLHF/DPO/KTO alignment training"
+quality: 8.4
+tags: [quality-gate, preference-dataset, P11, rlhf, dpo]
+tldr: "Pass/fail gate for preference_dataset: signal clarity, agreement_rate, rater_count, pair presence, training_objective."
+density_score: 0.90
+llm_function: GOVERN
+---
+# Gate: preference_dataset
+
+## Definition
+| Field | Value |
+|---|---|
+| metric | preference_dataset artifact quality score |
+| threshold | 7.0 (publish >= 8.0, golden >= 9.5) |
+| operator | weighted_sum |
+| scope | all artifacts with `kind: preference_dataset` |
+
+## HARD Gates
+All must pass (AND logic). Any single failure = REJECT.
+| ID | Check | Fail Condition |
+|---|---|---|
+| H01 | Frontmatter parses as valid YAML | Parse error on frontmatter block |
+| H02 | ID matches `^p11_pd_[a-z][a-z0-9_]+$` | ID has hyphens, uppercase, or missing prefix |
+| H03 | training_objective is valid enum value | "better_training" or unrecognized value |
+| H04 | Kind equals literal `preference_dataset` | `kind: dataset` or any other value |
+| H05 | Quality field is null | `quality: 8.0` or any non-null value |
+| H06 | All required fields present | Missing preference_signal, annotation_method, rater_count, agreement_rate |
+| H07 | preference_signal is non-empty string | `preference_signal: ""` or absent |
+| H08 | agreement_rate in [0.0, 1.0] | `agreement_rate: 1.5` or negative value |
+| H09 | Tags list has >= 3 items and includes "preference_dataset" | Only 2 tags or missing tag |
+| H10 | pairs array present with >= 1 entry | Empty pairs or missing pairs key |
+
+## SOFT Scoring
+Weights sum to 100%.
+| Dimension | Weight | Criteria |
+|---|---|---|
+| Signal clarity | 1.5 | preference_signal is specific, measurable criterion (not "better") |
+| Agreement quality | 1.5 | agreement_rate >= 0.75; rater_count >= 2 |
+| Annotation provenance | 1.0 | annotation_method declared and appropriate for domain |
+| Pair schema compliance | 1.0 | Example pairs use prompt/chosen/rejected/metadata structure |
+| Quality filter specification | 1.0 | quality_filters section with concrete thresholds |
+| Split ratios | 0.5 | train/eval/test ratios declared and sum to 1.0 |
+| Domain specificity | 0.5 | domain field set; task_type identifiable |
+| Boundary clarity | 1.0 | Not eval_dataset (no evaluation metrics), not golden_test (no deterministic outputs) |
+| tldr quality | 0.5 | <= 160 chars, includes objective and domain |
+
+## Actions
+| Score | Tier | Action |
+|---|---|---|
+| >= 9.5 | Golden | Publish as reference dataset spec |
+| >= 8.0 | Publish | Ready for training pipeline config |
+| >= 7.0 | Review | Improve signal clarity or add quality filters |
+| < 7.0 | Reject | Return with specific gate failures |
+
+## Never Bypass
+- H01 (unparseable YAML breaks tooling)
+- H05 (self-scored artifacts corrupt quality metrics)
+- H07 (vague signal makes dataset unusable for training)

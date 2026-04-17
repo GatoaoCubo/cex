@@ -1,0 +1,63 @@
+---
+kind: schema
+id: bld_schema_streaming_config
+pillar: P06
+llm_function: CONSTRAIN
+purpose: Formal schema -- SINGLE SOURCE OF TRUTH for streaming_config
+pattern: TEMPLATE derives from this. CONFIG restricts this.
+quality: 9.1
+title: "Schema Streaming Config"
+version: "1.0.0"
+author: n03_builder
+tags: [streaming_config, builder, schema, P06]
+tldr: "Schema for streaming_config: protocol, buffer, heartbeat, backpressure fields with naming and size constraints."
+domain: "streaming config construction"
+created: "2026-04-13"
+updated: "2026-04-13"
+density_score: 0.90
+---
+
+# Schema: streaming_config
+
+## Frontmatter Fields
+
+| Field | Type | Required | Default | Notes |
+|-------|------|----------|---------|-------|
+| id | string (p05_sc_{name}) | YES | - | Namespace compliance |
+| kind | literal "streaming_config" | YES | - | Type integrity |
+| pillar | literal "P05" | YES | - | Pillar assignment |
+| version | semver string | YES | "1.0.0" | Artifact versioning |
+| created | date YYYY-MM-DD | YES | - | Creation date |
+| updated | date YYYY-MM-DD | YES | - | Last update |
+| author | string | YES | - | Producer identity |
+| protocol | enum: sse, websocket, chunked, auto | YES | - | Transport protocol |
+| quality | null | YES | null | Never self-score |
+| tags | list[string], len >= 3 | YES | - | Must include "streaming_config" |
+| tldr | string <= 160ch | YES | - | Dense summary |
+| description | string <= 200ch | REC | - | What this config covers |
+| buffer_bytes | integer | REC | - | Max buffer size in bytes |
+| heartbeat_interval_ms | integer | REC | - | Ping/keepalive interval |
+| reconnect_delay_ms | integer | REC | - | Client reconnect backoff |
+| max_connections | integer | REC | - | Concurrent stream limit |
+| backpressure_strategy | enum: drop, block, buffer | REC | buffer | Overflow handling |
+| timeout_ms | integer | REC | - | Idle connection timeout |
+
+## ID Pattern
+Regex: `^p05_sc_[a-z][a-z0-9_]+$`
+Rule: id MUST equal filename stem.
+
+## Body Structure (required sections)
+1. `## Overview` -- transport protocol, purpose, who produces and consumes this stream
+2. `## Protocol Settings` -- table: field, value, notes for all protocol-specific parameters
+3. `## Flow Control` -- buffer size, backpressure strategy, flush interval, max connections
+4. `## Lifecycle` -- heartbeat interval, reconnect policy, timeout, graceful shutdown
+
+## Constraints
+- max_bytes: 2048 (body only -- streaming configs are concise specs)
+- naming: p05_sc_{name}.yaml
+- machine_format: yaml (compiled artifact)
+- id == filename stem
+- protocol field MUST be one of: sse, websocket, chunked, auto
+- quality: null always
+- buffer_bytes MUST be a positive integer when present
+- heartbeat_interval_ms only valid for sse and websocket protocols

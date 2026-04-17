@@ -1,0 +1,64 @@
+id: bld_knowledge_card_canary_config
+kind: knowledge_card
+pillar: P01
+title: 'Knowledge Card: canary_config'
+version: 1.0.0
+created: '2026-04-17'
+updated: '2026-04-17'
+author: builder
+domain: canary_config
+quality: 7.8
+tags:
+- knowledge_card
+- canary_config
+- P09
+llm_function: INJECT
+tldr: 'Domain knowledge for canary_config: traffic stages, rollback triggers, Argo Rollouts, Flagger.'
+density_score: null
+what_it_is: 'A canary_config specifies how to gradually shift traffic from a stable version to a new canary version, with
+  automatic rollback if defined metrics breach thresholds. Named after the "canary in a coal mine" practice: expose a small
+  subset of traffic to the new version first.'
+standard_traffic_stages: '| Stage | Canary % | Stable % | Typical Pause |
+
+  |-------|---------|---------|---------------|
+
+  | Initial | 5% | 95% | 10 min |
+
+  | Phase 1 | 25% | 75% | 15 min |
+
+  | Phase 2 | 50% | 50% | 20 min |
+
+  | Full | 100% | 0% | N/A (complete) |'
+rollback_trigger_metrics: '| Metric | Typical Threshold | Notes |
+
+  |--------|-----------------|-------|
+
+  | error_rate | > 1% | HTTP 5xx / total requests |
+
+  | latency_p99_ms | > 500 | 99th percentile response time |
+
+  | cpu_utilization | > 80% | Canary pod CPU |
+
+  | slo_breach | any | Link to slo_definition |'
+provider_comparison: '| Provider | Platform | Key Feature |
+
+  |----------|---------|-------------|
+
+  | Argo Rollouts | Kubernetes | Native k8s controller; analysis templates |
+
+  | Flagger | Kubernetes | Istio/Linkerd mesh integration |
+
+  | AWS CodeDeploy | AWS | Lambda + EC2 canary deployments |
+
+  | Custom | Any | Manual metric check + rollback script |'
+anti_patterns: '| Anti-Pattern | Fix |
+
+  |-------------|-----|
+
+  | Jumping to 50% immediately | Start at 5%; risk is proportional to traffic |
+
+  | No rollback trigger | Always define at least 1 metric threshold |
+
+  | Canary = feature flag | Canary splits traffic; feature flag toggles feature |
+
+  | Canary = A/B test | A/B uses statistics; canary uses metric threshold |'

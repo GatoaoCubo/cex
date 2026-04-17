@@ -1,0 +1,85 @@
+kind: quality_gate
+id: p09_qg_marketplace_app_manifest
+pillar: P11
+llm_function: GOVERN
+purpose: Quality gate with HARD and SOFT scoring for marketplace_app_manifest
+quality: null
+title: Quality Gate Marketplace App Manifest
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- marketplace_app_manifest
+- builder
+- quality_gate
+tldr: Quality gate with HARD and SOFT scoring for marketplace_app_manifest
+domain: marketplace_app_manifest construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+definition: '| metric | threshold | operator | scope |
+
+  |---|---|---|---|
+
+  | schema_id | ^p09_mam_[a-z][a-z0-9_]+.yaml$ | matches | H02 |'
+hard_gates: '| ID | Check | Fail Condition |
+
+  |---|---|---|
+
+  | H01 | YAML frontmatter valid | invalid YAML syntax or missing frontmatter |
+
+  | H02 | ID matches pattern ^p09_mam_[a-z][a-z0-9_]+.yaml$ | ID does not conform to schema ID pattern |
+
+  | H03 | kind field matches ''marketplace_app_manifest'' | kind field is incorrect or missing |
+
+  | H04 | metadata contains name, description, version | missing required metadata fields |
+
+  | H05 | permissions field defines valid access scopes | permissions missing or invalid |
+
+  | H06 | pricing field specifies cost model (free, tiered, etc.) | pricing missing or malformed |
+
+  | H07 | required fields (id, kind, metadata, perms) present | missing critical manifest fields |
+
+  | H08 | description length ≥ 50 characters | description too short or empty |
+
+  | H09 | id field is unique and lowercase alphanumeric | id contains invalid characters or duplicates |
+
+  | H10 | version follows semver (e.g., 1.0.0) | version format invalid |'
+soft_scoring: '| Dim | Dimension | Weight | Scoring Guide |
+
+  |---|---|---|---|
+
+  | D01 | Metadata completeness | 0.10 | 1.0 if all required fields present |
+
+  | D02 | Permissions clarity | 0.10 | 1.0 if scopes are well-defined |
+
+  | D03 | Pricing accuracy | 0.10 | 1.0 if cost model is explicit |
+
+  | D04 | Description quality | 0.10 | 1.0 if clear and ≥ 100 chars |
+
+  | D05 | Version validity | 0.10 | 1.0 if semver-compliant |
+
+  | D06 | Field consistency | 0.15 | 1.0 if all fields align with spec |
+
+  | D07 | Schema adherence | 0.10 | 1.0 if ID matches pattern |
+
+  | D08 | Error handling | 0.10 | 1.0 if no critical validation errors |
+
+  | D09 | Documentation links | 0.05 | 1.0 if URLs are valid and present |
+
+  | D10 | Compliance with TOS | 0.10 | 1.0 if terms are explicitly stated |'
+actions: '| Score | Action |
+
+  |---|---|
+
+  | ≥9.5 | GOLDEN: Auto-approve and promote |
+
+  | ≥8.0 | PUBLISH: Directly list on marketplace |
+
+  | ≥7.0 | REVIEW: Require manual review by PM |
+
+  | <7.0 | REJECT: Reject and request fixes |'
+bypass: '| conditions | approver | audit trail |
+
+  |---|---|---|
+
+  | Emergency fix for critical bug | Senior Engineer | Documented in JIRA with approval |'

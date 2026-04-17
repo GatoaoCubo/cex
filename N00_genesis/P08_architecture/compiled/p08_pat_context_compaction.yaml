@@ -1,0 +1,61 @@
+id: p08_pat_context_compaction
+kind: pattern
+pillar: P08
+title: 'Pattern: Context Compaction Strategy'
+version: 1.0.0
+quality: 9.1
+tags:
+- pattern
+- context
+- compaction
+- memory
+- optimization
+tldr: Architectural pattern for managing context window limits. Defines 4-level compaction strategy with preservation rules
+  and trigger thresholds.
+domain: architecture
+author: n03_builder
+created: '2026-04-12'
+updated: '2026-04-12'
+density_score: 0.92
+problem: LLM agents accumulate context during long sessions. As the context window fills, performance degrades and eventually
+  the session must be compressed or restarted. Uncontrolled compaction loses critical information.
+solution: A 4-level progressive compaction strategy that preserves high-value information while aggressively pruning low-value
+  content.
+architecture: "Context Window [============================----] 80% threshold\n                    |\n                  \
+  \  v\n            Compaction Engine\n            ├── L1: Trim redundancy (10-20% savings)\n            ├── L2: Summarize\
+  \ history (20-40% savings)\n            ├── L3: Drop low-value (30-50% savings)\n            └── L4: Critical-only (50-70%\
+  \ savings)"
+trigger_thresholds: '| Usage | Action | Automatic? |
+
+  |-------|--------|-----------|
+
+  | < 60% | No action | -- |
+
+  | 60-80% | Monitor, warn | Yes |
+
+  | 80-90% | L1 + L2 compaction | Yes |
+
+  | 90-95% | L3 compaction | Yes |
+
+  | > 95% | L4 emergency compaction | Yes |'
+preservation_priority:
+- Current task + requirements (NEVER compact)
+- Uncommitted changes (NEVER compact)
+- Active error context (NEVER compact)
+- User decisions this session (NEVER compact)
+- Recent tool results (compact after use)
+- Historical conversation (compact aggressively)
+- Exploration results (drop if superseded)
+trade_offs: '| Benefit | Cost |
+
+  |---------|------|
+
+  | Extends session lifetime | May lose useful historical context |
+
+  | Maintains performance | Summarization introduces information loss |
+
+  | Automatic operation | Requires careful priority tuning |'
+related_patterns:
+- 'Memory Extraction: persist valuable context before compaction'
+- 'Token Budget: pre-allocate context regions by function'
+- 'Prompt Cache: reuse cached prefixes to reduce context pressure'

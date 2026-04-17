@@ -1,0 +1,55 @@
+kind: schema
+id: bld_schema_vad_config
+pillar: P06
+llm_function: CONSTRAIN
+purpose: Formal schema -- SINGLE SOURCE OF TRUTH for vad_config
+quality: null
+title: Schema Vad Config
+version: 1.0.0
+author: wave1_builder_gen
+tags:
+- vad_config
+- builder
+- schema
+tldr: Formal schema -- SINGLE SOURCE OF TRUTH for vad_config
+domain: vad_config construction
+created: '2026-04-13'
+updated: '2026-04-13'
+density_score: 0.85
+frontmatter_fields: ''
+required: "| Field      | Type   | Required | Default | Notes |  \n|------------|--------|----------|---------|-------|  \n\
+  | id         | string | yes      | -       | Unique identifier |  \n| kind       | string | yes      | \"vad_config\" |\
+  \ Configuration type |  \n| pillar     | string | yes      | \"P09\"   | Pillar classification |  \n| title      | string\
+  \ | yes      | -       | Configuration title |  \n| version    | string | yes      | \"1.0\"   | Schema version |  \n| created\
+  \    | date   | yes      | -       | Creation date |  \n| updated    | date   | yes      | -       | Last update date |\
+  \  \n| author     | string | yes      | -       | Author name |  \n| domain     | string | yes      | -       | Application\
+  \ domain |  \n| quality    | null   | yes      | null    | Never self-score; peer review assigns value |  \n| tags     \
+  \  | list   | yes      | []      | Metadata tags |  \n| tldr       | string | yes      | -       | Summary |  \n| sensitivity|\
+  \ float  | yes      | 0.5     | Detection sensitivity |  \n| threshold  | float  | yes      | 0.7     | Activation threshold\
+  \ |"
+recommended: "| Field         | Type   | Notes |  \n|---------------|--------|-------|  \n| description   | string | Optional\
+  \ details |  \n| use_case      | string | Target application |  \n| validation    | string | Validation method |  \n| references\
+  \    | list   | External links |"
+id_pattern: '`^p09_vad_[a-zA-Z0-9_]+\.yaml$`'
+body_structure:
+- Configuration Parameters
+- Define core VAD settings
+- Sensitivity Settings
+- Dynamic adjustment rules
+- Language Support
+- Supported languages and dialects
+- Validation Rules
+- Input/output validation criteria
+- Sample Rate
+- Audio processing requirements
+- Use Case
+- Specific application context
+constraints:
+- 'Max file size: 2048 bytes'
+- All required fields must be present
+- ID must follow naming convention
+- Version must use semantic format
+- 'Sensitivity range: 0.1-1.0 (probability score; 0.5 = 50% confidence floor)'
+- 'Threshold (energy): -70 to -10 dBFS (noise floor reference, NOT a 0-1 probability)'
+- 'aggressiveness: integer {0, 1, 2, 3} per WebRTC VAD standard'
+- 'frame_size_ms: {10, 20, 30} for WebRTC compatibility; 20ms default'

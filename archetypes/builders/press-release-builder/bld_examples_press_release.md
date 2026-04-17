@@ -1,0 +1,135 @@
+---
+kind: examples
+id: bld_examples_press_release
+pillar: P07
+llm_function: GOVERN
+purpose: Golden example and anti-examples for press_release quality calibration
+quality: 9.1
+title: "Press Release Examples"
+version: "1.0.0"
+author: n02_wave6
+tags: [press_release, builder, examples]
+tldr: "One golden SaaS product launch example and two anti-examples with failure analysis"
+domain: "press_release construction"
+created: "2026-04-14"
+updated: "2026-04-14"
+density_score: 0.85
+---
+
+## Golden Example
+
+Score: 9.6/10. All H01-H08 gates pass. No AP style violations.
+
+---
+
+FOR IMMEDIATE RELEASE
+
+DATALOOP LAUNCHES AI-POWERED PIPELINE THAT CUTS DATA PREP TIME BY 70%
+
+SAN FRANCISCO, Calif., April 14, 2026 -- DataLoop Inc. today launched
+DataLoop Accelerate, an AI-powered data preparation platform that reduces
+the time data teams spend on pipeline configuration from hours to minutes,
+available immediately to enterprise customers.
+
+DataLoop Accelerate uses large language model inference to automatically
+detect schema mismatches, resolve null values, and generate transformation
+scripts from natural language descriptions. The platform integrates with
+Snowflake, Databricks, and BigQuery out of the box, with no custom
+connectors required. Pricing starts at $2,500 per month for teams of up to
+20 data engineers.
+
+Early access customers report a 70 percent reduction in data preparation
+time across production pipelines. Meridian Analytics, a DataLoop customer
+since 2024, reduced its weekly pipeline maintenance from 16 hours to fewer
+than five after deploying Accelerate in January 2026.
+
+"Data engineering teams spend more than half their time on undifferentiated
+preparation work that adds no analytical value," said Priya Nair, Chief
+Executive Officer at DataLoop Inc. "Accelerate changes that equation so
+teams can focus on the insights, not the plumbing."
+
+###
+
+About DataLoop Inc.:
+DataLoop Inc. builds AI-powered data infrastructure tools for enterprise
+analytics teams. Founded in 2021 and headquartered in San Francisco,
+DataLoop serves more than 300 enterprise customers across financial
+services, healthcare, and technology verticals. The company has raised
+$47 million in venture funding and employs 110 people.
+
+Media Contact:
+James Ortega
+Head of Communications, DataLoop Inc.
+james.ortega@dataloop.io
+(415) 555-0182
+
+---
+
+### Why this is golden
+
+| Element | Assessment |
+|---|---|
+| Headline | 63 chars, active voice, concrete "70%" hook, ALL CAPS |
+| Dateline | CITY in caps, "Calif." abbreviation, correct date format |
+| Lede | 35 words, answers who/what/when/where/why |
+| Body | Two solid paragraphs, specific pricing and integration details |
+| Quote | Human-sounding, attributed with full name and spelled-out title |
+| ### mark | Present |
+| Boilerplate | 75 words, third person, covers founding/HQ/customers/funding |
+| Contact | Name, email (format valid), phone with area code |
+
+## Anti-Example 1: Buried Lede
+
+---
+
+FOR IMMEDIATE RELEASE
+
+THE EVOLVING LANDSCAPE OF ENTERPRISE DATA MANAGEMENT IN 2026
+
+SAN FRANCISCO, Calif., April 14, 2026 -- As organizations continue to
+grapple with the increasing volume and complexity of data flowing through
+modern enterprise infrastructure, the demand for solutions that can
+abstract away the complexity of data pipeline management has never been
+higher. It is in this context that DataLoop Inc. is pleased to announce
+the launch of DataLoop Accelerate.
+
+---
+
+### Why this fails
+
+| Failure | Explanation |
+|---|---|
+| Buried lede | The product name does not appear until sentence three. Journalists who scan the first sentence will discard this release. |
+| Headline is a topic, not news | "The Evolving Landscape..." tells journalists nothing happened. A news headline announces a fact. |
+| Passive construction | "Is pleased to announce" is PR boilerplate that triggers journalist filters. |
+| No 5 Ws in paragraph 1 | Who launched what for whom and why is not answered in the first paragraph. |
+
+## Anti-Example 2: No Boilerplate
+
+---
+
+FOR IMMEDIATE RELEASE
+
+DATALOOP LAUNCHES AI-POWERED PIPELINE THAT CUTS DATA PREP TIME BY 70%
+
+SAN FRANCISCO, Calif., April 14, 2026 -- DataLoop Inc. today launched
+DataLoop Accelerate, an AI-powered data preparation platform that reduces
+pipeline configuration time by 70 percent.
+
+"This changes how data teams work," said Priya Nair, CEO at DataLoop.
+
+###
+
+Media Contact:
+james.ortega@dataloop.io
+
+---
+
+### Why this fails
+
+| Failure | Explanation |
+|---|---|
+| No boilerplate | Journalists who cover the story need company background. Without it they must research the company separately -- many will not bother. Wire services flag releases without boilerplate. H07 hard gate fails. |
+| CEO not spelled out | "CEO" must be "Chief Executive Officer" on first reference per AP style. D01 score deducted. |
+| Quote uses marketing language | "This changes how data teams work" is vague. No specific claim. D03 score low. |
+| Contact block incomplete | Email only. No name, no title, no phone. H08 hard gate fails on missing email format check. |

@@ -57,17 +57,17 @@ tldr: "{{dense_summary_max_160ch}}"
 ## Parameters
 | Parameter | Value | Rationale |
 |-----------|-------|-----------|
-| mode | {{mode}} | {{why_this_mode}} |
-| agent_group | {{agent_group}} | {{why_this_agent_group}} |
-| model | {{model}} | {{why_this_model}} |
-| timeout | {{timeout}}s | {{why_this_timeout}} |
-| interactive | {{interactive}} | {{why_interactive_or_not}} |
+| mode | `{{mode}}` | `{{why_this_mode}}` |
+| agent_group | `{{agent_group}}` | `{{why_this_agent_group}}` |
+| model | `{{model}}` | `{{why_this_model}}` |
+| timeout | `{{timeout}}`s | `{{why_this_timeout}}` |
+| interactive | `{{interactive}}` | `{{why_interactive_or_not}}` |
 ## Constraints
-1. {{constraint_1}}
-2. {{constraint_2}}
-3. {{constraint_3}}
+1. `{{constraint_1}}`
+2. `{{constraint_2}}`
+3. `{{constraint_3}}`
 ## References
-- {{reference_1}}
+- `{{reference_1}}`
 
 ## Properties
 

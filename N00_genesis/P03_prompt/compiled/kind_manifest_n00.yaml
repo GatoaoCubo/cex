@@ -1,0 +1,62 @@
+id: n00_webinar_script_manifest
+kind: knowledge_card
+pillar: P03 -- prompt
+nucleus: n00
+title: Webinar Script -- Canonical Manifest
+version: 1.0
+quality: null
+tags:
+- manifest
+- webinar_script
+- p03
+- n00
+- archetype
+- template
+density_score: 1.0
+purpose: A webinar_script is a complete scripted presentation artifact covering intro, agenda, content segments, Q&A handling,
+  and call-to-action sequences for live or recorded webinars. It structures the speaker's narrative, slide transitions, and
+  audience engagement moments into a production-ready document. The output enables speakers to deliver consistent, high-conversion
+  presentations without improvisation risk.
+schema_key_fields: '| Field | Type | Required | Description |
+
+  |-------|------|----------|-------------|
+
+  | id | string | yes | Unique artifact identifier |
+
+  | kind | string | yes | Always `webinar_script` |
+
+  | pillar | string | yes | Always `P03` |
+
+  | title | string | yes | Human-readable name |
+
+  | version | semver | yes | Artifact version |
+
+  | quality | float\|null | yes | Peer-review score (null until reviewed) |
+
+  | duration_minutes | integer | yes | Total presentation duration target |
+
+  | segments | list | yes | Ordered segments: intro, agenda, content_N, qa, cta |
+
+  | audience_persona | string | yes | Target audience role and knowledge level |
+
+  | primary_cta | string | yes | The conversion action requested at close |'
+when_to_use:
+- When N02 Marketing needs a scripted webinar for lead generation or product education
+- When a course launch requires a live demonstration presentation with structured Q&A
+- When building a series of educational webinars with consistent structure across sessions
+builder: '`archetypes/builders/webinar_script-builder/` Run: `python _tools/cex_8f_runner.py "your intent" --kind webinar_script
+  --execute`'
+template_variables_open_for_instantiation:
+- '`{{NUCLEUS_ROLE}}` -- which nucleus domain owns this'
+- '`{{SIN_LENS}}` -- cultural DNA driving the artifact'
+- '`{{TARGET_AUDIENCE}}` -- who this serves'
+- '`{{DOMAIN_CONTEXT}}` -- business/technical context'
+example_minimal: "---\nid: ws_cex_product_demo_q2\nkind: webinar_script\npillar: P03\nnucleus: n02\ntitle: \"CEX Product Demo\
+  \ Webinar Q2\"\nversion: 1.0\nquality: null\n---\nduration_minutes: 60\naudience_persona: \"Senior AI engineers and CTOs\
+  \ at 50-500 person companies\"\nprimary_cta: \"Book a 30-minute custom CEX demo\"\nsegments:\n  - intro: 5min\n  - agenda:\
+  \ 2min\n  - problem_framing: 10min\n  - live_demo: 25min\n  - case_study: 10min\n  - qa: 5min\n  - cta_close: 3min"
+related_kinds:
+- '`sales_playbook` (P03) -- sales motion context injected into the CTA segment'
+- '`prompt_template` (P03) -- templates for generating segment-specific script content'
+- '`landing_page` (P05) -- registration page that feeds attendees into the webinar'
+- '`content_monetization` (P11) -- monetization mechanics behind the webinar offer'

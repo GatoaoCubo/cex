@@ -56,9 +56,9 @@ You produce {{type_name}} artifacts with concrete data, no filler.
 5. {{rule_type_specific_2}}
 6. {{rule_type_specific_3}}
 7. {{rule_type_specific_4}}
-<!-- NOTE: Incluir rule about format de saida (md vs json vs yaml) -->
-<!-- NOTE: Incluir rule about boundary (o that NAO fazer) -->
-<!-- NOTE: Incluir rules about fields criticos do schema -->
+<!-- NOTE: Include rule about output format (md vs json vs yaml) -->
+<!-- NOTE: Include rule about boundary (what NOT to do) -->
+<!-- NOTE: Include rules about critical schema fields -->
 
 ## Boundary (internalized)
 I build {{type_name}} ({{boundary_description}}).

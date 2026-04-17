@@ -48,23 +48,23 @@ scope: "{{agent_or_system_scope}}"
 tier_count: {{N_if_tiered}}
 ```
 ## Strategy Specification
-{{primary_strategy_description_and_rationale}}
-Trigger: {{trigger_ratio}} of context window. Target: {{target_ratio}} after compression.
-{{why_this_strategy_fits_the_target_agent}}
+`{{primary_strategy_description_and_rationale}}`
+Trigger: `{{trigger_ratio}}` of context window. Target: `{{target_ratio}}` after compression.
+`{{why_this_strategy_fits_the_target_agent}}`
 ## Preserve Types
-- system_prompt: {{why_preserved}}
-- {{type_2}}: {{why_preserved}}
-- {{type_3}}: {{why_preserved}}
+- system_prompt: `{{why_preserved}}`
+- `{{type_2}}`: `{{why_preserved}}`
+- `{{type_3}}`: `{{why_preserved}}`
 ## Decay Weights
 | Message Type | Base Priority | Age Decay | Rationale |
 |-------------|--------------|-----------|-----------|
-| system_prompt | 1.00 | 0.00 | {{rationale}} |
-| {{type}} | {{priority}} | {{decay}} | {{rationale}} |
-| {{type}} | {{priority}} | {{decay}} | {{rationale}} |
+| system_prompt | 1.00 | 0.00 | `{{rationale}}` |
+| `{{type}}` | {{priority}} | {{decay}} | `{{rationale}}` |
+| `{{type}}` | {{priority}} | {{decay}} | `{{rationale}}` |
 ## Compression Pipeline
-1. **{{Stage 1 name}}** (target: -{{N}}%): {{description}}
-2. **{{Stage 2 name}}** (target: -{{N}}%): {{description}}
-3. **{{Stage 3 name}}** (target: remaining): {{description}}
+1. **`{{Stage 1 name}}`** (target: -{{N}}%): `{{description}}`
+2. **`{{Stage 2 name}}`** (target: -{{N}}%): `{{description}}`
+3. **`{{Stage 3 name}}`** (target: remaining): `{{description}}`
 ## References
-- {{reference_1}}
-- {{reference_2}}
+- `{{reference_1}}`
+- `{{reference_2}}`

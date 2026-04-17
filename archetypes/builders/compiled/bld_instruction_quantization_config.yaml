@@ -1,0 +1,42 @@
+kind: instruction
+id: bld_instruction_quantization_config
+pillar: P03
+llm_function: REASON
+purpose: Step-by-step production process for quantization_config
+quality: null
+title: Instruction Quantization Config
+version: 1.0.0
+author: wave1_builder_gen
+tags:
+- quantization_config
+- builder
+- instruction
+tldr: Step-by-step production process for quantization_config
+domain: quantization_config construction
+created: '2026-04-13'
+updated: '2026-04-13'
+density_score: 0.85
+phase_1_research:
+- Analyze target model weight distribution and dynamic range.
+- Evaluate bit-width trade-offs (INT8, FP8, NF4, INT4).
+- Compare compression algorithms (AWQ, GPTQ, bitsandbytes).
+- Assess hardware kernel compatibility (CUDA, ROCm, Triton).
+- Determine perplexity loss tolerance for specific tasks.
+- Identify optimal calibration dataset for scale estimation.
+phase_2_compose:
+- Initialize artifact structure using bld_output_template_quantization_config.md.
+- Map quantization parameters to types in bld_schema_quantization_config.md.
+- Define 'bits' parameter based on precision research.
+- Configure 'group_size' for weight-clustering density.
+- Specify 'quant_type' (e.g., 'nf4') per bld_schema_quantization_config.md.
+- Implement 'desc_act' settings for activation scaling (GPTQ only).
+- Set 'zero_point' and 'scale' calculation logic.
+- Define 'compute_dtype' for dequantization kernels.
+- Set id following naming convention from bld_config_quantization_config.md (p09_qc_*).
+phase_3_validate:
+- '[ ] Verify all keys strictly match bld_schema_quantization_config.md definitions.'
+- '[ ] Check id follows p09_qc_* pattern (HARD gate H02).'
+- '[ ] Confirm quant_type in {GPTQ, AWQ, GGUF, int8, int4, nf4} (HARD gate H04).'
+- '[ ] Confirm bits in {2, 3, 4, 8} (HARD gate H05).'
+- '[ ] Confirm calibration_dataset present for GPTQ/AWQ methods (HARD gate H07).'
+- '[ ] Validate structural integrity against bld_output_template_quantization_config.md.'

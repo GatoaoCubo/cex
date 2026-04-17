@@ -1,0 +1,60 @@
+kind: instruction
+id: bld_instruction_voice_pipeline
+pillar: P03
+llm_function: REASON
+purpose: Step-by-step production process for voice_pipeline
+quality: null
+title: Instruction Voice Pipeline
+version: 1.0.0
+author: wave1_builder_gen
+tags:
+- voice_pipeline
+- builder
+- instruction
+tldr: Step-by-step production process for voice_pipeline
+domain: voice_pipeline construction
+created: '2026-04-13'
+updated: '2026-04-13'
+density_score: 0.85
+phase_1_research:
+- 'Define voice_pipeline requirements: latency, accuracy, language support'
+- Analyze existing voice agent architectures (e.g., ASR, TTS, NLU integration)
+- Gather audio datasets for training and validation (noise, accents, environments)
+- Evaluate speech recognition models (e.g., Whisper, Kaldi) for performance metrics
+- Research real-time processing frameworks (e.g., WebRTC, TensorFlow Lite)
+- Document security/privacy constraints (data encryption, compliance)
+phase_2_compose:
+- Set up dev environment with Python 3.10+, PyTorch 2.0, and SCHEMA.md
+- 'Define pipeline stages in SCHEMA.md: input → ASR → NLU → response → TTS'
+- Implement audio preprocessing (normalization, noise reduction)
+- Integrate ASR model with OUTPUT_TEMPLATE.md's `transcript` field
+- Develop NLU module for intent classification and slot filling
+- Wire TTS engine (e.g., Tacotron 2) to generate synthetic speech
+- Add error handling for ASR/NLU failures (fallback responses)
+- Write unit tests for each pipeline stage using pytest
+- Package artifact with Dockerfile and requirements.txt
+phase_3_validate: '[ ] Validate schema alignment with SCHEMA.md [ ] Confirm all 4 core stages present: STT, NLU, dialogue
+  management, TTS [ ] Verify audio preprocessing stage is documented [ ] Confirm provider abstraction (no hardcoded vendor
+  names at interface level) [ ] Verify fallback chain documented for each stage [ ] Confirm error recovery defined at each
+  stage boundary [ ] Validate id matches pattern: p04_vp_[a-z0-9_]+ [ ] Run H01-H08 quality gate checks before delivering'
+properties: '| Property | Value |
+
+  |----------|-------|
+
+  | Kind | `instruction` |
+
+  | Pillar | P03 |
+
+  | Domain | voice_pipeline construction |
+
+  | Pipeline | 8F (F1-F8) |
+
+  | Scorer | cex_score.py |
+
+  | Compiler | cex_compile.py |
+
+  | Retriever | cex_retriever.py |
+
+  | Quality target | 9.0+ |
+
+  | Density target | 0.85+ |'

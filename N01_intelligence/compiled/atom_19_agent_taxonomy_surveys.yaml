@@ -1,0 +1,134 @@
+title: 'Comprehensive Taxonomy and Evaluation Framework for Autonomous Agents: 2026 Update'
+author: Arunkumar, Xi, Wang, and Collaborators
+date: April 2026
+description: This document provides an updated taxonomy of autonomous agents, evaluation frameworks, and a synthesis of 2026
+  research advancements. It integrates insights from Wang et al. (2023), Xi et al. (2023), and Arunkumar et al. (2026), with
+  a focus on cross-paradigm convergence, hybrid agent systems, and process-level reward modeling.
+introduction: 'Autonomous agents have evolved from narrow task-specific systems to complex, multi-modal entities capable of
+  interacting with digital, physical, and human environments. This document synthesizes the 2026 state of the art, building
+  on foundational surveys (Wang et al., 2023; Xi et al., 2023; Arunkumar et al., 2026) while addressing gaps identified in
+  recent research. Key themes include:
+
+
+  - Cross-paradigm convergence: Integration of embodied VLA, computer use, and ACI (Agent Computer Interface) systems.
+
+  - Evaluation evolution: CLASSic (Arunkumar et al., 2026) and SWE-bench Verified (Yang et al., 2024) as universal benchmarks.
+
+  - Process reward modeling: AgentRM (2026) and its implications for training and inference.
+
+  - Inter-agent communication: A2A Protocol (Google, 2026) and MCP 2.0 (Anthropic, 2026).
+
+
+  ---'
+taxonomy_of_autonomous_agents_2026: ''
+1_action_paradigms: '| Paradigm          | Description                                                                 | Key
+  Systems                          |
+
+  |-----------------------|---------------------------------------------------------------------------------|------------------------------------------|
+
+  | ACI (Agent Computer Interface) | Direct interaction with code, files, and tools via structured actions (e.g., edit, read,
+  submit). | Claude Code, SWE-Agent, Devin, Aider     |
+
+  | Code-as-Action    | Treats code as a first-class action space, often using diffs or patches.         | OpenHands (CodeAct),
+  Augment Code        |
+
+  | Computer Use      | Embodied interaction with GUIs, browsers, and desktop environments.             | Devin, Gemini Robotics,
+  Cursor           |
+
+  | Embodied VLA      | Vision-Language-Action models for physical tasks (e.g., robotics).              | Gemini Robotics,
+  RT-2 (Brohan et al., 2023) |
+
+  | Mesh Collaboration| Multi-agent systems with decentralized coordination (e.g., TradingAgents).      | TradingAgents (2026),
+  MARBLE benchmark   |'
+2_memory_architectures_2026_update: 'Six distinct memory strategies have emerged, each addressing trade-offs between context
+  capacity, latency, and coherence:
+
+
+  | Architecture      | Mechanism                                                                 | Use Case                             |
+
+  |-----------------------|-------------------------------------------------------------------------------|------------------------------------------|
+
+  | Stream            | Linear, unstructured memory with no retention.                               | Short-term tasks, chatbots               |
+
+  | Reflection        | Periodic summarization of memory for long-term retention.                    | Knowledge-intensive
+  agents               |
+
+  | Decay             | Time-based weighting of memory entries.                                       | Real-time decision-making                |
+
+  | Paging            | Context-aware memory partitioning (e.g., Gemini 2.5 Pro).                     | Long-context tasks                       |
+
+  | Compression       | Semantic summarization of memory for efficiency.                              | Resource-constrained
+  environments        |
+
+  | Learned           | Neural memory networks trained on task-specific patterns.                     | Personalized agents                      |'
+3_hybrid_action_spaces: '2026 research highlights the rise of hybrid agents that cross digital-physical boundaries. For example:
+
+  - Devin (SWE-bench): Combines code editing (ACI) with web research (Computer Use).
+
+  - Gemini Robotics (DeepMind): Integrates VLA for physical tasks with API-based tool use.
+
+
+  This challenges the 2023 taxonomy, which treated embodied and digital paradigms as separate.
+
+
+  ---'
+evaluation_frameworks_classic_and_beyond: ''
+classic_arunkumar_et_al_2026: 'CLASSic evaluates agents across five dimensions:
+
+  1. Accuracy (task completion, MARBLE benchmark).
+
+  2. Latency (response time, SWE-bench).
+
+  3. Security (MCP 2.0, A2A Protocol).
+
+  4. Scalability (multi-agent collaboration, TradingAgents).
+
+  5. Adaptability (lifelong learning, Voyager).'
+swe_bench_verified_yang_et_al_2024:
+- 'Harder variants (SWE-bench Pro, 2026): Private test cases, anti-gaming measures.'
+- 'Leaderboards: Claude 3.7 (70.3% accuracy), Aider (68.2%), Devin (65.1%).'
+emerging_metrics: '- Process Reward Modeling (AgentRM, 2026): Rewards intermediate steps (e.g., code quality) rather than
+  final outcomes.
+
+  - Emergent Behavior Metrics (MARBLE): Quantifies creativity, collaboration, and adaptability in multi-env tasks.
+
+
+  ---'
+2026_research_highlights: ''
+1_a2a_protocol_and_mcp_2_0:
+- 'A2A Protocol (Google): Standardizes inter-agent communication, enabling trust negotiation and capability sharing.'
+- 'MCP 2.0 (Anthropic): OAuth-based tool access with audit trails, enhancing CLASSic Security.'
+2_process_reward_models_agentrm:
+- 'Key Insight: Dense, step-level rewards improve alignment with human preferences (e.g., code readability).'
+- 'Impact: Changes training objectives and inference-time search strategies (not captured by POMDP).'
+3_hybrid_agents: '- Gemini Robotics: Cross-embodiment VLA with dexterous manipulation (SOTA in LIBERO).
+
+  - Devin: Full-stack agent for software engineering (ACI + Computer Use).
+
+
+  ---'
+taxonomy_gaps_and_future_directions: ''
+unaddressed_challenges:
+- 'Inter-Agent Trust Models: No sub-taxonomy for communication protocols, trust negotiation, or capability sharing (A2A Protocol
+  fills this gap).'
+- 'Hybrid System Evaluation: Current benchmarks (SWE-bench, MARBLE) lack metrics for physical-digital integration.'
+- 'Process-Level Alignment: AgentRM requires new evaluation frameworks to measure intermediate rewards.'
+future_research_areas: '- Unified Action Spaces: Merging ACI, Code-as-Action, and Computer Use into a single paradigm.
+
+  - Cross-Modal Reward Functions: Combining process rewards (AgentRM) with traditional accuracy metrics.
+
+  - Ethical Alignment: Ensuring hybrid agents adhere to human values in both digital and physical domains.
+
+
+  ---'
+conclusion: The 2026 landscape of autonomous agents reflects a shift from isolated paradigms to integrated, multi-modal systems.
+  CLASSic and SWE-bench Verified provide robust evaluation frameworks, while A2A Protocol and AgentRM address critical gaps
+  in inter-agent collaboration and reward modeling. Future work must focus on unifying action spaces, refining process-level
+  alignment, and ensuring ethical deployment of hybrid agents. ---
+references:
+- 'Arunkumar et al. (2026). CLASSic: A Comprehensive Evaluation Framework for Autonomous Agents.'
+- Wang et al. (2023). Taxonomy of Autonomous Agents.
+- Xi et al. (2023). From Task-Specific to General-Purpose Agents.
+- 'Yang et al. (2024). SWE-bench: Evaluating Code Editing Agents.'
+- 'Google (2026). A2A Protocol: Standardizing Inter-Agent Communication.'
+- 'DeepMind (2026). Gemini Robotics: Cross-Embodiment VLA.'

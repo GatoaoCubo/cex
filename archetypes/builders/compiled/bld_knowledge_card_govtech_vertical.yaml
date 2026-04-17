@@ -1,0 +1,89 @@
+kind: knowledge_card
+id: bld_knowledge_card_govtech_vertical
+pillar: P01
+llm_function: INJECT
+purpose: Domain knowledge for govtech_vertical production
+quality: null
+title: Knowledge Card Govtech Vertical
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- govtech_vertical
+- builder
+- knowledge_card
+tldr: Domain knowledge for govtech_vertical production
+domain: govtech_vertical construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+domain_overview: 'The govtech vertical covers technology solutions for government agencies -- federal, state, and local --
+  where compliance is not optional and regulatory specificity determines contract eligibility. The two dominant federal frameworks
+  are FedRAMP (cloud authorization) and FISMA (information security management). FedRAMP has three impact levels: Low, Moderate,
+  and High; most government SaaS solutions require Moderate or High. FISMA categorizes systems using the same Low/Moderate/High
+  scale per FIPS 199. The CJIS Security Policy (SP 20-01, v5.9.1) governs any system touching criminal justice data -- background
+  checks, incident reports, biometrics. GSA Schedules (IT Schedule 70 / MAS) and StateRAMP (state-level FedRAMP equivalent)
+  are the two primary procurement vehicles. Section 508 / WCAG 2.1 AA is the accessibility mandate for all citizen-facing
+  digital services. High-ACV govtech deals ($50K-$500K) require naming these standards precisely; vague "federal compliance"
+  language is a disqualifier.'
+key_concepts: '| Concept | Definition | Source |
+
+  |---------|-----------|--------|
+
+  | FedRAMP Moderate/High | Cloud authorization levels: Moderate for most SaaS (eMASS-tracked), High for systems with national
+  security data | FedRAMP.gov / NIST SP 800-37 |
+
+  | FISMA Categorization | Low/Moderate/High per FIPS 199; determines NIST SP 800-53 control baseline required | FISMA (44
+  USC 3551) |
+
+  | CJIS Security Policy SP 20-01 | FBI-issued policy governing criminal justice data: access, encryption, audit requirements
+  | DOJ CJIS v5.9.1 |
+
+  | GSA Schedule (MAS) | Multiple Award Schedule: pre-negotiated federal contract vehicle (replaces IT Schedule 70) | GSA
+  Acquisition Portal |
+
+  | StateRAMP | State-equivalent of FedRAMP; separate authorization per state for cloud services | StateRAMP.org |
+
+  | Section 508 / WCAG 2.1 AA | Federal accessibility law (29 USC 794d); technical standard is WCAG 2.1 Level AA | Access
+  Board / W3C |
+
+  | NIST SP 800-53 Rev. 5 | Security and privacy control catalog; organized by 20 control families (AC, AU, SC, etc.) | NIST
+  |
+
+  | RMF (Risk Management Framework) | 7-step process: Prepare, Categorize, Select, Implement, Assess, Authorize, Monitor |
+  NIST SP 800-37 Rev. 2 |
+
+  | ATO (Authority to Operate) | Authorization issued by AO (Authorizing Official) after RMF completion | NIST/FedRAMP |
+
+  | CMMI Level | Capability Maturity Model Integration; GovTech contracts sometimes require CMMI Level 3+ | CMMI Institute
+  |'
+industry_standards:
+- FedRAMP Authorization (Moderate / High impact levels) -- marketplace.fedramp.gov
+- FISMA (44 USC 3551) + FIPS 199 categorization
+- NIST SP 800-53 Rev. 5 (20 control families)
+- NIST SP 800-37 Rev. 2 (RMF 7-step process)
+- CJIS Security Policy v5.9.1 (DOJ, SP 20-01)
+- Section 508 / WCAG 2.1 AA (29 USC 794d)
+- GSA Multiple Award Schedule (MAS) -- sam.gov
+- StateRAMP Authorized Products List
+- CMMI Level 3 (for development/delivery maturity requirements)
+- OMB Circular A-130 (federal information resource management)
+common_patterns:
+- FedRAMP Moderate is the minimum bar for most federal SaaS; High is required for systems with law enforcement, intelligence,
+  or financial benefit data.
+- CJIS requires AES-256 encryption, two-factor authentication, and role-based access for any system touching criminal justice
+  records.
+- GSA MAS procurement path shortens sales cycle by ~60% vs. full FAR acquisition; requires SAM.gov registration and GSA Schedule
+  award.
+- StateRAMP authorization is state-specific and does not transfer; a FedRAMP-authorized product still needs StateRAMP for
+  state deployments.
+- Section 508 WCAG 2.1 AA VPATs (Voluntary Product Accessibility Template) are required at procurement; testing must include
+  screen readers (JAWS, NVDA).
+- CMMI Level 3 is a differentiator in large federal software development contracts; often required for DoD and intelligence
+  community work.
+pitfalls:
+- Generic "FedRAMP certified" without naming impact level (Moderate vs. High) -- fails procurement review.
+- Assuming FedRAMP authorization covers state contracts -- StateRAMP is a separate authorization process.
+- CJIS non-compliance via shared credentials or missing audit logs -- immediate disqualification from law enforcement RFPs.
+- Missing WCAG 2.1 AA VPAT at proposal stage -- common cause of accessibility-based proposal rejection.
+- Conflating GSA SAM registration with GSA Schedule award -- registration is a prerequisite, not the contract vehicle.
+- FISMA continuous monitoring lapses -- ATO can be revoked mid-contract, triggering termination clauses.

@@ -24,8 +24,8 @@ dependencies: []
 logging: true
 tldr: Formalize an inviolable operational rule into a complete invariant artifact with statement, rationale, enforcement, and exception protocol.
 density_score: 0.91
+llm_function: REASON
 ---
-
 ## Context
 The invariant-builder produces `law` artifacts (P08) — inviolable operational mandates the system must always follow. Laws differ from instructions (flexible guides), guardrails (safety restrictions), and axioms (abstract truths): an invariant is an operational rule with enforcement consequences and a defined exception protocol.
 **Inputs:**
@@ -98,7 +98,7 @@ Then score all 10 SOFT gates from `QUALITY_GATES.md`. If soft score < 8.0, revis
 4. Confirm total body size is within `CONFIG.md` size limit.
 ## Output Contract
 ```
-id: p08_law_{{number}}
+id: p08_law_`{{number}}`
 kind: invariant
 pillar: P08
 version: 1.0.0

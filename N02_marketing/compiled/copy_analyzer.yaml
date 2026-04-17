@@ -32,7 +32,7 @@ usage: '# Analyze a single copy file
 
   # Analyze all copy in a directory
 
-  python copy_analyzer.py --input N02_marketing/output/ --recursive
+  python copy_analyzer.py --input N02_marketing/P05_output/ --recursive
 
 
   # Analyze with specific audience target

@@ -12,8 +12,8 @@ quality: 9.0
 tags: [quality-gate, diagram, architecture-visualization, mermaid, ascii, P11]
 tldr: "Gates for diagram artifacts: validates notation correctness, layer boundaries, legend presence, and structural accuracy of architecture visuals."
 density_score: 0.90
+llm_function: GOVERN
 ---
-
 # Gate: diagram
 ## Definition
 | Field     | Value |

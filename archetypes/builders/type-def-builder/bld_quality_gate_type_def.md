@@ -16,8 +16,8 @@ tags:
   - schema
   - P06
 tldr: "Validates reusable type declarations for base type, constraints, serialization, and composition rules."
+llm_function: GOVERN
 ---
-
 ## Definition
 A type definition ofclares a named, reusable data structure: its base type, constraints, nullable semantics, serialization format, and composition rules. Type defs are consumed by validation schemas, validators, and code generators. This gate ensures every type def is machine-usable, unambiguous, and backward compatible.
 ## HARD Gates

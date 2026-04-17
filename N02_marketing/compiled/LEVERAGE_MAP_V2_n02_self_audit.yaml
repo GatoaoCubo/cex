@@ -1,0 +1,180 @@
+id: n02_leverage_map_v2_self_audit
+kind: verification_report
+pillar: P12
+title: N02 Marketing - LEVERAGE_MAP_V2 Self Audit
+mission: LEVERAGE_MAP_V2
+nucleus: n02
+date: 2026-04-15 21:35:00+00:00
+quality: null
+version: 3.0
+status: complete
+density_score: 0.94
+executive_summary: '`_tools/cex_social_publisher.py` is real, small, and immediately useful for N02. It closes the narrow
+  gap of platform-sized copy formatting for X, LinkedIn, Instagram, Threads, Bluesky, and Mastodon. It does not close autonomous
+  publishing, measurement, or optimization.
+
+
+  The broader N02 stack is more wired than the raw tool suggests:
+
+
+  - routing and social-publishing docs already exist
+
+  - the N02 social publishing knowledge card exists
+
+  - workflow docs reference scheduled publishing and analytics checkpoints
+
+
+  Even with that surrounding wiring, the live executable gap remains: N02 can format posts, but still cannot run a closed-loop
+  marketing system.'
+8f_pipeline: 'F1 CONSTRAIN: mission=LEVERAGE_MAP_V2, nucleus=n02, scope=_tools social publisher sufficiency
+
+  F2 BECOME: loaded N02 marketing rules, agent card, ASCII rule, orchestrator rules
+
+  F3 INJECT: handoff, CLAUDE.md, existing LEVERAGE_MAP reports, N02 social-publishing docs, live _tools scan
+
+  F4 REASON: verify tool presence, inspect API, test behavior, compare against missing-capability map
+
+  F5 CALL: read files, rg scans, live formatter execution, compile, git, signal
+
+  F6 PRODUCE: canonical self-audit report with sufficiency verdict and next-build ranking
+
+  F7 GOVERN: checked tool surface, live output, and surrounding docs for overclaim risk
+
+  F8 COLLABORATE: save, compile, commit, signal completion'
+verification: ''
+tool_confirmed: 'Present in `_tools`:
+
+
+  - `_tools/cex_social_publisher.py`
+
+
+  Observed API:
+
+
+  - `--input`
+
+  - `--stdin`
+
+  - `--platforms`
+
+  - `--json`
+
+
+  Observed behavior:
+
+
+  - truncates or formats copy per platform limit
+
+  - extracts hashtags with regex
+
+  - returns per-platform JSON or human-readable output
+
+  - uses stdlib only'
+api_fit_for_n02: 'Good fit:
+
+
+  - platform-sized copy generation
+
+  - character limit enforcement
+
+  - lightweight distribution handoff
+
+  - JSON output for downstream tooling
+
+
+  Not covered:
+
+
+  - platform API publishing
+
+  - scheduling
+
+  - engagement measurement
+
+  - A/B testing
+
+  - image generation'
+live_check: A sample stdin run succeeded, but PowerShell here-string input introduced a leading BOM marker in the returned
+  `content` field (`\ufeff`). That is a real integration edge case for stdin mode on Windows. File-based input is cleaner;
+  stdin should be normalized before production use.
+new_wired_tools_since_v1: ''
+executable: '| Item | Status | Notes |
+
+  |------|--------|------|
+
+  | `_tools/cex_social_publisher.py` | Wired | New formatter for platform-sized social copy |'
+supporting_wiring: '| Item | Status | Notes |
+
+  |------|--------|------|
+
+  | `N02_marketing/P04_tools/social_publisher_marketing.md` | Wired | Documents a fuller social publishing workflow |
+
+  | `N02_marketing/P01_knowledge/knowledge_card_social_publishing.md` | Wired | Captures the social publishing domain model |
+
+  | `N02_marketing/P12_orchestration/dispatch_rule_social_publisher.md` | Wired | Routes social publishing work into N02 |
+
+  | `_tools/cex_8f_motor.py` | Wired | Maps `social_publisher` intent into the N02 call path |
+
+  | `_tools/cex_schema_hydrate.py` | Wired | Includes `social-publisher-builder` metadata |'
+interpretation: The repo now has both the formatter and the surrounding domain wiring. That is useful, but it is still not
+  the same as an end-to-end publisher with scheduling, analytics, and optimization loops.
+still_missing: ''
+1_a_b_test_harness: 'Status: not implemented as a live tool.
+
+
+  Why it matters:
+
+
+  - N02 can produce variants, but cannot automatically compare them
+
+  - without a harness, copy improvement stays manual'
+2_analytics_aggregator: 'Status: not implemented as a live tool.
+
+
+  Why it matters:
+
+
+  - no unified publish -> measure -> improve loop
+
+  - platform dashboards remain external and manual'
+3_campaign_scheduler: 'Status: not implemented as a live tool.
+
+
+  Why it matters:
+
+
+  - workflows and docs already describe scheduling
+
+  - the runtime tool that automates timing and dispatch is still missing'
+4_image_generation_wrapper: 'Status: not implemented as a live tool.
+
+
+  Why it matters:
+
+
+  - visual channels still need manual or external design support
+
+  - Instagram and similar channels lose leverage without visual generation'
+next_iteration: "Top 3 next builds for N02, prioritized:\n\n1. `cex_ab_test_harness.py`\n   - highest leverage\n   - no external\
+  \ API dependency for an initial local version\n   - unlocks copy optimization\n\n2. `cex_analytics_aggregator.py`\n   -\
+  \ makes performance visible\n   - turns publishing into a feedback loop\n\n3. `image_generation_wrapper.py`\n   - unlocks\
+  \ visual campaigns\n   - especially important for Instagram and short-form social\n\nIf scheduler is the next operational\
+  \ dependency, it follows after measurement is in place. The stack should not automate timing before it can measure results."
+evidence_snapshot:
+- '`_tools/cex_social_publisher.py` exists and executes'
+- JSON output works for multiple platforms
+- platform limits are enforced
+- surrounding N02 docs and routing files are present
+- no live scheduler, A/B harness, or analytics tool was found in `_tools`
+final_assessment: '`cex_social_publisher.py` is sufficient for platform-sized copy formatting and insufficient for autonomous
+  marketing operations.
+
+
+  Net change from the previous cycle:
+
+
+  - formatter gap is closed
+
+  - routing and social-publishing docs are coherent
+
+  - the main leverage gaps remain testing, analytics, scheduling, and visual generation'

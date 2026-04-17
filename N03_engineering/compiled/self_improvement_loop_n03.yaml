@@ -1,0 +1,76 @@
+id: p11_sil_n03
+kind: self_improvement_loop
+pillar: P11
+title: Self-Improvement Loop -- N03 Engineering Evolution
+version: 1.0.0
+created: 2026-04-17
+author: n03_engineering
+domain: artifact-construction
+quality: null
+tags:
+- self-improvement-loop
+- N03
+- evolution
+- quality
+- autonomous
+- flywheel
+- 8F
+tldr: Autonomous quality evolution protocol for N03. Scans all N03 artifacts for quality < 9.0, ranks by improvement ROI,
+  applies heuristic + LLM improvement passes, and compounds quality over time via the Inventive Pride flywheel.
+density_score: 0.91
+updated: '2026-04-17'
+purpose: 'N03 does not just BUILD -- it IMPROVES what it has built. Inventive Pride demands that the portfolio gets better
+  over time, not just bigger. This loop is the mechanism: scan -> rank -> improve -> verify -> repeat. Target: all N03 artifacts
+  reach quality >= 9.0 or are flagged for human review.'
+loop_architecture: "SCAN: Read all N03 artifacts (find N03_engineering -name \"*.md\")\n  |\nRANK: Score each artifact; sort\
+  \ by improvement ROI\n  |   ROI = (9.0 - current_score) * pillar_priority_weight\n  |\nSELECT: Take top N candidates per\
+  \ run (default: 5)\n  |\nIMPROVE: Apply improvement strategy per score band\n  |\nVERIFY: Re-score; accept if improved;\
+  \ revert if worse\n  |\nPERSIST: Update baseline in results.tsv; write learning records\n  |\nREPEAT: Next run (scheduled\
+  \ or triggered)"
+trigger_conditions: '| Trigger | When | Mode |
+
+  |---------|------|------|
+
+  | Post-wave | After SELF_ASSEMBLY wave completes | Full scan |
+
+  | Nightly | Scheduled 02:00 UTC | Full scan |
+
+  | On-demand | N07 dispatches `/evolve n03` | Full scan |
+
+  | Post-build | After any F8 COLLABORATE | Single artifact |
+
+  | Regression | bugloop detects quality drop | Targeted fix |'
+score_bands_and_strategies: ''
+band_a_score_7_0_below_floor: "Strategy: Full rewrite via 8F pipeline  \nReason: Below-floor artifacts cannot be patched;\
+  \ they need to be rebuilt from intent.\n\npython cex_sdk/cex_8f_runner.py --kind {kind} --verb REWRITE --quality-target\
+  \ 9.0"
+band_b_score_in_7_0_8_5_acceptable_needs_improvement: "Strategy: Targeted section improvement  \nApproach:\n1. Load artifact\
+  \ + scoring rubric\n2. Identify lowest-scoring dimension (D1-D5)\n3. Inject improvement prompt: \"The {dimension} dimension\
+  \ scored {score}/10. Improve specifically: {rationale}\"\n4. Regenerate only the failing sections (not full rewrite)\n5.\
+  \ Re-validate via quality gate"
+band_c_score_in_8_5_9_0_good_close_to_target: "Strategy: Precision polish  \nApproach:\n1. Check vocabulary compliance (often\
+  \ the gap at this score band)\n2. Increase density_score by converting prose to tables\n3. Add missing examples if LP04\
+  \ failed\n4. Ensure all cross-references are canonical"
+band_d_score_9_0_excellent: "Strategy: Exemplar promotion  \nApproach:\n1. Mark artifact as candidate example for builder\
+  \ ISO injection\n2. Check if this artifact can be cited in kc_{kind} as a model\n3. Run regression_check to ensure it stays\
+  \ at this level"
+roi_weighting: "PILLAR_PRIORITY_WEIGHTS = {\n    \"P06\": 3.0,   # schema -- critical, blocking\n    \"P07\": 2.5,   # evaluation\
+  \ -- quality infrastructure\n    \"P08\": 2.0,   # architecture -- decisions compound\n    \"P11\": 2.0,   # feedback --\
+  \ self-improving\n    \"P04\": 1.5,   # tools -- operational leverage\n    \"P03\": 1.5,   # prompt -- interface quality\n\
+  \    \"P02\": 1.0,   # model -- stable\n    \"P01\": 1.0,   # knowledge -- gradual accumulation\n    \"P05\": 0.8,   # output\
+  \ -- often ephemeral\n    \"P09\": 1.2,   # config -- high blast radius if wrong\n    \"P10\": 1.0,   # memory -- value\
+  \ accrues over time\n    \"P12\": 1.0,   # orchestration -- stable\n}\n\nroi = (9.0 - current_score) * pillar_priority_weight\n\
+  # Higher ROI = improve this first"
+improvement_run_report: "loop_run:\n  nucleus: n03\n  timestamp: 2026-04-17T14:00:00\n  trigger: post_wave\n  artifacts_scanned:\
+  \ 98\n  artifacts_below_target: 12\n  artifacts_selected: 5\n  improvements:\n    - id: p06_is_build_contract\n      score_before:\
+  \ null\n      score_after: null\n      strategy: post_build_check\n      status: passed_gate\n    - id: p07_gt_n03\n   \
+  \   score_before: null\n      score_after: null\n      strategy: exemplar_check\n      status: candidate_example\n  artifacts_improved:\
+  \ 0      # quality: null means peer-review pending\n  artifacts_regressed: 0\n  artifacts_flagged_for_human: 0\n  next_run:\
+  \ scheduled"
+invariants:
+- Self-improvement loop NEVER sets quality field -- it remains null until peer review
+- 'If improvement makes score WORSE: revert to original (git checkout the file)'
+- Maximum 3 improvement attempts per artifact per loop run
+- Exemplar promotion requires N07 confirmation (GDP required for ISO injection)
+- Loop stops after 3 hours wall-clock to prevent infinite execution
+- 'All improvements are committed as: `[N03] self-improvement: {kind} quality improvement pass`'

@@ -1,0 +1,80 @@
+kind: schema
+id: bld_schema_reranker_config
+pillar: P06
+llm_function: CONSTRAIN
+purpose: Formal schema -- SINGLE SOURCE OF TRUTH for reranker_config
+quality: null
+title: Schema Reranker Config
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- reranker_config
+- builder
+- schema
+tldr: Formal schema -- SINGLE SOURCE OF TRUTH for reranker_config
+domain: reranker_config construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+frontmatter_fields: ''
+required: '| Field | Type | Required | Default | Notes |
+
+  |------|------|----------|---------|-------|
+
+  | id | string | yes | null | Must match ID Pattern |
+
+  | kind | string | yes | "reranker_config" | Fixed value |
+
+  | pillar | string | yes | "P01" | Fixed value |
+
+  | title | string | yes | null | Human-readable name |
+
+  | version | string | yes | "1.0.0" | Semantic versioning |
+
+  | created | datetime | yes | null | ISO 8601 format |
+
+  | updated | datetime | yes | null | ISO 8601 format |
+
+  | author | string | yes | null | Owner email |
+
+  | domain | string | yes | null | Application context |
+
+  | quality | null | yes | null | Never self-score; peer review assigns |
+
+  | tags | list | yes | [] | Metadata keywords |
+
+  | tldr | string | yes | null | Summary of purpose |
+
+  | model_type | string | yes | null | "dense" or "sparse" |
+
+  | ranking_criteria | list | yes | [] | ["relevance", "confidence"] |
+
+  | max_rank | integer | yes | 100 | Maximum items to rank |
+
+  | scoring_threshold | float | yes | 0.5 | Minimum score for inclusion |'
+recommended: '| Field | Type | Notes |
+
+  |------|------|-------|
+
+  | description | string | Detailed purpose |
+
+  | example_usage | string | Sample input/output |
+
+  | dependencies | list | Required libraries |
+
+  | validation_rules | list | Schema checks |'
+id_pattern: ^p01_rr_[a-z][a-z0-9_]+.yaml$
+body_structure:
+- 'Model Configuration: Define model architecture and parameters'
+- 'Ranking Parameters: Specify scoring functions and weights'
+- 'Scoring Rules: Detailed criteria for item evaluation'
+- 'Validation Settings: Input/output schema and constraints'
+- 'Example Usage: Sample request/response patterns'
+- 'Dependencies: Required software/hardware resources'
+constraints:
+- File size must not exceed 2048 bytes
+- ID must match exact regex pattern
+- Quality field must be peer-reviewed
+- Version must follow semantic versioning
+- All required fields must be present
+- Domain-specific fields must align with application context

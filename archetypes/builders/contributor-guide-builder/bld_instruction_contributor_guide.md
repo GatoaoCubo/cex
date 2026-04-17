@@ -1,0 +1,72 @@
+---
+kind: instruction
+id: bld_instruction_contributor_guide
+pillar: P03
+llm_function: REASON
+purpose: Step-by-step construction instructions for producing contributor_guide artifacts
+quality: 9.1
+title: "Contributor Guide Builder Instructions"
+version: "1.1.0"
+author: n02_hybrid_review7
+tags: [contributor_guide, builder, instruction]
+tldr: "Three-phase build protocol: research the project context, compose all required sections in order, validate against quality gates H01-H08"
+domain: "contributor_guide construction"
+created: "2026-04-14"
+updated: "2026-04-14"
+density_score: 0.85
+---
+
+## Phase 1: RESEARCH
+
+Gather all required inputs before writing. A contributor guide built without
+project context produces generic, unenforced standards that contributors ignore.
+
+| Step | Action | Required output |
+|------|--------|----------------|
+| 1.1 | Identify the project repository URL and primary language(s) | Repo URL + language list |
+| 1.2 | Document the project's existing CI/CD toolchain (lint, test, build commands) | Command list |
+| 1.3 | Confirm whether the project uses DCO or CLA (and which CLA -- Apache, Google, etc.) | DCO or CLA name + signing workflow URL |
+| 1.4 | Map the branching strategy (main, develop, feature/*, hotfix/*) | Branch naming convention |
+| 1.5 | Confirm commit message format (Conventional Commits, custom, or none) | Format spec |
+| 1.6 | Identify review SLA and required approvals before merge | Number of approvals + who |
+| 1.7 | Locate or draft the code style guide reference (Prettier, ESLint, Black, etc.) | Style guide URL or inline spec |
+
+If CLA status is unknown, default to DCO (Developer Certificate of Origin) with
+sign-off via `git commit -s`. Do not assume CLA without confirmation.
+
+## Phase 2: COMPOSE
+
+Write sections in schema order. See bld_schema_contributor_guide.md for
+required section sequence. Do not reorder or merge sections.
+
+| Section | Content | Word target |
+|---------|---------|-------------|
+| Introduction | Purpose of the guide, who it is for, scope statement | 60-100 words |
+| Getting Started | OS prerequisites, dependency installation commands, test run verification | 100-200 words + code blocks |
+| Contribution Workflow | Fork model or branch model, step-by-step from clone to merged PR | 150-250 words + numbered list |
+| Coding Standards | Style guide reference, linting commands, naming conventions, file structure | 80-150 words + code examples |
+| Commit Messages | Format spec with examples; mark Conventional Commits if used | 60-100 words + examples |
+| Pull Request Process | PR template fields, review checklist, CI gate requirements, merge policy | 100-200 words |
+| Review Process | Who reviews, SLA, feedback format, how to request re-review | 80-120 words |
+| CLA / DCO | Requirement statement, signing workflow, link to agreement | 60-100 words |
+
+Use bld_output_template_contributor_guide.md as the structural scaffold.
+Add code blocks for all setup commands. Use numbered lists for sequential steps.
+
+## Phase 3: VALIDATE
+
+Run all checks before delivering. All HARD gates must pass.
+
+| Gate | ID | Check | Pass condition |
+|------|----|-------|---------------|
+| YAML valid | H01 | Frontmatter parses without error | No YAML syntax errors |
+| ID pattern | H02 | ID matches ^p05_cg_[a-z][a-z0-9_]+ | Pattern match |
+| Kind correct | H03 | kind field value | kind == "contributor_guide" |
+| Dev setup present | H04 | Getting Started section exists with install commands | Section present + code block |
+| PR flow documented | H05 | Contribution Workflow section exists with numbered steps | Section present + steps |
+| Coding standards | H06 | Coding Standards section cites a style guide | Style guide named |
+| Review process | H07 | Review Process section exists | Section present |
+| CLA / DCO | H08 | CLA or DCO requirement stated with signing URL or command | Requirement stated |
+
+If any HARD gate fails, return to Phase 2 and correct before delivery.
+ASCII only: no Unicode checkmarks, emoji, or non-Latin characters.

@@ -1,0 +1,55 @@
+---
+kind: quality_gate
+id: p10_qg_vc_credential
+pillar: P11
+llm_function: GOVERN
+purpose: Quality gate with HARD and SOFT scoring for vc_credential
+quality: 9.0
+title: "Quality Gate VC Credential"
+version: "1.0.0"
+author: n04_wave7
+tags: [vc_credential, builder, quality_gate, W3C, VC-2.0, DID, data-integrity]
+tldr: "Quality gate with HARD and SOFT scoring for vc_credential"
+domain: "vc_credential construction"
+created: "2026-04-14"
+updated: "2026-04-14"
+density_score: 0.85
+---
+
+## Definition
+| Metric | Threshold | Operator | Scope |
+|--------|-----------|----------|-------|
+| W3C VC 2.0 compliance | 100% | equals | All required fields per spec |
+
+## HARD Gates
+| ID  | Check | Fail Condition |
+|-----|-------|----------------|
+| H01 | YAML frontmatter valid | Invalid YAML syntax or missing fields |
+| H02 | ID matches pattern ^p10_vc_[a-z][a-z0-9_]+\.md$ | ID format mismatch |
+| H03 | kind field is "vc_credential" | Kind field incorrect or missing |
+| H04 | @context includes https://www.w3.org/ns/credentials/v2 | Missing or wrong VC context |
+| H05 | issuer_did is valid DID (did: prefix) | Non-DID issuer |
+| H06 | subject_did is valid DID | Non-DID subject |
+| H07 | proof.cryptosuite is ecdsa-rdfc-2022 or eddsa-rdfc-2022 | Unsupported or missing cryptosuite |
+
+## SOFT Scoring
+| Dim | Dimension | Weight | Scoring Guide |
+|-----|-----------|--------|---------------|
+| D01 | VC 2.0 field completeness (validFrom, type, credentialSubject, proof) | 0.30 | All present = 1.0, partial = 0.5, missing critical = 0 |
+| D02 | credentialSchema reference quality (IRI valid, type correct) | 0.20 | Full reference = 1.0, partial = 0.5, absent = 0 |
+| D03 | credentialStatus coverage (endpoint valid, statusListIndex set) | 0.20 | Full coverage = 1.0, partial = 0.5, absent = 0 |
+| D04 | Proof block completeness (cryptosuite, verificationMethod, proofPurpose, proofValue) | 0.20 | Complete = 1.0, partial = 0.5, absent = 0 |
+| D05 | Domain keyword density (W3C, verifiable-credential, DID, issuer, subject, proof) | 0.10 | 6+ keywords = 1.0, 4-5 = 0.7, <4 = 0.3 |
+
+## Actions
+| Score | Action |
+|-------|--------|
+| GOLDEN | >=9.5 | Auto-publish with no review |
+| PUBLISH | >=8.0 | Auto-publish after validation |
+| REVIEW | >=7.0 | Require manual review |
+| REJECT | <7.0 | Reject and flag for correction |
+
+## Bypass
+| Conditions | Approver | Audit Trail |
+|------------|----------|-------------|
+| Prototype credential (no live status endpoint) | N07 orchestrator | Escalation log with PROTOTYPE tag |

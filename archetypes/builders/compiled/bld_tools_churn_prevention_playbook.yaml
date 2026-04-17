@@ -1,0 +1,43 @@
+kind: tools
+id: bld_tools_churn_prevention_playbook
+pillar: P04
+llm_function: CALL
+purpose: Tools available for churn_prevention_playbook production
+quality: null
+title: Tools Churn Prevention Playbook
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- churn_prevention_playbook
+- builder
+- tools
+tldr: Tools available for churn_prevention_playbook production
+domain: churn_prevention_playbook construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+production_tools: '| Tool                  | Purpose                                         | When                     |
+
+  |-----------------------|-------------------------------------------------|--------------------------|
+
+  | cex_compile.py        | Compile .md to .yaml                            | After every save         |
+
+  | cex_score.py          | Apply peer-review quality score                 | Post-production          |
+
+  | cex_retriever.py      | Find similar churn playbook artifacts           | During F3 INJECT         |
+
+  | cex_doctor.py         | Diagnose schema and frontmatter issues          | Pre-publish validation   |
+
+  | cex_wave_validator.py | Validate domain keywords and ISO completeness  | Post-build CI gate       |'
+validation_tools: '| Tool                  | Purpose                                         | When                     |
+
+  |-----------------------|-------------------------------------------------|--------------------------|
+
+  | cex_schema_hydrate.py | Enforce schema constraints on frontmatter       | Pre-commit               |
+
+  | cex_hooks.py          | Pre-commit ASCII and schema checks              | git commit               |'
+external_references:
+- 'Gainsight CS Platform: health score, CTA automation, playbook execution API'
+- 'ChurnZero: risk score signals and outreach sequence automation'
+- 'Salesforce CRM: account health tracking, escalation logging, save activity records'
+- 'Totango: SuccessBloc-based intervention playbook integration'

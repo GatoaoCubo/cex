@@ -1,0 +1,30 @@
+id: kc_integration_guide
+kind: knowledge_card
+title: Integration Guide for Platform Partners
+version: 1.0.0
+quality: null
+pillar: P01
+density_score: 1.0
+overview: This guide explains how to integrate with our platform for developers, SaaS partners, and enterprise clients. It
+  covers authentication, data handling, and best practices for seamless integration.
+key_concepts:
+- 'OAuth 2.0: Required for secure API access'
+- 'Rate Limits: 100 requests/minute for free tier, 1000/minute for paid'
+- 'Webhooks: Real-time updates via POST requests'
+- 'Data Formats: JSON with schema validation'
+integration_process:
+- Register Application - Get client ID/secret
+- Authentication Flow - Use OAuth 2.0 with JWT tokens
+- API Endpoints - Use `/api/v1/data` for bulk operations
+- Webhook Setup - Subscribe to real-time updates
+- Error Handling - Retry 5xx errors with exponential backoff
+best_practices:
+- Always validate payloads against schema
+- Implement token refresh logic (24h rotation)
+- Monitor usage via `/api/v1/metrics`
+- Use `application/json` content type
+troubleshooting:
+- '401 Unauthorized: Check token validity'
+- '429 Too Many Requests: Implement rate limiting'
+- '503 Service Unavailable: Retry with exponential backoff'
+- '400 Bad Request: Validate payload against schema'

@@ -1,0 +1,56 @@
+id: kc_synthetic_data_generation
+kind: knowledge_card
+title: Synthetic Data Generation for LLMs
+version: 1.0.0
+quality: 8.9
+pillar: P01
+language: English
+density_score: 1.0
+updated: '2026-04-13'
+overview: Synthetic data generation creates artificial datasets to train and evaluate large language models. This technique
+  addresses data scarcity, reduces bias, and enables controlled experimentation.
+core_techniques: ''
+1_self_instruct:
+- 'Description: Generate data via prompt-based instruction following'
+- 'Use Case: Initial data creation when no real data exists'
+- 'Pros: Simple to implement, full control over data characteristics'
+- 'Cons: Risk of introducing human bias through prompts'
+2_evol_instruct:
+- 'Description: Iterative refinement through multiple instruction rounds'
+- 'Use Case: Complex data generation requiring gradual improvement'
+- 'Pros: Produces higher quality data through iterative optimization'
+- 'Cons: Computationally intensive and time-consuming'
+3_distillation:
+- 'Description: Transfer knowledge from large models to smaller ones'
+- 'Use Case: Create compact models while preserving performance'
+- 'Pros: Efficient resource utilization, knowledge preservation'
+- 'Cons: Dependent on pre-trained models for knowledge transfer'
+4_quality_filtering:
+- 'Description: Post-processing to remove low-quality/generated data'
+- 'Use Case: Clean up datasets after initial generation'
+- 'Pros: Improves data accuracy and reliability'
+- 'Cons: Time-consuming and requires quality metrics'
+5_decontamination:
+- 'Description: Remove biases and artifacts from generated data'
+- 'Use Case: Ensure fair and unbiased model training'
+- 'Pros: Enhances model fairness and generalization'
+- 'Cons: Complex implementation with no guaranteed results'
+comparison_table: '| Technique        | Description                     | Use Case               | Pros                     |
+  Cons                     |
+
+  |------------------|---------------------------------|------------------------|--------------------------|--------------------------|
+
+  | Self-Instruct    | Prompt-based generation         | Initial data creation  | Simple, full control     | Risk of human
+  bias       |
+
+  | Evol-Instruct    | Iterative refinement            | Complex data needs    | High quality output      | Computationally
+  heavy    |
+
+  | Distillation     | Knowledge transfer              | Model compression      | Efficient resource use   | Dependent on
+  pre-trained |
+
+  | Quality Filtering| Post-processing cleanup         | Data refinement        | Improves accuracy        | Time-consuming           |
+
+  | Decontamination  | Bias removal                    | Fairness assurance     | Enhances model fairness  | Complex implementation   |'
+boundary: Conhecimento destilado, estatico, versionado. NAO eh instrucao, template, ou configuracao.
+8f_pipeline_function: 'Primary function: INJECT'

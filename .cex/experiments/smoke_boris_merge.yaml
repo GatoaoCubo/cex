@@ -1,0 +1,150 @@
+# Smoke spec: BORIS_MERGE feature parity across runtimes
+#
+# Purpose: verify the 21 assimilated Boris-isms land identically on every
+# supported runtime. Gemini is SKIPPED per 2026-04-15 memory (free tier
+# unusable -- stalls 25min+ on "Thinking...").
+#
+# Invocation: /fullrun boris_merge
+# Runner:     _tools/cex_mission_runner.py --spec .cex/experiments/smoke_boris_merge.yaml
+# Frequency:  run after any change to .claude/skills/, .claude/commands/,
+#             boot/*, _tools/cex_hooks_native.py, or .cex/skills/.
+
+id: smoke_boris_merge
+kind: experiment_config
+pillar: P07
+version: 1.0.0
+created: 2026-04-15
+author: N03
+mission: BORIS_MERGE_TAIL
+quality: null
+
+# --- Runtime matrix (gemini disabled) ------------------------------------
+runtimes:
+  - name: claude
+    cli: claude
+    model: claude-opus-4-6
+    flags: "--dangerously-skip-permissions --permission-mode bypassPermissions"
+    enabled: true
+    notes: "Native hooks, skills, slash commands. Canonical runtime."
+  - name: codex
+    cli: codex
+    model: gpt-5-codex
+    flags: "--dangerously-bypass-approvals-and-sandbox"
+    enabled: true
+    notes: "Skills via .cex/skills mirror. No native hooks -- boot wrapper calls."
+  - name: ollama
+    cli: ollama
+    model: llama3.1:8b
+    flags: ""
+    enabled: true
+    notes: "Offline. Free. No MCP. See project_local_model_grid_findings."
+  - name: gemini
+    cli: gemini
+    model: gemini-2.5-flash
+    flags: "--yolo"
+    enabled: false
+    skip_reason: "2026-04-15 memory: free tier hangs 25min+. Re-enable after upgrade."
+
+# --- Checks (must pass on every enabled runtime) -------------------------
+checks:
+  # Skills mirror parity (Boris-ism #1)
+  - id: skills_mirror_parity
+    description: ".claude/skills and .cex/skills have the same 5 skills"
+    command: "python _tools/cex_skill_loader.py --audit-mirror"
+    expect_exit: 0
+    expected_skills: [commit, simplify, btw, verify, dream]
+
+  # Slash commands wrap skills (Boris-ism #2)
+  - id: slash_commands_wrap_skills
+    description: ".claude/commands/{simplify,loop,schedule,batch}.md exist"
+    command: "ls .claude/commands/simplify.md .claude/commands/loop.md .claude/commands/schedule.md .claude/commands/batch.md"
+    expect_exit: 0
+
+  # Worktree isolation honored (Boris-ism #3)
+  - id: worktree_isolation_flag
+    description: "dispatch.sh -w flag spawns nucleus in isolated worktree"
+    command: "bash _spawn/dispatch.sh -w --dry-run solo n03 'smoke test'"
+    expect_exit: 0
+    expect_contains: "worktree"
+
+  # Native hooks wired (Boris-ism #4-8)
+  - id: native_hooks_settings
+    description: ".claude/settings.json has PostToolUse/PostCompact/SessionStart/Stop hooks"
+    command: "python -c \"import json; s=json.load(open('.claude/settings.json')); assert all(k in s.get('hooks',{}) for k in ['PostToolUse','PostCompact','SessionStart','Stop'])\""
+    expect_exit: 0
+
+  # .mcp.json consolidated root (Boris-ism #9)
+  - id: mcp_root_exists
+    description: "Root .mcp.json exists as single source of truth"
+    command: "ls .mcp.json"
+    expect_exit: 0
+
+  # Permissions template available (Boris-ism #10)
+  - id: permissions_template
+    description: ".claude/nucleus-settings/_template.json exists for new nuclei"
+    command: "python -c \"import json; json.load(open('.claude/nucleus-settings/_template.json'))\""
+    expect_exit: 0
+
+  # --bare startup (Boris-ism #11)
+  - id: bare_flag_honored
+    description: "cex_run.py --bare skips KC index + memory load"
+    command: "python _tools/cex_run.py --bare --dry-run"
+    expect_exit: 0
+
+  # /simplify skill (Boris-ism #12)
+  - id: simplify_skill_present
+    description: ".claude/skills/simplify.md + .cex/skills/simplify.md both exist"
+    command: "test -f .claude/skills/simplify.md && test -f .cex/skills/simplify.md"
+    expect_exit: 0
+
+  # /batch worktree (Boris-ism #15)
+  - id: batch_tmux_mode
+    description: "dispatch.sh --tmux flag works with -w"
+    command: "bash _spawn/dispatch.sh --help"
+    expect_exit: 0
+    expect_contains: "tmux"
+
+  # --auto-accept env propagation (Boris-ism #18)
+  - id: auto_accept_env
+    description: "CEX_AUTO_ACCEPT=1 propagates through boot wrappers"
+    command: "grep -l CEX_AUTO_ACCEPT boot/n0*.ps1"
+    expect_exit: 0
+
+  # swarm dispatch (Boris-ism #19)
+  - id: swarm_dispatch
+    description: "dispatch.sh swarm <kind> <N> command registered"
+    command: "bash _spawn/dispatch.sh --help"
+    expect_exit: 0
+    expect_contains: "swarm"
+
+  # verify skill runs the unified chain (D1 of this mission)
+  - id: verify_chain_present
+    description: "verify skill declares bun||npm||pytest unified chain"
+    command: "grep -E 'bun.*npm.*pytest|pytest.*bun' .claude/skills/verify.md"
+    expect_exit: 0
+
+  # boot_gen emits isolation marker (D3 of this mission)
+  - id: boot_gen_isolation_marker
+    description: "cex_boot_gen.py regenerates PS1 with isolation: worktree header"
+    command: "grep -l '# isolation: worktree' boot/n03.ps1"
+    expect_exit: 0
+
+# --- Gate (all enabled runtimes must pass all checks) --------------------
+gate:
+  pass_threshold: 1.0             # 100% of checks must pass per runtime
+  min_runtimes_required: 2        # at least claude + 1 other
+  timeout_per_check_sec: 60
+  timeout_total_sec: 900
+
+# --- Reporting -----------------------------------------------------------
+report:
+  output: ".cex/experiments/results.tsv"
+  columns: [timestamp, runtime, check_id, status, duration_ms, error]
+  append: true
+
+# --- Post-run ------------------------------------------------------------
+on_pass:
+  - "echo BORIS_MERGE smoke: all runtimes green"
+on_fail:
+  - "python _tools/cex_signal_watch.py --archive-failure smoke_boris_merge"
+  - "echo See .cex/experiments/results.tsv for per-check diagnostics"

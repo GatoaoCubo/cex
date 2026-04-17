@@ -1,0 +1,56 @@
+kind: collaboration
+id: bld_collaboration_training_method
+pillar: P12
+llm_function: COLLABORATE
+quality: null
+title: Collaboration Training Method
+version: 1.0.0
+author: n05_builder
+tags:
+- training_method
+- collaboration
+- P12
+- builder
+tldr: 'Collaboration patterns for training-method-builder: upstream/downstream dependencies and crew integration.'
+domain: training_method construction
+created: '2026-04-13'
+updated: '2026-04-13'
+density_score: 0.86
+upstream_dependencies_what_i_need: '| Artifact | From | When |
+
+  |----------|------|------|
+
+  | model_architecture | P02 / N03 | To understand target model structure |
+
+  | knowledge_card (domain) | P01 / N04 | Domain-specific training conventions |
+
+  | dataset documentation | P01 / N04 | Dataset format, size, preprocessing |'
+downstream_products_what_i_produce: '| Artifact | To | Purpose |
+
+  |----------|-----|---------|
+
+  | training_method | P02 | Paradigm specification for model training |
+
+  | Informs finetune_config | P02 / N03 | Concrete job uses this paradigm |
+
+  | Informs model_card | P02 / N04 | Model docs reference training approach |'
+crew_roles: '| Nucleus | Role | Interaction |
+
+  |---------|------|------------|
+
+  | N03 Builder | Creates the artifact | Receives handoff with training domain + model type |
+
+  | N01 Intelligence | Provides research context | Feeds training trends, dataset benchmarks |
+
+  | N04 Knowledge | Provides domain KCs | Injects learning paradigm conventions |
+
+  | N05 Operations | Validates and deploys | Runs doctor + hooks on final artifact |'
+handoff_format: "When N07 dispatches to N03 for a training_method build:\nBuild: training_method for [domain]\nKind: training_method\n\
+  Pillar: P02\nContext:\n  - Model architecture: [link or description]\n  - Target task: [classification/generation/alignment/etc.]\n\
+  \  - Compute budget: [available hardware]\n  - Dataset: [source and format]\nRead: archetypes/builders/training-method-builder/\
+  \ (all 13 ISOs)\nOutput: P02_model/training_methods/p02_tm_[domain].md"
+signal_protocol: 'After completion:
+
+  from _tools.signal_writer import write_signal
+
+  write_signal(''n03'', ''complete'', 9.0)'

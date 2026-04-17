@@ -1,0 +1,27 @@
+kind: collaboration
+id: bld_collaboration_onboarding_flow
+pillar: P12
+llm_function: COLLABORATE
+purpose: How onboarding_flow-builder works in crews with other builders
+quality: null
+title: Collaboration Onboarding Flow
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- onboarding_flow
+- builder
+- collaboration
+tldr: How onboarding_flow-builder works in crews with other builders
+domain: onboarding_flow construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+crew_role: Orchestrates activation steps, validates prerequisites, and triggers system readiness checks for new users or entities.
+receives_from: "| Builder       | What                  | Format      |  \n|---------------|-----------------------|-------------|\
+  \  \n| User Onboarding | Initial user data     | JSON        |  \n| Config Service  | Activation rules      | YAML     \
+  \   |  \n| Auth Service    | Authentication token  | JWT         |"
+produces_for: "| Builder         | What                    | Format      |  \n|-----------------|-------------------------|-------------|\
+  \  \n| User Profile    | Activated user state    | JSON        |  \n| Notification    | Onboarding confirmation | Email\
+  \       |  \n| Analytics       | Activation event        | Event       |"
+boundary: Does NOT handle long-term user data storage (User Profile Service), authentication (Auth Service), or post-activation
+  workflows (Workflow Engine).

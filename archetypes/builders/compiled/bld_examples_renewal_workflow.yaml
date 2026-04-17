@@ -1,0 +1,75 @@
+kind: examples
+id: bld_examples_renewal_workflow
+pillar: P07
+llm_function: GOVERN
+purpose: Golden and anti-examples of renewal_workflow artifacts
+quality: null
+title: Examples Renewal Workflow
+version: 1.0.0
+author: wave6_n06
+tags:
+- renewal_workflow
+- builder
+- examples
+- renewal
+- GRR
+- Gainsight
+- Salesforce
+tldr: Golden and anti-examples of renewal_workflow artifacts
+domain: renewal_workflow construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+golden_example: "---\nid: p12_rw_acme_corp_2026.yaml\nkind: renewal_workflow\npillar: P12\ntitle: \"Acme Corp Renewal Workflow\
+  \ -- 2026-06-30\"\ncontract_id: \"SF-OPP-2024-0892\"\nrenewal_stage: 90_day\ndays_to_renewal: 91\nGRR_impact: full\nmulti_year_flag:\
+  \ true\ncurrent_ARR: \"$240,000\"\nrenewal_ARR: \"$252,000\"\nhealth_score: 78\nprice_increase_pct: \"5%\"\nauto_renewal:\
+  \ true\nnotice_period_days: 30\nquality: null\n---\n\n# 90-Day Stage (Owner: CSM - Sarah Chen)\nTasks:\n  - Send renewal\
+  \ intent email (relationship-first, no price discussion)\n  - Review health score 78 -- above threshold, no escalation needed\n\
+  \  - Flag for multi-year: tenure 3yr + health 78 -- present 2yr offer at 60-day\n  - Confirm economic buyer (CTO - James\
+  \ Liu) and procurement contact (Tom Walsh)\nAutomation: Gainsight CTA \"Renewal 90 Days\" fired 2026-04-01\n\n# Price Increase\
+  \ Playbook\nAnnouncement: 60-day stage -- 5% uplift ($240K -> $252K)\nCSM Discount Authority: up to 2% ($5,040 max)\nManager\
+  \ Discount Authority: up to 4% ($9,600 max)\nVP Discount Authority: up to 5% (full waiver)\n\n# GRR Model\n| Scenario  \
+  \   | ARR Impact | Notes                   |\n|--------------|------------|-------------------------|\n| Full Renewal |\
+  \ $252,000   | 5% uplift applied       |\n| Contraction  | -$48,000   | Remove 20 seats risk    |\n| Churn        | -$240,000\
+  \  | Full loss scenario      |\n| Net GRR      | 95%+       | Full renewal expected   |"
+anti_example_1_missing_escalation_triggers: '---
+
+  kind: renewal_workflow
+
+  renewal_stage: 90_day
+
+  ---
+
+  # Stages
+
+  90-day: Send email, check in with customer
+
+  60-day: Send proposal
+
+  30-day: Try to close
+
+  Escalation: Escalate if needed
+
+  Why it fails: "If needed" is not an escalation trigger. There is no health score threshold, no named escalation owner, no
+  SLA. CSMs will not know when or to whom to escalate. High-risk renewals will slip through without executive involvement.'
+anti_example_2_generic_compliance_language: 'auto_renewal: true
+
+  notice_period_days: 30
+
+  Without specifying jurisdiction, "30 days" may be non-compliant. California requires 30 days for auto-renewal. EU GDPR may
+  require different notice. Australia has its own consumer law requirements. Generic notice periods create legal exposure.'
+anti_example_3_expansion_play_misclassified_as_renewal: '---
+
+  kind: renewal_workflow
+
+  title: "Acme Corp Renewal and Upsell"
+
+  ---
+
+  # Renewal
+
+  Renew the current contract AND add 20 seats at renewal.
+
+  Why it fails: Seat upsell is an expansion_play, not a renewal_workflow. Renewal workflows protect existing ARR (GRR). Expansion
+  plays grow net-new ARR within existing accounts (NRR > 100%). Conflating the two creates accountability confusion between
+  CS (owns renewal) and AE (owns expansion).'

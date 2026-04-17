@@ -1,0 +1,178 @@
+kind: quality_gate
+id: bld_quality_gate_agent_grounding_record
+pillar: P11
+llm_function: GOVERN
+purpose: Define hard gates H01-H08 and soft scoring dimensions for agent_grounding_record quality control
+quality: null
+title: Agent Grounding Record -- Quality Gate
+version: 1.0.0
+author: wave7_n05
+tags:
+- agent_grounding_record
+- builder
+- quality_gate
+tldr: 8 hard gates (all must pass) + 5D soft scoring targeting >= 9.0 overall for compliance-grade provenance
+domain: agent_grounding_record construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+scoring_overview: '| Layer       | Weight | Method                                                   |
+
+  |-------------|--------|----------------------------------------------------------|
+
+  | Structural  | 30%    | Hard gate pass/fail count (H01-H08, must all pass)      |
+
+  | Rubric      | 30%    | 5D dimension scoring (D1-D5 weighted)                    |
+
+  | Semantic    | 40%    | LLM evaluation when structural + rubric score >= 8.5    |
+
+  | Target      | --     | >= 9.0 overall for production-grade grounding record     |
+
+
+  A record that fails ANY hard gate receives a score of 0.0 regardless of rubric or semantic scores.'
+hard_gates_h01_h08: 'ALL hard gates must pass. One FAIL = record is invalid = do not publish.
+
+
+  | Gate | Field / Check                  | Pass Condition                                                         | Fail
+  Action                                          |
+
+  |------|-------------------------------|-------------------------------------------------------------------------|------------------------------------------------------|
+
+  | H01  | Frontmatter YAML              | Parses without error; all required frontmatter keys present             | Return
+  to F6, fix YAML syntax                        |
+
+  | H02  | Artifact ID naming pattern    | Matches ^p10_gr_[a-z0-9_]+\.md$                                        | Rename
+  file to match pattern before scoring          |
+
+  | H03  | kind field                    | Exactly "agent_grounding_record" (string match, no whitespace)          | Fix frontmatter
+  kind field                           |
+
+  | H04  | inference_id present          | Non-empty string matching UUIDv4 pattern                               | Generate
+  new UUIDv4; do not reuse existing IDs       |
+
+  | H05  | output_hash present           | 64 lowercase hex characters (SHA-256)                                  | Recompute
+  from raw output; this gate never waives    |
+
+  | H06  | otel_span_id present          | Non-empty string; 16 hex chars (W3C format) preferred                  | Verify
+  OTel instrumentation is active; retrieve span |
+
+  | H07  | timestamp format              | ISO 8601 parseable with timezone (Z or +/-HH:MM)                       | Reformat
+  timestamp; epoch integers are not accepted  |
+
+  | H08  | model.id present              | Non-empty string identifying the model                                 | Retrieve
+  from inference session metadata             |'
+hard_gate_failure_reference: '| Gate | Most Common Cause                             | Prevention                                                   |
+
+  |------|-----------------------------------------------|--------------------------------------------------------------|
+
+  | H01  | Copy-paste corruption in frontmatter YAML     | Validate YAML before finalizing                              |
+
+  | H02  | Wrong naming prefix (e.g. p01_ instead of p10_) | Check config ISO for naming convention before writing ID  |
+
+  | H03  | kind typo or wrong kind for this builder      | Load bld_manifest first; kind is agent_grounding_record      |
+
+  | H04  | Missing inference_id or copied from prior run | Generate fresh UUIDv4 at session start                       |
+
+  | H05  | Output hash computed after post-processing    | Hash the raw output BEFORE any formatting or truncation      |
+
+  | H06  | OTel not instrumented for this inference path | Add OTel GenAI semconv instrumentation to the inference layer|
+
+  | H07  | Timezone missing from timestamp               | Always use UTC (Z suffix) or explicit offset                 |
+
+  | H08  | Model ID not captured from provider response  | Log model ID from every API response header or body          |'
+soft_scoring_dimensions_d1_d5: '| Dim | Name                    | Weight | Scoring Criteria                                                              |
+
+  |-----|-------------------------|--------|-------------------------------------------------------------------------------|
+
+  | D1  | Provenance completeness | 0.30   | All required fields populated; no silent nulls; optional fields documented   |
+
+  | D2  | RAG-chunk coverage      | 0.25   | Every chunk has source_url AND content_hash; retrieval_score recorded         |
+
+  | D3  | Tool-call traceability  | 0.25   | Every tool-call has input_hash + output_hash + timestamp; status explicit    |
+
+  | D4  | C2PA integration        | 0.10   | c2pa_manifest_ref present (URI or explicit null); not omitted silently        |
+
+  | D5  | Downstream tracking     | 0.10   | downstream_use set; grounding_coverage_pct computed (not defaulted to 1.0)   |'
+d1_provenance_completeness_rubric: '| Score | Criteria                                                                                        |
+
+  |-------|-------------------------------------------------------------------------------------------------|
+
+  | 10    | All required fields present; all optional fields documented (null or value); model-signature included |
+
+  | 8-9   | All required fields present; most optional fields documented                                    |
+
+  | 6-7   | All required fields present; several optional fields silently omitted                           |
+
+  | 4-5   | One required field missing or null where value expected                                        |
+
+  | 0-3   | Multiple required fields missing; record is structurally incomplete                            |'
+d2_rag_chunk_coverage_rubric: '| Score | Criteria                                                                                        |
+
+  |-------|-------------------------------------------------------------------------------------------------|
+
+  | 10    | Every chunk has source_url, content_hash, retrieval_score, chunk_id; no gaps                   |
+
+  | 8-9   | All chunks have source_url and content_hash; retrieval_score missing on <= 1 chunk             |
+
+  | 6-7   | All chunks have source_url; content_hash missing on some chunks                                |
+
+  | 4-5   | Some chunks missing source_url (any missing source_url is a severe provenance failure)         |
+
+  | 0-3   | Chunks present but source_urls absent; output is untraceable                                   |'
+d3_tool_call_traceability_rubric: '| Score | Criteria                                                                                        |
+
+  |-------|-------------------------------------------------------------------------------------------------|
+
+  | 10    | Every tool-call has input_hash, output_hash, timestamp, duration_ms, status                    |
+
+  | 8-9   | All tool-calls have input_hash and output_hash; duration_ms missing on <= 1                    |
+
+  | 6-7   | All tool-calls have hashes; timestamps missing on some                                         |
+
+  | 4-5   | Some tool-calls missing output_hash; tool effects are partially unverifiable                   |
+
+  | 0-3   | Tool calls logged without hashes; invocations are unverifiable                                 |'
+d4_c2pa_integration_rubric: '| Score | Criteria                                                                                        |
+
+  |-------|-------------------------------------------------------------------------------------------------|
+
+  | 10    | c2pa_manifest_ref is a valid URI pointing to an accessible C2PA manifest                       |
+
+  | 8     | c2pa_manifest_ref is explicitly null and a comment explains why C2PA is not active             |
+
+  | 6     | c2pa_manifest_ref is null with no explanation                                                  |
+
+  | 0-3   | c2pa_manifest_ref field is entirely omitted from the record                                    |'
+d5_downstream_tracking_rubric: '| Score | Criteria                                                                                        |
+
+  |-------|-------------------------------------------------------------------------------------------------|
+
+  | 10    | downstream_use set; grounding_coverage_pct computed from actual claim analysis                 |
+
+  | 8     | downstream_use set; grounding_coverage_pct estimated with methodology noted                    |
+
+  | 6     | downstream_use set; grounding_coverage_pct is 0.0 (conservative but honest)                   |
+
+  | 0-3   | downstream_use missing or grounding_coverage_pct defaulted to 1.0 without verification        |'
+score_interpretation: '| Score Range | Interpretation                       | Action                                     |
+
+  |-------------|--------------------------------------|--------------------------------------------|
+
+  | 9.0 - 10.0  | Production-grade grounding record    | Publish; link to C2PA manifest if applicable|
+
+  | 8.0 - 8.9   | Acceptable; minor gaps               | Publish with note; address gaps in next run |
+
+  | 7.0 - 7.9   | Below standard; significant gaps     | Do not publish; return to F6 for revision  |
+
+  | < 7.0       | Compliance failure                   | Reject; investigate data capture pipeline  |'
+scoring_commands: '# Score an artifact
+
+  python _tools/cex_score.py --apply p10_gr_example.md
+
+  # Validate schema fields before scoring
+
+  python _tools/cex_compile.py p10_gr_example.md
+
+  # Check all P10 grounding records
+
+  python _tools/cex_doctor.py --pillar P10'

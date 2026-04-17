@@ -29,6 +29,7 @@ observation_types: [user, feedback, project, reference]
 quality: 9.2
 title: "Memory Trace Config"
 density_score: 0.90
+llm_function: INJECT
 ---
 ## Summary
 Tracing failures cluster into three categories: storage explosion (capturing everything without sampling or retention), privacy violations (prompts with PII captured and stored indefinitely), and debugging blindness (traces without 8F function mapping that show the agent did something but not what pipeline stage failed). Privacy-first configuration with selective sampling, tiered retention, and function-level spans addresses all three.

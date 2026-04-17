@@ -40,7 +40,7 @@ density_score: 0.90
 8. Write Content Strategy: mix ratios, calendar template, rotation rules
 9. Write Quality Gates: caption length, hashtag count, image dimensions, score threshold
 10. Write Scheduling: cron expression format, timezone handling, retry policy
-11. Ensure zero hardcoded company names — ALL via {{variable}}
+11. Ensure zero hardcoded company names — ALL via `{{variable}}`
 
 ## Phase 3: VALIDATE
 1. Check all 10 pipeline steps are documented with input/output

@@ -1,0 +1,56 @@
+kind: output_template
+id: bld_output_template_changelog
+pillar: P05
+llm_function: PRODUCE
+purpose: Template with vars for changelog production
+quality: null
+title: Output Template Changelog
+version: 1.1.0
+author: wave1_builder_gen_v2
+tags:
+- changelog
+- builder
+- output_template
+tldr: Keep a Changelog format template for changelog artifact production
+domain: changelog construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+unreleased: <!-- In-progress changes not yet versioned -->
+semver_yyyy_mm_dd: ''
+added: '- {{added_entry_1}} (#{{issue_or_pr_id}})
+
+  - {{added_entry_2}}
+
+
+  <!-- Added: new capabilities, endpoints, fields, or behaviors -->'
+changed: '- {{changed_entry_1}} (#{{issue_or_pr_id}})
+
+
+  <!-- Changed: modifications to existing behavior, not new features -->'
+deprecated: '- {{deprecated_entry_1}} -- removal scheduled for {{target_version}}
+
+
+  <!-- Deprecated: features still present but slated for removal -->'
+removed: '- BREAKING: {{removed_entry_1}} -- migrate using {{migration_guide_link}}
+
+
+  <!-- Removed: features deleted in this release -->'
+fixed: '- {{fixed_entry_1}} (fixes #{{issue_id}})
+
+  - {{fixed_entry_2}}
+
+
+  <!-- Fixed: bug fixes, regression patches -->'
+security: '- {{security_entry_1}} (CVE-{{cve_id}}, affects {{versions_range}})
+
+
+  <!-- Security: vulnerability patches; always include CVE ID if available -->'
+migration_guide_major_versions_only: 'From {{prev_major}}.x to {{semver}}:
+
+  1. {{migration_step_1}}
+
+  2. {{migration_step_2}}
+
+  3. Verify with: `{{verification_command}}`'
+prev_semver_prev_date: <!-- Previous release entries follow same structure -->

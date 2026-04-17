@@ -1,0 +1,57 @@
+kind: collaboration
+id: bld_collaboration_episodic_memory
+pillar: P12
+llm_function: COLLABORATE
+purpose: How episodic-memory-builder works in crews with other builders
+quality: 8.2
+title: Collaboration Episodic Memory
+version: 1.0.0
+author: n03_builder
+tags:
+- episodic_memory
+- builder
+- collaboration
+tldr: episodic-memory-builder is the long-term episode store in P10 memory crews.
+domain: episodic memory construction
+created: '2026-04-17'
+updated: '2026-04-17'
+density_score: 0.9
+my_role_in_crews: I am a SPECIALIST. I design the long-term episode store for an agent's interaction history. I do not store
+  entity facts. I do not compress context. I do not hold current task state. I provide the temporally-indexed episode schema
+  that enables agents to recall what happened in past interactions.
+crew_compositions: ''
+crew_p10_memory_system: "  1. working-memory-builder -> \"task context (promotes episodes here on complete)\"\n  2. episodic-memory-builder\
+  \ -> \"long-term episode store\"\n  3. entity-memory-builder -> \"long-term entity facts (parallel store)\"\n  4. memory-summary-builder\
+  \ -> \"compressed context from this episode store\""
+handoff_protocol: ''
+i_receive:
+- 'seeds: owner (agent/nucleus ID), expected interaction domain, episode retention needs'
+i_produce:
+- episodic_memory artifact (.md)
+- 'committed to: `N0x_{domain}/P10_memory/p10_ep_{scope}.md`'
+builders_i_depend_on: '| Builder | Why |
+
+  |---------|-----|
+
+  | working-memory-builder | Defines promotion sources that feed this store |
+
+  | entity-memory-builder | Entity facts are sibling kind; coordinate to avoid duplication |'
+builders_that_depend_on_me: '| Builder | Why |
+
+  |---------|-----|
+
+  | memory-summary-builder | Compresses accumulated episodes into shorter context blocks |
+
+  | agent-builder | Agents declare episodic_memory as a context source |
+
+  | instruction-builder | Instructions may reference past episode outcomes |'
+conflict_resolution: '| Scenario | Resolution |
+
+  |----------|-----------|
+
+  | Episode vs entity fact | Episodes are temporal events; entity facts are timeless attributes. Keep separate. |
+
+  | Episode vs memory_summary | Episodes = raw records; memory_summary = compressed output of episodes. Sequential, not competing.
+  |
+
+  | Episode store vs session_state | episodic = long-term, persists across sessions. session_state = in-session only. |'

@@ -1,0 +1,86 @@
+id: p02_nd_n06.md
+kind: nucleus_def
+pillar: P02
+nucleus_id: N06
+role: commercial
+sin_lens: Strategic Greed (Avareza Estrategica)
+cli_binding: claude
+model_tier: sonnet
+model_specific: claude-sonnet-4-6
+context_tokens: 200000
+boot_script: boot/n06.ps1
+agent_card_path: N06_commercial/agent_card_n06.md
+pillars_owned: '| Pillar | Domain | Sample Kinds |
+
+  |--------|--------|--------------|
+
+  | P11 (shared) | feedback | content_monetization |
+
+  | P12 (shared) | orchestration | team_charter |'
+crew_templates_exposed: '| Template | Role in Crew | Inputs | Outputs |
+
+  |----------|--------------|--------|---------|
+
+  | pricing_refresh | pricing_strategist | market intel + product spec | pricing tiers |
+
+  | launch_monetization | revenue_strategist | launch package | monetization plan |
+
+  | course_bundle | curriculum_designer | audience + product | course outline |'
+domain_agents: '| Agent | Purpose | Path |
+
+  |-------|---------|------|
+
+  | agent_pricing_strategist | Tier + bundle design | `N06_commercial/P02_model/` |
+
+  | agent_funnel_optimizer | Conversion funnel | `N06_commercial/P02_model/` |'
+fallback_cli: codex
+title: Nucleus Def N06
+version: 1.0.0
+author: n07_crewwiring
+domain: pricing, courses, funnels, monetization
+quality: 8.9
+tags:
+- nucleus_def
+- n06
+- commercial
+- composable
+tldr: 'N06 is the commercial nucleus: pricing, courses, funnels, CLV. Also owns team_charter (P12 GOVERN).'
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.87
+identity: '| Field | Value |
+
+  |-------|-------|
+
+  | Nucleus ID | N06 |
+
+  | Role | commercial |
+
+  | Sin Lens | Strategic Greed (Avareza Estrategica) |
+
+  | CLI Binding | claude |
+
+  | Model Tier | sonnet |
+
+  | Model | claude-sonnet-4-6 |
+
+  | Context | 200K tokens |
+
+  | Boot Script | `boot/n06.ps1` |
+
+  | Agent Card | `N06_commercial/agent_card_n06.md` |'
+boot_contract:
+- 'Boot file: `boot/n06.ps1`'
+- 'Task source: `.cex/runtime/handoffs/n06_task.md`'
+- 'Signal: `write_signal(''n06'', ''complete'', {score})`'
+composability: '| Direction | Nucleus | What Flows |
+
+  |-----------|---------|-----------|
+
+  | outbound | N02 | pricing data for copy |
+
+  | outbound | N07 | charter gate outcomes |
+
+  | inbound | N01 | competitor pricing |
+
+  | inbound | N02 | launch copy |'

@@ -81,23 +81,23 @@ Produces a structured knowledge card for any topic within a specified domain. Re
 ## Template Body
 ```
 You are a knowledge synthesis expert. Produce a knowledge card for the following topic.
-Topic: {{topic}}
-Domain: {{domain}}
-Audience level: {{audience}}
-Maximum sections: {{max_sections}}
-Include examples: {{include_examples}}
-Source references: {{source_refs}}
+Topic: `{{topic}}`
+Domain: `{{domain}}`
+Audience level: `{{audience}}`
+Maximum sections: `{{max_sections}}`
+Include examples: `{{include_examples}}`
+Source references: `{{source_refs}}`
 Structure your output as follows:
 1. TLDR (1 sentence)
 2. Core Definition (2-3 sentences, precise, domain-apownte)
-3. Key Concepts (up to {{max_sections}} bullet points)
-4. Relationships (how {{topic}} connects to adjacent concepts in {{domain}})
-5. Common Misconceptions (2-3 items, audience-calibrated for {{audience}})
+3. Key Concepts (up to `{{max_sections}}` bullet points)
+4. Relationships (how `{{topic}}` connects to adjacent concepts in `{{domain}}`)
+5. Common Misconceptions (2-3 items, audience-calibrated for `{{audience}}`)
 {{#include_examples}}
-6. Concrete Examples (2-3 examples grounded in {{domain}})
+6. Concrete Examples (2-3 examples grounded in `{{domain}}`)
 {{/include_examples}}
-7. References: {{source_refs}}
-Calibrate terminology and depth for a {{audience}}-level reader in {{domain}}.
+7. References: `{{source_refs}}`
+Calibrate terminology and depth for a `{{audience}}`-level reader in `{{domain}}`.
 ```
 ## Quality Gates
 | Gate | Status | Notes |

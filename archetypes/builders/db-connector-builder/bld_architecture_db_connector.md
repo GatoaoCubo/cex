@@ -17,6 +17,8 @@ density_score: 0.90
 ---
 
 ## Component Inventory
+
+This ISO addresses the database connector domain: connection pooling, query execution, and SQL dialect handling.
 | Name | Role | Owner | Status |
 |------|------|-------|--------|
 | outbound_endpoint | Sends data to external service — method, path, payload schema | connector | required |

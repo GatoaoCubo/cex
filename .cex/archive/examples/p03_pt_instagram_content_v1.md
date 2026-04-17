@@ -1,0 +1,215 @@
+---
+id: p03_pt_instagram_content_v1
+kind: prompt_template
+pillar: P03
+title: "Instagram Content Generator"
+version: "1.0.0"
+created: "2026-04-12"
+updated: "2026-04-12"
+author: prompt-template-builder
+variables:
+  - name: BRAND_NAME
+    type: string
+    required: true
+    default: null
+    description: Name of the brand or creator account producing the content
+  - name: TOPIC
+    type: string
+    required: true
+    default: null
+    description: Subject or theme of this specific post (e.g., "dicas de produtividade", "lancamento do produto X")
+  - name: FORMAT
+    type: string
+    required: true
+    default: null
+    description: "Instagram format: carrossel | reels | post_simples | stories"
+  - name: TONE
+    type: string
+    required: false
+    default: "educativo"
+    description: "Tone of voice: inspiracional | educativo | promocional | humor"
+  - name: CTA
+    type: string
+    required: false
+    default: "Salve esse post!"
+    description: Call-to-action appended after the caption body
+  - name: HASHTAG_COUNT
+    type: integer
+    required: false
+    default: 10
+    description: Number of hashtags to append (mix of niche and broad)
+variable_syntax: "mustache"
+composable: false
+domain: social-media
+quality: 9.0
+tags: [instagram, social-media, content, copywriting, n02, marketing]
+tldr: "Generates format-aware Instagram copy for any brand and topic with configurable tone, CTA, and hashtag volume."
+keywords: [instagram, content, copywriting, carrossel, reels, stories, social, hook, cta]
+density_score: 0.87
+
+---
+
+# Instagram Content Generator
+
+## Purpose
+
+Produces ready-to-publish Instagram copy for a given brand and topic, adapting structure to the chosen format (carrossel, reels, post_simples, or stories). Reuse scope: any brand publishing regularly on Instagram — invoke once per post, varying `BRAND_NAME`, `TOPIC`, `FORMAT`, and `TONE` to generate distinct, on-brand pieces from the same mold.
+
+## Variables Table
+
+| Name | Type | Required | Default | Description |
+|---|---|---|---|---|
+| BRAND_NAME | string | true | null | Name of the brand or creator account |
+| TOPIC | string | true | null | Subject or theme of this specific post |
+| FORMAT | string | true | null | Instagram format: carrossel, reels, post_simples, or stories |
+| TONE | string | false | educativo | Tone of voice: inspiracional, educativo, promocional, or humor |
+| CTA | string | false | Salve esse post! | Call-to-action appended after the caption body |
+| HASHTAG_COUNT | integer | false | 10 | Number of hashtags to append |
+
+## Template Body
+
+```
+Você é um copywriter especialista em Instagram para a marca {{BRAND_NAME}}.
+Crie conteúdo no formato {{FORMAT}} sobre o tema: {{TOPIC}}.
+Tom de voz: {{TONE}}.
+
+REGRAS OBRIGATÓRIAS:
+- A primeira linha (hook) deve parar o scroll: use pergunta, dado surpreendente ou afirmação ousada
+- A primeira palavra NÃO pode ser o nome da marca
+- Emojis: máximo 4 (exceto quando tom=humor)
+- Sem frases genéricas de abertura ("Olá seguidores!", "Hoje vamos falar sobre...")
+- Linguagem natural, sem jargão corporativo
+
+INSTRUÇÕES POR FORMATO:
+
+Se FORMAT = carrossel:
+  Slide 1: headline (até 7 palavras) + subtítulo (até 15 palavras)
+  Slides 2-8: um ponto por slide — título + 2-3 linhas de texto
+  Slide final: recapitulação + {{CTA}}
+  Legenda: hook (2 linhas visíveis) + desenvolvimento + {{CTA}}
+
+Se FORMAT = reels:
+  Hook visual (0-3s): ação ou frase de impacto na tela
+  Roteiro (15-60s): estrutura — problema | solução | prova | chamada
+  Texto de sobreposição: máximo 6 palavras por frame
+  Legenda: hook + resumo do vídeo + {{CTA}}
+
+Se FORMAT = post_simples:
+  Legenda estrutura: hook (linha 1-2) | corpo (valor sobre {{TOPIC}}) | {{CTA}}
+  Limite: 2200 caracteres; primeiras 150 caracteres devem segurar a atenção
+  Quebras de linha para respiração visual (a cada 2-3 linhas)
+
+Se FORMAT = stories:
+  Sequência de 5 frames
+  Frame 1: pergunta ou provocação
+  Frames 2-4: um ponto por frame, máximo 15 palavras cada
+  Frame 5: {{CTA}} + sticker de enquete ou caixa de perguntas sugerida
+
+HASHTAGS:
+Gere exatamente {{HASHTAG_COUNT}} hashtags.
+Mix: 40% nicho específico + 40% categoria + 20% amplo.
+Bloco separado após a legenda.
+
+ENTREGUE:
+1. Legenda completa (pronta para copiar e colar)
+2. Estrutura de slides ou frames (para formatos visuais)
+3. Bloco de hashtags
+```
+
+## Quality Gates
+
+| Gate | Status | Notes |
+|---|---|---|
+| H01 id pattern | PASS | `p03_pt_instagram_content_v1` matches `^p03_pt_[a-z][a-z0-9_]+$` |
+| H02 required fields | PASS | id, kind, pillar, title, variables, quality all present |
+| H03 no undeclared vars | PASS | All `{{BRAND_NAME}}`, `{{TOPIC}}`, `{{FORMAT}}`, `{{TONE}}`, `{{CTA}}`, `{{HASHTAG_COUNT}}` declared in variables list |
+| H04 no unused vars | PASS | All 6 declared variables appear in template body |
+| H05 size <= 8192 bytes | PASS | ~3.1KB |
+| H06 valid syntax tier | PASS | variable_syntax: mustache, consistent throughout |
+| H07 var fields complete | PASS | All variables have name, type, required, default, description |
+| H08 body non-empty | PASS | Template body has 60+ lines of parameterized instructions |
+
+## Examples
+
+### Filled Example 1 — Carrossel, Tom Educativo
+
+**Variables:**
+```yaml
+BRAND_NAME: "Studio Fit"
+TOPIC: "3 erros que sabotam seu treino em casa"
+FORMAT: carrossel
+TONE: educativo
+CTA: "Salve para não esquecer!"
+HASHTAG_COUNT: 10
+```
+
+**Rendered Output:**
+```
+Você é um copywriter especialista em Instagram para a marca Studio Fit.
+Crie conteúdo no formato carrossel sobre o tema: 3 erros que sabotam seu treino em casa.
+Tom de voz: educativo.
+
+[REGRAS e INSTRUÇÕES aplicadas para carrossel]
+
+Slide 1: "Seu treino em casa está funcionando?"
+Subtítulo: "3 erros invisíveis que travam seus resultados"
+
+Slide 2: Erro 1 — Sem aquecimento
+"Pular o aquecimento reduz performance em até 20% e dobra o risco de lesão."
+
+Slide 3: Erro 2 — Séries sem controle de tempo
+"Descanso longo demais esfria o músculo. Ideal: 45-90 segundos entre séries."
+
+Slide 4: Erro 3 — Mesmo treino toda semana
+"Sem progressão de carga, seu corpo se adapta em 3-4 semanas e para de evoluir."
+
+Slide 5 (final): "Agora você sabe o que corrigir. Salve para não esquecer!"
+
+Legenda:
+Quantas vezes você treinou sem ver resultado? 🤔
+
+A maioria dos treinos em casa falha nos mesmos 3 pontos — e nenhum deles é falta de esforço.
+
+Deslize para descobrir o que está travando sua evolução.
+
+Salve para não esquecer!
+
+#treinoEmCasa #fitness #errosNoTreino #musculacao #saudeequalidade #studiofit #exercicioEmCasa #treino #saude #resultados
+```
+
+### Filled Example 2 — Reels, Tom Humor
+
+**Variables:**
+```yaml
+BRAND_NAME: "Cafeteria Grão"
+TOPIC: "tipos de pessoas na fila do café"
+FORMAT: reels
+TONE: humor
+CTA: "Marca quem você conhece aqui!"
+HASHTAG_COUNT: 8
+```
+
+**Rendered Output:**
+```
+[Aplicando FORMAT=reels e TONE=humor]
+
+Hook visual (0-3s): texto na tela — "Qual tipo é você? ☕"
+
+Roteiro:
+Problema: todo mundo se identifica com um arquétipo na fila do café
+Solução: apresentar os tipos de forma cômica
+Prova: situações reconhecíveis do cotidiano
+Chamada: interação via comentário
+
+Frames de sobreposição:
+"O Sobrevivente" | "O Especialista" | "O Indeciso" | "Você?"
+
+Legenda:
+Sem café não tem reunião que aguente. 😅
+
+5 tipos de pessoa que você SEMPRE encontra na fila — o 3 somos todos nós.
+
+Marca quem você conhece aqui!
+
+#cafe #coffeelover #humordobem #trabalho #cafeina #cafeteria #manha #coffetime
+```

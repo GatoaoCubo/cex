@@ -56,26 +56,26 @@ tldr: "{{dense_summary_max_160ch}}"
 density_score: {{0.85_to_1.00}}
 ```
 ## Identity
-{{director_name}} coordinates a {{N}}-builder mission for {{mission_goal}}.
-{{two_sentences_coordination_strategy_and_wave_rationale}}
+`{{director_name}}` coordinates a {{N}}-builder mission for `{{mission_goal}}`.
+`{{two_sentences_coordination_strategy_and_wave_rationale}}`
 ## Builders
 | Builder | Nucleus | Role |
 |---------|---------|------|
-| {{builder_1}} | {{nucleus}} | {{role_in_mission}} |
-| {{builder_2}} | {{nucleus}} | {{role_in_mission}} |
+| `{{builder_1}}` | {{nucleus}} | `{{role_in_mission}}` |
+| `{{builder_2}}` | {{nucleus}} | `{{role_in_mission}}` |
 ## Wave Topology
-Wave 1: {{wave_1_builders}} -> {{signal_gate_1}}
-Wave 2: {{wave_2_builders}} -> {{signal_gate_2}}
-{{additional_waves_if_needed}}
+Wave 1: `{{wave_1_builders}}` -> `{{signal_gate_1}}`
+Wave 2: `{{wave_2_builders}}` -> `{{signal_gate_2}}`
+`{{additional_waves_if_needed}}`
 ## Dispatch Config
-Mode: {{dispatch_mode}}. Signal check: {{signal_check}}. Timeout: {{seconds}}s per wave.
-Fallback: {{builder_1}}: {{action}}; {{builder_2}}: {{action}}.
+Mode: `{{dispatch_mode}}`. Signal check: {{signal_check}}. Timeout: `{{seconds}}`s per wave.
+Fallback: `{{builder_1}}`: {{action}}; {{builder_2}}: `{{action}}`.
 ## Routing
-1. Triggers: {{trigger_phrase_1}}, {{trigger_phrase_2}}
-2. Keywords: {{keyword_1}}, {{keyword_2}}, {{keyword_3}}
-3. NOT when: {{exclusion_1}}, {{exclusion_2}}
+1. Triggers: `{{trigger_phrase_1}}`, `{{trigger_phrase_2}}`
+2. Keywords: `{{keyword_1}}`, {{keyword_2}}, `{{keyword_3}}`
+3. NOT when: `{{exclusion_1}}`, `{{exclusion_2}}`
 ## Footer
-version: {{version}} | author: {{author}} | quality: null
+version: `{{version}}` | author: `{{author}}` | quality: null
 
 ## Properties
 

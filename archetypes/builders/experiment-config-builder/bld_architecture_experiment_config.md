@@ -1,0 +1,69 @@
+---
+kind: architecture
+id: bld_architecture_experiment_config
+pillar: P08
+llm_function: CONSTRAIN
+purpose: Component map of experiment_config -- inventory, dependencies, and architectural position
+quality: 9.1
+title: "Architecture Experiment Config"
+version: "1.0.0"
+author: n03_builder
+tags: [experiment_config, builder, architecture, P09]
+tldr: "Component map for experiment_config: variants, traffic splits, metrics, and dependencies on feature_flag and env_config."
+domain: "experiment config construction"
+created: "2026-04-13"
+updated: "2026-04-13"
+density_score: 0.90
+---
+## Component Inventory
+| Name | Role | Owner | Status |
+|------|------|-------|--------|
+| variants | List of all variants: control (baseline) + 1+ treatments | experiment-config-builder | required |
+| traffic_split | Allocation per variant as integer percentages summing to 100 | experiment-config-builder | required |
+| hypothesis | Falsifiable statement: if X then Y measured by Z | experiment-config-builder | required |
+| primary_metric | Single KPI that determines the winning variant | experiment-config-builder | required |
+| guardrail_metrics | Metrics that must not regress; breach pauses experiment | experiment-config-builder | required |
+| statistical_parameters | significance_threshold, MDE, sample_size_target, duration_days | experiment-config-builder | required |
+| lifecycle | Status (draft/running/paused/concluded), dates, decision criteria | experiment-config-builder | required |
+| segment | Audience scope: all, power_users, new_users, custom | experiment-config-builder | optional |
+| winning_variant | Populated on conclusion; references winning variant name | experiment-config-builder | optional |
+| metadata | id, version, pillar, author, created, updated | experiment-config-builder | required |
+
+## Dependency Graph
+```
+quality_gate (P11) --governs--> experiment_config (scoring rubric for experiment validity)
+experiment_config --produces--> feature_flag (P09) (winning variant promoted to permanent toggle)
+experiment_config --reads--> env_config (P09) (experiment may vary env variables between variants)
+experiment_config --consumed_by--> prompt_template (P03) (variant prompt templates injected per traffic group)
+experiment_config --consumed_by--> agent (P02) (agent reads experiment config to select active variant)
+experiment_config --consumed_by--> trace_config (P09) (observability traces tagged with experiment_id + variant)
+learning_record (P10) --receives_from--> experiment_config (concluded experiments feed learnings to memory)
+```
+
+| From | To | Type | Data |
+|------|----|------|------|
+| quality_gate | experiment_config | governs | scoring criteria for experiment validity |
+| experiment_config | feature_flag | produces | concluded winning variant promoted to permanent |
+| experiment_config | env_config | reads | variant-specific environment variables |
+| experiment_config | prompt_template | consumed_by | variant prompts selected by traffic group |
+| experiment_config | agent | consumed_by | active variant parameters per request |
+| experiment_config | trace_config | consumed_by | experiment_id and variant tag injected in traces |
+| experiment_config | learning_record | produces | findings, effect size, decision rationale |
+
+## Boundary Table
+| experiment_config IS | experiment_config IS NOT |
+|---------------------|--------------------------|
+| A temporary controlled trial comparing variants against a control | A feature_flag (P09) -- feature_flag is a permanent on/off toggle with rollout logic |
+| Defines traffic allocation, success metrics, and statistical thresholds | An env_config (P09) -- env_config catalogs deployment variables without variants |
+| Lifecycle-bounded: concludes when reaching significance + min runtime | A quality_gate (P11) -- quality_gate is a scoring rubric, not an experiment design |
+| Produces a winner that may graduate to feature_flag or env change | A prompt_template (P03) -- prompt_template is the variant content, not the experiment spec |
+| Governs statistical decisions (significance, MDE, sample size) | A runtime_rule (P09) -- runtime_rule governs behavioral limits like timeouts/retries |
+
+## Layer Map
+| Layer | Components | Purpose |
+|-------|------------|---------|
+| Definition | hypothesis, variants, traffic_split | What is being tested and how traffic flows |
+| Measurement | primary_metric, guardrail_metrics | What success and failure look like |
+| Statistics | significance_threshold, MDE, sample_size_target | When to conclude |
+| Lifecycle | status, duration_days, winning_variant | Temporal state management |
+| Safety | guardrail_metrics, quality_gate | Prevent degradation while optimizing |

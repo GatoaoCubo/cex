@@ -1,0 +1,75 @@
+kind: schema
+id: bld_schema_prompt_compiler
+pillar: P06
+llm_function: CONSTRAIN
+purpose: Formal schema -- SINGLE SOURCE OF TRUTH for prompt_compiler
+pattern: TEMPLATE derives from this. CONFIG restricts this.
+quality: null
+title: Schema Prompt Compiler
+version: 1.0.0
+author: n03_builder
+tags:
+- prompt_compiler
+- builder
+- schema
+- P03
+tldr: Schema defining all fields, structure, and constraints for prompt_compiler artifacts.
+domain: prompt_compiler construction
+created: '2026-04-12'
+updated: '2026-04-12'
+density_score: 0.92
+frontmatter_fields: '| Field | Type | Required | Default | Notes |
+
+  |-------|------|----------|---------|-------|
+
+  | id | string (p03_pc_{slug}) | YES | - | Namespace compliance |
+
+  | kind | literal "prompt_compiler" | YES | - | Type integrity |
+
+  | pillar | literal "P03" | YES | - | Pillar assignment |
+
+  | title | string | YES | - | Human-readable title |
+
+  | version | semver string | YES | "1.0.0" | Versioning |
+
+  | created | date YYYY-MM-DD | YES | - | Creation date |
+
+  | updated | date YYYY-MM-DD | YES | - | Last update |
+
+  | author | string | YES | - | Producer identity |
+
+  | domain | string | YES | - | Domain this compiler serves |
+
+  | coverage | integer | YES | - | Number of kinds covered |
+
+  | languages | list[string] | YES | - | Supported languages (e.g. [pt-br, en]) |
+
+  | quality | null | YES | null | Never self-score |
+
+  | tags | list[string], len >= 3 | YES | - | Must include "prompt_compiler" |
+
+  | tldr | string <= 160ch | YES | - | Dense summary |
+
+  | density_score | float 0.80-1.00 | OPT | - | Content density |'
+kind_resolution_entry: "entry:\n  kind: string (one of 124 registered kinds)\n  pillar: string (P01-P12)\n  nucleus: string\
+  \ (N01-N07)\n  patterns_en: list[string] (user input triggers in EN)\n  patterns_pt: list[string] (user input triggers in\
+  \ PT-BR)\n  verb: string (canonical action)\n  8f_emphasis: string (primary 8F function)\n  boundary: string (when NOT to\
+  \ pick this kind)"
+id_pattern: 'Regex: `^p03_pc_[a-z][a-z0-9_]+$` Rule: id MUST equal filename stem.'
+body_structure_required_sections:
+- '`## Preamble` -- what this artifact is and how to use it'
+- '`## Kind Resolution Table` -- all kinds mapped to user input patterns'
+- '`## Verb Resolution Table` -- user verbs to canonical actions'
+- '`## Ambiguity Resolution` -- protocol for multi-kind matches'
+- '`## Fallback Heuristics` -- handling unrecognized input'
+- '`## Nucleus Routing Matrix` -- kind-to-nucleus mapping'
+- '`## Behavioral Instructions` -- rules for LLM operating as prompt compiler'
+constraints:
+- 'max_bytes: 16384 (body only)'
+- 'naming: p03_pc_{slug}.md'
+- 'machine_format: yaml (frontmatter) + markdown (body)'
+- id == filename stem
+- 'quality: null always'
+- coverage MUST match actual kinds in Kind Resolution Table
+- languages MUST list all supported languages
+- Every kind in kinds_meta.json MUST appear in Kind Resolution Table

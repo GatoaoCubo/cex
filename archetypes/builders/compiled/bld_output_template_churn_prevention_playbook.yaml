@@ -1,0 +1,18 @@
+kind: output_template
+id: bld_output_template_churn_prevention_playbook
+pillar: P05
+llm_function: PRODUCE
+purpose: Template with vars for churn_prevention_playbook production
+quality: null
+title: Output Template Churn Prevention Playbook
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- churn_prevention_playbook
+- builder
+- output_template
+tldr: Template with vars for churn_prevention_playbook production
+domain: churn_prevention_playbook construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85

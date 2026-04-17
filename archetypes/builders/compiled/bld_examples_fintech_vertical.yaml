@@ -1,0 +1,41 @@
+kind: examples
+id: bld_examples_fintech_vertical
+pillar: P07
+llm_function: GOVERN
+purpose: Golden and anti-examples of fintech_vertical artifacts
+quality: null
+title: Examples Fintech Vertical
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- fintech_vertical
+- builder
+- examples
+tldr: Golden and anti-examples of fintech_vertical artifacts
+domain: fintech_vertical construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+golden_example_fintech_vertical_artifact: "---  \ntitle: \"Fintech Vertical: SOC2+PCI-DSS, KYC/AML, Fraud Detection\"  \n\
+  description: \"Integration of compliance, identity verification, and fraud prevention tools for a digital banking platform.\"\
+  \  \nuse_cases:  \n  - Real-time transaction monitoring  \n  - Onboarding of enterprise clients  \n  - Cross-border payment\
+  \ validation  \ncompliance_standards:  \n  - SOC2 Type II  \n  - PCI-DSS v4.0  \ntools:  \n  - Compliance: AWS Artifact\
+  \ (SOC2), Stripe (PCI-DSS)  \n  - KYC/AML: Trulio (KYC), Elliptic (AML)  \n  - Fraud Detection: Sift (fraud scoring), Feedzai\
+  \ (AI-based detection)  \nvendor: \"DigitalBank Inc.\"  \n---  \nBody:  \nDigitalBank Inc. leverages AWS Artifact for SOC2\
+  \ compliance, ensuring data integrity and confidentiality. Stripe handles PCI-DSS requirements for payment processing. Trulio\
+  \ automates KYC checks using ID verification and sanctions list screening. Elliptic integrates distributed-ledger AML monitoring\
+  \ for crypto transactions. Sift and Feedzai analyze user behavior and transaction patterns to detect fraud in real time.\
+  \ This stack ensures compliance, reduces onboarding time, and minimizes fraud losses.  "
+anti_example_1_incomplete_compliance_tooling: "---  \ntitle: \"Fintech Vertical: SOC2+PCI-DSS, KYC/AML, Fraud Detection\"\
+  \  \ndescription: \"Basic setup with missing compliance layers.\"  \nuse_cases:  \n  - \"Basic user onboarding\"  \ncompliance_standards:\
+  \  \n  - \"SOC2 (unverified)\"  \ntools:  \n  - KYC/AML: Onfido (no AML integration)  \n  - Fraud Detection: None  \nvendor:\
+  \ \"QuickPay Ltd.\"  \n---  \nBody:  \nQuickPay Ltd. uses Onfido for ID verification but lacks AML checks or fraud detection.\
+  \ SOC2 compliance is not formally validated. This leaves the platform vulnerable to money laundering and undetected fraud.\
+  \  \n## Why it fails  \nNo AML tooling or fraud detection violates core compliance and security requirements. SOC2 claims\
+  \ without verification are invalid.  "
+anti_example_2_over_reliance_on_single_vendor: "---  \ntitle: \"Fintech Vertical: SOC2+PCI-DSS, KYC/AML, Fraud Detection\"\
+  \  \ndescription: \"Single-vendor solution with no redundancy.\"  \nuse_cases:  \n  - \"Internal audit\"  \ntools:  \n \
+  \ - All: \"ComplyX (proprietary tool)\"  \nvendor: \"SecureFin Co.\"  \n---  \nBody:  \nSecureFin Co. uses ComplyX for SOC2,\
+  \ PCI-DSS, KYC, and fraud detection. However, ComplyX lacks third-party validation and has no backup systems.  \n## Why\
+  \ it fails  \nOver-reliance on a single vendor increases risk of outages, compliance gaps, and lack of independent audits.\
+  \ No redundancy violates best practices for critical fintech systems.  "

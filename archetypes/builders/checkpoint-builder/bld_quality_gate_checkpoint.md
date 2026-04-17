@@ -12,8 +12,8 @@ quality: 9.0
 tags: [quality-gate, checkpoint, P12, workflow, resume, state]
 tldr: "Pass/fail gate for checkpoint artifacts: workflow_ref presence, state schema, TTL declaration, resume protocol, and lifecycle policy."
 density_score: 0.90
+llm_function: GOVERN
 ---
-
 # Gate: checkpoint
 ## Definition
 | Field | Value |

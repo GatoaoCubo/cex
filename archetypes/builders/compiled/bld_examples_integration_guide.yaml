@@ -1,0 +1,61 @@
+kind: examples
+id: bld_examples_integration_guide
+pillar: P07
+llm_function: GOVERN
+purpose: Golden and anti-examples of integration_guide artifacts
+quality: null
+title: Examples Integration Guide
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- integration_guide
+- builder
+- examples
+tldr: Golden and anti-examples of integration_guide artifacts
+domain: integration_guide construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+golden_example: '--- title: "Stripe + AWS Integration Guide for SaaS Platforms" description: "End-to-end integration guide
+  for connecting Stripe payments with AWS infrastructure for enterprise SaaS onboarding" audience: "Platform partners, enterprise
+  account managers" tags: ["payment-processing", "cloud-integration", "onboarding"]'
+overview: This guide helps integrate payment systems with your platform.
+prerequisites:
+- Stripe account with API keys (live/test)
+- AWS account with IAM roles configured
+- Node.js 16+ environment
+integration_steps: "1. API Setup\n   Configure Stripe Webhook endpoints in AWS API Gateway with Lambda triggers for real-time\
+  \ payment events.\n\n2. Data Pipeline\n   Use AWS Glue to transform Stripe's JSON events into Parquet format for storage\
+  \ in S3.\n\n3. Security\n   Implement AWS KMS encryption for payment data at rest, with IAM policies restricting access\
+  \ to payment data.\n\n4. Monitoring\n   Set up CloudWatch metrics for payment processing latency and error rates."
+best_practices:
+- Use Stripe's Radar for fraud detection before AWS processing
+- Implement automated scaling in EC2 for high-volume payment periods
+- Maintain audit logs in CloudTrail for compliance
+support: Contact Stripe's enterprise team at enterprise-support@stripe.com and AWS support via AWS Premium Support. ---
+anti_example_1_vague_implementation: '--- title: "Generic Payment Integration Guide" description: "Basic integration steps
+  for payment systems" audience: "Developers" tags: ["payments"]'
+payment_integration_guide: ''
+steps:
+- Get API keys from your provider
+- Make API calls to process payments
+- Handle webhooks for payment confirmation
+notes: '- Use HTTPS
+
+  - Store secrets securely
+
+
+  ---'
+why_it_fails: Focuses on API reference content (endpoints, parameters, schema examples) rather than integration workflow,
+  security considerations, or enterprise onboarding processes.
+anti_example_2_api_reference_contamination: '--- title: "Stripe Integration Guide" description: "How to use Stripe API" audience:
+  "Developers" tags: ["stripe"]'
+stripe_integration_guide: ''
+api_endpoints:
+- POST /v1/charges (Create charge)
+- GET /v1/customers (List customers)
+parameters:
+- amount (integer, required)
+- currency (string, 3-letter ISO code)
+- description (string, max 255 chars)
+example: "{\n  \"amount\": 1000,\n  \"currency\": \"usd\",\n  \"description\": \"Monthly subscription\"\n}\n\n---"

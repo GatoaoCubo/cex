@@ -1,0 +1,41 @@
+kind: instruction
+id: bld_instruction_white_label_config
+pillar: P03
+llm_function: REASON
+purpose: Step-by-step production process for white_label_config
+quality: null
+title: Instruction White Label Config
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- white_label_config
+- builder
+- instruction
+tldr: Step-by-step production process for white_label_config
+domain: white_label_config construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+phase_1_research:
+- Identify branding requirements (logos, color codes, legal disclaimers).
+- Map reseller-specific constraints (custom domain limits, API rate caps).
+- Audit compliance needs (data residency, GDPR/CCPA alignment).
+- Document stakeholder input (marketing, legal, engineering teams).
+- Analyze competitor configurations for feature parity benchmarks.
+- Validate technical feasibility (infrastructure, CMS, analytics tooling).
+phase_2_compose:
+- Set up working directory with SCHEMA.md and OUTPUT_TEMPLATE.md.
+- Define configuration schema (JSON/YAML structure, required fields).
+- Map reseller-specific parameters to schema (e.g., `branding.logo_url`).
+- Populate default values from OUTPUT_TEMPLATE.md placeholders.
+- 'Apply constraints (e.g., `max_domains_per_reseller: 5`).'
+- Cross-reference schema with legal/compliance requirements.
+- Generate artifact using template engine (Jinja2, Mustache).
+- Embed versioning metadata (artifact version, last updated).
+- Export as `.yaml` with checksum for integrity verification.
+phase_3_validate:
+- '[ ] Schema matches SCHEMA.md (using JSON Schema validator).'
+- '[ ] All constraints enforced (e.g., domain limits, branding rules).'
+- '[ ] Output conforms to OUTPUT_TEMPLATE.md structure.'
+- '[ ] Legal/compliance team approves final artifact.'
+- '[ ] Stakeholders confirm alignment with reseller agreements.'

@@ -18,6 +18,8 @@ density_score: 0.90
 ---
 
 # Schema: mental_model
+
+This ISO operationalizes a mental model -- a compact analogy or abstraction that guides reasoning.
 ## Frontmatter Fields
 | Field | Type | Required | Default | Notes |
 |-------|------|----------|---------|-------|

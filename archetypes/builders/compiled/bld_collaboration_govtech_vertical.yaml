@@ -1,0 +1,29 @@
+kind: collaboration
+id: bld_collaboration_govtech_vertical
+pillar: P12
+llm_function: COLLABORATE
+purpose: How govtech_vertical-builder works in crews with other builders
+quality: null
+title: Collaboration Govtech Vertical
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- govtech_vertical
+- builder
+- collaboration
+tldr: How govtech_vertical-builder works in crews with other builders
+domain: govtech_vertical construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+crew_role: Integrates govtech solutions tailored to specific verticals (e.g., healthcare, education), ensuring alignment with
+  policy goals, technical feasibility, and stakeholder needs. Coordinates cross-functional teams to deliver scalable, compliant
+  systems.
+receives_from: "| Builder       | What                  | Format         |  \n|---------------|-----------------------|----------------|\
+  \  \n| Policy Analyst| Vertical-specific mandates | Policy briefs |  \n| Legal Review  | Compliance guidelines  | Legal\
+  \ memos    |  \n| Tech Architect| System architecture specs | Tech diagrams |"
+produces_for: "| Builder       | What                  | Format         |  \n|---------------|-----------------------|----------------|\
+  \  \n| Implementation Team | Deployable system blueprints | Architecture docs |  \n| Compliance Officer | Vertical-specific\
+  \ audit trails | Compliance reports |  \n| Stakeholders  | Use case demonstrations | Demo scripts   |"
+boundary: Does NOT handle cross-vertical policy harmonization (legal_vertical) or audit-driven compliance checks (compliance_checklist).
+  These are managed by dedicated legal and audit builders.

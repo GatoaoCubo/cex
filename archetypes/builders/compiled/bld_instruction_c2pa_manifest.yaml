@@ -1,0 +1,48 @@
+kind: instruction
+id: bld_instruction_c2pa_manifest
+pillar: P03
+llm_function: REASON
+purpose: Step-by-step production process for c2pa_manifest
+quality: null
+title: Instruction C2PA Manifest
+version: 1.0.0
+author: n04_wave7
+tags:
+- c2pa_manifest
+- builder
+- instruction
+- C2PA
+- claim
+- assertion
+- ingredient
+- signature
+tldr: Step-by-step production process for c2pa_manifest
+domain: c2pa_manifest construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+phase_1_research:
+- 'Identify content type: image (JPEG/PNG/AVIF), audio (MP3/WAV), video (MP4), or document (PDF).'
+- 'Determine AI-ML generator details: model name, version, provider, training data references.'
+- 'Identify ingredient sources: base image, prompt text, model artifact, reference assets.'
+- 'Select digital source type: trainedAlgorithmicMedia (AI-generated) or compositeSynthetic (mixed).'
+- 'Identify signer certificate: X.509 from C2PA-trusted CA or DID-based signer.'
+- 'Determine assertion set: c2pa.ai_generator (required), c2pa.training-mining (if applicable), c2pa.ingredient (for source
+  references).'
+phase_2_compose:
+- Reference SCHEMA.md for C2PA manifest structure (manifest_store, active_manifest, claim, assertions).
+- 'Set manifest JUMBF box structure: manifest store -> manifest -> claim -> assertions.'
+- 'Populate claim: dc:format, ingredients array, assertions array, signature reference.'
+- 'Add c2pa.ai_generator assertion: digitalSourceType, generatorModel (name, version), promptText.'
+- 'Add ingredient assertions for each source: title, format, relationship, thumbnail_hash.'
+- 'Add c2pa.training-mining assertion if training data is referenced: dataType, source URIs.'
+- Generate thumbnail with SHA-256 hash for content binding.
+- Sign manifest with COSE_Sign1 using signer certificate/DID key.
+- Embed manifest in content file (JPEG Exif/APP11, MP4 moov box, PDF xpacket).
+phase_3_validate:
+- '[ ] claim.dc:format matches actual content MIME type'
+- '[ ] c2pa.ai_generator assertion present with digitalSourceType'
+- '[ ] All ingredient hashes verified against actual files'
+- '[ ] Signature chain validates to trusted C2PA certificate store'
+- '[ ] Manifest size within JUMBF box limits'
+- '[ ] Domain keywords present: C2PA, content-credential, claim, assertion, ingredient, signature'

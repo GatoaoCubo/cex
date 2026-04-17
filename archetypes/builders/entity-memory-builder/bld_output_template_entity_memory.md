@@ -48,19 +48,19 @@ tldr: "{{dense_summary_max_160ch}}"
 description: "{{what_entity_this_tracks_max_200ch}}"
 ```
 ## Overview
-{{what_entity_this_memory_tracks_1_to_2_sentences}}
-{{purpose_and_scope_of_this_entity_record}}
+`{{what_entity_this_memory_tracks_1_to_2_sentences}}`
+`{{purpose_and_scope_of_this_entity_record}}`
 ## Attributes
 | Key | Value | Type | Source |
 |-----|-------|------|--------|
-| {{attribute_key_1}} | {{attribute_value_1}} | {{string|date|url|enum}} | {{source}} |
-| {{attribute_key_2}} | {{attribute_value_2}} | {{string|date|url|enum}} | {{source}} |
-| {{attribute_key_3}} | {{attribute_value_3}} | {{string|date|url|enum}} | {{source}} |
+| `{{attribute_key_1}}` | {{attribute_value_1}} | {{string|date|url|enum}} | `{{source}}` |
+| `{{attribute_key_2}}` | {{attribute_value_2}} | {{string|date|url|enum}} | `{{source}}` |
+| `{{attribute_key_3}}` | {{attribute_value_3}} | {{string|date|url|enum}} | `{{source}}` |
 ## Relationships
 | Entity | Relation | Direction | Notes |
 |--------|----------|-----------|-------|
-| {{related_entity}} | {{relation_type}} | {{outbound|inbound|bidirectional}} | {{context}} |
+| `{{related_entity}}` | {{relation_type}} | {{outbound|inbound|bidirectional}} | `{{context}}` |
 ## Update Policy
 Policy: {{append|overwrite|merge|versioned}}
-{{conflict_resolution_rule}}
-{{staleness_handling_rule}}
+`{{conflict_resolution_rule}}`
+`{{staleness_handling_rule}}`

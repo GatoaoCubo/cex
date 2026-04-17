@@ -1,0 +1,76 @@
+kind: examples
+id: bld_examples_rl_algorithm
+pillar: P07
+llm_function: GOVERN
+purpose: Golden and anti-examples of rl_algorithm artifacts
+quality: null
+title: Examples Rl Algorithm
+version: 1.0.0
+author: wave1_builder_gen
+tags:
+- rl_algorithm
+- builder
+- examples
+tldr: Golden and anti-examples of rl_algorithm artifacts
+domain: rl_algorithm construction
+created: '2026-04-13'
+updated: '2026-04-13'
+density_score: 0.85
+golden_example: "---\nname: \"PPO\"\ndescription: \"Proximal Policy Optimization algorithm for model-free reinforcement learning\"\
+  \nversion: \"1.0\"\nauthor: \"OpenAI\"\nkeywords: [\"policy gradient\", \"actor-critic\", \"on-policy\"]\n---\n\nAlgorithm\
+  \ Components:\n- Agent: Uses parameterized policy π(a|s) and value function V(s)\n- Environment: Continuous action space,\
+  \ episodic tasks\n- Policy Update: Clipped surrogate objective with trust region constraint\n- Value Function: Neural network\
+  \ approximator with TD error loss\n- Training Loop:\n  1. Collect trajectories with current policy\n  2. Compute advantages\
+  \ via generalized advantage estimation\n  3. Update policy and value function via stochastic gradient ascent\n- Hyperparameters:\n\
+  \  - Clip range ε = 0.2\n  - Generalized advantage estimation parameter λ = 0.95\n  - Policy and value network learning\
+  \ rates"
+anti_example_1_conflating_with_training_method: '---
+
+  name: "Experience Replay"
+
+  description: "Stochastic gradient descent with memory buffer"
+
+  version: "0.1"
+
+  author: "Unknown"
+
+  keywords: ["replay buffer", "off-policy"]
+
+  ---
+
+
+  Training Process:
+
+  - Store transitions in a FIFO buffer
+
+  - Sample mini-batches randomly during training
+
+  - Update Q-network using Bellman equation
+
+  - Use target network for stability'
+why_it_fails: This defines a reward model (part of the environment), not an RL algorithm. It lacks agent policy definition,
+  learning process, and algorithm-specific training procedure.
+anti_example_2_confusing_with_reward_model: '---
+
+  name: "Inverse Reward Design"
+
+  description: "Reward function inference from expert demonstrations"
+
+  version: "1.0"
+
+  author: "MIT"
+
+  keywords: ["reward shaping", "inverse reinforcement learning"]
+
+  ---
+
+
+  Reward Model:
+
+  - Uses maximum entropy principle
+
+  - Learns potential function φ(s) from demonstrations
+
+  - Computes reward as Δφ(s)
+
+  - Regularizes with KL divergence to expert policy'

@@ -6,33 +6,24 @@
     },
     "markitdown": {
       "command": "cmd",
-      "args": ["/c", "npx", "-y", "markitdown-mcp"]
+      "args": ["/c", "npx", "-y", "markitdown-mcp-npx"]
     },
     "stripe": {
-      "command": "npx",
-      "args": ["-y", "@anthropic/mcp-stripe"],
+      "command": "cmd",
+      "args": ["/c", "npx", "-y", "@stripe/mcp"],
       "env": { "STRIPE_SECRET_KEY": "${STRIPE_SECRET_KEY}" }
     },
-    "hotmart": {
-      "command": "npx",
-      "args": ["-y", "mcp-server-hotmart"],
-      "env": {
-        "HOTMART_CLIENT_ID": "${HOTMART_CLIENT_ID}",
-        "HOTMART_CLIENT_SECRET": "${HOTMART_CLIENT_SECRET}",
-        "HOTMART_BASIC_AUTH": "${HOTMART_BASIC_AUTH}"
-      }
-    },
     "canva": {
-      "command": "npx",
-      "args": ["-y", "@mcp_factory/canva-mcp-server"],
+      "command": "cmd",
+      "args": ["/c", "npx", "-y", "@mcp_factory/canva-mcp-server"],
       "env": {
         "CANVA_CLIENT_ID": "${CANVA_CLIENT_ID}",
         "CANVA_CLIENT_SECRET": "${CANVA_CLIENT_SECRET}"
       }
     },
     "notebooklm": {
-      "command": "npx",
-      "args": ["-y", "notebooklm-mcp@latest"]
+      "command": "cmd",
+      "args": ["/c", "npx", "-y", "notebooklm-mcp@latest"]
     }
   }
 }

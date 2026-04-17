@@ -12,8 +12,8 @@ quality: 9.0
 tags: [quality-gate, law, governance, P08, enforcement]
 tldr: "Quality gate for invariant artifacts: enforces imperative statement, rationale, and testsble enforcement mechanism."
 density_score: 0.85
+llm_function: GOVERN
 ---
-
 # Gate: Law
 ## Definition
 A `law` artifact encodes an inviolable operational rule. It must carry a mandatory statement, the reasoning behind it, a concrete enforcement mechanism, and documented exceptions. Gates here prevent advisory rules from masquerading as laws and ensure every law is traceable, enforceable, and scoped.

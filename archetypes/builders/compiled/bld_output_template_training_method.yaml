@@ -1,0 +1,18 @@
+kind: output_template
+id: bld_output_template_training_method
+pillar: P05
+llm_function: PRODUCE
+quality: null
+title: Output Template Training Method
+version: 1.0.0
+author: n05_builder
+tags:
+- training_method
+- output_template
+- P05
+- builder
+tldr: Canonical output template for training_method artifacts with all required sections.
+domain: training_method construction
+created: '2026-04-13'
+updated: '2026-04-13'
+density_score: 0.88

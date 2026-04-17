@@ -1,0 +1,29 @@
+kind: examples
+id: bld_examples_roi_calculator
+pillar: P07
+llm_function: GOVERN
+purpose: Golden and anti-examples of roi_calculator artifacts
+quality: null
+title: Examples Roi Calculator
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- roi_calculator
+- builder
+- examples
+tldr: Golden and anti-examples of roi_calculator artifacts
+domain: roi_calculator construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+golden_example: "title: ROI Calculator for Cloud Migration  \nauthor: Jane Doe, Financial Analyst  \ndate: 2023-10-15  \n\
+  inputs:  \n  - Initial Investment: $5,000  \n  - Monthly Cloud Cost (AWS EC2): $200  \n  - Monthly Savings (vs. On-Premises):\
+  \ $1,000  \n  - Time Horizon: 12 months  \nformulas:  \n  ROI: ((Monthly Savings × Time Horizon) - Initial Investment) /\
+  \ Initial Investment × 100  \n  Payback Period: Initial Investment / Monthly Savings  \n  TCO: Initial Investment + (Monthly\
+  \ Cloud Cost × Time Horizon)  \ntco_comparison:  \n  AWS: $7,400  \n  Azure: $7,500  \n  GCP: $7,300  "
+anti_example_1_placeholder_names: "title: ROI Calculator for ProviderA  \ninputs:  \n  - Initial Investment: $X  \n  - Monthly\
+  \ Cost: $Y  \nformulas:  \n  ROI: (Y - X) / X  \ntco_comparison:  \n  ProviderA: $Z  "
+why_it_fails: Omits the TCO comparison section, which is critical for economic buyers to evaluate total costs across providers.
+  Without TCO, the calculator lacks actionable insights for decision-making.
+anti_example_2_missing_tco_comparison: "title: ROI Calculator for AWS  \ninputs:  \n  - Initial Investment: $5,000  \n  -\
+  \ Monthly Savings: $1,000  \nformulas:  \n  ROI: (1,000 × 12 - 5,000) / 5,000 × 100  "

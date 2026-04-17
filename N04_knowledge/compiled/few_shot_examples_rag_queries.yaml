@@ -1,0 +1,153 @@
+id: few_shot_examples_rag_queries
+kind: knowledge_card
+pillar: P01
+nucleus: n04
+title: Knowledge Card -- RAG Query Few-Shot Examples (N04)
+version: 1.0.0
+quality: null
+tags:
+- knowledge_card
+- few_shot_examples
+- rag
+- retrieval
+- query
+- n04
+- P01
+domain: knowledge management
+type: few_shot_examples
+status: active
+created: '2026-04-17'
+updated: '2026-04-17'
+author: n04_knowledge
+tldr: '5 complete RAG query traces from N04: semantic search, cross-nucleus query, intent->kind lookup, few-shot retrieval,
+  quality-filtered query. Each trace shows input, L0/L1/L2 transmutation, retrieval path, fusion, and output schema.'
+density_score: 0.92
+sources:
+- N04_knowledge/P04_tools/retriever_n04.md
+- N04_knowledge/P06_schema/input_schema_knowledge_query.md
+- N04_knowledge/P01_knowledge/kc_knowledge_vocabulary.md
+how_to_read_these_examples: 'Each example follows the N04 query trace format:
+
+  1. Input -- raw user query (natural language)
+
+  2. Transmutation -- L0/L1/L2 intent resolution chain
+
+  3. Retrieval path -- hybrid_retrieval configuration applied
+
+  4. Fusion -- RRF score merging
+
+  5. Output -- result schema returned to caller
+
+
+  Retriever config: hybrid (dense pgvector + sparse BM25), RRF(k=60), top_k=10, reranker=cross-encoder.
+
+
+  ---'
+example_1_semantic_search_find_all_quality_gate_artifacts: "Input: `find all quality_gate artifacts`\n\nL0 transmutation (cex_intent_resolver.py,\
+  \ 0 tokens):\nintent_type: artifact_lookup\nkind: quality_gate\npillar: P07\nnucleus: any\nverb: find\n\nL1 mapping (p03_pc_cex_universal.md):\n\
+  pattern_match: \"find all {kind} artifacts\" -> retrieval mode: metadata filter\nkind_canonical: quality_gate\npillar_canonical:\
+  \ P07\nquery_rewrite: \"quality_gate artifact P07 evaluation\"\n\nRetrieval path:\nStep 1: Metadata filter (free, no embedding\
+  \ needed)\n  filter: frontmatter.kind == \"quality_gate\"\n  backend: N04_knowledge/P07_evals/ glob + cex_retriever.py --kind\
+  \ quality_gate\n\nStep 2: Dense retrieval (embedding fallback if metadata fails)\n  query_vector: embed(\"quality gate validation\
+  \ scoring rubric\")\n  backend: pgvector, metric=cosine, top_k=20\n\nStep 3: RRF fusion\n  metadata_results: rank 1-N (exact\
+  \ kind match, score 1.0)\n  dense_results: rank 1-20\n  fused: RRF(k=60) -> top 10\n\nOutput schema:\n{\n  \"query\": \"\
+  find all quality_gate artifacts\",\n  \"kind_filter\": \"quality_gate\",\n  \"results\": [\n    {\"path\": \"N03_engineering/P07_evals/quality_gate_n03.md\"\
+  , \"score\": 0.98},\n    {\"path\": \"N05_operations/P07_evals/quality_gate_n05.md\", \"score\": 0.97}\n  ],\n  \"total\"\
+  : 6,\n  \"mode\": \"metadata_filter\"\n}\n\nKey insight: kind-exact queries use metadata filter first (free, instant). Dense\
+  \ retrieval is fallback only.\n\n---"
+example_2_cross_nucleus_query_which_nuclei_cover_p06_schema: "Input: `which nuclei cover P06 schema?`\n\nL0 transmutation:\n\
+  intent_type: coverage_query\npillar: P06\nnucleus: any\nverb: audit\n\nL1 mapping:\npattern_match: \"which nuclei cover\
+  \ {pillar}\" -> cross_nucleus scan\nquery_rewrite: \"P06 schema validation input_schema type_def nucleus\"\n\nRetrieval\
+  \ path:\nStep 1: Directory scan (0 tokens)\n  scan: glob(\"N0[1-6]_*/P06_schema/*.md\")\n  group_by: nucleus\n\nStep 2:\
+  \ Structured aggregation\n  for each nucleus found:\n    count: files in N0X/P06_schema/\n    list: kind[] from frontmatter\n\
+  \    \nStep 3: Dense retrieval for gap detection\n  query: \"schema validation contract type definition\"\n  filter: NOT\
+  \ in directory_scan results\n  purpose: find schema artifacts stored in non-standard paths\n\nFusion (cross-nucleus context):\n\
+  nucleus_coverage = {\n  \"N03\": 8 artifacts,  # Engineering owns P06 primary\n  \"N04\": 12 artifacts, # Knowledge stores\
+  \ data contracts\n  \"N05\": 4 artifacts,  # Operations has config schemas\n  \"N01\": 2 artifacts,  # Intelligence has\
+  \ eval schemas\n  \"N02\": 1 artifact,   # Marketing has form schemas\n  \"N06\": 3 artifacts   # Commercial has pricing\
+  \ schemas\n}\n\nOutput schema:\n{\n  \"pillar\": \"P06\",\n  \"coverage_by_nucleus\": {\n    \"N03\": {\"count\": 8, \"\
+  primary\": true},\n    \"N04\": {\"count\": 12, \"primary\": false},\n    \"N05\": {\"count\": 4},\n    \"N01\": {\"count\"\
+  : 2},\n    \"N02\": {\"count\": 1},\n    \"N06\": {\"count\": 3}\n  },\n  \"total_artifacts\": 30,\n  \"primary_nucleus\"\
+  : \"N03\"\n}\n\nKey insight: pillar-coverage queries use directory scan (free). Dense retrieval adds coverage gap detection.\n\
+  \n---"
+example_3_intent_resolution_kind_lookup_what_kind_handles_pricing: "Input: `what kind handles pricing?`\n\nL0 transmutation:\n\
+  intent_type: kind_lookup\ndomain: pricing\nnucleus: N06\nverb: discover\n\nL1 mapping (p03_pc_cex_universal.md, bilingual\
+  \ table):\nEN pattern: \"pricing strategy\" -> kind: content_monetization, pillar: P11, nucleus: N06\nEN pattern: \"pricing\
+  \ tiers\" -> kind: subscription_tier, pillar: P09, nucleus: N06\nEN pattern: \"pricing page\" -> kind: pricing_page, pillar:\
+  \ P05, nucleus: N06\nconfidence: 0.87 (multiple kinds match)\n\nRetrieval path (multi-kind confidence case):\nStep 1: Exact\
+  \ match from L1 table (0 tokens)\n  candidates: [content_monetization, subscription_tier, pricing_page]\n  \nStep 2: Dense\
+  \ retrieval for disambiguation\n  query_1: \"pricing strategy revenue tiers SaaS\"\n  query_2: \"pricing page landing page\
+  \ CTA conversion\"\n  query_3: \"subscription tier feature gating monthly annual\"\n  \nStep 3: GDP check (confidence <\
+  \ 0.90)\n  action: present 3 candidates to user with descriptions\n  fallback: if autonomous mode -> return all 3, primary\
+  \ = content_monetization\n\nOutput schema:\n{\n  \"query\": \"what kind handles pricing?\",\n  \"intent\": \"kind_discovery\"\
+  ,\n  \"candidates\": [\n    {\n      \"kind\": \"content_monetization\",\n      \"pillar\": \"P11\",\n      \"nucleus\"\
+  : \"N06\",\n      \"description\": \"Full pricing strategy: tiers, gates, revenue model\",\n      \"confidence\": 0.87,\n\
+  \      \"primary\": true\n    },\n    {\n      \"kind\": \"subscription_tier\",\n      \"pillar\": \"P09\",\n      \"nucleus\"\
+  : \"N06\",\n      \"description\": \"Single tier definition with features and limits\",\n      \"confidence\": 0.79\n  \
+  \  },\n    {\n      \"kind\": \"pricing_page\",\n      \"pillar\": \"P05\",\n      \"nucleus\": \"N06\",\n      \"description\"\
+  : \"Frontend pricing page artifact\",\n      \"confidence\": 0.71\n    }\n  ],\n  \"gdp_required\": true,\n  \"mode\": \"\
+  multi_kind_disambiguation\"\n}\n\nKey insight: low-confidence (< 0.90) kind resolution requires GDP. Always return candidates\
+  \ ranked by confidence, not just top-1.\n\n---"
+example_4_few_shot_retrieval_pattern_show_me_8f_examples: "Input: `show me 8F examples`\n\nL0 transmutation:\nintent_type:\
+  \ few_shot_lookup\nsubject: 8F_pipeline\nkind: few_shot_example\npillar: P03\nverb: retrieve\n\nL1 mapping:\npattern_match:\
+  \ \"show me {concept} examples\" -> few_shot_example retrieval\nquery_rewrite: \"8F pipeline reasoning trace example demonstration\"\
+  \n\nRetrieval path (few-shot pattern):\nStep 1: Kind filter (free)\n  filter: frontmatter.kind IN [\"few_shot_example\"\
+  , \"reasoning_trace\"]\n  \nStep 2: Dense retrieval with query variants\n  query_1: \"8F pipeline F1 constrain F2 become\
+  \ example\"\n  query_2: \"8F reasoning protocol trace research build deploy\"\n  query_3: \"8-function pipeline F6 produce\
+  \ F7 govern F8 collaborate\"\n  \nStep 3: Hybrid fusion (RRF k=60)\n  dense_candidates: 20 per query -> 60 total candidates\n\
+  \  sparse_candidates: BM25(\"8F pipeline example\") -> 20 candidates\n  fused: RRF -> top 10\n  \nStep 4: Cross-encoder\
+  \ rerank\n  model: cross-encoder/ms-marco-MiniLM-L-6-v2\n  rerank: top 10 -> top 5 (final)\n\nOutput schema:\n{\n  \"query\"\
+  : \"show me 8F examples\",\n  \"kind\": \"few_shot_example\",\n  \"results\": [\n    {\"path\": \".claude/rules/8f-reasoning.md\"\
+  , \"section\": \"N07 Orchestrator\", \"score\": 0.94},\n    {\"path\": \".claude/rules/8f-reasoning.md\", \"section\": \"\
+  N01 Intelligence\", \"score\": 0.91},\n    {\"path\": \"N03_engineering/P07_evals/reasoning_trace_8f_constrain.md\", \"\
+  score\": 0.88},\n    {\"path\": \"N03_engineering/P08_architecture/pattern_8f_full_trace.md\", \"score\": 0.86},\n    {\"\
+  path\": \"N04_knowledge/P01_knowledge/few_shot_examples_rag_queries.md\", \"score\": 0.82}\n  ],\n  \"total\": 5,\n  \"\
+  mode\": \"hybrid_with_rerank\"\n}\n\nKey insight: few-shot retrieval uses 3 query variants to maximize recall. Cross-encoder\
+  \ rerank improves precision from P@10=0.71 to P@5=0.94.\n\n---"
+example_5_quality_filtered_query_find_artifacts_below_8_0_in_n03: "Input: `find artifacts below 8.0 in N03`\n\nL0 transmutation:\n\
+  intent_type: quality_audit\nnucleus: N03\nquality_threshold: 8.0\noperator: less_than\nverb: find\n\nL1 mapping:\npattern_match:\
+  \ \"find artifacts {quality_condition} in {nucleus}\" -> quality_filter scan\nquery_rewrite: NULL (metadata-only query,\
+  \ no semantic component)\n\nRetrieval path (metadata-only, no embedding):\nStep 1: Structured metadata scan (0 tokens, 0\
+  \ embeddings)\n  source: cex_retriever.py --nucleus n03 --quality-filter \"<8.0\"\n  algorithm:\n    1. find N03_engineering/*/.md\
+  \ (exclude compiled/, README)\n    2. parse frontmatter (quality field)\n    3. filter: quality < 8.0 OR quality == null\n\
+  \    4. sort: by quality ASC (nulls last)\n\nStep 2: Augment with density_score\n  add: density_score < 0.85 as secondary\
+  \ filter\n  \nStep 3: Generate improvement candidates\n  rank_by: quality ASC, then density_score ASC\n  limit: 20\n\nFusion:\
+  \ none required (metadata-only, deterministic).\n\nOutput schema:\n{\n  \"query\": \"find artifacts below 8.0 in N03\",\n\
+  \  \"nucleus\": \"N03\",\n  \"quality_threshold\": 8.0,\n  \"operator\": \"lt\",\n  \"results\": [\n    {\"path\": \"N03_engineering/P01_knowledge/kc_draft_example.md\"\
+  , \"quality\": 7.2, \"density_score\": 0.78},\n    {\"path\": \"N03_engineering/P08_architecture/diagram_n03.md\", \"quality\"\
+  : 7.8, \"density_score\": 0.81},\n    {\"path\": \"N03_engineering/P06_schema/type_def_draft.md\", \"quality\": null, \"\
+  density_score\": 0.91}\n  ],\n  \"total_below_threshold\": 12,\n  \"total_null\": 8,\n  \"improvement_candidates\": 20,\n\
+  \  \"mode\": \"metadata_filter_only\",\n  \"next_step\": \"cex_evolve.py sweep --nucleus n03 --target 8.5\"\n}\n\nKey insight:\
+  \ quality-filter queries are deterministic metadata scans -- 0 tokens, 0 embeddings.\nOffer `cex_evolve.py` command in response\
+  \ to close the loop.\n\n---"
+summary_query_mode_selection: '| Query Type | Mode | Cost | Tokens Used |
+
+  |------------|------|------|-------------|
+
+  | Exact kind lookup | metadata filter | free | 0 |
+
+  | Pillar coverage audit | directory scan + aggregation | free | 0 |
+
+  | Quality filter | metadata scan | free | 0 |
+
+  | Kind disambiguation | L1 table + dense | low | ~200 |
+
+  | Semantic/conceptual | hybrid (dense + BM25) + RRF | medium | ~500 |
+
+  | Few-shot retrieval | hybrid + 3 queries + rerank | high | ~1000 |
+
+
+  Default selection rule: start with metadata filter. Escalate to dense only when metadata is insufficient.'
+anti_patterns: '| Anti-Pattern | Correct Behavior |
+
+  |-------------|-----------------|
+
+  | Embedding every query regardless of type | Use metadata filter first; reserve embeddings for semantic queries |
+
+  | Single-query dense retrieval | Always run 3 query variants for semantic queries (improves recall ~40%) |
+
+  | Skipping reranker | Cross-encoder rerank improves P@5 by 15-25% on average |
+
+  | Returning kind candidates without confidence | Always attach confidence score; trigger GDP if < 0.90 |
+
+  | Ignoring quality:null in quality filter | null artifacts are HIGH priority for improvement; include them |'

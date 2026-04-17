@@ -1,0 +1,155 @@
+id: ex_schedule_promo_calendar
+kind: schedule
+pillar: P12
+version: 1.0.0
+title: Promo Calendar Schedule Template -- Quarterly Overlay
+description: Quarterly promotional calendar with holiday triggers, content-promo alignment, UTM tagging, and channel-specific
+  rules. Generic template with {{BRAND_*}} placeholders.
+domain: content_monetization
+nucleus: N06
+quality: null
+tags:
+- schedule
+- promo-calendar
+- quarterly
+- ecommerce
+- utm
+- campaigns
+- content-alignment
+brand_placeholders:
+- BRAND_NAME
+- BRAND_DOMAIN
+- BRAND_REGION
+- BRAND_VERTICAL
+- BRAND_PROMO_DATES
+- BRAND_UTM_SOURCE
+- BRAND_GA4_ID
+- BRAND_CURRENCY
+density_score: 1.0
+1_calendar_structure: "QUARTER = 13 weeks\n  |-- AWARENESS WEEK (w1-w2): brand content, no hard sell\n  |-- CONSIDERATION\
+  \ PHASE (w3-w10): product content + soft CTAs\n  |-- CONVERSION SPRINT (w11-w12): promo + urgency\n  |-- RETENTION WEEK\
+  \ (w13): thank you + next cycle setup\n\n---"
+2_trigger_categories: ''
+2_1_hard_date_triggers_brand_region_defaults: '| Date | Event | Promo type |
+
+  |------|-------|-----------|
+
+  | Jan 20-31 | Post-holiday recovery | Clearance + new arrivals |
+
+  | Feb 12 | Valentine''s Day | Gift bundles |
+
+  | Mar 08 | International Women''s Day | Cause-aligned campaign |
+
+  | Apr/May | Easter (variable) | Seasonal + gifting |
+
+  | May 12 | Mothers Day (BR) | High-conversion window |
+
+  | Jun 12 | Lovers Day (BR) | Gift bundles |
+
+  | Jul 15-31 | Winter clearance (BR) | Category discounts |
+
+  | Aug | Gato Day? / niche date | Vertical-specific |
+
+  | Sep 07 | Brazil Independence Day | Patriotic theme (optional) |
+
+  | Oct 12 | Children''s Day (BR) | Gift + family content |
+
+  | Nov 1-29 | Pre-Black Friday buildup | Hype + waitlist |
+
+  | Nov last Fri | Black Friday | Peak conversion |
+
+  | Nov Mon | Cyber Monday | Digital + bundles |
+
+  | Dec 1-25 | Christmas buildup | Gift guide + urgency |
+
+  | Dec 25 | Christmas | Peak gifting |
+
+  | Dec 26-31 | Year-end clearance | Last chance |
+
+
+  > Replace dates and events with `{{BRAND_PROMO_DATES}}` from your config.
+
+
+  ---'
+3_promo_types_mechanics: '| Type | Mechanic | When to use |
+
+  |------|---------|------------|
+
+  | Percentage discount | 10-30% off | High-volume triggers (BF, XMAS) |
+
+  | Free shipping | No threshold fee | AOV below {{BRAND_CURRENCY}} (threshold) |
+
+  | Bundle deal | Buy 2 get 1 / kit discount | Shoulder periods |
+
+  | Flash sale | 4-24h offer | Mid-week engagement spike |
+
+  | Early access | VIP list gets deal 24h early | Loyalty + B2B channel |
+
+  | Coupon code | Affiliate / influencer specific | Attribution tracking |
+
+
+  ---'
+4_content_promo_alignment_rules: '| Weeks before promo | Content action |
+
+  |-------------------|----------------|
+
+  | -4 weeks | Educational content introduces product category |
+
+  | -2 weeks | Social proof + testimonials for key products |
+
+  | -1 week | Urgency signals + "coming soon" teaser |
+
+  | Promo week | Daily content with offer + countdown |
+
+  | +1 week | Thank you content + nurture for non-purchasers |
+
+
+  ---'
+5_utm_tagging_convention: "Base URL: https://{{BRAND_DOMAIN}}/{product_or_collection}\n\nPromo campaign UTM:\n  utm_source={{BRAND_UTM_SOURCE}}\n\
+  \  utm_medium=social|email|sms|whatsapp\n  utm_campaign={promo_name}_{year}   # e.g. black_friday_2026\n  utm_content={creative_id}\
+  \          # e.g. carousel_01\n  utm_term={discount_pct}            # optional, e.g. 20off\n\nExample:\n  https://{{BRAND_DOMAIN}}/produtos?\n\
+  \    utm_source=instagram&\n    utm_medium=social&\n    utm_campaign=black_friday_2026&\n    utm_content=carousel_01\n\n\
+  ---"
+6_channel_specific_rules: '| Channel | Lead time | Max frequency during promo | Tone |
+
+  |---------|-----------|---------------------------|------|
+
+  | Instagram feed | 2 days | 1 post/day | Aspirational + urgent |
+
+  | Instagram stories | Same day | 3 stories/day | Direct + urgent |
+
+  | WhatsApp blast | 1 day | 1 message/week max | Personal + warm |
+
+  | Email | 3 days | 1 per day (promo week) | Benefit-led |
+
+  | Blog | 1 week | 1 post per promo | SEO + evergreen |
+
+
+  ---'
+7_ga4_event_tracking_for_promos: "| Event | Trigger | Key params |\n|-------|---------|-----------|\n| `promo_view` | User\
+  \ sees promo banner/post | promo_id, channel |\n| `promo_click` | Click on promo CTA | promo_id, discount_pct |\n| `coupon_applied`\
+  \ | Coupon used at checkout | coupon_code, order_value |\n| `purchase` (with promo flag) | Promo-attributed purchase | promo_id,\
+  \ discount_pct, order_value |\n\n// GA4 measurement ID: {{BRAND_GA4_ID}}\ngtag('event', 'promo_view', {\n  promo_id: 'black_friday_2026',\n\
+  \  channel: 'instagram',\n  discount_pct: '20'\n})\n\n---"
+8_post_promo_retrospective_template: '| Metric | Target | Actual | Delta |
+
+  |--------|--------|--------|-------|
+
+  | Revenue during promo | (plan) | (actual) | -- |
+
+  | New customers acquired | (plan) | (actual) | -- |
+
+  | Avg order value | {{BRAND_CURRENCY}} {{BRAND_AOV}} | (actual) | -- |
+
+  | Top-performing channel | (predicted) | (actual) | -- |
+
+  | Coupon redemption rate | (plan) | (actual) | -- |
+
+  | Return rate | <10% | (actual) | -- |
+
+
+  ---'
+new_brand_variables:
+- '`BRAND_PROMO_DATES` -- comma-separated list of planned promo dates'
+- '`BRAND_REGION` -- geographic region (affects holiday calendar)'
+- '`BRAND_GA4_ID` -- Google Analytics 4 ID for event tracking'

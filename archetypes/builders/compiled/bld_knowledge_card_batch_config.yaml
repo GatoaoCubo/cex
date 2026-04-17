@@ -1,0 +1,96 @@
+kind: knowledge_card
+id: bld_knowledge_card_batch_config
+pillar: P01
+llm_function: INJECT
+purpose: Domain knowledge for batch_config production -- async bulk API job configuration
+sources: OpenAI Batch API docs, Anthropic Message Batches docs, AWS SQS batch patterns
+quality: null
+title: Knowledge Card Batch Config
+version: 1.0.0
+author: n03_builder
+tags:
+- batch_config
+- builder
+- knowledge
+- async-api
+- P09
+tldr: 'Async batch API: 50% cost reduction vs sync, 24h SLA, JSONL I/O, provider-specific limits. Configure cost cap, retry
+  policy, dead-letter.'
+domain: batch config construction
+created: '2026-04-13'
+updated: '2026-04-13'
+density_score: 0.9
+executive_summary: Batch configs specify async bulk LLM API job parameters. Both OpenAI Batch API and Anthropic Message Batches
+  offer ~50% cost reduction vs synchronous APIs by accepting up to 24h latency. A batch_config is NOT a schedule (cron), NOT
+  a workflow (multi-step), NOT a runtime_rule (per-request timeout). It is a single bulk async request specification.
+spec_table: '| Property | Value |
+
+  |----------|-------|
+
+  | Pillar | P09 (config) |
+
+  | llm_function | CALL |
+
+  | max_bytes | 2048 (body only) |
+
+  | Required frontmatter | provider, model, endpoint, max_requests, completion_window, cost_cap_usd |
+
+  | Quality gates | 10 HARD + 10 SOFT |
+
+  | Naming | p09_bc_{name_slug}.yaml |
+
+  | Input/output format | JSONL (default) |'
+provider_comparison: '| Feature | OpenAI Batch API | Anthropic Message Batches |
+
+  |---------|-----------------|--------------------------|
+
+  | Endpoint | POST /v1/batches | POST /v1/messages/batches |
+
+  | Max requests | 50,000 per batch | 10,000 per batch |
+
+  | Max file size | 200 MB | N/A |
+
+  | Completion SLA | 24h | Best-effort (minutes to hours) |
+
+  | Cost discount | ~50% | ~50% |
+
+  | Result expiry | None documented | 29 days |
+
+  | Eligible models | gpt-4o, gpt-4o-mini, etc. | claude-3-5-sonnet, claude-3-haiku, etc. |
+
+  | Result retrieval | Poll /v1/batches/{id} | Poll /v1/messages/batches/{id} |'
+patterns: "Cost control triad: cost_cap_usd + max_requests + token_budget. All three required.\n- cost_cap_usd: total spend\
+  \ ceiling for the job\n- max_requests: bounds the file size, preventing submission failures\n- token_budget: per-request\
+  \ token limit (input + output) to prevent oversized requests\n\nJSONL request schema (OpenAI):\n{\"custom_id\": \"req-001\"\
+  , \"method\": \"POST\", \"url\": \"/v1/chat/completions\",\n \"body\": {\"model\": \"gpt-4o-mini\", \"messages\": [{\"role\"\
+  : \"user\", \"content\": \"...\"}]}}\n\nJSONL request schema (Anthropic):\n{\"custom_id\": \"req-001\", \"params\": {\"\
+  model\": \"claude-3-haiku-20240307\",\n \"max_tokens\": 1024, \"messages\": [{\"role\": \"user\", \"content\": \"...\"}]}}\n\
+  \nRetry policy taxonomy:\n| Error type | Retry? | Strategy |\n|-----------|--------|---------|\n| 429 rate limit | YES |\
+  \ Exponential backoff |\n| 5xx server error | YES | Exponential backoff, max 3 |\n| 4xx client error | NO | Dead-letter\
+  \ immediately |\n| Timeout (>SLA) | RE-SUBMIT | New batch with unprocessed requests |\n\nPartial failure handling: batch\
+  \ jobs commonly complete with 95-99% success.\n`partial_failure: continue` processes all requests and collects failures.\n\
+  `partial_failure: halt` is appropriate only when strict consistency is required."
+p09_boundary_table: '| batch_config IS | batch_config IS NOT |
+
+  |----------------|---------------------|
+
+  | Async bulk API job spec for LLM inference | schedule (P09) -- cron timing for when to run |
+
+  | Single bulk request with JSONL I/O | workflow (P12) -- multi-step dependent pipeline |
+
+  | Cost and rate controls for batch submission | runtime_rule (P09) -- per-request sync timeouts |
+
+  | Provider-specific params (model, endpoint, SLA) | env_config (P09) -- generic env variables |
+
+  | Retry and dead-letter for failed batch requests | feature_flag (P09) -- on/off logical toggle |'
+application:
+- Select provider and confirm model is batch-eligible
+- Set max_requests <= provider limit; set cost_cap_usd
+- Set completion_window matching provider SLA
+- Define retry policy with partial_failure behavior
+- Specify dead_letter storage for permanently failed requests
+- Reference credential env var; never embed actual key
+references:
+- 'platform.openai.com/docs/guides/batch: OpenAI Batch API guide'
+- 'docs.anthropic.com/en/docs/build-with-claude/message-batches: Anthropic Message Batches'
+- 'aws.amazon.com/sqs/: SQS patterns for queue-based batch processing'

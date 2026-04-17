@@ -16,6 +16,7 @@ Usage:
 import argparse, json, subprocess, sys, time, yaml
 from pathlib import Path
 from datetime import datetime
+from typing import Any
 
 CEX_ROOT = Path(__file__).resolve().parent.parent
 SIGNAL_DIR = CEX_ROOT / ".cex_signals"
@@ -58,7 +59,7 @@ KIND_PATTERNS = {
 }
 
 
-def gap_analysis(nucleus, level=1):
+def gap_analysis(nucleus: str, level: int = 1) -> dict[str, Any]:
     """Find which kinds are missing for this nucleus."""
     ndir = CEX_ROOT / NUCLEUS_DIRS[nucleus]
     kinds_needed = list(CORE_KINDS)
@@ -88,7 +89,9 @@ def gap_analysis(nucleus, level=1):
     return {"have": have, "gaps": gaps, "total": len(kinds_needed)}
 
 
-def build_kinds(nucleus, kinds, dry_run=False):
+def build_kinds(
+    nucleus: str, kinds: list[str], dry_run: bool = False
+) -> dict[str, Any]:
     """Call nucleus builder for missing kinds."""
     domain = NUCLEUS_DOMAINS[nucleus]
     name = domain.lower()
@@ -112,13 +115,18 @@ def build_kinds(nucleus, kinds, dry_run=False):
     return {"passes": passes, "fails": fails, "output": result.stdout[-500:]}
 
 
-def write_signal(nucleus, cycle, status, details=None):
+def write_signal(
+    nucleus: str,
+    cycle: int,
+    status: str,
+    details: dict[str, Any] | None = None,
+) -> Any:
     """Write completion signal (delegates to signal_writer)."""
     from signal_writer import write_signal as _sw
     return _sw(nucleus, status=status, mission=f"cycle{cycle}", **details or {})
 
 
-def main():
+def main() -> None:
     ap = argparse.ArgumentParser(description="CEX Flywheel Worker")
     ap.add_argument("--nucleus", required=True, help="N01-N07")
     ap.add_argument("--cycle", type=int, default=1, help="Cycle number")

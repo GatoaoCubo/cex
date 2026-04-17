@@ -1,0 +1,1123 @@
+id: atom_10_haystack_vercel
+kind: knowledge_card
+title: 'Atom 10: Haystack (deepset) + Vercel AI SDK -- Full Type Registry & CEX Mapping'
+version: 2.0.0
+date: 2026-04-13
+quality: 8.8
+pillar: P01
+tags:
+- haystack
+- deepset
+- vercel
+- ai-sdk
+- pipeline
+- rag
+- streaming
+- agents
+- type-registry
+- serialization
+- middleware
+- wire-protocol
+sources:
+- https://docs.haystack.deepset.ai/
+- https://ai-sdk.dev/
+- https://github.com/deepset-ai/haystack
+- https://github.com/vercel/ai
+- https://docs.haystack.deepset.ai/docs/serialization
+- https://ai-sdk.dev/docs/reference/ai-sdk-ui/use-chat
+- https://ai-sdk.dev/docs/reference/ai-sdk-ui/use-completion
+- https://ai-sdk.dev/docs/ai-sdk-core/middleware
+- https://ai-sdk.dev/docs/ai-sdk-ui/stream-protocol
+1_haystack_deepset_python_ai_orchestration_framework: ''
+1_1_architecture: 'Haystack 2.x is a directed-graph pipeline engine. Components are nodes; connections
+
+  are typed edges. The `@component` decorator registers a class; `run()` is the only
+
+  required method. Inputs are declared via method signature or `set_input_type()`.
+
+  Outputs via `@component.output_types()` decorator. All return `dict`.
+
+
+  Pipeline.add_component(name, instance)
+
+  Pipeline.connect("source.output", "target.input")
+
+  Pipeline.run({"component": {"input": value}})
+
+  Pipeline.inputs()  -> dict of required inputs with types
+
+
+  Serialization: YAML-native (pipeline.to_yaml() / from_yaml()).'
+1_1a_pipeline_serialization_format_yaml: "Source: https://docs.haystack.deepset.ai/docs/serialization\n\nFull YAML schema\
+  \ produced by `pipeline.to_yaml()`:\n\n# Top-level keys\ncomponents:           # dict of component_name -> ComponentSpec\n\
+  \  {name}:\n    type: {fully.qualified.ClassName}   # e.g. haystack.components.retrievers.in_memory.bm25_retriever.InMemoryBM25Retriever\n\
+  \    init_parameters:                     # kwargs passed to init\n      {param_name}: {param_value}\n      # Complex objects\
+  \ serialized as dicts with class + haystack_type markers\n      document_store:\n        type: haystack.document_stores.in_memory.document_store.InMemoryDocumentStore\n\
+  \        init_parameters:\n          bm25_algorithm: BM25Okapi\n          bm25_parameters: {}\n          bm25_tokenization_regex:\
+  \ \"(?u)\\\\b\\\\w\\\\w+\\\\b\"\n          embedding_similarity_function: dot_product\n          index: null\nconnections:\
+  \          # list of typed edge specs\n  - sender: {component_name}.{output_socket_name}\n    receiver: {component_name}.{input_socket_name}\n\
+  max_runs_per_component: 100   # loop-protection ceiling (default: 100)\nmetadata:             # arbitrary user-defined key-value\
+  \ pairs\n  {key}: {value}\n\nJSON equivalent: `pipeline.to_dict()` / `Pipeline.from_dict()` produces the same structure\
+  \ as Python dicts, serialized to JSON.\n\nVersioning: No explicit schema version field; compatibility tracked by Haystack\
+  \ release. Migration utilities in `haystack.core.serialization`.\n\nCustom component serialization:\n@component\nclass MyComponent:\n\
+  \    def to_dict(self) -> dict:\n        return default_to_dict(self, param1=self.param1)\n\n    @classmethod\n    def from_dict(cls,\
+  \ data: dict) -> \"MyComponent\":\n        return default_from_dict(cls, data)\n`default_to_dict` / `default_from_dict`\
+  \ handle `class` injection automatically.\n\nNested component serialization: Warm components (with document stores, tokenizers,\
+  \ etc.) serialize their entire init_parameters graph recursively. Non-serializable objects (lambdas, file handles) raise\
+  \ `SerializationError`.\n\nSource: https://docs.haystack.deepset.ai/docs/serialization"
+1_2_core_data_model: '| Type | Description |
+
+  |------|-------------|
+
+  | `Document` | Dataclass: id, content, meta, embedding, score, blob |
+
+  | `ChatMessage` | Role-based message: system, user, assistant, tool |
+
+  | `GeneratedAnswer` | Answer with source documents and metadata |
+
+  | `StreamingChunk` | Token-level streaming output from generators |
+
+  | `ByteStream` | Raw file content with MIME type metadata |'
+1_3_full_component_type_registry: "#### 1.3.1 Generators (Chat)\n\n| Component | Provider | Module |\n|-----------|----------|--------|\n\
+  | OpenAIChatGenerator | OpenAI | haystack_integrations.components.generators.openai |\n| AzureOpenAIChatGenerator | Azure\
+  \ OpenAI | haystack_integrations.components.generators.azure |\n| AzureOpenAIResponsesChatGenerator | Azure (Responses API)\
+  \ | haystack_integrations.components.generators.azure |\n| AnthropicChatGenerator | Anthropic | haystack_integrations.components.generators.anthropic\
+  \ |\n| AnthropicVertexChatGenerator | Anthropic via Vertex | haystack_integrations.components.generators.anthropic |\n|\
+  \ GoogleGenAIChatGenerator | Google Gemini | haystack_integrations.components.generators.google_genai |\n| AmazonBedrockChatGenerator\
+  \ | AWS Bedrock | haystack_integrations.components.generators.amazon_bedrock |\n| CohereChatGenerator | Cohere | haystack_integrations.components.generators.cohere\
+  \ |\n| MistralChatGenerator | Mistral | haystack_integrations.components.generators.mistral |\n| OllamaChatGenerator | Ollama\
+  \ (local) | haystack_integrations.components.generators.ollama |\n| HuggingFaceAPIChatGenerator | HF API | haystack_integrations.components.generators.huggingface\
+  \ |\n| HuggingFaceLocalChatGenerator | HF local | haystack_integrations.components.generators.huggingface |\n| LlamaCppChatGenerator\
+  \ | llama.cpp | haystack_integrations.components.generators.llamacpp |\n| LlamaStackChatGenerator | Llama Stack | haystack_integrations.components.generators.llama_stack\
+  \ |\n| MetaLlamaChatGenerator | Meta Llama API | haystack_integrations.components.generators.meta_llama |\n| NvidiaChatGenerator\
+  \ | NVIDIA NIM | haystack_integrations.components.generators.nvidia |\n| OpenRouterChatGenerator | OpenRouter | haystack_integrations.components.generators.openrouter\
+  \ |\n| TogetherAIChatGenerator | Together AI | haystack_integrations.components.generators.togetherai |\n| WatsonxChatGenerator\
+  \ | IBM Watsonx | haystack_integrations.components.generators.watsonx |\n| FallbackChatGenerator | (wrapper) | haystack.components.generators\
+  \ |\n| AIMLAPIChatGenerator | AIMLAPI | haystack_integrations.components.generators.aimlapi |\n| CometAPIChatGenerator |\
+  \ Comet API | haystack_integrations.components.generators.comet |\n| STACKITChatGenerator | STACKIT | haystack_integrations.components.generators.stackit\
+  \ |\n| OpenAIResponsesChatGenerator | OpenAI Responses API | haystack_integrations.components.generators.openai |\n\n####\
+  \ 1.3.2 Generators (Text / Non-Chat)\n\n| Component | Provider |\n|-----------|----------|\n| OpenAIGenerator | OpenAI |\n\
+  | AzureOpenAIGenerator | Azure |\n| AnthropicGenerator | Anthropic |\n| AmazonBedrockGenerator | AWS Bedrock |\n| CohereGenerator\
+  \ | Cohere |\n| OllamaGenerator | Ollama |\n| HuggingFaceAPIGenerator | HF API |\n| HuggingFaceLocalGenerator | HF local\
+  \ |\n| LlamaCppGenerator | llama.cpp |\n| NvidiaGenerator | NVIDIA |\n| TogetherAIGenerator | Together AI |\n| WatsonxGenerator\
+  \ | IBM Watsonx |\n| SagemakerGenerator | AWS Sagemaker |\n| VertexAITextGenerator | Google Vertex |\n| VertexAICodeGenerator\
+  \ | Google Vertex (code) |\n| DALLEImageGenerator | OpenAI DALL-E (images) |\n| VertexAIImageGenerator | Google Vertex (images)\
+  \ |\n| VertexAIImageCaptioner | Google Vertex (captions) |\n| VertexAIImageQA | Google Vertex (image QA) |\n\n#### 1.3.3\
+  \ Retrievers\n\nSparse / BM25:\n\n| Component | Document Store |\n|-----------|---------------|\n| InMemoryBM25Retriever\
+  \ | InMemoryDocumentStore |\n| ElasticsearchBM25Retriever | ElasticsearchDocumentStore |\n| OpenSearchBM25Retriever | OpenSearchDocumentStore\
+  \ |\n| PgvectorKeywordRetriever | PgvectorDocumentStore |\n| WeaviateBM25Retriever | WeaviateDocumentStore |\n| AzureAISearchBM25Retriever\
+  \ | AzureAISearchDocumentStore |\n| MongoDBAtlasFullTextRetriever | MongoDBAtlasDocumentStore |\n\nDense / Embedding:\n\n\
+  | Component | Document Store |\n|-----------|---------------|\n| InMemoryEmbeddingRetriever | InMemoryDocumentStore |\n\
+  | ElasticsearchEmbeddingRetriever | ElasticsearchDocumentStore |\n| OpenSearchEmbeddingRetriever | OpenSearchDocumentStore\
+  \ |\n| PgvectorEmbeddingRetriever | PgvectorDocumentStore |\n| ChromaEmbeddingRetriever | ChromaDocumentStore |\n| PineconeEmbeddingRetriever\
+  \ | PineconeDocumentStore |\n| QdrantEmbeddingRetriever | QdrantDocumentStore |\n| WeaviateEmbeddingRetriever | WeaviateDocumentStore\
+  \ |\n| AzureAISearchEmbeddingRetriever | AzureAISearchDocumentStore |\n| MongoDBAtlasEmbeddingRetriever | MongoDBAtlasDocumentStore\
+  \ |\n| AstraEmbeddingRetriever | AstraDocumentStore |\n| FAISSEmbeddingRetriever | FAISSDocumentStore |\n| ArcadeDBEmbeddingRetriever\
+  \ | ArcadeDBDocumentStore |\n| ValkeyEmbeddingRetriever | ValkeyDocumentStore |\n\nHybrid:\n\n| Component | Document Store\
+  \ |\n|-----------|---------------|\n| AzureAISearchHybridRetriever | AzureAISearchDocumentStore |\n| OpenSearchHybridRetriever\
+  \ | OpenSearchDocumentStore |\n| QdrantHybridRetriever | QdrantDocumentStore |\n| WeaviateHybridRetriever | WeaviateDocumentStore\
+  \ |\n\nSparse Embedding:\n\n| Component | Document Store |\n|-----------|---------------|\n| QdrantSparseEmbeddingRetriever\
+  \ | QdrantDocumentStore |\n\nAdvanced / Specialized:\n\n| Component | Purpose |\n|-----------|---------|\n| FilterRetriever\
+  \ | Metadata-filter-only retrieval (no embedding/BM25) |\n| AutoMergingRetriever | Returns parent documents from child chunk\
+  \ matches |\n| MultiQueryTextRetriever | Parallel multi-query over BM25 retrievers |\n| MultiQueryEmbeddingRetriever | Parallel\
+  \ multi-query over embedding retrievers |\n| SentenceWindowRetriever | Expands retrieved chunks to neighboring sentences\
+  \ |\n| SnowflakeTableRetriever | SQL queries against Snowflake tables |\n| ChromaQueryTextRetriever | Chroma native query\
+  \ API |\n\n#### 1.3.3a Retriever Config Params (Implementation Detail)\n\nSource: https://docs.haystack.deepset.ai/docs/retrievers\n\
+  \nCommon params shared by all retrievers:\n- `filters: Optional[Dict]` -- metadata filter dict (REPLACE or MERGE via FilterPolicy)\n\
+  - `top_k: int = 10` -- max documents returned\n- `filter_policy: FilterPolicy` -- REPLACE (default) or MERGE\n\nInMemoryBM25Retriever\n\
+  InMemoryBM25Retriever(\n    document_store: InMemoryDocumentStore,\n    filters: Optional[Dict] = None,\n    top_k: int\
+  \ = 10,\n    scale_score: bool = False,     # normalize BM25 score to [0,1]\n    filter_policy: FilterPolicy = FilterPolicy.REPLACE,\n\
+  )\n\nElasticsearchBM25Retriever\nElasticsearchBM25Retriever(\n    document_store: ElasticsearchDocumentStore,\n    filters:\
+  \ Optional[Dict] = None,\n    fuzziness: str = \"AUTO\",       # ES fuzziness: AUTO, 0, 1, 2\n    top_k: int = 10,\n   \
+  \ scale_score: bool = False,\n    filter_policy: FilterPolicy = FilterPolicy.REPLACE,\n    raise_on_failure: bool = True,\n\
+  )\n\nOpenSearchBM25Retriever\nOpenSearchBM25Retriever(\n    document_store: OpenSearchDocumentStore,\n    filters: Optional[Dict]\
+  \ = None,\n    fuzziness: str = \"AUTO\",\n    top_k: int = 10,\n    scale_score: bool = False,\n    filter_policy: FilterPolicy\
+  \ = FilterPolicy.REPLACE,\n    all_terms_must_match: bool = False,  # AND vs OR for query terms\n    raise_on_failure: bool\
+  \ = True,\n)\n\nPgvectorKeywordRetriever\nPgvectorKeywordRetriever(\n    document_store: PgvectorDocumentStore,\n    filters:\
+  \ Optional[Dict] = None,\n    top_k: int = 10,\n    filter_policy: FilterPolicy = FilterPolicy.REPLACE,\n    # Uses PostgreSQL\
+  \ full-text search (tsvector / tsquery)\n)\n\nWeaviateBM25Retriever\nWeaviateBM25Retriever(\n    document_store: WeaviateDocumentStore,\n\
+  \    filters: Optional[Dict] = None,\n    top_k: int = 10,\n    filter_policy: FilterPolicy = FilterPolicy.REPLACE,\n  \
+  \  move_to: Optional[Dict] = None,        # concept vector boost {concepts, objects, force}\n    move_away_from: Optional[Dict]\
+  \ = None, # concept avoidance\n)\n\nInMemoryEmbeddingRetriever\nInMemoryEmbeddingRetriever(\n    document_store: InMemoryDocumentStore,\n\
+  \    filters: Optional[Dict] = None,\n    top_k: int = 10,\n    scale_score: bool = False,\n    return_embedding: bool =\
+  \ False,  # include embedding vector in result doc\n    filter_policy: FilterPolicy = FilterPolicy.REPLACE,\n)\n# Input\
+  \ socket: query_embedding(List[float])\n\nElasticsearchEmbeddingRetriever\nElasticsearchEmbeddingRetriever(\n    document_store:\
+  \ ElasticsearchDocumentStore,\n    filters: Optional[Dict] = None,\n    top_k: int = 10,\n    num_candidates: Optional[int]\
+  \ = None,  # ANN candidate pool (default: 10*top_k)\n    filter_policy: FilterPolicy = FilterPolicy.REPLACE,\n    raise_on_failure:\
+  \ bool = True,\n)\n\nPgvectorEmbeddingRetriever\nPgvectorEmbeddingRetriever(\n    document_store: PgvectorDocumentStore,\n\
+  \    filters: Optional[Dict] = None,\n    top_k: int = 10,\n    filter_policy: FilterPolicy = FilterPolicy.REPLACE,\n  \
+  \  vector_function: Optional[str] = None,  # \"l2_distance\" | \"max_inner_product\" | \"cosine_distance\"\n)\n\nChromaEmbeddingRetriever\n\
+  ChromaEmbeddingRetriever(\n    document_store: ChromaDocumentStore,\n    filters: Optional[Dict] = None,\n    top_k: int\
+  \ = 10,\n    filter_policy: FilterPolicy = FilterPolicy.REPLACE,\n    # ChromaDocumentStore handles HNSW index params internally\n\
+  )\n\nQdrantEmbeddingRetriever\nQdrantEmbeddingRetriever(\n    document_store: QdrantDocumentStore,\n    filters: Optional[Dict]\
+  \ = None,\n    top_k: int = 10,\n    scale_score: bool = False,\n    return_embedding: bool = False,\n    filter_policy:\
+  \ FilterPolicy = FilterPolicy.REPLACE,\n)\n\nWeaviateEmbeddingRetriever\nWeaviateEmbeddingRetriever(\n    document_store:\
+  \ WeaviateDocumentStore,\n    filters: Optional[Dict] = None,\n    top_k: int = 10,\n    filter_policy: FilterPolicy = FilterPolicy.REPLACE,\n\
+  \    distance: Optional[float] = None,    # max vector distance threshold\n    certainty: Optional[float] = None,   # min\
+  \ cosine similarity [0,1]\n    move_to: Optional[Dict] = None,\n    move_away_from: Optional[Dict] = None,\n)\n\nQdrantHybridRetriever\n\
+  QdrantHybridRetriever(\n    document_store: QdrantDocumentStore,\n    filters: Optional[Dict] = None,\n    top_k: int =\
+  \ 10,\n    return_embedding: bool = False,\n    filter_policy: FilterPolicy = FilterPolicy.REPLACE,\n)\n# Inputs: query_embedding(List[float])\
+  \ + query_sparse_embedding(SparseEmbedding)\n# SparseEmbedding: { indices: List[int], values: List[float] }\n\nAzureAISearchHybridRetriever\n\
+  AzureAISearchHybridRetriever(\n    document_store: AzureAISearchDocumentStore,\n    filters: Optional[Dict] = None,\n  \
+  \  top_k: int = 10,\n    filter_policy: FilterPolicy = FilterPolicy.REPLACE,\n    # Uses Reciprocal Rank Fusion (RRF) in\
+  \ Azure for BM25+vector blend\n)\n\nOpenSearchHybridRetriever\nOpenSearchHybridRetriever(\n    document_store: OpenSearchDocumentStore,\n\
+  \    filters: Optional[Dict] = None,\n    top_k: int = 10,\n    filter_policy: FilterPolicy = FilterPolicy.REPLACE,\n  \
+  \  normalization_technique: str = \"min_max\",      # or \"l2\"\n    combination_technique: str = \"arithmetic_mean\", #\
+  \ or \"geometric_mean\", \"harmonic_mean\"\n    combination_weights: Optional[List[float]] = None,  # [bm25_weight, embedding_weight]\n\
+  )\n\nWeaviateHybridRetriever\nWeaviateHybridRetriever(\n    document_store: WeaviateDocumentStore,\n    filters: Optional[Dict]\
+  \ = None,\n    top_k: int = 10,\n    alpha: float = 0.5,   # 0=BM25 only, 1=vector only, 0.5=equal blend\n    filter_policy:\
+  \ FilterPolicy = FilterPolicy.REPLACE,\n    fusion_type: Optional[str] = None,  # \"rankedFusion\" | \"relativeScoreFusion\"\
+  \n)\n\nQdrantSparseEmbeddingRetriever\nQdrantSparseEmbeddingRetriever(\n    document_store: QdrantDocumentStore,\n    filters:\
+  \ Optional[Dict] = None,\n    top_k: int = 10,\n    scale_score: bool = False,\n    return_embedding: bool = False,\n  \
+  \  filter_policy: FilterPolicy = FilterPolicy.REPLACE,\n)\n# Input: query_sparse_embedding(SparseEmbedding) -- SPLADE /\
+  \ BM25s vectors\n\nFilterRetriever\nFilterRetriever(\n    document_store: BaseDocumentStore,\n    filters: Optional[Dict]\
+  \ = None,\n    # No vector search. Metadata filter operators: eq, ne, gt, gte, lt, lte, in, not in\n    # Logical: AND,\
+  \ OR, NOT (nested dicts)\n)\n\nAutoMergingRetriever\nAutoMergingRetriever(\n    document_store: BaseDocumentStore,\n   \
+  \ threshold: float = 0.5,  # fraction of child matches to trigger parent return\n)\n# Input: matched_documents(List[Document])\
+  \ from any upstream retriever\n# Output: documents -- swaps child chunks for parent if threshold met\n\nSentenceWindowRetriever\n\
+  SentenceWindowRetriever(\n    document_store: BaseDocumentStore,\n    window_size: int = 3,  # sentences before + after\
+  \ the matched sentence\n)\n# Input: retrieved_documents(List[Document])\n# Output: context_windows(List[Document]) with\
+  \ expanded content field\n\nMultiQueryTextRetriever\nMultiQueryTextRetriever(\n    retriever: InMemoryBM25Retriever,  #\
+  \ any BM25-compatible retriever\n    llm: BaseChatGenerator,\n    query_count: int = 4,              # number of sub-queries\
+  \ to generate\n    include_original: bool = True,     # prepend original query to generated set\n    system_prompt: Optional[str]\
+  \ = None,\n)\n# LLM generates query_count rephrasings; runs N BM25 retrievals; deduplicates\n\nSnowflakeTableRetriever\n\
+  SnowflakeTableRetriever(\n    user: str,\n    account: str,\n    api_key: Secret,          # Haystack Secret (env var, AWS\
+  \ SM, Azure KV)\n    database: Optional[str] = None,\n    db_schema: Optional[str] = None,\n    warehouse: Optional[str]\
+  \ = None,\n    login_timeout: Optional[int] = None,\n)\n# Input: query(str) -- NL2SQL via companion LLM or raw SQL\n# Output:\
+  \ documents(List[Document]) -- each row as Document\n\nFilterPolicy enum:\nclass FilterPolicy(Enum):\n    REPLACE = \"replace\"\
+  \  # component filter replaces init filter\n    MERGE   = \"merge\"    # logical AND merge of init + runtime filters\n\n\
+  #### 1.3.4 Embedders\n\nText Embedders (query-time):\n\n| Component | Provider |\n|-----------|----------|\n| OpenAITextEmbedder\
+  \ | OpenAI |\n| AzureOpenAITextEmbedder | Azure OpenAI |\n| AmazonBedrockTextEmbedder | AWS Bedrock |\n| CohereTextEmbedder\
+  \ | Cohere |\n| GoogleGenAITextEmbedder | Google |\n| MistralTextEmbedder | Mistral |\n| NvidiaTextEmbedder | NVIDIA |\n\
+  | OllamaTextEmbedder | Ollama |\n| JinaTextEmbedder | Jina AI |\n| HuggingFaceAPITextEmbedder | HF API |\n| SentenceTransformersTextEmbedder\
+  \ | SentenceTransformers (local) |\n| SentenceTransformersSparseTextEmbedder | SentenceTransformers sparse |\n| FastembedTextEmbedder\
+  \ | Fastembed |\n| FastembedSparseTextEmbedder | Fastembed sparse |\n| OptimumTextEmbedder | HF Optimum |\n| STACKITTextEmbedder\
+  \ | STACKIT |\n| WatsonxTextEmbedder | IBM Watsonx |\n\nDocument Embedders (index-time):\n\n| Component | Provider |\n|-----------|----------|\n\
+  | OpenAIDocumentEmbedder | OpenAI |\n| AzureOpenAIDocumentEmbedder | Azure OpenAI |\n| AmazonBedrockDocumentEmbedder | AWS\
+  \ Bedrock |\n| CohereDocumentEmbedder | Cohere |\n| GoogleGenAIDocumentEmbedder | Google |\n| GoogleGenAIMultimodalDocumentEmbedder\
+  \ | Google (multimodal) |\n| MistralDocumentEmbedder | Mistral |\n| NvidiaDocumentEmbedder | NVIDIA |\n| OllamaDocumentEmbedder\
+  \ | Ollama |\n| JinaDocumentEmbedder | Jina AI |\n| HuggingFaceAPIDocumentEmbedder | HF API |\n| SentenceTransformersDocumentEmbedder\
+  \ | SentenceTransformers |\n| SentenceTransformersSparseDocumentEmbedder | SentenceTransformers sparse |\n| FastembedDocumentEmbedder\
+  \ | Fastembed |\n| FastembedSparseDocumentEmbedder | Fastembed sparse |\n| OptimumDocumentEmbedder | HF Optimum |\n| STACKITDocumentEmbedder\
+  \ | STACKIT |\n| WatsonxDocumentEmbedder | IBM Watsonx |\n\nImage / Multimodal Embedders:\n\n| Component | Provider |\n\
+  |-----------|----------|\n| AmazonBedrockDocumentImageEmbedder | AWS Bedrock |\n| CohereDocumentImageEmbedder | Cohere |\n\
+  | JinaDocumentImageEmbedder | Jina AI |\n| SentenceTransformersDocumentImageEmbedder | SentenceTransformers |\n\n#### 1.3.5\
+  \ Rankers\n\n| Component | Strategy |\n|-----------|----------|\n| SentenceTransformersSimilarityRanker | Cross-encoder\
+  \ similarity scoring |\n| TransformersSimilarityRanker | Legacy cross-encoder (deprecated) |\n| SentenceTransformersDiversityRanker\
+  \ | Diversity-optimized reranking |\n| CohereRanker | Cohere Rerank API |\n| JinaRanker | Jina Reranker API |\n| AmazonBedrockRanker\
+  \ | AWS Bedrock reranking |\n| NvidiaRanker | NVIDIA NIM reranking |\n| HuggingFaceTEIRanker | HF Text Embeddings Inference\
+  \ |\n| FastembedRanker | Fastembed cross-encoder |\n| LLMRanker | LLM-as-judge ranking (returns JSON indices) |\n| LostInTheMiddleRanker\
+  \ | Position-aware reordering (begin/end focus) |\n| MetaFieldRanker | Sort by metadata field value |\n| MetaFieldGroupingRanker\
+  \ | Group documents by metadata key |\n| PyversityRanker | Relevance + diversity balancing |\n\n#### 1.3.6 Converters\n\n\
+  | Component | Input Format |\n|-----------|-------------|\n| TextFileToDocument | .txt |\n| PDFMinerToDocument | .pdf (complex\
+  \ layouts) |\n| PyPDFToDocument | .pdf |\n| DOCXToDocument | .docx |\n| HTMLToDocument | .html |\n| MarkdownToDocument |\
+  \ .md |\n| CSVToDocument | .csv |\n| XLSXToDocument | .xlsx |\n| PPTXToDocument | .pptx |\n| MSGToDocument | .msg (Outlook)\
+  \ |\n| JSONConverter | .json |\n| ImageFileToDocument | images |\n| MultiFileConverter | CSV, DOCX, HTML, JSON, MD, PPTX,\
+  \ PDF, TXT, XLSX |\n| KreuzbergConverter | 91+ formats (Rust engine) |\n| AzureDocumentIntelligenceConverter | PDF, JPEG,\
+  \ PNG, BMP, TIFF, DOCX, XLSX, PPTX, HTML |\n| AzureOCRDocumentConverter | Same as above (OCR variant) |\n| MistralOCRDocumentConverter\
+  \ | Documents via Mistral OCR API |\n| PaddleOCRVLDocumentConverter | Documents via PaddleOCR |\n| TikaDocumentConverter\
+  \ | Various via Apache Tika |\n| UnstructuredFileConverter | Text files/directories |\n| OpenAPIServiceToFunctions | OpenAPI\
+  \ specs -> function defs |\n| OutputAdapter | Component output format adaptation |\n| FileToFileContent | Any file -> FileContent\
+  \ objects |\n| DocumentToImageContent | Document -> ImageContent objects |\n| ImageFileToImageContent | Image files -> ImageContent\
+  \ objects |\n| PDFToImageContent | PDF pages -> ImageContent objects |\n\n#### 1.3.7 Preprocessors\n\n| Component | Purpose\
+  \ |\n|-----------|---------|\n| DocumentCleaner | Remove whitespace, empty lines, headers/footers, regex patterns |\n| DocumentSplitter\
+  \ | Split by word/sentence/passage/page/line/function |\n| DocumentPreprocessor | Combined split + clean in single component\
+  \ |\n| HierarchicalDocumentSplitter | Multi-level parent-child document trees |\n| RecursiveSplitter | Recursive separator-based\
+  \ chunking |\n| MarkdownHeaderSplitter | Split at markdown headers preserving hierarchy |\n| ChineseDocumentSplitter | Chinese-specific\
+  \ segmentation via HanLP |\n| CSVDocumentCleaner | Remove empty CSV rows/columns |\n| CSVDocumentSplitter | Split CSV by\
+  \ empty row/column boundaries |\n| TextCleaner | Remove regex, punctuation, numbers; lowercase |\n\n#### 1.3.8 Routers\n\
+  \n| Component | Routing Logic |\n|-----------|--------------|\n| ConditionalRouter | User-defined conditions (Jinja2 expressions)\
+  \ |\n| FileTypeRouter | Route by file MIME type |\n| DocumentTypeRouter | Route documents by MIME type |\n| DocumentLengthRouter\
+  \ | Route by document content length |\n| MetadataRouter | Route by metadata field values |\n| TextLanguageRouter | Route\
+  \ by detected language |\n| LLMMessagesRouter | LLM classifies and routes chat messages |\n| TransformersTextRouter | Model-defined\
+  \ category labels |\n| TransformersZeroShotTextRouter | User-defined zero-shot category labels |\n\n#### 1.3.9 Joiners\n\
+  \n| Component | Merges |\n|-----------|--------|\n| DocumentJoiner | Lists of Documents (with dedup + score merge) |\n|\
+  \ BranchJoiner | Pipeline branches into single output |\n| AnswerJoiner | Multiple GeneratedAnswer lists |\n| StringJoiner\
+  \ | Strings from different components |\n| ListJoiner | Generic lists into flat list |\n\n#### 1.3.10 Writers\n\n| Component\
+  \ | Purpose |\n|-----------|---------|\n| DocumentWriter | Write Documents to any DocumentStore |\n\n#### 1.3.11 PromptBuilder\n\
+  \n| Component | Purpose |\n|-----------|---------|\n| PromptBuilder | Jinja2 template rendering -> string prompt |\n| ChatPromptBuilder\
+  \ | Jinja2 template rendering -> ChatMessage list |\n\nInput: template string + dynamic variables. Output: rendered prompt\
+  \ string or messages.\nTemplates use `{{ variable }}` syntax with full Jinja2 (loops, conditionals, filters).\n\n#### 1.3.12\
+  \ Document Stores\n\n| Store | Backend | BM25 | Embedding | Hybrid | Filtering |\n|-------|---------|------|-----------|--------|-----------|\n\
+  | InMemoryDocumentStore | Python dicts | Yes | Yes | No | Yes |\n| ElasticsearchDocumentStore | Elasticsearch | Yes | Yes\
+  \ | No | Yes |\n| OpenSearchDocumentStore | OpenSearch | Yes | Yes | Yes | Yes |\n| PgvectorDocumentStore | PostgreSQL +\
+  \ pgvector | Yes | Yes | No | Yes |\n| ChromaDocumentStore | Chroma | No | Yes | No | Yes |\n| PineconeDocumentStore | Pinecone\
+  \ (cloud) | No | Yes | No | Yes |\n| QdrantDocumentStore | Qdrant | No | Yes | Yes | Yes |\n| WeaviateDocumentStore | Weaviate\
+  \ | Yes | Yes | Yes | Yes |\n| AzureAISearchDocumentStore | Azure AI Search | Yes | Yes | Yes | Yes |\n| MongoDBAtlasDocumentStore\
+  \ | MongoDB Atlas | Yes | Yes | No | Yes |\n| AstraDocumentStore | DataStax Astra | No | Yes | No | Yes |\n| FAISSDocumentStore\
+  \ | FAISS | No | Yes | No | No |\n| Neo4jDocumentStore | Neo4j | No | Yes | No | Yes |\n| MilvusDocumentStore | Milvus |\
+  \ No | Yes | No | Yes |\n| ArcadeDBDocumentStore | ArcadeDB | No | Yes | No | Yes |\n| ValkeyDocumentStore | Valkey | No\
+  \ | Yes | No | Yes |\n\n#### 1.3.13 Agent & Tools\n\n| Component | Purpose |\n|-----------|---------|\n| Agent | Iterative\
+  \ tool-calling loop over a ChatGenerator |\n| Tool | Callable function with name, description, JSON schema params |\n| ComponentTool\
+  \ | Wraps any Haystack Component as an Agent Tool |\n| MCPTool | Model Context Protocol tool integration |\n\nAgent constructor:\
+  \ `Agent(chat_generator, tools, system_prompt, exit_conditions, state_schema, max_agent_steps, streaming_callback)`.\n\n\
+  Agent loop: generate -> detect tool calls -> execute tools -> feed results back -> repeat until exit_condition met (\"text\"\
+  \ response or named tool).\n\n---"
+2_vercel_ai_sdk_typescript_streaming_first_llm_framework: ''
+2_1_architecture: 'Three layers: AI SDK Core (provider-agnostic primitives), AI SDK UI (React/Next.js hooks), AI SDK Providers
+  (model adapters). Built around the `LanguageModelV4` interface -- every provider implements it, enabling zero-code model
+  switching.'
+2_2_full_type_registry: "#### 2.2.1 Core Generation Functions\n\ngenerateText\n\ngenerateText({\n  model: LanguageModel,\n\
+  \  prompt?: string,\n  messages?: ModelMessage[],\n  system?: string | SystemModelMessage | SystemModelMessage[],\n  tools?:\
+  \ ToolSet,\n  toolChoice?: \"auto\" | \"none\" | \"required\" | { type: \"tool\"; toolName: string },\n  maxOutputTokens?:\
+  \ number,\n  temperature?: number,\n  topP?: number,\n  topK?: number,\n  presencePenalty?: number,\n  frequencyPenalty?:\
+  \ number,\n  stopSequences?: string[],\n  seed?: number,\n  maxRetries?: number,\n  maxSteps?: number,           // enables\
+  \ agentic multi-step loop\n  timeout?: number | { totalMs?; stepMs? },\n  abortSignal?: AbortSignal,\n  headers?: Record<string,\
+  \ string>,\n  prepareStep?: (options) => PrepareStepResult,\n  stopWhen?: StopCondition | StopCondition[],\n  output?: Output,\n\
+  \  onStepFinish?: (result) => void,\n  onFinish?: (result) => void,\n  providerOptions?: Record<string, JSONObject>,\n \
+  \ activeTools?: string[],\n}): Promise<GenerateTextResult>\n\nReturns: `{ text, reasoning, reasoningText, sources, files,\
+  \ toolCalls, toolResults, finishReason, usage, totalUsage, steps, request, response, warnings, providerMetadata }`\n\nstreamText\n\
+  \nstreamText({\n  // same core params as generateText, plus:\n  onChunk?: (event) => void,\n  onError?: (event) => void,\n\
+  \  onAbort?: (event) => void,\n  experimental_transform?: StreamTextTransform[],\n  experimental_telemetry?: TelemetrySettings,\n\
+  }): StreamTextResult\n\nReturns: `{ textStream, fullStream, text, content, finishReason, usage, totalUsage, toolCalls, toolResults,\
+  \ steps, reasoning, sources, files, toUIMessageStream(), toUIMessageStreamResponse(), toTextStreamResponse(), pipeUIMessageStreamToResponse(),\
+  \ consumeStream() }`\n\ngenerateObject\n\ngenerateObject({\n  model: LanguageModel,\n  schema: ZodSchema | JSONSchema7,\
+  \   // structured output constraint\n  schemaName?: string,\n  schemaDescription?: string,\n  prompt?: string,\n  messages?:\
+  \ ModelMessage[],\n  system?: string,\n  mode?: \"auto\" | \"json\" | \"tool\",   // generation strategy\n  // + same tuning\
+  \ params as generateText\n}): Promise<GenerateObjectResult>\n\nReturns: `{ object, finishReason, usage, warnings, request,\
+  \ response }`\n\nstreamObject\n\nstreamObject({\n  // same params as generateObject\n}): StreamObjectResult\n\nReturns:\
+  \ `{ partialObjectStream, object, finishReason, usage, elementStream }`\n\n#### 2.2.2 Message Types\n\n| Type | Role | Description\
+  \ |\n|------|------|-------------|\n| SystemModelMessage | system | System instructions |\n| UserModelMessage | user | User\
+  \ input (text, images, files) |\n| AssistantModelMessage | assistant | Model response (text, tool calls, reasoning) |\n\
+  | ToolModelMessage | tool | Tool execution results |\n| ModelMessage | (union) | Union of all four message types |\n| CoreMessage\
+  \ | (legacy) | Previous name for ModelMessage |\n\nUIMessage (client-side):\n\n{\n  id: string,\n  role: \"system\" | \"\
+  user\" | \"assistant\",\n  parts: UIMessagePart[],     // text, tool-invocation, reasoning, source, file, data\n  metadata?:\
+  \ unknown,\n  status: \"submitted\" | \"streaming\" | \"ready\" | \"error\"\n}\n\n#### 2.2.3 Tool System\n\ntool() helper:\n\
+  \ntool({\n  description: string,\n  inputSchema: ZodSchema | JSONSchema,\n  execute?: async (input, context) => RESULT,\n\
+  \  strict?: boolean,\n  inputExamples?: Array,\n  needsApproval?: boolean | async (input) => boolean,\n  toModelOutput?:\
+  \ (output) => ContentPart,\n})\n\nExecute context: `{ toolCallId, messages, abortSignal, experimental_context }`\n\nToolInvocation:\n\
+  \n{\n  toolName: string,\n  toolCallId: string,\n  state: \"partial-call\" | \"call\" | \"result\",\n  args: Record<string,\
+  \ unknown>,\n  result?: unknown,\n}\n\nToolCall / ToolResult:\n\nToolCall<NAME extends string, ARGS>\nToolResult<NAME extends\
+  \ string, ARGS, RESULT>\nTypedToolCall<TOOLS>     // extracts types from ToolSet\nTypedToolResult<TOOLS>   // extracts types\
+  \ from ToolSet\n\n#### 2.2.4 Provider Interface\n\n// Model creation pattern\nconst model = provider(modelId)  // e.g. openai(\"\
+  gpt-4.1\")\n\n// LanguageModelV4 interface (abstract)\ninterface LanguageModelV4 {\n  doGenerate(options): Promise<GenerateResult>\n\
+  \  // supports: streaming, structured output, tool calling\n}\n\nOfficial Providers:\n\n| Provider | Factory | Models |\n\
+  |----------|---------|--------|\n| OpenAI | `openai()` | gpt-4.1, gpt-4o, o3, o4-mini |\n| Anthropic | `anthropic()` | claude-opus-4-6,\
+  \ claude-sonnet-4, etc |\n| Google GenAI | `google()` | gemini-2.5-pro, gemini-2.5-flash |\n| Azure OpenAI | `azure()` |\
+  \ gpt-4.1 via Azure |\n| Amazon Bedrock | `bedrock()` | Claude, Llama, etc via AWS |\n| Mistral | `mistral()` | mistral-large,\
+  \ codestral |\n| Groq | `groq()` | llama, mixtral on Groq hardware |\n| xAI | `xai()` | Grok models |\n| DeepSeek | `deepseek()`\
+  \ | deepseek-v3, deepseek-r1 |\n| Cohere | `cohere()` | command-r-plus |\n| Together AI | `togetherai()` | open-source models\
+  \ |\n| Fireworks | `fireworks()` | fast open-source inference |\n| Perplexity | `perplexity()` | search-augmented models\
+  \ |\n| Cerebras | `cerebras()` | fast Llama inference |\n| DeepInfra | `deepinfra()` | open-source models |\n\nCommunity\
+  \ providers: Ollama, OpenRouter, Cloudflare Workers AI, Portkey, LM Studio, 30+ more.\n\n#### 2.2.5 Streaming & Data Protocol\n\
+  \nDataStreamProtocol: Wire format for streaming custom data alongside text.\n\nSource: https://ai-sdk.dev/docs/ai-sdk-ui/stream-protocol\n\
+  \nThe protocol is newline-delimited lines, each line formatted as:\n{type_code}:{json_value}\\n\n\nComplete type code table:\n\
+  \n| Code | Type | Payload shape | Notes |\n|------|------|--------------|-------|\n| `0` | text-delta | `\"chunk string\"\
+  ` | Raw text token |\n| `1` | tool-call | `{toolCallId, toolName, args}` | Complete tool invocation |\n| `2` | data | `[...JSONValue]`\
+  \ | Array of arbitrary JSON |\n| `3` | error | `\"error message string\"` | Error from server |\n| `8` | message-annotations\
+  \ | `[...JSONValue]` | Annotation array |\n| `9` | tool-call-streaming-start | `{toolCallId, toolName}` | Begin streaming\
+  \ args |\n| `a` | tool-call-delta | `{toolCallId, argsTextDelta}` | Partial args chunk |\n| `b` | tool-result | `{toolCallId,\
+  \ result}` | Tool execution result |\n| `c` | step-start | `{messageId, stepType}` | stepType: \"initial\"\\|\"continue\"\
+  \ |\n| `d` | finish-step | `{finishReason, usage?, isContinued}` | Per-step completion |\n| `e` | finish-message | `{finishReason,\
+  \ usage}` | Full message done |\n| `f` | file | `{url, mediaType}` | File output |\n| `g` | reasoning | `\"reasoning text\
+  \ chunk\"` | Extended thinking |\n| `h` | source | `{sourceType, id, url, title, ...}` | Citation source |\n\nWire format\
+  \ examples:\n\n0:\"Hello\"\n0:\" world\"\n9:{\"toolCallId\":\"abc\",\"toolName\":\"get_weather\"}\na:{\"toolCallId\":\"\
+  abc\",\"argsTextDelta\":\"{\\\"city\\\":\\\"\"}\na:{\"toolCallId\":\"abc\",\"argsTextDelta\":\"Paris\\\"}\"}\n1:{\"toolCallId\"\
+  :\"abc\",\"toolName\":\"get_weather\",\"args\":{\"city\":\"Paris\"}}\nb:{\"toolCallId\":\"abc\",\"result\":{\"temp\":22,\"\
+  unit\":\"C\"}}\n0:\"The weather in Paris is 22C.\"\nd:{\"finishReason\":\"tool-calls\",\"usage\":{\"promptTokens\":45,\"\
+  completionTokens\":12},\"isContinued\":false}\ne:{\"finishReason\":\"stop\",\"usage\":{\"promptTokens\":78,\"completionTokens\"\
+  :38}}\n\nServer-side helpers:\n\n// Stream to Response\nreturn result.toUIMessageStreamResponse();  // Content-Type: text/event-stream\n\
+  \n// Pipe to Node.js response\nresult.pipeUIMessageStreamToResponse(res, {\n  headers: { \"X-Custom\": \"value\" },\n  sendReasoning:\
+  \ true,\n  sendSources: true,\n  onError: (error) => error.message,  // returns string to send as error part\n});\n\n//\
+  \ Manual data appending\nconst dataStream = createDataStream({\n  execute: async (writer) => {\n    writer.writeData({ progress:\
+  \ 50 });        // type 2\n    writer.writeMessageAnnotation({ id: \"x\" }); // type 8\n  },\n});\n\nText stream protocol\
+  \ (simpler alternative):\nPlain `text/plain` with `streamProtocol: \"text\"` in useChat.\nNo tool calls, no data parts --\
+  \ raw text only.\n\nStream part types: text-delta, tool-call, tool-call-streaming-start, tool-call-delta, tool-result, reasoning,\
+  \ source, file, data, error, finish, step-start, step-finish.\n\n#### 2.2.6 UI Hooks (React)\n\nSource: https://ai-sdk.dev/docs/reference/ai-sdk-ui/use-chat\n\
+  \n| Hook | Purpose |\n|------|---------|\n| `useChat()` | Full chat UI state management + streaming |\n| `useCompletion()`\
+  \ | Single-turn text completion |\n| `useObject()` | Streaming structured object generation |\n\nuseChat -- full parameter\
+  \ API:\n\nuseChat({\n  // Identity & routing\n  id?: string,                     // chat ID -- stable across re-renders\n\
+  \  api?: string,                    // default: \"/api/chat\"\n\n  // Initial state\n  initialMessages?: UIMessage[],\n\
+  \  initialInput?: string,\n\n  // Request customization\n  body?: Record<string, unknown>,  // extra JSON fields merged\
+  \ into POST body\n  headers?: Record<string, string>,\n  credentials?: RequestCredentials, // \"include\" | \"omit\" | \"\
+  same-origin\"\n  sendExtraMessageFields?: boolean, // send id/createdAt in message POST\n\n  // Protocol\n  streamProtocol?:\
+  \ \"data\" | \"text\", // default: \"data\"\n  maxSteps?: number,                // agentic loop: steps per user message\n\
+  \n  // Callbacks\n  onResponse?: (response: Response) => void | Promise<void>,\n  onFinish?: (message: UIMessage, options:\
+  \ {\n    usage: { promptTokens: number; completionTokens: number; totalTokens: number };\n    finishReason: FinishReason;\n\
+  \  }) => void,\n  onError?: (error: Error) => void,\n  onToolCall?: ({ toolCall: ToolCall }) => void | unknown | Promise<unknown>,\n\
+  \n  // Performance\n  experimental_throttle?: number,  // ms between UI re-renders during streaming\n\n  // Advanced\n \
+  \ experimental_prepareRequestBody?: (options: {\n    messages: UIMessage[];\n    id: string;\n    requestBody?: Record<string,\
+  \ unknown>;\n  }) => Record<string, unknown>,\n\n  fetch?: typeof globalThis.fetch,  // custom fetch impl\n})\n\nuseChat\
+  \ return object:\n\n{\n  // State\n  messages: UIMessage[],\n  input: string,\n  status: \"ready\" | \"submitted\" | \"\
+  streaming\" | \"error\",\n  error?: Error,\n  id: string,\n  data?: JSONValue[],              // data parts from stream\
+  \ (type 2)\n\n  // Actions\n  sendMessage: (message: CreateMessage | string) => void,\n  append: (message: Message | CreateMessage)\
+  \ => Promise<string | null | undefined>,\n  reload: () => Promise<string | null | undefined>,  // regenerate last assistant\
+  \ msg\n  stop: () => void,               // abort in-flight stream\n  addToolResult: ({ toolCallId: string; result: unknown\
+  \ }) => void,\n\n  // State setters\n  setMessages: Dispatch<SetStateAction<UIMessage[]>>,\n  setInput: Dispatch<SetStateAction<string>>,\n\
+  \  setData: Dispatch<SetStateAction<JSONValue[] | undefined>>,\n\n  // Form helpers\n  handleInputChange: (e: React.ChangeEvent<HTMLInputElement\
+  \ | HTMLTextAreaElement>) => void,\n  handleSubmit: (\n    event?: React.FormEvent<HTMLFormElement>,\n    options?: { experimental_attachments?:\
+  \ FileList | File[] }\n  ) => void,\n}\n\nuseCompletion -- full parameter API:\n\nSource: https://ai-sdk.dev/docs/reference/ai-sdk-ui/use-completion\n\
+  \nuseCompletion({\n  api?: string,                   // default: \"/api/completion\"\n  id?: string,\n  initialInput?: string,\n\
+  \  initialCompletion?: string,\n  body?: Record<string, unknown>,\n  headers?: Record<string, string>,\n  credentials?:\
+  \ RequestCredentials,\n  streamProtocol?: \"data\" | \"text\",  // default: \"data\"\n  onResponse?: (response: Response)\
+  \ => void | Promise<void>,\n  onFinish?: (prompt: string, completion: string) => void,\n  onError?: (error: Error) => void,\n\
+  \  experimental_throttle?: number,\n  fetch?: typeof globalThis.fetch,\n})\n\nuseCompletion return object:\n\n{\n  completion:\
+  \ string,            // accumulated completion text\n  input: string,\n  isLoading: boolean,\n  error?: Error,\n  data?:\
+  \ JSONValue[],            // data parts from stream\n\n  // Actions\n  complete: (prompt: string, options?: {\n    headers?:\
+  \ Record<string, string>;\n    body?: Record<string, unknown>;\n  }) => Promise<string | null | undefined>,\n  stop: ()\
+  \ => void,\n  setCompletion: Dispatch<SetStateAction<string>>,\n  setInput: Dispatch<SetStateAction<string>>,\n\n  // Form\
+  \ helpers\n  handleInputChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void,\n  handleSubmit:\
+  \ (e?: React.FormEvent<HTMLFormElement>) => void,\n}\n\nuseObject -- full parameter API:\n\nuseObject({\n  api?: string,\
+  \                  // default: \"/api/use-object\"\n  id?: string,\n  schema: ZodSchema,             // Zod schema for the\
+  \ target object shape\n  initialValue?: DeepPartial<T>,\n  headers?: Record<string, string>,\n  credentials?: RequestCredentials,\n\
+  \  fetch?: typeof globalThis.fetch,\n  onFinish?: (result: { object: T | undefined; error: Error | undefined }) => void,\n\
+  \  onError?: (error: Error) => void,\n})\n\n// Returns:\n{\n  object: DeepPartial<T> | undefined,   // partial object during\
+  \ streaming\n  isLoading: boolean,\n  error?: Error,\n  stop: () => void,\n  submit: (input: unknown) => void,\n}\n\n####\
+  \ 2.2.7 Agent Pattern\n\nAgents in Vercel AI SDK are `generateText` + `maxSteps` + tools:\n\nconst result = await generateText({\n\
+  \  model: anthropic(\"claude-sonnet-4-20250514\"),\n  tools: { search, calculate, writeFile },\n  maxSteps: 10,\n  stopWhen:\
+  \ stepCountIs(10),\n  prompt: \"Research and summarize...\",\n  onStepFinish: ({ text, toolCalls, toolResults }) => {\n\
+  \    console.log(\"Step completed\", toolCalls.length, \"tool calls\");\n  },\n});\n// result.steps contains the full execution\
+  \ trace\n\nNo separate Agent class -- the loop is implicit in generateText/streamText when maxSteps > 1.\n\n#### 2.2.8 Middleware\
+  \ System\n\nSource: https://ai-sdk.dev/docs/ai-sdk-core/middleware\n\nMiddleware wraps a `LanguageModelV4` to intercept\
+  \ `doGenerate` and `doStream` calls.\nUsed for: logging, caching, rate limiting, prompt injection, reasoning extraction.\n\
+  \nCore API:\n\nimport { wrapLanguageModel, type LanguageModelMiddleware } from \"ai\";\n\nconst wrappedModel = wrapLanguageModel({\n\
+  \  model: anthropic(\"claude-opus-4-6\"),\n  middleware: myMiddleware,   // single middleware\n  // OR\n  middleware: [mw1,\
+  \ mw2],    // array -- applied left to right\n});\n\nMiddleware interface:\n\ninterface LanguageModelMiddleware {\n  //\
+  \ Transform non-streaming calls\n  wrapGenerate?: (options: {\n    doGenerate: () => ReturnType<LanguageModelV4[\"doGenerate\"\
+  ]>,\n    doStream:   () => ReturnType<LanguageModelV4[\"doStream\"]>,\n    params:     Parameters<LanguageModelV4[\"doGenerate\"\
+  ]>[0],\n    model:      LanguageModelV4,\n  }) => ReturnType<LanguageModelV4[\"doGenerate\"]>;\n\n  // Transform streaming\
+  \ calls\n  wrapStream?: (options: {\n    doGenerate: () => ReturnType<LanguageModelV4[\"doGenerate\"]>,\n    doStream: \
+  \  () => ReturnType<LanguageModelV4[\"doStream\"]>,\n    params:     Parameters<LanguageModelV4[\"doStream\"]>[0],\n   \
+  \ model:      LanguageModelV4,\n  }) => ReturnType<LanguageModelV4[\"doStream\"]>;\n\n  transformParams?: {\n    (options:\
+  \ { params: LanguageModelV4CallOptions; type: \"generate\" | \"stream\" })\n      : Promise<LanguageModelV4CallOptions>\
+  \ | LanguageModelV4CallOptions,\n  };\n}\n\nBuilt-in middleware:\n\n| Middleware | Import | Purpose |\n|------------|--------|---------|\n\
+  | `extractReasoningMiddleware` | `ai` | Extract `<think>` tags as reasoning field |\n| `simulateStreamingMiddleware` | `ai`\
+  \ | Convert non-streaming response to stream |\n| `defaultSettingsMiddleware` | `ai` | Override model default params |\n\
+  \nextractReasoningMiddleware config:\n\nextractReasoningMiddleware({\n  tagName: \"think\",         // tag to extract (default:\
+  \ \"think\")\n  separator: \"\\n\",          // separator between reasoning and text\n  startWithReasoning: false, // true\
+  \ = reasoning precedes text\n})\n\nCustom logging middleware example:\n\nconst loggingMiddleware: LanguageModelMiddleware\
+  \ = {\n  wrapGenerate: async ({ doGenerate, params }) => {\n    console.log(\"Prompt:\", params.prompt);\n    const result\
+  \ = await doGenerate();\n    console.log(\"Response:\", result.text);\n    return result;\n  },\n  wrapStream: async ({\
+  \ doStream, params }) => {\n    console.log(\"Stream start:\", params.prompt);\n    const { stream, ...rest } = await doStream();\n\
+  \    return {\n      stream: stream.pipeThrough(new TransformStream({\n        transform(chunk, controller) {\n        \
+  \  if (chunk.type === \"text-delta\") console.log(chunk.textDelta);\n          controller.enqueue(chunk);\n        },\n\
+  \      })),\n      ...rest,\n    };\n  },\n};\n\nCustom caching middleware example:\n\nconst cacheMiddleware: LanguageModelMiddleware\
+  \ = {\n  wrapGenerate: async ({ doGenerate, params }) => {\n    const cacheKey = JSON.stringify(params);\n    const cached\
+  \ = cache.get(cacheKey);\n    if (cached) return cached;\n    const result = await doGenerate();\n    cache.set(cacheKey,\
+  \ result);\n    return result;\n  },\n};\n\nMiddleware composition order: leftmost = outermost wrapper (called first on\
+  \ input, last on output).\n\n---"
+3_comparative_analysis: ''
+3_1_architecture_comparison: '| Dimension | Haystack | Vercel AI SDK |
+
+  |-----------|----------|---------------|
+
+  | Language | Python | TypeScript |
+
+  | Paradigm | Directed graph pipeline | Function-call with implicit loop |
+
+  | Component model | @component decorator + run() | Function params + LanguageModelV4 |
+
+  | Typing | Python type hints + dict returns | TypeScript generics + Zod schemas |
+
+  | Streaming | StreamingChunk callback | AsyncIterableStream native |
+
+  | Agent model | Explicit Agent class with tool loop | generateText + maxSteps |
+
+  | Serialization | YAML native | JSON (no built-in pipeline serialization) |
+
+  | Document store | 16 integrations built-in | None (not in scope) |
+
+  | Structured output | Via PromptBuilder templates | generateObject with Zod/JSON Schema |
+
+  | State | Pipeline-level (no cross-run state) | React hooks (useChat) for UI state |
+
+  | Primary use | Backend RAG/pipeline/agent | Frontend streaming + API routes |'
+3_2_component_equivalence_map: '| Haystack Component | Vercel AI SDK Equivalent | Notes |
+
+  |--------------------|--------------------------|-------|
+
+  | Pipeline | (no equivalent) | Vercel has no graph engine |
+
+  | Generator / ChatGenerator | generateText / streamText | Function vs component |
+
+  | Retriever | (external, e.g. via tool) | Vercel delegates retrieval to tools |
+
+  | Embedder | (external, via provider) | Vercel has embedding support via providers |
+
+  | Ranker | (none) | Must implement as tool or middleware |
+
+  | Converter | (none) | Not in scope |
+
+  | Router | (none -- implicit in code) | TypeScript if/switch replaces routers |
+
+  | Joiner | (none -- implicit in code) | Promise.all or array merge |
+
+  | DocumentStore | (none) | Not in scope |
+
+  | PromptBuilder | system/prompt params | String interpolation replaces Jinja2 |
+
+  | Agent | generateText + maxSteps | Implicit vs explicit agent |
+
+  | Tool | tool() helper | Near-identical concept |
+
+  | ChatMessage | ModelMessage / CoreMessage | Role-based in both |
+
+  | Document | (no equivalent) | Vercel has no document abstraction |
+
+  | StreamingChunk | textStream / fullStream | Different streaming models |
+
+
+  ---'
+4_cex_pillar_mapping: ''
+4_1_haystack_cex_pillars: '| Haystack Concept | CEX Pillar | CEX Kind | Rationale |
+
+  |------------------|-----------|----------|-----------|
+
+  | Pipeline | P12 Orchestration | workflow | Directed graph = workflow |
+
+  | Component (base) | P04 Tools | cli_tool | Reusable processing unit |
+
+  | @component decorator | P08 Architecture | naming_rule | Convention-over-config pattern |
+
+  | ChatGenerator | P02 Model | agent | LLM interface abstraction |
+
+  | Generator | P03 Prompt | prompt_template | Text generation = prompt execution |
+
+  | Retriever | P01 Knowledge | rag_source | Core RAG retrieval |
+
+  | Embedder | P01 Knowledge | embedding_config | Vector representation |
+
+  | Ranker | P07 Evaluation | scoring_rubric | Document relevance scoring |
+
+  | Converter | P04 Tools | cli_tool | File format transformation |
+
+  | Router | P12 Orchestration | dispatch_rule | Conditional routing |
+
+  | Joiner | P12 Orchestration | workflow | Branch merge |
+
+  | Writer | P01 Knowledge | knowledge_index | Persistence to store |
+
+  | DocumentStore | P01 Knowledge | rag_source | Storage backend |
+
+  | PromptBuilder | P03 Prompt | prompt_template | Template rendering |
+
+  | Agent | P02 Model | agent | Autonomous tool-using entity |
+
+  | Tool | P04 Tools | cli_tool | External capability |
+
+  | Document | P06 Schema | schema | Core data contract |
+
+  | ChatMessage | P06 Schema | input_schema | Message protocol |'
+4_2_vercel_ai_sdk_cex_pillars: '| Vercel AI SDK Concept | CEX Pillar | CEX Kind | Rationale |
+
+  |-----------------------|-----------|----------|-----------|
+
+  | generateText | P03 Prompt | action_prompt | Single-shot generation |
+
+  | streamText | P03 Prompt | action_prompt | Streaming generation |
+
+  | generateObject | P06 Schema | schema | Schema-constrained output |
+
+  | streamObject | P06 Schema | schema | Streaming structured output |
+
+  | tool() | P04 Tools | cli_tool | Callable capability |
+
+  | LanguageModelV4 | P02 Model | model_provider | Provider abstraction |
+
+  | Provider | P02 Model | model_provider | Model factory |
+
+  | CoreMessage / ModelMessage | P06 Schema | input_schema | Message contract |
+
+  | UIMessage | P05 Output | output_template | Client-side representation |
+
+  | ToolInvocation | P04 Tools | cli_tool | Tool execution record |
+
+  | useChat | P05 Output | landing_page | UI state management |
+
+  | DataStreamProtocol | P06 Schema | interface | Wire protocol contract |
+
+  | maxSteps (agent loop) | P12 Orchestration | workflow | Iterative execution |
+
+  | StopCondition | P11 Feedback | quality_gate | Termination criteria |
+
+  | prepareStep | P12 Orchestration | dispatch_rule | Per-step configuration |
+
+  | onStepFinish | P11 Feedback | learning_record | Step-level feedback |
+
+
+  ---'
+5_key_insights_for_cex: ''
+5_1_what_cex_can_learn_from_haystack:
+- 'Typed component protocol: Haystack''s `@component` + typed `run()` is close to CEX''s kind system. Each component declares
+  its I/O contract -- analogous to CEX ISOs declaring builder inputs/outputs.'
+- 'Pipeline serialization: YAML-native serialization means pipelines are data, not code. CEX already uses YAML for schemas
+  -- a Pipeline kind could serialize CEX workflows the same way.'
+- 'Document Store abstraction: 16 backends behind one interface. CEX''s `rag_source` kind could adopt this pattern for storage-agnostic
+  retrieval.'
+- 'Retriever taxonomy: The BM25/embedding/hybrid/sparse split maps directly to CEX chunk_strategy and embedding_config kinds.
+  Haystack proves the taxonomy is industry-standard.'
+- 'Agent as component: Haystack''s Agent is just another pipeline component with a tool loop. This validates CEX''s decision
+  to treat agents as composable artifacts, not special entities.'
+5_2_what_cex_can_learn_from_vercel_ai_sdk:
+- 'Streaming-first: Every function has a streaming variant. CEX''s output pipeline (P05) should assume streaming as default,
+  not batch.'
+- 'Schema-as-output-constraint: `generateObject` with Zod proves that structured output is a first-class concern. CEX''s `schema`
+  kind should include output schemas, not just input validation.'
+- 'Provider abstraction depth: LanguageModelV4 hides 30+ providers behind one interface. CEX''s `model_provider` kind + `fallback_chain`
+  already does this -- Vercel validates the pattern.'
+- 'Implicit agent loop: No Agent class needed -- just generateText + maxSteps. This is simpler than Haystack''s explicit Agent.
+  CEX could offer both patterns.'
+- 'UI message protocol: UIMessage with parts (text, tool-invocation, reasoning, source, file) is a rich output format. CEX''s
+  `output_template` kind could adopt this part-based structure.'
+5_3_component_count_summary: '| Category | Haystack | Vercel AI SDK |
+
+  |----------|----------|---------------|
+
+  | Generators / LLM functions | 44 | 4 (generateText, streamText, generateObject, streamObject) |
+
+  | Retrievers | 28 | 0 (delegated to tools) |
+
+  | Embedders | 40 | via providers |
+
+  | Rankers | 14 | 0 |
+
+  | Converters | 26 | 0 |
+
+  | Preprocessors | 10 | 0 |
+
+  | Routers | 9 | 0 (code-level routing) |
+
+  | Joiners | 5 | 0 |
+
+  | Document Stores | 16 | 0 |
+
+  | Prompt Builders | 2 | string params |
+
+  | Agent/Tool | 4 | 1 (tool helper) |
+
+  | UI Hooks | 0 | 3 |
+
+  | Total components | 198 | 8 core functions |
+
+
+  Haystack = wide component catalog for backend pipelines.
+
+  Vercel AI SDK = narrow, deep API for streaming LLM interactions.
+
+
+  ---'
+6_references: '- Haystack docs: https://docs.haystack.deepset.ai/
+
+  - Haystack GitHub: https://github.com/deepset-ai/haystack
+
+  - Vercel AI SDK docs: https://ai-sdk.dev/
+
+  - Vercel AI SDK GitHub: https://github.com/vercel/ai
+
+  - Haystack integrations: https://haystack.deepset.ai/integrations
+
+  - AI SDK providers: https://ai-sdk.dev/docs/ai-sdk-core/providers-and-models
+
+
+  ---'
+1_4_pipeline_serialization_format_yaml: Haystack pipelines are data, not code. `pipeline.dumps()` / `pipeline.loads()` round-trip
+  through a canonical YAML schema. Every component must implement `to_dict()` / `from_dict()` for the pipeline serializer
+  to reconstruct it.
+1_4_1_schema_structure: "# Top-level fields\nmax_runs_per_component: 100          # int, default 100; caps loops\nmetadata:\
+  \ {}                         # dict, arbitrary pipeline metadata\ncomponents:                          # dict of named component\
+  \ definitions\n  <component_name>:\n    type: <fully.qualified.class>    # e.g. haystack.components.preprocessors.document_cleaner.DocumentCleaner\n\
+  \    init_parameters:                 # dict of constructor args (primitives + nested objects)\n      <param>: <value>\n\
+  connections:                         # list of typed edges\n  - sender: <comp_name>.<output>     # e.g. embedder.embedding\n\
+  \    receiver: <comp_name>.<input>    # e.g. retriever.query_embedding"
+1_4_2_serialization_api: 'from haystack import Pipeline
+
+
+  # Serialize
+
+  yaml_str: str = pipeline.dumps()            # -> YAML string
+
+  pipeline.dump(file_obj)                     # -> write to file
+
+
+  # Deserialize
+
+  pipeline = Pipeline.loads(yaml_str)
+
+  pipeline = Pipeline.load(file_obj)
+
+
+  # Dict round-trip (lower-level)
+
+  d: dict = pipeline.to_dict()
+
+  pipeline = Pipeline.from_dict(d, callbacks=DeserializationCallbacks())
+
+
+  `DeserializationCallbacks` allow patching components during reconstruction
+
+  (e.g. injecting secrets, swapping implementations without changing YAML).'
+1_4_3_full_serialized_pipeline_example_rag: "max_runs_per_component: 100\nmetadata:\n  name: basic-rag\n  description: Embedding\
+  \ RAG pipeline\ncomponents:\n  text_embedder:\n    type: haystack_integrations.components.embedders.openai.text_embedder.OpenAITextEmbedder\n\
+  \    init_parameters:\n      model: text-embedding-3-small\n      dimensions: 1536\n  retriever:\n    type: haystack_integrations.components.retrievers.pinecone.embedding_retriever.PineconeEmbeddingRetriever\n\
+  \    init_parameters:\n      document_store:\n        type: haystack_integrations.document_stores.pinecone.document_store.PineconeDocumentStore\n\
+  \        init_parameters:\n          index: my-index\n          namespace: \"\"\n          dimension: 1536\n          metric:\
+  \ cosine\n      top_k: 5\n      filter_policy: replace\n  prompt_builder:\n    type: haystack.components.builders.prompt_builder.PromptBuilder\n\
+  \    init_parameters:\n      template: |\n        Answer using the documents below.\n        Documents: {% for doc in documents\
+  \ %}{{ doc.content }}{% endfor %}\n        Question: {{ question }}\n  llm:\n    type: haystack_integrations.components.generators.openai.chat.chat_generator.OpenAIChatGenerator\n\
+  \    init_parameters:\n      model: gpt-4o-mini\n      generation_kwargs:\n        temperature: 0.1\n        max_tokens:\
+  \ 512\nconnections:\n  - sender: text_embedder.embedding\n    receiver: retriever.query_embedding\n  - sender: retriever.documents\n\
+  \    receiver: prompt_builder.documents\n  - sender: prompt_builder.prompt\n    receiver: llm.prompt"
+1_4_4_component_to_dict_contract: "Any custom component MUST implement:\n\n@component\nclass MyComponent:\n    def to_dict(self)\
+  \ -> dict:\n        return default_to_dict(self, param1=self.param1, param2=self.param2)\n\n    @classmethod\n    def from_dict(cls,\
+  \ data: dict):\n        return default_from_dict(cls, data)\n\n`default_to_dict` injects `type` as the fully qualified class\
+  \ name automatically."
+1_4_5_asyncpipeline: '`AsyncPipeline` is a drop-in replacement that executes independent branches in parallel:
+
+
+  from haystack import AsyncPipeline
+
+
+  pipeline = AsyncPipeline()
+
+  pipeline.add_component("embedder", embedder)
+
+  pipeline.add_component("retriever", retriever)
+
+  pipeline.connect("embedder.embedding", "retriever.query_embedding")
+
+  result = await pipeline.run({"embedder": {"text": "query"}})
+
+
+  Branches with no shared dependency run concurrently. Components with input dependencies
+
+  wait for their upstream outputs before starting.
+
+
+  ---'
+1_5_retriever_config_params_all_28_implementations: "All retrievers share this interface pattern:\n- Constructor: receives\
+  \ `document_store` (mandatory) + retrieval strategy params\n- run(): receives `query` or `query_embedding` (mandatory) +\
+  \ `top_k`, `filters` (optional)\n- Output: `{\"documents\": List[Document]}`\n\n`filters` always uses Haystack logical filter\
+  \ syntax:\n\nfilters = {\n  \"operator\": \"AND\",\n  \"conditions\": [\n    {\"field\": \"meta.lang\", \"operator\": \"\
+  ==\", \"value\": \"en\"},\n    {\"field\": \"meta.score\", \"operator\": \">=\", \"value\": 0.8},\n  ]\n}\n\n`FilterPolicy`\
+  \ enum: `FilterPolicy.REPLACE` (run() filters override constructor) or\n`FilterPolicy.MERGE` (run() filters AND-merged with\
+  \ constructor filters)."
+1_5_1_bm25_keyword_retrievers: '| Retriever | Constructor Params | run() Params |
+
+  |-----------|-------------------|--------------|
+
+  | InMemoryBM25Retriever | `document_store`, `filters=None`, `top_k=10`, `scale_score=True`, `filter_policy=REPLACE` | `query:
+  str`, `filters`, `top_k`, `scale_score` |
+
+  | ElasticsearchBM25Retriever | `document_store`, `filters={}`, `fuzziness="AUTO"`, `top_k=10`, `scale_score=True`, `filter_policy=REPLACE`
+  | `query`, `filters`, `fuzziness`, `top_k` |
+
+  | OpenSearchBM25Retriever | `document_store`, `filters={}`, `fuzziness="AUTO"`, `top_k=10`, `scale_score=True`, `custom_query=None`
+  | `query`, `filters`, `top_k` |
+
+  | PgvectorKeywordRetriever | `document_store`, `filters=None`, `top_k=10`, `filter_policy=REPLACE` | `query`, `filters`,
+  `top_k` |
+
+  | WeaviateBM25Retriever | `document_store`, `filters=None`, `top_k=10`, `filter_policy=REPLACE` | `query`, `filters`, `top_k`
+  |
+
+  | AzureAISearchBM25Retriever | `document_store`, `filters=None`, `top_k=10`, `filter_policy=REPLACE` | `query`, `filters`,
+  `top_k` |
+
+  | MongoDBAtlasFullTextRetriever | `document_store`, `filters=None`, `top_k=10` | `query`, `filters`, `top_k` |'
+1_5_2_embedding_dense_retrievers: '| Retriever | Constructor Params | run() Params | Notes |
+
+  |-----------|-------------------|--------------|-------|
+
+  | InMemoryEmbeddingRetriever | `document_store`, `filters=None`, `top_k=10`, `scale_score=True`, `return_embedding=False`,
+  `filter_policy=REPLACE` | `query_embedding: List[float]`, `filters`, `top_k`, `scale_score`, `return_embedding` | L2/cosine
+  |
+
+  | ElasticsearchEmbeddingRetriever | `document_store`, `filters={}`, `top_k=10`, `num_candidates=100`, `filter_policy=REPLACE`
+  | `query_embedding`, `filters`, `top_k`, `num_candidates` | ES kNN |
+
+  | OpenSearchEmbeddingRetriever | `document_store`, `filters={}`, `top_k=10`, `filter_policy=REPLACE`, `custom_query=None`
+  | `query_embedding`, `filters`, `top_k` | approx kNN |
+
+  | PgvectorEmbeddingRetriever | `document_store`, `filters=None`, `top_k=10`, `filter_policy=REPLACE` | `query_embedding`,
+  `filters`, `top_k` | exact/HNSW per store config |
+
+  | ChromaEmbeddingRetriever | `document_store`, `filters=None`, `top_k=10` | `query_embedding`, `filters`, `top_k` | Chroma
+  query() |
+
+  | PineconeEmbeddingRetriever | `document_store`, `filters=None`, `top_k=10`, `filter_policy=REPLACE` | `query_embedding`,
+  `filters`, `top_k` | Pinecone query() |
+
+  | QdrantEmbeddingRetriever | `document_store`, `filters=None`, `top_k=10`, `return_embedding=False`, `score_threshold=None`
+  | `query_embedding`, `filters`, `top_k`, `score_threshold` | Qdrant nearest |
+
+  | WeaviateEmbeddingRetriever | `document_store`, `filters=None`, `top_k=10`, `filter_policy=REPLACE`, `distance=None`, `certainty=None`
+  | `query_embedding`, `filters`, `top_k` | nearVector |
+
+  | AzureAISearchEmbeddingRetriever | `document_store`, `filters=None`, `top_k=10`, `filter_policy=REPLACE` | `query_embedding`,
+  `filters`, `top_k` | Azure vector search |
+
+  | MongoDBAtlasEmbeddingRetriever | `document_store`, `filters=None`, `top_k=10`, `filter_policy=REPLACE` | `query_embedding`,
+  `filters`, `top_k` | Atlas Vector Search |
+
+  | AstraEmbeddingRetriever | `document_store`, `filters=None`, `top_k=10` | `query_embedding`, `filters`, `top_k` | DataStax
+  Astra |
+
+  | FAISSEmbeddingRetriever | `document_store`, `filters=None`, `top_k=10` | `query_embedding`, `filters`, `top_k` | FAISS
+  flat/IVF/HNSW |
+
+  | ArcadeDBEmbeddingRetriever | `document_store`, `filters=None`, `top_k=10` | `query_embedding`, `filters`, `top_k` | ArcadeDB
+  vector |
+
+  | ValkeyEmbeddingRetriever | `document_store`, `filters=None`, `top_k=10` | `query_embedding`, `filters`, `top_k` | Valkey
+  VSEARCH |'
+1_5_3_hybrid_retrievers: 'Hybrid = BM25 + vector in one call; merged by RRF or weighted sum. Requires a single query
+
+  string AND a query embedding -- both must be supplied to `run()`.
+
+
+  | Retriever | Constructor Params | run() Params | Merge Strategy |
+
+  |-----------|-------------------|--------------|----------------|
+
+  | AzureAISearchHybridRetriever | `document_store`, `filters=None`, `top_k=10`, `filter_policy=REPLACE` | `query_embedding`,
+  `query: str`, `filters`, `top_k` | Azure native hybrid |
+
+  | OpenSearchHybridRetriever | `document_store`, `filters={}`, `top_k=10`, `bm25_weight=0.5`, `embedding_weight=0.5` | `query_embedding`,
+  `query`, `filters`, `top_k` | Weighted sum |
+
+  | QdrantHybridRetriever | `document_store`, `filters=None`, `top_k=10`, `return_embedding=False` | `query_embedding: List[float]`,
+  `sparse_embedding: SparseEmbedding`, `filters`, `top_k` | RRF |
+
+  | WeaviateHybridRetriever | `document_store`, `filters=None`, `top_k=10`, `alpha=0.75`, `filter_policy=REPLACE` | `query_embedding`,
+  `query`, `filters`, `top_k`, `alpha` | alpha=1.0 pure vector; alpha=0.0 pure BM25 |'
+1_5_4_sparse_embedding: '| Retriever | Constructor Params | run() Params | Input Type |
+
+  |-----------|-------------------|--------------|------------|
+
+  | QdrantSparseEmbeddingRetriever | `document_store`, `filters=None`, `top_k=10`, `return_embedding=False`, `score_threshold=None`
+  | `query_sparse_embedding: SparseEmbedding`, `filters`, `top_k` | `{indices: List[int], values: List[float]}` |
+
+
+  `SparseEmbedding` matches output of `FastembedSparseTextEmbedder` or `SentenceTransformersSparseTextEmbedder`.'
+1_5_5_advanced_specialized_retrievers: '| Retriever | Constructor Params | run() Params | Notes |
+
+  |-----------|-------------------|--------------|-------|
+
+  | FilterRetriever | `document_store`, `filters=None` | `filters` | No ranking; pure metadata filter |
+
+  | AutoMergingRetriever | `document_store`, `threshold=0.5` | `matched_leaf_documents: List[Document]` | Merges child chunks
+  into parent when >= threshold matched |
+
+  | MultiQueryTextRetriever | `document_store`, `top_k=10`, `retriever_params={}` | `queries: List[str]`, `filters`, `top_k`
+  | Fan-out BM25; deduplicates by doc ID |
+
+  | MultiQueryEmbeddingRetriever | `document_store`, `top_k=10`, `retriever_params={}` | `query_embeddings: List[List[float]]`,
+  `filters`, `top_k` | Fan-out embedding; deduplicates |
+
+  | SentenceWindowRetriever | `document_store`, `window_size=3` | `retrieved_documents: List[Document]` | Expands to +/- window_size
+  sentences |
+
+  | SnowflakeTableRetriever | `user`, `account`, `api_key`, `database`, `db_schema`, `warehouse`, `login_timeout=30` | `query:
+  str` | NL -> SQL on Snowflake |
+
+  | ChromaQueryTextRetriever | `document_store`, `filters=None`, `top_k=10` | `query: str`, `filters`, `top_k` | Chroma text
+  query (internal embedding) |
+
+
+  ---'
+2_3_vercel_ai_sdk_middleware_system: ''
+2_3_1_architecture: 'Middleware wraps `LanguageModelV3` via `wrapLanguageModel()`, intercepting calls before/after the model
+  without changing call-site code. Multiple middlewares form an onion: first in list is outermost (first to see params, last
+  to see results).'
+2_3_2_wraplanguagemodel_api: "import { wrapLanguageModel } from \"ai\";\n\nconst wrapped = wrapLanguageModel({\n  model: openai(\"\
+  gpt-4.1\"),          // base LanguageModelV3\n  middleware: myMiddleware,           // or: [mw1, mw2, mw3]\n  modelId?:\
+  \ \"custom-id\",             // override model.modelId\n  providerId?: \"custom-provider\",    // override model.provider\n\
+  });\n// wrapped is a LanguageModelV3 -- drop-in replacement\n\nExecution order with `[mw1, mw2]`:\n- transformParams: `mw1\
+  \ -> mw2 -> model`\n- results: `model -> mw2 -> mw1`"
+2_3_3_languagemodelv3middleware_interface: "interface LanguageModelV3Middleware {\n  // Runs before BOTH generate and stream\
+  \ calls.\n  transformParams?: (options: {\n    params: LanguageModelV3CallOptions;\n    type: \"generate\" | \"stream\"\
+  ;\n  }) => Promise<LanguageModelV3CallOptions>;\n\n  // Intercept non-streaming doGenerate().\n  wrapGenerate?: (options:\
+  \ {\n    doGenerate: () => Promise<LanguageModelV3GenerateResult>;\n    doStream: () => Promise<{ stream: ReadableStream<LanguageModelV3StreamPart>;\
+  \ rawCall: RawCallResponse }>;\n    params: LanguageModelV3CallOptions;\n    model: LanguageModelV3;\n  }) => Promise<LanguageModelV3GenerateResult>;\n\
+  \n  // Intercept streaming doStream().\n  wrapStream?: (options: {\n    doGenerate: () => Promise<LanguageModelV3GenerateResult>;\n\
+  \    doStream: () => Promise<{ stream: ReadableStream<LanguageModelV3StreamPart>; rawCall: RawCallResponse }>;\n    params:\
+  \ LanguageModelV3CallOptions;\n    model: LanguageModelV3;\n  }) => Promise<{ stream: ReadableStream<LanguageModelV3StreamPart>;\
+  \ rawCall: RawCallResponse }>;\n}\n\nAll three methods are optional. Pass context via `params.providerMetadata.yourKey`."
+2_3_4_built_in_middlewares: "extractReasoningMiddleware -- strips `<think>` blocks into separate reasoning field:\n\nimport\
+  \ { extractReasoningMiddleware, wrapLanguageModel } from \"ai\";\n\nwrapLanguageModel({\n  model: deepseek(\"deepseek-r1\"\
+  ),\n  middleware: extractReasoningMiddleware({\n    tagName: \"think\",           // default: \"think\"\n    startWithReasoning:\
+  \ false,  // prepend reasoning to generation if true\n  }),\n});\n// result.reasoning / result.reasoningText populated\n\
+  \nsimulateStreamingMiddleware -- makes non-streaming models stream:\n\nimport { simulateStreamingMiddleware } from \"ai\"\
+  ;\n\nwrapLanguageModel({\n  model: nonStreamingModel,\n  middleware: simulateStreamingMiddleware(),\n});\n// wrapStream()\
+  \ calls doGenerate() internally, emits fake stream parts\n\ndefaultSettingsMiddleware -- apply model defaults per-app:\n\
+  \nimport { defaultSettingsMiddleware } from \"ai\";\n\nwrapLanguageModel({\n  model: openai(\"gpt-4.1\"),\n  middleware:\
+  \ defaultSettingsMiddleware({\n    settings: {\n      temperature: 0.2,\n      maxOutputTokens: 1024,\n      providerOptions:\
+  \ {\n        openai: { store: false },\n      },\n    },\n  }),\n});\n\naddToolInputExamplesMiddleware -- inject tool examples\
+  \ into descriptions:\n\nimport { addToolInputExamplesMiddleware } from \"ai\";\n\nwrapLanguageModel({\n  model: provider(\"\
+  model\"),\n  middleware: addToolInputExamplesMiddleware({\n    prefix: \"Input Examples:\",\n    format: (example, index)\
+  \ => `${index + 1}. ${JSON.stringify(example.input)}`,\n    remove: true,   // strip inputExamples from schema after injection\n\
+  \  }),\n});\n\nextractJsonMiddleware -- strip markdown code fences from JSON responses:\n\nimport { extractJsonMiddleware\
+  \ } from \"ai\";\n\nwrapLanguageModel({\n  model: provider(\"model\"),\n  middleware: extractJsonMiddleware(),\n});"
+2_3_5_custom_middleware_pattern: "const loggingMiddleware: LanguageModelV3Middleware = {\n  transformParams: async ({ params,\
+  \ type }) => {\n    console.log(`[${type}] messages: ${params.prompt?.length ?? 0}`);\n    return params;\n  },\n  wrapGenerate:\
+  \ async ({ doGenerate, params }) => {\n    const t0 = Date.now();\n    const result = await doGenerate();\n    console.log(`generate:\
+  \ ${Date.now() - t0}ms, tokens: ${result.usage?.totalTokens}`);\n    return result;\n  },\n  wrapStream: async ({ doStream\
+  \ }) => {\n    const { stream, ...rest } = await doStream();\n    const transform = new TransformStream();\n    stream.pipeTo(transform.writable);\n\
+  \    return { stream: transform.readable, ...rest };\n  },\n};\n\n---"
+2_4_datastreamprotocol_complete_wire_format: Wire format between Vercel AI SDK server helpers and `useChat`/`useCompletion`
+  clients. Built on Server-Sent Events (SSE) + JSON per part.
+2_4_1_transport_layer: 'HTTP/1.1 200 OK
+
+  Content-Type: text/event-stream
+
+  x-vercel-ai-ui-message-stream: v1    # REQUIRED -- signals protocol version v1
+
+  Cache-Control: no-cache
+
+  Transfer-Encoding: chunked
+
+
+  data: {"type":"start","messageId":"msg_abc123"}
+
+  data: {"type":"text-start","id":"txt_1"}
+
+  data: {"type":"text-delta","id":"txt_1","delta":"Hello"}
+
+  data: {"type":"text-delta","id":"txt_1","delta":" world"}
+
+  data: {"type":"text-end","id":"txt_1"}
+
+  data: {"type":"finish"}
+
+  data: [DONE]'
+2_4_2_all_part_types: 'Message lifecycle:
+
+
+  | Type | Fields | Description |
+
+  |------|--------|-------------|
+
+  | `start` | `messageId: string` | Opens a new message frame |
+
+  | `finish` | (none) | Closes the message frame |
+
+  | `abort` | `reason?: string` | Client-side abort notification |
+
+
+  Text content (start/delta/end pattern):
+
+
+  | Type | Fields | Description |
+
+  |------|--------|-------------|
+
+  | `text-start` | `id: string` | Opens a text block |
+
+  | `text-delta` | `id: string`, `delta: string` | Appends text fragment |
+
+  | `text-end` | `id: string` | Closes text block |
+
+
+  Reasoning (models with extended thinking):
+
+
+  | Type | Fields | Description |
+
+  |------|--------|-------------|
+
+  | `reasoning-start` | `id: string` | Opens reasoning block |
+
+  | `reasoning-delta` | `id: string`, `delta: string` | Appends reasoning fragment |
+
+  | `reasoning-end` | `id: string` | Closes reasoning block |
+
+
+  Tool execution:
+
+
+  | Type | Fields | Description |
+
+  |------|--------|-------------|
+
+  | `tool-input-start` | `toolCallId`, `toolName` | Opens tool input streaming |
+
+  | `tool-input-delta` | `toolCallId`, `inputTextDelta: string` | Streams tool arg JSON fragment |
+
+  | `tool-input-available` | `toolCallId`, `toolName`, `input: object` | Complete tool args ready |
+
+  | `tool-output-available` | `toolCallId`, `output: unknown` | Tool execution result |
+
+
+  Sources and media:
+
+
+  | Type | Fields | Description |
+
+  |------|--------|-------------|
+
+  | `source-url` | `sourceId`, `url`, `title?`, `providerMetadata?` | URL citation |
+
+  | `source-document` | `sourceId`, `mediaType`, `title?`, `data?` | Document citation |
+
+  | `file` | `url`, `mediaType` | Generated file attachment |
+
+
+  Custom data and control:
+
+
+  | Type | Fields | Description |
+
+  |------|--------|-------------|
+
+  | `data-<suffix>` | `data: unknown`, `transient?: boolean` | App-defined; `transient=true` = not persisted to message history
+  |
+
+  | `error` | `errorText: string` | Error during generation |
+
+
+  Step boundaries (agentic multi-step):
+
+
+  | Type | Fields | Description |
+
+  |------|--------|-------------|
+
+  | `start-step` | `messageId?` | Opens an agent step |
+
+  | `finish-step` | `messageId?`, `isContinued: boolean` | `isContinued=true` means more steps follow |'
+2_4_3_server_side_emission: "// Next.js Route Handler\nexport async function POST(req: Request) {\n  const result = streamText({\n\
+  \    model: openai(\"gpt-4o\"),\n    messages: await req.json(),\n  });\n  return result.toUIMessageStreamResponse({\n \
+  \   sendReasoning: true,\n    sendSources: true,\n    headers: { \"X-Custom\": \"value\" },\n    onError: (err) => err.message,\
+  \   // transform errors before sending\n  });\n}"
+2_4_4_custom_data_parts: "// Server: write data parts alongside text\nconst response = createDataStreamResponse({\n  execute:\
+  \ async (writer) => {\n    writer.writeData({ status: \"processing\" });          // -> data-* part\n    writer.writeMessageAnnotation({\
+  \ hitRate: 0.87 });    // -> annotation on message\n    const result = await streamText({ model, prompt });\n    result.mergeIntoDataStream(writer);\n\
+  \  },\n});\n\n// Client: receive via onData\nuseChat({\n  onData: (items) => items.forEach(i => console.log(i)),\n});\n\n\
+  ---"
+2_5_complete_usechat_api_v5_sdk_5_x: ''
+2_5_1_parameters: '| Parameter | Type | Default | Description |
+
+  |-----------|------|---------|-------------|
+
+  | `api` | `string` | `"/api/chat"` | Endpoint URL |
+
+  | `chat` | `Chat<UIMessage>` | -- | Reuse existing Chat instance |
+
+  | `transport` | `ChatTransport` | DefaultChatTransport | Custom transport layer |
+
+  | `id` | `string` | random UUID | Stable ID; same ID shares state across components |
+
+  | `messages` | `UIMessage[]` | `[]` | Initial message history |
+
+  | `messageMetadataSchema` | `FlexibleSchema` | -- | Validation schema for message.metadata |
+
+  | `dataPartSchemas` | `UIDataTypesToSchemas` | -- | Schemas for data-* part validation |
+
+  | `generateId` | `IdGenerator` | nanoid | Custom ID generator |
+
+  | `credentials` | `RequestCredentials` | -- | Fetch credentials mode |
+
+  | `headers` | `Record<string,string>` | -- | Extra request headers |
+
+  | `body` | `object` | -- | Extra request body fields |
+
+  | `fetch` | `FetchFunction` | global fetch | Custom fetch implementation |
+
+  | `prepareSendMessagesRequest` | `(options) => RequestOptions` | -- | Customize request before send |
+
+  | `prepareReconnectToStreamRequest` | `(options) => RequestOptions` | -- | Customize reconnect |
+
+  | `onToolCall` | `async ({ toolCall }) => result` | -- | Client-side tool handler |
+
+  | `sendAutomaticallyWhen` | `(message) => boolean` | -- | Auto-send after stream if condition met |
+
+  | `onFinish` | `(message: UIMessage) => void` | -- | Called on response completion |
+
+  | `onError` | `(error: Error) => void` | -- | Error handler |
+
+  | `onData` | `(data: unknown[]) => void` | -- | Called when data-* parts arrive |
+
+  | `experimental_throttle` | `number` | -- | UI re-render throttle in ms |
+
+  | `resume` | `boolean` | `false` | Reconnect to in-progress generation on mount |'
+2_5_2_return_values: '| Property | Type | Description |
+
+  |----------|------|-------------|
+
+  | `id` | `string` | Chat identifier |
+
+  | `messages` | `UIMessage[]` | Full conversation history |
+
+  | `status` | `"ready" \| "submitted" \| "streaming" \| "error"` | Current request state |
+
+  | `error` | `Error \| undefined` | Active error |
+
+  | `sendMessage` | `async (msg) => void` | Submit a new user message |
+
+  | `regenerate` | `async (options?) => void` | Regenerate last assistant message |
+
+  | `stop` | `() => void` | Abort the current stream |
+
+  | `clearError` | `() => void` | Reset error state |
+
+  | `resumeStream` | `() => void` | Resume an interrupted stream |
+
+  | `addToolOutput` | `(toolCallId: string, result: unknown) => void` | Inject tool result |
+
+  | `addToolApprovalResponse` | `(toolCallId: string, approved: boolean) => void` | Respond to needsApproval |
+
+  | `setMessages` | `(messages: UIMessage[]) => void` | Overwrite messages locally |'
+2_5_3_sendmessage_options: "sendMessage({\n  text: string;\n  files?: FileList | FileUIPart[];\n  metadata?: unknown;    \
+  \    // validated against messageMetadataSchema\n  messageId?: string;        // custom ID; else generateId() used\n});\n\
+  \n---"
+2_6_complete_usecompletion_api: Single-turn text completion (no conversation history).
+2_6_1_parameters: '| Parameter | Type | Default | Description |
+
+  |-----------|------|---------|-------------|
+
+  | `api` | `string` | `"/api/completion"` | API endpoint |
+
+  | `id` | `string` | random | Shared state identifier across components |
+
+  | `initialInput` | `string` | -- | Pre-fill the prompt input |
+
+  | `initialCompletion` | `string` | -- | Pre-fill the completion output |
+
+  | `credentials` | `"omit" \| "same-origin" \| "include"` | `"same-origin"` | Fetch credentials |
+
+  | `headers` | `Record<string,string>` | -- | Extra request headers |
+
+  | `body` | `object` | -- | Extra request body fields |
+
+  | `streamProtocol` | `"text" \| "data"` | `"data"` | Stream interpretation mode |
+
+  | `fetch` | `FetchFunction` | global fetch | Custom fetch |
+
+  | `onFinish` | `(prompt: string, completion: string) => void` | -- | Completion callback |
+
+  | `onError` | `(error: Error) => void` | -- | Error handler |
+
+  | `experimental_throttle` | `number` | -- | UI update throttle ms |'
+2_6_2_return_values: '| Property | Type | Description |
+
+  |----------|------|-------------|
+
+  | `completion` | `string` | Current completion text |
+
+  | `input` | `string` | Current input value |
+
+  | `setInput` | `Dispatch<SetStateAction<string>>` | Update input state |
+
+  | `handleInputChange` | `(event: any) => void` | onChange handler for input |
+
+  | `handleSubmit` | `(event?: FormEvent) => void` | onSubmit handler for form |
+
+  | `complete` | `async (prompt, options?) => string \| null` | Programmatic trigger |
+
+  | `setCompletion` | `(text: string) => void` | Override completion manually |
+
+  | `stop` | `() => void` | Abort in-progress stream |
+
+  | `error` | `Error \| undefined` | Active error |
+
+  | `isLoading` | `boolean` | Whether request is in flight |'
+2_6_3_streamprotocol_difference: '| Mode | Server returns | Client parses |
+
+  |------|---------------|---------------|
+
+  | `"data"` | DataStreamProtocol SSE | Parses all part types, extracts text |
+
+  | `"text"` | Plain text stream | Appends raw chunks directly |
+
+
+  Use `"text"` for simple backends; `"data"` to receive annotations and metadata.'

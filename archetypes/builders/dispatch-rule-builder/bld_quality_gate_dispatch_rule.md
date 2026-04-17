@@ -12,8 +12,8 @@ quality: 9.0
 tags: [quality-gate, dispatch-rule, routing, keyword-mapping, P11]
 tldr: "Gates for dispatch_rule artifacts: validates keyword coverage, agent_group enum, fallback logic, bilingual support, and confidence thresholds."
 density_score: 0.92
+llm_function: GOVERN
 ---
-
 # Gate: dispatch_rule
 ## Definition
 | Field     | Value |

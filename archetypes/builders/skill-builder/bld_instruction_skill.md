@@ -25,8 +25,8 @@ dependencies: []
 logging: true
 tldr: Build a reusable skill artifact with a precise trigger, 2-6 atomic phases each with explicit input/output, and when-to-use contrast.
 density_score: 0.90
+llm_function: REASON
 ---
-
 ## Context
 The skill-builder produces `skill` artifacts — reusable capabilities defined as ordered
 phases with a trigger that activates them. A skill encapsulates a repeatable process:

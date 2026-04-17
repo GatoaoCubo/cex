@@ -1,0 +1,79 @@
+kind: quality_gate
+id: p07_qg_memory_benchmark
+pillar: P11
+llm_function: GOVERN
+purpose: Quality gate with HARD and SOFT scoring for memory_benchmark
+quality: null
+title: Quality Gate Memory Benchmark
+version: 1.1.0
+author: n05_operations
+tags:
+- memory_benchmark
+- builder
+- quality_gate
+tldr: Quality gate with HARD and SOFT scoring for memory_benchmark
+domain: memory_benchmark construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.87
+definition: '| metric           | threshold | operator | scope        |
+
+  |------------------|-----------|----------|--------------|
+
+  | frontmatter      | valid     | ==       | artifact     |
+
+  | section_count    | >=4       | >=       | body         |
+
+  | metric_count     | >=2       | >=       | body         |
+
+  | id_pattern       | matches   | ==       | frontmatter  |'
+hard_gates: '| ID  | Check                     | Fail Condition                                        |
+
+  |-----|---------------------------|-------------------------------------------------------|
+
+  | H01 | YAML frontmatter valid    | Invalid YAML syntax or missing required fields        |
+
+  | H02 | ID matches pattern        | ID does not match ^p07_mb_[a-z][a-z0-9_]+.md$        |
+
+  | H03 | kind field matches        | kind != ''memory_benchmark''                            |
+
+  | H04 | At least 2 metrics        | Fewer than 2 evaluation metrics defined in body       |
+
+  | H05 | Metric formula present    | No formula or calculation method specified per metric |
+
+  | H06 | Real benchmark reference  | No reference to LOCOMO, LongMemEval, MemGPT, or equiv |
+
+  | H07 | No hardware metrics       | Body contains DRAM/SRAM/bandwidth/ECC references      |'
+soft_scoring: '| Dim | Dimension           | Weight | Scoring Guide                                            |
+
+  |-----|---------------------|--------|----------------------------------------------------------|
+
+  | D01 | Metric completeness | 0.20   | retention+recall+hallucination (1.0) vs partial (0.5)    |
+
+  | D02 | Formula precision   | 0.20   | Exact formula cited (1.0) vs vague description (0.0)     |
+
+  | D03 | Benchmark grounding | 0.15   | 3+ real benchmarks cited (1.0) vs 1 (0.5) vs 0 (0.0)    |
+
+  | D04 | Distance coverage   | 0.15   | Tests at 3+ turn distances (1.0) vs single depth (0.3)   |
+
+  | D05 | Hallucination check | 0.15   | Hallucination metric required (1.0) vs absent (0.0)      |
+
+  | D06 | Reproducibility     | 0.10   | Dataset + prompt templates specified (1.0) vs none (0.0) |
+
+  | D07 | Domain accuracy     | 0.05   | AI memory domain only (1.0) vs hardware contamination (0)|'
+actions: '| Score  | Action   |
+
+  |--------|----------|
+
+  | >=9.5  | GOLDEN   |
+
+  | >=8.0  | PUBLISH  |
+
+  | >=7.0  | REVIEW   |
+
+  | <7.0   | REJECT   |'
+bypass: '| conditions                   | approver   | audit trail                      |
+
+  |------------------------------|------------|----------------------------------|
+
+  | Novel benchmark not yet named | Tech Lead  | Citation pending; flag for update |'

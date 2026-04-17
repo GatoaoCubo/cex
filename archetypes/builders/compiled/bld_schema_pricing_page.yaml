@@ -1,0 +1,53 @@
+kind: schema
+id: bld_schema_pricing_page
+pillar: P06
+llm_function: CONSTRAIN
+purpose: Formal schema -- SINGLE SOURCE OF TRUTH for pricing_page
+quality: null
+title: Schema Pricing Page
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- pricing_page
+- builder
+- schema
+tldr: Formal schema -- SINGLE SOURCE OF TRUTH for pricing_page
+domain: pricing_page construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+frontmatter_fields: ''
+required: "| Field      | Type   | Required | Default | Notes                              |  \n|------------|--------|----------|---------|------------------------------------|\
+  \  \n| id         | string | yes      | null    | Unique identifier                  |  \n| kind       | string | yes  \
+  \    | null    | Always \"pricing_page\"              |  \n| pillar     | string | yes      | null    | Always \"P05\" \
+  \                      |  \n| title      | string | yes      | null    | Page title                         |  \n| version\
+  \    | string | yes      | null    | Version control (e.g., \"v1.0\")     |  \n| created    | date   | yes      | null \
+  \   | ISO 8601 format                    |  \n| updated    | date   | yes      | null    | ISO 8601 format             \
+  \       |  \n| author     | string | yes      | null    | Author name                        |  \n| domain     | string\
+  \ | yes      | null    | \"pricing\"                          |  \n| quality    | null   | yes      | null    | Never self-score;\
+  \ peer review assigns |  \n| tags       | array  | yes      | null    | Keywords (e.g., \"saas\", \"freemium\", \"b2b\"\
+  ) |  \n| tldr       | string | yes      | null    | Summary of pricing structure       |  \n| pricing_model | string | yes\
+  \ | null | \"flat\", \"tiered\", \"dynamic\"        |  \n| currency   | string | yes      | null    | ISO 4217 code (e.g.,\
+  \ \"USD\")        |  \n| tiers      | array  | yes      | null    | Tiered pricing details             |"
+recommended: "| Field         | Type   | Notes                          |  \n|---------------|--------|--------------------------------|\
+  \  \n| last_reviewed | date   | Last peer review date          |  \n| source_url    | string | Link to pricing source  \
+  \       |  \n| notes         | string | Additional context or comments |"
+id_pattern: ^p05_pp_[a-z][a-z0-9_]+.md$
+body_structure:
+- Overview
+- Description of pricing page purpose and scope.
+- Pricing Tiers
+- Detailed breakdown of pricing levels, features, and limits.
+- Currency & Fees
+- Supported currencies, conversion rates, and transaction fees.
+- Subscription Models
+- Billing cycles, discounts, and recurring charges.
+- Terms & Conditions
+- Legal terms, validity periods, and disclaimers.
+constraints:
+- All pricing data must be sourced from verified, up-to-date records.
+- Tiers must be ordered by ascending value and clearly labeled.
+- Currency codes must adhere to ISO 4217 standards.
+- Subscription models must specify renewal intervals and cancellation policies.
+- Terms must include compliance with local financial regulations.
+- File size must not exceed 6144 bytes.

@@ -20,6 +20,10 @@ agent_group: edison
 keywords: [eval dataset, splits, schema fields, expected output, data leakage, braintrust, langsmith, deepeval, huggingface, versioning]
 memory_scope: project
 observation_types: [user, feedback, project, reference]
+llm_function: INJECT
+quality: 8.9
+title: Memory ISO - eval_dataset
+density_score: 0.96
 ---
 ## Summary
 Eval datasets are consumed by automated evaluation pipelines, not just humans. The difference between a dataset that integrates cleanly and one that causes silent failures comes down to three spec-time decisions: split declaration, schema_fields enumeration, and size accuracy. All three are invisible during happy-path exploration and catastrophic when absent in automated evaluation. Float split values drifting from 1.0 by as little as 0.001 cause silent case omission in some frameworks.

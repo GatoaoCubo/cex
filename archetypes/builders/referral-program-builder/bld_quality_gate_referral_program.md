@@ -1,0 +1,64 @@
+---
+kind: quality_gate
+id: p11_qg_referral_program
+pillar: P11
+llm_function: GOVERN
+purpose: Quality gate with HARD and SOFT scoring for referral_program
+quality: 9.0
+title: "Quality Gate Referral Program"
+version: "1.0.0"
+author: wave1_builder_gen_v2
+tags: [referral_program, builder, quality_gate]
+tldr: "Quality gate with HARD and SOFT scoring for referral_program"
+domain: "referral_program construction"
+created: "2026-04-14"
+updated: "2026-04-14"
+density_score: 0.85
+---
+
+## Definition
+(Table: metric, threshold, operator, scope)
+| Metric | Threshold | Operator | Scope |
+|---|---|---|---|
+| Viral coefficient | ≥1.5 | ≥ | Program design |
+| Reward conversion rate | ≥10% | ≥ | User engagement |
+
+## HARD Gates
+(Table: ID | Check | Fail Condition)
+| ID | Check | Fail Condition |
+|---|---|---|
+| H01 | YAML frontmatter valid | Invalid or missing YAML metadata |
+| H02 | ID matches pattern ^p11_rp_[a-z][a-z0-9_]+.yaml$ | ID format mismatch |
+| H03 | kind field matches 'referral_program' | Kind field incorrect |
+| H04 | Referral link uniqueness enforced | Duplicate referral links allowed |
+| H05 | Reward cap per user defined | No maximum reward limit |
+| H06 | Program cooldown period ≥7 days | Cooldown period <7 days |
+| H07 | Referral tracking system implemented | No tracking mechanism |
+| H08 | Terms of use compliance checked | Missing legal compliance checks |
+
+## SOFT Scoring
+(Table: Dim | Dimension | Weight | Scoring Guide)
+| Dim | Dimension | Weight | Scoring Guide |
+|---|---|---|---|
+| D1 | Viral coefficient design | 0.20 | 1.0-1.5 (1.0), 0.5-1.0 (0.5), <0.5 (0) |
+| D2 | Reward clarity | 0.15 | Clear (1.0), Ambiguous (0.5), Missing (0) |
+| D3 | User experience | 0.15 | Seamless (1.0), Moderate (0.5), Poor (0) |
+| D4 | Legal compliance | 0.15 | Fully compliant (1.0), Partial (0.5), Non-compliant (0) |
+| D5 | Scalability | 0.10 | Scalable (1.0), Limited (0.5), Non-scalable (0) |
+| D6 | Conversion rate | 0.10 | >=10% (1.0), 5-10% (0.5), <5% (0) |
+| D7 | Tracking accuracy | 0.15 | 100% (1.0), 75-99% (0.5), <75% (0) |
+
+## Actions
+(Table: Score | Action)
+| Score | Action |
+|---|---|
+| ≥9.5 | GOLDEN: Deploy immediately |
+| ≥8.0 | PUBLISH: Launch with monitoring |
+| ≥7.0 | REVIEW: Fix minor issues |
+| <7.0 | REJECT: Revise and resubmit |
+
+## Bypass
+(Table: conditions, approver, audit trail)
+| Conditions | Approver | Audit Trail |
+|---|---|---|
+| Urgent business need | CTO | Documented approval + timestamp |

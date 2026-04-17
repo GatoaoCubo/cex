@@ -1,0 +1,40 @@
+---
+kind: config
+id: bld_config_usage_report
+pillar: P09
+llm_function: CONSTRAIN
+purpose: Naming, paths, limits for usage_report production
+quality: 8.6
+title: "Config Usage Report"
+version: "1.0.0"
+author: wave1_builder_gen_v2
+tags: [usage_report, builder, config]
+tldr: "Naming, paths, limits for usage_report production"
+domain: "usage_report construction"
+created: "2026-04-14"
+updated: "2026-04-14"
+density_score: 0.85
+---
+
+## Naming Convention
+Pattern: `p07_ur_<report_name>.yaml`
+Examples:
+- `p07_ur_monthly.yaml`
+- `p07_ur_q4.yaml`
+
+## Paths
+- Artifacts: `/artifacts/reports/usage/`
+- Raw data: `/artifacts/reports/usage/raw/`
+- Processed: `/artifacts/reports/usage/processed/`
+- Logs: `/artifacts/reports/usage/logs/`
+
+## Limits
+- max_bytes: 3072
+- max_turns: 5
+- effort_level: medium
+
+## Hooks
+- pre_build: null
+- post_build: null
+- on_error: null
+- on_quality_fail: null

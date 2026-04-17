@@ -1,0 +1,35 @@
+kind: examples
+id: bld_examples_govtech_vertical
+pillar: P07
+llm_function: GOVERN
+purpose: Golden and anti-examples of govtech_vertical artifacts
+quality: null
+title: Examples Govtech Vertical
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- govtech_vertical
+- builder
+- examples
+tldr: Golden and anti-examples of govtech_vertical artifacts
+domain: govtech_vertical construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+golden_example: "kind: govtech_vertical  \ntitle: Secure Cloud Storage for Federal Agencies  \nprovider: AWS GovCloud (US)\
+  \  \ncompliance:  \n  - FedRAMP: High  \n  - FISMA: Compliant  \n  - CJIS: Certified  \n  - Section 508: Accessible  \n\
+  use_case:  \n  - Secure storage of classified data under CJIS standards  \n  - FedRAMP-compliant cloud infrastructure for\
+  \ federal agencies  \n  - Section 508-compliant UI for public-facing services  \ndescription:  \n  AWS GovCloud (US) provides\
+  \ a secure, isolated cloud environment tailored for U.S. government workloads. It meets FedRAMP High requirements, FISMA\
+  \ guidelines, and CJIS standards for handling sensitive data. The platform includes accessibility features compliant with\
+  \ Section 508, ensuring equitable access for users with disabilities.  "
+anti_example_1_missing_fedramp_compliance: "kind: govtech_vertical  \ntitle: Cloud Backup Solution  \nprovider: Dropbox Business\
+  \  \ncompliance:  \n  - FedRAMP: Not applicable  \n  - FISMA: Not assessed  \nuse_case:  \n  - Data backup for state agencies\
+  \  \ndescription:  \n  Dropbox Business lacks FedRAMP certification and has not undergone FISMA compliance assessments.\
+  \ It cannot be used for federal agencies handling sensitive data.  "
+why_it_fails: Section 508 compliance is mandatory for government tools. Missing accessibility features excludes users with
+  disabilities and violates legal requirements.
+anti_example_2_ignoring_section_508_standards: "kind: govtech_vertical  \ntitle: Video Conferencing Platform  \nprovider:\
+  \ Zoom for Government  \ncompliance:  \n  - FedRAMP: Compliant  \n  - Section 508: Not fully compliant  \nuse_case:  \n\
+  \  - Remote collaboration for federal employees  \ndescription:  \n  Zoom for Government meets FedRAMP requirements but\
+  \ lacks features like closed captions and keyboard navigation, failing Section 508 accessibility standards.  "

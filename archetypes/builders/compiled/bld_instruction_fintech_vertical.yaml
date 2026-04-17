@@ -1,0 +1,43 @@
+kind: instruction
+id: bld_instruction_fintech_vertical
+pillar: P03
+llm_function: REASON
+purpose: Step-by-step production process for fintech_vertical
+quality: null
+title: Instruction Fintech Vertical
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- fintech_vertical
+- builder
+- instruction
+tldr: Step-by-step production process for fintech_vertical
+domain: fintech_vertical construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+phase_1_research:
+- Identify SOC2+PCI-DSS compliance requirements for fintech data handling.
+- Map KYC/AML regulatory frameworks (e.g., FATF, GDPR, AMLA).
+- Analyze fraud detection methodologies (machine learning, rule-based systems).
+- Document industry-specific use cases (e.g., real-time transaction monitoring).
+- Interview stakeholders for pain points in compliance and fraud prevention.
+- Benchmark competitors’ approaches to security and regulatory alignment.
+phase_2_compose:
+- Align artifact structure with bld_schema_fintech_vertical.md’s compliance section.
+- Draft SOC2 Type II + PCI-DSS v4.0 controls using bld_output_template_fintech_vertical.md’s control matrix.
+- Write KYC/AML workflows with example data formats (e.g., JSON for customer onboarding, FinCEN CIP fields).
+- Detail fraud detection algorithms (Sift/Sardine integration patterns) with performance metrics.
+- Embed use cases (e.g., “OFAC SDN list screening at onboarding”, “detecting synthetic identity fraud”).
+- Reference bld_schema_fintech_vertical.md’s data governance section for artifact consistency.
+- Integrate PCI-DSS v4.0 scope definitions (cardholder data environments, tokenization).
+- Add FFIEC Cybersecurity Assessment Tool (CAT) mapping and ISO 20022 message types where relevant.
+- Cross-check artifact against bld_output_template_fintech_vertical.md’s compliance checklist.
+- Finalize with SOX Section 404 controls documentation if applicable.
+phase_3_validate:
+- '[ ] [OK] Verify SOC2 Type II + PCI-DSS v4.0 alignment with bld_schema_fintech_vertical.md.'
+- '[ ] [OK] Confirm KYC/AML workflows include OFAC sanctions screening and FinCEN CIP fields.'
+- '[ ] [OK] Ensure fraud detection logic references Sift/Sardine or equivalent behavioral scoring.'
+- '[ ] [OK] Validate use cases against bld_output_template_fintech_vertical.md structure.'
+- '[ ] [OK] Confirm SOFT weights in bld_quality_gate_fintech_vertical.md sum to 1.00.'
+- '[ ] [OK] Conduct peer review for clarity and adherence to bld_output_template_fintech_vertical.md.'

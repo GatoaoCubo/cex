@@ -54,4 +54,4 @@ Rule: id MUST equal filename stem.
 - Minimum 2 edge cases per action_prompt
 - Each edge case: concrete scenario + expected handling
 - Common categories: missing data, format variation, timeout, empty input
-- Format: "{{scenario}} — {{expected_handling}}"
+- Format: "`{{scenario}}` — `{{expected_handling}}`"

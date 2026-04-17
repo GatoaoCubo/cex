@@ -1,0 +1,83 @@
+kind: knowledge_card
+id: bld_knowledge_card_customer_segment
+pillar: P01
+llm_function: INJECT
+purpose: Domain knowledge for customer_segment production
+quality: null
+title: Knowledge Card Customer Segment
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- customer_segment
+- builder
+- knowledge_card
+tldr: Domain knowledge for customer_segment production
+domain: customer_segment construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+domain_overview: 'Customer segmentation defines distinct groups of organizations or individuals sharing firmographic traits
+  (e.g., industry, size, revenue) and unmet needs. In B2B contexts, this informs Ideal Customer Profile (ICP) development,
+  aligning product/service offerings with market demand. Segmentation uses the STP framework (Segmentation, Targeting, Positioning)
+  combined with firmographic and technographic signals. PLG (product-led growth) ICPs add behavioral triggers: activation
+  milestones, usage frequency, and feature adoption patterns. Qualification frameworks like BANT and MEDDIC convert segment
+  definitions into actionable sales criteria.'
+key_concepts: '| Concept | Definition | Source |
+
+  |---------|-----------|--------|
+
+  | Firmographics | Organizational attributes (industry, revenue, location) for segmentation | Dun & Bradstreet |
+
+  | Technographics | Technology stack signals used to infer fit and readiness | Bombora, G2 Crowd |
+
+  | ICP (Ideal Customer Profile) | Profile of the most valuable customer type based on fit and potential | HubSpot ICP Framework
+  |
+
+  | STP Framework | Segmentation, Targeting, Positioning -- market strategy structure | Kotler (1967) |
+
+  | BANT | Budget, Authority, Need, Timeline -- sales qualification framework | IBM (1950s), SPIN updated |
+
+  | MEDDIC | Metrics, Economic Buyer, Decision Criteria, Decision Process, Identify Pain, Champion | Jack Napoli (1996) |
+
+  | Jobs-to-be-Done (JTBD) | Theory of what "jobs" customers hire a product to accomplish | Christensen et al. (2015) |
+
+  | PLG ICP Signals | Product usage signals (activation, DAU/WAU, feature depth) that indicate fit | OpenView Partners |
+
+  | RFM Model | Recency, Frequency, Monetary value for behavioral segmentation | Marketing Science Institute (1990) |
+
+  | TAM/SAM/SOM | Total/Serviceable/Obtainable Addressable Market sizing | CB Insights |
+
+  | CAC / LTV | Customer Acquisition Cost and Lifetime Value -- segment economics | HBR, SaaStr |'
+icp_qualification_frameworks_comparative: '| Framework | Best For | Key Signals | Limitation |
+
+  |-----------|---------|------------|-----------|
+
+  | BANT | Transactional B2B, outbound | Budget confirmed, authority identified | Over-relies on self-reported data |
+
+  | MEDDIC | Enterprise/complex sales | Economic buyer mapped, champion active | High effort, not for SMB |
+
+  | PLG ICP | Product-led growth | Activation rate, feature depth, DAU | Requires product telemetry |
+
+  | JTBD | Innovation/new market | Customer-stated desired outcomes | Qualitative, hard to operationalize |
+
+  | RFM | B2C, e-commerce | Purchase recency, frequency, spend | Backward-looking, not predictive |'
+industry_standards:
+- STP Framework (Segmentation, Targeting, Positioning) -- Kotler (1967)
+- BANT qualification framework -- IBM origin, widely adopted by Salesforce, HubSpot
+- MEDDIC/MEDDPICC -- Napoli (1996), used by enterprise SaaS leaders
+- RFM Model -- Marketing Science Institute
+- Technographic segmentation -- Bombora intent data, G2 buyer intent
+- PLG ICP signals -- OpenView Partners SaaS benchmarks
+common_patterns:
+- Use firmographics (industry, employee count, revenue) to create initial segment filter.
+- Layer technographics (current tools, integrations in use) to refine ICP fit score.
+- Apply BANT or MEDDIC to qualify prospects within the segment.
+- 'For PLG motions: track activation milestones as in-product ICP signals.'
+- Run JTBD interviews on best-fit customers to validate need hypotheses.
+- Score segments by LTV:CAC ratio; prioritize segments where ratio exceeds 3:1.
+pitfalls:
+- 'Conflating ICP with persona: ICP = organizational fit, persona = individual behavior.'
+- Using static firmographics without technographic enrichment -- misses tech-fit signals.
+- 'Ignoring PLG signals for product-led companies: usage data outperforms demographic data.'
+- 'Over-segmenting: more than 5-7 primary segments dilutes go-to-market resources.'
+- Failing to validate segments against win/loss data from actual closed deals.

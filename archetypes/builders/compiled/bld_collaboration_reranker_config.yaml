@@ -1,0 +1,27 @@
+kind: collaboration
+id: bld_collaboration_reranker_config
+pillar: P12
+llm_function: COLLABORATE
+purpose: How reranker_config-builder works in crews with other builders
+quality: null
+title: Collaboration Reranker Config
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- reranker_config
+- builder
+- collaboration
+tldr: How reranker_config-builder works in crews with other builders
+domain: reranker_config construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+crew_role: Designs and validates reranker configurations to optimize retrieval accuracy and relevance.
+receives_from: "| Builder       | What                  | Format      |  \n|---------------|-----------------------|-------------|\
+  \  \n| Product Team  | User requirements     | Document    |  \n| Config Store  | Base config templates | JSON        |\
+  \  \n| Evaluator     | Feedback on rankings  | Evaluation  |  \n| System Team   | Hardware constraints  | Technical   |"
+produces_for: "| Builder         | What                  | Format      |  \n|-----------------|-----------------------|-------------|\
+  \  \n| Config Validator| Reranker config files | JSON/YAML   |  \n| Deployment Team | Configuration docs    | Markdown \
+  \   |  \n| QA Team         | Validation test cases | Test script |"
+boundary: Does NOT handle retrieval logic (retriever) or first-stage retrieval configs (retriever_config-builder). Evaluation
+  metrics and training data are managed by the evaluation team.

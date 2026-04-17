@@ -1,0 +1,43 @@
+kind: instruction
+id: bld_instruction_ecommerce_vertical
+pillar: P03
+llm_function: REASON
+purpose: Step-by-step production process for ecommerce_vertical
+quality: null
+title: Instruction Ecommerce Vertical
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- ecommerce_vertical
+- builder
+- instruction
+tldr: Step-by-step production process for ecommerce_vertical
+domain: ecommerce_vertical construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+phase_1_research:
+- Analyze cart/checkout user flows and pain points across major platforms.
+- Map PCI-DSS compliance requirements for payment handling and data storage.
+- Study recommendation engine algorithms (collaborative filtering, ML-based).
+- Identify fraud detection patterns (velocity checks, device fingerprinting).
+- Document use cases for abandoned cart recovery and dynamic pricing.
+- Benchmark industry standards for checkout conversion rates and load times.
+phase_2_compose:
+- 'Define artifact schema per bld_schema_ecommerce_vertical.md (sections: compliance, flows, engines).'
+- Map PCI-DSS requirements to checkout data fields and encryption protocols.
+- Write recommendation engine logic using bld_output_template_ecommerce_vertical.md’s ML integration block.
+- Draft fraud detection rules (thresholds, anomaly scoring) in JSON format.
+- Outline cart/checkout UX steps with error handling and validation rules.
+- Embed use case examples (e.g., “guest checkout”, “multi-currency support”).
+- Integrate schema versioning and artifact metadata (author, date, version).
+- Validate template syntax against bld_output_template_ecommerce_vertical.md’s placeholder structure.
+- Finalize artifact with cross-references to compliance and performance metrics.
+phase_3_validate:
+- '[ ] Schema matches bld_schema_ecommerce_vertical.md (no missing fields or invalid types)'
+- '[ ] PCI-DSS compliance rules pass static code analysis'
+- '[ ] Fraud detection thresholds align with industry benchmarks'
+- '[ ] Recommendation engine outputs match sample data in bld_output_template_ecommerce_vertical.md'
+- '[ ] Cart/checkout flow passes end-to-end simulation (no deadlocks or errors)'
+domain_scope: This instruction applies to ecommerce vertical artifacts (cart, checkout, catalog, payments, recommendations).
+  It covers the full ecommerce transaction lifecycle from product discovery through post-purchase loyalty mechanics.

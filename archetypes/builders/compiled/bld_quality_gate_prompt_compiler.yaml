@@ -1,0 +1,87 @@
+id: p11_qg_prompt_compiler
+kind: quality_gate
+pillar: P11
+title: 'Gate: Prompt Compiler'
+version: 1.0.0
+created: '2026-04-12'
+updated: '2026-04-12'
+author: n03_builder
+domain: prompt_compiler
+quality: null
+density_score: 0.9
+tags:
+- quality-gate
+- prompt_compiler
+- p11
+- intent-resolution
+tldr: 'Quality gate for intent resolution artifacts: verifies kind coverage, bilingual patterns, verb table, ambiguity protocol,
+  and fallback heuristics.'
+definition: 'A prompt_compiler artifact maps natural language user input to structured {kind, pillar, nucleus, verb} tuples.
+  It covers all 124 registered kinds with bilingual patterns (PT-BR + EN), provides verb canonicalization, defines ambiguity
+  resolution for multi-kind matches, and includes fallback heuristics for unrecognized input. It is the first function in
+  every 8F pipeline (F1 CONSTRAIN). Scope: files with `kind: prompt_compiler`. Does not apply to routers (P02, provider routing),
+  dispatch rules (P12, task-agent mapping), or prompt templates (P03, variable filling).'
+hard_gates: 'Failure on any single gate means REJECT regardless of soft score.
+
+  | ID  | Predicate | How to test |
+
+  |-----|-----------|-------------|
+
+  | H01 | Frontmatter parses as valid YAML | `yaml.safe_load(frontmatter)` raises no error |
+
+  | H02 | `id` matches namespace `p03_pc_*` | `id.startswith("p03_pc_")` is true |
+
+  | H03 | `id` equals filename stem | `Path(file).stem == id` |
+
+  | H04 | `kind` equals literal `prompt_compiler` | string equality check |
+
+  | H05 | `quality` is null at authoring time | `quality is None` |
+
+  | H06 | All required frontmatter fields present | id, kind, pillar, title, version, created, updated, author, domain, coverage,
+  languages, tags, tldr |
+
+  | H07 | Kind Resolution Table present with >= 120 kinds mapped | count distinct kinds >= 120 |
+
+  | H08 | `coverage` field matches actual kinds in table | integer == count of table rows |
+
+  | H09 | Verb Resolution Table present with >= 30 verbs | count rows >= 30 |'
+soft_scoring: '| #  | Dimension | Weight |
+
+  |----|-----------|--------|
+
+  | 1  | All 124 kinds covered (not just 120 minimum) | 1.0 |
+
+  | 2  | Bilingual coverage >= 80% (PT patterns for >= 80% of EN patterns) | 1.0 |
+
+  | 3  | Every kind has boundary note (when NOT to pick) | 1.0 |
+
+  | 4  | Ambiguity resolution protocol defined with >= 3 steps | 1.0 |
+
+  | 5  | Fallback heuristics defined with TF-IDF + semantic + confidence | 1.0 |
+
+  | 6  | Nucleus routing matrix covers all kinds | 0.5 |
+
+  | 7  | Behavioral instructions section present with >= 5 rules | 0.5 |
+
+  | 8  | Tags list includes `prompt_compiler` | 0.5 |
+
+  | 9  | `density_score` field present and >= 0.80 | 0.5 |
+
+  | 10 | `tldr` is <= 160 characters | 0.5 |
+
+  | 11 | Body <= 16384 bytes | 1.0 |
+
+  Formula: `final_score = (sum of score_i  weight_i) / (sum of weight_i)  10`
+
+  Weight total: 8.5. Score range: 0.0 to 10.0.'
+actions: '| Tier | Threshold | Action |
+
+  |------|-----------|--------|
+
+  | GOLDEN | >= 9.5 | Publish as reference prompt compiler |
+
+  | PUBLISH | >= 8.0 | Publish; mark production-ready |
+
+  | REVIEW | >= 7.0 | Return to author with feedback; one revision |
+
+  | REJECT | < 7.0 | Full rewrite required |'

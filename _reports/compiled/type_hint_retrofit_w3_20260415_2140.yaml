@@ -1,0 +1,58 @@
+mission: TYPE_HINT_RETROFIT
+wave: 3
+status: PASS
+executed_by: n05_codex
+runtime: codex
+8f_pipeline:
+- '`F1 CONSTRAIN`: mission=`TYPE_HINT_RETROFIT`, wave=`W3`, scope=6 target files, boundary=annotation-only edits on public
+  functions.'
+- '`F2 BECOME`: loaded N05 operations rules and agent card; role=context-bound mechanical refactor with verification and git
+  discipline.'
+- '`F3 INJECT`: read handoff, N05 rules, 8F rules, target file contents, and pre-edit public function inventory.'
+- '`F4 REASON`: plan=annotate signatures only, verify AST coverage plus CLI/import sanity, then commit per file and report.'
+- '`F5 CALL`: used local shell, AST verification, `git`, `cex_compile.py`, and `signal_writer`.'
+- '`F6 PRODUCE`: added type hints to all non-underscore-prefixed functions across 6 files with no logic changes.'
+- '`F7 GOVERN`: verified 100% coverage on all targets and preserved `--help` or import behavior.'
+- '`F8 COLLABORATE`: saved this report, compiled it, committed target files atomically, and sent the completion signal.'
+coverage_delta: '| Tool | Before | After | Delta |
+
+  | --- | --- | --- | --- |
+
+  | cex_sanitize | 0/10 | 10/10 | +10 |
+
+  | cex_showoff | 0/10 | 10/10 | +10 |
+
+  | cex_vector_store | 0/8 | 8/8 | +8 |
+
+  | test_agentic_capabilities_v2 | 0/8 | 8/8 | +8 |
+
+  | test_wave1_builder_gen_v2 | 0/8 | 8/8 | +8 |
+
+  | cex_finetune_export | 0/7 | 7/7 | +7 |'
+commits:
+- '`552329043` `refactor(cex_showoff): add type hints to public functions`'
+- '`05ae2bda1` `refactor(cex_sanitize): add type hints to public functions`'
+- '`f6965871b` `refactor(cex_vector_store): add type hints to public functions`'
+- '`3e95f204e` `refactor(test_agentic_capabilities_v2): add type hints to public functions`'
+- '`b92e0655e` `refactor(test_wave1_builder_gen_v2): add type hints to public functions`'
+- '`99a0edbe4` `refactor(cex_finetune_export): add type hints to public functions`'
+sanity_checks:
+- 'AST coverage verifier: 6/6 files at 100%.'
+- '`python _tools/cex_sanitize.py --help`: exit 0.'
+- '`python _tools/cex_showoff.py --help`: exit 0.'
+- '`python -c "import _tools.cex_vector_store"`: import clean.'
+- '`python _tools/test_agentic_capabilities_v2.py --help`: exit 0.'
+- '`python -c "import _tools.test_wave1_builder_gen_v2"`: import clean.'
+- '`python _tools/cex_finetune_export.py --help`: exit 0.'
+- 'Pre-commit hook on each file commit: 6/6 PASS.'
+- '`cex_sanitize.py --check --scope _tools/`: 0 non-ASCII issues during each commit gate.'
+ambiguous_cases:
+- '`cex_showoff.py`: used `dict[str, Any]` for wave payloads because the runtime mapping records are heterogeneous nested
+  dictionaries.'
+- '`cex_vector_store.py`: used `Any` for vector parameters to preserve compatibility with both Python lists and numpy arrays
+  without changing logic.'
+- '`test_agentic_capabilities_v2.py`: used `dict[str, Any]` for experiment result payloads because success and failure paths
+  emit different keys.'
+- '`cex_finetune_export.py`: used `dict[str, Any]` for `kinds_meta.json` entries because the registry schema is heterogeneous
+  at runtime.'
+type_hint_retrofit_w3_pass: ''

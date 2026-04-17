@@ -1,0 +1,41 @@
+id: bld_instruction_domain_event
+kind: instruction
+pillar: P03
+llm_function: REASON
+purpose: Step-by-step production process for domain_event
+version: 1.0.0
+quality: 4.9
+tags:
+- domain_event
+- builder
+- instruction
+title: Instruction Domain Event Builder
+density_score: 0.81
+updated: '2026-04-17'
+phase_1_identify:
+- 'Name the event in past tense: OrderPlaced, PaymentFailed, UserRegistered'
+- Identify the aggregate root that owns this event (Order, Payment, User)
+- Identify the bounded context (sales, billing, identity)
+- Determine event version (start at v1, increment on schema change)
+- 'Check: is this truly domain-significant, not a system heartbeat or log entry?'
+phase_2_compose:
+- Read bld_schema_domain_event.md for required fields
+- 'Set id: de_{aggregate}{past_tense_verb}{version} (snake_case)'
+- 'Fill payload fields: all data carried by the event at occurrence time'
+- Record causation_id (what caused this), correlation_id (saga/trace)
+- Set occurred_at as ISO-8601 UTC timestamp (do NOT use processed_at)
+- 'Set quality: null -- never self-score'
+phase_3_validate:
+- 'HARD gates (all must pass):'
+- id follows pattern de_{aggregate}_{verb}
+- kind == domain_event
+- quality == null
+- occurred_at is present and ISO-8601
+- aggregate_root is named
+- bounded_context is named
+- payload section present with >= 1 field
+- 'SOFT gates:'
+- causation_id and correlation_id present for traceability
+- event is named in past tense
+- payload fields are typed (string, int, uuid, etc.)
+- consumers array lists subscribing contexts

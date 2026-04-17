@@ -1,0 +1,29 @@
+id: kc_edit_format
+kind: knowledge_card
+title: Edit Format Specification
+version: 1.0.0
+quality: null
+pillar: P01
+density_score: 1.0
+1_base_structure: "change_type: [modify|create|delete]\nfile_path: \"/absolute/path/to/file\"\ncontent: \"new content\"\n\
+  metadata:\n  reason: \"change justification\"\n  timestamp: \"ISO 8601 format\""
+2_field_requirements:
+- 'change_type (required): Operation type (modify, create, delete)'
+- 'file_path (required): Absolute path with proper permissions'
+- 'content (required for modify/create): String content for modification'
+- 'metadata (optional): Additional context about the change'
+3_special_cases:
+- 'Delete Operation: Omit content field'
+- 'Binary Files: Use base64 encoding for content'
+- 'Permissions: Include `permissions` field for file access control'
+4_validation_rules:
+- All paths must be normalized
+- Content must be UTF-8 encoded
+- Metadata must include at least reason field
+- Timestamp must be current UTC time
+5_example: "change_type: modify\nfile_path: \"/home/user/config.yaml\"\ncontent: |\n  format: yaml\n  version: 2.1.0\nmetadata:\n\
+  \  reason: \"Update configuration format to YAML\"\n  timestamp: \"2023-10-15T14:48:00Z\""
+6_error_handling:
+- 'Invalid format: Return 400 Bad Request'
+- 'Permission denied: Return 403 Forbidden'
+- 'File not found: Return 404 Not Found'

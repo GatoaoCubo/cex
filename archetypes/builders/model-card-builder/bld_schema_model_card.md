@@ -84,7 +84,7 @@ features:
   batch_api: bool
 ```
 ## Body Structure (required sections)
-1. `## Boundary` — model_card EH / NAO EH
+1. `## Boundary` -- model_card IS / IS NOT
 2. `## Specifications` — table with Value + Source columns
 3. `## Capabilities` — boolean table matching features object
 4. `## When to Use` — decision table >= 5 rows with alternatives

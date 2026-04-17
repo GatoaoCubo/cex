@@ -1,0 +1,82 @@
+---
+kind: examples
+id: bld_examples_eval_metric
+pillar: P07
+llm_function: GOVERN
+purpose: Golden and anti-examples of eval_metric artifacts
+quality: 9.0
+title: "Examples Eval Metric"
+version: "1.0.0"
+author: wave1_builder_gen_v2
+tags: [eval_metric, builder, examples]
+tldr: "Golden and anti-examples of eval_metric artifacts"
+domain: "eval_metric construction"
+created: "2026-04-14"
+updated: "2026-04-14"
+density_score: 0.85
+---
+
+## Golden Example
+```yaml
+---
+metric_name: "BLEU Score"
+vendor: "Hugging Face"
+version: "1.0.0"
+description: "Measures the quality of machine translation by comparing generated text to reference translations."
+---
+**Definition**:
+The BLEU (Bilingual Evaluation Understudy) score evaluates generated text by computing precision at the n-gram level (typically 4-grams) and applying a brevity penalty for shorter outputs.
+
+**Calculation**:
+1. Compute precision for each n-gram (n=1 to 4).
+2. Geometric mean of precision scores.
+3. Apply brevity penalty if generated text is shorter than the reference.
+
+**Use Case**:
+Assessing machine translation models in multilingual NLP tasks.
+
+**Example**:
+Generated: "The cat is on the mat."
+Reference: "The cat sits on the mat."
+Score: 0.85 (high precision, minor brevity penalty).
+```
+
+## Anti-Example 1: Vague Metric Definition
+```yaml
+---
+metric_name: "Quality Check"
+vendor: "ExampleCorp"
+version: "0.1"
+description: "Measures how good something is."
+---
+**Definition**:
+"Quality Check" evaluates outputs based on unspecified criteria.
+
+**Calculation**:
+"Calculated using internal methods."
+
+**Use Case**:
+"Used for everything."
+```
+## Why it fails
+Lacks specificity in calculation, use case, and criteria. No reproducibility or clarity for users.
+
+## Anti-Example 2: Composite Metric
+```yaml
+---
+metric_name: "Overall Model Performance"
+vendor: "MLVendor"
+version: "2.0"
+description: "Combines accuracy, F1, and BLEU into a single score."
+---
+**Definition**:
+Weighted average of accuracy (40%), F1 score (30%), and BLEU (30%).
+
+**Calculation**:
+(0.4 * accuracy) + (0.3 * F1) + (0.3 * BLEU).
+
+**Use Case**:
+"General-purpose model evaluation."
+```
+## Why it fails
+Violates the boundary of being a *single* metric. Combines multiple metrics into a composite, making it unsuitable for focused evaluation.

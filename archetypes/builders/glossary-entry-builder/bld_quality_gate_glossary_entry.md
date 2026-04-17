@@ -12,8 +12,8 @@ quality: 9.0
 tags: [quality-gate, glossary-entry, terminology, definition, P11]
 tldr: "Validates glossary_entry artifacts: 3-line definition constraint, synonym presence, disambiguation clarity, and no circular references."
 density_score: 0.89
+llm_function: GOVERN
 ---
-
 # Gate: glossary_entry
 ## Definition
 | Field     | Value |

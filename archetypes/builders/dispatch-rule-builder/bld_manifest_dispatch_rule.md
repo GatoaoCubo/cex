@@ -3,7 +3,7 @@ id: dispatch-rule-builder
 kind: type_builder
 pillar: P12
 domain: dispatch_rule
-llm_function: REASON
+llm_function: BECOME
 version: 1.0.0
 created: 2026-03-26
 updated: 2026-03-26

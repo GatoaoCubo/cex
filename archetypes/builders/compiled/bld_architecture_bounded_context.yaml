@@ -1,0 +1,55 @@
+id: bld_architecture_bounded_context
+kind: component_map
+pillar: P08
+llm_function: CONSTRAIN
+version: 1.0.0
+quality: 7.2
+tags:
+- bounded_context
+- architecture
+- ddd
+- context-map
+title: Architecture Bounded Context
+density_score: 1.0
+updated: '2026-04-17'
+position_in_cex_kind_taxonomy: "P08 Architecture\n  bounded_context   <-- THIS KIND (semantic boundary)\n  component_map \
+  \    (deployment topology -- NOT bounded_context)\n  decision_record   (ADR -- architecture decisions)\n  interface    \
+  \     (integration contract spec)\n  agent_card        (agent capability definition)"
+context_map_relationships: "BC_A (upstream, Open Host Service)\n    |\n    | data_contract (Published Language)\n    v\nBC_B\
+  \ (downstream, Anti-Corruption Layer)\n    |\n    | domain_event (internal, not shared)\n    v\nBC_B aggregates (internal\
+  \ domain model)"
+relationships: '| Relation | Kind | Direction | Notes |
+
+  |----------|------|-----------|-------|
+
+  | governed by | domain_vocabulary | one-to-one | Each BC has one vocabulary |
+
+  | emits | domain_event | one-to-many | Events stay within BC unless published |
+
+  | publishes | data_contract | one-to-many | Published Language to other BCs |
+
+  | maps to | component_map | loose | BC may span multiple services |
+
+  | owns | agent / nucleus | one-to-many | Nuclei belong to a BC |'
+cex_bounded_contexts: '| BC | Nucleus | Domain |
+
+  |----|---------|--------|
+
+  | bc_intelligence | N01 | Research and analysis |
+
+  | bc_marketing | N02 | Content and campaigns |
+
+  | bc_engineering | N03 | Build and scaffold |
+
+  | bc_knowledge | N04 | Knowledge management |
+
+  | bc_operations | N05 | Code, test, deploy |
+
+  | bc_commercial | N06 | Pricing and revenue |
+
+  | bc_orchestration | N07 | Mission orchestration |'
+context_map_patterns_evans:
+- ACL prevents corruption from upstream model vocabulary
+- OHS standardizes how this context exposes itself to consumers
+- Partnership requires coordinated changes between two teams
+- 'Big Ball of Mud: avoid -- no explicit boundary = semantic drift'

@@ -1,0 +1,61 @@
+---
+kind: quality_gate
+id: p09_qg_oauth_app_config
+pillar: P11
+llm_function: GOVERN
+purpose: Quality gate with HARD and SOFT scoring for oauth_app_config
+quality: 9.0
+title: "Quality Gate Oauth App Config"
+version: "1.0.0"
+author: wave1_builder_gen_v2
+tags: [oauth_app_config, builder, quality_gate]
+tldr: "Quality gate with HARD and SOFT scoring for oauth_app_config"
+domain: "oauth_app_config construction"
+created: "2026-04-14"
+updated: "2026-04-14"
+density_score: 0.85
+---
+
+## Definition
+| metric | threshold | operator | scope |
+|---|---|---|---|
+| schema_id | ^p09_oauth_[a-z][a-z0-9_]+.yaml$ | matches | H02 |
+| required_fields | 7 | >= | app config |
+
+## HARD Gates
+| ID | Check | Fail Condition |
+|---|---|---|
+| H01 | YAML frontmatter valid | invalid YAML syntax |
+| H02 | ID matches pattern ^p09_oauth_[a-z][a-z0-9_]+.yaml$ | invalid schema ID |
+| H03 | kind field matches 'oauth_app_config' | incorrect kind value |
+| H04 | client_id present | missing client_id |
+| H05 | redirect_uris are valid URLs | invalid redirect URI format |
+| H06 | scopes are non-empty | empty or missing scopes |
+| H07 | access token_lifetime <= 3600 (OAuth BCP recommends 5-60 min) | token lifetime exceeds 1h |
+| H08 | refresh_token_policy is 'rotating' (OAuth 2.1 / BCP) | static refresh tokens not allowed |
+| H09 | grant_types subset of {authorization_code, client_credentials, refresh_token} | implicit/ROPC forbidden by OAuth 2.1 |
+| H10 | PKCE (S256) required for authorization_code flow | missing code_challenge_method |
+
+## SOFT Scoring
+| Dim | Dimension | Weight | Scoring Guide |
+|---|---|---|---|
+| D01 | Scope completeness | 0.15 | 1.0 if all required scopes present |
+| D02 | Redirect validity | 0.15 | 1.0 if all URIs are HTTPS and registered |
+| D03 | Token lifetime | 0.15 | 1.0 if <= 24h and aligned with policy |
+| D04 | Refresh policy | 0.15 | 1.0 if 'rolling' or 'fixed' with clear rules |
+| D05 | Security practices | 0.10 | 1.0 if PKCE enforced and client secrets rotated |
+| D06 | Documentation | 0.10 | 1.0 if app config includes usage examples |
+| D07 | Standards compliance | 0.20 | 1.0 if aligns with OAuth 2.1 + RFC 7636 PKCE + RFC 8252 |
+
+## Actions
+| Score | Action |
+|---|---|
+| GOLDEN | >=9.5 | Auto-approve and deploy |
+| PUBLISH | >=8.0 | Deploy after review |
+| REVIEW | >=7.0 | Require manual review |
+| REJECT | <7.0 | Block deployment |
+
+## Bypass
+| conditions | approver | audit trail |
+|---|---|---|
+| Security exception | CTO | "Bypassed by [name] on [date] for [reason]" |

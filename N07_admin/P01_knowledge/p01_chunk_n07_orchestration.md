@@ -1,0 +1,80 @@
+---
+id: p01_chunk_n07_orchestration
+kind: chunk_strategy
+pillar: P01
+nucleus: N07
+version: "1.0.0"
+created: "2026-04-17"
+updated: "2026-04-17"
+author: chunk-strategy-builder
+name: "N07 Orchestration Document Structure Splitter"
+method: "document_structure"
+chunk_size: "256 tokens"
+chunk_overlap: "32 tokens"
+separators: "[\\n## , \\n### , \\n\\n, \\n, . ]"
+quality: 7.5
+tags: [chunk_strategy, P01, orchestration, n07, retrieval]
+tldr: "Document-structure splitter for N07 orchestration docs: per-doctype size bands, 32-token overlap, metadata-keyed retrieval."
+description: "Chunking for N07: handoff .md, signal .json, mission plan .md, decision manifest .yaml."
+tokenizer: "cl100k_base"
+min_chunk_size: "32 tokens"
+strip_whitespace: "true"
+keep_separator: "true"
+---
+<!-- 8F: F1=chunk_strategy/P01 F2=13 ISOs F3=schema+examples F4=per-band F5=compile F6=4sec F7=null/id-ok F8=compiled -->
+
+## Overview
+
+N07 runtime: handoff `.md` (500-2000B), mission plan `.md` (2000-8000B),
+decision manifest `.yaml` (500-3000B), signal `.json` (200-500B, single chunk).
+Document-structure preserves YAML/JSON block integrity; fixed-size splits corrupt
+structured fields. Chunk metadata (nucleus, mission, wave, timestamp, kind)
+enables filtered retrieval. Sloth lens: minimum overhead.
+
+## Method
+
+Algorithm: `document_structure` (MarkdownHeaderTextSplitter variant).
+Separator cascade: `\n## ` > `\n### ` > `\n\n` > `\n` > `. `
+Signals always single chunk. Manifests split at top-level YAML keys post-frontmatter.
+Fallback to next separator when chunk exceeds active doctype band.
+Per-doctype bands (chunk_size / split_policy):
+- handoff `.md` -- 256 tok / H2>H3>para
+- mission plan `.md` -- 512 tok / H2>H3>para
+- manifest `.yaml` -- 128 tok / YAML top-keys
+- signal `.json` -- 512 tok / never split
+
+## Parameters
+
+| Parameter | Value | Rationale |
+|-----------|-------|-----------|
+| chunk_overlap | 32 tokens | 12.5%; cross-section refs |
+| min_chunk_size | 32 tokens | No YAML-split stubs |
+| tokenizer | cl100k_base | Claude-aligned counts |
+| strip_whitespace | true | YAML indent noise removal |
+| keep_separator | true | Heading text for disambiguation |
+
+## Integration
+
+Inputs:
+- `.cex/runtime/handoffs/*.md`
+- `.cex/runtime/signals/signal_*.json`
+- `.cex/runtime/plans/*.md`
+- `.cex/runtime/decisions/decision_manifest.yaml`
+
+Metadata per chunk: nucleus, mission, wave (H2 text), timestamp, kind.
+Consumers: `cex_retriever.py`, N07 F3 INJECT, `cex_memory_select.py`.
+Out of scope: embedding model, vector store -- see `embedding_config`.
+
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `chunk_strategy` |
+| Pillar | P01 |
+| Nucleus | N07 |
+| Domain | orchestration retrieval |
+| Method | document_structure |
+| Pipeline | 8F (F1-F8) |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

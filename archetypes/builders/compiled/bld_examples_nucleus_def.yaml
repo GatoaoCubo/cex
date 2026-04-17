@@ -1,0 +1,91 @@
+kind: examples
+id: bld_examples_nucleus_def
+pillar: P07
+llm_function: GOVERN
+purpose: Golden and anti-examples of nucleus_def artifacts
+quality: null
+title: Examples Nucleus Def
+version: 1.0.0
+author: n05_wave8
+tags:
+- nucleus_def
+- builder
+- examples
+tldr: Golden and anti-examples of nucleus_def artifacts
+domain: nucleus_def construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+golden_example: "---\nid: p02_nd_n05.md\nkind: nucleus_def\npillar: P02\nnucleus_id: N05\nrole: operations\nsin_lens: \"Ira\
+  \ Construtiva -- Constructive Wrath\"\ncli_binding: claude\nmodel_tier: sonnet\nmodel_specific: claude-sonnet-4-6\ncontext_tokens:\
+  \ 200000\nboot_script: boot/n05.ps1\nagent_card_path: N05_operations/agent_card_n05.md\npillars_owned: [P07, P08, P09, P11]\n\
+  crew_templates_exposed:\n  - ci_cd_review_crew\n  - deploy_gate_crew\n  - test_automation_crew\ndomain_agents:\n  - railway_superintendent\n\
+  \  - deploy_ops_agent\n  - test_ops_agent\n  - code_review_agent\nfallback_cli: codex\ntitle: \"Nucleus Def N05\"\nquality:\
+  \ null\ntags: [nucleus_def, n05, operations, composable]\n---\n\n## Identity\n\n| Field | Value |\n|-------|-------|\n|\
+  \ Nucleus ID | N05 |\n| Role | operations |\n| Sin Lens | Ira Construtiva -- Constructive Wrath |\n| CLI Binding | claude\
+  \ |\n| Model Tier | sonnet |\n| Model | claude-sonnet-4-6 |\n| Context | 200000 tokens |\n| Boot Script | `boot/n05.ps1`\
+  \ |\n| Agent Card | `N05_operations/agent_card_n05.md` |\n\n## Pillars Owned\n\n| Pillar | Domain | Sample Kinds |\n|--------|--------|-------------|\n\
+  | P07 | Evaluation | benchmark, golden_test, e2e_eval, scoring_rubric |\n| P08 | Architecture | decision_record, component_map,\
+  \ diagram |\n| P09 | Config | env_config, rate_limit_config, secret_config |\n| P11 | Feedback | bugloop, regression_check,\
+  \ lifecycle_rule |"
+why_it_succeeds: '- nucleus_id is canonical (N05).
+
+  - role matches the operations domain.
+
+  - cli_binding verified against nucleus_models.yaml.
+
+  - pillars_owned reflects actual artifact production (P07/P08/P09/P11).
+
+  - crew_templates_exposed names concrete patterns (ci_cd_review_crew).
+
+  - domain_agents lists real agent files from N05_operations/P02_model/.
+
+
+  ---'
+anti_example_1_wrong_pillar_assignment: '---
+
+  id: p02_nd_n05.md
+
+  kind: nucleus_def
+
+  nucleus_id: N05
+
+  role: operations
+
+  pillars_owned: [P01, P02, P03, P04, P05, P06, P07, P08, P09, P10, P11, P12]
+
+  ---'
+why_it_fails: Missing boot_script and agent_card_path. Without these, N07 cannot dispatch the nucleus (boot scripts read handoff
+  files) and cannot load the capability manifest. These fields are REQUIRED for the nucleus to participate in orchestration.
+anti_example_2_role_nucleus_mismatch: '---
+
+  id: p02_nd_n03.md
+
+  kind: nucleus_def
+
+  nucleus_id: N03
+
+  role: operations
+
+  sin_lens: "Ira Construtiva"
+
+  cli_binding: claude
+
+  model_tier: sonnet
+
+  ---'
+anti_example_3_missing_boot_contract: '---
+
+  id: p02_nd_n01.md
+
+  kind: nucleus_def
+
+  nucleus_id: N01
+
+  role: intelligence
+
+  cli_binding: claude
+
+  model_tier: sonnet
+
+  ---'

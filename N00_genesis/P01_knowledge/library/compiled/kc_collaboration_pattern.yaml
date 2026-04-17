@@ -1,0 +1,29 @@
+id: kc_collaboration_pattern
+kind: knowledge_card
+title: Collaboration Pattern
+version: 1.0.0
+quality: null
+pillar: P01
+density_score: 1.0
+core_patterns:
+- Centralized Control
+- Single orchestrator coordinates all agents
+- Centralized decision-making
+- 'Example: Task assignment via master-worker architecture'
+- Decentralized Coordination
+- Agents self-organize through local interactions
+- Emergent behavior from simple rules
+- 'Example: Swarm intelligence in robotics'
+- Hierarchical Structure
+- Nested layers of control and execution
+- Clear command chains and subordination
+- 'Example: Military operation command structures'
+- Peer-to-Peer Network
+- Equal agent participation
+- Distributed decision-making
+- 'Example: Blockchain consensus mechanisms'
+key_considerations:
+- Synchronization requirements
+- Fault tolerance mechanisms
+- Scalability constraints
+- Security protocols for collaborative workflows

@@ -1,5 +1,5 @@
 ---
-id: type-def-builder-output-template
+id: bld_output_template_type_def
 kind: output_template
 pillar: P05
 llm_function: PRODUCE

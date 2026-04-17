@@ -1,0 +1,33 @@
+kind: examples
+id: bld_examples_healthcare_vertical
+pillar: P07
+llm_function: GOVERN
+purpose: Golden and anti-examples of healthcare_vertical artifacts
+quality: null
+title: Examples Healthcare Vertical
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- healthcare_vertical
+- builder
+- examples
+tldr: Golden and anti-examples of healthcare_vertical artifacts
+domain: healthcare_vertical construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+golden_example: "---  \ntitle: \"Secure Patient Data Exchange Using FHIR\"  \nkind: healthcare_vertical  \nvendor: Epic Systems\
+  \  \ntool: Epic EHR Platform  \nstandard: HL7 FHIR R4  \nuse_case: Interoperable patient record sharing between hospitals\
+  \  \ndescription:  \n  - Implements HIPAA-compliant PHI encryption (AES-256) at rest and TLS 1.2+ in transit  \n  - Integrates\
+  \ with HL7 FHIR API for real-time lab result sharing  \n  - Audits all PHI access via AWS CloudTrail with role-based access\
+  \ controls  \n  - Uses Athenahealth's patient portal for consumer-facing data access  \n  - Complies with ONC 21st Century\
+  \ Cures Final Rule for data blocking  "
+anti_example_1_missing_hipaa_compliance: "---  \ntitle: \"Basic Lab Result API\"  \nkind: healthcare_vertical  \nvendor: MedTech\
+  \ Inc.  \ntool: Legacy Lab API v1.0  \nstandard: HL7 v2.x  \nuse_case: Lab result transmission  \ndescription:  \n  - No\
+  \ explicit encryption or audit logging for PHI  \n  - Uses unauthenticated HTTP endpoints for data transfer  \n  - No mention\
+  \ of HIPAA or PHI handling protocols  "
+why_it_fails: Fails to adopt HL7 FHIR (required for interoperability) and lacks HIPAA-mandated encryption and audit controls,
+  creating compliance and interoperability risks.
+anti_example_2_ignoring_fhir_standards: "---  \ntitle: \"Custom EHR Module\"  \nkind: healthcare_vertical  \nvendor: HealthSoft\
+  \ LLC  \ntool: Proprietary EHR Module  \nstandard: Custom HL7 v2.x  \nuse_case: Internal provider documentation  \ndescription:\
+  \  \n  - No FHIR API integration  \n  - Stores PHI in unencrypted flat files  \n  - No audit trails for data access  "

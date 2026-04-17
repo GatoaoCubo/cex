@@ -1,0 +1,72 @@
+id: workflow_campaign_pipeline
+kind: workflow
+pillar: P12
+nucleus: n02
+title: End-to-End Campaign Workflow Pipeline
+version: 1.0.0
+quality: null
+tags:
+- workflow
+- campaign_pipeline
+- brief_to_publish
+- orchestration
+- P12
+- n02_marketing
+domain: campaign-orchestration
+status: active
+density_score: 1.0
+purpose: A campaign without a pipeline is an idea. This workflow converts brief input into deployed, measured creative --
+  with no steps skipped, no decisions deferred, and no quality gates bypassed. Creative Lust demands COMPLETION, not just
+  output.
+pipeline_overview: "BRIEF INPUT\n    |\n    v\nF1: CONSTRAIN -- validate brief against input_schema_campaign_brief.md\n  \
+  \  |\n    v\nF2: STRATEGIZE -- map brief to funnel stage, content pillars, hook framework\n    |\n    v\nF3: RESEARCH --\
+  \ load brand_config, audience KCs, competitor intel, past campaign signals\n    |\n    v\nF4: PLAN -- copy variants, A/B\
+  \ structure, scheduling calendar\n    |\n    v\nF5: CREATE -- generate copy assets via action_prompt_n02_copy.md\n    |\n\
+  \    v\nF6: VALIDATE -- run each asset through validation_schema_content_spec.md\n    |         (if fail: regenerate, max\
+  \ 3 attempts)\n    |\n    v\nF7: REVIEW -- optional human review gate (configurable; default: skip for autonomous)\n   \
+  \ |\n    v\nF8: DISTRIBUTE -- publish via social_publisher_n02.md + api_reference_social_apis.md\n    |\n    v\nF9: MEASURE\
+  \ -- collect performance signals (CTR, CVR, engagement)\n    |\n    v\nF10: ANALYZE -- cohort_analysis + ab_test evaluation\n\
+  \    |\n    v\nF11: EVOLVE -- feed signals into self_improvement_loop_n02.md\n    |\n    v\nF12: ARCHIVE -- store campaign\
+  \ artifacts, commit to repo, signal n07"
+stage_definitions: ''
+f1_constrain_brief_validation: "inputs:\n  - campaign_brief (raw)\noutputs:\n  - validated_brief (compliant with input_schema_campaign_brief.md)\n\
+  \  - campaign_id (auto-generated)\nerror_handling:\n  - BRIEF_001..005: return error, request correction\ngate: all required\
+  \ fields present + validation rules pass"
+f2_strategize_intent_resolution: "inputs:\n  - validated_brief\nlogic:\n  - map campaign_goal -> funnel_stage (TOFU/MOFU/BOFU)\n\
+  \  - select hook_framework based on funnel_stage + brand_voice\n  - identify content_pillars relevant to this campaign\n\
+  \  - set urgency_trigger if not in brief\noutputs:\n  - strategy_doc (funnel_stage, hook_type, content_pillar[s], urgency_trigger)"
+f3_research_context_assembly: "load_in_sequence:\n  1. .cex/brand/brand_config.yaml (brand voice, colors, values)\n  2. N02_marketing/P02_model/customer_segment_n02.md\
+  \ (ICP for target_audience)\n  3. N02_marketing/P01_knowledge/kc_marketing_vocabulary.md (controlled vocabulary)\n  4. N01_intelligence/\
+  \ competitor KCs if campaign_goal == awareness\n  5. Past campaign signals from self_improvement_loop_n02.md (rulebook)\n\
+  \  6. Platform specs from api_reference_social_apis.md (for each channel in brief)"
+f4_plan_production_blueprint: "outputs:\n  - copy_plan:\n      assets_count: integer\n      variants_count: integer (2 if\
+  \ a_b_testing else 1)\n      formats: array (per channel)\n      scheduling_calendar: [{asset_id, channel, publish_datetime}]\n\
+  \      ab_test_config: ab_test object (nullable)\ngate: plan reviewed and locked before F5 (no scope creep mid-execution)"
+f5_create_copy_generation: "invokes: action_prompt_n02_copy.md\nfor_each_asset in copy_plan:\n  - inject: brand_voice, ICP,\
+  \ hook_type, CTA, channel, format\n  - generate: headline + body + CTA (+ visual brief if multimodal_prompt used)\n  - store:\
+  \ draft_copy object with asset_id\nmax_generation_time_per_asset: 30 seconds"
+f6_validate_quality_gate: "invokes: validation_schema_content_spec.md\nfor_each_draft_copy:\n  - check: character limits per\
+  \ platform/format\n  - check: tone compliance (brand_voice rules)\n  - check: CTA present (if campaign_goal requires)\n\
+  \  - check: forbidden_phrases absent\n  - score: 0.0-1.0\n  threshold: 0.80 minimum to proceed\nretry: max 3 regeneration\
+  \ attempts per asset\non_failure_after_3: flag for human review, pause this asset"
+f7_review_human_gate_configurable: "default: skip (autonomous mode)\nenable_when:\n  - campaign budget_usd > 10000\n  - is_regulated_industry:\
+  \ true\n  - explicit user request\nreview_interface: handoff to user with preview + approve/reject per asset\ntimeout: 24\
+  \ hours (auto-approve if no response and auto_approve: true)"
+f8_distribute_publishing: "invokes: social_publisher_n02.md\nfor_each_approved_asset:\n  - route to platform API (api_reference_social_apis.md)\n\
+  \  - respect rate_limits per platform\n  - log: published_at, platform_post_id, asset_id\n  - handle errors: queue failed,\
+  \ retry with backoff\nscheduling: honor scheduling_calendar from F4"
+f9_measure_signal_collection: "collect_after: 24h, 72h, 7d, end_date\nsignals_per_asset:\n  - impressions, clicks, ctr, conversions,\
+  \ cvr\n  - engagement_rate, save_rate, share_rate\n  - platform_post_id as join key\nstore_in: performance_signal objects\
+  \ (cohort_analysis_n02.md schema)"
+f10_analyze_post_campaign_intelligence: "invoke_sequence:\n  1. cohort_analysis_n02.md -- segment breakdown\n  2. ab_test_config_n02.md\
+  \ -- winner declaration (if a_b_testing)\n  3. nps_survey_n02.md -- trigger survey for conversion cohort\noutputs:\n  -\
+  \ campaign_summary_report (performance by asset, by channel, by segment)\n  - winner_copy (if A/B concluded)"
+f11_evolve_learning_integration: "invokes: self_improvement_loop_n02.md\nwith: campaign_summary_report + performance_signals\n\
+  produces:\n  - new_rule_candidates (high performers)\n  - failure_archive_entries (low performers)\ngate: campaign must\
+  \ have >= 500 impressions total to generate rules"
+f12_archive_completion: "actions:\n  - compile all artifacts: python _tools/cex_compile.py N02_marketing/\n  - git commit:\
+  \ \"[N02] campaign {campaign_id} complete -- {nps_score} NPS, {avg_cvr}% CVR\"\n  - signal: write_signal('n02', 'campaign_complete',\
+  \ score)\n  - archive: move campaign artifacts to N02_marketing/P12_orchestration/archive/"
+pipeline_configuration: "pipeline_config:\n  autonomous_mode: true             # runs F1-F12 without human gates\n  human_gate_at:\
+  \ F7                 # configurable; null to disable\n  max_retries_per_asset: 3\n  auto_approve_timeout_hours: 24\n  measure_periods_days:\
+  \ [1, 3, 7]\n  evolve_min_impressions: 500\n  archive_on_complete: true\n  commit_on_complete: true"

@@ -1,0 +1,72 @@
+id: backpressure-policy-builder
+kind: type_builder
+pillar: P09
+parent: null
+domain: backpressure_policy
+llm_function: BECOME
+version: 1.0.0
+created: 2026-04-17
+updated: 2026-04-17
+author: builder_agent
+tags:
+- kind-builder
+- backpressure-policy
+- P09
+- reactive-streams
+- flow-control
+- producer-consumer
+keywords:
+- backpressure
+- reactive streams
+- flow control
+- producer consumer
+- buffer
+- drop
+- throttle
+- overflow
+- queue
+triggers:
+- create backpressure policy
+- configure flow control
+- handle slow consumer
+- reactive streams policy
+- overflow policy
+capabilities:
+- 'Define overflow_strategy: DROP_LATEST, DROP_OLDEST, BUFFER, THROTTLE, ERROR'
+- 'Set buffer_size: max items held before overflow strategy activates'
+- 'Configure shed_threshold: percentage of capacity at which to start shedding'
+- 'Specify request_batch_size: items requested per demand signal (Reactive Streams protocol)'
+- Set high_watermark and low_watermark for adaptive flow control
+- Declare monitored_queue for which queue/channel this policy governs
+- Validate artifact against quality gates
+- Distinguish backpressure_policy from circuit_breaker, rate_limit_config, runtime_rule
+quality: 7.6
+title: Manifest Backpressure Policy
+tldr: Builds backpressure_policy artifacts -- reactive streams flow control policy when consumers lag behind producers.
+density_score: 0.9
+identity: Specialist in building backpressure_policy artifacts -- policies that define how a system responds when downstream
+  consumers cannot keep up with upstream producers. Grounded in Reactive Streams specification (2014), Project Reactor, RxJava,
+  and Akka Streams. Masters overflow strategy selection (drop/buffer/throttle/error), buffer sizing, shed thresholds, and
+  the boundary between backpressure_policy (consumer lag) and circuit_breaker (dependency failure) and rate_limit_config (inbound
+  throttle).
+properties: '| Property | Value |
+
+  |----------|-------|
+
+  | Kind | `type_builder` |
+
+  | Pillar | P09 |
+
+  | Domain | backpressure_policy |
+
+  | Pipeline | 8F (F1-F8) |
+
+  | Scorer | cex_score.py |
+
+  | Compiler | cex_compile.py |
+
+  | Retriever | cex_retriever.py |
+
+  | Quality target | 9.0+ |
+
+  | Density target | 0.85+ |'

@@ -29,6 +29,7 @@ import time
 import shutil
 from datetime import datetime, timezone
 from pathlib import Path
+from typing import Any
 
 ROOT = Path(__file__).resolve().parent.parent
 TOOLS = ROOT / "_tools"
@@ -39,14 +40,14 @@ PID_FILE = ROOT / ".cex" / "runtime" / "pids" / "spawn_pids.txt"
 ARCHIVE_DIR = ROOT / ".cex" / "archive" / "handoffs_done"
 
 
-def log(msg, level="INFO"):
+def log(msg: Any, level: str = "INFO") -> None:
     ts = datetime.now().strftime("%H:%M:%S")
     # Windows cp1252 can't handle unicode box chars -- replace them
     safe_msg = str(msg).encode("ascii", "replace").decode("ascii")
     print(f"[{ts}] [{level}] {safe_msg}", flush=True)
 
 
-def parse_args():
+def parse_args() -> argparse.Namespace:
     p = argparse.ArgumentParser(description="CEX Mission Runner -- autonomous grid orchestration")
     p.add_argument("--plan", help="Path to mission plan .md file")
     p.add_argument("--mission", default="MISSION", help="Mission name (default: MISSION)")
@@ -67,7 +68,7 @@ def parse_args():
 # WAVE PARSING
 # ==================================================
 
-def parse_waves_from_plan(plan_path: str) -> list:
+def parse_waves_from_plan(plan_path: str) -> list[dict[str, Any]]:
     """Extract wave definitions from a mission plan .md file.
 
     Looks for patterns like:
@@ -125,7 +126,7 @@ def parse_waves_from_plan(plan_path: str) -> list:
     return waves
 
 
-def parse_waves_from_json(waves_path: str) -> list:
+def parse_waves_from_json(waves_path: str) -> list[dict[str, Any]]:
     """Load waves from JSON/YAML file."""
     text = Path(waves_path).read_text(encoding="utf-8")
     if waves_path.endswith((".yaml", ".yml")):
@@ -138,7 +139,7 @@ def parse_waves_from_json(waves_path: str) -> list:
 # GRID OPERATIONS
 # ==================================================
 
-def clean_signals():
+def clean_signals() -> None:
     """Remove old signals."""
     if SIGNAL_DIR.exists():
         for f in SIGNAL_DIR.glob("signal_*.json"):
@@ -146,7 +147,7 @@ def clean_signals():
     log("Signals cleaned")
 
 
-def copy_handoffs_to_tasks(mission: str, nuclei: list):
+def copy_handoffs_to_tasks(mission: str, nuclei: list[dict[str, Any]]) -> None:
     """Copy MISSION_n0X.md -> n0X_task.md for each nucleus in wave."""
     for ninfo in nuclei:
         nuc = ninfo["nucleus"]
@@ -159,7 +160,7 @@ def copy_handoffs_to_tasks(mission: str, nuclei: list):
             log(f"  {nuc}: WARNING -- handoff {src.name} not found", "WARN")
 
 
-def dispatch_grid(mission: str, dry_run: bool = False):
+def dispatch_grid(mission: str, dry_run: bool = False) -> None:
     """Launch spawn_grid.ps1 in static mode."""
     if dry_run:
         log("[DRY-RUN] Would launch spawn_grid.ps1", "DRY")
@@ -177,7 +178,12 @@ def dispatch_grid(mission: str, dry_run: bool = False):
     time.sleep(10)  # Wait for processes to spawn
 
 
-def watch_signals(nuclei: list, timeout: int, poll: int, dry_run: bool = False) -> dict:
+def watch_signals(
+    nuclei: list[dict[str, Any]],
+    timeout: int,
+    poll: int,
+    dry_run: bool = False,
+) -> dict[str, Any]:
     """Block until all nuclei signal or timeout. Returns parsed result."""
     expected = ",".join(n["nucleus"] for n in nuclei)
 
@@ -216,7 +222,7 @@ def watch_signals(nuclei: list, timeout: int, poll: int, dry_run: bool = False) 
         return {"status": "fallback", "nuclei": signals}
 
 
-def find_signals_fallback(nuclei: list) -> dict:
+def find_signals_fallback(nuclei: list[dict[str, Any]]) -> dict[str, Any]:
     """Fallback: read signals directly from disk if watch parsing fails."""
     result = {}
     if SIGNAL_DIR.exists():
@@ -237,7 +243,7 @@ def find_signals_fallback(nuclei: list) -> dict:
     return result
 
 
-def stop_processes(dry_run: bool = False):
+def stop_processes(dry_run: bool = False) -> None:
     """Kill all spawned processes via spawn_stop.ps1."""
     args = [
         "powershell", "-NoProfile", "-ExecutionPolicy", "Bypass",
@@ -255,7 +261,11 @@ def stop_processes(dry_run: bool = False):
 # QUALITY GATE (G3)
 # ==================================================
 
-def quality_gate(nuclei: list, watch_result: dict, floor: float) -> dict:
+def quality_gate(
+    nuclei: list[dict[str, Any]],
+    watch_result: dict[str, Any],
+    floor: float,
+) -> dict[str, Any]:
     """Check quality of each nucleus output. Returns pass/fail per nucleus."""
     gate = {}
 
@@ -309,7 +319,7 @@ NUCLEUS_DOMAINS = {
 }
 
 
-def load_task_queue(path: str) -> list:
+def load_task_queue(path: str) -> list[dict[str, Any]]:
     """Load task queue from YAML or JSON.
 
     Format:
@@ -343,7 +353,7 @@ def load_task_queue(path: str) -> list:
     return tasks
 
 
-def route_task_to_nucleus(task: dict) -> str:
+def route_task_to_nucleus(task: dict[str, Any]) -> str:
     """Auto-route a task to a nucleus based on kind or keywords."""
     kind = task.get("kind", "")
     desc = task.get("task", "").lower()
@@ -375,7 +385,7 @@ def route_task_to_nucleus(task: dict) -> str:
     return "n03"  # Default: builder
 
 
-def pop_next_task(tasks: list, nucleus: str) -> dict:
+def pop_next_task(tasks: list[dict[str, Any]], nucleus: str) -> dict[str, Any]:
     """Pop the next pending task for a given nucleus. Priority: critical first."""
     priority_order = {"critical": 0, "normal": 1, "low": 2}
     candidates = [t for t in tasks if t["status"] == "pending" and t["nucleus"] == nucleus]
@@ -391,7 +401,7 @@ def pop_next_task(tasks: list, nucleus: str) -> dict:
     return chosen
 
 
-def write_task_handoff(mission: str, nucleus: str, task: dict):
+def write_task_handoff(mission: str, nucleus: str, task: dict[str, Any]) -> None:
     """Write a handoff file for a single task dispatch."""
     HANDOFF_DIR.mkdir(parents=True, exist_ok=True)
     handoff_path = HANDOFF_DIR / f"{mission}_{nucleus}.md"
@@ -421,7 +431,7 @@ Compile after save. Signal on complete.
     log(f"  Handoff written: {handoff_path.name}")
 
 
-def dispatch_solo(nucleus: str, mission: str, dry_run: bool = False):
+def dispatch_solo(nucleus: str, mission: str, dry_run: bool = False) -> None:
     """Dispatch a single nucleus via dispatch.sh solo."""
     if dry_run:
         log(f"[DRY-RUN] Would dispatch {nucleus.upper()} solo", "DRY")
@@ -434,7 +444,7 @@ def dispatch_solo(nucleus: str, mission: str, dry_run: bool = False):
         log(f"  {nucleus.upper()} dispatch failed: {e}", "ERROR")
 
 
-def check_signal(nucleus: str) -> dict:
+def check_signal(nucleus: str) -> dict[str, Any]:
     """Non-blocking check: has this nucleus signaled completion?"""
     if not SIGNAL_DIR.exists():
         return {}
@@ -455,7 +465,7 @@ def check_signal(nucleus: str) -> dict:
         return {}
 
 
-def run_continuous(args):
+def run_continuous(args: argparse.Namespace) -> None:
     """Continuous batching mode: dispatch -> poll -> re-dispatch -> repeat."""
     mission = args.mission
     log(f"{'='*50}")
@@ -602,7 +612,12 @@ def run_continuous(args):
 # CONSOLIDATION
 # ==================================================
 
-def consolidate_wave(mission: str, wave_num: int, nuclei: list, dry_run: bool = False):
+def consolidate_wave(
+    mission: str,
+    wave_num: int,
+    nuclei: list[dict[str, Any]],
+    dry_run: bool = False,
+) -> None:
     """Commit outputs, archive handoffs, write wave summary."""
     if dry_run:
         log(f"[DRY-RUN] Would consolidate wave {wave_num}", "DRY")
@@ -637,7 +652,7 @@ def consolidate_wave(mission: str, wave_num: int, nuclei: list, dry_run: bool = 
 # MAIN LOOP
 # ==================================================
 
-def run_mission(args):
+def run_mission(args: argparse.Namespace) -> None:
     mission = args.mission
     log(f"{'='*50}")
     log(f"CEX MISSION RUNNER v1.0")
@@ -684,6 +699,20 @@ def run_mission(args):
         # Step 2: Copy handoffs to task files
         log("Preparing handoffs...")
         copy_handoffs_to_tasks(mission, nuclei)
+
+        # Step 2.5: Hygiene gate (warning only, does not block dispatch)
+        try:
+            from cex_hygiene import run_scan
+            scan_result = run_scan()
+            if scan_result.critical_count > 0:
+                log(f"Hygiene: {scan_result.critical_count} critical issues found", "WARN")
+                log("Run: python _tools/cex_hygiene.py clean", "WARN")
+            else:
+                log("Hygiene: clean")
+        except ImportError:
+            log("Hygiene scanner not available -- skipping", "WARN")
+        except Exception as e:
+            log(f"Hygiene scan error: {e}", "WARN")
 
         # Step 3: Dispatch grid
         log("Dispatching grid...")

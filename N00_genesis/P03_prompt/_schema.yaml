@@ -1,0 +1,216 @@
+pillar: P03
+name: Prompt
+description: HOW the agent SPEAKS — 9 types of prompt engineering
+variable_syntax:
+  tier1_template: '{{MUSTACHE}}'
+  tier2_authoring: '[BRACKET]'
+  deprecated: '{single_curly}'
+kinds:
+  system_prompt:
+    description: System prompt defining agent identity and rules
+    boundary: Identity + rules + format. Read FIRST by the LLM.
+    layer: prompt
+    core: true
+    machine_format: yaml
+    naming: p03_sp_{{agent}}.md
+    industry_terms:
+    - system message
+    - system instruction
+    - persona prompt
+    used_by:
+    - OpenAI
+    - Anthropic
+    - Google
+    - LangChain SystemMessagePromptTemplate
+    source_map:
+      already_is:
+      - PRIME_*.md (7)
+      - ISO_*_SYSTEM_INSTRUCTION (101)
+      - Rules/*.md (10)
+      receives_input_from:
+      - P01 knowledge_card
+      - P10 mental_model
+      - P11 guardrail
+    constraints:
+      max_bytes: 4096
+      quality_min: 7.0
+    frontmatter_required:
+    - id
+    - kind
+    - pillar
+    - title
+    - target_agent
+    - quality
+    body_structure:
+    - identity
+    - rules
+    - output_format
+    - constraints
+    llm_function: BECOME
+  prompt_template:
+    description: Reusable template with {{vars}} for generating prompts
+    boundary: Template with variables. NOT a user_prompt (fixed) nor system_prompt (identity).
+    layer: prompt
+    core: true
+    machine_format: yaml
+    naming: p03_pt_{{topic}}.md
+    industry_terms:
+    - prompt template
+    - chat prompt template
+    - jinja template
+    used_by:
+    - LangChain PromptTemplate
+    - DSPy Signature
+    - Mustache
+    - Jinja2
+    source_map:
+      already_is:
+      - TPL_builder_agent_009-020 (10)
+      - ISO_*_OUTPUT_TEMPLATE (118)
+      receives_input_from:
+      - P06 type_def
+    constraints:
+      max_bytes: 8192
+    frontmatter_required:
+    - id
+    - kind
+    - title
+    - variables
+    - quality
+    body_structure:
+    - purpose
+    - variables_table
+    - template_body
+    - quality_gates
+    - examples
+    llm_function: CONSTRAIN
+  chain:
+    description: Chained prompt sequence (output A → input B)
+    boundary: Sequence of PROMPTS. NOT a workflow (P12, agents+tools).
+    layer: prompt
+    core: false
+    machine_format: yaml
+    naming: p03_ch_{{pipeline}}.md
+    industry_terms:
+    - prompt chain
+    - sequential chain
+    - pipeline
+    - LLMChain
+    used_by:
+    - LangChain SequentialChain
+    - DSPy Module composition
+    source_map:
+      already_is:
+      - ADW_*.md (~240 workflows)
+      receives_input_from:
+      - P05 output_schema
+      - P06 interface
+    constraints:
+      max_bytes: 6144
+    frontmatter_required:
+    - id
+    - kind
+    - steps
+    - flow
+    body_structure:
+    - purpose
+    - steps
+    - data_flow
+    - error_handling
+    llm_function: PRODUCE
+  action_prompt:
+    description: Task prompt sent by human/orchestrator to agent
+    boundary: Specific task. The LLM EXECUTES this.
+    layer: prompt
+    core: true
+    machine_format: yaml
+    naming: p03_up_{{task}}.md
+    industry_terms:
+    - user message
+    - human message
+    - task prompt
+    - instruction prompt
+    used_by:
+    - OpenAI
+    - Anthropic
+    - Google
+    - LangChain HumanMessagePromptTemplate
+    source_map:
+      already_is:
+      - HOP_*.md (287)
+      - Handoff_*.md (255)
+      - ISO_*_INSTRUCTIONS (213)
+      receives_input_from:
+      - P01 knowledge_card
+      - P05 output_schema
+    constraints:
+      max_bytes: 2048
+    frontmatter_required:
+    - id
+    - kind
+    - action
+    - input_required
+    - output_expected
+    body_structure:
+    - context
+    - purpose
+    - input
+    - execution
+    - output
+    - validation
+    llm_function: INJECT
+  instruction:
+    description: Step-by-step execution instructions for agents or pipelines
+    llm_function: REASON
+    naming: ex_instruction_{topic}.md
+  constraint_spec:
+    description: Constrained generation rules
+    boundary: Governs decoder. NOT validation_schema.
+    layer: runtime
+    core: true
+    machine_format: json
+    naming: p03_constraint.md
+    constraints:
+      max_bytes: 2048
+    frontmatter_required:
+    - id
+    - name
+    - constraint_type
+    - pattern
+    llm_function: CONSTRAIN
+  prompt_version:
+    description: Versioned prompt snapshot
+    boundary: Immutable version. NOT prompt_template.
+    layer: runtime
+    core: false
+    machine_format: yaml
+    naming: p03_pv.md
+    constraints:
+      max_bytes: 2048
+    frontmatter_required:
+    - id
+    - name
+    - prompt_ref
+    - version
+    - author
+    llm_function: GOVERN
+  context_window_config:
+    description: Token budget allocation, priority tiers, and overflow rules for prompt assembly
+    boundary: Budget allocation spec. NOT prompt_template (content), system_prompt (identity), nor model_card (capabilities).
+    layer: spec
+    core: true
+    machine_format: yaml
+    naming: p03_cwc_{{model}}.yaml
+    constraints:
+      max_bytes: 2048
+    frontmatter_required:
+    - id
+    - kind
+    - pillar
+    - total_tokens
+    - system_prompt_budget
+    - retrieved_context_budget
+    - output_reserve
+    - overflow_strategy
+    - priority_tiers
+    llm_function: CONSTRAIN

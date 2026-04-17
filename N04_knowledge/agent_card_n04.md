@@ -32,19 +32,20 @@ N04 is the knowledge backbone of CEX. While N01 researches and N03 builds, N04 i
 
 | Subdir | Count | Purpose |
 |--------|------:|---------|
-| agents | 1 | Agent definition for knowledge nucleus (`agent_knowledge.md`) |
-| architecture | 1 | Agent card with routing + capabilities (`agent_card_knowledge.md`) |
-| feedback | 1 | Quality gate feedback records (`quality_gate_knowledge.md`) |
-| knowledge | 8 | Core domain: chunk strategy, 2 embedding configs (knowledge + Supabase), 2 KCs (knowledge + Supabase data layer), 2 RAG sources (knowledge + Supabase), retriever config |
-| memory | 2 | Knowledge memory index + RAG pipeline memory |
-| orchestration | 4 | Dispatch rules (knowledge + Supabase), workflows (knowledge + Supabase setup) |
-| output | 15 | KC audits, gap reports, embedding batches, taxonomy maps, knowledge graphs, finetune datasets, SQL migrations, competitive intel, monetization curriculum, SDK validation, content factory audit, self-review |
-| prompts | 1 | System prompt for N04 persona (`system_prompt_knowledge.md`) |
+| agents | 4 | Agent definitions for knowledge nucleus |
+| architecture | 4 | Agent cards + capability maps |
+| feedback | 2 | Quality gate feedback records |
+| knowledge | 13 | Core domain: chunk strategy, embedding configs, KCs, RAG sources, retriever config |
+| memory | 5 | Knowledge memory index + RAG pipeline memory + scopes |
+| orchestration | 5 | Dispatch rules + workflows (knowledge + Supabase) |
+| output | 19 | KC audits, gap reports, taxonomy maps, knowledge graphs, finetune datasets, SQL migrations, competitive intel, self-reviews |
+| prompts | 3 | System prompts for N04 persona and tasks |
 | quality | 2 | Quality gate + scoring rubric for knowledge artifacts |
 | schemas | 7 | Contracts: database schema, embedding, export format, freshness, KC structure, naming convention, taxonomy |
-| tools | 1 | Supabase data layer tool |
-| compiled | 42 | YAML compilations of source artifacts |
-| **TOTAL** | **43 source + 42 compiled** | |
+| tools | 4 | Supabase data layer + utilities |
+| compiled | 65 | YAML compilations of source artifacts |
+| reports | 1 | Self-audit report (newpc 2026-04-13) |
+| **TOTAL** | **69 source + 65 compiled** | |
 
 ## Kinds I Build
 
@@ -163,7 +164,7 @@ N04 has the most MCP servers of any nucleus (5) because knowledge work requires 
 
 6. **5 MCP Servers**: Most connected nucleus. Ingestion (firecrawl + fetch) -> storage (supabase + postgres) -> transformation (notebooklm). This pipeline turns raw web content into indexed, retrievable, transformable knowledge.
 
-7. **20 Sub-Agent Definitions**: Every domain kind has a dedicated builder agent in `.claude/agents/`, each loading 13 ISOs. This means N04 can dispatch specialized builders for any knowledge or memory artifact type.
+7. **20 Sub-Agent Definitions**: Every domain kind has a dedicated builder agent in `.claude/P02_model/`, each loading 13 ISOs. This means N04 can dispatch specialized builders for any knowledge or memory artifact type.
 
 8. **P01 Library Depth**: The P01 compiled directory holds 197 example artifacts -- the largest example corpus of any pillar. These serve as F3 injection sources for template-first construction.
 
@@ -188,8 +189,8 @@ N04 has the most MCP servers of any nucleus (5) because knowledge work requires 
 
 | Category | Count |
 |----------|------:|
-| Source artifacts (in N04_knowledge/) | 43 |
-| Compiled artifacts (.yaml) | 42 |
+| Source artifacts (in N04_knowledge/) | 69 |
+| Compiled artifacts (.yaml) | 65 |
 | Kinds I can build | 22 |
 | Sub-agent builders (in .claude/agents/) | 20 |
 | Tools in my toolkit | 19 |
@@ -199,6 +200,6 @@ N04 has the most MCP servers of any nucleus (5) because knowledge work requires 
 | P01 example artifacts (compiled/) | 197 |
 | P10 example artifacts (compiled/) | 14 |
 | Domain KCs (in P01 library) | 20 |
-| **TOTAL CARDS** | **404** |
+| **TOTAL CARDS** | **432** |
 
 N04 is the knowledge infrastructure of CEX. Where N03 builds any artifact and N01 researches any topic, N04 owns the substrate: the knowledge cards that encode facts, the embedding configs that vectorize them, the retriever configs that find them, the memory tools that age and prune them, and the 5 MCP servers that connect it all to external data stores. The 8F pipeline is how I think. The 22 kinds are what I produce. The 404 cards in this agent card are my total capability surface.

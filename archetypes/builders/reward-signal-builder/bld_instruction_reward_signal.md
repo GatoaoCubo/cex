@@ -31,7 +31,7 @@ density_score: 0.90
 10. Check for existing reward_signal artifacts to avoid duplicates; confirm slug is snake_case, no hyphens
 ## Phase 2: COMPOSE
 1. Read SCHEMA.md — source of truth for all fields
-2. Read OUTPUT_TEMPLATE.md — fill {{vars}} following SCHEMA constraints
+2. Read OUTPUT_TEMPLATE.md — fill `{{vars}}` following SCHEMA constraints
 3. Fill frontmatter: all required fields (quality: null — never self-score)
 4. Write Overview section: what quality dimension this signal measures, who consumes it, and what improvement loop it feeds (2-4 sentences)
 5. Write Signal Design section: type with justification, scale with semantic meaning at low/high, model with reliability rationale, computation method step-by-step, frequency, aggregation

@@ -17,6 +17,8 @@ density_score: 0.90
 ---
 
 ## Component Inventory
+
+This ISO encodes a rate limit policy -- throttle bounds, quota windows, and backoff behavior.
 | Name | Role | Owner | Status |
 |------|------|-------|--------|
 | rpm | Requests-per-minute quota — hard ceiling on call frequency | rate_limit_config | required |

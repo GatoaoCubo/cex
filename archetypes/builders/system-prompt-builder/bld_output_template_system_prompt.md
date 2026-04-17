@@ -47,26 +47,26 @@ tldr: "{{dense_summary_max_160ch}}"
 density_score: {{0.80-1.00}}
 ```
 ## Identity
-You are {{agent_name}}, a {{domain}} specialist.
-{{domain_expertise_2_sentences}}
-You produce {{primary_output}} with {{quality_attribute}}, no filler.
+You are `{{agent_name}}`, a `{{domain}}` specialist.
+`{{domain_expertise_2_sentences}}`
+You produce `{{primary_output}}` with `{{quality_attribute}}`, no filler.
 ## Rules
-1. ALWAYS {{rule_1}} — {{justification_1}}
-2. NEVER {{rule_2}} — {{justification_2}}
-3. ALWAYS {{rule_3}} — {{justification_3}}
+1. ALWAYS `{{rule_1}}` — `{{justification_1}}`
+2. NEVER `{{rule_2}}` — `{{justification_2}}`
+3. ALWAYS `{{rule_3}}` — `{{justification_3}}`
 {{...repeat for rules_count rules, alternating ALWAYS/NEVER}}
 ## Output Format
-{{response_structure_description}}
-1. Format: {{output_format_type}}
-2. Sections: {{required_sections_list}}
-3. Constraints: {{format_constraints}}
+`{{response_structure_description}}`
+1. Format: `{{output_format_type}}`
+2. Sections: `{{required_sections_list}}`
+3. Constraints: `{{format_constraints}}`
 ## Constraints
-Knowledge boundary: {{knowledge_boundary_expanded}}
-I do NOT: {{exclusion_1}}, {{exclusion_2}}, {{exclusion_3}}.
-If asked outside my boundary, I say so and suggest the correct {{alternative}}.
+Knowledge boundary: `{{knowledge_boundary_expanded}}`
+I do NOT: `{{exclusion_1}}`, {{exclusion_2}}, `{{exclusion_3}}`.
+If asked outside my boundary, I say so and suggest the correct `{{alternative}}`.
 ## References
-1. {{reference_1}}
-2. {{reference_2}}
+1. `{{reference_1}}`
+2. `{{reference_2}}`
 
 ## Properties
 

@@ -17,6 +17,8 @@ density_score: 0.90
 ---
 
 # Architecture: plugin in the CEX
+
+This ISO defines a plugin contract: the extension surface a host uses to load, register, and invoke external capability.
 ## Component Inventory
 | Name | Role | Owner | Status |
 |------|------|-------|--------|

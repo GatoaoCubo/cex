@@ -16,15 +16,36 @@ density_score: 0.90
 
 The X in CEX is YOUR brand. This command fills it.
 
+## Phase 0: Environment Setup (ALWAYS runs first)
+
+Before brand setup, verify API keys are configured:
+
+```bash
+python _tools/cex_env_wizard.py --check
+```
+
+If `ANTHROPIC_API_KEY` is missing, run the wizard:
+
+```bash
+python _tools/cex_env_wizard.py
+```
+
+This is the minimum required key to run CEX. All other keys are optional.
+If the user types `/init --env`, run the wizard and stop (skip brand setup).
+
 ## Mode Detection
 
 Check how the user invoked `/init`:
 
 1. `/init` (no args) → **Conversational mode**: ask questions one by one
-2. `/init C:\Users\...\my_brand_stuff` → **Ingest mode**: scan folder first, then ask
-3. `/init --reset` → Reset existing brand: `python _tools/cex_bootstrap.py --reset`
+2. `/init C:\Users\...\my_brand_stuff` → **Ingest mode**: scan folder, then ask
+3. `/init <url>` → **URL mode**: scrape website for brand signals
+4. `/init https://github.com/...` → **Repo mode**: read GitHub repo for signals
+5. `/init <file.pdf>` → **File mode**: ingest single file
+6. `/init --reset` → Reset existing brand: `python _tools/cex_bootstrap.py --reset`
+7. `/init --env` → Env wizard only (no brand setup)
 
-## Step 0: Check Status
+## Step 0: Check Bootstrap Status
 
 ```bash
 python _tools/cex_bootstrap.py --check
@@ -131,6 +152,49 @@ Verify:
 python _tools/brand_validate.py
 python _tools/brand_audit.py --json
 ```
+
+---
+
+## PATH C -- URL Mode
+
+User provides a website URL (not a GitHub URL):
+
+```bash
+python _tools/brand_ingest.py --url "$ARGUMENTS" --for-llm
+```
+
+This scrapes homepage + /about + /pricing pages.
+Uses Firecrawl if `FIRECRAWL_API_KEY` is set, otherwise plain HTTP.
+
+Then follow PATH B Step 4 onwards (present findings, fill gaps conversationally).
+
+---
+
+## PATH D -- GitHub Repo Mode
+
+User provides a GitHub URL (`https://github.com/{owner}/{repo}`):
+
+```bash
+python _tools/brand_ingest.py --repo "$ARGUMENTS" --for-llm
+```
+
+This reads README + key docs via the GitHub raw content API (no auth needed for public repos).
+Also fetches the repo description from `api.github.com`.
+
+Then follow PATH B Step 4 onwards.
+
+---
+
+## PATH E -- Single File Mode
+
+User provides a path to a file (PDF, DOCX, MD, TXT):
+
+```bash
+python _tools/brand_ingest.py --file "$ARGUMENTS" --for-llm
+```
+
+If the file is a PDF/DOCX, attempts to use `markitdown` for conversion.
+Then follow PATH B Step 4 onwards.
 
 ---
 

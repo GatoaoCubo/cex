@@ -1,0 +1,36 @@
+kind: examples
+id: bld_examples_playground_config
+pillar: P07
+llm_function: GOVERN
+purpose: Golden and anti-examples of playground_config artifacts
+quality: null
+title: Examples Playground Config
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- playground_config
+- builder
+- examples
+tldr: Golden and anti-examples of playground_config artifacts
+domain: playground_config construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+golden_example: "---\ntitle: \"AI Model Playground Config\"\ndescription: \"Config for evaluating LLMs in a collaborative\
+  \ research environment\"\nvendor: \"Hugging Face\"\nversion: \"2.1\"\nparameters:\n  model: \"google/flan-t5-xl\"\n  max_tokens:\
+  \ 2048\n  rate_limit: 100\n  logging: true\n  evaluation_metrics: [\"accuracy\", \"latency\", \"hallucination\"]\n---\n\n\
+  ### Overview\nConfigures a collaborative evaluation environment for large language models with real-time metrics.\n\n###\
+  \ Setup\n- Requires Hugging Face Spaces API key\n- Uses Google Cloud for model hosting\n- Integrates with AWS for data storage\n\
+  \n### Usage\n1. Load model from Hugging Face Model Hub\n2. Enable interactive evaluation with Jupyter widgets\n3. Collect\
+  \ metrics via Prometheus exporter\n\n### Security\n- Role-based access control (RBAC)\n- Data anonymization pipeline\n-\
+  \ Session expiration after 2 hours\n\n### Evaluation\n- Compare against baseline models\n- Track user feedback via form\
+  \ submission\n- Export results to BigQuery"
+anti_example_1_missing_evaluation_metrics: "---\ntitle: \"Incomplete Playground Config\"\ndescription: \"Basic config without\
+  \ evaluation parameters\"\nvendor: \"ExampleCo\"\nversion: \"0.5\"\nparameters:\n  model: \"meta/llama-2\"\n  max_tokens:\
+  \ 512\n---"
+why_it_fails: Includes sandbox-specific isolation parameters (container_image, network_policy) that violate the playground
+  spec. Playground configs should focus on interactive evaluation, not system isolation. This conflates playground with sandbox
+  specifications.
+anti_example_2_sandbox_configuration: "---\ntitle: \"Misconfigured Playground\"\ndescription: \"Includes sandbox isolation\
+  \ parameters\"\nvendor: \"SomeCorp\"\nversion: \"1.0\"\nparameters:\n  model: \"openai/gpt-3.5\"\n  container_image: \"\
+  nginx:latest\"\n  network_policy: \"deny-all\"\n---"

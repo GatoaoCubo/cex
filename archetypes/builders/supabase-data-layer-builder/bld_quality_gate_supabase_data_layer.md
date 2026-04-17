@@ -11,8 +11,8 @@ domain: data_platform
 quality: 9.0
 tags: [builder, supabase, data-layer, quality-gate, validation]
 density_score: 0.92
+llm_function: GOVERN
 ---
-
 # Quality Gates
 
 ## HARD Gates (ALL must pass)

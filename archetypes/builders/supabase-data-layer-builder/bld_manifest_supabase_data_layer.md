@@ -15,6 +15,7 @@ keywords: ["data platform", data-layer, builder, capabilities, supabase, manifes
 triggers: ["create data platform", "build data platform artifact"]
 capabilities: >
   L1: | Field | Value |. L2: RLS on every table with user data. L3: When user needs to create, build, or scaffold data platform.
+llm_function: BECOME
 ---
 # Builder Manifest
 

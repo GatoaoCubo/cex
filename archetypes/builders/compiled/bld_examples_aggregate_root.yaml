@@ -1,0 +1,39 @@
+id: bld_examples_aggregate_root
+kind: knowledge_card
+pillar: P06
+title: Aggregate Root Builder -- Examples
+version: 1.0.0
+quality: 5.1
+tags:
+- builder
+- aggregate_root
+- examples
+llm_function: GOVERN
+density_score: 1.0
+updated: '2026-04-17'
+golden_example_order: "id: p06_ar_order\nkind: aggregate_root\nbounded_context: sales\ninvariants:\n  - \"Total price equals\
+  \ sum of all line items * quantity\"\n  - \"Order cannot be shipped if payment status is not confirmed\"\ncommands:\n  -\
+  \ \"AddItem(productId, qty): pre=order.status==draft, post=lineItems contains item\"\n  - \"ConfirmPayment(paymentRef):\
+  \ pre=total>0, post=status==paid\"\ndomain_events:\n  - \"OrderPlaced: emitted on first AddItem + ConfirmPayment, payload={orderId,\
+  \ total}\"\n  - \"PaymentConfirmed: payload={orderId, paymentRef}\"\nrepository: OrderRepository\ncluster_members: [\"LineItem\
+  \ (entity)\", \"Money (value_object)\"]"
+golden_example_user_account: "id: p06_ar_user_account\nkind: aggregate_root\nbounded_context: identity\ninvariants:\n  - \"\
+  Email must be unique within the system (enforced at domain level)\"\n  - \"Password hash must never be empty after account\
+  \ activation\"\ncommands:\n  - \"Activate(emailToken): pre=status==pending, post=status==active\"\n  - \"ChangePassword(newHash):\
+  \ pre=status==active\"\ndomain_events:\n  - \"AccountActivated: payload={userId, email}\"\nrepository: UserAccountRepository"
+anti_pattern_anemic_root: '# WRONG -- no invariants, just a data bag
+
+  id: p06_ar_product_bad
+
+  invariants: []
+
+  commands: ["Update(data): no precondition, no postcondition"]
+
+  # CORRECT: if no invariants, use type_def instead'
+anti_pattern_cross_aggregate_object_reference: '# WRONG
+
+  cluster_members: ["Order (aggregate_root object)"]
+
+  # CORRECT
+
+  cluster_members: ["orderId: OrderId (value_object representing foreign key)"]'

@@ -1,0 +1,50 @@
+id: mentor
+kind: instruction
+pillar: P08
+description: 'Universal CEX vocabulary mentor -- 8F + 12P + 257K. Usage: /mentor [question]'
+quality: null
+title: Mentor
+version: 1.0.0
+author: n07_orchestrator
+tags:
+- mentor
+- vocabulary
+- taxonomy
+- kinds
+- pillars
+- 8f
+tldr: 'Encyclopedic mode: answer any question about CEX kinds, pillars, builders, or pipeline.'
+domain: CEX system
+created: '2026-04-17'
+updated: '2026-04-17'
+density_score: 0.92
+steps: "1. Load the mentor context document:\n   Read: `N00_genesis/boot/mentor_context.md`\n\n2. Activate encyclopedic mode:\n\
+  \   - No sin lens (N00 archetype, neutral)\n   - No GDP (factual, not subjective)\n   - No 8F pipeline execution (query,\
+  \ not build)\n   - Pure taxonomy navigation and explanation\n\n3. Parse the user's question (`$ARGUMENTS`):\n\n   | Question\
+  \ pattern | Response type |\n   |------------------|---------------|\n   | \"What kind for X?\" | Kind recommendation with\
+  \ pillar + nucleus + builder path |\n   | \"Which pillar owns X?\" | Pillar explanation with all kinds in that pillar |\n\
+  \   | \"Show all P{xx} kinds\" | Full kind table for that pillar |\n   | \"How does 8F work?\" | Pipeline walkthrough with\
+  \ examples |\n   | \"What's the difference between X and Y?\" | Side-by-side comparison table |\n   | \"Which nucleus handles\
+  \ X?\" | Nucleus routing explanation |\n   | \"How many kinds?\" | Summary stats (257 kinds, 12 pillars, 259 builders) |\n\
+  \   | No argument | Show the 12-pillar overview + \"ask me anything\" |\n\n4. Answer concisely using tables. Always include:\n\
+  \   - Kind name\n   - Pillar code (P01-P12)\n   - One-line purpose\n   - Builder path: `archetypes/builders/{kind}-builder/`\n\
+  \   - Build command: `python _tools/cex_8f_runner.py \"intent\" --kind {kind} --execute`"
+examples: '/mentor what kind for a landing page?
+
+  /mentor show all P04 kinds
+
+  /mentor difference between agent and agent_card
+
+  /mentor which nucleus builds prompts?
+
+  /mentor how does F7 GOVERN work?
+
+  /mentor'
+behavior_rules:
+- Never trigger GDP (this is factual, not subjective)
+- Never execute 8F pipeline (this is a query, not a build)
+- Never apply a sin lens (encyclopedic neutrality)
+- 'Always cite the source: `N00_genesis/boot/mentor_context.md`'
+- If the user asks to BUILD something, redirect to `/build`
+- If the user asks about THEIR brand, redirect to `/init`
+- Keep answers under 50 lines unless explicitly asked for more

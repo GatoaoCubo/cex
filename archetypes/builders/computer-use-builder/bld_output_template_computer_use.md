@@ -18,6 +18,8 @@ density_score: 0.90
 ---
 
 # Output Template: computer_use
+
+This ISO governs computer use: screen capture, mouse, and keyboard actions taken on behalf of the agent.
 ```yaml
 id: p04_cu_{{target_slug}}
 kind: computer_use
@@ -48,28 +50,28 @@ tldr: "{{dense_summary_max_160ch}}"
 description: "{{what_tool_does_max_200ch}}"
 ```
 ## Overview
-{{what_this_tool_controls_1_to_2_sentences}}
-{{observe_act_loop_description}}
+`{{what_this_tool_controls_1_to_2_sentences}}`
+`{{observe_act_loop_description}}`
 ## Actions
-### {{action_name_1}} (e.g., click)
+### `{{action_name_1}}` (e.g., click)
 Parameters: {{x: int, y: int, button: left|right|middle}}
-Behavior: {{what_happens_when_action_executes}}
-### {{action_name_2}} (e.g., type)
+Behavior: `{{what_happens_when_action_executes}}`
+### `{{action_name_2}}` (e.g., type)
 Parameters: {{text: string}}
-Behavior: {{what_happens_when_action_executes}}
-### {{action_name_3}} (e.g., screenshot)
+Behavior: `{{what_happens_when_action_executes}}`
+### `{{action_name_3}}` (e.g., screenshot)
 Parameters: {{none or region: {x, y, w, h}}}
-Returns: {{base64 image or file path}}
+Returns: `{{base64 image or file path}}`
 ## Coordinate System
 Origin: {{top-left (0,0)}}
 Direction: {{x increases right, y increases down}}
-Units: {{pixels}}
+Units: `{{pixels}}`
 
-Resolution: {{width}}x{{height}} — all coordinates within this space
+Resolution: `{{width}}`x`{{height}}` — all coordinates within this space
 ## Safety
-1. {{safety_constraint_1}}
-2. {{safety_constraint_2}}
-3. Sandbox: {{sandboxing_requirement}}
+1. `{{safety_constraint_1}}`
+2. `{{safety_constraint_2}}`
+3. Sandbox: `{{sandboxing_requirement}}`
 
 ## Properties
 

@@ -112,9 +112,9 @@ commands: '# Launch continuous grid
 
   python _tools/cex_doctor.py'
 dependencies:
-- 'Dispatch rules: N07_admin/orchestration/dispatch_rule_admin.md'
-- 'Spawn config: N07_admin/orchestration/spawn_config_admin.md'
-- 'DAG: N07_admin/orchestration/dag_admin.md'
+- 'Dispatch rules: N07_admin/P12_orchestration/dispatch_rule_admin.md'
+- 'Spawn config: N07_admin/P12_orchestration/spawn_config_admin.md'
+- 'DAG: N07_admin/P12_orchestration/dag_admin.md'
 references:
-- 'DAG definition: N07_admin/orchestration/dag_admin.md'
-- 'Spawn config: N07_admin/orchestration/spawn_config_admin.md'
+- 'DAG definition: N07_admin/P12_orchestration/dag_admin.md'
+- 'Spawn config: N07_admin/P12_orchestration/spawn_config_admin.md'

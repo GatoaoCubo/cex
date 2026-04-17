@@ -1,0 +1,41 @@
+kind: instruction
+id: bld_instruction_benchmark_suite
+pillar: P03
+llm_function: REASON
+purpose: Step-by-step production process for benchmark_suite
+quality: null
+title: Instruction Benchmark Suite
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- benchmark_suite
+- builder
+- instruction
+tldr: Step-by-step production process for benchmark_suite
+domain: benchmark_suite construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+phase_1_research:
+- Identify benchmark objectives and scope (e.g., performance, scalability).
+- Gather candidate tasks from existing benchmarks and domain experts.
+- Analyze task dependencies and resource requirements (CPU, memory, I/O).
+- Define success criteria and metrics for each task (e.g., latency, throughput).
+- Prioritize tasks based on relevance to governance goals (P07).
+- Document research findings in a structured requirements matrix.
+phase_2_compose:
+- Create artifact root directory with `schema.yaml` and `tasks/` subdirectory.
+- Define benchmark_suite schema in `schema.yaml` (reference SCHEMA.md).
+- Write individual task definitions in YAML format under `tasks/`.
+- Integrate metrics configuration into each task (use OUTPUT_TEMPLATE.md).
+- Ensure all tasks comply with schema constraints (validate against SCHEMA.md).
+- Add metadata to benchmark_suite (author, version, license).
+- Implement task execution order and dependencies in `workflow.yaml`.
+- Include validation rules for input/output formats in `schema.yaml`.
+- Finalize artifact with checksums and version control tags.
+phase_3_validate:
+- '[ ] ✅ Validate schema compliance using `schema.yaml` and SCHEMA.md'
+- '[ ] ✅ Confirm all tasks have defined metrics and success criteria'
+- '[ ] ✅ Execute benchmark_suite in test environment (dry-run)'
+- '[ ] ✅ Verify output matches OUTPUT_TEMPLATE.md structure'
+- '[ ] ✅ Review documentation for clarity and completeness'

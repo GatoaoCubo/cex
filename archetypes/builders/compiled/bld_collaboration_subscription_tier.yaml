@@ -1,0 +1,28 @@
+kind: collaboration
+id: bld_collaboration_subscription_tier
+pillar: P12
+llm_function: COLLABORATE
+purpose: How subscription_tier-builder works in crews with other builders
+quality: null
+title: Collaboration Subscription Tier
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- subscription_tier
+- builder
+- collaboration
+tldr: How subscription_tier-builder works in crews with other builders
+domain: subscription_tier construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+crew_role: Defines subscription pricing structures, benefits, and access levels. Collaborates with product, billing, and analytics
+  teams to align tiers with business goals and user needs.
+receives_from: "| Builder        | What                  | Format  |  \n|----------------|-----------------------|---------|\
+  \  \n| Pricing Strategy | Tier configuration inputs | JSON    |  \n| Product Team   | Feature access mappings | YAML   \
+  \ |  \n| Billing Team   | Payment plan details  | CSV     |"
+produces_for: "| Builder        | What                  | Format  |  \n|----------------|-----------------------|---------|\
+  \  \n| Pricing Page   | Tier definitions      | JSON    |  \n| Analytics Team | Tier performance data | CSV     |  \n| Customer\
+  \ Support | Tier documentation  | Markdown|"
+boundary: Does NOT handle content monetization strategies (Content Team) or pricing page UI (UI Team). Billing integration
+  is handled by Billing Team.

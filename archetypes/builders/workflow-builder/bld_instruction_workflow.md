@@ -25,8 +25,8 @@ dependencies: []
 logging: true
 tldr: "Build a workflow YAML that orchestrates agents in sequential, parallel, or mixed waves with dependency resolution, signals, and error recovery."
 density_score: 0.93
+llm_function: REASON
 ---
-
 ## Context
 The workflow-builder produces a `workflow` artifact -- a structured YAML that defines how agents are orchestrated at runtime. A workflow decomposes a mission into steps, assigns agents to each step, maps dependencies between steps, specifies completion signals, and defines error recovery strategy.
 **Critical distinction**: a `workflow` is runtime orchestration with execution semantics (waves, signals, dependencies). It is NOT a prompt chain (`chain` -- sequential prompt calls without agent coordination), NOT a static dependency graph (`dag` -- structure only, no execution), and NOT a routing rule (`dispatch_rule` -- keyword-to-agent routing). Confusing these produces orchestration that cannot be executed.

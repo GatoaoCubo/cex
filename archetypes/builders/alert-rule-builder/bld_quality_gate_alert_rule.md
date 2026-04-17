@@ -1,0 +1,42 @@
+---
+id: bld_qg_alert_rule
+kind: quality_gate
+pillar: P11
+llm_function: GOVERN
+version: 1.0.0
+quality: 5.8
+tags: [alert_rule, quality-gate, observability]
+title: "Quality Gate: alert_rule"
+density_score: 1.0
+updated: "2026-04-17"
+---
+# Quality Gate: alert_rule
+## HARD Gates
+| ID | Check | Fail Condition |
+|----|-------|----------------|
+| H01 | Frontmatter parses as valid YAML | Parse error |
+| H02 | id matches `^ar_[a-z][a-z0-9_]+$` | Wrong prefix or format |
+| H03 | kind == "alert_rule" | Wrong kind |
+| H04 | quality == null | Non-null value |
+| H05 | alert_name present (PascalCase) | Missing or wrong case |
+| H06 | severity in {critical, warning, info} | Invalid severity |
+| H07 | for_duration present (ISO format) | Missing or invalid format |
+| H08 | metric_expression contains numeric threshold | No number in expression |
+| H09 | routing target present and non-empty | Missing routing |
+| H10 | Total file size <= 2048 bytes | Exceeds max_bytes |
+
+## SOFT Scoring
+| ID | Dimension | Weight | 10pts | 5pts | 0pts |
+|----|-----------|--------|-------|------|------|
+| S01 | Runbook presence | 1.0 | URL or inline steps | Steps vague | Absent |
+| S02 | Automated response | 0.8 | Defined action | Mentioned | Absent |
+| S03 | Prometheus labels | 0.7 | severity+team+service | Some labels | No labels |
+| S04 | for_duration appropriate | 0.7 | Matches severity best practice | Present | Missing |
+| S05 | Alert name PascalCase | 0.5 | PascalCase | Mixed | snake_case |
+
+## Score Tiers
+| Score | Action |
+|-------|--------|
+| >= 9.0 | Deploy to Prometheus; register in alert catalog |
+| >= 7.0 | Use with monitoring; add runbook |
+| < 7.0 | Return: add metric expression, routing, runbook |

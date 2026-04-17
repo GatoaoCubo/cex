@@ -1,0 +1,53 @@
+kind: instruction
+id: bld_instruction_context_map
+pillar: P03
+llm_function: REASON
+purpose: Step-by-step production process for context_map
+pattern: 3-phase pipeline (define -> compose -> validate)
+quality: null
+title: Instruction Context Map
+version: 1.0.0
+author: n03_builder
+tags:
+- context_map
+- builder
+- instruction
+tldr: '3-phase: enumerate BCs and relationships, assign DDD patterns, document team coupling and integration details.'
+domain: context map construction
+created: '2026-04-17'
+updated: '2026-04-17'
+density_score: 0.9
+phase_1_define:
+- Identify all bounded contexts in scope (name, owning team, core/supporting/generic)
+- 'For each pair of contexts: does one depend on the other? in what direction?'
+- 'For each relationship: determine the integration pattern:'
+- Does downstream translate upstream model? -> ACL
+- Does upstream expose formal API/protocol? -> OHS
+- Does downstream adopt upstream model directly? -> Conformist
+- Do two teams co-evolve together? -> Partnership
+- Do teams share a code subset? -> Shared Kernel
+- 'For each relationship: determine sync vs async vs batch integration'
+- 'For ACL relationships: identify who owns the translation layer'
+- 'For OHS relationships: identify the published language/API version'
+- 'Assess team coupling level: Low/Medium/High/Very High per relationship'
+phase_2_compose:
+- Read SCHEMA.md and OUTPUT_TEMPLATE.md
+- 'Fill frontmatter: all required fields (quality: null)'
+- 'Set id: `p08_cm_{system_slug}` -- verify pattern `^p08_cm_[a-z][a-z0-9_]+$`'
+- Set contexts_count to match the number of BCs in the body
+- 'Write Bounded Contexts section: table of all BCs'
+- 'Write Relationships section: upstream/downstream table with pattern and integration_type'
+- 'Write Integration Details section: translation layers, protocols, sync/async'
+- 'Write Team Coupling section: coupling level, risk, mitigation per relationship'
+- Verify body <= 4096 bytes
+phase_3_validate:
+- Confirm id matches `^p08_cm_[a-z][a-z0-9_]+$`
+- Confirm kind == context_map
+- Confirm contexts_count matches body count
+- Confirm all relationships have upstream, downstream, pattern
+- Confirm all 4 body sections present
+- Confirm ACL relationships have translation_layer identified
+- Confirm OHS relationships have protocol/API reference
+- 'Cross-check: not bounded_context (single BC), not component_map (deployment)'
+- 'Confirm quality: null'
+- Revise if score < 8.0

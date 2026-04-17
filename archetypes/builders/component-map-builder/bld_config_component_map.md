@@ -1,6 +1,6 @@
 ---
 pillar: P00
-id: component-map-builder-config
+id: bld_config_component_map
 kind: config
 parent: component-map-builder
 version: 1.0.0
@@ -23,6 +23,7 @@ domain: "component map construction"
 created: "2026-04-07"
 updated: "2026-04-07"
 density_score: 0.90
+llm_function: CONSTRAIN
 ---
 # Config — component-map-builder
 ## Naming Conventions

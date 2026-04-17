@@ -1,0 +1,171 @@
+id: kno_embedder_provider_n01
+kind: embedder_provider
+pillar: P01
+nucleus: N01
+title: N01 Embedder Provider
+version: 1.0.0
+quality: null
+tags:
+- embedder_provider
+- n01
+- p01
+- analytical_envy
+- retrieval
+density_score: 0.99
+purpose: The embedder provider is the lens that turns text into retrievable geometry. For N01, that geometry must preserve
+  competitor closeness and technical nuance without collapsing distinct claims into vague semantic sameness. Analytical Envy
+  means embedding quality is judged by whether it helps find the strongest comparative evidence first.
+properties: '| Property | Value |
+
+  |----------|-------|
+
+  | Kind | `embedder_provider` |
+
+  | Pillar | `P01` |
+
+  | Nucleus | `N01` |
+
+  | Lens | `Analytical Envy` |
+
+  | Primary workload | research corpora, product pages, docs, converted papers |
+
+  | Selection priority | retrieval quality, cost, update speed, interoperability |
+
+  | Default family | cloud API with local fallback |
+
+  | Dense retrieval role | candidate generation for comparative synthesis |
+
+  | Coupled artifacts | chunk strategy, vector store, retriever config |
+
+  | Main risk | mixing models or dimensions across one corpus |'
+provider_thesis: 'N01 does not need the most famous embedding model.
+
+  N01 needs the provider that best separates:
+
+  - official docs from commentary
+
+  - similar competitors with materially different positioning
+
+  - technical synonyms from actual product parity
+
+  - stable definitions from transient marketing language'
+selection_criteria: '| Criterion | Why N01 cares |
+
+  |-----------|----------------|
+
+  | semantic precision | avoids false equivalence between rivals |
+
+  | multilingual tolerance | market research and regional signals may mix languages |
+
+  | dimension control | index cost and latency tuning |
+
+  | throughput | bulk refresh of changing market data |
+
+  | pricing | recurring research budgets matter |
+
+  | operational maturity | fewer hidden integration costs |
+
+  | local fallback | resilience when external APIs fail |'
+recommended_provider_stack: '| Role | Choice pattern | Reason |
+
+  |------|----------------|--------|
+
+  | primary cloud | modern high-value API model | best quality for live corpora |
+
+  | local fallback | sentence-transformer or equivalent local model | continuity during API outage |
+
+  | evaluation baseline | frozen reference model | compare drift after provider changes |
+
+
+  N01 should prefer one primary model family per active index.
+
+  Mixing providers inside the same collection destroys score interpretability.'
+embedding_rules:
+- Embed chunks, not whole reports.
+- Use the same model for indexing and query vectors.
+- Normalize vectors if the backend expects cosine behavior.
+- Reindex after dimension or model changes.
+- Keep the provider metadata on every indexed document.
+comparative_failure_cases: '| Failure | Impact on N01 |
+
+  |---------|---------------|
+
+  | overly generic embeddings | competitors with different products cluster too tightly |
+
+  | weak domain sensitivity | technical method cards become hard to retrieve |
+
+  | dimension mismatch | vector store corruption or silent retrieval drift |
+
+  | mixed-model index | scores lose meaning across rows |
+
+  | stale baseline | cannot tell if provider swap improved or harmed retrieval |'
+evaluation_questions: 'N01 should test providers with adversarial query sets, not only happy-path semantic lookups.
+
+
+  | Query type | Why it matters |
+
+  |------------|----------------|
+
+  | exact competitor-vs-competitor comparisons | core battle card workload |
+
+  | pricing and packaging queries | dates and qualifiers matter |
+
+  | method and benchmark queries | technical nuance matters |
+
+  | contradictory source queries | conflict retrieval matters |
+
+  | entity plus region queries | scope must survive semantic compression |'
+operational_metadata: '| Metadata field | Use |
+
+  |----------------|-----|
+
+  | provider_name | audit and reproducibility |
+
+  | model_name | retrieval traceability |
+
+  | dimensions | compatibility with store |
+
+  | normalization | scoring consistency |
+
+  | indexed_at | freshness and reindex planning |
+
+  | batch_policy | throughput diagnostics |'
+cost_discipline: 'Analytical Envy is ambitious but not careless.
+
+  Choose a provider that can support:
+
+  - routine re-embedding of volatile sources
+
+  - evaluation snapshots
+
+  - fallback during rate limits
+
+  - cost visibility per corpus refresh
+
+
+  Cheap but inaccurate embeddings cost more when they force weak synthesis.
+
+  Expensive but marginally better embeddings are wasteful if the corpus is small and well-structured.
+
+  N01 should optimize for evidence retrieval quality per refresh dollar.'
+integration_with_n01_stack: 'The embedder provider should feed:
+
+  - comparison-preserving chunk strategy
+
+  - hybrid retriever candidate generation
+
+  - vector backend dimension contract
+
+  - citation-linked metadata filters
+
+
+  It should not own reranking, source reliability, or synthesis logic.'
+anti_patterns:
+- treating embedding benchmarks as universal truth without corpus tests
+- selecting a model only by price
+- ignoring multilingual or domain-specific retrieval behavior
+- comparing providers using different chunk strategies
+- changing provider without re-running retrieval evaluations
+n01_decision: The N01 embedder provider is selected by comparative retrieval performance, not brand prestige. If it cannot
+  retrieve the strongest opposing evidence and the most relevant rival context, it is the wrong provider no matter how cheap
+  or popular it is.

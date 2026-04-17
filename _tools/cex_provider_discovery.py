@@ -14,7 +14,7 @@ Checks:
   3. OpenAI: OPENAI_API_KEY set + API ping
   4. Ollama: localhost:11434 ping (no key needed)
 
-Reads: .cex/config/nucleus_models.yaml (for fallback config)
+Reads: .cex/P09_config/nucleus_models.yaml (for fallback config)
        .cex/router_config.yaml (for ping URLs)
 """
 import argparse

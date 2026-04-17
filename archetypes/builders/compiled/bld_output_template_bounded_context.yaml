@@ -1,0 +1,13 @@
+id: bld_tpl_bounded_context
+kind: prompt_template
+pillar: P03
+llm_function: PRODUCE
+version: 1.0.0
+quality: 6.3
+tags:
+- bounded_context
+- template
+- output
+title: 'Output Template: bounded_context'
+density_score: 1.0
+updated: '2026-04-17'

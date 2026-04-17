@@ -1,0 +1,28 @@
+kind: collaboration
+id: bld_collaboration_incident_report
+pillar: P12
+llm_function: COLLABORATE
+purpose: How incident_report-builder works in crews with other builders
+quality: null
+title: Collaboration Incident Report
+version: 1.0.0
+author: wave1_builder_gen
+tags:
+- incident_report
+- builder
+- collaboration
+tldr: How incident_report-builder works in crews with other builders
+domain: incident_report construction
+created: '2026-04-13'
+updated: '2026-04-13'
+density_score: 0.85
+crew_role: Structures incident data into post-mortem reports, ensuring clarity, accountability, and actionable insights for
+  teams.
+receives_from: "| Builder       | What                  | Format      |  \n|---------------|-----------------------|-------------|\
+  \  \n| Monitoring    | Raw incident logs     | JSON        |  \n| Stakeholders  | Feedback on incident  | Plain text  |\
+  \  \n| Incident Triage | Initial summary     | Markdown    |"
+produces_for: "| Builder       | What                  | Format      |  \n|---------------|-----------------------|-------------|\
+  \  \n| Post-Mortem   | Structured report     | Markdown    |  \n| Leadership    | Executive summary     | PDF         |\
+  \  \n| Analytics     | Incident data export  | CSV         |"
+boundary: Does NOT handle auto-fixes (bugloop) or generic learning (learning_record). Auto-fixes are resolved by bugloop;
+  learning records are managed by learning_record.

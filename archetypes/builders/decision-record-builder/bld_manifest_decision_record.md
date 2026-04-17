@@ -4,7 +4,7 @@ kind: type_builder
 pillar: P08
 parent: null
 domain: decision_record
-llm_function: REASON
+llm_function: BECOME
 version: 1.0.0
 created: 2026-03-29
 updated: 2026-03-29

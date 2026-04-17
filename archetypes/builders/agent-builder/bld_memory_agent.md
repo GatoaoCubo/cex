@@ -23,6 +23,7 @@ observation_types: [user, feedback, project, reference]
 quality: 9.0
 title: "Memory Agent"
 density_score: 0.90
+llm_function: INJECT
 ---
 ## Summary
 An agent definition has two orthogonal concerns: who the agent is (persona, reasoning style, communication norms) and what the agent can do (tools, actions, decision protocols). These concerns appear related but evolve at different rates. Persona is stable; capabilities change as new tools become available or existing tools are deprecated.

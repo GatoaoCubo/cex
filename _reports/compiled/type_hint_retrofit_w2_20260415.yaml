@@ -1,0 +1,45 @@
+mission: TYPE_HINT_RETROFIT
+wave: 2
+status: PASS
+coverage_delta: '| Tool | Before | After | Delta |
+
+  | --- | --- | --- | --- |
+
+  | cex_ft_dataset | 0/16 | 16/16 | +16 |
+
+  | cex_flywheel_audit | 0/13 | 13/13 | +13 |
+
+  | cex_auto_research | 0/11 | 11/11 | +11 |
+
+  | cex_kind_register | 0/11 | 11/11 | +11 |
+
+  | cex_doctor | 0/10 | 10/10 | +10 |
+
+  | cex_evolve_ollama | 0/10 | 10/10 | +10 |
+
+  | cex_prompt_cache | 0/10 | 10/10 | +10 |'
+commits:
+- '`2113bfece` `refactor(cex_ft_dataset): add type hints to public functions`'
+- '`1881070f6` `refactor(cex_flywheel_audit): add type hints to public functions`'
+- '`5cd2f6cbe` `refactor(cex_auto_research): add type hints to public functions`'
+- '`8e3e324fc` `refactor(cex_kind_register): add type hints to public functions`'
+- '`525499d2a` `refactor(cex_doctor): add type hints to public functions`'
+- '`bb1c4cf82` `refactor(cex_evolve_ollama): add type hints to public functions`'
+- '`bbd55d316` `refactor(cex_prompt_cache): add type hints to public functions`'
+sanity:
+- '`--help` exit 0: 7/7'
+- '`import clean`: 7/7'
+- '`sanitize`: 0 non-ASCII'
+ambiguous_cases:
+- '`cex_ft_dataset.py`: used `dict[str, Any]` for kind metadata loaded from `.cex/kinds_meta.json`; schema is runtime JSON
+  and not normalized in this module.'
+- '`cex_flywheel_audit.py`: used `list[dict[str, Any]]` for `RESULTS`-style records and heal-plan entries because each check
+  record carries varying optional keys.'
+- '`cex_auto_research.py`: used `dict[str, Any]` and `list[dict[str, Any]]` for state, targets, and build results because
+  each phase appends different fields.'
+- '`cex_kind_register.py`: used `Any` for JSON payload helpers because registry JSON values are heterogeneous.'
+- '`cex_doctor.py`: used `dict[str, Any] | None` for parsed YAML frontmatter and KC summary payloads because field sets vary
+  by artifact.'
+- '`cex_prompt_cache.py`: used `dict[str, Any] | None` for cache entries because frontmatter and prompt-section payloads include
+  mixed scalar and nested values.'
+type_hint_retrofit_w2_pass: ''

@@ -1,0 +1,70 @@
+id: parser-builder
+kind: type_builder
+pillar: P05
+parent: null
+domain: parser
+llm_function: BECOME
+version: 1.0.0
+created: '2026-03-26'
+updated: '2026-03-26'
+author: builder
+tags:
+- kind-builder
+- parser
+- P05
+- specialist
+- extraction
+- structured-data
+keywords:
+- parser
+- extraction
+- parse
+- regex
+- structured-data
+- normalize
+- transform
+- scrape
+triggers:
+- create parser for output
+- build extractor for JSON response
+- define parser for log format
+capabilities:
+- Analyze input formats and define extraction rules for structured data
+- Produce parser artifact with complete frontmatter (14 fields required)
+- Define regex patterns, JSON paths, and CSS selectors for extraction
+- Validate artifact against quality gates (8 HARD + 10 SOFT)
+- Distinguish parser from formatter (P05), validator (P06), and naming_rule (P05)
+- Configure error handling, fallback extraction, and normalization steps
+quality: 9.1
+title: Manifest Parser
+tldr: Golden and anti-examples for parser construction, demonstrating ideal structure and common pitfalls.
+density_score: 0.9
+identity: Specialist in building `parser` -- extractors of structured data from raw output (text, JSON, HTML, logs). Produces
+  parsers dense with extraction rules, regex patterns, error handling, and normalization pipelines that transform raw output
+  into consumable data.
+routing: 'keywords: [parser, extraction, parse, regex, structured-data, normalize, transform, scrape] triggers: "create parser
+  for output", "build extractor for JSON response", "define parser for log format"'
+crew_role: 'In a crew, I handle DATA EXTRACTION DESIGN. I answer: "how should raw output be parsed into structured data?"
+  I do NOT handle: output formatting (formatter-builder), content validation (validator-builder), naming conventions (naming-rule-builder).'
+metadata: python _tools/cex_score.py --apply parser-builder.md
+properties: '| Property | Value |
+
+  |----------|-------|
+
+  | Kind | `type_builder` |
+
+  | Pillar | P05 |
+
+  | Domain | parser |
+
+  | Pipeline | 8F (F1-F8) |
+
+  | Scorer | cex_score.py |
+
+  | Compiler | cex_compile.py |
+
+  | Retriever | cex_retriever.py |
+
+  | Quality target | 9.0+ |
+
+  | Density target | 0.85+ |'

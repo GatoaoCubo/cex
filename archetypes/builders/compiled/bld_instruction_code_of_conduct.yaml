@@ -1,0 +1,45 @@
+kind: instruction
+id: bld_instruction_code_of_conduct
+pillar: P03
+llm_function: REASON
+purpose: Step-by-step production process for code_of_conduct
+quality: null
+title: Instruction Code of Conduct
+version: 1.0.0
+author: n04_knowledge
+tags:
+- code_of_conduct
+- builder
+- instruction
+tldr: Step-by-step production process for code_of_conduct
+domain: code_of_conduct construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.87
+phase_1_research:
+- Identify the project type (solo OSS, foundation-backed, corporate-sponsored).
+- Determine enforcement capacity (maintainer count, response bandwidth).
+- Confirm reporting channel (contact email, dedicated moderation team).
+- Review existing community norms or prior conduct incidents.
+- 'Select base standard: Contributor Covenant v2.1 (default) or project-specific adaptation.'
+- Identify which spaces the CoC covers (GitHub issues, forums, chat, events).
+phase_2_compose:
+- Reference bld_schema_code_of_conduct.md for required frontmatter fields.
+- 'Write the pledge section: "We as members, contributors, and leaders pledge..."'
+- List positive standards (welcoming language, respect, constructive feedback).
+- List unacceptable behaviors (harassment, trolling, doxxing, discrimination).
+- Define enforcement responsibilities (maintainers, moderators).
+- 'Specify scope: online (repo, issues, PR comments) + offline (events, meetups).'
+- 'Compose enforcement ladder with 4 levels: Correction, Warning, Temporary Ban, Permanent Ban.'
+- Add reporting instructions with contact email and confidentiality statement.
+- Include attribution line referencing Contributor Covenant v2.1.
+- Add contact email placeholder with instruction to replace before publishing.
+phase_3_validate:
+- '[x] All required frontmatter fields present per bld_schema_code_of_conduct.md.'
+- '[x] Pledge section present with inclusive commitment language.'
+- '[x] Standards of conduct section lists at least 5 positive behaviors.'
+- '[x] Unacceptable behaviors section lists at least 5 prohibited actions.'
+- '[x] Enforcement ladder has all 4 levels (Correction, Warning, Temp Ban, Perm Ban).'
+- '[x] Reporting channel (contact email) present and actionable.'
+- '[x] Scope covers both online and offline spaces.'
+- '[x] Attribution to Contributor Covenant present.'

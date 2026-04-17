@@ -1,0 +1,36 @@
+id: bld_instruction_process_manager
+kind: instruction
+pillar: P12
+title: Process Manager Builder -- Instruction
+version: 1.0.0
+quality: 5.3
+tags:
+- builder
+- process_manager
+- instruction
+llm_function: REASON
+density_score: 0.8
+updated: '2026-04-17'
+phase_1_research:
+- Identify the business process being coordinated -- what multi-step operation spans multiple services or aggregates?
+- 'Define the correlation key: what identifier ties all events/commands in one process instance together?'
+- 'Map events received: what domain events does this process manager subscribe to?'
+- 'Map commands issued: for each received event, what command is dispatched and to whom?'
+- 'Design state machine: what are the states, transitions, and terminal states (success + failure)?'
+- 'Define timeout strategy: what happens if a step does not complete within SLA?'
+- 'Define compensation: how does the process roll back if a step fails?'
+phase_2_compose:
+- Read bld_schema_process_manager.md -- source of truth for required fields
+- 'Fill frontmatter: id pattern p12_pm_{slug}, kind: process_manager, quality: null'
+- 'Write Correlation section: how process instances are identified and tracked'
+- 'Write States section: state machine with all states and allowed transitions'
+- 'Write Event Routing table: event -> state transition + command dispatched'
+- 'Write Commands section: each command issued with target and payload'
+- 'Write Timeout section: per-state timeouts and timeout actions'
+- 'Write Compensation section: failure path with rollback commands'
+phase_3_validate:
+- 'HARD gates: id matches `p12_pm_[a-z][a-z0-9_]+`, kind == process_manager, quality == null'
+- Correlation key defined, state machine has start state and terminal states
+- Every event in routing table has a command dispatched
+- Timeout and compensation actions defined
+- 'If score < 8.0: revise before outputting'

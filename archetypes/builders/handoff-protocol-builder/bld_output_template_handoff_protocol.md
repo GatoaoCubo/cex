@@ -41,13 +41,13 @@ retry_policy: "{{retry_policy}}}}"
 escalation: "{{escalation}}}}"
 ```
 ## Overview
-{{overview_content}}
+`{{overview_content}}`
 ## Trigger
-{{trigger_content}}
+`{{trigger_content}}`
 ## Context Transfer
-{{context_transfer_content}}
+`{{context_transfer_content}}`
 ## Return Contract
-{{return_contract_content}}
+`{{return_contract_content}}`
 
 ## Template Standards
 

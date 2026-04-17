@@ -1,0 +1,53 @@
+kind: schema
+id: bld_schema_stt_provider
+pillar: P06
+llm_function: CONSTRAIN
+purpose: Formal schema -- SINGLE SOURCE OF TRUTH for stt_provider
+quality: null
+title: Schema Stt Provider
+version: 1.0.0
+author: wave1_builder_gen
+tags:
+- stt_provider
+- builder
+- schema
+tldr: Formal schema -- SINGLE SOURCE OF TRUTH for stt_provider
+domain: stt_provider construction
+created: '2026-04-13'
+updated: '2026-04-13'
+density_score: 0.85
+frontmatter_fields: ''
+required: "| Field        | Type       | Required | Default | Notes                          |  \n|--------------|------------|----------|---------|--------------------------------|\
+  \  \n| id           | string     | yes      | -       | Unique identifier              |  \n| kind         | string    \
+  \ | yes      | \"stt_provider\" | CEX kind                 |  \n| pillar       | string     | yes      | \"P04\"    | Pillar\
+  \ classification          |  \n| title        | string     | yes      | -       | Provider name                  |  \n|\
+  \ version      | string     | yes      | \"1.0.0\"  | Semantic versioning            |  \n| created      | datetime   |\
+  \ yes      | -       | ISO 8601 format                |  \n| updated      | datetime   | yes      | -       | ISO 8601 format\
+  \                |  \n| author       | string     | yes      | -       | Owner/organization             |  \n| domain  \
+  \     | string     | yes      | -       | Service domain (e.g., \"health\")|  \n| quality      | null       | yes      |\
+  \ null     | MUST be null -- peer review assigns |\n| tags         | array      | yes      | []      | Keywords        \
+  \               |  \n| tldr         | string     | yes      | -       | Summary                        |  \n| language_support\
+  \ | array  | yes      | []      | Supported languages            |  \n| accuracy_rating | number   | yes      | 0      \
+  \  | 0–100 accuracy score           |"
+recommended: "| Field              | Type   | Notes                          |  \n|--------------------|--------|--------------------------------|\
+  \  \n| description        | string | Detailed provider description  |  \n| license            | string | Legal terms   \
+  \                 |"
+id_pattern: '`^p04_stt_[a-zA-Z0-9]+$`'
+body_structure:
+- Overview
+- Description of the STT provider’s purpose and scope.
+- Technical Specifications
+- Language models, APIs, and integration methods.
+- Use Cases
+- Scenarios where the provider is applicable.
+- Compliance
+- Data privacy, security, and regulatory adherence.
+- Performance Metrics
+- Accuracy, latency, and scalability benchmarks.
+constraints:
+- All required fields must be present and valid.
+- '`id` must match the regex pattern `^p04_stt_[a-zA-Z0-9]+$`.'
+- '`language_support` must be an array of strings.'
+- '`accuracy_rating` must be a number between 0 and 100.'
+- '`version` must follow semantic versioning (e.g., "1.2.3").'
+- '`domain` must align with predefined categories (e.g., "health", "finance").'

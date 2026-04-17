@@ -1,0 +1,4 @@
+name: canary-config-builder
+description: Builds ONE canary_config artifact via 8F pipeline. Loads canary-config-builder specs. Produces draft with frontmatter
+  + body. Never self-scores quality.
+tools: Read, Write, Edit, Bash, Glob, Grep

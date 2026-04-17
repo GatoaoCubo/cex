@@ -36,7 +36,7 @@ usage: '# Validate single KC
 
   # Generate validation report
 
-  python _tools/kc_validator.py report --output N04_knowledge/output/kc_validation_report.md'
+  python _tools/kc_validator.py report --output N04_knowledge/P05_output/kc_validation_report.md'
 checks_performed: '| Check | Rule | Severity |
 
   |-------|------|----------|

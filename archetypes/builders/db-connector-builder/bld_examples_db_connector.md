@@ -18,6 +18,8 @@ density_score: 0.90
 ---
 
 # Examples: db-connector-builder
+
+This ISO addresses the database connector domain: connection pooling, query execution, and SQL dialect handling.
 ## Golden Example
 INPUT: "Create connector for an e-commerce platform with order sync and webhook notifications"
 OUTPUT:

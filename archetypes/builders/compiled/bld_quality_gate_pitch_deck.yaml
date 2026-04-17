@@ -1,0 +1,38 @@
+kind: quality_gate
+id: p05_qg_pitch_deck
+pillar: P11
+llm_function: GOVERN
+purpose: Quality gate with HARD and SOFT scoring for pitch_deck
+quality: null
+title: Quality Gate Pitch Deck
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- pitch_deck
+- builder
+- quality_gate
+tldr: Quality gate with HARD and SOFT scoring for pitch_deck
+domain: pitch_deck construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+definition: "(Table: metric, threshold, operator, scope)  \nmetric | threshold | operator | scope  \n--- | --- | --- | ---\
+  \  \nPresence of required slides | All slides present | must have | entire document"
+hard_gates: "(Table: ID | Check | Fail Condition)  \nID | Check | Fail Condition  \n--- | --- | ---  \nH01 | YAML frontmatter\
+  \ valid | invalid YAML syntax or missing fields  \nH02 | ID matches pattern ^p05_pd_[a-z][a-z0-9_]+.md$ | invalid filename\
+  \ format  \nH03 | kind field matches 'pitch_deck' | incorrect or missing kind value  \nH04 | Problem slide present | missing\
+  \ problem/solution slide  \nH05 | Solution slide present | missing problem/solution slide  \nH06 | Traction slide includes\
+  \ metrics | no quantitative data in traction section  \nH07 | Ask slide specifies funding amount | vague or missing funding\
+  \ request  \nH08 | Target audience clearly defined | ambiguous or missing audience description"
+soft_scoring: "(Table: Dim | Dimension | Weight | Scoring Guide)  \nDim | Dimension | Weight | Scoring Guide  \n--- | ---\
+  \ | --- | ---  \nD01 | Clarity of value proposition | 0.15 | 0.0-1.0 based on readability and impact  \nD02 | Slide structure\
+  \ consistency | 0.15 | 0.0-1.0 based on adherence to problem/solution/traction/ask  \nD03 | Data quality in traction | 0.15\
+  \ | 0.0-1.0 based on relevance and completeness  \nD04 | Visual appeal | 0.10 | 0.0-1.0 based on design and readability\
+  \  \nD05 | Roadmap feasibility | 0.10 | 0.0-1.0 based on logical progression  \nD06 | Ask alignment with traction | 0.10\
+  \ | 0.0-1.0 based on logical funding request  \nD07 | Audience specificity | 0.10 | 0.0-1.0 based on targeted market fit\
+  \  \nD08 | Conciseness | 0.15 | 0.0-1.0 based on brevity and focus"
+actions: "(Table: Score | Action)  \nScore | Action  \n--- | ---  \nGOLDEN (>=9.5) | Direct approval for presentation  \n\
+  PUBLISH (>=8.0) | Ready for external sharing  \nREVIEW (>=7.0) | Requires minor edits before use  \nREJECT (<7.0) | Needs\
+  \ major revisions"
+bypass: "(Table: conditions, approver, audit trail)  \nconditions | approver | audit trail  \n--- | --- | ---  \nCEO override\
+  \ | CTO | signed approval document, timestamped log"

@@ -1,0 +1,137 @@
+---
+kind: output_template
+id: bld_output_template_voice_pipeline
+pillar: P05
+llm_function: PRODUCE
+purpose: Template with guided frontmatter and body sections for voice_pipeline production
+quality: 9.1
+title: "Output Template: voice-pipeline-builder"
+version: "1.1.0"
+author: n01_audit
+tags: [voice_pipeline, builder, output_template, P05]
+tldr: "Guided template for voice_pipeline artifacts: frontmatter, pipeline stages table, data flow, fallback chains, error recovery."
+domain: "voice_pipeline construction"
+created: "2026-04-13"
+updated: "2026-04-13"
+density_score: 0.90
+---
+
+## Artifact Frontmatter (emit verbatim, fill all `{{placeholders}}`)
+
+```yaml
+---
+kind: voice_pipeline
+id: {{id}}                   # e.g. p04_vp_customer_support
+pillar: P04
+title: "{{title}}"           # Human-readable pipeline name
+version: "1.0.0"
+created: {{created_at}}      # ISO 8601: YYYY-MM-DD
+updated: {{updated_at}}
+author: {{author}}
+domain: {{domain}}           # e.g. "customer support", "smart home", "telephony"
+language: {{language}}       # primary language, e.g. "en", "pt-BR"
+sample_rate: {{sample_rate}} # audio sampling rate Hz, typically 16000
+quality: null
+tags: [voice_pipeline, {{domain_tag}}]
+tldr: "{{one_line_purpose}}"  # <= 160 chars
+---
+```
+
+## Pipeline Stages (REQUIRED -- all 4 core + preprocessing)
+
+<!-- Table: stage | role | input format | output format | example providers -->
+<!-- MUST include: audio_preprocessing, STT, NLU, dialogue_management, TTS -->
+<!-- providers column: real names only (Deepgram, AssemblyAI, Whisper, ElevenLabs, etc.) -->
+
+| Stage | Role | Input | Output | Example Providers |
+|-------|------|-------|--------|-------------------|
+| Audio Preprocessing | Noise reduction, normalization, VAD, segmentation | Raw PCM/WAV | Cleaned PCM 16kHz | WebRTC VAD, SpeexDSP, RNNoise |
+| STT (Speech-to-Text) | Convert audio to transcript | Cleaned PCM | Text transcript | Deepgram Nova-2, AssemblyAI, OpenAI Whisper v3 |
+| NLU (Natural Language Understanding) | Extract intent and entities from transcript | Text | Structured intent + slots | Rasa Open Source, Dialogflow CX, AWS Lex v2 |
+| Dialogue Management | Context tracking, multi-turn state, response selection | Intent + slots + history | Response text | Custom FSM, LangChain, LlamaIndex |
+| TTS (Text-to-Speech) | Convert response text to audio | Response text | Audio (MP3/WAV/PCM) | ElevenLabs, Google Cloud TTS, Amazon Polly, OpenAI TTS |
+
+## Data Flow
+
+<!-- Direction and format between each stage pair -->
+<!-- Each row: from stage -> to stage | data format | protocol -->
+
+| From | To | Format | Protocol | Notes |
+|------|----|--------|----------|-------|
+| Microphone | Audio Preprocessing | Raw PCM 16kHz mono | Direct buffer | Streaming chunks |
+| Audio Preprocessing | STT | Cleaned PCM 16kHz | WebSocket or HTTP | Streaming preferred for low latency |
+| STT | NLU | UTF-8 JSON `{transcript, confidence, timestamps}` | Internal queue | Include word-level timestamps |
+| NLU | Dialogue Management | JSON `{intent, entities, confidence}` | Internal queue | Pass full session context |
+| Dialogue Management | TTS | UTF-8 text | Internal queue | Include SSML hints if supported |
+| TTS | Speaker | Audio stream (MP3/PCM) | Direct buffer | Stream chunks; don't wait for full synthesis |
+
+## Fallback Chains
+
+<!-- Per-stage: primary provider -> fallback -> error signal -->
+<!-- MUST have at least one fallback per core stage -->
+
+| Stage | Primary | Fallback | Error Signal |
+|-------|---------|----------|--------------|
+| STT | `{{stt_primary}}` (e.g. Deepgram Nova-2) | {{stt_fallback}} (e.g. OpenAI Whisper v3) | `stt.failed` event + empty transcript |
+| NLU | `{{nlu_primary}}` (e.g. Dialogflow CX) | {{nlu_fallback}} (e.g. rule-based intent matcher) | `nlu.failed` event + default intent |
+| Dialogue Management | `{{dm_primary}}` | {{dm_fallback}} (e.g. static FAQ lookup) | `dm.failed` event + scripted response |
+| TTS | `{{tts_primary}}` (e.g. ElevenLabs) | {{tts_fallback}} (e.g. Google Cloud TTS) | `tts.failed` event + silent fallback or text display |
+
+## Error Recovery
+
+<!-- What each stage does when upstream or downstream fails -->
+
+| Stage | Upstream Failure | Downstream Failure | Recovery Action |
+|-------|-----------------|-------------------|-----------------|
+| Audio Preprocessing | Microphone dropout | STT unavailable | Buffer 3s; emit `input.silence` if no signal |
+| STT | Audio preprocessing gap | NLU timeout | Retry once; emit `stt.uncertain` transcript if low confidence |
+| NLU | STT empty transcript | Dialogue Management unavailable | Use last valid context; emit `nlu.clarify_needed` |
+| Dialogue Management | NLU failure | TTS failure | Fall back to scripted response; log incident |
+| TTS | DM response empty | Speaker/output failure | Log; emit `tts.skipped`; continue to next turn |
+
+## Latency Budget
+
+<!-- End-to-end target in ms. Adjust per use case. -->
+
+| Stage | Budget (ms) | Cumulative (ms) |
+|-------|------------|-----------------|
+| Audio Preprocessing | <= 20 | 20 |
+| STT first token | <= 300 | 320 |
+| NLU processing | <= 50 | 370 |
+| Dialogue Management | <= 100 | 470 |
+| TTS first audio chunk | <= 200 | 670 |
+| **End-to-end (speech -> audio out)** | **<= 800** | **670 + network** |
+
+## Compliance
+
+<!-- Privacy and regulatory requirements. Remove sections not applicable. -->
+
+- **Data residency**: Audio not persisted beyond session; transcripts retained for `{{retention_days}}` days
+- **Encryption**: Audio in transit via TLS 1.2+; at rest via AES-256 if stored
+- **GDPR**: Users may request transcript deletion; consent logged at session start
+- **HIPAA**: PHI redaction applied before NLU if `domain: healthcare`
+
+## Usage Example
+
+<!-- One concrete instantiation with named provider slots. Not provider-agnostic boilerplate. -->
+
+```yaml
+# Customer support voice agent (English, call center)
+pipeline_id: p04_vp_{{id}}
+stt: deepgram_nova2          # Deepgram Nova-2, WebSocket streaming
+nlu: dialogflow_cx           # Dialogflow CX, GCP us-central1
+dialogue: langchain_agent    # LangChain + GPT-4o backend
+tts: elevenlabs_turbo        # ElevenLabs Turbo v2.5, streaming
+latency_target_ms: 800
+```
+
+## Checklist (fill all; no `{{placeholder}}` may remain)
+
+- [ ] All 5 pipeline stages defined (audio_preprocessing, STT, NLU, dialogue_management, TTS)
+- [ ] Data flow table shows direction and format for each stage connection
+- [ ] Fallback provider named for each core stage (real names, not "providerB")
+- [ ] Latency budget table populated with ms targets
+- [ ] Error recovery defined for each stage boundary
+- [ ] Compliance section reviewed and inapplicable items removed
+- [ ] `id` matches `^p04_vp_[a-z0-9]+$`
+- [ ] `quality: null` in frontmatter

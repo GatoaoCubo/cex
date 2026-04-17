@@ -1,0 +1,23 @@
+id: kc_quickstart_guide
+kind: knowledge_card
+title: Quickstart Guide
+version: 1.0.0
+quality: null
+pillar: P01
+density_score: 0.9
+step_1_installation:
+- Download the latest version from [download link]
+- Extract files to your preferred directory
+step_2_configuration:
+- Open `config.yaml` in your editor
+- Set your API key under the `auth` section
+- Save and restart the service
+step_3_first_use:
+- Run `./start.sh` to launch the application
+- Access the dashboard at `http://localhost:8080`
+step_4_troubleshooting:
+- Check logs in `logs/` directory for errors
+- Common issues and solutions are in the FAQ section
+faq: 'Q: How do I update the application? A: Run `./update.sh` to fetch the latest version Q: What if I encounter errors during
+  setup? A: Review the Troubleshooting Guide section first Q: How do I access the API documentation? A: Visit `http://localhost:8080/docs`
+  after startup'

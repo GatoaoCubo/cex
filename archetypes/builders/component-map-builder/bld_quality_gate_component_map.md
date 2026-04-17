@@ -12,8 +12,8 @@ quality: 9.0
 tags: [quality-gate, component-map, P08, inventory, architecture, dependency-mapping]
 tldr: "Pass/fail gate for component_map artifacts: component completeness, connection accuracy, interface boundary documentation, and inventory scope."
 density_score: 0.90
+llm_function: GOVERN
 ---
-
 # Gate: component_map
 ## Definition
 | Field | Value |

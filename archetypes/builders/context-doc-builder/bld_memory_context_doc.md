@@ -23,6 +23,7 @@ observation_types: [user, feedback, project, reference]
 quality: 9.0
 title: "Memory Context Doc"
 density_score: 0.90
+llm_function: INJECT
 ---
 ## Summary
 A context document's job is eliminating ambiguity about what a piece of work covers. The outside list in the scope section is more valuable than the inside list: consumers know what the work covers from the title; what they need — and almost never get explicitly — is what it does not cover. A missing or vague outside list causes downstream consumers to fill the gap with assumptions that diverge into scope creep, rework, or integration failures.

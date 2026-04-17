@@ -1,0 +1,82 @@
+kind: schema
+id: bld_schema_marketplace_app_manifest
+pillar: P06
+llm_function: CONSTRAIN
+purpose: Formal schema -- SINGLE SOURCE OF TRUTH for marketplace_app_manifest
+quality: null
+title: Schema Marketplace App Manifest
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- marketplace_app_manifest
+- builder
+- schema
+tldr: Formal schema -- SINGLE SOURCE OF TRUTH for marketplace_app_manifest
+domain: marketplace_app_manifest construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+frontmatter_fields: ''
+required: '| Field     | Type      | Required | Default | Notes                              |
+
+  |-----------|-----------|----------|---------|------------------------------------|
+
+  | id        | string    | yes      | null    | Must match ID Pattern              |
+
+  | kind      | string    | yes      | null    | Always "marketplace_app_manifest"  |
+
+  | pillar    | string    | yes      | null    | Always "P09"                       |
+
+  | title     | string    | yes      | null    | Human-readable name                |
+
+  | version   | string    | yes      | null    | Semantic version (e.g., 1.0.0)     |
+
+  | created   | timestamp | yes      | null    | ISO 8601 format                    |
+
+  | updated   | timestamp | yes      | null    | ISO 8601 format                    |
+
+  | author    | string    | yes      | null    | Creator/organization               |
+
+  | domain    | string    | yes      | null    | Marketplace domain (e.g., "appstore") |
+
+  | quality   | null      | yes      | null    | Never self-score; peer review assigns |
+
+  | tags      | array     | yes      | null    | Keywords for discovery             |
+
+  | tldr      | string    | yes      | null    | Summary of app purpose             |
+
+  | app_id    | string    | yes      | null    | Unique identifier for the app      |
+
+  | marketplace_url | string | yes      | null    | URL of marketplace listing         |'
+recommended: '| Field         | Type   | Notes                          |
+
+  |---------------|--------|--------------------------------|
+
+  | description   | string | Detailed app description       |
+
+  | dependencies  | array  | Required system/applications   |
+
+  | license       | string | Legal terms for use            |
+
+  | screenshots   | array  | URLs to app interface images   |'
+id_pattern: ^p09_mam_[a-z][a-z0-9_]+.yaml$
+body_structure:
+- App Information
+- Name, description, app_id, author, license
+- Marketplace Integration
+- marketplace_url, domain, tags, tldr
+- Technical Requirements
+- Dependencies, supported platforms, system requirements
+- Compliance & Policies
+- Data usage terms, privacy policy, age restrictions
+- Pricing Model
+- Free/subscription/one-time, pricing tiers
+- User Support
+- Contact details, documentation links, support channels
+constraints:
+- All required fields must be present and valid
+- '`id` must match the exact regex pattern'
+- '`version` must follow semantic versioning'
+- '`marketplace_url` must be a valid HTTPS URL'
+- File size must not exceed 4096 bytes
+- '`quality` field must be assigned by peer review, not self-assigned'

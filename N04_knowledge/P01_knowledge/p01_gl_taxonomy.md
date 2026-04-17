@@ -1,0 +1,142 @@
+---
+id: p01_gl_taxonomy
+kind: glossary_entry
+pillar: P01
+title: "Taxonomy"
+version: 1.0.0
+created: 2026-04-07
+author: n04_knowledge
+domain: knowledge-management
+quality: 9.2
+tags: [glossary, taxonomy, classification, hierarchy]
+tldr: "A hierarchical classification system organizing CEX's 123 kinds across 12 pillars with canonical tags, enforced by kind registry and schema contracts."
+density_score: 0.96
+updated: "2026-04-13"
+---
+
+# Taxonomy
+
+**Term**: Taxonomy  
+**Abbreviation**: —  
+**Synonyms**: classification system, kind hierarchy, ontology (informal)  
+
+**Definition**: The hierarchical classification structure that organizes all CEX artifacts. Three levels: Pillar (12) → Kind (123) → Artifact (2,184+). Each artifact has exactly one `kind` and one `pillar`. Tags provide cross-cutting classification (3-10 per artifact, kebab-case). Maintained via `.cex/kinds_meta.json` (kind registry) and `P{01-12}_*/_schema.yaml` (pillar schemas). Not a true ontology — no formal inference rules, just strict hierarchical containment with tag-based cross-links.  
+
+**See**: `kinds_meta.json`, `taxonomy_builder_tool.md`, `agent_taxonomy_engineer.md`  
+
+## Boundary
+
+This artifact defines the canonical classification system for CEX. It is NOT a knowledge card (lacks minimum density) or context doc (lacks scope). It is a rigid framework for artifact categorization, not a flexible knowledge representation system.  
+
+## 8F Pipeline Function
+
+Primary function: **INJECT**  
+Injects structured classification metadata into all CEX artifacts during creation. Ensures compliance with hierarchical constraints, tag conventions, and schema contracts. Triggers validation against `kinds_meta.json` and pillar-specific `_schema.yaml` files.  
+
+## Comparison: Taxonomy vs. Ontology vs. Classification Systems
+
+| Feature                | Taxonomy (CEX)                  | Ontology (Formal)             | Classification System (General) | Schema Contract          | Knowledge Hierarchy (Informal) |
+|------------------------|----------------------------------|-------------------------------|----------------------------------|--------------------------|----------------------------------|
+| **Purpose**            | Artifact categorization         | Semantic relationship modeling | Data grouping                    | Enforce schema compliance | Informal knowledge organization |
+| **Structure**          | Pillar → Kind → Artifact        | Classes + Properties + Axioms | Hierarchical or flat             | JSON/YAML schema         | Unstructured tree                |
+| **Inference Rules**    | None (strict containment)       | Formal logic rules            | None                             | Schema validation rules  | None                             |
+| **Tag Usage**          | Cross-cutting classification    | Not typically used            | Optional                         | Enforced by schema       | Optional                         |
+| **Maintenance**        | Automated via kind registry     | Manual or tool-assisted       | Manual                           | Schema versioning        | Manual                           |
+
+## Related Kinds
+
+1. **glossary_entry**: Defines terminology used within the taxonomy framework.  
+2. **schema_contract**: Enforces structural compliance for artifacts under specific pillars.  
+3. **kind_registry**: Maintains the authoritative list of kinds and their hierarchical relationships.  
+4. **context_doc**: Provides contextual background but lacks the formal classification rigor of taxonomy.  
+5. **knowledge_card**: Contains dense, actionable knowledge but is not part of the hierarchical taxonomy system.  
+
+## Pillar-Kind Mapping Examples
+
+| Pillar | Kind Count | Example Kinds                          | Domain Focus               | Schema File                  |
+|--------|------------|----------------------------------------|----------------------------|------------------------------|
+| P01    | 12         | glossary_entry, taxonomy, schema_contract | Knowledge Management       | `P01_knowledge/_schema.yaml` |
+| P02    | 15         | data_model, entity_relationship, data_flow | Data Architecture          | `P02_data/_schema.yaml`      |
+| P03    | 10         | use_case, user_story, acceptance_criteria | Software Development       | `P03_development/_schema.yaml` |
+| P04    | 8          | security_policy, compliance_check, risk_assessment | Cybersecurity              | `P04_security/_schema.yaml`  |
+| P05    | 18         | business_process, workflow, process_map | Business Operations        | `P05_operations/_schema.yaml`|
+
+## Tag Usage Patterns
+
+| Artifact Type       | Tags (Example)                              | Purpose                          | Schema Enforcement         |
+|---------------------|---------------------------------------------|----------------------------------|----------------------------|
+| glossary_entry      | `knowledge-management`, `definition`        | Cross-referencing terms          | Required in `P01` schemas  |
+| data_model          | `data-architecture`, `entity-relationship`  | Technical classification         | Enforced by `P02` schemas  |
+| use_case            | `software-development`, `user-story`        | Functional categorization        | Enforced by `P03` schemas  |
+| security_policy     | `cybersecurity`, `compliance`               | Risk and regulatory alignment    | Enforced by `P04` schemas  |
+| business_process    | `operations`, `workflow-automation`         | Process optimization             | Enforced by `P05` schemas  |
+
+## Taxonomy Maintenance Workflow
+
+1. **Kind Registration**: New kinds added to `kinds_meta.json` with pillar, parent kind, and tag constraints.  
+2. **Schema Validation**: Pillar-specific `_schema.yaml` files updated to reflect new kind constraints.  
+3. **Tool Integration**: `taxonomy_builder_tool.md` automates artifact classification during creation.  
+4. **Agent Enforcement**: `agent_taxonomy_engineer.md` validates compliance across all artifacts.  
+5. **Version Control**: Changes tracked in `.cex/kinds_meta.json` with semantic versioning (e.g., 1.0.0 → 1.1.0).  
+
+## Common Pitfalls and Solutions
+
+| Issue                          | Solution                                      | Impact on System Integrity |
+|-------------------------------|-----------------------------------------------|----------------------------|
+| Duplicate kind definitions    | Enforce uniqueness via `kinds_meta.json`      | High                       |
+| Missing required tags         | Schema contracts enforce minimum tag count    | Medium                     |
+| Invalid pillar assignment     | Schema validation blocks invalid pillar links | High                       |
+| Orphaned artifacts            | Periodic audits with taxonomy builder tool    | Medium                     |
+| Inconsistent tag formatting   | Enforce kebab-case via schema validation      | Low                        |
+
+## Taxonomy Evolution
+
+- **Phase 1 (2025)**: Initial 12 pillars defined with 50 kinds.  
+- **Phase 2 (2026)**: Expanded to 123 kinds across all pillars.  
+- **Phase 3 (2027)**: Integration with AI-driven classification agents.  
+- **Phase 4 (2028)**: Dynamic schema contracts with versioned evolution.  
+- **Phase 5 (2029)**: Full automation of taxonomy maintenance via machine learning.  
+
+## Artifact Count Distribution
+
+| Pillar | Artifact Count | Example Artifact Types                  | Schema File                  |
+|--------|----------------|-----------------------------------------|------------------------------|
+| P01    | 2184           | glossary_entry, taxonomy, schema_contract | `P01_knowledge/_schema.yaml` |
+| P02    | 1542           | data_model, entity_relationship         | `P02_data/_schema.yaml`      |
+| P03    | 1320           | use_case, user_story                    | `P03_development/_schema.yaml` |
+| P04    | 987            | security_policy, risk_assessment        | `P04_security/_schema.yaml`  |
+| P05    | 1876           | business_process, workflow_map          | `P05_operations/_schema.yaml`|
+
+## Taxonomy in Practice
+
+- **Artifact Creation**: Every new artifact must specify a `kind` and `pillar` from the taxonomy.  
+- **Tag Assignment**: Minimum 3 tags required, with kebab-case formatting (e.g., `knowledge-management`).  
+- **Validation**: Automated checks during artifact creation ensure compliance with schema contracts.  
+- **Auditing**: Periodic reviews using `taxonomy_builder_tool.md` identify misclassifications.  
+- **Tooling**: `agent_taxonomy_engineer.md` provides real-time feedback on classification accuracy.  
+
+## Schema Contract Enforcement
+
+| Schema File                  | Enforced Rules                              | Violation Consequences         |
+|----------------------------|---------------------------------------------|--------------------------------|
+| `P01_knowledge/_schema.yaml` | `kind` ∈ {glossary_entry, taxonomy}        | Artifact rejected            |
+| `P02_data/_schema.yaml`     | `tag` must include `data-architecture`     | Schema validation error      |
+| `P03_development/_schema.yaml` | `kind` ∈ {use_case, user_story}           | Artifact rejected            |
+| `P04_security/_schema.yaml` | `tag` must include `cybersecurity`         | Schema validation error      |
+| `P05_operations/_schema.yaml` | `kind` ∈ {business_process, workflow_map} | Artifact rejected            |
+
+## Taxonomy and Knowledge Management
+
+- **Integration with Knowledge Cards**: Taxonomy provides structural context for dense knowledge content.  
+- **Cross-Referencing**: Tags enable linking between artifacts across pillars (e.g., `data-architecture` in P02 links to `knowledge-management` in P01).  
+- **Search Optimization**: Hierarchical classification improves artifact discoverability in knowledge repositories.  
+- **Version Control**: Schema contracts ensure backward compatibility during taxonomy evolution.  
+- **Agent Collaboration**: Taxonomy builder tools enable AI agents to autonomously classify new artifacts.  
+
+## Future Enhancements
+
+- **Dynamic Tagging**: AI-driven tag suggestions based on artifact content.  
+- **Cross-Pillar Analytics**: Taxonomy-based reporting on artifact distribution and usage.  
+- **Schema Evolution API**: Programmatic updates to `_schema.yaml` files with versioned rollback.  
+- **Taxonomy Visualization**: Interactive hierarchy maps for exploration and auditing.  
+- **Automated Compliance Checks**: Real-time validation against evolving schema contracts.

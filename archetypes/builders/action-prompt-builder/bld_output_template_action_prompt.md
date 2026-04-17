@@ -53,30 +53,30 @@ tldr: "{{dense_summary_max_160ch}}"
 density_score: {{0.80-1.00}}
 ```
 ## Context
-{{background_2_3_sentences}}
-Purpose: {{purpose_restated_concisely}}
+`{{background_2_3_sentences}}`
+Purpose: `{{purpose_restated_concisely}}`
 ## Input
 | Item | Type | Format | Required |
 |------|------|--------|----------|
-| {{input_1}} | {{type}} | {{format}} | YES |
-| {{input_2}} | {{type}} | {{format}} | {{YES/NO}} |
+| `{{input_1}}` | {{type}} | `{{format}}` | YES |
+| `{{input_2}}` | {{type}} | `{{format}}` | {{YES/NO}} |
 ## Execution
-1. {{step_1_transform_input}}
-2. {{step_2_process}}
-3. {{step_3_produce_output}}
+1. `{{step_1_transform_input}}`
+2. `{{step_2_process}}`
+3. `{{step_3_produce_output}}`
 ## Output
-Format: {{output_format}}
+Format: `{{output_format}}`
 Structure:
-```{{format}}
+``{{format}}`
 {{output_structure_example}}
 ```
 ## Validation
-1. {{criterion_1_verifiable}}
-2. {{criterion_2_verifiable}}
-3. Edge case handled: {{edge_case_1_check}}
+1. `{{criterion_1_verifiable}}`
+2. `{{criterion_2_verifiable}}`
+3. Edge case handled: `{{edge_case_1_check}}`
 ## References
-1. {{reference_1}}
-2. {{reference_2}}
+1. `{{reference_1}}`
+2. `{{reference_2}}`
 
 ## Properties
 

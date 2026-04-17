@@ -24,8 +24,8 @@ dependencies: []
 logging: true
 tldr: Configure an LLM provider's connection parameters, tiered models, rate limits, and fallback chain from official sources into a complete model_provider artifact.
 density_score: 0.91
+llm_function: REASON
 ---
-
 ## Context
 The model-provider-builder produces `model_provider` artifacts (P02) — LLM provider connection and routing configurations. Configs specify the provider API, authentication, tiered model selection, rate limits, fallback chains, retry logic, and health tracking. A model_provider is a connection/routing config, not a model_card (technical LLM spec), not an embedder_provider (embedding config), and not a boot_config (agent startup).
 **Inputs:**

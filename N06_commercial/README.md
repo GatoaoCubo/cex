@@ -1,71 +1,43 @@
----
-id: n06_readme
-kind: readme
-pillar: P09
-title: "N06 Commercial Nucleus — README"
-version: 2.0.0
-created: 2026-03-30
-updated: 2026-04-07
-author: n06_commercial
-quality: 9.1
-tags: [readme, commercial, N06, brand, monetization, fractal-module]
-tldr: "N06 fractal module index: 12 pillar subdirs, 48 artifacts, dual-role Brand Architect + Revenue Engineer. Brand discovery → propagation → monetization."
-domain: commercial
----
+# N06 Commercial -- Fractal Module
 
-# N06_commercial
+> Strategic Greed -- commercial and monetization
 
-> **Fractal Module** — Contains instances of all 12 pillars scoped to commercial.
-> Sales, pricing, e-commerce
+Contains instances of all 12 pillars scoped to commercial and monetization. Each pillar
+subdir holds typed artifacts filtered through this nucleus's sin lens.
 
 ## Structure (mirrors 12 pillars)
 
 | Subdir | Pillar | Function | Contents |
 |--------|--------|----------|----------|
-| knowledge/ | [[P01_knowledge]] | INJECT | Knowledge cards for commercial |
-| agents/ | [[P02_model]] | BECOME | Agents specialized in commercial |
-| prompts/ | [[P03_prompt]] | REASON | Prompt templates for commercial |
-| tools/ | [[P04_tools]] | CALL | Skills/tools for commercial |
-| output/ | [[P05_output]] | PRODUCE | Output formats for commercial |
-| schemas/ | [[P06_schema]] | CONSTRAIN | Validation rules for commercial |
-| quality/ | [[P07_evals]] | GOVERN | Quality gates for commercial |
-| architecture/ | [[P08_architecture]] | GOVERN | Component maps for commercial |
-| config/ | [[P09_config]] | GOVERN | Configs for commercial |
-| memory/ | [[P10_memory]] | INJECT | Learning records for commercial |
-| feedback/ | [[P11_feedback]] | GOVERN | User corrections for commercial |
-| orchestration/ | [[P12_orchestration]] | COLLABORATE | Routing rules for commercial |
+| knowledge/ | [[P01_knowledge]] | INJECT | Knowledge cards for commercial and monetization |
+| agents/ | [[P02_model]] | BECOME | Agents specialized in commercial and monetization |
+| prompts/ | [[P03_prompt]] | REASON | Prompt templates for commercial and monetization |
+| tools/ | [[P04_tools]] | CALL | Skills/tools for commercial and monetization |
+| output/ | [[P05_output]] | PRODUCE | Output formats for commercial and monetization |
+| schemas/ | [[P06_schema]] | CONSTRAIN | Validation rules for commercial and monetization |
+| quality/ | [[P07_evals]] | GOVERN | Quality gates for commercial and monetization |
+| architecture/ | [[P08_architecture]] | GOVERN | Component maps for commercial and monetization |
+| config/ | [[P09_config]] | GOVERN | Configs for commercial and monetization |
+| memory/ | [[P10_memory]] | INJECT | Learning records for commercial and monetization |
+| feedback/ | [[P11_feedback]] | GOVERN | User corrections for commercial and monetization |
+| orchestration/ | [[P12_orchestration]] | COLLABORATE | Routing rules for commercial and monetization |
 
-## Links
+## Auxiliary
 
-- Architecture: [[CEX_ARCHITECTURE_MAP]]
-- Entry: [[CLAUDE]]
-- Pipeline: [[LLM_PIPELINE]]
+| Subdir | Purpose |
+|--------|---------|
+| rules/ | Nucleus-scoped rules (loaded at boot) |
+| compiled/ | Auto-generated YAML from .md (do not edit) |
 
-Source mold: [[N00_genesis]]
+## Conventions
 
-## Quality Metrics
+- Every file has YAML frontmatter (`id`, `kind`, `pillar`, `quality: null`).
+- Kinds are variable; pillar subdirs are fixed.
+- Reading any file's path reveals its pillar: `N06_*/{pillar}/{kind}_*.md`.
+- Cross-nucleus siblings: same pillar in other nuclei lives at `../N0X_*/{pillar}/`.
 
-| Metric | Value | Threshold |
-|--------|-------|-----------|
-| Structural completeness | High | ≥ 8.5 |
-| Domain specificity | commercial | Verified |
-| Cross-reference density | Adequate | ≥ 3 refs |
-| Actionability | Verified | Pass |
+## See also
 
-### Key Principles
-
-- Commercial artifacts follow CEX 8F pipeline from intent to publication
-- Quality gates enforce minimum 8.0 threshold for all published artifacts
-- Cross-nucleus references use explicit id-based linking, not path-based
-- Version tracking enables rollback to any previous artifact state
-
-### Usage Reference
-
-```yaml
-# readme integration
-artifact: README
-nucleus: N06
-domain: commercial
-quality_threshold: 9.0
-```
-
+- Nucleus definition: `architecture/nucleus_def_n06.md`
+- Nucleus rules: `rules/` (or `.claude/rules/n07-*.md` for N07)
+- Canonical pillar specs: `../P01_*/` through `../P12_*/`

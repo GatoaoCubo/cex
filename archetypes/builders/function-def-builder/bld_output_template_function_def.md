@@ -54,26 +54,26 @@ error_types: [{{error_1}}, {{error_2}}]
 ```
 
 ## Overview
-{{what_the_function_does_1_to_2_sentences}}
-{{when_an_LLM_should_call_this_function}}
+`{{what_the_function_does_1_to_2_sentences}}`
+`{{when_an_LLM_should_call_this_function}}`
 
 ## Parameters
-### {{param_name_1}}
-Type: {{type}} | Required: {{yes|no}} | Default: {{default}}
-{{detailed_description_with_constraints}}
+### `{{param_name_1}}`
+Type: `{{type}}` | Required: {{yes|no}} | Default: `{{default}}`
+`{{detailed_description_with_constraints}}`
 
-### {{param_name_2}}
-Type: {{type}} | Required: {{yes|no}} | Default: {{default}}
-{{detailed_description_with_constraints}}
-Enum: {{list_of_allowed_values_if_applicable}}
+### `{{param_name_2}}`
+Type: `{{type}}` | Required: {{yes|no}} | Default: `{{default}}`
+`{{detailed_description_with_constraints}}`
+Enum: `{{list_of_allowed_values_if_applicable}}`
 
 ## Returns
-Type: {{return_type}}
-Structure: {{return_structure_description}}
-Example: {{concrete_return_value}}
+Type: `{{return_type}}`
+Structure: `{{return_structure_description}}`
+Example: `{{concrete_return_value}}`
 
 ## Examples
-### Example 1: {{scenario_name}}
+### Example 1: `{{scenario_name}}`
 Input:
 ```json
 {"{{param_name_1}}": "{{value}}", "{{param_name_2}}": "{{value}}"}

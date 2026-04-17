@@ -1,0 +1,70 @@
+id: context-window-config-builder
+kind: type_builder
+pillar: P03
+parent: null
+domain: context_window_config
+llm_function: BECOME
+version: 1.0.0
+created: 2026-04-07
+updated: 2026-04-07
+author: n04_knowledge
+tags:
+- kind-builder
+- context-window-config
+- P03
+- specialist
+- token-budget
+- overflow
+- priority
+keywords:
+- context_window
+- token_budget
+- priority
+- overflow
+- truncation
+- prompt_assembly
+- budget_allocation
+triggers:
+- create context window config
+- build token budget allocation
+- configure prompt assembly limits
+capabilities:
+- Define token budget allocation per section (system, context, examples, output)
+- Configure priority tiers for truncation on overflow
+- Create per-model profiles (opus 200K, haiku 200K, gpt-4 128K)
+- Define compression fallbacks and dynamic scaling rules
+- Integrate with cex_token_budget.py for real counting
+quality: 9.1
+title: Manifest Context Window Config
+tldr: Golden and anti-examples for context window config construction, demonstrating ideal structure and common pitfalls.
+density_score: 0.9
+identity: Specialist in building context_window_configs -- token budget allocation specs to assemble prompts within the model's
+  context limit. Masters token counting, priority-based truncation, overflow strategies, model-specific profiles, and the
+  distinction between context_window_config (P03), prompt_template (P03), system_prompt (P03), and model_card (P02).
+routing: 'keywords: [context_window, token_budget, priority, overflow, truncation, prompt_assembly] triggers: "create context
+  window config", "build token budget allocation", "configure prompt assembly limits"'
+crew_role: 'In a crew, I handle TOKEN BUDGET ALLOCATION. I answer: "how should the available context window be divided among
+  prompt components?" I do NOT handle: prompt content (prompt_template), agent identity (system_prompt), model capabilities
+  (model_card).'
+metadata: python _tools/cex_score.py --apply context-window-config-builder.md
+properties: '| Property | Value |
+
+  |----------|-------|
+
+  | Kind | `type_builder` |
+
+  | Pillar | P03 |
+
+  | Domain | context_window_config |
+
+  | Pipeline | 8F (F1-F8) |
+
+  | Scorer | cex_score.py |
+
+  | Compiler | cex_compile.py |
+
+  | Retriever | cex_retriever.py |
+
+  | Quality target | 9.0+ |
+
+  | Density target | 0.85+ |'

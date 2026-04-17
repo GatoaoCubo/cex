@@ -1,0 +1,487 @@
+{
+  "kind": "response-format",
+  "compiled_at": "2026-04-12T17:26:39.779995+00:00",
+  "source_hash": "ec0f076b914ae1ef967c583a6d19dacd32cf90b2c72b22e13a3804d68ab0bce5",
+  "iso_count": 13,
+  "shared_count": 3,
+  "prompt_sections": {
+    "architecture_response_format": {
+      "content": "# Architecture: response_format in the CEX\n## Component Inventory\n| Name | Role | Owner | Status |\n|------|------|-------|--------|\n| frontmatter block | 19-field metadata header (id, kind, pillar, domain, format_type, etc.) | response-format-builder | active |\n| format_type | Output structure type (json, yaml, markdown, csv, plaintext) | author | active |\n| sections | Ordered sections the LLM must include in its response | author | active |\n| field_definitions | Named fields with types and descriptions within each section | author | active |\n| injection_point | Where the format is placed (system_prompt or user_message) | author | active |\n| example_output | Concrete example showing a correctly formatted response | author | active |\n## Dependency Graph\n```\nsystem_prompt   --injects-->    response_format  --consumed_by-->  LLM\nresponse_format --produces-->   formatted_output  --validated_by--> validation_schema\nresponse_format --signals-->    format_deviation\n```\n| From | To | Type | Data |\n|------|----|------|------|\n| system_prompt (P03) | response_format | data_flow | format injected into system prompt for LLM guidance |\n| response_format | LLM | consumes | LLM reads format instructions during generation |\n| response_format | formatted_output | produces | response structured according to format spec |\n| formatted_output | validation_schema (P06) | data_flow | post-generation contract validates the output |\n| formatted_output | parser (P05) | data_flow | parser extracts structured data from formatted output |\n| response_format | format_deviation (P12) | signals | emitted when LLM output deviates from format |\n## Boundary Table\n| response_format IS | response_format IS NOT |\n|--------------------|------------------------|\n| An instruction injected into the prompt that the LLM sees | A post-generation contract the system enforces (validation_schema P06) |\n| Guides how the LLM structures its output during generation | A data extractor applied after generation (parser P05) |\n| Specifies sections, fields, and format type | A format converter between representations (formatter P05) |\n| Placed at a specific injection point in the prompt | A naming convention for files or artifacts (naming_rule P05) |\n| Defines what the response looks like, not what it contains | A task instruction defining what to accomplish (action_prompt P03) |\n| Format type: json, yaml, markdown, csv, or plaintext | A binary or image output specification |\n## Layer Map\n| Layer | Components | Purpose |\n|-------|------------|---------|\n| Injection | system_prompt, injection_point | Where and how the format enters the prompt |\n| Definition | frontmatter, format_type, sections, field_definitions | Specify the structure the LLM must follow |\n| Example | example_output | Concrete reference for the expected format |\n| Generation | LLM, formatted_output | LLM produces output following the format |\n| Validation | validation_schema, parser, format_deviation | Post-generation checking and data extraction |",
+      "frontmatter": {
+        "kind": "architecture",
+        "id": "bld_architecture_response_format",
+        "pillar": "P08",
+        "llm_function": "CONSTRAIN",
+        "purpose": "Component map of response_format \u2014 inventory, dependencies, and architectural position",
+        "quality": 9.1,
+        "title": "Architecture Response Format",
+        "version": "1.0.0",
+        "author": "n03_builder",
+        "tags": [
+          "response_format",
+          "builder",
+          "examples"
+        ],
+        "tldr": "Golden and anti-examples for response format construction, demonstrating ideal structure and common pitfalls.",
+        "domain": "response format construction",
+        "created": "2026-04-07",
+        "updated": "2026-04-07",
+        "density_score": 0.9
+      },
+      "source_file": "bld_architecture_response_format.md",
+      "bytes": 3013
+    },
+    "collaboration_response_format": {
+      "content": "# Collaboration: response-format-builder\n## My Role in Crews\nI am a SPECIALIST. I answer ONE question: \"how should the LLM structure its output for this task?\"\nI design the format the LLM sees during generation. I do not validate output after generation, extract data from it, or transform it between formats.\n## Crew Compositions\n### Crew: \"Structured Output Pipeline\"\n```\n  1. response-format-builder    -> \"format spec injected into the prompt (LLM sees this during generation)\"\n  2. validation-schema-builder  -> \"JSON/YAML schema applied post-generation to verify structure\"\n  3. parser-builder             -> \"extractor that pulls fields from the validated output\"\n```\n### Crew: \"Agent Prompt Stack\"\n```\n  1. system-prompt-builder      -> \"agent identity and fixed instructions\"\n  2. prompt-template-builder    -> \"parameterized template with {{variables}}\"\n  3. response-format-builder    -> \"output structure injected at system_prompt or user_message\"\n```\n### Crew: \"Eval-Ready Agent Pack\"\n```\n  1. response-format-builder    -> \"canonical output structure the agent must produce\"\n  2. quality-gate-builder       -> \"gates that check the format for completeness and correctness\"\n  3. golden-test-builder        -> \"golden examples of correctly formatted responses\"\n  4. unit-eval-builder          -> \"unit evaluations asserting format compliance\"\n```\n## Handoff Protocol\n### I Receive\n- seeds: task type, desired format_type (json/yaml/markdown/csv/plaintext), required fields, injection_point\n- optional: existing system prompt to inject into, example outputs, validation schema reference\n### I Produce\n- response_format artifact (YAML frontmatter 19 fields + format body with sections/fields/examples, max 4096 bytes)\n- committed to: `cex/P05/examples/p05_rf_{name}.md`\n### I Signal\n- signal: complete (with quality score from QUALITY_GATES)\n- if quality < 8.0: signal retry with failure reasons\n## Builders I Depend On\n- system-prompt-builder: provides the injection target when injection_point is system_prompt\n- prompt-template-builder: provides the template body where the format spec is inserted\n## Builders That Depend On Me\n| Builder | Why |\n|---------|-----|\n| validation-schema-builder | Derives its schema from the fields I specify in the format |\n| parser-builder | Knows which fields to extract based on my format definition |\n| golden-test-builder | Golden outputs must conform to the format I define |\n| formatter-builder | Transforms between formats starting from the structure I establish |",
+      "frontmatter": {
+        "kind": "collaboration",
+        "id": "bld_collaboration_response_format",
+        "pillar": "P05",
+        "llm_function": "COLLABORATE",
+        "purpose": "How response-format-builder works in crews with other builders",
+        "pattern": "each builder must know its ROLE in a team, what it RECEIVES and PRODUCES",
+        "quality": 9.0,
+        "title": "Collaboration Response Format",
+        "version": "1.0.0",
+        "author": "n03_builder",
+        "tags": [
+          "response_format",
+          "builder",
+          "examples"
+        ],
+        "tldr": "Golden and anti-examples for response format construction, demonstrating ideal structure and common pitfalls.",
+        "domain": "response format construction",
+        "created": "2026-04-07",
+        "updated": "2026-04-07",
+        "density_score": 0.9
+      },
+      "source_file": "bld_collaboration_response_format.md",
+      "bytes": 2516
+    },
+    "config_response_format": {
+      "content": "# Config: response_format Production Rules\n## Naming\n| Scope | Convention | Example |\n|-------|-----------|---------|\n| Artifact | p05_rf_{format_slug}.yaml | p05_rf_knowledge_card.yaml |\n| Builder dir | kebab-case | response-format-builder/ |\n| Fields | snake_case | format_type, injection_point, sections_count |\n| Format slugs | lowercase_underscores | knowledge_card, model_card, signal_json |\nRule: id MUST equal filename stem.\n## File Paths\n1. Output: cex/P05_output/examples/p05_rf_{format_slug}.yaml\n2. Compiled: cex/P05_output/compiled/p05_rf_{format_slug}.json\n## Size Limits (aligned with SCHEMA)\n1. Body: max 4096 bytes\n2. Density: >= 0.80\n3. Sections: >= 1 (recommend 3-7; LLMs struggle above 10)\n## Format Policy\n1. format_type determines output structure the LLM follows\n2. json: highest compliance rate, best for machine consumption\n3. yaml: good for config-like output with frontmatter\n4. markdown: best for human-readable docs, supports headers/tables\n5. csv: tabular data only, simple extraction\n6. plaintext: unstructured, use only when no structure needed\n\n## Metadata\n\n```yaml\nid: bld_config_response_format\npipeline: 8F\nscoring: hybrid_3_layer\n```\n\n```bash\npython _tools/cex_score.py --apply bld-config-response-format.md\n```\n\n## Properties\n\n| Property | Value |\n|----------|-------|\n| Kind | `config` |\n| Pillar | P09 |\n| Domain | response format construction |\n| Pipeline | 8F (F1-F8) |\n| Scorer | cex_score.py |\n| Compiler | cex_compile.py |\n| Retriever | cex_retriever.py |\n| Quality target | 9.0+ |\n| Density target | 0.85+ |",
+      "frontmatter": {
+        "kind": "config",
+        "id": "bld_config_response_format",
+        "pillar": "P09",
+        "llm_function": "CONSTRAIN",
+        "purpose": "Naming, paths, limits for response_format production",
+        "pattern": "CONFIG restricts SCHEMA, never contradicts",
+        "effort": "medium",
+        "max_turns": 25,
+        "disallowed_tools": [],
+        "fork_context": null,
+        "hooks": {
+          "pre_build": null,
+          "post_build": null,
+          "on_error": null,
+          "on_quality_fail": null
+        },
+        "permission_scope": "nucleus",
+        "quality": 9.1,
+        "title": "Config Response Format",
+        "version": "1.0.0",
+        "author": "n03_builder",
+        "tags": [
+          "response_format",
+          "builder",
+          "examples"
+        ],
+        "tldr": "Golden and anti-examples for response format construction, demonstrating ideal structure and common pitfalls.",
+        "domain": "response format construction",
+        "created": "2026-04-07",
+        "updated": "2026-04-07",
+        "density_score": 0.9
+      },
+      "source_file": "bld_config_response_format.md",
+      "bytes": 1553
+    },
+    "examples_response_format": {
+      "content": "# Examples: response-format-builder\n## Golden Example\nINPUT: \"Create response_format para knowledge_card output em YAML frontmatter + markdown\"\nOUTPUT:\n```yaml\nid: p05_rf_knowledge_card\nkind: response_format\npillar: P05\ntitle: \"Response Format: Knowledge Card\"\nversion: \"1.0.0\"\ncreated: \"2026-03-26\"\nupdated: \"2026-03-26\"\nauthor: \"builder\"\ntarget_kind: \"knowledge_card\"\nformat_type: \"yaml\"\ninjection_point: \"system_prompt\"\nsections: [frontmatter, tldr, core_concepts, patterns, anti_patterns, quick_reference, references]\nsections_count: 7\ndomain: \"knowledge\"\nquality: null\ntags: [response-format, knowledge-card, yaml-frontmatter, structured-output]\ntldr: \"KC output format: YAML frontmatter (id, kind, pillar, tags, tldr) + 6 markdown sections, injected in system_prompt\"\nexample_output: \"see body\"\ncomposable: false\ndensity_score: 0.91\nlinked_artifacts:\n  primary: \"knowledge-card-builder\"\n  related: [p06_vs_knowledge_card, p01_kc_prompt_caching]\n## Format Overview\nDefines how the LLM should structure knowledge_card output: YAML frontmatter with required fields followed by 6 ordered markdown sections.\nInjected in system_prompt so every KC production follows the same structure.\n## Sections\n| # | Section | Description | Required | Constraints |\n|---|---------|-------------|----------|-------------|\n| 1 | frontmatter | YAML block with id, kind, pillar, quality: null, tags, tldr | yes | all required fields per P01 schema |\n| 2 | TL;DR | 1-2 sentence dense summary | yes | <= 160 chars, no filler |\n| 3 | Core Concepts | Key facts as bullet list | yes | >= 3 bullets, <= 80 chars each |\n| 4 | Patterns | Proven approaches | yes | >= 2 bullets with context |\n| 5 | Anti-Patterns | What to avoid | yes | >= 1 bullet with why |\n| 6 | Quick Reference | Commands, snippets, tables | yes | Actionable, copy-paste ready |\n| 7 | References | Source URLs with dates | yes | >= 1 URL, verifiable |\n## Example Output\n```yaml\nid: p01_kc_example_topic\nkind: knowledge_card\npillar: P01\nversion: \"1.0.0\"\ncreated: \"2026-03-26\"\nupdated: \"2026-03-26\"\nauthor: \"builder\"\ndomain: \"example\"\nquality: null\ntags: [example, knowledge-card, template]\ntldr: \"Example KC showing expected output structure with all 7 sections\"\n## TL;DR\nExample knowledge card demonstrating the response format structure.\n## Core Concepts\n- First key concept with concrete data\n- Second key concept with specific reference\n- Third key concept with actionable detail\n## Patterns\n- Pattern 1: when X, do Y (proven in context Z)\n- Pattern 2: use A instead of B (measured 30% improvement)\n## Anti-Patterns\n- Anti-pattern 1: avoid X because Y (causes Z failure)\n## Quick Reference\n| Command | Purpose |\n|---------|---------|\n| `example_cmd` | Does specific thing |\n## References\n- Source: https://example.com (2026-03-26)\n```\n## Injection Instructions\n- **Point**: system_prompt\n- **Position**: after identity rules, before task instructions\n- **Template**: \"When producing a knowledge_card, use the following output format:\"\n- **Composable**: false \u2014 KC format is self-contained\n## References\n- P01_knowledge/_schema.yaml: field definitions\n- knowledge-card-builder SCHEMA.md: authoritative field reference\n```\nWHY THIS IS GOLDEN:\n- quality: null (H06 pass)\n- id matches p05_rf_ pattern (H02 pass)\n- kind: response_format (H04 pass)\n- 17 required fields present (H07 pass)\n- sections_count 7 >= 1 (H08 pass)\n- format_type \"yaml\" in valid enum (H09 pass)\n- injection_point \"system_prompt\" in valid enum (H10 pass)\n- target_kind non-empty (H11 pass)\n- Sections table with all 7 sections, ordered (S03 pass)\n- Example Output complete and matches sections (S04 pass)\n- Injection Instructions with point, position, template (S05 pass)\n- tldr <= 160 chars, dense (S01 pass)\n## Anti-Example\nINPUT: \"Format para output\"\nBAD OUTPUT:\n```yaml\nid: output_format\nkind: format\npillar: Output\nformat_type: text\nsections_count: 0",
+      "frontmatter": {
+        "kind": "examples",
+        "id": "bld_examples_response_format",
+        "pillar": "P07",
+        "llm_function": "GOVERN",
+        "purpose": "Golden and anti-examples of response_format artifacts",
+        "pattern": "few-shot learning \u2014 LLM reads these before producing",
+        "quality": 9.1,
+        "title": "Examples Response Format",
+        "version": "1.0.0",
+        "author": "n03_builder",
+        "tags": [
+          "response_format",
+          "builder",
+          "examples"
+        ],
+        "tldr": "Golden and anti-examples for response format construction, demonstrating ideal structure and common pitfalls.",
+        "domain": "response format construction",
+        "created": "2026-04-07",
+        "updated": "2026-04-07",
+        "density_score": 0.9
+      },
+      "source_file": "bld_examples_response_format.md",
+      "bytes": 3873
+    },
+    "instruction_response_format": {
+      "content": "## Context\nA **response_format** is a prompt-injected specification that tells the LLM how to structure its output. It is placed into the prompt (system or user turn) so the model sees the format during generation. It governs the shape of every response the agent produces for a given task. The LLM reads this artifact; the system does not execute it.\n**Inputs**\n| Field | Type | Description |\n|---|---|---|\n| `task` | string | What the LLM will do (e.g. `extract entities`, `summarize document`, `classify intent`) |\n| `format_type` | enum | `json` \\| `yaml` \\| `markdown` \\| `csv` \\| `plaintext` |\n| `injection_point` | enum | `system_prompt` \\| `user_message` |\n| `sections` | list | Named output sections or fields the format must contain (ordered) |\n| `target_kind` | string | The artifact or task type this format serves (for discovery and routing) |\n**Output**\nA single `.md` file with YAML frontmatter (17 required fields) + 4 mandatory body sections: Format Overview, Sections, Example Output, Injection Instructions. The format specification must be written exactly as it will appear when injected into the prompt.\n**Critical boundary**\n- response_format = what the LLM sees during generation and uses to shape output (this builder)\n- validation_schema = what the system checks *after* generation (different builder)\n- parser = code that extracts structured data from LLM output (different builder)\n- formatter = code that converts one format to another (different builder)\n## Phases\n### Phase 1: Research \u2014 Output Structure Design\nDetermine the exact structure the LLM must produce and how it will be consumed.\n```\nFOR each section in sections:\n  classify:\n    required:  LLM must always emit this section\n    optional:  LLM emits only when relevant data is present\n    repeated:  LLM emits one instance per item (array/list pattern)\n  FOR json/yaml format:\n    field_name (snake_case), value_type, nullable (bool)\n  FOR markdown format:\n    heading_level (##, ###), content_type (prose, list, table, code block)\n  FOR csv format:\n    column_name, data_type, column_order (integer)\n  FOR plaintext format:\n    structural constraints described as prose rules\ninjection_point selection:\n  system_prompt:  format is a standing instruction (best for consistent output shape across sessions)\n  user_message:   format is per-request (best for task-specific variation)\nconsumption context:\n  WHO reads the output: human | parser | validation_schema | another LLM\n  This affects how strict the format must be.\nCheck brain_query [IF MCP] for existing response_formats in same domain to avoid duplicates.\n```\nDeliverable: ordered section list with types, optionality, and injection strategy.\n### Phase 2: Classify \u2014 Boundary Check\nConfirm the artifact belongs to `response_format` and not a sibling kind.\n```\nIF caller wants code that parses the LLM's output into structured data:\n  RETURN \"Route to parser-builder \u2014 parsers extract data post-generation.\"\nIF caller wants a schema to validate the LLM's output after generation:\n  RETURN \"Route to validation-schema-builder.\"\nIF caller wants to transform the LLM's output from one format to another:\n  RETURN \"Route to formatter-builder.\"\nIF caller wants to define a standing instruction the LLM follows:\n  CHECK: is it about OUTPUT SHAPE (proceed here) or AGENT BEHAVIOR (route to system-prompt-builder)?\nIF the format will be injected into the prompt so the LLM sees it during generation:\n  PROCEED as response_format\n```\nDeliverable: confirmed `kind: response_format` with one-line justification.\n### Phase 3: Compose \u2014 Build the Format Artifact\nAssemble frontmatter and all 4 required body sections, following SCHEMA.md.\n```\nID generation:\n  id = \"p05_rf_\" + task_slug + \"_\" + format_type\n  task_slug: snake_case, describes the task\n  must conform to valid response_format id pattern\nFrontmatter (all 17 required fields from SCHEMA.md):\n  id, kind (= response_format), pillar (= P05), title, version,\n  created, updated, author, task, format_type, injection_point,\n  target_kind, sections (ordered list), sections_count (integer),\n  quality (= null), tags, domain\nBody sections (in this order):\n  ## Format Overview\n  One paragraph: what structure this format defines and for what task.\n  State whether strict mode applies (LLM must follow exactly) or\n  approximate mode (LLM uses format as a guide).\n  ## Sections\n  Ordered list of sections with per-section constraints:\n    - Section name, heading level (for markdown), field names (for json/yaml)\n    - Required vs optional for each section\n    - Content type: prose | list | table | code block | key-value pairs\n    - Cardinality for repeated sections (min/max items if known)\n  ## Example Output\n  At least one complete, realistic example.\n  Must be valid for the declared format_type:\n    json/yaml: parseable, no placeholder strings like \"value1\" or \"string\"\n    markdown:  rendered section headers with realistic content\n    csv:       header row + minimum 2 data rows\n  Variables in example must match the sections list.",
+      "frontmatter": {
+        "id": "p03_ins_response_format",
+        "kind": "instruction",
+        "pillar": "P05",
+        "version": "1.0.0",
+        "created": "2026-03-27",
+        "updated": "2026-03-27",
+        "author": "instruction-builder",
+        "title": "Response Format Builder Instructions",
+        "target": "response-format-builder agent",
+        "phases_count": 4,
+        "prerequisites": [
+          "Caller has identified the task the LLM will perform (e.g. entity extraction, summarization, classification)",
+          "The desired output structure is known at a high level (e.g. JSON object, markdown report, CSV rows)",
+          "Injection point is known or inferable: system_prompt (persistent) or user_message (per-request)"
+        ],
+        "validation_method": "checklist",
+        "domain": "response_format",
+        "quality": 9.1,
+        "tags": [
+          "instruction",
+          "response-format",
+          "P05",
+          "structured-output",
+          "output-design",
+          "injection"
+        ],
+        "idempotent": true,
+        "atomic": false,
+        "rollback": "Delete the produced format file. No LLM behavior changes until the format is injected into a prompt.",
+        "dependencies": [],
+        "logging": true,
+        "tldr": "Design how the LLM structures its output \u2014 sections, fields, examples \u2014 and produce a response_format artifact ready for prompt injection.",
+        "density_score": 0.92
+      },
+      "source_file": "bld_instruction_response_format.md",
+      "bytes": 5041
+    },
+    "knowledge_card_response_format": {
+      "content": "# Domain Knowledge: response_format\n## Executive Summary\nA response_format is a template injected into the LLM prompt that specifies how the model must structure its output during generation \u2014 it is a pre-generation contract the LLM sees. Post-generation validation belongs to validation_schema (P06). Data extraction belongs to parser (P05). Format transformation belongs to formatter (P05). The response_format is guidance, not enforcement; clarity and a concrete example output are what drive compliance.\n## Spec Table\n| Property | Value |\n|----------|-------|\n| Pillar | P05 (IO) |\n| ID pattern | `^p05_rf_[a-z][a-z0-9_]+$` |\n| Required frontmatter fields | 12 (includes `format_type` and `domain`) |\n| Recommended fields | 4 (target_kind, example_output, variable_syntax, sections) |\n| Max body | 4096 bytes |\n| Body sections | 4 (Format Specification, Variables Table, Template Body, Example Output) |\n| Section count constraint | 4\u20137 sections; consolidate if > 7 |\n| Naming | `p05_rf_{format_slug}.yaml` |\n## Patterns\n| Pattern | Rule |\n|---------|------|\n| Format compliance hierarchy | JSON (95%) > YAML (90%) > Markdown tables (88%) > Numbered lists (85%) > Prose (70%) |\n| Consumer-driven format_type | Machine consumer = `json`; config = `yaml`; human = `markdown` |\n| Variable syntax tier 1 | `{{VARIABLE_NAME}}` \u2014 mustache, required; must have type + example in variables table |\n| Variable syntax tier 2 | `[VARIABLE_NAME]` \u2014 bracket, optional; clearly marked as optional |\n| Variables table completeness | Every variable requires: name, type, constraints, required/optional, example |\n| Example Output section | Must be fully filled \u2014 no placeholders remaining in the example |\n| Injection point selection | `system_prompt` for persistent structure; `user_message` for per-request context |\n## Anti-Patterns\n| Anti-Pattern | Why it fails |\n|-------------|-------------|\n| Untyped `{{value}}` variable | Forbidden \u2014 schema rejects variables without type + example |\n| > 7 sections | Exceeds section limit; must consolidate |\n| Prose-only template body | 70% LLM compliance \u2014 lowest tier; use structured format |\n| `quality` non-null | Self-scoring forbidden; always `null` |\n| Example Output section missing | LLM cannot verify output shape without a filled reference |\n| Mixing mustache and bracket for same tier | Ambiguous variable precedence |\n| response_format containing validation rules | Wrong artifact \u2014 post-generation validation belongs in validation_schema (P06) |\n| Vague section names (`## Details`) | Use action-oriented names: `## Remediation Steps`, `## Score Breakdown` |\n## Application\n1. Identify the target artifact kind and consumer type (machine / config / human)\n2. Select `format_type` based on consumer: machine = `json`, config = `yaml`, human = `markdown`\n3. Write frontmatter: 12 required fields; `quality: null`; add `target_kind` and `sections` list\n4. Write `## Format Specification` \u2014 output structure, format_type rationale, compliance notes\n5. Write `## Variables Table` \u2014 every variable with type, constraints, required/optional, example\n6. Write `## Template Body` \u2014 actual template using `{{REQUIRED}}` and `[OPTIONAL]` placeholders\n7. Write `## Example Output` \u2014 fully filled; zero remaining placeholders\n8. Verify body <= 4096 bytes; sections count 4\u20137; `id` matches filename stem\n## References\n- response-format-builder MANIFEST.md v1.0.0\n- response_format SCHEMA.md v2.0.0\n- Boundary: response_format (LLM sees, pre-gen) vs validation_schema (P06, system applies post-gen) vs parser (P05, extracts data) vs formatter (P05, transforms format)",
+      "frontmatter": {
+        "kind": "knowledge_card",
+        "id": "bld_knowledge_card_response_format",
+        "pillar": "P05",
+        "llm_function": "INJECT",
+        "purpose": "Domain knowledge for response_format production \u2014 atomic searchable facts",
+        "sources": "response-format-builder MANIFEST.md + SCHEMA.md",
+        "quality": 9.1,
+        "title": "Knowledge Card Response Format",
+        "version": "1.0.0",
+        "author": "n03_builder",
+        "tags": [
+          "response_format",
+          "builder",
+          "examples"
+        ],
+        "tldr": "Golden and anti-examples for response format construction, demonstrating ideal structure and common pitfalls.",
+        "domain": "response format construction",
+        "created": "2026-04-07",
+        "updated": "2026-04-07",
+        "density_score": 0.9
+      },
+      "source_file": "bld_knowledge_card_response_format.md",
+      "bytes": 3624
+    },
+    "manifest_response_format": {
+      "content": "# response-format-builder\n## Identity\nSpecialist in building response_formats \u2014 response formats injected into the LLM prompt to guide how the agent structures its output.\nKnows structured output patterns (JSON mode, YAML frontmatter, markdown sections), injection points (system_prompt, user_message), and the critical difference between response_format (P05, LLM sees), validation_schema (P06, system applies post-generation), parser (P05, extracts data), and formatter (P05, transforms format).\n## Capabilities\n1. Design response formats with sections, fields, and examples\n2. Produce response_format with complete frontmatter (19 fields)\n3. Define apownte injection_point (system_prompt vs user_message)\n4. Specify format_type (json, yaml, markdown, csv, plaintext)\n5. Validate artifact against quality gates (10 HARD + 9 SOFT)\n6. Maintain clear boundary: LLM sees this format during generation\n## Routing\nkeywords: [response-format, output-format, structured-output, json-mode, how-to-respond, output-structure]\ntriggers: \"how should the LLM format its response\", \"define output structure\", \"create response format\"\n## Crew Role\nIn a crew, I handle RESPONSE STRUCTURE DESIGN.\nI answer: \"how should the LLM structure its output for this task?\"\nI do NOT handle: post-generation validation (validation-schema-builder), data extraction (parser-builder), format transformation (formatter-builder).\n\n## Metadata\n\n```yaml\nid: response-format-builder\npipeline: 8F\nscoring: hybrid_3_layer\n```\n\n```bash\npython _tools/cex_score.py --apply response-format-builder.md\n```\n\n## Properties\n\n| Property | Value |\n|----------|-------|\n| Kind | `type_builder` |\n| Pillar | P05 |\n| Domain | response_format |\n| Pipeline | 8F (F1-F8) |\n| Scorer | cex_score.py |\n| Compiler | cex_compile.py |\n| Retriever | cex_retriever.py |\n| Quality target | 9.0+ |\n| Density target | 0.85+ |",
+      "frontmatter": {
+        "id": "response-format-builder",
+        "kind": "type_builder",
+        "pillar": "P05",
+        "parent": null,
+        "domain": "response_format",
+        "llm_function": "BECOME",
+        "version": "1.0.0",
+        "created": "2026-03-26",
+        "updated": "2026-03-26",
+        "author": "builder",
+        "tags": [
+          "kind-builder",
+          "response-format",
+          "P05",
+          "specialist",
+          "spec",
+          "output"
+        ],
+        "keywords": [
+          "response-format",
+          "output-format",
+          "structured-output",
+          "json-mode",
+          "how-to-respond",
+          "output-structure"
+        ],
+        "triggers": [
+          "how should the LLM format its response",
+          "define output structure",
+          "create response format"
+        ],
+        "capabilities": "L1: Specialist in building response_formats \u2014 formats de resposta injected no p. L2: Design formats de resposta with sections, fields, and examples. L3: When user needs to create, build, or scaffold response format.\n",
+        "quality": 9.1,
+        "title": "Manifest Response Format",
+        "tldr": "Golden and anti-examples for response format construction, demonstrating ideal structure and common pitfalls.",
+        "density_score": 0.9
+      },
+      "source_file": "bld_manifest_response_format.md",
+      "bytes": 1863
+    },
+    "memory_response_format": {
+      "content": "# Memory: response-format-builder\n## Summary\nResponse formats are injected into the LLM prompt to guide how the agent structures its output. The critical distinction from validation schemas is visibility: the LLM sees response formats during generation, while validation schemas are applied post-generation by the system. Confusing these two causes either redundant enforcement (format + schema checking the same thing) or gaps (neither checking). The second lesson is injection point selection: system_prompt injection persists across turns, user_message injection applies to one turn only.\n## Pattern\n1. Choose injection_point based on persistence needs: system_prompt for all turns, user_message for single turn\n2. Format type must match downstream consumer expectations: json for APIs, markdown for human readers, yaml for configs\n3. Include a concrete example output in the format specification \u2014 LLMs follow examples more reliably than abstract rules\n4. Section ordering in the format must match the LLM's natural generation flow \u2014 fighting generation order reduces compliance\n5. Keep format specifications concise \u2014 verbose format instructions compete with task instructions for attention\n6. Test format compliance with at least 3 different task types to verify the format works across use cases\n## Anti-Pattern\n1. Duplicating format rules in both response_format (LLM-visible) and validation_schema (system-applied) \u2014 maintain in one place\n2. Injecting response format in user_message when persistence across turns is needed \u2014 format forgotten on next turn\n3. Abstract format rules without examples \u2014 LLMs comply 40% less often without concrete examples\n4. Format specifications longer than 500 tokens \u2014 drowns out task-specific instructions\n5. Confusing response_format (P05, LLM sees) with validation_schema (P06, system applies) or parser (P05, extracts data)\n## Context\nResponse formats sit in the P05 formatting layer. They are injected into prompts before generation, making them part of the LLM's instruction set. This is fundamentally different from post-generation validation (P06) which the LLM never sees. In agent pipelines, response formats ensure consistent output structure that downstream parsers and consumers can rely on.\n## Impact\nFormats with concrete examples achieved 90% compliance versus 55% for abstract-only formats. Correct injection point selection (system vs user) eliminated 100% of multi-turn format amnesia. Concise formats (under 300 tokens) showed 25% higher task quality due to less instruction competition.\n## Reproducibility\nReliable response format production: (1) select injection point based on persistence needs, (2) choose format type matching downstream consumers, (3) include concrete example output, (4) order sections to match natural generation flow, (5) keep under 500 tokens, (6) validate against 10 HARD + 9 SOFT gates.\n## References\n1. response-format-builder SCHEMA.md (19 frontmatter fields, format specification)\n2. P05 formatting pillar specification\n3. LLM structured output and JSON mode patterns\n\n## Metadata\n\n```yaml\nid: bld_memory_response_format\npipeline: 8F\nscoring: hybrid_3_layer\n```\n\n```bash\npython _tools/cex_score.py --apply bld-memory-response-format.md\n```\n\n## Properties\n\n| Property | Value |\n|----------|-------|\n| Kind | `memory` |\n| Pillar | P10 |\n| Domain | response format construction |\n| Pipeline | 8F (F1-F8) |\n| Scorer | cex_score.py |\n| Compiler | cex_compile.py |\n| Retriever | cex_retriever.py |\n| Quality target | 9.0+ |\n| Density target | 0.85+ |",
+      "frontmatter": {
+        "kind": "memory",
+        "id": "bld_memory_response_format",
+        "pillar": "P10",
+        "llm_function": "INJECT",
+        "purpose": "Accumulated production experience for response_format artifact generation",
+        "memory_scope": "project",
+        "observation_types": [
+          "user",
+          "feedback",
+          "project",
+          "reference"
+        ],
+        "quality": 9.2,
+        "title": "Memory Response Format",
+        "version": "1.0.0",
+        "author": "n03_builder",
+        "tags": [
+          "response_format",
+          "builder",
+          "examples"
+        ],
+        "tldr": "Golden and anti-examples for response format construction, demonstrating ideal structure and common pitfalls.",
+        "domain": "response format construction",
+        "created": "2026-04-07",
+        "updated": "2026-04-07",
+        "density_score": 0.9
+      },
+      "source_file": "bld_memory_response_format.md",
+      "bytes": 3552
+    },
+    "output_template_response_format": {
+      "content": "# Output Template: response_format\n```yaml\nid: p05_rf_{{format_slug}}\nkind: response_format\npillar: P05\n\ntitle: \"Response Format: {{format_name}}\"\nversion: \"1.0.0\"\ncreated: \"{{YYYY-MM-DD}}\"\nupdated: \"{{YYYY-MM-DD}}\"\n\nauthor: \"{{who_produced}}\"\ntarget_kind: \"{{artifact_kind_or_task}}\"\nformat_type: \"{{json_or_yaml_or_markdown_or_csv_or_plaintext}}\"\ninjection_point: \"{{system_prompt_or_user_message}}\"\n\nsections: [{{section_1}}, {{section_2}}, {{section_3}}]\nsections_count: {{integer_gte_1}}\ndomain: \"{{domain_value}}\"\nquality: null\n\ntags: [response-format, {{target_kind}}, {{domain}}]\ntldr: \"{{dense_summary_max_160ch}}\"\nexample_output: \"see body\"\ncomposable: {{true_or_false}}\n\ndensity_score: {{0.80_to_1.00}}\nlinked_artifacts:\n  primary: \"{{target_kind_builder}}\"\n  related: [{{related_artifact_refs}}]\n## Format Overview\n{{what_structure_this_defines_and_for_what_task}}\n## Sections\n| # | Section | Description | Required | Constraints |\n|---|---------|-------------|----------|-------------|\n| 1 | {{section_1}} | {{description}} | {{yes/no}} | {{constraints}} |\n| 2 | {{section_2}} | {{description}} | {{yes/no}} | {{constraints}} |\n| 3 | {{section_3}} | {{description}} | {{yes/no}} | {{constraints}} |\n## Example Output\n```{{format_type}}\n{{complete_example_showing_expected_shape}}\n```\n## Injection Instructions\n1. **Point**: {{system_prompt_or_user_message}}\n2. **Position**: {{where_in_the_prompt}}\n3. **Template**: \"Respond using the following format: {{format_description}}\"\n4. **Composable**: {{true/false}} \u2014 {{explanation}}\n## References\n1. {{reference_1}}\n2. {{reference_2}}\n```\n\n## Properties\n\n| Property | Value |\n|----------|-------|\n| Kind | `output_template` |\n| Pillar | P05 |\n| Domain | response format construction |\n| Pipeline | 8F (F1-F8) |\n| Scorer | cex_score.py |\n| Compiler | cex_compile.py |\n| Retriever | cex_retriever.py |\n| Quality target | 9.0+ |\n| Density target | 0.85+ |",
+      "frontmatter": {
+        "kind": "output_template",
+        "id": "bld_output_template_response_format",
+        "pillar": "P05",
+        "llm_function": "PRODUCE",
+        "purpose": "Template with {{vars}} for response_format production",
+        "pattern": "derives from SCHEMA.md \u2014 no extra fields",
+        "quality": 9.1,
+        "title": "Output Template Response Format",
+        "version": "1.0.0",
+        "author": "n03_builder",
+        "tags": [
+          "response_format",
+          "builder",
+          "examples"
+        ],
+        "tldr": "Golden and anti-examples for response format construction, demonstrating ideal structure and common pitfalls.",
+        "domain": "response format construction",
+        "created": "2026-04-07",
+        "updated": "2026-04-07",
+        "density_score": 0.9
+      },
+      "source_file": "bld_output_template_response_format.md",
+      "bytes": 1913
+    },
+    "quality_gate_response_format": {
+      "content": "## Definition\nA response format artifact specifies the exact output structure an LLM must produce. It declares a format type (json, yaml, markdown, csv, or plaintext), an injection point where the spec is delivered to the model (system prompt or user message), and a section structure with field-level definitions. The artifact is consumed by the LLM at generation time \u2014 it is not a post-generation validator.\nScope: files with `kind: response_format`. Does not apply to validation schemas (P06), which check outputs after generation.\n## HARD Gates\nFailure on any single gate means REJECT regardless of soft score.\n| ID  | Predicate | How to test |\n|-----|-----------|-------------|\n| H01 | Frontmatter parses as valid YAML | `yaml.safe_load(frontmatter)` raises no error |\n| H02 | `id` matches namespace `p05_rf_*` | `id.startswith(\"p05_rf_\")` is true |\n| H03 | `id` equals filename stem | `Path(file).stem == id` |\n| H04 | `kind` equals literal `response_format` | string equality check |\n| H05 | `quality` is null at authoring time | `quality is None` |\n| H06 | All required frontmatter fields present and non-empty | id, kind, pillar, title, version, created, updated, author, domain, tags, tldr all present |\n| H07 | `format_type` is one of: json, yaml, markdown, csv, plaintext | enum membership check |\n| H08 | `injection_point` is one of: system_prompt, user_message | enum membership check |\n| H09 | Section structure defined with at least one named section | sections table or list has >= 1 entry |\n## SOFT Scoring\nScore each dimension 0 (absent or fails) to 1 (present and passes). Weights are 0.5 or 1.0.\n| #  | Dimension | Weight |\n|----|-----------|--------|\n| 1  | `density_score` field present and >= 0.80 | 1.0 |\n| 2  | Each section has explicit field definitions (name, type, required/optional) | 1.0 |\n| 3  | At least one complete example output present for the declared format | 1.0 |\n| 4  | Injection point matches the use case (system for persistent structure, user for per-request) | 1.0 |\n| 5  | Format is parseable by a downstream consumer without ambiguity | 1.0 |\n| 6  | Tags list includes `response-format` | 0.5 |\n| 7  | Scope note confirms this is for LLM generation time, not post-generation validation | 1.0 |\n| 8  | Field constraints documented (max length, allowed values, nullable) | 1.0 |\n| 9  | Fallback format described for partial or truncated LLM output | 0.5 |\n| 10 | Format is compatible with the target model's context window and output style | 0.5 |\n| 11 | `tldr` is <= 160 characters | 0.5 |\n**Formula**: `final_score = (sum of score_i * weight_i) / (sum of weight_i) * 10`\nWeight total: 9.0. Each dimension contributes proportionally. Score range: 0.0 to 10.0.\n## Actions\n| Tier | Threshold | Action |\n|------|-----------|--------|\n| GOLDEN | >= 9.5 | Publish to pool as golden; use as reference for format design |\n| PUBLISH | >= 8.0 | Publish to pool; mark production-ready |\n| REVIEW | >= 7.0 | Return to author with scored dimension feedback; one revision cycle allowed |\n| REJECT | < 7.0 | Block from pool; full rewrite required before re-evaluation |\n## Bypass\n| Field | Value |\n|-------|-------|\n| condition | Format is under active negotiation with a new model provider whose output style is not yet finalized |\n| approver | Domain lead must approve in writing before bypass takes effect |\n| audit_log | Record in `records/pool/audits/bypasses.md` with date, approver, and reason |\n| expiry | 14 days from bypass grant; format must reach full compliance once model behavior is confirmed |",
+      "frontmatter": {
+        "id": "p11_qg_response_format",
+        "kind": "quality_gate",
+        "pillar": "P11",
+        "title": "Gate: Response Format",
+        "version": "1.0.0",
+        "created": "2026-03-27",
+        "updated": "2026-03-27",
+        "author": "builder",
+        "domain": "response_format",
+        "quality": 9.0,
+        "density_score": 0.85,
+        "tags": [
+          "quality-gate",
+          "response-format",
+          "p11",
+          "output-structure",
+          "llm"
+        ],
+        "tldr": "Quality gate for LLM output structure specs: verifies format type, injection point, section definitions, and downstream parseability."
+      },
+      "source_file": "bld_quality_gate_response_format.md",
+      "bytes": 3545
+    },
+    "schema_response_format": {
+      "content": "# Schema: response_format\n## Artifact Identity\n| Field | Value |\n|-------|-------|\n| Pillar | `P05` |\n| Type | literal `response_format` |\n| Machine format | `yaml` (frontmatter yaml + md body) |\n| Naming | `p05_rf_{format_slug}.yaml` |\n| Max bytes | 4096 |\n## Required Fields (12)\n| Field | Type | Required | Default | Notes |\n|-------|------|----------|---------|-------|\n| id | string, matches `^p05_rf_[a-z][a-z0-9_]+$` | YES | \u2014 | id == filename stem |\n| kind | literal \"response_format\" | YES | \u2014 | Type discriminator |\n| pillar | literal \"P05\" | YES | \u2014 | Pillar assignment |\n| version | semver string | YES | \"1.0.0\" | Versioning |\n| created | date YYYY-MM-DD | YES | \u2014 | Creation date |\n| updated | date YYYY-MM-DD | YES | \u2014 | Last update date |\n| author | string | YES | \u2014 | Producer identity |\n| format_type | enum: json, yaml, markdown, text, structured | YES | \u2014 | Output format; compliance: JSON 95% > YAML 90% > tables 88% > lists 85% > prose 70% |\n| domain | string | YES | \u2014 | Domain this format covers |\n| quality | null | YES | null | Never self-score |\n| tags | list[string], len >= 3 | YES | \u2014 | Must include \"response-format\" |\n| tldr | string <= 160ch | YES | \u2014 | Dense summary |\n## Recommended Fields (4)\n| Field | Type | Required | Notes |\n|-------|------|----------|-------|\n| target_kind | string | REC | Artifact kind that uses this format |\n| example_output | string | REC | Concrete example of expected output |\n| variable_syntax | enum: mustache, bracket | REC | tier1={{MUSTACHE}} for primary, tier2=[BRACKET] for secondary |\n| sections | list[string] | REC | Ordered output section names |\n## ID Pattern\n```\n^p05_rf_[a-z][a-z0-9_]+$\n```\nRule: id MUST equal filename stem.\n## Variable Syntax\n| Tier | Syntax | Use |\n|------|--------|-----|\n| Primary (required vars) | `{{VARIABLE_NAME}}` | Mustache \u2014 always typed in variables table |\n| Secondary (optional vars) | `[VARIABLE_NAME]` | Bracket \u2014 clearly marked optional |\nEvery variable MUST have type + example in the variables table. Untyped variables are forbidden.\n## Body Structure (4 sections)\n1. `## Format Specification` \u2014 what output structure this defines, format_type, compliance notes\n2. `## Variables Table` \u2014 all variables with name, type, constraints, required/optional, example\n3. `## Template Body` \u2014 the actual template with placeholders showing expected shape\n4. `## Example Output` \u2014 complete filled example demonstrating correct output\n## Compliance Note\nFormat preference hierarchy (by LLM compliance rate):\n`JSON (95%) > YAML (90%) > Markdown tables (88%) > Numbered lists (85%) > Prose (70%)`\nChoose format_type based on consumer: machine = json, config = yaml, human = markdown.\n## Constraints\n| Constraint | Value |\n|-----------|-------|\n| max_bytes | 4096 (body only) |\n| naming | p05_rf_{format_slug}.yaml |\n| id == filename stem | enforced |\n| format_type | one of: json, yaml, markdown, text, structured |\n| quality | ALWAYS null |\n| sections | 4-7 per format (consolidate if >7) |\n| variables | every variable typed + exampled |",
+      "frontmatter": {
+        "kind": "schema",
+        "id": "bld_schema_response_format",
+        "pillar": "P06",
+        "llm_function": "CONSTRAIN",
+        "purpose": "Formal schema \u2014 SINGLE SOURCE OF TRUTH for response_format",
+        "pattern": "TEMPLATE derives from this. CONFIG restricts this.",
+        "version": "2.0.0",
+        "quality": 9.1,
+        "title": "Schema Response Format",
+        "author": "n03_builder",
+        "tags": [
+          "response_format",
+          "builder",
+          "examples"
+        ],
+        "tldr": "Golden and anti-examples for response format construction, demonstrating ideal structure and common pitfalls.",
+        "domain": "response format construction",
+        "created": "2026-04-07",
+        "updated": "2026-04-07",
+        "density_score": 0.9
+      },
+      "source_file": "bld_schema_response_format.md",
+      "bytes": 3072
+    },
+    "system_prompt_response_format": {
+      "content": "# System Prompt: response-format-builder\n## Identity\nYou are **response-format-builder** \u2014 a specialist in LLM output structure design. You produce `response_format` artifacts: instructions injected into the LLM prompt (system or user message) that tell the model how to structure its output. You design the shape of the response before generation; you do not validate, parse, or transform it after.\nYou know JSON mode constraints, YAML frontmatter patterns, markdown section ordering, CSV column layout, and plaintext structure. You know when to inject in the system prompt vs the user message. You know how to write section definitions that an LLM can follow unambiguously. Your example_output is always a concrete rendered specimen, never a description of what the output should be.\n## Rules\n**ALWAYS:**\n1. ALWAYS specify `format_type` (one of: `json`, `yaml`, `markdown`, `csv`, `plaintext`)\n2. ALWAYS specify `injection_point` (one of: `system_prompt`, `user_message`)\n3. ALWAYS include `example_output` showing the exact expected shape with realistic values\n4. ALWAYS define sections in the order the LLM should produce them\n5. ALWAYS write instructions the LLM can follow \u2014 concrete, unambiguous, positively stated\n6. ALWAYS set `quality: null` \u2014 the validator assigns the score, not the builder\n7. ALWAYS specify required vs optional fields when format_type is `json` or `yaml`\n**NEVER:**\n8. NEVER include system-side validation logic \u2014 that belongs in `validation_schema` (P06)\n9. NEVER include parsing or extraction logic \u2014 that belongs in `parser` (P05)\n10. NEVER include transformation logic \u2014 that belongs in `formatter` (P05)\n11. NEVER assume the system enforces the format \u2014 `response_format` is LLM guidance, not a runtime contract\n12. NEVER use vague instructions (\"write it naturally\", \"be concise\") \u2014 every structural directive must be deterministic\n13. NEVER exceed 4096 bytes body \u2014 response_format instructions must be dense, not verbose\n14. NEVER omit `example_output` \u2014 without a specimen, LLMs interpret structure instructions inconsistently\n## Output Format\nDeliver a `response_format` artifact with this structure:\n1. YAML frontmatter: `id`, `kind: response_format`, `pillar`, `format_type`, `injection_point`, `fields_count`, `quality: null`\n2. `## Format Instructions` \u2014 numbered directives the LLM follows during generation\n3. `## Fields` \u2014 table: field_name | type | required | description (for json/yaml formats)\n4. `## Example Output` \u2014 fenced block showing a complete, realistic rendered specimen\n5. `## Injection Snippet` \u2014 the exact text to paste into the target prompt position\n## Constraints\n- Boundary: I produce `response_format` artifacts (P05) only\n- I do NOT produce: `validation_schema` (P06, post-generation contracts), `parser` (P05, extraction), `formatter` (P05, transformation)\n- `injection_point: system_prompt` is preferred for format instructions that apply to all turns\n- `injection_point: user_message` is used when format varies per request",
+      "frontmatter": {
+        "id": "p03_sp_response_format_builder",
+        "kind": "system_prompt",
+        "pillar": "P03",
+        "version": "1.0.0",
+        "created": "2026-03-27",
+        "updated": "2026-03-27",
+        "author": "builder",
+        "title": "System Prompt: response-format-builder",
+        "target_agent": "response-format-builder",
+        "persona": "Output structure designer who tells the LLM how to format its response, not how to validate it",
+        "rules_count": 14,
+        "tone": "technical",
+        "knowledge_boundary": "JSON mode, YAML frontmatter, markdown section design, CSV layout, injection_point selection (system_prompt vs user_message), format_type enumeration, example_output composition | Does NOT: write post-generation validation schemas (P06), build parsers or extractors (P05), build formatters that transform existing output (P05)",
+        "domain": "response_format",
+        "quality": 9.0,
+        "tags": [
+          "system_prompt",
+          "response_format",
+          "P05"
+        ],
+        "safety_level": "standard",
+        "tools_listed": false,
+        "output_format_type": "markdown",
+        "tldr": "Designs LLM output structure instructions injected at prompt time; guidance only, no validation or extraction logic",
+        "density_score": 0.85
+      },
+      "source_file": "bld_system_prompt_response_format.md",
+      "bytes": 3023
+    },
+    "tools_response_format": {
+      "content": "# Tools: response-format-builder\n## Production Tools\n| Tool | Purpose | When | Status |\n|------|---------|------|--------|\n| brain_query [MCP] | Search existing response_formats | Phase 1 (check duplicates) | CONDITIONAL |\n| validate_artifact.py | Validate any artifact kind | Phase 3 | [PLANNED] |\n| cex_forge.py | Generate artifact from seeds | Alternative compose | [PLANNED] |\n## Data Sources\n| Source | Path/URL | Data |\n|--------|----------|------|\n| CEX Schema | P05_output/_schema.yaml | Field definitions for response_format |\n| CEX Examples | P05_output/examples/ | Existing format artifacts |\n| Target schemas | {lp_dir}/_schema.yaml | Output requirements of target kinds |\n| SEED_BANK | archetypes/SEED_BANK.yaml | P05_output_schema seeds |\n| OpenAI docs | https://platform.openai.com/docs | Structured output patterns |\n| Anthropic docs | https://docs.anthropic.com | Tool use output patterns |\n## Tool Permissions\n\n| Category | Tools | Status |\n|----------|-------|--------|\n| ALLOWED | Read, Write, Edit, Bash, Glob, Grep | Explicitly permitted |\n| DENIED | (none) | Explicitly blocked |\n| EFFECTIVE | Bash, Edit, Glob, Grep, Read, Write | ALLOWED minus DENIED |\n\n## Interim Validation\nManually check each QUALITY_GATES.md gate against produced artifact.\n1. [ ] YAML parses\n2. [ ] id matches p05_rf_ prefix\n3. [ ] sections_count >= 1\n4. [ ] format_type in valid enum\n5. [ ] injection_point in valid enum\n6. [ ] Example Output section present\n\n## Metadata\n\n```yaml\nid: bld_tools_response_format\npipeline: 8F\nscoring: hybrid_3_layer\n```\n\n```bash\npython _tools/cex_score.py --apply bld-tools-response-format.md\n```",
+      "frontmatter": {
+        "kind": "tools",
+        "id": "bld_tools_response_format",
+        "pillar": "P04",
+        "llm_function": "CALL",
+        "purpose": "Tools available for response_format production",
+        "quality": 9.1,
+        "title": "Tools Response Format",
+        "version": "1.0.0",
+        "author": "n03_builder",
+        "tags": [
+          "response_format",
+          "builder",
+          "examples"
+        ],
+        "tldr": "Golden and anti-examples for response format construction, demonstrating ideal structure and common pitfalls.",
+        "domain": "response format construction",
+        "created": "2026-04-07",
+        "updated": "2026-04-07",
+        "density_score": 0.9
+      },
+      "source_file": "bld_tools_response_format.md",
+      "bytes": 1626
+    },
+    "shared_skill_guided_decisions": {
+      "content": "# Skill: Guided Decision Protocol (GDP)\n\n## The Principle\n\n> **When the LLM decides, the output is generic.**\n> **When the USER decides, the output is theirs.**\n>\n> Every assumption you avoid is a revision the user won't need.\n\nThe GDP is as mandatory as the 8F pipeline.\n8F controls HOW artifacts are built.\nGDP controls WHO decides WHAT goes in them.\n\n---\n\n## When to Trigger a Decision Point\n\nA **Decision Point (DP)** activates when:\n\n1. **Multiple valid paths exist** \u2014 archetype A vs B, layout X vs Y, tone formal vs casual\n2. **Subjective preference matters** \u2014 colors, names, voice, positioning, pricing\n3. **Trade-offs are real** \u2014 speed vs quality, cost vs features, niche vs broad\n4. **The output will be hard to undo** \u2014 brand identity, architecture, deployment target\n5. **The user has context you don't** \u2014 their market, their competitors, their gut feeling\n\nA DP does NOT activate for:\n- Mechanical/deterministic steps (compile, validate, format)\n- Technical correctness (schema compliance, syntax)\n- CEX internal operations (8F pipeline, signaling, indexing)\n\n---\n\n## The DP Format\n\nEvery Decision Point follows this exact structure:\n\n```\n\u2501\u2501\u2501 DP {N}/{TOTAL}: {TOPIC} \u2501\u2501\u2501\n\n{1-2 sentence context explaining WHY this matters}\n\n  1. {OPTION_EMOJI} {Option Name} \u2014 \"{short description}\"\n     \u2192 Best if: {when to pick this}\n\n  2. {OPTION_EMOJI} {Option Name} \u2014 \"{short description}\"\n     \u2192 Best if: {when to pick this}\n\n  3. {OPTION_EMOJI} {Option Name} \u2014 \"{short description}\"\n     \u2192 Best if: {when to pick this}\n\n  \u2605 Recommended: {N} ({reason from context/signals})\n\n  [Type number, combine like \"1+3\", or describe your own]: \u258c\n```\n\n### Rules for Options\n\n| Rule | Detail |\n|------|--------|\n| **3-5 options max** | More than 5 overwhelms. Less than 2 isn't a choice. |\n| **Always have a \u2605 Recommended** | The user can always just hit Enter. Never leave them stuck. |\n| **Recommendation has a reason** | Not \"I think\" \u2014 cite a signal: \"based on your 'educational' description\" |\n| **\"Describe your own\" is always valid** | Options are suggestions, not walls. Freetext is always accepted. |\n| **Emoji per option** | Visual scanning. One emoji per option, consistent within a DP. |\n| **\"Best if\" clause** | Helps the user self-select without jargon. |\n| **Numbering is stable** | Once presented, option 2 is always option 2. Don't renumber. |\n\n---\n\n## DP Density by Domain\n\nNot every interaction needs the same amount of DPs.\n\n| Domain | DP Density | Why |\n|--------|-----------|-----|\n| **Brand Identity** (N06) | HIGH (8-12 DPs) | Every choice is subjective and permanent |\n| **Content/Copy** (N02) | MEDIUM (4-6 DPs) | Tone, layout, CTA style matter |\n| **Research** (N01) | LOW-MEDIUM (2-4 DPs) | Scope, depth, focus area |\n| **Knowledge** (N04) | LOW (1-3 DPs) | Structure, detail level |\n| **Operations** (N05) | LOW (1-3 DPs) | Platform, scaling, cost trade-offs |\n| **Build** (N03) | MINIMAL (0-2 DPs) | Mostly mechanical, schema-driven |\n| **Orchestration** (N07) | MEDIUM (3-5 DPs) | Priority, sequencing, resource allocation |\n\n---\n\n## DP Chaining\n\nDPs can depend on each other. Later DPs adapt based on earlier choices.\n\n```\nDP 1: Archetype \u2192 User picks \"Sage\"\nDP 2: Voice Tone \u2192 Options CHANGE because Sage implies authority+warmth\nDP 3: Color Palette \u2192 Options CHANGE because Sage palette is different from Rebel\n```\n\nWhen a previous DP narrows the space, say so:\n\n```\n\u2501\u2501\u2501 DP 3/8: Color Palette \u2501\u2501\u2501\n\nBased on your Sage archetype, these palettes work best:\n\n  1. \ud83d\udd35 Deep Trust \u2014 navy #1B365D + gold #C5A55A + cream #FAF3E0\n     \u2192 Best if: you want gravitas and authority\n\n  2. \ud83d\udfe2 Growth Wisdom \u2014 forest #2D5016 + sage #B2BEB5 + white #FAFAFA\n     \u2192 Best if: you want natural, approachable wisdom\n\n  3. \ud83d\udfe3 Modern Scholar \u2014 indigo #4B0082 + silver #C0C0C0 + white #FFFFFF\n     \u2192 Best if: you want contemporary, tech-forward wisdom\n\n  \u2605 Recommended: 1 (Deep Trust) \u2014 matches your \"professor but accessible\" description\n\n  [Type number, adjust colors, or describe your vibe]: \u258c\n```\n\n---\n\n## Handling User Responses\n\n| Response | Action |\n|----------|--------|\n| `2` | Select option 2. Confirm briefly: \"Got it \u2014 Going with Growth Wisdom \ud83d\udfe2\" |\n| `1+3` | Combine elements. \"Mixing Deep Trust base with Modern Scholar accents \u2014 nice.\" |\n| `the first one but more green` | Adapt option 1 with modification. Show the modified version. |\n| Free text: `\"I want something techy and dark\"` | Map to closest option or create costm. \"Sounds like a Dark Mode Scholar vibe. Let me propose...\" |\n| `?` or confused | Explain the trade-offs in simpler language. No jargon. |\n| Empty / Enter / \"whatever\" / \"you choose\" | Apply \u2605 Recommended. \"Going with the recommended option: Deep Trust \ud83d\udd35\" |\n| `skip` | Apply \u2605 Recommended and note it can be changed later. |\n\n---\n\n## DP Timing in Workflows\n\nDPs are NOT dumped all at once. They are **interleaved with progress**.\n\n```\nBAD:  \"Here are 12 questions. Answer all.\"\nGOOD: \"Let me ask you a few things as we go.\"\n```\n\nPattern:\n1. Ask DP 1-2 (identity basics)\n2. **Show progress**: \"Great. I already know enough to suggest...\"\n3. Ask DP 3-4 (personality, voice)\n4. **Show preview**: \"Here's what your brand is looking like so far...\"\n5. Ask DP 5-6 (audience, positioning)\n6. **Show preview**: \"Almost there. Your brand summary so far...\"\n7. Ask DP 7-8 (visual, monetization)\n8. **Final confirmation**: \"Here's the complete picture. Change anything?\"\n\n---\n\n## Preview After Every 2-3 DPs\n\nAfter every 2-3 decisions, show a running summary:\n\n```\n\u2501\u2501\u2501 Your Brand So Far \u2501\u2501\u2501\n  Name:       Acme Academy\n  Archetype:  \ud83e\uddd9 Sage\n  Voice:      Authoritative but warm (4,3,2,4,4)\n  Colors:     Deep Trust palette (#1B365D, #C5A55A, #FAF3E0)\n  Audience:   Career-switchers who want to become devs\n  \u2501\u2501\u2501 {5/8 decisions made} \u2501\u2501\u2501\n```\n\nThis gives the user confidence that their choices are being heard,\nand a chance to go back: \"Actually, can I change the colors?\"\n\n---\n\n## The Final Confirmation DP\n\nEvery GDP sequence ends with a FULL REVIEW:\n\n```\n\u2501\u2501\u2501 Final Review \u2501\u2501\u2501\n\nHere's everything we've decided together:\n\n  Brand:         Acme Academy\n  Tagline:       \"Code your future\"\n  Archetype:     \ud83e\uddd9 Sage\n  Voice:         Authoritative, warm, low humor, high trust\n  Colors:        #1B365D, #C5A55A, #FAF3E0\n  Font:          Inter (headers) + Source Serif (body)\n  Audience:      Career-switchers, 25-40, frustrated with current job\n  Transformation: From \"stuck in a dead-end job\" to \"confident junior dev\"\n  Category:      Online Education / Tech\n  Pricing:       Subscription (R$ 47/mo basic, R$ 97/mo pro)\n\n  \u2705 Confirm all \u2192 I'll generate brand_config.yaml\n  \u270f\ufe0f Change something \u2192 tell me which item\n  \ud83d\udd04 Start over \u2192 we'll redo the whole flow\n\n  [Confirm, change, or start over]: \u258c\n```\n\n---\n\n## Anti-Patterns (BLOCKED)\n\n| Anti-Pattern | Why It's Bad | Do This Instead |\n|-------------|-------------|-----------------|\n| \"I'll assume a Sage archetype\" | User might be a Rebel. You just poisoned the brand. | Present 3-4 options with \u2605 recommendation |\n| Dumping 10 questions at once | Overwhelming. User gives shallow answers. | 2-3 at a time, preview between rounds |\n| \"Which of these 12 archetypes...\" | Too many choices = paralysis | Pre-filter to 3-4 based on signals |\n| No recommendation on any DP | User with no branding knowledge is stuck | ALWAYS have \u2605 Recommended with reason |\n| Skipping final review | User can't see the full picture | ALWAYS show complete summary before executing |\n| Assuming after 1 vague answer | \"Casual\" doesn't mean Jester. | Probe: \"Casual like a friend or casual like a comedian?\" |\n| Using branding jargon | \"5D voice calibration\" means nothing to a bakery owner | \"How should your brand sound?\" |\n\n---\n\n## Part 2: The Autonomy Side\n\nGDP is half the picture. The other half is what happens AFTER decisions are made.\n\n### The Decision Manifest\n\nEvery GDP session produces a **Decision Manifest**:\n`.cex/runtime/decisions/decision_manifest.yaml`\n\nThis file contains:\n- Every DP answer (choice + reason + alternatives shown)\n- Brand config pointer (`.cex/brand/brand_config.yaml`)\n- Per-nucleus specific decisions\n- Constraints (language, currency, quality floor)\n- Flags for auto-filled decisions (user skipped \u2192 \u2605 Recommended applied)\n\n### The Two-Phase Pattern\n\n```\nPHASE 1 \u2014 Co-pilot (GDP active, user present)\n  N07 identifies mission\n  N07 identifies which decisions are subjective\n  N07 presents DPs to user (this skill)\n  N07 writes decision_manifest.yaml\n  N07 locks manifest (status: locked)\n\nPHASE 2 \u2014 Autonomous (GDP off, nuclei dispatched)\n  N07 dispatches via grid/solo\n  Handoff includes: \"Read .cex/runtime/decisions/decision_manifest.yaml\"\n  Each nucleus reads manifest ONCE at start\n  Each nucleus executes 8F with manifest context\n  ZERO questions to user\n  Commit \u2192 signal \u2192 done\n```\n\n### How Nuclei Read the Manifest\n\nAt the start of any dispatched task, a nucleus:\n\n1. Checks if manifest exists: `.cex/runtime/decisions/decision_manifest.yaml`\n2. If YES \u2192 reads it, extracts relevant decisions (global + per_nucleus.{self})\n3. If NO \u2192 falls back to brand_config.yaml only (minimal context)\n4. Uses decisions as CONSTRAINTS for 8F, not as suggestions\n\nA nucleus NEVER overrides a manifest decision.\nA nucleus NEVER re-asks a question the manifest already answered.\n\n### Edge Cases During Autonomous Execution\n\n| Situation | What the nucleus does |\n|-----------|----------------------|\n| Manifest covers the decision | Use it. No question. |\n| Manifest doesn't cover this specific case | Apply \u2605 Recommended. Add to `auto_filled` list. |\n| Decision seems wrong in context | Execute it anyway. Flag in output: \"\u26a0\ufe0f Manifest says X, but Y might be better \u2014 review recommended.\" |\n| Manifest is corrupt/missing | Fall back to brand_config.yaml. If that's also missing, use sensible defaults + flag everything. |\n\n### Why This Works\n\nThe plat\u00f4 between autonomy and collaboration:\n\n```\n100% User decides \u2190\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500 GDP \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2192 100% LLM decides\n         \u2191                    \u2191                       \u2191\n     Slow, tedious      THE SWEET SPOT          Generic, misaligned\n     but perfect        User decides WHAT        Fast but wrong\n                        LLM decides HOW\n```\n\n- **User decides WHAT**: brand name, tone, audience, positioning, colors, pricing model\n- **LLM decides HOW**: file structure, frontmatter, 8F pipeline, compilation, signaling\n- **Manifest is the contract**: locks the WHAT so the HOW can run free",
+      "frontmatter": {
+        "id": "skill_guided_decisions",
+        "kind": "instruction",
+        "scope": "shared",
+        "purpose": "Teach all builders and nuclei to present structured decision points instead of assuming. The Co-pilot Protocol.",
+        "version": "1.0.0",
+        "created": "2026-03-31",
+        "author": "n07_orchestrator",
+        "quality": 9.1,
+        "tags": [
+          "skill",
+          "shared",
+          "copilot",
+          "guided-decisions",
+          "UX",
+          "interaction"
+        ],
+        "tldr": "When a decision affects the output, STOP and present numbered options with recommendations. Never assume what the user wants. This is as mandatory as 8F.",
+        "density_score": 0.95
+      },
+      "source_file": "skill_guided_decisions.md",
+      "bytes": 10647
+    },
+    "shared_skill_memory_update": {
+      "content": "# Skill: Memory Update After Execution\n\n## When to Use\nAfter EVERY build session, before signaling complete.\n\n## What to Record\nOne structured observation per session. Focus on **reusable patterns**, not obvious facts.\n\n### Good Observations\n1. \"Splitting handler into validate+process+respond reduced errors 40%\"\n2. \"Builders with >3 tools need explicit tool-selection criteria\"\n3. \"ISO files >4KB overflow small model context \u2014 split into sections\"\n\n### Bad Observations (DO NOT record)\n1. \"The schema was followed\" (obvious)\n2. \"The file was saved\" (mechanical)\n3. \"Quality was high\" (vague)\n\n## How to Record\n\n```bash\npython _tools/cex_memory_update.py \\\n  --builder <your-builder-id> \\\n  --type feedback \\\n  --observation \"what you learned\" \\\n  --pattern \"generalizable rule\" \\\n  --evidence \"data that supports it\" \\\n  --confidence 0.8 \\\n  --outcome SUCCESS\n```\n\n## Observation Types\n| Type | Decay | When to Use |\n|------|-------|-------------|\n| user | 0.02/day | User preference or style |\n| feedback | 0.00 | Quality feedback (NEVER decays) |\n| project | 0.05/day | Project-specific context |\n| reference | 0.03/day | External knowledge or docs |\n\n## Rules\n1. ONE observation per session (quality > quantity)\n2. Confidence 0.0-1.0 (be honest, 0.6-0.8 is normal)\n3. Pattern must be ACTIONABLE (someone else can apply it)\n4. Evidence must be MEASURABLE when possible\n5. If nothing was learned, don't force an observation\n\n## Properties\n\n| Property | Value |\n|----------|-------|\n| Kind | `instruction` |\n| Pillar |  |\n| Domain | CEX system |\n| Pipeline | 8F (F1-F8) |\n| Scorer | cex_score.py |\n| Compiler | cex_compile.py |\n| Retriever | cex_retriever.py |\n| Quality target | 9.0+ |\n| Density target | 0.85+ |",
+      "frontmatter": {
+        "id": "skill_memory_update",
+        "kind": "instruction",
+        "scope": "shared",
+        "purpose": "Teach builders to reflect and record learnings after execution",
+        "quality": 9.0,
+        "title": "Skill Memory Update",
+        "version": "1.0.0",
+        "author": "n03_builder",
+        "tags": [
+          "artifact",
+          "builder",
+          "examples"
+        ],
+        "tldr": "Golden and anti-examples for CEX system, demonstrating ideal structure and common pitfalls.",
+        "domain": "CEX system",
+        "created": "2026-04-07",
+        "updated": "2026-04-07",
+        "density_score": 0.9
+      },
+      "source_file": "skill_memory_update.md",
+      "bytes": 1718
+    },
+    "shared_skill_verification_protocol": {
+      "content": "# Verification Protocol (Shared Skill)\n\nAfter producing an artifact (F6 PRODUCE), invoke this protocol before F7 GOVERN.\n\n## When to Verify\n1. 3+ sections modified in the artifact\n2. Artifact kind is core (system_prompt, skill, guardrail, agent, agent_card)\n3. Quality target >= 8.5\n4. Retry attempt (previous quality gate failure)\n\n## Verification Steps\n\n1. **Schema compliance**: Does the artifact match its kind's SCHEMA.md?\n   Check: every required frontmatter field present and correctly typed.\n\n2. **Boundary compliance**: Does the artifact stay within its kind's boundary?\n   Check: no system_prompt content in a skill, no task instructions in identity.\n\n3. **Naming compliance**: Does the ID match the naming convention from kinds_meta.json?\n   Check: `p{NN}_{prefix}_{slug}` format.\n\n4. **Cross-reference check**: Do all referenced artifacts/builders/kinds exist?\n   Check: grep for references, verify targets are real paths.\n\n5. **Adversarial probe**: Try to break the artifact:\n   - Feed it an edge-case input (empty, malformed, contradictory)\n   - Check if the rules are enforceable or aspirational\n   - Verify the output format is machine-parseable\n\n## Output\nFor each check: PASS with evidence or FAIL with Expected vs Actual.\nFinal: VERDICT: PASS | FAIL | PARTIAL\n\n## Artifact Metadata\n\n```yaml\nkind: skill\npillar: P04\npipeline: 8F\nscoring: hybrid_3_layer\ncompilation: cex_compile\n```\n\n## Artifact Properties\n\n| Property | Value |\n|----------|-------|\n| Kind | `skill` |\n| Pillar | P04 |\n| Domain | verification |\n| Pipeline | 8F (F1-F8) |\n| Scorer | `cex_score.py` |\n| Compiler | `cex_compile.py` |\n| Retriever | `cex_retriever.py` |\n| Quality target | 9.0+ |\n| Density target | 0.85+ |",
+      "frontmatter": {
+        "id": "shared_skill_verification_protocol",
+        "kind": "skill",
+        "pillar": "P04",
+        "version": "1.0.0",
+        "created": "2026-04-05",
+        "updated": "2026-04-05",
+        "author": "n07-orchestrator",
+        "title": "Shared Skill: Verification Protocol for All Builders",
+        "domain": "verification",
+        "quality": 9.1,
+        "tags": [
+          "shared",
+          "skill",
+          "verification",
+          "adversarial",
+          "all-builders"
+        ],
+        "source_insight": "OpenClaude verificationAgent.ts -- adapted as shared builder skill",
+        "tldr": "Every builder can invoke adversarial verification on its output before publishing",
+        "density_score": 0.86
+      },
+      "source_file": "skill_verification_protocol.md",
+      "bytes": 1702
+    }
+  },
+  "total_tokens": 13070,
+  "total_bytes": 52281
+}

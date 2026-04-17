@@ -29,6 +29,7 @@ observation_types: [user, feedback, project, reference]
 quality: 9.2
 title: "Memory Dag"
 density_score: 0.90
+llm_function: INJECT
 ---
 ## Summary
 Task dependency graphs fail silently when cycles exist or edge targets are undefined. Omitting topological order forces every consumer to recompute it - and different consumers may compute different valid orders, causing non-deterministic execution. Three-pass construction (nodes, edges, computed order) produces a self-contained, verifiable spec.

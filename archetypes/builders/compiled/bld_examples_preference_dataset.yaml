@@ -1,0 +1,65 @@
+kind: examples
+id: bld_examples_preference_dataset
+pillar: P07
+llm_function: GOVERN
+purpose: Golden and anti-examples of preference_dataset artifacts
+pattern: few-shot learning -- LLM reads these before producing
+quality: null
+title: Examples Preference Dataset
+version: 1.0.0
+author: n03_builder
+tags:
+- preference_dataset
+- builder
+- examples
+tldr: Golden and anti-examples for preference_dataset construction.
+domain: preference dataset construction
+created: '2026-04-17'
+updated: '2026-04-17'
+density_score: 0.9
+golden_example: "INPUT: \"Create preference dataset for instruction-following DPO training, human-rated, CEX nucleus tasks\"\
+  \nOUTPUT:\nid: p11_pd_cex_instruction_dpo\nkind: preference_dataset\npillar: P11\nversion: \"1.0.0\"\ncreated: \"2026-04-17\"\
+  \nupdated: \"2026-04-17\"\nauthor: \"builder_agent\"\ntraining_objective: dpo\npreference_signal: \"Response follows all\
+  \ stated constraints and produces correct artifact with proper frontmatter\"\nannotation_method: human\nrater_count: 3\n\
+  agreement_rate: 0.85\ndomain: \"instruction-following\"\nlanguage: \"en\"\ntotal_pairs: 500\nsplit_ratios:\n  train: 0.80\n\
+  \  eval: 0.10\n  test: 0.10\nsource: \"CEX nucleus task logs, human annotation by N07 team\"\nquality: null\ntags: [preference_dataset,\
+  \ instruction_following, dpo, P11]\ntldr: \"500 DPO pairs for CEX instruction-following: chosen=correct artifact+frontmatter,\
+  \ rejected=incomplete/malformed response.\""
+overview: DPO training dataset for CEX nucleus instruction-following tasks. Pairs drawn from real nucleus task logs, annotated
+  by 3 raters with 85% agreement threshold.
+annotation_protocol: 'Chosen when response: produces complete artifact with valid frontmatter, follows 8F pipeline, includes
+  required sections.
+
+  Rejected when response: omits frontmatter, misses required sections, contradicts instructions.
+
+
+  | Chosen When | Rejected When |
+
+  |-------------|--------------|
+
+  | Complete frontmatter with all required fields | Missing or malformed frontmatter |
+
+  | All required sections present | Truncated output missing sections |
+
+  | Follows 8F pipeline trace | No 8F trace shown |'
+quality_filters: '| Filter | Threshold | Action |
+
+  |--------|-----------|--------|
+
+  | agreement_rate | >= 0.85 | Exclude pairs with < 3 rater agreement |
+
+  | confidence | >= 0.80 | Flag and review borderline pairs |'
+pairs_excerpt: "pairs:\n  - id: \"cex_dpo_001\"\n    prompt: \"Build a knowledge_card for RAG chunking strategies\"\n    chosen:\
+  \ \"---\\nid: p01_kc_rag_chunking\\nkind: knowledge_card\\npillar: P01\\nquality: null\\n---\\n## Overview\\n...\"\n   \
+  \ rejected: \"Here is a knowledge card about RAG chunking: RAG uses chunks to...\"\n    metadata:\n      rater_count: 3\n\
+  \      agreement: 0.92\n      confidence: 0.90\n      tags: [instruction_following, frontmatter, knowledge_card]\n\nWHY\
+  \ THIS IS GOLDEN:\n- quality: null (H05 pass)\n- id matches `^p11_pd_` pattern (H02 pass)\n- kind: preference_dataset (H04\
+  \ pass)\n- preference_signal declared (H06 pass)\n- agreement_rate: 0.85 (H07 pass)\n- rater_count: 3 (H08 pass)\n- pairs\
+  \ array present with example (H09 pass)\n- training_objective: dpo (H03 pass)"
+anti_example: "INPUT: \"Create preference dataset for my chatbot\"\nBAD OUTPUT:\nid: my-chatbot-prefs\nkind: preferences\n\
+  quality: 9.2\nsignal: \"better\"\npairs:\n  - good: \"Hello! How can I help?\"\n    bad: \"Hi\"\nFAILURES:\n1. id: \"my-chatbot-prefs\"\
+  \ has hyphens and no `p11_pd_` prefix -> H02 FAIL\n2. kind: \"preferences\" not \"preference_dataset\" -> H04 FAIL\n3. quality:\
+  \ 9.2 (not null) -> H05 FAIL\n4. preference_signal: \"better\" is too vague -> H06 SOFT FAIL\n5. Missing required fields:\
+  \ training_objective, annotation_method, rater_count, agreement_rate -> H06 FAIL\n6. Pairs use wrong schema: \"good/bad\"\
+  \ not \"chosen/rejected\" -> structure FAIL\n7. No frontmatter pillar, version, created, updated, author, tags, tldr ->\
+  \ H06 FAIL"

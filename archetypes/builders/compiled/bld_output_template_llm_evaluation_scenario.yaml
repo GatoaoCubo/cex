@@ -1,0 +1,19 @@
+kind: output_template
+id: bld_output_template_llm_evaluation_scenario
+pillar: P05
+llm_function: PRODUCE
+purpose: Template with vars for llm_evaluation_scenario production
+quality: null
+title: Output Template LLM Evaluation Scenario
+version: 1.0.0
+author: n06_wave7
+tags:
+- llm_evaluation_scenario
+- builder
+- output_template
+- helm
+tldr: Template with vars for llm_evaluation_scenario production
+domain: llm_evaluation_scenario construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85

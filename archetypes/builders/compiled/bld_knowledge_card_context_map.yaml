@@ -1,0 +1,114 @@
+id: bld_knowledge_card_context_map
+kind: knowledge_card
+pillar: P01
+nucleus: n00
+domain: kind-taxonomy
+quality: null
+title: Context Map Builder -- Knowledge Card
+llm_function: INJECT
+tags:
+- context_map
+- ddd
+- bounded-context
+- P08
+- strategic-design
+tldr: 'context_map: DDD BC relationship diagram with upstream/downstream, ACL, OHS, and conformist patterns. NOT bounded_context
+  nor component_map.'
+created: '2026-04-17'
+updated: '2026-04-17'
+version: 1.0.0
+author: n03_builder
+density_score: 0.9
+definition: A `context_map` is a Domain-Driven Design (DDD) artifact that documents the relationships and integration patterns
+  between bounded contexts (BCs) in a system. It captures upstream/downstream coupling, translation mechanisms (ACL, OHS),
+  team coordination patterns, and the strategic design intent connecting different domain models. Introduced by Eric Evans
+  in "Domain-Driven Design" (2003) as a mandatory strategic design exercise for complex multi-team systems.
+origin:
+- 'Eric Evans -- "Domain-Driven Design: Tackling Complexity in the Heart of Software" (2003)'
+- 'Vaughn Vernon -- "Implementing Domain-Driven Design" (2013): expanded pattern catalog'
+- 'Alberto Brandolini -- EventStorming (2014): complements context mapping with event flow'
+- 'CEX pillar: P08 (Architecture) -- strategic design documentation'
+ddd_integration_patterns: '| Pattern | Symbol | Meaning | Team Coupling |
+
+  |---------|--------|---------|---------------|
+
+  | Anti-Corruption Layer | ACL | Downstream protects itself from upstream model | Low |
+
+  | Open Host Service | OHS | Upstream exposes formal protocol/API | Low |
+
+  | Conformist | CF | Downstream adopts upstream model as-is | High |
+
+  | Partnership | P | Two teams co-evolve their models together | Very High |
+
+  | Shared Kernel | SK | Two contexts share a subset of the domain model | Very High |
+
+  | Customer/Supplier | C/S | Downstream negotiates requirements with upstream | Medium |
+
+  | Published Language | PL | Formal, documented shared language | Low |'
+key_fields: '| Field | Type | Required | Description |
+
+  |-------|------|----------|-------------|
+
+  | id | string | YES | p08_cm_{system_slug} |
+
+  | system_name | string | YES | Name of system being mapped |
+
+  | contexts_count | integer | YES | Number of BCs |
+
+  | contexts | list | YES | BC names and owners |
+
+  | relationships | list | YES | Directed pairs with patterns |
+
+  | pattern | enum | YES | ACL/OHS/Conformist/Partnership/Shared_Kernel |
+
+  | integration_type | enum | REC | sync/async/batch |'
+when_to_use: '| Scenario | Use context_map? |
+
+  |----------|-----------------|
+
+  | Multiple teams with separate domain models | YES |
+
+  | Service integration architecture review | YES |
+
+  | Identifying anti-corruption needs between legacy and new | YES |
+
+  | Onboarding new developers to system relationships | YES |
+
+  | Single bounded context documentation | NO -- use bounded_context |
+
+  | Service deployment/infrastructure diagram | NO -- use component_map |
+
+  | Code-level class/module dependencies | NO -- use diagram |'
+anti_patterns: '| Anti-Pattern | Why It Fails | Fix |
+
+  |-------------|-------------|-----|
+
+  | All relationships labeled "integration" | Pattern-less -- no coupling insight | Use ACL/OHS/Conformist etc. |
+
+  | Conformist everywhere | Upstream model lock-in -- painful coupling | Introduce ACL where models diverge |
+
+  | Missing integration_type | Async vs sync matters for fault tolerance | Always declare sync/async/batch |
+
+  | Conflating with component_map | Mixes strategic (DDD) with tactical (deployment) | Separate artifacts for each concern
+  |'
+decision_tree: "Documenting relationships between two BCs?\n  YES: context_map\n    Is downstream adopting upstream model\
+  \ directly?\n      YES -> Conformist (HIGH coupling warning)\n      NO:\n        Does upstream expose formal API/protocol?\n\
+  \          YES -> OHS (or OHS+Published Language)\n          NO:\n            Is downstream building translation layer?\n\
+  \              YES -> ACL (recommended for legacy integration)\n              NO -> Partnership (requires team alignment)"
+cross_framework_map: '| Framework/Method | Equivalent | Notes |
+
+  |-----------------|-----------|-------|
+
+  | Evans DDD (2003) | context_map | Origin -- the canonical reference |
+
+  | Team Topologies | Stream-aligned + platform team map | Organizational lens on same relationships |
+
+  | C4 Model (Context diagram) | context_map | C4 L1 = context map at system level |
+
+  | Microservices Architecture | Service dependency map | Technical implementation of DDD context map |
+
+  | Event-driven architecture | Event flow map | Complements context map with event routing |'
+integration_graph: "context_map (P08)\n  |\n  |-- documents --> bounded_context (P08) -- each node in the map\n  |-- influences\
+  \ --> agent (P02) -- agents respect context boundaries\n  |-- informs --> interface (P08) -- ACL/OHS become formal interfaces\n\
+  \  |-- guides --> workflow (P12) -- workflows cross context boundaries\n  |-- feeds --> decision_record (P08) -- architectural\
+  \ decisions"

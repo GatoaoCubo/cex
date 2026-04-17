@@ -1,0 +1,41 @@
+kind: tools
+id: bld_tools_trajectory_eval
+pillar: P04
+llm_function: CALL
+purpose: Tools available for trajectory_eval production
+quality: null
+title: Tools Trajectory Eval
+version: 1.1.0
+author: n01_hybrid_review4
+tags:
+- trajectory_eval
+- builder
+- tools
+tldr: Real CEX tools for producing trajectory_eval artifacts.
+domain: trajectory_eval construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+production_tools: '| Tool | Purpose | When |
+
+  |------|---------|------|
+
+  | cex_compile.py | Compile .md artifact to .yaml | After saving |
+
+  | cex_score.py | Apply peer-review quality score | Post-production |
+
+  | cex_retriever.py | Find similar trajectory_eval artifacts for reference | Before composing |
+
+  | cex_doctor.py | Validate artifact health (frontmatter, kind, pillar) | During validation |'
+validation_tools: '| Tool | Purpose | When |
+
+  |------|---------|------|
+
+  | cex_wave_validator.py | Structural checks: domain keywords, required fields | Pre-commit |
+
+  | cex_hygiene.py | Artifact CRUD hygiene: naming, orphan detection | Post-production |'
+external_references:
+- 'AgentBench: github.com/THUDM/AgentBench (step-level LLM agent evaluation framework)'
+- 'WebArena: github.com/web-arena-x/webarena (web navigation trajectory benchmark)'
+- 'SWE-bench: github.com/princeton-nlp/SWE-bench (software engineering agent benchmark)'
+- 'tau-bench: github.com/sierra-research/tau-bench (tool-agent-user trajectory evaluation)'

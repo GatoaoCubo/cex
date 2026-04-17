@@ -1,0 +1,40 @@
+id: kc_audit_log
+kind: knowledge_card
+title: Immutable Audit Log Configuration for SOC2 Type II Compliance
+version: 1.0.0
+quality: null
+pillar: P01
+density_score: 1.0
+overview: This knowledge card defines the immutable audit log configuration required for SOC2 Type II compliance. The audit
+  log system must maintain an unalterable record of all system activities to demonstrate control effectiveness.
+key_requirements:
+- 'Immutability: Logs must be write-once, read-many (WORM) to prevent tampering'
+- 'Retention: Maintain logs for 7 years with automatic archival'
+- 'Access Control: Restrict access to audit logs to authorized compliance officers'
+- 'Timestamping: Use blockchain-based timestamping for audit integrity'
+- 'Encryption: AES-256 encryption for at-rest data protection'
+- 'Monitoring: Real-time alerting for unauthorized access attempts'
+technical_implementation: "audit_log:\n  storage:\n    type: blockchain\n    provider: aws\n    encryption: AES-256\n  retention:\n\
+  \    period: 7y\n    archive: true\n  access:\n    roles:\n      - compliance_officer\n      - auditor\n    restrictions:\n\
+  \      - no_delete\n      - no_modify\n  monitoring:\n    alerts:\n      unauthorized_access: true\n      tamper_attempt:\
+  \ true"
+compliance_mapping: '| Control | Audit Log Requirement |
+
+  |--------|-----------------------|
+
+  | 1.1.1 | Immutable log storage |
+
+  | 1.1.2 | 7-year retention period |
+
+  | 1.2.1 | Role-based access control |
+
+  | 1.3.1 | Tamper-proof timestamping |
+
+  | 1.4.1 | Data encryption at rest |
+
+  | 2.1.1 | Real-time access monitoring |'
+best_practices:
+- Use hardware security modules (HSMs) for key management
+- Implement multi-factor authentication for audit log access
+- Conduct quarterly penetration testing of the logging infrastructure
+- Maintain separate audit log environments from production systems

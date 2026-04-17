@@ -1,6 +1,6 @@
 ---
 pillar: P00
-id: component-map-builder-output-template
+id: bld_output_template_component_map
 kind: output_template
 parent: component-map-builder
 version: 1.0.0
@@ -13,8 +13,8 @@ domain: "component map construction"
 created: "2026-04-07"
 updated: "2026-04-07"
 density_score: 0.90
+llm_function: PRODUCE
 ---
-
 # Output Template — component-map-builder
 NOTE: component_map uses YAML format (machine_format: yaml). Output extension is `.yaml`.
 ```yaml

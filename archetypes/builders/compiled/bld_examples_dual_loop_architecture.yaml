@@ -1,0 +1,33 @@
+kind: examples
+id: bld_examples_dual_loop_architecture
+pillar: P07
+llm_function: GOVERN
+purpose: Golden and anti-examples of dual_loop_architecture artifacts
+quality: null
+title: Examples Dual Loop Architecture
+version: 1.0.0
+author: wave1_builder_gen
+tags:
+- dual_loop_architecture
+- builder
+- examples
+tldr: Golden and anti-examples of dual_loop_architecture artifacts
+domain: dual_loop_architecture construction
+created: '2026-04-13'
+updated: '2026-04-13'
+density_score: 0.85
+golden_example: "This ISO applies to the dual loop pattern, coordinating an outer orchestrator with one or more inner worker\
+  \ loops.\ntitle: Autonomous Vehicle Control System\nkind: dual_loop_architecture\ndescription: >-\n  Outer loop handles\
+  \ route planning; inner loop manages real-time steering/throttle.\n  Feedback ensures alignment between high-level goals\
+  \ and low-level execution.\nouter_loop:\n  - name: Path Planner\n    inputs: [destination, map, traffic data]\n    outputs:\
+  \ [desired trajectory]\ninner_loop:\n  - name: Vehicle Controller\n    inputs: [trajectory, sensor data]\n    outputs: [steering,\
+  \ throttle, brake]\nfeedback:\n  - from: Vehicle Controller\n    to: Path Planner\n    metric: deviation from trajectory"
+anti_example_1_linear_workflow_misinterpretation: "title: Misinterpreted Workflow\nkind: dual_loop_architecture\ndescription:\
+  \ >-\n  \"Outer loop\" processes data sequentially, then passes to \"inner loop\" for final output.\nouter_loop:\n  - name:\
+  \ Data Processor\n    inputs: [raw data]\n    outputs: [processed data]\ninner_loop:\n  - name: Finalizer\n    inputs: [processed\
+  \ data]\n    outputs: [result]"
+why_it_fails: Blurs separation between strategic planning (outer loop) and tactical execution (inner loop). Loses modularity
+  and fails to enable independent optimization of each control layer, making system adaptation and debugging difficult.
+anti_example_2_merged_loop_architecture: "title: Monolithic Controller\nkind: dual_loop_architecture\ndescription: >-\n  Single\
+  \ agent handles both planning and execution without clear separation.\nagent:\n  - name: Unified Controller\n    inputs:\
+  \ [goals, sensor data]\n    outputs: [actions]"

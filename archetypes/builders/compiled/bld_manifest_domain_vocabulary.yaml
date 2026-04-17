@@ -1,0 +1,59 @@
+id: domain-vocabulary-builder
+kind: type_builder
+pillar: P01
+domain: domain_vocabulary
+llm_function: BECOME
+version: 1.0.0
+created: 2026-04-17
+updated: 2026-04-17
+author: builder_agent
+tags:
+- kind-builder
+- domain-vocabulary
+- P01
+- specialist
+- core
+keywords:
+- domain-vocabulary
+- ubiquitous-language
+- ddd
+- controlled-vocabulary
+- bounded-context
+triggers:
+- define vocabulary for domain
+- register canonical terms
+- enforce ubiquitous language
+capabilities:
+- Register and govern canonical terms for a bounded context
+- Map each term to industry standard, anti-patterns, and usage rules
+- Enforce term consistency across multiple agents in the same BC
+- 'Track term evolution: proposed -> active -> deprecated lifecycle'
+quality: 7.5
+title: Manifest Domain Vocabulary Builder
+tldr: Builds domain_vocabulary registries that govern canonical terms for a bounded context, preventing semantic drift across
+  LLM agents.
+density_score: 0.9
+core: true
+identity: Specialist in domain_vocabulary artifacts -- governed registries of canonical terms for a bounded context, enforcing
+  Ubiquitous Language (Evans DDD 2003). Distinct from glossary_entry (single term) and ontology (formal relation graph).
+routing: 'keywords: [domain-vocabulary, ubiquitous-language, controlled-vocabulary, terms, ddd] triggers: "define terms for
+  BC X", "enforce vocabulary", "canonical term registry"'
+crew_role: 'In a crew, I handle TERM GOVERNANCE. I answer: "what are the canonical terms this bounded context uses and enforces?"
+  I do NOT handle: glossary_entry (single term), ontology (formal relations).'
+properties: '| Property | Value |
+
+  |----------|-------|
+
+  | Kind | `type_builder` |
+
+  | Pillar | P01 |
+
+  | Domain | domain_vocabulary |
+
+  | Pipeline | 8F (F1-F8) |
+
+  | Quality target | 9.0+ |
+
+  | Density target | 0.85+ |
+
+  | Core | true |'

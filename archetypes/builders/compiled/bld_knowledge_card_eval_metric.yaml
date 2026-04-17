@@ -1,0 +1,61 @@
+kind: knowledge_card
+id: bld_knowledge_card_eval_metric
+pillar: P01
+llm_function: INJECT
+purpose: Domain knowledge for eval_metric production
+quality: null
+title: Knowledge Card Eval Metric
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- eval_metric
+- builder
+- knowledge_card
+tldr: Domain knowledge for eval_metric production
+domain: eval_metric construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+domain_overview: Evaluation metrics are quantitative measures used to assess the performance of machine learning models, algorithms,
+  or systems. They provide objective criteria for comparing alternatives, validating claims, and ensuring alignment with business
+  or technical goals. In fields like NLP, computer vision, and recommendation systems, metrics such as accuracy, F1-score,
+  or mean average precision (mAP) are critical for model iteration and deployment. Properly defined metrics ensure reproducibility,
+  fairness, and transparency in AI systems, while poor definitions can lead to misleading conclusions or biased outcomes.
+key_concepts: '| Concept | Definition | Source |
+
+  |---|---|---|
+
+  | Accuracy | Proportion of correct predictions over total predictions | scikit-learn |
+
+  | Precision | Ratio of true positives to total predicted positives | Powers, 2020 |
+
+  | Recall | Ratio of true positives to total actual positives | Fawcett, 2006 |
+
+  | F1-Score | Harmonic mean of precision and recall | Hriberšek et al., 2019 |
+
+  | AUC-ROC | Area under the receiver operating characteristic curve | Hand, 2009 |
+
+  | BLEU | Metric for evaluating machine translation quality | Papineni et al., 2002 |
+
+  | ROUGE | Metric for assessing text summarization | Lin, 2004 |
+
+  | Mean Average Precision (mAP) | Average precision across all classes in object detection | Everingham et al., 2010 |'
+industry_standards:
+- MLPerf (benchmarking metrics for ML systems)
+- ISO/IEC 23050:2021 (AI ethics and evaluation)
+- RFC 7850 (metrics for network protocols)
+- scikit-learn (standard implementations for ML metrics)
+- GLUE Benchmark (NLP evaluation suite)
+- Powers, 2020 (evaluation metrics for imbalanced datasets)
+common_patterns:
+- Use task-specific metrics (e.g., BLEU for NLP, mAP for object detection).
+- Balance precision and recall via F1-score or AUC-ROC.
+- Normalize metrics for fair comparison across scales.
+- Incorporate domain-specific constraints (e.g., fairness, bias).
+- Track calibration (e.g., Brier score for probabilistic models).
+pitfalls:
+- Overfitting to a single metric, ignoring broader system goals.
+- Using accuracy in imbalanced datasets (e.g., medical diagnosis).
+- Misinterpreting statistical significance vs. practical impact.
+- Neglecting metric alignment with stakeholder needs.
+- Failing to account for data distribution shifts during evaluation.

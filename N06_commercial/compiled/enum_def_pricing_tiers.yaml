@@ -1,0 +1,73 @@
+id: enum_def_pricing_tiers
+kind: enum_def
+pillar: P06
+nucleus: n06
+title: Enum Definition -- Pricing Tier Taxonomy
+version: 1.0.0
+quality: null
+tags:
+- pricing
+- tiers
+- enum
+- commercial
+- saas
+- packaging
+density_score: 1.0
+purpose: Canonical enumeration of all pricing tiers, their feature gates, limits, and Stripe Price ID mapping. Every part
+  of the commercial system references this enum -- pricing pages, checkout flow, entity_memory, churn logic, expansion plays.
+tier_enum: "enum PlanTier {\n  FREE       = \"free\",\n  STARTER    = \"starter\",\n  PRO        = \"pro\",\n  ENTERPRISE\
+  \ = \"enterprise\",\n  CUSTOM     = \"custom\"\n}"
+tier_definitions: ''
+free: "tier: free\nstripe_price_id: null\nmonthly_usd: 0\nannual_usd: 0\nseats: 1\nfeature_flags:\n  ai_builds_per_month:\
+  \ 10\n  nuclei_access: [n04]\n  brand_config: false\n  api_access: false\n  priority_support: false\n  sso: false\n  audit_log:\
+  \ false\n  custom_integrations: false\nupgrade_path: starter\nconversion_trigger: \"builds exhausted OR brand_config requested\"\
+  \nchurn_risk: N/A"
+starter: "tier: starter\nstripe_price_id_monthly: price_starter_monthly\nstripe_price_id_annual: price_starter_annual\nmonthly_usd:\
+  \ 49\nannual_usd: 470          # ~20% discount = 2 months free\nannual_discount_pct: 20\nseats: 1\nfeature_flags:\n  ai_builds_per_month:\
+  \ 100\n  nuclei_access: [n01, n02, n04, n06]\n  brand_config: true\n  api_access: false\n  priority_support: false\n  sso:\
+  \ false\n  audit_log: false\n  custom_integrations: false\nupgrade_trigger: \"100 builds exhausted OR api_access needed\
+  \ OR seats > 1\"\nchurn_risk_signals: [\"<5 builds/month used\", \"no brand_config set\", \"login <2x/month\"]"
+pro: "tier: pro\nstripe_price_id_monthly: price_pro_monthly\nstripe_price_id_annual: price_pro_annual\nmonthly_usd: 149\n\
+  annual_usd: 1430         # ~20% discount\nannual_discount_pct: 20\nseats: 5\nfeature_flags:\n  ai_builds_per_month: unlimited\n\
+  \  nuclei_access: [n01, n02, n03, n04, n05, n06]\n  brand_config: true\n  api_access: true\n  api_rate_limit_rpm: 60\n \
+  \ priority_support: true\n  sso: false\n  audit_log: true\n  custom_integrations: false\nupgrade_trigger: \"seats > 5 OR\
+  \ SSO required OR custom SLA needed\"\nchurn_risk_signals: [\"api_calls < 100/month\", \"only 1 nucleus used\"]\nexpansion_target:\
+  \ enterprise"
+enterprise: "tier: enterprise\nstripe_price_id: negotiated\nmonthly_usd_base: 500          # floor, actual varies\nseats:\
+  \ unlimited\nfeature_flags:\n  ai_builds_per_month: unlimited\n  nuclei_access: [n01, n02, n03, n04, n05, n06, n07]\n  brand_config:\
+  \ true\n  api_access: true\n  api_rate_limit_rpm: 600\n  priority_support: true\n  dedicated_success_manager: true\n  sso:\
+  \ true\n  audit_log: true\n  custom_integrations: true\n  sla_uptime_pct: 99.9\n  data_residency: true\nqualification: \"\
+  requires sales touch, >25 seats OR compliance requirements OR custom SLA\""
+custom: 'tier: custom
+
+  stripe_price_id: bespoke
+
+  description: "White-label, OEM, reseller, or usage-based pricing arrangements"
+
+  qualification: "legal review required"'
+feature_gate_logic: "def is_feature_enabled(customer_tier: str, feature: str) -> bool:\n    tier_order = [\"free\", \"starter\"\
+  , \"pro\", \"enterprise\", \"custom\"]\n    feature_min_tier = {\n        \"brand_config\": \"starter\",\n        \"api_access\"\
+  : \"pro\",\n        \"n03_access\": \"pro\",\n        \"n05_access\": \"pro\",\n        \"n07_access\": \"enterprise\",\n\
+  \        \"sso\": \"enterprise\",\n        \"audit_log\": \"pro\",\n        \"dedicated_csm\": \"enterprise\",\n       \
+  \ \"custom_integrations\": \"enterprise\",\n    }\n    min_tier = feature_min_tier.get(feature, \"free\")\n    return tier_order.index(customer_tier)\
+  \ >= tier_order.index(min_tier)"
+upgrade_path_matrix: "FREE -> STARTER -> PRO -> ENTERPRISE\n          ^                   |\n          |                 \
+  \  v\n          +--- downgrade ------+\n                (retention play)"
+pricing_psychology_notes: '| Principle | Application |
+
+  |-----------|-------------|
+
+  | Good/Better/Best | FREE anchors value; PRO is hero; ENTERPRISE is ceiling |
+
+  | Annual discount | 20% off = 2 months free framing (psychologically stronger than "20% off") |
+
+  | Seat-based expansion | PRO 5 seats triggers natural expansion to Enterprise as team grows |
+
+  | Feature gating | Gate API (dev workflow must-have) at PRO to drive conversions |
+
+  | Trial-to-paid | FREE has hard limits (10 builds) to create urgency without free-rider problem |'
+related_artifacts:
+- '`input_schema_checkout.md` -- checkout flow references `plan_tier` enum'
+- '`api_reference_stripe.md` -- maps tier to `stripe_price_id_*`'
+- '`subscription_tier_n06.md` -- detailed revenue architecture per tier'
+- '`churn_prevention_playbook_n06.md` -- uses `churn_risk_signals` per tier'

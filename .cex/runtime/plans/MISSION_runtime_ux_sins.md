@@ -76,7 +76,7 @@ Intent do User → N07 Ira (filtra, roteia, exige qualidade)
 
 | Task | What | Output |
 |------|------|--------|
-| T01 | Create `.cex/config/nucleus_sins.yaml` | Sin mapping: nucleus→pecado→virtude→cor→lente→prompt_injection |
+| T01 | Create `.cex/P09_config/nucleus_sins.yaml` | Sin mapping: nucleus→pecado→virtude→cor→lente→prompt_injection |
 | T02 | Update `cex_boot_gen.py` | Read sins.yaml, inject sin banner + lente in PS1 boot scripts |
 | T03 | Complete P06 Theme | Create `_tools/cex_theme.py` — read sins.yaml, output color schemes for any target (PS, ANSI, HTML, CSS) |
 | T04 | Regenerate all boot scripts | `python _tools/cex_boot_gen.py` with sin-aware UX |
@@ -106,8 +106,8 @@ Intent do User → N07 Ira (filtra, roteia, exige qualidade)
 
 | Task | Nucleus | What | Output |
 |------|---------|------|--------|
-| T09 | N03 | Update 7 agent identity files | `N0X_*/agents/agent_*.md` — add sin section with lente description |
-| T10 | N03 | Update 7 nucleus system prompts | `N0X_*/prompts/system_prompt_*.md` — inject sin as operational rule |
+| T09 | N03 | Update 7 agent identity files | `N0X_*/P02_model/agent_*.md` — add sin section with lente description |
+| T10 | N03 | Update 7 nucleus system prompts | `N0X_*/P03_prompt/system_prompt_*.md` — inject sin as operational rule |
 | T11 | N02 | Create sin visual identity | 7 sin cards — name, color, icon (ASCII), tagline, operational rules |
 | T12 | N03 | End-to-end validation | Dispatch test grid, verify sin banners appear, colors correct, lenses in prompts |
 
@@ -134,7 +134,7 @@ Wave 3: N03 + N02 parallel (N03=agents+prompts, N02=visual identity)
 
 ## Acceptance Criteria
 
-1. `.cex/config/nucleus_sins.yaml` exists with 7 complete entries
+1. `.cex/P09_config/nucleus_sins.yaml` exists with 7 complete entries
 2. `_tools/cex_theme.py` outputs color schemes for PS/ANSI/HTML/CSS
 3. `_tools/cex_provider_discovery.py --status` reports all providers
 4. All 6 boot/*.ps1 show sin banner + lente on launch

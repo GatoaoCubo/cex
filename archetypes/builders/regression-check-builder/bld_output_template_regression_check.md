@@ -49,30 +49,30 @@ cadence: {{on_pr|on_deploy|daily|on_demand}}
 scope: "{{which_prompt_model_or_pipeline}}"
 ```
 ## Overview
-{{what_system_this_check_governs_1_to_2_sentences}}
-{{who_owns_it_and_when_it_runs}}
+`{{what_system_this_check_governs_1_to_2_sentences}}`
+`{{who_owns_it_and_when_it_runs}}`
 ## Baseline
 **baseline_ref**: `{{experiment_id_or_version_tag}}`
-{{what_this_baseline_represents}}
-{{when_it_was_captured_and_conditions}}
+`{{what_this_baseline_represents}}`
+`{{when_it_was_captured_and_conditions}}`
 
-**Update policy**: {{when_to_rotate_baseline}}
+**Update policy**: `{{when_to_rotate_baseline}}`
 ## Metrics
-### {{metric_name_1}}
-1. **Definition**: {{what_this_metric_measures}}
-2. **Method**: {{how_it_is_measured_in_tool}}
-3. **Threshold**: {{threshold_value}} {{percent|absolute}} ({{higher|lower}} is better)
+### `{{metric_name_1}}`
+1. **Definition**: `{{what_this_metric_measures}}`
+2. **Method**: `{{how_it_is_measured_in_tool}}`
+3. **Threshold**: `{{threshold_value}}` {{percent|absolute}} ({{higher|lower}} is better)
 4. **Direction**: {{increase|decrease}} signals regression
-### {{metric_name_2}}
-1. **Definition**: {{what_this_metric_measures}}
-2. **Method**: {{how_it_is_measured_in_tool}}
-3. **Threshold**: {{threshold_value}} {{percent|absolute}} ({{higher|lower}} is better)
+### `{{metric_name_2}}`
+1. **Definition**: `{{what_this_metric_measures}}`
+2. **Method**: `{{how_it_is_measured_in_tool}}`
+3. **Threshold**: `{{threshold_value}}` {{percent|absolute}} ({{higher|lower}} is better)
 4. **Direction**: {{increase|decrease}} signals regression
 ## Failure Protocol
 1. **fail_action**: {{block|warn|log}}
-2. **Notify**: {{who_gets_notified}}
-3. **Remediation**: {{steps_to_investigate_and_fix}}
-4. **Escalation**: {{if_not_resolved_in_X_time}}
+2. **Notify**: `{{who_gets_notified}}`
+3. **Remediation**: `{{steps_to_investigate_and_fix}}`
+4. **Escalation**: `{{if_not_resolved_in_X_time}}`
 
 ## Properties
 

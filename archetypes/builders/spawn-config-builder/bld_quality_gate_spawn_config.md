@@ -16,8 +16,8 @@ tags:
   - orchestration
   - P12
 tldr: "Validates agent_group spawn configurations for mode, CLI flags, model pairing, and runtime safety."
+llm_function: GOVERN
 ---
-
 ## Definition
 A spawn config defines how a agent_group process is launched: execution mode (solo, grid, or continuous), CLI flags passed to the runtime, the model driving the agent_group, and how prompts and recovery are handled. This gate ensures every spawn config is safe to execute without human intervention and unambiguous to the launch runtime.
 ## HARD Gates

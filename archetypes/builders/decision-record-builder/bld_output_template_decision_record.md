@@ -57,46 +57,46 @@ date_decided: "{{YYYY-MM-DD}}"
   Do NOT state the decision here — only the situation.
 }}
 ## Options Considered
-### Option A: {{option_a_name}}
-{{brief description of option A}}
+### Option A: `{{option_a_name}}`
+`{{brief description of option A}}`
 Pros:
-1. {{pro_1}}
-2. {{pro_2}}
+1. `{{pro_1}}`
+2. `{{pro_2}}`
 Cons:
-1. {{con_1}}
-2. {{con_2}}
-### Option B: {{option_b_name}}
-{{brief description of option B}}
+1. `{{con_1}}`
+2. `{{con_2}}`
+### Option B: `{{option_b_name}}`
+`{{brief description of option B}}`
 Pros:
-1. {{pro_1}}
-2. {{pro_2}}
+1. `{{pro_1}}`
+2. `{{pro_2}}`
 Cons:
-1. {{con_1}}
-2. {{con_2}}
-### Option C: {{option_c_name}} (if applicable)
-{{brief description of option C}}
+1. `{{con_1}}`
+2. `{{con_2}}`
+### Option C: `{{option_c_name}}` (if applicable)
+`{{brief description of option C}}`
 Pros:
-- {{pro_1}}
+- `{{pro_1}}`
 
 Cons:
-- {{con_1}}
+- `{{con_1}}`
 ## Decision
 {{
   State the chosen option clearly in the first sentence.
-  Example: "We will use Option B: {{option_b_name}}."
+  Example: "We will use Option B: `{{option_b_name}}`."
 
   Follow with the primary rationale in 2-4 sentences.
   Explain why this option was preferred over the alternatives.
 }}
 ## Consequences
 **Positive:**
-1. {{what_becomes_easier_or_better}}
-2. {{capability_or_property_gained}}
+1. `{{what_becomes_easier_or_better}}`
+2. `{{capability_or_property_gained}}`
 **Negative:**
-1. {{what_becomes_harder_or_constrained}}
-2. {{technical_debt_or_risk_introduced}}
+1. `{{what_becomes_harder_or_constrained}}`
+2. `{{technical_debt_or_risk_introduced}}`
 **Neutral:**
-- {{change_in_process_or_tooling_without_clear_valence}}
+- `{{change_in_process_or_tooling_without_clear_valence}}`
 
 ## Properties
 

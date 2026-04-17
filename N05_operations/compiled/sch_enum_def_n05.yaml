@@ -1,0 +1,134 @@
+id: sch_enum_def_n05
+kind: enum_def
+pillar: P06
+nucleus: n05
+title: Release Gate Enum
+version: 1.0
+quality: null
+tags:
+- schema
+- enum
+- operations
+- release
+- gating
+density_score: 1.0
+purpose: '| Field | Value |
+
+  |---|---|
+
+  | Intent | Define the finite release gate states reused by N05 review, CI, deploy, and rollback flows. |
+
+  | Scope | Build pipelines, smoke checks, security scans, deploy approvals, post-deploy verification. |
+
+  | Gating Wrath Lens | Every value must force a clear operational branch. No vague "maybe" states. |
+
+  | Default Posture | Fail closed. If evidence is missing, the state is not promotable. |
+
+  | Reuse Rule | Referenced by schemas, validators, runtime rules, and incident reports. |'
+schema: '| Property | Type | Required | Rule | Rationale |
+
+  |---|---|---|---|---|
+
+  | name | string | yes | `release_gate_state` | Stable reusable enum name. |
+
+  | value_type | string | yes | `string` | Predictable interop across YAML, JSON, and markdown references. |
+
+  | closed_set | boolean | yes | `true` | Prevents ad hoc status inflation during incidents. |
+
+  | default_value | string | yes | `blocked` | Unknown evidence must not pass a gate. |
+
+  | ordering | list[string] | yes | strict progression | Makes escalation and dashboard sorting deterministic. |
+
+  | descriptions | map[string,string] | yes | one sentence per value | Operators need exact meaning under stress. |
+
+  | allowed_in_manual_override | list[string] | yes | bounded subset | Human override can only relax within audited limits.
+  |'
+values: '| Value | Meaning | Allowed Transition In | Allowed Transition Out | Operational Action |
+
+  |---|---|---|---|---|
+
+  | blocked | Hard stop due to missing evidence, failed control, or unresolved risk. | initial, failed | review_pending |
+  Hold deploy, open incident, require owner. |
+
+  | review_pending | Evidence exists but human or automated review is still incomplete. | blocked, initial | approved, blocked
+  | Wait for gate owner sign-off. |
+
+  | approved | Required checks passed and deployment may proceed within the current window. | review_pending | deployed, blocked
+  | Permit next stage only while evidence remains fresh. |
+
+  | deployed | Artifact was released and is now under active observation. | approved | observed, rolled_back | Start smoke,
+  telemetry, and rollback timers. |
+
+  | observed | Post-deploy checks passed during the defined soak period. | deployed | retired, blocked | Mark stable release
+  candidate. |
+
+  | rolled_back | Release was reversed because blast radius exceeded tolerance. | deployed, blocked | review_pending | Freeze
+  promotion and require corrective review. |
+
+  | retired | State is closed and immutable for the release cycle. | observed | none | Preserve for audit only. |'
+transition_controls: '| From | To | Gate Condition | Evidence Required | Reject Reason |
+
+  |---|---|---|---|---|
+
+  | blocked | review_pending | incident owner assigned | failing control documented | No owner, no movement. |
+
+  | review_pending | approved | all mandatory checks green | CI, security, smoke, change record | Partial green is still red.
+  |
+
+  | approved | deployed | release window open | deployment ticket + artifact digest | Out-of-window deploys widen blast radius.
+  |
+
+  | deployed | observed | soak timer complete | telemetry, logs, health endpoints | Silent services are not healthy services.
+  |
+
+  | deployed | rolled_back | rollback trigger fired | alert, regression, or policy breach | Delay increases damage. |
+
+  | observed | retired | release review archived | immutable audit package | Missing archive blocks closure. |'
+rationale: '| Design Choice | Why It Exists | Gating Wrath Effect |
+
+  |---|---|---|
+
+  | `blocked` as default | New work starts stopped until proof appears. | Removes wishful promotion. |
+
+  | `review_pending` separate from `approved` | Human review latency is real and must be explicit. | Prevents hidden bypasses.
+  |
+
+  | `deployed` separate from `observed` | Shipping is not validation. | Forces soak discipline. |
+
+  | `rolled_back` as first-class value | Rollback must be visible, not inferred from logs. | Makes failure auditable and actionable.
+  |
+
+  | No `warning` state | Ambiguous values create policy drift. | Every branch becomes enforceable. |
+
+  | Immutable `retired` state | Closed releases should not be rewritten retroactively. | Protects audit integrity. |'
+example: "| Scenario | Input Evidence | Resolved Value | Why |\n|---|---|---|---|\n| Security scan failed on migration branch\
+  \ | CI pass, SAST fail | blocked | A critical control failed. |\n| CI green, QA reviewing smoke logs | checks present, approval\
+  \ absent | review_pending | Evidence exists but gate is not closed. |\n| All checks green, change window open | CI green,\
+  \ approval signed | approved | Promotion can proceed. |\n| Release pushed to production 15 minutes ago | deploy done, soak\
+  \ active | deployed | Observation period has not finished. |\n| No alerts after soak window | telemetry stable, checks green\
+  \ | observed | Release proved stable under monitoring. |\n| Elevated error rate after deploy | health degraded, rollback\
+  \ executed | rolled_back | Blast radius required reversal. |\n\nname: release_gate_state\nvalue_type: string\nclosed_set:\
+  \ true\ndefault_value: blocked\nordering:\n  - blocked\n  - review_pending\n  - approved\n  - deployed\n  - observed\n \
+  \ - rolled_back\n  - retired\ndescriptions:\n  blocked: Hard stop until evidence and owner exist.\n  review_pending: Review\
+  \ underway but not complete.\n  approved: Mandatory controls passed and window is open.\n  deployed: Release is live and\
+  \ under observation.\n  observed: Soak completed without critical regression.\n  rolled_back: Release reversed to contain\
+  \ risk.\n  retired: Release record closed for audit.\nallowed_in_manual_override:\n  - review_pending\n  - approved"
+properties: '| Property | Value |
+
+  |---|---|
+
+  | Kind | `enum_def` |
+
+  | Pillar | `P06` |
+
+  | Nucleus | `n05` |
+
+  | Primary Consumers | `input_schema`, `validator`, `runtime_rule`, `quality_gate` |
+
+  | Failure Mode | Treat unknown value as `blocked` and page owner. |
+
+  | Review Cadence | At every release process change. |
+
+  | Compatibility | YAML, JSON, markdown references. |
+
+  | Sin Lens | Gating Wrath: no soft states, no silent passes, no unaudited promotion. |'

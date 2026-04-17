@@ -25,8 +25,8 @@ dependencies: []
 logging: true
 tldr: Produce a YAML workflow primitive with typed inputs, typed outputs, composition constraints, and guard clauses — under 4096 bytes, one type per file, no full workflow graphs included.
 density_score: 0.86
+llm_function: REASON
 ---
-
 ## Context
 The workflow-primitive-builder produces `workflow_primitive` artifacts — YAML definitions of
 atomic orchestration building blocks. A workflow primitive is the smallest reusable unit of

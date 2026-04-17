@@ -1,0 +1,69 @@
+---
+id: ex-api-client-shopify
+kind: api_client
+pillar: P04
+title: Shopify Admin API Client
+version: 0.1.0
+quality: 8.9
+status: template
+brand_placeholders:
+  - BRAND_SHOPIFY_DOMAIN
+  - BRAND_SHOPIFY_STORE_DOMAIN
+  - BRAND_SHOPIFY_API_VERSION
+  - BRAND_SHOPIFY_ADMIN_TOKEN
+tags: [commerce, template, distillation, shopify, api_client]
+density_score: 1.0
+---
+
+# Shopify Admin API Client
+
+## Purpose
+Typed wrapper over Shopify Admin GraphQL + REST API for pulling the product catalog into Supabase, pushing title/SEO updates back, and triggering per-product sync. Single source of truth for authentication, rate-limiting, and UTF-8 repair.
+
+## When to use
+- Any Supabase edge function that reads from or writes to a Shopify store.
+- Nightly full catalog pull (`fetch-from-shopify`) or on-demand single-product sync (`sync-shopify-product`).
+- Batch SEO title updates (`push-titles-to-shopify`) -- must preserve variant order.
+
+## Interface
+- Inputs: resource (`products | orders | inventory | variants`), operation (`list | get | update | create`), payload (typed by resource).
+- Outputs: `{data, cursor?, rateLimitRemaining}` on success; `{error, retryAfterMs?}` on failure.
+- Side effects: writes to `shopify_sync_log` table; increments `rate_limit_bucket` counter; repairs double-UTF-8 strings (`PortÃ£o` -> `Portão`) on read path only.
+
+## Brand variables used
+- `{{BRAND_SHOPIFY_DOMAIN}}` -- public domain (e.g. `mybrand.com`).
+- `{{BRAND_SHOPIFY_STORE_DOMAIN}}` -- myshopify URL (`brand.myshopify.com`), used for API host.
+- `{{BRAND_SHOPIFY_API_VERSION}}` -- e.g. `2025-01`; pin per release.
+- `{{BRAND_SHOPIFY_ADMIN_TOKEN}}` -- env var name, never the value; read from `Deno.env.get()`.
+
+## Example usage
+```ts
+const client = createShopifyClient({
+  host: `https://{{BRAND_SHOPIFY_STORE_DOMAIN}}/admin/api/{{BRAND_SHOPIFY_API_VERSION}}`,
+  token: Deno.env.get("{{BRAND_SHOPIFY_ADMIN_TOKEN}}")!,
+});
+const { data, cursor } = await client.list("products", { limit: 250, fields: ["id","title","variants"] });
+for (const p of data) await db.upsertProduct(repairUtf8(p));
+if (cursor) queue.enqueue({ cursor }); // pagination
+```
+
+## Rate limiting contract
+Shopify GraphQL uses a leaky bucket (1000 cost points / 50 restore per sec). Client MUST:
+- Track `extensions.cost.throttleStatus.currentlyAvailable` on every response.
+- Back off when `currentlyAvailable < 100`; sleep `(100 - currentlyAvailable) / 50` seconds.
+- Emit metric `shopify.rate_limit.remaining` for observability.
+
+## UTF-8 repair rule
+Strings coming from Shopify that contain `Ã`, `Â`, or sequence `\xc3\x83` are assumed double-encoded. Apply `Buffer.from(s, "latin1").toString("utf8")` before upsert. Never apply on write path.
+
+## Retries
+- Network error: exponential backoff 500ms -> 1s -> 2s -> 4s (max 4 attempts).
+- 429 Too Many Requests: honor `Retry-After` header, else 2s.
+- 5xx: same as network error.
+- 4xx (non-429): fail fast, surface error to caller.
+
+## Related artifacts
+- `ex_webhook_shopify.md` -- inbound webhook handler pair.
+- `ex_oauth_app_config_shopify.md` -- token provisioning.
+- `ex_integration_guide_shopify.md` -- end-to-end wiring.
+- `ex_workflow_multi_marketplace_sync.md` -- orchestrates this client.

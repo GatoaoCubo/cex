@@ -1,0 +1,64 @@
+kind: architecture
+id: bld_architecture_benchmark_suite
+pillar: P08
+llm_function: CONSTRAIN
+purpose: Component map of benchmark_suite -- inventory, dependencies
+quality: null
+title: Architecture Benchmark Suite
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- benchmark_suite
+- builder
+- architecture
+tldr: Component map of benchmark_suite -- inventory, dependencies
+domain: benchmark_suite construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+component_inventory: '| ISO Name             | Role                          | Pillar | Status  |
+
+  |----------------------|-------------------------------|--------|---------|
+
+  | bld_manifest         | Builder identity and routing  | P07    | Active  |
+
+  | bld_instruction      | Step-by-step production guide | P03    | Active  |
+
+  | bld_system_prompt    | Builder persona and rules     | P03    | Active  |
+
+  | bld_schema           | Formal data contract (SSOT)   | P06    | Active  |
+
+  | bld_quality_gate     | HARD/SOFT scoring gates       | P11    | Active  |
+
+  | bld_output_template  | Output skeleton with vars     | P05    | Active  |
+
+  | bld_examples         | Sample input/output pairs     | P07    | Active  |
+
+  | bld_knowledge_card   | Domain knowledge injection    | P01    | Active  |
+
+  | bld_architecture     | ISO inventory and deps        | P08    | Active  |
+
+  | bld_collaboration    | Crew coordination protocol    | P12    | Active  |
+
+  | bld_config           | Runtime configuration         | P09    | Active  |
+
+  | bld_memory           | Learned patterns (memory ISO) | P10    | Active  |
+
+  | bld_tools            | Tool registry for F5 CALL     | P04    | Active  |'
+dependencies: '| From              | To                  | Type         |
+
+  |-------------------|---------------------|--------------|
+
+  | bld_manifest      | bld_config          | Configuration|
+
+  | bld_instruction   | bld_system_prompt   | Data         |
+
+  | bld_quality_gate  | bld_schema          | Validation   |
+
+  | bld_output_template | bld_examples      | Template     |
+
+  | bld_tools         | CI/CD pipeline      | Integration  |'
+architectural_position: benchmark_suite serves as the central orchestrator in P07, standardizing benchmark creation through
+  structured definitions, quality gates, and collaboration frameworks. It ensures consistency across system prompts, schemas,
+  and output formats while enabling adaptability via configurable tools and memory mechanisms, aligning with CEX's focus on
+  rigorous evaluation and reproducible results.

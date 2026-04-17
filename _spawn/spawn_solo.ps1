@@ -4,7 +4,9 @@ param(
     [ValidateSet('n01','n02','n03','n04','n05','n06','n07')]
     [string]$nucleus,
     [string]$task = "",
-    [switch]$interactive
+    [switch]$interactive,
+    [ValidateSet('claude','gemini','codex','ollama','litellm','auto')]
+    [string]$cli = ""   # if empty, read from nucleus_models.yaml
 )
 
 Add-Type @"
@@ -47,21 +49,27 @@ $runtimeDir = "$root\.cex\runtime"
 
 New-Item -ItemType Directory -Force -Path "$runtimeDir\handoffs","$runtimeDir\signals","$runtimeDir\pids" | Out-Null
 
-# -- Read CLI from nucleus_models.yaml (single source of truth) --
-$cli = "claude"  # fallback
-$modelsFile = "$root\.cex\config\nucleus_models.yaml"
-if (Test-Path $modelsFile) {
-    $inNucleus = $false
-    foreach ($line in Get-Content $modelsFile) {
-        if ($line -match "^${nucleus}:") { $inNucleus = $true; continue }
-        if ($inNucleus -and $line -match "^\w" -and $line -notmatch "^\s") { break }
-        if ($inNucleus -and $line -match "^\s+cli:\s*(.+)") {
-            $cli = $matches[1].Trim()
-            break
+# -- CLI selection --
+# If -cli was passed explicitly, honor it (enables `dispatch.sh solo-ollama n04`).
+# Otherwise read from nucleus_models.yaml (single source of truth).
+if (-not $cli) {
+    $cli = "claude"  # fallback
+    $modelsFile = "$root\.cex\config\nucleus_models.yaml"
+    if (Test-Path $modelsFile) {
+        $inNucleus = $false
+        foreach ($line in Get-Content $modelsFile) {
+            if ($line -match "^${nucleus}:") { $inNucleus = $true; continue }
+            if ($inNucleus -and $line -match "^\w" -and $line -notmatch "^\s") { break }
+            if ($inNucleus -and $line -match "^\s+cli:\s*(.+)") {
+                $cli = $matches[1].Trim()
+                break
+            }
         }
     }
+    Write-Output "[$upper] CLI from nucleus_models: $cli"
+} else {
+    Write-Output "[$upper] CLI from -cli arg: $cli"
 }
-Write-Output "[$upper] CLI from nucleus_models: $cli"
 
 # Write handoff if task provided
 if ($task) {
@@ -121,7 +129,9 @@ if (Test-Path $pidFile) {
 }
 
 # Boot script -- PowerShell-only stack (sin-aware UX: colors, sizing, banner)
-$bootPs1 = "$root\boot\$nucleus.ps1"
+# Per-CLI suffix: claude -> n0X.ps1 | gemini -> n0X_gemini.ps1 | ollama -> n0X_ollama.ps1
+$cliSuffix = if ($cli -eq "claude") { "" } else { "_$cli" }
+$bootPs1 = "$root\boot\${nucleus}${cliSuffix}.ps1"
 
 if (Test-Path $bootPs1) {
     Write-Output "[$upper] Boot: PowerShell (sin-aware UX)"
@@ -133,44 +143,19 @@ if (Test-Path $bootPs1) {
     Write-Output "[$upper] ERROR: no boot script at $bootPs1"; exit 1
 }
 
-# Position window in fixed grid cell (aggressive: repeat for 15s to beat Claude resize)
+# Position window in fixed grid cell (retry loop for window handle)
 if ($proc -and $pos) {
     $hwnd = [IntPtr]::Zero
-    # Phase 1: find the window handle (up to 5s)
     for ($i = 0; $i -lt 10; $i++) {
         Start-Sleep -Milliseconds 500
         try { $proc.Refresh() } catch {}
         $hwnd = $proc.MainWindowHandle
         if ($hwnd -ne [IntPtr]::Zero) { break }
     }
-    # Phase 2: force position repeatedly using PID (re-fetch handle each time)
-    # The window handle can go stale when Claude Code replaces the terminal
-    $bgPid = $proc.Id; $bgX = $pos.x; $bgY = $pos.y; $bgW = $cellW; $bgH = $cellH
-    Start-Job -ScriptBlock {
-        param($procId, $x, $y, $w, $hh)
-        Add-Type @"
-using System; using System.Runtime.InteropServices;
-public class W32 { [DllImport("user32.dll")] public static extern bool MoveWindow(IntPtr hWnd, int X, int Y, int W, int H, bool r); }
-"@
-        # Force position 10 times over 20 seconds (every 2s)
-        # Re-fetch handle each time to survive Claude Code window replacement
-        for ($r = 0; $r -lt 10; $r++) {
-            Start-Sleep -Seconds 2
-            try {
-                $p = Get-Process -Id $procId -EA SilentlyContinue
-                if ($p) {
-                    $p.Refresh()
-                    $h = $p.MainWindowHandle
-                    if ($h -ne [IntPtr]::Zero) {
-                        [W32]::MoveWindow($h, $x, $y, $w, $hh, $true) | Out-Null
-                    }
-                }
-            } catch {}
-        }
-    } -ArgumentList @($bgPid, $bgX, $bgY, $bgW, $bgH) | Out-Null
-    # Also do one immediate move if handle is available
     if ($hwnd -ne [IntPtr]::Zero) {
         [Win32]::MoveWindow($hwnd, $pos.x, $pos.y, $cellW, $cellH, $true) | Out-Null
+    } else {
+        Write-Output "[$upper] WARN: no window handle after 5s -- window not positioned"
     }
 }
 

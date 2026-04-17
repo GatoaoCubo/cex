@@ -1,0 +1,72 @@
+kind: schema
+id: bld_schema_safety_policy
+pillar: P06
+llm_function: CONSTRAIN
+purpose: Formal schema -- SINGLE SOURCE OF TRUTH for safety_policy
+quality: null
+title: Schema Safety Policy
+version: 1.0.0
+author: wave1_builder_gen
+tags:
+- safety_policy
+- builder
+- schema
+tldr: Formal schema -- SINGLE SOURCE OF TRUTH for safety_policy
+domain: safety_policy construction
+created: '2026-04-13'
+updated: '2026-04-13'
+density_score: 0.85
+frontmatter_fields: ''
+required: '| Field         | Type       | Required | Default | Notes                              |
+
+  |---------------|------------|----------|---------|------------------------------------|
+
+  | id            | string     | yes      |         | Unique identifier                  |
+
+  | kind          | string     | yes      |         | "safety_policy"                    |
+
+  | pillar        | string     | yes      |         | "P11"                              |
+
+  | title         | string     | yes      |         | Policy name                        |
+
+  | version       | string     | yes      | "1.0.0" | Semantic versioning                |
+
+  | created       | datetime   | yes      |         | ISO 8601                           |
+
+  | updated       | datetime   | yes      |         | ISO 8601                           |
+
+  | author        | string     | yes      |         | Author name                        |
+
+  | domain        | string     | yes      |         | "CEX"                              |
+
+  | quality       | string     | yes      | "draft" | "draft", "review", "approved"      |
+
+  | tags          | list       | yes      | []      | Keywords                           |
+
+  | tldr          | string     | yes      |         | Summary                            |
+
+  | risk_level    | string     | yes      |         | "Low", "Medium", "High", "Critical"|
+
+  | compliance_framework | string | yes |         | Reference standard                 |
+
+  | enforcement_mechanisms | list | yes | []      | Actions for policy enforcement     |'
+recommended: '| Field               | Type   | Notes                          |
+
+  |---------------------|--------|--------------------------------|
+
+  | last_reviewed       | date   | Last review date               |
+
+  | policy_owner        | string | Responsible team/individual    |
+
+  | related_policies    | list   | Linked policy IDs              |
+
+  | audit_frequency     | string | "Quarterly", "Annual", etc.    |'
+id_pattern: ^p11_sp_[a-zA-Z0-9_]+\.md$
+body_structure: "1. Policy Scope\n   Define the policy's applicability and boundaries.\n\n2. Risk Management Framework\n \
+  \  Outline risk identification, assessment, and mitigation strategies.\n\n3. Compliance Requirements\n   Specify mandatory\
+  \ standards, regulations, and internal guidelines.\n\n4. Enforcement Mechanisms\n   Detail procedures for monitoring, reporting,\
+  \ and addressing violations.\n\n5. Incident Response Protocol\n   Describe steps for handling breaches, incidents, or non-compliance.\n\
+  \n6. Review and Update Process\n   Define frequency, triggers, and stakeholders for policy revisions."
+constraints:
+- All required fields must be present and non-empty.
+- Version must follow semantic versioning

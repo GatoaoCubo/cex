@@ -213,9 +213,9 @@ class TestDerivedVariables:
     """Test derived variables including new BRAND_DOMAIN."""
 
     def test_brand_domain_from_logo_url(self):
-        flat = {"BRAND_LOGO_URL": "https://gato3.com.br/logo.png"}
+        flat = {"BRAND_LOGO_URL": "https://brand.example/logo.png"}
         derived = compute_derived(flat)
-        assert derived.get("BRAND_DOMAIN") == "gato3.com.br"
+        assert derived.get("BRAND_DOMAIN") == "brand.example"
 
     def test_brand_domain_from_favicon_url(self):
         flat = {"BRAND_FAVICON_URL": "https://example.com/favicon.ico"}

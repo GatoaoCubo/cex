@@ -1,0 +1,45 @@
+kind: instruction
+id: bld_instruction_llm_evaluation_scenario
+pillar: P03
+llm_function: REASON
+purpose: Step-by-step production process for llm_evaluation_scenario
+quality: null
+title: Instruction LLM Evaluation Scenario
+version: 1.0.0
+author: n06_wave7
+tags:
+- llm_evaluation_scenario
+- builder
+- instruction
+- helm
+tldr: Step-by-step production process for llm_evaluation_scenario
+domain: llm_evaluation_scenario construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+phase_1_research:
+- Identify the capability under evaluation (e.g., commonsense reasoning, medical QA, code generation).
+- Map capability to HELM subject_area taxonomy (knowledge, reasoning, language, code, safety).
+- Survey existing HELM scenarios at `crfm.stanford.edu/helm/latest/` to avoid duplication.
+- 'Identify eval_dataset sources: source corpus, license, task format (MCQ, open-ended, classification).'
+- 'Determine baseline adapter: instruction-following vs. few-shot, context window budget.'
+- Audit IBM Enterprise HELM extensions if domain is finance/legal/climate/cybersecurity.
+phase_2_compose:
+- Reference SCHEMA.md for required fields (scenario_id, subject_area, capability, task_instances).
+- 'Define task_instance schema: input format, expected output format, answer key.'
+- 'Specify few_shot_pool: number of demonstrations (0, 1, 3, 5, 10), selection strategy (random, stratified).'
+- 'Configure adapter parameters: prompt_template reference, max_tokens, stop_sequences, temperature.'
+- 'Map primary metric: accuracy, F1, ROUGE, BLEU, exact_match, calibration_error, efficiency.'
+- 'Define canonicalization rules: normalization function, case sensitivity, punctuation stripping, alias expansion.'
+- Add subject_area and capability tags for HELM leaderboard indexing.
+- 'Estimate token cost per scenario run: num_instances * (prompt_tokens + completion_tokens).'
+- Proofread for schema compliance and HELM naming conventions.
+phase_3_validate:
+- '[ ] scenario_id follows pattern `p07_evs_[subject]_[capability].md`'
+- '[ ] subject_area maps to recognized HELM taxonomy (or IBM extension)'
+- '[ ] capability is specific and testable, not a vague category'
+- '[ ] task_instance format is consistent (all MCQ, all open-ended, not mixed)'
+- '[ ] few_shot_pool size >= max few-shot trials configured in adapter'
+- '[ ] canonicalization rules produce deterministic output (no randomness)'
+- '[ ] metric mapped to HELM metric family with correct aggregation function'
+- '[ ] token budget estimate documented and within model limits'

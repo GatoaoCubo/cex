@@ -1,0 +1,37 @@
+id: ex_workflow_content_factory
+kind: workflow
+pillar: P12
+title: 'Example Workflow: Content Factory'
+version: 1.0.0
+created: 2026-04-16
+updated: 2026-04-16
+author: n02_marketing
+domain: content_factory_pipeline
+quality: null
+brand_placeholders:
+- BRAND_NAME
+- BRAND_VOICE
+- BRAND_AUDIENCE
+- BRAND_CONTENT_THEMES
+- BRAND_DOMAIN
+tags:
+- workflow
+- content-factory
+- editorial
+- n02
+tldr: Multi-stage workflow for planning, drafting, reviewing, publishing, and repurposing branded content.
+density_score: 0.93
+inputs:
+- campaign_goal
+- audience_segment
+- source_material
+- channel
+- publish_deadline
+outputs:
+- approved_copy
+- creative_brief
+- publish_payload
+- feedback_log
+sla:
+- 'Draft turnaround: same day for short-form, two business days for long-form.'
+- 'Revision limit: two rounds before escalation.'

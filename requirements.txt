@@ -2,5 +2,17 @@
 # Install: pip install -r requirements.txt
 # These are needed for ALL cex_*.py tools to work.
 
+# --- Required (tools break without these) ---
 pyyaml>=6.0
 tiktoken>=0.7.0
+
+# --- Required for tests/MANIFEST.yaml core tier ---
+# Without these a fresh-clone user cannot run the documented test suite.
+pytest>=7.0
+
+# --- Optional performance (retriever works without, but slower) ---
+# numpy and scikit-learn accelerate TF-IDF in cex_retriever.py.
+# The retriever has a pure-Python fallback, so these are not mandatory.
+numpy>=1.24.0
+scikit-learn>=1.3.0
+llmlingua>=0.2.2

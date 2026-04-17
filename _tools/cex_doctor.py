@@ -7,15 +7,17 @@ Usage:
   python _tools/cex_doctor.py --fix    # diagnose + auto-fix naming issues
 """
 
+import argparse
 import sys
 import re
 
 import yaml
 from pathlib import Path
+from typing import Any
 
 ROOT = Path(__file__).resolve().parent.parent
 BUILDERS_DIR = ROOT / "archetypes" / "builders"
-LIBRARY_DIR = ROOT / "P01_knowledge" / "library"
+LIBRARY_DIR = ROOT / "N00_genesis" / "P01_knowledge" / "library"
 FIX_MODE = "--fix" in sys.argv
 
 # -- Constants ----------------------------------------------------------------
@@ -44,7 +46,7 @@ NAMING_RE = re.compile(r"^bld_[a-z][a-z0-9_]+_[a-z][a-z0-9_]+\.md$")
 # -- Helpers ------------------------------------------------------------------
 
 
-def get_frontmatter(path):
+def get_frontmatter(path: Path) -> dict[str, Any] | None:
     """Return parsed YAML frontmatter dict, or None if missing/invalid."""
     try:
         text = path.read_text(encoding="utf-8", errors="ignore")
@@ -56,7 +58,7 @@ def get_frontmatter(path):
     return None
 
 
-def calc_density(path):
+def calc_density(path: Path) -> float:
     """Return density ratio (0.0-1.0): content lines / total lines.
 
     Filler = empty lines, whitespace-only, bare separators (---).
@@ -89,7 +91,7 @@ def calc_density(path):
     return content / len(lines)
 
 
-def extract_topic_from_dir(dirname):
+def extract_topic_from_dir(dirname: str) -> str:
     """Convert builder dir name to expected topic suffix.
 
     'agent-builder' -> 'agent'
@@ -104,11 +106,11 @@ def extract_topic_from_dir(dirname):
     return name.replace("-", "_")
 
 
-def expected_filename(kind, topic):
+def expected_filename(kind: str, topic: str) -> str:
     return f"bld_{kind}_{topic}.md"
 
 
-def parse_bld_filename(filename):
+def parse_bld_filename(filename: str) -> tuple[str, str] | None:
     """Parse bld_{kind}_{topic}.md -> (kind, topic) or None."""
     if not filename.startswith("bld_") or not filename.endswith(".md"):
         return None
@@ -125,7 +127,7 @@ def parse_bld_filename(filename):
 
 
 class CheckResult:
-    def __init__(self, builder_name):
+    def __init__(self, builder_name: str) -> None:
         self.name = builder_name
         self.naming = "PASS"
         self.density = "PASS"
@@ -135,7 +137,7 @@ class CheckResult:
         self.details = []
 
     @property
-    def overall(self):
+    def overall(self) -> str:
         statuses = [self.naming, self.density, self.max_bytes, self.completeness, self.frontmatter]
         if "FAIL" in statuses:
             return "FAIL"
@@ -147,7 +149,7 @@ class CheckResult:
         return "PASS"
 
 
-def check_builder(builder_dir):
+def check_builder(builder_dir: Path) -> CheckResult:
     """Run all checks on a single builder directory."""
     r = CheckResult(builder_dir.name)
     topic = extract_topic_from_dir(builder_dir.name)
@@ -355,7 +357,7 @@ ALL_KINDS = [
 ]
 
 
-def check_kc_library():
+def check_kc_library() -> dict[str, Any]:
     """Check KC Library health: sources, domains, kind KCs, feeds_kinds, origins."""
     sources_dir = LIBRARY_DIR / "sources"
     domain_dir = LIBRARY_DIR / "domain"
@@ -415,7 +417,7 @@ def check_kc_library():
 # -- Main ---------------------------------------------------------------------
 
 
-def main():
+def main() -> None:
     print("=" * 72)
     print("CEX Doctor v2.0 -- Naming v2.0 + Density + 13-File Completeness")
     print(f"Root: {ROOT}")
@@ -452,7 +454,7 @@ def main():
 
     for r in results:
 
-        def sym(s):
+        def sym(s: str) -> str:
             return {"PASS": "ok", "WARN": "~~", "FAIL": "XX"}[s]
 
         line = (
@@ -526,4 +528,11 @@ def main():
 
 
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser(
+        description=__doc__,
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+    )
+    parser.add_argument("--fix", action="store_true", help="Diagnose and auto-fix naming issues.")
+    args, _ = parser.parse_known_args()
+    FIX_MODE = args.fix
     main()

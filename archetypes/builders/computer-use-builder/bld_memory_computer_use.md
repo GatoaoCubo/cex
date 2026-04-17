@@ -23,8 +23,11 @@ observation_types: [user, feedback, project, reference]
 quality: 9.2
 title: "Memory Computer Use"
 density_score: 0.90
+llm_function: INJECT
 ---
 ## Summary
+
+This ISO governs computer use: screen capture, mouse, and keyboard actions taken on behalf of the agent.
 Computer use tools are the most visually dependent P04 kind — the LLM literally cannot act without seeing the screen. The observe-act loop (screenshot -> interpret -> act) is not optional; skipping screenshots causes the LLM to act on stale information, resulting in clicks on wrong coordinates, invisible elements, or changed layouts.
 ## Pattern
 **Observe-act loop and explicit safety constraints.**

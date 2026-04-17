@@ -1,0 +1,83 @@
+kind: examples
+id: bld_examples_prosody_config
+pillar: P07
+llm_function: GOVERN
+purpose: Golden and anti-examples of prosody_config artifacts
+quality: null
+title: Examples Prosody Config
+version: 1.1.0
+author: n03_hybrid_review2
+tags:
+- prosody_config
+- builder
+- examples
+- ssml
+- elevenlabs
+- cartesia
+tldr: Golden and anti-examples covering SSML + provider-native emotion/style tags
+domain: prosody_config construction
+created: '2026-04-13'
+updated: '2026-04-13'
+density_score: 0.9
+golden_example_1_ssml_azure_google_aws_portable: "---\nid: p09_prs_calm_professional\nkind: prosody_config\npillar: P09\n\
+  version: 1.0.0\n---\nbaseline:\n  pitch: \"+0%\"\n  rate: \"100%\"\n  volume: \"medium\"\nemotions:\n  calm_professional:\n\
+  \    ssml: |\n      <prosody pitch=\"+2%\" rate=\"95%\" volume=\"medium\">\n        <break time=\"300ms\"/>\n        {{text}}\n\
+  \      </prosody>\n  urgent_alert:\n    ssml: |\n      <prosody pitch=\"+8%\" rate=\"115%\" volume=\"loud\">\n        <emphasis\
+  \ level=\"strong\">{{text}}</emphasis>\n      </prosody>\ntarget_providers: [azure, google, aws]"
+golden_example_2_elevenlabs_v3_native: "---\nid: p09_prs_elevenlabs_warm\nkind: prosody_config\npillar: P09\nversion: 1.0.0\n\
+  ---\nprovider: elevenlabs\nvoice_settings:\n  stability: 0.35          # low = expressive\n  similarity_boost: 0.75\n  style:\
+  \ 0.45              # moderate style exaggeration\n  use_speaker_boost: true\nmodel_id: eleven_multilingual_v2"
+golden_example_3_cartesia_sonic_inline_directives: '---
+
+  id: p09_prs_cartesia_excited
+
+  kind: prosody_config
+
+  pillar: P09
+
+  version: 1.0.0
+
+  ---
+
+  provider: cartesia
+
+  model: sonic-english
+
+  speed: normal
+
+  text_template: "[excited] {{text}} [pause:200ms]"
+
+  language: en'
+anti_example_1_mixing_provider_settings_with_prosody: '---
+
+  id: p09_prs_bad_provider
+
+  prosody_config: "aggressive_sales"
+
+  tts_provider: "azure"          # FAIL: belongs in tts_provider kind
+
+  api_key: "Ak2hG..."            # FAIL: belongs in secret_config
+
+  ---'
+why_it_fails: ElevenLabs v3 does not parse SSML -- it consumes `voice_settings` JSON. Tags are silently passed through as
+  literal text, corrupting output. Always validate emission path matches target provider (see provider matrix in KC).
+anti_example_2_vague_unmeasurable_parameters: '---
+
+  id: p09_prs_mysterious
+
+  emotion: "unclear"             # FAIL: not a valid emotion label
+
+  speech_rate: "fast"            # FAIL: non-numeric, non-SSML
+
+  pitch: "high-ish"              # FAIL: subjective
+
+  ---'
+anti_example_3_ssml_tags_to_non_ssml_provider: '---
+
+  id: p09_prs_wrong_target
+
+  provider: elevenlabs
+
+  ssml: "<prosody rate=''120%''>Hello</prosody>"   # FAIL: ElevenLabs ignores SSML
+
+  ---'

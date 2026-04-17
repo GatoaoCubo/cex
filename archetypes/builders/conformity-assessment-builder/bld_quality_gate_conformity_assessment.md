@@ -1,0 +1,159 @@
+---
+kind: quality_gate
+id: bld_quality_gate_conformity_assessment
+pillar: P11
+llm_function: GOVERN
+purpose: Hard and soft quality gates for conformity_assessment artifacts
+quality: 9.1
+title: "Conformity Assessment Builder -- Quality Gate"
+version: "1.0.0"
+author: wave7_n05
+tags: [conformity_assessment, builder, quality_gate]
+tldr: "8 hard gates + 5 scored dimensions for EU-AI-Act Annex-IV conformity assessment artifacts"
+domain: "conformity_assessment construction"
+created: "2026-04-14"
+updated: "2026-04-14"
+density_score: 0.85
+---
+# Conformity Assessment Builder -- Quality Gate
+## Hard Gates (H01-H08)
+All 8 gates MUST pass. A single FAIL blocks publication (quality stays null).
+| Gate | ID | Check | Pass Condition | FAIL Action |
+|------|----|-------|---------------|-------------|
+| Frontmatter complete | H01 | YAML frontmatter present with all required fields | All fields populated, quality: null | Add missing fields |
+| ID pattern valid | H02 | id matches ^p11_ca_[a-z0-9_]+\.md$ | Regex match | Rename artifact |
+| Kind correct | H03 | kind == "conformity_assessment" | Exact match | Fix kind field |
+| RMS section present | H04 | risk_management_system object has >= 6 sub-fields | Count >= 6 | Add missing RMS fields |
+| Data governance present | H05 | data_governance_plan object has >= 5 sub-fields | Count >= 5 | Add missing DGP fields |
+| Human oversight present | H06 | human_oversight_measures object has >= 5 sub-fields | Count >= 5 | Add missing HOM fields |
+| Annex-III category specified | H07 | annex_iii_category is one of the 9 valid enum values | Enum match | Identify correct category |
+| Post-market-monitoring plan | H08 | post_market_monitoring_plan object has >= 5 sub-fields | Count >= 5 | Add missing PMM fields |
+
+## Hard Gate Evaluation Script (pseudo-code)
+
+```
+results = {}
+
+# H01 -- Frontmatter
+required_fields = [system_name, system_version, provider_name, annex_iii_category,
+                   article_43_procedure, declaration_date, eu_ai_act_ref,
+                   technical_documentation_reference]
+results[H01] = all(field in frontmatter for field in required_fields)
+
+# H02 -- ID pattern
+results[H02] = re.match(r'^p11_ca_[a-z0-9_]+\.md$', artifact.id)
+
+# H03 -- Kind
+results[H03] = artifact.kind == 'conformity_assessment'
+
+# H04 -- RMS
+results[H04] = len(artifact.risk_management_system.keys()) >= 6
+
+# H05 -- DGP
+results[H05] = len(artifact.data_governance_plan.keys()) >= 5
+
+# H06 -- HOM
+results[H06] = len(artifact.human_oversight_measures.keys()) >= 5
+
+# H07 -- Annex III
+valid_categories = [biometric_identification, biometric_categorisation,
+                    critical_infrastructure, education_vocational,
+                    employment_workers, essential_services,
+                    law_enforcement, migration_asylum, justice_democratic]
+results[H07] = artifact.annex_iii_category in valid_categories
+
+# H08 -- PMM
+results[H08] = len(artifact.post_market_monitoring_plan.keys()) >= 5
+
+pass = all(results.values())
+```
+
+## Soft Scoring Dimensions (D01-D05)
+
+Total possible score: 10.0. Quality floor: 8.0. Target: 9.0+.
+
+| Dim | ID | Weight | Criterion | Max Points |
+|-----|----|--------|-----------|-----------|
+| Completeness | D01 | 0.25 | All 7 Annex-IV categories documented with substantive content | 2.5 |
+| Regulatory accuracy | D02 | 0.25 | All claims cite specific EU AI Act article + annex section; no misquotations | 2.5 |
+| Evidence density | D03 | 0.20 | RMS, DGP, HOM sections contain specific evidence references, not placeholders | 2.0 |
+| Traceability | D04 | 0.20 | Each risk control traceable to an Art. 9 risk ID; each data provision traceable to Art. 10 | 2.0 |
+| Auditability | D05 | 0.10 | Aug-2026 deadline items flagged; notified body ID present if required; provider contact included | 1.0 |
+
+## D01 Completeness Scoring
+
+| Score | Condition |
+|-------|-----------|
+| 2.5 | All 7 Annex-IV categories present with >= 3 sentences or 1 table each |
+| 2.0 | 6 of 7 categories present and substantive |
+| 1.5 | 5 of 7 categories present |
+| 1.0 | 4 of 7 categories present |
+| 0.5 | 3 or fewer categories present |
+| 0.0 | Missing or placeholder only |
+
+## D02 Regulatory Accuracy Scoring
+
+| Score | Condition |
+|-------|-----------|
+| 2.5 | Every requirement cites article + annex + section; zero factual errors detected |
+| 2.0 | >= 90% of requirements cited; no material errors |
+| 1.5 | >= 70% cited; <= 1 minor error |
+| 1.0 | >= 50% cited; multiple minor errors |
+| 0.5 | < 50% cited or >= 1 material error |
+| 0.0 | No citations or significant factual misrepresentation |
+
+## D03 Evidence Density Scoring
+
+| Score | Condition |
+|-------|-----------|
+| 2.0 | RMS has named risks + named controls; DGP has named datasets; HOM has named tools |
+| 1.5 | Two of three sections have specific named evidence |
+| 1.0 | One section has specific evidence |
+| 0.5 | All sections present but all generic/vague |
+| 0.0 | Sections missing or placeholder only |
+
+## D04 Traceability Scoring
+
+| Score | Condition |
+|-------|-----------|
+| 2.0 | Each mitigation measure references a risk ID; each data provision references Art. 10 sub-clause |
+| 1.5 | Risk traceability OR data traceability present (not both) |
+| 1.0 | Partial traceability in one domain |
+| 0.5 | Implied but not explicit traceability |
+| 0.0 | No traceability |
+
+## D05 Auditability Scoring
+
+| Score | Condition |
+|-------|-----------|
+| 1.0 | Aug-2026 flags present; notified body ID present (if applicable); provider contact complete |
+| 0.7 | Two of three auditability elements present |
+| 0.4 | One auditability element present |
+| 0.0 | None present |
+
+## Score Computation
+
+```
+score = D01 + D02 + D03 + D04 + D05
+pass_gate = score >= 8.0 AND all hard gates pass
+target = score >= 9.0
+```
+
+## Gate Failure Protocol
+
+| Score Range | Action |
+|-------------|--------|
+| < 8.0 | Return to F6 PRODUCE. Fix all H-gate failures first. Then improve lowest-scoring D dimensions. |
+| 8.0-8.9 | May publish with quality: null. Flag for improvement in next cycle. |
+| 9.0-10.0 | Publish. Signal complete. |
+| H-gate FAIL (any) | BLOCK regardless of D score. Fix H-gate. |
+
+## Integration
+
+```bash
+# Run quality gate check
+python _tools/cex_score.py --apply p11_ca_{system}.md
+
+# If score < 8.0, the artifact is returned to F6
+# quality: null until peer-review assigns a score via cex_score.py --apply
+```

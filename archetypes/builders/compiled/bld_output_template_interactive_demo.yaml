@@ -1,0 +1,18 @@
+kind: output_template
+id: bld_output_template_interactive_demo
+pillar: P05
+llm_function: PRODUCE
+purpose: Template with vars for interactive_demo production
+quality: null
+title: Output Template Interactive Demo
+version: 1.0.1
+author: n02_marketing
+tags:
+- interactive_demo
+- builder
+- output_template
+tldr: Template with vars for interactive_demo production
+domain: interactive_demo construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85

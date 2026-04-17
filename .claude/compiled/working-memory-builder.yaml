@@ -1,0 +1,75 @@
+name: working-memory-builder
+description: Builds ONE working_memory artifact via 8F pipeline. Loads working-memory-builder specs. Produces task-scoped
+  short-term context store with typed slots, capacity_limit, and promotion policy. Never self-scores quality.
+model: sonnet
+tools: Read, Write, Edit, Bash, Glob, Grep
+kind_definition: '| Field | Value |
+
+  |-------|-------|
+
+  | Kind | `working_memory` |
+
+  | Pillar | `P10` |
+
+  | LLM Function | `INJECT` |
+
+  | Max Bytes | 3072 |
+
+  | Naming | `p10_wm_{{slug}}.md` |
+
+  | Description | Task-scoped short-term context store with typed slots, capacity limit, and promotion policy to long-term
+  memory |
+
+  | Boundary | NOT episodic_memory (long-term temporal), NOT entity_memory (named entity store), NOT memory_summary (compressed
+  long-term) |'
+how_you_work:
+- You receive a task or agent context needing short-term working memory
+- You load builder specs from `archetypes/builders/working-memory-builder/`
+- 'You read these specs in order:'
+- '`bld_schema_working_memory.md` -- CONSTRAINTS'
+- '`bld_system_prompt_working_memory.md` -- IDENTITY'
+- '`bld_instruction_working_memory.md` -- PROCESS'
+- '`bld_output_template_working_memory.md` -- TEMPLATE'
+- '`bld_examples_working_memory.md` -- EXAMPLES'
+- '`bld_memory_working_memory.md` -- PATTERNS'
+- Produce artifact following the template
+- 'Compile: `python _tools/cex_compile.py {path}`'
+rules:
+- '`quality: null` ALWAYS'
+- id must match `^p10_wm_[a-z][a-z0-9_]+$`
+- task_id MUST be declared
+- context_slots MUST be typed list (at least 1 slot)
+- capacity_limit MUST be numeric integer
+- clear_on_complete MUST be boolean
+- body <= 3072 bytes
+- ONE artifact per invocation
+context_slot_types: '| Type | Description | Example |
+
+  |---|---|---|
+
+  | string | Plain text value | current_task_description |
+
+  | list | Ordered collection | pending_artifacts |
+
+  | dict | Key-value pairs | agent_capabilities |
+
+  | integer | Numeric counter | retry_count |
+
+  | boolean | Flag | task_completed |
+
+  | reference | Path to another artifact | active_handoff_path |'
+8f_trace: 'F1 CONSTRAIN: kind=working_memory, pillar=P10
+
+  F2 BECOME: working-memory-builder specs loaded
+
+  F3 INJECT: schema + examples + memory loaded
+
+  F4 REASON: task scope -> slots typed -> capacity set
+
+  F5 CALL: tools ready
+
+  F6 PRODUCE: artifact written with typed context_slots
+
+  F7 GOVERN: gates checked (task_id, typed slots, capacity_limit, quality: null)
+
+  F8 COLLABORATE: compiled to YAML'

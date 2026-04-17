@@ -1,0 +1,38 @@
+id: kc_stt_provider
+kind: knowledge_card
+title: Speech-to-Text Provider Integration
+version: 1.0.0
+quality: null
+pillar: P01
+density_score: 1.0
+key_providers:
+- Google Cloud Speech-to-Text - High accuracy with 120+ languages
+- Amazon Transcribe - Seamless AWS integration with real-time transcription
+- Azure Speech Services - Enterprise-grade with custom voice models
+- IBM Watson Speech to Text - Advanced speaker diarization capabilities
+- Deepgram - Low-latency streaming transcription
+integration_considerations:
+- API key authentication mechanisms
+- Language model customization options
+- Real-time vs batch processing capabilities
+- Support for multiple audio formats (WAV, MP3, FLAC)
+- Pricing models (pay-per-minute, fixed-rate)
+- Error correction and punctuation awareness
+use_cases:
+- Virtual assistants
+- Call center transcription
+- Meeting recordings
+- Accessibility tools
+- Voice-controlled IoT devices
+technical_requirements:
+- Audio sampling rates (8kHz-48kHz)
+- Noise suppression algorithms
+- Speaker diarization support
+- Custom vocabulary training
+- Result formatting options (JSON, XML, plain text)
+quality_factors:
+- Word error rate (WER) metrics
+- Language support breadth
+- Latency performance
+- Scalability for large volumes
+- Compliance with data privacy regulations

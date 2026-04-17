@@ -1,0 +1,34 @@
+kind: examples
+id: bld_examples_planning_strategy
+pillar: P07
+llm_function: GOVERN
+purpose: Golden and anti-examples of planning_strategy artifacts
+quality: null
+title: Examples Planning Strategy
+version: 1.0.0
+author: wave1_builder_gen
+tags:
+- planning_strategy
+- builder
+- examples
+tldr: Golden and anti-examples of planning_strategy artifacts
+domain: planning_strategy construction
+created: '2026-04-13'
+updated: '2026-04-13'
+density_score: 0.85
+golden_example: "---\ntitle: \"Urban Mobility Expansion Plan\"\nkind: planning_strategy\nauthor: Urban Planning Team\ndate:\
+  \ 2023-11-01\n---\n\nObjective: Optimize city transportation network for 2030.\n\nPhases:\n1. Research: Analyze traffic\
+  \ patterns, population growth, and existing infrastructure gaps.\n2. Design: Propose hybrid public transit (electric buses\
+  \ + bike lanes) and AI-driven traffic signaling.\n3. Implementation: Prioritize high-impact zones using phased funding and\
+  \ community feedback loops.\n4. Evaluation: Use real-time sensors and quarterly audits to adjust strategies.\n\nConstraints:\
+  \ \n- Budget: $500M annual cap\n- Timeline: 5-year rollout\n- Equity: Ensure accessibility in underserved neighborhoods"
+anti_example_1_confusing_with_reasoning_strategy: "---\ntitle: \"Prompt-Based Decision Framework\"\nkind: planning_strategy\n\
+  author: AI Team\ndate: 2023-10-15\n---\n\nSteps:\n1. Use \"maximize efficiency\" prompt for resource allocation.\n2. Apply\
+  \ \"ethical dilemma\" prompt for conflict resolution.\n3. Generate options via \"scenario simulation\" prompt.\n\nConstraints:\
+  \ \n- Must use predefined prompts\n- No human oversight allowed"
+why_it_fails: Describes an execution workflow (sequence of tasks), not a planning strategy (strategic framework for deciding
+  what to do). It lacks high-level objectives and adaptive planning elements.
+anti_example_2_treating_as_workflow: "---\ntitle: \"Project Execution Steps\"\nkind: planning_strategy\nauthor: Operations\n\
+  date: 2023-10-20\n---\n\nTasks:\n1. Collect data from sensors\n2. Upload to cloud storage\n3. Run ML model on dataset\n\
+  4. Generate report\n5. Send to stakeholders\n\nConstraints: \n- Must use Python for data processing\n- Reports due by 5\
+  \ PM daily"

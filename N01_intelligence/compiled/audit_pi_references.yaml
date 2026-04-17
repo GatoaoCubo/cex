@@ -106,10 +106,10 @@ medium_specs_and_plans_historical_less_urgent: 'These contain design-time contex
   281, 284, 378 | 16+ PI refs: `pi --continue`, `pi --model`, `.pi/agents/`, `pi compact()`, `pi /handoff`, `pi subagent extension`
   | HEAVIEST FILE -- needs full rewrite or archive. Entire architecture assumes PI |
 
-  | 12 | `N03_builder/orchestration/spawn_config_builder.md` | 13, 54 | "pi CLI", `pi --model opus-4-6` | Replace with `claude
+  | 12 | `N03_builder/P12_orchestration/spawn_config_builder.md` | 13, 54 | "pi CLI", `pi --model opus-4-6` | Replace with `claude
   CLI`, `claude --model opus-4-6` |
 
-  | 13 | `N04_knowledge/orchestration/spawn_config_knowledge.md` | 31 | `pi --model opus-4-6` | Replace with `claude --model
+  | 13 | `N04_knowledge/P12_orchestration/spawn_config_knowledge.md` | 31 | `pi --model opus-4-6` | Replace with `claude --model
   opus-4-6` |
 
   | 14 | `_tmp_prose_audit.py` | 11 | `"cex-pi-package"` in skip filter | Remove cex-pi-package from skip list (or delete

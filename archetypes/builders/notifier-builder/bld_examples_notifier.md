@@ -2,7 +2,7 @@
 kind: examples
 id: bld_examples_notifier
 pillar: P04
-llm_function: DEMONSTRATE
+llm_function: GOVERN
 purpose: Golden and anti-pattern examples for notifier artifacts
 version: 1.0.0
 created: 2026-03-28
@@ -12,6 +12,7 @@ tags: [examples, notifier, P04, golden, anti-pattern]
 quality: 9.0
 tldr: "Golden: Slack deploy alert notifier (all gates pass, score 9.2). Anti: minimal email notifier (H05/H07/S02 fail)."
 density_score: 1.0
+title: Examples ISO - notifier
 ---
 # Examples: notifier
 

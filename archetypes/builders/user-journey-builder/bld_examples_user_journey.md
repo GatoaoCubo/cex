@@ -1,0 +1,75 @@
+---
+kind: examples
+id: bld_examples_user_journey
+pillar: P07
+llm_function: GOVERN
+purpose: Golden and anti-examples of user_journey artifacts
+quality: 8.8
+title: "Examples User Journey"
+version: "1.0.0"
+author: wave1_builder_gen_v2
+tags: [user_journey, builder, examples]
+tldr: "Golden and anti-examples of user_journey artifacts"
+domain: "user_journey construction"
+created: "2026-04-14"
+updated: "2026-04-14"
+density_score: 0.85
+---
+
+## Golden Example
+---
+title: "User Journey for HubSpot CRM Adoption"
+kind: user_journey
+author: Jane Doe, UX Researcher
+date: 2023-10-15
+tools: HubSpot, Slack, Stripe, Zoom
+---
+**Awareness**
+- Touchpoint: LinkedIn ad (HubSpot)
+- User Action: Clicks "Start Free Trial"
+- Emotion: Curiosity
+- Pain Point: No clear ROI from current tools
+
+**Consideration**
+- Touchpoint: Demo request via Slack (Intercom)
+- User Action: Schedules Zoom call with sales
+- Emotion: Skepticism
+- Pain Point: Unclear integration with existing workflows
+
+**Conversion**
+- Touchpoint: Stripe payment page
+- User Action: Completes 30-day trial
+- Emotion: Excitement
+- Pain Point: No immediate value visible
+
+**Retention**
+- Touchpoint: Weekly onboarding emails (HubSpot)
+- User Action: Completes 70% of tutorial
+- Emotion: Frustration
+- Pain Point: Missing key features
+
+**Advocacy**
+- Touchpoint: NPS survey (Delighted)
+- User Action: Recommends to peers
+- Emotion: Satisfaction
+- Pain Point: None
+
+## Anti-Example 1: Confusing journey with workflow
+---
+**Awareness**
+- Touchpoint: Website homepage
+- User Action: Clicks "Sign Up"
+- Emotion: None
+- Pain Point: None
+
+**Why it fails**: Focuses only on a single action ("Sign Up") without mapping emotional states, touchpoints across channels, or long-term engagement. It’s a workflow, not a journey.
+
+## Anti-Example 2: Generic placeholders
+---
+**Awareness**
+- Touchpoint: "ProviderA ad"
+- User Action: "Clicks link"
+- Emotion: "Curiosity"
+- Pain Point: "No clear value"
+
+**Why it fails**: Uses vague terms like "ProviderA" and "no clear value" without context. Fails to specify real tools, user emotions, or actionable insights for improvement.

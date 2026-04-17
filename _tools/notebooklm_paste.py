@@ -9,7 +9,7 @@ import json
 import time
 from pathlib import Path
 
-CONTENT_FILE = Path(__file__).parent.parent / "P01_knowledge" / "library" / "domain" / "meta" / "kc_8f_pipeline.md"
+CONTENT_FILE = Path(__file__).parent.parent / "N00_genesis" / "P01_knowledge" / "library" / "domain" / "meta" / "kc_8f_pipeline.md"
 STATE_FILE = Path(r"C:\Users\PC\AppData\Local\notebooklm-mcp\Data\browser_state\state.json")
 SS_DIR = Path(__file__).parent
 

@@ -115,12 +115,14 @@ THRESHOLDS = {
 
 
 def extract_headers(text: str) -> list:
+    """Extract normalized level-two headings from markdown text."""
     pattern = r"^##\s+(.+)$"
     headers = re.findall(pattern, text, re.MULTILINE)
     return [h.strip().lower().rstrip(":") for h in headers]
 
 
 def lcs_length(a: list, b: list) -> int:
+    """Compute the longest common subsequence length for two header lists."""
     m, n = len(a), len(b)
     dp = [[0] * (n + 1) for _ in range(m + 1)]
     for i in range(1, m + 1):
@@ -133,6 +135,7 @@ def lcs_length(a: list, b: list) -> int:
 
 
 def structural_similarity(orig_text: str, gen_text: str) -> float:
+    """Score heading-order similarity between two builder documents."""
     orig_headers = extract_headers(orig_text)
     gen_headers = extract_headers(gen_text)
     if not orig_headers:
@@ -147,6 +150,7 @@ def structural_similarity(orig_text: str, gen_text: str) -> float:
 
 
 def extract_frontmatter_fields(text: str) -> set:
+    """Extract normalized frontmatter keys from a markdown document."""
     match = re.match(r"^---\n(.*?)\n---", text, re.DOTALL)
     if not match:
         return set()
@@ -164,6 +168,7 @@ def extract_frontmatter_fields(text: str) -> set:
 
 
 def extract_table_fields(text: str) -> set:
+    """Extract likely field names from markdown table rows."""
     fields = set()
     rows = re.findall(r"^\|([^|]+)\|", text, re.MULTILINE)
     for row in rows:
@@ -179,11 +184,13 @@ def extract_table_fields(text: str) -> set:
 
 
 def extract_template_variables(text: str) -> set:
+    """Extract template variable names wrapped in double braces."""
     vars_ = re.findall(r"\{\{([a-z_][a-z0-9_]*)\}\}", text)
     return {v.lower() for v in vars_}
 
 
 def extract_all_fields(text: str) -> set:
+    """Combine field names discovered across all supported sources."""
     fields = set()
     fields |= extract_frontmatter_fields(text)
     fields |= extract_table_fields(text)
@@ -192,6 +199,7 @@ def extract_all_fields(text: str) -> set:
 
 
 def field_coverage(orig_text: str, gen_text: str) -> float:
+    """Measure how many original fields are preserved in the generated file."""
     orig_fields = extract_all_fields(orig_text)
     gen_fields = extract_all_fields(gen_text)
     if not orig_fields:
@@ -206,6 +214,7 @@ def field_coverage(orig_text: str, gen_text: str) -> float:
 
 
 def extract_body(text: str) -> str:
+    """Return markdown content after the first frontmatter block when present."""
     parts = text.split("---", 2)
     if len(parts) >= 3:
         return parts[2]
@@ -213,11 +222,13 @@ def extract_body(text: str) -> str:
 
 
 def tokenize(text: str) -> set:
+    """Tokenize text into normalized content words."""
     tokens = re.findall(r"[a-z0-9_]{2,}", text.lower())
     return {t for t in tokens if t not in STOPWORDS}
 
 
 def content_similarity(orig_text: str, gen_text: str) -> float:
+    """Compute Jaccard similarity across normalized document bodies."""
     orig_tokens = tokenize(extract_body(orig_text))
     gen_tokens = tokenize(extract_body(gen_text))
     if not orig_tokens and not gen_tokens:
@@ -235,6 +246,7 @@ def content_similarity(orig_text: str, gen_text: str) -> float:
 
 
 def size_delta(orig_path: Path, gen_path: Path) -> float:
+    """Measure absolute byte-size drift as a percentage."""
     orig_bytes = orig_path.stat().st_size
     gen_bytes = gen_path.stat().st_size
     if orig_bytes == 0:
@@ -249,6 +261,7 @@ def size_delta(orig_path: Path, gen_path: Path) -> float:
 
 
 def file_verdict(metrics: dict) -> str:
+    """Reduce per-metric scores into a single file verdict."""
     verdicts = []
     for metric, value in metrics.items():
         if value is None:
@@ -276,6 +289,7 @@ def file_verdict(metrics: dict) -> str:
 
 
 def builder_verdict(file_verdicts: list) -> str:
+    """Aggregate file verdicts into a builder-level outcome."""
     fail_count = file_verdicts.count("FAIL")
     pass_count = file_verdicts.count("PASS")
     warn_count = file_verdicts.count("WARN")
@@ -294,6 +308,7 @@ def builder_verdict(file_verdicts: list) -> str:
 
 
 def match_files(original_dir: Path, generated_dir: Path):
+    """Pair original markdown files with generated matches by filename."""
     originals = {f.name: f for f in original_dir.glob("*.md")}
     generated = {f.name: f for f in generated_dir.glob("*.md")}
 
@@ -316,6 +331,7 @@ def match_files(original_dir: Path, generated_dir: Path):
 def compare(
     original_dir: Path, generated_dir: Path, quality_data: dict = None, skip_quality: bool = True
 ):
+    """Compare two builder directories and return file-level and aggregate metrics."""
     pairs, extra = match_files(original_dir, generated_dir)
     builder_name = original_dir.name
 
@@ -386,6 +402,7 @@ def compare(
 
     # Aggregate
     def agg(key):
+        """Summarize a metric across all compared files."""
         vals = [f["metrics"][key] for f in files_results if f["metrics"][key] is not None]
         if not vals:
             return None
@@ -426,6 +443,7 @@ def compare(
 
 
 def print_table(result: dict):
+    """Render comparison results as a human-readable markdown table."""
     print(f"\n# Comparison: {result['builder_name']}")
     print(f"| File | Structural | Fields | Content | Size Delta | Quality | Verdict |")
     print(f"|------|-----------|--------|---------|------------|---------|---------|")
@@ -458,6 +476,7 @@ def print_table(result: dict):
 
 
 def main():
+    """Parse CLI arguments, run the comparison, and emit the requested output."""
     parser = argparse.ArgumentParser(description="Compare original vs reconstructed builder files")
     parser.add_argument("--original", required=True, help="Directory with original builder files")
     parser.add_argument("--generated", required=True, help="Directory with reconstructed files")

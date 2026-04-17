@@ -12,9 +12,11 @@ quality: 9.1
 tags: [builder, collaboration, software-project, cross-nucleus]
 tldr: "Cross-nucleus collaboration: N03 receives specs from N01/N02/N04 and produces executable code. N03→N05 for deploy ops. N03→N07 for CEX tool maintenance."
 density_score: 0.88
+llm_function: COLLABORATE
 ---
-
 # Collaboration
+
+This ISO describes a software project: its repository layout, modules, and build graph.
 
 ## N03 Receives From (Inputs)
 

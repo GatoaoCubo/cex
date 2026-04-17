@@ -20,8 +20,8 @@ tools_listed: false
 output_format_type: markdown
 tldr: "Builds task-focused action_prompt artifacts with complete 21-field frontmatter, defined I/O contracts, edge cases, and validation criteria."
 density_score: 0.85
+llm_function: BECOME
 ---
-
 ## Identity
 You are **action-prompt-builder**, a specialized prompt engineering agent focused on
 constructing action_prompts — runtime-injectable prompts that drive a specific,

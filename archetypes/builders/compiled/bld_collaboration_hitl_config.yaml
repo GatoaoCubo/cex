@@ -1,0 +1,68 @@
+kind: collaboration
+id: bld_collaboration_hitl_config
+pillar: P12
+llm_function: COLLABORATE
+purpose: How hitl-config-builder works in crews with other builders
+pattern: each builder must know its ROLE in a team, what it RECEIVES and PRODUCES
+quality: null
+title: Collaboration Hitl Config
+version: 1.0.0
+author: n03_builder
+tags:
+- hitl_config
+- builder
+- collaboration
+- P12
+tldr: 'hitl-config-builder role in crews: HITL gate specialist. Receives workflow + risk level. Produces review gate config.
+  Depends on guardrail, quality_gate.'
+domain: hitl_config construction
+created: '2026-04-13'
+updated: '2026-04-13'
+density_score: 0.9
+my_role_in_crews: 'I am a SPECIALIST. I answer ONE question: "under what conditions should this output pause for human judgment,
+  who reviews it in what order, and what happens if they don''t respond?" I do not automate filtering (that is guardrail).
+  I do not score quality automatically (that is quality_gate). I configure the gate where human eyes are required and cannot
+  be replaced by automation.'
+crew_compositions: ''
+crew_ai_output_governance: "  1. guardrail-builder    -> \"automated safety filtering (pre-HITL block)\"\n  2. quality-gate-builder\
+  \ -> \"automated scoring (post-generation quality check)\"\n  3. hitl-config-builder  -> \"human review gate for outputs\
+  \ that pass auto-checks but need human judgment\"\n  4. learning-record-builder -> \"capture review decisions for model\
+  \ improvement\""
+crew_high_stakes_ai_deployment: "  1. agent-builder        -> \"agent definition and capabilities\"\n  2. guardrail-builder\
+  \    -> \"safety boundaries for agent outputs\"\n  3. hitl-config-builder  -> \"mandatory human review for regulatory/domain\
+  \ requirements\"\n  4. workflow-builder     -> \"orchestrate agent steps including HITL pause node\"\n  5. reward-signal-builder\
+  \ -> \"continuous quality signal from review outcomes\""
+crew_content_generation_pipeline: "  1. prompt-template-builder -> \"generation prompt\"\n  2. quality-gate-builder    ->\
+  \ \"automated quality scoring\"\n  3. hitl-config-builder     -> \"human edit flow for below-threshold outputs\"\n  4. lifecycle-rule-builder\
+  \  -> \"archive or promote reviewed content\""
+handoff_protocol: ''
+i_receive:
+- 'seeds: workflow name, output types being reviewed, risk level (high/medium/low)'
+- 'optional: existing reviewer list, SLA requirements, regulatory constraints, notification preferences'
+- 'optional: confidence score availability (determines trigger type)'
+i_produce:
+- hitl_config artifact (.md + .yaml frontmatter)
+- 'committed to: `P11_feedback/examples/p11_hitl_{name}.md`'
+i_signal:
+- 'signal: complete (with quality score from QUALITY_GATES)'
+- 'if quality < 8.0: signal retry with failure reasons listed'
+builders_i_depend_on: '| Builder | Why |
+
+  |---------|-----|
+
+  | guardrail-builder | Automated filter upstream; HITL reviews what passes the guardrail |
+
+  | quality-gate-builder | Automated score; HITL escalates when score falls below threshold |
+
+  | agent-builder | Agent workflow defines where HITL pause nodes are inserted |'
+builders_that_depend_on_me: '| Builder | Why |
+
+  |---------|-----|
+
+  | workflow-builder | Workflows embed HITL pause nodes; need hitl_config to configure them |
+
+  | learning-record-builder | Captures review decisions logged by hitl_config feedback_loop |
+
+  | reward-signal-builder | Review outcomes feed into reward signal for RLHF training |
+
+  | optimizer-builder | Optimizes review volume by tracking which triggers fire most often |'

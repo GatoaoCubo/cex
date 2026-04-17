@@ -1,0 +1,33 @@
+---
+kind: memory
+id: p10_mem_github_issue_template_builder
+pillar: P10
+llm_function: INJECT
+purpose: Learned patterns and pitfalls for github_issue_template construction
+quality: 8.7
+title: "Memory Github Issue Template"
+version: "1.0.0"
+author: wave1_builder_gen_v2
+tags: [github_issue_template, builder, memory]
+tldr: "Learned patterns and pitfalls for github_issue_template construction"
+domain: "github_issue_template construction"
+created: "2026-04-14"
+updated: "2026-04-14"
+density_score: 0.85
+---
+
+## Observation
+Common issues include missing required fields (e.g., reproduction steps) and inconsistent label usage, leading to incomplete or misclassified reports. Templates often overlook guidance for users to prioritize clarity over verbosity.
+
+## Pattern
+Effective templates enforce mandatory fields (title, description, labels) and use structured prompts to guide users. Labels like `bug`, `feature`, or `question` are paired with clear definitions to streamline triage.
+
+## Evidence
+Reviewed templates from vuejs/vue and tensorflow/tensorflow demonstrate consistent use of required fields and label-specific instructions.
+
+## Recommendations
+- Enforce required fields (e.g., `title`, `steps to reproduce`) via template syntax.
+- Use standardized labels with explicit definitions (e.g., `bug`: "Unexpected behavior").
+- Include example issues to illustrate expected formatting.
+- Avoid markdown in description fields to ensure compatibility with GitHub’s parser.
+- Keep templates concise to reduce user friction.

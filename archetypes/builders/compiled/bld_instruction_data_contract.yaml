@@ -1,0 +1,41 @@
+id: bld_instruction_data_contract
+kind: instruction
+pillar: P03
+llm_function: REASON
+purpose: Step-by-step production process for data_contract
+version: 1.0.0
+quality: 4.9
+tags:
+- data_contract
+- builder
+- instruction
+title: Instruction Data Contract Builder
+density_score: 0.83
+updated: '2026-04-17'
+phase_1_identify:
+- Name producer system and consumer system (teams or services)
+- Identify the data entity being exchanged (Event, Record, API response)
+- 'Determine transport: REST, event bus, file, database view, gRPC'
+- List all fields with types -- producer is source of truth for schema
+- Confirm this needs a formal contract (crossing team/system boundary)
+phase_2_compose:
+- Read bld_schema_data_contract.md for required fields
+- 'Set id: dc_{producer}{consumer}{entity} (snake_case)'
+- Fill producer_system and consumer_system
+- 'Define schema section: all fields with type, nullable, description'
+- 'Define SLA section: freshness_sla, availability_sla, latency_p99'
+- Set contract_version (semver) and effective_date
+- 'Set quality: null -- never self-score'
+phase_3_validate:
+- 'HARD gates:'
+- id follows pattern dc_{prod}{cons}{entity}
+- kind == data_contract
+- quality == null
+- producer_system and consumer_system both present
+- schema section with >= 1 typed field
+- at least one SLA field (freshness OR availability)
+- 'SOFT gates:'
+- all schema fields have types and nullable flag
+- SLA includes numeric thresholds (not vague "fast" or "available")
+- backward_compatible field set (true/false)
+- breaking_change_policy documented

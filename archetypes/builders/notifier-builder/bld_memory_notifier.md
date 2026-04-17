@@ -2,7 +2,7 @@
 kind: memory
 id: bld_memory_notifier
 pillar: P04
-llm_function: CONTEXT
+llm_function: INJECT
 purpose: Learned patterns and anti-patterns from notifier artifact production
 version: 1.0.0
 created: 2026-03-28
@@ -33,7 +33,7 @@ to genuine incidents. Document timing semantics per priority level in the Templa
 
 ## Pattern: Template Vars Prevent Runtime Errors [score: 8.5]
 **Context**: Notifiers with undocumented template vars caused KeyError at delivery time.
-**Learning**: template_vars frontmatter field must list every {{var}} used in the template.
+**Learning**: template_vars frontmatter field must list every `{{var}}` used in the template.
 Consumers cannot implement without knowing what data to provide.
 **Rule derived**: template_vars list must be exhaustive; missing vars = H05 soft fail.
 

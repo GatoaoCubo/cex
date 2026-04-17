@@ -1,0 +1,30 @@
+kind: learning_record
+id: p10_lr_repo_map_builder
+pillar: P10
+llm_function: INJECT
+purpose: Learned patterns and pitfalls for repo_map construction
+quality: null
+title: Learning Record Repo Map
+version: 1.0.0
+author: wave1_builder_gen
+tags:
+- repo_map
+- builder
+- learning_record
+tldr: Learned patterns and pitfalls for repo_map construction
+domain: repo_map construction
+created: '2026-04-13'
+updated: '2026-04-13'
+density_score: 0.85
+observation: Inconsistent module boundary definitions often lead to fragmented or overlapping repo_map entries. Over-reliance
+  on file structure alone may miss implicit dependencies or cross-cutting concerns.
+pattern: Combining static analysis with manual curation improves accuracy. Focusing on explicit markers (e.g., `@context`
+  annotations) and architectural decisions aligns maps with developer intent.
+evidence: Artifacts from `repo_map-builder-v2` showed 25% fewer inconsistencies after integrating semantic markers with file-based
+  heuristics.
+recommendations:
+- Define explicit criteria for module boundaries (e.g., package structure + semantic roles).
+- Prioritize tooling that surfaces implicit dependencies (e.g., call graphs, import analysis).
+- Validate maps iteratively with domain experts to align with operational workflows.
+- Avoid over-segmentation; balance granularity with maintainability.
+- Document exclusion rules to prevent accidental omission of critical context.

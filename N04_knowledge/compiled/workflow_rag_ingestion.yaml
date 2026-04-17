@@ -1,0 +1,117 @@
+id: p12_wf_rag_ingestion_n04
+kind: workflow
+pillar: P12
+nucleus: n04
+title: Workflow -- RAG Corpus Ingestion Pipeline
+version: 1.0.0
+quality: null
+tags:
+- workflow
+- n04
+- rag
+- ingestion
+- corpus
+- embedding
+- indexing
+- P12
+domain: knowledge management
+status: active
+created: '2026-04-17'
+updated: '2026-04-17'
+author: n04_knowledge
+tldr: 'End-to-end RAG corpus ingestion workflow: source identification -> document loading -> chunking -> embedding -> vector
+  store upsert -> index validation. Includes error handling, batch processing, and post-ingestion verification.'
+density_score: null
+overview: 'This workflow governs how external knowledge enters the N04 semantic corpus. It is the WRITE side of the read pipeline
+  defined in `memory_architecture_n04.md`. Trigger: new documents available, scheduled refresh, or manual ingestion command
+  Output: documents indexed in pgvector, BM25 index updated, integrity verified ---'
+workflow_steps: "SOURCE IDENTIFICATION\n       |\n       v\nDOCUMENT LOADING (document_loader_n04.md)\n       |\n       v\n\
+  QUALITY FILTERING\n       |\n       v\nCHUNKING (chunk_strategy_knowledge.md)\n       |\n       v\nMETADATA ENRICHMENT\n\
+  \       |\n       v\nEMBEDDING GENERATION\n       |\n       v\nDEDUPLICATION CHECK\n       |\n       v\nVECTOR STORE UPSERT\
+  \ (api_reference_rag_apis.md)\n       |\n       v\nBM25 INDEX UPDATE\n       |\n       v\nPOST-INGESTION VERIFICATION\n\
+  \       |\n       v\nLOG + COMMIT\n\n---"
+step_details: ''
+step_1_source_identification: 'Determine source type and corpus namespace:
+
+
+  | Source | Type | Corpus | Trust Level |
+
+  |--------|------|--------|-------------|
+
+  | CEX .md artifacts | markdown | cex_artifacts | 5 |
+
+  | External documentation | html/pdf | external_docs | 3 |
+
+  | Research papers | pdf | external_docs | 4 |
+
+  | Session transcripts | text | session_memory | 2 |
+
+  | User-uploaded files | varies | external_docs | 3 (default) |'
+step_2_document_loading: "Apply `document_loader_n04.md` per source type.\n\npython _tools/cex_retriever.py --ingest \\\n\
+  \  --source {path} \\\n  --format {markdown|pdf|html|docx|repo} \\\n  --corpus {corpus_name} \\\n  --trust-level {1-5}"
+step_3_quality_filtering: 'Reject documents below quality thresholds:
+
+  - PDF: OCR artifact ratio <= 5%
+
+  - HTML: text/html ratio >= 0.3 (not mostly markup)
+
+  - Markdown: frontmatter must parse without error
+
+  - All: min_length = 100 characters'
+step_4_chunking: 'Per `chunk_strategy_knowledge.md`:
+
+
+  | Document Type | Strategy | Size | Overlap |
+
+  |-------------|---------|------|---------|
+
+  | KnowledgeCard | whole document | N/A | N/A |
+
+  | ContextDoc | heading-based | 1024 tokens | 0 |
+
+  | PDF/HTML/DOCX | sliding window | 512 tokens | 128 tokens |
+
+  | Code | function-level | variable | 0 |'
+step_5_metadata_enrichment: 'Add: `ingestion_date`, `corpus`, `trust_level`, `token_count`, `language`, `embedding_model`'
+step_6_embedding_generation: "embeddings = openai_client.embeddings.create(\n    model=\"text-embedding-3-small\",\n    input=[chunk.content\
+  \ for chunk in chunks]\n)\n\nBatch size: 50 chunks per API call. Rate limit: 500 requests/min (1 batch/2s)."
+step_7_deduplication_check: "Before upsert, check for near-duplicates:\npython _tools/cex_retriever.py --similarity-check\
+  \ \\\n  --query \"{chunk_content}\" \\\n  --threshold 0.97 \\\n  --corpus {corpus_name}\n\nIf similarity >= 0.97: skip upsert\
+  \ (exact duplicate), log event.\nIf similarity 0.92-0.96: flag for review queue."
+step_8_vector_store_upsert: "Per `api_reference_rag_apis.md` -> `upsert_document` endpoint.\n\nfor chunk in deduped_chunks:\n\
+  \    supabase.rpc(\"upsert_document\", {\n        \"doc_id\": str(chunk.id),\n        \"content\": chunk.content,\n    \
+  \    \"embedding\": chunk.embedding,\n        \"metadata\": chunk.metadata\n    }).execute()"
+step_9_bm25_index_update: "After all upserts:\npython _tools/cex_retriever.py --rebuild-index \\\n  --corpus {corpus_name}"
+step_10_post_ingestion_verification: "Verify the just-ingested content is retrievable:\npython _tools/cex_retriever.py \\\n\
+  \  --query \"{representative_query_from_ingested_content}\" \\\n  --corpus {corpus_name} \\\n  --verify-ingestion\n\nPASS:\
+  \ at least 1 result from ingested batch in top-10\nFAIL: ingestion failed silently -- check upsert logs"
+step_11_log_commit: "# Log ingestion event\necho \"{date} | {source} | {n_docs} docs | {corpus}\" \\\n  >> N04_knowledge/P05_output/ingestion_log.md\n\
+  \n# Commit for CEX artifact ingestions\ngit add N04_knowledge/ && \\\ngit commit -m \"[N04] ingest: {n_docs} docs from {source}\
+  \ to {corpus}\"\n\n---"
+error_handling: '| Error | Step | Recovery |
+
+  |-------|------|---------|
+
+  | Low OCR quality | 3 | Skip document, log to P07_evals/ |
+
+  | Embedding API rate limit | 6 | Exponential backoff (1s, 2s, 4s) |
+
+  | Vector store unavailable | 8 | Fall back to ChromaDB, retry pgvector in 5min |
+
+  | Dedup threshold exceeded | 7 | Skip upsert, log duplicate pair |
+
+  | Verification fails | 10 | Alert: check step 8 logs, re-run upsert |
+
+
+  ---'
+scheduled_runs: '| Trigger | Source | Corpus |
+
+  |---------|--------|--------|
+
+  | After `cex_compile.py --all` | N04_knowledge/ | cex_artifacts |
+
+  | Weekly cron (Sunday 02:00) | All CEX nuclei/ | cex_artifacts |
+
+  | Monthly (first Sunday) | External curated sources | external_docs |
+
+  | Manual trigger | Any | Any |'

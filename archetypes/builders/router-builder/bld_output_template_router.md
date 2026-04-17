@@ -46,28 +46,28 @@ density_score: {{0.80_to_1.00}}
 ## Routes
 | Pattern | Destination | Priority | Confidence Min | Conditions |
 |---------|-------------|----------|----------------|------------|
-| {{pattern_1}} | {{destination_1}} | {{1-100}} | {{0.0-1.0}} | {{conditions_or_dash}} |
-| {{pattern_2}} | {{destination_2}} | {{1-100}} | {{0.0-1.0}} | {{conditions_or_dash}} |
+| `{{pattern_1}}` | {{destination_1}} | {{1-100}} | {{0.0-1.0}} | `{{conditions_or_dash}}` |
+| `{{pattern_2}}` | {{destination_2}} | {{1-100}} | {{0.0-1.0}} | `{{conditions_or_dash}}` |
 ## Decision Logic
 Algorithm: {{priority_first|confidence_weighted|load_balanced}}
 Tie-breaking: {{highest_priority|most_specific_pattern|round_robin}}
 Evaluation order: {{sequential_top_down|parallel_all_then_rank}}
 ## Fallback
-Default destination: {{fallback_route}}
+Default destination: `{{fallback_route}}`
 Trigger: no route matches above confidence_threshold
 Behavior: {{route_to_fallback|queue_for_review|escalate}}
 ## Escalation
-Trigger: {{ambiguous_match_description}}
-Action: {{escalation_action}}
-Notification: {{signal_type_or_none}}
+Trigger: `{{ambiguous_match_description}}`
+Action: `{{escalation_action}}`
+Notification: `{{signal_type_or_none}}`
 ## Integration
-1. Receives from: {{upstream_source}}
-2. Routes to: {{downstream_destinations}}
-3. Consults: {{dispatch_rules_or_model_cards}}
-4. Signal on failure: {{signal_type}}
+1. Receives from: `{{upstream_source}}`
+2. Routes to: `{{downstream_destinations}}`
+3. Consults: `{{dispatch_rules_or_model_cards}}`
+4. Signal on failure: `{{signal_type}}`
 ## References
-1. {{reference_1}}
-2. {{reference_2}}
+1. `{{reference_1}}`
+2. `{{reference_2}}`
 
 ## Properties
 

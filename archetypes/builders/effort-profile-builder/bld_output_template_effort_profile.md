@@ -40,13 +40,13 @@ max_tokens: {{max_tokens}}
 temperature: {{temperature}}
 ```
 ## Overview
-{{overview_content}}
+`{{overview_content}}`
 ## Configuration
-{{configuration_content}}
+`{{configuration_content}}`
 ## Levels
-{{levels_content}}
+`{{levels_content}}`
 ## Integration
-{{integration_content}}
+`{{integration_content}}`
 
 ## Template Standards
 

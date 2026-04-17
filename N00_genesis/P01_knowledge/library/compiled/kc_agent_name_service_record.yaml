@@ -1,0 +1,108 @@
+id: p04_kc_agent_name_service_record
+kind: knowledge_card
+type: kind
+pillar: P04
+title: Agent Name Service Record -- Deep Knowledge for agent_name_service_record
+version: 1.0.0
+created: 2026-04-15
+updated: 2026-04-15
+author: n05_selfheal
+quality: null
+tags: []
+density_score: 1.0
+vis_o_geral: O Agent Name Service Record (ANSR) é um formato padronizado para documentar e gerenciar identidades de agentes
+  dentro do sistema CEX. Ele fornece uma forma estruturada de armazenar metadados sobre agentes, seus papéis, capacidades
+  e parâmetros operacionais.
+prop_sito: 'O ANSR tem três funções principais:
+
+  1. Gerenciamento de Identidade: Armazenar identificadores únicos e metadados dos agentes
+
+  2. Descoberta de Capacidades: Documentar capacidades funcionais e restrições
+
+  3. Configuração Operacional: Definir parâmetros de execução e regras de comportamento'
+estrutura: 'Cada ANSR consiste em esses componentes principais:'
+1_metadados_da_cabe_a: 'agent_id: "n03-builder-01"
+
+  agent_type: "builder"
+
+  created_at: "2023-10-15T14:30:00Z"
+
+  last_modified: "2023-10-15T15:45:00Z"'
+2_informa_es_de_identidade: 'name: "Quantum Architect"
+
+  alias: "qarch"
+
+  display_name: "Quantum Architecture Builder"
+
+  description: "Specializes in creating complex architectural designs for quantum computing systems"'
+3_declara_o_de_capacidades: "capabilities:\n  - type: \"design\"\n    sub_type: \"quantum\"\n    level: \"expert\"\n  - type:\
+  \ \"simulation\"\n    sub_type: \"quantum_circuit\"\n    level: \"intermediate\""
+4_par_metros_operacionais: "parameters:\n  max_token_budget: 12000\n  priority: \"high\"\n  response_format: \"structured\"\
+  \n  memory_limit: \"256MB\"\n  timeout: \"300s\""
+5_configura_o_de_seguran_a: "security:\n  access_level: \"project\"\n  authentication: \"token\"\n  encryption: \"AES-256\"\
+  \n  audit_log: true"
+6_mapeamento_de_relacionamentos: "relationships:\n  - type: \"depends_on\"\n    target: \"n01-analyst-01\"\n  - type: \"collaborates_with\"\
+  \n    target: \"n04-librarian-02\""
+tipos_de_registro: '| Tipo | Descrição | Caso de Uso |
+
+  |------|-------------|----------|
+
+  | `builder` | Cria novos artefatos | n03-builder |
+
+  | `analyst` | Realiza análise de pesquisa | n01-analyst |
+
+  | `librarian` | Gerencia repositórios de conhecimento | n04-librarian |
+
+  | `operator` | Executa tarefas de código/teste | n05-operator |
+
+  | `strategist` | Lida com monetização | n06-strategist |
+
+  | `orchestrator` | Coordena workflows | n07-orchestrator |'
+boas_pr_ticas:
+- 'Nomenclatura Consistente: Use o formato `nXX-<role>-<number>`'
+- 'Atualizações Regulares: Atualize os registros a cada 7 dias'
+- 'Segurança em Primeiro Lugar: Sempre defina o nível de acesso apropriado'
+- 'Otimização de Parâmetros: Equilibre o orçamento de tokens com a complexidade da tarefa'
+- 'Claridade nos Relacionamentos: Documente todos os relacionamentos de dependência'
+registros_de_exemplo: ''
+agente_construtor: "agent_id: \"n03-builder-01\"\nagent_type: \"builder\"\ncreated_at: \"2023-10-15T14:30:00Z\"\nlast_modified:\
+  \ \"2023-10-15T15:45:00Z\"\nname: \"Quantum Architect\"\nalias: \"qarch\"\ndisplay_name: \"Quantum Architecture Builder\"\
+  \ndescription: \"Specializes in creating complex architectural designs for quantum computing systems\"\ncapabilities:\n\
+  \  - type: \"design\"\n    sub_type: \"quantum\"\n    level: \"expert\"\n  - type: \"simulation\"\n    sub_type: \"quantum_circuit\"\
+  \n    level: \"intermediate\"\nparameters:\n  max_token_budget: 12000\n  priority: \"high\"\n  response_format: \"structured\"\
+  \n  memory_limit: \"256MB\"\n  timeout: \"300s\"\nsecurity:\n  access_level: \"project\"\n  authentication: \"token\"\n\
+  \  encryption: \"AES-256\"\n  audit_log: true\nrelationships:\n  - type: \"depends_on\"\n    target: \"n01-analyst-01\"\n\
+  \  - type: \"collaborates_with\"\n    target: \"n04-librarian-02\""
+agente_analista: "agent_id: \"n01-analyst-01\"\nagent_type: \"analyst\"\ncreated_at: \"2023-10-15T10:00:00Z\"\nlast_modified:\
+  \ \"2023-10-15T11:30:00Z\"\nname: \"Data Oracle\"\nalias: \"dataoracle\"\ndisplay_name: \"Quantum Data Analyst\"\ndescription:\
+  \ \"Specializes in analyzing complex datasets for quantum research\"\ncapabilities:\n  - type: \"analysis\"\n    sub_type:\
+  \ \"quantum_data\"\n    level: \"expert\"\n  - type: \"visualization\"\n    sub_type: \"quantum_states\"\n    level: \"\
+  advanced\"\nparameters:\n  max_token_budget: 8000\n  priority: \"medium\"\n  response_format: \"structured\"\n  memory_limit:\
+  \ \"128MB\"\n  timeout: \"180s\"\nsecurity:\n  access_level: \"user\"\n  authentication: \"token\"\n  encryption: \"AES-128\"\
+  \n  audit_log: false\nrelationships:\n  - type: \"depends_on\"\n    target: \"n07-orchestrator-01\""
+erros_comuns: '| Código de Erro | Descrição | Resolução |
+
+  |------------|-------------|------------|
+
+  | `ANSR-001` | Identificador do agente ausente | Adicione identificador único |
+
+  | `ANSR-002` | Tipo de capacidade inválido | Use tipos de capacidade documentados |
+
+  | `ANSR-003` | Valor do parâmetro fora do intervalo | Ajuste para o intervalo válido |
+
+  | `ANSR-004` | Configuração de segurança ausente | Adicione campos de segurança necessários |
+
+  | `ANSR-005` | Tipo de relacionamento inválido | Use tipos de relacionamento documentados |'
+hist_rico_de_vers_es: '| Versão | Data | Alterações |
+
+  |--------|------|---------|
+
+  | 1.0.0 | 2023-10-15 | Lançamento inicial |
+
+  | 1.1.0 | 2023-10-16 | Adição de registros de exemplo |
+
+  | 1.2.0 | 2023-10-17 | Melhoria na seção de tratamento de erros |'
+documentos_relacionados:
+- P01_knowledge/library/kind/kc_agent_discovery.md
+- P01_knowledge/library/kind/kc_agent_capabilities.md
+- P01_knowledge/library/kind/kc_agent_security.md

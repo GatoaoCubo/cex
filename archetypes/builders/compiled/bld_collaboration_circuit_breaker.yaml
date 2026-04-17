@@ -1,0 +1,54 @@
+kind: collaboration
+id: bld_collaboration_circuit_breaker
+pillar: P12
+llm_function: COLLABORATE
+purpose: How circuit-breaker-builder works in crews with other builders
+pattern: each builder must know its ROLE in a team, what it RECEIVES and PRODUCES
+quality: 7.9
+title: Collaboration Circuit Breaker
+version: 1.0.0
+author: n03_builder
+tags:
+- circuit_breaker
+- builder
+- collaboration
+tldr: Dependency fault isolation specialist. Upstream of runtime_rule and monitor. Downstream of agent and tool configs.
+domain: circuit breaker construction
+created: '2026-04-17'
+updated: '2026-04-17'
+density_score: 0.9
+my_role_in_crews: 'I am a RESILIENCE SPECIALIST. I answer ONE question: "how should this dependency be isolated when it fails,
+  and how should recovery be probed?" I do not define retry logic. I do not define inbound rate limits. I do not choose between
+  providers. I declare the fault isolation boundary for a single downstream dependency.'
+crew_compositions: ''
+crew_resilient_api_integration: "  1. rate-limit-config-builder  -> \"quota declaration (RPM, TPM, budget)\"\n  2. circuit-breaker-builder\
+  \    -> \"fault isolation (failure threshold, cooldown)\"\n  3. runtime-rule-builder       -> \"retry and backoff policy\
+  \ for 429 and transient failures\"\n  4. env-config-builder         -> \"API key, base URL, model selection\""
+crew_production_hardening: "  1. circuit-breaker-builder    -> \"per-service fault isolation configs\"\n  2. backpressure-policy-builder\
+  \ -> \"upstream flow control during degradation\"\n  3. guardrail-builder          -> \"execution constraints and safety\
+  \ limits\"\n  4. monitor-builder            -> \"state transition observability\""
+crew_multi_provider_resilience: "  1. fallback-chain-builder     -> \"ordered provider substitution list\"\n  2. circuit-breaker-builder\
+  \    -> \"breaker per provider in the chain\"\n  3. rate-limit-config-builder  -> \"quotas per provider\""
+handoff_protocol: ''
+i_receive:
+- 'seeds: service name, traffic volume, acceptable failure tolerance'
+- 'failure patterns: what types of errors occur (5xx, timeout, DNS)'
+- 'recovery SLA: how long is an outage before recovery should be attempted'
+i_produce:
+- circuit_breaker artifact (.md with YAML frontmatter)
+- 'committed to: `N0X_{domain}/P09_config/p09_cb_{service_slug}.md`'
+i_signal:
+- 'signal: complete (with quality score)'
+- 'if quality < 8.0: signal retry with gate failures listed'
+builders_i_depend_on: None -- independent builder (layer 0). Circuit breakers can be defined standalone.
+builders_that_depend_on_me: '| Builder | Why |
+
+  |---------|-----|
+
+  | agent-builder | Agents wrap calls through circuit breaker at execution time |
+
+  | runtime-rule-builder | Retry policy may consult circuit state before retrying |
+
+  | monitor-builder | Monitors track CLOSED/OPEN/HALF-OPEN state transition events |
+
+  | backpressure-policy-builder | Backpressure may read circuit state to decide shedding policy |'

@@ -1,0 +1,110 @@
+---
+id: kc_lineage_record
+kind: knowledge_card
+pillar: P01
+nucleus: n00
+domain: kind-taxonomy
+quality: 7.9
+tags: [kind, taxonomy, lineage_record, P01, knowledge, provenance]
+density_score: 0.97
+updated: "2026-04-17"
+---
+
+# lineage_record
+
+## Spec
+```yaml
+kind: lineage_record
+pillar: P01
+llm_function: INJECT
+max_bytes: 3072
+naming: p01_lr_{{name}}.md + .yaml
+core: false
+```
+
+## What It Is
+A lineage_record documents the provenance chain of a knowledge artifact: what sources it was derived from, what transformation activities occurred, and which agents (nuclei, tools, humans) were responsible. Based on the W3C PROV-O standard (PROV Ontology).
+
+It is NOT:
+- `audit_log` (compliance event sequence -- records who did what for regulatory purposes; no provenance semantics)
+- `citation` (in-text source reference -- a single bibliographic entry; not a full derivation chain)
+- `learning_record` (session learning capture -- records what was learned, not how an artifact was made)
+
+## When to Use
+- After synthesizing a knowledge_card from multiple rag_sources
+- After a large knowledge import wave (FRACTAL_FILL)
+- When an artifact is derived from prior artifacts in a chain
+- For reproducibility: anyone should be able to re-derive the artifact from the lineage
+- For compliance or audit requirements on knowledge provenance
+
+## When NOT to Use
+- Recording compliance events -> use `audit_log`
+- Adding a citation in a document -> use `citation`
+- Capturing session learnings -> use `learning_record`
+- Tracking entity facts -> use `entity_memory`
+
+## Structure
+```yaml
+# Required frontmatter fields
+id: p01_lr_{name_slug}
+kind: lineage_record
+pillar: P01
+target_artifact: "artifact-id-whose-provenance-is-recorded"
+sources_count: N
+activities_count: N
+derivation_type: wasDerivedFrom | wasGeneratedBy | wasQuotedFrom | wasRevisionOf
+quality: null
+```
+
+```markdown
+## Entities
+Table: id, type, location/URL, retrieval_timestamp (ISO 8601)
+
+## Activities
+Table: id, label, used (entity ids), generated (entity id), agent, timestamp
+
+## Agents
+Table: id, type (nucleus|tool|human), role
+
+## Derivation Relations
+PROV-O triples: target wasGeneratedBy activity, target wasDerivedFrom source, etc.
+```
+
+## PROV-O Core Vocabulary
+| Term | Meaning in CEX |
+|------|---------------|
+| prov:Entity | knowledge artifact, rag_source, raw document, dataset |
+| prov:Activity | ingestion, synthesis, distillation, validation, annotation |
+| prov:Agent | nucleus (N01-N07), tool, human curator |
+| wasDerivedFrom(E2, E1) | knowledge_card built from rag_source |
+| wasGeneratedBy(E, A) | artifact produced by synthesis activity |
+| wasAttributedTo(E, Ag) | artifact attributed to N04 |
+| used(A, E) | activity consumed a source entity |
+
+## Derivation Types
+| Type | When |
+|------|------|
+| wasDerivedFrom | Target built directly from source |
+| wasGeneratedBy | Target is output of a specific activity |
+| wasQuotedFrom | Target contains verbatim content |
+| wasRevisionOf | Target is an update of a prior artifact |
+
+## Relationships
+```
+[rag_source] --> [ingestion activity] --> [knowledge_card]
+[knowledge_card] --> [lineage_record] (provenance of the KC)
+[lineage_record] -- cites --> [citation] (extracted source refs)
+[audit_log] -- compliance copy of --> [lineage_record] (optional)
+```
+
+## Decision Tree
+- IF synthesizing KC from multiple sources -> create lineage_record immediately
+- IF source is unknown -> use entity type: unknown; note "provenance unavailable"
+- IF artifact is revised -> use wasRevisionOf derivation type
+- IF tool generated artifact -> agent type: tool; include tool id
+- DEFAULT: create lineage_record after any FRACTAL_FILL or import wave
+
+## Quality Criteria
+- GOOD: target_artifact set, at least 1 source entity, at least 1 activity, agent identified
+- GREAT: PROV-O relations explicit, ISO timestamps on all entities, derivation type correct
+- FAIL: No source entity, no activity, sources_count mismatch, no agent

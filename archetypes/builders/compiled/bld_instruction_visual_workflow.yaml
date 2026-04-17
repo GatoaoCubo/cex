@@ -1,0 +1,38 @@
+kind: instruction
+id: bld_instruction_visual_workflow
+pillar: P03
+llm_function: REASON
+purpose: Step-by-step production process for visual_workflow
+quality: null
+title: Instruction Visual Workflow
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- visual_workflow
+- builder
+- instruction
+tldr: Step-by-step production process for visual_workflow
+domain: visual_workflow construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+phase_1_research:
+- Analyze existing GUI workflow tools for feature parity
+- Identify user interaction patterns for drag-and-drop node placement
+- Map workflow elements (tasks, triggers, conditions) to visual components
+- Study UI/UX principles for hierarchical workflow visualization
+- Evaluate technical constraints (browser compatibility, performance)
+- Document requirements for real-time validation and error highlighting
+phase_2_compose:
+- Define node schema using bld_schema_visual_workflow.md for data model alignment
+- Specify node types (trigger, action, condition, output) with input/output ports
+- 'Define edge schema: connection type, data type, cardinality'
+- Map workflow DSL to visual representation (Mermaid-compatible node/edge schema)
+- Apply bld_output_template_visual_workflow.md for final artifact structure
+- Integrate validation rules from bld_schema_visual_workflow.md into workflow engine
+- 'Add persistence layer: serialize/deserialize workflow as JSON'
+- 'Document visual layout conventions: left-to-right flow, color-coded node types'
+- Finalize artifact with versioning and export capabilities
+phase_3_validate: '[ ] Frontmatter complete and valid YAML [ ] Node schema complete with all required fields [ ] Edge connections
+  validated (no orphaned nodes) [ ] Conforms to bld_output_template_visual_workflow.md structure [ ] Compatible with at least
+  one DSL standard (Mermaid, LangGraph, n8n)'

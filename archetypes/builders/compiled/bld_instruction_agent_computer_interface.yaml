@@ -1,0 +1,42 @@
+kind: instruction
+id: bld_instruction_agent_computer_interface
+pillar: P03
+llm_function: REASON
+purpose: Step-by-step production process for agent_computer_interface
+quality: null
+title: Instruction Agent Computer Interface
+version: 1.0.0
+author: wave1_builder_gen
+tags:
+- agent_computer_interface
+- builder
+- instruction
+tldr: Step-by-step production process for agent_computer_interface
+domain: agent_computer_interface construction
+created: '2026-04-13'
+updated: '2026-04-13'
+density_score: 0.85
+phase_1_research:
+- Analyze OS-level accessibility APIs (X11, Wayland, or Windows UI Automation).
+- Map terminal escape sequences and ANSI/Xterm capability sets.
+- Define UI tree traversal logic for DOM and desktop GUI automation.
+- Evaluate latency constraints for real-time screen/input feedback loops.
+- Audit security boundaries for sandboxed agent execution environments.
+- Catalog standard input/output (STDIN/STDOUT) stream protocols.
+phase_2_compose:
+- Initialize document structure based on bld_output_template_agent_computer_interface.md.
+- Define the CALL function signature for interface invocation.
+- Map input primitives (keystrokes, clicks) to bld_schema_agent_computer_interface.md types.
+- Detail the state machine for terminal and GUI session management.
+- Implement error-handling protocols for unresponsive UI elements.
+- Integrate observation feedback loops (OCR/DOM parsing) per SCHEMA.md.
+- Define the protocol for agent-to-host command serialization.
+- Apply formatting constraints from OUTPUT_TEMPLATE.md.
+- Finalize the interaction handshake logic per bld_quality_gate_agent_computer_interface.md H-gates.
+phase_3_validate:
+- '[ ] Verify all CALL primitives map to valid bld_schema_agent_computer_interface.md definitions.'
+- '[ ] Confirm terminal escape sequence compatibility.'
+- '[ ] Validate sandboxing and security constraints for agent execution.'
+- '[ ] Ensure all HARD gates pass per bld_quality_gate_agent_computer_interface.md.'
+- '[ ] Confirm quality: null (never self-score).'
+- '[ ] Run: python _tools/cex_hooks.py validate {path}'

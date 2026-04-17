@@ -1,0 +1,59 @@
+kind: output_template
+id: bld_output_template_discovery_questions
+pillar: P05
+llm_function: PRODUCE
+purpose: Template with vars for discovery_questions production
+quality: null
+title: Output Template Discovery Questions
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- discovery_questions
+- builder
+- output_template
+tldr: Template with vars for discovery_questions production
+domain: discovery_questions construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+personas: '| Persona | Role | Pain Points | Decision Criteria |
+
+  |---------|------|-------------|-------------------|
+
+  | {{persona_1}} | {{role_1}} | {{pain_1}} | {{criteria_1}} |
+
+  | {{persona_2}} | {{role_2}} | {{pain_2}} | {{criteria_2}} |'
+discovery_questions_by_stage: ''
+stage_1_qualification_bant: '| Framework | Question | Intent |
+
+  |-----------|----------|--------|
+
+  | Budget | {{q_budget}} | Uncover spend authority |
+
+  | Authority | {{q_authority}} | Identify decision-maker |
+
+  | Need | {{q_need}} | Surface pain points |
+
+  | Timeline | {{q_timeline}} | Establish urgency |'
+stage_2_solution_fit_meddic: '| Criterion | Question | Expected Insight |
+
+  |-----------|----------|-----------------|
+
+  | Metrics | {{q_metrics}} | Quantify success criteria |
+
+  | Economic Buyer | {{q_economic_buyer}} | Confirm budget authority |
+
+  | Decision Criteria | {{q_decision_criteria}} | Understand evaluation factors |
+
+  | Identify Pain | {{q_pain}} | Deepen problem understanding |
+
+  | Champion | {{q_champion}} | Validate internal sponsor |'
+stage_3_closing_negotiation: '| Scenario | Question | Goal |
+
+  |----------|----------|------|
+
+  | Urgency probe | {{q_urgency}} | Surface timeline drivers |
+
+  | Objection test | {{q_objection}} | Pre-handle blockers |
+
+  | Commitment | {{q_commitment}} | Move to next step |'

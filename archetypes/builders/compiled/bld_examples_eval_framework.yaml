@@ -1,0 +1,33 @@
+kind: examples
+id: bld_examples_eval_framework
+pillar: P07
+llm_function: GOVERN
+purpose: Golden and anti-examples of eval_framework artifacts
+quality: null
+title: Examples Eval Framework
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- eval_framework
+- builder
+- examples
+tldr: Golden and anti-examples of eval_framework artifacts
+domain: eval_framework construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+golden_example: "---\nkind: eval_framework\nname: HuggingFaceTransformersEvaluation\ndescription: End-to-end evaluation using\
+  \ Hugging Face Transformers and MLflow\ntools: [\"Hugging Face Transformers\", \"MLflow\", \"Datasets\"]\nmetrics: [\"accuracy\"\
+  , \"F1 score\", \"perplexity\"]\nworkflow:\n  - data_loading: \"Load dataset from Hugging Face Datasets\"\n  - model_inference:\
+  \ \"Run inference with Hugging Face Transformers model\"\n  - metric_calculation: \"Compute metrics using evaluate library\"\
+  \n  - logging: \"Log results to MLflow tracking server\"\n---\n\nHugging Face Transformers provides a unified API for model\
+  \ evaluation. The framework integrates with MLflow for experiment tracking and leverages the Hugging Face Datasets library\
+  \ for data loading. It supports multiple metrics and ensures reproducibility through versioned model and dataset references."
+anti_example_1_benchmark_suite_confusion: "---\nkind: eval_framework\nname: GLUEBenchmark\ndescription: Evaluation using GLUE\
+  \ benchmark tasks\ntools: [\"GLUE benchmark\"]\nmetrics: [\"accuracy\"]\nworkflow:\n  - data_loading: \"Load GLUE tasks\"\
+  \n  - model_inference: \"Run model on tasks\"\n  - metric_calculation: \"Compute accuracy\"\n---"
+why_it_fails: An evaluation framework must support multiple metrics and comprehensive analysis. Focusing on a single metric
+  (accuracy) ignores critical aspects like fairness, robustness, and error analysis.
+anti_example_2_single_metric_focus: "---\nkind: eval_framework\nname: AccuracyOnly\ndescription: Evaluation framework focusing\
+  \ on accuracy\ntools: [\"Custom script\"]\nmetrics: [\"accuracy\"]\nworkflow:\n  - data_loading: \"Load data\"\n  - model_inference:\
+  \ \"Run model\"\n  - metric_calculation: \"Compute accuracy\"\n---"

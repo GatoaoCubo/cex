@@ -1,0 +1,18 @@
+kind: output_template
+id: bld_output_template_nucleus_def
+pillar: P05
+llm_function: PRODUCE
+purpose: Template with vars for nucleus_def production
+quality: null
+title: Output Template Nucleus Def
+version: 1.0.0
+author: n05_wave8
+tags:
+- nucleus_def
+- builder
+- output_template
+tldr: Template with vars for nucleus_def production
+domain: nucleus_def construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85

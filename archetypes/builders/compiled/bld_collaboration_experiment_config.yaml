@@ -1,0 +1,61 @@
+kind: collaboration
+id: bld_collaboration_experiment_config
+pillar: P12
+llm_function: COLLABORATE
+purpose: How experiment-config-builder works in crews with other builders
+pattern: each builder must know its ROLE in a team, what it RECEIVES and PRODUCES
+quality: null
+title: Collaboration Experiment Config
+version: 1.0.0
+author: n03_builder
+tags:
+- experiment_config
+- builder
+- collaboration
+- P12
+tldr: 'Crew roles for experiment-config-builder: receives variant seeds, produces complete experiment spec, feeds winning
+  results to feature-flag-builder.'
+domain: experiment config construction
+created: '2026-04-13'
+updated: '2026-04-13'
+density_score: 0.88
+my_role_in_crews: 'I am a SPECIALIST. I answer ONE question: "what variants does this experiment compare, how is traffic allocated,
+  and what metrics determine success?" I do not define the variant content (prompt templates do that). I do not decide permanence
+  (feature-flag-builder does that after I conclude). I specify the experiment framework so controlled trials are statistically
+  valid and operationally safe.'
+crew_compositions: ''
+crew_prompt_optimization: "  1. prompt-template-builder -> \"create control and treatment prompt variants\"\n  2. experiment-config-builder\
+  \ -> \"define A/B test: traffic split, metrics, statistics\"\n  3. quality-gate-builder -> \"scoring rubric for evaluation\"\
+  \n  4. learning-record-builder -> \"capture learnings when experiment concludes\""
+crew_feature_rollout: "  1. experiment-config-builder -> \"validate new feature via controlled trial\"\n  2. feature-flag-builder\
+  \ -> \"promote winning variant to permanent rollout\"\n  3. env-config-builder -> \"update environment variables for new\
+  \ configuration\"\n  4. trace-config-builder -> \"tag traces with experiment_id and variant\""
+crew_model_comparison: "  1. agent-builder -> \"define agent for each model variant\"\n  2. experiment-config-builder -> \"\
+  A/B test model A vs model B traffic allocation\"\n  3. benchmark-builder -> \"define scoring criteria for model quality\"\
+  \n  4. learning-record-builder -> \"record model selection decision\""
+handoff_protocol: ''
+i_receive:
+- 'seeds: experiment name, domain (what is being tested), variant descriptions'
+- 'optional: traffic split preferences, metric definitions, segment constraints'
+- 'optional: statistical targets (MDE, significance threshold)'
+i_produce:
+- experiment_config artifact (.md + .yaml frontmatter)
+- 'committed to: `P09_config/examples/p09_ec_{name_slug}.md`'
+i_signal:
+- 'signal: complete (with quality score from QUALITY_GATES)'
+- 'if quality < 8.0: signal retry with failure reasons'
+- 'on conclusion: signal to feature-flag-builder or learning-record-builder'
+builders_i_depend_on:
+- 'prompt-template-builder: provides variant prompt content referenced in variant descriptions'
+- 'trace-config-builder: confirms experiment_id tagging is in place before launch'
+builders_that_depend_on_me: '| Builder | Why |
+
+  |---------|-----|
+
+  | feature-flag-builder | Receives winning variant from concluded experiments for permanent promotion |
+
+  | learning-record-builder | Receives experiment findings, effect size, and decision rationale |
+
+  | env-config-builder | Receives any environment variable changes required by winning variant |
+
+  | agent-builder | Reads active experiment config to select variant parameters per request |'

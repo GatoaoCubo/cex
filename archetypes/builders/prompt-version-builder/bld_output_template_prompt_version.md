@@ -39,13 +39,13 @@ status: "{{status}}}}"
 model_tested: "{{model_tested}}}}"
 ```
 ## Overview
-{{overview_content}}
+`{{overview_content}}`
 ## Prompt Snapshot
-{{prompt_snapshot_content}}
+`{{prompt_snapshot_content}}`
 ## Metrics
-{{metrics_content}}
+`{{metrics_content}}`
 ## Lineage
-{{lineage_content}}
+`{{lineage_content}}`
 
 ## Template Standards
 

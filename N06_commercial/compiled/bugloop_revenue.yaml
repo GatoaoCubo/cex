@@ -1,0 +1,82 @@
+id: bugloop_revenue
+kind: bugloop
+pillar: P11
+nucleus: n06
+title: Revenue Bugloop -- Automated Revenue Anomaly Detection and Remediation
+version: 1.0.0
+quality: 9.0
+tags:
+- bugloop
+- revenue
+- anomaly
+- remediation
+- feedback
+- commercial
+density_score: 1.0
+updated: '2026-04-17'
+purpose: 'Catches revenue-impacting defects in real time: billing errors, checkout failures, webhook misses, and pricing calculation
+  bugs. Every hour of undetected revenue bug = compounding loss. This loop runs continuously and self-remediates where safe.'
+detection_layer: ''
+revenue_anomaly_signals: "ANOMALY_RULES = {\n    # Billing errors\n    \"double_charge\": {\n        \"condition\": \"customer\
+  \ charged twice within 10 minutes for same product\",\n        \"severity\": \"CRITICAL\",\n        \"auto_remediate\":\
+  \ True,\n        \"action\": \"issue_refund_second_charge + alert_ops\"\n    },\n    \"wrong_price\": {\n        \"condition\"\
+  : \"charge_amount != expected_price_from_enum_def\",\n        \"severity\": \"HIGH\",\n        \"auto_remediate\": True,\n\
+  \        \"action\": \"hold_payment + create_corrected_invoice\"\n    },\n    \"trial_expired_still_free\": {\n        \"\
+  condition\": \"subscription.trial_end < now AND status == trialing\",\n        \"severity\": \"MEDIUM\",\n        \"auto_remediate\"\
+  : True,\n        \"action\": \"force_subscription_status_update\"\n    },\n    \n    # Checkout failures\n    \"checkout_session_abandoned\"\
+  : {\n        \"condition\": \"checkout.session.expired without checkout.session.completed\",\n        \"severity\": \"LOW\"\
+  ,\n        \"auto_remediate\": False,\n        \"action\": \"send_cart_abandonment_email\"\n    },\n    \"webhook_missed\"\
+  : {\n        \"condition\": \"stripe_event not processed within 30 seconds\",\n        \"severity\": \"HIGH\",\n       \
+  \ \"auto_remediate\": True,\n        \"action\": \"replay_event + alert_eng\"\n    },\n    \n    # Referral bugs\n    \"\
+  referral_credit_not_applied\": {\n        \"condition\": \"referee converted AND referral_code valid AND credit not issued\
+  \ within 1 hour\",\n        \"severity\": \"MEDIUM\",\n        \"auto_remediate\": True,\n        \"action\": \"backfill_referral_credit\
+  \ + notify_referrer\"\n    },\n    \n    # Churn system bugs\n    \"cancel_sequence_not_triggered\": {\n        \"condition\"\
+  : \"subscription.cancel_at_period_end=true AND no cancel_play started within 1 hour\",\n        \"severity\": \"MEDIUM\"\
+  ,\n        \"auto_remediate\": True,\n        \"action\": \"trigger_churn_prevention_playbook\"\n    },\n    \n    # MRR\
+  \ calculation bugs\n    \"mrr_spike_30pct\": {\n        \"condition\": \"calculated_mrr differs from previous period by\
+  \ >30%\",\n        \"severity\": \"HIGH\",\n        \"auto_remediate\": False,\n        \"action\": \"alert_ops + freeze_mrr_report\
+  \ + manual_audit\"\n    }\n}"
+remediation_confidence_levels: "| Level | Definition | Action |\n|-------|-----------|--------|\n| AUTO | Low risk, reversible,\
+  \ clear fix | Execute without human review |\n| SUPERVISED | Higher risk, needs audit trail | Execute + notify ops within\
+  \ 15 min |\n| MANUAL | Irreversible or unclear | Block + alert ops immediately |\n\nremediation_confidence_map:\n  double_charge:\
+  \ SUPERVISED      # financial impact, needs audit trail\n  wrong_price: SUPERVISED        # financial impact\n  trial_expired:\
+  \ AUTO            # no financial risk, idempotent\n  webhook_missed: AUTO           # idempotent replay\n  referral_credit:\
+  \ SUPERVISED    # billing impact\n  cancel_not_triggered: AUTO     # starts a workflow, reversible\n  mrr_spike: MANUAL\
+  \              # data integrity concern"
+monitoring_schedule: 'Real-time: webhook processing health (< 30 sec lag)
+
+  Every 5 min: active checkout sessions scan
+
+  Every 15 min: trial expiry check
+
+  Every hour: referral credit reconciliation
+
+  Every 6 hours: MRR calculation vs Stripe source-of-truth
+
+  Daily: full billing reconciliation audit
+
+  Weekly: churn prevention sequence audit'
+remediation_audit_log_schema: "{\n  \"bug_id\": \"BUG_2026_04_17_001\",\n  \"anomaly_type\": \"referral_credit_not_applied\"\
+  ,\n  \"detected_at\": \"2026-04-17T10:15:00Z\",\n  \"severity\": \"MEDIUM\",\n  \"confidence_level\": \"SUPERVISED\",\n\
+  \  \"affected_customers\": [\"cus_abc123\"],\n  \"revenue_impact_cents\": 4900,\n  \"auto_remediated\": true,\n  \"remediation_action\"\
+  : \"backfill_referral_credit\",\n  \"remediated_at\": \"2026-04-17T10:16:30Z\",\n  \"human_reviewed\": false,\n  \"ops_notified\"\
+  : true\n}"
+escalation_matrix: 'CRITICAL: page oncall immediately, freeze affected revenue flows
+
+  HIGH: alert ops via Slack + email within 5 minutes
+
+  MEDIUM: Slack notification, ops reviews within 1 hour
+
+  LOW: daily digest, reviewed by EOD'
+integration_with_self_improvement_loop: 'Bugs that occur >3 times trigger a hypothesis in `self_improvement_loop_n06.md`:
+
+  - Root cause analysis
+
+  - Schema update proposal
+
+  - Test case addition to prevent recurrence'
+related_artifacts:
+- '`api_reference_stripe.md` -- Stripe events that trigger detection'
+- '`churn_prevention_playbook_n06.md` -- triggered by cancel sequence bug detection'
+- '`self_improvement_loop_n06.md` -- recurring bugs become improvement candidates'
+- '`eval_metric_commercial.md` -- revenue impact metrics updated by bugloop'

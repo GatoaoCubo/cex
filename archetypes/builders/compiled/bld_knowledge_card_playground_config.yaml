@@ -1,0 +1,66 @@
+kind: knowledge_card
+id: bld_knowledge_card_playground_config
+pillar: P01
+llm_function: INJECT
+purpose: Domain knowledge for playground_config production
+quality: null
+title: Knowledge Card Playground Config
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- playground_config
+- builder
+- knowledge_card
+tldr: Domain knowledge for playground_config production
+domain: playground_config construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+domain_overview: 'Playground_config artifacts define interactive, try-before-buy evaluation environments for AI products,
+  APIs, and SDKs. The pattern is proven by OpenAI Playground (prompt + model + sampling controls), Anthropic Console, Swagger/OpenAPI
+  "Try It Out" in-browser explorers, Replit and CodeSandbox embed APIs, and JupyterLite WASM kernels. The goal is zero-friction
+  first-touch: the user runs a representative workload with sane defaults, hits resource caps safely, and sees a clear upgrade
+  path to paid tiers. A playground_config differs from a sandbox_spec: playground optimizes for conversion (low friction,
+  short sessions, shareable URLs), sandbox optimizes for enterprise procurement (strict isolation, audit trails, compliance).
+  Playground sessions are typically rate-limited, time-boxed, stateless, and observable.'
+key_concepts: '| Concept | Definition | Source |
+
+  |---|---|---|
+
+  | Rate-limited session | Per-IP or per-key caps on requests and tokens | OpenAI Playground, Anthropic Console |
+
+  | Interactive REPL | Read-eval-print loop in browser | JupyterLite, Replit, CodeSandbox |
+
+  | API Try-It-Out | Form-driven API call from docs | Swagger UI, Redoc, Stoplight |
+
+  | Embed snippet | iframe or script tag to host playground elsewhere | CodeSandbox, StackBlitz, Replit |
+
+  | Activation metric | Instrumented event signaling value realized | PLG literature (Reforge, OpenView) |
+
+  | Quota gate | Hard stop that surfaces upgrade prompt | Vercel, Supabase, Stripe test mode |
+
+  | Ephemeral state | No persistence across sessions | Firecracker-backed notebook kernels |
+
+  | Sharable reproduction | URL encodes prompt + config for collab | OpenAI Playground share links |'
+industry_standards:
+- OpenAI Playground (prompt + model + temperature + max_tokens reference UX)
+- Anthropic Console playground controls
+- Swagger UI / OpenAPI 3.1 "Try It Out" spec
+- Replit + CodeSandbox embed API contracts
+- JupyterLite (WASM Python, pyodide)
+- Product-Led Growth activation metric frameworks (Reforge, OpenView)
+- JSON Schema draft 2020-12 (config validation)
+- 12-Factor App (externalized config principles)
+common_patterns:
+- Pre-filled example prompts that demonstrate the killer use case in under 10 seconds.
+- Hard quotas (token + rate) with inline upgrade CTA when exceeded.
+- Stateless, shareable URLs encoding the full config.
+- Embed mode via iframe with postMessage event bus for analytics.
+- Activation event fires on first successful run; feeds conversion funnel.
+- Ephemeral compute via WASM or Firecracker micro-VMs for isolation.
+pitfalls:
+- Generous defaults burn compute budget with zero conversion signal.
+- No activation metric -- unable to measure free-to-paid funnel effectiveness.
+- Playground treated as a sandbox (over-isolated, slow boot, hurts first-touch UX).
+- Missing upgrade CTA at quota wall -- friction without destination.
+- No shareable reproduction -- blocks viral loop and support reproducibility.

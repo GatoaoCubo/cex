@@ -133,23 +133,77 @@ if (Test-Path $pidFile) {
     Log "    No PID file"
 }
 
-# --- STEP 2: Window title scan (only if -All) ---
+# --- STEP 2: CommandLine scan (MORE RELIABLE than MainWindowTitle) ---
+# MainWindowTitle can be truncated or stale (prompt-theme title).
+# Win32_Process.CommandLine is the immutable launch command -- source of truth.
+# Runs on MY session by default, -All to scan every session.
 Log ""
-Log "  STEP 2: Window title scan"
-if ($All) {
-    # Nuclei can run in CMD (.cmd boot) or PowerShell (.ps1 boot)
-    $wins = @(Get-Process cmd, powershell -EA SilentlyContinue |
-        Where-Object { $PSItem.MainWindowTitle -match 'CEX-N0[1-7]|N0[1-6]\s' })
-    foreach ($w in $wins) {
-        if ($w.Id -notin $killedPids) {
-            Log "    Found '$($w.MainWindowTitle)' PID:$($w.Id)"
-            Kill-Tree -TargetPid $w.Id -Tag "title"
+Log "  STEP 2: CommandLine scan (boot/n0X_*.ps1 wrappers)"
+$cimAll = Get-CimInstance Win32_Process -Filter "Name='powershell.exe'" -EA SilentlyContinue
+$bootWrappers = @($cimAll | Where-Object {
+    $PSItem.CommandLine -match 'boot[/\\]n0[1-7](_gemini|_codex|_ollama|_litellm)?\.ps1' -and
+    $PSItem.ProcessId -notin $killedPids -and
+    $PSItem.ProcessId -ne $PID
+})
+$wrappedBySession = @{}
+if (-not $All -and $targetSession) {
+    # Only kill wrappers whose pid matches our session's pid file entries
+    $sessionPids = @()
+    if (Test-Path $pidFile) {
+        foreach ($line in (Get-Content $pidFile)) {
+            $parts = $line.Trim().Split(' ')
+            if ($parts.Count -ge 4 -and $parts[3] -eq $targetSession) {
+                $sessionPids += [int]$parts[0]
+            }
         }
     }
-    if ($wins.Count -eq 0) { Log "    No CEX windows found" }
-} else {
-    Log "    SKIPPED (only with -All flag)"
+    # ALSO: if pid file is incomplete (showoff case), fall back to ALL boot wrappers
+    # since they will have been created by the current N07 orchestration.
+    # Session protection means we check if they're children of claude.exe from another session.
 }
+foreach ($w in $bootWrappers) {
+    $match = $Matches[0]
+    if ($All) {
+        Log "    CMDLINE: PID:$($w.ProcessId) $match"
+        Kill-Tree -TargetPid $w.ProcessId -Tag "cmdline"
+    } elseif ($targetSession) {
+        # Only kill if this wrapper is in MY session's pid file, OR orphan (no pid file entry)
+        $inSession = $sessionPids -contains $w.ProcessId
+        $tracked = $false
+        if (Test-Path $pidFile) {
+            foreach ($line in (Get-Content $pidFile)) {
+                if (($line.Trim().Split(' '))[0] -eq "$($w.ProcessId)") { $tracked = $true; break }
+            }
+        }
+        if ($inSession -or -not $tracked) {
+            Log "    CMDLINE: PID:$($w.ProcessId) (in-session:$inSession tracked:$tracked)"
+            Kill-Tree -TargetPid $w.ProcessId -Tag "cmdline-session"
+        } else {
+            Log "    CMDLINE: SKIP PID:$($w.ProcessId) (other session)"
+        }
+    }
+}
+if ($bootWrappers.Count -eq 0) { Log "    No boot wrappers found" }
+
+# --- STEP 2b: Orphan node.exe cleanup (gemini children) ---
+# Gemini CLI runs as node.exe -- no gemini.exe. When wrapper dies without
+# tree-killing, node.exe lingers. Kill any node whose parent is dead AND
+# whose CommandLine references gemini/codex npm packages.
+Log ""
+Log "  STEP 2b: Orphan node.exe (gemini/codex CLI workers)"
+$orphanNodes = @(Get-CimInstance Win32_Process -Filter "Name='node.exe'" -EA SilentlyContinue |
+    Where-Object {
+        $parentAlive = Get-Process -Id $PSItem.ParentProcessId -EA SilentlyContinue
+        -not $parentAlive -and
+        ($PSItem.CommandLine -match 'gemini|codex|@google|@openai' -or $PSItem.CommandLine -eq $null)
+    })
+foreach ($n in $orphanNodes) {
+    if ($n.ProcessId -notin $killedPids) {
+        Log "    ORPHAN node PID:$($n.ProcessId) parent-dead"
+        Kill-Tree -TargetPid $n.ProcessId -Tag "orphan-node"
+    }
+}
+if ($orphanNodes.Count -eq 0) { Log "    No orphan node processes" }
 
 # --- STEP 3: Orphan scan (ONLY if -All, NEVER by default) ---
 Log ""

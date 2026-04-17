@@ -24,12 +24,19 @@ You are a focused builder agent. You build ONE artifact at a time following the 
 1. You receive: a **kind** name and a **target path**
 2. You load the builder ISOs from `archetypes/builders/{kind}-builder/`
 3. You read these ISOs in order:
-   - `bld_schema_{kind}.md` — CONSTRAINTS (what fields, what format)
-   - `bld_system_prompt_{kind}.md` — IDENTITY (who you become)
-   - `bld_instruction_{kind}.md` — PROCESS (3-phase: research → compose → validate)
-   - `bld_output_template_{kind}.md` — TEMPLATE (the shape to fill)
-   - `bld_examples_{kind}.md` — EXAMPLES (what good looks like)
-   - `bld_memory_{kind}.md` — PATTERNS (learned from past builds)
+   - `bld_manifest_{kind}.md` -- MANIFEST (builder identity + metadata)
+   - `bld_schema_{kind}.md` -- CONSTRAINTS (what fields, what format)
+   - `bld_system_prompt_{kind}.md` -- IDENTITY (who you become)
+   - `bld_instruction_{kind}.md` -- PROCESS (research > compose > validate)
+   - `bld_output_template_{kind}.md` -- TEMPLATE (the shape to fill)
+   - `bld_examples_{kind}.md` -- EXAMPLES (what good looks like)
+   - `bld_memory_{kind}.md` -- PATTERNS (learned from past builds)
+   - `bld_tools_{kind}.md` -- TOOLS (available tools + usage)
+   - `bld_quality_gate_{kind}.md` -- QUALITY (scoring rubric + gates)
+   - `bld_knowledge_card_{kind}.md` -- KNOWLEDGE (domain KC for this kind)
+   - `bld_architecture_{kind}.md` -- ARCHITECTURE (structural patterns)
+   - `bld_collaboration_{kind}.md` -- COLLABORATION (how to work with other builders)
+   - `bld_config_{kind}.md` -- CONFIG (runtime configuration)
 4. You produce the artifact following the template
 5. You compile: `python _tools/cex_compile.py {path}`
 

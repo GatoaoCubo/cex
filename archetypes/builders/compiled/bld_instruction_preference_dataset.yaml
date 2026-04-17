@@ -1,0 +1,53 @@
+kind: instruction
+id: bld_instruction_preference_dataset
+pillar: P03
+llm_function: REASON
+purpose: Step-by-step production process for preference_dataset
+pattern: 3-phase pipeline (define -> compose -> validate)
+quality: 7.1
+title: Instruction Preference Dataset
+version: 1.0.0
+author: n03_builder
+tags:
+- preference_dataset
+- builder
+- instruction
+tldr: '3-phase process: define scope and annotation schema, compose pairs with metadata, validate quality gates.'
+domain: preference dataset construction
+created: '2026-04-17'
+updated: '2026-04-17'
+density_score: 0.9
+phase_1_define:
+- 'Identify the training objective: RLHF reward modeling, DPO, constitutional AI, or custom preference signal'
+- Declare domain and task_type (e.g., instruction-following, coding, summarization, safety)
+- 'Determine annotation method: human raters, model-assisted labeling, constitutional criteria'
+- 'Set quality thresholds: minimum agreement_rate (>= 0.8 recommended), min_rater_count (>= 2)'
+- 'Define preference_signal: what makes "chosen" better than "rejected" (helpfulness, safety, accuracy)'
+- 'Determine dataset scope: total_pairs target, language, source_distribution'
+- 'Set train/eval/test split (default: 80/10/10)'
+- Check for existing preference_dataset artifacts with overlapping domain to avoid duplication
+phase_2_compose:
+- Read SCHEMA.md -- source of truth for all fields
+- Read OUTPUT_TEMPLATE.md -- fill `{{vars}}` following SCHEMA constraints
+- 'Fill frontmatter: all required fields (quality: null -- never self-score)'
+- 'Write pairs section: array of {prompt, chosen, rejected, metadata} triplets'
+- Declare annotation_method with rater_count, agreement_rate, confidence
+- 'Write quality_filters section: threshold values and exclusion criteria'
+- Declare split_ratios and total_pairs count
+- 'Write Overview: 2 sentences on objective and scope'
+- 'Write Annotation Protocol: criteria defining chosen vs rejected'
+- 'Write Quality Filters: automated and human checks applied'
+- Verify body <= 4096 bytes
+phase_3_validate:
+- Check QUALITY_GATES.md -- verify each HARD gate manually
+- Confirm YAML frontmatter parses without errors
+- Confirm id matches `^p11_pd_[a-z][a-z0-9_]+$`
+- Confirm kind == preference_dataset
+- Confirm pairs array has >= 1 example (schema validation)
+- Confirm agreement_rate >= 0.0 and <= 1.0
+- Confirm preference_signal is declared (not empty)
+- 'HARD gates: frontmatter valid, id pattern matches, pairs present, signal declared'
+- 'SOFT gates: score against QUALITY_GATES.md -- target >= 8.0'
+- 'Cross-check kind boundaries: no expected outputs without alternatives (eval_dataset or golden_test)? No reward model weights
+  (model artifact, not dataset)?'
+- 'Revise if score < 8.0 -- most common fix: add annotation_method detail or quality filter criteria'

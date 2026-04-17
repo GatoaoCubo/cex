@@ -1,0 +1,68 @@
+kind: examples
+id: bld_examples_competitive_matrix
+pillar: P07
+llm_function: GOVERN
+purpose: Golden and anti-examples of competitive_matrix artifacts
+quality: null
+title: Examples Competitive Matrix
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- competitive_matrix
+- builder
+- examples
+tldr: Golden and anti-examples of competitive_matrix artifacts
+domain: competitive_matrix construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+golden_example: '---
+
+  title: "Competitive Matrix: CRM Solutions"
+
+  date: 2023-10-15
+
+  author: Sales Strategy Team
+
+  version: 1.2
+
+  ---
+
+
+  | Feature                | Salesforce       | HubSpot          | Pipedrive        |
+
+  |-----------------------|------------------|------------------|------------------|
+
+  | Lead Scoring          | Advanced (AI)    | Basic            | Customizable     |
+
+  | Automation            | Full workflow    | Limited          | Mid-level        |
+
+  | Integration (API)     | 500+ apps        | 300+ apps        | 150+ apps        |
+
+  | Pricing Model         | Tiered (per user)| Flat fee         | Per deal         |
+
+  | Support               | 24/7 premium     | Business hours   | Email only       |
+
+  | Strengths             | Enterprise scale | Marketing focus  | Sales simplicity |
+
+  | Weaknesses            | Complex UI       | Limited AI       | No marketing tools |'
+anti_example_1_vague_vendor_names: '| Feature       | ProviderA | ProviderB |
+
+  |---------------|-----------|-----------|
+
+  | Speed         | Fast      | Slow      |
+
+  | Cost          | High      | Low       |
+
+  | Ease of Use   | Easy      | Hard      |'
+? why_it_fails_uses_generic_placeholder_names_providera_providerb_instead_of_real_vendor_names_making_the_matrix_unactionable_for_sales_teams_needing_specific_competitive_insights
+: ''
+anti_example_2_missing_competitive_dimensions: '| Feature       | Salesforce | HubSpot |
+
+  |---------------|------------|---------|
+
+  | Pricing       | $150/user  | $50/user|
+
+  | UI            | Complex    | Simple  |'
+? why_it_fails_only_includes_basic_features_without_critical_competitive_dimensions_like_automation_capabilities_integration_depth_or_support_models_which_are_essential_for_procurement_evaluations
+: ''

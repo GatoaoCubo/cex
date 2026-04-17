@@ -1,0 +1,170 @@
+id: p01_fse_n02_email_campaign
+kind: few_shot_example
+pillar: P01
+nucleus: N02
+title: Few-Shot Example -- N02 Email Campaign via 8F Pipeline
+version: 1.0.0
+created: '2026-04-17'
+updated: '2026-04-17'
+author: few-shot-example-builder
+domain: marketing
+difficulty: medium-hard
+edge_case: false
+format: 8F pipeline trace + email sequence output (subject + preview + body structure)
+quality: 9.1
+tags:
+- few-shot
+- email
+- marketing
+- 8f-pipeline
+- n02
+- drip-sequence
+- campaign
+tldr: '3 input/output pairs teaching N02 how to run 8F for email campaigns: welcome drip, nurture sequence, and re-engagement.'
+keywords:
+- email
+- drip
+- sequence
+- subject-line
+- preview
+- welcome
+- nurture
+- re-engagement
+- n02
+density_score: 1.0
+explanation: 'Email is the highest-ROI channel in most marketing stacks -- and the most abused.
+
+  N02 treats email copy as a relationship, not a broadcast.
+
+
+  These 3 examples teach:
+
+  1. Welcome drip (first impression, set expectations)
+
+  2. Nurture sequence (build desire over 3+ emails)
+
+  3. Re-engagement (win back dormant subscribers without begging)
+
+
+  Every email must earn the reader''s next open. Creative Lust means the subject line
+
+  makes them WANT to open before they know what is inside.
+
+
+  ---'
+example_1_easy_welcome_drip_new_trial_signup_saas: "Input brief\ntask: write_3_email_welcome_drip\ntrigger: new_trial_signup\n\
+  product: ai_agent_platform\naudience: technical_founders_and_engineers\nsequence_goal: activate trial user to first agent\
+  \ deployment\nemails:\n  email_1: immediate (day 0) -- welcome + first action\n  email_2: day 2 -- proof + feature spotlight\n\
+  \  email_3: day 5 -- objection handling + upgrade path\ntone: helpful_direct\ncta:\n  email_1: deploy_first_agent\n  email_2:\
+  \ explore_templates\n  email_3: start_pro_trial\n\n8F trace (abbreviated)\nF1: kind=email_sequence/P01, 3-email drip, activation\
+  \ sequence\nF2: N02. Welcome sequence = trust-first, value-fast. No pitching in email 1.\nF3: kc_email_sequence (welcome\
+  \ pattern: value first, CTA single), kc_campaign\nF4: email 1=orientation+first_win; email 2=social_proof+feature; email\
+  \ 3=remove_risk+close\nF6: subject + preview + structured body outline per email\nF7: subject <= 50 chars x3, single CTA\
+  \ x3, no pitch in email_1 = pass\n\nOutput\nemail_1:\n  send_day: 0\n  subject: \"Your first agent deploys in under 10 minutes\"\
+  \n  subject_chars: 46\n  preview: \"No plumbing required. We mapped the shortest path from sign-up to running agent.\"\n\
+  \  body_outline:\n    - greeting: \"Welcome to CEX. You are 10 minutes from your first running agent.\"\n    - value_line:\
+  \ \"We skipped the feature tour. Here is the one thing that matters: your first deployment.\"\n    - action_block:\n   \
+  \     step_1: \"Open your dashboard\"\n        step_2: \"Pick a builder from the 257-kind library\"\n        step_3: \"\
+  Run the 8F pipeline -- your agent is live\"\n    - cta: \"Deploy my first agent\"\n    - ps: \"Questions? Reply directly.\
+  \ This inbox is monitored by humans.\"\n\nemail_2:\n  send_day: 2\n  subject: \"40+ teams. One thing they did first.\"\n\
+  \  subject_chars: 38\n  preview: \"They deployed fast and iterated from working code -- not from scratch.\"\n  body_outline:\n\
+  \    - opener: \"If you have not deployed yet, that is okay. Here is what the teams who did found.\"\n    - proof_block:\n\
+  \        stat: \"40+ enterprise teams deployed their first agent in under 2 hours.\"\n        testimonial: \"This is the\
+  \ Rails of AI infrastructure. -- CTO, Series B startup\"\n    - feature_spotlight:\n        title: \"The 8F pipeline\"\n\
+  \        body: \"Every artifact passes 8 reasoning functions: Constrain, Become, Inject, Reason, Call, Produce, Govern,\
+  \ Collaborate. Nothing ships below 9.0.\"\n    - cta: \"Explore agent templates\"\n    - ps: \"Your trial expires in 8 days.\
+  \ No pressure -- but here is what Pro unlocks.\"\n\nemail_3:\n  send_day: 5\n  subject: \"Still thinking? Here is the honest\
+  \ answer.\"\n  subject_chars: 40\n  preview: \"The two most common hesitations -- and what we actually found in the data.\"\
+  \n  body_outline:\n    - opener: \"You signed up, which means you saw something. Let us address the two things that usually\
+  \ stop a trial from converting.\"\n    - objection_1:\n        fear: \"This looks complex\"\n        answer: \"CEX is typed\
+  \ infrastructure. Complexity is the alternative -- building this from scratch. The 8F pipeline removes the plumbing so you\
+  \ can focus on the output.\"\n    - objection_2:\n        fear: \"I am not sure it will work for my stack\"\n        answer:\
+  \ \"4 runtimes: Claude, Codex, Gemini, Ollama. Your stack is covered. If not, reply and we will check.\"\n    - upgrade_path:\n\
+  \        offer: \"Pro trial -- 14 more days, team collaboration, advanced analytics\"\n        cta: \"Start Pro trial --\
+  \ 14 days free\"\n    - ps: \"If this is not the right time, keep your free tier. We will be here when it is.\"\n\nquality_check:\n\
+  \  subject_length: \"all <= 50 chars\"\n  pitch_in_email_1: false\n  cta_count: \"1 per email\"\n  tone: \"helpful_direct\
+  \ throughout\"\n  objections_addressed: \"email 3 (2 objections)\"\n\n---"
+example_2_medium_nurture_sequence_content_brand_creator_economy: "Input brief\ntask: write_5_email_nurture_sequence\ntrigger:\
+  \ lead_magnet_download\nproduct: content_creation_course_for_creators\naudience: aspiring_content_creators_early_stage\n\
+  sequence_goal: build trust and desire over 5 emails before making offer on day 10\nemails:\n  email_1: deliver_lead_magnet\
+  \ + first_value\n  email_2: pain_empathy\n  email_3: proof_story\n  email_4: pre-objection\n  email_5: soft_offer\ntone:\
+  \ warm_confessional_mentoring\nrule: no hard pitch before email_5\n\n8F trace (abbreviated)\nF1: 5-email nurture, no pitch\
+  \ before email_5, warm_confessional tone\nF2: N02. Nurture = relationship building. Creative Lust in nurture = make them\
+  \ look forward to the next email.\nF3: kc_email_sequence (nurture pattern: deliver-empathize-prove-anticipate-invite)\n\
+  F4: arc: lead_magnet -> empathy -> story_proof -> objection_pre-empt -> soft_offer\nF6: subject + preview + body_focus per\
+  \ email\nF7: no hard pitch before email_5, warm_confessional maintained x5 = pass\n\nOutput\nemail_1:\n  send_day: 0\n \
+  \ subject: \"Your guide is here -- plus one thing nobody tells you\"\n  subject_chars: 49\n  preview: \"The guide is attached.\
+  \ But the thing that matters more is what I learned after I made every mistake.\"\n  body_focus: \"Deliver lead magnet.\
+  \ Share one non-obvious lesson that validates their desire and makes email_2 irresistible.\"\n\nemail_2:\n  send_day: 2\n\
+  \  subject: \"The part of content creation they do not show you\"\n  subject_chars: 50\n  preview: \"I spent 6 months posting\
+  \ into nothing. Here is what that actually looks like.\"\n  body_focus: \"Empathize with the exact pain of posting without\
+  \ traction. Name it precisely. No solution yet -- just recognition. Make them feel understood.\"\n\nemail_3:\n  send_day:\
+  \ 4\n  subject: \"What changed when she stopped guessing\"\n  subject_chars: 40\n  preview: \"Ana posted 3 times a week\
+  \ for a year. Then she changed one thing and her account grew 4x in 60 days.\"\n  body_focus: \"Tell a specific student\
+  \ story (named, with timeline and metric). Show transformation. CTA=reply with their biggest obstacle.\"\n\nemail_4:\n \
+  \ send_day: 7\n  subject: \"The two things people worry about (answered)\"\n  subject_chars: 47\n  preview: \"Before you\
+  \ ask: yes, both of these are addressed in the program.\"\n  body_focus: \"Pre-empt the two most common objections: time\
+  \ and uniqueness. Answer with specifics, not reassurance. Seed the offer without naming it.\"\n\nemail_5:\n  send_day: 10\n\
+  \  subject: \"I am opening 12 spots. Here is what is inside.\"\n  subject_chars: 47\n  preview: \"If you have been following\
+  \ along, this is the part where I tell you what we actually do together.\"\n  body_focus: \"Soft offer: name the cohort,\
+  \ describe what happens inside, include testimonial, single CTA. No countdown timer. No fake scarcity. Real invitation.\"\
+  \n\nquality_check:\n  hard_pitch_before_email_5: false\n  tone_consistency: \"warm_confessional x5\"\n  subject_length:\
+  \ \"all <= 50 chars\"\n  empathy_email_present: true (email_2)\n  proof_email_present: true (email_3)\n  objection_email_present:\
+  \ true (email_4)\n\n---"
+example_3_hard_re_engagement_lapsed_subscribers_b2c: "Input brief\ntask: write_3_email_re_engagement_sequence\ntrigger: subscriber_inactive_90_days\n\
+  product: premium_subscription_box\naudience: past_subscribers_who_cancelled\nsequence_goal: re-activate or get clean unsubscribe\
+  \ (no zombie list)\nemails:\n  email_1: curiosity_hook (do not mention they were gone)\n  email_2: value_reminder + incentive\n\
+  \  email_3: permission_or_goodbye (clean break option)\ntone: warm_no_guilt_no_pressure\nrule: email_3 must offer clean\
+  \ unsubscribe as primary option, with re-subscribe as secondary\n\n8F trace (abbreviated)\nF1: re-engagement sequence, email_3\
+  \ must lead with clean_unsubscribe option (inverted CTA priority)\nF2: N02. Re-engagement = earn back attention, not demand\
+  \ it. No guilt.\nF3: kc_email_sequence (re-engagement: curiosity -> value -> permission)\nF4: email_1=curiosity_no_accusation;\
+  \ email_2=value+incentive; email_3=permission_first_then_offer\nF6: outputs follow warm_no_guilt tone; email_3 CTA order\
+  \ = unsubscribe first\nF7: no guilt language, permission respected in email_3, tone consistent = pass\n\nOutput\nemail_1:\n\
+  \  send_day: 0\n  subject: \"Something new is in the box this month\"\n  subject_chars: 41\n  preview: \"We redesigned the\
+  \ curation. Here is the first preview.\"\n  body_focus: \"Pure curiosity hook. No mention of absence. Act as if continuing\
+  \ a conversation. Tease the new curation without pitching. CTA = see what is new.\"\n  note: \"Do not say 'we miss you'\
+  \ or 'you have been away' -- it signals accusation, not invitation.\"\n\nemail_2:\n  send_day: 4\n  subject: \"Your subscriber\
+  \ price is still locked in\"\n  subject_chars: 42\n  preview: \"Current rate is 20% below the public price. Here is what\
+  \ this month includes.\"\n  body_focus: \"Remind them of the concrete value: locked price, exclusive items, curation quality.\
+  \ Include a 10% re-activation discount with code + expiry. CTA = reactivate my box.\"\n  incentive:\n    type: discount\n\
+  \    value: \"10% off first reactivated box\"\n    code: COMEBACK10\n    expiry: \"7 days from send\"\n\nemail_3:\n  send_day:\
+  \ 9\n  subject: \"Stay or go -- your choice, no judgment\"\n  subject_chars: 41\n  preview: \"We would rather you unsubscribe\
+  \ than stay out of obligation. Here is the real offer.\"\n  body_focus: \"Lead with unsubscribe as the first option. Frame\
+  \ it as respect, not reverse psychology. Then offer the reactivation option with incentive reminder. CTA_primary=unsubscribe,\
+  \ CTA_secondary=reactivate.\"\n  cta_order:\n    primary: \"Unsubscribe cleanly -- no hard feelings\"\n    secondary: \"\
+  Actually, reactivate at 10% off\"\n  note: \"Inverted CTA priority per brief spec. Primary = clean break.\"\n\nquality_check:\n\
+  \  guilt_language: 0\n  mention_of_absence: 0 (email_1 only)\n  clean_unsubscribe_primary: true (email_3)\n  incentive_present:\
+  \ true (email_2 + email_3)\n  tone: \"warm_no_guilt x3\"\n\n---"
+format_lessons: '| Lesson | What the model learns |
+
+  |--------|-----------------------|
+
+  | Subject line = first decision | Reader decides open/skip in 2 seconds; subject + preview = one unit |
+
+  | Welcome = deliver value, no pitch | Email_1 earns trust; pitch comes later in the sequence |
+
+  | Nurture arc has a shape | Deliver -> empathize -> prove -> pre-empt -> invite |
+
+  | Re-engagement respects autonomy | Offering clean unsubscribe increases re-activation rate |
+
+  | Tone declared in brief = tone in every line | One off-tone sentence breaks the relationship |'
+prompting_rules_derived_from_these_examples:
+- Subject line + preview operate together -- always write both.
+- Declare sequence goal and per-email role before writing any copy.
+- 'Never pitch before trust is built (welcome sequences: value first, offer after email 3).'
+- 'Re-engagement: lead with autonomy, not guilt. Offer the exit before the comeback.'
+- 'For nurture: use the arc (deliver -> empathy -> proof -> pre-empt -> invite).'
+- Tone is a constraint, not a suggestion -- enforce it in every email body.
+anti_patterns: '| Anti-pattern | Failure |
+
+  |-------------|---------|
+
+  | "We miss you" in re-engagement | Signals accusation, not invitation |
+
+  | Hard pitch in welcome email_1 | Breaks trust before it forms |
+
+  | Subjects without preview context | Reader sees only half the pitch |
+
+  | Nurture sequence without arc | Random emails; no compounding desire |
+
+  | CTA count > 1 per email | Decision paralysis; click rate drops |'

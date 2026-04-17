@@ -1,0 +1,927 @@
+id: atom_09_autogen_ag2
+kind: knowledge_card
+pillar: P01
+title: AutoGen / AG2 Framework -- Deep Vocabulary Atlas
+version: 1.1.0
+quality: 8.8
+tags:
+- multi-agent
+- autogen
+- ag2
+- microsoft
+- orchestration
+- groupchat
+- swarm
+- graphflow
+- declarative
+date: 2026-04-13
+sources:
+- https://github.com/ag2ai/ag2
+- https://docs.ag2.ai/
+- https://docs.ag2.ai/latest/docs/user-guide/advanced-concepts/orchestration/group-chat/patterns/
+- https://docs.ag2.ai/latest/docs/user-guide/advanced-concepts/orchestration/group-chat/handoffs/
+- https://docs.ag2.ai/latest/docs/user-guide/advanced-concepts/orchestration/swarm/deprecation/
+- https://docs.ag2.ai/latest/docs/blog/2025/04/28/0.9-Release-Announcement/
+- https://microsoft.github.io/autogen/stable//user-guide/agentchat-user-guide/graph-flow.html
+- https://learn.microsoft.com/en-us/agent-framework/agents/declarative
+- https://learn.microsoft.com/en-us/agent-framework/workflows/declarative
+- https://learn.microsoft.com/en-us/agent-framework/migration-guide/from-autogen/
+1_historical_context_fork_lineage: '| Date | Event |
+
+  |------|-------|
+
+  | 2023-09 | Microsoft Research publishes AutoGen paper (Wu et al.) |
+
+  | 2023-10 | `microsoft/autogen` open-sourced, PyPI: `pyautogen` |
+
+  | 2024-11 | Chi Wang & Qingyun Wu leave Microsoft, fork to `ag2ai/ag2` |
+
+  | 2024-11 | AG2AI inherits `autogen` + `pyautogen` PyPI packages + Discord (20K+) |
+
+  | 2025-01 | Microsoft releases AutoGen 0.4 -- complete architectural redesign |
+
+  | 2025-04 | AG2 v0.9 -- unified GroupChat replaces Swarm + old GroupChat |
+
+  | 2025-10 | Microsoft Agent Framework public preview (AutoGen + Semantic Kernel merger) |
+
+  | 2026-Q1 | Microsoft Agent Framework GA planned (C#, Python, Java) |
+
+  | 2026-04 | Microsoft AutoGen v0.4 enters maintenance-only mode |'
+three_divergent_codebases_as_of_2026: '| Codebase | Repo | Status | PyPI |
+
+  |----------|------|--------|------|
+
+  | AG2 (community) | `ag2ai/ag2` | Active, heading to 1.0 | `ag2`, `autogen`, `pyautogen` |
+
+  | Microsoft AutoGen | `microsoft/autogen` | Maintenance (bugs/security only) | `autogen` (0.4.x) |
+
+  | Microsoft Agent Framework | `microsoft/agent-framework` | Active (successor) | `agent-framework` |
+
+
+  Key insight: AG2 preserves the 0.2 API (ConversableAgent-based). Microsoft''s path abandoned that API entirely in 0.4 and
+  then merged with Semantic Kernel into Agent Framework. The two communities are now fully divergent.
+
+
+  ---'
+2_agent_type_hierarchy: ''
+ag2_0_2_0_8_0_9_lineage: "ConversableAgent (base)\n  |-- AssistantAgent       (llm_config=True, code_execution_config=False)\n\
+  \  |-- UserProxyAgent       (human_input_mode=\"ALWAYS\", code_execution_config=True)\n  |-- GroupChatManager     (orchestrates\
+  \ GroupChat speaker selection)\n  |-- CompressibleAgent    (token-aware context compression)\n  |-- RetrieveAssistantAgent\
+  \  (RAG-augmented assistant)\n  |-- RetrieveUserProxyAgent  (RAG-augmented user proxy)\n  |-- GPTAssistantAgent    (wraps\
+  \ OpenAI Assistants API)\n  |-- MultimodalConversableAgent  (image + text)"
+microsoft_autogen_0_4_event_driven: "RoutedAgent (low-level, message-handler based)\nBaseChatAgent (high-level)\n  |-- AssistantAgent\
+  \       (redesigned, single-turn default)\n  |-- CodeExecutorAgent    (wraps code executors)\n  |-- OpenAIAssistantAgent\
+  \ (Assistants API wrapper)\n  |-- SocietyOfMindAgent   (agent-as-team)\n  |-- UserProxyAgent       (human input bridge)"
+microsoft_agent_framework_2025_2026_successor: "BaseAgent\n  |-- Agent                (stateless, multi-turn by default)\n\
+  \  |-- FoundryAgent         (Azure AI Foundry managed agent)\n  |-- Custom agents via BaseAgent subclass\n\n---"
+3_conversableagent_full_api: ''
+constructor_parameters: '| Parameter | Type | Default | Purpose |
+
+  |-----------|------|---------|---------|
+
+  | `name` | str | required | Unique agent identifier |
+
+  | `system_message` | str/list | "You are a helpful AI Assistant." | LLM system prompt |
+
+  | `is_termination_msg` | callable | None | Function(msg) -> bool to end conversation |
+
+  | `max_consecutive_auto_reply` | int | class constant | Auto-reply ceiling |
+
+  | `human_input_mode` | str | "TERMINATE" | "ALWAYS" / "TERMINATE" / "NEVER" |
+
+  | `function_map` | dict | None | name -> callable mapping |
+
+  | `code_execution_config` | dict/False | False | Code executor settings |
+
+  | `llm_config` | LLMConfig/dict/False/None | None | Model configuration |
+
+  | `default_auto_reply` | str/dict | "" | Fallback reply |
+
+  | `description` | str | None | Summary for speaker selection |
+
+  | `chat_messages` | dict | None | Conversation history |
+
+  | `silent` | bool | None | Suppress output |
+
+  | `context_variables` | ContextVariables | None | Persistent state (v0.9) |
+
+  | `functions` | list/callable | None | Tools to register |
+
+  | `update_agent_state_before_reply` | list/callable | None | State hooks |
+
+  | `handoffs` | Handoffs | None | Transition conditions (v0.9) |'
+key_methods: '| Category | Method | Purpose |
+
+  |----------|--------|---------|
+
+  | Communication | `initiate_chat(recipient, message, max_turns)` | Start conversation |
+
+  | | `initiate_chats(chat_queue)` | Multiple sequential chats |
+
+  | | `send(message, recipient)` | Send message |
+
+  | | `receive(message, sender)` | Process incoming message |
+
+  | Reply Generation | `generate_reply(messages, sender)` | Produce response |
+
+  | | `generate_oai_reply()` | LLM-based reply |
+
+  | | `generate_code_execution_reply()` | Code execution reply |
+
+  | | `generate_tool_calls_reply()` | Tool invocation reply |
+
+  | Registration | `register_reply(trigger, reply_func)` | Custom reply handler |
+
+  | | `register_for_llm(func)` | Expose function to LLM |
+
+  | | `register_for_execution(func)` | Enable function execution |
+
+  | | `register_hook(hookable, hook)` | Lifecycle hook |
+
+  | | `register_model_client(client_cls)` | Custom model client |
+
+  | | `register_handoff(conditions)` | Agent transitions (v0.9) |
+
+  | | `register_nested_chats(chat_queue, trigger)` | Nested chat workflow |
+
+  | | `register_input_guardrail(fn)` | Input validation |
+
+  | | `register_output_guardrail(fn)` | Output validation |
+
+  | State | `reset()` | Clear agent state |
+
+  | | `clear_history(recipient)` | Remove chat history |
+
+  | | `update_system_message(msg)` | Change system prompt |
+
+  | Utility | `get_human_input(prompt)` | Solicit user input |
+
+  | | `run_code(code, lang)` | Execute code block |
+
+  | | `print_usage_summary()` | Token usage stats |
+
+  | | `get_actual_usage()` / `get_total_usage()` | Programmatic usage |'
+human_input_mode_values: '| Value | Behavior |
+
+  |-------|----------|
+
+  | `"ALWAYS"` | Ask human every turn before auto-reply |
+
+  | `"TERMINATE"` | Ask human only when termination detected |
+
+  | `"NEVER"` | Fully autonomous, no human input |
+
+
+  ---'
+4_groupchat_vocabulary: ''
+groupchat_constructor: '| Parameter | Type | Default | Purpose |
+
+  |-----------|------|---------|---------|
+
+  | `agents` | list[ConversableAgent] | required | Participants (unique names) |
+
+  | `messages` | list | [] | Shared conversation thread |
+
+  | `max_round` | int | 10 | Maximum conversation iterations |
+
+  | `speaker_selection_method` | str/callable | "auto" | How next speaker is chosen |
+
+  | `send_introductions` | bool | False | Agents introduce themselves |
+
+  | `allowed_or_disallowed_speaker_transitions` | dict | None | Agent -> [agents] transition map |
+
+  | `speaker_transitions_type` | str | "allowed" | "allowed" or "disallowed" |
+
+  | `admin_name` | str | "Admin" | Name for admin messages |
+
+  | `func_call_filter` | bool | True | Filter function-calling agents |
+
+  | `role_for_select_speaker_messages` | str | "system" | Role for selection prompts |'
+groupchatmanager_constructor: '| Parameter | Type | Purpose |
+
+  |-----------|------|---------|
+
+  | `groupchat` | GroupChat | The chat instance to manage |
+
+  | `llm_config` | LLMConfig | For "auto" speaker selection |
+
+  | `name` | str | Manager identifier |
+
+  | `is_termination_msg` | callable | Conversation end condition |'
+speaker_selection_methods_legacy_pre_0_9: '| Method | Behavior |
+
+  |--------|----------|
+
+  | `"auto"` | LLM selects next speaker based on context (default) |
+
+  | `"round_robin"` | Sequential rotation through agent list |
+
+  | `"random"` | Random agent selection |
+
+  | `"manual"` | Human selects next speaker each turn |
+
+  | callable | Custom function(last_speaker, groupchat) -> agent |'
+constrained_speaker_transitions: "# Only allow A->B, B->C, C->A (circular)\nallowed_or_disallowed_speaker_transitions = {\n\
+  \    agent_a: [agent_b],\n    agent_b: [agent_c],\n    agent_c: [agent_a],\n}\nspeaker_transitions_type = \"allowed\"\n\n\
+  ---"
+5_ag2_v0_9_unified_groupchat_new: v0.9 merged Swarm + GroupChat into a single pattern. Swarm is deprecated.
+new_pattern_classes: '| Pattern | Behavior |
+
+  |---------|----------|
+
+  | `AutoPattern` | LLM selects next speaker intelligently |
+
+  | `RoundRobinPattern` | Sequential rotation |
+
+  | `RandomPattern` | Random selection (excl. current speaker) |
+
+  | `ManualPattern` | Human selects next speaker |
+
+  | `DefaultPattern` | Explicit handoffs control flow |'
+transition_targets_v0_9: '| Target | Purpose |
+
+  |--------|---------|
+
+  | `AgentTarget` | Direct agent reference |
+
+  | `AgentNameTarget` | Agent by name string |
+
+  | `RevertToUserTarget` | Return control to user |
+
+  | `TerminateTarget` | End conversation |
+
+  | `StayTarget` | Current agent continues |
+
+  | `RandomAgentTarget` | Random next agent |
+
+  | `AskUserTarget` | Request human decision |
+
+  | `NestedChatTarget` | Enter nested chat |
+
+  | `GroupChatTarget` | Enter sub-group-chat |
+
+  | `GroupManagerTarget` | Delegate to manager |'
+handoff_conditions_v0_9: '| Condition | Purpose |
+
+  |-----------|---------|
+
+  | `StringLLMCondition` | LLM evaluates string condition |
+
+  | `ExpressionContextCondition` | Evaluate context variable expression |
+
+  | `OnCondition` | Explicit trigger-based handoff |
+
+  | `OnContextCondition` | Context-variable-based handoff |'
+contextvariables_v0_9: Structured state management replacing raw dict passing. Persists across agents within a GroupChat session.
+replyresult_v0_9: 'Function return type containing: message, target agent, updated context variables. ---'
+6_conversation_patterns_orchestration: ''
+two_agent_chat: "Simplest pattern. One `initiate_chat()` call between two agents.\n\nresult = agent_a.initiate_chat(\n   \
+  \ agent_b,\n    message=\"Hello\",\n    max_turns=5\n)\n\nKey params: `message`, `max_turns`, `summary_method`, `clear_history`"
+sequential_chat: "Chained two-agent conversations with carryover.\n\nresults = agent_a.initiate_chats([\n    {\"recipient\"\
+  : agent_b, \"message\": \"Task 1\", \"max_turns\": 3,\n     \"summary_method\": \"reflection_with_llm\"},\n    {\"recipient\"\
+  : agent_c, \"message\": \"Task 2\", \"max_turns\": 3,\n     \"carryover\": \"auto\"},  # carries summary from chat 1\n])\n\
+  \nKey params: `carryover` (str/list/\"auto\"), `summary_method` (\"last_msg\" / \"reflection_with_llm\"), `summary_prompt`"
+nested_chat: "Package a multi-step workflow as a single agent's reply handler.\n\nagent.register_nested_chats(\n    chat_queue=[\n\
+  \        {\"recipient\": reviewer, \"message\": reflect_msg, \"max_turns\": 1},\n        {\"recipient\": editor, \"max_turns\"\
+  : 1}\n    ],\n    trigger=writer  # activates when writer sends message\n)"
+swarm_deprecated_in_v0_9: "from autogen import initiate_swarm_chat, AfterWorkOption\n\nchat_result, context, last_agent =\
+  \ initiate_swarm_chat(\n    initial_agent=triage_agent,\n    agents=[triage_agent, specialist_a, specialist_b],\n    user_agent=user_proxy,\n\
+  \    messages=\"Help me with X\",\n    swarm_manager_args={\"llm_config\": config},\n    after_work=AfterWorkOption.SWARM_MANAGER\n\
+  )\n\nKey vocab: `initiate_swarm_chat`, `SwarmAgent`, `ON_CONDITION`, `AFTER_WORK`, `AfterWorkOption` (TERMINATE, REVERT_TO_USER,\
+  \ STAY, SWARM_MANAGER), `SwarmResult`, `context_variables`, `register_hand_off`\n\n---"
+7_code_execution_vocabulary: ''
+executor_classes: '| Class | Isolation | State | Use Case |
+
+  |-------|-----------|-------|----------|
+
+  | `LocalCommandLineCodeExecutor` | None (host) | Stateless | Dev/prototyping |
+
+  | `DockerCommandLineCodeExecutor` | Docker container | Stateless | Production |
+
+  | `JupyterCodeExecutor` | Jupyter kernel | Stateful | Data science workflows |'
+code_execution_config_parameters: '| Parameter | Type | Purpose |
+
+  |-----------|------|---------|
+
+  | `executor` | CodeExecutor | Which executor class to use |
+
+  | `work_dir` | str | Directory for code files |
+
+  | `use_docker` | bool/str | Docker image or False |
+
+  | `timeout` | int | Execution timeout (seconds) |
+
+  | `last_n_messages` | int | How many messages to scan for code |'
+supported_languages: Python, Bash/Shell/Sh, PowerShell (pwsh, ps1), HTML, CSS, JavaScript
+code_execution_flow: "AssistantAgent generates code block\n  -> UserProxyAgent detects code fence\n  -> Executor writes to\
+  \ work_dir\n  -> Executor runs subprocess / Docker / Jupyter\n  -> CodeResult returned (exit_code, output)\n  -> UserProxyAgent\
+  \ sends result back to AssistantAgent\n  -> Loop until termination or max_turns"
+key_types: '| Type | Purpose |
+
+  |------|---------|
+
+  | `CodeBlock` | Parsed code with language + content |
+
+  | `CodeResult` | Execution result: exit_code + output |
+
+  | `CodeExecutor` | Base class for all executors |
+
+
+  ---'
+8_llm_configuration_vocabulary: ''
+llmconfig_ag2: "llm_config = LLMConfig(\n    api_type=\"openai\",        # \"openai\", \"azure\", \"anthropic\", etc.\n  \
+  \  model=\"gpt-4\",\n    api_key=\"sk-...\",\n    temperature=0.7,\n    max_tokens=4096,\n    seed=42,                 \
+  \ # reproducibility\n    cache_seed=None,          # disable caching\n    config_list=[...],        # multiple model configs\
+  \ for fallback\n)"
+config_list_pattern_legacy: "config_list = [\n    {\"model\": \"gpt-4\", \"api_key\": \"key1\"},\n    {\"model\": \"gpt-3.5-turbo\"\
+  , \"api_key\": \"key2\"},  # fallback\n]\nllm_config = {\"config_list\": config_list, \"temperature\": 0}"
+model_client_classes_autogen_0_4: '| Class | Provider |
+
+  |-------|----------|
+
+  | `OpenAIChatCompletionClient` | OpenAI |
+
+  | `AzureOpenAIChatCompletionClient` | Azure OpenAI |
+
+  | `AzureAIChatCompletionClient` | Azure AI |
+
+  | `AnthropicChatCompletionClient` | Anthropic |
+
+  | `OllamaChatCompletionClient` | Ollama (local) |
+
+  | `ChatCompletionCache` | Caching wrapper |
+
+
+  ---'
+9_tool_integration_vocabulary: '| Concept | AG2 (0.2/0.8) | AutoGen 0.4 | Agent Framework |
+
+  |---------|----------------|-------------|-----------------|
+
+  | Define tool | `register_for_llm` + `register_for_execution` | `FunctionTool(func)` | `@tool` decorator |
+
+  | Caller agent | Sets `llm_config` | `AssistantAgent(tools=[...])` | `Agent(tools=[...])` |
+
+  | Executor agent | Sets `code_execution_config` | `CodeExecutorAgent` | Built-in (multi-turn) |
+
+  | Agent-as-tool | N/A | `AgentTool(agent=)` | `agent.as_tool()` |
+
+  | MCP integration | Limited | Extension-based | `MCPStdioTool`, `MCPStreamableHTTPTool`, `MCPWebsocketTool` |
+
+  | Hosted tools | N/A | N/A | `client.get_code_interpreter_tool()`, `client.get_web_search_tool()` |
+
+
+  ---'
+10_multi_agent_orchestration_autogen_0_4_agent_framework: ''
+autogen_0_4_teams: '| Class | Pattern |
+
+  |-------|---------|
+
+  | `RoundRobinGroupChat` | Sequential rotation |
+
+  | `SelectorGroupChat` | LLM-based selection |
+
+  | `MagenticOneGroupChat` | Microsoft''s Magentic-One pattern |
+
+  | `Swarm` | Handoff-based routing |
+
+  | `GraphFlow` | DAG-based control flow |'
+autogen_0_4_key_types: '| Type | Purpose |
+
+  |------|---------|
+
+  | `Team` | Base class for multi-agent groups |
+
+  | `RoutedAgent` | Low-level event-driven agent |
+
+  | `DiGraphBuilder` | Build directed graphs for GraphFlow |
+
+  | `StopAfterNMessages` | Termination condition |
+
+  | `TextMessage` | Standard text message |
+
+  | `StopMessage` | Termination signal message |
+
+  | `TaskResult` | Final result from team.run() |
+
+  | `ModelClientStreamingChunkEvent` | Streaming event |'
+agent_framework_workflow: '| Concept | Class/Decorator | Purpose |
+
+  |---------|-----------------|---------|
+
+  | Workflow builder | `WorkflowBuilder` | Compose executor graph |
+
+  | Executor | `@executor(id="...")` | Node in workflow graph |
+
+  | Context | `WorkflowContext` | Send messages, yield output |
+
+  | Session | `AgentSession` | Persist state across turns |
+
+  | Middleware | `AgentContext`, `FunctionInvocationContext` | Cross-cutting concerns |'
+flow_paradigm_comparison: '| Aspect | AG2 GroupChat | AutoGen 0.4 GraphFlow | Agent Framework Workflow |
+
+  |--------|---------------|----------------------|--------------------------|
+
+  | Flow type | Broadcast | Control flow (transitions) | Data flow (typed edges) |
+
+  | Node types | Agents only | Agents only | Agents + functions + sub-workflows |
+
+  | State | Shared messages | Broadcast messages | Edge-routed typed data |
+
+  | Join | N/A | `activation_group` + `activation_condition` | Executor-level logic |
+
+  | Routing | Speaker selection | Conditional edges | `target_id` explicit routing |
+
+
+  ---'
+11_termination_vocabulary: '| Mechanism | Where | Example |
+
+  |-----------|-------|---------|
+
+  | `is_termination_msg` | ConversableAgent / GroupChatManager | `lambda msg: "DONE" in msg["content"]` |
+
+  | `max_turns` | `initiate_chat()` | `max_turns=5` |
+
+  | `max_round` | GroupChat | `max_round=12` |
+
+  | `max_consecutive_auto_reply` | ConversableAgent | Limit auto-replies before asking human |
+
+  | `StopAfterNMessages(n)` | AutoGen 0.4 Team | Terminate after n messages |
+
+  | `TerminateTarget` | AG2 v0.9 | Handoff target that ends chat |
+
+
+  ---'
+12_mapping_to_cex_pillars: '| AG2/AutoGen Concept | CEX Pillar | CEX Kind | Notes |
+
+  |---------------------|------------|----------|-------|
+
+  | ConversableAgent | P02 Model | `agent` | Base agent definition |
+
+  | AssistantAgent | P02 Model | `agent` | LLM-backed agent variant |
+
+  | UserProxyAgent | P02 Model | `agent` | Human-in-loop agent |
+
+  | system_message | P03 Prompt | `system_prompt` | Agent instructions |
+
+  | GroupChat | P12 Orchestration | `workflow` | Multi-agent coordination |
+
+  | GroupChatManager | P12 Orchestration | `workflow` | Speaker selection orchestrator |
+
+  | speaker_selection_method | P12 Orchestration | `dispatch_rule` | Routing strategy |
+
+  | NestedChat | P12 Orchestration | `workflow` | Sub-workflow pattern |
+
+  | sequential_chat | P12 Orchestration | `workflow` | Chained conversations |
+
+  | Swarm / handoff | P12 Orchestration | `workflow` | Agent transfer pattern |
+
+  | code_execution_config | P04 Tools | `cli_tool` | Code executor config |
+
+  | LocalCommandLineCodeExecutor | P04 Tools | `cli_tool` | Local execution |
+
+  | DockerCommandLineCodeExecutor | P04 Tools | `cli_tool` | Container execution |
+
+  | JupyterCodeExecutor | P04 Tools | `cli_tool` | Stateful notebook execution |
+
+  | register_for_llm / FunctionTool | P04 Tools | `api_client` | Tool definition |
+
+  | llm_config / config_list | P09 Config | `env_config` | Model routing |
+
+  | is_termination_msg | P11 Feedback | `guardrail` | Conversation boundary |
+
+  | description (for selection) | P08 Architecture | `agent_card` | Agent capability summary |
+
+  | context_variables | P10 Memory | `entity_memory` | Persistent state |
+
+  | summary_method | P10 Memory | `memory_summary` | Chat summarization |
+
+  | register_hook | P11 Feedback | `quality_gate` | Lifecycle interceptor |
+
+  | register_input_guardrail | P11 Feedback | `guardrail` | Input validation |
+
+  | register_output_guardrail | P11 Feedback | `guardrail` | Output validation |
+
+  | Agent Framework Workflow | P12 Orchestration | `workflow` | Data-flow graph |
+
+  | Agent Framework @tool | P04 Tools | `cli_tool` | Declarative tool definition |
+
+  | Agent Framework Middleware | P11 Feedback | `guardrail` | Cross-cutting concerns |
+
+  | AgentSession | P10 Memory | `memory_scope` | Conversation state |
+
+
+  ---'
+13_package_installation_reference: '# AG2 (community fork)
+
+  pip install ag2[openai]          # Core + OpenAI
+
+  pip install ag2[anthropic]       # + Anthropic
+
+  pip install ag2[jupyter]         # + Jupyter executor
+
+  pip install ag2[docker]          # + Docker executor
+
+  pip install ag2[websockets]      # + WebSocket support
+
+
+  # Microsoft AutoGen 0.4 (maintenance)
+
+  pip install autogen-agentchat    # High-level
+
+  pip install autogen-core         # Low-level
+
+  pip install autogen-ext          # Extensions
+
+
+  # Microsoft Agent Framework (successor)
+
+  pip install agent-framework
+
+
+  - Python requirement: >= 3.10, < 3.14
+
+  - AG2 repo: github.com/ag2ai/ag2 (4.4K stars, Apache 2.0)
+
+  - Microsoft repo: github.com/microsoft/autogen (maintenance)
+
+  - Agent Framework: github.com/microsoft/agent-framework
+
+
+  ---'
+14_key_architectural_differences_summary: '| Dimension | AG2 (community) | MS AutoGen 0.4 | MS Agent Framework |
+
+  |-----------|-----------------|-----------------|---------------------|
+
+  | API style | ConversableAgent (0.2 compat) | Event-driven + Team | Stateless Agent + Workflow |
+
+  | State | Agent holds history | Agent holds history | Stateless; AgentSession opt-in |
+
+  | Orchestration | GroupChat (unified v0.9) | Team + GraphFlow | WorkflowBuilder (data-flow DAG) |
+
+  | Tool iteration | Manual (caller/executor split) | `max_tool_iterations` | Auto until completion |
+
+  | MCP | Basic | Extension-based | First-class (Stdio, HTTP, WS) |
+
+  | Code execution | 3 executors (local/Docker/Jupyter) | Same 3 executors | Hosted code interpreter (cloud) |
+
+  | Governance | Community (AG2AI) | Microsoft (maintenance) | Microsoft (active, Semantic Kernel team) |
+
+  | Target | 1.0 release | End of life | GA Q1 2026 |
+
+
+  ---'
+15_ag2_v0_9_pattern_classes_full_api: All patterns live in `autogen.agentchat.group.patterns`. Every pattern shares the same
+  base constructor; behavior differs only in next-speaker selection logic.
+common_constructor_signature: "Pattern(\n    initial_agent: ConversableAgent,             # First agent to speak\n    agents:\
+  \ list[ConversableAgent],              # All participants\n    user_agent: ConversableAgent | None,         # Human-in-loop\
+  \ agent (optional)\n    group_manager_args: dict | None,             # Passed to internal GroupChatManager\n    context_variables:\
+  \ ContextVariables | None,  # Shared state\n    after_work: TransitionTarget | None,         # Default post-turn behavior\n\
+  )"
+pattern_decision_matrix: '| Pattern | Next-speaker selection | Handoffs respected? | Human input? | Use when |
+
+  |---------|----------------------|---------------------|--------------|----------|
+
+  | `AutoPattern` | LLM reads conversation + agent descriptions | Yes (override) | Optional | Dynamic routing, customer service
+  |
+
+  | `RoundRobinPattern` | Fixed index rotation through `agents` list | Yes (override) | Optional | Turn-taking, brainstorming
+  |
+
+  | `RandomPattern` | Uniform random, excludes current speaker | Yes (override) | Optional | Diverse viewpoints, creative
+  tasks |
+
+  | `ManualPattern` | Always reverts to `user_agent` for selection | N/A (user decides) | Required | Debugging, demos, education
+  |
+
+  | `DefaultPattern` | Purely handoff-driven; no fallback LLM | Required | Optional | Compliance, approval chains |'
+autopattern_full_example: "from autogen import ConversableAgent, LLMConfig\nfrom autogen.agentchat import initiate_group_chat\n\
+  from autogen.agentchat.group.patterns import AutoPattern\nfrom autogen.agentchat.group import (\n    AgentTarget, RevertToUserTarget,\n\
+  \    OnCondition, StringLLMCondition, ContextVariables\n)\n\nllm_config = LLMConfig(api_type=\"openai\", model=\"gpt-4o\"\
+  , temperature=0)\n\ntriage = ConversableAgent(\"triage\", system_message=\"Route queries.\", llm_config=llm_config)\nbilling\
+  \ = ConversableAgent(\"billing\", system_message=\"Handle billing.\", llm_config=llm_config)\ntech = ConversableAgent(\"\
+  tech\", system_message=\"Handle technical issues.\", llm_config=llm_config)\nuser = ConversableAgent(\"user\", human_input_mode=\"\
+  ALWAYS\")\n\ntriage.handoffs.add_llm_conditions([\n    OnCondition(target=AgentTarget(billing),\n                condition=StringLLMCondition(prompt=\"\
+  Issue is billing-related\")),\n    OnCondition(target=AgentTarget(tech),\n                condition=StringLLMCondition(prompt=\"\
+  Issue is technical\")),\n])\ntriage.handoffs.set_after_work(RevertToUserTarget())\n\npattern = AutoPattern(\n    initial_agent=triage,\n\
+  \    agents=[triage, billing, tech],\n    user_agent=user,\n    group_manager_args={\"llm_config\": llm_config},\n)\n\n\
+  result, context, last_agent = initiate_group_chat(\n    pattern=pattern,\n    messages=\"My invoice is wrong.\",\n    max_rounds=10,\n\
+  )"
+defaultpattern_full_example_handoff_only_no_llm_fallback: "from autogen.agentchat.group.patterns import DefaultPattern\nfrom\
+  \ autogen.agentchat.group import TerminateTarget\n\nwriter.handoffs.add_llm_conditions([\n    OnCondition(target=AgentTarget(reviewer),\n\
+  \                condition=StringLLMCondition(prompt=\"Draft is ready for review\")),\n])\nwriter.handoffs.set_after_work(TerminateTarget())\n\
+  \nreviewer.handoffs.add_llm_conditions([\n    OnCondition(target=AgentTarget(writer),\n                condition=StringLLMCondition(prompt=\"\
+  Needs revision\")),\n])\nreviewer.handoffs.set_after_work(TerminateTarget())\n\npattern = DefaultPattern(\n    initial_agent=writer,\n\
+  \    agents=[writer, reviewer],\n    user_agent=None,\n)\nresult, context, last = initiate_group_chat(pattern=pattern, messages=\"\
+  Write a blog post\", max_rounds=20)"
+required_imports_v0_9: "from autogen.agentchat import initiate_group_chat\nfrom autogen.agentchat.group.patterns import (\n\
+  \    AutoPattern, RoundRobinPattern, RandomPattern, ManualPattern, DefaultPattern\n)\nfrom autogen.agentchat.group import\
+  \ (\n    AgentTarget, AgentNameTarget, FunctionTarget,\n    AskUserTarget, NestedChatTarget, GroupManagerTarget,\n    RandomAgentTarget,\
+  \ RevertToUserTarget, StayTarget, TerminateTarget,\n    OnCondition, OnContextCondition,\n    StringLLMCondition, ExpressionContextCondition,\
+  \ StringAvailableCondition,\n    ContextVariables, ContextExpression,\n    ReplyResult, FunctionTargetResult,\n)"
+functiontarget_pattern_custom_routing_logic: "from autogen.agentchat.group import FunctionTarget, FunctionTargetResult\n\n\
+  def route_by_score(output: str, context_variables: ContextVariables) -> FunctionTargetResult:\n    score = context_variables[\"\
+  quality_score\"]\n    if score >= 8:\n        return FunctionTargetResult(message=\"Approved\", target=AgentTarget(publisher))\n\
+  \    return FunctionTargetResult(message=\"Needs revision\", target=AgentTarget(editor))\n\nagent.handoffs.set_after_work(FunctionTarget(func=route_by_score))\n\
+  \n---"
+16_graphflow_api_autogen_0_4_digraphbuilder: 'GraphFlow enables DAG-based (and cyclic) control flow between agents. Status:
+  experimental -- API subject to change before stable. Package: `autogen_agentchat.teams.GraphFlow` + `autogen_agentchat.teams._graph_flow.DiGraphBuilder`'
+digraphbuilder_method_reference: '| Method | Signature | Returns | Purpose |
+
+  |--------|-----------|---------|---------|
+
+  | `add_node` | `add_node(agent)` | `self` | Register agent as graph node |
+
+  | `add_edge` | `add_edge(src, dst, condition=None, activation_group=None, activation_condition="all")` | `self` | Define
+  directed edge |
+
+  | `set_entry_point` | `set_entry_point(agent)` | `self` | Force start node (required for cyclic graphs) |
+
+  | `build` | `build()` | `DiGraph` | Validate and produce graph |
+
+  | `get_participants` | `get_participants()` | `list[Agent]` | Return all registered agents |'
+add_edge_parameters: '| Parameter | Type | Default | Purpose |
+
+  |-----------|------|---------|---------|
+
+  | `source` | `BaseChatAgent` | required | Source node |
+
+  | `target` | `BaseChatAgent` | required | Destination node |
+
+  | `condition` | `callable(msg) -> bool` | `None` | Edge fires only if True |
+
+  | `activation_group` | `str` | `None` | Fan-in coordination label |
+
+  | `activation_condition` | `"all"` or `"any"` | `"all"` | Gate: wait for all or any grouped input |'
+pattern_sequential: 'from autogen_agentchat.teams import GraphFlow
+
+  from autogen_agentchat.teams._graph_flow import DiGraphBuilder
+
+
+  builder = DiGraphBuilder()
+
+  builder.add_node(writer).add_node(reviewer).add_node(publisher)
+
+  builder.add_edge(writer, reviewer)
+
+  builder.add_edge(reviewer, publisher)
+
+  flow = GraphFlow(participants=builder.get_participants(), graph=builder.build())
+
+  await flow.run(task="Write an article about AI")'
+pattern_fan_out_parallel: 'builder = DiGraphBuilder()
+
+  builder.add_node(coordinator).add_node(editor_a).add_node(editor_b)
+
+  builder.add_edge(coordinator, editor_a)
+
+  builder.add_edge(coordinator, editor_b)
+
+  flow = GraphFlow(participants=builder.get_participants(), graph=builder.build())'
+pattern_fan_in_convergence: 'builder = DiGraphBuilder()
+
+  builder.add_node(editor_a).add_node(editor_b).add_node(final_reviewer)
+
+  builder.add_edge(editor_a, final_reviewer, activation_group="reviews", activation_condition="all")
+
+  builder.add_edge(editor_b, final_reviewer, activation_group="reviews", activation_condition="all")
+
+  flow = GraphFlow(participants=builder.get_participants(), graph=builder.build())'
+pattern_conditional_loop_retry_until_approved: "builder = DiGraphBuilder()\nbuilder.add_node(generator).add_node(reviewer).add_node(publisher)\n\
+  builder.set_entry_point(generator)\nbuilder.add_edge(generator, reviewer)\n# Loop back if NOT approved\nbuilder.add_edge(reviewer,\
+  \ generator,\n                 condition=lambda msg: \"APPROVE\" not in msg.to_model_text())\n# Exit to publisher if approved\n\
+  builder.add_edge(reviewer, publisher,\n                 condition=lambda msg: \"APPROVE\" in msg.to_model_text())\nflow\
+  \ = GraphFlow(participants=builder.get_participants(), graph=builder.build())"
+pattern_diamond_fan_out_fan_in: 'builder = DiGraphBuilder()
+
+  builder.add_node(planner).add_node(researcher).add_node(writer).add_node(summarizer)
+
+  builder.add_edge(planner, researcher)
+
+  builder.add_edge(planner, writer)
+
+  builder.add_edge(researcher, summarizer, activation_group="inputs", activation_condition="all")
+
+  builder.add_edge(writer, summarizer, activation_group="inputs", activation_condition="all")
+
+  flow = GraphFlow(participants=builder.get_participants(), graph=builder.build())'
+execution_semantics: '| Concept | Behavior |
+
+  |---------|----------|
+
+  | Source nodes | Nodes with no incoming edges execute first automatically |
+
+  | `activation_group` | Tags edges pointing to same target for coordination |
+
+  | `activation_condition="all"` | Target waits until ALL grouped edges have fired |
+
+  | `activation_condition="any"` | Target fires on FIRST grouped edge |
+
+  | Termination | Flow ends when no pending executable nodes remain |
+
+  | Cyclic graphs | Require `set_entry_point()` to avoid ambiguous start detection |'
+known_limitations_autogen_0_4_stable: '- Callable conditions not serialized in `dump_component()` (no YAML round-trip)
+
+  - First-node double-call in some conditional configs (issue #6716)
+
+  - Experimental: breaking changes expected before v1.0
+
+
+  ---'
+17_microsoft_agent_framework_declarative_yaml_spec_ga_april_2026: 'Agent Framework 1.0 (GA April 2026) supports YAML/JSON
+  definitions for agents and workflows. Sources: `learn.microsoft.com/en-us/agent-framework/agents/declarative` `learn.microsoft.com/en-us/agent-framework/workflows/declarative`'
+declarative_agent_schema_python: "kind: Prompt                              # required; \"Prompt\" for LLM-backed agents\n\
+  name: DiagnosticAgent                     # required; unique identifier\ndisplayName: Diagnostic Assistant         # optional;\
+  \ human-readable label\ndescription: Performs system diagnostics  # optional; used in multi-agent routing\ninstructions:\
+  \ You are a diagnostic...     # required; system prompt\n\nmodel:\n  id: =Env.AZURE_OPENAI_MODEL             # =Env.VAR_NAME\
+  \ resolves env vars at runtime\n  connection:\n    kind: remote                          # \"remote\" = Azure Foundry, \"\
+  local\" = local LLM\n    endpoint: =Env.FOUNDRY_PROJECT_ENDPOINT\n  options:                                # LLM sampling\
+  \ parameters\n    temperature: 0.9\n    topP: 0.95\n\noutputSchema:                             # optional; enforces structured\
+  \ JSON output\n  properties:\n    language:\n      type: string\n      required: true\n      description: Language of the\
+  \ answer\n    answer:\n      type: string\n      required: true\n      description: The answer text"
+loading_a_declarative_agent_python: "import asyncio\nfrom agent_framework.declarative import AgentFactory\nfrom azure.identity.aio\
+  \ import AzureCliCredential\n\nasync def main():\n    yaml_str = open(\"agent-config.yaml\").read()\n    async with (\n\
+  \        AzureCliCredential() as credential,\n        AgentFactory(client_kwargs={\"credential\": credential})\n       \
+  \     .create_agent_from_yaml(yaml_str) as agent,\n    ):\n        response = await agent.run(\"Check system health\")\n\
+  \        print(response.text)\n\nasyncio.run(main())"
+declarative_workflow_schema_python: "name: my-workflow                         # required; unique identifier\ndescription:\
+  \ What this workflow does      # optional\n\ninputs:                                   # optional; typed parameters\n  userQuery:\n\
+  \    type: string\n    description: User query text\n\nactions:                                  # required; sequential\
+  \ action list\n  - kind: SetVariable\n    id: capture_input\n    variable: Local.query\n    value: =inputs.userQuery\n\n\
+  \  - kind: InvokeAzureAgent\n    id: call_agent\n    agentId: DiagnosticAgent\n    input: =Local.query\n\n  - kind: If\n\
+  \    id: check_severity\n    condition: =Local.severity >= 8\n    actions:\n      - kind: InvokeAzureAgent\n        id:\
+  \ escalate\n        agentId: EscalationAgent\n        input: \"Critical issue detected\"\n\n  - kind: SendActivity\n   \
+  \ id: respond\n    activity: =Local.result\n\n  - kind: EndWorkflow\n    id: done"
+declarative_workflow_action_types: '| Category | Action | Python | C# | Purpose |
+
+  |----------|--------|--------|-----|---------|
+
+  | Variables | `SetVariable` | Yes | Yes | Set a single variable |
+
+  | Variables | `SetMultipleVariables` | Yes | Yes | Batch variable assignment |
+
+  | Variables | `ResetVariable` | Yes | Yes | Clear a variable |
+
+  | Variables | `AppendValue` | Yes | No | Append to list variable |
+
+  | Control | `If` | Yes | Yes | Conditional branching |
+
+  | Control | `ConditionGroup` | Yes | Yes | Multi-branch switch |
+
+  | Control | `Foreach` | Yes | Yes | Iterate over collection |
+
+  | Control | `BreakLoop` | Yes | Yes | Exit current loop |
+
+  | Control | `GotoAction` | Yes | Yes | Jump to named action |
+
+  | Control | `RepeatUntil` | Yes | No | Loop until condition |
+
+  | Output | `SendActivity` | Yes | Yes | Send message to user |
+
+  | Output | `EmitEvent` | Yes | No | Emit workflow event |
+
+  | Agent | `InvokeAzureAgent` | Yes | Yes | Call a deployed agent |
+
+  | Tool | `InvokeFunctionTool` | Yes | Yes | Call a function tool |
+
+  | Tool | `InvokeMcpTool` | No | Yes | Call an MCP tool |
+
+  | Human | `Question` | Yes | Yes | Ask user a question |
+
+  | Human | `WaitForInput` | Yes | No | Block until input received |
+
+  | Workflow | `EndWorkflow` | Yes | Yes | Terminate workflow |
+
+  | Workflow | `EndConversation` | Yes | Yes | End the conversation |'
+loading_a_declarative_workflow_python: 'from agent_framework.declarative import WorkflowFactory
+
+  from azure.identity import AzureCliCredential
+
+
+  factory = WorkflowFactory(client_kwargs={"credential": AzureCliCredential()})
+
+  workflow = await factory.create_workflow_from_yaml_path("my-workflow.yaml")
+
+  result = await workflow.run(inputs={"userQuery": "Check system health"})
+
+
+  ---'
+18_termination_mechanisms_complete_reference_with_examples: ''
+ag2_termination_0_2_0_8_0_9: "#### 1. `is_termination_msg` -- Agent-level, per-message\n\nagent = ConversableAgent(\n    \"\
+  agent\",\n    is_termination_msg=lambda msg: \"DONE\" in msg.get(\"content\", \"\"),\n    llm_config=llm_config,\n)\n\n\
+  #### 2. `max_turns` -- Two-agent chat ceiling\n\nresult = agent_a.initiate_chat(agent_b, message=\"Start\", max_turns=5)\n\
+  \n#### 3. `max_round` -- GroupChat ceiling\n\ngroupchat = GroupChat(agents=[a, b, c], messages=[], max_round=12)\n\n####\
+  \ 4. `max_consecutive_auto_reply` -- Human-gating\n\n# After 3 consecutive auto-replies, agent requests human input\nagent\
+  \ = ConversableAgent(\"agent\", max_consecutive_auto_reply=3)\n\n#### 5. `TerminateTarget` -- v0.9 handoff-driven\n\nfrom\
+  \ autogen.agentchat.group import TerminateTarget, OnCondition, StringLLMCondition\n\nagent.handoffs.add_llm_conditions([\n\
+  \    OnCondition(\n        target=TerminateTarget(),\n        condition=StringLLMCondition(prompt=\"Task is fully complete\
+  \ and verified\")\n    )\n])\nagent.handoffs.set_after_work(TerminateTarget())  # fallback: terminate if no condition matches\n\
+  \n#### 6. `ExpressionContextCondition` -- context-variable-driven\n\nfrom autogen.agentchat.group import OnContextCondition,\
+  \ ExpressionContextCondition, ContextExpression\n\nagent.handoffs.add_context_conditions([\n    OnContextCondition(\n  \
+  \      target=TerminateTarget(),\n        condition=ExpressionContextCondition(\n            expression=ContextExpression(\"\
+  ${task_complete} == True\")\n        )\n    )\n])"
+autogen_0_4_team_termination: "#### 7. `StopAfterNMessages(n)`\n\nfrom autogen_agentchat.conditions import StopAfterNMessages\n\
+  team = RoundRobinGroupChat(participants=[a, b], termination_condition=StopAfterNMessages(10))\n\n#### 8. `TextMentionTermination`\n\
+  \nfrom autogen_agentchat.conditions import TextMentionTermination\nteam = SelectorGroupChat(\n    participants=[a, b],\n\
+  \    model_client=model,\n    termination_condition=TextMentionTermination(\"TERMINATE\"),\n)\n\n#### 9. `MaxMessageTermination`\n\
+  \nfrom autogen_agentchat.conditions import MaxMessageTermination\ntermination = MaxMessageTermination(max_messages=20)\n\
+  \n#### 10. Composing Conditions (OR / AND)\n\n# Either condition fires -> stop\ntermination = TextMentionTermination(\"\
+  DONE\") | MaxMessageTermination(50)\n\n# Both conditions required -> stop\ntermination = StopAfterNMessages(5) & TextMentionTermination(\"\
+  DONE\")"
+termination_mechanism_matrix: '| Mechanism | Framework | Level | Trigger | Recommended for |
+
+  |-----------|-----------|-------|---------|-----------------|
+
+  | `is_termination_msg` | AG2 | Agent | Content check | Content-based stopping |
+
+  | `max_turns` | AG2 | Chat | Hard limit | Safety fallback |
+
+  | `max_round` | AG2 | GroupChat | Hard limit | Safety fallback |
+
+  | `max_consecutive_auto_reply` | AG2 | Agent | Count | Human-in-loop gating |
+
+  | `TerminateTarget` | AG2 v0.9 | Handoff | Explicit routing | Workflow-driven stopping |
+
+  | `ExpressionContextCondition` | AG2 v0.9 | Context var | State value | Data-driven stopping |
+
+  | `StopAfterNMessages` | AutoGen 0.4 | Team | Count | Simple caps |
+
+  | `TextMentionTermination` | AutoGen 0.4 | Team | Content | Signal-word stopping |
+
+  | `MaxMessageTermination` | AutoGen 0.4 | Team | Count | Hard safety limit |
+
+  | `\|` (OR compose) | AutoGen 0.4 | Team | Either fires | Flexible multi-condition |
+
+  | `&` (AND compose) | AutoGen 0.4 | Team | Both fire | Strict compound gate |
+
+
+  ---'
+19_swarm_deprecation_full_migration_path_v0_8_v0_9: 'Status: Swarm classes functional in v0.9 but deprecated. No removal date
+  set. Source: `docs.ag2.ai/latest/docs/user-guide/advanced-concepts/orchestration/swarm/deprecation/`'
+deprecated_classes_and_replacements: '| Deprecated | Replacement |
+
+  |-----------|-------------|
+
+  | `SwarmAgent` | `ConversableAgent` with `.handoffs` |
+
+  | `SwarmResult` | `ReplyResult` |
+
+  | `initiate_swarm_chat` | `initiate_group_chat` + Pattern |
+
+  | `register_hand_off` | `agent.handoffs.add_llm_conditions()` |
+
+  | `OnCondition` (swarm import) | `OnCondition` from `autogen.agentchat.group` |
+
+  | `OnContextCondition` (swarm) | `OnContextCondition` from `autogen.agentchat.group` |
+
+  | `AfterWork` / `AfterWorkOption` | `agent.handoffs.set_after_work(Target())` |
+
+  | `context_variables: dict[str, Any]` | `context_variables: ContextVariables` |'
+option_a_quick_fix_keep_swarm_code_running: "# BEFORE (v0.8)\nfrom autogen import initiate_swarm_chat, AfterWorkOption, OnCondition,\
+  \ SwarmAgent, SwarmResult\n\n# AFTER (v0.9 compat shim -- deprecated but still runs)\nfrom autogen.agentchat.contrib.swarm_agent\
+  \ import (\n    AfterWork, AfterWorkOption, initiate_swarm_chat,\n    OnCondition, OnContextCondition, register_hand_off,\n\
+  \    SwarmAgent, SwarmResult\n)\nfrom autogen.agentchat.group import ContextVariables\n\n# ContextVariables: was dict, now\
+  \ a class\nmy_ctx = ContextVariables(data={\"confidence\": 0, \"task_complete\": False})"
+option_b_full_migration_to_v0_9_groupchat: "#### Step 1: Replace `SwarmResult` with `ReplyResult`\n\n# BEFORE\ndef my_tool(param:\
+  \ str, context_variables: dict) -> SwarmResult:\n    context_variables[\"done\"] = True\n    return SwarmResult(agent=next_agent,\
+  \ context_variables=context_variables, values=\"Done\")\n\n# AFTER\nfrom autogen.agentchat.group import ReplyResult, AgentTarget,\
+  \ ContextVariables\n\ndef my_tool(param: str, context_variables: ContextVariables) -> ReplyResult:\n    context_variables[\"\
+  done\"] = True\n    return ReplyResult(target=AgentTarget(next_agent), context_variables=context_variables, message=\"Done\"\
+  )\n\n#### Step 2: Replace `register_hand_off` with `agent.handoffs`\n\n# BEFORE\nregister_hand_off(\n    agent=triage_agent,\n\
+  \    hand_to=[\n        ON_CONDITION(billing_agent, \"Issue is billing related\"),\n        AfterWork(AfterWorkOption.REVERT_TO_USER),\n\
+  \    ]\n)\n\n# AFTER\nfrom autogen.agentchat.group import (\n    OnCondition, AgentTarget, StringLLMCondition,\n    StringAvailableCondition,\
+  \ RevertToUserTarget\n)\n\ntriage_agent.handoffs.add_llm_conditions([\n    OnCondition(\n        target=AgentTarget(billing_agent),\n\
+  \        condition=StringLLMCondition(prompt=\"Issue is billing related\"),\n    ),\n])\ntriage_agent.handoffs.set_after_work(RevertToUserTarget())\n\
+  \n#### Step 3: Replace `initiate_swarm_chat` with Pattern + `initiate_group_chat`\n\n# BEFORE\nchat_result, context, last_agent\
+  \ = initiate_swarm_chat(\n    initial_agent=triage_agent,\n    agents=[triage_agent, billing_agent, tech_agent],\n    user_agent=user_proxy,\n\
+  \    messages=\"Help me\",\n    after_work=AfterWorkOption.SWARM_MANAGER,\n    context_variables={\"confidence\": 0},\n\
+  )\n\n# AFTER\nfrom autogen.agentchat import initiate_group_chat\nfrom autogen.agentchat.group.patterns import DefaultPattern\n\
+  from autogen.agentchat.group import ContextVariables\n\nctx = ContextVariables(data={\"confidence\": 0})\npattern = DefaultPattern(\n\
+  \    initial_agent=triage_agent,\n    agents=[triage_agent, billing_agent, tech_agent],\n    context_variables=ctx,\n  \
+  \  user_agent=user_proxy,\n    group_manager_args={\"llm_config\": llm_config},\n)\nresult, final_context, last_agent =\
+  \ initiate_group_chat(\n    pattern=pattern, messages=\"Help me\", max_rounds=40\n)"
+afterworkoption_to_target_mapping: '| Old `AfterWorkOption` | New Target class |
+
+  |----------------------|-----------------|
+
+  | `TERMINATE` | `TerminateTarget()` |
+
+  | `REVERT_TO_USER` | `RevertToUserTarget()` |
+
+  | `STAY` | `StayTarget()` |
+
+  | `SWARM_MANAGER` | `GroupManagerTarget()` |'
+migration_checklist: '[ ] 1. Move imports from autogen. -> autogen.agentchat.group.
+
+  [ ] 2. ContextVariables: dict -> ContextVariables(data={...})
+
+  [ ] 3. Tool function param type: dict -> ContextVariables
+
+  [ ] 4. SwarmResult -> ReplyResult (agent->target, values->message)
+
+  [ ] 5. register_hand_off -> agent.handoffs.add_llm_conditions()
+
+  [ ] 6. AfterWork(AfterWorkOption.X) -> agent.handoffs.set_after_work(XTarget())
+
+  [ ] 7. initiate_swarm_chat -> initiate_group_chat with Pattern
+
+  [ ] 8. Pick Pattern: DefaultPattern (Swarm equivalent) or AutoPattern (LLM-driven)'

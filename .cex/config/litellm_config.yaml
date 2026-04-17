@@ -1,0 +1,70 @@
+# LiteLLM Proxy Configuration for CEX (FREE MODE, tuned per-nucleus)
+# 2026-04-15 round 2: added gemma2:9b to bench. New winners:
+#   gemma2:9b wins N01/N02/N03/N05/N06 (fast + raw --- frontmatter on N03)
+#   qwen3:14b still wins N04 (only model naming real citations, e.g. Sparck-Jones 1972)
+#   llama3.1:8b still wins N07 (longer structured plans at comparable speed)
+# Disqualified: qwen3:8b (thinking-budget = 0 bytes on N05), gemma4:26b (VRAM overflow).
+#
+# Benchmark data: .cex/runtime/benchmarks/summary.json
+# Decision rationale: _docs/specs/spec_claude_vs_free_routing.md
+#
+# To enable paid fallback (ordered chain, NOT pool duplication):
+#   router_settings:
+#     fallbacks:
+#       - {cex-n01: [cex-n01-free]}
+#   with a paired model_list entry e.g. cex-n01-free -> ollama/qwen3:14b.
+
+model_list:
+  # --- N07 Orchestrator (gemma2:9b 8.6s; haiku hits 22.3s for 2x volume) ---
+  - model_name: cex-n07
+    litellm_params:
+      model: ollama/gemma2:9b
+      api_base: http://localhost:11434
+
+  # --- N01 Intelligence (gemma2:9b fastest adherent, 5.5s) ---
+  - model_name: cex-n01
+    litellm_params:
+      model: ollama/gemma2:9b
+      api_base: http://localhost:11434
+
+  # --- N02 Marketing (gemma2:9b 5.0s, tied with llama) ---
+  - model_name: cex-n02
+    litellm_params:
+      model: ollama/gemma2:9b
+      api_base: http://localhost:11434
+
+  # --- N03 Builder (gemma2:9b produces raw --- frontmatter in 5.1s vs qwen3:14b 11.6s) ---
+  - model_name: cex-n03
+    litellm_params:
+      model: ollama/gemma2:9b
+      api_base: http://localhost:11434
+
+  # --- N04 Knowledge (gemma2:9b 6.7s; qwen3:14b citation win NOT reproducible) ---
+  # Round 2 (2026-04-15): neither model cited Sparck-Jones. Use gemma2
+  # for speed; production KCs still require Claude Opus or human review.
+  - model_name: cex-n04
+    litellm_params:
+      model: ollama/gemma2:9b
+      api_base: http://localhost:11434
+
+  # --- N05 Operations (gemma2:9b 6.4s, llama close behind at 6.8s) ---
+  - model_name: cex-n05
+    litellm_params:
+      model: ollama/gemma2:9b
+      api_base: http://localhost:11434
+
+  # --- N06 Commercial (gemma2:9b 6.1s adherent) ---
+  - model_name: cex-n06
+    litellm_params:
+      model: ollama/gemma2:9b
+      api_base: http://localhost:11434
+
+general_settings:
+  master_key: os.environ/LITELLM_MASTER_KEY
+
+router_settings:
+  routing_strategy: simple-shuffle
+  num_retries: 2
+  timeout: 120
+  retry_after: 5
+  allowed_fails: 2

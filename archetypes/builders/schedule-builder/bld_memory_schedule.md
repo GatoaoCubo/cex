@@ -23,6 +23,7 @@ observation_types: [user, feedback, project, reference]
 quality: 9.2
 title: "Memory Schedule"
 density_score: 0.90
+llm_function: INJECT
 ---
 ## Summary
 Schedules have three silent failure modes that only appear in production: timezone drift on DST transitions, catch-up bursts after downtime, and thundering herd from synchronized starts. All three are preventable at spec time with four field decisions: timezone (explicit IANA), catch_up (false by default), max_concurrent (1 by default), and jitter (0-Ns for shared infra).

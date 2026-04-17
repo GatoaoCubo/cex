@@ -12,8 +12,8 @@ quality: 9.0
 tags: [quality-gate, regression-check, P07, evals, baseline, threshold]
 tldr: "Pass/fail gate for regression_check artifacts: baseline_ref resolvability, threshold semantics, metric coverage, and fail_action definition."
 density_score: 0.90
+llm_function: GOVERN
 ---
-
 # Gate: regression_check
 ## Definition
 | Field | Value |

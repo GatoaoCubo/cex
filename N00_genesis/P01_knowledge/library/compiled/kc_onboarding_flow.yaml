@@ -1,0 +1,26 @@
+id: kc_onboarding_flow
+kind: knowledge_card
+title: User Onboarding Flow
+version: 1.0.0
+quality: null
+pillar: P01
+density_score: 0.99
+overview: A structured process to guide new users through initial interactions with a product, converting them from first-time
+  visitors to engaged users.
+activation_milestones:
+- Account Creation - First-time sign-up with email verification
+- First Use - Complete onboarding tutorial and core feature demo
+- Engagement - Complete 3 key actions (e.g., profile setup, payment, sharing)
+- Retention - Return within 7 days with active usage
+aha_moment_design:
+- 'Trigger: Reveal product value through personalized onboarding'
+- 'Mechanics:'
+- Interactive tutorials with progress tracking
+- Real-time feedback on actions
+- Micro-rewards for milestones
+- 'Measurement: Track time-to-aha (average 3-5 minutes)'
+best_practices:
+- Use progressive disclosure to avoid cognitive overload
+- Personalize flow based on user intent (e.g., B2B vs B2C)
+- Include clear success indicators at each milestone
+- Monitor drop-off points for continuous improvement

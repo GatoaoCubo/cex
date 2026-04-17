@@ -1,0 +1,33 @@
+---
+kind: memory
+id: p10_mem_discovery_questions_builder
+pillar: P10
+llm_function: INJECT
+purpose: Learned patterns and pitfalls for discovery_questions construction
+quality: 8.7
+title: "Memory Discovery Questions Builder"
+version: "1.0.0"
+author: wave1_builder_gen_v2
+tags: [discovery_questions, builder, memory]
+tldr: "Learned patterns and pitfalls for discovery_questions construction"
+domain: "discovery_questions construction"
+created: "2026-04-14"
+updated: "2026-04-14"
+density_score: 0.85
+---
+
+## Observation
+Discovery questions often lack alignment with specific buyer personas or deal stages, leading to generic, unactionable prompts. Over-reliance on broad frameworks without contextual customization reduces relevance and engagement.
+
+## Pattern
+Effective questions are structured around MEDDIC/BANT pillars (e.g., Budget, Authority) and tailored to persona roles (e.g., CTO vs. IT manager) and stage-specific pain points (e.g., evaluation vs. negotiation).
+
+## Evidence
+Reviewed artifacts showed higher engagement when questions explicitly referenced persona responsibilities and stage-specific obstacles (e.g., "How does your current vendor’s support impact your team’s productivity?").
+
+## Recommendations
+- Map questions to MEDDIC/BANT pillars and persona roles (e.g., "What metrics define success for your team?").
+- Segment questions by deal stage (e.g., early-stage: "What challenges are you facing now?" vs. late-stage: "What’s your timeline for implementation?").
+- Use open-ended prompts to uncover unspoken needs (e.g., "What’s the biggest hurdle you’ve faced in adopting new solutions?").
+- Avoid sales jargon; focus on the buyer’s priorities (e.g., "How does this impact your department’s goals?").
+- Test questions with real buyers to refine clarity and relevance.

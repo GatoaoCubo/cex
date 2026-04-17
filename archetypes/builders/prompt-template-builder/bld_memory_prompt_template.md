@@ -22,7 +22,7 @@ density_score: 0.90
 Prompt templates are reusable molds with variable slots that generate distinct prompts when filled. The critical production insight is separating structure from content — templates define the shape, variable values provide the substance. The most common failure is embedding fixed content into what should be a variable slot, creating a template that looks reusable but produces only one useful output. The second lesson is variable typing: untyped variables accept any value, including values that break the prompt logic.
 ## Pattern
 1. Every variable slot must have a type, description, and at least one example value
-2. Use consistent syntax throughout: Mustache tier-1 {{var}} or bracket tier-2 [VAR], never mix
+2. Use consistent syntax throughout: Mustache tier-1 `{{var}}` or bracket tier-2 [VAR], never mix
 3. Template body must produce valid, coherent output with ANY valid variable combination, not just the golden path
 4. Include a default value for optional variables — missing variables should degrade gracefully, not produce broken prompts
 5. Test templates with 3+ distinct variable sets to verify genuine reusability
@@ -30,7 +30,7 @@ Prompt templates are reusable molds with variable slots that generate distinct p
 ## Anti-Pattern
 1. Fixed content in variable positions — template appears reusable but produces only one useful output
 2. Untyped variables — accept any value including those that break prompt coherence
-3. Mixed syntax ({{var}} and [VAR] in same template) — confuses renderers and human readers
+3. Mixed syntax (`{{var}}` and [VAR] in same template) — confuses renderers and human readers
 4. Templates that only work with the example values — not genuinely reusable
 5. Confusing prompt_template (P03, parameterized mold) with system_prompt (P03, fixed identity) or action_prompt (P03, one-time task)
 6. Variables without descriptions — downstream users guess at intended usage

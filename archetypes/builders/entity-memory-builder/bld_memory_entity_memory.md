@@ -23,6 +23,7 @@ observation_types: [user, feedback, project, reference]
 quality: 9.2
 title: "Memory Entity Memory"
 density_score: 0.90
+llm_function: INJECT
 ---
 ## Summary
 Entity memory is only as useful as its worst attribute. A single unverified fact injected with the same weight as a primary-source fact degrades the entire grounding block. Three authoring decisions determine whether entity memory is useful or noise: confidence scoring, expiry declaration, and attribute count. Records with >= 3 specific, confidence-scored attributes consistently grounded LLM responses correctly.

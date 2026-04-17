@@ -24,8 +24,8 @@ dependencies: []
 logging: true
 tldr: "Catalog an external URL as an indexable rag_source pointer with freshness policy, reliability, and format — under 1024 bytes, no content."
 density_score: 0.92
+llm_function: REASON
 ---
-
 ## Context
 A **rag_source** is a pointer record: it catalogs where authoritative external data lives so a retrieval pipeline can schedule crawls and index the content. The artifact contains metadata about the source — URL, domain, format, freshness schedule, reliability classification — but it does NOT contain any extracted content. The 1024-byte body limit enforces this constraint structurally.
 **Inputs**

@@ -1,0 +1,28 @@
+kind: collaboration
+id: bld_collaboration_discovery_questions
+pillar: P12
+llm_function: COLLABORATE
+purpose: How discovery_questions-builder works in crews with other builders
+quality: null
+title: Collaboration Discovery Questions
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- discovery_questions
+- builder
+- collaboration
+tldr: How discovery_questions-builder works in crews with other builders
+domain: discovery_questions construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+crew_role: Facilitates structured discovery by generating targeted questions to uncover customer needs, challenges, and priorities
+  for specific use cases.
+receives_from: "| Builder       | What                  | Format      |  \n|---------------|-----------------------|-------------|\
+  \  \n| Use Case Def  | Use case details      | Document    |  \n| Industry Spec | Industry-specific info| JSON        |\
+  \  \n| Customer Feed | Existing feedback     | CSV         |"
+produces_for: "| Builder           | What                    | Format        |  \n|-------------------|-------------------------|---------------|\
+  \  \n| Discovery Qs      | Question set            | JSON          |  \n| Prioritization    | Question prioritization |\
+  \ Spreadsheet   |  \n| Follow-up Guide   | Next steps framework    | Document      |"
+boundary: Does NOT generate broad sales strategies (handled by `sales_playbook_builder`) or define ICPs (handled by `customer_segment_builder`).
+  Avoids data analysis or reporting (handled by `data_analysis_builder` and `reporting_builder`).

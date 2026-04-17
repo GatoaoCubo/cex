@@ -1,5 +1,5 @@
 ---
-id: type-def-builder-examples
+id: bld_examples_type_def
 kind: examples
 pillar: P07
 llm_function: GOVERN

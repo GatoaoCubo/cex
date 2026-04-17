@@ -1,0 +1,208 @@
+id: n02_leverage_map_v2_codex_verification
+kind: verification_report
+pillar: P12
+title: N02 Marketing - LEVERAGE_MAP_V2 Codex Verification
+mission: LEVERAGE_MAP_V2
+nucleus: n02
+date: 2026-04-15 21:20:00+00:00
+quality: null
+version: 1.0
+status: complete
+density_score: 0.95
+executive_summary: '`_tools/cex_social_publisher.py` is present, small, and usable for N02''s immediate copy-formatting workflow.
+  It closes the narrow gap of platform-sized text output, but it does not close deployment, testing, analytics, or visual
+  production. Net result: N02 can now format posts for manual publishing, but still cannot run an autonomous marketing loop.'
+8f_pipeline: 'F1 CONSTRAIN: mission=LEVERAGE_MAP_V2, nucleus=n02, artifact=verification_report, scope=_tools social publisher
+  sufficiency
+
+  F2 BECOME: loaded N02 marketing rules, agent card, orchestration rules, ASCII rule
+
+  F3 INJECT: handoff + CLAUDE.md + existing N02 leverage reports + live _tools scan
+
+  F4 REASON: verify tool presence, inspect API, test behavior, compare against N02 missing-capability map
+
+  F5 CALL: used file reads, ripgrep scans, sample CLI execution, compile, git, signal
+
+  F6 PRODUCE: wrote canonical report + runtime archive summary
+
+  F7 GOVERN: checked evidence against live repo state; noted one behavior risk on Windows stdin BOM
+
+  F8 COLLABORATE: saved, compiled, committed, signaled completion'
+verification: ''
+tool_presence: 'Confirmed present:
+
+
+  - `_tools/cex_social_publisher.py`
+
+
+  Observed surface:
+
+
+  - Inputs: `--input`, `--stdin`, `--platforms`, `--json`
+
+  - Platforms: `x`, `twitter`, `linkedin`, `instagram`, `threads`, `bluesky`, `mastodon`
+
+  - Output fields: `platform`, `char_count`, `limit`, `fits`, `hashtags`, `content`
+
+  - Dependencies: stdlib only'
+api_fit_for_n02: 'Fits well for:
+
+
+  - converting one draft into platform-sized variants
+
+  - enforcing character ceilings
+
+  - extracting existing hashtags
+
+  - producing JSON that another tool could consume later
+
+
+  Does not fit for:
+
+
+  - publishing to platform APIs
+
+  - scheduling posts
+
+  - adapting tone by platform strategy
+
+  - ranking copy by performance
+
+  - generating images or carousels
+
+  - collecting performance metrics'
+live_behavior_check: 'Sample execution confirmed JSON output and per-platform sizing worked. One caution surfaced on Windows
+  PowerShell stdin: piped content may retain a leading BOM, which showed up as `\ufeff` at the start of generated content.
+  That is not a blocker for file-based usage, but it is a real integration edge case for `--stdin`.'
+new_wired_tools_since_v1: 'Net new tool confirmed in this cycle:
+
+
+  - `cex_social_publisher.py` - formatter only, no network dispatch
+
+
+  Related wiring already present around it:
+
+
+  - `_tools/cex_8f_motor.py` maps `social_publisher` and social intents
+
+  - `_tools/cex_schema_hydrate.py` includes `social-publisher-builder`
+
+  - `N02_marketing/P04_tools/social_publisher_marketing.md` documents the broader publishing shape
+
+
+  This means the codebase now has:
+
+
+  - intent routing
+
+  - builder/schema awareness
+
+  - format-time execution
+
+
+  It still does not have:
+
+
+  - a scheduler tool
+
+  - an analytics collector
+
+  - an A/B execution harness
+
+  - an image generation wrapper'
+still_missing: ''
+1_a_b_harness: 'Status: still missing as an executable tool.
+
+
+  Evidence:
+
+
+  - N02 has framework docs and rubric support for variants
+
+  - no `_tools/cex_ab_test_harness.py` exists
+
+
+  Impact:
+
+
+  - N02 can produce variants, but cannot automatically compare results or select winners'
+2_scheduler: 'Status: still missing as an executable tool.
+
+
+  Evidence:
+
+
+  - schedule concepts and workflows exist in prompts/workflows
+
+  - no dedicated scheduler implementation exists in `_tools`
+
+
+  Impact:
+
+
+  - formatting is automated, deployment timing is not'
+3_analytics: 'Status: still missing as an executable tool.
+
+
+  Evidence:
+
+
+  - performance memories and analytics targets exist in N02 docs
+
+  - no `_tools/cex_analytics_aggregator.py` or equivalent exists
+
+
+  Impact:
+
+
+  - no publish -> measure -> improve loop'
+4_image_generation: 'Status: still missing for N02 production use.
+
+
+  Evidence:
+
+
+  - there is skill support and conceptual vision-tool coverage
+
+  - no live N02 social image wrapper is wired in `_tools`
+
+
+  Impact:
+
+
+  - visual-first channels remain dependent on manual design or external tools'
+sufficiency_verdict: 'Verdict: partial closure only.
+
+
+  What is closed:
+
+
+  - manual-ready social copy formatting
+
+
+  What remains open:
+
+
+  - autonomous testing
+
+  - autonomous measurement
+
+  - autonomous scheduling
+
+  - autonomous visual asset generation
+
+
+  Operationally, N02 moved from "copy only" to "copy plus platform formatting," but not to a self-improving campaign engine.'
+next_iteration: "Priority order:\n\n1. `cex_ab_test_harness.py`\n   Why first: highest leverage per line of code; no external\
+  \ API dependency required for a first local/statistical version.\n\n2. `cex_analytics_aggregator.py`\n   Why second: without\
+  \ measurement, formatted posts still do not improve over time.\n\n3. `cex_campaign_scheduler.py`\n   Why third: once testing\
+  \ and analytics exist, scheduling turns the stack from assisted to hands-off.\n\nImage generation remains important, but\
+  \ for N02's current leverage map it is fourth after the measurement loop is in place."
+evidence_snapshot:
+- Tool file present in `_tools`
+- CLI test succeeded with `--json`
+- Ripgrep confirmed surrounding social routing and schema references
+- Ripgrep did not surface any live scheduler, A/B harness, or analytics tool implementation in `_tools`
+final_assessment: '`cex_social_publisher.py` is sufficient for platform-sized copy formatting and insufficient for autonomous
+  marketing operations. The previous gap list was directionally correct; this verification closes only the "formatter exists"
+  question and leaves the main leverage gaps open.'

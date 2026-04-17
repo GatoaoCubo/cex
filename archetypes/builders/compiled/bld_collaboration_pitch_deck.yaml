@@ -1,0 +1,25 @@
+kind: collaboration
+id: bld_collaboration_pitch_deck
+pillar: P12
+llm_function: COLLABORATE
+purpose: How pitch_deck-builder works in crews with other builders
+quality: null
+title: Collaboration Pitch Deck
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- pitch_deck
+- builder
+- collaboration
+tldr: How pitch_deck-builder works in crews with other builders
+domain: pitch_deck construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+crew_role: Structures and populates pitch deck slides with core messaging, visuals, and data, aligning with strategic goals.
+receives_from: "| Builder | What | Format |  \n|---|---|---|  \n| Strategist | Core message & value proposition | Text outline\
+  \ |  \n| Designer | Visual assets (logos, charts) | Image files |  \n| Data Analyst | Key metrics & stats | CSV/Excel |"
+produces_for: "| Builder | What | Format |  \n|---|---|---|  \n| Presenter | Structured pitch deck draft | Slide deck (PPT/XLSX)\
+  \ |  \n| Designer | Placeholder-embedded slides | Slide deck with notes |  \n| Strategist | Feedback on message clarity\
+  \ | Text comments |"
+boundary: Does NOT handle case studies (narrative team), pricing details (pricing team), or legal compliance (legal team).

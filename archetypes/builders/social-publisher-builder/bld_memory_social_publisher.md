@@ -6,9 +6,9 @@ version: 1.0.0
 created: 2026-03-31
 updated: 2026-03-31
 author: n03_engineering
-observation: "Social publisher systems fail when config is mixed with code. The original GATO3 system had 9352 lines with hardcoded company data scattered across 9 Python files, making it impossible to reuse for another business without a full fork."
+observation: "Social publisher systems fail when config is mixed with code. The original {{BRAND_NAME}} system had 9352 lines with hardcoded company data scattered across 9 Python files, making it impossible to reuse for another business without a full fork."
 pattern: "Separate concerns into 3 layers: (1) config YAML with all company-specific data, (2) pipeline architecture describing the 10-step flow, (3) runtime code that reads config and executes pipeline. Layer 1 changes per company. Layers 2-3 are universal."
-evidence: "GATO3 system analysis: 47 hardcoded references to company name, 12 hardcoded API endpoints, 3 plaintext API keys. Refactoring to config-driven reduced company-specific code from 9352 lines to ~150 lines of YAML config + ~400 lines universal runtime."
+evidence: "{{BRAND_NAME}} system analysis: 47 hardcoded references to company name, 12 hardcoded API endpoints, 3 plaintext API keys. Refactoring to config-driven reduced company-specific code from 9352 lines to ~150 lines of YAML config + ~400 lines universal runtime."
 confidence: 0.85
 outcome: SUCCESS
 domain: social_publisher
@@ -22,13 +22,14 @@ observation_types: [user, feedback, project, reference]
 quality: 9.0
 title: "Memory Social Publisher"
 density_score: 0.90
+llm_function: INJECT
 ---
 # Learning: social_publisher
 
 ## Key Insight
 The single most impactful architectural decision for social publishers is **config extraction**. Every piece of company-specific data — name, platforms, schedule, API keys, hashtags, content mix — must live in ONE config file. The pipeline code should be 100% company-agnostic.
 
-## Evidence from GATO3
+## Evidence from {{BRAND_NAME}}
 | Metric | Before (hardcoded) | After (config-driven) |
 |--------|-------------------|----------------------|
 | Total lines | 9352 | 550 (150 config + 400 runtime) |

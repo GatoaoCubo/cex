@@ -1,0 +1,93 @@
+kind: examples
+id: bld_examples_repo_map
+pillar: P07
+llm_function: GOVERN
+purpose: Golden and anti-examples of repo_map artifacts
+quality: null
+title: Examples Repo Map
+version: 1.1.0
+author: n05_ops
+tags:
+- repo_map
+- builder
+- examples
+- tree-sitter
+- pagerank
+- aider
+tldr: 'Golden: Aider-style symbol map with PageRank + token budget; Anti: flat file tree listing (wrong), missing token budget
+  (fail)'
+domain: repo_map construction
+created: '2026-04-13'
+updated: '2026-04-13'
+density_score: 0.9
+golden_example_aider_style_repo_map_symbol_table_pagerank: "---\nid: p01_rm_cex_sdk\nkind: repo_map\npillar: P01\ntitle: \"\
+  CEX SDK -- Repository Context Map\"\nversion: \"1.0.0\"\ntoken_budget: 1024\nsymbol_count: 847\nfile_count: 18\nextraction_method:\
+  \ tree-sitter\n---\n\n## File Ranking (PageRank, alpha=0.85)\n\n| Rank | File | Score | Tokens | Reason |\n|------|------|-------|--------|--------|\n\
+  | 1 | cex_sdk/cex_8f_motor.py | 0.142 | 87 | 12 files import this |\n| 2 | cex_sdk/cex_compile.py | 0.098 | 64 | Entry point;\
+  \ high in-degree |\n| 3 | cex_sdk/cex_score.py | 0.087 | 71 | Referenced in 9 builder ISOs |\n\n## Symbol Table (tree-sitter\
+  \ extracted)\n\ncex_sdk/cex_8f_motor.py:\n  class EightFMotor:\n    def run(self, intent: str, nucleus: str) -> dict\n \
+  \   def classify_intent(self, text: str) -> str\n    def fan_out(self, plan: list) -> list\n  def parse_intent(raw: str)\
+  \ -> Intent\n\ncex_sdk/cex_compile.py:\n  def compile_artifact(path: str) -> dict\n  def compile_all(pillar: str) -> list\n\
+  \  class CompileError(Exception):\n\ncex_sdk/cex_score.py:\n  class HybridScorer:\n    def score(self, artifact: dict) ->\
+  \ float\n    def apply_score(self, path: str, score: float) -> None\n\nToken budget used: 987 / 1024 (96%)\n\nWhy it passes:\
+  \ Contains ranked symbol table (not file tree). tree-sitter extracted\nspecific function signatures. PageRank scores shown.\
+  \ Token budget tracked. 18 files fit\nin 1024 token budget via PageRank pruning.\n\n---"
+golden_example_2_repo_map_for_microservices_with_reference_graph: "---\nid: p01_rm_microservices_demo\nkind: repo_map\npillar:\
+  \ P01\ntitle: \"Microservices Demo -- Repo Context Map\"\ntoken_budget: 2048\nfile_count: 23\nextraction_method: tree-sitter\n\
+  ---\n\n## Symbol Table\n\napi/auth_service.py:\n  class AuthService:\n    def authenticate(self, token: str) -> User\n \
+  \   def refresh(self, refresh_token: str) -> dict\n  def verify_jwt(token: str) -> Claims\n\napi/data_service.py:\n  class\
+  \ DataService:\n    def query(self, sql: str, params: dict) -> list\n    def cache_get(self, key: str) -> Optional[bytes]\n\
+  \nservices/event_bus.py:\n  class EventBus:\n    def publish(self, topic: str, message: dict) -> None\n    def subscribe(self,\
+  \ topic: str, handler: Callable) -> None\n\n## Reference Graph (top connections)\nauth_service -> [data_service (2), event_bus\
+  \ (1)]\ndata_service -> [event_bus (3)]\nevent_bus -> []  # sink node\n\n---"
+anti_example_1_flat_file_tree_wrong_this_is_not_a_repo_map: "## Repository Structure\n- api/\n  - auth_service.py\n  - data_service.py\n\
+  - services/\n  - event_bus.py\n- tests/\n  - test_auth.py\n\nWhy it fails: H04 FAIL -- no `token_budget` field. No symbol\
+  \ extraction (just file paths).\nNo PageRank ranking. No function signatures. This is a directory listing, not a repo map.\n\
+  An LLM receiving this cannot determine which files are most relevant to the current task.\n\n---"
+anti_example_2_token_budget_exceeded: '---
+
+  id: p01_rm_giant_monorepo
+
+  kind: repo_map
+
+  pillar: P01
+
+  token_budget: 1024
+
+  file_count: 2847    # FAIL: 2847 files, 1024 token budget -- impossible
+
+  ---
+
+
+  # [Lists all 2847 files with full signatures -- 48,000 tokens]
+
+
+  Why it fails: Token budget (1024) vs actual content (48,000 tokens) -- budget not enforced.
+
+  The map should use PageRank to select the top ~15-20 most relevant files fitting within 1024 tokens.
+
+  Fix: apply PageRank ranking, truncate to budget, include only top-ranked symbols.
+
+
+  ---'
+anti_example_3_missing_frontmatter_schema_violation: 'Repo Structure
+
+  - src/
+
+  - tests/
+
+  - README.md
+
+
+  Key Components
+
+  - frontend: React app
+
+  - backend: FastAPI
+
+
+  Why it fails: H01-H04 all fail: no YAML frontmatter, no ID, no kind, no token_budget.
+
+  No symbol extraction. Vague component names without file paths or function signatures.
+
+  Useless for LLM context injection.'

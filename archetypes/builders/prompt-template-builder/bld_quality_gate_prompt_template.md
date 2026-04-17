@@ -17,8 +17,8 @@ tags:
   - variables
   - reusable
 tldr: "Quality gate for reusable prompt molds with typed {{variables}}, injection points, and composable structure."
+llm_function: GOVERN
 ---
-
 ## Definition
 A prompt template is a reusable text mold containing one or more `{{variable}}` placeholders filled at invocation time. It declares where in the conversation it is injected (system or user turn), documents each variable's type and constraints, and provides at least one complete invocation example with all slots filled.
 Scope: files with `kind: prompt_template`. Does not apply to system prompts (fixed text, no slots) or instruction files (behavioral rules, no variable slots).

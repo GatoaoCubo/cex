@@ -1,0 +1,39 @@
+kind: instruction
+id: bld_instruction_stt_provider
+pillar: P03
+llm_function: REASON
+purpose: Step-by-step production process for stt_provider
+quality: null
+title: Instruction Stt Provider
+version: 1.0.0
+author: wave1_builder_gen
+tags:
+- stt_provider
+- builder
+- instruction
+tldr: Step-by-step production process for stt_provider
+domain: stt_provider construction
+created: '2026-04-13'
+updated: '2026-04-13'
+density_score: 0.85
+phase_1_research:
+- Identify STT API endpoints and authentication protocols (OAuth2, API keys).
+- Evaluate provider latency, accuracy, and language support for target use cases.
+- 'Align requirements with P04: CALL function constraints (e.g., real-time processing).'
+- Analyze audio input formats (WAV, FLAC) and required sampling rates.
+- Review provider documentation for error codes and rate-limiting policies.
+- Benchmark provider performance against industry standards (e.g., WER metrics).
+phase_2_compose:
+- Set up dev environment with Python 3.9+ and required libraries (requests, pydub).
+- 'Define schema in SCHEMA.md: input (audio blob, metadata) → output (transcript, confidence).'
+- Implement core STT logic using provider’s API (e.g., `POST /v1/transcribe`).
+- 'Handle audio preprocessing: normalize volume, split long files into 30s chunks.'
+- Integrate error handling for HTTP 4xx/5xx responses and retries (exponential backoff).
+- Use OUTPUT_TEMPLATE.md for structured JSON output (transcript, timestamps, language).
+- Add logging for audit trails (e.g., request ID, provider response time).
+- Write unit tests for edge cases (silence, background noise, non-supported languages).
+- Document API keys and endpoint URLs in a secure config file (not committed to repo).
+phase_3_validate: '[ ] [ ] Run unit tests: 100% coverage for all edge cases. [ ] [ ] Validate integration with provider’s
+  sandbox environment. [ ] [ ] Confirm compliance with P04: CALL function SLAs (latency < 500ms). [ ] [ ] Test security: audio
+  data encrypted in transit (TLS 1.2+), no plaintext logs. [ ] [ ] Perform load testing: 100 concurrent requests, 99.9% success
+  rate.'

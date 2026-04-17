@@ -1,0 +1,73 @@
+---
+id: p11_qg_finetune_config
+kind: quality_gate
+pillar: P11
+title: "Gate: finetune_config"
+version: "1.0.0"
+created: "2026-04-13"
+updated: "2026-04-13"
+author: "builder_agent"
+domain: "finetune_config -- LLM fine-tuning job specifications with base model, adapter, dataset, hyperparameters, and eval metrics"
+quality: 9.0
+tags: [quality-gate, finetune-config, training, lora, peft, P11]
+tldr: "Gates for finetune_config: validates adapter completeness, hyperparameter coverage, dataset spec, eval metrics, and no credentials."
+density_score: 0.92
+llm_function: GOVERN
+---
+# Gate: finetune_config
+## Definition
+| Field | Value |
+|-------|-------|
+| metric | Composite score from SOFT dimensions + all HARD gates pass |
+| threshold | >= 7.0 to publish; >= 9.5 golden |
+| operator | AND (all HARD) + weighted_sum (SOFT) |
+| scope | All artifacts where `kind: finetune_config` |
+
+## HARD Gates
+All must pass. Any single failure = REJECT regardless of SOFT score.
+| ID | Check | Failure message |
+|----|-------|----------------|
+| H01 | Frontmatter parses as valid YAML | "Frontmatter YAML syntax error" |
+| H02 | `id` matches `^p02_ft_[a-z][a-z0-9_]+$` | "ID fails finetune_config namespace regex" |
+| H03 | `id` value equals filename stem | "ID does not match filename" |
+| H04 | `kind` equals literal `"finetune_config"` | "Kind is not 'finetune_config'" |
+| H05 | `quality` field is `null` | "Quality must be null at authoring time" |
+| H06 | All required fields present: id, kind, pillar, base_model, adapter_type, dataset, version, created, author, tags, tldr | "Missing required field(s)" |
+| H07 | `adapter_type` is from the enum: lora, qlora, full, prefix_tuning, p_tuning | "adapter_type not from allowed enum" |
+| H08 | For adapter_type lora or qlora: rank (r), lora_alpha, lora_dropout, and target_modules are specified in body | "LoRA/QLoRA config missing required parameters" |
+| H09 | For adapter_type qlora: bits and quant_type are specified in body | "QLoRA quantization parameters missing" |
+| H10 | Hyperparameters section present and contains: learning_rate, per_device_train_batch_size, num_train_epochs or max_steps, warmup_ratio, lr_scheduler_type | "Required hyperparameters missing" |
+| H11 | At least one eval_metric specified (frontmatter or Evaluation section) | "No evaluation metrics defined" |
+| H12 | No credentials, API keys, HuggingFace tokens, or passwords in any field | "Credentials detected in artifact" |
+
+## SOFT Scoring
+Dimensions sum to 100%. Score each 0.0-10.0; multiply by weight.
+| Dimension | Weight | What to assess |
+|-----------|--------|----------------|
+| Adapter config completeness | 1.5 | All adapter params specified; target_modules explicit, not default |
+| Hyperparameter completeness | 1.5 | All 8 standard params present with explicit values, no TBD |
+| Dataset specification quality | 1.0 | Format, field_mapping, size, preprocessing all documented |
+| Evaluation strategy | 1.0 | eval_strategy, save_strategy, metric_for_best_model all set |
+| Compute feasibility | 0.5 | VRAM requirement documented; max_seq_length consistent with compute |
+| Effective batch size clarity | 1.0 | per_device_batch_size * gradient_accum * num_gpus documented |
+| Base model justification | 0.5 | Model choice rationale stated in Overview |
+| Task type accuracy | 0.5 | task_type (sft/dpo/rlhf/orpo) matches training paradigm |
+| Framework alignment | 0.5 | framework specified and consistent with adapter/task type |
+| Boundary clarity | 1.0 | Explicitly not model_provider (runtime), not model_card (docs) |
+| Reproducibility | 1.0 | Config is executable as-is; no values require external lookup |
+| Documentation density | 0.5 | tldr names model, adapter, task type, and key stats |
+Weight sum: 1.5+1.5+1.0+1.0+0.5+1.0+0.5+0.5+0.5+1.0+1.0+0.5 = 10.0 (100%)
+
+## Actions
+| Score | Tier | Action |
+|-------|------|--------|
+| >= 9.5 | GOLDEN | Publish to pool as golden exemplar |
+| >= 8.0 | PUBLISH | Publish to pool |
+| >= 7.0 | REVIEW | Flag for human review before publish |
+| < 7.0 | REJECT | Return to author with failure report |
+
+## Bypass
+| Field | Value |
+|-------|-------|
+| conditions | Exploratory configs where hyperparameters are intentionally under-specified for sweep |
+| approver | ML lead approval required (written); H12 (no credentials) never bypassed |

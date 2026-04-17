@@ -19,7 +19,7 @@ density_score: 0.90
 
 # Domain Knowledge: prompt_template
 ## Executive Summary
-Prompt templates are parameterized text molds where fixed structure and dynamic content are separated via typed {{variable}} slots filled at invocation time. The same template produces N distinct prompts by substituting different variable values — this is the core reuse contract. They differ from system prompts (fixed identity, no slots), user prompts (one-time tasks), few-shot examples (fixed examples), and meta-prompts (which generate other prompts) by being reusable molds with declared, typed variable slots.
+Prompt templates are parameterized text molds where fixed structure and dynamic content are separated via typed `{{variable}}` slots filled at invocation time. The same template produces N distinct prompts by substituting different variable values — this is the core reuse contract. They differ from system prompts (fixed identity, no slots), user prompts (one-time tasks), few-shot examples (fixed examples), and meta-prompts (which generate other prompts) by being reusable molds with declared, typed variable slots.
 ## Spec Table
 | Property | Value |
 |----------|-------|
@@ -31,7 +31,7 @@ Prompt templates are parameterized text molds where fixed structure and dynamic 
 | Max body | 4096 bytes |
 | Density minimum | >= 0.80 |
 | Quality field | always `null` |
-| Min variables | 1 (at least one {{variable}} slot) |
+| Min variables | 1 (at least one `{{variable}}` slot) |
 | Injection point | `system` or `user` |
 | Tier-1 syntax | `{{variable}}` (Mustache-compatible) |
 | Tier-2 syntax | `[VARIABLE]` (when Mustache conflicts) |
@@ -44,12 +44,12 @@ Prompt templates are parameterized text molds where fixed structure and dynamic 
 | Injection point | Declare system or user — determines where in conversation template lands |
 | Composability | Template designed for embedding in larger templates via partials |
 | Idempotency | Same template + same variables MUST always produce same rendered prompt |
-| Variable-body match | Every {{variable}} in body must be declared in Variables section |
+| Variable-body match | Every `{{variable}}` in body must be declared in Variables section |
 | Rendering pipeline | Template -> variable substitution -> rendered prompt -> LLM call |
 ## Anti-Patterns
 | Anti-Pattern | Why it fails |
 |-------------|-------------|
-| No {{variable}} in body | Not a template — it's a fixed prompt |
+| No `{{variable}}` in body | Not a template — it's a fixed prompt |
 | Undeclared variable in body | Variable present in body but missing from Variables section |
 | Mixed syntax ({{}} and []) | Inconsistent; tools cannot reliably extract all variables |
 | Hardcoded content in variable slots | Slots must be empty placeholders only |
@@ -59,7 +59,7 @@ Prompt templates are parameterized text molds where fixed structure and dynamic 
 ## Application
 1. Identify the reuse contract: what varies between invocations?
 2. Extract variables: name, type, required/optional, constraints
-3. Choose syntax tier: {{variable}} (tier-1) or [VARIABLE] (tier-2)
+3. Choose syntax tier: `{{variable}}` (tier-1) or [VARIABLE] (tier-2)
 4. Set injection_point: system or user
 5. Write template body with all variable slots as empty placeholders
 6. Provide at least one complete invocation example with all slots filled

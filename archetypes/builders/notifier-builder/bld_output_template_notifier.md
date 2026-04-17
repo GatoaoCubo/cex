@@ -2,7 +2,7 @@
 kind: output_template
 id: bld_output_template_notifier
 pillar: P04
-llm_function: GENERATE
+llm_function: PRODUCE
 purpose: Fill-in-the-blank template for notifier artifacts
 version: 1.0.0
 created: 2026-03-28

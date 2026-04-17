@@ -1,0 +1,14 @@
+id: kc_reranker_config
+kind: knowledge_card
+title: Reranker Configuration
+version: 1.0.0
+quality: 8.4
+pillar: P01
+density_score: 1.0
+updated: '2026-04-15'
+reranker_configuration_parameters: "Model Configuration\n- `model_name`: Name of the reranking model (e.g., `rerank-1.0`)\n\
+  - `model_version`: Version of the model (e.g., `v2.1`)\n- `model_params`: Additional parameters for model initialization\n\
+  \nStrategy Parameters\n- `strategy`: Reranking strategy (e.g., `confidence`, `diversity`, `relevance`)\n- `threshold`: Minimum\
+  \ score threshold for item inclusion\n- `max_items`: Maximum number of items to return\n- `weighting`: Weight distribution\
+  \ across ranking criteria\n\nExample Configuration\nmodel_name: rerank-1.0\nmodel_version: v2.1\nstrategy: confidence\n\
+  threshold: 0.75\nmax_items: 10\nweighting:\n  relevance: 0.6\n  diversity: 0.3\n  confidence: 0.1"

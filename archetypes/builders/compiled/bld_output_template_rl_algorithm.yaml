@@ -1,0 +1,46 @@
+kind: output_template
+id: bld_output_template_rl_algorithm
+pillar: P05
+llm_function: PRODUCE
+purpose: Template with vars for rl_algorithm production
+quality: null
+title: Output Template Rl Algorithm
+version: 1.0.0
+author: wave1_builder_gen
+tags:
+- rl_algorithm
+- builder
+- output_template
+tldr: Template with vars for rl_algorithm production
+domain: rl_algorithm construction
+created: '2026-04-13'
+updated: '2026-04-13'
+density_score: 0.85
+overview: <!-- What problem this algorithm solves. Key mechanism (e.g., "proximal policy optimization clips the policy gradient").
+  Theoretical guarantees (convergence, sample efficiency). -->
+algorithm_components: "<!-- Key modules in formal notation.\n     Policy: pi(a|s; theta)\n     Value function: V(s; phi)\n\
+  \     Exploration: epsilon-greedy, entropy bonus, etc. -->\n| Component | Notation | Role |\n|-----------|----------|------|\n\
+  | Policy | pi(a\\|s; theta) | Action selection |\n| Value function | V(s; phi) | Baseline for variance reduction |\n| `{{component}}`\
+  \ | {{notation}} | `{{role}}` |"
+training_process:
+- 'Initialize: `{{initialization approach}}`'
+- 'Sample: collect T timesteps of experience'
+- 'Update: {{update rule, e.g., compute advantage, clip ratio, backprop}}'
+- 'Evaluate: every `{{N}}` episodes, run `{{M}}` evaluation episodes'
+- 'Convergence: `{{stopping criterion}}`'
+evaluation_metrics: '| Metric | Target | Measurement |
+
+  |--------|--------|-------------|
+
+  | Episode reward | >= `{{threshold}}` | Mean over last 100 episodes |
+
+  | Sample efficiency | `{{N}}` env steps | Time to reach target reward |
+
+  | `{{metric}}` | {{target}} | `{{method}}` |'
+use_cases:
+- 'APPLY when: `{{specific conditions where this algorithm excels}}`'
+- 'AVOID when: `{{conditions where alternatives outperform}}`'
+constraints:
+- 'Computational: {{GPU memory, parallelism requirements}}'
+- 'Environment: {{required interfaces, gym compatibility}}'
+- 'Reproducibility: fix random seeds `{{seed_list}}`, log all hyperparameters'

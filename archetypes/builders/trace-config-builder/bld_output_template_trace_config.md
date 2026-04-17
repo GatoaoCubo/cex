@@ -50,30 +50,30 @@ error_classification:
   permanent: "{{permanent_error_types}}"
 ```
 ## Tracing Specification
-{{enabled_state_and_sample_rate_rationale}}
-Export via {{export_format}} to {{export_path}}.
-{{why_this_configuration_fits_the_environment}}
+`{{enabled_state_and_sample_rate_rationale}}`
+Export via `{{export_format}}` to `{{export_path}}`.
+`{{why_this_configuration_fits_the_environment}}`
 ## Capture Rules
 | Category | Captured | Rationale |
 |----------|----------|-----------|
-| {{category_1}} | {{YES|NO}} | {{rationale}} |
-| {{category_2}} | {{YES|NO}} | {{rationale}} |
-| {{category_3}} | {{YES|NO}} | {{rationale}} |
+| `{{category_1}}` | {{YES|NO}} | `{{rationale}}` |
+| `{{category_2}}` | {{YES|NO}} | `{{rationale}}` |
+| `{{category_3}}` | {{YES|NO}} | `{{rationale}}` |
 ## Span Attributes
 | Span | Attributes | 8F Mapping |
 |------|-----------|-----------|
-| `cex.pipeline` | {{root_attributes}} | Root span |
-| `cex.8f.{{function}}` | {{function_attributes}} | {{F1-F8}} |
-| `cex.llm.call` | {{llm_attributes}} | LLM invocation |
+| `cex.pipeline` | `{{root_attributes}}` | Root span |
+| `cex.8f.`{{function}} | `{{function_attributes}}` | {{F1-F8}} |
+| `cex.llm.call` | `{{llm_attributes}}` | LLM invocation |
 ## Retention Policy
 | Tier | Days | Storage | Cleanup |
 |------|------|---------|---------|
-| Hot | {{days}} | {{storage_type}} | {{cleanup_strategy}} |
-| Warm | {{days}} | {{storage_type}} | {{cleanup_strategy}} |
-| Cold | {{days}} | {{storage_type}} | {{cleanup_strategy}} |
+| Hot | `{{days}}` | {{storage_type}} | `{{cleanup_strategy}}` |
+| Warm | `{{days}}` | {{storage_type}} | `{{cleanup_strategy}}` |
+| Cold | `{{days}}` | {{storage_type}} | `{{cleanup_strategy}}` |
 ## Privacy Controls
-{{pii_redaction_rules}}
-{{prompt_capture_policy}}
+`{{pii_redaction_rules}}`
+`{{prompt_capture_policy}}`
 ## References
-- {{reference_1}}
-- {{reference_2}}
+- `{{reference_1}}`
+- `{{reference_2}}`

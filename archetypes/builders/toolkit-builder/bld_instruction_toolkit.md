@@ -25,8 +25,8 @@ dependencies: []
 logging: true
 tldr: Produce a YAML toolkit bundle with tool definitions, confirmation tiers, and deny lists — under 4096 bytes, least-privilege enforced, no tool implementation code included.
 density_score: 0.86
+llm_function: REASON
 ---
-
 ## Context
 The toolkit-builder produces `toolkit` artifacts — YAML bundles defining which tools an agent
 or nucleus can access and under what permission constraints. A toolkit answers exactly: what

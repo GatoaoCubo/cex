@@ -1,0 +1,42 @@
+kind: instruction
+id: bld_instruction_govtech_vertical
+pillar: P03
+llm_function: REASON
+purpose: Step-by-step production process for govtech_vertical
+quality: null
+title: Instruction Govtech Vertical
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- govtech_vertical
+- builder
+- instruction
+tldr: Step-by-step production process for govtech_vertical
+domain: govtech_vertical construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+phase_1_research:
+- Identify applicable federal regulations (FedRAMP, FISMA, CJIS).
+- Map compliance frameworks to GSA contract requirements.
+- Analyze use cases for secure data handling in federal agencies.
+- Review Section 508 accessibility standards for digital systems.
+- Evaluate existing govtech artifacts for alignment with P01.
+- Document stakeholder needs for vertical-specific inject functions.
+phase_2_compose:
+- Align artifact structure with bld_schema_govtech_vertical.md (govtech_vertical, P01).
+- Use bld_output_template_govtech_vertical.md to draft overview and compliance sections.
+- Populate FedRAMP and FISMA requirements in "Regulatory Alignment" block.
+- Detail CJIS data security protocols in "Technical Controls" section.
+- Embed Section 508 accessibility checks in "User Experience" module.
+- Reference GSA contract clauses in "Procurement Compliance" tab.
+- Add use-case scenarios for federal agency deployments.
+- Cross-reference schema fields with template placeholders.
+- Finalize artifact with metadata (version, author, compliance status).
+phase_3_validate:
+- '[ ] Verify FedRAMP authorization level (Moderate or High) is explicitly stated.'
+- '[ ] Confirm FISMA categorization (Low/Moderate/High) matches artifact scope.'
+- '[ ] Ensure CJIS Security Policy version (SP 20-01) is cited for law enforcement data.'
+- '[ ] Validate Section 508 WCAG 2.1 AA criteria are mapped to specific UI requirements.'
+- '[ ] Confirm GSA Schedule or StateRAMP reference is present for procurement path.'
+- '[ ] Confirm artifact adheres to bld_schema_govtech_vertical.md ID pattern and required fields.'

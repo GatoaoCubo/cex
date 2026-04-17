@@ -24,8 +24,8 @@ dependencies: []
 logging: true
 tldr: "Design how the LLM structures its output — sections, fields, examples — and produce a response_format artifact ready for prompt injection."
 density_score: 0.92
+llm_function: REASON
 ---
-
 ## Context
 A **response_format** is a prompt-injected specification that tells the LLM how to structure its output. It is placed into the prompt (system or user turn) so the model sees the format during generation. It governs the shape of every response the agent produces for a given task. The LLM reads this artifact; the system does not execute it.
 **Inputs**

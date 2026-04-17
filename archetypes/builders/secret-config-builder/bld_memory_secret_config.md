@@ -23,6 +23,7 @@ observation_types: [user, feedback, project, reference]
 quality: 9.2
 title: "Memory Secret Config"
 density_score: 0.90
+llm_function: INJECT
 ---
 ## Summary
 Secret configs are consumed by agents at runtime under time pressure — a stale credential or misconfigured access pattern causes silent failures that are expensive to diagnose. Three decisions made at spec time determine safety: rotation method explicitness, access pattern precision, and audit logging.

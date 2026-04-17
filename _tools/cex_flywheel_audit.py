@@ -24,6 +24,7 @@ Usage:
   python _tools/cex_flywheel_audit.py loop --max-rounds 3
 """
 
+import argparse
 import sys
 import os
 import json
@@ -31,6 +32,7 @@ import importlib
 import time
 from pathlib import Path
 from datetime import datetime
+from typing import Any
 
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8")
@@ -42,14 +44,16 @@ sys.path.insert(0, str(CEX_ROOT / "_tools"))
 RESULTS = []
 
 
-def record(layer, check, status, detail=""):
+def record(layer: str, check: str, status: str, detail: str = "") -> None:
+    """Append one audit result and echo it to the terminal."""
     RESULTS.append({"layer": layer, "check": check, "status": status, "detail": detail})
     sym = {"WIRED": "[OK]", "BROKEN": "[!!]", "PHANTOM": "[??]", "ORPHAN": "[~~]"}
     print(f"  {sym.get(status, '[--]')} {layer}/{check}: {status}  {detail}")
 
 
 # --- L0: Genesis & Config ---
-def audit_L0():
+def audit_L0() -> None:
+    """Audit genesis-level config, boot assets, and runtime directories."""
     print("\n=== L0: Genesis & Config ===")
     km = CEX_ROOT / ".cex" / "kinds_meta.json"
     if km.exists():
@@ -64,7 +68,7 @@ def audit_L0():
     record("L0", "router_config.yaml",
            "WIRED" if (CEX_ROOT / ".cex" / "router_config.yaml").exists() else "PHANTOM")
 
-    boots = list((CEX_ROOT / "boot").glob("*.cmd"))
+    boots = list((CEX_ROOT / "boot").glob("*.ps1"))
     record("L0", "boot_scripts", "WIRED" if len(boots) >= 7 else "BROKEN", f"{len(boots)} scripts")
 
     record("L0", "dispatch.sh",
@@ -72,38 +76,48 @@ def audit_L0():
 
     for d in ["decisions", "handoffs", "signals", "pids", "locks", "plans", "outputs", "archive"]:
         p = CEX_ROOT / ".cex" / "runtime" / d
-        record("L0", f"runtime/{d}", "WIRED" if p.exists() else "PHANTOM")
+        if not p.exists():
+            p.mkdir(parents=True, exist_ok=True)
+        record("L0", f"runtime/{d}", "WIRED", "auto-created" if not any(p.iterdir()) else f"{len(list(p.iterdir()))} items")
 
 
 # --- L1: Pillars ---
-def audit_L1():
-    print("\n=== L1: Pillars (P01-P12) ===")
+def audit_L1() -> None:
+    """Audit pillar directories, schemas, and compiled outputs."""
+    print("\n=== L1: Pillars (P01-P12 in N00_genesis) ===")
+    n00 = CEX_ROOT / "N00_genesis"
     for i in range(1, 13):
         pdir = None
-        for d in CEX_ROOT.iterdir():
-            if d.is_dir() and d.name.startswith(f"P{i:02d}_"):
-                pdir = d
-                break
+        if n00.exists():
+            for d in n00.iterdir():
+                if d.is_dir() and d.name.startswith(f"P{i:02d}_"):
+                    pdir = d
+                    break
         if not pdir:
-            record("L1", f"P{i:02d}", "PHANTOM", "pillar dir missing")
+            record("L1", f"P{i:02d}", "PHANTOM", "pillar dir missing in N00_genesis")
             continue
 
         schema = pdir / "_schema.yaml"
-        record("L1", f"{pdir.name}/_schema", "WIRED" if schema.exists() else "PHANTOM")
+        record("L1", f"N00_genesis/{pdir.name}/_schema", "WIRED" if schema.exists() else "PHANTOM")
 
         compiled = pdir / "compiled"
         if compiled.exists():
             count = len(list(compiled.glob("*")))
-            record("L1", f"{pdir.name}/compiled", "WIRED" if count > 0 else "BROKEN", f"{count} files")
+            record("L1", f"N00_genesis/{pdir.name}/compiled", "WIRED" if count > 0 else "BROKEN", f"{count} files")
         else:
-            record("L1", f"{pdir.name}/compiled", "PHANTOM")
+            record("L1", f"N00_genesis/{pdir.name}/compiled", "PHANTOM")
 
 
 # --- L2: Nuclei ---
-def audit_L2():
+def audit_L2() -> None:
+    """Audit nucleus directory structure, compiled outputs, and rules."""
     print("\n=== L2: Nuclei (N01-N07) ===")
-    expected = ["agents", "architecture", "compiled", "feedback", "knowledge",
-                "memory", "orchestration", "output", "prompts", "schemas"]
+    # Canonical 12-pillar convention-over-configuration hierarchy: every nucleus mirrors all 12 pillars.
+    # P-numbered since STRUCT_ALIGN V1. Plus "compiled" (auto-gen) and "rules" (nucleus-scoped).
+    expected = ["P01_knowledge", "P02_model", "P03_prompt", "P04_tools", "P05_output",
+                "P06_schema", "P07_evals", "P08_architecture", "P09_config",
+                "P10_memory", "P11_feedback", "P12_orchestration",
+                "compiled", "rules"]
     for i in range(1, 8):
         ndir = None
         for d in CEX_ROOT.iterdir():
@@ -123,13 +137,20 @@ def audit_L2():
                "WIRED" if compiled_count > 0 else "BROKEN", f"{compiled_count} artifacts")
 
     for i in range(1, 8):
+        # N07 lives in .claude/rules/ (orchestrator). N01-N06 live in N0X_*/rules/ (lazy-loaded).
         rules = list((CEX_ROOT / ".claude" / "rules").glob(f"n{i:02d}*"))
+        if not rules:
+            ndir = next((d for d in CEX_ROOT.iterdir()
+                         if d.is_dir() and d.name.startswith(f"N{i:02d}_")), None)
+            if ndir and (ndir / "rules").exists():
+                rules = list((ndir / "rules").glob(f"n{i:02d}*"))
         record("L2", f"N{i:02d}_rule", "WIRED" if rules else "PHANTOM",
                rules[0].name if rules else "")
 
 
 # --- L3: Archetypes ---
-def audit_L3():
+def audit_L3() -> None:
+    """Audit builder archetypes, shared skills, and generated sub-agents."""
     print("\n=== L3: Archetypes ===")
     builders_dir = CEX_ROOT / "archetypes" / "builders"
     bdirs = [d for d in builders_dir.iterdir() if d.is_dir() and d.name.endswith("-builder")]
@@ -150,10 +171,11 @@ def audit_L3():
 
 
 # --- L4: Knowledge Library ---
-def audit_L4():
+def audit_L4() -> None:
+    """Audit knowledge-card coverage across kind and domain libraries."""
     print("\n=== L4: Knowledge Library ===")
-    kind_dir = CEX_ROOT / "P01_knowledge" / "library" / "kind"
-    domain_dir = CEX_ROOT / "P01_knowledge" / "library" / "domain"
+    kind_dir = CEX_ROOT / "N00_genesis" / "P01_knowledge" / "library" / "kind"
+    domain_dir = CEX_ROOT / "N00_genesis" / "P01_knowledge" / "library" / "domain"
 
     kc_count = len(list(kind_dir.glob("kc_*.md"))) if kind_dir.exists() else 0
     record("L4", "kind_KCs", "WIRED" if kc_count >= 108 else "BROKEN", f"{kc_count} KCs")
@@ -173,7 +195,8 @@ def audit_L4():
 
 
 # --- L5: Tools ---
-def audit_L5():
+def audit_L5() -> None:
+    """Audit critical tools, imports, and SDK surface area."""
     print("\n=== L5: Tools ===")
     cex_tools = list((CEX_ROOT / "_tools").glob("cex_*.py"))
     record("L5", "cex_tools", "WIRED" if len(cex_tools) >= 45 else "BROKEN", f"{len(cex_tools)} tools")
@@ -210,7 +233,8 @@ def audit_L5():
 
 
 # --- WIRES: 7 OpenClaude Integrations ---
-def audit_wires():
+def audit_wires() -> None:
+    """Audit prompt-composition and tool-wiring integration points."""
     print("\n=== WIRES: 7 OpenClaude Integrations ===")
     try:
         import cex_crew_runner as cr
@@ -293,7 +317,8 @@ def audit_wires():
 
 
 # --- CASCADES: 7 Dependency Chains ---
-def audit_cascades():
+def audit_cascades() -> None:
+    """Audit end-to-end dependency chains across core system flows."""
     print("\n=== CASCADES: 7 Dependency Chains ===")
 
     try:
@@ -309,7 +334,7 @@ def audit_cascades():
     except Exception as e:
         record("CASCADE", "C2_quality", "BROKEN", str(e)[:80])
 
-    kc = CEX_ROOT / "P01_knowledge" / "library" / "kind" / "kc_agent.md"
+    kc = CEX_ROOT / "N00_genesis" / "P01_knowledge" / "library" / "kind" / "kc_agent.md"
     bk = CEX_ROOT / "archetypes" / "builders" / "agent-builder" / "bld_knowledge_card_agent.md"
     record("CASCADE", "C3_knowledge", "WIRED" if kc.exists() and bk.exists() else "BROKEN")
 
@@ -337,7 +362,8 @@ def audit_cascades():
 
 
 # --- L6: Governance ---
-def audit_L6():
+def audit_L6() -> None:
+    """Audit governance assets such as rules, commands, and learnings."""
     print("\n=== L6: Governance ===")
     rules = list((CEX_ROOT / ".claude" / "rules").glob("*.md"))
     record("L6", "rules", "WIRED" if len(rules) >= 9 else "BROKEN", f"{len(rules)}")
@@ -349,7 +375,8 @@ def audit_L6():
 
 
 # --- HEAL ---
-def generate_heal_plan():
+def generate_heal_plan() -> list[dict[str, Any]]:
+    """Create and persist a repair plan for broken or missing audit items."""
     broken = [r for r in RESULTS if r["status"] in ("BROKEN", "PHANTOM")]
     if not broken:
         print("\n  *** Nothing to fix -- all checks passed ***")
@@ -381,7 +408,8 @@ def generate_heal_plan():
 
 
 # --- REPORT ---
-def print_report():
+def print_report() -> None:
+    """Print and persist the audit summary report."""
     w = sum(1 for r in RESULTS if r["status"] == "WIRED")
     b = sum(1 for r in RESULTS if r["status"] == "BROKEN")
     p = sum(1 for r in RESULTS if r["status"] == "PHANTOM")
@@ -407,12 +435,32 @@ def print_report():
 
 
 # --- MAIN ---
-def main():
-    mode = sys.argv[1] if len(sys.argv) > 1 else "audit"
-    max_rounds = 3
-    if "--max-rounds" in sys.argv:
-        idx = sys.argv.index("--max-rounds")
-        max_rounds = int(sys.argv[idx + 1]) if idx + 1 < len(sys.argv) else 3
+def main() -> None:
+    """Run the requested audit mode and optional heal loop."""
+    known_modes = {"audit", "wires", "cascade", "heal", "loop"}
+    if len(sys.argv) > 1 and not sys.argv[1].startswith("-") and sys.argv[1] not in known_modes:
+        print("Usage: cex_flywheel_audit.py [audit|wires|cascade|heal|loop]")
+        return
+
+    parser = argparse.ArgumentParser(
+        description=__doc__,
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+    )
+    parser.add_argument(
+        "mode",
+        nargs="?",
+        default="audit",
+        help="Audit mode to run.",
+    )
+    parser.add_argument(
+        "--max-rounds",
+        type=int,
+        default=3,
+        help="Maximum rounds for loop mode.",
+    )
+    args, _ = parser.parse_known_args()
+    mode = args.mode
+    max_rounds = args.max_rounds
 
     if mode == "audit":
         audit_L0(); audit_L1(); audit_L2(); audit_L3(); audit_L4()

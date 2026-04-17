@@ -1,0 +1,30 @@
+kind: memory
+id: p10_lr_sdk_example_builder
+pillar: P10
+llm_function: INJECT
+purpose: Learned patterns and pitfalls for sdk_example construction
+quality: null
+title: Learning Record Sdk Example
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- sdk_example
+- builder
+- learning_record
+tldr: Learned patterns and pitfalls for sdk_example construction
+domain: sdk_example construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+observation: Common issues include inconsistent error handling, lack of parameter validation, and unclear documentation in
+  example code. Language-specific nuances often lead to redundant boilerplate or misaligned integration patterns.
+pattern: Canonical examples prioritize idiomatic language usage, modular code structure, and explicit documentation. They
+  abstract boilerplate into reusable components while exposing core SDK functionality clearly.
+evidence: Reviewed Python and JavaScript examples showed consistent error handling via exceptions and clear function signatures,
+  respectively.
+recommendations:
+- Standardize error handling (e.g., exceptions, result objects) per language.
+- Include parameter validation and default values in example functions.
+- Use comments to demarcate SDK-specific logic vs. user implementation.
+- Avoid hardcoding credentials or sensitive data in sample code.
+- Provide minimal, self-contained examples that highlight key integration steps.

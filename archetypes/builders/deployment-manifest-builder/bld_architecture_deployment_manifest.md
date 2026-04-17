@@ -1,0 +1,47 @@
+---
+id: bld_architecture_deployment_manifest
+kind: knowledge_card
+pillar: P08
+title: "Architecture: deployment_manifest Relationships"
+version: 1.0.0
+created: "2026-04-17"
+updated: "2026-04-17"
+author: builder
+domain: deployment_manifest
+quality: 7.8
+tags: [architecture, deployment_manifest, P09]
+llm_function: CONSTRAIN
+tldr: "How deployment_manifest relates to env_config, canary_config, sandbox_spec, and workflow."
+density_score: null
+---
+
+# Architecture: deployment_manifest
+
+## Relationship Graph
+```
+[workflow] --> [deployment_manifest] --> [env_config]
+                     |                        |
+                     +--> [canary_config]      +--> [secret_config]
+                     |
+                     +--> [sandbox_spec] (test only, not production)
+                     |
+                     +--> [slo_definition] (success criteria post-deploy)
+```
+
+## Kind Boundaries
+| Kind | Relationship | Boundary |
+|------|-------------|---------|
+| env_config | USES | deployment_manifest references env_config; does not define runtime vars inline |
+| canary_config | SIBLING | canary_config handles traffic split; deployment_manifest handles artifact list + target |
+| sandbox_spec | EXCLUDES | sandbox_spec is ephemeral test env; deployment_manifest targets stable envs |
+| workflow | PARENT | workflow steps may include deployment_manifest as a COLLABORATE step |
+| slo_definition | POST-DEPLOY | slo_definition defines success metrics measured after deployment completes |
+| secret_config | REFERENCES | secrets are referenced by path only, never inlined |
+
+## Integration Points
+- **Upstream**: workflow (F8 COLLABORATE step), handoff (triggering context)
+- **Downstream**: env_config (variable injection), slo_definition (success gate), signal (deploy complete)
+- **Sibling**: canary_config (traffic split), sandbox_spec (test env)
+
+## Pillar Placement
+Pillar P09 (Config) -- deployment_manifest is a configuration artifact, not a runtime executable. It specifies parameters for a deployment tool (Kubernetes, Helm, custom runner) to execute.

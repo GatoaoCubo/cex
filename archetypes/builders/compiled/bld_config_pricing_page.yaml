@@ -1,0 +1,22 @@
+kind: config
+id: bld_config_pricing_page
+pillar: P09
+llm_function: CONSTRAIN
+purpose: Naming, paths, limits for pricing_page production
+quality: null
+title: Config Pricing Page
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- pricing_page
+- builder
+- config
+tldr: Naming, paths, limits for pricing_page production
+domain: pricing_page construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+naming_convention: 'Pattern: `p05_pp_{{name}}.md` Examples: `p05_pp_bronze.md`, `p05_pp_platinum.md`'
+paths: '`/artifacts/p05/pricing_pages/{{name}}.md`'
+limits: 'max_bytes: 6144 max_turns: 3 effort_level: medium'
+hooks: 'pre_build: null post_build: null on_error: null on_quality_fail: null'

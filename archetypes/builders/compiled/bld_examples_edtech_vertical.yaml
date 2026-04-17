@@ -1,0 +1,36 @@
+kind: examples
+id: bld_examples_edtech_vertical
+pillar: P07
+llm_function: GOVERN
+purpose: Golden and anti-examples of edtech_vertical artifacts
+quality: null
+title: Examples Edtech Vertical
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- edtech_vertical
+- builder
+- examples
+tldr: Golden and anti-examples of edtech_vertical artifacts
+domain: edtech_vertical construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+golden_example: "title: EdTech Vertical Integration with LTI and Privacy Compliance  \nkind: edtech_vertical  \ndescription:\
+  \ Secure student data management with LTI integration and FERPA/COPPA compliance  \ntools:  \n  - LMS: Canvas LMS  \n  -\
+  \ Data Privacy: Google Workspace for Education (with encryption at rest and in transit)  \n  - LTI Provider: Microsoft Teams\
+  \ for Education (LTI 1.3 compliant)  \nuse_cases:  \n  - Student performance analytics with anonymized data  \n  - Parental\
+  \ consent workflows for COPPA-compliant data collection  \n  - Seamless grade sync between LMS and external assessment tools\
+  \  \ncompliance:  \n  - FERPA: Data access restricted to authorized educational purposes  \n  - COPPA: Age verification\
+  \ and opt-in mechanisms for under-13 users  "
+anti_example_1_missing_lti_compliance: "title: EdTech Vertical Integration (Incomplete)  \nkind: edtech_vertical  \ndescription:\
+  \ Student data management without LTI integration  \ntools:  \n  - LMS: Moodle  \n  - Data Privacy: Custom in-house solution\
+  \ (no third-party audits)  \nuse_cases:  \n  - Manual data transfer between systems  \n  - No student consent tracking \
+  \ \ncompliance:  \n  - FERPA: Not explicitly addressed  \n  - COPPA: Not applicable (no under-13 user handling)  "
+why_it_fails: The analytics tool collects data from minors without COPPA-compliant consent mechanisms, exposing the organization
+  to legal risks and data breaches.
+anti_example_2_overlooking_coppa_scope: "title: EdTech Vertical for K-12  \nkind: edtech_vertical  \ndescription: LMS integration\
+  \ with student data collection  \ntools:  \n  - LMS: Schoology  \n  - Data Privacy: Third-party analytics tool (no COPPA\
+  \ certification)  \nuse_cases:  \n  - Real-time student behavior tracking  \n  - Automated reporting to school admins  \n\
+  compliance:  \n  - FERPA: Partially addressed  \n  - COPPA: Ignored (tool collects data from under-13 users without consent)\
+  \  "

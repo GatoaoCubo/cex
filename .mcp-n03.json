@@ -2,16 +2,16 @@
   "mcpServers": {
     "github": {
       "command": "cmd",
-      "args": ["/c", "npx", "-y", "@anthropic/mcp-server-github"],
+      "args": ["/c", "npx", "-y", "@modelcontextprotocol/server-github"],
       "env": { "GITHUB_TOKEN": "${GITHUB_TOKEN}" }
     },
     "fetch": {
-      "command": "cmd",
-      "args": ["/c", "npx", "-y", "@anthropic/mcp-server-fetch"]
+      "command": "uvx",
+      "args": ["mcp-server-fetch", "--ignore-robots-txt"]
     },
     "canva": {
-      "command": "npx",
-      "args": ["-y", "@mcp_factory/canva-mcp-server"],
+      "command": "cmd",
+      "args": ["/c", "npx", "-y", "@mcp_factory/canva-mcp-server"],
       "env": {
         "CANVA_CLIENT_ID": "${CANVA_CLIENT_ID}",
         "CANVA_CLIENT_SECRET": "${CANVA_CLIENT_SECRET}"

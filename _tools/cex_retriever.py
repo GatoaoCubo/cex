@@ -66,7 +66,7 @@ def strip_frontmatter(text: str) -> str:
 
 
 # ---------------------------------------------------------------------------
-# TF-IDF Implementation (no external deps beyond stdlib + numpy)
+# TF-IDF Implementation (pure stdlib -- no numpy/sklearn required)
 # ---------------------------------------------------------------------------
 
 import math
@@ -405,53 +405,83 @@ def main():
     parser.add_argument("--query", "-q", help="Search query")
     parser.add_argument("--kind", "-k", help="Filter by kind")
     parser.add_argument("--pillar", "-p", help="Filter by pillar")
-    parser.add_argument("--top-k", type=int, default=10, help="Number of results (default: 10)")
-    parser.add_argument("--stats", "-s", action="store_true", help="Show index statistics")
+    parser.add_argument("--top-k", "-n", type=int, default=5, help="Maximum results")
+    parser.add_argument("--min-score", "-s", type=float, default=0.05, help="Minimum similarity score")
+    parser.add_argument("--stats", action="store_true", help="Show index statistics")
+    parser.add_argument("--examples", "-e", help="Find examples for kind")
+    parser.add_argument("--intent", "-i", help="Intent for example search")
+    parser.add_argument("--output", "-o", help="Output format (json, table, markdown)")
     parser.add_argument("--verbose", "-v", action="store_true", help="Verbose output")
     args = parser.parse_args()
 
     if args.build:
-        print("Building retriever index...")
-        index = build_index(verbose=True)
-        show_stats(index)
+        build_index(args.verbose)
         return
 
     if args.stats:
         index = load_index()
         if not index:
             print("No index found. Run --build first.")
-            sys.exit(1)
+            return
         show_stats(index)
+        return
+
+    if args.examples:
+        index = load_index()
+        if not index:
+            print("No index found. Run --build first.")
+            return
+        examples = find_examples_for_kind(args.examples, intent=args.intent, index=index)
+        if args.output == "json":
+            print(json.dumps(examples, indent=2))
+        elif args.output == "table":
+            print("=== Examples ===")
+            for e in examples:
+                print(f"{e['title']} ({e['score']:.2f})")
+        elif args.output == "markdown":
+            print("### Examples")
+            for e in examples:
+                print(f"- **{e['title']}** ({e['score']:.2f})")
+        else:
+            print("=== Examples ===")
+            for e in examples:
+                print(f"{e['title']} ({e['score']:.2f})")
         return
 
     if args.query:
         index = load_index()
         if not index:
-            print("No index found. Building...")
-            index = build_index(verbose=args.verbose)
-
+            print("No index found. Run --build first.")
+            return
         results = find_similar(
-            query=args.query,
+            args.query,
             index=index,
             kind=args.kind,
             pillar=args.pillar,
             top_k=args.top_k,
+            min_score=args.min_score,
         )
-
-        print(f"\n{len(results)} results for: '{args.query}'")
-        if args.kind:
-            print(f"  (filtered: kind={args.kind})")
-        print()
-
-        for r in results:
-            print(f"  {r['score']:.4f}  {r['kind']:20s}  {r['title']}")
-            print(f"           {r['path']}")
-            if r.get("tldr"):
-                print(f"           {r['tldr'][:100]}")
-            print()
+        if not results:
+            print("No matching artifacts found.")
+            return
+        if args.output == "json":
+            print(json.dumps(results, indent=2))
+        elif args.output == "table":
+            print("=== Search Results ===")
+            for r in results:
+                print(f"{r['title']} ({r['score']:.2f})")
+        elif args.output == "markdown":
+            print("### Search Results")
+            for r in results:
+                print(f"- **{r['title']}** ({r['score']:.2f})")
+        else:
+            print("=== Search Results ===")
+            for r in results:
+                print(f"{r['title']} ({r['score']:.2f})")
         return
 
     parser.print_help()
+    return
 
 
 if __name__ == "__main__":

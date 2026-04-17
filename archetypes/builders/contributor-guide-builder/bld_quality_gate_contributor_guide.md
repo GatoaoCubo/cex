@@ -1,0 +1,58 @@
+---
+kind: quality_gate
+id: p05_qg_contributor_guide
+pillar: P11
+llm_function: GOVERN
+purpose: Quality gate with HARD and SOFT scoring for contributor_guide
+quality: 8.9
+title: "Quality Gate Contributor Guide"
+version: "1.0.0"
+author: wave1_builder_gen_v2
+tags: [contributor_guide, builder, quality_gate]
+tldr: "Quality gate with HARD and SOFT scoring for contributor_guide"
+domain: "contributor_guide construction"
+created: "2026-04-14"
+updated: "2026-04-14"
+density_score: 0.85
+---
+
+## Definition
+| metric | threshold | operator | scope |
+|---|---|---|---|
+| completeness | 100% | >= | required sections |
+
+## HARD Gates
+| ID | Check | Fail Condition |
+|---|---|---|
+| H01 | YAML frontmatter valid | invalid YAML syntax |
+| H02 | ID matches pattern ^p05_cg_[a-z][a-z0-9_]+.md$ | invalid filename |
+| H03 | kind field matches 'contributor_guide' | mismatched kind |
+| H04 | dev setup instructions present | missing setup guide |
+| H05 | PR flow documented | incomplete PR process |
+| H06 | coding standards defined | no style guidelines |
+| H07 | review process outlined | missing review criteria |
+| H08 | CLA process described | no CLA requirements |
+
+## SOFT Scoring
+| Dim | Dimension | Weight | Scoring Guide |
+|---|---|---|---|
+| D01 | Clarity | 0.15 | 1.0=unambiguous |
+| D02 | Completeness | 0.20 | 1.0=all sections present |
+| D03 | Structure | 0.15 | 1.0=logical flow |
+| D04 | Coding standards | 0.15 | 1.0=specific and enforceable |
+| D05 | PR process | 0.10 | 1.0=step-by-step |
+| D06 | Review process | 0.10 | 1.0=clear expectations |
+| D07 | CLA compliance | 0.15 | 1.0=explicit requirements |
+
+## Actions
+| Score | Action |
+|---|---|
+| GOLDEN >=9.5 | Auto-approve and publish |
+| PUBLISH >=8.0 | Manual review required |
+| REVIEW >=7.0 | Minor edits needed |
+| REJECT <7.0 | Reject and request rewrite |
+
+## Bypass
+| conditions | approver | audit trail |
+|---|---|---|
+| emergency release | CTO | signed waiver |

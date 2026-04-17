@@ -30,6 +30,47 @@ setup.cmd
 
 ---
 
+## 2.5. Validate Setup
+
+After `setup.cmd` completes, run the setup validator:
+
+```bash
+python _tools/cex_setup_validator.py
+```
+
+This checks all runtimes, dependencies, MCP configs, and runtime directories.
+Fix any FAIL items before booting. If everything passes, you're ready.
+
+---
+
+## 2.6. Environment Variables
+
+| Variable | Required? | Purpose | How to set |
+|----------|-----------|---------|-----------|
+| (none for OAuth) | -- | Claude Code uses browser login | Automatic on first `claude` run |
+| ANTHROPIC_API_KEY | Optional | API access (alternative to OAuth) | `setx ANTHROPIC_API_KEY sk-ant-...` |
+| FIRECRAWL_API_KEY | Optional | Web scraping (N01 research) | `setx FIRECRAWL_API_KEY fc-...` |
+| BRAVE_API_KEY | Optional | Brave Search (N01 research) | `setx BRAVE_API_KEY BSA...` |
+
+Set via `setx VAR value` in CMD, or System Properties > Environment Variables on Windows.
+After `setx`, restart your terminal for the variable to take effect.
+
+---
+
+## 2.7. Power Settings (for long runs)
+
+For grid/mission work (multi-nucleus dispatch that can run 30-60 min):
+
+```
+Settings > System > Power > Screen and sleep: set both to "Never"
+```
+
+Or from CMD: `powercfg -change -standby-timeout-ac 0`
+
+Re-enable after the mission completes to save power.
+
+---
+
 ## 3. Boot
 
 ```bash
@@ -82,13 +123,15 @@ Or go guided (co-pilot mode):
 
 ```
 cex/
-  archetypes/builders/          # 123 builders (13 ISOs each = 1,599 files)
+  archetypes/builders/          # 125 builders (13 ISOs each = 1,625 files)
   P01_knowledge/ .. P12_orchestration/  # 12 pillars (kind schemas + templates)
   N00_genesis/                  # Archetype mold
   N01_intelligence/ .. N07_admin/       # 7 runtime nuclei (domain instances)
-  _tools/                       # 91 Python tools (8F engine, quality, retrieval)
-  boot/                         # Boot scripts (1 per nucleus)
-  .claude/                      # Claude Code config (rules, agents, commands)
+  _tools/                       # 59 Python tools (8F engine, quality, retrieval)
+  boot/                         # Boot scripts (1 per nucleus + N07 orchestrator)
+  .claude/P02_model/               # 125 builder sub-agents
+  .claude/rules/                # Behavioral rules (auto-loaded per session)
+  .claude/commands/             # Custom /commands (/build, /mission, etc.)
   .cex/                         # Runtime state (kinds_meta, config, signals)
 ```
 
@@ -139,4 +182,19 @@ python _tools/cex_compile.py --all   # Compile all .md to .yaml
 
 ---
 
-*CEX Quick Start v3.0 -- Claude Code native. 2026-04-08.*
+## Troubleshooting
+
+| Problem | Fix |
+|---------|-----|
+| `uvx not found` | `pip install uv` -- uv provides the `uvx` command for MCP servers |
+| MCP server 404 / install fails | Check `.mcp-n0X.json` -- old `@anthropic/*` packages moved to `@modelcontextprotocol/*` |
+| `cex_retriever.py` warnings | `pip install numpy scikit-learn` -- optional but improves TF-IDF performance |
+| Pre-commit hook not running | `python _tools/cex_hooks.py install` -- installs the git pre-commit hook |
+| `claude` command not found | `npm install -g @anthropic-ai/claude-code` -- or check Node.js is in PATH |
+| Python `UnicodeEncodeError` | Windows terminal uses cp1252 by default; set `PYTHONIOENCODING=utf-8` or use `chcp 65001` |
+| Nuclei die mid-grid | Check Windows power settings -- disable sleep for long runs (see section 2.7) |
+| `setup.cmd` fails at pip | Ensure Python is in PATH (`python --version` should work from CMD) |
+
+---
+
+*CEX Quick Start v4.0 -- Claude Code native. 2026-04-12.*

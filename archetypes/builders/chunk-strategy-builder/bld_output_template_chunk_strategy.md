@@ -41,13 +41,13 @@ strip_whitespace: "{{strip_whitespace}}}}"
 keep_separator: "{{keep_separator}}}}"
 ```
 ## Overview
-{{overview_content}}
+`{{overview_content}}`
 ## Method
-{{method_content}}
+`{{method_content}}`
 ## Parameters
-{{parameters_content}}
+`{{parameters_content}}`
 ## Integration
-{{integration_content}}
+`{{integration_content}}`
 
 ## Template Standards
 

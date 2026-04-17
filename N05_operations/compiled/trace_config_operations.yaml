@@ -7,7 +7,7 @@ created: 2026-04-07
 updated: 2026-04-07
 author: n05_operations
 domain: observability-operations
-quality: null
+quality: 8.9
 tags:
 - trace_config
 - observability
@@ -20,10 +20,19 @@ tldr: Trace configuration for N05 operations covering deploy telemetry, test exe
 density_score: 0.96
 overview: This trace configuration defines observability instrumentation for all N05 operations. Every deploy, test execution,
   health check, and inter-nucleus signal is traceable. No operation runs in the dark.
+boundary: This artifact defines the trace configuration for N05 operations, specifying how to instrument and monitor deploy,
+  test, health, and signal activities. It is not a technical implementation of the tracing system, but rather the policy and
+  structure for what should be traced, how data is captured, and how traces are stored and used.
+related_kinds:
+- 'observability_policies: Defines the rules and criteria for when and how traces are used in decision-making processes.'
+- 'telemetry_data_models: Structures the format and content of the data captured in each trace, ensuring consistency across
+  systems.'
+- 'deployment_workflows: Integrates trace configurations to monitor and log the execution of deployment steps.'
+- 'signal_orchestration: Relies on signal traces to ensure proper coordination and debugging of inter-nucleus communication.'
 trace_points: ''
 deploy_traces: '| trace_id | trigger | data_captured | retention |
 
-  |----------|---------|---------------|-----------|
+  |------|---------|------|-------|
 
   | DEPLOY_PRE | Pre-flight check start | env_vars_count, railway_toml_hash, migration_status | 90d |
 
@@ -36,7 +45,7 @@ deploy_traces: '| trace_id | trigger | data_captured | retention |
   | DEPLOY_ROLLBACK | Rollback triggered | trigger_reason, services_affected, rollback_duration_ms | 365d |'
 test_traces: '| trace_id | trigger | data_captured | retention |
 
-  |----------|---------|---------------|-----------|
+  |------|---------|------|-------|
 
   | TEST_UNIT | Unit eval start/end | test_count, pass_count, fail_count, duration_ms | 30d |
 
@@ -49,7 +58,7 @@ test_traces: '| trace_id | trigger | data_captured | retention |
   | TEST_REGRESS | Regression check | baseline_version, current_version, delta_metrics | 90d |'
 signal_traces: '| trace_id | trigger | data_captured | retention |
 
-  |----------|---------|---------------|-----------|
+  |------|---------|------|-------|
 
   | SIG_EMIT | Signal written | source_nucleus, signal_type, quality_score, timestamp | 30d |
 
@@ -58,7 +67,7 @@ signal_traces: '| trace_id | trigger | data_captured | retention |
   | SIG_TIMEOUT | Signal poll timeout | expected_source, wait_duration_s, retry_count | 90d |'
 health_traces: '| trace_id | trigger | data_captured | retention |
 
-  |----------|---------|---------------|-----------|
+  |------|---------|------|-------|
 
   | HEALTH_POLL | Periodic health check | endpoint, response_ms, status_code, body_hash | 7d |
 
@@ -67,7 +76,7 @@ health_traces: '| trace_id | trigger | data_captured | retention |
   | HEALTH_RECOVER | Health recovery | endpoint, downtime_ms, recovery_trigger | 90d |'
 sampling_configuration: '| trace_category | sample_rate | reason |
 
-  |----------------|-------------|--------|
+  |------|------|-------|
 
   | DEPLOY_* | 100% | Every deploy is traced — no exceptions |
 
@@ -80,7 +89,7 @@ sampling_configuration: '| trace_category | sample_rate | reason |
   | HEALTH_DEGRADE | 100% | Always trace degradation events |'
 storage: '| field | value |
 
-  |-------|-------|
+  |-------|-----|
 
   | format | JSON lines (.jsonl) |
 
@@ -102,3 +111,32 @@ alert_rules: '| rule | condition | action |
   | TEST_REGRESS | TEST_REGRESS delta > 10% degradation | Block deploy, flag for review |
 
   | SIG_LOST | SIG_TIMEOUT retry_count > 3 | Signal N07 crash detection |'
+8f_pipeline_function: 'Primary function: GOVERN
+
+
+  The GOVERN function ensures trace configurations are enforced across all operations, including:
+
+  - Enforcing sampling rates (e.g., 100% for critical traces)
+
+  - Validating data capture completeness (e.g., ensuring all deploy phases are logged)
+
+  - Maintaining storage policies (e.g., 90d retention for deploy traces)
+
+  - Applying alert rules (e.g., triggering rollback assessments on health failures)
+
+  - Integrating with observability policies to align trace usage with operational goals
+
+
+  | Responsibility | Impact | Example |
+
+  |--------------|--------|--------|
+
+  | Sampling control | Reduces storage overhead | 10% sampling for HEALTH_POLL |
+
+  | Data validation | Ensures trace completeness | All deploy phases must be logged |
+
+  | Alert activation | Enables proactive remediation | Triggers rollback on health degradation |
+
+  | Policy alignment | Ensures trace usage consistency | Aligns with observability_policies |
+
+  | Storage management | Prevents data sprawl | Auto-purge beyond retention |'

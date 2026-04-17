@@ -24,8 +24,8 @@ dependencies: []
 logging: true
 tldr: "Build a route table with patterns, confidence thresholds, fallback, and escalation logic for task-to-destination dispatch."
 density_score: 0.91
+llm_function: REASON
 ---
-
 ## Context
 A **router** artifact defines task-to-destination routing logic: given an incoming task, which agent_group, agent, or service should handle it? It contains a route table (pattern → destination mappings), confidence thresholds per route, a fallback destination for unmatched tasks, and an escalation policy for ambiguous matches.
 **Inputs**

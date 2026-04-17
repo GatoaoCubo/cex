@@ -28,7 +28,7 @@ updated: "2026-04-07"
 
 ---
 
-## WAVE 3A: SCHEMAS (P06) -- 5 CREATE em N02/schemas/
+## WAVE 3A: SCHEMAS (P06) -- 5 CREATE em N02/P06_schema/
 
 ### 3.1 html_output_schema.yaml
 Valida todo HTML output do N02.
@@ -70,7 +70,7 @@ Dark mode: inverted lightness, same hue. Forbidden: arbitrary hex in className.
 
 ---
 
-## WAVE 3B: OUTPUT TEMPLATES (P05) -- 7 CREATE em N02/output/
+## WAVE 3B: OUTPUT TEMPLATES (P05) -- 7 CREATE em N02/P05_output/
 
 ### 3.6 output_landing_page.md
 Template HTML completo para landing pages.

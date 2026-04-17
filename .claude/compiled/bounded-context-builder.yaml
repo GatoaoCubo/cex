@@ -1,0 +1,5 @@
+name: bounded-context-builder
+description: Builds ONE bounded_context artifact via 8F pipeline. Loads bounded-context-builder specs. Produces DDD bounded
+  context definition with semantic scope, aggregates, integration patterns (ACL/OHS/CF), and team ownership. Never self-scores
+  quality.
+tools: Read, Write, Edit, Bash, Glob, Grep

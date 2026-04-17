@@ -4,7 +4,7 @@ kind: type_builder
 pillar: P02
 parent: null
 domain: memory_scope
-llm_function: INJECT
+llm_function: BECOME
 version: 1.0.0
 created: 2026-03-29
 updated: 2026-03-29

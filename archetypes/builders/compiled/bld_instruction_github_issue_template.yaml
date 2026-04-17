@@ -1,0 +1,41 @@
+kind: instruction
+id: bld_instruction_github_issue_template
+pillar: P03
+llm_function: REASON
+purpose: Step-by-step production process for github_issue_template
+quality: null
+title: Instruction Github Issue Template
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- github_issue_template
+- builder
+- instruction
+tldr: Step-by-step production process for github_issue_template
+domain: github_issue_template construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+phase_1_research:
+- Analyze existing GitHub issue templates in the project’s repository.
+- Identify required fields (title, description, steps to reproduce, expected vs actual behavior).
+- Categorize labels (bug, feature, question, blocked, enhancement).
+- Review SCHEMA.md for field types, formats, and constraints.
+- Audit OUTPUT_TEMPLATE.md for structure and placeholder syntax.
+- Document domain-specific requirements (e.g., environment details, component names).
+phase_2_compose:
+- Create template file with `.md` extension and `issue_template` metadata.
+- Define required fields using markdown headers and placeholder syntax (e.g., `{{field}}`).
+- Assign labels based on categorization from Phase 1 (e.g., `bug`, `question`).
+- Use SCHEMA.md to enforce field types (e.g., `textarea`, `checkbox`).
+- Add optional fields for context (e.g., `screenshots`, `logs`).
+- Reference OUTPUT_TEMPLATE.md for consistent formatting and structure.
+- Embed validation rules (e.g., required fields must not be empty).
+- Customize template for the project’s workflows (e.g., triage labels).
+- Finalize with a `---` separator and metadata block.
+phase_3_validate:
+- '[ ] All required fields are present and labeled correctly.'
+- '[ ] Labels match predefined categories in SCHEMA.md.'
+- '[ ] Markdown syntax conforms to OUTPUT_TEMPLATE.md.'
+- '[ ] Placeholder syntax is consistent and functional.'
+- '[ ] Template renders correctly in GitHub (preview, submit).'

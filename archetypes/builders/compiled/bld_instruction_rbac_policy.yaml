@@ -1,0 +1,41 @@
+kind: instruction
+id: bld_instruction_rbac_policy
+pillar: P03
+llm_function: REASON
+purpose: Step-by-step production process for rbac_policy
+quality: null
+title: Instruction Rbac Policy
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- rbac_policy
+- builder
+- instruction
+tldr: Step-by-step production process for rbac_policy
+domain: rbac_policy construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+phase_1_research:
+- Identify tenant domains and their unique resource hierarchies.
+- Map roles to tenant-specific operations (e.g., admin, viewer).
+- Define access constraints per role (e.g., read-only, write-only).
+- Audit existing policies for conflicts or overlaps.
+- Consult compliance requirements (e.g., GDPR, SOC2).
+- Document stakeholder approval workflows for policy changes.
+phase_2_compose:
+- Use bld_schema_rbac_policy.md to structure policy JSON with `role`, `resource`, `action`, `tenant`.
+- Define base roles (e.g., `tenant_admin`, `service_user`).
+- Assign permissions via `allow`/`deny` rules per resource type.
+- 'Scope policies to tenant identifiers (e.g., `tenant_id: "abc123"`).'
+- 'Reference bld_output_template_rbac_policy.md for required fields: `policy_id`, `version`, `created_by`.'
+- Embed multi-tenant isolation rules using `tenant_scope` enum.
+- Validate against bld_schema_rbac_policy.md using JSON schema validator.
+- Write policy in YAML format with `---` separators.
+- Add comments for audit trails and change logs.
+phase_3_validate:
+- '[ ] ✅ Check syntax using `yamllint` and JSON schema.'
+- '[ ] ✅ Test policy enforcement with mock tenant data.'
+- '[ ] ✅ Confirm isolation: no cross-tenant access leaks.'
+- '[ ] ✅ Verify compliance with Pillar P09 constraints.'
+- '[ ] ✅ Obtain stakeholder sign-off on final artifact.'

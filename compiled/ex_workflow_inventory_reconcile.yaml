@@ -1,0 +1,66 @@
+id: ex-workflow-inventory-reconcile
+kind: workflow
+pillar: P12
+title: Inventory Reconcile Workflow
+version: 0.1.0
+quality: null
+status: template
+brand_placeholders:
+- BRAND_NAME
+- BRAND_SHOPIFY_STORE_DOMAIN
+- BRAND_BLING_API_URL
+- BRAND_BLING_DEPOSITS
+- BRAND_RECONCILE_TOLERANCE
+tags:
+- commerce
+- template
+- distillation
+- orchestration
+- inventory
+- reconcile
+purpose: Specialized workflow focused solely on stock convergence across Supabase (cache), Bling (ERP truth), and Shopify
+  (storefront display). Catches drift, reports it, and -- on operator consent -- auto-corrects by writing Bling's number back
+  into the other channels.
+when_to_use:
+- Stock discrepancies cause canceled orders or oversells and you need them fixed daily.
+- Bling ERP is the accounting truth and you can't let Shopify drift.
+- You want a dry-run diff view before any write.
+when_not_to_use:
+- Single-channel brand -- trivially consistent.
+- Brands that don't use Bling -- build a simplified 2-channel version.
+brand_variables_used:
+- '`{{BRAND_NAME}}` -- report labeling.'
+- '`{{BRAND_SHOPIFY_STORE_DOMAIN}}`, `{{BRAND_BLING_API_URL}}` -- channel endpoints.'
+- '`{{BRAND_BLING_DEPOSITS}}` -- JSON array of Bling deposito ids counted as "available stock".'
+- '`{{BRAND_RECONCILE_TOLERANCE}}` -- integer; deltas smaller than this are logged but not acted on (default `2`).'
+workflow:
+- Snapshot
+- Pull current Supabase `inventory` rows into memory.
+- Pull current Bling `estoques` for `{{BRAND_BLING_DEPOSITS}}` (one call per deposito, parallel).
+- Pull current Shopify `inventoryLevels` via bulk GraphQL query.
+- Normalize -- every row keyed by `(sku, warehouse_or_location)`; align to the Bling taxonomy (Bling is truth).
+- Compute deltas
+- 'For each SKU: Bling_total = sum over deposits; Supabase_total = aggregate row; Shopify_total = sum over locations.'
+- '`delta_shopify = shopify_total - bling_total`; `delta_supabase = supabase_total - bling_total`.'
+- Tolerance filter -- drop any SKU whose |delta| <= `{{BRAND_RECONCILE_TOLERANCE}}`.
+- Validate -- run `ex_validator_inventory_invariants.md` checks (see there for rules). Hard failures abort the workflow; warnings
+  continue.
+- 'Report -- write to `inventory_reconcile_runs` table: `{run_id, started_at, discrepancies_count, auto_corrected_count, report_path}`.'
+- Act
+- Mode `dry_run` -> return report, no writes.
+- Mode `auto_correct` -> for each SKU, write Bling total to Supabase + Shopify.
+- Mode `propose` -> attach proposals to a ticket in the ops queue; human approves before write.
+- Notify -- `ex_notifier_webhook.md` emits `stock_low` for SKUs below `brand.reorder_threshold`.
+safety_rails:
+- If discrepancy set > 25% of catalog AND mode is `auto_correct` -> refuse and downgrade to `propose`; assumes a systemic
+  bug, not real drift.
+- If Bling is unreachable -> refuse to touch Shopify; stale Bling data would cause wrong writes.
+- Always record `before/after` per SKU for 90 days so an operator can revert a bad correction.
+scheduling:
+- 'Default cron: every 2h during business hours, every 6h off-hours.'
+- On-demand trigger from admin dashboard "Reconcile now" button.
+related_artifacts:
+- '`ex_validator_inventory_invariants.md` -- rule set used in validate step.'
+- '`ex_workflow_multi_marketplace_sync.md` -- the broader sync; this is a specialization.'
+- '`ex_api_client_bling.md`, `ex_api_client_shopify.md`'
+- '`ex_notifier_webhook.md`'

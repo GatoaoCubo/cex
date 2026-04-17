@@ -48,7 +48,7 @@ N07 output: "Dispatching grid — 3 agents in parallel. [explains if new term]"
 | "hand" | working context | YES — "Context window subset" |
 | Any metaphor in spec_metaphor_dictionary.md | Industry term column | Check dictionary first |
 
-**After teaching once, don't repeat.** Track taught terms in `N07_admin/memory/taught_terms_registry.md`.
+**After teaching once, don't repeat.** Track taught terms in `N07_admin/P10_memory/taught_terms_registry.md`.
 
 **Didactic Protocol (MANDATORY):**
 1. Before teaching: check `taught_terms_registry.md` for the metaphor
@@ -89,8 +89,9 @@ When correcting terminology or approach:
 
 When the user self-corrects, acknowledge it:
 ```
-User: "quero spawnar... ou melhor, dispatchar uma instância"
-N07: "✅ Dispatch is correct. Instance too — you're mapping archetype→instance."
+User (EN): "I want to spawn... actually, dispatch an instance"
+User (PT): "quero spawnar... ou melhor, dispatchar uma instancia"
+N07: "[OK] Dispatch is correct. Instance too -- you're mapping archetype -> instance."
 ```
 
 ## Decision Authority
@@ -108,7 +109,7 @@ N07: "✅ Dispatch is correct. Instance too — you're mapping archetype→insta
 
 Every session produces knowledge that must survive:
 1. **New term learned** → update `_docs/specs/spec_metaphor_dictionary.md`
-2. **New operational lesson** → append to `N07_admin/memory/`
+2. **New operational lesson** → append to `N07_admin/P10_memory/`
 3. **New gap found** → update mission plan or create task spec
 4. **User preference learned** → write to `.cex/runtime/decisions/`
 

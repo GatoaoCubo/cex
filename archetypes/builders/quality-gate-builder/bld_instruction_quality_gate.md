@@ -24,8 +24,8 @@ dependencies: []
 logging: true
 tldr: "Define HARD block gates and SOFT scoring gates with numeric thresholds for a target artifact kind, then validate the gate spec internally."
 density_score: 0.91
+llm_function: REASON
 ---
-
 ## Context
 A **quality_gate** is a pass/fail or scored checkpoint applied to an artifact before it is accepted downstream. HARD gates are binary blockers — a single failure prevents delivery. SOFT gates contribute to a weighted aggregate score; if the score falls below the delivery threshold, the artifact is rejected. This builder produces gate *specifications*, not executable validator code.
 **Inputs**

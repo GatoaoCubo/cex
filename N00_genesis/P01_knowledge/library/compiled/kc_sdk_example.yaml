@@ -1,0 +1,25 @@
+id: kc_sdk_example
+kind: knowledge_card
+title: SDK Example Integration Patterns
+version: 1.0.0
+quality: null
+pillar: P01
+density_score: 1.0
+python: 'from cex_sdk import SDK
+
+
+  sdk = SDK(api_key="your_key")
+
+  response = sdk.create_project(name="Example Project")
+
+  print(response.status_code)'
+javascript: "const SDK = require('cex-sdk');\nconst sdk = new SDK({ apiKey: 'your_key' });\nsdk.createProject(\"Example Project\"\
+  )\n  .then(data => console.log(data))\n  .catch(err => console.error(err));"
+java: "import com.cex.sdk.SDK;\n\npublic class Example {\n    public static void main(String[] args) {\n        SDK sdk =\
+  \ new SDK(\"your_key\");\n        System.out.println(sdk.createProject(\"Example Project\"));\n    }\n}"
+key_patterns:
+- API key authentication via constructor
+- Asynchronous pattern for non-blocking I/O
+- Consistent error handling patterns
+- Type-safe method signatures
+- Environment variable support for credentials

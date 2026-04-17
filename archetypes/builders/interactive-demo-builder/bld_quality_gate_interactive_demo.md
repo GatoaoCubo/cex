@@ -1,0 +1,64 @@
+---
+kind: quality_gate
+id: p05_qg_interactive_demo
+pillar: P11
+llm_function: GOVERN
+purpose: Quality gate with HARD and SOFT scoring for interactive_demo
+quality: 9.0
+title: "Quality Gate Interactive Demo"
+version: "1.0.0"
+author: wave1_builder_gen_v2
+tags: [interactive_demo, builder, quality_gate]
+tldr: "Quality gate with HARD and SOFT scoring for interactive_demo"
+domain: "interactive_demo construction"
+created: "2026-04-14"
+updated: "2026-04-14"
+density_score: 0.85
+---
+
+## Definition
+(Table: metric, threshold, operator, scope)
+| metric | threshold | operator | scope |
+|---|---|---|---|
+| Interactive demo script completeness | 100% | = | Entire product |
+
+## HARD Gates
+(Table: ID | Check | Fail Condition)
+| ID | Check | Fail Condition |
+|---|---|---|
+| H01 | YAML frontmatter valid | Invalid YAML syntax |
+| H02 | ID matches pattern ^p05_id_[a-z][a-z0-9_]+.md$ | ID format mismatch |
+| H03 | kind field matches 'interactive_demo' | Kind field incorrect |
+| H04 | Guided tour steps present | Missing or incomplete steps |
+| H05 | Talk track script included | Script missing or incomplete |
+| H06 | User flow aligns with product | Inconsistent or broken flow |
+| H07 | Accessibility compliance (WCAG 2.1 AA) | Fails accessibility checks |
+| H08 | Device compatibility (desktop/mobile) | Not functional on required platforms |
+
+## SOFT Scoring
+(Table: Dim | Dimension | Weight | Scoring Guide)
+| Dim | Dimension | Weight | Scoring Guide |
+|---|---|---|---|
+| D01 | Script completeness | 0.20 | 1.0 = all steps, talk track, and objection map present |
+| D02 | User experience | 0.20 | 1.0 = seamless guided flow, no dead ends |
+| D03 | Clarity | 0.15 | 1.0 = no ambiguity, active voice throughout |
+| D04 | Engagement | 0.15 | 1.0 = compelling proof points and CTA present |
+| D05 | Accessibility | 0.10 | 1.0 = WCAG 2.1 AA compliant |
+| D06 | Localization | 0.05 | 1.0 = all target locales supported |
+| D07 | Performance | 0.05 | 1.0 = <2s load time per step |
+| D08 | Device compatibility | 0.10 | 1.0 = desktop and mobile verified |
+
+## Actions
+(Table: Score | Action)
+| Score | Action |
+|---|---|
+| GOLDEN | >=9.5 | Auto-publish with celebration |
+| PUBLISH | >=8.0 | Publish to production |
+| REVIEW | >=7.0 | Send to UX team for review |
+| REJECT | <7.0 | Block release, fix required |
+
+## Bypass
+(Table: conditions, approver, audit trail)
+| conditions | approver | audit trail |
+|---|---|---|
+| Prototype/demo version | Product Lead | Meeting note dated 2023-10-01 |

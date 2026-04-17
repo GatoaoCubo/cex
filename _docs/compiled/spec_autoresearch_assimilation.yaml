@@ -47,7 +47,7 @@ wave_2_knowledge_cards_2_files:
 - '`P01_knowledge/library/domain/patterns/kc_autoresearch_loop.md`'
 - '`P01_knowledge/library/domain/patterns/kc_experiment_driven_development.md`'
 wave_3_integration_2_files:
-- '`N07_admin/orchestration/auto/wf_auto_evolve.md` — REWRITE (add autoresearch loop)'
+- '`N07_admin/P12_orchestration/auto/wf_auto_evolve.md` — REWRITE (add autoresearch loop)'
 - '`.claude/commands/evolve.md` — new `/evolve` command'
 wave_4_score_consolidate:
 - Score all new artifacts from N01/N04 verticalization (40 files)

@@ -1,0 +1,127 @@
+id: p03_fse_schema_design
+kind: few_shot_example
+pillar: P03
+title: Few-Shot Example -- P06 Schema Design via 8F
+version: 1.0.0
+created: 2026-04-17
+author: n03_engineering
+domain: schema-design
+quality: null
+tags:
+- few_shot_example
+- P06
+- schema
+- type_def
+- input_schema
+- validation_schema
+- 8F
+- coc
+tldr: Input/output pair demonstrating how N03 applies 8F to P06 schema design. Covers type_def, input_schema, and validation_schema
+  in one cohesive example. Reusable by any LLM runtime for schema-kind builds.
+density_score: 0.89
+example_1_type_def_via_template_first: ''
+input: 'User: "define a type for artifact metadata"
+
+  Context: N03_engineering, pillar P06, schema domain'
+reasoning_8f_abbreviated: "F1: kind=type_def, pillar=P06, nucleus=N03\n    schema: N00_genesis/P06_schema/_schema.yaml\n \
+  \   max_bytes: 2048\n\nF2: type-def-builder loaded (13 ISOs)\n    sin_lens: Inventive Pride (precision of types reflects\
+  \ pride in contracts)\n\nF3: template match -> type_def_cex_types.md (similarity: 78%)\n    approach: Template-First (>=\
+  \ 60%)\n    injected: kc_engineering_vocabulary.md, type_def_cex_types.md\n\nF4: sections: TypeDef, Fields table, Constraints,\
+  \ Usage\n    approach: Template-First (adapt type_def_cex_types.md)\n\nF7: H01-H07 all pass, density=0.87, score=9.1"
+output: "---\nid: p06_td_artifact_metadata\nkind: type_def\npillar: P06\ntitle: \"Type -- ArtifactMetadata\"\nversion: 1.0.0\n\
+  created: 2026-04-17\nauthor: n03_engineering\ndomain: schema\nquality: null\ntags: [type_def, artifact, metadata, frontmatter]\n\
+  tldr: \"Structural type for CEX artifact frontmatter. Enforces required fields, type constraints, and naming conventions\
+  \ across all 257 kinds.\"\ndensity_score: 0.87\n---\n\n# Type: ArtifactMetadata\n\n## TypeDef\n\ninterface ArtifactMetadata\
+  \ {\n  id: string           // pattern: p{pillar}{prefix}{slug}\n  kind: KindName       // enum: 257 values from kinds_meta.json\n\
+  \  pillar: PillarCode   // enum: P01-P12\n  title: string        // max: 120 chars\n  version: SemVer      // pattern: /^\\\
+  d+\\.\\d+\\.\\d+$/\n  created: ISODate     // format: YYYY-MM-DD\n  author: string       // nucleus id or username\n  domain:\
+  \ string       // kebab-case domain tag\n  quality: null | float // null (produced) or 0-10 (scored by peer)\n  tags: string[]\
+  \       // min: 2, all lowercase, kebab-case\n  tldr: string         // max: 160 chars\n}\n\n## Fields\n\n| Field | Type\
+  \ | Required | Constraint |\n|-------|------|----------|------------|\n| id | string | YES | pattern `p{XX}{prefix}{slug}`,\
+  \ globally unique |\n| kind | KindName | YES | must exist in kinds_meta.json |\n| pillar | P01-P12 | YES | must match kind's\
+  \ canonical pillar |\n| quality | null\\|float | YES | null when produced; peer sets value |\n| tags | string[] | YES |\
+  \ min 2, lowercase, kebab-case |\n| tldr | string | YES | <= 160 chars |\n\n## Cross-References\n- `N03_engineering/P06_schema/type_def_cex_types.md`\
+  \ — master CEX type registry\n- `N03_engineering/P06_schema/enum_def_build_actions.md` — KindName enum source\n\n---\n\n\
+  ## Example 2: input_schema via Hybrid\n\n### INPUT\n\nUser: \"create input schema for the 8F pipeline build request\"\n\
+  Context: N03_engineering, pillar P06\n\n### REASONING (8F abbreviated)\n\nF1: kind=input_schema, pillar=P06, nucleus=N03\n\
+  \    max_bytes: 4096\n\nF2: input-schema-builder loaded (13 ISOs)\n\nF3: partial match -> input_schema_engineering.md (similarity:\
+  \ 52%)\n    approach: Hybrid (30-60% match)\n    injected: input_schema_engineering.md + interface_builder_protocol.md\n\
+  \nF4: composite from input_schema_engineering (structure)\n    + fresh content for 8F-specific fields\n\nF7: density_score:\
+  \ 0.91, gates 7/7, score: 9.2\n\n### OUTPUT (key sections only)\n\n---\nid: p06_is_8f_build_request\nkind: input_schema\n\
+  pillar: P06\ntitle: \"Input Schema -- 8F Pipeline Build Request\"\nquality: null\n---"
+schema: '| Field | Type | Required | Default | Description |
+
+  |-------|------|----------|---------|-------------|
+
+  | intent | string | YES | — | Natural language or structured intent |
+
+  | kind | KindName | NO | auto-resolved | Override kind resolution |
+
+  | pillar | P01-P12 | NO | auto-resolved | Override pillar assignment |
+
+  | nucleus | N01-N07 | NO | auto-routed | Force specific nucleus |
+
+  | budget_tokens | int | NO | 50000 | Agent loop token budget |
+
+  | target_score | float | NO | 9.0 | Minimum acceptable quality |
+
+  | dry_run | bool | NO | false | Validate without writing |
+
+  | manifest_path | string | NO | auto-detect | GDP decision manifest |'
+validation_rules: '| Rule ID | Check | Pass Condition | Fail Action |
+
+  |---------|-------|----------------|-------------|
+
+  | COC-01 | Frontmatter present | YAML block at file start | REJECT |
+
+  | COC-02 | kind in kinds_meta.json | exact match | REJECT |
+
+  | COC-03 | pillar matches kind | schema lookup | REJECT |
+
+  | COC-04 | id format: p{XX}{prefix}{slug} | regex match | WARN |
+
+  | COC-05 | quality: null | exact match | REJECT (self-scoring) |
+
+  | COC-06 | File in correct pillar dir | path.startswith("N0X/P{XX}") | WARN |
+
+  | COC-07 | density_score >= 0.85 | numeric check | WARN |
+
+  | COC-08 | No filler phrases | grep pattern list | WARN |
+
+  ```
+
+
+  ---
+
+
+  ## What This Example Teaches
+
+
+  | Pattern | Demonstrated |
+
+  |---------|-------------|
+
+  | Template-First selects when match >= 60% | Example 1 (78% match -> adapt) |
+
+  | Hybrid selects when match 30-60% | Example 2 (52% match -> composite) |
+
+  | Fresh selects when match < 30% | Example 3 (22% match -> first principles) |
+
+  | All three still run full F1-F8 | Every example shows F7 pass |
+
+  | Output format is consistent across patterns | Frontmatter structure identical |
+
+
+  ---
+
+
+  ## Cross-References
+
+
+  - `N03_engineering/P06_schema/type_def_cex_types.md` — CEX type definitions (source)
+
+  - `N03_engineering/P06_schema/input_schema_engineering.md` — Example 2 source template
+
+  - `N03_engineering/P08_architecture/pattern_construction_triad.md` — Template/Hybrid/Fresh decision
+
+  - `N03_engineering/P08_architecture/pattern_8f_full_trace.md` — F3 template match field'

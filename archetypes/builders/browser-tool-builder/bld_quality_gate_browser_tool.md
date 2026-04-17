@@ -12,8 +12,8 @@ quality: 9.0
 tags: [quality-gate, browser-tool, P04, playwright, dom, selectors, automation]
 tldr: "Pass/fail gate for browser_tool artifacts: engine declaration, action completeness, selector fallback chains, timeout config, and output format contract."
 density_score: 0.90
+llm_function: GOVERN
 ---
-
 # Gate: browser_tool
 ## Definition
 | Field | Value |

@@ -1,0 +1,32 @@
+kind: examples
+id: bld_examples_reward_model
+pillar: P07
+llm_function: GOVERN
+purpose: Golden and anti-examples of reward_model artifacts
+quality: null
+title: Examples Reward Model
+version: 1.0.0
+author: wave1_builder_gen
+tags:
+- reward_model
+- builder
+- examples
+tldr: Golden and anti-examples of reward_model artifacts
+domain: reward_model construction
+created: '2026-04-13'
+updated: '2026-04-13'
+density_score: 0.85
+golden_example: "title: \"Dialogue Quality Reward Model\"\ndescription: \"Reward model for evaluating conversational AI based\
+  \ on coherence, relevance, and safety\"\nmetrics:\n  - name: \"coherence_score\"\n    type: \"float\"\n    description:\
+  \ \"Score from 0-1 based on linguistic coherence\"\n  - name: \"task_completion\"\n    type: \"binary\"\n    description:\
+  \ \"1 if user goal is achieved, 0 otherwise\"\nscoring_rules:\n  - if: \"response contains harmful content\"\n    then:\
+  \ \"coherence_score = 0; task_completion = 0\"\n  - if: \"response directly answers question\"\n    then: \"task_completion\
+  \ = 1\"\n  - if: \"response uses 3+ grammatical errors\"\n    then: \"coherence_score -= 0.3\"\nexample:\n  input: \"Explain\
+  \ quantum physics\"\n  output: \"Quantum physics studies particles at atomic scales...\"\n  scores: {coherence_score: 0.95,\
+  \ task_completion: 1}"
+anti_example_1_vague_metrics: "title: \"Generic Reward Model\"\ndescription: \"Make things better\"\nmetrics:\n  - name: \"\
+  quality\"\n    type: \"unknown\"\n    description: \"How good the output is\""
+why_it_fails: Mixes reward model configuration with training algorithm details. The boundary explicitly excludes RL algorithms.
+  The "reward" metric is defined by the training process rather than the evaluation criteria itself.
+anti_example_2_algorithm_confusion: "title: \"PPO Reward Model\"\ndescription: \"Uses PPO algorithm for training\"\nmetrics:\n\
+  \  - name: \"reward\"\n    type: \"float\"\n    description: \"Calculated by PPO during training\""

@@ -6,7 +6,7 @@ version: 1.0.0
 created: 2026-04-07
 author: n04_knowledge
 domain: quality-feedback
-quality: null
+quality: 8.9
 tags:
 - feedback
 - iteration
@@ -16,12 +16,27 @@ tags:
 tldr: 'Tracks N04 quality iterations: what failed, what was learned, what changed. Prevents repeat mistakes across KC creation
   sessions.'
 density_score: 0.9
-purpose: Living document tracking quality issues found in N04 artifacts, the corrections applied, and the lessons learned.
-  Each entry represents a feedback loop closure — a mistake that won't be repeated.
+boundary: This artifact is a feedback log tracking quality iterations in N04, capturing issues, corrections, and lessons learned.
+  It is not a solution document, status report, or audit trail.
+related_kinds:
+- 'feedback_log: Directly related as it''s the same kind'
+- 'quality_audit: Complementary, as audits may identify issues tracked here'
+- 'iteration_plan: Sequential, as plans may inform future iterations'
+- 'knowledge_inventory: Related, as inventory may show missing artifacts'
+- 'solution_blueprint: Indirectly related, as blueprints may guide artifact creation'
+purpose: '| Aspect | Description | Key Focus | Outcome |
+
+  |-------|-------------|-----------|---------|
+
+  | Document Type | Living feedback log | Quality issues, corrections, lessons | Prevents repeat mistakes |
+
+  | Scope | N04 artifact creation | Mistakes in KC sessions | Iteration closure |
+
+  | Format | Structured entries | Root causes, actions, lessons | Machine-readable for analysis |'
 iteration_log: ''
 iteration_001_agent_card_gaps_2026_04_07: '| Field | Value |
 
-  |-------|-------|
+  |-------|--|
 
   | Date | 2026-04-07 |
 
@@ -40,7 +55,7 @@ iteration_001_agent_card_gaps_2026_04_07: '| Field | Value |
   terms — before it can effectively serve other nuclei |'
 iteration_002_compiled_yaml_alignment_2026_04_07: '| Field | Value |
 
-  |-------|-------|
+  |-------|--|
 
   | Date | 2026-04-07 |
 
@@ -58,7 +73,7 @@ template_for_new_entries: '### Iteration NNN — Title (DATE)
 
   | Field | Value |
 
-  |-------|-------|
+  |-------|--|
 
   | Date | YYYY-MM-DD |
 
@@ -71,15 +86,18 @@ template_for_new_entries: '### Iteration NNN — Title (DATE)
   | Action | What was done to fix it |
 
   | Lesson | What to remember for next time |'
-patterns_observed: '| Pattern | Frequency | Mitigation |
+patterns_observed: '| Pattern | Frequency | Mitigation | Impact |
 
-  |---------|-----------|------------|
+  |---------|-----------|------------|--------|
 
-  | Missing specialist agents | Common in initial bootstrap | Build agents FIRST, then have them build their artifacts |
-
-  | Thin memory infrastructure | Common | Minimum viable: 1 entity memory + 1 knowledge index + 1 memory scope |
-
-  | No glossary in knowledge nucleus | Ironic but common | Glossary entries are cheap — create 5-10 core terms immediately
+  | Missing specialist agents | Common in initial bootstrap | Build agents FIRST, then have them build their artifacts | High
   |
 
-  | Compiled YAML lag | Every batch creation | Single compile pass at end, not per-file |'
+  | Thin memory infrastructure | Common | Minimum viable: 1 entity memory + 1 knowledge index + 1 memory scope | Medium |
+
+  | No glossary in knowledge nucleus | Ironic but common | Glossary entries are cheap — create 5-10 core terms immediately
+  | Low |
+
+  | Compiled YAML lag | Every batch creation | Single compile pass at end, not per-file | High |
+
+  | Overlooked config files | Rare but critical | Automate config validation with pre-commit hooks | Critical |'

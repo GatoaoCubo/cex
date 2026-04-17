@@ -23,6 +23,7 @@ observation_types: [user, feedback, project, reference]
 quality: 9.1
 title: "Memory Checkpoint"
 density_score: 0.90
+llm_function: INJECT
 ---
 ## Summary
 Checkpoints are only useful if they can be found and restored. Three properties make or break checkpoint utility: TTL enforcement (prevents orphan accumulation), workflow_ref presence (enables association during incident recovery), and state minimization (determines restore speed). The most expensive failure is a checkpoint that exists but cannot be used — correct id and step, but missing workflow_ref blocks recovery tooling.

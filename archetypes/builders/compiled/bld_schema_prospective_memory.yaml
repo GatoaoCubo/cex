@@ -1,0 +1,59 @@
+kind: schema
+id: bld_schema_prospective_memory
+pillar: P10
+llm_function: CONSTRAIN
+purpose: Formal schema for prospective_memory
+quality: 7.6
+title: Schema Prospective Memory
+version: 1.0.0
+author: n03_builder
+tags:
+- prospective_memory
+- builder
+- schema
+tldr: 'Schema for prospective_memory: reminders array with trigger/payload/priority/expiry, owner, execution_mechanism.'
+domain: prospective memory construction
+created: '2026-04-17'
+updated: '2026-04-17'
+density_score: 0.9
+frontmatter_fields: '| Field | Type | Required | Notes |
+
+  |-------|------|----------|-------|
+
+  | id | string (p10_pm_{slug}) | YES | Namespace compliance |
+
+  | kind | literal "prospective_memory" | YES | Type integrity |
+
+  | pillar | literal "P10" | YES | |
+
+  | version | semver | YES | |
+
+  | created | date | YES | |
+
+  | updated | date | YES | |
+
+  | author | string | YES | |
+
+  | owner | string | YES | Agent/nucleus that executes reminders |
+
+  | reminders | list[Reminder] | YES | Array of future actions |
+
+  | execution_mechanism | enum: schedule_signal, polling, wake_notification | YES | How reminders are checked |
+
+  | quality | null | YES | Never self-score |
+
+  | tags | list[string], len >= 3 | YES | Must include "prospective_memory" |
+
+  | tldr | string <= 160ch | YES | |
+
+  | completion_policy | enum: mark_done, re_schedule | REC | Per-reminder or global |'
+reminder_object_schema: "- id: \"{reminder_id}\"\n  trigger_type: time | event | condition\n  trigger_value: \"{datetime|signal_name|condition_expression}\"\
+  \n  action_payload: \"{what_the_agent_should_do}\"\n  priority: int (1=highest)\n  expiry: \"YYYY-MM-DD or null\"\n  completion_policy:\
+  \ mark_done | re_schedule\n  recurrence: \"null or {cron_like_expression}\""
+id_pattern: 'Regex: `^p10_pm_[a-z][a-z0-9_]+$`'
+constraints:
+- 'max_bytes: 2048'
+- reminders array MUST have >= 1 entry
+- Each reminder MUST have trigger_type and action_payload
+- 'quality: null always'
+- owner MUST be declared

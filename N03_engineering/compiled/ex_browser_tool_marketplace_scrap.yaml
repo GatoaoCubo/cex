@@ -1,0 +1,96 @@
+id: ex_browser_tool_marketplace_scrap
+kind: browser_tool
+pillar: P04
+title: Marketplace Web Scraper Tool
+version: 0.1.0
+quality: 7.9
+status: template
+brand_placeholders:
+- BRAND_SUPABASE_PROJECT_REF
+tags:
+- commerce
+- template
+- distillation
+- scraper
+- marketplace
+- browser_tool
+density_score: 1.0
+updated: '2026-04-17'
+purpose: Browser-based web scraping tool for collecting marketplace product data (Mercado Livre, regional distributors) when
+  no structured API is available — used as a fallback enrichment source for the catalog research pipeline.
+when_to_use:
+- API quotas exhausted; need product data from ML public pages.
+- Scraping regional Brazilian pet distributors that do not expose APIs.
+- Collecting competitor pricing for market intelligence.
+- Enriching product records with detailed descriptions from distributor pages.
+capability_specification: '| Capability | Support |
+
+  |-----------|---------|
+
+  | JavaScript rendering | Yes (headless Chromium) |
+
+  | Pagination navigation | Yes |
+
+  | Anti-bot detection bypass | Rotating user agents, delays, no fingerprint |
+
+  | CAPTCHA handling | Manual intervention (not automated) |
+
+  | Login-gated pages | Not supported (public pages only) |
+
+  | Rate limiting | Configurable delay 500ms-3000ms between requests |
+
+  | Output formats | JSON, CSV, Markdown |'
+scraping_targets: '| Target | URL Pattern | Data Extracted |
+
+  |--------|------------|----------------|
+
+  | Mercado Livre item page | `https://www.mercadolivre.com.br/MLB-{id}` | title, price, description, images, seller |
+
+  | ML search results | `https://lista.mercadolivre.com.br/{query}` | item list, prices, ratings |
+
+  | Distributor catalog | `https://{distributor_domain}/produtos` | SKU, price, stock status |'
+tool_configuration: "browser:\n  engine: chromium-headless\n  viewport: \"1280x800\"\n  user_agent: rotate            # selects\
+  \ from 10+ real UA strings\n  javascript_enabled: true\n  images_disabled: true         # faster loading\n  request_timeout_ms:\
+  \ 15000\n\nthrottle:\n  min_delay_ms: 500\n  max_delay_ms: 2000\n  jitter: true                  # randomize within range\n\
+  \  retry_on_503: 3\n\noutput:\n  storage: supabase_storage\n  bucket: \"scrape-results\"\n  path_prefix: \"marketplace/{{BRAND_SUPABASE_PROJECT_REF}}\""
+interface: '| Input | Type | Description |
+
+  |-------|------|-------------|
+
+  | `urls[]` | string[] | List of URLs to scrape |
+
+  | `selectors` | object | CSS/XPath selectors per site |
+
+  | `max_pages` | int | Pagination limit (default: 10) |
+
+  | `output_format` | enum | `json` \| `csv` \| `markdown` |
+
+
+  | Output | Type | Description |
+
+  |--------|------|-------------|
+
+  | `results[]` | JSON objects | Extracted product data per URL |
+
+  | `errors[]` | string[] | Failed URLs with reason |
+
+  | `report_path` | string | Supabase storage path of output file |'
+selectors_mercado_livre: "const selectors = {\n  meli_item: {\n    title:       'h1.ui-pdp-title',\n    price:       '.andes-money-amount__fraction',\n\
+  \    description: '.ui-pdp-description__content',\n    images:      '.ui-pdp-gallery__figure img[data-zoom]',\n    condition:\
+  \   '.ui-pdp-subtitle',\n  },\n};\n\n> Selectors break when ML redesigns pages. Maintain a selector registry and version\
+  \ them."
+usage_example: "// Enrich one product from ML public page\nconst result = await scraper.scrape({\n  url: `https://www.mercadolivre.com.br/MLB-${meliId}`,\n\
+  \  selectors: selectors.meli_item,\n});\nif (result.ok) {\n  await supabase.from('products')\n    .update({ description:\
+  \ result.description, meli_price: parseFloat(result.price) })\n    .eq('meli_id', meliId);\n}"
+brand_variables_used: '| Variable | Purpose |
+
+  |----------|---------|
+
+  | `{{BRAND_SUPABASE_PROJECT_REF}}` | Supabase project for output storage |'
+related_artifacts: '| Artifact | Kind | Role |
+
+  |----------|------|------|
+
+  | `ex_research_pipeline_marketplace_scrap.md` | research_pipeline | Orchestrates scraping pipeline |
+
+  | `ex_api_client_meli.md` | api_client | Preferred API-based enrichment (no scraping) |'

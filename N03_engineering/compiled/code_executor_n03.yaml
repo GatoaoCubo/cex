@@ -1,0 +1,78 @@
+id: p04_ce_n03
+kind: code_executor
+pillar: P04
+title: Code Executor -- N03 Sandboxed Build Validation
+version: 1.0.0
+created: 2026-04-17
+author: n03_engineering
+domain: artifact-construction
+quality: null
+tags:
+- code-executor
+- N03
+- sandbox
+- validation
+- build
+- compile
+- 8F
+tldr: Sandboxed code execution environment for N03 build validation. Executes cex_compile.py, cex_doctor.py, cex_sanitize.py,
+  and cex_score.py in a controlled context. Captures stdout/stderr, enforces timeout, and reports structured results to F7
+  GOVERN.
+density_score: 0.9
+updated: '2026-04-17'
+purpose: N03 produces artifacts and VALIDATES them by executing Python tools. The code executor defines HOW those tools run
+  -- what's sandboxed, what's timeout-enforced, what counts as a pass, and how results feed back into the pipeline.
+execution_contexts: '| Context | When Used | Tools | Timeout |
+
+  |---------|----------|-------|---------|
+
+  | post_produce | After F6 generates draft | cex_compile.py (dry) | 30s |
+
+  | govern | F7 GOVERN validation | cex_doctor.py + cex_score.py | 60s |
+
+  | post_f8 | After artifact saved | cex_compile.py (write) + cex_sanitize.py | 45s |
+
+  | bugloop | Auto error correction | cex_compile.py + cex_doctor.py | 30s |
+
+  | regression | Regression detection | cex_retriever.py --vocab-check | 15s |'
+tool_specifications: ''
+cex_compile_py: "python _tools/cex_compile.py {artifact_path}\n# OR\npython _tools/cex_compile.py --all\n\n# Success: exit\
+  \ code 0\n# Failure: exit code 1 + error message on stderr\n# Output: {artifact_path}.yaml created on success\n\nPass condition:\
+  \ exit code 0 + .yaml file created  \nFail condition: exit code 1 OR missing .yaml  \nCommon failures: YAML parse error,\
+  \ missing required frontmatter field, invalid kind"
+cex_doctor_py: "python _tools/cex_doctor.py --file {artifact_path}\n# OR\npython _tools/cex_doctor.py --nucleus n03\n\n# Success:\
+  \ exit code 0 + \"PASS\" count >= total count\n# Failure: exit code 1 + FAIL lines on stdout\n\nPass condition: exit code\
+  \ 0 + zero FAIL lines  \nWarn condition: exit code 0 + WARN lines  \nFail condition: exit code 1 OR FAIL lines present"
+cex_sanitize_py: "python _tools/cex_sanitize.py --check --scope N03_engineering/\n# OR single file:\npython _tools/cex_sanitize.py\
+  \ --check {artifact_path}\n\n# Success: exit code 0\n# Failure: exit code 1 + list of non-ASCII positions\n\nPass condition:\
+  \ exit code 0  \nOnly runs on: .py, .ps1, .sh code blocks extracted from artifacts"
+cex_score_py: "python _tools/cex_score.py {artifact_path} --nucleus n03\n# Returns: JSON score object {score, dimensions,\
+  \ gates}\n# Never sets quality in the file (read-only analysis)\n\nReturns: structured score object; does NOT write to file\
+  \  \nUsed by: scoring_rubric_n03.md D1-D5 composite calculation"
+execution_protocol: "def execute_build_validation(artifact_path: str, context: str) -> ExecutionResult:\n    \"\"\"Execute\
+  \ all tools for the given context.\"\"\"\n    tools = CONTEXT_TOOLS[context]\n    results = []\n    \n    for tool in tools:\n\
+  \        cmd = build_command(tool, artifact_path)\n        proc = subprocess.run(\n            cmd,\n            capture_output=True,\n\
+  \            text=True,\n            timeout=CONTEXT_TIMEOUTS[context],\n            cwd=REPO_ROOT\n        )\n        results.append(ToolResult(\n\
+  \            tool=tool,\n            exit_code=proc.returncode,\n            stdout=proc.stdout[:4096],   # truncate excessive\
+  \ output\n            stderr=proc.stderr[:2048],\n            passed=proc.returncode == 0\n        ))\n    \n    return\
+  \ ExecutionResult(\n        context=context,\n        artifact_path=artifact_path,\n        tools=results,\n        all_passed=all(r.passed\
+  \ for r in results),\n        failure_count=sum(1 for r in results if not r.passed)\n    )"
+error_classification: '| Exit Code | stdout pattern | Classification | Action |
+
+  |-----------|---------------|----------------|--------|
+
+  | 0 | "PASS" | success | Continue pipeline |
+
+  | 1 | "SyntaxError" | yaml_error | bugloop: heuristic fix |
+
+  | 1 | "FAIL" + field name | missing_field | bugloop: field injection |
+
+  | 1 | "non-ASCII" | ascii_violation | bugloop: cex_sanitize fix |
+
+  | 1 | "UnknownKind" | unknown_kind | Escalate to N07 |
+
+  | timeout | — | timeout | Retry once; if again -> escalate |'
+output_format: "execution_result:\n  context: govern\n  artifact_path: N03_engineering/P06_schema/input_schema_build_contract.md\n\
+  \  all_passed: true\n  failure_count: 0\n  tools:\n    - tool: cex_compile.py\n      exit_code: 0\n      passed: true\n\
+  \      stdout: \"Compiled: N03_engineering/P06_schema/input_schema_build_contract.yaml\"\n    - tool: cex_doctor.py\n  \
+  \    exit_code: 0\n      passed: true\n      stdout: \"1/1 PASS\""

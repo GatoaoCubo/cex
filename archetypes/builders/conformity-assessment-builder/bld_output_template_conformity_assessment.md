@@ -1,0 +1,202 @@
+---
+kind: output_template
+id: bld_output_template_conformity_assessment
+pillar: P05
+llm_function: PRODUCE
+purpose: Fill-in-the-blanks template for producing a complete Annex-IV conformity assessment artifact
+quality: 9.1
+title: "Conformity Assessment Builder -- Output Template"
+version: "1.0.0"
+author: wave7_n05
+tags: [conformity_assessment, builder, output_template]
+tldr: "Annex-IV structured template with all 7 required categories and EU-AI-Act citations"
+domain: "conformity_assessment construction"
+created: "2026-04-14"
+updated: "2026-04-14"
+density_score: 0.85
+---
+# Conformity Assessment Builder -- Output Template
+## Usage
+Copy from "BEGIN ARTIFACT TEMPLATE" to "END ARTIFACT TEMPLATE".
+Replace every {{PLACEHOLDER}} with actual content.
+Do NOT leave any {{PLACEHOLDER}} unfilled in the final artifact.
+Flag Aug-2026 deadline items with [AUG-2026-DEADLINE].
+---
+## BEGIN ARTIFACT TEMPLATE
+```markdown
+---
+kind: conformity_assessment
+id: p11_ca_{{SYSTEM_SLUG}}
+pillar: P11
+title: "Conformity Assessment -- {{SYSTEM_NAME}}"
+system_name: "{{SYSTEM_NAME}}"
+system_version: "{{SYSTEM_VERSION}}"
+provider_name: "{{PROVIDER_NAME}}"
+provider_address: "{{PROVIDER_ADDRESS}}"
+provider_contact: "{{PROVIDER_CONTACT_EMAIL}}"
+annex_iii_category: "{{ANNEX_III_CATEGORY}}"
+article_43_procedure: "{{INTERNAL_CHECK_OR_NOTIFIED_BODY}}"
+notified_body_id: "{{NOTIFIED_BODY_ID_OR_NA}}"
+declaration_date: "{{YYYY-MM-DD}}"
+ce_marking_status: "{{PLANNED_OR_AFFIXED_OR_NOT_APPLICABLE}}"
+eu_ai_act_ref: "EU AI Act 2024/1689"
+technical_documentation_reference: "{{TECH_DOC_REF}}"
+version: "1.0.0"
+quality: null
+tags: [conformity_assessment, high-risk, {{ANNEX_III_CATEGORY}}]
+created: "{{YYYY-MM-DD}}"
+updated: "{{YYYY-MM-DD}}"
+---
+# Conformity Assessment: {{SYSTEM_NAME}} v{{SYSTEM_VERSION}}
+**Provider**: {{PROVIDER_NAME}}
+**Annex III Category**: {{ANNEX_III_CATEGORY}} (EU AI Act, Annex III)
+**Conformity Procedure**: {{INTERNAL_CHECK_OR_NOTIFIED_BODY}} (EU AI Act, Art. 43)
+**Assessment Date**: {{YYYY-MM-DD}}
+**EU AI Act Reference**: EU AI Act 2024/1689
+---
+## Annex IV, Section 1 -- General Description [AUG-2026-DEADLINE]
+### 1.1 Intended Purpose
+{{INTENDED_PURPOSE_DESCRIPTION}}
+Per EU AI Act Art. 13, the system is designed to: {{TRANSPARENCY_STATEMENT}}.
+### 1.2 System Classification
+| Attribute | Value |
+|-----------|-------|
+| Annex III Category | {{ANNEX_III_CATEGORY}} |
+| High-Risk Determination | Yes, per EU AI Act Annex III, Sec. {{ANNEX_III_SECTION}} |
+| Article 43 Route | {{INTERNAL_CHECK_OR_NOTIFIED_BODY}} |
+| Notified Body (if applicable) | {{NOTIFIED_BODY_ID_OR_NA}} |
+### 1.3 General Description
+{{GENERAL_DESCRIPTION_2_TO_5_SENTENCES}}
+---
+## Annex IV, Section 2 -- Development Process and Elements [AUG-2026-DEADLINE]
+### 2.1 Development Methods
+| Method | Description |
+|--------|-------------|
+| Training approach | {{TRAINING_APPROACH}} |
+| Model architecture | {{MODEL_ARCHITECTURE}} |
+| Optimization objective | {{OPTIMIZATION_OBJECTIVE}} |
+| Framework/toolchain | {{ML_FRAMEWORK}} |
+### 2.2 Data Governance (EU AI Act Art. 10)
+#### Training Data
+| Dataset | Source | Size | Date Range | License |
+|---------|--------|------|-----------|---------|
+| {{DATASET_NAME}} | {{SOURCE}} | {{SIZE}} | {{DATE_RANGE}} | {{LICENSE}} |
+#### Validation and Test Data
+| Dataset | Purpose | Size | Source |
+|---------|---------|------|--------|
+| {{VAL_DATASET}} | Validation | {{SIZE}} | {{SOURCE}} |
+| {{TEST_DATASET}} | Testing | {{SIZE}} | {{SOURCE}} |
+#### Data Quality Criteria (Art. 10(3))
+| Criterion | Implementation |
+|-----------|---------------|
+| Completeness | {{COMPLETENESS_MEASURE}} |
+| Representativeness | {{REPRESENTATIVENESS_MEASURE}} |
+| Accuracy | {{ACCURACY_MEASURE}} |
+| Freedom from errors | {{ERROR_RATE_CONTROL}} |
+#### Bias Examination and Mitigation
+{{BIAS_MITIGATION_DESCRIPTION}}
+#### Known Data Limitations
+| Limitation | Impact | Mitigation |
+|------------|--------|-----------|
+| {{LIMITATION_1}} | {{IMPACT_1}} | {{MITIGATION_1}} |
+### 2.3 Accuracy, Robustness, Cybersecurity (EU AI Act Art. 15)
+#### Accuracy Metrics
+| Metric | Threshold | Achieved | Test Dataset |
+|--------|-----------|----------|-------------|
+| {{METRIC_1}} | {{THRESHOLD_1}} | {{ACHIEVED_1}} | {{DATASET_1}} |
+| {{METRIC_2}} | {{THRESHOLD_2}} | {{ACHIEVED_2}} | {{DATASET_2}} |
+#### Robustness Measures
+{{ADVERSARIAL_TESTING_RESULTS}}
+Fallback behavior: {{FALLBACK_BEHAVIOR_SPEC}}.
+#### Cybersecurity Controls
+Threat model reference: {{THREAT_MODEL_REF}}.
+Penetration test summary: {{PENTEST_SUMMARY}}.
+---
+## Annex IV, Section 3 -- Monitoring, Functioning, and Control [AUG-2026-DEADLINE]
+### 3.1 Record-Keeping (EU AI Act Art. 12)
+| Log Type | Retention Period | Storage |
+|----------|-----------------|---------|
+| Decision logs | {{RETENTION_PERIOD}} | {{STORAGE_LOCATION}} |
+| Input data logs | {{RETENTION_PERIOD}} | {{STORAGE_LOCATION}} |
+| Override logs | {{RETENTION_PERIOD}} | {{STORAGE_LOCATION}} |
+### 3.2 Human Oversight Measures (EU AI Act Art. 14)
+#### Override Capability
+{{OVERRIDE_CAPABILITY_DESCRIPTION}}
+#### Human Oversight Controls
+| Measure | Implementation |
+|---------|---------------|
+| Override mechanism | {{OVERRIDE_MECHANISM}} |
+| Interpretability tool | {{XAI_TOOL}} |
+| Monitoring interface | {{DASHBOARD_DESCRIPTION}} |
+| Anomaly alerting | {{ALERT_CONFIG}} |
+| Operator training | {{TRAINING_REQUIREMENT}} |
+### 3.3 Transparency to Deployers (EU AI Act Art. 13)
+{{TRANSPARENCY_INFORMATION_FOR_DEPLOYERS}}
+---
+## Annex IV, Section 4 -- Risk Management System [AUG-2026-DEADLINE]
+### 4.1 RMS Process (EU AI Act Art. 9)
+{{RMS_ITERATIVE_PROCESS_DESCRIPTION}}
+### 4.2 Identified Risks and Mitigations
+| Risk ID | Risk Description | Severity | Likelihood | Mitigation Measure | Residual Risk |
+|---------|-----------------|----------|-----------|-------------------|---------------|
+| R-{{N}} | {{RISK_DESCRIPTION}} | {{HIGH_MED_LOW}} | {{HIGH_MED_LOW}} | {{MITIGATION}} | {{RESIDUAL_LEVEL}} |
+### 4.3 Residual Risk Evaluation
+{{OVERALL_RESIDUAL_RISK_ACCEPTABILITY_STATEMENT}}
+### 4.4 RMS Review Schedule
+Post-deployment RMS review cadence: {{REVIEW_CADENCE}}.
+RMS document version: {{RMS_VERSION}}, last updated: {{RMS_LAST_UPDATED}}.
+---
+## Annex IV, Section 5 -- Post-Market Changes and Monitoring [AUG-2026-DEADLINE]
+### 5.1 Post-Market Monitoring Plan (EU AI Act Art. 72)
+| KPI | Measurement Method | Threshold | Corrective Action |
+|-----|--------------------|-----------|------------------|
+| {{KPI_1}} | {{METHOD_1}} | {{THRESHOLD_1}} | {{ACTION_1}} |
+| {{KPI_2}} | {{METHOD_2}} | {{THRESHOLD_2}} | {{ACTION_2}} |
+Data collection method: {{DATA_COLLECTION_METHOD}}.
+PMM report recipients: {{REPORT_RECIPIENTS}}.
+Periodic review schedule: {{REVIEW_SCHEDULE}}.
+### 5.2 Serious Incident Reporting (EU AI Act Art. 73)
+Serious incident reporting procedure: {{SIR_PROCEDURE_REFERENCE}}.
+Reporting authority: {{COMPETENT_MARKET_SURVEILLANCE_AUTHORITY}}.
+### 5.3 Lifecycle Change Management
+| Change Type | Process |
+|------------|---------|
+| Minor update (no re-assessment) | {{MINOR_UPDATE_PROCESS}} |
+| Substantial modification (re-assessment required) | {{SUBSTANTIAL_MOD_PROCESS}} |
+---
+## Annex IV, Section 6 -- Standards and Specifications Applied
+| Standard | Version | Relevance |
+|----------|---------|-----------|
+| EU AI Act 2024/1689 | 2024 | Primary regulation |
+| ISO/IEC 42001 | 2023 | AI management system |
+| ISO 31000 | 2018 | Risk management (RMS basis) |
+| NIST AI RMF | 1.0 | AI risk framework (supplementary) |
+| {{ADDITIONAL_STANDARD}} | {{VERSION}} | {{RELEVANCE}} |
+Harmonised standards applied: {{LIST_OR_NONE}}.
+---
+## Annex IV, Section 7 -- EU Declaration of Conformity Reference
+The EU Declaration of Conformity (EU AI Act, Art. 47) for this system is a separate document.
+Reference: {{DECLARATION_OF_CONFORMITY_REF}}.
+Declaration date: {{YYYY-MM-DD}}.
+Signed by: {{AUTHORISED_SIGNATORY}}, {{TITLE}}.
+CE marking affixed: {{YES_OR_NO}}. If yes, affixed: {{AFFIXING_DATE}}.
+---
+*This conformity assessment package constitutes the technical documentation required by
+EU AI Act Art. 11 and Annex IV for high-risk AI systems. It supports but does not
+replace the EU Declaration of Conformity required by Art. 47.*
+*All high-risk AI systems must have this documentation complete before Aug-2026
+(transitional period per EU AI Act Art. 113(2)).*
+```
+## END ARTIFACT TEMPLATE
+---
+## Placeholder Reference
+| Placeholder | Description | Source |
+|-------------|-------------|--------|
+| {{SYSTEM_SLUG}} | Lowercase underscore slug of system name | Derived from system_name |
+| {{SYSTEM_NAME}} | Full system name | User input |
+| {{SYSTEM_VERSION}} | Version string | User input |
+| {{PROVIDER_NAME}} | Legal name of provider | User input |
+| {{ANNEX_III_CATEGORY}} | One of 9 enum values | bld_schema_conformity_assessment.md |
+| {{INTERNAL_CHECK_OR_NOTIFIED_BODY}} | Conformity route | Art. 43 determination |
+| {{AUG-2026-DEADLINE}} | Deadline flag | Always flag in conformity items |
+| {{TECH_DOC_REF}} | Pointer to full technical docs | Provider documentation |

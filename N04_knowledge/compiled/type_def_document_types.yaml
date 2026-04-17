@@ -1,0 +1,115 @@
+id: p06_td_document_types
+kind: type_def
+pillar: P06
+nucleus: n04
+title: Type Definition -- Document Type Taxonomy
+version: 1.0.0
+quality: null
+tags:
+- type_def
+- document_types
+- taxonomy
+- rag
+- knowledge_card
+- n04
+- P06
+domain: knowledge management
+status: active
+created: '2026-04-17'
+updated: '2026-04-17'
+author: n04_knowledge
+tldr: 'Canonical type definitions for all document types that flow through the N04 RAG pipeline: KnowledgeCard, ContextDoc,
+  RAGSource, Artifact, and their subtypes. Includes field contracts, serialization rules, and retrieval behavior per type.'
+density_score: null
+overview: 'Every document in the N04 retrieval pipeline has a type. Types determine:
+
+  - Which embedding model and chunking strategy to apply
+
+  - How the document is stored and indexed
+
+  - What metadata fields are required
+
+  - How retrieval results are formatted and scored
+
+
+  ---'
+base_type_document: "All document types extend this base.\n\ninterface Document {\n  id: string;              // UUID v4\n\
+  \  type: DocumentType;      // enum (see below)\n  content: string;         // raw text content\n  metadata: Metadata; \
+  \     // type-specific metadata\n  embedding?: float[];     // 1536-dim vector (null until indexed)\n  created_at: datetime;\n\
+  \  updated_at: datetime;\n  score?: float;           // only present in retrieval results (0.0-1.0)\n}\n\n---"
+enum_documenttype: "enum DocumentType {\n  KNOWLEDGE_CARD   = \"knowledge_card\",\n  CONTEXT_DOC      = \"context_doc\",\n\
+  \  RAG_SOURCE       = \"rag_source\",\n  ARTIFACT         = \"artifact\",\n  CONVERSATION     = \"conversation\",\n  CHUNK\
+  \            = \"chunk\",\n  CITATION         = \"citation\",\n  GLOSSARY_ENTRY   = \"glossary_entry\",\n}\n\n---"
+type_knowledgecard: "Primary knowledge unit. Typed, peer-reviewed, compiled.\n\ninterface KnowledgeCard extends Document {\n\
+  \  type: DocumentType.KNOWLEDGE_CARD;\n  metadata: {\n    kind: string;          // from 257-kind taxonomy\n    pillar:\
+  \ string;        // P01-P12\n    nucleus: string;       // n01-n07\n    domain: string;\n    quality: float | null; // null\
+  \ until peer-reviewed\n    version: string;       // semver\n    tldr: string;          // <= 200 chars\n    tags: string[];\n\
+  \    compiled_path?: string; // path to .yaml compiled version\n  };\n}\n\nChunking: 512-token sliding window, 128-token\
+  \ overlap\nEmbedding: text-embedding-3-small (1536 dim)\nStorage: pgvector `cex_artifacts` namespace\nRetrieval weight:\
+  \ 1.2x boost (highest quality signal)\n\n---"
+type_contextdoc: "Longer-form operational documentation: guides, specs, runbooks.\n\ninterface ContextDoc extends Document\
+  \ {\n  type: DocumentType.CONTEXT_DOC;\n  metadata: {\n    title: string;\n    kind: string;           // context_doc, contributor_guide,\
+  \ quickstart_guide, etc.\n    pillar: string;\n    audience: string;       // \"developer\" | \"operator\" | \"agent\"\n\
+  \    version: string;\n    toc?: string[];         // table of contents (section headings)\n  };\n}\n\nChunking: 1024-token\
+  \ semantic chunks (split on H2/H3 boundaries)\nEmbedding: text-embedding-3-small\nStorage: pgvector `cex_artifacts` namespace\n\
+  Retrieval weight: 1.0x (standard)\n\n---"
+type_ragsource: "External data source registered for ingestion into the corpus.\n\ninterface RAGSource extends Document {\n\
+  \  type: DocumentType.RAG_SOURCE;\n  metadata: {\n    source_url?: string;\n    source_type: string;   // \"web\", \"pdf\"\
+  , \"repo\", \"database\", \"api\"\n    ingestion_date: datetime;\n    refresh_interval?: string; // ISO 8601 duration (e.g.,\
+  \ \"P7D\" for weekly)\n    corpus: string;        // target corpus namespace\n    license?: string;\n    trust_level: integer;\
+  \  // 1 (low) to 5 (high) -- affects retrieval weight\n  };\n}\n\nChunking: adaptive (PDF: 256-token; code: function-level;\
+  \ web: paragraph)\nEmbedding: text-embedding-3-small\nStorage: pgvector `external_docs` namespace\nRetrieval weight: trust_level\
+  \ / 5.0 (max 1.0x)\n\n---"
+type_artifact: "Any CEX typed artifact file (not necessarily a KC -- includes agents, configs, schemas).\n\ninterface Artifact\
+  \ extends Document {\n  type: DocumentType.ARTIFACT;\n  metadata: {\n    kind: string;          // any of 257 CEX kinds\n\
+  \    pillar: string;\n    nucleus: string;\n    path: string;          // relative path in repo\n    quality: float | null;\n\
+  \    compiled_yaml_path?: string;\n  };\n}\n\nChunking: whole document (artifacts are small enough, max 8KB)\nEmbedding:\
+  \ text-embedding-3-small\nStorage: pgvector `cex_artifacts` namespace\nRetrieval weight: 1.0x\n\n---"
+type_conversation: "Session transcript or summarized conversation memory.\n\ninterface Conversation extends Document {\n \
+  \ type: DocumentType.CONVERSATION;\n  metadata: {\n    session_id: string;\n    nucleus: string;\n    turn_count: integer;\n\
+  \    summary?: string;       // compressed representation\n    learnings?: string[];   // extracted facts for memory persistence\n\
+  \    date: datetime;\n  };\n}\n\nChunking: by turn (one chunk per exchange)\nEmbedding: text-embedding-3-small\nStorage:\
+  \ pgvector `session_memory` namespace\nRetrieval weight: 0.8x (recency-boosted if < 24h old)\n\n---"
+type_chunk: "Atomic retrieval unit. Produced by the chunking pipeline from any parent document.\n\ninterface Chunk extends\
+  \ Document {\n  type: DocumentType.CHUNK;\n  metadata: {\n    parent_id: string;      // source document ID\n    parent_type:\
+  \ DocumentType;\n    chunk_index: integer;   // position in parent\n    token_count: integer;\n    overlap_tokens: integer;\n\
+  \    heading_context?: string; // nearest H2/H3 above this chunk\n  };\n}\n\nChunking: N/A (is the chunk)\nEmbedding: text-embedding-3-small\n\
+  Storage: pgvector alongside parent namespace\nRetrieval weight: inherits parent weight\n\n---"
+type_citation: "Source reference for provenance tracking.\n\ninterface Citation extends Document {\n  type: DocumentType.CITATION;\n\
+  \  metadata: {\n    title: string;\n    authors?: string[];\n    url?: string;\n    doi?: string;\n    publication_date?:\
+  \ datetime;\n    cited_by: string[];     // list of document IDs that cite this\n    kind: \"citation\";\n  };\n}\n\nEmbedding:\
+  \ title + abstract only (if available)\nStorage: pgvector `citations` namespace\n\n---"
+type_hierarchy: "Document (base)\n  |-- KnowledgeCard     (P01 primary type, highest retrieval weight)\n  |-- ContextDoc \
+  \       (P05 documentation, semantic chunks)\n  |-- RAGSource         (external ingested data, trust-weighted)\n  |-- Artifact\
+  \          (any CEX artifact, whole-doc embedding)\n  |-- Conversation      (session memory, recency-boosted)\n  |-- Chunk\
+  \             (atomic retrieval unit, inherits parent)\n  |-- Citation          (provenance, title+abstract only)\n  |--\
+  \ GlossaryEntry     (vocabulary, short, whole-doc embedding)\n\n---"
+serialization_rules: '| Rule | Requirement |
+
+  |------|------------|
+
+  | IDs | UUID v4, lowercase, no hyphens in storage keys |
+
+  | Dates | ISO 8601 UTC (e.g., `2026-04-17T00:00:00Z`) |
+
+  | Embeddings | 1536-dim float array, stored as JSONB in pgvector |
+
+  | Content encoding | UTF-8 |
+
+  | Metadata | flat JSON (no nesting beyond 1 level) |
+
+  | Quality field | float 0.0-10.0 or null (never string "null") |
+
+
+  ---'
+cross_references: '| Type | Builder | Schema |
+
+  |------|---------|--------|
+
+  | KnowledgeCard | `knowledge-card-builder` | `kc_structure_contract.md` |
+
+  | RAGSource | `rag-source-builder` | `rag_source_knowledge.md` |
+
+  | Artifact | any kind builder | frontmatter schema per kind |
+
+  | Chunk | chunking pipeline | `chunk_strategy_knowledge.md` |'

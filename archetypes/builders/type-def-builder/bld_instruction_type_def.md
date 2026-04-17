@@ -25,8 +25,8 @@ dependencies: []
 logging: true
 tldr: "Build a precise type_def YAML that declares base type, constraints, composition rules, nullable semantics, generics, and serialization spec."
 density_score: 0.91
+llm_function: REASON
 ---
-
 ## Context
 The type-def-builder produces a `type_def` artifact -- a machine-parseable YAML that declares a reusable costm type. These types form the vocabulary layer that other artifacts reference: `input_schema` uses them to define field types, `validator` uses them to enforce constraints, and `grammar` uses them for structural rules.
 **Critical distinction**: `type_def` is purely declarative vocabulary. It does NOT define input validation contracts (`input_schema`), pass/fail enforcement rules (`validator`), or integration interfaces (`interface`). Confusing these produces types that duplicate validation logic they should not own.

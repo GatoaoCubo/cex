@@ -23,6 +23,7 @@ observation_types: [user, feedback, project, reference]
 quality: 9.2
 title: "Memory Component Map"
 density_score: 0.90
+llm_function: INJECT
 ---
 ## Summary
 A component map's value is making hidden dependencies visible. Orphan components — listed in the component table but absent from connections — destroy that value. Orphans signal either truly isolated components (rare, annotate explicitly) or omitted connections (common, dangerous).

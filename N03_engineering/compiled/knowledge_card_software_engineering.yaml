@@ -77,12 +77,12 @@ knowledge_inventory: '| Category | Count | Location |
 
   | Platform KCs (software eng) | 12 | P01_knowledge/library/platform/ |
 
-  | CEX Tooling KC (master) | 1 | N03_engineering/knowledge/ |
+  | CEX Tooling KC (master) | 1 | N03_engineering/P01_knowledge/ |
 
   | Builder ISOs | 14 | archetypes/builders/software-project-builder/ |
 
   | Instance config template | 1 | _instances/_template/N03_engineering/ |
 
-  | Dispatch rules | 2 | N03_engineering/orchestration/ |
+  | Dispatch rules | 2 | N03_engineering/P12_orchestration/ |
 
-  | Workflows | 2 | N03_engineering/orchestration/ |'
+  | Workflows | 2 | N03_engineering/P12_orchestration/ |'

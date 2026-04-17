@@ -1,0 +1,132 @@
+---
+id: p06_is_knowledge_query
+kind: input_schema
+pillar: P06
+nucleus: n04
+title: "Input Schema -- Knowledge Query Contract"
+version: "1.0.0"
+quality: 9.1
+tags: [input_schema, knowledge_query, rag, retrieval, n04, P06]
+domain: knowledge retrieval
+status: active
+created: "2026-04-17"
+updated: "2026-04-17"
+author: n04_knowledge
+tldr: "Typed contract for all knowledge query requests entering the N04 retrieval pipeline: query text, corpus scope, filters, output format, and retrieval mode."
+density_score: null
+---
+
+# Input Schema: Knowledge Query Contract
+
+## Purpose
+
+Every retrieval request hitting the N04 RAG pipeline MUST conform to this contract.
+Untyped queries lead to retrieval ambiguity, wrong corpus selection, and hallucinated
+context. This schema prevents those failure modes at the boundary.
+
+## Fields
+
+| Name | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `query_text` | string | YES | -- | Natural language query or structured search string |
+| `corpus` | enum | YES | -- | Target corpus: `cex_artifacts`, `brand_knowledge`, `external_docs`, `all` |
+| `retrieval_mode` | enum | NO | `hybrid` | `dense`, `sparse`, `hybrid`, `graph` |
+| `top_k` | integer | NO | `10` | Max number of documents to retrieve |
+| `score_threshold` | float | NO | `0.65` | Minimum similarity score to include a result |
+| `filters` | object | NO | `{}` | Key-value metadata filters: kind, pillar, nucleus, domain, date_range |
+| `output_format` | enum | NO | `passages` | `passages`, `summaries`, `full_docs`, `citations_only` |
+| `rerank` | boolean | NO | `true` | Apply cross-encoder reranking after initial retrieval |
+| `max_tokens` | integer | NO | `4096` | Maximum total tokens in retrieved context |
+| `include_metadata` | boolean | NO | `true` | Include source path, score, and kind in response |
+| `query_expansion` | boolean | NO | `false` | Apply HyDE or query rewriting before retrieval |
+| `nucleus_scope` | list[string] | NO | `[]` | Limit to specific nucleus directories (e.g., `["n04_knowledge", "n01_intelligence"]`) |
+
+## Validation Rules
+
+| Field | Rule |
+|-------|------|
+| `query_text` | min_length=3, max_length=2048, must not be empty string |
+| `corpus` | enum: `cex_artifacts`, `brand_knowledge`, `external_docs`, `all` |
+| `retrieval_mode` | enum: `dense`, `sparse`, `hybrid`, `graph` |
+| `top_k` | integer, range 1-100 |
+| `score_threshold` | float, range 0.0-1.0 |
+| `filters.kind` | must match a kind in kinds_meta.json if provided |
+| `filters.pillar` | must match P01-P12 pattern if provided |
+| `output_format` | enum: `passages`, `summaries`, `full_docs`, `citations_only` |
+| `max_tokens` | integer, range 128-200000 |
+| `nucleus_scope` | list of valid nucleus dir names if provided |
+
+## Coercion Rules
+
+| Condition | Behavior |
+|-----------|----------|
+| `query_text` is empty | Raise `QueryEmptyError` |
+| `top_k` > 100 | Clamp to 100, log warning |
+| `score_threshold` outside 0.0-1.0 | Clamp to range |
+| `filters.kind` not in taxonomy | Drop filter, log warning |
+| `retrieval_mode` = `graph` and graph DB unavailable | Fallback to `hybrid` |
+| `corpus` = `all` | Query all corpora, merge results by score |
+| `max_tokens` > 200000 | Clamp to 200000 (context window safety) |
+
+## Error Messages
+
+| Field | Error | Message |
+|-------|-------|---------|
+| `query_text` | `QueryEmptyError` | "query_text must be a non-empty string of at least 3 characters" |
+| `corpus` | `InvalidCorpusError` | "corpus must be one of: cex_artifacts, brand_knowledge, external_docs, all" |
+| `retrieval_mode` | `InvalidModeError` | "retrieval_mode must be one of: dense, sparse, hybrid, graph" |
+| `top_k` | `RangeError` | "top_k must be an integer between 1 and 100" |
+| `filters.kind` | `UnknownKindWarning` | "Unknown kind filter dropped; check kinds_meta.json for valid kinds" |
+
+## Examples
+
+### Minimal query (required fields only)
+```yaml
+query_text: "how does the 8F pipeline work"
+corpus: cex_artifacts
+```
+
+### Full hybrid query with filters
+```yaml
+query_text: "RAG architecture patterns for long-form documents"
+corpus: cex_artifacts
+retrieval_mode: hybrid
+top_k: 20
+score_threshold: 0.70
+filters:
+  kind: knowledge_card
+  pillar: P01
+  nucleus_scope: ["n04_knowledge", "n01_intelligence"]
+output_format: passages
+rerank: true
+max_tokens: 8192
+include_metadata: true
+query_expansion: false
+```
+
+### Citation-only query for source attribution
+```yaml
+query_text: "consolidation policy for memory systems"
+corpus: cex_artifacts
+output_format: citations_only
+top_k: 5
+include_metadata: true
+```
+
+## Constraints
+
+| Constraint | Value |
+|-----------|-------|
+| Max fields in `filters` object | 10 |
+| Max nesting depth | 2 (no nested objects in filters) |
+| Max payload size | 16KB |
+| `query_text` encoding | UTF-8 |
+| Concurrent queries per session | 5 |
+
+## Integration
+
+This schema is the entry point for:
+- `search_tool_n04.md` (P04) -- consumes this contract
+- `retriever_n04.md` (P04) -- applies `retrieval_mode` from this schema
+- `document_loader_n04.md` (P04) -- `corpus` field maps to loader targets
+- `eval_dataset_n04.md` (P07) -- eval queries must conform to this schema

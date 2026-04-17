@@ -23,6 +23,7 @@ observation_types: [user, feedback, project, reference]
 quality: 9.1
 title: "Memory Function Def"
 density_score: 0.90
+llm_function: INJECT
 ---
 ## Summary
 Function definitions live or die by their description field. The LLM reads the description to decide whether to call the function — a vague or missing description means the LLM either picks the wrong function or invents parameters. Parameter schema accuracy drops sharply with nesting depth beyond 2 levels.

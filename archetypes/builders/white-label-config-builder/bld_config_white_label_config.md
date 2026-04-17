@@ -1,0 +1,37 @@
+---
+kind: config
+id: bld_config_white_label_config
+pillar: P09
+llm_function: CONSTRAIN
+purpose: Naming, paths, limits for white_label_config production
+quality: 8.6
+title: "Config White Label Config"
+version: "1.0.0"
+author: wave1_builder_gen_v2
+tags: [white_label_config, builder, config]
+tldr: "Naming, paths, limits for white_label_config production"
+domain: "white_label_config construction"
+created: "2026-04-14"
+updated: "2026-04-14"
+density_score: 0.85
+---
+
+## Naming Convention
+Pattern: `p09_wl_{{name}}.yaml`
+Examples:
+- `p09_wl_example.yaml`
+- `p09_wl_test.yaml`
+
+## Paths
+`/config/white_labels/p09_wl_{{name}}.yaml`
+
+## Limits
+- max_bytes: 4096
+- max_turns: 10
+- effort_level: medium
+
+## Hooks
+- pre_build: null
+- post_build: null
+- on_error: null
+- on_quality_fail: null

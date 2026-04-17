@@ -1,0 +1,97 @@
+kind: schema
+id: bld_schema_ab_test_config
+pillar: P06
+llm_function: CONSTRAIN
+purpose: Formal schema -- SINGLE SOURCE OF TRUTH for ab_test_config
+quality: null
+title: Schema Ab Test Config
+version: 1.0.0
+author: n03_builder
+tags:
+- ab_test_config
+- builder
+- schema
+tldr: Canonical A/B test config schema aligned with Optimizely, Statsig, GrowthBook, LaunchDarkly, and Split.io contracts.
+domain: ab_test_config construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.88
+frontmatter_fields: ''
+required: '| Field | Type | Required | Default | Notes |
+
+  |---|---|---|---|---|
+
+  | id | string | yes | null | Must match ID Pattern |
+
+  | kind | string | yes | "ab_test_config" | Fixed value |
+
+  | pillar | string | yes | "P11" | Fixed value |
+
+  | title | string | yes | null | Human-readable experiment name |
+
+  | version | string | yes | "1.0.0" | Semantic versioning |
+
+  | created | date | yes | null | ISO 8601 |
+
+  | updated | date | yes | null | ISO 8601 |
+
+  | author | string | yes | null | Experiment owner (email or handle) |
+
+  | domain | string | yes | null | Product surface (e.g., "checkout", "onboarding") |
+
+  | quality | null | yes | null | Never self-score; peer review assigns |
+
+  | tags | list | yes | [] | Keywords for search |
+
+  | tldr | string | yes | null | One-sentence experiment thesis |
+
+  | hypothesis | string | yes | null | "If {change}, then {metric} will {direction} by {mde}, because {mechanism}" |
+
+  | primary_metric | object | yes | null | `{name, type, direction, aggregation}` -- the Overall Evaluation Criterion (OEC)
+  |
+
+  | guardrail_metrics | list | yes | [] | Metrics BLOCKED from degrading (retention, latency, revenue_per_user) |
+
+  | variants | list | yes | [] | 2+ variant objects `{id, name, traffic_pct, is_control}` |
+
+  | randomization_unit | string | yes | "user_id" | Unit of assignment; must match metric grain |
+
+  | statistical_method | string | yes | null | "frequentist_fixed" \| "frequentist_sequential" \| "bayesian" |
+
+  | minimum_detectable_effect | number | yes | null | Smallest effect (relative, e.g., 0.02 = 2%) the test can detect |
+
+  | sample_size_per_variant | integer | yes | null | Pre-computed via power analysis (alpha, power, baseline, mde) |'
+recommended: '| Field | Type | Notes |
+
+  |---|---|---|
+
+  | alpha | number | Significance level; default 0.05 |
+
+  | power | number | Statistical power; default 0.80 |
+
+  | baseline_rate | number | Control-group metric value used for sample-size math |
+
+  | max_duration_days | integer | Hard stop to prevent indefinite runs |
+
+  | srm_threshold | number | Sample Ratio Mismatch tolerance; default 0.01 |
+
+  | segmentation | list | Pre-registered subgroup breakdowns |
+
+  | mutual_exclusion_group | string | Layer name for overlapping experiment isolation |'
+id_pattern: '`^p11_abt_[a-z][a-z0-9_]+\.yaml$`'
+body_structure:
+- Hypothesis -- if/then/because statement with measurable MDE.
+- Variants -- control + treatments, traffic allocation, mutual exclusion.
+- Metrics -- primary OEC, guardrails, secondary/tracking metrics.
+- Statistical Plan -- method, alpha, power, sample_size, stopping rule, peeking policy.
+- Rollout -- ramp schedule, kill switch, monitoring cadence.
+- Analysis Plan -- pre-registered subgroups, SRM check, novelty-effect window.
+constraints:
+- File size <= 4096 bytes.
+- Variant traffic_pct values MUST sum to 100 (integer percents only).
+- 'Exactly one variant MUST have `is_control: true`.'
+- '`minimum_detectable_effect` and `sample_size_per_variant` MUST both be present -- tests without pre-computed power are
+  rejected.'
+- '`primary_metric` and `guardrail_metrics` MUST be disjoint (no overlap).'
+- '`statistical_method` MUST be one of the enumerated values; custom methods require a decision_record.'
+- Quality field MUST be null (peer review assigns).

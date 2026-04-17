@@ -12,8 +12,8 @@ quality: 9.0
 tags: [quality-gate, context-window-config, token-budget, overflow]
 tldr: "Gates ensuring context_window_config artifacts have valid budgets, priority tiers, and overflow strategy."
 density_score: 0.90
+llm_function: GOVERN
 ---
-
 # Gate: Context Window Config
 ## Definition
 | Field     | Value |

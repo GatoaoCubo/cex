@@ -3,9 +3,10 @@ id: spec_instance_extraction
 kind: context_doc
 title: "Instance Extraction: gato-ao-cubo → universal templates in main"
 version: 1.0.0
-quality: null
+quality: 9.0
 created: 2026-04-07
 purpose: Extract reusable patterns from gato-ao-cubo branch into main as {{mustache}} templates
+density_score: 1.0
 ---
 
 # Instance Extraction: Prototype → Archetype
@@ -48,7 +49,7 @@ lives in main. Private data stays in the branch.
 
 | Source (gato) | Template (main) | Variables |
 |---------------|----------------|-----------|
-| `N06_commercial/output/dashboard.html` | `P05_output/templates/tpl_crm_dashboard.html` | {{BRAND_NAME}}, {{BRAND_COLORS.*}}, {{MAP_CENTER_LAT}}, {{MAP_CENTER_LNG}}, {{MAP_ZOOM}}, {{CRM_DATA_SOURCE}} |
+| `N06_commercial/P05_output/dashboard.html` | `P05_output/templates/tpl_crm_dashboard.html` | {{BRAND_NAME}}, {{BRAND_COLORS.*}}, {{MAP_CENTER_LAT}}, {{MAP_CENTER_LNG}}, {{MAP_ZOOM}}, {{CRM_DATA_SOURCE}} |
 
 ### 4. CRM Admin Spec
 
@@ -69,7 +70,7 @@ lives in main. Private data stays in the branch.
 
 | Source (gato) | Template (main) | Variables |
 |---------------|----------------|-----------|
-| `decision_manifest_brand_gato3.yaml` | `.cex/runtime/decisions/tpl_decision_manifest_brand.yaml` | {{BRAND_NAME}}, {{DECISIONS.*}} |
+| `decision_manifest_brand_{{BRAND_NAME}}.yaml` | `.cex/runtime/decisions/tpl_decision_manifest_brand.yaml` | {{BRAND_NAME}}, {{DECISIONS.*}} |
 
 ### 7. Learning Records Pattern
 
@@ -83,7 +84,7 @@ lives in main. Private data stays in the branch.
 |----------|-------|--------|
 | Contact data | `crm_batch_*.json`, `crm_enrich_*.json` | Private customer data |
 | Brand config values | `brand_config.yaml` (filled) | Brand-specific identity |
-| GDP decisions (filled) | `decision_manifest_brand_gato3.yaml` | Brand-specific choices |
+| GDP decisions (filled) | `decision_manifest_brand_{{BRAND_NAME}}.yaml` | Brand-specific choices |
 | API keys / secrets | Any `.env`, auth tokens | Security |
 
 ## The /init Flow (how a new brand uses templates)

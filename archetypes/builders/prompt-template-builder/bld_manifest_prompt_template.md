@@ -32,7 +32,7 @@ I operate at the **prompt layer** — above instructions (P02) and below executi
 ## Routing
 | Signal | Route to me when |
 |---|---|
-| "reusable prompt mold" | Template has {{variables}} and is invoked multiple times |
+| "reusable prompt mold" | Template has `{{variables}}` and is invoked multiple times |
 | "parameterized prompt" | Caller fills slots at runtime |
 | "chat prompt template" | LangChain / DSPy pattern |
 | "Jinja template for prompts" | Jinja2 / Mustache interpolation |

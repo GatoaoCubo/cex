@@ -1,0 +1,36 @@
+id: bld_rules_value_object
+kind: knowledge_card
+pillar: P06
+title: Value Object Builder -- Rules
+version: 1.0.0
+quality: 5.5
+tags:
+- builder
+- value_object
+- rules
+llm_function: CONSTRAIN
+density_score: 0.81
+updated: '2026-04-17'
+absolute_rules_hard_never_violate:
+- 'No identity fields: never add id, uuid, or pk to a value object.'
+- 'Immutability: no setters, no mutation methods, no mutable state.'
+- 'Structural equality: two instances with same attributes are equal (always).'
+- 'Validation at construction: if invalid state can be constructed, the design is broken.'
+- 'Transformations return new instances: withX() -> new VO, never this.x = x.'
+- 'quality: null always -- never self-score.'
+soft_rules_recommend:
+- Keep attribute count <= 5. More than 5 suggests decomposing into nested value objects.
+- 'Always specify hashable: true/false explicitly.'
+- Include at least 2 invalid state examples to document the validation contract.
+- Name transformations with `with` or `to` prefix for clarity.
+boundary_rules:
+- 'THIS BUILDER handles: value_object (P06)'
+- 'NOT this builder: type_def (generic alias without DDD contract) -> type-def-builder'
+- 'NOT this builder: enum_def (fixed constants) -> enum-def-builder'
+- 'NOT this builder: aggregate_root (entity with identity) -> aggregate-root-builder'
+- 'NOT this builder: input_schema (raw input validation) -> input-schema-builder'
+cex_specific_rules:
+- 'id pattern: p06_vo_{slug} -- always prefix p06_vo_'
+- 'Pillar: always P06 (Schema)'
+- 'Producing nucleus: N03 (Engineering)'
+- 'max_bytes: 2048 (smaller than aggregate_root, value objects are concise)'

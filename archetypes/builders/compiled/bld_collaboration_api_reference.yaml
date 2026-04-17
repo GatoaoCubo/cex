@@ -1,0 +1,28 @@
+kind: collaboration
+id: bld_collaboration_api_reference
+pillar: P12
+llm_function: COLLABORATE
+purpose: How api_reference-builder works in crews with other builders
+quality: null
+title: Collaboration Api Reference
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- api_reference
+- builder
+- collaboration
+tldr: How api_reference-builder works in crews with other builders
+domain: api_reference construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+crew_role: Generates and maintains accurate, up-to-date API reference documentation from specifications, ensuring clarity
+  for developers and users.
+receives_from: "| Builder      | What               | Format       |  \n|--------------|--------------------|--------------|\
+  \  \n| spec_builder | API specifications | OpenAPI JSON |  \n| code_builder | Code samples       | Markdown     |  \n| design_system|\
+  \ UI component specs | Figma        |"
+produces_for: "| Builder      | What                     | Format       |  \n|--------------|--------------------------|--------------|\
+  \  \n| docs_team    | API reference docs       | Markdown     |  \n| dev_team     | SDK example snippets     | Code blocks\
+  \  |  \n| qa_team      | Test case definitions    | JSON         |"
+boundary: Does NOT validate schema correctness (spec_validator handles this) or implement code (code_builder handles this).
+  Deployment of docs is managed by the deployment_team.

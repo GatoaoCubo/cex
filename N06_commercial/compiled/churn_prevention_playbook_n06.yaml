@@ -1,0 +1,97 @@
+id: churn_prevention_playbook_n06
+kind: churn_prevention_playbook
+pillar: P11
+nucleus: n06
+title: Churn Prevention Playbook -- Retention Intervention by Signal and Tier
+version: 1.0.0
+quality: null
+tags:
+- churn
+- retention
+- playbook
+- intervention
+- commercial
+- revenue-defense
+density_score: 1.0
+strategic_frame: 'Revenue defense is revenue generation. Every churned customer is a CAC write-off plus lost LTV. Strategic
+  Greed demands we protect ARR with the same aggression we acquire it. This playbook defines the intervention chain: detect
+  signal -> triage by tier -> execute play -> measure outcome.'
+churn_signal_taxonomy: "signals:\n  behavioral:\n    - builds_per_week < 2          # declining engagement\n    - login_frequency\
+  \ < 2x_week   # disengagement\n    - last_build_age > 14_days     # dormancy\n    - support_tickets > 3_open    # frustration\n\
+  \    - feature_adoption < 30pct    # underutilization\n  \n  financial:\n    - invoice.payment_failed       # payment failure\
+  \ (Stripe event)\n    - subscription.cancel_at_period_end: true  # soft cancel\n    - downgrade_attempt            # plan\
+  \ reduction request\n    - refund_request               # strong churn signal\n  \n  lifecycle:\n    - trial_day_3_no_build\
+  \         # low-engagement trial\n    - trial_day_10_no_brand_config # not set up\n    - day_60_no_api_call           #\
+  \ PRO unused key feature\n    - renewal_minus_30_days        # pre-renewal risk window"
+triage_matrix_signal_x_tier: '| Signal | FREE | STARTER | PRO | ENTERPRISE |
+
+  |--------|------|---------|-----|------------|
+
+  | builds < 2/week | email (activate) | email (reactivate) | CSM outreach | CSM + exec escalation |
+
+  | payment failed | email (update card) | email + SMS | CSM call | CSM + billing concierge |
+
+  | soft cancel | upgrade prompt | save offer 20% off | CSM save call | exec + custom offer |
+
+  | dormancy 14d | reactivation email | reactivation + case study | CSM scheduled |  CSM + QBR trigger |
+
+  | support 3+ tickets | auto-escalate | priority queue | CSM owns | dedicated resolution |'
+intervention_plays: ''
+play_1_reactivation_email_sequence: "Trigger: login_frequency < 2x/week AND builds < 2/week\n\nDay 0: \"We miss you\" email\n\
+  \  Subject: \"[Name], 3 builds you could do in 10 minutes\"\n  Body: Personalized use cases based on their industry + past\
+  \ builds\n  CTA: \"Start building now\" (deep link to builder)\n\nDay 3: Value reminder\n  Subject: \"What [similar company]\
+  \ built with CEX this week\"\n  Body: Social proof + specific artifact type relevant to their role\n  CTA: \"Try this template\"\
+  \n\nDay 7: Risk check\n  Subject: \"Are we solving the right problem for you?\"\n  Body: 3-question survey + direct calendar\
+  \ link for 15-min call\n  CTA: \"Tell us what's blocking you\"\n\nDay 14: Save offer (STARTER and above only)\n  Subject:\
+  \ \"We'd like to earn your trust back\"\n  Body: 30% off next 3 months + personal onboarding session\n  CTA: \"Claim offer\"\
+  \ (limited time, expires 48h)"
+play_2_payment_failure_recovery: "Trigger: `invoice.payment_failed` Stripe event\n\nHour 0: Email -- \"Payment issue on your\
+  \ CEX account\"\n  Tone: neutral, not accusatory\n  CTA: \"Update payment method\" (link to Stripe customer portal)\n\n\
+  Hour 24: Reminder email\n  Escalate: SMS if mobile number on file\n\nHour 48: Account warning\n  Email: \"Access pauses\
+  \ in 24 hours\"\n  CTA: Update card OR contact support for alternative\n\nHour 72: Downgrade to FREE (not delete)\n  Preserve\
+  \ all builds and brand_config\n  Email: \"Your account is paused -- data safe for 30 days\"\n  CTA: \"Reactivate in 1 click\"\
+  \n\nDay 30: Final warning before data archive\nDay 60: Archive (recoverable by support for 6 months)"
+play_3_soft_cancel_save_sequence: "Trigger: `cancel_at_period_end: true` set on subscription\n\nImmediate: In-app exit survey\n\
+  \  \"What's the main reason for canceling?\"\n  Options: [Too expensive | Missing feature | Switching to competitor | \n\
+  \            Not using it enough | Project ended | Other]\n\nBased on response:\n  Too expensive:\n    - Offer annual switch\
+  \ (20% off)\n    - Offer pause (2-month pause at 50% price) if available\n    \n  Missing feature:\n    - Connect to roadmap\
+  \ item if planned\n    - Offer workaround walkthrough\n    - Route to product team feedback\n\n  Switching to competitor:\n\
+  \    - Run competitive differentiation script\n    - Offer 1:1 comparison session\n    \n  Not using enough:\n    - Offer\
+  \ onboarding session\n    - Activate use-case-specific templates\n    \n  Project ended:\n    - Offer pause option\n   \
+  \ - Offer downgrade to FREE (preserve data)"
+play_4_trial_to_paid_conversion_defense: 'Trigger: Trial day 10 with <3 builds OR no brand_config
+
+
+  Day 1: Welcome + quick-win task (immediate value)
+
+  Day 3: "Your first build" reminder (if not done)
+
+  Day 7: Check-in email + book onboarding call
+
+  Day 10: "See what you built" recap + upgrade push
+
+  Day 12: Extended trial offer (if no conversion): +7 days for completing onboarding
+
+  Day 14: Trial end -- upgrade or downgrade to FREE (not delete)'
+measurement_framework: '| Metric | Formula | Target |
+
+  |--------|---------|--------|
+
+  | Monthly churn rate | churned_customers / start_customers | <2% MoM |
+
+  | Churn save rate | saves / save_attempts | >35% |
+
+  | Reactivation rate | reactivated / dormant_targeted | >15% |
+
+  | Net Revenue Retention | (MRR_end - churn_MRR + expansion_MRR) / MRR_start | >110% |
+
+  | Average save value | saved_ARR / save_attempts | >$400 |'
+escalation_decision_tree: "Payment failed?\n  -> YES: Start PLAY 2 immediately\n  -> NO: Continue...\n\nCancel requested?\n\
+  \  -> YES: Start PLAY 3 + in-app save immediately\n  -> NO: Continue...\n\nEngagement falling (builds < 2/week for 2 weeks)?\n\
+  \  -> YES: Start PLAY 1 (reactivation)\n  -> NO: Continue...\n\nTrial day > 10 and not converted?\n  -> YES: Start PLAY\
+  \ 4 (trial conversion)\n  -> NO: No intervention needed"
+related_artifacts:
+- '`subscription_tier_n06.md` -- churn risk signals per tier'
+- '`renewal_workflow_n06.md` -- pre-renewal churn prevention'
+- '`entity_memory_customer.md` -- health_score and churn_risk tracked here'
+- '`eval_metric_commercial.md` -- churn rate KPI tracking'

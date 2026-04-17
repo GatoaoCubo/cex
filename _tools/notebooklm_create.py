@@ -10,13 +10,14 @@ import json
 import sys
 import time
 from pathlib import Path
+from typing import Any
 
-CONTENT_FILE = Path(__file__).parent.parent / "P01_knowledge" / "library" / "domain" / "meta" / "kc_8f_pipeline.md"
+CONTENT_FILE = Path(__file__).parent.parent / "N00_genesis" / "P01_knowledge" / "library" / "domain" / "meta" / "kc_8f_pipeline.md"
 STATE_FILE = Path(r"C:\Users\PC\AppData\Local\notebooklm-mcp\Data\browser_state\state.json")
 SS_DIR = Path(__file__).parent
 
 
-def load_cookies():
+def load_cookies() -> list[dict[str, Any]]:
     data = json.loads(STATE_FILE.read_text(encoding="utf-8"))
     cookies = []
     for c in data.get("cookies", []):
@@ -40,7 +41,9 @@ def load_cookies():
     return cookies
 
 
-def click_first_visible(page, selectors, label="element", timeout=3000):
+def click_first_visible(
+    page: Any, selectors: list[str], label: str = "element", timeout: int = 3000
+) -> bool:
     for sel in selectors:
         try:
             loc = page.locator(sel).first
@@ -54,7 +57,7 @@ def click_first_visible(page, selectors, label="element", timeout=3000):
     return False
 
 
-def dump_elements(page, tag="button", limit=15):
+def dump_elements(page: Any, tag: str = "button", limit: int = 15) -> None:
     els = page.locator(tag).all()
     for i, el in enumerate(els[:limit]):
         try:
@@ -66,7 +69,7 @@ def dump_elements(page, tag="button", limit=15):
             pass
 
 
-def main():
+def main() -> None:
     from playwright.sync_api import sync_playwright
 
     content = CONTENT_FILE.read_text(encoding="utf-8")

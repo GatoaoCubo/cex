@@ -1,0 +1,34 @@
+id: kc_usage_report
+kind: knowledge_card
+title: Usage Analytics Report Specification
+version: 1.0.0
+quality: null
+pillar: P01
+density_score: 1.0
+purpose: Standardized format for billing and CFO dashboards showing system resource utilization patterns.
+structure:
+- Overview (10% of report)
+- Key Metrics (40% of report)
+- Trend Analysis (30% of report)
+- Anomaly Detection (15% of report)
+- Recommendations (5% of report)
+data_points:
+- User activity metrics (login frequency, session duration)
+- API call volume by endpoint
+- Storage utilization trends
+- CPU/memory usage patterns
+- Error rate statistics
+- Feature adoption rates
+- Geographic usage distribution
+formatting:
+- Use tables for quantitative data
+- Include time-series charts for trend analysis
+- Highlight anomalies with color-coding
+- Add contextual notes for irregular patterns
+- Maintain consistent date formatting (YYYY-MM-DD)
+usage_guidelines:
+- Update monthly for recurring subscriptions
+- Generate quarterly summaries for CFO analysis
+- Include system health indicators in technical reports
+- Annotate seasonal variations in usage patterns
+- Flag potential fraud patterns for audit review

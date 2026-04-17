@@ -1,0 +1,82 @@
+id: p10_qg_working_memory
+kind: quality_gate
+pillar: P11
+title: 'Gate: working_memory'
+version: 1.0.0
+created: '2026-04-17'
+updated: '2026-04-17'
+author: builder_agent
+domain: working_memory -- short-term context store for a single active task, cleared after completion
+quality: 7.8
+tags:
+- quality-gate
+- working-memory
+- P10
+- short-term
+tldr: 'Pass/fail gate for working_memory: task_id, typed slots, capacity_limit, expiry, clear policy.'
+density_score: 0.9
+llm_function: GOVERN
+definition: '| Field | Value |
+
+  |---|---|
+
+  | metric | working_memory artifact quality score |
+
+  | threshold | 7.0 (publish >= 8.0, golden >= 9.5) |
+
+  | operator | weighted_sum |
+
+  | scope | all artifacts with `kind: working_memory` |'
+hard_gates: '| ID | Check | Fail Condition |
+
+  |---|---|---|
+
+  | H01 | Frontmatter parses as valid YAML | Parse error |
+
+  | H02 | ID matches `^p10_wm_[a-z][a-z0-9_]+$` | Hyphens, uppercase, or missing prefix |
+
+  | H03 | ID equals filename stem | id vs filename mismatch |
+
+  | H04 | Kind equals literal `working_memory` | `kind: memory` or any other value |
+
+  | H05 | Quality field is null | Any non-null value |
+
+  | H06 | task_id declared and non-empty | Missing or empty task_id |
+
+  | H07 | context_slots has >= 1 typed slot | Empty map or untyped values |
+
+  | H08 | capacity_limit declared with numeric value and unit | Missing or non-numeric |
+
+  | H09 | expiry declared and non-empty | Missing expiry |
+
+  | H10 | clear_on_complete declared as clear or promote | Missing or invalid enum value |'
+soft_scoring: '| Dimension | Weight | Criteria |
+
+  |---|---|---|
+
+  | Slot type completeness | 1.5 | All slots have declared types from valid enum |
+
+  | Capacity calibration | 1.0 | Capacity appropriate for task complexity |
+
+  | Expiry policy | 1.0 | TTL or trigger appropriate for task lifecycle |
+
+  | Clear policy quality | 1.0 | Promote declared with targets for research tasks |
+
+  | Slot count appropriateness | 0.5 | >= 3 slots for non-trivial tasks |
+
+  | Boundary clarity | 1.0 | Not session_state, not entity_memory, not episodic_memory |
+
+  | Nucleus binding | 0.5 | nucleus field declared |
+
+  | tldr quality | 0.5 | <= 160 chars, includes task and key slots |'
+actions: '| Score | Tier | Action |
+
+  |---|---|---|
+
+  | >= 9.5 | Golden | Reference working memory spec |
+
+  | >= 8.0 | Publish | Ready for task dispatch integration |
+
+  | >= 7.0 | Review | Add slot types or expiry |
+
+  | < 7.0 | Reject | Return with gate failures |'

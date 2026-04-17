@@ -1,0 +1,33 @@
+kind: examples
+id: bld_examples_experiment_tracker
+pillar: P07
+llm_function: GOVERN
+purpose: Golden and anti-examples of experiment_tracker artifacts
+quality: null
+title: Examples Experiment Tracker
+version: 1.0.0
+author: wave1_builder_gen
+tags:
+- experiment_tracker
+- builder
+- examples
+tldr: Golden and anti-examples of experiment_tracker artifacts
+domain: experiment_tracker construction
+created: '2026-04-13'
+updated: '2026-04-13'
+density_score: 0.85
+golden_example: "---\nkind: experiment_tracker\nmetadata:\n  project_name: \"transformer-layer-scaling\"\n  experiment_group:\
+  \ \"width-vs-depth-study\"\n  total_runs: 3\nruns:\n  - run_id: \"run_alpha\"\n    timestamp: \"2023-11-01T08:00:00Z\"\n\
+  \    configuration:\n      layers: 6\n      hidden_dim: 512\n      heads: 8\n    results:\n      perplexity: 12.4\n    \
+  \  training_loss: 0.85\n      throughput_tokens_sec: 1200\n  - run_id: \"run_beta\"\n    timestamp: \"2023-11-01T14:30:00Z\"\
+  \n    configuration:\n      layers: 12\n      hidden_dim: 512\n      heads: 8\n    results:\n      perplexity: 10.2\n  \
+  \    training_loss: 0.72\n      throughput_tokens_sec: 850\n  - run_id: \"run_gamma\"\n    timestamp: \"2023-11-02T09:15:00Z\"\
+  \n    configuration:\n      layers: 12\n      hidden_dim: 768\n      heads: 12\n    results:\n      perplexity: 9.8\n  \
+  \    training_loss: 0.68\n      throughput_tokens_sec: 600\n---"
+anti_example_1_single_experiment_configuration: '--- kind: experiment_config parameters: learning_rate: 0.0001 batch_size:
+  32 optimizer: "adamw" ---'
+why_it_fails: This is a `benchmark`. It focuses on the static evaluation of a specific model version against a fixed dataset.
+  An `experiment_tracker` should focus on the iterative process of changing parameters and observing the resulting changes
+  in performance across different attempts.
+anti_example_2_evaluation_benchmark: '--- kind: benchmark_suite dataset: "GLUE_benchmark" model_version: "v2.1-final" evaluation_metrics:
+  mnli_accuracy: 0.88 sst2_accuracy: 0.92 cola_score: 0.65 ---'

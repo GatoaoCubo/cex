@@ -49,7 +49,7 @@ action_prompt    --produces-->  validated_output
 |------------------|----------------------|
 | A task-focused prompt with explicit typed input and output | A persona or identity definition (system_prompt) |
 | Atomic — one task, one invocation, one output | A sequence of steps (chain, instruction) |
-| Injected at runtime for a specific execution context | A reusable template with {{vars}} for generic use (prompt_template) |
+| Injected at runtime for a specific execution context | A reusable template with `{{vars}}` for generic use (prompt_template) |
 | Validated against a typed output contract | A raw user message without I/O specification |
 | Consumed once per task instance | A persistent configuration loaded at agent boot |
 | The bridge between orchestration dispatch and agent execution | An orchestration artifact (handoff, workflow, dispatch_rule) |

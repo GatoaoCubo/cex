@@ -1,0 +1,229 @@
+id: extraction_synapse_stack
+kind: knowledge_card
+pillar: P01_knowledge
+title: 'Extraction: Synapse 8-Layer Context Stack from aiox-core'
+version: 1.1
+quality: null
+tags:
+- extraction
+- synapse
+- context
+- layers
+- prompt_composition
+- aiox
+- port
+created: 2026-04-12
+updated: 2026-04-13
+author: n01_intelligence
+domain: prompt composition architecture
+source: SynkraAI/aiox-core
+tldr: aiox-core injects context via 8 sequential layers (L0 Constitution -> L7 Star-Command) with bracket-based token budgets.
+  Maps directly to CEX F3 INJECT as a canonical envelope structure.
+1_the_8_layers: 'aiox-core''s SYNAPSE system processes rules through 8 layers, executed
+
+  sequentially. Each layer has a trigger condition, priority, and timeout.
+
+
+  | Layer | Name | Trigger | Priority | Timeout | CEX Equivalent |
+
+  |-------|------|---------|----------|---------|----------------|
+
+  | L0 | Constitution | ALWAYS_ON | HIGHEST | 5ms | `.claude/rules/*.md` (hardcoded rules) |
+
+  | L1 | Global + Context | ALWAYS_ON | HIGH | 10ms | `CLAUDE.md` + pillar schemas |
+
+  | L2 | Agent-Scoped | AGENT_TRIGGER | MED-HIGH | 15ms | `agent_card_n0x.md` (nucleus identity) |
+
+  | L3 | Workflow-Scoped | WORKFLOW_TRIGGER | MEDIUM | 15ms | Mission handoff context |
+
+  | L4 | Task Context | Active task | MEDIUM | 15ms | Handoff file (`n0x_task.md`) |
+
+  | L5 | Squad Discovery | Active squad | MED-LOW | 15ms | No equivalent (CEX has no squads) |
+
+  | L6 | Keyword (RECALL) | Prompt keywords | LOW | 15ms | `cex_retriever.py` (F3 similarity) |
+
+  | L7 | Star-Command | User `*command` | HIGHEST | 5ms | `/slash commands` |'
+execution_order: L0 Constitution -> L1 Global -> L2 Agent -> L3 Workflow -> L4 Task -> L5 Squad -> L6 Keyword -> L7 Star-Command
+2_implementation_details: ''
+2_1_base_class_layer_processor_js: "class LayerProcessor {\n  constructor({ name, layer, timeout = 15 }) {\n    this.name\
+  \ = name;\n    this.layer = layer;\n    this.timeout = timeout;  // milliseconds\n  }\n\n  process(context) {\n    throw\
+  \ new Error('must implement');\n  }\n\n  _safeProcess(context) {\n    const start = Date.now();\n    try {\n      const\
+  \ result = this.process(context);\n      const elapsed = Date.now() - start;\n      if (elapsed > this.timeout) {\n    \
+  \    console.warn(`[synapse:${this.name}] exceeded timeout`);\n      }\n      return result;\n    } catch (error) {\n  \
+  \    console.warn(`[synapse:${this.name}] Error: ${error.message}`);\n      return null;  // graceful degradation -- layer\
+  \ skipped, pipeline continues\n    }\n  }\n}"
+2_2_layer_return_type: "{\n  rules: string[],           // array of rule strings (one per line from domain file)\n  metadata:\
+  \ {\n    layer: number,           // 0-7\n    source?: string,         // domain name or agent ID\n    nonNegotiable?: boolean,\
+  \ // L0 only\n    agentId?: string,        // L2 only\n    workflowId?: string,     // L3 only\n    matches?: Array,   \
+  \      // L6 keyword matches\n    command?: string         // L7 star-command\n  }\n}"
+2_3_context_bracket_system_context_tracker_js: "Token budget varies by how much context window remains:\n\n| Bracket | Context\
+  \ % | Token Budget | Active Layers | Behavior |\n|---------|-----------|--------------|---------------|----------|\n| FRESH\
+  \ | 60-100% | 800 tokens | [0,1,2,7] | Lean injection |\n| MODERATE | 40-60% | 1500 tokens | [0-7] | All layers active |\n\
+  | DEPLETED | 25-40% | 2000 tokens | [0-7] + memory | L6 keyword skipped |\n| CRITICAL | 0-25% | 2500 tokens | [0-7] + memory\
+  \ | Handoff warning |\n\nconst usedTokens = promptCount  avgTokensPerPrompt  1.2;  // XML safety multiplier\nconst contextPercent\
+  \ = 100 - (usedTokens / maxContext * 100);\nconst bracket = contextPercent >= 60 ? 'FRESH'\n              : contextPercent\
+  \ >= 40 ? 'MODERATE'\n              : contextPercent >= 25 ? 'DEPLETED'\n              : 'CRITICAL';\n\nKey insight: FRESH\
+  \ bracket injects FEWER rules (only critical ones).\nAs context depletes, MORE rules are injected to prevent drift. Counter-intuitive\n\
+  but correct -- early in conversation the model is aligned; late, it needs reminders."
+2_4_conflict_resolution:
+- NON_NEGOTIABLE wins -- L0 Constitution can never be overridden
+- Higher layer number = more specific -- L7 overrides L1 for current prompt
+- Agent > Global -- L2 overrides L1
+- Workflow > Agent -- L3 augments L2
+- Explicit > Implicit -- star-commands override automatic rules
+2_5_deduplication_l6_keyword_layer: '// L6 skips domains already loaded by L0-L5
+
+  const loadedSources = this._extractLoadedSources(previousLayers || []);
+
+  if (loadedSources.has(domainName)) continue;  // dedup'
+2_6_performance_targets: '| Metric | Target | Hard limit |
+
+  |--------|--------|-----------|
+
+  | Total pipeline | <70ms | <100ms |
+
+  | Individual layer | <15ms | <20ms |
+
+  | L0/L7 (critical) | <5ms | <5ms |
+
+  | Startup | <5ms | <10ms |'
+2_7_output_format_formatter_js: '<synapse-rules>
+
+  [CONTEXT BRACKET: MODERATE] 40-60% context remaining
+
+  [CONSTITUTION] CLI First | Agent Authority | Story-Driven | No Invention | Quality First
+
+  [ACTIVE AGENT: @dev] Follow story tasks, update Dev Agent Record only
+
+  [ACTIVE WORKFLOW: story_development] Follow SDC phases
+
+  [TASK CONTEXT] Current task details
+
+  [SQUAD: mmos] Squad-specific rules
+
+  [KEYWORD MATCHES] Matched domain rules
+
+  [MEMORY_HINTS] Cached memories
+
+  [STAR-COMMANDS] *dev: Code over explanation, minimal changes
+
+  [LOADED DOMAINS SUMMARY] constitution, global, context, agent-dev, etc.
+
+  </synapse-rules>
+
+
+  Section ordering is priority-based for truncation: constitution first, summary last.'
+3_cex_integration_plan_canonical_f3_inject_envelope: ''
+current_state: 'CEX F3 INJECT is ad-hoc: each builder/nucleus loads what it remembers to load. There''s no enforced structure
+  ensuring all context layers are present. `cex_crew_runner.py` (839 lines) does prompt composition but without a defined
+  layer protocol.'
+proposed_f3_envelope_structure: 'Map aiox-core''s 8 layers to CEX''s domain:
+
+
+  | CEX F3 Layer | Source | aiox Equivalent | Required? |
+
+  |--------------|--------|-----------------|-----------|
+
+  | C0: Rules | `.claude/rules/*.md` | L0 Constitution | ALWAYS |
+
+  | C1: System | `CLAUDE.md` + `_schema.yaml` | L1 Global | ALWAYS |
+
+  | C2: Identity | `agent_card_n0x.md` + sin lens | L2 Agent | ALWAYS |
+
+  | C3: Mission | `decision_manifest.yaml` + GDP | L3 Workflow | IF dispatched |
+
+  | C4: Task | `n0x_task.md` handoff | L4 Task | IF dispatched |
+
+  | C5: Brand | `brand_config.yaml` | L5 Squad | IF bootstrapped |
+
+  | C6: Knowledge | `cex_retriever.py` results + KCs | L6 Keyword | IF relevant |
+
+  | C7: Builder | 13 builder ISOs | L7 Star-Command | IF building |'
+context_budget_by_conversation_depth: 'Adapt aiox-core''s bracket system for CEX''s 1M context:
+
+
+  | Bracket | Context % | F3 Budget | Active layers | Notes |
+
+  |---------|-----------|-----------|---------------|-------|
+
+  | FRESH | 80-100% | 5K tokens | C0,C1,C2,C7 | Lean -- model is aligned |
+
+  | WORKING | 40-80% | 15K tokens | C0-C7 all | Full injection |
+
+  | DEEP | 10-40% | 20K tokens | C0-C7 + memory | Add explicit reminders |
+
+  | CRITICAL | 0-10% | 25K tokens | C0-C7 + full KC | Maximum reinforcement |'
+implementation: "Update `_tools/cex_crew_runner.py` to enforce the envelope:\n\nclass F3Envelope:\n    \"\"\"Canonical F3\
+  \ INJECT context assembly.\"\"\"\n\n    LAYERS = [\n        (\"C0_rules\", load_rules, True),\n        (\"C1_system\", load_system_context,\
+  \ True),\n        (\"C2_identity\", load_agent_card, True),\n        (\"C3_mission\", load_mission_context, False),\n  \
+  \      (\"C4_task\", load_task_handoff, False),\n        (\"C5_brand\", load_brand_config, False),\n        (\"C6_knowledge\"\
+  , load_retriever_results, False),\n        (\"C7_builder\", load_builder_isos, False),\n    ]\n\n    def assemble(self,\
+  \ context: dict) -> str:\n        bracket = self.detect_bracket(context)\n        active = self.active_layers(bracket)\n\
+  \        sections = []\n        for name, loader, required in self.LAYERS:\n            if name in active or required:\n\
+  \                content = loader(context)\n                if content:\n                    sections.append(f\"## {name}\\\
+  n{content}\")\n        return \"\\n\\n\".join(sections)"
+files_to_create_modify: '| File | Action | Lines est. |
+
+  |------|--------|-----------|
+
+  | `_tools/cex_f3_envelope.py` | CREATE -- F3Envelope class | ~150 |
+
+  | `_tools/cex_crew_runner.py` | MODIFY -- use F3Envelope in compose() | ~40 |
+
+  | `.claude/rules/8f-reasoning.md` | MODIFY -- document C0-C7 layers in F3 section | ~30 |
+
+  | `cex_sdk/prompt_compiler.py` | MODIFY -- integrate envelope if present | ~20 |'
+estimated_effort:
+- 'Complexity: Low (refactor existing code into structured layers)'
+- 'Lines of code: ~150 new + ~90 modified'
+- 'Dependencies: None'
+- 'Risk: Low -- formalizes what already happens informally'
+4_comparative_analysis: '| Dimension | aiox-core Synapse | CEX F3 (current) | Proposed CEX F3 Envelope |
+
+  |-----------|------------------|-------------------|--------------------------|
+
+  | Structure | 8 explicit layers | Ad-hoc per builder | 8 explicit layers (C0-C7) |
+
+  | Token budget | Bracket-based (800-2500) | Fixed (no budget) | Bracket-based (5K-25K) |
+
+  | Deduplication | Yes (L6 skips loaded) | No | Yes (envelope tracks loaded) |
+
+  | Timeout per layer | Yes (5-15ms) | No | Not needed (Python, not hook) |
+
+  | Conflict resolution | Priority hierarchy | None | Priority hierarchy |
+
+  | Context bracket | 4 levels (FRESH->CRITICAL) | None | 4 levels (FRESH->CRITICAL) |
+
+  | Output format | XML sections | Raw concatenation | Markdown sections |
+
+  | Performance | <100ms total | N/A (build-time) | N/A (build-time) |'
+what_not_to_port:
+- XML output format -- CEX uses Markdown throughout
+- Millisecond timeouts -- aiox runs as a Claude hook (real-time); CEX assembles at build time
+- Squad layer (L5) -- CEX has no squad concept; brand fills this slot
+- Star-command layer (L7) -- CEX uses slash commands differently; builder ISOs fill this slot
+5_key_code_references_in_aiox_core: '| File (relative to aiox-core/) | What it contains |
+
+  |-------------------------------|-----------------|
+
+  | `core/synapse/engine.js` | Main orchestrator -- pipeline execution |
+
+  | `core/synapse/layers/layer-processor.js` | Abstract base class |
+
+  | `core/synapse/layers/l0-constitution.js` | L0 -- non-negotiable rules |
+
+  | `core/synapse/layers/l1-global.js` | L1 -- global + context |
+
+  | `core/synapse/layers/l2-agent.js` | L2 -- agent-scoped (12 agents) |
+
+  | `core/synapse/layers/l6-keyword.js` | L6 -- keyword recall + dedup |
+
+  | `core/synapse/layers/l7-star-command.js` | L7 -- mode switching |
+
+  | `core/synapse/context/context-tracker.js` | Bracket calculation |
+
+  | `core/synapse/output/formatter.js` | XML output assembly |
+
+  | `.claude/skills/synapse/references/layers.md` | Layer reference docs |'
+boundary: Conhecimento destilado, estatico, versionado. NAO eh instrucao, template, ou configuracao.
+8f_pipeline_function: 'Primary function: INJECT'

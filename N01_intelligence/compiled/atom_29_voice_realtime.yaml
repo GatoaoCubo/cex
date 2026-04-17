@@ -1,0 +1,546 @@
+id: atom_29_voice_realtime
+kind: knowledge_card
+pillar: P01
+title: Voice Agent Architecture and Configuration Reference
+author: AI Systems Engineering Team
+date: 2026-04-13
+version: 4.0
+quality: null
+tags:
+- voice
+- realtime
+- s2s
+- vad
+- pipecat
+- livekit
+- moshi
+- openai-realtime
+boundary: This artifact is a technical reference for implementing voice agent systems, covering codec-based speech-to-speech
+  (S2S) and cascading pipeline (STT→LLM→TTS) architectures. It is not a product specification, user guide, or design pattern
+  document. It focuses on configuration patterns, industry terminology mapping, and performance metrics for real-time voice
+  applications.
+related_kinds: '- architecture_diagram: Shows system components and flow
+
+  - configuration_template: Provides example YAML structures
+
+  - performance_benchmark: Contains latency and throughput metrics
+
+  - industry_mapping: Defines terminology equivalences
+
+  - transport_protocol: Details WebRTC, SIP, WebSocket implementations
+
+
+  ---'
+1_introduction: This document provides a technical reference for implementing voice agent systems, covering both codec-based
+  speech-to-speech (S2S) and cascading pipeline (STT→LLM→TTS) architectures. It includes configuration patterns, industry
+  terminology mapping, and performance metrics for real-time voice applications. ---
+2_core_architectures: ''
+2_1_codec_based_s2s_vs_cascading_pipeline: '| Feature | Codec-Based S2S | Cascading Pipeline |
+
+  |--------|------------------|---------------------|
+
+  | LLM Output | Audio tokens (EnCodec, Mimi) | Text tokens (LLM) |
+
+  | Transport | WebRTC, WebSocket, SIP | WebRTC, WebSocket |
+
+  | Advantages | Lower latency, native emotion modeling | Modular components, tool calling support |
+
+  | Limitations | Vendor-specific codec dependencies | Higher latency (500ms+) |
+
+  | Use Cases | Real-time emotion modeling | Enterprise IVR, telephony |
+
+
+  ---'
+3_configuration_patterns: ''
+3_1_voice_agent_configuration_voice_agent_yaml: '| Parameter | Value | Description | Valid Range |
+
+  |----------|-------|-------------|-------------|
+
+  | `vad_threshold` | 0.7 | Voice activity detection sensitivity | 0.1–1.0 |
+
+  | `tts_speed` | 1.2 | Text-to-speech playback rate | 0.5–2.0 |
+
+  | `emotion_style` | "empathetic" | Emotion modulation mode | "neutral", "empathetic", "urgent", "calm" |
+
+  | `codecs` | ["opus", "pcm16"] | Supported audio codecs | opus, pcm16, g711 |
+
+  | `transport` | "webRTC" | Communication protocol | webRTC, websocket, sip |
+
+
+  ---'
+4_performance_metrics: '| Metric | Codec-Based S2S | Cascading Pipeline |
+
+  |-------|------------------|---------------------|
+
+  | Latency (ms) | 120–180 | 500–700 |
+
+  | Throughput (tokens/s) | 1200–1500 | 800–1000 |
+
+  | Jitter (ms) | 10–20 | 50–80 |
+
+  | Packet Loss (%) | <0.5 | <1.2 |
+
+  | Supported Codecs | opus, pcm16 | opus, pcm16 |
+
+
+  ---'
+5_transport_layer_configurations: ''
+5_1_webrtc_sip_trunk_websocket_comparison: '| Transport Type | Use Case | Protocols | Codecs | NAT Traversal | Bandwidth (kbps)
+  |
+
+  |---------------|----------|-----------|--------|----------------|------------------|
+
+  | WebRTC | Real-time voice | SRTP, ICE | opus, pcm16 | STUN/TURN | 64–256 |
+
+  | SIP Trunk | Telephony integration | SIP, RTP | g711, pcm16 | STUN/TURN | 64–128 |
+
+  | WebSocket | Low-latency fallback | WebSocket | opus | None | 128–256 |
+
+
+  ---'
+6_prosody_and_emotion_modeling: ''
+6_1_prosody_profile_parameters: '| Parameter | Value | Description | Valid Range |
+
+  |----------|-------|-------------|-------------|
+
+  | `pitch_shift` | 0.8 | Pitch modulation factor | 0.5–2.0 |
+
+  | `duration_stretch` | 1.1 | Speech duration scaling | 0.8–1.5 |
+
+  | `energy_level` | 0.9 | Loudness modulation | 0.1–1.0 |
+
+  | `emotion_weight` | 0.7 | Emotion influence factor | 0.1–1.0 |
+
+  | `language` | "en-US" | Language model | "en-US", "es-ES", "fr-FR" |
+
+
+  ---'
+7_industry_terms_vs_cex_metaphors: '| Industry Term | CEX Metaphor | Description | Use Case |
+
+  |--------------|--------------|-------------|-----------|
+
+  | Voice Activity Detection | `vad_threshold` | Detects speech presence | Noise suppression |
+
+  | Text-to-Speech | `tts_speed` | Converts text to audio | Voice response |
+
+  | Emotion Modulation | `emotion_style` | Adjusts vocal tone | Customer service |
+
+  | Codecs | `codecs` | Audio compression format | Bandwidth optimization |
+
+  | Transport Protocol | `transport` | Communication channel | Network reliability |
+
+
+  ---'
+8_configuration_validation_rules: '| Rule # | Description | Valid Values | Notes |
+
+  |-------|-------------|---------------|-------|
+
+  | 1 | `vad_threshold` | 0.1–1.0 | Higher = more sensitive |
+
+  | 2 | `tts_speed` | 0.5–2.0 | 1.0 = normal pace |
+
+  | 3 | `emotion_style` | "neutral", "empathetic", "urgent", "calm" | Required for emotion modeling |
+
+  | 4 | `codecs` | opus, pcm16, g711 | Must include at least one |
+
+  | 5 | `transport` | webRTC, websocket, sip | Required for communication |
+
+
+  ---'
+9_references: '- Hume EVI Documentation
+
+  - Deepgram API Reference
+
+  - Cartesia TTS SDK
+
+  - OpenAI Realtime API Reference
+
+  - OpenAI Realtime VAD Guide
+
+  - OpenAI Realtime Client Events
+
+  - OpenAI Realtime Server Events
+
+  - Pipecat Pipeline Architecture
+
+  - Pipecat DeepWiki
+
+  - LiveKit Agents Framework
+
+  - LiveKit Silero VAD Plugin
+
+  - LiveKit Turn Detection
+
+  - LiveKit EOU Blog
+
+  - Moshi arXiv Paper
+
+  - Moshi Kyutai GitHub
+
+  - Silero VAD GitHub
+
+  - Picovoice VAD Comparison 2026
+
+  - TEN VAD (TEN Framework)
+
+
+  ---'
+10_openai_realtime_api_v2_event_reference: 'Source: OpenAI Realtime API Reference'
+10_1_client_events_sent_by_client_to_server: '| Event | Purpose |
+
+  |-------|---------|
+
+  | `session.update` | Modify session config: model, voice, modalities, VAD, tools, instructions |
+
+  | `input_audio_buffer.append` | Stream raw audio bytes (base64 PCM16 or g711) to server buffer |
+
+  | `input_audio_buffer.commit` | Manually commit buffered audio as conversation item (non-VAD mode) |
+
+  | `input_audio_buffer.clear` | Flush input buffer without creating an item |
+
+  | `conversation.item.create` | Insert message, function call, or function result into conversation |
+
+  | `conversation.item.truncate` | Truncate assistant audio to sync with client playback after barge-in |
+
+  | `conversation.item.delete` | Remove an item from conversation history |
+
+  | `response.create` | Trigger a new model response (overrides session response config) |
+
+  | `response.cancel` | Cancel an in-progress response |'
+10_2_server_events_emitted_by_server_to_client: '| Event | Category | Description |
+
+  |-------|----------|-------------|
+
+  | `error` | Control | Recoverable error; session remains open |
+
+  | `session.created` | Lifecycle | First event on connection; contains default session config |
+
+  | `session.updated` | Lifecycle | Confirms session.update applied; returns full effective config |
+
+  | `conversation.created` | Lifecycle | New conversation initialized |
+
+  | `conversation.item.created` | Conversation | New item added (user message, assistant turn, function call) |
+
+  | `conversation.item.input_audio_transcription.completed` | Audio | STT transcript ready for committed audio item |
+
+  | `conversation.item.input_audio_transcription.delta` | Audio | Streaming transcript delta |
+
+  | `conversation.item.input_audio_transcription.failed` | Audio | Transcription error |
+
+  | `conversation.item.truncated` | Conversation | Confirms item truncation |
+
+  | `conversation.item.deleted` | Conversation | Confirms item deletion |
+
+  | `input_audio_buffer.committed` | Audio | Server committed audio to conversation |
+
+  | `input_audio_buffer.cleared` | Audio | Buffer cleared |
+
+  | `input_audio_buffer.speech_started` | VAD | VAD detected start of user speech |
+
+  | `input_audio_buffer.speech_stopped` | VAD | VAD detected end of user speech |
+
+  | `response.created` | Response | Response created, status=in_progress |
+
+  | `response.done` | Response | Response complete; status: completed/cancelled/failed/incomplete |
+
+  | `response.output_item.added` | Response | New output item added to response |
+
+  | `response.output_item.done` | Response | Output item finalized |
+
+  | `response.content_part.added` | Response | Content part added (audio, text, or transcript) |
+
+  | `response.content_part.done` | Response | Content part complete |
+
+  | `response.text.delta` | Streaming | Text token delta |
+
+  | `response.text.done` | Streaming | Full text complete |
+
+  | `response.audio_transcript.delta` | Streaming | Audio transcript token delta |
+
+  | `response.audio_transcript.done` | Streaming | Full audio transcript complete |
+
+  | `response.audio.delta` | Streaming | Audio bytes delta (base64) |
+
+  | `response.audio.done` | Streaming | Audio generation complete |
+
+  | `response.function_call_arguments.delta` | Tools | Function call argument streaming |
+
+  | `response.function_call_arguments.done` | Tools | Function call complete |
+
+  | `output_audio_buffer.audio_started` | Audio | Output audio playback started |
+
+  | `output_audio_buffer.audio_stopped` | Audio | Output audio playback stopped |
+
+  | `output_audio_buffer.cleared` | Audio | Output buffer cleared (on barge-in or client request) |
+
+  | `rate_limits.updated` | Control | Rate limit counters updated |'
+10_3_turn_detection_vad_via_session_update: "server_vad (energy-based, default):\n{\n  \"turn_detection\": {\n    \"type\"\
+  : \"server_vad\",\n    \"threshold\": 0.5,\n    \"prefix_padding_ms\": 300,\n    \"silence_duration_ms\": 500,\n    \"create_response\"\
+  : true,\n    \"interrupt_response\": true\n  }\n}\n\n| Parameter | Default | Range | Notes |\n|-----------|---------|-------|-------|\n\
+  | `threshold` | 0.5 | 0.0-1.0 | Higher = louder audio required; better for noisy envs |\n| `silence_duration_ms` | 500 |\
+  \ 200-2000 | Lower = faster response, more false triggers |\n| `prefix_padding_ms` | 300 | 0-1000 | Audio before speech\
+  \ onset included in utterance |\n\nsemantic_vad (transformer-based; gpt-4o-realtime required):\n{\n  \"turn_detection\"\
+  : {\n    \"type\": \"semantic_vad\",\n    \"eagerness\": \"auto\",\n    \"create_response\": true,\n    \"interrupt_response\"\
+  : true\n  }\n}\n\n| `eagerness` | Max wait | Notes |\n|-------------|----------|-------|\n| `low` | 8s | Waits longer; better\
+  \ for complex sentences |\n| `medium` / `auto` | 4s | Balanced default |\n| `high` | 2s | Responds quickly; may interrupt\
+  \ longer utterances |\n\nserver_vad vs semantic_vad:\n\n| Dimension | server_vad | semantic_vad |\n|-----------|-----------|-------------|\n\
+  | Algorithm | Energy/amplitude threshold | Transformer language model |\n| False triggers | Common on filler words (\"um\"\
+  , \"uh\") | Understands incomplete sentences |\n| Model requirement | Any gpt-4o-realtime | gpt-4o-realtime only |\n| Best\
+  \ for | Low-latency, noisy environments | Natural conversation |\n\n---"
+11_pipecat_frame_based_pipeline_architecture: 'Source: Pipecat Docs, Pipecat DeepWiki'
+11_1_frame_taxonomy: 'Everything in Pipecat is a Frame. Three priority classes:
+
+
+  | Class | Queue behavior | Examples |
+
+  |-------|---------------|---------|
+
+  | `SystemFrame` | Bypasses all queues -- immediate | `StartFrame`, `EndFrame`, `CancelFrame`, `InterruptionFrame` |
+
+  | `DataFrame` | Queued, in-order | `InputAudioRawFrame`, `OutputAudioRawFrame`, `TextFrame`, `LLMTextFrame`, `TranscriptionFrame`
+  |
+
+  | `ControlFrame` | Queued, in-order | `LLMContextFrame`, `LLMRunFrame`, response boundary markers |
+
+
+  `UninterruptibleFrame` mixin: preserves critical frames (function results, state updates) through interruptions.'
+11_2_bidirectional_frame_flow: "DOWNSTREAM: Transport Input -> STT -> LLMUserAgg -> LLM -> LLMAssistantAgg -> TTS -> Transport\
+  \ Output\nUPSTREAM:   Transport Output <- InterruptionFrame (VAD) <- any processor\n\nEach FrameProcessor implements:\n\
+  async def process_frame(self, frame: Frame, direction: FrameDirection):\n    await self.push_frame(output_frame, direction)"
+11_3_ai_service_categories: '| Category | Provider Count | Key Providers |
+
+  |----------|----------------|---------------|
+
+  | STT | 19+ | Deepgram, AssemblyAI, Google, Azure, AWS Transcribe, Whisper |
+
+  | LLM | 18+ | OpenAI, Anthropic, Google Gemini, Groq, Ollama |
+
+  | TTS | 25+ | Cartesia, ElevenLabs, Deepgram Aura, PlayHT, AWS Polly |
+
+  | S2S | 5 | OpenAI Realtime, Gemini Live, AWS Nova Sonic |
+
+  | Vision | 2+ | Moondream, Google Vision |'
+11_4_observability_system: '| Observer | Purpose |
+
+  |----------|---------|
+
+  | `RTVIObserver` | RTVI protocol event emission |
+
+  | `TurnTrackingObserver` | Turn boundary analytics |
+
+  | `UserBotLatencyObserver` | TTFA/TTFB measurement |
+
+  | `TurnTraceObserver` | OpenTelemetry tracing |'
+11_5_transport_adapters: '| Transport | Class | Protocol |
+
+  |-----------|-------|---------|
+
+  | Daily.co | `daily.CallClient` | WebRTC |
+
+  | LiveKit | `livekit.rtc.Room` | WebRTC |
+
+  | FastAPI | WebSocket handler | WS |
+
+  | Local | File/Mic I/O | PCM |
+
+
+  ---'
+12_livekit_agents_room_track_plugin_system: 'Source: LiveKit Agents, LiveKit Docs'
+12_1_room_architecture: "Agents join LiveKit rooms as full WebRTC participants. SFU (Selective Forwarding Unit) routes media\
+  \ only to necessary participants -- horizontal scaling without media processing overhead.\n\nAgentServer\n  |-- WorkerPool\n\
+  \        |-- Worker 1 -> Room A\n        |      |-- AudioTrack (subscribe: user input)\n        |      |-- AudioTrack (publish:\
+  \ TTS output)\n        |-- Worker 2 -> Room B"
+12_2_roomio_subsystems: '| Subsystem | Interface | Purpose |
+
+  |-----------|-----------|---------|
+
+  | Input stream | `AudioInput` | Subscribe to user track, buffer pre-connect audio |
+
+  | Output stream | `AudioOutput` | Publish TTS audio as track |
+
+  | Transcript sync | `TextOutput` | Sync STT transcripts with audio playback |
+
+  | Participant lifecycle | event hooks | Handle join/leave, track subscribe/unsubscribe |'
+12_3_plugin_architecture: "from livekit.plugins import openai, silero, deepgram, cartesia, turn_detector\n\nagent = VoicePipelineAgent(\n\
+  \    vad=silero.VAD.load(),\n    stt=deepgram.STT(),\n    llm=openai.LLM(model=\"gpt-4o\"),\n    tts=cartesia.TTS(),\n \
+  \   turn_detector=turn_detector.EOUModel(),\n)\n\nChanging a provider = one line change. No pipeline rewiring."
+12_4_silero_vad_plugin_configuration: "silero.VAD.load(\n    min_speech_duration=0.05,       # seconds; min duration to classify\
+  \ as speech\n    min_silence_duration=0.55,      # seconds; silence before speech end declared\n    prefix_padding_duration=0.5,\
+  \    # seconds; audio before speech onset kept\n    max_buffered_speech=60.0,       # seconds; max buffer before force-flush\n\
+  \    activation_threshold=0.5,       # 0.0-1.0; Silero probability threshold\n    sample_rate=16000,              # 8000\
+  \ or 16000 Hz only\n    # deactivation defaults to max(activation_threshold - 0.15, 0.01)\n)"
+12_5_eou_end_of_utterance_semantic_turn_detection: 'LiveKit''s EOU model is a 135M-parameter transformer (SmolLM v2 base)
+  fine-tuned for turn completion prediction. Uses sliding window of last 4 conversation turns. Recommended combination: Silero
+  VAD + EOU model together for best accuracy. Source: LiveKit EOU blog ---'
+13_vad_cross_provider_reference: 'Source: Picovoice VAD Comparison 2026, Silero VAD'
+13_1_accuracy_benchmark_at_5_fpr: '| Provider | TPR @ 5% FPR | Architecture | Latency/Frame | Open Source |
+
+  |----------|-------------|-------------|--------------|-------------|
+
+  | Cobra (Picovoice) | 98.9% | DNN on-device | <1ms CPU | No |
+
+  | Silero VAD | 87.7% | PyTorch DNN | <1ms CPU (30ms) | Yes |
+
+  | WebRTC VAD (Google) | 50.0% | GMM signal processing | <0.5ms CPU | Yes |
+
+  | TEN VAD | N/A | DNN, 10-16ms frames | low-latency | Yes |
+
+
+  At 5% FPR: WebRTC misses 1 in 2 speech frames; Silero misses 1 in 8; Cobra misses 1 in 100.'
+13_2_configuration_snippets: 'WebRTC VAD:
+
+  import webrtcvad
+
+  vad = webrtcvad.Vad(aggressiveness=3)  # 0=least, 3=most aggressive
+
+  # frame: 160/320/480 samples at 16kHz (10/20/30ms)
+
+
+  Silero VAD:
+
+  model, utils = torch.hub.load(''snakers4/silero-vad'', ''silero_vad'', onnx=True)
+
+  threshold = 0.5            # speech probability threshold (0.0-1.0)
+
+  sampling_rate = 16000      # 8000 or 16000 only
+
+  window_size_samples = 512  # frame size in samples
+
+
+  OpenAI server_vad:
+
+  {"type": "server_vad", "threshold": 0.5, "silence_duration_ms": 500}
+
+
+  OpenAI semantic_vad:
+
+  {"type": "semantic_vad", "eagerness": "auto"}
+
+
+  LiveKit Silero:
+
+  silero.VAD.load(activation_threshold=0.5, min_silence_duration=0.55)
+
+
+  ---'
+14_moshi_s2s_architecture_deep_dive: 'Source: Moshi arXiv:2410.00037, Kyutai GitHub'
+14_1_architecture_overview: "Full-duplex S2S foundation model -- no cascading pipeline. Simultaneously listens and speaks,\
+  \ modeling both user and system audio as parallel streams.\n\nUser audio stream (continuous)\n  + System audio stream (Moshi's\
+  \ own previous speech)\n         |\n    Mimi Codec (encoder) -- 80ms frames, 12.5Hz\n         |\n    Temporal Transformer\
+  \ (7B, 32L) -- temporal dependencies\n         |\n    Depth Transformer (6L) -- inter-codebook deps per timestep\n     \
+  \    |\n    Inner Monologue -- text token BEFORE audio tokens\n         |\n    Mimi Codec (decoder) -> Audio output"
+14_2_temporal_transformer_specs: '| Parameter | Value |
+
+  |-----------|-------|
+
+  | Layers | 32 |
+
+  | Attention heads | 32 |
+
+  | Model dimension | 4,096 |
+
+  | MLP dimension | 11,264 |
+
+  | Context length | 4,096 tokens |
+
+  | Position encoding | RoPE |
+
+  | Normalization | RMSNorm |
+
+  | Attention | FlashAttention |
+
+  | Activation | Gated Linear Units (SiLU) |
+
+  | Initialized from | Helium 7B text LM |'
+14_3_depth_transformer_specs: '| Parameter | Value |
+
+  |-----------|-------|
+
+  | Layers | 6 |
+
+  | Attention heads | 16 |
+
+  | Model dimension | 1,024 |
+
+  | MLP dimension | 4,096 |
+
+  | Function | Inter-codebook dependency per timestep |'
+14_4_mimi_codec_architecture: '| Component | Detail |
+
+  |-----------|--------|
+
+  | Architecture | SeaNet (causal convolutions) |
+
+  | Encoder strides | 4 blocks: factors 4, 5, 6, 8 |
+
+  | Bottleneck | 8 transformer layers before + after quantization |
+
+  | Quantization | Split RVQ: 1 semantic VQ (WavLM-distilled) + 7 acoustic quantizers |
+
+  | Codebook size | 2,048 entries each |
+
+  | Bitrate | 1.1 kbps at 12.5Hz |
+
+  | Frame size | 80ms |
+
+  | Training | Adversarial-only (feature + discriminator losses) |'
+14_5_inner_monologue_mechanism: 'Per-frame prediction sequence: `[text_token] -> [semantic_codebook] -> [acoustic_codebooks
+  1..7]` Text tokens are Whisper-transcribed, time-aligned to 12.5Hz, and predicted before audio tokens at each timestep.
+  Enables: improved factuality, zero-shot streaming ASR + TTS, real-time compatible generation.'
+14_6_dual_stream_modeling: '| Dimension | Detail |
+
+  |-----------|--------|
+
+  | Streams | 2: user audio + Moshi audio |
+
+  | Representation | Separate semantic + acoustic sequences per stream |
+
+  | Turn-taking | No explicit speaker boundaries -- overlap/interruption natural |
+
+  | Training | Diarized single-speaker audio + Fisher dataset (true separate channels) |'
+14_7_latency_profile: '| Stage | Latency |
+
+  |-------|---------|
+
+  | Mimi frame size | 80ms |
+
+  | Acoustic delay | 80ms |
+
+  | Theoretical E2E | 160ms |
+
+  | Practical E2E (L4 GPU) | 200ms |
+
+  | Human conversation avg | 230ms (10 languages) |'
+14_8_moshi_vs_alternatives: '| Dimension | Moshi | OpenAI Realtime | Cascading Pipeline |
+
+  |-----------|-------|----------------|-------------------|
+
+  | Architecture | Native dual-stream | Codec-based tokens | Modular STT+LLM+TTS |
+
+  | Latency | 200ms | ~300ms | 500-1500ms |
+
+  | Full-duplex | Yes | Yes | No (half-duplex) |
+
+  | LLM flexibility | Fixed (Helium-7B) | Fixed (gpt-4o-realtime) | Any LLM |
+
+  | Tool calling | Limited | Native | Full |
+
+  | Open source | Yes (Kyutai) | No | Yes (components) |
+
+  | Customizable voice | No | Yes (voice param) | Yes (TTS provider) |
+
+
+  ---'
+15_voice_agent_architecture_decision_tree_extended: "LATENCY REQUIREMENT?\n  <200ms -> Moshi (200ms practical, full-duplex,\
+  \ open source)\n  <300ms -> OpenAI Realtime (gpt-4o-realtime, native tool calls)\n  <500ms -> Pipecat or LiveKit cascading\
+  \ (modular, any LLM)\n  flexible -> standard cascading (maximum control)\n\nFULL-DUPLEX NEEDED?\n  Yes -> Moshi or OpenAI\
+  \ Realtime\n  No  -> Cascading pipeline\n\nTOOL CALLING NEEDED?\n  Yes -> OpenAI Realtime (native) OR cascading (full)\n\
+  \  No  -> Moshi OK\n\nOPEN SOURCE REQUIRED?\n  Yes -> Moshi (Kyutai) or Pipecat + Silero + open LLM\n  No  -> Any provider\n\
+  \nFRAMEWORK CHOICE:\n  Pipecat               LiveKit\n  - 25+ TTS providers   - Room/SFU model\n  - 19+ STT providers  \
+  \ - EOU semantic turn detection\n  - Frame-based pipes   - Multi-party voice rooms\n  - Observer metrics    - Managed infra\
+  \ option\n  - Daily/LK/WS/local   - Worker pool scaling\n\nVAD SELECTION:\n  Accuracy priority  -> Cobra VAD (98.9% TPR)\n\
+  \  Speed + open src   -> Silero VAD (87.7% TPR, <1ms)\n  Zero-dependency    -> WebRTC VAD (GMM, 50% TPR, fastest)\n  OpenAI\
+  \ Realtime    -> server_vad (energy) or semantic_vad (transformer)\n  LiveKit agents     -> Silero + EOU model (recommended\
+  \ combo)\n\nTRANSPORT:\n  Browser  -> WebRTC (ICE/DTLS/RTP, Opus)\n  Server   -> WebSocket (persistent, bidirectional)\n\
+  \  Phone    -> SIP (PSTN gateway, IVR fallback)\n  Scale    -> LiveKit SFU (selective forwarding, horizontal scale)\n\n\
+  ---"

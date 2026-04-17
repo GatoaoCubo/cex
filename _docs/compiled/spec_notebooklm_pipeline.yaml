@@ -58,7 +58,7 @@ component_map: '| Component | Type | Path | Status |
 
   | `cex_notebooklm.py` | Unified CLI tool | `_tools/cex_notebooklm.py` | TO BUILD (N03) |
 
-  | `notebooklm_notebooks.yaml` | Config registry | `.cex/config/notebooklm_notebooks.yaml` | TO BUILD (N04 draft) |
+  | `notebooklm_notebooks.yaml` | Config registry | `.cex/P09_config/notebooklm_notebooks.yaml` | TO BUILD (N04 draft) |
 
   | `notebooklm_create.py` | Prototype (create notebook) | `_tools/notebooklm_create.py` | EXISTS (PoC) |
 
@@ -206,7 +206,7 @@ selector_strategy: 'NotebookLM UI is Angular Material (PT-BR locale). Selectors 
   ---'
 3_config_spec_notebooklm_notebooks_yaml: ''
 schema: "# .cex/config/notebooklm_notebooks.yaml\n# Domain → NotebookLM notebook mapping\n# GDP D1: 1 notebook per DOMAIN\
-  \ (reusable, not per-mission)\n\nversion: 1\ngoogle_account: financeiro@gatoaocubo3.com   # GDP D5\npublish_mode: auto \
+  \ (reusable, not per-mission)\n\nversion: 1\ngoogle_account: {{BRAND_EMAIL}}   # GDP D5\npublish_mode: auto \
   \                           # GDP D3\nbrowser_engine: chrome_local                  # GDP D4\ndefault_outputs:         \
   \                     # GDP D2\n  - flashcards\n  - audio_summary\n  - quiz\n\ncookie_source: \"%LOCALAPPDATA%\\\\notebooklm-mcp\\\
   \\Data\\\\browser_state\\\\state.json\"\n\ndomains:\n  meta:\n    notebook_id: \"940fd258-847f-47c1-b7e6-caca7b730681\"\n\
@@ -273,7 +273,7 @@ validation_rules: '| Field | Type | Required | Constraint |
   \nN04's NotebookLM work runs in parallel with N03's tool-based production. No dependency between them — both read from the\
   \ same KC sources.\n\n---"
 5_auth_management: ''
-5_1_cookie_architecture: "Google Account (financeiro@gatoaocubo3.com)\n    │\n    ▼\nNotebookLM MCP Server (Puppeteer-based)\n\
+5_1_cookie_architecture: "Google Account ({{BRAND_EMAIL}})\n    │\n    ▼\nNotebookLM MCP Server (Puppeteer-based)\n\
   \    │ Logs in via browser, saves cookies\n    ▼\n%LOCALAPPDATA%\\notebooklm-mcp\\Data\\browser_state\\state.json\n    │\
   \ Contains: cookies[], localStorage, sessionStorage\n    ▼\ncex_notebooklm.py reads cookies from state.json\n    │ Injects\
   \ into Playwright browser context\n    ▼\nPlaywright operates NotebookLM UI as authenticated user"
@@ -295,7 +295,7 @@ validation_rules: '| Field | Type | Required | Constraint |
   their system Chrome, MCP cookies may still be valid (and vice versa). The two sessions are independent.'
 5_5_security_notes: '- Cookies are stored locally in `%LOCALAPPDATA%` (user-scoped, not world-readable).
 
-  - Google account `financeiro@gatoaocubo3.com` is a dedicated automation account (not personal).
+  - Google account `{{BRAND_EMAIL}}` is a dedicated automation account (not personal).
 
   - The `--dangerously-skip-permissions` flag is only needed when spawning Chrome MCP clones, not for Playwright uploads.
 

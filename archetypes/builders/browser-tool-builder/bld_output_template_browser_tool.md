@@ -50,36 +50,36 @@ user_agent: "{{user_agent_string_or_omit}}"
 proxy: "{{proxy_url_or_omit}}"
 ```
 ## Overview
-{{what_the_tool_automates_1_to_2_sentences}}
-{{target_site_domain_and_primary_use_case}}
+`{{what_the_tool_automates_1_to_2_sentences}}`
+`{{target_site_domain_and_primary_use_case}}`
 ## Engine
-Engine: {{engine_name}} ({{browser_type}}). Headless: {{true|false}}. Viewport: {{WxH}}.
-Timeout: {{ms}}ms per action. JavaScript: {{enabled|disabled}}.
-{{stealth_config_if_applicable}}
+Engine: `{{engine_name}}` ({{browser_type}}). Headless: {{true|false}}. Viewport: `{{WxH}}`.
+Timeout: `{{ms}}`ms per action. JavaScript: {{enabled|disabled}}.
+`{{stealth_config_if_applicable}}`
 ## Actions
-### {{action_1}}
-{{action_description}}
-Params: {{param_name}} ({{type}}, {{required|optional}}): {{param_description}}
-{{selector_if_applicable}}: `{{selector_string}}` ({{strategy}})
-Fallback: `{{fallback_selector}}` ({{fallback_strategy}})
-Wait: {{wait_condition}}
-Returns: {{return_description}}
-### {{action_2}}
-{{action_description}}
-Params: {{param_name}} ({{type}}, {{required|optional}}): {{param_description}}
-Selector: `{{selector_string}}` ({{strategy}})
-Fallback: `{{fallback_selector}}` ({{fallback_strategy}})
-Returns: {{return_description}}
-### {{action_3}}
-{{action_description}}
-Params: {{param_name}} ({{type}}, {{required|optional}}): {{param_description}}
-Returns: {{return_description}}
+### `{{action_1}}`
+`{{action_description}}`
+Params: `{{param_name}}` ({{type}}, {{required|optional}}): `{{param_description}}`
+`{{selector_if_applicable}}`: {{selector_string}} (`{{strategy}}`)
+Fallback: `{{fallback_selector}}` (`{{fallback_strategy}}`)
+Wait: `{{wait_condition}}`
+Returns: `{{return_description}}`
+### `{{action_2}}`
+`{{action_description}}`
+Params: `{{param_name}}` ({{type}}, {{required|optional}}): `{{param_description}}`
+Selector: `{{selector_string}}` (`{{strategy}}`)
+Fallback: `{{fallback_selector}}` (`{{fallback_strategy}}`)
+Returns: `{{return_description}}`
+### `{{action_3}}`
+`{{action_description}}`
+Params: `{{param_name}}` ({{type}}, {{required|optional}}): `{{param_description}}`
+Returns: `{{return_description}}`
 ## Selectors
-Priority order: {{strategy_1}} > {{strategy_2}} > {{strategy_3}}
-1. {{strategy_1}} (`{{example_selector}}`): {{why_this_is_primary}}
-2. {{strategy_2}} (`{{example_selector}}`): {{why_this_is_secondary}}
-3. {{strategy_3}} (`{{example_selector}}`): {{why_this_is_fallback}}
-Fallback rule: {{describe_fallback_behavior_on_null_result}}
+Priority order: `{{strategy_1}}` > {{strategy_2}} > `{{strategy_3}}`
+1. `{{strategy_1}}` ({{example_selector}}): `{{why_this_is_primary}}`
+2. `{{strategy_2}}` ({{example_selector}}): `{{why_this_is_secondary}}`
+3. `{{strategy_3}}` ({{example_selector}}): `{{why_this_is_fallback}}`
+Fallback rule: `{{describe_fallback_behavior_on_null_result}}`
 ## Output Format
 Primary: {{json|html|screenshot|text}}
 Schema:

@@ -29,6 +29,7 @@ observation_types: [user, feedback, project, reference]
 quality: 9.2
 title: "Memory Session Backend"
 density_score: 0.90
+llm_function: INJECT
 ---
 ## Summary
 Session persistence failures divide into: data loss (in-memory backends, no TTL cleanup leading to storage exhaustion), security vulnerabilities (pickle deserialization, embedded credentials), and data corruption (global namespaces with concurrent writes). The file-first pattern with JSON serialization, TTL enforcement, and per-nucleus scoping addresses all three categories with zero external dependencies.

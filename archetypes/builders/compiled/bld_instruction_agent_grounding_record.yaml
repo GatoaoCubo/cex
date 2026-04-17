@@ -1,0 +1,143 @@
+kind: instruction
+id: bld_instruction_agent_grounding_record
+pillar: P03
+llm_function: REASON
+purpose: Step-by-step build instructions for producing a valid agent_grounding_record artifact
+quality: null
+title: Agent Grounding Record Builder -- Instructions
+version: 1.0.0
+author: wave7_n05
+tags:
+- agent_grounding_record
+- builder
+- instruction
+tldr: 'Three-phase protocol: RESEARCH (collect traces), COMPOSE (populate record), VALIDATE (gate checks)'
+domain: agent_grounding_record construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+overview: 'A grounding record is a structured per-inference provenance artifact. It answers: "What sources, tools, and model
+  produced this output -- and can I prove it?" Each record covers exactly ONE inference run. Do not aggregate multiple runs
+  into one record.'
+phase_1_research_f3_inject_f5_call: Collect all evidence from the inference session before writing a single field.
+step_1_1_identify_tool_calls: '| Action                          | Detail                                                                      |
+
+  |---------------------------------|-----------------------------------------------------------------------------|
+
+  | Extract tool invocation log     | Get tool_name, input payload hash, output payload hash for every call      |
+
+  | Record timestamps               | ISO 8601 per tool-call -- not just session start/end                        |
+
+  | Measure duration_ms             | Wall-clock milliseconds from invocation to response                        |
+
+  | Flag tool-call failures         | If a tool errored, include it with status: "error" and error_code field    |'
+step_1_2_collect_rag_chunk_metadata: '| Action                          | Detail                                                                      |
+
+  |---------------------------------|-----------------------------------------------------------------------------|
+
+  | List all retrieved chunks       | Every chunk the retriever returned, even if not used in the final output   |
+
+  | Capture source_url              | Full URL or internal path -- no source_url = untraceable output (FAIL)     |
+
+  | Record retrieval_score          | Cosine similarity or BM25 score as float                                   |
+
+  | Compute content_hash            | SHA-256 of the chunk text at retrieval time                                |
+
+  | Record chunk_id                 | Unique identifier from the vector store or document store                  |'
+step_1_3_capture_model_reference: '| Action                          | Detail                                                                      |
+
+  |---------------------------------|-----------------------------------------------------------------------------|
+
+  | Model ID                        | Exact model identifier (e.g. claude-sonnet-4-6, gpt-4o-2024-11-20)       |
+
+  | Model version                   | Semantic version or checkpoint hash if available                           |
+
+  | Provider                        | anthropic / openai / google / self-hosted                                  |
+
+  | Model-signature                 | Cryptographic hash or attestation from provider if available               |'
+step_1_4_establish_inference_session_identity: '| Action                          | Detail                                                                      |
+
+  |---------------------------------|-----------------------------------------------------------------------------|
+
+  | Generate inference_id           | UUIDv4 -- unique per inference run, never reused                           |
+
+  | Link to session_id              | Parent session if this inference is part of a multi-turn conversation      |
+
+  | Get otel_span_id                | The OpenTelemetry span ID for this inference operation                     |
+
+  | Timestamp the session           | ISO 8601 with timezone -- start of inference, not start of session         |'
+step_1_5_prepare_output_hash_input: '| Action                          | Detail                                                                      |
+
+  |---------------------------------|-----------------------------------------------------------------------------|
+
+  | Capture raw model output        | Exact bytes before any post-processing or formatting                       |
+
+  | Compute output-hash             | SHA-256 of raw output bytes -- this is MANDATORY, cannot be omitted        |
+
+  | Record hash algorithm           | Always "sha256" -- no MD5, no SHA-1                                        |'
+phase_2_compose_f6_produce: Populate the grounding record fields in this exact order. Use bld_output_template for the structure.
+step_2_1_header_block: "inference_id: <UUIDv4>\nsession_id: <string or null>\ntimestamp: <ISO 8601 with timezone>\ndownstream_use:\
+  \ <production | test | eval>\ngrounding_coverage_pct: <float 0.0-1.0>\nCompute grounding_coverage_pct as:\n  (number of\
+  \ output claims with a traceable RAG-chunk or tool-call source)\n  divided by\n  (total factual claims in output)\nIf uncertain,\
+  \ use 0.0 -- do not guess."
+step_2_2_model_block: "model:\n  id: <exact model identifier>\n  version: <version string>\n  provider: <provider name>\n\
+  \  model-signature: <hash or attestation string, null if unavailable>"
+step_2_3_tool_calls_array: "For each tool invocation, one entry:\ntool_calls:\n  - tool_name: <string>\n    tool_input_hash:\
+  \ <sha256 of input payload>\n    tool_output_hash: <sha256 of output payload>\n    duration_ms: <integer>\n    timestamp:\
+  \ <ISO 8601>\n    status: <success | error>\nIf no tools were called, write: `tool_calls: []`"
+step_2_4_rag_chunks_array: "For each retrieved chunk, one entry:\nrag_chunks:\n  - chunk_id: <string>\n    source_url: <full\
+  \ URL or internal path>\n    retrieval_score: <float>\n    content_hash: <sha256 of chunk text at retrieval>\nIf no RAG\
+  \ was used, write: `rag_chunks: []`"
+step_2_5_integrity_and_compliance_fields: 'output_hash: <sha256 of raw model output>
+
+  otel_span_id: <OTel span ID string>
+
+  c2pa_manifest_ref: <C2PA manifest URI or null>'
+phase_3_validate_f7_govern: Run this checklist before finalizing the record. Any FAIL = do not publish.
+hard_gate_checklist: '| Gate | Check                                        | Pass Condition                        |
+
+  |------|----------------------------------------------|---------------------------------------|
+
+  | H01  | Frontmatter valid YAML                       | No parse errors                       |
+
+  | H02  | ID matches naming pattern                    | ^p10_gr_[a-z0-9_]+\.md$              |
+
+  | H03  | kind = agent_grounding_record                | Exact string match                    |
+
+  | H04  | inference_id present                         | UUIDv4 format                         |
+
+  | H05  | output-hash present                          | SHA-256 hex string (64 chars)         |
+
+  | H06  | otel_span_id present                         | Non-empty string                      |
+
+  | H07  | timestamp is ISO 8601                        | Parseable with timezone               |
+
+  | H08  | model.id present                             | Non-empty string                      |'
+soft_quality_checks: '| Dimension                | Weight | Check                                             |
+
+  |--------------------------|--------|---------------------------------------------------|
+
+  | Provenance completeness  | 0.30   | All fields populated, no null where required      |
+
+  | RAG-chunk coverage       | 0.25   | Every chunk has source_url and content_hash       |
+
+  | Tool-call traceability   | 0.25   | Every tool-call has input/output hashes + timestamp|
+
+  | C2PA integration         | 0.10   | c2pa_manifest_ref present or explicitly null      |
+
+  | Downstream tracking      | 0.10   | downstream_use field set                          |'
+common_failures_and_fixes: '| Failure Pattern                       | Fix                                                  |
+
+  |---------------------------------------|------------------------------------------------------|
+
+  | output-hash missing                   | Recompute SHA-256 from raw model output bytes        |
+
+  | RAG chunk has no source_url           | Trace back to retriever config; reject chunk if unknown|
+
+  | tool_input_hash = null                | Re-run tool call logging with hash capture enabled   |
+
+  | otel_span_id missing                  | Check OTel instrumentation -- span must be active    |
+
+  | grounding_coverage_pct > 1.0          | Recompute -- value is a ratio, not a percentage      |
+
+  | inference_id reused                   | Generate new UUIDv4 -- IDs are non-reusable          |'

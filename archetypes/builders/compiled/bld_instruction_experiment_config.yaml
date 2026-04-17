@@ -1,0 +1,53 @@
+kind: instruction
+id: bld_instruction_experiment_config
+pillar: P03
+llm_function: REASON
+purpose: Step-by-step production process for experiment_config
+pattern: 3-phase pipeline (research -> compose -> validate)
+quality: null
+title: Instruction Experiment Config
+version: 1.0.0
+author: n03_builder
+tags:
+- experiment_config
+- builder
+- instruction
+- P09
+tldr: '3-phase process: research experiment scope and metrics, compose variant catalog and statistical parameters, validate
+  gates.'
+domain: experiment config construction
+created: '2026-04-13'
+updated: '2026-04-13'
+density_score: 0.9
+phase_1_research:
+- 'Identify the experiment subject: is this a prompt variant test, a feature rollout, a model comparison, or a UI/UX test?'
+- 'Write the hypothesis: a falsifiable statement in the form "If [variant change] then [expected outcome] measured by [metric]"'
+- 'Catalog all variants: name each (control = baseline, treatment_N = change being tested), describe what differs'
+- 'Identify the primary metric: the single KPI that determines the winning variant (e.g., task_completion_rate, response_quality_score)'
+- 'Identify guardrail metrics: metrics that must NOT regress even if the primary metric improves (e.g., latency_p99, error_rate)'
+- 'Define traffic allocation: percentage for each variant; consider segment constraints (power_users only, new_users only,
+  all)'
+- 'Determine statistical parameters: significance threshold (default 0.05), minimum detectable effect (MDE), estimated sample
+  size'
+- 'Define experiment duration: how many days or how many samples before concluding'
+- Check existing experiment_configs via brain_query [IF MCP] for the same domain -- avoid duplicate experiments
+phase_2_compose:
+- Read SCHEMA.md -- source of truth for all fields
+- Read OUTPUT_TEMPLATE.md -- fill the template following SCHEMA constraints
+- 'Fill all required frontmatter fields; set `quality: null` -- never self-score'
+- 'Write Overview section: what is being tested, why it matters, what decision it enables'
+- 'Write Variants section: table with columns name, type (control/treatment), description, key parameter changes'
+- 'Write Traffic Split section: allocation table per variant (must sum to 100), segment rules, hold-out percentage if any'
+- 'Write Metrics section: primary metric with direction and winning threshold; guardrail metrics with acceptable limits'
+- 'Write Statistical Parameters section: significance_threshold, MDE, sample_size_target, duration_days, power calculation
+  method'
+- 'Write Lifecycle section: current status (draft/running/paused/concluded), key dates, decision criteria for conclusion'
+- Confirm body <= 4096 bytes
+phase_3_validate: "1. Check QUALITY_GATES.md -- verify each HARD gate manually\n2. Confirm YAML frontmatter parses without\
+  \ errors\n3. Confirm `id` matches `^p09_ec_[a-z][a-z0-9_]+$`\n4. Confirm variants list has at least 2 entries and first\
+  \ entry is \"control\"\n5. Confirm traffic_split percentages sum to exactly 100\n6. Confirm primary_metric is defined and\
+  \ single\n7. Confirm guardrail_metrics is present (even if empty list)\n8. Confirm significance_threshold and min_detectable_effect\
+  \ are specified\n9. Confirm `quality` is null\n10. Confirm body <= 4096 bytes\n11. Cross-check: is this a temporary controlled\
+  \ trial? If this is a permanent on/off toggle it belongs in `feature_flag`.\n    If these are deployment variables they\
+  \ belong in `env_config`. If this is a scoring rubric it belongs in `quality_gate`.\n12. If score < 8.0: revise in the same\
+  \ pass before outputting"

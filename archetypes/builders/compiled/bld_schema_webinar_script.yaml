@@ -1,0 +1,118 @@
+kind: schema
+id: bld_schema_webinar_script
+pillar: P06
+llm_function: CONSTRAIN
+purpose: Define frontmatter schema, ID pattern, and body structure for webinar_script artifacts
+quality: null
+title: Webinar Script Schema
+version: 1.0.0
+author: n02_wave6
+tags:
+- webinar_script
+- builder
+- schema
+tldr: 'Schema enforcement for webinar_script: required frontmatter fields, ID pattern, body sections, and byte constraints.'
+domain: webinar_script construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+id_pattern: '^p03_ws_[a-z][a-z0-9_]+\.md$
+
+
+  Examples:
+
+  - `p03_ws_product_demo.md` -- valid
+
+  - `p03_ws_onboarding_q2.md` -- valid
+
+  - `p03_ws_ProductDemo.md` -- INVALID (uppercase)
+
+  - `ws_product_demo.md` -- INVALID (missing pillar prefix)'
+frontmatter_fields: ''
+required_fields: '| Field | Type | Validation | Example |
+
+  |-------|------|-----------|---------|
+
+  | id | string | Matches ID pattern | p03_ws_product_demo |
+
+  | kind | string | Must be "webinar_script" | webinar_script |
+
+  | pillar | string | Must be "P03" | P03 |
+
+  | title | string | Non-empty, max 80 chars | "SaaS Product Demo Webinar" |
+
+  | version | string | Semantic version x.x.x | "1.0.0" |
+
+  | created | string | ISO date YYYY-MM-DD | "2026-04-14" |
+
+  | updated | string | ISO date YYYY-MM-DD | "2026-04-14" |
+
+  | author | string | Nucleus or person identifier | n02_wave6 |
+
+  | domain | string | Must contain "webinar" | "webinar_script construction" |
+
+  | quality | null | Always null (peer-scored) | null |
+
+  | tags | list | Min 2 tags, includes "webinar_script" | [webinar_script, demo] |
+
+  | tldr | string | Max 120 chars | "60-min SaaS demo webinar script." |
+
+  | webinar_title | string | Display title for the event | "How to Cut Onboarding Time by 50%" |
+
+  | duration_minutes | integer | One of: 30, 45, 60, 90 | 60 |
+
+  | platform | string | One of: zoom, gotowebinar, teams, other | zoom |
+
+  | target_audience | string | Audience job title or persona | "Operations managers at mid-market SaaS" |'
+optional_fields: '| Field | Type | Notes |
+
+  |-------|------|-------|
+
+  | registration_url | string | URL of the registration page |
+
+  | recording_url | string | URL of the post-event recording |
+
+  | panelists | list | List of speaker names and titles |
+
+  | cta_url | string | URL for the closing CTA action |
+
+  | llm_function | string | Pipeline function tag |'
+body_structure: 'Sections must appear in this order. Section headings must include timestamp markers.
+
+
+  | Order | Section | Required | Min Content |
+
+  |-------|---------|----------|-------------|
+
+  | 1 | Hook / Opening | YES | 1 hook statement, 1 benefit statement, [SLIDE 1] cue |
+
+  | 2 | Agenda Preview | YES | 3 agenda items, Q&A timing statement, [SLIDE 2] cue |
+
+  | 3 | Value Segment 1 | YES | Speaker content, 1 [SLIDE X] cue, 1 [SPEAKER NOTE] |
+
+  | 4 | Value Segment 2 | NO | Same as Segment 1 if present |
+
+  | 5 | Value Segment 3 | NO | Same as Segment 1 if present |
+
+  | 6 | Demo Walk-through | NO | Step-by-step narration, [SCREEN] or [SLIDE] cues |
+
+  | 7 | Q&A Facilitation | YES | Moderator intro, 3 seed questions, graceful close line |
+
+  | 8 | CTA Close | YES | Action statement, URL, [SLIDE X: CTA] cue |'
+constraints: '| Constraint | Value | Enforcement |
+
+  |-----------|-------|-------------|
+
+  | max_bytes | 6144 | Hard limit -- H07 gate rejects over-limit |
+
+  | Hook length | <= 150 words (~60 sec at 150 wpm) | Soft warning at 170 words |
+
+  | Segment word count | (duration_minutes - 12) * 150 / segment_count | Per-segment budget |
+
+  | Slide cue format | [SLIDE N: title] | Must be bracketed, sequential |
+
+  | Speaker note format | [SPEAKER NOTE: instruction] | Must be bracketed, imperative |
+
+  | Q&A seed questions | >= 3 | H07 hard gate |
+
+  | CTA URL | Must be present in closing section | H08 hard gate |'

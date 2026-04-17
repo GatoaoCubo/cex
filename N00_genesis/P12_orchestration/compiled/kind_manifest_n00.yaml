@@ -1,0 +1,66 @@
+id: n00_workflow_primitive_manifest
+kind: knowledge_card
+pillar: P12 -- orchestration
+nucleus: n00
+title: Workflow Primitive -- Canonical Manifest
+version: 1.0
+quality: null
+tags:
+- manifest
+- workflow_primitive
+- p12
+- n00
+- archetype
+- template
+density_score: 1.0
+purpose: A workflow_primitive defines a low-level workflow execution primitive (Step, Parallel, Loop, Condition, Router) that
+  serves as the atomic building block of complex orchestration logic. It is the instruction set of the CEX workflow engine
+  -- each primitive has precise execution semantics that workflow compilers and runners can implement consistently across
+  different execution environments.
+schema_key_fields: '| Field | Type | Required | Description |
+
+  |-------|------|----------|-------------|
+
+  | id | string | yes | Unique artifact identifier |
+
+  | kind | string | yes | Always `workflow_primitive` |
+
+  | pillar | string | yes | Always `P12` |
+
+  | title | string | yes | Human-readable name |
+
+  | version | semver | yes | Artifact version |
+
+  | quality | float\|null | yes | Peer-review score (null until reviewed) |
+
+  | primitive_type | enum | yes | Step \| Parallel \| Loop \| Condition \| Router |
+
+  | semantics | string | yes | Prose description of execution behavior |
+
+  | parameters | array | yes | Named parameters with types and descriptions |
+
+  | preconditions | array | no | Conditions that must hold before execution |
+
+  | postconditions | array | no | Guarantees that hold after successful execution |
+
+  | error_behavior | enum | yes | fail_fast \| retry \| skip \| compensate |'
+when_to_use:
+- When implementing a new workflow execution engine that must support CEX workflows
+- When defining the execution semantics for a custom workflow step type
+- When auditing whether a workflow implementation correctly handles all primitive types
+builder: '`archetypes/builders/workflow_primitive-builder/` Run: `python _tools/cex_8f_runner.py "your intent" --kind workflow_primitive
+  --execute`'
+template_variables_open_for_instantiation:
+- '`{{NUCLEUS_ROLE}}` -- which nucleus domain owns this'
+- '`{{SIN_LENS}}` -- cultural DNA driving the artifact'
+- '`{{TARGET_AUDIENCE}}` -- who this serves'
+- '`{{DOMAIN_CONTEXT}}` -- business/technical context'
+example_minimal: "---\nid: wp_parallel_primitive\nkind: workflow_primitive\npillar: P12\nnucleus: n07\ntitle: \"Example Workflow\
+  \ Primitive\"\nversion: 1.0\nquality: null\n---\n# Workflow Primitive: Parallel\nprimitive_type: Parallel\nsemantics: \"\
+  Execute all child steps concurrently. Collect all results before continuing.\"\nparameters:\n  - name: branches, type: array,\
+  \ description: \"Steps to execute in parallel\"\n  - name: max_concurrency, type: integer, description: \"Max simultaneous\
+  \ branches\"\nerror_behavior: fail_fast"
+related_kinds:
+- '`workflow_node` (P12) -- node types that implement specific workflow primitives'
+- '`workflow` (P12) -- workflow that composes these primitives into a complete program'
+- '`dag` (P12) -- Parallel primitive maps to fan-out edges in the DAG'

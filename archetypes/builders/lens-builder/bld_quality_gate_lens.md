@@ -12,8 +12,8 @@ quality: 9.0
 tags: [quality-gate, lens, perspective, P02, filter]
 tldr: "Quality gate for lens artifacts: enforces declared bias, scoped focus, and explicit applies_to list."
 density_score: 0.85
+llm_function: GOVERN
 ---
-
 # Gate: Lens
 ## Definition
 A `lens` is a perspective filter applied to artifact evaluation or routing. It amplifies certain attributes and suppresses others without executing logic. Gates here prevent lenses from claiming capabilities (which belong to agents), enforce honest bias declaration, and require a concrete `applies_to` scope so the lens is never applied indiscriminately.

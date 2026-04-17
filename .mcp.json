@@ -1,0 +1,50 @@
+{
+  "comment": "CEX root MCP config (BORIS_MERGE A6). Union of previous .mcp-n0X.json files. Per-nucleus overlays remain in .mcp-n0X.json and win when a boot wrapper points --mcp-config at them.",
+  "mcpServers": {
+    "github": {
+      "command": "cmd",
+      "args": ["/c", "npx", "-y", "@modelcontextprotocol/server-github"],
+      "env": { "GITHUB_TOKEN": "${GITHUB_TOKEN}" }
+    },
+    "fetch": {
+      "command": "uvx",
+      "args": ["mcp-server-fetch", "--ignore-robots-txt"]
+    },
+    "firecrawl": {
+      "command": "cmd",
+      "args": ["/c", "npx", "-y", "firecrawl-mcp"],
+      "env": { "FIRECRAWL_API_KEY": "${FIRECRAWL_API_KEY}" }
+    },
+    "markitdown": {
+      "command": "cmd",
+      "args": ["/c", "npx", "-y", "markitdown-mcp-npx"]
+    },
+    "brave-search": {
+      "command": "cmd",
+      "args": ["/c", "npx", "-y", "@modelcontextprotocol/server-brave-search"],
+      "env": { "BRAVE_API_KEY": "${BRAVE_API_KEY}" }
+    },
+    "notebooklm": {
+      "command": "cmd",
+      "args": ["/c", "npx", "-y", "notebooklm-mcp@latest"]
+    },
+    "postgres": {
+      "command": "cmd",
+      "args": ["/c", "npx", "-y", "@modelcontextprotocol/server-postgres"]
+    },
+    "canva": {
+      "command": "cmd",
+      "args": ["/c", "npx", "-y", "@mcp_factory/canva-mcp-server"],
+      "env": {
+        "CANVA_CLIENT_ID": "${CANVA_CLIENT_ID}",
+        "CANVA_CLIENT_SECRET": "${CANVA_CLIENT_SECRET}"
+      }
+    },
+    "playwright": {
+      "command": "cmd",
+      "args": ["/c", "npx", "-y", "@playwright/mcp", "--cdp-endpoint", "http://localhost:9222"],
+      "disabled": true,
+      "_setup": "Run boot/chrome_cdp.ps1 first, then set disabled: false"
+    }
+  }
+}

@@ -23,6 +23,7 @@ observation_types: [user, feedback, project, reference]
 quality: 9.1
 title: "Memory Output Validator"
 density_score: 0.90
+llm_function: INJECT
 ---
 ## Summary
 Output validator — checks and corrective actions applied to LLM output AFTER generation. The difference between a useful output_validator and a useless one is concrete values

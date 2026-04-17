@@ -1,0 +1,92 @@
+kind: output_template
+id: bld_output_template_repo_map
+pillar: P05
+llm_function: PRODUCE
+purpose: Template with vars for repo_map production
+quality: null
+title: Output Template Repo Map
+version: 1.1.0
+author: n05_ops
+tags:
+- repo_map
+- builder
+- output_template
+- tree-sitter
+- pagerank
+- token-budget
+tldr: 'Repo map template: symbol table (tree-sitter), PageRank scores, token budget, file selection heuristics'
+domain: repo_map construction
+created: '2026-04-13'
+updated: '2026-04-13'
+density_score: 0.9
+repository_overview: 'Repo: {{repo_name}} Root: {{repo_root}} Languages: {{language_list}} Total files scanned: {{total_files}}
+  Total symbols extracted: {{total_symbols}} Token budget: {{token_budget}} tokens Tokens used: {{tokens_used}} / {{token_budget}}'
+file_ranking_pagerank: '| Rank | File | PageRank Score | Tokens | Reason |
+
+  |------|------|---------------|--------|--------|
+
+  | 1 | {{file_1}} | {{score_1}} | {{tok_1}} | {{reason_1}} |
+
+  | 2 | {{file_2}} | {{score_2}} | {{tok_2}} | {{reason_2}} |
+
+  | 3 | {{file_3}} | {{score_3}} | {{tok_3}} | {{reason_3}} |
+
+  | ... | ... | ... | ... | ... |
+
+
+  Personalization boosts applied: {{mentioned_files_list}} (2x weight)
+
+  Recency boosts applied: {{recent_files_list}} (1.5x weight)'
+symbol_table_tree_sitter_extracted: "{{file_1_path}}:\n  {{symbol_type}} {{symbol_name_1}}({{params_1}})\n  {{symbol_type}}\
+  \ {{symbol_name_2}}({{params_2}})\n\n{{file_2_path}}:\n  class {{class_name_1}}:\n    {{method_name_1}}({{params}})\n  \
+  \  {{method_name_2}}({{params}})\n\n{{file_3_path}}:\n  {{symbol_type}} {{symbol_name_3}} = {{value_preview}}\n\nSymbol\
+  \ types: def | class | var | const | interface | type | enum"
+reference_graph_summary: '| File | In-degree | Out-degree | Top References |
+
+  |------|-----------|------------|---------------|
+
+  | {{file_1}} | {{in_1}} | {{out_1}} | {{refs_1}} |
+
+  | {{file_2}} | {{in_2}} | {{out_2}} | {{refs_2}} |
+
+
+  Graph stats: {{node_count}} nodes, {{edge_count}} edges, density {{density}}'
+file_selection_heuristics_applied: '| Rule | Files Affected | Effect |
+
+  |------|---------------|--------|
+
+  | Mentioned in chat | {{mentioned_count}} files | +2.0x weight |
+
+  | Recent git changes | {{recent_count}} files | +1.5x weight |
+
+  | Entry points detected | {{entry_count}} files | +1.2x weight |
+
+  | Test-source pairs | {{test_count}} pairs | Linked |
+
+  | Binary/generated excluded | {{excluded_count}} files | Excluded |'
+extraction_method: '| Component | Tool | Version | Notes |
+
+  |-----------|------|---------|-------|
+
+  | Parser | {{parser_tool}} | {{parser_version}} | tree-sitter or ctags |
+
+  | Languages parsed | {{lang_list}} | - | tree-sitter grammar coverage |
+
+  | Fallback | ctags | universal-ctags | For unsupported languages |
+
+  | Token counter | {{tokenizer}} | - | tiktoken cl100k or claude tokenizer |
+
+  | Graph library | networkx | 3.x | PageRank alpha=0.85 |'
+excluded_files: '| Pattern | Count | Reason |
+
+  |---------|-------|--------|
+
+  | .gitignore patterns | {{gitignore_count}} | User-excluded |
+
+  | Binary files | {{binary_count}} | Not parseable |
+
+  | Generated files (.pb.go, *_generated.) | {{gen_count}} | Noise |
+
+  | Files > 100KB | {{large_count}} | Too large for symbol extraction |
+
+  | Lock files | {{lock_count}} | No symbols |'

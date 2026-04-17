@@ -52,7 +52,7 @@ Instructions are operational recipes that transform a defined start state into a
 |-------------|-------------|
 | No input contract | LLM guesses variable types; inconsistent output |
 | Compound steps | Two actions in one step; ambiguous failure point |
-| Prose output description | Use literal template with {{variables}} instead |
+| Prose output description | Use literal template with `{{variables}}` instead |
 | Missing validation phase | No quality check; output quality unverified |
 | No examples | At least 1 complete I/O example required |
 | Identity mixed with task | Identity = system_prompt; task = instruction |

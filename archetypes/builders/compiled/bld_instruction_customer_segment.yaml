@@ -1,0 +1,41 @@
+kind: instruction
+id: bld_instruction_customer_segment
+pillar: P03
+llm_function: REASON
+purpose: Step-by-step production process for customer_segment
+quality: null
+title: Instruction Customer Segment
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- customer_segment
+- builder
+- instruction
+tldr: Step-by-step production process for customer_segment
+domain: customer_segment construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+phase_1_research:
+- 'Define segment objectives: Align with P02 goals and business constraints.'
+- 'Collect firmographic data: Industry, company size, revenue, geography, tech stack.'
+- 'Identify customer needs: Map pain points, workflows, and KPIs via interviews/surveys.'
+- 'Analyze constraints: Legal, technical, or operational barriers to adoption.'
+- 'Prioritize segments: Rank by alignment with product value proposition and scalability.'
+- 'Validate with stakeholders: Confirm assumptions with sales, product, and customer success.'
+phase_2_compose:
+- 'Outline structure: Use bld_schema_customer_segment.md headers (e.g., Segment Name, Firmographics, Needs).'
+- 'Populate firmographics: Include industry verticals, company size ranges, and geographic focus.'
+- 'Detail customer needs: Specify use cases, desired outcomes, and success metrics.'
+- 'Define constraints: List technical, financial, or regulatory limitations for the segment.'
+- 'Align with ICP: Cross-reference with bld_output_template_customer_segment.md for consistency.'
+- 'Add examples: Include 2-3 representative customer profiles (e.g., SaaS startup, enterprise retailer).'
+- 'Review for clarity: Ensure language is actionable and free of jargon.'
+- 'Finalize artifact: Format per bld_schema_customer_segment.md and bld_output_template_customer_segment.md guidelines.'
+- 'Document sources: Cite research data, interviews, and validation steps.'
+phase_3_validate:
+- '[ ] [OK] All data aligns with bld_schema_customer_segment.md and bld_output_template_customer_segment.md'
+- '[ ] [OK] Firmographics and needs are specific, measurable, and actionable'
+- '[ ] [OK] No contradictions with existing product constraints or roadmaps'
+- '[ ] [OK] Data sources cited and stakeholder review scheduled'
+- '[ ] [OK] Artifact is reusable for marketing, sales, and product planning'

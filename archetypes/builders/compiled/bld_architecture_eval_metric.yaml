@@ -1,0 +1,63 @@
+kind: architecture
+id: bld_architecture_eval_metric
+pillar: P08
+llm_function: CONSTRAIN
+purpose: Component map of eval_metric -- inventory, dependencies
+quality: null
+title: Architecture Eval Metric
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- eval_metric
+- builder
+- architecture
+tldr: Component map of eval_metric -- inventory, dependencies
+domain: eval_metric construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+component_inventory: '| ISO Name             | Role                          | Pillar | Status  |
+
+  |----------------------|-------------------------------|--------|---------|
+
+  | bld_manifest         | Defines evaluation structure  | P07    | Active  |
+
+  | bld_instruction      | Specifies construction rules  | P07    | Active  |
+
+  | bld_system_prompt    | Guides metric generation logic| P07    | Active  |
+
+  | bld_schema           | Enforces data format standards| P07    | Active  |
+
+  | bld_quality_gate     | Validates metric compliance   | P07    | Active  |
+
+  | bld_output_template  | Structures result formatting  | P07    | Active  |
+
+  | bld_examples         | Provides sample metric outputs| P07    | Active  |
+
+  | bld_knowledge_card   | Embeds domain-specific rules  | P07    | Active  |
+
+  | bld_architecture     | Maps metric to system layers  | P07    | Active  |
+
+  | bld_collaboration    | Coordinates cross-component workflows | P07 | Active  |
+
+  | bld_config           | Stores builder parameters     | P07    | Active  |
+
+  | bld_memory           | Maintains state across builds | P07    | Active  |
+
+  | bld_tools            | Integrates external validation| P07    | Active  |'
+dependencies: '| From             | To               | Type         |
+
+  |------------------|------------------|--------------|
+
+  | bld_manifest     | bld_instruction  | Reference    |
+
+  | bld_schema       | bld_quality_gate | Validation   |
+
+  | bld_output_template | bld_examples   | Dependency   |
+
+  | bld_tools        | JSON Schema Validator | External |
+
+  | bld_config       | bld_memory       | Configuration|'
+architectural_position: eval_metric sits at the core of P07's CEX pillar, ensuring evaluation metrics are rigorously constructed,
+  validated, and aligned with system prompts, quality gates, and domain-specific knowledge. It bridges builder components
+  with external tools, enabling consistent metric generation across compliance, performance, and collaboration workflows.

@@ -3,13 +3,14 @@ id: tpl_template_registry
 kind: context_doc
 title: "Template Registry — Instance Extraction Templates"
 version: 1.0.0
-quality: null
+quality: 9.1
 created: 2026-04-07
 author: n03_builder
 purpose: Index of all universal templates extracted from gato-ao-cubo patterns
 density_score: 0.95
 tags: [registry, templates, instance-extraction, mustache]
 tldr: "Master registry of 17 templates extracted from gato-ao-cubo → main. All use {{mustache}} variables filled by brand_inject.py or /init."
+updated: "2026-04-13"
 ---
 
 # Template Registry

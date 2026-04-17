@@ -1,0 +1,62 @@
+---
+kind: quality_gate
+id: p09_qg_sso_config
+pillar: P11
+llm_function: GOVERN
+purpose: Quality gate with HARD and SOFT scoring for sso_config
+quality: 9.1
+title: "Quality Gate Sso Config"
+version: "1.0.0"
+author: wave1_builder_gen_v2
+tags: [sso_config, builder, quality_gate]
+tldr: "Quality gate with HARD and SOFT scoring for sso_config"
+domain: "sso_config construction"
+created: "2026-04-14"
+updated: "2026-04-14"
+density_score: 0.85
+---
+
+## Definition
+| metric         | threshold                                      | operator | scope  |
+|----------------|------------------------------------------------|----------|--------|
+| schema ID      | ^p09_sso_[a-z][a-z0-9_]+.yaml$                | matches  | H02    |
+
+## HARD Gates
+| ID   | Check                          | Fail Condition                                      |
+|------|--------------------------------|-----------------------------------------------------|
+| H01  | YAML frontmatter valid         | Missing or invalid YAML frontmatter                 |
+| H02  | ID matches pattern             | ID does not match ^p09_sso_[a-z][a-z0-9_]+.yaml$   |
+| H03  | kind field matches 'sso_config'| kind is not 'sso_config'                            |
+| H04  | idp_entity_id present          | Missing idp_entity_id                               |
+| H05  | acs_url present                | Missing acs_url                                     |
+| H06  | protocols include SAML/OIDC    | Protocols do not include SAML or OIDC               |
+| H07  | certificates array valid       | Certificates array missing or invalid               |
+| H08  | slo_url present                | Missing slo_url                                     |
+| H09  | metadata_url present           | Missing metadata_url                                |
+| H10  | no duplicate config IDs        | Duplicate ID in config                              |
+
+## SOFT Scoring
+| Dim | Dimension              | Weight | Scoring Guide                                      |
+|-----|------------------------|--------|----------------------------------------------------|
+| D1  | Configuration completeness | 0.15   | All required fields present                        |
+| D2  | Protocol support       | 0.15   | Supports SAML/OIDC                                 |
+| D3  | Certificate validity   | 0.15   | Certificates valid and up-to-date                  |
+| D4  | Security practices     | 0.15   | Uses HTTPS, no hardcoded secrets                   |
+| D5  | Documentation          | 0.10   | Includes metadata and troubleshooting guides       |
+| D6  | Error handling         | 0.10   | Defines error codes and recovery procedures        |
+| D7  | Scalability            | 0.10   | Supports high-concurrency use cases                |
+| D8  | Compliance             | 0.10   | Meets industry standards (e.g., ISO 27001)         |
+
+## Actions
+| Score   | Action                          |
+|---------|---------------------------------|
+| GOLDEN  | Auto-approve and deploy         |
+| PUBLISH | Manual review before deployment |
+| REVIEW  | Flag for security audit         |
+| REJECT  | Block and require rework        |
+
+## Bypass
+| conditions                  | approver         | audit trail             |
+|-----------------------------|------------------|-------------------------|
+| Emergency fix required      | Security Lead    | Documented in JIRA      |
+| Legacy system compatibility | Architect        | Signed-off in audit log |

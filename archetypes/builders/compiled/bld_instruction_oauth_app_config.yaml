@@ -1,0 +1,41 @@
+kind: instruction
+id: bld_instruction_oauth_app_config
+pillar: P03
+llm_function: REASON
+purpose: Step-by-step production process for oauth_app_config
+quality: null
+title: Instruction Oauth App Config
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- oauth_app_config
+- builder
+- instruction
+tldr: Step-by-step production process for oauth_app_config
+domain: oauth_app_config construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+phase_1_research:
+- Identify partner integration requirements (scopes, redirect URIs).
+- Document required OAuth2/PKCE flow variants (implicit, authorization code).
+- Determine token lifetime constraints (access/refresh token durations).
+- Analyze partner compliance with OIDC or OAuth2.0 specifications.
+- Map refresh policy rules (e.g., sliding expiration, token rotation).
+- Verify redirect URI formats (HTTPS, registered domains).
+phase_2_compose:
+- Define `client_id` and `client_secret` per partner.
+- Enumerate `scopes` using SCHEMA.md's `scope` enum values.
+- Specify `redirect_uris` array with exact URI strings.
+- Set `access_token_lifetime` in seconds (min 300, max 86400).
+- Configure `refresh_token_lifetime` (min 604800, max 2592000).
+- Assign `refresh_policy` from SCHEMA.md's `refresh_policy` enum.
+- Include `pkce_required` boolean flag (true for PKCE enforcement).
+- Add `audience` field for API target identification.
+- Finalize using OUTPUT_TEMPLATE.md structure with YAML formatting.
+phase_3_validate:
+- '[ ] ✅ Schema compliance checked via `jsonschema` validator.'
+- '[ ] ✅ All required fields (`client_id`, `scopes`, etc.) present.'
+- '[ ] ✅ Redirect URIs match registered domains and use HTTPS.'
+- '[ ] ✅ Token lifetimes within configured min/max bounds.'
+- '[ ] ✅ Refresh policy aligns with enum values and partner needs.'

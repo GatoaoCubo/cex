@@ -1,0 +1,42 @@
+kind: instruction
+id: bld_instruction_healthcare_vertical
+pillar: P03
+llm_function: REASON
+purpose: Step-by-step production process for healthcare_vertical
+quality: null
+title: Instruction Healthcare Vertical
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- healthcare_vertical
+- builder
+- instruction
+tldr: Step-by-step production process for healthcare_vertical
+domain: healthcare_vertical construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+phase_1_research:
+- Study HIPAA compliance requirements for data encryption and access controls.
+- Analyze HL7/FHIR standards for interoperability in EHR systems.
+- Map PHI (Protected Health Information) handling workflows in clinical settings.
+- Identify use cases for secure data exchange between hospitals and insurers.
+- Evaluate risks in non-compliant data processing for healthcare applications.
+- Review industry benchmarks for healthcare data privacy and security.
+phase_2_compose:
+- Align artifact structure with bld_schema_healthcare_vertical.md's data models.
+- Define PHI fields using FHIR resources (e.g., Patient, Encounter, Observation).
+- Implement HIPAA-compliant encryption protocols (AES-256 at rest, TLS 1.2+ in transit).
+- Write use cases for telemedicine, remote patient monitoring, and clinical decision support.
+- Reference HL7 v2.x messaging formats (ADT, ORU) for legacy system integration.
+- Embed audit logging requirements per HIPAA Security Rule (45 CFR 164.312(b)).
+- Use bld_output_template_healthcare_vertical.md to format artifact with metadata headers.
+- Validate terminology against SNOMED-CT and LOINC standards.
+- Finalize artifact with BAA requirements, Safe Harbor de-identification, and versioning metadata.
+phase_3_validate:
+- '[ ] [OK] Confirm HIPAA Privacy + Security Rule compliance (45 CFR 164).'
+- '[ ] [OK] Verify HL7/FHIR R4 conformance using FHIR Validator tool.'
+- '[ ] [OK] Ensure PHI de-identification follows Safe Harbor (18 identifiers removed per 45 CFR 164.514(b)).'
+- '[ ] [OK] Test use cases against bld_schema_healthcare_vertical.md validation rules.'
+- '[ ] [OK] Cross-check artifact against bld_output_template_healthcare_vertical.md structure.'
+- '[ ] [OK] Verify BAA requirements documented if covered entity relationship exists.'

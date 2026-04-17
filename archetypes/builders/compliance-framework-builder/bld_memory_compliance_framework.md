@@ -1,0 +1,33 @@
+---
+kind: learning_record
+id: p10_lr_compliance_framework_builder
+pillar: P10
+llm_function: INJECT
+purpose: Learned patterns and pitfalls for compliance_framework construction
+quality: 8.7
+title: "Learning Record Compliance Framework"
+version: "1.0.0"
+author: wave1_builder_gen
+tags: [compliance_framework, builder, learning_record]
+tldr: "Learned patterns and pitfalls for compliance_framework construction"
+domain: "compliance_framework construction"
+created: "2026-04-13"
+updated: "2026-04-13"
+density_score: 0.85
+---
+
+## Observation
+Common issues include fragmented regulatory mapping, inconsistent attestation criteria, and misalignment between AI system components and jurisdiction-specific requirements. Overlooking dynamic regulatory updates often leads to outdated compliance frameworks.
+
+## Pattern
+Structured templates that map regulations to AI system workflows improve clarity. Cross-functional collaboration between legal and technical teams ensures alignment with both regulatory intent and implementation realities.
+
+## Evidence
+Reviewed artifacts showed success with frameworks that explicitly link GDPR and AI Act requirements to data processing modules, supported by version-controlled attestation logs.
+
+## Recommendations
+- Use modular compliance templates to adapt to evolving regulations.
+- Integrate automated tools for real-time regulatory update tracking.
+- Involve legal experts during framework design to ensure interpretive accuracy.
+- Document attestation processes with auditable evidence (e.g., third-party validations).
+- Maintain a centralized repository for regulatory mappings and compliance artifacts.

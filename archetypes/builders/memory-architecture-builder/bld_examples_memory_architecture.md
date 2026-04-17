@@ -1,0 +1,85 @@
+---
+kind: examples
+id: bld_examples_memory_architecture
+pillar: P07
+llm_function: GOVERN
+purpose: Golden and anti-examples of memory_architecture artifacts
+quality: 8.9
+title: "Examples: memory_architecture artifacts"
+version: "2.0.0"
+author: n06_commercial
+tags: [memory_architecture, builder, examples]
+tldr: "Golden example: 4-layer MemGPT-style agent with tier matrix and eviction. Anti-examples: hardware memory (wrong domain) and flat no-eviction design."
+domain: "LLM agent memory systems"
+created: "2026-04-14"
+updated: "2026-04-14"
+density_score: 0.90
+---
+
+## Golden Example: Customer Support Agent (PRO tier)
+
+```yaml
+---
+id: p10_marc_customer_support_pro
+kind: memory_architecture
+pillar: P10
+title: "Memory Architecture: Customer Support Agent (PRO)"
+version: "1.0.0"
+created: "2026-04-14"
+updated: "2026-04-14"
+author: n06_commercial
+domain: "customer-support"
+quality: null
+tags: [memory_architecture, customer_support, pro]
+tldr: "4-layer memory for B2C support agent: working context + episodic (pgvector) + semantic (Redis JSON) + procedural (Redis KV). PRO tier."
+layers: [working, episodic, semantic, procedural]
+tier: pro
+system_ref: memgpt
+retention_days: 90
+consolidation_enabled: true
+---
+```
+
+**Why golden**: all required frontmatter, 4 layers defined, tier=pro, system_ref cited,
+retention_days set, consolidation_enabled. Body includes read/write pipelines, eviction
+per layer, and FREE/PRO/ENTERPRISE tier matrix. No hardware memory content.
+
+## Anti-Example 1: Hardware Memory Contamination (D04 domain hallucination)
+
+```yaml
+---
+id: p10_marc_server_memory
+kind: memory_architecture
+title: "DDR5 Memory Architecture with CXL 3.0"
+memory_type: DRAM
+capacity: 4294967296
+access_time: 50.0
+---
+```
+
+**Why it fails**:
+- `memory_type: DRAM` -- hardware memory field, not agent memory
+- `capacity: bytes` -- byte capacity is for DRAM, not LLM context
+- `access_time: nanoseconds` -- hardware latency, not retrieval latency
+- No `layers` field, no `tier` field, no `system_ref`
+- Content describes JEDEC DDR5, CXL interconnects -- wrong domain entirely
+
+## Anti-Example 2: Flat Design with No Eviction Policy
+
+```yaml
+---
+id: p10_marc_flat_no_eviction
+kind: memory_architecture
+title: "Agent Memory (everything stored forever)"
+layers: [working]
+---
+## Memory
+Store all conversations in a list. Never delete.
+```
+
+**Why it fails**:
+- Only working layer -- no episodic/semantic persistence
+- No eviction policy -- unbounded storage growth
+- No tier matrix -- misses commercial differentiation
+- No backend specified -- not implementable
+- Fails H06 (no tier matrix) and scores 0.0 on D3 (commercial differentiation)

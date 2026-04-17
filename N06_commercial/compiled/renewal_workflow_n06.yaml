@@ -1,0 +1,77 @@
+id: renewal_workflow_n06
+kind: renewal_workflow
+pillar: P12
+nucleus: n06
+title: Renewal Workflow -- Automated Renewal and Retention Orchestration
+version: 1.0.0
+quality: null
+tags:
+- renewal
+- workflow
+- retention
+- orchestration
+- commercial
+- automated
+density_score: 1.0
+updated: '2026-04-17'
+purpose: 'Automates the full renewal lifecycle: from early signal detection through close or win-back. Renewals are NOT passive
+  events -- they are actively managed revenue moments with defined trigger sequences, escalation protocols, and success criteria.'
+workflow_architecture: "DETECT: renewal_date - 30 days\n    |\n    v\nASSESS: pull customer entity -> health_score, churn_risk,\
+  \ expansion_potential\n    |\n    +-- health >= 70, risk low -> STANDARD track\n    |\n    +-- health 40-70, risk medium\
+  \ -> ENGAGEMENT track\n    |\n    +-- health < 40, risk high -> SAVE track\n    |\n    v\nEXECUTE track-specific sequence\n\
+  \    |\n    v\nMEASURE outcome: renewed | upgraded | downgraded | churned\n    |\n    v\nUPDATE entity + signal + log"
+track_standard_health_70_risk_low: "Day -30: Renewal value email\n  Subject: \"Your [tier] renewal is coming up -- here's\
+  \ what you've built\"\n  Content:\n    - Usage recap: \"You ran [N] builds this month, saving ~[hours] hours\"\n    - Value\
+  \ delivered: top artifact types by frequency\n    - Annual upgrade offer: \"Switch to annual and get [months] months free\"\
+  \n  CTA: [Renew annual] | [Keep monthly]\n\nDay -7: Renewal reminder\n  Subject: \"Your renewal renews in 7 days\"\n  Content:\
+  \ brief reminder + annual offer still available\n  CTA: [Manage subscription]\n\nDay 0: Stripe auto-charges (no action if\
+  \ payment succeeds)\n\nDay +1: Success confirmation\n  Subject: \"You're all set for another [period]\"\n  Content: \"Here's\
+  \ what's coming for [month]: [planned improvements]\""
+track_engagement_health_40_70_risk_medium: "Day -30: Personalized reactivation email\n  Subject: \"We noticed you haven't\
+  \ used [underutilized feature]\"\n  Content:\n    - Specific usage gap identified\n    - Tutorial or quick-win for that\
+  \ feature\n    - \"Before you renew, let us show you what you might be missing\"\n  CTA: [Book 15-min session] | [Watch\
+  \ tutorial]\n\nDay -14: CSM review\n  Action: CSM reviews entity, decides:\n    - If fixable engagement gap: book customer\
+  \ call\n    - If low value fit: let renew without touch (low priority save)\n    - If confused/frustrated: proactive outreach\n\
+  \nDay -7: Save offer (if engagement gap unresolved)\n  Subject: \"We want to make sure CEX is working for you\"\n  Content:\n\
+  \    - Acknowledge they may not be getting full value\n    - Offer: 30-min onboarding session (value: $299, free for them)\n\
+  \    - Pair with: 1 month free credit if they complete the session\n  CTA: [Book session + claim credit]\n\nDay -3: Final\
+  \ renewal reminder + feature highlight\nDay 0: Auto-renewal\n\nDay +1-7: Activation check\n  If session completed: monitor\
+  \ builds/week for next 14 days\n  If no improvement: escalate to SAVE track for next renewal"
+track_save_health_40_risk_high: "Day -30: CSM priority assignment\n  Action: CSM assigned within 24h of detection\n  CSM brief\
+  \ includes:\n    - Full entity dump (health, churn signals, usage history)\n    - Recommended save offer\n    - Decision:\
+  \ fight for renewal OR let churn gracefully\n\nDay -21: CSM outreach call\n  Script: \"We noticed your usage has changed\
+  \ -- are we still solving the right problem for you?\"\n  Listen for: project ended | team change | budget cut | competitor\
+  \ switch\n  Respond with: appropriate save play from churn_prevention_playbook\n\nDay -14: Save offer deployed\n  Based\
+  \ on stated reason:\n    - Budget: annual at 20% off + 1 month free = ~37% effective discount\n    - Project ended: pause\
+  \ option (2 months pause at 50% rate)\n    - Missing feature: roadmap commitment + free PRO upgrade if feature lands\n \
+  \   - Competitor: competitive objection handling\n\nDay -7: Follow-up if offer not accepted\n  Options:\n    a. Escalate\
+  \ to exec sponsor\n    b. Downgrade to lower tier (preserve revenue)\n    c. Accept churn gracefully + set win-back sequence\n\
+  \nDay 0: Outcome logged"
+outcome_measurement: "renewal_outcomes:\n  renewed_same_tier:\n    outcome: base\n    nrr_impact: 100% (neutral)\n    follow_up:\
+  \ annual upgrade offer at day 60\n  \n  renewed_upgraded:\n    outcome: expansion\n    nrr_impact: >100% (positive)\n  \
+  \  follow_up: activation check for new tier features\n  \n  renewed_downgraded:\n    outcome: contraction\n    nrr_impact:\
+  \ <100% (negative, better than churn)\n    follow_up: engagement track for next renewal\n  \n  churned:\n    outcome: lost\n\
+  \    nrr_impact: 0% (fully negative)\n    follow_up: win-back sequence at 30, 60, 90 days"
+win_back_sequence_post_churn: "Day 30 post-churn: \"We've been busy since you left\" email\n  Content: top 3 improvements\
+  \ since they churned\n  CTA: See what's new (no direct sales push)\n\nDay 60: \"Special offer for former [tier] customers\"\
+  \n  Content: 50% off first month + preserved data reactivation\n  CTA: Come back at 50% off (48h limit)\n\nDay 90: Final\
+  \ win-back\n  Content: \"Last chance to reclaim your [brand_config / builds / data] at [tier] pricing\"\n  CTA: Reactivate\
+  \ with 1 month free trial\n\nDay 180: Archive + remove from active sequences"
+metrics: '| Metric | Formula | Target |
+
+  |--------|---------|--------|
+
+  | Gross revenue retention | (MRR_renewed) / (MRR_up_for_renewal) | >90% |
+
+  | Net revenue retention | (renewed + expansion - contraction) / MRR_up | >110% |
+
+  | Renewal rate | accounts_renewed / accounts_up | >85% |
+
+  | Save rate | accounts_saved / save_attempts | >40% |
+
+  | Win-back rate | accounts_reactivated / churned | >10% |'
+related_artifacts:
+- '`churn_prevention_playbook_n06.md` -- save plays by signal type'
+- '`entity_memory_customer.md` -- health score and churn risk source'
+- '`eval_metric_commercial.md` -- renewal KPIs tracked here'
+- '`procedural_memory_n06.md` -- PROC-004 renewal management'

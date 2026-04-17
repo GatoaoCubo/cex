@@ -31,12 +31,12 @@ density_score: 0.90
 ## Naming Convention
 | Scope | Convention | Example |
 |-------|-----------|---------|
-| Config file | `social_publisher_config_{empresa_slug}.yaml` | `social_publisher_config_gato3.yaml` |
+| Config file | `social_publisher_config_{empresa_slug}.yaml` | `social_publisher_config_{{BRAND_NAME}}.yaml` |
 | Template | `tpl_social_publisher.md` | P04_tools/templates/ |
 | Examples | `ex_social_publisher_{niche}.md` | `ex_social_publisher_pet_shop.md` |
 | Compiled | `social_publisher_{slug}.yaml` | P04_tools/compiled/ |
 | Instance | `social_publisher_config.md` | _instances/{company}/N02_marketing/ |
-| Frontmatter id | `p04_cli_social_publisher_{slug}` | `p04_cli_social_publisher_gato3` |
+| Frontmatter id | `p04_cli_social_publisher_{slug}` | `p04_cli_social_publisher_{{BRAND_NAME}}` |
 
 ## Size Limits
 | Artifact | Max Size | Rationale |
@@ -65,9 +65,9 @@ density_score: 0.90
 | Template | P04_tools/templates/ | P04 |
 | Examples | P04_tools/examples/ | P04 |
 | Compiled | P04_tools/compiled/ | P04 |
-| Nucleus tool | N02_marketing/tools/ | P04 |
-| Nucleus KC | N02_marketing/knowledge/ | P01 |
-| Nucleus dispatch | N02_marketing/orchestration/ | P12 |
+| Nucleus tool | N02_marketing/P04_tools/ | P04 |
+| Nucleus KC | N02_marketing/P01_knowledge/ | P01 |
+| Nucleus dispatch | N02_marketing/P12_orchestration/ | P12 |
 | Company config | _instances/{co}/N02_marketing/ | instance |
 
 ## Security Rules

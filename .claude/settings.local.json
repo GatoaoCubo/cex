@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git checkout *)",
+      "Bash(rm -f .claude/compiled/8f-reasoning.yaml n07_task.md)"
+    ]
+  }
+}

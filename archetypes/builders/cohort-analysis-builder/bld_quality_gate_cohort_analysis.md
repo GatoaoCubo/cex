@@ -1,0 +1,60 @@
+---
+kind: quality_gate
+id: p07_qg_cohort_analysis
+pillar: P11
+llm_function: GOVERN
+purpose: Quality gate with HARD and SOFT scoring for cohort_analysis
+quality: 9.0
+title: "Quality Gate Cohort Analysis"
+version: "1.0.0"
+author: wave1_builder_gen_v2
+tags: [cohort_analysis, builder, quality_gate]
+tldr: "Quality gate with HARD and SOFT scoring for cohort_analysis"
+domain: "cohort_analysis construction"
+created: "2026-04-14"
+updated: "2026-04-14"
+density_score: 0.85
+---
+
+## Definition
+| metric         | threshold | operator | scope         |
+|----------------|-----------|----------|---------------|
+| retention_rate | 0.3       | >=       | per cohort    |
+| ltv_model_r2   | 0.7       | >=       | per user segment |
+
+## HARD Gates
+| ID      | Check                     | Fail Condition                              |
+|---------|---------------------------|---------------------------------------------|
+| H01     | YAML frontmatter valid    | Missing or invalid frontmatter              |
+| H02     | ID matches pattern        | ID does not match ^p07_ca_[a-z][a-z0-9_]+.yaml$ |
+| H03     | kind field matches        | kind ≠ 'cohort_analysis'                   |
+| H04     | cohort_key defined        | cohort_key missing or invalid               |
+| H05     | retention_window defined  | retention_window missing or < 1 day        |
+| H06     | ltv_window defined        | ltv_window missing or < 30 days            |
+| H07     | metrics field valid       | metrics missing or not a list              |
+| H08     | dimensions field valid    | dimensions missing or not a list           |
+
+## SOFT Scoring
+| Dim         | Dimension               | Weight | Scoring Guide                          |
+|-------------|-------------------------|--------|----------------------------------------|
+| D01         | Data completeness       | 0.15   | 1.0 if 100% data, 0.5 if 50%           |
+| D02         | Metric accuracy         | 0.15   | 1.0 if metrics align with business KPIs|
+| D03         | Cohort definition clarity | 0.10 | 1.0 if cohort_key is unambiguous       |
+| D04         | Retention window validity | 0.10 | 1.0 if window ≥ 1 day                  |
+| D05         | LTV model validity      | 0.15   | 1.0 if R² ≥ 0.7                        |
+| D06         | Aggregation method      | 0.10   | 1.0 if method is documented and valid  |
+| D07         | Analysis type           | 0.10   | 1.0 if 'retention' or 'ltv' specified  |
+| D08         | Dimension relevance     | 0.15   | 1.0 if dimensions correlate with KPIs  |
+
+## Actions
+| Score     | Action         |
+|-----------|----------------|
+| GOLDEN    | Auto-publish   |
+| PUBLISH   | Manual review  |
+| REVIEW    | Flag for QA    |
+| REJECT    | Block deployment |
+
+## Bypass
+| conditions                  | approver | audit trail              |
+|-----------------------------|----------|--------------------------|
+| Experimental schema         | CTO      | Note: "Bypassed for testing" |

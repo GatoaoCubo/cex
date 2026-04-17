@@ -1,0 +1,34 @@
+kind: examples
+id: bld_examples_trajectory_eval
+pillar: P07
+llm_function: GOVERN
+purpose: Golden and anti-examples of trajectory_eval artifacts
+quality: null
+title: Examples Trajectory Eval
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- trajectory_eval
+- builder
+- examples
+tldr: Golden and anti-examples of trajectory_eval artifacts
+domain: trajectory_eval construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+golden_example: "---\ncex_kind: trajectory_eval\ntitle: \"Trajectory Evaluation of RL Agent in Maze Navigation\"\ndescription:\
+  \ \"Evaluation of a reinforcement learning agent's trajectory in a simulated maze environment using Stable Baselines3 and\
+  \ Gym.\"\ntags: [reinforcement_learning, trajectory_analysis, gym]\n---\n\nMethodology:\n- Environment: OpenAI Gym's `MiniGrid-Maze-10x10-v0`\n\
+  - Agent: PPO algorithm implemented with Stable Baselines3 (version 2.0.0)\n- Evaluation Metrics:\n  - Path efficiency (shortest\
+  \ path vs. taken path)\n  - Collision rate\n  - Time to goal\n- Setup: 100 episodes, 5 random seeds, 1000 steps per episode\n\
+  - Results:\n  - Average path efficiency: 85%\n  - Collision rate: 2.3%\n  - Time to goal: 120 steps (±15)"
+anti_example_1_confusing_with_static_benchmark: "---\ncex_kind: trajectory_eval\ntitle: \"Static Benchmark for Language Model\"\
+  \ndescription: \"Evaluation of a language model on GLUE benchmark tasks.\"\ntags: [nlp, benchmark]\n---\n\nMethodology:\n\
+  - Model: Hugging Face's `bert-base-uncased`\n- Tasks: MNLI, SST-2, QQP\n- Metrics: Accuracy, F1 score\n- Results:\n  - MNLI:\
+  \ 87% accuracy\n  - SST-2: 92% accuracy"
+why_it_fails: The example lacks critical details about the environment, agent, and evaluation setup. Metrics like "success
+  rate" are vague without context, making the evaluation non-reproducible and unverifiable.
+anti_example_2_missing_environment_details: "---\ncex_kind: trajectory_eval\ntitle: \"Unspecified Agent Evaluation\"\ndescription:\
+  \ \"Evaluation of an unspecified agent in an unspecified environment.\"\ntags: [unknown]\n---\n\nMethodology:\n- Agent:\
+  \ [Not specified]\n- Environment: [Not specified]\n- Metrics:\n  - \"Success rate\"\n  - \"Reward\"\n- Results:\n  - \"\
+  Success rate: 70%\""

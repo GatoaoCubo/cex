@@ -1,0 +1,62 @@
+---
+kind: architecture
+id: bld_architecture_model_architecture
+pillar: P08
+llm_function: CONSTRAIN
+quality: 9.1
+title: "Architecture Model Architecture"
+version: "1.0.0"
+author: n05_builder
+tags: [model_architecture, architecture, P08, builder]
+tldr: "Architecture of model-architecture-builder: pillar, naming, size constraints, 8F integration."
+domain: "model_architecture construction"
+created: "2026-04-13"
+updated: "2026-04-13"
+density_score: 0.88
+---
+
+# Architecture: model_architecture
+
+## Pillar Placement
+| Attribute | Value |
+|-----------|-------|
+| Pillar | P02 (Model) |
+| Rationale | model_architecture defines neural network structure -- core model artifact |
+| Adjacent pillars | P07 (benchmarks), P01 (domain knowledge), P09 (serving config) |
+
+## Naming Convention
+| Component | Pattern | Example |
+|-----------|---------|---------|
+| Artifact ID | `p02_ma_[family]_[scale]` | `p02_ma_llama_7b` |
+| File name | `p02_ma_[family]_[scale].md` | `p02_ma_llama_7b.md` |
+| Builder ISOs | `bld_[type]_model_architecture.md` | `bld_instruction_model_architecture.md` |
+| Directory | `P02_model/architectures/` | standard pillar location |
+
+## Size Constraints
+| Component | Limit | Rationale |
+|-----------|-------|-----------|
+| Artifact body | 4096 bytes | Concise spec, not implementation |
+| Instruction ISO | 8192 bytes | Process guidance needs more space |
+| Other ISOs | 6144 bytes | Standard ISO limit |
+
+## 8F Pipeline Integration
+| Stage | model_architecture Role |
+|-------|------------------------|
+| F1 CONSTRAIN | kind=model_architecture, pillar=P02, schema loaded |
+| F2 BECOME | model-architecture-builder loaded (13 ISOs) |
+| F3 INJECT | kc_model_architecture + similar specs + domain KCs |
+| F4 REASON | plan sections: overview + layers + connectivity + params + compute |
+| F5 CALL | retriever finds similar architectures |
+| F6 PRODUCE | complete artifact with all required sections |
+| F7 GOVERN | 10 HARD gates, density >= 0.85 |
+| F8 COLLABORATE | save to P02, compile, commit, signal |
+
+## Relationship Map
+```
+model_architecture
+  |-- used_by --> finetune_config (training job spec)
+  |-- documented_in --> model_card (trained model docs)
+  |-- served_by --> model_provider (runtime routing)
+  |-- trained_via --> training_method (learning paradigm)
+  |-- evaluated_by --> benchmark (performance metrics)
+```

@@ -16,8 +16,8 @@ tags:
   - cognition
   - p11
 tldr: "Gates ensuring reasoning traces define complete step-evidence-confidence chains, record rejected alternatives, calibrate confidence scores, and contain no execution instructions."
+llm_function: GOVERN
 ---
-
 ## Definition
 A reasoning_trace is a structured decision record capturing WHY an agent chose a particular path. It passes this gate when every step has concrete evidence, confidence is calibrated to the 0.0-1.0 scale, at least one alternative is rejected with an evidence-based reason, the conclusion references the strongest evidence, and the trace contains no execution instructions or workflow logic.
 ## HARD Gates

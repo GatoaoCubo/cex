@@ -1,0 +1,51 @@
+kind: examples
+id: bld_examples_scoring_rubric
+pillar: P07
+llm_function: GOVERN
+purpose: Golden and anti-examples of scoring_rubric artifacts
+pattern: few-shot learning — LLM reads these before producing
+quality: 9.1
+title: Examples Scoring Rubric
+version: 1.0.0
+author: n03_builder
+tags:
+- scoring_rubric
+- builder
+- examples
+tldr: Golden and anti-examples for scoring rubric construction, demonstrating ideal structure and common pitfalls.
+domain: scoring rubric construction
+created: '2026-04-07'
+updated: '2026-04-07'
+density_score: 0.9
+golden_example: "INPUT: \"Create rubric de evaluation 5D para knowledge_cards\"\nOUTPUT:\nid: p07_sr_5d_knowledge_card\nkind:\
+  \ scoring_rubric\npillar: P07\ntitle: \"Rubric: 5D Knowledge Card\"\nversion: \"1.0.0\"\ncreated: \"2026-03-26\"\nupdated:\
+  \ \"2026-03-26\"\nauthor: \"builder\"\nframework: \"5D\"\ntarget_kinds: [knowledge_card]\ndimensions_count: 5\ntotal_weight:\
+  \ 100\nthreshold_golden: 9.5\nthreshold_publish: 8.0\nthreshold_review: 7.0\nautomation_status: \"semi-automated\"\ndomain:\
+  \ \"knowledge\"\nquality: null\ntags: [scoring-rubric, 5d, knowledge-card, evaluation]\ntldr: \"5-dimension rubric for KCs:\
+  \ density 25%, completeness 25%, actionability 20%, boundary 15%, references 15%\"\ndensity_score: 0.92\ncalibration_set:\
+  \ [p07_gt_kc_prompt_caching]\ninter_rater_agreement: 0.85\nappeals_process: \"Submit to p01-chief with rationale for re-evaluation\"\
+  \nlinked_artifacts:\n  primary: \"quality-gate-builder\"\n  related: [p11_qg_kc_publish, p07_gt_kc_prompt_caching]\n## Framework\
+  \ Overview\n5D evaluates knowledge_cards across 5 orthogonal dimensions.\nDesigned to complement the KC quality_gate (P11)\
+  \ which enforces HARD pass/fail.\nThis rubric provides the SOFT scoring framework for nuanced quality assessment.\n## Dimensions\n\
+  | Dimension | Weight | Scale | Criteria | Example (10) | Example (5) |\n|-----------|--------|-------|----------|-------------|-------------|\n\
+  | Density | 25% | 0-10 | Ratio of concrete data to total text >= 0.80 | 0.93 density, zero filler phrases | 0.65 density,\
+  \ has \"this document describes\" |\n| Completeness | 25% | 0-10 | All required sections present, >= 3 bullets each | 7\
+  \ sections, 4+ bullets, all fields filled | 4 sections, some empty, missing tags |\n| Actionability | 20% | 0-10 | Contains\
+  \ commands, code, or specific steps | 3 CLI commands, 2 code snippets, concrete steps | General advice, no specific commands\
+  \ |\n| Boundary | 15% | 0-10 | Clear IS/IS NOT, no drift to other types | Explicit boundary table, 3+ IS NOT rows | Vague\
+  \ scope, overlaps with other kinds |\n| References | 15% | 0-10 | >= 1 source URL, dates, verifiable claims | 3 URLs, all\
+  \ accessible, dated 2026 | No URLs, unverifiable claims |\n## Thresholds\n| Tier | Score | Action |\n|------|-------|--------|\n\
+  | GOLDEN | >= 9.5 | Promote to calibration set, mark as reference |\n| PUBLISH | >= 8.0 | Merge to pool |\n| REVIEW | >=\
+  \ 7.0 | Return with specific dimension feedback |\n| REJECT | < 7.0 | Redo from scratch with new research |\n## Calibration\n\
+  - GOLDEN (9.8): p07_gt_kc_prompt_caching — density 0.93, 7 sections, 3 URLs, explicit boundary\n- PUBLISH (8.3): typical\
+  \ KC with all sections, density 0.82, 1 URL, adequate boundary\n- REVIEW (7.2): KC with 5 sections, density 0.75, no URLs,\
+  \ vague boundary\n- REJECT (5.0): KC with 3 sections, density 0.50, filler prose, no boundary section\n## Automation\n|\
+  \ Dimension | Status | Tool |\n|-----------|--------|------|\n| Density | automated | validate_kc.py (char ratio calculation)\
+  \ |\n| Completeness | automated | validate_kc.py (section/field counting) |\n| Actionability | manual | Human review for\
+  \ command quality |\n| Boundary | semi-automated | Grep for IS/IS NOT patterns |\n| References | semi-automated | URL presence\
+  \ check + manual accessibility |\n## References\n- AAC&U VALUE Rubrics: https://www.aacu.org/initiatives/value-initiative\n\
+  - validate_kc.py v2.0 (CEX 5D implementation reference)\nWHY THIS IS GOLDEN:\n- quality: null (H06 pass)\n- id matches p07_sr_\
+  \ pattern (H02 pass)\n- kind: scoring_rubric (H04 pass)\n- 25 frontmatter fields present (H08 pass)\n- 5 dimensions with\
+  \ weights 25+25+20+15+15 = 100% (H07 pass)\n- All 4 tiers defined with score ranges and actions (H09 pass)\n- Criteria are\
+  \ concrete per dimension with examples at 10 and 5 (S03 pass)\n- Calibration section has examples at all 4 tiers (S05 pass)\n\
+  - Automation status per dimension with tool refs (S06 pass)"

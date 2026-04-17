@@ -1,0 +1,30 @@
+kind: output_template
+id: bld_output_template_sales_playbook
+pillar: P05
+llm_function: PRODUCE
+purpose: Template with vars for sales_playbook production
+quality: null
+title: Output Template Sales Playbook
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- sales_playbook
+- builder
+- output_template
+tldr: Template with vars for sales_playbook production
+domain: sales_playbook construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+strategies: '| Step | Action | Target |
+
+  |------|--------|--------|
+
+  | 1 | Identify high-value clients | {{client_segment}} <!-- Example: enterprise SaaS companies -->
+
+  | 2 | Schedule demo with CTO | {{demo_process}} <!-- Example: 30-min walkthrough -->
+
+  | 3 | Follow-up with tailored proposal | {{proposal_template}} <!-- Example: p03_sp_proposal_template.md -->'
+script_example: "def generate_proposal(client_name):\n    # {{script_logic}} <!-- Example: Fetch client data from CRM -->\n\
+  \    return f\"Proposal for {client_name} generated at {datetime.now()}\"\n\n<!-- Replace {{script_logic}} with actual code\
+  \ logic -->"

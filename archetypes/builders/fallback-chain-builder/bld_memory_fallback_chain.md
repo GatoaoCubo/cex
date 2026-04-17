@@ -23,6 +23,7 @@ observation_types: [user, feedback, project, reference]
 quality: 9.0
 title: "Memory Fallback Chain"
 density_score: 0.90
+llm_function: INJECT
 ---
 ## Summary
 A fallback chain is a sequence of model calls executed in order until one meets a quality threshold or the chain is exhausted. Without explicit timeout, cost, and quality fields on each step the chain becomes unpredictable under load. The terminal step must be a static response to guarantee resolution in all failure modes.

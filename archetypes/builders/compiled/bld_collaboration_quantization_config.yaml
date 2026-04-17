@@ -1,0 +1,42 @@
+kind: collaboration
+id: bld_collaboration_quantization_config
+pillar: P12
+llm_function: COLLABORATE
+purpose: How quantization_config-builder works in crews with other builders
+quality: null
+title: Collaboration Quantization Config
+version: 1.0.0
+author: wave1_builder_gen
+tags:
+- quantization_config
+- builder
+- collaboration
+tldr: How quantization_config-builder works in crews with other builders
+domain: quantization_config construction
+created: '2026-04-13'
+updated: '2026-04-13'
+density_score: 0.85
+crew_role: Defines precision parameters (bit-width, dtype, scaling) to optimize model inference speed and memory footprint
+  without altering architecture.
+receives_from: '| Builder | What | Format |
+
+  | :--- | :--- | :--- |
+
+  | model_architecture-builder | Target precision/dtype | JSON |
+
+  | hardware_profiler | Supported bit-widths | Schema |
+
+  | optimization_strategist | Accuracy/Latency targets | YAML |'
+produces_for: '| Builder | What | Format |
+
+  | :--- | :--- | :--- |
+
+  | quantization_engine | Quantization parameters | JSON |
+
+  | model_converter | Quantization mapping | YAML |
+
+  | deployment_orchestrator | Quantization metadata | JSON |'
+boundary:
+- Does NOT define model layers or weights (model_architecture-builder).
+- Does NOT handle context/KV cache compression (compression_config-builder).
+- Does NOT manage weight pruning (pruning_config-builder).

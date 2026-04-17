@@ -1,0 +1,97 @@
+id: p09_kc_prosody_config
+kind: knowledge_card
+type: kind
+pillar: P09
+title: Prosody Config -- Deep Knowledge for prosody_config
+version: 1.0.0
+created: 2026-04-15
+updated: 2026-04-15
+author: n05_selfheal
+quality: null
+tags: []
+density_score: 1.0
+introduction: Prosody configuration defines how speech synthesis systems modulate pitch, stress, and intonation to create
+  natural-sounding speech. This guide explains key parameters, best practices, and use cases for configuring prosody in text-to-speech
+  (TTS) systems.
+key_concepts: ''
+1_prosody_parameters:
+- 'Pitch: Vertical position of the voice (measured in Hz)'
+- 'Intonation: Rise/fall pattern of pitch across phrases'
+- 'Stress: Emphasis on syllables or words'
+- 'Rhythm: Timing and duration of speech segments'
+- 'Pause: Silence between words or phrases'
+2_configuration_scope:
+- 'Global: Applies to all text'
+- 'Sentence-level: Applies to entire sentences'
+- 'Word-level: Applies to specific words'
+- 'Phoneme-level: Applies to individual speech sounds'
+configuration_parameters: '| Parameter | Description | Data Type | Default | Example |
+
+  |----------|-------------|-----------|---------|---------|
+
+  | pitch | Base pitch frequency in Hz | float | 120.0 | 150.0 |
+
+  | pitchRange | Pitch variation range (Hz) | float | 20.0 | 30.0 |
+
+  | intonation | Intonation pattern (up/down/flat) | string | "neutral" | "rising" |
+
+  | stress | Stress level (0-100) | integer | 50 | 75 |
+
+  | pause | Pause duration in seconds | float | 0.5 | 1.2 |
+
+  | rhythm | Rhythm pattern (fast/normal/slow) | string | "normal" | "fast" |'
+example_configurations: ''
+1_basic_configuration: "prosody:\n  pitch: 120.0\n  pitchRange: 20.0\n  intonation: neutral\n  stress: 50\n  pause: 0.5\n\
+  \  rhythm: normal"
+2_sentence_level_configuration: "prosody:\n  sentence:\n    pitch: 130.0\n    intonation: rising\n    stress: 70\n    pause:\
+  \ 1.0"
+3_word_level_configuration: "prosody:\n  words:\n    - word: \"important\"\n      stress: 90\n      pitch: 140.0\n    - word:\
+  \ \"never\"\n      stress: 60\n      pitchRange: 25.0"
+best_practices:
+- 'Use context-aware parameters: Adjust pitch based on sentence structure'
+- 'Balance stress and pause: Avoid over-stressing words'
+- 'Match intonation to content: Use rising intonation for questions'
+- 'Test with different rhythms: Find optimal pacing for content'
+- 'Use phoneme-level controls for precision: For technical documentation'
+use_cases: ''
+1_news_broadcasting: "prosody:\n  pitch: 140.0\n  pitchRange: 15.0\n  intonation: flat\n  stress: 40\n  pause: 0.8\n  rhythm:\
+  \ fast"
+2_educational_content: "prosody:\n  pitch: 130.0\n  pitchRange: 25.0\n  intonation: rising\n  stress: 60\n  pause: 0.6\n \
+  \ rhythm: normal"
+3_customer_service: "prosody:\n  pitch: 125.0\n  pitchRange: 10.0\n  intonation: neutral\n  stress: 50\n  pause: 0.7\n  rhythm:\
+  \ slow"
+advanced_techniques: ''
+1_dynamic_parameter_adjustment: "prosody:\n  dynamic:\n    pitch: \n      question: 150.0\n      statement: 120.0\n    intonation:\n\
+  \      question: \"rising\"\n      statement: \"flat\""
+2_phoneme_level_control: "prosody:\n  phonemes:\n    - phoneme: \"V\"\n      pitch: 140.0\n      stress: 90\n    - phoneme:\
+  \ \"R\"\n      pitchRange: 30.0\n      pause: 0.3"
+troubleshooting: '| Issue | Solution |
+
+  |-------|----------|
+
+  | Monotone speech | Increase pitchRange and add intonation variation |
+
+  | Too fast speech | Reduce rhythm speed and increase pause duration |
+
+  | Unnatural stress | Adjust stress levels and use phoneme-level controls |
+
+  | Poor intonation | Use dynamic intonation settings based on sentence type |'
+references:
+- ISO 20463:2020 - Speech synthesis parameters
+- CMU Sphinx Documentation
+- MaryTTS Configuration Guide
+appendix: ''
+1_parameter_units:
+- 'Pitch: Hertz (Hz)'
+- 'PitchRange: Hertz (Hz)'
+- 'Pause: Seconds (s)'
+- 'Stress: Percentage (0-100)'
+- 'Rhythm: Relative speed (fast/normal/slow)'
+2_configuration_file_structure: "prosody:\n  global:\n    pitch: 120.0\n    pitchRange: 20.0\n    intonation: neutral\n  \
+  \  stress: 50\n    pause: 0.5\n    rhythm: normal\n  sentence:\n    pitch: 130.0\n    intonation: rising\n    stress: 7\n\
+  \    pause: 1.0\n  words:\n    - word: \"important\"\n      stress: 90\n      pitch: 140.0\n    - word: \"never\"\n    \
+  \  stress: 60\n      pitchRange: 25.0"
+3_version_history:
+- '1.0.0 (2023-10-15): Initial release'
+- '1.1.0 (2023-10-20): Added dynamic parameter adjustment'
+- '1.2.0 (2023-10-25): Enhanced phoneme-level controls'

@@ -16,8 +16,11 @@ keywords: [software-engineering, manifest, software-project, builder, capabiliti
 triggers: ["create software-engineering", "build software-engineering artifact"]
 capabilities: >
   L1: | Vertical | What It Does | Depends On |. L2: Max project complexity: 20 files. L3: When user needs to create, build, or scaffold software engineering.
+llm_function: BECOME
 ---
 # Software Project Builder — Manifest
+
+This ISO describes a software project: its repository layout, modules, and build graph.
 
 ## Capabilities
 

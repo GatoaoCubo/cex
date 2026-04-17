@@ -12,8 +12,8 @@ quality: 9.0
 tags: [quality-gate, axiom, P11, P10, governance, immutable, fundamental-truth]
 tldr: "Gates for axiom artifacts — immutable fundamental rules that govern a domain permanently."
 density_score: 0.89
+llm_function: GOVERN
 ---
-
 # Gate: axiom
 ## Definition
 | Field     | Value                                          |

@@ -4,7 +4,7 @@ kind: type_builder
 pillar: P04
 parent: null
 domain: search_tool
-llm_function: CALL
+llm_function: BECOME
 version: 1.0.0
 created: 2026-03-28
 updated: 2026-03-28

@@ -1,0 +1,127 @@
+---
+kind: knowledge_card
+id: bld_knowledge_card_conformity_assessment
+pillar: P01
+llm_function: INJECT
+purpose: Domain knowledge reference for EU AI Act Annex-IV conformity assessment concepts
+quality: 9.1
+title: "Conformity Assessment Builder -- Knowledge Card"
+version: "1.0.0"
+author: wave7_n05
+tags: [conformity_assessment, builder, knowledge_card]
+tldr: "EU-AI-Act high-risk AI system concepts, Annex III categories, Annex IV requirements, key standards"
+domain: "conformity_assessment construction"
+created: "2026-04-14"
+updated: "2026-04-14"
+density_score: 0.85
+---
+# Conformity Assessment Builder -- Knowledge Card
+
+## Domain Overview
+
+The EU Artificial Intelligence Act (Regulation 2024/1689, "EU AI Act") establishes a
+risk-based regulatory framework for AI systems placed on or put into service in the EU.
+High-risk AI systems -- defined by Annex III -- must undergo a conformity assessment
+procedure under Article-43 before market placement.
+
+The Aug-2026 deadline applies to existing high-risk systems under transitional provisions
+(EU AI Act Art. 113(2)). New systems must comply from the Act's application date (Aug 2026
+for most high-risk provisions).
+
+**This builder specializes in**: producing the Annex-IV technical documentation package
+required by Article 11, supporting the Article-43 conformity procedure.
+## Key Concepts
+
+| Concept | Definition | EU AI Act Reference |
+|---------|-----------|-------------------|
+| Conformity assessment | Procedure verifying a high-risk AI system meets requirements before market placement | Art. 43 |
+| Annex III | Exhaustive list of 8 high-risk AI application areas | Annex III |
+| Annex IV | Required content of technical documentation for high-risk AI | Annex IV |
+| Risk-management-system (RMS) | Iterative process: identify, estimate, evaluate, mitigate, monitor AI risks | Art. 9 |
+| Data governance | Requirements for training/validation/test data quality, bias, provenance | Art. 10 |
+| Human-oversight | Measures enabling humans to monitor, override, and correct AI outputs | Art. 14 |
+| Post-market-monitoring (PMM) | Systematic collection and analysis of experience post-deployment | Art. 72 |
+| Serious incident reporting (SIR) | Reporting to authorities of incidents causing harm or rights violations | Art. 73 |
+| Notified body (NB) | Third-party conformity assessment body designated by EU member state | Art. 33 |
+| Declaration of Conformity (DoC) | Provider's formal statement that system meets AI Act requirements | Art. 47 |
+| CE marking | Mark affixed after conformity, signaling EU market compliance | Art. 48 |
+| GPAI model | General-purpose AI model -- subject to Chapter V, NOT Annex III | Art. 51-56 |
+| Provider | Natural or legal person who develops/places an AI system on the market | Art. 3(3) |
+| Deployer | Natural or legal person who uses an AI system under their authority | Art. 3(4) |
+| Substantial modification | Change that affects conformity -- triggers re-assessment | Art. 3(23) |
+## Annex-III High-Risk Categories
+
+| # | Category | Examples | NB Required? |
+|---|----------|---------|-------------|
+| 1(a) | Biometric identification (real-time remote) | Live facial recognition in public spaces | YES |
+| 1(b) | Biometric categorisation by sensitive attributes | Emotion detection, sexual orientation inference | NO |
+| 2 | Critical infrastructure safety | AI in power grids, water systems, transport | NO |
+| 3 | Education and vocational training | Exam scoring AI, student assessment tools | NO |
+| 4 | Employment and workers management | CV screening, performance monitoring, task allocation | NO |
+| 5 | Essential private/public services | Credit scoring, benefits eligibility, emergency dispatch | NO |
+| 6 | Law enforcement | Polygraph AI, crime risk prediction, evidence assessment | NO |
+| 7 | Migration, asylum, border control | Border interview AI, document verification | NO |
+| 8 | Administration of justice / democratic processes | AI in sentencing, election influence tools | NO |
+
+**Note**: Annex III categories are exhaustive. If the system does not fit any category,
+it is NOT high-risk under Annex III and this builder does not apply.
+## Annex-IV Technical Documentation Requirements
+
+| Section | Content Required | Key Article |
+|---------|-----------------|-------------|
+| 1 | General description: intended purpose, version, provider | Art. 11 |
+| 2 | Development elements: design logic, training data, testing methodology | Art. 10, 11 |
+| 3 | Monitoring and control: record-keeping, human oversight, instructions | Art. 12-14 |
+| 4 | Risk management system: full RMS documentation | Art. 9 |
+| 5 | Lifecycle changes: post-market monitoring plan, change management | Art. 72 |
+| 6 | Standards and specifications: harmonised standards applied | Art. 40-41 |
+| 7 | EU Declaration of Conformity reference | Art. 47 |
+## Article-43 Conformity Procedure
+
+| Procedure | When | Process |
+|-----------|------|---------|
+| Internal conformity check (Annex VI) | All high-risk systems EXCEPT real-time remote biometric ID | Provider performs conformity check internally |
+| Notified body assessment (Annex VII) | Real-time remote biometric identification (Annex III(1)(a)) | Third-party NB reviews technical documentation |
+| Notified body (elective) | Any high-risk system if provider chooses | Provider may elect NB review for credibility |
+## Industry Standards Mapping
+
+| Standard | Version | Relevance to Conformity Assessment |
+|----------|---------|-------------------------------------|
+| EU AI Act 2024/1689 | 2024 | Primary regulation -- all requirements |
+| ISO/IEC 42001 | 2023 | AI management system -- supports RMS implementation |
+| ISO 31000 | 2018 | Risk management principles -- basis for Art. 9 RMS |
+| NIST AI RMF | 1.0 (2023) | AI risk framework -- supplementary to EU RMS |
+| ISO/IEC 27001 | 2022 | Information security -- supports Art. 15 cybersecurity |
+| IEEE 2857-2024 | 2024 | Privacy engineering for ML -- supports data governance |
+| ISO/IEC 25010 | 2023 | Software quality -- supports Art. 15 accuracy/robustness |
+| EN ISO 13485 | 2016 | Medical devices QMS -- relevant for healthcare AI |
+## Deadline Map
+
+| Provision | Applicable Date | Who Is Affected |
+|-----------|----------------|----------------|
+| Prohibited AI systems ban | Feb 2025 | All providers |
+| GPAI model obligations | Aug 2025 | GPAI providers |
+| High-risk AI (Annex III) -- new systems | Aug 2026 | Providers placing new systems |
+| High-risk AI (Annex III) -- existing systems | Aug 2026 [AUG-2026-DEADLINE] | Providers of already-deployed systems |
+| High-risk AI (Annex I -- product safety) | Aug 2027 | Providers of AI embedded in regulated products |
+| Full Act application | Aug 2026 | All actors |
+## Common Pitfalls
+
+| Pitfall | Correct Understanding |
+|---------|----------------------|
+| Treating conformity assessment = DoC | The Annex-IV package SUPPORTS the DoC (Art. 47); they are separate documents |
+| Treating conformity assessment = ISO 42001 cert | ISO 42001 is an AI management system standard; Annex IV is EU regulatory documentation |
+| Including GDPR in the Annex IV package | GDPR is a separate regulation; do NOT merge them |
+| Omitting PMM plan | Art. 72 PMM plan is MANDATORY for all high-risk systems, not optional |
+| Assuming no NB needed for biometrics | Real-time remote biometric ID (Annex III(1)(a)) REQUIRES a notified body |
+| Marking system compliant in the Annex IV doc | Conformity assessment documents the evidence; the PROVIDER declares conformity via DoC (Art. 47) |
+| Ignoring Aug-2026 deadline | Existing high-risk systems must complete conformity by Aug-2026 |
+## Regulatory Citation Format
+
+| Element | Format | Example |
+|---------|--------|---------|
+| Article | "EU AI Act Art. X" | "EU AI Act Art. 9" |
+| Annex + Section | "Annex IV, Sec. Y" | "Annex IV, Sec. 4" |
+| Annex III category | "Annex III(X)" | "Annex III(5)" |
+| Regulation citation | "EU AI Act 2024/1689" | as shown |
+| Recital | "Recital Z" | "Recital 51" |

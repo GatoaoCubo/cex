@@ -1,0 +1,29 @@
+kind: architecture
+id: bld_architecture_repo_map
+pillar: P08
+llm_function: CONSTRAIN
+purpose: Component map of repo_map -- inventory, dependencies
+quality: null
+title: Architecture Repo Map
+version: 1.0.0
+author: wave1_builder_gen
+tags:
+- repo_map
+- builder
+- architecture
+tldr: Component map of repo_map -- inventory, dependencies
+domain: repo_map construction
+created: '2026-04-13'
+updated: '2026-04-13'
+density_score: 0.85
+component_inventory: "| Name          | Role                     | Owner         | Status    |  \n|---------------|--------------------------|---------------|-----------|\
+  \  \n| RepoScanner   | Scans repos for metadata | Infrastructure| Active    |  \n| DependencyResolver | Resolves dependencies\
+  \ | Data          | In Dev    |  \n| MapperEngine  | Builds repo maps         | Analytics     | Active    |  \n| RepoStorage\
+  \   | Stores mapped data       | Operations    | Stable    |  \n| Visualizer    | Renders repo maps        | UI/UX     \
+  \    | In Dev    |  \n| ConfigManager | Manages builder configs  | DevOps        | Active    |"
+dependencies: "| From          | To            | Type       |  \n|---------------|---------------|------------|  \n| RepoScanner\
+  \   | GitAPI        | External   |  \n| DependencyResolver | RepoScanner | Internal   |  \n| MapperEngine  | DependencyResolver\
+  \ | Internal |  \n| Visualizer    | MapperEngine  | Internal   |  \n| ConfigManager | MapperEngine  | Internal   |"
+architectural_position: repo_map is a foundational component in the CEX ecosystem, enabling repository structure analysis
+  and dependency tracking. It integrates with Git systems, feeds analytics pipelines, and ensures consistent mapping for CI/CD
+  and governance tools, acting as a bridge between raw code data and actionable insights.

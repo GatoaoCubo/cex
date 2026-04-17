@@ -54,7 +54,7 @@ density_score: 0.90
 | system_instruction.md | P03 | Full system prompt for LLM injection |
 | instructions.md | P03 | Step-by-step execution protocol |
 | architecture.md | P08 | Boundary, position, dependency graph |
-| output_template.md | P05 | Template with {{vars}} for agent output |
+| output_template.md | P05 | Template with `{{vars}}` for agent output |
 | examples.md | P07 | Golden + anti-examples (min 2) |
 | error_handling.md | P11 | Failure modes and remediation |
 | quick_start.md | P01 | 5-minute onboarding guide |

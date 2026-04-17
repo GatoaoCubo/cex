@@ -1,0 +1,18 @@
+kind: output_template
+id: bld_output_template_code_of_conduct
+pillar: P05
+llm_function: PRODUCE
+purpose: Template with vars for code_of_conduct production
+quality: null
+title: Output Template Code of Conduct
+version: 1.0.0
+author: n04_knowledge
+tags:
+- code_of_conduct
+- builder
+- output_template
+tldr: Template with vars for code_of_conduct production
+domain: code_of_conduct construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.87

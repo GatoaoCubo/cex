@@ -1,0 +1,41 @@
+kind: instruction
+id: bld_instruction_eval_framework
+pillar: P03
+llm_function: REASON
+purpose: Step-by-step production process for eval_framework
+quality: null
+title: Instruction Eval Framework
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- eval_framework
+- builder
+- instruction
+tldr: Step-by-step production process for eval_framework
+domain: eval_framework construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+phase_1_research:
+- Define evaluation criteria aligned with P07 governance metrics
+- Identify required data sources and integration points
+- Survey existing evaluation tools and frameworks
+- Document success/failure scenarios for edge cases
+- Map stakeholder requirements to evaluation phases
+- Assess regulatory and compliance constraints
+phase_2_compose:
+- Set up dev environment with SCHEMA.md as reference
+- Implement evaluation pipeline using OUTPUT_TEMPLATE.md structure
+- Write data ingestion module for heterogeneous sources
+- Develop scoring engine with weighted metric calculations
+- Integrate visualization layer for result interpretation
+- Add audit logging for traceability per P07 standards
+- Implement validation rules from SCHEMA.md
+- Write unit tests for each evaluation component
+- Finalize artifact with governance metadata tags
+phase_3_validate:
+- '[ ] Verify schema alignment with SCHEMA.md'
+- '[ ] Confirm data integrity across all integration points'
+- '[ ] Test tool compatibility with P07-compliant systems'
+- '[ ] Validate stakeholder requirements coverage'
+- '[ ] Ensure compliance with governance and regulatory rules'

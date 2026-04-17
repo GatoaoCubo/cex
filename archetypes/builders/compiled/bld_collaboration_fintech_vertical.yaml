@@ -1,0 +1,40 @@
+kind: collaboration
+id: bld_collaboration_fintech_vertical
+pillar: P12
+llm_function: COLLABORATE
+purpose: How fintech_vertical-builder works in crews with other builders
+quality: null
+title: Collaboration Fintech Vertical
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- fintech_vertical
+- builder
+- collaboration
+tldr: How fintech_vertical-builder works in crews with other builders
+domain: fintech_vertical construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+crew_role: Builds vertical-specific fintech solutions (e.g., lending, payments) by integrating APIs, customizing features,
+  and ensuring scalability within defined boundaries.
+receives_from: '| Builder       | What                  | Format         |
+
+  |---------------|-----------------------|----------------|
+
+  | Product Mgr   | Feature requirements  | Document       |
+
+  | API Provider  | Integration specs     | API docs       |
+
+  | Design Team   | UI/UX guidelines      | Figma/Zeplin   |'
+produces_for: '| Builder         | What                  | Format         |
+
+  |-----------------|-----------------------|----------------|
+
+  | Compliance Bldr | Regulatory checklists | JSON           |
+
+  | Tech Bldr       | Architecture specs    | Diagrams       |
+
+  | UX Bldr         | Wireframes            | Figma          |'
+boundary: Does NOT handle compliance validation (Compliance Bldr), audit trails (Audit Bldr), or customer onboarding (Onboarding
+  Bldr).

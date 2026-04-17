@@ -1,0 +1,28 @@
+kind: examples
+id: bld_examples_data_residency
+pillar: P07
+llm_function: GOVERN
+purpose: Golden and anti-examples of data_residency artifacts
+quality: null
+title: Examples Data Residency
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- data_residency
+- builder
+- examples
+tldr: Golden and anti-examples of data_residency artifacts
+domain: data_residency construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+golden_example: "kind: data_residency\nname: eu_gdpr_compliance\nlabels:\n  region: EU\n  compliance: GDPR\nspec:\n  data_storage:\n\
+  \    provider: AWS\n    regions: [\"eu-west-1\", \"eu-central-1\"]\n  data_processing:\n    provider: Azure\n    regions:\
+  \ [\"westeurope\", \"northeurope\"]\n  encryption:\n    at_rest: AES-256\n    in_transit: TLS-1.2\n  legal:\n    dpa: \"\
+  https://aws.amazon.com/compliance/gdpr/\"\n    audit_logs: \"https://azure.microsoft.com/en-us/compliance/audit-logs/\""
+anti_example_1_vague_region_specification: "kind: data_residency\nname: generic_eu_setup\nlabels:\n  region: EU\nspec:\n \
+  \ data_storage:\n    provider: Google Cloud\n    regions: [\"EU\"]"
+why_it_fails: The spec omits encryption standards for data at rest/in transit, which are mandatory for GDPR and regional compliance.
+  Data residency alone is insufficient without proper cryptographic protections.
+anti_example_2_missing_encryption_requirements: "kind: data_residency\nname: us_compliance\nlabels:\n  region: US\nspec:\n\
+  \  data_storage:\n    provider: AWS\n    regions: [\"us-east-1\"]"

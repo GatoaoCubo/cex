@@ -1,0 +1,73 @@
+---
+kind: tools
+id: bld_tools_state_machine
+pillar: P04
+llm_function: CALL
+purpose: Tools and APIs available for state_machine production
+quality: null
+title: "Tools State Machine"
+version: "1.0.0"
+author: n03_builder
+tags: [state_machine, builder, tools]
+tldr: "Tools: cex_compile, cex_doctor, cex_score. Data sources: XState docs, entity domain model, existing FSM artifacts."
+domain: "state machine construction"
+created: "2026-04-17"
+updated: "2026-04-17"
+density_score: 0.90
+---
+
+# Tools: state-machine-builder
+
+## Runtime Tools
+
+| Tool | Function | Stage |
+|------|----------|-------|
+| `cex_compile.py {path}` | Compile artifact to YAML | F8 COLLABORATE |
+| `cex_doctor.py` | Validate builder integrity | F7 GOVERN |
+| `cex_retriever.py --query {intent}` | Find similar state_machine artifacts | F5 CALL |
+| `cex_score.py {path}` | Peer-review quality scoring | F7 GOVERN |
+| `cex_hooks.py validate {path}` | Frontmatter + field validation | F7 GOVERN |
+
+## Context Sources
+
+| Source | Content | Stage |
+|--------|---------|-------|
+| `N00_genesis/P01_knowledge/library/kind/kc_state_machine.md` | Primary domain KC | F3 INJECT |
+| `.cex/kinds_meta.json` (key: `state_machine`) | Boundary, pillar, naming | F1 CONSTRAIN |
+| `archetypes/builders/state-machine-builder/bld_examples_state_machine.md` | Reference examples | F3 INJECT |
+| `archetypes/builders/state-machine-builder/bld_schema_state_machine.md` | Output schema | F2 BECOME |
+
+## Discovery
+
+```bash
+# Find existing state_machine artifacts
+python _tools/cex_retriever.py --query "state machine entity lifecycle transitions"
+
+# Validate a new artifact
+python _tools/cex_hooks.py validate path/to/artifact.md
+
+# Compile after writing
+python _tools/cex_compile.py path/to/artifact.md
+```
+
+## External References
+
+| Reference | Purpose |
+|-----------|---------|
+| xstate.js.org/docs | XState 5 FSM implementation reference |
+| UML 2.5 Statechart spec | Formal statechart semantics |
+| stately.ai/docs | Visual XState editor and docs |
+| spring.io/projects/spring-statemachine | Spring State Machine (Java) reference |
+| python-statemachine.readthedocs.io | Python state machine library |
+
+## Validation Commands
+
+| Command | Purpose | When |
+|---------|---------|------|
+| `python _tools/cex_compile.py {path}` | Compile .md to .yaml | F8 |
+| `python _tools/cex_doctor.py` | Check builder health | F7 |
+| `python _tools/cex_score.py {path} --apply` | Peer review + apply score | F7 |
+| `python _tools/cex_retriever.py --query "state machine FSM lifecycle"` | Find similar artifacts | F5 |
+| `git add {path} && git commit` | Version artifact | F8 |
+| `python _tools/cex_index.py` | Update artifact index | F8 |
+| `python _tools/cex_retriever.py --similar {path}` | Find similar FSMs | F5 |

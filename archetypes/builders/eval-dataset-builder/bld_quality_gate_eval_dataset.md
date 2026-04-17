@@ -12,8 +12,8 @@ quality: 9.1
 tags: [quality-gate, eval-dataset, P07, evals, splits, schema-fields]
 tldr: "Pass/fail gate for eval_dataset artifacts: schema completeness, split integrity, size declaration, and framework integration."
 density_score: 0.90
+llm_function: GOVERN
 ---
-
 # Gate: eval_dataset
 ## Definition
 | Field | Value |

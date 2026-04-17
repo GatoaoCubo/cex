@@ -49,7 +49,7 @@ Knowledge cards are atomic searchable facts — the smallest retrieval unit in a
 |-------------|-------------|
 | Vague tldr ("How to use CLI") | No search signal; returns wrong in BM25 |
 | Prose body | Low density; convert to tables, bullets, code |
-| Template residue ({{placeholder}}) | Unfilled fields; looks incomplete |
+| Template residue (`{{placeholder}}`) | Unfilled fields; looks incomplete |
 | Frontmatter echo in body | Body repeats title/tldr; adds zero depth |
 | Giant monolith (300+ lines) | Split into 2+ focused atomic cards |
 | density < 0.80 | Card fails regardless of other quality scores |

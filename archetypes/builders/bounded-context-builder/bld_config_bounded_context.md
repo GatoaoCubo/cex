@@ -1,0 +1,38 @@
+---
+id: bld_context_sources_bounded_context
+kind: rag_source
+pillar: P10
+llm_function: CONSTRAIN
+version: 1.0.0
+quality: 6.0
+tags: [bounded_context, context, rag]
+title: "Context Sources: bounded_context"
+density_score: 1.0
+updated: "2026-04-17"
+---
+# Context Sources: bounded_context
+## Mandatory Sources (load at F3 INJECT)
+| Source | Path | Why |
+|--------|------|-----|
+| Kind KC | N00_genesis/P01_knowledge/library/kind/kc_bounded_context.md | Definition + boundary |
+| Schema | archetypes/builders/bounded-context-builder/bld_schema_bounded_context.md | Required fields |
+| Examples | archetypes/builders/bounded-context-builder/bld_examples_bounded_context.md | Golden patterns |
+
+## Optional Sources (load if relevant)
+| Source | Path | When to Load |
+|--------|------|-------------|
+| domain_vocabulary KC | N00_genesis/P01_knowledge/library/kind/kc_domain_vocabulary.md | Vocabulary governance |
+| domain_event KC | N00_genesis/P01_knowledge/library/kind/kc_domain_event.md | Published events |
+| data_contract KC | N00_genesis/P01_knowledge/library/kind/kc_data_contract.md | Integration contracts |
+| Nucleus defs | N0X_*/P08_architecture/nucleus_def_n0X.md | BC maps to nucleus |
+
+## Search Queries for Retrieval
+- "DDD bounded context context map integration pattern"
+- "Anti-Corruption Layer Open Host Service Conformist"
+- "domain model boundary team ownership aggregate"
+- "Evans context mapping upstream downstream"
+
+## Anti-Sources (do NOT confuse with)
+- component_map (deployment topology, not semantic boundary)
+- namespace (code organization, not domain model)
+- agent_card (capability definition, not domain boundary)

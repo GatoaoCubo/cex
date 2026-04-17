@@ -1,0 +1,65 @@
+kind: output_template
+id: bld_output_template_trajectory_eval
+pillar: P05
+llm_function: PRODUCE
+purpose: Template with vars for trajectory_eval production
+quality: null
+title: Output Template Trajectory Eval
+version: 1.1.0
+author: n01_hybrid_review4
+tags:
+- trajectory_eval
+- builder
+- output_template
+tldr: 'Template for trajectory_eval artifacts: LLM agent step-level evaluation records.'
+domain: trajectory_eval construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.86
+trajectory_overview: '| Field | Value |
+
+  |---|---|
+
+  | Agent | {{agent_id}} |
+
+  | Task | {{task_id}} ({{benchmark}}) |
+
+  | Environment | {{environment_description}} |
+
+  | Total steps | {{step_count}} |
+
+  | Task success | {{task_success}} |'
+step_log: '| Step | Observation Summary | Reasoning Summary | Action | Outcome |
+
+  |---|---|---|---|---|
+
+  | 1 | {{obs_1}} | {{reasoning_1}} | {{action_1}} | {{pass/fail/partial}} |
+
+  | 2 | {{obs_2}} | {{reasoning_2}} | {{action_2}} | {{pass/fail/partial}} |
+
+  | ... | | | | |'
+evaluation_metrics: '| Metric | Value | Benchmark Threshold |
+
+  |---|---|---|
+
+  | Task success | {{true/false}} | >= 0.5 (AgentBench) |
+
+  | Path efficiency | {{float}} | >= 0.7 |
+
+  | Tool call accuracy | {{float}} | >= 0.8 |
+
+  | Partial credit | {{float}} | >= 0.6 |
+
+  | Backtrack count | {{int}} | <= 2 |'
+step_level_scores: '| Step | Score | Judge Rationale |
+
+  |---|---|---|
+
+  | {{step_n}} | {{0-10}} | {{one-line rationale}} |'
+failure_analysis:
+- 'First failure step: {{step_n}}'
+- 'Root cause: {{hallucination | grounding_error | tool_misuse | reasoning_drift}}'
+- 'Impact: {{how the failure propagated to subsequent steps}}'
+recommendations:
+- '{{targeted fix 1 for the observed failure mode}}'
+- '{{targeted fix 2}}'

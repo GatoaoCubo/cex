@@ -1,0 +1,51 @@
+kind: instruction
+id: bld_instruction_workflow_run_crate
+pillar: P03
+llm_function: REASON
+purpose: Step-by-step production process for workflow_run_crate
+quality: null
+title: Instruction Workflow Run Crate
+version: 1.0.0
+author: n04_wave7
+tags:
+- workflow_run_crate
+- builder
+- instruction
+- RO-Crate
+- provenance-graph
+- CreateAction
+- BioSchemas
+tldr: Step-by-step production process for workflow_run_crate
+domain: workflow_run_crate construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+phase_1_research:
+- 'Identify workflow definition: Galaxy workflow file (.ga), Nextflow script, CWL document, or Snakemake file.'
+- 'Collect execution metadata: run ID, start time, end time, executor agent (ORCID).'
+- 'List input datasets: files, URLs, checksums (SHA-256 or MD5), formats, licenses.'
+- 'List output datasets: files, URLs, checksums, formats.'
+- 'Enumerate software environment: tool name, version, container image (Docker/Singularity) for each step.'
+- Identify institutional affiliation for ORCID-linked author entities.
+phase_2_compose:
+- Reference SCHEMA.md for RO-Crate 1.2 Workflow Run Crate required entities.
+- Create ro-crate-metadata.json with @context including RO-Crate and BioSchemas contexts.
+- 'Add root Dataset entity: RO-Crate root descriptor with name, description, datePublished, license.'
+- 'Add ComputationalWorkflow entity: url, programmingLanguage, version, BioSchemas profile.'
+- 'Add CreateAction entity: instrument (workflow IRI), object (input IRIs), result (output IRIs), agent (ORCID), startTime,
+  endTime.'
+- 'Add Dataset entities for each input: @id, name, contentSize, sha256, encodingFormat, license.'
+- 'Add Dataset entities for each output: @id, name, contentSize, sha256, encodingFormat, dateCreated.'
+- 'Add SoftwareApplication entities for each tool: name, version, url, softwareVersion.'
+- Add Person entities for each author with @id as ORCID URL.
+- Add Organization entity with affiliation data.
+- Add FAIR Signposting Link header declarations.
+- Validate JSON-LD syntax and RO-Crate profile conformance.
+phase_3_validate:
+- '[ ] ro-crate-metadata.json includes @context with RO-Crate 1.2 URL'
+- '[ ] Root Dataset entity present with datePublished and license'
+- '[ ] ComputationalWorkflow entity has programmingLanguage'
+- '[ ] CreateAction links instrument, object[], result[], agent (ORCID)'
+- '[ ] All input/output Datasets have sha256 or md5 checksum'
+- '[ ] Author Person entities use ORCID URL as @id'
+- '[ ] Domain keywords present: RO-Crate, workflow-run, provenance-graph, ORCID'

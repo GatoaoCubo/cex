@@ -62,7 +62,7 @@ Every `prompt_template` artifact MUST contain these 5 sections in order:
 | Constraint | Rule |
 |---|---|
 | max_bytes | 8192 bytes per file |
-| variable_syntax | `mustache` is tier-1 (`{{var}}`); `bracket` is tier-2 (`[VAR]`) — use bracket only when Mustache conflicts with target system |
+| variable_syntax | `mustache` is tier-1 ({{var}}); `bracket` is tier-2 (`[VAR]`) — use bracket only when Mustache conflicts with target system |
 | body completeness | Every `{{var}}` in the body MUST be declared in `variables`. Every declared variable MUST appear in the body at least once. |
 | id uniqueness | No two prompt_template artifacts may share the same id |
 | kind lock | The `kind` field MUST be `prompt_template` — never overridden |

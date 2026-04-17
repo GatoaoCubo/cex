@@ -1,0 +1,1 @@
+- [CoC hierarchy term](project_coc_hierarchy_term.md) -- 'fractal' -> 'convention-over-configuration hierarchy' (canonical tech term, 2026-04-17)

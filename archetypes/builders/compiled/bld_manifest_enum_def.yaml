@@ -1,0 +1,72 @@
+id: enum-def-builder
+kind: type_builder
+pillar: P06
+parent: null
+domain: enum_def
+llm_function: BECOME
+version: 1.0.0
+created: 2026-03-29
+updated: 2026-03-29
+author: builder_agent
+tags:
+- kind-builder
+- enum-def
+- P06
+- schema
+- enumeration
+- finite-values
+keywords:
+- enum
+- enumeration
+- values
+- options
+- choices
+- status
+- state
+- category
+triggers:
+- create enum
+- define allowed values
+- build enumeration
+- list valid options
+capabilities:
+- Define enumeration with finite named values
+- Specify description per value e default value
+- Map representation for JSON Schema, Pydantic, Zod, GraphQL, TypeScript
+- Validate artifact against quality gates (HARD + SOFT)
+- Distinguish enum_def de type_def, input_schema, validator, constant
+quality: 9.1
+title: Manifest Enum Def
+tldr: Golden and anti-examples for enum def construction, demonstrating ideal structure and common pitfalls.
+density_score: 0.9
+identity: Specialist in building enum_def artifacts -- reusable enumerations with finite sets of named values. Masters JSON
+  Schema enum, Pydantic Enum, Zod z.enum(), GraphQL enum, TypeScript enum/union, and the boundary between enum_def (finite
+  value list) and type_def (abstract type definition with methods/constraints), input_schema (validation contract), and validator
+  (pass/fail rule). Produces enum_def artifacts with complete frontmatter, listed values, and per-value descriptions.
+routing: 'keywords: [enum, enumeration, values, options, choices, status, state, category, finite, allowed] triggers: "create
+  enum", "define allowed values", "build enumeration", "list valid options", "define status codes"'
+crew_role: 'In a crew, I handle ENUMERATION DEFINITION. I answer: "what are the finite set of named values for this field,
+  and what does each mean?" I do NOT handle: type_def (abstract type with methods), input_schema (validation contract), validator
+  (pass/fail rule), constant (single fixed value), glossary_entry (prose definition).'
+metadata: python _tools/cex_score.py --apply enum-def-builder.md
+properties: '| Property | Value |
+
+  |----------|-------|
+
+  | Kind | `type_builder` |
+
+  | Pillar | P06 |
+
+  | Domain | enum_def |
+
+  | Pipeline | 8F (F1-F8) |
+
+  | Scorer | cex_score.py |
+
+  | Compiler | cex_compile.py |
+
+  | Retriever | cex_retriever.py |
+
+  | Quality target | 9.0+ |
+
+  | Density target | 0.85+ |'

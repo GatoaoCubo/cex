@@ -1,0 +1,96 @@
+pillar: P10
+name: Memory
+description: WHAT to remember
+kinds:
+  runtime_state:
+    description: Variable mental state per session (routing, runtime decisions)
+    boundary: Variable mental state accumulated at runtime. NOT mental_model P02 (fixed agent identity, immutable) nor
+      session_state (ephemeral, snapshot).
+    layer: runtime
+    core: true
+    machine_format: yaml
+    naming: p10_rs_{{agent}}.yaml
+    constraints:
+      max_bytes: 3072
+    llm_function: INJECT
+  knowledge_index:
+    description: Search index (BM25, FAISS config)
+    boundary: Search index semantic (BM25, FAISS). NOT embedding_config (P01, model) nor rag_source (P01, source).
+    layer: runtime
+    core: true
+    machine_format: yaml
+    naming: p10_bi_{{index}}.yaml
+    constraints:
+      max_bytes: 3072
+    llm_function: INJECT
+  learning_record:
+    description: Learning record (what worked/failed)
+    boundary: Persistent learning record. NOT session_state (ephemeral) nor axiom (immutable, does not learn).
+    layer: content
+    core: true
+    machine_format: yaml
+    naming: p10_lr_{{topic}}.md + .yaml
+    constraints:
+      max_bytes: 3072
+    llm_function: INJECT
+  session_state:
+    description: Session state (ephemeral, snapshot)
+    boundary: Ephemeral session state (snapshot). NOT runtime_state (persistent across sessions) nor learning_record (does not
+      accumulate).
+    layer: runtime
+    core: false
+    machine_format: yaml
+    naming: p10_ss_{{session}}.yaml
+    constraints:
+      max_bytes: 3072
+    llm_function: INJECT
+  memory_summary:
+    description: Compressed memory summary
+    boundary: Compressao. NOT session_state.
+    layer: runtime
+    core: true
+    machine_format: yaml
+    naming: p10_summary.md
+    constraints:
+      max_bytes: 2048
+    frontmatter_required:
+    - id
+    - name
+    - source_type
+    - compression_method
+    llm_function: INJECT
+  entity_memory:
+    description: Memoria sobre entidades
+    boundary: Fatos sobre X. NOT learning_record.
+    layer: runtime
+    core: true
+    machine_format: yaml
+    naming: p10_entity.md
+    constraints:
+      max_bytes: 2048
+    frontmatter_required:
+    - id
+    - name
+    - entity_type
+    - attributes
+    llm_function: INJECT
+  prompt_cache:
+    description: TTL, eviction, and invalidation config for cached LLM prompt/completion pairs
+    boundary: Cache config. NOT session_state (contexto ephemeral), memory_summary (history), nor runtime_state (variables runtime).
+    layer: runtime
+    core: false
+    machine_format: yaml
+    naming: p10_pc_{{name}}.yaml
+    constraints:
+      max_bytes: 2048
+    frontmatter_required:
+    - id
+    - kind
+    - pillar
+    - ttl_seconds
+    - eviction_strategy
+    - max_entries
+    - cache_key_method
+    - invalidation_trigger
+    - storage_backend
+    llm_function: GOVERN

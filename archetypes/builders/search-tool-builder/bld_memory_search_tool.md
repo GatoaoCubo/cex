@@ -23,6 +23,7 @@ observation_types: [user, feedback, project, reference]
 quality: 9.1
 title: "Memory Search Tool"
 density_score: 0.90
+llm_function: INJECT
 ---
 ## Summary
 Search tools are the primary way agents access current information, and they are the most likely P04 kind to generate unexpected costs. The three load-bearing constraints are: max_results (prevents token waste), cost_per_query (enables budget tracking), and API key security (prevents credential exposure).

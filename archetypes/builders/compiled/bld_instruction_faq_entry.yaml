@@ -1,0 +1,41 @@
+kind: instruction
+id: bld_instruction_faq_entry
+pillar: P03
+llm_function: REASON
+purpose: Step-by-step production process for faq_entry
+quality: null
+title: Instruction Faq Entry
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- faq_entry
+- builder
+- instruction
+tldr: Step-by-step production process for faq_entry
+domain: faq_entry construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+phase_1_research:
+- Identify high-frequency customer inquiries from support tickets.
+- Analyze existing FAQs to avoid duplication and ensure coverage.
+- Determine support deflection metric (e.g., % of resolved cases via this entry).
+- Interview subject matter experts for accurate canonical answer content.
+- Collect relevant internal links (KB articles, product docs, community forums).
+- Verify compliance with company policies and legal requirements.
+phase_2_compose:
+- 'Outline structure: question, answer, related_topics, metric (per bld_schema_faq_entry.md).'
+- Draft question using active voice, avoiding jargon.
+- Write canonical answer with step-by-step guidance (max 3 paragraphs, <=150 words).
+- Embed hyperlinked references to related resources (validate URLs).
+- Calculate support deflection metric using historical resolution data.
+- Apply bld_output_template_faq_entry.md formatting for consistency.
+- Add Schema.org FAQPage structured data snippet for rich-results eligibility.
+- Review for clarity, conciseness, and alignment with brand tone.
+- Finalize artifact with metadata (author, date, version).
+phase_3_validate:
+- '[ ] All required fields (question, answer, related_topics, metric) present per bld_schema_faq_entry.md.'
+- '[ ] Answer resolves issue without ambiguity or missing steps.'
+- '[ ] Schema.org FAQPage snippet included in output template.'
+- '[ ] Support deflection metric is accurate and up-to-date.'
+- '[ ] Artifact adheres to bld_schema_faq_entry.md and bld_output_template_faq_entry.md specs.'

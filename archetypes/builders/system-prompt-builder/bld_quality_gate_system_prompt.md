@@ -16,8 +16,8 @@ tags:
   - identity
   - P03
 tldr: "Validates LLM identity and persona prompts for specificity, safety constraints, and behavioral clarity."
+llm_function: GOVERN
 ---
-
 ## Definition
 A system prompt establishes the identity, rules, and behavioral boundaries of a language model for a specific domain or role. It is not a task instruction and not a template with placeholders. This gate ensures every system prompt is specific, safe, self-contained, and clearly separated from prompt templates and action prompts.
 ## HARD Gates

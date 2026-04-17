@@ -49,32 +49,32 @@ keywords: [{{keyword_1}}, {{keyword_2}}, {{keyword_3}}]
 density_score: {{0.80_to_1.00}}
 ```
 ## Trigger Configuration
-Event: {{trigger_event}}
-Execution: {{execution}} ({{pre_post_description}})
+Event: `{{trigger_event}}`
+Execution: `{{execution}}` (`{{pre_post_description}}`)
 Conditions:
-1. {{condition_description_1}}
-2. {{condition_description_2}}
+1. `{{condition_description_1}}`
+2. `{{condition_description_2}}`
 ## Script
-Path: {{script_path}}
-Language: {{script_language}}
-Arguments: {{script_args_or_none}}
-```{{script_language}}
+Path: `{{script_path}}`
+Language: `{{script_language}}`
+Arguments: `{{script_args_or_none}}`
+``{{script_language}}`
 {{script_content_or_description}}
 ```
 ## Input/Output
 Input (from event):
-1. {{input_field_1}}: {{input_description_1}}
-2. {{input_field_2}}: {{input_description_2}}
+1. `{{input_field_1}}`: `{{input_description_1}}`
+2. `{{input_field_2}}`: `{{input_description_2}}`
 Output (to caller):
-- {{output_field_1}}: {{output_description_1}}
+- `{{output_field_1}}`: `{{output_description_1}}`
 ## Error Handling
-Strategy: {{error_handling}}
-1. On script failure: {{failure_behavior}}
-2. On timeout: {{timeout_behavior}}
-3. On missing script: {{missing_behavior}}
+Strategy: `{{error_handling}}`
+1. On script failure: `{{failure_behavior}}`
+2. On timeout: `{{timeout_behavior}}`
+3. On missing script: `{{missing_behavior}}`
 ## References
-1. {{reference_1}}
-2. {{reference_2}}
+1. `{{reference_1}}`
+2. `{{reference_2}}`
 
 ## Properties
 

@@ -12,8 +12,8 @@ quality: 9.0
 tags: [quality-gate, boot-config, P11, P02, governance, initialization, provider]
 tldr: "Gates for boot_config artifacts — provider-specific agent initialization parameters and constraints."
 density_score: 0.88
+llm_function: GOVERN
 ---
-
 # Gate: boot_config
 ## Definition
 | Field     | Value                                                  |

@@ -1,0 +1,149 @@
+id: ex_db_connector_supabase
+kind: db_connector
+pillar: P09
+title: Supabase Database Connector
+version: 0.1.0
+quality: 7.9
+status: template
+brand_placeholders:
+- BRAND_SUPABASE_PROJECT_REF
+tags:
+- commerce
+- template
+- distillation
+- supabase
+- db_connector
+- config
+density_score: 1.0
+updated: '2026-04-17'
+purpose: Connection configuration spec for Supabase PostgreSQL backend — defines connection parameters, pooling settings,
+  auth modes, and environment variable schema for edge functions and frontend clients.
+when_to_use:
+- Setting up a new environment (staging, production) with Supabase credentials.
+- Documenting the connection architecture for security reviews.
+- Configuring connection pooling for high-concurrency edge functions.
+- Onboarding a developer who needs to run local Supabase.
+connection_parameters: ''
+frontend_browser_react: '| Parameter | Env Var | Example Value |
+
+  |-----------|---------|---------------|
+
+  | Supabase URL | `VITE_SUPABASE_URL` | `https://{{BRAND_SUPABASE_PROJECT_REF}}.supabase.co` |
+
+  | Anon key | `VITE_SUPABASE_ANON_KEY` | `eyJ...` (public, safe in frontend) |
+
+  | Auth mode | — | `anon` (RLS enforced) |'
+edge_functions_deno: '| Parameter | Env Var | Access Level |
+
+  |-----------|---------|-------------|
+
+  | Supabase URL | `SUPABASE_URL` | Auto-injected by Supabase runtime |
+
+  | Service role key | `SUPABASE_SERVICE_ROLE_KEY` | Auto-injected; full bypass RLS |
+
+  | Anon key | `SUPABASE_ANON_KEY` | Auto-injected |'
+direct_postgresql_admin_migrations: '| Parameter | Value |
+
+  |-----------|-------|
+
+  | Host | `db.{{BRAND_SUPABASE_PROJECT_REF}}.supabase.co` |
+
+  | Port | `5432` |
+
+  | Database | `postgres` |
+
+  | User | `postgres` |
+
+  | Password | Supabase Dashboard → Settings → Database |
+
+  | SSL | Required (`?sslmode=require`) |
+
+
+  Connection string:
+
+  postgresql://postgres:{PASSWORD}@db.{{BRAND_SUPABASE_PROJECT_REF}}.supabase.co:5432/postgres?sslmode=require'
+pooled_connection_supavisor_for_high_concurrency: '| Mode | Port | Use Case |
+
+  |------|------|---------|
+
+  | Transaction pooling | `6543` | Edge functions, serverless (recommended) |
+
+  | Session pooling | `5432` | Long-running connections, migrations |
+
+
+  # Transaction pool (for edge functions)
+
+  postgresql://postgres.{{BRAND_SUPABASE_PROJECT_REF}}:{PASSWORD}@aws-0-sa-east-1.pooler.supabase.com:6543/postgres'
+environment_variables: ''
+local_development_env_local: 'VITE_SUPABASE_URL=https://{{BRAND_SUPABASE_PROJECT_REF}}.supabase.co
+
+  VITE_SUPABASE_ANON_KEY=eyJ...
+
+
+  # For local Supabase (supabase start)
+
+  VITE_SUPABASE_URL=http://localhost:54321
+
+  VITE_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...'
+production_supabase_edge_secrets: '# Set via CLI
+
+  supabase secrets set SHOPIFY_ADMIN_TOKEN=shpat_...
+
+  supabase secrets set BLING_CLIENT_ID={{BRAND_BLING_CLIENT_ID}}
+
+  supabase secrets set BLING_CLIENT_SECRET={{BRAND_BLING_CLIENT_SECRET}}
+
+  supabase secrets set MELI_CLIENT_ID={{BRAND_MELI_CLIENT_ID}}
+
+  supabase secrets set MELI_CLIENT_SECRET={{BRAND_MELI_CLIENT_SECRET}}
+
+  supabase secrets set SUPPORT_EMAIL={{BRAND_SUPPORT_EMAIL}}
+
+
+  # List all secrets (values hidden)
+
+  supabase secrets list'
+connection_health_check: '// Quick connectivity test
+
+  const { data, error } = await supabase.from(''products'').select(''count'').limit(1);
+
+  if (error) throw new Error(`Supabase connection failed: ${error.message}`);
+
+  console.log(''Supabase connected. Product count:'', data[0].count);'
+local_development_setup: '# Install Supabase CLI
+
+  npm install -g supabase
+
+
+  # Start local Supabase stack (PostgreSQL + Studio + Auth + Storage)
+
+  supabase start
+
+
+  # Apply migrations
+
+  supabase db push
+
+
+  # Generate TypeScript types from schema
+
+  supabase gen types typescript --local > src/integrations/supabase/types.ts
+
+
+  # Link to production project
+
+  supabase link --project-ref {{BRAND_SUPABASE_PROJECT_REF}}'
+brand_variables_used: '| Variable | Purpose |
+
+  |----------|---------|
+
+  | `{{BRAND_SUPABASE_PROJECT_REF}}` | Supabase project reference ID |'
+related_artifacts: '| Artifact | Kind | Role |
+
+  |----------|------|------|
+
+  | `ex_supabase_data_layer.md` | supabase_data_layer | Table schemas and RLS policies |
+
+  | `ex_interface_supabase_tables.md` | interface | TypeScript type contracts |
+
+  | `ex_secret_config_n03.md` | secret_config | General secrets management pattern |'

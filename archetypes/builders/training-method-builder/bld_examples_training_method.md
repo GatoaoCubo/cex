@@ -1,0 +1,111 @@
+---
+kind: examples
+id: bld_examples_training_method
+pillar: P07
+llm_function: GOVERN
+quality: 9.1
+title: "Examples Training Method"
+version: "1.0.0"
+author: n05_builder
+tags: [training_method, examples, P02, ml]
+tldr: "Canonical examples for training_method artifacts: supervised classification, self-supervised pre-training, RL fine-tuning."
+domain: "training_method construction"
+created: "2026-04-13"
+updated: "2026-04-13"
+density_score: 0.86
+---
+
+# Examples: training_method Artifacts
+
+## Example 1: Supervised Text Classification
+```yaml
+---
+id: p02_tm_text_classification_bert
+kind: training_method
+pillar: P02
+title: "Supervised Text Classification with BERT"
+version: "1.0.0"
+learning_paradigm: supervised
+compute_intensity: medium
+domain: NLP
+quality: null
+---
+## Overview
+Supervised fine-tuning of BERT-base for binary/multi-class text classification.
+
+## Learning Paradigm
+| Attribute | Value |
+|-----------|-------|
+| paradigm | supervised |
+| objective | cross-entropy loss |
+| requires_labels | Yes (class labels) |
+
+## Compute Profile
+| Attribute | Value |
+|-----------|-------|
+| intensity | medium |
+| hardware | 1x A100 40GB or 4x RTX 3090 |
+| memory | ~12GB per GPU |
+
+## Hyperparameters
+| Parameter | Value |
+|-----------|-------|
+| learning_rate | 2e-5 |
+| batch_size | 32 |
+| epochs | 3 |
+| optimizer | adamw |
+| warmup_ratio | 0.1 |
+```
+
+## Example 2: Self-Supervised Pre-training (MLM)
+```yaml
+---
+id: p02_tm_mlm_pretraining
+kind: training_method
+pillar: P02
+title: "Masked Language Model Pre-training"
+learning_paradigm: self_supervised
+compute_intensity: high
+domain: NLP
+quality: null
+---
+## Overview
+Self-supervised pre-training with masked language modeling (MLM) objective.
+
+## Learning Paradigm
+| Attribute | Value |
+|-----------|-------|
+| paradigm | self_supervised |
+| objective | MLM (predict masked tokens, 15% mask rate) |
+| requires_labels | No |
+
+## Compute Profile
+| Attribute | Value |
+|-----------|-------|
+| intensity | high |
+| hardware | 8x A100 80GB (DDP) |
+| memory | ~60GB aggregate |
+```
+
+## Example 3: Reinforcement Learning from Human Feedback
+```yaml
+---
+id: p02_tm_rlhf_alignment
+kind: training_method
+pillar: P02
+title: "RLHF Alignment Training"
+learning_paradigm: reinforcement
+compute_intensity: high
+domain: LLM_alignment
+quality: null
+---
+## Overview
+PPO-based RLHF for aligning LLM outputs to human preferences.
+
+## Learning Paradigm
+| Attribute | Value |
+|-----------|-------|
+| paradigm | reinforcement |
+| objective | maximize reward model score via PPO |
+| reward_signal | human preference labels + reward_model |
+```

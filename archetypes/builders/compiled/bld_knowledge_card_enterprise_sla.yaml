@@ -1,0 +1,73 @@
+kind: knowledge_card
+id: bld_knowledge_card_enterprise_sla
+pillar: P01
+llm_function: INJECT
+purpose: Domain knowledge for enterprise_sla production
+quality: null
+title: Knowledge Card Enterprise Sla
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- enterprise_sla
+- builder
+- knowledge_card
+tldr: Domain knowledge for enterprise_sla production
+domain: enterprise_sla construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+domain_overview: Enterprise SLAs (Service Level Agreements) define contractual obligations between service providers and consumers,
+  ensuring alignment on performance, availability, and support expectations. They are critical in cloud computing, SaaS, and
+  IT outsourcing, where downtime, latency, and response times directly impact business operations. SLAs typically include
+  metrics like uptime percentages (e.g., 99.9%), latency thresholds (e.g., <100ms), and support SLAs (e.g., 24/7 escalation
+  paths). These agreements balance accountability with flexibility, often incorporating service credits or penalties for non-compliance.
+  SLAs differ from quality gates (runtime monitoring) and compliance checklists (audit-focused) by focusing on pre-defined
+  contractual commitments rather than runtime validation or regulatory adherence. They require clear definitions of success,
+  measurable KPIs, and mechanisms for dispute resolution. Industry leaders like AWS, Azure, and Salesforce use SLAs to manage
+  customer expectations and operational risks.
+key_concepts: "| Concept               | Definition                                                                 | Source\
+  \                          |  \n|----------------------|----------------------------------------------------------------------------|---------------------------------|\
+  \  \n| Uptime SLA           | Percentage of time a service must be operational (e.g., 99.95%).           | ITIL 4      \
+  \                    |  \n| Latency SLA          | Maximum allowable response time for critical operations (e.g., <100ms).\
+  \   | RFC 7348 (HTTP/2)               |  \n| Service Credits      | Financial compensation for SLA breaches (e.g., 10% credit\
+  \ per downtime hour). | ISO/IEC 20000-1:2018            |  \n| Support SLA          | Guaranteed response/resolution times\
+  \ for incidents (e.g., 15-minute SLA). | ITIL 4                          |  \n| SLA Breach         | Failure to meet defined\
+  \ metrics, triggering remedies.                      | Gartner SLA Best Practices      |  \n| SLA Monitoring       | Automated\
+  \ tools to track compliance (e.g., Datadog, New Relic).           | DevOps Handbook                 |  \n| SLA Renegotiation\
+  \    | Process to update terms as business needs evolve.                          | IEEE 1220-2005                  |  \n\
+  | SLA Escalation Path  | Defined steps for resolving breaches (e.g., Tier 1 → Tier 3 support).     | ISO/IEC 20000-1:2018\
+  \            |"
+industry_standards:
+- ITIL 4 (Service Management Framework)
+- ISO/IEC 20000-1:2018 (IT Service Management)
+- RFC 7348 (HTTP/2 Latency Considerations)
+- Gartner "SLA Best Practices for Cloud Providers" (2022)
+- IEEE 1220-2005 (Service Level Agreements for IT Services)
+- SLA Templates from AWS, Azure, and Salesforce
+uptime_math_must_include_in_every_enterprise_sla: "| Uptime % | Monthly Downtime | Annual Downtime | Typical Tier |  \n|----------|------------------|-----------------|--------------|\
+  \  \n| 99.0%    | 7h 18m           | 3d 15h          | Basic        |  \n| 99.5%    | 3h 39m           | 1d 19h        \
+  \  | Standard     |  \n| 99.9%    | 43m 50s          | 8h 45m          | Production   |  \n| 99.95%   | 21m 55s        \
+  \  | 4h 22m          | Business     |  \n| 99.99%   | 4m 22s           | 52m 34s         | Enterprise   |  \n| 99.999% \
+  \ | 26s              | 5m 15s          | Mission-critical |"
+error_budget_google_sre_model: "Error budget = 1 - SLO target. Example: 99.9% SLO = 0.1% error budget = 43.8 min/month.  \n\
+  - Burn rate: ratio of error budget consumed vs. time elapsed. Burn rate > 1 = on pace to exhaust budget.  \n- Alert threshold:\
+  \ page at 2% budget consumed in 1h (burn rate 14.4x), ticket at 5% in 6h (burn rate 6x).  \n- Budget exhaustion: triggers\
+  \ freeze on non-critical releases until budget resets."
+rpo_rto_definitions: "| Term | Definition | Typical Enterprise Values |  \n|------|-----------|---------------------------|\
+  \  \n| RTO (Recovery Time Objective) | Max acceptable downtime before service resumes | Tier 1: 15min, Tier 2: 4h, Tier\
+  \ 3: 24h |  \n| RPO (Recovery Point Objective) | Max acceptable data loss window | Tier 1: 0min (sync replication), Tier\
+  \ 2: 1h, Tier 3: 24h |"
+common_patterns:
+- Define uptime as a percentage with monthly calculation windows (include actual downtime minutes, not just %).
+- 'Use tiered latency thresholds per service tier: gold (<50ms p99), silver (<150ms p99), bronze (<300ms p99).'
+- 'Specify support SLAs with escalation timelines (P0: 15min response/1h resolution, P1: 1h/4h, P2: 4h/24h).'
+- Include service credits proportional to breach severity (e.g., 10% monthly fee per hour over threshold).
+- Define error budget explicitly and link to release freeze policy.
+- Specify both RTO and RPO for each service tier.
+- Align SLA with SLI (Service Level Indicator) definitions for objective measurement.
+pitfalls:
+- Vague metrics (e.g., "high availability" without a defined percentage and downtime calculation).
+- Missing error budget and burn-rate alerting (SLO without error budget is unenforceable at scale).
+- Omitting RPO/RTO, leaving disaster recovery obligations undefined.
+- Ignoring breach remedies, leading to unresolved disputes.
+- Overcomplicating SLAs with excessive clauses, reducing enforceability.

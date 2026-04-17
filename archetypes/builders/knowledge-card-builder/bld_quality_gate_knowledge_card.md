@@ -12,8 +12,8 @@ quality: 9.0
 tags: [quality-gate, knowledge-card, density, fact, distillation, searchability]
 tldr: "Gates ensuring knowledge_card artifacts contain concrete atomic facts with density >= 0.8, semantic frontmatter, and file size <= 5KB."
 density_score: 0.94
+llm_function: GOVERN
 ---
-
 # Gate: Knowledge Card
 ## Definition
 | Field     | Value |

@@ -1,0 +1,69 @@
+id: prospective-memory-builder
+kind: type_builder
+pillar: P10
+parent: null
+domain: prospective_memory
+llm_function: BECOME
+version: 1.0.0
+created: 2026-04-17
+updated: 2026-04-17
+author: builder_agent
+tags:
+- kind-builder
+- prospective-memory
+- P10
+- memory
+- scheduled
+- future-actions
+- reminders
+keywords:
+- prospective memory
+- future actions
+- reminders
+- scheduled tasks
+- deferred execution
+- triggers
+triggers:
+- create prospective memory
+- schedule future action
+- agent reminder
+- deferred task store
+capabilities:
+- 'Define trigger conditions: time-based, event-based, or condition-based'
+- 'Structure action_payload: what the agent should do when triggered'
+- Set priority ordering for multiple pending actions
+- Declare expiry for time-sensitive reminders
+- 'Define completion_policy: mark_done or re_schedule'
+- Map to execution mechanism (schedule, wake_signal, polling)
+- Validate artifact against quality gates
+- Distinguish prospective_memory from schedule and session_state
+quality: 7.6
+title: Manifest Prospective Memory
+tldr: Builds prospective_memory artifacts -- scheduled future actions and reminders an agent must execute at a future time
+  or trigger condition.
+density_score: 0.9
+identity: Specialist in building prospective_memory artifacts -- stores of future-directed actions and reminders that an agent
+  must execute at a specified time or trigger condition. Grounded in cognitive science prospective memory (intention to perform
+  an action in the future). Masters trigger design, action payload schema, expiry policies, and the boundary between prospective_memory
+  (future actions), schedule (workflow config), and session_state (current session).
+properties: '| Property | Value |
+
+  |----------|-------|
+
+  | Kind | `type_builder` |
+
+  | Pillar | P10 |
+
+  | Domain | prospective_memory |
+
+  | Pipeline | 8F (F1-F8) |
+
+  | Scorer | cex_score.py |
+
+  | Compiler | cex_compile.py |
+
+  | Retriever | cex_retriever.py |
+
+  | Quality target | 9.0+ |
+
+  | Density target | 0.85+ |'

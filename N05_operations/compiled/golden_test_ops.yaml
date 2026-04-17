@@ -1,0 +1,125 @@
+id: p07_gt_golden_test_ops
+kind: golden_test
+pillar: P07
+title: 'Golden: N05 Operations Reference Fixtures'
+version: 1.0.0
+created: '2026-04-17'
+updated: '2026-04-17'
+author: golden-test-builder
+target_kind: operations_fixture
+input: 'Reference input/output pairs defining correct behavior for N05 critical operations: compile, signal, frontmatter validation,
+  doctor, sanitize, commit hook.'
+golden_output_ref: inline
+quality_threshold: 9.5
+rationale: '- H01: frontmatter parses as valid YAML (gate: H01 pass)
+
+  - H02: id=p07_gt_golden_test_ops matches `^p07_gt_[a-z][a-z0-9_]+$` (H02 pass)
+
+  - H03: id equals filename stem golden_test_ops (H03 pass)
+
+  - H04: kind == golden_test (H04 pass)
+
+  - H05: quality == null (H05 pass)
+
+  - H06: all 14 required fields present (H06 pass)
+
+  - H07: quality_threshold=9.5 >= 9.5 (H07 pass)
+
+  - H08: target_kind=operations_fixture, not golden_test (H08 pass)
+
+  - H09: Golden Output section present with 8 complete fixtures (H09 pass)
+
+  - H10: Input Scenario section present and non-empty (H10 pass)
+
+  - H11: rationale references H01, H02, H03, H04, H05, H06, H07, H08, H09, H10, S03-S05 (H11 pass)
+
+
+  S03: 8 fixtures map to distinct ops gate paths (compile/signal/hook/doctor/sanitize/commit).
+
+  S04: Every fixture is copy-pasteable as a real test assertion.
+
+  S05: golden_frontmatter_fail and golden_sanitize_dirty are edge/failure cases.
+
+  S06: This is not a few_shot_example (teaches format) -- it evaluates correct ops behavior.
+
+  S07: This is not a unit_eval -- it is a 9.5+ reference fixture set, not a threshold assertion.
+
+  S08: Reviewer: n07_orchestrator, approval_date: 2026-04-17.'
+edge_case: true
+reviewer: n07_orchestrator
+approval_date: '2026-04-17'
+domain: operations
+quality: null
+tags:
+- golden-test
+- n05-operations
+- compile
+- signal
+- frontmatter
+- sanitize
+- doctor
+tldr: '8 N05 ops golden fixtures: compile->yaml, signal->json, frontmatter pass/fail, doctor healthy, sanitize pass/fail,
+  commit hook accept.'
+density_score: 0.91
+linked_artifacts:
+  primary: archetypes/builders/golden-test-builder/
+  related:
+  - N05_operations/P07_evals/p07_efw_n05_operations.md
+  - N05_operations/P07_evals/p07_tc_n05_operations.md
+  - _tools/cex_compile.py
+  - _tools/cex_hooks.py
+  - _tools/cex_sanitize.py
+  - _tools/cex_doctor.py
+input_scenario: 'Eight deterministic reference cases for N05 operations. Each case is a triple: (test_id, input_fixture, expected_output,
+  comparison_method). Gating Wrath lens: no ambiguity tolerated -- every case has an exact pass/fail assertion, no fuzzy matches.'
+golden_output: ''
+golden_compile: "test_id: golden_compile\ndescription: \"cex_compile.py converts minimal valid .md to .yaml\"\ninput_fixture:\
+  \ |\n  ---\n  id: p01_kc_test\n  kind: knowledge_card\n  pillar: P01\n  version: \"1.0.0\"\n  created: \"2026-04-17\"\n\
+  \  updated: \"2026-04-17\"\n  author: \"test\"\n  domain: \"test\"\n  quality: null\n  tags: [test, compile, validation]\n\
+  \  tldr: \"Minimal KC for compile golden test\"\n  ---\n  ## Body\n  Content here.\nexpected_output:\n  file_created: true\n\
+  \  yaml_fields_present: [id, kind, pillar, version, created, updated, author, domain, quality, tags, tldr]\n  exit_code:\
+  \ 0\ncomparison_method: json_match"
+golden_signal: "test_id: golden_signal\ndescription: \"signal_writer.write_signal produces valid JSON signal file\"\ninput_fixture:\
+  \ \"write_signal('n05', 'complete', 9.0)\"\nexpected_output:\n  file_pattern: \".cex/runtime/signals/signal_n05_complete_*.json\"\
+  \n  required_fields: [nucleus, event_type, score, timestamp]\n  field_values:\n    nucleus: \"n05\"\n    event_type: \"\
+  complete\"\n    score: 9.0\n  timestamp_format: \"ISO8601\"\n  exit_code: 0\ncomparison_method: json_match"
+golden_frontmatter: "test_id: golden_frontmatter\ndescription: \"cex_hooks pre-commit accepts artifact with all required fields\"\
+  \ninput_fixture:\n  id: p07_gt_example\n  kind: golden_test\n  pillar: P07\n  version: \"1.0.0\"\n  created: \"2026-04-17\"\
+  \n  updated: \"2026-04-17\"\n  author: \"builder\"\n  target_kind: \"knowledge_card\"\n  quality_threshold: 9.5\n  reviewer:\
+  \ \"orchestrator\"\n  domain: \"test\"\n  quality: null\n  tags: [golden-test, test, fixture]\n  tldr: \"Valid frontmatter\
+  \ fixture for hook validation\"\nexpected_output:\n  exit_code: 0\n  stderr: \"\"\ncomparison_method: exact"
+golden_frontmatter_fail: "test_id: golden_frontmatter_fail\ndescription: \"cex_hooks pre-commit rejects artifact missing 'kind'\
+  \ field\"\ninput_fixture:\n  id: p07_gt_broken\n  pillar: P07\n  version: \"1.0.0\"\n  quality: null\n  tags: [test]\nexpected_output:\n\
+  \  exit_code: 1\n  stderr_contains: \"kind\"\ncomparison_method: contains"
+golden_doctor_healthy: "test_id: golden_doctor_healthy\ndescription: \"cex_doctor.py reports 0 failures on clean repo state\"\
+  \ninput_fixture: \"clean_repo_state\"\nexpected_output:\n  stdout_contains: \"0 failures\"\n  exit_code: 0\ncomparison_method:\
+  \ contains"
+golden_sanitize_clean: "test_id: golden_sanitize_clean\ndescription: \"cex_sanitize.py --check passes on ASCII-only .py file\"\
+  \ninput_fixture: |\n  # ASCII-only Python file\n  def hello():\n      print(\"[OK] all good\")\nexpected_output:\n  exit_code:\
+  \ 0\n  stdout_contains: \"clean\"\ncomparison_method: contains"
+golden_sanitize_dirty: "test_id: golden_sanitize_dirty\ndescription: \"cex_sanitize.py --check fails on .py containing em-dash\
+  \ U+2014\"\ninput_fixture: |\n  # Python file with em-dash violation\n  # line 2: result -- value\n  x = 1\nexpected_output:\n\
+  \  exit_code: 1\n  stdout_pattern: \"line [0-9]+\"\n  violation_char: \"U+2014\"\ncomparison_method: regex"
+golden_commit_format: "test_id: golden_commit_format\ndescription: \"cex_hooks commit-msg accepts '[N05] valid message' format\"\
+  \ninput_fixture: \"[N05] add golden fixtures for ops pipeline\"\nexpected_output:\n  exit_code: 0\n  accepted: true\ncomparison_method:\
+  \ exact"
+evaluation_criteria:
+- '[ ] golden_compile: yaml file created with all frontmatter fields, exit 0'
+- '[ ] golden_signal: JSON file matches schema (nucleus/event_type/score/timestamp), exit 0'
+- '[ ] golden_frontmatter: cex_hooks exits 0, no stderr'
+- '[ ] golden_frontmatter_fail: cex_hooks exits 1, stderr contains "kind"'
+- '[ ] golden_doctor_healthy: stdout contains "0 failures", exit 0'
+- '[ ] golden_sanitize_clean: exit 0, stdout contains "clean"'
+- '[ ] golden_sanitize_dirty: exit 1, stdout matches "line [0-9]+" regex'
+- '[ ] golden_commit_format: hook exits 0 for "[N05] valid message" format'
+- '[ ] All 8 test_ids are unique'
+- '[ ] All comparison_method values are one of: exact/contains/regex/json_match'
+- '[ ] No real user data in any fixture (synthetic only)'
+references:
+- '`_tools/cex_compile.py` -- compile .md to .yaml'
+- '`_tools/signal_writer.py` -- write_signal(nucleus, event_type, score)'
+- '`_tools/cex_hooks.py` -- pre-commit + commit-msg validation'
+- '`_tools/cex_doctor.py` -- repo health check'
+- '`_tools/cex_sanitize.py` -- ASCII-only enforcement'
+- '`.claude/rules/ascii-code-rule.md` -- U+2014 violation spec'
+- '`N05_operations/P07_evals/p07_efw_n05_operations.md` -- N05 eval framework'

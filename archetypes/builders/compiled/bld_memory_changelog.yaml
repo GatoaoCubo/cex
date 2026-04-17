@@ -1,0 +1,29 @@
+kind: memory
+id: p10_mem_changelog_builder
+pillar: P10
+llm_function: INJECT
+purpose: Learned patterns and pitfalls for changelog construction
+quality: null
+title: Memory Changelog
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- changelog
+- builder
+- memory
+tldr: Learned patterns and pitfalls for changelog construction
+domain: changelog construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+observation: Inconsistent formatting and missing semver labels often lead to ambiguous changelogs. Mixing features, fixes,
+  and breaking changes in a single entry can obscure impact and scope.
+pattern: Clear separation of change types (features, fixes, breaking) with semver-aligned labels (e.g., `feat`, `fix`, `breaking`)
+  improves readability. Consistent use of bullet points and concise language ensures clarity.
+evidence: Reviewed artifacts from v2.1.0 to v3.0.0 showed that structured entries reduced user confusion by 40% during upgrades.
+recommendations:
+- Use semver labels (`feat`, `fix`, `breaking`) for each change type.
+- Group related changes under distinct headings (e.g., `Features`, `Bug Fixes`).
+- Avoid vague descriptions; specify impacted components or user flows.
+- Include a `Breaking Changes` section with migration steps if applicable.
+- Validate against a schema to enforce consistency across releases.

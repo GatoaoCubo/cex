@@ -1,0 +1,53 @@
+kind: schema
+id: bld_schema_cohort_analysis
+pillar: P06
+llm_function: CONSTRAIN
+purpose: Formal schema -- SINGLE SOURCE OF TRUTH for cohort_analysis
+quality: null
+title: Schema Cohort Analysis
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- cohort_analysis
+- builder
+- schema
+tldr: Formal schema -- SINGLE SOURCE OF TRUTH for cohort_analysis
+domain: cohort_analysis construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+frontmatter_fields: ''
+required: "| Field        | Type   | Required | Default | Notes                              |  \n|--------------|--------|----------|---------|------------------------------------|\
+  \  \n| id           | string | yes      | null    | Unique identifier                  |  \n| kind         | string | yes\
+  \      | null    | Must be 'cohort_analysis'          |  \n| pillar       | string | yes      | null    | Must be 'P07'\
+  \                      |  \n| title        | string | yes      | null    | Descriptive title                  |  \n| version\
+  \      | string | yes      | null    | Semantic version (e.g., 1.0.0)     |  \n| created      | date   | yes      | null\
+  \    | ISO 8601 date                      |  \n| updated      | date   | yes      | null    | ISO 8601 date            \
+  \          |  \n| author       | string | yes      | null    | Primary author                     |  \n| domain       |\
+  \ string | yes      | null    | Domain (e.g., 'health', 'finance') |  \n| quality      | null   | yes      | null    | Never\
+  \ self-score; peer review assigns |  \n| tags         | list   | yes      | null    | Keywords for categorization      \
+  \  |  \n| tldr         | string | yes      | null    | One-sentence summary               |  \n| cohort_definition | string\
+  \ | yes | null | Cohort selection criteria        |  \n| analysis_method | string | yes | null | Statistical or analytical\
+  \ approach |"
+recommended: "| Field         | Type   | Notes                          |  \n|---------------|--------|--------------------------------|\
+  \  \n| data_source   | string | Origin of cohort data          |  \n| sample_size   | int    | Number of participants  \
+  \       |"
+id_pattern: ^p07_ca_[a-z][a-z0-9_]+.yaml$
+body_structure:
+- Cohort Definition
+- Detailed criteria for cohort selection
+- Population Criteria
+- Inclusion/exclusion rules and demographics
+- Analysis Method
+- Statistical techniques and tools used
+- Key Findings
+- Summary of results and insights
+- Interpretation
+- Contextual implications and limitations
+constraints:
+- File must adhere to ID pattern and max 3072 bytes
+- Quality field must be assigned by peer review, not self-scored
+- Version must follow semantic versioning (e.g., 1.0.0)
+- Tags must use lowercase, alphanumeric, and underscores only
+- Domain-specific fields must be populated for validity
+- Created/updated dates must be in ISO 8601 format

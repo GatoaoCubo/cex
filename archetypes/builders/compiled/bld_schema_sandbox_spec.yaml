@@ -1,0 +1,68 @@
+kind: schema
+id: bld_schema_sandbox_spec
+pillar: P06
+llm_function: CONSTRAIN
+purpose: Formal schema -- SINGLE SOURCE OF TRUTH for sandbox_spec
+quality: null
+title: Schema Sandbox Spec
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- sandbox_spec
+- builder
+- schema
+tldr: Formal schema -- SINGLE SOURCE OF TRUTH for sandbox_spec
+domain: sandbox_spec construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+frontmatter_fields: ''
+required: '| Field      | Type   | Required | Default | Notes |
+
+  |------------|--------|----------|---------|-------|
+
+  | id         | string | yes      | null    | Must match ID Pattern |
+
+  | kind       | string | yes      | null    | Always "sandbox_spec" |
+
+  | pillar     | string | yes      | null    | Always "P09" |
+
+  | title      | string | yes      | null    | Human-readable name |
+
+  | version    | string | yes      | null    | Semver format (e.g., 1.0.0) |
+
+  | created    | date   | yes      | null    | ISO 8601 format |
+
+  | updated    | date   | yes      | null    | ISO 8601 format |
+
+  | author     | string | yes      | null    | Maintainer email |
+
+  | domain     | string | yes      | null    | "sandbox" |
+
+  | quality    | null   | yes      | null    | Never self-score; peer review assigns |
+
+  | tags       | list   | yes      | []      | Keywords for discovery |
+
+  | tldr       | string | yes      | null    | One-sentence summary |
+
+  | sandbox_type | string | yes | null | "dev" or "prod" |
+
+  | resource_limits | object | yes | {} | CPU/Memory/Storage constraints |'
+recommended: '| Field          | Type   | Notes |
+
+  |----------------|--------|-------|
+
+  | sandbox_image  | string | Docker image reference |
+
+  | network_config | object | VPC/ACL definitions |'
+id_pattern: ^p09_sb_[a-z][a-z0-9_]+.yaml$
+body_structure: "1. Overview\n   Brief description of the sandbox's purpose and scope.\n\n2. Configuration\n   Detailed parameters\
+  \ for setup (e.g., environment variables, dependencies).\n\n3. Security\n   Access controls, isolation mechanisms, and compliance\
+  \ requirements.\n\n4. Resource Limits\n   Maximum CPU, memory, and storage allocations.\n\n5. Usage Examples\n   Sample\
+  \ commands or workflows for common tasks."
+constraints:
+- ID must match exact regex pattern
+- File size must not exceed 4096 bytes
+- All required fields must be present and valid
+- Version must follow semver (e.g., 1.2.3)
+- sandbox_type must be "dev" or "prod"

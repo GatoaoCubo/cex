@@ -12,8 +12,8 @@ quality: 9.0
 tags: [quality-gate, vision-tool, P04, image, ocr, confidence-threshold]
 tldr: "Pass/fail gate for vision_tool artifacts: input type coverage, capability documentation, provider mapping, confidence thresholds, and output schema."
 density_score: 0.90
+llm_function: GOVERN
 ---
-
 # Gate: vision_tool
 ## Definition
 | Field | Value |

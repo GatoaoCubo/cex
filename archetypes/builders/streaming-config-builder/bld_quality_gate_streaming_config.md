@@ -1,0 +1,76 @@
+---
+id: p11_qg_streaming_config
+kind: quality_gate
+pillar: P11
+title: "Gate: streaming_config"
+version: "1.0.0"
+created: "2026-04-13"
+updated: "2026-04-13"
+author: "builder_agent"
+domain: "streaming_config -- SSE, WebSocket, and chunked HTTP transport specifications"
+quality: 9.1
+tags: [quality-gate, streaming-config, SSE, WebSocket, chunked, P11]
+tldr: "Gates for streaming_config: validates protocol enum, buffer positivity, heartbeat presence, lifecycle completeness."
+density_score: 0.92
+llm_function: GOVERN
+---
+# Gate: streaming_config
+
+## Definition
+
+| Field | Value |
+|-------|-------|
+| metric | Composite score from SOFT dimensions + all HARD gates pass |
+| threshold | >= 7.0 to publish; >= 9.5 golden |
+| operator | AND (all HARD) + weighted_sum (SOFT) |
+| scope | All artifacts where `kind: streaming_config` |
+
+## HARD Gates
+All must pass. Any single failure = REJECT regardless of SOFT score.
+
+| ID | Check | Failure message |
+|----|-------|----------------|
+| H01 | Frontmatter parses as valid YAML | "Frontmatter YAML syntax error" |
+| H02 | `id` matches `^p05_sc_[a-z][a-z0-9_]+$` | "ID fails streaming_config namespace regex" |
+| H03 | `id` value equals filename stem | "ID does not match filename" |
+| H04 | `kind` equals literal `"streaming_config"` | "Kind is not 'streaming_config'" |
+| H05 | `quality` field is `null` | "Quality must be null at authoring time" |
+| H06 | All required fields present: id, kind, pillar, protocol, version, created, author, tags, tldr | "Missing required field(s)" |
+| H07 | `protocol` is one of: sse, websocket, chunked, auto | "Protocol is not a valid enum value" |
+| H08 | `buffer_bytes` is a positive integer (> 0) when present | "buffer_bytes must be a positive integer" |
+| H09 | `heartbeat_interval_ms` is present when protocol is sse or websocket | "heartbeat_interval_ms required for SSE and WebSocket" |
+| H10 | Body contains all 4 required sections: Overview, Protocol Settings, Flow Control, Lifecycle | "Missing required body section(s)" |
+
+## SOFT Scoring
+Dimensions sum to 100%. Score each 0.0-10.0; multiply by weight.
+
+| Dimension | Weight | What to assess |
+|-----------|--------|----------------|
+| Protocol rationale | 1.0 | Explains why this protocol was chosen over alternatives |
+| Buffer sizing justification | 1.0 | buffer_bytes choice is explained relative to expected data rate |
+| Backpressure completeness | 1.0 | backpressure_strategy present with overflow rationale |
+| Heartbeat tuning | 1.0 | heartbeat_interval_ms below known proxy timeout thresholds |
+| Flush interval correctness | 1.0 | flush_interval_ms <= 50ms for token streams; documented rationale |
+| Lifecycle completeness | 1.0 | timeout_ms, reconnect_delay_ms, shutdown strategy all present |
+| Boundary clarity | 0.5 | Explicitly not output_template, formatter, or trace_config |
+| Consumer/producer identification | 1.0 | Overview names the producer system and consumer system |
+| Protocol settings completeness | 1.0 | All protocol-specific parameters filled (content_type, encoding, etc.) |
+| Documentation quality | 0.5 | tldr names protocol and key tuning values |
+
+Weight sum: 1.0+1.0+1.0+1.0+1.0+1.0+0.5+1.0+1.0+0.5 = 9.5 (normalized to 100%)
+
+## Actions
+
+| Score | Tier | Action |
+|-------|------|--------|
+| >= 9.5 | GOLDEN | Publish to pool as golden exemplar |
+| >= 8.0 | PUBLISH | Publish to pool |
+| >= 7.0 | REVIEW | Flag for human review before publish |
+| < 7.0 | REJECT | Return to author with failure report |
+
+## Bypass
+
+| Field | Value |
+|-------|-------|
+| conditions | New transport integration where full parameter set is not yet known |
+| approver | Engineering lead approval required (written); protocol and buffer fields never bypassed |

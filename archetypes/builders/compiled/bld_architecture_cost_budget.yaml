@@ -1,0 +1,104 @@
+kind: architecture
+id: bld_architecture_cost_budget
+pillar: P08
+llm_function: CONSTRAIN
+purpose: Component map of cost_budget -- inventory, dependencies, and architectural position
+quality: null
+title: Architecture Cost Budget
+version: 1.0.0
+author: n03_builder
+tags:
+- cost_budget
+- builder
+- architecture
+- P09
+tldr: 'Component map for cost_budget: scope, budget catalog, alert policy, overage rules, and dependency graph.'
+domain: cost budget construction
+created: '2026-04-13'
+updated: '2026-04-13'
+density_score: 0.9
+component_inventory: '| Name | Role | Owner | Status |
+
+  |------|------|-------|--------|
+
+  | scope | System boundary this budget covers: global, provider, or model | cost-budget-builder | required |
+
+  | budget_catalog | Per-provider/model entries: limits, threshold, reset, action | cost-budget-builder | required |
+
+  | alert_policy | Threshold tiers (warn/block), channels, escalation path | cost-budget-builder | required |
+
+  | overage_rules | Breach behavior, grace period, limit increase process | cost-budget-builder | required |
+
+  | reset_policy | When spend counters reset (daily/weekly/monthly/rolling/none) | cost-budget-builder | required |
+
+  | currency | Budget unit: USD or token_units | cost-budget-builder | required |
+
+  | enforcement_ref | Reference to runtime enforcer (cex_token_budget.py) | cost-budget-builder | recommended |
+
+  | metadata | id, version, pillar, scope, author, created date | cost-budget-builder | required |'
+dependency_graph: 'guardrail (P11) --constrains--> cost_budget (security: no credentials in artifact)
+
+  rate_limit_config (P09) --orthogonal-- cost_budget (RPM/TPM throughput vs USD/token spend)
+
+  cost_budget --enforced_by--> cex_token_budget.py (runtime SDK reads budget at call time)
+
+  cost_budget --alerts_via--> trace_config (P09) (alert channels reference trace/logging config)
+
+  cost_budget --consumed_by--> boot_config (P02) (boot may check budget before starting provider)
+
+  cost_budget --consumed_by--> agent (P02) (agent respects budget for its LLM calls)
+
+  cost_budget --consumed_by--> workflow (P12) (workflow gates steps on budget availability)
+
+  env_config (P09) --independent-- cost_budget (env_config = variable catalog; cost_budget = spend limit)
+
+  feature_flag (P09) --independent-- cost_budget (feature_flag = on/off toggle; cost_budget = spend cap)
+
+
+  | From | To | Type | Data |
+
+  |------|----|------|------|
+
+  | guardrail | cost_budget | constrains | no credentials, no payment data in artifact |
+
+  | cost_budget | cex_token_budget.py | enforced_by | limits, thresholds, reset policy read at call time |
+
+  | cost_budget | trace_config | alerts_via | alert channels, webhook URLs |
+
+  | cost_budget | boot_config | consumed_by | provider budget checked before startup |
+
+  | cost_budget | agent | consumed_by | per-call budget check before LLM invocation |
+
+  | cost_budget | workflow | consumed_by | step gate: sufficient budget to proceed? |'
+boundary_table: '| cost_budget IS | cost_budget IS NOT |
+
+  |---------------|-------------------|
+
+  | Spend governance: USD or token limits per provider/model | rate_limit_config (P09) -- rate limits govern RPM/TPM throughput,
+  not total spend |
+
+  | Alert thresholds: warn and block at configured percentages | env_config (P09) -- env_config catalogs environment variables,
+  not spend limits |
+
+  | Reset policy: when spend counters start fresh | feature_flag (P09) -- feature_flag is an on/off toggle, not a spend specification
+  |
+
+  | Overage rules: what happens when limit is hit | permission (P09) -- permission governs access control, not cost limits
+  |
+
+  | Scope hierarchy: global > provider > model | runtime_rule (P09) -- runtime_rule governs timeouts/retries, not spending
+  |
+
+  | Enforcement reference: points to runtime SDK | billing_account (external) -- actual billing is external; artifact is policy
+  only |'
+layer_map: '| Layer | Components | Purpose |
+
+  |-------|------------|---------|
+
+  | Safety | guardrail, alert_policy | Prevent overspend, enforce notification chain |
+
+  | Governance | budget_catalog, reset_policy, overage_rules | Define limits and consequences |
+
+  | Enforcement | cex_token_budget.py reference | Runtime check at every LLM call |
+
+  | Observability | trace_config integration | Spend metrics, alert delivery, audit trail |'

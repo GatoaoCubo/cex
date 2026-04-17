@@ -1,0 +1,222 @@
+---
+kind: output_template
+id: bld_output_template_action_paradigm
+pillar: P05
+llm_function: PRODUCE
+purpose: Template with vars for action_paradigm production
+quality: 9.1
+title: "Output Template Action Paradigm"
+version: "1.1.0"
+author: n01_polish
+tags: [action_paradigm, builder, output_template]
+tldr: "Template with vars for action_paradigm production -- includes field guide, constraints, and filled example"
+domain: "action_paradigm construction"
+created: "2026-04-13"
+updated: "2026-04-13"
+density_score: null
+---
+
+## Frontmatter Template
+
+```yaml
+---
+id: p04_act_{{slug}}
+kind: action_paradigm
+title: "{{title}}"
+paradigm_type: {{paradigm_type}}
+version: {{version}}
+tags: {{tags}}
+domain: {{domain}}
+quality: null
+---
+```
+
+## Frontmatter Field Guide
+
+| Field | Type | Constraints | Example Value |
+|-------|------|------------|--------------|
+| id | string | pattern: p04_act_{slug}, slug = snake_case | p04_act_nav_obstacle_avoidance |
+| kind | string | fixed: action_paradigm | action_paradigm |
+| title | string | max 80 chars, verb-noun-context | "Reactive Obstacle Avoidance for Mobile Robot" |
+| paradigm_type | enum | reactive / deliberative / hybrid / hierarchical | reactive |
+| version | semver | major.minor.patch, start at 1.0.0 | 1.0.0 |
+| tags | list | >=3 tags, include paradigm_type and domain | [reactive, navigation, robotics] |
+| domain | string | application domain of the paradigm | autonomous navigation |
+| quality | null | always null at creation, peer-scored | null |
+
+---
+
+## Body Sections (All Required)
+
+### Section 1: Paradigm Overview
+
+```markdown
+## Paradigm Overview
+
+{{paradigm_type}} paradigm for {{domain}}.
+Decision cycle: {{decision_cycle_ms}}ms. Priority model: {{priority_model}}.
+{{one_sentence_behavioral_summary}}
+```
+
+**Guidance**: State paradigm_type, cycle time in ms, and priority model (priority-order/mutex/round-robin).
+Prose max 3 sentences. Do not embed implementation details (those go in steps).
+
+---
+
+### Section 2: State-Action Table (Required, >= 4 rows)
+
+```markdown
+## State-Action Table
+
+| State | Precondition | Action | Postcondition | Priority |
+|-------|-------------|--------|--------------|----------|
+| {{state_1}} | {{precondition_1}} | {{action_1}} | {{postcondition_1}} | {{priority_1}} |
+| {{state_2}} | {{precondition_2}} | {{action_2}} | {{postcondition_2}} | {{priority_2}} |
+| {{state_3}} | {{precondition_3}} | {{action_3}} | {{postcondition_3}} | {{priority_3}} |
+| {{state_4}} | {{precondition_4}} | {{action_4}} | {{postcondition_4}} | {{priority_4}} |
+```
+
+**Field constraints for State-Action Table**
+
+| Column | Constraint | Bad Example | Good Example |
+|--------|-----------|------------|-------------|
+| State | Noun phrase, present tense | "doing navigation" | obstacle_detected |
+| Precondition | Boolean-evaluable condition | "when needed" | distance < 0.5m AND sensor_ok=true |
+| Action | Verb_noun, no transport verbs | "send POST /move" | execute_avoidance_maneuver |
+| Postcondition | State assertion after action | "done" | velocity = 0.0, alert_log.append(event) |
+| Priority | Integer 0-9, lower = higher priority | "high" | 0 (safety), 1 (efficiency) |
+
+---
+
+### Section 3: Concurrency Model (Required)
+
+```markdown
+## Concurrency Model
+
+Conflict resolution: {{conflict_policy}}.
+{{resource_lock_description}}
+{{preemption_rules}}
+```
+
+**Guidance for concurrency policy options**
+
+| Policy | When to Use | Example Statement |
+|--------|------------|-----------------|
+| Priority-order | Multiple parallel actions possible | Lower priority number wins; ties go to shorter estimated duration |
+| Mutex per resource | Single shared resource | motor_controller locked for duration of any movement action |
+| Round-robin | Equal-priority concurrent actions | Actions in same priority tier execute in FIFO submission order |
+| Preemptive | Safety-critical interruption | P0 actions interrupt all lower-priority actions immediately |
+
+---
+
+### Section 4: Failure Recovery Table (Required, >= 3 rows)
+
+```markdown
+## Failure Recovery
+
+| Failure Mode | Detection Signal | Recovery Action | Timeout | Max Retries |
+|-------------|-----------------|----------------|---------|-------------|
+| {{failure_1}} | {{detection_1}} | {{recovery_1}} | {{timeout_1}} | {{retries_1}} |
+| {{failure_2}} | {{detection_2}} | {{recovery_2}} | {{timeout_2}} | {{retries_2}} |
+| {{failure_3}} | {{detection_3}} | {{recovery_3}} | {{timeout_3}} | {{retries_3}} |
+```
+
+**Field constraints for Failure Recovery**
+
+| Column | Constraint | Minimum |
+|--------|-----------|---------|
+| Failure Mode | Named failure, not "error" | 3 distinct failure modes |
+| Detection Signal | Observable symptom, measurable | Threshold or event, not "when it breaks" |
+| Recovery Action | Named action from state-action table or new action | Must be executable, not "fix it" |
+| Timeout | Duration in ms/s before escalation | Always specified; "none" only for immediate recovery |
+| Max Retries | Integer or 0 for no retry | 0, 1, or 3; no unbounded retries |
+
+---
+
+### Section 5: Environment Interface (Required)
+
+```markdown
+## Environment Interface
+
+| Interface | Type | Direction | Description |
+|-----------|------|-----------|-------------|
+| {{interface_1}} | {{type_1}} | input/output | {{desc_1}} |
+| {{interface_2}} | {{type_2}} | input/output | {{desc_2}} |
+| {{interface_3}} | {{type_3}} | input/output | {{desc_3}} |
+```
+
+**Guidance**: List all external interfaces the paradigm reads from (inputs) or writes to (outputs).
+Do NOT embed transport protocols here -- reference agent_computer_interface artifacts instead.
+
+---
+
+## Filled Example (Minimal Valid Artifact)
+
+```markdown
+---
+id: p04_act_door_entry_control
+kind: action_paradigm
+title: "Reactive Door Entry Control for Access System"
+paradigm_type: reactive
+version: 1.0.0
+tags: [reactive, access-control, iot]
+domain: physical access control
+quality: null
+---
+
+## Paradigm Overview
+
+Reactive paradigm for physical access control.
+Decision cycle: 200ms. Priority model: priority-order (lower number wins).
+Agent senses credential, validates against policy, actuates door, and logs event atomically.
+
+## State-Action Table
+
+| State | Precondition | Action | Postcondition | Priority |
+|-------|-------------|--------|--------------|----------|
+| credential_presented | card_data_valid AND policy_allows | unlock_door | door_state=open, event_logged | 1 |
+| credential_presented | card_data_valid AND policy_denies | deny_entry | door_state=closed, denial_logged | 1 |
+| credential_presented | card_data_invalid | reject_credential | door_state=closed, tamper_flag+=1 | 0 |
+| tamper_detected | tamper_flag >= 3 | lockdown_zone | all_doors=locked, security_alerted | 0 |
+| door_open | time_elapsed > 30s | force_close | door_state=closed, overstay_logged | 2 |
+
+## Concurrency Model
+
+Conflict resolution: priority-order (0 beats 1 beats 2).
+door_actuator locked for duration of any unlock/lock action.
+P0 tamper_detection interrupts any pending P1/P2 action.
+
+## Failure Recovery
+
+| Failure Mode | Detection Signal | Recovery Action | Timeout | Max Retries |
+|-------------|-----------------|----------------|---------|-------------|
+| reader_timeout | no credential data > 500ms | reset_reader | 1s | 3 |
+| policy_service_unavailable | HTTP 503 or timeout > 200ms | fallback_to_cached_policy | 200ms | 1 |
+| door_actuator_fault | door_state mismatch after 1s | manual_override_alert | immediate | 0 |
+| network_failure | heartbeat missing > 5s | offline_mode_cached_allow | 5s | 0 |
+
+## Environment Interface
+
+| Interface | Type | Direction | Description |
+|-----------|------|-----------|-------------|
+| credential_reader | RFID/NFC stream | input | Raw credential bytes, 13.56MHz |
+| policy_service | REST API | input | Returns allow/deny for credential+zone |
+| door_actuator | GPIO / relay | output | High=unlock, Low=lock |
+| event_log | append-only stream | output | Structured audit event per access attempt |
+```
+
+---
+
+## Quality Gate Checklist
+
+| Gate | Check | Pass Condition |
+|------|-------|---------------|
+| H01 | paradigm_type in frontmatter | One of: reactive/deliberative/hybrid/hierarchical |
+| H02 | state-action table present | >= 4 rows with precondition + postcondition columns |
+| H03 | failure recovery table present | >= 3 named failure modes |
+| H04 | concurrency model stated | Not empty; policy explicitly named |
+| H05 | environment interface table | >= 3 rows, direction column present |
+| H06 | no transport verbs in actions | Actions describe agent behavior, not HTTP/MQTT calls |
+| H07 | all postconditions are assertions | No "done" or "completed" -- must state what changed |
+| H08 | id follows naming convention | Starts with p04_act_, uses snake_case |
+

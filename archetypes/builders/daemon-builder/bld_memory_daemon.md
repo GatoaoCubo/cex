@@ -29,6 +29,7 @@ observation_types: [user, feedback, project, reference]
 quality: 9.2
 title: "Memory Daemon"
 density_score: 0.90
+llm_function: INJECT
 ---
 ## Summary
 Long-running background processes fail in predictable ways: premature PID files mislead supervisors, missing signal handlers corrupt state, and shallow health checks hide real degradation. A three-layer design - startup barrier, signal fence, health probe - eliminates the most common failure modes without adding significant complexity.

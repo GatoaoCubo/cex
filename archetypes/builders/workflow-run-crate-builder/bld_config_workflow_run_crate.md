@@ -1,0 +1,35 @@
+---
+kind: config
+id: bld_config_workflow_run_crate
+pillar: P09
+llm_function: CONSTRAIN
+purpose: Naming, paths, limits for workflow_run_crate production
+quality: 8.6
+title: "Config Workflow Run Crate"
+version: "1.0.0"
+author: n04_wave7
+tags: [workflow_run_crate, builder, config, RO-Crate, p10]
+tldr: "Naming, paths, limits for workflow_run_crate production"
+domain: "workflow_run_crate construction"
+created: "2026-04-14"
+updated: "2026-04-14"
+density_score: 0.85
+---
+
+## Naming Convention
+Pattern: `p10_wrc_{{name}}.md`
+Examples: `p10_wrc_rnaseq_alignment_20260414.md`, `p10_wrc_ml_training_run_003.md`
+
+## Paths
+Artifacts stored in: `P10_memory/workflow_runs/{{name}}.md`
+
+## Limits
+max_bytes: 5120
+max_turns: 6
+effort_level: 4
+
+## Hooks
+pre_build: validate_orcid_format
+post_build: compile_to_yaml
+on_error: null
+on_quality_fail: rebuild_with_createaction_fix

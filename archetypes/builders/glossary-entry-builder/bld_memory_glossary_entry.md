@@ -23,6 +23,7 @@ observation_types: [user, feedback, project, reference]
 quality: 9.2
 title: "Memory Glossary Entry"
 density_score: 0.90
+llm_function: INJECT
 ---
 ## Summary
 A glossary entry defines one term in 3 lines maximum. Line 1 states what it is. Line 2 scopes it or gives a concrete example. Line 3 disambiguates it from the term most commonly confused with it. Anything beyond 3 lines is a knowledge_card, not a glossary entry.

@@ -1,0 +1,28 @@
+kind: collaboration
+id: bld_collaboration_expansion_play
+pillar: P12
+llm_function: COLLABORATE
+purpose: How expansion_play-builder works in crews with other builders
+quality: null
+title: Collaboration Expansion Play
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- expansion_play
+- builder
+- collaboration
+tldr: How expansion_play-builder works in crews with other builders
+domain: expansion_play construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+crew_role: Strategizes and executes growth initiatives for existing customers, identifying upsell/cross-sell opportunities,
+  creating tailored solutions, and coordinating with product/eng teams to scale adoption.
+receives_from: "| Builder       | What                          | Format         |  \n|---------------|-------------------------------|----------------|\
+  \  \n| Customer Success | Customer feedback/usage data  | Document       |  \n| Product       | Feature roadmap updates\
+  \       | Email          |  \n| Sales         | Existing account health       | Dashboard      |"
+produces_for: "| Builder       | What                          | Format         |  \n|---------------|-------------------------------|----------------|\
+  \  \n| Sales         | Expansion play strategies     | Playbook       |  \n| Product       | Feature prioritization requests\
+  \ | Jira ticket  |  \n| Leadership    | Expansion ROI metrics         | Dashboard      |"
+boundary: Does NOT handle churn prevention (churn_prevention_playbook) or new customer acquisition (sales_playbook). Does
+  NOT manage technical implementation; Engineering handles deployment.

@@ -1,0 +1,109 @@
+kind: examples
+id: bld_examples_edit_format
+pillar: P07
+llm_function: GOVERN
+purpose: Golden and anti-examples of edit_format artifacts
+quality: null
+title: Examples Edit Format
+version: 1.1.0
+author: n04_hybrid_review2
+tags:
+- edit_format
+- builder
+- examples
+- aider
+- unified_diff
+- search_replace
+tldr: Golden and anti-examples of edit_format artifacts
+domain: edit_format construction
+created: '2026-04-13'
+updated: '2026-04-13'
+density_score: 0.92
+golden_example_1_search_replace_format_spec: "---\nid: p06_ef_search_replace\nkind: edit_format\npillar: P06\ntitle: \"Search-Replace\
+  \ Block Edit Format\"\nversion: \"1.0.0\"\nformat_type: search_replace\nedit_scope: targeted_replace\ncreated: \"2026-04-13\"\
+  \nauthor: \"n04\"\ndomain: \"code_agent\"\nquality: null\ntags: [edit_format, search_replace, aider, cursor]\ntldr: \"Context-anchored\
+  \ SEARCH/REPLACE block pairs for LLM code edits -- no line numbers\"\ncompatible_tools: [aider, cursor, claude-code]\n---\n\
+  \n## Overview\n\nSearch-replace block format enables LLMs to specify precise file edits by referencing\nexact content rather\
+  \ than line numbers. Resilient to file drift between context loading\nand edit application. Used by Aider (search/replace\
+  \ mode) and Cursor (apply format).\n\n## Format Specification\n\nEach edit is expressed as a block with SEARCH (exact content\
+  \ to find) and REPLACE\n(new content to substitute). The host applies the edit by locating the SEARCH content\nexactly in\
+  \ the target file and replacing it with REPLACE content.\n\npath/to/target_file.py\n<<<<<<< SEARCH\n    old_function_call(param1,\
+  \ param2)\n=======\n    new_function_call(param1, param2, timeout=30)\n>>>>>>> REPLACE\n\nMultiple blocks apply sequentially.\
+  \ File path appears once before the first block\nor before each block in multi-file edits.\n\n## Application Rules\n\n1.\
+  \ SEARCH block MUST match file content byte-for-byte (whitespace, indentation, CRLF/LF)\n2. If SEARCH block not found: raise\
+  \ FileEditError, do NOT skip silently\n3. Apply top-to-bottom; do NOT reorder blocks\n4. Empty REPLACE = delete SEARCH content\n\
+  5. Empty SEARCH = prepend REPLACE at file start\n\n## Validation Rules\n\n- Both SEARCH and REPLACE sections must be non-empty\
+  \ (except explicit delete/prepend)\n- File path must be present and point to a valid path\n- Delimiter lines must be exactly:\
+  \ `<<<<<<< SEARCH`, `=======`, `>>>>>>> REPLACE`\n- SEARCH content must not contain the `=======` delimiter"
+golden_example_2_unified_diff_format_spec: "---\nid: p06_ef_unified_diff\nkind: edit_format\npillar: P06\ntitle: \"Unified\
+  \ Diff Edit Format\"\nversion: \"1.0.0\"\nformat_type: unified_diff\nedit_scope: partial_hunk\ncreated: \"2026-04-13\"\n\
+  author: \"n04\"\ndomain: \"git_workflow\"\nquality: null\ntags: [edit_format, unified_diff, git]\ntldr: \"Standard unified\
+  \ diff for LLM code edits -- git-apply compatible\"\ncompatible_tools: [git-apply, patch, aider]\n---\n\n## Overview\n\n\
+  Standard POSIX unified diff (`diff -u` output). Git-compatible. Best for small targeted\nchanges in git-centric workflows\
+  \ where the output can be piped to `git apply` directly.\n\n## Format Specification\n\n--- a/src/utils.py\n+++ b/src/utils.py\n\
+  @@ -42,7 +42,7 @@\n def process(items):\n-    for item in items:\n+    for item in sorted(items):\n         handle(item)\n\
+  \n## Application Rules\n\n1. Apply via `git apply` or `patch -p1 < file.diff`\n2. Context lines anchor the hunk -- must\
+  \ match existing file content\n3. Line number offsets in `@@ -n,m +n,m @@` are informational; `patch` recalculates if drift"
+anti_example_1_line_numbers_as_anchors: '---
+
+  id: p06_ef_line_based
+
+  format_type: search_replace
+
+  ---
+
+  # Edit specification
+
+  file: src/auth.py
+
+  line: 42
+
+  action: replace
+
+  old: "    pass"
+
+  new: "    return True"
+
+
+  Why it fails:
+
+  Line numbers are unstable -- any edit above line 42 shifts all subsequent line numbers.
+
+  By the time the agent applies the edit, line 42 may contain something entirely different.
+
+  Use SEARCH/REPLACE with actual content, not line numbers, for reliable application.'
+anti_example_2_placeholder_content_in_whole_mode: "src/models/user.py\n\nclass User:\n    # ... existing methods ...\n\n \
+  \   def new_method(self):\n        return True\n\nWhy it fails:\n`# ... existing imports ...` and `# ... existing methods\
+  \ ...` are placeholders, not real\ncontent. Whole-file format MUST contain the complete file. A host applying this format\n\
+  would overwrite all existing imports and methods with placeholder comments."
+anti_example_3_mixing_diff_strategy_into_edit_format: '---
+
+  id: p06_ef_hybrid
+
+  format_type: unified_diff
+
+  ---
+
+  ## Format
+
+  Uses unified diff with semantic matching enabled.
+
+
+  diff_strategy: semantic     # <-- WRONG: this is diff_strategy concern
+
+  fuzzy_threshold: 0.85       # <-- WRONG: matching algorithm, not wire format
+
+  edit: replace
+
+  from: "old code"
+
+  to: "new code"
+
+
+  Why it fails:
+
+  `diff_strategy`, `fuzzy_threshold`, and matching parameters belong to `diff_strategy` kind.
+
+  `edit_format` specifies the WIRE FORMAT (what the LLM emits), not how the host FINDS the
+
+  matching location in the file. These are separate CEX kinds with separate builders.'

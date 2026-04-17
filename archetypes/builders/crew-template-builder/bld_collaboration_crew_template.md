@@ -1,0 +1,39 @@
+---
+kind: collaboration
+id: bld_collaboration_crew_template
+pillar: P12
+llm_function: COLLABORATE
+purpose: How crew_template-builder works in crews with other builders
+quality: 8.9
+title: "Collaboration Crew Template"
+version: "1.0.0"
+author: n03_wave8_builder
+tags: [crew_template, builder, collaboration, composable, crewai]
+tldr: "How crew_template-builder works in crews with other builders"
+domain: "crew_template construction"
+created: "2026-04-14"
+updated: "2026-04-14"
+density_score: 0.87
+---
+
+## Crew Role
+Acts as the team-architect of P12 orchestration: composes role_assignment atoms into reusable crew blueprints. Upstream from supervisor (which instantiates and runs the crew) and workflow (which may sequence multiple crews).
+
+## Receives From
+| Builder                    | What                         | Format      |
+|----------------------------|------------------------------|-------------|
+| role-assignment-builder    | Role atoms (agent bindings)  | p02_ra_*.md |
+| handoff-protocol-builder   | Inter-role transfer formats  | p12_hp_*.md |
+| workflow-builder           | Task dependency graph        | p12_wf_*.md |
+| quality-gate-builder       | Gate IDs for success_criteria| p11_qg_*.md |
+
+## Produces For
+| Builder               | What                            | Format         |
+|-----------------------|---------------------------------|----------------|
+| supervisor-builder    | Crew blueprint to instantiate   | p12_ct_*.md    |
+| workflow-builder      | Reusable team step              | reference      |
+| agent-package-builder | Distributable crew bundle       | artifact ref   |
+| N07 orchestrator      | Dispatch-time crew instantiation| handoff ref    |
+
+## Boundary
+Does NOT bind individual agents to roles (that is role-assignment-builder). Does NOT execute the crew at runtime (supervisor-builder handles instantiation). Does NOT define single-task transfers (handoff-builder). Does NOT own agent identity (agent-builder). Owns ONLY the declarative blueprint: roles + process + memory + success.

@@ -37,13 +37,13 @@ priority_mode: "{{priority_mode}}"
 error_strategy: "{{error_strategy}}"
 ```
 ## Overview
-{{overview_content}}
+`{{overview_content}}`
 ## Hooks
-{{hooks_table_content}}
+`{{hooks_table_content}}`
 ## Lifecycle
-{{lifecycle_content}}
+`{{lifecycle_content}}`
 ## Integration
-{{integration_content}}
+`{{integration_content}}`
 
 ## Template Standards
 

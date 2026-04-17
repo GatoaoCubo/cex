@@ -1,0 +1,52 @@
+kind: instruction
+id: bld_instruction_state_machine
+pillar: P03
+llm_function: REASON
+purpose: Step-by-step production process for state_machine
+pattern: 3-phase pipeline (define -> compose -> validate)
+quality: null
+title: Instruction State Machine
+version: 1.0.0
+author: n03_builder
+tags:
+- state_machine
+- builder
+- instruction
+tldr: '3-phase: enumerate states and events, define transitions with guards/actions, validate determinism and completeness.'
+domain: state machine construction
+created: '2026-04-17'
+updated: '2026-04-17'
+density_score: 0.9
+phase_1_define:
+- Identify the entity whose lifecycle this machine governs
+- Enumerate all states the entity can be in (initial, intermediate, final)
+- Identify the initial state (only one)
+- Identify all final states (terminal states with no outgoing transitions)
+- 'For each state pair: what events can trigger a transition between them?'
+- 'For each transition: are there conditions (guards) that must be true?'
+- 'For each transition: are there side-effects (actions) to execute?'
+- 'For each state: are there entry or exit actions?'
+- 'Verify determinism: no two transitions have the same (from_state, event) pair without guards'
+- Count states and transitions for frontmatter fields
+phase_2_compose:
+- Read SCHEMA.md and OUTPUT_TEMPLATE.md
+- 'Fill frontmatter: all required fields (quality: null)'
+- 'Set id: `p12_sm_{entity_slug}` -- verify pattern `^p12_sm_[a-z][a-z0-9_]+$`'
+- Set entity, initial_state, final_states, states_count, transitions_count
+- 'Write States section: table with state name, type (initial/intermediate/final), description'
+- 'Write Transitions section: full table with from, event, to, guard, action'
+- 'Write Guards section: define each guard condition as a boolean expression'
+- 'Write Actions section: define each action with its trigger and effect'
+- Verify body <= 4096 bytes
+phase_3_validate:
+- Confirm id matches `^p12_sm_[a-z][a-z0-9_]+$`
+- Confirm kind == state_machine
+- Confirm initial_state is in states list
+- Confirm all final_states are in states list
+- Confirm states_count matches states table row count
+- Confirm transitions_count matches transitions table row count
+- 'Check determinism: no (from_state, event) appears twice without guards'
+- 'Confirm all 4 sections present: States, Transitions, Guards, Actions'
+- 'Cross-check: not workflow (no DAG), not process_manager (no event orchestration)'
+- 'Confirm quality: null'
+- Revise if score < 8.0

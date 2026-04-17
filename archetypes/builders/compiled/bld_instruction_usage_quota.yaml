@@ -1,0 +1,41 @@
+kind: instruction
+id: bld_instruction_usage_quota
+pillar: P03
+llm_function: REASON
+purpose: Step-by-step production process for usage_quota
+quality: null
+title: Instruction Usage Quota
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- usage_quota
+- builder
+- instruction
+tldr: Step-by-step production process for usage_quota
+domain: usage_quota construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+phase_1_research:
+- Analyze system usage patterns to identify peak load periods.
+- Define rate limits for API endpoints based on service-level agreements.
+- Determine quota metrics (e.g., requests per user, data transfer limits).
+- Study fair-use policies to align enforcement with legal and business rules.
+- Audit historical usage data for anomalies or abuse trends.
+- Consult stakeholders to prioritize quota enforcement for critical services.
+phase_2_compose:
+- Reference bld_schema_usage_quota.md to define `usage_quota` fields (e.g., `quota_limit`, `reset_interval`).
+- Set initial quota thresholds using P09 guidelines for resource allocation.
+- Map metrics to monitored resources (e.g., CPU, memory, API calls).
+- Write enforcement logic for exceeding thresholds (e.g., rate limiting, blocking).
+- Implement fair-use exceptions for legitimate high-usage scenarios.
+- Use bld_output_template_usage_quota.md to structure quota configuration files (YAML/JSON).
+- Integrate with monitoring tools for real-time quota tracking.
+- Document enforcement rules in a policy repository.
+- Test artifact against sample workloads to ensure constraint accuracy.
+phase_3_validate:
+- '[ ] ✅ Validate schema compliance with SCHEMA.md'
+- '[ ] ✅ Test quota thresholds against edge cases (e.g., zero, max limits)'
+- '[ ] ✅ Verify fair-use exceptions trigger correctly'
+- '[ ] ✅ Confirm integration with monitoring tools logs quota events'
+- '[ ] ✅ Ensure artifact enforces constraints without service disruption'

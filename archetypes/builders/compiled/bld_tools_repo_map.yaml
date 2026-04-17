@@ -1,0 +1,94 @@
+kind: tools
+id: bld_tools_repo_map
+pillar: P04
+llm_function: CALL
+purpose: Tools available for repo_map production
+quality: null
+title: Tools Repo Map
+version: 1.1.0
+author: n05_ops
+tags:
+- repo_map
+- builder
+- tools
+- tree-sitter
+- ctags
+- networkx
+- tiktoken
+tldr: 'Real repo map tools: tree-sitter (symbol extraction), NetworkX (PageRank), tiktoken (token budget), ctags (fallback)'
+domain: repo_map construction
+created: '2026-04-13'
+updated: '2026-04-13'
+density_score: 0.9
+symbol_extraction_tools: '| Tool | Purpose | Command / API |
+
+  |------|---------|---------------|
+
+  | tree-sitter (Python) | Incremental CST parser; extract functions/classes | `pip install tree-sitter tree-sitter-languages`
+  |
+
+  | tree-sitter-languages | Pre-built grammars for 40+ languages | `from tree_sitter_languages import get_language` |
+
+  | Universal ctags | Fallback symbol extractor for rare languages | `ctags --output-format=json -R .` |
+
+  | pygments (Lexer) | Tokenize source for language detection | `pygments.lexers.guess_lexer_for_filename()` |'
+graph_ranking_tools: '| Tool | Purpose | API |
+
+  |------|---------|-----|
+
+  | NetworkX | Graph construction + PageRank | `nx.DiGraph()`, `nx.pagerank(G, alpha=0.85)` |
+
+  | scipy (sparse) | Sparse matrix PageRank (large repos) | `scipy.sparse.linalg.eigs` |
+
+  | igraph | Fast alternative to NetworkX for large graphs | `igraph.Graph.PageRank()` |'
+token_budget_tools: '| Tool | Purpose | API |
+
+  |------|---------|-----|
+
+  | tiktoken | BPE tokenizer for OpenAI models | `tiktoken.get_encoding("cl100k_base")` |
+
+  | anthropic SDK | Token counting for Claude models | `client.beta.messages.count_tokens()` |
+
+  | tokenizers (HuggingFace) | Fast Rust tokenizers | `AutoTokenizer.from_pretrained(model)` |'
+file_discovery_and_filtering: '| Tool | Purpose | Command |
+
+  |------|---------|---------|
+
+  | ripgrep (rg) | Fast file search; apply .gitignore | `rg --files --glob "*.py"` |
+
+  | pathspec (Python) | Parse and apply .gitignore rules | `pathspec.PathSpec.from_lines("gitwildmatch", patterns)` |
+
+  | git ls-files | List tracked files respecting .gitignore | `git ls-files --cached --others --exclude-standard` |
+
+  | watchdog (Python) | File system events for incremental update | `watchdog.observers.Observer()` |'
+reference_import_analysis: '| Tool | Purpose | Language |
+
+  |------|---------|---------|
+
+  | ast (stdlib) | Python AST import extraction | `ast.parse()`, walk for `Import`/`ImportFrom` |
+
+  | acorn / esprima | JavaScript/TypeScript import analysis | `acorn.parse()` |
+
+  | go/parser (stdlib) | Go import extraction | `go/parser.ParseFile()` |
+
+  | javap / jdeprscan | Java class dependency analysis | `javap -p -c *.class` |'
+cex_infrastructure_tools: '| Tool | Purpose | When |
+
+  |------|---------|------|
+
+  | cex_compile.py | YAML compilation | Post-production |
+
+  | cex_score.py | Quality scoring | After artifact generation |
+
+  | cex_doctor.py | System health check | Pre-dispatch |
+
+  | cex_retriever.py | Similarity search | Find similar maps |'
+reference_implementation: '| Source | What to Study |
+
+  |--------|--------------|
+
+  | aider/repomap.py | Full Aider repo map implementation (PageRank + tree-sitter) |
+
+  | aider/linter.py | Tree-sitter language dispatch and query patterns |
+
+  | github.com/paul-gauthier/aider | Reference implementation for repo_map concept |'

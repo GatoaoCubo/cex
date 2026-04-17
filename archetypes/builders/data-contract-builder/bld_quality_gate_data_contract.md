@@ -1,0 +1,42 @@
+---
+id: bld_qg_data_contract
+kind: quality_gate
+pillar: P11
+llm_function: GOVERN
+version: 1.0.0
+quality: 5.8
+tags: [data_contract, quality-gate, schema, sla]
+title: "Quality Gate: data_contract"
+density_score: 1.0
+updated: "2026-04-17"
+---
+# Quality Gate: data_contract
+## HARD Gates
+| ID | Check | Fail Condition |
+|----|-------|----------------|
+| H01 | Frontmatter parses as valid YAML | Parse error |
+| H02 | id matches `^dc_[a-z][a-z0-9_]+$` | Wrong prefix or format |
+| H03 | kind == "data_contract" | Wrong kind |
+| H04 | quality == null | Non-null value |
+| H05 | producer_system present and non-empty | Missing |
+| H06 | consumer_system present and non-empty | Missing |
+| H07 | entity present and PascalCase | Missing or snake_case |
+| H08 | contract_version present (semver) | Missing or non-semver |
+| H09 | Schema section with >= 1 typed field | Missing schema |
+| H10 | Total file size <= 4096 bytes | Exceeds max_bytes |
+
+## SOFT Scoring
+| ID | Dimension | Weight | 10pts | 5pts | 0pts |
+|----|-----------|--------|-------|------|------|
+| S01 | SLA numeric thresholds | 1.0 | All metrics numeric | Some numeric | Vague only |
+| S02 | Schema field completeness | 1.0 | type + nullable + desc per field | type + nullable | Type only |
+| S03 | Versioning policy | 0.8 | backward_compat + policy + deprecation | Some policy | Absent |
+| S04 | Enforcement documented | 0.7 | Schema registry + contract tests | One mechanism | Neither |
+| S05 | Effective date set | 0.5 | Valid date | Date present | Absent |
+
+## Score Tiers
+| Score | Action |
+|-------|--------|
+| >= 9.0 | Publish; register in schema registry |
+| >= 7.0 | Use with monitoring; improve SLA specifics |
+| < 7.0 | Return: add numeric SLAs and typed schema fields |

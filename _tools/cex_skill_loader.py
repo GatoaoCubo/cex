@@ -40,22 +40,55 @@ SOURCE_PRIORITY = {
     "brand": 4,
 }
 
-# All 13 ISO file patterns per builder
+# All 13 ISO file patterns per builder (must match actual filenames on disk)
 ISO_PATTERNS = [
     "bld_manifest_{kind}.md",
     "bld_instruction_{kind}.md",
     "bld_system_prompt_{kind}.md",
-    "bld_memory_{kind}.md",
-    "bld_scoring_{kind}.md",
-    "bld_hooks_{kind}.md",
-    "bld_style_{kind}.md",
-    "bld_quality_{kind}.md",
-    "bld_template_{kind}.md",
-    "bld_examples_{kind}.md",
-    "bld_context_{kind}.md",
-    "bld_tools_{kind}.md",
     "bld_schema_{kind}.md",
+    "bld_output_template_{kind}.md",
+    "bld_examples_{kind}.md",
+    "bld_memory_{kind}.md",
+    "bld_tools_{kind}.md",
+    "bld_quality_gate_{kind}.md",
+    "bld_knowledge_card_{kind}.md",
+    "bld_architecture_{kind}.md",
+    "bld_collaboration_{kind}.md",
+    "bld_config_{kind}.md",
 ]
+
+# Stage-to-ISO mapping: which ISO prefixes are needed for each 8F stage.
+# Enables selective loading -- load 3 ISOs instead of 13 for targeted work.
+STAGE_ISO_MAP = {
+    "manifest": ["manifest"],
+    "constraint": ["schema", "manifest"],
+    "system_prompt": ["system_prompt"],
+    "instruction": ["instruction"],
+    "memory": ["memory"],
+    "knowledge_card": ["knowledge_card", "context"],
+    "few_shot": ["examples"],
+    "template": ["template", "output_template"],
+    "format": ["style", "template", "output_template"],
+    "quality_gate": ["quality", "scoring"],
+    "scoring_rubric": ["scoring"],
+    "tools": ["tools"],
+    "hooks": ["hooks"],
+    "context": ["context"],
+    "examples": ["examples"],
+    "schema": ["schema"],
+    "collaboration": ["collaboration"],
+    "architecture": ["architecture"],
+    "config": ["config"],
+}
+
+# Convenience aliases mapping 8F function names to stage groups
+F_STAGE_ALIASES = {
+    "F1": ["manifest", "constraint"],
+    "F2": ["system_prompt", "instruction"],
+    "F3": ["memory", "knowledge_card", "few_shot"],
+    "F6": ["instruction", "template", "format"],
+    "F7": ["quality_gate", "scoring_rubric"],
+}
 
 
 @dataclass
@@ -125,14 +158,65 @@ class SkillLoader:
         self._conditional: Dict[str, BuilderISO] = {}
         self._activated: Dict[str, BuilderISO] = {}
 
-    def load_builder(self, kind: str, force: bool = False) -> List[BuilderISO]:
-        """Load all ISOs for a builder kind.
+    def load_builder(self, kind: str, force: bool = False,
+                     stages: Optional[List[str]] = None) -> List[BuilderISO]:
+        """Load ISOs for a builder kind, optionally filtered by stage.
 
-        Cached unless force=True. Deduplicates by canonical path.
+        Args:
+            kind: Builder kind name (e.g., "agent").
+            force: Bypass cache and reload from disk.
+            stages: Optional list of stage/section names to load. When provided,
+                only ISOs matching those stages are returned (saves ~60% context
+                tokens for targeted operations). Accepts stage names from
+                STAGE_ISO_MAP keys or 8F aliases (F1, F2, F3, F6, F7).
+                None = load all ISOs (default, backward-compatible).
+
+        Returns:
+            List of BuilderISO objects, sorted by source priority.
         """
+        # Full load (cached)
         if kind in self._cache and not force:
-            return self._cache[kind]
+            all_isos = self._cache[kind]
+        else:
+            all_isos = self._load_all_isos(kind)
+            self._cache[kind] = all_isos
 
+        # If no stage filter, return everything
+        if stages is None:
+            return all_isos
+
+        # Resolve stage names to ISO prefix patterns
+        prefixes = set()
+        for stage in stages:
+            # Check 8F aliases first (F1, F2, etc.)
+            if stage.upper() in F_STAGE_ALIASES:
+                for sub_stage in F_STAGE_ALIASES[stage.upper()]:
+                    for prefix in STAGE_ISO_MAP.get(sub_stage, [sub_stage]):
+                        prefixes.add(prefix)
+            elif stage in STAGE_ISO_MAP:
+                for prefix in STAGE_ISO_MAP[stage]:
+                    prefixes.add(prefix)
+            else:
+                # Treat as a direct ISO prefix
+                prefixes.add(stage)
+
+        # Filter ISOs: match if any prefix appears in the ISO filename
+        # Also always include shared skills (skill_* files)
+        filtered = []
+        for iso in all_isos:
+            if iso.source == "shared":
+                filtered.append(iso)
+                continue
+            name_lower = iso.name.lower()
+            for prefix in prefixes:
+                if f"_{prefix}_" in name_lower or name_lower.endswith(f"_{prefix}"):
+                    filtered.append(iso)
+                    break
+
+        return filtered
+
+    def _load_all_isos(self, kind: str) -> List[BuilderISO]:
+        """Internal: load all ISOs for a kind from all sources."""
         isos: List[BuilderISO] = []
         seen_canonical: set = set()
 
@@ -153,8 +237,6 @@ class SkillLoader:
 
         # Sort by source priority (lower first, so higher overrides later)
         isos.sort(key=lambda i: i.priority)
-
-        self._cache[kind] = isos
         return isos
 
     def _discover_sources(self, kind: str) -> Dict[str, List[Path]]:

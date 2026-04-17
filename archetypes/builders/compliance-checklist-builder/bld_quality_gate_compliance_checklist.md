@@ -1,0 +1,58 @@
+---
+kind: quality_gate
+id: p11_qg_compliance_checklist
+pillar: P11
+llm_function: GOVERN
+purpose: Quality gate with HARD and SOFT scoring for compliance_checklist
+quality: 8.9
+title: "Quality Gate Compliance Checklist"
+version: "1.0.0"
+author: wave1_builder_gen_v2
+tags: [compliance_checklist, builder, quality_gate]
+tldr: "Quality gate with HARD and SOFT scoring for compliance_checklist"
+domain: "compliance_checklist construction"
+created: "2026-04-14"
+updated: "2026-04-14"
+density_score: 0.85
+---
+
+## Definition
+| metric | threshold | operator | scope |
+|---|---|---|---|
+| compliance_coverage | 100% | >= | all audits |
+
+## HARD Gates
+| ID | Check | Fail Condition |
+|---|---|---|
+| H01 | YAML frontmatter valid | invalid YAML syntax |
+| H02 | ID matches pattern ^p11_cc_[a-z][a-z0-9_]+.md$ | invalid ID format |
+| H03 | kind field matches 'compliance_checklist' | incorrect kind value |
+| H04 | SOC2 controls documented | missing control descriptions |
+| H05 | GDPR data subject rights implemented | incomplete DSAR process |
+| H06 | HIPAA encryption policies enforced | unencrypted sensitive data |
+| H07 | EU AI Act audit trails complete | missing audit logs for AI systems |
+
+## SOFT Scoring
+| Dim | Dimension | Weight | Scoring Guide |
+|---|---|---|---|
+| D1 | Data protection | 0.20 | 1.00 (full encryption) |
+| D2 | Audit readiness | 0.15 | 1.00 (complete logs) |
+| D3 | Documentation | 0.15 | 1.00 (all policies documented) |
+| D4 | GDPR compliance | 0.15 | 1.00 (DSARs handled) |
+| D5 | HIPAA adherence | 0.15 | 1.00 (controls met) |
+| D6 | AI Act compliance | 0.10 | 1.00 (audit trails valid) |
+| D7 | Third-party reviews | 0.10 | 1.00 (all vendors audited) |
+
+## Actions
+| Score | Action |
+|---|---|
+| >=9.5 | GOLDEN |
+| >=8.0 | PUBLISH |
+| >=7.0 | REVIEW |
+| <7.0 | REJECT |
+
+## Bypass
+| conditions | approver | audit trail |
+|---|---|---|
+| legal exception | CTO | signed waiver |
+| urgent regulatory change | CEO | emergency audit |

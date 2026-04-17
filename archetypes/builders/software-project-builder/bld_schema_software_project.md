@@ -12,9 +12,11 @@ quality: 9.1
 tags: [builder, schema, software-project, validation]
 tldr: "Validation schema for software projects: required files, pyproject.toml fields, directory structure, test requirements, Docker constraints."
 density_score: 0.88
+llm_function: CONSTRAIN
 ---
-
 # Software Project Schema
+
+This ISO describes a software project: its repository layout, modules, and build graph.
 
 ## Required Files
 

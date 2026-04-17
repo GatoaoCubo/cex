@@ -218,9 +218,9 @@ def build_prompt(
     sections.append("")
 
     # Schema rules
-    sections.append("## Regras do Schema")
-    sections.append(f"- **Tipo**: {type_name}")
-    sections.append(f"- **Descricao**: {rules.get('description', 'N/A')}")
+    sections.append("## Schema Rules")
+    sections.append(f"- **Type**: {type_name}")
+    sections.append(f"- **Description**: {rules.get('description', 'N/A')}")
     sections.append(f"- **Naming**: `{rules.get('naming', 'N/A')}`")
     if rules.get("max_bytes"):
         sections.append(f"- **Max bytes**: {rules['max_bytes']}")

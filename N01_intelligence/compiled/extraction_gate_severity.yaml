@@ -1,0 +1,171 @@
+id: extraction_gate_severity
+kind: knowledge_card
+pillar: P01_knowledge
+title: 'Extraction: Quality Gate Severity Levels from aiox-core'
+version: 1.0
+quality: null
+tags:
+- extraction
+- quality_gate
+- severity
+- aiox
+- port
+- schema_extension
+created: 2026-04-13
+author: n01_intelligence
+domain: quality enforcement
+source: SynkraAI/aiox-core
+tldr: aiox-core uses 4-level severity (CRITICAL/HIGH/MEDIUM/LOW) across a 3-layer quality pipeline (pre-commit/PR-automation/human-review).
+  CEX quality_gate kind is binary pass/fail -- add severity field to enable publish-with-warnings, retry budgets, and graduated
+  enforcement.
+1_aiox_core_gate_architecture: 'aiox-core uses a 3-layer quality pipeline with a severity taxonomy per check. Source: `.aiox-core/core/quality-gates/`'
+pipeline_layers: '| Layer | File | What it runs | Fail behavior |
+
+  |-------|------|-------------|---------------|
+
+  | L1 Pre-commit | `layer1-precommit.js` | lint, test, typecheck | `failFast: true` -- stops on first error |
+
+  | L2 PR Automation | `layer2-pr-automation.js` | CodeRabbit, Quinn AI review | depends on severity |
+
+  | L3 Human Review | `layer3-human-review.js` | checklist sign-off | requires human approval |'
+severity_definitions_quality_gate_config_yaml_36_54: "# Layer 2 severity configuration\nlayer2:\n  coderabbit:\n    blockOn:\
+  \   [CRITICAL]   # hard block -- pipeline stops\n    warnOn:    [HIGH]        # flag in report, does NOT block\n    documentOn:\
+  \ [MEDIUM]    # add to documentation/report\n    ignoreOn:  [LOW]         # silently skip\n\n  quinn:\n    severity:\n \
+  \     block: [\"CRITICAL\"]\n      warn:  [\"HIGH\", \"MEDIUM\"]"
+severity_semantics: '| Level | Code | Behavior | CEX equivalent |
+
+  |-------|------|----------|----------------|
+
+  | CRITICAL | `CRIT` | Blocks pipeline, cannot publish | score < 8.0 (hard reject) |
+
+  | HIGH | `HIGH` | Warns in report, passes | score 8.0-8.5 (publish + flag) |
+
+  | MEDIUM | `MED` | Documents in report, passes | score 8.5-9.0 (publish + note) |
+
+  | LOW | `LOW` | Silently ignored | score >= 9.0 (clean pass) |'
+2_layer_1_pre_commit_details: "From `layer1-precommit.js` (failFast mode):\n\n// Sequential with early exit\nconst lintResult\
+  \ = await this.runLint(context);\nif (!lintResult.pass && this.failFast) {\n  return this.getSummary();  // stop -- don't\
+  \ run tests\n}\n\nconst testResult = await this.runTests(context);\nif (!testResult.pass && this.failFast) {\n  return this.getSummary();\
+  \  // stop -- don't run typecheck\n}\n\n// coverage threshold enforced per config:\ncoverage:\n  enabled: true\n  minimum:\
+  \ 80   // percent\n\nKey: L1 is binary pass/fail with NO severity levels -- it's CRITICAL-only behavior.\nSeverity kicks\
+  \ in at L2."
+3_layer_2_severity_flow: "CodeRabbit scan\n  |\n  +-- CRITICAL issue found -> BLOCK (return failure immediately)\n  +-- HIGH\
+  \ issue found     -> WARN (add to report, continue)\n  +-- MEDIUM issue found   -> DOCUMENT (log, continue)\n  +-- LOW issue\
+  \ found      -> IGNORE (skip)\n  |\nQuinn AI review (runs in parallel)\n  |\n  +-- CRITICAL -> block\n  +-- HIGH     ->\
+  \ warn\n  +-- MEDIUM   -> warn (quinn is stricter than coderabbit)\n\nSource: `quality-gate-config.yaml:37-54`"
+4_layer_3_human_review: 'L3 requires manual sign-off:
+
+  - `requireSignoff: true`
+
+  - Default reviewer: `@architect`
+
+  - Sign-off expires after 24h (`expiry: 86400000`)
+
+  - Checklist: min 5 items from `strategic-review-checklist`
+
+
+  This layer has no automated severity — it''s fully human-gated.'
+5_base_layer_patterns_base_layer_js: "Common infrastructure for all 3 layers:\n\nclass BaseLayer {\n  reset()        // clear\
+  \ results\n  startTimer()   // track duration\n  stopTimer()    // record elapsed\n  addResult(r)   // push check result\n\
+  \  getSummary()   // aggregate pass/fail + duration\n  formatDuration(ms) // \"2.3s\" etc.\n}\n\nLayer results carry: `{\
+  \ check, pass, skipped, message, duration }`"
+6_cex_current_state: 'CEX quality gates are binary: `cex_score.py` returns a float 0-10.
+
+  The enforcement is:
+
+  - `< 8.0`: REJECT (F7 GOVERN retries, max 2x)
+
+  - `>= 8.0`: ACCEPT
+
+
+  There is no warn-level or graduated severity. This causes two problems:
+
+  1. An artifact scoring 7.9 is indistinguishable from one scoring 5.0
+
+  2. No way to "publish with known issues" for time-sensitive releases'
+7_cex_integration_plan_severity_field_for_quality_gate_kind: ''
+schema_extension: "Add to `P07_evals/_schema.yaml` under `quality_gate`:\n\nquality_gate:\n  # ... existing fields ...\n \
+  \ rules:\n    type: array\n    items:\n      type: object\n      required: [id, check]\n      properties:\n        id: \
+  \     { type: string }\n        check:   { type: string }\n        weight:  { type: number, default: 1.0 }\n        severity:\
+  \                        # NEW\n          type: string\n          enum: [error, warn, info]\n          default: error\n\
+  \          description: |\n            error: blocks publish (CRITICAL equivalent)\n            warn:  allows publish, adds\
+  \ annotation to frontmatter\n            info:  logs only, no annotation"
+impact_on_cex_score_py: "# Current behavior\ndef evaluate_gates(artifact, gates):\n    for gate in gates:\n        if not\
+  \ gate.passes(artifact):\n            return FAIL\n\n# Proposed behavior\ndef evaluate_gates(artifact, gates):\n    errors\
+  \ = []\n    warnings = []\n    for gate in gates:\n        if not gate.passes(artifact):\n            severity = gate.get(\"\
+  severity\", \"error\")\n            if severity == \"error\":\n                errors.append(gate.id)\n            elif\
+  \ severity == \"warn\":\n                warnings.append(gate.id)\n            # info: log only\n\n    if errors:\n    \
+  \    return GateResult(blocked=True, errors=errors, warnings=warnings)\n    return GateResult(blocked=False, errors=[],\
+  \ warnings=warnings)"
+impact_on_quality_gate_artifact_frontmatter: '# existing gate artifact
+
+  id: qg_density
+
+  rule: body must have density >= 0.85
+
+  severity: error   # NEW -- hard block
+
+
+  id: qg_examples
+
+  rule: at least one usage example
+
+  severity: warn    # NEW -- allowed to publish, adds warning annotation'
+annotation_in_published_artifact: "When a `warn` gate fails, the artifact frontmatter gets:\n\nquality_warnings:\n  - gate:\
+  \ qg_examples\n    message: \"No usage example found -- consider adding one\"\n    timestamp: 2026-04-13"
+files_to_create_modify: '| File | Action | Lines est. |
+
+  |------|--------|-----------|
+
+  | `P07_evals/_schema.yaml` | MODIFY -- add severity field to gate rule schema | ~15 |
+
+  | `_tools/cex_score.py` | MODIFY -- GateResult with blocked/warnings separation | ~50 |
+
+  | `P01_knowledge/library/kind/kc_quality_gate.md` | MODIFY -- document severity levels | ~20 |
+
+  | `archetypes/builders/quality-gate-builder/bld_instruction_quality_gate.md` | MODIFY -- add severity guidance | ~15 |'
+estimated_effort:
+- 'Complexity: Low (additive schema field + score.py logic change)'
+- 'Lines of code: ~50 new + ~50 modified'
+- 'Dependencies: None'
+- 'Risk: Low -- additive, existing gates default to `error` (backward compatible)'
+8_comparative_analysis: '| Dimension | aiox-core (3 layers) | CEX (current) | Proposed CEX |
+
+  |-----------|---------------------|---------------|--------------|
+
+  | Severity levels | 4 (CRIT/HIGH/MED/LOW) | 2 (pass/fail) | 3 (error/warn/info) |
+
+  | Layer structure | Pre-commit/PR/Human | Single scoring pass | Single pass + severity |
+
+  | Human review gate | Yes (L3 sign-off) | No | Out of scope (no PR flow) |
+
+  | Per-check severity | Yes (per rule) | No | Yes (per gate rule) |
+
+  | Publish with warnings | Yes (HIGH/MED don''t block) | No | Yes (warn gates) |
+
+  | Retry on failure | No (L1 failFast, L2 continues) | Yes (F7, max 2x) | Yes (on error only) |
+
+  | Coverage threshold | Yes (80% min, L1) | No | Out of scope (no test suite) |'
+what_not_to_port_from_aiox_core:
+- L1 pre-commit -- CEX has no test runner; build artifacts are the unit
+- L3 human review -- no PR workflow in CEX's terminal-first pipeline
+- CodeRabbit/Quinn integrations -- CI/CD specific, irrelevant for artifact builds
+- Coverage threshold -- no code coverage concept for KCs and prompts
+- 24h sign-off expiry -- no async review process in CEX
+9_key_code_references_in_aiox_core: '| File (relative to aiox-core/) | What it contains |
+
+  |-------------------------------|-----------------|
+
+  | `.aiox-core/core/quality-gates/quality-gate-config.yaml` | Severity config (blockOn/warnOn/documentOn/ignoreOn) |
+
+  | `.aiox-core/core/quality-gates/quality-gate-manager.js` | 3-layer orchestrator |
+
+  | `.aiox-core/core/quality-gates/layer1-precommit.js` | Pre-commit: lint, test, typecheck |
+
+  | `.aiox-core/core/quality-gates/layer2-pr-automation.js` | PR review: CodeRabbit, Quinn |
+
+  | `.aiox-core/core/quality-gates/layer3-human-review.js` | Human sign-off: checklist, expiry |
+
+  | `.aiox-core/core/quality-gates/base-layer.js` | Abstract base: timer, results, summary |'
+boundary: Conhecimento destilado, estatico, versionado. NAO eh instrucao, template, ou configuracao.
+8f_pipeline_function: 'Primary function: INJECT'

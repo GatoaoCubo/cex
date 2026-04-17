@@ -1,0 +1,69 @@
+kind: schema
+id: bld_schema_discovery_questions
+pillar: P06
+llm_function: CONSTRAIN
+purpose: Formal schema -- SINGLE SOURCE OF TRUTH for discovery_questions
+quality: null
+title: Schema Discovery Questions
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- discovery_questions
+- builder
+- schema
+tldr: Formal schema -- SINGLE SOURCE OF TRUTH for discovery_questions
+domain: discovery_questions construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+frontmatter_fields: ''
+required: '| Field | Type | Required | Default | Notes |
+
+  |---|---|---|---|---|
+
+  | id | string | yes | null | Must match ID Pattern |
+
+  | kind | string | yes | "discovery_questions" | Fixed value |
+
+  | pillar | string | yes | "P01" | Fixed value |
+
+  | title | string | yes | null | Concise question summary |
+
+  | version | string | yes | "1.0" | Schema version |
+
+  | created | datetime | yes | null | ISO 8601 format |
+
+  | updated | datetime | yes | null | ISO 8601 format |
+
+  | author | string | yes | null | Author name |
+
+  | domain | string | yes | null | Domain of question (e.g., "security") |
+
+  | quality | null | yes | null | Peer-reviewed score |
+
+  | tags | list | yes | [] | Keywords for categorization |
+
+  | tldr | string | yes | null | One-sentence summary |
+
+  | question_type | string | yes | null | E.g., "open-ended", "yes/no" |
+
+  | target_audience | string | yes | null | E.g., "executives", "developers" |'
+recommended: '| Field | Type | Notes |
+
+  |---|---|---|
+
+  | related_questions | list | Links to related discovery questions |
+
+  | sensitivity_level | string | E.g., "low", "high" |'
+id_pattern: ^p01_dq_[a-z][a-z0-9_]+.md$
+body_structure: "1. Purpose\n   Define the objective of the discovery question.\n\n2. Scope\n   Clarify boundaries and limitations\
+  \ of the question.\n\n3. Question Formulation\n   Provide the exact wording and context.\n\n4. Target Audience\n   Specify\
+  \ who should answer the question.\n\n5. Expected Outcomes\n   Describe anticipated insights or data.\n\n6. Review Process\n\
+  \   Detail peer-review steps for quality validation."
+constraints:
+- ID must match ^p01_dq_[a-z][a-z0-9_]+.md$ exactly.
+- Quality field must be assigned by peer review, not self-scored.
+- Domain-specific fields (question_type, target_audience) are mandatory.
+- All datetime fields must use ISO 8601 format.
+- Total file size must not exceed 4096 bytes.
+- Tags must be lowercase, alphanumeric, and underscore-separated.

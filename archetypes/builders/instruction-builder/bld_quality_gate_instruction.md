@@ -12,8 +12,8 @@ quality: 9.0
 tags: [quality-gate, instruction, steps, recipe, procedure, idempotency]
 tldr: "Gates ensuring instruction artifacts decompose tasks into atomic verifiable steps with prerequisites, completion criteria, and rollback procedures."
 density_score: 0.90
+llm_function: GOVERN
 ---
-
 # Gate: Instruction
 ## Definition
 | Field     | Value |

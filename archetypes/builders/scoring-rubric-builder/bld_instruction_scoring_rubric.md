@@ -25,8 +25,8 @@ dependencies: []
 logging: true
 tldr: Design a weighted evaluation framework with dimensions, per-tier thresholds, concrete scoring criteria, and calibration guidance.
 density_score: 0.88
+llm_function: REASON
 ---
-
 ## Context
 The scoring-rubric-builder produces `scoring_rubric` artifacts — structured evaluation
 frameworks used to measure the quality of a specific artifact kind. A scoring_rubric defines
@@ -124,8 +124,8 @@ INPUT: weighted_dimensions[], artifact_profile
      - Must discriminate from adjacent score point
      - Must reference the artifact's actual content, not meta-quality
    Standard anchor pattern:
-     10: "{{dimension}} is exemplary — exceeds all requirements, zero gaps"
-     9:  "{{dimension}} is complete with at most one minor, non-blocking issue"
-     7:  "{{dimension}} is present and functional with 1-2 small gaps"
-     5:  "{{dimension}} is present but has significant gaps affecting usability"
-     3:  "{{dimension}} is partially present, major issues block correct use"
+     10: "`{{dimension}}` is exemplary — exceeds all requirements, zero gaps"
+     9:  "`{{dimension}}` is complete with at most one minor, non-blocking issue"
+     7:  "`{{dimension}}` is present and functional with 1-2 small gaps"
+     5:  "`{{dimension}}` is present but has significant gaps affecting usability"
+     3:  "`{{dimension}}` is partially present, major issues block correct use"

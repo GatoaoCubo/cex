@@ -12,8 +12,8 @@ quality: 9.0
 tags: [quality-gate, effort-profile, P09]
 tldr: "Pass/fail gate for effort_profile artifacts: required fields, id pattern, body sections, configuration completeness."
 density_score: 1.0
+llm_function: GOVERN
 ---
-
 # Gate: effort_profile
 ## Definition
 | Field | Value |

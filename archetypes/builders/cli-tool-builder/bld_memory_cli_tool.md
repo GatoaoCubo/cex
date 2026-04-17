@@ -23,6 +23,7 @@ observation_types: [user, feedback, project, reference]
 quality: 9.2
 title: "Memory Cli Tool"
 density_score: 0.90
+llm_function: INJECT
 ---
 ## Summary
 CLI tools are consumed programmatically as often as interactively. The difference between a tool that composes well in a pipeline and one that does not comes down to two decisions made at spec time: exit code semantics and flag naming convention. Both are invisible during happy-path use and catastrophic on failure if undefined.

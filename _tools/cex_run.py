@@ -254,14 +254,15 @@ def resolve_output_path(kind: str, domain: str, intent: str) -> Path:
         naming = meta.get("naming", "")
 
     # Map pillar to directory
-    pillar_dirs = {p.name: p for p in ROOT.iterdir()
+    _n00 = ROOT / "N00_genesis"
+    pillar_dirs = {p.name: p for p in _n00.iterdir()
                    if p.is_dir() and re.match(r'P\d{2}_', p.name)}
-    target_dir = pillar_dirs.get(pillar, ROOT / "P01_knowledge")
+    target_dir = pillar_dirs.get(pillar, _n00 / "P01_knowledge")
 
     # If no target dir, find by prefix
     if not target_dir.exists():
-        matches = list(ROOT.glob(f"{pillar}_*"))
-        target_dir = matches[0] if matches else ROOT / "P01_knowledge"
+        matches = list(_n00.glob(f"{pillar}_*"))
+        target_dir = matches[0] if matches else _n00 / "P01_knowledge"
 
     # Generate filename
     slug = re.sub(r'[^a-z0-9]+', '_', intent.lower())[:60].strip('_')
@@ -603,8 +604,15 @@ Examples:
                        help="Generate execution plan only")
     parser.add_argument("--json", action="store_true",
                        help="Output as JSON")
+    parser.add_argument("--bare", action="store_true",
+                       help="Skip config search + heavy context load (10x startup). Use for hot-loop dispatch.")
 
     args = parser.parse_args()
+
+    if args.bare:
+        os.environ["CEX_BARE"] = "1"
+        os.environ["CEX_SKIP_KC_INDEX"] = "1"
+        os.environ["CEX_SKIP_MEMORY_LOAD"] = "1"
 
     if args.status:
         show_status()

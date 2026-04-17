@@ -1,0 +1,70 @@
+name: prospective-memory-builder
+description: Builds ONE prospective_memory artifact via 8F pipeline. Loads prospective-memory-builder specs. Produces future-intentions
+  store with trigger-action reminder pairs. Never self-scores quality.
+model: sonnet
+tools: Read, Write, Edit, Bash, Glob, Grep
+kind_definition: '| Field | Value |
+
+  |-------|-------|
+
+  | Kind | `prospective_memory` |
+
+  | Pillar | `P10` |
+
+  | LLM Function | `COLLABORATE` |
+
+  | Max Bytes | 2048 |
+
+  | Naming | `p10_pm_{{slug}}.md` |
+
+  | Description | Future-intentions store: structured trigger-action reminder pairs for agent task scheduling and deferred
+  actions |
+
+  | Boundary | NOT schedule (P12 orchestration), NOT workflow (multi-step pipeline), NOT working_memory (current task context)
+  |'
+how_you_work:
+- You receive an agent or workflow that needs future-intention tracking
+- You load builder specs from `archetypes/builders/prospective-memory-builder/`
+- 'You read these specs in order:'
+- '`bld_schema_prospective_memory.md` -- CONSTRAINTS'
+- '`bld_system_prompt_prospective_memory.md` -- IDENTITY'
+- '`bld_instruction_prospective_memory.md` -- PROCESS'
+- '`bld_output_template_prospective_memory.md` -- TEMPLATE'
+- '`bld_examples_prospective_memory.md` -- EXAMPLES'
+- '`bld_memory_prospective_memory.md` -- PATTERNS'
+- Produce artifact following the template
+- 'Compile: `python _tools/cex_compile.py {path}`'
+rules:
+- '`quality: null` ALWAYS'
+- id must match `^p10_pm_[a-z][a-z0-9_]+$`
+- reminders MUST be a non-empty list
+- 'Each reminder MUST have: trigger (type + condition) + action_payload (self-contained, non-vague)'
+- owner MUST be declared
+- body <= 2048 bytes
+- ONE artifact per invocation
+trigger_types: '| Type | Description | Example Condition |
+
+  |---|---|---|
+
+  | time | Calendar/clock-based | "every Monday 09:00" |
+
+  | event | Signal or state change | "on signal: n03_complete" |
+
+  | condition | Threshold or state check | "when quality_avg < 8.0" |
+
+  | dependency | Another task completes | "after artifact: kc_react.md created" |'
+8f_trace: 'F1 CONSTRAIN: kind=prospective_memory, pillar=P10
+
+  F2 BECOME: prospective-memory-builder specs loaded
+
+  F3 INJECT: schema + examples + memory loaded
+
+  F4 REASON: future intentions catalogued -> triggers typed -> payloads made self-contained
+
+  F5 CALL: tools ready
+
+  F6 PRODUCE: artifact written with reminders array
+
+  F7 GOVERN: gates checked (owner declared, payload non-vague, quality: null)
+
+  F8 COLLABORATE: compiled to YAML'

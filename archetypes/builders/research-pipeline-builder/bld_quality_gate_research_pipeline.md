@@ -12,8 +12,8 @@ quality: 9.1
 tags: [quality-gate, research-pipeline, P11, STORM, CRAG, CRITIC, governance]
 tldr: "Gates for research pipeline artifacts — 7-stage completeness, source diversity, CRAG thresholds, CRITIC verification, budget controls."
 density_score: 1.0
+llm_function: GOVERN
 ---
-
 # Gate: research_pipeline
 
 ## Definition

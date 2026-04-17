@@ -1,0 +1,39 @@
+kind: examples
+id: bld_examples_app_directory_entry
+pillar: P07
+llm_function: GOVERN
+purpose: Golden and anti-examples of app_directory_entry artifacts
+quality: null
+title: Examples App Directory Entry
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- app_directory_entry
+- builder
+- examples
+tldr: Golden and anti-examples of app_directory_entry artifacts
+domain: app_directory_entry construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+golden_example: "kind: app_directory_entry\nname: Supabase\ntagline: \"Open source backend for modern apps, free tier included\"\
+  \nscreenshots:\n  - https://supabase.io/static/images/hero.png\n  - https://supabase.io/static/images/dashboard.png\ninstall_steps:\n\
+  \  - \"Visit https://supabase.io\"\n  - \"Sign up for a free account\"\n  - \"Use CLI: `npm install -g supabase`\"\ndemo_link:\
+  \ https://supabase.io/demo\ndescription: \"Supabase provides a free tier with PostgreSQL, Auth, and Realtime features. Ideal\
+  \ for startups and developers.\""
+anti_example_1_missing_key_sections: 'kind: app_directory_entry
+
+  name: ExampleApp
+
+  tagline: "A great app for everything"
+
+  screenshots: []
+
+  install_steps: []
+
+  demo_link: https://example.com'
+why_it_fails: Uses generic names like "ProviderA" and "ExampleApp" instead of real tools/vendors, reducing credibility and
+  discoverability.
+anti_example_2_placeholder_names: "kind: app_directory_entry\nname: ProviderA's App\ntagline: \"Example solution for hypothetical\
+  \ use cases\"\nscreenshots:\n  - https://providera.com/placeholder.png\ninstall_steps:\n  - \"Download from ProviderA's\
+  \ site\"\ndemo_link: https://providera.com\ndescription: \"This is a placeholder example for demonstration purposes only.\""

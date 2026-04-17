@@ -12,9 +12,11 @@ quality: 9.1
 tags: [builder, output-template, software-project]
 tldr: "Standard output structure: pyproject.toml skeleton, src layout, conftest.py, Dockerfile, CI workflow. All [PLACEHOLDERS] for costmization."
 density_score: 0.88
+llm_function: PRODUCE
 ---
-
 # Output Template
+
+This ISO describes a software project: its repository layout, modules, and build graph.
 
 ## pyproject.toml
 

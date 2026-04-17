@@ -1,0 +1,69 @@
+id: ex-api-client-bling
+kind: api_client
+pillar: P04
+title: Bling ERP API v3 Client
+version: 0.1.0
+quality: null
+status: template
+brand_placeholders:
+- BRAND_BLING_API_URL
+- BRAND_BLING_CLIENT_ID
+- BRAND_BLING_CLIENT_SECRET
+- BRAND_BLING_ACCESS_TOKEN
+tags:
+- commerce
+- template
+- distillation
+- bling
+- api_client
+density_score: 1.0
+purpose: Typed client for Bling ERP (Brazilian fiscal + inventory system) v3. Wraps OAuth2 token refresh, rate-limited endpoints,
+  and domain models (produtos, estoques, pedidos, depositos).
+when_to_use:
+- Push Supabase products into Bling as `produtos` for fiscal registration.
+- Pull current stock (`estoques`) from Bling to reconcile with Shopify.
+- Create/update notas fiscais (NF-e) tied to orders (requires emit permission in Bling).
+interface:
+- 'Base URL: `{{BRAND_BLING_API_URL}}` (default `https://api.bling.com.br/Api/v3`).'
+- 'Auth: `Authorization: Bearer <access_token>` -- token rotates every 6h, refresh transparently.'
+- 'Rate limit: 3 req/sec, 120000 req/day. Client MUST enforce via token-bucket locally.'
+brand_variables_used:
+- '`{{BRAND_BLING_API_URL}}` -- pinned base URL.'
+- '`{{BRAND_BLING_CLIENT_ID}}`, `{{BRAND_BLING_CLIENT_SECRET}}` -- OAuth app credentials.'
+- '`{{BRAND_BLING_ACCESS_TOKEN}}` -- env var name of the current token; token-manager rewrites this secret.'
+token_refresh_contract:
+- Check `expires_at` stored alongside token; refresh if <5 min remaining.
+- 'Refresh endpoint: `POST /oauth/token` with `grant_type=refresh_token`.'
+- On 401 from any API call, force-refresh ONCE and retry; on second 401 fail loud (likely revoked).
+- Persist new token via `ex_api_client_token_manager.md` -- never write directly to env.
+example_usage: "const bling = createBlingClient({\n  baseUrl: \"{{BRAND_BLING_API_URL}}\",\n  getToken: () => tokenManager.get(\"\
+  bling\"),\n});\nconst { data } = await bling.request(\"GET\", \"/produtos\", { limit: 100, pagina: 1 });\nfor (const p of\
+  \ data) await db.upsertBlingProduct(p);"
+error_taxonomy: '| HTTP | Meaning | Client action |
+
+  |------|---------|---------------|
+
+  | 200/201 | success | parse body |
+
+  | 400 | validation | surface field errors, no retry |
+
+  | 401 | token expired | refresh + retry once |
+
+  | 403 | scope missing | fail loud, operator must re-OAuth with new scope |
+
+  | 404 | entity not found | return `null`, not throw, for get-by-id ops |
+
+  | 422 | invalid payload | surface detail; often fiscal rule (e.g. missing NCM) |
+
+  | 429 | rate limited | sleep `X-RateLimit-Reset` seconds |
+
+  | 5xx | transient | exponential retry 3x |'
+data_model_quirks_bling_v3:
+- Products keyed by `id` (Bling internal) AND `codigo` (our SKU). Always store both.
+- Stock is per-warehouse (`deposito`); the "current stock" requires summing across the default warehouse set defined per brand.
+- '`Produto.situacao` = `A` (ativo) / `I` (inativo). Deleted products stay in API with `I` forever.'
+related_artifacts:
+- '`ex_webhook_bling.md`'
+- '`ex_oauth_app_config_bling.md`'
+- '`ex_integration_guide_bling.md`'
+- '`ex_api_client_token_manager.md` (referenced, not in this wave)'

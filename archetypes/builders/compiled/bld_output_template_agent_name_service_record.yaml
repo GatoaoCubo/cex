@@ -1,0 +1,84 @@
+kind: output_template
+id: bld_output_template_agent_name_service_record
+pillar: P05
+llm_function: PRODUCE
+purpose: Canonical output template for agent_name_service_record artifacts
+quality: null
+title: Agent Name Service Record Builder -- Output Template
+version: 1.0.0
+author: wave7_n05
+tags:
+- agent_name_service_record
+- builder
+- output_template
+tldr: Copy this template and fill in the placeholders to produce a valid ANS registry record
+domain: agent_name_service_record construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+usage: Copy the template below verbatim. Replace all `{{PLACEHOLDER}}` tokens. Do not remove any section -- each maps to a
+  hard gate or soft dimension. See `bld_schema_agent_name_service_record.md` for field validation rules. ---
+template: "---\nkind: agent_name_service_record\nid: p04_ans_{{AGENT_SLUG}}\npillar: P04\ntitle: \"ANS Record: {{ANS_NAME}}\"\
+  \nversion: \"1.0.0\"\nquality: null\nagent_name: \"{{ANS_NAME}}\"\nregistry_id: \"{{UUID_V4}}\"\nendpoint_url: \"{{PRIMARY_ENDPOINT_URL}}\"\
+  \nregistry_operator: \"{{OPERATOR}}\"\ncreated: \"{{YYYY-MM-DD}}\"\nupdated: \"{{YYYY-MM-DD}}\"\npki_cert_reference: \"\
+  cert:{{CA_ISSUER}}:SHA256:{{FINGERPRINT}}\"\ndiscovery_endpoint: \"{{DISCOVERY_ENDPOINT_URL}}\"\ntags: [ANS, AgentDNS, IETF,\
+  \ CNCF, {{OPERATOR}}, {{PROTOCOLS}}]\n---\n\n# ANS Record: {{ANS_NAME}}\n\n> IETF ANS registry-record for {{HUMAN_AGENT_NAME}}.\n\
+  > Registry operator: {{OPERATOR}} | Protocol adapters: {{PROTOCOL_LIST}}\n\n## Agent Identity\n\n| Field | Value |\n|-------|-------|\n\
+  | ANS Name | `{{ANS_NAME}}` |\n| Registry ID | `{{UUID_V4}}` |\n| Registry Operator | {{OPERATOR}} |\n| Primary Endpoint\
+  \ | {{PRIMARY_ENDPOINT_URL}} |\n| Discovery Endpoint | {{DISCOVERY_ENDPOINT_URL}} |\n| Record Version | 1.0.0 |\n| Spec\
+  \ Reference | IETF draft-narajala-ans-00, CNCF draft-liang-agentdns-00 |\n\n## Protocol Adapters\n\n| Protocol | Version\
+  \ | Endpoint | Auth | Status |\n|----------|---------|----------|------|--------|\n| {{PROTOCOL_1}} | {{VERSION_1}} | {{ENDPOINT_1}}\
+  \ | {{AUTH_1}} | active |\n| {{PROTOCOL_2}} | {{VERSION_2}} | {{ENDPOINT_2}} | {{AUTH_2}} | active |\n\n> Minimum 1 protocol-adapter\
+  \ required (H06). Target: 2+ for production ANS records.\n> Supported protocols: mcp, a2a, grpc, http, websocket.\n\n##\
+  \ Capability Advertisement\n\n| Capability | Description |\n|-----------|-------------|\n| {{SKILL_1}} | {{SKILL_1_DESC}}\
+  \ |\n| {{SKILL_2}} | {{SKILL_2_DESC}} |\n| {{SKILL_3}} | {{SKILL_3_DESC}} |\n\nConcurrency: max_concurrent = {{MAX_CONCURRENT}}\n\
+  \nSupported task types:\n- {{TASK_TYPE_1}}\n- {{TASK_TYPE_2}}\n\nPerformance: response_time_p95_ms = {{P95_MS}} (optional)\n\
+  \n## PKI Certificate\n\n| Field | Value |\n|-------|-------|\n| Reference | `cert:{{CA_ISSUER}}:SHA256:{{FINGERPRINT}}`\
+  \ |\n| Issuer | {{CA_ISSUER}} |\n| Fingerprint (SHA256) | {{FINGERPRINT}} |\n| Expires | {{CERT_EXPIRY_DATE}} |\n| Required\
+  \ by | GoDaddy, Salesforce (production ANS registration) |\n\n> PKI-cert enables mTLS authentication and satisfies A2A v0.3\
+  \ security card signing.\n> Omitting PKI-cert blocks GoDaddy and Salesforce production registration.\n\n## Discovery Endpoint\n\
+  \n| Field | Value |\n|-------|-------|\n| URL | {{DISCOVERY_ENDPOINT_URL}} |\n| Convention | `https://{{ORG_DOMAIN}}/.well-known/agent/{{AGENT_LABEL}}`\
+  \ |\n| Resolution method | HTTPS GET -- returns this registry-record as JSON |\n| TTL (seconds) | {{TTL}} |\n| CNCF AgentDNS\
+  \ compatible | Yes -- draft-liang-agentdns-00 |\n\n> The discovery-endpoint is distinct from endpoint_url (H07).\n> Other\
+  \ agents and orchestrators resolve this URL to locate and authenticate this agent.\n\n## Lifecycle\n\n| Field | Value |\n\
+  |-------|-------|\n| Registered | {{REGISTERED_DATE}} |\n| Expires | {{EXPIRY_DATE}} |\n| Renewal Policy | {{RENEWAL_POLICY}}\
+  \ |\n| Last Verified | {{LAST_VERIFIED_DATE}} |\n| Status | active |\n\nlifecycle:\n  registered: \"{{REGISTERED_DATE}}\"\
+  \n  expires: \"{{EXPIRY_DATE}}\"\n  renewal_policy: {{RENEWAL_POLICY}}\n  last_verified: \"{{LAST_VERIFIED_DATE}}\"\n  status:\
+  \ active\n\n---"
+placeholder_reference: '| Placeholder | Description | Example |
+
+  |------------|-------------|---------|
+
+  | `{{ANS_NAME}}` | DNS-like ANS name (lowercase, `.agents` suffix) | `billing-bot.acme.agents` |
+
+  | `{{AGENT_SLUG}}` | Underscored version of ANS label for file ID | `billing_bot_acme` |
+
+  | `{{UUID_V4}}` | Generated UUID v4 for registry uniqueness | `550e8400-e29b-41d4-a716-446655440000` |
+
+  | `{{PRIMARY_ENDPOINT_URL}}` | Main HTTPS endpoint for agent communication | `https://agents.acme.com/billing` |
+
+  | `{{OPERATOR}}` | Registry operator enum value | `godaddy` |
+
+  | `{{PROTOCOL_1}}` | First protocol adapter name | `mcp` |
+
+  | `{{VERSION_1}}` | Protocol version | `2024-11-05` |
+
+  | `{{ENDPOINT_1}}` | Protocol-specific endpoint URL | `https://agents.acme.com/billing/mcp` |
+
+  | `{{AUTH_1}}` | Auth method for this protocol | `bearer` |
+
+  | `{{SKILL_1}}` | Capability identifier | `invoice-lookup` |
+
+  | `{{MAX_CONCURRENT}}` | Max concurrent tasks integer | `10` |
+
+  | `{{CA_ISSUER}}` | Certificate authority name | `letsencrypt` |
+
+  | `{{FINGERPRINT}}` | SHA256 certificate fingerprint | `AB12CD34EF56GH78` |
+
+  | `{{DISCOVERY_ENDPOINT_URL}}` | Well-known agent resolution URL | `https://acme.com/.well-known/agent/billing-bot` |
+
+  | `{{RENEWAL_POLICY}}` | Enum: auto, manual, none | `auto` |
+
+  | `{{REGISTERED_DATE}}` | ISO 8601 date | `2026-04-14` |
+
+  | `{{EXPIRY_DATE}}` | ISO 8601 date (typically +1 year) | `2027-04-14` |'

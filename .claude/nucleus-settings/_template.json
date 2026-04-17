@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json.schemastore.org/claude-settings",
+  "comment": "Template for NEW Nxx nuclei (N08+). Copy to n{XX}.json, customize the bash allowlist. Existing N01-N07 bypass this (trusted). Reference: .claude/rules/new-nucleus-bootstrap.md",
+  "permissions": {
+    "allow": [
+      "Read(**)",
+      "Grep(**)",
+      "Glob(**)",
+      "Write(N{XX}_*/**)",
+      "Edit(N{XX}_*/**)",
+      "Bash(python _tools/cex_*:*)",
+      "Bash(python -c:*)",
+      "Bash(git status:*)",
+      "Bash(git log:*)",
+      "Bash(git diff:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(ls:*)",
+      "Bash(bash _spawn/dispatch.sh status:*)"
+    ],
+    "deny": [
+      "Bash(rm -rf:*)",
+      "Bash(git push --force:*)",
+      "Bash(git reset --hard:*)",
+      "Bash(taskkill /F:*)",
+      "Write(CLAUDE.md)",
+      "Write(.cex/kinds_meta.json)",
+      "Write(.claude/settings.json)"
+    ]
+  },
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python _tools/cex_hooks_native.py stop",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  }
+}

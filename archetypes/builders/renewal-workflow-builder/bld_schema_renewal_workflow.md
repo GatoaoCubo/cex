@@ -1,0 +1,69 @@
+---
+kind: schema
+id: bld_schema_renewal_workflow
+pillar: P06
+llm_function: CONSTRAIN
+purpose: Formal schema -- SINGLE SOURCE OF TRUTH for renewal_workflow
+quality: 9.2
+title: "Schema Renewal Workflow"
+version: "1.0.0"
+author: wave6_n06
+tags: [renewal_workflow, builder, schema, renewal, GRR, Salesforce, Gainsight]
+tldr: "Formal schema -- SINGLE SOURCE OF TRUTH for renewal_workflow"
+domain: "renewal_workflow construction"
+created: "2026-04-14"
+updated: "2026-04-14"
+density_score: 0.85
+---
+
+## Frontmatter Fields
+### Required
+| Field            | Type   | Required | Default | Notes                                         |
+|------------------|--------|----------|---------|-----------------------------------------------|
+| id               | string | yes      |         | Pattern: p12_rw_{{name}}.yaml                 |
+| kind             | string | yes      |         | Must be "renewal_workflow"                    |
+| pillar           | string | yes      |         | Must be "P12"                                 |
+| title            | string | yes      |         |                                               |
+| version          | string | yes      |         |                                               |
+| created          | date   | yes      |         | ISO 8601                                      |
+| updated          | date   | yes      |         | ISO 8601                                      |
+| author           | string | yes      |         |                                               |
+| domain           | string | yes      |         | e.g., "SaaS renewal -- enterprise segment"   |
+| quality          | null   | yes      | null    | Never self-score; peer review assigns         |
+| tags             | array  | yes      |         | Must include: renewal and GRR or auto-renewal |
+| tldr             | string | yes      |         |                                               |
+| contract_id      | string | yes      |         | Salesforce contract or opportunity ID         |
+| renewal_stage    | string | yes      |         | 90_day / 60_day / 30_day / closed             |
+| days_to_renewal  | number | yes      |         | Integer days until contract end date          |
+| GRR_impact       | string | yes      |         | "full" / "contraction_{pct}" / "churn"        |
+| multi_year_flag  | boolean| yes      | false   | True if multi-year offer is presented         |
+
+### Recommended
+| Field              | Type   | Notes                                       |
+|--------------------|--------|---------------------------------------------|
+| current_ARR        | string | Current contract ARR                        |
+| renewal_ARR        | string | Expected renewal ARR (with or without uplift)|
+| health_score       | number | Gainsight health score at renewal open (0-100)|
+| price_increase_pct | string | Proposed price increase percentage          |
+| auto_renewal       | boolean| Whether contract has auto-renewal clause    |
+| notice_period_days | number | Jurisdiction-required opt-out notice days   |
+
+## ID Pattern
+^p12_rw_[a-z][a-z0-9_]+\.yaml$
+
+## Body Structure
+1. **Renewal Stage Map** -- 90/60/30-day stages with owners, tasks, automation triggers
+2. **Price Increase Playbook** -- announcement timing, percentage, objection responses, discount authority
+3. **Multi-Year Offer** -- discount structure, approval matrix, commitment incentives
+4. **Escalation Path** -- CSM -> Manager -> VP CS triggers and health score thresholds
+5. **Auto-Renewal Compliance** -- notice periods by jurisdiction, opt-out process, audit trail
+6. **GRR Model** -- full renewal, contraction, and churn scenarios with ARR impact
+
+## Constraints
+- All required fields must be present and valid.
+- id must match regex pattern exactly.
+- renewal_stage must be one of: 90_day, 60_day, 30_day, closed_won, closed_lost.
+- days_to_renewal must be a positive integer.
+- GRR_impact must be one of: full, contraction_{pct} (e.g., contraction_15), churn.
+- Escalation path must define health score threshold for each escalation level.
+- Auto-renewal notices must specify jurisdiction (US state, EU, APAC -- not generic).

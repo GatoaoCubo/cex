@@ -1,0 +1,57 @@
+---
+kind: quality_gate
+id: p03_qg_expansion_play
+pillar: P11
+llm_function: GOVERN
+purpose: Quality gate with HARD and SOFT scoring for expansion_play
+quality: 9.1
+title: "Quality Gate Expansion Play"
+version: "1.0.0"
+author: wave6_n06
+tags: [expansion_play, builder, quality_gate, NRR, upsell, land-and-expand]
+tldr: "Quality gate with HARD and SOFT scoring for expansion_play"
+domain: "expansion_play construction"
+created: "2026-04-14"
+updated: "2026-04-14"
+density_score: 0.85
+---
+
+## Definition
+| Metric                        | Threshold | Operator | Scope                        |
+|-------------------------------|-----------|----------|------------------------------|
+| Expansion trigger specificity | 100%      | equals   | All quantified, time-bounded |
+| NRR model completeness        | 100%      | equals   | Expansion + contraction + churn |
+
+## HARD Gates
+| ID  | Check                                              | Fail Condition                                          |
+|-----|----------------------------------------------------|---------------------------------------------------------|
+| H01 | YAML frontmatter valid                             | Invalid YAML syntax or missing required fields          |
+| H02 | ID matches pattern ^p03_ep_[a-z][a-z0-9_]+\.md$  | ID format mismatch                                      |
+| H03 | kind field = "expansion_play"                      | Kind field incorrect or missing                         |
+| H04 | expansion_type field present and valid enum        | Missing or invalid (must be seat_upsell/tier_upgrade/cross_sell/usage_ramp) |
+| H05 | trigger_type field present and valid enum          | Missing or invalid trigger type                         |
+| H06 | NRR_target field present and numeric              | Missing or non-numeric (e.g., "good NRR" fails)         |
+| H07 | Account map contains minimum 2 stakeholders        | Only 1 or zero stakeholders identified                  |
+| H08 | Talk track has hook + ask + next step sections     | Missing any of the three required sections              |
+
+## SOFT Scoring
+| Dim | Dimension                                            | Weight | Scoring Guide                                                           |
+|-----|------------------------------------------------------|--------|-------------------------------------------------------------------------|
+| D01 | Trigger quantification (specific threshold + window) | 0.25   | Specific % + time window = 1.0, one dimension only = 0.5, vague = 0   |
+| D02 | NRR model accuracy (all 3 components present)        | 0.25   | All 3 (expansion, contraction, churn) = 1.0, 2 = 0.5, <2 = 0          |
+| D03 | Talk track quality (hook-value-case-ask-next)        | 0.20   | All 5 sections = 1.0, 3-4 = 0.5, <3 = 0                               |
+| D04 | Account map depth (buyer + champion + blocker)       | 0.15   | 3+ stakeholders = 1.0, 2 = 0.5, 1 = 0                                 |
+| D05 | QBR alignment (customer metrics, not internal)       | 0.15   | Customer-facing metrics only = 1.0, mixed = 0.5, internal only = 0    |
+
+## Actions
+| Level  | Score  | Action                                      |
+|--------|--------|---------------------------------------------|
+| GOLDEN | >=9.5  | Auto-publish; used as golden example        |
+| PUBLISH| >=8.0  | Auto-publish after AE/CSM lead review       |
+| REVIEW | >=7.0  | Require RevOps or CS lead manual review     |
+| REJECT | <7.0   | Reject; return to builder for rework        |
+
+## Bypass
+| Conditions                     | Approver        | Audit Trail              |
+|--------------------------------|-----------------|--------------------------|
+| Emergency QBR prep (<48h)      | VP CS or VP Sales| Escalation log in CRM   |

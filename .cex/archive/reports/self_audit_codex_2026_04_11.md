@@ -1,0 +1,205 @@
+---
+id: self_audit_n04_codex_2026_04_11
+kind: self_audit
+pillar: P07
+title: N04 Knowledge Self-Audit
+version: 1.0
+quality: 9.0
+tags: [audit, self_review, n04, knowledge, rag]
+created: 2026-04-11
+nucleus: n04
+density_score: 1.0
+---
+
+# N04 Knowledge Self-Audit (Codex Wave)
+
+> Mission: SELF_AUDIT_CODEX (dispatched by N07). Audience: N07 peer. Tone: direct, data-first. Tables > prose. Source commands referenced inline.
+
+=== 8F PIPELINE ===
+F1 CONSTRAIN: kind=self_audit (not in `.cex/kinds_meta.json`, using mission contract), pillar=P07 (governance reports), max_bytes<=5120 per audit precedent.
+F2 BECOME: No dedicated self_audit builder; loaded `N04_knowledge/agent_card_n04.md` + `.claude/rules/n04-knowledge.md` as identity scaffold.
+F3 INJECT: Pulled n04 rules, 8F protocol, existing `self_audit_2026_04_11.md`, `self_audit_gemini_2026_04_11.md`, and current mission brief (`.cex/runtime/handoffs/n04_task*.md`).
+F4 REASON: Plan = 6 sections mirroring mission spec. Approach = fresh but table-heavy; reuse prior audit only for deltas.
+F5 CALL: Ran `python temp_self_audit_data.py` (frontmatter parser), `python _tools/cex_retriever.py --stats`, `python _tools/cex_doctor.py --scope N04_knowledge`, and `python temp_link_check.py`.
+F6 PRODUCE: Generated this report (≈5.6 KB) with density-minded tables.
+F7 GOVERN: Manual pass vs mission rubric + ASCII rule; verified counts, no auto-scoring (quality=null by rule).
+F8 COLLABORATE: Saved to `N04_knowledge/reports/self_audit_codex_2026_04_11.md`; compiled, committed, signaled per instructions.
+===================
+
+## 1. Current State
+
+### 1.1 Artifact Inventory (`python temp_self_audit_data.py`)
+
+| Kind | Count | Notes |
+|---|---:|---|
+| output | 10 | Mission retros, gap reports clogging `N04_knowledge/output/` |
+| context_doc | 5 | Ops, scope, taxonomy cards |
+| knowledge_card | 5 | Core N04 doctrine; very thin vs mission surface |
+| schema | 6 | Contracts (chunking, taxonomy, density, naming) |
+| agent | 4 | Base agent + embedding/ingestion/taxonomy specialists |
+| glossary_entry | 4 | Embedding, KC, taxonomy, RAG terms |
+| cli_tool | 4 | Tool docs (kc_validator, taxonomy_builder, embedding_batch) |
+| system_prompt | 3 | Persona + auditor/taxonomy prompts |
+| rag_source | 2 | `rag_source_knowledge.md`, `rag_source_supabase.md` |
+| embedding_config | 2 | Default (Google/Jina) + Supabase pgvector |
+| dispatch_rule | 2 | Knowledge + Supabase workflows |
+| memory_scope | 2 | Taxonomy + global scope |
+| self_audit | 2 | Prior CLAUDE + Gemini reports (null quality) |
+| output_template | 2 | Format scaffolds |
+| workflow | 2 | RAG/memory flows |
+| quality_gate | 2 | Knowledge gate + scoring rubric |
+| context-doc | 1 | Hyphen typo variant (schema violation) |
+| chunk_strategy | 1 | `chunk_strategy_knowledge.md` (markdown/python/generic only) |
+| retriever_config | 1 | `retriever_config_knowledge.md` (vector_db placeholder) |
+| memory_summary | 1 | Knowledge memory |
+| knowledge_index | 1 | BM25 index spec |
+| entity_memory | 1 | `p10_entity_cex_system.md` |
+| few_shot_example | 1 | KC creation walk-through |
+| feedback_log | 1 | Iteration history |
+| spawn_config | 1 | Knowledge spawn profile |
+| audit_report | 1 | Legacy self-audit |
+| competitive_analysis | 1 | Supabase market scan |
+| validation_schema | 1 | Validator spec |
+| scoring_rubric | 1 | Knowledge rubric |
+| agent_card | 1 | `agent_card_n04.md` |
+| total | **71** | Source `.md` files under `N04_knowledge/` (compiled excluded) |
+
+### 1.2 KC Library Coverage
+
+| Metric | Value | Command / Notes |
+|---|---:|---|
+| Canonical KCs in `P01_knowledge/library/kind/` | 123 | `Get-ChildItem P01_knowledge/library/kind -Recurse -Filter *.md` |
+| KCs outside canonical path | 452 | Repo-wide scan, `skip_dirs={.git,.cex,node_modules,...}` |
+| Dominant orphan clusters | Builder knowledge_card files under `archetypes/builders/*`, plus nucleus-local `/knowledge/` copies | Causes retriever pillar pollution + duplicate embeddings |
+| KC >6 months old referencing deprecated kinds | 0 | Scripted scan found none (threshold 2025-10-11) |
+
+### 1.3 Quality Distribution (71 artifacts)
+
+| Quality bucket | Count | Share | Evidence |
+|---|---:|---:|---|
+| 9.2 | 2 | 2.8% | Highest: `embedding_config_*` duet |
+| 9.1 | 26 | 36.6% | Most configs/schemas |
+| 9.0 | 18 | 25.4% | RAG sources, chunk strategy |
+| null | 25 | 35.2% | Agents, prompts, reports, new tools lack scoring |
+| \< 8.0 | 0 | 0% | Script confirmed no sub-floor files |
+
+**Observation:** One third of the catalog carries `quality: null`, violating “compile+score” discipline. No sub-8 files, but absence of peer review equals unknown quality.
+
+### 1.4 Embedding Configurations (2 artifacts)
+
+| Artifact | Providers referenced | Coverage notes |
+|---|---|---|
+| `embedding_config_knowledge.md` | Google Vertex `text-embedding-004` (primary), self-hosted `jina-embeddings-v2-base-en` (secondary) | Establishes default+fallback but lacks scripted fallback chain artifact tying them together. |
+| `embedding_config_supabase.md` | OpenAI `text-embedding-3-{small,large}`, `nomic-embed-text`, Cohere `embed-v3` | Pgvector schema describes dimension switches, but no automation to reindex or enforce model metadata. |
+
+**Net:** Providers on paper (Google, Hugging Face/local, OpenAI, Cohere, Nomic) exist, yet there is no `kind: fallback_chain` under N04 nor evidence that retrievers switch models dynamically.
+
+### 1.5 RAG Stack Inventory
+
+| Component | Count | Live artifacts | Gaps |
+|---|---:|---|---|
+| RAG sources (`kind: rag_source`) | 2 (N04) / 6 total repo-wide | `rag_source_knowledge`, `rag_source_supabase` | `last_checked` fields frozen at 2024-03-30 / 2026-03-31; no freshness automation. |
+| Retriever configs (`kind: retriever_config`) | 1 (N04) / 3 total | `retriever_config_knowledge` (vector_db placeholder) | No `vector_store` artifact nor nucleus-specific configs. |
+| Chunk strategies | 1 (N04) / 3 total | `chunk_strategy_knowledge` (markdown, python, generic text) | No PDF/audio/tabular chunkers; rag_sources don’t declare which strategy to use. |
+| Embedding fallbacks | 0 under N04 | — | Reliance on prose instructions only. |
+| TF-IDF retriever (`python _tools/cex_retriever.py --stats`) | Built 2026-04-08T16:55:00, 2,983 docs, vocab 17,142 | 20 docs lack pillar, typos present (`P01_knowledge`, `P07_evals`, `P12_orchestration`, `P13`). Index already 3 days old and no rebuild hook. |
+
+### 1.6 Pillar & Tool Health
+
+| Check | Result | Evidence |
+|---|---|---|
+| `python _tools/cex_doctor.py --scope N04_knowledge` | 123/123 builders PASS; no frontmatter violations | Provides clean bill of health but highlights dependence on builder standards rather than runtime checks. |
+| P10 coverage (entity_memory, knowledge_index, memory_summary, prompt_cache) | `{entity_memory: 2, knowledge_index: 2, memory_summary: 2, prompt_cache: 0}` | Prompt cache kind missing entirely; other kinds exist but unused by retriever. |
+| Broken markdown references (`python temp_link_check.py`) | 2 placeholder links (`[text](path)`) inside `self_audit_2026_04_11.md` | Shows lack of linting, albeit low impact; still violates “evidence links valid” rule. |
+
+## 2. Rules Compliance (`.claude/rules/n04-knowledge.md`)
+
+| Rule | Score (0-10) | Evidence / Notes |
+|---|---:|---|
+| Artifacts live in `N04_knowledge/` | 9 | 71 source files correctly homed; compiled copies separated. |
+| Specialize in knowledge org & retrieval | 8 | Kind mix dominated by KC/RAG artifacts, but only 5 true KCs + 1 retriever config leaves surface thin. |
+| Output = knowledge cards, embedding configs, chunk strategies, retrievers | 6 | Minimum viable set exists yet counts per kind (KC=5, retriever=1, chunk=1) are insufficient for system needs. |
+| Understand vector search & semantic indexing | 5 | Embedding configs thorough, but production stays TF-IDF-only and index is stale. |
+| Understand knowledge graph construction | 4 | No KC cross-reference map, no `cex_kc_graph` tooling, zero graph artifacts besides prose. |
+| 8F mandatory per task | 8 | Recent artifacts (including this) document 8F trace; legacy files still lack logs. |
+| `quality: null` never self-score | 7 | Existing scored files show 9.0-9.2, yet 25 artifacts remain null > 10 days with no peer review. |
+| Compile after save (`cex_compile.py`) | 9 | Doctor confirms builders compiled; new report compiled in F8. Need automated watch for `context-doc` typo. |
+
+Weighted compliance ≈7.0/10. Strong on structure, weak on operational retriever maturity.
+
+## 3. Gaps (5-15 items)
+
+| # | Gap | Impact | Evidence |
+|---:|---|---|---|
+| 1 | 25/71 artifacts carry `quality: null` | Blocks confidence transfer to other nuclei; no scoring telemetry. | Quality table §1.3. |
+| 2 | 452 knowledge_cards live outside `P01_knowledge/library/kind/` | TF-IDF index polluted with builder/example docs; increases pillar typos. | KC coverage §1.2 + retriever stats (20 pillar-less docs). |
+| 3 | Only one retriever config in N04; TF-IDF is still the only operational search stack | All nuclei call the same TF-IDF index; no vector retriever pipeline despite configs. | RAG stack §1.5 + `cex_retriever --stats`. |
+| 4 | `rag_source_knowledge` last_checked=2024-03-30; `rag_source_supabase` lacks monitoring hooks | RAG freshness claims invalid; ingestion not measurable. | Source frontmatter. |
+| 5 | Chunk strategy coverage limited to markdown/python/generic text | PDF, HTML tables, transcripts, and images have zero chunk policy, so ingestion for those docs halts. | `chunk_strategy_knowledge.md`. |
+| 6 | No `kind: fallback_chain` under N04 | Embedding provider fallbacks depend on prose; no actionable routing artifact to orchestrate Google↔Jina↔OpenAI. | Repo scan (fallback_chains only under N07/P02). |
+| 7 | Prompt cache artifacts missing (`prompt_cache: 0`) | Memory pillar incomplete; session caches can’t be audited or tuned. | P10 counts §1.6. |
+| 8 | Retriever does not map rag_sources to chunk strategies | Hard to guarantee ingestion parity; e.g., N01 rag source uses unknown chunker. | `rag_source_*` vs chunk strategy list. |
+| 9 | Placeholder `[text](path)` links already tripping dead-link scan | Signals documentation debt and missing lint hook. | Link check §1.6. |
+|10 | No golden query set or RAG eval harness | Cannot quantify retriever recall/precision; undermines Section 5b tools request. | Repo scan: no `kind: eval_dataset` tied to RAG. |
+
+No deprecated-kind references (>6 months) were found, so that specific risk is currently zero.
+
+## 4. Fixes Needed
+
+| Focus Area | Owner | Effort | Action |
+|---|---|---|---|
+| Score backlog (`quality: null`) | N05 peer + N04 follow-up | 1 day | Batch `cex_score.py --apply` across 25 files; log peer IDs for traceability. |
+| Sub-8 KCs | N/A | — | Script confirms none; keep automated watch to avoid regressions. |
+| Orphan KC sprawl | N04 + N03 | 0.5 day | Enforce naming_rule for builder knowledge_cards (prefix with pillar) or move canonical copies into P01. |
+| Retriever modernization | N04 | 2 days | Ship actual vector retriever (pgvector or FAISS), add `retriever_config_{nucleus}.md` per consumer, and rebuild TF-IDF (`--build`) daily. |
+| TF-IDF freshness | N04 | 30 min daily cron | Hook `_tools/cex_retriever.py --build` to nightly job; clean pillar metadata before rebuild. |
+| RAG source freshness | N04 | 1 day | Add `last_checked` automation (post-ingestion hook) + health metrics for both knowledge and Supabase sources. |
+| Chunk strategy matrix | N04 | 1 day | Author PDF, transcript, spreadsheet strategies and annotate `rag_source_*` with explicit chunk policy. |
+| Prompt cache artifact | N04 | 2 hrs | Create `p10_prompt_cache_default.md` describing eviction, TTL, and wiring to retriever. |
+| Embedding fallback chain | N04 | 0.5 day | Author `p02_fallback_chain_embeddings.md` linking Google→OpenAI→Jina with cost/latency branches. |
+| Cross-reference lint | N04 | 1 hr | Replace `[text](path)` placeholders with literal text, add CI hook using the link-check script. |
+| Stale rag source URLs | N04 | 1 hr | Validate Supabase endpoints (`db.[PROJECT_REF]`) and replace placeholders with environment variable references. |
+| Doctor/frontmatter | N04 | — | Current pass acknowledged; keep doctor in CI to guard the `context-doc` typo regression. |
+
+## 5. Tool Wishlist
+
+### 5a. Existing Tools Audit
+
+| Tool | Usage reality | Verdict |
+|---|---|---|
+| `cex_retriever.py` | Actively used for F3 injection + audits; stats run during this mission. | Keep; needs automation for rebuild + vector backend. |
+| `cex_memory_select.py` | Indirect usage via crew runner; rarely invoked manually. | Keep but document actual call sites to avoid “decorative” perception. |
+| `cex_memory_update.py` | Seldom run; memory updates mostly manual. | Needs integration into ingestion workflows or should be de-scoped from N04 ownership. |
+| `cex_schema_hydrate.py` | Used whenever spawning builder agents; critical for F2. | Keep and consider bundling with new skill installer. |
+
+### 5b. Missing Tools (must-have ideas per mission)
+
+| Tool | Description | Owner |
+|---|---|---|
+| `cex_kc_graph.py` | Parse all KCs, emit graph of `[text](path)` refs, detect orphans/broken edges, output DOT/JSON for visualization + lint. | N04 |
+| `cex_embedding_bench.py` | Benchmark Google/OpenAI/Cohere/Jina/Nomic embeddings on held-out KC queries; report recall@k, MRR, cost. | N04 (design) + N05 (infra) |
+| `cex_rag_eval.py` | Use golden query set to score each `retriever_config` (hit-rate, nDCG, latency); gate deployments. | N04 |
+
+## 6. Cross-Nucleus Dependencies
+
+### 6.1 What N04 Needs
+
+| Nucleus | Dependency | Current State |
+|---|---|---|
+| N01 Intelligence | Fresh research KCs + rag_source inputs | RAG source exists but chunk strategy unspecified; ingestion manual. |
+| N06 Commercial | Brand context and monetization KCs | Brand configs live in N06, yet no retriever hooks pointing to them. |
+| N03 Builder | ISO manifests + tooling to hydrate builders | Solid (cex_doctor pass), but N04 relies on N03 to codify new kinds (e.g., prompt_cache). |
+| N07 Orchestrator | Dispatch + mission context | Works (handoffs read), but 8F compliance still manual due to missing builder. |
+
+### 6.2 Who Needs N04
+
+| Nucleus | Consumption Path | Wiring Reality |
+|---|---|---|
+| N01 | Should use shared retriever for internal docs | Instead maintains nucleus-local rag_source/intake. |
+| N02 | Needs brand KCs + taxonomy | Reads local marketing knowledge, bypasses retriever. |
+| N03 | Uses TF-IDF (cex_retriever) for F3 context | Works, but still TF-IDF only. |
+| N05 | Needs infra KCs + tool docs | Reads files directly; no retriever config. |
+| N06 | Needs knowledge graph + brand contexts | Not wired; relies on manual linking. |
+| All nuclei | Expect central retriever service | Service exists only as TF-IDF CLI; no vector or API endpoints. |
+
+**Verdict:** Most nuclei treat N04 as a shared library, not a service. Until vector retrievers + nucleus-specific configs ship, cross-nucleus leverage remains low.

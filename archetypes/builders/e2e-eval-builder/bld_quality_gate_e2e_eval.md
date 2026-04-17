@@ -12,8 +12,8 @@ quality: 9.0
 tags: [quality-gate, e2e-eval, pipeline-testing, integration-test, P11]
 tldr: "Gates for e2e_eval artifacts: validates pipeline coverage, stage completeness, fixture validity, assertion specificity, and cleanup protocol."
 density_score: 0.91
+llm_function: GOVERN
 ---
-
 # Gate: e2e_eval
 ## Definition
 | Field     | Value |

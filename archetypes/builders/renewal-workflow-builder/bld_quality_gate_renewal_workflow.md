@@ -1,0 +1,57 @@
+---
+kind: quality_gate
+id: p12_qg_renewal_workflow
+pillar: P11
+llm_function: GOVERN
+purpose: Quality gate with HARD and SOFT scoring for renewal_workflow
+quality: 9.1
+title: "Quality Gate Renewal Workflow"
+version: "1.0.0"
+author: wave6_n06
+tags: [renewal_workflow, builder, quality_gate, GRR, renewal, Gainsight]
+tldr: "Quality gate with HARD and SOFT scoring for renewal_workflow"
+domain: "renewal_workflow construction"
+created: "2026-04-14"
+updated: "2026-04-14"
+density_score: 0.85
+---
+
+## Definition
+| Metric                      | Threshold | Operator | Scope                          |
+|-----------------------------|-----------|----------|--------------------------------|
+| Stage owner assignment      | 100%      | equals   | All 3 stages have named owners |
+| GRR scenario coverage       | 100%      | equals   | Full + contraction + churn     |
+
+## HARD Gates
+| ID  | Check                                               | Fail Condition                                          |
+|-----|-----------------------------------------------------|---------------------------------------------------------|
+| H01 | YAML frontmatter valid                              | Invalid YAML syntax or missing required fields          |
+| H02 | ID matches pattern ^p12_rw_[a-z][a-z0-9_]+\.yaml$ | ID format mismatch                                      |
+| H03 | kind field = "renewal_workflow"                     | Kind field incorrect or missing                         |
+| H04 | renewal_stage field present and valid enum          | Missing or invalid (must be 90_day/60_day/30_day/closed)|
+| H05 | days_to_renewal field present and positive integer  | Missing or negative/zero value                          |
+| H06 | GRR_impact field present and valid enum             | Missing or invalid (must be full/contraction_*/churn)   |
+| H07 | Escalation path defined with health score threshold | No escalation path or no health score threshold         |
+| H08 | Auto-renewal compliance specifies jurisdiction      | Generic notice period without named jurisdiction        |
+
+## SOFT Scoring
+| Dim | Dimension                                              | Weight | Scoring Guide                                                              |
+|-----|--------------------------------------------------------|--------|----------------------------------------------------------------------------|
+| D01 | Stage completeness (owner + tasks + automation trigger)| 0.25   | All 3 elements per stage = 1.0, 2 = 0.5, <2 = 0                          |
+| D02 | Price-increase playbook specificity                    | 0.25   | % range + timing + objections + discount authority = 1.0, 2-3 = 0.5, <2 = 0|
+| D03 | Multi-year incentive structure                         | 0.20   | Discount range + approval authority = 1.0, one only = 0.5, missing = 0   |
+| D04 | GRR model completeness (3 scenarios)                   | 0.15   | All 3 modeled with ARR impact = 1.0, 2 = 0.5, <2 = 0                     |
+| D05 | Compliance accuracy (jurisdiction-specific notices)    | 0.15   | Named jurisdictions with specific days = 1.0, partial = 0.5, generic = 0  |
+
+## Actions
+| Level  | Score  | Action                                            |
+|--------|--------|---------------------------------------------------|
+| GOLDEN | >=9.5  | Auto-publish; used as golden example              |
+| PUBLISH| >=8.0  | Auto-publish after RevOps + Legal review          |
+| REVIEW | >=7.0  | Require CS VP and Legal manual review             |
+| REJECT | <7.0   | Reject; return to builder for rework              |
+
+## Bypass
+| Conditions                          | Approver           | Audit Trail               |
+|-------------------------------------|--------------------|---------------------------|
+| Contract end < 14 days emergency    | VP CS + CFO        | Escalation log in Gainsight|

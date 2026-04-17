@@ -18,6 +18,8 @@ density_score: 0.90
 ---
 
 # Output Template: rate_limit_config
+
+This ISO encodes a rate limit policy -- throttle bounds, quota windows, and backoff behavior.
 ```yaml
 id: p09_rl_{{provider_slug}}
 kind: rate_limit_config
@@ -49,23 +51,23 @@ model_overrides:
     tpm: {{model_tpm}}
 ```
 ## Overview
-{{what_this_rate_limit_config_does_1_to_2_sentences}}
-{{which_provider_and_tier_and_primary_use_case}}
+`{{what_this_rate_limit_config_does_1_to_2_sentences}}`
+`{{which_provider_and_tier_and_primary_use_case}}`
 ## Limits
 | Dimension | Limit | Notes |
 |-----------|-------|-------|
-| RPM | {{rpm}} | Requests per minute |
-| TPM | {{tpm}} | Tokens per minute |
-| RPD | {{rpd}} | Requests per day |
-| Concurrent | {{concurrent}} | Max parallel in-flight requests |
+| RPM | `{{rpm}}` | Requests per minute |
+| TPM | `{{tpm}}` | Tokens per minute |
+| RPD | `{{rpd}}` | Requests per day |
+| Concurrent | `{{concurrent}}` | Max parallel in-flight requests |
 ## Tier
-**Tier**: {{tier_name}}
-{{tier_description_and_what_is_included}}
-Upgrade path: {{how_to_upgrade_to_next_tier}}
+**Tier**: `{{tier_name}}`
+`{{tier_description_and_what_is_included}}`
+Upgrade path: `{{how_to_upgrade_to_next_tier}}`
 ## Budget
-Monthly cap: ${{budget_usd}}
-Alert threshold: {{alert_threshold_percent}}% of limit
-Overage policy: {{what_happens_when_budget_exceeded}}
+Monthly cap: $`{{budget_usd}}`
+Alert threshold: `{{alert_threshold_percent}}`% of limit
+Overage policy: `{{what_happens_when_budget_exceeded}}`
 
 ## Template Standards
 

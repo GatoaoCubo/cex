@@ -1,0 +1,52 @@
+id: p10_lr_citation_builder
+kind: learning_record
+pillar: P10
+version: 1.0.0
+created: 2026-04-07
+updated: 2026-04-07
+author: n04_knowledge
+observation: Citations without excerpts are the most common failure — a URL alone provides no context if the link rots. Reliability
+  tier misclassification (blog as tier_1) undermines trust. Missing date_accessed makes temporal validity impossible to assess.
+pattern:
+- Always excerpt — 1-3 sentences with specific data from the source
+- Strict tier classification — tier_1 only for peer-reviewed/primary research
+- Temporal tracking — date_accessed on every citation, freshness policy when time-sensitive
+- Relevance mapping — specify which domains/kinds the citation supports
+evidence: Initial pattern from KC analysis — no production log yet.
+confidence: 0.7
+outcome: PENDING
+domain: citation
+tags:
+- citation
+- provenance
+- reliability
+- excerpt
+- temporal
+tldr: Excerpt is mandatory (URL rots). Tier classification must be strict. date_accessed always present. quality:null always.
+impact_score: 7.0
+decay_rate: 0.05
+agent_group: n04_knowledge
+keywords:
+- citation
+- excerpt
+- reliability_tier
+- date_accessed
+- provenance
+- url
+memory_scope: project
+observation_types:
+- user
+- feedback
+- project
+- reference
+llm_function: INJECT
+quality: null
+title: Memory ISO - citation
+density_score: 0.97
+summary: Citations ground LLM outputs in verifiable external evidence. The primary failure mode is URL-only citations without
+  context, excerpt, or reliability assessment.
+anti_pattern:
+- 'URL-only citation: no context if URL breaks'
+- 'Blog as tier_1: overestimates reliability'
+- 'No date_accessed: cannot assess temporal validity'
+- 'No excerpt: reader must visit source to understand relevance'

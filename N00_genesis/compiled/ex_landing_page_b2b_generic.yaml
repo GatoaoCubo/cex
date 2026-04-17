@@ -1,0 +1,124 @@
+id: ex_landing_page_b2b_generic
+kind: landing_page
+pillar: P05
+version: 1.0.0
+title: B2B Landing Page Template -- Partner/Wholesale Channel
+description: B2B landing page with channel value props, FAQ accordion, and partner registration CTA. For brands with a wholesale
+  or reseller program.
+domain: ecommerce
+nucleus: N06
+quality: null
+tags:
+- landing-page
+- b2b
+- partner
+- wholesale
+- cta
+- faq
+brand_placeholders:
+- BRAND_NAME
+- BRAND_DOMAIN
+- BRAND_B2B_TAGLINE
+- BRAND_WHATSAPP_B2B
+- BRAND_PARTNER_EMAIL
+- BRAND_VERTICAL
+- BRAND_AFFILIATE_COMMISSION
+- BRAND_PRIMARY_COLOR
+density_score: 1.0
+page_meta: 'title: "Parceiros {{BRAND_NAME}} -- Revenda com Margem Real"
+
+  description: "Seja revendedor {{BRAND_NAME}}. Acesso a catálogo completo, preços exclusivos e suporte dedicado. Cadastre-se
+  em 2 minutos."
+
+  og_image: /images/og_b2b.jpg
+
+  canonical: https://{{BRAND_DOMAIN}}/b2b
+
+
+  ---'
+section_1_hero: 'Headline: "Venda {{BRAND_VERTICAL}} premium com a margem que você merece"
+
+  Subheadline: "{{BRAND_B2B_TAGLINE}}"
+
+
+  CTA primary: [Quero ser parceiro] -> /b2b/cadastro
+
+  CTA secondary: [Falar com consultor] -> wa.me/{{BRAND_WHATSAPP_B2B}}
+
+
+  Trust badges (3 items):
+
+  - Cadastro gratuito em 2 minutos
+
+  - Suporte via WhatsApp
+
+  - Tabela de preços exclusiva
+
+
+  ---'
+section_2_channel_value_props_3_columns: '| Canal | Descricao | CTA |
+
+  |-------|-----------|-----|
+
+  | Revendedor | Acesso a tabela com descontos por volume | Cadastrar como revendedor |
+
+  | Afiliado | {{BRAND_AFFILIATE_COMMISSION}} de comissao por venda | Ver programa de afiliados |
+
+  | ONG/Institucional | Condições especiais para organizações sem fins lucrativos | Contato institucional |
+
+
+  ---'
+section_3_how_it_works_steps: "1. Cadastro  ->  2. Aprovação  ->  3. Acesso ao catálogo  ->  4. Pedido  ->  5. Entrega\n \
+  \  (2 min)        (até 24h)        (portal B2B)              (mínimo: X unidades)\n\n---"
+section_4_faq_accordion: '| Pergunta | Resposta |
+
+  |----------|---------|
+
+  | Qual o pedido mínimo? | A partir de (X unidades por SKU -- configure conforme sua política) |
+
+  | Tem exclusividade territorial? | (Defina sua política de exclusividade) |
+
+  | Como é feito o pagamento? | PIX, boleto, ou cartão. Prazo de pagamento negociado por perfil. |
+
+  | Posso vender online? | Sim, com uso das nossas diretrizes de marca. |
+
+  | Tem suporte para montar minha loja? | Sim, via {{BRAND_PARTNER_EMAIL}} ou WhatsApp {{BRAND_WHATSAPP_B2B}} |
+
+
+  ---'
+section_5_social_proof: '> Testimonial block -- 3 partner quotes. Use real quotes or illustrative format:
+
+
+  "[Nome do parceiro], [cidade]: ''[Resultado quantificado -- ex: dobrei meu ticket médio
+
+  em 2 meses com o catálogo {{BRAND_NAME}}]''"
+
+
+  ---'
+section_6_cta_footer: 'Headline: "Pronto para começar?"
+
+  CTA: [Criar minha conta parceiro] -> /b2b/cadastro
+
+  Secondary: [Dúvidas? Fale conosco] -> mailto:{{BRAND_PARTNER_EMAIL}}
+
+
+  ---'
+component_dependencies: '| Component | Purpose |
+
+  |-----------|---------|
+
+  | Header | Navigation with partner login link |
+
+  | FAQ Accordion | Interactive collapse/expand |
+
+  | WhatsApp Float | Sticky WhatsApp button |
+
+  | SEO Head | Meta + OG tags |
+
+
+  ---'
+design_tokens: '--primary: {{BRAND_PRIMARY_COLOR}};
+
+  --b2b-accent: #1a1a2e;   / professional dark tone for B2B /
+
+  --cta-radius: 8px;'

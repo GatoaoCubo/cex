@@ -1,0 +1,109 @@
+id: bld_examples_deployment_manifest
+kind: knowledge_card
+pillar: P01
+title: 'Examples: deployment_manifest'
+version: 1.0.0
+created: '2026-04-17'
+updated: '2026-04-17'
+author: builder
+domain: deployment_manifest
+quality: 7.6
+tags:
+- examples
+- deployment_manifest
+- P09
+llm_function: GOVERN
+tldr: Golden and anti-examples for deployment_manifest construction.
+density_score: null
+golden_example_cex_api_service_deploy: '---
+
+  id: p09_dm_cex_api_v2
+
+  kind: deployment_manifest
+
+  pillar: P09
+
+  version: 1.0.0
+
+  manifest_name: "CEX API v2.1.0 Production Deploy"
+
+  target_env: production
+
+  artifacts_count: 2
+
+  rollback_to: "v2.0.3"
+
+  domain: cex-api
+
+  quality: null
+
+  tags: [deployment_manifest, cex-api, production]
+
+  tldr: "Deploy CEX API v2.1.0 and worker to production cluster us-east-1"
+
+  ---
+
+  ## Artifacts
+
+  | Name | Version | Checksum (SHA256) | Source |
+
+  |------|---------|-------------------|--------|
+
+  | cex-api | 2.1.0 | abc123def456... | registry.cex.io/cex-api |
+
+  | cex-worker | 2.1.0 | 789xyz012abc... | registry.cex.io/cex-worker |
+
+
+  ## Target Environment
+
+  - environment: production
+
+  - namespace: cex-prod
+
+  - region: us-east-1
+
+  - cluster: prod-eks-01
+
+
+  ## Config Overrides
+
+  | Key | Value | Notes |
+
+  |-----|-------|-------|
+
+  | LOG_LEVEL | warn | Production log level |
+
+  | REPLICAS | 4 | Scale up from staging 2 |
+
+
+  Secrets:
+
+  - DATABASE_URL: vault/secret/prod/cex/db_url
+
+  - API_KEY: k8s-secret/cex-prod/api-key
+
+
+  ## Rollback Strategy
+
+  - rollback_to: v2.0.3
+
+  - trigger: health check fails after 120s
+
+  - health_check: GET /health -> 200
+
+  - auto_rollback: true'
+anti_example_rejected: '# FAILS H04: inline secret value
+
+  DATABASE_URL: postgres://user:PLAINTEXT_PASSWORD@host/db
+
+
+  # FAILS H05: "latest" tag
+
+  image: cex-api:latest
+
+
+  # FAILS H06: no rollback_to
+
+  rollback_to: null
+
+  Why rejected: inline secret leaks credentials; "latest" is non-reproducible; missing rollback leaves no recovery path.'

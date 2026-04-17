@@ -56,8 +56,8 @@ KINDS_META = ROOT / ".cex" / "kinds_meta.json"
 HANDOFF_DIR = ROOT / ".cex" / "runtime" / "handoffs"
 DECISION_MANIFEST = ROOT / ".cex" / "runtime" / "decisions" / "decision_manifest.yaml"
 BUILDERS_DIR = ROOT / "archetypes" / "builders"
-KC_DIR = ROOT / "P01_knowledge" / "library" / "kind"
-EXAMPLES_DIR = ROOT / "P01_knowledge" / "examples"
+KC_DIR = ROOT / "N00_genesis" / "P01_knowledge" / "library" / "kind"
+EXAMPLES_DIR = ROOT / "N00_genesis" / "P01_knowledge" / "examples"
 SCHEMAS_DIR = ROOT  # P{XX}_*/_schema.yaml lives under ROOT
 
 # Nucleus domain map (fallback if nucleus_models.yaml unavailable)

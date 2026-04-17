@@ -1,0 +1,36 @@
+id: bld_instruction_constitutional_rule
+kind: instruction
+pillar: P11
+title: Constitutional Rule Builder -- Instruction
+version: 1.0.0
+quality: 5.3
+tags:
+- builder
+- constitutional_rule
+- instruction
+llm_function: REASON
+density_score: 0.76
+updated: '2026-04-17'
+phase_1_research:
+- 'Identify the absolute prohibition: what behavior must NEVER occur under ANY circumstances?'
+- 'Classify the constitutional basis: harm_prevention, honesty, autonomy_preservation, legality'
+- 'Verify it is truly absolute: is there ANY legitimate scenario where this should be bypassed? If yes -> it is a guardrail,
+  not a constitutional rule.'
+- 'Define the violation test: how would a reviewer recognize that this rule was broken?'
+- 'Write the rationale: why can this never have an exception?'
+- Check existing constitutional_rules for overlap -- each rule should cover a distinct prohibition.
+phase_2_compose:
+- Read bld_schema_constitutional_rule.md -- source of truth for required fields
+- 'Fill frontmatter: id pattern p11_cr_{slug}, kind: constitutional_rule, quality: null'
+- 'Write Principle section: one clear, concrete statement of the absolute prohibition'
+- 'Write Basis section: which constitutional value this protects (harm/honesty/autonomy/legality)'
+- 'Write Rationale section: why this has zero exceptions'
+- 'Write Violation section: concrete examples of what breaking this rule looks like'
+- 'Write Detection section: how a violation is identified'
+- 'CONFIRM: bypass_policy must be "none" -- if you find yourself writing any bypass, downgrade to guardrail'
+phase_3_validate:
+- 'HARD gates: id matches `p11_cr_[a-z][a-z0-9_]+`, kind == constitutional_rule, quality == null'
+- bypass_policy == "none" (absolute)
+- Principle is a single clear prohibition, not a collection
+- At least 2 concrete violation examples
+- constitutional_basis is one of the valid enum values

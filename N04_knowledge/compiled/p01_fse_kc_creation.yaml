@@ -6,7 +6,7 @@ version: 1.0.0
 created: 2026-04-07
 author: n04_knowledge
 domain: knowledge-management
-quality: null
+quality: 8.4
 tags:
 - few-shot
 - knowledge-card
@@ -15,6 +15,7 @@ tags:
 tldr: Input/output example showing how to create a high-density KC from a raw topic — demonstrates frontmatter, section order,
   density rules.
 density_score: 0.94
+updated: '2026-04-17'
 input: 'Topic: Chain-of-Thought Prompting
 
   Domain: llm_patterns

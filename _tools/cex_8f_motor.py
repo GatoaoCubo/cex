@@ -136,7 +136,7 @@ except ImportError:
 
 CEX_ROOT = Path(__file__).resolve().parent.parent
 BUILDER_MAP_PATH = CEX_ROOT / "_docs" / "8F_BUILDER_MAP.yaml"
-KC_LIBRARY_PATH = CEX_ROOT / "P01_knowledge" / "library"
+KC_LIBRARY_PATH = CEX_ROOT / "N00_genesis" / "P01_knowledge" / "library"
 KC_DOMAIN_PATH = KC_LIBRARY_PATH / "domain"
 KC_KIND_PATH = KC_LIBRARY_PATH / "kind"
 KC_INDEX_PATH = KC_LIBRARY_PATH / "index.yaml"
@@ -723,7 +723,11 @@ def estimate_tokens(builder_id: str) -> int:
 
 
 def parse_intent(intent: str, quality_override: float | None = None) -> dict:
-    """Parse natural language intent into structured fields."""
+    """Parse natural language intent into structured fields.
+
+    Tries Python-first resolution via cex_intent_resolver (0 tokens)
+    before falling back to local heuristic parsing.
+    """
     text = intent.strip()
     if not text:
         return {
@@ -735,6 +739,39 @@ def parse_intent(intent: str, quality_override: float | None = None) -> dict:
             "multi_object": False,
             "error": "intent vazio",
         }
+
+    # --- F1 CONSTRAIN: Python-first intent resolution (0 LLM tokens) ---
+    try:
+        from cex_intent_resolver import resolve_intent
+        resolved = resolve_intent(text)
+        if resolved and resolved.get("confidence", 0) >= 0.6 and resolved.get("kind"):
+            kind = resolved["kind"]
+            pillar = resolved["pillar"]
+            nucleus = resolved["nucleus"]
+            verb = resolved.get("verb", "create")
+            quality = quality_override or 9.0
+
+            # Build result matching expected parse_intent format
+            if kind in OBJECT_TO_KINDS:
+                objects = [kind]
+            else:
+                objects = [kind]
+
+            return {
+                "verb": verb,
+                "verb_action": verb,
+                "objects": objects,
+                "domain": pillar,
+                "quality": quality,
+                "multi_object": False,
+                "resolved_by": "cex_intent_resolver",
+                "confidence": resolved["confidence"],
+                "nucleus": nucleus,
+            }
+    except ImportError:
+        pass  # resolver not available, fall through to heuristic
+    except Exception:
+        pass  # any error in resolver, fall through gracefully
 
     text_lower = text.lower()
     words = text_lower.split()

@@ -1,0 +1,79 @@
+id: batch-config-builder
+kind: type_builder
+pillar: P09
+parent: null
+domain: batch_config
+llm_function: BECOME
+version: 1.0.0
+created: 2026-04-13
+updated: 2026-04-13
+author: builder_agent
+tags:
+- kind-builder
+- batch-config
+- P09
+- async
+- bulk-api
+- openai-batch
+- anthropic-batches
+keywords:
+- batch
+- async
+- bulk
+- api
+- openai
+- anthropic
+- message-batches
+- batch-api
+- queue
+- job
+triggers:
+- configure batch processing
+- set up async batch API
+- bulk API job config
+- OpenAI Batch config
+- Anthropic Message Batches config
+capabilities:
+- Define provider, model, and endpoint for bulk async API operations
+- Specify concurrency limits, timeout windows, and cost caps per batch job
+- Document retry policy (max_retries, backoff strategy, error thresholds)
+- Configure input/output format (JSONL) and storage paths
+- Validate artifact against quality gates (8 HARD + 10 SOFT)
+- Distinguish batch_config from schedule (cron), workflow (multi-step), and runtime_rule (timeouts)
+quality: null
+title: Manifest Batch Config
+tldr: Builder for batch_config artifacts -- async bulk API job configurations for OpenAI Batch API and Anthropic Message Batches.
+density_score: 0.9
+identity: Specialist in building batch_config artifacts -- async bulk API processing configurations for LLM providers (OpenAI
+  Batch API, Anthropic Message Batches). Masters provider selection, model specification, endpoint routing, concurrency limits,
+  cost controls, retry policy, and the boundary between batch_config (single bulk async request) and schedule (cron-based
+  timing) or workflow (multi-step orchestration). Produces batch_config artifacts with complete frontmatter and job parameter
+  catalog.
+routing: 'keywords: [batch, async, bulk, api, openai-batch, anthropic-batches, queue, job, concurrency, cost-control] triggers:
+  "configure batch processing", "set up async batch API", "bulk API job config", "OpenAI Batch config", "Anthropic Message
+  Batches config"'
+crew_role: 'In a crew, I handle ASYNC BULK API JOB CONFIGURATION. I answer: "what provider, model, concurrency, cost cap,
+  and retry policy does this batch job need?" I do NOT handle: schedule (cron timing, P09), workflow (multi-step, P12), runtime_rule
+  (per-request timeouts, P09), env_config (generic env vars, P09).'
+metadata: python _tools/cex_score.py --apply batch-config-builder.md
+properties: '| Property | Value |
+
+  |----------|-------|
+
+  | Kind | `type_builder` |
+
+  | Pillar | P09 |
+
+  | Domain | batch_config |
+
+  | Pipeline | 8F (F1-F8) |
+
+  | Scorer | cex_score.py |
+
+  | Compiler | cex_compile.py |
+
+  | Retriever | cex_retriever.py |
+
+  | Quality target | 9.0+ |
+
+  | Density target | 0.85+ |'

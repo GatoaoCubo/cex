@@ -10,6 +10,7 @@ Usage:
 import sys
 import re
 from pathlib import Path
+from typing import Any
 
 try:
     import yaml
@@ -36,7 +37,7 @@ LANG_PATTERN = re.compile(r"^[a-z]{2}-[A-Z]{2}$")
 TRANSFORM_PATTERN = re.compile(r"From .+ to .+ through .+", re.IGNORECASE)
 
 
-def is_placeholder(value) -> bool:
+def is_placeholder(value: Any) -> bool:
     """Check if value is still a mustache placeholder."""
     if value is None:
         return True
@@ -44,7 +45,13 @@ def is_placeholder(value) -> bool:
     return s.startswith("{{") and s.endswith("}}")
 
 
-def validate_section(config: dict, section: str, required: list, errors: list, warnings: list):
+def validate_section(
+    config: dict[str, Any],
+    section: str,
+    required: list[str],
+    errors: list[str],
+    warnings: list[str],
+) -> None:
     """Validate a section of brand_config."""
     if section not in config:
         errors.append(f"Missing section: {section}")
@@ -60,7 +67,7 @@ def validate_section(config: dict, section: str, required: list, errors: list, w
             warnings.append(f"Placeholder: {section}.{field} = {data[field]}")
 
 
-def validate(config: dict, strict: bool = False) -> dict:
+def validate(config: dict[str, Any], strict: bool = False) -> dict[str, Any]:
     """Validate brand_config against schema rules."""
     errors = []
     warnings = []
@@ -148,7 +155,7 @@ def validate(config: dict, strict: bool = False) -> dict:
     }
 
 
-def main():
+def main() -> None:
     import argparse
     parser = argparse.ArgumentParser(description="Validate brand_config.yaml")
     parser.add_argument("--config", default=str(BRAND_CONFIG), help="Path to brand_config.yaml")

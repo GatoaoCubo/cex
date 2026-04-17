@@ -1,0 +1,38 @@
+id: bld_examples_event_stream
+kind: knowledge_card
+pillar: P04
+title: Event Stream Builder -- Examples
+version: 1.0.0
+quality: 5.0
+tags:
+- builder
+- event_stream
+- examples
+llm_function: GOVERN
+density_score: 1.0
+updated: '2026-04-17'
+golden_example_order_events: "id: p04_es_order_events\nkind: event_stream\nevent_types: [OrderPlaced, OrderPaid, OrderShipped,\
+  \ OrderCancelled]\nproducer: OrderService\nconsumer_groups:\n  - name: fulfillment-group\n    offset_policy: latest\n  \
+  \  lag_tolerance: 1000 events\n  - name: analytics-group\n    offset_policy: earliest\n    lag_tolerance: 10000 events\n\
+  partition_key: orderId\npartition_count: 12\nretention_hours: 168\nretention_bytes: \"50GB\"\ndelivery: at_least_once\n\
+  schema_format: avro\ncompatibility_mode: BACKWARD\nthroughput_estimate: \"5000 events/sec peak\"\nordering_guarantee: per_partition"
+golden_example_user_activity_stream: "id: p04_es_user_activity\nkind: event_stream\nevent_types: [UserLoggedIn, PageViewed,\
+  \ ItemAddedToCart, CheckoutStarted]\nproducer: WebApp\nconsumer_groups:\n  - name: personalization-group\n    offset_policy:\
+  \ latest\n    lag_tolerance: 500 events\npartition_key: userId\npartition_count: 24\nretention_hours: 72\ndelivery: at_most_once\n\
+  schema_format: json_schema"
+anti_pattern_no_partition_key: '# WRONG -- round-robin loses per-entity ordering
+
+  partition_key: null
+
+  # CORRECT: use entity identifier as key
+
+  partition_key: userId'
+anti_pattern_confusing_with_webhook: '# WRONG -- webhook is for single HTTP push, not stream
+
+  kind: event_stream
+
+  consumer_groups: [{name: slack, offset_policy: latest}]
+
+  delivery: http_push  # not a valid delivery for event_stream
+
+  # CORRECT: if single HTTP push, use webhook kind instead'

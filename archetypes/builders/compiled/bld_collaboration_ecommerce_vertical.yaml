@@ -1,0 +1,25 @@
+kind: collaboration
+id: bld_collaboration_ecommerce_vertical
+pillar: P12
+llm_function: COLLABORATE
+purpose: How ecommerce_vertical-builder works in crews with other builders
+quality: null
+title: Collaboration Ecommerce Vertical
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- ecommerce_vertical
+- builder
+- collaboration
+tldr: How ecommerce_vertical-builder works in crews with other builders
+domain: ecommerce_vertical construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+crew_role: Assembles and maintains vertical-specific ecommerce capabilities (product catalogs, inventory, order processing),
+  ensuring integration with frontend and backend systems.
+receives_from: "| Builder | What | Format |  \n|---|---|---|  \n| Product Catalog Builder | Product data | JSON |  \n| Inventory\
+  \ Management Builder | Stock updates | API |  \n| Customer Data Builder | Customer info | CSV |"
+produces_for: "| Builder | What | Format |  \n|---|---|---|  \n| Frontend Builder | Product catalog | XML |  \n| Notification\
+  \ Builder | Order confirmation | Webhook |  \n| Analytics Builder | Inventory reports | CSV |"
+boundary: Does NOT handle payments (fintech_vertical), user authentication (security_builder), or shipping logistics (logistics_builder).

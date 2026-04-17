@@ -3,7 +3,7 @@ id: reasoning-trace-builder
 kind: type_builder
 pillar: P03
 domain: reasoning_trace
-llm_function: REASON
+llm_function: BECOME
 version: 1.0.0
 created: 2026-04-06
 updated: 2026-04-06

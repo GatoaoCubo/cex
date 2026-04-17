@@ -1,0 +1,48 @@
+kind: instruction
+id: bld_instruction_fhir_agent_capability
+pillar: P03
+llm_function: REASON
+purpose: Step-by-step production process for fhir_agent_capability
+quality: null
+title: Instruction FHIR Agent Capability
+version: 1.0.0
+author: n06_wave7
+tags:
+- fhir_agent_capability
+- builder
+- instruction
+- fhir
+- hl7
+tldr: Step-by-step production process for fhir_agent_capability
+domain: fhir_agent_capability construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+phase_1_research:
+- 'Identify clinical AI use case: CDS, summarization, coding (ICD/CPT), documentation, or scheduling.'
+- Map use case to HL7 FHIR capability category using AI Office 2025 taxonomy.
+- 'Determine FHIR resource access requirements: which resources the agent reads/writes (Patient, Observation, Condition, MedicationRequest,
+  etc.).'
+- Identify SMART on FHIR authorization scopes required for each resource access (e.g., `patient/Patient.read`).
+- 'Audit PHI exposure: does the agent process, retain, or transmit Protected Health Information?'
+- 'Check CDS Hooks integration: does the agent expose hooks (patient-view, order-select, order-sign)?'
+- Review HL7 AI Office transparency requirements for the declared capability.
+phase_2_compose:
+- Reference SCHEMA.md for required fields (agent_id, fhir_version, capability_category, smart_scopes).
+- 'Declare capability_category: CDS / summarization / coding / documentation / scheduling.'
+- Specify SMART on FHIR scopes as minimum-privilege list (principle of least privilege).
+- 'Define PHI-handling declaration: data_retention_policy, de_identification_standard, audit_log_resource.'
+- 'Specify CDS Hooks: hook_id, context_resources, prefetch_keys (if applicable).'
+- Map agent tools to FHIR resource operations (read, write, search, create).
+- 'Reference AI Transparency extension: model_id, training_data_statement, explainability_method.'
+- Validate authorization_scopes are consistent with SMART on FHIR v2 specification.
+- Include FHIR CapabilityStatement reference (the FHIR server this agent is certified for).
+phase_3_validate:
+- '[ ] agent_id follows pattern `p08_fhir_[capability_slug].md`'
+- '[ ] fhir_version is "R5" (or explicitly R4B with migration note)'
+- '[ ] capability_category is from HL7 taxonomy: CDS/summarization/coding/documentation/scheduling'
+- '[ ] smart_scopes follow SMART on FHIR v2 format: `{{system}}/{{resource}}.{{action}}`'
+- '[ ] PHI-handling declaration present if agent processes patient data'
+- '[ ] audit_log_resource references a valid FHIR AuditEvent extension'
+- '[ ] CDS Hooks declared if agent provides EHR-integrated decision support'
+- '[ ] AI Transparency extension present (HL7 AI Office requirement)'

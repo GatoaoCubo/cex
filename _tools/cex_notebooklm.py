@@ -14,7 +14,7 @@ Subcommands:
   --reauth              Re-authenticate Google session
 
 Spec: _docs/specs/spec_notebooklm_pipeline.md
-Config: .cex/config/notebooklm_notebooks.yaml
+Config: .cex/P09_config/notebooklm_notebooks.yaml
 
 Usage:
   python _tools/cex_notebooklm.py --upload P01_knowledge/library/kind/kc_agent.md
@@ -33,6 +33,7 @@ import sys
 import time
 from datetime import datetime, timezone
 from pathlib import Path
+from typing import Any
 
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8")
@@ -167,7 +168,7 @@ def _resolve_state_file() -> Path:
     return STATE_FILE or Path(".")
 
 
-def load_cookies() -> list:
+def load_cookies() -> list[dict[str, Any]]:
     """Load Google cookies from NotebookLM MCP browser state."""
     sf = _resolve_state_file()
     if not sf or not sf.exists():
@@ -198,7 +199,7 @@ def load_cookies() -> list:
     return cookies
 
 
-def check_auth_valid(cookies: list) -> bool:
+def check_auth_valid(cookies: list[dict[str, Any]]) -> bool:
     """Check if Google cookies are likely still valid."""
     if not cookies:
         return False
@@ -222,7 +223,7 @@ def check_auth_valid(cookies: list) -> bool:
 # Config Management
 # ---------------------------------------------------------------------------
 
-def load_config() -> dict:
+def load_config() -> dict[str, Any]:
     """Load notebooklm_notebooks.yaml config."""
     yaml = _yaml()
     if not CONFIG_PATH.exists():
@@ -237,7 +238,7 @@ def load_config() -> dict:
     return yaml.safe_load(CONFIG_PATH.read_text(encoding="utf-8")) or {}
 
 
-def save_config(config: dict) -> None:
+def save_config(config: dict[str, Any]) -> None:
     """Save config back to YAML."""
     yaml = _yaml()
     CONFIG_PATH.parent.mkdir(parents=True, exist_ok=True)
@@ -247,7 +248,7 @@ def save_config(config: dict) -> None:
     )
 
 
-def resolve_domain(kc_path: Path, explicit: str = None) -> str:
+def resolve_domain(kc_path: Path, explicit: str | None = None) -> str:
     """Resolve domain from explicit flag, KC frontmatter, or directory structure."""
     if explicit:
         return explicit
@@ -282,7 +283,7 @@ def resolve_domain(kc_path: Path, explicit: str = None) -> str:
     return "meta"  # fallback
 
 
-def get_notebook_id(config: dict, domain: str) -> str:
+def get_notebook_id(config: dict[str, Any], domain: str) -> str | None:
     """Get notebook_id for a domain, or None if not created."""
     domains = config.get("domains", {})
     entry = domains.get(domain, {})
@@ -411,7 +412,7 @@ def _preflight_auth() -> list:
 # Subcommand: --upload
 # ---------------------------------------------------------------------------
 
-def cmd_upload(args):
+def cmd_upload(args: argparse.Namespace) -> None:
     """Upload a KC as source to a domain notebook."""
     kc_path = Path(args.upload)
     if not kc_path.exists():
@@ -652,7 +653,7 @@ def cmd_upload(args):
 # Subcommand: --studio
 # ---------------------------------------------------------------------------
 
-def cmd_studio(args):
+def cmd_studio(args: argparse.Namespace) -> None:
     """Activate Estudio outputs for a notebook."""
     notebook_id = args.studio
 
@@ -771,7 +772,7 @@ def cmd_studio(args):
 # Subcommand: --status
 # ---------------------------------------------------------------------------
 
-def cmd_status(args):
+def cmd_status(args: argparse.Namespace) -> None:
     """Check status of a notebook (local config + info)."""
     notebook_id = args.status
     config = load_config()
@@ -820,7 +821,7 @@ def cmd_status(args):
 # Subcommand: --list
 # ---------------------------------------------------------------------------
 
-def cmd_list(args):
+def cmd_list(args: argparse.Namespace) -> None:
     """List all tracked notebooks with domain mapping."""
     config = load_config()
     domains = config.get("domains", {})
@@ -857,7 +858,7 @@ def cmd_list(args):
 # Subcommand: --reauth
 # ---------------------------------------------------------------------------
 
-def cmd_reauth(args):
+def cmd_reauth(args: argparse.Namespace) -> None:
     """Re-authenticate Google session via browser."""
     if not _check_playwright():
         sys.exit(1)
@@ -917,7 +918,7 @@ def cmd_reauth(args):
 # Subcommand: --auth-check
 # ---------------------------------------------------------------------------
 
-def cmd_auth_check(args):
+def cmd_auth_check(args: argparse.Namespace) -> None:
     """Check if Google auth cookies are valid."""
     cookies = load_cookies()
     if not cookies:
@@ -949,7 +950,7 @@ def cmd_auth_check(args):
 # Main
 # ---------------------------------------------------------------------------
 
-def main():
+def main() -> None:
     parser = argparse.ArgumentParser(
         description="CEX NotebookLM Pipeline Tool",
         formatter_class=argparse.RawDescriptionHelpFormatter,
@@ -962,7 +963,7 @@ def main():
             "  %(prog)s --reauth\n"
             "  %(prog)s --auth-check\n"
             "\n"
-            "Config: .cex/config/notebooklm_notebooks.yaml\n"
+            "Config: .cex/P09_config/notebooklm_notebooks.yaml\n"
             "Spec: _docs/specs/spec_notebooklm_pipeline.md\n"
         ),
     )

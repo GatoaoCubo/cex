@@ -12,8 +12,8 @@ quality: 9.0
 tags: [quality-gate, handoff-protocol, P02]
 tldr: "Pass/fail gate for handoff_protocol artifacts: required fields, id pattern, body sections, parameter completeness."
 density_score: 0.90
+llm_function: GOVERN
 ---
-
 # Gate: handoff_protocol
 ## Definition
 | Field | Value |

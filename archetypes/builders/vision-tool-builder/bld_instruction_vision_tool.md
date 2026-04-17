@@ -30,7 +30,7 @@ density_score: 0.90
 9. Confirm capability slug for id: snake_case, lowercase, no hyphens
 ## Phase 2: COMPOSE
 1. Read SCHEMA.md — source of truth for all fields
-2. Read OUTPUT_TEMPLATE.md — fill {{vars}} following SCHEMA constraints
+2. Read OUTPUT_TEMPLATE.md — fill `{{vars}}` following SCHEMA constraints
 3. Fill frontmatter: all required fields (quality: null — never self-score)
 4. Write Overview section: what the tool does, primary use case, who calls it
 5. Write Input Types section: each type with format details, size limits, and encoding requirements

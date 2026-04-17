@@ -1,0 +1,76 @@
+kind: quality_gate
+id: p04_qg_mcp_app_extension
+pillar: P11
+llm_function: GOVERN
+purpose: Quality gate with HARD and SOFT scoring for mcp_app_extension
+quality: null
+title: Quality Gate MCP App Extension
+version: 1.0.0
+author: wave7_n03_dev_manifests
+tags:
+- mcp_app_extension
+- builder
+- quality_gate
+tldr: Quality gate with HARD and SOFT scoring for mcp_app_extension
+domain: mcp_app_extension construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+definition: '| Metric | Threshold | Operator | Scope |
+
+  |---|---|---|---|
+
+  | SEP-1865 manifest conformance | 100% | equals | All mcp_app_extension artifacts |'
+hard_gates: '| ID | Check | Fail Condition |
+
+  |---|---|---|
+
+  | H01 | YAML frontmatter valid | Invalid YAML syntax or missing fields |
+
+  | H02 | ID matches pattern ^p04_mae_[a-z][a-z0-9_]+\.md$ | ID format mismatch |
+
+  | H03 | kind field equals ''mcp_app_extension'' | Kind field incorrect or set to mcp_server |
+
+  | H04 | app_id present and follows reverse-DNS or p04_mae slug | Missing or malformed app_id |
+
+  | H05 | entry_url is HTTPS and present | Non-HTTPS URL or missing |
+
+  | H06 | capabilities array present and each maps to MCP tool/resource | Missing or unmapped capabilities |
+
+  | H07 | permissions array present with per-scope justification | Missing scopes or unjustified grants |
+
+  | H08 | Install, launch, terminate handlers documented | Any lifecycle phase missing |'
+soft_scoring: '| Dim | Dimension | Weight | Scoring Guide |
+
+  |---|---|---|---|
+
+  | D01 | SEP-1865 manifest completeness (app_id, version, entry_url, capabilities, permissions) | 0.25 | All present = 1.0,
+  partial = 0.5, <50% = 0 |
+
+  | D02 | Capability-to-tool mapping accuracy (matches backing mcp_server) | 0.20 | All capabilities map to real tools/resources
+  = 1.0, partial = 0.5, none = 0 |
+
+  | D03 | Permission-grant minimality (Anthropic + OpenAI review criteria) | 0.20 | All scopes justified = 1.0, partial =
+  0.5, unjustified = 0 |
+
+  | D04 | Sandbox policy rigor (CSP, iframe flags, no parent-frame DOM) | 0.20 | Full CSP + isolation = 1.0, partial = 0.5,
+  missing = 0 |
+
+  | D05 | Lifecycle handler clarity (install, launch, terminate postMessage schemas) | 0.15 | All three documented with payloads
+  = 1.0, partial = 0.5, none = 0 |'
+actions: '| Score | Action |
+
+  |---|---|
+
+  | GOLDEN | >=9.5 | Auto-publish to MCP app directory |
+
+  | PUBLISH | >=8.0 | Auto-publish after AAIF checklist |
+
+  | REVIEW | >=7.0 | Require manual security review |
+
+  | REJECT | <7.0 | Reject and flag for correction |'
+bypass: '| Conditions | Approver | Audit Trail |
+
+  |---|---|---|
+
+  | Emergency patch for active Anthropic/OpenAI client | MCP Apps Extension maintainer | AAIF escalation log |'

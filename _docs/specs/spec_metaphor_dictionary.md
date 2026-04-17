@@ -118,11 +118,31 @@ The user (and internal docs) use metaphors to explain concepts. LLMs and artifac
 | make it smarter | improve quality | **prompt optimization** / model upgrade | cex_prompt_optimizer.py + cex_evolve.py | YES -- "Prompt optimization first, model upgrade second" |
 | test it | run evaluation | **evaluation** (unit/e2e/smoke) | unit_eval, e2e_eval, smoke_eval, benchmark kinds | YES if ambiguous -- "Which eval type?" |
 
+## MLOps / LLM Ops Metaphors
+
+| User says | System means | Industry term | CEX implementation | Teach? |
+|-----------|-------------|---------------|-------------------|--------|
+| -- | A/B test for models/prompts | **experiment** (MLOps) | cex_experiments/ + results.tsv | YES -- "Experiment, not just 'try'" |
+| -- | versioned model/prompt store | **registry** (MLOps: MLflow, W&B) | archetypes/ + compiled/ (local registry) | YES -- "Registry, like Docker Hub for models" |
+| -- | data-to-inference provenance | **lineage** (MLOps: MLflow, DVC) | 8F trace (F1-F8) = artifact lineage | YES -- "Lineage, not just 'history'" |
+| evolve | optimization sweep | **sweep** (MLOps: W&B, Optuna) | cex_evolve.py (heuristic + agent mode) | YES -- "Sweep, not just 'improve'" |
+| quality_gate | evaluation milestone snapshot | **checkpoint** (MLOps: PyTorch, HF) | cex_score.py --apply (snapshot at gate) | YES -- "Checkpoint, not just 'gate'" |
+| -- | full pass through dataset | **epoch** (MLOps: deep learning) | one cex_evolve.py --all cycle = 1 epoch | YES -- "Epoch = one full pass" |
+| -- | async grouped API requests | **batch** (API: OpenAI, Anthropic) | cex_batch.py (multi-intent processing) | YES -- "Batch API, not just 'queue'" |
+| -- | token allocation limit | **token budget** (LLM Ops) | cex_token_budget.py + context_window_config | YES -- "Token budget = cost ceiling" |
+| cex_score.py | benchmark framework | **evaluation harness** (MLOps: lm-eval, HELM) | cex_score.py + unit_eval + e2e_eval kinds | YES -- "Eval harness, not just 'scorer'" |
+| overnight.ps1 | long-running compute task | **training job** (MLOps: SageMaker, Vertex AI) | boot/overnight_h1.cmd (evolve + audit) | YES -- "Training job, not just 'overnight'" |
+| prompt_compiler | automated prompt improvement | **prompt optimization** (DSPy: prompt compilation) | cex_prompt_compiler.py + p03_pc_*.md | YES -- "DSPy-style prompt compilation" |
+| cex_retriever | query-retrieve-rerank flow | **retrieval pipeline** (RAG: LlamaIndex, LangChain) | cex_retriever.py (TF-IDF + rerank) | YES -- "Retrieval pipeline, not just 'search'" |
+| -- | vector space semantic shift | **embedding drift** (MLOps: Arize, WhyLabs) | not yet implemented (monitor embedding_config) | YES -- "Drift = silent quality decay" |
+| -- | model serving API | **inference endpoint** (MLOps: HF, SageMaker) | cex_router.py provider endpoints | YES -- "Inference endpoint, not just 'API'" |
+| cex_router | multi-provider request proxy | **model gateway** (MLOps: LiteLLM, Portkey) | cex_router.py (4 providers x 7 nuclei) | YES -- "Gateway, not just 'router'" |
+
 ## Rules
 
 1. **Artifacts, code, docs**: use "Industry term" column. ALWAYS.
 2. **User input**: accept "User says" column, translate silently.
 3. **This dictionary**: the ONLY place both columns coexist.
 4. **Llama-7B test**: if the term needs this dictionary to be understood, it's wrong for artifacts.
-5. **Rename cascade**: changing a term requires CRUD across all files that reference it. See `N07_admin/memory/terminology_standardization.md` for the full map.
-6. **Didactic protocol**: check `N07_admin/memory/taught_terms_registry.md` before teaching. Teach once per term, never repeat. See N02's didactic protocol spec for format guidelines.
+5. **Rename cascade**: changing a term requires CRUD across all files that reference it. See `N07_admin/P10_memory/terminology_standardization.md` for the full map.
+6. **Didactic protocol**: check `N07_admin/P10_memory/taught_terms_registry.md` before teaching. Teach once per term, never repeat. See N02's didactic protocol spec for format guidelines.

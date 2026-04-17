@@ -1,0 +1,71 @@
+id: social_publisher_n02
+kind: browser_tool
+pillar: P04
+nucleus: n02
+title: Social Publisher -- Multi-Channel Content Publishing Tool
+version: 1.0.0
+quality: null
+tags:
+- browser_tool
+- social_publisher
+- multi_channel
+- distribution
+- publishing
+- P04
+- n02_marketing
+domain: content-distribution
+status: active
+density_score: 1.0
+purpose: 'Copy that never ships is a draft. This tool is the final mile: structured publishing to multiple social platforms,
+  respecting rate limits, handling errors, and recording proof of delivery for every asset.'
+tool_interface: "# Tool signature\ndef publish_asset(\n    asset_id: str,\n    copy_text: str,\n    visual_path: str | None,\n\
+  \    platform: str,\n    format: str,\n    scheduled_at: str | None,\n    campaign_id: str,\n    dry_run: bool = False\n\
+  ) -> PublishResult"
+publisher_architecture: "INPUT: validated copy asset + optional visual\n    |\n    v\nROUTE: platform selector\n    |\n  \
+  \  +-- instagram -> IGPublisher (Meta Graph API)\n    +-- linkedin  -> LIPublisher (LinkedIn UGC API)\n    +-- x       \
+  \  -> XPublisher (Twitter API v2)\n    +-- meta_ads  -> MetaAdsPublisher (Meta Ads API)\n    +-- email     -> EmailPublisher\
+  \ (SMTP/ESP integration)\n    |\n    v\nPRE-FLIGHT: validate payload against api_reference_social_apis.md constraints\n\
+  \    |\n    v\nEXECUTE: API call with retry logic\n    |\n    v\nLOG: publish record (platform_post_id, timestamp, asset_id,\
+  \ campaign_id)\n    |\n    v\nRETURN: PublishResult object"
+platform_publisher_specs: ''
+igpublisher_instagram: "class IGPublisher:\n    base_url = \"https://graph.facebook.com/v21.0\"\n    auth: OAuth2 user access\
+  \ token\n    rate_limit: 25 posts / 24h (tracked in session)\n\n    def publish_post(self, ig_user_id, image_url, caption):\n\
+  \        # Step 1: create media container\n        container_id = self._create_media(ig_user_id, image_url, caption)\n \
+  \       # Step 2: publish container\n        return self._publish_media(ig_user_id, container_id)\n\n    def publish_story(self,\
+  \ ig_user_id, media_url, sticker_data=None):\n        ...\n\n    def publish_carousel(self, ig_user_id, items, caption):\n\
+  \        # items: [{image_url, caption_per_card}]\n        children = [self._create_media(ig_user_id, item[\"url\"]) for\
+  \ item in items]\n        return self._create_carousel(ig_user_id, children, caption)"
+lipublisher_linkedin: "class LIPublisher:\n    base_url = \"https://api.linkedin.com/v2\"\n    auth: OAuth2 3-legged token\n\
+  \    rate_limit: 150 posts / day (tracked)\n\n    def publish_post(self, author_urn, text, image_urn=None):\n        payload\
+  \ = {\n            \"author\": author_urn,\n            \"lifecycleState\": \"PUBLISHED\",\n            \"specificContent\"\
+  : {\n                \"com.linkedin.ugc.ShareContent\": {\n                    \"shareCommentary\": {\"text\": text},\n\
+  \                    \"shareMediaCategory\": \"IMAGE\" if image_urn else \"NONE\",\n                    \"media\": [{\"\
+  status\": \"READY\", \"media\": image_urn}] if image_urn else []\n                }\n            },\n            \"visibility\"\
+  : {\"com.linkedin.ugc.MemberNetworkVisibility\": \"PUBLIC\"}\n        }\n        return self._post(\"/ugcPosts\", payload)\n\
+  \n    def upload_image(self, owner_urn, image_path) -> str:\n        # returns asset URN for use in publish_post\n     \
+  \   ..."
+xpublisher_x_twitter: "class XPublisher:\n    base_url = \"https://api.twitter.com/2\"\n    auth: OAuth 2.0 PKCE\n    rate_limit:\
+  \ 300 tweets / 3h (Basic tier)\n\n    def publish_tweet(self, text, media_ids=None, reply_to=None):\n        payload = {\"\
+  text\": text}\n        if media_ids:\n            payload[\"media\"] = {\"media_ids\": media_ids}\n        if reply_to:\n\
+  \            payload[\"reply\"] = {\"in_reply_to_tweet_id\": reply_to}\n        return self._post(\"/tweets\", payload)\n\
+  \n    def upload_media(self, media_path) -> str:\n        # INIT + APPEND + FINALIZE flow\n        # Returns media_id_string\n\
+  \        ..."
+rate_limit_tracking: "rate_limit_tracker:\n  instagram:\n    daily_posts_used: integer\n    daily_posts_limit: 25\n    reset_at:\
+  \ ISO 8601 datetime\n  linkedin:\n    daily_posts_used: integer\n    daily_posts_limit: 150\n    reset_at: ISO 8601 datetime\n\
+  \  x:\n    window_tweets_used: integer\n    window_tweets_limit: 300\n    window_reset_at: ISO 8601 datetime\n\nenforcement:\n\
+  \  on_limit_reached: queue_for_next_window\n  queue_max_hours: 48"
+retry_logic: "retry_policy:\n  max_attempts: 3\n  backoff: exponential (base: 30s, factor: 2)\n  retryable_errors: [429, 503,\
+  \ 504, 524]\n  non_retryable_errors: [400, 401, 403]\n  on_non_retryable:\n    action: log_failure + notify_n07 + set_asset_status=failed"
+publishresult_schema: "publish_result:\n  asset_id: string\n  campaign_id: string\n  platform: string\n  format: string\n\
+  \  status: published|scheduled|failed|rate_limited|queued\n  platform_post_id: string (nullable -- populated on success)\n\
+  \  published_at: ISO 8601 datetime (nullable)\n  scheduled_at: ISO 8601 datetime (nullable)\n  error: string (nullable)\n\
+  \  retry_count: integer\n  dry_run: boolean"
+scheduling: "scheduler:\n  engine: cron or datetime queue\n  timezone: from brand_config.yaml (default: UTC)\n  optimal_posting_times:\n\
+  \    instagram:\n      B2C: [\"09:00\", \"12:00\", \"17:00\", \"19:00\"]\n      B2B: [\"08:00\", \"12:00\", \"17:00\"]\n\
+  \    linkedin:\n      B2B: [\"07:30\", \"12:00\", \"17:00\", \"18:00\"]\n    x:\n      B2B: [\"08:00\", \"12:00\", \"17:00\"\
+  ]\n  buffer_between_posts_minutes: 30  # min spacing to avoid spam signals"
+integration:
+- 'Consumes: `api_reference_social_apis.md` (platform API specs)'
+- 'Consumes: `validation_schema_content_spec.md` (pre-flight validation)'
+- 'Invoked by: `workflow_campaign_pipeline.md` (F8 DISTRIBUTE step)'
+- 'Feeds: `cohort_analysis_n02.md` (platform_post_id as tracking anchor)'

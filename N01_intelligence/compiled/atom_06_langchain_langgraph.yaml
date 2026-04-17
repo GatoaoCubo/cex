@@ -1,0 +1,1408 @@
+id: atom_06_langchain_langgraph
+kind: knowledge_card
+pillar: P01
+domain: agentic-frameworks
+title: LangChain LCEL + LangGraph + LangSmith -- Complete Vocabulary Atlas
+version: 2.1.0
+quality: 8.8
+tags:
+- langchain
+- langgraph
+- langsmith
+- lcel
+- runnable
+- stategraph
+- observability
+- agent-framework
+- langgraph-platform
+- pregel
+- hitl
+- datasets
+- store-api
+- sdk-reference
+- task-parallelism
+- experiments
+sources:
+- https://docs.langchain.com/oss/python/langgraph/graph-api
+- https://docs.langchain.com/langsmith/observability-concepts
+- https://reference.langchain.com/python/langchain_core/
+- https://docs.langchain.com/oss/python/langgraph/use-functional-api
+- https://langchain-ai.github.io/langgraph/reference/agents/
+- https://langchain-ai.github.io/langgraph/cloud/reference/api/api_ref.html
+- https://docs.langchain.com/langgraph-platform/deployment-options
+- https://docs.langchain.com/langgraph-platform/langgraph-server
+- https://langchain-ai.github.io/langgraph/concepts/human_in_the_loop/
+- https://docs.langchain.com/oss/python/langgraph/interrupts
+- https://docs.smith.langchain.com/evaluation/how_to_guides/manage_datasets_programmatically
+- https://docs.smith.langchain.com/reference/python/client/langsmith.client.Client
+- https://blog.langchain.dev/langgraph-platform-ga/
+date: 2026-04-13
+1_lcel_runnable_type_hierarchy: 'LCEL (LangChain Expression Language) is the composition protocol. Every component
+
+  implements `Runnable`, which defines invoke/batch/stream + pipe operator (`|`).'
+1_1_runnable_interface_methods_on_every_lcel_object: '| Method | Sync | Async | Purpose |
+
+  |--------|------|-------|---------|
+
+  | `invoke(input)` | yes | `ainvoke` | Single-input execution |
+
+  | `batch(inputs)` | yes | `abatch` | Multi-input parallel execution |
+
+  | `stream(input)` | yes | `astream` | Token-level streaming |
+
+  | `astream_events(input)` | -- | yes | Event-level streaming (v2) |
+
+  | `astream_log(input)` | -- | yes | Log-patch streaming |
+
+  | `bind(**kwargs)` | yes | -- | Bind kwargs to runnable |
+
+  | `with_config(config)` | yes | -- | Override RunnableConfig |
+
+  | `with_retry(...)` | yes | -- | Add retry policy |
+
+  | `with_fallbacks(...)` | yes | -- | Add fallback chain |
+
+  | `assign(**kwargs)` | yes | -- | Merge additional runnables into output |
+
+  | `pick(keys)` | yes | -- | Select subset of output keys |
+
+  | `pipe(other)` | yes | -- | Compose sequentially (same as `\|`) |
+
+  | `get_graph()` | yes | -- | Return graph representation |
+
+  | `get_name()` | yes | -- | Return runnable name |
+
+  | `get_input_schema()` | yes | -- | Pydantic model for input |
+
+  | `get_output_schema()` | yes | -- | Pydantic model for output |'
+1_2_runnable_subclass_hierarchy: "Runnable (abstract base -- langchain_core.runnables.base)\n  |\n  +-- RunnableSerializable\
+  \ (adds JSON serialization)\n  |     +-- RunnableSequence          # chain: A | B | C\n  |     +-- RunnableParallel    \
+  \      # fan-out: {\"a\": A, \"b\": B}\n  |     +-- RunnableLambda            # wrap plain function\n  |     +-- RunnableEach\
+  \              # apply to each item\n  |     +-- RunnableBinding           # bind kwargs\n  |     +-- RunnableGenerator\
+  \         # generator/async-generator\n  |     +-- RunnableAssign            # merge keys into output\n  |     +-- RunnablePick\
+  \              # select output keys\n  |     +-- RunnableBranch            # conditional dispatch\n  |     +-- RouterRunnable\
+  \            # key-based routing\n  |     +-- RunnableWithFallbacks     # fallback chain\n  |     +-- RunnableRetry    \
+  \         # retry with backoff\n  |     +-- RunnableWithMessageHistory# inject chat history\n  |     +-- RunnableConfigurableFields#\
+  \ runtime-configurable params\n  |     +-- RunnableConfigurableAlternatives # swap implementations\n  |     +-- DynamicRunnable\
+  \           # runtime-resolved runnable\n  |     +-- RunnablePassthrough       # identity (pass input through)\n  |\n  +--\
+  \ BaseChatModel --> all chat models (ChatOpenAI, ChatAnthropic, etc.)\n  +-- BaseLLM --> all completion models\n  +-- BaseRetriever\
+  \ --> all retrievers\n  +-- BaseOutputParser --> all output parsers\n  +-- BasePromptTemplate --> all prompt templates\n\
+  \  +-- BaseTool --> all tools"
+1_3_composition_primitives: '| Primitive | Syntax | Semantics |
+
+  |-----------|--------|-----------|
+
+  | `RunnableSequence` | `A \| B \| C` | Serial: output(A) -> input(B) -> input(C) |
+
+  | `RunnableParallel` | `{"a": A, "b": B}` | Parallel: same input -> both, merge outputs |
+
+  | `RunnableBranch` | `RunnableBranch([(cond, A)], default=B)` | First-match conditional |
+
+  | `RunnablePassthrough` | `RunnablePassthrough()` | Identity function (pipe-through) |
+
+  | `RunnableAssign` | `.assign(key=runnable)` | Merge new keys into dict output |
+
+  | `RunnablePick` | `.pick("key")` | Select keys from dict output |
+
+  | `RunnableWithFallbacks` | `.with_fallbacks([B, C])` | Try A, on failure try B, then C |'
+1_4_configuration: '| Class | Purpose |
+
+  |-------|---------|
+
+  | `RunnableConfig` | Dict with `run_name`, `tags`, `metadata`, `callbacks`, `max_concurrency`, `recursion_limit`, `configurable`
+  |
+
+  | `ExponentialJitterParams` | Retry backoff parameters |
+
+  | `ContextThreadPoolExecutor` | Thread pool for sync-in-async |
+
+
+  ---'
+2_langchain_core_components_langchain_core: ''
+2_1_messages: '| Class | Role | Chunk variant |
+
+  |-------|------|---------------|
+
+  | `BaseMessage` | Abstract base | `BaseMessageChunk` |
+
+  | `HumanMessage` | User input | `HumanMessageChunk` |
+
+  | `AIMessage` | Model response | `AIMessageChunk` |
+
+  | `SystemMessage` | System instruction | `SystemMessageChunk` |
+
+  | `ToolMessage` | Tool result (has `tool_call_id`) | `ToolMessageChunk` |
+
+  | `FunctionMessage` | Legacy function result | `FunctionMessageChunk` |
+
+  | `ChatMessage` | Generic with `role` field | `ChatMessageChunk` |
+
+  | `ToolCall` | Structured tool invocation (in `AIMessage.tool_calls`) | `ToolCallChunk` |
+
+  | `InvalidToolCall` | Malformed tool call | -- |
+
+
+  Content block types: text, image, video, audio, file, reasoning (multimodal).'
+2_2_prompts: '| Class | Purpose |
+
+  |-------|---------|
+
+  | `BasePromptTemplate` | Abstract prompt base |
+
+  | `PromptTemplate` | String template with `{variables}` |
+
+  | `ChatPromptTemplate` | List of message templates |
+
+  | `MessagesPlaceholder` | Inject dynamic message list |
+
+  | `SystemMessagePromptTemplate` | System message template |
+
+  | `HumanMessagePromptTemplate` | Human message template |
+
+  | `AIMessagePromptTemplate` | AI message template |
+
+  | `FewShotPromptTemplate` | Few-shot with example selector |
+
+  | `FewShotChatMessagePromptTemplate` | Chat-format few-shot |
+
+  | `ImagePromptTemplate` | Image input template |
+
+  | `DictPromptTemplate` | Dict-structured template |
+
+  | `StructuredPrompt` | Pydantic-validated prompt |'
+2_3_output_parsers: '| Class | Output type |
+
+  |-------|-------------|
+
+  | `BaseOutputParser` | Abstract base |
+
+  | `StrOutputParser` | Raw string |
+
+  | `JsonOutputParser` | JSON dict |
+
+  | `PydanticOutputParser` | Pydantic model instance |
+
+  | `ListOutputParser` | List base |
+
+  | `CommaSeparatedListOutputParser` | `["a", "b", "c"]` |
+
+  | `NumberedListOutputParser` | Numbered list |
+
+  | `MarkdownListOutputParser` | Markdown bullets |
+
+  | `XMLOutputParser` | XML structure |
+
+  | `JsonOutputToolsParser` | Tool-call JSON |
+
+  | `PydanticToolsParser` | Tool-call Pydantic |
+
+  | `BaseCumulativeTransformOutputParser` | Streaming accumulator |'
+2_4_language_models: '| Class | Layer |
+
+  |-------|-------|
+
+  | `BaseLanguageModel` | Abstract root |
+
+  | `BaseLLM` | Completion models (text-in, text-out) |
+
+  | `BaseChatModel` | Chat models (messages-in, message-out) |
+
+  | `SimpleChatModel` | Minimal chat implementation |
+
+  | `LLM` | Convenience base for custom LLMs |
+
+
+  Key methods: `invoke`, `generate`, `predict`, `bind_tools`, `with_structured_output`.'
+2_5_tools: '| Class/Decorator | Purpose |
+
+  |-----------------|---------|
+
+  | `BaseTool` | Abstract tool base |
+
+  | `StructuredTool` | Tool with Pydantic args schema |
+
+  | `Tool` | Simple tool (string input) |
+
+  | `@tool` | Decorator to create tool from function |
+
+  | `BaseToolkit` | Collection of related tools |
+
+  | `ToolException` | Graceful tool failure |
+
+  | `InjectedToolArg` | Arg injected by runtime, hidden from LLM |
+
+  | `InjectedToolCallId` | Auto-inject tool_call_id |
+
+  | `RetrieverInput` | Pydantic model for retriever-as-tool |'
+2_6_documents_retrievers: '| Class | Purpose |
+
+  |-------|---------|
+
+  | `Document` | Text + metadata container |
+
+  | `BaseMedia` / `Blob` | Binary media container |
+
+  | `BaseRetriever` | Abstract retriever (implements Runnable) |
+
+  | `VectorStoreRetriever` | Retriever backed by vector store |
+
+  | `BaseDocumentTransformer` | Transform documents (split, filter) |
+
+  | `BaseDocumentCompressor` | Compress/rerank documents |
+
+  | `BaseLoader` | Document loader base |'
+2_7_embeddings_vector_stores: '| Class | Purpose |
+
+  |-------|---------|
+
+  | `Embeddings` | Abstract embedding model |
+
+  | `VectorStore` | Abstract vector store |
+
+  | `InMemoryVectorStore` | In-memory reference implementation |'
+2_8_callbacks_tracers: '| Class | Purpose |
+
+  |-------|---------|
+
+  | `BaseCallbackHandler` | Sync callback handler |
+
+  | `AsyncCallbackHandler` | Async callback handler |
+
+  | `BaseCallbackManager` | Manages callback handlers |
+
+  | `StdOutCallbackHandler` | Print to stdout |
+
+  | `StreamingStdOutCallbackHandler` | Stream tokens to stdout |
+
+  | `FileCallbackHandler` | Write to file |
+
+  | `UsageMetadataCallbackHandler` | Track token usage |
+
+  | `BaseTracer` | Trace execution tree |
+
+  | `LangChainTracer` | Send traces to LangSmith |
+
+  | `LogStreamCallbackHandler` | Stream execution log |
+
+  | `ConsoleCallbackHandler` | Console output tracer |
+
+
+  Callback events: `on_llm_start`, `on_llm_end`, `on_llm_error`, `on_chat_model_start`,
+
+  `on_chain_start`, `on_chain_end`, `on_chain_error`, `on_tool_start`, `on_tool_end`,
+
+  `on_tool_error`, `on_retriever_start`, `on_retriever_end`, `on_retriever_error`,
+
+  `on_text`, `on_agent_action`, `on_agent_finish`.'
+2_9_storage_memory: '| Class | Purpose |
+
+  |-------|---------|
+
+  | `BaseStore` | Abstract key-value store |
+
+  | `InMemoryStore` | In-memory store |
+
+  | `InMemoryByteStore` | In-memory byte store |
+
+  | `BaseChatMessageHistory` | Abstract chat history |
+
+  | `InMemoryChatMessageHistory` | In-memory chat history |
+
+  | `RecordManager` | Dedup/indexing record manager |
+
+  | `DocumentIndex` | Document indexing interface |
+
+  | `BaseCache` | LLM response cache |
+
+  | `InMemoryCache` | In-memory LLM cache |
+
+  | `BaseRateLimiter` | Rate limiting base |'
+2_10_agents_legacy_langgraph: '| Class | Purpose |
+
+  |-------|---------|
+
+  | `AgentAction` | Single tool call decision |
+
+  | `AgentActionMessageLog` | Agent action with message log |
+
+  | `AgentStep` | Action + observation pair |
+
+  | `AgentFinish` | Terminal agent response |
+
+  | `AgentExecutor` | Legacy agent loop (deprecated in favor of LangGraph) |'
+2_11_example_selectors: '| Class | Strategy |
+
+  |-------|----------|
+
+  | `BaseExampleSelector` | Abstract base |
+
+  | `LengthBasedExampleSelector` | Select by token budget |
+
+  | `SemanticSimilarityExampleSelector` | Select by embedding similarity |
+
+  | `MaxMarginalRelevanceExampleSelector` | MMR diversity selection |'
+2_12_exceptions: '| Exception | When |
+
+  |-----------|------|
+
+  | `LangChainException` | Base exception |
+
+  | `OutputParserException` | Parser failure |
+
+  | `ContextOverflowError` | Context window exceeded |
+
+  | `TracerException` | Tracing failure |
+
+  | `InvalidKeyException` | Bad API key |
+
+  | `IndexingException` | Indexing failure |
+
+
+  ---'
+3_langgraph_graph_primitives: ''
+3_1_core_graph_classes: '| Class | Purpose |
+
+  |-------|---------|
+
+  | `StateGraph` | Main graph builder -- nodes share typed state |
+
+  | `MessageGraph` | Convenience: state = list of messages |
+
+  | `CompiledGraph` | Executable graph (result of `.compile()`) |
+
+  | `Pregel` | Internal execution engine (inspired by Google Pregel) |'
+3_2_graph_construction_api: '| Method | Purpose |
+
+  |--------|---------|
+
+  | `add_node(name, fn)` | Register a function as a named node |
+
+  | `add_edge(src, dst)` | Fixed transition from src to dst |
+
+  | `add_conditional_edges(src, fn, mapping)` | Dynamic routing based on fn return |
+
+  | `set_entry_point(name)` | (legacy) Set first node |
+
+  | `set_finish_point(name)` | (legacy) Set terminal node |
+
+  | `compile(checkpointer=, interrupt_before=, interrupt_after=)` | Build executable graph |'
+3_3_constants_sentinels: '| Constant | Purpose |
+
+  |----------|---------|
+
+  | `START` | Virtual entry node -- represents user input |
+
+  | `END` | Virtual exit node -- represents terminal state |'
+3_4_state_definition: '| Mechanism | Purpose |
+
+  |-----------|---------|
+
+  | `TypedDict` | Standard state schema (most common) |
+
+  | `Pydantic BaseModel` | Validated state schema |
+
+  | `dataclass` | State with defaults |
+
+  | `Annotation` | Attach reducers to individual fields |
+
+  | `MessagesState` | Prebuilt state: `{"messages": Annotated[list, add_messages]}` |
+
+  | `add_messages` | Prebuilt reducer: append + dedup messages |
+
+
+  State variants:
+
+
+  | Variant | Purpose |
+
+  |---------|---------|
+
+  | `InputState` | Filtered schema for graph inputs |
+
+  | `OutputState` | Filtered schema for graph outputs |
+
+  | `OverallState` | Complete internal state |
+
+  | `PrivateState` | Internal-only channels (not exposed) |'
+3_5_reducers: 'A reducer is a function `(current, update) -> new` that defines how a state key
+
+  is updated when multiple nodes write to it.
+
+
+  | Reducer | Behavior |
+
+  |---------|----------|
+
+  | (default) | Last-write-wins (overwrite) |
+
+  | `add_messages` | Append messages, dedup by ID |
+
+  | `operator.add` | Concatenate lists |
+
+  | Custom `fn(a, b) -> c` | User-defined merge logic |
+
+  | `Overwrite` | Force overwrite, bypass reducer |'
+3_6_control_flow_primitives: '| Primitive | Purpose |
+
+  |-----------|---------|
+
+  | `Command(update=, goto=)` | Combined state update + navigation |
+
+  | `Command(resume=)` | Continue after interrupt |
+
+  | `Command(graph=Command.PARENT)` | Navigate to parent graph |
+
+  | `Send(node, state)` | Dynamic fan-out with custom state per target |'
+3_7_nodes: 'Nodes are Python functions `(state) -> update` or `(state, config) -> update`.
+
+
+  | Node type | Source |
+
+  |-----------|--------|
+
+  | User-defined function | `add_node("name", fn)` |
+
+  | `ToolNode` | Prebuilt: execute tool calls from AIMessage |
+
+  | Subgraph | Nested compiled graph as a node |
+
+
+  Runtime context available to nodes:
+
+
+  | Object | Access |
+
+  |--------|--------|
+
+  | `RunnableConfig` | Second arg to node function |
+
+  | `context` | Via `config["context"]` (from `context_schema`) |
+
+  | `store` | Via `config["store"]` (cross-thread persistence) |
+
+  | `stream_writer` | Via `config["stream_writer"]` (custom streaming) |'
+3_8_execution_model: '| Concept | Definition |
+
+  |---------|------------|
+
+  | Super-step | One iteration over all active nodes |
+
+  | Message passing | Nodes communicate via state updates (Pregel model) |
+
+  | `recursion_limit` | Max super-steps (default: 25) |
+
+  | `GraphRecursionError` | Raised when limit exceeded |
+
+  | `langgraph_step` | Current step counter (in config metadata) |
+
+  | `RemainingSteps` | Managed value: steps until recursion limit |
+
+
+  Metadata injected into config:
+
+
+  | Key | Value |
+
+  |-----|-------|
+
+  | `langgraph_node` | Current node name |
+
+  | `langgraph_triggers` | Edges that activated current node |
+
+  | `langgraph_path` | Execution path taken |
+
+  | `langgraph_checkpoint_ns` | Checkpoint namespace |'
+3_8_1_pregel_execution_model_deep_dive: 'LangGraph''s runtime (`Pregel` class) implements the Bulk Synchronous Parallel (BSP)
+
+  model from Google''s 2010 Pregel paper for large-scale graph computation.
+
+
+  Node Activation Lifecycle (one super-step):
+
+
+  1. All nodes start INACTIVE at graph entry
+
+  2. Input routed via START edge activates first node(s)
+
+  3. ACTIVE nodes execute: read full state -> emit partial update dict
+
+  4. Updates COLLECTED (not yet applied) -- isolation within step
+
+  5. Super-step ends: all updates applied atomically via reducers
+
+  6. Checkpoint written after step (enables interrupt/resume)
+
+  7. Nodes with pending incoming messages become ACTIVE for next step
+
+  8. Repeat until no ACTIVE nodes OR recursion_limit exceeded
+
+
+  Transactional Guarantee:
+
+  Super-steps in parallel branches are atomic. If any node in a parallel branch
+
+  raises an unhandled exception, NO updates from that super-step are applied --
+
+  all-or-nothing prevents partial state corruption.
+
+
+  Channel Types (state key semantics):
+
+
+  | Channel type | Behavior | Default reducer |
+
+  |-------------|----------|-----------------|
+
+  | LastValue | Last-write-wins per key (default) | None (overwrite) |
+
+  | Topic | Append-only with dedup by ID | `add_messages` |
+
+  | BinaryOperatorAggregate | User-defined merge function | Custom fn(a, b) -> c |
+
+  | EphemeralValue | Cleared after each super-step | -- |
+
+
+  Concurrency rule: Nodes connected by `Send` (fan-out) or via parallel
+
+  conditional edges run in the same super-step (concurrent). Nodes connected
+
+  by sequential edges run in separate super-steps.
+
+
+  Termination conditions:
+
+
+  | Condition | Trigger |
+
+  |-----------|---------|
+
+  | No active nodes | Normal completion -- returns final state |
+
+  | `recursion_limit` exceeded | `GraphRecursionError` raised |
+
+  | `END` edge traversed | Explicit terminal node reached |
+
+  | `interrupt(value)` called | Pause -- checkpoint written, caller receives state |'
+3_8_2_task_level_parallelism_inside_a_super_step: "When multiple nodes are activated within the same super-step (via `Send`\
+  \ fan-out\nor parallel conditional edges), LangGraph executes them as concurrent tasks.\n\nConcurrency mechanism:\n\n| Invocation\
+  \ mode | Parallelism |\n|----------------|-------------|\n| `graph.invoke(...)` (sync) | `ThreadPoolExecutor` via `ContextThreadPoolExecutor`\
+  \ |\n| `graph.ainvoke(...)` (async) | `asyncio.gather` -- true coroutine parallelism |\n\nFan-out + reduce pattern:\n\n\
+  # Map phase: Send creates N tasks in ONE super-step\ndef dispatch_node(state):\n    return [Send(\"worker\", {\"item\":\
+  \ x}) for x in state[\"items\"]]\n\n# Each worker runs concurrently -- isolated state copies\ndef worker_node(state):\n\
+  \    return {\"results\": [process(state[\"item\"])]}\n\n# Reduce phase: reducer merges N results in NEXT super-step\n#\
+  \ Requires Annotated reducer on the aggregation key:\n# results: Annotated[list, operator.add]\n\nIsolation guarantee:\n\
+  - Each `Send` task receives its own state copy\n- Updates from concurrent tasks are COLLECTED then merged atomically\n-\
+  \ A task exception does NOT abort sibling tasks in async mode\n- `recursion_limit` counts super-steps, NOT individual tasks\
+  \ -- 100 Send tasks = 1 step\n\nScheduler internals (Pregel.stream):\n\n| Phase | What happens |\n|-------|-------------|\n\
+  | 1. Preprocess | Resolve active nodes from pending channel writes |\n| 2. Collect tasks | Build Task objects for all active\
+  \ nodes this step |\n| 3. Execute | Run tasks via ThreadPool (sync) or gather (async) |\n| 4. Apply writes | Apply all updates\
+  \ atomically via reducers |\n| 5. Checkpoint | Write state snapshot to checkpointer |\n| 6. Yield | Surface values/updates/messages\
+  \ to caller |\n| 7. Loop | Back to step 1 with new active-node set |"
+3_9_persistence_checkpointing: '| Class | Purpose |
+
+  |-------|---------|
+
+  | `BaseCheckpointSaver` | Abstract checkpoint interface |
+
+  | `MemorySaver` | In-memory checkpointer (dev/test) |
+
+  | `SqliteSaver` | SQLite-backed checkpointer |
+
+  | `PostgresSaver` | Postgres-backed checkpointer (production) |
+
+  | `InMemoryCache` | Node-level result cache |
+
+
+  Checkpoint interface methods:
+
+
+  | Method | Purpose |
+
+  |--------|---------|
+
+  | `.put(config, checkpoint, metadata)` | Store checkpoint |
+
+  | `.putWrites(config, writes)` | Store pending writes |
+
+  | `.getTuple(config)` | Fetch checkpoint by thread_id + thread_ts |
+
+  | `.list(config, filter)` | List checkpoints matching criteria |
+
+
+  Key identifiers:
+
+
+  | ID | Scope |
+
+  |----|-------|
+
+  | `thread_id` | Conversation-level persistence |
+
+  | `thread_ts` | Point-in-time within a thread |
+
+  | `checkpoint_ns` | Namespace for subgraph isolation |'
+3_10_human_in_the_loop: '| Mechanism | Purpose |
+
+  |-----------|---------|
+
+  | `interrupt(value)` | Pause execution, surface value to user |
+
+  | `interrupt_before=[nodes]` | Pause before specified nodes |
+
+  | `interrupt_after=[nodes]` | Pause after specified nodes |
+
+  | `Command(resume=value)` | Resume execution with user input |'
+3_10_1_interrupt_resume_implementation_detail: "Interrupt types:\n\n| Mode | Declaration | When triggered |\n|------|-------------|----------------|\n\
+  | Static | `compile(interrupt_before=[\"node_a\"])` | Before/after specified node, always |\n| Dynamic | `interrupt(value)`\
+  \ inside node body | Conditional, based on state at runtime |\n\nDynamic interrupt pattern:\n\nfrom langgraph.types import\
+  \ interrupt\n\ndef human_review_node(state):\n    # Pause here -- surface data to caller\n    decision = interrupt({\n \
+  \       \"question\": \"Approve this action?\",\n        \"context\": state[\"proposed_action\"]\n    })\n    # Execution\
+  \ resumes here; decision = value passed in Command(resume=...)\n    return {\"approved\": decision == \"approve\"}\n\nResume\
+  \ flow:\n\n# Invoke hits interrupt -- returns state snapshot\nresult = graph.invoke(input_data, config)\n# result[\"interrupt\"\
+  ] contains the interrupt value surfaced above\n\n# User inspects and decides, then resume:\ngraph.invoke(Command(resume=\"\
+  approve\"), config)\n# config MUST have the same thread_id to restore from checkpoint\n\nMultiple interrupts in one node:\n\
+  LangGraph tracks a `resume` list per task. On resume, execution restarts\nfrom the top of the node. Each `interrupt()` call\
+  \ is matched index-based\nagainst the resume list -- consumed interrupts are skipped, first unconsumed halts.\n\nPersistence\
+  \ requirement:\n`interrupt` requires a `checkpointer` in `compile()`. Without it, a\n`GraphInterruptException` is raised.\
+  \ The checkpointer stores full graph\nstate including all pending resume values.\n\nState inspection during interrupt:\n\
+  \n# Read frozen state while graph is paused\nstate_snapshot = graph.get_state(config)\n# state_snapshot.tasks contains pending\
+  \ interrupt info\n\nInternal mechanism:\n`NodeInterrupt` exception is raised by `interrupt()` internally, caught by\nthe\
+  \ Pregel engine, which writes a checkpoint and surfaces the value to the\ncaller. Do NOT catch `NodeInterrupt` in user code."
+3_11_functional_api_alternative_to_stategraph: '| Decorator | Purpose |
+
+  |-----------|---------|
+
+  | `@entrypoint` | Define workflow entry point (replaces StateGraph) |
+
+  | `@task` | Define individual work unit (replaces add_node) |
+
+  | `entrypoint.final` | Return value while saving different checkpoint |
+
+  | `previous` | Access return value of prior invocation (same thread) |
+
+
+  Task config: `@task(name=, retry_policy=, cache_policy=)`.'
+3_12_prebuilt_components: "#### create_react_agent -- Full Parameter Reference\n\nfrom langgraph.prebuilt import create_react_agent\n\
+  \ngraph = create_react_agent(\n    model,                       # BaseChatModel -- the LLM backbone\n    tools,        \
+  \               # list[BaseTool | Callable]\n    prompt=None,                 # str | SystemMessage | Callable | Runnable\n\
+  \    response_format=None,        # type[BaseModel] -- structured final output\n    pre_model_hook=None,         # node\
+  \ fn inserted BEFORE model call\n    post_model_hook=None,        # node fn inserted AFTER model call\n    state_schema=MessagesState,\
+  \  # TypedDict -- default uses messages reducer\n    context_schema=None,         # TypedDict for read-only runtime context\n\
+  \    checkpointer=None,           # BaseCheckpointSaver -- enables memory/HIL\n    store=None,                  # BaseStore\
+  \ -- cross-thread long-term memory\n)\n\n| Parameter | Type | Purpose |\n|-----------|------|---------|\n| `model` | BaseChatModel\
+  \ | The LLM backbone |\n| `tools` | list | Tools the agent can call |\n| `prompt` | str / SystemMessage / Callable / Runnable\
+  \ | Prepended context; string auto-converts to SystemMessage |\n| `response_format` | Pydantic type | Force structured final\
+  \ response via `with_structured_output` |\n| `pre_model_hook` | node function | Before model call -- use for message trimming,\
+  \ token budget |\n| `post_model_hook` | node function | After model call -- use for HITL approval before tool execution\
+  \ |\n| `state_schema` | TypedDict | Extend MessagesState with custom fields |\n| `context_schema` | TypedDict | Read-only\
+  \ context injected via `config[\"context\"]` |\n| `checkpointer` | BaseCheckpointSaver | Required for multi-turn memory\
+  \ and interrupt/resume |\n| `store` | BaseStore | Long-term memory across threads |\n\n#### ToolNode -- Full Parameter Reference\n\
+  \nfrom langgraph.prebuilt import ToolNode\n\ntool_node = ToolNode(\n    tools,                    # list[BaseTool]\n   \
+  \ name=\"tools\",             # node name registered in graph\n    tags=None,                # LangSmith tags attached to\
+  \ tool runs\n    handle_tool_errors=True,  # True: catch errors -> ToolMessage(is_error=True)\n                        \
+  \      # str: use as error message template\n                              # Callable: custom error handler fn\n    messages_key=\"\
+  messages\",  # state key where messages list lives\n)\n\nToolNode behavior:\n- Reads last AIMessage from `state[messages_key]`\n\
+  - Extracts all `tool_calls` from that AIMessage\n- Executes all tool calls IN PARALLEL (asyncio.gather under async)\n- Returns\
+  \ list of ToolMessages, one per tool call\n- With `handle_tool_errors=True`: exceptions become ToolMessage with `is_error=True`\n\
+  \n#### Tool Injection Annotations\n\n| Annotation | Source | Purpose |\n|-----------|--------|---------|\n| `InjectedToolArg`\
+  \ | langchain_core | Hidden from LLM schema -- injected by runtime (e.g., user_id) |\n| `InjectedToolCallId` | langchain_core\
+  \ | Auto-injects current `tool_call_id` into tool |\n| `InjectedState` | langgraph.prebuilt | Inject full graph state into\
+  \ tool args at call time |\n| `InjectedStore` | langgraph.prebuilt | Inject BaseStore instance into tool for memory ops\
+  \ |\n\n#### Other Prebuilt Components\n\n| Component | Purpose |\n|-----------|---------|\n| `MessagesState` | TypedDict:\
+  \ `{messages: Annotated[list[AnyMessage], add_messages]}` |\n| `CachePolicy(key_func=, ttl=)` | Cache node outputs; key_func\
+  \ maps state to cache key |\n| `ValidationNode(tools)` | Validate tool call schemas before execution; raises ToolException\
+  \ on invalid |\n| `tools_condition(state)` | Router function: if last AIMessage has tool_calls -> \"tools\" else -> END\
+  \ |\n\n#### Human-in-the-Loop Prebuilt Types (LangGraph Studio)\n\n| Type | Purpose |\n|------|---------|\n| `HumanInterruptConfig`\
+  \ | Configure what triggers human review in Studio |\n| `ActionRequest` | Proposed action surfaced to human reviewer |\n\
+  | `HumanInterrupt` | Event type emitted when graph hits HITL gate |\n| `InterruptDecision` | Human decision: accept / reject\
+  \ / edit / respond |"
+3_13_advanced_patterns: '| Pattern | Description |
+
+  |---------|-------------|
+
+  | Subgraph | Nested graph as a node -- separate state, checkpoint namespace |
+
+  | Map-reduce | `Send` to fan-out, reducer to merge results |
+
+  | Multi-agent handoff | Nodes return `Command(goto="other_agent")` |
+
+  | Branching | Conditional edges for dynamic routing |
+
+  | Cycles | Edges that loop back (agent loops, retry loops) |
+
+
+  ---'
+4_langsmith_tracing_observability_vocabulary: ''
+4_1_core_observability_concepts: '| Term | Definition |
+
+  |------|------------|
+
+  | Trace | Collection of runs for a single operation (= OpenTelemetry trace) |
+
+  | Run | Single span of work within a trace (= OpenTelemetry span) |
+
+  | Project | Collection of traces (organizational container) |
+
+  | Thread | Sequence of traces for one conversation (grouped by session_id) |
+
+  | Dataset | Persistent storage of inputs/outputs for evaluation |'
+4_2_run_types: '| Run type | When |
+
+  |----------|------|
+
+  | `llm` | LLM/chat model invocation |
+
+  | `chain` | Chain/runnable execution |
+
+  | `tool` | Tool execution |
+
+  | `retriever` | Document retrieval |
+
+  | `embedding` | Embedding computation |
+
+  | `prompt` | Prompt formatting |
+
+  | `parser` | Output parsing |'
+4_3_run_properties: '| Property | Type | Purpose |
+
+  |----------|------|---------|
+
+  | `run_id` | UUID | Unique run identifier |
+
+  | `trace_id` | UUID | Parent trace identifier |
+
+  | `parent_run_id` | UUID | Parent run in hierarchy |
+
+  | `name` | string | Run name (function/class name) |
+
+  | `run_type` | enum | One of the run types above |
+
+  | `inputs` | dict | Input data |
+
+  | `outputs` | dict | Output data |
+
+  | `error` | string | Error message if failed |
+
+  | `start_time` | datetime | Execution start |
+
+  | `end_time` | datetime | Execution end |
+
+  | `latency` | float | Duration in seconds |
+
+  | `token_usage` | dict | `{prompt_tokens, completion_tokens, total_tokens}` |
+
+  | `tags` | list[str] | Categorical labels |
+
+  | `metadata` | dict | Arbitrary key-value context |'
+4_4_feedback_evaluation: '| Term | Definition |
+
+  |------|------------|
+
+  | Feedback | Score + comment attached to a run |
+
+  | Annotation | Human-provided feedback (via annotation queue) |
+
+  | Online evaluator | Real-time LLM-as-judge assessment |
+
+  | Offline evaluation | Batch evaluation against dataset |
+
+  | Annotation queue | UI workflow for human review |
+
+  | Feedback score | Numeric value (e.g., 0-1, 1-5) |
+
+  | Feedback key | Category name (e.g., "correctness", "helpfulness") |'
+4_5_tracing_integration: '| Mechanism | Purpose |
+
+  |-----------|---------|
+
+  | `LangChainTracer` | Auto-trace LangChain runs to LangSmith |
+
+  | `@traceable` | Decorator to trace arbitrary Python functions |
+
+  | `RunTree` | Manual trace tree construction |
+
+  | `LANGSMITH_API_KEY` | Auth env var |
+
+  | `LANGSMITH_PROJECT` | Target project env var |
+
+  | `LANGSMITH_TRACING` | Enable/disable tracing env var |'
+4_6_data_retention: '- Max 25,000 runs per trace
+
+  - 400-day retention for SaaS traces
+
+  - Datasets persist independently of trace retention
+
+
+  ---'
+5_mapping_to_cex_pillars: '| LangChain/LangGraph Concept | CEX Pillar | CEX Kind | Notes |
+
+  |------------------------------|------------|----------|-------|
+
+  | Runnable (base interface) | P03 Prompt | `chain` | LCEL chain = CEX chain |
+
+  | RunnableSequence (`\|`) | P03 Prompt | `chain` | Serial composition |
+
+  | RunnableParallel | P12 Orchestration | `workflow` | Fan-out pattern |
+
+  | RunnableBranch | P12 Orchestration | `dispatch_rule` | Conditional routing |
+
+  | RunnableWithFallbacks | P02 Model | `fallback_chain` | Provider failover |
+
+  | ChatPromptTemplate | P03 Prompt | `prompt_template` | Direct equivalent |
+
+  | MessagesPlaceholder | P03 Prompt | `prompt_template` | Variable injection |
+
+  | FewShotPromptTemplate | P03 Prompt | `prompt_template` | Example injection |
+
+  | BaseChatModel | P02 Model | `model_provider` | LLM abstraction |
+
+  | BaseTool / @tool | P04 Tools | `cli_tool` / `mcp_server` | Tool definition |
+
+  | ToolNode | P04 Tools | `cli_tool` | Tool execution node |
+
+  | BaseRetriever | P01 Knowledge | `retriever_config` | RAG retrieval |
+
+  | VectorStore | P01 Knowledge | `embedding_config` | Vector backend |
+
+  | Document | P01 Knowledge | `knowledge_card` | Content container |
+
+  | BaseOutputParser | P05 Output | `parser` | Output extraction |
+
+  | StrOutputParser | P05 Output | `parser` | String output |
+
+  | JsonOutputParser | P05 Output | `parser` | JSON output |
+
+  | StateGraph | P12 Orchestration | `workflow` | Graph-based workflow |
+
+  | CompiledGraph | P12 Orchestration | `workflow` | Executable workflow |
+
+  | Node | P12 Orchestration | `workflow` | Workflow step |
+
+  | Edge / ConditionalEdge | P12 Orchestration | `dispatch_rule` | Transition rule |
+
+  | Command | P12 Orchestration | `dispatch_rule` | State + routing |
+
+  | Send | P12 Orchestration | `dispatch_rule` | Dynamic fan-out |
+
+  | MessagesState | P10 Memory | `memory_scope` | Conversation state |
+
+  | Checkpointer | P10 Memory | `entity_memory` | Persistence layer |
+
+  | MemorySaver | P10 Memory | `memory_scope` | In-memory persistence |
+
+  | Store | P10 Memory | `entity_memory` | Cross-thread memory |
+
+  | interrupt | P12 Orchestration | `workflow` | Human-in-the-loop gate |
+
+  | BaseCallbackHandler | P07 Evaluation | `trace_config` | Observability hook |
+
+  | LangChainTracer | P07 Evaluation | `trace_config` | Tracing integration |
+
+  | Feedback | P11 Feedback | `scoring_rubric` | Quality signal |
+
+  | Dataset | P07 Evaluation | `benchmark` | Test data collection |
+
+  | Online evaluator | P07 Evaluation | `llm_judge` | LLM-as-judge |
+
+  | Annotation queue | P11 Feedback | `quality_gate` | Human review workflow |
+
+  | AgentExecutor (legacy) | P12 Orchestration | `workflow` | Deprecated agent loop |
+
+  | create_react_agent | P02 Model | `agent` | Prebuilt agent graph |
+
+  | @entrypoint | P12 Orchestration | `workflow` | Functional API entry |
+
+  | @task | P12 Orchestration | `workflow` | Functional API step |
+
+  | RunnableConfig | P09 Config | `env_config` | Runtime configuration |
+
+  | BaseCache | P10 Memory | `prompt_cache` | LLM response cache |
+
+  | BaseRateLimiter | P09 Config | `rate_limit_config` | Rate limiting |
+
+  | ExampleSelector | P03 Prompt | `prompt_template` | Few-shot selection |
+
+  | BaseDocumentTransformer | P01 Knowledge | `chunk_strategy` | Document processing |
+
+  | RecordManager | P10 Memory | `knowledge_index` | Dedup/indexing |
+
+  | BaseChatMessageHistory | P10 Memory | `memory_scope` | Conversation history |
+
+
+  ---'
+6_key_architectural_patterns: ''
+6_1_lcel_vs_langgraph_decision_matrix: '| Use case | Use LCEL | Use LangGraph |
+
+  |----------|----------|---------------|
+
+  | Linear chain (prompt -> model -> parser) | yes | overkill |
+
+  | Conditional branching | RunnableBranch | StateGraph + conditional edges |
+
+  | Cycles / loops | not possible | yes (edges can loop) |
+
+  | Human-in-the-loop | not supported | interrupt/resume |
+
+  | Multi-agent | not native | Command + multi-node |
+
+  | Persistence across turns | RunnableWithMessageHistory | Checkpointer (built-in) |
+
+  | Parallel tool execution | RunnableParallel | ToolNode (auto-parallel) |
+
+  | Complex state management | dict passing | TypedDict + reducers |'
+6_2_langgraph_execution_model_pregel: "User input\n  |\n  v\nSTART --> [node_a] --> [conditional_edge] --> [node_b] --> END\n\
+  \                            |                     ^\n                            +---> [node_c] -------+\n            \
+  \                         |\n                                     v (cycle)\n                                  [node_a]\n\
+  \nEach iteration over nodes = one super-step. The `recursion_limit` caps total\nsuper-steps. Nodes communicate only through\
+  \ the shared State object -- there is\nno direct node-to-node messaging."
+6_3_langsmith_integration_points: "Application code\n  |\n  +-- @traceable / LangChainTracer\n  |       |\n  |       v\n \
+  \ |   LangSmith API\n  |       |\n  |       +-- Project (trace container)\n  |       |     +-- Trace (one operation)\n \
+  \ |       |           +-- Run (one span)\n  |       |                 +-- inputs, outputs, latency, tokens\n  |       |\
+  \                 +-- Feedback (score + comment)\n  |       |\n  |       +-- Dataset (evaluation data)\n  |       +-- Annotation\
+  \ Queue (human review)\n  |       +-- Online Evaluator (real-time LLM judge)\n  |\n  +-- Evaluation harness\n        +--\
+  \ Offline evaluators (batch scoring against dataset)\n\n---"
+7_glossary_quick_reference: '| Term | Definition |
+
+  |------|------------|
+
+  | LCEL | LangChain Expression Language -- composition via pipe operator |
+
+  | Runnable | Base protocol: invoke/batch/stream + composable |
+
+  | StateGraph | Graph where nodes share typed state with reducers |
+
+  | CompiledGraph | Immutable executable graph after `.compile()` |
+
+  | Node | Named function that reads/writes state |
+
+  | Edge | Directed transition between nodes |
+
+  | Conditional edge | Edge resolved by a routing function |
+
+  | Command | Combined state update + goto navigation |
+
+  | Send | Dynamic fan-out with per-target state |
+
+  | Reducer | Merge function for concurrent state writes |
+
+  | Checkpointer | Persistence backend for graph state |
+
+  | Thread | Conversation identified by thread_id |
+
+  | Interrupt | Pause graph for human input |
+
+  | Super-step | One pass over all active nodes |
+
+  | Pregel | Google''s graph computation model (LangGraph inspiration) |
+
+  | Trace | Collection of runs for one operation |
+
+  | Run | Single span of work (LangSmith) |
+
+  | Feedback | Quality score attached to a run |
+
+  | ToolNode | Prebuilt node that executes tool calls |
+
+  | MessagesState | Prebuilt state: messages list with add_messages reducer |
+
+  | @entrypoint | Functional API: workflow entry decorator |
+
+  | @task | Functional API: work unit decorator |
+
+  | @traceable | LangSmith: trace arbitrary function |
+
+  | @tool | LangChain: create tool from function |
+
+  | NodeInterrupt | Internal exception raised by interrupt() -- do not catch in user code |
+
+  | BSP | Bulk Synchronous Parallel -- the Pregel execution model |
+
+  | Assistant | LangGraph Platform: named versioned config of a graph |
+
+  | Thread (Platform) | LangGraph Platform: conversation container across runs |
+
+  | Run (Platform) | LangGraph Platform: single graph invocation |
+
+  | Cron | LangGraph Platform: scheduled periodic run |
+
+  | Store | LangGraph Platform: cross-thread long-term memory (key-value namespace) |
+
+  | DataType.kv | LangSmith dataset type: arbitrary key-value (most common) |
+
+  | evaluate() | LangSmith: sync evaluation function against a dataset |
+
+  | aevaluate() | LangSmith: async evaluation function (preferred for large datasets) |
+
+
+  ---'
+8_langgraph_platform_cloud_deployment: 'LangGraph Platform (GA: 2025) is the production infrastructure layer for deploying
+  stateful, long-running agents. Built on top of the Agent Server, it provides REST API, persistence, scheduling, and streaming
+  capabilities. Source: https://blog.langchain.dev/langgraph-platform-ga/'
+8_1_deployment_tiers: '| Tier | Who manages infra | Where data runs | Cost |
+
+  |------|------------------|-----------------|------|
+
+  | Self-Hosted Lite | You | Your infra | Free (up to 1M nodes executed) |
+
+  | Self-Hosted Enterprise | You | Your infra | Enterprise license |
+
+  | BYOC (Bring Your Own Cloud) | LangChain managed | Your cloud account | Enterprise |
+
+  | Cloud SaaS | LangChain fully managed | LangChain cloud | Plus/Enterprise plan |'
+8_2_agent_server_architecture: "                    CONTROL PLANE (LangSmith)\n                    +---------------------------+\n\
+  \                    | - Deployment management   |\n                    | - Auth (X-Api-Key header) |\n                \
+  \    | - Studio UI               |\n                    +---------------------------+\n                              |\n\
+  \                    DATA PLANE (Agent Server)\n                    +---------------------------+\n                    |\
+  \ LangGraph Server          |\n                    |  - REST API (/docs)       |\n                    |  - Task queue workers\
+  \     |\n                    |                           |\n                    | PostgreSQL (persistent)   |\n        \
+  \            |  - Assistants             |\n                    |  - Threads                |\n                    |  -\
+  \ Runs                   |\n                    |  - Store (long-term mem)  |\n                    |                   \
+  \        |\n                    | Redis (ephemeral)         |\n                    |  - Queue coordination     |\n     \
+  \               |  - Worker communication   |\n                    +---------------------------+"
+8_3_rest_api_resource_groups: '| Resource | Endpoint prefix | Definition |
+
+  |----------|----------------|------------|
+
+  | Assistants | `/assistants` | Named, versioned config of a graph (graph_id + config + metadata) |
+
+  | Threads | `/threads` | Conversation container -- accumulates state across runs |
+
+  | Thread Runs | `/threads/{id}/runs` | Invoke a graph on a thread (stateful) |
+
+  | Stateless Runs | `/runs` | Invoke graph with no state persistence |
+
+  | Crons | `/crons` | Schedule periodic runs with cron expression |
+
+  | Store | `/store` | Long-term memory namespace operations (cross-thread KV) |
+
+  | Meta | `/info`, `/ok` | Server health + version metadata |'
+8_4_run_execution_modes: '| Mode | API call | Behavior |
+
+  |------|----------|---------|
+
+  | Synchronous | `POST /runs/wait` | Blocks until complete, returns final state |
+
+  | Streaming | `POST /runs/stream` | Server-Sent Events (SSE) with intermediate values |
+
+  | Background | `POST /runs` | Returns run_id immediately; poll for status |
+
+  | Cron | `POST /crons` | Scheduled background run on cron expression |'
+8_5_streaming_event_types_sse: '| Stream mode | Content |
+
+  |-------------|---------|
+
+  | `values` | Full state snapshot after each super-step |
+
+  | `updates` | Incremental state updates from each node |
+
+  | `messages` | Token-level streaming from model nodes |
+
+  | `events` | LangChain callback events (on_llm_start, on_chain_end, etc.) |
+
+  | `debug` | Internal debug events |
+
+  | `custom` | Custom events via `stream_writer` in node |'
+8_6_langgraph_cli: 'langgraph dev          # Local dev server with hot reload
+
+  langgraph build        # Build Docker image for deployment
+
+  langgraph deploy       # Deploy to LangSmith Cloud SaaS
+
+  langgraph up           # Start via Docker Compose (self-hosted)
+
+  langgraph dockerfile   # Generate Dockerfile for custom builds'
+8_7_python_sdk_langgraph_sdk: "from langgraph_sdk import get_client\n\nclient = get_client(\n    url=\"http://localhost:2024\"\
+  ,   # local dev or deployed URL\n    api_key=\"lsv2_...\"             # LangSmith API key (X-Api-Key header)\n)\n\n# Create\
+  \ a thread + stream a run\nthread = await client.threads.create()\nasync for chunk in client.runs.stream(\n    thread[\"\
+  thread_id\"],\n    assistant_id=\"my-agent\",\n    input={\"messages\": [{\"role\": \"user\", \"content\": \"Hello\"}]},\n\
+  \    stream_mode=\"values\",\n):\n    print(chunk.data)"
+8_8_cex_pillar_mapping_langgraph_platform: '| Platform Concept | CEX Kind | Pillar |
+
+  |-----------------|----------|--------|
+
+  | Assistant | `agent_card` | P08 |
+
+  | Thread | `session_state` | P10 |
+
+  | Run (background) | `spawn_config` | P12 |
+
+  | Cron job | `schedule` | P12 |
+
+  | Store namespace | `entity_memory` | P10 |
+
+  | Streaming (SSE) | `streaming_config` | P09 |'
+8_9_python_sdk_full_method_reference_langgraph_sdk: "Complete method table for `LangGraphClient` (async) / `SyncLangGraphClient`.\n\
+  \n#### Threads namespace\n\n| Method | Signature | Returns |\n|--------|-----------|---------|\n| `create` | `(metadata=None,\
+  \ config=None, if_exists=\"raise\")` | Thread |\n| `get` | `(thread_id)` | Thread |\n| `update` | `(thread_id, metadata=None)`\
+  \ | Thread |\n| `delete` | `(thread_id)` | None |\n| `search` | `(metadata=None, status=None, limit=10, offset=0)` | list[Thread]\
+  \ |\n| `copy` | `(thread_id)` | Thread |\n| `get_state` | `(thread_id, checkpoint_id=None, subgraphs=False)` | ThreadState\
+  \ |\n| `update_state` | `(thread_id, values, as_node=None, checkpoint_id=None)` | dict |\n| `get_history` | `(thread_id,\
+  \ limit=10, before=None, metadata=None)` | Iterator[ThreadState] |\n| `patch_state` | `(thread_id, metadata)` | dict |\n\
+  \n#### Runs namespace\n\n| Method | Signature | Returns |\n|--------|-----------|---------|\n| `create` | `(thread_id, assistant_id,\
+  \ *, input, config, metadata, stream_mode, interrupt_before, interrupt_after, multitask_strategy)` | Run |\n| `stream` |\
+  \ `(thread_id, assistant_id, *, input, stream_mode, config, ...)` | AsyncIterator[StreamPart] |\n| `wait` | `(thread_id,\
+  \ assistant_id, *, input, config, ...)` | dict |\n| `get` | `(thread_id, run_id)` | Run |\n| `list` | `(thread_id, *, limit=10,\
+  \ offset=0)` | list[Run] |\n| `cancel` | `(thread_id, run_id, *, wait=False, action=\"interrupt\")` | None |\n| `join` |\
+  \ `(thread_id, run_id)` | dict |\n| `join_stream` | `(thread_id, run_id)` | AsyncIterator[StreamPart] |\n| `delete` | `(thread_id,\
+  \ run_id)` | None |\n\nMultitask strategies (when thread has a run in progress):\n\n| Strategy | Behavior |\n|----------|---------|\n\
+  | `\"reject\"` | Raise error (default) |\n| `\"enqueue\"` | Queue behind current run |\n| `\"interrupt\"` | Cancel current,\
+  \ start new |\n| `\"rollback\"` | Cancel current, restore prior state, start new |\n\n#### Assistants namespace\n\n| Method\
+  \ | Signature | Returns |\n|--------|-----------|---------|\n| `create` | `(graph_id, config=None, metadata=None, name=None)`\
+  \ | Assistant |\n| `get` | `(assistant_id)` | Assistant |\n| `update` | `(assistant_id, config=None, metadata=None, name=None)`\
+  \ | Assistant |\n| `delete` | `(assistant_id)` | None |\n| `search` | `(metadata=None, graph_id=None, limit=10, offset=0)`\
+  \ | list[Assistant] |\n| `get_schemas` | `(assistant_id)` | dict (input/output/config schemas) |\n| `get_subgraphs` | `(assistant_id,\
+  \ namespace=None, recurse=False)` | dict[str, SubgraphSchemas] |\n| `create_version` | `(assistant_id, config=None, metadata=None)`\
+  \ | Assistant |\n| `get_versions` | `(assistant_id, metadata=None, limit=10, offset=0)` | list[AssistantVersion] |\n| `set_latest`\
+  \ | `(assistant_id, version)` | Assistant |\n\n#### Crons namespace\n\n| Method | Signature | Returns |\n|--------|-----------|---------|\n\
+  | `create` | `(assistant_id, schedule, payload=None, metadata=None)` | Cron |\n| `create_for_thread` | `(thread_id, assistant_id,\
+  \ schedule, payload=None)` | Cron |\n| `delete` | `(cron_id)` | None |\n| `search` | `(thread_id=None, assistant_id=None,\
+  \ limit=10, offset=0)` | list[Cron] |\n\nSchedule format: standard cron string, e.g., `\"0 9   1\"` = every Monday at 09:00\
+  \ UTC.\n\n#### Store namespace (SDK)\n\n| Method | Signature | Returns |\n|--------|-----------|---------|\n| `put_item`\
+  \ | `(namespace: tuple[str, ...], key: str, value: dict)` | None |\n| `get_item` | `(namespace: tuple[str, ...], key: str)`\
+  \ | Item |\n| `delete_item` | `(namespace: tuple[str, ...], key: str)` | None |\n| `search_items` | `(namespace_prefix:\
+  \ tuple, query: str=None, limit: int=10, offset: int=0)` | list[Item] |\n| `list_namespaces` | `(prefix: tuple=None, suffix:\
+  \ tuple=None, max_depth: int=None, limit: int=10)` | list[tuple] |\n\nItem schema:\n\n| Field | Type | Description |\n|-------|------|-------------|\n\
+  | `namespace` | tuple[str, ...] | Hierarchical path, e.g., `(\"users\", \"u123\", \"preferences\")` |\n| `key` | str | Identifier\
+  \ within namespace |\n| `value` | dict | Arbitrary JSON payload |\n| `created_at` | datetime | Creation timestamp |\n| `updated_at`\
+  \ | datetime | Last-write timestamp |\n\n#### StreamPart schema\n\nclass StreamPart:\n    event: str    # \"values\" | \"\
+  updates\" | \"messages\" | \"error\" | \"end\" | custom\n    data: Any     # shape depends on stream_mode; \"end\" has data=None\n\
+  \n---"
+9_langsmith_dataset_management_api_deep_dive: ''
+9_1_client_initialization: "from langsmith import Client\nimport os\n\nclient = Client(\n    api_url=\"https://api.smith.langchain.com\"\
+  ,  # default SaaS endpoint\n    api_key=os.environ[\"LANGSMITH_API_KEY\"],\n)"
+9_2_dataset_operations: '| Method | Parameters | Returns |
+
+  |--------|-----------|---------|
+
+  | `create_dataset` | `name, description="", data_type=DataType.kv` | Dataset |
+
+  | `read_dataset` | `dataset_id=None, dataset_name=None` | Dataset |
+
+  | `list_datasets` | `dataset_name=None, data_type=None, metadata=None` | Iterator[Dataset] |
+
+  | `delete_dataset` | `dataset_id` | None |
+
+  | `clone_public_dataset` | `token_or_url, source_api_url=None` | Dataset |
+
+
+  Dataset data types (DataType enum):
+
+
+  | Value | Use case |
+
+  |-------|----------|
+
+  | `DataType.kv` | Arbitrary key-value inputs/outputs (most common) |
+
+  | `DataType.llm` | LLM completion pairs (prompt_text -> completion_text) |
+
+  | `DataType.chat` | Chat message pairs (messages list -> generation) |'
+9_3_example_row_operations: "| Method | Parameters | Returns |\n|--------|-----------|---------|\n| `create_example` | `inputs,\
+  \ outputs=None, dataset_id, metadata=None` | Example |\n| `create_examples` | `inputs, outputs=None, dataset_id, metadata=None`\
+  \ | CreateExamplesResponse |\n| `list_examples` | `dataset_id=None, as_of=None, splits=None, metadata=None` | Iterator[Example]\
+  \ |\n| `read_example` | `example_id` | Example |\n| `update_example` | `example_id, inputs=None, outputs=None, metadata=None`\
+  \ | Example |\n| `delete_examples` | `example_ids: list[UUID]` | None |\n\nBatch creation (preferred for large datasets):\n\
+  \n# Single request for multiple rows\nclient.create_examples(\n    inputs=[{\"question\": q} for q in questions],\n    outputs=[{\"\
+  answer\": a} for a in answers],\n    dataset_id=dataset.id,\n    metadata=[{\"source\": \"v1\"} for _ in questions],\n)"
+9_4_evaluation_api: "| Function | Import | Purpose |\n|----------|--------|---------|\n| `evaluate` | `from langsmith import\
+  \ evaluate` | Sync evaluation on dataset |\n| `aevaluate` | `from langsmith import aevaluate` | Async evaluation (preferred\
+  \ for large sets) |\n| `client.evaluate` | SDK v1.x+ preferred method | Same as above via Client |\n\nevaluate() parameters:\n\
+  \nfrom langsmith import evaluate\n\nresults = evaluate(\n    target,                       # Callable or LangChain Runnable\n\
+  \    data,                         # Dataset name/ID or list[Example]\n    evaluators=[correctness_fn],  # list[Callable]\
+  \ -- per-example scorers\n    summary_evaluators=[agg_fn],  # list[Callable] -- aggregate scorers\n    metadata={\"model\"\
+  : \"gpt-4o\"}, # Stored with experiment\n    experiment_prefix=\"my-run-v1\",\n    max_concurrency=4,            # Parallel\
+  \ example evaluation\n    num_repetitions=1,            # Run each example N times\n    blocking=True,                #\
+  \ Wait for all results\n)\n\nEvaluator function signature:\n\nfrom langsmith.schemas import Run, Example\nfrom langsmith.evaluation\
+  \ import EvaluationResult\n\ndef correctness_evaluator(run: Run, example: Example) -> EvaluationResult:\n    score = 1.0\
+  \ if run.outputs[\"answer\"] == example.outputs[\"answer\"] else 0.0\n    return EvaluationResult(key=\"correctness\", score=score)"
+9_5_dataset_versioning: '| Feature | API |
+
+  |---------|-----|
+
+  | Tag a version | `client.create_tag(dataset_id, name="v1.0")` |
+
+  | Pin eval to version | `data="my-dataset:v1.0"` in `evaluate()` |
+
+  | List examples at version | `client.list_examples(dataset_id, as_of="v1.0")` |'
+9_6_cex_pillar_mapping_langsmith_datasets: '| LangSmith Concept | CEX Kind | Pillar |
+
+  |-------------------|----------|--------|
+
+  | Dataset | `benchmark` | P07 |
+
+  | Example (row) | `eval_dataset` entry | P07 |
+
+  | Evaluator function | `llm_judge` or `scoring_rubric` | P07 |
+
+  | Annotation queue | `quality_gate` | P11 |
+
+  | Experiment result | `benchmark` (output) | P07 |
+
+  | Summary evaluator | `scoring_rubric` (aggregate) | P07 |
+
+
+  ---'
+10_comparative_context_vs_alternatives: '| Dimension | LangGraph | CrewAI | AutoGen | Semantic Kernel |
+
+  |-----------|-----------|--------|---------|-----------------|
+
+  | Graph model | Pregel BSP (super-steps) | Role-based crews | Conversation protocol | Plugin + planner |
+
+  | State management | TypedDict + reducers | Agent memory dicts | ConversableAgent vars | SKContext |
+
+  | HITL | interrupt() / resume | Manual callback | Human proxy agent | Plan interrupts |
+
+  | Persistence | Checkpointer (Postgres/SQLite) | Memory backends | Memory DB | SK memory store |
+
+  | Cloud deployment | LangGraph Platform (GA 2025) | Self-managed | AutoGen Studio | Azure AI Foundry |
+
+  | Observability | LangSmith (native) | LangSmith / custom | OTel compatible | Azure AppInsights |
+
+  | Multi-agent | Command + Send primitives | Hierarchical crews | GroupChat | Orchestrator pattern |
+
+  | Evaluation | LangSmith datasets + evaluate() | Custom | Custom | Promptflow |
+
+  | Long-term memory | InMemoryStore / PostgresStore | Custom dict | Memory DB | SK memory |
+
+  | Task parallelism | asyncio.gather + Send fan-out | CrewAI parallel tasks | Async GroupChat | SK parallel steps |
+
+
+  ---'
+11_langgraph_store_api_cross_thread_long_term_memory: '`BaseStore` / `InMemoryStore` provides persistent key-value memory
+  that survives across threads and graph invocations. Distinct from `Checkpointer` (which stores checkpoint-scoped state per
+  thread).'
+11_1_in_graph_store_access: "from langgraph.store.memory import InMemoryStore\nfrom langgraph.store.postgres import PostgresStore\
+  \  # production\n\n# Pass store at compile time\nstore = InMemoryStore()\ngraph = graph_builder.compile(store=store)\n\n\
+  # Access inside a node via config or InjectedStore annotation\ndef memory_node(state, config):\n    store = config.get(\"\
+  store\")  # BaseStore instance\n    items = store.search((\"users\", state[\"user_id\"]), query=\"preferences\")\n    return\
+  \ {\"context\": [i.value for i in items]}\n\n# Or via InjectedStore annotation (preferred):\nfrom langgraph.prebuilt import\
+  \ InjectedStore\nfrom langchain_core.tools import tool\n\n@tool\ndef save_memory(content: str, store: Annotated[BaseStore,\
+  \ InjectedStore()]) -> str:\n    store.put((\"memories\", \"shared\"), content[:20], {\"text\": content})\n    return \"\
+  saved\""
+11_2_basestore_interface: '| Method | Signature | Returns |
+
+  |--------|-----------|---------|
+
+  | `put` | `(namespace: tuple[str, ...], key: str, value: dict, index: list[str]=None)` | None |
+
+  | `get` | `(namespace: tuple[str, ...], key: str)` | Item or None |
+
+  | `delete` | `(namespace: tuple[str, ...], key: str)` | None |
+
+  | `search` | `(namespace_prefix: tuple[str, ...], *, query: str=None, limit: int=10, offset: int=0, filter: dict=None)`
+  | list[Item] |
+
+  | `list_namespaces` | `(*, prefix: tuple=None, suffix: tuple=None, max_depth: int=None, limit: int=100)` | list[tuple[str,
+  ...]] |
+
+  | `aput` | async variant of `put` | None |
+
+  | `aget` | async variant of `get` | Item or None |
+
+  | `adelete` | async variant of `delete` | None |
+
+  | `asearch` | async variant of `search` | list[Item] |
+
+  | `alist_namespaces` | async variant of `list_namespaces` | list[tuple] |
+
+  | `batch` | `(ops: Iterable[Op])` | list[Result] -- atomic batch ops |
+
+  | `abatch` | async variant of `batch` | list[Result] |'
+11_3_namespace_design_patterns: 'Namespaces are tuples. Convention: `(domain, entity_id, category)`.
+
+
+  | Pattern | Namespace | Purpose |
+
+  |---------|-----------|---------|
+
+  | User preferences | `("users", user_id, "prefs")` | Per-user settings |
+
+  | Shared facts | `("facts", "global")` | System-wide knowledge |
+
+  | Agent working memory | `("agents", agent_id, "scratchpad")` | Per-agent temp state |
+
+  | Conversation summaries | `("threads", thread_id, "summary")` | Compressed history |
+
+  | Org-scoped memory | `("org", org_id, "policies")` | Multi-tenant isolation |
+
+
+  Semantic search: When `PostgresStore` with `pgvector` is used, `query=` performs
+
+  approximate nearest-neighbor search over embedded `value` fields specified in `index`.'
+11_4_backends: '| Backend | Class | Production ready | Semantic search |
+
+  |---------|-------|-----------------|-----------------|
+
+  | In-memory | `InMemoryStore` | Dev/test only | No |
+
+  | PostgreSQL | `PostgresStore` | Yes | Yes (pgvector) |
+
+  | Redis | `RedisStore` (community) | Yes | With RediSearch |
+
+  | Custom | Implement `BaseStore` | User-managed | User-managed |'
+11_5_cex_pillar_mapping_store: '| Store Concept | CEX Kind | Pillar |
+
+  |--------------|----------|--------|
+
+  | `BaseStore` | `entity_memory` | P10 |
+
+  | Namespace | `memory_scope` | P10 |
+
+  | `put` / `get` / `search` | `retriever_config` | P01 |
+
+  | PostgresStore + pgvector | `embedding_config` | P01 |
+
+  | `batch` ops | `workflow` (atomic ops) | P12 |
+
+
+  ---'
+12_langsmith_experiments_api: 'Experiments are named evaluation runs against a dataset. Source: https://docs.smith.langchain.com/evaluation/how_to_guides/run_experiments_programmatically'
+12_1_experiment_concepts: '| Term | Definition |
+
+  |------|------------|
+
+  | Experiment | One `evaluate()` call -- a batch of target fn runs against a dataset |
+
+  | Experiment prefix | Human-readable name prefix (e.g., `"gpt-4o-v2"`) |
+
+  | ExperimentResults | Object returned by `evaluate()` -- iterable of `ExperimentResultRow` |
+
+  | ExperimentResultRow | Single example result: `run`, `example`, `evaluation_results` |
+
+  | ComparativeExperiment | Side-by-side comparison of 2+ experiments on same dataset |'
+12_2_running_experiments: "from langsmith import evaluate, aevaluate\n\n# Sync -- blocks until complete\nresults = evaluate(\n\
+  \    target_fn,                        # Callable or Runnable\n    data=\"my-dataset\",                # Dataset name, ID,\
+  \ or list[Example]\n    evaluators=[correctness_fn],      # Per-example scorers\n    summary_evaluators=[aggregate_fn],#\
+  \ Whole-experiment scorers\n    experiment_prefix=\"my-run\",       # Appears in UI as \"my-run-<timestamp>\"\n    metadata={\"\
+  model\": \"gpt-4o\"},     # Stored with every run\n    max_concurrency=4,                # Parallel example evaluation\n\
+  \    num_repetitions=1,                # Run each example N times\n    blocking=True,                    # False = fire-and-forget\n\
+  \    load_nested=False,                # Include nested runs in results\n)\n\n# Async -- preferred for large datasets\n\
+  results = await aevaluate(target_fn, data=\"my-dataset\", evaluators=[fn])"
+12_3_summary_evaluator_pattern: "from langsmith.schemas import Example, Run\nfrom langsmith.evaluation import EvaluationResult,\
+  \ EvaluationResults\n\ndef agg_score(runs: list[Run], examples: list[Example]) -> EvaluationResults:\n    avg = sum(r.feedback_stats[\"\
+  correctness\"][\"avg\"] for r in runs) / len(runs)\n    return EvaluationResults(results=[EvaluationResult(key=\"avg_correctness\"\
+  , score=avg)])"
+12_4_comparative_experiments: "from langsmith import evaluate\n\n# Run two experiments then compare\nexp1 = evaluate(fn_v1,\
+  \ data=\"my-dataset\", experiment_prefix=\"v1\")\nexp2 = evaluate(fn_v2, data=\"my-dataset\", experiment_prefix=\"v2\")\n\
+  \n# Compare in UI: annotate both with same dataset to enable side-by-side view\n# Programmatic comparison:\nfrom langsmith\
+  \ import Client\nclient = Client()\nresults = client.get_pairwise_evaluations(\n    [exp1.experiment_name, exp2.experiment_name]\n\
+  )"
+12_5_online_evaluation_real_time_llm_judge: "# Configure online evaluator on LangSmith project (SDK or UI)\nclient.create_evaluator(\n\
+  \    project_name=\"my-project\",\n    criteria=\"Is the response helpful? Reply YES or NO.\",\n    evaluator_type=\"LangChainStringEvaluator\"\
+  ,\n    name=\"helpfulness\",\n    feedback_key=\"helpfulness\",\n)\n# Fires after every traced run -- no code changes needed\
+  \ in application"
+12_6_cex_mapping_experiments: '| LangSmith Concept | CEX Kind | Pillar |
+
+  |------------------|----------|--------|
+
+  | Experiment | `benchmark` | P07 |
+
+  | Per-example evaluator | `llm_judge` or `scoring_rubric` | P07 |
+
+  | Summary evaluator | `scoring_rubric` (aggregate) | P07 |
+
+  | ComparativeExperiment | `benchmark` (multi-variant) | P07 |
+
+  | Online evaluator | `llm_judge` (streaming) | P07 |
+
+  | ExperimentResultRow | `eval_dataset` row | P07 |'

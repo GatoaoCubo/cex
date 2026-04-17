@@ -2,7 +2,7 @@
 id: p11_qg_retriever
 kind: quality_gate
 pillar: P11
-llm_function: CONSTRAIN
+llm_function: GOVERN
 version: 1.0.0
 created: 2026-03-28
 updated: 2026-03-28
@@ -11,6 +11,7 @@ quality: 9.1
 tags: [quality_gate, retriever, P11, validation, RAG, vector-search]
 tldr: "10 HARD gates block delivery. 12 SOFT dimensions score 0-10. Threshold 7.0."
 density_score: 1.0
+title: Quality Gate ISO - retriever
 ---
 # Gate: retriever
 

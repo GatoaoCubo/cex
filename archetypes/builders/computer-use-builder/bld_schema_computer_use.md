@@ -18,6 +18,8 @@ density_score: 0.90
 ---
 
 # Schema: computer_use
+
+This ISO governs computer use: screen capture, mouse, and keyboard actions taken on behalf of the agent.
 ## Frontmatter Fields
 | Field | Type | Required | Default | Notes |
 |-------|------|----------|---------|-------|

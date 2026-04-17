@@ -1,8 +1,8 @@
 {
   "status": "complete",
-  "actions_total": 1,
-  "actions_passed": 1,
-  "gaps_before": 1,
-  "gaps_after": 0,
-  "timestamp": "2026-03-31T10:13:58.642434"
+  "actions_total": 4,
+  "actions_passed": 2,
+  "gaps_before": 4,
+  "gaps_after": 4,
+  "timestamp": "2026-04-16T07:36:26.126064"
 }

@@ -12,8 +12,8 @@ quality: 9.0
 tags: [quality-gate, path-config, P11, P09, governance, filesystem]
 tldr: "Gates for path_config artifacts — portable paths catalog with platform spec, expandable variables, and creation order."
 density_score: 0.85
+llm_function: GOVERN
 ---
-
 # Gate: path_config
 ## Definition
 | Field     | Value                                                |
@@ -34,7 +34,7 @@ All must pass. Failure on any = final score 0.
 | H06 | All required fields present: id, kind, pillar, version, created, updated, author, domain, quality, tags, tldr | Completeness |
 | H07 | paths catalog has >= 3 entries, each with name, default, and relative_or_absolute flag | Fewer than 3 paths does not justify a config artifact |
 | H08 | platform field states target OS or list of supported OS values | Paths are platform-dependent; undeclared = silent breakage |
-| H09 | No user-specific absolute paths (all absolute paths use expandable variables such as $HOME or {{USER_DIR}}) | Hardcoded user paths break on any other machine |
+| H09 | No user-specific absolute paths (all absolute paths use expandable variables such as $HOME or `{{USER_DIR}}`) | Hardcoded user paths break on any other machine |
 | H10 | default values are present for all paths (null is acceptable if no default exists, but must be explicit) | Missing defaults force manual config on every install |
 ## SOFT Scoring
 | Gate | Check | Weight |

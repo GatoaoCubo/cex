@@ -41,14 +41,14 @@ dir_count: {{N}}
 file_count: {{N}}
 ```
 ## Overview
-{{what_scope_and_purpose_1_to_2_sentences}}
-{{who_consumes_these_paths}}
+`{{what_scope_and_purpose_1_to_2_sentences}}`
+`{{who_consumes_these_paths}}`
 ## Path Catalog
 | Path | Type | Platform | Default | Required | Notes |
 |------|------|----------|---------|----------|-------|
-| {{path_name_1}} | {{dir|file}} | {{windows|unix|all}} | {{default_path}} | {{yes|no}} | {{notes}} |
-| {{path_name_2}} | {{type}} | {{platform}} | {{default}} | {{yes|no}} | {{notes}} |
-| {{path_name_3}} | {{type}} | {{platform}} | {{default}} | {{yes|no}} | {{notes}} |
+| `{{path_name_1}}` | {{dir|file}} | {{windows|unix|all}} | {{default_path}} | {{yes|no}} | `{{notes}}` |
+| `{{path_name_2}}` | {{type}} | {{platform}} | {{default}} | {{yes|no}} | `{{notes}}` |
+| `{{path_name_3}}` | {{type}} | {{platform}} | {{default}} | {{yes|no}} | `{{notes}}` |
 ## Directory Hierarchy
 ```text
 {{base_dir}}/
@@ -58,10 +58,10 @@ file_count: {{N}}
   {{subdir_3}}/
 ```
 ## Platform Notes
-{{platform_specific_differences_and_resolution_rules}}
+`{{platform_specific_differences_and_resolution_rules}}`
 ## References
-1. {{reference_1}}
-2. {{reference_2}}
+1. `{{reference_1}}`
+2. `{{reference_2}}`
 
 ## Template Standards
 

@@ -2,7 +2,7 @@
 id: bld_knowledge_card_notifier
 kind: knowledge_card
 pillar: P04
-llm_function: CONTEXT
+llm_function: INJECT
 purpose: Domain knowledge for building notifier artifacts
 version: 1.0.0
 created: 2026-03-28
@@ -12,6 +12,7 @@ tags: [knowledge_card, notifier, email, sms, slack, discord, firebase, sendgrid,
 quality: 9.1
 tldr: "Provider selection, template design, rate limits, and anti-patterns for notification delivery across email, SMS, Slack, Discord, push channels."
 density_score: 1.0
+title: Knowledge Card ISO - notifier
 ---
 # Knowledge Card: Notification Delivery
 

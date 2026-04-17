@@ -1,0 +1,202 @@
+kind: examples
+id: bld_examples_finetune_config
+pillar: P07
+llm_function: GOVERN
+purpose: Golden and anti-examples of finetune_config artifacts
+pattern: few-shot learning -- LLM reads these before producing
+quality: null
+title: Examples Finetune Config
+version: 1.0.0
+author: n03_builder
+tags:
+- finetune_config
+- builder
+- examples
+- P02
+tldr: Golden QLoRA SFT example and anti-example with failure analysis for finetune_config.
+domain: finetune_config construction
+created: '2026-04-13'
+updated: '2026-04-13'
+density_score: 0.9
+golden_example: "INPUT: \"Configure QLoRA fine-tuning of Llama-3-8B for instruction following on a custom dataset\"\nOUTPUT:\n\
+  id: p02_ft_llama3_8b_instruct_qlora\nkind: finetune_config\npillar: P02\nversion: \"1.0.0\"\ncreated: \"2026-04-13\"\nupdated:\
+  \ \"2026-04-13\"\nauthor: \"builder_agent\"\nbase_model: \"meta-llama/Meta-Llama-3-8B\"\nadapter_type: qlora\ndataset: \"\
+  data/instruct_train.jsonl\"\nquality: null\ntags: [finetune_config, qlora, llama3, instruction-following, sft]\ntldr: \"\
+  QLoRA SFT on Llama-3-8B: rank=16, 4-bit NF4, 3 epochs, cosine LR, instruction dataset 50K rows\"\ndescription: \"QLoRA fine-tune\
+  \ of Llama-3-8B for instruction following using a 50K-row Alpaca-format dataset\"\ntask_type: sft\nframework: trl\ncompute:\
+  \ \"1x A10G 24GB or 1x RTX 4090 24GB\"\neval_metrics:\n  - eval_loss\n  - perplexity"
+overview: Adapt Llama-3-8B to follow instructions in a custom domain using supervised fine-tuning. QLoRA chosen to fit within
+  24GB VRAM while retaining near-full-fine-tune quality. 4-bit NF4 quantization of base model with LoRA adapters on attention
+  and MLP projections.
+base_model: '| Field | Value |
+
+  |-------|-------|
+
+  | model_id | meta-llama/Meta-Llama-3-8B |
+
+  | architecture | llama3 |
+
+  | param_count | 8B |
+
+  | license | llama3 |
+
+  | quantization | 4bit (NF4, loaded for training) |'
+dataset: '| Field | Value |
+
+  |-------|-------|
+
+  | path | data/instruct_train.jsonl |
+
+  | size | 50000 rows |
+
+  | format | alpaca |
+
+  | field_mapping | instruction / input / output |
+
+  | language | en |
+
+  | preprocessing | filter max_len=2048, deduplicate |'
+adapter_config: '| Parameter | Value |
+
+  |-----------|-------|
+
+  | r (rank) | 16 |
+
+  | lora_alpha | 32 |
+
+  | lora_dropout | 0.05 |
+
+  | target_modules | q_proj, k_proj, v_proj, o_proj, gate_proj, up_proj, down_proj |
+
+  | bias | none |
+
+  | task_type | CAUSAL_LM |
+
+  | bits | 4 |
+
+  | quant_type | nf4 |
+
+  | double_quant | true |'
+hyperparameters: '| Parameter | Value |
+
+  |-----------|-------|
+
+  | learning_rate | 2e-4 |
+
+  | per_device_train_batch_size | 2 |
+
+  | gradient_accumulation_steps | 8 |
+
+  | num_train_epochs | 3 |
+
+  | max_steps | -1 |
+
+  | warmup_ratio | 0.03 |
+
+  | lr_scheduler_type | cosine |
+
+  | weight_decay | 0.01 |
+
+  | max_grad_norm | 1.0 |
+
+  | fp16 | false |
+
+  | bf16 | true |
+
+  | gradient_checkpointing | true |
+
+  | optim | paged_adamw_8bit |
+
+  | max_seq_length | 2048 |'
+evaluation: '| Parameter | Value |
+
+  |-----------|-------|
+
+  | eval_strategy | epoch |
+
+  | eval_steps | null |
+
+  | save_strategy | epoch |
+
+  | save_steps | null |
+
+  | save_total_limit | 3 |
+
+  | load_best_model_at_end | true |
+
+  | metric_for_best_model | eval_loss |
+
+  | early_stopping_patience | 2 |
+
+  WHY THIS IS GOLDEN:
+
+  - quality: null (H05 pass)
+
+  - id matches p02_ft_ pattern (H02 pass)
+
+  - kind: finetune_config (H04 pass)
+
+  - adapter_type from allowed enum (H06 pass)
+
+  - LoRA rank/alpha/dropout/target_modules all specified (H07 pass)
+
+  - QLoRA bits/quant_type specified (H08 pass)
+
+  - All required hyperparameters have explicit values (H09 pass)
+
+  - eval_metrics non-empty (H10 pass)
+
+  - No credentials anywhere (H03 pass)
+
+  - tldr: 92 chars <= 160 (S01 pass)
+
+  - tags: 5 items, includes "finetune_config" (S02 pass)
+
+  - All 6 body sections present (S03 pass)'
+anti_example: 'INPUT: "fine-tune GPT for my data"
+
+  BAD OUTPUT:
+
+  id: gpt-finetune
+
+  kind: training
+
+  pillar: models
+
+  adapter: lora
+
+  rank: TBD
+
+  dataset: my_data.csv
+
+  quality: 8.5
+
+  tags: [training]
+
+  Fine-tune GPT on my data. Use LoRA with rank TBD. Training settings TBD.
+
+  FAILURES:
+
+  1. id: "gpt-finetune" uses hyphens and no `p02_ft_` prefix -> H02 FAIL
+
+  2. kind: "training" not "finetune_config" -> H04 FAIL
+
+  3. pillar: "models" not "P02" -> H06 FAIL
+
+  4. quality: 8.5 (not null) -> H05 FAIL
+
+  5. adapter_type not from enum (uses "adapter") -> H06 FAIL
+
+  6. rank: TBD -- placeholder value for required param -> H09 FAIL
+
+  7. Missing fields: version, created, updated, author, base_model, tldr -> H06 FAIL
+
+  8. tags: only 1 item, missing "finetune_config" -> S02 FAIL
+
+  9. Body missing all 6 required sections -> S03 FAIL
+
+  10. No lora_alpha, dropout, target_modules specified -> H07 FAIL
+
+  11. No hyperparameters section at all -> H09 FAIL
+
+  12. No eval_metrics -> H10 FAIL'

@@ -1,0 +1,57 @@
+id: p11_lr_n04_knowledge
+kind: learning_record
+pillar: P11
+nucleus: n04
+title: Learning Record -- N04 Knowledge Nucleus
+version: 1.0.0
+quality: null
+tags:
+- learning_record
+- n04
+- knowledge
+- rag
+- retrieval
+- P11
+domain: knowledge management
+status: active
+created: '2026-04-17'
+updated: '2026-04-17'
+author: n04_knowledge
+tldr: 'Persistent learning record for N04: what has been learned from sessions, what source each insight came from, and how
+  that learning changed N04 behavior. Append-only log -- never delete entries.'
+density_score: null
+about_this_file: Append-only learning journal. Each session that produces a learning appends an entry. N04 reads this at session
+  start to avoid re-learning what it already knows. `cex_memory_update.py` manages freshness decay and archive. ---
+learning_log: ''
+2026_04_17_self_assembly_w1: "Mission: Portfolio Construction -- build missing artifacts across P06, P10, P11, P04, P07, P12,\
+  \ P02\n\nLearnings:\n\n1. P10 was the largest gap (8 artifacts vs. 18+ target). Memory architecture is what separates\n\
+  \   a knowledge BASE from a knowledge SYSTEM. N04 had knowledge but not memory infrastructure.\n   - Impact: built 6 P10\
+  \ artifacts in this session (memory_architecture, consolidation_policy,\n     procedural_memory, memory_summary, entity_memory,\
+  \ memory_scope, memory_type, memory_benchmark)\n\n2. P06 gap was blocking (0 proper input_schema/api_reference/type_def).\
+  \ Without typed contracts,\n   retrieval requests were untyped and the RAG pipeline had no schema enforcement at boundaries.\n\
+  \   - Impact: built 3 P06 artifacts establishing the knowledge query contract\n\n3. Document type taxonomy was implicit,\
+  \ not explicit. N04 had been treating all documents\n   the same (embedding each as text) without differentiating type-specific\
+  \ strategies.\n   type_def_document_types.md makes chunking and retrieval behavior per type explicit.\n   - Impact: type_def\
+  \ built; chunk strategies now mapped per type\n\n4. Procedural memory must be explicit for SOPs to be reproducible. N04\
+  \ had knowledge of HOW\n   to do things but it was scattered across multiple files. Consolidating into SOPs\n   makes the\
+  \ procedures reliable and version-controlled.\n   - Impact: procedural_memory_n04.md built with 7 SOPs\n\n5. Self-improvement\
+  \ loop was missing from P11. Without it, N04 could not evolve its own\n   knowledge quality autonomously. The loop closes\
+  \ the feedback cycle.\n   - Impact: self_improvement_loop_n04.md built this session\n\nSources: n04_task.md handoff, spec_nucleus_self_assembly.md,\
+  \ N04 prior session history\n\nArtifacts produced: 17+ files across P01, P02, P04, P06, P07, P10, P11, P12\n\n---"
+learning_template_for_future_entries: "### {date} | {session_type}\n\nMission: brief description\n\nLearnings:\n1. {finding\
+  \ title}: {description}\n   - Impact: {how behavior changed}\n\nSources: {files, sessions, or tools that informed the learning}\n\
+  Artifacts produced: {list}\n\n---"
+aggregate_insights_cross_session_synthesis: '| Domain | Insight | First Learned | Confidence |
+
+  |--------|---------|--------------|-----------|
+
+  | Retrieval | Hybrid beats dense-only by +12% MRR | session ~2026-04-07 | HIGH |
+
+  | Memory | P10 is the most under-built pillar in all nuclei | 2026-04-17 | HIGH |
+
+  | Architecture | Memory types (correction/preference/convention/context) cleanly partition all learnings | 2026-04-17 |
+  HIGH |
+
+  | Quality | KC whole-document embedding outperforms chunk-based for docs < 8KB | session ~2026-04-14 | MEDIUM |
+
+  | Tooling | cex_retriever.py TF-IDF fallback is always reliable (no external deps) | early sessions | HIGH |'

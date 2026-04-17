@@ -12,8 +12,8 @@ quality: 9.0
 tags: [quality-gate, trace-config, observability, tracing, P11]
 tldr: "Gates for trace_config artifacts: validates exporter, sample rate, capture flags, span attributes, retention, and privacy controls."
 density_score: 0.91
+llm_function: GOVERN
 ---
-
 # Gate: trace_config
 ## Definition
 | Field     | Value |

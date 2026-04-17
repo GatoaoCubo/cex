@@ -1,0 +1,41 @@
+kind: instruction
+id: bld_instruction_edit_format
+pillar: P03
+llm_function: REASON
+purpose: Step-by-step production process for edit_format
+quality: null
+title: Instruction Edit Format
+version: 1.0.0
+author: wave1_builder_gen
+tags:
+- edit_format
+- builder
+- instruction
+tldr: Step-by-step production process for edit_format
+domain: edit_format construction
+created: '2026-04-13'
+updated: '2026-04-13'
+density_score: 0.85
+phase_1_research:
+- Analyze existing LLM-to-host communication protocols for file change syntax.
+- Identify constraints from P06 (e.g., security, versioning, error handling).
+- Survey use cases for edit_format (e.g., code patches, config updates).
+- Determine required syntax elements (e.g., diff format, metadata fields).
+- Evaluate tooling compatibility (e.g., Git, JSON, YAML parsers).
+- Document research findings into a preliminary specification draft.
+phase_2_compose:
+- Define schema structure in SCHEMA.md (e.g., `operation`, `file_path`, `content`).
+- Map each schema field to corresponding OUTPUT_TEMPLATE.md placeholders.
+- Specify syntax rules (e.g., line endings, escaping characters).
+- Add constraints (e.g., max file size, allowed operations).
+- Write template examples for common operations (e.g., `replace`, `append`).
+- Align template with SCHEMA.md using cross-references.
+- Include error codes and handling procedures per P06.
+- Add versioning metadata to both schema and template.
+- Finalize artifact with review checklists from Phase 3.
+phase_3_validate:
+- '[ ] Validate schema against 10+ example edits using SCHEMA.md.'
+- '[ ] Test OUTPUT_TEMPLATE.md with edge cases (e.g., binary files).'
+- '[ ] Confirm tooling compatibility (e.g., parsers, validators).'
+- '[ ] Ensure all P06 constraints are explicitly addressed.'
+- '[ ] Perform peer review for clarity and completeness.'

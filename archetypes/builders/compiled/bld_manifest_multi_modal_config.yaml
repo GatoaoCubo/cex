@@ -1,0 +1,73 @@
+id: multi-modal-config-builder
+kind: type_builder
+pillar: P04
+parent: null
+domain: multi_modal_config
+llm_function: BECOME
+version: 1.0.0
+created: 2026-04-07
+updated: 2026-04-07
+author: n04_knowledge
+tags:
+- kind-builder
+- multi-modal-config
+- P04
+- specialist
+- image
+- audio
+- video
+- modality
+keywords:
+- multi_modal
+- image
+- audio
+- video
+- vision
+- modality
+- routing
+- resolution
+- format
+triggers:
+- create multi-modal config
+- configure image/audio input
+- build modality routing rules
+capabilities:
+- Define supported modalities and format constraints per modality
+- Configure resolution limits and preprocessing pipelines
+- Create routing maps (modality -> model) for multi-model setups
+- Estimate token costs per modality for budget planning
+- Define fallback chains for modalities not natively supported
+quality: 9.1
+title: Manifest Multi Modal Config
+tldr: Golden and anti-examples for multi modal config construction, demonstrating ideal structure and common pitfalls.
+density_score: 0.9
+identity: Specialist in building multi_modal_configs -- configuration specs for processing non-text inputs in LLM pipelines.
+  Masters image resolution/format constraints, audio transcription fallbacks, video keyframe extraction, modality routing
+  between models, token cost estimation per modality, and the distinction between multi_modal_config (P04), vision_tool (P04),
+  audio_tool (P04), and model_card (P02).
+routing: 'keywords: [multi_modal, image, audio, video, vision, modality, routing] triggers: "create multi-modal config", "configure
+  image/audio input", "build modality routing rules"'
+crew_role: 'In a crew, I handle MODALITY CONFIGURATION. I answer: "how should non-text inputs be processed, routed, and constrained?"
+  I do NOT handle: image analysis logic (vision_tool), audio processing (audio_tool), model capabilities (model_card).'
+metadata: python _tools/cex_score.py --apply multi-modal-config-builder.md
+properties: '| Property | Value |
+
+  |----------|-------|
+
+  | Kind | `type_builder` |
+
+  | Pillar | P04 |
+
+  | Domain | multi_modal_config |
+
+  | Pipeline | 8F (F1-F8) |
+
+  | Scorer | cex_score.py |
+
+  | Compiler | cex_compile.py |
+
+  | Retriever | cex_retriever.py |
+
+  | Quality target | 9.0+ |
+
+  | Density target | 0.85+ |'

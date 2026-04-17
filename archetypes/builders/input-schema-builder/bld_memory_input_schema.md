@@ -23,6 +23,7 @@ observation_types: [user, feedback, project, reference]
 quality: 9.2
 title: "Memory Input Schema"
 density_score: 0.90
+llm_function: INJECT
 ---
 ## Summary
 Input schemas define the contract between a caller and a component. The most common failure mode is semantic confusion between required and optional: a required field with a default is a contradiction, and an optional field without a default creates None propagation bugs. Getting these two rules right eliminates the majority of runtime validation failures.

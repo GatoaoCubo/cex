@@ -1,0 +1,132 @@
+id: sch_type_def_n04
+kind: type_def
+pillar: P06
+nucleus: n04
+title: Knowledge Record Type
+version: 1.0
+quality: null
+tags:
+- schema
+- type
+- knowledge
+- provenance
+- index
+density_score: 1.0
+purpose: N04 needs a reusable object type for facts that survive beyond one prompt or one batch. Under the Knowledge Gluttony
+  lens, the type must preserve text, provenance, taxonomy, freshness, and ranking hints in one reusable shape so the system
+  can keep learning from the same record over time. This type is the durable vocabulary used by input contracts, validators,
+  and downstream config.
+schema: "name: knowledge_record\nbase_type: object\nnullable: false\nextends: null\nserialization:\n  primary: yaml\n  secondary:\
+  \ json\nrequired:\n  - record_id\n  - title\n  - body\n  - signal_state\n  - provenance\n  - taxonomy\n  - freshness\nfields:\n\
+  \  record_id: string\n  title: string\n  body: string\n  summary: string?\n  signal_state: enum<knowledge_signal_state>\n\
+  \  provenance: list<provenance_item>\n  taxonomy: list<string>\n  freshness: freshness_window\n  embedding: embedding_ref?\n\
+  \  retrieval_score_hint: number?\n  access_tier: string?"
+fields: '| Field | Type | Required | Example | Why it exists |
+
+  |-------|------|----------|---------|---------------|
+
+  | record_id | string | yes | `kr_rag_rerank_001` | stable primary key |
+
+  | title | string | yes | `Hybrid Reranking Pattern` | human-readable retrieval anchor |
+
+  | body | string | yes | `Dense explanation of reranking...` | main evidence payload |
+
+  | summary | string | no | `Short abstract for previews` | cheaper recall surfaces |
+
+  | signal_state | enum | yes | `enriched` | lifecycle-aware retrieval |
+
+  | provenance | list<object> | yes | `[{source_id:..., confidence:...}]` | hungry memory needs source depth |
+
+  | taxonomy | list<string> | yes | `[rag, retrieval, ranking]` | categorization for route and search |
+
+  | freshness | object | yes | `{review_after_days: 30, stale_after_days: 90}` | explicit time decay |
+
+  | embedding | object | no | `{model: text-embedding-3-large, vector_ref: ...}` | decouples text from vector storage |
+
+  | retrieval_score_hint | number | no | `0.82` | precomputed ranking signal |
+
+  | access_tier | string | no | `internal_shared` | permission-aware serving |'
+nested_types: '| Nested type | Shape | Constraint |
+
+  |-------------|-------|-----------|
+
+  | provenance_item | object | source_id, source_type, confidence, observed_at required |
+
+  | freshness_window | object | review_after_days <= stale_after_days |
+
+  | embedding_ref | object | model, dimension, vector_ref, generated_at |'
+constraints: '| Constraint | Rule | Rationale |
+
+  |------------|------|-----------|
+
+  | `record_id` uniqueness | unique per active namespace | avoids duplicate evidence collisions |
+
+  | `title` size | 8-120 chars | enough signal without bloated headings |
+
+  | `body` size | 160+ chars | N04 avoids starving the index |
+
+  | `taxonomy` count | 1-8 labels | enough context without taxonomy spam |
+
+  | `confidence` range | 0.0-1.0 | machine-sortable trust |
+
+  | `retrieval_score_hint` | 0.0-1.0 if present | normalized ranking signal |'
+freshness_window_definition: "freshness_window:\n  review_after_days: 30\n  stale_after_days: 90\n  last_reviewed_at: 2026-04-16\n\
+  \  freshness_basis: observed_at_max"
+embedding_reference_definition: "embedding_ref:\n  model: text-embedding-3-large\n  dimension: 3072\n  vector_ref: vs://n04/knowledge/kr_rag_rerank_001\n\
+  \  generated_at: 2026-04-16T18:20:00Z"
+example: "knowledge_record:\n  record_id: kr_taxonomy_conflict_017\n  title: Taxonomy conflict between product and workflow\
+  \ labels\n  body: \"A retrieval gap appears when ecommerce docs use product_taxonomy while workflow docs use process_taxonomy...\"\
+  \n  summary: \"Cross-domain taxonomy mismatch harms recall.\"\n  signal_state: contested\n  provenance:\n    - source_id:\
+  \ src_framework_taxonomy\n      source_type: doc\n      confidence: 0.88\n      observed_at: 2026-04-12\n  taxonomy: [taxonomy,\
+  \ retrieval, drift]\n  freshness:\n    review_after_days: 14\n    stale_after_days: 45\n    last_reviewed_at: 2026-04-16\n\
+  \    freshness_basis: observed_at_max\n  retrieval_score_hint: 0.74\n  access_tier: internal_shared"
+rationale: '| Decision | Knowledge Gluttony interpretation | Operational effect |
+
+  |----------|----------------------------------|--------------------|
+
+  | keep both body and summary | N04 hoards full evidence and compressed recall forms | supports cheap previews and deep audits
+  |
+
+  | store freshness as object | hunger for facts must include hunger for recency context | stale detection becomes deterministic
+  |
+
+  | embedding kept as ref not vector inline | gluttony for metadata should not bloat the type with heavy payloads | storage
+  remains portable |
+
+  | taxonomy required | unlabeled knowledge is hard to retrieve and compare | better index partitioning |
+
+  | provenance list, not singleton | multiple witnesses beat one unchallenged claim | better confidence handling |'
+usage_surfaces: '| Consumer | Usage |
+
+  |----------|-------|
+
+  | input schema | validates raw intake before becoming this type |
+
+  | validators | enforce invariants on confidence and freshness |
+
+  | config | path, permission, and secret layers decide where and how records live |
+
+  | retrieval layer | scores and filters by state, freshness, and taxonomy |'
+properties: '| Property | Value |
+
+  |----------|-------|
+
+  | Type name | `knowledge_record` |
+
+  | Base type | object |
+
+  | Nullable | no |
+
+  | Required field count | 7 |
+
+  | Optional field count | 4 |
+
+  | Primary serialization | yaml |
+
+  | Secondary serialization | json |
+
+  | Reuse target | N04 ingestion, indexing, audit |
+
+  | Drift tolerance | low |
+
+  | Governance mode | validator enforced |'

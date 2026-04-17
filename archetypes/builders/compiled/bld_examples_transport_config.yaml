@@ -1,0 +1,76 @@
+kind: examples
+id: bld_examples_transport_config
+pillar: P07
+llm_function: GOVERN
+purpose: Golden and anti-examples of transport_config artifacts
+quality: null
+title: Examples Transport Config
+version: 1.1.0
+author: n04_hybrid_review2
+tags:
+- transport_config
+- builder
+- examples
+- webrtc
+- websocket
+- grpc
+tldr: Golden and anti-examples of transport_config artifacts
+domain: transport_config construction
+created: '2026-04-13'
+updated: '2026-04-13'
+density_score: 0.9
+golden_example_1_webrtc_media_transport: "---\nid: p09_tc_webrtc_media\nkind: transport_config\npillar: P09\ntitle: \"WebRTC\
+  \ Media Transport - Production\"\nversion: \"1.0.0\"\ntransport_type: webrtc\nprotocol: dtls-srtp\ncreated: \"2026-04-13\"\
+  \nauthor: \"n04\"\ndomain: \"video_conferencing\"\nquality: null\ntags: [transport_config, webrtc, dtls-srtp]\ntldr: \"\
+  WebRTC transport with STUN+TURN, max-bundle, DSCP QoS\"\n---\n\ntransport_type: webrtc\nprotocol: dtls-srtp\n\nice_servers:\n\
+  \  - urls: [\"stun:stun.example.com:3478\"]\n  - urls:\n      - \"turn:turn.example.com:3478?transport=udp\"\n      - \"\
+  turn:turn.example.com:5349?transport=tcp\"\n    username: \"alice\"\n    credential: \"${TURN_CREDENTIAL}\"\n\nice_transport_policy:\
+  \ \"all\"\nbundle_policy: \"max-bundle\"\nrtcp_mux_policy: \"require\"\ndtls_role: \"auto\"\n\nqos:\n  dscp_audio: 46  \
+  \    # EF for voice (<20ms jitter target)\n  dscp_video: 34      # AF41 for video\n  dscp_data: 0\n\ntls:\n  min_version:\
+  \ \"1.2\"\n  preferred_version: \"1.3\"\n  dtls_fingerprint_algorithm: \"sha-256\"\n\nnotes: \"Force relay with ice_transport_policy:\
+  \ relay in restrictive enterprise firewalls\""
+golden_example_2_websocket_event_stream: "---\nid: p09_tc_ws_events\nkind: transport_config\npillar: P09\ntitle: \"WebSocket\
+  \ Event Transport\"\nversion: \"1.0.0\"\ntransport_type: websocket\nprotocol: rfc6455\ncreated: \"2026-04-13\"\nauthor:\
+  \ \"n04\"\ndomain: \"realtime_api\"\nquality: null\ntags: [transport_config, websocket]\ntldr: \"WebSocket config with keepalive,\
+  \ compression, retry backoff\"\n---\n\ntransport_type: websocket\nprotocol: rfc6455\n\nendpoint: \"wss://api.example.com:443/events\"\
+  \nsubprotocols: [\"v4.json.example.com\"]\n\nkeepalive:\n  ping_interval_ms: 30000\n  ping_timeout_ms: 10000\n  max_missed_pings:\
+  \ 2\n\nframing:\n  max_message_size_bytes: 1048576\n  compression:\n    enabled: true\n    algorithm: \"permessage-deflate\"\
+  \n\ntls:\n  version: \"1.3\"\n  verify_peer: true\n\nreconnect:\n  initial_delay_ms: 1000\n  max_delay_ms: 30000\n  backoff_multiplier:\
+  \ 2.0\n  max_attempts: 10\n\nnotes: \"Subprotocol negotiated during Upgrade handshake via Sec-WebSocket-Protocol\""
+anti_example_1_webrtc_without_turn: "---\nid: p09_tc_stun_only\nkind: transport_config\ntransport_type: webrtc\n---\nice_servers:\n\
+  \  - urls: [\"stun:stun.l.google.com:19302\"]\n\nWhy it fails:\nSTUN-only configuration fails behind symmetric NAT (~15%\
+  \ of enterprise users). Without TURN\nrelay servers, connectivity checks will fail silently. H06 HARD gate REJECTS this\
+  \ config.\nAlways pair STUN with at least one TURN server."
+anti_example_2_websocket_without_message_size_limit: "---\nid: p09_tc_ws_no_limit\nkind: transport_config\ntransport_type:\
+  \ websocket\n---\nendpoint: \"wss://api.example.com/stream\"\nkeepalive:\n  ping_interval_ms: 30000\n\nWhy it fails:\nMissing\
+  \ `max_message_size_bytes`. A single WebSocket frame can be up to 2^63 bytes by protocol\nspec. Without a server-side limit,\
+  \ a malicious client can OOM the server with one message.\nAlso missing reconnect policy -- if the WSS connection drops,\
+  \ the client has no guidance on\nretry behavior."
+anti_example_3_session_state_pollution: '---
+
+  id: p09_tc_grpc_polluted
+
+  kind: transport_config
+
+  transport_type: grpc_streaming
+
+  ---
+
+  server_endpoint: "inference.example.com:443"
+
+  session_token: "Bearer eyJ..."
+
+  user_id: "user_123"
+
+  auth_callback_url: "https://auth.example.com/refresh"
+
+
+  Why it fails:
+
+  `session_token`, `user_id`, and `auth_callback_url` belong to `realtime_session` kind.
+
+  Transport config owns protocol parameters only. Session authentication and lifecycle are
+
+  a different boundary. Mixing them creates coupling that prevents session rotation without
+
+  transport config changes.'

@@ -51,10 +51,10 @@ linked_artifacts:
 | {{rule_2}} | {{when_triggered}} | {{what_happens}} | {{threshold}} |
 ## Decision Tree
 ```text
-{{input_condition}}
-  ├── {{branch_1}} -> {{outcome_1}}
-  ├── {{branch_2}} -> {{outcome_2}}
-  └── {{fallback}} -> {{default_outcome}}
+`{{input_condition}}`
+  ├── `{{branch_1}}` -> `{{outcome_1}}`
+  ├── `{{branch_2}}` -> `{{outcome_2}}`
+  └── `{{fallback}}` -> `{{default_outcome}}`
 ```
 ## Priorities
 1. {{highest_priority}} — {{rationale}}

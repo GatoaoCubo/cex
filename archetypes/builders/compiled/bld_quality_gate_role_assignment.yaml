@@ -1,0 +1,76 @@
+kind: quality_gate
+id: p11_qg_role_assignment
+pillar: P11
+llm_function: GOVERN
+purpose: Quality gate with HARD and SOFT scoring for role_assignment
+quality: null
+title: Quality Gate Role Assignment
+version: 1.0.0
+author: n03_wave8_builder
+tags:
+- role_assignment
+- builder
+- quality_gate
+- composable
+- crewai
+tldr: Quality gate with HARD and SOFT scoring for role_assignment
+domain: role_assignment construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.88
+definition: '| Metric | Threshold | Operator | Scope |
+
+  |---|---|---|---|
+
+  | Role binding resolvability | 100% | equals | All role_assignment artifacts |
+
+  | Tools-allowed subset validity | 100% | equals | vs. agent native toolkit |'
+hard_gates: '| ID | Check | Fail Condition |
+
+  |---|---|---|
+
+  | H01 | YAML frontmatter valid | Invalid YAML or missing required fields |
+
+  | H02 | ID matches ^p02_ra_[a-z][a-z0-9_]+\.md$ | ID pattern mismatch |
+
+  | H03 | kind field == ''role_assignment'' | Kind field incorrect or missing |
+
+  | H04 | agent_id resolves to .claude/agents/.md OR N0x/agents/ | Broken agent_id reference |
+
+  | H05 | role_name is snake_case | Non-snake_case role_name |
+
+  | H06 | tools_allowed is subset of agent native toolkit | Phantom tool in tools_allowed |
+
+  | H07 | delegation_policy.can_delegate_to uses role_names not agent_ids | agent_id leaked into delegation list |
+
+  | H08 | backstory present + goal present + measurable | Missing or vague goal/backstory |'
+soft_scoring: '| Dim | Dimension | Weight | Scoring Guide |
+
+  |---|---|---|---|
+
+  | D01 | Responsibility clarity (3-5 testable bullets) | 0.25 | All testable = 1.0, mixed = 0.5, vague = 0 |
+
+  | D02 | Backstory quality (CrewAI persona hook) | 0.20 | Domain-grounded = 1.0, generic = 0.5, absent = 0 |
+
+  | D03 | Goal measurability (outcome not activity) | 0.25 | Has threshold/check = 1.0, outcome-shaped = 0.5, activity = 0
+  |
+
+  | D04 | Tools-allowed precision (least-privilege) | 0.15 | Minimal subset = 1.0, broad = 0.5, wildcard = 0 |
+
+  | D05 | Delegation policy specificity | 0.15 | Conditions+roles = 1.0, roles only = 0.5, open = 0 |'
+actions: '| Score | Action |
+
+  |---|---|
+
+  | GOLDEN | >=9.5 | Auto-register as reusable role atom |
+
+  | PUBLISH | >=8.0 | Publish to role-assignment library |
+
+  | REVIEW | >=7.0 | Request peer review |
+
+  | REJECT | <7.0 | Rebuild per 8F F6 |'
+bypass: '| Conditions | Approver | Audit Trail |
+
+  |---|---|---|
+
+  | Temporary one-off role (research) | Nucleus lead | .cex/experiments/results.tsv |'

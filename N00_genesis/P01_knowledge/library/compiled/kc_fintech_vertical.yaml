@@ -1,0 +1,8 @@
+id: kc_fintech_vertical
+kind: knowledge_card
+title: Fintech Vertical
+version: 1.0.0
+quality: 4.0
+pillar: P01
+description: 'Fintech industry vertical: SOC2+PCI-DSS, KYC/AML, fraud detection, use cases'
+density_score: 1.0

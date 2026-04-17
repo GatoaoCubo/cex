@@ -2,7 +2,7 @@
 id: bld_knowledge_card_webhook
 kind: knowledge_card
 pillar: P06
-llm_function: CONTEXT
+llm_function: INJECT
 version: 1.0.0
 created: 2026-03-28
 updated: 2026-03-28
@@ -12,6 +12,7 @@ quality: 9.1
 tags: [knowledge_card, webhook, HMAC, signature, retry, idempotency, stripe, github, slack]
 tldr: "Domain knowledge: webhook patterns, HMAC-SHA256 verification, retry/backoff, idempotency, provider specifics (Stripe/GitHub/Slack/Twilio)."
 density_score: 1.0
+title: Knowledge Card ISO - webhook
 ---
 # Knowledge Card: webhook
 ## Core Concept

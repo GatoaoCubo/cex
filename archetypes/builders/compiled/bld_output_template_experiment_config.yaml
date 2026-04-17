@@ -1,0 +1,79 @@
+kind: output_template
+id: bld_output_template_experiment_config
+pillar: P05
+llm_function: PRODUCE
+purpose: Template with {{vars}} that the LLM fills to produce an experiment_config artifact
+pattern: every field here exists in SCHEMA.md -- template derives, never invents
+quality: null
+title: Output Template Experiment Config
+version: 1.0.0
+author: n03_builder
+tags:
+- experiment_config
+- builder
+- output_template
+- P09
+tldr: 'Fill-in template for experiment_config artifacts: frontmatter + 6 required body sections.'
+domain: experiment config construction
+created: '2026-04-13'
+updated: '2026-04-13'
+density_score: 0.9
+overview: '`{{what_is_being_tested_and_why_1_to_2_sentences}}` `{{what_decision_this_experiment_enables}}`'
+variants: '| Variant | Type | Description | Key Changes |
+
+  |---------|------|-------------|-------------|
+
+  | control | control | `{{baseline_description}}` | Baseline -- no changes |
+
+  | `{{treatment_1}}` | treatment | {{treatment_description}} | `{{parameter_changes}}` |
+
+  | `{{treatment_2_if_any}}` | treatment | {{treatment_description}} | `{{parameter_changes}}` |'
+traffic_split: '| Variant | Allocation | Segment |
+
+  |---------|-----------|---------|
+
+  | control | `{{pct}}`% | `{{segment}}` |
+
+  | `{{treatment_1}}` | {{pct}}% | `{{segment}}` |
+
+  Allocation total: 100%. `{{hold_out_rule_if_any}}`'
+metrics: ''
+primary_metric: '| Metric | Direction | Winning Threshold |
+
+  |--------|-----------|-------------------|
+
+  | `{{primary_metric}}` | {{higher_is_better|lower_is_better}} | {{e.g. +3pct vs control}} |'
+guardrail_metrics: '| Metric | Acceptable Limit | Action if Breached |
+
+  |--------|-----------------|-------------------|
+
+  | `{{guardrail_1}}` | {{e.g. p99_latency <= 500ms}} | `{{pause_experiment}}` |
+
+  | `{{guardrail_2}}` | {{e.g. error_rate < 1pct}} | `{{pause_experiment}}` |'
+statistical_parameters: '| Parameter | Value | Notes |
+
+  |-----------|-------|-------|
+
+  | Significance threshold | {{0.05}} | alpha = {{5pct}} |
+
+  | Min detectable effect | {{+2pct relative}} | `{{baseline_rate}}` |
+
+  | Sample size (per variant) | `{{N}}` | `{{power_calculation_method}}` |
+
+  | Duration | `{{N}}` days | `{{estimated_daily_samples}}` samples/day |'
+lifecycle: '| Field | Value |
+
+  |-------|-------|
+
+  | Status | {{draft|running|paused|concluded}} |
+
+  | Created | {{YYYY-MM-DD}} |
+
+  | Launch target | {{YYYY-MM-DD}} |
+
+  | Conclusion criteria | `{{statistical_significance_AND_min_runtime}}` |
+
+  | Decision owner | `{{team_or_role}}` |'
+references:
+- '`{{reference_1}}`'
+- '`{{reference_2}}`'

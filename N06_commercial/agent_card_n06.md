@@ -5,9 +5,10 @@ title: "N06 Agent Card -- Available Capabilities"
 nucleus: N06
 pillar: P01
 sin: Avareza Estrategica
-version: 1.0.0
-quality: 9.1
+version: 1.2.0
+quality: 8.9
 created: 2026-04-07
+updated: 2026-04-13
 density_score: 1.0
 ---
 
@@ -35,18 +36,19 @@ The lens is **monetization-first**: pricing is optimized, funnels are metrified,
 | Subdir | Count | What's There |
 |--------|------:|--------------|
 | `agents/` | 3 | `agent_commercial.md` — N06 agent identity, `axiom_commercial.md` — 12 immutable commercial laws, `mental_model_commercial.md` — decision routing + frameworks |
-| `architecture/` | 4 | `agent_card_commercial.md` — capability card, `pattern_brand_pipeline.md` — 6-stage brand pipeline, `pattern_pricing_framework.md` — value-based pricing, `pattern_funnel_architecture.md` — 5-stage conversion funnel |
-| `compiled/` | 19 | Auto-compiled YAML mirrors of source artifacts |
+| `architecture/` | 5 | `agent_card_commercial.md`, `integration_content_factory.md`, `pattern_brand_pipeline.md`, `pattern_pricing_framework.md`, `pattern_funnel_architecture.md` |
+| `compiled/` | 33 | Auto-compiled YAML mirrors of source artifacts |
 | `feedback/` | 1 | `quality_gate_commercial.md` — N06 quality gate |
-| `knowledge/` | 12 | Brand KCs: archetypes, book patterns, frameworks, monetization models, naming, propagation, tokens pipeline, voice systems, competitive positioning, ICP frameworks, + 2 knowledge cards |
+| `knowledge/` | 14 | Brand KCs: archetypes, book patterns, frameworks, monetization models, naming, propagation, tokens pipeline, voice systems, competitive positioning, ICP frameworks, + AI compliance, SaaS monetization, + 2 knowledge cards |
 | `memory/` | 3 | `brand_decisions_memory.md` — GDP decision log, `pricing_optimization_memory.md` — pricing experiments + metrics, `commercial_learning_record.md` — 10 lessons learned |
 | `orchestration/` | 4 | Dispatch rules + workflows for commercial & content monetization |
-| `output/` | 15 | Brand book, brand config, brand one-pager, brand voice guide, competitive map, content factory model, discovery report, monetization plan, pricing page, README pricing, SDK validation audit, transformation arc, visual identity, competitive business, self-review |
+| `output/` | 26 | Brand book, brand config, pricing pages, funnels (CEX + content factory), competitive analysis, monetization plans, visual identity, strategy docs, audits |
 | `prompts/` | 6 | Brand audit, brand book generator, brand config extractor, brand discovery interview, prompt template, system prompt |
 | `quality/` | 1 | `scoring_rubric_commercial.md` — commercial scoring |
-| `schemas/` | 4 | Brand audit schema, brand book schema, brand config schema, brand voice contract |
+| `reports/` | 3 | Self-audit reports (2026-04-11 x2, newpc 2026-04-12) |
+| `schemas/` | 5 | Brand audit, brand book, brand config, brand voice contract, content order input schema |
 | `tools/` | 3 | `content_monetization_tool.md` — monetization pipeline, `pricing_experiment_tool.md` — A/B testing framework, `funnel_diagnostic_tool.md` — leak detection + fix prioritization |
-| **TOTAL** | **74** | **55 source + 19 compiled** |
+| **TOTAL** | **107** | **74 source + 33 compiled** |
 
 ---
 
@@ -157,23 +159,34 @@ The lens is **monetization-first**: pricing is optimized, funnels are metrified,
 │  N06 Commercial Nucleus — Avareza Estratégica   │
 │  "Quanto RENDE cada decisão?"                   │
 ├─────────────────────────────────────────────────┤
-│  📦 55 source artifacts + 19 compiled = 74 total│
-│  🔧 2 dedicated builders + 9 cross-domain kinds │
-│  🛠️ 18 tools (5 brand + 11 system + 2 N06)     │
-│  🔌 6 MCP servers (Stripe, Hotmart, Canva, ...)│
-│  📚 12 domain KCs                               │
-│  📐 4 brand schemas                             │
-│  📝 6 prompts                                   │
-│  📊 15 output artifacts                         │
-│  🧠 3 memory artifacts (decisions, pricing, LR) │
-│  📏 12 commercial axioms                        │
-│  🧭 3 architecture patterns (brand, price, fun) │
+│  74 source artifacts + 33 compiled = 107 total  │
+│  2 dedicated builders + 9 cross-domain kinds    │
+│  18 tools (5 brand + 11 system + 2 N06)         │
+│  6 MCP servers (Stripe, Hotmart, Canva, ...)    │
+│  14 domain KCs                                  │
+│  5 brand schemas                                │
+│  6 prompts                                      │
+│  26 output artifacts                            │
+│  3 memory artifacts (decisions, pricing, LR)    │
+│  12 commercial axioms                           │
+│  3 architecture patterns + 1 integration        │
+│  3 reports (self-audits)                        │
 ├─────────────────────────────────────────────────┤
-│  ✅ Strengths: brand infra, payment MCPs,       │
+│  Strengths: brand infra, payment MCPs,          │
 │     knowledge depth, system propagation,        │
 │     commercial memory, pricing framework        │
-│  ⚠️ Remaining: dedicated builders, golden tests │
+│  Remaining: dedicated builders, golden tests,   │
+│     P11 guardrails, Stripe pkg fix              │
 └─────────────────────────────────────────────────┘
 ```
 
 **ROI of this agent card**: Self-awareness is free. Ignorance of capabilities costs missed revenue opportunities, duplicated work, and misrouted tasks. This agent card pays for itself every time N07 routes correctly to N06.
+
+## Boundary
+
+Contexto de dominio para hidratar prompts. NAO eh knowledge_card (sem density gate) nem glossary_entry (nao define termo).
+
+
+## 8F Pipeline Function
+
+Primary function: **INJECT**

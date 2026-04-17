@@ -1,0 +1,41 @@
+kind: instruction
+id: bld_instruction_product_tour
+pillar: P03
+llm_function: REASON
+purpose: Step-by-step production process for product_tour
+quality: null
+title: Instruction Product Tour
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- product_tour
+- builder
+- instruction
+tldr: Step-by-step production process for product_tour
+domain: product_tour construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+phase_1_research:
+- Conduct user interviews to identify pain points and feature discovery gaps.
+- Analyze competitor product tours for common patterns and usability benchmarks.
+- Map the product’s core workflow to determine optimal tour sequence and context.
+- Define trigger events (e.g., onboarding, feature first use) for tour activation.
+- Document technical constraints (e.g., supported frameworks, analytics integration).
+- Prioritize features for inclusion based on impact and user engagement potential.
+phase_2_compose:
+- Reference bld_schema_product_tour.md to structure tour metadata (id, name, version).
+- Define step order using `step_id`, `title`, `content`, and `target_element` fields.
+- Write tooltip content with concise, action-oriented language (max 2 sentences).
+- 'Assign trigger conditions (e.g., `user_first_time: true`, `feature_flag: enabled`).'
+- Specify visual styles (color, icon) per step in `style` block (see bld_output_template_product_tour.md).
+- Align tour with brand guidelines (tone, terminology, visual hierarchy).
+- Use bld_output_template_product_tour.md to populate `tour.yaml` with structured data.
+- Add analytics events for each step (e.g., `step_viewed`, `tooltip_closed`).
+- Validate YAML syntax and schema compliance with linter tools.
+phase_3_validate:
+- '[ ] All steps match bld_schema_product_tour.md requirements (required fields, data types).'
+- '[ ] Tooltip content aligns with user research and avoids jargon.'
+- '[ ] Triggers fire correctly in simulated environments (no false positives).'
+- '[ ] Visual design matches brand guidelines and is accessible (contrast, fonts).'
+- '[ ] End-to-end tour flows complete without errors in production preview.'

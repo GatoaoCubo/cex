@@ -1,5 +1,5 @@
 ---
-id: type-def-builder-config
+id: bld_config_type_def
 kind: config
 pillar: P09
 llm_function: CONSTRAIN

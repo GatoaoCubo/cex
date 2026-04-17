@@ -12,8 +12,8 @@ quality: 9.0
 tags: [quality-gate, formatter, output-format, transformation, P11]
 tldr: "Validates formatter artifacts: transform rule completeness, escaping strategy, null-field handling, and output example presence."
 density_score: 0.91
+llm_function: GOVERN
 ---
-
 # Gate: formatter
 ## Definition
 | Field     | Value |

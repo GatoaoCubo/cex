@@ -1,0 +1,27 @@
+kind: collaboration
+id: bld_collaboration_playground_config
+pillar: P12
+llm_function: COLLABORATE
+purpose: How playground_config-builder works in crews with other builders
+quality: null
+title: Collaboration Playground Config
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- playground_config
+- builder
+- collaboration
+tldr: How playground_config-builder works in crews with other builders
+domain: playground_config construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+crew_role: Configures playground environments by assembling spec-compliant settings, ensuring consistency across execution
+  contexts.
+receives_from: "| Builder       | What                  | Format      |  \n|---------------|-----------------------|-------------|\
+  \  \n| Spec Author   | Playground spec       | YAML        |  \n| Template Lib  | Config templates      | JSON        |\
+  \  \n| Env Manager   | Environment variables | Key-value   |"
+produces_for: "| Builder         | What                  | Format      |  \n|-----------------|-----------------------|-------------|\
+  \  \n| Execution Engine| Runtime config        | JSON        |  \n| UI Component    | Playground metadata   | Config file\
+  \ |  \n| Monitoring Sys  | Telemetry endpoints   | API spec    |"
+boundary: Does NOT enforce security isolation (handled by sandbox_spec) or build UIs (handled by interactive_demo).

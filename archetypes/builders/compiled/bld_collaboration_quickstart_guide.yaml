@@ -1,0 +1,28 @@
+kind: collaboration
+id: bld_collaboration_quickstart_guide
+pillar: P12
+llm_function: COLLABORATE
+purpose: How quickstart_guide-builder works in crews with other builders
+quality: null
+title: Collaboration Quickstart Guide
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- quickstart_guide
+- builder
+- collaboration
+tldr: How quickstart_guide-builder works in crews with other builders
+domain: quickstart_guide construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+crew_role: Creates concise, user-friendly quickstart guides that enable end-users to achieve first-value outcomes with minimal
+  friction. Collaborates with designers, engineers, and product managers to ensure accuracy and clarity.
+receives_from: "| Builder       | What                  | Format      |  \n|---------------|-----------------------|-------------|\
+  \  \n| Engineers     | Technical specifications | Markdown    |  \n| Designers     | UI/UX assets          | Figma     \
+  \  |  \n| Product Mgmt  | Feature requirements  | Comments    |"
+produces_for: "| Builder       | What                  | Format      |  \n|---------------|-----------------------|-------------|\
+  \  \n| Technical Writers | Guide drafts        | Markdown    |  \n| Designers     | Visual preview        | HTML       \
+  \ |  \n| Product Mgmt  | Summary for review    | Plain text  |"
+boundary: Does NOT handle integration details (handled by integration_guide-builder), code examples (handled by sdk_example-builder),
+  or localization (handled by localization-team).

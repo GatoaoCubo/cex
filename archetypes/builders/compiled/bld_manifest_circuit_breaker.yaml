@@ -1,0 +1,73 @@
+id: circuit-breaker-builder
+kind: type_builder
+pillar: P09
+parent: null
+domain: circuit_breaker
+llm_function: BECOME
+version: 1.0.0
+created: 2026-04-17
+updated: 2026-04-17
+author: builder_agent
+tags:
+- kind-builder
+- circuit-breaker
+- P09
+- resilience
+- hystrix
+- resilience4j
+- fault-tolerance
+keywords:
+- circuit breaker
+- fault tolerance
+- resilience
+- cooldown
+- half-open
+- hystrix
+- resilience4j
+- trip threshold
+- recovery
+triggers:
+- create circuit breaker
+- configure fault tolerance
+- add resilience pattern
+- circuit breaker config
+- auto-disable failing dependency
+capabilities:
+- 'Define failure_rate_threshold: percentage of failures that trips the breaker'
+- 'Configure sliding_window: count-based or time-based failure tracking'
+- 'Set cooldown_duration: how long to stay open before attempting recovery'
+- 'Define probe_count: number of half-open test requests before closing'
+- 'Specify fallback_response: what to return while circuit is open'
+- 'Map monitored_exceptions: which error types count as failures'
+- Validate artifact against quality gates
+- Distinguish circuit_breaker from rate_limit_config, fallback_chain, runtime_rule
+quality: 7.6
+title: Manifest Circuit Breaker
+tldr: Builds circuit_breaker artifacts -- resilience pattern that auto-disables failing dependencies and allows recovery after
+  cooldown.
+density_score: 0.9
+identity: Specialist in building circuit_breaker artifacts -- resilience configurations that auto-disable failing downstream
+  dependencies and allow recovery after a cooldown period. Grounded in the Hystrix and Resilience4j implementations. Masters
+  state machine design (closed/open/half-open), failure rate thresholds, sliding window types, and the boundary between circuit_breaker
+  (dependency failure) and rate_limit_config (inbound throttle) and fallback_chain (ordered provider fallback).
+properties: '| Property | Value |
+
+  |----------|-------|
+
+  | Kind | `type_builder` |
+
+  | Pillar | P09 |
+
+  | Domain | circuit_breaker |
+
+  | Pipeline | 8F (F1-F8) |
+
+  | Scorer | cex_score.py |
+
+  | Compiler | cex_compile.py |
+
+  | Retriever | cex_retriever.py |
+
+  | Quality target | 9.0+ |
+
+  | Density target | 0.85+ |'

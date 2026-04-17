@@ -1,0 +1,208 @@
+kind: instruction
+id: bld_instruction_conformity_assessment
+pillar: P03
+llm_function: REASON
+purpose: Step-by-step build instructions for producing an EU AI Act Annex-IV conformity assessment artifact
+quality: null
+title: Conformity Assessment Builder -- Instruction
+version: 1.0.0
+author: wave7_n05
+tags:
+- conformity_assessment
+- builder
+- instruction
+tldr: 'Three-phase build protocol: RESEARCH, COMPOSE, VALIDATE for Annex-IV conformity packages'
+domain: conformity_assessment construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+overview: 'This instruction governs the 8F production of a `conformity_assessment` artifact under the EU-AI-Act. Target: high-risk
+  AI systems as defined by Annex-III, following the conformity procedure in Article-43. Deadline: Aug-2026 for existing high-risk
+  systems entering the market.'
+phase_1_research_f1_f3: ''
+step_1_1_identify_system_type_f1_constrain: '| Action | Detail |
+
+  |--------|--------|
+
+  | Load schema | bld_schema_conformity_assessment.md |
+
+  | Confirm kind | conformity_assessment |
+
+  | Identify Annex-III category | Biometrics / Critical infrastructure / Education / Employment / Essential services / Law
+  enforcement / Migration / Administration of justice / Democratic processes |
+
+  | Confirm Article-43 route | Internal conformity check (Annex VI) or notified body (Annex VII) |
+
+  | Flag Aug-2026 deadline | Mark all items required before Aug-2026 |
+
+
+  Annex-III categories that require notified body:
+
+  - Biometric identification (real-time remote, Art. 43(1)(a))
+
+  - Prohibited use exceptions reviewed by authority
+
+
+  All other high-risk categories: internal conformity check per Annex VI unless notified body elected.'
+step_1_2_enumerate_rms_records_f3_inject: 'Collect evidence for the risk-management-system (RMS) per EU-AI-Act Article 9:
+
+
+  | RMS Component | Evidence Type | Required? |
+
+  |---------------|---------------|-----------|
+
+  | Risk identification process | Process doc, SOP | MANDATORY |
+
+  | Risk estimation and evaluation | Risk register | MANDATORY |
+
+  | Risk mitigation measures | Control catalog | MANDATORY |
+
+  | Residual risk evaluation | Residual risk log | MANDATORY |
+
+  | Post-deployment risk review cadence | Schedule doc | MANDATORY |
+
+  | RMS version and update history | Change log | MANDATORY |'
+step_1_3_gather_data_governance_evidence_f3_inject: 'Data-governance provisions per Article 10:
+
+
+  | Requirement | Evidence |
+
+  |-------------|----------|
+
+  | Training data description | Dataset cards or data sheets |
+
+  | Validation/test data description | Evaluation dataset docs |
+
+  | Data quality criteria | Data quality SOP |
+
+  | Bias examination and mitigation | Bias audit report |
+
+  | Dataset known limitations | Limitation registry |
+
+  | Data provenance records | Lineage documentation |'
+step_1_4_collect_human_oversight_documentation_f3_inject: 'Human-oversight measures per Article 14:
+
+
+  | Measure | Evidence |
+
+  |---------|----------|
+
+  | Override capability | System architecture doc showing manual override |
+
+  | Interpretability support | Explainability report or XAI tool description |
+
+  | Operator training materials | Training curriculum and completion records |
+
+  | Monitoring dashboard specification | Dashboard spec or screenshot |
+
+  | Alerting on anomalies | Alert configuration docs |'
+step_1_5_compile_post_market_monitoring_data_f3_inject: 'Post-market-monitoring plan per Article 72:
+
+
+  | Component | Evidence |
+
+  |-----------|----------|
+
+  | Monitoring objectives and KPIs | Monitoring plan document |
+
+  | Data collection method | Telemetry or feedback pipeline spec |
+
+  | Serious incident reporting procedure | SIR SOP (Art. 73) |
+
+  | Periodic review schedule | Review calendar |
+
+  | Threshold for corrective action | Defined thresholds table |'
+phase_2_compose_f4_f6: ''
+step_2_1_plan_annex_iv_sections_f4_reason: 'Annex IV requires 7 categories of technical documentation:
+
+
+  | # | Category | Key Articles |
+
+  |---|----------|-------------|
+
+  | 1 | General description of the AI system | Art. 11, Annex IV(1) |
+
+  | 2 | Detailed description of elements and development process | Annex IV(2) |
+
+  | 3 | Monitoring, functioning, and control | Annex IV(3) |
+
+  | 4 | Risk management system | Art. 9, Annex IV(4) |
+
+  | 5 | Changes to the system through its lifecycle | Annex IV(5) |
+
+  | 6 | Standards and specifications applied | Annex IV(6) |
+
+  | 7 | EU declaration of conformity | Art. 47, Annex IV(7) |'
+step_2_2_map_risk_controls_to_eu_ai_act_articles_f4_reason: '| Control Domain | Article | Annex IV Section |
+
+  |----------------|---------|-----------------|
+
+  | RMS process | Art. 9 | 4 |
+
+  | Data governance | Art. 10 | 2 |
+
+  | Technical documentation | Art. 11 | All |
+
+  | Record-keeping | Art. 12 | 3 |
+
+  | Transparency to deployers | Art. 13 | 1 |
+
+  | Human-oversight | Art. 14 | 3 |
+
+  | Accuracy, robustness, cybersecurity | Art. 15 | 2 |
+
+  | Post-market-monitoring | Art. 72 | 5 |
+
+  | Serious incident reporting | Art. 73 | 5 |'
+step_2_3_document_accuracy_robustness_cybersecurity_f6_produce: 'Per Article 15:
+
+
+  | Metric | Minimum Documentation |
+
+  |--------|-----------------------|
+
+  | Accuracy metrics | Metric name, threshold, test dataset, achieved value |
+
+  | Robustness measures | Adversarial test results, fallback behavior spec |
+
+  | Cybersecurity controls | Threat model reference, penetration test summary |
+
+  | Performance degradation handling | Graceful degradation procedure |'
+step_2_4_generate_output_artifact_f6_produce: Use bld_output_template_conformity_assessment.md. Populate all placeholders.
+  Do NOT leave any [PLACEHOLDER] unfilled. Cite Annex-IV section numbers for every claim. Flag items with "AUG-2026-DEADLINE"
+  where applicable.
+phase_3_validate_f7_govern: ''
+step_3_1_completeness_checklist: '| Item | Check |
+
+  |------|-------|
+
+  | All 7 Annex-IV categories present | [ ] |
+
+  | Annex-III category specified | [ ] |
+
+  | Article-43 procedure identified | [ ] |
+
+  | RMS section complete (5 sub-components) | [ ] |
+
+  | Data-governance section complete | [ ] |
+
+  | Human-oversight section complete | [ ] |
+
+  | Accuracy/robustness/cybersecurity documented | [ ] |
+
+  | Post-market-monitoring plan present | [ ] |
+
+  | Aug-2026 deadline items flagged | [ ] |
+
+  | Provider name and contact included | [ ] |
+
+  | Notified body ID (if applicable) | [ ] |
+
+  | Declaration date included | [ ] |'
+step_3_2_quality_gate: 'Run bld_quality_gate_conformity_assessment.md checks. Minimum score: 8.0 to proceed. Target: 9.0+.
+  If FAIL: return to Phase 2, address failing gates, re-validate.'
+step_3_3_compile_and_signal_f8_collaborate: 'python _tools/cex_compile.py {path}
+
+  python -c "from _tools.signal_writer import write_signal; write_signal(''n03'', ''complete'', 9.0)"
+
+  git add {path} && git commit -m "[N03] conformity_assessment: {system_name}"'

@@ -1,0 +1,66 @@
+id: input_schema_checkout
+kind: input_schema
+pillar: P06
+nucleus: n06
+title: Input Schema -- Checkout and Order Flow Contract
+version: 1.0.0
+quality: null
+tags:
+- checkout
+- order
+- schema
+- payment
+- commercial
+- contract
+density_score: 1.0
+purpose: Defines the canonical data contract for all checkout and order-creation flows in N06's commercial pipeline. Every
+  pricing page, cart, and payment handler MUST validate against this schema before processing.
+schema_definition: "{\n  \"$schema\": \"https://json-schema.org/draft/2020-12/schema\",\n  \"$id\": \"checkout_order_flow_v1\"\
+  ,\n  \"title\": \"Checkout Order Flow\",\n  \"type\": \"object\",\n  \"required\": [\"product\", \"customer\", \"payment_method\"\
+  , \"price\"],\n  \"properties\": {\n    \"product\": {\n      \"type\": \"object\",\n      \"required\": [\"id\", \"name\"\
+  , \"plan_tier\", \"billing_cycle\"],\n      \"properties\": {\n        \"id\": { \"type\": \"string\", \"pattern\": \"^prod_[A-Za-z0-9]+$\"\
+  \ },\n        \"name\": { \"type\": \"string\", \"minLength\": 1, \"maxLength\": 200 },\n        \"plan_tier\": { \"$ref\"\
+  : \"#/$defs/plan_tier\" },\n        \"billing_cycle\": { \"enum\": [\"monthly\", \"annual\", \"lifetime\", \"one_time\"\
+  ] },\n        \"quantity\": { \"type\": \"integer\", \"minimum\": 1, \"default\": 1 },\n        \"addons\": {\n        \
+  \  \"type\": \"array\",\n          \"items\": { \"$ref\": \"#/$defs/addon\" }\n        }\n      }\n    },\n    \"customer\"\
+  : {\n      \"type\": \"object\",\n      \"required\": [\"email\"],\n      \"properties\": {\n        \"id\": { \"type\"\
+  : \"string\", \"description\": \"Existing customer ID if returning\" },\n        \"email\": { \"type\": \"string\", \"format\"\
+  : \"email\" },\n        \"name\": { \"type\": \"string\" },\n        \"company\": { \"type\": \"string\" },\n        \"\
+  country\": { \"type\": \"string\", \"pattern\": \"^[A-Z]{2}$\" },\n        \"tax_id\": { \"type\": \"string\", \"description\"\
+  : \"VAT/EIN for B2B invoicing\" }\n      }\n    },\n    \"payment_method\": {\n      \"type\": \"object\",\n      \"required\"\
+  : [\"provider\"],\n      \"properties\": {\n        \"provider\": { \"enum\": [\"stripe\", \"paypal\", \"pix\", \"bank_transfer\"\
+  , \"crypto\"] },\n        \"token\": { \"type\": \"string\", \"description\": \"Provider payment token (e.g., Stripe pm_*)\"\
+  \ },\n        \"save_for_future\": { \"type\": \"boolean\", \"default\": false }\n      }\n    },\n    \"price\": {\n  \
+  \    \"type\": \"object\",\n      \"required\": [\"currency\", \"amount_cents\"],\n      \"properties\": {\n        \"currency\"\
+  : { \"type\": \"string\", \"pattern\": \"^[A-Z]{3}$\" },\n        \"amount_cents\": { \"type\": \"integer\", \"minimum\"\
+  : 0 },\n        \"discount_code\": { \"type\": \"string\" },\n        \"discount_percent\": { \"type\": \"number\", \"minimum\"\
+  : 0, \"maximum\": 100 },\n        \"tax_amount_cents\": { \"type\": \"integer\", \"minimum\": 0 },\n        \"trial_days\"\
+  : { \"type\": \"integer\", \"minimum\": 0, \"default\": 0 }\n      }\n    },\n    \"metadata\": {\n      \"type\": \"object\"\
+  ,\n      \"properties\": {\n        \"utm_source\": { \"type\": \"string\" },\n        \"utm_medium\": { \"type\": \"string\"\
+  \ },\n        \"utm_campaign\": { \"type\": \"string\" },\n        \"referral_code\": { \"type\": \"string\" },\n      \
+  \  \"affiliate_id\": { \"type\": \"string\" }\n      }\n    }\n  },\n  \"$defs\": {\n    \"plan_tier\": { \"enum\": [\"\
+  free\", \"starter\", \"pro\", \"enterprise\", \"custom\"] },\n    \"addon\": {\n      \"type\": \"object\",\n      \"required\"\
+  : [\"id\", \"name\", \"price_cents\"],\n      \"properties\": {\n        \"id\": { \"type\": \"string\" },\n        \"name\"\
+  : { \"type\": \"string\" },\n        \"price_cents\": { \"type\": \"integer\", \"minimum\": 0 }\n      }\n    }\n  }\n}"
+validation_rules: '| Field | Rule | Error Code |
+
+  |-------|------|-----------|
+
+  | product.id | Must match `prod_*` pattern | E001_INVALID_PRODUCT_ID |
+
+  | customer.email | Valid RFC 5321 email | E002_INVALID_EMAIL |
+
+  | price.amount_cents | Non-negative integer | E003_INVALID_AMOUNT |
+
+  | payment_method.provider | From allowed enum | E004_UNSUPPORTED_PROVIDER |
+
+  | price.currency | ISO 4217 3-letter code | E005_INVALID_CURRENCY |
+
+  | price.discount_percent | 0-100 range | E006_INVALID_DISCOUNT |'
+integration_points:
+- Pricing page -> validates before Stripe session creation
+- API endpoint `POST /checkout/create` -> validates request body
+- Webhook handler -> validates reconstructed order on event replay
+- Referral system -> reads `metadata.referral_code` for attribution
+revenue_intelligence_notes: Track `metadata.utm_*` fields to measure channel ROI. `referral_code` attribution feeds into referral_program
+  payout calculation. `trial_days > 0` triggers churn_prevention_playbook activation at day `trial_days - 3`.

@@ -162,7 +162,7 @@ top_30_universal_kcs_non_branded_knowledge: 'LLM Patterns (move to P01_knowledge
   - Anti-Pattern (generic)
 
 
-  Operations Patterns (move to N05/knowledge/):
+  Operations Patterns (move to N05/P01_knowledge/):
 
   - Zero Touch Execution Patterns
 
@@ -175,7 +175,7 @@ top_30_universal_kcs_non_branded_knowledge: 'LLM Patterns (move to P01_knowledge
   - Production Monitoring Alerting
 
 
-  Orchestration Patterns (move to N07/knowledge/ or P12):
+  Orchestration Patterns (move to N07/P01_knowledge/ or P12):
 
   - Orchestration Coordination Patterns
 

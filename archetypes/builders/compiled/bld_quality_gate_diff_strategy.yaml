@@ -1,0 +1,74 @@
+kind: quality_gate
+id: p04_qg_diff_strategy
+pillar: P11
+llm_function: GOVERN
+purpose: Quality gate with HARD and SOFT scoring for diff_strategy
+quality: null
+title: Quality Gate Diff Strategy
+version: 1.1.0
+author: n06_audit_hybrid_review2
+tags:
+- diff_strategy
+- builder
+- quality_gate
+tldr: Quality gate enforcing algorithm specificity, patch correctness, and edge-case coverage for code diff artifacts
+domain: diff_strategy construction
+created: '2026-04-13'
+updated: '2026-04-13'
+density_score: 0.9
+definition: '| metric        | threshold | operator | scope                            |
+
+  |---------------|-----------|----------|----------------------------------|
+
+  | patch_accuracy| 99.0%     | >=       | Patch applies cleanly to target  |
+
+  | algorithm_named | true    | ==       | Named algorithm required         |
+
+  | edge_cases_min | 3        | >=       | Empty diff, binary, encoding     |'
+hard_gates: '| ID  | Check                   | Fail Condition                                          |
+
+  |-----|-------------------------|---------------------------------------------------------|
+
+  | H01 | YAML valid              | Invalid YAML syntax                                     |
+
+  | H02 | ID matches pattern      | ID does not match `p04_ds_[a-zA-Z0-9_-]+`              |
+
+  | H03 | kind = diff_strategy    | kind field absent or wrong value                        |
+
+  | H04 | algorithm_type present  | Field missing or not in [Myers, LCS, patience, histogram, Ratcliff-Obershelp, custom]
+  |
+
+  | H05 | granularity defined     | Field missing or not in [line, token, character, AST, semantic] |
+
+  | H06 | patch correctness test  | No test case demonstrating correct patch application    |
+
+  | H07 | edge cases documented   | Fewer than 3 edge cases (empty diff, binary file, encoding mismatch) |'
+soft_scoring: '| Dim | Dimension               | Weight | Scoring Guide                                             |
+
+  |-----|-------------------------|--------|-----------------------------------------------------------|
+
+  | D1  | Algorithm justification | 0.20   | 1.0 = named algo with complexity analysis; 0.0 = generic |
+
+  | D2  | Patch correctness       | 0.25   | 1.0 = idempotent, reversible patches; 0.0 = destructive  |
+
+  | D3  | Performance budget      | 0.15   | 1.0 = O(ND) or better cited; 0.0 = no complexity claim   |
+
+  | D4  | Edge case coverage      | 0.20   | 1.0 = 5+ named edge cases with handling; 0.0 = none      |
+
+  | D5  | Tool integration        | 0.20   | 1.0 = difflib/git-apply/patch cited; 0.0 = fictional tools|'
+score_thresholds: '| Score  | Action                                                       |
+
+  |--------|--------------------------------------------------------------|
+
+  | >= 9.0 | GOLDEN -- publish to library                                 |
+
+  | 8.0-9.0| PUBLISH -- peer review before publish                        |
+
+  | 6.0-8.0| REVIEW -- fix algorithm gaps, resubmit                       |
+
+  | < 6.0  | REJECT -- rebuild; missing core algorithm or wrong domain    |'
+bypass: '| Condition                          | Approver | Audit Trail                      |
+
+  |------------------------------------|----------|----------------------------------|
+
+  | Emergency patch rollback           | N07      | "Emergency patch rollback"       |'

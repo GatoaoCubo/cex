@@ -1,0 +1,4 @@
+name: saga-builder
+description: Builds ONE saga artifact via 8F pipeline. Loads saga-builder specs. Produces draft with frontmatter + body. Never
+  self-scores quality.
+tools: Read, Write, Edit, Bash, Glob, Grep

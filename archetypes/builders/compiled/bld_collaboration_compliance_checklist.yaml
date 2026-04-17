@@ -1,0 +1,28 @@
+kind: collaboration
+id: bld_collaboration_compliance_checklist
+pillar: P12
+llm_function: COLLABORATE
+purpose: How compliance_checklist-builder works in crews with other builders
+quality: null
+title: Collaboration Compliance Checklist
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- compliance_checklist
+- builder
+- collaboration
+tldr: How compliance_checklist-builder works in crews with other builders
+domain: compliance_checklist construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+crew_role: Coordinates creation of audit-specific compliance checklists, ensuring alignment with regulatory requirements and
+  organizational policies.
+receives_from: "| Builder       | What                  | Format      |  \n|---------------|-----------------------|-------------|\
+  \  \n| Compliance Officer | Regulatory updates  | Document    |  \n| Auditor       | Scope of audit        | Form      \
+  \  |  \n| Legal Team    | Policy changes        | Email       |"
+produces_for: "| Builder       | What                  | Format      |  \n|---------------|-----------------------|-------------|\
+  \  \n| Compliance Officer | Final checklist     | PDF         |  \n| Auditor       | Executable checklist  | Shared Doc\
+  \  |  \n| Management    | Review summary        | Dashboard   |"
+boundary: Does NOT enforce runtime compliance or define safety policies. Guardrail checks and behavioral policies are handled
+  by dedicated guardrail_checker and safety_policy_enforcer builders.

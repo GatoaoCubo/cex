@@ -1,0 +1,73 @@
+---
+kind: quality_gate
+id: p05_qg_press_release
+pillar: P11
+llm_function: GOVERN
+purpose: Define hard gates and soft scoring dimensions for press_release quality enforcement
+quality: 9.1
+title: "Press Release Quality Gate"
+version: "1.0.0"
+author: n02_wave6
+tags: [press_release, builder, quality_gate]
+tldr: "8 hard gates and 5 scored dimensions; minimum 8.0 to publish, 9.5 for golden status"
+domain: "press_release construction"
+created: "2026-04-14"
+updated: "2026-04-14"
+density_score: 0.85
+---
+
+## Definition
+
+| Property | Value |
+|---|---|
+| Kind | press_release |
+| Pillar | P05 |
+| Scorer | cex_score.py |
+| Quality floor | 8.0 (PUBLISH threshold) |
+| Quality target | 9.0 |
+| Golden threshold | 9.5 |
+| Max retries | 2 (return to F6 PRODUCE) |
+
+## HARD Gates (all must pass; one failure = REJECT)
+
+| Gate | ID | Check | Pass condition | Failure action |
+|---|---|---|---|---|
+| YAML valid | H01 | Frontmatter parses without error | No YAML syntax errors | Fix frontmatter, re-run |
+| ID pattern | H02 | ID matches regex | ^p05_pr_[a-z][a-z0-9_]+.md$ | Rename artifact |
+| Kind correct | H03 | kind field value | kind == "press_release" | Correct kind |
+| Headline | H04 | Headline present, character count | Present AND <= 80 chars | Shorten or add headline |
+| Dateline | H05 | Dateline format | City in CAPS + AP state abbr + date | Fix dateline format |
+| Lede 5Ws | H06 | Lede answers who/what/when/where/why | All 5 Ws detectable in lede | Rewrite lede |
+| Boilerplate | H07 | "About [Company]:" section present | Section exists with content | Add boilerplate |
+| Contact block | H08 | Media contact has email | Email field present and formatted | Add contact email |
+
+## SOFT Scoring (5 dimensions, weighted to 1.0)
+
+| Dimension | ID | Weight | What is scored | 10/10 example |
+|---|---|---|---|---|
+| AP style adherence | D01 | 0.25 | Style compliance: attribution verb, number rules, title format, date format, no Oxford comma | Zero AP violations; "said" used; titles before names |
+| Headline quality | D02 | 0.25 | Hook strength, active voice, specificity, keyword relevance | Active verb, concrete number or name, no puffery |
+| Quote authenticity | D03 | 0.20 | Attribution completeness, quote naturalness, avoidance of marketing-speak | Full name + title + "said"; quote sounds like a human said it |
+| Boilerplate completeness | D04 | 0.15 | Company description, third person, present tense, 50-100 words | Covers: what company does, founded when, key differentiator |
+| Contact block completeness | D05 | 0.15 | Name, title, email, phone all present | All four fields, phone with area code |
+
+Score formula: (D01 x 0.25) + (D02 x 0.25) + (D03 x 0.20) + (D04 x 0.15) + (D05 x 0.15) = score out of 10.
+
+## Actions by Score
+
+| Score range | Status | Action |
+|---|---|---|
+| >= 9.5 | GOLDEN | Archive as exemplar in bld_examples_press_release.md |
+| >= 8.0 | PUBLISH | Approved for wire service submission |
+| >= 7.0 | REVIEW | Return to human editor for revision pass |
+| < 7.0 | REJECT | Return to F6 PRODUCE (max 2 retries) |
+
+## Bypass Table
+
+| Bypass condition | Allowed | Notes |
+|---|---|---|
+| User waives embargo line | YES | User must explicitly confirm "FOR IMMEDIATE RELEASE" intent |
+| User waives phone in contact | YES | Email-only contact acceptable if user confirms |
+| Headline exceeds 80 chars | NO | Hard gate, no bypass permitted |
+| Missing boilerplate | NO | Hard gate, no bypass permitted |
+| Missing lede 5Ws | NO | Hard gate, no bypass permitted |

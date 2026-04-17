@@ -1,0 +1,56 @@
+---
+kind: quality_gate
+id: p11_qg_gpai_technical_doc
+pillar: P11
+llm_function: GOVERN
+purpose: Quality gate with HARD and SOFT scoring for gpai_technical_doc
+quality: 9.0
+title: "Quality Gate GPAI Technical Doc"
+version: "1.0.0"
+author: n01_wave7
+tags: [gpai_technical_doc, builder, quality_gate, GPAI, EU-AI-Act, Annex-IV, Article-53, training-data, compute-budget, downstream-limit, technical-documentation]
+tldr: "Quality gate with HARD and SOFT scoring for gpai_technical_doc"
+domain: "gpai_technical_doc construction"
+created: "2026-04-14"
+updated: "2026-04-14"
+density_score: 0.85
+---
+
+## Definition
+| Metric | Threshold | Operator | Scope |
+|--------|-----------|----------|-------|
+| Annex IV field completeness | 100% | equals | All 8 required Annex IV sections |
+
+## HARD Gates
+| ID | Check | Fail Condition |
+|----|-------|---------------|
+| H01 | YAML frontmatter valid | Invalid YAML syntax or missing required fields |
+| H02 | ID matches pattern ^p11_gpai_[a-z][a-z0-9_]+\.md$ | ID format mismatch |
+| H03 | kind field equals 'gpai_technical_doc' | Kind field incorrect or missing |
+| H04 | provider field present with legal entity name | Missing or informal provider name (brand only) |
+| H05 | Training data section includes dataset names and volumes | Vague training data description without specifics |
+| H06 | Compute budget expressed in FLOP or GPU/TPU-hours | Missing or narrative compute description |
+| H07 | Energy consumption includes MWh and CO2-eq | Missing energy data (mandatory Annex IV field) |
+| H08 | Downstream-limit clauses list specific prohibited uses | Generic "no harmful use" clause without enumeration |
+
+## SOFT Scoring
+| Dim | Dimension | Weight | Scoring Guide |
+|-----|-----------|--------|--------------|
+| D01 | Training data completeness (datasets, volumes, governance) | 0.25 | All 3 sub-fields = 1.0, 2 = 0.7, 1 = 0.3, none = 0 |
+| D02 | Evaluation results quality (benchmarks + methodology) | 0.25 | >= 3 benchmarks with methodology = 1.0, 1-2 = 0.5, none = 0 |
+| D03 | Energy reporting rigor (MWh + CO2-eq + methodology) | 0.20 | All 3 present = 1.0, 2 = 0.6, 1 = 0.3, none = 0 |
+| D04 | Downstream-limit specificity | 0.15 | >= 5 specific prohibited uses = 1.0, 1-4 = 0.5, generic = 0 |
+| D05 | Document versioning and submission tracking | 0.15 | submission_date + version present = 1.0, partial = 0.5 |
+
+## Actions
+| Score | Action |
+|-------|--------|
+| GOLDEN | >= 9.5 | Cleared for EU AI Office submission |
+| PUBLISH | >= 8.0 | Submit after final legal review |
+| REVIEW | >= 7.0 | Return to compliance team for revision |
+| REJECT | < 7.0 | Reject -- insufficient for EU AI Office submission |
+
+## Bypass
+| Condition | Approver | Audit Trail |
+|-----------|---------|-------------|
+| Interim submission (partial doc accepted by EU AI Office) | DPO + Legal Counsel | Interim submission reference number |

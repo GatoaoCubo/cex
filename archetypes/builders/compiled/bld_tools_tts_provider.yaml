@@ -1,0 +1,30 @@
+kind: tools
+id: bld_tools_tts_provider
+pillar: P04
+llm_function: CALL
+purpose: Tools available for tts_provider production
+quality: null
+title: Tools Tts Provider
+version: 1.0.0
+author: wave1_builder_gen
+tags:
+- tts_provider
+- builder
+- tools
+tldr: Tools available for tts_provider production
+domain: tts_provider construction
+created: '2026-04-13'
+updated: '2026-04-13'
+density_score: 0.85
+production_tools: "| Tool | Purpose | When |  \n|------|---------|------|  \n| cex_compile.py | Compiles TTS models into deployable\
+  \ formats | Pre-deployment |  \n| cex_score.py | Evaluates TTS quality using MOS and latency metrics | Post-training | \
+  \ \n| cex_retriever.py | Fetches training data from external repositories | Model development |  \n| cex_doctor.py | Diagnoses\
+  \ model inconsistencies and errors | Debugging |  \n| cex_optimizer.py | Optimizes model parameters for performance | Fine-tuning\
+  \ |"
+validation_tools: "| Tool | Purpose | When |  \n|------|---------|------|  \n| val_accuracy_checker.py | Validates alignment\
+  \ between text and audio | Testing |  \n| val_compliance_checker.py | Ensures adherence to linguistic and legal standards\
+  \ | Deployment |  \n| val_stress_tester.py | Simulates high-load scenarios for robustness | QA |"
+external_references:
+- 'TensorFlow Text: For text processing pipelines'
+- 'PyTorch Audio: For audio signal handling'
+- 'Mozilla TTS: Open-source TTS framework for reference implementation'

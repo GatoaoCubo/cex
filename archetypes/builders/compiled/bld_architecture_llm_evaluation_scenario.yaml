@@ -1,0 +1,78 @@
+kind: architecture
+id: bld_architecture_llm_evaluation_scenario
+pillar: P08
+llm_function: CONSTRAIN
+purpose: Component map of llm_evaluation_scenario -- inventory, dependencies
+quality: null
+title: Architecture LLM Evaluation Scenario
+version: 1.0.0
+author: n06_wave7
+tags:
+- llm_evaluation_scenario
+- builder
+- architecture
+- helm
+tldr: Component map of llm_evaluation_scenario -- inventory, dependencies
+domain: llm_evaluation_scenario construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+component_inventory: '| ISO Name                | Role                              | Pillar | Status |
+
+  |-------------------------|-----------------------------------|--------|--------|
+
+  | bld_manifest            | Builder identity, routing         | P07    | Active |
+
+  | bld_instruction         | Production process (3-phase)      | P03    | Active |
+
+  | bld_system_prompt       | LLM persona and rules             | P03    | Active |
+
+  | bld_schema              | Frontmatter + body structure      | P06    | Active |
+
+  | bld_quality_gate        | HARD gates + SOFT scoring         | P11    | Active |
+
+  | bld_output_template     | Parameterized scenario template   | P05    | Active |
+
+  | bld_examples            | Golden + anti-examples            | P07    | Active |
+
+  | bld_knowledge_card      | HELM domain knowledge             | P01    | Active |
+
+  | bld_architecture        | Component map + dependencies      | P08    | Active |
+
+  | bld_collaboration       | Crew workflow + boundaries        | P12    | Active |
+
+  | bld_config              | Naming, paths, limits             | P09    | Active |
+
+  | bld_memory              | Learned patterns + pitfalls       | P10    | Active |
+
+  | bld_tools               | Production + validation tools     | P04    | Active |'
+dependencies: '| From                  | To                        | Type          |
+
+  |-----------------------|---------------------------|---------------|
+
+  | bld_output_template   | bld_schema                | dependency    |
+
+  | bld_quality_gate      | bld_schema                | validation    |
+
+  | bld_quality_gate      | bld_examples              | validation    |
+
+  | bld_instruction       | bld_system_prompt         | dependency    |
+
+  | bld_manifest          | bld_config                | configuration |
+
+  | bld_collaboration     | bld_memory                | coordination  |
+
+  | bld_tools             | eval_metric-builder       | integration   |
+
+  | bld_tools             | experiment-config-builder | integration   |
+
+  | bld_tools             | prompt_template-builder   | integration   |'
+architectural_position: 'llm_evaluation_scenario sits at the intersection of P07 (Evaluation) and P03 (Prompt) in the CEX
+  pillar graph. It is the leaf node in the HELM decomposition hierarchy: benchmark (suite) -> llm_evaluation_scenario (single)
+  -> eval_metric (measure). It consumes prompt_template artifacts for adapter configuration and produces inputs consumed by
+  experiment_config for run orchestration.'
+cex_integration_points:
+- 'Upstream: `eval_dataset-builder` (provides task_instances)'
+- 'Peer: `eval_metric-builder` (provides primary_metric definition)'
+- 'Downstream: `experiment_config-builder` (consumes scenario for run assembly)'
+- 'Suite: `benchmark-builder` (aggregates multiple scenarios into a suite)'

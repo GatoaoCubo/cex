@@ -12,8 +12,8 @@ quality: 9.0
 tags: [quality-gate, fallback-chain, resilience, model-degradation, P11]
 tldr: "Validates fallback_chain artifacts: step sequence integrity, timeout/threshold coverage, and cost-aware degradation design."
 density_score: 0.92
+llm_function: GOVERN
 ---
-
 # Gate: fallback_chain
 ## Definition
 | Field     | Value |

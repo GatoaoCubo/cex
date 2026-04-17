@@ -1,0 +1,104 @@
+id: ex_webhook_manager
+kind: webhook
+pillar: P04
+title: Shopify Webhook Manager
+version: 0.1.0
+quality: 7.9
+status: template
+brand_placeholders:
+- BRAND_SHOPIFY_DOMAIN
+- BRAND_SUPABASE_PROJECT_REF
+tags:
+- commerce
+- template
+- distillation
+- shopify
+- webhook
+- manager
+density_score: 1.0
+updated: '2026-04-17'
+purpose: CRUD management tool for Shopify webhook subscriptions — lists, registers, tests, and removes webhooks via Shopify
+  Admin API, ensuring required product sync hooks are always active.
+when_to_use:
+- 'Initial setup: registering the required webhook topics for a new Shopify store.'
+- 'Maintenance: verifying all required webhooks are still registered after app reinstall.'
+- 'Debugging: testing webhook delivery by triggering a manual test event.'
+- 'Cleanup: removing stale or duplicate webhook subscriptions.'
+operations: '| Operation | Method | Endpoint | Description |
+
+  |-----------|--------|----------|-------------|
+
+  | List | GET | `/webhooks.json` | Retrieve all registered webhooks |
+
+  | Setup | POST | `/webhooks.json` | Register a new webhook subscription |
+
+  | Delete | DELETE | `/webhooks/{id}.json` | Remove a webhook by ID |
+
+  | Clear | DELETE (bulk) | `/webhooks/{id}.json` × N | Remove all managed webhooks |
+
+  | Test | POST | `/webhooks/{id}/test.json` | Send a test event (if supported) |'
+required_webhooks_minimum_set: '| Topic | Purpose |
+
+  |-------|---------|
+
+  | `products/update` | Sync product changes to Supabase |
+
+  | `products/create` | Add new Shopify products to Supabase |
+
+  | `products/delete` | Remove deleted products from Supabase |
+
+  | `inventory_levels/update` | Sync stock quantity changes |'
+edge_function_interface: '// GET /webhook-manager?action=list
+
+  // GET /webhook-manager?action=setup
+
+  // GET /webhook-manager?action=clear
+
+  // GET /webhook-manager?action=test&id={webhook_id}'
+setup_action_auto_registers_missing_webhooks: "const REQUIRED_TOPICS = [\n  'products/update', 'products/create', 'products/delete',\
+  \ 'inventory_levels/update',\n];\n\nasync function setupWebhooks(existingWebhooks: Webhook[]) {\n  const existingTopics\
+  \ = new Set(existingWebhooks.map(w => w.topic));\n  const callbackBase = `https://{{BRAND_SUPABASE_PROJECT_REF}}.supabase.co/functions/v1`;\n\
+  \n  for (const topic of REQUIRED_TOPICS) {\n    if (existingTopics.has(topic)) continue;\n    await shopifyFetch('/webhooks.json',\
+  \ {\n      method: 'POST',\n      body: JSON.stringify({\n        webhook: { topic, address: `${callbackBase}/shopify-webhook-handler`,\
+  \ format: 'json' },\n      }),\n    });\n  }\n}"
+verification_direction_outbound_management: 'This artifact manages webhooks — it does not receive them. The inbound handler
+  is `ex_webhook_shopify.md`.
+
+
+  For the management endpoint itself:
+
+  - Authenticate via Supabase `Authorization: Bearer {SERVICE_KEY}` — not public.
+
+  - HMAC verification not applicable (outbound management, not inbound events).'
+retry_and_delivery: '| Field | Value |
+
+  |-------|-------|
+
+  | Direction | Outbound (management calls to Shopify Admin API) |
+
+  | Auth | `X-Shopify-Access-Token` on all calls |
+
+  | Idempotency | Check existing webhooks before creating; skip if topic exists |
+
+  | Rate limits | Subject to Shopify Admin API limits (40 req/s) |'
+brand_variables_used: '| Variable | Purpose |
+
+  |----------|---------|
+
+  | `{{BRAND_SHOPIFY_DOMAIN}}` | Store to manage webhooks for |
+
+  | `{{BRAND_SUPABASE_PROJECT_REF}}` | Callback base URL for registered webhooks |'
+example_response_list: "{\n  \"webhooks\": [\n    {\n      \"id\": 123456789,\n      \"topic\": \"products/update\",\n   \
+  \   \"address\": \"https://{{BRAND_SUPABASE_PROJECT_REF}}.supabase.co/functions/v1/shopify-webhook-handler\",\n      \"\
+  format\": \"json\",\n      \"created_at\": \"2026-01-15T10:00:00-05:00\"\n    }\n  ]\n}"
+related_artifacts: '| Artifact | Kind | Role |
+
+  |----------|------|------|
+
+  | `ex_webhook_shopify.md` | webhook | Inbound event handler for registered webhooks |
+
+  | `ex_notifier_webhook.md` | notifier | Delivery confirmation and alert system |
+
+  | `ex_api_client_shopify.md` | api_client | HTTP client used by this manager |
+
+  | `ex_integration_guide_shopify.md` | integration_guide | Full Shopify setup context |'

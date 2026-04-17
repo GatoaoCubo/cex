@@ -1,0 +1,81 @@
+id: p06_td_cex_types
+kind: "type Kind = {\n  id: string;               // snake_case identifier, globally unique\n  name: string;             //\
+  \ human-readable display name\n  pillar: Pillar;           // canonical pillar assignment (P01-P12)\n  description: string;\
+  \      // one-line purpose description\n  max_bytes: number;        // maximum artifact size in bytes\n  naming_pattern:\
+  \ string;   // regex pattern for artifact filename\n  builder: string;          // builder agent reference: {kind}-builder\n\
+  \  schema_id: string;        // input_schema artifact id for this kind\n  tags: string[];           // classification tags\n\
+  }"
+pillar: "type Pillar = \n  | \"P01\"  // Knowledge -- storage, retrieval, KCs\n  | \"P02\"  // Model -- agent definitions,\
+  \ providers\n  | \"P03\"  // Prompt -- templates, actions, chains\n  | \"P04\"  // Tools -- external capabilities\n  | \"\
+  P05\"  // Output -- production artifacts\n  | \"P06\"  // Schema -- data contracts\n  | \"P07\"  // Evaluation -- quality,\
+  \ scoring, testing\n  | \"P08\"  // Architecture -- system structure\n  | \"P09\"  // Config -- runtime settings\n  | \"\
+  P10\"  // Memory -- state, context, indexing\n  | \"P11\"  // Feedback -- learning, correction\n  | \"P12\"  // Orchestration\
+  \ -- workflows, dispatch"
+title: Type Definitions -- CEX Core Types
+version: 1.0.0
+created: 2026-04-17
+author: n03_engineering
+domain: artifact-construction
+quality: "type Quality = {\n  score: number | null;       // null until peer-reviewed; range [0.0, 10.0]\n  tier: QualityTier\
+  \ | null;   // derived from score\n  dimensions: QualityDimension[];  // D1-D5 scores\n  reviewer: string | null;    //\
+  \ nucleus that assigned quality\n  reviewed_at: string | null; // ISO date\n}\n\ntype QualityTier =\n  | \"exemplary\" \
+  \   // score >= 9.5\n  | \"excellent\"    // score >= 9.0\n  | \"good\"         // score >= 8.0\n  | \"acceptable\"   //\
+  \ score >= 7.0\n  | \"below_floor\"  // score < 7.0 (blocked from publication)\n\ntype QualityDimension = {\n  id: \"D1\"\
+  \ | \"D2\" | \"D3\" | \"D4\" | \"D5\";\n  name: string;   // D1=Structural, D2=Rubric, D3=Semantic, D4=Coverage, D5=Novelty\n\
+  \  weight: number; // percentage, D1+D2+D3+D4+D5 = 100\n  score: number;  // 0.0-10.0\n}"
+tags:
+- type-def
+- CEX
+- core-types
+- kind
+- pillar
+- nucleus
+- quality
+- pipeline
+- N03
+tldr: 'Canonical type definitions for the CEX typed knowledge system: Kind, Pillar, Nucleus, Quality, Pipeline, BuildAction,
+  Signal. The source of truth for structural contracts across all 8 nuclei.'
+density_score: 0.92
+updated: '2026-04-17'
+purpose: Defines the canonical structural types used throughout the CEX system. Every artifact, builder, nucleus, and signal
+  maps to one or more of these types. These definitions are the machine-readable ground truth for the 257-kind taxonomy.
+core_types: ''
+nucleus: "type Nucleus = {\n  id: NucleusId;              // n00-n07\n  name: string;               // display name (e.g.\
+  \ \"N03_engineering\")\n  sin_lens: SinLens;          // cultural DNA driving optimization\n  domain: string;          \
+  \   // primary domain\n  model: \"haiku\" | \"sonnet\" | \"opus\";  // assigned model tier\n  context_window: number;  \
+  \   // token limit (200000 or 1000000)\n  primary_pillars: Pillar[];  // top priority pillars\n  agent_card_path: string;\
+  \    // path to agent_card artifact\n}\n\ntype NucleusId = \"n00\" | \"n01\" | \"n02\" | \"n03\" | \"n04\" | \"n05\" | \"\
+  n06\" | \"n07\"\n\ntype SinLens =\n  | \"analytical_envy\"         // N01\n  | \"creative_lust\"           // N02\n  | \"\
+  inventive_pride\"         // N03\n  | \"knowledge_gluttony\"      // N04\n  | \"gating_wrath\"            // N05\n  | \"\
+  strategic_greed\"         // N06\n  | \"orchestrating_sloth\"     // N07"
+pipeline: "type Pipeline = {\n  id: string;           // 8F instance id\n  nucleus: NucleusId;   // executing nucleus\n  kind:\
+  \ string;         // artifact kind being built\n  started_at: string;   // ISO timestamp\n  functions: PipelineFunction[];\
+  \  // F1-F8 execution records\n  status: \"running\" | \"complete\" | \"failed\" | \"retrying\";\n  artifact_path: string\
+  \ | null;   // output artifact path on complete\n}\n\ntype PipelineFunction = {\n  fn: \"F1\" | \"F2\" | \"F2b\" | \"F3\"\
+  \ | \"F3b\" | \"F3c\" | \"F4\" | \"F5\" | \"F6\" | \"F7\" | \"F7b\" | \"F8\";\n  name: string;         // CONSTRAIN, BECOME,\
+  \ SPEAK, INJECT, etc.\n  status: \"pending\" | \"running\" | \"complete\" | \"skipped\";\n  output: string;       // trace\
+  \ output line\n  bytes_consumed: number;\n}"
+buildaction: 'type BuildAction = "CREATE" | "REWRITE" | "MIGRATE" | "IMPROVE" | "VALIDATE"
+
+
+  // CREATE: produce artifact from scratch, fail if already exists (unless force=true)
+
+  // REWRITE: discard existing artifact, build fresh from same intent
+
+  // MIGRATE: update artifact structure/schema while preserving content
+
+  // IMPROVE: enhance quality score of existing artifact (F7 loop)
+
+  // VALIDATE: run F7 GOVERN only, do not produce/save'
+signal: "type Signal = {\n  nucleus: NucleusId;\n  event: \"complete\" | \"error\" | \"partial\" | \"ready\";\n  score: number\
+  \ | null;\n  artifacts: string[];    // paths of produced artifacts\n  timestamp: string;      // ISO timestamp\n  session_id:\
+  \ string;     // N07 session this belongs to\n  wave: string | null;    // mission wave identifier\n}"
+type_hierarchy: "CEX System\n  |-- Kind (257 types in kinds_meta.json)\n  |-- Pillar (P01-P12, 12 domain groups)\n  |-- Nucleus\
+  \ (N00-N07, 8 operational agents)\n        |-- Pipeline (8F execution: F1->F8)\n        |-- Signal (completion notification)\n\
+  \  |-- Artifact (instance of a Kind, governed by Quality)\n        |-- Quality (null until peer-reviewed)"
+type_invariants:
+- Every Artifact has exactly one Kind
+- Every Kind maps to exactly one Pillar
+- Quality.score is null until explicitly assigned by a peer nucleus (never self-assigned)
+- Pipeline.functions execute in strict order F1->F2->F3->F4->F5->F6->F7->F8
+- Signal.nucleus must match the nucleus that produced the artifact

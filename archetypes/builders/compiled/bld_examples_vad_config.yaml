@@ -1,0 +1,61 @@
+kind: examples
+id: bld_examples_vad_config
+pillar: P07
+llm_function: GOVERN
+purpose: Golden and anti-examples of vad_config artifacts
+quality: null
+title: Examples Vad Config
+version: 1.0.0
+author: wave1_builder_gen
+tags:
+- vad_config
+- builder
+- examples
+tldr: Golden and anti-examples of vad_config artifacts
+domain: vad_config construction
+created: '2026-04-13'
+updated: '2026-04-13'
+density_score: 0.85
+golden_example: '---
+
+  kind: vad_config
+
+  version: 1.0
+
+  ---
+
+  sensitivity: 0.75
+
+  noise_suppression: true
+
+  aggressiveness: 3
+
+  min_speech_duration: 0.5
+
+  max_speech_gap: 1.2'
+anti_example_1_missing_required_parameters: '---
+
+  kind: vad_config
+
+  version: 1.0
+
+  ---
+
+  noise_suppression: false
+
+  aggressiveness: 5'
+why_it_fails: Includes `transcription_engine` and `language` parameters which belong to STT components, not VAD. This violates
+  the boundary constraint and creates configuration conflicts.
+anti_example_2_mixing_vad_with_stt_parameters: '---
+
+  kind: vad_config
+
+  version: 1.0
+
+  ---
+
+  sensitivity: 0.8
+
+  transcription_engine: "whisper"
+
+  language: "en"'

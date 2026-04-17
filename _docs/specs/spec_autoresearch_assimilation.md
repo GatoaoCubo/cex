@@ -53,7 +53,7 @@ until it crosses a quality threshold, using git as the experiment ledger.
 2. `P01_knowledge/library/domain/patterns/kc_experiment_driven_development.md`
 
 ### Wave 3: Integration (2 files)
-1. `N07_admin/orchestration/auto/wf_auto_evolve.md` — REWRITE (add autoresearch loop)
+1. `N07_admin/P12_orchestration/auto/wf_auto_evolve.md` — REWRITE (add autoresearch loop)
 2. `.claude/commands/evolve.md` — new `/evolve` command
 
 ### Wave 4: Score + Consolidate

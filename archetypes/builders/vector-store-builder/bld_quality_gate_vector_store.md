@@ -12,8 +12,8 @@ quality: 9.0
 tags: [quality-gate, vector-store, vector-database, P01, hnsw]
 tldr: "Quality gate for vector_store artifacts: enforces dimensions, distance metric, index type, and persistence fields."
 density_score: 0.87
+llm_function: GOVERN
 ---
-
 # Gate: Vectordb Backend
 ## Definition
 A `vector_store` is a storage and indexing configuration for vector embeddings: backend type, dimensions, distance metric, index type, HNSW parameters, and persistence. Infrastructure artifact only — not a tutorial. Gates ensure dimension contract with upstream embedder, distance metric alignment with normalization, and complete index configuration.

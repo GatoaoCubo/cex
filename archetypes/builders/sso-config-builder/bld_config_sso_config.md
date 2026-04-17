@@ -1,0 +1,35 @@
+---
+kind: config
+id: bld_config_sso_config
+pillar: P09
+llm_function: CONSTRAIN
+purpose: Naming, paths, limits for sso_config production
+quality: 8.6
+title: "Config Sso Config"
+version: "1.0.0"
+author: wave1_builder_gen_v2
+tags: [sso_config, builder, config]
+tldr: "Naming, paths, limits for sso_config production"
+domain: "sso_config construction"
+created: "2026-04-14"
+updated: "2026-04-14"
+density_score: 0.85
+---
+
+## Naming Convention
+Pattern: `p09_sso_{{name}}.yaml`
+Examples: `p09_sso_example.yaml`, `p09_sso_prod.yaml`
+
+## Paths
+Artifacts stored in: `/opt/cex/configs/p09/sso/{{name}}.yaml`
+
+## Limits
+max_bytes: 3072
+max_turns: 10
+effort_level: 3
+
+## Hooks
+pre_build: null
+post_build: null
+on_error: null
+on_quality_fail: null

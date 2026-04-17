@@ -1,6 +1,6 @@
 ---
 pillar: P00
-id: component-map-builder-tools
+id: bld_tools_component_map
 kind: tools
 parent: component-map-builder
 version: 1.0.0
@@ -13,8 +13,8 @@ domain: "component map construction"
 created: "2026-04-07"
 updated: "2026-04-07"
 density_score: 0.90
+llm_function: CALL
 ---
-
 # Tools — component-map-builder
 ## Production Tools
 | Tool | Purpose | When | Status |

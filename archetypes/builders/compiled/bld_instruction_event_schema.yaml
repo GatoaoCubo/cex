@@ -1,0 +1,49 @@
+kind: instruction
+id: bld_instruction_event_schema
+pillar: P03
+llm_function: REASON
+purpose: Step-by-step production process for event_schema
+pattern: 3-phase pipeline (define -> compose -> validate)
+quality: null
+title: Instruction Event Schema
+version: 1.0.0
+author: n03_builder
+tags:
+- event_schema
+- builder
+- instruction
+tldr: '3-phase: define event type and source, design JSON Schema payload, document versioning and consumers.'
+domain: event schema construction
+created: '2026-04-17'
+updated: '2026-04-17'
+density_score: 0.9
+phase_1_define:
+- Identify the domain event name and producing service
+- 'Construct event_type using reverse-DNS + version: `{reverse_domain}.{aggregate}.{event}.v{major}`'
+- Identify the source URI (producing service endpoint or name)
+- 'Design the payload data structure: what fields does this event carry?'
+- 'Classify fields: required vs optional'
+- Define field types using JSON Schema primitives (string, number, integer, boolean, array, object)
+- 'Identify subject: what is the primary entity identifier in this event?'
+- 'Identify consumers: who subscribes to this event and what do they do with it?'
+- 'Decide evolution strategy: ADDITIVE_ONLY or VERSIONED_TYPE for breaking changes'
+phase_2_compose:
+- Read SCHEMA.md and OUTPUT_TEMPLATE.md
+- 'Fill frontmatter: all required fields (quality: null)'
+- 'Set id: `p06_evs_{event_slug}` -- verify pattern `^p06_evs_[a-z][a-z0-9_]+$`'
+- 'Write CloudEvents Attributes section: envelope fields table'
+- 'Write Payload Schema section: JSON Schema for data field (full schema, not field list)'
+- 'Write Versioning section: compatibility strategy, breaking change policy, migration path'
+- 'Write Consumers section: who subscribes and what action they take'
+- Verify body <= 4096 bytes
+phase_3_validate:
+- Confirm id matches `^p06_evs_[a-z][a-z0-9_]+$`
+- Confirm kind == event_schema
+- Confirm event_type follows reverse-DNS naming with .v{N} suffix
+- Confirm schema_version is semver
+- Confirm datacontenttype is "application/json"
+- Confirm all 4 sections present
+- Confirm payload is JSON Schema format (not field list)
+- 'Cross-check: not data_contract (no SLA), not event_stream (no infrastructure)'
+- 'Confirm quality: null'
+- Revise if score < 8.0

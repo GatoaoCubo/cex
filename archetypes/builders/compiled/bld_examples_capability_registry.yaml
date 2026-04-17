@@ -1,0 +1,107 @@
+kind: examples
+id: bld_examples_capability_registry
+pillar: P07
+llm_function: GOVERN
+purpose: Golden and anti-examples of capability_registry artifacts
+quality: null
+title: Examples Capability Registry
+version: 1.0.0
+author: n04_wave8
+tags:
+- capability_registry
+- builder
+- examples
+- agent-discovery
+tldr: Golden and anti-examples of capability_registry artifacts
+domain: capability_registry construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+golden_example: '---
+
+  id: p08_cr_builder_sub_agents.md
+
+  kind: capability_registry
+
+  pillar: P08
+
+  title: "CEX Builder Sub-Agent Registry"
+
+  registry_scope: builder_sub_agents
+
+  entry_count: 3
+
+  index_date: "2026-04-14"
+
+  quality: null
+
+  ---
+
+
+  ## Builder Sub-Agent Index
+
+  | capability_name | provider_agent | input_schema | output_schema | cost_tokens | quality_baseline | availability | keyword_index
+  |
+
+  |----------------|----------------|--------------|---------------|-------------|-----------------|--------------|---------------|
+
+  | Build landing page | .claude/agents/landing-page-builder.md | intent string, brand_config | landing_page (P05 .md) | medium
+  | unscored | active | landing page, html, conversion, marketing, P05 |
+
+  | Build knowledge card | .claude/agents/knowledge-card-builder.md | topic, domain, sources | knowledge_card (P01 .md) |
+  low | unscored | active | knowledge card, KC, P01, documentation, RAG |
+
+  | Build agent card | .claude/agents/agent-card-builder.md | nucleus id, capabilities list | agent_card (P08 .md) | low |
+  unscored | active | agent card, A2A, capability declaration, P08 |
+
+
+  ## Query Examples
+
+  | Query | Top Candidate | Why |
+
+  |-------|--------------|-----|
+
+  | "who can build conversion pages?" | landing-page-builder | keyword: conversion, marketing |
+
+  | "who documents domain knowledge?" | knowledge-card-builder | keyword: knowledge card, KC, documentation |'
+anti_example_1_missing_required_fields: '| capability_name | provider_agent |
+
+  |----------------|----------------|
+
+  | Build reports  | some-builder   |'
+why_it_fails: 'All three agent layers mixed in one flat table. Builder sub-agents, nucleus domain agents, and nucleus cards
+  have different invocation paths: sub-agents are invoked as Claude Code sub-agents; domain agents via dispatch.sh; nucleus
+  cards describe the nucleus itself. Mixing them causes routing errors where N07 attempts to dispatch a builder sub-agent
+  path as a nucleus boot.'
+anti_example_2_phantom_agent_reference: '| capability_name | provider_agent | ...
+
+  |----------------|----------------|
+
+  | Build dashboards | .claude/P02_model/dashboard-builder.md | ...'
+anti_example_3_invented_quality_scores: '| capability_name | quality_baseline |
+
+  |----------------|-----------------|
+
+  | Build landing page | 8.5 |'
+anti_example_4_flat_list_without_layer_separation: '| capability_name | provider_agent | availability |
+
+  |----------------|----------------|--------------|
+
+  | Build landing page | .claude/agents/landing-page-builder.md | active |
+
+  | Knowledge management | N04_knowledge/P02_model/agent_knowledge.md | active |
+
+  | Orchestration | N07_admin/agent_card_n07.md | active |'
+key_distinctions: '| Aspect | Good Registry Entry | Bad Registry Entry |
+
+  |--------|--------------------|--------------------|
+
+  | provider_agent | Validated path to existing file | Path to non-existent file |
+
+  | quality_baseline | "unscored" when source is null | Invented numeric score |
+
+  | keyword_index | >= 5 domain-derived terms | 1-2 generic terms |
+
+  | availability | "active" / "deprecated" / "experimental" | Missing or free-text |
+
+  | layer | Entries in correct section (builder / nucleus / card) | Mixed flat list |'

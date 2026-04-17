@@ -1,0 +1,41 @@
+kind: instruction
+id: bld_instruction_roi_calculator
+pillar: P03
+llm_function: REASON
+purpose: Step-by-step production process for roi_calculator
+quality: null
+title: Instruction Roi Calculator
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- roi_calculator
+- builder
+- instruction
+tldr: Step-by-step production process for roi_calculator
+domain: roi_calculator construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+phase_1_research:
+- 'Identify input parameters: initial investment, annual savings, implementation cost, maintenance fees, and time horizon.'
+- Research industry benchmarks for ROI thresholds and TCO components (hardware, software, labor).
+- 'Define ROI formula: (Net Profit / Total Investment) × 100. Define TCO formula: Sum of all recurring and one-time costs.'
+- Collect case studies for economic buyer scenarios (e.g., enterprise SaaS, manufacturing automation).
+- Map dependencies between variables (e.g., scaling effects on TCO).
+- Validate data sources for accuracy (financial databases, vendor quotes).
+phase_2_compose:
+- 'Define schema in bld_schema_roi_calculator.md: specify input types, units, and constraints.'
+- Map inputs to ROI/TCO formulas using bld_output_template_roi_calculator.md structure.
+- Write formula logic for dynamic calculations (e.g., compound annual growth rate).
+- 'Build TCO comparison table with columns: cost category, baseline, alternative, delta.'
+- Populate template with placeholder values for user input fields.
+- Add scenario examples (e.g., 3-year vs 5-year ROI).
+- 'Format output for clarity: color-code positive/negative deltas, include charts.'
+- Peer-review formula logic against domain-specific benchmarks.
+- Finalize artifact with version control and change log.
+phase_3_validate:
+- '[ ] Verify formula accuracy with sample data (e.g., 10% ROI, $50k TCO).'
+- '[ ] Test edge cases (zero investment, negative savings).'
+- '[ ] Confirm TCO comparison aligns with input parameters.'
+- '[ ] Ensure output template renders correctly across devices.'
+- '[ ] Conduct user acceptance testing with economic buyers.'

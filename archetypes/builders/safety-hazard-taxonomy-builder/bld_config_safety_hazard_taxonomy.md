@@ -1,0 +1,35 @@
+---
+kind: config
+id: bld_config_safety_hazard_taxonomy
+pillar: P09
+llm_function: CONSTRAIN
+purpose: Naming, paths, limits for safety_hazard_taxonomy production
+quality: 8.6
+title: "Config Safety Hazard Taxonomy"
+version: "1.0.0"
+author: n01_wave7
+tags: [safety_hazard_taxonomy, builder, config, MLCommons, AILuminate]
+tldr: "Naming, paths, limits for safety_hazard_taxonomy production"
+domain: "safety_hazard_taxonomy construction"
+created: "2026-04-14"
+updated: "2026-04-14"
+density_score: 0.85
+---
+
+## Naming Convention
+Pattern: `p11_sht_{{scope}}.md`
+Examples: `p11_sht_ailuminate_v1_full.md`, `p11_sht_consumer_api_restricted.md`
+
+## Paths
+Artifacts stored in: `P11_governance/safety_hazard_taxonomies/`
+
+## Limits
+max_bytes: 5120
+max_turns: 6
+effort_level: 4
+
+## Hooks
+pre_build: validate_category_count
+post_build: compile + signal_n07
+on_error: null
+on_quality_fail: retry_with_missing_categories

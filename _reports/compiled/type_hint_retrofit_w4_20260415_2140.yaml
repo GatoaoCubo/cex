@@ -1,0 +1,65 @@
+mission: TYPE_HINT_RETROFIT
+wave: 4
+status: PASS
+executed_by: n05_codex
+runtime: codex
+8f_pipeline:
+- '`F1 CONSTRAIN`: mission=`TYPE_HINT_RETROFIT`, wave=`W4`, scope=6 target files, boundary=public-function annotations only
+  plus required report output.'
+- '`F2 BECOME`: loaded N05 operations rules and agent card; role=mechanical refactor with verification, CI discipline, and
+  per-file commits.'
+- '`F3 INJECT`: read handoff frontmatter, mirrored task file, CLAUDE/rule context, target module contents, and pre-edit AST
+  coverage.'
+- '`F4 REASON`: annotate every non-underscore function signature, verify AST coverage and runtime sanity, then emit the report
+  and completion signal.'
+- '`F5 CALL`: used local shell, AST validation, `git`, `cex_compile.py`, and `signal_writer`.'
+- '`F6 PRODUCE`: added type hints to all public functions in the six target modules without changing bodies, names, decorators,
+  or control flow.'
+- '`F7 GOVERN`: achieved 100% AST coverage on all targets and preserved CLI `--help` or import behavior.'
+- '`F8 COLLABORATE`: saved this report, compiled it, recorded commits, and sent the completion signal.'
+coverage_delta: '| Tool | Before | After | Delta |
+
+  | --- | --- | --- | --- |
+
+  | cex_discovery | 0/6 | 6/6 | +6 |
+
+  | cex_ft_train | 0/6 | 6/6 | +6 |
+
+  | cex_memo | 0/6 | 6/6 | +6 |
+
+  | wave_pipeline | 0/6 | 6/6 | +6 |
+
+  | cex_intent_resolver | 0/5 | 5/5 | +5 |
+
+  | cex_litellm_test | 0/5 | 5/5 | +5 |'
+commits:
+- '`50adff32f` `refactor(cex_discovery): add type hints to public functions`'
+- '`9bc636d0b` `refactor(cex_ft_train): add type hints to public functions`'
+- '`cefd0096e` `refactor(cex_memo): add type hints to public functions`'
+- '`ae4aa3a15` `refactor(wave_pipeline): add type hints to public functions`'
+- '`df25d07cd` `refactor(cex_intent_resolver): add type hints to public functions`'
+- '`7c6a71bbd` `refactor(cex_litellm_test): add type hints to public functions`'
+sanity_checks:
+- 'AST coverage verifier: 6/6 files at 100%.'
+- '`python _tools/cex_discovery.py --help`: exit 0.'
+- '`python _tools/cex_ft_train.py --help`: exit 0.'
+- '`python _tools/cex_memo.py --help`: exit 0.'
+- '`python -c "import _tools.cex_memo"`: import clean.'
+- '`python _tools/wave_pipeline.py --help`: exit 0.'
+- '`python -c "import _tools.wave_pipeline"`: import clean.'
+- '`python _tools/cex_intent_resolver.py --help`: exit 0.'
+- '`python -c "import _tools.cex_intent_resolver"`: import clean.'
+- '`python _tools/cex_litellm_test.py --help`: exit 0.'
+- '`python -c "import _tools.cex_litellm_test"`: import clean.'
+- 'Pre-commit hook on each file commit: 6/6 PASS.'
+- '`cex_sanitize.py --check --scope _tools/`: 0 non-ASCII issues during each commit gate.'
+ambiguous_cases:
+- '`cex_discovery.py`: used `dict[str, Any]` for artifact and opportunity records because the loaded metadata is heterogeneous
+  and inferred at runtime.'
+- '`cex_ft_train.py`: used `dict[str, Any]` for training config and dataset example payloads because values span ints, floats,
+  strings, and nested fields from external libraries.'
+- '`cex_memo.py`: used `dict[str, Any] | None` for cached entries because memo records may optionally include heterogeneous
+  `metadata`.'
+- '`cex_intent_resolver.py`: used `dict[str, Any]` for resolver outputs because success, low-confidence, and empty-input paths
+  return different keys.'
+type_hint_retrofit_w4_pass: ''

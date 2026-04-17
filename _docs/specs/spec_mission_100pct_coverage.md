@@ -1,0 +1,470 @@
+---
+quality: 8.4
+id: spec_mission_100pct_coverage
+title: "Mission Spec: 100% LLM Vocabulary Coverage"
+kind: decision_record
+pillar: P08
+version: 1.0.0
+created: 2026-04-13
+author: N07
+status: approved
+source: "32-atom atlas hydration (2026-04-13), 3 Explore agents gap analysis"
+raw_terms_scanned: 2390
+raw_gaps_identified: 2068
+consolidated_new_kinds: 52
+total_kinds_after: 184
+target_coverage: "95%+"
+density_score: 1.0
+updated: "2026-04-17"
+---
+
+# Mission Spec: 100% LLM Vocabulary Coverage
+
+## 1. Executive Summary
+
+32 N01 Sonnet instances hydrated 32 LLM vocabulary atoms covering frameworks,
+standards, regional ecosystems, and specialized domains. Gap analysis against
+CEX's 132-kind architecture identified ~2,068 uncovered concepts.
+
+After consolidation (merging vendor-specific implementations into structural types),
+**52 new kinds** are needed. Combined with 132 existing = **184 total kinds**.
+
+Additionally, **~350 knowledge_cards** document individual terms/implementations
+within those kinds, and **~52 golden examples** validate each new builder.
+
+### Coverage Projection
+
+| Phase | Kinds | Coverage | Notes |
+|-------|-------|----------|-------|
+| Current | 132 | ~40-55% | Framework + protocol concepts well-covered |
+| After Wave 0-3 | 184 | ~85-90% | All structural gaps closed |
+| After Wave 4 (KCs) | 184 + 350 KCs | ~95%+ | Every atom term has a home |
+| Remaining ~5% | Out of scope | N/A | Hardware (GPU scheduling), infra (K8s), vendor UIs |
+
+---
+
+## 2. Consolidation Principle
+
+A new CEX kind is warranted ONLY when:
+1. Multiple industry concepts share the same structural pattern (schema, lifecycle, operations)
+2. The concept CANNOT be expressed as an instance of an existing kind
+3. Enough instances exist to justify builder overhead (13 ISOs per kind)
+
+**NOT a kind**: Individual algorithms (PPO, GRPO, DPO), specific tools (FAISS, Milvus),
+vendor models (Qwen, DeepSeek), or framework methods (`.invoke()`, `.stream()`).
+These are **knowledge_cards** or **instances** of existing kinds.
+
+---
+
+## 3. The 52 New Kinds (Consolidated)
+
+### 3.1 Safety & Compliance (6 kinds)
+
+| # | Kind | Pillar | Boundary | Covers |
+|---|------|--------|----------|--------|
+| 1 | `threat_model` | P11 | Structured hazard/risk assessment for AI systems | Aegis 2.0 categories, OWASP LLM Top 10, attack surfaces |
+| 2 | `safety_policy` | P11 | Organizational AI safety governance rules | NIST RMF GOVERN function, safety culture, incident response |
+| 3 | `content_filter` | P11 | Input/output content filtering pipeline | Hate speech, misinformation, toxicity, PII detection |
+| 4 | `bias_audit` | P07 | Fairness evaluation methodology and results | Adverse impact ratio, demographic parity, equalized odds |
+| 5 | `compliance_framework` | P11 | Regulatory mapping and attestation | NIST AI RMF, EU AI Act, ISO 42001, GDPR for AI |
+| 6 | `incident_report` | P11 | AI incident documentation and post-mortem | AI Incident Database format, root cause, remediation |
+
+### 3.2 Voice & Realtime (7 kinds)
+
+| # | Kind | Pillar | Boundary | Covers |
+|---|------|--------|----------|--------|
+| 7 | `voice_pipeline` | P04 | End-to-end voice agent architecture | Cascading STT>LLM>TTS, codec-based S2S, Pipecat, LiveKit |
+| 8 | `realtime_session` | P09 | Live bidirectional session configuration | OpenAI Realtime API events, LiveKit rooms, session lifecycle |
+| 9 | `vad_config` | P09 | Voice activity detection settings | Server VAD, semantic VAD, Silero, energy-based, EOU |
+| 10 | `tts_provider` | P04 | Text-to-speech provider integration | Cartesia, ElevenLabs, Azure TTS, OpenAI TTS |
+| 11 | `stt_provider` | P04 | Speech-to-text provider integration | Deepgram, Whisper, Google STT, AssemblyAI |
+| 12 | `prosody_config` | P09 | Voice personality and emotion settings | Pitch, speed, emotion modulation, style presets |
+| 13 | `transport_config` | P09 | Network transport layer for realtime | WebRTC, SIP trunk, WebSocket, gRPC, RTVI |
+
+### 3.3 Code Agents (5 kinds)
+
+| # | Kind | Pillar | Boundary | Covers |
+|---|------|--------|----------|--------|
+| 14 | `edit_format` | P06 | LLM-to-host file change format specification | 9 format families: whole, search/replace, udiff, patch, tool-based, sketch+apply, semantic |
+| 15 | `sandbox_config` | P09 | Isolated code execution environment | Docker, E2B MicroVM, Browserbase, VM isolation, Cursor VMs |
+| 16 | `repo_map` | P01 | Codebase context extraction strategy | Tree-sitter + PageRank (Aider), AST analysis, dependency graph |
+| 17 | `diff_strategy` | P04 | Change application/matching algorithm | Exact, fuzzy (Levenshtein), layered, middle-out, fast-apply model |
+| 18 | `agent_computer_interface` | P08 | GUI/terminal interaction protocol | SWE-Agent ACI, CodeAct action space, GUI-Actor, AgentTrek |
+
+### 3.4 Reasoning & RL (5 kinds)
+
+| # | Kind | Pillar | Boundary | Covers |
+|---|------|--------|----------|--------|
+| 19 | `reasoning_strategy` | P03 | Prompting technique for structured reasoning | CoT, ToT, GoT, AoT, ReAct, Reflexion, self-consistency, DiVeRSe |
+| 20 | `rl_algorithm` | P02 | RL training algorithm definition | 14 algorithms: REINFORCE, PPO, GRPO, DAPO, DPO, KTO, REBEL, etc. |
+| 21 | `reward_model` | P07 | Process/outcome reward model configuration | ORM, PRM, PAV, ThinkPRM, R-PRM, RLVR verifiers |
+| 22 | `search_strategy` | P04 | Inference-time compute allocation | MCTS, beam search, best-of-N, lookahead, test-time scaling |
+| 23 | `thinking_config` | P09 | Extended thinking / budget tokens settings | Anthropic thinking, OpenAI reasoning effort, Gemini thinking budget |
+
+### 3.5 ML Lifecycle (6 kinds)
+
+| # | Kind | Pillar | Boundary | Covers |
+|---|------|--------|----------|--------|
+| 24 | `training_method` | P02 | Model training/adaptation technique | LoRA, QLoRA, instruction tuning, distillation, RLHF, DPO training |
+| 25 | `model_architecture` | P02 | Neural architecture definition | Transformer, MoE, diffusion-LM, RNN-LM, vision-language, S2S codec |
+| 26 | `dataset_card` | P01 | Structured dataset documentation | Croissant JSON-LD, HF datasets, training data provenance |
+| 27 | `model_registry` | P10 | Model versioning and artifact tracking | MLflow, W&B, HF Hub, model lineage, checkpoint management |
+| 28 | `experiment_tracker` | P07 | Experiment configuration and results | Runs, hyperparameters, metrics, W3C ML Schema Experiment |
+| 29 | `quantization_config` | P09 | Model compression settings | 8-bit, 4-bit, GPTQ, AWQ, GGUF, quantization-aware training |
+
+### 3.6 Evaluation (5 kinds)
+
+| # | Kind | Pillar | Boundary | Covers |
+|---|------|--------|----------|--------|
+| 30 | `benchmark_suite` | P07 | Composite benchmark definition | HELM, SWE-bench, GAIA, AgentBench, OSWorld, WebArena, LiveBench |
+| 31 | `judge_config` | P07 | LLM judge configuration (extends llm_judge) | Pointwise, pairwise, listwise, ensemble, auto-rubric generation |
+| 32 | `eval_metric` | P07 | Individual evaluation metric definition | Faithfulness, groundedness, calibration, toxicity, efficiency |
+| 33 | `eval_framework` | P07 | End-to-end evaluation framework | RAGAS 2.0, CLEAR, CLASSic, AutoRubric, ProtocolBench |
+| 34 | `trajectory_eval` | P07 | Agent trajectory evaluation | Step accuracy, tool use correctness, completion rate, cost |
+
+### 3.7 RAG Advanced (3 kinds)
+
+| # | Kind | Pillar | Boundary | Covers |
+|---|------|--------|----------|--------|
+| 35 | `reranker_config` | P01 | Retrieval reranking model/strategy | Cross-encoder, ColBERT, FlashRank, MonoT5, LLM-based reranker |
+| 36 | `graph_rag_config` | P01 | Graph-based RAG architecture | GraphRAG v1/v2, LazyGraphRAG, community summarization, Leiden |
+| 37 | `agentic_rag` | P01 | Agent-driven retrieval pattern | Single-agent, multi-agent, hierarchical, reflexion, FLARE RAG |
+
+### 3.8 Memory Advanced (4 kinds)
+
+| # | Kind | Pillar | Boundary | Covers |
+|---|------|--------|----------|--------|
+| 38 | `memory_architecture` | P10 | Complete memory system design | MemoryOS, MIRIX, 3D-8Q taxonomy, tiering, heat-page |
+| 39 | `procedural_memory` | P10 | Skill/procedure storage and retrieval | Skill libraries, code patterns, 6 acquisition modalities |
+| 40 | `consolidation_policy` | P10 | Memory lifecycle management | Reflection triggers, summarization, eviction (LRU, importance), decay |
+| 41 | `memory_benchmark` | P07 | Memory quality evaluation suite | MemoryArena, 4-layer evaluation stack, context saturation tests |
+
+### 3.9 Agent Architecture (5 kinds)
+
+| # | Kind | Pillar | Boundary | Covers |
+|---|------|--------|----------|--------|
+| 42 | `agent_profile` | P02 | Agent persona/identity construction | Handcrafting, LLM-generation, dataset alignment methods |
+| 43 | `planning_strategy` | P03 | Agent planning approach | Single-path (CoT), multi-path (ToT), external planner (PDDL), POMDP |
+| 44 | `action_paradigm` | P04 | How agents execute actions | API calls, code-as-action, computer use, VLA (embodied) |
+| 45 | `collaboration_pattern` | P12 | Multi-agent coordination topology | Swarm, supervisor, sequential, hierarchical, group chat |
+| 46 | `dual_loop_architecture` | P08 | Outer/inner loop agent control | XAgent planner+actor, P-C-G (Planner-Caller-Generator) |
+
+### 3.10 Workflow & Visual (2 kinds)
+
+| # | Kind | Pillar | Boundary | Covers |
+|---|------|--------|----------|--------|
+| 47 | `workflow_node` | P12 | Typed node in visual/programmatic workflow | LLM, knowledge, condition, loop, agent, trigger, variable nodes |
+| 48 | `visual_workflow` | P12 | GUI-based workflow editor configuration | Dify chatflow, Coze bot builder, n8n, visual DAG editors |
+
+### 3.11 Prompt Engineering (3 kinds)
+
+| # | Kind | Pillar | Boundary | Covers |
+|---|------|--------|----------|--------|
+| 49 | `prompt_technique` | P03 | Specific prompting method/pattern | Self-consistency, diverse generation, spatial grounding, SecureCoT |
+| 50 | `prompt_optimizer` | P03 | Automated prompt improvement tool | GEPA, MIPROv2, APE, DSPy teleprompter, BootstrapFewShot |
+| 51 | `multimodal_prompt` | P03 | Cross-modal prompt pattern | MM-ICL, MM-CoT, visual RAG, audio-CoT, MM-Self-Refine |
+
+### 3.12 Self-Improvement (1 kind)
+
+| # | Kind | Pillar | Boundary | Covers |
+|---|------|--------|----------|--------|
+| 52 | `self_improvement_loop` | P11 | Agent/system self-evolution mechanism | DGM (Sakana), STaR, self-refine, evolutionary model merging |
+
+---
+
+## 3.13 Full Registry Map (Pillar + 8F Function + Naming)
+
+This table provides the exact `kinds_meta.json` entry fields for Wave 0.
+
+| # | Kind | Pillar | llm_function | naming | max_bytes |
+|---|------|--------|-------------|--------|-----------|
+| 1 | `threat_model` | P11 | GOVERN | `p11_tm_{{name}}.md` | 5120 |
+| 2 | `safety_policy` | P11 | CONSTRAIN | `p11_sp_{{name}}.md` | 5120 |
+| 3 | `content_filter` | P11 | GOVERN | `p11_cf_{{name}}.md` | 4096 |
+| 4 | `bias_audit` | P07 | GOVERN | `p07_ba_{{name}}.md` | 5120 |
+| 5 | `compliance_framework` | P11 | CONSTRAIN | `p11_cfw_{{name}}.md` | 5120 |
+| 6 | `incident_report` | P11 | GOVERN | `p11_ir_{{name}}.md` | 5120 |
+| 7 | `voice_pipeline` | P04 | CALL | `p04_vp_{{name}}.md` | 5120 |
+| 8 | `realtime_session` | P09 | CALL | `p09_rs_{{name}}.md` | 4096 |
+| 9 | `vad_config` | P09 | CONSTRAIN | `p09_vad_{{name}}.yaml` | 2048 |
+| 10 | `tts_provider` | P04 | CALL | `p04_tts_{{name}}.md` | 4096 |
+| 11 | `stt_provider` | P04 | CALL | `p04_stt_{{name}}.md` | 4096 |
+| 12 | `prosody_config` | P09 | CONSTRAIN | `p09_prs_{{name}}.yaml` | 2048 |
+| 13 | `transport_config` | P09 | CONSTRAIN | `p09_tc_{{name}}.yaml` | 2048 |
+| 14 | `edit_format` | P06 | CONSTRAIN | `p06_ef_{{name}}.md` | 4096 |
+| 15 | `sandbox_config` | P09 | CONSTRAIN | `p09_sb_{{name}}.yaml` | 2048 |
+| 16 | `repo_map` | P01 | INJECT | `p01_rm_{{name}}.md` | 5120 |
+| 17 | `diff_strategy` | P04 | CALL | `p04_ds_{{name}}.md` | 4096 |
+| 18 | `agent_computer_interface` | P08 | CALL | `p08_aci_{{name}}.md` | 5120 |
+| 19 | `reasoning_strategy` | P03 | REASON | `p03_rs_{{name}}.md` | 5120 |
+| 20 | `rl_algorithm` | P02 | BECOME | `p02_rla_{{name}}.md` | 5120 |
+| 21 | `reward_model` | P07 | GOVERN | `p07_rwm_{{name}}.md` | 5120 |
+| 22 | `search_strategy` | P04 | CALL | `p04_ss_{{name}}.md` | 4096 |
+| 23 | `thinking_config` | P09 | CONSTRAIN | `p09_thk_{{name}}.yaml` | 2048 |
+| 24 | `training_method` | P02 | BECOME | `p02_trm_{{name}}.md` | 5120 |
+| 25 | `model_architecture` | P02 | BECOME | `p02_ma_{{name}}.md` | 5120 |
+| 26 | `dataset_card` | P01 | INJECT | `p01_dc_{{name}}.md` | 5120 |
+| 27 | `model_registry` | P10 | GOVERN | `p10_mr_{{name}}.md` | 4096 |
+| 28 | `experiment_tracker` | P07 | GOVERN | `p07_et_{{name}}.md` | 4096 |
+| 29 | `quantization_config` | P09 | CONSTRAIN | `p09_qc_{{name}}.yaml` | 2048 |
+| 30 | `benchmark_suite` | P07 | GOVERN | `p07_bs_{{name}}.md` | 5120 |
+| 31 | `judge_config` | P07 | GOVERN | `p07_jc_{{name}}.md` | 4096 |
+| 32 | `eval_metric` | P07 | GOVERN | `p07_em_{{name}}.md` | 4096 |
+| 33 | `eval_framework` | P07 | GOVERN | `p07_efw_{{name}}.md` | 5120 |
+| 34 | `trajectory_eval` | P07 | GOVERN | `p07_te_{{name}}.md` | 5120 |
+| 35 | `reranker_config` | P01 | INJECT | `p01_rr_{{name}}.yaml` | 2048 |
+| 36 | `graph_rag_config` | P01 | INJECT | `p01_grc_{{name}}.yaml` | 4096 |
+| 37 | `agentic_rag` | P01 | INJECT | `p01_ar_{{name}}.md` | 5120 |
+| 38 | `memory_architecture` | P10 | INJECT | `p10_marc_{{name}}.md` | 5120 |
+| 39 | `procedural_memory` | P10 | INJECT | `p10_pm_{{name}}.md` | 4096 |
+| 40 | `consolidation_policy` | P10 | GOVERN | `p10_cp_{{name}}.md` | 4096 |
+| 41 | `memory_benchmark` | P07 | GOVERN | `p07_mb_{{name}}.md` | 5120 |
+| 42 | `agent_profile` | P02 | BECOME | `p02_ap_{{name}}.md` | 4096 |
+| 43 | `planning_strategy` | P03 | REASON | `p03_ps_{{name}}.md` | 5120 |
+| 44 | `action_paradigm` | P04 | CALL | `p04_act_{{name}}.md` | 4096 |
+| 45 | `collaboration_pattern` | P12 | COLLABORATE | `p12_collab_{{name}}.md` | 5120 |
+| 46 | `dual_loop_architecture` | P08 | REASON | `p08_dl_{{name}}.md` | 5120 |
+| 47 | `workflow_node` | P12 | PRODUCE | `p12_wn_{{name}}.md` | 4096 |
+| 48 | `visual_workflow` | P12 | PRODUCE | `p12_vw_{{name}}.md` | 5120 |
+| 49 | `prompt_technique` | P03 | INJECT | `p03_pt_{{name}}.md` | 4096 |
+| 50 | `prompt_optimizer` | P03 | GOVERN | `p03_po_{{name}}.md` | 5120 |
+| 51 | `multimodal_prompt` | P03 | INJECT | `p03_mmp_{{name}}.md` | 4096 |
+| 52 | `self_improvement_loop` | P11 | GOVERN | `p11_sil_{{name}}.md` | 5120 |
+
+### 8F Function Distribution (52 new kinds)
+
+| llm_function | Count | Kinds |
+|-------------|-------|-------|
+| **GOVERN** | 17 | threat_model, content_filter, bias_audit, incident_report, compliance_framework, reward_model, benchmark_suite, judge_config, eval_metric, eval_framework, trajectory_eval, model_registry, experiment_tracker, consolidation_policy, memory_benchmark, prompt_optimizer, self_improvement_loop |
+| **CONSTRAIN** | 9 | safety_policy, vad_config, prosody_config, transport_config, edit_format, sandbox_config, quantization_config, thinking_config, compliance_framework |
+| **CALL** | 8 | voice_pipeline, realtime_session, tts_provider, stt_provider, diff_strategy, search_strategy, agent_computer_interface, action_paradigm |
+| **INJECT** | 8 | repo_map, dataset_card, reranker_config, graph_rag_config, agentic_rag, memory_architecture, procedural_memory, prompt_technique, multimodal_prompt |
+| **BECOME** | 4 | rl_algorithm, training_method, model_architecture, agent_profile |
+| **REASON** | 3 | reasoning_strategy, planning_strategy, dual_loop_architecture |
+| **PRODUCE** | 2 | workflow_node, visual_workflow |
+| **COLLABORATE** | 1 | collaboration_pattern |
+
+---
+
+## 4. Per-Kind Deliverables
+
+Each new kind requires:
+
+| Deliverable | Count | Nucleus | Description |
+|-------------|-------|---------|-------------|
+| `kinds_meta.json` entry | 1 | N07 | id, pillar, boundary, naming, llm_function, max_bytes |
+| Builder scaffold (13 ISOs) | 13 | N03 | manifest, instruction, system_prompt, schema, few_shot, quality_gate, golden_test, etc. |
+| Knowledge card | 1 | N04 | `kc_{kind}.md` documenting the kind with examples |
+| Sub-agent definition | 1 | N03 | `.claude/P02_model/{kind}-builder.md` |
+| Golden example | 1 | N03 | Production-quality instance artifact |
+
+**Total per kind**: 17 artifacts
+**Total for 52 kinds**: 884 artifacts
+
+**Plus**: ~350 KCs for individual terms within existing and new kinds.
+
+**Grand total**: ~1,234 new artifacts.
+
+---
+
+## 5. Execution Plan (7 Waves)
+
+### Wave 0: Foundation (N07 solo, ~30 min)
+- Update `kinds_meta.json` with all 52 new kind entries
+- Run `python _tools/cex_materialize.py` to generate 52 builder scaffolds
+- Run `python _tools/cex_doctor.py` to validate
+- Commit: `[N07] register 52 new kinds for 100% coverage`
+
+**Gate**: `cex_doctor.py` passes, 184 kinds in registry.
+
+### Wave 1: Safety + Voice + Code (6 nuclei, ~45 min)
+Priority: P0 kinds that block enterprise and voice use cases.
+
+| Nucleus | Task | Kinds | Artifact Count |
+|---------|------|-------|---------------|
+| N01 | Research deep-dive: safety frameworks, voice architecture, code agent patterns | -- | 18 KCs |
+| N02 | Marketing: landing page copy for new capability categories | -- | 3 copy artifacts |
+| N03 | Build 18 builders (ISOs + golden examples): safety(6) + voice(7) + code(5) | 18 | 306 artifacts |
+| N04 | Knowledge cards for all 18 new kinds + key terms within each | -- | 54 KCs |
+| N05 | Validation: schema checks, compile, doctor for Wave 1 output | -- | test reports |
+| N06 | Commercial: pricing impact of new safety/voice capabilities | -- | 1 pricing update |
+
+**Gate**: 18 builders pass `cex_doctor.py`, all compile, quality >= 8.5.
+
+### Wave 2: Reasoning + ML + Evaluation (6 nuclei, ~45 min)
+Priority: P1 kinds covering fastest-growing LLM domains.
+
+| Nucleus | Task | Kinds | Artifact Count |
+|---------|------|-------|---------------|
+| N01 | Research: RL algorithms genealogy, ML ontology mapping, eval landscape | -- | 16 KCs |
+| N03 | Build 16 builders: reasoning(5) + ml(6) + eval(5) | 16 | 272 artifacts |
+| N04 | Knowledge cards for 16 new kinds + algorithm instances | -- | 48 KCs |
+| N05 | Validation + compile + doctor for Wave 2 | -- | test reports |
+
+**Gate**: 34/52 builders complete. All compile.
+
+### Wave 3: RAG + Memory + Agent + Workflow + Prompt (6 nuclei, ~45 min)
+Priority: P2 kinds completing the architecture.
+
+| Nucleus | Task | Kinds | Artifact Count |
+|---------|------|-------|---------------|
+| N01 | Research: memory architectures, RAG advanced patterns, agent taxonomy surveys | -- | 18 KCs |
+| N03 | Build 18 builders: rag(3) + memory(4) + agent(5) + workflow(2) + prompt(3) + self(1) | 18 | 306 artifacts |
+| N04 | Knowledge cards for 18 new kinds | -- | 54 KCs |
+| N05 | Validation + compile + doctor for Wave 3 | -- | test reports |
+
+**Gate**: 52/52 builders complete. All compile. `cex_doctor.py` 184 PASS.
+
+### Wave 4: Knowledge Card Hydration (N01 + N04, 32-parallel, ~60 min)
+Reuse atlas_wave2 pattern: 32 N01 Sonnet instances, each hydrating KCs.
+
+| Batch | Atoms | KCs to produce | Method |
+|-------|-------|---------------|--------|
+| Batch A (16 instances) | Atoms 01-16 (frameworks) | ~175 KCs | Map each framework term to its home kind, produce KC instance |
+| Batch B (16 instances) | Atoms 17-32 (specialized) | ~175 KCs | Map each specialized term, produce KC with citations |
+
+**Gate**: 350+ new KCs compiled, coverage >= 95% by term count.
+
+### Wave 5: Cross-Validation (N05 + N07, ~30 min)
+- Run `python _tools/cex_doctor.py` (full 184-kind check)
+- Run `python _tools/cex_flywheel_audit.py` (109 checks)
+- Run `python _tools/cex_system_test.py` (54 tests)
+- Generate coverage report: each atom term mapped to kind+KC
+- Identify remaining uncovered terms (target < 5%)
+
+**Gate**: System test 54/54 pass, flywheel audit clean, coverage report > 95%.
+
+### Wave 6: Gap Closure + Quality (N03 + N05, ~30 min)
+- Address any terms from Wave 5 coverage report still unmapped
+- Run `python _tools/cex_evolve.py --target 9.0` on all new artifacts
+- Final compilation pass
+- Git tag: `v11.0.0-184-kinds`
+
+**Gate**: Final coverage >= 95%. All artifacts quality >= 8.5. Tagged.
+
+---
+
+## 6. Resource Estimates
+
+| Resource | Estimate | Notes |
+|----------|----------|-------|
+| **Total waves** | 7 (0-6) | Waves 1-3 run full 6-nucleus grid |
+| **Total dispatches** | ~26 nucleus-sessions | 4 grids + solos |
+| **Total artifacts** | ~1,234 | 884 builder artifacts + 350 KCs |
+| **Sonnet sessions** (max concurrent) | 20 | Within safe limit (rate_limits.yaml) |
+| **Estimated wall time** | ~5-6 hours | Waves are sequential, nuclei parallel within wave |
+| **Wave 4 (32-parallel)** | Uses atlas_wave2 pattern | 5s spawn interval, expect ~4 429s, retry |
+| **Model budget** | 2 Opus (N07, N03) + 5 Sonnet (N01-N06 minus N03) | Per nucleus_models.yaml |
+
+---
+
+## 7. Pillar Distribution (After 184 Kinds)
+
+| Pillar | Current | +New | Total | % of Total |
+|--------|---------|------|-------|-----------|
+| P01 Knowledge | 16 | 5 | 21 | 11.4% |
+| P02 Model | 15 | 4 | 19 | 10.3% |
+| P03 Prompt | 12 | 5 | 17 | 9.2% |
+| P04 Tools | 18 | 5 | 23 | 12.5% |
+| P05 Output | 7 | 0 | 7 | 3.8% |
+| P06 Schema | 6 | 1 | 7 | 3.8% |
+| P07 Evaluation | 12 | 7 | 19 | 10.3% |
+| P08 Architecture | 8 | 2 | 10 | 5.4% |
+| P09 Config | 11 | 5 | 16 | 8.7% |
+| P10 Memory | 10 | 4 | 14 | 7.6% |
+| P11 Feedback | 10 | 7 | 17 | 9.2% |
+| P12 Orchestration | 7 | 2 | 9 | 4.9% |
+| **Total** | **132** | **52** | **184** | **100%** |
+
+---
+
+## 8. Framework Coverage After Completion
+
+| Framework | Terms | Coverage Before | Coverage After |
+|-----------|-------|----------------|---------------|
+| LangChain/LangGraph | ~180 | 36% | 90%+ |
+| CrewAI | ~80 | 56% | 95%+ |
+| AutoGen/AG2 | ~90 | 39% | 90%+ |
+| DSPy | ~70 | 43% | 92%+ |
+| OpenAI API/Agents SDK | ~120 | 46% | 93%+ |
+| Google ADK/Vertex | ~100 | 40% | 88%+ |
+| Anthropic MCP | ~60 | 83% | 98%+ |
+| A2A Protocol | ~40 | 75% | 95%+ |
+| OWASP LLM Top 10 | ~45 | 22% | 90%+ |
+| NIST AI RMF (511 terms) | ~511 | 16% | 85%+ |
+| MLflow/W&B | ~80 | 19% | 88%+ |
+| Voice/Realtime | ~140 | <10% | 90%+ |
+| Code Agents | ~110 | 20% | 92%+ |
+| Reasoning/RL | ~130 | 15% | 88%+ |
+| Memory Architectures | ~110 | 50% | 95%+ |
+| RAG Advanced | ~180 | 60% | 95%+ |
+
+---
+
+## 9. Execution Command
+
+```bash
+# N07 runs this after GDP decisions are locked:
+python _tools/cex_mission_runner.py \
+  --plan _docs/specs/spec_mission_100pct_coverage.md \
+  --mission COVERAGE_100 \
+  --timeout 21600 \
+  --waves 7
+```
+
+Or manually per wave:
+```bash
+# Wave 0: N07 solo
+bash _spawn/dispatch.sh solo n07 "Execute Wave 0 of COVERAGE_100 mission"
+
+# Wave 1-3: Full grid
+bash _spawn/dispatch.sh grid COVERAGE_100_W1
+bash _spawn/dispatch.sh grid COVERAGE_100_W2
+bash _spawn/dispatch.sh grid COVERAGE_100_W3
+
+# Wave 4: 32-parallel atlas pattern
+powershell -File boot/atlas_wave2.ps1  # (adapted for KC hydration)
+
+# Wave 5-6: Validation + closure
+bash _spawn/dispatch.sh grid COVERAGE_100_W5
+bash _spawn/dispatch.sh grid COVERAGE_100_W6
+```
+
+---
+
+## 10. Success Criteria
+
+| Criterion | Threshold | Measurement |
+|-----------|-----------|-------------|
+| Total kinds registered | >= 184 | `jq 'keys | length' .cex/kinds_meta.json` |
+| Builders passing doctor | >= 180 | `python _tools/cex_doctor.py` |
+| Knowledge cards created | >= 350 | `find P01_knowledge/ -name "kc_*.md" | wc -l` |
+| Term coverage | >= 95% | Each atom term maps to kind OR KC |
+| Artifact quality floor | >= 8.5 | `python _tools/cex_score.py --all` |
+| System tests | 54/54 | `python _tools/cex_system_test.py` |
+| Git tag | v11.0.0 | `git tag` |
+
+---
+
+## 11. Dependencies
+
+| Dependency | Status | Blocker? |
+|------------|--------|----------|
+| kinds_meta.json writable | OK | No |
+| cex_materialize.py functional | OK | No |
+| cex_doctor.py covers new kinds | Needs update | Wave 0 |
+| Builder archetype scaffold | Needs creation for 52 kinds | Wave 0 |
+| Rate limits (32 concurrent) | Documented in rate_limits.yaml | Wave 4 |
+| Ollama preflight (qwen3:14b) | Built by N05 (cex_preflight.py) | Optional |
+
+---
+
+## 12. Risk Register
+
+| Risk | Impact | Mitigation |
+|------|--------|-----------|
+| 429 rate limit during Wave 4 (32-parallel) | 4/32 fail | Retry with 15s interval (proven in atlas_wave2) |
+| Builder quality below 8.5 | Blocks release | Wave 6 evolve pass raises floor |
+| Some atoms have vendor-specific noise | Inflated KC count | Strict KC dedup in Wave 4 gate |
+| kinds_meta.json merge conflict | Data loss | N07 solo in Wave 0 (no concurrent writes) |
+| Quota exhaustion mid-mission | Stalled waves | Monitor with cex_quota_check.py, pause/resume |

@@ -1,0 +1,157 @@
+id: ex_content_monetization_generic
+kind: content_monetization
+pillar: P11
+version: 1.0.0
+title: Content Monetization Framework -- D2C Ecommerce Funnel
+description: Content-to-revenue funnel for D2C ecommerce brands. Maps content pillars to funnel stages, engagement targets,
+  CTA types, and product mention rules. Generic template with {{BRAND_*}} placeholders.
+domain: content_monetization
+nucleus: N06
+quality: null
+tags:
+- content-monetization
+- funnel
+- ecommerce
+- cta
+- attribution
+- d2c
+- revenue
+brand_placeholders:
+- BRAND_NAME
+- BRAND_DOMAIN
+- BRAND_VERTICAL
+- BRAND_PRODUCT_CATALOG
+- BRAND_UTM_SOURCE
+- BRAND_MONTHLY_VISITORS
+- BRAND_AOV
+- BRAND_CONVERSION_RATE
+- BRAND_PERSONA_NAME
+1_funnel_architecture: "AWARENESS (30%)         CONSIDERATION (40%)     CONVERSION (20%)        RETENTION (10%)\n~30% of content\
+  \         ~40% of content         ~20% of content         ~10% of content\n\nGoal: REACH             Goal: TRUST       \
+  \      Goal: PURCHASE          Goal: REPEAT\nKPI: impressions,       KPI: saves, profile     KPI: clicks,            KPI:\
+  \ reorder rate,\n     shares, new        visits, blog time-on-   add-to-cart,            NPS, UGC\n     followers      \
+  \    page                    checkout starts         submissions\n\n---"
+2_stage_1_awareness_30_of_content_budget: ''
+content_types: '| Type | Format | Goal |
+
+  |------|--------|------|
+
+  | Limited offer / promo | Reel + Stories | Purchase with urgency |
+
+  | UGC / testimonials | Repost | Social proof -> conversion |
+
+  | Product bundles | Carousel | AOV uplift |
+
+  | Affiliate codes | Stories | Tracked conversion |'
+engagement_targets_example_ranges: '| Metric | Example range | Your target |
+
+  |--------|--------------|-------------|
+
+  | Reach per post | 3-5x follower count | (your data) |
+
+  | Share rate | 2-4% of reach | (your data) |
+
+  | New followers/week | 150-600 | (your data) |'
+cta_rules_awareness: '- Follow on every awareness post
+
+  - Share on humor/meme content
+
+  - Save on educational content
+
+  - NEVER: product links (kills shareability at awareness stage)
+
+
+  ---'
+3_stage_2_consideration_40_of_content_budget: ''
+engagement_targets: '| Metric | Example range | Your target |
+
+  |--------|--------------|-------------|
+
+  | Blog time-on-page | 3-5 min | (your data) |
+
+  | Profile visit rate | 5-10% of reach | (your data) |
+
+  | Link-in-bio CTR | 1-3% | (your data) |'
+cta_rules_consideration: '- Link in bio to product catalog or blog
+
+  - "Ver mais" / "Saiba mais" to specific product page
+
+  - Save for later (educational content)
+
+  - AI persona chat link
+
+
+  ---'
+4_stage_3_conversion_20_of_content_budget: ''
+conversion_metrics_example_ranges: '| Metric | Example range | Your target |
+
+  |--------|--------------|-------------|
+
+  | {{BRAND_DOMAIN}} monthly visitors | 5,000-50,000 | {{BRAND_MONTHLY_VISITORS}} |
+
+  | Avg order value | R$80-300 | {{BRAND_AOV}} |
+
+  | Conversion rate | 1.5-3.5% | {{BRAND_CONVERSION_RATE}} |
+
+  | Cart abandonment | 65-80% | (your data) |'
+utm_convention: 'utm_source={{BRAND_UTM_SOURCE}}
+
+  utm_medium=social|blog|email
+
+  utm_campaign={content_pillar}_{month}
+
+  utm_content={post_id}
+
+
+  ---'
+5_stage_4_retention_10_of_content_budget: ''
+retention_levers: '| Lever | Tactic | Expected impact |
+
+  |-------|--------|-----------------|
+
+  | Reorder prompt | Email/WhatsApp 30 days post-purchase | +15-25% reorder rate |
+
+  | Partner upsell | B2B invite after 2nd purchase | Channel diversification |
+
+  | UGC campaign | Branded hashtag + repost | Organic reach + social proof |
+
+  | Loyalty program | Points / early access | LTV increase |
+
+
+  ---'
+6_product_mention_rules: '| Stage | Product mention rule |
+
+  |-------|---------------------|
+
+  | Awareness | NONE -- brand implicit only |
+
+  | Consideration | Mention product category, not specific SKU |
+
+  | Conversion | Specific SKU + direct product link |
+
+  | Retention | Personalized based on past purchase |
+
+
+  ---'
+7_revenue_model: '| Revenue stream | Source | Example benchmark |
+
+  |----------------|--------|-------------------|
+
+  | D2C sales | Own website + marketplace | Core revenue |
+
+  | B2B/wholesale | Partner program | 20-40% of revenue at scale |
+
+  | Affiliate commissions | Partner program | 5-15% affiliate share |
+
+  | Content IP | Templates, training | Optional secondary |
+
+
+  ---'
+8_content_roi_formula: "Monthly content revenue = Monthly visitors\n  x Conversion rate\n  x AOV\n  = Example: 10,000 x 2%\
+  \ x R$150 = R$30,000/month\n\nContent cost = Team hours x hourly rate + tools\nBreak-even = Content cost / (Conversion rate\
+  \ x AOV)\n\n---"
+new_brand_variables:
+- '`BRAND_UTM_SOURCE` -- primary UTM source (e.g. instagram, blog)'
+- '`BRAND_MONTHLY_VISITORS` -- current monthly website visitors'
+- '`BRAND_AOV` -- average order value in brand currency'
+- '`BRAND_CONVERSION_RATE` -- current website conversion rate (%)'

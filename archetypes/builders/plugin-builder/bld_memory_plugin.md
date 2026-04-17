@@ -18,6 +18,8 @@ updated: "2026-04-07"
 density_score: 0.90
 ---
 # Memory: plugin-builder
+
+This ISO defines a plugin contract: the extension surface a host uses to load, register, and invoke external capability.
 ## Summary
 Plugins are modular extensions with interface contracts, lifecycle management, and API surfaces that extend system capabilities without modifying core code. The critical production lesson is lifecycle completeness — plugins that define load and enable but omit disable and unload create resource leaks and zombie processes. Every lifecycle hook must have its inverse. The second lesson is isolation: plugins must declare their isolation level to prevent one plugin's failure from cascading to others.
 ## Pattern

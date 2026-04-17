@@ -1,0 +1,48 @@
+kind: instruction
+id: bld_instruction_nucleus_def
+pillar: P03
+llm_function: REASON
+purpose: Step-by-step production process for nucleus_def
+quality: null
+title: Instruction Nucleus Def
+version: 1.0.0
+author: n05_wave8
+tags:
+- nucleus_def
+- builder
+- instruction
+tldr: Step-by-step production process for nucleus_def
+domain: nucleus_def construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+phase_1_research:
+- Read `.cex/config/nucleus_models.yaml` to extract cli_binding and model_tier for the target nucleus.
+- Read `.claude/rules/n0{X}-*.md` rule file to extract role, domain, and sin_lens.
+- Read `N0{X}_*/agent_card_n0{X}.md` to enumerate domain_agents and kinds_owned.
+- Scan `N0{X}_*/agents/` directory for non-builder agent definitions.
+- Scan `N0{X}_*/` for boot_script path (boot/n0{X}.ps1).
+- Read `N00_genesis/README.md` for fractal structure and pillar assignment.
+- Cross-reference `.cex/kinds_meta.json` for pillar ownership mapping.
+phase_2_compose:
+- Reference bld_schema_nucleus_def.md for required frontmatter fields.
+- 'Set nucleus_id to canonical form: N00, N01, N02, N03, N04, N05, N06, N07.'
+- 'Set role from enum: genesis | intelligence | marketing | builder | knowledge | operations | commercial | orchestrator.'
+- Populate pillars_owned as array of pillar codes (e.g., [P01, P07, P08, P09]).
+- Set sin_lens from nucleus rule file (e.g., "Ira Construtiva -- Constructive Wrath").
+- Set cli_binding from nucleus_models.yaml (claude | gemini | codex | ollama).
+- Set model_tier from nucleus_models.yaml (opus | sonnet | haiku | local).
+- Set boot_script to canonical path (e.g., boot/n05.ps1).
+- Set agent_card_path to canonical path (e.g., N05_operations/agent_card_n05.md).
+- 'List crew_templates_exposed: which crew patterns this nucleus assembles.'
+- 'List domain_agents: all non-builder agents in N0{X}_*/agents/.'
+- Use OUTPUT_TEMPLATE.md to produce the artifact body.
+phase_3_validate:
+- '[ ] All required fields present (nucleus_id, role, pillars_owned, sin_lens, cli_binding, model_tier).'
+- '[ ] nucleus_id matches pattern N0[0-7].'
+- '[ ] role is one of the 8 valid enum values.'
+- '[ ] pillars_owned is a non-empty array of valid P01-P12 codes.'
+- '[ ] cli_binding matches nucleus_models.yaml for the target nucleus.'
+- '[ ] crew_templates_exposed lists at least 1 composable pattern.'
+- '[ ] domain_agents lists known agents or empty array if none.'
+- '[ ] ID matches pattern ^p02_nd_n0[0-7]\.md$.'

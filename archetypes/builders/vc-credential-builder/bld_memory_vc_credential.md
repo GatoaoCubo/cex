@@ -1,0 +1,33 @@
+---
+kind: learning_record
+id: p10_lr_vc_credential_builder
+pillar: P10
+llm_function: INJECT
+purpose: Learned patterns and pitfalls for vc_credential construction
+quality: 8.7
+title: "Learning Record VC Credential"
+version: "1.0.0"
+author: n04_wave7
+tags: [vc_credential, builder, learning_record, W3C, VC-2.0, DID, data-integrity]
+tldr: "Learned patterns and pitfalls for vc_credential construction"
+domain: "vc_credential construction"
+created: "2026-04-14"
+updated: "2026-04-14"
+density_score: 0.85
+---
+
+## Observation
+Most VC 1.x implementations used `issuanceDate` and JWT encoding. VC 2.0 (May 2025) breaks both: field name changed to `validFrom`, JWT profile moved to separate spec (vc-jose-cose). Many CEX artifacts attempted to map VCs to existing compliance_framework kind (P11) but lost the cryptographic proof layer and DID binding.
+
+## Pattern
+Build vc_credential as a pure JSON-LD document with data-integrity proof, not as a policy document. The proof block (cryptosuite + proofValue) is the differentiator from a plain claim set. Always include credentialSchema so verifiers can validate claim semantics, not just signatures.
+
+## Evidence
+W3C VC 2.0 became a Recommendation in May 2025. OpenAgents.org launched production DID-based agent credentials in Feb 2026. Enterprise machine-to-human issuance ratios reached 144:1 by Q1 2026, confirming agent credential infrastructure is no longer experimental.
+
+## Recommendations
+- Always use `https://www.w3.org/ns/credentials/v2` context (not v1).
+- Use `validFrom` not `issuanceDate` (VC 2.0 breaking change).
+- Include `credentialSchema` with JSON Schema validator for all agent credentials.
+- Use `ecdsa-rdfc-2022` (secp256r1) for broad verifier support; `eddsa-rdfc-2022` (Ed25519) for performance.
+- Register status list at stable HTTPS endpoint before issuing credentials referencing it.

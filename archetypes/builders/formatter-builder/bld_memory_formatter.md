@@ -23,6 +23,7 @@ observation_types: [user, feedback, project, reference]
 quality: 9.2
 title: "Memory Formatter"
 density_score: 0.90
+llm_function: INJECT
 ---
 ## Summary
 A formatter defines how data is transformed into a presentation format. It is not a parser (which extracts data) and not a validator (which checks data). Its core deliverable is a table of transformation rules where each rule specifies the input type, the transformation applied, the output shape, and what happens when input is null.

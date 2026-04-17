@@ -23,6 +23,7 @@ observation_types: [user, feedback, project, reference]
 quality: 9.1
 title: "Memory Memory Scope"
 density_score: 0.90
+llm_function: INJECT
 ---
 ## Summary
 Memory scope config — which memory types an agent uses, backends, TTL, and isolation boundaries. The difference between a useful memory_scope and a useless one is concrete values

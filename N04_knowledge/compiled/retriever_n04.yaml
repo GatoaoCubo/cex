@@ -1,0 +1,116 @@
+id: p04_ret_n04_knowledge
+kind: retriever
+pillar: P04
+nucleus: n04
+title: Retriever -- N04 Dense + Sparse Fusion Configuration
+version: 1.0.0
+quality: null
+tags:
+- retriever
+- n04
+- dense_retrieval
+- sparse_retrieval
+- hybrid
+- RRF
+- P04
+domain: knowledge management
+status: active
+created: '2026-04-17'
+updated: '2026-04-17'
+author: n04_knowledge
+tldr: 'N04 retriever configuration: primary=pgvector dense+BM25 sparse, fusion=RRF(k=60), reranker=cross-encoder, fallback
+  chain to ChromaDB then TF-IDF. All tunable parameters and their current values.'
+density_score: null
+retriever_identity: '| Property | Value |
+
+  |----------|-------|
+
+  | Primary strategy | Hybrid (dense + sparse) |
+
+  | Dense backend | pgvector (cosine similarity) |
+
+  | Sparse backend | BM25 / TF-IDF (cex_retriever.py) |
+
+  | Fusion algorithm | Reciprocal Rank Fusion (RRF, k=60) |
+
+  | Reranker | cross-encoder (optional, enabled by default) |
+
+  | Embedding model | text-embedding-3-small (1536 dim) |
+
+  | Fallback chain | pgvector -> ChromaDB -> TF-IDF -> grep |
+
+
+  ---'
+dense_retriever_config: "dense_retriever:\n  backend: pgvector\n  connection:\n    host: \"${SUPABASE_URL}\"\n    key: \"\
+  ${SUPABASE_KEY}\"\n    table: \"knowledge_documents\"\n  embedding:\n    model: \"text-embedding-3-small\"\n    dimensions:\
+  \ 1536\n    encoding_format: \"float\"\n  search:\n    metric: \"cosine\"\n    top_k_candidates: 20          # retrieve\
+  \ 20 before rerank\n    score_threshold: 0.65\n    ef_search: 64                 # HNSW search parameter\n  namespaces:\n\
+  \    - \"cex_artifacts\"\n    - \"external_docs\"\n    - \"session_memory\"\n\n---"
+sparse_retriever_config: "sparse_retriever:\n  backend: bm25\n  index_path: \".cex/cache/bm25_index.pkl\"\n  corpus_path:\
+  \ \"N04_knowledge/\"\n  vocabulary_size: 12000          # current TF-IDF vocab\n  k1: 1.5                        # BM25\
+  \ term frequency saturation\n  b: 0.75                        # BM25 length normalization\n  top_k_candidates: 20\n  fallback_to_grep:\
+  \ true         # if index stale or missing\n\n---"
+fusion_config_rrf: "fusion:\n  algorithm: \"reciprocal_rank_fusion\"\n  k: 60                          # RRF k parameter (constant,\
+  \ 60 is standard)\n  weights:\n    dense: 1.0\n    sparse: 1.0\n  normalize_scores: true         # normalize to 0-1 before\
+  \ fusion\n  merge_top_k: 20               # merge top-20 from each retriever\n  output_top_k: 10              # return top-10\
+  \ after fusion\n\nWhy RRF?: No tuning required, handles different score scales from dense/sparse,\nconsistently outperforms\
+  \ weighted linear combination on knowledge retrieval.\n(Cormack et al. 2009)\n\n---"
+reranker_config: "reranker:\n  enabled: true                  # enable by default\n  model: \"cross-encoder/ms-marco-MiniLM-L-6-v2\"\
+  \n  batch_size: 8\n  max_length: 512\n  threshold: null                # use top_k, not threshold after rerank\n  candidates_to_rerank:\
+  \ 20       # rerank top-20 from fusion\n  output_top_k: 10              # return top-10 after reranking\n  fallback_on_error:\
+  \ true        # if reranker fails, return RRF results\n\n---"
+fallback_chain: "Level 1: pgvector (primary)\n  |-- available if SUPABASE_URL and SUPABASE_KEY set\n  |-- latency: 180ms (dense),\
+  \ 220ms (hybrid)\n  |\n  | FAIL -> Level 2\n  v\nLevel 2: ChromaDB (local persistent)\n  |-- available if chroma service\
+  \ running on localhost:8000\n  |-- latency: 120ms (dense), 160ms (hybrid)\n  |\n  | FAIL -> Level 3\n  v\nLevel 3: cex_retriever.py\
+  \ TF-IDF (embedded, zero dependency)\n  |-- always available (pure Python, no external service)\n  |-- 2184 documents indexed\n\
+  \  |-- latency: 45ms (sparse only, no dense)\n  |-- note: no reranking at this level\n  |\n  | FAIL -> Level 4\n  v\nLevel\
+  \ 4: grep-based keyword search\n  |-- pure OS-level, no Python dependencies\n  |-- bash: grep -r --include=\"*.md\" \"{query}\"\
+  \ ./N04_knowledge/\n  |-- latency: 5-20ms\n  |-- no scoring, just presence detection\n\n---"
+tuning_reference: '| Parameter | Current | Range | Effect |
+
+  |-----------|---------|-------|--------|
+
+  | `score_threshold` | 0.65 | 0.40-0.90 | Lower = more recall, more noise |
+
+  | `top_k_candidates` | 20 | 5-100 | Higher = better recall pre-rerank |
+
+  | `rrf_k` | 60 | 10-200 | Higher = less rank compression |
+
+  | `ef_search` (HNSW) | 64 | 16-512 | Higher = better recall, slower |
+
+  | `bm25_k1` | 1.5 | 0.5-3.0 | Lower = less TF saturation |
+
+  | `bm25_b` | 0.75 | 0-1.0 | Lower = less length normalization |
+
+
+  ---'
+performance_targets: '| Metric | Target | Alert Threshold |
+
+  |--------|--------|----------------|
+
+  | MRR@10 | >= 0.83 | < 0.75 |
+
+  | NDCG@10 | >= 0.80 | < 0.72 |
+
+  | p95 latency | < 500ms | > 1000ms |
+
+  | Corpus coverage | 100% | < 95% |
+
+
+  See `memory_benchmark_n04.md` for current measured values.
+
+
+  ---'
+integration: '| Artifact | Role |
+
+  |---------|------|
+
+  | `search_tool_n04.md` | Consumes this retriever config |
+
+  | `api_reference_rag_apis.md` | pgvector + Pinecone API specs |
+
+  | `embedding_config_knowledge.md` | Embedding model config |
+
+  | `retriever_config_knowledge.md` | Dense retriever config (P01 KC) |
+
+  | `memory_benchmark_n04.md` | Regression baselines |'

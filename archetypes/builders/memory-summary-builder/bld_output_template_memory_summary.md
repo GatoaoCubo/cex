@@ -41,22 +41,22 @@ freshness_decay: {{float_0_to_1}}
 description: "{{what_this_summary_captures_max_200ch}}"
 ```
 ## Overview
-{{what_this_summary_does_1_to_2_sentences}}
-{{when_it_triggers_and_what_scope_it_covers}}
+`{{what_this_summary_does_1_to_2_sentences}}`
+`{{when_it_triggers_and_what_scope_it_covers}}`
 ## Compression
 Method: {{abstractive|extractive|hybrid|sliding_window}}
-Ratio: {{input_tokens}}:{{output_tokens}} (approx {{compression_ratio}}x)
-Preserved: {{list_what_is_kept}}
-Dropped: {{list_what_is_discarded}}
+Ratio: `{{input_tokens}}`:{{output_tokens}} (approx `{{compression_ratio}}`x)
+Preserved: `{{list_what_is_kept}}`
+Dropped: `{{list_what_is_discarded}}`
 ## Trigger
-Condition: {{trigger_condition_description}}
+Condition: `{{trigger_condition_description}}`
 Threshold: {{numeric_threshold — tokens, turns, or time}}
-On fire: {{what_happens_when_trigger_activates}}
+On fire: `{{what_happens_when_trigger_activates}}`
 ## Retention
-Entities: {{retained|discarded}} — {{entity_types_kept}}
-Decisions: {{retained|discarded}} — {{decision_format}}
-Action items: {{retained|discarded}} — {{action_item_format}}
-Timestamps: {{retained|discarded}} — {{temporal_marker_format}}
+Entities: {{retained|discarded}} — `{{entity_types_kept}}`
+Decisions: {{retained|discarded}} — `{{decision_format}}`
+Action items: {{retained|discarded}} — `{{action_item_format}}`
+Timestamps: {{retained|discarded}} — `{{temporal_marker_format}}`
 
 ## Template Standards
 

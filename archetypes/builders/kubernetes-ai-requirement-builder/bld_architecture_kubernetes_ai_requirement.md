@@ -1,0 +1,49 @@
+---
+kind: architecture
+id: bld_architecture_kubernetes_ai_requirement
+pillar: P08
+llm_function: CONSTRAIN
+purpose: Component map of kubernetes_ai_requirement -- inventory, dependencies
+quality: 9.0
+title: "Architecture Kubernetes AI Requirement"
+version: "1.0.0"
+author: wave7_n03_dev_manifests
+tags: [kubernetes_ai_requirement, builder, architecture]
+tldr: "Component map of kubernetes_ai_requirement -- inventory, dependencies"
+domain: "kubernetes_ai_requirement construction"
+created: "2026-04-14"
+updated: "2026-04-14"
+density_score: 0.85
+---
+
+## Component Inventory
+| ISO Name              | Role                                  | Pillar | Status  |
+|-----------------------|---------------------------------------|--------|---------|
+| bld_manifest          | Builder identity (KAR author)         | P05    | Active  |
+| bld_instruction       | Research -> Compose -> Validate flow  | P03    | Active  |
+| bld_system_prompt     | KAR v1.35 persona, rules              | P03    | Active  |
+| bld_schema            | KAR field contract (GPU, RDMA, DRA)   | P06    | Active  |
+| bld_quality_gate      | HARD/SOFT gates for KAR conformance   | P11    | Active  |
+| bld_output_template   | YAML template with topology/fabric    | P05    | Active  |
+| bld_examples          | Golden 64x H100 + anti-examples       | P07    | Active  |
+| bld_knowledge_card    | CNCF KAR v1.35 domain knowledge       | P01    | Active  |
+| bld_architecture      | Component map, dependencies (this)    | P08    | Active  |
+| bld_collaboration     | Crew handoffs with platform teams     | P12    | Active  |
+| bld_config            | Naming p09_kar_*, max_bytes=4096      | P09    | Active  |
+| bld_memory            | Learned KAR patterns and pitfalls     | P10    | Active  |
+| bld_tools             | kubectl, dra-check, mig-parted        | P04    | Active  |
+
+## Dependencies
+| From                  | To                    | Type          |
+|-----------------------|-----------------------|---------------|
+| bld_manifest          | bld_config            | configuration |
+| bld_instruction       | bld_system_prompt     | dependency    |
+| bld_output_template   | bld_schema            | dependency    |
+| bld_quality_gate      | bld_examples          | validation    |
+| bld_collaboration     | bld_memory            | coordination  |
+| bld_tools             | kubectl + CNCF KAR CLI| integration   |
+| bld_schema            | DRA ResourceClaim API | constraint    |
+| bld_knowledge_card    | CNCF KAR v1.35 spec   | source        |
+
+## Architectural Position
+kubernetes_ai_requirement sits in CEX P09 (runtime config pillar) as the declarative contract between AI workloads and Certified Kubernetes AI Platforms. It upstreams from workload_spec (declared by ML teams) and downstreams to cluster_admission (enforced by KAR conformance CLI and DRA scheduler). It anchors the Kubernetes AI Conformance Program (Nov 2025) by making GPU-topology, InfiniBand, MIG, DRA, and checkpoint-PVC requirements machine-verifiable -- ensuring portable multi-node training and disaggregated inference across CNCF-certified vendors.

@@ -81,8 +81,8 @@ density_score: 0.90
 | Template | P11_feedback/templates/ | P04 |
 | Examples | P11_feedback/examples/ | P04 |
 | Compiled | P11_feedback/compiled/ | P04 |
-| Nucleus tool | N06_commercial/tools/ | P04 |
-| Nucleus KCs | N06_commercial/knowledge/ | P01 |
+| Nucleus tool | N06_commercial/P04_tools/ | P04 |
+| Nucleus KCs | N06_commercial/P01_knowledge/ | P01 |
 | Company config | _instances/{co}/N06_commercial/ | instance |
 
 ## Environment Variables

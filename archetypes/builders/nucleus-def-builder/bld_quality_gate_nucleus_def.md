@@ -1,0 +1,61 @@
+---
+kind: quality_gate
+id: p02_qg_nucleus_def
+pillar: P11
+llm_function: GOVERN
+purpose: Quality gate with HARD and SOFT scoring for nucleus_def
+quality: 9.0
+title: "Quality Gate Nucleus Def"
+version: "1.0.0"
+author: n05_wave8
+tags: [nucleus_def, builder, quality_gate]
+tldr: "Quality gate with HARD and SOFT scoring for nucleus_def"
+domain: "nucleus_def construction"
+created: "2026-04-14"
+updated: "2026-04-14"
+density_score: 0.85
+---
+
+## Definition
+
+| Metric | Threshold | Operator | Scope |
+|--------|-----------|----------|-------|
+| Nucleus registry completeness | 7/7 (N01-N07) | equals | All active nuclei |
+
+## HARD Gates
+
+| ID | Check | Fail Condition |
+|----|-------|---------------|
+| H01 | YAML frontmatter valid | Invalid YAML syntax or missing required fields |
+| H02 | ID matches pattern ^p02_nd_n0[0-7]\.md$ | ID format mismatch |
+| H03 | kind field equals "nucleus_def" | Kind field incorrect or missing |
+| H04 | nucleus_id is one of N00-N07 | Invalid or missing nucleus_id |
+| H05 | role is valid enum value | Role not in: genesis, intelligence, marketing, builder, knowledge, operations, commercial, orchestrator |
+| H06 | pillars_owned is non-empty array | Empty or missing pillars_owned |
+| H07 | cli_binding matches nucleus_models.yaml | CLI mismatch with source of truth |
+| H08 | boot_script path exists | boot/n0{X}.ps1 file not found |
+
+## SOFT Scoring
+
+| Dim | Dimension | Weight | Scoring Guide |
+|-----|-----------|--------|--------------|
+| D01 | Schema completeness (all required + recommended fields present) | 0.25 | All fields = 1.0, missing recommended = 0.7, missing required = 0 |
+| D02 | Data accuracy (cli_binding + model_tier verified against nucleus_models.yaml) | 0.25 | Verified exact match = 1.0, reasonable estimate = 0.5, guessed = 0 |
+| D03 | Composability (crew_templates_exposed + domain_agents populated and accurate) | 0.20 | Real templates + agents listed = 1.0, placeholder values = 0.5, empty = 0 |
+| D04 | Fractal alignment (pillars_owned reflects actual artifact production) | 0.20 | Verified against agent_card = 1.0, estimated = 0.5, all-12 claimed = 0 |
+| D05 | Boot contract validity (boot_script + handoff + signal format correct) | 0.10 | All three correct = 1.0, partial = 0.5, missing = 0 |
+
+## Actions
+
+| Score | Threshold | Action |
+|-------|-----------|--------|
+| GOLDEN | >=9.5 | Auto-register in nucleus registry |
+| PUBLISH | >=8.0 | Auto-register after validation |
+| REVIEW | >=7.0 | Require N07 review before registration |
+| REJECT | <7.0 | Reject -- fix cli_binding, pillars_owned, or boot_script |
+
+## Bypass
+
+| Conditions | Approver | Audit Trail |
+|------------|---------|-------------|
+| New nucleus being bootstrapped (boot_script not yet created) | N07 Orchestrator | Decision manifest entry |

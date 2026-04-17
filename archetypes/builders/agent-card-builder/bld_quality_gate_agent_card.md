@@ -16,8 +16,8 @@ tags:
   - autonomous-agent
   - p11
 tldr: "Gates ensuring agent_group spec files define a fully autonomous agent with role, model, tools, boot sequence, and dispatch rules."
+llm_function: GOVERN
 ---
-
 ## Definition
 A agent_group spec describes a fully autonomous agent: its identity, the LLM it runs on, the external tools it can call, how it starts up, how it receives work, and how it shuts down. A spec passes this gate when any operator could launch and operate the agent_group from the document alone, without consulting the author.
 ## HARD Gates

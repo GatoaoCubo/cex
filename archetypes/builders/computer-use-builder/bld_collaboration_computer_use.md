@@ -18,6 +18,8 @@ density_score: 0.90
 ---
 
 # Collaboration: computer-use-builder
+
+This ISO governs computer use: screen capture, mouse, and keyboard actions taken on behalf of the agent.
 ## My Role in Crews
 I am a SPECIALIST. I answer ONE question: "what screen actions can the LLM perform, at what resolution, and on what target?"
 I do not build DOM interactions. I do not define terminal commands.

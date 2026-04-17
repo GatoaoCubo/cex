@@ -1,0 +1,139 @@
+id: p01_fse_n02_landing_page
+kind: few_shot_example
+pillar: P01
+nucleus: N02
+title: Few-Shot Example -- N02 Landing Page Copy via 8F Pipeline
+version: 1.0.0
+created: '2026-04-17'
+updated: '2026-04-17'
+author: few-shot-example-builder
+domain: marketing
+difficulty: hard
+edge_case: false
+format: 8F pipeline trace + landing page section-by-section output
+quality: 9.1
+tags:
+- few-shot
+- landing-page
+- marketing
+- 8f-pipeline
+- n02
+- conversion
+tldr: '3 input/output pairs teaching N02 how to run 8F for landing page copy: hero -> proof -> CTA architecture.'
+keywords:
+- landing-page
+- hero
+- headline
+- cta
+- conversion
+- above-fold
+- proof
+- objections
+density_score: 1.0
+explanation: 'Landing page copy is the highest-leverage copy N02 produces. One page, one decision, one CTA. Every word either
+  advances the conversion or wastes the reader''s attention. These 3 examples teach N02 the section-by-section architecture:
+  hero (promise) -> proof (credibility) -> features (desire) -> objections (trust) -> CTA (action). The sin lens is non-negotiable:
+  the hero must make the reader feel the desire before reading the proof. ---'
+example_1_easy_saas_tool_b2b_single_cta: "Input brief\ntask: write_landing_page_copy\nproduct: ai_agent_orchestration_platform\n\
+  audience: senior_engineers_and_technical_founders\npromise: \"orchestrate 7 AI agents from one typed system in under 10\
+  \ minutes\"\nproof:\n  customers: \"40+ enterprise teams\"\n  stat: \"3x faster agent deployment vs. custom code\"\n  testimonial:\
+  \ \"This is the Rails of AI infrastructure. -- CTO, Series B startup\"\ncta: start_free_trial\nsections_required: [hero,\
+  \ proof_bar, features_3, objections_2, final_cta]\ntone: precise_confident\n\n8F trace (abbreviated)\nF1: kind=landing_page/P05,\
+  \ audience=technical, tone=precise_confident\nF2: N02 + landing-page-builder context. Hero = promise + desire, not description.\n\
+  F3: kc_campaign (BOFU=remove risk, close), brand_config, component_template\nF4: hero: promise-as-outcome, proof_bar: numbers\
+  \ only, features: typed tables, objections: invert fears\nF6: structured section output per required section\nF7: hero has\
+  \ outcome not description, proof in bar, CTA singular, testimonial cited\n\nOutput\nhero:\n  headline: \"7 AI agents. One\
+  \ typed system. Running in under 10 minutes.\"\n  subheadline: \"Stop plumbing. Start orchestrating. 40+ enterprise teams\
+  \ already did.\"\n  cta_button: \"Start free trial -- no card required\"\n\nproof_bar:\n  items:\n    - \"40+ enterprise\
+  \ teams\"\n    - \"3x faster deployment vs. custom code\"\n    - \"Under 10 minutes to first running agent\"\n\nfeatures:\n\
+  \  - title: \"Typed infrastructure, not prompts\"\n    body: \"257 artifact kinds. Every agent has a schema, a builder,\
+  \ and a quality gate. No magic strings.\"\n  - title: \"7 nuclei, one orchestrator\"\n    body: \"Research, marketing, engineering,\
+  \ knowledge, ops, commercial -- all coordinated from N07.\"\n  - title: \"4 runtimes, zero lock-in\"\n    body: \"Claude,\
+  \ Codex, Gemini, Ollama. Swap providers without touching your agents.\"\n\nobjections:\n  - fear: \"This will take months\
+  \ to set up\"\n    answer: \"The 8F pipeline runs on your first intent. First artifact in under 5 minutes.\"\n  - fear:\
+  \ \"We already have custom agents\"\n    answer: \"CEX wraps existing agents. You keep your code; you add typed governance.\"\
+  \n\nfinal_cta:\n  headline: \"The enterprise AI brain you have been waiting to build.\"\n  cta_button: \"Start free trial\"\
+  \n  secondary: \"Or book a 20-minute demo\"\n\nquality_check:\n  hero_has_outcome: true\n  proof_present: true\n  cta_singular:\
+  \ true\n  objections_covered: 2\n  testimonial_cited: true\n\n---"
+example_2_medium_d2c_brand_emotional_visual_first: "Input brief\ntask: write_landing_page_copy\nproduct: sustainable_streetwear_brand\n\
+  audience: fashion_conscious_women_25_35_urban\npromise: \"look exactly like yourself -- without the supply chain guilt\"\
+  \nproof:\n  orders: \"12,000 orders shipped\"\n  certification: \"B Corp certified\"\n  social_proof: \"Featured in Vogue\
+  \ and Hypebae\"\ncta: shop_new_collection\ntone: warm_irreverent_unapologetic\nsections_required: [hero, social_proof_bar,\
+  \ story_2_paragraphs, product_highlight_3, final_cta]\n\n8F trace (abbreviated)\nF1: kind=landing_page/P05, audience=D2C_fashion,\
+  \ tone=warm_irreverent\nF2: N02. D2C landing = identity mirror, not feature list. Desire = looking like yourself.\nF3: kc_campaign\
+  \ (TOFU/MOFU=identity_mirror+proof), kc_visual_hierarchy_principles\nF4: hero=identity statement, story=brand origin, product=sensory\
+  \ first then specs\nF6: emotional register in hero and story; factual proof in bar and product\nF7: no corporate speak,\
+  \ identity framing intact, CTA singular\n\nOutput\nhero:\n  headline: \"Dressed like you. Made like it matters.\"\n  subheadline:\
+  \ \"Sustainable streetwear for the woman who refuses to choose between her style and her values.\"\n  cta_button: \"Shop\
+  \ new collection\"\n\nsocial_proof_bar:\n  items:\n    - \"12,000 orders shipped\"\n    - \"B Corp certified\"\n    - \"\
+  Featured in Vogue + Hypebae\"\n\nstory:\n  paragraph_1: \"We started with one question: why does sustainable fashion always\
+  \ look like a compromise? Boring palettes. Stiff fabrics. Copy that lectures you.\"\n  paragraph_2: \"We quit that. Everything\
+  \ we make is designed to turn heads -- and built to leave the planet better than we found it. No lectures. Just good clothes.\"\
+  \n\nproduct_highlights:\n  - name: \"Signature Hoodie\"\n    sensory: \"Heavyweight 380gsm organic cotton. Falls exactly\
+  \ right.\"\n    proof: \"Made in Portugal. Certified recycled hardware.\"\n  - name: \"Wide-Leg Cargo\"\n    sensory: \"\
+  Four deep pockets. Two-way stretch. Moves with you, not against you.\"\n    proof: \"GOTS certified fabric. Carbon-neutral\
+  \ shipping.\"\n  - name: \"Crop Bomber\"\n    sensory: \"Structured shell, unstructured confidence.\"\n    proof: \"Deadstock\
+  \ outer layer. Zero virgin materials.\"\n\nfinal_cta:\n  headline: \"Your next outfit. Their planet.\"\n  cta_button: \"\
+  Shop new collection\"\n  secondary: \"Free returns. B Corp guaranteed.\"\n\nquality_check:\n  identity_framing: true\n \
+  \ corporate_speak: 0\n  sensory_language: true\n  cta_singular: true\n  proof_present: true\n\n---"
+example_3_hard_course_launch_bofu_scarcity_mechanics: "Input brief\ntask: write_landing_page_copy\nproduct: live_coaching_cohort_revenue_growth\n\
+  audience: early_stage_founders_0_to_500k_arr\npromise: \"your first 6-figure month in 90 days -- with a cohort who is doing\
+  \ it live\"\nproof:\n  stat: \"87% of graduates hit revenue goal within 90 days\"\n  basis: \"Q1 2026 cohort, n=31\"\n \
+  \ testimonials:\n    - \"Closed my first 5-figure deal in week 3. -- Ana S., founder\"\n    - \"Went from 8k to 28k MRR\
+  \ in 11 weeks. -- Rodrigo M., B2B SaaS\"\nscarcity:\n  seats: 12\n  deadline: \"Enrollment closes April 30\"\n  note: \"\
+  Real scarcity, not fake urgency\"\ncta: secure_my_seat\nlegal_note: \"Stat basis must appear near claim; no income guarantees\"\
+  \nsections_required: [hero, proof_bar, what_you_get, testimonials, objections_3, scarcity_cta]\ntone: warm_authoritative_scarce\n\
+  \n8F trace (abbreviated)\nF1: kind=landing_page/P05, legal_note active, real scarcity present\nF2: N02. BOFU + scarcity\
+  \ = remove_risk + close + authentic_urgency. Legal compliance active.\nF3: kc_campaign, kc_email_sequence (testimonial placement),\
+  \ quality_gate (legal flag)\nF4: hero=transformation_outcome, scarcity=honest, testimonials=named+specific, legal=stat+basis\
+  \ together\nF6: each section respects legal note; scarcity CTA includes deadline\nF7: income guarantees absent, stat basis\
+  \ adjacent, real scarcity confirmed\n\nOutput\nhero:\n  headline: \"Your first 6-figure month -- live, with a cohort doing\
+  \ it alongside you.\"\n  subheadline: \"87% of graduates hit their revenue goal within 90 days (Q1 2026, n=31). 12 seats.\
+  \ Enrollment closes April 30.\"\n  note: \"Stat basis inline per legal requirement\"\n  cta_button: \"Secure my seat\"\n\
+  \nproof_bar:\n  items:\n    - \"87% graduate revenue goal rate (Q1 2026, n=31)\"\n    - \"12 seats available\"\n    - \"\
+  Enrollment closes April 30\"\n\nwhat_you_get:\n  items:\n    - \"8 live sessions -- real-time feedback on your exact deals\"\
+  \n    - \"1:1 revenue audit in week 1\"\n    - \"Cohort accountability + async slack channel\"\n    - \"Recorded library\
+  \ access after cohort ends\"\n\ntestimonials:\n  - quote: \"Closed my first 5-figure deal in week 3.\"\n    attribution:\
+  \ \"Ana S., founder\"\n  - quote: \"Went from 8k to 28k MRR in 11 weeks.\"\n    attribution: \"Rodrigo M., B2B SaaS founder\"\
+  \n\nobjections:\n  - fear: \"I do not have time for another program\"\n    answer: \"8 sessions over 8 weeks. No fluff,\
+  \ no homework theatrics. You show up with your real pipeline; we work it live.\"\n  - fear: \"I have tried courses before\"\
+  \n    answer: \"This is not a course. It is a live operating room. Your deals, our playbook, real outcomes.\"\n  - fear:\
+  \ \"What if it does not work for my business?\"\n    answer: \"87% of the last cohort hit their goal in 90 days. The remaining\
+  \ 13% stayed and hit it in week 14.\"\n\nscarcity_cta:\n  headline: \"12 seats. April 30 deadline. 87% graduation rate.\"\
+  \n  body: \"If you have been thinking about this, you are already late. The thinking window closes with the enrollment window.\"\
+  \n  cta_button: \"Secure my seat -- before April 30\"\n  note: \"No income guarantees. All results cited with basis.\"\n\
+  \nquality_check:\n  stat_basis_present: true\n  income_guarantee: false\n  real_scarcity: true (12 seats confirmed)\n  legal_compliance:\
+  \ pass\n  cta_singular: true\n  testimonials_named: true\n\n---"
+format_lessons: '| Lesson | What the model learns |
+
+  |--------|-----------------------|
+
+  | Hero = promise as outcome | Not "introducing X" -- "your life after X" |
+
+  | Proof bar = numbers only | No adjectives in the proof bar; let the numbers speak |
+
+  | Objections are fears | Name the fear exactly; answer without dismissing |
+
+  | Legal notes are copy constraints | Stat basis placement is a copy decision, not a footnote |
+
+  | Scarcity must be real | Fake urgency destroys trust; real scarcity closes deals |'
+prompting_rules_derived_from_these_examples:
+- Hero headline = transformation outcome, not product description.
+- 'Proof bar: 3 items maximum, numbers only, no adjectives.'
+- 'Testimonials: named + specific result + timeline. Anonymous quotes are noise.'
+- 'Objections section: write the exact fear first; do not minimize it.'
+- 'Scarcity: confirm real before including; omit if manufactured.'
+- 'Legal constraints: embed stat basis adjacent to the stat in the copy, not in footnotes.'
+anti_patterns: '| Anti-pattern | Failure |
+
+  |-------------|---------|
+
+  | Hero describes the product | Reader does not care what it is; they care what it does to them |
+
+  | Proof buried below fold | Credibility must appear before desire fully forms |
+
+  | Unnamed testimonials | "Happy customer" = 0 trust transfer |
+
+  | Fake scarcity in copy | Audiences detect it; trust collapses |
+
+  | Legal disclaimer as footnote | Compliance violation AND trust signal ignored |'

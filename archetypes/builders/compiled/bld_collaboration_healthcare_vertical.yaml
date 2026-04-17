@@ -1,0 +1,28 @@
+kind: collaboration
+id: bld_collaboration_healthcare_vertical
+pillar: P12
+llm_function: COLLABORATE
+purpose: How healthcare_vertical-builder works in crews with other builders
+quality: null
+title: Collaboration Healthcare Vertical
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- healthcare_vertical
+- builder
+- collaboration
+tldr: How healthcare_vertical-builder works in crews with other builders
+domain: healthcare_vertical construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+crew_role: Integrates healthcare-specific workflows, ensures data interoperability, and aligns vertical features with clinical
+  and operational requirements.
+receives_from: "| Builder        | What                  | Format      |  \n|----------------|-----------------------|-------------|\
+  \  \n| Data Engineer  | Patient data streams  | CSV/JSON    |  \n| Compliance Officer | Regulatory guidelines | PDF/JSON\
+  \  |  \n| UI/UX Designer | Interface mockups     | Figma/Sketch|"
+produces_for: "| Builder        | What                        | Format      |  \n|----------------|-----------------------------|-------------|\
+  \  \n| Data Scientist | Anonymized datasets         | Parquet     |  \n| Operations Manager | Workflow automation specs\
+  \ | YAML        |  \n| Compliance Officer | Compliance-ready interface | PDF       |"
+boundary: Does NOT handle audit trails, legal documentation, or end-to-end compliance validation (handled by Compliance Officer).
+  Excludes case study development (handled by Research Team).

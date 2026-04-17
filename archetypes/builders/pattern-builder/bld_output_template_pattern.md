@@ -47,39 +47,39 @@ applicability: "{{when_to_use_and_when_not}}"
 keywords: [{{kw_1}}, {{kw_2}}, {{kw_3}}]
 ```
 ## Problem
-{{recurring_problem_in_concrete_terms}}
+`{{recurring_problem_in_concrete_terms}}`
 ## Context
-1. Environment: {{where_problem_occurs}}
-2. Frequency: {{how_often_encountered}}
-3. Severity: {{impact_if_unsolved}}
+1. Environment: `{{where_problem_occurs}}`
+2. Frequency: `{{how_often_encountered}}`
+3. Severity: `{{impact_if_unsolved}}`
 ## Forces
-1. {{tension_1}}: {{why_hard_1}}
-2. {{tension_2}}: {{why_hard_2}}
-3. {{tension_3}}: {{why_hard_3}}
+1. `{{tension_1}}`: `{{why_hard_1}}`
+2. `{{tension_2}}`: `{{why_hard_2}}`
+3. `{{tension_3}}`: `{{why_hard_3}}`
 ## Solution
-{{reusable_approach_concrete_steps}}
+`{{reusable_approach_concrete_steps}}`
 ```text
 {{optional_ascii_diagram_of_solution}}
 ```
 ## Consequences
 Benefits:
-1. {{benefit_1}}
-2. {{benefit_2}}
+1. `{{benefit_1}}`
+2. `{{benefit_2}}`
 Costs:
-1. {{cost_1}}
-2. {{cost_2}}
+1. `{{cost_1}}`
+2. `{{cost_2}}`
 ## Examples
-1. **{{example_name_1}}**: {{concrete_application_1}}
-2. **{{example_name_2}}**: {{concrete_application_2}}
+1. **`{{example_name_1}}`**: `{{concrete_application_1}}`
+2. **`{{example_name_2}}`**: `{{concrete_application_2}}`
 ## Anti-Patterns
-1. **{{anti_name_1}}**: {{why_wrong_1}}
-2. **{{anti_name_2}}**: {{why_wrong_2}}
+1. **`{{anti_name_1}}`**: `{{why_wrong_1}}`
+2. **`{{anti_name_2}}`**: `{{why_wrong_2}}`
 ## Related Patterns
-1. {{related_pattern_1}}: {{relationship_description_1}}
-2. {{related_pattern_2}}: {{relationship_description_2}}
+1. `{{related_pattern_1}}`: `{{relationship_description_1}}`
+2. `{{related_pattern_2}}`: `{{relationship_description_2}}`
 ## References
-1. {{reference_1}}
-2. {{reference_2}}
+1. `{{reference_1}}`
+2. `{{reference_2}}`
 
 ## Properties
 

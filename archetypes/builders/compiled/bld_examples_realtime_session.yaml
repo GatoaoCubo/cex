@@ -1,0 +1,110 @@
+kind: examples
+id: bld_examples_realtime_session
+pillar: P07
+llm_function: GOVERN
+purpose: Golden and anti-examples of realtime_session artifacts (LLM streaming, not video conf)
+quality: null
+title: 'Examples: realtime-session-builder'
+version: 1.1.0
+author: n01_audit
+tags:
+- realtime_session
+- builder
+- examples
+- openai_realtime
+- websocket
+- webrtc
+tldr: 'Golden example: OpenAI WebSocket realtime session. Anti-examples: generic model, missing VAD, raw API key.'
+domain: realtime_session construction
+created: '2026-04-13'
+updated: '2026-04-13'
+density_score: 0.9
+golden_example_openai_realtime_api_via_websocket: '---
+
+  kind: realtime_session
+
+  id: p04_rs_support_voicebot
+
+  pillar: P04
+
+  provider: openai
+
+  model: gpt-4o-realtime-preview-2024-12-17
+
+  transport: websocket
+
+  version: "1.0.0"
+
+  created: 2026-04-13
+
+  updated: 2026-04-13
+
+  quality: null
+
+  tags: [realtime_session, openai, websocket, vad, support]
+
+  tldr: "Customer support voicebot: OpenAI Realtime WebSocket, server_vad, pcm16@24kHz, barge-in."
+
+  ---'
+session_config: "{\n  \"model\": \"gpt-4o-realtime-preview-2024-12-17\",\n  \"modalities\": [\"audio\", \"text\"],\n  \"voice\"\
+  : \"alloy\",\n  \"instructions\": \"You are a customer support agent for Acme Corp. Be concise.\",\n  \"input_audio_format\"\
+  : \"pcm16\",\n  \"output_audio_format\": \"pcm16\",\n  \"input_audio_transcription\": {\"model\": \"whisper-1\"},\n  \"\
+  turn_detection\": {\n    \"type\": \"server_vad\",\n    \"threshold\": 0.5,\n    \"prefix_padding_ms\": 300,\n    \"silence_duration_ms\"\
+  : 500\n  },\n  \"tools\": [],\n  \"tool_choice\": \"auto\",\n  \"temperature\": 0.8,\n  \"max_response_output_tokens\":\
+  \ 1024\n}"
+why_it_passes: '- Provider + model pinned to realtime-capable version ✓
+
+  - Transport `websocket` paired with `pcm16` codec ✓
+
+  - `server_vad` with explicit threshold, padding, silence_ms ✓
+
+  - `quality: null` in frontmatter ✓
+
+  - ID matches `^p04_rs_[a-z0-9_]{3,48}\.md$` ✓
+
+
+  ---'
+anti_example_1_generic_model_id_h04_fail: '---
+
+  kind: realtime_session
+
+  id: p04_rs_chat_agent
+
+  pillar: P04
+
+  provider: openai
+
+  model: gpt-4o
+
+  transport: websocket
+
+  quality: null
+
+  ---'
+why_it_fails: 'Raw `OPENAI_API_KEY` is exposed in the browser. Gate: H09 -- API key MUST NOT appear in artifact. Instead:
+  mint ephemeral token server-side via `POST /v1/realtime/sessions` (60s TTL), pass `client_secret.value` to browser only.'
+anti_example_2_missing_vad_and_barge_in_h07_h08_fail: "{\n  \"model\": \"gpt-4o-realtime-preview-2024-12-17\",\n  \"modalities\"\
+  : [\"audio\"],\n  \"voice\": \"alloy\"\n}"
+anti_example_3_raw_api_key_exposed_h09_fail: "const pc = new RTCPeerConnection();\n// WRONG: api_key shipped to browser\n\
+  const ws = new WebSocket(\"wss://api.openai.com/v1/realtime?model=gpt-4o-realtime-preview\",\n  [\"realtime\", `openai-insecure-api-key-${process.env.OPENAI_API_KEY}`]);"
+properties: '| Property | Value |
+
+  |----------|-------|
+
+  | Kind | `examples` |
+
+  | Pillar | P07 |
+
+  | Domain | realtime_session construction |
+
+  | Pipeline | 8F (F1-F8) |
+
+  | Scorer | cex_score.py |
+
+  | Compiler | cex_compile.py |
+
+  | Retriever | cex_retriever.py |
+
+  | Quality target | 9.0+ |
+
+  | Density target | 0.85+ |'

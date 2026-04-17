@@ -13,11 +13,11 @@ summary:
 - 'Missing: 1 (Config directory)'
 - 'Broken references: 0'
 critical_gaps_must_fix:
-- 'Pillar P09 (Config) is Empty: The `N01_intelligence/config/` directory contains no artifacts. A nucleus''s config pillar
+- 'Pillar P09 (Config) is Empty: The `N01_intelligence/P09_config/` directory contains no artifacts. A nucleus''s config pillar
   is essential for holding runtime rules, feature flags, and other configurations. This violates the established fractal architecture
   pattern and must be remediated by creating a default config artifact.'
 warn_gaps_should_fix:
-- 'Ambiguous `P10_memory` Directory Content: The files in `N01_intelligence/memory/` define the RAG system configuration (ingestion
+- 'Ambiguous `P10_memory` Directory Content: The files in `N01_intelligence/P10_memory/` define the RAG system configuration (ingestion
   sources and embedding models), not "learning records" or runtime memories. While the content itself is high-quality, the
   pillar''s purpose could be misinterpreted. It''s unclear where runtime learning records for N01 are stored. This should
   be clarified in the documentation to avoid confusion.'
@@ -36,9 +36,9 @@ systemic_patterns: The P09 config gap and P10 memory ambiguity reveal a fractal 
   integration failures during cross-nucleus handoffs. The auto-healing flywheel appears optimized for content quality but
   under-engineered for structural integrity validation.
 recommended_actions_priority_order:
-- '[High] Create a default configuration artifact (e.g., `config.md`) inside `N01_intelligence/config/` with baseline settings
+- '[High] Create a default configuration artifact (e.g., `config.md`) inside `N01_intelligence/P09_config/` with baseline settings
   for the nucleus.'
-- '[Medium] Add a `README.md` to the `N01_intelligence/memory/` directory explaining that it contains the configuration for
+- '[Medium] Add a `README.md` to the `N01_intelligence/P10_memory/` directory explaining that it contains the configuration for
   the memory system, not the memory state itself.'
 - '[Low] Investigate the feasibility of creating a new `eval-dataset` schema and artifact type within the `P06_schema` and
   `P07_evals` pillars.'

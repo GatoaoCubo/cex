@@ -1,0 +1,61 @@
+---
+kind: quality_gate
+id: p02_qg_rl_algorithm
+pillar: P11
+llm_function: GOVERN
+purpose: Quality gate with HARD and SOFT scoring for rl_algorithm
+quality: 9.1
+title: "Quality Gate Rl Algorithm"
+version: "1.0.0"
+author: wave1_builder_gen
+tags: [rl_algorithm, builder, quality_gate]
+tldr: "Quality gate with HARD and SOFT scoring for rl_algorithm"
+domain: "rl_algorithm construction"
+created: "2026-04-13"
+updated: "2026-04-13"
+density_score: 0.85
+---
+
+## Definition
+| metric               | threshold         | operator | scope          |
+|----------------------|-------------------|----------|----------------|
+| Training loss        | <= 0.1            | <=       | All episodes   |
+| Reward convergence   | >= 95%            | >=       | Final 10%      |
+| Training duration    | <= 72h            | <=       | Per experiment |
+
+## HARD Gates
+| ID   | Check                  | Fail Condition                          |
+|------|------------------------|-----------------------------------------|
+| H01  | YAML valid             | Invalid YAML syntax                     |
+| H02  | ID matches pattern     | ID does not match `^p02_rla_[a-zA-Z0-9_]+$` |
+| H03  | Kind matches           | Kind != `rl_algorithm`                 |
+| H04  | Parameters complete    | Missing required algorithm parameters  |
+| H05  | Hyperparameters valid  | Hyperparameters outside defined ranges |
+| H06  | Training duration      | Training time exceeds 72h              |
+| H07  | Reward threshold       | Final reward < 95% of target           |
+
+## SOFT Scoring
+| Dim | Dimension         | Weight | Scoring Guide                          |
+|-----|-------------------|--------|----------------------------------------|
+| D01 | Code quality      | 0.15   | 100%: clean, 75%: minor issues         |
+| D02 | Documentation     | 0.10   | 100%: complete, 50%: partial           |
+| D03 | Training perf     | 0.15   | 100%: meets loss/reward targets        |
+| D04 | Hyperparam tuning | 0.10   | 100%: optimal, 50%: suboptimal         |
+| D05 | Convergence       | 0.10   | 100%: stable, 50%: fluctuating         |
+| D06 | Reward design     | 0.15   | 100%: aligned with objective           |
+| D07 | Scalability       | 0.10   | 100%: handles 10k+ episodes            |
+| D08 | Reproducibility   | 0.15   | 100%: same results on 3 runs           |
+
+## Actions
+| Score     | Action                          |
+|-----------|---------------------------------|
+| GOLDEN    | >=9.5: Auto-publish             |
+| PUBLISH   | >=8.0: Manual review required   |
+| REVIEW    | >=7.0: Detailed review required |
+| REJECT    | <7.0: Reject, fix and resubmit  |
+
+## Bypass
+| conditions                          | approver         | audit trail                          |
+|------------------------------------|------------------|--------------------------------------|
+| Emergency fix for production issue | Senior engineer  | Log bypass reason and approver name  |
+| Experimental phase with risk approval | Manager         | Document experimental scope and risks |

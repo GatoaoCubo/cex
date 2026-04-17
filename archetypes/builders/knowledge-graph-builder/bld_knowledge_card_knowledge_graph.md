@@ -1,0 +1,121 @@
+---
+kind: knowledge_card
+id: bld_knowledge_card_knowledge_graph
+pillar: P01
+llm_function: INJECT
+purpose: Domain knowledge for knowledge_graph production -- graph schema design and GraphRAG patterns
+sources: Microsoft GraphRAG (2024), LlamaIndex KnowledgeGraphIndex, LightRAG (2024), Neo4j docs, FalkorDB docs
+quality: 9.2
+title: "Knowledge Card: knowledge_graph"
+version: "1.0.0"
+author: n03_builder
+tags: [knowledge_graph, builder, knowledge-card, GraphRAG, P01]
+tldr: "Graph knowledge schemas: constrained entity types, annotated relation types, dedup strategy, hybrid traversal, neo4j/falkordb for production."
+domain: "knowledge graph construction"
+created: "2026-04-13"
+updated: "2026-04-13"
+density_score: 0.91
+---
+
+# Domain Knowledge: knowledge_graph
+
+## Executive Summary
+A knowledge_graph defines the relational structure for domain knowledge: entity types,
+relation types, extraction prompts, storage backend, traversal strategies, and embedding
+integration. It answers: "what entities exist in this domain, how are they related, and
+how do we extract, store, and traverse those relationships?" Unlike flat vector search,
+knowledge graphs enable multi-hop queries, theme summarization, and relationship discovery.
+
+## Spec Table
+
+| Property | Value |
+|----------|-------|
+| Pillar | P01 (Knowledge) |
+| llm_function | INJECT |
+| max_bytes | 8192 |
+| Required frontmatter | 13 fields |
+| Quality gates | 12 HARD + 12 SOFT |
+| Entity types | 3-10 recommended (constrained whitelist) |
+| Relation types | 5-15 recommended |
+| Storage backends | neo4j, falkordb, in_memory, json |
+| Traversal strategies | local, global, hybrid |
+| Dedup strategies | exact, fuzzy, llm |
+| Community detection | leiden, louvain, none |
+
+## Framework Comparison
+
+| Framework | Extraction | Storage | Traversal | Best for |
+|-----------|-----------|---------|-----------|----------|
+| Microsoft GraphRAG | LLM community summaries | in_memory or neo4j | global + local | Large corpora, theme queries |
+| LlamaIndex KG | LLM triplet extraction | in_memory or neo4j | local | Structured knowledge Q&A |
+| LightRAG | Incremental LLM | in_memory | local + global | Frequently updated corpora |
+| Neo4j + LangChain | External ETL | neo4j | Cypher QA | Complex relational queries |
+| FalkorDB | External ETL | falkordb | Cypher | High-throughput, Redis ecosystem |
+| Haystack KG | NLP pipeline | RDF store | SPARQL | Academic/semantic web patterns |
+
+## Patterns
+
+**Entity type whitelisting**: constrain extraction to 3-10 explicit types.
+- More types = richer graph + noisier extraction. Find the minimum sufficient set.
+- Include extraction hints (phrases that signal the type) and example instances.
+
+**Relation type annotation**:
+| Component | Required | Purpose |
+|-----------|----------|---------|
+| name | YES | Machine-readable relation identifier |
+| source_type | YES | Entity type at relation source |
+| target_type | YES | Entity type at relation target |
+| description | YES | Human-readable semantic meaning |
+| directionality | YES | directed (A->B) or undirected (A--B) |
+
+**Deduplication strategy selection**:
+| Strategy | Accuracy | Cost | Use when |
+|----------|----------|------|----------|
+| exact | Low | Zero | All names are canonical (unlikely) |
+| fuzzy | Medium | Low | Default -- variable naming conventions |
+| llm | High | High | Precision matters, budget available |
+
+**Traversal strategy selection**:
+| Strategy | Query type answered | When to use |
+|----------|--------------------|-----------:|
+| local | "What do I know about entity X?" | Entity-centric retrieval |
+| global | "What are the main themes/trends?" | Corpus-level synthesis |
+| hybrid | Both types | Default recommendation |
+
+**Storage backend selection**:
+| Backend | Scale | Persistence | Query | Use when |
+|---------|-------|------------|-------|---------|
+| in_memory | < 10k nodes | None | Python API | Prototyping only |
+| json | < 50k nodes | File | Python | Simple persistence |
+| falkordb | < 1M nodes | Redis | Cypher | Production, high throughput |
+| neo4j | Unlimited | ACID | Cypher | Production, complex queries |
+
+## Anti-Patterns
+
+| Anti-Pattern | Why It Fails | Fix |
+|-------------|-------------|-----|
+| Unconstrained entity types | 100+ node types, useless graph | Define 3-10 type whitelist |
+| No dedup strategy | Entity fragmentation, broken multi-hop | Add fuzzy dedup as minimum |
+| No extraction prompt | Graph schema cannot be populated | Always include extraction template |
+| Depth=1 traversal | Misses multi-hop relationships | Use depth 2-3 with pruning |
+| in_memory in production | Data lost on restart | Use neo4j or falkordb for production |
+| Relation without source/target type | Ambiguous relation semantics | Always annotate both ends |
+| Schema with data instances | Mixes schema with data | Instances go in entity_memory (P10) |
+
+## Application
+1. Define domain: what questions must the graph answer?
+2. Enumerate entity types: 3-10 types, constrained whitelist with extraction hints
+3. Enumerate relation types: 5-15 types, with source/target/directionality
+4. Design extraction prompt: schema-constrained LLM triplet extraction
+5. Select storage backend: in_memory (prototype) -> falkordb or neo4j (production)
+6. Select traversal strategy: hybrid is the safe default
+7. Configure dedup: fuzzy is the safe default
+8. Specify community detection: leiden for global traversal; none for local-only
+9. Validate: entity_types and relation_types non-empty, all relations reference defined types
+
+## References
+- Microsoft GraphRAG: arxiv.org/abs/2404.16130 (2024)
+- LlamaIndex KnowledgeGraphIndex: docs.llamaindex.ai
+- LightRAG: arxiv.org/abs/2410.05779 (2024)
+- Neo4j property graph model: neo4j.com/docs/getting-started/graph-database
+- FalkorDB: falkordb.com/docs

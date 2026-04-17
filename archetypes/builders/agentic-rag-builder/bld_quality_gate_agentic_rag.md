@@ -1,0 +1,60 @@
+---
+kind: quality_gate
+id: p01_qg_agentic_rag
+pillar: P11
+llm_function: GOVERN
+purpose: Quality gate with HARD and SOFT scoring for agentic_rag
+quality: 9.0
+title: "Quality Gate Agentic Rag"
+version: "1.0.0"
+author: wave1_builder_gen_v2
+tags: [agentic_rag, builder, quality_gate]
+tldr: "Quality gate with HARD and SOFT scoring for agentic_rag"
+domain: "agentic_rag construction"
+created: "2026-04-14"
+updated: "2026-04-14"
+density_score: 0.85
+---
+
+## Definition
+| metric | threshold | operator | scope |
+|---|---|---|---|
+| ID pattern | ^p01_ar_[a-z][a-z0-9_]+.md$ | matches | artifact filename |
+
+## HARD Gates
+| ID  | Check | Fail Condition |
+|-----|-------|----------------|
+| H01 | YAML frontmatter valid | Invalid YAML syntax or missing required fields |
+| H02 | ID matches ^p01_ar_[a-z][a-z0-9_]+.md$ | ID does not conform to schema pattern |
+| H03 | kind field equals 'agentic_rag' | kind field is not 'agentic_rag' |
+| H04 | agent_type field present and non-empty | Missing or empty agent_type field |
+| H05 | knowledge_source field present and non-empty | Missing or empty knowledge_source field |
+| H06 | Execution workflow section present | Missing ## Execution Workflow section |
+| H07 | Reflection loop documented (retrieve->reflect->re-query) | No reflection loop specification |
+| H08 | Fallback strategy defined | No fallback behavior for retrieval failure |
+
+## SOFT Scoring
+| Dim | Dimension | Weight | Scoring Guide |
+|-----|-----------|--------|---------------|
+| D01 | Schema Completeness | 0.20 | All required frontmatter fields present and typed correctly |
+| D02 | Agent Loop Clarity | 0.20 | retrieve->reflect->re-query cycle explicitly documented |
+| D03 | Retrieval Strategy | 0.15 | Retriever type, similarity metric, top-k defined |
+| D04 | Knowledge Source Provenance | 0.15 | Source type, format, access method documented |
+| D05 | Error and Fallback Coverage | 0.10 | CRAG-style corrective fallback or equivalent |
+| D06 | Tool Plan Coverage | 0.10 | Agent tools listed against bld_config_agentic_rag.md registry |
+| D07 | Documentation Quality | 0.10 | Usage examples and section headers complete |
+
+## Actions
+(Table: Score | Action)
+| Score      | Action         |
+|------------|----------------|
+| >=9.5      | GOLDEN         |
+| >=8.0      | PUBLISH        |
+| >=7.0      | REVIEW         |
+| <7.0       | REJECT         |
+
+## Bypass
+(Table: conditions, approver, audit trail)
+| conditions                  | approver             | audit trail                              |
+|-----------------------------|----------------------|------------------------------------------|
+| Emergency fix required      | Senior Engineering Lead | "Bypass approved by [name] for [reason]" |

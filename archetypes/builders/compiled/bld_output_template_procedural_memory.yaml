@@ -1,0 +1,80 @@
+kind: output_template
+id: bld_output_template_procedural_memory
+pillar: P05
+llm_function: PRODUCE
+purpose: Template with vars for procedural_memory production
+quality: null
+title: 'Output Template: procedural_memory'
+version: 2.0.0
+author: n06_commercial
+tags:
+- procedural_memory
+- builder
+- output_template
+tldr: 'Template for LLM agent procedural memory artifacts: skill definitions table, namespace, backend, verification, reflexion
+  notes, tier matrix'
+domain: LLM agent procedural memory
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.9
+overview: '{{agent_name}} procedural memory for {{agent_domain}}. Tier: {{tier}}. Skill format: {{skill_format}}. Reference
+  design: Voyager (Wang 2023) skill library. {{free_tier_note}} <!-- free_tier_note: For free tier only: "Free tier: no procedural
+  memory. Agent reasons from scratch on each task." --> <!-- For PRO/ENTERPRISE: remove free_tier_note and proceed with sections
+  below. -->'
+skill_definitions: '| Skill ID | Name | Format | Storage Key | Verification | Tier Required |
+
+  |----------|------|--------|-------------|-------------|---------------|
+
+  | {{skill_id_1}} | {{skill_name_1}} | {{skill_format}} | {{namespace_pattern}}.{{task_1}} | {{verification}} | {{tier_req_1}}
+  |
+
+  | {{skill_id_2}} | {{skill_name_2}} | {{skill_format}} | {{namespace_pattern}}.{{task_2}} | {{verification}} | {{tier_req_2}}
+  |
+
+
+  <!-- Add rows per skill. Remove section entirely for free tier. -->'
+skill_namespace:
+- 'Pattern: `{{namespace_pattern}}`'
+- 'Example keys: `{{example_key_1}}`, `{{example_key_2}}`'
+- 'Lookup method: {{lookup_method}} (exact | semantic | hybrid)'
+- 'Conflict resolution: latest_wins | version_pinned | manual_review'
+storage_backend:
+- 'Backend: {{storage_backend}}'
+- 'Encoding: {{encoding}} (e.g., JSON, YAML, raw code string)'
+- 'Key expiry: {{ttl_days}} days (or null for persistent)'
+- 'Max skills: {{max_skills}} (null = unlimited for enterprise)'
+verification_strategy: 'Reference: Voyager (Wang 2023) verify-before-store pattern.
+
+  - Method: {{verification}}
+
+  - On failure: {{failure_action}} (reject | quarantine | human_review)
+
+  - Test coverage target: {{test_coverage}}%
+
+  - Sandbox: {{sandbox_type}} (e.g., Docker, E2B, none)'
+reflexion_notes: '<!-- Optional section. Include if reflexion_enabled: true -->
+
+  - Storage: co-located with skill in {{storage_backend}}, key suffix `.reflexion`
+
+  - Format: natural language paragraph describing past failures and lessons
+
+  - Retrieval: retrieved alongside the skill on every invocation
+
+  - Max length: {{reflexion_max_chars}} characters'
+commercial_tier_matrix: '| Feature | Free | Pro | Enterprise |
+
+  |---------|------|-----|------------|
+
+  | Skill library | None | Up to {{pro_skill_limit}} skills | Unlimited |
+
+  | Skill format | N/A | {{pro_skill_format}} | {{enterprise_skill_format}} |
+
+  | Verification | N/A | {{pro_verification}} | CI pipeline + audit |
+
+  | Cross-agent sharing | N/A | Within workspace | Cross-org with ACL |
+
+  | Skill versioning | N/A | Latest only | Full history + rollback |
+
+  | Reflexion notes | None | Per-session | Persistent + searchable |
+
+  | Access control | N/A | None | Role-based skill ACL |'

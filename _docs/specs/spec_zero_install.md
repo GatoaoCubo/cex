@@ -3,10 +3,11 @@ id: spec_zero_install
 kind: context_doc
 title: "CEX Zero-Install: Dependencies and Bootstrap on Fresh Machine"
 version: 2.0.0
-quality: null
+quality: 9.0
 created: 2026-04-07
 updated: 2026-04-08
 purpose: Everything needed to run CEX on a PC with nothing installed
+density_score: 1.0
 ---
 
 # CEX Zero-Install Spec
@@ -24,7 +25,11 @@ Layer 0: OS (Windows 10+, macOS, Linux)
   +-- Layer 2: Core Packages (setup.cmd installs)
   |     +-- npm: @anthropic-ai/claude-code (Claude Code CLI)
   |     +-- pip: pyyaml, tiktoken
+  |     +-- pip: numpy, scikit-learn (optional -- accelerates retriever)
   |     +-- pip: uv (for MCP server auto-install)
+  |
+  +-- Layer 2.5: Post-setup validation
+  |     +-- python _tools/cex_setup_validator.py (canonical health check)
   |
   +-- Layer 3: Auto-managed (Claude Code handles)
         +-- MCP servers (npx/uvx auto-install on first use)
@@ -90,6 +95,8 @@ Or just run `setup.cmd` which does all of the above with validation.
 | **pyyaml** | pip | YAML parsing (schemas, configs, kinds_meta) | 150KB |
 | **tiktoken** | pip | Token counting (budget allocation) | 2MB |
 | **uv** | pip | Python package runner for MCP servers (uvx) | 5MB |
+| **numpy** | pip | (optional) Array ops for retriever acceleration | 7MB |
+| **scikit-learn** | pip | (optional) TF-IDF vectorizer for retriever | 30MB |
 
 ### Layer 3: MCP Servers (AUTO-INSTALL on first use)
 
@@ -100,10 +107,10 @@ MCP servers install automatically via `npx -y` or `uvx`. No pre-install needed.
 | firecrawl-mcp | `npx -y firecrawl-mcp` | N01, N04 |
 | mcp-server-fetch | `uvx mcp-server-fetch` | N01, N04, N06 |
 | markitdown-mcp | `npx -y markitdown-mcp` | N01, N02, N06 |
-| brave-search | `npx -y @anthropic/mcp-server-brave-search` | N01 |
+| brave-search | `npx -y @modelcontextprotocol/server-brave-search` | N01 |
 | notebooklm | `npx -y notebooklm-mcp@latest` | N01, N02, N04, N06 |
-| puppeteer | `npx -y @anthropic-ai/mcp-server-puppeteer` | N02 |
-| github | `npx -y @anthropic/mcp-server-github` | N03, N05 |
+| puppeteer | `npx -y @modelcontextprotocol/server-puppeteer` | N02 |
+| github | `npx -y @modelcontextprotocol/server-github` | N03, N05 |
 
 ### What Claude Code installs on its own
 
@@ -157,11 +164,54 @@ The user never needs to pre-install anything beyond Layer 1 + Layer 2.
 | **macOS** | `brew install python node git` | bash + tmux | Boot scripts need .sh equivalents |
 | **Linux** | `apt install python3 nodejs git` | bash + tmux | Boot scripts need .sh equivalents |
 
-## Bootstrap Script
+## Post-Setup Validation
 
-`setup.cmd` in repo root. Validates runtimes, installs packages, clones if needed, runs doctor.
+After running `setup.cmd`, run the setup validator before first boot:
+
+```bash
+python _tools/cex_setup_validator.py
+```
+
+This checks: runtimes present, pip deps installed, Claude Code CLI available,
+MCP configs valid, runtime directories exist. Fix any FAIL items before booting.
+
+## Runtime Directory Creation
+
+CEX needs these directories at runtime. `setup.cmd` creates them, but if
+cloning fresh or after a clean, ensure they exist:
 
 ```
-setup.cmd                              -- run from CEX directory
+.cex/runtime/handoffs/
+.cex/runtime/signals/
+.cex/runtime/pids/
+.cex/runtime/decisions/
+.cex/runtime/proposals/
+.cex/runtime/archive/
+```
+
+## Windows Power Settings (for grid/mission work)
+
+Long-running grid dispatches can take 30-60 minutes with 6 nuclei working in parallel.
+Windows default power settings will sleep the machine mid-run, killing all nuclei.
+
+Before running `/grid` or `/mission`:
+- Settings > System > Power > Screen and sleep: set both to **Never**
+- Or run: `powercfg -change -standby-timeout-ac 0`
+- Re-enable after the mission completes
+
+## Bootstrap Scripts
+
+Two scripts serve different starting points:
+
+| Script | Starting point | What it does |
+|--------|---------------|--------------|
+| `install.cmd` | Bare Windows PC (nothing installed) | Uses `winget` to install Git, Python, Node.js, then Claude Code + pip deps |
+| `setup.cmd` | Runtimes already installed | Validates runtimes, installs Claude Code + pip deps, runs doctor |
+
+```
+install.cmd                            -- fully automated: installs runtimes + everything else
+setup.cmd                              -- run from CEX directory (runtimes required)
 setup.cmd https://github.com/x/cex    -- clone + setup
 ```
+
+Use `install.cmd` on a fresh PC. Use `setup.cmd` if you already have Python, Node, and Git.

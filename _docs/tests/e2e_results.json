@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-04-08T19:27:10.634462+00:00",
+  "timestamp": "2026-04-17T18:19:55.217859+00:00",
   "version": "1.0.0",
   "summary": {
     "total": 3,
@@ -21,7 +21,7 @@
             {
               "check": "runner_exits_clean",
               "passed": false,
-              "detail": "exit=1 stderr=  [F1] bld_schema loaded (2144 chars)\r\n  [F1] bld_config loaded (2133 chars)\r\n  [F1] constraints: 5 "
+              "detail": "exit=1 stderr=  [F1] bld_schema loaded (2168 chars)\r\n  [F1] bld_config loaded (2157 chars)\r\n  [F1] constraints: 5 "
             },
             {
               "check": "f1_constrain_fires",
@@ -78,7 +78,7 @@
             {
               "check": "runner_exits_clean",
               "passed": false,
-              "detail": "exit=1 stderr=  [F1] bld_schema loaded (4199 chars)\r\n  [F1] bld_config loaded (4260 chars)\r\n  [F1] constraints: 5 "
+              "detail": "exit=1 stderr=  [F1] bld_schema loaded (4199 chars)\r\n  [F1] bld_config loaded (4268 chars)\r\n  [F1] constraints: 5 "
             },
             {
               "check": "f1_constrain_fires",
@@ -187,7 +187,7 @@
           }
         }
       ],
-      "total_elapsed_ms": 23741
+      "total_elapsed_ms": 25606
     },
     {
       "name": "instagram",
@@ -202,7 +202,7 @@
             {
               "check": "runner_exits_clean",
               "passed": false,
-              "detail": "exit=1 stderr=  [F1] bld_schema loaded (4075 chars)\r\n  [F1] bld_config loaded (3029 chars)\r\n  [F1] constraints: 5 "
+              "detail": "exit=1 stderr=  [F1] bld_schema loaded (4073 chars)\r\n  [F1] bld_config loaded (3029 chars)\r\n  [F1] constraints: 6 "
             },
             {
               "check": "f1_constrain_fires",
@@ -311,7 +311,7 @@
           }
         }
       ],
-      "total_elapsed_ms": 16663
+      "total_elapsed_ms": 17791
     },
     {
       "name": "docs",
@@ -435,7 +435,7 @@
           }
         }
       ],
-      "total_elapsed_ms": 17331
+      "total_elapsed_ms": 16586
     }
   ]
 }

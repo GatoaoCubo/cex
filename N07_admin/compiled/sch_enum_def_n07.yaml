@@ -1,0 +1,147 @@
+id: sch_enum_def_n07
+kind: enum_def
+pillar: P06
+nucleus: n07
+title: Orchestrator Enumerations
+version: 1.0
+quality: 7.5
+tags:
+- enum-def
+- orchestration
+- dispatch
+- wave
+- signal
+density_score: 1.0
+purpose: 'Canonical closed-set enumerations for N07 orchestration. These values are the only legal tokens in handoffs, signals,
+  and mission plans. Consumers use exhaustive match — no unknown-value handling required (`extensible: false` on all).'
+enumerations: ''
+dispatch_mode: 'How N07 spawns work. Pick one per task; no mixing within a single dispatch call.
+
+
+  | Value | Description | Behavior |
+
+  |-------|-------------|----------|
+
+  | solo | One nucleus, one artifact | `dispatch.sh solo n0X "task"` |
+
+  | grid | N nuclei in parallel, independent outputs | `dispatch.sh grid MISSION` |
+
+  | crew | N roles with ordered handoffs, one package | `cex_crew.py run <name>` |
+
+  | swarm | N builders of same kind, N independent outputs | `dispatch.sh swarm <kind> N` |'
+wave_status: 'Lifecycle of a single wave inside a mission. N07 reads this to gate next-wave dispatch.
+
+
+  | Value | Description | Behavior |
+
+  |-------|-------------|----------|
+
+  | pending | Wave defined, dispatch not yet issued | Block next wave |
+
+  | dispatched | PIDs written, processes started | Poll for signals |
+
+  | running | At least one nucleus signaled start | Continue polling |
+
+  | complete | All nuclei signaled complete | Gate passes; dispatch next wave |
+
+  | failed | One or more nuclei signaled error | Halt mission; report |
+
+  | timeout | Wave exceeded time budget | Escalate to user |'
+signal_type: 'Events emitted by nuclei via signal_writer. N07 consumes these to drive lifecycle.
+
+
+  | Value | Description | Behavior |
+
+  |-------|-------------|----------|
+
+  | start | Nucleus booted and task accepted | Update WAVE_STATUS to running |
+
+  | progress | Checkpoint within long task | Log only; no state change |
+
+  | complete | Task done, artifacts committed | Decrement pending count |
+
+  | error | Unrecoverable failure, no artifacts | Set WAVE_STATUS to failed |
+
+  | timeout | Nucleus self-reported time overrun | Same as error |'
+consolidation_action: 'Ordered steps N07 executes after a wave reaches complete. Run in sequence.
+
+
+  | Value | Description | Behavior |
+
+  |-------|-------------|----------|
+
+  | verify | Check expected artifacts exist on disk | Fail fast if missing |
+
+  | stop | Kill completed nucleus process trees | `taskkill /F /PID <pid> /T` |
+
+  | commit | Stage + commit nucleus output (Gemini path) | `git add N0x && git commit` |
+
+  | archive | Move wave signals to `.cex/runtime/archive/` | Keeps runtime dir clean |
+
+  | report | Write consolidation summary to handoff dir | Input for next wave |'
+handoff_priority: 'Urgency tag on handoff files. N07 reads this to sequence dispatch when budget is tight.
+
+
+  | Value | Description | Behavior |
+
+  |-------|-------------|----------|
+
+  | critical | Blocking dependency; all other waves wait | Dispatch immediately |
+
+  | high | Near-blocking; dispatch in wave N+1 | Next scheduled wave |
+
+  | normal | Standard work; batch with others | Default |
+
+  | low | Optional enrichment; skip if time-constrained | Drop if budget exceeded |'
+nucleus_state: 'Runtime state of a single nucleus process. Tracked in PID file.
+
+
+  | Value | Description | Behavior |
+
+  |-------|-------------|----------|
+
+  | idle | Process alive, no active task | Safe to assign new task |
+
+  | booting | Boot script executing, task not yet loaded | Wait for start signal |
+
+  | active | Nucleus executing 8F pipeline | Do not interrupt |
+
+  | completing | F8 in progress (compile + commit + signal) | Wait for complete signal |
+
+  | crashed | Process dead, no signal received | Trigger error path |'
+mission_phase: 'Top-level phases of a CEX mission. Maps to slash commands.
+
+
+  | Value | Description | Behavior |
+
+  |-------|-------------|----------|
+
+  | plan | Decompose goal into tasks and waves | `/plan` command |
+
+  | guide | GDP: collect subjective decisions from user | `/guide` command |
+
+  | spec | Write artifact specs and handoff files | `/spec` command |
+
+  | grid | Dispatch grid; autonomous execution | `/grid` command |
+
+  | consolidate | Verify, archive, report on completed grid | `/consolidate` command |'
+rationale: 'Orchestrating Sloth lens: every enum value maps to an unambiguous automated action. N07 reads a value and executes
+  -- no interpretation overhead, no branching on prose. All sets are closed (`extensible: false`) so exhaustive match is always
+  safe.'
+properties: '| Property | Value |
+
+  |----------|-------|
+
+  | Kind | `enum_def` |
+
+  | Pillar | P06 |
+
+  | Nucleus | N07 |
+
+  | Enum count | 7 |
+
+  | Total values | 33 |
+
+  | Extensible | false (all) |
+
+  | Quality target | null (peer-assigned) |'

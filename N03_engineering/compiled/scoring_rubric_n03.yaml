@@ -1,0 +1,163 @@
+id: p07_sr_n03_artifact
+kind: scoring_rubric
+pillar: P07
+title: Scoring Rubric -- N03 Artifact Quality
+version: 1.0.0
+created: 2026-04-17
+author: n03_engineering
+domain: artifact-construction
+quality: 8.9
+tags:
+- scoring-rubric
+- N03
+- quality
+- 5D
+- evaluation
+- 8F
+- governance
+tldr: 5-dimension weighted scoring rubric for all artifacts produced by N03. D1=Structural, D2=Semantic, D3=Density, D4=Invariant,
+  D5=Coverage. Target score >= 9.0 for production.
+density_score: 0.91
+updated: '2026-04-17'
+purpose: 'Applied at F7 GOVERN for all N03-produced artifacts. Weights sum to 100. Minimum passing score: 7.0. Target: 9.0.
+  Self-scoring is NEVER performed -- quality field is always null until peer review.'
+dimensions: '| ID | Dimension | Weight | Description |
+
+  |----|-----------|--------|-------------|
+
+  | D1 | Structural Integrity | 25% | Frontmatter completeness, YAML validity, id/kind/pillar alignment |
+
+  | D2 | Semantic Precision | 30% | Correct use of canonical terms, zero vocabulary drift, domain accuracy |
+
+  | D3 | Information Density | 20% | density_score >= 0.85; tables/code/lists ratio to prose |
+
+  | D4 | Invariant Compliance | 15% | System invariants respected; quality=null; no placeholders |
+
+  | D5 | Coverage Completeness | 10% | All required sections present; no gaps for the kind |'
+d1_structural_integrity_25: '| Score | Criteria |
+
+  |-------|---------|
+
+  | 10.0 | All 14 frontmatter fields present and valid; id matches naming pattern; YAML parses clean |
+
+  | 8.0-9.9 | 12-13 fields valid; minor optional field missing |
+
+  | 6.0-7.9 | 10-11 fields valid; recommended field missing but not required |
+
+  | < 6.0 | Any required field missing OR YAML parse error |
+
+
+  Scoring checklist:
+
+  - [ ] `id` matches kind naming pattern
+
+  - [ ] `kind` in kinds_meta.json
+
+  - [ ] `pillar` matches kind''s canonical pillar
+
+  - [ ] `quality: null` (never self-scored)
+
+  - [ ] `version` valid semver
+
+  - [ ] `title` 5-120 chars
+
+  - [ ] `tldr` 20-300 chars
+
+  - [ ] `created` valid ISO date
+
+  - [ ] `tags` non-empty list
+
+  - [ ] `density_score` present as float'
+d2_semantic_precision_30: '| Score | Criteria |
+
+  |-------|---------|
+
+  | 10.0 | 100% canonical vocabulary; every term maps to kinds_meta or spec_metaphor_dictionary |
+
+  | 8.0-9.9 | <= 1 non-canonical term; in-body correction possible |
+
+  | 6.0-7.9 | 2-3 non-canonical terms; no invented synonyms for canonical kinds |
+
+  | < 6.0 | Invented synonyms for canonical kinds OR pillar mismatch in body |
+
+
+  Common semantic failures:
+
+  - Using "research card" instead of `knowledge_card`
+
+  - Using "deck" instead of `agent_card`
+
+  - Using "nucleus rules" instead of `rules/*.md` paths
+
+  - Using "quality score" without specifying the 5D model'
+d3_information_density_20: '| Score | Criteria |
+
+  |-------|---------|
+
+  | 10.0 | density_score >= 0.90; predominantly structured data |
+
+  | 8.0-9.9 | density_score in [0.85, 0.90); minor prose padding |
+
+  | 6.0-7.9 | density_score in [0.75, 0.85); some prose sections without structure |
+
+  | < 6.0 | density_score < 0.75; mostly prose or excessive preamble |
+
+
+  Density formula: `structured_bytes / total_body_bytes`
+
+  Where structured = tables + code blocks + lists + YAML blocks'
+d4_invariant_compliance_15: '| Score | Criteria |
+
+  |-------|---------|
+
+  | 10.0 | All system invariants respected; no spec deviations |
+
+  | 8.0-9.9 | 1 minor invariant violation (soft, correctable) |
+
+  | 6.0-7.9 | 2 invariant violations; artifact still usable |
+
+  | < 6.0 | Hard invariant violated (e.g., self-scoring, placeholder text in body) |
+
+
+  Invariants checked:
+
+  - [ ] quality field is null
+
+  - [ ] No TODO/FIXME/TBD/{{placeholder}} in body
+
+  - [ ] Artifact saved to correct pillar directory
+
+  - [ ] id is globally unique (check existing artifacts)
+
+  - [ ] ASCII-only in any embedded code'
+d5_coverage_completeness_10: '| Score | Criteria |
+
+  |-------|---------|
+
+  | 10.0 | All required sections for kind present; kind-specific L3 validation passes |
+
+  | 8.0-9.9 | 1 optional section missing; all required present |
+
+  | 6.0-7.9 | 1 recommended section missing |
+
+  | < 6.0 | Required section for kind is absent |'
+composite_score_calculation: 'final_score = (D1  0.25) + (D2  0.30) + (D3  0.20) + (D4  0.15) + (D5 * 0.10)
+
+
+  PASS  condition: final_score >= 7.0 AND no D1 score < 6.0 (structural failures are blocking)
+
+  WARN  condition: final_score in [7.0, 8.0)
+
+  EXCELLENT: final_score >= 9.0 (CEX target)'
+calibration_examples: ''
+score_9_2_excellent:
+- D1=9.5 (all 14 fields present) | D2=9.5 (zero vocabulary drift) | D3=9.0 (density=0.88)
+- D4=9.0 (all invariants) | D5=8.5 (1 optional section missing)
+- 'Composite: (9.5 x 0.25) + (9.5 x 0.30) + (9.0 x 0.20) + (9.0 x 0.15) + (8.5 x 0.10) = 9.275 -> 9.2'
+score_7_4_acceptable_above_floor:
+- D1=8.0 (1 optional field missing) | D2=7.0 (2 non-canonical terms) | D3=7.5 (density=0.77)
+- D4=7.0 (1 invariant violation) | D5=7.0 (1 required section thin)
+- 'Composite: (8.0 x 0.25) + (7.0 x 0.30) + (7.5 x 0.20) + (7.0 x 0.15) + (7.0 x 0.10) = 7.35 -> 7.4'
+score_5_8_below_floor_reject:
+- D1=4.0 (quality not null -- self-scored) | D2=6.0 | D3=6.0 | D4=5.0 | D5=7.0
+- D1 < 6.0 is blocking regardless of composite

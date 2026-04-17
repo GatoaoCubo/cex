@@ -1,0 +1,42 @@
+---
+kind: tools
+id: bld_tools_team_charter
+pillar: P04
+llm_function: CALL
+purpose: Tools available for team_charter production
+quality: 9.0
+title: "Tools Team Charter"
+version: "1.0.0"
+author: n06_wave8
+tags: [team_charter, builder, tools, governance]
+tldr: "Tools available for team_charter production"
+domain: "team_charter construction"
+created: "2026-04-14"
+updated: "2026-04-14"
+density_score: 0.85
+---
+
+## Production Tools
+| Tool                  | Purpose                                  | When                          |
+|-----------------------|------------------------------------------|-------------------------------|
+| cex_compile.py        | Compile charter .md to .yaml             | After writing charter         |
+| cex_score.py          | Score charter quality (H gates + dims)   | F7 GOVERN step                |
+| cex_gdp.py            | Read GDP manifest, enforce decision gate | F1 CONSTRAIN + F4 REASON      |
+| cex_token_budget.py   | Calculate token allocation from budget   | Budget field construction     |
+| cex_doctor.py         | Validate charter against schema rules    | Pre-dispatch validation       |
+| signal_writer.py      | Signal mission completion to N07         | F8 COLLABORATE                |
+
+## Validation Tools
+| Tool                  | Purpose                                  | When                          |
+|-----------------------|------------------------------------------|-------------------------------|
+| cex_hooks.py          | Pre-commit ASCII + frontmatter check     | Before git commit             |
+| cex_schema_hydrate.py | Validate charter against bld_schema ISOs | Post-draft validation         |
+| brand_validate.py     | Ensure charter aligns with brand config  | If charter includes brand KPIs|
+| cex_retriever.py      | Find similar existing charters (TF-IDF)  | F3 INJECT -- reuse patterns   |
+
+## External References
+- PMI PMBOK 7th Edition: Project Charter section (scope, authorization, stakeholders)
+- Google OKR Playbook: Key Result threshold methodology
+- ITIL 4 SLA Practice Guide: Escalation protocol design
+- CEX cex_mission_runner.py: Consumes termination_criteria for automated polling
+- CEX cex_gdp.py: Reads decision_manifest.yaml to enforce GDP gate at F4

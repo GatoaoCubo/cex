@@ -46,7 +46,7 @@ system_prompt   --signals-->   identity_load
 |------------------|----------------------|
 | A fixed identity definition with persona and ALWAYS/NEVER rules | A task-specific instruction (action_prompt P03) |
 | Loaded once at agent boot — persistent across interactions | A step-by-step recipe (instruction P03) |
-| Defines who the agent is and how it behaves | A reusable template with {{variable}} slots (prompt_template P03) |
+| Defines who the agent is and how it behaves | A reusable template with `{{variable}}` slots (prompt_template P03) |
 | Constrains tone, knowledge boundary, and output format | A meta-prompt that generates other prompts |
 | Scoped to one agent with specific domain expertise | A universal prompt applied to all agents |
 | Constitutional — defines what the agent must and must not do | A suggestion or guideline that can be overridden |

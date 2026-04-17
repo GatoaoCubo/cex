@@ -1,0 +1,41 @@
+kind: instruction
+id: bld_instruction_vad_config
+pillar: P03
+llm_function: REASON
+purpose: Step-by-step production process for vad_config
+quality: null
+title: Instruction Vad Config
+version: 1.0.0
+author: wave1_builder_gen
+tags:
+- vad_config
+- builder
+- instruction
+tldr: Step-by-step production process for vad_config
+domain: vad_config construction
+created: '2026-04-13'
+updated: '2026-04-13'
+density_score: 0.85
+phase_1_research:
+- Identify use case (e.g., noise suppression, call center)
+- Gather audio sample metadata (sample rate, language, environment)
+- Study existing vad_config schemas for P09 compatibility
+- Analyze false positive/negative rates from prior deployments
+- Benchmark algorithm performance (e.g., WebRTC, Kaldi)
+- Document regulatory constraints (e.g., GDPR audio handling)
+phase_2_compose:
+- Set schema version in SCHEMA.md (e.g., v1.2.3)
+- Define sensitivity thresholds (0.1–0.9) for voice detection
+- Specify window size (e.g., 320 samples @ 16kHz)
+- Map parameters to OUTPUT_TEMPLATE.md fields
+- Add silence timeout (e.g., 0.8s) and speech hold (e.g., 0.4s)
+- Embed language-specific noise profiles (e.g., "en-us", "zh-cn")
+- Apply P09 constraint rules (e.g., max 200ms silence gaps)
+- Validate JSON structure against SCHEMA.md
+- Annotate config with deployment environment tags
+phase_3_validate:
+- '[ ] Schema validation (jsonschema)'
+- '[ ] Template field coverage (100%)'
+- '[ ] Constraint rule enforcement'
+- '[ ] Audio sample stress test (500+ files)'
+- '[ ] Cross-platform compatibility (Linux/Windows)'

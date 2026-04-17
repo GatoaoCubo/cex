@@ -1,0 +1,530 @@
+id: atom_21_rag_taxonomy
+kind: knowledge_card
+pillar: P01
+quality: 8.8
+title: RAG Taxonomy Surveys
+tags:
+- rag
+- retrieval
+- chunking
+- reranking
+- agentic-rag
+- graph-rag
+- late-chunking
+- framework-atlas
+date: 2026-04-13
+boundary: This artifact is a technical reference for RAG configuration strategies and their alignment with CEX kinds. It is
+  not a product specification, implementation guide, or performance benchmark. It focuses on structural taxonomy and configuration
+  patterns rather than deployment specifics or vendor comparisons.
+related_kinds: '- knowledge_index: Stores vector embeddings and manages retrieval backends for RAG systems.
+
+  - embedding_config: Defines parameters for embedding models used in document representation.
+
+  - scoring_rubric: Provides evaluation metrics and thresholds for assessing RAG pipeline performance.
+
+  - prompt_template: Encapsulates query rewriting strategies to enhance retrieval effectiveness.
+
+  - rag_source: Manages external data sources and their integration into the RAG pipeline.
+
+
+  ---'
+1_introduction: This document provides a structured technical reference for implementing Retrieval-Augmented Generation (RAG)
+  systems, with a focus on configuration strategies and their alignment with CEX (Configuration Exchange) kinds. It covers
+  all pillars of RAG architecture, including data indexing, retrieval strategies, generation pipelines, and evaluation frameworks.
+  ---
+2_retrieval_strategies: ''
+2_1_dense_vector_retrieval: '| Strategy | Description | CEX Kind | Use Case |
+
+  |---------|-------------|----------|----------|
+
+  | FAISS | High-performance similarity search | `knowledge_index` (store_type: FAISS) | Large-scale similarity search |
+
+  | HNSW | Approximate nearest neighbor search | `knowledge_index` (index_algo: HNSW) | Real-time retrieval with high recall
+  |
+
+  | IVF-PQ | Quantized indexing for large-scale data | `knowledge_index` (index_algo: IVF-PQ) | Memory-constrained environments
+  |
+
+  | Annoy | Tree-based indexing for fast queries | `knowledge_index` (index_algo: Annoy) | Low-latency applications |
+
+  | Milvus | Distributed vector database | `knowledge_index` (store_type: Milvus) | Multi-node clustering scenarios |'
+2_2_sparse_text_retrieval: '| Backend | Use Case | CEX Kind | Query Type |
+
+  |--------|----------|----------|------------|
+
+  | Elasticsearch | BM25 ranking | `knowledge_index` (sparse_backend: Elasticsearch) | Full-text search |
+
+  | Tantivy | Fast inverted index | `knowledge_index` (sparse_backend: Tantivy) | Lightweight applications |
+
+  | Meilisearch | Relevance ranking | `knowledge_index` (sparse_backend: Meilisearch) | E-commerce search |
+
+  | Whoosh | Python-native index | `knowledge_index` (sparse_backend: Whoosh) | Development environments |
+
+  | Solr | Enterprise search | `knowledge_index` (sparse_backend: Solr) | Large-scale deployments |'
+2_3_hybrid_retrieval: "retriever_config:\n  hybrid: true\n  top_k: 10\n  fusion_method: \"rrf\"  # Reciprocal Rank Fusion\n\
+  \n---"
+3_chunking_strategies: ''
+3_1_text_chunking: '| Method | Parameters | CEX Kind | Example Use Case |
+
+  |--------|------------|----------|------------------|
+
+  | Token-based | `size=512`, `overlap=64` | `chunk_strategy` (method: token) | Legal document summarization |
+
+  | Sentence-based | `separator_hierarchy: [".", "!", "?"]` | `chunk_strategy` (method: sentence) | News article indexing
+  |
+
+  | Paragraph-based | `max_length=1024` | `chunk_strategy` (method: paragraph) | Technical documentation |
+
+  | Semantic-based | `model: BERT`, `threshold=0.8` | `chunk_strategy` (method: semantic) | Scientific paper indexing |
+
+  | Line-based | `split_by: "\n"` | `chunk_strategy` (method: line) | Codebase indexing |'
+3_2_graph_chunking: "chunk_strategy:\n  type: \"graph\"\n  method: \"community_detection\"\n  graph_endpoint: \"https://graphdb.example.com\"\
+  \n\n---"
+4_embedding_models: ''
+4_1_model_selection: '| Model | Dimensions | Metric | CEX Kind | Training Data |
+
+  |-------|------------|--------|----------|----------------|
+
+  | BGE | 768 | Cosine | `embedding_config` (model: BGE) | Multilingual corpus |
+
+  | E5 | 1024 | Dot Product | `embedding_config` (model: E5) | Wikipedia + Common Crawl |
+
+  | Arctic | 3072 | L2 | `embedding_config` (model: Arctic) | Code + technical documents |
+
+  | Sentence-BERT | 768 | Cosine | `embedding_config` (model: SBERT) | Sentiment analysis |
+
+  | MiniLM | 384 | Cosine | `embedding_config` (model: MiniLM) | Low-resource languages |'
+4_2_model_configuration: "embedding_config:\n  model: \"BGE\"\n  batch_size: 32\n  device: \"cuda\"\n  normalize: true\n\n\
+  ---"
+5_generation_pipelines: ''
+5_1_llm_integration: '| Model | Parameters | CEX Kind | Use Case |
+
+  |-------|------------|----------|----------|
+
+  | GPT-3 | 175B | `generation_config` (model: GPT-3) | Open-ended tasks |
+
+  | LLaMA | 65B | `generation_config` (model: LLaMA) | Private deployment |
+
+  | BLOOM | 176B | `generation_config` (model: BLOOM) | Multilingual tasks |
+
+  | Falcon | 180B | `generation_config` (model: Falcon) | Code generation |
+
+  | Mistral | 24B | `generation_config` (model: Mistral) | Dialogue systems |'
+5_2_prompt_engineering: "prompt_template:\n  system: \"You are a helpful assistant\"\n  user: \"Answer the following question:\
+  \ {question}\"\n  format: \"chat\"\n\n---"
+6_evaluation_metrics: ''
+6_1_scoring_rubrics: '| Metric | Description | CEX Kind | Threshold |
+
+  |--------|-------------|----------|-----------|
+
+  | Recall@K | Proportion of relevant documents retrieved | `scoring_rubric` (metric: recall) | ≥0.85 |
+
+  | Precision@K | Proportion of retrieved documents that are relevant | `scoring_rubric` (metric: precision) | ≥0.75 |
+
+  | MRR | Mean Reciprocal Rank | `scoring_rubric` (metric: mrr) | ≥0.65 |
+
+  | NDCG | Normalized Discounted Cumulative Gain | `scoring_rubric` (metric: ndcg) | ≥0.70 |
+
+  | F1 Score | Harmonic mean of precision and recall | `scoring_rubric` (metric: f1) | ≥0.80 |'
+6_2_threshold_configuration: "scoring_rubric:\n  metrics:\n    recall: 0.85\n    precision: 0.75\n    mrr: 0.65\n    ndcg:\
+  \ 0.70\n    f1: 0.80\n\n---"
+7_data_sources: ''
+7_1_external_integration: '| Source | Format | CEX Kind | Access Method |
+
+  |--------|--------|----------|---------------|
+
+  | Wikipedia | Text | `rag_source` (type: wikipedia) | API |
+
+  | Common Crawl | Text | `rag_source` (type: common_crawl) | S3 |
+
+  | PubMed | PDF/Text | `rag_source` (type: pubmed) | OAI |
+
+  | arXiv | PDF/Text | `rag_source` (type: arxiv) | API |
+
+  | GitHub | Code | `rag_source` (type: github) | Webhook |'
+7_2_source_configuration: "rag_source:\n  type: \"wikipedia\"\n  language: \"en\"\n  endpoint: \"https://en.wikipedia.org/w/api.php\"\
+  \n\n---"
+8_deployment_patterns: ''
+8_1_infrastructure: '| Pattern | Description | CEX Kind | Use Case |
+
+  |--------|-------------|----------|----------|
+
+  | Single-node | All components on one server | `deployment_config` (pattern: single_node) | Development |
+
+  | Multi-node | Distributed architecture | `deployment_config` (pattern: multi_node) | Production |
+
+  | Serverless | Cloud-based FaaS | `deployment_config` (pattern: serverless) | Scalable workloads |
+
+  | Edge | On-device processing | `deployment_config` (pattern: edge) | IoT applications |
+
+  | Hybrid | Combination of cloud and edge | `deployment_config` (pattern: hybrid) | Real-time analytics |'
+8_2_configuration_example: "deployment_config:\n  pattern: \"multi_node\"\n  nodes: 3\n  autoscaling: true\n  region: \"us-east-1\"\
+  \n\n---"
+9_gap_analysis_and_recommendations: '| Concept | Current State | Recommendation |
+
+  |--------|---------------|----------------|
+
+  | Multimodal Retrieval | Limited support | Integrate CLIP and BLIP models |
+
+  | Real-time Updates | Batch processing only | Implement streaming pipelines |
+
+  | Security | No encryption | Add TLS and access controls |
+
+  | Cost Optimization | No budgeting | Introduce cost tracking metrics |
+
+  | Model Versioning | Manual process | Automate with MLflow |
+
+
+  ---'
+10_appendices: ''
+10_1_cex_kind_mapping: '| CEX Kind | Description | Example |
+
+  |----------|-------------|---------|
+
+  | knowledge_index | Vector storage and retrieval | FAISS, Milvus |
+
+  | embedding_config | Model parameters | BGE, E5 |
+
+  | scoring_rubric | Evaluation metrics | Recall@K, NDCG |
+
+  | prompt_template | Query formatting | Chat templates |
+
+  | rag_source | Data integration | Wikipedia, GitHub |'
+10_2_glossary: '- RAG: Retrieval-Augmented Generation
+
+  - CEX: Configuration Exchange
+
+  - LLM: Large Language Model
+
+  - MRR: Mean Reciprocal Rank
+
+  - NDCG: Normalized Discounted Cumulative Gain
+
+
+  This document serves as a living reference, with updates to be made as new RAG paradigms and CEX standards evolve.
+
+
+  ---'
+11_agentic_rag_2025_2026: ''
+11_1_definition_and_taxonomy: 'Agentic RAG embeds autonomous AI agents into the RAG pipeline, transcending the limitations
+  of static retrieve-then-generate patterns. Source: arXiv 2501.09136 -- Agentic RAG Survey, updated Apr 2026
+
+
+  | Dimension | Naive RAG | Agentic RAG |
+
+  |-----------|-----------|-------------|
+
+  | Retrieval | Single-shot, fixed query | Iterative, adaptive, multi-step |
+
+  | Control | Linear pipeline | Agentic loop with reflection |
+
+  | Memory | Context window only | Long-term + episodic memory |
+
+  | Tools | Embedder + LLM | Planner + Retriever + Executor + Critic |
+
+  | Error handling | None | Self-correction via reflection |
+
+  | Multi-source | Manual config | Dynamic source selection |'
+11_2_agentic_rag_architectures: '| Architecture | Cardinality | Control | Description | Best For |
+
+  |---|---|---|---|---|
+
+  | Single-agent RAG | 1 agent | Linear | One agent manages plan + retrieve + generate | Simple QA |
+
+  | Multi-agent RAG | N agents | Parallel | Specialized agents (planner, retriever, critic) run concurrently | Complex research
+  |
+
+  | Hierarchical RAG | N agents | Tree | Supervisor dispatches to specialist retriever agents | Enterprise Q&A |
+
+  | Reflexion RAG | 1 agent + critic | Loop | Agent self-evaluates and re-queries until confidence threshold met | High-accuracy
+  tasks |
+
+  | FLARE | 1 agent | Forward-looking | Generates tentatively, triggers retrieval when uncertain | Long-form generation |'
+11_3_agentic_rag_design_patterns: '| Pattern | Industry Term | Description |
+
+  |---------|--------------|-------------|
+
+  | Reflection | Self-critique | Agent evaluates its own output and re-retrieves if quality below threshold |
+
+  | Planning | Task decomposition | Agent breaks complex query into sub-queries before retrieval |
+
+  | Tool use | Function calling | Agent selects retrieval backends dynamically (web, vector DB, SQL) |
+
+  | Memory | Episodic + semantic | Agent maintains short-term working memory + long-term knowledge store |
+
+  | Multi-agent coordination | Orchestration | Supervisor agent dispatches retrieval subtasks to specialist agents |'
+11_4_open_research_challenges_2026: '| Challenge | Current Gap | Active Work |
+
+  |-----------|------------|-------------|
+
+  | Evaluation | No unified benchmark for agentic retrieval quality | RAGAS 2.0, AgentBench RAG track |
+
+  | Coordination overhead | Multi-agent latency 3-5x naive RAG | Async retrieval + speculative generation |
+
+  | Memory management | Context saturation in long sessions | Hierarchical compression + selective eviction |
+
+  | Governance | Agentic loops can escape guardrails | Structured output constraints + kill-switch |
+
+  | Efficiency | Reflection loops consume 10x tokens | Confidence-gated retrieval triggers |
+
+
+  ---'
+12_graph_rag_v2_and_lazygraphrag: ''
+12_1_evolution_from_v1_to_v2: 'Microsoft''s GraphRAG project (2024-2026) constructs a knowledge graph from the corpus and
+  uses community detection to answer global queries. Source: Microsoft Research -- GraphRAG | GitHub microsoft/graphrag
+
+
+  | Version | Release | Indexing Cost | Key Feature |
+
+  |---------|---------|--------------|-------------|
+
+  | GraphRAG v1 | 2024-Q2 | ~$33K per large dataset | Global + local search via community summaries |
+
+  | GraphRAG v1.2 | 2024-Q4 | ~$33K | +10-20% quality on global queries via mixed community reports |
+
+  | LazyGraphRAG | 2025-Q2 | ~$330 (99% reduction) | Community summarization deferred to query time |
+
+  | GraphRAG v2 | 2025-Q4 | Optimized | Developer-experience overhaul, modular pipeline |'
+12_2_graphrag_vs_naive_rag_vs_agentic_rag: '| Dimension | Naive RAG | GraphRAG | Agentic RAG |
+
+  |-----------|-----------|---------|-------------|
+
+  | Query type | Local (factoid) | Global (thematic, cross-doc) | Both + multi-step |
+
+  | Indexing cost | Low | High (v1) / Low (Lazy) | Low |
+
+  | Relationship reasoning | No | Yes (graph traversal) | Partial (tool use) |
+
+  | Latency | Low (50-200ms) | High (2-10s) | High (seconds-minutes) |
+
+  | Best for | Factoid QA | Cross-document synthesis | Complex research |'
+12_3_lazygraphrag_implementation: "# LazyGraphRAG defers community summarization to query time\ngraph_rag_config:\n  mode:\
+  \ lazy                         # deferred summarization\n  community_detection: leiden        # Leiden algorithm for graph\
+  \ partitioning\n  summary_depth: on_demand           # generate summaries only when queried\n  embedding_backend: text-embedding-3-small\n\
+  \  graph_store: networkx              # or neo4j for production\n  cost_vs_quality: balanced          # quality < eager\
+  \ but cost 99% lower"
+12_4_when_to_use_graph_rag: '| Signal | Use GraphRAG? |
+
+  |--------|-------------|
+
+  | Query spans multiple documents | YES |
+
+  | Query is thematic ("what are the themes in...") | YES |
+
+  | Query is a factoid ("what is X") | NO -- use naive RAG |
+
+  | Corpus has clear entity relationships | YES |
+
+  | Cost is primary constraint | Use LazyGraphRAG |
+
+  | Low latency required (<500ms) | NO |
+
+
+  Source: Graph Praxis -- Graph RAG in 2026
+
+
+  ---'
+13_late_chunking_jina_2024_2025: ''
+13_1_technique_overview: 'Late chunking inverts the traditional chunk-then-embed pipeline. The full document is embedded first
+  using a long-context model; only after full-document attention is applied are the token vectors pooled per chunk. This preserves
+  inter-chunk context in each chunk''s embedding. Source: arXiv 2409.04701 -- Late Chunking | Jina AI Blog
+
+
+  TRADITIONAL:     split document -> embed each chunk -> retrieve
+
+  LATE CHUNKING:   embed full document -> pool per-chunk spans -> retrieve'
+13_2_performance_results: '| Benchmark | Traditional Chunking | Late Chunking | Delta |
+
+  |-----------|---------------------|--------------|-------|
+
+  | Average (512-token chunks) | baseline | +24.47% relative | +24.47% |
+
+  | Pronoun resolution accuracy | Low (no cross-chunk context) | High (full-doc attention) | Significant |
+
+  | "the city" -> "Berlin" mapping | Fails across chunk boundaries | Resolves correctly | Fixed |'
+13_3_implementation: "# Late chunking with Jina Embeddings v3\nfrom jina_embeddings import JinaEmbeddingsV3\n\nmodel = JinaEmbeddingsV3(max_tokens=8192)\
+  \  # long-context required\n\n# Step 1: embed the full document\ndoc_tokens = model.tokenize(full_document)         # up\
+  \ to 8192 tokens\nfull_embedding_matrix = model.encode(doc_tokens)   # shape: [seq_len, dim]\n\n# Step 2: define chunk spans\
+  \ (character offsets -> token indices)\nchunk_spans = [(0, 512), (448, 960), (896, 1408)]  # with overlap\n\n# Step 3: mean-pool\
+  \ per span (late pooling)\nchunk_embeddings = [\n    full_embedding_matrix[start:end].mean(axis=0)\n    for start, end in\
+  \ chunk_spans\n]\n# Result: each chunk embedding carries full-document context"
+13_4_constraints_and_requirements: '| Requirement | Value | Why |
+
+  |---|---|---|
+
+  | Model context window | >= 8192 tokens | Must fit full document |
+
+  | Compatible models | jina-embeddings-v2, v3 | Must expose token-level embeddings |
+
+  | Document length limit | Model max_tokens | Longer docs need sliding window |
+
+  | Memory overhead | O(seq_len * dim) | Stores full embedding matrix before pooling |
+
+  | Incompatible with | OpenAI text-embedding-3-* | API returns only [CLS] vector, not per-token |
+
+
+  Sources: GitHub jina-ai/late-chunking | Elasticsearch + Jina Late Chunking | Milvus + Late Chunking
+
+
+  ---'
+14_chunking_benchmarks_nvidia_2024_2026_state: ''
+14_1_nvidia_2024_benchmark_results: 'NVIDIA tested 7 chunking strategies across 5 datasets including DigitalCorpora767 (767
+  PDFs, 991 annotated questions), Earnings (512 PDFs), and FinanceBench. Source: NVIDIA Technical Blog -- Best Chunking Strategy
+
+
+  | Strategy | Financial Docs | Knowledge Graphs | Legal Docs | Winner |
+
+  |----------|---------------|-----------------|-----------|--------|
+
+  | Page-level | 0.60 | 0.52 (best) | 0.58 | Knowledge graphs |
+
+  | 1024-token | 0.579 (best) | 0.45 | 0.54 | Financial |
+
+  | 512-token | 0.54 | 0.48 | 0.56 | Balanced |
+
+  | 256-token | 0.51 | 0.44 | 0.52 | Factoid queries |
+
+  | Semantic | 0.55 | 0.49 | 0.57 | Mixed corpora |
+
+  | Sentence | 0.49 | 0.42 | 0.55 | Conversational |
+
+  | Paragraph | 0.53 | 0.47 | 0.58 | Legal |
+
+
+  Key NVIDIA finding: Page-level chunking highest accuracy (0.648) with lowest variance (0.107). Optimal chunk size varies
+  by content type AND query pattern.'
+14_2_query_type_vs_chunk_size_matrix: '| Query Type | Optimal Chunk Size | Reasoning |
+
+  |-----------|-------------------|-----------|
+
+  | Factoid ("Who is...") | 256-512 tokens | Precise, localized answer |
+
+  | Analytical ("Summarize the...") | 1024+ tokens | Needs broader context |
+
+  | Comparison ("How does X differ from Y") | 512-1024 tokens | Needs enough detail per concept |
+
+  | Global ("What are the themes in...") | Page-level or GraphRAG | Cross-document synthesis |'
+14_3_2026_benchmark_update: 'Source: Prem AI -- RAG Chunking 2026 Benchmark Guide
+
+
+  | Strategy | Accuracy (real-doc test) | Cost | Verdict |
+
+  |----------|------------------------|------|---------|
+
+  | Recursive splitting 512 tokens | 69% | Zero model calls | Best overall cost/quality |
+
+  | Semantic chunking | 65% | 1 embedding call/chunk | Good for mixed corpora |
+
+  | Late chunking (Jina) | 72% | 1 full-doc embedding | Best quality, higher memory |
+
+  | Agentic re-chunking | 70% | LLM call per doc | Best for PDFs/tables |
+
+  | Fixed 256 tokens | 58% | Zero model calls | Fast baseline |'
+14_4_chunking_strategy_selection_guide: "Is the document structured (PDF with tables, headers)?\n  YES --> Agentic re-chunking\
+  \ or page-level\n  NO  --> Does the doc exceed 8192 tokens total?\n            YES --> Recursive splitting (512, overlap=64)\n\
+  \            NO  --> Late chunking (preserves cross-chunk context, +24% recall)\n                    Requires: jina-embeddings-v2/v3\
+  \ or similar long-ctx model\n\n---"
+15_reranker_taxonomy_and_performance_comparison: ''
+15_1_reranker_types: '| Type | Mechanism | Latency | Accuracy | Example Models |
+
+  |------|-----------|---------|----------|---------------|
+
+  | Cross-encoder | Full attention over (query, doc) pair | High (150-400ms) | Highest | MonoT5, ms-marco-MiniLM, BGE-Reranker
+  |
+
+  | Bi-encoder reranker | Dot-product over pre-encoded vecs | Low (5-20ms) | Medium | ColBERT-v2 |
+
+  | LLM-based reranker | LLM generates relevance score | Very High (500ms+) | Very High | RankLLM, Cohere Rerank |
+
+  | Lightweight reranker | Distilled cross-encoder | Low (10-30ms) | Medium-High | FlashRank (MiniLM-L-12-v2) |
+
+  | API reranker | Managed cloud endpoint | Medium (100-300ms) | High | Cohere Rerank, Voyage Rerank |
+
+
+  Sources: Analytics Vidhya -- Top 7 Rerankers for RAG | Medium -- Reranking in RAG 2026'
+15_2_beir_benchmark_performance_2025: 'Source: arXiv -- How Good are LLM-based Rerankers | Oreate AI -- Best Reranker Models
+  2025
+
+
+  | Model | NDCG@10 (BEIR avg) | Latency | Open Source |
+
+  |-------|-------------------|---------|-------------|
+
+  | MonoT5-3B-10k | 60.75 | 400ms | YES |
+
+  | Twolar-xl | 60.03 | 350ms | YES |
+
+  | mxbai-rerank-large | 57.49 | 200ms | YES |
+
+  | Cohere Rerank v3 | 57.2 | 150ms | NO |
+
+  | mxbai-rerank-base | 55.57 | 80ms | YES |
+
+  | FlashRank MiniLM-L-12-v2 | 55.43 | 15ms | YES |
+
+  | ColBERT-v2 | 54.20 | 20ms | YES |
+
+  | Voyage Rerank | 54.0 | 120ms | NO |
+
+  | BGE-Reranker-large | 53.5 | 180ms | YES |
+
+  | No reranker (BM25 baseline) | 47.3 | 0ms | -- |'
+15_3_reranker_selection_matrix: '| Constraint | Recommended | Why |
+
+  |-----------|-------------|-----|
+
+  | Real-time (<30ms) | FlashRank or ColBERT-v2 | Fastest open-source options |
+
+  | Maximum accuracy | MonoT5-3B or Cohere Rerank | Top BEIR scores |
+
+  | Zero infrastructure | Cohere Rerank API or Voyage | One API call, no hosting |
+
+  | On-premise high accuracy | mxbai-rerank-large | Best open-source BEIR score |
+
+  | Multilingual | Cohere Rerank v3 | Native multilingual support |
+
+  | Code retrieval | BGE-Reranker + fine-tune | Domain-specific training |'
+15_4_reranker_cex_integration: "retriever_config:\n  initial_retrieval:\n    method: hybrid        # dense + sparse fusion\n\
+  \    top_k: 50             # retrieve more, rerank down\n  reranker:\n    type: cross_encoder   # or: llm_based, lightweight,\
+  \ api\n    model: mxbai-rerank-large\n    top_k_after_rerank: 5\n    score_threshold: 0.4  # discard low-confidence results\n\
+  \    budget_ms: 200        # latency cap per request\n\n---"
+16_rag_architecture_decision_tree: "START: What is your primary use case?\n|\n+-- [A] Factoid QA (single-doc, specific facts)\n\
+  |       --> Naive RAG (dense retrieval + 512-token chunks)\n|       --> Reranker: FlashRank (low latency)\n|       --> Embedding:\
+  \ BGE or E5\n|\n+-- [B] Multi-document synthesis (themes, summaries)\n|       --> GraphRAG or LazyGraphRAG\n|       -->\
+  \ Reranker: MonoT5 or Cohere (accuracy priority)\n|\n+-- [C] Complex multi-step research (reason + retrieve)\n|       -->\
+  \ Agentic RAG (reflexion or multi-agent)\n|       --> Reranker: LLM-based (RankLLM)\n|       --> Memory: entity_memory +\
+  \ memory_summary kinds\n|\n+-- [D] Real-time chat (< 500ms SLA)\n|       --> Naive RAG + FlashRank reranker\n|       -->\
+  \ Chunking: 256-512 fixed tokens\n|       --> Pre-warmed vector index (HNSW)\n|\n+-- [E] High-accuracy (compliance, medical,\
+  \ legal)\n        --> Agentic RAG with reflexion pattern\n        --> Reranker: MonoT5-3B or Cohere Rerank\n        -->\
+  \ Chunking: late chunking (Jina, +24% recall)\n        --> Guardrail: citation enforcement (every claim sourced)\n\nSECONDARY:\
+  \ What is your chunk size constraint?\n|\n+-- Document fits in 8192 tokens AND Jina model available\n|       --> Use late\
+  \ chunking (best recall, context-preserving)\n+-- Mixed document types (PDFs, tables, HTML)\n|       --> Agentic re-chunking\
+  \ (LLM identifies boundaries)\n+-- Cost-first, any document type\n        --> Recursive splitting 512 tokens (69% accuracy,\
+  \ zero model calls)\n\nSECONDARY: What is your latency budget?\n|\n+-- <30ms reranking budget    --> FlashRank or ColBERT-v2\n\
+  +-- <200ms reranking budget   --> mxbai-rerank-large or Cohere Nimble\n+-- No latency constraint     --> MonoT5-3B-10k (highest\
+  \ NDCG)"
+16_1_cex_kind_mapping_for_full_rag_stack: '| Component | CEX Kind | Config Key |
+
+  |-----------|---------|------------|
+
+  | Chunking strategy | `chunk_strategy` | method, size, overlap |
+
+  | Embedding model | `embedding_config` | model, dimensions, normalize |
+
+  | Vector index | `knowledge_index` | store_type, index_algo |
+
+  | Sparse retrieval | `knowledge_index` | sparse_backend, bm25_k1 |
+
+  | Hybrid fusion | `retriever_config` | hybrid: true, fusion_method |
+
+  | Reranker | `retriever_config` | reranker.type, reranker.model |
+
+  | Data sources | `rag_source` | type, endpoint, auth |
+
+  | Evaluation | `scoring_rubric` | metrics, thresholds |
+
+  | Agentic loop | `workflow` | steps, reflection_gate |
+
+  | Graph index | `knowledge_index` | store_type: graph, graph_endpoint |
+
+  | Memory | `entity_memory` + `memory_summary` | ttl, scope, decay |'

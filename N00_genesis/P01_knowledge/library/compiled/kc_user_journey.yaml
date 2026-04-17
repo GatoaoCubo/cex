@@ -1,0 +1,35 @@
+id: kc_user_journey
+kind: knowledge_card
+title: User Journey Map
+version: 1.0.0
+quality: null
+pillar: P01
+density_score: 0.97
+key_stages: "1. Awareness  \n   The customer becomes aware of a problem or need.  \n   Touchpoints: Advertising, content marketing,\
+  \ word-of-mouth.\n\n2. Consideration  \n   The customer researches solutions.  \n   Touchpoints: Product comparisons, reviews,\
+  \ demos.\n\n3. Intent  \n   The customer shows clear interest in a specific solution.  \n   Touchpoints: Website visits,\
+  \ email engagement, social media interactions.\n\n4. Evaluation  \n   The customer assesses options and compares vendors.\
+  \  \n   Touchpoints: Free trials, consultations, pricing comparisons.\n\n5. Purchase  \n   The customer makes a buying decision.\
+  \  \n   Touchpoints: Checkout, payment processing, order confirmation.\n\n6. Post-Purchase  \n   The customer uses the product/service\
+  \ and provides feedback.  \n   Touchpoints: Customer support, loyalty programs, referrals."
+purpose: 'This map helps businesses:
+
+  - Identify gaps in the customer experience
+
+  - Optimize marketing and sales strategies
+
+  - Improve conversion rates
+
+  - Enhance customer retention'
+metrics_to_track:
+- Awareness stage conversion rate
+- Consideration phase engagement time
+- Decision funnel drop-off points
+- Post-purchase satisfaction scores
+- Net Promoter Score (NPS)
+tools_for_analysis:
+- Customer journey mapping software
+- Heatmaps and session recordings
+- CRM analytics dashboards
+- A/B testing platforms
+- Survey tools for post-purchase feedback

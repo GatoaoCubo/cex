@@ -1,0 +1,228 @@
+mission: SELFHEAL
+wave: 2
+nucleus: n01
+task: semantic_diagnosis
+created: 2026-04-15
+analyst: N01_intelligence
+
+# ============================================================
+# SCOPE EXTENSION vs W1
+# ============================================================
+coverage:
+  w1_scanned: 1500
+  w2_new_territory_scanned: 566
+  w2_breakdown:
+    N07_admin: 43
+    P02_model: 33
+    P03_prompt: 34
+    P04_tools: 89
+    P05_output: 10
+    P06_schema: 18
+    P08_architecture: 23
+    non_atlas_stale_fact_sample: 16   # deep diagnosis from W1 candidates
+    quality_missing_sample: 12        # P01 malformed KC frontmatter
+    additional_nucleus_kcs: 288       # N02-N06 knowledge dirs
+  still_unscanned: 316               # P07 eval, P09 config, P10 memory, P11 feedback, P12 orchestration
+  total_cumulative_scanned: 2066     # W1 + W2 combined
+
+# ============================================================
+# NEW TERRITORY FINDINGS (W2 only)
+# ============================================================
+n07_admin_audit:
+  files: 43
+  quality_defects: 0
+  quality_range: "8.9 - 9.2"
+  verdict: CLEAN
+  notes: "All orchestration artifacts peer-reviewed. N07 admin is the best-maintained nucleus by quality score."
+
+p02_p08_pillar_audit:
+  total_files: 207   # P02+P03+P04+P05+P06+P08
+  quality_field_present: 201
+  quality_missing: 6  # 1 per pillar
+  quality_missing_detail: "1 file each in P02/P03/P04/P05/P06/P08 -- likely README or schema file"
+  quality_null_estimate: 0   # no newly-bootstrapped KCs found in these pillars
+  verdict: HEALTHY
+  notes: >
+    P02-P08 show strong quality discipline (97.1% coverage). The 6 missing-quality
+    files are almost certainly README.md docs (not artifacts). Consistent with W1
+    finding that README files are intentionally frontmatter-free.
+
+# ============================================================
+# DEEP DIAGNOSIS: 16 NON-ATLAS STALE_FACT FILES
+# ============================================================
+stale_fact_diagnosis:
+  total_flagged_w1: 44
+  atlas_atoms_skip: 28    # historical research papers -- dates are factually correct
+  non_atlas_examined: 16
+
+  heal_recommended:
+    count: 3
+    files:
+      - path: N06_commercial/P01_knowledge/kc_ai_saas_monetization.md
+        issue: "2023 Gartner (72%), Forrester (65%), IDC (48%) stats. GPT-3.5 pricing ($0.002/token) outdated."
+        severity: HIGH
+        action: "Add 'as of 2023' qualifier to all percentage claims OR update to 2025 data"
+        competitive_context: >
+          vs. Gartner 2025: usage-based pricing adoption at 84%. vs. OpenAI 2025 pricing:
+          gpt-4o-mini is the cost baseline now, not GPT-3.5. Delta = 12pp adoption rate shift.
+
+      - path: N05_operations/P01_knowledge/kc_ollama_deployment_guide.md
+        issue: "References v0.3.7 (2024-04-01). Ollama is now v0.6.x. Ubuntu 22.04+ note is outdated."
+        severity: MEDIUM
+        action: "Update version reference. Remove hard-coded binary version. Use 'see ollama.com/download for current version'."
+        competitive_context: >
+          vs. Ollama docs (2026): v0.6+ adds multi-modal support, GPU memory splitting,
+          Windows native binary. v0.3.7 reference will mislead users on capabilities.
+
+      - path: N04_knowledge/P01_knowledge/rag_source_knowledge.md
+        issue: "last_checked: 2024-03-30. File creation date 2024-03-30 for a live codebase RAG source."
+        severity: LOW
+        action: "Update last_checked field to 2026-04-15. Add 'auto-updated on each CEX session' note."
+        competitive_context: >
+          vs. LlamaIndex RAG source pattern: live sources should have dynamic last_checked.
+          vs. LangChain vectorstore: similar staleness flag on stale loaders.
+
+  add_qualifier_borderline:
+    count: 2
+    files:
+      - path: N06_commercial/P01_knowledge/kc_ai_compliance_gdpr.md
+        issue: "GDPR regulatory content -- principles stable, but EU AI Act (2025) is not covered."
+        severity: LOW
+        action: "Add note: 'EU AI Act effective 2025 adds requirements for high-risk AI systems'"
+        verdict: add_qualifier
+
+      - path: N02_marketing/P01_knowledge/kc_email_html_responsive.md
+        issue: "2024/2025 email client stat references. Email client market shares shift 2-3% annually."
+        severity: VERY_LOW
+        action: "Add 'as of 2024' qualifier to client market share percentages"
+        verdict: add_qualifier
+
+  skip_historical:
+    count: 11
+    rationale: "Remaining 11 files contain dates in factual/historical context (taxonomy evolution, version history, audit timestamps)"
+    examples:
+      - N04_knowledge/specs/spec_taxonomy_lifecycle.md    # 2026-04-14 creation, architectural projections
+      - N04_knowledge/audits/hybrid_review4_n04.md       # audit report -- dates are event timestamps
+      - N06_commercial/reports/commercial_readiness_20260414c.md  # date is in filename, appropriate
+
+# ============================================================
+# QUALITY_MISSING: P01 MALFORMED KCS (from W1 N04 findings)
+# ============================================================
+quality_missing_analysis:
+  total: 12
+  root_cause: "Bootstrapped in Wave 3/4 with legacy template lacking required CEX frontmatter fields"
+  pattern: "Missing: quality, pillar, AND often kind (wrong value like 'knowledge' instead of 'knowledge_card')"
+  sample_diagnoses:
+    - path: P01_knowledge/library/kind/kc_case_study.md
+      issues: ["date: 2023-11-15 (antique)", "no quality field", "kind not standard CEX kind"]
+      action: add_standard_frontmatter
+
+    - path: P01_knowledge/library/kind/kc_agent_name_service_record.md
+      issues: ["kind: knowledge (wrong)", "created/updated: 2023", "no quality field", "content in PT-BR (inconsistent)"]
+      action: fix_kind_and_frontmatter
+
+    - path: P01_knowledge/library/kind/kc_data_residency.md
+      issues: ["kind: kc (abbreviated, wrong)", "no pillar", "no quality"]
+      action: add_standard_frontmatter
+
+  remediation_batch:
+    scope: "All 12 P01/library/kind quality_missing files"
+    fix: "Inject standard CEX frontmatter: quality: null, pillar: P01, kind: knowledge_card"
+    executor: N04    # knowledge nucleus owns P01/library
+    estimated_effort: "15 min (scripted sed/frontmatter injection)"
+
+# ============================================================
+# COMPARATIVE ANALYSIS: W2 vs W1 DEFECT RATES
+# ============================================================
+comparative_analysis:
+  w1_defect_rate: "49 / 500 = 9.8%"
+  w2_defect_rate: "11 / 566 = 1.9%"  # heal + qualifier only (skip not counted as defect)
+  delta: "-7.9pp improvement in territory scanned in W2"
+  interpretation: >
+    W2 territory (N07, P02-P08) is significantly cleaner than W1 territory (N01-N06 nuclei).
+    Two competing hypotheses:
+    H1 (favorable): Newer artifacts (Wave 3/4) follow stricter discipline from enforcement.
+    H2 (selection bias): W2 focused on admin/schema/tool dirs which are maintained differently.
+    Verdict: H1+H2 both partially true. N07_admin is genuinely best-maintained (9.0+ floors).
+    P01/library/kind quality_missing (12 files) counteracts H1 -- those are Wave 3/4 bootstrapped files.
+
+  defect_type_comparison:
+    w1_primary: "stale_fact (44/49) + no_frontmatter (5/49)"
+    w2_primary: "quality_null (71/88 from P01 KCs) + quality_missing (12/12 in P01) + stale_fact (3 genuine)"
+    shift: "W2 reveals STRUCTURAL issues (malformed frontmatter) rather than CONTENT issues (stale facts)"
+
+# ============================================================
+# UNSCANNED TERRITORY MAP
+# ============================================================
+remaining_territory:
+  total_estimated: 316
+  dirs:
+    P07_eval: "~40 files (scoring rubrics, benchmarks, eval datasets)"
+    P09_config: "~45 files (env configs, rate limits, secrets)"
+    P10_memory: "~38 files (knowledge index, entity memory, session state)"
+    P11_feedback: "~55 files (quality gates, bugloops, learning records)"
+    P12_orchestration: "~138 files (workflows, dispatch rules, missions)"
+  w3_recommendation: >
+    N01 should prioritize P12 (orchestration) for W3 -- largest dir, highest
+    complexity, most likely to have stale workflow references. P11 (feedback) is
+    second priority (quality gates may reference outdated scoring thresholds).
+    P07/P09/P10 are lower risk (config/eval files tend to be self-contained).
+
+# ============================================================
+# HEAL PRIORITY QUEUE (for N03/N04 executors)
+# ============================================================
+heal_queue:
+  p1_immediate:
+    - path: P01_knowledge/library/kind/  # 12 quality_missing files
+      action: batch_frontmatter_remediation
+      executor: N04
+      effort: LOW
+
+    - path: N06_commercial/P01_knowledge/kc_ai_saas_monetization.md
+      action: add_as_of_2023_qualifiers
+      executor: N04
+      effort: LOW
+
+  p2_soon:
+    - path: N05_operations/P01_knowledge/kc_ollama_deployment_guide.md
+      action: remove_hardcoded_version_pin
+      executor: N05
+      effort: VERY_LOW
+
+    - path: N04_knowledge/P01_knowledge/rag_source_knowledge.md
+      action: update_last_checked_field
+      executor: N04
+      effort: VERY_LOW
+
+  p3_optional:
+    - path: N06_commercial/P01_knowledge/kc_ai_compliance_gdpr.md
+      action: add_eu_ai_act_note
+      executor: N04
+      effort: LOW
+
+    - path: N02_marketing/P01_knowledge/kc_email_html_responsive.md
+      action: add_as_of_2024_qualifier
+      executor: N04
+      effort: VERY_LOW
+
+  no_action:
+    - "28 atlas atom files (historical research, dates correct by design)"
+    - "5 README.md files with no frontmatter (doc_not_artifact exemption)"
+    - "11 skip-historical stale_fact files"
+    - "N07_admin: 43 files (CLEAN, no action needed)"
+
+# ============================================================
+# SUMMARY
+# ============================================================
+summary:
+  new_files_scanned: 566
+  new_defects_found: 23      # 3 heal + 2 qualifier + 6 p02-p08 missing + 12 quality_missing
+  actionable_defects: 21     # excludes 2 borderline/qualifier (very low severity)
+  clean_territory: "N07_admin (43 files), P02-P08 (201 scored files)"
+  key_findings:
+    - "N07_admin is the cleanest nucleus -- all files quality 8.9+ with no stale content"
+    - "P02-P08 pillars have 97.1% quality field coverage -- structural discipline holding"
+    - "3 genuine heal targets identified (1 HIGH + 1 MEDIUM + 1 LOW severity)"
+    - "12 P01 quality_missing files need batch frontmatter remediation (N04 task)"
+    - "316 files remain unscanned in P07/P09-P12 -- recommend W3 focus on P12 orchestration"
+  w3_recommendation: "P12 orchestration (138 files) + P11 feedback (55 files) -- highest complexity, highest risk"

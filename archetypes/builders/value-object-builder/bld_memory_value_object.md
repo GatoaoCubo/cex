@@ -1,0 +1,32 @@
+---
+id: bld_memory_value_object
+kind: knowledge_card
+pillar: P06
+title: "Value Object Builder -- Memory"
+version: 1.0.0
+quality: 5.0
+tags: [builder, value_object, memory]
+llm_function: INJECT
+density_score: 0.92
+updated: "2026-04-17"
+---
+# Memory: value_object
+## Session Patterns
+- Attribute count: most value objects have 1-3 attributes. >5 suggests decomposing.
+- The "whole value" test: if you can construct an invalid instance, the value object is broken. All invariants must be checked at construction.
+- Hashability: value objects should be hashable if they will be used as dict keys or in sets. Always specify.
+- Transformation naming: use `withX()` or `toX()` pattern, never `setX()`.
+## Common Mistakes
+- Adding an `id` field: if you need to track this object, it is an entity.
+- Mutable setters: value objects are immutable. Any mutation creates a new instance.
+- Empty attributes list: every value object must have at least 1 attribute with a constraint.
+- Missing invalid examples: without invalid state examples, validation rules cannot be verified.
+## Identity Test (use when unsure)
+Q: "If I find two instances with identical attributes in the database, are they the same thing?"
+- YES -> value object (structural equality, no identity needed)
+- NO -> entity (needs its own identity to distinguish them)
+## Type Taxonomy
+- value_object: domain-meaningful, DDD contract, no identity, structural equality
+- type_def: generic alias (Age = int), no domain contract
+- enum_def: fixed set of constants (Status = [ACTIVE, INACTIVE])
+- aggregate_root: entity with identity that owns a cluster

@@ -1,0 +1,57 @@
+kind: instruction
+id: bld_instruction_repo_map
+pillar: P03
+llm_function: REASON
+purpose: Step-by-step production process for repo_map
+quality: null
+title: Instruction Repo Map
+version: 1.1.0
+author: n05_ops
+tags:
+- repo_map
+- builder
+- instruction
+- tree-sitter
+- pagerank
+- aider
+tldr: 'Repo map production: tree-sitter symbol extraction -> PageRank file ranking -> token budget fit -> output symbol table'
+domain: repo_map construction
+created: '2026-04-13'
+updated: '2026-04-13'
+density_score: 0.9
+phase_1_research_discover_and_extract:
+- Identify repo root and scan all source files (use `git ls-files` or ripgrep).
+- Detect languages per file using pygments or file extension mapping.
+- 'For each source file: extract symbols using tree-sitter (classes, functions, methods, variables).'
+- Use `tree_sitter_languages.get_language(lang)` + language-specific query.
+- Fallback to Universal ctags (`ctags --output-format=json`) for unsupported languages.
+- 'Build reference graph: directed edges from file A -> file B when A imports or calls B.'
+- Parse import statements (Python `import`/`from`, JS `import`/`require`, Go `import`).
+- 'Identify "personalization" files: files explicitly mentioned in current conversation (+2x weight).'
+- 'Identify "recency" files: files in `git diff HEAD` or recent commits (+1.5x weight).'
+- 'Document: total file count, total symbol count, language distribution.'
+phase_2_rank_apply_pagerank_and_select_files:
+- Apply PageRank to reference graph with `networkx.pagerank(G, alpha=0.85, personalization=weights)`.
+- Sort all files by PageRank score (descending).
+- 'Set token budget: `--map-tokens` value (default 1024; multiply by 2 if no files in current context).'
+- Count tokens for each file's symbol block using tiktoken or anthropic token counter.
+- Add files to map in rank order until token budget is exhausted.
+- 'If a file''s symbols exceed 20% of remaining budget: truncate symbols by line length.'
+- 'Apply file exclusion rules: binaries, generated files, lock files, files > 100KB, .gitignore patterns.'
+- Record selection heuristics applied (mentioned, recent, entry-point, test-paired).
+phase_3_compose_build_the_artifact: "1. Write YAML frontmatter: id (pattern `p01_rm_{{name}}`), kind, pillar, token_budget,\n\
+  \   symbol_count, file_count, extraction_method.\n2. Write Repository Overview section: repo name, root, languages, total\
+  \ files/symbols, tokens used/budget.\n3. Write File Ranking table: rank, file path, PageRank score, token count, reason\
+  \ for inclusion.\n4. Write Symbol Table section in Aider format:\n   path/to/file.py:\n     class ClassName:\n       def\
+  \ method_name(self, param: type) -> return_type\n     def function_name(param: type) -> return_type\n5. Write Reference\
+  \ Graph Summary: top files by in-degree + out-degree.\n6. Write File Selection Heuristics Applied table.\n7. Write Excluded\
+  \ Files table with reasons.\n8. Validate against OUTPUT_TEMPLATE.md: all sections present."
+phase_4_validate:
+- '[ ] id matches pattern `^p01_rm_[a-zA-Z0-9_]+$`'
+- '[ ] token_budget field present and equals configured budget'
+- '[ ] tokens_used <= token_budget (HARD constraint)'
+- '[ ] Symbol table contains function signatures (not just file paths)'
+- '[ ] PageRank scores shown in file ranking table'
+- '[ ] File exclusion rules applied (no binaries, no lock files)'
+- '[ ] H01-H10 HARD gates pass'
+- '[ ] SOFT score >= 8.0 before publish'

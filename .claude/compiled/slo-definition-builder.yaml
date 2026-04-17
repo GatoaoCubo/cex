@@ -1,0 +1,4 @@
+name: slo-definition-builder
+description: Builds ONE slo_definition artifact via 8F pipeline. Loads slo-definition-builder specs. Produces draft with frontmatter
+  + body. Never self-scores quality.
+tools: Read, Write, Edit, Bash, Glob, Grep

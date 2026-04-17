@@ -1,0 +1,45 @@
+kind: collaboration
+id: bld_collaboration_prospective_memory
+pillar: P12
+llm_function: COLLABORATE
+purpose: How prospective-memory-builder works in crews with other builders
+quality: 7.2
+title: Collaboration Prospective Memory
+version: 1.0.0
+author: n03_builder
+tags:
+- prospective_memory
+- builder
+- collaboration
+tldr: prospective-memory-builder provides future-action stores for agent crews.
+domain: prospective memory construction
+created: '2026-04-17'
+updated: '2026-04-17'
+density_score: 0.9
+my_role_in_crews: I store the FUTURE INTENTIONS of an agent -- what it commits to do later. I do not schedule workflow jobs
+  (that is schedule P12). I do not hold current task state (working_memory). I do not record what happened (episodic_memory).
+crew_compositions: ''
+crew_agent_memory_system: "  1. working-memory-builder -> \"active task state\"\n  2. episodic-memory-builder -> \"past interaction\
+  \ history\"\n  3. prospective-memory-builder -> \"future action intentions\"\n  4. entity-memory-builder -> \"persistent\
+  \ entity facts\""
+handoff_protocol: ''
+i_receive:
+- 'seeds: owner agent/nucleus, list of future actions and their triggers'
+i_produce:
+- prospective_memory artifact (.md)
+- 'committed to: `N0x_{domain}/P10_memory/p10_pm_{scope}.md`'
+builders_i_depend_on: '| Builder | Why |
+
+  |---------|-----|
+
+  | agent-builder | Agent definition declares which tools the action_payloads reference |
+
+  | episodic-memory-builder | Completed reminders are recorded as episodes |'
+conflict_resolution: '| Scenario | Resolution |
+
+  |----------|-----------|
+
+  | prospective_memory vs schedule | prospective = agent intention. schedule = workflow config. Different pillars (P10 vs
+  P12). |
+
+  | Future action vs current task | Future -> prospective_memory. Current -> working_memory. |'

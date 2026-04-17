@@ -6,12 +6,46 @@ __pycache__/
 
 # Secrets
 .env
+.env.*
+!.env.example
+*.pem
+*.key
 _config/*.credentials
 _config/client_secret.json
 _config/token.json
 **/canva_token.json
 **/*_token.json
 **/*_credentials.json
+
+# Audit reports (may contain raw .env scan output -- NEVER commit)
+_reports/audit/
+_reports/leverage_map/
+_reports/leverage_map_v2_*/
+_reports/gridtest_*/
+_reports/gridtest_leverage_map_dispatch.log
+_reports/overnight/
+_reports/smoke/
+_reports/polish/
+_reports/selfheal/
+_reports/spawn_probe/
+_reports/token_trim/
+_reports/ops/
+.cex/quality/audit_*.json
+
+# Supabase local dev temp (contains project ref + connection strings)
+supabase/.temp/
+
+# Showoff ephemeral (logs, wave fix attempts -- keep compiled/ only)
+_showoff/logs/
+_showoff/gemini_fix/
+_showoff/codex_fix/
+_showoff/w*/
+
+# External projects cloned into workspace (not part of CEX)
+_external/
+
+# Auto-generated context dumps
+CLAUDE_GENERATED.md
 
 # IDE
 .obsidian/
@@ -49,3 +83,8 @@ Thumbs.db
 nul
 .cex/temp/
 boot/n01-claude.cmd
+.aider*
+unsloth_compiled_cache/
+.venv_litellm/
+_reports/distillation/inventory_*.md
+_reports/compiled/inventory_*.yaml

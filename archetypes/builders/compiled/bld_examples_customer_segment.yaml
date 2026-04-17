@@ -1,0 +1,29 @@
+kind: examples
+id: bld_examples_customer_segment
+pillar: P07
+llm_function: GOVERN
+purpose: Golden and anti-examples of customer_segment artifacts
+quality: null
+title: Examples Customer Segment
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- customer_segment
+- builder
+- examples
+tldr: Golden and anti-examples of customer_segment artifacts
+domain: customer_segment construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+golden_example: "title: Mid-Market Healthcare Provider ICP\nkind: customer_segment\nfirmographics:\n  industry: Healthcare\n\
+  \  company_size: 100-500 employees\n  revenue: $10M-$50M\n  location: North America, Europe\n  technology_stack: Epic, Cerner,\
+  \ Microsoft 365\nneeds:\n  - Streamlined patient data management\n  - HIPAA-compliant analytics tools\n  - Integration with\
+  \ existing EHR systems\n  - Scalable cloud infrastructure\n  - 24/7 technical support"
+anti_example_1_vague_generalization: "title: Small Businesses\nkind: customer_segment\nfirmographics:\n  industry: All industries\n\
+  \  company_size: 1-10 employees\nneeds:\n  - \"Basic tools\"\n  - \"Low cost\"\n  - \"Easy to use\""
+why_it_fails: Mixes personal attributes (age, education) with firmographics. Focuses on user preferences rather than organizational
+  needs, misaligning with ICP definition requirements.
+anti_example_2_persona_confusion: "title: Tech-Savvy Entrepreneurs\nkind: customer_segment\nfirmographics:\n  industry: All\
+  \ industries\n  company_size: 1-10 employees\n  personal_attributes:\n    - Age: 25-35\n    - Education: College degree\n\
+  \    - Tech proficiency: High\nneeds:\n  - \"Cool features\"\n  - \"Modern UI\"\n  - \"Social media integration\""

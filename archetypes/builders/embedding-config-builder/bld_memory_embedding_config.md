@@ -29,6 +29,7 @@ observation_types: [user, feedback, project, reference]
 quality: 9.2
 title: "Memory Embedding Config"
 density_score: 0.90
+llm_function: INJECT
 ---
 ## Summary
 Embedding pipeline misconfiguration produces incorrect similarity rankings that appear to work until retrieval quality is measured quantitatively. The four critical decisions - model/dimensions pairing, chunk size, overlap, and distance metric with normalization - interact: a correct choice in one dimension can be undermined by a wrong choice in another.

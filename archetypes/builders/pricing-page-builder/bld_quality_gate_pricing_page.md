@@ -1,0 +1,64 @@
+---
+kind: quality_gate
+id: p05_qg_pricing_page
+pillar: P11
+llm_function: GOVERN
+purpose: Quality gate with HARD and SOFT scoring for pricing_page
+quality: 9.0
+title: "Quality Gate Pricing Page"
+version: "1.0.0"
+author: wave1_builder_gen_v2
+tags: [pricing_page, builder, quality_gate]
+tldr: "Quality gate with HARD and SOFT scoring for pricing_page"
+domain: "pricing_page construction"
+created: "2026-04-14"
+updated: "2026-04-14"
+density_score: 0.85
+---
+
+## Definition
+(Table: metric, threshold, operator, scope)
+| metric | threshold | operator | scope |
+|---|---|---|---|
+| Tier comparison clarity | 3+ | >= | Pricing tiers |
+| Conversion copy effectiveness | 80% | >= | Call-to-action buttons |
+| Currency symbol consistency | 100% | == | All price displays |
+
+## HARD Gates
+(Table: ID | Check | Fail Condition)
+| ID | Check | Fail Condition |
+|---|---|---|
+| H01 | YAML frontmatter valid | Invalid YAML syntax |
+| H02 | ID matches pattern ^p05_pp_[a-z][a-z0-9_]+.md$ | Invalid schema ID |
+| H03 | kind field matches 'pricing_page' | Incorrect kind value |
+| H04 | At least 3 pricing tiers | <3 tiers defined |
+| H05 | Conversion copy includes CTA verbs | Missing "Buy", "Sign up", etc. |
+| H06 | No missing currency symbols | Missing $, €, or ₽ |
+| H07 | Tier comparison table present | Table missing or incomplete |
+
+## SOFT Scoring
+(Table: Dim | Dimension | Weight | Scoring Guide)
+| Dim | Dimension | Weight | Scoring Guide |
+|---|---|---|---|
+| D01 | Tier clarity | 0.15 | 1-5 (less clear to very clear) |
+| D02 | Conversion copy | 0.20 | 1-5 (weak to compelling) |
+| D03 | Visual hierarchy | 0.10 | 1-5 (poor to excellent) |
+| D04 | Currency accuracy | 0.10 | 1-5 (errors to perfect) |
+| D05 | Comparison completeness | 0.15 | 1-5 (sparse to comprehensive) |
+| D06 | CTA prominence | 0.10 | 1-5 (hidden to obvious) |
+| D07 | Mobile usability | 0.20 | 1-5 (broken to seamless) |
+
+## Actions
+(Table: Score | Action)
+| Score | Action |
+|---|---|
+| GOLDEN | >=9.5 | Auto-publish with celebration |
+| PUBLISH | >=8.0 | Publish immediately |
+| REVIEW | >=7.0 | Require stakeholder review |
+| REJECT | <7.0 | Reject and request major fixes |
+
+## Bypass
+(Table: conditions, approver, audit trail)
+| conditions | approver | audit trail |
+|---|---|---|
+| Emergency launch | CTO | Slack notification + email |

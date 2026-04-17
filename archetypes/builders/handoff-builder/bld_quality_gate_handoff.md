@@ -12,8 +12,8 @@ quality: 9.0
 tags: [quality-gate, handoff, delegation, orchestration, scope-fence]
 tldr: "Gates ensuring handoff artifacts carry complete delegation context: task, scope fence, commit instructions, and size discipline."
 density_score: 0.88
+llm_function: GOVERN
 ---
-
 # Gate: Handoff
 ## Definition
 | Field     | Value |

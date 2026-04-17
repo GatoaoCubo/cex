@@ -1,0 +1,36 @@
+kind: quality_gate
+id: p01_qg_discovery_questions
+pillar: P11
+llm_function: GOVERN
+purpose: Quality gate with HARD and SOFT scoring for discovery_questions
+quality: null
+title: Quality Gate Discovery Questions
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- discovery_questions
+- builder
+- quality_gate
+tldr: Quality gate with HARD and SOFT scoring for discovery_questions
+domain: discovery_questions construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+definition: "(Table: metric, threshold, operator, scope)  \nmetric | threshold | operator | scope  \n--- | --- | --- | ---\
+  \  \nCompleteness | 100% | >= | All buyer personas and deal stages"
+hard_gates: "(Table: ID | Check | Fail Condition)  \nH01 | YAML frontmatter valid | Invalid YAML syntax  \nH02 | ID matches\
+  \ pattern ^p01_dq_[a-z][a-z0-9_]+.md$ | Invalid schema ID format  \nH03 | kind field matches 'discovery_questions' | Incorrect\
+  \ kind value  \nH04 | Questions grouped by buyer persona | Missing persona-specific categorization  \nH05 | Deal stage alignment\
+  \ present | No stage-specific questions  \nH06 | At least 3 question types (e.g., value, pain, budget) | <3 question types\
+  \  \nH07 | No duplicate questions across personas | Duplicates detected  \nH08 | Questions avoid leading bias | Leading\
+  \ language present"
+soft_scoring: "(Table: Dim | Dimension | Weight | Scoring Guide)  \nDim | Dimension | Weight | Scoring Guide  \n--- | ---\
+  \ | --- | ---  \nD1 | Relevance to persona | 0.20 | 1.0 (fully aligned) to 0.0 (irrelevant)  \nD2 | Coverage of deal stages\
+  \ | 0.15 | 1.0 (all stages) to 0.0 (none)  \nD3 | Clarity of questions | 0.15 | 1.0 (unambiguous) to 0.0 (vague)  \nD4 |\
+  \ Depth of insight | 0.15 | 1.0 (high value) to 0.0 (superficial)  \nD5 | Question type diversity | 0.10 | 1.0 (3+ types)\
+  \ to 0.0 (<2 types)  \nD6 | Language neutrality | 0.10 | 1.0 (neutral) to 0.0 (biased)  \nD7 | Actionability | 0.10 | 1.0\
+  \ (drives next steps) to 0.0 (non-actionable)  \nD8 | Consistency across personas | 0.05 | 1.0 (consistent) to 0.0 (inconsistent)"
+actions: "(Table: Score | Action)  \nScore | Action  \n--- | ---  \nGOLDEN >=9.5 | Auto-approve and flag for excellence  \n\
+  PUBLISH >=8.0 | Approve for use  \nREVIEW >=7.0 | Flag for review by SME  \nREJECT <7.0 | Reject and require rewrite"
+bypass: "(Table: conditions, approver, audit trail)  \nconditions | approver | audit trail  \n--- | --- | ---  \nEmergency\
+  \ release | CTO | Requires written justification and timestamp"

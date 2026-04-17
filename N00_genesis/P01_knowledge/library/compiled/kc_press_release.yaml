@@ -1,0 +1,42 @@
+id: kc_press_release
+kind: knowledge_card
+title: Press Release
+version: 1.0.0
+quality: null
+pillar: P01
+language: English
+density_score: 0.99
+ap_style_elements:
+- 'Headline: Bold, concise, and attention-grabbing (e.g., "Local Tech Startup Secures $5M in Funding")'
+- 'Dateline: "City, State — Date" (e.g., "San Francisco, CA — April 5, 2024")'
+- 'Lede: First paragraph summarizing key facts: who, what, when, where, why, how'
+- 'Quotes: Direct quotes from executives/officials (e.g., "We''re thrilled to announce this milestone," said CEO Jane Doe)'
+- 'Boilerplate: Company overview and mission statement'
+- 'Contacts: Media contact information with phone number, email, and website'
+structure_template: '[Headline]
+
+  [Dateline]
+
+
+  [Lead paragraph with key details]
+
+
+  [Quote from executive]
+
+
+  [Additional context/technical details]
+
+
+  [Boilerplate]
+
+
+  [Contact information]'
+example: "LOCAL TECH STARTUP SECURES $5M IN FUNDING  \nSan Francisco, CA — April 5, 2024  \n\nLocal tech startup InnovateX\
+  \ has raised $5 million in Series A funding to expand its AI-powered analytics platform.  \n\n\"We're thrilled to announce\
+  \ this milestone,\" said CEO Jane Doe. \"This investment will accelerate our mission to democratize data science.\"  \n\n\
+  The funding comes from top-tier venture capital firms including Sequoia Capital and a16z. InnovateX's platform now serves\
+  \ over 100 enterprises.  \n\nAbout InnovateX  \nInnovateX is a San Francisco-based company developing AI tools for enterprise\
+  \ data analysis. Founded in 2020, the company has grown to 50 employees and serves clients across 15 countries.  \n\nMedia\
+  \ Contact  \nJane Doe  \nChief Executive Officer  \njane.doe@innovatex.com  \n(415) 555-0198  \nwww.innovatex.com\n\n##\
+  \ Tips\n- Use active voice and present tense\n- Avoid jargon; explain technical terms\n- Include specific metrics and dates\n\
+  - Maintain neutral, factual tone\n- Include multimedia assets (photos, videos) when possible"

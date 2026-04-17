@@ -1,0 +1,116 @@
+id: retriever_n01
+kind: retriever
+pillar: P04
+nucleus: n01
+title: N01 Intelligence Corpus Retriever
+version: 1.0.0
+created: 2026-04-17
+author: n01_intelligence
+domain: research-intelligence
+quality: null
+tags:
+- retriever
+- rag
+- semantic_search
+- n01
+- knowledge_retrieval
+- corpus
+tldr: 'Hybrid retriever for N01 knowledge corpus: BM25 (keyword) + dense embedding (semantic) with RRF fusion. Retrieves from
+  N01_intelligence/ artifact store and .cex/cache/ compiled outputs.'
+density_score: 0.9
+updated: '2026-04-17'
+purpose: 'Analytical Envy drives N01 to ALWAYS compare new findings against existing knowledge.
+
+  Before any synthesis, N01 must query its own corpus to:
+
+  1. Avoid duplicating research already done
+
+  2. Identify contradictions (new data vs. old data = the interesting signal)
+
+  3. Build on existing intelligence (compound knowledge, not restart)'
+retrieval_architecture: '| Component | Technology | Role |
+
+  |-----------|-----------|------|
+
+  | Sparse index | BM25 (rank_bm25) | keyword precision: exact terms, entity names |
+
+  | Dense index | sentence-transformers/all-MiniLM-L6-v2 | semantic similarity |
+
+  | Fusion | RRF (Reciprocal Rank Fusion) | combine sparse+dense scores |
+
+  | Store | local file index (`knowledge_index_intelligence.md`) | no external vector DB needed |
+
+  | Reranker | cross-encoder (ms-marco-MiniLM-L-6-v2) | top-10 rerank |'
+query_protocol: "query(text: str, top_k: int = 10) -> list[RetrievedDoc]:\n  1. bm25_results = bm25_index.search(text, top_k=20)\n\
+  \  2. dense_results = embedder.search(text, top_k=20)\n  3. fused = rrf_fuse(bm25_results, dense_results, k=60)\n  4. reranked\
+  \ = cross_encoder.rerank(fused[:20], top_k=top_k)\n  5. return reranked"
+corpus_coverage: '| Source | Format | Update Frequency |
+
+  |--------|--------|-----------------|
+
+  | `N01_intelligence/P01_knowledge/*.md` | knowledge_card | on every new KC |
+
+  | `N01_intelligence/compiled/*.yaml` | compiled artifacts | on every compile |
+
+  | `.cex/cache/*.json` | prompt cache | on session start |
+
+  | Research outputs in `.cex/runtime/` | session outputs | on session end |'
+retrieved_document_schema: '| Field | Type | Description |
+
+  |-------|------|-------------|
+
+  | `doc_id` | string | artifact path (relative) |
+
+  | `title` | string | artifact title |
+
+  | `kind` | string | CEX kind |
+
+  | `content` | string | relevant excerpt |
+
+  | `bm25_score` | float | keyword relevance |
+
+  | `dense_score` | float | semantic similarity |
+
+  | `fused_rank` | int | final RRF rank |
+
+  | `rerank_score` | float | cross-encoder score |
+
+  | `last_updated` | ISO8601 | artifact modification date |'
+pre_synthesis_check_protocol: "Before any research task, N01 runs:\n\nexisting = retriever.query(task_goal, top_k=5)\nif existing[0].rerank_score\
+  \ > 0.85:\n    report(\"HIGH_OVERLAP: similar research found in corpus\")\n    decision = \"extend\" if existing is partial\
+  \ else \"reuse\"\nelse:\n    proceed_with_new_research()\n\n| Score | Action |\n|-------|--------|\n| > 0.85 | reuse or\
+  \ extend existing artifact |\n| 0.60 - 0.85 | run targeted gaps, merge into existing |\n| < 0.60 | full new research pipeline\
+  \ |"
+performance_targets: '| Metric | Target | Alert |
+
+  |--------|--------|-------|
+
+  | Index build time (cold) | < 30s for 200 docs | > 60s |
+
+  | Query latency (warm) | < 500ms | > 2s |
+
+  | Recall@10 | > 0.80 | < 0.60 |
+
+  | Precision@5 | > 0.70 | < 0.50 |'
+comparison_vs_alternatives: '| Approach | Precision | Speed | Corpus Type | N01 Fit |
+
+  |----------|-----------|-------|-------------|---------|
+
+  | BM25 only | high keyword | fast | large text | misses semantic |
+
+  | Dense only | high semantic | medium | embedding DB | misses exact terms |
+
+  | This (hybrid RRF) | best of both | medium | local files | optimal |
+
+  | Full vector DB (Pinecone) | high | fast | cloud required | overkill for N01 scale |'
+related_artifacts: '| Artifact | Relationship |
+
+  |----------|-------------|
+
+  | `P10_memory/knowledge_index_n01.md` | index that this retriever queries |
+
+  | `P10_memory/embedding_config_intelligence.md` | embedding model config |
+
+  | `P04_tools/research_pipeline_n01.md` | calls this before synthesis |
+
+  | `P01_knowledge/*.md` | primary corpus being indexed |'

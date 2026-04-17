@@ -1,0 +1,41 @@
+---
+kind: tools
+id: bld_tools_enterprise_sla
+pillar: P04
+llm_function: CALL
+purpose: Tools available for enterprise_sla production
+quality: 8.9
+title: "Tools Enterprise Sla"
+version: "1.0.0"
+author: wave1_builder_gen_v2
+tags: [enterprise_sla, builder, tools]
+tldr: "Tools available for enterprise_sla production"
+domain: "enterprise_sla construction"
+created: "2026-04-14"
+updated: "2026-04-14"
+density_score: 0.85
+---
+
+## Production Tools
+| Tool | Purpose | When |
+|------|---------|------|
+| cex_compile.py | Compile SLA artifact to YAML + register in index | After authoring |
+| cex_score.py | Score artifact quality (5D + HARD gates) | After compile |
+| cex_retriever.py | Retrieve similar SLA artifacts for template reuse | During F3 INJECT |
+| cex_doctor.py | Validate all ISOs in builder for structural health | Post-build audit |
+| cex_wave_validator.py | Batch-validate full enterprise-sla-builder (39 ISOs) | CI gate |
+| cex_hygiene.py | Enforce 8 hygiene rules (frontmatter, density, IDs) | Pre-commit |
+
+## Validation Tools
+| Tool | Purpose | When |
+|------|---------|------|
+| cex_hooks.py | Pre-commit hook: block non-ASCII + schema violations | On git add |
+| cex_sanitize.py | ASCII sanitize .py/.ps1 in builder scope | After code edits |
+| cex_feedback.py | Track quality trends + archive low-score artifacts | After scoring |
+
+## External References
+- ITIL 4 (Service Level Management framework)
+- ISO/IEC 20000-1:2018 (IT Service Management SLA requirements)
+- Google SRE Book: Error Budgets and SLO/SLI/SLA distinction
+- Prometheus (uptime and latency monitoring reference)
+- PagerDuty (incident escalation and SLA breach alerting)

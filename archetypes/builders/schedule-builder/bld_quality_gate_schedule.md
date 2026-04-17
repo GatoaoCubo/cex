@@ -12,8 +12,8 @@ quality: 9.0
 tags: [quality-gate, schedule, P12, cron, temporal-trigger, workflow-ref]
 tldr: "Pass/fail gate for schedule artifacts: cron validity, timezone declaration, workflow_ref resolution, and policy completeness."
 density_score: 0.90
+llm_function: GOVERN
 ---
-
 # Gate: schedule
 ## Definition
 | Field | Value |

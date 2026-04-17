@@ -1,0 +1,27 @@
+kind: collaboration
+id: bld_collaboration_safety_policy
+pillar: P12
+llm_function: COLLABORATE
+purpose: How safety_policy-builder works in crews with other builders
+quality: null
+title: Collaboration Safety Policy
+version: 1.0.0
+author: wave1_builder_gen
+tags:
+- safety_policy
+- builder
+- collaboration
+tldr: How safety_policy-builder works in crews with other builders
+domain: safety_policy construction
+created: '2026-04-13'
+updated: '2026-04-13'
+density_score: 0.85
+crew_role: Translates safety governance rules into actionable safety policies, ensuring alignment with organizational goals
+  and risk contexts.
+receives_from: "| Builder       | What                  | Format     |  \n|---------------|-----------------------|------------|\
+  \  \n| safety_governance_owner | Governance rules      | JSON       |  \n| threat_modeler  | Risk assessment inputs | YAML\
+  \       |  \n| policy_repository | Existing policies   | Markdown   |"
+produces_for: "| Builder       | What                  | Format     |  \n|---------------|-----------------------|------------|\
+  \  \n| policy_repository | Safety policy documents | Markdown   |  \n| compliance_team   | Policy templates      | JSON\
+  \       |  \n| audit_team    | Policy validation reports | CSV      |"
+boundary: Does NOT perform threat modeling (handled by threat_modeler) or map policies to regulations (handled by compliance_framework_builder).

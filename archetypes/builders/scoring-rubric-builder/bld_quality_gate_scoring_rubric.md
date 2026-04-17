@@ -16,8 +16,8 @@ tags:
   - evaluation
   - p11
 tldr: "Gates ensuring scoring rubric files define measurable dimensions, justified weights summing to 100%, and calibrated tier thresholds."
+llm_function: GOVERN
 ---
-
 ## Definition
 A scoring rubric is an evaluation framework that rates a target artifact on multipland weighted dimensions and maps the aggregate score to an action tier. A rubric passes this gate when a reviewer with no prior context could apply it consistently, two independent reviewers would reach scores within 1.0 point of each other on the same input, and the tier thresholds match established system standards.
 ## HARD Gates

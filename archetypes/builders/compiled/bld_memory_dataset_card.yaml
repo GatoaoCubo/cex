@@ -1,0 +1,29 @@
+kind: learning_record
+id: p10_lr_dataset_card_builder
+pillar: P10
+llm_function: INJECT
+purpose: Learned patterns and pitfalls for dataset_card construction
+quality: null
+title: Learning Record Dataset Card
+version: 1.0.0
+author: wave1_builder_gen
+tags:
+- dataset_card
+- builder
+- learning_record
+tldr: Learned patterns and pitfalls for dataset_card construction
+domain: dataset_card construction
+created: '2026-04-13'
+updated: '2026-04-13'
+density_score: 0.85
+observation: Builders often omit critical metadata like licensing, versioning, and specific data collection methodologies.
+  Descriptions frequently lack the granularity required for reproducible data science and downstream integration.
+pattern: Effective documentation utilizes structured templates that separate data provenance from technical specifications.
+  Clear, tabular representations of features, labels, and data types significantly improve readability and machine-readability.
+evidence: Analysis of standardized dataset documentation templates and repository metadata.
+recommendations:
+- Use standardized schemas for metadata (e.g., version, license, author).
+- Explicitly document data collection and preprocessing pipelines.
+- Provide clear, unambiguous definitions for all features and labels.
+- Include detailed information on data splits and sampling methods.
+- Add a "Quick Start" section with minimal code for loading the data.

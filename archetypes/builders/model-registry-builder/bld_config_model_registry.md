@@ -1,0 +1,35 @@
+---
+kind: config
+id: bld_config_model_registry
+pillar: P09
+llm_function: CONSTRAIN
+purpose: Naming, paths, limits for model_registry production
+quality: 8.6
+title: "Config Model Registry"
+version: "1.0.0"
+author: wave1_builder_gen
+tags: [model_registry, builder, config]
+tldr: "Naming, paths, limits for model_registry production"
+domain: "model_registry construction"
+created: "2026-04-13"
+updated: "2026-04-13"
+density_score: 0.85
+---
+
+## Naming Convention
+Pattern: p10_mr_{name}
+Examples: p10_mr_gpt4, p10_mr_claude_sonnet
+
+## Paths
+Artifacts: P10_memory/registry/
+
+## Limits
+max_bytes: 4096
+max_turns: 5
+effort_level: medium
+
+## Hooks
+pre_build: null
+post_build: null
+on_error: null
+on_quality_fail: null

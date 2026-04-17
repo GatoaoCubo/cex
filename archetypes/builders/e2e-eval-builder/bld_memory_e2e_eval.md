@@ -29,6 +29,7 @@ observation_types: [user, feedback, project, reference]
 quality: 9.2
 title: "Memory E2E Eval"
 density_score: 0.90
+llm_function: INJECT
 ---
 ## Summary
 End-to-end pipeline evaluations fail to catch real bugs when stages are disconnected, assertions only appear at the final output, or timeout values are borrowed from unit tests. A well-structured e2e eval specifies data lineage through the pipeline, asserts correctness at every stage boundary, scales timeouts to pipeline depth, and restores environment state after each run.

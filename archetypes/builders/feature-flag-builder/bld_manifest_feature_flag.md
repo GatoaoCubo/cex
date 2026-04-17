@@ -4,7 +4,7 @@ kind: type_builder
 pillar: P09
 parent: null
 domain: feature_flag
-llm_function: GOVERN
+llm_function: BECOME
 version: 1.0.0
 created: "2026-03-26"
 updated: "2026-03-26"

@@ -1,0 +1,51 @@
+kind: schema
+id: bld_schema_sso_config
+pillar: P06
+llm_function: CONSTRAIN
+purpose: Formal schema -- SINGLE SOURCE OF TRUTH for sso_config
+quality: null
+title: Schema Sso Config
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- sso_config
+- builder
+- schema
+tldr: Formal schema -- SINGLE SOURCE OF TRUTH for sso_config
+domain: sso_config construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+frontmatter_fields: ''
+required: "| Field | Type | Required | Default | Notes |  \n|---|---|---|---|---|  \n| id | string | yes | null | Must match\
+  \ ID Pattern |  \n| kind | string | yes | \"sso_config\" | CEX configuration type |  \n| pillar | string | yes | \"P09\"\
+  \ | Strategic pillar classification |  \n| title | string | yes | null | Human-readable configuration name |  \n| version\
+  \ | string | yes | \"1.0.0\" | Schema version |  \n| created | datetime | yes | null | ISO 8601 timestamp |  \n| updated\
+  \ | datetime | yes | null | ISO 8601 timestamp |  \n| author | string | yes | null | Responsible party |  \n| domain | string\
+  \ | yes | \"sso\" | Configuration domain |  \n| quality | null | yes | null | Never self-score; peer review assigns |  \n\
+  | tags | list | yes | [] | Metadata keywords |  \n| tldr | string | yes | null | Summary of configuration purpose |  \n\
+  | provider | string | yes | null | SSO provider name (e.g., \"Okta\") |  \n| protocol | string | yes | null | Authentication\
+  \ protocol (e.g., \"SAML\") |"
+recommended: "| Field | Type | Notes |  \n|---|---|---|  \n| redirect_uri | string | Validated URI for SSO redirects |  \n\
+  | scopes | list | Required OAuth scopes |"
+id_pattern: ^p09_sso_[a-z][a-z0-9_]+.yaml$
+body_structure:
+- Configuration Overview
+- Summary of SSO integration purpose and scope
+- Provider Details
+- Metadata about the SSO provider (entity ID, endpoints)
+- Security Settings
+- Encryption, certificate paths, and authentication policies
+- Integration Instructions
+- Steps for system administrators to deploy/configure
+- Compliance and Auditing
+- Regulatory requirements and audit trails
+- Maintenance Schedule
+- Rotation timelines for secrets and certificates
+constraints:
+- File must conform to ID Pattern and max 3072 bytes
+- '`provider` must be a registered SSO entity'
+- '`protocol` must be a supported standard (SAML, OAuth 2.0, etc.)'
+- '`redirect_uri` must be HTTPS and match provider''s domain'
+- '`scopes` must be non-empty and validated against provider''s API'
+- '`quality` field must be assigned by peer review before deployment'

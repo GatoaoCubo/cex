@@ -1,0 +1,83 @@
+kind: tools
+id: bld_tools_kind
+pillar: P04
+llm_function: CALL
+purpose: Tools and data sources available for builder package production
+quality: null
+title: Tools Kind Builder
+version: 1.0.0
+author: n03_builder
+tags:
+- kind_builder
+- builder
+- tools
+- meta-builder
+tldr: 'Tools for kind-builder: kinds_meta.json lookup, cex_compile, cex_score, cex_skill_loader, cex_doctor.'
+domain: kind builder construction
+created: '2026-04-13'
+updated: '2026-04-13'
+density_score: 0.9
+production_tools: '| Tool | Purpose | When | Status |
+
+  |------|---------|------|--------|
+
+  | kinds_meta.json lookup | Read target kind metadata (pillar, naming, max_bytes, llm_function, boundary) | Phase 1 (discover)
+  | AVAILABLE |
+
+  | cex_compile.py | Compile produced ISOs to validate structure | Phase 4 (validate) | AVAILABLE |
+
+  | cex_score.py | Score produced ISOs against quality gates | Phase 4 (validate) | AVAILABLE |
+
+  | cex_skill_loader.py | Verify the 13-ISO package loads correctly | Phase 4 (validate) | AVAILABLE |
+
+  | cex_doctor.py | Run health check on the builder directory | Phase 4 (validate) | AVAILABLE |
+
+  | cex_materialize.py | Generate sub-agent .md from builder ISOs | Phase 3 (produce) | AVAILABLE |
+
+  | cex_retriever.py | Find similar existing builders for reference | Phase 2 (reference) | AVAILABLE |'
+data_sources: '| Source | Path | Data |
+
+  |--------|------|------|
+
+  | Kind registry | .cex/kinds_meta.json | All 130+ kinds with pillar, naming, max_bytes, llm_function |
+
+  | Pillar schemas | P{01-12}_*/_schema.yaml | Field definitions per pillar, sibling kinds |
+
+  | Knowledge cards | P01_knowledge/library/kind/kc_{kind}.md | Domain knowledge per kind |
+
+  | Reference builders | archetypes/builders/{kind}-builder/ | Complete builder packages (13 ISOs each) |
+
+  | Sub-agent defs | .claude/agents/{kind}-builder.md | Existing sub-agent definitions |
+
+  | Shared ISOs | archetypes/builders/_shared/ | Cross-builder shared skills and patterns |
+
+  | Builder registry | archetypes/builders/ | All existing builder directories |'
+tool_permissions: '| Category | Tools | Status |
+
+  |----------|-------|--------|
+
+  | ALLOWED | Read, Write, Edit, Bash, Glob, Grep | Explicitly permitted |
+
+  | DENIED | (none) | No tools blocked |
+
+  | EFFECTIVE | Bash, Edit, Glob, Grep, Read, Write | ALLOWED minus DENIED |'
+key_lookups: ''
+kinds_meta_json_entry_structure: "{\n  \"env_config\": {\n    \"pillar\": \"P09\",\n    \"description\": \"Environment variable\
+  \ specification with scope and validation\",\n    \"naming\": \"p09_env_{scope_slug}.yaml\",\n    \"max_bytes\": 4096,\n\
+  \    \"core\": false,\n    \"llm_function\": \"GOVERN\",\n    \"boundary\": \"Variable catalog. NOT a boot_config or feature_flag.\"\
+  \n  }\n}"
+builder_directory_discovery: 'ls archetypes/builders/ | grep -c builder  # count existing builders
+
+  ls archetypes/builders/{kind}-builder/     # check if target exists'
+validation_commands: 'python _tools/cex_compile.py archetypes/builders/{kind}-builder/
+
+  python _tools/cex_doctor.py --scope archetypes/builders/{kind}-builder/
+
+  python tools/cex_score.py --apply archetypes/builders/{kind}-builder/bld_manifest{kind}.md'
+pipeline_integration:
+- Created via 8F pipeline from F1-Focus through F8-Furnish
+- Scored by cex_score across three structural layers
+- Compiled by cex_compile for structural validation
+- Retrieved by cex_retriever for context injection
+- Evolved by cex_evolve when quality regresses below target
+metadata: python _tools/cex_score.py --apply bld_tools_kind.md

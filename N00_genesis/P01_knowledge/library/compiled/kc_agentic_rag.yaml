@@ -1,0 +1,34 @@
+id: kc_agentic_rag
+kind: knowledge_card
+title: Agentic RAG Pattern
+version: 1.0.0
+quality: null
+pillar: P01
+density_score: 0.98
+overview: The Agentic RAG (Retrieval-Augmented Generation) pattern combines the strengths of retrieval systems and generative
+  models to create a more effective and context-aware knowledge processing system.
+key_components:
+- 'Agent: A specialized component that manages the RAG workflow'
+- 'Retrieval System: Used to fetch relevant documents from a knowledge base'
+- 'Generative Model: Produces coherent and contextually appropriate responses'
+- 'Feedback Loop: Enables continuous improvement through iterative refinement'
+implementation: "class AgenticRAG:\n    def init(self, retriever, generator):\n        self.retriever = retriever\n      \
+  \  self.generator = generator\n        \n    def generate(self, query):\n        retrieved_docs = self.retriever.retrieve(query)\n\
+  \        context = self._build_context(retrieved_docs)\n        response = self.generator.generate(query, context)\n   \
+  \     return response\n    \n    def _build_context(self, docs):\n        # Combine retrieved documents into a coherent\
+  \ context\n        return \" \".join([doc.content for doc in docs])"
+benefits:
+- Enhanced contextual understanding
+- Better handling of complex queries
+- Continuous learning through feedback
+- More accurate and relevant responses
+use_cases:
+- Customer support systems
+- Research assistants
+- Content creation tools
+- Educational platforms
+best_practices:
+- Use high-quality retrievers for accurate document selection
+- Fine-tune the generative model for domain-specific tasks
+- Implement robust feedback mechanisms for continuous improvement
+- Regularly update the knowledge base with new information

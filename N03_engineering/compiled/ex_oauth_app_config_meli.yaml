@@ -1,0 +1,112 @@
+id: ex_oauth_app_config_meli
+kind: oauth_app_config
+pillar: P09
+title: Mercado Livre OAuth 2.0 App Configuration
+version: 0.1.0
+quality: 8.2
+status: template
+brand_placeholders:
+- BRAND_MELI_CLIENT_ID
+- BRAND_MELI_CLIENT_SECRET
+- BRAND_SUPABASE_PROJECT_REF
+tags:
+- commerce
+- template
+- distillation
+- mercadolivre
+- meli
+- oauth
+density_score: 1.0
+updated: '2026-04-17'
+purpose: OAuth 2.0 app configuration for Mercado Livre (MLB) API — defines the authorization code flow, token storage schema,
+  and 6-hour access token refresh strategy for `{{BRAND_MELI_CLIENT_ID}}`.
+when_to_use:
+- Registering and configuring a new ML app for the first time.
+- Documenting the token lifecycle for compliance and security review.
+- Setting up proactive token refresh to avoid 401 errors in production.
+app_registration:
+- Go to `https://developers.mercadolivre.com.br/devcenter` → Create App.
+- 'Set Redirect URI: `https://{{BRAND_SUPABASE_PROJECT_REF}}.supabase.co/functions/v1/meli-oauth-callback`.'
+- 'Set scopes: `offline_access` (required for refresh tokens).'
+- 'Copy client ID and client secret → store:'
+oauth_2_0_parameters: '| Parameter | Value |
+
+  |-----------|-------|
+
+  | Auth endpoint | `https://auth.mercadolibre.com.br/authorization` |
+
+  | Token endpoint | `https://api.mercadolibre.com/oauth/token` |
+
+  | Grant type | `authorization_code` |
+
+  | Response type | `code` |
+
+  | Scope | `offline_access` (plus any ML-specific scopes) |
+
+  | Access token TTL | 21600s (6 hours) |
+
+  | Refresh token TTL | ~180 days |
+
+  | Site | `MLB` (Brazil) |'
+authorization_url: "https://auth.mercadolibre.com.br/authorization\n  ?response_type=code\n  &client_id={{BRAND_MELI_CLIENT_ID}}\n\
+  \  &redirect_uri=https://{{BRAND_SUPABASE_PROJECT_REF}}.supabase.co/functions/v1/meli-oauth-callback\n  &state={nonce}"
+token_storage_schema: "create table meli_tokens (\n  id            uuid primary key default gen_random_uuid(),\n  access_token\
+  \  text not null,\n  refresh_token text not null,\n  expires_at    timestamptz not null,\n  user_id       bigint,      \
+  \      -- ML user ID\n  scope         text,\n  created_at    timestamptz default now(),\n  updated_at    timestamptz default\
+  \ now()\n);"
+token_refresh: 'Access tokens expire in 6 hours. Refresh proactively at 5h 50m:
+
+
+  POST https://api.mercadolibre.com/oauth/token
+
+  Content-Type: application/x-www-form-urlencoded
+
+
+  grant_type=refresh_token
+
+  &client_id={MELI_CLIENT_ID}
+
+  &client_secret={MELI_CLIENT_SECRET}
+
+  &refresh_token={STORED_REFRESH_TOKEN}
+
+
+  Response: new `access_token` + new `refresh_token` (rolling refresh — always store both).'
+cron_setup_shared_with_bling: "The `token-auto-refresh` edge function handles both Bling and ML refresh in one pass. Schedule\
+  \ every 5 hours:\n\nselect cron.schedule('meli-token-refresh', '0 /5   ',\n  $$select net.http_post(url := 'https://{{BRAND_SUPABASE_PROJECT_REF}}.supabase.co/functions/v1/token-auto-refresh')$$);"
+interface: '| Input | Type | Description |
+
+  |-------|------|-------------|
+
+  | `MELI_CLIENT_ID` | env secret | OAuth app client ID |
+
+  | `MELI_CLIENT_SECRET` | env secret | OAuth app client secret |
+
+  | Authorization code | URL param | From ML redirect |
+
+
+  | Output | Description |
+
+  |--------|-------------|
+
+  | `access_token` | Bearer token for ML API calls |
+
+  | `refresh_token` | Rolling long-lived refresh token |'
+brand_variables_used: '| Variable | Purpose |
+
+  |----------|---------|
+
+  | `{{BRAND_MELI_CLIENT_ID}}` | ML OAuth client ID env name |
+
+  | `{{BRAND_MELI_CLIENT_SECRET}}` | ML OAuth client secret env name |
+
+  | `{{BRAND_SUPABASE_PROJECT_REF}}` | Supabase project (callback URL + DB) |'
+related_artifacts: '| Artifact | Kind | Role |
+
+  |----------|------|------|
+
+  | `ex_api_client_meli.md` | api_client | Consumes the access token |
+
+  | `ex_integration_guide_meli.md` | integration_guide | Full setup walkthrough |
+
+  | `ex_oauth_app_config_bling.md` | oauth_app_config | Bling OAuth (same refresh pattern) |'

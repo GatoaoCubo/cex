@@ -1,0 +1,2080 @@
+{
+  "generated_at": "2026-04-16T17:22:21.271714",
+  "mode": "plan",
+  "plan": {
+    "nuclei": {
+      "N00_genesis": {
+        "sin": "pre-sin archetype",
+        "applicable_total": 64,
+        "present_total": 0,
+        "to_create_total": 64,
+        "pillars": {
+          "P01": {
+            "subdir": "knowledge",
+            "applicable": [
+              "chunk_strategy",
+              "embedder_provider",
+              "few_shot_example",
+              "knowledge_card",
+              "retriever_config",
+              "vector_store"
+            ],
+            "present": [],
+            "missing": [
+              "chunk_strategy",
+              "embedder_provider",
+              "few_shot_example",
+              "knowledge_card",
+              "retriever_config",
+              "vector_store"
+            ],
+            "missing_count": 6
+          },
+          "P02": {
+            "subdir": "agents",
+            "applicable": [
+              "agent",
+              "agent_package",
+              "axiom",
+              "handoff_protocol",
+              "mental_model",
+              "model_provider",
+              "nucleus_def",
+              "router"
+            ],
+            "present": [],
+            "missing": [
+              "agent",
+              "agent_package",
+              "axiom",
+              "handoff_protocol",
+              "mental_model",
+              "model_provider",
+              "nucleus_def",
+              "router"
+            ],
+            "missing_count": 8
+          },
+          "P03": {
+            "subdir": "prompts",
+            "applicable": [
+              "action_prompt",
+              "constraint_spec",
+              "context_window_config",
+              "prompt_compiler",
+              "prompt_template",
+              "reasoning_trace",
+              "system_prompt"
+            ],
+            "present": [],
+            "missing": [
+              "action_prompt",
+              "constraint_spec",
+              "context_window_config",
+              "prompt_compiler",
+              "prompt_template",
+              "reasoning_trace",
+              "system_prompt"
+            ],
+            "missing_count": 7
+          },
+          "P04": {
+            "subdir": "tools",
+            "applicable": [
+              "browser_tool",
+              "code_executor",
+              "document_loader",
+              "function_def",
+              "hook",
+              "mcp_server",
+              "retriever",
+              "search_tool",
+              "toolkit"
+            ],
+            "present": [],
+            "missing": [
+              "browser_tool",
+              "code_executor",
+              "document_loader",
+              "function_def",
+              "hook",
+              "mcp_server",
+              "retriever",
+              "search_tool",
+              "toolkit"
+            ],
+            "missing_count": 9
+          },
+          "P05": {
+            "subdir": "output",
+            "applicable": [
+              "output_validator",
+              "response_format"
+            ],
+            "present": [],
+            "missing": [
+              "output_validator",
+              "response_format"
+            ],
+            "missing_count": 2
+          },
+          "P06": {
+            "subdir": "schemas",
+            "applicable": [
+              "enum_def",
+              "input_schema",
+              "type_def",
+              "validator"
+            ],
+            "present": [],
+            "missing": [
+              "enum_def",
+              "input_schema",
+              "type_def",
+              "validator"
+            ],
+            "missing_count": 4
+          },
+          "P07": {
+            "subdir": "quality",
+            "applicable": [
+              "eval_dataset",
+              "golden_test",
+              "llm_judge",
+              "scoring_rubric",
+              "unit_eval"
+            ],
+            "present": [],
+            "missing": [
+              "eval_dataset",
+              "golden_test",
+              "llm_judge",
+              "scoring_rubric",
+              "unit_eval"
+            ],
+            "missing_count": 5
+          },
+          "P08": {
+            "subdir": "architecture",
+            "applicable": [
+              "decision_record",
+              "invariant",
+              "pattern"
+            ],
+            "present": [],
+            "missing": [
+              "decision_record",
+              "invariant",
+              "pattern"
+            ],
+            "missing_count": 3
+          },
+          "P09": {
+            "subdir": "config",
+            "applicable": [
+              "env_config",
+              "path_config",
+              "permission",
+              "rate_limit_config",
+              "secret_config"
+            ],
+            "present": [],
+            "missing": [
+              "env_config",
+              "path_config",
+              "permission",
+              "rate_limit_config",
+              "secret_config"
+            ],
+            "missing_count": 5
+          },
+          "P10": {
+            "subdir": "memory",
+            "applicable": [
+              "entity_memory",
+              "knowledge_index",
+              "learning_record",
+              "memory_summary",
+              "runtime_state"
+            ],
+            "present": [],
+            "missing": [
+              "entity_memory",
+              "knowledge_index",
+              "learning_record",
+              "memory_summary",
+              "runtime_state"
+            ],
+            "missing_count": 5
+          },
+          "P11": {
+            "subdir": "feedback",
+            "applicable": [
+              "guardrail",
+              "lifecycle_rule",
+              "quality_gate",
+              "reward_signal"
+            ],
+            "present": [],
+            "missing": [
+              "guardrail",
+              "lifecycle_rule",
+              "quality_gate",
+              "reward_signal"
+            ],
+            "missing_count": 4
+          },
+          "P12": {
+            "subdir": "orchestration",
+            "applicable": [
+              "checkpoint",
+              "handoff",
+              "signal",
+              "spawn_config",
+              "workflow",
+              "workflow_primitive"
+            ],
+            "present": [],
+            "missing": [
+              "checkpoint",
+              "handoff",
+              "signal",
+              "spawn_config",
+              "workflow",
+              "workflow_primitive"
+            ],
+            "missing_count": 6
+          }
+        }
+      },
+      "N01_intelligence": {
+        "sin": "Analytical Envy",
+        "applicable_total": 68,
+        "present_total": 11,
+        "to_create_total": 57,
+        "pillars": {
+          "P01": {
+            "subdir": "knowledge",
+            "applicable": [
+              "chunk_strategy",
+              "citation",
+              "competitive_matrix",
+              "embedder_provider",
+              "few_shot_example",
+              "knowledge_card",
+              "ontology",
+              "retriever_config",
+              "vector_store"
+            ],
+            "present": [
+              "knowledge_card"
+            ],
+            "missing": [
+              "chunk_strategy",
+              "citation",
+              "competitive_matrix",
+              "embedder_provider",
+              "few_shot_example",
+              "ontology",
+              "retriever_config",
+              "vector_store"
+            ],
+            "missing_count": 8
+          },
+          "P02": {
+            "subdir": "agents",
+            "applicable": [
+              "agent",
+              "agent_package",
+              "axiom",
+              "handoff_protocol",
+              "mental_model",
+              "model_provider",
+              "nucleus_def",
+              "router"
+            ],
+            "present": [
+              "agent"
+            ],
+            "missing": [
+              "agent_package",
+              "axiom",
+              "handoff_protocol",
+              "mental_model",
+              "model_provider",
+              "nucleus_def",
+              "router"
+            ],
+            "missing_count": 7
+          },
+          "P03": {
+            "subdir": "prompts",
+            "applicable": [
+              "action_prompt",
+              "constraint_spec",
+              "context_window_config",
+              "prompt_compiler",
+              "prompt_template",
+              "reasoning_trace",
+              "system_prompt"
+            ],
+            "present": [
+              "prompt_template",
+              "system_prompt"
+            ],
+            "missing": [
+              "action_prompt",
+              "constraint_spec",
+              "context_window_config",
+              "prompt_compiler",
+              "reasoning_trace"
+            ],
+            "missing_count": 5
+          },
+          "P04": {
+            "subdir": "tools",
+            "applicable": [
+              "browser_tool",
+              "document_loader",
+              "function_def",
+              "hook",
+              "mcp_server",
+              "research_pipeline",
+              "retriever",
+              "search_tool",
+              "toolkit"
+            ],
+            "present": [],
+            "missing": [
+              "browser_tool",
+              "document_loader",
+              "function_def",
+              "hook",
+              "mcp_server",
+              "research_pipeline",
+              "retriever",
+              "search_tool",
+              "toolkit"
+            ],
+            "missing_count": 9
+          },
+          "P05": {
+            "subdir": "output",
+            "applicable": [
+              "analyst_briefing",
+              "output_validator",
+              "response_format"
+            ],
+            "present": [],
+            "missing": [
+              "analyst_briefing",
+              "output_validator",
+              "response_format"
+            ],
+            "missing_count": 3
+          },
+          "P06": {
+            "subdir": "schemas",
+            "applicable": [
+              "enum_def",
+              "input_schema",
+              "type_def",
+              "validator"
+            ],
+            "present": [],
+            "missing": [
+              "enum_def",
+              "input_schema",
+              "type_def",
+              "validator"
+            ],
+            "missing_count": 4
+          },
+          "P07": {
+            "subdir": "quality",
+            "applicable": [
+              "benchmark",
+              "eval_dataset",
+              "golden_test",
+              "llm_judge",
+              "scoring_rubric",
+              "unit_eval"
+            ],
+            "present": [
+              "benchmark",
+              "eval_dataset",
+              "scoring_rubric"
+            ],
+            "missing": [
+              "golden_test",
+              "llm_judge",
+              "unit_eval"
+            ],
+            "missing_count": 3
+          },
+          "P08": {
+            "subdir": "architecture",
+            "applicable": [
+              "decision_record",
+              "invariant",
+              "pattern"
+            ],
+            "present": [],
+            "missing": [
+              "decision_record",
+              "invariant",
+              "pattern"
+            ],
+            "missing_count": 3
+          },
+          "P09": {
+            "subdir": "config",
+            "applicable": [
+              "env_config",
+              "path_config",
+              "permission",
+              "rate_limit_config",
+              "secret_config"
+            ],
+            "present": [],
+            "missing": [
+              "env_config",
+              "path_config",
+              "permission",
+              "rate_limit_config",
+              "secret_config"
+            ],
+            "missing_count": 5
+          },
+          "P10": {
+            "subdir": "memory",
+            "applicable": [
+              "entity_memory",
+              "knowledge_index",
+              "learning_record",
+              "memory_summary",
+              "runtime_state"
+            ],
+            "present": [
+              "knowledge_index",
+              "learning_record"
+            ],
+            "missing": [
+              "entity_memory",
+              "memory_summary",
+              "runtime_state"
+            ],
+            "missing_count": 3
+          },
+          "P11": {
+            "subdir": "feedback",
+            "applicable": [
+              "guardrail",
+              "lifecycle_rule",
+              "quality_gate"
+            ],
+            "present": [
+              "quality_gate"
+            ],
+            "missing": [
+              "guardrail",
+              "lifecycle_rule"
+            ],
+            "missing_count": 2
+          },
+          "P12": {
+            "subdir": "orchestration",
+            "applicable": [
+              "checkpoint",
+              "handoff",
+              "signal",
+              "spawn_config",
+              "workflow",
+              "workflow_primitive"
+            ],
+            "present": [
+              "workflow"
+            ],
+            "missing": [
+              "checkpoint",
+              "handoff",
+              "signal",
+              "spawn_config",
+              "workflow_primitive"
+            ],
+            "missing_count": 5
+          }
+        }
+      },
+      "N02_marketing": {
+        "sin": "Creative Lust",
+        "applicable_total": 68,
+        "present_total": 13,
+        "to_create_total": 55,
+        "pillars": {
+          "P01": {
+            "subdir": "knowledge",
+            "applicable": [
+              "chunk_strategy",
+              "embedder_provider",
+              "few_shot_example",
+              "knowledge_card",
+              "retriever_config",
+              "vector_store"
+            ],
+            "present": [
+              "knowledge_card"
+            ],
+            "missing": [
+              "chunk_strategy",
+              "embedder_provider",
+              "few_shot_example",
+              "retriever_config",
+              "vector_store"
+            ],
+            "missing_count": 5
+          },
+          "P02": {
+            "subdir": "agents",
+            "applicable": [
+              "agent",
+              "agent_package",
+              "axiom",
+              "handoff_protocol",
+              "mental_model",
+              "model_provider",
+              "nucleus_def",
+              "router"
+            ],
+            "present": [
+              "agent"
+            ],
+            "missing": [
+              "agent_package",
+              "axiom",
+              "handoff_protocol",
+              "mental_model",
+              "model_provider",
+              "nucleus_def",
+              "router"
+            ],
+            "missing_count": 7
+          },
+          "P03": {
+            "subdir": "prompts",
+            "applicable": [
+              "action_prompt",
+              "constraint_spec",
+              "context_window_config",
+              "multimodal_prompt",
+              "prompt_compiler",
+              "prompt_template",
+              "reasoning_trace",
+              "system_prompt",
+              "tagline"
+            ],
+            "present": [
+              "action_prompt",
+              "prompt_template",
+              "system_prompt"
+            ],
+            "missing": [
+              "constraint_spec",
+              "context_window_config",
+              "multimodal_prompt",
+              "prompt_compiler",
+              "reasoning_trace",
+              "tagline"
+            ],
+            "missing_count": 6
+          },
+          "P04": {
+            "subdir": "tools",
+            "applicable": [
+              "browser_tool",
+              "document_loader",
+              "function_def",
+              "hook",
+              "mcp_server",
+              "retriever",
+              "search_tool",
+              "social_publisher",
+              "toolkit"
+            ],
+            "present": [],
+            "missing": [
+              "browser_tool",
+              "document_loader",
+              "function_def",
+              "hook",
+              "mcp_server",
+              "retriever",
+              "search_tool",
+              "social_publisher",
+              "toolkit"
+            ],
+            "missing_count": 9
+          },
+          "P05": {
+            "subdir": "output",
+            "applicable": [
+              "landing_page",
+              "onboarding_flow",
+              "output_validator",
+              "press_release",
+              "response_format"
+            ],
+            "present": [
+              "output_validator"
+            ],
+            "missing": [
+              "landing_page",
+              "onboarding_flow",
+              "press_release",
+              "response_format"
+            ],
+            "missing_count": 4
+          },
+          "P06": {
+            "subdir": "schemas",
+            "applicable": [
+              "enum_def",
+              "input_schema",
+              "type_def",
+              "validator"
+            ],
+            "present": [
+              "input_schema"
+            ],
+            "missing": [
+              "enum_def",
+              "type_def",
+              "validator"
+            ],
+            "missing_count": 3
+          },
+          "P07": {
+            "subdir": "quality",
+            "applicable": [
+              "eval_dataset",
+              "golden_test",
+              "llm_judge",
+              "scoring_rubric",
+              "unit_eval"
+            ],
+            "present": [
+              "scoring_rubric"
+            ],
+            "missing": [
+              "eval_dataset",
+              "golden_test",
+              "llm_judge",
+              "unit_eval"
+            ],
+            "missing_count": 4
+          },
+          "P08": {
+            "subdir": "architecture",
+            "applicable": [
+              "decision_record",
+              "invariant",
+              "pattern"
+            ],
+            "present": [],
+            "missing": [
+              "decision_record",
+              "invariant",
+              "pattern"
+            ],
+            "missing_count": 3
+          },
+          "P09": {
+            "subdir": "config",
+            "applicable": [
+              "env_config",
+              "path_config",
+              "permission",
+              "rate_limit_config",
+              "secret_config"
+            ],
+            "present": [
+              "env_config"
+            ],
+            "missing": [
+              "path_config",
+              "permission",
+              "rate_limit_config",
+              "secret_config"
+            ],
+            "missing_count": 4
+          },
+          "P10": {
+            "subdir": "memory",
+            "applicable": [
+              "entity_memory",
+              "knowledge_index",
+              "learning_record",
+              "memory_summary",
+              "runtime_state"
+            ],
+            "present": [
+              "learning_record",
+              "memory_summary"
+            ],
+            "missing": [
+              "entity_memory",
+              "knowledge_index",
+              "runtime_state"
+            ],
+            "missing_count": 3
+          },
+          "P11": {
+            "subdir": "feedback",
+            "applicable": [
+              "guardrail",
+              "lifecycle_rule",
+              "quality_gate"
+            ],
+            "present": [
+              "quality_gate"
+            ],
+            "missing": [
+              "guardrail",
+              "lifecycle_rule"
+            ],
+            "missing_count": 2
+          },
+          "P12": {
+            "subdir": "orchestration",
+            "applicable": [
+              "checkpoint",
+              "handoff",
+              "signal",
+              "spawn_config",
+              "workflow",
+              "workflow_primitive"
+            ],
+            "present": [
+              "workflow"
+            ],
+            "missing": [
+              "checkpoint",
+              "handoff",
+              "signal",
+              "spawn_config",
+              "workflow_primitive"
+            ],
+            "missing_count": 5
+          }
+        }
+      },
+      "N03_engineering": {
+        "sin": "Inventive Pride",
+        "applicable_total": 67,
+        "present_total": 21,
+        "to_create_total": 46,
+        "pillars": {
+          "P01": {
+            "subdir": "knowledge",
+            "applicable": [
+              "chunk_strategy",
+              "embedder_provider",
+              "few_shot_example",
+              "knowledge_card",
+              "retriever_config",
+              "vector_store"
+            ],
+            "present": [
+              "few_shot_example",
+              "knowledge_card"
+            ],
+            "missing": [
+              "chunk_strategy",
+              "embedder_provider",
+              "retriever_config",
+              "vector_store"
+            ],
+            "missing_count": 4
+          },
+          "P02": {
+            "subdir": "agents",
+            "applicable": [
+              "agent",
+              "agent_package",
+              "axiom",
+              "handoff_protocol",
+              "mental_model",
+              "model_provider",
+              "nucleus_def",
+              "router"
+            ],
+            "present": [
+              "agent",
+              "axiom",
+              "mental_model"
+            ],
+            "missing": [
+              "agent_package",
+              "handoff_protocol",
+              "model_provider",
+              "nucleus_def",
+              "router"
+            ],
+            "missing_count": 5
+          },
+          "P03": {
+            "subdir": "prompts",
+            "applicable": [
+              "action_prompt",
+              "chain",
+              "constraint_spec",
+              "context_window_config",
+              "prompt_compiler",
+              "prompt_template",
+              "reasoning_trace",
+              "system_prompt"
+            ],
+            "present": [
+              "chain",
+              "prompt_template",
+              "system_prompt"
+            ],
+            "missing": [
+              "action_prompt",
+              "constraint_spec",
+              "context_window_config",
+              "prompt_compiler",
+              "reasoning_trace"
+            ],
+            "missing_count": 5
+          },
+          "P04": {
+            "subdir": "tools",
+            "applicable": [
+              "browser_tool",
+              "code_executor",
+              "document_loader",
+              "function_def",
+              "hook",
+              "mcp_server",
+              "retriever",
+              "search_tool",
+              "skill",
+              "toolkit"
+            ],
+            "present": [
+              "function_def"
+            ],
+            "missing": [
+              "browser_tool",
+              "code_executor",
+              "document_loader",
+              "hook",
+              "mcp_server",
+              "retriever",
+              "search_tool",
+              "skill",
+              "toolkit"
+            ],
+            "missing_count": 9
+          },
+          "P05": {
+            "subdir": "output",
+            "applicable": [
+              "output_validator",
+              "response_format"
+            ],
+            "present": [
+              "response_format"
+            ],
+            "missing": [
+              "output_validator"
+            ],
+            "missing_count": 1
+          },
+          "P06": {
+            "subdir": "schemas",
+            "applicable": [
+              "enum_def",
+              "input_schema",
+              "interface",
+              "type_def",
+              "validator"
+            ],
+            "present": [
+              "input_schema",
+              "interface"
+            ],
+            "missing": [
+              "enum_def",
+              "type_def",
+              "validator"
+            ],
+            "missing_count": 3
+          },
+          "P07": {
+            "subdir": "quality",
+            "applicable": [
+              "eval_dataset",
+              "golden_test",
+              "llm_judge",
+              "scoring_rubric",
+              "unit_eval"
+            ],
+            "present": [
+              "scoring_rubric"
+            ],
+            "missing": [
+              "eval_dataset",
+              "golden_test",
+              "llm_judge",
+              "unit_eval"
+            ],
+            "missing_count": 4
+          },
+          "P08": {
+            "subdir": "architecture",
+            "applicable": [
+              "decision_record",
+              "invariant",
+              "pattern"
+            ],
+            "present": [
+              "pattern"
+            ],
+            "missing": [
+              "decision_record",
+              "invariant"
+            ],
+            "missing_count": 2
+          },
+          "P09": {
+            "subdir": "config",
+            "applicable": [
+              "env_config",
+              "path_config",
+              "permission",
+              "rate_limit_config",
+              "secret_config"
+            ],
+            "present": [],
+            "missing": [
+              "env_config",
+              "path_config",
+              "permission",
+              "rate_limit_config",
+              "secret_config"
+            ],
+            "missing_count": 5
+          },
+          "P10": {
+            "subdir": "memory",
+            "applicable": [
+              "entity_memory",
+              "knowledge_index",
+              "learning_record",
+              "memory_summary",
+              "runtime_state"
+            ],
+            "present": [
+              "learning_record"
+            ],
+            "missing": [
+              "entity_memory",
+              "knowledge_index",
+              "memory_summary",
+              "runtime_state"
+            ],
+            "missing_count": 4
+          },
+          "P11": {
+            "subdir": "feedback",
+            "applicable": [
+              "guardrail",
+              "lifecycle_rule",
+              "quality_gate",
+              "reward_signal"
+            ],
+            "present": [
+              "guardrail",
+              "quality_gate"
+            ],
+            "missing": [
+              "lifecycle_rule",
+              "reward_signal"
+            ],
+            "missing_count": 2
+          },
+          "P12": {
+            "subdir": "orchestration",
+            "applicable": [
+              "checkpoint",
+              "handoff",
+              "signal",
+              "spawn_config",
+              "workflow",
+              "workflow_primitive"
+            ],
+            "present": [
+              "handoff",
+              "signal",
+              "spawn_config",
+              "workflow"
+            ],
+            "missing": [
+              "checkpoint",
+              "workflow_primitive"
+            ],
+            "missing_count": 2
+          }
+        }
+      },
+      "N04_knowledge": {
+        "sin": "Knowledge Gluttony",
+        "applicable_total": 66,
+        "present_total": 15,
+        "to_create_total": 51,
+        "pillars": {
+          "P01": {
+            "subdir": "knowledge",
+            "applicable": [
+              "chunk_strategy",
+              "embedder_provider",
+              "embedding_config",
+              "few_shot_example",
+              "knowledge_card",
+              "knowledge_graph",
+              "rag_source",
+              "retriever_config",
+              "vector_store"
+            ],
+            "present": [
+              "chunk_strategy",
+              "embedding_config",
+              "few_shot_example",
+              "knowledge_card",
+              "rag_source",
+              "retriever_config"
+            ],
+            "missing": [
+              "embedder_provider",
+              "knowledge_graph",
+              "vector_store"
+            ],
+            "missing_count": 3
+          },
+          "P02": {
+            "subdir": "agents",
+            "applicable": [
+              "agent",
+              "agent_package",
+              "axiom",
+              "handoff_protocol",
+              "mental_model",
+              "model_provider",
+              "nucleus_def",
+              "router"
+            ],
+            "present": [
+              "agent"
+            ],
+            "missing": [
+              "agent_package",
+              "axiom",
+              "handoff_protocol",
+              "mental_model",
+              "model_provider",
+              "nucleus_def",
+              "router"
+            ],
+            "missing_count": 7
+          },
+          "P03": {
+            "subdir": "prompts",
+            "applicable": [
+              "action_prompt",
+              "constraint_spec",
+              "context_window_config",
+              "prompt_compiler",
+              "prompt_template",
+              "reasoning_trace",
+              "system_prompt"
+            ],
+            "present": [
+              "system_prompt"
+            ],
+            "missing": [
+              "action_prompt",
+              "constraint_spec",
+              "context_window_config",
+              "prompt_compiler",
+              "prompt_template",
+              "reasoning_trace"
+            ],
+            "missing_count": 6
+          },
+          "P04": {
+            "subdir": "tools",
+            "applicable": [
+              "browser_tool",
+              "code_executor",
+              "document_loader",
+              "function_def",
+              "hook",
+              "mcp_server",
+              "retriever",
+              "search_tool",
+              "toolkit"
+            ],
+            "present": [],
+            "missing": [
+              "browser_tool",
+              "code_executor",
+              "document_loader",
+              "function_def",
+              "hook",
+              "mcp_server",
+              "retriever",
+              "search_tool",
+              "toolkit"
+            ],
+            "missing_count": 9
+          },
+          "P05": {
+            "subdir": "output",
+            "applicable": [
+              "output_validator",
+              "response_format"
+            ],
+            "present": [],
+            "missing": [
+              "output_validator",
+              "response_format"
+            ],
+            "missing_count": 2
+          },
+          "P06": {
+            "subdir": "schemas",
+            "applicable": [
+              "enum_def",
+              "input_schema",
+              "type_def",
+              "validator"
+            ],
+            "present": [],
+            "missing": [
+              "enum_def",
+              "input_schema",
+              "type_def",
+              "validator"
+            ],
+            "missing_count": 4
+          },
+          "P07": {
+            "subdir": "quality",
+            "applicable": [
+              "eval_dataset",
+              "golden_test",
+              "llm_judge",
+              "scoring_rubric",
+              "unit_eval"
+            ],
+            "present": [
+              "scoring_rubric"
+            ],
+            "missing": [
+              "eval_dataset",
+              "golden_test",
+              "llm_judge",
+              "unit_eval"
+            ],
+            "missing_count": 4
+          },
+          "P08": {
+            "subdir": "architecture",
+            "applicable": [
+              "decision_record",
+              "invariant",
+              "pattern"
+            ],
+            "present": [],
+            "missing": [
+              "decision_record",
+              "invariant",
+              "pattern"
+            ],
+            "missing_count": 3
+          },
+          "P09": {
+            "subdir": "config",
+            "applicable": [
+              "env_config",
+              "path_config",
+              "permission",
+              "rate_limit_config",
+              "secret_config"
+            ],
+            "present": [],
+            "missing": [
+              "env_config",
+              "path_config",
+              "permission",
+              "rate_limit_config",
+              "secret_config"
+            ],
+            "missing_count": 5
+          },
+          "P10": {
+            "subdir": "memory",
+            "applicable": [
+              "entity_memory",
+              "knowledge_index",
+              "learning_record",
+              "memory_summary",
+              "runtime_state"
+            ],
+            "present": [
+              "entity_memory",
+              "knowledge_index",
+              "memory_summary"
+            ],
+            "missing": [
+              "learning_record",
+              "runtime_state"
+            ],
+            "missing_count": 2
+          },
+          "P11": {
+            "subdir": "feedback",
+            "applicable": [
+              "guardrail",
+              "lifecycle_rule",
+              "quality_gate"
+            ],
+            "present": [
+              "quality_gate"
+            ],
+            "missing": [
+              "guardrail",
+              "lifecycle_rule"
+            ],
+            "missing_count": 2
+          },
+          "P12": {
+            "subdir": "orchestration",
+            "applicable": [
+              "checkpoint",
+              "handoff",
+              "signal",
+              "spawn_config",
+              "workflow",
+              "workflow_primitive"
+            ],
+            "present": [
+              "spawn_config",
+              "workflow"
+            ],
+            "missing": [
+              "checkpoint",
+              "handoff",
+              "signal",
+              "workflow_primitive"
+            ],
+            "missing_count": 4
+          }
+        }
+      },
+      "N05_operations": {
+        "sin": "Gating Wrath",
+        "applicable_total": 68,
+        "present_total": 10,
+        "to_create_total": 58,
+        "pillars": {
+          "P01": {
+            "subdir": "knowledge",
+            "applicable": [
+              "chunk_strategy",
+              "embedder_provider",
+              "few_shot_example",
+              "knowledge_card",
+              "retriever_config",
+              "vector_store"
+            ],
+            "present": [
+              "knowledge_card"
+            ],
+            "missing": [
+              "chunk_strategy",
+              "embedder_provider",
+              "few_shot_example",
+              "retriever_config",
+              "vector_store"
+            ],
+            "missing_count": 5
+          },
+          "P02": {
+            "subdir": "agents",
+            "applicable": [
+              "agent",
+              "agent_package",
+              "axiom",
+              "handoff_protocol",
+              "mental_model",
+              "model_provider",
+              "nucleus_def",
+              "router"
+            ],
+            "present": [
+              "agent"
+            ],
+            "missing": [
+              "agent_package",
+              "axiom",
+              "handoff_protocol",
+              "mental_model",
+              "model_provider",
+              "nucleus_def",
+              "router"
+            ],
+            "missing_count": 7
+          },
+          "P03": {
+            "subdir": "prompts",
+            "applicable": [
+              "action_prompt",
+              "constraint_spec",
+              "context_window_config",
+              "prompt_compiler",
+              "prompt_template",
+              "reasoning_trace",
+              "system_prompt"
+            ],
+            "present": [
+              "system_prompt"
+            ],
+            "missing": [
+              "action_prompt",
+              "constraint_spec",
+              "context_window_config",
+              "prompt_compiler",
+              "prompt_template",
+              "reasoning_trace"
+            ],
+            "missing_count": 6
+          },
+          "P04": {
+            "subdir": "tools",
+            "applicable": [
+              "browser_tool",
+              "code_executor",
+              "document_loader",
+              "function_def",
+              "hook",
+              "mcp_server",
+              "retriever",
+              "search_tool",
+              "toolkit"
+            ],
+            "present": [],
+            "missing": [
+              "browser_tool",
+              "code_executor",
+              "document_loader",
+              "function_def",
+              "hook",
+              "mcp_server",
+              "retriever",
+              "search_tool",
+              "toolkit"
+            ],
+            "missing_count": 9
+          },
+          "P05": {
+            "subdir": "output",
+            "applicable": [
+              "output_validator",
+              "response_format"
+            ],
+            "present": [
+              "output_validator"
+            ],
+            "missing": [
+              "response_format"
+            ],
+            "missing_count": 1
+          },
+          "P06": {
+            "subdir": "schemas",
+            "applicable": [
+              "enum_def",
+              "input_schema",
+              "type_def",
+              "validator"
+            ],
+            "present": [
+              "input_schema",
+              "validator"
+            ],
+            "missing": [
+              "enum_def",
+              "type_def"
+            ],
+            "missing_count": 2
+          },
+          "P07": {
+            "subdir": "quality",
+            "applicable": [
+              "e2e_eval",
+              "eval_dataset",
+              "golden_test",
+              "llm_judge",
+              "scoring_rubric",
+              "smoke_eval",
+              "unit_eval"
+            ],
+            "present": [],
+            "missing": [
+              "e2e_eval",
+              "eval_dataset",
+              "golden_test",
+              "llm_judge",
+              "scoring_rubric",
+              "smoke_eval",
+              "unit_eval"
+            ],
+            "missing_count": 7
+          },
+          "P08": {
+            "subdir": "architecture",
+            "applicable": [
+              "decision_record",
+              "invariant",
+              "pattern"
+            ],
+            "present": [],
+            "missing": [
+              "decision_record",
+              "invariant",
+              "pattern"
+            ],
+            "missing_count": 3
+          },
+          "P09": {
+            "subdir": "config",
+            "applicable": [
+              "env_config",
+              "feature_flag",
+              "path_config",
+              "permission",
+              "rate_limit_config",
+              "secret_config"
+            ],
+            "present": [],
+            "missing": [
+              "env_config",
+              "feature_flag",
+              "path_config",
+              "permission",
+              "rate_limit_config",
+              "secret_config"
+            ],
+            "missing_count": 6
+          },
+          "P10": {
+            "subdir": "memory",
+            "applicable": [
+              "entity_memory",
+              "knowledge_index",
+              "learning_record",
+              "memory_summary",
+              "runtime_state"
+            ],
+            "present": [
+              "runtime_state"
+            ],
+            "missing": [
+              "entity_memory",
+              "knowledge_index",
+              "learning_record",
+              "memory_summary"
+            ],
+            "missing_count": 4
+          },
+          "P11": {
+            "subdir": "feedback",
+            "applicable": [
+              "guardrail",
+              "incident_report",
+              "lifecycle_rule",
+              "quality_gate",
+              "reward_signal"
+            ],
+            "present": [
+              "quality_gate"
+            ],
+            "missing": [
+              "guardrail",
+              "incident_report",
+              "lifecycle_rule",
+              "reward_signal"
+            ],
+            "missing_count": 4
+          },
+          "P12": {
+            "subdir": "orchestration",
+            "applicable": [
+              "checkpoint",
+              "handoff",
+              "signal",
+              "spawn_config",
+              "workflow",
+              "workflow_primitive"
+            ],
+            "present": [
+              "spawn_config",
+              "workflow"
+            ],
+            "missing": [
+              "checkpoint",
+              "handoff",
+              "signal",
+              "workflow_primitive"
+            ],
+            "missing_count": 4
+          }
+        }
+      },
+      "N06_commercial": {
+        "sin": "Strategic Greed",
+        "applicable_total": 71,
+        "present_total": 14,
+        "to_create_total": 57,
+        "pillars": {
+          "P01": {
+            "subdir": "knowledge",
+            "applicable": [
+              "chunk_strategy",
+              "embedder_provider",
+              "few_shot_example",
+              "knowledge_card",
+              "retriever_config",
+              "vector_store"
+            ],
+            "present": [
+              "knowledge_card"
+            ],
+            "missing": [
+              "chunk_strategy",
+              "embedder_provider",
+              "few_shot_example",
+              "retriever_config",
+              "vector_store"
+            ],
+            "missing_count": 5
+          },
+          "P02": {
+            "subdir": "agents",
+            "applicable": [
+              "agent",
+              "agent_package",
+              "axiom",
+              "customer_segment",
+              "handoff_protocol",
+              "mental_model",
+              "model_provider",
+              "nucleus_def",
+              "router"
+            ],
+            "present": [
+              "agent",
+              "axiom",
+              "mental_model"
+            ],
+            "missing": [
+              "agent_package",
+              "customer_segment",
+              "handoff_protocol",
+              "model_provider",
+              "nucleus_def",
+              "router"
+            ],
+            "missing_count": 6
+          },
+          "P03": {
+            "subdir": "prompts",
+            "applicable": [
+              "action_prompt",
+              "constraint_spec",
+              "context_window_config",
+              "expansion_play",
+              "prompt_compiler",
+              "prompt_template",
+              "reasoning_trace",
+              "sales_playbook",
+              "system_prompt"
+            ],
+            "present": [
+              "prompt_template",
+              "system_prompt"
+            ],
+            "missing": [
+              "action_prompt",
+              "constraint_spec",
+              "context_window_config",
+              "expansion_play",
+              "prompt_compiler",
+              "reasoning_trace",
+              "sales_playbook"
+            ],
+            "missing_count": 7
+          },
+          "P04": {
+            "subdir": "tools",
+            "applicable": [
+              "browser_tool",
+              "document_loader",
+              "function_def",
+              "hook",
+              "mcp_server",
+              "retriever",
+              "search_tool",
+              "toolkit"
+            ],
+            "present": [
+              "function_def"
+            ],
+            "missing": [
+              "browser_tool",
+              "document_loader",
+              "hook",
+              "mcp_server",
+              "retriever",
+              "search_tool",
+              "toolkit"
+            ],
+            "missing_count": 7
+          },
+          "P05": {
+            "subdir": "output",
+            "applicable": [
+              "output_validator",
+              "pricing_page",
+              "response_format"
+            ],
+            "present": [],
+            "missing": [
+              "output_validator",
+              "pricing_page",
+              "response_format"
+            ],
+            "missing_count": 3
+          },
+          "P06": {
+            "subdir": "schemas",
+            "applicable": [
+              "enum_def",
+              "input_schema",
+              "type_def",
+              "validator"
+            ],
+            "present": [
+              "input_schema"
+            ],
+            "missing": [
+              "enum_def",
+              "type_def",
+              "validator"
+            ],
+            "missing_count": 3
+          },
+          "P07": {
+            "subdir": "quality",
+            "applicable": [
+              "eval_dataset",
+              "golden_test",
+              "llm_judge",
+              "scoring_rubric",
+              "unit_eval"
+            ],
+            "present": [
+              "scoring_rubric"
+            ],
+            "missing": [
+              "eval_dataset",
+              "golden_test",
+              "llm_judge",
+              "unit_eval"
+            ],
+            "missing_count": 4
+          },
+          "P08": {
+            "subdir": "architecture",
+            "applicable": [
+              "decision_record",
+              "invariant",
+              "pattern"
+            ],
+            "present": [
+              "pattern"
+            ],
+            "missing": [
+              "decision_record",
+              "invariant"
+            ],
+            "missing_count": 2
+          },
+          "P09": {
+            "subdir": "config",
+            "applicable": [
+              "env_config",
+              "path_config",
+              "permission",
+              "rate_limit_config",
+              "secret_config"
+            ],
+            "present": [],
+            "missing": [
+              "env_config",
+              "path_config",
+              "permission",
+              "rate_limit_config",
+              "secret_config"
+            ],
+            "missing_count": 5
+          },
+          "P10": {
+            "subdir": "memory",
+            "applicable": [
+              "entity_memory",
+              "knowledge_index",
+              "learning_record",
+              "memory_summary",
+              "runtime_state"
+            ],
+            "present": [
+              "learning_record",
+              "memory_summary"
+            ],
+            "missing": [
+              "entity_memory",
+              "knowledge_index",
+              "runtime_state"
+            ],
+            "missing_count": 3
+          },
+          "P11": {
+            "subdir": "feedback",
+            "applicable": [
+              "content_monetization",
+              "guardrail",
+              "lifecycle_rule",
+              "nps_survey",
+              "quality_gate",
+              "referral_program",
+              "roi_calculator",
+              "subscription_tier"
+            ],
+            "present": [
+              "quality_gate"
+            ],
+            "missing": [
+              "content_monetization",
+              "guardrail",
+              "lifecycle_rule",
+              "nps_survey",
+              "referral_program",
+              "roi_calculator",
+              "subscription_tier"
+            ],
+            "missing_count": 7
+          },
+          "P12": {
+            "subdir": "orchestration",
+            "applicable": [
+              "checkpoint",
+              "handoff",
+              "signal",
+              "spawn_config",
+              "workflow",
+              "workflow_primitive"
+            ],
+            "present": [
+              "workflow"
+            ],
+            "missing": [
+              "checkpoint",
+              "handoff",
+              "signal",
+              "spawn_config",
+              "workflow_primitive"
+            ],
+            "missing_count": 5
+          }
+        }
+      },
+      "N07_admin": {
+        "sin": "Orchestrating Sloth",
+        "applicable_total": 70,
+        "present_total": 11,
+        "to_create_total": 59,
+        "pillars": {
+          "P01": {
+            "subdir": "knowledge",
+            "applicable": [
+              "chunk_strategy",
+              "embedder_provider",
+              "few_shot_example",
+              "knowledge_card",
+              "retriever_config",
+              "vector_store"
+            ],
+            "present": [
+              "knowledge_card"
+            ],
+            "missing": [
+              "chunk_strategy",
+              "embedder_provider",
+              "few_shot_example",
+              "retriever_config",
+              "vector_store"
+            ],
+            "missing_count": 5
+          },
+          "P02": {
+            "subdir": "agents",
+            "applicable": [
+              "agent",
+              "agent_package",
+              "axiom",
+              "handoff_protocol",
+              "mental_model",
+              "model_provider",
+              "nucleus_def",
+              "role_assignment",
+              "router"
+            ],
+            "present": [
+              "agent"
+            ],
+            "missing": [
+              "agent_package",
+              "axiom",
+              "handoff_protocol",
+              "mental_model",
+              "model_provider",
+              "nucleus_def",
+              "role_assignment",
+              "router"
+            ],
+            "missing_count": 8
+          },
+          "P03": {
+            "subdir": "prompts",
+            "applicable": [
+              "action_prompt",
+              "constraint_spec",
+              "context_window_config",
+              "prompt_compiler",
+              "prompt_template",
+              "reasoning_trace",
+              "system_prompt"
+            ],
+            "present": [
+              "system_prompt"
+            ],
+            "missing": [
+              "action_prompt",
+              "constraint_spec",
+              "context_window_config",
+              "prompt_compiler",
+              "prompt_template",
+              "reasoning_trace"
+            ],
+            "missing_count": 6
+          },
+          "P04": {
+            "subdir": "tools",
+            "applicable": [
+              "browser_tool",
+              "code_executor",
+              "document_loader",
+              "function_def",
+              "hook",
+              "mcp_server",
+              "retriever",
+              "search_tool",
+              "toolkit"
+            ],
+            "present": [],
+            "missing": [
+              "browser_tool",
+              "code_executor",
+              "document_loader",
+              "function_def",
+              "hook",
+              "mcp_server",
+              "retriever",
+              "search_tool",
+              "toolkit"
+            ],
+            "missing_count": 9
+          },
+          "P05": {
+            "subdir": "output",
+            "applicable": [
+              "output_validator",
+              "response_format"
+            ],
+            "present": [],
+            "missing": [
+              "output_validator",
+              "response_format"
+            ],
+            "missing_count": 2
+          },
+          "P06": {
+            "subdir": "schemas",
+            "applicable": [
+              "enum_def",
+              "input_schema",
+              "type_def",
+              "validator"
+            ],
+            "present": [],
+            "missing": [
+              "enum_def",
+              "input_schema",
+              "type_def",
+              "validator"
+            ],
+            "missing_count": 4
+          },
+          "P07": {
+            "subdir": "quality",
+            "applicable": [
+              "eval_dataset",
+              "golden_test",
+              "llm_judge",
+              "scoring_rubric",
+              "unit_eval"
+            ],
+            "present": [],
+            "missing": [
+              "eval_dataset",
+              "golden_test",
+              "llm_judge",
+              "scoring_rubric",
+              "unit_eval"
+            ],
+            "missing_count": 5
+          },
+          "P08": {
+            "subdir": "architecture",
+            "applicable": [
+              "capability_registry",
+              "decision_record",
+              "invariant",
+              "pattern"
+            ],
+            "present": [],
+            "missing": [
+              "capability_registry",
+              "decision_record",
+              "invariant",
+              "pattern"
+            ],
+            "missing_count": 4
+          },
+          "P09": {
+            "subdir": "config",
+            "applicable": [
+              "env_config",
+              "path_config",
+              "permission",
+              "rate_limit_config",
+              "secret_config"
+            ],
+            "present": [],
+            "missing": [
+              "env_config",
+              "path_config",
+              "permission",
+              "rate_limit_config",
+              "secret_config"
+            ],
+            "missing_count": 5
+          },
+          "P10": {
+            "subdir": "memory",
+            "applicable": [
+              "entity_memory",
+              "knowledge_index",
+              "learning_record",
+              "memory_summary",
+              "runtime_state"
+            ],
+            "present": [
+              "entity_memory"
+            ],
+            "missing": [
+              "knowledge_index",
+              "learning_record",
+              "memory_summary",
+              "runtime_state"
+            ],
+            "missing_count": 4
+          },
+          "P11": {
+            "subdir": "feedback",
+            "applicable": [
+              "guardrail",
+              "lifecycle_rule",
+              "quality_gate"
+            ],
+            "present": [
+              "quality_gate"
+            ],
+            "missing": [
+              "guardrail",
+              "lifecycle_rule"
+            ],
+            "missing_count": 2
+          },
+          "P12": {
+            "subdir": "orchestration",
+            "applicable": [
+              "checkpoint",
+              "crew_template",
+              "dag",
+              "dispatch_rule",
+              "handoff",
+              "schedule",
+              "signal",
+              "spawn_config",
+              "team_charter",
+              "workflow",
+              "workflow_primitive"
+            ],
+            "present": [
+              "dag",
+              "dispatch_rule",
+              "handoff",
+              "signal",
+              "spawn_config",
+              "workflow"
+            ],
+            "missing": [
+              "checkpoint",
+              "crew_template",
+              "schedule",
+              "team_charter",
+              "workflow_primitive"
+            ],
+            "missing_count": 5
+          }
+        }
+      }
+    },
+    "grand_total_to_create": 447
+  }
+}

@@ -1,0 +1,30 @@
+kind: examples
+id: bld_examples_rbac_policy
+pillar: P07
+llm_function: GOVERN
+purpose: Golden and anti-examples of rbac_policy artifacts
+quality: null
+title: Examples Rbac Policy
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- rbac_policy
+- builder
+- examples
+tldr: Golden and anti-examples of rbac_policy artifacts
+domain: rbac_policy construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+golden_example: "kind: rbac_policy\nname: multi_tenant_rbac\nspec:\n  tenants:\n    - name: \"acme_corp\"\n      roles:\n\
+  \        - name: \"database_admin\"\n          permissions:\n            - \"read:acme_corp/databases/*\"\n            -\
+  \ \"write:acme_corp/databases/*\"\n        - name: \"developer\"\n          permissions:\n            - \"read:acme_corp/databases/*\"\
+  \n    - name: \"initech_inc\"\n      roles:\n        - name: \"data_viewer\"\n          permissions:\n            - \"read:initech_inc/datasets/*\""
+anti_example_1_global_permissions: "kind: rbac_policy\nname: bad_global_rbac\nspec:\n  tenants:\n    - name: \"all_tenants\"\
+  \n      roles:\n        - name: \"super_admin\"\n          permissions:\n            - \"read:/\"\n            - \"write:/\""
+why_it_fails: Duplicates permissions between roles (`analyst` and `manager`) without differentiation. Creates ambiguity in
+  access control and increases risk of accidental over-privilege due to redundant role definitions.
+anti_example_2_role_overlap: "kind: rbac_policy\nname: overlapping_roles\nspec:\n  tenants:\n    - name: \"cloudnine\"\n \
+  \     roles:\n        - name: \"analyst\"\n          permissions:\n            - \"read:cloudnine/reports/*\"\n        \
+  \    - \"write:cloudnine/reports/*\"\n        - name: \"manager\"\n          permissions:\n            - \"read:cloudnine/reports/*\"\
+  \n            - \"write:cloudnine/reports/*\""

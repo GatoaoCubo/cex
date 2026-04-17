@@ -18,6 +18,8 @@ density_score: 0.90
 ---
 
 # Schema: rate_limit_config
+
+This ISO encodes a rate limit policy -- throttle bounds, quota windows, and backoff behavior.
 ## Frontmatter Fields
 | Field | Type | Required | Default | Notes |
 |-------|------|----------|---------|-------|

@@ -86,8 +86,8 @@ Intent: "create landing page for pet shop"
     P06_schema/contracts/landing_page_schema.yaml
   |
   Select from instance layer (if target agent = N02):
-    N02_marketing/knowledge/kc_*.md (relevant domain KCs)
-    N02_marketing/output/ (examples of prior output)
+    N02_marketing/P01_knowledge/kc_*.md (relevant domain KCs)
+    N02_marketing/P05_output/ (examples of prior output)
   |
   Assemble handoff with all references
   |
