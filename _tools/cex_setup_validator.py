@@ -743,6 +743,16 @@ def main() -> None:
         if not args.json:
             print()
             print("Fixed %d items. Re-run without --fix to verify." % fixed)
+            # Always show remaining failures after fix attempt
+            remaining = [r for r in all_results if r.status == FAIL]
+            if remaining:
+                print()
+                print("Remaining issues (%d) -- manual action needed:" % len(remaining))
+                for r in remaining:
+                    if r.fix_cmd and r.fix_cmd != "mkdir":
+                        print("  [ACTION] %s" % r.fix_cmd)
+                    else:
+                        print("  [FAIL]   %s: %s" % (r.name, r.message))
             print()
 
     if args.json:

@@ -115,10 +115,23 @@ def extract_signals_from_text(text: str) -> dict:
     signals["likely_language"] = "pt-BR" if pt_count > en_count else "en-US"
 
     # Detect potential brand names (capitalized phrases, repeated)
+    _STOPWORDS = {
+        "The", "And", "For", "This", "That", "With", "From", "Into", "Over",
+        "Under", "About", "After", "Before", "Between", "Through", "During",
+        "Learn", "More", "Read", "Click", "Get", "Use", "Find", "See", "View",
+        "Error", "Warning", "Info", "True", "False", "None", "Null", "Ok",
+        "Yes", "No", "New", "Old", "All", "Any", "Not", "Our", "Your", "Their",
+        "Its", "His", "Her", "We", "You", "They", "He", "She", "It", "Who",
+        "What", "When", "Where", "Why", "How", "Can", "May", "Will", "Should",
+        "Must", "Have", "Has", "Had", "Was", "Were", "Been", "Being", "Are",
+        "Does", "Did", "Done", "Copyright", "Privacy", "Terms", "Policy",
+        "Login", "Sign", "Home", "Menu", "Blog", "Page", "Site", "Web",
+        "Http", "Https", "Www", "Com", "Org", "Net", "Dns", "Ip", "Api",
+    }
     caps = re.findall(r"\b[A-Z][a-zA-Z]+(?:\s+[A-Z][a-zA-Z]+){0,2}\b", text)
     name_freq = defaultdict(int)
     for name in caps:
-        if len(name) > 2 and name not in {"The", "And", "For", "This", "That", "With"}:
+        if len(name) > 2 and name not in _STOPWORDS:
             name_freq[name] += 1
     signals["potential_names"] = sorted(
         name_freq.keys(), key=lambda k: name_freq[k], reverse=True
@@ -492,10 +505,32 @@ def ingest_url(url: str) -> dict:
         },
     }
 
+    # Quick connectivity check before full ingest
+    probe = _fetch_url(url)
+    if not probe:
+        sys.stderr.write(
+            "[WARN] Could not reach %s\n"
+            "[HINT] The site may be:\n"
+            "  a) Unreachable from this machine (DNS / firewall)\n"
+            "  b) JavaScript-rendered (needs FIRECRAWL_API_KEY for full extraction)\n"
+            "  c) Blocking bots -- try /init <folder> with downloaded brand files instead\n" % url
+        )
+        signals["source_mode"] = "url_failed"
+        return signals
+
     if os.environ.get("FIRECRAWL_API_KEY"):
         result = _ingest_via_firecrawl(url, signals)
     else:
         result = _ingest_via_requests(url, signals)
+        # Warn if very little content was extracted (likely JS-rendered)
+        text = result.get("source_text", "")
+        if len(text) < 200 and not result.get("potential_brand_name"):
+            sys.stderr.write(
+                "[WARN] Extracted very little content from %s\n"
+                "[HINT] Site may use JavaScript rendering.\n"
+                "  Set FIRECRAWL_API_KEY for richer extraction, or use:\n"
+                "  brand_ingest.py <folder>  with downloaded brand materials\n" % url
+            )
 
     # Build source_excerpts compat key
     src_text = result.pop("source_text", "")
@@ -522,10 +557,12 @@ def ingest_repo(repo_url: str) -> dict:
     ]
 
     combined_text = ""
+    fetched_count = 0
     for fname in files_to_try:
         content = _fetch_url(f"{raw_base}/{fname}")
         if content:
             combined_text += f"\n\n### {fname}\n{content[:10000]}"
+            fetched_count += 1
 
     # Get repo description via GitHub API
     api_data_raw = _fetch_url(api_base)
@@ -537,6 +574,14 @@ def ingest_repo(repo_url: str) -> dict:
                 combined_text = f"Description: {desc}\n\n" + combined_text
         except Exception:
             pass
+
+    if not combined_text.strip():
+        sys.stderr.write(
+            "[WARN] Could not read any files from %s/%s\n"
+            "[HINT] If this is a private repo, set GITHUB_PAT env var:\n"
+            "  export GITHUB_PAT=ghp_your_token\n"
+            "  Or clone the repo locally and use: brand_ingest.py <folder>\n" % (owner, repo)
+        )
 
     sig = extract_signals_from_text(combined_text)
     sig["source"] = repo_url
