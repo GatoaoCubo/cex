@@ -17,6 +17,7 @@ tags:
 tldr: 'N05 sandbox: file write scoped to N05+runtime dirs, read-only repo, tool whitelist, localhost-only network, max 5 sub-agents.'
 sandbox_type: isolated
 platform: native
+density_score: 1.0
 resource_limits: '| Resource | Limit | Unit |
 
   |----------|-------|------|

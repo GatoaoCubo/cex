@@ -33,6 +33,7 @@ resources:
 references:
 - NIST SP 800-182
 - N05_operations/P09_config/con_permission_n05.md
+density_score: 1.0
 policy_overview: 'Scope: N05_operations + all system shared resources. Model: deny-by-default; each nucleus is an isolated
   tenant. Lens: Gating Wrath -- every boundary is a hard gate; violations log and halt. ---'
 roles_and_permissions: '| Role | artifact_files | config_files | runtime_signals | pid_files | git_operations | tool_execution

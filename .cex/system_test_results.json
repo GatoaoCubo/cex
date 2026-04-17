@@ -1,20 +1,20 @@
 {
-  "timestamp": "2026-04-15T18:31:54.284167",
+  "timestamp": "2026-04-17T15:19:55.280941",
   "pass": 53,
-  "fail": 5,
+  "fail": 7,
   "skip": 0,
-  "total": 58,
-  "elapsed_s": 235.4,
+  "total": 60,
+  "elapsed_s": 79.2,
   "tests": [
     {
       "name": "tool:cex_8f_motor.py",
       "status": "PASS",
-      "detail": "65182B"
+      "detail": "65198B"
     },
     {
       "name": "tool:cex_8f_runner.py",
       "status": "PASS",
-      "detail": "73773B"
+      "detail": "73895B"
     },
     {
       "name": "tool:cex_intent.py",
@@ -24,27 +24,27 @@
     {
       "name": "tool:cex_compile.py",
       "status": "PASS",
-      "detail": "18980B"
+      "detail": "19285B"
     },
     {
       "name": "tool:cex_doctor.py",
       "status": "PASS",
-      "detail": "16224B"
+      "detail": "16771B"
     },
     {
       "name": "tool:cex_index.py",
       "status": "PASS",
-      "detail": "11479B"
+      "detail": "11563B"
     },
     {
       "name": "tool:cex_feedback.py",
       "status": "PASS",
-      "detail": "14638B"
+      "detail": "14770B"
     },
     {
       "name": "tool:cex_hooks.py",
       "status": "PASS",
-      "detail": "26329B"
+      "detail": "32805B"
     },
     {
       "name": "tool:cex_score.py",
@@ -54,12 +54,12 @@
     {
       "name": "tool:cex_materialize.py",
       "status": "PASS",
-      "detail": "6108B"
+      "detail": "6111B"
     },
     {
       "name": "tool:signal_writer.py",
       "status": "PASS",
-      "detail": "1760B"
+      "detail": "2271B"
     },
     {
       "name": "doctor:pass_count",
@@ -69,17 +69,17 @@
     {
       "name": "doctor:zero_warn",
       "status": "FAIL",
-      "detail": "64 WARN"
+      "detail": "69 WARN"
     },
     {
       "name": "doctor:zero_fail",
-      "status": "FAIL",
-      "detail": "5 FAIL"
+      "status": "PASS",
+      "detail": "0 FAIL"
     },
     {
       "name": "compile:all",
       "status": "PASS",
-      "detail": "382/382"
+      "detail": "383/383"
     },
     {
       "name": "builders:count",
@@ -94,32 +94,32 @@
     {
       "name": "nucleus:N01_intelligence",
       "status": "PASS",
-      "detail": "130 artifacts (min 11)"
+      "detail": "189 artifacts (min 11)"
     },
     {
       "name": "nucleus:N02_marketing",
       "status": "PASS",
-      "detail": "90 artifacts (min 10)"
+      "detail": "127 artifacts (min 10)"
     },
     {
       "name": "nucleus:N03_engineering",
       "status": "PASS",
-      "detail": "77 artifacts (min 34)"
+      "detail": "116 artifacts (min 34)"
     },
     {
       "name": "nucleus:N04_knowledge",
       "status": "PASS",
-      "detail": "89 artifacts (min 12)"
+      "detail": "126 artifacts (min 12)"
     },
     {
       "name": "nucleus:N05_operations",
       "status": "PASS",
-      "detail": "79 artifacts (min 9)"
+      "detail": "132 artifacts (min 9)"
     },
     {
       "name": "nucleus:N06_commercial",
       "status": "PASS",
-      "detail": "90 artifacts (min 9)"
+      "detail": "131 artifacts (min 9)"
     },
     {
       "name": "nucleus:N07_admin",
@@ -129,12 +129,12 @@
     {
       "name": "quality:zero_null",
       "status": "FAIL",
-      "detail": "22 quality:null (awaiting peer review)"
+      "detail": "363 quality:null (awaiting peer review)"
     },
     {
       "name": "quality:scored",
       "status": "PASS",
-      "detail": "602 artifacts with quality score"
+      "detail": "2041 artifacts with quality score"
     },
     {
       "name": "subagents:count",
@@ -148,8 +148,8 @@
     },
     {
       "name": "hooks:validate_all",
-      "status": "PASS",
-      "detail": "0 errors"
+      "status": "FAIL",
+      "detail": "106 errors"
     },
     {
       "name": "hooks:git_precommit",
@@ -253,8 +253,8 @@
     },
     {
       "name": "runner:execute_pass",
-      "status": "PASS",
-      "detail": "PASS"
+      "status": "FAIL",
+      "detail": ", KCs injected: 1\n  [F4] calling LLM for reasoning plan...\nERROR: No LLM provider available.\n  CLI-Claude: exit 1: \n  Ollama: server not running\n  API: Paid APIs disabled (set CEX_USE_API=1 to allow)\n"
     },
     {
       "name": "runner:learning_record",
@@ -272,9 +272,9 @@
       "detail": ""
     },
     {
-      "name": "e2e:runs",
+      "name": "e2e:scenarios_pass",
       "status": "FAIL",
-      "detail": "exit=-1, output=Command '['C:\\\\Users\\\\CEX\\\\AppData\\\\Local\\\\Programs\\\\Python\\\\Python312\\\\python.exe', 'C:\\\\Users\\\\CEX\\\\Documents\\\\GitHub\\\\cex\\\\_tools\\\\cex_e2e_test.py'"
+      "detail": "0/3 scenarios passed"
     },
     {
       "name": "e2e:report_written",
@@ -287,14 +287,24 @@
       "detail": "263/98 kind KCs"
     },
     {
+      "name": "boot:vt_enable",
+      "status": "PASS",
+      "detail": "37 scanned, missing: none"
+    },
+    {
+      "name": "signal:mission_phase_regex",
+      "status": "FAIL",
+      "detail": "No module named '_tools'"
+    },
+    {
       "name": "git:clean",
       "status": "FAIL",
-      "detail": "34 dirty files"
+      "detail": "323 dirty files"
     },
     {
       "name": "git:has_commits",
       "status": "PASS",
-      "detail": "9c1386f80 [8F] agent: faz um CRM pra pet shop"
+      "detail": "72070255b [evolve] p01_fse_n07_dispatch.md: added density_sc"
     }
   ]
 }

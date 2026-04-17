@@ -47,6 +47,7 @@ credentials:
   keys:
   - GOOGLE_AUTH_TOKEN
   injection: env_var
+density_score: 0.92
 overview: 'Automates Google NotebookLM UI via Playwright. Covers notebook selection, source document upload, prompt composition
   for research queries, Audio Overview generation (submit + poll until complete), and output retrieval. Used by N01 research
   pipelines and N04 knowledge workflows. Timeout set to 60s (Audio Overview generation is slow). MCP fallback: `mcpnotebooklm*`

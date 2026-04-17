@@ -11,6 +11,7 @@ tags:
 - archetype
 - instantiation
 - cex
+density_score: 1.0
 what_is_n00_genesis: 'N00_genesis is the pre-sin archetype from which all CEX nuclei (N01-N07) are born. It holds the canonical
   vocabulary of the entire system: 12 pillar kind indexes and 257 kind manifests that define every artifact type the system
   can produce. N00 has no sin lens and no operational role. It is the uninstantiated template -- a convention-over-configuration

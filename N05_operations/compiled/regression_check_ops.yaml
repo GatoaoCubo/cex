@@ -43,6 +43,7 @@ notify:
 - n05_ops_owner
 cadence: on_pr
 scope: N05_operations nucleus -- all .py tools and dispatch workflows
+density_score: 1.0
 overview: 'Known-failure registry for N05 operations (sin lens: Gating Wrath). Six incident-derived and policy-derived patterns
   that must never recur. Runs on every PR. Owned by N05; escalates to N07 on any detection.'
 baseline: 'baseline_ref: `incident_log/n05_ops_baseline_2026-04-17` Zero-failure snapshot captured after ascii-code-rule +

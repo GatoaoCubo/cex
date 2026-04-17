@@ -12,6 +12,7 @@ tags:
 - n00
 - archetype
 - template
+density_score: 1.0
 purpose: A white_label_config defines the branding, domain, and feature customizations that enable a reseller or partner to
   offer CEX under their own brand. It specifies custom domain configuration, brand asset overrides (logo, colors, tone), feature
   enablement per reseller, and billing attribution settings, enabling a single CEX instance to serve multiple branded deployments.

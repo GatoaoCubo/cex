@@ -1,204 +1,164 @@
 id: extraction_trust_tiers
 kind: knowledge_card
-pillar: P01_knowledge
-title: 'Extraction: Trust Tiers (Capability-Based Access) from ruflo'
-version: 1.1
-quality: 8.9
+pillar: P01
+nucleus: N01
+domain: security
+title: 'Extraction: Trust Tiers (R3 -- ruflo)'
+version: 1.0
+quality: null
 tags:
 - extraction
-- trust
-- capability
-- access_control
+- trust_tiers
+- security
+- agent_card
+- dispatch_guard
 - ruflo
-- port
-created: 2026-04-12
-updated: 2026-04-13
-author: n01_intelligence
-domain: dispatch security
-source: ruvnet/ruflo v3.5
-tldr: 'ruflo has TWO trust systems: (a) agent capability claims system (AgentDB) and (b) CapabilityAlgebra typed permission
-  objects with delegation, attestation, and constraint enforcement (guidance package). CEX should adopt simplified 3-tier
-  model from (a), with optional CapabilityAlgebra concepts for future hardening.'
-1_key_finding_capability_based_not_tier_based: 'ruflo does NOT implement traditional fixed trust tiers (Tier 1/2/3).
-
-  Instead it uses a gradient capability model with 5 enforcement dimensions:
+- port_plan
+created: 2026-04-17
+source: C:/Users/CEX/Documents/GitHub/_external/ruflo/
+source_files:
+- v3/@claude-flow/cli/src/transfer/types.ts (TrustLevel)
+- v3/@claude-flow/cli/src/plugins/store/types.ts (PluginEntry.trustLevel)
+- .agents/skills/claims/SKILL.md (Claims authorization)
+port_priority: P0_HIGH
+1_what_ruflo_implements: 'Ruflo uses claims-based authorization at two levels:
 
 
-  1. Capabilities: array of strings per agent
+  1. TrustLevel (per-entity): a 5-value enum applied to plugins, patterns, and agents
 
-  2. Workload: 0-100% capacity tracking
-
-  3. Claim lifecycle: state machine for task ownership
-
-  4. Progress protection: high-progress claims resist stealing
-
-  5. Access levels: private/team/swarm/public/system for memory
+  2. Claims (per-operation): fine-grained capability grants with scope patterns
 
 
-  This is more flexible than fixed tiers but harder to reason about.
+  The trust tier governs which capabilities are available to each entity and whether dispatch
 
-  CEX should adopt a simplified 3-tier model inspired by ruflo''s capability
+  should proceed. N07 (dispatch guard) checks `minTrustLevel` against the caller''s `trustLevel`
 
-  checks but with explicit tier labels for dispatch clarity.'
-2_ruflo_implementation_details: ''
-2_1_agent_capabilities_agent_ts_17_186: "// 7 capability types\nconst typeToCapability = {\n  'code': 'code',\n  'test': 'test',\n\
-  \  'review': 'review',\n  'design': 'design',\n  'deploy': 'deploy',\n  'refactor': 'refactor',\n  'debug': 'debug'\n};\n\
-  \n// Check before execution\ncanExecute(taskType: string): boolean {\n  const required = typeToCapability[taskType];\n \
-  \ return this.hasCapability(required);\n}"
-2_2_claim_capacity_limits_rules_ts_50_265: "// Capacity enforcement\nconst maxClaims = claimant.maxConcurrentClaims ?? 5;\n\
-  const activeClaims = existingClaims.filter(\n  c => c.claimant.id === claimant.id && isActiveClaim(c.status)\n).length;\n\
-  \nif (activeClaims >= maxClaims) {\n  return ruleFailure('CLAIMANT_AT_CAPACITY');\n}\n\nif (workload >= 100) {\n  return\
-  \ ruleFailure('CLAIMANT_AT_CAPACITY', 'At 100% capacity');\n}"
-2_3_claim_status_lifecycle_types_ts_32_41: 'active -> pending_handoff | in_review | completed | released | paused | blocked
-  | stealable
+  before spawning.'
+2_trustlevel_enum_source_transfer_types_ts: 'export type TrustLevel = ''official'' | ''verified'' | ''community'' | ''unverified''
+  | ''untrusted'';
 
-  pending_handoff -> active | completed
 
-  in_review -> active | completed
+  | Level | Meaning | CEX equivalent |
 
-  paused -> active | blocked | stealable | completed
+  |-------|---------|----------------|
 
-  blocked -> active | paused | stealable | completed
+  | `official` | Core team, cryptographically signed | N00_genesis builders, N07 orchestrator |
 
-  stealable -> active | completed
+  | `verified` | Third-party, audited by team | Peer-reviewed nuclei (N01-N06) |
 
-  completed -> (terminal)
+  | `community` | Public, user-contributed | External plugins, agentic RAG tools |
 
-  released -> (terminal)
+  | `unverified` | Untested, not reviewed | Test environments, experimental |
 
-  expired -> (terminal)'
-2_4_work_stealing_rules_ts_180_286: "type StealableReason = 'stale' | 'blocked' | 'overloaded' | 'manual' | 'timeout';\n\n\
-  // Conditions for stealing\ncanStealClaim(claim, challenger, config, now):\n  1. Claim must be in 'stealable' status\n \
-  \ 2. Grace period must have elapsed (stealableAt timestamp)\n  3. Progress below minProgressToProtect %\n  4. Challenger\
-  \ != owner (no self-steal)\n  5. No pending contest already\n  6. Cross-type stealing allowed (if configured)"
-2_5_memory_access_levels_types_ts_25_30: "type AccessLevel = 'private' | 'team' | 'swarm' | 'public' | 'system';\n\n// MemoryEntry\
-  \ includes:\ninterface MemoryEntry {\n  accessLevel: AccessLevel;\n  ownerId?: string;\n}"
-2_6_command_execution_security_safe_executor_ts_163_250: "// Allowlist-only model\ninterface ExecutorConfig {\n  allowedCommands:\
-  \ string[];     // ONLY these can execute\n  blockedPatterns?: string[];    // injection prevention\n  timeout?: number;\
-  \              // default 30000ms\n  maxBuffer?: number;            // default 10MB\n  allowSudo?: boolean;           //\
-  \ default false\n}\n\n// Blocked patterns (injection prevention)\nconst DEFAULT_BLOCKED = [';', '&&', '||', '|', '`', '$(',\
-  \ '${', '>', '<', '>>', '&', '\\n', '\\r', '\\0'];"
-3_cex_integration_plan: ''
-current_state: CEX has no trust/capability model. Any nucleus can be dispatched any task. N07 uses routing rules (domain ->
-  nucleus) but there's no enforcement -- nothing prevents dispatching a deploy task to N02 (marketing).
-proposed_3_tier_trust_model_for_agent_card: '| Tier | Label | Capabilities | Example nuclei |
+  | `untrusted` | Known bad or explicitly blocked | Reject immediately at dispatch |'
+3_claims_security_levels_source_claims_skill_md: '| Level | Claims granted | CEX nucleus match |
 
-  |------|-------|-------------|----------------|
+  |-------|---------------|------------------|
 
-  | T1 | `sandboxed` | read, research, draft | N01 (research), N02 (marketing) |
+  | `minimal` | read only | Sandboxed viewers / read-only agents |
 
-  | T2 | `audited` | T1 + build, modify artifacts, compile | N03 (builder), N04 (knowledge) |
+  | `standard` | read + write + execute | Standard nuclei (N01-N06) |
 
-  | T3 | `privileged` | T2 + deploy, modify tools, modify rules | N05 (operations), N07 (orchestrator) |'
-schema_extension_for_agent_card_kind: "Add to `P08_architecture/_schema.yaml` under `agent_card`:\n\nagent_card:\n  frontmatter_required:\n\
-  \    # ... existing fields ...\n    - trust_tier          # NEW: sandboxed | audited | privileged\n    - capabilities  \
-  \      # NEW: array of capability strings\n  constraints:\n    trust_tiers: [sandboxed, audited, privileged]\n    capability_values:\
-  \ [read, research, draft, build, compile, modify_artifacts, deploy, modify_tools, modify_rules]"
-dispatch_guard_in_n07: "Add to `_tools/cex_agent_spawn.py` or new `_tools/cex_trust_guard.py`:\n\ndef check_trust(task_requirements:\
-  \ list[str], nucleus_card: dict) -> bool:\n    \"\"\"Verify nucleus has capabilities required by the task.\"\"\"\n    nucleus_caps\
-  \ = set(nucleus_card.get(\"capabilities\", []))\n    required = set(task_requirements)\n    missing = required - nucleus_caps\n\
-  \    if missing:\n        raise TrustViolation(\n            f\"Nucleus {nucleus_card['id']} lacks: {missing}. \"\n    \
-  \        f\"Tier: {nucleus_card['trust_tier']}\"\n        )\n    return True"
-files_to_create_modify: '| File | Action | Lines est. |
+  | `elevated` | + spawn + memory | N07 (orchestrator, spawns nuclei) |
 
-  |------|--------|-----------|
+  | `admin` | all claims | Internal automation (cex_auto, test) |'
+claim_types: '| Claim | Meaning | Typical holder |
 
-  | `P08_architecture/_schema.yaml` | MODIFY -- add trust_tier + capabilities to agent_card | ~10 |
+  |-------|---------|---------------|
 
-  | `_tools/cex_trust_guard.py` | CREATE -- dispatch guard logic | ~80 |
+  | `read` | Read files | All nuclei |
 
-  | `_tools/cex_agent_spawn.py` | MODIFY -- call trust guard before spawn | ~15 |
+  | `write` | Write files | All nuclei |
 
-  | `N0{1-7}_*/agent_card_n0{1-7}.md` | MODIFY -- add trust_tier + capabilities fields | ~7 files x 3 lines |
+  | `execute` | Shell commands | N03, N05 |
 
-  | `.claude/rules/n07-orchestrator.md` | MODIFY -- document trust check in dispatch | ~10 |'
-estimated_effort:
-- 'Complexity: Low (additive schema fields + one guard function)'
-- 'Lines of code: ~80 new + ~50 modified across 10 files'
-- 'Dependencies: None'
-- 'Risk: Low -- additive only, no existing behavior changes'
-4_comparative_analysis: '| Dimension | ruflo capability model | Proposed CEX trust tiers | Traditional RBAC |
+  | `spawn` | Agent spawning | N07 |
 
-  |-----------|----------------------|-------------------------|-----------------|
+  | `memory` | Memory system access | N04, N07 |
 
-  | Granularity | Per-capability (7 types) | Per-tier (3 levels) | Per-role (N roles) |
+  | `network` | Network calls | N01 (research), N05 |
 
-  | Complexity | High (5 enforcement dims) | Low (1 check at dispatch) | Medium |
-
-  | Work stealing | Yes (stealable state) | No (not needed -- N07 re-dispatches) | N/A |
-
-  | Workload tracking | Yes (0-100%) | No (PID-based liveness only) | N/A |
-
-  | Memory access control | 5 levels | Not needed (nuclei own their dirs) | N/A |
-
-  | Injection prevention | Allowlist + blocked patterns | Not needed (no shell exec in nuclei) | N/A |'
-what_not_to_port_from_ruflo:
-- Work stealing -- CEX nuclei don't compete for tasks; N07 assigns
-- Claim lifecycle -- CEX uses signals (complete/fail), not claim states
-- Workload percentage -- CEX tracks PID liveness, not load
-- Memory access levels -- CEX nuclei own their N0x_*/ dirs; no cross-access needed
-- Command injection prevention -- CEX nuclei run in Claude Code sandbox
-5_capabilityalgebra_advanced_trust_model_v1_1_finding: '`v3/@claude-flow/guidance/src/capabilities.ts` contains a full typed
-  capability permission system going beyond simple capability arrays:'
-capability_object_structure: "// capabilities.ts:52-81 -- typed permission object\ninterface Capability {\n  id: string; \
-  \                        // UUID\n  scope: CapabilityScope;             // 'tool' | 'memory' | 'network' | 'file' | 'model'\
-  \ | 'system'\n  resource: string;                   // target (tool name, path pattern, namespace)\n  actions: string[];\
-  \                  // 'read' | 'write' | 'execute' | 'delete'\n  constraints: CapabilityConstraint[]; // rate-limit | budget\
-  \ | time-window | condition | scope-restriction\n  grantedBy: string;                  // agent or authority that issued\
-  \ it\n  grantedTo: string;                  // agent it's granted to\n  expiresAt: number | null;           // TTL for temporary\
-  \ grants\n  delegatable: boolean;               // can sub-agents inherit this?\n  revoked: boolean;\n  attestations: Attestation[];\
-  \        // cryptographic proof of audit/verification\n  parentCapabilityId: string | null;  // delegation chain parent\n\
+  | `admin` | All operations | cex_auto.py, CI |'
+4_enforcement_pattern_from_plugins_store_types_ts: "interface PluginEntry {\n  trustLevel: TrustLevel;       // entity's declared\
+  \ level\n  securityAudit?: SecurityAudit; // optional audit record\n}\n\ninterface PluginFilter {\n  minTrustLevel: TrustLevel;\
+  \    // caller's required minimum\n}\n\nDispatch guard pseudo-code from ruflo:\n\n// Before spawning, check caller trust\
+  \ >= required trust\nconst TRUST_ORDER = ['untrusted', 'unverified', 'community', 'verified', 'official'];\nfunction canDispatch(callerLevel:\
+  \ TrustLevel, requiredLevel: TrustLevel): boolean {\n  return TRUST_ORDER.indexOf(callerLevel) >= TRUST_ORDER.indexOf(requiredLevel);\n\
   }"
-authority_levels_authority_ts_42: 'type AuthorityLevel = ''agent'' | ''human'' | ''institutional'' | ''regulatory'';
-
-  // Irreversibility classification for action safety:
-
-  type IrreversibilityClass = ''reversible'' | ''costly-reversible'' | ''irreversible'';
-
-  type ProofLevel = ''standard'' | ''elevated'' | ''maximum'';'
-trustlevel_transfer_types_ts_22: '// Used for plugin marketplace trust rating:
-
-  type TrustLevel = ''official'' | ''verified'' | ''community'' | ''unverified'' | ''untrusted'';'
-what_this_means_for_cex: '| ruflo concept | CEX equivalent | Port? |
-
-  |---------------|---------------|-------|
-
-  | `CapabilityScope` (6 scopes) | Not needed — nuclei own dirs | Skip |
-
-  | `Attestation` (cryptographic proof) | Aligns with R5 proof chain | Wave 3 |
-
-  | `delegatable` flag | Relevant if sub-agents inherit caps | Future |
-
-  | `constraints` (rate-limit, budget) | aligns with `rate_limit_config` kind | Future |
-
-  | `AuthorityLevel` (agent/human) | Maps to CEX GDP (human decides WHAT) | Already implemented |
-
-  | `IrreversibilityClass` | Maps to CEX "risky actions" documentation | Partially implemented |
-
-  | `TrustLevel` (5-level marketplace) | Relevant only if CEX opens a plugin store | Wave 3 |
+5_cex_integration_plan: ''
+step_1_extend_agent_card_kind_schema: "Add `trust_tier` field to the `agent_card` schema in `.cex/kinds_meta.json` and\n`N00_genesis/P08_architecture/_schema.yaml`:\n\
+  \n# In agent_card frontmatter:\ntrust_tier: verified          # official | verified | community | unverified | untrusted\n\
+  required_claims:              # list of claim types this agent needs\n  - read\n  - write\n  - execute\ndispatch_guard:\
+  \ true          # whether N07 must check trust before spawn"
+step_2_add_dispatch_guard_in_n07_dispatch_protocol: 'File: `.claude/rules/n07-orchestrator.md` -- append to Dispatch Workflow:
 
 
-  Conclusion: CapabilityAlgebra is more sophisticated than needed for CEX Wave 1.
+  ## Dispatch Guard (trust_tier check)
 
-  Stick with 3-tier model (sandboxed/audited/privileged). Revisit in Wave 3.'
-6_key_code_references_in_ruflo: '| File (relative to ruflo/) | What it contains |
+  Before any dispatch, verify:
 
-  |---------------------------|-----------------|
+  1. Read target nucleus agent_card.trust_tier
 
-  | `v3/src/agent-lifecycle/domain/Agent.ts` | Capability array, canExecute(), hasCapability() |
+  2. Compare against handoff.required_trust (default: ''verified'')
 
-  | `v3/@claude-flow/claims/src/domain/types.ts` | ClaimStatus lifecycle, Claimant interface |
+  3. If nucleus.trust_tier < required: REJECT + log to incident_report
 
-  | `v3/@claude-flow/claims/src/domain/rules.ts` | canClaimIssue(), canStealClaim(), capacity checks |
+  4. If nucleus.trust_tier == ''untrusted'': BLOCK permanently'
+step_3_apply_tier_to_existing_nuclei: '| Nucleus | Recommended trust_tier | Rationale |
 
-  | `v3/@claude-flow/security/src/safe-executor.ts` | Allowlist model, blocked patterns, sudo prevention |
+  |---------|----------------------|-----------|
 
-  | `v3/@claude-flow/memory/src/types.ts` | AccessLevel enum (private/team/swarm/public/system) |
+  | N00_genesis | official | Core archetype, signed by team |
 
-  | `v3/@claude-flow/guidance/src/capabilities.ts` | CapabilityAlgebra, Capability interface, delegation |
+  | N07 | official | Orchestrator, highest privilege |
 
-  | `v3/@claude-flow/guidance/src/authority.ts` | AuthorityLevel, IrreversibilityClass, ProofLevel |
+  | N01-N06 | verified | Peer-reviewed, in repo, tested |
 
-  | `v3/@claude-flow/cli/src/transfer/types.ts` | TrustLevel enum (5-level marketplace trust) |'
-boundary: Conhecimento destilado, estatico, versionado. NAO eh instrucao, template, ou configuracao.
-8f_pipeline_function: 'Primary function: INJECT'
+  | External plugins | community | User-added, not reviewed |
+
+  | Test harnesses | unverified | Not audited |'
+step_4_enforcement_in_cex_agent_spawn_py: "File: `_tools/cex_agent_spawn.py` -- add trust check:\n\nTRUST_ORDER = ['untrusted',\
+  \ 'unverified', 'community', 'verified', 'official']\n\ndef check_dispatch_trust(agent_card: dict, required: str = 'verified')\
+  \ -> bool:\n    tier = agent_card.get('trust_tier', 'unverified')\n    if tier == 'untrusted':\n        raise DispatchBlocked(f\"\
+  Agent {agent_card['id']} is untrusted -- dispatch blocked\")\n    return TRUST_ORDER.index(tier) >= TRUST_ORDER.index(required)"
+6_comparison_cex_dispatch_current_vs_trust_tier_dispatch_proposed: '| Dimension | Current CEX | Trust-Tier extension |
+
+  |-----------|------------|---------------------|
+
+  | Who can dispatch | Anyone with nucleus boot script | Requires trust_tier >= required_level |
+
+  | Capability check | None (trust nucleus existence) | Per-nucleus claims list |
+
+  | Untrusted rejection | Manual (user judgment) | Automatic BLOCK at dispatch |
+
+  | Audit trail | git commit + signal | + trust check log in incident_report |
+
+  | Complexity cost | Zero | ~50 lines in agent_spawn.py + schema field |
+
+  | Security uplift | None | Prevents dispatch to corrupted/hijacked nuclei |'
+7_estimated_effort: '| Task | Complexity | Lines |
+
+  |------|-----------|-------|
+
+  | Schema extension (`agent_card`, `kinds_meta.json`) | Low | ~30 |
+
+  | Guard in `cex_agent_spawn.py` | Low | ~50 |
+
+  | Backfill `trust_tier` on 8 nucleus agent_cards | Low | ~16 (2 fields x 8) |
+
+  | Update N07 dispatch rule doc | Low | ~20 |
+
+  | Tests | Low | ~50 |
+
+  | Total | Low | ~166 |'
+8_risks: '| Risk | Mitigation |
+
+  |------|-----------|
+
+  | Tier assignment is subjective initially | Start with `verified` for all N01-N06; refine post-audit |
+
+  | Trust drift (tier assigned but not re-audited) | Add `trust_tier_audited_at` timestamp; warn if >90 days |
+
+  | Claims not enforced at runtime | Phase 2: enforce at tool-call level via cex_hooks.py |
+
+  | Breaking change for existing dispatches | `trust_tier` field is optional; defaults to ''verified'' when missing |'

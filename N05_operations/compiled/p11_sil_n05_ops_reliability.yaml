@@ -32,6 +32,7 @@ feedback_sources:
 - cex_doctor.py diagnostic output
 - cex_flywheel_audit.py 7-layer report
 review_cycle: P7D
+density_score: 1.0
 overview: 'Gating Wrath: infrastructure passes or it does not. This loop enforces that gate autonomously. Every failure becomes
   a tracked work item that exits only via verified fix or escalation record. NOT a bugloop (single-bug patch) nor learning_record
   (passive capture).'

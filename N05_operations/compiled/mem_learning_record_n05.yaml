@@ -13,6 +13,7 @@ tags:
 - retrieval
 - release_gate
 - evidence
+density_score: 0.97
 intent: This learning record captures what N05 should remember about retrieving and using operational evidence for code review,
   CI triage, deploy gating, and rollback decisions. The record is persistent because these lessons should shape future behavior.
 properties: '| Property | Value |

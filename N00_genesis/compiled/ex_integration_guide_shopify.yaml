@@ -1,0 +1,72 @@
+id: ex-integration-guide-shopify
+kind: integration_guide
+pillar: P04
+title: Shopify Integration Guide
+version: 0.1.0
+quality: null
+status: template
+brand_placeholders:
+- BRAND_NAME
+- BRAND_SHOPIFY_STORE_DOMAIN
+- BRAND_SHOPIFY_API_VERSION
+- BRAND_SHOPIFY_ADMIN_TOKEN
+- BRAND_SHOPIFY_WEBHOOK_SECRET
+- BRAND_SUPABASE_PROJECT_REF
+tags:
+- commerce
+- template
+- distillation
+- shopify
+- integration_guide
+density_score: 1.0
+purpose: Wire {{BRAND_NAME}} to Shopify for bidirectional catalog + inventory + order sync. This guide glues together the
+  api_client, webhook handler, OAuth config, and Supabase mirror into one reproducible setup.
+when_to_use:
+- New brand onboarding that uses Shopify as the storefront of record.
+- Migration from a private Shopify app token to a public/custom app with OAuth.
+- Recovery procedure after rotating webhook secrets or admin tokens.
+prerequisites:
+- 'Supabase project provisioned (`{{BRAND_SUPABASE_PROJECT_REF}}`) with tables: `products`, `inventory`, `orders`, `shopify_installations`,
+  `webhook_inbox`, `shopify_sync_log`.'
+- 'Shopify store admin access: `{{BRAND_SHOPIFY_STORE_DOMAIN}}`.'
+- 'Env vars set: `{{BRAND_SHOPIFY_ADMIN_TOKEN}}`, `{{BRAND_SHOPIFY_WEBHOOK_SECRET}}`.'
+- 'API version pinned: `{{BRAND_SHOPIFY_API_VERSION}}` (rotate every 6 months).'
+architecture_read_top_to_bottom: "Shopify store\n  |-- webhooks --> [shopify-webhook-handler]  --> Supabase.products/inventory/orders\n\
+  \  |                                               |\n  |                                               +-- db trigger -->\
+  \ [product-sync-webhook] --> Shopify Admin API\n  |\n  +-- Admin API <-- [unified-sync]             <-- cron\n  +-- Admin\
+  \ API <-- [fetch-from-shopify]       <-- manual\n  +-- Admin API <-- [push-titles-to-shopify]   <-- admin UI"
+brand_variables_used: All listed in frontmatter; every one must be an env var in the edge function runtime, NEVER a literal.
+setup_steps:
+- 'Create Shopify app -- Admin > Apps > Develop apps > Create app. Add scopes: `read_products, write_products, read_inventory,
+  write_inventory, read_orders`.'
+- Install OAuth flow (if multi-tenant) -- see `ex_oauth_app_config_shopify.md`. Skip if single-store custom app.
+- Provision admin token -- copy from app install page into `{{BRAND_SHOPIFY_ADMIN_TOKEN}}`.
+- 'Deploy edge functions:'
+- 'Register webhooks -- run `webhook-manager` once: `POST /webhook-manager {op:"setup"}`. It creates `products/update`, `inventory_levels/update`,
+  `orders/create`, `orders/paid`, `app/uninstalled`.'
+- 'Initial catalog backfill -- `POST /fetch-from-shopify {full: true}`; expect ~2 min per 1000 products.'
+- Verify inventory reconcile -- run `inventory-reconcile` in `dry_run=true`; expect 0 discrepancies on a clean install.
+- Enable DB trigger -- Supabase dashboard > Database > Triggers > enable `product_sync_outbound` on `products` table.
+verification_checklist:
+- '[ ] `GET /shopify/admin/api/{{BRAND_SHOPIFY_API_VERSION}}/shop.json` returns 200 with the token.'
+- '[ ] Inbound webhook delivery log shows ingress within 10s of a test product update.'
+- '[ ] Double-UTF-8 repair regression: create a product named `Portão` in Shopify, verify `Portão` (not `PortÃ£o`) lands in
+  Supabase.'
+- '[ ] Uninstall test: remove app -> `app/uninstalled` fires -> installation row soft-deleted.'
+troubleshooting: '| Symptom | Likely cause | Fix |
+
+  |---------|--------------|-----|
+
+  | 401 from Admin API | Token revoked or wrong scope | Reinstall app, refresh scopes |
+
+  | 429 loops | Missing bucket backoff | See rate-limit contract in `ex_api_client_shopify.md` |
+
+  | Webhook not received | HMAC secret mismatch after rotation | Re-run webhook-manager `rotate_secret` op |
+
+  | `PortÃ£o` in DB | UTF-8 repair skipped | Enable on read path in api_client |'
+related_artifacts:
+- '`ex_api_client_shopify.md`'
+- '`ex_webhook_shopify.md`'
+- '`ex_oauth_app_config_shopify.md`'
+- '`ex_webhook_manager_shopify.md`'
+- '`ex_workflow_multi_marketplace_sync.md`'

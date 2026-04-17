@@ -33,6 +33,7 @@ tags:
 - operations
 - token-budget
 tldr: 'N05 200K: 50% working-memory, 13.5% tool-buf, 16.5% context, 10% ISOs, 10% system'
+density_score: 1.0
 budget_allocation: '| Section | Tokens | % | P |
 
   |---|---|---|---|

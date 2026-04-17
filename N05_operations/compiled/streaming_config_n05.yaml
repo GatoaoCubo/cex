@@ -25,6 +25,7 @@ tags:
 tldr: 'File-based ops streams for N05: 5 channels (signal/audit/health/compile/dispatch), 100-event buffer, 1s flush, drop_oldest.'
 description: 'Local file-watcher streaming for N05: signals, audit JSONL, health heartbeats, compile progress, dispatch lifecycle
   events.'
+density_score: 1.0
 overview: 'File-based transport (protocol: auto) -- no HTTP server. N05 writes operational events to `.cex/runtime/` subdirs;
   a tail-follower emits them to subscribers. Transport is local only: file sink (normal) or stdout (DEBUG_STREAM=1). Producer:
   N05 ops nucleus (signal_writer, compile pipeline, dispatch script). Consumer: N07 monitor loop, cex_signal_watch.py, cex_doctor.py.'

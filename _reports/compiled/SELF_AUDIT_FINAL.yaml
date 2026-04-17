@@ -1,0 +1,282 @@
+id: self_audit_final.md
+kind: audit_report
+pillar: cross-cutting
+title: SELF_AUDIT_FINAL — Architecture Against Itself
+generated: 2026-04-16
+auditor: N07 (Claude Opus 4.6)
+grid: codex (n01-n06) parallel + N07 ground-truth re-derivation
+verdict: NOT_READY_FOR_PUBLIC
+severity: P0
+quality: 9.0
+density_score: 0.97
+tl_dr: 'The repo IS NOT READY for public release. Previous "READY" verdict was wrong. **Re-running the audit script revealed
+  4 LIVE API keys committed inside a tracked report file.** Pushing this repo today would burn 4 production keys. Verdict
+  reversed: `READY` → `NOT_READY` (P0 blocker). ---'
+method: 'Two parallel passes:
+
+  1. N07 ground-truth audit (this file) — re-ran scripts, counted from source, cross-checked HEAD.
+
+  2. Codex grid (`SELF_AUDIT_n01..n06`) — 6 nuclei, read-only audit, 30-min budget.
+
+
+  I did NOT trust my own prior consolidation. I re-derived every number, re-ran every scanner,
+
+  and inspected `git ls-files` to verify what would actually ship.
+
+
+  ---'
+p0_blockers_must_fix_before_any_public_push: ''
+b0_1_live_api_keys_committed_in_audit_report_catastrophic: 'File: `_reports/audit/security_brand.md` (tracked at HEAD `ac3be936d`)
+
+  Contains the literal contents of `.env`:
+
+
+  | Key | Status | Where |
+
+  |-----|--------|-------|
+
+  | `ANTHROPIC_API_KEY=sk-ant-REDACTED` | LIVE  ROTATE | line 51 of report |
+
+  | `CEREBRAS_API_KEY=csk-REDACTED` | LIVE  ROTATE | line 57 |
+
+  | `YOUTUBE_API_KEY=AIzaSyREDACTED` | LIVE  ROTATE | line 44 |
+
+  | `GOOGLE_IMAGEN_API_KEY=AIzaSyREDACTED` | LIVE  ROTATE | line 45 |
+
+
+  Root cause chain (3 failures):
+
+  1. `.env` is correctly in `.gitignore` (good)
+
+  2. But `_tools/audit_security_brand.py` SCANS `.env` and dumps full lines into report
+
+  3. And `_reports/audit/` is NOT gitignored, so the report (with real keys) gets committed
+
+  4. The pre-commit hook (`cex_hooks.py`) has ZERO secret detection — it allowed the commit
+
+
+  Required actions (in order):
+
+  # 1. ROTATE all 4 keys NOW (treat as fully compromised)
+
+  # 2. Add audit reports + .env mirrors to .gitignore
+
+  echo "_reports/audit/*.md" >> .gitignore
+
+  echo "_reports/audit/inventory_full.jsonl" >> .gitignore
+
+  # 3. Patch _tools/audit_security_brand.py: skip .env (or redact line snippets containing API keys)
+
+  # 4. git rm --cached _reports/audit/security_brand.md _reports/audit/inventory_full.jsonl
+
+  # 5. Use git filter-repo to PURGE keys from history before push:
+
+  #    git filter-repo --path _reports/audit/security_brand.md --invert-paths
+
+  # 6. Add gitleaks/trufflehog to .github/workflows/ci.yml as a new job
+
+  # 7. Add a pre-commit hook step that runs the same secret scanner'
+b0_2_inventory_full_jsonl_is_also_tracked: '`git ls-files _reports/audit/inventory_full.jsonl` returns the file. Contains
+  an `.env` record (size, last_touched, refs). Less catastrophic than B0.1 (no key contents) but still leaks repo internals.
+  Same fix: gitignore + filter-repo purge. ---'
+p1_blockers_block_release_fixable_in_1_day: ''
+b1_1_no_secret_scanner_in_ci_or_pre_commit: '`grep -i "trufflehog\|gitleaks\|detect-secret" .github/workflows/*.yml` returns
+  nothing.
+
+  `cex_hooks.py` has zero pattern-match for API keys.
+
+
+  If B0.1 had been caught by automation, the prior consolidation would not have happened.
+
+
+  Fix: add `gitleaks-action` or `trufflehog` to `ci.yml` as a blocking job + mirror in pre-commit.'
+b1_2_requirements_txt_missing_pytest: 'README claims: > `pip install -r requirements.txt` then run pytest core tier. Reality:
+  `requirements.txt` has only `pyyaml`, `tiktoken`, `numpy`, `scikit-learn`. `pytest` is NOT included. The first thing a fresh-clone
+  user runs (the test suite from `tests/MANIFEST.yaml`) will fail with `No module named pytest`. Fix: add `pytest>=7.0` (and
+  `pytest-cov` if CI uses it) to `requirements.txt` — OR rename to `requirements-runtime.txt` and create separate `requirements-dev.txt`.'
+b1_3_documentation_drift_counts_wrong_everywhere: '| Metric | CLAUDE.md / README claim | Actual (re-counted) | Delta |
+
+  |--------|--------------------------|---------------------|-------|
+
+  | Builders | 260 | 259 | -1 |
+
+  | ISOs | 3381 | 3384 | +3 |
+
+  | Kinds | 257 | 257 |  |
+
+  | Sub-agents | 125 (orig) / 259 (my fix) | 259 |  (after my fix) |
+
+  | KCs in P01_knowledge | 131 | 424 | +293 |
+
+  | Total LOC | 1,353,114 (prior consolidation) | ~1,064,017 | -289K |
+
+
+  The "1.35M lines" number from CONSOLIDATION.md was wrong — likely included binaries or compiled artifacts.
+
+  Real text-line count for `.py + .md + .yaml + .yml + .sh + .ps1 + .json` (excluding .git/.venv/node_modules) is ~1.06M.
+
+
+  Fix: replace hand-maintained badges with a `make stats` target driven by a Python script.'
+b1_4_readme_82_tools_claim_un_verified: 'README badge: "tools-82-brightgreen". I did not verify this number in this audit.
+  Codex N03 self-audit handoff was tasked to count — verify when grid finishes. ---'
+p2_findings_cosmetic_pollution_low_risk: ''
+b2_1_audit_script_flags_11_fake_placeholder_secrets: 'These are EXAMPLES inside builder ISOs (intentional, not real):
+
+  - `archetypes/builders/oauth-app-config-builder/bld_examples_oauth_app_config.md`: `ghp_1234567890abcdef1234567890abcdef1234`
+  (3 hits)
+
+  - `archetypes/builders/sdk-example-builder/bld_examples_sdk_example.md`: `AKIAXXXXXXXXXXXXXXXX` (placeholder X''s, 1 hit)
+
+  - `archetypes/builders/white-label-config-builder/bld_examples_white_label_config.md`: same (1 hit)
+
+  - Plus 6 mirror hits in `archetypes/builders/compiled/*.yaml`
+
+
+  These are NOT leaks — they are textbook anti-pattern documentation. But the audit
+
+  script reports them as CRITICAL with no way to allowlist.
+
+
+  Fix: add a `# allowlist-secret` magic comment marker that `audit_security_brand.py`
+
+  honors, OR add `archetypes/builders//bld_examples_.md` to the `BRAND_OWNERS`-style
+
+  allowlist for `*_key` patterns.'
+b2_2_numpy_1_24_0_and_scikit_learn_1_3_0_listed_as_optional_in_comments_but_as_required_in_requirements_txt: Comment says
+  "retriever has a pure-Python fallback, so these are not mandatory" but they're not behind a `[project.optional-dependencies]`
+  group. Either remove from `requirements.txt` (move to `requirements-perf.txt`) or remove the comment.
+b2_3_no_security_md_vulnerability_disclosure_email: I added `SECURITY.md` in prior commit, but it points to `security@<your-org>`
+  — needs real contact before push. Or remove the file until you have a real channel. ---
+verified_healthy: 'These passed audit and are public-ready:
+
+
+  | Area | Evidence |
+
+  |------|----------|
+
+  | CI exists | `.github/workflows/ci.yml` (lint, test, compile, doctor, flywheel) + `quality.yml` + `claude_learn.yml` |
+
+  | Reverse compiler works | `python _tools/cex_compile.py --target claude-md` rendered 114 artifacts -> `CLAUDE_GENERATED.md`
+  (22353 bytes) |
+
+  | Doctor passes | 189 PASS, 69 WARN, 0 FAIL (warnings are oversized files, not breakage) |
+
+  | Bash boots syntactically valid | `bash -n boot/cex.sh` + `boot/n01.sh` clean |
+
+  | Brand strings cleaned | `brand_gato3`, `brand_gatoaocubo`, `brand_cex_user`, `email_personal` HIGH counts now 0 in source
+  code |
+
+  | Test tier manifest exists | `tests/MANIFEST.yaml` with 3 tiers (core / integration / optional), 38 files inventoried |
+
+  | Frontmatter validation works | `cex_hooks.py` blocked my unquoted YAML in 2 codex outputs (caught Jinja-in-YAML bug) |
+
+
+  ---'
+codex_grid_status: 'Dispatched 6 nuclei at start of this audit. Status at write-time: all 6 still RUNNING (~5 min). Per memory
+  `feedback_multiruntime_verification.md`, codex frequently exits without producing — I do NOT depend on their output for
+  this verdict. If codex deliverables land in `_reports/audit/self_audit/` after this report, they will be appended as Annex
+  A; my verdict above stands regardless. ---'
+recommendation_path_priority_ordered: '1. NOW (before ANY push): Rotate the 4 keys in B0.1. Treat as compromised.
+
+  2. Day 1: Apply B0.1 + B0.2 fixes (gitignore + filter-repo + audit-script patch).
+
+  3. Day 1: Add gitleaks to CI + pre-commit (B1.1) — make sure step 2 cannot regress.
+
+  4. Day 1: Fix `requirements.txt` (B1.2). Test fresh-clone install on a clean VM.
+
+  5. Day 2: Replace hand-maintained badges with auto-generated stats (B1.3).
+
+  6. Day 2: Allowlist example-secret placeholders in audit script (B2.1).
+
+  7. Day 2: Either fill SECURITY.md contact or remove the file (B2.3).
+
+  8. THEN re-run `python _tools/audit_security_brand.py` — must show 0 CRITICAL, 0 HIGH (excluding allowlisted examples).
+
+  9. THEN re-run this self-audit. If clean: READY.
+
+
+  Estimated effort: 1.5–2 days of focused work before public push is safe.
+
+
+  ---'
+honest_reflection_on_prior_consolidation: 'The previous `CONSOLIDATION.md` declared READY based on:
+
+  - Brand decoupling complete (true)
+
+  - Bash boots added (true)
+
+  - Tests tiered (true)
+
+  - Examples runnable (true, but stale)
+
+  - SECURITY.md present (true, but stub)
+
+
+  It missed:
+
+  - The audit script itself was leaking the very secrets the audit was trying to detect
+
+  - No automation to prevent regression
+
+  - Doc-vs-code drift on counts
+
+
+  Lesson: "the audit passed" is meaningless if the audit output itself is the leak.
+
+  Future audits must scan their own outputs.'
+verdict_not_ready: 5 P0/P1 blockers. 3 P2 findings. ~2 days of work to clear. ---
+annex_a_codex_grid_output: 'Grid dispatched 6 codex nuclei (N01-N06). 3 produced deliverables, 3 crashed
+
+  (N01, N03, N04) — codex skip pattern per memory `feedback_multiruntime_verification.md`.
+
+
+  All 3 completed nuclei independently confirmed NOT_READY. This corroborates
+
+  N07''s verdict from a different angle (marketing, ops, commercial) without seeing
+
+  my P0 finding.
+
+
+  | Nucleus | File | Verdict | Top blocker |
+
+  |---------|------|---------|-------------|
+
+  | N02 marketing | `_reports/audit/self_audit/n02_marketing.md` | `POSITIONING_NOT_READY` | README opens at "step 4 advanced
+  proof"; missing problem→product→outcome arc; fake repo URL |
+
+  | N05 operations | `_reports/audit/self_audit/n05_operations.md` | `OPS_NOT_READY` | 14 CRITICAL + 2 HIGH live-looking keys;
+  pytest missing in `requirements.txt`; CI doesn''t run manifest core tier; no security scanner in CI (corroborates B1.1)
+  |
+
+  | N06 commercial | `_reports/audit/self_audit/n06_commercial.md` | `COMMERCIAL_NOT_READY` | "Open-source engine with buried
+  business plans"; no public pricing surface; brand decoupling incomplete (gato3 residue in first-run surfaces) |
+
+
+  Convergent findings across N07 + codex grid:
+
+  - Live secret leak (N07 B0.1 ↔ N05 14 CRITICAL)
+
+  - Missing pytest in `requirements.txt` (N07 B1.2 ↔ N05 gap)
+
+  - No CI secret scanner (N07 B1.1 ↔ N05 gap)
+
+  - Doc-vs-code drift on counts (N07 B1.3 ↔ N02 finding)
+
+
+  N07-only findings (not surfaced by codex):
+
+  - Audit script itself dumps `.env` into tracked report (the catastrophic chain)
+
+  - `inventory_full.jsonl` also tracked with `.env` metadata
+
+
+  Codex-only findings (not surfaced by N07):
+
+  - README narrative arc broken (N02)
+
+  - Monetization strategy not consumer-facing (N06)
+
+  - `tests/MANIFEST.yaml` references missing files (N05) — needs verification
+
+  - N05 claims `boot/n0X.sh` absent; N07 counted 8 files — DISCREPANCY, reconcile before action'
+self_audit_pass: ''

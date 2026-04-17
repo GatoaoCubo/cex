@@ -17,6 +17,7 @@ tags:
 quality: null
 title: Chrome CDP Browser Automation
 tldr: 'Control user Chrome via CDP WebSocket: setup, gotchas, session cookies, click strategies, and NotebookLM integration'
+density_score: 0.98
 overview: 'Chrome DevTools Protocol (CDP) allows programmatic control of Chrome via WebSocket. By launching Chrome with `--remote-debugging-port=9222`,
   any tool can navigate, click, type, read, and screenshot. CDP is the foundation for Playwright, Puppeteer, and any custom
   browser automation that needs to operate on the user''s actual browser session (with existing logins, cookies, and extensions).

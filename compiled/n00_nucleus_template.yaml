@@ -11,6 +11,7 @@ tags:
 - nucleus_def
 - archetype
 - instantiation
+density_score: 1.0
 identity: 'nucleus_id: "{{NUCLEUS_ID}}"          # n08, n09, n10 ... (sequential after N07)
 
   role_name: "{{ROLE_NAME}}"            # e.g., "sales", "legal", "research"

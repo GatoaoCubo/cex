@@ -1,0 +1,164 @@
+mission: OPENSOURCE_FIX
+generated: 2026-04-16
+status: complete
+verdict_before: NOT_READY (5 blockers)
+verdict_after: PARTIAL_READY (2 blockers fixed clean, 2 partial, 1 not started)
+codex_nuclei_dispatched: 4
+codex_pass_rate: 1/4 PASS, 3/4 partial-or-no-report
+quality: null
+density_score: 1.0
+tl_dr_non_dev_language: '| Question | Answer |
+
+  |----------|--------|
+
+  | Total lines in CEX? | 1,353,114 lines across 10,568 files (113.7 MB) |
+
+  | Blockers fixed? | 2 fully (B3 examples, B4 community) + 2 partially (B1 bash, B2 brand) + 1 not started (B5 tests) |
+
+  | Stale docs found? | Yes -- CLAUDE.md says 262 builders / 125 sub-agents; actual is 260 / 259 |
+
+  | Verdict change? | NOT_READY -> PARTIAL_READY (3.5 of 5 blockers addressed) |'
+repository_scale_w0_baseline_ground_truth: '| Metric | Value | Source |
+
+  |--------|-------|--------|
+
+  | Total files | 10,568 | `_reports/audit/inventory_summary.md` |
+
+  | Total bytes | 113.7 MB | W0 |
+
+  | Total lines | 1,353,114 | W0 |
+
+  | Builders (actual) | 260 | `ls archetypes/builders/` |
+
+  | Builder ISOs | 3,381 | `find archetypes/builders -name "bld_*.md"` |
+
+  | Knowledge cards | 424 | `find P01_knowledge -name "kc_*.md"` |
+
+  | Sub-agents | 259 | `ls .claude/agents/*.md` |
+
+  | Kinds registered | 257 | `.cex/kinds_meta.json` |
+
+  | Pillars | 12 | `P01..P12` |
+
+  | Nuclei | 8 | `N00..N07` |
+
+  | Quality-scored artifacts | 5,002 | W7 (none below 8.4) |'
+pre_existing_doc_drift_n07_spot_check: 'These stale claims were found by grepping CLAUDE.md + README.md:
+
+
+  | Doc | Claims | Actual | Drift |
+
+  |-----|--------|--------|-------|
+
+  | `CLAUDE.md` | 262 builders | 260 | -2 |
+
+  | `CLAUDE.md` | 125 sub-agents | 259 | +134 |
+
+  | `README.md` | 262 builders | 260 | -2 |
+
+  | `README.md` | "Builder integrity (262 builders)" | 260 | -2 |
+
+
+  > Codex N01 was supposed to deepen this audit but produced zero output.
+
+  > The fix is mechanical: search-replace 262 -> 260 and 125 -> 259 in CLAUDE.md +
+
+  > README.md. Recommend N07 dispatch a single solo claude task to fix.'
+blocker_status_was_5_now_2_fully_2_partial: '| ID | Description | Owner | Status | Evidence |
+
+  |----|-------------|-------|--------|----------|
+
+  | B1 | 57 ps1, 0 bash equivs | N05 codex | PARTIAL | 8 bash boots added (`boot/cex.sh` + `boot/n0[1-7].sh`); 35 ps1 still
+  missing parity (`litellm.ps1`, `atlas*.ps1`, `vllm_*.ps1`, `ollama_grid.ps1`) |
+
+  | B2 | 132 brand coupling hits | N03 codex | PARTIAL | 55 files modified (`gatoaocubo3.com` -> `{{BRAND_EMAIL}}`, etc);
+  audit re-run shows 49 `brand_cex_user` HIGH still remaining (path coupling) |
+
+  | B3 | examples/ empty | N04 codex | DONE | 3 examples created: `quickstart.md` (89 lines), `build_one_artifact.md`, `run_grid.md`
+  |
+
+  | B4 | Missing SECURITY + COC | N04 codex | DONE | `SECURITY.md` (44 lines, 90-day disclosure) + `CODE_OF_CONDUCT.md` (Contributor
+  Covenant 2.1) at repo root |
+
+  | B5 | 70% tests fail clean clone | N05 codex | NOT STARTED | `tests/MANIFEST.yaml` not created; tier split not implemented;
+  codex stopped at bash boots |'
+wave_1_codex_grid_execution: 'Dispatched: 2026-04-16 10:09 (4 codex nuclei in parallel via `dispatch.sh grid-codex`)
+
+
+  | Nucleus | Task | PID | Final state | Wrote report? | Did work? |
+
+  |---------|------|-----|-------------|---------------|-----------|
+
+  | N01 codex | doc_alignment_audit | 41756 | CRASHED ~6min | NO | NO -- zero output, no files modified |
+
+  | N03 codex | brand_decoupling | 35232 | CRASHED ~6min | NO | YES -- 55 files modified, 1001+/346- diff |
+
+  | N04 codex | examples_and_community | 40120 | CRASHED ~6min | YES (TBDs) | YES -- 5 deliverables created |
+
+  | N05 codex | cross_platform + test_split | 27004 | CRASHED ~6min | NO | PARTIAL -- 8 bash boots created, no manifest, no
+  platform doc |
+
+
+  > Pattern: Codex consistently produces work but skips self-reports + signals.
+
+  > Per memory `feedback_multiruntime_verification.md`: never trust codex signal,
+
+  > always verify deliverables on disk.'
+wave_2_n07_verification_claude_opus_reviews: 'Output: `_reports/audit/codex_review.md`
+
+
+  | Nucleus | Score | Pass/Total | Status |
+
+  |---------|-------|------------|--------|
+
+  | N01 | 0.0/10 | 0/3 | FAIL -- no deliverable, no work |
+
+  | N03 | 2.5/10 | 1/4 | FAIL on report; work itself OK (audit re-run passed) |
+
+  | N04 | 10.0/10 | 9/9 | PASS |
+
+  | N05 | 6.92/10 | 9/13 | PARTIAL -- bash boots OK, manifest+report missing |'
+doc_alignment_findings_n07_manual_since_codex_n01_produced_nothing: '| Severity | Count | Examples |
+
+  |----------|-------|----------|
+
+  | Outdated counts | 4 | CLAUDE.md "262 builders" + "125 sub-agents"; README.md "262 builders" x2 |
+
+  | Dead refs | unknown | not audited (N01 was supposed to find these) |
+
+  | Wrong kind mapping | unknown | not audited |
+
+
+  Recommendation: dispatch a solo claude N04 task to deep-scan all 10,568 files
+
+  for stale references. Codex is unreliable for this kind of long-context work.'
+audit_re_runs_after_vs_before: '| Audit | Before | After | Delta |
+
+  |-------|--------|-------|-------|
+
+  | `audit_security_brand.py` | 132 brand hits | 184 findings (49 HIGH brand_cex_user + 2 generic_secret + 66 email + 53 localhost)
+  | Mixed -- N03''s 55 file edits did NOT cleanly drop the count because the audit picks up new patterns |
+
+  | `audit_cross_platform.py` | 57 ps1 / 0 sh | 40 findings; 8 bash boots present | Improved -- core boots covered; specialty
+  scripts (`litellm.ps1`, `vllm*`, `atlas_*`) still ps1-only |
+
+  | `audit_docs_ux.py` | examples/ empty | examples/ has 3 files | Fully fixed |'
+what_codex_did_right: "- N03 brand decoupling: aggressive find-replace on 55 files, replaced\n  `gatoaocubo3.com` with `{{BRAND_EMAIL}}`\
+  \ and `Gato3` placeholders.\n- N04 examples + community: complete and correct. 3 runnable examples with\n  real commands\
+  \ + expected outputs. SECURITY + COC are template-quality\n  with placeholder emails (no real address leaked).\n- N05 bash\
+  \ boots: all 8 cross-platform boot wrappers created (`cex.sh` + `n0[1-7].sh`)."
+what_codex_did_wrong_rejected_by_n07: "- All 4 nuclei: failed to write their `_done.md` self-reports despite\n  having work\
+  \ to report. This is a systemic codex behavior, not a one-off.\n- N01: no work at all -- silent crash before producing anything.\n\
+  - N04: report contains \"TBD\" placeholders for line counts (didn't fill\n  in the metrics it claimed to verify).\n- N05:\
+  \ stopped at bash boots; never created `tests/MANIFEST.yaml` or\n  `_docs/PLATFORM_SUPPORT.md`; B5 (test tier split) untouched."
+final_verdict: "PARTIAL_READY. Was 5 blockers, now ~1.5 remaining hard blockers:\n\n- Cleanly fixed (2): B3 examples, B4 community\
+  \ files\n- Partially fixed (2): B1 bash (core boots done, 35 specialty ps1 remain)\n  and B2 brand (55 files cleaned, but\
+  \ `C:\\Users\\CEX` paths still in many files)\n- Not started (1): B5 test tier split"
+next_recommended_actions_priority_order: "1. Fix the 4 doc drift items in CLAUDE.md + README.md (262->260, 125->259).\n  \
+  \ Mechanical, ~5 min, dispatch solo claude N04.\n2. Finish B2 brand decoupling: replace remaining 49 `C:\\Users\\CEX`\n\
+  \   hardcoded paths with `Path.home()` / `{{USER_HOME}}`. Solo claude N03.\n3. Finish B5 test tier split: create `tests/MANIFEST.yaml`\
+  \ with\n   `core` / `integration` / `optional` tiers; update CI to run `core` only.\n   Solo claude N05.\n4. (Optional)\
+  \ B1 cleanup: add bash equivalents for `_litellm.ps1` family\n   if Linux/macOS support is needed for litellm proxy. Lower\
+  \ priority -- those\n   scripts are dev-internal.\n5. Re-run `python _tools/audit_release.py` to confirm verdict moves to\
+  \ READY."
+consolidation_pass: ''

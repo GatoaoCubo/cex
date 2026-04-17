@@ -19,6 +19,7 @@ tags:
 - runtime
 tldr: 'STRIDE threat model for CEX multi-nucleus AI system: artifact repo, brand config, API keys, runtime state, git history,
   LLM context windows.'
+density_score: 1.0
 1_scope: 'System: CEX N01-N07 multi-nucleus AI runtime (N05 ops focus). In scope: artifact repo, brand_config.yaml, API credentials,
   .cex/runtime/, git history, LLM context windows. Out of scope: cloud provider infra, LLM provider internals, end-user browsers.
   Framework: STRIDE + MITRE ATT&CK + MITRE ATLAS.'

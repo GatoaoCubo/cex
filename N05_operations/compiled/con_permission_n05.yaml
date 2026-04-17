@@ -11,6 +11,7 @@ tags:
 - operations
 - access
 - governance
+density_score: 1.0
 purpose: '| Field | Value |
 
   |---|---|
@@ -28,8 +29,8 @@ values: '| Subject | Resources | Allowed Actions | Denied Actions | Reason |
 
   |---|---|---|---|---|
 
-  | release_manager_n05 | `N05_operations/P09_config/`, `N05_operations/P06_schema/`, `.cex_signals/*` | read, write, approve | delete
-  on source roots | Can author and signal, but not destructively rewrite history. |
+  | release_manager_n05 | `N05_operations/P09_config/`, `N05_operations/P06_schema/`, `.cex_signals/*` | read, write, approve
+  | delete on source roots | Can author and signal, but not destructively rewrite history. |
 
   | qa_reviewer_n05 | `N05_operations/`, `_reports/` | read, comment, approve | deploy, delete | Reviews quality without mutating
   runtime state. |
@@ -76,9 +77,10 @@ rationale: '| Design Choice | Why It Exists | Gating Wrath Effect |
 example: "| Scenario | Decision |\n|---|---|\n| `qa_reviewer_n05` tries to trigger deploy | denied |\n| `deployer_n05` writes\
   \ compiled artifacts after approval | allowed |\n| `automation_worker_n05` attempts to edit unrelated config file | denied\
   \ |\n| `incident_commander_n05` triggers rollback path | allowed |\n\nscope: n05_operations\ndefault_effect: deny\nsubjects:\n\
-  \  release_manager_n05:\n    allow: [read, write, approve]\n    resources:\n      - N05_operations/P09_config/*\n      - N05_operations/P06_schema/*\n\
-  \      - .cex_signals/*\n    deny: [delete]\n  deployer_n05:\n    allow: [read, execute, write]\n    resources:\n      -\
-  \ compiled/*\n      - .cex_signals/*\n      - deploy_endpoint/*\n    deny:\n      - delete\n      - permission_override"
+  \  release_manager_n05:\n    allow: [read, write, approve]\n    resources:\n      - N05_operations/P09_config/*\n      -\
+  \ N05_operations/P06_schema/*\n      - .cex_signals/*\n    deny: [delete]\n  deployer_n05:\n    allow: [read, execute, write]\n\
+  \    resources:\n      - compiled/*\n      - .cex_signals/*\n      - deploy_endpoint/*\n    deny:\n      - delete\n    \
+  \  - permission_override"
 properties: '| Property | Value |
 
   |---|---|

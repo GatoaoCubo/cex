@@ -13,6 +13,7 @@ tags:
 - pgvector
 - retrieval
 - evidence
+density_score: 0.97
 intent: 'N05 needs a vector backend that fits operational reality:
 
 

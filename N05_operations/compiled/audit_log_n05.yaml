@@ -17,6 +17,7 @@ tags:
 - compliance
 - dispatch
 tldr: Immutable JSONL audit log for N05 -- 8 event types, 30-day retention, SOC2 CC6.1/CC7.1/CC11.2.
+density_score: 1.0
 event_catalog: '| event_type     | actor        | resource             | action           |
 
   |----------------|--------------|----------------------|------------------|

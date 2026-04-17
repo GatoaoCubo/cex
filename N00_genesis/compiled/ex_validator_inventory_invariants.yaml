@@ -16,6 +16,7 @@ tags:
 - validator
 - inventory
 - invariants
+density_score: 0.94
 purpose: Declarative rule set that the reconcile workflow runs before any write. Each rule checks a cross-channel or intra-row
   inventory invariant; a failure either downgrades the mode (auto -> propose) or aborts the run. These rules are what keep
   a bad sync from writing garbage into the ERP.

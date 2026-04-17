@@ -1,0 +1,104 @@
+id: ex_input_schema_partner_registration
+kind: input_schema
+pillar: P06
+version: 1.0.0
+title: Input Schema -- B2B Partner Registration Form
+description: Validation schema for B2B partner registration. CNPJ validation, field constraints, error messages, and multi-step
+  form flow spec.
+domain: crm
+nucleus: N06
+quality: null
+tags:
+- input-schema
+- partner-registration
+- b2b
+- cnpj
+- validation
+- form
+brand_placeholders:
+- BRAND_NAME
+- BRAND_PARTNER_EMAIL
+- BRAND_DOMAIN
+density_score: 1.0
+1_form_steps: "Step 1: Company Info   ->   Step 2: Contact Info   ->   Step 3: Confirm + Submit\n  cnpj, company_name    \
+  \     contact_name, email          Review + LGPD consent\n  state, region              whatsapp, role               [Submit\
+  \ for review]\n\n---"
+2_field_definitions: ''
+step_1_company_info: '| Field | Type | Required | Rules | Error message |
+
+  |-------|------|----------|-------|---------------|
+
+  | cnpj | string | YES | 14 digits, format XX.XXX.XXX/XXXX-XX, valid via ReceitaWS | "CNPJ invalido ou nao encontrado na
+  Receita Federal" |
+
+  | company_name | string | YES | 2-200 chars | "Razao social obrigatoria (2-200 caracteres)" |
+
+  | trade_name | string | NO | max 200 chars | -- |
+
+  | state | enum | YES | BR state codes (2 chars) | "Selecione o estado" |
+
+  | city | string | YES | 2-100 chars | "Cidade obrigatoria" |
+
+  | monthly_volume_estimate | enum | YES | "1-20", "21-100", "101-500", "500+" | "Selecione o volume estimado" |'
+step_2_contact_info: '| Field | Type | Required | Rules | Error message |
+
+  |-------|------|----------|-------|---------------|
+
+  | contact_name | string | YES | 2-100 chars | "Nome do contato obrigatorio" |
+
+  | email | email | YES | valid email, unique in system | "Email invalido ou ja cadastrado" |
+
+  | whatsapp | string | YES | E.164 or BR format (+55XXXXXXXXXXX) | "WhatsApp invalido (ex: 11999887766)" |
+
+  | role | string | NO | max 100 chars | -- |
+
+  | how_did_you_hear | enum | NO | instagram, google, indicacao, evento, outro | -- |'
+step_3_confirm: '| Field | Type | Required | Rules |
+
+  |-------|------|----------|-------|
+
+  | lgpd_consent | boolean | YES | must be true | "Aceite os termos para continuar" |
+
+  | marketing_consent | boolean | NO | optional opt-in | -- |
+
+
+  ---'
+3_cnpj_validation_flow: '1. User types CNPJ (client-side format mask)
+
+  2. Client validates format (14 digits, valid check digit)
+
+  3. On blur: POST /api/validate-cnpj?cnpj={value}
+
+  4. Server calls ReceitaWS API
+
+  5. If valid: auto-fill company_name, state (if available)
+
+  6. If invalid: show error + block form progression
+
+  7. If API down: allow submission, flag for manual review'
+cnpj_validation_endpoint_contract: "// POST /api/validate-cnpj\n// Request\n{ cnpj: string }\n\n// Response (success)\n{\n\
+  \  valid: true,\n  cnpj: \"12.345.678/0001-90\",\n  company_name: \"EMPRESA MODELO LTDA\",\n  status: \"ATIVA\",\n  state:\
+  \ \"SP\"\n}\n\n// Response (invalid)\n{ valid: false, error: \"CNPJ nao encontrado\" }\n\n---"
+4_server_side_validation_edge_function: "import { z } from 'zod'\n\nconst partnerRegistrationSchema = z.object({\n  cnpj:\
+  \ z.string().regex(/^\\d{14}$/, \"CNPJ deve ter 14 digitos\"),\n  company_name: z.string().min(2).max(200),\n  trade_name:\
+  \ z.string().max(200).optional(),\n  state: z.string().length(2),\n  city: z.string().min(2).max(100),\n  monthly_volume_estimate:\
+  \ z.enum([\"1-20\", \"21-100\", \"101-500\", \"500+\"]),\n  contact_name: z.string().min(2).max(100),\n  email: z.string().email(),\n\
+  \  whatsapp: z.string().regex(/^(\\+55)?\\d{10,11}$/),\n  role: z.string().max(100).optional(),\n  how_did_you_hear: z.enum([\"\
+  instagram\",\"google\",\"indicacao\",\"evento\",\"outro\"]).optional(),\n  lgpd_consent: z.literal(true, { errorMap: ()\
+  \ => ({ message: \"Consentimento obrigatorio\" }) }),\n  marketing_consent: z.boolean().optional()\n})\n\ntype PartnerRegistration\
+  \ = z.infer<typeof partnerRegistrationSchema>\n\n---"
+5_post_submission_flow: "Submit\n  |\n  v\nServer validates schema\n  |-- FAIL -> 422 with field errors\n  |\n  v\nCNPJ uniqueness\
+  \ check (DB)\n  |-- DUPLICATE -> 409 \"CNPJ ja cadastrado. Contato: {{BRAND_PARTNER_EMAIL}}\"\n  |\n  v\nInsert partner\
+  \ record (status=pending)\n  |\n  v\nSend confirmation email to partner\nSend notification to admin\n  |\n  v\n200 -> /b2b/cadastro/confirmacao\n\
+  \n---"
+6_error_code_map: '| Code | Scenario | User message |
+
+  |------|----------|-------------|
+
+  | 422 | Validation failed | Show field errors |
+
+  | 409 | CNPJ already registered | "CNPJ ja cadastrado. Contato: {{BRAND_PARTNER_EMAIL}}" |
+
+  | 503 | ReceitaWS API down | "Validacao automatica indisponivel. Enviaremos confirmacao manual em 24h." |
+
+  | 500 | DB error | "Erro interno. Tente novamente ou contate {{BRAND_PARTNER_EMAIL}}" |'

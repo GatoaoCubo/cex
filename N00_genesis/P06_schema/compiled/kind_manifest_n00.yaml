@@ -12,6 +12,7 @@ tags:
 - n00
 - archetype
 - template
+density_score: 1.0
 purpose: Validator defines a reusable validation rule that can be referenced by multiple validation schemas or quality gates.
   Each validator encapsulates a single testable assertion (e.g., "frontmatter has required fields", "quality is null or in
   range 0-10") with pass/fail semantics, severity level, and an error message template. Validators compose into validation

@@ -12,6 +12,7 @@ tags:
 - n00
 - archetype
 - template
+density_score: 1.0
 purpose: 'A supervisor is a crew orchestrator that composes and coordinates multiple builders within a single crew. Unlike
   N07 which orchestrates across nuclei at the mission level, a supervisor operates within a single crew instance: it sequences
   roles, passes handoff artifacts between them, enforces the charter quality gate, and escalates failures. It is the inner-crew

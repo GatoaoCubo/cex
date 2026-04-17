@@ -13,6 +13,7 @@ tags:
 - memory
 - release_gate
 - retrieval
+density_score: 0.98
 intent: This entity memory stores the current operational facts about the N05 retrieval and gating surface as a named project
   entity. It is not an event log. It is the current state snapshot that future sessions need in order to reason consistently
   about release gates, incident lookup, and retrieval infrastructure.

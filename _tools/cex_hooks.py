@@ -584,6 +584,8 @@ ROOT_WHITELIST = {
     "requirements.txt", "requirements-llm.txt", "pyproject.toml",
     "setup.py", "setup.cfg", "Makefile", "package.json", "package-lock.json",
     "tsconfig.json", ".mcp.json",
+    "n01_task.md", "n02_task.md", "n03_task.md", "n04_task.md",
+    "n05_task.md", "n06_task.md", "n07_task.md",
 }
 
 

@@ -1,0 +1,187 @@
+id: p01_vdb_faiss
+kind: vector_store
+pillar: P01
+nucleus: n07
+version: 1.0.0
+created: '2026-04-17'
+updated: '2026-04-17'
+author: vector-store-builder
+backend: faiss
+connection:
+  host: localhost
+  port: null
+  api_key_env: null
+  tls: false
+  database: null
+collection: n07_orchestration
+dimensions: 1536
+distance_metric: cosine
+index_type: ivf
+hnsw:
+  M: null
+  ef_construction: null
+  ef_search: null
+ivf:
+  nlist: 64
+  nprobe: 8
+  quantizer: flat
+max_vectors: 10000
+metadata_filtering: true
+metadata_schema:
+  nucleus: string
+  mission: string
+  wave: integer
+  timestamp: string
+  kind: string
+  quality_score: float
+persistence: manual
+namespace_strategy: 'Four separate FAISS index files, one per N07 document type:
+
+
+  | Collection | Index File | Document Types Included |
+
+  |-----------|-----------|------------------------|
+
+  | n07_handoffs | .cex/vectorstore/n07/handoffs.index | handoff .md files in .cex/runtime/handoffs/ |
+
+  | n07_signals | .cex/vectorstore/n07/signals.index | signal JSON files in .cex/runtime/signals/ |
+
+  | n07_plans | .cex/vectorstore/n07/plans.index | mission plan .md files in .cex/runtime/plans/ |
+
+  | n07_decisions | .cex/vectorstore/n07/decisions.index | decision_manifest.yaml and decision records |
+
+
+  Rules:
+
+  - One index per document type -- cross-type queries use metadata sidecar filtering
+
+  - Metadata sidecar (SQLite) maps vector ID -> {nucleus, mission, wave, timestamp, kind, quality_score}
+
+  - Never store raw document text in FAISS -- use sidecar or separate document store'
+cloud_region: null
+pricing: null
+domain: vector_storage
+quality: null
+tags:
+- vector-store
+- faiss
+- ivf
+- local
+- n07
+- orchestration
+tldr: FAISS IVFFlat -- local, 4 indexes by doc type, 1536d cosine, manual persist to .cex/vectorstore/n07/
+keywords:
+- faiss
+- vectordb
+- ivf
+- local
+- orchestration
+- n07
+linked_artifacts:
+  primary: null
+  related:
+  - p01_emb_openai_text_embedding_3_small
+data_source: https://github.com/facebookresearch/faiss/wiki
+boundary: 'vector_store IS: FAISS IVFFlat index configuration for N07 orchestration corpus (handoffs, signals, mission plans,
+  decision manifests). Storage and indexing layer only. vector_store IS NOT: embedder_provider (no model config), retriever
+  (no query pipeline), agent (no identity), model_provider (no LLM routing).'
+backend_matrix: '| Parameter | Value | Source |
+
+  |-----------|-------|--------|
+
+  | Backend | faiss 1.8.x | https://github.com/facebookresearch/faiss |
+
+  | Index Type | IndexIVFFlat (IVFFlat) | https://github.com/facebookresearch/faiss/wiki/Faiss-indexes |
+
+  | Host | in-process (no server) | https://github.com/facebookresearch/faiss/wiki |
+
+  | Auth | none (local file) | https://github.com/facebookresearch/faiss/wiki |
+
+  | Dimensions | 1536 (text-embedding-3-small) | Upstream: p01_emb_openai_text_embedding_3_small |
+
+  | Distance Metric | cosine (L2-normalized embeddings) | https://github.com/facebookresearch/faiss/wiki/MetricType |
+
+  | Max Vectors | 10000 per index | Corpus estimate: 2K-5K docs per type |
+
+  | Persistence | manual (index.write_index / read_index) | https://github.com/facebookresearch/faiss/wiki/Index-IO |
+
+  | Metadata Filtering | external (SQLite sidecar, .cex/vectorstore/n07/meta.db) | https://github.com/facebookresearch/faiss/wiki
+  |'
+index_configuration: 'FAISS IVFFlat uses an inverted file structure: nlist centroids partition the space,
+
+  nprobe centroids are searched at query time. No HNSW parameters apply.
+
+
+  | Parameter | Value | Effect |
+
+  |-----------|-------|--------|
+
+  | nlist | 64 | Voronoi cells. sqrt(5000) rule. More cells = faster search, less recall |
+
+  | nprobe | 8 | Cells searched per query. 8/64 = 12.5%. Recall ~95% at this ratio |
+
+  | quantizer | IndexFlatL2 | Exact centroid search. Required for IVFFlat (no PQ compression) |
+
+  | train_size | >= 64  39 = 2496 | IVFFlat requires >= 39  nlist vectors to train. Must pre-train |
+
+
+  Scale guidance:
+
+  - < 1K vectors per index: use IndexFlatIP (brute-force, exact, no training required)
+
+  - 1K-10K vectors: IVFFlat with nlist=64, nprobe=8 (this config)
+
+  - > 10K vectors: IVFPQx8 for compressed storage, or migrate to Qdrant
+
+
+  Dimensions fallback: If embedder is local (768d, e.g. all-MiniLM-L6-v2), rebuild
+
+  indexes with dimensions=768. Never mix dimension configs within one index file.'
+lifecycle_operations: "1. Train + Create: Load >= 2496 vectors, call `index.train(vectors)`, then `index.add(vectors)`.\n\
+  \   Use `faiss.IndexFlatL2` as quantizer, wrap with `faiss.IndexIVFFlat(quantizer, 1536, 64)`.\n\n2. Incremental update:\
+  \ IVFFlat does not support delete. Append-only: call `index.add(new_vectors)`\n   after each new document batch. Sidecar\
+  \ SQLite is append-compatible.\n\n3. Reindex (full rebuild): Triggered by (a) embedder model change, (b) nlist tuning,\n\
+  \   (c) corpus growth past 10K. Re-embed all docs, re-train, re-add, save, replace files.\n\n4. Backup: Copy `.cex/vectorstore/n07/*.index`\
+  \ + `meta.db` to `.cex/vectorstore/n07/backup/YYYYMMDD/`.\n\n5. Restore: Replace `.cex/vectorstore/n07/` contents from backup\
+  \ directory, reload index\n   via `faiss.read_index(path)` at next process start.\n\n6. Persistence at write time: Call\
+  \ `faiss.write_index(index, path)` after every add batch.\n   FAISS is in-memory -- any omitted write loses all appended\
+  \ vectors on process exit."
+anti_patterns: "1. Omitting `faiss.write_index()` after upsert -- FAISS is purely in-memory; all new vectors\n   lost on process\
+  \ restart. Must persist explicitly after every batch add.\n\n2. Querying before training -- IndexIVFFlat raises `AssertionError:\
+  \ Index not trained`.\n   Train with >= nlist * 39 representative vectors before the first add().\n\n3. Setting nprobe =\
+  \ nlist (nprobe=64) -- degrades to brute-force, eliminates IVF speed benefit.\n   Target nprobe = 10-15% of nlist for the\
+  \ recall/speed tradeoff.\n\n4. Mixing 1536-dim and 768-dim vectors in the same index file -- FAISS silently accepts mismatched\n\
+  \   dimensions if quantizer was created with wrong d; similarity scores become garbage.\n\n5. Storing all N07 doc types\
+  \ in one index -- cross-type noise contaminates results. Use one index\n   per document type with metadata sidecar for cross-type\
+  \ joins."
+references:
+- 'FAISS wiki: https://github.com/facebookresearch/faiss/wiki'
+- 'FAISS index types: https://github.com/facebookresearch/faiss/wiki/Faiss-indexes'
+- 'Index I/O: https://github.com/facebookresearch/faiss/wiki/Index-IO,-cloning-and-hyper-parameter-tuning'
+- 'IVF guidelines: https://github.com/facebookresearch/faiss/wiki/Guidelines-to-choose-an-index'
+- 'MetricType: https://github.com/facebookresearch/faiss/wiki/MetricType'
+properties: '| Property | Value |
+
+  |----------|-------|
+
+  | Kind | `vector_store` |
+
+  | Pillar | P01 |
+
+  | Nucleus | N07 |
+
+  | Backend | FAISS IVFFlat |
+
+  | Domain | vector_storage |
+
+  | Pipeline | 8F (F1-F8) |
+
+  | Scorer | cex_score.py |
+
+  | Compiler | cex_compile.py |
+
+  | Retriever | cex_retriever.py |
+
+  | Quality target | 9.0+ |
+
+  | Density target | 0.85+ |'

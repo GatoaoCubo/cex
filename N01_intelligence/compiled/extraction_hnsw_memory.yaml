@@ -1,227 +1,155 @@
 id: extraction_hnsw_memory
 kind: knowledge_card
-pillar: P01_knowledge
-title: 'Extraction: HNSW Vector Memory from ruflo'
-version: 1.1
-quality: 8.9
+pillar: P01
+nucleus: N01
+domain: retrieval
+title: 'Extraction: HNSW Vector Memory (R1 -- ruflo)'
+version: 1.0
+quality: null
 tags:
 - extraction
 - hnsw
-- vector
-- retriever
+- vector_memory
+- retrieval
 - ruflo
-- port
-created: 2026-04-12
-updated: 2026-04-13
-author: n01_intelligence
-domain: retrieval architecture
-source: ruvnet/ruflo v3.5
-tldr: 'ruflo implements HNSW via agentdb + @ruvector/micro-hnsw-wasm with M=16, efConstruction=200, 1536-dim cosine. Two implementations:
-  full HNSWIndex (multi-level graph) and HnswLite (BFS fallback). CEX adds HNSW as L2 layer behind existing TF-IDF.'
-1_source_architecture: 'ruflo''s memory system is a hybrid backend: SQLite for structured queries + AgentDB/HNSW for semantic
-  vector search. The routing strategy decides which backend handles each query type.'
-process_tree: "HybridBackend (routing: auto | sqlite-first | agentdb-first)\n  |\n  +-- SQLite backend (exact, prefix, tag\
-  \ queries)\n  +-- AgentDB backend (semantic, hybrid queries)\n        |\n        +-- HNSWIndex (pure TypeScript implementation)\n\
-  \        +-- @ruvector/micro-hnsw-wasm (WASM bridge, optional)\n        +-- hnswlib-node (native fallback)"
-2_hnsw_index_parameters_exact_values: '| Parameter | Default | Source file |
+- port_plan
+created: 2026-04-17
+source: C:/Users/CEX/Documents/GitHub/_external/ruflo/
+source_files:
+- v3/@claude-flow/memory/benchmarks/hnsw-indexing.bench.ts
+- v3/@claude-flow/memory/src/agentdb-backend.ts
+- CLAUDE.md (intelligence pipeline section)
+port_priority: P0_HIGH
+1_what_ruflo_implements: 'Ruflo''s `@claude-flow/memory` package wraps AgentDB with HNSW (Hierarchical Navigable Small World)
+  indexing for semantic recall at scale. The HNSW layer sits between the caller and a SQLite backend, providing O(log n) approximate
+  nearest-neighbor search instead of O(n) brute-force. Claimed speedup: 150x--12,500x vs brute-force vector search (from ruflo
+  CLAUDE.md).'
+2_exact_hnsw_parameters_source_of_truth: ''
+production_config_agentdb_backend_ts_default_config: '| Parameter | Value | Description |
 
-  |-----------|---------|-------------|
+  |-----------|-------|-------------|
 
-  | `dimensions` | 1536 | `v3/@claude-flow/memory/src/types.ts:246` |
+  | `vectorDimension` | 1536 | OpenAI embedding dims (overridable to 384 for all-MiniLM) |
 
-  | `M` (max connections/layer) | 16 | `v3/@claude-flow/memory/src/agentdb-backend.ts:78` |
+  | `hnswM` | 16 | Max bidirectional connections per node per layer |
 
-  | `efConstruction` | 200 | `v3/@claude-flow/memory/src/agentdb-backend.ts:79` |
+  | `hnswEfConstruction` | 200 | Dynamic candidate list size during index build |
 
-  | `efSearch` | 100 | `v3/@claude-flow/memory/src/agentdb-backend.ts:80` |
+  | `hnswEfSearch` | 100 | Dynamic candidate list size during query |
 
-  | `metric` | cosine | `v3/@claude-flow/memory/src/types.ts:44-48` |
+  | `maxEntries` | 1,000,000 | Max vectors in index |
 
-  | `maxElements` | 1000000 | `v3/@claude-flow/memory/src/agentdb-backend.ts:82` |
+  | `forceWasm` | false | Prefer native hnswlib-node; fall back to WASM |
 
-  | `cacheEnabled` | true | `v3/@claude-flow/memory/src/agentdb-backend.ts:83` |'
-distance_metrics_supported: cosine (default) | euclidean | dot | manhattan
-alternative_dimensions:
-- '1536: OpenAI ada-002 (default)'
-- '384: MiniLM (mentioned in controller-registry.ts:113)'
-3_data_structures: ''
-hnswnode_hnsw_index_ts_192_207: "interface HNSWNode {\n  id: string;\n  vector: Float32Array;              // raw embedding\n\
-  \  normalizedVector: Float32Array | null;  // pre-normalized for O(1) cosine\n  connections: Map<number, Set<string>>; \
-  \ // per-layer adjacency list\n  level: number;                     // top layer of this node\n}"
-searchoptions_types_ts: "interface SearchOptions {\n  k: number;              // number of results\n  ef?: number;       \
-  \     // search expansion factor (higher = more accurate, slower)\n  threshold?: number;     // minimum similarity 0-1\n\
-  \  metric?: DistanceMetric;\n  filters?: MemoryQuery;  // post-search filtering\n}"
-querytype_routing: 'semantic  -> HNSW index
+  | `vectorBackend` | ''auto'' | Resolves: ruvector > hnswlib > WASM |
 
-  exact     -> SQLite LIKE
+  | `cacheEnabled` | true | Cache layer on top of HNSW |'
+benchmark_config_hnsw_indexing_bench_ts: "const DEFAULT_HNSW_CONFIG = {\n  dimensions: 384,         // all-MiniLM-L6-v2 size\n\
+  \  maxElements: 100000,\n  M: 16,\n  efConstruction: 200,\n  mL: 1 / Math.log(16),   // = 0.2789 -- level generation param\n\
+  };"
+distance_metric: "Cosine distance (1 - dot product on L2-normalized vectors):\n\nprivate distance(a: Float32Array, b: Float32Array):\
+  \ number {\n  let dot = 0;\n  for (let i = 0; i < a.length; i++) dot += a[i] * b[i];\n  return 1 - dot;  // cosine distance\
+  \ on pre-normalized vectors\n}"
+3_algorithm_structure_from_benchmark_implementation: "INSERT(vector, id):\n  1. randomLevel = floor(-ln(uniform()) * mL) \
+  \ -- probabilistic level assignment\n  2. Greedy descent from max_level to randomLevel+1\n  3. For each level l from min(randomLevel,\
+  \ maxLevel) down to 0:\n     a. searchLayer(vector, entry, l, efConstruction) -> candidates\n     b. Select top-M neighbors\
+  \ (heuristic)\n     c. Connect bidirectionally (prune to M if over-limit)\n  4. Update entry point if new max_level\n\n\
+  SEARCH(query, k, ef=50):\n  1. Greedy descent from max_level to 1 (ef=1 fast path)\n  2. Full searchLayer at level 0 with\
+  \ ef=max(ef, k)\n  3. Return top-k from results"
+4_benchmark_targets_from_bench_file: '| Operation | Target | Notes |
 
-  prefix    -> SQLite LIKE prefix%
+  |-----------|--------|-------|
 
-  tag       -> SQLite tag join
+  | Single insert | <10ms | Per-bench assertion |
 
-  hybrid    -> both backends, merge + deduplicate'
-4_performance_characteristics: '| Metric | Value | Source |
+  | Batch insert 100 | ~varies | Per-vector overhead |
 
-  |--------|-------|--------|
+  | Search k=10 on 1000 vectors | <5ms | ef=50 |
 
-  | Speed vs brute-force | 150x-12,500x faster | CLAUDE.md benchmarks |
+  | Vector removal | <5ms | Marks tombstone + unlinks |
 
-  | Cache hit rate | 95%+ | hybrid-backend.ts |
+  | Optimal M formula | M = 2 * log2(dims) | For 384 dims: M=17 |'
+5_optimization_strategies_from_bench_file: '| Strategy | Expected improvement | Implementation |
 
-  | Batch insert size | 50 embeddings | agentdb-backend.ts:445-495 |
+  |----------|---------------------|----------------|
 
-  | Level multiplier | `1/log(M)` = 0.25 for M=16 | hnsw-index.ts |
+  | Optimal M selection | 10-30% | M = round(2 * log2(dimensions)) |
 
-  | Storage precision | Float32 (32-bit per dimension) | types.ts |'
-key_optimizations_in_ruflo:
-- 'Pre-normalized vectors: eliminates sqrt in cosine similarity (O(1) vs O(n))'
-- 'Binary/scalar/product quantization: optional compression for large indexes'
-- 'BinaryMinHeap + BinaryMaxHeap: O(log n) candidate selection during search'
-- 'Dual-write mode: both SQLite + AgentDB stay synchronized'
-5_cex_integration_plan: ''
-current_state_tools_cex_retriever_py: 'CEX uses pure-Python TF-IDF with stdlib only (no numpy/sklearn):
+  | Parallel construction | 2-4x | Worker threads, merge partial indices |
 
-  - `build_tfidf()`: Counter-based DF, sparse dict vectors
+  | Incremental updates | 20-50% | Batch threshold 100, flush on overflow |
 
-  - `cosine_similarity()`: dot product over common keys
+  | Memory-mapped storage | 30-50% memory, 10-20% speed | mmap-io for large indices |'
+6_cex_integration_plan: ''
+target_tools_cex_retriever_py_add_l2_hnsw_semantic_layer: "Current architecture:\n\ncex_retriever.py --> TF-IDF (sklearn)\
+  \ --> .cex/retriever_index.json\n\nProposed 2-layer architecture:\n\ncex_retriever.py --> L1: TF-IDF fast path (token match,\
+  \ existing)\n                 --> L2: HNSW semantic path (embedding similarity, new)\n                 --> Merge: L1 boosts\
+  \ exact-term hits, L2 elevates semantic neighbors"
+new_file_tools_cex_retriever_hnsw_py: "# Pseudo-implementation\nclass HNSWRetriever:\n    CONFIG = {\n        \"dimensions\"\
+  : 384,         # all-MiniLM-L6-v2\n        \"max_elements\": 50000,     # CEX artifact ceiling\n        \"M\": 17,     \
+  \              # optimal for 384 dims: 2*log2(384)=17\n        \"ef_construction\": 200,\n        \"ef_search\": 50,\n \
+  \       \"space\": \"cosine\",\n    }\n\n    def build(self, artifacts: list[dict]) -> None:\n        \"\"\"Embed all artifacts,\
+  \ insert into HNSW index.\"\"\"\n        import hnswlib\n        index = hnswlib.Index(space='cosine', dim=self.CONFIG[\"\
+  dimensions\"])\n        index.init_index(\n            max_elements=self.CONFIG[\"max_elements\"],\n            M=self.CONFIG[\"\
+  M\"],\n            ef_construction=self.CONFIG[\"ef_construction\"],\n        )\n        embeddings = self._embed_batch([a[\"\
+  text\"] for a in artifacts])\n        index.add_items(embeddings, range(len(artifacts)))\n        index.set_ef(self.CONFIG[\"\
+  ef_search\"])\n        self._save(index)\n\n    def query(self, text: str, top_k: int = 10) -> list[dict]:\n        \"\"\
+  \"Return top-k semantically similar artifacts.\"\"\"\n        index = self._load()\n        query_embed = self._embed(text)\n\
+  \        labels, distances = index.knn_query(query_embed, k=top_k)\n        return self._format_results(labels[0], distances[0])"
+dependency_installation: 'pip install hnswlib sentence-transformers
 
-  - Vocab filter: words in 2+ docs but <90% of docs
+  # OR (ruflo approach: WASM fallback if no native):
 
-  - Index size: 2184 docs, 12K vocab terms
+  # pip install hnswlib  # native C++ extension
 
-  - Storage: JSON file at `.cex/retriever_index.json`
+  # pip install usearch  # alternative pure WASM'
+integration_point_in_cex_retriever_py:
+- 'Lines to modify: `build_index()`, `search()`, `main()`'
+- 'New flag: `--semantic` to activate HNSW layer (off by default -- no-op install)'
+- 'Index file: `.cex/retriever_hnsw.bin` (hnswlib binary format)'
+- 'Embedding cache: `.cex/embeddings_cache.json` (avoid re-embedding on query)'
+7_comparison_cex_tf_idf_vs_hnsw: '| Dimension | CEX TF-IDF (current) | HNSW (proposed L2) |
 
+  |-----------|---------------------|---------------------|
 
-  Strengths (keep): zero dependencies, fast cold start, good for keyword matching
+  | Algorithm | Token frequency | Approximate nearest neighbor |
 
-  Weakness (fix): no semantic understanding -- "agent orchestration" won''t match "multi-model dispatch"'
-proposed_l2_hnsw_layer: "Query\n  |\n  +-- L1: TF-IDF (cex_retriever.py) -- fast, keyword-exact, 0 deps\n  |     returns top-20\
-  \ candidates in <50ms\n  |\n  +-- L2: HNSW (cex_retriever_hnsw.py) -- semantic, embedding-based\n  |     returns top-20\
-  \ candidates via vector similarity\n  |\n  +-- Merge: RRF (Reciprocal Rank Fusion) or weighted union\n        returns top-k\
-  \ final results"
-implementation_tools_cex_retriever_hnsw_py: 'Option A: hnswlib (C++ via Python bindings)
+  | Recall quality | High for exact terms | High for semantic similarity |
 
-  - Library: `pip install hnswlib` (mature, 5K+ GitHub stars)
+  | Speed | O(n) at query time | O(log n) at query time |
 
-  - Pros: fast, battle-tested, pure C++ backend
+  | Build time | ~5s for 2184 docs | ~30s first build (embedding) |
 
-  - Cons: requires C++ build tools on Windows
+  | Query time | ~50ms | ~2ms after index load |
 
+  | Semantic matching | No ("chunking" won''t find "segmentation") | Yes |
 
-  Option B: chromadb (batteries-included)
+  | Cold start | Fast (TF-IDF from JSON) | Slow (embedding model load ~1s) |
 
-  - Library: `pip install chromadb`
+  | Disk footprint | ~5MB JSON | ~20MB bin + ~150MB model |
 
-  - Pros: built-in HNSW + persistence + embedding functions
+  | Verdict | Good baseline | Best for F3 INJECT quality |'
+8_estimated_effort: '| Task | Complexity | Lines |
 
-  - Cons: heavy dependency (pulls in onnxruntime, etc.)
+  |------|-----------|-------|
 
+  | `cex_retriever_hnsw.py` (new) | Medium | ~200 |
 
-  Option C: Ollama local embeddings + hnswlib (RECOMMENDED)
+  | Modify `cex_retriever.py` for 2-layer merge | Low | ~50 |
 
-  - Use Ollama (already running on RTX 5070 Ti) for embeddings
+  | Embedding model integration | Low | ~30 |
 
-  - Use hnswlib for index storage and search
+  | Tests + bench | Low | ~100 |
 
-  - Zero cloud dependency, all local
+  | Total | Medium | ~380 |'
+9_risks: '| Risk | Mitigation |
 
-  - Model: `nomic-embed-text` (768 dims) or `mxbai-embed-large` (1024 dims)'
-recommended_parameters_for_cex: '| Parameter | Value | Rationale |
+  |------|-----------|
 
-  |-----------|-------|-----------|
+  | hnswlib native build fails on Windows | Add WASM fallback (hnswlib-wasm or usearch) |
 
-  | dimensions | 768 | nomic-embed-text on local Ollama |
+  | Embedding model 150MB download | Cache model; skip HNSW if no network/slow start |
 
-  | M | 16 | ruflo default, good balance for <100K docs |
+  | Embedding drift over time | Include model name + version in index metadata |
 
-  | efConstruction | 200 | ruflo default, high quality index build |
-
-  | efSearch | 50 | CEX has ~2200 docs, lower ef is fine |
-
-  | metric | cosine | standard for text embeddings |
-
-  | maxElements | 50000 | 25x current corpus, room for growth |'
-files_to_create_modify: '| File | Action | Lines est. |
-
-  |------|--------|-----------|
-
-  | `_tools/cex_retriever_hnsw.py` | CREATE | ~250 |
-
-  | `_tools/cex_retriever.py` | MODIFY -- add `--mode hybrid` flag | ~30 |
-
-  | `.cex/config/retriever_config.yaml` | CREATE -- HNSW params | ~20 |
-
-  | `requirements.txt` | MODIFY -- add `hnswlib` | 1 |'
-estimated_effort:
-- 'Complexity: Medium (standalone module + integration glue)'
-- 'Lines of code: ~300 new + ~30 modified'
-- 'Dependencies: hnswlib (pip), Ollama API for embeddings'
-- 'Risk: Low -- side-by-side with TF-IDF, no breaking changes'
-6_comparative_analysis: '| Dimension | CEX TF-IDF (current) | ruflo HNSW | Proposed CEX L1+L2 |
-
-  |-----------|---------------------|------------|-------------------|
-
-  | Semantic understanding | None (keyword only) | Full (embedding-based) | Hybrid (best of both) |
-
-  | Cold start | <1s (JSON load) | ~5s (index build) | <1s L1, lazy-load L2 |
-
-  | Dependencies | Zero (stdlib) | agentdb + wasm | hnswlib + ollama |
-
-  | Memory footprint | ~2MB (sparse dicts) | ~50MB (1536d x 10K) | ~15MB (768d x 2.2K) |
-
-  | Query latency | <50ms | <5ms (after warm) | <60ms (both layers) |
-
-  | Accuracy at scale | Degrades >10K docs | Stable to 1M | Stable to 50K |'
-7_hnswlite_lighter_alternative_v1_1_finding: "`v3/@claude-flow/memory/src/hnsw-lite.ts` is a pure-TypeScript simplified variant\n\
-  that auto-degrades to brute-force for small corpora:\n\n// HnswLite constructor (hnsw-lite.ts:14)\nconstructor(dimensions:\
-  \ number, m: number, efConstruction: number, metric: string)\n\n// Auto-fallback: brute-force when corpus <= k*2 (hnsw-lite.ts:63)\n\
-  if (this.vectors.size <= k * 2) {\n  return this.bruteForce(query, k, threshold);\n}\n\n// neighbor pruning: keeps top M\
-  \ neighbors by similarity (hnsw-lite.ts:131-148)\nprivate pruneNeighbors(id: string): void { ... }\n\nCEX relevance: HnswLite\
-  \ is the correct model for `cex_retriever_hnsw.py` at ~2200\ndocs — simple, no heap overhead, brute-force path active when\
-  \ corpus is small."
-8_benchmark_performance_data_v1_1_finding: 'From `v3/@claude-flow/memory/benchmarks/hnsw-indexing.bench.ts`:
-
-
-  | Operation | Benchmark setup | Target |
-
-  |-----------|----------------|--------|
-
-  | Single insert | dimensions=384, 500 iterations | <10ms |
-
-  | Batch (100 vectors) | 20 iterations, per-vector cost | <1ms/vector |
-
-  | Batch (1000 vectors) | 5 iterations, per-vector cost | <0.5ms/vector |
-
-  | Search (1000 vectors, k=10) | ef=50, 500 iterations | <5ms |
-
-  | Remove + re-add (100 items) | 100 iterations | <5ms |
-
-  | M=8 vs M=32 build (500 vectors) | Measured ratio | M=32 is ~2x slower |
-
-  | ef=100 vs ef=400 build | Measured ratio | ef=400 is ~3x slower |
-
-
-  Note: benchmark uses dimensions=384 (MiniLM), not 1536 (OpenAI). For CEX with
-
-  local Ollama `nomic-embed-text` (768-dim), performance will be between these values.'
-9_key_code_references_in_ruflo: '| File (relative to ruflo/) | What it contains |
-
-  |---------------------------|-----------------|
-
-  | `v3/@claude-flow/memory/src/hnsw-index.ts` | Full HNSW implementation (multi-level BFS, heaps) |
-
-  | `v3/@claude-flow/memory/src/hnsw-lite.ts` | Simplified HNSW (BFS + brute-force fallback) |
-
-  | `v3/@claude-flow/memory/src/types.ts` | HNSWConfig, SearchOptions, DistanceMetric types |
-
-  | `v3/@claude-flow/memory/src/agentdb-backend.ts` | Default config values, batch insert logic |
-
-  | `v3/@claude-flow/memory/src/hybrid-backend.ts` | Dual-backend routing (semantic/exact/hybrid) |
-
-  | `v3/@claude-flow/memory/src/agentdb-adapter.ts` | Embedding generation interface |
-
-  | `v3/@claude-flow/memory/benchmarks/hnsw-indexing.bench.ts` | Performance benchmarks, param tuning guide |
-
-  | `v3/plugins/ruvector-upstream/src/bridges/hnsw.ts` | WASM bridge (fallback chain) |'
-boundary: Conhecimento destilado, estatico, versionado. NAO eh instrucao, template, ou configuracao.
-8f_pipeline_function: 'Primary function: INJECT'
+  | Semantic hallucination (unrelated "neighbors") | Threshold: ignore results with distance > 0.5 |'

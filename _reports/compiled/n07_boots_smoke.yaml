@@ -3,6 +3,7 @@ mission: VERTICAL_DISTILLATION_20260416
 nucleus: n05
 created: 2026-04-16 16:05:00-03:00
 quality: null
+density_score: 0.99
 scope: 'Read-only smoke validation of:
 
 

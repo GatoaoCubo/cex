@@ -8,11 +8,12 @@ created: "2026-04-17"
 updated: "2026-04-17"
 author: financeiro@gatoaocubo3.com
 domain: "operations, tool-execution, process-management"
-quality: null
+quality: 8.9
 tags: [sandbox_config, n05, operations, isolation, security-boundary]
 tldr: "N05 sandbox: file write scoped to N05+runtime dirs, read-only repo, tool whitelist, localhost-only network, max 5 sub-agents."
 sandbox_type: isolated
 platform: native
+density_score: 1.0
 ---
 
 ## Resource Limits

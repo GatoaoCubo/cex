@@ -12,6 +12,7 @@ tags:
 - n00
 - archetype
 - template
+density_score: 1.0
 purpose: A webhook is an HTTP event-driven endpoint that receives inbound events from external systems (Stripe payment, GitHub
   push, Slack action) and triggers agent workflows in response, or sends outbound HTTP POST notifications to external systems
   when CEX events occur. It defines the endpoint URL, payload schema, signature verification, and the action triggered on

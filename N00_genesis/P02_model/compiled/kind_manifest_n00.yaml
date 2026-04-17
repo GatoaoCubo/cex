@@ -12,6 +12,8 @@ tags:
 - n00
 - archetype
 - template
+density_score: 1.0
+updated: '2026-04-17'
 purpose: 'Training Method defines a model training or adaptation technique: the approach, data requirements, compute constraints,
   and expected outcomes. It covers the full spectrum from pre-training to fine-tuning, PEFT methods (LoRA, QLoRA), RLHF, and
   domain adaptation. Used as the BECOME specification when N03 or N05 designs model training pipelines.'

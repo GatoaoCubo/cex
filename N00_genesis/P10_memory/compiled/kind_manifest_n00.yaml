@@ -12,6 +12,7 @@ tags:
 - n00
 - archetype
 - template
+density_score: 1.0
 purpose: 'A workflow_run_crate is an RO-Crate 1.2 Workflow Run Crate that packages the complete provenance of a scientific
   or enterprise workflow execution: inputs, outputs, tool versions, parameters, and timing. It enables reproducibility by
   providing a self-describing, FAIR-compliant archive of exactly what ran and what it produced.'

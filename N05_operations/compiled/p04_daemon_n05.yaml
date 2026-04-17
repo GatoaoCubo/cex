@@ -40,6 +40,7 @@ monitoring: 'Health: n05_heartbeat.json every 60s -- timestamp, last_task, error
 logging: structured
 graceful_shutdown: finish active task, write heartbeat status=stopping, delete PID, exit 0
 max_restarts: 5 in 30min
+density_score: 1.0
 overview: 'N05 maintenance daemon (Windows PowerShell). 7 staggered tasks keep .cex/runtime/ clean: orphan reap, signal archival,
   PID hygiene, temp cleanup, compile verify, lock rotation, heartbeat.'
 lifecycle: 'Schedule: heartbeat 60s; orphan 5m/30m; PID-hygiene 10m; compile-verify 15m; lock-rotate 1h; temp-cleanup 24h.

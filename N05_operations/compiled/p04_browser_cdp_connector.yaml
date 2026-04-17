@@ -53,6 +53,7 @@ tags:
 - automation
 tldr: 'Generic CDP connector for user Chrome: setup, connect, navigate, interact. Base layer for all browser_tool specs.'
 description: Connects to user Chrome via CDP WebSocket on localhost:9222. Provides navigate/click/type/read/screenshot primitives.
+density_score: 1.0
 overview: Generic CDP connector that bridges Claude Code (CLI) to the user's real Chrome browser. All target-specific browser_tools
   (Supabase, Railway, NotebookLM) depend on this connector. Uses Chrome DevTools Protocol over WebSocket. User's logged-in
   sessions are preserved.

@@ -13,6 +13,7 @@ tags:
 - hybrid_search
 - ci_cd
 - deploy
+density_score: 0.97
 intent: 'The retriever for N05 must answer operational questions with evidence that is precise, recent, and gate-relevant.
 
 

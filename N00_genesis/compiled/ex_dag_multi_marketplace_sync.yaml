@@ -1,0 +1,50 @@
+id: ex-dag-multi-marketplace-sync
+kind: dag
+pillar: P12
+title: Multi-Marketplace Sync DAG
+version: 0.1.0
+quality: null
+status: template
+brand_placeholders:
+- BRAND_SHOPIFY_STORE_DOMAIN
+- BRAND_BLING_API_URL
+- BRAND_MELI_USER_ID
+tags:
+- commerce
+- template
+- distillation
+- orchestration
+- dag
+density_score: 1.0
+purpose: Formal directed-acyclic-graph specification for the sync workflow. Lets the scheduler parallelize independent steps
+  (pull Shopify, pull Bling, pull ML can run concurrently) while enforcing barriers before reconcile + push.
+when_to_use:
+- The workflow has >5 steps and some are independent.
+- You want deterministic ordering for debugging (same run id -> same trace topology).
+- You plan to swap a runner (e.g. from Supabase cron to Dagster or Prefect) later.
+brand_variables_used:
+- '`{{BRAND_SHOPIFY_STORE_DOMAIN}}`, `{{BRAND_BLING_API_URL}}`, `{{BRAND_MELI_USER_ID}}` -- per-channel target identifiers
+  referenced in the pull nodes.'
+graph_nodes_edges: "nodes:\n  - id: acquire_lock\n    type: barrier\n    action: pg_advisory_lock(sync)\n  - id: load_health\n\
+  \    type: read\n    action: query channel_health\n  - id: pull_shopify\n    type: fetch\n    channel: shopify\n    target:\
+  \ \"{{BRAND_SHOPIFY_STORE_DOMAIN}}\"\n  - id: pull_bling\n    type: fetch\n    channel: bling\n    target: \"{{BRAND_BLING_API_URL}}\"\
+  \n  - id: pull_meli\n    type: fetch\n    channel: meli\n    target: \"{{BRAND_MELI_USER_ID}}\"\n  - id: reconcile\n   \
+  \ type: transform\n    rule_set: dispatch_rule_multi_marketplace\n  - id: push_shopify\n    type: write\n    channel: shopify\n\
+  \  - id: push_bling\n    type: write\n    channel: bling\n  - id: push_meli\n    type: write\n    channel: meli\n  - id:\
+  \ audit\n    type: verify\n  - id: release_lock\n    type: barrier\n    on_failure: always_run\nedges:\n  - [acquire_lock,\
+  \ load_health]\n  - [load_health, pull_shopify]\n  - [load_health, pull_bling]\n  - [load_health, pull_meli]\n  - [pull_shopify,\
+  \ reconcile]\n  - [pull_bling, reconcile]\n  - [pull_meli, reconcile]\n  - [reconcile, push_shopify]\n  - [reconcile, push_bling]\n\
+  \  - [reconcile, push_meli]\n  - [push_shopify, audit]\n  - [push_bling, audit]\n  - [push_meli, audit]\n  - [audit, release_lock]"
+concurrency_budget:
+- Three pull nodes may run in parallel -- each channel's client enforces its own rate limit.
+- Three push nodes may run in parallel -- same reasoning.
+- 'Reconcile is a hard barrier: must see all three pulls or their failure-as-empty substitutes.'
+failure_propagation:
+- A fetch node's failure substitutes an empty input to reconcile (channel-skipped mode).
+- 'A push node''s failure is isolated: audit sees the per-channel outcome and emits metrics; the DAG still completes.'
+- '`release_lock` is tagged `on_failure: always_run` to guarantee lock release.'
+observability: Each node emits `{node_id, started_at, ended_at, rows_in, rows_out, outcome}` to `sync_dag_trace`. Graph visualization
+  tool can render a waterfall per run id.
+related_artifacts:
+- '`ex_workflow_multi_marketplace_sync.md`'
+- '`ex_dispatch_rule_multi_marketplace.md`'

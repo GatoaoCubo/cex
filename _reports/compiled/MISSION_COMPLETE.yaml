@@ -1,107 +1,159 @@
-report: VERTICAL_DISTILLATION_MISSION_COMPLETE
-mission: VERTICAL_DISTILLATION_20260416
+id: token_trim_v1_mission_complete
+kind: incident_report
+title: TOKEN_TRIM_V1 Mission Complete
+pillar: P11
 nucleus: n07
-started: 2026-04-16 11:00:00-03:00
-completed: 2026-04-16 13:06:00-03:00
-duration_min: ~126
-branch: vertical-distillation-WIP
-base_commit: 722238e05
+mission: TOKEN_TRIM_V1_20260416
+date_started: 2026-04-16 12:00:00-03:00
+date_completed: 2026-04-16 12:43:00-03:00
+quality: null
 status: COMPLETE
-outcome: Distilled two brand-specific source repos (gato-cubo-commerce + gato-ao-cubo branch) into 58 reusable CEX template
-  artifacts with `{{BRAND_*}}` placeholders. Zero new kinds invented. Zero brand leakage in distilled templates.
-deliverables: '| Wave | Nucleus | CLI | Deliverable | Count |
+density_score: 1.0
+goal_vs_outcome: '| Metric | Baseline | Target | Achieved | Delta |
 
-  |------|---------|-----|-------------|-------|
+  |--------|----------|--------|----------|-------|
 
-  | 1A | N04 | claude | `_reports/distillation/inventory_commerce.md` | 1 report |
+  | Boot footprint (CLAUDE.md + .claude/rules/*) | 92,678 B | <=50,000 B | 77,348 B raw / ~50,000 B w/ LLMLingua | -16.5%
+  raw / -46% combined |
 
-  | 1B | N01 | claude | `_reports/distillation/inventory_gato_ao_cubo.md` | 1 report |
+  | Approx tokens (4B/token) | ~23K | ~12.5K | ~19.3K raw / ~12.5K compressed | -46% combined |
 
-  | 1C | N03 | claude | `boot/n07_{codex,gemini,ollama}.ps1` | 3 boots |
+  | Lazy-rule count | 14 | 10 | 10 | -4 |
 
-  | 2A | N03 | claude (codex failed) | P04/P05/P06/P08/P09/P12 commerce templates | 27 |
+  | Skill count (multi-runtime) | 5 | 9 | 9 | +4 |'
+wave_a_parallel_codex_spawns: '| Cell | Output | Bytes | Status |
 
-  | 2B | N02 | codex | N02_marketing/ + P03/P04/P05/P11/P12 content factory | 19 |
+  |------|--------|-------|--------|
 
-  | 2C | N06 | claude (codex failed) | P05/P06/P09/P10/P11/P12 monetization | 12 |
+  | A1 (N05 codex) | `_tools/cex_compress.py` | 10,369 | OK -- N07 committed (codex exited w/o commit) |
 
-  | 3 | N05 | codex | `_reports/distillation/n07_boots_smoke.md` | 1 report (PARTIAL) |
+  | A2 (N03 codex) | 4 skills x 2 mirrors = 8 files | 7,851 (one set) | OK -- mirrors byte-identical |
 
-  | 4 | N07 | claude | consolidation + push | this report |
+  | A3 (N05 codex) | `_tools/cex_cache_audit.py` | 12,834 | OK -- N07 committed (codex exited w/o commit) |'
+wave_b_sequential_in_session: '| Step | Action | Result |
+
+  |------|--------|--------|
+
+  | B1 | `--compress-boot` flag in cex_preflight.py | OK (pass-through to cex_compress.py) |
+
+  | B2 | Benchmark BEFORE/AFTER LLMLingua-2 | OK -- 90,829B -> 58,219B at ratio 0.7 (-36%) |
+
+  | B3 | Apply rule-deletion proposal | OK -- 4 files deleted, 15,523B reclaimed |
+
+  | B4 | Apply CLAUDE.md update proposal | OK -- "Lazy skills" pointer row added |
+
+  | B5 | Final consolidation commit | OK -- ad6bafafa |'
+wave_c_consolidation: '| Check | Result |
+
+  |-------|--------|
+
+  | `python _tools/cex_doctor.py` | 189 PASS / 69 WARN / 0 FAIL |
+
+  | Cache hit rate (last 5 sessions) | 97.36% (671M cached reads, 11.5K uncached) |
+
+  | All 4 skills auto-fire on description match | YES -- frontmatter has `description` + `when` triggers |
+
+  | Multi-runtime mirrors byte-identical | YES -- `diff` returned 0 for all 4 pairs |
+
+  | ASCII clean (cex_sanitize) | YES -- 0 non-ASCII chars in both new tools |'
+llmlingua_2_empirical_results_boot_context_ratio_0_7: '| File | BEFORE | AFTER | Ratio |
+
+  |------|--------|-------|-------|
+
+  | CLAUDE.md | 15,013 | 10,242 | 0.682 |
+
+  | 8f-reasoning.md | 8,850 | 6,034 | 0.682 |
+
+  | ascii-code-rule.md | 2,341 | 1,533 | 0.655 |
+
+  | brand-bootstrap.md | 2,897 | 1,819 | 0.628 |
+
+  | composable-crew.md | 6,197 | 3,809 | 0.615 |
+
+  | dispatch-depth.md | 3,020 | 1,995 | 0.661 |
+
+  | guided-decisions.md | 4,395 | 2,224 | 0.506 |
+
+  | n07-autonomous-lifecycle.md | 5,168 | 3,130 | 0.606 |
+
+  | n07-input-transmutation.md | 13,201 | 8,681 | 0.658 |
+
+  | n07-orchestrator.md | 9,164 | 5,608 | 0.612 |
+
+  | n07-technical-authority.md | 5,315 | 3,551 | 0.668 |
+
+  | TOTAL (post-deletion 11 files) | 75,561 | 48,626 | 0.643 |'
+anthropic_cache_audit_cex_cache_audit_py_hit_rate_last_5: '| Metric | Value |
+
+  |--------|-------|
+
+  | Avg cache hit rate | 97.36% |
+
+  | Cached reads | 671,784,225 tokens |
+
+  | Cached writes | 18,183,970 tokens |
+
+  | Uncached input | 11,507 tokens |
+
+  | Cache events | 5,089 |
+
+  | Net cost saved (estimate, $3 -> $0.30/MTok) | ~$1,815 |
+
+  | Breakpoint discipline | EXCELLENT |
 
 
-  Total: 58 template artifacts + 3 reports + 3 boot scripts.'
-commits_this_branch_in_order: 'e3e45d141 [N01] wave 1B: gato-ao-cubo branch inventory
+  Finding: Anthropic cache_control breakpoints are already firing optimally
 
-  8f355b0c3 [N04] wave 1A: commerce repo inventory
+  (99.998% of input is cached). Token-trim gains compound on top -- smaller boot
 
-  7892e4194 [N03] wave 1C: N07 boots (codex/gemini/ollama)
+  context = smaller per-session cache writes.'
+lessons_surprises: "- Codex spawns exit without committing: both N05 codex runs (A1 + A3) wrote\n  files cleanly but exited\
+  \ without `git commit` or signal. N07 had to verify\n  deliverables manually and commit. Add to memory: codex CLI does not\
+  \ auto-commit.\n- N03 over-delivered: produced 4 skills + mirrors AND a partial mission report\n  on its own (commit d224a4b0d).\
+  \ Quality of skills was production-grade.\n- LLMLingua-2 ratio 0.7 is conservative: even at 0.7, files compress 36-50%\n\
+  \  (RoBERTa knows what is filler). Could push to 0.6 with manual fidelity review.\n- Cache hit rate already at 97%+: most\
+  \ of the win was already locked in by\n  Claude Code's automatic cache_control insertion. Token-trim is primarily about\n\
+  \  reducing the 3% uncached input AND per-session cache-write cost."
+files_created:
+- '`_tools/cex_compress.py` (cli_tool, P04, 10,369 B)'
+- '`_tools/cex_cache_audit.py` (cli_tool, P07, 12,834 B)'
+- '`.claude/skills/cross_wave_cleanup.md`'
+- '`.claude/skills/shared_file_proposal.md`'
+- '`.claude/skills/new_nucleus_bootstrap.md`'
+- '`.claude/skills/auto_accept_handoff.md`'
+- '`.cex/skills/{4 mirrors}.md`'
+- '`_reports/token_trim/MISSION_COMPLETE.md` (this file)'
+files_modified:
+- '`CLAUDE.md`: +1 row in Pointers ("Lazy skills (auto-fire)")'
+- '`_tools/cex_preflight.py`: +`--compress-boot` flag'
+- '`requirements.txt`: +`llmlingua>=0.2.2`'
+files_deleted:
+- '`.claude/rules/cross-wave-cleanup.md` (3,984 B)'
+- '`.claude/rules/shared-file-proposal.md` (5,708 B)'
+- '`.claude/rules/new-nucleus-bootstrap.md` (2,480 B)'
+- '`.claude/rules/auto-accept-handoff.md` (3,351 B)'
+- 'Subtotal: 15,523 B reclaimed via skill conversion'
+hard_constraint_verification:
+- '[x] No new kinds invented (kinds_meta.json count unchanged at 257)'
+- '[x] All artifacts ASCII-clean (cex_sanitize.py: 0 issues)'
+- '[x] Multi-runtime: skills exist in BOTH `.claude/skills/` and `.cex/skills/`'
+- '[x] Auto-accept: codex spawns dispatched with default boot wrapper auto-accept'
+- '[x] Shared-file-proposal: CLAUDE.md edit queued via `.cex/runtime/proposals/`, archived'
+- '[x] Quality floor: doctor 0 FAIL (no regressions)'
+properties: '| Property | Value |
 
-  08738de79 [N02] wave 2B: content factory + brand persona (codex)
+  |----------|-------|
 
-  4322c2859 [N03] wave 2A: commerce templates
+  | Kind | incident_report |
 
-  935d33328 [N06] wave 2C: monetization + commerce vertical
+  | Pillar | P11 feedback |
 
-  d0a51d93e [N05] wave 3: N07 boot smoke tests
+  | Nucleus | N07 |
 
-  4b3d89fc7 [N07] wave 3: compiled yamls + report
+  | Pipeline | 8F (post-mission learning capture) |
 
-  <this> [N07] wave 4: MISSION_COMPLETE'
-verification: '| Check | Expected | Actual | Pass |
+  | Quality target | 9.0+ |
 
-  |-------|----------|--------|------|
+  | Mission duration | ~43 min (12:00 -> 12:43 BRT) |
 
-  | kinds_meta count | 257 | 257 | yes |
-
-  | Compile | 383/383 | 383/383 | yes |
-
-  | Doctor | 0 FAIL | 189 PASS / 69 WARN / 0 FAIL | yes |
-
-  | Brand leakage (gato3/gatoaocubo/ronronalda) | 0 hits in distilled templates | 0 | yes |
-
-  | N07 boots parse | 3/3 OK | 3/3 OK | yes |
-
-  | N07 boots ASCII | clean | clean | yes |'
-known_gaps_from_wave_3_smoke_report: "1. `boot/n07_ollama.ps1` handoff path uses `n07_task.md` instead of the\n   runtime-specific\
-  \ `n07_task_ollama.md`. Non-blocking; follow-up needed.\n2. `CEX_AUTO_ACCEPT` not explicitly wired by the 3 new N07 boot\
-  \ wrappers.\n   Pass-through works if env is pre-set. Non-blocking; follow-up needed.\n\nBoth gaps are minor, do not affect\
-  \ the distilled templates, and are isolated\nto the 3 new N07 boots. They will be fixed in a follow-up on main."
-cli_routing_codex_vs_claude: 'User requested "se puder usar codex/gpt para economizar claudes".
-
-  Results of that experiment:
-
-
-  | Wave | Nucleus | Assigned CLI | Result |
-
-  |------|---------|-------------|--------|
-
-  | 2B | N02 | codex | SUCCESS (19 artifacts, proper frontmatter, committed) |
-
-  | 2A | N03 | codex | FAILURE (fake signal, zero files) -> re-dispatched on claude -> SUCCESS (27) |
-
-  | 2C | N06 | codex | FAILURE (no output) -> re-dispatched on claude -> SUCCESS (12) |
-
-  | 3 | N05 | codex | SUCCESS (smoke report written + committed) |
-
-
-  Takeaway: codex worked for N02 and N05 (moderate-complexity tasks) but failed
-
-  silently on N03 and N06 (higher volume: 20+ and 12 artifacts). Either the
-
-  "exit-without-work" pattern documented in `feedback_multiruntime_verification.md`,
-
-  or ChatGPT-Max rate limiting under parallel load. Memory already captures this.'
-hard_rules_honored:
-- no new kinds invented (257 in, 257 out)
-- all distilled templates use `{{BRAND_*}}` placeholders
-- 'all artifacts carry `quality: null` (peer review assigns)'
-- all artifacts carry `brand_placeholders:` frontmatter list
-- all work committed to `vertical-distillation-WIP`, never main
-- '`auto_accept: true` honored end-to-end; no user re-prompts during waves'
-next_steps_for_the_user:
-- 'Review the 58 templates: `git diff main..vertical-distillation-WIP --stat | head -80`'
-- 'Decide merge strategy: squash into main OR keep granular commits'
-- 'Optional follow-up: fix the 2 smoke-test gaps (ollama handoff path + CEX_AUTO_ACCEPT wiring)'
-- 'Push to remote: `git push origin vertical-distillation-WIP`'
-- Open PR when ready
+  | Commits | 4 (e45554c94 wA1, d224a4b0d wA2 N03, ad6bafafa wB, 911ca4af6 wA3) + this consolidation |'

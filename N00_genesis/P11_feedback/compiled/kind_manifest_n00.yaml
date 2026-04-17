@@ -12,6 +12,7 @@ tags:
 - n00
 - archetype
 - template
+density_score: 1.0
 purpose: A threat_model provides a structured hazard and risk assessment for AI systems, identifying attack surfaces, threat
   actors, potential failure modes, and mitigating controls. It enables systematic security and safety engineering by making
   implicit risks explicit and traceable to specific mitigations within the CEX architecture.

@@ -13,6 +13,7 @@ tags:
 - compression
 - session
 - retrieval
+density_score: 0.96
 intent: This memory summary defines the compressed briefing N05 should carry forward between sessions when the work concerns
   retrieval-backed code review, CI triage, deploy gates, and rollback readiness. It is intentionally lossy, but it must not
   lose the blockers.

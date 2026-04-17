@@ -1,0 +1,215 @@
+mission: REPO_AUDIT_OPENSOURCE
+generated: 2026-04-16
+verdict: NOT_READY
+blockers_total: 5
+critical_total: 0
+quality: null
+density_score: 1.0
+tl_dr_for_the_user_non_dev_language: '| Question | Answer |
+
+  |----------|--------|
+
+  | Is CEX ready to push to public GitHub? | NO, but close. 5 fixable blockers. |
+
+  | Is there leaked secret? | NO — all CRITICAL hits are placeholder strings (ghp_1234..., AKIAXXXX...). Real keys live in
+  `.env` which is gitignored AND not tracked. |
+
+  | Is the code dead/duplicated? | 30 dead .py files (registers, old tests). 5 dup function groups. Trivial cleanup. |
+
+  | Does it work on Linux/Mac? | NO — 57/57 ps1 scripts have no bash equivalent. This is the BIGGEST blocker. |
+
+  | Is the documentation good? | README + LICENSE (MIT) + CONTRIBUTING + CHANGELOG present. Missing: SECURITY.md, CODE_OF_CONDUCT.md,
+  examples/. |
+
+  | What is the artifact quality? | Excellent: 5002 artifacts scored, none below 8.4, 91% above 8.5. Zero embarrassments.
+  |
+
+  | Should we FT before or after audit? | AFTER. The audit produces the labeled corpus that makes FT useful. |'
+inventory_snapshot_w0: '| Metric | Value |
+
+  |--------|-------|
+
+  | Total files | 10,568 |
+
+  | Total bytes | 113.7 MB |
+
+  | Total lines | 1,353,114 |
+
+  | Top kinds | builder_iso (32%), yaml_other (29%), md_other (10%), kc (3.3%), runtime_state (3.0%) |'
+blockers_must_fix_before_public_push: ''
+b1_cross_platform_57_ps1_scripts_0_bash_equivalents_w5: 'Severity: HIGH (blocks Linux/macOS users entirely) Affected: `boot/*.ps1`
+  Fix: write `boot/*.sh` siblings for the 7-8 most-used wrappers (n07.ps1, dispatch.sh already exists). Document WSL fallback
+  for the rest. ETA: 1 day for top 8 wrappers; 1 week for full parity. PR: `feat(boot): bash equivalents for top wrappers
+  (closes B1)`'
+b2_brand_coupling_132_hits_across_non_brand_files_w3: 'Severity: HIGH (publishes founder''s brand name to every user) Affected:
+  51 cex_user paths, 32 gatoaocubo refs, 29 Gato3 refs, 19 personal emails, 12 cex-main refs Fix: replace with `{{BRAND_*}}`
+  placeholders or move to `.cex/brand/brand_config.yaml` (already excluded by audit). ETA: 1 day with sed pass + manual review.
+  PR: `chore(brand): extract brand strings to brand_config (closes B2)`'
+b3_examples_directory_empty_w4: 'Severity: MEDIUM (hurts onboarding, not a hard blocker) Fix: add 3 runnable examples: `examples/{quickstart,build_one_artifact,run_grid}.md`
+  ETA: half a day. PR: `docs(examples): add 3 quickstart examples (closes B3)`'
+b4_missing_security_md_code_of_conduct_md_w4: 'Severity: LOW (recommended, not blocking, but expected for serious projects)
+  Fix: standard templates from contributor-covenant.org + GitHub default SECURITY template. ETA: 1 hour. PR: `docs(community):
+  add SECURITY + CODE_OF_CONDUCT (closes B4)`'
+cleanup_wins_no_blocker_just_polish: '| Item | Source | Action | Files |
+
+  |------|--------|--------|-------|
+
+  | Dead Python | W1 | DELETE | 30 .py files (registers, orphan tests, tools/cex_fix*) |
+
+  | Dup functions | W2 | REFACTOR | 5 groups (mainmain, load_yaml, ...) |
+
+  | Dup MD pairs | W2 | MERGE | 5 near-dup pairs (Jaccard >= 0.85) |
+
+  | Hardcoded drives | W5 | FIX | 2 hits -> `Path.home()` |
+
+  | Hardcoded `/Users/` | W5 | FIX | 2 hits -> `Path.home()` |
+
+  | `cp1252` encoding | W5 | FIX | 1 hit -> `utf-8` |
+
+  | MD orphans needing investigation | W1 | TRIAGE | 902 (likely most are valid leaves not yet covered by leaf rules) |'
+quality_distribution_w7_this_is_exceptional: '- 5,002 artifacts have a numeric quality score
+
+  - 0 artifacts below 7.0 -- there is NO embarrassment list
+
+  - 0 artifacts below 8.4 minimum
+
+  - 91% of artifacts at 8.5+
+
+  - 70.7% in the 9.0-9.5 sweet spot
+
+  - 414 artifacts (7.6%) have `quality: null` (uncoded; correct per CEX rule "quality: null = peer-reviewed assigns")
+
+
+  | Bucket | Count | % |
+
+  |--------|-------|---|
+
+  | null | 414 | 7.6% |
+
+  | 8-8.5 | 14 | 0.3% |
+
+  | 8.5-9 | 1159 | 21.4% |
+
+  | 9-9.5 | 3828 | 70.7% |
+
+  | 9.5-10 | 1 | 0.0% |
+
+
+  By nucleus: every nucleus''s mean is 8.95-9.09 with min >= 8.4. No nucleus is dragging the average.'
+test_ci_health_w6: '| Metric | Value |
+
+  |--------|-------|
+
+  | Test files found | 45 |
+
+  | Test sample passed | 3/10 (30% on first 10) |
+
+  | Workflow YAML valid | 3/3 (`ci.yml`, `claude_learn.yml`, `quality.yml`) |
+
+  | Dep files | `pyproject.toml`, `requirements.txt`, `requirements-llm.txt` -- all present |
+
+  | `cex_doctor.py` exit | 0 (with 80+ density/size WARNs across builders) |
+
+  | `cex_flywheel_audit.py` exit | 0 -- 7 cascades wired |
+
+
+  B5 (NEW BLOCKER) -- 7/10 sampled tests fail on clean run. Failure modes likely
+
+  include missing local config, real LLM keys, or absent dependencies. Need triage:
+
+
+  | Test | Exit | Likely cause |
+
+  |------|------|--------------|
+
+  | `cex_sdk/tests/test_sdk_integrity.py` | 1 | needs full repo state |
+
+  | `N05_operations/scripts/test_bootstrap_dryrun.py` | 1 | needs `.cex/` runtime |
+
+  | `_tools/cex_e2e_test.py` | 1 | needs LLM provider |
+
+  | `_tools/cex_grid_test.py` | 2 | needs grid backend |
+
+  | `_tools/cex_system_test.py` | -1 | TIMEOUT (60s exceeded) |
+
+  | `_tools/test_agentic_capabilities_v2.py` | -1 | TIMEOUT (60s exceeded) |
+
+  | `_tools/tests/test_autodiscovery.py` | 1 | needs registry state |
+
+
+  PASSING: `cex_litellm_test.py`, `test_cex_wave_validator.py`, `test_wave1_builder_gen_v2.py`.
+
+
+  Add to blocker list:'
+b5_70_of_tests_fail_on_clean_clone_w6: 'Severity: HIGH (CI badge will be red on day 1) Fix: split tests into `tests/unit/`
+  (no external deps) and `tests/integration/` (requires `.cex/` + LLM key). CI runs only unit tier. ETA: 2-3 days for triage
+  + reorg. PR: `test(split): unit vs integration tier (closes B5)`'
+what_to_publish_vs_what_to_keep_private: ''
+publish_open_source_mit:
+- '`_tools/` -- core engines (cex_run, cex_score, cex_doctor, cex_compile, etc.)'
+- '`cex_sdk/` -- runtime'
+- '`archetypes/builders/` -- 262 builders, 3381 ISOs'
+- '`P{01-12}_*/` -- pillar schemas + KCs'
+- '`N{00-07}_*/` -- nucleus structure (without brand-specific memory)'
+- '`boot/` -- after B1 fix'
+- '`_docs/`, `examples/`, `.github/`, README, LICENSE, etc.'
+do_not_publish_private_to_founder: '- `.env` (already gitignored)
+
+  - `.cex/runtime/` (operational state)
+
+  - `.cex/brand/` (founder''s brand identity)
+
+  - `.cex/instance/` (founder''s instance config)
+
+  - `.cex/learning_records/` (private telemetry)
+
+  - `.cex/experiments/` (private results)
+
+  - `_reports/` (audit reports for founder eyes only)
+
+  - Memory files referencing personal info
+
+
+  Recommend: add a `.gitignore.publish` overlay or a separate "public" branch with these stripped.'
+ft_fine_tuning_corpus_spec: 'After the audit cleanup, the repo IS the corpus. Concrete plan:'
+phase_2a_builder_level_ft_free_models: 'Target: gemma2:9b (locked base per memory), llama3.1:8b, qwen3:14b Corpus: 3,381 builder
+  ISOs + 5,000 high-quality artifacts (>= 9.0) Objective: teach the model the 8F pipeline + per-kind builder semantics Format:
+  instruction-output pairs derived from `archetypes/builders/{kind}-builder/bld_*.md` Tool: `_tools/cex_ft_corpus_builder.py`
+  (TO BUILD) ETA: 2 days corpus prep, 1 day per model run'
+phase_2b_per_nucleus_ft: 'Target: 7 specialized adapters (one per N01-N07) Corpus: each nucleus''s directory + brand context
+  Objective: nucleus-specific style + routing ETA: 1 day per nucleus after Phase 2A'
+phase_2c_quality_judge_ft: 'Target: dedicated scoring model Corpus: 5,002 artifacts with quality scores (regression target)
+  Objective: reproduce the 3-layer scoring without LLM judge calls ETA: 1 week (small model, large dataset)'
+recommended_pr_sequence: '1. PR-A: dead code purge (W1: 30 .py DELETE, 5 dup groups REFACTOR)
+
+  2. PR-B: cross-platform parity (B1: bash equivalents for top 8 ps1)
+
+  3. PR-C: brand decoupling (B2: extract to brand_config + sed pass)
+
+  4. PR-D: examples + community files (B3 + B4)
+
+  5. PR-E: test tier split (B5: unit vs integration)
+
+  6. PR-F: gitignore overlay for private state
+
+  7. PR-G: README polish (badges, TOC, screenshots, usage section)
+
+
+  After PR-A through PR-G: tag `v0.1.0-public`, push to a fresh public repo.'
+acceptance_gate_rerun_after_each_pr: 'python _tools/audit_inventory.py
+
+  python _tools/audit_dead_code.py
+
+  python _tools/audit_security_brand.py
+
+  python _tools/audit_cross_platform.py
+
+  python _tools/audit_docs_ux.py
+
+  python _tools/audit_test_ci.py
+
+  python _tools/audit_quality_distribution.py
+
+
+  All 7 reports must end with their `*_PASS` sentinel and have <= the previous run''s blocker count.'
+synthesis_pass: ''

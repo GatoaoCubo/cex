@@ -13,6 +13,7 @@ tags:
 - review
 - deploy
 - ci
+density_score: 0.95
 intent: 'This few-shot example teaches the exact response pattern N05 should use when asked to judge an operational failure
   and recommend a gate-safe next action.
 

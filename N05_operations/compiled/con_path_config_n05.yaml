@@ -11,6 +11,7 @@ tags:
 - operations
 - filesystem
 - boundaries
+density_score: 1.0
 purpose: '| Field | Value |
 
   |---|---|
@@ -79,9 +80,9 @@ rationale: '| Design Choice | Why It Exists | Gating Wrath Effect |
 example: "| Use Case | Alias Path | Allowed Action |\n|---|---|---|\n| Save schema artifact | `n05_schemas/sch_enum_def_n05.md`\
   \ | write |\n| Read task handoff | `handoff_root/n05_task_codex.md` | read only |\n| Compile markdown | `compiled_root/...`\
   \ | write |\n| Emit completion marker | `signal_root/...` | write |\n\nbase_dir: .\npaths:\n  repo_root: .\n  n05_root:\
-  \ N05_operations/\n  n05_schemas: N05_operations/P06_schema/\n  n05_config: N05_operations/P09_config/\n  compiled_root: compiled/\n\
-  \  signal_root: .cex_signals/\n  handoff_root: .cex/runtime/handoffs/\n  report_root: _reports/\n  tool_root: _tools/\n\
-  \  temp_ops: _spawn/\nreadonly:\n  - repo_root\n  - n05_root\n  - handoff_root\n  - tool_root"
+  \ N05_operations/\n  n05_schemas: N05_operations/P06_schema/\n  n05_config: N05_operations/P09_config/\n  compiled_root:\
+  \ compiled/\n  signal_root: .cex_signals/\n  handoff_root: .cex/runtime/handoffs/\n  report_root: _reports/\n  tool_root:\
+  \ _tools/\n  temp_ops: _spawn/\nreadonly:\n  - repo_root\n  - n05_root\n  - handoff_root\n  - tool_root"
 properties: '| Property | Value |
 
   |---|---|

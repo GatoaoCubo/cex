@@ -13,6 +13,7 @@ tags:
 - retrieval
 - ci_cd
 - evidence
+density_score: 0.96
 intent: 'N05 needs embeddings that survive the language mix of code review comments, CI logs, traceback text, deploy notes,
   shell commands, YAML keys, and short policy fragments.
 

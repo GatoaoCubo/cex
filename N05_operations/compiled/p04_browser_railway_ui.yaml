@@ -47,6 +47,7 @@ credentials:
   keys:
   - RAILWAY_TOKEN
   injection: env_var
+density_score: 0.92
 overview: Automates Railway dashboard operations via Playwright. Covers service creation, environment variable configuration,
   custom domain assignment, deploy triggering, and log tailing. Used by N05 deploy pipelines when Railway CLI (`railway`)
   is unavailable or when UI-only features (log viewer, metrics) are needed.

@@ -12,6 +12,7 @@ tags:
 - n00
 - archetype
 - template
+density_score: 1.0
 purpose: A workflow_primitive defines a low-level workflow execution primitive (Step, Parallel, Loop, Condition, Router) that
   serves as the atomic building block of complex orchestration logic. It is the instruction set of the CEX workflow engine
   -- each primitive has precise execution semantics that workflow compilers and runners can implement consistently across

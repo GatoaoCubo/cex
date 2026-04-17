@@ -48,6 +48,7 @@ credentials:
   - SUPABASE_ANON_KEY
   - SUPABASE_SERVICE_ROLE_KEY
   injection: env_var
+density_score: 0.91
 overview: 'Automates Supabase Studio dashboard operations via Playwright. Covers the full project lifecycle: creation, environment
   variable injection, schema setup via SQL editor, RLS policy configuration, and edge function deployment. Triggered by N05
   deploy pipelines or N03 scaffold workflows when Supabase CLI is unavailable.'

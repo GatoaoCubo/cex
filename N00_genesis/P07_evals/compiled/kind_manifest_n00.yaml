@@ -12,6 +12,7 @@ tags:
 - n00
 - archetype
 - template
+density_score: 1.0
 purpose: Usage report defines a usage analytics report specification for billing reconciliation, capacity planning, and CFO
   dashboards. It specifies the metrics collected (token consumption, API calls, active users, artifact builds), aggregation
   granularity, cost attribution logic, and report distribution format. Usage reports bridge the operational data layer and

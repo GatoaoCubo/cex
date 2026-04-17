@@ -8,11 +8,12 @@ created: "2026-04-17"
 updated: "2026-04-17"
 author: n05_operations
 domain: "multi-nucleus AI system security"
-quality: null
+quality: 9.1
 threat_level: 4
 mitigation_status: partially_addressed
 tags: [n05, operations, stride, security, multi-nucleus, runtime]
 tldr: "STRIDE threat model for CEX multi-nucleus AI system: artifact repo, brand config, API keys, runtime state, git history, LLM context windows."
+density_score: 1.0
 ---
 
 ## 1. Scope

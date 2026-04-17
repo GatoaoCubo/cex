@@ -25,6 +25,7 @@ tags:
 tldr: 'N05 bulk ops: compile_all/doctor_all/sanitize_all/evolve_batch/score_batch -- local CLI, 4h window, retry 2x, progress
   every 10 items'
 description: 'Batch execution config for N05 operations nucleus mass ops: compile, health check, sanitize, evolve, and score.'
+density_score: 1.0
 overview: 'Five bulk operation modes for N05 against the CEX local toolchain. Triggered by: overnight scripts or N07 orchestrator
   dispatch. Credential env var: `n/a` -- local tools only, no external API credentials required.'
 job_parameters: '| Parameter | Value | Description |

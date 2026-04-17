@@ -12,6 +12,7 @@ tags:
 - n00
 - archetype
 - template
+density_score: 0.99
 purpose: User journey produces an end-to-end funnel map from awareness to conversion and retention, documenting every touchpoint,
   user emotion, friction point, and enabling artifact at each stage. It is the canonical top-level artifact for product and
   marketing strategy, serving as the source of truth from which more specific output artifacts (landing pages, onboarding

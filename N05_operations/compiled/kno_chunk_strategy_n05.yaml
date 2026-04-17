@@ -13,6 +13,7 @@ tags:
 - rag
 - ci_cd
 - deploy
+density_score: 0.97
 intent: 'This chunk strategy defines how N05 indexes operations knowledge without losing the evidence chain that matters during
   code review, CI triage, release gating, deploy recovery, and post-incident analysis.
 

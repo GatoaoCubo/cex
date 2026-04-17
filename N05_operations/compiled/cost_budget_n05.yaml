@@ -25,6 +25,7 @@ reset_policy: rolling_30d
 alert_enabled: true
 total_budget: 6000000
 overage_action: block
+density_score: 1.0
 overview: 'N05 (Gating Wrath) governs its own LLM spend with the same discipline it applies to operational gates: hard limits
   per dispatch mode, real-time alerts at 80%, and a hard block at 100% -- no grace, no override without an explicit manifest
   change. Enforced by `cex_token_budget.py` at each LLM call boundary.'

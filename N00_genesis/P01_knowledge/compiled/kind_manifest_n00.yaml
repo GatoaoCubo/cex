@@ -12,6 +12,7 @@ tags:
 - n00
 - archetype
 - template
+density_score: 1.0
 purpose: Vector Store defines the vector database backend configuration for similarity search in RAG pipelines. It specifies
   the database type, connection parameters, index configuration, and persistence strategy. The vector_store is the runtime
   storage layer that receives embeddings produced by embedding_config and serves queries from retriever_config.

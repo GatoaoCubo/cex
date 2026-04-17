@@ -13,6 +13,7 @@ tags:
 - bm25
 - pgvector
 - hybrid
+density_score: 1.0
 intent: This memory artifact defines how N05 indexes and refreshes its operational corpus across sparse and dense retrieval
   paths. The index is a memory concern because it captures persistent search behavior, rebuild posture, freshness rules, and
   fallback routing across sessions.

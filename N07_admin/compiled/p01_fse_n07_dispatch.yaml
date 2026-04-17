@@ -1,0 +1,265 @@
+id: p01_fse_n07_dispatch
+kind: few_shot_example
+pillar: P01
+nucleus: N07
+title: Few-Shot Example -- N07 Intent Resolution and Dispatch
+version: 1.0.0
+created: '2026-04-17'
+updated: '2026-04-17'
+author: few-shot-example-builder
+domain: orchestration
+difficulty: hard
+edge_case: true
+format: intent resolution + handoff writing for N07 orchestrator
+quality: null
+tags:
+- few-shot
+- orchestration
+- intent-resolution
+- dispatch
+- n07
+tldr: 5 input/output pairs teaching N07 how to transmute vague user input into structured kind/pillar/nucleus/verb tuples
+  and handoff snippets.
+keywords:
+- intent-resolution
+- dispatch
+- handoff
+- n07
+- orchestrator
+- transmutation
+density_score: 1.0
+explanation: 'N07''s core skill is transmutation: convert vague user tokens into the canonical `{kind, pillar, nucleus, verb}`
+  tuple, then write a concrete handoff. These 5 pairs calibrate easy (single kind) through hard (grid + wave plan). Each output
+  shows the exact structured form N07 must produce -- not prose, not summary, but machine-readable dispatch that any nucleus
+  can execute without further clarification. ---'
+example_1_easy_single_artifact_clear_kind: 'Input
+
+  "make me a landing page"
+
+
+  Resolved Intent
+
+  kind: landing_page
+
+  pillar: P05
+
+  nucleus: N03
+
+  verb: create
+
+  confidence: 0.92
+
+
+  Handoff Snippet
+
+  ## Task
+
+  Produce kind=landing_page, pillar=P05, using landing-page-builder ISOs.
+
+  Builder: archetypes/builders/landing-page-builder/
+
+  Output: N03_engineering/P05_output/landing_page_{{slug}}.md
+
+  Compile after save: python _tools/cex_compile.py {path}
+
+  Signal: write_signal("n03", "complete", null)
+
+
+  ---'
+example_2_easy_research_domain_nucleus_routing: 'Input
+
+  "research competitors"
+
+
+  Resolved Intent
+
+  kind: knowledge_card
+
+  pillar: P01
+
+  nucleus: N01
+
+  verb: analyze
+
+  domain: competitive-intelligence
+
+  confidence: 0.88
+
+
+  Handoff Snippet
+
+  ## Task
+
+  Produce kind=knowledge_card, pillar=P01, domain=competitive-intelligence.
+
+  Builder: archetypes/builders/knowledge-card-builder/
+
+  Scan: N01_intelligence/P01_knowledge/ for existing competitor KCs first.
+
+  Output: N01_intelligence/P01_knowledge/kc_competitor_{{slug}}.md
+
+  Signal: write_signal("n01", "complete", null)
+
+
+  ---'
+example_3_medium_tool_invocation_no_kind: 'Input
+
+  "fix the tests"
+
+
+  Resolved Intent
+
+  kind: null
+
+  pillar: P07
+
+  nucleus: N05
+
+  verb: validate
+
+  tool: cex_e2e_test.py
+
+  action: debug_and_repair
+
+  confidence: 0.85
+
+
+  Handoff Snippet
+
+  ## Task
+
+  No artifact to produce. Run: python _tools/cex_e2e_test.py --verbose
+
+  For each FAIL: diagnose root cause, apply fix, rerun until PASS.
+
+  Commit fixes: git commit -m "[N05] fix failing e2e tests"
+
+  Signal: write_signal("n05", "complete", null)
+
+
+  ---'
+example_4_hard_grid_dispatch_wave_plan: 'Input
+
+  "launch all nuclei"
+
+
+  Resolved Intent
+
+  kind: null
+
+  pillar: P12
+
+  nucleus: N07
+
+  verb: dispatch
+
+  mode: grid
+
+  wave_count: 1
+
+  targets: [n01, n02, n03, n04, n05, n06]
+
+  confidence: 0.79
+
+  gdp_required: true
+
+
+  Handoff Snippet
+
+  ## GDP Decision Required
+
+  Q1: What is the mission goal? (grid needs a task per nucleus)
+
+  Q2: Parallel or sequential waves?
+
+  -- After GDP --
+
+  Write 6 handoff files: .cex/runtime/handoffs/MISSION_{nucleus}.md
+
+  Run: bash _spawn/dispatch.sh grid MISSION
+
+  Monitor: git log --oneline --since="5 minutes ago"
+
+  Consolidate after all 6 signal complete.
+
+
+  ---'
+example_5_hard_sweep_tool_quality_threshold: 'Input
+
+  "improve bad artifacts"
+
+
+  Resolved Intent
+
+  kind: null
+
+  pillar: P11
+
+  nucleus: N07
+
+  verb: improve
+
+  tool: cex_evolve.py
+
+  threshold: 9.0
+
+  mode: heuristic_then_agent
+
+  confidence: 0.91
+
+
+  Handoff Snippet
+
+  ## Task
+
+  Run: python _tools/cex_evolve.py --sweep --threshold 9.0 --mode heuristic
+
+  Then: python _tools/cex_evolve.py --sweep --threshold 9.0 --mode agent --budget 50
+
+  Artifacts below quality 9.0 are retried up to 2 passes.
+
+  Commit: git commit -m "[N07] evolve: heuristic+agent sweep, threshold=9.0"
+
+  Signal: write_signal("n07", "complete", null)
+
+
+  ---'
+edge_cases: "- Grid without goal: input \"launch all nuclei\" triggers GDP (Example 4) --\n  N07 must NOT dispatch without\
+  \ knowing the per-nucleus task.\n- Tool-only dispatch (no kind): \"fix tests\" routes to N05 + tool, not a builder.\n  `kind:\
+  \ null` is valid when the action is operational, not artifact-producing.\n- Confidence < 0.80: present top-3 interpretations\
+  \ to user via GDP before\n  dispatching. Do not guess silently.\n\n---"
+variations: '- "write a system prompt for N03" -> kind=system_prompt, pillar=P03, nucleus=N03, verb=create
+
+  - "schedule the overnight loop" -> kind=schedule, pillar=P12, nucleus=N07, tool=overnight.ps1
+
+  - "what agents do we have?" -> kind=null, verb=query, tool=cex_capability_index.py
+
+
+  ---'
+properties: '| Property | Value |
+
+  |----------|-------|
+
+  | Kind | `few_shot_example` |
+
+  | Pillar | P01 |
+
+  | Nucleus | N07 |
+
+  | Domain | orchestration |
+
+  | Difficulty | hard |
+
+  | Examples | 5 (easy x2, medium x1, hard x2) |
+
+  | Pipeline | 8F (F1-F8) |
+
+  | Scorer | cex_score.py |
+
+  | Compiler | cex_compile.py |
+
+  | Quality target | null (never self-score) |
+
+  | Density target | 0.85+ |
+
+  | Max bytes | 5120 |'

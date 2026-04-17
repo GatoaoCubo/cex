@@ -23,6 +23,7 @@ tags:
 tldr: 'CLI surface for all N05-owned infra operations: compile, doctor, hooks, signals, dispatch, system validation.'
 endpoint: _tools/ and _spawn/
 authentication: None -- local CLI tools, no token required
+density_score: 1.0
 overview: 'N05 (Operations, Gating Wrath) owns the CEX infrastructure CLI surface. No HTTP endpoints, no auth tokens. All
   tools run from repo root.
 
