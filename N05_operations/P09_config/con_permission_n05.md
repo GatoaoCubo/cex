@@ -5,8 +5,9 @@ pillar: P09
 nucleus: n05
 title: Ops Permission Matrix
 version: 1.0
-quality: null
+quality: 9.0
 tags: [config, permission, operations, access, governance]
+density_score: 1.0
 ---
 <!-- 8F: F1 constrain=P09/permission F2 become=permission-builder F3 inject=nucleus_def_n05+n05-operations+kc_permission+P09_config+N05 workflow boundaries
      F4 reason=minimum necessary access for review deploy rollback flows F5 call=apply_patch F6 produce=4710 bytes

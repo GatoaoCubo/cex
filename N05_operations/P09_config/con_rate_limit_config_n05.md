@@ -5,8 +5,10 @@ pillar: P09
 nucleus: n05
 title: Ops Rate Limits
 version: 1.0
-quality: null
+quality: 9.0
 tags: [config, rate-limit, operations, budget, provider]
+density_score: 1.0
+updated: "2026-04-17"
 ---
 <!-- 8F: F1 constrain=P09/rate_limit_config F2 become=rate-limit-config-builder F3 inject=nucleus_def_n05+n05-operations+kc_rate_limit_config+P09_config+N05 provider control
      F4 reason=cost and throughput ceilings for ops tooling with rollback-safe throttling F5 call=apply_patch F6 produce=4320 bytes
