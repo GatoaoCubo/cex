@@ -9,11 +9,12 @@ updated: "2026-04-17"
 author: api-reference-builder
 domain: "infrastructure APIs, CI/CD tooling"
 nucleus: N05
-quality: null
+quality: 9.1
 tags: [api_reference, n05, infrastructure, cli, compile, doctor, hooks, signal, dispatch, system_test]
 tldr: "CLI surface for all N05-owned infra operations: compile, doctor, hooks, signals, dispatch, system validation."
 endpoint: "_tools/ and _spawn/"
 authentication: "None -- local CLI tools, no token required"
+density_score: 1.0
 ---
 
 ## Overview

@@ -10,7 +10,7 @@ name: "N05 Operations Maintenance Daemon"
 schedule: "continuous; heartbeat 60s, orphan-cleanup 5m/30m, PID-hygiene 10m, compile-verify 15m, lock-rotate 1h, temp-cleanup 24h"
 restart_policy: on_failure
 signal_handling: "SIGTERM: complete active task, flush heartbeat, delete PID, exit 0"
-quality: null
+quality: 8.9
 tags: [daemon, n05, operations, P04, system-health]
 tldr: "N05 ops daemon: orphan reap, signal archival, PID hygiene, compile-verify, lock rotation, heartbeat 60s -- Windows PowerShell task"
 description: "Persistent background daemon maintaining .cex/runtime/ health: 7 staggered tasks keep processes reaped and .md/.yaml pairs in sync."
@@ -21,6 +21,7 @@ monitoring: "heartbeat JSON; alert if stale >3min or error_count >3 per 10min"
 logging: structured
 graceful_shutdown: "finish active task, write heartbeat status=stopping, delete PID, exit 0"
 max_restarts: "5 in 30min"
+density_score: 1.0
 ---
 
 ## Overview
