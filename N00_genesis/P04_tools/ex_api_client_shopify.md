@@ -4,7 +4,7 @@ kind: api_client
 pillar: P04
 title: Shopify Admin API Client
 version: 0.1.0
-quality: null
+quality: 8.9
 status: template
 brand_placeholders:
   - BRAND_SHOPIFY_DOMAIN
@@ -12,6 +12,7 @@ brand_placeholders:
   - BRAND_SHOPIFY_API_VERSION
   - BRAND_SHOPIFY_ADMIN_TOKEN
 tags: [commerce, template, distillation, shopify, api_client]
+density_score: 1.0
 ---
 
 # Shopify Admin API Client

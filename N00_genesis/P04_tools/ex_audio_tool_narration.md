@@ -8,7 +8,7 @@ created: 2026-04-16
 updated: 2026-04-16
 author: n02_marketing
 domain: photo_video_editing_with_narration
-quality: null
+quality: 8.7
 brand_placeholders:
   - BRAND_VOICE
   - BRAND_TONE
