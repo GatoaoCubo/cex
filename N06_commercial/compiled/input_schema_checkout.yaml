@@ -12,6 +12,7 @@ tags:
 - payment
 - commercial
 - contract
+density_score: 1.0
 purpose: Defines the canonical data contract for all checkout and order-creation flows in N06's commercial pipeline. Every
   pricing page, cart, and payment handler MUST validate against this schema before processing.
 schema_definition: "{\n  \"$schema\": \"https://json-schema.org/draft/2020-12/schema\",\n  \"$id\": \"checkout_order_flow_v1\"\

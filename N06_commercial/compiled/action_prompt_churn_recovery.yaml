@@ -12,6 +12,7 @@ tags:
 - action-prompt
 - retention
 - commercial
+density_score: 0.92
 purpose: 'Generates personalized recovery messages for customers at various churn stages: cancel intent, post-cancel, and
   win-back sequences. Each template is calibrated for the emotional state of a customer who is leaving -- neither desperate
   nor dismissive.'

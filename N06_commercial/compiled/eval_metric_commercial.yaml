@@ -15,6 +15,7 @@ tags:
 - ltv
 - cac
 - revenue
+density_score: 1.0
 purpose: Defines the canonical commercial metrics N06 tracks, their formulas, targets, and evaluation cadence. Every commercial
   decision, experiment, and self-improvement loop cycle references this framework.
 metric_taxonomy: ''

@@ -12,6 +12,7 @@ tags:
 - intervention
 - commercial
 - revenue-defense
+density_score: 1.0
 strategic_frame: 'Revenue defense is revenue generation. Every churned customer is a CAC write-off plus lost LTV. Strategic
   Greed demands we protect ARR with the same aggression we acquire it. This playbook defines the intervention chain: detect
   signal -> triage by tier -> execute play -> measure outcome.'

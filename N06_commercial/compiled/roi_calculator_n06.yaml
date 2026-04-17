@@ -13,6 +13,8 @@ tags:
 - proof
 - commercial
 - ltv
+density_score: 1.0
+updated: '2026-04-17'
 purpose: 'Quantifies the value CEX delivers to customers by tier and persona. Used in sales conversations, pricing pages,
   and renewal negotiations. Strategic Greed principle: customers buy when value > price is undeniable.'
 input_variables: "inputs:\n  # Customer profile\n  team_size: integer          # number of people who would use CEX\n  hourly_rate_usd:\

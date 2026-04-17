@@ -12,6 +12,7 @@ tags:
 - autonomous
 - commercial
 - revenue
+density_score: 1.0
 purpose: N06's commercial portfolio must evolve faster than the market. This artifact defines the autonomous loop by which
   N06 scans revenue performance, identifies strategy gaps, generates improvement hypotheses, tests them, and integrates validated
   improvements back into its artifact portfolio.

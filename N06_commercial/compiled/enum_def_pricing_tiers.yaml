@@ -12,6 +12,7 @@ tags:
 - commercial
 - saas
 - packaging
+density_score: 1.0
 purpose: Canonical enumeration of all pricing tiers, their feature gates, limits, and Stripe Price ID mapping. Every part
   of the commercial system references this enum -- pricing pages, checkout flow, entity_memory, churn logic, expansion plays.
 tier_enum: "enum PlanTier {\n  FREE       = \"free\",\n  STARTER    = \"starter\",\n  PRO        = \"pro\",\n  ENTERPRISE\

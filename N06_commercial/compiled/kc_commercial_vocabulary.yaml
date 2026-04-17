@@ -13,6 +13,7 @@ tags:
 - terminology
 - revenue
 type: controlled_vocabulary
+density_score: 0.99
 purpose: Canonical controlled vocabulary for N06 Commercial nucleus. Loaded at F2b SPEAK before every artifact generation.
   Prevents semantic drift, enforces industry-standard terminology, and enables precise LLM-to-LLM communication across nuclei.
 canonical_terms: '| Term | Definition | N06 Application | Anti-pattern |

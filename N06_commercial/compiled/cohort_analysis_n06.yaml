@@ -4,7 +4,7 @@ pillar: P07
 nucleus: n06
 title: Cohort Analysis -- Revenue Cohort Framework by Channel, Plan, and Period
 version: 1.0.0
-quality: null
+quality: 9.0
 tags:
 - cohort
 - analysis
@@ -13,6 +13,8 @@ tags:
 - commercial
 - channel
 - plan
+density_score: 1.0
+updated: '2026-04-17'
 purpose: 'Segments customer behavior by acquisition cohort to understand true retention, expansion, and LTV by channel, plan,
   and signup month. Cohort analysis reveals what aggregate churn rates hide: which customers are thriving, which are churning,
   and why.'

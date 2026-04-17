@@ -12,6 +12,7 @@ tags:
 - conversion
 - expansion
 - commercial
+density_score: 0.96
 purpose: Defines the prompt templates N06 uses to generate personalized upsell messages, upgrade nudges, and expansion plays
   at trigger events. Every in-app message, email, or CSM talking point is generated from these templates.
 template_1_quota_threshold_upsell: "Trigger: Customer at 80% of monthly build quota\n\nSystem: You are N06 Commercial writing\

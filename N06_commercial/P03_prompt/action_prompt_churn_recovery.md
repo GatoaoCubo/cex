@@ -5,8 +5,9 @@ pillar: P03
 nucleus: n06
 title: "Action Prompt -- Churn Recovery and Win-Back Messaging"
 version: 1.0.0
-quality: null
+quality: 8.9
 tags: [churn, recovery, win-back, action-prompt, retention, commercial]
+density_score: 0.92
 ---
 
 # Action Prompt: Churn Recovery and Win-Back Messaging

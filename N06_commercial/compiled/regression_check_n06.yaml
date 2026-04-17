@@ -11,6 +11,8 @@ tags:
 - commercial
 - revenue
 - failed-hypothesis
+density_score: 0.91
+updated: '2026-04-17'
 purpose: Documents failed hypotheses and revenue anti-patterns so N06 never repeats them. Strategic Greed without memory repeats
   expensive mistakes. This is the "do NOT do this" registry.
 anti_pattern_schema: "regression_entry:\n  id: REG_{date}_{sequence}\n  date: ISO8601\n  domain: pricing | conversion | retention\

@@ -12,6 +12,8 @@ tags:
 - orchestration
 - commercial
 - automated
+density_score: 1.0
+updated: '2026-04-17'
 purpose: 'Automates the full renewal lifecycle: from early signal detection through close or win-back. Renewals are NOT passive
   events -- they are actively managed revenue moments with defined trigger sequences, escalation protocols, and success criteria.'
 workflow_architecture: "DETECT: renewal_date - 30 days\n    |\n    v\nASSESS: pull customer entity -> health_score, churn_risk,\

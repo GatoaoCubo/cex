@@ -13,6 +13,7 @@ tags:
 - churn-risk
 - commercial
 - memory
+density_score: 1.0
 purpose: 'Defines the canonical customer entity that N06 maintains per account. This is the commercial brain''s memory of
   each customer -- not just contact data, but the full commercial intelligence picture: health, risk, potential, relationship
   history, and signals.'

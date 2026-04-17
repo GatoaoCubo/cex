@@ -13,6 +13,7 @@ tags:
 - commercial
 - spin
 - meddic
+density_score: 0.94
 purpose: Provides N06 with a structured question bank for commercial discovery. Questions follow SPIN methodology (Situation,
   Problem, Implication, Need-Payoff) and are organized by persona, use case, and stage. Every question has a purpose -- extract
   information that maps directly to ROI calculator inputs, ICP scoring, or tier recommendation.

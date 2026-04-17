@@ -13,6 +13,7 @@ tags:
 - escalation
 - renewal
 - operations
+density_score: 0.98
 purpose: Encodes N06's repeatable commercial procedures as procedural memory. When N06 encounters a known commercial scenario
   (new deal, renewal, escalation, pricing question), this memory provides the exact step sequence without re-deriving it each
   time.

@@ -12,6 +12,7 @@ tags:
 - feedback
 - session
 - evolution
+density_score: 1.0
 purpose: Accumulates validated learnings from N06 operations, experiments, and commercial outcomes. Each entry represents
   a pattern that passed the measurement gate in `self_improvement_loop_n06.md`. This is N06's long-term commercial memory.
 learning_schema: "learning_entry:\n  id: LRN_{date}_{sequence}\n  date: ISO8601\n  source: experiment | observation | customer_feedback\

@@ -12,6 +12,7 @@ tags:
 - commercial
 - revenue
 - validated
+density_score: 0.99
 purpose: Registry of commercial plays, pricing decisions, and sales patterns that have produced validated positive revenue
   outcomes. When N06 encounters an ambiguous commercial decision, this registry surfaces the closest matching winning pattern.
 signal_schema: "reward_entry:\n  id: REW_{date}_{sequence}\n  date: ISO8601\n  domain: pricing | conversion | retention |\

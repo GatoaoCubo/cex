@@ -1,0 +1,83 @@
+id: few_shot_examples_pricing_scenarios
+kind: knowledge_card
+pillar: P01
+nucleus: n06
+title: Few-Shot Examples -- N06 Pricing Decision Reasoning (4 Scenarios)
+version: 1.0.0
+quality: null
+updated: 2026-04-17
+tags:
+- few-shot
+- pricing
+- ltv
+- churn
+- referral
+- reasoning
+- examples
+- commercial
+type: few_shot_examples
+purpose: 'Four complete worked examples showing how N06 applies Strategic Greed reasoning to pricing, LTV, churn, and referral
+  design. Each example: problem -> 8F trace -> structured output. Use these to ground any LLM operating in the commercial
+  domain. ---'
+example_1_design_saas_pricing_tiers: 'Problem statement: A B2B SaaS product serves solo consultants, marketing teams, and
+  enterprise departments. Revenue goal: $1M ARR in 12 months. Design the tier architecture.'
+8f_trace_summary: '| Stage | Action |
+
+  |-------|--------|
+
+  | F1 CONSTRAIN | kind=referral_program, pillar=P11, domain=viral-growth |
+
+  | F2 BECOME | strategic-greed: referral = lowest CAC channel, peer trust as distribution |
+
+  | F3 INJECT | referral_program_n06.md + subscription_tier_n06.md + input_schema_checkout.md |
+
+  | F4 REASON | K-factor formula, dual-sided incentive optimization, fraud prevention |
+
+  | F5 CALL | model K-factor sensitivity to incentive value, find minimum viable reward |
+
+  | F6 PRODUCE | incentive structure with mechanics, attribution flow, anti-fraud controls |
+
+  | F7 GOVERN | validate: dual-sided? fraud controls? K-factor modeled? CAC constraint respected? |
+
+  | F8 COLLABORATE | update referral_program_n06.md + signal n06 |'
+structured_output: "REFERRAL INCENTIVE DESIGN: K-FACTOR ENGINEERING\n\nCurrent state:\n  K = referrals_sent_per_user * referral_conversion_rate\n\
+  \  K = 0.20 * 0.40 = 0.08\n\nTarget: K >= 0.30\n  Option A: increase referrals_sent to 0.75 (keep conversion 0.40)\n  Option\
+  \ B: increase conversion to 0.75 (keep referrals_sent 0.20)\n  Option C: both to 0.55 * 0.55 = 0.30 [recommended -- balanced]\n\
+  \nIncentive structure to achieve K=0.30:\n\nReferrer (existing customer):\n  Reward:    1 month free per successful conversion\
+  \ ($49-$149 value)\n  Trigger:   share at high-delight moments (post-first-build, NPS >= 9, upgrade)\n  Stacking:  up to\
+  \ 12 months/year (max $1,788 annual credit -- Enterprise)\n  Why works: intrinsic motivation (gift to friend) + extrinsic\
+  \ (personal value)\n\nReferee (new customer):\n  Reward:    1 month free on first paid plan\n  Applied:   automatically\
+  \ on first invoice (zero friction)\n  Why works: lowers trial-to-paid friction (one free month = lower perceived risk)\n\
+  \nEnterprise referral bonus:\n  Reward:    $500 cash, paid 30 days post-conversion\n  Trigger:   Enterprise plan conversion\
+  \ only\n  Rationale: Enterprise deals worth $6,000+ LTV; $500 = 8.3% CAC of $6,000\n\nK-factor impact model:\n  With dual-sided\
+  \ reward:\n    referrals_sent: 0.20 -> 0.55 (NPS trigger + delight moments)\n    conversion:     0.40 -> 0.55 (1-month free\
+  \ for referee reduces friction)\n    New K = 0.55 * 0.55 = 0.30  [TARGET ACHIEVED]\n\nCAC check:\n  Referrer cost: avg $99\
+  \ credit (blended STARTER/PRO avg)\n  Referee cost:  avg $99 credit\n  Total reward:  $198 per conversion\n  CAC target:\
+  \    $50 (cash) + $198 (credit) = $248 blended\n  Vs organic CAC: $300-$500 (paid acquisition benchmark)\n  Verdict:   \
+  \    referral CAC well within budget\n\nAnti-fraud layer:\n  - Block same-card or same-email-domain self-referrals\n  -\
+  \ Reward triggers on paid conversion only (not free signup)\n  - Manual review at 10+ conversions/month per referrer\n \
+  \ - 30-day hold before credit released (refund-gaming prevention)\n\nAttribution implementation:\n  URL: /signup?ref={tier}-{customer_id_prefix}-{random_4}\n\
+  \  Cookie TTL: 30 days\n  Schema field: customer.metadata.referral_code\n  Webhook: checkout.session.completed -> verify\
+  \ -> credit -> notify\n\nKey insight: Dual-sided incentives double K-factor by attacking both send rate\nand conversion\
+  \ rate simultaneously. Total blended CAC ($248) is lower than\npaid acquisition ($300-$500) with higher LTV (peer-matched\
+  \ ICP fit).\n\n---"
+example_2_calculate_ltv_for_enterprise_segment: 'Problem statement: Enterprise customer signs at $2,000/mo with 15% annual
+  churn. What is LTV? Is CAC of $8,000 acceptable? Calculate and frame for a board conversation.'
+example_3_model_churn_intervention_roi: 'Problem statement: Current monthly churn is 3.5%. We can invest $5,000/month in a
+  CSM team. How do we model whether it pays? Which intervention plays yield the best return?'
+example_4_structure_referral_program_incentives: 'Problem statement: Current viral coefficient K=0.08. Target K=0.30. Design
+  incentive structure to triple referral conversion rate. Budget: $50 max CAC via referral.'
+usage_notes: 'These examples are grounded in the actual N06_commercial artifact stack:
+
+  - `subscription_tier_n06.md` -- tier structure and upgrade triggers
+
+  - `churn_prevention_playbook_n06.md` -- intervention plays and save rates
+
+  - `referral_program_n06.md` -- K-factor mechanics and attribution
+
+  - `roi_calculator_n06.md` -- value proof model and objection handlers
+
+
+  When an LLM receives a pricing or commercial question, match to the closest
+
+  example above and adapt the 8F trace for the specific context.'

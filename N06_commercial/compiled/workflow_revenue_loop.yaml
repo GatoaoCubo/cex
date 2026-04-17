@@ -12,6 +12,8 @@ tags:
 - orchestration
 - commercial
 - growth
+density_score: 0.99
+updated: '2026-04-17'
 purpose: 'Defines the end-to-end orchestration of N06''s revenue-generating workflow. This is the master workflow -- it references
   and sequences all other N06 commercial artifacts. The flywheel: each phase feeds the next, creating compounding revenue.'
 flywheel_architecture: "         ACQUIRE\n        /        \\\n MEASURE          ACTIVATE\n   |                |\n EXPAND\
