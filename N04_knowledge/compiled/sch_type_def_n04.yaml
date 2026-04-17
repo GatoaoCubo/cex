@@ -11,6 +11,7 @@ tags:
 - knowledge
 - provenance
 - index
+density_score: 1.0
 purpose: N04 needs a reusable object type for facts that survive beyond one prompt or one batch. Under the Knowledge Gluttony
   lens, the type must preserve text, provenance, taxonomy, freshness, and ranking hints in one reusable shape so the system
   can keep learning from the same record over time. This type is the durable vocabulary used by input contracts, validators,

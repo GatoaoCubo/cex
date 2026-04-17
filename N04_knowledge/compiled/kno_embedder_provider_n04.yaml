@@ -26,6 +26,7 @@ api_key_env: OPENAI_API_KEY
 api_base_url: https://api.openai.com/v1
 domain: rag_indexing
 tldr: High-fidelity dense embedder for N04 retrieval, graph augmentation, and memory recall.
+density_score: 1.0
 boundary: '`embedder_provider` IS the contract for text-to-vector conversion. `embedder_provider` IS NOT the vector backend,
   retriever policy, or graph schema. N04 uses this artifact to keep chunk embeddings, entity embeddings, and memory embeddings
   aligned under one semantic geometry.'

@@ -46,6 +46,7 @@ cloud_region: null
 pricing: null
 domain: vector_storage
 tldr: Qdrant HNSW store for high-recall N04 semantic search with disciplined metadata filtering.
+density_score: 1.0
 boundary: '`vector_store` defines where vectors live and how they are indexed. It does not choose the embedding model or the
   retrieval orchestration policy. This artifact assumes embeddings come from `kno_embedder_provider_n04` and are queried by
   N04 retrieval flows.'

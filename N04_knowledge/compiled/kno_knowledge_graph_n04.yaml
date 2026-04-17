@@ -62,6 +62,7 @@ dedup_strategy: fuzzy
 community_detection: leiden
 extraction_prompt: schema_constrained_triplet_extraction_n04
 tldr: GraphRAG schema for CEX artifacts, builders, contracts, and memory paths across N04-owned knowledge.
+density_score: 1.0
 boundary: '`knowledge_graph` defines types, relations, extraction rules, storage, and traversal. It does not store live counters,
   ephemeral session facts, or raw vector index parameters. Actual instances belong in graph storage or memory artifacts after
   extraction.'

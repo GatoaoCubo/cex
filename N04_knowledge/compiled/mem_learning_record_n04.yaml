@@ -53,6 +53,7 @@ linked_artifacts:
   - kno_embedder_provider_n04
   - kno_vector_store_n04
   - mem_runtime_state_n04
+density_score: 0.95
 pattern:
 - Load the pillar schema first so kind boundaries and naming expectations are explicit before any prose appears.
 - Read the kind builder manifest and instruction before drafting so section shape follows an existing contract.

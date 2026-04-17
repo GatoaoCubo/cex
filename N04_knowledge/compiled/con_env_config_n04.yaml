@@ -11,6 +11,7 @@ tags:
 - knowledge
 - indexing
 - retrieval
+density_score: 1.0
 purpose: N04 uses environment variables to tune ingestion appetite, retrieval precision, and freshness behavior without rewriting
   artifacts. The Knowledge Gluttony lens favors collecting enough knobs to observe and steer knowledge flow, while still naming
   each variable precisely enough to prevent configuration sprawl. This config defines the canonical environment catalog for

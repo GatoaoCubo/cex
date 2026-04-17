@@ -15,6 +15,7 @@ name: embeddings_default
 provider: openai
 rpm: 180
 tpm: 900000
+density_score: 1.0
 purpose: 'N04 can generate large indexing bursts: embeddings, reranking, metadata enrichment, and freshness sweeps all compete
   for provider quota. The Knowledge Gluttony lens means the nucleus would happily consume every source it sees, so this config
   defines the ceilings that keep appetite aligned with provider limits and budget. This artifact governs request throughput,

@@ -28,6 +28,7 @@ linked_artifacts:
   - kno_knowledge_graph_n04
   - kno_vector_store_n04
   - mem_learning_record_n04
+updated: '2026-04-17'
 routing_rules: '| Rule | Condition | Action | Confidence |
 
   |------|-----------|--------|------------|

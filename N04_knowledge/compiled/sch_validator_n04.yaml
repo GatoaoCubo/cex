@@ -11,6 +11,7 @@ tags:
 - knowledge
 - provenance
 - quality
+density_score: 1.0
 purpose: This validator blocks thin, source-poor knowledge from entering N04 as if it were trustworthy. The Knowledge Gluttony
   lens does not mean accepting everything; it means collecting aggressively and then governing the collection with hard binary
   checks. This rule targets the intake payload and fails artifacts that lack enough evidence density to deserve indexing.

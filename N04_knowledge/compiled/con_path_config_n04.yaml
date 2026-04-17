@@ -11,6 +11,7 @@ tags:
 - knowledge
 - storage
 - index
+density_score: 1.0
 purpose: 'N04 accumulates source material, compiled artifacts, embeddings, and audit outputs quickly. The Knowledge Gluttony
   lens therefore needs a bounded path map: gather many files, but place each class of knowledge in a named location so the
   nucleus can hoard without becoming unreadable. This path config defines the authoritative directory aliases for N04 work.'

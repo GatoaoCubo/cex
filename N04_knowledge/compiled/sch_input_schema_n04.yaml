@@ -11,6 +11,7 @@ tags:
 - knowledge
 - ingestion
 - retrieval
+density_score: 1.0
 purpose: 'N04 does not accept vague payloads. Under the Knowledge Gluttony lens, every intake should preserve enough context
   to support re-ranking, provenance tracing, freshness review, and taxonomy repair later. This schema defines the unilateral
   contract for any caller that submits a knowledge unit, chunk batch, or indexing candidate into N04 workflows. The contract

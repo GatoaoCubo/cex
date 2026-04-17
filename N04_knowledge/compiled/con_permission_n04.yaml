@@ -11,6 +11,7 @@ tags:
 - knowledge
 - access
 - governance
+density_score: 1.0
 purpose: 'Knowledge assets are valuable because they accumulate evidence, provenance, and organizational memory. The Knowledge
   Gluttony lens pushes N04 to store a lot, but that makes access control more important, not less: hungry systems must know
   who may read, write, execute, and export knowledge-bearing resources. This permission artifact defines the least-privilege

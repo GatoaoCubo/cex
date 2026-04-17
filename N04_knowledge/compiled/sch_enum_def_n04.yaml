@@ -34,6 +34,7 @@ values: '| Value | Meaning | Typical producer | Typical consumer | Status |
   |
 
   | rejected | Failed structural or provenance checks and cannot enter index | validator | remediation queue | active |'
+density_score: 1.0
 purpose: 'N04 works under the Knowledge Gluttony lens: capture more signal than the minimum, but capture it in a finite, auditable
   vocabulary so retrieval, indexing, and validator layers do not drown in synonyms. This enum defines the canonical lifecycle
   labels for knowledge-bearing units handled by N04 pipelines such as ingestion, chunk enrichment, taxonomy alignment, freshness
