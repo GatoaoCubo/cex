@@ -7,12 +7,13 @@ title: "Entity Memory -- B2B Partner Profile"
 description: "Entity memory schema for B2B partner profiles. Captures registration data, tier, activity history, and commercial signals for CRM and AI-assisted sales workflows."
 domain: crm
 nucleus: N06
-quality: null
+quality: 9.0
 tags: [entity-memory, crm, b2b, partner, profile, commercial]
 brand_placeholders:
   - BRAND_NAME
   - BRAND_CRM_TABLE_PREFIX
   - BRAND_VERTICAL
+density_score: 1.0
 ---
 
 # Entity Memory -- B2B Partner Profile
