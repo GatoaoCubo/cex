@@ -7,7 +7,7 @@ title: "Promo Calendar Schedule Template -- Quarterly Overlay"
 description: "Quarterly promotional calendar with holiday triggers, content-promo alignment, UTM tagging, and channel-specific rules. Generic template with {{BRAND_*}} placeholders."
 domain: content_monetization
 nucleus: N06
-quality: null
+quality: 9.0
 tags: [schedule, promo-calendar, quarterly, ecommerce, utm, campaigns, content-alignment]
 brand_placeholders:
   - BRAND_NAME
@@ -18,6 +18,7 @@ brand_placeholders:
   - BRAND_UTM_SOURCE
   - BRAND_GA4_ID
   - BRAND_CURRENCY
+density_score: 1.0
 ---
 
 # Promo Calendar Schedule Template -- Quarterly Overlay
