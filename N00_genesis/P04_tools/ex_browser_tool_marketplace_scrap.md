@@ -4,13 +4,14 @@ kind: browser_tool
 pillar: P04
 title: Marketplace Scrap Browser Tool
 version: 0.1.0
-quality: null
+quality: 8.9
 status: template
 brand_placeholders:
   - BRAND_NAME
   - BRAND_SUPPORT_EMAIL
   - BRAND_COMPETITOR_WHITELIST
 tags: [commerce, template, distillation, browser, scraping]
+density_score: 0.97
 ---
 
 # Marketplace Scrap Browser Tool

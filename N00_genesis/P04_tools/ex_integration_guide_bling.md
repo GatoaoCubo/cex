@@ -4,7 +4,7 @@ kind: integration_guide
 pillar: P04
 title: Bling ERP Integration Guide
 version: 0.1.0
-quality: null
+quality: 9.0
 status: template
 brand_placeholders:
   - BRAND_NAME
@@ -14,6 +14,7 @@ brand_placeholders:
   - BRAND_BLING_WEBHOOK_SECRET
   - BRAND_SUPABASE_PROJECT_REF
 tags: [commerce, template, distillation, bling, integration_guide]
+density_score: 1.0
 ---
 
 # Bling ERP Integration Guide
