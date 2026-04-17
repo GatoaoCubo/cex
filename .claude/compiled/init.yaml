@@ -1,0 +1,191 @@
+description: 'Initialize CEX for your brand. First-time setup. Usage: /init [folder_path]'
+quality: 9.0
+title: Init
+version: 1.0.0
+author: n03_builder
+tags:
+- artifact
+- builder
+- examples
+tldr: Golden and anti-examples for CEX system, demonstrating ideal structure and common pitfalls.
+domain: CEX system
+created: '2026-04-07'
+updated: '2026-04-07'
+density_score: 0.9
+phase_0_environment_setup_always_runs_first: 'Before brand setup, verify API keys are configured:
+
+
+  python _tools/cex_env_wizard.py --check
+
+
+  If `ANTHROPIC_API_KEY` is missing, run the wizard:
+
+
+  python _tools/cex_env_wizard.py
+
+
+  This is the minimum required key to run CEX. All other keys are optional.
+
+  If the user types `/init --env`, run the wizard and stop (skip brand setup).'
+mode_detection: 'Check how the user invoked `/init`:
+
+
+  1. `/init` (no args) → Conversational mode: ask questions one by one
+
+  2. `/init C:\Users\...\my_brand_stuff` → Ingest mode: scan folder, then ask
+
+  3. `/init <url>` → URL mode: scrape website for brand signals
+
+  4. `/init https://github.com/...` → Repo mode: read GitHub repo for signals
+
+  5. `/init <file.pdf>` → File mode: ingest single file
+
+  6. `/init --reset` → Reset existing brand: `python _tools/cex_bootstrap.py --reset`
+
+  7. `/init --env` → Env wizard only (no brand setup)'
+step_0_check_bootstrap_status: 'python _tools/cex_bootstrap.py --check
+
+
+  If already bootstrapped, show status and ask if they want to update or reset.
+
+
+  ---'
+path_a_conversational_mode_no_folder: "Ask these questions ONE AT A TIME in natural language. Wait for each answer.\nUse casual,\
+  \ friendly tone. The user might not know branding terminology.\n\nRound 1 — The basics\n1. \"What's the name of your company\
+  \ or product?\"\n2. \"If you had to describe what you do in one sentence — like an elevator pitch — what would it be?\"\n\
+  3. \"What are 3 things your company would NEVER compromise on? Like core values.\"\n\nRound 2 — Personality\n- \"How should\
+  \ your brand sound? More like a professor or a friend? More serious or fun?\"\n  - From their answer, map to 5D voice scores\
+  \ and suggest an archetype.\n  - Present 3-4 archetype options in SIMPLE language:\n    - \"The Wise Guide (Sage) — educational,\
+  \ trustworthy\"\n    - \"The Rebel (Outlaw) — bold, challenges the status quo\"\n    - \"The Creator — innovative, original,\
+  \ artistic\"\n    - \"The Caregiver — supportive, warm, protective\"\n    - etc. (only show 3-4 most likely matches)\n\n\
+  Round 3 — Your people\n1. \"Describe your dream customer — not their age, but their daily frustrations and what they wish\
+  \ was different.\"\n2. \"After they use your product, what changes? Try: 'From  to  through _'\"\n\nRound 4 — Business\n\
+  1. \"What category or market are you in?\"\n2. \"How do you make money — subscriptions, one-time sales, courses, something\
+  \ else?\"\n3. \"What currency — BRL, USD?\"\n\nAfter all answers: write YAML, bootstrap, confirm.\n\n---"
+path_b_ingest_mode_folder_provided: 'The user has a messy folder with brand materials. Process it:'
+step_1_ingest: 'python _tools/brand_ingest.py "$ARGUMENTS" --for-llm
+
+
+  This scans the folder and extracts:
+
+  1. Color hex codes from CSS/HTML files
+
+  2. Font names
+
+  3. Potential brand names (by frequency)
+
+  4. Mission/vision/tagline (if found in text)
+
+  5. URLs, social handles, pricing
+
+  6. Source excerpts for context'
+step_2_read_documents_if_any: 'If `brand_ingest.py` reports documents (PDF, DOCX, PPTX):
+
+  1. Use the markitdown MCP tool to convert each to text
+
+  2. Extract brand signals from the converted text
+
+  3. Look for: pitch decks (positioning), brand guides (colors/fonts), proposals (ICP)'
+step_3_read_images_if_any: 'If images are found (logos, screenshots, Canva exports):
+
+  1. Describe what you see: colors, style, typography direction
+
+  2. Note potential logo files'
+step_4_present_findings_to_user: 'Show what you found: > "I scanned your 23 files and found: > - Brand name appears to be:
+  [name] (appeared 14 times) > - Colors used: #FF5733, #1A1A2E, #50C878 > - Font: Inter (in your CSS) > - Mission fragment:
+  ''...'' > - Pricing: R$ 97, R$ 297 (subscription seems likely) > > Let me confirm a few things..."'
+step_5_fill_gaps_conversationally: 'Ask ONLY about what wasn''t found:
+
+  1. If no archetype signals → ask about personality
+
+  2. If no ICP found → ask about ideal customer
+
+  3. If no transformation → ask about before/after
+
+  4. If no values → ask about non-negotiables'
+step_6_bootstrap: 'Write YAML from combined signals + answers:
+
+
+  python _tools/cex_bootstrap.py --from-file /tmp/brand_from_ingest.yaml
+
+
+  Verify:
+
+  python _tools/brand_validate.py
+
+  python _tools/brand_audit.py --json
+
+
+  ---'
+path_c_url_mode: 'User provides a website URL (not a GitHub URL):
+
+
+  python _tools/brand_ingest.py --url "$ARGUMENTS" --for-llm
+
+
+  This scrapes homepage + /about + /pricing pages.
+
+  Uses Firecrawl if `FIRECRAWL_API_KEY` is set, otherwise plain HTTP.
+
+
+  Then follow PATH B Step 4 onwards (present findings, fill gaps conversationally).
+
+
+  ---'
+path_d_github_repo_mode: 'User provides a GitHub URL (`https://github.com/{owner}/{repo}`):
+
+
+  python _tools/brand_ingest.py --repo "$ARGUMENTS" --for-llm
+
+
+  This reads README + key docs via the GitHub raw content API (no auth needed for public repos).
+
+  Also fetches the repo description from `api.github.com`.
+
+
+  Then follow PATH B Step 4 onwards.
+
+
+  ---'
+path_e_single_file_mode: 'User provides a path to a file (PDF, DOCX, MD, TXT):
+
+
+  python _tools/brand_ingest.py --file "$ARGUMENTS" --for-llm
+
+
+  If the file is a PDF/DOCX, attempts to use `markitdown` for conversion.
+
+  Then follow PATH B Step 4 onwards.
+
+
+  ---'
+final_confirmation: 'Always end with: > "Done! CEX is now the brain of [BRAND_NAME]. > Everything I produce from now on will
+  use your voice, colors, and identity. > > Want me to generate your full Brand Book? (32 sections, takes ~5 minutes)" If
+  they say yes → run the N06 Brand Book workflow. ---'
+edge_cases: 'User has almost nothing: Just a name and a vague idea. → That''s fine. Fill what you can, use sensible defaults,
+  mark gaps. → Suggest: "We can refine this later with `/init` again." User has TOO MUCH: 500 files, multiple brands. → Ask:
+  "Which brand should I focus on?" or "Which folder is the main one?" → Only ingest the subfolder they point to. User has
+  an existing brand guide: PDF with colors, fonts, voice. → Best case. Use markitdown to read it, extract everything. → This
+  might fill 90% of brand_config.yaml automatically. User''s materials are in a foreign language: → brand_ingest.py detects
+  language automatically. → Set BRAND_LANGUAGE accordingly.'
+properties: '| Property | Value |
+
+  |----------|-------|
+
+  | Kind | `` |
+
+  | Pillar |  |
+
+  | Domain | CEX system |
+
+  | Pipeline | 8F (F1-F8) |
+
+  | Scorer | cex_score.py |
+
+  | Compiler | cex_compile.py |
+
+  | Retriever | cex_retriever.py |
+
+  | Quality target | 9.0+ |
+
+  | Density target | 0.85+ |'
