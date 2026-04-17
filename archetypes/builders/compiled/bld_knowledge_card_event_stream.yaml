@@ -1,0 +1,35 @@
+id: bld_knowledge_card_event_stream
+kind: knowledge_card
+pillar: P04
+title: Event Stream Builder -- Knowledge Card
+version: 1.0.0
+quality: null
+tags:
+- builder
+- event_stream
+- knowledge
+llm_function: INJECT
+core_concept: 'Event Stream is a configuration artifact for real-time ordered event feeds. It specifies how domain events
+  are published, partitioned, retained, and consumed. Industry: Kafka topic, Kinesis stream, Azure Event Hub.'
+when_to_use:
+- Multiple consumers need the same domain events independently
+- Events must be replayed (audit, reprocessing, new consumer catch-up)
+- Order matters within an entity's events (user actions, order updates)
+- Real-time processing at high throughput (>100 events/sec)
+when_not_to_use:
+- 'Single HTTP push to one endpoint: use webhook'
+- 'Internal CEX nucleus coordination: use signal'
+- 'One-time notification: use webhook or direct command'
+- 'Scheduled batch: use schedule'
+key_configuration_dimensions:
+- 'Partitioning: determines parallelism and ordering scope'
+- 'Retention: determines replay window (how far back consumers can read)'
+- 'Delivery: determines consumer idempotency requirements'
+- 'Consumer groups: each group reads independently with its own offset'
+- 'Schema: determines event shape and evolution policy'
+cex_integration:
+- 'Pillar: P04 (Tools)'
+- 'Builder: event-stream-builder (13 ISOs)'
+- 'Related: webhook (P04), signal (internal), process_manager (P12)'
+- 'Produced by: N05 (Operations) or N03 (Engineering)'
+- 'max_bytes: 3072'

@@ -1,0 +1,56 @@
+id: bld_manifest_aggregate_root
+kind: knowledge_card
+pillar: P06
+title: Aggregate Root Builder -- Manifest
+version: 1.0.0
+quality: null
+tags:
+- builder
+- aggregate_root
+- ddd
+- P06
+domain: aggregate_root
+llm_function: BECOME
+triggers:
+- define aggregate root
+- create domain entity
+- enforce domain invariants
+keywords:
+- aggregate_root
+- ddd
+- domain
+- invariant
+- entity
+- consistency_boundary
+identity: Specialist in building `aggregate_root` artifacts -- DDD entry-point entities that own a consistency boundary, enforce
+  invariants, and control all access to their cluster. Knows Evans DDD patterns, CQRS aggregate design, event sourcing aggregate
+  roots, and the hard line between aggregate_root (P06), interface (P06), and input_schema (P06).
+capabilities:
+- Define aggregate boundary with explicit invariants
+- Produce aggregate_root with identity, commands, events, and repositories
+- Classify invariants (hard/soft) and enforcement mechanism
+- Specify factories, repositories, and domain event emission
+- Document invariant violations with concrete examples
+routing: 'keywords: [aggregate_root, ddd, domain_entity, consistency_boundary, invariant] triggers: "define aggregate root",
+  "create domain entity", "enforce domain invariants"'
+crew_role: 'Handles DOMAIN CONSISTENCY BOUNDARIES. Answers: "what entity owns a cluster and what invariants must never be
+  broken?" Does NOT handle: interface (contract), input_schema (validation), type_def (type alias).'
+properties: '| Property | Value |
+
+  |----------|-------|
+
+  | Kind | `type_builder` |
+
+  | Pillar | P06 |
+
+  | Domain | aggregate_root |
+
+  | Pipeline | 8F (F1-F8) |
+
+  | Scorer | cex_score.py |
+
+  | Compiler | cex_compile.py |
+
+  | Quality target | 9.0+ |
+
+  | Density target | 0.85+ |'

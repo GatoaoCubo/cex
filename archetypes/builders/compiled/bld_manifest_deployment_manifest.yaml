@@ -1,0 +1,74 @@
+id: bld_manifest_deployment_manifest
+kind: type_builder
+pillar: P09
+domain: deployment_manifest
+llm_function: BECOME
+version: 1.0.0
+created: '2026-04-17'
+updated: '2026-04-17'
+author: builder
+tags:
+- builder
+- deployment_manifest
+- P09
+- config
+- deploy
+keywords:
+- deployment
+- manifest
+- kubernetes
+- helm
+- rollout
+- artifact
+- infrastructure
+triggers:
+- create deployment manifest
+- write deploy spec
+- deployment configuration
+- what to deploy where
+capabilities:
+- Enumerate artifact list with versions and checksums
+- Specify target environment with namespace/region/cluster
+- Encode configuration overrides (env vars, secrets refs)
+- Define health-check endpoints and readiness gates
+- Specify rollback_to revision on failure
+- Validate artifact against quality gates (8 HARD + SOFT)
+quality: null
+title: 'Manifest: deployment_manifest Builder'
+tldr: Builds deployment_manifest artifacts specifying what artifacts deploy to which environment with what configuration.
+density_score: null
+isolation: worktree
+isolation_reason: deployment manifests touch infra config and may trigger live deployments; worktree isolates from main branch
+identity: Specialist in building `deployment_manifest` -- deployment specifications that encode WHAT artifacts to deploy,
+  WHERE (environment/target), and HOW (config overrides, secrets refs, health checks). Maps to Kubernetes manifest / Helm
+  values in the industry.
+routing: 'keywords: [deployment, manifest, kubernetes, helm, rollout, artifact, infrastructure] triggers: "create deployment
+  manifest", "write deploy spec", "deployment configuration"'
+crew_role: 'In a crew, I handle DEPLOYMENT SPECIFICATION. I answer: "what goes where, with what config, and what is the rollback
+  plan?" I do NOT handle: env_config (runtime variables), sandbox_spec (test environments), canary_config (traffic splitting).'
+metadata: 'id: bld_manifest_deployment_manifest
+
+  pipeline: 8F
+
+  scoring: hybrid_3_layer'
+properties: '| Property | Value |
+
+  |----------|-------|
+
+  | Kind | `type_builder` |
+
+  | Pillar | P09 |
+
+  | Domain | deployment_manifest |
+
+  | Pipeline | 8F (F1-F8) |
+
+  | Scorer | cex_score.py |
+
+  | Compiler | cex_compile.py |
+
+  | Retriever | cex_retriever.py |
+
+  | Quality target | 9.0+ |
+
+  | Density target | 0.85+ |'

@@ -1,0 +1,11 @@
+id: bld_output_template_constitutional_rule
+kind: output_template
+pillar: P11
+title: Constitutional Rule Builder -- Output Template
+version: 1.0.0
+quality: null
+tags:
+- builder
+- constitutional_rule
+- template
+llm_function: PRODUCE

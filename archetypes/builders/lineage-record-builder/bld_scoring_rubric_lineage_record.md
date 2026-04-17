@@ -1,0 +1,31 @@
+---
+id: bld_scoring_rubric_lineage_record
+kind: knowledge_card
+pillar: P07
+title: "Scoring Rubric: lineage_record"
+version: 1.0.0
+created: "2026-04-17"
+updated: "2026-04-17"
+author: builder
+domain: lineage_record
+quality: null
+tags: [scoring_rubric, lineage_record, P01]
+llm_function: GOVERN
+tldr: "5-dimension scoring rubric for lineage_record artifacts."
+density_score: null
+---
+
+# Scoring Rubric: lineage_record
+
+## 5-Dimension Scoring
+
+| Dimension | Weight | Score 10 | Score 5 | Score 0 |
+|-----------|--------|----------|---------|---------|
+| D1 Completeness | 0.30 | All entities+activities+agents+relations present, counts match | Missing 1 section | Multiple sections missing |
+| D2 PROV-O Compliance | 0.25 | Standard PROV-O relations used in derivation section | Informal language used | No PROV-O vocabulary |
+| D3 Traceability | 0.25 | Each entity has location + timestamp; each activity has timestamp | Some timestamps missing | No timestamps |
+| D4 Agent Coverage | 0.10 | Agent identified for every activity | Partial agent coverage | No agents listed |
+| D5 Compliance | 0.10 | ID pattern, kind literal, frontmatter parses | Minor issue | HARD gate failure |
+
+## Composite Score
+`score = (D1*0.30 + D2*0.25 + D3*0.25 + D4*0.10 + D5*0.10) * 10`

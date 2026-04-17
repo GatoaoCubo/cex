@@ -1,0 +1,32 @@
+---
+id: bld_scoring_rubric_aggregate_root
+kind: knowledge_card
+pillar: P06
+title: "Aggregate Root Builder -- Scoring Rubric"
+version: 1.0.0
+quality: null
+tags: [builder, aggregate_root, scoring]
+llm_function: GOVERN
+---
+# Scoring Rubric: aggregate_root
+## 5D Dimensions
+| Dim | Name | Weight | Description |
+|-----|------|--------|-------------|
+| D1 | Invariant Strength | 0.30 | Are invariants concrete, measurable, and domain-meaningful? |
+| D2 | Command Completeness | 0.20 | Do commands cover all mutations with pre/postconditions? |
+| D3 | Event Coverage | 0.15 | Does every state-changing command emit a domain event? |
+| D4 | Boundary Integrity | 0.25 | Are cross-aggregate references by ID only? No internal object leakage? |
+| D5 | Repository Contract | 0.10 | Is repository limited to find_by_id + save? |
+## D1 Scoring Guide: Invariant Strength
+| Score | Criteria |
+|-------|----------|
+| 1.0 | All invariants: measurable (field + operator + value), domain-meaningful, testable |
+| 0.7 | Most invariants concrete, 1-2 vague ("must be valid") |
+| 0.3 | Invariants are aspirational ("should be correct") |
+| 0.0 | No invariants or invariants are tautologies |
+## D4 Scoring Guide: Boundary Integrity
+| Score | Criteria |
+|-------|----------|
+| 1.0 | All external aggregates referenced by ID value_object only |
+| 0.5 | 1 cross-aggregate object reference (anti-pattern) present |
+| 0.0 | Multiple object references to other aggregates |

@@ -1,0 +1,59 @@
+---
+kind: config
+id: bld_config_working_memory
+pillar: P09
+llm_function: CONSTRAIN
+purpose: Naming, paths, size limits, and operational constraints for working_memory
+effort: low
+max_turns: 15
+disallowed_tools: []
+quality: null
+title: "Config Working Memory"
+version: "1.0.0"
+author: n03_builder
+tags: [working_memory, builder, config]
+tldr: "Naming, paths, size limits, and enum constraints for working_memory production."
+domain: "working memory construction"
+created: "2026-04-17"
+updated: "2026-04-17"
+density_score: 0.90
+---
+# Config: working_memory Production Rules
+
+## Naming Convention
+| Scope | Convention | Example |
+|-------|-----------|---------|
+| Artifact files | `p10_wm_{scope}.md` | `p10_wm_n04_kc_builder.md` |
+| Builder directory | kebab-case | `working-memory-builder/` |
+| Frontmatter fields | snake_case | `task_id`, `context_slots`, `clear_on_complete` |
+| Task slug | snake_case, lowercase | `n04_kc_builder`, `n01_research_task` |
+
+Rule: id MUST equal filename stem.
+
+## File Paths
+- Output: `N0x_{domain}/P10_memory/p10_wm_{scope}.md`
+- Compiled: `N0x_{domain}/P10_memory/compiled/p10_wm_{scope}.yaml`
+
+## Size Limits
+- Body: max 3072 bytes
+- Density: >= 0.80
+
+## Clear Policy Enum
+| Value | When | Target |
+|-------|------|--------|
+| clear | Pure computation, no persistent knowledge | None |
+| promote | Research, analysis, knowledge extraction | entity_memory, episodic_memory, learning_record |
+
+## Expiry Options
+| Value | When to use |
+|-------|-------------|
+| on_task_complete | Standard; clear when task signals done |
+| on_session_end | Task may span multiple turns |
+| {integer}min | Fallback TTL for stuck tasks |
+| manual | Developer-controlled (debugging only) |
+
+## Capacity Unit Options
+| Unit | When | Notes |
+|------|------|-------|
+| tokens | LLM context-aware | Measure against model's context window |
+| slots | Simple key-value stores | Count of slot entries |

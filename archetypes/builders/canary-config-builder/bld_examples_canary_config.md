@@ -1,0 +1,64 @@
+---
+id: bld_examples_canary_config
+kind: knowledge_card
+pillar: P01
+title: "Examples: canary_config"
+version: 1.0.0
+created: "2026-04-17"
+updated: "2026-04-17"
+author: builder
+domain: canary_config
+quality: null
+tags: [examples, canary_config, P09]
+llm_function: INJECT
+tldr: "Golden and anti-examples for canary_config construction."
+density_score: null
+---
+
+# Examples: canary_config
+
+## Golden Example
+```yaml
+---
+id: p09_cc_cex_api_v210
+kind: canary_config
+pillar: P09
+version: 1.0.0
+service_name: "cex-api"
+canary_version: "2.1.0"
+stable_version: "2.0.3"
+stages_count: 4
+rollback_trigger_metric: "error_rate"
+rollback_trigger_threshold: 0.01
+provider: argo_rollouts
+domain: cex-api
+quality: null
+tags: [canary_config, cex-api]
+tldr: "cex-api canary 2.1.0: 5->25->50->100% over 4 stages; rollback if error_rate > 1%"
+---
+## Traffic Stages
+| Stage | Canary % | Pause (min) | Analysis Interval (min) |
+|-------|---------|-------------|------------------------|
+| initial | 5 | 10 | 2 |
+| phase_1 | 25 | 15 | 5 |
+| phase_2 | 50 | 20 | 5 |
+| complete | 100 | - | - |
+
+## Rollback Triggers
+- Metric: error_rate
+- Threshold: > 0.01 (1%)
+- Action: Rollback to 2.0.3
+
+## Analysis Configuration
+- Provider: argo_rollouts
+- Metric Provider: Prometheus
+- Success Condition: `result < 0.01`
+```
+
+## Anti-Example (REJECTED)
+```yaml
+stages_count: 1
+stages:
+  - traffic_percent: 100  # FAIL: no gradual rollout; defeats canary purpose
+rollback_trigger_metric: null  # FAIL: no rollback trigger
+```

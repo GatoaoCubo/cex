@@ -1,0 +1,35 @@
+id: bld_architecture_canary_config
+kind: knowledge_card
+pillar: P08
+title: 'Architecture: canary_config Relationships'
+version: 1.0.0
+created: '2026-04-17'
+updated: '2026-04-17'
+author: builder
+domain: canary_config
+quality: null
+tags:
+- architecture
+- canary_config
+- P09
+llm_function: CONSTRAIN
+tldr: How canary_config relates to deployment_manifest, slo_definition, feature_flag, and ab_test_config.
+density_score: null
+relationship_graph: "[deployment_manifest] --> [canary_config] --> [slo_definition] (rollback trigger)\n                 \
+  \              |\n                               +--> [signal: canary_promoted | canary_rolled_back]\n                 \
+  \              |\n                               +--> [trace_config] (metric data source)"
+kind_boundaries: '| Kind | Relationship | Boundary |
+
+  |------|-------------|---------|
+
+  | deployment_manifest | UPSTREAM | deployment_manifest defines artifacts; canary_config defines traffic split strategy |
+
+  | slo_definition | ROLLBACK SIGNAL | slo_definition breach triggers canary_config rollback |
+
+  | feature_flag | SIBLING | feature_flag is boolean toggle; canary_config is graduated traffic split |
+
+  | ab_test_config | SIBLING | ab_test_config uses statistical analysis; canary_config uses metric thresholds |
+
+  | trace_config | DOWNSTREAM | trace_config feeds metric data used by canary analysis |'
+progressive_delivery_stack: "deployment_manifest  (what to deploy)\n      |\ncanary_config        (how to roll out traffic)\n\
+  \      |\nslo_definition       (success criteria)\n      |\ntrace_config         (observability data)"

@@ -1,0 +1,65 @@
+id: bld_schema_constitutional_rule
+kind: schema
+pillar: P11
+title: Constitutional Rule Builder -- Schema
+version: 1.0.0
+quality: null
+tags:
+- builder
+- constitutional_rule
+- schema
+llm_function: CONSTRAIN
+frontmatter_fields: ''
+required: '| Field | Type | Notes |
+
+  |-------|------|-------|
+
+  | id | string `p11_cr_{slug}` | namespace + slug |
+
+  | kind | literal `constitutional_rule` | type integrity |
+
+  | pillar | literal `P11` | pillar assignment |
+
+  | title | string | human label |
+
+  | version | semver | versioning |
+
+  | constitutional_basis | enum(harm_prevention, honesty, autonomy_preservation, legality) | which value this protects |
+
+  | principle | string | one concrete prohibition statement |
+
+  | bypass_policy | literal `none` | MUST be none -- no exceptions |
+
+  | core | literal `true` | marks as non-overridable core rule |
+
+  | quality | null | never self-score |
+
+  | tags | list[string] >= 3 | searchability |
+
+  | tldr | string <= 160ch | dense summary |'
+recommended: '| Field | Type | Notes |
+
+  |-------|------|-------|
+
+  | applies_to | list[string] | which agent kinds this rule applies to |
+
+  | detection_method | string | how violations are identified |
+
+  | cai_reference | string | which CAI principle this maps to |
+
+  | severity | literal `critical` | always critical for constitutional rules |'
+id_pattern: 'Regex: `^p11_cr_[a-z][a-z0-9_]+$`'
+body_structure:
+- '`## Principle` -- one clear, concrete prohibition'
+- '`## Constitutional Basis` -- which value this protects and why it is absolute'
+- '`## Rationale` -- why this has zero exceptions'
+- '`## Violations` -- concrete examples of what breaking this looks like'
+- '`## Detection` -- how a reviewer identifies a violation'
+- '`## Boundary` -- why this is not a guardrail (no bypass) and not a safety_policy (has enforcement)'
+constraints:
+- 'max_bytes: 2048'
+- 'naming: p11_cr_{slug}.md'
+- bypass_policy MUST be "none" -- any bypass downgrades to guardrail
+- core MUST be true
+- severity MUST be critical (constitutional rules are always critical)
+- 'quality: null always'

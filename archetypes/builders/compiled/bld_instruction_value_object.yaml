@@ -1,0 +1,32 @@
+id: bld_instruction_value_object
+kind: instruction
+pillar: P06
+title: Value Object Builder -- Instruction
+version: 1.0.0
+quality: null
+tags:
+- builder
+- value_object
+- instruction
+llm_function: REASON
+phase_1_research:
+- Identify the domain concept -- what real-world attribute needs typed representation?
+- 'Verify no identity needed: two instances with same attributes should be interchangeable.'
+- 'Enumerate attributes: what fields make up this value? What are their types and constraints?'
+- 'Define validation rules: what makes an instance valid vs invalid?'
+- 'Define allowed transformations: what operations produce a new valid instance?'
+- 'Identify context: which aggregate_root or entity uses this value_object?'
+phase_2_compose:
+- Read bld_schema_value_object.md -- source of truth for required fields
+- 'Fill frontmatter: id pattern p06_vo_{slug}, kind: value_object, quality: null'
+- 'Write Attributes section: field name, type, constraint for each attribute'
+- 'Write Equality section: structural equality contract (all attributes equal = value equal)'
+- 'Write Validation section: invariants for the value (invalid state examples)'
+- 'Write Transformations section: operations that produce new instances (never mutate)'
+- 'Write Usage section: which aggregates or entities use this value_object'
+phase_3_validate:
+- 'HARD gates: id matches `p06_vo_[a-z][a-z0-9_]+`, kind == value_object, quality == null'
+- Value has >= 1 attribute with type and constraint
+- Equality is structural (not by reference)
+- No mutation methods -- only transformations returning new instances
+- Invalid state examples present

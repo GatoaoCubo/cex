@@ -1,0 +1,11 @@
+id: bld_output_template_process_manager
+kind: output_template
+pillar: P12
+title: Process Manager Builder -- Output Template
+version: 1.0.0
+quality: null
+tags:
+- builder
+- process_manager
+- template
+llm_function: PRODUCE

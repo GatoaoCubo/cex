@@ -1,0 +1,34 @@
+id: bld_instruction_aggregate_root
+kind: instruction
+pillar: P06
+title: Aggregate Root Builder -- Instruction
+version: 1.0.0
+quality: null
+tags:
+- builder
+- aggregate_root
+- instruction
+llm_function: REASON
+phase_1_research:
+- Identify the domain concept this aggregate owns -- what real-world entity is the root?
+- 'Map the cluster: which child entities and value objects fall inside this boundary?'
+- 'Enumerate invariants: what rules must ALWAYS be true after any command executes?'
+- 'Identify commands: what operations mutate state within this aggregate?'
+- 'Identify domain events: what facts does this aggregate emit on state change?'
+- 'Determine repository interface: how is this aggregate persisted and retrieved?'
+phase_2_compose:
+- Read bld_schema_aggregate_root.md -- source of truth for required fields
+- Read bld_output_template_aggregate_root.md -- fill following SCHEMA constraints
+- 'Fill frontmatter: id pattern p06_ar_{slug}, kind: aggregate_root, quality: null'
+- 'Write Identity section: root entity name, bounded context, and cluster members'
+- 'Write Invariants section: numbered hard rules, each concrete and verifiable'
+- 'Write Commands section: allowed mutations with preconditions and postconditions'
+- 'Write Events section: domain events emitted, their payloads and triggers'
+- 'Write Repository section: find-by-id + save interface, no query methods'
+- 'Write Boundaries section: what is inside vs outside this aggregate'
+phase_3_validate:
+- Check bld_quality_gate_aggregate_root.md -- run all HARD gates
+- 'HARD gates: id matches `p06_ar_[a-z][a-z0-9_]+`, kind == aggregate_root, quality == null'
+- Invariants are concrete not aspirational, commands have pre/postconditions
+- Aggregate does not reference other aggregates by object -- only by ID
+- 'If score < 8.0: revise before outputting'

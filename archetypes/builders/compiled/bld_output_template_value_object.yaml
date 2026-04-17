@@ -1,0 +1,11 @@
+id: bld_output_template_value_object
+kind: output_template
+pillar: P06
+title: Value Object Builder -- Output Template
+version: 1.0.0
+quality: null
+tags:
+- builder
+- value_object
+- template
+llm_function: PRODUCE

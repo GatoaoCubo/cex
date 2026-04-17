@@ -1,0 +1,11 @@
+id: bld_tpl_data_contract
+kind: prompt_template
+pillar: P03
+llm_function: PRODUCE
+version: 1.0.0
+quality: null
+tags:
+- data_contract
+- template
+- output
+title: 'Output Template: data_contract'

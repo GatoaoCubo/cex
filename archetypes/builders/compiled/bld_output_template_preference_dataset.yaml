@@ -1,0 +1,49 @@
+kind: output_template
+id: bld_output_template_preference_dataset
+pillar: P05
+llm_function: PRODUCE
+purpose: Template with {{vars}} that the LLM fills to produce a preference_dataset artifact
+pattern: every field here exists in SCHEMA.md -- template derives, never invents
+quality: null
+title: Output Template Preference Dataset
+version: 1.0.0
+author: n03_builder
+tags:
+- preference_dataset
+- builder
+- output_template
+tldr: Fill {{vars}} to produce a preference_dataset artifact with training objective, pairs, and quality filters.
+domain: preference dataset construction
+created: '2026-04-17'
+updated: '2026-04-17'
+density_score: 0.9
+overview: '`{{training_objective_and_domain_1_to_2_sentences}}` `{{intended_use_and_scope}}`'
+annotation_protocol: '`{{preference_criterion_definition}}`
+
+
+  | Chosen When | Rejected When |
+
+  |-------------|--------------|
+
+  | {{criterion_1_chosen}} | {{criterion_1_rejected}} |
+
+  | {{criterion_2_chosen}} | {{criterion_2_rejected}} |
+
+
+  Edge cases: `{{how_to_handle_ties_and_ambiguous_cases}}`'
+quality_filters: '| Filter | Threshold | Action |
+
+  |--------|-----------|--------|
+
+  | agreement_rate | >= {{threshold}} | Exclude pairs below threshold |
+
+  | confidence | >= {{confidence_min}} | Flag low-confidence pairs for review |
+
+  | length_ratio | chosen/rejected != extreme ratio | Exclude length-biased pairs |
+
+  | {{custom_filter}} | {{custom_threshold}} | {{custom_action}} |'
+pairs: "pairs:\n  - id: \"{{pair_id_001}}\"\n    prompt: \"{{instruction_or_conversation}}\"\n    chosen: \"{{preferred_response}}\"\
+  \n    rejected: \"{{dispreferred_response}}\"\n    metadata:\n      rater_count: {{int}}\n      agreement: {{float}}\n \
+  \     confidence: {{float}}\n      tags: [{{tag_1}}, {{tag_2}}]\n  - id: \"{{pair_id_002}}\"\n    prompt: \"{{instruction_or_conversation_2}}\"\
+  \n    chosen: \"{{preferred_response_2}}\"\n    rejected: \"{{dispreferred_response_2}}\"\n    metadata:\n      rater_count:\
+  \ {{int}}\n      agreement: {{float}}\n      confidence: {{float}}\n      tags: [{{tag_1}}]"

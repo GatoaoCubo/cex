@@ -1,0 +1,34 @@
+---
+id: bld_scoring_rubric_saga
+kind: knowledge_card
+pillar: P07
+title: "Scoring Rubric: saga"
+version: 1.0.0
+created: "2026-04-17"
+updated: "2026-04-17"
+author: builder
+domain: saga
+quality: null
+tags: [scoring_rubric, saga, P12]
+llm_function: GOVERN
+tldr: "5-dimension scoring rubric for saga artifacts."
+density_score: null
+---
+
+# Scoring Rubric: saga
+
+## 5-Dimension Scoring
+
+| Dimension | Weight | Score 10 | Score 5 | Score 0 |
+|-----------|--------|----------|---------|---------|
+| D1 Compensation Completeness | 0.35 | Every step has non-null compensating_action | >= 50% steps compensated | Any step missing compensation |
+| D2 Rollback Clarity | 0.25 | Rollback Sequence explicit + ordered | Partial sequence | No rollback sequence |
+| D3 Topology Definition | 0.20 | Topology chosen + participant diagram | Topology named, no diagram | Topology missing |
+| D4 Actionability | 0.10 | on_failure set, all participants named | Partial | Missing on_failure |
+| D5 Compliance | 0.10 | ID pattern, kind, steps_count match | Minor issue | HARD gate failure |
+
+## Composite Score
+`score = (D1*0.35 + D2*0.25 + D3*0.20 + D4*0.10 + D5*0.10) * 10`
+
+## D1 Compensation Completeness is Non-Negotiable
+A saga with any uncompensated step is REJECT (score D1 = 0 = overall REJECT). This is the invariant of the pattern.

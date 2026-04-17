@@ -1,0 +1,32 @@
+id: bld_memory_process_manager
+kind: knowledge_card
+pillar: P12
+title: Process Manager Builder -- Memory
+version: 1.0.0
+quality: null
+tags:
+- builder
+- process_manager
+- memory
+llm_function: INJECT
+session_patterns:
+- 'Correlation key: always ask "how do you find the right process instance when an event arrives?" -- this is the correlation
+  key.'
+- 'State count: most process managers have 3-7 states. More than 10 states suggests splitting.'
+- 'Compensation is mandatory: if compensation is missing, the process manager is incomplete. Every forward command needs an
+  undo.'
+- 'Timeout strategy: every waiting state should have a timeout. Infinite waits cause stuck processes.'
+common_mistakes:
+- 'Storing domain data: process manager stores state + correlation key ONLY.'
+- 'Missing start_event: every process manager must have exactly one event that creates a new instance.'
+- 'Multiple terminal states with no FAILED: a process manager without explicit failure handling is dangerous.'
+- 'Confusing with workflow: workflow is explicit step ordering (DAG); process_manager is reactive event routing.'
+vocabulary:
+- '"Saga orchestrator" = process_manager in microservices context'
+- '"Compensation" = undo actions (Sagas paper, Garcia-Molina 1987)'
+- '"Correlation" = matching events to the right process instance'
+- '"Terminal state" = state where the process instance is complete and can be archived'
+timeout_patterns:
+- 'Fast-fail: timeout -> FAILED + immediate compensation'
+- 'Retry: timeout -> re-issue same command (with counter limit)'
+- 'Escalate: timeout -> notify human, pause process'

@@ -1,0 +1,49 @@
+---
+id: bld_scoring_rubric_domain_event
+kind: scoring_rubric
+pillar: P07
+llm_function: GOVERN
+version: 1.0.0
+quality: null
+tags: [domain_event, scoring, rubric]
+title: "Scoring Rubric: domain_event"
+---
+# Scoring Rubric: domain_event
+## 5 Dimensions
+| # | Dimension | Weight | Description |
+|---|-----------|--------|-------------|
+| D1 | Schema completeness | 30% | Required fields present: aggregate, context, occurred_at, payload |
+| D2 | DDD correctness | 25% | Past tense name, immutable payload, correct aggregate ownership |
+| D3 | Traceability | 20% | causation_id and correlation_id populated and explained |
+| D4 | Consumer clarity | 15% | Consumers listed with their expected reactions |
+| D5 | Business semantics | 10% | Business invariants or rules stated in context |
+
+## Scoring Formula
+`score = (D1*0.30 + D2*0.25 + D3*0.20 + D4*0.15 + D5*0.10) * 10`
+
+## Dimension Scoring Guide
+### D1 Schema completeness (0-10)
+- 10: all required + causal chain + typed payload
+- 7: all required, payload present but untyped
+- 4: missing causation or correlation IDs
+- 0: missing aggregate_root or occurred_at
+
+### D2 DDD correctness (0-10)
+- 10: past tense, immutable payload, single aggregate owner
+- 5: past tense but payload contains mutable references
+- 0: imperative name or no aggregate identified
+
+### D3 Traceability (0-10)
+- 10: causation_id AND correlation_id with explanations
+- 5: one ID present
+- 0: no trace IDs
+
+### D4 Consumer clarity (0-10)
+- 10: >= 2 consumers with reaction descriptions
+- 5: consumers named, no reaction detail
+- 0: no consumers listed
+
+### D5 Business semantics (0-10)
+- 10: >= 1 business invariant with bounded context rule
+- 5: implied invariant from payload structure
+- 0: pure technical schema, no business meaning

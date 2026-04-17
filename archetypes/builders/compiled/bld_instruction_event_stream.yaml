@@ -1,0 +1,34 @@
+id: bld_instruction_event_stream
+kind: instruction
+pillar: P04
+title: Event Stream Builder -- Instruction
+version: 1.0.0
+quality: null
+tags:
+- builder
+- event_stream
+- instruction
+llm_function: REASON
+phase_1_research:
+- Identify the domain events flowing through this stream -- what facts are being published?
+- 'Determine the producer: which service or aggregate emits events to this stream?'
+- 'Determine consumers: which services subscribe and what consumer groups do they form?'
+- 'Decide partitioning strategy: what is the partition key? (orderId, userId, etc.)'
+- 'Set retention policy: how long must events be retained? (reprocessing, audit, replay)'
+- 'Choose delivery semantics: at-most-once, at-least-once, or exactly-once?'
+- 'Define schema: what is the event envelope format (Avro, Protobuf, JSON Schema)?'
+phase_2_compose:
+- Read bld_schema_event_stream.md -- source of truth for required fields
+- 'Fill frontmatter: id pattern p04_es_{slug}, kind: event_stream, quality: null'
+- 'Write Producer section: who writes to this stream, at what rate'
+- 'Write Consumer Groups section: each group with offset policy and lag tolerance'
+- 'Write Partitioning section: key, count, ordering guarantee'
+- 'Write Retention section: time + bytes, replay window'
+- 'Write Schema section: format, registry, compatibility mode'
+- 'Write Operations section: monitoring, alerting, lag thresholds'
+phase_3_validate:
+- 'HARD gates: id matches `p04_es_[a-z][a-z0-9_]+`, kind == event_stream, quality == null'
+- Producer and at least one consumer group defined
+- Partition key and count specified
+- Retention policy defined (time AND bytes)
+- Delivery semantics specified

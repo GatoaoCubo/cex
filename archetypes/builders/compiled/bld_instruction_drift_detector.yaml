@@ -1,0 +1,51 @@
+kind: instruction
+id: bld_instruction_drift_detector
+pillar: P03
+llm_function: REASON
+purpose: Step-by-step production process for drift_detector
+pattern: 3-phase pipeline (scope -> compose -> validate)
+quality: null
+title: Instruction Drift Detector
+version: 1.0.0
+author: n03_builder
+tags:
+- drift_detector
+- builder
+- instruction
+tldr: '3-phase process: scope drift target and statistical method, compose detector config, validate gates.'
+domain: drift detector construction
+created: '2026-04-17'
+updated: '2026-04-17'
+density_score: 0.9
+phase_1_scope:
+- 'Identify what to monitor: input features, model outputs, behavioral patterns, or latency'
+- 'Determine drift type: data drift (input distribution), concept drift (label/output distribution), prediction drift (output
+  distribution), behavioral drift (response patterns)'
+- 'Select statistical test: PSI for numerical with known baseline; KS for continuous distributions; chi-square/JS for categorical;
+  embedding distance for text'
+- 'Define reference window: fixed baseline (training data stats), rolling window (last N days), or seasonal baseline'
+- 'Define production window: batch size or time window for comparison'
+- 'Set threshold severity levels: warning (early detection) and critical (action required)'
+- 'Declare alert destination: webhook URL, log file, signal file, or monitoring platform'
+- Identify features or output dimensions to monitor (be specific, not "everything")
+phase_2_compose:
+- Read SCHEMA.md -- source of truth for all fields
+- Read OUTPUT_TEMPLATE.md -- fill `{{vars}}` following SCHEMA constraints
+- 'Fill frontmatter: all required fields (quality: null)'
+- 'Write detection_method: statistical test + parameters'
+- 'Write window_config: reference and production window specs'
+- 'Write thresholds: warning and critical levels per feature'
+- 'Write alert_rule: destination, frequency, suppression rules'
+- 'Write features_monitored: list of input/output dimensions'
+- 'Write Overview: 2 sentences on what this detector monitors and why'
+- Verify body <= 3072 bytes
+phase_3_validate:
+- Check QUALITY_GATES.md -- verify each HARD gate manually
+- Confirm id matches `^p11_dd_[a-z][a-z0-9_]+$`
+- Confirm kind == drift_detector
+- Confirm detection_method is declared (not empty)
+- Confirm threshold has at least one level (warning or critical)
+- Confirm features_monitored is non-empty
+- 'HARD gates: frontmatter valid, id pattern, method declared, threshold set'
+- 'Cross-check: not regression_check (no code test assertions), not benchmark (no eval metrics)'
+- 'Revise if score < 8.0 -- most common fix: add window_config or alert_rule specifics'

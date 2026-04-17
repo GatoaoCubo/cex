@@ -1,0 +1,39 @@
+id: bld_context_sources_deployment_manifest
+kind: knowledge_card
+pillar: P01
+title: 'Context Sources: deployment_manifest Builder'
+version: 1.0.0
+created: '2026-04-17'
+updated: '2026-04-17'
+author: builder
+domain: deployment_manifest
+quality: null
+tags:
+- context_sources
+- deployment_manifest
+- P09
+llm_function: INJECT
+tldr: Ordered list of context sources to inject at F3 INJECT for deployment_manifest builds.
+density_score: null
+injection_order_f3_inject: '| Priority | Source | Path | Why |
+
+  |----------|--------|------|-----|
+
+  | 1 | Schema | archetypes/builders/deployment-manifest-builder/bld_schema_deployment_manifest.md | Field names + constraints
+  |
+
+  | 2 | Knowledge Card | N00_genesis/P01_knowledge/library/kind/kc_deployment_manifest.md | Domain definition |
+
+  | 3 | Examples | archetypes/builders/deployment-manifest-builder/bld_examples_deployment_manifest.md | Golden reference
+  |
+
+  | 4 | Quality Gate | archetypes/builders/deployment-manifest-builder/bld_quality_gate_deployment_manifest.md | Validation
+  rules |
+
+  | 5 | env_config KC | N00_genesis/P01_knowledge/library/kind/kc_env_config.md | Config override context |
+
+  | 6 | canary_config KC | N00_genesis/P01_knowledge/library/kind/kc_canary_config.md | Boundary clarification |
+
+  | 7 | Memory | archetypes/builders/deployment-manifest-builder/bld_memory_deployment_manifest.md | Recalled corrections
+  |'
+similarity_scan_f5_call: 'Run retriever against: `N0X_*/P09_config/p09_dm_*.md` to find existing manifests for the same domain.'

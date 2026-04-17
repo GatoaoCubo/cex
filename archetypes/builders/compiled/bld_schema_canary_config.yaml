@@ -1,0 +1,62 @@
+id: bld_schema_canary_config
+kind: schema
+pillar: P06
+llm_function: CONSTRAIN
+purpose: Formal schema -- SINGLE SOURCE OF TRUTH for canary_config
+quality: null
+title: 'Schema: canary_config'
+version: 1.0.0
+author: builder
+tags:
+- schema
+- canary_config
+- P09
+domain: progressive delivery
+created: '2026-04-17'
+updated: '2026-04-17'
+density_score: null
+frontmatter_fields: '| Field | Type | Required | Default | Notes |
+
+  |-------|------|----------|---------|-------|
+
+  | id | string (p09_cc_{name_slug}) | YES | - | Namespace compliance |
+
+  | kind | literal "canary_config" | YES | - | Type integrity |
+
+  | pillar | literal "P09" | YES | - | Pillar assignment |
+
+  | version | semver string | YES | "1.0.0" | Version |
+
+  | service_name | string | YES | - | Service being canary deployed |
+
+  | canary_version | string | YES | - | New version being rolled out |
+
+  | stable_version | string | YES | - | Current stable version |
+
+  | stages_count | integer | YES | - | Must match stages list |
+
+  | rollback_trigger_metric | string | YES | - | Metric that triggers rollback |
+
+  | rollback_trigger_threshold | float | YES | - | Breach value |
+
+  | provider | enum: argo_rollouts, flagger, aws_codedeploy, custom | YES | argo_rollouts | Delivery platform |
+
+  | domain | string | YES | - | Service domain |
+
+  | quality | null | YES | null | Never self-score |
+
+  | tags | list[string], len >= 3 | YES | - | Must include "canary_config" |
+
+  | tldr | string <= 160ch | YES | - | Dense summary |'
+id_pattern: 'Regex: `^p09_cc_[a-z][a-z0-9_]+$`'
+body_structure:
+- '`## Traffic Stages` -- table: stage, traffic_percent, pause_duration_minutes, analysis_interval_minutes'
+- '`## Rollback Triggers` -- metric name, threshold, action'
+- '`## Analysis Configuration` -- provider, metric_provider, success_condition'
+constraints:
+- 'max_bytes: 2048'
+- 'naming: p09_cc_{name_slug}.md'
+- First stage traffic_percent MUST be < 50
+- Last stage traffic_percent MUST be 100
+- stages_count MUST match actual stages
+- 'quality: null always'

@@ -1,0 +1,43 @@
+---
+id: bld_quality_gate_constitutional_rule
+kind: quality_gate
+pillar: P11
+title: "Constitutional Rule Builder -- Quality Gate"
+version: 1.0.0
+quality: null
+tags: [builder, constitutional_rule, quality_gate]
+llm_function: GOVERN
+---
+# Gate: constitutional_rule
+## Threshold
+>= 8.0 to publish (higher threshold because these are core safety rules); >= 9.5 for golden
+## HARD Gates
+| ID | Check | Fail Condition |
+|----|-------|----------------|
+| H01 | Frontmatter parses as valid YAML | Syntax error |
+| H02 | id matches `^p11_cr_[a-z][a-z0-9_]+$` | Wrong pattern |
+| H03 | id equals filename stem | Mismatch |
+| H04 | kind == `constitutional_rule` | Any other value |
+| H05 | quality == null | Non-null |
+| H06 | bypass_policy == `none` | Any other value -- ABSOLUTE FAIL |
+| H07 | core == true | Missing or false |
+| H08 | constitutional_basis is valid enum | Unlisted value |
+| H09 | principle is a single concrete prohibition | Vague or compound |
+| H10 | severity == critical | Any other severity |
+## SOFT Scoring
+| Dim | Check | Weight |
+|-----|-------|--------|
+| S01 | Principle is concrete and testable (not abstract value) | 0.30 |
+| S02 | At least 2 concrete violation examples | 0.20 |
+| S03 | Detection method specified | 0.15 |
+| S04 | Rationale explains why no exceptions exist | 0.15 |
+| S05 | Boundary section distinguishes from guardrail and safety_policy | 0.10 |
+| S06 | cai_reference or equivalent ethical grounding cited | 0.10 |
+**Weight sum: 1.00**
+## Actions
+| Score | Action |
+|-------|--------|
+| >= 9.5 | GOLDEN -- reference constitutional rule |
+| >= 8.0 | PUBLISH |
+| >= 7.0 | REVIEW -- principle or detection unclear |
+| < 7.0 | REJECT -- likely has bypass or vague principle |

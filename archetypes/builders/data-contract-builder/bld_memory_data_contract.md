@@ -1,0 +1,35 @@
+---
+id: bld_memory_data_contract
+kind: entity_memory
+pillar: P10
+llm_function: INJECT
+version: 1.0.0
+quality: null
+tags: [data_contract, memory, patterns]
+title: "Memory Patterns: data_contract"
+---
+# Memory Patterns: data_contract
+## What to Remember
+- Contract versioning is INDEPENDENT from service versioning
+- SLA must be numeric -- not "fast" or "reliable" but "< 200ms" and "99.9%"
+- Producer owns the schema; consumer specifies what they need (CDC pattern)
+- data_contract boundary: schema+SLA between systems, NOT LLM output validation
+
+## Common Mistakes
+| Mistake | Correction |
+|---------|-----------|
+| Conflating with validation_schema | data_contract = cross-system; validation_schema = LLM output |
+| Vague SLA ("near real-time") | Numeric: "< 5 seconds", "99.9%", "< 200ms p99" |
+| Contract version tied to service | Contract v1.2.0 independent from service v3.5.1 |
+| Missing consumer_system | Always name both sides of the agreement |
+
+## Cross-Kind Memory
+- domain_event: events crossing BC boundaries need data_contracts
+- bounded_context: contracts formalize BC-to-BC communication
+- validation_schema: downstream consumers use this to validate incoming data
+- dataset_card: separate concern -- data asset metadata, not exchange agreement
+
+## Reuse Signals
+- Check existing contracts: grep P06 for dc_ prefix files
+- Check schema registry (if configured) before creating new contract
+- Consumer-driven: ask consumer team what fields they actually need

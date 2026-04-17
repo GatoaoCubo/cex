@@ -1,0 +1,63 @@
+kind: examples
+id: bld_examples_working_memory
+pillar: P07
+llm_function: GOVERN
+purpose: Golden and anti-examples of working_memory artifacts
+quality: null
+title: Examples Working Memory
+version: 1.0.0
+author: n03_builder
+tags:
+- working_memory
+- builder
+- examples
+tldr: Golden and anti-examples for working_memory construction.
+domain: working memory construction
+created: '2026-04-17'
+updated: '2026-04-17'
+density_score: 0.9
+golden_example: "INPUT: \"Create working memory for N04 knowledge card builder task\"\nOUTPUT:\nid: p10_wm_n04_kc_builder\n\
+  kind: working_memory\npillar: P10\nversion: \"1.0.0\"\ncreated: \"2026-04-17\"\nupdated: \"2026-04-17\"\nauthor: \"builder_agent\"\
+  \ntask_id: \"n04_kc_build_{uuid}\"\ncontext_slots:\n  current_phase: \"string\"\n  target_kind: \"string\"\n  sections_written:\
+  \ \"int\"\n  accumulated_kc_body: \"string\"\n  gate_checks_passed: \"int\"\n  quality_score: \"float\"\n  is_complete:\
+  \ \"bool\"\ncapacity_limit:\n  value: 8000\n  unit: tokens\nexpiry: \"on_task_complete\"\nclear_on_complete: promote\npromote_targets:\
+  \ [episodic_memory]\nnucleus: \"n04\"\nquality: null\ntags: [working_memory, n04, knowledge_card_build, P10]\ntldr: \"Working\
+  \ memory for N04 knowledge card build: tracks phase, sections, quality, promotes episode on complete.\"\ndescription: \"\
+  Short-term task state for a single knowledge_card build cycle in N04 nucleus.\""
+overview: Holds intermediate state for a single knowledge card build task in N04. Tracks current phase, target kind, body
+  accumulation, and gate validation progress.
+context_slots: '| Slot Name | Type | Purpose | Example Value |
+
+  |-----------|------|---------|--------------|
+
+  | current_phase | string | Which 8F phase is active | "F6_PRODUCE" |
+
+  | sections_written | int | How many sections are complete | 3 |
+
+  | accumulated_kc_body | string | In-progress body text | "## Overview\n..." |
+
+  | quality_score | float | Running quality estimate | 8.5 |
+
+  | is_complete | bool | Task completion flag | false |
+
+
+  WHY THIS IS GOLDEN:
+
+  - quality: null (H05 pass)
+
+  - id matches `^p10_wm_` (H02 pass)
+
+  - task_id declared (H06 pass)
+
+  - context_slots: 7 typed slots (H07 pass)
+
+  - capacity_limit declared (H08 pass)
+
+  - expiry: on_task_complete (H09 pass)
+
+  - clear_on_complete + promote_targets (H10 pass)'
+anti_example: "BAD OUTPUT:\nid: task-memory\nkind: memory\ntask: \"build kc\"\nslots:\n  data: anything\nquality: 7.5\nFAILURES:\n\
+  1. id: \"task-memory\" has hyphen, no prefix -> H02 FAIL\n2. kind: \"memory\" not \"working_memory\" -> H04 FAIL\n3. quality:\
+  \ 7.5 (not null) -> H05 FAIL\n4. task_id missing (task is not the same field) -> H06 FAIL\n5. context_slots: \"data: anything\"\
+  \ -- no type annotation -> H07 SOFT FAIL\n6. capacity_limit missing -> H08 FAIL\n7. expiry missing -> H09 FAIL\n8. clear_on_complete\
+  \ missing -> H10 FAIL"

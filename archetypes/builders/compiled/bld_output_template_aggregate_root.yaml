@@ -1,0 +1,11 @@
+id: bld_output_template_aggregate_root
+kind: output_template
+pillar: P06
+title: Aggregate Root Builder -- Output Template
+version: 1.0.0
+quality: null
+tags:
+- builder
+- aggregate_root
+- template
+llm_function: PRODUCE

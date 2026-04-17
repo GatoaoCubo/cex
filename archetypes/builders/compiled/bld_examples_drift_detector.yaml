@@ -1,0 +1,93 @@
+kind: examples
+id: bld_examples_drift_detector
+pillar: P07
+llm_function: GOVERN
+purpose: Golden and anti-examples of drift_detector artifacts
+pattern: few-shot learning -- LLM reads these before producing
+quality: null
+title: Examples Drift Detector
+version: 1.0.0
+author: n03_builder
+tags:
+- drift_detector
+- builder
+- examples
+tldr: Golden and anti-examples for drift_detector construction.
+domain: drift detector construction
+created: '2026-04-17'
+updated: '2026-04-17'
+density_score: 0.9
+golden_example: "INPUT: \"Create drift detector for CEX nucleus output quality distribution\"\nOUTPUT:\nid: p11_dd_nucleus_output_quality\n\
+  kind: drift_detector\npillar: P11\nversion: \"1.0.0\"\ncreated: \"2026-04-17\"\nupdated: \"2026-04-17\"\nauthor: \"builder_agent\"\
+  \ndetection_method: ks\nthreshold:\n  warning: 0.05\n  critical: 0.10\ndrift_type: behavioral\nfeatures_monitored:\n  -\
+  \ \"quality_score\"\n  - \"density_score\"\n  - \"gate_pass_rate\"\nwindow_config:\n  reference: \"Rolling 30-day average\
+  \ quality scores from N01-N06 artifacts\"\n  production: \"Last 7 days of scored artifacts\"\nalert_rule:\n  destination:\
+  \ signal_file\n  frequency: daily\n  suppression_window: \"4h after alert\"\nplatform: \"custom\"\nenabled: true\nsampling_rate:\
+  \ 1.0\nquality: null\ntags: [drift_detector, behavioral, nucleus_output, P11]\ntldr: \"Daily KS drift monitor on nucleus\
+  \ quality/density/gate_pass_rate; warning at 0.05, critical at 0.10.\""
+overview: Monitors behavioral drift in CEX nucleus output quality metrics. Detects when quality_score, density_score, or gate_pass_rate
+  distributions shift from the 30-day rolling baseline.
+detection_method: 'Method: KS (Kolmogorov-Smirnov) -- nonparametric, no distributional assumptions, works on small samples.
+  Parameters: two-sample KS statistic; p-value threshold 0.05 warning, 0.10 critical. Rationale: Quality scores are continuous;
+  KS is preferred over PSI when baseline is not fixed.'
+thresholds: '| Level | Value | Interpretation | Action |
+
+  |-------|-------|---------------|--------|
+
+  | Warning | 0.05 | Mild distribution shift | Alert + investigate recent commits |
+
+  | Critical | 0.10 | Significant shift | Alert + trigger quality audit |
+
+
+  WHY THIS IS GOLDEN:
+
+  - quality: null (H05 pass)
+
+  - id matches `^p11_dd_` (H02 pass)
+
+  - kind: drift_detector (H04 pass)
+
+  - detection_method: ks (H06 pass)
+
+  - threshold with both levels (H07 pass)
+
+  - features_monitored: 3 named dimensions (H08 pass)
+
+  - window_config declared (H09 pass)
+
+  - alert_rule with suppression (H10 pass)'
+anti_example: 'INPUT: "Monitor my model for problems"
+
+  BAD OUTPUT:
+
+  id: model-monitor
+
+  kind: monitor
+
+  detection: statistical
+
+  threshold: low
+
+  features: all
+
+  alert: yes
+
+  quality: 8.0
+
+  FAILURES:
+
+  1. id: "model-monitor" has hyphen, no `p11_dd_` prefix -> H02 FAIL
+
+  2. kind: "monitor" not "drift_detector" -> H04 FAIL
+
+  3. quality: 8.0 (not null) -> H05 FAIL
+
+  4. detection_method: "statistical" not in enum -> H06 FAIL
+
+  5. threshold: "low" is not a numeric value -> H07 FAIL
+
+  6. features_monitored: "all" is not a specific list -> H08 FAIL
+
+  7. No window_config -> H09 FAIL
+
+  8. alert_rule has no destination or frequency -> H10 FAIL'

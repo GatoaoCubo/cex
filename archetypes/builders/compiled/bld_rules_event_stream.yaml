@@ -1,0 +1,34 @@
+id: bld_rules_event_stream
+kind: knowledge_card
+pillar: P04
+title: Event Stream Builder -- Rules
+version: 1.0.0
+quality: null
+tags:
+- builder
+- event_stream
+- rules
+llm_function: CONSTRAIN
+absolute_rules_hard_never_violate:
+- 'Partition key must be defined: never use round-robin for entity-ordered events.'
+- 'Retention must include both time (hours) and bytes: one alone is incomplete.'
+- 'Delivery semantics must be explicit: ambiguous delivery causes data loss or duplication.'
+- Every consumer that needs independent offset tracking must be a separate consumer group.
+- 'Schema format must be specified: untyped event streams are a maintenance hazard.'
+- 'quality: null always -- never self-score.'
+soft_rules_recommend:
+- 'Use BACKWARD compatibility mode by default: allows adding optional fields without breaking consumers.'
+- Monitoring lag threshold should be <= 10% of expected throughput-to-processing ratio.
+- 'Retention: default 168 hours (7 days) unless replay requirements dictate more.'
+- 'Partition count: right-size to throughput estimate, not maximum possible.'
+boundary_rules:
+- 'THIS BUILDER handles: event_stream (P04)'
+- 'NOT this builder: webhook (single outbound HTTP push) -> webhook-builder'
+- 'NOT this builder: signal (internal CEX nucleus signal) -> not a user-facing kind'
+- 'NOT this builder: process_manager (event routing + state machine) -> process-manager-builder'
+- 'NOT this builder: api_client (HTTP consumer) -> api-client-builder'
+cex_specific_rules:
+- 'id pattern: p04_es_{slug} -- always prefix p04_es_'
+- 'Pillar: always P04 (Tools)'
+- 'Producing nucleus: N05 (Operations) for infra config, N03 for domain design'
+- 'max_bytes: 3072'

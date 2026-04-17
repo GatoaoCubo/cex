@@ -1,0 +1,42 @@
+id: bld_rules_lineage_record
+kind: knowledge_card
+pillar: P08
+title: 'Rules: lineage_record Builder Constraints'
+version: 1.0.0
+created: '2026-04-17'
+updated: '2026-04-17'
+author: builder
+domain: lineage_record
+quality: null
+tags:
+- rules
+- lineage_record
+- P01
+llm_function: CONSTRAIN
+tldr: Hard constraints and edge cases for lineage_record builder.
+density_score: null
+hard_constraints:
+- At least 1 source entity MUST be listed
+- At least 1 activity MUST be listed
+- At least 1 agent MUST be listed
+- sources_count MUST equal len(entities list)
+- activities_count MUST equal len(activities list)
+- quality MUST be null
+- 'id pattern: `^p01_lr_[a-z][a-z0-9_]+$`'
+edge_cases: '| Situation | Resolution |
+
+  |-----------|-----------|
+
+  | Provenance unknown | Use entity type: unknown; note "provenance not available" |
+
+  | Multiple derivation relations | List all in Derivation Relations section |
+
+  | Artifact revised from prior version | Use wasRevisionOf derivation type |
+
+  | Tool (not nucleus) as agent | agent type: tool; include tool id |
+
+  | Human curator as agent | agent type: human; include name/role |
+
+  | Circular derivation detected | Flag as data integrity issue; escalate to N04 |
+
+  | User confuses with audit_log | Redirect: create audit_log for compliance events |'

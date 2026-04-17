@@ -1,0 +1,4 @@
+name: constitutional-rule-builder
+description: Builds ONE constitutional_rule artifact via 8F pipeline. Loads constitutional-rule-builder specs. Produces draft
+  with frontmatter + body. Never self-scores quality.
+tools: Read, Write, Edit, Bash, Glob, Grep

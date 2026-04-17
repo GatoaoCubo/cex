@@ -1,0 +1,44 @@
+---
+id: bld_architecture_aggregate_root
+kind: knowledge_card
+pillar: P06
+title: "Aggregate Root Builder -- Architecture"
+version: 1.0.0
+quality: null
+tags: [builder, aggregate_root, architecture]
+llm_function: CONSTRAIN
+---
+# Architecture: aggregate_root
+## Pattern Origin
+Evans DDD (2003): Aggregate = cluster of domain objects treated as a unit for data changes.
+Aggregate Root = single entity responsible for maintaining cluster invariants.
+## Structural Topology
+```
+AggregateRoot (identity + invariant enforcer)
+  |-- Entity_A (child, no direct external access)
+  |-- Entity_B (child, accessed only via root)
+  |-- ValueObject_X (immutable, no identity)
+  |-- ValueObject_Y (immutable, no identity)
+  repository: AggregateRootRepository (find_by_id + save only)
+```
+## Invariant Enforcement
+- Commands mutate state inside the boundary
+- Root checks invariants AFTER applying command, BEFORE returning
+- If invariant violated: raise domain exception, rollback state
+- Repository saves ENTIRE aggregate atomically (one transaction)
+## Event Emission
+- Each command that succeeds emits one or more domain events
+- Events are facts about what happened (past tense)
+- Subscribers react to events outside the aggregate boundary
+## Relationship to Other Kinds
+| Kind | Relationship |
+|------|-------------|
+| value_object | members inside the aggregate, no identity |
+| interface | contract that repository or service implements |
+| input_schema | validates data BEFORE entering the aggregate |
+| domain_event | fact emitted by aggregate on state change |
+## Anti-Patterns
+- "God aggregate": one root owns everything -- split by consistency need
+- Cross-aggregate object references: use IDs only
+- Anemic aggregate: root has no invariants, just getters/setters
+- Large aggregate: more than ~7 members signals over-aggregation

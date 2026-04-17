@@ -1,0 +1,23 @@
+id: bld_examples_value_object
+kind: knowledge_card
+pillar: P06
+title: Value Object Builder -- Examples
+version: 1.0.0
+quality: null
+tags:
+- builder
+- value_object
+- examples
+llm_function: GOVERN
+golden_example_money: "id: p06_vo_money\nkind: value_object\nattributes:\n  - name: amount\n    type: Decimal\n    constraint:\
+  \ \"amount >= 0\"\n  - name: currency\n    type: string\n    constraint: \"ISO 4217 code, len == 3\"\nequality: structural\n\
+  transformations:\n  - \"add(other: Money) -> Money: requires same currency, returns new Money(amount+other.amount, currency)\"\
+  \n  - \"scale(factor: Decimal) -> Money: returns new Money(amount*factor, currency)\"\nhashable: true\nused_in: [Order,\
+  \ Invoice]\ntldr: \"Money: immutable amount+currency value, structural equality, used in financial aggregates\""
+golden_example_email: "id: p06_vo_email\nkind: value_object\nattributes:\n  - name: address\n    type: string\n    constraint:\
+  \ \"matches RFC 5322, len <= 320\"\nequality: structural\ntransformations:\n  - \"domain() -> string: returns the part after\
+  \ @\"\nhashable: true\nused_in: [UserAccount, ContactInfo]"
+anti_pattern_mutable_value_object: "# WRONG -- value objects must be immutable\ntransformations:\n  - \"setAmount(n): mutates\
+  \ amount field\"\n# CORRECT\ntransformations:\n  - \"withAmount(n: Decimal) -> Money: returns new Money(n, currency)\""
+anti_pattern_value_object_with_identity: "# WRONG -- value objects have no identity\nattributes:\n  - name: id\n    type:\
+  \ UUID\n# CORRECT: if identity is needed, use entity or aggregate_root"

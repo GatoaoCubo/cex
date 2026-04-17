@@ -1,0 +1,35 @@
+id: bld_scoring_rubric_canary_config
+kind: knowledge_card
+pillar: P07
+title: 'Scoring Rubric: canary_config'
+version: 1.0.0
+created: '2026-04-17'
+updated: '2026-04-17'
+author: builder
+domain: canary_config
+quality: null
+tags:
+- scoring_rubric
+- canary_config
+- P09
+llm_function: GOVERN
+tldr: 5-dimension scoring rubric for canary_config artifacts.
+density_score: null
+5_dimension_scoring: '| Dimension | Weight | Score 10 | Score 5 | Score 0 |
+
+  |-----------|--------|----------|---------|---------|
+
+  | D1 Gradual Rollout | 0.30 | >= 3 stages, starts < 10%, ends at 100% | 2 stages, reasonable progression | Single stage
+  or starts >= 50% |
+
+  | D2 Rollback Config | 0.30 | Metric + numeric threshold + action all defined | Metric defined, threshold missing | No rollback
+  trigger |
+
+  | D3 Analysis Config | 0.20 | Provider + metric_provider + success_condition all present | Provider only | No analysis config
+  |
+
+  | D4 Version Pinning | 0.10 | Both canary_version and stable_version pinned to specific versions | One version pinned |
+  Neither pinned |
+
+  | D5 Compliance | 0.10 | ID pattern, kind, gates pass | Minor issue | HARD gate failure |'
+composite_score: '`score = (D1*0.30 + D2*0.30 + D3*0.20 + D4*0.10 + D5*0.10) * 10`'

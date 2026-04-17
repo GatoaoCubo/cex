@@ -1,0 +1,67 @@
+id: bld_manifest_slo_definition
+kind: type_builder
+pillar: P09
+domain: slo_definition
+llm_function: BECOME
+version: 1.0.0
+created: '2026-04-17'
+updated: '2026-04-17'
+author: builder
+tags:
+- builder
+- slo_definition
+- P09
+- config
+- reliability
+keywords:
+- slo
+- service level objective
+- error budget
+- reliability
+- latency
+- availability
+- SRE
+triggers:
+- define SLO
+- set service level objective
+- error budget
+- reliability target
+- uptime goal
+capabilities:
+- Define SLI (Service Level Indicator) metric and measurement method
+- Set target threshold (e.g., 99.9% availability over 30d window)
+- Compute error budget (1 - target) with burn rate thresholds
+- Specify alerting policy on budget consumption
+- Link to slo_owner and incident escalation path
+- Validate against quality gates (8 HARD + SOFT)
+quality: null
+title: 'Manifest: slo_definition Builder'
+tldr: Builds slo_definition artifacts with measurable target, error budget, and alerting thresholds.
+density_score: null
+isolation: standard
+identity: Specialist in building `slo_definition` -- measurable service level objectives with target threshold, error budget,
+  and alerting policy. Maps to Google SRE SLO framework, Prometheus recording rules, and DataDog SLO monitors.
+routing: 'keywords: [slo, service level objective, error budget, reliability, latency, availability, SRE] triggers: "define
+  SLO", "set service level objective", "error budget", "reliability target"'
+crew_role: 'In a crew, I handle RELIABILITY CONTRACT SPECIFICATION. I answer: "what measurable target defines success for
+  this service, and how much failure is acceptable?" I do NOT handle: enterprise_sla (contractual with external party), quality_gate
+  (build-time scoring), benchmark (performance measurement).'
+properties: '| Property | Value |
+
+  |----------|-------|
+
+  | Kind | `type_builder` |
+
+  | Pillar | P09 |
+
+  | Domain | slo_definition |
+
+  | Pipeline | 8F (F1-F8) |
+
+  | Scorer | cex_score.py |
+
+  | Compiler | cex_compile.py |
+
+  | Quality target | 9.0+ |
+
+  | Density target | 0.85+ |'

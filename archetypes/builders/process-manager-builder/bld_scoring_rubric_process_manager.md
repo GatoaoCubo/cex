@@ -1,0 +1,32 @@
+---
+id: bld_scoring_rubric_process_manager
+kind: knowledge_card
+pillar: P12
+title: "Process Manager Builder -- Scoring Rubric"
+version: 1.0.0
+quality: null
+tags: [builder, process_manager, scoring]
+llm_function: GOVERN
+---
+# Scoring Rubric: process_manager
+## 5D Dimensions
+| Dim | Name | Weight | Description |
+|-----|------|--------|-------------|
+| D1 | Event Routing Completeness | 0.30 | Does every event have a state transition + command dispatch? |
+| D2 | Compensation Coverage | 0.25 | Is there an undo path for every forward step? |
+| D3 | State Machine Integrity | 0.20 | Are all states reachable, with defined transitions to terminal? |
+| D4 | Separation of Concerns | 0.15 | Does process manager hold state only (no domain data)? |
+| D5 | Timeout Coverage | 0.10 | Does every waiting state have a timeout action? |
+## D1 Scoring Guide
+| Score | Criteria |
+|-------|----------|
+| 1.0 | Every event in subscribed_events appears in routing table with next_state + command |
+| 0.7 | Most events covered, 1-2 missing command dispatch |
+| 0.3 | Routing table partial (some events unhandled) |
+| 0.0 | No routing table or events not mapped |
+## D2 Scoring Guide
+| Score | Criteria |
+|-------|----------|
+| 1.0 | Every forward command has a compensation command on the failure path |
+| 0.5 | Compensation exists but covers only partial failure paths |
+| 0.0 | No compensation defined |

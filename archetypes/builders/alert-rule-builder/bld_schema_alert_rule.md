@@ -1,0 +1,51 @@
+---
+id: bld_schema_alert_rule
+kind: input_schema
+pillar: P06
+llm_function: CONSTRAIN
+version: 1.0.0
+quality: null
+tags: [alert_rule, schema, prometheus]
+title: "Schema Alert Rule"
+---
+# Schema: alert_rule
+## Frontmatter Fields (Required)
+| Field | Type | Required | Notes |
+|-------|------|----------|-------|
+| id | string (ar_{sys}_{metric}) | YES | snake_case |
+| kind | literal "alert_rule" | YES | — |
+| pillar | literal "P09" | YES | — |
+| title | string | YES | Human-readable alert name |
+| version | semver | YES | 1.0.0 start |
+| quality | null | YES | Never self-score |
+| alert_name | string (PascalCase) | YES | Prometheus alert name |
+| severity | enum | YES | critical|warning|info |
+| for_duration | ISO duration | YES | "0s", "1m", "5m", "15m", "1h" |
+| metric_expression | string | YES | PromQL or logical expression |
+| routing | string | YES | Team/channel/policy/webhook |
+| tags | list[string] | YES | >= 3 tags |
+
+## Optional Fields
+| Field | Type | Notes |
+|-------|------|-------|
+| runbook_url | URL | Link to remediation procedure |
+| automated_response | string | Auto-action: restart, scale, rollback |
+| labels | map[string] | Prometheus labels for routing |
+| annotations | map[string] | summary, description for Alertmanager |
+| inhibit_rules | list | Suppress lower severity if critical fires |
+
+## ID Pattern
+`^ar_[a-z][a-z0-9_]+$`
+Example: ar_api_error_rate_high, ar_db_latency_critical, ar_disk_usage_warning
+
+## Severity Definitions
+| Level | Meaning | for_duration recommendation |
+|-------|---------|---------------------------|
+| critical | Immediate action, page on-call | 0s - 2m |
+| warning | Attention needed, create ticket | 5m - 15m |
+| info | Log for awareness, no action needed | 15m+ |
+
+## Constraints
+- max_bytes: 2048
+- metric_expression must contain a numeric threshold
+- for_duration must be ISO 8601 duration (PT1M not 1min)
