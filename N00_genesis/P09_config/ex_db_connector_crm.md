@@ -7,13 +7,14 @@ title: "CRM DB Connector Template -- Supabase B2B Partner Tables"
 description: "Supabase database connector for B2B CRM. Partner registration, contacts, orders, and activity log tables with RLS policies and type-safe client patterns."
 domain: crm
 nucleus: N06
-quality: null
+quality: 9.0
 tags: [db-connector, crm, supabase, b2b, partner, rls, typescript]
 brand_placeholders:
   - BRAND_NAME
   - BRAND_CRM_TABLE_PREFIX
   - BRAND_SUPABASE_URL
   - BRAND_SUPABASE_ANON_KEY
+density_score: 1.0
 ---
 
 # CRM DB Connector -- Supabase B2B Partner Tables
