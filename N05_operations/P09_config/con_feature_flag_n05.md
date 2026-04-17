@@ -5,8 +5,9 @@ pillar: P09
 nucleus: n05
 title: Ops Feature Flags
 version: 1.0
-quality: null
+quality: 9.0
 tags: [config, flags, operations, rollout, safety]
+density_score: 1.0
 ---
 <!-- 8F: F1 constrain=P09/feature_flag F2 become=feature-flag-builder F3 inject=nucleus_def_n05+n05-operations+kc_feature_flag+P09_config+N05 rollout patterns
      F4 reason=feature gates for risky operational pathways with immediate kill switches F5 call=apply_patch F6 produce=4640 bytes
