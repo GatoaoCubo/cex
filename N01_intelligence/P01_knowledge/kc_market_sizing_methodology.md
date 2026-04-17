@@ -8,10 +8,11 @@ version: 1.0.0
 created: 2026-04-17
 author: n01_intelligence
 domain: market-analysis
-quality: null
+quality: 9.2
 tags: [market_sizing, TAM_SAM_SOM, bottom_up, top_down, market_analysis, n01]
 tldr: "Comprehensive market sizing methodology: top-down (analyst reports) vs. bottom-up (unit economics), TAM/SAM/SOM definitions and calculations, common errors, and calibration against known benchmarks."
 density_score: 0.91
+updated: "2026-04-17"
 ---
 
 <!-- 8F: F1 constrain=P01/knowledge_card F2 become=knowledge-card-builder F3 inject=kc_competitive_intelligence_methods+reasoning_strategy_n01 F4 reason=market sizing is the most common N01 task after competitive analysis; this KC grounds every sizing exercise in methodology F5 call=cex_compile F6 produce=kc_market_sizing_methodology.md F7 govern=frontmatter+ascii+tables F8 collaborate=N01_intelligence/P01_knowledge/ -->
