@@ -5,7 +5,7 @@ description: Comprehensive documentation for testing and validating Ollama wrapp
 tags: ["ollama", "wrapper", "testing", "integration", "api"]
 kind: knowledge_card
 pillar: P01
-quality: null
+quality: 8.0
 priority: 1
 density_score: 1.0
 ---

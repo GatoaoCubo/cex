@@ -7,7 +7,7 @@ version: 1.0.0
 created: 2026-04-17
 author: n03_engineering
 domain: schema-design
-quality: null
+quality: 8.7
 tags: [few_shot_example, P06, schema, type_def, input_schema, validation_schema, 8F, coc]
 tldr: "Input/output pair demonstrating how N03 applies 8F to P06 schema design. Covers type_def, input_schema, and validation_schema in one cohesive example. Reusable by any LLM runtime for schema-kind builds."
 density_score: 0.89

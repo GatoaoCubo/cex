@@ -3,18 +3,18 @@
 # Fill {{VARS}} before use | Validate against P09_config/_schema.yaml
 # Max 4096 bytes | density_min: 0.85 | quality_min: 9.0
 
-id: p09_ec_{{EXPERIMENT_SLUG}}
+id: "p09_ec_{{EXPERIMENT_SLUG}}"
 kind: experiment_config
 pillar: P09
 title: "Experiment: {{EXPERIMENT_NAME}}"
 version: 1.0.0
-created: {{ISO_DATE}}
-updated: {{ISO_DATE}}
-author: {{AGENT_OR_TEAM}}
-quality: null
-tags: [{{TAG1}}, experiment, ab_test, P09]
+created: "{{ISO_DATE}}"
+updated: "{{ISO_DATE}}"
+author: "{{AGENT_OR_TEAM}}"
+quality: 8.2
+tags: "[{{TAG1}}, experiment, ab_test, P09]"
 tldr: "{{ONE_SENTENCE_HYPOTHESIS_AND_METRIC}}"
-density_score: {{0.85_TO_1.00}}
+density_score: "{{0.85_TO_1.00}}"
 ---
 
 # Experiment: {{EXPERIMENT_NAME}}

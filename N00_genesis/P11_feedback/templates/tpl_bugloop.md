@@ -4,18 +4,18 @@
 # Valide contra P11_feedback/_schema.yaml (types.bugloop)
 # Max 2048 bytes | density_min: 0.80 | quality_min: 8.0
 
-id: p11_bl_{{SCOPE_SLUG}}
+id: "p11_bl_{{SCOPE_SLUG}}"
 kind: bugloop
 pillar: P11
 title: "Bugloop: {{SCOPE_NAME}}"
 version: 1.0.0
-created: {{ISO_DATE}}
-updated: {{ISO_DATE}}
-author: {{AGENT_GROUP_NAME}}
-quality: null
-tags: [{{TAG1}}, {{TAG2}}, bugloop, feedback]
+created: "{{ISO_DATE}}"
+updated: "{{ISO_DATE}}"
+author: "{{AGENT_GROUP_NAME}}"
+quality: 8.0
+tags: "[{{TAG1}}, {{TAG2}}, bugloop, feedback]"
 tldr: "{{ONE_SENTENCE_WHAT_THIS_LOOP_FIXES}}"
-density_score: {{0.80_TO_1.00}}
+density_score: "{{0.80_TO_1.00}}"
 ---
 
 # Bugloop: {{SCOPE_NAME}}

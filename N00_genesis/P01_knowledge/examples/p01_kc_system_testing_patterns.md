@@ -8,7 +8,7 @@ created: "2023-10-15"
 updated: "2023-10-15"  
 author: P01_Team  
 domain: software_testing  
-quality: null  
+quality: 0.0
 tags: [testing, patterns, software, validation, knowledge]  
 tldr: Essential system testing patterns to ensure software reliability, including unit, integration, and acceptance testing strategies.  
 when_to_use: When validating software systems for reliability and performance.  

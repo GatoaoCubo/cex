@@ -7,7 +7,7 @@ version: 1.0.0
 created: 2026-04-17
 author: n03_engineering
 domain: nucleus-construction
-quality: null
+quality: 8.7
 tags: [pattern, nucleus, instantiation, N00, archetype, convention-over-configuration, coc, new-nucleus-bootstrap]
 tldr: "Convention-over-Configuration pattern for creating a new nucleus (N08+) from the N00_genesis archetype. 9-step protocol with explicit file list, naming rules, and CoC compliance checks."
 density_score: 0.92

@@ -1,9 +1,9 @@
 ---
 id: kc_edtech_vertical
 kind: knowledge_card
-title: EdTech Vertical: FERPA, COPPA, LMS Integration, and Student Data Privacy
+title: "EdTech Vertical: FERPA, COPPA, LMS Integration, and Student Data Privacy"
 version: 1.0.0
-quality: null
+quality: 4.3
 pillar: P01
 ---
 

@@ -14,7 +14,7 @@ capabilities_count: 4
 tools_count: 4  
 iso_files_count: 10  
 routing_keywords: [pet shop CRM, customer management, pet data tracking, sales tracking]  
-quality: null  
+quality: 0.0
 tags: [agent, pet shop, pet_shop_crm, P02]  
 tldr: Manages customer interactions, tracks pet data, and streamlines sales for pet shops.  
 density_score: 0.85  

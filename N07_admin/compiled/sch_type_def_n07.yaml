@@ -4,7 +4,7 @@ pillar: P06
 nucleus: n07
 title: Orchestrator Type Definitions
 version: 1.0
-quality: null
+quality: 7.9
 tags:
 - type-def
 - orchestration

@@ -708,7 +708,7 @@ def main():
                     if fn.endswith('.md'):
                         fpath = os.path.join(root_dir, fn)
                         try:
-                            head = open(fpath, 'r', encoding='utf-8').read(200)
+                            head = open(fpath, 'r', encoding='utf-8').read(2000)
                             if 'quality:' in head:
                                 args.files.append(fpath)
                         except (OSError, UnicodeDecodeError):
@@ -728,14 +728,17 @@ def main():
         )
         args.files = sorted(set(result.stdout.strip().split('\n'))) if result.stdout.strip() else []
 
-    # Filter to null-only if requested
+    # Filter to null-only if requested (frontmatter only)
     if args.null_only and args.files:
         filtered = []
         for f in args.files:
             try:
-                head = open(f, 'r', encoding='utf-8').read(500)
-                if re.search(r'^quality:\s*null\s*$', head, re.MULTILINE):
-                    filtered.append(f)
+                content = open(f, 'r', encoding='utf-8').read()
+                fm_match = re.match(r'^---\s*\n(.*?)\n---', content, re.DOTALL)
+                if fm_match:
+                    fm = fm_match.group(1)
+                    if re.search(r'^quality:\s*null\s*$', fm, re.MULTILINE):
+                        filtered.append(f)
             except (OSError, UnicodeDecodeError):
                 pass
         args.files = filtered

@@ -4,7 +4,7 @@ pillar: P09
 nucleus: n07
 title: Orchestrator Path Registry
 version: 1.0
-quality: null
+quality: 8.7
 tags:
 - path-config
 - orchestration

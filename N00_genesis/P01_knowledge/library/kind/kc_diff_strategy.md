@@ -1,9 +1,9 @@
 ---
 id: kc_diff_strategy
 kind: knowledge_card
-title: Diff Strategy: Change Application and Matching Algorithm
+title: "Diff Strategy: Change Application and Matching Algorithm"
 version: 1.0.0
-quality: null
+quality: 6.0
 pillar: P01
 ---
 

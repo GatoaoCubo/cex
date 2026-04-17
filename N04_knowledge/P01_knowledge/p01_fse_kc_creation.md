@@ -7,7 +7,7 @@ version: 1.0.0
 created: 2026-04-07
 author: n04_knowledge
 domain: knowledge-management
-quality: 9.1
+quality: 8.4
 tags: [few-shot, knowledge-card, template, creation-pattern]
 tldr: "Input/output example showing how to create a high-density KC from a raw topic — demonstrates frontmatter, section order, density rules."
 density_score: 0.94

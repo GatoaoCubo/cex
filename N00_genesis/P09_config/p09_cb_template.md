@@ -3,18 +3,18 @@
 # Fill {{VARS}} before use | Validate against P09_config/_schema.yaml
 # Max 3072 bytes | density_min: 0.85 | quality_min: 9.0
 
-id: p09_cb_{{BUDGET_SLUG}}
+id: "p09_cb_{{BUDGET_SLUG}}"
 kind: cost_budget
 pillar: P09
 title: "Budget: {{BUDGET_NAME}}"
 version: 1.0.0
-created: {{ISO_DATE}}
-updated: {{ISO_DATE}}
-author: {{AGENT_OR_TEAM}}
-quality: null
-tags: [{{TAG1}}, cost_budget, tokens, P09]
+created: "{{ISO_DATE}}"
+updated: "{{ISO_DATE}}"
+author: "{{AGENT_OR_TEAM}}"
+quality: 7.6
+tags: "[{{TAG1}}, cost_budget, tokens, P09]"
 tldr: "{{ONE_SENTENCE_SCOPE_AND_CAP}}"
-density_score: {{0.85_TO_1.00}}
+density_score: "{{0.85_TO_1.00}}"
 ---
 
 # Budget: {{BUDGET_NAME}}

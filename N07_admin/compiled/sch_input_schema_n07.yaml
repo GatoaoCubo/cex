@@ -4,7 +4,7 @@ pillar: P06
 nucleus: n07
 title: Orchestrator Input Contract
 version: 1.0
-quality: null
+quality: 8.9
 tags:
 - input-schema
 - orchestration

@@ -7,7 +7,7 @@ version: 1.0.0
 created: 2026-04-17
 author: n03_engineering
 domain: pipeline-reasoning
-quality: null
+quality: 8.8
 tags: [reasoning_trace, F7, GOVERN, quality-gate, scoring, 8F, example, coc]
 tldr: "Live F7 GOVERN trace for a landing_page artifact scoring 8.4. Shows 7-gate evaluation, 12LP checklist, retry loop, and the specific fixes that raised the score to 9.1. Teaches both failure and recovery."
 density_score: 0.91

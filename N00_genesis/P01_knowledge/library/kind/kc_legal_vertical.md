@@ -1,9 +1,9 @@
 ---
 id: kc_legal_vertical
 kind: knowledge_card
-title: Legal Industry Vertical: Key Concepts
+title: "Legal Industry Vertical: Key Concepts"
 version: 1.0.0
-quality: null
+quality: 5.5
 pillar: P01
 ---
 

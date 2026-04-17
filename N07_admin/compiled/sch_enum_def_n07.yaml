@@ -4,7 +4,7 @@ pillar: P06
 nucleus: n07
 title: Orchestrator Enumerations
 version: 1.0
-quality: null
+quality: 7.5
 tags:
 - enum-def
 - orchestration

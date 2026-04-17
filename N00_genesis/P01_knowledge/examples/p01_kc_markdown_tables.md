@@ -8,7 +8,7 @@ created: "2023-10-05"
 updated: "2023-10-05"  
 author: "knowledge-team"  
 domain: "markdown"  
-quality: null  
+quality: 0.0
 tags: [markdown, tables, syntax, formatting]  
 tldr: "Markdown tables use pipes and dashes to format structured data."  
 when_to_use: "When formatting structured data in markdown documents."  

@@ -4,18 +4,18 @@
 # Valide contra P11_feedback/_schema.yaml (types.quality_gate)
 # Max 1024 bytes | density_min: 0.80 | quality_min: 8.0
 
-id: p11_qg_{{GATE_SLUG}}
+id: "p11_qg_{{GATE_SLUG}}"
 kind: quality_gate
 pillar: P11
 title: "Gate: {{GATE_NAME}}"
 version: 1.0.0
-created: {{ISO_DATE}}
-updated: {{ISO_DATE}}
-author: {{AGENT_GROUP_NAME}}
-quality: null
-tags: [{{TAG1}}, {{TAG2}}, quality-gate, feedback]
+created: "{{ISO_DATE}}"
+updated: "{{ISO_DATE}}"
+author: "{{AGENT_GROUP_NAME}}"
+quality: 6.7
+tags: "[{{TAG1}}, {{TAG2}}, quality-gate, feedback]"
 tldr: "{{ONE_SENTENCE_WHAT_THIS_GATE_ENFORCES}}"
-density_score: {{0.80_TO_1.00}}
+density_score: "{{0.80_TO_1.00}}"
 ---
 
 # Gate: {{GATE_NAME}}

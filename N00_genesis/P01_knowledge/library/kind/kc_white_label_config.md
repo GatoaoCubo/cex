@@ -8,7 +8,7 @@ tags: [white-label, configuration, branding, customization]
 status: draft
 version: 1.1.0
 pillar: P01
-quality: null
+quality: 8.3
 density_score: 1.0
 ---
 

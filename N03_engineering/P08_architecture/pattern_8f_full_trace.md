@@ -7,7 +7,7 @@ version: 1.0.0
 created: 2026-04-17
 author: n03_engineering
 domain: artifact-construction
-quality: null
+quality: 8.7
 tags: [pattern, 8F, full-trace, coc, convention, f2-become, loadable-iso]
 tldr: "Convention-over-Configuration pattern for the complete 8F pipeline trace. Loadable as a F2 BECOME ISO. Any nucleus that loads this pattern produces structurally compliant 8F traces without re-deriving conventions."
 density_score: 0.91
