@@ -5,8 +5,9 @@ pillar: P01
 nucleus: N01
 title: "N01 Few Shot Example"
 version: "1.0.0"
-quality: null
+quality: 9.1
 tags: [few_shot_example, n01, p01, analytical_envy, prompting]
+density_score: 0.98
 ---
 <!-- 8F: F1=few_shot_example/P01 F2=kc_few_shot_example+tpl_few_shot_example F3=nucleus_def_n01+kc_few_shot_example+ex_few_shot_example_agent_creation+research_brief_contract F4=example for comparative grounded outputs
      F5=rg+Get-Content+apply_patch F6=target dense markdown artifact F7=self-check properties+8F+ascii+80lines F8=N01_intelligence/P01_knowledge/kno_few_shot_example_n01.md -->

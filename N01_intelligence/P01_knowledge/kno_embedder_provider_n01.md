@@ -5,8 +5,9 @@ pillar: P01
 nucleus: N01
 title: "N01 Embedder Provider"
 version: "1.0.0"
-quality: null
+quality: 9.0
 tags: [embedder_provider, n01, p01, analytical_envy, retrieval]
+density_score: 0.99
 ---
 <!-- 8F: F1=embedder_provider/P01 F2=kc_embedder_provider+example_embedder_provider F3=nucleus_def_n01+kc_embedder_provider+ex_embedder_provider_openai_ada+search_config_intelligence F4=provider selection for comparative retrieval
      F5=rg+Get-Content+apply_patch F6=target dense markdown artifact F7=self-check properties+8F+ascii+80lines F8=N01_intelligence/P01_knowledge/kno_embedder_provider_n01.md -->
