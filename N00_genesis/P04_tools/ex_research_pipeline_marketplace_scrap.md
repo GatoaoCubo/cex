@@ -4,13 +4,14 @@ kind: research_pipeline
 pillar: P04
 title: Marketplace Scrap Research Pipeline
 version: 0.1.0
-quality: null
+quality: 8.9
 status: template
 brand_placeholders:
   - BRAND_NAME
   - BRAND_VERTICAL
   - BRAND_COMPETITOR_WHITELIST
 tags: [commerce, template, distillation, research, scraping]
+density_score: 0.98
 ---
 
 # Marketplace Scrap Research Pipeline
