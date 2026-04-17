@@ -8,7 +8,7 @@ created: 2026-03-31
 author: n07_orchestrator
 domain: orchestration
 trigger: nucleus_output_arrives
-quality: 9.1
+quality: 8.2
 tags: [workflow, auto, n07, review, quality, gate]
 tldr: "When a nucleus signals complete, auto-review its output: frontmatter, compilation, quality gate, doctor check."
 density_score: 0.92

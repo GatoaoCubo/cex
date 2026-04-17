@@ -11,7 +11,7 @@ author: "memory-summary-builder"
 name: "N07 Orchestration History Summary"
 source_type: multi_session
 compression_method: hybrid
-quality: null
+quality: 8.3
 tags: [memory_summary, orchestration, n07, missions, routing]
 tldr: "Compressed 30-day N07 orchestration log: 5 missions, routing decisions, process lessons, token spend. Inject at boot."
 max_tokens: 1800

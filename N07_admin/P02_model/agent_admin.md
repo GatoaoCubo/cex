@@ -13,7 +13,7 @@ llm_function: BECOME
 capabilities_count: 7
 tools_count: 7
 routing_keywords: [orchestrate, dispatch, monitor, route, handoff, spawn, validate]
-quality: 9.2
+quality: 8.9
 tags: [agent, orchestrator, nucleus, N07, multi-cli, dispatch]
 tldr: Multi-CLI orchestrator that dispatches tasks to 6 specialized nuclei via spawn — never builds, only coordinates.
 density_score: 0.91

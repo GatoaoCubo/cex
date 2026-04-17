@@ -1,0 +1,119 @@
+---
+id: con_rate_limit_config_n07
+kind: rate_limit_config
+pillar: P09
+nucleus: n07
+title: "Orchestrator Rate Limits"
+version: 1.0
+quality: 7.9
+tags: [rate-limit, orchestration, budget, throttle, provider]
+provider: anthropic
+rpm: 20
+tpm: 1000000
+concurrent: 6
+retry_after: 60
+alert_threshold: 0.8
+budget_usd: 50.0
+tier: enterprise
+rpd: 480
+tldr: "N07 orchestration rate limits: 6 concurrent nuclei, $50/hr Opus ceiling, 60-90s polling, 5-wave max per mission."
+description: "Rate limits and dispatch budgets for N07 orchestrator -- governs nucleus spawns, provider quotas, wave cadence, and token spend per mission."
+---
+<!-- 8F: F1=P09/rate_limit_config F2=rate-limit-config-builder F3=nucleus_def_n07+rate_limits_atlas F4=reason F5=call F6=produce F7=govern F8=collaborate -->
+
+## Purpose
+
+N07 orchestrates up to 6 parallel nuclei across 4 providers. Without declared limits,
+a runaway mission can exhaust hourly API quota or exceed budget in a single wave.
+This config is the single source of truth for what N07 may dispatch, at what rate,
+and when to abort.
+
+Boundary: this artifact declares WHAT the limits are.
+Runtime enforcement (backoff, circuit-break) belongs in runtime_rule artifacts.
+Provider credentials belong in secret_config artifacts.
+
+## Provider Limits
+
+| Provider | RPM | TPM | Concurrent | Budget/Hr (USD) | Fallback |
+|----------|-----|-----|------------|-----------------|---------|
+| Claude Opus | 20 | 1,000,000 | 6 | $50.00 | Claude Sonnet |
+| Claude Sonnet | 40 | 2,000,000 | 12 | $20.00 | Claude Haiku |
+| Claude Haiku | 100 | 4,000,000 | 20 | $5.00 | Ollama |
+| Ollama (local) | unlimited | unlimited | 3 | $0.00 | none |
+| Gemini Pro | 10 | 1,000,000 | 4 | $0.00 (free) | Gemini Flash |
+| Gemini Flash | 30 | 2,000,000 | 8 | $0.00 (free) | Ollama |
+
+Notes:
+- Opus is N07 native model; 20 RPM reflects Anthropic Max plan observed ceiling.
+- Ollama concurrency capped at 3: RTX 5070 Ti saturates at 3 parallel qwen3:14b instances.
+- Gemini free tier: aggressive RPM limits; treat as fallback only (see memory: gemini_free_tier_unusable).
+- Fallback chain is lazy: only activated when primary returns 429 or times out after retry_after.
+
+## Dispatch Limits
+
+| Dimension | Limit | Rationale |
+|-----------|-------|-----------|
+| max_concurrent_nuclei | 6 | Hardware + API ceiling; 7+ causes 429 cascade |
+| max_waves_per_mission | 5 | Diminishing returns past W5; cost compounds |
+| max_retries_per_nucleus | 2 | Fail fast -- third retry rarely succeeds |
+| cooldown_between_waves_sec | 30 | Signal propagation + git log settle time |
+| max_dispatch_per_hour | 20 | Prevents runaway orchestration loops |
+| polling_interval_sec | 60-90 | Balance signal freshness vs token burn |
+| nucleus_boot_budget_tokens | 30,000 | Flag if spawn context exceeds this |
+| nucleus_boot_hard_cap_tokens | 50,000 | Abort spawn if exceeded -- bloated context |
+
+Polling rule: never poll more than once per 60 seconds in interactive mode.
+Use background bash loop (sleep 60) -- never repeated synchronous Bash calls.
+
+## Budget Controls
+
+| Metric | Soft Limit | Hard Limit | Action |
+|--------|------------|------------|--------|
+| tokens_per_mission | 500,000 | 1,000,000 | warn at soft; abort at hard |
+| cost_per_mission_usd | $25.00 | $50.00 | warn at soft; abort at hard |
+| boot_tokens_per_spawn | 30,000 | 50,000 | flag at soft; refuse at hard |
+| concurrent_opus_calls | 4 | 6 | warn at soft; queue at hard |
+| waves_burned_no_signal | 1 | 2 | warn; investigate nucleus PID |
+
+Alert threshold: 0.8 -- trigger warning at 80% of any hard limit.
+Overage policy: requests blocked; mission paused; user notified with spend summary.
+Budget resets: per-mission (not per-hour); N07 tracks cumulative via signal metadata.
+
+## Backoff Strategy
+
+| Trigger | Wait | Next Action |
+|---------|------|-------------|
+| 429 from Anthropic | 60s (Retry-After header) | retry once; then fallback_chain |
+| 429 from Gemini | 30s | skip to Flash tier; then Ollama |
+| nucleus no signal >15min | 0s | check PID alive; if dead, re-dispatch |
+| nucleus no signal >45min | 0s | escalate to user (timeout decision) |
+| consecutive 429s (3+) | 120s | pause wave; switch provider pool |
+| budget soft limit hit | 0s | warn; reduce concurrent from 6 to 3 |
+| budget hard limit hit | 0s | abort mission; write partial consolidation |
+
+Backoff is exponential for provider errors: 60s -> 120s -> 240s (max 3 retries).
+Fixed wait for nucleus timeouts: check, don't spin.
+
+## Rationale
+
+| Decision | Reason |
+|----------|--------|
+| max_concurrent=6 | Memory: rate_limits_atlas 32-Sonnet test; safe limit ~20 -> 6 nucleus grid well inside |
+| polling=60-90s | Memory: polling_intervals -- don't poll every second; 60-90s balance |
+| max_waves=5 | Empirical: W5+ artifacts show quality regression; cost/value inverts |
+| boot_cap=30k | Memory: token_efficient_orchestration -- each spawn costs ~30k tokens |
+| retry_after=60 | Anthropic returns Retry-After: 60 on 429; golden example confirms |
+| alert_threshold=0.8 | Memory: rate_limit_config builder -- 80% alert prevents billing surprise |
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | rate_limit_config |
+| Pillar | P09 |
+| Nucleus | N07 |
+| Domain | orchestration dispatch |
+| Pipeline | 8F (F1-F8) |
+| Compiler | cex_compile.py |
+| Quality target | null (peer-reviewed) |
+| Density target | 0.85+ |

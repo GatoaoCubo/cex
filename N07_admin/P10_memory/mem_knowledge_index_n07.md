@@ -12,7 +12,7 @@ scope: "N07 orchestration knowledge: 257-kind taxonomy, KC library, handoff arch
 algorithm: "hybrid"
 corpus_type: "text"
 domain: "orchestration intent resolution"
-quality: null
+quality: 8.4
 tags: [knowledge-index, n07, orchestration, hybrid-search, intent-resolution, bm25, faiss]
 tldr: "Hybrid BM25+FAISS index over N07 orchestration corpus enabling instant intent resolution: vague user input -> {kind, pillar, nucleus} tuple"
 rebuild_schedule: "on_change"

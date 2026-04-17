@@ -9,7 +9,7 @@ updated: 2026-03-30
 author: n07_orchestrator
 pipeline: bootstrap_full
 domain: orchestration
-quality: 9.2
+quality: 9.1
 tags: [mission, bootstrap, dag, orchestration, N07, critical]
 tldr: "Plano de 4 fases para o CEX se auto-construir: validar tools, N03 reconstroi N07, fix WARNs, N03 sequencial reconstroi N01-N06."
 node_count: 16

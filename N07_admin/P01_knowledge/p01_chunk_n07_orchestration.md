@@ -12,7 +12,7 @@ method: "document_structure"
 chunk_size: "256 tokens"
 chunk_overlap: "32 tokens"
 separators: "[\\n## , \\n### , \\n\\n, \\n, . ]"
-quality: null
+quality: 7.5
 tags: [chunk_strategy, P01, orchestration, n07, retrieval]
 tldr: "Document-structure splitter for N07 orchestration docs: per-doctype size bands, 32-token overlap, metadata-keyed retrieval."
 description: "Chunking for N07: handoff .md, signal .json, mission plan .md, decision manifest .yaml."

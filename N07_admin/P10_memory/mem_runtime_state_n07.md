@@ -10,7 +10,7 @@ author: "runtime-state-builder"
 agent: "n07_orchestrator"
 persistence: "session"
 domain: "multi-nucleus orchestration"
-quality: null
+quality: 9.1
 tags: [runtime-state, n07, orchestration, routing, mission-control]
 tldr: "N07 session-scoped mutable state: active wave, PID registry, provider health, GDP manifest, quality ledger."
 routing_mode: "rule_based"

@@ -8,7 +8,7 @@ updated: "2026-04-17"
 author: learning-record-builder
 nucleus: N07
 domain: "orchestration"
-quality: null
+quality: 8.8
 tags: [n07, orchestration, dispatch, routing, process-management, token-efficiency, wave-structure]
 tldr: "N07 operational lessons: PID tree-kill, fake-signal verification, codex no-autocommit, rate limits, solo > grid on budget"
 topic: "N07 orchestrator accumulated operational lessons from dispatch cycles"

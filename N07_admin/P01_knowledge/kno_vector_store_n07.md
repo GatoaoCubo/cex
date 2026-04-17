@@ -40,7 +40,7 @@ namespace_strategy: "index_per_document_type"
 cloud_region: null
 pricing: null
 domain: vector_storage
-quality: null
+quality: 8.8
 tags: [vector-store, faiss, ivf, local, n07, orchestration]
 tldr: "FAISS IVFFlat -- local, 4 indexes by doc type, 1536d cosine, manual persist to .cex/vectorstore/n07/"
 keywords: [faiss, vectordb, ivf, local, orchestration, n07]
