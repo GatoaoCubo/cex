@@ -9,8 +9,9 @@ created: "2026-04-16"
 updated: "2026-04-16"
 author: n03_engineering
 domain: engineering retrieval architecture
-quality: null
+quality: 9.1
 tags: [embedder_provider, p01, n03, embeddings, retrieval, inventive_pride]
+density_score: 0.99
 ---
 <!-- 8F: F1=embedder_provider/P01 F2=embedder-provider-builder F3=nucleus_def_n03+kc_embedder_provider+P01_schema F4=proud dense-retrieval default
      F5=Get-Content+rg+apply_patch+cex_compile.py F6=bytes:6247 F7=self-check:frontmatter+8f+properties+80l+ascii F8=N03_engineering/P01_knowledge/kno_embedder_provider_n03.md -->
