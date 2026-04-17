@@ -5,8 +5,9 @@ pillar: P09
 nucleus: n05
 title: Ops Secret Registry
 version: 1.0
-quality: null
+quality: 9.0
 tags: [config, secret, operations, vault, rotation]
+density_score: 1.0
 ---
 <!-- 8F: F1 constrain=P09/secret_config F2 become=secret-config-builder F3 inject=nucleus_def_n05+n05-operations+kc_secret_config+P09_config+N05 secret patterns
      F4 reason=secret registry with rotation and retrieval discipline for ops workflows F5 call=apply_patch F6 produce=4521 bytes

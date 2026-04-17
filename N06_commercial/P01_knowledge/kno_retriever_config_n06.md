@@ -5,8 +5,9 @@ pillar: P01
 nucleus: n06
 title: Commercial Retriever Config
 version: 1.0
-quality: null
+quality: 9.0
 tags: [knowledge, retriever_config, rag, pricing, search, revenue]
+density_score: 1.0
 ---
 <!-- 8F: F1=P01/retriever_config F2=retriever-config-builder F3=nucleus_def_n06.md,kc_retriever_config.md,P01_knowledge/_schema.yaml,N06 W1 config/schema F4=hybrid_retrieval_tuned_for_margin_safe_conversion_decisions F5=apply_patch;python _tools/cex_compile.py F6=author_dense_markdown_artifact F7=frontmatter_ascii_density_linecount_review F8=N06_commercial/P01_knowledge/kno_retriever_config_n06.md -->
 
