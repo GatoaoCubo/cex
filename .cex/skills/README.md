@@ -1,4 +1,5 @@
 ---
+quality: 6.6
 id: cex_skills_readme
 kind: context_doc
 pillar: P03
