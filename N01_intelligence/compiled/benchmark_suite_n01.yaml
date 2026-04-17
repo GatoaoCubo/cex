@@ -18,6 +18,7 @@ tags:
 tldr: 'Benchmark suite for N01 research capability: 5 benchmark categories with 20 test cases each, covering competitive analysis
   accuracy, source retrieval quality, synthesis depth, bias detection, and time-to-insight.'
 density_score: 0.91
+updated: '2026-04-17'
 purpose: 'N01 claims Analytical Envy -- this suite proves it.
 
   Five benchmark categories test whether N01 research outperforms:

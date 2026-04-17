@@ -17,6 +17,7 @@ tags:
 tldr: 'Incident report template for N01 research quality failures: captures what went wrong, root cause, impact, and systematic
   fix. Filed when any research output scores < 7.0 or causes downstream harm.'
 density_score: 0.86
+updated: '2026-04-17'
 purpose: 'Research quality failures have consequences:
 
   - Downstream decisions based on wrong competitive data

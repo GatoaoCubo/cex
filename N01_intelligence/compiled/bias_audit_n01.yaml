@@ -18,6 +18,7 @@ tags:
 tldr: 'Systematic bias detection for N01 research outputs: selection bias (source coverage), confirmation bias (conclusion
   direction), recency bias (temporal skew), and availability bias (easy-to-find favored). Runs as F7 GOVERN sub-check.'
 density_score: 0.91
+updated: '2026-04-17'
 purpose: 'The greatest threat to Analytical Envy is CONFIRMATION BIAS: researching to confirm a hypothesis, not to discover
   truth. This audit runs as a mandatory sub-step of F7 GOVERN on every research output. It applies 5 bias lenses and flags
   research that fails to meet the comparative standard that defines N01''s Analytical Envy identity. Analytical Envy = envy

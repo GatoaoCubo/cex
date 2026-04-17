@@ -17,6 +17,7 @@ tags:
 tldr: 'Structured prompt template for generating N01 research briefs: slots for topic, competitors, evidence standard, audience,
   and depth. Output template enforces Analytical Envy with mandatory competitive benchmarking sections.'
 density_score: 0.88
+updated: '2026-04-17'
 purpose: 'Research briefs are the primary N01 output format.
 
   This template defines both:

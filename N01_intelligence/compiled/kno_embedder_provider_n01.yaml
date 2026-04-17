@@ -11,6 +11,7 @@ tags:
 - p01
 - analytical_envy
 - retrieval
+density_score: 0.99
 purpose: The embedder provider is the lens that turns text into retrievable geometry. For N01, that geometry must preserve
   competitor closeness and technical nuance without collapsing distinct claims into vague semantic sameness. Analytical Envy
   means embedding quality is judged by whether it helps find the strongest comparative evidence first.

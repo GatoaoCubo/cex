@@ -18,6 +18,7 @@ tags:
 tldr: 'Complete taxonomy of cognitive and research biases affecting intelligence analysis: 12 bias types with detection signatures,
   impact severity, and mitigation strategies. Grounds the bias_audit_n01 detection protocol.'
 density_score: 0.92
+updated: '2026-04-17'
 definition: Research bias = systematic error in how information is sought, collected, analyzed, or presented. Distinct from
   random error (noise) because it consistently skews in one direction. Analytical Envy means KNOWING our blind spots so we
   can compensate for them.

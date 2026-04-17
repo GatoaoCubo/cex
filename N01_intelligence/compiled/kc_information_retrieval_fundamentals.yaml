@@ -19,6 +19,7 @@ tags:
 tldr: 'Core IR concepts applied to N01 research: BM25 vs. dense retrieval, NDCG metric, precision/recall trade-off, hybrid
   search. Grounds the retriever_n01 and knowledge_index_n01 design decisions in IR fundamentals.'
 density_score: 0.9
+updated: '2026-04-17'
 core_ir_concepts: ''
 retrieval_models: '| Model | Algorithm | Strengths | Weaknesses | N01 Use |
 

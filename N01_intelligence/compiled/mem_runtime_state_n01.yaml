@@ -11,6 +11,7 @@ tags:
 - p10
 - analytical_envy
 - routing
+density_score: 0.99
 purpose: N01 runtime state stores the mutable decisions of the current research execution path. Analytical Envy means the
   state must capture how the nucleus is currently choosing to compare, verify, route, and stop. Identity stays elsewhere.
   Only the live analytical posture belongs here.

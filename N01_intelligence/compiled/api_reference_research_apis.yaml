@@ -17,6 +17,7 @@ tags:
 tldr: 'Typed API contract reference for all external data sources used by N01: web search, academic DBs, financial data, news
   feeds, and competitive intelligence APIs.'
 density_score: 0.91
+updated: '2026-04-17'
 purpose: N01 MUST triangulate across at least 3 independent sources per claim. This reference defines the typed contract for
   every API category N01 consumes, enabling automated source selection, authentication, rate-limit tracking, and result normalization.
   Analytical Envy drives N01 to ALWAYS compare against competitors. Each API category maps to a specific intelligence use

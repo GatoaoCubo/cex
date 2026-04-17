@@ -17,6 +17,7 @@ tags:
 tldr: 'Advanced quality gate for N01 adding 3 new hard gates to the base quality_gate_intelligence: Analytical Envy check
   (comparison mandatory), Vocabulary compliance (no metaphors), and Confidence completeness (scores on all claims).'
 density_score: 0.88
+updated: '2026-04-17'
 purpose: '`quality_gate_intelligence.md` (v4.0) defines 5 hard gates (H01-H05) for basic research quality.
 
   This v2 adds 3 additional gates specific to N01 Analytical Envy identity:

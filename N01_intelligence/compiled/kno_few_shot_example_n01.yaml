@@ -11,6 +11,7 @@ tags:
 - p01
 - analytical_envy
 - prompting
+density_score: 0.98
 purpose: N01 few-shot examples should teach comparative rigor, not only format. Analytical Envy means the example must demonstrate
   how to contrast claims, surface proof strength, and preserve uncertainty. A pretty example that omits evidence pressure
   teaches the wrong habit.

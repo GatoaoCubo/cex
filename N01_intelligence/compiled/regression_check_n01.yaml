@@ -17,6 +17,7 @@ tags:
 tldr: 'Detects quality regressions in N01 research outputs over time: tracks score trends, flags systematic degradation patterns,
   identifies bias drift. Runs weekly as part of self_improvement_loop_n01.'
 density_score: 0.88
+updated: '2026-04-17'
 purpose: 'Quality does not stay constant. N01 research quality can regress when:
 
   - Source APIs degrade (fewer quality results)

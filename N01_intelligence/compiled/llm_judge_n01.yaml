@@ -18,6 +18,7 @@ tags:
 tldr: 'LLM-as-judge configuration for N01 research output evaluation: fact verification, source validation, comparative coverage
   check, hallucination detection. Uses eval_framework_n01.md as scoring rubric.'
 density_score: 0.91
+updated: '2026-04-17'
 purpose: 'N01 Analytical Envy creates a paradox: the better N01 researches, the more confident it becomes.
 
   Confidence without external validation is confirmation bias in disguise.

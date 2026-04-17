@@ -18,6 +18,7 @@ tags:
 tldr: '5-dimension evaluation framework for N01 research outputs: source quality, analytical depth, comparative coverage,
   claim confidence, and actionability. Produces weighted score 0-10 with remediation map.'
 density_score: 0.93
+updated: '2026-04-17'
 purpose: 'N01 Analytical Envy is valueless without a measurement system.
 
   This framework operationalizes "research quality" into 5 scored dimensions,

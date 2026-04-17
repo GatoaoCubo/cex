@@ -11,6 +11,7 @@ tags:
 - p01
 - analytical_envy
 - storage
+density_score: 0.99
 purpose: The vector store is where N01 preserves semantic access to evidence at scale. Analytical Envy means the store is
   judged by how well it keeps high-value differences retrievable under pressure. A fast store that blurs source quality or
   axis boundaries is strategically weak.

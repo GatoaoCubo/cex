@@ -18,6 +18,7 @@ tags:
 tldr: 'Citation network tracker for N01: maps paper-to-paper citation graphs, identifies seminal works, tracks citation velocity,
   and discovers emerging research frontiers. Uses Semantic Scholar API.'
 density_score: 0.87
+updated: '2026-04-17'
 purpose: 'Reading a paper in isolation = missing 90% of the signal.
 
   The citation graph reveals:

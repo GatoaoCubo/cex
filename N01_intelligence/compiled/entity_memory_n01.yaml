@@ -18,6 +18,7 @@ tags:
 tldr: 'Typed entity memory for N01: tracks companies, people, products, papers, and market events across research sessions.
   Prevents re-researching known entities. Enables compound intelligence over time.'
 density_score: 0.89
+updated: '2026-04-17'
 purpose: 'Without entity memory, N01 researches the same companies from scratch every session.
 
   This erases the compound advantage that Analytical Envy demands.

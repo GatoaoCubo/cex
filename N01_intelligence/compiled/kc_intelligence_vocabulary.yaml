@@ -18,6 +18,7 @@ tags:
 tldr: 'Canonical vocabulary for N01 Intelligence domain: 20 seed terms mapped to industry definitions, N01 application, and
   anti-patterns. This KC makes N01 think in correct intelligence tradecraft terminology automatically.'
 density_score: 0.93
+updated: '2026-04-17'
 purpose: 'This KC implements the Ubiquitous Language Protocol (`.claude/rules/ubiquitous-language.md`)
 
   for the N01 Intelligence domain.

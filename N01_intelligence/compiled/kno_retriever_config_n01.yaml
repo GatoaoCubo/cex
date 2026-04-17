@@ -11,6 +11,7 @@ tags:
 - p01
 - analytical_envy
 - hybrid_search
+density_score: 0.99
 purpose: The retriever config decides which evidence gets the first chance to shape synthesis. For N01, that makes it a strategic
   artifact, not a tuning file. Analytical Envy means retrieval must favor the strongest comparative evidence, not just the
   most semantically nearby text.

@@ -18,6 +18,7 @@ tags:
 tldr: '4-layer memory architecture for N01: working (session context), episodic (research sessions), semantic (KCs + entities),
   procedural (methods). Maps storage, retrieval, and decay rules for each layer.'
 density_score: 0.91
+updated: '2026-04-17'
 purpose: 'Four types of memory serve different N01 research needs:
 
   1. What am I doing RIGHT NOW? (working memory)

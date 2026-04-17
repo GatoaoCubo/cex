@@ -18,6 +18,7 @@ tags:
 tldr: 'Hybrid retriever for N01 knowledge corpus: BM25 (keyword) + dense embedding (semantic) with RRF fusion. Retrieves from
   N01_intelligence/ artifact store and .cex/cache/ compiled outputs.'
 density_score: 0.9
+updated: '2026-04-17'
 purpose: 'Analytical Envy drives N01 to ALWAYS compare new findings against existing knowledge.
 
   Before any synthesis, N01 must query its own corpus to:

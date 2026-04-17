@@ -11,6 +11,7 @@ tags:
 - p01
 - analytical_envy
 - retrieval
+density_score: 0.97
 purpose: N01 does not chunk to merely fit context. N01 chunks to outperform weaker evidence packs. The strategy is designed
   for research artifacts, competitor dossiers, paper notes, and citation-heavy intelligence briefs. Analytical Envy means
   every split must preserve comparative signal, not just semantic continuity. If a chunk hides the delta between two sources,

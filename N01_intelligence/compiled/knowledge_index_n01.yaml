@@ -18,6 +18,7 @@ tags:
 tldr: 'Master index of the N01 intelligence corpus: 60+ knowledge cards, entity profiles, research outputs, and compiled artifacts.
   Enables retriever_n01 to perform sub-500ms corpus queries. Updated on every F8 COLLABORATE.'
 density_score: 0.9
+updated: '2026-04-17'
 purpose: 'N01 has 167+ artifacts. Without an index, retrieval degrades to linear scan.
 
   This knowledge index maintains:

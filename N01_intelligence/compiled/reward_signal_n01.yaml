@@ -18,6 +18,7 @@ tags:
 tldr: 'Reward signal definition for N01 research quality optimization: composite signal from eval_framework (D1-D5) + bias
   audit + stakeholder satisfaction. Used by self_improvement_loop to guide artifact evolution direction.'
 density_score: 0.88
+updated: '2026-04-17'
 purpose: 'The self_improvement_loop_n01 must optimize in a DIRECTION.
 
   Without a defined reward signal, "better" is undefined.

@@ -17,6 +17,7 @@ tags:
 tldr: '4 labeled few-shot examples for N01 research quality calibration: 2 high-quality (score 9+) and 2 low-quality (score
   6-7) with annotations explaining the difference. Used to ground llm_judge_n01 scoring.'
 density_score: 0.89
+updated: '2026-04-17'
 purpose: 'The eval_framework and scoring_rubric define the scale abstractly.
 
   These examples make the scale concrete. Used by:

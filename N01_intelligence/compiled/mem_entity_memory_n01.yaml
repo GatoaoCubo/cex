@@ -11,6 +11,7 @@ tags:
 - p10
 - analytical_envy
 - memory
+density_score: 1.0
 purpose: N01 entity memory stores stable facts about the entities that repeatedly shape research. Analytical Envy means the
   memory should preserve what makes an entity strategically distinct, not every incidental mention. If memory fills with trivia,
   future comparisons get weaker.

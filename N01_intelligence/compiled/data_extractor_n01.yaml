@@ -18,6 +18,7 @@ tags:
 tldr: 'LLM-powered structured data extractor for N01: transforms raw research text into typed intelligence structures (CompetitorProfile,
   MarketSignal, PricingData). Outputs match type_def_intelligence_types schema.'
 density_score: 0.89
+updated: '2026-04-17'
 purpose: 'DocumentChunks from document_loader_n01 are unstructured text. Intelligence is structured data that can be compared,
   ranked, and indexed. This extractor bridges the two: takes raw text, applies LLM extraction, outputs typed structures defined
   in sch_type_def_n01.md.'

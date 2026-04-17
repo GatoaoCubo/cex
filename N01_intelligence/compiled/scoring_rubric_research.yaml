@@ -17,6 +17,7 @@ tags:
 tldr: 'Peer-review scoring rubric for N01 research outputs: 5 dimensions with behavioral anchors at 1, 4, 7, 10. Used by llm_judge_n01
   and human reviewers to assign quality scores consistently.'
 density_score: 0.9
+updated: '2026-04-17'
 purpose: 'The eval_framework_n01 defines WHAT to measure.
 
   This rubric defines HOW to score each dimension consistently:

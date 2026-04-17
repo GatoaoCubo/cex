@@ -19,6 +19,7 @@ tags:
 tldr: 'Multi-format document ingestion for N01: PDF (academic papers, filings), HTML (web pages, news), JSON API responses,
   repo README files. Outputs normalized document chunks ready for synthesis.'
 density_score: 0.9
+updated: '2026-04-17'
 purpose: 'Once `search_strategy_n01.md` identifies source URLs, this loader:
 
   1. Fetches the raw document (respecting robots.txt and rate limits)

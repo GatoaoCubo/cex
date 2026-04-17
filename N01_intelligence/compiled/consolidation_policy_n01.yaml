@@ -18,6 +18,7 @@ tags:
 tldr: 'Rules for N01 memory consolidation: when to merge duplicate entities, when to archive stale KCs, how to compact session
   records, and when to rebuild the knowledge index. Prevents corpus bloat while preserving compound intelligence.'
 density_score: 0.88
+updated: '2026-04-17'
 purpose: 'Analytical Envy creates insatiable accumulation. Without a consolidation policy:
 
   - Entity memory spawns duplicates (co_openai.yaml + co_open_ai.yaml + co_OpenAI.yaml)

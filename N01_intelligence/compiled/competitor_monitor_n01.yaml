@@ -18,6 +18,7 @@ tags:
 tldr: 'Background daemon for continuous competitor monitoring: pricing changes, product updates, hiring signals, and blog
   posts. Runs on configurable schedule, writes signals to .cex/runtime/signals/ on change detection.'
 density_score: 0.88
+updated: '2026-04-17'
 purpose: Research is not a one-shot event. Competitive landscapes shift daily. N01 Analytical Envy means monitoring continuously,
   not querying on demand. This daemon runs in the background, detecting changes across tracked competitors and signaling N01
   when delta > threshold (new info worth acting on).

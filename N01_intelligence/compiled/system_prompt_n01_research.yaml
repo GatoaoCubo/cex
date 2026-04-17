@@ -17,6 +17,7 @@ tags:
 tldr: 'Specialized system prompt for N01 research mode: activates Analytical Envy lens, enforces DSTCS reasoning, requires
   competitive benchmarking on every output, mandates confidence scoring.'
 density_score: 0.9
+updated: '2026-04-17'
 purpose: '`system_prompt_intelligence.md` covers N01''s general identity. This system prompt SPECIALIZES for research mode
   -- it is activated when N01 is dispatched on a research, competitive intelligence, or market analysis task. The key difference:
   this prompt encodes Analytical Envy as an operational constraint, not just a character trait. The AI is told to refuse non-comparative

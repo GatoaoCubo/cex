@@ -17,6 +17,7 @@ tags:
 tldr: 'Library of 8 action prompts for N01 research operations: competitive analysis, market sizing, literature review, source
   triangulation, entity extraction, bias check, trend detection, synthesis. Each enforces Analytical Envy lens.'
 density_score: 0.9
+updated: '2026-04-17'
 purpose: 'Action prompts are discrete, callable instructions that implement specific research operations. Unlike the system_prompt
   (sets identity), action prompts drive specific F6 PRODUCE steps. Each prompt enforces Analytical Envy: comparison is built
   into the instruction, not optional.'

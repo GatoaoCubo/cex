@@ -18,6 +18,7 @@ tags:
 tldr: '5-step prompt chain for N01 research: DECOMPOSE -> SOURCE -> TRIANGULATE -> SYNTHESIZE -> GOVERN. Each step uses a
   discrete action prompt from action_prompt_n01.md. Chain output is a scored research brief.'
 density_score: 0.89
+updated: '2026-04-17'
 purpose: 'A single LLM call cannot do deep research reliably.
 
   This chain breaks the research pipeline into 5 discrete, controllable steps.

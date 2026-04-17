@@ -19,6 +19,7 @@ tags:
 tldr: 'Multimodal prompts for N01 research from visual sources: competitor UI screenshots, pricing table images, chart/graph
   analysis, LinkedIn profile screenshots. Extracts structured intelligence from images using Claude Vision.'
 density_score: 0.87
+updated: '2026-04-17'
 purpose: 'Some intelligence sources are inherently visual:
 
   - Competitor UI screenshots (feature matrix capture)

@@ -17,6 +17,7 @@ tags:
 tldr: 'Playwright-based browser tool for N01 JS-heavy source extraction: competitor pricing pages, LinkedIn job postings,
   dynamic product catalogs, app stores. Falls back to requests+BeautifulSoup for static pages.'
 density_score: 0.89
+updated: '2026-04-17'
 purpose: Static HTTP fetching fails on 40%+ of modern competitor pages (JS-rendered). N01 Analytical Envy demands data from
   ALL sources, including JS-heavy pages. This tool provides authenticated, headless browser access for intelligence gathering.
 target_page_categories: '| Category | Example Sites | Why JS-Rendered | Intelligence Value |

@@ -18,6 +18,7 @@ tags:
 tldr: 'Trend detection tool for N01: detects rising / falling / plateauing signals across competitor metrics, hiring, search
   volume, and social velocity. Outputs ranked trend signals with statistical confidence.'
 density_score: 0.88
+updated: '2026-04-17'
 purpose: 'Trend detection separates intelligence from reporting. N01 Analytical Envy: finding a trend AFTER everyone knows
   it = no competitive advantage. This tool detects trends in their EARLY stage, before they become obvious.'
 trend_signal_categories: '| Category | Data Source | Detection Method | Lead Time |

@@ -17,6 +17,7 @@ tags:
 tldr: '10 golden test cases for N01 research pipeline: fixed inputs with expected outputs. Prevents quality regressions when
   pipeline changes. Run before any changes to search_strategy, reasoning_strategy, or eval_framework.'
 density_score: 0.89
+updated: '2026-04-17'
 purpose: 'N01 pipeline changes (new search strategy, new system prompt, new eval dimensions)
 
   can inadvertently degrade output quality. Golden tests catch regressions before they land.
