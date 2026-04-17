@@ -148,6 +148,51 @@ def compute_density(filepath: Path) -> float:
     return round(density, 2)
 
 
+def heuristic_quality(filepath: Path) -> float:
+    """Compute heuristic quality estimate via structural + rubric scoring (no LLM).
+
+    Uses score_structural + score_rubric directly -- no subprocess, no LLM tokens.
+    Returns average of both layers on 0-10 scale.
+    """
+    tools_dir = str(Path(__file__).resolve().parent)
+    if tools_dir not in sys.path:
+        sys.path.insert(0, tools_dir)
+    try:
+        from cex_score import score_structural, score_rubric
+        struct_raw, _ = score_structural(str(filepath))
+        rubric_raw, _, _ = score_rubric(str(filepath))
+        return round((struct_raw + rubric_raw) / 2, 1)
+    except Exception:
+        return 0.0
+
+
+def write_heuristic_quality(filepath: Path) -> float:
+    """Compute and persist heuristic quality to frontmatter. Returns the score.
+
+    Handles both quality:null (replace) and missing quality field (insert after id:).
+    """
+    q = heuristic_quality(filepath)
+    if q <= 0:
+        return q
+    tools_dir = str(Path(__file__).resolve().parent)
+    if tools_dir not in sys.path:
+        sys.path.insert(0, tools_dir)
+    try:
+        from cex_score import update_quality
+        wrote = update_quality(str(filepath), q)
+        if not wrote:
+            # quality field is absent -- insert after the first frontmatter field
+            text = filepath.read_text(encoding="utf-8")
+            fm_match = re.match(r"^(---\n)", text)
+            if fm_match:
+                insert_pos = fm_match.end()
+                text = text[:insert_pos] + f"quality: {q}\n" + text[insert_pos:]
+                filepath.write_text(text, encoding="utf-8")
+    except Exception:
+        pass
+    return q
+
+
 # ============================================================
 # EXPERIMENT LEDGER (results.tsv equivalent)
 # ============================================================
@@ -413,11 +458,17 @@ def evolve_single(filepath: Path, target: float = 9.0, max_rounds: int = 5,
             log_result(str(fp), round_num, 0, 0, "crash", f"compile fail after: {description}")
             continue
 
+        # Write heuristic quality immediately after each improvement (Bug 1 fix).
+        # This ensures quality:null -> quality:X.X even if score_artifact subprocess fails.
+        if description not in ("no change",) and not description.startswith("analyzed:"):
+            write_heuristic_quality(fp)
+
         # Measure
         new_density = compute_density(fp)
         new_quality = score_artifact(fp)
         if new_quality is None:
-            new_quality = best_quality  # Score didn't change
+            # Fallback: heuristic quality already written above; re-read it
+            new_quality = get_current_quality(fp) or best_quality
 
         if verbose:
             print(f"  Result: quality={new_quality}, density={new_density}")
@@ -445,33 +496,83 @@ def evolve_single(filepath: Path, target: float = 9.0, max_rounds: int = 5,
     return {"status": "complete", "quality": best_quality, "rounds": rounds_run}
 
 
-def evolve_sweep(target: float = 8.5, max_rounds: int = 3, verbose: bool = True):
-    """Evolve all quality:null artifacts."""
-    # Find all quality:null files
+def _sweep_priority(fp: Path) -> float:
+    """Sort key for sweep: null=0 (highest priority), then ascending by quality."""
+    q = get_current_quality(fp)
+    if q is None:
+        return 0.0
+    return q
+
+
+def evolve_sweep(target: float = 8.5, max_rounds: int = 3,
+                 apply_scores: bool = False, verbose: bool = True):
+    """Evolve artifacts: quality:null first (unscored), then below-target sorted ascending.
+
+    Priority order (Bug 2 fix):
+      1. quality:null files -- unscored, unknown quality, highest risk
+      2. quality < target files -- known bad, sorted worst-first
+      3. quality >= target -- skipped
+    """
     null_files = []
+    low_files = []
+
     for root, _, files in os.walk(CEX_ROOT):
         if ".git" in root or "_archive" in root or "node_modules" in root:
             continue
         for f in files:
-            if f.endswith(".md"):
-                fp = Path(root) / f
-                q = get_current_quality(fp)
-                if q is None:
-                    fm = read_frontmatter(fp)
-                    if fm.get("quality") == "null":
-                        null_files.append(fp)
+            if not f.endswith(".md"):
+                continue
+            fp = Path(root) / f
+            fm = read_frontmatter(fp)
+            if not fm.get("kind"):
+                continue  # skip non-artifact markdown files
+            q_raw = fm.get("quality", "")
+            if q_raw == "null" or not q_raw:
+                null_files.append(fp)
+            else:
+                try:
+                    q = float(q_raw)
+                    if q < target:
+                        low_files.append((q, fp))
+                except ValueError:
+                    null_files.append(fp)
 
-    print(f"\n[SWEEP] Found {len(null_files)} artifacts with quality:null")
+    # Sort low-quality ascending: worst quality gets fixed first
+    low_files.sort(key=lambda x: x[0])
+    all_files = null_files + [fp for _, fp in low_files]
+
+    print(f"\n[SWEEP] quality:null={len(null_files)} | below-target={len(low_files)} | total={len(all_files)}")
     print(f"  Target: {target} | Max rounds per artifact: {max_rounds}")
 
+    improved_files = []
     results = []
-    for i, fp in enumerate(null_files):
-        print(f"\n[{i+1}/{len(null_files)}] {fp.relative_to(CEX_ROOT)}")
+    for i, fp in enumerate(all_files):
+        print(f"\n[{i+1}/{len(all_files)}] {fp.relative_to(CEX_ROOT)}")
         result = evolve_single(fp, target=target, max_rounds=max_rounds, verbose=verbose)
         results.append({"file": str(fp.relative_to(CEX_ROOT)), **result})
+        if result.get("status") == "complete" and result.get("quality", 0) > 0:
+            improved_files.append(fp)
+
+    # --apply-scores: final pass that writes structural+rubric scores to all improved files
+    if apply_scores and improved_files:
+        print(f"\n[APPLY SCORES] Writing heuristic scores to {len(improved_files)} improved files...")
+        tools_dir = str(Path(__file__).resolve().parent)
+        if tools_dir not in sys.path:
+            sys.path.insert(0, tools_dir)
+        try:
+            from cex_score import score_structural, score_rubric, update_quality
+            for fp in improved_files:
+                struct_raw, _ = score_structural(str(fp))
+                rubric_raw, _, _ = score_rubric(str(fp))
+                q = round((struct_raw + rubric_raw) / 2, 1)
+                update_quality(str(fp), q)
+                if verbose:
+                    print(f"  [SCORE] {fp.name}: {q}")
+        except Exception as e:
+            print(f"  [WARN] apply_scores failed: {e}")
 
     # Summary
-    kept = sum(1 for r in results if r["status"] == "complete" and r["quality"] >= target)
+    kept = sum(1 for r in results if r["status"] == "complete" and r.get("quality", 0) >= target)
     skipped = sum(1 for r in results if r["status"] == "skip")
     print(f"\n{'='*60}")
     print(f"[SWEEP COMPLETE]")
@@ -945,7 +1046,9 @@ def main():
     single_parser.add_argument("file", nargs="?", help="Target file.")
     single_parser.add_argument("rest", nargs=argparse.REMAINDER)
 
-    sweep_parser = subparsers.add_parser("sweep", help="Run heuristic evolution on all quality:null files.")
+    sweep_parser = subparsers.add_parser("sweep", help="Run heuristic evolution on quality:null + below-target files.")
+    sweep_parser.add_argument("--apply-scores", action="store_true",
+                              help="After sweep, write structural+rubric scores to all improved files.")
     sweep_parser.add_argument("rest", nargs=argparse.REMAINDER)
 
     subparsers.add_parser("report", help="Show experiment history.")
@@ -1003,9 +1106,11 @@ def main():
     elif mode == "sweep":
         # Heuristic batch -- no LLM
         args = _parse_cli_args([sys.argv[0], mode] + parsed.rest, start=2)
+        apply_scores = getattr(parsed, "apply_scores", False) or ("apply_scores" in args)
         evolve_sweep(
             target=float(args.get("target", 8.5)),
             max_rounds=int(args.get("max_rounds", 3)),
+            apply_scores=apply_scores,
         )
 
     elif mode == "report":
