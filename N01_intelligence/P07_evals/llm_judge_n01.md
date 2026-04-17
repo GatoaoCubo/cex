@@ -8,10 +8,11 @@ version: 1.0.0
 created: 2026-04-17
 author: n01_intelligence
 domain: research-intelligence
-quality: null
+quality: 9.2
 tags: [llm_judge, fact_checking, source_validation, n01, quality_assessment, analytical_envy]
 tldr: "LLM-as-judge configuration for N01 research output evaluation: fact verification, source validation, comparative coverage check, hallucination detection. Uses eval_framework_n01.md as scoring rubric."
 density_score: 0.91
+updated: "2026-04-17"
 ---
 
 <!-- 8F: F1 constrain=P07/llm_judge F2 become=llm-judge-builder F3 inject=eval_framework_n01+quality_gate_intelligence+bias_audit_n01+sch_input_schema_n01 F4 reason=N01 Analytical Envy demands external validation -- the researcher cannot judge their own work without bias F5 call=cex_compile F6 produce=llm_judge_n01.md F7 govern=frontmatter+ascii+tables F8 collaborate=N01_intelligence/P07_evals/ -->
