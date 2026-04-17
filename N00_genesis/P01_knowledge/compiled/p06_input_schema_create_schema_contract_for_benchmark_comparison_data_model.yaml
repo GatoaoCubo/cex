@@ -1,0 +1,95 @@
+id: p06_is_benchmark_comparison
+kind: input_schema
+pillar: P06
+version: 1.0.0
+created: '2026-04-02'
+updated: '2026-04-02'
+author: input-schema-builder
+scope: benchmark comparison analysis — evaluates performance difference between baseline and candidate metric values
+fields: '| # | Name | Type | Required | Default | Description |
+
+  |---|------|------|----------|---------|-------------|
+
+  | 1 | benchmark_name | string | YES | — | Benchmark suite or test identifier |
+
+  | 2 | baseline_metric | float | YES | — | Reference performance value (prior version / control) |
+
+  | 3 | comparison_metric | float | YES | — | Candidate performance value (new version / experiment) |
+
+  | 4 | metric_type | string | YES | — | Metric category: accuracy, latency, throughput, cost, error_rate, custom |
+
+  | 5 | direction | string | NO | "auto" | Improvement direction: higher_is_better, lower_is_better, auto |
+
+  | 6 | significance_threshold | float | NO | 0.05 | P-value cutoff for significance declaration |
+
+  | 7 | analysis_mode | string | NO | "percentage" | Delta computation: percentage, absolute, ratio, z_score |
+
+  | 8 | sample_sizes | object | NO | null | {baseline: int, comparison: int} for significance testing |
+
+  | 9 | tags | list | NO | [] | Grouping labels for filtering and reporting |
+
+  | 10 | output_format | string | NO | "summary" | Report format: summary, detailed, table, json |'
+coercion:
+- from: string
+  to: float
+  rule: Parse baseline_metric and comparison_metric from numeric strings (e.g., '0.823' -> 0.823); reject non-numeric strings
+    with error
+- from: integer
+  to: float
+  rule: Promote integer metric values to float silently (e.g., 95 -> 95.0)
+- from: string
+  to: list
+  rule: Parse comma-separated string into list for tags field (e.g., 'nightly,v3' -> ['nightly', 'v3'])
+examples: "{\n  \"benchmark_name\": \"mmlu_5shot\",\n  \"baseline_metric\": 0.712,\n  \"comparison_metric\": 0.741,\n  \"\
+  metric_type\": \"accuracy\",\n  \"direction\": \"higher_is_better\",\n  \"significance_threshold\": 0.05,\n  \"analysis_mode\"\
+  : \"percentage\",\n  \"sample_sizes\": {\"baseline\": 500, \"comparison\": 500},\n  \"tags\": [\"nightly\", \"model-v3\"\
+  ],\n  \"output_format\": \"summary\"\n}\n\n{\n  \"benchmark_name\": \"api_latency_p95\",\n  \"baseline_metric\": 320.5,\n\
+  \  \"comparison_metric\": 289.1,\n  \"metric_type\": \"latency\",\n  \"output_format\": \"detailed\"\n}\n\nInvalid example\
+  \ (triggers errors):\n{\n  \"benchmark_name\": \"hellaswag\",\n  \"baseline_metric\": \"not_a_number\",\n  \"comparison_metric\"\
+  : 0.88\n}\nFailures: `baseline_metric` coercion fails (non-numeric string); `metric_type` missing → error: \"metric_type\
+  \ is required\"."
+domain: benchmark-analysis
+quality: 9.1
+tags:
+- input-schema
+- benchmark-comparison
+- performance-evaluation
+- metrics
+tldr: 'Input contract for benchmark comparison: requires benchmark name, baseline/comparison floats, metric type; optional
+  direction, threshold, analysis mode, sample sizes.'
+density_score: 0.91
+keywords:
+- benchmark
+- comparison
+- baseline
+- metric
+- performance
+- evaluation
+- significance
+- analysis_mode
+- direction
+- coercion
+contract_definition: Benchmark comparison operations receive structured input specifying which benchmark is being evaluated,
+  the baseline and candidate metric values to compare, and the metric category. The receiving system computes the performance
+  delta, determines statistical significance if sample sizes are provided, and generates a comparison report in the requested
+  format. Used by evaluation agents, CI regression checkers, and model assessment pipelines. Required fields define the comparison
+  identity (benchmark name), the data points (baseline and comparison floats), and the metric semantics (type + direction).
+  Optional fields control analysis depth, statistical rigor, and report verbosity.
+coercion_rules: '| From | To | Field(s) | Rule |
+
+  |------|----|----------|------|
+
+  | string | float | baseline_metric, comparison_metric | Parse numeric strings; reject non-numeric with field-named error
+  |
+
+  | integer | float | baseline_metric, comparison_metric | Silent promotion — no data loss |
+
+  | string | list | tags | Split on comma, strip whitespace from each element |
+
+
+  `direction: "auto"` resolves as follows: accuracy → higher_is_better; latency, cost → lower_is_better; throughput → higher_is_better;
+  error_rate → lower_is_better; custom → caller must supply explicit direction or field is rejected.'
+references:
+- 'JSON Schema draft-07: json-schema.org'
+- 'MLflow metrics API: mlflow.org/docs/latest/tracking'
+- 'OpenAI Evals framework: github.com/openai/evals'

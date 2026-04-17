@@ -1,0 +1,126 @@
+id: self_improvement_loop_n02
+kind: self_improvement_loop
+pillar: P11
+nucleus: n02
+title: N02 Autonomous Copy Quality Evolution Loop
+version: 1.0.0
+quality: null
+tags:
+- self_improvement_loop
+- copy_quality
+- autonomous_evolution
+- creative_lust
+- P11
+- n02_marketing
+domain: campaign-feedback
+status: active
+the_premise: Copy that doesn't evolve dies. Every campaign is a lesson. Every lesson that isn't captured is wasted. This loop
+  exists to ensure N02 gets better with every brief it processes -- not through human review alone, but through systematic,
+  autonomous quality evolution.
+loop_architecture: "TRIGGER\n  |\n  v\nCOLLECT -- harvest performance signals from deployed campaigns\n  |\n  v\nSCORE --\
+  \ apply 5D quality model to copy assets\n  |\n  v\nANALYZE -- identify patterns in high/low performers\n  |\n  v\nHYPOTHESIZE\
+  \ -- form improvement rules\n  |\n  v\nTEST -- apply rules to next brief (controlled)\n  |\n  v\nMEASURE -- compare treated\
+  \ vs. control\n  |\n  v\nCOMMIT -- winning rules -> kc_marketing_vocabulary.md + validation_schema\n  |\n  v\nDISCARD --\
+  \ losing rules -> archive (never delete, learn from failure)\n  |\n  [LOOP]"
+trigger_conditions: '| Trigger | Condition | Minimum Data Required |
+
+  |---------|-----------|----------------------|
+
+  | `campaign_complete` | Campaign end_date reached | 1 campaign, 7+ days live |
+
+  | `threshold_breach` | CTR < 0.5% or conversion_rate < 1% | 100+ impressions |
+
+  | `explicit_invoke` | User runs `/evolve n02` | Any deployed copy |
+
+  | `weekly_cron` | Every 7 days (automated) | Any accumulated signal |
+
+  | `ab_test_concluded` | Winner declared in ab_test_config | Both variants min 1000 impressions |'
+signal_collection_schema: "performance_signal:\n  campaign_id: string\n  asset_id: string\n  platform: instagram|linkedin|x|meta|email\n\
+  \  format: post|story|reel|carousel|email|ad\n  metrics:\n    impressions: integer\n    clicks: integer\n    ctr: float\
+  \              # clicks / impressions\n    conversions: integer\n    conversion_rate: float  # conversions / clicks\n  \
+  \  cost_per_click: float   # nullable (paid only)\n    cost_per_acquisition: float  # nullable\n    engagement_rate: float\
+  \  # (likes + comments + shares) / impressions\n    save_rate: float        # saves / impressions (Instagram)\n  copy_features:\n\
+  \    word_count: integer\n    has_emoji: boolean\n    emoji_count: integer\n    has_question: boolean\n    has_number: boolean\n\
+  \    cta_verb: string\n    urgency_trigger: none|deadline|scarcity|social_proof\n    brand_voice: string\n    hook_type:\
+  \ pain|curiosity|authority|social_proof|data\n    funnel_stage: TOFU|MOFU|BOFU"
+scoring_model_5d: '| Dimension | Weight | Metric |
+
+  |-----------|--------|--------|
+
+  | D1 Conversion | 35% | conversion_rate vs. platform benchmark |
+
+  | D2 Engagement | 25% | engagement_rate vs. campaign average |
+
+  | D3 Brand Voice | 20% | compliance score from validation_schema |
+
+  | D4 Efficiency | 15% | CPA vs. campaign budget target |
+
+  | D5 Longevity | 5% | Performance decay rate over campaign lifetime |
+
+
+  Benchmark Targets (update quarterly):
+
+
+  | Platform | Format | CTR Benchmark | Engagement Benchmark |
+
+  |----------|--------|--------------|---------------------|
+
+  | Instagram | Post | 0.9% | 3.0% |
+
+  | Instagram | Reel | 1.2% | 5.0% |
+
+  | LinkedIn | Post | 0.5% | 2.0% |
+
+  | Meta Ads | Feed | 1.5% | 1.0% |
+
+  | Email | Standard | 2.5% CTR | 20% open rate |'
+pattern_analysis_rules: "# High-performer pattern extraction\n# Apply when score >= 0.80 on 5D model\n\npatterns_to_extract:\n\
+  \  - copy_feature vs performance_delta\n  - hook_type distribution in top 20% performers\n  - cta_verb frequency in conversion\
+  \ rate leaders\n  - emoji_count optimal range per platform\n  - word_count sweet spots per format\n  - urgency_trigger lift\
+  \ per funnel_stage\n\nmin_sample_for_rule: 10 assets\nconfidence_threshold: 0.75  # above = adopt rule; below = flag for\
+  \ human review"
+hypothesis_test_protocol: "hypothesis_format:\n  id: hyp_{date}_{sequence}\n  statement: \"Using [feature] in [context] increases\
+  \ [metric] by ~[delta]%\"\n  based_on: array[signal_ids]\n  confidence: float\n  test_design:\n    control: copy without\
+  \ feature\n    treatment: copy with feature\n    min_impressions: 1000\n    significance_level: 0.95\n    max_runtime_days:\
+  \ 14"
+commit_gate_rule_promotion: 'A hypothesis becomes a rule only when:
+
+
+  1. Statistical significance >= 95% (p < 0.05)
+
+  2. Effect size > 10% improvement on primary metric
+
+  3. Replicated on >= 2 different campaigns or platforms
+
+  4. No violation of `validation_schema_content_spec.md` constraints
+
+
+  Promoted rules are written to:
+
+  - `kc_marketing_vocabulary.md` -- vocabulary + context section
+
+  - `validation_schema_content_spec.md` -- as new validation rule
+
+  - `action_prompt_n02_copy.md` -- as generation preference hint'
+failure_archive_protocol: "Every losing hypothesis is logged:\ndiscard_log:\n  hyp_id: string\n  hypothesis: string\n  outcome:\
+  \ string\n  why_failed: string  # data-driven explanation\n  retest_conditions: string  # under what conditions to retry\n\
+  \nFailures are not deleted. They prevent re-learning the same wrong lesson."
+loop_metrics_self_evaluation: '| Metric | Target | Measurement |
+
+  |--------|--------|-------------|
+
+  | Rules promoted per month | >= 2 | Count of committed rules |
+
+  | Hypothesis cycle time | <= 14 days | trigger -> commit |
+
+  | Average score improvement | >= 5% per quarter | 5D model delta |
+
+  | False positive rate | < 20% | Promoted rules that underperform on retest |
+
+  | Signal coverage | >= 80% of campaigns | Campaigns with collected signals |'
+integration:
+- 'Consumes: `ab_test_config_n02.md` (test design + winner data)'
+- 'Consumes: `cohort_analysis_n02.md` (audience segment performance)'
+- 'Produces to: `kc_marketing_vocabulary.md` (promoted rules)'
+- 'Produces to: `validation_schema_content_spec.md` (new gates)'
+- 'Trigger: `workflow_campaign_pipeline.md` (F11 loop step after F8)'

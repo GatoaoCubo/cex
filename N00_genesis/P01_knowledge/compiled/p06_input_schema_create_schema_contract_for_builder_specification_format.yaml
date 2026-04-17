@@ -1,0 +1,96 @@
+id: p06_is_builder_specification
+kind: input_schema
+pillar: P06
+version: 1.0.0
+created: '2026-04-02'
+updated: '2026-04-02'
+author: builder_agent
+scope: builder specification creation — defines the identity, capabilities, routing, and crew role of a CEX builder
+fields: '| # | Name | Type | Required | Default | Description |
+
+  |---|------|------|----------|---------|-------------|
+
+  | 1 | builder_id | string | YES | — | Kebab-case unique identifier |
+
+  | 2 | kind | string | YES | — | Builder category (type/content/config/code/eval) |
+
+  | 3 | pillar | string | YES | — | Output pillar P01–P12 |
+
+  | 4 | domain | string | YES | — | Artifact type or subject area |
+
+  | 5 | identity | string | YES | — | One-sentence expertise statement |
+
+  | 6 | capabilities | list | YES | — | Concrete builder actions (min 3) |
+
+  | 7 | routing_keywords | list | YES | — | Router discovery keywords (min 3) |
+
+  | 8 | routing_triggers | list | YES | — | Activation phrases (min 2) |
+
+  | 9 | crew_role | string | YES | — | SPECIALIST / ORCHESTRATOR / VALIDATOR |
+
+  | 10 | llm_function | string | NO | "PRODUCE" | Primary 8F function |
+
+  | 11 | max_turns | integer | NO | 25 | Max LLM turns per build |
+
+  | 12 | version | string | NO | "1.0.0" | Spec semver |
+
+  | 13 | author | string | NO | "builder_agent" | Producer identity |
+
+  | 14 | tags | list | NO | [] | Classification tags |'
+coercion:
+- from: string
+  to: string
+  rule: 'pillar: normalize ''p06'' → ''P06'' — uppercase P-prefix always'
+- from: string
+  to: string
+  rule: 'llm_function: normalize lowercase ''produce'' → ''PRODUCE'' — uppercase always'
+- from: string
+  to: integer
+  rule: 'max_turns: parse numeric string ''25'' → 25; reject non-numeric strings with error'
+- from: string
+  to: list
+  rule: 'capabilities/routing_keywords/routing_triggers: comma-separated string → list of trimmed strings'
+examples: "{\n  \"builder_id\": \"validator-builder\",\n  \"kind\": \"eval_builder\",\n  \"pillar\": \"P06\",\n  \"domain\"\
+  : \"validator\",\n  \"identity\": \"Specialist in building pass/fail validation rule sets for artifact quality enforcement.\"\
+  ,\n  \"capabilities\": [\n    \"Define HARD and SOFT validation gates\",\n    \"Specify per-field rule expressions\",\n\
+  \    \"Produce rejection messages with remediation hints\"\n  ],\n  \"routing_keywords\": [\"validator\", \"validation\"\
+  , \"gate\", \"check\", \"enforce\"],\n  \"routing_triggers\": [\"validate this artifact\", \"define quality gates for\"\
+  ],\n  \"crew_role\": \"VALIDATOR\"\n}"
+domain: builder-specification
+quality: 9.1
+tags:
+- input-schema
+- builder-specification
+- routing
+- capabilities
+- P06
+tldr: 'Input contract for builder specs: requires identity, capabilities, routing keywords/triggers, crew role, and pillar
+  assignment.'
+density_score: 0.91
+keywords:
+- builder_spec
+- input_schema
+- routing
+- capabilities
+- crew_role
+- pillar
+- domain
+- llm_function
+contract_definition: Builder specification creation receives structured input defining a CEX builder's identity, functional
+  scope, routing surface, and crew position. Callers provide a kebab-case identifier, output pillar, artifact domain, a one-sentence
+  identity, enumerated capabilities, router keywords, natural language trigger phrases, and a crew role label. Optional fields
+  cover the 8F function, execution limits, versioning, authorship, and tags. The receiver produces a complete builder spec
+  (bld_manifest + ISOs) that the 8F pipeline, cex_query router, and crew orchestrator can consume.
+coercion_rules: '| From | To | Rule |
+
+  |------|----|------|
+
+  | string (lowercase) | string (uppercase) | pillar "p06" → "P06"; llm_function "produce" → "PRODUCE" |
+
+  | string (numeric) | integer | max_turns "25" → 25; reject non-numeric strings |
+
+  | comma-separated string | list | capabilities, routing_keywords, routing_triggers split on "," with strip |'
+references:
+- CEX kinds_meta.json — canonical kind and pillar registry
+- archetypes/builders/ — builder directory structure (13 ISOs per builder)
+- .claude/rules/n03-8f-enforcement.md — 8F pipeline functions reference

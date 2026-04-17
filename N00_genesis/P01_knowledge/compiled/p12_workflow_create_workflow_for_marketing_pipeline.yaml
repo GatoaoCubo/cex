@@ -1,0 +1,99 @@
+id: p12_wf_marketing_pipeline
+kind: workflow
+pillar: P12
+version: 1.0.0
+created: '2026-04-02'
+updated: '2026-04-02'
+author: workflow-builder
+title: Marketing Pipeline Workflow
+steps_count: 5
+execution: mixed
+agent_groups:
+- shaka
+- maya
+- n02_marketing
+- stella
+timeout: 7200
+retry_policy: per_step
+depends_on: []
+signals:
+- 'On step complete: `{agent}_complete` signal emitted by each step agent (see signal-builder conventions)'
+- 'On workflow complete: `workflow_complete` signal with aggregate quality score across all 5 steps'
+- 'On error: `{agent}_error` signal emitted; retry per step (max 2 retries per `retry_policy: per_step`); after max retries,
+  escalate to stella via abort'
+spawn_configs:
+- p12_spawn_shaka_solo_research
+- p12_spawn_maya_brand
+- p12_spawn_n02_marketing
+- p12_spawn_stella_consolidate
+domain: marketing
+quality: 9.0
+tags:
+- workflow
+- marketing
+- pipeline
+- multi-wave
+tldr: '5-step mixed workflow: market research → brand strategy → parallel copy + visual assets → campaign launch consolidation'
+density_score: 0.91
+purpose: 'Orchestrates the end-to-end marketing pipeline from raw market intelligence through campaign launch. Wave 1: shaka
+  conducts deep audience and competitive research. Wave 2: maya synthesizes findings into a brand strategy and messaging framework.
+  Wave 3: n02_marketing produces copy assets and maya produces visual asset specs in parallel (both depend on Wave 2, independent
+  of each other). Wave 4: stella consolidates all outputs, validates brand consistency, and signals campaign readiness.'
+steps: ''
+step_1_market_research_shaka:
+- 'Agent: shaka (gemini-pro research specialist)'
+- 'Wave: 1'
+- 'Action: Research target audience segments, competitive landscape, and positioning opportunities'
+- 'Input: marketing brief from handoff file; campaign goals and target demographics'
+- 'Output: market research report with audience profiles and competitor analysis committed to `records/marketing/`'
+- 'Signal: `shaka_complete` with quality score'
+- 'Depends on: none'
+- 'on_failure: retry'
+step_2_brand_strategy_maya:
+- 'Agent: maya (sonnet brand specialist)'
+- 'Wave: 2'
+- 'Action: Synthesize market research into brand positioning, messaging pillars, and campaign strategy brief'
+- 'Input: market research report from Step 1'
+- 'Output: brand strategy brief with messaging framework committed to `records/marketing/`'
+- 'Signal: `maya_strategy_complete` with quality score'
+- 'Depends on: Step 1'
+- 'on_failure: retry'
+step_3_copy_creation_n02_marketing:
+- 'Agent: n02_marketing (sonnet copywriter)'
+- 'Wave: 3'
+- 'Action: Produce campaign copy bundle — headlines, CTAs, email sequences, and social posts aligned to messaging pillars'
+- 'Input: brand strategy brief from Step 2'
+- 'Output: copy asset bundle committed to `N02_marketing/campaigns/`'
+- 'Signal: `copy_complete` with quality score'
+- 'Depends on: Step 2'
+- 'on_failure: retry'
+step_4_visual_asset_specification_maya:
+- 'Agent: maya (sonnet brand specialist)'
+- 'Wave: 3'
+- 'Action: Produce visual asset specifications — color palette, typography tokens, layout guidelines, and image direction'
+- 'Input: brand strategy brief from Step 2'
+- 'Output: visual asset spec committed to `N06_commercial/brand/`'
+- 'Signal: `assets_complete` with quality score'
+- 'Depends on: Step 2'
+- 'on_failure: retry'
+step_5_campaign_launch_consolidation_stella:
+- 'Agent: stella (opus orchestrator)'
+- 'Wave: 4'
+- 'Action: Review copy and visual outputs, validate brand consistency against brand_config.yaml, archive handoffs, and emit
+  campaign-ready signal'
+- 'Input: copy bundle (Step 3), visual spec (Step 4), signals from Steps 3 and 4'
+- 'Output: consolidated campaign package with archived handoffs and final quality aggregate'
+- 'Signal: `workflow_complete` with aggregate quality score'
+- 'Depends on: Steps 3, 4'
+- 'on_failure: abort'
+dependencies:
+- Handoff files for shaka, maya, n02_marketing, and stella must exist before dispatch
+- '`spawn_configs` referenced must be valid: `p12_spawn_shaka_solo_research`, `p12_spawn_maya_brand`, `p12_spawn_n02_marketing`,
+  `p12_spawn_stella_consolidate`'
+- '`.cex/brand/brand_config.yaml` must be populated (brand identity injected into all marketing outputs)'
+- Marketing brief with campaign goals and audience demographics must be committed to handoff before Wave 1 launches
+references:
+- '`signal-builder`: completion and error signal naming conventions'
+- '`spawn-config-builder`: agent launch parameters per wave'
+- '`.cex/brand/brand_config.yaml`: brand identity auto-injected into maya and n02_marketing prompts'
+- 'N02 marketing rules (`.claude/rules/n02-marketing.md`): copywriting standards and brand voice constraints'

@@ -1,0 +1,153 @@
+id: p05_fmt_marketing_report
+kind: formatter
+pillar: P05
+version: 1.0.0
+created: '2026-04-02'
+updated: '2026-04-02'
+author: formatter-builder
+target_format: markdown
+input_type: structured_data
+rule_count: 8
+domain: marketing_reporting
+quality: 9.1
+tags:
+- formatter
+- markdown
+- marketing
+- P05
+- reporting
+- campaigns
+- kpi
+tldr: 'Formats campaign performance data into Markdown reports: KPI tables, channel breakdown, budget tracking, ROAS, and
+  recommendations'
+template_engine: string_format
+pretty_print: true
+escaping: none
+encoding: utf8
+locale: en-US
+streaming: false
+keywords:
+- marketing-report
+- campaign-formatter
+- kpi-table
+- channel-breakdown
+- roas-display
+density_score: 0.88
+formatting_rules: '| Name | Input Field | Transform | Pattern | Options |
+
+  |------|-------------|-----------|---------|---------|
+
+  | report_header | campaign_name, period | template | `# {campaign_name} — Marketing Report · {period}` | title_case: true;
+  null: "Unnamed Campaign" |
+
+  | report_meta | report_date, channel, analyst | template | `Date: {report_date}  ·  Channel: {channel}  ·  Analyst: {analyst}`
+  | date_fmt: MM/DD/YYYY; null: omit_field |
+
+  | kpi_table | kpi_metrics | tabulate | `\| Metric \| Value \| Target \| Delta \|` | col_width: auto; null: `-` |
+
+  | channel_table | channel_data | tabulate | `\| Channel \| Spend \| Clicks \| CTR \| CPC \| Conv \|` | number_fmt: en-US;
+  null: `-` |
+
+  | budget_line | budget_spent, budget_total | number_format | `Budget: ${budget_spent:,.0f} / ${budget_total:,.0f} ({pct:.1%}
+  used)` | locale: en-US; null: omit |
+
+  | roas_display | revenue, ad_spend | number_format | `ROAS: {value:.2f}x` | precision: 2; null: `N/A` |
+
+  | conv_rate | conversions, clicks | number_format | `CVR: {value:.2%}` | precision: 2; null: `N/A` |
+
+  | recommendations | action_items | stringify | `- {item}` | max_length: 120; truncate: ellipsis; null: omit |'
+input_specification: "Type: structured_data\nStructure: Campaign performance payload — metadata fields (campaign_name, period,\
+  \ report_date, channel, analyst), kpi_metrics list of `{metric, value, target, delta}` objects, channel_data list of `{channel,\
+  \ spend, clicks, ctr, cpc, conv}` objects, scalar budget/revenue/conversion figures, and action_items list.\n\nExample:\n\
+  {\n  \"campaign_name\": \"Q1 Brand Awareness\",\n  \"period\": \"Jan–Mar 2026\",\n  \"report_date\": \"2026-04-02\",\n \
+  \ \"channel\": \"Multi-channel\",\n  \"analyst\": \"Marketing Team\",\n  \"kpi_metrics\": [{\"metric\": \"CTR\", \"value\"\
+  : \"3.2%\", \"target\": \"3.0%\", \"delta\": \"+0.2%\"}],\n  \"channel_data\": [{\"channel\": \"Google Ads\", \"spend\"\
+  : 8500, \"clicks\": 12400, \"ctr\": 0.032, \"cpc\": 0.69, \"conv\": 310}],\n  \"budget_spent\": 15200, \"budget_total\"\
+  : 20000,\n  \"revenue\": 76000, \"ad_spend\": 15200,\n  \"conversions\": 620, \"clicks\": 38750,\n  \"action_items\": [\"\
+  Increase Google Ads budget by 15%\"]\n}"
+output_specification: 'Format: markdown
+
+
+  Example:
+
+  # Q1 Brand Awareness — Marketing Report · Jan–Mar 2026
+
+  Date: 04/02/2026  ·  Channel: Multi-channel  ·  Analyst: Marketing Team
+
+
+  ## KPI Summary
+
+  | Metric | Value | Target | Delta |
+
+  |--------|-------|--------|-------|
+
+  | CTR | 3.2% | 3.0% | +0.2% |
+
+
+  ## Channel Breakdown
+
+  | Channel | Spend | Clicks | CTR | CPC | Conv |
+
+  |---------|-------|--------|-----|-----|------|
+
+  | Google Ads | $8,500 | 12,400 | 3.2% | $0.69 | 310 |
+
+
+  Budget: $15,200 / $20,000 (76.0% used)  ·  ROAS: 5.00x  ·  CVR: 1.60%
+
+
+  ## Recommendations
+
+  - Increase Google Ads budget by 15%'
+template: 'Engine: string_format
+
+  # {campaign_name} — Marketing Report · {period}
+
+  Date: {report_date}  ·  Channel: {channel}  ·  Analyst: {analyst}
+
+
+  ## KPI Summary
+
+  | Metric | Value | Target | Delta |
+
+  |--------|-------|--------|-------|
+
+  {kpi_rows}
+
+
+  ## Channel Breakdown
+
+  | Channel | Spend | Clicks | CTR | CPC | Conv |
+
+  |---------|-------|--------|-----|-----|------|
+
+  {channel_rows}
+
+
+  Budget: ${budget_spent:,.0f} / ${budget_total:,.0f} ({budget_pct:.1%} used)
+
+  ROAS: {roas:.2f}x  ·  CVR: {cvr:.2%}
+
+
+  ## Recommendations
+
+  {recommendation_items}'
+edge_cases:
+- 'Null values: `-` placeholder in table cells; metadata fields (channel, analyst) omitted from meta line when null'
+- 'Empty strings: treated as null — `-` in tables, omitted in metadata line'
+- 'Special characters: pipe `|` escaped as `\|` in all Markdown table cells; `#` in campaign_name escaped as `\#` to prevent
+  header promotion'
+- 'Overflow: campaign_name truncated at 60 chars with ellipsis; action_items at 120 chars with ellipsis; table column widths
+  auto-sized by renderer'
+locale_handling:
+- 'Currency: en-US — comma thousands separator, period decimal (`$8,500.00`); symbol `$` prepended'
+- 'Percentages: CTR, CVR rendered as `{:.2%}` (e.g., `3.20%`); budget_pct as `{:.1%}`'
+- 'ROAS: float with 2 decimal places suffixed `x` (e.g., `5.00x`)'
+- 'Dates: `report_date` YYYY-MM-DD input rendered as MM/DD/YYYY; `period` passed as raw human-readable string'
+boundary:
+- 'NOT a parser: does not extract data from raw text — receives pre-structured dict/list from upstream pipeline'
+- 'NOT a response_format: does not instruct an LLM what to generate — transforms already-structured data into Markdown presentation'
+references:
+- 'CommonMark table spec: commonmark.org/0.30/#tables'
+- 'Python format spec: docs.python.org/3/library/string.html#format-specification-mini-language'
+- 'Marketing KPI definitions: CTR = clicks/impressions; CVR = conversions/clicks; ROAS = revenue/ad_spend; CPC = spend/clicks'

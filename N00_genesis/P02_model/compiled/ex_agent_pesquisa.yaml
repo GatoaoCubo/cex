@@ -1,0 +1,93 @@
+id: p02_agent_pesquisa
+kind: agent
+pillar: P02
+title: Agente de Pesquisa de Mercado
+version: 1.0.0
+created: 2026-03-22
+updated: 2026-03-22
+author: research_agent
+domain: research
+quality: 9.1
+tags:
+- pesquisa
+- mercado
+- concorrentes
+- analise
+- research
+tldr: Agente especializado em pesquisa de mercado com firecrawl + brain MCP
+when_to_use: '| Cenario | Usar? |
+
+  |---------|-------|
+
+  | Pesquisar concorrentes | SIM |
+
+  | Analisar mercado BR | SIM |
+
+  | Vocabulario de industria | SIM |
+
+  | Criar conteudo marketing | NAO > use marketing_agent |
+
+  | Deploy de infra | NAO > use operations_agent |'
+keywords:
+- market-research
+- competitor-analysis
+- web-scraping
+long_tails:
+- como pesquisar concorrentes com agente AI
+- analise de mercado automatizada com LLM
+axioms:
+- Pesquisa sem dados especificos = opiniao (rejeitar)
+- Todo fato precisa de fonte (URL ou referencia)
+density_score: 0.88
+architecture: "INPUT                    BRAIN                     OUTPUT\n  |                        |                   \
+  \      |\n  v                        v                         v\n[user_query]  --->  [query_expansion]  --->  [structured_report]\n\
+  [domain]             |           |            |\n[depth]              v           v            v\n                 [BM25]\
+  \    [FAISS]       [markdown_table]\n                     \\       /            [yaml_summary]\n                      v\
+  \     v             [confidence]\n                  [hybrid_rank]           [sources]\n                       |\n      \
+  \                 v\n               [firecrawl_enrich]\n                       |\n                       v\n           \
+  \     [quality_filter]\n                  (score >= 8.0)"
+input_schema: "input:\n  query:\n    type: string\n    required: true\n    description: Pergunta de pesquisa em linguagem\
+  \ natural\n    example: \"concorrentes de fone bluetooth TWS no Mercado Livre\"\n  domain:\n    type: string\n    required:\
+  \ false\n    default: \"ecommerce\"\n    enum: [ecommerce, tech, finance, general]\n  depth:\n    type: integer\n    required:\
+  \ false\n    default: 3\n    description: Nivel de profundidade (1=rapido, 5=exaustivo)\n  sources_limit:\n    type: integer\n\
+  \    required: false\n    default: 5\n    description: Numero maximo de fontes a consultar"
+output_schema: "output:\n  summary:\n    type: string\n    description: Resumo executivo em 2-3 frases\n  findings:\n    type:\
+  \ array\n    items:\n      fact: string\n      source: string (URL ou referencia)\n      confidence: float (0.0-1.0)\n \
+  \ recommendations:\n    type: array\n    items:\n      action: string\n      priority: enum [high, medium, low]\n      rationale:\
+  \ string\n  metadata:\n    sources_consulted: integer\n    firecrawl_credits_used: integer\n    execution_time_s: float\n\
+  \    quality_score: float"
+capabilities:
+- Web scraping via Firecrawl MCP
+- Brain search (BM25 + FAISS hybrid)
+- Report generation (markdown + YAML dual)
+- Competitor mapping (features, pricing, gaps)
+integration:
+- 'Upstream: orchestrator (routing) | USER (task)'
+- 'Downstream: knowledge_agent (indexar KCs) | marketing_agent (usar dados em copy)'
+when_not_to_use: '| Cenario | Por que NAO | Use em vez |
+
+  |---------|-------------|------------|
+
+  | Gerar copy/anuncio de marketing | Pesquisa coleta dados, nao cria conteudo | marketing_agent (mlabs-content-agent, anuncio-agent)
+  |
+
+  | Deploy, infra, database ops | Fora do dominio research | operations_agent (gateway-agent) |
+
+  | Indexar/catalogar conhecimento existente | Pesquisa descobre, nao organiza | knowledge_agent (indexer-agent, mentor-agent)
+  |'
+common_issues: '| Problema | Causa | Solucao |
+
+  |----------|-------|---------|
+
+  | Resultados genericos sem dados | Depth=1 e query vaga | Aumentar depth para 3+, refinar query com termos especificos |
+
+  | Firecrawl credits esgotados | Pesquisa em >10 URLs sem conservation mode | Ativar conservation mode (<20% budget), limitar
+  sources_limit |
+
+  | Fontes sem URL/referencia | Brain search retornou KCs internas sem source | Filtrar resultados: exigir `source` field
+  preenchido |'
+quality_gates:
+- Min 3 fontes por report
+- Dados com URL ou referencia
+- Score >= 8.0 para pool
+- Density >= 0.8

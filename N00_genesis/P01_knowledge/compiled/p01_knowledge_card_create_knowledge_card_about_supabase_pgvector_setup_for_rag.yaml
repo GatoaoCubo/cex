@@ -1,0 +1,109 @@
+id: p01_kc_supabase_pgvector_rag_setup
+kind: knowledge_card
+pillar: P01
+title: Supabase pgvector Setup for RAG Pipelines
+version: 1.0.0
+created: '2026-04-02'
+updated: '2026-04-02'
+author: builder_agent
+domain: data_platform
+quality: 9.2
+tags:
+- supabase
+- pgvector
+- rag
+- embeddings
+- postgresql
+- vector-search
+- knowledge
+tldr: Enable pgvector in Supabase, create VECTOR(1536) table, HNSW index, match_documents() RPC — full RAG backend in 5 SQL
+  statements
+when_to_use: When building RAG pipelines that need vector search co-located with PostgreSQL data, avoiding a separate vector
+  DB
+keywords:
+- pgvector
+- supabase
+- rag
+- hnsw
+- embeddings
+- match_documents
+- semantic-search
+long_tails:
+- How to set up pgvector in Supabase for semantic search
+- Supabase HNSW index vs IVFFlat for RAG
+- How to implement match_documents RPC in Supabase pgvector
+- Supabase pgvector RLS multi-tenant vector setup
+axioms:
+- ALWAYS enable RLS on vector tables before production deployment
+- NEVER skip HNSW index on tables exceeding 10k rows
+- ALWAYS use VECTOR(1536) for OpenAI ada-002 / text-embedding-3-small
+- IF multi-tenant THEN add user_id to metadata + RLS policy scoped to auth.uid()
+linked_artifacts:
+  primary: null
+  related:
+  - p01_kc_supabase_vectors
+  - p01_kc_rag_fundamentals
+density_score: 0.91
+data_source: https://supabase.com/docs/guides/ai/vector-columns
+quick_reference: 'topic: supabase_pgvector_rag_setup
+
+  scope: pgvector extension, HNSW index, match_documents RPC, RLS
+
+  owner: builder_agent
+
+  criticality: high
+
+  min_tier: Free (500MB DB included)
+
+  embedding_dim: 1536 (OpenAI) | 1024 (Cohere) | 768 (local)'
+key_concepts:
+- 'pgvector: PostgreSQL extension; `VECTOR(N)` column type; operators `<=>`, `<->`, `<#>`'
+- 'HNSW: Graph-based ANN index; no training needed; `m` controls graph degree, `ef_construction` recall'
+- 'IVFFlat: Centroid-based; requires `ANALYZE` post-insert; optimal for >500k rows with `lists` tuning'
+- 'match_documents(): PostgreSQL RPC returning top-k rows by cosine similarity score'
+- 'RLS: Row Level Security enforced at DB layer — same table, per-tenant isolation'
+- 'Cosine distance `<=>`: Standard for normalized text embeddings (OpenAI, Cohere, Voyage)'
+setup_phases:
+- Enable extension
+- Create table
+- 'HNSW index (recommended: < 1M rows)'
+- match_documents RPC
+- RLS policy
+index_comparison: '| Index | Rows sweet spot | Build cost | p95 latency | Recall |
+
+  |-------|----------------|-----------|-------------|--------|
+
+  | None (exact) | < 10k | Zero | 1–5ms | 100% |
+
+  | HNSW | 10k – 1M | Medium | 5–20ms | 98%+ |
+
+  | IVFFlat | 500k – 5M | Low+ANALYZE | 10–30ms | 95%+ |
+
+
+  IVFFlat `lists` rule: `sqrt(row_count)` for balanced; e.g., 1M rows → `lists=1000`'
+distance_operators: '| Operator | Metric | Best for |
+
+  |----------|--------|----------|
+
+  | `<=>` | Cosine | Normalized text embeddings (OpenAI, Cohere) |
+
+  | `<->` | L2 Euclidean | Image, vision, unnormalized embeddings |
+
+  | `<#>` | Inner product | Pre-normalized vectors (fastest) |'
+python_integration: "from supabase import create_client\nimport openai\n\nsb = create_client(SUPABASE_URL, SUPABASE_KEY)\n\
+  oa = openai.OpenAI()\n\ndef embed(text: str) -> list[float]:\n    return oa.embeddings.create(\n        input=text, model=\"\
+  text-embedding-3-small\"\n    ).data[0].embedding\n\ndef upsert(content: str, metadata: dict = {}):\n    sb.table(\"documents\"\
+  ).insert(\n        {\"content\": content, \"metadata\": metadata, \"embedding\": embed(content)}\n    ).execute()\n\ndef\
+  \ search(query: str, k: int = 5, threshold: float = 0.7):\n    return sb.rpc(\"match_documents\", {\n        \"query_embedding\"\
+  : embed(query),\n        \"match_count\": k,\n        \"match_threshold\": threshold\n    }).execute().data"
+golden_rules:
+- SET `hnsw.ef_search = 100` at query time for high-recall use cases
+- VACUUM ANALYZE documents after bulk inserts (IVFFlat rebuilds centroids)
+- 'MONITOR index health: `SELECT * FROM pg_stat_user_indexes WHERE relname = ''documents''`'
+- CHUNK content to 512–1024 tokens before embedding; store chunk_index in metadata
+- NEVER store raw full documents — split, embed, and link to parent via metadata
+references:
+- 'Supabase AI docs: https://supabase.com/docs/guides/ai/vector-columns'
+- 'pgvector GitHub: https://github.com/pgvector/pgvector'
+- 'OpenAI embeddings: https://platform.openai.com/docs/guides/embeddings'
+- 'Related: p01_kc_supabase_vectors (base SQL patterns), p01_kc_rag_fundamentals (retrieval patterns)'

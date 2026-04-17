@@ -1,0 +1,64 @@
+id: p11_bl_agent_group_execution
+kind: bugloop
+pillar: P11
+title: 'Bugloop: Agent_group Execution Resilience'
+version: 1.0.0
+created: 2026-03-22
+updated: 2026-03-22
+author: builder_agent
+quality: 9.0
+tags:
+- agent_group
+- resilience
+- bugloop
+- feedback
+tldr: 3-retry bugloop for agent_group task execution — never stop on first error, skip after 3 failures, always commit partial
+  work
+density_score: 0.9
+source: organization-core/.claude/rules/agent_group-execution.md
+trigger: '| Property | Value |
+
+  |----------|-------|
+
+  | Detect | Any error during agent_group task execution (file not found, command failed, import error, git conflict, permission
+  denied, timeout) |
+
+  | Condition | `organization_AGENT_GROUP` is set and NOT stella |
+
+  | Frequency | Every task step, checked after each action |'
+cycle: "[DETECT] --> [ANALYZE] --> [FIX] --> [VERIFY] --> [COMMIT]\n                |                       |\n          \
+  \ [root cause]          [RETRY if fail]\n                                   (max 3)"
+phase_1_detect:
+- 'Signal: Non-zero exit code, exception, missing file, tool error'
+- 'Data: stderr output, error message, file paths involved'
+phase_2_analyze:
+- 'Root cause method: Read stderr, check path existence, verify dependencies'
+- 'Context needed: Current working directory, git status, installed packages'
+phase_3_fix:
+- 'Strategy: Adjust command, fix path, create missing file, install dependency'
+- 'Fallback: Try completely different approach (alternative command, different path, simplify scope)'
+- 'Scope: Same files as original task'
+phase_4_verify:
+- 'Command: Re-run the original action that failed'
+- 'Expected: Zero exit code, expected output file exists'
+- 'Timeout: 300s max per retry'
+phase_5_commit:
+- 'Message: `"feat: T1+T2 complete, T3 failed (file not found after 3 attempts)"`'
+- 'Files: All work completed so far (even partial)'
+limits: '| Limit | Value | On Exceed |
+
+  |-------|-------|-----------|
+
+  | Max retries | 3 | Skip task, move to next, log failure |
+
+  | Max duration | 5 min per retry | Move to next task |
+
+  | Max files touched | per scope fence | Respect SOMENTE/NAO TOQUE boundaries |'
+escalation: '- After 3 failures: Register error, SKIP to next task, continue execution
+
+  - Owner: orchestrator (reviews via signal + git log after agent_group completes)
+
+
+  ---
+
+  Migrated from: organization-core/.claude/rules/agent_group-execution.md (Resilience Protocol)'

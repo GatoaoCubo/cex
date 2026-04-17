@@ -1,0 +1,56 @@
+id: p04_daemon_autonomous
+kind: daemon
+name: autonomous_agent_daemon
+pid_file: records/core/python/autonomous/daemon.pid
+restart_policy: on_failure
+health_check: /status
+pillar: P04
+version: 1.0.0
+created: 2026-03-24
+author: builder_agent
+quality: 9.0
+tags:
+- daemon
+- autonomous
+- background
+- orchestration
+updated: '2026-04-07'
+domain: tool integration
+title: Daemon Autonomous
+density_score: 0.92
+tldr: Defines daemon for daemon autonomous, with validation gates and integration points.
+runtime:
+- 'Trigger: queue (watches .claude/inbox/ for new tasks)'
+- 'Interval: 60s poll cycle'
+- 'Owner: system-level (runs outside Claude session)'
+loop:
+- Read task queue from `.claude/inbox/*.json`
+- Route task to agent_group via spawn_solo.ps1
+- Emit completion signal to `.claude/signals/`
+safety:
+- 'Healthcheck: PID file exists + process responsive'
+- 'Restart policy: on_failure (max 3 retries, then alert)'
+- 'Stop condition: SIGTERM or `daemon.py stop` (reads PID)'
+cli: '`daemon.py start|stop|status|run-once` — start backgrounds with PID, stop via SIGTERM, run-once for testing.'
+metadata: python _tools/cex_score.py --apply p04-daemon-autonomous.md
+properties: '| Property | Value |
+
+  |----------|-------|
+
+  | Kind | `daemon` |
+
+  | Pillar | P04 |
+
+  | Domain |  |
+
+  | Pipeline | 8F (F1-F8) |
+
+  | Scorer | cex_score.py |
+
+  | Compiler | cex_compile.py |
+
+  | Retriever | cex_retriever.py |
+
+  | Quality target | 9.0+ |
+
+  | Density target | 0.85+ |'

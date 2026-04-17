@@ -1,0 +1,89 @@
+id: kc_format_benchmark_cex_types
+kind: knowledge_card
+pillar: P01
+llm_function: INJECT
+title: Benchmark de Formatos para Artefatos CEX — MD+YAML vs YAML vs JSON vs XML
+version: 1.0.0
+created: 2026-03-25
+updated: 2026-03-25
+author: orchestrator
+domain: meta-construction
+quality: 9.1
+tags:
+- format
+- benchmark
+- yaml
+- markdown
+- token-efficiency
+- cex
+- schema
+tldr: MD+YAML (.md) vence para 60/78 tipos CEX; YAML puro para 18 tipos machine-only; JSON para API payloads. Testado com
+  tiktoken cl100k_base em 6 formatos.
+when_to_use: Antes de definir formato de qualquer novo tipo CEX ou reescrever tipo existente
+keywords:
+- format_selection
+- token_benchmark
+- md_yaml
+- yaml_pure
+- brain_search_compatibility
+source: 'Benchmark empirico: 668 KCs analisados + 1102 YAMLs testados + tiktoken token count'
+code_provenance: organization-core/records/pool/knowledge (668 KCs) + cex/ repo (120 examples)
+confidence: 0.95
+linked_kcs: []
+facts: '| # | Claim | Source | Cf |
+
+  |---|-------|--------|----|
+
+  | 1 | MD puro usa 152 tokens para mesmo conteudo que YAML puro usa 222 tokens (46% mais) | tiktoken cl100k_base benchmark,
+  mesma info em 4 formatos | 1.0 |
+
+  | 2 | MD+YAML usa 204 tokens — 34% mais que MD puro mas inclui frontmatter validavel | tiktoken benchmark | 1.0 |
+
+  | 3 | JSON compacto usa 190 tokens — menor que YAML mas sem comentarios e multiline ruim | tiktoken benchmark | 1.0 |
+
+  | 4 | Brain search (BM25+FAISS) so indexa .md — YAML e JSON sao invisiveis | build_indexes_ollama.py linha 240: rglob("*.md")
+  | 1.0 |
+
+  | 5 | 11.3% dos 1102 YAMLs no organization-core tem parse errors (67% por --- separators) | yaml.safe_load scan em records/*/.yaml
+  | 1.0 |
+
+  | 6 | KCs 9.5+ tem 65% code blocks e 75% tables vs 8.0 com 5% code e 34% tables | Scan de 668 KCs: quality vs features |
+  1.0 |
+
+  | 7 | KCs 9.5+ tem avg 14.3 campos metadata vs 8.0 com 11.8 campos | Scan de 668 KCs frontmatter | 1.0 |
+
+  | 8 | LLMs geram MD melhor que YAML — YAML sofre com erros de indentacao na geracao | Observacao empirica em 2964 commits
+  organization-core | 0.85 |
+
+  | 9 | 98.4% dos KCs nao tem campo source, 92.1% nao tem when_to_use | Scan 668 KCs: fields_absent counter | 1.0 |'
+score_ponderado_10_dimensoes_pesos_por_importancia_cex: '| Format | Tokens | Parse | Gen | Schema | Human | Brain | Diff |
+  Comment | Multiline | Cross-type | TOTAL |
+
+  |--------|--------|-------|-----|--------|-------|-------|------|---------|-----------|------------|-------|
+
+  | MD+YAML | 8 | 7 | 8 | 6 | 9 | 10 | 8 | 7 | 10 | 7 | 150.0 |
+
+  | MD pure | 10 | 4 | 7 | 2 | 10 | 10 | 9 | 8 | 10 | 6 | 133.0 |
+
+  | YAML | 7 | 9 | 6 | 9 | 7 | 0 | 8 | 9 | 7 | 9 | 133.0 |
+
+  | JSON | 5 | 10 | 8 | 10 | 5 | 0 | 6 | 0 | 3 | 10 | 127.0 |'
+recomendacao_por_tipo_de_consumidor: '| Quem le | Formato | Tipos (~78) | Exemplos |
+
+  |---------|---------|-------------|----------|
+
+  | LLM + Humano | MD+YAML (.md) | ~60 | KC, prompt, agent, skill, blueprint, instruction |
+
+  | Maquina | YAML (.yaml) | ~18 | schema, config, signal, workflow, eval, validator |'
+anti_patterns:
+- Assumir que YAML eh mais token-eficiente que MD (eh 46% MAIS caro)
+- Usar JSON para artefatos com code blocks ou texto longo (multiline impossivel)
+- Usar YAML puro para artefatos que precisam de brain search (invisivel)
+- Usar MD puro sem frontmatter (sem schema validation possivel)
+- Formato unico para 78 tipos (cada tipo tem consumidor diferente)
+convencao_para_body_md_estruturado:
+- 'Facts: tabela `| # | Claim | Source | Cf |`'
+- 'Patterns: tabela `| Trigger | Action |`'
+- 'Anti-patterns: bullets simples'
+- 'Code: fenced blocks com lang tag'
+- 'Links: bullets tipados `- relation: target_id`'

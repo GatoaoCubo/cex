@@ -1,0 +1,31 @@
+{
+  "id": "p06_iface_agent_group_handoff",
+  "kind": "interface",
+  "pillar": "P06",
+  "title": "Interface: orchestrator → Agent_group Handoff Contract",
+  "version": "1.0.0",
+  "created": "2026-03-22",
+  "updated": "2026-03-22",
+  "author": "knowledge_agent",
+  "quality": 9.0,
+  "tags": [
+    "interface",
+    "stella",
+    "agent_group",
+    "handoff",
+    "contract"
+  ],
+  "tldr": "Interface contract for handoff files: orchestrator writes, agent_group reads — required sections, naming, signal protocol",
+  "max_bytes": 1024,
+  "density_score": 0.91,
+  "source": "organization-core/.claude/rules/orchestrator_RULES.md (COMPOSE phase)",
+  "linked_artifacts": {
+    "workflow": "p12_wf_stella_dispatch",
+    "handoff": "p12_ho_isofix_batch"
+  },
+  "contract_overview": "| Property | Value |\n|----------|-------|\n| Producer | orchestrator (orchestrator) |\n| Consumer | Agent_group (research_agent, marketing_agent, builder_agent, knowledge_agent, operations_agent, commercial_agent) |\n| Location | `.claude/handoffs/{MISSION}_{SAT}.md` |\n| Encoding | UTF-8, ASCII-safe Portuguese |\n| Trigger | orchestrator COMPOSE phase (Step 3 of 5) |",
+  "required_sections": "# {SAT} — {MISSION}: {Title}\nAutonomia Total | Quality {N}.0+\nREGRA: Commit e signal ANTES de qualquer pausa.\n\n## CONTEXTO\n[1-3 paragraphs: what, why, background]\n\n## SEEDS\n`[keyword1], [keyword2], [keyword3], ...`  # min 5, max 10\n\n## TAREFAS\n### Step N: [ACTION_VERB] [OBJECT]\n[Description with [OPEN_VARIABLES] where agent_group decides]\n\n## SCOPE FENCE\n- SOMENTE: [permitted paths]\n- NAO TOQUE: [forbidden paths]\n\n## COMMIT\ngit add [paths] && git commit -m \"{SAT}[{MISSION}]: [description]\"\n\n## SIGNAL\npython -c \"from records.core.python.signal_writer import write_signal; write_signal('{sat}', 'complete', {score})\"",
+  "field_constraints": "| Field | Type | Constraint |\n|-------|------|-----------|\n| MISSION | string | UPPER_SNAKE_CASE, max 20 chars |\n| SAT | string | UPPER: research_agent, marketing_agent, builder_agent, knowledge_agent, operations_agent, commercial_agent |\n| Title | string | max 60 chars, no emoji |\n| Quality target | float | 8.0 to 9.5 (never lower) |\n| SEEDS | list[str] | 5-10 keywords, comma-separated |\n| SCOPE FENCE | list[str] | min 1 SOMENTE + 1 NAO TOQUE |\n| Inline prompt | string | < 200 chars (TSP -p limit) |",
+  "signal_protocol": "Agent_group MUST signal before stopping:\nwrite_signal(sat_name, 'complete', score, task=mission_id)\n# Writes to: .claude/signals/{sat}complete{timestamp}.json",
+  "naming_conventions": "| Mode | File Pattern | Example |\n|------|-------------|---------|\n| Solo | `{MISSION}_{sat}.md` | `CEX7_pytha.md` |\n| Grid static | `{MISSION}_{sat}.md` | `CEX7_edison.md` |\n| Grid continuous | `{MISSION}batch{N}_{sat}.md` | `CEX7_batch_2_pytha.md` |"
+}

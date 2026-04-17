@@ -1,0 +1,150 @@
+id: p08_adr_vector_db_choice
+kind: decision_record
+pillar: P08
+title: 'ADR-007: Choose Qdrant over Pinecone for Vector Database'
+status: Accepted — 2026-03-29
+context: 'organization''s brain_query currently uses FAISS for vector search (140MB index, ~1,957 pool artifacts). This works
+  for local development but has limitations:
+
+
+  1. No persistence — index must be rebuilt on every fresh clone (~20 min)
+
+  2. No filtering — cannot filter by pillar, agent_group, or quality score during search
+
+  3. No real-time updates — adding a new KC requires full index rebuild
+
+  4. Single-machine — cannot share index across Railway API + local dev
+
+
+  We need a vector database that supports:
+
+  - Self-hosted deployment (data sovereignty requirement — pool artifacts contain proprietary business knowledge)
+
+  - Hybrid search (vector + keyword, replacing current BM25+FAISS dual system)
+
+  - Metadata filtering (by pillar, agent_group, quality score, kind)
+
+  - Real-time upsert without full rebuild
+
+  - Affordable at our scale (2K-10K documents, 768-dim vectors)'
+decision: 'Use Qdrant self-hosted on Railway.
+
+
+  Deciding factors:
+
+  1. 10x lower latency — 5ms vs 50ms (same-network vs cross-internet)
+
+  2. 80% cheaper — ~$10/mo vs $70/mo at our scale
+
+  3. Data sovereignty — pool artifacts never leave our infrastructure
+
+  4. Native hybrid search — replaces both FAISS and BM25 with single system
+
+  5. Rust performance — 2GB RAM handles 1M vectors; we have <10K'
+consequences: ''
+version: 1.0.0
+created: 2026-03-29
+author: builder_agent
+quality: 9.1
+tags:
+- adr
+- vector-database
+- qdrant
+- pinecone
+- self-hosted
+- architecture
+options_evaluated: ''
+option_a_pinecone_managed: '| Aspect | Assessment |
+
+  |--------|------------|
+
+  | Hosting | Cloud-managed (AWS us-east-1) |
+
+  | Pricing | Free tier: 100K vectors. Starter: $70/mo for 1M vectors |
+
+  | Hybrid search | Sparse-dense vectors supported |
+
+  | Filtering | Metadata filtering with JSON operators |
+
+  | Latency | ~50ms p95 (network round-trip to US) |
+
+  | Setup | 5 min (API key + SDK) |
+
+  | Concern | Data leaves our infrastructure. Vendor lock-in. $70/mo for <10K vectors is overpaying. |'
+option_b_qdrant_self_hosted: '| Aspect | Assessment |
+
+  |--------|------------|
+
+  | Hosting | Docker on Railway ($5-20/mo depending on RAM) |
+
+  | Pricing | Open source, infrastructure cost only |
+
+  | Hybrid search | Native sparse+dense, BM25-equivalent built in |
+
+  | Filtering | Rich payload filtering (nested JSON, geo, datetime) |
+
+  | Latency | ~5ms p95 (same Railway network, no external hop) |
+
+  | Setup | 30 min (Docker, collection schema, initial load) |
+
+  | Concern | Self-managed backups. Must monitor health ourselves. |'
+option_c_chromadb_self_hosted: '| Aspect | Assessment |
+
+  |--------|------------|
+
+  | Hosting | Docker or embedded Python |
+
+  | Pricing | Open source |
+
+  | Hybrid search | Basic keyword + vector |
+
+  | Filtering | Metadata where clauses |
+
+  | Latency | ~15ms p95 |
+
+  | Setup | 15 min |
+
+  | Concern | Python-based — higher memory, slower at scale. No native sparse vectors. Single-node only (no replication).
+  |'
+option_d_keep_faiss_bm25: '| Aspect | Assessment |
+
+  |--------|------------|
+
+  | Hosting | Local files |
+
+  | Pricing | Free |
+
+  | Concern | All 4 original problems remain unsolved. |'
+implementation_plan: "Phase 1 (Week 1): Deploy Qdrant on Railway\n  - Docker image: qdrant/qdrant:v1.8.4\n  - Collection:\
+  \ organization_brain, 768-dim, cosine distance\n  - Initial load: migrate FAISS index -> Qdrant collection\n\nPhase 2 (Week\
+  \ 2): Integrate with brain_query\n  - Replace hybrid_search() to call Qdrant instead of FAISS+BM25\n  - Add metadata filters:\
+  \ pillar, agent_group, quality, kind\n  - Benchmark: must match or beat current 88% top-3 accuracy\n\nPhase 3 (Week 3):\
+  \ Real-time sync\n  - On KC create/update: upsert to Qdrant via post-commit hook\n  - Remove build_indexes_ollama.py rebuild\
+  \ requirement\n  - Add health check to /api/v2/health"
+positive:
+- Single search system instead of BM25+FAISS dual maintenance
+- Real-time index updates — new KCs searchable in <1s
+- Metadata filtering enables scoped queries ("agents in P02 with quality >= 8.0")
+- 10x latency improvement for Railway API search endpoint
+- No vendor lock-in — Qdrant is open source, data exportable as JSON
+negative:
+- 'Infrastructure responsibility: backups, updates, monitoring'
+- Team must learn Qdrant query DSL (though similar to Elasticsearch)
+- 'Migration risk: must validate accuracy parity before cutover'
+- Additional Railway service adds ~$10/mo to infrastructure cost
+risks: '| Risk | Mitigation |
+
+  |------|-----------|
+
+  | Qdrant service crashes | Railway auto-restart + daily snapshot backups |
+
+  | Accuracy regression after migration | A/B test against FAISS for 1 week before cutover |
+
+  | Qdrant version upgrade breaks API | Pin version, test upgrades in staging first |
+
+  | Scale beyond single node | Unlikely at <10K docs; Qdrant supports clustering if needed |'
+references:
+- 'Qdrant docs: https://qdrant.tech/documentation/'
+- 'FAISS current setup: `records/core/brain/mcp-organization-brain/build_indexes_ollama.py`'
+- 'Brain search: `records/core/brain/mcp-organization-brain/vector_search.py`'
+- 'Related: p01_kc_bm25_search (current BM25 implementation)'

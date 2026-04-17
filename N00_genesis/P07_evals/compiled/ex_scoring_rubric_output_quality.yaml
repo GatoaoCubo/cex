@@ -1,0 +1,119 @@
+id: p07_sr_output_quality_density
+kind: scoring_rubric
+pillar: P07
+title: Output Quality & Density Scoring Rubric
+version: 1.0.0
+created: 2026-03-23
+updated: 2026-03-23
+author: builder_agent
+domain: evaluation
+quality: 9.0
+tags:
+- quality
+- density
+- scoring
+- evaluation
+- rubric
+tldr: Rubrica 5-dimensao para avaliar qualidade e densidade de artefatos CEX com thresholds actionaveis por tier
+when_to_use: Avaliar qualquer artefato CEX antes de pool promotion ou golden designation
+framework_overview: Rubrica de 5 dimensoes para avaliacao sistematica de artefatos CEX. Cada dimensao tem peso, escala 1-10,
+  e criterios observaveis. Score final = media ponderada.
+dimensions: ''
+d1_density_peso_0_25: 'Informacao unica por unidade de texto. Zero filler, zero repeticao.
+
+
+  | Score | Criterio |
+
+  |-------|----------|
+
+  | 9-10 | Cada frase contem fato unico, verificavel. Nenhuma frase removivel sem perda. |
+
+  | 7-8 | 1-2 frases redundantes ou genéricas. Bulk e denso. |
+
+  | 5-6 | ~20% do texto e filler ("e importante notar", "como sabemos"). |
+
+  | 3-4 | Mais da metade e repeticao ou obviedade. |
+
+  | 1-2 | Texto vazio de conteudo. Parece gerado sem instrucao. |'
+d2_correctness_peso_0_25: 'Fatos verificaveis, codigo funcional, claims com evidencia.
+
+
+  | Score | Criterio |
+
+  |-------|----------|
+
+  | 9-10 | Todos os fatos verificaveis. Codigo compila. Numeros com fonte. |
+
+  | 7-8 | 1 imprecisao menor (versao desatualizada, numero arredondado). |
+
+  | 5-6 | Claim central sem evidencia ou codigo com bug sintatico. |
+
+  | 3-4 | Multiplos erros factuais ou logicos. |
+
+  | 1-2 | Hallucination dominante. Dados inventados. |'
+d3_structure_peso_0_20: 'Organizacao, frontmatter, naming, sections obrigatorias.
+
+
+  | Score | Criterio |
+
+  |-------|----------|
+
+  | 9-10 | Frontmatter 100% completo. Todas as secoes do schema. Naming correto. |
+
+  | 7-8 | 1 campo CEX-extended ausente. Estrutura solida. |
+
+  | 5-6 | Frontmatter incompleto ou secao obrigatoria ausente. |
+
+  | 3-4 | Estrutura ad-hoc, ignora schema. |
+
+  | 1-2 | Texto corrido sem frontmatter. |'
+d4_actionability_peso_0_20: 'O leitor sabe O QUE fazer apos ler. Instrucoes executaveis, nao abstratas.
+
+
+  | Score | Criterio |
+
+  |-------|----------|
+
+  | 9-10 | Cada secao tem acao clara. Comandos copy-paste. Decision trees. |
+
+  | 7-8 | Maioria actionavel, 1-2 secoes descritivas sem next step. |
+
+  | 5-6 | Metade e descricao passiva ("RAG e um paradigma..."). |
+
+  | 3-4 | Texto academico. Leitor nao sabe por onde comecar. |
+
+  | 1-2 | Puramente teorico. Zero aplicabilidade pratica. |'
+d5_specificity_peso_0_10: 'Concreto vs generico. Numeros > adjetivos. Exemplos > descricoes.
+
+
+  | Score | Criterio |
+
+  |-------|----------|
+
+  | 9-10 | Numeros concretos, exemplos reais, thresholds definidos. |
+
+  | 7-8 | Maioria especifico, 1-2 claims vagos ("melhora performance"). |
+
+  | 5-6 | Mix de concreto e generico. |
+
+  | 3-4 | Maioria generico ("use boas praticas"). |
+
+  | 1-2 | Completamente abstrato. Aplicavel a qualquer dominio. |'
+scoring_protocol: "1. Ler artefato completo\n2. Pontuar cada dimensao (1-10) com justificativa de 1 frase\n3. Calcular: final\
+  \ = D1*0.25 + D2*0.25 + D3*0.20 + D4*0.20 + D5*0.10\n4. Classificar tier:\n   >= 9.5: Golden (pool promotion automatica)\n\
+  \   >= 8.0: Skilled (pool eligible, remember())\n   >= 7.0: Learning (experimental, iteracao necessaria)\n   < 7.0: Rejected\
+  \ (redo obrigatorio)"
+calibration_examples: '| Artefato | D1 | D2 | D3 | D4 | D5 | Final | Tier |
+
+  |----------|----|----|----|----|----| ------|------|
+
+  | KC com 5 fatos unicos, frontmatter completo, flow ASCII | 9 | 9 | 10 | 8 | 9 | 9.0 | Skilled |
+
+  | Agent com "TODO" no frontmatter, overview generico | 5 | 7 | 4 | 6 | 5 | 5.6 | Rejected |
+
+  | Skill com metricas reais, anti-patterns, 3 fases | 8 | 8 | 9 | 9 | 8 | 8.4 | Skilled |'
+anti_patterns_in_scoring:
+- Inflar score por "parece completo" sem verificar fatos (D2 trap)
+- Penalizar brevidade — documentos curtos podem ter density 10
+- Ignorar naming/frontmatter porque "o conteudo e bom" (D3 still matters)
+- Score 7.0 como "default seguro" — se nao sabe, releia e pontue honestamente

@@ -1,0 +1,117 @@
+id: p06_is_marketing_data_model
+kind: input_schema
+pillar: P06
+version: 1.0.0
+created: '2026-04-02'
+updated: '2026-04-02'
+author: input-schema-builder
+owner: n02_marketing
+scope: marketing campaign creation and content generation operations
+fields: '| # | Name | Type | Required | Default | Description |
+
+  |---|------|------|----------|---------|-------------|
+
+  | 1 | campaign_name | string | YES | — | Slug-safe campaign identifier (3-80 chars, ^[a-z0-9_-]+$) |
+
+  | 2 | brand_name | string | YES | — | Brand reference matching brand_config.yaml brand_name |
+
+  | 3 | marketing_objective | string | YES | — | Enum: awareness, conversion, retention, engagement, lead_gen |
+
+  | 4 | target_audience | string | YES | — | Ideal customer segment description (20-500 chars) |
+
+  | 5 | channels | list | YES | — | Distribution channels, min 1 entry |
+
+  | 6 | budget | float | NO | null | Campaign budget USD; null = unset; must be >= 0.0 |
+
+  | 7 | tone | string | NO | "professional" | Brand voice: professional, casual, technical, friendly, bold |
+
+  | 8 | start_date | string | NO | null | Campaign start YYYY-MM-DD |
+
+  | 9 | end_date | string | NO | null | Campaign end YYYY-MM-DD; must be >= start_date |
+
+  | 10 | kpis | list | NO | [] | KPI identifiers: ctr, cpc, roas, cpl, open_rate, conversion_rate |
+
+  | 11 | content_formats | list | NO | ["text"] | Output formats: text, image, video, carousel, email, landing_page |
+
+  | 12 | geo_targets | list | NO | [] | ISO 3166-1 alpha-2 codes or region names |'
+coercion:
+- from: string
+  to: float
+  rule: Parse budget from numeric string ('5000' → 5000.0); reject with type error if non-numeric
+- from: string
+  to: list
+  rule: Wrap single-item string into list for channels, kpis, content_formats, geo_targets ('email' → ['email'])
+- from: YYYYMMDD|DD-MM-YYYY|DD/MM/YYYY
+  to: YYYY-MM-DD
+  rule: Normalize start_date and end_date to ISO 8601; reject if unparseable
+examples: "{\n  \"campaign_name\": \"brand_awareness_q2\",\n  \"brand_name\": \"AcmeCorp\",\n  \"marketing_objective\": \"\
+  awareness\",\n  \"target_audience\": \"Tech-forward consumers interested in productivity tools\",\n  \"channels\": [\"social_media\"\
+  ],\n  \"budget\": null,\n  \"tone\": \"casual\",\n  \"start_date\": null,\n  \"end_date\": null,\n  \"kpis\": [],\n  \"\
+  content_formats\": [\"text\"],\n  \"geo_targets\": []\n}"
+domain: marketing
+quality: 9.1
+tags:
+- input-schema
+- marketing
+- campaign
+- data-model
+- P06
+tldr: 'Input contract for marketing campaign creation: requires name, brand, objective, audience, channels; optional budget,
+  tone, dates, KPIs, formats, geo.'
+keywords:
+- marketing
+- campaign
+- input_schema
+- brand
+- objective
+- audience
+- channels
+- budget
+- tone
+- kpis
+- content_formats
+- geo_targets
+- coercion
+density_score: 0.91
+contract_definition: 'Marketing campaign creation and content generation operations receive structured input defining brand
+  context, campaign strategy, and execution parameters. Callers supply five required fields (campaign identity, brand reference,
+  strategic objective, target audience, and distribution channels) plus up to seven optional fields governing budget, voice,
+  timing, measurement, output formats, and geography. The receiver — N02 marketing nucleus or any campaign builder — produces
+  campaign briefs, copy variants, and content artifacts aligned strictly with caller-provided parameters. This schema is unilateral:
+  it defines only what goes in; output shape is defined by the corresponding formatter or interface artifact.'
+validation_constraints: '| Field | Constraint |
+
+  |-------|-----------|
+
+  | campaign_name | 3-80 chars; pattern `^[a-z0-9_-]+$` |
+
+  | marketing_objective | Enum: awareness \| conversion \| retention \| engagement \| lead_gen |
+
+  | target_audience | 20-500 chars |
+
+  | channels | min 1 item; each in: social_media, email, paid_ads, seo, content, influencer |
+
+  | budget | float >= 0.0 if not null |
+
+  | tone | Enum: professional \| casual \| technical \| friendly \| bold |
+
+  | start_date / end_date | ISO 8601 `\d{4}-\d{2}-\d{2}`; end_date >= start_date when both set |
+
+  | content_formats | Each in: text, image, video, carousel, email, landing_page |
+
+  | geo_targets | ISO 3166-1 alpha-2 or recognized region name |'
+coercion_rules: '| From | To | Field(s) | Rule |
+
+  |------|----|----------|------|
+
+  | string | float | budget | Parse numeric string ("5000" → 5000.0); reject with type error if non-numeric |
+
+  | string | list | channels, kpis, content_formats, geo_targets | Wrap single-item string in list ("email" → ["email"]) |
+
+  | YYYYMMDD / DD-MM-YYYY / DD/MM/YYYY | YYYY-MM-DD | start_date, end_date | Normalize to ISO 8601; reject if unparseable
+  |'
+references:
+- OpenAPI requestBody specification (spec.openapis.org)
+- IAB Content Taxonomy 3.0 — channel and format classification
+- ISO 3166-1 alpha-2 country code registry (iso.org)
+- Pydantic BaseModel field validation patterns (docs.pydantic.dev)

@@ -1,0 +1,54 @@
+id: p07_ue_brain_query_accuracy
+kind: unit_eval
+pillar: P07
+description: Unit test for brain_query search accuracy across known queries
+target: brain_query MCP tool — hybrid BM25+FAISS search.
+version: 1.0.0
+created: 2026-03-24
+author: operations_agent
+quality: 9.0
+tags:
+- unit-eval
+- brain
+- search
+- accuracy
+updated: '2026-04-07'
+domain: evaluation
+title: Unit Eval Brain Query Accuracy
+density_score: 0.92
+tldr: Defines unit eval for unit eval brain query accuracy, with validation gates and integration points.
+test_cases: '| Query | Expected Top Result | Pass Criteria |
+
+  |-------|-------------------|---------------|
+
+  | "agent for SEO" | KC with SEO/marketplace | Top-3 contains match |
+
+  | "how to spawn agent_group" | KC_operations_agent_003 or spawn skill | Top-1 score > 0.7 |
+
+  | "quality gate implementation" | KC_operations_agent_010 | Exact match in top-1 |
+
+  | "brand propagation pipeline" | brand_propagation skill | Top-3 contains match |
+
+  | "whatsapp voice pipeline" | voice_pipeline skill | Top-3 contains match |'
+execution: "python -c \"\nfrom organization_brain.vector_search import hybrid_search\nfor query, expected in TEST_CASES:\n\
+  \    results = hybrid_search(query, k=3)\n    assert any(expected in r['source'] for r in results)\n\""
+metrics: '| Metric | Threshold | Current |
+
+  |--------|-----------|---------|
+
+  | Top-1 accuracy | >= 70% | ~72% |
+
+  | Top-3 accuracy | >= 85% | ~88% |
+
+  | Query latency | < 500ms | ~200ms |
+
+  | Fallback rate | < 5% | ~2% |'
+failure_action:
+- 'Top-1 < 70%: Rebuild FAISS index, check embedding model'
+- 'Latency > 500ms: Check Ollama status, model loading'
+pipeline_integration:
+- Created via 8F pipeline from F1-Focus through F8-Furnish
+- Scored by cex_score across three structural layers
+- Compiled by cex_compile for structural validation
+- Retrieved by cex_retriever for context injection
+- Evolved by cex_evolve when quality regresses below target

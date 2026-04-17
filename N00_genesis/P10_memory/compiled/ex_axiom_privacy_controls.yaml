@@ -1,0 +1,63 @@
+id: p10_ax_privacy_controls
+kind: axiom
+pillar: P10
+title: 'Axiom: Edge-Layer Privacy Controls'
+version: 1.0.0
+created: 2026-03-24
+updated: 2026-03-24
+author: builder_agent
+quality: 9.0
+tags:
+- axiom
+- privacy
+- edge
+- hooks
+- tags
+tldr: Privacy enforced at edge (hook layer), not center (daemon). <private> tags stripped before HTTP send. Data never leaves
+  client boundary unfiltered.
+max_bytes: 3072
+density_score: 0.9
+source: organization-core/records/core/memory/hooks/ (privacy filtering layer)
+linked_artifacts:
+  template: tpl_axiom_privacy_controls
+  related: p10_ax_lifecycle_hooks
+statement: '> Privacy enforcement happens at the edge (hook layer), not at the center (daemon/DB). Content tagged as private
+  never reaches the persistence layer. The client boundary is the security perimeter.'
+rule: "User message with <private>...</private>\n  → Hook layer: strip <private> tags, sanitize content\n  → HTTP POST sanitized\
+  \ text to daemon\n  → Worker layer: strip <context> tags (prevent re-storage loops)\n  → DB write (clean data only)"
+tag_types: '| Tag | Controlled By | Stripped At | Purpose |
+
+  |-----|--------------|------------|---------|
+
+  | `<private>` | User | Hook layer (before HTTP send) | User-controlled exclusion from memory |
+
+  | `<context>` | System | Worker layer (before re-storage) | Injected context — prevent re-storage loops |'
+worker_skip_signal: 'When the daemon determines an observation should not be stored (duplicate, low-value, or system-flagged),
+  it returns `skipped: true` in the HTTP response. The hook aborts the observation pipeline without error (exit 0).'
+exit_codes: '| Code | Meaning | Effect |
+
+  |------|---------|--------|
+
+  | 0 | Success or graceful skip | Continue |
+
+  | 1 | Non-blocking (tag parse warning) | Log, continue |
+
+  | 2 | Blocking (privacy violation detected) | Halt, do NOT persist |'
+invariants:
+- 'Edge enforcement: private data is stripped BEFORE leaving the client process'
+- 'Never trust daemon for privacy: daemon is a persistence layer, not a security boundary'
+- 'Exit 2 on violation: if `<private>` stripping fails, hook MUST block (exit 2) to prevent leak'
+- 'No regex on secrets: use tag boundaries only — never pattern-match for API keys or passwords'
+violations_and_costs: '| Violation | Cost |
+
+  |-----------|------|
+
+  | Strip `<private>` at daemon instead of hook | Data already transmitted over HTTP — breach |
+
+  | Regex-match secrets instead of tag-based | False negatives, maintenance burden, security theater |
+
+  | Ignore `<context>` re-storage | Infinite loop: inject -> capture -> inject -> capture |
+
+  | Exit 0 on strip failure | Private data persisted to DB — irrecoverable |'
+trigger: 'Auto-applies to: every PostToolUse and UserPromptSubmit hook that processes text content. Privacy check runs BEFORE
+  any HTTP call to daemon.'

@@ -1,0 +1,164 @@
+id: p03_pt_knowledge_tasks
+kind: prompt_template
+pillar: P03
+title: Knowledge Task Execution Template
+version: 1.0.0
+created: '2026-04-02'
+updated: '2026-04-02'
+author: prompt-template-builder
+variables:
+- name: topic
+  type: string
+  required: true
+  default: null
+  description: The subject, concept, or entity the knowledge task will address
+- name: domain
+  type: string
+  required: true
+  default: null
+  description: Knowledge domain classifying the topic (e.g., machine_learning, finance, biology, law)
+- name: task_type
+  type: string
+  required: true
+  default: null
+  description: The specific knowledge operation to perform — one of synthesize, extract, compare, summarize, map, audit
+- name: audience
+  type: string
+  required: false
+  default: intermediate
+  description: Target reader level that calibrates terminology and depth (beginner, intermediate, expert)
+- name: depth
+  type: string
+  required: false
+  default: standard
+  description: Coverage depth controlling section count and elaboration (brief, standard, deep)
+- name: output_format
+  type: string
+  required: false
+  default: structured
+  description: Shape of the output — structured (headers + tables), prose, or bullet
+- name: sources
+  type: list
+  required: false
+  default: []
+  description: Reference sources, URLs, or citation keys to incorporate into the output
+- name: constraints
+  type: list
+  required: false
+  default: []
+  description: Explicit focus constraints, exclusion rules, or scope boundaries for the task
+variable_syntax: mustache
+composable: true
+domain: knowledge
+quality: 9.1
+tags:
+- prompt-template
+- knowledge
+- P03
+- knowledge-task
+- synthesis
+- extraction
+- reusable
+tldr: Executes any knowledge task (synthesize, extract, compare, summarize, map, audit) for a given topic and domain.
+keywords:
+- knowledge
+- task
+- template
+- synthesis
+- extraction
+- comparison
+- audit
+- domain
+- reusable
+density_score: 0.91
+purpose: 'Produces a precisely scoped knowledge task prompt for any topic within any domain. The same mold generates distinct
+  prompts across six knowledge operations — synthesize, extract, compare, summarize, map, and audit — by substituting `task_type`
+  and the remaining variables. Reuse scope covers any situation where an LLM must execute a structured knowledge operation:
+  building knowledge cards, extracting entities from documents, comparing concepts, auditing knowledge bases, or mapping concept
+  relationships. Composable: designed for embedding as a sub-block inside mission-level or multi-step pipeline templates.'
+variables_table: '| Name | Type | Required | Default | Description |
+
+  |---|---|---|---|---|
+
+  | topic | string | true | null | The subject, concept, or entity the knowledge task will address |
+
+  | domain | string | true | null | Knowledge domain classifying the topic (e.g., machine_learning, finance, biology) |
+
+  | task_type | string | true | null | Knowledge operation: synthesize, extract, compare, summarize, map, or audit |
+
+  | audience | string | false | "intermediate" | Target reader level calibrating terminology and depth |
+
+  | depth | string | false | "standard" | Coverage depth: brief, standard, or deep |
+
+  | output_format | string | false | "structured" | Output shape: structured, prose, or bullet |
+
+  | sources | list | false | [] | Reference sources, URLs, or citation keys to incorporate |
+
+  | constraints | list | false | [] | Explicit focus constraints, exclusion rules, or scope boundaries |'
+template_body: "You are a knowledge specialist operating in the {{domain}} domain.\n\nTASK: {{task_type}}\nTOPIC: {{topic}}\n\
+  AUDIENCE: {{audience}}\nDEPTH: {{depth}}\nOUTPUT FORMAT: {{output_format}}\n\n{{#sources}}\nSOURCES TO INCORPORATE:\n{{#sources}}\n\
+  - {{.}}\n{{/sources}}\n{{/sources}}\n\n{{#constraints}}\nSCOPE CONSTRAINTS:\n{{#constraints}}\n- {{.}}\n{{/constraints}}\n\
+  {{/constraints}}\n\n---\n\nTASK EXECUTION GUIDE\n\nApply the operation \"{{task_type}}\" to \"{{topic}}\" within {{domain}}\
+  \ as follows:\n\nsynthesize  → Integrate multiple perspectives into a unified, original account. Resolve contradictions.\
+  \ Surface the consensus and the contested edges.\nextract     → Identify and list discrete, atomic facts, entities, or relationships.\
+  \ One claim per item. No interpretation.\ncompare     → Produce a structured comparison: shared properties, divergent properties,\
+  \ and the implications of the differences.\nsummarize   → Compress the core meaning into the minimum tokens that preserve\
+  \ fidelity. Preserve key terms. Omit elaboration.\nmap         → Generate a concept map: nodes (key terms in {{domain}}),\
+  \ edges (relationships), and a brief label for each edge type.\naudit       → Evaluate existing knowledge for gaps, outdated\
+  \ claims, internal contradictions, and missing cross-references. Return a scored gap report.\n\n---\n\nOUTPUT REQUIREMENTS\n\
+  \nFormat: {{output_format}}\n  structured → Use ## headers, tables, and bullet lists. Every section must have a label.\n\
+  \  prose      → Continuous paragraphs. No headers except the title. Transitions required.\n  bullet     → Flat or nested\
+  \ bullet lists only. No prose paragraphs.\n\nDepth calibration for {{depth}}:\n  brief    → 150–300 words. Essential claims\
+  \ only.\n  standard → 400–700 words. Core concepts + 1 example per concept.\n  deep     → 800–1400 words. Full elaboration,\
+  \ edge cases, cross-domain links.\n\nAudience calibration for {{audience}}:\n  beginner     → Define all domain terms on\
+  \ first use. Avoid jargon. Use analogies.\n  intermediate → Assume domain literacy. Define only specialized sub-terms.\n\
+  \  expert       → Use full technical vocabulary. Omit foundational explanations.\n\nDeliver the {{task_type}} output for\
+  \ {{topic}} now."
+quality_gates: '| Gate | Status | Notes |
+
+  |---|---|---|
+
+  | H01 id matches `^p03_pt_[a-z][a-z0-9_]+$` | PASS | `p03_pt_knowledge_tasks` matches pattern |
+
+  | H02 required frontmatter fields present | PASS | id, kind, pillar, title, version, created, updated, author, domain, tags,
+  tldr all present |
+
+  | H03 `kind` equals `prompt_template` | PASS | Exact literal match |
+
+  | H04 `quality` is null | PASS | null at authoring time |
+
+  | H05 all body `{{vars}}` declared in variables list | PASS | topic, domain, task_type, audience, depth, output_format,
+  sources, constraints — all declared |
+
+  | H06 all declared variables appear in body | PASS | All 8 variables used in template body |
+
+  | H07 body contains at least one `{{variable}}` | PASS | Multiple Mustache slots present |
+
+  | H08 `variable_syntax` is mustache or bracket | PASS | mustache — no mixed syntax |
+
+  | H09 injection point declarable | PASS | Template targets user turn; composable: true for system-level embedding |'
+examples: ''
+example_1_synthesize_structured_intermediate_standard: "Variables:\ntopic: \"transformer attention mechanisms\"\ndomain: \"\
+  machine_learning\"\ntask_type: \"synthesize\"\naudience: \"intermediate\"\ndepth: \"standard\"\noutput_format: \"structured\"\
+  \nsources: [\"Vaswani et al. 2017\", \"Dao et al. 2022\"]\nconstraints: [\"exclude positional encodings\", \"focus on multi-head\
+  \ design\"]\n\nRendered Output:\nYou are a knowledge specialist operating in the machine_learning domain.\n\nTASK: synthesize\n\
+  TOPIC: transformer attention mechanisms\nAUDIENCE: intermediate\nDEPTH: standard\nOUTPUT FORMAT: structured\n\nSOURCES TO\
+  \ INCORPORATE:\n- Vaswani et al. 2017\n- Dao et al. 2022\n\nSCOPE CONSTRAINTS:\n- exclude positional encodings\n- focus\
+  \ on multi-head design\n\n---\n\nTASK EXECUTION GUIDE\n\nApply the operation \"synthesize\" to \"transformer attention mechanisms\"\
+  \ within machine_learning as follows:\n\nsynthesize → Integrate multiple perspectives into a unified, original account.\
+  \ Resolve contradictions. Surface the consensus and the contested edges.\n\n---\n\nOUTPUT REQUIREMENTS\n\nFormat: structured\n\
+  \  structured → Use ## headers, tables, and bullet lists. Every section must have a label.\n\nDepth calibration for standard:\n\
+  \  standard → 400–700 words. Core concepts + 1 example per concept.\n\nAudience calibration for intermediate:\n  intermediate\
+  \ → Assume domain literacy. Define only specialized sub-terms.\n\nDeliver the synthesize output for transformer attention\
+  \ mechanisms now."
+example_2_audit_bullet_expert_deep: "Variables:\ntopic: \"RAG pipeline evaluation metrics\"\ndomain: \"knowledge_retrieval\"\
+  \ntask_type: \"audit\"\naudience: \"expert\"\ndepth: \"deep\"\noutput_format: \"bullet\"\nsources: []\nconstraints: [\"\
+  focus on retrieval precision and context faithfulness\"]\n\nRendered Output:\nYou are a knowledge specialist operating in\
+  \ the knowledge_retrieval domain.\n\nTASK: audit\nTOPIC: RAG pipeline evaluation metrics\nAUDIENCE: expert\nDEPTH: deep\n\
+  OUTPUT FORMAT: bullet\n\nSCOPE CONSTRAINTS:\n- focus on retrieval precision and context faithfulness\n\n---\n\nTASK EXECUTION\
+  \ GUIDE\n\nApply the operation \"audit\" to \"RAG pipeline evaluation metrics\" within knowledge_retrieval as follows:\n\
+  \naudit → Evaluate existing knowledge for gaps, outdated claims, internal contradictions, and missing cross-references.\
+  \ Return a scored gap report.\n\n---\n\nOUTPUT REQUIREMENTS\n\nFormat: bullet\n  bullet → Flat or nested bullet lists only.\
+  \ No prose paragraphs.\n\nDepth calibration for deep:\n  deep → 800–1400 words. Full elaboration, edge cases, cross-domain\
+  \ links.\n\nAudience calibration for expert:\n  expert → Use full technical vocabulary. Omit foundational explanations.\n\
+  \nDeliver the audit output for RAG pipeline evaluation metrics now."

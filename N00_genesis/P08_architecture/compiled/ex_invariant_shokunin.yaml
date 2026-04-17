@@ -1,0 +1,63 @@
+id: p08_law_shokunin
+kind: invariant
+pillar: P08
+title: 'Invariant 13: Shokunin — Quality Excellence'
+version: 3.0.0
+created: 2026-03-22
+updated: 2026-03-22
+author: knowledge_agent
+quality: 9.1
+tags:
+- law
+- shokunin
+- quality
+- excellence
+- golden
+tldr: 'LAW 13: Every output must pass the Shokunin test — ''Would I be proud of this?'' Hesitation = iterate. Quality floor
+  8.0, Golden >= 9.5'
+max_bytes: 1024
+density_score: 0.93
+source: organization-core/records/framework/docs/LAWS_v3_PRACTICAL.md (LAW 13)
+linked_artifacts:
+  gate: p11_qg_cex_quality
+  rubric: p07_sr_5d_scoring
+statement: '> Every organization output must pass the Shokunin test: "Eu tenho orgulho disso?" (Would I be proud of this?).
+  Any hesitation means iterate — never ship doubt.'
+implementation: '| Trigger | Implementation | Auto |
+
+  |---------|---------------|------|
+
+  | Any output generation | `ultrathink_orchestrator.py` quality check | ULTRATHINK mode |
+
+  | Pre-pool write | 5D scoring (D1-D5), score >= 8.0 required | Always |
+
+  | Golden promotion | score >= 9.5, all dims >= 9.0 | Always |'
+quality_tiers: '| Score | Tier | Action |
+
+  |-------|------|--------|
+
+  | >= 9.5 | Masterwork / Golden | Pool as golden artifact |
+
+  | 8.0 - 9.4 | Skilled | Pool + remember() |
+
+  | 7.0 - 7.9 | Learning | Experimental only |
+
+  | < 7.0 | Rejected | Redo from scratch |'
+inviolable_rules:
+- Never ship < 7.0 — discard and rebuild
+- Never pool < 8.0 — experimental artifacts stay local
+- Golden requires 9.5 — not 9.4, not "close enough"
+- Hesitation = iteration — if unsure, the score is not ready
+- Partial is better than fake — score 8.0 partial > fake 9.5 complete
+layer: "LAYER 3: QUALITY SYSTEM\nLAW 13 (Shokunin) ← LAW 12 (Confidence Tiers)\n       │\nLAW 4 (Pool) — artifacts must pass\
+  \ LAW 13 before entering pool"
+violation_pattern: 'WRONG: "I''ll ship this 6.5 and note it''s a draft"
+
+  RIGHT: Rebuild until >= 7.0, then decide on pooling
+
+
+  WRONG: "It''s basically 9.5, close enough for golden"
+
+  RIGHT: Measure with 5D rubric. If < 9.5, it''s T2 skilled — pool but not golden.'
+origin: '"Shokunin" (Japanese: 職人) = artisan who pursues mastery not as goal but as daily practice. Applied in organization:
+  every output reflects the system''s character. Mediocre output = mediocre system.'

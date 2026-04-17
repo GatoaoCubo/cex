@@ -1,0 +1,56 @@
+id: ex_research_pipeline_saas_global
+kind: cli_tool
+pillar: P04
+title: Research Pipeline — Global SaaS Competitive Intelligence
+version: 1.0.0
+created: 2026-03-31
+author: research-pipeline-builder
+domain: research_pipeline
+quality: 9.1
+tags:
+- research-pipeline
+- example
+- saas
+- global
+- competitive-intelligence
+tldr: Config for SaaS competitive research — G2/Capterra/ProductHunt, papers via Exa, developer community via HackerNews.
+density_score: 0.88
+updated: '2026-04-07'
+about: Config for a SaaS analytics company researching competitors, market trends, and developer sentiment. Focuses on review
+  platforms (G2, Capterra), academic papers (Exa), and developer communities (HackerNews, Reddit).
+config: "identity:\n  empresa: \"CloudMetrics\"\n  nicho: saas_analytics\n  idioma: en\n  pais: US\n\nsources:\n  inbound:\n\
+  \    - g2              # review platform, competitor features\n    - capterra        # review platform, pricing comparison\n\
+  \    - producthunt     # new product launches\n    - crunchbase      # funding, team size, growth signals\n  outbound:\n\
+  \    - youtube         # product demos, conference talks\n    - reddit          # r/devops, r/dataengineering\n    - hackernews\
+  \      # developer sentiment, product launches\n    - twitter         # founder announcements, feature drops\n  search:\n\
+  \    - serper          # Google SERP\n    - exa             # academic papers, technical docs\n    - tavily          # research-grade\
+  \ search with extraction\n  trends:\n    - pytrends        # search interest for product categories\n  rag:\n    - internal_wiki\
+  \   # company product docs\n    - confluence      # engineering specs\n\nstorm_perspectives:\n  - role: buyer\n    focus:\
+  \ \"pricing features integrations support onboarding\"\n  - role: competitor\n    focus: \"market-share roadmap funding\
+  \ team-size acquisition\"\n  - role: analyst\n    focus: \"TAM growth-rate churn-rate ARR NRR\"\n  - role: developer\n \
+  \   focus: \"API-docs SDK ease-of-integration latency reliability\"\n  - role: reviewer\n    focus: \"NPS satisfaction complaints\
+  \ switching-cost alternatives\"\n\nmulti_model:\n  extraction: gemini-2.5-flash\n  reasoning: claude-sonnet\n  social: gemini-2.5-flash\n\
+  \  critic: o4-mini\n\nbudget:\n  serper_daily: 50\n  exa_monthly: 1000\n  firecrawl_monthly: 500\n\noutput:\n  formats:\
+  \ [html, json, md]\n  idioma: en\n  template: consulting\n\nquality:\n  crag_min_score: 0.7\n  critic_max_iterations: 3\n\
+  \  final_min_score: 8.0"
+niche_notes:
+- 'G2/Capterra focus: SaaS buyer journey starts with review platforms (72% of B2B buyers check G2)'
+- 'Exa for papers: technical SaaS needs academic papers on observability, distributed systems'
+- 'HackerNews: developer sentiment is a leading indicator of SaaS adoption'
+- 'Crunchbase: funding rounds signal competitive threat level'
+- 'Higher reasoning model: competitive analysis needs nuanced reasoning (Claude Sonnet over Flash)'
+- 'Lower Firecrawl budget: SaaS platforms have structured APIs, less scraping needed'
+cross_references:
+- 'Pillar: P04 (Tools)'
+- 'Kind: `cli tool`'
+- 'Artifact ID: `ex_research_pipeline_saas_global`'
+- 'Tags: [research-pipeline, example, saas, global, competitive-intelligence]'
+integration_points: '| Component | Role |
+
+  |-----------|------|
+
+  | Pillar P04 | Tools domain |
+
+  | Kind `cli tool` | Artifact type |
+
+  | Pipeline | 8F (F1→F8) |'

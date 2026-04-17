@@ -1,0 +1,37 @@
+{
+  "id": "p05_rf_security_audit",
+  "kind": "response_format",
+  "pillar": "P05",
+  "title": "Output Schema: Access Control Audit Report",
+  "version": "1.0.0",
+  "created": "2026-03-22",
+  "updated": "2026-03-22",
+  "author": "builder_agent",
+  "format": "markdown",
+  "quality": 9.0,
+  "tags": [
+    "security",
+    "audit",
+    "output"
+  ],
+  "tldr": "Structured security audit report with findings by severity, remediation roadmap, and OWASP compliance mapping",
+  "max_bytes": 8192,
+  "density_score": 0.92,
+  "source": "organization-core/records/agents/access_control_auditor/iso_vectorstore/ISO_operations_agent_007_OUTPUT_TEMPLATE.md",
+  "linked_artifacts": {
+    "agent": "p02_ag_access_control_auditor",
+    "schema": null
+  },
+  "fields": "| Field | Type | Required | Example |\n|-------|------|----------|---------|\n| timestamp | string (ISO 8601) | yes | `2026-03-22T14:30:00Z` |\n| framework | string | yes | `FastAPI 0.104` |\n| total_findings | int | yes | `12` |\n| critical_count | int | yes | `2` |\n| high_count | int | yes | `3` |\n| overall_risk | enum(CRITICAL,HIGH,MEDIUM,LOW) | yes | `HIGH` |\n| findings | list[Finding] | yes | see below |\n| route_inventory | object | yes | protected/unprotected/public routes |\n| cwe_summary | list[CWE] | no | `[{id: \"CWE-306\", count: 2}]` |",
+  "nested_finding": "| Field | Type | Required | Example |\n|-------|------|----------|---------|\n| id | string | yes | `F001` |\n| severity | enum(CRITICAL,HIGH,MEDIUM,LOW,INFO) | yes | `CRITICAL` |\n| cwe | string | yes | `CWE-306` |\n| title | string | yes | `Missing Authentication on User Deletion` |\n| file | string | yes | `api/routes/users.js:23` |\n| vulnerable_code | string | yes | code snippet |\n| remediation_code | string | yes | fixed code snippet |\n| impact | string | yes | impact description |",
+  "constraints": [
+    "max_bytes: 8192",
+    "format: markdown (primary) + JSON export",
+    "encoding: utf-8",
+    "Findings grouped by severity (CRITICAL > HIGH > MEDIUM > LOW > INFO)",
+    "Each finding MUST include remediation code, not just description"
+  ],
+  "valid_example": "{\n  \"metadata\": {\"timestamp\": \"2026-03-22T14:30:00Z\", \"framework\": \"FastAPI\"},\n  \"summary\": {\"total_findings\": 3, \"by_severity\": {\"critical\": 1, \"high\": 1, \"medium\": 1}},\n  \"findings\": [\n    {\"id\": \"F001\", \"severity\": \"CRITICAL\", \"cwe\": \"CWE-306\",\n     \"title\": \"Missing Auth on DELETE /users/:id\",\n     \"file\": \"api/routes/users.js:23\",\n     \"remediation_code\": \"app.delete('/users/:id', authenticate, authorize('admin'), handler)\"}\n  ]\n}",
+  "invalid_example": "// FAILS: finding without remediation_code (required field)\n{\"id\": \"F001\", \"severity\": \"CRITICAL\", \"title\": \"Missing Auth\", \"description\": \"needs fix\"}",
+  "error_handling": "| Condition | Action | Return |\n|-----------|--------|--------|\n| No routes found in codebase | Warn + empty inventory | `{\"findings\": [], \"warning\": \"no routes detected\"}` |\n| Scan timeout (>240s) | Return partial results | partial report + `\"status\": \"timeout\"` |\n| Unrecognized framework | Fallback to generic scan | report with `\"confidence\": \"T3\"` |"
+}

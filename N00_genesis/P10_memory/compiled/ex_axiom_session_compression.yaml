@@ -1,0 +1,55 @@
+id: p10_ax_session_compression
+kind: axiom
+pillar: P10
+title: 'Axiom: Session Compression (Dual-ID Pattern)'
+version: 1.0.0
+created: 2026-03-24
+updated: 2026-03-24
+author: builder_agent
+quality: 9.0
+tags:
+- axiom
+- compression
+- session
+- dual-id
+- stop
+tldr: 'Compression fires exactly once at Stop hook. Dual-ID pattern: content_session_id (stable, for DB) vs memory_session_id
+  (lazy, for SDK resume).'
+max_bytes: 3072
+density_score: 0.91
+source: organization-core/records/core/memory/hooks/ (Stop hook compression)
+linked_artifacts:
+  template: tpl_axiom_session_compression
+  related: p10_ax_lifecycle_hooks
+statement: '> Compression fires exactly once per session at the Stop hook. It produces a summary from accumulated observations.
+  Original observations are retained for citation; the summary is the primary retrieval artifact.'
+rule: "Stop hook fires\n  → Check compression_status for content_session_id\n  → If \"pending\":\n      → Fetch all observations\
+  \ for content_session_id\n      → Generate summary via LLM (single call)\n      → Store summary linked to content_session_id\n\
+  \      → Set compression_status = \"done\"\n  → If \"done\": no-op (idempotent)"
+dual_session_ids: '| ID | Lifecycle | Purpose |
+
+  |----|-----------|---------|
+
+  | `content_session_id` | Stable — assigned at session creation | ALL database operations (observations, summaries, lookups)
+  |
+
+  | `memory_session_id` | Lazy-captured — may be NULL initially | SDK session resume only (e.g., Claude API `session_id`)
+  |'
+invariants:
+- 'Once per session: Stop hook triggers compression exactly once. Re-entry is idempotent via `compression_status` check'
+- 'Dual-ID separation: NEVER use `memory_session_id` for DB queries — it may be NULL or change'
+- 'NULL check before resume: If `memory_session_id` is NULL, session cannot be resumed via SDK — create new session'
+- 'Retain originals: Compression produces summary but does NOT delete raw observations (needed for citation and audit)'
+- 'Single LLM call: Summary generated in one pass, not incremental — controls cost'
+violations_and_costs: '| Violation | Cost |
+
+  |-----------|------|
+
+  | Compress at PostToolUse instead of Stop | N compressions instead of 1 — token waste proportional to tool count |
+
+  | Use memory_session_id for DB queries | NULL pointer errors, orphaned records, broken lookups |
+
+  | Delete raw observations after compression | Loss of citation trail, audit failure, irreversible |
+
+  | Skip compression_status check | Duplicate summaries on Stop re-entry (crash recovery) |'
+trigger: 'Auto-applies to: Stop hook implementation. Compression is the final memory operation before session teardown.'

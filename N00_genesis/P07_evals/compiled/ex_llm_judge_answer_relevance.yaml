@@ -1,0 +1,89 @@
+id: p07_judge_answer_relevance
+kind: llm_judge
+pillar: P07
+name: Answer Relevance Judge
+description: LLM-as-judge evaluator for RAG answer relevance, completeness, and citation accuracy
+judge_model: claude-sonnet-4-6
+criteria:
+- relevance
+- completeness
+- citation_accuracy
+scale: 1-5
+few_shot: 3
+version: 1.0.0
+created: 2026-03-29
+author: builder_agent
+quality: 9.0
+tags:
+- llm-judge
+- answer-relevance
+- rag
+- evaluation
+- citation
+purpose: Evaluates RAG-generated answers using Claude Sonnet as judge. Scores three orthogonal criteria on a 1-5 scale with
+  calibrated few-shot examples to reduce variance.
+judge_configuration: '| Parameter | Value | Rationale |
+
+  |-----------|-------|-----------|
+
+  | Model | claude-sonnet-4-6 | Cost-effective, consistent scoring |
+
+  | Temperature | 0.0 | Deterministic judgments |
+
+  | Max tokens | 512 | Structured output only |
+
+  | Criteria | 3 (relevance, completeness, citation) | Orthogonal dimensions |
+
+  | Scale | 1-5 integer | Granular enough, not noisy |
+
+  | Few-shot | 3 per criterion | Calibration anchors |'
+criteria_definitions: ''
+relevance_1_5: 'Does the answer directly address the question asked?
+
+  - 5: Precisely answers the question, no tangential content
+
+  - 3: Partially relevant, includes some off-topic material
+
+  - 1: Answer is about a different topic entirely'
+completeness_1_5: 'Does the answer cover all aspects of the question?
+
+  - 5: All sub-questions answered, no gaps
+
+  - 3: Main point covered, secondary aspects missing
+
+  - 1: Only superficially touches the topic'
+citation_accuracy_1_5: 'Are claims properly attributed to retrieved sources?
+
+  - 5: Every factual claim has a correct source citation
+
+  - 3: Some citations present but gaps or misattributions exist
+
+  - 1: No citations or all citations are incorrect'
+few_shot_calibration_examples: ''
+example_1_high_score_5_5_5: "question: \"What is the default rotation policy for API keys in organization?\"\ncontext: \"\
+  KC_CONFIG_003: API keys rotate every 90 days via Vault. AES-256 encryption at rest. Audit log enabled.\"\nanswer: \"The\
+  \ default rotation policy for API keys in organization is 90 days, managed through Vault with AES-256 encryption at rest\
+  \ and audit logging enabled [KC_CONFIG_003].\"\nscores:\n  relevance: 5       # Directly answers the question\n  completeness:\
+  \ 5    # Covers rotation, encryption, audit\n  citation_accuracy: 5  # Correct source attribution"
+example_2_medium_score_3_2_3: "question: \"How does BM25 handle synonym matching?\"\ncontext: \"KC_BM25_001: BM25 is keyword-based,\
+  \ operates on exact token matches. Does not understand synonyms.\"\nanswer: \"BM25 is a search algorithm that ranks documents\
+  \ by relevance. It uses TF-IDF scoring and works well for keyword searches.\"\nscores:\n  relevance: 3       # Related to\
+  \ BM25 but doesn't answer synonym question\n  completeness: 2    # Missing the key point: BM25 does NOT handle synonyms\n\
+  \  citation_accuracy: 3  # No citation but no false attribution either"
+example_3_low_score_1_1_1: "question: \"What are the rate limits for Anthropic Tier 2?\"\ncontext: \"KC_RATELIMIT_002: Tier\
+  \ 2 allows 1000 RPM, 80K TPM, $50/day budget.\"\nanswer: \"To deploy on Railway, use `railway up` after configuring your\
+  \ service. Make sure to set environment variables first.\"\nscores:\n  relevance: 1       # Completely off-topic (deployment\
+  \ vs rate limits)\n  completeness: 1    # Answers a different question entirely\n  citation_accuracy: 1  # No relevant citations"
+judge_prompt_template: "You are an evaluation judge. Score the following answer on three criteria.\n\nQuestion: {{question}}\n\
+  Retrieved Context: {{context}}\nGenerated Answer: {{answer}}\n\nScore each criterion 1-5:\n- relevance: Does the answer\
+  \ address the question?\n- completeness: Are all aspects covered?\n- citation_accuracy: Are sources correctly cited?\n\n\
+  Respond in YAML only:\nrelevance: <1-5>\ncompleteness: <1-5>\ncitation_accuracy: <1-5>\nreasoning: \"<1 sentence>\"\n\n\
+  ## Execution\n\nimport anthropic\n\nclient = anthropic.Anthropic()\n\ndef judge_answer(question: str, context: str, answer:\
+  \ str) -> dict:\n    response = client.messages.create(\n        model=\"claude-sonnet-4-6\",\n        max_tokens=512,\n\
+  \        temperature=0.0,\n        messages=[{\n            \"role\": \"user\",\n            \"content\": JUDGE_PROMPT.format(\n\
+  \                question=question, context=context, answer=answer\n            )\n        }]\n    )\n    return yaml.safe_load(response.content[0].text)\n\
+  \n## Pass/Fail Thresholds\n\n| Criterion | Pass | Warn | Fail |\n|-----------|------|------|------|\n| Relevance | >= 4\
+  \ | 3 | <= 2 |\n| Completeness | >= 4 | 3 | <= 2 |\n| Citation | >= 3 | 2 | <= 1 |\n| Composite | >= 3.7 avg | 3.0-3.6 |\
+  \ < 3.0 |\n\n## Anti-Patterns\n- Using opus as judge (expensive, no accuracy gain for scoring)\n- Temperature > 0 (introduces\
+  \ scoring variance)\n- Judging without few-shot calibration (scores drift across runs)\n- Single composite score instead\
+  \ of per-criterion (hides weaknesses)"

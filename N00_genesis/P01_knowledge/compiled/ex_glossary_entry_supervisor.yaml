@@ -1,0 +1,68 @@
+id: p01_gl_agent_group
+kind: glossary_entry
+pillar: P01
+version: 1.0.0
+title: Glossary — Agent Node
+term: agent_group
+definition: Unidade autonoma de execucao no sistema CEX. Cada agent_group tem dominio fixo (Research, Build, Marketing), modelo
+  LLM dedicado (opus ou sonnet), e MCPs exclusivos. O orchestrator (N07) coordena; agent_groups executam.
+synonyms:
+- worker
+- executor
+- specialist
+tags:
+- glossary
+- agent
+- node
+- orchestration
+tldr: An agent_group is an autonomous execution unit in the CEX system. Each has a fixed domain, dedicated LLM model, and
+  exclusive MCP tools.
+quality: 9.0
+updated: '2026-04-07'
+domain: knowledge management
+author: n04_knowledge
+created: '2026-04-07'
+density_score: 0.98
+usage:
+- 'Context: Aparece em N07 orchestration, dispatch rules, spawn configs'
+- 'Example: "Spawnar agent_group builder_agent para executar 8F pipeline"'
+- 'Avoid confusion with: `sub-agent` — um sub-agent é uma definição (.md); um agent_group é a execução viva'
+relationships: '| Relation | Term | Notes |
+
+  |----------|------|-------|
+
+  | parent | nucleus | Agent nodes pertencem a um nucleus (N01-N07) |
+
+  | sibling | builder | Builders são agent_groups especializados em construção |
+
+  | child | task | Cada agent_group executa uma ou mais tasks |'
+domain_scope:
+- 'Pillars: P02 (model), P03 (prompt), P12 (orchestration)'
+- 'Kinds: agent, spawn_config, dispatch_rule'
+- 'Frequency: high — termo usado em todo o sistema de orquestração'
+canonical_source:
+- 'Reference: `.claude/rules/n07-orchestrator.md`'
+- 'CEX adoption date: 2026-01-15'
+cross_references:
+- 'Pillar: P01 (Knowledge)'
+- 'Kind: `glossary entry`'
+- 'Artifact ID: `p01_gl_agent_group`'
+- 'Tags: [glossary, agent, node, orchestration]'
+integration_points: '| Component | Role |
+
+  |-----------|------|
+
+  | Pillar P01 | Knowledge domain |
+
+  | Kind `glossary entry` | Artifact type |
+
+  | Pipeline | 8F (F1→F8) |'
+artifact_metadata: 'kind: glossary_entry
+
+  pillar: P01
+
+  pipeline: 8F
+
+  scoring: hybrid_3_layer
+
+  compilation: cex_compile'

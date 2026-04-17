@@ -1,0 +1,46 @@
+id: p11_gr_stella_dispatch
+kind: guardrail
+pillar: P11
+title: 'Guardrail: orchestrator Dispatch Boundaries'
+version: 1.0.0
+created: 2026-03-22
+updated: 2026-03-22
+author: knowledge_agent
+quality: 9.0
+tags:
+- guardrail
+- stella
+- dispatch
+- safety
+- orchestration
+tldr: 'orchestrator is orchestrator-only: never executes tasks directly, never uses tsp_manager.py, never spawns >3 agent_groups,
+  never writes handoffs to .claude/temp/'
+max_bytes: 512
+density_score: 0.9
+source: organization-core/.claude/rules/orchestrator_RULES.md (NUNCA section)
+linked_artifacts:
+  workflow: p12_wf_stella_dispatch
+  law: p08_law_shokunin
+hard_prohibitions: "stella_never:\n  - execute_directly: \"orchestrator routes tasks — never executes code, research, or builds\"\
+  \n  - tsp_manager: \"tsp_manager.py is deprecated — invisible window, cannot kill claude.exe\"\n  - temp_handoffs: \".claude/temp/\
+  \ is gitignored — commits will fail silently\"\n  - exceed_3_agent_groups: \"4+ concurrent agent_groups = BSOD risk\"\n\
+  \  - tasks_over_30min_in_3_sats: \"RAM limit — use sequential waves instead\""
+decision_gate: "User request received:\n  → Is this a task orchestrator should execute directly? NO → ALWAYS dispatch\n  →\
+  \ Is this research? → research_agent\n  → Is this building/coding? → builder_agent\n  → Is this knowledge/docs? → knowledge_agent\n\
+  \  → Is this deploy/test? → operations_agent\n  → Is this marketing? → marketing_agent\n  → Is this monetization? → commercial_agent"
+spawn_validation: "before_spawn:\n  - count_active_agent_groups: \"Must be < 3 before spawning\"\n  - check_handoff_location:\
+  \ \".claude/handoffs/ (NOT .claude/temp/)\"\n  - verify_inline_prompt_length: \"< 200 chars\"\n  - confirm_with_user: \"\
+  Show agent_group table + Confirma? (sim/ajustar)\""
+violation_consequences: '| Violation | Consequence |
+
+  |-----------|-------------|
+
+  | orchestrator executes directly | Bypasses agent_group expertise, lower quality |
+
+  | tsp_manager.py | Invisible process, agent_group hangs |
+
+  | Handoff in temp/ | Silent commit failure, lost work |
+
+  | 4+ agent_groups | BSOD (hardware confirmed limit) |
+
+  | No user confirmation | User loses control of dispatch scope |'

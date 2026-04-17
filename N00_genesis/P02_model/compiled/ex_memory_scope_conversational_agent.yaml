@@ -1,0 +1,106 @@
+id: p02_ms_conversational_agent
+kind: memory_scope
+pillar: P02
+title: Conversational Agent Memory (Buffer + Summary + Entity)
+version: 1.0.0
+created: 2026-03-29
+updated: 2026-03-29
+author: builder_agent
+domain: agent_memory
+quality: 9.1
+tags:
+- memory-scope
+- conversational
+- buffer
+- summary
+- entity
+- redis
+- session
+- mem0
+tldr: Configuracao de memoria para agente conversacional com 3 camadas — buffer (ultimas 10 msgs), summary (compressao apos
+  10), entity (entidades extraidas) — backend Redis com TTL 3600s
+when_to_use: Agentes que mantam conversa multi-turn com usuario e precisam lembrar contexto recente + entidades mencionadas
+overview: 'Define o escopo de memoria para um agente conversacional multi-turn (ex: mentor-agent, gateway-agent). Tres camadas
+  complementares garantem que o agente lembra o contexto imediato (buffer), o resumo da conversa ate agora (summary), e entidades
+  especificas mencionadas (entity). Backend Redis garante persistencia entre requests com TTL de sessao.'
+memory_types: '| Layer | Type | Purpose | Token Budget |
+
+  |-------|------|---------|-------------|
+
+  | 1 | Buffer | Ultimas N mensagens raw | ~2000 tokens (10 msgs) |
+
+  | 2 | Summary | Compressao progressiva de msgs antigas | ~500 tokens (fixo) |
+
+  | 3 | Entity | Entidades extraidas (pessoas, produtos, datas) | ~300 tokens (top 20 entities) |'
+parameters: '| Param | Value | Rationale |
+
+  |-------|-------|-----------|
+
+  | buffer_size | 10 messages | 10 msgs = ~2000 tokens. Alem disso, custo > beneficio |
+
+  | summary_trigger | buffer > 10 msgs | Quando buffer excede 10, msgs antigas sao sumarizadas |
+
+  | summary_model | haiku | Sumarizacao e tarefa simples, haiku e suficiente e 10x mais barato |
+
+  | summary_max_tokens | 500 | Resumo compacto, nao transcript |
+
+  | entity_types | [person, product, date, price, marketplace, agent] | Tipos relevantes para e-commerce organization |
+
+  | entity_max | 20 | Top 20 entidades por recencia + frequencia |
+
+  | backend | Redis | Sub-ms latency, TTL nativo, pub/sub para multi-instance |
+
+  | redis_url | redis://localhost:6379/0 | Instancia local para dev; Railway Redis para prod |
+
+  | ttl | 3600 | 1 hora de inatividade = sessao expirada |
+
+  | scope | session | Memoria isolada por session_id, nao compartilhada entre usuarios |
+
+  | serialization | JSON | Simples, debuggavel, compativel com Redis strings |'
+architecture: "[User Message] --> [Entity Extractor] --> [Entity Store (Redis)]\n       |                                \
+  \        |\n       v                                        |\n[Buffer Memory (last 10)]                       |\n     \
+  \  |                                        |\n       |-- buffer > 10? --> [Summary Generator]  |\n       |            \
+  \             |               |\n       |                    [Summary Store]      |\n       |                         |\
+  \               |\n       v                         v               v\n[Context Assembly: buffer + summary + entities]\n\
+  \       |\n       v\n[LLM Call with assembled context]"
+implementation: "from langchain.memory import ConversationBufferWindowMemory, ConversationSummaryMemory\nfrom langchain_community.chat_message_histories\
+  \ import RedisChatMessageHistory\nfrom langchain_anthropic import ChatAnthropic\n\n# Redis-backed message history\nhistory\
+  \ = RedisChatMessageHistory(\n    session_id=\"user_abc_session_001\",\n    url=\"redis://localhost:6379/0\",\n    ttl=3600,\n\
+  )\n\n# Layer 1: Buffer (last 10)\nbuffer_memory = ConversationBufferWindowMemory(\n    k=10,\n    chat_memory=history,\n\
+  \    return_messages=True,\n    memory_key=\"buffer_context\",\n)\n\n# Layer 2: Summary (compressed history)\nsummary_memory\
+  \ = ConversationSummaryMemory(\n    llm=ChatAnthropic(model=\"claude-haiku-4-5-20251001\"),\n    chat_memory=history,\n\
+  \    return_messages=False,\n    memory_key=\"summary_context\",\n    max_token_limit=500,\n)\n\n# Layer 3: Entity (extracted\
+  \ entities)\nentity_memory = ConversationEntityMemory(\n    llm=ChatAnthropic(model=\"claude-haiku-4-5-20251001\"),\n  \
+  \  chat_memory=history,\n    memory_key=\"entity_context\",\n    entity_store=RedisEntityStore(\n        session_id=\"user_abc_session_001\"\
+  ,\n        url=\"redis://localhost:6379/0\",\n        ttl=3600,\n    ),\n)"
+context_assembly_order: "def assemble_context(buffer, summary, entities):\n    \"\"\"Ordem importa: summary primeiro (background),\
+  \ entities (referencia), buffer por ultimo (recente).\"\"\"\n    return f\"\"\"## Conversation Summary\n{summary}\n\n##\
+  \ Known Entities\n{format_entities(entities)}\n\n## Recent Messages\n{format_buffer(buffer)}\"\"\""
+redis_key_schema: 'organization:memory:{session_id}:messages     -> List<JSON>   (buffer)
+
+  organization:memory:{session_id}:summary      -> String       (summary text)
+
+  organization:memory:{session_id}:entities     -> Hash          (entity_name -> description)
+
+  organization:memory:{session_id}:metadata     -> Hash          (created_at, last_active, msg_count)'
+lifecycle: '| Event | Action |
+
+  |-------|--------|
+
+  | Session start | Create Redis keys, initialize empty buffer |
+
+  | Message received | Append to buffer, extract entities, update last_active |
+
+  | Buffer > 10 | Summarize oldest 5 msgs, remove from buffer, append to summary |
+
+  | TTL expired (1h idle) | Redis auto-deletes all session keys |
+
+  | Explicit logout | Flush all keys for session_id immediately |'
+when_not_to_use:
+- 'Stateless single-turn agents (ex: formatter, parser) — sem necessidade de memoria'
+- Long-term cross-session memory — usar Mem0 ou organization learning memory
+- Shared memory between agents — usar session_state (P10) com pub/sub
+related:
+- '`ex_agent_gateway.md` — Gateway agent que usa este memory scope'
+- '`ex_boot_config_edison_claude.md` — Boot config (memoria e efemera por sessao de agent_group)'
+- '`records/core/learning/memory/` — organization long-term memory (diferente de session memory)'

@@ -1,0 +1,58 @@
+id: p04_ex_supabase_data_layer_saas
+kind: example
+pillar: P04
+title: Example — Supabase Data Layer for SaaS B2B
+version: 1.0.0
+created: 2026-03-31
+updated: 2026-03-31
+author: n04_knowledge
+domain: data_platform
+quality: 9.1
+tags:
+- example
+- supabase
+- data-layer
+- saas
+- multi-tenant
+- config
+tldr: 'SaaS B2B config: users, orgs, subscriptions, feature flags, multi-tenant isolamento por org_id, SSO/MFA para enterprise'
+density_score: 0.9
+vertical_profile: '| Aspect | Value |
+
+  |--------|-------|
+
+  | Vertical | saas |
+
+  | Tier | team |
+
+  | Key tables | organizations, memberships, subscriptions, feature_flags, audit_log |
+
+  | Extensions | pg_cron (billing sync), pg_net (webhooks), pgjwt |
+
+  | Storage | documents (private per org) |
+
+  | Realtime | feature flag updates, audit events |
+
+  | Vectors | Not needed (no semantic search) |'
+config: "identidade:\n  vertical: saas\n  regiao: us-east-1\n  tier: team\n\ndatabase:\n  schemas: [public, billing, audit]\n\
+  \  extensions:\n    obrigatorias: [pgcrypto, pg_graphql, pgjwt]\n    opcionais: [pg_cron, pg_net, wrappers]\n  tables:\n\
+  \    - name: organizations\n      columns: [id UUID PK, name TEXT, slug TEXT UNIQUE, plan TEXT DEFAULT 'free', stripe_customer_id\
+  \ TEXT]\n      rls: org_admin\n      indexes: [slug, stripe_customer_id]\n    - name: memberships\n      columns: [user_id\
+  \ UUID FK auth.users, org_id UUID FK organizations, role TEXT CHECK owner/admin/member/viewer]\n      rls: org_member\n\
+  \      indexes: [user_id, org_id]\n    - name: subscriptions\n      schema: billing\n      columns: [id UUID PK, org_id\
+  \ UUID FK, plan TEXT, status TEXT, current_period_end TIMESTAMPTZ, stripe_subscription_id TEXT]\n      rls: org_admin\n\
+  \    - name: feature_flags\n      columns: [id UUID PK, org_id UUID FK, flag_name TEXT, enabled BOOLEAN, config JSONB]\n\
+  \      rls: org_member_read_admin_write\n    - name: audit_log\n      schema: audit\n      columns: [id UUID PK, org_id\
+  \ UUID FK, user_id UUID, action TEXT, resource TEXT, metadata JSONB, created_at TIMESTAMPTZ]\n      rls: org_admin\n\nauth:\n\
+  \  providers: [email, google, microsoft]\n  mfa: true\n  sso: true\n  custom_claims: [org_id, role, plan]\n  jwt_expiry:\
+  \ 1800\n\nrls:\n  multi_tenant_column: org_id\n  patterns:\n    - nome: org_member\n      policy: \"org_id IN (SELECT org_id\
+  \ FROM memberships WHERE user_id = auth.uid())\"\n      tabelas: [memberships, feature_flags]\n    - nome: org_admin\n \
+  \     policy: \"org_id IN (SELECT org_id FROM memberships WHERE user_id = auth.uid() AND role IN ('owner','admin'))\"\n\
+  \      tabelas: [organizations, subscriptions, audit_log]\n\nstorage:\n  buckets:\n    - nome: org-documents\n      publico:\
+  \ false\n      max_file_size: 52428800\n      allowed_mime_types: [application/pdf, image/png, image/jpeg, text/csv]\n\n\
+  realtime:\n  habilitado: true\n  postgres_changes:\n    - tabela: feature_flags\n      eventos: [UPDATE]\n    - tabela:\
+  \ audit_log\n      eventos: [INSERT]\n\nvectors:\n  habilitado: false\n\nedge_functions:\n  functions:\n    - nome: stripe-webhook\n\
+  \      trigger: http\n      secrets: [STRIPE_KEY, STRIPE_WEBHOOK_SECRET]\n    - nome: sync-subscriptions\n      trigger:\
+  \ cron\n      schedule: \"0 /6   \"\n    - nome: onboard-org\n      trigger: http\n      secrets: [SENDGRID_KEY]\n  deploy_method:\
+  \ github_actions\n\nbudget:\n  alertas:\n    - metrica: db_size\n      threshold: 75\n      acao: slack\n    - metrica:\
+  \ auth_mau\n      threshold: 90\n      acao: email"

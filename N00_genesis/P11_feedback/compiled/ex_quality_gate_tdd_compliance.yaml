@@ -1,0 +1,108 @@
+id: p11_qg_tdd_compliance
+kind: quality_gate
+pillar: P11
+title: 'Gate: TDD Compliance'
+version: 1.0.0
+created: 2026-03-24
+updated: 2026-03-24
+author: builder_agent
+domain: build
+quality: 9.1
+tags:
+- tdd
+- testing
+- quality-gate
+- red-green-refactor
+- build-discipline
+tldr: 'Enforces test-first development: RED verified before code, YAGNI compliance, no RED commits merged'
+when_to_use: Before merging any code commit in builder_agent or operations_agent build pipelines
+keywords:
+- tdd-compliance
+- test-first
+- red-green-refactor
+- commit-hygiene
+long_tails:
+- como validar se codigo segue TDD corretamente
+- quality gate para garantir test-first development
+axioms:
+- No code exists without a test that drove its creation
+- Every commit on the branch must have all tests passing
+density_score: 0.91
+definition: '| Property | Value |
+
+  |----------|-------|
+
+  | Metric | tdd_compliance_score |
+
+  | Threshold | 1.0 (all 7 checks pass) |
+
+  | Operator | == |
+
+  | Scope | builder_agent and operations_agent build agent_groups |
+
+  | Trigger | Pre-merge on any branch with code changes |'
+actions: '| Result | Action | Escalation |
+
+  |--------|--------|------------|
+
+  | Pass (7/7) | Approve merge, proceed to deploy pipeline | None |
+
+  | Partial (5-6/7) | Block merge, return specific failing checks | Author fixes within same PR |
+
+  | Fail (<5/7) | Block merge, flag for process review | Notify agent_group owner + orchestrator |'
+checklist:
+- '[ ] C1: Test written BEFORE implementation (git diff timeline: test file timestamp < impl file)'
+- '[ ] C2: RED phase verified — test runs and FAILS before implementation exists (captured output)'
+- '[ ] C3: GREEN phase — minimal code to pass test (no speculative features added)'
+- '[ ] C4: REFACTOR phase — cleanup without behavior change (test suite still green)'
+- '[ ] C5: Commit state GREEN only — every commit has all tests passing (no broken windows)'
+- '[ ] C6: YAGNI — no code exists without a corresponding test driving it'
+- '[ ] C7: Tests assert behavior (WHAT), not implementation (HOW) — no private method testing'
+scoring: '| Dimension | Weight | Evidence Required |
+
+  |-----------|--------|-------------------|
+
+  | Test-first order | 30% | `git log --diff-filter=A` shows test file added before impl file |
+
+  | RED phase evidence | 25% | CI log or local output showing test failure before fix |
+
+  | YAGNI compliance | 20% | No untested code paths (coverage delta = 0 for new code) |
+
+  | Behavior focus | 15% | Tests assert return values/side effects, not mock call counts |
+
+  | Commit hygiene | 10% | `git log --oneline` + `pytest` on each commit = all green |
+
+
+  Formula: `score = (test_first  0.3) + (red_phase  0.25) + (yagni  0.2) + (behavior  0.15) + (commit_hygiene * 0.1)`
+
+
+  Each dimension: 0 (fail) or 10 (pass). Score >= 7.0 to merge.'
+anti_patterns_instant_fail:
+- Writing code first, backfilling tests afterward ("test-after" is not TDD)
+- Skipping RED phase entirely (test never seen failing = may be vacuously true)
+- Testing implementation details (mocking internals, asserting private state)
+- Committing with failing tests ("I'll fix it next commit" = broken window)
+- Gold-plating in GREEN phase (adding features no test currently requires)
+bypass_protocol:
+- 'Conditions: Hotfix patches with P0 production incident (max 24h bypass window)'
+- 'Approver: orchestrator orchestrator or project owner'
+- 'Audit: Bypass logged with incident ID + follow-up TDD ticket auto-created'
+- 'Limit: Max 2 bypasses per sprint; 3rd triggers mandatory process review'
+verification_commands: '# Check test-first order via git
+
+  git log --diff-filter=A --name-only --pretty=format:"%H %ai" -- "tests/" "src/"
+
+
+  # Run full suite to verify GREEN state
+
+  pytest --tb=short -q
+
+
+  # Coverage delta for new code only
+
+  pytest --cov=src --cov-report=term-missing --cov-fail-under=80
+
+
+  ---
+
+  Quality Gate v1.0 | builder_agent Build Domain | 2026-03-24'

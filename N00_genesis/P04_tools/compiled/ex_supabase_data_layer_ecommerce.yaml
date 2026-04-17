@@ -1,0 +1,57 @@
+id: p04_ex_supabase_data_layer_ecommerce
+kind: example
+pillar: P04
+title: Example — Supabase Data Layer for E-commerce
+version: 1.0.0
+created: 2026-03-31
+updated: 2026-03-31
+author: n04_knowledge
+domain: data_platform
+quality: 9.1
+tags:
+- example
+- supabase
+- data-layer
+- ecommerce
+- config
+tldr: 'E-commerce config: catalogo, pedidos, reviews, busca semantica, media de produtos, status real-time'
+density_score: 0.9
+vertical_profile: '| Aspect | Value |
+
+  |--------|-------|
+
+  | Vertical | ecommerce |
+
+  | Tier | pro |
+
+  | Key tables | products, orders, reviews, carts, categories |
+
+  | Extensions | pgvector (search), pg_cron (cleanup), pg_net (webhooks) |
+
+  | Storage | product-images (public), invoices (private) |
+
+  | Realtime | order status updates |
+
+  | Vectors | product semantic search |'
+config: "identidade:\n  vertical: ecommerce\n  regiao: sa-east-1\n  tier: pro\n\ndatabase:\n  schemas: [public, internal]\n\
+  \  extensions:\n    obrigatorias: [pgcrypto, pg_graphql]\n    opcionais: [pgvector, pg_cron, pg_net]\n  tables:\n    - name:\
+  \ categories\n      columns: [id UUID PK, org_id UUID FK, name TEXT, slug TEXT UNIQUE, parent_id UUID FK SELF]\n      rls:\
+  \ org_member\n    - name: products\n      columns: [id UUID PK, org_id UUID FK, category_id UUID FK, name TEXT, description\
+  \ TEXT, price NUMERIC(10,2), stock INT, status TEXT, embedding VECTOR(1536)]\n      rls: org_member\n      indexes: [org_id,\
+  \ category_id, status, \"embedding HNSW vector_cosine_ops\"]\n    - name: orders\n      columns: [id UUID PK, user_id UUID\
+  \ FK, org_id UUID FK, total NUMERIC(10,2), status TEXT DEFAULT 'pending', items JSONB]\n      rls: owner\n      indexes:\
+  \ [user_id, org_id, status, created_at]\n    - name: reviews\n      columns: [id UUID PK, product_id UUID FK, user_id UUID\
+  \ FK, rating INT CHECK 1-5, content TEXT]\n      rls: public_read_owner_write\n    - name: carts\n      columns: [id UUID\
+  \ PK, user_id UUID FK, items JSONB, expires_at TIMESTAMPTZ]\n      rls: owner\n\nauth:\n  providers: [email, google, apple]\n\
+  \  mfa: false\n  custom_claims: [org_id, role]\n\nrls:\n  multi_tenant_column: org_id\n  patterns:\n    - nome: org_member\n\
+  \      policy: \"org_id = (auth.jwt()->'app_metadata'->>'org_id')::uuid\"\n      tabelas: [categories, products]\n    -\
+  \ nome: owner\n      policy: \"user_id = auth.uid()\"\n      tabelas: [orders, carts]\n    - nome: public_read_owner_write\n\
+  \      policy: \"true FOR SELECT; user_id = auth.uid() FOR INSERT/UPDATE/DELETE\"\n      tabelas: [reviews]\n\nstorage:\n\
+  \  buckets:\n    - nome: product-images\n      publico: true\n      max_file_size: 10485760\n      allowed_mime_types: [image/jpeg,\
+  \ image/png, image/webp]\n      transform: true\n    - nome: invoices\n      publico: false\n      max_file_size: 5242880\n\
+  \      allowed_mime_types: [application/pdf]\n\nrealtime:\n  habilitado: true\n  postgres_changes:\n    - tabela: orders\n\
+  \      eventos: [UPDATE]\n      filter: \"status=eq.shipped\"\n\nvectors:\n  habilitado: true\n  embedding_model: text-embedding-3-small\n\
+  \  dimensions: 1536\n  distance_function: cosine\n  search_function: match_products\n\nedge_functions:\n  functions:\n \
+  \   - nome: process-payment\n      trigger: http\n      secrets: [STRIPE_KEY, WEBHOOK_SECRET]\n    - nome: cleanup-expired-carts\n\
+  \      trigger: cron\n      schedule: \"0 3   *\"\n  deploy_method: cli\n\nbudget:\n  alertas:\n    - metrica: db_size\n\
+  \      threshold: 75\n      acao: email\n    - metrica: bandwidth\n      threshold: 90\n      acao: email"

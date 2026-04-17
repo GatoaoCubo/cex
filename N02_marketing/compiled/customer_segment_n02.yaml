@@ -1,0 +1,78 @@
+id: customer_segment_n02
+kind: customer_segment
+pillar: P02
+nucleus: n02
+title: ICP-Typed Audience Segment Definitions
+version: 1.0.0
+quality: null
+tags:
+- customer_segment
+- ICP
+- audience_segments
+- message_market_fit
+- P02
+- n02_marketing
+domain: audience-intelligence
+status: active
+purpose: Generic copy performs generically. Segment-aware copy converts. These ICP-typed segment definitions are the lens
+  through which N02 views every brief -- not "who is this for?" but "which segment has the highest message-market fit for
+  this copy approach?"
+segment_taxonomy: ''
+segment_structure: "segment:\n  id: string\n  label: string                        # short human label\n  icp_descriptor:\
+  \ string               # detailed ICP profile\n  demographics:\n    age_range: [min, max]\n    role_seniority: c_suite|vp|director|manager|individual_contributor\n\
+  \    company_size: startup|smb|mid_market|enterprise\n    industry: array[string]\n  psychographics:\n    primary_motivation:\
+  \ string         # jobs-to-be-done framing\n    primary_fear: string               # loss aversion anchor\n    aspirational_identity:\
+  \ string      # who they want to become\n    content_consumption: string        # how they consume content\n  platform_behavior:\n\
+  \    primary_platforms: array[string]\n    peak_engagement_hours: array[string]\n    content_format_preference: string\n\
+  \  message_market_fit:\n    hook_type: pain|curiosity|authority|social_proof|data\n    preferred_tone: string\n    cta_style:\
+  \ string\n    urgency_response: low|medium|high\n  funnel_entry:\n    typical_stage: TOFU|MOFU|BOFU\n    avg_sales_cycle_days:\
+  \ integer\n    nurture_touches_avg: integer"
+core_icp_segments: ''
+seg_01_founder_ceo_startup_1_50_employees: "id: SEG_01\nlabel: \"Bootstrapped Founder\"\nicp_descriptor: \"Solo founder or\
+  \ early-stage CEO, 28-42, wearing all hats\"\ndemographics:\n  age_range: [26, 45]\n  role_seniority: c_suite\n  company_size:\
+  \ startup\n  industry: [saas, consulting, ecommerce, creator_economy]\npsychographics:\n  primary_motivation: \"Build something\
+  \ that lasts without burning out\"\n  primary_fear: \"Wasting time on the wrong thing while competitors move faster\"\n\
+  \  aspirational_identity: \"Respected founder who built an efficient, profitable company\"\n  content_consumption: \"Podcasts\
+  \ at 1.5x, Twitter/X threads, LinkedIn Sunday evenings\"\nplatform_behavior:\n  primary_platforms: [linkedin, x]\n  peak_engagement_hours:\
+  \ [\"06:30-08:00\", \"20:00-22:00\"]\n  content_format_preference: \"Thread, short-form insight, data-backed post\"\nmessage_market_fit:\n\
+  \  hook_type: pain\n  preferred_tone: conversational\n  cta_style: \"low-friction -- 'See how' beats 'Buy now'\"\n  urgency_response:\
+  \ medium\nfunnel_entry:\n  typical_stage: TOFU\n  avg_sales_cycle_days: 14\n  nurture_touches_avg: 5"
+seg_02_marketing_director_vp_mid_market_50_500_employees: "id: SEG_02\nlabel: \"Marketing Director, Mid-Market\"\nicp_descriptor:\
+  \ \"Director or VP of Marketing, accountable to CEO and sales\"\ndemographics:\n  age_range: [32, 50]\n  role_seniority:\
+  \ director\n  company_size: mid_market\n  industry: [b2b_saas, professional_services, fintech, healthtech]\npsychographics:\n\
+  \  primary_motivation: \"Prove marketing drives revenue, not just brand metrics\"\n  primary_fear: \"Budget cut when CMO\
+  \ asks for ROI data and I don't have it\"\n  aspirational_identity: \"Strategic CMO who built a growth machine\"\n  content_consumption:\
+  \ \"LinkedIn feed daily, industry newsletters, case studies\"\nplatform_behavior:\n  primary_platforms: [linkedin]\n  peak_engagement_hours:\
+  \ [\"07:30-09:00\", \"12:00-13:00\", \"17:00-18:30\"]\n  content_format_preference: \"Long-form post, carousel, case study,\
+  \ webinar\"\nmessage_market_fit:\n  hook_type: data\n  preferred_tone: professional\n  cta_style: \"Resource-first -- 'Get\
+  \ the playbook', 'Download the report'\"\n  urgency_response: low\nfunnel_entry:\n  typical_stage: MOFU\n  avg_sales_cycle_days:\
+  \ 45\n  nurture_touches_avg: 12"
+seg_03_content_creator_personal_brand_solopreneur: "id: SEG_03\nlabel: \"Creator / Personal Brand\"\nicp_descriptor: \"Solopreneur\
+  \ monetizing expertise via content, coaching, or courses\"\ndemographics:\n  age_range: [24, 40]\n  role_seniority: individual_contributor\n\
+  \  company_size: startup\n  industry: [creator_economy, education, consulting, coaching]\npsychographics:\n  primary_motivation:\
+  \ \"Turn knowledge into income without a corporate job\"\n  primary_fear: \"Invisible in a crowded feed; followers who don't\
+  \ convert\"\n  aspirational_identity: \"Recognized authority in niche with a paid community\"\n  content_consumption: \"\
+  Instagram Reels, TikTok, YouTube long-form\"\nplatform_behavior:\n  primary_platforms: [instagram, tiktok, youtube]\n  peak_engagement_hours:\
+  \ [\"09:00-11:00\", \"19:00-21:00\"]\n  content_format_preference: \"Reel, carousel, educational series\"\nmessage_market_fit:\n\
+  \  hook_type: social_proof\n  preferred_tone: conversational\n  cta_style: \"Social -- 'Join 2,000 creators who...', 'See\
+  \ what others built'\"\n  urgency_response: high\nfunnel_entry:\n  typical_stage: TOFU\n  avg_sales_cycle_days: 7\n  nurture_touches_avg:\
+  \ 3"
+seg_04_enterprise_buyer_large_corp_500_employees: "id: SEG_04\nlabel: \"Enterprise Decision Maker\"\nicp_descriptor: \"Senior\
+  \ leader or economic buyer in enterprise, risk-averse\"\ndemographics:\n  age_range: [38, 60]\n  role_seniority: vp\n  company_size:\
+  \ enterprise\n  industry: [finance, healthcare, manufacturing, enterprise_tech]\npsychographics:\n  primary_motivation:\
+  \ \"Scale without introducing new risk; protect existing systems\"\n  primary_fear: \"Failed implementation that puts career\
+  \ on the line\"\n  aspirational_identity: \"Executive who makes the smart, safe, ROI-proven call\"\n  content_consumption:\
+  \ \"LinkedIn, Gartner, Harvard Business Review, analyst reports\"\nplatform_behavior:\n  primary_platforms: [linkedin, email]\n\
+  \  peak_engagement_hours: [\"08:00-09:30\", \"12:00-13:00\"]\n  content_format_preference: \"Long-form article, ROI report,\
+  \ executive brief\"\nmessage_market_fit:\n  hook_type: authority\n  preferred_tone: authoritative\n  cta_style: \"High-trust\
+  \ -- 'Request a demo', 'Read the Gartner report'\"\n  urgency_response: low\nfunnel_entry:\n  typical_stage: BOFU\n  avg_sales_cycle_days:\
+  \ 180\n  nurture_touches_avg: 30"
+segment_selection_logic: "auto_segment_from_brief:\n  if company_size == startup AND role_seniority == c_suite:\n    primary_segment:\
+  \ SEG_01\n  if company_size in [mid_market] AND role_seniority in [director, vp]:\n    primary_segment: SEG_02\n  if industry\
+  \ in [creator_economy, education, coaching]:\n    primary_segment: SEG_03\n  if company_size == enterprise AND role_seniority\
+  \ in [vp, c_suite]:\n    primary_segment: SEG_04\n  default:\n    action: request explicit ICP from brief; GDP if insufficient"
+integration:
+- 'Read by: `action_prompt_n02_copy.md` (ICP injection)'
+- 'Read by: `workflow_campaign_pipeline.md` (F2 STRATEGIZE)'
+- 'Referenced by: `cohort_analysis_n02.md` (segment performance tracking)'
+- 'Updated by: `self_improvement_loop_n02.md` (segment performance learnings)'

@@ -1,0 +1,148 @@
+id: p03_pt_action_prompt
+kind: prompt_template
+pillar: P03
+title: Template Universal de Action Prompt
+version: 1.0.0
+created: 2026-03-22
+updated: 2026-03-22
+author: builder_agent
+domain: meta
+quality: 9.1
+tags:
+- prompt
+- template
+- action
+- universal
+- meta
+tldr: Template reutilizavel para criar action prompts com variaveis tipadas
+when_to_use: Quando precisa criar prompt de acao para qualquer agente
+keywords:
+- action-prompt
+- prompt-template
+- prompt-engineering
+long_tails:
+- como criar prompt de acao para agente AI
+- template de prompt reutilizavel com variaveis
+axioms:
+- Todo prompt precisa de PURPOSE, INPUT, EXECUTION, OUTPUT, VALIDATION
+density_score: 0.95
+variables: '| Var | Tipo | Descricao | Exemplo |
+
+  |-----|------|-----------|---------|
+
+  | {{PROMPT_NAME}} | string | Nome do prompt | Analise de Mercado |
+
+  | {{PURPOSE}} | string | O que faz (1 linha) | Analisa concorrentes |
+
+  | {{INPUT_FIELDS}} | list | Campos de entrada | [url, domain, depth] |
+
+  | {{STEPS}} | list | Passos de execucao | [extrair, analisar, reportar] |
+
+  | {{OUTPUT_FORMAT}} | string | Formato de saida | markdown table |
+
+  | {{VALIDATIONS}} | list | Checklist final | [dados completos, score >= 8] |'
+template_body: '# {{PROMPT_NAME}}
+
+
+  ## PURPOSE
+
+  {{PURPOSE}}
+
+
+  ## INPUT
+
+  You will receive:
+
+  {{#each INPUT_FIELDS}}
+
+  - {{name}} ({{type}}): {{description}}. Example: `{{example}}`
+
+  {{/each}}
+
+
+  ## EXECUTION
+
+
+  Follow these steps IN ORDER. Each step produces an intermediate output.
+
+
+  {{#each STEPS}}
+
+  ### Step {{@index}}: {{title}}
+
+  - Action: {{action}}
+
+  - Output: {{output_description}}
+
+  - Constraint: {{constraint}}
+
+  {{/each}}
+
+
+  ## OUTPUT FORMAT
+
+  Return results as: {{OUTPUT_FORMAT}}
+
+
+  Structure:
+
+  - summary: 2-3 sentence overview of findings
+
+  - data: structured results from execution steps
+
+  - confidence: 0.0-1.0 score for result reliability
+
+  - sources: list of references used
+
+
+  ## VALIDATION
+
+  Before returning, verify ALL of these:
+
+  {{#each VALIDATIONS}}
+
+  - [ ] {{this}}
+
+  {{/each}}
+
+
+  If ANY validation fails, retry the failed step before returning.'
+example_1_market_analysis_action_prompt: "Input:\nPROMPT_NAME: Analise de Concorrentes ML\nPURPOSE: Analisar top 5 concorrentes\
+  \ de um produto no Mercado Livre\nINPUT_FIELDS:\n  - name: product_url\n    type: string\n    description: URL do produto\
+  \ base no ML\n    example: \"https://mercadolivre.com.br/MLB-12345\"\n  - name: depth\n    type: integer\n    description:\
+  \ Numero de concorrentes a analisar\n    example: 5\nSTEPS:\n  - title: Extrair Dados Base\n    action: Scrape produto base\
+  \ via Firecrawl\n    output_description: JSON com titulo, preco, vendas, reputacao\n    constraint: Max 3 credits Firecrawl\n\
+  \  - title: Identificar Concorrentes\n    action: Buscar top N vendedores do mesmo catalogo\n    output_description: Lista\
+  \ de seller_ids com metricas\n    constraint: Apenas sellers com reputacao verde+\n  - title: Comparar e Reportar\n    action:\
+  \ Gerar tabela comparativa com gaps\n    output_description: Markdown table com ranking\n    constraint: Incluir preco,\
+  \ frete, reputacao, vendas/mes\nVALIDATIONS:\n  - Todos os 5 concorrentes tem dados completos\n  - Precos em BRL com 2 decimais\n\
+  \  - Score de confianca >= 0.8\nOUTPUT_FORMAT: markdown table + YAML summary\n\nOutput:\n## summary\nAnalisados 5 concorrentes\
+  \ para \"Fone Bluetooth TWS\". Lider: SellerX (R$89.90, 450 vendas/mes). Gap principal: frete gratis via Full.\n\n## data\n\
+  | Seller | Preco | Vendas/Mes | Reputacao | Frete | Buy Box |\n|--------|-------|------------|-----------|-------|---------|\n\
+  | SellerX | R$89.90 | 450 | Verde | Full | SIM |\n| SellerY | R$94.50 | 320 | Verde | Flex | NAO |\n| SellerZ | R$87.00\
+  \ | 280 | Amarelo | Normal | NAO |\n| SellerW | R$92.00 | 210 | Verde | Full | NAO |\n| SellerV | R$99.90 | 180 | Verde\
+  \ | Full | NAO |\n\n## confidence: 0.92\n## sources: [MLB-12345, MLB-67890, MLB-11223, MLB-44556, MLB-77889]"
+example_2_seo_keyword_action_prompt: "Input:\nPROMPT_NAME: Extracao de Keywords SEO\nPURPOSE: Extrair keywords de alto volume\
+  \ e baixa concorrencia para listing ML\nINPUT_FIELDS:\n  - name: seed_keyword\n    type: string\n    description: Palavra-chave\
+  \ semente\n    example: \"organizador de maquiagem acrilico\"\n  - name: max_keywords\n    type: integer\n    description:\
+  \ Numero maximo de keywords\n    example: 20\nSTEPS:\n  - title: Expandir Seeds\n    action: Gerar variacoes long-tail da\
+  \ seed keyword\n    output_description: Lista de 50+ keywords candidatas\n    constraint: Incluir sinonimos BR (nao PT-PT)\n\
+  \  - title: Filtrar por Volume\n    action: Estimar volume relativo via SERP analysis\n    output_description: Keywords\
+  \ rankeadas por volume estimado\n    constraint: Remover keywords com volume < 100/mes estimado\n  - title: Classificar\
+  \ Intencao\n    action: Categorizar cada keyword por intencao de busca\n    output_description: Keywords com tag transactional/informational/navigational\n\
+  \    constraint: Priorizar transactional para listings\nVALIDATIONS:\n  - Min 15 keywords no output final\n  - Cada keyword\
+  \ tem volume estimado e intencao\n  - Zero keywords em PT-PT (validar BR)\nOUTPUT_FORMAT: YAML list with metadata\n\nOutput:\n\
+  keywords:\n  - term: \"organizador de maquiagem acrilico grande\"\n    volume_est: high\n    intent: transactional\n   \
+  \ competition: low\n  - term: \"porta maquiagem acrilico com gaveta\"\n    volume_est: medium\n    intent: transactional\n\
+  \    competition: low\n  - term: \"organizador cosmeticos acrilico transparente\"\n    volume_est: medium\n    intent: transactional\n\
+  \    competition: medium\ntotal: 18\navg_competition: low\nrecommended_title_keywords: [\"organizador\", \"maquiagem\",\
+  \ \"acrilico\", \"grande\", \"gaveta\"]"
+quality_gates:
+- 'PURPOSE: max 2 linhas, especifico (nao generico)'
+- 'INPUT: cada campo com tipo e exemplo'
+- 'STEPS: numerados, cada um com output intermediario'
+- 'VALIDATION: min 3 criterios mensuraveis'
+semantic_bridge:
+- 'Also known as: PromptTemplate, ChatPromptTemplate, SystemMessage'
+- 'Keywords: prompt engineering, template variables, instruction following'
+- 'LangChain: PromptTemplate | OpenAI: System Prompt | Anthropic: System Message'

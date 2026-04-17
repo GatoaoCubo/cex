@@ -1,0 +1,72 @@
+id: ab_test_config_n02
+kind: ab_test_config
+pillar: P11
+nucleus: n02
+title: A/B Test Configuration -- Copy Variant Testing
+version: 1.0.0
+quality: null
+tags:
+- ab_test_config
+- copy_variants
+- conversion_optimization
+- P11
+- n02_marketing
+domain: performance-creative
+status: active
+purpose: Gut feelings don't scale. A/B testing turns creative intuition into data. This config governs how N02 structures,
+  deploys, and concludes copy experiments.
+test_taxonomy: '| Test Type | What Varies | Use When |
+
+  |-----------|------------|---------|
+
+  | `headline_test` | Hook, first line, subject line | CTR optimization |
+
+  | `cta_test` | CTA verb, phrasing, urgency | Conversion rate optimization |
+
+  | `tone_test` | Brand voice variant | New audience, new platform |
+
+  | `format_test` | Content format (post vs. carousel vs. reel) | Content_format selection |
+
+  | `length_test` | Copy length (short vs. long-form) | Engagement vs. click optimization |
+
+  | `hook_test` | Hook type (pain|curiosity|data|social_proof|authority) | TOFU awareness campaigns |
+
+  | `urgency_test` | Urgency trigger present vs. absent | MOFU/BOFU conversion lift |'
+test_configuration_schema: "ab_test:\n  id: \"test_{campaign_id}_{sequence}\"\n  type: headline_test|cta_test|tone_test|format_test|length_test|hook_test|urgency_test\n\
+  \  hypothesis: string               # \"Adding scarcity to CTA increases conversion by 15%\"\n  campaign_id: string\n  platform:\
+  \ instagram|linkedin|x|meta|email\n  primary_metric: ctr|conversion_rate|engagement_rate|cpa\n  secondary_metrics: array[string]\n\
+  \n  traffic_split:\n    control: 0.50                  # proportion of audience (0.0-1.0)\n    treatment: 0.50         \
+  \       # must sum to 1.0\n\n  sample_size:\n    min_impressions_per_variant: 1000\n    min_conversions_per_variant: 50\
+  \  # for conversion tests\n    confidence_level: 0.95\n    power: 0.80\n\n  runtime:\n    start_date: string\n    max_days:\
+  \ 14                   # hard stop even if undecided\n    early_stop_threshold: 0.99    # stop if significance exceeds this\n\
+  \n  variants:\n    control:\n      label: \"A\"\n      description: string\n      copy_asset_id: string\n      copy_snapshot:\
+  \ string        # full copy text at test registration\n    treatment:\n      label: \"B\"\n      description: string\n \
+  \     copy_asset_id: string\n      copy_snapshot: string\n\n  winner_rule: significance|practical_significance|hybrid\n\
+  \  winner_min_lift: 0.10           # minimum meaningful improvement (10%)"
+variant_generation_protocol: "When `a_b_testing: true` in campaign brief:\n\nvariant_generation:\n  generate_count: 2    \
+  \            # default 2 variants (A/B); max 4 (A/B/C/D)\n  isolation_principle: change_one_variable   # never test 2 variables\
+  \ simultaneously\n  naming_convention: \"{test_type}{date}{variant_letter}\"\n\n  auto_variants:\n    headline_test:\n \
+  \     A: pain-point-first hook\n      B: curiosity-gap hook\n    cta_test:\n      A: action verb + benefit (\"Get more clients\"\
+  )\n      B: action verb + urgency (\"Get more clients before Friday\")\n    tone_test:\n      A: brand_voice from brief\n\
+  \      B: adjacent tone (bold -> conversational)"
+statistical_evaluation_rules: "# Winner declaration logic\n\ndef declare_winner(test_result):\n    p_value = test_result[\"\
+  p_value\"]\n    lift = test_result[\"relative_lift\"]\n    impressions = test_result[\"total_impressions\"]\n\n    if p_value\
+  \ < 0.05 and lift > 0.10 and impressions >= 2000:\n        return \"treatment_wins\"\n    elif p_value < 0.05 and lift <\
+  \ -0.10:\n        return \"control_wins\"\n    elif test_result[\"days_running\"] >= 14:\n        return \"inconclusive\"\
+  \     # time-boxed termination\n    else:\n        return \"continue\""
+results_schema: "ab_test_result:\n  test_id: string\n  status: running|concluded|inconclusive|stopped_early\n  winner: control|treatment|none\n\
+  \  confidence: float\n  relative_lift: float            # (treatment - control) / control\n  absolute_lift: float\n  control_metric:\
+  \ float\n  treatment_metric: float\n  impressions:\n    control: integer\n    treatment: integer\n  learning:\n    summary:\
+  \ string               # plain language: \"Scarcity CTA lifted CVR 18% on LinkedIn\"\n    promote_to_rulebook: boolean\n\
+  \    hypothesis_confirmed: boolean"
+exclusion_rules_do_not_test:
+- Brand identity elements (logo, brand name spelling)
+- Legal disclaimer copy
+- Accessibility text (alt text, ARIA labels)
+- Competitor mentions
+- Price points without legal/finance sign-off
+integration:
+- 'Feeds into: `self_improvement_loop_n02.md` (winner rules -> rulebook)'
+- 'Triggered by: `workflow_campaign_pipeline.md` (when `a_b_testing: true`)'
+- 'Validated by: `validation_schema_content_spec.md` (both variants must pass)'
+- 'Audience data from: `cohort_analysis_n02.md` (segment performance context)'

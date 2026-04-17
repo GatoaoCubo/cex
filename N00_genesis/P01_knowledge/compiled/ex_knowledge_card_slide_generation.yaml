@@ -1,0 +1,101 @@
+id: p01_kc_slide_generation
+kind: knowledge_card
+pillar: P01
+title: CSV-Driven Slide Generation Pipeline with Design Tokens and Emotion Arcs
+version: 1.0.0
+created: 2026-03-26
+updated: 2026-03-26
+author: builder_agent
+domain: content_generation
+quality: 9.1
+tags:
+- slides
+- html-generation
+- design-tokens
+- chart-js
+- emotion-arc
+- csv-pipeline
+- presentation
+tldr: Pipeline gera slides HTML via 8 CSVs (estrategia, layout, cor, tipografia) com Chart.js, design tokens e Duarte Sparkline
+  emotion arcs
+when_to_use: Gerar apresentacoes HTML data-driven com estrategia de engajamento baseada em emotion arcs
+keywords:
+- slide-generation
+- design-tokens
+- chart-js
+- sparkline
+- csv-pipeline
+- duarte-method
+long_tails:
+- Como gerar slides HTML automaticamente a partir de dados CSV
+- Como aplicar emotion arcs em apresentacoes para manter engajamento
+axioms:
+- SEMPRE usar design tokens (var(--x)) — NUNCA hardcoded hex
+- SEMPRE usar Chart.js para dados — NUNCA CSS-only bars
+- NUNCA colocar mais de 1 mensagem principal por slide
+linked_artifacts:
+  primary: null
+  related:
+  - p01_kc_cex_function_become
+density_score: null
+data_source: https://www.duarte.com/resources/books/resonate/
+summary: Pipeline CSV-driven que gera slides HTML com design tokens, Chart.js e emotion arcs (Duarte Sparkline). 8 CSVs controlam
+  estrategia (15 deck structures), layout (25 variants), tipografia, cor, backgrounds, copy (25 formulas como PAS/AIDA/FAB),
+  charts (25 tipos Chart.js) e animacoes CSS. BM25 contextual search seleciona componentes por posicao no deck e emocao anterior.
+  Token validator (slide-token-validator.py) rejeita qualquer hardcoded hex no HTML final.
+spec: '| CSV | Conteudo | Qtd |
+
+  |-----|----------|-----|
+
+  | slide-strategies | Deck structures + emotion arcs + sparkline beats | 15 |
+
+  | slide-layouts | Layout variants + component + animations | 25 |
+
+  | slide-layout-logic | Goal → Layout + break_pattern flag | — |
+
+  | slide-typography | Content type → Typography scale | — |
+
+  | slide-color-logic | Emotion → Color treatment | — |
+
+  | slide-backgrounds | Slide type → Image category (Pexels/Unsplash) | — |
+
+  | slide-copy | Copywriting formulas (PAS, AIDA, FAB) | 25 |
+
+  | slide-charts | Chart.js tipos com config | 25 |
+
+
+  Pipeline por slide: layout-logic → typography → color-logic → backgrounds → animations → HTML.
+
+  Duarte Sparkline calcula break patterns em 1/3 e 2/3 do deck, alternando "What Is" (frustration) com "What Could Be" (hope).
+
+  Design system persistido em MASTER.md (global) + pages/*.md (overrides por pagina).
+
+  Retrieval: page-specific override → fallback MASTER — garante consistencia visual.'
+patterns: '| Trigger | Action |
+
+  |---------|--------|
+
+  | Novo deck solicitado | BM25 busca em slide-strategies.csv por estrutura + emotion arc |
+
+  | Slide na posicao 1/3 ou 2/3 | Ativar break_pattern flag (inverter emocao) |
+
+  | Dados quantitativos no slide | Chart.js com tokens (borderColor: var(--x)) |
+
+  | Brand customization | Persistir design system: MASTER.md + page overrides |
+
+  | Busca por componente especifico | Contextual search: --position N --prev-emotion X |'
+anti_patterns:
+- Hardcoded hex (#FF6B6B) em HTML — token validator rejeita
+- CSS-only bars para dados — sempre Chart.js via CDN
+- Slide sem navegacao (setas teclado, click, progress bar)
+- Deck monotono sem emotion arc — audiencia desengaja
+- Slide com multiplas mensagens (cognitive overload)
+code: "<!-- lang: python | purpose: contextual slide search with BM25 -->\n# Busca basica: encontra estrategia de deck\npython\
+  \ scripts/search-slides.py \"investor pitch\"\n\n# Busca contextual: considera posicao e emocao anterior\npython scripts/search-slides.py\
+  \ \"problem slide\" \\\n  --context --position 2 --total 9\n\n# Busca por dominio especifico\npython scripts/search-slides.py\
+  \ \"revenue growth\" -d chart\n\n/ Design tokens — source of truth /\nbackground: var(--slide-bg);\ncolor: var(--color-primary);\n\
+  font-family: var(--typography-font-heading);\n\n/ Chart.js com tokens /\nborderColor: var(--color-primary);"
+references:
+- 'source: https://www.duarte.com/resources/books/resonate/'
+- 'source: https://www.chartjs.org/docs/latest/'
+- 'related: p01_kc_cex_function_become'

@@ -1,0 +1,103 @@
+id: ex_dispatch_rule_research
+kind: dispatch_rule
+pillar: P12
+title: Research Task Routing
+target_nucleus: N01
+target_agent: research-agent
+priority: 8
+confidence_threshold: 0.7
+fallback_agent: gateway-agent
+tags:
+- dispatch
+- routing
+- research
+- orchestration
+- N01
+references:
+- tpl_dispatch_rule
+- ex_chain_research_pipeline
+- ex_agent_copywriter
+- ex_skill_web_scraper
+tldr: 'Dispatch rule: routes research intents to N01 research-agent (STORM+CRAG pipeline) with keyword+intent matching.'
+quality: 9.1
+matching_logic: 'The dispatcher evaluates incoming intents against this rule using a two-stage match:
+
+
+  Stage 1 — Keyword Match (fast, regex-based):
+
+  Keywords: research, analyze, compare, benchmark, investigate, study, evaluate, survey
+
+  Pattern: /\b(research|analyz|compar|benchmark|investigat|stud|evaluat|survey)\b/i
+
+
+  Stage 2 — Intent Classification (LLM-based, if keyword score > 0.3):
+
+  Classifier input: user intent + context
+
+  Classifier output: confidence score [0, 1]
+
+  Threshold: >= 0.7 to route to research-agent'
+rule_configuration: '| Field | Value | Description |
+
+  |-------|-------|-------------|
+
+  | Keywords | research, analyze, compare, benchmark, investigate, study, evaluate | Trigger words (any match activates Stage
+  2) |
+
+  | Target | `research-agent` (N01) | Gemini 2.5-pro with 1M context window |
+
+  | Priority | 8 (of 10) | Higher priority than general dispatch rules |
+
+  | Threshold | 0.7 | Minimum confidence for research routing |
+
+  | Fallback | `gateway-agent` | Routes to N07 orchestrator for manual triage |
+
+  | Pipeline | STORM + CRAG | Multi-source research with retrieval-augmented generation |'
+routing_examples: '| Intent | Keyword Score | Intent Score | Route | Reason |
+
+  |--------|---------------|--------------|-------|--------|
+
+  | "Research competitors in the SaaS analytics space" | 1.0 (exact: "research") | 0.95 | research-agent | High confidence
+  research intent |
+
+  | "Compare pricing models for AI APIs" | 1.0 (exact: "compare") | 0.88 | research-agent | Comparative analysis, clear research
+  |
+
+  | "Analyze last quarter''s sales data" | 1.0 (exact: "analyze") | 0.62 | gateway-agent | Below 0.7 — likely analytics, not
+  research |
+
+  | "Write a blog post about trends" | 0.0 (no keywords) | — | skipped | No keyword match, rule not activated |
+
+  | "Benchmark our LLM pipeline latency" | 1.0 (exact: "benchmark") | 0.91 | research-agent | Technical benchmarking = research
+  domain |'
+priority_resolution: 'When multiple dispatch rules match the same intent:
+
+
+  | Priority | Rule | Resolution |
+
+  |----------|------|------------|
+
+  | 10 | emergency-triage | Always wins — safety/compliance routing |
+
+  | 8 | research (this rule) | Wins over general and domain rules |
+
+  | 6 | marketing-copy | Only activated if research doesn''t match |
+
+  | 4 | general-task | Default catch-all |
+
+  | 1 | gateway-fallback | Last resort — N07 manual triage |
+
+
+  Tie-breaking: If two rules share the same priority, the one with higher confidence score wins.'
+storm_crag_pipeline: "When `research-agent` receives a dispatched task, it executes:\n\n1. STORM (Survey of the Topic via\
+  \ Retrieval-Oriented Methods):\n   - Generate 5-7 research questions from the intent\n   - Search multiple sources (web,\
+  \ papers, internal docs)\n   - Synthesize findings into structured outline\n\n2. CRAG (Corrective Retrieval-Augmented Generation):\n\
+  \   - Retrieve candidate passages for each section\n   - Score passage relevance (discard < 0.6)\n   - Generate response\
+  \ with inline citations\n   - Cross-check facts against retrieved sources"
+fallback_behavior: 'When confidence < 0.7, the intent routes to `gateway-agent` (N07 orchestrator), which:
+
+  1. Logs the unmatched intent for rule refinement
+
+  2. Presents the user with nucleus options (N01-N06)
+
+  3. Learns from the user''s manual choice to improve future routing'

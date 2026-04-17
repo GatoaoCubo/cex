@@ -1,0 +1,94 @@
+id: p09_rr_agent_group_spawn
+kind: runtime_rule
+pillar: P09
+title: 'Runtime Rule: Agent_group Spawn Constraints'
+version: 1.0.0
+created: 2026-03-22
+updated: 2026-03-22
+author: knowledge_agent
+quality: 9.1
+tags:
+- runtime
+- agent_group
+- spawn
+- constraints
+- bsod
+tldr: 'Spawn rules: max 3 agent_groups + orchestrator (BSOD at 4), 5s between terminals, -p flag mandatory for TSP, inline
+  prompt < 200 chars'
+max_bytes: 512
+density_score: 0.91
+source: organization-core/.claude/rules/boot-autonomy-flags.md + MEMORY.md constraints
+linked_artifacts:
+  spawn_config: p12_spawn_grid_continuous
+domain: config
+hard_limits: "spawn_limits:\n  max_concurrent_agent_groups: 3   # + orchestrator = 4 total. BSOD confirmed at 5\n  delay_between_terminals:\
+  \ 5s    # RAM stability — never skip\n  max_inline_prompt_chars: 200   # TSP -p flag limit — longer prompts hang\n  agent_group_boot_timeout:\
+  \ 30s    # Kill and retry if no output after 30s"
+required_flags: '# TSP agent_group spawn (mandatory flags):
+
+  claude --dangerously-skip-permissions --no-chrome -p
+
+
+  # -p (non-interactive): skips workspace trust dialog — MANDATORY for automation
+
+  # --dangerously-skip-permissions: skips tool permission prompts
+
+  # --no-chrome: all agent_groups (chrome only via boot/chrome.cmd)'
+spawn_script_rules: '# CORRECT:
+
+  spawn_solo.ps1 -sat pytha -task "Read handoff and execute" -interactive
+
+
+  # WRONG (all cause failures):
+
+  tsp_manager.py spawn        # invisible window, cannot kill claude.exe
+
+  spawn with --mcp-config     # absolute paths hang in PS->cmd chain'
+environment_variables: '# REQUIRED in boot scripts (v2.1.50+ fix):
+
+  set CLAUDECODE=
+
+  set organization_AGENT_GROUP={SAT_NAME}&&claude --dangerously-skip-permissions ...
+
+
+  # Note: set VAR=val&& (no space before &&)'
+bsod_prevention: "bsod_history: 2026-02-18\ncause: USB power suspend + Intel I219-V driver race condition\nprevention:\n \
+  \ - hybrid_sleep: disabled\n  - usb_selective_suspend: disabled\n  - hibernate: disabled\n  - wake_on_lan: disabled\nthreshold:\
+  \ NEVER spawn 4+ agent_groups simultaneously"
+handoff_offload_rule: 'When task > 200 chars, write to handoff file:
+
+  # Inline prompt (PASS):
+
+  "Read .claude/handoffs/CEX7_batch_2_pytha.md e execute"  # 53 chars
+
+
+  # Inline prompt (FAIL — hangs with -p):
+
+  "Execute these 10 tasks: [1] research market... [2] build agent..." # 400+ chars'
+pipeline_integration:
+- Created via 8F pipeline from F1-Focus through F8-Furnish
+- Scored by cex_score across three structural layers
+- Compiled by cex_compile for structural validation
+- Retrieved by cex_retriever for context injection
+- Evolved by cex_evolve when quality regresses below target
+properties: '| Property | Value |
+
+  |----------|-------|
+
+  | Kind | `runtime_rule` |
+
+  | Pillar | P09 |
+
+  | Domain |  |
+
+  | Pipeline | 8F (F1-F8) |
+
+  | Scorer | cex_score.py |
+
+  | Compiler | cex_compile.py |
+
+  | Retriever | cex_retriever.py |
+
+  | Quality target | 9.0+ |
+
+  | Density target | 0.85+ |'

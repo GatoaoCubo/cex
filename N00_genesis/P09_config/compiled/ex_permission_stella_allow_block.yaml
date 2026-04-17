@@ -1,0 +1,59 @@
+id: p09_perm_stella_allow_block
+kind: permission
+pillar: P09
+description: Permission rules for orchestrator orchestrator — what it can and cannot do directly
+scope: stella
+version: 1.0.0
+created: 2026-03-24
+author: builder_agent
+quality: 9.0
+tags:
+- permission
+- stella
+- allow
+- block
+- orchestration
+updated: '2026-04-07'
+domain: config
+title: Permission Stella Allow Block
+density_score: 0.92
+tldr: Defines permission for permission stella allow block, with validation gates and integration points.
+allow_list_execute_directly: '| Category | Operations |
+
+  |----------|-----------|
+
+  | Status | git status, git log, git diff |
+
+  | Diagnostic | pwd, ls, cat, head, tail, echo |
+
+  | Spawn | spawn_solo.ps1, spawn_grid.ps1, spawn_monitor.ps1 |
+
+  | Read | Read, Glob, Grep tools |
+
+  | Maintenance | del, rm, mkdir, copy, move |
+
+  | Signals | read .claude/signals/, write completion signals |'
+block_list_route_to_agent_groups: '| Domain | Route To |
+
+  |--------|----------|
+
+  | Research, market analysis | research_agent |
+
+  | Marketing, copy, ads | marketing_agent |
+
+  | Code, components, infra | builder_agent |
+
+  | Knowledge, indexing, RAG | knowledge_agent |
+
+  | Deploy, test, debug | operations_agent |
+
+  | Courses, pricing | commercial_agent |'
+confirm_required: Delete files, force push, production deploy, API key changes, payment operations.
+principle: orchestrator orchestrates, NEVER executes. If a task produces artifacts, it must be dispatched.
+pipeline_integration:
+- Created via 8F pipeline from F1-Focus through F8-Furnish
+- Scored by cex_score across three structural layers
+- Compiled by cex_compile for structural validation
+- Retrieved by cex_retriever for context injection
+- Evolved by cex_evolve when quality regresses below target
+metadata: python _tools/cex_score.py --apply p09-perm-stella-allow-block.md

@@ -1,0 +1,55 @@
+id: ex_knowledge_card_rag_fundamentals
+kind: knowledge_card
+pillar: P01
+title: RAG Fundamentals
+tags:
+- rag
+- retrieval
+- embedding
+- search
+references:
+- tpl_knowledge_card
+- bld_knowledge_card_knowledge_card
+- ex_knowledge_card_prompt_caching
+quality: 9.1
+updated: '2026-04-07'
+domain: knowledge management
+version: 1.0.0
+author: n04_knowledge
+created: '2026-04-07'
+density_score: 0.95
+tldr: Defines the knowledge card specification for rag fundamentals, with structural rules, validation gates, and integration
+  points.
+key_concepts: '| Concept | Description |
+
+  |---------|------------|
+
+  | Chunking | Split docs into retrievable segments |
+
+  | Embedding | Vector representation for semantic search |
+
+  | Retrieval | Find relevant chunks via similarity |
+
+  | Augmentation | Inject retrieved context into prompt |'
+links:
+- 'Template: [[tpl_knowledge_card]]'
+- 'Builder: [[bld_knowledge_card_knowledge_card]]'
+- 'Related: [[ex_knowledge_card_prompt_caching]]'
+- 'Function: INJECT (what the AI knows)'
+cross_references:
+- 'Pillar: P01 (Knowledge)'
+- 'Kind: `knowledge card`'
+- 'Artifact ID: `ex_knowledge_card_rag_fundamentals`'
+- 'Tags: [rag, retrieval, embedding, search]'
+integration_points: '| Component | Role |
+
+  |-----------|------|
+
+  | Pillar P01 | Knowledge domain |
+
+  | Kind `knowledge card` | Artifact type |
+
+  | Pipeline | 8F (F1→F8) |'
+retrieval_example: '# CLI retrieval
+
+  python _tools/cex_retriever.py "RAG Fundamentals" --top 5'

@@ -1,0 +1,83 @@
+id: p10_ax_scout_before_create
+kind: axiom
+pillar: P10
+title: 'Axiom: Scout Before Create (Law 8)'
+version: 3.0.0
+created: 2026-03-22
+updated: 2026-03-22
+author: knowledge_agent
+quality: 9.1
+tags:
+- axiom
+- scout
+- law8
+- discovery
+- pool
+tldr: 'LAW 8: Always Glob/Grep before Write. Never duplicate pool artifacts. 60% similarity = adapt existing; <60% = build
+  new'
+max_bytes: 512
+density_score: 0.93
+source: organization-core/records/framework/docs/LAWS_v3_PRACTICAL.md (LAW 8 SCOUT-FIRST)
+linked_artifacts:
+  law: p08_law_shokunin
+domain: memory
+statement: '> Before creating any file, artifact, agent, or template — search the pool first. If similar exists (>= 60% overlap),
+  adapt it. If not, build new with full structure.'
+rule: "Glob/Grep → found similar (>= 60%) → adapt existing artifact\n                                    → credit source in\
+  \ frontmatter\nGlob/Grep → not found (<60%) → build new from scratch\n                              → add to pool at quality\
+  \ >= 8.0"
+implementation: '# Step 1: Glob by name pattern
+
+  Glob("*/KC_*DEPLOY", path="records/pool/knowledge/")
+
+
+  # Step 2: Grep by content keywords
+
+  Grep("railway.*deploy|deploy.*checklist", path="records/pool/")
+
+
+  # Step 3: If found → Read → assess similarity → adapt or skip
+
+  # Step 4: If not found → Build new → quality gate → pool write'
+violations_and_costs: '| Violation | Cost |
+
+  |-----------|------|
+
+  | Create duplicate KC | Bloat pool, confuse brain search |
+
+  | Skip scouting before agent build | Duplicate agent dirs, routing conflicts |
+
+  | Build template that exists | Wasted 20-40min build time |'
+trigger: 'Auto-trigger on: any `Write` tool call for new file in `records/` or `.claude/`'
+decision_threshold: 'similarity >= 0.60 → ADAPT (never build duplicate)
+
+  similarity 0.40-0.59 → EXTEND (build new, link to existing)
+
+  similarity < 0.40 → BUILD NEW (independent artifact)'
+pipeline_integration:
+- Created via 8F pipeline from F1-Focus through F8-Furnish
+- Scored by cex_score across three structural layers
+- Compiled by cex_compile for structural validation
+- Retrieved by cex_retriever for context injection
+- Evolved by cex_evolve when quality regresses below target
+properties: '| Property | Value |
+
+  |----------|-------|
+
+  | Kind | `axiom` |
+
+  | Pillar | P10 |
+
+  | Domain |  |
+
+  | Pipeline | 8F (F1-F8) |
+
+  | Scorer | cex_score.py |
+
+  | Compiler | cex_compile.py |
+
+  | Retriever | cex_retriever.py |
+
+  | Quality target | 9.0+ |
+
+  | Density target | 0.85+ |'

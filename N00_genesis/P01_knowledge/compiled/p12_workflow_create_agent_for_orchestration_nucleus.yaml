@@ -1,0 +1,79 @@
+id: p12_wf_create_orchestration_agent
+kind: workflow
+pillar: P12
+version: 1.0.0
+created: '2026-04-02'
+updated: '2026-04-02'
+author: workflow-builder
+title: Create Agent for Orchestration Nucleus
+steps_count: 3
+execution: mixed
+agent_groups:
+- n03
+- n05
+timeout: 7200
+retry_policy: per_step
+depends_on: []
+signals:
+- 'On step complete: `{nucleus}_complete` emitted by assigned agent (see signal-builder conventions)'
+- 'On workflow complete: `workflow_complete` with aggregate quality score from all steps'
+- 'On error: `{nucleus}_error` emitted; retry per step (max 2), then escalate to N07 orchestrator'
+spawn_configs:
+- p12_spawn_n03_solo_build
+- p12_spawn_n05_solo_validate
+domain: orchestration
+quality: 9.0
+tags:
+- workflow
+- orchestration
+- agent-creation
+tldr: '3-step mixed workflow: n03 builds orchestration agent artifact, n05 deploys to N07 runtime, n05 validates end-to-end
+  dispatch capabilities'
+density_score: 0.88
+purpose: Establishes a new agent artifact scoped to the N07 orchestration nucleus. Step 1 builds the agent YAML with nucleus
+  routing, dispatch protocol, and signal contracts via N03. Step 2 deploys the artifact and registers it in the N07 runtime
+  environment. Step 3 validates the agent can dispatch tasks, receive signals, and consolidate nucleus outputs correctly.
+steps: ''
+step_1_build_orchestration_agent_n03:
+- 'Agent: n03 (opus builder)'
+- 'Action: Build agent artifact with N07 routing table, dispatch capabilities, and signal contracts'
+- 'Input: Orchestration intent, nucleus routing definitions from `.claude/rules/n07-orchestrator.md`'
+- 'Output: `p02_agent_orchestration_nucleus.yaml` committed to `P02_agents/`'
+- 'Signal: `n03_complete` with artifact quality score'
+- 'Depends on: none (wave 1)'
+step_2_deploy_and_configure_n05:
+- 'Agent: n05 (codex operations)'
+- 'Action: Register agent in N07 runtime, bind to spawn_configs, update dispatch routing table'
+- 'Input: Agent artifact from Step 1, `.cex/runtime/` configuration state'
+- 'Output: Updated dispatch routing; agent registered in `.cex/runtime/decisions/`'
+- 'Signal: `n05_deploy_complete` with deployment status'
+- 'Depends on: Step 1 (wave 2)'
+step_3_validate_orchestration_capabilities_n05:
+- 'Agent: n05 (codex operations)'
+- 'Action: Run system tests — dispatch smoke test, signal round-trip, consolidate check'
+- 'Input: Deployed agent artifact; test harness from `cex_system_test.py`'
+- 'Output: Validation report with pass/fail per capability'
+- 'Signal: `n05_validate_complete` with test results summary'
+- 'Depends on: Step 2 (wave 2, sequential after deploy)'
+dependencies:
+- 'N03 builder healthy: `python _tools/cex_doctor.py`'
+- '`spawn_configs` for n03 and n05 must exist before workflow starts'
+- '`.cex/runtime/` directory initialized and writable'
+references:
+- 'signal-builder: P12 signal emission conventions'
+- 'spawn-config-builder: `p12_spawn_n03_solo_build`, `p12_spawn_n05_solo_validate`'
+- 'N07 routing rules: `.claude/rules/n07-orchestrator.md`'
+cross_references:
+- 'Pillar: P12 (Orchestration)'
+- 'Kind: `workflow`'
+- 'Artifact ID: `p12_wf_create_orchestration_agent`'
+- 'Tags: [workflow, orchestration, agent-creation]'
+integration_points: '| Component | Role |
+
+  |-----------|------|
+
+  | Pillar P12 | Orchestration domain |
+
+  | Kind `workflow` | Artifact type |
+
+  | Pipeline | 8F (F1→F8) |'

@@ -1,0 +1,59 @@
+id: p04_ex_supabase_data_layer_marketplace
+kind: example
+pillar: P04
+title: Example — Supabase Data Layer for Marketplace
+version: 1.0.0
+created: 2026-03-31
+updated: 2026-03-31
+author: n04_knowledge
+domain: data_platform
+quality: 9.1
+tags:
+- example
+- supabase
+- data-layer
+- marketplace
+- config
+tldr: 'Marketplace config: sellers, listings, transactions, disputes, ratings, busca semantica de produtos, media de listings'
+density_score: 0.89
+vertical_profile: '| Aspect | Value |
+
+  |--------|-------|
+
+  | Vertical | marketplace |
+
+  | Tier | pro |
+
+  | Key tables | sellers, listings, transactions, disputes, ratings |
+
+  | Extensions | pgvector (search), pg_cron (payouts), pg_net (notifications) |
+
+  | Storage | listing-images (public), kyc-documents (private) |
+
+  | Realtime | bid updates, transaction status |
+
+  | Vectors | Listing semantic search |'
+config: "identidade:\n  vertical: marketplace\n  regiao: sa-east-1\n  tier: pro\n\ndatabase:\n  schemas: [public, payments]\n\
+  \  extensions:\n    obrigatorias: [pgcrypto, pg_graphql]\n    opcionais: [pgvector, pg_cron, pg_net, pg_trgm]\n  tables:\n\
+  \    - name: sellers\n      columns: [id UUID PK, user_id UUID FK auth.users, org_id UUID FK, display_name TEXT, verified\
+  \ BOOLEAN, rating_avg NUMERIC(3,2)]\n      rls: public_read_owner_write\n      indexes: [user_id, org_id, verified]\n  \
+  \  - name: listings\n      columns: [id UUID PK, seller_id UUID FK, org_id UUID FK, title TEXT, description TEXT, price\
+  \ NUMERIC(10,2), status TEXT, embedding VECTOR(1536)]\n      rls: public_read_seller_write\n      indexes: [seller_id, status,\
+  \ price, \"embedding HNSW vector_cosine_ops\"]\n    - name: transactions\n      schema: payments\n      columns: [id UUID\
+  \ PK, listing_id UUID FK, buyer_id UUID FK, seller_id UUID FK, amount NUMERIC(10,2), status TEXT, escrow_until TIMESTAMPTZ]\n\
+  \      rls: buyer_or_seller\n      indexes: [buyer_id, seller_id, status]\n    - name: disputes\n      schema: payments\n\
+  \      columns: [id UUID PK, transaction_id UUID FK, opened_by UUID FK, reason TEXT, status TEXT, resolution TEXT]\n   \
+  \   rls: dispute_parties\n    - name: ratings\n      columns: [id UUID PK, transaction_id UUID FK, from_user UUID FK, to_user\
+  \ UUID FK, score INT CHECK 1-5, comment TEXT]\n      rls: public_read_buyer_write\n\nauth:\n  providers: [email, google,\
+  \ apple]\n  mfa: false\n  custom_claims: [org_id, role, seller_id]\n\nrls:\n  multi_tenant_column: org_id\n  patterns:\n\
+  \    - nome: public_read_seller_write\n      policy: \"true FOR SELECT; seller_id = (auth.jwt()->'app_metadata'->>'seller_id')::uuid\
+  \ FOR INSERT/UPDATE\"\n      tabelas: [listings]\n    - nome: buyer_or_seller\n      policy: \"buyer_id = auth.uid() OR\
+  \ seller_id = auth.uid()\"\n      tabelas: [transactions]\n\nstorage:\n  buckets:\n    - nome: listing-images\n      publico:\
+  \ true\n      max_file_size: 10485760\n      allowed_mime_types: [image/jpeg, image/png, image/webp]\n      transform: true\n\
+  \    - nome: kyc-documents\n      publico: false\n      max_file_size: 20971520\n      allowed_mime_types: [application/pdf,\
+  \ image/jpeg, image/png]\n\nrealtime:\n  habilitado: true\n  postgres_changes:\n    - tabela: transactions\n      eventos:\
+  \ [UPDATE]\n    - tabela: listings\n      eventos: [INSERT]\n\nvectors:\n  habilitado: true\n  embedding_model: text-embedding-3-small\n\
+  \  dimensions: 1536\n  distance_function: cosine\n  search_function: match_listings\n\nedge_functions:\n  functions:\n \
+  \   - nome: process-escrow\n      trigger: cron\n      schedule: \"0 /4   \"\n      secrets: [PAYMENT_GATEWAY_KEY]\n   \
+  \ - nome: notify-seller\n      trigger: webhook\n      secrets: [SENDGRID_KEY]\n  deploy_method: cli\n\nbudget:\n  alertas:\n\
+  \    - metrica: db_size\n      threshold: 75\n      acao: email"

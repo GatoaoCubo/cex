@@ -1,0 +1,36 @@
+{
+  "id": "p06_is_quality_audit",
+  "kind": "input_schema",
+  "pillar": "P06",
+  "title": "Input Schema: Quality Audit Pipeline",
+  "version": "1.0.0",
+  "created": "2026-03-22",
+  "updated": "2026-03-22",
+  "author": "builder_agent",
+  "quality": 9.1,
+  "tags": [
+    "quality",
+    "audit",
+    "input",
+    "contract"
+  ],
+  "tldr": "Validates input parameters for the codebase quality audit pipeline (scope, threshold, scan options)",
+  "density_score": 0.9,
+  "source": "organization-core/records/core/examples/blueprint_quality_audit.yaml",
+  "linked_artifacts": {
+    "agent": "p02_ag_qa_agent",
+    "output": "p05_os_quality_report"
+  },
+  "fields": "| Field | Type | Required | Default | Constraints | Example |\n|-------|------|----------|---------|-------------|---------|\n| scope | string | yes | none | min_length: 1, must be valid path | `records/agents/` |\n| threshold | float | no | 7.0 | min: 0.0, max: 10.0 | `8.0` |\n| scan_type | enum | no | `full` | one_of: [full, quick, deep] | `full` |\n| exclude_patterns | list[string] | no | `[]` | valid glob patterns | `[\".test.\", \"node_modules/\"]` |\n| output_format | enum | no | `markdown` | one_of: [markdown, json, both] | `both` |",
+  "step_contracts": "",
+  "step_1_scan_files_code": "| Direction | Field | Type | Source |\n|-----------|-------|------|--------|\n| input | scope | string | blueprint.params.scope |\n| output | file_list | list[string] | scan result |\n| output | file_stats | object | `{total: int, by_ext: {}}` |\n| output | total_lines | int | line count |",
+  "step_2_analyze_quality_agent_qa_agent": "| Direction | Field | Type | Source |\n|-----------|-------|------|--------|\n| input | files | list[string] | scan_files.file_list |\n| input | stats | object | scan_files.file_stats |\n| output | quality_issues | list[Issue] | analysis result |\n| output | per_file_scores | object | `{path: float}` |",
+  "validation_rules": [
+    "If scope is empty or null: `\"scope is required: provide directory or file path to audit\"`",
+    "If threshold < 0 or > 10: `\"threshold must be between 0.0 and 10.0, got {value}\"`",
+    "If scope path does not exist: `\"scope path not found: {scope}\"`"
+  ],
+  "valid_input_example": "scope: records/agents/scout-agent/\nthreshold: 8.0\nscan_type: full\nexclude_patterns: [\".test.\"]\noutput_format: both",
+  "invalid_input_example": "# FAILS: scope is empty string (required, min_length: 1)\nscope: \"\"\nthreshold: 15.0  # FAILS: max is 10.0",
+  "upstream_downstream": "| Direction | Component | Protocol |\n|-----------|-----------|----------|\n| upstream | orchestrator handoff | handoff file (.md) |\n| downstream | qa-agent | blueprint step chain |"
+}

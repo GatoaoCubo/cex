@@ -1,0 +1,85 @@
+id: p10_em_user_preferences
+kind: entity_memory
+pillar: P10
+title: User Entity Memory — Preference Tracking Across Sessions
+version: 1.0.0
+created: 2026-03-29
+updated: 2026-03-29
+author: builder_agent
+domain: memory
+quality: 9.1
+tags:
+- entity-memory
+- user-preferences
+- personalization
+- cross-session
+tldr: Armazena fatos sobre o user (nome, preferencias, expertise) com merge-on-new para personalizacao persistente
+when_to_use: Quando o sistema precisa lembrar quem e o user e como ele prefere trabalhar entre sessoes
+keywords:
+- entity-memory
+- user-profile
+- preferences
+- expertise-tracking
+name: user_preferences
+entity_type: user
+attributes:
+- name
+- preferences
+- history
+- expertise
+update_policy: merge_on_new_interaction
+density_score: 1.0
+tl_dr: 'Entity memory do tipo `user` armazena fatos persistentes sobre o usuario: nome, preferencias de workflow, historico
+  de interacoes, e niveis de expertise por dominio. A politica `merge_on_new_interaction` garante que novos fatos sao incorporados
+  sem sobrescrever os existentes.'
+conceito_central: 'Diferente de learning_record (que registra o que deu certo/errado em tasks), entity_memory registra fatos
+  sobre ENTIDADES — neste caso, o user. Cada atributo tem semantica propria:
+
+
+  - name: identificador do user (pode ser nome real ou handle)
+
+  - preferences: como o user gosta de trabalhar (terse vs verbose, commit style, etc.)
+
+  - history: interacoes passadas relevantes (projetos, decisoes recorrentes)
+
+  - expertise: niveis de conhecimento por dominio (senior em Go, iniciante em React)'
+estrutura_de_armazenamento: "entity:\n  type: user\n  id: \"user_ronaldo\"\n\n  name:\n    display: \"Ronaldo\"\n    first_seen:\
+  \ \"2026-01-15\"\n\n  preferences:\n    response_style: terse      # no trailing summaries\n    commit_style: conventional\
+  \  # feat:/fix:/refactor:\n    pr_strategy: bundled        # prefer 1 PR over many small\n    testing: pytest          \
+  \   # not unittest\n    language: pt-BR             # Portuguese prompts OK\n    auto_ship: true             # commit+push+deploy\
+  \ without asking\n\n  history:\n    projects_active:\n      - organization-core             # AI agent framework\n     \
+  \ - fresh-start             # React frontend (Lovable)\n      - gato-cubo-commerce      # e-commerce\n    recent_decisions:\n\
+  \      - \"2026-03-15: Chose Mercado Pago over Stripe for payments\"\n      - \"2026-03-01: Integrated Firecrawl for marketplace\
+  \ scraping\"\n      - \"2026-02-18: Disabled all power-save after BSOD\"\n\n  expertise:\n    advanced:     [python, fastapi,\
+  \ prompt-engineering, ai-agents, e-commerce-br]\n    intermediate: [react, typescript, postgresql, railway-deploy]\n   \
+  \ beginner:     [rust, kubernetes, mobile-dev]\n\nupdate_policy:\n  strategy: merge_on_new_interaction\n  rules:\n    -\
+  \ \"New preference overrides old (latest wins)\"\n    - \"Expertise levels only upgrade, never downgrade without explicit\
+  \ correction\"\n    - \"History appends, never deletes\"\n    - \"Conflicting facts: ask user to clarify before overwriting\"\
+  \n  trigger: session_start  # re-inject entity into context"
+exemplo_pratico: "Sessao 1 (2026-01-15): User diz \"I'm Ronaldo, I build AI agents\"\n# Entity created\nname: {display: \"\
+  Ronaldo\"}\nexpertise: {advanced: [ai-agents]}\n\nSessao 14 (2026-02-20): User diz \"stop summarizing at the end\"\n# Merge:\
+  \ preferences updated\npreferences: {response_style: terse}\n# Everything else preserved\n\nSessao 47 (2026-03-29): User\
+  \ trabalha em React pela primeira vez\n# Merge: expertise updated\nexpertise:\n  intermediate: [react]  # added based on\
+  \ observed usage\n# Previous advanced/beginner preserved\n\nMerge conflict example: User diz \"I prefer unittest now\" mas\
+  \ entity tem `testing: pytest`.\n# Resolution: latest wins (preference)\npreferences: {testing: unittest}  # overwritten\n\
+  # But log previous value in history\nhistory:\n  preference_changes:\n    - \"2026-03-29: testing pytest->unittest\""
+fronteira_com_outros_kinds: '| Kind | Diferenca |
+
+  |------|-----------|
+
+  | runtime_state (P10) | Estado do AGENTE em runtime — nao do user |
+
+  | learning_record (P10) | O que o SISTEMA aprendeu — nao fatos sobre entidades |
+
+  | memory_summary (P10) | Compressao de conversa — nao fatos persistentes |
+
+  | user_persona (P03) | Template de prompt para simular persona — nao fatos reais |'
+anti_patterns:
+- Armazenar preferencias efemeras como permanentes ("use tabs hoje" != "sempre tabs")
+- Downgrade de expertise sem correcao explicita do user
+- Misturar fatos do user com fatos do projeto (use project memory para isso)
+- Armazenar dados sensiveis (tokens, passwords) como atributos de entidade
+- Update policy `overwrite_all` — perde historico acumulado
+referencias:
+- 'schema: P10/_schema.yaml (entity_memory)'
+- 'related: p10_ms_memory_summary, p10_lr_learning_record'

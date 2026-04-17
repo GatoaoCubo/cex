@@ -1,0 +1,60 @@
+id: p12_crew_agent_group_grid
+kind: crew
+pillar: P12
+description: Multi-agent_group crew configuration for parallel task execution via spawn_grid
+version: 1.0.0
+created: 2026-03-25
+author: orchestrator
+quality: 9.1
+tags:
+- crew
+- multi-agent
+- grid
+- parallel
+- orchestration
+updated: '2026-04-07'
+domain: orchestration
+title: Workflow Supervisor Grid
+density_score: 0.92
+tldr: Defines crew for workflow supervisor grid, with validation gates and integration points.
+purpose: Defines how N agent_groups collaborate on a mission. The crew is NOT the agents — it is the PROTOCOL that coordinates
+  them.
+configuration: "crew:\n  name: \"GENESIS\"\n  coordinator: orchestrator\n  protocol: parallel_grid\n  \n  members:\n    -\
+  \ agent_group: research_agent\n      role: researcher\n      model: sonnet\n      tasks_from: \".claude/handoffs/GENESIS_batch_*_shaka.md\"\
+  \n    - agent_group: builder_agent\n      role: builder\n      model: opus\n      tasks_from: \".claude/handoffs/GENESIS_batch_*_edison.md\"\
+  \n    - agent_group: knowledge_agent\n      role: knowledge\n      model: sonnet\n      tasks_from: \".claude/handoffs/GENESIS_batch_*_pytha.md\"\
+  \n\n  coordination:\n    max_parallel: 6\n    mode: continuous  # static | continuous\n    shared_state: git_repo  # all\
+  \ read/write same repo\n    conflict_resolution: file_isolation  # each agent_group edits different files\n    \n  lifecycle:\n\
+  \    spawn: \"spawn_grid.ps1 -mission GENESIS -mode continuous\"\n    monitor: \"spawn_monitor.ps1 (30s poll)\"\n    completion:\
+  \ \"all signals received\"\n    cleanup: \"spawn_stop.ps1 + archive handoffs\"\n\n  termination:\n    condition: all_signals_complete\n\
+  \    timeout: 60m\n    on_stuck: escalate_to_stella"
+the_crew_is_a_fractal_of_12_lps: 'A crew instantiates ALL 12 LPs at the group level: P01=shared pool, P02=N agent_groups,
+  P03=mission goal, P04=shared MCPs, P06=file isolation contract, P07=quality gates, P09=grid config, P10=shared git state,
+  P11=monitor watchdog, P12=signal protocol.'
+pipeline_integration:
+- Created via 8F pipeline from F1-Focus through F8-Furnish
+- Scored by cex_score across three structural layers
+- Compiled by cex_compile for structural validation
+- Retrieved by cex_retriever for context injection
+- Evolved by cex_evolve when quality regresses below target
+properties: '| Property | Value |
+
+  |----------|-------|
+
+  | Kind | `crew` |
+
+  | Pillar | P12 |
+
+  | Domain |  |
+
+  | Pipeline | 8F (F1-F8) |
+
+  | Scorer | cex_score.py |
+
+  | Compiler | cex_compile.py |
+
+  | Retriever | cex_retriever.py |
+
+  | Quality target | 9.0+ |
+
+  | Density target | 0.85+ |'

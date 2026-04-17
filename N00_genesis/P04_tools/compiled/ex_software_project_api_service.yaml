@@ -1,0 +1,78 @@
+id: p04_ex_software_project_api_service
+kind: example
+pillar: P04
+title: Example — API Service (Product API)
+version: 1.0.0
+created: 2026-03-31
+updated: 2026-03-31
+author: n03_engineering
+domain: software-engineering
+quality: 9.1
+tags:
+- example
+- software-project
+- api-service
+- fastapi
+- supabase
+tldr: 'Complete API service: Product management with FastAPI+Pydantic+Supabase. Middleware stack (CORS→RateLimit→Auth→RLS),
+  multi-stage Docker, Railway deploy, GitHub Actions CI.'
+density_score: 0.9
+config: "project: { name: product-api, version: 1.0.0, type: api_service, python: \"3.12\" }\npackage: { name: product_api,\
+  \ cli_name: product-api }\ndependencies:\n  core: [fastapi>=0.100, uvicorn[standard]>=0.23, pydantic>=2.0, httpx>=0.24,\
+  \ asyncpg>=0.29]\n  dev: [pytest>=7.0, pytest-asyncio>=0.21, ruff>=0.1.0]\ndeploy: { target: railway, port: 8000, workers:\
+  \ 4, health_path: /health }\nconfig: { env_prefix: APP, settings: [database_url, redis_url, api_keys, debug] }"
+key_files: 'src/product_api/api/main.py: FastAPI app with middleware stack (CORS outermost). src/product_api/api/routes/products.py:
+  CRUD routes with Pydantic models. src/product_api/api/middleware/auth.py: API key + JWT hybrid auth. src/product_api/domain/models.py:
+  Product, CreateProduct, UpdateProduct models. src/product_api/infra/db.py: asyncpg pool, health check, graceful shutdown.
+  src/product_api/infra/config.py: BaseSettings with APP_ prefix. Dockerfile: Multi-stage, non-root user, healthcheck. docker-compose.yml:
+  API + Postgres + Redis + pgAdmin (dev-tools profile). .github/workflows/ci.yml: lint → test → docker-build.'
+architecture: 'src/product_api/
+
+  ├── domain/           # Layer 1: Pure logic
+
+  │   ├── models.py     # Pydantic: Product, CreateProduct
+
+  │   ├── services.py   # CRUD logic (no DB imports)
+
+  │   └── errors.py     # ProductNotFound, ValidationError
+
+  ├── infra/            # Layer 2: External
+
+  │   ├── db.py         # asyncpg pool
+
+  │   ├── cache.py      # Redis client
+
+  │   └── config.py     # BaseSettings
+
+  ├── api/              # Layer 3: Interface
+
+  │   ├── main.py       # FastAPI + middleware
+
+  │   ├── routes/       # Route handlers
+
+  │   ├── middleware/    # Auth, rate-limit, RLS
+
+  │   └── deps.py       # Dependency injection
+
+  └── init.py'
+what_makes_it_good:
+- Middleware order correct (CORS outermost)
+- Domain layer has zero infrastructure imports
+- Health check returns DB + cache status
+- Async all the way (asyncpg, not psycopg2)
+- Docker compose with healthcheck deps
+- Rate limiting per tenant tier (free/pro/business)
+cross_references:
+- 'Pillar: P04 (Tools)'
+- 'Kind: `example`'
+- 'Artifact ID: `p04_ex_software_project_api_service`'
+- 'Tags: [example, software-project, api-service, fastapi, supabase]'
+example_registry: '| Aspect | Detail |
+
+  |--------|--------|
+
+  | Purpose | Few-shot exemplar for builder prompts |
+
+  | Injection | Loaded by `cex_skill_loader.py` at F3 |
+
+  | Quality | Must score 9.0+ to serve as exemplar |'

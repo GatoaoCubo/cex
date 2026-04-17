@@ -1,0 +1,66 @@
+id: content_filter_n02
+kind: content_filter
+pillar: P04
+nucleus: n02
+title: Brand Voice Compliance Filter -- Content Safety and Quality Gate
+version: 1.0.0
+quality: null
+tags:
+- content_filter
+- brand_voice
+- compliance
+- content_safety
+- P04
+- n02_marketing
+domain: content-governance
+status: active
+purpose: 'Not everything that can be published should be published. This filter is N02''s immune system: it catches copy that
+  violates brand standards, platform policies, and legal constraints before it reaches the distribution layer. One viral mistake
+  costs more than a thousand great campaigns.'
+filter_architecture: "COPY INPUT\n    |\n    v\nL1: BRAND VOICE COMPLIANCE (fast, deterministic)\n    |\n    v\nL2: PLATFORM\
+  \ POLICY CHECK (rule-based, platform-specific)\n    |\n    v\nL3: LEGAL/SENSITIVITY CHECK (pattern matching + blocklist)\n\
+  \    |\n    v\nL4: COMPETITIVE INTELLIGENCE GUARD (protect brand positioning)\n    |\n    v\nDECISION: PASS | WARN | FAIL\n\
+  \    |\n    +-- PASS: proceed to social_publisher_n02.md\n    +-- WARN: pass with flagged items (human review suggested)\n\
+  \    +-- FAIL: return to action_prompt_n02_copy.md for regeneration"
+l1_brand_voice_compliance: "brand_voice_rules:\n  source: validation_schema_content_spec.md (tone_rule_matrix)\n\n  universal_blocklist:\n\
+  \    - \"game-changer\"\n    - \"revolutionary\"\n    - \"world-class\"\n    - \"synergy\"\n    - \"leverage\" (as noun\
+  \ in \"a key leverage\")\n    - \"seamlessly\"\n    - \"cutting-edge\"\n    - \"innovative solution\"\n    - \"empower\"\
+  \ (overused; replace with specific action)\n    - \"ecosystem\" (unless genuinely technical context)\n    - \"value-add\"\
+  \n    - \"best-in-class\"\n    - \"state-of-the-art\"\n    - \"thought leader\" (when self-applied)\n    - \"disruptive\"\
+  \ (unless specific market context)\n\n  readability_rules:\n    flesch_kincaid_max: 10 (B2B) / 8 (B2C)\n    avg_sentence_length_max:\
+  \ 25 words\n    passive_voice_max_pct: 20\n\n  action_per_voice:\n    bold:\n      require: verb-first-sentences\n     \
+  \ block: qualifiers (\"might\", \"could\", \"perhaps\", \"potentially\")\n    conversational:\n      require: contractions-allowed\n\
+  \      block: corporate-jargon\n    professional:\n      block: exclamation_mark_count > 2\n      block: emoji_count > 1\n\
+  \    empathetic:\n      require: second-person-references\n      block: prescriptive-commands"
+l2_platform_policy_check: "instagram:\n  prohibited: [explicit_content, misleading_health_claims, firearms, tobacco]\n  text_overlay_rule:\
+  \ max 20% image area (Meta policy)\n  sponsored_label: required_if budget_usd > 0\n\nlinkedin:\n  prohibited: [political_ads_without_disclosure,\
+  \ misleading_professional_claims]\n  discrimination_free: age, gender, race cannot be targeting criterion in ads\n  b2b_tone:\
+  \ required (no hyper-casual language in promoted content)\n\nx_twitter:\n  prohibited: [coordinated_inauthentic_behavior,\
+  \ synthetic_media_without_label]\n  political_ads: require_authorization\n  character_hard_limit: 280 (URLs = 23 chars each)\n\
+  \nmeta_ads:\n  special_categories: [housing, credit, employment, social_issues]\n  text_overlay_check: true (automated via\
+  \ Meta API)\n  landing_page_required: true (for conversion objective)"
+l3_legal_sensitivity_check: "legal_patterns:\n  claim_guardrails:\n    superlatives:\n      detect: [\"#1\", \"best\", \"\
+  only\", \"first\", \"exclusive\", \"guaranteed\"]\n      action: WARN -- requires substantiation\n    health_claims:\n \
+  \     detect: [\"cure\", \"treat\", \"prevent\", \"heal\", \"diagnose\"]\n      action: FAIL -- medical claims require compliance\
+  \ review\n    financial_claims:\n      detect: [\"guaranteed return\", \"risk-free\", \"profit guaranteed\"]\n      action:\
+  \ FAIL -- financial disclaimer required\n\n  sensitivity_blocklist:\n    categories: [racial_slurs, gender_slurs, ableist_language,\
+  \ religious_mockery]\n    action: FAIL (immediate, no regeneration)\n\n  competitor_references:\n    direct_comparison:\
+  \ WARN (legal review)\n    disparagement: FAIL\n    comparative_advertising: WARN (jurisdiction-specific rules)\n\n  trademark_guard:\n\
+  \    detect: [registered_brand_names used incorrectly]\n    action: WARN"
+l4_competitive_intelligence_guard: "competitive_guard:\n  purpose: prevent accidental amplification of competitors\n  rules:\n\
+  \    - no_competitor_mentions: unless explicit comparative campaign (requires approval)\n    - no_competitor_hashtags: detect\
+  \ competitor branded hashtags\n    - no_implicit_reference: detect dog-whistle competitor references\n  source: campaign_brief.competitor_avoid\
+  \ field\n\n  on_detection:\n    action: WARN + flag specific mention + suggest neutral alternative"
+filter_output_schema: "filter_result:\n  asset_id: string\n  decision: PASS|WARN|FAIL\n  score: float (0.0-1.0, where 1.0\
+  \ = fully compliant)\n  checks_passed: integer\n  checks_total: integer\n  violations:\n    - layer: L1|L2|L3|L4\n     \
+  \ rule: string\n      severity: error|warning\n      excerpt: string (the problematic text)\n      suggestion: string\n\
+  \  override_allowed: boolean\n  override_requires: human_review|legal_sign_off|auto"
+override_protocol: "override_rules:\n  WARN_override:\n    allowed: true\n    requires: campaign_manager_acknowledgment\n\
+  \    log: true\n  FAIL_override:\n    L1_brand_voice: allowed (regenerate preferred)\n    L2_platform_policy: not_allowed\n\
+  \    L3_legal: not_allowed (legal sign-off required externally)\n    L4_competitive: allowed with legal_review flag"
+integration:
+- 'Reads: `validation_schema_content_spec.md` (brand voice rules source)'
+- 'Reads: `input_schema_campaign_brief.md` (competitor_avoid field)'
+- 'Called by: `workflow_campaign_pipeline.md` (F6 VALIDATE, after action_prompt)'
+- 'Blocks: `social_publisher_n02.md` (FAIL result prevents publish)'
+- 'Reports to: `self_improvement_loop_n02.md` (violation patterns as learning signals)'

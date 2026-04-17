@@ -1,0 +1,103 @@
+id: p01_kc_plugin_marketplace
+kind: knowledge_card
+pillar: P01
+title: Claude Plugin Marketplace — .claude-plugin/ Distribution Structure
+version: 1.0.0
+created: 2026-03-26
+updated: 2026-03-26
+author: builder_agent
+domain: plugin_distribution
+quality: 9.1
+tags:
+- claude-plugin
+- marketplace
+- distribution
+- plugin-json
+- skill-packaging
+tldr: .claude-plugin/ com marketplace.json (registry) e plugin.json (manifest) define distribuicao de skills via Claude Code
+  Marketplace
+when_to_use: Empacotar skills para distribuicao publica ou instalar plugins de terceiros via Claude Code
+keywords:
+- claude-plugin
+- marketplace-json
+- plugin-json
+- skill-distribution
+long_tails:
+- Como publicar skills no Claude Code Marketplace
+- Qual a estrutura de diretorio para distribuir plugins Claude
+axioms:
+- SEMPRE sincronizar version entre marketplace.json e plugin.json
+- NUNCA omitir keywords no plugin.json (prejudica discoverability)
+linked_artifacts:
+  primary: null
+  related:
+  - p01_kc_cex_function_become
+density_score: null
+data_source: https://github.com/kepano/obsidian-skills
+summary: 'O diretorio `.claude-plugin/` na raiz de um repositorio define metadados para distribuicao de skills via Claude
+  Code Marketplace. Dois arquivos JSON complementares: `marketplace.json` (registry entry para discovery) e `plugin.json`
+  (manifest para instalacao). Um unico repo pode conter multiplos plugins via array `plugins[]`. Instalacao: `/plugin marketplace
+  add {owner}/{repo}` seguido de `/plugin install {name}@{repo}`.'
+spec: '| Arquivo | Campo | Tipo | Descricao |
+
+  |---------|-------|------|-----------|
+
+  | marketplace.json | name | string | Slug do repo, kebab-case |
+
+  | marketplace.json | owner.name | string | Nome do autor |
+
+  | marketplace.json | owner.url | string | URL do autor (opcional) |
+
+  | marketplace.json | plugins[] | array | Plugins neste repo |
+
+  | marketplace.json | plugins[].name | string | Ref para install |
+
+  | marketplace.json | plugins[].source | string | Path no repo ("./" = raiz) |
+
+  | marketplace.json | plugins[].version | semver | Sync com plugin.json |
+
+  | plugin.json | name | string | Bater com plugins[].name |
+
+  | plugin.json | description | string | Aparece em `/plugin info` |
+
+  | plugin.json | keywords | string[] | Busca no marketplace |
+
+  | plugin.json | repository | url | URL GitHub do repo |
+
+  | plugin.json | license | string | SPDX identifier (ex: MIT) |
+
+
+  Versionamento semver sincronizado: patch (1.0.1→1.0.2) para correcoes de skills, minor (1.0→1.1) para skills novas, major
+  (1.x→2.0) para breaking changes na estrutura. Ambos arquivos devem ter a mesma versao.'
+patterns: '| Trigger | Action |
+
+  |---------|--------|
+
+  | Distribuir skills externamente | Criar .claude-plugin/ com ambos JSONs |
+
+  | Repo com multiplos skill sets | Um entry por set no array plugins[] |
+
+  | Atualizar versao do plugin | Incrementar em AMBOS arquivos simultaneamente |
+
+  | Maximizar discoverability | Keywords descritivas e especificas no plugin.json |
+
+  | Consumir plugin de terceiro | `/plugin marketplace add` + `/plugin install` |
+
+  | Skills internas migrando para publico | Adicionar .claude-plugin/ sem mudar estrutura |'
+code: "<!-- lang: json | purpose: complete .claude-plugin/ structure -->\n# Estrutura completa de um plugin distribuivel\n\
+  repo-root/\n  .claude-plugin/\n    marketplace.json      # Registry entry (discovery)\n    plugin.json           # Plugin\
+  \ manifest (install metadata)\n  skills/\n    my-skill/\n      SKILL.md            # Skill definition (frontmatter obrigatorio)\n\
+  \      references/\n        *.md\n  README.md\n  LICENSE\n\n{\n  \"name\": \"my-skills\",\n  \"owner\": {\"name\": \"Author\"\
+  , \"url\": \"https://example.com\"},\n  \"plugins\": [{\n    \"name\": \"toolkit\",\n    \"source\": \"./\",\n    \"description\"\
+  : \"Productivity skills for Claude Code\",\n    \"version\": \"1.2.0\"\n  }]\n}\n\n# Instalacao\n/plugin marketplace add\
+  \ author/my-skills\n/plugin install toolkit@my-skills\n# Formato: {plugin.json:name}@{marketplace.json:name}"
+anti_patterns:
+- Version mismatch entre marketplace.json e plugin.json (install quebra)
+- Omitir keywords (plugin invisivel no marketplace search)
+- plugin.json sem license (bloqueia adocao enterprise/corporativa)
+- Nome do plugin diferente entre os dois arquivos (referencia invalida)
+- Source path apontando para diretorio inexistente no repo
+references:
+- 'source: https://github.com/kepano/obsidian-skills'
+- 'source: https://docs.anthropic.com/en/docs/claude-code'
+- 'related: p01_kc_cex_function_become'

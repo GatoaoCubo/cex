@@ -1,0 +1,162 @@
+id: p05_fmt_engineering_report
+kind: formatter
+pillar: P05
+version: 1.0.0
+created: '2026-04-02'
+updated: '2026-04-02'
+author: builder_agent
+target_format: markdown
+input_type: structured_data
+rule_count: 7
+domain: engineering_reports
+quality: 9.1
+tags:
+- formatter
+- engineering
+- report
+- markdown
+- P05
+tldr: Formats engineering report data into structured Markdown with metrics, test results, deployment status, and performance
+  benchmarks
+template_engine: string_format
+pretty_print: true
+escaping: none
+encoding: utf8
+locale: en-US
+streaming: false
+keywords:
+- engineering-report
+- metrics
+- test-results
+- deployment-status
+- performance-benchmarks
+density_score: 0.91
+formatting_rules: '| Name | Input Field | Transform | Pattern | Options |
+
+  |------|-------------|-----------|---------|---------|
+
+  | metrics_table | project_metrics | tabulate | `| {metric} | {value} | {target} | {status} |` | headers: true, align: center
+  |
+
+  | test_summary | test_results | stringify | `{passed}/{total} tests passed ({percentage}%)` | precision: 1 |
+
+  | build_status | build_info | stringify | `Build #{build_number}: {status} ({duration}s)` | uppercase_status: true |
+
+  | deploy_status | deployment | stringify | `{environment}: {status} @ {timestamp}` | timestamp_format: ISO |
+
+  | issues_count | issue_summary | stringify | `🐛 {bugs} bugs • ⚠️ {warnings} warnings • 📝 {tasks} tasks` | emoji: true |
+
+  | perf_benchmarks | performance | tabulate | `| {test_name} | {baseline} | {current} | {delta} |` | delta_color: true |
+
+  | velocity_data | sprint_metrics | stringify | `Sprint {number}: {completed}/{planned} stories ({velocity} pts)` | round_velocity:
+  0 |'
+input_specification: "Type: structured_data\nStructure: Engineering report object with metrics, test results, build info,\
+  \ deployment status, issues, performance data, and sprint metrics.\nExample:\n{\n  \"project_metrics\": [\n    {\"metric\"\
+  : \"Code Coverage\", \"value\": \"87.5%\", \"target\": \"85%\", \"status\": \"✅\"},\n    {\"metric\": \"Technical Debt\"\
+  , \"value\": \"12h\", \"target\": \"<16h\", \"status\": \"✅\"}\n  ],\n  \"test_results\": {\"passed\": 847, \"total\": 852,\
+  \ \"percentage\": 99.4},\n  \"build_info\": {\"build_number\": 1247, \"status\": \"success\", \"duration\": 285},\n  \"\
+  deployment\": {\"environment\": \"production\", \"status\": \"deployed\", \"timestamp\": \"2026-04-02T10:30:00Z\"},\n  \"\
+  issue_summary\": {\"bugs\": 3, \"warnings\": 12, \"tasks\": 28},\n  \"performance\": [\n    {\"test_name\": \"API Response\"\
+  , \"baseline\": \"120ms\", \"current\": \"98ms\", \"delta\": \"-18%\"}\n  ],\n  \"sprint_metrics\": {\"number\": 42, \"\
+  completed\": 23, \"planned\": 25, \"velocity\": 89.2}\n}"
+output_specification: 'Format: markdown
+
+  Example:
+
+  # Engineering Report
+
+
+  ## Project Metrics
+
+  | Metric | Value | Target | Status |
+
+  |--------|-------|--------|--------|
+
+  | Code Coverage | 87.5% | 85% | ✅ |
+
+  | Technical Debt | 12h | <16h | ✅ |
+
+
+  ## Test Results
+
+  847/852 tests passed (99.4%)
+
+
+  ## Build Status
+
+  Build #1247: SUCCESS (285s)
+
+
+  ## Deployment Status
+
+  production: deployed @ 2026-04-02T10:30:00Z
+
+
+  ## Issues Summary
+
+  🐛 3 bugs • ⚠️ 12 warnings • 📝 28 tasks
+
+
+  ## Performance Benchmarks
+
+  | Test Name | Baseline | Current | Delta |
+
+  |-----------|----------|---------|-------|
+
+  | API Response | 120ms | 98ms | -18% |
+
+
+  ## Sprint Velocity
+
+  Sprint 42: 23/25 stories (89 pts)'
+template: 'Engine: string_format
+
+  # Engineering Report
+
+
+  ## Project Metrics
+
+  {metrics_table}
+
+
+  ## Test Results
+
+  {test_summary}
+
+
+  ## Build Status
+
+  {build_status}
+
+
+  ## Deployment Status
+
+  {deploy_status}
+
+
+  ## Issues Summary
+
+  {issues_count}
+
+
+  ## Performance Benchmarks
+
+  {perf_benchmarks}
+
+
+  ## Sprint Velocity
+
+  {velocity_data}'
+edge_cases:
+- 'Null values: render as `N/A` placeholder in tables and `-` in summary strings'
+- 'Empty arrays: render section as "No data available"'
+- 'Missing performance data: omit Performance Benchmarks section entirely'
+- 'Zero values: display as `0` rather than empty string'
+- 'Special characters: emoji preserved in issues summary, pipe `|` escaped as `\|` in table cells'
+- 'Long metric names: truncate at 25 chars with ellipsis in tables'
+- 'Negative deltas: prefix with `-` and color red if delta_color enabled'
+- 'Timestamp formatting: ISO 8601 format with timezone, fallback to raw string if invalid'
+references:
+- CommonMark table specification for Markdown table rendering
+- ISO 8601 timestamp format standard
+- Engineering metrics best practices (DORA metrics, code coverage standards)

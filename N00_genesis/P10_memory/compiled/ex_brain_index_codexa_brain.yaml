@@ -1,0 +1,62 @@
+id: p10_bi_organization_brain
+kind: knowledge_index
+pillar: P10
+title: 'Brain Index: organization Knowledge Base'
+version: 1.0.0
+created: 2026-03-22
+updated: 2026-03-22
+author: knowledge_agent
+quality: 9.0
+tags:
+- brain
+- index
+- bm25
+- faiss
+- search
+- memory
+tldr: 'Hybrid search index: BM25 (keyword, ~50% accuracy) + FAISS/Ollama (semantic, ~88% accuracy) over 9916 MD files in organization-core'
+max_bytes: 1024
+density_score: 0.89
+source: organization-core/CLAUDE.md (BRAIN SEARCH) + records/core/brain/mcp-organization-brain/
+linked_artifacts:
+  smoke_eval: p07_se_brain_query
+configuration: "knowledge_index:\n  name: organization_knowledge_base\n  version: current\n  location: records/core/brain/mcp-organization-brain/\n\
+  \n  corpus:\n    total_files: ~9916\n    primary: records/pool/knowledge/  # KCs\n    secondary: records/agents/*/iso_vectorstore/\n\
+  \    tertiary: records/skills/*/SKILL.md\n\n  search_backends:\n    bm25:\n      type: keyword\n      accuracy: ~50%\n \
+  \     fallback: true  # activates when Ollama down\n      rebuild_time: < 1min\n\n    faiss:\n      type: semantic\n   \
+  \   model: nomic-embed-text  # via Ollama local\n      accuracy: ~88%\n      index_size: 140MB  # gitignored — must rebuild\
+  \ on fresh clone\n      rebuild_time: ~20min\n      rebuild_cmd: \"python build_indexes_ollama.py --scope all\""
+hybrid_search_mode: "Query → BM25 (keyword match) + FAISS (semantic match)\n      → merge results (rank fusion)\n      → return\
+  \ top-N with confidence scores\n\nIf Ollama DOWN:\n  → BM25-only fallback (~50% accuracy)\n  → search_mode: \"bm25_only\"\
+  \ in response"
+accuracy_by_mode: '| Mode | Accuracy | When |
+
+  |------|----------|------|
+
+  | Hybrid (BM25+FAISS) | ~88% | Ollama running |
+
+  | BM25-only | ~50% | Ollama down |'
+rebuild_protocol: '# Check if rebuild needed (stale > 24h):
+
+  brain_status()  # returns last_rebuild timestamp
+
+
+  # Rebuild full index:
+
+  cd records/core/brain/mcp-organization-brain
+
+  python build_indexes_ollama.py --scope all
+
+
+  # Verify:
+
+  brain_query("test agent for web scraping")  # should return web_scraper'
+scope_mapping: '| Query Pattern | Best Backend | Example |
+
+  |---------------|-------------|---------|
+
+  | `"agent for X"` | FAISS (semantic) | `"agent for security scanning"` |
+
+  | `"KC_knowledge_agent_*"` | BM25 (keyword) | `"KC_knowledge_agent_088"` |
+
+  | `"skill for X"` | FAISS | `"skill for continuous batching"` |'

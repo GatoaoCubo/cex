@@ -1,0 +1,72 @@
+id: landing_page_petshop_crm
+kind: landing_page
+pillar: P05
+title: Pet Shop CRM - Manage Your Business Efficiently
+version: 1.0.0
+created: 2023-10-15
+author: landing-page-builder
+quality: 8.9
+tags:
+- landing-page
+- petshop_crm
+- html
+- responsive
+- dark-mode
+stack: html
+sections_count: 6
+responsive: true
+dark_mode: true
+a11y: AA
+seo:
+  title: Pet Shop CRM - Streamline Your Pet Shop Operations
+  description: Manage pet data, appointments, and inventory with our easy-to-use CRM. Free tier available. Boost your pet
+    shop efficiency today.
+  og_image: https://example.com/og-image.jpg
+density_score: 1.0
+design_tokens: '| Token | Value |
+
+  |-------|-------|
+
+  | Primary | #3B82F6 |
+
+  | Secondary | #10B981 |
+
+  | Font Heading | ''Inter'', sans-serif |
+
+  | Font Body | ''Inter'', sans-serif |'
+sections:
+- Hero
+- Features
+- Testimonials
+- Pricing
+- FAQ
+- CTA
+code: '<html> <head> <meta charset="UTF-8" /> <meta name="viewport" content="width=device-width, initial-scale=1.0" /> <title>Pet
+  Shop CRM - Streamline Your Pet Shop Operations</title> <meta property="og:title" content="Pet Shop CRM - Streamline Your
+  Pet Shop Operations" /> <meta property="og:description" content="Manage pet data, appointments, and inventory with our easy-to-use
+  CRM. Free tier available. Boost your pet shop efficiency today." /> <meta property="og:image" content="https://example.com/og-image.jpg"
+  /> <meta property="og:url" content="https://example.com/pet-shop-crm" /> <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap"
+  rel="stylesheet"> <script src="https://cdn.tailwindcss.com"></script> <style> @media (prefers-color-scheme: dark) { :root
+  { --bg-color: #1a202c; --text-color: #f7fafc; } } </style> </head> <body class="bg-white text-gray-900 dark:bg-gray-900
+  dark:text-white transition-colors duration-300"> <header class="sticky top-0 z-10 bg-white dark:bg-gray-900 shadow-md">
+  <div class="container mx-auto px-4 py-4 flex justify-between items-center"> <h1 class="text-2xl font-bold">Pet Shop CRM</h1>
+  <nav class="hidden md:flex space-x-6"> <a href="#hero" class="hover:text-blue-600 dark:hover:text-blue-400">Home</a> <a
+  href="#features" class="hover:text-blue-600 dark:hover:text-blue-400">Features</a> <a href="#testimonials" class="hover:text-blue-600
+  dark:hover:text-blue-400">Testimonials</a> <a href="#pricing" class="hover:text-blue-600 dark:hover:text-blue-400">Pricing</a>
+  <a href="#faq" class="hover:text-blue-600 dark:hover:text-blue-400">FAQ</a> </nav> <button class="md:hidden" id="menu-toggle">☰</button>
+  </div> </header> <main class="container mx-auto px-4 py-12"> <section id="hero" class="mb-16" aria-label="Hero Section">
+  <div class="max-w-3xl mx-auto text-center"> <h2 class="text-4xl font-bold mb-4">Streamline Your Pet Shop Operations</h2>
+  <p class="text-xl mb-8">Track pets, manage appointments, and boost sales effortlessly with our CRM solution.</p> <a href="#cta"
+  class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-md font-medium transition-colors">Get Started for Free</a>
+  </div> </section> <section id="features" class="mb-16" aria-label="Features Section"> <h2 class="text-3xl font-bold mb-12
+  text-center">Key Features</h2> <div class="grid md:grid-cols-2 gap-8"> <div class="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg">
+  <div class="text-blue-600 dark:text-blue-400 mb-4"> <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none"
+  viewBox="0 0 24 2 </think> (Continued from previous code) <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+  stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" /> </div> <h3 class="text-xl font-semibold mb-2">Pet Data Management</h3>
+  <p>Organize and track all your pet information in one centralized location.</p> </div> <div class="bg-gray-50 dark:bg-gray-800
+  p-6 rounded-lg"> <div class="text-green-600 dark:text-green-400 mb-4"> <svg xmlns="http://www.w3.org/2000/svg" class="h-8
+  w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+  d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.582a1 1 0 01.707.293l5.474 5.474a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+  /> </svg> </div> <h3 class="text-xl font-semibold mb-2">Appointment Scheduling</h3> <p>Effortlessly manage and schedule
+  appointments for your pet owners.</p> </div> <div class="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg"> <div class="text-purple-600
+  dark:text-purple-400 mb-4"> <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 2'

@@ -1,0 +1,56 @@
+id: ex_social_publisher_clothing
+kind: cli_tool
+pillar: P04
+title: Social Publisher — Fashion Brand (Clothing Niche)
+version: 1.0.0
+created: 2026-03-31
+author: social-publisher-builder
+domain: social_publisher
+quality: 9.1
+tags:
+- social-publisher
+- example
+- fashion
+- clothing
+- instagram
+- tiktok
+- pinterest
+tldr: Config for fashion brand — IG+TikTok+Pinterest, Airtable catalog, visual-driven strategy with evening posting.
+density_score: 0.88
+updated: '2026-04-07'
+about: Config for a contemporary women's fashion brand. Instagram, TikTok, and Pinterest — visual platforms where fashion
+  content performs best. Evening posting optimized for browse-and-buy behavior.
+config: "identity:\n  empresa: \"Atelier Noa\"\n  handle: \"@ateliernoa\"\n  nicho: fashion\n  tom: \"elegant, contemporary,\
+  \ empowering\"\n  persona: \"Noa\"\n  bio: \"Moda contemporânea para mulheres que lideram ✨\"\n\nplatforms: [instagram,\
+  \ tiktok, pinterest]\n\nschedule:\n  timezone: \"America/Sao_Paulo\"\n  calendar:\n    monday:    { type: product, time:\
+  \ \"19:00\" }\n    tuesday:   { type: educational, time: \"12:00\" }\n    wednesday: { type: product, time: \"19:00\" }\n\
+  \    thursday:  { type: trend, time: \"20:00\" }\n    friday:    { type: product, time: \"18:00\" }\n    saturday:  { type:\
+  \ tips, time: \"11:00\" }\n    sunday:    { type: educational, time: \"10:00\" }\n\ncontent_mix:\n  product: 45\n  educational:\
+  \ 20\n  tips: 15\n  trends: 20\n\ncatalog:\n  type: airtable\n  url_env: AIRTABLE_API_URL\n  key_env: AIRTABLE_API_KEY\n\
+  \  table: collection_ss26\n  cooldown_days: 4\n\npublisher:\n  type: ayrshare\n  api_key_env: AYRSHARE_API_KEY\n  batch_size:\
+  \ 3\n  retry:\n    max: 3\n    backoff: exponential\n    base_seconds: 30\n\nhashtags:\n  brand: [\"ateliernoa\", \"noafashion\"\
+  ]\n  niche: [\"modacontemporanea\", \"fashionbrasil\", \"ootd\", \"streetstyle\", \"lookdodia\"]\n  max_per_post: 15\n\n\
+  notifications:\n  type: discord\n  webhook_env: DISCORD_WEBHOOK_URL\n\ncron:\n  type: windows_task\n  interval: daily"
+niche_notes:
+- '3 platforms: fashion thrives on visual platforms; Pinterest drives long-tail traffic'
+- 'Evening posting (18-20h): fashion audience browses after work → highest impulse purchase window'
+- 'Higher trends % (20): fashion is trend-driven; seasonal/collection content must stay current'
+- 'Pinterest strategy: pins have 4-month average lifespan vs 24h for IG → SEO value'
+- 'Airtable catalog: fashion brands manage seasonal collections → Airtable enables collection-based filtering'
+- 'Higher hashtag limit (15): fashion IG posts benefit from more hashtags (discoverability)'
+- '4-day cooldown: fashion products need variety — same dress 2x/week kills exclusivity perception'
+- 'TikTok evening (20h): Gen-Z fashion audience peaks at 20-22h — try-on hauls, styling tips'
+cross_references:
+- 'Pillar: P04 (Tools)'
+- 'Kind: `cli tool`'
+- 'Artifact ID: `ex_social_publisher_clothing`'
+- 'Tags: [social-publisher, example, fashion, clothing, instagram, tiktok, pinterest]'
+integration_points: '| Component | Role |
+
+  |-----------|------|
+
+  | Pillar P04 | Tools domain |
+
+  | Kind `cli tool` | Artifact type |
+
+  | Pipeline | 8F (F1→F8) |'
