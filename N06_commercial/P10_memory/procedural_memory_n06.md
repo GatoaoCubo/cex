@@ -5,8 +5,9 @@ pillar: P10
 nucleus: n06
 title: "Procedural Memory -- N06 Commercial Standard Operating Procedures"
 version: 1.0.0
-quality: null
+quality: 9.0
 tags: [procedural-memory, sop, commercial, deals, escalation, renewal, operations]
+density_score: 0.98
 ---
 
 # Procedural Memory: N06 Commercial SOPs
