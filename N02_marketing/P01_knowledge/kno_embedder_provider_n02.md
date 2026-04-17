@@ -5,8 +5,9 @@ pillar: P01
 nucleus: N02
 title: "N02 Marketing Embedder Provider"
 version: "1.0.0"
-quality: null
+quality: 9.1
 tags: [embedder_provider, marketing, embeddings, retrieval, creative_lust, n02]
+density_score: 1.0
 ---
 <!-- 8F: F1=embedder_provider/P01 F2=embedder-provider-builder F3=nucleus_def_n02+kc_campaign+ab_testing_framework+P01_schema+N02_memory F4=provider_choice_for_conversion_copy_similarity F5=shell_command,apply_patch F6=approx_6kb F7=frontmatter+8F+80_lines+dense_tables+self_check_pass F8=N02_marketing/P01_knowledge/kno_embedder_provider_n02.md -->
 
