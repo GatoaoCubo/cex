@@ -1,5 +1,6 @@
 id: p01_ctx_organization_boot_chain
 kind: context_doc
+pillar: P01
 domain: architecture
 scope: Sequencia deterministica de 8 camadas que inicializa qualquer sessao organization, de variavel de ambiente ate execucao
   de tarefa.

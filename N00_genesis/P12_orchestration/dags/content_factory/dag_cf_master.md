@@ -1,6 +1,7 @@
 ---
 id: p12_dag_cf_master
 kind: dag
+pillar: P12
 lp: P12
 version: "1.0.0"
 created: "2026-04-06"

@@ -1,6 +1,7 @@
 ---
 id: p01_rs_brain_faiss_index
 kind: rag_source
+pillar: P01
 url: records/core/brain/mcp-organization-brain/src/indexes/
 domain: knowledge_retrieval
 last_checked: 2026-03-24
