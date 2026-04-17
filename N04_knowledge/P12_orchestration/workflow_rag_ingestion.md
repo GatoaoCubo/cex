@@ -5,7 +5,7 @@ pillar: P12
 nucleus: n04
 title: "Workflow -- RAG Corpus Ingestion Pipeline"
 version: "1.0.0"
-quality: null
+quality: 9.1
 tags: [workflow, n04, rag, ingestion, corpus, embedding, indexing, P12]
 domain: knowledge management
 status: active

@@ -8,9 +8,10 @@ updated: "2026-04-17"
 author: "n05_operations"
 domain: "browser automation"
 tags: [knowledge_card, chrome, cdp, browser, automation, playwright, P01]
-quality: null
+quality: 9.2
 title: "Chrome CDP Browser Automation"
 tldr: "Control user Chrome via CDP WebSocket: setup, gotchas, session cookies, click strategies, and NotebookLM integration"
+density_score: 0.98
 ---
 
 # Chrome CDP Browser Automation
