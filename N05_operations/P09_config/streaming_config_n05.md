@@ -15,10 +15,11 @@ max_connections: 5
 backpressure_strategy: drop
 timeout_ms: null
 flush_interval_ms: 1000
-quality: null
+quality: 8.9
 tags: [streaming_config, auto, file-watcher, operations, N05, P05]
 tldr: "File-based ops streams for N05: 5 channels (signal/audit/health/compile/dispatch), 100-event buffer, 1s flush, drop_oldest."
 description: "Local file-watcher streaming for N05: signals, audit JSONL, health heartbeats, compile progress, dispatch lifecycle events."
+density_score: 1.0
 ---
 
 ## Overview
