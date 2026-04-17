@@ -5,8 +5,10 @@ pillar: P02
 nucleus: n00
 title: "RL Algorithm -- Canonical Manifest"
 version: 1.0
-quality: null
+quality: 9.0
 tags: [manifest, rl_algorithm, p02, n00, archetype, template]
+density_score: 1.0
+updated: "2026-04-17"
 ---
 
 <!-- 8F: F1=knowledge_card P02 F2=knowledge-card-builder F3=kinds_meta+builder-manifest F4=plan F5=scan F6=produce F7=gate F8=save -->
