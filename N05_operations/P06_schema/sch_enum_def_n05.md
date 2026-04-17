@@ -5,8 +5,9 @@ pillar: P06
 nucleus: n05
 title: Release Gate Enum
 version: 1.0
-quality: null
+quality: 9.0
 tags: [schema, enum, operations, release, gating]
+density_score: 1.0
 ---
 <!-- 8F: F1 constrain=P06/enum_def F2 become=enum-def-builder F3 inject=nucleus_def_n05+n05-operations+kc_enum_def+P06_schema+N05 schema examples
      F4 reason=closed set for ops gating states with deny-first semantics F5 call=apply_patch F6 produce=6577 bytes

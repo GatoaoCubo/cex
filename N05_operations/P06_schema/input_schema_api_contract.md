@@ -90,7 +90,7 @@ examples:
   - {endpoint: "scale", nucleus_id: "n01", target_replicas: 3, max_budget_usd: 5.00}
   - {endpoint: "health_check", target: "pipeline", depth: "deep"}
 domain: "infrastructure"
-quality: null
+quality: 9.2
 tags: [input-schema, infrastructure, cicd, deploy, monitor, scale, health-check, N05, operations]
 tldr: "Input contract for CEX ops API: deploy/monitor/scale/health-check endpoints. Enforces nucleus_id, environment, metric, replica, and depth gates."
 keywords: [deploy, monitor, scale, health_check, nucleus_id, rollback, replica, budget, pipeline, cicd]
