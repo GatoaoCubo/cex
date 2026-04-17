@@ -4,10 +4,11 @@ kind: knowledge_card
 pillar: P01
 title: "HYBRID_REVIEW3 Audit: dataset_card (N03)"
 version: 1.0.0
-quality: 8.6
+quality: 8.9
 tags: [audit, hybrid_review3, dataset_card, gemma4, wave2]
 domain: data engineering quality assurance
 created: "2026-04-14"
+density_score: 1.0
 ---
 
 # HYBRID_REVIEW3 Audit — dataset_card (13 ISOs)
