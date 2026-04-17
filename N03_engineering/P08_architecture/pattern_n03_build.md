@@ -7,10 +7,11 @@ version: 1.0.0
 created: 2026-04-17
 author: n03_engineering
 domain: artifact-construction
-quality: null
+quality: 9.2
 tags: [pattern, N03, build, template-first, hybrid, fresh, construction-triad, 8F]
 tldr: "Three canonical build patterns for N03: Template-First (score >= 0.60), Hybrid (0.30-0.60), Fresh (<0.30). Selection is automatic via F4 REASON based on template match score. Each pattern has distinct F6 instructions and quality expectations."
 density_score: 0.90
+updated: "2026-04-17"
 ---
 
 # Pattern: N03 Canonical Build Patterns
