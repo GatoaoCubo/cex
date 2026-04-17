@@ -5,8 +5,9 @@ pillar: P09
 nucleus: n02
 title: Marketing Rate Limits
 version: 1.0
-quality: null
+quality: 9.0
 tags: [config, rate_limit, budget, marketing, runtime]
+density_score: 1.0
 ---
 
 

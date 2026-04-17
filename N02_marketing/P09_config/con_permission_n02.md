@@ -5,8 +5,9 @@ pillar: P09
 nucleus: n02
 title: Marketing Permission Rule
 version: 1.0
-quality: null
+quality: 9.0
 tags: [config, permission, access, marketing, governance]
+density_score: 1.0
 ---
 
 
