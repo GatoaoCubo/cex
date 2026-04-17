@@ -5,7 +5,7 @@ pillar: P04
 nucleus: n04
 title: "Retriever -- N04 Dense + Sparse Fusion Configuration"
 version: "1.0.0"
-quality: null
+quality: 9.1
 tags: [retriever, n04, dense_retrieval, sparse_retrieval, hybrid, RRF, P04]
 domain: knowledge management
 status: active

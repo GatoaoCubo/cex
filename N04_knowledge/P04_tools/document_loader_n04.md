@@ -5,7 +5,7 @@ pillar: P04
 nucleus: n04
 title: "Document Loader -- N04 Multi-Format Ingestion Pipeline"
 version: "1.0.0"
-quality: null
+quality: 9.1
 tags: [document_loader, n04, ingestion, pdf, markdown, html, docx, repo, P04]
 domain: knowledge management
 status: active
