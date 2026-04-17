@@ -5,7 +5,7 @@ pillar: P10
 nucleus: n04
 title: "Memory Scope -- N04 Context Boundary Definitions"
 version: "1.0.0"
-quality: null
+quality: 9.1
 tags: [memory_scope, n04, context_boundary, working_memory, session, P10]
 domain: knowledge management
 status: active

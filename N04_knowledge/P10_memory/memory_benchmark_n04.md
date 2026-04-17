@@ -5,7 +5,7 @@ pillar: P10
 nucleus: n04
 title: "Memory Benchmark -- N04 Retrieval Quality Baselines"
 version: "1.0.0"
-quality: null
+quality: 9.1
 tags: [memory_benchmark, n04, retrieval, MRR, NDCG, precision, recall, P10]
 domain: knowledge management
 status: active
