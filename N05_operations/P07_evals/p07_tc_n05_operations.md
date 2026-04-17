@@ -1,0 +1,119 @@
+---
+id: p07_tc_n05_operations
+kind: trace_config
+pillar: P07
+version: "1.0.0"
+created: "2026-04-17"
+updated: "2026-04-17"
+author: "trace-config-builder"
+enabled: true
+sample_rate: 0.10
+export_format: json_file
+export_path: ".cex/runtime/traces/"
+capture_prompts: false
+capture_responses: false
+span_attributes:
+  - cex.nucleus
+  - cex.kind
+  - cex.8f.function
+  - cex.mission
+  - cex.wave
+  - cex.trace_id
+  - cex.span_type
+  - cex.tokens.input
+  - cex.tokens.output
+  - cex.latency_ms
+  - cex.error.type
+  - cex.quality.score
+  - cex.signal.status
+retention_days: 7
+quality: null
+tags: [trace_config, n05_operations, observability, distributed-tracing, P07]
+tldr: "N05 ops tracing: 10% success / 100% error sample, json_file export, 7d hot + archive, 8F spans + dispatch/signal/compile"
+description: "Distributed tracing config for CEX N05 operations nucleus. Spans cover dispatch, 8F pipeline, signal, compile, and tool_call across nucleus boundaries."
+scope: "n05_operations"
+environment: production
+error_classification:
+  transient: "rate_limit, timeout, connection_reset, compile_retry"
+  permanent: "auth_failure, schema_invalid, signal_malformed, artifact_missing"
+  degraded: "quality_below_threshold, fallback_triggered, compile_warn"
+---
+
+## Tracing Specification
+
+Enabled at **10% base sample rate** (success) and **100% for error spans**. Head-based
+sampling at root `cex.dispatch` span; error override propagates to all children. Keeps
+volume under 200 MB/day at 50-150 tasks/day while capturing every failure.
+
+Trace ID format: `{mission}_{wave}_{nucleus}_{timestamp}`. Injected into handoff files
+for cross-nucleus correlation without a centralized collector. Export: `json_file` to
+`.cex/runtime/traces/`. Git correlation via `cex.trace_id` in commit messages.
+
+Instrumentation: `dispatch.sh` (root), 8F F1-F8 (child spans), `signal_writer.py`
+(completion), `cex_compile.py` (compile event), `cex_doctor.py` (health), `tool_call`.
+
+## Capture Rules
+
+| Category | Captured | Rationale |
+|----------|----------|-----------|
+| Span metadata (nucleus, kind, 8F fn) | YES | Lightweight, no PII |
+| Token counts (input/output/total) | YES | Cost attribution |
+| Latency per span | YES | Performance debugging |
+| Error codes + classification | YES | Incident triage and retry logic |
+| Signal status (complete/fail/timeout) | YES | Cross-nucleus health |
+| Trace ID (mission_wave_nucleus_ts) | YES | Handoff correlation |
+| Prompt content | NO | PII risk |
+| Response content | NO | Storage + privacy risk |
+| Tool call names | YES | Invocation debug aid |
+| Tool call results | NO | May contain secrets |
+| Handoff file paths | YES | Artifact lineage |
+| Git commit hash | YES | Trace-to-commit link |
+
+## Span Attributes
+
+| Span | Attributes | 8F Mapping |
+|------|------------|------------|
+| `cex.dispatch` | mission, wave, nucleus, trace_id, cli | Root -- one per dispatch call |
+| `cex.8f.f1_constrain` | kind_resolved, pillar, schema_loaded | F1 CONSTRAIN |
+| `cex.8f.f2_become` | builder_id, iso_count, sin_lens | F2 BECOME |
+| `cex.8f.f3_inject` | sources_count, template_match_pct | F3 INJECT |
+| `cex.8f.f4_reason` | section_count, approach, gdp_required | F4 REASON |
+| `cex.8f.f5_call` | tools_ready, similar_count | F5 CALL |
+| `cex.8f.f6_produce` | bytes, sections, density_score | F6 PRODUCE |
+| `cex.8f.f7_govern` | score, gates_passed, gates_total | F7 GOVERN |
+| `cex.8f.f8_collaborate` | path, compiled, committed, signal_sent | F8 COLLABORATE |
+| `cex.compile` | target_path, status, warnings | cex_compile.py invocation |
+| `cex.signal` | nucleus, status, quality_score | signal_writer.py emit |
+| `cex.tool_call` | tool_name, success, latency_ms | Any tool invocation |
+| `cex.doctor` | checks_passed, checks_total, health | cex_doctor.py run |
+
+Hierarchy: `cex.dispatch` (N07) -> `cex.8f.*` (N03/N05) -> `cex.compile` -> `cex.signal`.
+Trace ID propagated via handoff file field `trace_id:`.
+
+## Retention Policy
+
+| Tier | Days | Storage | Cleanup |
+|------|------|---------|---------|
+| Hot | 7 | `.cex/runtime/traces/` (raw JSON) | Auto-archive on day 8 |
+| Archive | 30 | `.cex/runtime/archive/traces/` (gzip) | Hard-delete on day 31 |
+
+Hot: active debugging, queryable by trace_id or nucleus. Archive: compressed rotation,
+`gunzip` on-demand. Error traces held full 7 days regardless of sample rate.
+`cex.sampled: true|false` attribute on root span controls child propagation.
+
+## Privacy Controls
+
+Span values are sanitized -- no user input, API keys, or secrets. Prompt/response
+content excluded (`capture_prompts: false`, `capture_responses: false`). Tool results
+excluded (may contain external API data). Traces are local-only; if OTLP is added
+later, a privacy assessment is required before enabling prompt capture.
+Error override (100%) applied before child spans are created -- no error dropped.
+
+## References
+
+- `archetypes/builders/trace-config-builder/bld_schema_trace_config.md`
+- `archetypes/builders/trace-config-builder/bld_memory_trace_config.md`
+- `.claude/rules/8f-reasoning.md` (8F function boundaries for span mapping)
+- `_tools/signal_writer.py` (completion event instrumentation point)
+- `_tools/cex_compile.py` (compile event instrumentation point)
+- `_spawn/dispatch.sh` (root span entry point)

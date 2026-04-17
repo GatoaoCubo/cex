@@ -1,0 +1,87 @@
+id: p07_e2e_n05
+kind: e2e_eval
+pillar: P07
+title: 'E2E: CEX System Pipeline (N05 Owned)'
+version: 1.0.0
+created: '2026-04-17'
+updated: '2026-04-17'
+author: e2e-eval-builder
+pipeline: cex-system-full
+stages: '| Stage | Tool | Severity | Timeout |
+
+  |-------|------|----------|---------|
+
+  | bootstrap | cex_bootstrap.py --from-file | blocking | 30s |
+
+  | build_8f | n03 8F pipeline | blocking | 120s |
+
+  | dispatch_solo | dispatch.sh solo n03 | blocking | 180s |
+
+  | grid_6 | dispatch.sh grid SMOKE_GRID | blocking | 360s |
+
+  | compile | cex_compile.py {path} | warning | 10s |
+
+  | doctor | cex_doctor.py | warning | 60s |
+
+  | signal | signal_writer.write_signal(''n05'',''complete'',None) | blocking | 5s |
+
+  | quality_gate | cex_score.py --apply + cex_feedback.py | warning | 30s |
+
+
+  Blocking: failure halts the run and emits `[FAIL] stage | assertion | elapsed_s`.
+
+  Warning: logged but subsequent stages continue.'
+input: brand_init.yaml + intent 'create knowledge_card topic=prompt_caching pillar=P01'
+expected_output: 'All 8 stages PASS:
+
+  - `brand_config.yaml` with 13+ fields present
+
+  - `P01_knowledge/kc_prompt_caching.md` + compiled `.yaml` exist, `quality: null`
+
+  - Solo signal: `signal_n03_SMOKE_*.json` with `status: complete`
+
+  - Grid: 6 signal files + 6 deliverable files, zero orphan processes
+
+  - `cex_doctor.py` exit 0, no FAIL lines
+
+  - Score float written to artifact; feedback log entry appended'
+timeout: 600
+environment: local-dev-windows
+data_fixtures: "brand_init:\n  name: TestBrand\n  domain: tech\n  values: [quality, speed, clarity]\n  voice: technical\n\
+  \  audience: developers\n  revenue_model: subscription\n\ngrid_handoffs:\n  SMOKE_n01: \"produce knowledge_card pillar=P01\
+  \ topic=web_scraping\"\n  SMOKE_n02: \"produce prompt_template pillar=P03 topic=ad_copy\"\n  SMOKE_n03: \"produce knowledge_card\
+  \ pillar=P01 topic=prompt_caching\"\n  SMOKE_n04: \"produce glossary_entry pillar=P01 term=RAG\"\n  SMOKE_n05: \"produce\
+  \ env_config pillar=P09 env=local\"\n  SMOKE_n06: \"produce content_monetization pillar=P11 tier=free\""
+cleanup: 'rm -f .cex/runtime/handoffs/SMOKE_*.md
+
+  rm -f .cex/runtime/signals/signal_n0*SMOKE*.json
+
+  rm -f .cex/runtime/pids/spawn_pids_SMOKE.txt
+
+  git checkout -- .cex/brand/brand_config.yaml 2>/dev/null || true'
+parallel: false
+reporting: 'stdout: [PASS|FAIL] stage_name | assertion | elapsed_s; blocking failures halt run'
+domain: system-validation
+quality: null
+tags:
+- e2e-eval
+- cex-system
+- n05-operations
+- pipeline-validation
+- gating-wrath
+tldr: '600s e2e: 8 stages bootstrap->build->dispatch->grid->compile->doctor->signal->quality_gate. N05 owned.'
+density_score: 0.91
+pipeline_overview: "[brand_init.yaml]\n      |\n[bootstrap] -> brand_config.yaml + propagate\n      |\n[build_8f] -> knowledge_card\
+  \ .md + .yaml\n      |\n[dispatch_solo] -> handoff -> nucleus boot -> artifact -> signal\n      |\n[grid_6] -> 6 nuclei\
+  \ -> 6 signals -> 6 deliverables\n      |\n[compile] -> .md -> cex_compile.py -> .yaml sidecar\n      |\n[doctor] -> cex_doctor.py\
+  \ -> exit 0\n      |\n[signal] -> signal_writer.py -> JSON signal file\n      |\n[quality_gate] -> cex_score.py -> gate\
+  \ pass -> cex_feedback.py"
+stage_assertions_detail:
+- 'bootstrap: `brand_config.yaml` has 13+ fields; `brand_propagate.py` exit 0'
+- 'build_8f: `.md` + `compiled/*.yaml` both present; `quality: null` in frontmatter'
+- 'dispatch_solo: signal JSON at `.cex/runtime/signals/`; `git log --since=5min` shows commit'
+- 'grid_6: exactly 6 signal files; 6 deliverable paths from handoffs; no orphan `claude.exe`'
+- 'compile: output YAML parses; `id` and `kind` fields match source `.md`'
+- 'doctor: `exit_code == 0`; stdout has no `FAIL` substring'
+- 'signal: file exists; `json.nucleus == ''n05''`; `json.status == ''complete''`'
+- 'quality_gate: score is float; `cex_feedback.py` log entry timestamp matches run'

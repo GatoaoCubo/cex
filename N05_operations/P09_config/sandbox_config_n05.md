@@ -1,0 +1,81 @@
+---
+id: p09_sb_n05_operations
+kind: sandbox_config
+pillar: P09
+title: "N05 Operations -- Sandbox Isolation Config"
+version: "1.0.0"
+created: "2026-04-17"
+updated: "2026-04-17"
+author: financeiro@gatoaocubo3.com
+domain: "operations, tool-execution, process-management"
+quality: null
+tags: [sandbox_config, n05, operations, isolation, security-boundary]
+tldr: "N05 sandbox: file write scoped to N05+runtime dirs, read-only repo, tool whitelist, localhost-only network, max 5 sub-agents."
+sandbox_type: isolated
+platform: native
+---
+
+## Resource Limits
+
+| Resource | Limit | Unit |
+|----------|-------|------|
+| CPU | 2 | cores |
+| RAM | 1024 | MB |
+| Disk write | 512 | MB |
+| Timeout | 1800 | seconds |
+| Max processes | 5 | count |
+
+## Filesystem Scope
+
+```yaml
+read_only_root: true
+allowed_write: [N05_operations/, .cex/runtime/signals/, .cex/runtime/audit/, compiled/]
+allowed_read: ["**"]
+denied_write: [.cex/config/, .env, boot/, "N0[0-47]_*/"]
+scratch_dir: .cex/runtime/audit/
+scratch_size_mb: 64
+```
+
+## Network Policy
+
+```yaml
+mode: whitelist
+egress: whitelist
+allowed_hosts: [localhost, api.anthropic.com]
+allowed_ports: [11434, 443]
+arbitrary_http: false
+dns: false
+```
+
+## Tool Execution
+
+```yaml
+allowed_scripts: [_tools/cex_*.py, _spawn/dispatch.sh]
+allowed_dispatch_verbs: [status, stop]
+denied_dispatch_verbs: [solo, grid, swarm]
+git_commit_scope: N05_operations/
+git_force_push: false
+```
+
+## Isolation
+
+```yaml
+runtime: native
+enforcement: pre-execution-hook
+hook: _tools/cex_hooks_native.py
+no_new_privs: true
+capabilities_drop: [arbitrary_http, cross_nucleus_write, force_push]
+env_read: ["CEX_*"]
+env_write: []
+kill_other_nuclei: false
+```
+
+## Audit
+
+```yaml
+pre_execution_validation: true
+post_execution_log: true
+log_destination: .cex/runtime/audit/n05_audit.jsonl
+log_retention_days: 30
+log_fields: [timestamp, tool, verb, path, result, duration_ms]
+```

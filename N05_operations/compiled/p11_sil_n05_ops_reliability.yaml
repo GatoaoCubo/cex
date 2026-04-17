@@ -1,0 +1,136 @@
+id: p11_sil_n05_ops_reliability
+kind: self_improvement_loop
+pillar: P11
+title: N05 Ops Reliability Evolution Loop
+version: '1.0'
+created: '2026-04-17'
+updated: '2026-04-17'
+author: n05_operations
+domain: autonomous-reliability-engineering
+quality: null
+tags:
+- self_improvement_loop
+- operations
+- reliability
+- N05
+- autonomous
+- feedback
+tldr: 'N05 autonomous loop: scan infra health, classify failures, fix, verify, and signal N07 -- zero human intervention required.'
+loop_stages: ''
+metrics: '| Metric | Target | Alert |
+
+  |--------|--------|-------|
+
+  | fix_success_rate | >= 0.90 | < 0.75 |
+
+  | mean_time_to_fix | <= 120s | > 300s |
+
+  | regression_rate | <= 0.05 | > 0.15 |
+
+  | loop_completion_rate | >= 0.95 | < 0.80 |'
+feedback_sources:
+- cex_doctor.py diagnostic output
+- cex_flywheel_audit.py 7-layer report
+review_cycle: P7D
+overview: 'Gating Wrath: infrastructure passes or it does not. This loop enforces that gate autonomously. Every failure becomes
+  a tracked work item that exits only via verified fix or escalation record. NOT a bugloop (single-bug patch) nor learning_record
+  (passive capture).'
+triggers: '| Trigger | Source | Condition |
+
+  |---------|--------|-----------|
+
+  | post-dispatch consolidation | N07 signal | nucleus completes any task |
+
+  | overnight evolve | scheduler | `review_cycle: P7D` (daily at 02:00) |
+
+  | quality regression | cex_quality_monitor.py | score drops > 0.5 below baseline |
+
+  | operator-initiated | /doctor --fix | manual invocation |'
+s1_scan: 'python _tools/cex_doctor.py --json > .cex/runtime/sil/scan_doctor.json
+
+  python _tools/cex_flywheel_audit.py --json > .cex/runtime/sil/scan_flywheel.json
+
+  python _tools/cex_system_test.py --json > .cex/runtime/sil/scan_systest.json'
+s2_classify: 'Categorize each failure into one of four classes:
+
+
+  | Class | Examples | Auto-fixable |
+
+  |-------|----------|-------------|
+
+  | config_drift | stale model version, wrong path | yes |
+
+  | missing_artifact | absent ISO, no compiled YAML | yes |
+
+  | broken_compile | syntax error, encoding violation | yes |
+
+  | quality_regression | score < threshold, gate fail | yes |
+
+  | security | exposed secret, unsafe permission | NO -- escalate |'
+s3_prioritize: 'Impact score `= severity * scope`:
+
+
+  | Dimension | blocking | warning |
+
+  |-----------|----------|---------|
+
+  | security | ESCALATE | P1 |
+
+  | shared (cross-nucleus) | P1 | P2 |
+
+  | local (N05-only) | P2 | P3 |'
+s4_fix: '| Class | Command |
+
+  |-------|---------|
+
+  | config_drift | `python _tools/cex_model_updater.py --apply` |
+
+  | missing_artifact | dispatch builder sub-agent for missing kind |
+
+  | broken_compile | `python _tools/cex_sanitize.py --fix --scope <file>` |
+
+  | quality_regression | `python _tools/cex_evolve.py --target <file> --threshold 8.5` |
+
+
+  Max 3 attempts per issue; on 3rd failure -> ESCALATE.'
+s5_verify: 'Re-run the diagnostic that surfaced the failure:
+
+  python _tools/cex_doctor.py --check <scope>
+
+  python _tools/cex_compile.py <file>
+
+  Pass: zero failures for fixed item. Fail -> increment attempt counter.'
+s6_learn: "python _tools/cex_memory_update.py \\\n  --kind correction \\\n  --issue \"<class>:<description>\" \\\n  --fix\
+  \ \"<command>\" \\\n  --result \"<pass|escalated>\"\nRecord schema: `{issue_class, description, fix_applied, attempts, result,\
+  \ timestamp}`."
+s7_report: "Signal N07 with loop summary:\nfrom _tools.signal_writer import write_signal\nwrite_signal('n05', 'sil_complete',\
+  \ {\n    'fixed_count': N,\n    'remaining_count': M,\n    'escalated_count': K,\n    'new_issues': [],\n    'loop_duration_s':\
+  \ T\n})"
+guard_rails: '| Rail | Rule |
+
+  |------|------|
+
+  | max_attempts | 3 per issue; exceeded -> ESCALATE |
+
+  | security_fence | class=security NEVER auto-fixed; escalate to operator |
+
+  | scope_boundary | never modify outside N05_operations/ without N07 dispatch |
+
+  | rollback_trigger | new failures > fixed count -> rollback + ESCALATE |
+
+  | signal_required | loop always terminates with write_signal (never silent) |'
+feedback_mechanisms: '1. `cex_doctor.py` -- 118 structural checks; sensor for config drift + missing artifacts
+
+  2. `cex_flywheel_audit.py` -- 109 checks across 7 layers; detects doc-vs-practice divergence
+
+
+  Both sources feed S2 CLASSIFY independently. Divergence triggers P1 priority.'
+review_process: '| Period | Activity | Owner |
+
+  |--------|----------|-------|
+
+  | P1D | Loop telemetry review (metrics vs targets) | N05 autonomous |
+
+  | P7D | Learning record audit -- are corrections reducing recurrence? | N05 autonomous |
+
+  | P30D | Guard rail effectiveness review -- escalation rate trending? | N07 + operator |'
