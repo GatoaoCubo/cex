@@ -18,6 +18,7 @@ tags:
 tldr: 'Live F1 CONSTRAIN trace for input: ''build a landing page for my SaaS''. Shows intent resolution, kind mapping, schema
   load, and ambiguity handling. Loadable as F2 BECOME ISO to teach any LLM how CONSTRAIN works.'
 density_score: 0.9
+updated: '2026-04-17'
 f_annotation_f1_constrain: 'F1 is intent resolution. It transforms raw user input into a typed tuple: `{kind, pillar, nucleus,
   verb, constraints}`. Without F1, F2-F8 operate on ambiguous input. F1 is the "type safety" of the pipeline. ---'
 step_1_verb_resolution: '| Input token | Candidate verbs | Resolution |

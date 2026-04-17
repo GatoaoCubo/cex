@@ -18,6 +18,7 @@ tags:
 tldr: 'Execution model for the CEX build action: maps any user input to a typed artifact via the 8F pipeline. Defines the
   precondition stack, execution phases, postconditions, and error recovery protocols.'
 density_score: 0.9
+updated: '2026-04-17'
 paradigm_definition: 'The CEX Build Paradigm is the canonical execution model for artifact construction. It maps: `{intent,
   context}` → `{typed artifact, 8F trace, signal}`. Every nucleus running a build action instantiates this paradigm. ---'
 precondition_stack: 'Before any build action, these must hold. Violation = reject at F1.

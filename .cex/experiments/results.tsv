@@ -16136,3 +16136,36 @@ et
 2026-04-17 15:20:58	N03_engineering\P11_feedback\quality_gate_n03.md	3	8.9	1.00	discard	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
 2026-04-17 15:20:58	N03_engineering\P11_feedback\quality_gate_n03.md	4	8.9	1.00	discard	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
 2026-04-17 15:20:58	N03_engineering\P11_feedback\quality_gate_n03.md	5	8.9	1.00	discard	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-17 15:46:13	C:\Users\CEX\Documents\GitHub\cex\.cex\runtime\out\gemma_grid_n02.md	1	2.1	0.97	keep	added density_score: 0.97
+2026-04-17 15:46:13	C:\Users\CEX\Documents\GitHub\cex\.cex\skills\README.md	1	6.2	0.97	keep	added density_score: 0.97
+2026-04-17 15:46:13	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P01_knowledge\library\kind\kc_diff_strategy.md	1	0.0	0.00	crash	compile fail after: added density_score: 1.0
+2026-04-17 15:46:13	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P01_knowledge\library\kind\kc_edtech_vertical.md	1	0.0	0.00	crash	compile fail after: added density_score: 0.94
+2026-04-17 15:46:13	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P01_knowledge\library\kind\kc_fintech_vertical.md	1	0.0	0.00	crash	compile fail after: added density_score: 1.0
+2026-04-17 15:46:14	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P01_knowledge\library\kind\kc_legal_vertical.md	1	0.0	0.00	crash	compile fail after: added density_score: 1.0
+2026-04-17 15:46:14	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P01_knowledge\library\kind\kc_test_ollama_wrapper.md	1	6.8	1.00	keep	added density_score: 1.0
+2026-04-17 15:46:14	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P01_knowledge\library\kind\kc_trajectory_eval.md	1	6.7	1.00	keep	added density_score: 1.0
+2026-04-17 15:46:14	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P01_knowledge\library\kind\kc_white_label_config.md	1	7.9	1.00	keep	added density_score: 1.0
+2026-04-17 15:46:15	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P01_knowledge\library\kind\kc_workflow_run_crate.md	1	7.0	0.99	keep	added density_score: 0.99
+2026-04-17 15:46:15	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P01_knowledge\templates\tpl_context_doc.md	1	0.0	0.00	crash	compile fail after: added density_score: 1.0
+2026-04-17 15:46:15	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P01_knowledge\templates\tpl_knowledge_card.md	1	0.0	0.00	crash	compile fail after: polished formatting (whitespace cleanup)
+2026-04-17 15:46:15	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P02_model\templates\tpl_agent.md	1	8.3	1.00	keep	added density_score: 1.0
+2026-04-17 15:46:15	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P02_model\templates\tpl_mental_model.md	1	0.0	0.00	crash	compile fail after: added density_score: 1.0
+2026-04-17 15:46:15	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P03_prompt\templates\tpl_prompt_template.md	1	0.0	0.00	crash	compile fail after: polished formatting (whitespace cleanup)
+2026-04-17 15:46:15	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P03_prompt\templates\tpl_system_prompt.md	1	6.0	1.00	keep	added density_score: 1.0
+2026-04-17 15:46:15	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P04_tools\templates\tpl_api_client.md	1	0.0	0.00	crash	compile fail after: added density_score: 1.0
+2026-04-17 15:46:15	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P05_output\templates\tpl_formatter.md	1	0.0	0.00	crash	compile fail after: polished formatting (whitespace cleanup)
+2026-04-17 15:46:16	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P05_output\templates\tpl_parser.md	1	0.0	0.00	crash	compile fail after: polished formatting (whitespace cleanup)
+2026-04-17 15:46:16	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P06_schema\templates\tpl_input_schema.md	1	0.0	0.00	crash	compile fail after: polished formatting (whitespace cleanup)
+2026-04-17 15:46:16	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P06_schema\templates\tpl_interface.md	1	0.0	0.00	crash	compile fail after: polished formatting (whitespace cleanup)
+2026-04-17 15:46:16	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P06_schema\templates\tpl_type_def.md	1	0.0	0.00	crash	compile fail after: added density_score: 1.0
+2026-04-17 15:46:16	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P06_schema\templates\tpl_validator.md	1	0.0	0.00	crash	compile fail after: polished formatting (whitespace cleanup)
+2026-04-17 15:46:16	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P07_evals\templates\tpl_benchmark.md	1	0.0	0.00	crash	compile fail after: added density_score: 1.0
+2026-04-17 15:46:16	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P07_evals\templates\tpl_e2e_eval.md	1	6.7	1.00	keep	added density_score: 1.0
+2026-04-17 15:46:16	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P07_evals\templates\tpl_golden_test.md	1	0.0	0.00	crash	compile fail after: polished formatting (whitespace cleanup)
+2026-04-17 15:46:16	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P07_evals\templates\tpl_scoring_rubric.md	1	0.0	0.00	crash	compile fail after: added density_score: 1.0
+2026-04-17 15:46:16	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P07_evals\templates\tpl_unit_eval.md	1	0.0	0.00	crash	compile fail after: polished formatting (whitespace cleanup)
+2026-04-17 15:46:16	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P08_architecture\templates\tpl_naming_rule.md	1	0.0	0.00	crash	compile fail after: polished formatting (whitespace cleanup)
+2026-04-17 15:46:16	C:\Users\CEX\Documents\GitHub\cex\N00_genesis\P08_architecture\templates\tpl_pattern.md	1	0.0	0.00	crash	compile fail after: polished formatting (whitespace cleanup)
+2026-04-17 15:47:50	N04_knowledge\P01_knowledge\few_shot_examples_rag_queries.md	1	9.1	1.00	keep	tldr flagged for manual review
+2026-04-17 15:51:14	N03_engineering\P03_prompt\action_paradigm_cex_build.md	1	8.8	1.00	keep	added updated: 2026-04-17
+2026-04-17 15:51:39	N03_engineering\P07_evals\reasoning_trace_8f_constrain.md	1	8.8	1.00	keep	added updated: 2026-04-17

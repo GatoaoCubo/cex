@@ -1,0 +1,58 @@
+{
+  "C:/Users/CEX/AppData/Local/Temp/test_minimal.md:8f01e6ab98f8a0f8": {
+    "score": 3.9,
+    "structural": 2.24,
+    "rubric": 5.64,
+    "semantic": null,
+    "dimensions": {
+      "S01": {
+        "description": "Factual concreteness",
+        "heuristic": 4.0
+      },
+      "S02": {
+        "description": "Atomicity",
+        "heuristic": 8.0
+      },
+      "S03": {
+        "description": "Searchability \u2014 tags",
+        "heuristic": 0.0
+      },
+      "S04": {
+        "description": "Source attribution",
+        "heuristic": 3.0
+      },
+      "S05": {
+        "description": "Card type classification",
+        "heuristic": 5.0
+      },
+      "S06": {
+        "description": "Density discipline",
+        "heuristic": 5.0
+      },
+      "S07": {
+        "description": "tldr precision",
+        "heuristic": 2.0
+      },
+      "S08": {
+        "description": "Currency",
+        "heuristic": 5.0
+      },
+      "S09": {
+        "description": "Cross-references",
+        "heuristic": 5.0
+      },
+      "S10": {
+        "description": "Practical applicability",
+        "heuristic": 5.0
+      }
+    },
+    "weakest": "",
+    "suggestion": "",
+    "mode": "hybrid",
+    "cached": false,
+    "notes": [
+      "FAIL H07 [HIGH]: `density_score` is a float in range [0.0, 1.0]",
+      "FAIL H10 [HIGH]: `tldr` is <= 160 characters"
+    ]
+  }
+}
