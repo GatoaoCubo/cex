@@ -7,10 +7,11 @@ version: 1.0.0
 created: 2026-04-17
 author: n03_engineering
 domain: artifact-construction
-quality: null
+quality: 9.1
 tags: [invariant, N03, system-properties, constraints, 8F, quality, correctness]
 tldr: "18 system invariants for the N03 engineering domain. Properties that ALWAYS hold regardless of context, model, or runtime. Violation of any invariant indicates a system bug, not a feature gap."
 density_score: 0.91
+updated: "2026-04-17"
 ---
 
 # Invariants: N03 Engineering System

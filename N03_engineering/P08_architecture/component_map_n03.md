@@ -7,10 +7,11 @@ version: 1.0.0
 created: 2026-04-17
 author: n03_engineering
 domain: artifact-construction
-quality: null
+quality: 9.1
 tags: [component-map, N03, architecture, dependencies, 8F, builders, system]
 tldr: "Dependency map of all N03 engineering system components: builders (259), SDK tools (78), quality infrastructure, schema layer, and runtime artifacts. Shows how components compose to produce the 8F pipeline execution."
 density_score: 0.92
+updated: "2026-04-17"
 ---
 
 # Component Map: N03 Engineering System
