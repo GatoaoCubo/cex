@@ -5,8 +5,9 @@ pillar: P09
 nucleus: n03
 title: Engineering Rate Limit Config
 version: 1.0
-quality: null
+quality: 9.0
 tags: [config, rate_limit, budget, engineering, n03]
+density_score: 1.0
 ---
 
 
