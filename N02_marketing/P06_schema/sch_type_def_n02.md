@@ -5,8 +5,9 @@ pillar: P06
 nucleus: n02
 title: Campaign Desire Type
 version: 1.0
-quality: null
+quality: 9.0
 tags: [type, schema, campaign, copy, marketing]
+density_score: 1.0
 ---
 
 

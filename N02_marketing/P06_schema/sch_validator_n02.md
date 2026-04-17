@@ -5,8 +5,9 @@ pillar: P06
 nucleus: n02
 title: Seductive Copy Validator
 version: 1.0
-quality: null
+quality: 9.0
 tags: [validator, quality, marketing, precommit, governance]
+density_score: 1.0
 ---
 
 
