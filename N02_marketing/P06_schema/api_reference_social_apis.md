@@ -5,10 +5,11 @@ pillar: P06
 nucleus: n02
 title: "Social Platform API Reference -- Meta, LinkedIn, X"
 version: 1.0.0
-quality: null
+quality: 9.0
 tags: [api_reference, social_apis, meta, linkedin, x_twitter, publishing_contract, P06, n02_marketing]
 domain: social-distribution
 status: active
+density_score: 1.0
 ---
 
 # Social Platform API Reference

@@ -5,10 +5,11 @@ pillar: P05
 nucleus: n02
 title: "Funnel-Stage Content Mapping -- User Journey"
 version: 1.0.0
-quality: null
+quality: 9.0
 tags: [user_journey, funnel_mapping, content_strategy, TOFU_MOFU_BOFU, P05, n02_marketing]
 domain: content-strategy
 status: active
+density_score: 1.0
 ---
 
 # User Journey -- Funnel-Stage Content Mapping
