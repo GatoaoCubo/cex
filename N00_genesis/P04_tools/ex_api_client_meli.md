@@ -4,7 +4,7 @@ kind: api_client
 pillar: P04
 title: Mercado Livre API Client
 version: 0.1.0
-quality: null
+quality: 9.0
 status: template
 brand_placeholders:
   - BRAND_MELI_API_URL
@@ -13,6 +13,7 @@ brand_placeholders:
   - BRAND_MELI_ACCESS_TOKEN
   - BRAND_MELI_USER_ID
 tags: [commerce, template, distillation, mercado_livre, api_client]
+density_score: 1.0
 ---
 
 # Mercado Livre API Client

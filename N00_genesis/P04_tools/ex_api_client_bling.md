@@ -4,7 +4,7 @@ kind: api_client
 pillar: P04
 title: Bling ERP API v3 Client
 version: 0.1.0
-quality: null
+quality: 9.0
 status: template
 brand_placeholders:
   - BRAND_BLING_API_URL
@@ -12,6 +12,7 @@ brand_placeholders:
   - BRAND_BLING_CLIENT_SECRET
   - BRAND_BLING_ACCESS_TOKEN
 tags: [commerce, template, distillation, bling, api_client]
+density_score: 1.0
 ---
 
 # Bling ERP API v3 Client
