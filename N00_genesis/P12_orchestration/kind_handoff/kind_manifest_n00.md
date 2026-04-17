@@ -5,8 +5,9 @@ pillar: P12
 nucleus: n00
 title: "Handoff -- Canonical Manifest"
 version: 1.0
-quality: null
+quality: 9.0
 tags: [manifest, handoff, p12, n00, archetype, template]
+density_score: 0.99
 ---
 
 <!-- 8F: F1=knowledge_card P12 F2=knowledge-card-builder F3=kinds_meta+builder-manifest F4=plan F5=scan F6=produce F7=gate F8=save -->
