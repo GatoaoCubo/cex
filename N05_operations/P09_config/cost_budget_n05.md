@@ -11,7 +11,7 @@ providers:
   - anthropic
   - google
   - ollama
-quality: null
+quality: 9.0
 tags: [cost_budget, n05-operations, sonnet-tier, spend-tracking, P09]
 tldr: "N05 operations spend limits: Sonnet tier, 3 providers, per-dispatch-mode caps, warn 80%, block 100%"
 description: "Token and USD budget policy for N05 operations nucleus across solo, grid, and overnight dispatch modes with provider-level tracking."
@@ -20,6 +20,7 @@ reset_policy: rolling_30d
 alert_enabled: true
 total_budget: 6000000
 overage_action: block
+density_score: 1.0
 ---
 
 ## Overview

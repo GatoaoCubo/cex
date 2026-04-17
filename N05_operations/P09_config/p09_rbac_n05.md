@@ -8,7 +8,7 @@ created: "2026-04-17"
 updated: "2026-04-17"
 author: rbac-policy-builder
 domain: operations access control
-quality: null
+quality: 9.1
 tags: [rbac, access_control, n05, operations, security, least_privilege]
 tldr: "RBAC policy for CEX ops: defines read/write/execute/dispatch/stop rights across artifact files, config, runtime signals, PID files, git, and tools for 5 roles."
 roles: [n07_orchestrator, nucleus_n01_n06, operator_human, ci_pipeline, guest_readonly]
@@ -16,6 +16,7 @@ resources: [artifact_files, config_files, runtime_signals, pid_files, git_operat
 references:
   - NIST SP 800-182
   - N05_operations/P09_config/con_permission_n05.md
+density_score: 1.0
 ---
 
 ## Policy Overview
