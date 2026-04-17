@@ -5,8 +5,9 @@ pillar: P06
 nucleus: n02
 title: Seduction Enum Set
 version: 1.0
-quality: null
+quality: 9.0
 tags: [enum, schema, marketing, voice, governance]
+density_score: 1.0
 ---
 
 

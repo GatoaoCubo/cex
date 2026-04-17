@@ -5,10 +5,11 @@ pillar: P06
 nucleus: n02
 title: "Campaign Brief Input Schema"
 version: 1.0.0
-quality: null
+quality: 9.0
 tags: [input_schema, campaign_brief, brand_contract, P06, n02_marketing]
 domain: campaign-intake
 status: active
+density_score: 1.0
 ---
 
 # Campaign Brief Input Schema
