@@ -5,8 +5,10 @@ pillar: P06
 nucleus: n06
 title: "API Reference -- Stripe Payment Integration (N06 Commercial)"
 version: 1.0.0
-quality: null
+quality: 9.0
 tags: [stripe, api, payment, checkout, webhook, commercial, revenue]
+density_score: 1.0
+updated: "2026-04-17"
 ---
 
 # API Reference: Stripe Payment Integration

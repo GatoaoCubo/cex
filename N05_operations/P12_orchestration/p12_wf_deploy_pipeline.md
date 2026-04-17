@@ -16,7 +16,7 @@ depends_on: []
 signals: [validate_ok, build_ok, compile_ok, test_ok, doctor_ok, sanitize_ok, score_ok, stage_ok, signal_ok, deploy_ok]
 spawn_configs: [spawn_config_operations]
 domain: deployment-pipeline
-quality: null
+quality: 9.2
 tags: [workflow, deploy, ci-cd, n05, gating-wrath]
 tldr: "10-step sequential deploy pipeline: validate->build->compile->test->doctor->sanitize->score->stage->signal->deploy. Hard gate on every step."
 density_score: 0.95
