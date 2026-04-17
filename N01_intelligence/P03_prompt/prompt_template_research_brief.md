@@ -8,10 +8,11 @@ version: 1.0.0
 created: 2026-04-17
 author: n01_intelligence
 domain: research-intelligence
-quality: null
+quality: 9.1
 tags: [prompt_template, research_brief, n01, analytical_envy, intelligence_output]
 tldr: "Structured prompt template for generating N01 research briefs: slots for topic, competitors, evidence standard, audience, and depth. Output template enforces Analytical Envy with mandatory competitive benchmarking sections."
 density_score: 0.88
+updated: "2026-04-17"
 ---
 
 <!-- 8F: F1 constrain=P03/prompt_template F2 become=prompt-template-builder F3 inject=system_prompt_n01_research+action_prompt_n01+reasoning_strategy_n01+prompt_template_intelligence F4 reason=a template codifies best practice into a reusable structure -- every research brief follows the same high-quality format without reinventing it each time F5 call=cex_compile F6 produce=prompt_template_research_brief.md F7 govern=frontmatter+ascii+tables F8 collaborate=N01_intelligence/P03_prompt/ -->
