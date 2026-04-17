@@ -1,67 +1,69 @@
-id: n00_ecommerce_vertical_manifest
+id: n00_vector_store_manifest
 kind: knowledge_card
 pillar: P01 -- Knowledge
 nucleus: n00
-title: eCommerce Vertical -- Canonical Manifest
+title: Vector Store -- Canonical Manifest
 version: 1.0
 quality: null
 tags:
 - manifest
-- ecommerce_vertical
+- vector_store
 - p01
 - n00
 - archetype
 - template
-purpose: eCommerce Vertical is an industry vertical knowledge artifact that packages domain-specific terminology, KPIs, buyer
-  personas, regulatory context, and technology stack patterns for the eCommerce sector. It is injected into nucleus prompts
-  when operating in retail/eCommerce contexts, enabling domain-aware generation without repeated re-explanation.
+purpose: Vector Store defines the vector database backend configuration for similarity search in RAG pipelines. It specifies
+  the database type, connection parameters, index configuration, and persistence strategy. The vector_store is the runtime
+  storage layer that receives embeddings produced by embedding_config and serves queries from retriever_config.
 schema_key_fields: '| Field | Type | Required | Description |
 
   |-------|------|----------|-------------|
 
   | id | string | yes | Unique artifact identifier |
 
-  | kind | string | yes | Always `ecommerce_vertical` |
+  | kind | string | yes | Always `vector_store` |
 
   | pillar | string | yes | Always `P01` |
 
-  | title | string | yes | Vertical name and scope |
+  | title | string | yes | Store name and backend |
 
   | version | semver | yes | Artifact version |
 
   | quality | float\|null | yes | Peer-review score (null until reviewed) |
 
-  | sub_verticals | list | no | D2C, marketplace, B2B commerce, etc. |
+  | backend | enum | yes | chroma\|qdrant\|weaviate\|pinecone\|pgvector\|faiss |
 
-  | key_kpis | list | yes | Conversion rate, AOV, CAC, LTV, churn |
+  | persist_path | string | no | Local persistence directory (for embedded backends) |
 
-  | regulatory | list | no | GDPR, PCI-DSS, consumer protection laws |
+  | collection_name | string | yes | Collection or index name |
 
-  | tech_stack | list | no | Common platforms: Shopify, Magento, VTEX |
+  | dimensions | int | yes | Vector dimensionality (must match embedder) |
 
-  | buyer_personas | list | yes | Primary buyer archetypes |'
+  | index_type | enum | yes | HNSW\|IVF\|flat -- ANN algorithm |
+
+  | distance_metric | enum | yes | cosine\|dot_product\|euclidean |'
 when_to_use:
-- When generating content, analysis, or agents for eCommerce clients
-- When configuring nucleus prompts with retail domain grounding
-- When conducting competitive analysis in the eCommerce space
-builder: '`archetypes/builders/ecommerce_vertical-builder/` Run: `python _tools/cex_8f_runner.py "your intent" --kind ecommerce_vertical
+- When deploying a new RAG pipeline requiring vector storage
+- When migrating from one vector DB backend to another
+- When configuring multi-tenant vector collections
+builder: '`archetypes/builders/vector_store-builder/` Run: `python _tools/cex_8f_runner.py "your intent" --kind vector_store
   --execute`'
 template_variables_open_for_instantiation:
-- '`{{NUCLEUS_ROLE}}` -- which nucleus domain owns this (N01, N02, or N06)'
+- '`{{NUCLEUS_ROLE}}` -- which nucleus domain owns this (N04 or N05)'
 - '`{{SIN_LENS}}` -- cultural DNA driving the artifact'
-- '`{{TARGET_AUDIENCE}}` -- eCommerce operators or digital agencies'
-- '`{{DOMAIN_CONTEXT}}` -- specific sub-vertical and geography'
+- '`{{TARGET_AUDIENCE}}` -- engineers deploying retrieval infrastructure'
+- '`{{DOMAIN_CONTEXT}}` -- scale, latency, and persistence requirements'
 example_minimal: '---
 
-  id: ecommerce_vertical_d2c_brazil
+  id: vector_store_cex_chroma
 
-  kind: ecommerce_vertical
+  kind: vector_store
 
   pillar: P01
 
-  nucleus: n01
+  nucleus: n04
 
-  title: "D2C eCommerce Brazil"
+  title: "CEX Chroma Local Vector Store"
 
   version: 1.0
 
@@ -69,17 +71,18 @@ example_minimal: '---
 
   ---
 
-  sub_verticals: [D2C, marketplace]
+  backend: chroma
 
-  key_kpis: [conversion_rate, AOV, CAC, LTV]
+  persist_path: ".cex/vector_db/chroma"
 
-  regulatory: [LGPD, CDC]
+  collection_name: cex_knowledge
 
-  tech_stack: [VTEX, Shopify, Magento]
+  dimensions: 768
 
-  buyer_personas: [fashion_consumer, electronics_buyer]'
+  index_type: HNSW
+
+  distance_metric: cosine'
 related_kinds:
-- '`context_doc` (P01) -- broader domain context for eCommerce'
-- '`customer_segment` (P02) -- ICP definitions within eCommerce'
-- '`knowledge_card` (P01) -- atomic facts about the vertical'
-- '`fintech_vertical` (P01) -- adjacent vertical for payment context'
+- '`embedding_config` (P01) -- produces vectors stored here'
+- '`retriever_config` (P01) -- queries this store for similarity search'
+- '`embedder_provider` (P01) -- the model generating the stored vectors'

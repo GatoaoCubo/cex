@@ -1,0 +1,73 @@
+---
+id: n00_code_executor_manifest
+kind: knowledge_card
+pillar: P04
+nucleus: n00
+title: "Code Executor -- Canonical Manifest"
+version: 1.0
+quality: null
+tags: [manifest, code_executor, p04, n00, archetype, template]
+---
+
+<!-- 8F: F1=knowledge_card P04 F2=knowledge-card-builder F3=kinds_meta+builder-manifest F4=plan F5=scan F6=produce F7=gate F8=save -->
+
+## Purpose
+A code_executor provides a sandboxed runtime environment for executing LLM-generated code safely, capturing output, errors, and side effects as structured observations. It supports Docker containers, E2B cloud sandboxes, and Jupyter kernels as backends, with resource limits, timeout enforcement, and output serialization. The output is a tool that lets agents verify code correctness without risking host system contamination.
+
+## Pillar
+P04 -- tools
+
+## Schema (key fields)
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| id | string | yes | Unique artifact identifier |
+| kind | string | yes | Always `code_executor` |
+| pillar | string | yes | Always `P04` |
+| title | string | yes | Human-readable name |
+| version | semver | yes | Artifact version |
+| quality | float\|null | yes | Peer-review score (null until reviewed) |
+| runtime | string | yes | Backend: docker, e2b, jupyter, subprocess |
+| languages | list | yes | Supported languages: python, javascript, bash, sql |
+| timeout_seconds | integer | yes | Maximum execution time before sandbox kill |
+| resource_limits | map | no | CPU, memory, and network access constraints |
+
+## When to use
+- When N03 Engineering generates code that must be validated by execution before committing
+- When building a bugloop that requires iterative code generation and test execution
+- When the agent pipeline includes data analysis that requires running Python or SQL
+
+## Builder
+`archetypes/builders/code_executor-builder/`
+
+Run: `python _tools/cex_8f_runner.py "your intent" --kind code_executor --execute`
+
+## Template variables (open for instantiation)
+- `{{NUCLEUS_ROLE}}` -- which nucleus domain owns this
+- `{{SIN_LENS}}` -- cultural DNA driving the artifact
+- `{{TARGET_AUDIENCE}}` -- who this serves
+- `{{DOMAIN_CONTEXT}}` -- business/technical context
+
+## Example (minimal)
+```yaml
+---
+id: ce_python_e2b_sandbox
+kind: code_executor
+pillar: P04
+nucleus: n05
+title: "Python E2B Sandbox Executor"
+version: 1.0
+quality: null
+---
+runtime: e2b
+languages: [python, bash]
+timeout_seconds: 30
+resource_limits:
+  memory_mb: 512
+  network: blocked
+```
+
+## Related kinds
+- `cli_tool` (P04) -- simpler subprocess wrapper when sandboxing is not required
+- `bugloop` (P11) -- iterative code fix loop that drives code_executor repeatedly
+- `scoring_rubric` (P07) -- rubric that evaluates code_executor output quality
+- `function_def` (P04) -- LLM-callable interface wrapping the code_executor

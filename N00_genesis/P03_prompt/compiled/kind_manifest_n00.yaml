@@ -1,28 +1,28 @@
-id: n00_instruction_manifest
+id: n00_webinar_script_manifest
 kind: knowledge_card
 pillar: P03 -- prompt
 nucleus: n00
-title: Instruction -- Canonical Manifest
+title: Webinar Script -- Canonical Manifest
 version: 1.0
 quality: null
 tags:
 - manifest
-- instruction
+- webinar_script
 - p03
 - n00
 - archetype
 - template
-purpose: 'An instruction is a step-by-step execution directive for agents or pipelines, specifying the exact sequence of operations,
-  conditions, and outputs expected at each step. Unlike a system_prompt that defines identity, an instruction defines procedure:
-  what to do, in what order, and how to handle edge cases. The output is a deterministic execution protocol that reduces agent
-  hallucination and drift.'
+purpose: A webinar_script is a complete scripted presentation artifact covering intro, agenda, content segments, Q&A handling,
+  and call-to-action sequences for live or recorded webinars. It structures the speaker's narrative, slide transitions, and
+  audience engagement moments into a production-ready document. The output enables speakers to deliver consistent, high-conversion
+  presentations without improvisation risk.
 schema_key_fields: '| Field | Type | Required | Description |
 
   |-------|------|----------|-------------|
 
   | id | string | yes | Unique artifact identifier |
 
-  | kind | string | yes | Always `instruction` |
+  | kind | string | yes | Always `webinar_script` |
 
   | pillar | string | yes | Always `P03` |
 
@@ -32,31 +32,30 @@ schema_key_fields: '| Field | Type | Required | Description |
 
   | quality | float\|null | yes | Peer-review score (null until reviewed) |
 
-  | steps | list | yes | Ordered list of discrete steps with expected outputs |
+  | duration_minutes | integer | yes | Total presentation duration target |
 
-  | preconditions | list | no | Conditions that must be true before execution begins |
+  | segments | list | yes | Ordered segments: intro, agenda, content_N, qa, cta |
 
-  | error_handling | map | no | Error type -> recovery action mapping |
+  | audience_persona | string | yes | Target audience role and knowledge level |
 
-  | idempotent | boolean | no | Whether re-running produces same result safely |'
+  | primary_cta | string | yes | The conversion action requested at close |'
 when_to_use:
-- When an agent needs a deterministic, repeatable procedure with no ambiguity
-- When onboarding new nuclei that must follow a specific execution protocol
-- When building builder ISOs (instruction is one of the 13 ISO types in every builder)
-builder: '`archetypes/builders/instruction-builder/` Run: `python _tools/cex_8f_runner.py "your intent" --kind instruction
+- When N02 Marketing needs a scripted webinar for lead generation or product education
+- When a course launch requires a live demonstration presentation with structured Q&A
+- When building a series of educational webinars with consistent structure across sessions
+builder: '`archetypes/builders/webinar_script-builder/` Run: `python _tools/cex_8f_runner.py "your intent" --kind webinar_script
   --execute`'
 template_variables_open_for_instantiation:
 - '`{{NUCLEUS_ROLE}}` -- which nucleus domain owns this'
 - '`{{SIN_LENS}}` -- cultural DNA driving the artifact'
 - '`{{TARGET_AUDIENCE}}` -- who this serves'
 - '`{{DOMAIN_CONTEXT}}` -- business/technical context'
-example_minimal: "---\nid: instr_build_knowledge_card\nkind: instruction\npillar: P03\nnucleus: n04\ntitle: \"Build Knowledge\
-  \ Card Instruction\"\nversion: 1.0\nquality: null\n---\npreconditions:\n  - kind resolved via kinds_meta.json\n  - KC template\
-  \ loaded from P01\nsteps:\n  - step: 1\n    action: \"Read builder ISOs from archetypes/builders/knowledge_card-builder/\"\
-  \n    output: builder_loaded\n  - step: 2\n    action: \"Inject kc_{kind}.md from P01_knowledge/library/kind/\"\n    output:\
-  \ context_assembled"
+example_minimal: "---\nid: ws_cex_product_demo_q2\nkind: webinar_script\npillar: P03\nnucleus: n02\ntitle: \"CEX Product Demo\
+  \ Webinar Q2\"\nversion: 1.0\nquality: null\n---\nduration_minutes: 60\naudience_persona: \"Senior AI engineers and CTOs\
+  \ at 50-500 person companies\"\nprimary_cta: \"Book a 30-minute custom CEX demo\"\nsegments:\n  - intro: 5min\n  - agenda:\
+  \ 2min\n  - problem_framing: 10min\n  - live_demo: 25min\n  - case_study: 10min\n  - qa: 5min\n  - cta_close: 3min"
 related_kinds:
-- '`action_prompt` (P03) -- the trigger that activates an instruction sequence'
-- '`system_prompt` (P03) -- identity definition that precedes instruction execution'
-- '`planning_strategy` (P03) -- determines which instruction branch to follow'
-- '`workflow` (P12) -- orchestrates multiple instructions across nuclei'
+- '`sales_playbook` (P03) -- sales motion context injected into the CTA segment'
+- '`prompt_template` (P03) -- templates for generating segment-specific script content'
+- '`landing_page` (P05) -- registration page that feeds attendees into the webinar'
+- '`content_monetization` (P11) -- monetization mechanics behind the webinar offer'
