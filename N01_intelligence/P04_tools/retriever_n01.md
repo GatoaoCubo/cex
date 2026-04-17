@@ -8,10 +8,11 @@ version: 1.0.0
 created: 2026-04-17
 author: n01_intelligence
 domain: research-intelligence
-quality: null
+quality: 9.2
 tags: [retriever, rag, semantic_search, n01, knowledge_retrieval, corpus]
 tldr: "Hybrid retriever for N01 knowledge corpus: BM25 (keyword) + dense embedding (semantic) with RRF fusion. Retrieves from N01_intelligence/ artifact store and .cex/cache/ compiled outputs."
 density_score: 0.90
+updated: "2026-04-17"
 ---
 
 <!-- 8F: F1 constrain=P04/retriever F2 become=retriever-builder F3 inject=knowledge_index_intelligence+embedding_config_intelligence+rag_source_intelligence+search_strategy_n01 F4 reason=N01 Analytical Envy: before generating new research, retrieve what N01 already knows -- avoid redundancy, find contradictions F5 call=cex_compile F6 produce=retriever_n01.md F7 govern=frontmatter+ascii+tables F8 collaborate=N01_intelligence/P04_tools/ -->

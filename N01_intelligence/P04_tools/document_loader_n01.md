@@ -8,10 +8,11 @@ version: 1.0.0
 created: 2026-04-17
 author: n01_intelligence
 domain: research-intelligence
-quality: null
+quality: 9.2
 tags: [document_loader, ingestion, pdf, html, api, research, n01]
 tldr: "Multi-format document ingestion for N01: PDF (academic papers, filings), HTML (web pages, news), JSON API responses, repo README files. Outputs normalized document chunks ready for synthesis."
 density_score: 0.90
+updated: "2026-04-17"
 ---
 
 <!-- 8F: F1 constrain=P04/document_loader F2 become=document-loader-builder F3 inject=search_strategy_n01+api_reference_research_apis+sch_type_def_n01+chunk_strategy F4 reason=N01 must ingest documents from multiple formats without data loss F5 call=cex_compile F6 produce=document_loader_n01.md F7 govern=frontmatter+ascii+tables F8 collaborate=N01_intelligence/P04_tools/ -->
