@@ -77,3 +77,40 @@ Rule: id MUST equal filename stem. Hyphens in id = HARD FAIL.
 | summary | Short imperative phrase | "List all users", "Get user by ID" |
 | tags | PascalCase noun | ["Users", "Orders", "Products"] |
 | Error codes | Always declare 400/401/404/500 | Even if unlikely -- tooling needs them |
+
+## HTTP Method Assignment
+
+| Action | HTTP Method | Has Body? |
+|--------|-------------|-----------|
+| List collection | GET /resources | No |
+| Get single | GET /resources/{id} | No |
+| Create | POST /resources | YES |
+| Full replace | PUT /resources/{id} | YES |
+| Partial update | PATCH /resources/{id} | YES |
+| Delete | DELETE /resources/{id} | No |
+
+## Response Code Policy
+
+| Code | Meaning | When to Use |
+|------|---------|-------------|
+| 200 | OK | Successful GET, PUT, PATCH |
+| 201 | Created | Successful POST (new resource) |
+| 204 | No Content | Successful DELETE |
+| 400 | Bad Request | Validation failure |
+| 401 | Unauthorized | Missing/invalid auth |
+| 403 | Forbidden | Authenticated but no permission |
+| 404 | Not Found | Resource does not exist |
+| 409 | Conflict | Duplicate resource |
+| 500 | Internal Error | Server-side failure |
+
+## Security Scheme Reference
+
+| Scheme | OAS Type | When to Use |
+|--------|----------|-------------|
+| JWT Bearer | http bearer | Standard REST API authentication |
+| API Key header | apiKey in header | Simple service-to-service auth |
+| OAuth2 code flow | oauth2 authorizationCode | User-delegated access |
+| OAuth2 client credentials | oauth2 clientCredentials | Machine-to-machine |
+| No auth | (none) | Public read-only endpoints only |
+| mTLS | mutual TLS | Service mesh internal auth |
+| No auth declared | Tooling skips security tests | Always declare scheme in components.securitySchemes |

@@ -57,3 +57,17 @@ python _tools/cex_compile.py path/to/artifact.md
 | spec.openapis.org/oas/v3.1.0 | OAS 3.1 official specification |
 | swagger.io/tools/swagger-editor | Interactive OAS editor for validation |
 | openapi-generator.tech | Code generation from OAS spec |
+| stoplight.io/spectral | OAS linting and validation rules |
+| redocly.com/docs | OAS documentation rendering |
+
+## Validation Commands
+
+| Command | Purpose | When |
+|---------|---------|------|
+| `python _tools/cex_compile.py {path}` | Compile .md to .yaml | F8 |
+| `python _tools/cex_doctor.py` | Check builder health | F7 |
+| `python _tools/cex_score.py {path} --apply` | Peer review + apply score | F7 |
+| `python _tools/cex_retriever.py --query "oas api"` | Find similar artifacts | F5 |
+| `git add {path} && git commit` | Version artifact | F8 |
+| `python _tools/cex_index.py` | Update artifact index | F8 |
+| `python _tools/cex_retriever.py --similar {path}` | Find duplicate schemas | F5 |

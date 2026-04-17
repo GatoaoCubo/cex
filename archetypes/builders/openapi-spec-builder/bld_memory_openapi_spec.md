@@ -59,3 +59,34 @@ Error response discipline:
 3. No error response schemas -- clients receive untyped errors, hard to handle
 4. OAS 2.0 (Swagger) -- declining tooling, missing JSON Schema features
 5. Mixing human docs (tutorial prose) in paths -- clutters machine-readable contract
+
+## Evidence Table
+
+| Issue | Impact | Fix |
+|-------|--------|-----|
+| 5/8 integrations: no $ref | Schema drift on update | Move to components.schemas |
+| 3/8: missing operationId | Unusable codegen output | Always set camelCase operationId |
+| 2/8: no error schemas | Client null pointer errors | Define ErrorResponse + $ref |
+| 4/8: OAS 2.0 | Missing webhooks, JSON Schema | Migrate to OAS 3.1.0 |
+
+## Recommended Defaults
+
+| Parameter | Default | Notes |
+|-----------|---------|-------|
+| oas_version | "3.1.0" | Full JSON Schema support |
+| security scheme type | http bearer | JWT standard |
+| error response schema | ErrorResponse (shared) | Single $ref across all errors |
+| content type | application/json | Standard REST |
+| operationId format | camelCase verb+noun | Code generator compatibility |
+
+## Application Checklist
+
+| Check | Question | Pass Condition |
+|-------|----------|----------------|
+| Schema reuse | Any schema in 2+ places? | Move to components.schemas |
+| operationId | Every operation named? | Yes, camelCase verb+noun |
+| Error responses | 400/401/404/500 on all ops? | Yes, shared ErrorResponse $ref |
+| Security | Global security set? | Yes, scheme declared in components |
+| OAS version | Using 3.1.0? | Yes, unless tooling forces 3.0.x |
+| OAS version | Using 3.1.0 or 3.0.3? | Yes, never Swagger 2.0 |
+| Webhook | Webhooks declared in spec? | Yes, in webhooks section if event-driven |
