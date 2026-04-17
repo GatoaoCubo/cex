@@ -5,8 +5,9 @@ pillar: P01
 nucleus: N05
 title: "N05 Operations Vector Store"
 version: "1.0.0"
-quality: null
+quality: 9.0
 tags: [n05, operations, vector_store, gating_wrath, pgvector, retrieval, evidence]
+density_score: 0.97
 ---
 <!-- 8F: F1=vector_store/P01 F2=vector-store-builder F3=nucleus_def_n05+P01_schema+kc_vector_store+examples+W1 config F4=pgvector backend with auditable namespaces
      F5=shell+apply_patch+cex_compile F6=approx-6KB dense markdown F7=self-check frontmatter+8F+80L+properties+ascii F8=N05_operations/P01_knowledge/kno_vector_store_n05.md -->
