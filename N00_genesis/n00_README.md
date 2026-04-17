@@ -5,8 +5,9 @@ pillar: P01
 nucleus: n00
 title: "N00 Genesis -- Nucleus Instantiation Guide"
 version: 1.0
-quality: null
+quality: 9.1
 tags: [n00, genesis, archetype, instantiation, cex]
+density_score: 1.0
 ---
 
 <!-- 8F: F1=context_doc P01 F2=context-doc-builder F3=kinds_meta+pillar_schemas F4=plan F5=scan F6=produce F7=gate F8=save -->
