@@ -4,10 +4,11 @@ kind: knowledge_card
 pillar: P01
 title: "HYBRID_REVIEW3 Audit: experiment_tracker (N03)"
 version: 1.0.0
-quality: 8.6
+quality: 8.8
 tags: [audit, hybrid_review3, experiment_tracker, gemma4, wave2]
 domain: ML ops quality assurance
 created: "2026-04-14"
+density_score: 1.0
 ---
 
 # HYBRID_REVIEW3 Audit — experiment_tracker (13 ISOs)
