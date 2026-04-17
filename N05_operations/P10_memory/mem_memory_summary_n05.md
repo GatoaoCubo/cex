@@ -5,8 +5,9 @@ pillar: P10
 nucleus: N05
 title: "N05 Operations Memory Summary"
 version: "1.0.0"
-quality: null
+quality: 9.1
 tags: [n05, operations, memory_summary, gating_wrath, compression, session, retrieval]
+density_score: 0.96
 ---
 <!-- 8F: F1=memory_summary/P10 F2=memory-summary-builder F3=nucleus_def_n05+P10_schema+kc_memory_summary+examples+N05 retrieval docs F4=compressed briefing for next ops session
      F5=shell+apply_patch+cex_compile F6=approx-5KB dense markdown F7=self-check frontmatter+8F+80L+properties+ascii F8=N05_operations/P10_memory/mem_memory_summary_n05.md -->

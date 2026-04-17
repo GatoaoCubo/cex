@@ -5,8 +5,9 @@ pillar: P03
 nucleus: n06
 title: "Discovery Questions -- Structured Commercial Qualification Bank"
 version: 1.0.0
-quality: null
+quality: 9.0
 tags: [discovery, qualification, sales, questions, commercial, spin, meddic]
+density_score: 0.94
 ---
 
 # Discovery Questions: Structured Commercial Qualification Bank

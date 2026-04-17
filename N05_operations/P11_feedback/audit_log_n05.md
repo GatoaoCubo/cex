@@ -11,9 +11,10 @@ domain: operational-accountability
 nucleus: N05
 event_type: multi_category
 log_level: info
-quality: null
+quality: 9.1
 tags: [audit_log, N05, compliance, dispatch]
 tldr: "Immutable JSONL audit log for N05 -- 8 event types, 30-day retention, SOC2 CC6.1/CC7.1/CC11.2."
+density_score: 1.0
 ---
 
 ## Event Catalog
