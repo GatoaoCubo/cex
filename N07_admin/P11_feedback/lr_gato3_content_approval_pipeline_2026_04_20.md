@@ -164,8 +164,46 @@ Both can run simultaneously. Cron can be scheduled against either action; recomm
 
 ```
 gato-cubo-commerce 266cef3  feat(ayshare): wire content_library -> Ayshare publish pipeline
-gato-cubo-commerce (prior)  storage uploads + DB row population via REST (ad-hoc, no commit)
+gato-cubo-commerce 9c9fe38  feat(admin/conteudo): inline media thumbnails in variant rows
+gato-cubo-commerce 23f7614  feat(admin/conteudo): inline edit + media replace + download source
+gato-cubo-commerce b49f212  feat(admin/conteudo): needs-media triage filter + upload validation
+cex/gato-ao-cubo   8a9d39dd  [N07] fix: utf8 double-encoding (88 rows fixed, cp1252->utf8)
+cex/gato-ao-cubo   bd7e82c7  [N07] tools: upload_w02_p05_scenes.py (+2 rows wired = 11/224)
 ```
+
+## Continuation Turn (2026-04-20 PM)
+
+User reported persistent empty media after initial fixes. Investigation confirmed
+no rendering bug: 215/224 rows genuinely have storage_url=NULL. Scope of visible
+fixes in this turn:
+
+1. **Mojibake** -- 88 rows across caption_text / alt_text / metadata dict-values
+   fixed via `_tools/fix_content_library_mojibake.py`. Encoding cp1252->utf8
+   (not latin-1; em-dash char 0x97 outside latin-1 strict range). Verified 0
+   remaining after second pass.
+
+2. **Edit round-trip UX** (`useContentLibrary.ts` + `ContentLibrary.tsx`):
+   - `useUpdateVariant` mutation: inline caption/alt_text edit via textarea
+   - `useReplaceMedia` mutation: upload to Storage + patch row + reset
+     publish_status='pending' + clear ayshare_job_id (idempotency reset)
+   - Download-source link for external editor round-trip
+   - Upload validation: 100MB cap + mime/ext check per asset_type
+
+3. **Triage filter**: mediaFilter Select (Toda / Com midia / Pendente upload)
+   with live counts. Gives operator a single click to see the 213 rows still
+   needing content.
+
+4. **+2 rows wired**: uploaded w02_p05 scene PNGs via
+   `_tools/upload_w02_p05_scenes.py` (threads 1:1, pinterest 2:3).
+   Final count: 11/224 with media.
+
+## Remaining Gaps (blocked, not forgotten)
+
+| Blocker | Who unblocks | Action |
+|---------|--------------|--------|
+| 213 rows with NULL storage_url | N02 or user | Regen scenes OR upload via new triage UI |
+| ayshare-publish function not deployed | User | Get SUPABASE_ACCESS_TOKEN + run deploy |
+| Cron still points at `publish_due` | After deploy verified | Switch to `publish_library_due` |
 
 ## Properties
 
