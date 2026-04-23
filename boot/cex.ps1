@@ -28,18 +28,19 @@ if (Test-Path $handoff) {
     }
 }
 
-# Detect git repo name + branch
+# Detect git repo name + branch + tier
 $gitBranch = ""
 $gitRepo = ""
+$cexTier = if ($env:CEX_TIER) { $env:CEX_TIER.ToUpper() } else { "DEV" }
 try {
     $gitBranch = (git rev-parse --abbrev-ref HEAD 2>$null)
     $gitRemote = (git remote get-url origin 2>$null)
     if ($gitRemote -match "[/:]([^/]+?)(?:\.git)?$") { $gitRepo = $Matches[1] }
 } catch {}
 
-# Build title: N0X Sin | repo@branch [mission] -- STATUS
+# Build title: [TIER] N0X Sin | repo@branch [mission] -- STATUS
 function Set-CexTitle($status) {
-    $t = "N07 $sinName"
+    $t = "[$cexTier] N07 $sinName"
     if ($gitRepo) { $t += " | $gitRepo" }
     if ($gitBranch) { $t += "@$gitBranch" }
     if ($mission) { $t += " [$mission]" }
@@ -65,10 +66,11 @@ try {
     Clear-Host
 } catch {}
 
+$tierColor = switch ($cexTier) { "LAB" { "Yellow" } "PUBLIC" { "Red" } default { "Green" } }
 Write-Host ""
-Write-Host "  [*] N07 Orchestrating Sloth - Orchestrator" -ForegroundColor DarkCyan
+Write-Host "  [$cexTier] N07 Orchestrating Sloth - Orchestrator" -ForegroundColor $tierColor
 Write-Host "  ==================================================" -ForegroundColor DarkGray
-Write-Host "  Too lazy to do it myself. Dispatching." -ForegroundColor DarkGray
+Write-Host "  Repo: $gitRepo  |  Remote: $($env:CEX_REMOTE)" -ForegroundColor DarkGray
 Write-Host "  opus-4-6  |  1000K context  |  8F pipeline" -ForegroundColor DarkGray
 if ($mission) { Write-Host "  Mission: $mission" -ForegroundColor DarkCyan }
 Write-Host ""
@@ -95,7 +97,8 @@ Ready. What do you need?
 '@
 
 # Build argument list (avoids PowerShell parsing -- flags as operators)
-$cliArgs = @("--dangerously-skip-permissions", "--permission-mode", "bypassPermissions", "--no-chrome", "--effort", "max", "--model", "claude-opus-4-6", "--name", "CEX-N07")
+$sessionName = "CEX-N07-$cexTier"
+$cliArgs = @("--dangerously-skip-permissions", "--permission-mode", "bypassPermissions", "--no-chrome", "--effort", "max", "--model", "claude-opus-4-6", "--name", $sessionName)
 $cliArgs += "--append-system-prompt", "N07_admin/agent_card_n07.md"
 $cliArgs += "--append-system-prompt", ".cex/P09_config/context_self_select.md"
 $cliArgs += "--append-system-prompt", $sysPrompt

@@ -57,6 +57,10 @@
       }
     ]
   },
+  "statusLine": {
+    "type": "command",
+    "command": "./.claude/statusline.sh"
+  },
   "permissions": {
     "allow": [
       "Bash(*)",

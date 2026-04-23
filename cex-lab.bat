@@ -1,10 +1,10 @@
 @echo off
-:: CEX-MAIN -- alias for cex-dev (backward compat)
-:: Usage: cex-main [subcommand]
+:: CEX-LAB -- experiments, benchmarks, breaking changes (private repo: cex-lab)
+:: Usage: cex-lab [subcommand]
 
 set CEX_ROOT=%~dp0
-set CEX_TIER=dev
-set CEX_REMOTE=origin
+set CEX_TIER=lab
+set CEX_REMOTE=lab
 cd /d "%CEX_ROOT%"
 
 if "%~1"=="" (
@@ -19,6 +19,9 @@ if "%~1"=="" (
     powershell -NoProfile -ExecutionPolicy Bypass -File _spawn\spawn_solo.ps1 -nucleus %2 -task "%~3" -interactive
 ) else if "%~1"=="doctor" (
     python _tools\cex_doctor.py
+) else if "%~1"=="promote" (
+    echo Promoting lab to dev...
+    git push origin main
 ) else (
     powershell -NoProfile -NoExit -ExecutionPolicy Bypass -File boot\cex.ps1 %*
 )
