@@ -1,0 +1,9 @@
+# Deprecated Terms Blocklist
+# Used by cex_hooks.py pre-commit to reject staged files containing these terms.
+# Format: one term per line, exact match (case-sensitive).
+# Lines starting with # are comments.
+#
+# Added: 2026-04-21 (CEXAI rebrand W3)
+
+Cognitive Enterprise X
+enterprise brain

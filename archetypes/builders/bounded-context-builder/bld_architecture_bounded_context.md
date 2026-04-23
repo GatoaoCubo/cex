@@ -1,0 +1,87 @@
+---
+id: bld_architecture_bounded_context
+kind: component_map
+pillar: P08
+llm_function: CONSTRAIN
+version: 1.0.0
+quality: 8.1
+tags: [bounded_context, architecture, ddd, context-map]
+title: "Architecture Bounded Context"
+density_score: 1.0
+updated: "2026-04-17"
+related:
+  - bld_knowledge_card_nucleus_def
+  - p01_kc_context_scoping
+  - bld_collaboration_model_architecture
+  - p01_kc_cex_project_overview
+  - component-map-builder
+  - spec_infinite_bootstrap_loop
+  - p01_ctx_cex_project
+  - p08_pat_builder_construction
+  - p01_kg_cex_system_architecture
+  - report_intent_resolution_value_prop
+---
+# Architecture: bounded_context
+## Position in CEX Kind Taxonomy
+```
+P08 Architecture
+  bounded_context   <-- THIS KIND (semantic boundary)
+  component_map     (deployment topology -- NOT bounded_context)
+  decision_record   (ADR -- architecture decisions)
+  interface         (integration contract spec)
+  agent_card        (agent capability definition)
+```
+
+## Context Map Relationships
+```
+BC_A (upstream, Open Host Service)
+    |
+    | data_contract (Published Language)
+    v
+BC_B (downstream, Anti-Corruption Layer)
+    |
+    | domain_event (internal, not shared)
+    v
+BC_B aggregates (internal domain model)
+```
+
+## Relationships
+| Relation | Kind | Direction | Notes |
+|----------|------|-----------|-------|
+| governed by | domain_vocabulary | one-to-one | Each BC has one vocabulary |
+| emits | domain_event | one-to-many | Events stay within BC unless published |
+| publishes | data_contract | one-to-many | Published Language to other BCs |
+| maps to | component_map | loose | BC may span multiple services |
+| owns | agent / nucleus | one-to-many | Nuclei belong to a BC |
+
+## CEX Bounded Contexts
+| BC | Nucleus | Domain |
+|----|---------|--------|
+| bc_intelligence | N01 | Research and analysis |
+| bc_marketing | N02 | Content and campaigns |
+| bc_engineering | N03 | Build and scaffold |
+| bc_knowledge | N04 | Knowledge management |
+| bc_operations | N05 | Code, test, deploy |
+| bc_commercial | N06 | Pricing and revenue |
+| bc_orchestration | N07 | Mission orchestration |
+
+## Context Map Patterns (Evans)
+- ACL prevents corruption from upstream model vocabulary
+- OHS standardizes how this context exposes itself to consumers
+- Partnership requires coordinated changes between two teams
+- Big Ball of Mud: avoid -- no explicit boundary = semantic drift
+
+## Related Artifacts
+
+| Artifact | Relationship | Score |
+|----------|-------------|-------|
+| [[bld_knowledge_card_nucleus_def]] | upstream | 0.21 |
+| [[p01_kc_context_scoping]] | upstream | 0.20 |
+| [[bld_collaboration_model_architecture]] | downstream | 0.20 |
+| [[p01_kc_cex_project_overview]] | upstream | 0.19 |
+| [[component-map-builder]] | related | 0.19 |
+| [[spec_infinite_bootstrap_loop]] | related | 0.18 |
+| [[p01_ctx_cex_project]] | upstream | 0.18 |
+| [[p08_pat_builder_construction]] | related | 0.18 |
+| [[p01_kg_cex_system_architecture]] | upstream | 0.17 |
+| [[report_intent_resolution_value_prop]] | upstream | 0.17 |

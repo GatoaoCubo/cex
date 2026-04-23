@@ -1,0 +1,208 @@
+id: leverage_map_v2_verify_cycle
+title: N01 Leverage Map V2 — Verification Cycle Report
+kind: knowledge_card
+pillar: P01_knowledge
+nucleus: N01
+created: 2026-04-15
+version: 2.0.1
+quality: null
+tags:
+- leverage
+- tools
+- gap-analysis
+- n01-intel
+density_score: 1.0
+verification: ''
+was_the_expected_tool_added_yes_no_evidence: 'YES. `_tools/cex_web_fetch.py` is present and functional.
+
+
+  Evidence:
+
+  - File exists: `{{USER_HOME}}\Documents\GitHub\cex\_tools\cex_web_fetch.py` ✓
+
+  - Implements HTTP fetch with HTML→text conversion ✓
+
+  - Supports both generic URLs and arXiv shortcuts ✓
+
+  - Handles charset detection and truncation ✓
+
+  - ASCII-only, per `.claude/rules/ascii-code-rule.md` ✓'
+does_its_api_match_n01_s_needs: 'PARTIALLY. The tool is sufficient for fetching but insufficient for validating what was fetched.
+
+
+  #### API Capabilities (✓ = present, ✗ = missing)
+
+
+  | Feature | Status | Implementation |
+
+  |---------|--------|-----------------|
+
+  | HTTP GET with user-agent | ✓ | `fetch(url, timeout=20)` |
+
+  | Charset auto-detection | ✓ | Parses `Content-Type` header |
+
+  | HTML→plaintext conversion | ✓ | Regex strip scripts/styles/tags |
+
+  | ArXiv URL shortcut | ✓ | `arxiv_url(arxiv_id)` + `--arxiv` flag |
+
+  | Size limiting | ✓ | `--max-bytes` (default 20KB) |
+
+  | Raw HTML fallback | ✓ | `--raw` flag for JS-heavy sites |
+
+  | Timeout handling | ✓ | Configurable timeout (default 20s) |
+
+  | Citation extraction | ✗ | MISSING |
+
+  | Metadata parsing | ✗ | MISSING (author, date, venue) |
+
+  | Citation validation | ✗ | MISSING (DOI/ISBN/arXiv authenticity) |
+
+  | Broken link detection | ✗ | MISSING (HTTP status inference) |
+
+  | Citation formatting | ✗ | MISSING (APA/MLA/Chicago/BibTeX) |
+
+
+  ---'
+new_wired_tools_since_v1: ''
+primary_new_tool: '`cex_web_fetch.py` (72 lines, minimal deps)
+
+  - Fetch URL content for N01 research
+
+  - Output: plaintext with truncation
+
+  - Integration points: `cex_research.py`, `cex_taxonomy_scout.py` already use similar fetch patterns
+
+  - Maturity: Production-ready for basic fetch, not for citation work'
+secondary_integration_points: '`cex_taxonomy_scout.py` (existing, now has fetch dependency)
+
+  - Uses urllib.request for source discovery (now can delegate to cex_web_fetch)
+
+  - Scans GitHub, arXiv, IETF, W3C, community sources
+
+  - Output: candidate kinds + evidence
+
+
+  `cex_source_harvester.py` (existing, now complementary)
+
+  - Extracts source references (URLs, arXiv, RFC, DOI) from repo
+
+  - Deduplicates via URL canonicalization + fuzzy matching
+
+  - Output: `.cex/P09_config/taxonomy_sources.yaml`
+
+
+  `cex_research.py` (existing, now has fetch foundation)
+
+  - Generates research prompts for taxonomy extraction
+
+  - Pipeline: research.py → cex_web_fetch.py → src_*.md → distill.py → kc_*.md
+
+  - Integrates with official docs fetching
+
+
+  ---'
+still_missing_leverage_gaps: ''
+gap_1_citation_extraction_validation: "Why this matters: N01 research outputs (KCs, briefs, analyses) cite sources. Without\
+  \ automated validation, citations are unmaintained — links break, DOI format drifts, metadata goes stale.\n\nWhat's needed:\n\
+  1. Citation parser — extract citations from fetched HTML/plaintext\n   - Regex patterns for DOI, arXiv, ISBN, GitHub slugs,\
+  \ URLs\n   - Support both implicit (URL in text) and explicit (citation blocks)\n   - Example: \"See Liu et al. 2023\" →\
+  \ `{authors: [...], year: 2023, arxiv: 2303.18223}`\n\n2. Metadata extractor — pull author, date, venue from fetched pages\n\
+  \   - Open Graph meta tags (og:title, og:author, og:publication_date)\n   - Schema.org structured data (ScholarArticle,\
+  \ BlogPosting)\n   - arXiv API (faster than scraping)\n   - Fallback heuristics (h1/h2 for title, footer for date)\n\n3.\
+  \ Validation engine — check citations for authenticity/liveness\n   - HTTP HEAD to detect broken links (304, 404, 410, 451)\n\
+  \   - arXiv API lookup (verify ID format, retraction status)\n   - DOI resolution (crossref.org API)\n   - ISBN validation\
+  \ (checksum + OpenLibrary)"
+gap_2_citation_formatting_normalization: "Why this matters: N01 outputs need consistent citation formats (APA, MLA, Chicago,\
+  \ BibTeX). Current solution: manual. Opportunity: generative.\n\nWhat's needed:\n1. Citation formatter — convert parsed\
+  \ citation objects to standard formats\n   - Input: `{authors: [...], title, year, venue, doi, arxiv, url}`\n   - Output:\
+  \ APA, MLA, Chicago, BibTeX, CSL-JSON\n   - Validation: check that output is structurally valid (APA requires period, etc.)\n\
+  \n2. Template library — per-format rules (author order, punctuation, abbreviations)\n   - APA: \"(Author, Year)\" for in-text,\
+  \ full list at end\n   - MLA: (Author Page) for in-text\n   - Chicago: superscript numbers or author-date\n   - BibTeX:\
+  \ raw LaTeX-safe fields"
+gap_3_knowledge_base_linkage: 'Why this matters: N01''s research feeds into P01_knowledge library. Citations should auto-link
+  to existing KCs or flag new KC opportunities.
+
+
+  What''s needed:
+
+  1. Citation→Kind mapping — when N01 cites a paper on "tokenization," auto-suggest that it feeds `kc_tokenization.md` in
+  P01
+
+  2. Missing KC detector — if citation is novel (not mapped to existing KC), flag for N04 to create
+
+  3. Citation aging — track when each source was last accessed, flag stale references for refresh'
+gap_4_multimodal_fetch_low_priority: 'Why this matters: arXiv PDFs, GitHub README.md rendering, social media embeds add richness
+  to research.
+
+
+  What''s needed:
+
+  1. PDF extraction (pypdf, pdfplumber) — extract text from arXiv PDFs instead of HTML
+
+  2. Markdown rendering — GitHub/GitLab README render to plaintext for better extraction
+
+  3. Rate limiting — respect API quotas (arXiv, GitHub, Crossref all have limits)
+
+
+  ---'
+wiring_summary_v1_v2: '| Layer | V1 Status | V2 Status | Tool |
+
+  |-------|-----------|-----------|------|
+
+  | Fetch | Manual (research.py requests) | ✓ Automated | `cex_web_fetch.py` |
+
+  | Research | ✓ Prompt template | ✓ Same | `cex_research.py` |
+
+  | Taxonomy Scout | ✓ Basic fetch | ✓ Enhanced | `cex_taxonomy_scout.py` |
+
+  | Source Harvesting | ✓ Regex extraction | ✓ Same | `cex_source_harvester.py` |
+
+  | Citation Parsing | ✗ MISSING | ✗ Still missing | — |
+
+  | Citation Validation | ✗ MISSING | ✗ Still missing | — |
+
+  | Citation Formatting | ✗ MISSING | ✗ Still missing | — |
+
+  | Metadata Extraction | ✗ MISSING | ✗ Still missing | — |
+
+
+  ---'
+next_iteration_prioritized: ''
+1_citation_extractor_cex_citation_parser_py_critical: "Purpose: Parse fetched content and extract structured citations.\n\n\
+  Input: Plaintext from `cex_web_fetch.py`\n\nOutput: JSON with parsed citations\n[\n  {\n    \"authors\": [\"Liu, Z.\", \"\
+  Wang, X.\"],\n    \"title\": \"Attention Is All You Need\",\n    \"year\": 2017,\n    \"venue\": \"NeurIPS\",\n    \"doi\"\
+  : \"10.5555/3295222\",\n    \"arxiv\": \"1706.03762\",\n    \"url\": \"https://arxiv.org/abs/1706.03762\"\n  }\n]\n\nScope:\
+  \ ~150 lines\n- Regex for DOI: `\\b10\\.\\d{4,}/\\S+`\n- Regex for arXiv: `\\barxiv:\\d{4}\\.\\d{4,}`\n- Regex for URLs:\
+  \ `https?://[^\\s)]+`\n- Regex for author lists: `\\b[A-Z][a-z]+(?:,| and) [A-Z]\\.`\n- Fallback heuristics for missing\
+  \ metadata\n\nSuccess criteria:\n- Extracts ≥80% of citations from academic papers (test vs. 10 arXiv papers)\n- Zero false\
+  \ positives (random URLs should not be flagged as citations)\n- Handles DOI, arXiv, ISBN, GitHub URLs\n\n---"
+2_citation_validator_cex_citation_validator_py_high: "Purpose: Check citations for authenticity, liveness, and completeness.\n\
+  \nInput: Parsed citations from `cex_citation_parser.py`\n\nOutput: Validation status + metadata enrichment\n{\n  \"doi\"\
+  : \"10.5555/3295222\",\n  \"status\": \"valid\",\n  \"http_status\": 301,\n  \"metadata\": {\n    \"authors\": [\"Vaswani,\
+  \ A.\", ...],\n    \"title\": \"Attention Is All You Need\",\n    \"year\": 2017,\n    \"venue\": \"31st Conference on Neural\
+  \ Information Processing Systems\"\n  },\n  \"last_checked\": \"2026-04-15T12:34:56Z\"\n}\n\nScope: ~200 lines\n- arXiv\
+  \ API: `https://export.arxiv.org/api/query?id_list={arxiv_id}`\n- DOI resolution: `https://doi.org/{doi}` (follow 301 redirects)\n\
+  - Crossref API: `https://api.crossref.org/works/{doi}` (metadata enrichment)\n- HTTP HEAD for URL liveness\n- ISBN checksum\
+  \ validation\n\nSuccess criteria:\n- Validates ≥95% of DOI/arXiv citations (test vs. 50 real citations)\n- Detects broken\
+  \ links (404, 410) with zero false negatives\n- Enriches metadata for ≥90% of academic papers\n\n---"
+3_citation_formatter_cex_citation_format_py_medium: "Purpose: Convert parsed citations to standard formats (APA, MLA, Chicago,\
+  \ BibTeX).\n\nInput: Validated citations from `cex_citation_validator.py`\n\nOutput: Formatted citation strings per requested\
+  \ style\n# APA\nVaswani, A., et al. (2017). Attention is all you need. In Advances in neural information processing systems\
+  \ (pp. 5998-6008).\n\n# BibTeX\n@inproceedings{vaswani2017attention,\n  title={Attention is all you need},\n  author={Vaswani,\
+  \ Ashish and others},\n  booktitle={NeurIPS},\n  year={2017}\n}\n\nScope: ~250 lines\n- Template-based formatting per style\n\
+  - Author abbreviation rules (et al. for ≥4 authors)\n- Punctuation & capitalization rules per style\n- Validation that output\
+  \ matches style spec\n\nSuccess criteria:\n- Formats all citation types (book, journal, conference, web)\n- Output matches\
+  \ citation style guide examples (test vs. official examples)\n- BibTeX output is valid (no unescaped special chars)\n\n\
+  ---"
+integration_points: "Once built, these tools should wire into:\n\n1. N01 Research Pipeline\n   - `cex_research.py` output\
+  \ (src_*.md) → auto-extract citations → store in `N01_intelligence/research/citations/`\n\n2. N04 Knowledge Base\n   - Citation\
+  \ validator flags new entities → suggest new KCs\n   - Citation formatter generates formatted references for KC outputs\n\
+  \n3. Continuous Monitoring\n   - Nightly job: re-validate all citations in `.cex/P09_config/taxonomy_sources.yaml`\n   - Report\
+  \ broken links + suggest archival (Wayback Machine) or removal\n\n4. Memory & Learning\n   - Track citation patterns per\
+  \ domain (ML papers cite arXiv, management cite LinkedIn, etc.)\n   - Learn domain-specific citation formats for future\
+  \ generation\n\n---"
+conclusion: 'cex_web_fetch.py is 50% of the solution. It handles data ingestion. The missing 50% is data validation and formatting
+  — transforming raw fetched content into trustworthy, reusable research artifacts. The 3-tool sequence (parser → validator
+  → formatter) is a high-ROI pattern that will dramatically increase N01''s research output reliability and N04''s citation
+  hygiene across the repo. Recommendation: Implement in order (1 → 2 → 3) with tests against real data (arXiv, DOI, GitHub)
+  before wiring into research pipeline.'

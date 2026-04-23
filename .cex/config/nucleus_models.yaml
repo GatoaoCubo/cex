@@ -1,0 +1,296 @@
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# CEX Nucleus Model Configuration
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+#
+# Each nucleus reads its CLI + model from here.
+# Boot scripts and spawn_grid consume this file.
+#
+# CHANGE THESE to match your subscriptions/budget.
+# Low-budget? Use ollama + local models everywhere.
+# Premium? Use the best cloud model per domain.
+#
+# CLI options:  claude | gemini | codex | ollama
+# Model: any model string your CLI supports
+#
+# Decision: 2026-04-02 — /guide session, user-confirmed
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+# --- N07: Orchestrator (this session — claude) ---
+n07:
+  cli: claude
+  model: claude-opus-4-6
+  flags: "--dangerously-skip-permissions --permission-mode bypassPermissions --no-chrome"
+  mcps: ".mcp-n07.json"
+  context: 1000000
+  domain: orchestration
+  # fallback_chain: ordered list consumed by cex_cli_resolver.py.
+  # Primary fails (quota/offline/missing) -> next entry is tried.
+  # Rule: never hardcode the CLI -- this YAML IS the config surface.
+  fallback_chain:
+    - {cli: gemini, model: gemini-2.5-flash-lite, flags: "--yolo"}
+    - {cli: codex,  model: gpt-5,             flags: "--dangerously-bypass-approvals-and-sandbox"}
+    - {cli: ollama, model: gemma4:26b,        flags: ""}
+    - {cli: ollama, model: qwen3:8b,         flags: ""}
+  # Legacy single-fallback field -- kept for backward compat with older tools.
+  fallback:
+    cli: ollama
+    model: gemma4:26b
+  fallback_local:
+    cli: ollama
+    model: gemma4:26b
+  notes: "Maestro. Best reasoning for dispatch decisions. Gemma4 MoE as local fallback (4B active, fits 16GB)."
+
+# --- N01: Research & Intelligence ---
+n01:
+  cli: claude
+  model: claude-opus-4-6
+  flags: "--dangerously-skip-permissions --permission-mode bypassPermissions --no-chrome"
+  context: 1000000
+  domain: research
+  mcps: ".mcp-n01.json"
+  settings: ".claude/nucleus-settings/n01.json"
+  fallback_chain:
+    - {cli: gemini, model: gemini-2.5-flash-lite, flags: "--yolo"}
+    - {cli: codex,  model: gpt-5,             flags: "--dangerously-bypass-approvals-and-sandbox"}
+    - {cli: ollama, model: gemma4:26b,        flags: ""}
+    - {cli: ollama, model: qwen3:8b,         flags: ""}
+  fallback:
+    cli: gemini
+    model: gemini-2.5-flash-lite
+    flags: "--yolo"
+  fallback_local:
+    cli: ollama
+    model: gemma4:26b
+  notes: "2026-04-13: opus->sonnet. Budget optimization: 5 Sonnet + 2 Opus. Preflight handles context compilation. Fallback uses gemini-2.5-flash-lite."
+
+# --- N02: Marketing & Copy ---
+n02:
+  cli: claude
+  model: claude-opus-4-6
+  flags: "--dangerously-skip-permissions --permission-mode bypassPermissions --no-chrome"
+  context: 1000000
+  domain: marketing
+  mcps: ".mcp-n02.json"
+  settings: ".claude/nucleus-settings/n02.json"
+  fallback_chain:
+    - {cli: gemini, model: gemini-2.5-flash-lite, flags: "--yolo"}
+    - {cli: codex,  model: gpt-5,             flags: "--dangerously-bypass-approvals-and-sandbox"}
+    - {cli: ollama, model: gemma4:26b,        flags: ""}
+    - {cli: ollama, model: qwen3:8b,         flags: ""}
+  fallback:
+    cli: gemini
+    model: gemini-2.5-flash-lite
+    flags: "--yolo"
+  fallback_local:
+    cli: ollama
+    model: gemma4:26b
+  notes: "2026-04-13: opus->sonnet. Creative copy is Sonnet sweet spot. Preflight pre-compiles context."
+
+# --- N03: Engineering & Builder ---
+n03:
+  cli: claude
+  model: claude-opus-4-6
+  flags: "--dangerously-skip-permissions --permission-mode bypassPermissions --no-chrome"
+  context: 1000000
+  domain: engineering
+  mcps: ".mcp-n03.json"
+  settings: ".claude/nucleus-settings/n03.json"
+  fallback_chain:
+    - {cli: codex,  model: gpt-5,             flags: "--dangerously-bypass-approvals-and-sandbox"}
+    - {cli: gemini, model: gemini-2.5-flash-lite, flags: "--yolo"}
+    - {cli: ollama, model: gemma4:26b,        flags: ""}
+    - {cli: ollama, model: qwen3:14b,         flags: ""}
+  fallback:
+    cli: codex
+    model: gpt-5
+    flags: "--dangerously-bypass-approvals-and-sandbox"
+  fallback_local:
+    cli: ollama
+    model: gemma4:26b
+  notes: "Opus primary. gpt-5 (not gpt-5-codex -- needs API key, not ChatGPT auth). Gemma4 MoE local fallback. 2026-04-16."
+
+# --- N04: Knowledge & RAG ---
+n04:
+  cli: claude
+  model: claude-opus-4-6
+  flags: "--dangerously-skip-permissions --permission-mode bypassPermissions --no-chrome"
+  context: 1000000
+  domain: knowledge
+  mcps: ".mcp-n04.json"
+  settings: ".claude/nucleus-settings/n04.json"
+  fallback_chain:
+    - {cli: gemini, model: gemini-2.5-flash-lite, flags: "--yolo"}
+    - {cli: codex,  model: gpt-5,             flags: "--dangerously-bypass-approvals-and-sandbox"}
+    - {cli: ollama, model: gemma4:26b,        flags: ""}
+    - {cli: ollama, model: qwen3:8b,         flags: ""}
+  fallback:
+    cli: gemini
+    model: gemini-2.5-flash-lite
+    flags: "--yolo"
+  fallback_local:
+    cli: ollama
+    model: gemma4:26b
+  notes: "2026-04-13: opus->sonnet. Supabase+complex arch needs Sonnet minimum. Preflight handles context."
+
+# --- N05: Operations & DevOps ---
+n05:
+  cli: claude
+  model: claude-opus-4-6
+  flags: "--dangerously-skip-permissions --permission-mode bypassPermissions"
+  context: 1000000
+  domain: operations
+  mcps: ".mcp-n05.json"
+  settings: ".claude/nucleus-settings/n05.json"
+  # chrome: enabled -- no --no-chrome flag; claude-in-chrome extension handles browser_tool + computer_use
+  fallback_chain:
+    - {cli: codex,  model: gpt-5,             flags: "--dangerously-bypass-approvals-and-sandbox"}
+    - {cli: gemini, model: gemini-2.5-flash-lite, flags: "--yolo"}
+    - {cli: ollama, model: qwen3:8b,         flags: ""}
+  fallback:
+    cli: codex
+    model: gpt-5
+    flags: "--dangerously-bypass-approvals-and-sandbox"
+  fallback_local:
+    cli: ollama
+    model: qwen3:8b
+  notes: "2026-04-17: sonnet->opus. Promoted for browser_tool + computer_use (UI automation: Supabase, Railway, NotebookLM). Chrome enabled (no --no-chrome). 1M context for multi-step browser sessions."
+
+# --- N06: Commercial & Brand ---
+n06:
+  cli: claude
+  model: claude-opus-4-6
+  flags: "--dangerously-skip-permissions --permission-mode bypassPermissions --no-chrome"
+  context: 1000000
+  domain: commercial
+  mcps: ".mcp-n06.json"
+  settings: ".claude/nucleus-settings/n06.json"
+  fallback_chain:
+    - {cli: gemini, model: gemini-2.5-flash-lite, flags: "--yolo"}
+    - {cli: codex,  model: gpt-5,             flags: "--dangerously-bypass-approvals-and-sandbox"}
+    - {cli: ollama, model: gemma4:26b,        flags: ""}
+    - {cli: ollama, model: qwen3:8b,         flags: ""}
+  fallback:
+    cli: gemini
+    model: gemini-2.5-flash-lite
+    flags: "--yolo"
+  fallback_local:
+    cli: ollama
+    model: gemma4:26b
+  notes: "2026-04-13: opus->sonnet. Pricing + monetization structured enough for Sonnet."
+
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# GRID LOAD DISTRIBUTION (6 simultaneous during /grid):
+#
+#   Claude/Opus:  N03 + N05 + N07 = 3 (deep reasoning + browser automation)
+#   Claude/Sonnet: N01 + N02 + N04 + N06 = 4 (structured tasks)
+#   N07 runs in separate session (doesn't compete with grid)
+#
+# 2026-04-13: Budget optimization. 7 Opus -> 2 Opus + 5 Sonnet.
+# Rationale: Max subscription has token caps. Opus for reasoning-critical
+# (orchestration + 8F artifact construction). Sonnet for well-structured domains.
+# Preflight (local Ollama or Haiku) pre-compiles context to reduce token burn.
+#
+# Fallback principle: always cross-provider (claude -> gemini-flash -> codex -> ollama)
+# Fallback local: qwen3:14b (N03) / qwen3:8b (all others)
+#
+# 2026-04-11: Added fallback_chain (ordered list). Consumed by cex_cli_resolver.py
+# during `-cli auto` mode in spawn_grid.ps1.
+#
+# 2026-04-12: Added ollama_api config for tools that call Ollama via OpenAI SDK.
+# Verified: qwen3:8b and qwen3:14b both respond at localhost:11434/v1.
+# -----------------------------------------------------------------------------------
+
+# --- Preflight Configuration ---
+# Pre-compilation phase: cheap/local model assembles context BEFORE nucleus boots.
+# Reduces token burn on main model by 60-70%.
+# Tool: _tools/cex_preflight.py (reads this config)
+preflight:
+  enabled: true
+  # Strategy: "local" = Ollama only, "cloud" = Haiku only, "hybrid" = local-first + Haiku fallback
+  strategy: hybrid
+  local:
+    cli: ollama
+    model: qwen3:14b
+    fallback_model: qwen3:8b
+    base_url: "http://localhost:11434/v1"
+    timeout_seconds: 30
+    # Tasks the local model handles (zero Max tokens spent):
+    tasks:
+      - file_scanning        # list relevant files for the task
+      - iso_ranking           # rank 13 ISOs by relevance, pick top 3-5
+      - context_dedup         # remove redundant context across sources
+      - token_counting        # count tokens before assembly
+      - embedding_retrieval   # TF-IDF / embedding similarity search
+  cloud:
+    cli: claude
+    model: claude-haiku-4-5-20251001
+    # Haiku is ~60x cheaper than Opus per token
+    tasks:
+      - semantic_ranking      # when local model ranking is uncertain
+      - prompt_compression    # summarize verbose context into dense form
+      - relevance_scoring     # score KC/ISO relevance 0-1 for selection
+  # Budget: max tokens the preflight phase can consume on cloud model
+  cloud_token_budget: 4000
+  # Output: compiled prompt written to .cex/cache/preflight/{nucleus}_{task_hash}.json
+  cache_dir: ".cex/cache/preflight"
+  # Context reduction targets
+  targets:
+    max_isos_per_build: 5           # from 13 -> top 5 most relevant
+    max_kcs_per_build: 3            # from all -> top 3
+    max_context_tokens: 15000       # target ceiling after compilation
+    original_avg_tokens: 50000      # baseline before preflight
+
+# --- Pre-flight Phase 0: MCP external context gather (N07 gateway) ---
+# N07 gathers external context before dispatch so non-Claude runtimes
+# (Codex, Gemini, Ollama) receive rich handoffs without live MCP access.
+# Tool: _tools/cex_preflight_mcp.py (reads preflight_mcp section below)
+# Spec: _docs/specs/spec_preflight_expansion_smart_routing.md
+#
+# Budget split (DP2): 8K external + 7K ISOs/KCs = 15K total per handoff
+# Timeout (DP3): 60s -- generous for network-bound MCP calls
+# Strategy (DP4): tiered -- free defaults + optional premium via env keys
+preflight_mcp:
+  enabled: true
+  max_external_tokens: 8192      # DP2: 8K external context budget
+  timeout_seconds: 60            # DP3: generous for network-bound calls
+  max_queries_per_provider: 3    # max search queries per provider per run
+  delay_between_queries_ms: 1000 # rate-limit guard between queries
+  audit_log: true                # write .cex/cache/preflight/{hash}_audit.json
+  providers:
+    github:
+      enabled: true
+      requires_key: GITHUB_TOKEN
+      operations: [search_repositories, search_code, list_issues, get_file_contents]
+      notes: "Free. Set GITHUB_TOKEN env var (any GitHub account token)."
+    fetch:
+      enabled: true
+      requires_key: null
+      notes: "Direct HTTP GET for specific URLs. No API key needed."
+    markitdown:
+      enabled: true
+      requires_key: null
+      notes: "HTML/PDF to markdown via MCP markitdown tool. No API key needed."
+    brave_search:
+      enabled: false
+      requires_key: BRAVE_API_KEY
+      notes: "Optional. Free tier: 2000 queries/mo. Set BRAVE_API_KEY in .env."
+    firecrawl:
+      enabled: false
+      requires_key: FIRECRAWL_API_KEY
+      notes: "Optional premium. Deep web crawl. Set FIRECRAWL_API_KEY in .env."
+  # Graceful degradation: if all providers unavailable, Phase 0 silently skips.
+  # The nucleus still receives ISO/KC context from Phase 1+2 (no crash).
+
+# --- Ollama API (OpenAI-compatible endpoint for tool-level access) ---
+ollama_api:
+  base_url: "http://localhost:11434/v1"
+  embed_url: "http://localhost:11434/api/embed"
+  models:
+    primary: "gemma4:26b"
+    heavy: "qwen3:14b"
+    light: "qwen3:8b"
+  gpu: "RTX 5070 Ti"
+  vram: "16GB"
+  parallel: 6  # OLLAMA_NUM_PARALLEL for concurrent grid inference
+  notes: "Gemma4 MoE (26B total, 4B active) as primary. Fits 16GB. 6x concurrent via OLLAMA_NUM_PARALLEL."
+

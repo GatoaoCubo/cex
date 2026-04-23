@@ -1,0 +1,112 @@
+# brand_config_schema.yaml
+# Validates .cex/brand/brand_config.yaml
+# 7 sections, 13 required fields, 38 optional fields
+# Derived variables (BRAND_SLUG, BRAND_UPPER, BRAND_NAME_SHORT) computed by brand_inject.py
+# Aliases (BRAND_TONE->BRAND_VOICE_TONE, BRAND_VOICE->BRAND_VOICE_TONE, BRAND_NICHE->BRAND_CATEGORY) handled by brand_inject.py
+
+type: object
+required: [identity, archetype, voice, audience, visual, positioning, monetization]
+
+properties:
+  identity:
+    type: object
+    required: [BRAND_NAME, BRAND_TAGLINE, BRAND_MISSION, BRAND_VALUES]
+    properties:
+      BRAND_NAME:       { type: string, minLength: 1, maxLength: 100 }
+      BRAND_TAGLINE:    { type: string, minLength: 10, maxLength: 100 }
+      BRAND_SLOGAN:     { type: string }
+      BRAND_MISSION:    { type: string, minLength: 20, maxLength: 500 }
+      BRAND_VISION:     { type: string }
+      BRAND_VALUES:     { type: array, items: { type: string }, minItems: 3, maxItems: 7 }
+      BRAND_STORY:      { type: string, minLength: 200, maxLength: 2000 }
+      BRAND_BIO:        { type: string, maxLength: 300 }
+      BRAND_ESSENCE:    { type: string, maxLength: 50 }
+      BRAND_MANIFESTO:  { type: string, maxLength: 3000 }
+
+  archetype:
+    type: object
+    required: [BRAND_ARCHETYPE]
+    properties:
+      BRAND_ARCHETYPE:
+        type: string
+        enum: [creator, hero, sage, explorer, rebel, magician, lover, caregiver, jester, ruler, innocent, everyman]
+      BRAND_ARCHETYPE_SHADOW:  { type: string }
+      BRAND_PERSONALITY:       { type: array, items: { type: string }, minItems: 3, maxItems: 7 }
+
+  voice:
+    type: object
+    required: [BRAND_VOICE_TONE, BRAND_VOICE_FORMALITY]
+    properties:
+      BRAND_VOICE_TONE:        { type: string }
+      BRAND_VOICE_FORMALITY:   { type: integer, minimum: 1, maximum: 5 }
+      BRAND_VOICE_ENTHUSIASM:  { type: integer, minimum: 1, maximum: 5 }
+      BRAND_VOICE_HUMOR:       { type: integer, minimum: 1, maximum: 5 }
+      BRAND_VOICE_WARMTH:      { type: integer, minimum: 1, maximum: 5 }
+      BRAND_VOICE_AUTHORITY:   { type: integer, minimum: 1, maximum: 5 }
+      BRAND_VOICE_DO:          { type: array, items: { type: string }, minItems: 3 }
+      BRAND_VOICE_DONT:        { type: array, items: { type: string }, minItems: 3 }
+      BRAND_LANGUAGE:          { type: string, pattern: "^[a-z]{2}-[A-Z]{2}$" }
+      BRAND_PERSON:            { type: string, enum: ["1st", "2nd", "3rd"] }
+      BRAND_ENERGY:            { type: string, enum: [calm, moderate, energetic, bold] }
+
+  audience:
+    type: object
+    required: [BRAND_ICP, BRAND_TRANSFORMATION]
+    properties:
+      BRAND_ICP:              { type: string, minLength: 20 }
+      BRAND_ICP_AGE:          { type: string }
+      BRAND_ICP_LOCATION:     { type: string }
+      BRAND_ICP_INCOME:       { type: string }
+      BRAND_ICP_VALUES:       { type: array, items: { type: string } }
+      BRAND_ICP_FEARS:        { type: array, items: { type: string } }
+      BRAND_ICP_ASPIRATIONS:  { type: array, items: { type: string } }
+      BRAND_TRANSFORMATION:   { type: string, pattern: "From .+ to .+ through .+" }
+      BRAND_COUNTRY:          { type: string, pattern: "^[A-Z]{2}$" }
+
+  visual:
+    type: object
+    required: [BRAND_COLORS]
+    properties:
+      BRAND_COLORS:
+        type: object
+        required: [primary, secondary, accent]
+        properties:
+          primary:    { type: string, pattern: "^#[0-9a-fA-F]{6}$" }
+          secondary:  { type: string, pattern: "^#[0-9a-fA-F]{6}$" }
+          accent:     { type: string, pattern: "^#[0-9a-fA-F]{6}$" }
+          background: { type: string, pattern: "^#[0-9a-fA-F]{6}$" }
+          foreground: { type: string, pattern: "^#[0-9a-fA-F]{6}$" }
+          surface:    { type: string, pattern: "^#[0-9a-fA-F]{6}$" }
+      BRAND_FONTS:
+        type: object
+        properties:
+          heading: { type: string }
+          body:    { type: string }
+          mono:    { type: string }
+      BRAND_LOGO_URL:    { type: string, format: uri }
+      BRAND_FAVICON_URL: { type: string, format: uri }
+      BRAND_STYLE:       { type: string }
+
+  positioning:
+    type: object
+    required: [BRAND_CATEGORY, BRAND_UVP]
+    properties:
+      BRAND_CATEGORY:       { type: string }
+      BRAND_UVP:            { type: string, minLength: 20 }
+      BRAND_DIFFERENTIATOR: { type: string }
+      BRAND_COMPETITORS:    { type: array, items: { type: string } }
+      BRAND_CONTENT_PILLARS: { type: array, items: { type: string }, minItems: 3, maxItems: 7 }
+      BRAND_HASHTAG:       { type: string, pattern: "^#" }
+      BRAND_TAGS:          { type: array, items: { type: string }, maxItems: 10 }
+
+  monetization:
+    type: object
+    required: [BRAND_PRICING_MODEL, BRAND_CURRENCY]
+    properties:
+      BRAND_PRICING_MODEL:
+        type: string
+        enum: [subscription, one-time, credits, freemium, marketplace, hybrid]
+      BRAND_CURRENCY:        { type: string, pattern: "^[A-Z]{3}$" }
+      BRAND_PRICE_ANCHOR:    { type: string }
+      BRAND_TIERS:           { type: array, items: { type: string } }
+      BRAND_PAYMENT_PROVIDERS: { type: array, items: { type: string } }

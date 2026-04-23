@@ -1,0 +1,345 @@
+---
+id: p01_kc_terminology_google_mcp_canonical
+kind: knowledge_card
+type: domain
+pillar: P01
+title: "Google & MCP Official Terminology: Canonical Vocabulary (2026)"
+version: 1.0.0
+created: 2026-04-07
+updated: 2026-04-07
+author: N01_intelligence
+domain: terminology
+origin: src_provider_taxonomy
+quality: 9.1
+tags: [terminology, google, gemini, a2a, mcp, canonical, grounding, permanent]
+tldr: "Complete canonical vocabulary from Google Gemini API, A2A Protocol, and MCP spec. Combined because MCP complements Google's A2A — together they define the agent interoperability layer."
+when_to_use: "When building CEX kinds for Google features, A2A agent cards, MCP server integration, or validating terminology in multi-provider artifacts."
+keywords: [google, gemini, a2a, agent-card, mcp, model-context-protocol, grounding, function-calling]
+long_tails:
+  - "google gemini official API terms function calling grounding a2a"
+  - "MCP protocol canonical terms tools resources prompts transport"
+axioms:
+  - "Google A2A and MCP are complementary protocols — A2A is agent-to-agent, MCP is agent-to-tools"
+  - "Google uses PascalCase for types (FunctionDeclaration) vs Anthropic/OpenAI snake_case"
+feeds_kinds: [function_def, agent_card, mcp_server, search_tool, code_executor, system_prompt]
+linked_artifacts:
+  related:
+    - P01_knowledge/library/domain/_reference/kc_google_ai_patterns.md
+    - P01_knowledge/library/domain/_reference/kc_mcp_protocol.md
+    - P01_knowledge/library/domain/_reference/kc_a2a_protocol.md
+    - P01_knowledge/library/domain/_reference/kc_terminology_rosetta_stone.md
+density_score: 0.91
+related:
+  - p01_kc_google_ai_patterns
+  - p01_kc_terminology_openai_canonical
+  - p01_kc_terminology_anthropic_canonical
+  - p01_kc_terminology_rosetta_stone
+  - p01_kc_openai_api_patterns
+  - p02_mc_google_gemini_2_5_pro
+  - taxonomy_completeness_audit
+  - atom_03_openai_agents_sdk
+  - bld_knowledge_card_function_def
+  - atom_12_dify
+---
+
+# Google & MCP Canonical Terminology
+
+---
+
+## PART 1: Google Gemini API
+
+### Source
+- **Primary**: ai.google.dev (Gemini API reference)
+- **A2A**: google.github.io/A2A (Agent-to-Agent protocol spec)
+- **Version**: Gemini 2.5 (April 2026)
+
+### Core API Terms
+
+| Official Term | Category | Definition |
+|---------------|----------|------------|
+| **GenerativeModel** | Class | Main model interface |
+| **model** | Parameter | Model name (e.g., `gemini-2.5-pro-preview-05-06`) |
+| **system_instruction** | Parameter | System prompt (NOT `system` — that's Anthropic/OpenAI) |
+| **contents** | Parameter | Conversation turns (array of `Content` objects) |
+| **Content** | Object | `{role, parts}` — role is `user` or `model` |
+| **Part** | Object | Content unit: `text`, `inline_data`, `function_call`, `function_response` |
+| **generation_config** | Parameter | Output configuration object |
+| **max_output_tokens** | Config field | Response length limit |
+| **temperature** | Config field | Randomness (0–2) |
+| **top_p** / **top_k** | Config field | Sampling parameters |
+| **response_mime_type** | Config field | `text/plain`, `application/json` |
+| **response_schema** | Config field | JSON Schema for structured output |
+| **safety_settings** | Parameter | Array of `{category, threshold}` |
+| **candidate** | Response | One generation candidate |
+| **finish_reason** | Response field | `STOP`, `MAX_TOKENS`, `SAFETY`, `RECITATION`, `OTHER` |
+
+### Function Calling Terms
+
+| Official Term | What It Is | Key Detail |
+|---------------|-----------|------------|
+| **FunctionDeclaration** | Definition | `{name, description, parameters}` — PascalCase type name |
+| **Tool** | Container | Holds array of `function_declarations` |
+| **FunctionCall** | Response part | Model invocation: `{name, args, id}` |
+| **FunctionResponse** | Request part | Developer result: `{name, response, id}` |
+| **tool_config** | Config | Contains `function_calling_config` |
+| **function_calling_config** | Inner config | `{mode, allowed_function_names}` |
+| **mode: AUTO** | Default | Model decides |
+| **mode: ANY** | Force | Must call a function |
+| **mode: NONE** | Disable | No function calls |
+| **mode: VALIDATED** | Preview | Function call with validation |
+| **allowed_function_names** | Filter | Array restricting callable functions |
+
+> **Key difference**: Google uses PascalCase types (`FunctionDeclaration`) and `mode` field. Anthropic/OpenAI use snake_case and `tool_choice`.
+
+### Grounding Terms
+
+| Official Term | What It Is |
+|---------------|-----------|
+| **grounding** | Feature name — connecting model output to real sources |
+| **google_search** | Grounding tool: `{google_search: {}}` in tools array |
+| **google_search_retrieval** | Older name (deprecated in favor of `google_search`) |
+| **dynamic_retrieval_config** | Config for when to ground |
+| **grounding_metadata** | Response metadata containing sources |
+| **grounding_chunks** | Array of source references |
+| **grounding_supports** | Which response segments are grounded |
+| **search_entry_point** | Rendered search widget |
+| **web** | Chunk source type (web result) |
+| **retrieval_queries** | Queries the model used for search |
+
+> **CEX impact**: Google's "grounding" maps to the proposed `citation` kind. Google provides the most mature citation/grounding system.
+
+### Built-in Tools
+
+| Official Name | Purpose | Comparison |
+|---------------|---------|------------|
+| **google_search** | Web search grounding | ≈ Anthropic `web_search`, OpenAI `web_search` |
+| **code_execution** | Sandboxed Python | ≈ Anthropic `code_execution`, OpenAI `code_interpreter` |
+
+> **Note**: Google says "code_execution" — same as Anthropic, NOT OpenAI's "code_interpreter".
+
+### Context Caching Terms
+
+| Official Term | What It Is |
+|---------------|-----------|
+| **Context Caching** | Feature name (two words) |
+| **CachedContent** | Object storing cached content |
+| **cached_content** | Request parameter referencing cache |
+| **expire_time** / **ttl** | Cache expiration |
+| **create** / **get** / **list** / **update** / **delete** | Cache CRUD operations |
+| **usage_metadata.cached_content_token_count** | Usage tracking |
+
+> **Difference from Anthropic**: Google's caching is explicit CRUD (create, manage, delete). Anthropic's is implicit (`cache_control: ephemeral` with auto-TTL).
+
+### Safety Settings
+
+| Official Term | What It Is |
+|---------------|-----------|
+| **HarmCategory** | Enum: `HATE_SPEECH`, `DANGEROUS_CONTENT`, `SEXUALLY_EXPLICIT`, `HARASSMENT`, `CIVIC_INTEGRITY` |
+| **HarmBlockThreshold** | Enum: `BLOCK_NONE`, `BLOCK_LOW_AND_ABOVE`, `BLOCK_MEDIUM_AND_ABOVE`, `BLOCK_ONLY_HIGH` |
+| **safety_ratings** | Response: per-category harm scores |
+| **blocked** | Response field: content was blocked |
+
+### Multimodal Terms
+
+| Official Term | What It Is |
+|---------------|-----------|
+| **inline_data** | Part type: `{mime_type, data}` for images/audio/video |
+| **file_data** | Part type: `{file_uri, mime_type}` for uploaded files |
+| **GenerateContentFile** | Uploaded file reference |
+| **video** | Natively supported in Gemini (unique advantage) |
+
+### Model Naming Convention
+
+| Pattern | Example | Meaning |
+|---------|---------|---------|
+| `gemini-{gen}-{tier}-{suffix}` | `gemini-2.5-pro-preview-05-06` | Gen 2.5, pro tier, preview |
+| Tiers | `flash`, `pro`, `ultra` | Small → medium → large |
+| `-preview` | Experimental | Not production-ready |
+| `-latest` | Alias | Newest stable snapshot |
+
+---
+
+## PART 2: A2A Protocol (Agent-to-Agent)
+
+### Source
+- **Primary**: google.github.io/A2A (protocol spec, March 2025+)
+- **Status**: Open standard, multi-vendor support
+
+### Core A2A Terms
+
+| Official Term | What It Is | CEX Relevance |
+|---------------|-----------|---------------|
+| **Agent Card** | JSON metadata describing an agent | `agent_card` kind — DIRECT match |
+| **A2A Server** | Agent exposing A2A endpoints | Agent hosting |
+| **A2A Client** | Agent consuming A2A endpoints | Agent consuming |
+| **Task** | Unit of work sent between agents | `handoff` |
+| **tasks/send** | Method: send task to agent | Dispatch |
+| **tasks/sendSubscribe** | Method: send + subscribe to updates | Streaming dispatch |
+| **tasks/get** | Method: get task status | Status check |
+| **tasks/cancel** | Method: cancel running task | Stop |
+| **Message** | Communication unit within a task | Turn in conversation |
+| **Artifact** | Output produced by agent task | NOT same as CEX "artifact" |
+| **Part** | Content unit: `TextPart`, `FilePart`, `DataPart` | Content block |
+
+### Agent Card Fields
+
+| Field | Type | Purpose |
+|-------|------|---------|
+| **name** | string | Human-readable agent name |
+| **description** | string | What the agent does |
+| **url** | string | Agent's A2A endpoint |
+| **provider** | object | Organization info |
+| **version** | string | Agent version |
+| **capabilities** | object | `streaming`, `pushNotifications`, `stateTransitionHistory` |
+| **authentication** | object | Auth requirements |
+| **defaultInputModes** | array | Supported input MIME types |
+| **defaultOutputModes** | array | Supported output MIME types |
+| **skills** | array | Agent's capabilities list |
+
+### Task States
+
+| State | Meaning |
+|-------|---------|
+| **submitted** | Task received |
+| **working** | Agent processing |
+| **input-required** | Agent needs more info |
+| **completed** | Task done |
+| **canceled** | Task canceled |
+| **failed** | Task failed |
+| **rejected** | Agent refused task |
+
+---
+
+## PART 3: MCP (Model Context Protocol)
+
+### Source
+- **Primary**: spec.modelcontextprotocol.io (protocol specification)
+- **Version**: 2025-06-18 (latest as of April 2026)
+- **Origin**: Created by Anthropic, now independent open standard
+
+### Architecture Terms
+
+| Official Term | What It Is | Key Detail |
+|---------------|-----------|------------|
+| **MCP Host** | AI application | Contains 1+ MCP Clients (e.g., Claude Desktop, VS Code) |
+| **MCP Client** | Connection manager | 1:1 connection to one MCP Server |
+| **MCP Server** | Context provider | Exposes tools, resources, prompts |
+| **transport** | Communication layer | `stdio` or `Streamable HTTP` |
+| **capabilities** | Negotiation | Client and server declare supported features |
+| **protocol version** | Handshake field | Version string in `initialize` |
+
+### Server Primitives (what servers expose)
+
+| Official Term | What It Is | Control | CEX Kind |
+|---------------|-----------|---------|----------|
+| **tool** | Executable action | Model-controlled (LLM decides when to call) | `function_def` |
+| **resource** | Data source | Application-controlled (app decides when to fetch) | `rag_source` |
+| **prompt** | Reusable template | User-controlled (user selects) | `prompt_template` |
+
+> **Critical distinction**: Tools = model decides. Resources = app decides. Prompts = user decides. This is MCP's core taxonomy.
+
+### Tool Definition Fields
+
+| Field | Type | Purpose |
+|-------|------|---------|
+| **name** | string | Tool identifier |
+| **title** | string | Human-readable display name (NEW in 2025-06-18) |
+| **description** | string | Tool purpose (for model) |
+| **inputSchema** | JSON Schema | Parameter schema (camelCase — NOT `input_schema`) |
+| **annotations** | object | Hints: `readOnlyHint`, `destructiveHint`, `idempotentHint`, `openWorldHint` |
+
+### Resource Definition Fields
+
+| Field | Type | Purpose |
+|-------|------|---------|
+| **uri** | string | Resource identifier (URI format) |
+| **name** | string | Human-readable name |
+| **description** | string | Resource purpose |
+| **mimeType** | string | Content type |
+
+### Prompt Definition Fields
+
+| Field | Type | Purpose |
+|-------|------|---------|
+| **name** | string | Prompt identifier |
+| **description** | string | Prompt purpose |
+| **arguments** | array | Parameters with `name`, `description`, `required` |
+
+### Client Primitives (what clients expose to servers)
+
+| Official Term | What It Is |
+|---------------|-----------|
+| **sampling** | Server requests LLM completion from client |
+| **elicitation** | Server requests user input from client |
+| **logging** | Server sends log messages to client |
+
+### JSON-RPC Methods
+
+| Method | Direction | Purpose |
+|--------|-----------|---------|
+| **initialize** | Client→Server | Handshake + capability negotiation |
+| **tools/list** | Client→Server | Discover available tools |
+| **tools/call** | Client→Server | Execute a tool |
+| **resources/list** | Client→Server | Discover resources |
+| **resources/read** | Client→Server | Fetch resource content |
+| **resources/subscribe** | Client→Server | Watch for resource changes |
+| **prompts/list** | Client→Server | Discover prompts |
+| **prompts/get** | Client→Server | Get prompt with arguments |
+| **sampling/createMessage** | Server→Client | Request LLM completion |
+| **elicitation/create** | Server→Client | Request user input |
+| **notifications/initialized** | Client→Server | Confirm initialization |
+| **notifications/cancelled** | Either | Cancel a request |
+| **notifications/progress** | Server→Client | Progress updates |
+
+### Transport Types
+
+| Official Name | Wire Protocol | When to Use |
+|---------------|---------------|-------------|
+| **stdio** | stdin/stdout JSON-RPC | Local processes, CLI tools |
+| **Streamable HTTP** | HTTP POST + optional SSE | Remote servers, web services |
+
+> **Note**: "Streamable HTTP" replaced the older "HTTP+SSE" transport. The older name is deprecated.
+
+### Capability Negotiation
+
+| Capability | Side | Purpose |
+|------------|------|---------|
+| **tools** | Server | Declares tool support + `listChanged` |
+| **resources** | Server | Declares resource support + `subscribe` + `listChanged` |
+| **prompts** | Server | Declares prompt support + `listChanged` |
+| **sampling** | Client | Declares sampling support |
+| **elicitation** | Client | Declares elicitation support |
+| **logging** | Server | Declares log support |
+| **completions** | Server | Declares completion support |
+| **experimental** | Both | Non-stable features |
+
+---
+
+## Cross-Protocol Comparison: A2A vs MCP
+
+| Dimension | A2A | MCP | CEX Implication |
+|-----------|-----|-----|-----------------|
+| **Purpose** | Agent-to-agent communication | Agent-to-tool connection | CEX needs both |
+| **Unit of work** | Task | Tool call | `handoff` vs `function_def` |
+| **Discovery** | Agent Card (JSON) | `tools/list` + `resources/list` | `agent_card` vs `mcp_server` |
+| **State** | Task states (submitted→completed) | Stateless (per-call) | Different patterns |
+| **Protocol** | HTTP/JSON | JSON-RPC (stdio or HTTP) | Different transports |
+| **Multimodal** | TextPart, FilePart, DataPart | MIME-typed content | Both support it |
+| **Auth** | Agent Card `authentication` | Transport-level | Different layers |
+
+> **Key insight**: A2A is for agent *collaboration*. MCP is for agent *capability*. They solve different problems and are designed to work together.
+
+## Related Artifacts
+
+| Artifact | Relationship | Score |
+|----------|-------------|-------|
+| [[p01_kc_google_ai_patterns]] | sibling | 0.46 |
+| [[p01_kc_terminology_openai_canonical]] | sibling | 0.46 |
+| [[p01_kc_terminology_anthropic_canonical]] | sibling | 0.42 |
+| [[p01_kc_terminology_rosetta_stone]] | sibling | 0.40 |
+| [[p01_kc_openai_api_patterns]] | sibling | 0.26 |
+| [[p02_mc_google_gemini_2_5_pro]] | downstream | 0.23 |
+| [[taxonomy_completeness_audit]] | sibling | 0.22 |
+| [[atom_03_openai_agents_sdk]] | sibling | 0.22 |
+| [[bld_knowledge_card_function_def]] | sibling | 0.22 |
+| [[atom_12_dify]] | sibling | 0.21 |

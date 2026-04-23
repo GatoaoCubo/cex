@@ -1,0 +1,107 @@
+---
+id: p11_qg_intelligence_artifact
+kind: quality_gate
+pillar: P11
+title: "Gate: Intelligence Artifact Pre-Publish"
+version: "1.0.0"
+created: "2026-04-02"
+updated: "2026-04-02"
+author: "quality-gate-builder"
+domain: "intelligence_artifact"
+quality: 9.1
+tags: [quality-gate, intelligence, research, n01, pre-publish, p11]
+tldr: "Pre-publish gate for N01 intelligence artifacts: 9 HARD checks + 5-dimension scoring >= 8.0 before pool acceptance"
+density_score: 0.91
+related:
+  - p11_qg_creation_artifacts
+  - p11_qg_marketing_artifacts
+  - p11_qg_orchestration_artifacts
+  - p11_qg_engineering_artifacts
+  - p11_qg_brand_artifacts
+  - p11_qg_quality_gate
+  - p11_qg_response_format
+  - p11_qg_chunk_strategy
+  - bld_knowledge_card_quality_gate
+  - p11_qg_boot_config
+---
+## Definition
+
+| Property | Value |
+|----------|-------|
+| Metric | intelligence_quality_score |
+| Threshold | 8.0 |
+| Operator | >= |
+| Scope | All intelligence artifacts produced by N01 before pool merge or delivery handoff |
+
+## HARD Gates
+
+Failure on any single gate sets `intelligence_quality_score = 0` and blocks pool merge immediately.
+
+| ID | Criterion | Failure Action |
+|----|-----------|----------------|
+| H01 | Frontmatter block parses as valid YAML without errors | block |
+| H02 | `id` matches the required namespace pattern for the artifact kind | block |
+| H03 | `id` value equals the filename stem exactly (case-sensitive) | block |
+| H04 | `kind` field matches the literal artifact type registered in `kinds_meta.json` | block |
+| H05 | `quality` field is null at authoring time (self-scoring forbidden) | block |
+| H06 | All required frontmatter fields present and non-empty: id, kind, pillar, title, version, created, updated, author, domain, tags, tldr | block |
+| H07 | At least one cited source present in body (URL, DOI, named publication, or named dataset) — unsourced intelligence is inadmissible | block |
+| H08 | Executive summary or equivalent section (abstract, overview, brief) present with >= 2 sentences | block |
+| H09 | Findings or analysis section present with >= 3 distinct, substantive claims | block |
+
+## SOFT Scoring
+
+Score each dimension 0.0–1.0. Multiply by weight. Sum to produce aggregate on 0–10 scale.
+
+| ID | Dimension | Weight | Criteria |
+|----|-----------|--------|----------|
+| S01 | Evidence Quality | 25% | Sources are credible (peer-reviewed, official, or primary), recent (< 3 yr unless historical domain), and directly relevant to the stated research question. Score: 1.0 = all three; 0.5 = two; 0.0 = one or none |
+| S02 | Analytical Depth | 25% | Analysis surfaces non-obvious insights, causal mechanisms, or structural patterns beyond surface facts. Score: 1.0 = >= 2 non-obvious insights; 0.5 = surface with one interpretation; 0.0 = purely descriptive |
+| S03 | Actionability | 20% | Recommendations name a concrete actor, action, and measurable outcome. Score: 1.0 = >= 2 concrete recommendations; 0.5 = recommendations present but vague; 0.0 = no recommendations |
+| S04 | Structural Completeness | 20% | All four required sections present: executive summary, findings/analysis, recommendations, limitations/caveats. Score: 1.0 = all four; 0.0 = any missing |
+| S05 | Scope Adherence | 10% | Content stays within stated research scope; tangential topics comprise < 15% of body length. Score: 1.0 = in-scope; 0.0 = scope violated |
+
+**Scoring Formula**:
+```
+intelligence_quality_score =
+  (S01 * 0.25 + S02 * 0.25 + S03 * 0.20 + S04 * 0.20 + S05 * 0.10) * 10
+```
+Weight sum: 1.00. Score range: 0.0–10.0.
+PASS condition: all 9 HARD gates pass AND `intelligence_quality_score >= 8.0`.
+
+## Actions
+
+| Tier | Threshold | Action |
+|------|-----------|--------|
+| GOLDEN | >= 9.5 | Publish to N01 golden pool; flag as reference brief for future comparable research tasks |
+| PUBLISH | >= 8.0 | Publish to N01 output pool; mark delivery-ready for handoff |
+| REVIEW | >= 7.0 | Return to N01 with scored dimension breakdown; one revision cycle permitted before re-evaluation |
+| REJECT | < 7.0 | Block from pool; log failing dimensions; full rewrite required before resubmission |
+
+## Bypass
+
+| Field | Value |
+|-------|-------|
+| condition | Research covers a rapidly-evolving domain where the < 3-year recency rule (S01) would exclude all available primary sources (e.g., emerging technology with < 12 months of published literature) |
+| approver | N07 Orchestrator must approve in writing; exception scope must be documented in the active handoff file |
+| audit_log | Record in `.cex/runtime/decisions/decision_manifest.yaml` with: date, approver name, dimension bypassed, specific reason, and artifact id |
+| expiry | 7 days from bypass grant; artifact must reach full compliance or be re-evaluated before expiry |
+| non-bypassable | H01 (YAML parse integrity) and H05 (quality null) cannot be bypassed under any condition or approver level |
+
+---
+quality: 9.1
+
+## Related Artifacts
+
+| Artifact | Relationship | Score |
+|----------|-------------|-------|
+| [[p11_qg_creation_artifacts]] | sibling | 0.61 |
+| [[p11_qg_marketing_artifacts]] | sibling | 0.52 |
+| [[p11_qg_orchestration_artifacts]] | sibling | 0.52 |
+| [[p11_qg_engineering_artifacts]] | sibling | 0.51 |
+| [[p11_qg_brand_artifacts]] | sibling | 0.47 |
+| [[p11_qg_quality_gate]] | sibling | 0.42 |
+| [[p11_qg_response_format]] | sibling | 0.35 |
+| [[p11_qg_chunk_strategy]] | sibling | 0.34 |
+| [[bld_knowledge_card_quality_gate]] | related | 0.33 |
+| [[p11_qg_boot_config]] | sibling | 0.32 |

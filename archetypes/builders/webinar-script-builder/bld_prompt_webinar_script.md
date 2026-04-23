@@ -1,0 +1,124 @@
+---
+kind: instruction
+id: bld_instruction_webinar_script
+pillar: P03
+llm_function: REASON
+purpose: Step-by-step production instructions for building webinar_script artifacts
+quality: 9.1
+title: "Webinar Script Builder Instructions"
+version: "1.0.0"
+author: n02_wave6
+tags: [webinar_script, builder, instruction]
+tldr: "Three-phase instructions: Research audience/goal, Compose all script sections, Validate against time and quality gates."
+domain: "webinar_script construction"
+created: "2026-04-14"
+updated: "2026-04-14"
+density_score: 0.85
+related:
+  - bld_schema_webinar_script
+  - p03_sp_webinar_script_builder
+  - bld_examples_webinar_script
+  - bld_output_template_webinar_script
+  - p03_qg_webinar_script
+  - p10_lr_webinar_script_builder
+  - bld_tools_webinar_script
+  - bld_collaboration_webinar_script
+  - bld_knowledge_card_webinar_script
+  - kc_webinar_script
+---
+## Phase 1: RESEARCH
+Gather all inputs before writing a single line of script. Incomplete research produces misaligned hooks and off-target CTAs.
+| Research Item | Questions to Answer | Source |
+|--------------|--------------------|----|
+| Audience profile | Job title, pain points, desired outcome from attending | Brief, persona docs |
+| Webinar goal | Education, product demo, lead generation, or upsell | Marketing brief |
+| Duration | 45 min, 60 min, or 90 min -- determines segment budget | Event logistics |
+| Panelists | Names, titles, talking point ownership per segment | Speaker list |
+| Demo assets | Product screens, live environment URL, fallback video | Product team |
+| Registration data | Expected attendee count, registration page URL | Event platform |
+| Competing webinars | What else is live this week in same topic area | Calendar check |
+**Time budget calculation**: Total duration minus 4 min (hook + agenda) minus 10 min (Q&A) minus 2 min (CTA close) = available segment minutes. Divide evenly across segments (max 3).
+
+---
+
+## Phase 2: COMPOSE
+
+Write sections in this exact order. Skipping ahead produces structural gaps.
+
+### Step 1: Hook / Opening (60 sec / ~150 words)
+- State attendee benefit in sentence 1: "By the end of this session, you will [specific outcome]."
+- Apply one hook framework: 3-2-1 countdown, bold claim, or pain-agitate-solution.
+- Include [SLIDE 1: Title Slide] cue.
+- Add [SPEAKER NOTE: energy level, eye contact cue].
+
+### Step 2: Agenda Preview (2 min)
+- List exactly what will be covered -- 3 items maximum.
+- State what will NOT be covered to set expectations.
+- Include [SLIDE 2: Agenda] cue.
+- Mention Q&A timing: "We will take questions at the end."
+
+### Step 3: Value Segments (1 to 3 segments, time-budgeted)
+- Each segment: heading with timestamp [XX:00] + duration in minutes.
+- Each segment: one [SLIDE X: title] cue per transition.
+- Each segment: speaker note with key stat or story to reinforce point.
+- Use the structure: Problem -> Evidence -> Solution -> Example.
+
+### Step 4: Demo Walk-through (if applicable)
+- Open with: "Let me show you exactly how this works."
+- Break demo into numbered steps with [SLIDE X] or [SCREEN: action] cues.
+- Include a fallback note: "[SPEAKER NOTE: If live demo fails, switch to recording at URL]."
+- Close demo with: "What you just saw was [outcome summary]."
+
+### Step 5: Q&A Facilitation (10 min)
+- Write moderator intro script: "We are opening the Q&A. [Name] will be watching the chat."
+- Write 3 seed questions that prime the audience if no questions arrive in the first 60 seconds.
+- Write a graceful close if time runs out: "We have time for one more question."
+
+### Step 6: CTA Close (2 min)
+- State the single CTA clearly: trial, download, consultation, or next webinar registration.
+- Include registration URL or short link.
+- Include [SLIDE X: CTA slide] cue.
+- Close with: "Thank you for joining [Webinar Title]. See you next time."
+
+### Step 7: Speaker Notes Review
+- Verify every segment has at least one [SPEAKER NOTE].
+- Verify all [SLIDE X] cues are sequential and match the deck outline.
+- Verify word count fits time budget (150 words per minute).
+
+---
+
+## Phase 3: VALIDATE
+
+Run the following checklist before delivering the script. All HARD gates must pass.
+
+| Gate | Check | Pass Condition |
+|------|-------|---------------|
+| H01 | YAML frontmatter valid | All required fields present |
+| H02 | ID pattern | Matches ^p03_ws_ |
+| H03 | Kind | webinar_script |
+| H04 | Hook present | In first section, under 60 sec |
+| H05 | Agenda preview | Dedicated section present |
+| H06 | Value segment | At least one segment with content |
+| H07 | Q&A seed questions | Minimum 3 seed questions written |
+| H08 | CTA | Explicit CTA with URL in closing section |
+| TC | Time budget | Word count / 150 <= duration_minutes |
+| SC | Slide cues | Every segment transition has [SLIDE X] cue |
+| SN | Speaker notes | Every segment has at least one [SPEAKER NOTE] |
+
+If any HARD gate fails, return to Phase 2 and correct before delivery.
+
+
+## Related Artifacts
+
+| Artifact | Relationship | Score |
+|----------|-------------|-------|
+| [[bld_schema_webinar_script]] | downstream | 0.54 |
+| [[p03_sp_webinar_script_builder]] | related | 0.53 |
+| [[bld_examples_webinar_script]] | downstream | 0.52 |
+| [[bld_output_template_webinar_script]] | downstream | 0.50 |
+| [[p03_qg_webinar_script]] | downstream | 0.45 |
+| [[p10_lr_webinar_script_builder]] | downstream | 0.42 |
+| [[bld_tools_webinar_script]] | downstream | 0.42 |
+| [[bld_collaboration_webinar_script]] | downstream | 0.41 |
+| [[bld_knowledge_card_webinar_script]] | upstream | 0.41 |
+| [[kc_webinar_script]] | upstream | 0.41 |

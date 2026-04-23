@@ -1,0 +1,85 @@
+---
+quality: 8.7
+quality: 8.1
+kind: tools
+id: bld_tools_backpressure_policy
+pillar: P04
+llm_function: CALL
+purpose: Tools and APIs available for backpressure_policy production
+title: "Tools Backpressure Policy"
+version: "1.0.0"
+author: n03_builder
+tags: [backpressure_policy, builder, tools]
+tldr: "Tools: cex_compile, cex_score, cex_doctor. Sources: P09 schema, Reactive Streams spec, P09 examples."
+domain: "backpressure policy construction"
+created: "2026-04-17"
+updated: "2026-04-17"
+density_score: 0.90
+related:
+  - bld_tools_response_format
+  - bld_tools_runtime_rule
+  - bld_tools_path_config
+  - bld_tools_feature_flag
+  - bld_tools_retriever_config
+  - bld_tools_function_def
+  - bld_tools_cli_tool
+  - bld_tools_memory_scope
+  - bld_tools_golden_test
+  - bld_tools_validation_schema
+---
+
+# Tools: backpressure-policy-builder
+
+## Production Tools
+| Tool | Purpose | When | Status |
+|------|---------|------|--------|
+| cex_compile.py | Compile .md to .yaml | Phase 3 (after produce) | ACTIVE |
+| cex_score.py | Quality scoring | Phase 3 (validate) | ACTIVE |
+| cex_doctor.py | Builder health check | Phase 3 (post-build) | ACTIVE |
+| brain_query [MCP] | Search existing backpressure_policy artifacts | Phase 1 (check duplicates) | CONDITIONAL |
+
+## Data Sources
+| Source | Path/URL | Data |
+|--------|----------|------|
+| CEX Schema | P09_config/_schema.yaml | Field definitions, backpressure_policy kind |
+| CEX Examples | P09_config/examples/ | Real backpressure_policy artifacts |
+| Reactive Streams spec | reactive-streams.org | Demand protocol and backpressure semantics |
+| Project Reactor Docs | projectreactor.io/docs | OverflowStrategy enum reference |
+| CEX Builder | archetypes/builders/backpressure-policy-builder/ | This builder's 13 ISOs |
+
+## Tool Permissions
+| Category | Tools | Status |
+|----------|-------|--------|
+| ALLOWED | Read, Write, Edit, Bash, Glob, Grep | Explicitly permitted |
+| DENIED | (none) | Explicitly blocked |
+| EFFECTIVE | Bash, Edit, Glob, Grep, Read, Write | ALLOWED minus DENIED |
+
+## Validation Checklist
+Manually verify against QUALITY_GATES.md:
+1. YAML frontmatter parses cleanly
+2. id matches `^p09_bp_[a-z][a-z0-9_]+$`
+3. overflow_strategy is valid enum value
+4. buffer_size: positive integer
+5. shed_threshold: float in [0.0, 1.0]
+6. high_watermark <= buffer_size (if present)
+7. low_watermark < high_watermark (if both present)
+8. All 4 body sections present
+9. quality == null
+10. tags includes "backpressure_policy"
+11. body <= 2048 bytes
+12. NOT conflated with circuit_breaker, rate_limit_config, runtime_rule
+
+## Related Artifacts
+
+| Artifact | Relationship | Score |
+|----------|-------------|-------|
+| [[bld_tools_response_format]] | sibling | 0.46 |
+| [[bld_tools_runtime_rule]] | sibling | 0.46 |
+| [[bld_tools_path_config]] | sibling | 0.45 |
+| [[bld_tools_feature_flag]] | sibling | 0.45 |
+| [[bld_tools_retriever_config]] | sibling | 0.44 |
+| [[bld_tools_function_def]] | sibling | 0.44 |
+| [[bld_tools_cli_tool]] | sibling | 0.44 |
+| [[bld_tools_memory_scope]] | sibling | 0.44 |
+| [[bld_tools_golden_test]] | sibling | 0.44 |
+| [[bld_tools_validation_schema]] | sibling | 0.44 |

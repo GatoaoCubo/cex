@@ -1,0 +1,56 @@
+id: ex-integration-guide-meli
+kind: integration_guide
+pillar: P04
+title: Mercado Livre Integration Guide
+version: 0.1.0
+quality: null
+status: template
+brand_placeholders:
+- BRAND_NAME
+- BRAND_MELI_CLIENT_ID
+- BRAND_MELI_CLIENT_SECRET
+- BRAND_MELI_USER_ID
+- BRAND_SUPABASE_PROJECT_REF
+tags:
+- commerce
+- template
+- distillation
+- mercado_livre
+- integration_guide
+purpose: Connect {{BRAND_NAME}} to Mercado Livre for dual-channel selling, product enrichment (category/brand/GTIN), and unified
+  order pipeline. ML is a higher-volume / lower-margin channel than Shopify; keep SKUs identical so reporting stays clean.
+when_to_use:
+- Brand sells or plans to sell on ML in addition to Shopify.
+- Existing Supabase products have attribute gaps that ML catalog can fill.
+- Multi-country sellers (MLB + MLA + MLM) needing per-site token management.
+prerequisites:
+- Mercado Livre seller account in good standing.
+- ML dev app created at `https://developers.mercadolivre.com.br/devcenter`.
+- 'Supabase tables: `meli_tokens`, `products`, `orders_meli`, `meli_enrichment_log`.'
+architecture: "Mercado Livre\n  |-- OAuth <-- [meli-oauth-callback]\n  |-- Notifications push -> [meli-notifications-handler]\
+  \ (TBD)\n  |-- REST <-- [product-enrich]         (enrich missing Supabase products)\n  |-- REST <-- [meli-order-poll]  \
+  \      (cron fallback to notifications)\n  |\n  +-- Token refresh <-- [token-auto-refresh] -- mutex per user_id"
+brand_variables_used: All in frontmatter. `{{BRAND_MELI_USER_ID}}` is captured during OAuth callback and stored with tokens;
+  it's not a pre-configured env var.
+setup_steps:
+- Create ML dev app -- set redirect URI to `https://{{BRAND_DOMAIN}}/oauth/meli/callback` exactly.
+- Request API access -- ML approval can take 24-72h; apps start in `pending` state.
+- Connect seller account -- UI "Connect ML" button redirects to authorize URL; on approval, callback stores tokens + `user_id`.
+- 'Deploy edge functions:'
+- Schedule refresher -- reuse `token-auto-refresh` with mutex per-brand; ML refresh races corrupt tokens.
+- Enrichment sweep -- run `product-enrich` in `dry_run=true` on all Supabase products with missing `gtin` OR `brand` OR `category_id`;
+  review output before applying.
+verification_checklist:
+- '[ ] `GET /users/{{BRAND_MELI_USER_ID}}` returns 200 with stored token.'
+- '[ ] Authorize -> callback -> user lands at `/admin/integracoes?meli=ok` and token row exists.'
+- '[ ] Force-expire token -> next API call triggers refresh; new `refresh_token` persisted; old one errors on reuse.'
+- '[ ] Enrichment dry-run produces a human-readable diff; apply only after product manager review.'
+quirks_gotchas:
+- 'Refresh token rotation is destructive: always refresh in a single-writer mutex.'
+- Different regions (MLB/MLA/MLM) have separate APIs; if brand expands, provision separate token rows keyed by `site_id`.
+- ML notifications use long-poll subscriptions -- outside scope of this guide; start with cron poll if traffic is low.
+- 'Stock pushes to ML are eventually consistent: `available_quantity` update appears in listings within ~60s.'
+related_artifacts:
+- '`ex_api_client_meli.md`'
+- '`ex_oauth_app_config_meli.md`'
+- '`ex_workflow_multi_marketplace_sync.md`'

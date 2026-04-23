@@ -1,0 +1,135 @@
+{
+  "collapse-filter": false,
+  "search": "",
+  "showTags": false,
+  "showAttachments": false,
+  "hideUnresolved": true,
+  "showOrphans": false,
+  "collapse-color-groups": false,
+  "colorGroups": [
+    {
+      "query": "path:N01_intelligence",
+      "color": {
+        "a": 1,
+        "rgb": 4492543
+      }
+    },
+    {
+      "query": "path:N02_marketing",
+      "color": {
+        "a": 1,
+        "rgb": 16718131
+      }
+    },
+    {
+      "query": "path:N03_engineering",
+      "color": {
+        "a": 1,
+        "rgb": 16768256
+      }
+    },
+    {
+      "query": "path:N04_knowledge",
+      "color": {
+        "a": 1,
+        "rgb": 5546828
+      }
+    },
+    {
+      "query": "path:N05_operations",
+      "color": {
+        "a": 1,
+        "rgb": 16729344
+      }
+    },
+    {
+      "query": "path:N06_commercial",
+      "color": {
+        "a": 1,
+        "rgb": 11141375
+      }
+    },
+    {
+      "query": "path:N07_admin",
+      "color": {
+        "a": 1,
+        "rgb": 1146880
+      }
+    },
+    {
+      "query": "path:N00_genesis",
+      "color": {
+        "a": 1,
+        "rgb": 3355443
+      }
+    },
+    {
+      "query": "path:archetypes/builders",
+      "color": {
+        "a": 1,
+        "rgb": 16750848
+      }
+    },
+    {
+      "query": "path:_tools",
+      "color": {
+        "a": 1,
+        "rgb": 16750848
+      }
+    },
+    {
+      "query": "path:_docs",
+      "color": {
+        "a": 1,
+        "rgb": 4473924
+      }
+    },
+    {
+      "query": "path:_reports",
+      "color": {
+        "a": 1,
+        "rgb": 4473924
+      }
+    },
+    {
+      "query": "path:_output",
+      "color": {
+        "a": 1,
+        "rgb": 4473924
+      }
+    },
+    {
+      "query": "path:_dashboards",
+      "color": {
+        "a": 1,
+        "rgb": 4473924
+      }
+    },
+    {
+      "query": "path:cex_sdk",
+      "color": {
+        "a": 1,
+        "rgb": 4473924
+      }
+    },
+    {
+      "query": "path:_showoff",
+      "color": {
+        "a": 1,
+        "rgb": 4473924
+      }
+    }
+  ],
+  "collapse-display": false,
+  "showArrow": false,
+  "textFadeMultiplier": -3,
+  "nodeSizeMultiplier": 0.840104166666667,
+  "lineSizeMultiplier": 0.202083333333333,
+  "collapse-forces": false,
+  "centerStrength": 0.3,
+  "repelStrength": 14,
+  "linkStrength": 0.8,
+  "linkDistance": 74,
+  "scale": 0.018269266084169015,
+  "close": false
+}

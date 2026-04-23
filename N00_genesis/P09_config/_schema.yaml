@@ -1,0 +1,179 @@
+pillar: P09
+name: Config
+description: HOW to configure
+frontmatter_cex:
+  related:
+    type: list[string]
+    required: recommended
+    description: "Artifact IDs of related artifacts (upstream, downstream, sibling, alternative)"
+    format: "[p{XX}_{kind}_{slug}, ...]"
+    max: 15
+    min: 0
+    validator: S_RELATED
+    note: "Auto-populated by cex_wikilink.py, manually curated by builders"
+kinds:
+  env_config:
+    description: Environment variables
+    boundary: System environment variables. NOT boot_config (P02, per-provider) nor feature_flag (on/off logical).
+    layer: runtime
+    core: true
+    machine_format: yaml
+    naming: p09_env_{{scope}}.yaml
+    constraints:
+      max_bytes: 4096
+    llm_function: GOVERN
+  path_config:
+    description: System paths
+    boundary: File system paths. NOT env_config (generic variables) nor permission (access control).
+    layer: runtime
+    core: true
+    machine_format: yaml
+    naming: p09_path_{{scope}}.yaml
+    constraints:
+      max_bytes: 3072
+    llm_function: GOVERN
+  permission:
+    description: Permission rule (read/write/execute)
+    boundary: Access permission rule. NOT guardrail (P11, safety boundary) nor feature_flag (on/off feature).
+    layer: governance
+    core: true
+    machine_format: yaml
+    naming: p09_perm_{{scope}}.yaml
+    constraints:
+      max_bytes: 3072
+    llm_function: GOVERN
+  feature_flag:
+    description: Feature flag (on/off, gradual rollout)
+    boundary: Feature flag on/off with gradual rollout. NOT permission (access) nor env_config (generic variable).
+    layer: runtime
+    core: false
+    machine_format: json
+    naming: p09_ff_{{feature}}.yaml
+    constraints:
+      max_bytes: 1536
+    llm_function: GOVERN
+  runtime_rule:
+    description: Runtime rule (timeouts, retries, limits)
+    boundary: Technical runtime rule (timeouts, retries). NOT lifecycle_rule (P11, lifecycle) nor law (P08, inviolable).
+    layer: runtime
+    core: false
+    machine_format: yaml
+    naming: p09_rr_{{rule}}.yaml
+    constraints:
+      max_bytes: 3072
+    llm_function: GOVERN
+  secret_config:
+    description: Secret management
+    boundary: Credenciais. NOT env_config.
+    layer: runtime
+    core: true
+    machine_format: yaml
+    naming: p09_secret.md
+    constraints:
+      max_bytes: 1024
+    frontmatter_required:
+    - id
+    - name
+    - provider
+    - rotation_policy
+    llm_function: GOVERN
+  rate_limit_config:
+    description: 'Rate limiting: RPM, TPM, budget'
+    boundary: Limites. NOT runtime_rule.
+    layer: runtime
+    core: true
+    machine_format: yaml
+    naming: p09_ratelimit.md
+    constraints:
+      max_bytes: 1024
+    frontmatter_required:
+    - id
+    - name
+    - provider
+    - rpm
+    - tpm
+    llm_function: CONSTRAIN
+
+  inference_config:
+    description: Inference parameters (temperature, top_p, sampling strategy, generation config)
+    boundary: LLM inference parameters. NOT runtime_rule (timeouts, retries) nor effort_profile (thinking level).
+    layer: runtime
+    core: false
+    machine_format: yaml
+    naming: p09_ic_{{scope}}.yaml
+    constraints:
+      max_bytes: 2048
+    frontmatter_required:
+    - id
+    - kind
+    - pillar
+    - temperature
+    - top_p
+    - max_tokens
+    llm_function: CONSTRAIN
+  tokenizer_config:
+    description: Tokenizer configuration (BPE, SentencePiece, tiktoken)
+    boundary: Tokenizer settings. NOT context_window_config (P03, token budget) nor embedding_config (P01, vector model).
+    layer: runtime
+    core: false
+    machine_format: yaml
+    naming: p09_tk_{{tokenizer}}.yaml
+    constraints:
+      max_bytes: 2048
+    frontmatter_required:
+    - id
+    - kind
+    - pillar
+    - tokenizer_type
+    - vocab_size
+    - model_name
+    llm_function: CONSTRAIN
+  effort_profile:
+    description: Effort and thinking level configuration for builder execution
+    llm_function: CONSTRAIN
+    boundary: effort_profile = QUAL model/thinking usar; runtime_rule = QUANDO/COMO execute
+    layer: content
+    core: false
+    machine_format: yaml
+    naming: p09_effort_profile_{{topic}}.md + .yaml
+    constraints:
+      max_bytes: 4096
+      density_min: 0.8
+      quality_min: 7.0
+    frontmatter_required:
+    - id
+    - kind
+    - pillar
+    - title
+    - version
+    - created
+    - updated
+    - author
+    - domain
+    - quality
+    - tags
+    - tldr
+
+  terminal_backend:
+    description: Abstract execution backend selectable at runtime (local/docker/ssh/daytona/modal/singularity)
+    boundary: Execution environment abstraction. NOT sandbox_config (security isolation) nor env_config (env vars) nor deployment_manifest (production ship spec).
+    layer: runtime
+    core: false
+    machine_format: yaml
+    naming: p09_tb_{{backend}}.yaml
+    constraints:
+      max_bytes: 3072
+    llm_function: CALL
+    upstream_source: NousResearch/hermes-agent environments/
+
+  hibernation_policy:
+    description: Policy for hibernating idle serverless workloads to save cost
+    boundary: Idle-state cost guard. NOT cost_budget (spend caps) nor rate_limit_config (throughput) nor terminal_backend (where to run) nor runtime_rule (active-session timeouts).
+    layer: runtime
+    core: false
+    machine_format: yaml
+    naming: p09_hp_{{backend}}.yaml
+    constraints:
+      max_bytes: 2048
+    llm_function: GOVERN
+    upstream_source: NousResearch/hermes-agent

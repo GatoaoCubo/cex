@@ -1,0 +1,85 @@
+---
+kind: knowledge_card
+id: bld_knowledge_card_capability_registry
+pillar: P01
+llm_function: INJECT
+purpose: Domain knowledge for capability_registry production
+quality: 9.2
+title: "Knowledge Card Capability Registry"
+version: "1.0.0"
+author: n04_wave8
+tags: [capability_registry, builder, knowledge_card, agent-discovery, A2A, tool-registry]
+tldr: "Domain knowledge for capability_registry production"
+domain: "capability_registry construction"
+created: "2026-04-14"
+updated: "2026-04-14"
+density_score: 0.85
+related:
+  - capability-registry-builder
+  - p03_sp_capability_registry_builder
+  - bld_collaboration_agent
+  - p01_kc_agent
+  - agent-builder
+  - bld_knowledge_card_agent
+  - bld_tools_capability_registry
+  - bld_collaboration_capability_registry
+  - bld_architecture_agent
+  - p01_kc_a2a_protocol
+---
+
+## Domain Overview
+A capability registry is a searchable catalog of all agents available to a crew orchestrator. It bridges agent definition (what an agent can do) with runtime discovery (which agent to dispatch for a given task). Capability registries are central to multi-agent systems: without them, orchestrators either hardcode routing or rediscover capabilities on every query.
+
+In the A2A protocol (Google/Linux Foundation, v0.3 April 2026), the AgentCard is the canonical capability declaration -- skills, authentication, endpoint, version. A capability_registry aggregates multiple AgentCards into a queryable index. LangChain's ToolRegistry and OpenAI's function-calling schema serve the same role for LLM tool invocation. CEX capability_registry unifies these patterns into a single P08 artifact type.
+
+## Key Concepts
+| Concept                | Definition                                                                        | Source |
+|------------------------|-----------------------------------------------------------------------------------|--------|
+| Agent Card             | Structured capability declaration: name, skills, input/output, endpoint, version  | A2A Protocol v0.3 (Google/LF) |
+| Tool Registry          | Catalog of callable tools with schemas; runtime discovery for LLM function-calling | LangChain ToolRegistry |
+| Function-calling Schema| JSON Schema describing a callable function for LLM tool use                        | OpenAI API (2023) |
+| Ranked Candidates      | Ordered list of agents matching a query, scored by quality/cost/availability       | RAG retrieval pattern |
+| Quality Baseline       | Historical quality score for an agent's output (from cex_score.py)                 | CEX scoring (cex_score.py) |
+| Availability           | Runtime status of an agent: active, deprecated, or experimental                    | CEX lifecycle |
+| Capability Name        | Canonical identifier for what an agent does (verb-noun form)                       | ANS (Agent Name Service) pattern |
+| Input Schema           | Kind(s) or format the agent accepts as input                                       | CEX kind system |
+| Output Schema          | Kind(s) or format the agent produces as output                                     | CEX kind system |
+| Coverage Gap           | Domain or capability with no registered agent                                       | Gap analysis pattern |
+
+## Industry Standards
+- A2A Protocol v0.3 (Google/Linux Foundation, April 2026) -- AgentCard discovery
+- OpenAI Function-calling spec (2023) -- JSON Schema for tool schemas
+- LangChain ToolRegistry pattern -- runtime tool discovery
+- Agent Name Service (ANS) -- agent endpoint registration and lookup
+- FIPA ACL Agent Directory (historical) -- ancestor of A2A AgentCard registry
+
+## Common Patterns
+1. Group entries by layer: builder_sub_agents | nucleus_domain_agents | nucleus_cards.
+2. Sort within groups by quality_baseline DESC to surface best candidates first.
+3. Use keyword_index for TF-IDF-style retrieval ("who can do X?").
+4. Include cost_tokens signal to enable cost-aware routing (prefer low-cost when quality equal).
+5. Mark deprecated agents explicitly -- never silently remove from registry.
+6. Re-index on every new agent addition (post-build F8 step).
+
+## Pitfalls
+- Phantom agent references: listing agents that don't exist as files causes dispatch failures.
+- Invented quality scores: use "unscored" for null; never extrapolate or guess.
+- Conflating agent layers: builder sub-agents and nucleus domain agents have different invocation paths.
+- Stale registry: new builders added without re-indexing leave capabilities undiscoverable.
+- Overly broad keyword_index: too many generic terms dilutes relevance ranking.
+- Missing coverage_gaps section: orchestrators need to know what CANNOT be done, not just what can.
+
+## Related Artifacts
+
+| Artifact | Relationship | Score |
+|----------|-------------|-------|
+| [[capability-registry-builder]] | downstream | 0.50 |
+| [[p03_sp_capability_registry_builder]] | downstream | 0.43 |
+| [[bld_collaboration_agent]] | downstream | 0.39 |
+| [[p01_kc_agent]] | sibling | 0.39 |
+| [[agent-builder]] | downstream | 0.36 |
+| [[bld_knowledge_card_agent]] | sibling | 0.36 |
+| [[bld_tools_capability_registry]] | downstream | 0.35 |
+| [[bld_collaboration_capability_registry]] | downstream | 0.34 |
+| [[bld_architecture_agent]] | downstream | 0.34 |
+| [[p01_kc_a2a_protocol]] | sibling | 0.31 |

@@ -1,0 +1,94 @@
+---
+kind: schema
+id: bld_schema_gpai_technical_doc
+pillar: P06
+llm_function: CONSTRAIN
+purpose: Formal schema -- SINGLE SOURCE OF TRUTH for gpai_technical_doc
+quality: 9.2
+title: "Schema GPAI Technical Doc"
+version: "1.0.0"
+author: n01_wave7
+tags: [gpai_technical_doc, builder, schema, GPAI, EU-AI-Act, Annex-IV, Article-53, training-data, compute-budget, downstream-limit, technical-documentation]
+tldr: "Formal schema -- SINGLE SOURCE OF TRUTH for gpai_technical_doc"
+domain: "gpai_technical_doc construction"
+created: "2026-04-14"
+updated: "2026-04-14"
+density_score: 0.85
+related:
+  - bld_schema_usage_report
+  - bld_schema_search_strategy
+  - bld_schema_reranker_config
+  - bld_schema_dataset_card
+  - bld_schema_benchmark_suite
+  - bld_schema_quickstart_guide
+  - bld_schema_sandbox_config
+  - bld_schema_rl_algorithm
+  - bld_schema_pitch_deck
+  - bld_schema_thinking_config
+---
+
+## Frontmatter Fields
+### Required
+| Field | Type | Required | Default | Notes |
+|-------|------|----------|---------|-------|
+| id | string | yes | | Pattern: p11_gpai_{{model}}.md |
+| kind | string | yes | | Must be: gpai_technical_doc |
+| pillar | string | yes | | Must be: P11 |
+| title | string | yes | | Include "GPAI Technical Documentation" and model name |
+| version | string | yes | | Document version |
+| created | date | yes | | ISO 8601 |
+| updated | date | yes | | ISO 8601 |
+| author | string | yes | | Provider team responsible |
+| domain | string | yes | | Model domain / use case area |
+| quality | null | yes | null | Never self-score |
+| tags | array | yes | | Include: GPAI, EU-AI-Act, Annex-IV minimum |
+| tldr | string | yes | | One-line model description |
+| provider | string | yes | | Legal entity name + EU registration |
+| model_version | string | yes | | Exact model version string |
+| submission_date | date | yes | | EU AI Office submission date |
+| annex_iv_version | string | yes | | EU AI Act version reference |
+
+### Recommended
+| Field | Type | Notes |
+|-------|------|-------|
+| eu_representative | string | Required if provider is non-EU |
+| model_family | string | Architecture family |
+| parameter_count | string | Approximate parameter count |
+| systemic_risk | boolean | True if >= 10^25 FLOP |
+
+## ID Pattern
+^p11_gpai_[a-z][a-z0-9_]+\.md$
+
+## Body Structure (Annex IV compliant)
+1. **Model Identity** -- Name, version, architecture, parameters, release date, provider
+2. **Training Data Summary** -- Datasets, volumes, languages, preprocessing, data governance
+3. **Compute Budget** -- FLOP estimate, hardware, duration, datacenter location
+4. **Energy Consumption** -- MWh, CO2-eq, PUE, methodology
+5. **Evaluation Results** -- Benchmark table: name | score | date | methodology
+6. **Intended Purpose** -- Primary use cases, target users, prohibited uses
+7. **Downstream Integration Limits** -- Explicit list of prohibited downstream applications
+8. **Risk Mitigation Measures** -- Known limitations, bias assessments, safety measures
+
+## Constraints
+- All 8 Annex IV body sections required.
+- Compute budget expressed in FLOP (scientific notation) or GPU/TPU-hours with hardware spec.
+- Energy consumption must include MWh, CO2-eq, and methodology reference.
+- Evaluation section: minimum 3 benchmarks with scores and dates.
+- downstream-limit must enumerate specific prohibited uses, not generic phrases.
+- provider must be full legal entity name (not brand name alone).
+- submission_date must be present for EU AI Office tracking.
+
+## Related Artifacts
+
+| Artifact | Relationship | Score |
+|----------|-------------|-------|
+| [[bld_schema_usage_report]] | sibling | 0.64 |
+| [[bld_schema_search_strategy]] | sibling | 0.63 |
+| [[bld_schema_reranker_config]] | sibling | 0.62 |
+| [[bld_schema_dataset_card]] | sibling | 0.62 |
+| [[bld_schema_benchmark_suite]] | sibling | 0.62 |
+| [[bld_schema_quickstart_guide]] | sibling | 0.60 |
+| [[bld_schema_sandbox_config]] | sibling | 0.60 |
+| [[bld_schema_rl_algorithm]] | sibling | 0.60 |
+| [[bld_schema_pitch_deck]] | sibling | 0.60 |
+| [[bld_schema_thinking_config]] | sibling | 0.60 |

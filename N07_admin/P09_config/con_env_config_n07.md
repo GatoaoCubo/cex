@@ -1,0 +1,145 @@
+---
+id: con_env_config_n07
+kind: env_config
+pillar: P09
+nucleus: n07
+title: "Orchestrator Env Contract"
+version: 1.0
+quality: 8.2
+tags: [config, env, orchestration, dispatch, session]
+related:
+  - bld_schema_env_config
+  - bld_schema_usage_report
+  - bld_schema_dataset_card
+  - bld_schema_sandbox_config
+  - bld_schema_smoke_eval
+  - bld_schema_reranker_config
+  - bld_schema_quickstart_guide
+  - bld_schema_safety_policy
+  - bld_schema_crew_template
+  - bld_schema_pitch_deck
+---
+<!-- 8F: F1=P09/env_config F2=env-config-builder F3=nucleus_def_n07+n05_env_config F4=reason F5=call F6=produce F7=govern F8=collaborate -->
+
+# Orchestrator Env Contract
+
+## Purpose
+
+| Field | Value |
+|---|---|
+| Intent | Define the environment variables required for N07 orchestration, dispatch, wave planning, and mission control. |
+| Scope | Session bootstrap, dispatch grid, handoff routing, signal polling, process lifecycle management. |
+| Sloth Lens | Minimal required config, maximum leverage -- every variable earns its place by preventing a class of failure. |
+| Default Posture | Fail closed on missing identity and path vars; warn only on budget vars; cap on overprovisioned concurrency. |
+| Precedence | Runtime env -> secure injection -> checked defaults; no silent fallback to unconfigured state. |
+
+## Values
+
+| Variable | Type | Required | Sensitive | Default | Validation | Action On Failure |
+|---|---|---|---|---|---|---|
+| CEX_NUCLEUS | string | yes | no | `n07` | must equal `n07` | Abort: wrong nucleus booted. |
+| CEX_SESSION_ID | string | yes | no | auto-generated | non-empty UUID-like token | Abort: session cannot be tracked. |
+| CEX_DISPATCH_MODE | string | yes | no | `solo` | `solo\|grid\|crew\|swarm` | Abort: unknown dispatch topology. |
+| CEX_MAX_CONCURRENT | integer | yes | no | `6` | 1..12 | Cap at 6; do not abort. |
+| CEX_WAVE_TIMEOUT_SEC | integer | yes | no | `1800` | 300..7200 | Use default 1800; warn operator. |
+| CEX_MISSION_BUDGET_TOKENS | integer | no | no | `500000` | positive integer | Warn only; do not block dispatch. |
+| CEX_AUTO_CONSOLIDATE | boolean | yes | no | `true` | boolean | Treat invalid value as true. |
+| CEX_HANDOFF_DIR | string | yes | no | `.cex/runtime/handoffs/` | valid path | Abort: handoffs cannot be written. |
+| CEX_PID_FILE | string | yes | no | `.cex/runtime/pids/spawn_pids.txt` | valid path | Abort: process tracking unavailable. |
+| CEX_SIGNAL_DIR | string | yes | no | `.cex/runtime/signals/` | valid path | Abort: completion signals unreadable. |
+| CEX_ANTHROPIC_API_KEY | string | yes | yes | none | non-empty string | Abort: no provider credential available. |
+| CEX_PROVIDER_PROFILE | string | yes | no | `balanced` | `balanced\|cost_guarded\|latency_guarded` | Reject unknown policy; abort. |
+
+## Groups
+
+| Group | Variables | Why |
+|---|---|---|
+| Identity | `CEX_NUCLEUS`, `CEX_SESSION_ID` | Bind every dispatch to a verified nucleus identity and trackable session. |
+| Dispatch Control | `CEX_DISPATCH_MODE`, `CEX_MAX_CONCURRENT`, `CEX_WAVE_TIMEOUT_SEC`, `CEX_AUTO_CONSOLIDATE` | Govern topology, parallelism ceiling, timeout fence, and post-wave automation. |
+| Paths | `CEX_HANDOFF_DIR`, `CEX_PID_FILE`, `CEX_SIGNAL_DIR` | Ensure all inter-nucleus I/O targets are explicit and valid before first spawn. |
+| Secrets | `CEX_ANTHROPIC_API_KEY` | Isolate the only credential from non-sensitive config; mask in all logs. |
+| Budget | `CEX_MISSION_BUDGET_TOKENS`, `CEX_PROVIDER_PROFILE` | Soft-gate token burn and enforce provider selection policy. |
+
+## Precedence
+
+| Tier | Source | Priority | Notes |
+|---|---|---|---|
+| 1 | Runtime environment variable | Highest | Shell export, container env, CI secret injection. |
+| 2 | `.env` file at repo root | Mid | Loaded by bootstrap; not committed with secrets. |
+| 3 | Compiled default in this artifact | Lowest | Safe baseline; never overrides explicit operator input. |
+
+Required vars with no default MUST be supplied at tier 1 or 2. Absence at boot time is an immediate abort, not a warning.
+
+## Resolution Rules
+
+| Rule | Description | Sloth Effect |
+|---|---|---|
+| Identity first | Validate `CEX_NUCLEUS` and `CEX_SESSION_ID` before any dispatch call. | Catches wrong-nucleus boots before work is done under the wrong identity. |
+| Path pre-flight | Check all three path vars exist and are writable before writing any handoff. | Prevents partial handoff writes that leave nuclei waiting forever. |
+| Concurrency cap | If `CEX_MAX_CONCURRENT` > 12, silently cap to 6 and log a warning. | Protects provider rate limits without requiring operator action. |
+| Secret masking | `CEX_ANTHROPIC_API_KEY` is redacted in all logs, signals, and handoff files. | One rule eliminates the entire credential-in-log failure class. |
+| Budget soft gate | `CEX_MISSION_BUDGET_TOKENS` triggers a warn-only log when budget is approached; dispatch continues. | Avoids false aborts on long missions while keeping cost visible. |
+| Timeout fence | `CEX_WAVE_TIMEOUT_SEC` outside 300..7200 reverts to 1800 without operator input. | Prevents both immediate timeouts and multi-hour zombie waves. |
+
+## Rationale
+
+| Design Choice | Why It Exists | Sloth Lens Effect |
+|---|---|---|
+| `CEX_NUCLEUS=n07` required | Prevents a misrouted nucleus from acting as orchestrator. | One env var replaces a class of routing bugs. |
+| `CEX_SESSION_ID` auto-generated | Multiple N07 instances can coexist; session ID is the kill-safe boundary. | `stop` kills MY session only; other N07 instances are untouched. |
+| `CEX_DISPATCH_MODE` enum | Prevents invalid topology strings from reaching spawn scripts. | Fail at config, not mid-dispatch. |
+| Path vars explicit | Hardcoded paths break on non-standard setups; explicit vars allow remapping. | Zero path-assumption bugs across environments. |
+| Single secret var | Only one credential in this contract; all others are non-sensitive by design. | Minimises secret surface without constraining capability. |
+| Provider profile enum | Only three approved policies; ad hoc strings are rejected. | Eliminates silent cost overruns from typos in provider selection. |
+
+## Example
+
+| Scenario | Effective Outcome |
+|---|---|
+| `CEX_NUCLEUS=n05` set by mistake | Abort before first dispatch; operator reads clear error. |
+| `CEX_MAX_CONCURRENT=20` set in CI | Silently capped to 6; warning written to log; dispatch proceeds. |
+| `CEX_ANTHROPIC_API_KEY` missing | Abort at boot; no handoffs written; nuclei never spawned. |
+| `CEX_DISPATCH_MODE=grid` with valid paths | Grid dispatch runs; PID file and signal dir are written atomically. |
+| `CEX_AUTO_CONSOLIDATE=false` | Post-wave consolidation skipped; operator must invoke manually. |
+
+```env
+CEX_NUCLEUS=n07
+CEX_SESSION_ID=n07-2026-04-17-001
+CEX_DISPATCH_MODE=grid
+CEX_MAX_CONCURRENT=6
+CEX_WAVE_TIMEOUT_SEC=1800
+CEX_MISSION_BUDGET_TOKENS=500000
+CEX_AUTO_CONSOLIDATE=true
+CEX_HANDOFF_DIR=.cex/runtime/handoffs/
+CEX_PID_FILE=.cex/runtime/pids/spawn_pids.txt
+CEX_SIGNAL_DIR=.cex/runtime/signals/
+CEX_PROVIDER_PROFILE=balanced
+```
+
+## Properties
+
+| Property | Value |
+|---|---|
+| Kind | `env_config` |
+| Pillar | `P09` |
+| Nucleus | `n07` |
+| Scope | Session bootstrap, dispatch, wave planning, mission control |
+| Secret Handling | Mask `CEX_ANTHROPIC_API_KEY` in all logs and handoff files. |
+| Enforcement Point | Pre-flight bootstrap before any nucleus spawn or handoff write. |
+| Failure Mode | Hard abort for identity, path, and credential vars; soft warn for budget vars. |
+| Sin Lens | Orchestrating Sloth: minimal config surface, maximum dispatch leverage. |
+
+## Related Artifacts
+
+| Artifact | Relationship | Score |
+|----------|-------------|-------|
+| [[bld_schema_env_config]] | upstream | 0.41 |
+| [[bld_schema_usage_report]] | upstream | 0.40 |
+| [[bld_schema_dataset_card]] | upstream | 0.38 |
+| [[bld_schema_sandbox_config]] | upstream | 0.38 |
+| [[bld_schema_smoke_eval]] | upstream | 0.38 |
+| [[bld_schema_reranker_config]] | upstream | 0.38 |
+| [[bld_schema_quickstart_guide]] | upstream | 0.38 |
+| [[bld_schema_safety_policy]] | upstream | 0.38 |
+| [[bld_schema_crew_template]] | upstream | 0.37 |
+| [[bld_schema_pitch_deck]] | upstream | 0.37 |

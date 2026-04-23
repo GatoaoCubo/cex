@@ -1,0 +1,80 @@
+id: dash_cross_ref_health
+kind: dashboard
+title: Cross-Reference Health
+version: 2.0.0
+quality: 7.2
+density_score: 0.98
+updated: '2026-04-22'
+related:
+- dash_orphan_detector
+- dash_kind_census
+- dash_pillar_health
+- dash_quality_heatmap
+- home
+- bld_instruction_repo_map
+- bld_instruction_kind
+most_connected_hub_artifacts: 'TABLE (length(file.inlinks) + length(file.outlinks)) as "Total Links", length(file.inlinks)
+  as "In", length(file.outlinks) as "Out", kind
+
+  FROM ""
+
+  WHERE kind
+
+  SORT (length(file.inlinks) + length(file.outlinks)) DESC
+
+  LIMIT 15'
+least_connected_should_have_refs: 'TABLE (length(file.inlinks) + length(file.outlinks)) as "Total", kind
+
+  FROM ""
+
+  WHERE kind AND (length(file.inlinks) + length(file.outlinks)) < 2
+
+  SORT file.mtime DESC
+
+  LIMIT 20'
+bridge_nodes_high_in_high_out: 'TABLE length(file.inlinks) as "In", length(file.outlinks) as "Out", kind
+
+  FROM ""
+
+  WHERE kind AND length(file.inlinks) >= 5 AND length(file.outlinks) >= 5
+
+  SORT (length(file.inlinks) + length(file.outlinks)) DESC
+
+  LIMIT 15'
+missing_related_field: 'TABLE kind, pillar
+
+  FROM ""
+
+  WHERE kind AND !related
+
+  SORT file.mtime DESC
+
+  LIMIT 25'
+average_links_per_nucleus: 'TABLE round(average(rows.links), 1) as "Avg Links", length(rows) as "Files"
+
+  FROM ""
+
+  WHERE kind
+
+  FLATTEN (length(file.inlinks) + length(file.outlinks)) as links
+
+  GROUP BY regexreplace(file.folder, "/.*", "") as "Nucleus"
+
+  SORT round(average(rows.links), 1) DESC'
+related_artifacts: '| Artifact | Relationship | Score |
+
+  |----------|-------------|-------|
+
+  | [[dash_orphan_detector]] | sibling | 0.65 |
+
+  | [[dash_kind_census]] | sibling | 0.46 |
+
+  | [[dash_pillar_health]] | sibling | 0.38 |
+
+  | [[dash_quality_heatmap]] | sibling | 0.35 |
+
+  | [[home]] | sibling | 0.30 |
+
+  | [[bld_instruction_repo_map]] | related | 0.18 |
+
+  | [[bld_instruction_kind]] | related | 0.15 |'

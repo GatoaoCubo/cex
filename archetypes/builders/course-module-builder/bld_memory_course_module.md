@@ -1,0 +1,65 @@
+---
+kind: memory
+id: bld_memory_course_module
+pillar: P10
+llm_function: INJECT
+purpose: Accumulated production experience for course_module artifact generation
+memory_scope: project
+observation_types: [user, feedback, project, reference]
+quality: 9.0
+title: "Memory Course Module"
+version: "1.0.0"
+author: n03_builder
+tags: [course_module, builder, memory]
+tldr: "Golden and anti-patterns for course module construction: Bloom-aligned objectives, Kirkpatrick-measured outcomes, micro-learning chunks, SCORM/xAPI interoperable."
+domain: "course_module construction"
+created: "2026-04-14"
+updated: "2026-04-14"
+density_score: 0.88
+related:
+  - p05_qg_course_module
+  - bld_schema_course_module
+  - bld_knowledge_card_course_module
+  - p03_sp_course_module_builder
+  - course-module-builder
+  - p05_kc_course_module
+  - hybrid_review5_n03
+  - bld_instruction_course_module
+---
+# Memory: course-module-builder
+
+## Summary
+Modules fail when learning_outcomes are verb-agnostic ("understand X") instead of Bloom-measurable ("analyze X by classifying 5 cases"). The second failure is assessment-objective drift: objectives target Bloom level 4 (Analyze) but the quiz tests level 1 (Remember). The third is time overestimation: designers plan 45-minute modules; learners disengage at 18 minutes (Duolingo, Khan Academy data).
+
+## Pattern
+1. Every learning_outcome starts with a Bloom taxonomy verb (Remember, Understand, Apply, Analyze, Evaluate, Create). Verbs like "know", "learn", "understand" are REJECTED.
+2. Assessment items map 1:1 to outcomes and MATCH the Bloom level (outcome="evaluate arguments" -> assessment requires critique, not recall).
+3. Design for Kirkpatrick levels: L1 Reaction (post-survey), L2 Learning (quiz), L3 Behavior (application task), L4 Results (business metric). Most modules stop at L2 -- document if that is the design intent.
+4. Chunk content into 5-10 minute micro-learning units (Duolingo lesson length). Long-form lectures without interaction fail at minute 18.
+5. Produce SCORM 2004 4th Edition or xAPI (Tin Can) wrappers for LMS interoperability. Include cmi.core.lesson_status and cmi.core.score.raw mapping.
+6. Prerequisites must reference other course_module IDs, not free-text ("Intro to Python" -> p05_cm_python_intro).
+7. WCAG 2.2 AA minimum: captions, alt-text, keyboard nav, 4.5:1 contrast, no color-only signals.
+
+## Evidence
+Bloom (1956, revised Anderson & Krathwohl 2001) is the canonical cognitive taxonomy. Kirkpatrick-Kirkpatrick (2016, "Kirkpatrick's Four Levels of Training Evaluation") formalizes outcome measurement. ADDIE (Dick & Carey) and SAM (Allen) are dominant design processes. Cohort-based course data (Maven, On Deck) shows 50-70% completion vs <10% for MOOCs, confirming chunking + cohort drive retention.
+
+## Pitfalls
+- **Objective-assessment drift**: test items evaluate lower cognitive level than outcome claims.
+- **Weak formative loops**: summative-only courses lose learners at minute 10; formative checks every 3-5 minutes sustain engagement.
+- **Cognitive overload**: >4 new concepts per 10 minutes violates Sweller's Cognitive Load Theory.
+- **Completion != learning**: Kirkpatrick L2 required; L1 NPS alone is vanity.
+- **Inaccessible multimedia**: video without captions fails WCAG 1.2.2 and excludes ~15% of learners.
+- **Platform lock-in**: hardcoded Articulate/Rise markup breaks SCORM portability -- author against the standard, not the tool.
+
+## Related Artifacts
+
+| Artifact | Relationship | Score |
+|----------|-------------|-------|
+| [[p05_qg_course_module]] | downstream | 0.42 |
+| [[bld_schema_course_module]] | upstream | 0.34 |
+| [[bld_knowledge_card_course_module]] | upstream | 0.32 |
+| [[p03_sp_course_module_builder]] | upstream | 0.29 |
+| [[course-module-builder]] | upstream | 0.25 |
+| [[p05_kc_course_module]] | upstream | 0.19 |
+| [[hybrid_review5_n03]] | upstream | 0.18 |
+| [[bld_instruction_course_module]] | upstream | 0.17 |

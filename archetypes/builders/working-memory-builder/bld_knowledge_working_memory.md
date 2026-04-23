@@ -1,0 +1,99 @@
+---
+kind: knowledge_card
+id: bld_knowledge_card_working_memory
+pillar: P01
+llm_function: INJECT
+purpose: Domain knowledge for working_memory production
+sources: Baddeley & Hitch (1974) working memory model, LangChain ConversationBufferWindowMemory, DSPy state management
+quality: 8.4
+title: "Knowledge Card Working Memory"
+version: "1.0.0"
+author: n03_builder
+tags: [working_memory, builder, knowledge_card]
+tldr: "Working memory holds active task state in typed slots with capacity limits and task-scoped expiry -- the computational analog of cognitive working memory."
+domain: "working memory construction"
+created: "2026-04-17"
+updated: "2026-04-17"
+density_score: 0.90
+related:
+  - bld_memory_runtime_state
+  - p01_kc_session_state
+  - p01_kc_memory_persistence
+  - bld_collaboration_session_state
+  - p01_kc_memory_consolidation
+  - bld_memory_session_state
+  - p01_kc_runtime_state
+  - p02_memory_scope
+  - atom_22_memory_taxonomy
+  - bld_knowledge_card_memory_scope
+---
+
+# Domain Knowledge: working_memory
+
+## Executive Summary
+Working memory (cognitive origin: Baddeley & Hitch, 1974) is the short-term, limited-capacity store for information being actively processed. In LLM agent systems, working memory holds intermediate task state -- current step, accumulated results, error counts -- that a task needs during execution but that does not need to persist after completion. It is the innermost and most ephemeral tier of the P10 memory hierarchy.
+
+## Cognitive Science Foundation
+| Cognitive Component | CEX Equivalent | Notes |
+|---------------------|---------------|-------|
+| Phonological loop | string slots | Verbal/text working state |
+| Visuospatial sketchpad | json/list slots | Structured intermediate data |
+| Central executive | task_id binding | Task coordination |
+| Capacity limit (7+-2 items) | capacity_limit field | Bounded by design |
+
+## LLM Implementation Patterns
+| Pattern | Framework | CEX Mapping |
+|---------|-----------|-------------|
+| ConversationBufferWindowMemory | LangChain | context_slots + capacity_limit |
+| AgentState dict | LangGraph | context_slots map |
+| DSPy Typed Predict state | DSPy | typed context_slots |
+| Scratch memory | AutoGPT | working_memory + expiry: on_complete |
+
+## Slot Type Selection
+| Task State | Slot Type | Example |
+|-----------|-----------|---------|
+| Current processing step | string | "step": "extract_entities" |
+| Retry/error counter | int | "retry_count": 2 |
+| Intermediate results | list[string] | "results": ["item1", "item2"] |
+| Confidence accumulation | float | "avg_confidence": 0.87 |
+| Completion flag | bool | "is_complete": false |
+| Complex intermediate data | json | "parsed_output": {...} |
+
+## Capacity Guidelines
+| Agent Type | Recommended Capacity | Rationale |
+|-----------|---------------------|-----------|
+| Simple task agent | 10 slots / 1000 tokens | Low complexity |
+| Multi-step pipeline | 20 slots / 4000 tokens | Stage-by-stage accumulation |
+| Research agent | 50 slots / 16000 tokens | Extensive intermediate results |
+
+## Clear vs Promote Decision
+| Slot Content | Action | Target |
+|-------------|--------|--------|
+| Temporary counters, flags | CLEAR | Discard |
+| Discovered entity facts | PROMOTE | entity_memory |
+| Task interaction summary | PROMOTE | episodic_memory |
+| Error patterns observed | PROMOTE | learning_record |
+
+## Anti-Patterns
+| Anti-Pattern | Why it fails |
+|-------------|-------------|
+| No capacity_limit | Context window overflow on long tasks |
+| No expiry | Working memory becomes permanent state |
+| Long-term facts in slots | Slots cleared on complete; facts lost |
+| Mixing session state with task state | Session state belongs in session_state kind |
+| Untyped slots | Type errors corrupt task execution |
+
+## Related Artifacts
+
+| Artifact | Relationship | Score |
+|----------|-------------|-------|
+| [[bld_memory_runtime_state]] | downstream | 0.30 |
+| [[p01_kc_session_state]] | sibling | 0.26 |
+| [[p01_kc_memory_persistence]] | sibling | 0.26 |
+| [[bld_collaboration_session_state]] | downstream | 0.26 |
+| [[p01_kc_memory_consolidation]] | sibling | 0.24 |
+| [[bld_memory_session_state]] | downstream | 0.24 |
+| [[p01_kc_runtime_state]] | sibling | 0.23 |
+| [[p02_memory_scope]] | downstream | 0.23 |
+| [[atom_22_memory_taxonomy]] | sibling | 0.23 |
+| [[bld_knowledge_card_memory_scope]] | sibling | 0.22 |

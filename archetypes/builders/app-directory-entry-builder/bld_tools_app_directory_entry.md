@@ -1,0 +1,66 @@
+---
+kind: tools
+id: bld_tools_app_directory_entry
+pillar: P04
+llm_function: CALL
+purpose: Tools available for app_directory_entry production
+quality: 8.9
+title: "Tools App Directory Entry"
+version: "1.0.0"
+author: wave1_builder_gen_v2
+tags: [app_directory_entry, builder, tools]
+tldr: "Tools available for app_directory_entry production"
+domain: "app_directory_entry construction"
+created: "2026-04-14"
+updated: "2026-04-14"
+density_score: 0.85
+related:
+  - bld_tools_github_issue_template
+  - bld_tools_code_of_conduct
+  - bld_tools_playground_config
+  - bld_tools_customer_segment
+  - bld_tools_integration_guide
+  - bld_tools_white_label_config
+  - bld_tools_rbac_policy
+  - bld_tools_usage_quota
+  - bld_tools_usage_report
+  - bld_tools_sandbox_spec
+---
+
+## Production Tools
+| Tool                  | Purpose                               | When                          |
+|-----------------------|---------------------------------------|-------------------------------|
+| cex_compile.py        | Compile .md builder ISOs to .yaml     | After each ISO write          |
+| cex_score.py          | Score artifact quality (5D + H gates) | Post-validation assessment    |
+| cex_retriever.py      | TF-IDF similarity search on artifacts | When finding similar entries  |
+| cex_doctor.py         | Builder health check (118 assertions) | Pre-deployment checks         |
+| cex_wave_validator.py | Validate all ISOs in a builder dir    | After completing all 13 ISOs  |
+| cex_hygiene.py        | Artifact CRUD + 8 hygiene rules       | Cleanup and consistency pass  |
+
+## Validation Tools
+| Tool                  | Purpose                               | When                          |
+|-----------------------|---------------------------------------|-------------------------------|
+| cex_hooks.py          | Pre-commit validation + ASCII check   | On git commit                 |
+| cex_sanitize.py       | Detect and fix non-ASCII in code      | Before committing .py/.ps1    |
+| cex_schema_hydrate.py | Hydrate ISOs with universal patterns  | After schema changes          |
+
+## External References
+- Product Hunt listing guidelines: tagline <= 60 chars, 1280x800 screenshots
+- Chrome Web Store developer documentation: icon 512x512 PNG, feature graphic 1280x800
+- W3C Web App Manifest spec: name, short_name, description, icons
+- Apple App Store Review Guidelines: metadata standards for app submissions
+
+## Related Artifacts
+
+| Artifact | Relationship | Score |
+|----------|-------------|-------|
+| [[bld_tools_github_issue_template]] | sibling | 0.61 |
+| [[bld_tools_code_of_conduct]] | sibling | 0.48 |
+| [[bld_tools_playground_config]] | sibling | 0.38 |
+| [[bld_tools_customer_segment]] | sibling | 0.38 |
+| [[bld_tools_integration_guide]] | sibling | 0.37 |
+| [[bld_tools_white_label_config]] | sibling | 0.36 |
+| [[bld_tools_rbac_policy]] | sibling | 0.34 |
+| [[bld_tools_usage_quota]] | sibling | 0.34 |
+| [[bld_tools_usage_report]] | sibling | 0.32 |
+| [[bld_tools_sandbox_spec]] | sibling | 0.32 |

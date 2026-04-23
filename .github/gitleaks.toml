@@ -1,0 +1,36 @@
+# gitleaks config for CEX
+# Scans full git history for live API keys, tokens, secrets.
+# Allowlists documented placeholder examples in builder ISOs.
+
+title = "CEX gitleaks config"
+
+[extend]
+useDefault = true
+
+[allowlist]
+description = "CEX-specific allowlist for documented placeholder examples"
+
+paths = [
+    # Builder example ISOs intentionally showcase placeholder secrets
+    '''archetypes/builders/.*/bld_examples_.*\.md''',
+    '''archetypes/builders/compiled/bld_examples_.*\.yaml''',
+    # Audit reports are gitignored but pre-existing history may flag them
+    '''_reports/audit/.*''',
+    # Retriever index ingests example content (placeholders only)
+    '''\.cex/retriever_index\.json''',
+]
+
+regexes = [
+    # Documented placeholder patterns
+    '''ghp_1234567890abcdef1234567890abcdef1234''',
+    '''AKIAXXXXXXXXXXXXXXXX''',
+    '''sk-ant-api03-EXAMPLE''',
+    '''<REDACTED-[a-z_]+>''',
+]
+
+stopwords = [
+    "example",
+    "placeholder",
+    "your-key-here",
+    "REDACTED",
+]

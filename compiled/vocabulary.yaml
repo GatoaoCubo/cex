@@ -1,0 +1,413 @@
+quality: 7.1
+id: vocabulary_cex_rosetta
+kind: domain_vocabulary
+pillar: P01
+title: CEXAI Vocabulary -- Dev vs AI/LLM Rosetta Stone
+version: 1.0.0
+tags:
+- vocabulary
+- glossary
+- rosetta
+- open-source
+entry_count: 98
+related:
+- p01_kc_cex_project_overview
+- p03_sp_cex_core_identity
+- ctx_cex_new_dev_guide
+- p01_kg_cex_system_architecture
+- bld_knowledge_card_kind
+- skill
+- p03_sp_n03_creation_nucleus
+- p01_ctx_cex_project
+- p01_kc_8f_pipeline
+- report_intent_resolution_value_prop
+density_score: 1.0
+updated: '2026-04-22'
+architecture_terms: '| CEX Term | Dev Equivalent | AI/LLM Equivalent | Definition |
+
+  |----------|---------------|-------------------|------------|
+
+  | `kind` | class / schema / resource type | prompt template category | Atomic artifact type (300 registered). Every file
+  has one. Examples: `knowledge_card`, `agent`, `workflow` |
+
+  | `pillar` | module / package / domain | capability group | One of 12 domain groupings (P01-P12). Artifacts belong to exactly
+  one pillar. |
+
+  | `nucleus` | microservice / team / department | agent / role | Autonomous operational unit (N01-N07), each with a domain,
+  a sin lens, and a model budget. |
+
+  | `ISO` | interface / trait / mixin | instruction layer | One of 12 instruction files inside a builder. Each ISO maps 1:1
+  to a pillar and teaches the LLM domain-specific production rules. |
+
+  | `builder` | factory / generator / scaffold | prompt chain | Kind-specific production pipeline (302 registered). 12 ISOs
+  per builder = 1 per pillar. |
+
+  | `archetype` | base class / template | meta-prompt | N00 Genesis pattern that nuclei inherit. The difference between a
+  class (archetype) and an instance (nucleus). |
+
+  | `fractal` | convention over configuration | recursive pattern | Self-similar 12-pillar structure replicated across every
+  nucleus. N04 has P01-P12 just like N03, N07, etc. |
+
+  | `artifact` | resource / entity / record | output / generation | Any .md file produced by the 8F pipeline. Has YAML frontmatter
+  (id, kind, pillar, version) and a markdown body. |
+
+  | `N00 Genesis` | base class / abstract parent | meta-agent | The pre-sin archetype. All nuclei (N01-N07) inherit their
+  structure from N00. Read-only reference layer. |
+
+  | `sin lens` | team culture / optimization target | reward signal | Cultural DNA of a nucleus. Defines what it optimizes
+  for under ambiguity. Example: N04 = Knowledge Gluttony (ingest everything). |
+
+
+  ---'
+pipeline_terms_8f: '| CEX Term | Dev Equivalent | AI/LLM Equivalent | Definition |
+
+  |----------|---------------|-------------------|------------|
+
+  | `8F pipeline` | CI/CD pipeline | prompt chain | 8-function reasoning protocol (F1-F8) mandatory for every task. Not just
+  for building -- also for research, writing, planning. |
+
+  | `F1 CONSTRAIN` | schema validation / type check | intent resolution | Resolve kind, pillar, and schema from user input.
+  Load constraints before any other work. |
+
+  | `F2 BECOME` | dependency injection / factory | persona loading | Load builder identity and all 12 ISOs. The nucleus becomes
+  the specialized role. |
+
+  | `F3 INJECT` | context assembly / data fetch | RAG / context stuffing | Assemble knowledge sources (KCs, examples, memory,
+  brand, similar artifacts) into working context. |
+
+  | `F4 REASON` | algorithm design / planning | chain-of-thought | Plan the approach, sections, references. GDP runs here
+  for subjective decisions. |
+
+  | `F5 CALL` | tool invocation / API call | tool use / function calling | Execute tools (retriever, compiler, doctor) for
+  enrichment and pre-flight checks. |
+
+  | `F6 PRODUCE` | render / generate / build | inference / generation | Generate the artifact using all loaded context. |
+
+  | `F7 GOVERN` | test / validate / lint | eval / judge | Quality gate with 5D scoring rubric. Score >= 8.0 required. Retry
+  up to 2x if below threshold. |
+
+  | `F8 COLLABORATE` | deploy / publish / push | save + signal | Save, compile, commit, and emit completion signal to the
+  orchestrator. |
+
+
+  ---'
+orchestration_terms: '| CEX Term | Dev Equivalent | AI/LLM Equivalent | Definition |
+
+  |----------|---------------|-------------------|------------|
+
+  | `dispatch` | deploy / schedule / enqueue | agent spawn | Send a task to a nucleus via `_spawn/dispatch.sh`. N07 dispatches;
+  nuclei execute. |
+
+  | `grid` | parallel deployment / fan-out | multi-agent swarm | Up to 6 nuclei running in parallel, each on its own task.
+  Dispatched from one mission spec. |
+
+  | `crew` | team / squad / pipeline | multi-agent workflow | N roles with handoffs producing 1 coherent deliverable. Roles
+  depend on each other (sequential, hierarchical, or consensus). |
+
+  | `handoff` | message / event / payload | context transfer | Structured .md file that N07 writes to tell a nucleus exactly
+  what to do. Contains task, artifact references, and decision manifest pointer. |
+
+  | `signal` | webhook / event / callback | completion notification | JSON file in `.cex/runtime/signals/` that a nucleus
+  writes when it finishes. Contains nucleus ID, status, and quality score. |
+
+  | `wave` | deployment phase / batch | orchestration round | Group of parallel dispatches with a gate between waves. Wave
+  2 does not start until Wave 1 signals complete. |
+
+  | `consolidate` | collect / aggregate / merge | result synthesis | Post-wave step: verify deliverables, stop processes,
+  commit results, archive signals. |
+
+  | `GDP` | feature flag / A/B decision | human-in-the-loop | Guided Decision Protocol. User decides WHAT (tone, audience,
+  style). LLM decides HOW (files, pipeline, structure). |
+
+  | `mission` | project / epic / initiative | goal decomposition | Full lifecycle command: plan + guide + spec + grid + consolidate
+  in sequence. |
+
+  | `swarm` | parallel workers of same type | homogeneous agent pool | N builders of the same kind running in parallel worktrees.
+  Coverage (variants) vs crew (coherence). |
+
+  | `session-aware dispatch` | scoped deployment / namespaced job | multi-tenant orchestration | Each N07 instance tracks
+  its own nucleus PIDs. `stop` only kills YOUR session''s nuclei. |
+
+
+  ---'
+knowledge_terms: '| CEX Term | Dev Equivalent | AI/LLM Equivalent | Definition |
+
+  |----------|---------------|-------------------|------------|
+
+  | `KC (knowledge_card)` | doc / wiki page / record | knowledge chunk | Structured knowledge unit with YAML frontmatter.
+  The atomic unit of the CEX knowledge library. |
+
+  | `embedding_config` | search index config | vector store setup | Configures how artifacts are embedded and indexed for
+  semantic search. |
+
+  | `retriever` | search engine / query service | RAG retriever | Finds similar artifacts by content using TF-IDF + optional
+  Haiku reranking. Tool: `cex_retriever.py`. |
+
+  | `entity_memory` | ORM entity / database record | named entity store | Persistent record of a specific entity (person,
+  company, concept) across sessions. Kind: P10. |
+
+  | `episodic_memory` | event log / journal | session history | Record of what happened in a specific session or task. Decays
+  over time via `cex_memory_age.py`. |
+
+  | `procedural_memory` | runbook / SOP | skill / tool | Captured sequence of steps that worked, promoted to a reusable skill.
+  |
+
+  | `user_model` | user profile / preferences | personalization layer | Cross-session record of user preferences, corrections,
+  and context. Honcho dialectic pattern. |
+
+  | `context_window` | buffer / viewport | token budget | How much context fits in one LLM call. N07 has 1M tokens; most nuclei
+  have 200K. |
+
+  | `working_memory` | stack / in-scope variables | active context | What is currently loaded into the LLM''s context for
+  this task. Cleared after each 8F run. |
+
+  | `knowledge_index` | database index / search index | embedding index | Inverted or vector index over all artifacts in a
+  pillar or nucleus. Tool: `cex_retriever.py`. |
+
+
+  ---'
+quality_terms: '| CEX Term | Dev Equivalent | AI/LLM Equivalent | Definition |
+
+  |----------|---------------|-------------------|------------|
+
+  | `quality gate` | CI gate / test suite | eval pass/fail | Score threshold (>= 8.0 to publish, 9.0 target). Enforced by
+  `cex_score.py` at F7 GOVERN. |
+
+  | `scoring_rubric` | test criteria / acceptance criteria | judge rubric | 5-dimensional scoring: structural (30%) + rubric
+  (30%) + semantic (40%). |
+
+  | `density` | LOC / information ratio | token efficiency | Information per byte. Target >= 0.85. Low-density artifacts are
+  verbose without content. |
+
+  | `doctor` | health check / diagnostics | system audit | Builder health verification across 302 builders. Checks ISOs, sub-agents,
+  schema wiring. Tool: `cex_doctor.py`. |
+
+  | `flywheel` | feedback loop / CI/CD cycle | self-improvement | Automated quality improvement cycle: scan -> evolve -> score
+  -> commit. Tool: `cex_flywheel_audit.py`. |
+
+  | `evolve` | refactor / optimize | prompt optimization sweep | Heuristic + agent-mode quality improvement loop. Targets
+  artifacts below 9.0. Tool: `cex_evolve.py`. |
+
+  | `preflight` | pre-deployment check | context pre-fetch | Phase 0 of handoff preparation: N07 gathers external context
+  via MCP before dispatching. |
+
+
+  ---'
+sin_lens_terms: '| CEX Term | Sin | Dev Equivalent | AI/LLM Equivalent |
+
+  |----------|-----|---------------|-------------------|
+
+  | `Analytical Envy` (N01) | Envy | competitive analysis obsession | research optimization bias; benchmark everything |
+
+  | `Creative Lust` (N02) | Lust | design-driven development | creative generation priority; seductive output |
+
+  | `Inventive Pride` (N03) | Pride | engineering excellence culture | build quality maximization; never ship below standard
+  |
+
+  | `Knowledge Gluttony` (N04) | Gluttony | documentation-first culture | knowledge accumulation bias; ingest all sources
+  |
+
+  | `Gating Wrath` (N05) | Wrath | strict QA / zero-tolerance CI | validation strictness; reject anything that fails gates
+  |
+
+  | `Strategic Greed` (N06) | Greed | revenue optimization mindset | monetization focus; maximize every revenue stream |
+
+  | `Orchestrating Sloth` (N07) | Sloth | delegation / management | efficient dispatch (never builds directly; always delegates)
+  |
+
+
+  ---'
+tool_integration_terms: '| CEX Term | Dev Equivalent | AI/LLM Equivalent | Definition |
+
+  |----------|---------------|-------------------|------------|
+
+  | `MCP server` | API integration / plugin | tool provider | Model Context Protocol external capability. CEX uses: github,
+  fetch, firecrawl, markitdown, notebooklm, supabase. |
+
+  | `preflight` | pre-deployment smoke test | context pre-fetch | N07-only Phase 0: gathers external context via MCP before
+  dispatching to non-Claude runtimes. |
+
+  | `boot script` | startup script / entrypoint | agent initialization | PowerShell (.ps1) that launches a nucleus: sets env,
+  loads handoff, starts CLI. |
+
+  | `compile` | build / transpile | yaml serialization | Converts .md artifact to .yaml for machine consumption. Tool: `cex_compile.py`.
+  |
+
+  | `sanitize` | lint / ASCII enforcement | output normalization | Ensures all executable code is ASCII-only (no emoji, no
+  em-dash, no accented chars in .py/.ps1). Tool: `cex_sanitize.py`. |
+
+  | `intent resolver` | router / dispatcher | NLU classifier | Maps user''s words to {kind, pillar, nucleus, verb}. Tool:
+  `cex_intent_resolver.py` (Python-first, 0 tokens). |
+
+  | `prompt compiler` | template engine | prompt optimizer | Bilingual (EN+PT) pattern table mapping 300 kinds to dispatch
+  targets. Kind: `prompt_compiler`. |
+
+
+  ---'
+multi_runtime_terms: '| CEX Term | Dev Equivalent | AI/LLM Equivalent | Definition |
+
+  |----------|---------------|-------------------|------------|
+
+  | `runtime` | execution environment | LLM provider / backend | One of 4 CEX runtimes: Claude (claude CLI), Codex (openai-codex),
+  Gemini (gemini CLI), Ollama (local). |
+
+  | `fallback chain` | circuit breaker / failover | model cascade | Ordered list of providers to try per nucleus. Config:
+  `.cex/config/nucleus_models.yaml`. |
+
+  | `nucleus_models.yaml` | environment config | routing config | YAML that maps each nucleus to its primary model + fallback
+  chain. Never hardcode a CLI. |
+
+  | `LiteLLM proxy` | API gateway / proxy | model gateway | Unified endpoint that routes requests to any provider. Enables
+  free-tier routing via Ollama. |
+
+  | `worktree` | isolated branch / sandbox | parallel context | Git worktree used for isolated parallel builds. Each `/batch`
+  task or swarm arm gets its own worktree. |
+
+
+  ---'
+configuration_terms: '| CEX Term | Dev Equivalent | AI/LLM Equivalent | Definition |
+
+  |----------|---------------|-------------------|------------|
+
+  | `env_config` | .env / environment variables | runtime config | Maps environment variables to their values and validation
+  rules. Kind: P09. |
+
+  | `rate_limit_config` | throttle config / API rate limit | inference quota | Configures request rate limits per provider,
+  per nucleus, per tier. Kind: P09. |
+
+  | `feature_flag` | feature toggle / LaunchDarkly | conditional behavior | Enables or disables specific capabilities at runtime
+  without code changes. Kind: P09. |
+
+  | `secret_config` | secrets manager / Vault | credential store | Secure configuration for API keys and tokens. Never hardcoded.
+  `.env` gitignored. Kind: P09. |
+
+  | `brand_config.yaml` | tenant config / white-label config | persona config | Single file that makes a generic CEX instance
+  specific to one brand. Generated by N06. |
+
+
+  ---'
+evaluation_terms: '| CEX Term | Dev Equivalent | AI/LLM Equivalent | Definition |
+
+  |----------|---------------|-------------------|------------|
+
+  | `benchmark` | performance test / load test | eval suite | Structured test that measures a specific capability dimension.
+  Kind: P07. |
+
+  | `llm_judge` | peer review / code review | LLM-as-judge | LLM that evaluates another LLM''s output against a rubric. Kind:
+  P07. |
+
+  | `unit_eval` | unit test | prompt unit test | Tests a single artifact or builder output in isolation. Kind: P07. |
+
+  | `e2e_eval` | integration test / E2E test | end-to-end eval | Tests the full 8F pipeline from intent to artifact. Kind:
+  P07. |
+
+  | `smoke_eval` | smoke test | sanity check | Quick pass/fail check that the system boots and produces output. Kind: P07.
+  |
+
+  | `trajectory_eval` | workflow test | agentic trace eval | Evaluates the sequence of tool calls and decisions, not just
+  the final output. Kind: P07. |
+
+
+  ---'
+brand_identity_terms: '| CEX Term | Dev Equivalent | AI/LLM Equivalent | Definition |
+
+  |----------|---------------|-------------------|------------|
+
+  | `brand_book` | design system doc / style guide | brand persona | The canonical brand document covering identity, voice,
+  visual, audience, and positioning. |
+
+  | `mustache variable` | template variable / slot | prompt slot | `{{BRAND_NAME}}` pattern. Replaced at runtime by `brand_inject.py`
+  from `brand_config.yaml`. |
+
+  | `brand propagation` | config injection / dependency propagation | persona injection | Pushing brand context from N06 to
+  all other nuclei so every output matches the brand voice. |
+
+  | `ICP` | target user / customer persona | user persona | Ideal Customer Profile: who the brand serves, their fears, aspirations,
+  and transformation. |
+
+  | `brand archetype` | brand personality type | persona type | One of 12 Jungian archetypes (creator, hero, sage...) that
+  defines the brand''s character. |
+
+
+  ---'
+process_operational_terms: '| CEX Term | Dev Equivalent | AI/LLM Equivalent | Definition |
+
+  |----------|---------------|-------------------|------------|
+
+  | `spawn` | fork / start process | agent launch | Launch a nucleus by starting a new terminal process via `dispatch.sh`.
+  |
+
+  | `kill` | SIGTERM / terminate | agent shutdown | Stop a nucleus process tree via `taskkill /F /PID /T` (tree-kill, kills
+  all children). |
+
+  | `idle` | process in wait state | agent idle | Nucleus completed its task but the process is still alive. Kill it to free
+  resources. |
+
+  | `overnight` | cron job / batch job | training job | Long-running autonomous run: evolve + audit cycle. Script: `boot/overnight_h1.cmd`.
+  |
+
+  | `wave gate` | deployment stage gate | orchestration checkpoint | Quality check between waves. Wave N+1 only starts when
+  Wave N signals complete and scores pass. |
+
+  | `PID tracking` | process table | agent registry | `.cex/runtime/pids/spawn_pids.txt` maps `{wrapper_pid} {nucleus} {cli}
+  {session_id} {timestamp} {worker_pids}`. |
+
+
+  ---'
+exchange_terms: '| CEX Term | Dev Equivalent | AI/LLM Equivalent | Definition |
+
+  |----------|---------------|-------------------|------------|
+
+  | `exchange` | shared registry / package repository | knowledge sharing protocol | The model for sharing typed artifacts
+  between CEXAI instances. Git-based pull, quality-gated on import. |
+
+  | `exchange unit` | package / module / library | shareable artifact | Self-describing .md file with YAML frontmatter. Carries
+  kind, quality, pillar, and nucleus origin. Validates automatically on import. |
+
+  | `vertical nucleus` | vertical SaaS / domain module | domain-specialized agent department | Community-contributed N08+
+  nucleus. Full 12-pillar AI department for a specific domain (healthcare, fintech, legal, etc.). |
+
+  | `assimilation` | integration / installation | onboarding / import | Process of importing external artifacts or nuclei
+  into a CEXAI instance. Runs doctor + compile + index. |
+
+  | `Artificial Sin` | team culture / optimization axis | agent personality / behavioral bias | The sin lens assigned to each
+  nucleus (Envy, Lust, Pride, etc.). Drives optimization under ambiguity. Canonical branding for CEXAI''s 7 nucleus personalities.
+  |
+
+  | `knowledge asset` | intellectual property / data asset | trained model / knowledge base | The CEXAI instance viewed as
+  an appreciating asset. Every artifact adds value. EN preferred over "digital asset" (crypto connotation). |
+
+  | `CEXAI` | product name | system identifier | Cognitive Exchange AI. Full brand name. CEX = code short form. The X = Exchange.
+  |
+
+  | `neuroplastic` | extensible / pluggable | adaptive | The system''s ability to incorporate new kinds, vocabularies, and
+  nuclei automatically. Intent resolver + prompt compiler adapt to imports. |
+
+
+  ---'
+metaphor_mapping_quick_reference: 'For the complete metaphor dictionary (internal language -> industry terms), see: `_docs/specs/spec_metaphor_dictionary.md`
+  For intent resolution patterns (user phrases -> kind + nucleus), see: `N00_genesis/P03_prompt/layers/p03_pc_cex_universal.md`
+  For kind definitions (all 300), see: `.cex/kinds_meta.json` and `N00_genesis/P01_knowledge/library/kind/kc_{kind}.md`'
+related_artifacts: '| Artifact | Relationship | Score |
+
+  |----------|-------------|-------|
+
+  | [[p01_kc_cex_project_overview]] | related | 0.32 |
+
+  | [[p03_sp_cex_core_identity]] | downstream | 0.31 |
+
+  | [[ctx_cex_new_dev_guide]] | related | 0.31 |
+
+  | [[p01_kg_cex_system_architecture]] | related | 0.31 |
+
+  | [[bld_knowledge_card_kind]] | related | 0.30 |
+
+  | [[skill]] | downstream | 0.30 |
+
+  | [[p03_sp_n03_creation_nucleus]] | downstream | 0.30 |
+
+  | [[p01_ctx_cex_project]] | related | 0.29 |
+
+  | [[p01_kc_8f_pipeline]] | related | 0.28 |
+
+  | [[report_intent_resolution_value_prop]] | related | 0.27 |'

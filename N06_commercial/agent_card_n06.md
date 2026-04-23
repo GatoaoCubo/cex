@@ -1,0 +1,233 @@
+---
+id: agent_card_n06
+kind: context_doc
+title: "N06 Agent Card -- Available Capabilities"
+nucleus: N06
+pillar: P01
+sin: Strategic Greed
+version: 1.2.0
+quality: 8.9
+created: 2026-04-07
+updated: 2026-04-13
+density_score: 1.0
+related:
+  - p02_mm_commercial_nucleus
+  - spec_n06_brand_verticalization
+  - p02_agent_commercial_nucleus
+  - p07_sr_commercial
+  - p12_dr_commercial
+  - n06_sdk_validation_audit
+  - p03_sp_brand_nucleus
+  - p02_agent_brand_nucleus
+  - p12_wf_commercial
+  - p03_sp_commercial_nucleus
+---
+
+# N06 Agent Card — Available Capabilities
+
+## Identity
+
+| Attribute | Value |
+|-----------|-------|
+| **Nucleus** | N06 — Commercial |
+| **Sin** | Strategic Greed |
+| **Icon** | `$` |
+| **Color** | Gold (#ca8a04) |
+| **Domain** | Pricing, funnels, monetization, brand strategy |
+| **Tagline** | "Quanto RENDE cada decisão?" |
+
+**What makes N06 different**: Every output has an ROI calculation attached. No resource is wasted. Every decision has a financial justification. Free is a strategy, not charity. Where other nuclei ask "is it good?", N06 asks "does it EARN?"
+
+The lens is **monetization-first**: pricing is optimized, funnels are metrified, CAC vs LTV is calculated. Nothing ships from N06 without a business case.
+
+---
+
+## My Artifacts
+
+| Subdir | Count | What's There |
+|--------|------:|--------------|
+| `agents/` | 3 | `agent_commercial.md` — N06 agent identity, `axiom_commercial.md` — 12 immutable commercial laws, `mental_model_commercial.md` — decision routing + frameworks |
+| `architecture/` | 5 | `agent_card_commercial.md`, `integration_content_factory.md`, `pattern_brand_pipeline.md`, `pattern_pricing_framework.md`, `pattern_funnel_architecture.md` |
+| `compiled/` | 33 | Auto-compiled YAML mirrors of source artifacts |
+| `feedback/` | 1 | `quality_gate_commercial.md` — N06 quality gate |
+| `knowledge/` | 14 | Brand KCs: archetypes, book patterns, frameworks, monetization models, naming, propagation, tokens pipeline, voice systems, competitive positioning, ICP frameworks, + AI compliance, SaaS monetization, + 2 knowledge cards |
+| `memory/` | 3 | `brand_decisions_memory.md` — GDP decision log, `pricing_optimization_memory.md` — pricing experiments + metrics, `commercial_learning_record.md` — 10 lessons learned |
+| `orchestration/` | 4+16 | Dispatch rules + workflows + 4 crew templates + 12 role assignments + 4 team charters |
+| `output/` | 26 | Brand book, brand config, pricing pages, funnels (CEX + content factory), competitive analysis, monetization plans, visual identity, strategy docs, audits |
+| `prompts/` | 6 | Brand audit, brand book generator, brand config extractor, brand discovery interview, prompt template, system prompt |
+| `quality/` | 1 | `scoring_rubric_commercial.md` — commercial scoring |
+| `reports/` | 3 | Self-audit reports (2026-04-11 x2, newpc 2026-04-12) |
+| `schemas/` | 5 | Brand audit, brand book, brand config, brand voice contract, content order input schema |
+| `tools/` | 3 | `content_monetization_tool.md` — monetization pipeline, `pricing_experiment_tool.md` — A/B testing framework, `funnel_diagnostic_tool.md` — leak detection + fix prioritization |
+| **TOTAL** | **107** | **74 source + 33 compiled** |
+
+---
+
+## Kinds I Can Build
+
+### Primary (Direct Domain)
+
+| Kind | Pillar | Naming Pattern | N06 Use Case |
+|------|--------|---------------|--------------|
+| `content_monetization` | P04 | `p04_cm_{{name}}.md` | Course pricing, revenue models, monetization strategies |
+| `tagline` | P03 | `p03_tl_{{topic}}.md` | Brand taglines, positioning lines, value props |
+
+### Secondary (Cross-Domain, N06-Relevant)
+
+| Kind | Pillar | Naming Pattern | N06 Use Case |
+|------|--------|---------------|--------------|
+| `landing_page` | P05 | `p05_lp_{{page}}.md` | Pricing pages, sales pages, conversion funnels |
+| `knowledge_card` | P01 | `p01_kc_{{topic}}.md` | Brand/commercial knowledge documentation |
+| `context_doc` | P01 | `p01_ctx_{{scope}}.md` | Commercial context, market analysis docs |
+| `scoring_rubric` | P07 | `p07_sr_{{framework}}.md` | Commercial quality evaluation frameworks |
+| `workflow` | P12 | `p12_wf_{{pipeline}}.yaml` | Monetization pipelines, sales workflows |
+| `dispatch_rule` | P12 | `p12_dr_{{scope}}.md` | Commercial routing rules |
+| `director` | P08 | `ex_director_{topic}.md` | Strategic commercial direction |
+| `benchmark` | P07 | `p07_bm_{{metric}}.md` | Revenue benchmarks, conversion metrics |
+| `decision_record` | P08 | `p08_adr_{{decision}}.md` | Pricing/strategy decisions |
+
+---
+
+## Tools Available
+
+### Brand Tools (N06 Primary)
+
+| Tool | What It Does | ROI |
+|------|-------------|-----|
+| `brand_audit.py` | Score brand consistency across 6 dimensions | Prevents brand drift → protects premium pricing |
+| `brand_ingest.py` | Scan user's messy folder → extract brand signals | Saves hours of manual brand discovery |
+| `brand_inject.py` | Replace `{{BRAND_*}}` tokens in templates | Automated brand consistency at scale |
+| `brand_propagate.py` | Push brand context to all 7 nuclei | One source of truth → zero brand conflict |
+| `brand_validate.py` | Validate `brand_config.yaml` (13 required fields) | Catches broken brand config before it propagates |
+
+### System Tools (N06-Relevant)
+
+| Tool | What It Does | ROI |
+|------|-------------|-----|
+| `cex_bootstrap.py` | First-run brand setup → propagate → audit | Zero-to-brand in one command |
+| `cex_compile.py` | `.md` → `.yaml` compilation | Machine-readable artifacts for pipelines |
+| `cex_evolve.py` | AutoResearch loop: evolve artifacts autonomously | Continuous improvement without human cost |
+| `cex_feedback.py` | Quality tracking + archive + metrics | Data-driven quality decisions |
+| `cex_gdp.py` | GDP enforcement: manifest I/O, NeedsUserDecision gate | Prevents expensive rework from bad assumptions |
+| `cex_notebooklm.py` | NotebookLM pipeline integration | Content distribution → audience reach |
+| `cex_score.py` | Peer review scoring (--apply) | Objective quality without self-bias |
+| `cex_quality_monitor.py` | Quality snapshots + regression detection | Catches quality drops before they cost revenue |
+| `cex_router.py` | Multi-provider routing: 4 providers × 7 nuclei | Cost-optimal model routing |
+| `cex_retriever.py` | TF-IDF artifact similarity (2184 docs) | Find relevant prior work → avoid duplication |
+| `signal_writer.py` | Inter-nucleus signals | Cross-nucleus coordination |
+
+---
+
+## MCP Servers
+
+| Server | Command | Purpose | N06 Value |
+|--------|---------|---------|-----------|
+| **fetch** | `uvx mcp-server-fetch` | HTTP fetch (ignores robots.txt) | Competitor pricing scraping, market research |
+| **markitdown** | `npx markitdown-mcp` | Document → Markdown conversion | Ingest competitor docs, sales materials |
+| **stripe** | `npx @anthropic/mcp-stripe` | Stripe API integration | Payment processing, subscription management, revenue data |
+| **hotmart** | `npx mcp-server-hotmart` | Hotmart API integration | Course sales, affiliate management, conversion tracking |
+| **canva** | `npx @mcp_factory/canva-mcp-server` | Canva design API | Brand assets, visual identity, marketing materials |
+| **notebooklm** | `npx notebooklm-mcp@latest` | Google NotebookLM automation | Content repurposing: flashcards, audio summaries, quizzes |
+
+**Total MCPs**: 6 servers — covering payments (Stripe), courses (Hotmart), design (Canva), research (fetch), content (NotebookLM, markitdown).
+
+---
+
+## Strengths
+
+1. **Brand Infrastructure Complete**: 4 schemas + 5 brand tools + 12 domain KCs = full brand pipeline from discovery to propagation. No other nucleus has this.
+
+2. **Monetization Stack**: Stripe + Hotmart MCPs give N06 direct access to payment/course platforms. Revenue isn't theoretical — it's executable.
+
+3. **Knowledge Density**: 12 specialized KCs covering brand archetypes, naming patterns, voice systems, monetization models, competitive positioning, ICP frameworks. Deep domain knowledge.
+
+4. **Output Variety**: 15 output artifacts spanning brand books, pricing pages, competitive maps, monetization plans, visual identity. Wide deliverable surface.
+
+5. **Brand-to-System Propagation**: `brand_propagate.py` + `brand_inject.py` means N06's brand decisions automatically flow to all other nuclei. Single point of brand truth.
+
+6. **6 MCP Integrations**: Most connected nucleus externally. Payments, design, research, content — all wired.
+
+---
+
+## Gaps (Updated 2026-04-07)
+
+| Gap | Severity | Status | Resolution |
+|-----|----------|--------|------------|
+| `memory/` is empty | 🔴 High | ✅ CLOSED | 3 memory artifacts: brand decisions, pricing optimization, learning record |
+| Single agent identity | 🟢 Low | ✅ CLOSED | Added axiom_commercial.md (12 axioms) + mental_model_commercial.md (routing + frameworks) |
+| No architecture patterns | 🟡 Medium | ✅ CLOSED | 3 patterns: brand pipeline, pricing framework, funnel architecture |
+| Only 1 tool definition | 🟡 Medium | ✅ CLOSED | Added pricing_experiment_tool.md + funnel_diagnostic_tool.md |
+| Only 2 dedicated builders | 🟡 Medium | ⏳ OPEN | `content-monetization` and `tagline` are narrow. Future: register pricing-builder, funnel-builder |
+| No `tests/` subdir | 🟡 Medium | ⏳ OPEN | Commercial outputs lack golden test validation. Future: add test fixtures |
+| No dashboards/metrics | 🟡 Medium | 🟡 PARTIAL | Metrics templates exist in pricing_optimization_memory.md and funnel_diagnostic_tool.md. Future: live dashboard |
+
+---
+
+## Agent Card Summary
+
+```
+┌─────────────────────────────────────────────────┐
+│  N06 Commercial Nucleus — Strategic Greed        │
+│  "Quanto RENDE cada decisão?"                   │
+├─────────────────────────────────────────────────┤
+│  86 source artifacts + 33 compiled = 119 total  │
+│  2 dedicated builders + 9 cross-domain kinds    │
+│  18 tools (5 brand + 11 system + 2 N06)         │
+│  6 MCP servers (Stripe, Hotmart, Canva, ...)    │
+│  14 domain KCs                                  │
+│  5 brand schemas                                │
+│  6 prompts                                      │
+│  26 output artifacts                            │
+│  3 memory artifacts (decisions, pricing, LR)    │
+│  12 commercial axioms                           │
+│  3 architecture patterns + 1 integration        │
+│  3 reports (self-audits)                        │
+├─────────────────────────────────────────────────┤
+│  Strengths: brand infra, payment MCPs,          │
+│     knowledge depth, system propagation,        │
+│     commercial memory, pricing framework        │
+│  Remaining: dedicated builders, golden tests,   │
+│     P11 guardrails, Stripe pkg fix              │
+└─────────────────────────────────────────────────┘
+```
+
+**ROI of this agent card**: Self-awareness is free. Ignorance of capabilities costs missed revenue opportunities, duplicated work, and misrouted tasks. This agent card pays for itself every time N07 routes correctly to N06.
+
+## Composable Crews
+
+N06 owns 4 crews covering the full commercial lifecycle: acquire, price, retain, expand.
+
+| Crew | Process | Roles | Revenue Stage | Instantiation |
+|------|---------|-------|---------------|---------------|
+| `sales_pipeline` | sequential | strategist -> content_producer -> closer | **Acquire** | `cex_crew.py run sales_pipeline --charter .../team_charter_pipeline_default.md` |
+| `pricing_workshop` | sequential | market_analyst -> pricing_architect -> revenue_validator | **Price** | `cex_crew.py run pricing_workshop --charter .../team_charter_pricing_default.md` |
+| `subscription_design` | sequential | segment_researcher -> tier_architect -> retention_analyst | **Retain** | `cex_crew.py run subscription_design --charter .../team_charter_subscription_default.md` |
+| `partnership_kit` | sequential | partner_researcher -> proposal_writer -> deal_reviewer | **Expand** | `cex_crew.py run partnership_kit --charter .../team_charter_partnership_default.md` |
+
+**Agent bindings**: 9 unique builders across 4 crews -- content-monetization, pitch-deck, expansion-play, competitive-matrix, roi-calculator, customer-segment, subscription-tier, churn-prevention-playbook, partner-listing, enterprise-sla.
+
+**Composition**: All 4 crews can run as grid cells for simultaneous multi-product launches. Example: 3 products x 4 crews = 12 sequential crew instances in parallel grid.
+
+## Boundary
+
+Contexto de dominio para hidratar prompts. NAO eh knowledge_card (sem density gate) nem glossary_entry (nao define termo).
+
+
+## 8F Pipeline Function
+
+Primary function: **INJECT**
+
+## Related Artifacts
+
+| Artifact | Relationship | Score |
+|----------|-------------|-------|
+| [[p02_mm_commercial_nucleus]] | downstream | 0.52 |
+| [[spec_n06_brand_verticalization]] | downstream | 0.51 |
+| [[p02_agent_commercial_nucleus]] | downstream | 0.50 |
+| [[p07_sr_commercial]] | downstream | 0.45 |
+| [[p12_dr_commercial]] | downstream | 0.45 |
+| [[n06_sdk_validation_audit]] | sibling | 0.44 |
+| [[p03_sp_brand_nucleus]] | downstream | 0.43 |
+| [[p02_agent_brand_nucleus]] | downstream | 0.42 |
+| [[p12_wf_commercial]] | downstream | 0.41 |
+| [[p03_sp_commercial_nucleus]] | downstream | 0.40 |

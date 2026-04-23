@@ -1,0 +1,88 @@
+# CEX Version Manifest
+# Auto-generated counts from real directory structure
+# Use _tools/bump_version.py to increment versions
+
+cex_version: "1.1.0"
+date: "2026-03-23"
+
+lps:
+  P01_knowledge:
+    version: "1.0.0"
+    kinds: 6
+    schemas: 1
+    templates: 3
+    examples: 7
+  P02_model:
+    version: "1.0.0"
+    kinds: 8
+    schemas: 1
+    templates: 1
+    examples: 4
+  P03_prompt:
+    version: "1.0.0"
+    kinds: 6
+    schemas: 1
+    templates: 1
+    examples: 4
+  P04_tools:
+    version: "1.0.0"
+    kinds: 9
+    schemas: 1
+    templates: 1
+    examples: 3
+  P05_output:
+    version: "1.0.0"
+    kinds: 4
+    schemas: 1
+    templates: 1
+    examples: 3
+  P06_schema:
+    version: "1.0.0"
+    kinds: 5
+    schemas: 1
+    templates: 2
+    examples: 3
+  P07_evals:
+    version: "1.0.0"
+    kinds: 5
+    schemas: 1
+    templates: 2
+    examples: 3
+  P08_architecture:
+    version: "1.0.0"
+    kinds: 5
+    schemas: 1
+    templates: 2
+    examples: 3
+  P09_config:
+    version: "1.0.0"
+    kinds: 5
+    schemas: 1
+    templates: 2
+    examples: 4
+  P10_memory:
+    version: "1.0.0"
+    kinds: 5
+    schemas: 1
+    templates: 2
+    examples: 4
+  P11_feedback:
+    version: "1.0.0"
+    kinds: 5
+    schemas: 1
+    templates: 2
+    examples: 6
+  P12_orchestration:
+    version: "1.0.0"
+    kinds: 6
+    schemas: 1
+    templates: 2
+    examples: 4
+
+totals:
+  kinds: 69
+  schemas: 12
+  templates: 21
+  examples: 48
+  generators: 12
+  validators: 3

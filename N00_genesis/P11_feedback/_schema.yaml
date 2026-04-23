@@ -1,0 +1,104 @@
+pillar: P11
+name: Feedback
+description: HOW to improve
+frontmatter_cex:
+  related:
+    type: list[string]
+    required: recommended
+    description: "Artifact IDs of related artifacts (upstream, downstream, sibling, alternative)"
+    format: "[p{XX}_{kind}_{slug}, ...]"
+    max: 15
+    min: 0
+    validator: S_RELATED
+    note: "Auto-populated by cex_wikilink.py, manually curated by builders"
+kinds:
+  quality_gate:
+    description: Quality barrier (pass/fail with score)
+    boundary: Quality barrier with numeric score. NOT validator (P06, technical pass/fail) nor scoring_rubric (P07,
+      defines criteria).
+    layer: governance
+    core: true
+    machine_format: yaml
+    naming: p11_qg_{{gate}}.yaml
+    constraints:
+      max_bytes: 4096
+    llm_function: GOVERN
+  bugloop:
+    description: Automatic correction loop (detect > fix > verify)
+    boundary: Automatic detect>fix>verify loop. NOT unit_eval (P07, manual test) nor optimizer (continuous improvement, not
+      correction).
+    layer: governance
+    core: false
+    machine_format: yaml
+    naming: p11_bl_{{scope}}.md + .yaml
+    constraints:
+      max_bytes: 4096
+    llm_function: GOVERN
+  lifecycle_rule:
+    description: Lifecycle rule (freshness, archive, promote)
+    boundary: Declarative lifecycle rule. NOT hook (P04, executable code) nor runtime_rule (P09, technical).
+    layer: governance
+    core: true
+    machine_format: yaml
+    naming: p11_lc_{{rule}}.yaml
+    constraints:
+      max_bytes: 4096
+    llm_function: GOVERN
+  guardrail:
+    description: Safety restriction (safety boundary)
+    boundary: Safety restriction and safety boundary. NOT permission (P09, access) nor law (P08, operational).
+    layer: governance
+    core: true
+    machine_format: yaml
+    naming: p11_gr_{{scope}}.yaml
+    constraints:
+      max_bytes: 4096
+    llm_function: CONSTRAIN
+  optimizer:
+    description: Process optimizer (metric > action)
+    boundary: Process optimizer metric>action. NOT bugloop (correction pointwise) nor benchmark (P07, passive measurement).
+    layer: governance
+    core: false
+    machine_format: yaml
+    naming: p11_opt_{{target}}.md + .yaml
+    constraints:
+      max_bytes: 4096
+    llm_function: GOVERN
+  revision_loop_policy:
+    description: Policy governing max revision iterations and escalation priority
+    boundary: Max-N revision iterations before escalation. NOT retry_policy (transient failure) nor quality_gate (single check) nor regression_check (diff vs baseline).
+    layer: governance
+    core: false
+    machine_format: yaml
+    naming: p11_rlp_{{name}}.yaml
+    constraints:
+      max_bytes: 2048
+    llm_function: GOVERN
+    upstream_source: "1ilkhamov/opencode-hermes-multiagent"
+  curation_nudge:
+    description: Periodic prompt to persist knowledge to durable memory
+    boundary: Proactive memory-persistence reminder. NOT guardrail (blocks action) nor quality_gate (pass/fail). Nudges ASK.
+    layer: governance
+    core: false
+    machine_format: yaml
+    naming: p11_cn_{{trigger}}.yaml
+    constraints:
+      max_bytes: 2048
+    llm_function: GOVERN
+    upstream_source: "NousResearch/hermes-agent"
+  reward_signal:
+    description: Continuous quality signal
+    boundary: Score. NOT quality_gate.
+    layer: runtime
+    core: true
+    machine_format: yaml
+    naming: p11_reward.md
+    constraints:
+      max_bytes: 2048
+    frontmatter_required:
+    - id
+    - name
+    - signal_type
+    - scale
+    - model
+    llm_function: GOVERN

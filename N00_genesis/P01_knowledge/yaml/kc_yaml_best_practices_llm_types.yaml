@@ -1,0 +1,91 @@
+id: kc_yaml_best_practices_llm_types
+type: knowledge_card
+lp: P01
+llm_function: INJECT
+title: "YAML Best Practices for LLM-Native Artifact Types"
+version: 1.0.0
+created: 2026-03-25
+updated: 2026-03-25
+author: orchestrator
+domain: meta-construction
+quality: 9.5
+tags: [yaml, best-practices, llm-native, artifact-design, schema, structured-data]
+tldr: "Regras para YAML LLM-native: flat over nested, claims com source, zero prose, self-describing, max 5KB atomico"
+
+when_to_use: "Antes de criar qualquer artefato CEX YAML-first — este KC eh o guia de estilo"
+keywords: [yaml_design, llm_consumption, structured_knowledge, artifact_format, schema_first]
+source: "757 KCs organization-core + 120 exemplos CEX + 7 mental_models"
+code_provenance: "organization-core + cex repo — 2964 commits empiricos"
+confidence: 0.95
+linked_kcs: [kc_mcp_tool_infrastructure]
+
+content:
+  summary: "YAML-first: o YAML eh o artefato, nao container para prosa. Cada campo auto-descritivo, cada fato com fonte, cada lista com proposito. LLM le direto sem parsear Markdown."
+
+  facts:
+    - claim: "LLMs processam YAML estruturado com menos tokens e maior precisao que Markdown com prosa"
+      source: "Empirico: mesmo conteudo YAML vs MD — YAML usa 30-40% menos tokens"
+      confidence: 0.9
+    - claim: "Cada fact deve ter source nao-vazio — sem fonte, nao eh fato, eh opiniao"
+      source: "CEX knowledge_card.schema.yaml — validation: all facts have source"
+      confidence: 1.0
+    - claim: "Max 5120 bytes por KC forca atomicidade — se nao cabe, dividir em 2 KCs linkados"
+      source: "CEX P01/_schema.yaml — constraints.max_bytes: 5120"
+      confidence: 1.0
+    - claim: "Campos flat (max 3 niveis) — LLM perde contexto em YAML deeply nested"
+      source: "Observado: mental_model.yaml 3 niveis OK vs configs 5+ niveis LLMs erram"
+      confidence: 0.85
+    - claim: "tldr eh o campo primario de busca — deve funcionar sozinho"
+      source: "Brain MCP: BM25 ranqueia por tldr + title primeiro"
+      confidence: 0.95
+    - claim: "Tags sao para BUSCA nao decoracao — cada tag = palavra pesquisavel"
+      source: "Brain MCP hybrid search: tags alimentam BM25 keyword matching"
+      confidence: 0.95
+    - claim: "Comentarios YAML (#) sao para humanos — LLMs ignoram, nao atrapalham"
+      source: "YAML spec 1.2 — comments stripped during parsing"
+      confidence: 1.0
+
+  patterns:
+    - trigger: "Guardar fato com fonte"
+      action: "facts: [{claim:, source:, confidence:}]"
+    - trigger: "Guardar regra se X entao Y"
+      action: "patterns: [{trigger:, action:}]"
+    - trigger: "Listar coisas a evitar"
+      action: "anti_patterns: [string imperativa]"
+    - trigger: "Incluir codigo"
+      action: "code_snippets: [{lang:, purpose:, source_file:, code:}]"
+    - trigger: "Conectar com outros artefatos"
+      action: "relationships: [{target: id, relation: uses|extends|depends_on}]"
+
+  anti_patterns:
+    - "Prosa narrativa entre campos — LLM nao precisa de introducoes"
+    - "Facts sem source — vira opiniao"
+    - "YAML 5+ niveis nested — LLM perde contexto"
+    - "Tags genericas (important, reference) — nao ajudam busca"
+    - "Misturar Markdown dentro de valores YAML"
+    - "id diferente do filename — quebra lookup"
+    - "Omitir when_to_use — LLMs nao sabem quando buscar"
+
+  code_snippets:
+    - lang: yaml
+      purpose: "KC minimo valido"
+      source_file: "knowledge_card.schema.yaml"
+      code: |
+        id: kc_exemplo
+        type: knowledge_card
+        lp: P01
+        llm_function: INJECT
+        title: "Titulo ate 120 chars"
+        version: 1.0.0
+        quality: 8.0
+        tags: [tag1, tag2]
+        tldr: "1 frase densa"
+        content:
+          summary: "Resumo"
+          facts:
+            - claim: "Afirmacao"
+              source: "Fonte"
+
+  relationships:
+    - target: kc_mcp_tool_infrastructure
+      relation: extends

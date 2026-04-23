@@ -1,0 +1,91 @@
+---
+kind: knowledge_card
+id: bld_knowledge_card_kubernetes_ai_requirement
+pillar: P01
+llm_function: INJECT
+purpose: Domain knowledge for kubernetes_ai_requirement production
+quality: 9.2
+title: "Knowledge Card Kubernetes AI Requirement"
+version: "1.0.0"
+author: wave7_n03_dev_manifests
+tags: [kubernetes_ai_requirement, builder, knowledge_card]
+tldr: "Domain knowledge for kubernetes_ai_requirement production"
+domain: "kubernetes_ai_requirement construction"
+created: "2026-04-14"
+updated: "2026-04-14"
+density_score: 0.85
+related:
+  - kubernetes-ai-requirement-builder
+  - p03_sp_kubernetes_ai_requirement_builder
+  - bld_instruction_kubernetes_ai_requirement
+  - bld_tools_kubernetes_ai_requirement
+  - p10_lr_kubernetes_ai_requirement_builder
+  - bld_examples_kubernetes_ai_requirement
+  - bld_collaboration_kubernetes_ai_requirement
+  - bld_schema_kubernetes_ai_requirement
+  - p09_qg_kubernetes_ai_requirement
+  - bld_output_template_kubernetes_ai_requirement
+---
+
+## Domain Overview
+kubernetes_ai_requirement (KAR) is a CNCF-governed conformance artifact introduced with the Kubernetes AI Conformance Program (GA Nov 2025, v1.35). It is the declarative contract AI workloads use to state what a Certified Kubernetes AI Platform must provide: GPU-topology (NVLink/NVSwitch pairs, PCIe affinity, NUMA alignment), InfiniBand RDMA fabric bandwidth and GPUDirect capability, NVIDIA MIG partitioning profiles, Dynamic Resource Allocation (DRA) scheduling primitives (K8s 1.32+ GA), and checkpoint-PVC durability semantics for multi-node training and disaggregated inference.
+
+KAR artifacts make previously ad-hoc cluster-capability assumptions portable across CNCF-certified vendors. Multi-node training jobs (64-node NCCL all-to-all with NDR 400 Gbps InfiniBand) and disaggregated inference (prefill/decode separation with KV-cache locality) depend on KAR conformance to ensure scheduler, device plugin, CSI driver, and network fabric match workload expectations. The Kubernetes AI Conformance Program profile is validated by a KAR CLI tool that inspects the cluster against declared requirements and emits a signed evidence bundle.
+
+## Key Concepts
+| Concept                      | Definition                                                                 | Source                              |
+|------------------------------|----------------------------------------------------------------------------|-------------------------------------|
+| CNCF KAR v1.35               | Kubernetes AI Requirements conformance spec, GA Nov 2025                   | CNCF TAG-Runtime                    |
+| K8s AI Conformance Program   | Vendor certification program layered on core K8s conformance               | CNCF (Nov 2025)                     |
+| GPU-topology                 | NVLink/NVSwitch pairs, PCIe root-complex affinity, NUMA alignment          | NVIDIA H100/B200 datasheets         |
+| InfiniBand NDR/XDR           | 400 Gbps (NDR) / 800 Gbps (XDR) RDMA fabric                                 | IBTA spec, Mellanox/NVIDIA docs     |
+| GPUDirect RDMA               | Peer-to-peer DMA between GPU memory and NIC                                | NVIDIA GPUDirect spec               |
+| MIG (Multi-Instance GPU)     | Partitions A100/H100/B200 into 1g.5gb, 2g.10gb, 3g.20gb, 7g.40gb slices    | NVIDIA MIG User Guide               |
+| DRA (Dynamic Resource Alloc) | Accelerator-aware scheduler API, K8s 1.32 GA                               | KEP-4381                            |
+| ResourceClaim / ResourceSlice| DRA CRDs declaring and advertising device capacity                         | KEP-4381                            |
+| Checkpoint PVC               | ReadWriteMany CSI volume for training checkpoints with snapshot cadence    | CSI snapshot spec                   |
+| Gang scheduling              | All-or-nothing pod admission for multi-node training                       | Kueue / Volcano projects            |
+| Disaggregated inference      | Split prefill and decode stages for throughput gain (vLLM, SGLang)         | vLLM paper (2024), SGLang docs      |
+
+## Industry Standards
+- CNCF KAR v1.35 (Kubernetes AI Requirements, GA Nov 2025)
+- Kubernetes AI Conformance Program (CNCF, Nov 2025)
+- DRA (Dynamic Resource Allocation, K8s 1.32 GA, KEP-4381)
+- NVIDIA MIG User Guide (H100/B200 profiles)
+- IBTA InfiniBand Architecture Specification (NDR 400, XDR 800)
+- OCI Image Spec v1.1 (for model artifact packaging)
+- Kueue v0.9+ (CNCF sandbox, multi-node gang scheduling)
+- Volcano v1.10+ (CNCF batch scheduler for AI/ML)
+- CSI Spec v1.9 (snapshot and cloning APIs for checkpoint PVCs)
+
+## Common Patterns
+1. 64x H100 training: declare NVLink pairs=4, NDR 400 Gbps, GPUDirect RDMA, Kueue gang scheduling.
+2. Disaggregated inference: MIG profile 3g.20gb for prefill, 1g.5gb for decode, separate node pools.
+3. LoRA fine-tuning: single-node 8x H100, no InfiniBand, checkpoint-PVC cadence 10 minutes.
+4. DRA ResourceClaim templates per workload class (training vs inference) to avoid duplication.
+5. Checkpoint-PVC on RDMA-backed CSI (Vast, WEKA, DDN) for sub-minute restore during job preemption.
+6. Conformance profile tag lets KAR CLI emit signed evidence for CNCF-certified vendors.
+
+## Pitfalls
+- Declaring bandwidth (e.g., 400 Gbps) exceeding physical NDR fabric -- KAR CLI rejects.
+- Mixing MIG profiles with DRA ResourceClaims without device-class mapping -- scheduler confusion.
+- Omitting NUMA binding on 8x H100 nodes -- cross-socket traffic degrades NCCL.
+- Forgetting gang-scheduling on multi-node training -- partial admission wastes GPUs.
+- Using ReadWriteOnce on checkpoint-PVC -- blocks multi-worker checkpoint resume.
+- Confusing KAR (requirement) with env_config (runtime env) or sandbox_config (isolation).
+- Targeting DRA on K8s < 1.32 -- feature not GA, ResourceSlice API absent.
+
+## Related Artifacts
+
+| Artifact | Relationship | Score |
+|----------|-------------|-------|
+| [[kubernetes-ai-requirement-builder]] | downstream | 0.72 |
+| [[p03_sp_kubernetes_ai_requirement_builder]] | downstream | 0.68 |
+| [[bld_instruction_kubernetes_ai_requirement]] | downstream | 0.64 |
+| [[bld_tools_kubernetes_ai_requirement]] | downstream | 0.62 |
+| [[p10_lr_kubernetes_ai_requirement_builder]] | downstream | 0.59 |
+| [[bld_examples_kubernetes_ai_requirement]] | downstream | 0.57 |
+| [[bld_collaboration_kubernetes_ai_requirement]] | downstream | 0.55 |
+| [[bld_schema_kubernetes_ai_requirement]] | downstream | 0.49 |
+| [[p09_qg_kubernetes_ai_requirement]] | downstream | 0.49 |
+| [[bld_output_template_kubernetes_ai_requirement]] | downstream | 0.48 |

@@ -1,0 +1,98 @@
+---
+kind: architecture
+id: bld_architecture_nucleus_def
+pillar: P08
+llm_function: CONSTRAIN
+purpose: Component map of nucleus_def -- inventory, dependencies
+quality: 9.1
+title: "Architecture Nucleus Def"
+version: "1.0.0"
+author: n05_wave8
+tags: [nucleus_def, builder, architecture]
+tldr: "Component map of nucleus_def -- inventory, dependencies"
+domain: "nucleus_def construction"
+created: "2026-04-14"
+updated: "2026-04-14"
+density_score: 0.85
+related:
+  - bld_architecture_legal_vertical
+  - bld_architecture_app_directory_entry
+  - bld_architecture_fintech_vertical
+  - bld_architecture_benchmark_suite
+  - bld_architecture_healthcare_vertical
+  - bld_architecture_api_reference
+  - bld_architecture_code_of_conduct
+  - bld_architecture_roi_calculator
+  - bld_architecture_ai_rmf_profile
+  - bld_architecture_github_issue_template
+---
+
+## Component Inventory
+
+| ISO Name | Role | Pillar | Status |
+|----------|------|--------|--------|
+| bld_manifest | Builder identity, routing, crew role | P02 | Active |
+| bld_instruction | Step-by-step production process | P03 | Active |
+| bld_system_prompt | LLM guidance for nucleus_def production | P03 | Active |
+| bld_schema | SINGLE SOURCE OF TRUTH for field definitions | P06 | Active |
+| bld_quality_gate | HARD gates + SOFT scoring dimensions | P11 | Active |
+| bld_output_template | Template with vars for artifact production | P05 | Active |
+| bld_examples | Golden + anti-examples covering all failure modes | P07 | Active |
+| bld_knowledge_card | Domain knowledge: 8 nuclei, 12 pillars, fractal | P01 | Active |
+| bld_architecture | Component map and dependency graph | P08 | Active |
+| bld_collaboration | Crew workflow: receives-from / produces-for | P12 | Active |
+| bld_config | Naming, paths, limits for artifact production | P09 | Active |
+| bld_memory | Learned patterns and pitfalls | P10 | Active |
+| bld_tools | Production + validation tools | P04 | Active |
+
+## Dependencies
+
+| From | To | Type |
+|------|----|------|
+| bld_manifest | bld_config | configuration |
+| bld_instruction | bld_schema | reads for field reference |
+| bld_instruction | bld_output_template | uses as composition target |
+| bld_output_template | bld_schema | derives variables from schema |
+| bld_quality_gate | bld_schema | validates against schema |
+| bld_quality_gate | bld_examples | cross-references golden examples |
+| bld_system_prompt | bld_schema | references for field rules |
+| bld_collaboration | bld_memory | coordination pattern |
+| bld_tools | nucleus_models.yaml | reads CLI + model bindings |
+| bld_tools | .cex/kinds_meta.json | adds nucleus_def entry |
+
+## External Dependencies
+
+| Resource | Purpose | Path |
+|----------|---------|------|
+| nucleus_models.yaml | CLI + model binding source of truth | .cex/config/nucleus_models.yaml |
+| kinds_meta.json | Kind registry -- nucleus_def must be registered here | .cex/kinds_meta.json |
+| N0{X} agent cards | Data source for domain_agents + pillars_owned | N0{X}_*/agent_card_n0{X}.md |
+| nucleus rule files | Data source for sin_lens + routing rules | .claude/rules/n0{X}-*.md |
+| N00 genesis README | Fractal structure reference | N00_genesis/README.md |
+| boot scripts | Verify boot_script paths | boot/n0{X}.ps1 |
+
+## Architectural Position
+nucleus_def occupies P02 (Model) in the CEX pillar structure because it defines
+agent/nucleus identity -- analogous to how agent definitions and model providers
+live in P02. It is the formal contract layer that makes the 8-nucleus fractal
+explicit, enabling N07 to dispatch, route, and lifecycle-manage nuclei without
+hardcoded assumptions.
+
+nucleus_def instances (p02_nd_n01.md through p02_nd_n07.md) form the nucleus
+registry, mirroring how kinds_meta.json is the kind registry. Together they
+provide the full declarative map of the CEX system.
+
+## Related Artifacts
+
+| Artifact | Relationship | Score |
+|----------|-------------|-------|
+| [[bld_architecture_legal_vertical]] | sibling | 0.60 |
+| [[bld_architecture_app_directory_entry]] | sibling | 0.60 |
+| [[bld_architecture_fintech_vertical]] | sibling | 0.58 |
+| [[bld_architecture_benchmark_suite]] | sibling | 0.58 |
+| [[bld_architecture_healthcare_vertical]] | sibling | 0.57 |
+| [[bld_architecture_api_reference]] | sibling | 0.57 |
+| [[bld_architecture_code_of_conduct]] | sibling | 0.57 |
+| [[bld_architecture_roi_calculator]] | sibling | 0.56 |
+| [[bld_architecture_ai_rmf_profile]] | sibling | 0.56 |
+| [[bld_architecture_github_issue_template]] | sibling | 0.55 |

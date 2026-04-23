@@ -1,0 +1,123 @@
+---
+id: p01_kc_bounded_context
+kind: knowledge_card
+type: kind
+pillar: P01
+title: "Bounded Context -- Deep Knowledge for bounded_context"
+version: 1.0.0
+created: 2026-04-17
+updated: 2026-04-17
+author: builder_agent
+domain: bounded_context
+quality: 8.8
+tags: [bounded_context, p08, CONSTRAIN, kind-kc, ddd, context-map]
+tldr: "Explicit semantic boundary where a domain model applies with its own vocabulary; Evans DDD ch.14; NOT component_map (deployment) nor namespace (code)."
+when_to_use: "Modeling domain architecture for multi-team or multi-service systems; defining team ownership boundaries"
+keywords: [bounded-context, ddd, context-map, domain-model, integration-pattern]
+feeds_kinds: [bounded_context]
+density_score: null
+aliases: ["domain boundary", "semantic boundary", "context boundary", "DDD context"]
+user_says: ["define bounded context", "model domain boundary", "context map", "team ownership of domain"]
+long_tails: ["define an explicit boundary where a domain model applies and a team owns it", "create a context map showing how bounded contexts relate", "model which domain model applies within this part of the system"]
+related:
+  - bld_collaboration_model_card
+  - model-registry-builder
+  - bld_knowledge_card_model_registry
+  - model-card-builder
+  - kc_model_registry
+  - p01_kc_model_card
+  - bld_collaboration_model_provider
+  - bld_memory_model_provider
+  - bld_knowledge_card_context_window_config
+  - kc_model_context_protocol
+---
+
+# Bounded Context
+
+## Spec
+```yaml
+kind: bounded_context
+pillar: P08
+llm_function: CONSTRAIN
+max_bytes: 4096
+naming: bc_{context_name}.md
+```
+
+## What It Is
+A bounded_context is an explicit boundary within which a domain model applies, enforcing its own vocabulary and business rules. Evans DDD 2003 ch.14: "A model only works in the context where it is developed and used. [...] Explicitly define the context within which a model applies."
+
+The key insight: the same word can mean different things in different bounded contexts. "Account" in a Banking BC means a financial ledger entry. "Account" in a Social Media BC means a user profile. "Account" in a Sales BC means a customer relationship. These are NOT the same model -- forcing a shared model creates complexity and coupling. Bounded contexts make the ambiguity explicit and manageable.
+
+## What It Is NOT
+| Concept | Why Not bounded_context |
+|---------|------------------------|
+| Microservice | A BC may span multiple services; a service may implement parts of multiple BCs |
+| Namespace | Code organization boundary != semantic model boundary |
+| component_map | Deployment topology != domain model boundary |
+| Module | Technical organization != business concept boundary |
+| Team | A team owns a BC, but BC is defined by model, not by org chart |
+
+## Integration Patterns (Context Map)
+| Pattern | Abbrev | Meaning | When to Use |
+|---------|--------|---------|-------------|
+| Anti-Corruption Layer | ACL | Translate upstream model to your BC's model | When upstream model would corrupt your clean model |
+| Open Host Service | OHS | Publish a public API for consumers to use | When many consumers need your BC's data |
+| Conformist | CF | Adopt upstream model as-is | When upstream is dominant and migration cost is high |
+| Partnership | P | Two teams coordinate model changes together | When two BCs are tightly coupled and co-owned |
+| Published Language | PL | Formalized shared schema (data_contract) | When OHS needs a versioned, documented schema |
+| Big Ball of Mud | BBoM | No explicit boundary | NEVER -- leads to semantic drift and coupling debt |
+
+## CEX Bounded Contexts
+| BC | Nucleus | Domain | Key Aggregates |
+|----|---------|--------|----------------|
+| bc_cex_orchestration | N07 | Mission management | Mission, HandoffRegistry, WaveSchedule |
+| bc_intelligence | N01 | Research and analysis | ResearchTask, KnowledgeCard, SourceCitation |
+| bc_marketing | N02 | Content production | Campaign, CopyVariant, AudienceSegment |
+| bc_engineering | N03 | Build and scaffold | BuildTask, Artifact, QualityGate |
+| bc_knowledge | N04 | Knowledge management | KnowledgeCard, RAGIndex, EmbeddingConfig |
+| bc_operations | N05 | Code and deployment | Pipeline, TestSuite, DeploymentConfig |
+| bc_commercial | N06 | Revenue and pricing | PricingTier, RevenueStream, ContentMonetization |
+
+## Context Map Decision Points
+- Upstream context: provides data/events to this BC
+- Downstream context: consumes data/events from this BC
+- ACL selection: use when upstream model is incompatible or unstable
+- OHS selection: use when this BC must serve many consumers without N:1 coupling
+- Partnership: use when two teams must change their models in lockstep
+
+## Anti-Patterns
+| Anti-Pattern | Why It Fails | Fix |
+|-------------|-------------|-----|
+| Single model for enterprise | One term means many things; model becomes compromised | Split into explicit bounded contexts |
+| BC = microservice (1:1 mapping) | Couples architecture decisions to domain model | BC is semantic; services are technical |
+| No context map | Invisible integration = invisible coupling debt | Draw the map; explicit patterns |
+| BC without vocabulary | Semantic drift resumes without enforcement | Every BC needs a domain_vocabulary |
+| Ownerless BC | No team = no governance = model erosion | One team owns each BC |
+
+## Decision Tree
+- IF explicit semantic boundary needed for a domain model -> bounded_context
+- IF modeling deployment topology -> component_map
+- IF modeling code organization -> namespace or package (not a CEX kind)
+- IF need to govern vocabulary within the BC -> domain_vocabulary (for the same BC)
+- IF data crosses BC boundary -> data_contract (Published Language)
+- DEFAULT: bounded_context when a team owns a domain model with its own vocabulary
+
+## Quality Criteria
+- GOOD: semantic scope_statement, team_owner, >= 1 aggregate, domain_vocabulary reference
+- GREAT: integration patterns with rationale + domain events published + business invariants + context map position
+- FAIL: technical scope_statement OR missing team_owner OR no aggregates OR conflated with service/namespace
+
+## Related Artifacts
+
+| Artifact | Relationship | Score |
+|----------|-------------|-------|
+| [[bld_collaboration_model_card]] | downstream | 0.32 |
+| [[model-registry-builder]] | downstream | 0.31 |
+| [[bld_knowledge_card_model_registry]] | sibling | 0.31 |
+| [[model-card-builder]] | downstream | 0.27 |
+| [[kc_model_registry]] | sibling | 0.26 |
+| [[p01_kc_model_card]] | sibling | 0.25 |
+| [[bld_collaboration_model_provider]] | downstream | 0.23 |
+| [[bld_memory_model_provider]] | downstream | 0.23 |
+| [[bld_knowledge_card_context_window_config]] | sibling | 0.22 |
+| [[kc_model_context_protocol]] | sibling | 0.22 |

@@ -1,0 +1,92 @@
+# NotebookLM Mentor Notebooks
+# Generated: 2026-04-19
+# 10 concepts x EN audio_source uploaded
+# Mission: INFOPRODUCT_MEDIA_SCALE
+
+version: 1
+mission: INFOPRODUCT_MEDIA_SCALE
+language: en
+status: uploaded
+
+notebooks:
+  pillars:
+    notebook_id: "c505dc47-3bd1-4204-80f8-9a05b0e94766"
+    url: "https://notebooklm.google.com/notebook/c505dc47-3bd1-4204-80f8-9a05b0e94766"
+    source: "_output/mentor/pillars/en/audio_source.md"
+    chars: 11411
+    wave: 1
+    status: uploaded
+
+  nuclei:
+    notebook_id: "5adda4af-7d9c-4e62-9cfe-ca267fe564f2"
+    url: "https://notebooklm.google.com/notebook/5adda4af-7d9c-4e62-9cfe-ca267fe564f2"
+    source: "_output/mentor/nuclei/en/audio_source.md"
+    chars: 12047
+    wave: 1
+    status: uploaded
+
+  kinds:
+    notebook_id: "ea616590-3c19-414d-bd27-30ddbe1254f1"
+    url: "https://notebooklm.google.com/notebook/ea616590-3c19-414d-bd27-30ddbe1254f1"
+    source: "_output/mentor/kinds/en/audio_source.md"
+    chars: 11359
+    wave: 1
+    status: uploaded
+
+  gdp:
+    notebook_id: "355e2fe8-f719-4ab4-b19e-c4354a4f6571"
+    url: "https://notebooklm.google.com/notebook/355e2fe8-f719-4ab4-b19e-c4354a4f6571"
+    source: "_output/mentor/gdp/en/audio_source.md"
+    chars: 13426
+    wave: 2
+    status: uploaded
+
+  builder:
+    notebook_id: "7214b567-ea0f-4065-bc89-aa428b87bbeb"
+    url: "https://notebooklm.google.com/notebook/7214b567-ea0f-4065-bc89-aa428b87bbeb"
+    source: "_output/mentor/builder/en/audio_source.md"
+    chars: 11413
+    wave: 2
+    status: uploaded
+
+  dispatch:
+    notebook_id: "5df722ca-8660-43c5-ba52-8e7b5c891e7b"
+    url: "https://notebooklm.google.com/notebook/5df722ca-8660-43c5-ba52-8e7b5c891e7b"
+    source: "_output/mentor/dispatch/en/audio_source.md"
+    chars: 12056
+    wave: 2
+    status: uploaded
+
+  crews:
+    notebook_id: "9dc67209-34f7-44f8-ad6e-26baeff70193"
+    url: "https://notebooklm.google.com/notebook/9dc67209-34f7-44f8-ad6e-26baeff70193"
+    source: "_output/mentor/crews/en/audio_source.md"
+    chars: 13416
+    wave: 3
+    status: uploaded
+
+  signals:
+    notebook_id: "35dbbd37-0d96-4e14-9157-751b3353410a"
+    url: "https://notebooklm.google.com/notebook/35dbbd37-0d96-4e14-9157-751b3353410a"
+    source: "_output/mentor/signals/en/audio_source.md"
+    chars: 12533
+    wave: 3
+    status: uploaded
+
+  memory:
+    notebook_id: "e4d0d9e3-c0b8-4ee1-90ce-4222f9004764"
+    url: "https://notebooklm.google.com/notebook/e4d0d9e3-c0b8-4ee1-90ce-4222f9004764"
+    source: "_output/mentor/memory/en/audio_source.md"
+    chars: 12517
+    wave: 3
+    status: uploaded
+
+  sin_lens:
+    notebook_id: "9e0e7a11-b9e5-4e27-892b-bc2a3a8740ed"
+    url: "https://notebooklm.google.com/notebook/9e0e7a11-b9e5-4e27-892b-bc2a3a8740ed"
+    source: "_output/mentor/sin_lens/en/audio_source.md"
+    chars: 13491
+    wave: 3
+    status: uploaded
+
+# Cleanup: delete empty notebook ed2bc2b7-7035-41a3-8049-41a448491277

@@ -1,0 +1,134 @@
+---
+id: kc_competitive_intelligence_methods
+kind: knowledge_card
+pillar: P01
+nucleus: n01
+title: "Competitive Intelligence Methods: Framework and Best Practices"
+version: 1.0.0
+created: 2026-04-17
+author: n01_intelligence
+domain: competitive-intelligence
+quality: 9.2
+tags: [competitive_intelligence, CI_methods, analytical_framework, porter, SWOT, war_gaming]
+tldr: "Taxonomy of competitive intelligence methods: primary (interviews, surveys), secondary (reports, databases), and tertiary (social signals, hiring). Maps methods to use cases, evidence quality, and N01 automation level."
+density_score: 0.92
+updated: "2026-04-17"
+related:
+  - p12_dr_intelligence
+  - n01_kc_intelligence_domain
+  - p01_kc_intelligence_best_practices
+  - p03_sp_n01_intelligence
+  - n01_dr_intelligence
+  - p03_pt_intelligence_analysis
+  - p07_sr_intel_research
+  - n01_intelligence
+  - kc_8f_pipeline_implementation
+  - n01_tool_research_pipeline
+---
+
+<!-- 8F: F1 constrain=P01/knowledge_card F2 become=knowledge-card-builder F3 inject=reasoning_strategy_n01+bias_audit_n01+search_strategy_n01 F4 reason=Analytical Envy demands knowing ALL available CI methods, not just the ones currently implemented F5 call=cex_compile F6 produce=kc_competitive_intelligence_methods.md F7 govern=frontmatter+ascii+tables F8 collaborate=N01_intelligence/P01_knowledge/ -->
+
+## Definition
+
+Competitive Intelligence (CI) is the systematic process of gathering, analyzing, and acting on information about competitors, markets, and the external environment to support strategic decision-making.
+
+CI is NOT: corporate espionage, data theft, or unethical surveillance.
+CI IS: legal, ethical, methodical analysis of publicly available and licensable data.
+
+## Method Taxonomy
+
+### Primary Research Methods
+
+| Method | Data Type | Quality | N01 Automation | Use Case |
+|--------|-----------|---------|---------------|---------|
+| Customer interviews | qualitative | very high | 0% | deep buyer insight |
+| Win/loss interviews | qualitative | very high | 0% | sales intelligence |
+| Expert interviews (AlphaSights, GLG) | qualitative | high | 0% | industry expert signal |
+| Mystery shopping | observational | high | 30% | product/UX experience |
+| Direct outreach | qualitative | medium | 10% | relationship intelligence |
+
+Primary methods: highest quality, not automatable at N01 scale. Use for high-stakes decisions.
+
+### Secondary Research Methods
+
+| Method | Data Type | Quality | N01 Automation | Use Case |
+|--------|-----------|---------|---------------|---------|
+| Analyst reports (Gartner, IDC, CB Insights) | quantitative + qualitative | high | 40% | market sizing, trends |
+| SEC/regulatory filings | quantitative | very high | 80% | financial data |
+| Academic papers (Semantic Scholar) | qualitative | very high | 80% | technical capability |
+| Patent databases | structured | high | 70% | IP / innovation signal |
+| Job posting analysis | structured | high | 90% | hiring signal = strategic intent |
+| Web scraping / crawling | varies | medium | 95% | pricing, feature changes |
+| Social listening | qualitative | medium | 70% | brand, sentiment |
+
+### Tertiary / Derived Methods
+
+| Method | Data Type | Quality | N01 Automation | Use Case |
+|--------|-----------|---------|---------------|---------|
+| Search volume trends | derived | medium | 90% | market interest |
+| App store ranking trends | derived | medium | 80% | product adoption |
+| GitHub activity | derived | high | 95% | open-source / technical |
+| LinkedIn hiring trends | derived | high | 85% | talent strategy |
+| News event frequency | derived | medium | 90% | industry momentum |
+
+## CI Analytical Frameworks
+
+| Framework | Best For | Analytical Output | N01 Applicability |
+|-----------|---------|------------------|------------------|
+| Porter's Five Forces | industry structure | market power map | high |
+| SWOT Analysis | entity assessment | strength/weakness matrix | high |
+| War Gaming | scenario planning | competitive response prediction | medium |
+| SCIP Model | ongoing intelligence | intelligence cycle management | high |
+| PESTEL | macro environment | strategic context | medium |
+| Competitor Profile Template | standard CI | entity profile | very high |
+
+## Intelligence Cycle (SCIP Standard)
+
+```
+1. PLAN: define intelligence need (gap in knowledge)
+2. COLLECT: gather data from methods above
+3. PROCESS: clean, translate, normalize data
+4. ANALYZE: apply frameworks, synthesize
+5. DISSEMINATE: deliver to decision makers
+6. FEEDBACK: assess usefulness, refine next cycle
+```
+
+N01 automates steps 2-4 heavily. Steps 1, 5, 6 require human judgment (GDP).
+
+## Evidence Grading System (Intelligence Community Standard)
+
+| Grade | Source Reliability | Information Credibility | Overall |
+|-------|-------------------|------------------------|---------|
+| A1 | Completely reliable | Confirmed | Gold standard |
+| B2 | Usually reliable | Probably true | Primary use |
+| C3 | Fairly reliable | Possibly true | Use with caveat |
+| D4 | Not usually reliable | Doubtful | Flag clearly |
+| F6 | Reliability unknown | Cannot be judged | Do not cite |
+
+N01 maps: primary sources -> A1/B2, secondary -> C3/D4, social -> D4/F6
+
+## Comparison: CI Approaches
+
+| Approach | Depth | Automation | Analytical Envy Coverage |
+|----------|-------|-----------|------------------------|
+| Ad-hoc research | low | 0% | none |
+| Traditional CI (SCIP cycle) | high | 20% | partial |
+| N01 automated CI (this system) | high | 80% | full |
+| Commercial CI tools (Crayon, Klue) | medium | 90% | medium (no deep analysis) |
+
+N01 advantage: combines automation depth with analytical rigor of SCIP.
+
+## Related Artifacts
+
+| Artifact | Relationship | Score |
+|----------|-------------|-------|
+| [[p12_dr_intelligence]] | downstream | 0.30 |
+| [[n01_kc_intelligence_domain]] | sibling | 0.29 |
+| [[p01_kc_intelligence_best_practices]] | sibling | 0.26 |
+| [[p03_sp_n01_intelligence]] | downstream | 0.23 |
+| [[n01_dr_intelligence]] | downstream | 0.23 |
+| [[p03_pt_intelligence_analysis]] | downstream | 0.22 |
+| [[p07_sr_intel_research]] | downstream | 0.21 |
+| [[n01_intelligence]] | downstream | 0.21 |
+| [[kc_8f_pipeline_implementation]] | sibling | 0.21 |
+| [[n01_tool_research_pipeline]] | downstream | 0.21 |

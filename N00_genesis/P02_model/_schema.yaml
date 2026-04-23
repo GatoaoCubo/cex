@@ -1,0 +1,267 @@
+pillar: P02
+name: Model
+description: WHO the agent IS
+frontmatter_cex:
+  related:
+    type: list[string]
+    required: recommended
+    description: "Artifact IDs of related artifacts (upstream, downstream, sibling, alternative)"
+    format: "[p{XX}_{kind}_{slug}, ...]"
+    max: 15
+    min: 0
+    validator: S_RELATED
+    note: "Auto-populated by cex_wikilink.py, manually curated by builders. Supersedes related_agents for cross-pillar links."
+kinds:
+  agent:
+    description: Agent definition (persona + capabilities)
+    boundary: Complete agent definition (persona + capabilities). NOT a skill (P04, executable ability) nor system_prompt (P03, how it speaks).
+    layer: spec
+    core: true
+    machine_format: yaml
+    naming: p02_agent_{{name}}.md + .yaml
+    constraints:
+      max_bytes: 5120
+      quality_min: 7.0
+    frontmatter_required:
+    - id
+    - kind
+    - pillar
+    - title
+    - version
+    - agent_group
+    - domain
+    - quality
+    - tags
+    - tldr
+    body_structure:
+    - overview
+    - architecture
+    - file_structure
+    - when_to_use
+    - input_output
+    - integration
+    - quality_gates
+    - common_issues
+    - invocation
+    - related_agents
+    - footer
+    iso_vectorstore:
+      min_files: 10
+      required:
+      - MANIFEST
+      - QUICK_START
+      - PRIME
+      - INSTRUCTIONS
+      - ARCHITECTURE
+      - OUTPUT_TEMPLATE
+      - EXAMPLES
+      - ERROR_HANDLING
+      - UPLOAD_KIT
+      - SYSTEM_INSTRUCTION
+    llm_function: BECOME
+  lens:
+    description: Specialized perspective on domain
+    boundary: Specialized perspective on domain. NOT an agent (no capabilities) nor mental_model (no routing rules).
+    layer: content
+    core: false
+    machine_format: yaml
+    naming: p02_lens_{{perspective}}.md + .yaml
+    constraints:
+      max_bytes: 2048
+    frontmatter_required:
+    - id
+    - kind
+    - perspective
+    - applies_to
+    llm_function: INJECT
+  boot_config:
+    description: Per-provider initialization configuration
+    boundary: Bootstrap per provider (claude, cursor, codex). NOT an env_config (P09, generic variables) nor spawn_config (P12, agent_groups).
+    layer: runtime
+    core: false
+    machine_format: yaml
+    naming: p02_boot_{{provider}}.md
+    constraints:
+      max_bytes: 2048
+    frontmatter_required:
+    - id
+    - provider
+    - identity
+    - constraints
+    - tools
+    llm_function: GOVERN
+  mental_model:
+    description: Agent mental map (routing, decisions)
+    boundary: Fixed agent identity with routing and decisions. NOT a runtime_state P10 (variable state per session).
+    layer: spec
+    core: true
+    machine_format: yaml
+    naming: p02_mm_{{agent}}.yaml
+    constraints:
+      max_bytes: 2048
+    frontmatter_required:
+    - id
+    - agent
+    - routing_rules
+    - decision_tree
+    llm_function: BECOME
+  model_card:
+    description: LLM spec (pricing, context window, capabilities)
+    boundary: LLM spec (pricing, context window, capabilities). NOT an agent (P02, who uses the model) nor boot_config (how it starts).
+    layer: spec
+    core: false
+    machine_format: yaml
+    naming: p02_mc_{{model}}.md + .yaml
+    constraints:
+      max_bytes: 2048
+    frontmatter_required:
+    - id
+    - model_name
+    - provider
+    - context_window
+    - pricing
+    llm_function: GOVERN
+  router:
+    description: Routing rule (task > agent_group)
+    boundary: Task-to-agent_group routing. NOT a dispatch_rule (P12, keyword>agent_group) nor fallback_chain (model>model).
+    layer: runtime
+    core: true
+    machine_format: yaml
+    naming: p02_rt_{{scope}}.yaml
+    constraints:
+      max_bytes: 1024
+    frontmatter_required:
+    - id
+    - routes
+    - fallback
+    llm_function: REASON
+  distillation_config:
+    description: Teacher-student model distillation configuration
+    boundary: Model distillation config (teacher-student, compression). NOT finetune_config (general fine-tuning) nor training_method (training approach).
+    layer: spec
+    core: false
+    machine_format: yaml
+    naming: p02_dc_{{model}}.md + .yaml
+    constraints:
+      max_bytes: 3072
+    frontmatter_required:
+    - id
+    - kind
+    - pillar
+    - teacher_model
+    - student_model
+    - distillation_method
+    llm_function: CONSTRAIN
+  fallback_chain:
+    description: Fallback sequence (model A > B > C)
+    boundary: Fallback sequence between LLM models. NOT a chain (P03, prompt sequence) nor router (task routing).
+    layer: runtime
+    core: false
+    machine_format: yaml
+    naming: p02_fb_{{chain}}.yaml
+    constraints:
+      max_bytes: 512
+    frontmatter_required:
+    - id
+    - chain
+    - timeout_per_step
+    llm_function: GOVERN
+  agent_package:
+    description: Portable AI agent package (ISO format) — self-contained, LLM-agnostic
+    boundary: Distributable agent package in ISO format. NOT an agent (agent spec) — agent_package is the portable bundle.
+    layer: spec
+    core: true
+    machine_format: yaml
+    naming: agents/{{agent_name}}/manifest.yaml
+    constraints:
+      max_bytes: 4096
+    required_files:
+    - manifest.yaml
+    - system_instruction.md
+    - instructions.md
+    recommended_files:
+    - architecture.md
+    - output_template.md
+    - examples.md
+    - error_handling.md
+    optional_files:
+    - quick_start.md
+    - input_schema.yaml
+    - upload_kit.md
+    - upload_kit_whitelabel.md
+    tiers:
+      minimal: 3
+      standard: 7
+      complete: 10
+      whitelabel: 12
+    quality_gates:
+      system_instruction_max_tokens: 4096
+      min_examples: 2
+      density_min: 0.8
+      score_min: 8.0
+      no_hardcoded_paths: true
+    lp_mapping:
+      manifest.yaml: P02
+      system_instruction.md: P03
+      instructions.md: P03
+      architecture.md: P08
+      output_template.md: P05
+      examples.md: P07
+      error_handling.md: P11
+      quick_start.md: P01
+      input_schema.yaml: P06
+      upload_kit.md: P04
+    llm_function: BECOME
+  axiom:
+    boundary: Immutable fundamental rule. NOT an invariant (P08, adjustable operational) nor instruction (P03, flexible).
+    constraints:
+      max_bytes: 3072
+    core: true
+    description: Immutable fundamental principle — part of the entity's deep identity
+    layer: governance
+    llm_function: BECOME
+    machine_format: yaml
+    naming: p10_ax_{{rule}}.md
+  handoff_protocol:
+    description: Inter-agent transfer protocol
+    boundary: A2A handoff. NOT a dispatch_rule.
+    layer: runtime
+    core: true
+    machine_format: yaml
+    naming: p02_handoff.md
+    constraints:
+      max_bytes: 2048
+    frontmatter_required:
+    - id
+    - name
+    - trigger
+    - context_passed
+    - return_contract
+    llm_function: COLLABORATE
+  memory_scope:
+    description: Agent memory configuration
+    boundary: Which memory to use. NOT session_state.
+    layer: runtime
+    core: false
+    machine_format: yaml
+    naming: p02_memscope.md
+    constraints:
+      max_bytes: 2048
+    frontmatter_required:
+    - id
+    - name
+    - memory_types
+    - backend
+    - ttl
+    llm_function: INJECT
+  personality:
+    description: Hot-swappable persona -- voice/tone/values layer applied to an agent at runtime
+    boundary: Hot-swappable persona (voice/tone/values). NOT agent (full spec) nor agent_profile (runtime config) nor system_prompt (full prompt).
+    layer: runtime
+    core: false
+    machine_format: yaml
+    naming: p02_per_{{name}}.md
+    constraints:
+      max_bytes: 3072
+    llm_function: INJECT
+    upstream_source: NousResearch/hermes-agent (SOUL.md pattern)

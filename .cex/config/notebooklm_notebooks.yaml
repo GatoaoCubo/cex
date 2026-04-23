@@ -1,0 +1,81 @@
+# NotebookLM Domain → Notebook Mapping
+# GDP D1: 1 notebook per DOMAIN (reusable, not per-mission)
+# Managed by: cex_notebooklm.py
+# Spec: _docs/specs/spec_notebooklm_pipeline.md
+
+version: 1
+google_account: "{{BRAND_EMAIL}}"   # GDP D5
+publish_mode: auto                            # GDP D3
+browser_engine: chrome_local                  # GDP D4
+default_outputs:                              # GDP D2
+  - flashcards
+  - audio_summary
+  - quiz
+
+cookie_source: "%LOCALAPPDATA%\\notebooklm-mcp\\Data\\browser_state\\state.json"
+
+domains:
+  meta:
+    notebook_id: "940fd258-847f-47c1-b7e6-caca7b730681"
+    name: "CEX Meta Knowledge"
+    description: "8F pipeline, architecture, nuclei, pillars, system design"
+    sources:
+      - path: "P01_knowledge/library/domain/meta/kc_8f_pipeline.md"
+        uploaded: 2026-04-06
+    source_count: 2
+    outputs_generated:
+      - type: flashcards
+        count: 75
+        generated: 2026-04-06
+    last_sync: 2026-04-06T17:00:00-03:00
+    status: active
+
+  brand:
+    notebook_id: null
+    name: "Brand Knowledge"
+    description: "Brand identity, voice, visual guidelines, positioning"
+    sources: []
+    source_count: 0
+    outputs_generated: []
+    last_sync: null
+    status: pending
+
+  integration:
+    notebook_id: null
+    name: "Integration Knowledge"
+    description: "External tool integrations: Canva, ElevenLabs, YouTube, etc."
+    sources: []
+    source_count: 0
+    outputs_generated: []
+    last_sync: null
+    status: pending
+
+  kind:
+    notebook_id: null
+    name: "Kind Reference"
+    description: "115 kind KCs — type system, builders, schemas"
+    sources: []
+    source_count: 0
+    outputs_generated: []
+    last_sync: null
+    status: pending
+
+  operations:
+    notebook_id: null
+    name: "Operations Knowledge"
+    description: "DevOps, CI/CD, testing, deployment patterns"
+    sources: []
+    source_count: 0
+    outputs_generated: []
+    last_sync: null
+    status: pending
+
+  commercial:
+    notebook_id: null
+    name: "Commercial Knowledge"
+    description: "Pricing, monetization, funnels, courses"
+    sources: []
+    source_count: 0
+    outputs_generated: []
+    last_sync: null
+    status: pending

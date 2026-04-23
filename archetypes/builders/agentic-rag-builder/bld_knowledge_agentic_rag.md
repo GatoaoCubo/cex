@@ -1,0 +1,82 @@
+---
+kind: knowledge_card
+id: bld_knowledge_card_agentic_rag
+pillar: P01
+llm_function: INJECT
+purpose: Domain knowledge for agentic_rag production
+quality: 9.2
+title: "Knowledge Card Agentic Rag"
+version: "1.0.0"
+author: wave1_builder_gen_v2
+tags: [agentic_rag, builder, knowledge_card]
+tldr: "Domain knowledge for agentic_rag production"
+domain: "agentic_rag construction"
+created: "2026-04-14"
+updated: "2026-04-14"
+density_score: 0.85
+related:
+  - bld_tools_agentic_rag
+  - bld_instruction_agentic_rag
+  - p01_kc_academic_rag_patterns
+  - agentic-rag-builder
+  - p04_fn_search_web
+  - bld_output_template_agentic_rag
+  - atom_21_rag_taxonomy
+  - p03_sp_agentic_rag_builder
+  - kc_agentic_rag
+  - p01_kc_rag_hybrid
+---
+
+## Domain Overview
+Agentic RAG extends vanilla RAG by adding a **retrieve->reflect->re-query loop**: the agent evaluates retrieved documents, decides whether they are sufficient, and issues corrective sub-queries before generating. This loop is the defining characteristic separating agentic RAG from static RAG pipelines.
+
+Published variants differ on where and how the reflection happens: Self-RAG (Asai 2023) uses special reflection tokens trained into the model; CRAG (Yan 2024) adds an external retrieval evaluator that triggers web search when documents are irrelevant; RAG-Fusion generates multiple sub-queries and reranks via RRF; Adaptive RAG classifies query complexity to choose single-hop vs multi-hop retrieval. All share the core loop but differ in trigger mechanism and correction strategy.
+
+## Key Concepts
+| Concept | Definition | Source |
+|---|---|---|
+| Retrieve->Reflect->Re-query loop | Core agentic pattern: retrieve, assess relevance, issue corrective queries if needed | Asai et al. 2023 |
+| Self-RAG | Trains model to emit [Retrieve], [ISREL], [ISSUP], [ISUSE] tokens; retrieval is model-driven | Asai et al. 2023 (arXiv:2310.11511) |
+| CRAG (Corrective RAG) | External retrieval evaluator scores retrieved docs; triggers web search on low-confidence | Yan et al. 2024 (arXiv:2401.15884) |
+| RAG-Fusion | Multi-query generation + Reciprocal Rank Fusion (RRF) reranking across result sets | Rackauckas 2024 |
+| Adaptive RAG | Query complexity classifier (simple/multi-step/iterative) routes to appropriate pipeline | Jeong et al. 2024 (arXiv:2403.14403) |
+| ReAct over retrievers | Interleaves Reason + Act (retrieve) steps in a trace; LangGraph native pattern | Yao et al. 2023 |
+| Reflection trigger | Condition that activates re-query: low similarity score, contradictory evidence, missing entity | LangGraph agentic RAG |
+| Corrective fallback | Action taken on failed retrieval: web search (CRAG), sub-query decomposition, or abort | Yan et al. 2024 |
+
+## Industry Standards
+- Self-RAG: Asai et al. 2023 (arXiv:2310.11511) -- self-reflection token training
+- CRAG: Yan et al. 2024 (arXiv:2401.15884) -- retrieval evaluator + corrective action
+- RAG-Fusion: Rackauckas 2024 -- multi-query RRF reranking
+- Adaptive RAG: Jeong et al. 2024 (arXiv:2403.14403) -- complexity-based routing
+- LangGraph agentic RAG (retrieve->grade->generate StateGraph)
+- LlamaIndex AgentRunner (tool-calling with retrieval as a tool)
+
+## Common Patterns
+1. **Loop termination contract**: max_reflection_iterations (default 3-4) prevents infinite re-query spirals.
+2. **Reflection scoring**: use similarity threshold or LLM grader to decide if retrieved docs are relevant.
+3. **Corrective fallback chain**: irrelevant docs -> sub-query decomposition -> web search -> abort with disclaimer.
+4. **Multi-source fusion**: combine vector store + graph store + web results via RRF before generation.
+5. **Tool plan coverage**: document which tools (retrieve_vector, retrieve_graph, generate_subquery, reflect_plan) map to each loop phase.
+
+## Pitfalls
+- Infinite loops: no termination condition on re-query iterations leads to runaway token spend.
+- Conflating Self-RAG (model-intrinsic) with ReAct (tool-calling): they require different configurations.
+- Hallucinated reflection: agent claims documents are insufficient without a measurable relevance signal.
+- Missing corrective fallback: without CRAG-style web search or sub-query, failure mode is silent hallucination.
+- Treating Adaptive RAG as generic routing: complexity classifier must be calibrated per domain query distribution.
+
+## Related Artifacts
+
+| Artifact | Relationship | Score |
+|----------|-------------|-------|
+| [[bld_tools_agentic_rag]] | downstream | 0.58 |
+| [[bld_instruction_agentic_rag]] | downstream | 0.50 |
+| [[p01_kc_academic_rag_patterns]] | sibling | 0.37 |
+| [[agentic-rag-builder]] | related | 0.37 |
+| [[p04_fn_search_web]] | downstream | 0.36 |
+| [[bld_output_template_agentic_rag]] | downstream | 0.35 |
+| [[atom_21_rag_taxonomy]] | sibling | 0.34 |
+| [[p03_sp_agentic_rag_builder]] | downstream | 0.33 |
+| [[kc_agentic_rag]] | sibling | 0.31 |
+| [[p01_kc_rag_hybrid]] | sibling | 0.30 |

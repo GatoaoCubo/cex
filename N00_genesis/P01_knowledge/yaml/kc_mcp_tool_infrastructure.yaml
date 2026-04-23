@@ -1,0 +1,79 @@
+# CEX knowledge_card | YAML-first | LLM-native
+# Generated from: organization-core/records/pool/knowledge/KC_knowledge_agent_363_CLAUDE_TOOL_INFRASTRUCTURE_MCP.md
+# Shokunin: rewritten as structured YAML — zero prose, 100% parseable
+
+id: kc_mcp_tool_infrastructure
+type: knowledge_card
+lp: P01
+llm_function: INJECT
+title: "Claude MCP Tool Infrastructure — Connector, Skills, Search, Programmatic Calling"
+version: 2.0.0
+created: 2026-02-23
+updated: 2026-03-25
+author: orchestrator
+domain: architecture
+quality: 9.5
+tags: [mcp, tools, infrastructure, api, scaling, claude]
+tldr: "4 primitivas de tool infrastructure: MCP connector (remote servers), agent skills (reusable bundles), tool search (100+ discovery), programmatic calling (deterministic execution)"
+
+when_to_use: "Quando escalar tools alem de 20, conectar MCP servers remotos, ou construir skill libraries reutilizaveis"
+keywords: [mcp_connector, tool_search, agent_skills, programmatic_calling, tool_scaling]
+source: "platform.claude.com/docs/en/agents-and-tools"
+code_provenance: "Claude API docs 2026-02"
+confidence: 1.0
+linked_kcs: [kc_pytha_361_server_tools, kc_pytha_037_plugins]
+
+content:
+  summary: "Claude expoe 4 primitivas para escalar tool ecosystems: MCP connector (roteamento direto a MCP servers remotos via API), agent skills (bundles reutilizaveis de tools+prompts+behavior), tool search (descoberta dinamica para 100+ tools por indexacao de descricoes), e programmatic calling (execucao deterministica sem decisao do LLM)."
+
+  facts:
+    - claim: "MCP connector traduz protocol MCP para Claude API — inputSchema vira input_schema (snake_case)"
+      source: "platform.claude.com/docs/mcp-connector"
+      confidence: 1.0
+    - claim: "Tool search indexa descricoes e retorna apenas tools relevantes por query — previne context window bloat"
+      source: "platform.claude.com/docs/tool-search"
+      confidence: 1.0
+    - claim: "Agent skills sao capability bundles nomeados — tools + prompts + behavior compartilhaveis entre agentes"
+      source: "platform.claude.com/docs/agent-skills"
+      confidence: 1.0
+    - claim: "Programmatic calling executa tool especifica sem LLM decidir — util quando routing eh deterministic"
+      source: "platform.claude.com/docs/programmatic-calling"
+      confidence: 1.0
+    - claim: "MCP connector elimina necessidade de construir MCP client customizado"
+      source: "platform.claude.com/docs/mcp-connector"
+      confidence: 1.0
+
+  patterns:
+    - trigger: "< 20 tools"
+      action: "Definir tools inline no request"
+    - trigger: "20-100 tools"
+      action: "Usar tool search para descoberta dinamica"
+    - trigger: "100+ tools"
+      action: "MCP connector para servers remotos + tool search"
+    - trigger: "Routing deterministic (sabe qual tool usar)"
+      action: "Programmatic calling — bypassa selecao do LLM"
+    - trigger: "Mesma capability em N agentes"
+      action: "Encapsular em agent skill reutilizavel"
+
+  anti_patterns:
+    - "Enviar 100+ tool definitions em cada request (usar tool search)"
+    - "Construir MCP client custom quando connector ja resolve"
+    - "Hardcodar tool routing quando programmatic calling faz melhor"
+    - "Duplicar tool definitions entre agentes (usar skills para reuso)"
+
+  code_snippets:
+    - lang: python
+      purpose: "Converter MCP tools para formato Claude API"
+      source_file: "platform.claude.com/docs/mcp-connector#conversion"
+      code: |
+        claude_tools = [{
+            "name": tool.name,
+            "description": tool.description,
+            "input_schema": tool.inputSchema  # MCP camelCase -> Claude snake_case
+        } for tool in mcp_tools.tools]
+
+  relationships:
+    - target: kc_pytha_361_server_tools
+      relation: extends
+    - target: kc_pytha_037_plugins
+      relation: uses

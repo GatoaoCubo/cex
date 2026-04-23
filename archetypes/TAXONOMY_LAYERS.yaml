@@ -1,0 +1,253 @@
+# TAXONOMY_LAYERS.yaml
+# CEX Artifact Taxonomy — 5 Layers + Core 24 + Extensions + Overlap Boundaries
+# Generated: 2026-03-23 | Author: knowledge_agent | Quality: 9.5
+# Source: COVERAGE_68_TYPES.md + all 12 _schema.yaml files
+
+layers:
+  spec:
+    description: "Define o que algo eh — estatico, imutavel por run"
+    count: 17
+    kinds:
+      - model_card          # P02 — spec do LLM (pricing, context, capabilities)
+      - interface           # P06 — contrato de integracao entre agentes
+      - input_schema        # P06 — contrato de entrada
+      - output_schema_P06   # P06 — contrato de saida (validacao entre sistemas)
+      - validator           # P06 — regra de validacao
+      - type_def            # P06 — definicao de tipo customizado
+      - boot_config         # P02 — configuracao de inicializacao por provider
+      - mental_model_P02    # P02 — mapa de routing/decisoes (design-time)
+      - agent_package         # P02 — pacote portable de agente (self-contained)
+      - output_schema_P05   # P05 — formato de saida do LLM
+      - naming_rule         # P05 — regra de nomenclatura
+      - agent_card      # P08 — deployment spec: identity + model + tools + boot + dispatch (A2A AgentCard)
+      - pattern             # P08 — pattern reutilizavel
+      - law                 # P08 — lei operacional (inviolavel)
+      - diagram             # P08 — diagrama de arquitetura
+      - component_map       # P08 — mapa de componentes
+      - embedding_config    # P01 — configuracao de embedding model
+
+  content:
+    description: "Conhecimento destilado — criado, versionado"
+    count: 8
+    kinds:
+      - knowledge_card      # P01 — fato atomico pesquisavel
+      - rag_source          # P01 — fonte externa indexavel
+      - glossary_entry      # P01 — definicao de termo
+      - context_doc         # P01 — contexto de dominio
+      - few_shot_example    # P01 — exemplo input/output para prompt
+      - lens                # P02 — perspectiva especializada sobre dominio
+      - axiom               # P10 — regra fundamental imutavel
+      - learning_record     # P10 — registro de aprendizado
+
+  prompt:
+    description: "Instrucoes para LLM — executavel, texto"
+    count: 5
+    kinds:
+      - system_prompt       # P03 — identidade + regras do agente
+      - action_prompt       # P03 — prompt de acao task-focused
+      - prompt_template     # P03 — template com vars para reuso
+      - instruction         # P03 — instrucao operacional passo-a-passo
+      - chain               # P03 — sequencia de prompts (A→B→C)
+
+  runtime:
+    description: "Executam em runtime — estado efemero ou persistente"
+    count: 32
+    kinds:
+      - agent               # P02 — entidade executora (persona + capabilities)
+      - router              # P02 — regra de roteamento (task→agent_group)
+      - fallback_chain      # P02 — sequencia de fallback (model A→B→C)
+      - skill               # P04 — habilidade reutilizavel (phases + trigger)
+      - mcp_server          # P04 — servidor MCP (tools + resources)
+      - hook                # P04 — pre/post processing hook
+      - plugin              # P04 — extensao plugavel
+      - client              # P04 — cliente de API
+      - cli_tool            # P04 — ferramenta CLI
+      - scraper             # P04 — extrator de dados web
+      - connector           # P04 — conector de servico externo
+      - daemon              # P04 — processo background
+      - parser              # P05 — extrator de dados de saida
+      - formatter           # P05 — formatador de saida
+      - env_config          # P09 — variaveis de ambiente
+      - path_config         # P09 — caminhos do sistema
+      - feature_flag        # P09 — flag de feature (on/off)
+      - runtime_rule        # P09 — regra de runtime (timeouts, retries)
+      - mental_model_P10    # P10 — modelo mental persistente em runtime
+      - knowledge_index         # P10 — indice de busca (BM25, FAISS)
+      - session_state       # P10 — estado de sessao (efemero)
+      - workflow            # P12 — fluxo de trabalho (steps paralelos/sequenciais)
+      - dag                 # P12 — grafo aciclico de dependencias
+      - spawn_config        # P12 — configuracao de spawn (solo, grid, continuous)
+      - signal              # P12 — sinal entre agentes (complete, error, progress)
+      - handoff             # P12 — instrucao de handoff (task + context + commit)
+      - dispatch_rule       # P12 — regra de despacho (keyword→agent_group)
+      - bugloop             # P11 — ciclo de correcao automatica
+      - optimizer           # P11 — otimizador de processo (metric→action)
+      - memory_scope        # P10 — configuracao de escopo de memoria por builder
+      - effort_profile      # P09 — perfil de esforco/thinking por builder
+      - hook_config         # P04 — configuracao de hooks lifecycle por builder
+
+  governance:
+    description: "Qualidade, seguranca, evolucao — regras de melhoria"
+    count: 10
+    kinds:
+      - unit_eval           # P07 — teste unitario de agente/prompt
+      - smoke_eval          # P07 — teste rapido de sanidade (<30s)
+      - e2e_eval            # P07 — teste end-to-end (pipeline completo)
+      - benchmark           # P07 — medicao de performance (latencia, custo)
+      - golden_test         # P07 — caso de teste referencia (quality 9.5+)
+      - scoring_rubric      # P07 — criterio de avaliacao (5D, 12LP, custom)
+      - quality_gate        # P11 — barreira de qualidade (pass/fail com score)
+      - lifecycle_rule      # P11 — regra de ciclo de vida (archive, promote)
+      - guardrail           # P11 — restricao de seguranca (safety boundary)
+      - permission          # P09 — regra de permissao (read/write/execute)
+
+core_24:
+  description: "Necessarios para qualquer sistema agentico, independente de stack"
+  criteria:
+    - "Sem eles o sistema nao funciona"
+    - "Cobrem todas as 5 camadas"
+    - "Suficientes para bootstrapar do zero"
+  spec:       [interface, validator, input_schema, model_card]
+  content:    [knowledge_card, rag_source, glossary_entry, context_doc, few_shot_example]
+  prompt:     [system_prompt, instruction, action_prompt, chain]
+  runtime:    [agent, skill, mcp_server, workflow, signal, spawn_config]
+  governance: [scoring_rubric, quality_gate, guardrail, lifecycle_rule, golden_test]
+
+extensions:
+  description: "45 tipos — organization-specific ou avancados (validos, opcionais)"
+  derivado:
+    reason: "Derivado de tipo core — especializacao ou split de responsabilidade"
+    kinds: [output_schema_P05, type_def, router, fallback_chain, parser, formatter, naming_rule]
+  especializacao:
+    reason: "Especializacao de eval ou ciclo — util mas nao universal"
+    kinds: [unit_eval, smoke_eval, e2e_eval, benchmark, bugloop, prompt_template]
+  interno:
+    reason: "organization-specific — util neste sistema, nao universal"
+    kinds:
+      - agent_package
+      - agent_card
+      - pattern
+      - law
+      - component_map
+      - diagram
+      - knowledge_index
+      - mental_model_P02
+      - mental_model_P10
+      - boot_config
+      - lens
+      - axiom
+      - learning_record
+      - session_state
+      - handoff
+      - dag
+      - dispatch_rule
+      - optimizer
+      - permission
+  avancado:
+    reason: "Avancado ou tool-specific — requer infraestrutura dedicada"
+    kinds:
+      - plugin
+      - hook
+      - client
+      - cli_tool
+      - scraper
+      - connector
+      - daemon
+      - env_config
+      - path_config
+      - feature_flag
+      - runtime_rule
+      - embedding_config
+      - output_schema_P06
+
+overlaps:
+  - pair: [output_schema_P05, output_schema_P06]
+    boundary: "P05 = formato de saida do LLM; P06 = contrato de validacao entre sistemas"
+    resolution: "P06 canonico como output_schema; P05 renomear para output_format"
+    severity: high
+
+  - pair: [mental_model_P02, mental_model_P10]
+    boundary: "P02 = blueprint estatico de design; P10 = estado persistido em runtime"
+    resolution: "Renomear P02->agent_blueprint; P10->runtime_state"
+    severity: high
+
+  - pair: [instruction, action_prompt]
+    boundary: "instruction = receita operacional passo-a-passo; action_prompt = prompt conversacional task-focused"
+    resolution: "Manter separados — instruction para agentes, action_prompt para LLMs"
+    severity: low
+
+  - pair: [hook, lifecycle_rule]
+    boundary: "hook = gatilho tecnico de evento (pre/post/stop); lifecycle_rule = politica de ciclo de vida de artefato"
+    resolution: "Manter separados — hook P04/P12, lifecycle_rule P11"
+    severity: low
+
+  - pair: [chain, workflow]
+    boundary: "chain = sequencia de prompts (texto->texto); workflow = orquestracao de runtime (agentes+sinais)"
+    resolution: "Manter separados — chain P03, workflow P12"
+    severity: medium
+
+  - pair: [signal, dispatch_rule]
+    boundary: "signal = dado de evento (o que/quando/quem); dispatch_rule = logica de roteamento (se X->Y)"
+    resolution: "Manter separados — signal eh dado, dispatch_rule eh logica"
+    severity: low
+
+  - pair: [memory_scope, learning_record]
+    boundary: "memory_scope = CONFIG de como memoria funciona; learning_record = CONTEUDO da memoria"
+    resolution: "Manter separados — memory_scope P10 config, learning_record P10 content"
+    severity: medium
+
+  - pair: [effort_profile, runtime_rule]
+    boundary: "effort_profile = QUAL modelo/thinking usar; runtime_rule = QUANDO/COMO executar"
+    resolution: "Manter separados — effort_profile P09 model selection, runtime_rule P09 execution"
+    severity: medium
+
+  - pair: [hook_config, hook]
+    boundary: "hook_config = DECLARACAO de quais hooks; hook = IMPLEMENTACAO do hook"
+    resolution: "Manter separados — hook_config P04 declaration, hook P04 implementation"
+    severity: medium
+
+v2_proposals:
+  fusions:
+    - from: [output_schema_P05, output_schema_P06]
+      to: output_schema
+      canonical_lp: P06
+      note: "P05 vira output_format (presentacao); P06 vira output_schema (validacao)"
+
+    - from: [mental_model_P02, mental_model_P10]
+      to: [agent_blueprint, runtime_state]
+      note: "Clarifica design-time vs runtime sem perder semantica"
+
+  splits:
+    - from: bugloop
+      to: [bug_detector, fix_verifier]
+      note: "Separa deteccao de verificacao para composibilidade"
+
+  reclassifications:
+    - type: few_shot_example
+      from_lp: P01
+      to_lp: P03
+      reason: "Eh prompt engineering, nao conhecimento puro"
+    - type: hook
+      from_lp: P04
+      to_lp: P12
+      reason: "Evento de orquestracao, nao ferramenta"
+    - type: axiom
+      from_lp: P10
+      to_lp: P01
+      reason: "Regra fundamental eh CONTENT, nao memoria"
+
+  new_types:
+    - type: eval_suite
+      lp: P07
+      description: "Container agregador de evals (unit + e2e + benchmark) — hoje ausente"
+    - type: output_format
+      lp: P05
+      description: "Formato de apresentacao de saida do LLM (renomear output_schema P05)"
+
+  deprecations:
+    - type: output_schema_P05
+      reason: "Resolver overlap — renomear para output_format"
+
+# Totals check: SPEC(17) + CONTENT(8) + PROMPT(5) + RUNTIME(32) + GOVERNANCE(10) = 72
+# Core 24: SPEC(4) + CONTENT(5) + PROMPT(4) + RUNTIME(6) + GOVERNANCE(5) = 24
+# Extensions: 72 - 24 = 48

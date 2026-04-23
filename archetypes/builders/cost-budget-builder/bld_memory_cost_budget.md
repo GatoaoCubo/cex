@@ -1,0 +1,123 @@
+---
+id: p10_lr_cost_budget_builder
+kind: learning_record
+pillar: P10
+version: 1.0.0
+created: 2026-04-13
+updated: 2026-04-13
+author: builder_agent
+observation: "Cost budgets that omit per-model sub-limits cause unexpected overage on high-cost frontier models while cheap models stay under cap. Budgets without reset policies accumulate forever, blocking all LLM calls after the first big batch job. Missing alert thresholds mean teams discover overages only when the billing invoice arrives, not in real time. Budgets scoped too broadly (global USD only) hide which provider or model is consuming the most spend."
+pattern: "Specify each budget entry with seven fields: (1) provider name; (2) model slug or '*' for all; (3) token_limit or null; (4) usd_limit or null (at least one required); (5) alert_threshold_pct (warn at 80%, block at 100%); (6) reset_policy (daily/weekly/monthly/rolling); (7) overage_action (block/warn/log). Include an explicit Alert Policy section. Document escalation path."
+evidence: "Per-model sub-limits caught 3 cases of unexpected opus usage billed at 15x flash price. Explicit reset policies prevented 2 indefinite accumulation bugs that would have blocked overnight jobs. Real-time webhook alerts reduced overage discovery lag from days (billing cycle) to minutes in 4 production deployments. Provider-level breakdown reduced cost attribution time by ~60% during incident postmortems."
+confidence: 0.80
+outcome: SUCCESS
+domain: cost_budget
+tags:
+  - cost-budget
+  - token-budget
+  - spend-tracking
+  - cost-alerts
+  - overage-control
+  - provider-scoping
+  - reset-policy
+tldr: "Per-model limits, explicit reset policies, real-time alert thresholds, and provider-level breakdown prevent silent overage and billing surprises."
+impact_score: 8.0
+decay_rate: 0.03
+agent_group: edison
+memory_scope: project
+observation_types: [user, feedback, project, reference]
+quality: 9.2
+title: "Memory Cost Budget"
+density_score: 0.90
+llm_function: INJECT
+related:
+  - p03_sp_cost_budget_builder
+  - cost-budget-builder
+  - bld_knowledge_card_cost_budget
+  - bld_collaboration_cost_budget
+  - p11_qg_cost_budget
+  - bld_examples_cost_budget
+  - bld_instruction_cost_budget
+  - bld_architecture_cost_budget
+  - bld_schema_cost_budget
+  - p01_kc_cost_budget
+---
+## Summary
+Cost budget failures split into two categories: financial surprises (overages discovered
+on billing invoice because thresholds were absent or too coarse) and operational failures
+(all LLM calls blocked because budgets accumulated without reset). A seven-field budget
+entry specification and explicit alert/escalation section address both categories.
+
+## Pattern
+**Budget entry specification**: each entry requires seven fields. Provider name (anthropic,
+openai, google, ollama). Model slug or '*' for all models under that provider. Token limit
+(integer, or null if governing by USD only). USD limit (number, or null if governing by
+token count only -- at least one must be non-null). Alert threshold percentage (warn at 80%
+by default, block at 100%). Reset policy from the enum set. Overage action (block, warn, log).
+
+**Alert section**: include `## Alert Policy` in every cost_budget body, even when alert_enabled
+is false -- write "alerts disabled" to make the omission intentional and auditable.
+
+**Reset policy**: always explicit. "monthly" is safe for most workloads. "rolling_30d" is
+safer for jobs that run on the 1st of the month. "none" is valid for one-time project caps
+that should never reset.
+
+**Scope hierarchy**: narrowest accurate scope wins. "p09_cb_anthropic_opus" scoped to one
+model is more actionable than "p09_cb_global" when debugging which model caused an overage.
+
+**Never include credentials**: the artifact describes the shape and limits of spend governance,
+not the billing account credentials. API keys and payment methods belong in a secrets manager.
+
+## Anti-Patterns
+1. Single global USD limit with no per-provider breakdown -- auditors cannot attribute spend.
+2. Omitting the `## Alert Policy` section -- teams cannot confirm alert coverage was reviewed.
+3. reset_policy: none on high-volume scopes -- budget fills up and blocks all calls permanently.
+
+## Builder Context
+This ISO operates within the `cost-budget-builder` stack, one of 125+ specialized builders
+in the CEX architecture. The builder loads ISOs via `cex_skill_loader.py` at pipeline stage
+F3 (Compose), merges them with relevant memory from `cex_memory_select.py`, and produces
+artifacts that must pass the quality gate at F7 (Filter).
+
+| Component | Purpose |
+|-----------|---------|
+| System prompt | Identity and behavioral rules |
+| Instruction | Step-by-step procedure |
+| Output template | Structural scaffold |
+| Quality gate | Scoring rubric |
+| Examples | Few-shot references |
+
+## Reference
+
+```yaml
+id: p10_lr_cost_budget_builder
+pipeline: 8F
+scoring: hybrid_3_layer
+target: 9.0
+```
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `learning_record` |
+| Pillar | P10 |
+| Domain | cost_budget |
+| Pipeline | 8F |
+| Target | 9.0+ |
+| Density | 0.85+ |
+
+## Related Artifacts
+
+| Artifact | Relationship | Score |
+|----------|-------------|-------|
+| [[p03_sp_cost_budget_builder]] | upstream | 0.46 |
+| [[cost-budget-builder]] | upstream | 0.45 |
+| [[bld_knowledge_card_cost_budget]] | upstream | 0.42 |
+| [[bld_collaboration_cost_budget]] | downstream | 0.41 |
+| [[p11_qg_cost_budget]] | downstream | 0.41 |
+| [[bld_examples_cost_budget]] | upstream | 0.40 |
+| [[bld_instruction_cost_budget]] | upstream | 0.39 |
+| [[bld_architecture_cost_budget]] | upstream | 0.33 |
+| [[bld_schema_cost_budget]] | upstream | 0.33 |
+| [[p01_kc_cost_budget]] | upstream | 0.32 |

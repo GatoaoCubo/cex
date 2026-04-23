@@ -1,0 +1,109 @@
+---
+id: leverage_map_v2_n01_tool_verification
+kind: knowledge_card
+pillar: P04
+title: LEVERAGE_MAP_V2 - N01 Tool Verification Cycle
+version: 1.0
+quality: 9.0
+tags: [leverage, tooling, n01, verification]
+density_score: 0.89
+related:
+  - leverage_map_v2_verify_cycle
+  - p04_tool_scraping_config
+  - p12_wf_auto_research
+  - n02_leverage_map_v2_codex_verification
+  - leverage_map_v2_n04_verify
+  - n01_dr_research_pipeline
+  - p08_dm_n03_leverage_v2_verification
+  - leverage_map_v2_n06_verification
+  - agent_card_n01
+  - self_audit_newpc_2026_04_13
+---
+
+# N01 Intelligence - Tool Leverage Verification
+
+Run date: 2026-04-15
+
+## Verification
+
+- Was the expected tool added? **YES.** `_tools/cex_web_fetch.py` exists in `_tools/` and is a standalone CLI fetcher.
+- Evidence:
+  - `Get-ChildItem _tools` shows `cex_web_fetch.py` (2115 bytes)
+  - `_tools/cex_web_fetch.py` exposes `fetch()`, `html_to_text()`, and `arxiv_url()`
+  - CLI surface: positional `url`, `--arxiv`, `--max-bytes`, `--raw`
+- Does its API match N01's needs? **Partially.**
+  - Matches the baseline need for live HTTP fetch and simple arXiv abstract retrieval.
+  - Does not close the citation-validator gap (validation, normalization, provenance).
+  - Does not support PDF full text, JavaScript rendering, or structured metadata extraction.
+
+`rg -n "arxiv|web_fetch" _tools` also shows adjacent arXiv-related logic in `_tools/cex_source_harvester.py` and `_tools/cex_taxonomy_scout.py`, but those are not duplicate generic fetchers. They classify or scan sources; `cex_web_fetch.py` is the only minimal fetch-and-extract utility.
+
+## New Wired Tools (since V1)
+
+- `cex_web_fetch.py`
+  - New capability: generic URL fetch with charset-aware decoding
+  - New capability: HTML to plain-text reduction
+  - New capability: `--arxiv` shortcut via `https://export.arxiv.org/abs/{id}`
+
+This closes the "web fetch / arXiv abstract fetch" gap only at a baseline ingestion level. It gives N01 a direct path to pull lightweight web content into research flows, but it does not yet turn fetched material into validated research evidence (nor does it provide search/discovery).
+
+## Still Missing
+
+- Citation validator
+  - Still missing as a dedicated tool.
+  - Current fetch output is unstructured text, so N01 still cannot check whether cited claims, authors, titles, venues, or source links are valid.
+- Web search / discovery
+  - `cex_web_fetch.py` fetches a URL you already have; it does not help N01 discover sources or build a candidate set of URLs to fetch.
+- PDF full-text extraction
+  - `cex_web_fetch.py` targets HTML and arXiv abstract pages, not paper PDFs.
+  - For N01, this is the main remaining blocker for paper-grade research.
+- Metadata extraction
+  - No structured parse of author, publish date, domain, DOI, venue, or citation list.
+- Reliability controls
+  - No retries, caching, rate limiting, or source provenance record in the fetcher itself.
+
+## Next Iteration
+
+1. Build `cex_citation_validator.py`
+   - Priority: highest
+   - Why: this is the gap explicitly left open by the previous cycle and the current fetcher does not address it.
+2. Build `cex_pdf_extract.py`
+   - Priority: high
+   - Why: arXiv support is only partial until N01 can read paper bodies instead of just abstract pages.
+3. Build/standardize a search entrypoint for N01
+   - Priority: medium
+   - Why: to bridge from "I need sources" -> "here are candidate URLs" before fetching and validating.
+
+## Notes
+
+- Minor mismatch: `--max-bytes` truncates by Python string length (chars), not encoded byte length. The behavior is still safe, but the flag name is slightly misleading.
+
+## 8F Trace
+
+```text
+=== 8F PIPELINE ===
+F1 CONSTRAIN: mission=LEVERAGE_MAP_V2, output=N01_intelligence/reports/LEVERAGE_MAP_V2_n01_tool_verification.md
+F2 BECOME: loaded N01 agent card + N01/routing rules
+F3 INJECT: handoff, prior leverage-map report path, tool inventory, related _tools context
+F4 REASON: verify existence, inspect API, check overlaps, then write evidence-based gap report
+F5 CALL: used file reads, ripgrep, compiler, git, signal writer
+F6 PRODUCE: report drafted with Verification, New Wired Tools, Still Missing, Next Iteration
+F7 GOVERN: corrected prior overclaim of "no duplicates" to "no duplicate generic fetcher"
+F8 COLLABORATE: save, compile, commit, signal
+===================
+```
+
+## Related Artifacts
+
+| Artifact | Relationship | Score |
+|----------|-------------|-------|
+| [[leverage_map_v2_verify_cycle]] | sibling | 0.43 |
+| [[p04_tool_scraping_config]] | related | 0.26 |
+| [[p12_wf_auto_research]] | downstream | 0.23 |
+| [[n02_leverage_map_v2_codex_verification]] | downstream | 0.23 |
+| [[leverage_map_v2_n04_verify]] | upstream | 0.22 |
+| [[n01_dr_research_pipeline]] | downstream | 0.22 |
+| [[p08_dm_n03_leverage_v2_verification]] | downstream | 0.21 |
+| [[leverage_map_v2_n06_verification]] | sibling | 0.20 |
+| [[agent_card_n01]] | related | 0.20 |
+| [[self_audit_newpc_2026_04_13]] | related | 0.19 |

@@ -1,0 +1,607 @@
+action_prompt:
+  builder: archetypes/builders/action-prompt-builder
+  core: true
+  description: Task prompt that the human/orchestrator sends to the agent
+  llm_function: INJECT
+  pillar: P03_prompt
+agent:
+  builder: archetypes/builders/agent-builder
+  core: true
+  description: Agent definition (persona + capabilities)
+  llm_function: BECOME
+  pillar: P02_model
+api_client:
+  builder: archetypes/builders/api-client-builder
+  core: false
+  description: Typed REST/GraphQL/gRPC API client
+  llm_function: CALL
+  pillar: P04_tools
+audio_tool:
+  builder: archetypes/builders/audio-tool-builder
+  core: false
+  description: Speech-to-text, text-to-speech, audio analysis
+  llm_function: CALL
+  pillar: P04_tools
+axiom:
+  builder: archetypes/builders/axiom-builder
+  core: true
+  description: Immutable fundamental principle -- part of the entity's deep identity
+  llm_function: BECOME
+  pillar: P02_model
+benchmark:
+  builder: archetypes/builders/benchmark-builder
+  core: false
+  description: Performance measurement (latency, cost, quality)
+  llm_function: GOVERN
+  pillar: P07_evals
+boot_config:
+  builder: archetypes/builders/boot-config-builder
+  core: false
+  description: Initialization configuration per provider
+  llm_function: GOVERN
+  pillar: P02_model
+knowledge_index:
+  builder: archetypes/builders/knowledge-index-builder
+  core: true
+  description: Search index (BM25, FAISS config)
+  llm_function: INJECT
+  pillar: P10_memory
+browser_tool:
+  builder: archetypes/builders/browser-tool-builder
+  core: true
+  description: 'Browser automation: DOM parsing, navigation, interaction, screenshot'
+  llm_function: CALL
+  pillar: P04_tools
+bugloop:
+  builder: archetypes/builders/bugloop-builder
+  core: false
+  description: Automatic correction cycle (detect > fix > verify)
+  llm_function: GOVERN
+  pillar: P11_feedback
+chain:
+  builder: archetypes/builders/chain-builder
+  core: false
+  description: Chained prompt sequence (output A -> input B)
+  llm_function: PRODUCE
+  pillar: P03_prompt
+checkpoint:
+  builder: archetypes/builders/checkpoint-builder
+  core: true
+  description: Workflow state snapshot
+  llm_function: GOVERN
+  pillar: P12_orchestration
+chunk_strategy:
+  builder: archetypes/builders/chunk-strategy-builder
+  core: true
+  description: Chunking strategy
+  llm_function: CONSTRAIN
+  pillar: P01_knowledge
+cli_tool:
+  builder: archetypes/builders/cli-tool-builder
+  core: false
+  description: CLI tool
+  llm_function: CALL
+  pillar: P04_tools
+code_executor:
+  builder: archetypes/builders/code-executor-builder
+  core: true
+  description: Sandboxed runtime for code execution (Docker, E2B, Jupyter)
+  llm_function: CALL
+  pillar: P04_tools
+component_map:
+  builder: archetypes/builders/component-map-builder
+  core: false
+  description: Component map (what connects to what)
+  llm_function: INJECT
+  pillar: P08_architecture
+computer_use:
+  builder: archetypes/builders/computer-use-builder
+  core: false
+  description: Screen, keyboard and mouse control by LLM (Anthropic, browser-use)
+  llm_function: CALL
+  pillar: P04_tools
+constraint_spec:
+  builder: archetypes/builders/constraint-spec-builder
+  core: true
+  description: Constrained generation rules
+  llm_function: CONSTRAIN
+  pillar: P03_prompt
+context_doc:
+  builder: archetypes/builders/context-doc-builder
+  core: false
+  description: Domain context
+  llm_function: INJECT
+  pillar: P01_knowledge
+daemon:
+  builder: archetypes/builders/daemon-builder
+  core: false
+  description: Background process
+  llm_function: GOVERN
+  pillar: P04_tools
+dag:
+  builder: archetypes/builders/dag-builder
+  core: false
+  description: Directed acyclic dependency graph
+  llm_function: PRODUCE
+  pillar: P12_orchestration
+db_connector:
+  builder: archetypes/builders/db-connector-builder
+  core: false
+  description: Database/structured data connector (SQL, GraphQL, REST-to-DB)
+  llm_function: CALL
+  pillar: P04_tools
+decision_record:
+  builder: archetypes/builders/decision-record-builder
+  core: true
+  description: 'ADR: context, decision, consequences'
+  llm_function: REASON
+  pillar: P08_architecture
+diagram:
+  builder: archetypes/builders/diagram-builder
+  core: false
+  description: Architecture diagram (ASCII or Mermaid)
+  llm_function: INJECT
+  pillar: P08_architecture
+director:
+  builder: archetypes/builders/supervisor-builder
+  core: true
+  description: Crew orchestrator that composes and coordinates multiple builders
+  llm_function: PRODUCE
+  pillar: P08_architecture
+dispatch_rule:
+  builder: archetypes/builders/dispatch-rule-builder
+  core: false
+  description: Dispatch rule (keyword > agent_group)
+  llm_function: REASON
+  pillar: P12_orchestration
+document_loader:
+  builder: archetypes/builders/document-loader-builder
+  core: true
+  description: Ingests files and converts to chunks (PDF, HTML, CSV, etc)
+  llm_function: INJECT
+  pillar: P04_tools
+e2e_eval:
+  builder: archetypes/builders/e2e-eval-builder
+  core: false
+  description: End-to-end test (complete pipeline)
+  llm_function: GOVERN
+  pillar: P07_evals
+embedding_config:
+  builder: archetypes/builders/embedding-config-builder
+  core: false
+  description: Embedding model configuration
+  llm_function: GOVERN
+  pillar: P01_knowledge
+entity_memory:
+  builder: archetypes/builders/entity-memory-builder
+  core: true
+  description: Entity memory
+  llm_function: INJECT
+  pillar: P10_memory
+enum_def:
+  builder: archetypes/builders/enum-def-builder
+  core: true
+  description: Reusable enumeration
+  llm_function: CONSTRAIN
+  pillar: P06_schema
+env_config:
+  builder: archetypes/builders/env-config-builder
+  core: true
+  description: Environment variables
+  llm_function: GOVERN
+  pillar: P09_config
+eval_dataset:
+  builder: archetypes/builders/eval-dataset-builder
+  core: true
+  description: Test case collection
+  llm_function: GOVERN
+  pillar: P07_evals
+fallback_chain:
+  builder: archetypes/builders/fallback-chain-builder
+  core: false
+  description: Fallback sequence (model A > B > C)
+  llm_function: GOVERN
+  pillar: P02_model
+feature_flag:
+  builder: archetypes/builders/feature-flag-builder
+  core: false
+  description: Feature flag (on/off, gradual rollout)
+  llm_function: GOVERN
+  pillar: P09_config
+few_shot_example:
+  builder: archetypes/builders/few-shot-example-builder
+  core: true
+  description: Input/output example for prompt
+  llm_function: INJECT
+  pillar: P01_knowledge
+formatter:
+  builder: archetypes/builders/formatter-builder
+  core: false
+  description: Output formatter (json, md, yaml)
+  llm_function: GOVERN
+  pillar: P05_output
+function_def:
+  builder: archetypes/builders/function-def-builder
+  core: true
+  description: LLM-callable function definition (JSON Schema tool)
+  llm_function: CALL
+  pillar: P04_tools
+glossary_entry:
+  builder: archetypes/builders/glossary-entry-builder
+  core: false
+  description: Term definition
+  llm_function: INJECT
+  pillar: P01_knowledge
+golden_test:
+  builder: archetypes/builders/golden-test-builder
+  core: true
+  description: Reference test case (quality 9.5+)
+  llm_function: GOVERN
+  pillar: P07_evals
+guardrail:
+  builder: archetypes/builders/guardrail-builder
+  core: true
+  description: Safety restriction (safety boundary)
+  llm_function: CONSTRAIN
+  pillar: P11_feedback
+handoff:
+  builder: archetypes/builders/handoff-builder
+  core: true
+  description: Handoff instruction (task + context + commit)
+  llm_function: COLLABORATE
+  pillar: P12_orchestration
+handoff_protocol:
+  builder: archetypes/builders/handoff-protocol-builder
+  core: true
+  description: Transfer protocol between agents
+  llm_function: COLLABORATE
+  pillar: P02_model
+hook:
+  builder: archetypes/builders/hook-builder
+  core: true
+  description: Pre/post processing hook
+  llm_function: GOVERN
+  pillar: P04_tools
+input_schema:
+  builder: archetypes/builders/input-schema-builder
+  core: true
+  description: Input contract
+  llm_function: CONSTRAIN
+  pillar: P06_schema
+instruction:
+  builder: archetypes/builders/instruction-builder
+  core: true
+  description: Step-by-step execution instructions for agents or pipelines
+  llm_function: PRODUCE
+  pillar: P03_prompt
+interface:
+  builder: archetypes/builders/interface-builder
+  core: false
+  description: Integration contract between agents
+  llm_function: CONSTRAIN
+  pillar: P06_schema
+agent_package:
+  builder: archetypes/builders/agent-package-builder
+  core: true
+  description: Portable AI agent package (ISO format) -- self-contained, LLM-agnostic
+  llm_function: BECOME
+  pillar: P02_model
+knowledge_card:
+  builder: archetypes/builders/knowledge-card-builder
+  core: true
+  description: Searchable atomic fact (density > 0.8)
+  llm_function: INJECT
+  pillar: P01_knowledge
+law:
+  builder: archetypes/builders/invariant-builder
+  core: true
+  description: Operational law (inviolable)
+  llm_function: CONSTRAIN
+  pillar: P08_architecture
+learning_record:
+  builder: archetypes/builders/learning-record-builder
+  core: true
+  description: Learning record (what went right/wrong)
+  llm_function: INJECT
+  pillar: P10_memory
+lens:
+  builder: archetypes/builders/lens-builder
+  core: false
+  description: Specialized perspective on a domain
+  llm_function: INJECT
+  pillar: P02_model
+lifecycle_rule:
+  builder: archetypes/builders/lifecycle-rule-builder
+  core: true
+  description: Lifecycle rule (freshness, archive, promote)
+  llm_function: GOVERN
+  pillar: P11_feedback
+llm_judge:
+  builder: archetypes/builders/llm-judge-builder
+  core: true
+  description: LLM-as-Judge config
+  llm_function: GOVERN
+  pillar: P07_evals
+mcp_server:
+  builder: archetypes/builders/mcp-server-builder
+  core: true
+  description: MCP server (tools + resources)
+  llm_function: CALL
+  pillar: P04_tools
+memory_scope:
+  builder: archetypes/builders/memory-scope-builder
+  core: false
+  description: Agent memory config
+  llm_function: INJECT
+  pillar: P02_model
+memory_summary:
+  builder: archetypes/builders/memory-summary-builder
+  core: true
+  description: Compressed memory summary
+  llm_function: INJECT
+  pillar: P10_memory
+mental_model:
+  builder: archetypes/builders/mental-model-builder
+  core: true
+  description: Agent mental map (routing, decisions)
+  llm_function: BECOME
+  pillar: P02_model
+model_card:
+  builder: archetypes/builders/model-card-builder
+  core: false
+  description: LLM spec (pricing, context, capabilities)
+  llm_function: GOVERN
+  pillar: P02_model
+naming_rule:
+  builder: archetypes/builders/naming-rule-builder
+  core: false
+  description: Naming convention rule
+  llm_function: GOVERN
+  pillar: P08
+notifier:
+  builder: archetypes/builders/notifier-builder
+  core: false
+  description: Push notification delivery (email, SMS, Slack, Discord)
+  llm_function: CALL
+  pillar: P04_tools
+optimizer:
+  builder: archetypes/builders/optimizer-builder
+  core: false
+  description: Process optimizer (metric > action)
+  llm_function: GOVERN
+  pillar: P11_feedback
+output_validator:
+  builder: archetypes/builders/output-validator-builder
+  core: true
+  description: Post-LLM validation
+  llm_function: GOVERN
+  pillar: P05_output
+parser:
+  builder: archetypes/builders/parser-builder
+  core: false
+  description: Output data extractor
+  llm_function: GOVERN
+  pillar: P05_output
+path_config:
+  builder: archetypes/builders/path-config-builder
+  core: true
+  description: System paths
+  llm_function: GOVERN
+  pillar: P09_config
+pattern:
+  builder: archetypes/builders/pattern-builder
+  core: true
+  description: 'Reusable pattern (e.g.: continuous batching)'
+  llm_function: INJECT
+  pillar: P08_architecture
+permission:
+  builder: archetypes/builders/permission-builder
+  core: true
+  description: Permission rule (read/write/execute)
+  llm_function: GOVERN
+  pillar: P09_config
+plugin:
+  builder: archetypes/builders/plugin-builder
+  core: false
+  description: Pluggable extension
+  llm_function: CALL
+  pillar: P04_tools
+prompt_template:
+  builder: archetypes/builders/prompt-template-builder
+  core: true
+  description: Reusable template with {{vars}} for generating prompts
+  llm_function: CONSTRAIN
+  pillar: P03_prompt
+prompt_version:
+  builder: archetypes/builders/prompt-version-builder
+  core: false
+  description: Versioned prompt snapshot
+  llm_function: GOVERN
+  pillar: P03_prompt
+quality_gate:
+  builder: archetypes/builders/quality-gate-builder
+  core: true
+  description: Quality barrier (pass/fail with score)
+  llm_function: GOVERN
+  pillar: P11_feedback
+rag_source:
+  builder: archetypes/builders/rag-source-builder
+  core: false
+  description: Indexable external source
+  llm_function: INJECT
+  pillar: P01_knowledge
+rate_limit_config:
+  builder: archetypes/builders/rate-limit-config-builder
+  core: true
+  description: 'Rate limiting: RPM, TPM, budget'
+  llm_function: CONSTRAIN
+  pillar: P09_config
+red_team_eval:
+  builder: archetypes/builders/red-team-eval-builder
+  core: false
+  description: Adversarial test
+  llm_function: GOVERN
+  pillar: P07_evals
+regression_check:
+  builder: archetypes/builders/regression-check-builder
+  core: false
+  description: Baseline comparison
+  llm_function: GOVERN
+  pillar: P07_evals
+response_format:
+  builder: archetypes/builders/response-format-builder
+  core: true
+  description: LLM response format (how the agent responds)
+  llm_function: CONSTRAIN
+  pillar: P05_output
+retriever:
+  builder: archetypes/builders/retriever-builder
+  core: true
+  description: Vector/keyword/hybrid search over local store (RAG core)
+  llm_function: INJECT
+  pillar: P04_tools
+retriever_config:
+  builder: archetypes/builders/retriever-config-builder
+  core: true
+  description: Retrieval config (top_k, hybrid, reranker)
+  llm_function: CONSTRAIN
+  pillar: P01_knowledge
+reward_signal:
+  builder: archetypes/builders/reward-signal-builder
+  core: true
+  description: Continuous quality signal
+  llm_function: GOVERN
+  pillar: P11_feedback
+router:
+  builder: archetypes/builders/router-builder
+  core: true
+  description: Routing rule (task > agent_group)
+  llm_function: REASON
+  pillar: P02_model
+runtime_rule:
+  builder: archetypes/builders/runtime-rule-builder
+  core: false
+  description: Runtime rule (timeouts, retries, limits)
+  llm_function: GOVERN
+  pillar: P09_config
+runtime_state:
+  builder: archetypes/builders/runtime-state-builder
+  core: true
+  description: Variable mental state per session (routing, runtime decisions)
+  llm_function: INJECT
+  pillar: P10_memory
+schedule:
+  builder: archetypes/builders/schedule-builder
+  core: false
+  description: Temporal trigger that starts a workflow
+  llm_function: GOVERN
+  pillar: P12_orchestration
+scoring_rubric:
+  builder: archetypes/builders/scoring-rubric-builder
+  core: true
+  description: Evaluation criteria (5D, 12LP, custom)
+  llm_function: GOVERN
+  pillar: P07_evals
+search_tool:
+  builder: archetypes/builders/search-tool-builder
+  core: true
+  description: Web, semantic, or hybrid search (Tavily, Serper, Perplexity)
+  llm_function: CALL
+  pillar: P04_tools
+secret_config:
+  builder: archetypes/builders/secret-config-builder
+  core: true
+  description: Secrets management
+  llm_function: GOVERN
+  pillar: P09_config
+session_state:
+  builder: archetypes/builders/session-state-builder
+  core: false
+  description: Session state (ephemeral, snapshot)
+  llm_function: INJECT
+  pillar: P10_memory
+signal:
+  builder: archetypes/builders/signal-builder
+  core: true
+  description: Inter-agent signal (complete, error, progress)
+  llm_function: COLLABORATE
+  pillar: P12_orchestration
+smoke_eval:
+  builder: archetypes/builders/smoke-eval-builder
+  core: false
+  description: Quick sanity test (< 30s)
+  llm_function: GOVERN
+  pillar: P07_evals
+spawn_config:
+  builder: archetypes/builders/spawn-config-builder
+  core: true
+  description: Spawn configuration (solo, grid, continuous)
+  llm_function: GOVERN
+  pillar: P12_orchestration
+system_prompt:
+  builder: archetypes/builders/system-prompt-builder
+  core: true
+  description: System prompt that defines the agent's identity and rules
+  llm_function: BECOME
+  pillar: P03_prompt
+type_def:
+  builder: archetypes/builders/type-def-builder
+  core: true
+  description: Custom type definition
+  llm_function: GOVERN
+  pillar: P06_schema
+unit_eval:
+  builder: archetypes/builders/unit-eval-builder
+  core: true
+  description: Agent/prompt unit test
+  llm_function: GOVERN
+  pillar: P07_evals
+validation_schema:
+  builder: archetypes/builders/validation-schema-builder
+  core: false
+  description: Post-generation validation contract (the system applies it, LLM does not see it)
+  llm_function: GOVERN
+  pillar: P06_schema
+validator:
+  builder: archetypes/builders/validator-builder
+  core: true
+  description: Validation rule (pre-commit, quality gate)
+  llm_function: GOVERN
+  pillar: P06_schema
+vision_tool:
+  builder: archetypes/builders/vision-tool-builder
+  core: false
+  description: Image analysis, OCR, screenshot interpretation
+  llm_function: CALL
+  pillar: P04_tools
+webhook:
+  builder: archetypes/builders/webhook-builder
+  core: false
+  description: HTTP event-driven inbound/outbound endpoint
+  llm_function: CALL
+  pillar: P04_tools
+workflow:
+  builder: archetypes/builders/workflow-builder
+  core: true
+  description: Workflow (sequential/parallel steps)
+  llm_function: PRODUCE
+  pillar: P12_orchestration
+
+agent_card:
+  pillar: P08
+  description: Agent deployment spec (identity + model + tools + boot + dispatch)
+  builder: archetypes/builders/agent-card-builder/
+  isos:
+    - bld_schema_agent_card.md
+    - bld_config_agent_card.md
+    - bld_system_prompt_agent_card.md
+    - bld_manifest_agent_card.md
+    - bld_knowledge_card_agent_card.md
+    - bld_examples_agent_card.md
+    - bld_memory_agent_card.md
+    - bld_architecture_agent_card.md
+    - bld_tools_agent_card.md
+    - bld_instruction_agent_card.md
+    - bld_output_template_agent_card.md
+    - bld_quality_gate_agent_card.md
+    - bld_collaboration_agent_card.md

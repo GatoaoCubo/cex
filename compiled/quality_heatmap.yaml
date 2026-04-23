@@ -1,0 +1,71 @@
+id: dash_quality_heatmap
+kind: dashboard
+title: Quality Heatmap
+version: 2.0.0
+quality: 6.6
+density_score: 1.0
+updated: '2026-04-22'
+related:
+- dash_pillar_health
+- dash_kind_census
+- home
+- dash_cross_ref_health
+- dash_orphan_detector
+score_distribution: 'TABLE length(rows) as "Count"
+
+  FROM ""
+
+  WHERE quality
+
+  GROUP BY round(quality, 0) as "Score Band"
+
+  SORT round(quality, 0) DESC'
+top_scores_9_5: 'TABLE quality as "Score", kind, title
+
+  FROM ""
+
+  WHERE quality >= 9.5
+
+  SORT quality DESC
+
+  LIMIT 15'
+below_threshold_8_0: 'TABLE quality as "Score", kind, title
+
+  FROM ""
+
+  WHERE quality AND quality < 8.0
+
+  SORT quality ASC
+
+  LIMIT 20'
+unscored_artifacts_quality_null: 'TABLE kind, title
+
+  FROM ""
+
+  WHERE kind AND !quality
+
+  SORT file.mtime DESC
+
+  LIMIT 25'
+average_quality_per_pillar: 'TABLE round(average(rows.quality), 2) as "Avg", length(rows) as "Scored"
+
+  FROM ""
+
+  WHERE pillar AND quality
+
+  GROUP BY pillar
+
+  SORT round(average(rows.quality), 2) ASC'
+related_artifacts: '| Artifact | Relationship | Score |
+
+  |----------|-------------|-------|
+
+  | [[dash_pillar_health]] | sibling | 0.55 |
+
+  | [[dash_kind_census]] | sibling | 0.41 |
+
+  | [[home]] | sibling | 0.34 |
+
+  | [[dash_cross_ref_health]] | sibling | 0.25 |
+
+  | [[dash_orphan_detector]] | sibling | 0.25 |'

@@ -1,0 +1,72 @@
+---
+kind: architecture
+id: bld_architecture_customer_segment
+pillar: P08
+llm_function: CONSTRAIN
+purpose: Component map of customer_segment -- inventory, dependencies
+quality: 9.0
+title: "Architecture Customer Segment"
+version: "1.0.0"
+author: wave1_builder_gen_v2
+tags: [customer_segment, builder, architecture]
+tldr: "Component map of customer_segment -- inventory, dependencies"
+domain: "customer_segment construction"
+created: "2026-04-14"
+updated: "2026-04-14"
+density_score: 0.85
+related:
+  - bld_architecture_roi_calculator
+  - bld_architecture_quickstart_guide
+  - bld_architecture_api_reference
+  - bld_architecture_sales_playbook
+  - bld_architecture_discovery_questions
+  - bld_architecture_onboarding_flow
+  - bld_architecture_fintech_vertical
+  - bld_architecture_benchmark_suite
+  - bld_architecture_legal_vertical
+  - bld_architecture_sdk_example
+---
+
+## Component Inventory
+| ISO Name              | Role                          | Pillar | Status  |
+|-----------------------|-------------------------------|--------|---------|
+| bld_manifest          | Segment definition blueprint  | P02    | Active  |
+| bld_instruction       | Operational guidance          | P02    | Active  |
+| bld_system_prompt     | LLM interaction framework     | P02    | Active  |
+| bld_schema            | Data structure specification  | P02    | Active  |
+| bld_quality_gate      | Validation rules              | P02    | Active  |
+| bld_output_template   | Format standardization        | P02    | Active  |
+| bld_examples          | Use case repository           | P02    | Active  |
+| bld_knowledge_card    | Domain-specific knowledge     | P02    | Active  |
+| bld_architecture      | Structural design             | P02    | Active  |
+| bld_collaboration     | Stakeholder alignment         | P02    | Active  |
+| bld_config            | Configuration management      | P02    | Active  |
+| bld_memory            | Context retention            | P02    | Active  |
+| bld_tools             | Execution utilities           | P02    | Active  |
+
+## Dependencies
+| From              | To                  | Type        |
+|-------------------|---------------------|-------------|
+| bld_config        | bld_schema          | Data        |
+| bld_instruction   | bld_system_prompt   | Control     |
+| bld_quality_gate  | bld_output_template | Validation  |
+| bld_memory        | bld_tools           | Execution   |
+| bld_collaboration | bld_examples        | Reference   |
+
+## Architectural Position
+The customer_segment-builder is a foundational element in the CEX P02 pillar, enabling precise segmentation through structured data modeling, collaborative validation, and adaptive execution frameworks. It ensures alignment between business objectives and technical implementation by orchestrating schema definition, quality assurance, and contextual memory across stakeholder workflows.
+
+## Related Artifacts
+
+| Artifact | Relationship | Score |
+|----------|-------------|-------|
+| [[bld_architecture_roi_calculator]] | sibling | 0.57 |
+| [[bld_architecture_quickstart_guide]] | sibling | 0.56 |
+| [[bld_architecture_api_reference]] | sibling | 0.56 |
+| [[bld_architecture_sales_playbook]] | sibling | 0.55 |
+| [[bld_architecture_discovery_questions]] | sibling | 0.55 |
+| [[bld_architecture_onboarding_flow]] | sibling | 0.54 |
+| [[bld_architecture_fintech_vertical]] | sibling | 0.53 |
+| [[bld_architecture_benchmark_suite]] | sibling | 0.53 |
+| [[bld_architecture_legal_vertical]] | sibling | 0.53 |
+| [[bld_architecture_sdk_example]] | sibling | 0.53 |

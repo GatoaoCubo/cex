@@ -1,0 +1,137 @@
+---
+kind: knowledge_card
+id: bld_knowledge_card_consolidation_policy
+pillar: P01
+llm_function: INJECT
+purpose: Domain knowledge for consolidation_policy production
+quality: 9.2
+title: "Knowledge Card: consolidation_policy Builder"
+version: "2.0.0"
+author: n06_commercial
+tags: [consolidation_policy, builder, knowledge_card, memgpt, letta, memory_consolidation]
+tldr: "LLM agent memory consolidation: working->episodic->semantic promotion, LRU/LFU/importance eviction, sleep-time consolidation, replay-based memory, enterprise retention compliance"
+domain: "LLM agent memory consolidation"
+created: "2026-04-14"
+updated: "2026-04-14"
+density_score: 0.91
+related:
+  - consolidation-policy-builder
+  - bld_knowledge_card_memory_architecture
+  - p03_sp_consolidation_policy_builder
+  - bld_output_template_memory_architecture
+  - bld_instruction_consolidation_policy
+  - bld_output_template_consolidation_policy
+  - p01_kc_memory_scope
+  - atom_22_memory_taxonomy
+  - p03_sp_memory_architecture_builder
+  - memory-architecture-builder
+---
+
+## Domain Overview
+
+Memory consolidation in LLM agents governs *when and how* memories move between tiers
+(working -> episodic -> semantic), get evicted, merged, or archived. Unlike OS garbage
+collection or hardware memory compaction, agent memory consolidation is about *information
+value*: should this interaction be remembered? At what granularity? For how long?
+
+MemGPT/Letta (Packer 2023) introduced the consolidation pipeline as an explicit agent
+function: after each conversation, a background job scores episodic entries, promotes
+high-value facts to semantic memory, and archives or deletes low-value entries. This
+"sleep-time consolidation" mirrors neuroscience models of memory offline replay.
+
+## Key Concepts
+
+| Concept | Definition | Source |
+|---------|-----------|--------|
+| Working -> Episodic Promotion | Saving in-context interaction to episodic store after session ends | MemGPT/Letta |
+| Episodic -> Semantic Promotion | Extracting durable facts from interaction history into semantic store | MemGPT consolidation pipeline |
+| Importance Scoring | Assigning a retention priority to each memory unit (0-1 float) | mem0 (2024) |
+| Sleep-Time Consolidation | Background job runs when agent is idle to consolidate memories | MemGPT/Letta (Packer 2023) |
+| Replay-Based Memory | Re-processing old episodic entries to extract missed semantic facts | Episodic memory research |
+| LRU Eviction | Remove least recently accessed memories when storage budget exceeded | Cache theory |
+| LFU Eviction | Remove least frequently accessed memories | Cache theory |
+| TTL (Time-To-Live) | Fixed expiry time per memory unit (e.g., 90 days) | Standard practice |
+| Memory Merging | Deduplicating similar episodic entries into a single canonical record | Zep (2024) |
+| Forgetting Curve | Exponential decay of memory importance over time without reinforcement | Ebbinghaus (1885) |
+| Retention Policy | Rule set defining what to keep, for how long, and under what conditions | Enterprise compliance |
+
+## Consolidation Pipeline (MemGPT Model)
+
+```
+[Session ends]
+     |
+     v
+[Episodic buffer] -- (async job triggered)
+     |
+     +-- Score each entry (recency + relevance + user_feedback)
+     |
+     +-- High score (>0.7) --> Promote to semantic memory
+     |       |
+     |       +-- Deduplicate against existing semantic entries
+     |       +-- Merge if similarity > 0.92
+     |       +-- Write new entity/fact to graph or KV store
+     |
+     +-- Medium score (0.3-0.7) --> Archive to cold storage
+     |
+     +-- Low score (<0.3) --> Delete (or soft-delete for compliance)
+```
+
+## Eviction Strategies
+
+| Strategy | Trigger | Best For |
+|----------|---------|---------|
+| TTL | Age > N days | Time-sensitive facts, compliance |
+| LRU | Storage > budget, remove oldest accessed | General episodic memory |
+| LFU | Storage > budget, remove least queried | Semantic entity store |
+| Importance threshold | Importance < floor (e.g., 0.3) | Mixed TTL + value |
+| Generational | N interactions old, no semantic promotion | Conversation logs |
+
+## Commercial Tier Differentiation
+
+| Feature | Free | PRO | ENTERPRISE |
+|---------|------|-----|------------|
+| Consolidation | None | Basic TTL (90 days) | Configurable + compliance |
+| Episodic retention | None | 90 days | Custom (1y / indefinite) |
+| Semantic promotion | None | Auto (LLM-driven) | Scheduled + audited |
+| Sleep-time consolidation | None | On session end | Continuous + scheduled |
+| Retention policy | N/A | Fixed | Custom rules + data residency |
+| Audit trail | None | Read | Write + export + GDPR |
+| Merge/dedup | None | Similarity-based | LLM-driven + manual review |
+
+## Enterprise Compliance Considerations
+
+- GDPR Art. 17 (right to erasure): consolidation must support hard-delete, not just archive
+- HIPAA: retention period for health-related agent memories may be governed by law
+- Data residency: consolidation jobs must not transfer memories across regions
+- Audit trail: every promotion/eviction event should be logged with timestamp + reason
+
+## Common Patterns
+
+1. **Session-end consolidation**: trigger pipeline after every conversation ends.
+2. **Importance-gated promotion**: only promote episodic entries with score > threshold.
+3. **Merge-before-write**: check semantic memory for duplicates before adding new facts.
+4. **Cold archival**: TTL-expired entries move to cold storage before hard delete.
+5. **Replay sweep**: periodic re-processing of episodic archive for missed semantic facts.
+
+## Pitfalls
+
+- Consolidating everything wastes semantic memory with low-signal facts.
+- No deduplication creates semantic memory bloat with conflicting versions of the same fact.
+- Ignoring compliance requirements exposes the system to data retention violations.
+- Synchronous consolidation blocks agent response time; always run async.
+- No audit trail makes GDPR erasure requests impossible to verify.
+
+## Related Artifacts
+
+| Artifact | Relationship | Score |
+|----------|-------------|-------|
+| [[consolidation-policy-builder]] | downstream | 0.62 |
+| [[bld_knowledge_card_memory_architecture]] | sibling | 0.56 |
+| [[p03_sp_consolidation_policy_builder]] | downstream | 0.53 |
+| [[bld_output_template_memory_architecture]] | downstream | 0.51 |
+| [[bld_instruction_consolidation_policy]] | downstream | 0.48 |
+| [[bld_output_template_consolidation_policy]] | downstream | 0.45 |
+| [[p01_kc_memory_scope]] | sibling | 0.43 |
+| [[atom_22_memory_taxonomy]] | sibling | 0.40 |
+| [[p03_sp_memory_architecture_builder]] | downstream | 0.40 |
+| [[memory-architecture-builder]] | downstream | 0.40 |

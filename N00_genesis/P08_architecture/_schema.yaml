@@ -1,0 +1,116 @@
+pillar: P08
+name: Architecture
+description: COMO escala
+frontmatter_cex:
+  related:
+    type: list[string]
+    required: recommended
+    description: "Artifact IDs of related artifacts (upstream, downstream, sibling, alternative)"
+    format: "[p{XX}_{kind}_{slug}, ...]"
+    max: 15
+    min: 0
+    validator: S_RELATED
+    note: "Auto-populated by cex_wikilink.py, manually curated by builders"
+kinds:
+  pattern:
+    description: 'Pattern reusable (ex: continuous batching)'
+    boundary: Reusable pattern architecture. NOT law (inviolable) nor workflow (P12, sequence executable).
+    layer: content
+    core: true
+    machine_format: yaml
+    naming: p08_pat_{{name}}.md + .yaml
+    constraints:
+      max_bytes: 4096
+    llm_function: INJECT
+  law:
+    description: Law operational (inviolable)
+    boundary: Law operational inviolable of the system. NOT instruction (P03, flexible) nor guardrail (P11, safety-focused).
+    layer: governance
+    core: true
+    machine_format: yaml
+    naming: p08_law_{{number}}.md
+    constraints:
+      max_bytes: 3072
+    llm_function: CONSTRAIN
+  diagram:
+    description: Architecture diagram (ASCII ou Mermaid)
+    boundary: Visual diagram architecture. NOT component_map (dados structureds) nor pattern (sem prescricao).
+    layer: content
+    core: false
+    machine_format: yaml
+    naming: p08_diag_{{scope}}.md
+    constraints:
+      max_bytes: 4096
+    llm_function: INJECT
+  component_map:
+    description: Component map (what connects to what)
+    boundary: Mapa structured components and connections. NOT diagram (visual) nor agent_card (scope of one agent_group).
+    layer: spec
+    core: false
+    machine_format: yaml
+    naming: p08_cmap_{{scope}}.yaml
+    constraints:
+      max_bytes: 3072
+    llm_function: INJECT
+  agent_card:
+    description: Deployment spec for autonomous agent — identity, model, tools, boot, dispatch, constraints
+    boundary: Agent deployment spec. NOT agent (P02, persona only) nor boot_config (P02, provider startup) nor spawn_config (P12, runtime launch).
+    layer: spec
+    core: false
+    machine_format: yaml
+    naming: p08_ac_{{agent_name}}.yaml
+    constraints:
+      max_bytes: 4096
+    required_files:
+    - identity section (name, domain, role)
+    - model config (model, context_window, temperature)
+    - tools list (mcp_servers or function_defs)
+    - dispatch keywords
+    recommended_files:
+    - boot sequence
+    - constraints (hard + soft)
+    - scaling config
+    - monitoring spec
+    trust_tiers:
+      sandboxed: "Read-only access. Cannot modify files or run destructive commands."
+      standard: "Read-write access. Can create/edit files in own nucleus directory."
+      privileged: "System-modify access. Can edit shared config, run deploys, kill processes."
+    required_trust: standard  # default tier for new agent cards
+    llm_function: BECOME
+    references:
+    - A2A AgentCard (Google, 2024)
+    - OpenAI Assistant config
+    - CrewAI Agent(role+goal+tools+llm)
+    - MCP Server manifest
+    - K8s PodSpec
+    - Docker Compose service
+  director:
+    description: Crew orchestrator that composes and coordinates multiple builders
+    llm_function: REASON
+    naming: ex_director_{topic}.md
+  decision_record:
+    description: 'ADR: contexto, decision, consequencias'
+    boundary: Record. NOT law nor pattern.
+    layer: runtime
+    core: true
+    machine_format: yaml
+    naming: p08_adr.md
+    constraints:
+      max_bytes: 4096
+    frontmatter_required:
+    - id
+    - title
+    - status
+    - context
+    - decision
+    llm_function: REASON
+  naming_rule:
+    description: Naming rule
+    boundary: Artifact naming rule. NOT validator (P06, valida content) nor type_def (P06, defines type).
+    layer: governance
+    core: false
+    machine_format: yaml
+    naming: p05_nr_{{scope}}.md
+    constraints:
+      max_bytes: 4096
+    llm_function: GOVERN

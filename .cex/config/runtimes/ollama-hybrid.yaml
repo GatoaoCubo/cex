@@ -1,0 +1,48 @@
+runtime: ollama-hybrid
+tier: free
+provider: ollama
+cli: none
+status: deprecated
+deprecation_reason: |
+  Disproven by 4 grid-test waves on LEVERAGE_MAP_V2 (2026-04-15).
+  Per-nucleus routing to qwen2.5-coder:7b on content tasks produces
+  9-byte MAX_ITERS stubs (qwen cannot call done() on non-code work).
+  Run-to-run variance on ollama models (~2-6x per nucleus) dominates
+  any routing-derived gain.
+
+  RECOMMENDED: use runtime=ollama-llama (pure llama3.1:8b).
+  See memory project_free_tier_routing_truth.md.
+
+# Kept for historical reference only. Do NOT use.
+models:
+  default: llama3.1:8b
+  n01: llama3.1:8b
+  n02: llama3.1:8b
+  n03: qwen2.5-coder:7b
+  n04: llama3.1:8b
+  n05: llama3.1:8b
+  n06: llama3.1:8b
+  n07: qwen2.5-coder:7b
+context_window: 32000
+effective_context: 8192
+capabilities:
+  native_tool_calls: partial
+  done_native: true
+  sub_agents: false
+  task_tracking: false
+  large_context: false
+agentic_profile:
+  max_iters: 15
+  min_iters: 4
+  require_reads_before_done: 3
+  nudge_on_shallow: true
+  max_nudges: 2
+  anti_fabrication: true
+  reject_done_without_reads: true
+  temperature: 0.3
+  num_predict: 1500
+boot_script: boot/n0x_ollama.ps1
+spawn_script: _spawn/spawn_grid_ollama.ps1
+runner: _tools/cex_agentic_nucleus.py
+cost_per_mtok_in: 0
+cost_per_mtok_out: 0

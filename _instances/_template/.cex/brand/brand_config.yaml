@@ -1,0 +1,89 @@
+# .cex/brand/brand_config.yaml
+# Template — fill during /init or brand bootstrap
+# Run: python _tools/brand_validate.py to check validity
+# Run: python _tools/brand_propagate.py to push to all nuclei
+#
+# Origin: gato-ao-cubo/.cex/brand/brand_config.yaml (anonymized)
+# All {{BRAND_*}} variables match brand_inject.py conventions
+
+identity:
+  BRAND_NAME: "{{BRAND_NAME}}"
+  BRAND_TAGLINE: "{{BRAND_TAGLINE}}"
+  BRAND_SLOGAN: "{{BRAND_SLOGAN}}"
+  BRAND_MISSION: "{{BRAND_MISSION}}"
+  BRAND_VISION: "{{BRAND_VISION}}"
+  BRAND_VALUES:
+    - "{{BRAND_VALUE_1}}"
+    - "{{BRAND_VALUE_2}}"
+    - "{{BRAND_VALUE_3}}"
+    - "{{BRAND_VALUE_4}}"
+    - "{{BRAND_VALUE_5}}"
+  BRAND_STORY: "{{BRAND_STORY}}"
+
+archetype:
+  BRAND_ARCHETYPE: "{{BRAND_ARCHETYPE | default: 'creator'}}"
+  BRAND_ARCHETYPE_SHADOW: "{{BRAND_ARCHETYPE_SHADOW}}"
+  BRAND_PERSONALITY:
+    - "{{BRAND_PERSONALITY_1}}"
+    - "{{BRAND_PERSONALITY_2}}"
+    - "{{BRAND_PERSONALITY_3}}"
+    - "{{BRAND_PERSONALITY_4}}"
+    - "{{BRAND_PERSONALITY_5}}"
+
+voice:
+  BRAND_VOICE_TONE: "{{BRAND_VOICE_TONE}}"
+  BRAND_VOICE_FORMALITY: "{{BRAND_VOICE_FORMALITY | default: '3'}}"
+  BRAND_VOICE_ENTHUSIASM: "{{BRAND_VOICE_ENTHUSIASM | default: '3'}}"
+  BRAND_VOICE_HUMOR: "{{BRAND_VOICE_HUMOR | default: '2'}}"
+  BRAND_VOICE_WARMTH: "{{BRAND_VOICE_WARMTH | default: '3'}}"
+  BRAND_VOICE_AUTHORITY: "{{BRAND_VOICE_AUTHORITY | default: '3'}}"
+  BRAND_VOICE_DO:
+    - "{{BRAND_VOICE_DO_1}}"
+    - "{{BRAND_VOICE_DO_2}}"
+    - "{{BRAND_VOICE_DO_3}}"
+  BRAND_VOICE_DONT:
+    - "{{BRAND_VOICE_DONT_1}}"
+    - "{{BRAND_VOICE_DONT_2}}"
+    - "{{BRAND_VOICE_DONT_3}}"
+
+audience:
+  BRAND_ICP: "{{BRAND_ICP}}"
+  BRAND_ICP_LOCATION: "{{BRAND_ICP_LOCATION}}"
+  BRAND_ICP_VALUES:
+    - "{{BRAND_ICP_VALUE_1}}"
+    - "{{BRAND_ICP_VALUE_2}}"
+    - "{{BRAND_ICP_VALUE_3}}"
+  BRAND_CATEGORY: "{{BRAND_CATEGORY}}"
+  BRAND_COMPETITORS:
+    - "{{BRAND_COMPETITOR_1}}"
+    - "{{BRAND_COMPETITOR_2}}"
+    - "{{BRAND_COMPETITOR_3}}"
+
+visual:
+  BRAND_COLORS:
+    primary: "{{BRAND_COLOR_PRIMARY | default: '#000000'}}"
+    secondary: "{{BRAND_COLOR_SECONDARY | default: '#1F1F1F'}}"
+    accent: "{{BRAND_COLOR_ACCENT | default: '#7A7A7A'}}"
+    background: "{{BRAND_COLOR_BG | default: '#FFFFFF'}}"
+    text: "{{BRAND_COLOR_TEXT | default: '#000000'}}"
+  BRAND_TYPOGRAPHY:
+    heading: "{{BRAND_FONT_HEADING | default: 'Inter'}}"
+    body: "{{BRAND_FONT_BODY | default: 'Inter'}}"
+    mono: "{{BRAND_FONT_MONO | default: 'JetBrains Mono'}}"
+
+content:
+  BRAND_CONTENT_PILLARS:
+    - "{{BRAND_CONTENT_PILLAR_1}}"
+    - "{{BRAND_CONTENT_PILLAR_2}}"
+    - "{{BRAND_CONTENT_PILLAR_3}}"
+    - "{{BRAND_CONTENT_PILLAR_4}}"
+  BRAND_LANGUAGE: "{{BRAND_LANGUAGE | default: 'en'}}"
+  BRAND_REGION: "{{BRAND_REGION}}"
+
+operations:
+  BRAND_SLUG: "{{BRAND_SLUG}}"
+  BRAND_DOMAIN: "{{BRAND_DOMAIN}}"
+  BRAND_EMAIL: "{{BRAND_EMAIL}}"
+  BRAND_SOCIAL:
+    instagram: "{{BRAND_INSTAGRAM}}"
+    website: "{{BRAND_WEBSITE}}"

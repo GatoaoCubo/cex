@@ -1,0 +1,88 @@
+# CEX Quality Gate — Artifact Quality Monitoring
+# =================================================
+# Runs on push to main. Checks artifact quality scores, compile, and release readiness.
+
+name: Quality Gate
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'P01_knowledge/**'
+      - 'N01_intelligence/**'
+      - 'N02_marketing/**'
+      - 'N03_engineering/**'
+      - 'N04_knowledge/**'
+      - 'N05_operations/**'
+      - 'N06_commercial/**'
+      - 'archetypes/**'
+      - '_tools/**'
+  workflow_dispatch:
+
+env:
+  PYTHON_VERSION: '3.12'
+
+jobs:
+  quality-check:
+    name: Quality Score Check
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: 'pip'
+      - run: pip install -r requirements.txt
+
+      - name: Score platform KCs
+        run: |
+          echo "## Quality Score Report" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          SCORE_OUTPUT=$(python _tools/cex_score.py P01_knowledge/library/platform/kc_*.md 2>&1)
+          SCORE_EXIT=$?
+          echo "$SCORE_OUTPUT" | tail -10 >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          if [ $SCORE_EXIT -ne 0 ]; then
+            echo "::error::cex_score.py failed with exit code $SCORE_EXIT"
+            exit $SCORE_EXIT
+          fi
+
+      - name: Check quality floor (8.0)
+        run: |
+          BELOW=$(python -c "
+          import os, sys
+          sys.path.insert(0, '_tools')
+          from cex_score import score_artifact
+          from pathlib import Path
+          below = 0
+          for f in Path('P01_knowledge/library/platform').glob('kc_*.md'):
+              s, _ = score_artifact(str(f))
+              if s < 8.0: below += 1
+          print(below)
+          " 2>/dev/null || echo "0")
+          if [ "$BELOW" -gt 0 ]; then
+            echo "::warning::$BELOW artifacts below quality threshold 8.0"
+          fi
+
+      - name: Compile check
+        run: |
+          RESULT=$(python _tools/cex_compile.py --all 2>&1 | tail -1)
+          echo "### Compile: $RESULT" >> $GITHUB_STEP_SUMMARY
+
+  release-gate:
+    name: Release Readiness
+    needs: quality-check
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+      - run: pip install -r requirements.txt
+      - name: Release check
+        run: |
+          python _tools/cex_release_check.py
+          echo "## Release Check" >> $GITHUB_STEP_SUMMARY
+          python _tools/cex_release_check.py 2>&1 | tail -5 >> $GITHUB_STEP_SUMMARY

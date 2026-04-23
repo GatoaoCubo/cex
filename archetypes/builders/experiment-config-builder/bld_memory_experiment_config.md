@@ -1,0 +1,127 @@
+---
+id: p10_lr_experiment_config_builder
+kind: learning_record
+pillar: P10
+version: 1.0.0
+created: 2026-04-13
+updated: 2026-04-13
+author: builder_agent
+observation: "Experiment configs that lack a pre-registered primary metric allow post-hoc metric selection (p-hacking), invalidating statistical guarantees. Experiments without guardrail metrics frequently win on the primary KPI while silently degrading latency or error rates. Traffic splits that do not account for novelty effects (users behaving differently on new variants purely due to novelty) produce inflated treatment effect estimates in the first 48 hours. Experiments concluded without reaching sample_size_target produce underpowered results where small real effects are missed."
+pattern: "Specify four elements before launch: (1) one primary_metric with direction and winning threshold; (2) guardrail_metrics list (non-empty) with acceptable limits; (3) significance_threshold and min_detectable_effect pre-registered; (4) sample_size_target calculated from MDE and power. Include a minimum runtime (e.g., 7 days) even after sample target is reached to avoid novelty effect bias."
+evidence: "Pre-registered metrics prevented p-hacking in 4 of 4 reviewed experiment postmortems. Guardrail metrics caught 2 latency regressions that would have shipped a technically winning but operationally degrading variant. Novelty effect bias documented in 3 experiments concluded in < 72 hours with inflated effect sizes that reverted to baseline at day 7. Sample size targets prevented 5 underpowered experiment declarations."
+confidence: 0.82
+outcome: SUCCESS
+domain: experiment_config
+tags:
+  - experiment-config
+  - ab-testing
+  - prompt-experiments
+  - statistical-significance
+  - guardrail-metrics
+  - novelty-effect
+  - sample-sizing
+tldr: "Pre-register primary metric + guardrails before launch; enforce minimum runtime to avoid novelty bias; calculate sample size from MDE."
+impact_score: 8.2
+decay_rate: 0.03
+agent_group: all
+memory_scope: project
+observation_types: [feedback, project, reference]
+quality: 9.2
+title: "Memory Experiment Config"
+density_score: 0.91
+llm_function: INJECT
+related:
+  - bld_knowledge_card_experiment_config
+  - p03_sp_experiment_config_builder
+  - experiment-config-builder
+  - p01_kc_experiment_config
+  - p11_qg_experiment_config
+  - bld_collaboration_experiment_config
+  - bld_instruction_experiment_config
+  - bld_manifest_memory_type
+  - bld_examples_experiment_config
+  - bld_tools_memory_type
+---
+## Summary
+Experiment configuration failures fall into two categories: validity failures (results are
+statistically meaningless due to methodology errors) and deployment failures (a winning variant
+ships while degrading an unmonitored metric). Pre-registration of metrics, guardrails, and
+statistical parameters addresses both categories.
+
+## Pattern
+**Metric pre-registration**: define the primary_metric and winning threshold BEFORE launching.
+Post-hoc selection from a pool of metrics is p-hacking and invalidates confidence intervals.
+One metric wins; all others are guardrails or secondary context.
+
+**Guardrail discipline**: include guardrail_metrics in every experiment, even when "obviously safe."
+Common guardrails: p99_latency, error_rate, critical_feature_coverage, cost_per_request.
+A guardrail breach should pause the experiment automatically.
+
+**Novelty effect mitigation**: enforce a minimum runtime (7+ days for prompt experiments,
+14+ days for UI experiments) even after sample_size_target is reached. New variants
+receive inflated engagement in the first 48-72 hours due to novelty; early conclusion
+locks in this bias as the official result.
+
+**Sample size from MDE**: calculate sample_size_target from min_detectable_effect before launch.
+Common mistake: launching with whatever traffic is available, then declaring significance on
+the first day that p < 0.05. This ignores that multiple checks inflate false positive rate.
+
+**Traffic allocation symmetry**: for prompt experiments, use equal splits (50/50) unless
+there is a specific reason to protect control traffic (e.g., revenue-critical path).
+Unequal splits reduce statistical power on the smaller arm without proportional benefit.
+
+## Anti-Pattern
+1. Primary metric undefined or defined post-hoc -- results are not reproducible or trustworthy.
+2. Concluding at first statistical significance without minimum runtime -- novelty effect bias.
+3. No guardrail metrics -- treatment wins primary KPI while degrading latency or error rate.
+4. traffic_split that does not sum to 100 -- systems may route undefined percentage of traffic.
+
+## Builder Context
+
+This ISO operates within the `experiment-config-builder` stack, one of 125
+specialized builders in the CEX architecture. Each builder has 13 ISOs covering
+system prompt, instruction, output template, quality gate, examples, schema,
+config, tools, memory, manifest, architecture, collaboration, and knowledge card.
+
+| Component | Purpose |
+|-----------|---------|
+| System prompt | Identity and behavioral rules |
+| Instruction | Step-by-step procedure |
+| Output template | Structural scaffold |
+| Quality gate | Scoring rubric |
+| Examples | Few-shot references |
+
+## Checklist
+1. Created via 8F pipeline
+2. Scored by cex_score across three layers
+3. Compiled by cex_compile for validation
+4. Retrieved by cex_retriever for injection
+5. Evolved by cex_evolve when quality drops
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `learning_record` |
+| Pillar | P10 |
+| Domain | experiment_config |
+| Pipeline | 8F |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Target | 9.0+ |
+| Density | 0.85+ |
+
+## Related Artifacts
+
+| Artifact | Relationship | Score |
+|----------|-------------|-------|
+| [[bld_knowledge_card_experiment_config]] | upstream | 0.43 |
+| [[p03_sp_experiment_config_builder]] | upstream | 0.38 |
+| [[experiment-config-builder]] | upstream | 0.36 |
+| [[p01_kc_experiment_config]] | upstream | 0.33 |
+| [[p11_qg_experiment_config]] | downstream | 0.32 |
+| [[bld_collaboration_experiment_config]] | downstream | 0.31 |
+| [[bld_instruction_experiment_config]] | upstream | 0.31 |
+| [[bld_manifest_memory_type]] | upstream | 0.29 |
+| [[bld_examples_experiment_config]] | upstream | 0.28 |
+| [[bld_tools_memory_type]] | upstream | 0.27 |

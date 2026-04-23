@@ -1,0 +1,60 @@
+---
+kind: config
+id: bld_config_pitch_deck
+pillar: P09
+llm_function: CONSTRAIN
+purpose: Naming, paths, limits for pitch_deck production
+quality: 8.6
+title: "Config Pitch Deck"
+version: "1.0.0"
+author: wave1_builder_gen_v2
+tags: [pitch_deck, builder, config]
+tldr: "Naming, paths, limits for pitch_deck production"
+domain: "pitch_deck construction"
+created: "2026-04-14"
+updated: "2026-04-14"
+density_score: 0.85
+related:
+  - bld_config_data_residency
+  - bld_config_diff_strategy
+  - bld_config_pricing_page
+  - bld_config_search_strategy
+  - bld_config_agent_computer_interface
+  - bld_config_transport_config
+  - bld_config_partner_listing
+  - bld_config_product_tour
+  - bld_config_usage_quota
+  - bld_config_sales_playbook
+---
+
+## Naming Convention (pitch deck artifacts)
+Pattern: p05_pd_<project_name>.md (e.g., p05_pd_innovateX.md, p05_pd_neuroFlow.md) for each pitch deck
+
+## Paths
+/artifacts/p05/pd/<project_name>/output.md
+
+## Limits
+max_bytes: 6144
+max_turns: 5
+effort_level: high
+
+## Hooks
+pre_build: null
+post_build: null
+on_error: null
+on_quality_fail: null
+
+## Related Artifacts
+
+| Artifact | Relationship | Score |
+|----------|-------------|-------|
+| [[bld_config_data_residency]] | sibling | 0.58 |
+| [[bld_config_diff_strategy]] | sibling | 0.55 |
+| [[bld_config_pricing_page]] | sibling | 0.55 |
+| [[bld_config_search_strategy]] | sibling | 0.54 |
+| [[bld_config_agent_computer_interface]] | sibling | 0.54 |
+| [[bld_config_transport_config]] | sibling | 0.54 |
+| [[bld_config_partner_listing]] | sibling | 0.53 |
+| [[bld_config_product_tour]] | sibling | 0.53 |
+| [[bld_config_usage_quota]] | sibling | 0.53 |
+| [[bld_config_sales_playbook]] | sibling | 0.53 |

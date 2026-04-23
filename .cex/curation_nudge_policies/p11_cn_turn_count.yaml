@@ -1,0 +1,12 @@
+id: p11_cn_turn_count
+enabled: true
+trigger:
+  type: turn_count
+  threshold: 10
+cadence:
+  min_interval_turns: 8
+  max_per_session: 3
+prompt_template: "Notei {{observation}}. Persistir em MEMORY.md?"
+target_memory:
+  destination: MEMORY.md
+  auto_write_if_confirmed: false

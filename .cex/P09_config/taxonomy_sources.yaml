@@ -1,0 +1,405 @@
+# CEX Taxonomy Sources Configuration
+# Managed by: cex_taxonomy_scout.py
+# Owner: N04 (Knowledge Gluttony)
+# Cadence: weekly (Mondays 08:00 UTC)
+# Schema: see N04_knowledge/specs/spec_taxonomy_lifecycle.md Section A
+
+version: "1.0.0"
+created: "2026-04-19"
+last_updated: "2026-04-19"
+
+# Candidate scoring thresholds
+thresholds:
+  auto_flag: 8.0      # Score >= this: immediate N07 signal
+  queue: 6.0          # Score >= this: weekly review queue
+  archive: 0.0        # Score < queue: move to low/ archive
+
+# Deduplication settings
+dedupe:
+  similarity_threshold: 0.85   # TF-IDF cosine similarity vs existing kinds
+  method: tfidf                 # tfidf | embedding (embedding = future)
+
+# Output settings
+output:
+  candidates_dir: ".cex/runtime/taxonomy_candidates"
+  state_file: ".cex/runtime/taxonomy_candidates/.scout_state.json"
+  health_dir: ".cex/runtime/taxonomy_candidates/health"
+
+sources:
+
+  # ==========================================
+  # CATEGORY 1: GitHub Protocol Repos
+  # ==========================================
+
+  - name: google-a2a
+    type: github
+    url: https://github.com/google-a2a/A2A
+    watch_paths:
+      - spec/
+      - drafts/
+      - docs/
+    extract_patterns:
+      - "type:\\s+[A-Z][a-zA-Z]+"
+      - "interface\\s+[A-Z][a-zA-Z]+"
+      - '"\\$defs":'
+      - "message [A-Z][a-zA-Z]+"
+    cadence: weekly
+    priority: critical
+    suggested_pillar: P02
+    notes: "Agent-to-Agent protocol by Google. Core A2A task/message kinds."
+
+  - name: modelcontextprotocol
+    type: github
+    url: https://github.com/modelcontextprotocol/modelcontextprotocol
+    watch_paths:
+      - schema/
+      - spec/
+      - docs/specification/
+    extract_patterns:
+      - "interface\\s+[A-Z][a-zA-Z]+"
+      - "type\\s+[A-Z][a-zA-Z]+\\s*="
+      - '"\\$defs":'
+      - "zod\\.object\\("
+    cadence: weekly
+    priority: critical
+    suggested_pillar: P04
+    notes: "Model Context Protocol by Anthropic. MCP server/tool/resource kinds."
+
+  - name: opentelemetry-semantic-conventions
+    type: github
+    url: https://github.com/open-telemetry/semantic-conventions
+    watch_paths:
+      - model/metrics/
+      - model/trace/
+      - model/logs/
+      - model/resource/
+    extract_patterns:
+      - "^  brief:"
+      - "^  id:"
+      - "^- id:"
+    cadence: weekly
+    priority: high
+    suggested_pillar: P09
+    notes: "OTel semantic conventions. Trace/metric/log attribute kinds."
+
+  - name: w3c-verifiable-credentials
+    type: github
+    url: https://github.com/w3c/vc-data-model
+    watch_paths:
+      - index.html
+      - contexts/
+      - schema/
+    extract_patterns:
+      - '"@type":'
+      - "df\\.term\\("
+      - "rdfs:Class"
+    cadence: biweekly
+    priority: high
+    suggested_pillar: P06
+    notes: "W3C VC spec. Credential/presentation schema kinds."
+
+  - name: sigstore-cosign
+    type: github
+    url: https://github.com/sigstore/cosign
+    watch_paths:
+      - docs/specs/
+      - pkg/types/
+    extract_patterns:
+      - "type [A-Z][a-zA-Z]+ struct"
+      - "Attachment:"
+      - "ArtifactType:"
+    cadence: monthly
+    priority: medium
+    suggested_pillar: P06
+    notes: "Sigstore supply-chain security. Attestation/bundle schema kinds."
+
+  - name: c2pa-spec
+    type: github
+    url: https://github.com/c2pa-org/c2pa-spec
+    watch_paths:
+      - specs/
+      - docs/
+    extract_patterns:
+      - "label:"
+      - "assertion:"
+      - '"jumbf":'
+    cadence: monthly
+    priority: medium
+    suggested_pillar: P06
+    notes: "C2PA content provenance. Manifest/assertion kinds."
+
+  - name: openai-openapi
+    type: github
+    url: https://github.com/openai/openai-openapi
+    watch_paths:
+      - openai.yaml
+    extract_patterns:
+      - "^\\s+[A-Z][a-zA-Z]+Object:"
+      - "^\\s+[A-Z][a-zA-Z]+Request:"
+      - "^\\s+[A-Z][a-zA-Z]+Response:"
+    cadence: biweekly
+    priority: high
+    suggested_pillar: P02
+    notes: "OpenAI API schema. New capability/model/tool kinds."
+
+  - name: anthropic-sdk-python
+    type: github
+    url: https://github.com/anthropics/anthropic-sdk-python
+    watch_paths:
+      - src/anthropic/types/
+    extract_patterns:
+      - "class [A-Z][a-zA-Z]+\\(TypedDict\\)"
+      - "class [A-Z][a-zA-Z]+\\(BaseModel\\)"
+    cadence: biweekly
+    priority: high
+    suggested_pillar: P02
+    notes: "Anthropic Python SDK types. Tool use, extended thinking, cache kinds."
+
+  - name: huggingface-hub-docs
+    type: github
+    url: https://github.com/huggingface/hub-docs
+    watch_paths:
+      - docs/hub/model-cards.md
+      - docs/hub/datasets-cards.md
+    extract_patterns:
+      - "^### "
+      - "^\\*\\*[A-Z][a-z]+ [A-Z][a-z]+"
+    cadence: biweekly
+    priority: medium
+    suggested_pillar: P01
+    notes: "HF model/dataset card spec. Card schema kind updates."
+
+  - name: langchain-core
+    type: github
+    url: https://github.com/langchain-ai/langchain
+    watch_paths:
+      - libs/core/langchain_core/runnables/
+      - libs/core/langchain_core/messages/
+    extract_patterns:
+      - "class [A-Z][a-zA-Z]+\\(BaseModel\\)"
+      - "class [A-Z][a-zA-Z]+Message"
+    cadence: monthly
+    priority: medium
+    suggested_pillar: P03
+    notes: "LangChain core primitives. Chain/runnable/message kind variations."
+
+  - name: openapi-specification
+    type: github
+    url: https://github.com/OAI/OpenAPI-Specification
+    watch_paths:
+      - versions/
+      - schemas/
+    extract_patterns:
+      - "^### "
+      - "\\$ref:"
+    cadence: monthly
+    priority: medium
+    suggested_pillar: P06
+    notes: "OpenAPI spec evolution. API schema and operation kind updates."
+
+  # ==========================================
+  # CATEGORY 2: arXiv Feeds
+  # ==========================================
+
+  - name: arxiv-cs-ma
+    type: arxiv
+    url: https://arxiv.org/search/?query=&searchtype=all&start=0
+    categories:
+      - cs.MA
+    keywords:
+      - protocol
+      - schema
+      - interoperability
+      - "agent-to-agent"
+      - "multi-agent"
+      - "tool use"
+      - "function calling"
+    cadence: weekly
+    priority: high
+    suggested_pillar: P02
+    notes: "Multi-agent systems. New coordination/communication protocol kinds."
+
+  - name: arxiv-cs-ai-agents
+    type: arxiv
+    url: https://arxiv.org/search/
+    categories:
+      - cs.AI
+    keywords:
+      - "agent framework"
+      - "capability"
+      - "evaluation framework"
+      - "benchmark"
+      - "alignment"
+      - "memory"
+      - "retrieval"
+    cadence: weekly
+    priority: high
+    suggested_pillar: P07
+    notes: "AI systems papers. Eval/benchmark/capability kind candidates."
+
+  - name: arxiv-cs-cl-rag
+    type: arxiv
+    url: https://arxiv.org/search/
+    categories:
+      - cs.CL
+    keywords:
+      - RAG
+      - "knowledge graph"
+      - ontology
+      - taxonomy
+      - "context window"
+      - "long context"
+    cadence: weekly
+    priority: medium
+    suggested_pillar: P01
+    notes: "NLP/LLM papers. RAG, knowledge, context kind candidates."
+
+  # ==========================================
+  # CATEGORY 3: IETF Datatracker
+  # ==========================================
+
+  - name: ietf-ai-drafts
+    type: ietf
+    url: https://datatracker.ietf.org/doc/search/?states=active&type=draft
+    keywords:
+      - AI
+      - "machine learning"
+      - agent
+      - "autonomous"
+    cadence: biweekly
+    priority: medium
+    suggested_pillar: P09
+    notes: "IETF active drafts. Protocol/config kind candidates."
+
+  - name: ietf-oauth-bof
+    type: ietf
+    url: https://datatracker.ietf.org/wg/oauth/documents/
+    keywords:
+      - agent
+      - delegation
+      - "token exchange"
+    cadence: monthly
+    priority: medium
+    suggested_pillar: P09
+    notes: "OAuth/token standards. Auth config kind candidates."
+
+  # ==========================================
+  # CATEGORY 4: ISO/IEC JTC 1/SC 42
+  # ==========================================
+
+  - name: iso-sc42-ai
+    type: web_scrape
+    url: https://www.iso.org/committee/6794475/x/catalogue/
+    extract_patterns:
+      - "AI system"
+      - "trustworthy"
+      - "governance"
+    cadence: monthly
+    priority: medium
+    suggested_pillar: P11
+    notes: "ISO AI standards. Governance/compliance kind candidates."
+
+  # ==========================================
+  # CATEGORY 5: IEEE SA
+  # ==========================================
+
+  - name: ieee-sa-ai
+    type: web_scrape
+    url: https://standards.ieee.org/search/?q=artificial+intelligence&status=Active
+    extract_patterns:
+      - "^P[0-9]+"
+      - "Standard for"
+    cadence: monthly
+    priority: low
+    suggested_pillar: P11
+    notes: "IEEE AI P-drafts. Compliance/safety kind candidates."
+
+  # ==========================================
+  # CATEGORY 6: W3C
+  # ==========================================
+
+  - name: w3c-ai-cg
+    type: web_scrape
+    url: https://www.w3.org/groups/cg/?filter-tr=ai
+    extract_patterns:
+      - "charter"
+      - "deliverable"
+    cadence: monthly
+    priority: medium
+    suggested_pillar: P02
+    notes: "W3C AI community groups. Emerging web agent standards."
+
+  - name: w3c-tr-ai
+    type: web_scrape
+    url: https://www.w3.org/TR/?status=WD&status=CR&tag=ai
+    extract_patterns:
+      - "^## "
+      - "interface "
+    cadence: biweekly
+    priority: medium
+    suggested_pillar: P06
+    notes: "W3C working drafts. Schema/credential kind candidates."
+
+  # ==========================================
+  # CATEGORY 7: Vendor Protocol Announcements
+  # ==========================================
+
+  - name: hackernews-protocols
+    type: hn_search
+    url: https://hn.algolia.com/api/v1/search
+    query: "agent protocol schema interoperability"
+    min_points: 50
+    cadence: weekly
+    priority: medium
+    suggested_pillar: P04
+    notes: "HN signal for emerging vendor protocols. Early detection."
+
+  - name: aws-what-is-new
+    type: web_scrape
+    url: https://aws.amazon.com/new/?whats-new-content-all.q=agent&whats-new-content-all.q_operator=AND
+    cadence: biweekly
+    priority: medium
+    suggested_pillar: P09
+    notes: "AWS new features. Cloud agent/infra kind candidates."
+
+  - name: google-ai-blog
+    type: rss
+    url: https://ai.googleblog.com/feeds/posts/default
+    keywords:
+      - agent
+      - protocol
+      - "multi-agent"
+    cadence: weekly
+    priority: medium
+    suggested_pillar: P02
+    notes: "Google AI blog. A2A and Gemini protocol updates."
+
+  # ==========================================
+  # CATEGORY 8: Conference System Papers
+  # ==========================================
+
+  - name: neurips-systems
+    type: proceedings
+    url: https://proceedings.neurips.cc/
+    tracks:
+      - "Systems"
+      - "Benchmarks"
+    cadence: annually
+    priority: high
+    suggested_pillar: P07
+    notes: "NeurIPS systems track. Benchmark/eval kind candidates."
+
+  - name: acl-anthology
+    type: proceedings
+    url: https://aclanthology.org/
+    tracks:
+      - "Demo"
+      - "System"
+    keywords:
+      - "framework"
+      - "toolkit"
+      - "system"
+    cadence: annually
+    priority: medium
+    suggested_pillar: P04
+    notes: "ACL/EMNLP system demos. NLP tool kind candidates."

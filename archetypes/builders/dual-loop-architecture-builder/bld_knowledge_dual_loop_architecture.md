@@ -1,0 +1,82 @@
+---
+kind: knowledge_card
+id: bld_knowledge_card_dual_loop_architecture
+pillar: P01
+llm_function: INJECT
+purpose: Domain knowledge for dual_loop_architecture production
+quality: 9.2
+title: "Knowledge Card Dual Loop Architecture"
+version: "1.0.0"
+author: wave1_builder_gen
+tags: [dual_loop_architecture, builder, knowledge_card]
+tldr: "Domain knowledge for dual_loop_architecture production"
+domain: "dual_loop_architecture construction"
+created: "2026-04-13"
+updated: "2026-04-13"
+density_score: 0.85
+related:
+  - dual-loop-architecture-builder
+  - bld_collaboration_dual_loop_architecture
+  - p03_sp_dual_loop_architecture_builder
+  - kc_dual_loop_architecture
+  - p10_lr_dual_loop_architecture_builder
+  - bld_instruction_dual_loop_architecture
+  - bld_examples_dual_loop_architecture
+  - p08_qg_dual_loop_architecture
+  - bld_tools_dual_loop_architecture
+  - bld_architecture_dual_loop_architecture
+---
+
+## Domain Overview
+
+This ISO applies to the dual loop pattern, coordinating an outer orchestrator with one or more inner worker loops.
+Dual-loop architecture is a control paradigm used in robotics, autonomous systems, and industrial automation to separate real-time execution (inner loop) from strategic decision-making (outer loop). The inner loop manages low-latency tasks like motor control and sensor feedback, while the outer loop handles higher-level planning, error correction, and goal adaptation. This separation ensures responsiveness and stability in dynamic environments, such as autonomous vehicle navigation or robotic manipulation.
+
+Industry adoption is driven by the need to balance speed and adaptability. For example, in aerospace, the inner loop ensures flight stability, while the outer loop optimizes trajectory planning. Similarly, in manufacturing, dual-loop systems enable real-time adjustments to production lines while maintaining long-term process goals.
+
+## Key Concepts
+| Concept              | Definition                                                                 | Source                          |
+|----------------------|----------------------------------------------------------------------------|----------------------------------|
+| Inner Loop           | Real-time control layer handling actuation, sensor feedback, and PID control | *Modern Robotics* (Siciliano)  |
+| Outer Loop           | High-level planning layer for goal setting, error correction, and adaptation | *Autonomous Systems* (Kumar)    |
+| Feedback Integration | Mechanism to relay inner-loop sensor data to outer-loop decision-making      | IEEE 1878-2017                  |
+| Latency Compensation | Techniques to mitigate delays between loop layers (e.g., predictive control) | *Control Systems Engineering*   |
+| Hierarchical Control | Structured delegation of tasks between loops to avoid conflicts              | ISO 26262:2018                  |
+| Dynamic Reconfiguration | Ability to adjust loop priorities during runtime (e.g., emergency braking) | *Robotics: Science and Systems* |
+| Feedforward Control  | Outer-loop prediction of disturbances to preempt inner-loop corrections      | *Feedback Control Systems*      |
+| Model Predictive Control (MPC) | Outer-loop optimization using system models for future state prediction | *IEEE Transactions on Robotics* |
+
+## Industry Standards
+- ROS (Robot Operating System)
+- ISO 26262:2018 (Automotive functional safety)
+- IEEE 1878-2017 (Autonomous system standards)
+- Model Predictive Control (MPC) frameworks
+- IEC 61508 (Functional safety of electrical/electronic systems)
+
+## Common Patterns
+1. **Hierarchical task delegation** – Assign distinct responsibilities to each loop.
+2. **Feedback-driven adaptation** – Use inner-loop data to refine outer-loop goals.
+3. **Latency-aware prioritization** – Allocate resources to time-critical inner-loop tasks.
+4. **Hybrid control modes** – Switch between loops based on environmental conditions.
+
+## Pitfalls
+- Confusing loop boundaries (e.g., outer-loop decisions violating inner-loop constraints).
+- Overloading the outer loop with real-time data, causing delays.
+- Ignoring latency in feedback paths, leading to instability.
+- Hardcoding loop parameters, reducing adaptability in dynamic environments.
+- Poor modularity between loops, complicating maintenance and scaling.
+
+## Related Artifacts
+
+| Artifact | Relationship | Score |
+|----------|-------------|-------|
+| [[dual-loop-architecture-builder]] | downstream | 0.74 |
+| [[bld_collaboration_dual_loop_architecture]] | downstream | 0.71 |
+| [[p03_sp_dual_loop_architecture_builder]] | downstream | 0.69 |
+| [[kc_dual_loop_architecture]] | sibling | 0.65 |
+| [[p10_lr_dual_loop_architecture_builder]] | downstream | 0.59 |
+| [[bld_instruction_dual_loop_architecture]] | downstream | 0.55 |
+| [[bld_examples_dual_loop_architecture]] | downstream | 0.52 |
+| [[p08_qg_dual_loop_architecture]] | downstream | 0.51 |
+| [[bld_tools_dual_loop_architecture]] | downstream | 0.45 |
+| [[bld_architecture_dual_loop_architecture]] | downstream | 0.44 |

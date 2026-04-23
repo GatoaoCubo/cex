@@ -1,0 +1,245 @@
+---
+id: n05_leverage_map_v2_verification
+kind: context_doc
+title: N05 Operations - LEVERAGE_MAP_V2 Verification
+nucleus: N05
+pillar: P01
+mission: LEVERAGE_MAP_V2
+version: 2.0.1
+quality: 9.1
+created: 2026-04-15
+updated: 2026-04-15
+tags: [operations, verification, leverage_map_v2, tooling, self_audit]
+density_score: 0.96
+related:
+  - self_audit_n05_codex_2026_04_15
+  - leverage_map_v2_n05_verify
+  - p10_out_taxonomy_map
+  - p08_dm_n03_leverage_v2_verification
+  - spec_mission_100pct_coverage
+  - self_audit_newpc
+  - p01_kc_gap_detection
+  - system_health_20260413
+  - type_hint_retrofit_w6_20260415_2140
+  - doctor
+---
+
+# N05 Operations - LEVERAGE_MAP_V2 Verification
+
+## 8F Pipeline
+
+```text
+F1 CONSTRAIN: mission=LEVERAGE_MAP_V2, scope=_tools coverage/test/doctor/release surface, output=N05_operations/reports/n05_leverage_map_v2_verification.md
+F2 BECOME: N05 Operations loaded from agent card + n05 rules
+F3 INJECT: handoff, CLAUDE.md, 8F rule, n05 rule, agent card, existing report, tool sources
+F4 REASON: verify tool presence, run real commands, compare with adjacent ops tools, then rank gaps
+F5 CALL: shell used for coverage, doctor, release, grep, artifact inspection, compile, git, signal
+F6 PRODUCE: updated verification report with 2026-04-15 evidence and next-iteration priorities
+F7 GOVERN: checked for factual consistency against command outputs and inspected representative artifacts
+F8 COLLABORATE: saved report, compiled it, committed report artifacts, emitted completion signal
+```
+
+## Mission Notes
+
+The runtime handoff provided to Codex was `LEVERAGE_MAP_V2`, not `SELF_AUDIT`.
+This report executes the actual handoff instructions and uses the existing N05
+report target already present in the repo.
+
+## Verification
+
+### Tool added
+
+`_tools/cex_coverage.py` is present and executable.
+
+### Coverage math
+
+The percentage math is correct once the tool finds matches:
+
+- `coverage_pct = covered / total * 100`
+- pillar rollups and gap counts are internally consistent
+
+The implementation is not sufficient as an ops-quality coverage source yet:
+
+1. It took about 63 seconds to scan the repo on a full run, which is too slow
+for routine interactive use.
+2. It detects artifacts by filename substring, not by frontmatter `kind:`.
+3. That strategy undercounts real coverage when filenames do not mirror the
+derived naming prefix.
+
+Concrete mismatch:
+
+- `N05_operations/P05_output/smoke_eval_deploy.md` has `kind: smoke_eval`
+- `N05_operations/P05_output/regression_check_operations.md` has `kind: regression_check`
+- `N05_operations/P05_output/benchmark_api_latency.md` has `kind: benchmark`
+- `cex_coverage.py` still reported `P07` coverage as `0 / 23`
+
+Conclusion: the math is correct, but the artifact discovery method is too weak,
+so the reported coverage is directionally useful and operationally misleading.
+
+### Useful for gap detection
+
+Yes, but only as a rough scout tool.
+
+It is useful for:
+
+- identifying which pillars look sparse
+- giving N05 a fast backlog sketch
+- surfacing naming-pattern problems
+
+It is not reliable enough for:
+
+- release gating
+- objective coverage KPIs
+- backfill completion claims
+
+## Command Evidence
+
+### `python _tools/cex_coverage.py`
+
+The tool completed and reported:
+
+| Pillar | Total | Covered | Coverage % | Gaps |
+|--------|-------|---------|------------|------|
+| P01 | 28 | 5 | 17.9 | 23 |
+| P02 | 22 | 3 | 13.6 | 19 |
+| P03 | 20 | 7 | 35.0 | 13 |
+| P04 | 34 | 2 | 5.9 | 32 |
+| P05 | 23 | 1 | 4.3 | 22 |
+| P06 | 8 | 0 | 0.0 | 8 |
+| P07 | 23 | 0 | 0.0 | 23 |
+| P08 | 12 | 2 | 16.7 | 10 |
+| P09 | 28 | 2 | 7.1 | 26 |
+| P10 | 18 | 2 | 11.1 | 16 |
+| P11 | 26 | 1 | 3.8 | 25 |
+| P12 | 15 | 2 | 13.3 | 13 |
+
+### `python _tools/cex_doctor.py`
+
+The doctor remains materially more mature than the new coverage tool:
+
+- 258 builder directories found
+- 3354 / 3354 expected files present
+- 190 PASS, 63 WARN, 5 FAIL
+- KC library coverage: 98 / 98 kinds covered
+
+This confirms N05 already has stronger builder-health tooling than artifact
+coverage tooling.
+
+### `python _tools/cex_release_check.py`
+
+Release gate exists, but repo health is not green:
+
+- 8 FAIL / 20 PASS
+- doctor fails present
+- hook errors present
+- flywheel health below target
+- README counts and some model refs are stale
+
+This matters for the leverage map because "CI gate missing" is only partly true:
+there is already a release gate, but not a focused pre-merge ops gate.
+
+## New Wired Tools Since V1
+
+### Newly added in this cycle
+
+- `_tools/cex_coverage.py` - artifact coverage by pillar/kind with JSON output
+
+### Relevant N05 ops tools already wired
+
+- `cex_doctor.py` - builder health, density, completeness
+- `cex_system_test.py` - full system checks
+- `cex_e2e_test.py` - end-to-end runner
+- `cex_grid_test.py` - multi-runtime grid validation
+- `cex_litellm_test.py` - provider routing tests
+- `cex_hooks.py` - hook validation
+- `cex_sanitize.py` - ASCII enforcement
+- `cex_release_check.py` - release readiness gate
+- `cex_quality_monitor.py` - snapshot and regression tracking
+- `cex_setup_validator.py` - environment readiness
+- `cex_signal_watch.py` - completion polling
+- `cex_quota_check.py` - provider quota preflight
+
+## Still Missing
+
+### High priority
+
+- A frontmatter-aware coverage tool or a fixed `cex_coverage.py`
+- A true pre-merge CI gate that evaluates staged changes, not just release state
+- A rollback operator for git or deploy flows
+
+### Medium priority
+
+- A deploy validator that checks readiness evidence before rollout
+- A code review scanner focused on `_tools/*.py`
+- A consolidated regression runner that compares current outputs to stored baselines
+
+### Lower priority
+
+- Incident autopsy tooling
+- SLA and runtime health aggregation
+- Audit-log style change evidence for ops workflows
+
+## Top 3 Next Builds
+
+### 1. Fix or replace `cex_coverage.py`
+
+Why first:
+
+- the new tool is the direct output of this mission
+- it undercounts real artifacts
+- it is too slow for daily ops use
+
+Minimum spec:
+
+- parse frontmatter `kind:` instead of filename substrings
+- ignore builders, runtime, and archived outputs explicitly
+- cache artifact inventory or use indexed discovery
+- emit total runtime and scan counts
+
+### 2. Build `cex_ci_gate.py`
+
+Why second:
+
+- `cex_release_check.py` is release-oriented, not change-oriented
+- N05 needs a gate on staged diffs before merge or commit
+
+Minimum spec:
+
+- inspect staged files only
+- run sanitize, compile, targeted doctor checks, and optional score checks
+- fail fast with file-specific reasons
+
+### 3. Build `cex_rollback.py`
+
+Why third:
+
+- smoke and deploy artifacts already mention rollback behavior
+- there is no operational rollback tool backing those procedures
+
+Minimum spec:
+
+- support dry-run and explicit target ref
+- capture signal and evidence before rollback
+- protect unrelated working tree changes
+
+## Final Assessment
+
+`cex_coverage.py` is a real addition, but not yet a trustworthy N05 ops
+instrument. The repo already has meaningful test, doctor, and release tooling.
+The real gap is not "no ops tooling"; it is the absence of tight, accurate,
+change-scoped gates and rollback support.
+
+## Related Artifacts
+
+| Artifact | Relationship | Score |
+|----------|-------------|-------|
+| [[self_audit_n05_codex_2026_04_15]] | downstream | 0.47 |
+| [[leverage_map_v2_n05_verify]] | downstream | 0.44 |
+| [[p10_out_taxonomy_map]] | downstream | 0.29 |
+| [[p08_dm_n03_leverage_v2_verification]] | downstream | 0.27 |
+| [[spec_mission_100pct_coverage]] | downstream | 0.24 |
+| [[self_audit_newpc]] | sibling | 0.24 |
+| [[p01_kc_gap_detection]] | related | 0.23 |
+| [[system_health_20260413]] | downstream | 0.23 |
+| [[type_hint_retrofit_w6_20260415_2140]] | sibling | 0.23 |
+| [[doctor]] | downstream | 0.22 |

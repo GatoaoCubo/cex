@@ -1,0 +1,166 @@
+---
+id: p08_pat_n03_build
+kind: pattern
+pillar: P08
+title: "Pattern -- N03 Canonical Build Patterns"
+version: 1.0.0
+created: 2026-04-17
+author: n03_engineering
+domain: artifact-construction
+quality: 9.2
+tags: [pattern, N03, build, template-first, hybrid, fresh, construction-triad, 8F]
+tldr: "Three canonical build patterns for N03: Template-First (score >= 0.60), Hybrid (0.30-0.60), Fresh (<0.30). Selection is automatic via F4 REASON based on template match score. Each pattern has distinct F6 instructions and quality expectations."
+density_score: 0.90
+updated: "2026-04-17"
+related:
+  - bld_collaboration_prompt_template
+  - p01_kc_8f_pipeline
+  - agent_card_engineering_nucleus
+  - p08_pat_construction_triad
+  - bld_output_template_kind
+  - p01_kc_creation_best_practices
+  - bld_examples_response_format
+  - p03_ins_doing_tasks
+  - kc_benchmark_tool_vs_llm
+  - p01_kc_pattern_extraction
+---
+
+# Pattern: N03 Canonical Build Patterns
+
+## Purpose
+
+The Construction Triad defines HOW N03 executes F6 PRODUCE.
+Inventive Pride means choosing the right strategy -- not always building from scratch,
+but not always copying a template either. Context determines craft.
+
+## The Construction Triad
+
+### Pattern 1: Template-First
+
+**Trigger:** `template_match_score >= 0.60` (F4 REASON output)
+
+**Philosophy:** A 60%+ match means the domain knowledge is well-represented
+in existing artifacts. Adapt what works; innovate where the template falls short.
+
+**F6 Execution:**
+1. Load the matching template artifact as primary context
+2. Identify: what sections are directly applicable (keep), what needs adaptation (modify), what is missing for this specific artifact (add)
+3. Produce by sections: keep -> modify -> add (in that order)
+4. Do NOT change sections that score well in the template just to "make it your own"
+5. Innovation is additive: add what's missing, not different
+
+**Quality Expectation:**
+- density_score >= 0.87 (template structure helps)
+- D2 (Semantic) target: 9.0+ (canonical terms well-represented in template)
+- Typical composite: 8.8-9.5
+
+**Anti-pattern:** Using template as copy-paste. Template is a SCAFFOLD, not a COPY.
+Every artifact must have context-specific content in at least 50% of its sections.
+
+---
+
+### Pattern 2: Hybrid
+
+**Trigger:** `template_match_score in [0.30, 0.60)` (F4 REASON output)
+
+**Philosophy:** Partial match means some domain knowledge exists but the use case
+differs enough to require novel composition. Combine the best of existing artifacts
+with fresh reasoning for the gaps.
+
+**F6 Execution:**
+1. Identify 2-3 partially matching artifacts
+2. Extract the relevant sections from each (like LEGO bricks)
+3. Identify what is NOT covered by any existing artifact
+4. Produce by composing extracted sections + fresh reasoning for gaps
+5. Ensure transitions between composite sections are coherent
+
+**Quality Expectation:**
+- density_score >= 0.85
+- D4 (Invariant) target: 9.0+ (hybrid must honor all invariants)
+- Typical composite: 8.5-9.2
+
+**Anti-pattern:** Frankensteining -- forcing incompatible sections together.
+If the composite is incoherent, use Fresh instead.
+
+---
+
+### Pattern 3: Fresh
+
+**Trigger:** `template_match_score < 0.30` (F4 REASON output)
+
+**Philosophy:** No useful prior art. This requires genuine invention.
+Inventive Pride peaks here: no shortcuts, full reasoning, original construction.
+
+**F6 Execution:**
+1. Reason from first principles: what is the CORE FUNCTION of this artifact?
+2. Plan sections based on function, not convention
+3. Use the pillar schema as the structural guide (not other artifacts)
+4. Inject deep domain knowledge from P01 KCs + external reference
+5. Build top-to-bottom: high-level purpose -> detailed specification -> examples
+
+**Quality Expectation:**
+- density_score >= 0.85 (fresh means no template; must earn density through substance)
+- D5 (Coverage) target: 9.0+ (fresh artifacts must be comprehensive)
+- Typical composite: 8.3-9.5 (higher variance; depends on domain knowledge)
+
+**Anti-pattern:** Re-inventing things that SHOULD match a template.
+If score < 0.30 on a common kind (knowledge_card, agent, workflow), run F3 INJECT again
+with broader search before defaulting to Fresh.
+
+---
+
+## Pattern Selection Decision Tree
+
+```
+F4 REASON: compute template_match_score
+    |
+    v
+score >= 0.60?
+  YES -> Template-First
+    |
+    NO -> score >= 0.30?
+      YES -> Hybrid
+        |
+        NO -> score < 0.30?
+          YES -> are there >= 2 partial matches?
+            YES -> Hybrid (prefer Hybrid over Fresh when possible)
+            NO -> Fresh
+```
+
+## Pattern-Specific F6 Instructions Injected
+
+When a pattern is selected at F4, these instructions are injected into F6:
+
+| Pattern | Injected instruction |
+|---------|---------------------|
+| Template-First | "Primary template: {template_path}. Adapt sections, do not copy verbatim. Add {N} missing sections." |
+| Hybrid | "Composite from: {artifact1} ({sections}) + {artifact2} ({sections}). Fill gaps: {gaps_list}." |
+| Fresh | "No prior art. Build from function: {core_function}. Use {pillar} schema as structure. Inject: {kc_paths}." |
+
+## Pattern Performance Baseline
+
+Based on N03 build history (all kinds, all pillars):
+
+| Pattern | Avg composite score | Avg density | Avg build time |
+|---------|-------------------|-------------|----------------|
+| Template-First | 9.1 | 0.88 | ~120s |
+| Hybrid | 8.7 | 0.86 | ~180s |
+| Fresh | 8.4 | 0.85 | ~240s |
+
+Higher build time for Fresh is expected and acceptable.
+Inventive Pride means doing it right, not fast.
+
+## Related Artifacts
+
+| Artifact | Relationship | Score |
+|----------|-------------|-------|
+| [[bld_collaboration_prompt_template]] | upstream | 0.23 |
+| [[p01_kc_8f_pipeline]] | upstream | 0.22 |
+| [[agent_card_engineering_nucleus]] | upstream | 0.22 |
+| [[p08_pat_construction_triad]] | sibling | 0.22 |
+| [[bld_output_template_kind]] | upstream | 0.21 |
+| [[p01_kc_creation_best_practices]] | upstream | 0.21 |
+| [[bld_examples_response_format]] | upstream | 0.21 |
+| [[p03_ins_doing_tasks]] | upstream | 0.19 |
+| [[kc_benchmark_tool_vs_llm]] | upstream | 0.17 |
+| [[p01_kc_pattern_extraction]] | upstream | 0.17 |

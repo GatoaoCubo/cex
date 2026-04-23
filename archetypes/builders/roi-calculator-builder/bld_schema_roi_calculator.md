@@ -1,0 +1,101 @@
+---
+kind: schema
+id: bld_schema_roi_calculator
+pillar: P06
+llm_function: CONSTRAIN
+purpose: Formal schema -- SINGLE SOURCE OF TRUTH for roi_calculator
+quality: 9.1
+title: "Schema Roi Calculator"
+version: "1.0.0"
+author: wave1_builder_gen_v2
+tags: [roi_calculator, builder, schema]
+tldr: "Formal schema -- SINGLE SOURCE OF TRUTH for roi_calculator"
+domain: "roi_calculator construction"
+created: "2026-04-14"
+updated: "2026-04-14"
+density_score: 0.85
+related:
+  - bld_schema_reranker_config
+  - bld_schema_integration_guide
+  - bld_schema_benchmark_suite
+  - bld_schema_prompt_technique
+  - bld_schema_eval_metric
+  - bld_schema_usage_report
+  - bld_schema_multimodal_prompt
+  - bld_schema_oauth_app_config
+  - bld_schema_pitch_deck
+  - bld_schema_sandbox_spec
+---
+
+## Frontmatter Fields
+### Required
+| Field | Type | Required | Default | Notes |
+|------|------|----------|---------|-------|
+| id | string | yes | null | Must match ID Pattern |
+| kind | string | yes | "roi_calculator" | CEX kind identifier |
+| pillar | string | yes | "P11" | Pillar classification |
+| title | string | yes | null | Descriptive title |
+| version | string | yes | "1.0.0" | Semantic versioning |
+| created | datetime | yes | null | ISO 8601 format |
+| updated | datetime | yes | null | ISO 8601 format |
+| author | string | yes | null | Responsible party |
+| domain | string | yes | "roi" | Domain context |
+| quality | null | yes | null | Never self-score; peer review assigns |
+| tags | list | yes | [] | Keyword metadata |
+| tldr | string | yes | null | Summary of purpose |
+| calculation_method | string | yes | null | ROI formula/algorithm |
+| input_parameters | list | yes | [] | Required variables |
+| output_metrics | list | yes | [] | Resulting values |
+
+### Recommended
+| Field | Type | Notes |
+|------|------|-------|
+| last_reviewed | datetime | Peer review timestamp |
+| reviewers | list | Reviewer identifiers |
+| validation_status | string | "pending"/"approved" |
+| example_use_case | string | Sample application |
+
+## ID Pattern
+^p11_roi_[a-z][a-z0-9_]+$
+
+## Body Structure
+1. **Calculation Methodology**
+   Detailed description of ROI formula and logic
+
+2. **Input Parameters**
+   List of required variables with data types and ranges
+
+3. **Output Metrics**
+   Definition of calculated values and their units
+
+4. **Assumptions**
+   Conditions and limitations of the model
+
+5. **Validation Procedures**
+   Steps for verifying accuracy and edge cases
+
+6. **Example Use Case**
+   Practical scenario with sample input/output
+
+## Constraints
+- ID must match exact regex pattern
+- All required fields must be present
+- YAML must be valid and under 4096 bytes
+- Domain-specific fields must follow schema
+- Quality field must be peer-reviewed
+- Versioning must follow semantic format
+
+## Related Artifacts
+
+| Artifact | Relationship | Score |
+|----------|-------------|-------|
+| [[bld_schema_reranker_config]] | sibling | 0.77 |
+| [[bld_schema_integration_guide]] | sibling | 0.74 |
+| [[bld_schema_benchmark_suite]] | sibling | 0.73 |
+| [[bld_schema_prompt_technique]] | sibling | 0.70 |
+| [[bld_schema_eval_metric]] | sibling | 0.69 |
+| [[bld_schema_usage_report]] | sibling | 0.69 |
+| [[bld_schema_multimodal_prompt]] | sibling | 0.68 |
+| [[bld_schema_oauth_app_config]] | sibling | 0.68 |
+| [[bld_schema_pitch_deck]] | sibling | 0.68 |
+| [[bld_schema_sandbox_spec]] | sibling | 0.68 |

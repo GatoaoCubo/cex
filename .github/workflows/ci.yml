@@ -1,0 +1,160 @@
+# CEX CI Pipeline — Quality Gate
+# ================================
+# Validates all Python tools powering the 8F pipeline.
+# Jobs: lint → test → compile → doctor → flywheel → system_test
+#
+# No LLM calls in CI (no API keys in Actions).
+
+name: CEX CI
+
+on:
+  push:
+    branches: [main, develop]
+    paths:
+      - '_tools/**'
+      - 'archetypes/**'
+      - 'pyproject.toml'
+      - 'requirements*.txt'
+      - '.github/workflows/ci.yml'
+  pull_request:
+    branches: [main]
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  PYTHON_VERSION: '3.12'
+
+jobs:
+  secret-scan:
+    name: Secret Scan (gitleaks)
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Run gitleaks
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITLEAKS_CONFIG: .github/gitleaks.toml
+
+  lint:
+    name: Lint (Ruff)
+    needs: secret-scan
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+      - run: pip install ruff
+      - name: Lint all tools
+        run: ruff check _tools/*.py _tools/tests/ --select E,F,W --ignore E501,E402,W291,W293
+
+  test:
+    name: Tests (pytest)
+    needs: lint
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: 'pip'
+      - run: pip install -r requirements.txt pytest pytest-cov
+      - name: Run tests
+        run: |
+          cd _tools
+          python -m pytest tests/ -v --tb=short -m "not slow" \
+            --cov=. --cov-report=term-missing --cov-report=xml
+        env:
+          PYTHONPATH: ${{ github.workspace }}/_tools
+      - name: Test summary
+        if: always()
+        run: |
+          echo "## Test Results" >> $GITHUB_STEP_SUMMARY
+          cd _tools && python -m pytest tests/ -q --tb=no 2>&1 | tail -5 >> $GITHUB_STEP_SUMMARY
+
+  compile:
+    name: Compile Artifacts
+    needs: lint
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+      - run: pip install -r requirements.txt
+      - name: Compile all artifacts
+        run: python _tools/cex_compile.py --all
+      - name: Compile summary
+        run: |
+          echo "## Compile Results" >> $GITHUB_STEP_SUMMARY
+          python _tools/cex_compile.py --all 2>&1 | tail -3 >> $GITHUB_STEP_SUMMARY
+
+  doctor:
+    name: Doctor (Health Check)
+    needs: [test, compile]
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+      - run: pip install -r requirements.txt
+      - name: Run doctor
+        run: python _tools/cex_doctor.py
+      - name: Doctor summary
+        if: always()
+        run: |
+          echo "## Doctor Results" >> $GITHUB_STEP_SUMMARY
+          python _tools/cex_doctor.py 2>&1 | tail -10 >> $GITHUB_STEP_SUMMARY
+
+  flywheel:
+    name: Flywheel Audit (109 wires)
+    needs: lint
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+      - run: pip install -r requirements.txt
+      - name: Audit wiring
+        run: python _tools/cex_flywheel_audit.py audit
+      - name: Flywheel summary
+        if: always()
+        run: |
+          echo "## Flywheel Audit" >> $GITHUB_STEP_SUMMARY
+          python _tools/cex_flywheel_audit.py audit 2>&1 | tail -5 >> $GITHUB_STEP_SUMMARY
+
+  system-test:
+    name: System Test (offline)
+    needs: [doctor, flywheel]
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: 'pip'
+      - run: pip install -r requirements.txt
+      - name: Run system test (no LLM)
+        run: python _tools/cex_system_test.py --quick 2>&1
+        env:
+          CEX_USE_API: "0"
+          PYTHONPATH: ${{ github.workspace }}/_tools
+      - name: System test summary
+        if: always()
+        run: |
+          echo "## System Test" >> $GITHUB_STEP_SUMMARY
+          python _tools/cex_system_test.py --quick 2>&1 | tail -10 >> $GITHUB_STEP_SUMMARY

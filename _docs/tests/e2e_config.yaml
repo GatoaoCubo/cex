@@ -1,0 +1,65 @@
+# CEX E2E Stress Test Configuration
+# Source scenarios: P01_knowledge/library/domain/meta/kc_8f_stress_tests.md
+# Gold standards: _docs/tests/e2e_gold/ (produced by N02 W2)
+
+version: "1.0.0"
+created: "2026-04-06"
+author: n05_operations
+
+# Quality floor: any artifact below this score = FAIL
+quality_floor: 8.0
+
+# Timeout per scenario (seconds)
+timeout_quick: 60
+timeout_full: 300
+
+scenarios:
+  petshop:
+    input: "faz um CRM pra pet shop"
+    description: "Vague pt-BR input: ambiguous domain (grooming? vet? retail?), no CRM spec"
+    expected_kinds:
+      - landing_page
+      - content_monetization
+      - agent
+    expected_pillars:
+      - P05
+      - P11
+      - P02
+    quality_floor: 8.0
+    gold_standard: _docs/tests/e2e_gold/petshop_marketing.md
+    regression_markers:
+      - "F1 must fan-out to >= 2 kinds"
+      - "F4 must show disambiguation reasoning"
+      - "F7 score must not drop > 1.0 from baseline"
+
+  instagram:
+    input: "preciso de conteudo pro instagram"
+    description: "Vague pt-BR input: no format, audience, or niche specified"
+    expected_kinds:
+      - prompt_template
+      - schedule
+    expected_pillars:
+      - P03
+      - P08
+    quality_floor: 8.0
+    gold_standard: _docs/tests/e2e_gold/instagram_marketing.md
+    regression_markers:
+      - "F3 must inject brand_config"
+      - "F6 must respect Instagram platform limits"
+      - "Output must contain CTA"
+
+  docs:
+    input: "documenta esse projeto"
+    description: "Vague pt-BR input: which project? what depth? dev or user audience?"
+    expected_kinds:
+      - knowledge_card
+      - context_doc
+    expected_pillars:
+      - P01
+      - P09
+    quality_floor: 8.0
+    gold_standard: _docs/tests/e2e_gold/docs_marketing.md
+    regression_markers:
+      - "F3 must scan actual repo (git log, ls)"
+      - "F6 must not hallucinate module names"
+      - "Every documented path must exist in codebase"

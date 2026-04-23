@@ -1,0 +1,206 @@
+---
+id: p01_kc_terminology_anthropic_canonical
+kind: knowledge_card
+type: domain
+pillar: P01
+title: "Anthropic Official Terminology: Canonical Vocabulary (2026)"
+version: 1.0.0
+created: 2026-04-07
+updated: 2026-04-07
+author: N01_intelligence
+domain: terminology
+origin: src_provider_taxonomy
+quality: 9.1
+tags: [terminology, anthropic, canonical, claude, messages-api, tool-use, mcp, permanent]
+tldr: "Complete canonical vocabulary from Anthropic's official docs. Every term listed here is the EXACT name Anthropic uses — not synonyms, not paraphrases. Use this to validate CEX artifacts touching Anthropic features."
+when_to_use: "When building CEX kinds for Anthropic features, writing system prompts for Claude, or validating terminology in Anthropic-facing artifacts."
+keywords: [anthropic, claude, messages-api, tool-use, computer-use, prompt-caching, extended-thinking, mcp]
+long_tails:
+  - "anthropic official API term names messages tool_use content blocks"
+  - "what does anthropic call prompt caching extended thinking computer use"
+axioms:
+  - "Anthropic's Messages API is the canonical source, not Claude.ai UI terminology"
+  - "MCP originated at Anthropic but is now an independent spec — use MCP spec terms for MCP concepts"
+feeds_kinds: [function_def, mcp_server, computer_use, system_prompt, prompt_template]
+linked_artifacts:
+  related:
+    - P01_knowledge/library/domain/_reference/kc_anthropic_api_patterns.md
+    - P01_knowledge/library/domain/_reference/kc_terminology_rosetta_stone.md
+density_score: 0.93
+related:
+  - p01_kc_anthropic_api_patterns
+  - p01_kc_terminology_openai_canonical
+  - p01_kc_terminology_rosetta_stone
+  - p01_kc_terminology_google_mcp_canonical
+  - bld_memory_mcp_server
+  - atom_12_dify
+  - n01_atom_02_mcp_protocol
+  - p01_kc_openai_api_patterns
+  - atom_03_openai_agents_sdk
+  - p01_kc_server_tools
+---
+
+# Anthropic Canonical Terminology
+
+## Source
+- **Primary**: docs.anthropic.com (Messages API reference, Tool Use guide, Prompt Caching guide, Extended Thinking guide, Computer Use guide)
+- **Secondary**: anthropic.com/engineering (technical blog posts with term definitions)
+- **Version**: API version `2025-09-01` (latest as of April 2026)
+
+---
+
+## Core API Terms
+
+| Official Term | Category | Definition | CEX Relevance |
+|---------------|----------|------------|---------------|
+| **Messages API** | API | Primary API for interacting with Claude models | Core integration point |
+| **model** | Parameter | Model identifier string (e.g., `claude-sonnet-4-20250514`) | `model_card` |
+| **system** | Parameter | System prompt — sets agent behavior context | `system_prompt` |
+| **messages** | Parameter | Array of user/assistant message turns | Conversation state |
+| **max_tokens** | Parameter | Maximum tokens in response | Config |
+| **stop_sequences** | Parameter | Custom stop strings | Config |
+| **temperature** | Parameter | Randomness control (0.0–1.0) | Config |
+| **top_p** | Parameter | Nucleus sampling threshold | Config |
+| **top_k** | Parameter | Top-k sampling | Config |
+| **metadata** | Parameter | Request metadata (e.g., `user_id`) | Tracing |
+| **stream** | Parameter | Enable streaming (SSE) | Config |
+
+## Content Block Types
+
+Anthropic uses a **content block** architecture — each message contains an array of typed blocks.
+
+| Block Type | Direction | Purpose | Fields |
+|------------|-----------|---------|--------|
+| **text** | Both | Natural language | `text` |
+| **image** | Input | Image content | `source` (base64 or URL) |
+| **document** | Input | PDF/document content | `source` (base64 or URL) |
+| **tool_use** | Output | Model invokes a tool | `id`, `name`, `input` |
+| **tool_result** | Input | Developer returns result | `tool_use_id`, `content`, `is_error` |
+| **thinking** | Output | Extended thinking trace | `thinking` (text), `budget_tokens` |
+| **redacted_thinking** | Output | Classified thinking (safety) | Opaque block |
+| **server_tool_use** | Output | Model invokes server tool | Same as tool_use, server-side |
+| **web_search_tool_result** | Input | Server web search result | `search_results` array |
+| **citation** | Output | Source reference in text | `cited_text`, `document_index`/`url` |
+
+## Tool Use Terms
+
+| Official Term | What It Is | Key Detail |
+|---------------|-----------|------------|
+| **tool** | Tool definition object | `{name, description, input_schema}` |
+| **input_schema** | JSON Schema for tool params | NOT `parameters` (that's OpenAI) |
+| **tool_use** | Content block type | Model's tool invocation: contains `id`, `name`, `input` |
+| **tool_result** | Content block type | Developer's response: contains `tool_use_id`, `content` |
+| **tool_choice** | Selection control | Object with `type`: `auto`, `any`, `tool`, `none` |
+| **auto** | Default mode | Model decides whether to use tools |
+| **any** | Force tool use | Model MUST use a tool |
+| **tool** | Specific tool | Force use of specific named tool |
+| **none** | No tools | Disable tool use entirely |
+| **strict** | Schema enforcement | `strict: true` on tool definition — guarantees schema match |
+| **stop_reason: "tool_use"** | Response signal | Generation stopped because tool was invoked |
+| **client tool** | Category | Tool executed in developer's environment |
+| **server tool** | Category | Tool executed on Anthropic's infrastructure |
+
+## Server Tools (Built-in)
+
+| Official Name | Type String | Purpose |
+|---------------|-------------|---------|
+| **web_search** | `web_search_20250305` | Web search via Brave Search |
+| **web_fetch** | `web_fetch` | Fetch and parse web content |
+| **code_execution** | `code_execution_20250522` | Sandboxed code execution |
+| **text_editor** | `text_editor_20250429` | File editing tool |
+| **mcp** | `mcp` | MCP server connector |
+
+> **Note**: Anthropic says "code_execution" — NOT "code_interpreter" (that's OpenAI's term).
+
+## Extended Thinking
+
+| Official Term | What It Is |
+|---------------|-----------|
+| **extended thinking** | Feature name (NOT "chain of thought" or "reasoning") |
+| **thinking** | Content block type containing the thinking trace |
+| **budget_tokens** | Parameter controlling thinking length |
+| **redacted_thinking** | Opaque block when thinking triggers safety |
+| **streaming_thinking** | Whether thinking is streamed incrementally |
+
+## Prompt Caching
+
+| Official Term | What It Is |
+|---------------|-----------|
+| **prompt caching** | Feature name |
+| **cache_control** | Object on cacheable content: `{type: "ephemeral"}` |
+| **ephemeral** | Cache type — 5-minute TTL |
+| **cache_creation_input_tokens** | Usage field: tokens written to cache |
+| **cache_read_input_tokens** | Usage field: tokens read from cache |
+| **cache breakpoint** | Minimum token threshold for caching (1024 for Claude Sonnet) |
+
+## Computer Use
+
+| Official Term | What It Is |
+|---------------|-----------|
+| **computer use** | Feature name (two words, NOT "computer-use" or "computerUse") |
+| **computer** | Tool type for computer control |
+| **display_width_px** / **display_height_px** | Screen dimensions |
+| **screenshot** | Action: capture current screen |
+| **click** / **double_click** / **right_click** | Mouse actions |
+| **type** | Keyboard text entry |
+| **key** | Single key press (e.g., "Return", "ctrl+c") |
+| **scroll** | Scroll action with direction |
+| **coordinate** | `[x, y]` pixel position |
+
+## Batch API
+
+| Official Term | What It Is |
+|---------------|-----------|
+| **Message Batches** | Feature name |
+| **processing_status** | Batch state: `in_progress`, `ended`, `canceling` |
+| **result_type** | Per-message: `succeeded`, `errored`, `canceled`, `expired` |
+| **custom_id** | Developer's identifier for each batch request |
+
+## Citations
+
+| Official Term | What It Is |
+|---------------|-----------|
+| **citations** | Feature — source references in responses |
+| **cited_text** | The exact quoted text |
+| **document_index** | Reference to which source document |
+| **start_char_index** / **end_char_index** | Character positions in source |
+| **url** | Web source URL (for web search citations) |
+
+## Model Naming Convention
+
+| Pattern | Example | Meaning |
+|---------|---------|---------|
+| `claude-{tier}-{version}-{date}` | `claude-sonnet-4-20250514` | Tier + generation + snapshot date |
+| Tiers | `haiku`, `sonnet`, `opus` | Small → medium → large |
+| Latest alias | `claude-sonnet-4-latest` | Points to newest snapshot |
+
+## Terms Anthropic Does NOT Use
+
+These terms are **not** part of Anthropic's official vocabulary (common misconceptions):
+
+| ❌ Don't Say | ✅ Anthropic Says | Why |
+|-------------|-------------------|-----|
+| function calling | tool use | Anthropic's official term |
+| code interpreter | code_execution | OpenAI's term, not Anthropic's |
+| assistant | Claude / model | Anthropic has no "assistant" abstraction |
+| thread | conversation / messages | No persistent thread concept in API |
+| fine-tuning | N/A | Not offered (as of 2026) |
+| embeddings | N/A | Deprecated Voyage partnership |
+| reasoning | extended thinking | Anthropic's specific term |
+| chain of thought | thinking | Block type name |
+| guardrail | constitutional AI / usage policy | Anthropic's framing |
+
+## Related Artifacts
+
+| Artifact | Relationship | Score |
+|----------|-------------|-------|
+| [[p01_kc_anthropic_api_patterns]] | sibling | 0.46 |
+| [[p01_kc_terminology_openai_canonical]] | sibling | 0.46 |
+| [[p01_kc_terminology_rosetta_stone]] | sibling | 0.38 |
+| [[p01_kc_terminology_google_mcp_canonical]] | sibling | 0.35 |
+| [[bld_memory_mcp_server]] | downstream | 0.27 |
+| [[atom_12_dify]] | sibling | 0.26 |
+| [[n01_atom_02_mcp_protocol]] | sibling | 0.26 |
+| [[p01_kc_openai_api_patterns]] | sibling | 0.26 |
+| [[atom_03_openai_agents_sdk]] | sibling | 0.26 |
+| [[p01_kc_server_tools]] | sibling | 0.25 |

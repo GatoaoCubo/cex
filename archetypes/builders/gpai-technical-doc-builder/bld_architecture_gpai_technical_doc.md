@@ -1,0 +1,72 @@
+---
+kind: architecture
+id: bld_architecture_gpai_technical_doc
+pillar: P08
+llm_function: CONSTRAIN
+purpose: Component map of gpai_technical_doc -- inventory, dependencies
+quality: 9.0
+title: "Architecture GPAI Technical Doc"
+version: "1.0.0"
+author: n01_wave7
+tags: [gpai_technical_doc, builder, architecture, GPAI, EU-AI-Act, Annex-IV]
+tldr: "Component map of gpai_technical_doc -- inventory, dependencies"
+domain: "gpai_technical_doc construction"
+created: "2026-04-14"
+updated: "2026-04-14"
+density_score: 0.85
+related:
+  - bld_architecture_ai_rmf_profile
+  - bld_architecture_roi_calculator
+  - bld_architecture_legal_vertical
+  - bld_architecture_app_directory_entry
+  - bld_architecture_api_reference
+  - bld_architecture_benchmark_suite
+  - bld_architecture_churn_prevention_playbook
+  - bld_architecture_fintech_vertical
+  - bld_architecture_discovery_questions
+  - bld_architecture_code_of_conduct
+---
+
+## Component Inventory
+| ISO Name | Role | Pillar | Status |
+|----------|------|--------|--------|
+| bld_manifest | Builder identity and routing | P11 | Active |
+| bld_instruction | Annex IV production process | P03 | Active |
+| bld_system_prompt | LLM persona for EU compliance | P03 | Active |
+| bld_schema | Annex IV field schema | P06 | Active |
+| bld_quality_gate | EU AI Office submission gates | P11 | Active |
+| bld_output_template | Annex IV structured template | P05 | Active |
+| bld_examples | Golden GPAI doc + anti-examples | P07 | Active |
+| bld_knowledge_card | EU AI Act domain knowledge | P01 | Active |
+| bld_architecture | Component map and dependencies | P08 | Active |
+| bld_collaboration | Cross-builder workflow | P12 | Active |
+| bld_config | Naming, paths, limits | P09 | Active |
+| bld_memory | Session persistence and patterns | P10 | Active |
+| bld_tools | Production and validation tools | P04 | Active |
+
+## Dependencies
+| From | To | Type |
+|------|----|------|
+| bld_manifest | bld_config | configuration |
+| bld_instruction | bld_schema | dependency |
+| bld_output_template | bld_schema | dependency |
+| bld_quality_gate | bld_examples | validation reference |
+| bld_tools | bld_quality_gate | validation |
+
+## Architectural Position
+gpai_technical_doc is the EU AI Act compliance artifact within CEX P11. It bridges EU legal requirements (Article 53 / Annex IV) and structured model documentation. Distinct from: model_card (informal), compliance_framework (policy mapping), conformity_assessment (high-risk systems). Upstream inputs: training metadata from ML engineering, evaluation results from N05, energy data from infrastructure. Downstream: EU AI Office submission, downstream provider agreements.
+
+## Related Artifacts
+
+| Artifact | Relationship | Score |
+|----------|-------------|-------|
+| [[bld_architecture_ai_rmf_profile]] | sibling | 0.73 |
+| [[bld_architecture_roi_calculator]] | sibling | 0.72 |
+| [[bld_architecture_legal_vertical]] | sibling | 0.71 |
+| [[bld_architecture_app_directory_entry]] | sibling | 0.71 |
+| [[bld_architecture_api_reference]] | sibling | 0.70 |
+| [[bld_architecture_benchmark_suite]] | sibling | 0.69 |
+| [[bld_architecture_churn_prevention_playbook]] | sibling | 0.69 |
+| [[bld_architecture_fintech_vertical]] | sibling | 0.68 |
+| [[bld_architecture_discovery_questions]] | sibling | 0.68 |
+| [[bld_architecture_code_of_conduct]] | sibling | 0.68 |

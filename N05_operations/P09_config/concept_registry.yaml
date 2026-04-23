@@ -1,0 +1,171 @@
+# CEXAI Infoproduct Concept Registry
+# Source of truth for the 14 core teaching concepts.
+# Used by: _tools/cex_media_produce.py, N04 content pipeline, N05 NotebookLM upload.
+# Spec: _docs/specs/spec_infoproduct_media_scale.md
+
+meta:
+  version: 2.0.0
+  created: 2026-04-19
+  updated: 2026-04-22
+  total_concepts: 14
+  waves: 4
+  formats: [text, audio_source, slides]
+  languages: [en]
+  community_languages: [pt-br]
+
+concepts:
+  # Wave 1: Foundations
+  - slug: pillars
+    display_name: "12 Pillars"
+    wave: 1
+    lens: factory
+    description: "The 12-domain architecture P01-P12 that organizes all CEX knowledge"
+    notebook_title: "Arquitetura de Pilares CEXAI: O Sistema de Fabrica Cognitiva"
+    notebook_id: b99d2038-e9f8-47cf-b618-8b2c0307a989
+    output_dir: _output/mentor/pillars/en
+    status: produced
+
+  - slug: nuclei
+    display_name: "Nuclei"
+    wave: 1
+    lens: city
+    description: "The 7 sin-driven operational agents N01-N07"
+    notebook_title: "CEXAI: Nuclei and the City Metaphor"
+    notebook_id: 3798fba5-45a7-421b-b5a3-15884ea4e5fa
+    output_dir: _output/mentor/nuclei/en
+    status: produced
+
+  - slug: kinds
+    display_name: "Kinds"
+    wave: 1
+    lens: factory
+    description: "The 293-type artifact taxonomy: one kind per atomic output"
+    notebook_title: "CEXAI: Kinds and the Factory Metaphor"
+    notebook_id: 1a77c78d-3dbc-47f9-9716-13655dae184c
+    output_dir: _output/mentor/kinds/en
+    status: produced
+
+  # Wave 2: Mechanics
+  - slug: gdp
+    display_name: "GDP"
+    wave: 2
+    lens: game
+    description: "Guided Decision Protocol: user decides WHAT, LLM decides HOW"
+    notebook_title: "CEXAI: GDP and the Game Metaphor"
+    notebook_id: 7f3f723c-28db-4282-bb0b-ca41982542d6
+    output_dir: _output/mentor/gdp/en
+    status: produced
+
+  - slug: builder
+    display_name: "Builder"
+    wave: 2
+    lens: factory
+    description: "12-ISO agent that produces one kind via the 8F pipeline"
+    notebook_title: "CEXAI: Builder and the Factory Metaphor"
+    notebook_id: 8ceacf27-fbd7-4ae9-a633-f4331c7e35d6
+    output_dir: _output/mentor/builder/en
+    status: produced
+
+  - slug: dispatch
+    display_name: "Dispatch"
+    wave: 2
+    lens: city
+    description: "Grid orchestration: solo/grid/swarm dispatch to nuclei"
+    notebook_title: "CEXAI: Dispatch and the City Metaphor"
+    notebook_id: d2ffc688-4096-410a-91e0-63b9660ffd36
+    output_dir: _output/mentor/dispatch/en
+    status: produced
+
+  # Wave 3: Advanced
+  - slug: crews
+    display_name: "Crews"
+    wave: 3
+    lens: game
+    description: "Multi-role composable team with sequential/hierarchical/consensus topology"
+    notebook_title: "CEXAI: Crews and the Game Metaphor"
+    notebook_id: 559db45c-3dbd-473f-9b42-0adc763bd8f1
+    output_dir: _output/mentor/crews/en
+    status: produced
+
+  - slug: signals
+    display_name: "Signals"
+    wave: 3
+    lens: biology
+    description: "Inter-agent completion and state communication protocol"
+    notebook_title: "CEXAI: Signals and the Biology Metaphor"
+    notebook_id: 36f4783a-2ef7-48c0-9c95-b60af66452c8
+    output_dir: _output/mentor/signals/en
+    status: produced
+
+  - slug: memory
+    display_name: "Memory"
+    wave: 3
+    lens: biology
+    description: "4-type persistent knowledge system: correction/preference/convention/context"
+    notebook_title: "CEXAI: Memory and the Biology Metaphor"
+    notebook_id: f5189e2f-5a82-4eba-b68d-c446b56343cc
+    output_dir: _output/mentor/memory/en
+    status: produced
+
+  - slug: sin_lens
+    display_name: "Sin Lens"
+    wave: 3
+    lens: game
+    description: "Cultural DNA per nucleus: the sin that shapes each agent's optimization bias"
+    notebook_title: "CEXAI: Sin Lens and the Game Metaphor"
+    notebook_id: 88bb3090-9ef6-4b1c-86d1-dc1815b36238
+    output_dir: _output/mentor/sin_lens/en
+    status: produced
+
+  # Wave 4: Driver Course (PT-BR infoproduct)
+  - slug: structured_thinking
+    display_name: "Pensamento Estruturado"
+    wave: 4
+    lens: car
+    description: "8-step structured process turns chaotic AI prompts into professional output"
+    notebook_title: "Pensamento Estruturado - Car Lens"
+    notebook_id: be69b9d3-abfa-4641-9514-b4c424bcea5c
+    output_dir: _output/courses/driver/01_structured_thinking
+    source_module: _courses/driver/01_structured_thinking.md
+    tier: driver
+    language: pt-br
+    status: text_ready
+
+  - slug: seven_sins
+    display_name: "7 Pecados Artificiais"
+    wave: 4
+    lens: bible
+    description: "Deliberate constraint (sin) creates specialization and excellence"
+    notebook_title: "7 Pecados Artificiais - Bible Lens"
+    notebook_id: ce69e2d3-6f52-4fec-a4ae-25cbb440cc59
+    output_dir: _output/courses/driver/02_seven_sins
+    source_module: _courses/driver/02_seven_sins.md
+    tier: driver
+    language: pt-br
+    status: text_ready
+
+  - slug: twelve_pillars
+    display_name: "12 Pilares"
+    wave: 4
+    lens: city
+    description: "12 categories organize ALL knowledge an AI needs"
+    notebook_title: "12 Pilares - City Lens"
+    notebook_id: 96e2ef82-ad90-4f61-8cf5-19a68bdff464
+    output_dir: _output/courses/driver/03_twelve_pillars
+    source_module: _courses/driver/03_twelve_pillars.md
+    tier: driver
+    language: pt-br
+    status: text_ready
+
+  - slug: naming_things
+    display_name: "Nomeie as Coisas"
+    wave: 4
+    lens: factory
+    description: "Precise naming = findability = reusability = compounding AI quality"
+    notebook_title: "Nomeie as Coisas - Factory Lens"
+    notebook_id: 77b5e8e9-ad72-4366-93fd-3e2d4d718a80
+    output_dir: _output/courses/driver/04_naming_things
+    source_module: _courses/driver/04_naming_things.md
+    tier: driver
+    language: pt-br
+    status: text_ready

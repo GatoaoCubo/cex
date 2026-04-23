@@ -1,0 +1,62 @@
+---
+kind: config
+id: bld_config_audit_log
+pillar: P09
+llm_function: CONSTRAIN
+purpose: Naming, paths, limits for audit_log production
+quality: 8.6
+title: "Config Audit Log"
+version: "1.0.0"
+author: wave1_builder_gen_v2
+tags: [audit_log, builder, config]
+tldr: "Naming, paths, limits for audit_log production"
+domain: "audit_log construction"
+created: "2026-04-14"
+updated: "2026-04-14"
+density_score: 0.85
+related:
+  - bld_config_usage_quota
+  - bld_config_ab_test_config
+  - bld_config_visual_workflow
+  - bld_config_prompt_technique
+  - bld_config_transport_config
+  - bld_config_search_strategy
+  - bld_config_rbac_policy
+  - bld_config_pricing_page
+  - bld_config_sso_config
+  - bld_config_sales_playbook
+---
+
+## Naming Convention
+Pattern: `p11_al_{{name}}.yaml`
+Examples: `p11_al_user123.yaml`, `p11_al_system456.yaml`
+
+## Paths
+Artifacts: `/opt/cex/audit_logs/{{name}}/`
+Backup: `/backup/cex/audit_logs/{{name}}/`
+
+## Limits
+max_bytes: 3072
+max_turns: 100
+effort_level: 3
+
+## Hooks
+pre_build: null
+post_build: null
+on_error: null
+on_quality_fail: null
+
+## Related Artifacts
+
+| Artifact | Relationship | Score |
+|----------|-------------|-------|
+| [[bld_config_usage_quota]] | sibling | 0.55 |
+| [[bld_config_ab_test_config]] | sibling | 0.54 |
+| [[bld_config_visual_workflow]] | sibling | 0.54 |
+| [[bld_config_prompt_technique]] | sibling | 0.53 |
+| [[bld_config_transport_config]] | sibling | 0.53 |
+| [[bld_config_search_strategy]] | sibling | 0.52 |
+| [[bld_config_rbac_policy]] | sibling | 0.52 |
+| [[bld_config_pricing_page]] | sibling | 0.51 |
+| [[bld_config_sso_config]] | sibling | 0.51 |
+| [[bld_config_sales_playbook]] | sibling | 0.51 |

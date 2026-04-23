@@ -1,0 +1,6407 @@
+{
+  "schema": "kind_tool_registry/v1",
+  "generated_by": "cex_kind_tool_map.py + gen_tool_kind_supplement.py",
+  "tool_count": 133,
+  "kind_count": 293,
+  "pillar_count": 12,
+  "kind_to_tools": {
+    "agent": [
+      "cex_8f_motor.py",
+      "cex_8f_runner.py",
+      "cex_agent_spawn.py",
+      "cex_batch.py",
+      "cex_builder_linter.py",
+      "cex_capability_index.py",
+      "cex_crew_runner.py",
+      "cex_doctor.py",
+      "cex_evolve.py",
+      "cex_finetune_export.py",
+      "cex_forge.py",
+      "cex_handoff_composer.py",
+      "cex_hygiene.py",
+      "cex_init.py",
+      "cex_intent.py",
+      "cex_materialize.py",
+      "cex_memory.py",
+      "cex_memory_select.py",
+      "cex_memory_update.py",
+      "cex_mission_runner.py",
+      "cex_naming_validator.py",
+      "cex_nucleus_builder.py",
+      "cex_output_formatter.py",
+      "cex_pipeline.py",
+      "cex_preflight.py",
+      "cex_prompt_cache.py",
+      "cex_prompt_optimizer.py",
+      "cex_retriever.py",
+      "cex_schema_hydrate.py",
+      "cex_shared.py",
+      "cex_skill_loader.py",
+      "cex_crew.py",
+      "cex_router.py",
+      "cex_model_updater.py"
+    ],
+    "agent_card": [
+      "cex_handoff_composer.py",
+      "cex_nucleus_builder.py",
+      "cex_agent_spawn.py",
+      "cex_materialize.py",
+      "cex_doctor.py",
+      "cex_flywheel_audit.py",
+      "cex_stats.py",
+      "cex_kind_deps.py"
+    ],
+    "agent_package": [
+      "cex_doctor.py",
+      "cex_agent_spawn.py",
+      "cex_router.py",
+      "cex_model_updater.py",
+      "cex_crew.py",
+      "cex_8f_runner.py"
+    ],
+    "benchmark": [
+      "cex_benchmark_ollama.py",
+      "cex_score.py",
+      "cex_system_test.py",
+      "cex_evolve.py",
+      "cex_feedback.py",
+      "cex_quality_monitor.py",
+      "cex_flywheel_audit.py"
+    ],
+    "capability_registry": [
+      "cex_capability_index.py",
+      "cex_doctor.py",
+      "cex_flywheel_audit.py",
+      "cex_stats.py",
+      "cex_kind_deps.py"
+    ],
+    "chain": [
+      "cex_8f_motor.py",
+      "cex_cli_resolver.py",
+      "cex_router.py",
+      "cex_prompt_cache.py",
+      "cex_prompt_optimizer.py",
+      "cex_prompt_layers.py",
+      "cex_skill_loader.py",
+      "cex_crew_runner.py"
+    ],
+    "chunk_strategy": [
+      "cex_8f_runner.py",
+      "cex_retriever.py",
+      "cex_schema_hydrate.py",
+      "cex_memory_select.py",
+      "cex_query.py",
+      "cex_fts5_search.py",
+      "cex_compile.py"
+    ],
+    "citation": [
+      "cex_memory_age.py",
+      "cex_router_v2.py",
+      "cex_web_fetch.py",
+      "cex_retriever.py",
+      "cex_memory_select.py",
+      "cex_query.py",
+      "cex_fts5_search.py",
+      "cex_compile.py"
+    ],
+    "cli_tool": [
+      "cex_cache_audit.py",
+      "cex_compress.py",
+      "cex_kind_tool_map.py",
+      "cex_batch.py",
+      "cex_8f_runner.py",
+      "cex_run.py"
+    ],
+    "crew_template": [
+      "cex_capability_index.py",
+      "cex_crew.py",
+      "cex_crew_runner.py",
+      "cex_mission.py",
+      "cex_mission_runner.py",
+      "cex_gdp.py",
+      "cex_coordinator.py",
+      "cex_signal_watch.py",
+      "signal_writer.py"
+    ],
+    "curation_nudge": [
+      "cex_nudge.py",
+      "cex_feedback.py",
+      "cex_evolve.py",
+      "cex_score.py",
+      "cex_quality_monitor.py",
+      "cex_hooks.py",
+      "cex_hooks_native.py",
+      "cex_mirror_audit.py"
+    ],
+    "daemon": [
+      "cex_continuous.py",
+      "cex_kind_tool_map.py",
+      "cex_batch.py",
+      "cex_8f_runner.py",
+      "cex_run.py"
+    ],
+    "dag": [
+      "cex_crew_runner.py",
+      "cex_handoff_composer.py",
+      "cex_mission.py",
+      "cex_mission_runner.py",
+      "cex_gdp.py",
+      "cex_coordinator.py",
+      "cex_crew.py",
+      "cex_signal_watch.py",
+      "signal_writer.py"
+    ],
+    "dispatch_rule": [
+      "cex_batch.py",
+      "cex_nucleus_builder.py",
+      "cex_mission.py",
+      "cex_coordinator.py",
+      "cex_8f_motor.py",
+      "cex_mission_runner.py",
+      "cex_gdp.py",
+      "cex_crew.py",
+      "cex_signal_watch.py",
+      "signal_writer.py"
+    ],
+    "entity_memory": [
+      "cex_kind_tool_map.py",
+      "cex_memory_update.py",
+      "cex_memory_select.py",
+      "cex_memory_age.py",
+      "cex_memory_types.py",
+      "cex_user_model.py",
+      "cex_fts5_search.py"
+    ],
+    "env_config": [
+      "cex_naming_validator.py",
+      "cex_setup_validator.py",
+      "cex_preflight.py",
+      "cex_quota_check.py",
+      "cex_router.py",
+      "cex_hooks_native.py"
+    ],
+    "fallback_chain": [
+      "cex_cli_resolver.py",
+      "cex_agent_spawn.py",
+      "cex_router.py",
+      "cex_model_updater.py",
+      "cex_crew.py",
+      "cex_8f_runner.py"
+    ],
+    "formatter": [
+      "cex_output_formatter.py",
+      "cex_social_publisher.py",
+      "cex_compile.py",
+      "cex_schema_hydrate.py",
+      "cex_8f_runner.py",
+      "cex_materialize.py"
+    ],
+    "guardrail": [
+      "cex_prompt_layers.py",
+      "cex_feedback.py",
+      "cex_evolve.py",
+      "cex_score.py",
+      "cex_quality_monitor.py",
+      "cex_hooks.py",
+      "cex_hooks_native.py",
+      "cex_mirror_audit.py"
+    ],
+    "handoff": [
+      "cex_agent_spawn.py",
+      "cex_agentic_nucleus.py",
+      "cex_continuous.py",
+      "cex_handoff_composer.py",
+      "cex_mirror_audit.py",
+      "cex_mission_runner.py",
+      "cex_ollama.py",
+      "cex_preflight.py",
+      "cex_router_v2.py",
+      "cex_mission.py",
+      "cex_gdp.py",
+      "cex_coordinator.py",
+      "cex_crew.py",
+      "cex_signal_watch.py",
+      "signal_writer.py"
+    ],
+    "hook": [
+      "cex_evolve.py",
+      "cex_hooks.py",
+      "cex_nudge.py",
+      "cex_setup_validator.py",
+      "cex_kind_tool_map.py",
+      "cex_batch.py",
+      "cex_8f_runner.py",
+      "cex_run.py"
+    ],
+    "instruction": [
+      "cex_agent_spawn.py",
+      "cex_compile.py",
+      "cex_ft_dataset.py",
+      "cex_hooks.py",
+      "cex_shared.py",
+      "cex_skill_loader.py",
+      "cex_prompt_cache.py",
+      "cex_prompt_optimizer.py",
+      "cex_prompt_layers.py",
+      "cex_crew_runner.py"
+    ],
+    "interface": [
+      "cex_ollama.py",
+      "cex_score_python.py",
+      "cex_hooks.py",
+      "cex_schema_hydrate.py",
+      "cex_compile.py",
+      "cex_hooks_native.py"
+    ],
+    "invariant": [
+      "cex_skill_improve.py",
+      "cex_doctor.py",
+      "cex_flywheel_audit.py",
+      "cex_stats.py",
+      "cex_kind_deps.py"
+    ],
+    "knowledge_card": [
+      "cex_doctor.py",
+      "cex_finetune_export.py",
+      "cex_forge.py",
+      "cex_fractal_fill.py",
+      "cex_hygiene.py",
+      "cex_kind_tool_map.py",
+      "cex_mission_runner.py",
+      "cex_naming_validator.py",
+      "cex_nucleus_builder.py",
+      "cex_pipeline.py",
+      "cex_shared.py",
+      "cex_vector_store.py",
+      "cex_retriever.py",
+      "cex_query.py",
+      "cex_compile.py",
+      "cex_memory_select.py",
+      "cex_fts5_search.py"
+    ],
+    "learning_record": [
+      "cex_8f_runner.py",
+      "cex_feedback.py",
+      "cex_evolve.py",
+      "cex_quality_monitor.py",
+      "cex_memory_update.py",
+      "cex_memory_select.py",
+      "cex_memory_age.py",
+      "cex_memory_types.py",
+      "cex_user_model.py",
+      "cex_fts5_search.py"
+    ],
+    "lens": [
+      "cex_8f_runner.py",
+      "cex_auto_run.py",
+      "cex_crew_runner.py",
+      "cex_theme.py",
+      "cex_agent_spawn.py",
+      "cex_router.py",
+      "cex_model_updater.py",
+      "cex_crew.py"
+    ],
+    "memory_scope": [
+      "cex_schema_hydrate.py",
+      "cex_agent_spawn.py",
+      "cex_router.py",
+      "cex_model_updater.py",
+      "cex_crew.py",
+      "cex_8f_runner.py"
+    ],
+    "optimizer": [
+      "cex_prompt_optimizer.py",
+      "cex_feedback.py",
+      "cex_evolve.py",
+      "cex_score.py",
+      "cex_quality_monitor.py",
+      "cex_hooks.py",
+      "cex_hooks_native.py",
+      "cex_mirror_audit.py"
+    ],
+    "parser": [
+      "cex_capability_index.py",
+      "cex_crew_runner.py",
+      "cex_hooks.py",
+      "cex_hygiene.py",
+      "cex_nudge.py",
+      "cex_prompt_cache.py",
+      "cex_taxonomy_scout.py",
+      "cex_compile.py",
+      "cex_schema_hydrate.py",
+      "cex_8f_runner.py",
+      "cex_materialize.py"
+    ],
+    "pattern": [
+      "cex_agent_spawn.py",
+      "cex_continuous.py",
+      "cex_coordinator.py",
+      "cex_evolve.py",
+      "cex_gdp.py",
+      "cex_handoff_composer.py",
+      "cex_hooks.py",
+      "cex_intent_resolver.py",
+      "cex_memory.py",
+      "cex_memory_age.py",
+      "cex_memory_types.py",
+      "cex_memory_update.py",
+      "cex_patch_boot_timeout.py",
+      "cex_router.py",
+      "cex_skill_loader.py",
+      "cex_user_model.py",
+      "cex_wave_autofix_joinbackticks.py",
+      "cex_wave_validator.py",
+      "cex_doctor.py",
+      "cex_flywheel_audit.py",
+      "cex_stats.py",
+      "cex_kind_deps.py"
+    ],
+    "permission": [
+      "cex_8f_motor.py",
+      "cex_gdp.py",
+      "cex_setup_validator.py",
+      "cex_preflight.py",
+      "cex_quota_check.py",
+      "cex_router.py",
+      "cex_hooks_native.py"
+    ],
+    "quality_gate": [
+      "cex_hooks.py",
+      "cex_nucleus_builder.py",
+      "cex_score.py",
+      "cex_flywheel_audit.py",
+      "cex_feedback.py",
+      "cex_evolve.py",
+      "cex_quality_monitor.py",
+      "cex_hooks_native.py",
+      "cex_mirror_audit.py"
+    ],
+    "rag_source": [
+      "cex_forge.py",
+      "cex_retriever.py",
+      "cex_schema_hydrate.py",
+      "cex_memory_select.py",
+      "cex_query.py",
+      "cex_fts5_search.py",
+      "cex_compile.py"
+    ],
+    "retriever": [
+      "cex_crew_runner.py",
+      "cex_reranker.py",
+      "cex_retriever.py",
+      "cex_vector_store.py",
+      "cex_kind_tool_map.py",
+      "cex_batch.py",
+      "cex_8f_runner.py",
+      "cex_run.py"
+    ],
+    "role_assignment": [
+      "cex_capability_index.py",
+      "cex_crew.py",
+      "cex_crew_runner.py",
+      "cex_agent_spawn.py",
+      "cex_router.py",
+      "cex_model_updater.py",
+      "cex_8f_runner.py"
+    ],
+    "router": [
+      "cex_8f_motor.py",
+      "cex_cli_resolver.py",
+      "cex_crew_runner.py",
+      "cex_router.py",
+      "cex_agent_spawn.py",
+      "cex_model_updater.py",
+      "cex_crew.py",
+      "cex_8f_runner.py"
+    ],
+    "session_state": [
+      "cex_fts5_search.py",
+      "cex_memory_update.py",
+      "cex_memory_select.py",
+      "cex_memory_age.py",
+      "cex_memory_types.py",
+      "cex_user_model.py"
+    ],
+    "signal": [
+      "cex_8f_motor.py",
+      "cex_agent_spawn.py",
+      "cex_auto_run.py",
+      "cex_continuous.py",
+      "cex_evolve.py",
+      "cex_flywheel_worker.py",
+      "cex_hooks_native.py",
+      "cex_mission_runner.py",
+      "cex_mission_state.py",
+      "cex_orchestrate.py",
+      "cex_schema_hydrate.py",
+      "cex_shared.py",
+      "cex_showoff.py",
+      "cex_signal_watch.py",
+      "cex_mission.py",
+      "cex_gdp.py",
+      "cex_coordinator.py",
+      "cex_crew.py",
+      "signal_writer.py"
+    ],
+    "skill": [
+      "cex_8f_runner.py",
+      "cex_crew_runner.py",
+      "cex_hooks_native.py",
+      "cex_prompt_layers.py",
+      "cex_skill_autocreate.py",
+      "cex_skill_improve.py",
+      "cex_skill_loader.py",
+      "cex_kind_tool_map.py",
+      "cex_batch.py",
+      "cex_run.py"
+    ],
+    "system_prompt": [
+      "cex_nucleus_builder.py",
+      "cex_compile.py",
+      "cex_prompt_layers.py",
+      "cex_prompt_cache.py",
+      "cex_prompt_optimizer.py",
+      "cex_skill_loader.py",
+      "cex_crew_runner.py"
+    ],
+    "team_charter": [
+      "cex_crew.py",
+      "cex_crew_runner.py",
+      "cex_mission.py",
+      "cex_mission_runner.py",
+      "cex_gdp.py",
+      "cex_coordinator.py",
+      "cex_signal_watch.py",
+      "signal_writer.py"
+    ],
+    "user_model": [
+      "cex_user_model.py",
+      "cex_memory_update.py",
+      "cex_memory_select.py",
+      "cex_memory_age.py",
+      "cex_memory_types.py",
+      "cex_fts5_search.py"
+    ],
+    "validator": [
+      "cex_hooks.py",
+      "cex_materialize.py",
+      "cex_naming_validator.py",
+      "cex_setup_validator.py",
+      "cex_schema_hydrate.py",
+      "cex_compile.py",
+      "cex_hooks_native.py"
+    ],
+    "voice_pipeline": [
+      "cex_wave_validator.py",
+      "cex_kind_tool_map.py",
+      "cex_batch.py",
+      "cex_8f_runner.py",
+      "cex_run.py"
+    ],
+    "webhook": [
+      "cex_handoff_composer.py",
+      "cex_query.py",
+      "cex_run.py",
+      "cex_social_publisher.py",
+      "cex_kind_tool_map.py",
+      "cex_batch.py",
+      "cex_8f_runner.py"
+    ],
+    "workflow": [
+      "cex_8f_motor.py",
+      "cex_batch.py",
+      "cex_coordinator.py",
+      "cex_handoff_composer.py",
+      "cex_nucleus_builder.py",
+      "cex_run.py",
+      "cex_mission_runner.py",
+      "cex_gdp.py",
+      "cex_mission.py",
+      "cex_crew.py",
+      "cex_signal_watch.py",
+      "signal_writer.py"
+    ],
+    "ab_test_config": [
+      "cex_feedback.py",
+      "cex_evolve.py",
+      "cex_score.py",
+      "cex_quality_monitor.py",
+      "cex_hooks.py",
+      "cex_hooks_native.py",
+      "cex_mirror_audit.py"
+    ],
+    "action_paradigm": [
+      "cex_kind_tool_map.py",
+      "cex_batch.py",
+      "cex_8f_runner.py",
+      "cex_run.py"
+    ],
+    "action_prompt": [
+      "cex_prompt_cache.py",
+      "cex_prompt_optimizer.py",
+      "cex_prompt_layers.py",
+      "cex_skill_loader.py",
+      "cex_crew_runner.py"
+    ],
+    "agent_computer_interface": [
+      "cex_doctor.py",
+      "cex_flywheel_audit.py",
+      "cex_stats.py",
+      "cex_kind_deps.py"
+    ],
+    "agent_grounding_record": [
+      "cex_memory_update.py",
+      "cex_memory_select.py",
+      "cex_memory_age.py",
+      "cex_memory_types.py",
+      "cex_user_model.py",
+      "cex_fts5_search.py"
+    ],
+    "agent_name_service_record": [
+      "cex_kind_tool_map.py",
+      "cex_batch.py",
+      "cex_8f_runner.py",
+      "cex_run.py"
+    ],
+    "agent_profile": [
+      "cex_agent_spawn.py",
+      "cex_router.py",
+      "cex_model_updater.py",
+      "cex_crew.py",
+      "cex_8f_runner.py"
+    ],
+    "agentic_rag": [
+      "cex_retriever.py",
+      "cex_memory_select.py",
+      "cex_query.py",
+      "cex_fts5_search.py",
+      "cex_compile.py"
+    ],
+    "agents_md": [
+      "cex_agent_spawn.py",
+      "cex_router.py",
+      "cex_model_updater.py",
+      "cex_crew.py",
+      "cex_8f_runner.py"
+    ],
+    "aggregate_root": [
+      "cex_hooks.py",
+      "cex_schema_hydrate.py",
+      "cex_compile.py",
+      "cex_hooks_native.py"
+    ],
+    "ai_rmf_profile": [
+      "cex_feedback.py",
+      "cex_evolve.py",
+      "cex_score.py",
+      "cex_quality_monitor.py",
+      "cex_hooks.py",
+      "cex_hooks_native.py",
+      "cex_mirror_audit.py"
+    ],
+    "alert_rule": [
+      "cex_setup_validator.py",
+      "cex_preflight.py",
+      "cex_quota_check.py",
+      "cex_router.py",
+      "cex_hooks_native.py"
+    ],
+    "analyst_briefing": [
+      "cex_compile.py",
+      "cex_schema_hydrate.py",
+      "cex_8f_runner.py",
+      "cex_materialize.py"
+    ],
+    "api_client": [
+      "cex_kind_tool_map.py",
+      "cex_batch.py",
+      "cex_8f_runner.py",
+      "cex_run.py"
+    ],
+    "api_reference": [
+      "cex_hooks.py",
+      "cex_schema_hydrate.py",
+      "cex_compile.py",
+      "cex_hooks_native.py"
+    ],
+    "app_directory_entry": [
+      "cex_compile.py",
+      "cex_schema_hydrate.py",
+      "cex_8f_runner.py",
+      "cex_materialize.py"
+    ],
+    "audio_tool": [
+      "cex_kind_tool_map.py",
+      "cex_batch.py",
+      "cex_8f_runner.py",
+      "cex_run.py"
+    ],
+    "audit_log": [
+      "cex_feedback.py",
+      "cex_evolve.py",
+      "cex_score.py",
+      "cex_quality_monitor.py",
+      "cex_hooks.py",
+      "cex_hooks_native.py",
+      "cex_mirror_audit.py"
+    ],
+    "axiom": [
+      "cex_agent_spawn.py",
+      "cex_router.py",
+      "cex_model_updater.py",
+      "cex_crew.py",
+      "cex_8f_runner.py"
+    ],
+    "backpressure_policy": [
+      "cex_setup_validator.py",
+      "cex_preflight.py",
+      "cex_quota_check.py",
+      "cex_router.py",
+      "cex_hooks_native.py"
+    ],
+    "batch_config": [
+      "cex_setup_validator.py",
+      "cex_preflight.py",
+      "cex_quota_check.py",
+      "cex_router.py",
+      "cex_hooks_native.py"
+    ],
+    "benchmark_suite": [
+      "cex_score.py",
+      "cex_feedback.py",
+      "cex_quality_monitor.py",
+      "cex_evolve.py",
+      "cex_flywheel_audit.py",
+      "cex_system_test.py"
+    ],
+    "bias_audit": [
+      "cex_score.py",
+      "cex_feedback.py",
+      "cex_quality_monitor.py",
+      "cex_evolve.py",
+      "cex_flywheel_audit.py",
+      "cex_system_test.py"
+    ],
+    "boot_config": [
+      "cex_agent_spawn.py",
+      "cex_router.py",
+      "cex_model_updater.py",
+      "cex_crew.py",
+      "cex_8f_runner.py"
+    ],
+    "bounded_context": [
+      "cex_doctor.py",
+      "cex_flywheel_audit.py",
+      "cex_stats.py",
+      "cex_kind_deps.py"
+    ],
+    "browser_tool": [
+      "cex_kind_tool_map.py",
+      "cex_batch.py",
+      "cex_8f_runner.py",
+      "cex_run.py"
+    ],
+    "bugloop": [
+      "cex_feedback.py",
+      "cex_evolve.py",
+      "cex_score.py",
+      "cex_quality_monitor.py",
+      "cex_hooks.py",
+      "cex_hooks_native.py",
+      "cex_mirror_audit.py"
+    ],
+    "c2pa_manifest": [
+      "cex_memory_update.py",
+      "cex_memory_select.py",
+      "cex_memory_age.py",
+      "cex_memory_types.py",
+      "cex_user_model.py",
+      "cex_fts5_search.py"
+    ],
+    "canary_config": [
+      "cex_setup_validator.py",
+      "cex_preflight.py",
+      "cex_quota_check.py",
+      "cex_router.py",
+      "cex_hooks_native.py"
+    ],
+    "case_study": [
+      "cex_compile.py",
+      "cex_schema_hydrate.py",
+      "cex_8f_runner.py",
+      "cex_materialize.py"
+    ],
+    "changelog": [
+      "cex_retriever.py",
+      "cex_memory_select.py",
+      "cex_query.py",
+      "cex_fts5_search.py",
+      "cex_compile.py"
+    ],
+    "checkpoint": [
+      "cex_mission.py",
+      "cex_mission_runner.py",
+      "cex_gdp.py",
+      "cex_coordinator.py",
+      "cex_crew.py",
+      "cex_signal_watch.py",
+      "signal_writer.py"
+    ],
+    "churn_prevention_playbook": [
+      "cex_prompt_cache.py",
+      "cex_prompt_optimizer.py",
+      "cex_prompt_layers.py",
+      "cex_skill_loader.py",
+      "cex_crew_runner.py"
+    ],
+    "circuit_breaker": [
+      "cex_setup_validator.py",
+      "cex_preflight.py",
+      "cex_quota_check.py",
+      "cex_router.py",
+      "cex_hooks_native.py"
+    ],
+    "code_executor": [
+      "cex_kind_tool_map.py",
+      "cex_batch.py",
+      "cex_8f_runner.py",
+      "cex_run.py"
+    ],
+    "code_of_conduct": [
+      "cex_compile.py",
+      "cex_schema_hydrate.py",
+      "cex_8f_runner.py",
+      "cex_materialize.py"
+    ],
+    "cohort_analysis": [
+      "cex_score.py",
+      "cex_feedback.py",
+      "cex_quality_monitor.py",
+      "cex_evolve.py",
+      "cex_flywheel_audit.py",
+      "cex_system_test.py"
+    ],
+    "collaboration_pattern": [
+      "cex_mission.py",
+      "cex_mission_runner.py",
+      "cex_gdp.py",
+      "cex_coordinator.py",
+      "cex_crew.py",
+      "cex_signal_watch.py",
+      "signal_writer.py"
+    ],
+    "competitive_matrix": [
+      "cex_retriever.py",
+      "cex_memory_select.py",
+      "cex_query.py",
+      "cex_fts5_search.py",
+      "cex_compile.py"
+    ],
+    "compliance_checklist": [
+      "cex_feedback.py",
+      "cex_evolve.py",
+      "cex_score.py",
+      "cex_quality_monitor.py",
+      "cex_hooks.py",
+      "cex_hooks_native.py",
+      "cex_mirror_audit.py"
+    ],
+    "compliance_framework": [
+      "cex_feedback.py",
+      "cex_evolve.py",
+      "cex_score.py",
+      "cex_quality_monitor.py",
+      "cex_hooks.py",
+      "cex_hooks_native.py",
+      "cex_mirror_audit.py"
+    ],
+    "component_map": [
+      "cex_doctor.py",
+      "cex_flywheel_audit.py",
+      "cex_stats.py",
+      "cex_kind_deps.py"
+    ],
+    "compression_config": [
+      "cex_memory_update.py",
+      "cex_memory_select.py",
+      "cex_memory_age.py",
+      "cex_memory_types.py",
+      "cex_user_model.py",
+      "cex_fts5_search.py"
+    ],
+    "computer_use": [
+      "cex_kind_tool_map.py",
+      "cex_batch.py",
+      "cex_8f_runner.py",
+      "cex_run.py"
+    ],
+    "conformity_assessment": [
+      "cex_feedback.py",
+      "cex_evolve.py",
+      "cex_score.py",
+      "cex_quality_monitor.py",
+      "cex_hooks.py",
+      "cex_hooks_native.py",
+      "cex_mirror_audit.py"
+    ],
+    "consolidation_policy": [
+      "cex_memory_update.py",
+      "cex_memory_select.py",
+      "cex_memory_age.py",
+      "cex_memory_types.py",
+      "cex_user_model.py",
+      "cex_fts5_search.py"
+    ],
+    "constitutional_rule": [
+      "cex_feedback.py",
+      "cex_evolve.py",
+      "cex_score.py",
+      "cex_quality_monitor.py",
+      "cex_hooks.py",
+      "cex_hooks_native.py",
+      "cex_mirror_audit.py"
+    ],
+    "constraint_spec": [
+      "cex_prompt_cache.py",
+      "cex_prompt_optimizer.py",
+      "cex_prompt_layers.py",
+      "cex_skill_loader.py",
+      "cex_crew_runner.py"
+    ],
+    "content_filter": [
+      "cex_feedback.py",
+      "cex_evolve.py",
+      "cex_score.py",
+      "cex_quality_monitor.py",
+      "cex_hooks.py",
+      "cex_hooks_native.py",
+      "cex_mirror_audit.py"
+    ],
+    "content_monetization": [
+      "cex_feedback.py",
+      "cex_evolve.py",
+      "cex_score.py",
+      "cex_quality_monitor.py",
+      "cex_hooks.py",
+      "cex_hooks_native.py",
+      "cex_mirror_audit.py"
+    ],
+    "context_doc": [
+      "cex_retriever.py",
+      "cex_memory_select.py",
+      "cex_query.py",
+      "cex_fts5_search.py",
+      "cex_compile.py"
+    ],
+    "context_file": [
+      "cex_prompt_cache.py",
+      "cex_prompt_optimizer.py",
+      "cex_prompt_layers.py",
+      "cex_skill_loader.py",
+      "cex_crew_runner.py"
+    ],
+    "context_map": [
+      "cex_doctor.py",
+      "cex_flywheel_audit.py",
+      "cex_stats.py",
+      "cex_kind_deps.py"
+    ],
+    "context_window_config": [
+      "cex_prompt_cache.py",
+      "cex_prompt_optimizer.py",
+      "cex_prompt_layers.py",
+      "cex_skill_loader.py",
+      "cex_crew_runner.py"
+    ],
+    "contributor_guide": [
+      "cex_compile.py",
+      "cex_schema_hydrate.py",
+      "cex_8f_runner.py",
+      "cex_materialize.py"
+    ],
+    "cost_budget": [
+      "cex_setup_validator.py",
+      "cex_preflight.py",
+      "cex_quota_check.py",
+      "cex_router.py",
+      "cex_hooks_native.py"
+    ],
+    "course_module": [
+      "cex_compile.py",
+      "cex_schema_hydrate.py",
+      "cex_8f_runner.py",
+      "cex_materialize.py"
+    ],
+    "customer_segment": [
+      "cex_agent_spawn.py",
+      "cex_router.py",
+      "cex_model_updater.py",
+      "cex_crew.py",
+      "cex_8f_runner.py"
+    ],
+    "data_contract": [
+      "cex_hooks.py",
+      "cex_schema_hydrate.py",
+      "cex_compile.py",
+      "cex_hooks_native.py"
+    ],
+    "data_residency": [
+      "cex_setup_validator.py",
+      "cex_preflight.py",
+      "cex_quota_check.py",
+      "cex_router.py",
+      "cex_hooks_native.py"
+    ],
+    "dataset_card": [
+      "cex_retriever.py",
+      "cex_memory_select.py",
+      "cex_query.py",
+      "cex_fts5_search.py",
+      "cex_compile.py"
+    ],
+    "db_connector": [
+      "cex_kind_tool_map.py",
+      "cex_batch.py",
+      "cex_8f_runner.py",
+      "cex_run.py"
+    ],
+    "decision_record": [
+      "cex_flywheel_audit.py",
+      "cex_doctor.py",
+      "cex_stats.py",
+      "cex_kind_deps.py"
+    ],
+    "deployment_manifest": [
+      "cex_setup_validator.py",
+      "cex_preflight.py",
+      "cex_quota_check.py",
+      "cex_router.py",
+      "cex_hooks_native.py"
+    ],
+    "diagram": [
+      "cex_doctor.py",
+      "cex_flywheel_audit.py",
+      "cex_stats.py",
+      "cex_kind_deps.py"
+    ],
+    "diff_strategy": [
+      "cex_kind_tool_map.py",
+      "cex_batch.py",
+      "cex_8f_runner.py",
+      "cex_run.py"
+    ],
+    "discovery_questions": [
+      "cex_retriever.py",
+      "cex_memory_select.py",
+      "cex_query.py",
+      "cex_fts5_search.py",
+      "cex_compile.py"
+    ],
+    "document_loader": [
+      "cex_kind_tool_map.py",
+      "cex_batch.py",
+      "cex_8f_runner.py",
+      "cex_run.py"
+    ],
+    "domain_event": [
+      "cex_mission.py",
+      "cex_mission_runner.py",
+      "cex_gdp.py",
+      "cex_coordinator.py",
+      "cex_crew.py",
+      "cex_signal_watch.py",
+      "signal_writer.py"
+    ],
+    "domain_vocabulary": [
+      "cex_retriever.py",
+      "cex_memory_select.py",
+      "cex_query.py",
+      "cex_fts5_search.py",
+      "cex_compile.py"
+    ],
+    "drift_detector": [
+      "cex_feedback.py",
+      "cex_evolve.py",
+      "cex_score.py",
+      "cex_quality_monitor.py",
+      "cex_hooks.py",
+      "cex_hooks_native.py",
+      "cex_mirror_audit.py"
+    ],
+    "dual_loop_architecture": [
+      "cex_doctor.py",
+      "cex_flywheel_audit.py",
+      "cex_stats.py",
+      "cex_kind_deps.py"
+    ],
+    "e2e_eval": [
+      "cex_score.py",
+      "cex_feedback.py",
+      "cex_quality_monitor.py",
+      "cex_evolve.py",
+      "cex_flywheel_audit.py",
+      "cex_system_test.py"
+    ],
+    "ecommerce_vertical": [
+      "cex_retriever.py",
+      "cex_memory_select.py",
+      "cex_query.py",
+      "cex_fts5_search.py",
+      "cex_compile.py"
+    ],
+    "edit_format": [
+      "cex_hooks.py",
+      "cex_schema_hydrate.py",
+      "cex_compile.py",
+      "cex_hooks_native.py"
+    ],
+    "edtech_vertical": [
+      "cex_retriever.py",
+      "cex_memory_select.py",
+      "cex_query.py",
+      "cex_fts5_search.py",
+      "cex_compile.py"
+    ],
+    "effort_profile": [
+      "cex_setup_validator.py",
+      "cex_preflight.py",
+      "cex_quota_check.py",
+      "cex_router.py",
+      "cex_hooks_native.py"
+    ],
+    "embedder_provider": [
+      "cex_retriever.py",
+      "cex_memory_select.py",
+      "cex_query.py",
+      "cex_fts5_search.py",
+      "cex_compile.py"
+    ],
+    "embedding_config": [
+      "cex_retriever.py",
+      "cex_memory_select.py",
+      "cex_query.py",
+      "cex_fts5_search.py",
+      "cex_compile.py"
+    ],
+    "enterprise_sla": [
+      "cex_feedback.py",
+      "cex_evolve.py",
+      "cex_score.py",
+      "cex_quality_monitor.py",
+      "cex_hooks.py",
+      "cex_hooks_native.py",
+      "cex_mirror_audit.py"
+    ],
+    "enum_def": [
+      "cex_hooks.py",
+      "cex_schema_hydrate.py",
+      "cex_compile.py",
+      "cex_hooks_native.py"
+    ],
+    "episodic_memory": [
+      "cex_memory_update.py",
+      "cex_memory_select.py",
+      "cex_memory_age.py",
+      "cex_memory_types.py",
+      "cex_user_model.py",
+      "cex_fts5_search.py"
+    ],
+    "eval_dataset": [
+      "cex_score.py",
+      "cex_feedback.py",
+      "cex_quality_monitor.py",
+      "cex_evolve.py",
+      "cex_flywheel_audit.py",
+      "cex_system_test.py"
+    ],
+    "eval_framework": [
+      "cex_score.py",
+      "cex_feedback.py",
+      "cex_quality_monitor.py",
+      "cex_evolve.py",
+      "cex_flywheel_audit.py",
+      "cex_system_test.py"
+    ],
+    "eval_metric": [
+      "cex_score.py",
+      "cex_feedback.py",
+      "cex_quality_monitor.py",
+      "cex_evolve.py",
+      "cex_flywheel_audit.py",
+      "cex_system_test.py"
+    ],
+    "event_schema": [
+      "cex_hooks.py",
+      "cex_schema_hydrate.py",
+      "cex_compile.py",
+      "cex_hooks_native.py"
+    ],
+    "event_stream": [
+      "cex_kind_tool_map.py",
+      "cex_batch.py",
+      "cex_8f_runner.py",
+      "cex_run.py"
+    ],
+    "expansion_play": [
+      "cex_prompt_cache.py",
+      "cex_prompt_optimizer.py",
+      "cex_prompt_layers.py",
+      "cex_skill_loader.py",
+      "cex_crew_runner.py"
+    ],
+    "experiment_config": [
+      "cex_setup_validator.py",
+      "cex_preflight.py",
+      "cex_quota_check.py",
+      "cex_router.py",
+      "cex_hooks_native.py"
+    ],
+    "experiment_tracker": [
+      "cex_score.py",
+      "cex_feedback.py",
+      "cex_quality_monitor.py",
+      "cex_evolve.py",
+      "cex_flywheel_audit.py",
+      "cex_system_test.py"
+    ],
+    "faq_entry": [
+      "cex_retriever.py",
+      "cex_memory_select.py",
+      "cex_query.py",
+      "cex_fts5_search.py",
+      "cex_compile.py"
+    ],
+    "feature_flag": [
+      "cex_setup_validator.py",
+      "cex_hooks_native.py",
+      "cex_preflight.py",
+      "cex_quota_check.py",
+      "cex_router.py"
+    ],
+    "few_shot_example": [
+      "cex_retriever.py",
+      "cex_memory_select.py",
+      "cex_query.py",
+      "cex_fts5_search.py",
+      "cex_compile.py"
+    ],
+    "fhir_agent_capability": [
+      "cex_doctor.py",
+      "cex_flywheel_audit.py",
+      "cex_stats.py",
+      "cex_kind_deps.py"
+    ],
+    "finetune_config": [
+      "cex_agent_spawn.py",
+      "cex_router.py",
+      "cex_model_updater.py",
+      "cex_crew.py",
+      "cex_8f_runner.py"
+    ],
+    "fintech_vertical": [
+      "cex_retriever.py",
+      "cex_memory_select.py",
+      "cex_query.py",
+      "cex_fts5_search.py",
+      "cex_compile.py"
+    ],
+    "function_def": [
+      "cex_kind_tool_map.py",
+      "cex_batch.py",
+      "cex_8f_runner.py",
+      "cex_run.py"
+    ],
+    "github_issue_template": [
+      "cex_compile.py",
+      "cex_schema_hydrate.py",
+      "cex_8f_runner.py",
+      "cex_materialize.py"
+    ],
+    "glossary_entry": [
+      "cex_retriever.py",
+      "cex_memory_select.py",
+      "cex_query.py",
+      "cex_fts5_search.py",
+      "cex_compile.py"
+    ],
+    "golden_test": [
+      "cex_score.py",
+      "cex_feedback.py",
+      "cex_quality_monitor.py",
+      "cex_evolve.py",
+      "cex_flywheel_audit.py",
+      "cex_system_test.py"
+    ],
+    "govtech_vertical": [
+      "cex_retriever.py",
+      "cex_memory_select.py",
+      "cex_query.py",
+      "cex_fts5_search.py",
+      "cex_compile.py"
+    ],
+    "gpai_technical_doc": [
+      "cex_feedback.py",
+      "cex_evolve.py",
+      "cex_score.py",
+      "cex_quality_monitor.py",
+      "cex_hooks.py",
+      "cex_hooks_native.py",
+      "cex_mirror_audit.py"
+    ],
+    "graph_rag_config": [
+      "cex_retriever.py",
+      "cex_memory_select.py",
+      "cex_query.py",
+      "cex_fts5_search.py",
+      "cex_compile.py"
+    ],
+    "handoff_protocol": [
+      "cex_agent_spawn.py",
+      "cex_router.py",
+      "cex_model_updater.py",
+      "cex_crew.py",
+      "cex_8f_runner.py"
+    ],
+    "healthcare_vertical": [
+      "cex_retriever.py",
+      "cex_memory_select.py",
+      "cex_query.py",
+      "cex_fts5_search.py",
+      "cex_compile.py"
+    ],
+    "hibernation_policy": [
+      "cex_setup_validator.py",
+      "cex_preflight.py",
+      "cex_quota_check.py",
+      "cex_router.py",
+      "cex_hooks_native.py"
+    ],
+    "hitl_config": [
+      "cex_feedback.py",
+      "cex_evolve.py",
+      "cex_score.py",
+      "cex_quality_monitor.py",
+      "cex_hooks.py",
+      "cex_hooks_native.py",
+      "cex_mirror_audit.py"
+    ],
+    "hook_config": [
+      "cex_kind_tool_map.py",
+      "cex_batch.py",
+      "cex_8f_runner.py",
+      "cex_run.py"
+    ],
+    "incident_report": [
+      "cex_feedback.py",
+      "cex_evolve.py",
+      "cex_score.py",
+      "cex_quality_monitor.py",
+      "cex_hooks.py",
+      "cex_hooks_native.py",
+      "cex_mirror_audit.py"
+    ],
+    "input_schema": [
+      "cex_hooks.py",
+      "cex_schema_hydrate.py",
+      "cex_compile.py",
+      "cex_hooks_native.py"
+    ],
+    "integration_guide": [
+      "cex_compile.py",
+      "cex_schema_hydrate.py",
+      "cex_8f_runner.py",
+      "cex_materialize.py"
+    ],
+    "interactive_demo": [
+      "cex_compile.py",
+      "cex_schema_hydrate.py",
+      "cex_8f_runner.py",
+      "cex_materialize.py"
+    ],
+    "judge_config": [
+      "cex_score.py",
+      "cex_feedback.py",
+      "cex_quality_monitor.py",
+      "cex_evolve.py",
+      "cex_flywheel_audit.py",
+      "cex_system_test.py"
+    ],
+    "knowledge_graph": [
+      "cex_retriever.py",
+      "cex_memory_select.py",
+      "cex_query.py",
+      "cex_fts5_search.py",
+      "cex_compile.py"
+    ],
+    "knowledge_index": [
+      "cex_fts5_search.py",
+      "cex_memory_select.py",
+      "cex_retriever.py",
+      "cex_memory_update.py",
+      "cex_memory_age.py",
+      "cex_memory_types.py",
+      "cex_user_model.py"
+    ],
+    "kubernetes_ai_requirement": [
+      "cex_setup_validator.py",
+      "cex_preflight.py",
+      "cex_quota_check.py",
+      "cex_router.py",
+      "cex_hooks_native.py"
+    ],
+    "landing_page": [
+      "cex_compile.py",
+      "cex_schema_hydrate.py",
+      "cex_8f_runner.py",
+      "cex_materialize.py"
+    ],
+    "legal_vertical": [
+      "cex_retriever.py",
+      "cex_memory_select.py",
+      "cex_query.py",
+      "cex_fts5_search.py",
+      "cex_compile.py"
+    ],
+    "lifecycle_rule": [
+      "cex_feedback.py",
+      "cex_evolve.py",
+      "cex_score.py",
+      "cex_quality_monitor.py",
+      "cex_hooks.py",
+      "cex_hooks_native.py",
+      "cex_mirror_audit.py"
+    ],
+    "lineage_record": [
+      "cex_retriever.py",
+      "cex_memory_select.py",
+      "cex_query.py",
+      "cex_fts5_search.py",
+      "cex_compile.py"
+    ],
+    "llm_evaluation_scenario": [
+      "cex_score.py",
+      "cex_feedback.py",
+      "cex_quality_monitor.py",
+      "cex_evolve.py",
+      "cex_flywheel_audit.py",
+      "cex_system_test.py"
+    ],
+    "llm_judge": [
+      "cex_score.py",
+      "cex_evolve.py",
+      "cex_feedback.py",
+      "cex_quality_monitor.py",
+      "cex_flywheel_audit.py",
+      "cex_system_test.py"
+    ],
+    "marketplace_app_manifest": [
+      "cex_setup_validator.py",
+      "cex_preflight.py",
+      "cex_quota_check.py",
+      "cex_router.py",
+      "cex_hooks_native.py"
+    ],
+    "mcp_app_extension": [
+      "cex_kind_tool_map.py",
+      "cex_batch.py",
+      "cex_8f_runner.py",
+      "cex_run.py"
+    ],
+    "mcp_server": [
+      "cex_agent_spawn.py",
+      "cex_setup_validator.py",
+      "cex_kind_tool_map.py",
+      "cex_batch.py",
+      "cex_8f_runner.py",
+      "cex_run.py"
+    ],
+    "memory_architecture": [
+      "cex_memory_update.py",
+      "cex_memory_select.py",
+      "cex_memory_age.py",
+      "cex_memory_types.py",
+      "cex_user_model.py",
+      "cex_fts5_search.py"
+    ],
+    "memory_benchmark": [
+      "cex_score.py",
+      "cex_feedback.py",
+      "cex_quality_monitor.py",
+      "cex_evolve.py",
+      "cex_flywheel_audit.py",
+      "cex_system_test.py"
+    ],
+    "memory_summary": [
+      "cex_memory_update.py",
+      "cex_memory_select.py",
+      "cex_memory_age.py",
+      "cex_memory_types.py",
+      "cex_user_model.py",
+      "cex_fts5_search.py"
+    ],
+    "memory_type": [
+      "cex_memory_update.py",
+      "cex_memory_select.py",
+      "cex_memory_age.py",
+      "cex_memory_types.py",
+      "cex_user_model.py",
+      "cex_fts5_search.py"
+    ],
+    "mental_model": [
+      "cex_agent_spawn.py",
+      "cex_router.py",
+      "cex_model_updater.py",
+      "cex_crew.py",
+      "cex_8f_runner.py"
+    ],
+    "messaging_gateway": [
+      "cex_kind_tool_map.py",
+      "cex_batch.py",
+      "cex_8f_runner.py",
+      "cex_run.py"
+    ],
+    "model_architecture": [
+      "cex_agent_spawn.py",
+      "cex_router.py",
+      "cex_model_updater.py",
+      "cex_crew.py",
+      "cex_8f_runner.py"
+    ],
+    "model_card": [
+      "cex_agent_spawn.py",
+      "cex_router.py",
+      "cex_model_updater.py",
+      "cex_crew.py",
+      "cex_8f_runner.py"
+    ],
+    "model_provider": [
+      "cex_model_updater.py",
+      "cex_router.py",
+      "cex_quota_check.py",
+      "cex_agent_spawn.py",
+      "cex_crew.py",
+      "cex_8f_runner.py"
+    ],
+    "model_registry": [
+      "cex_memory_update.py",
+      "cex_memory_select.py",
+      "cex_memory_age.py",
+      "cex_memory_types.py",
+      "cex_user_model.py",
+      "cex_fts5_search.py"
+    ],
+    "multi_modal_config": [
+      "cex_kind_tool_map.py",
+      "cex_batch.py",
+      "cex_8f_runner.py",
+      "cex_run.py"
+    ],
+    "multimodal_prompt": [
+      "cex_prompt_cache.py",
+      "cex_prompt_optimizer.py",
+      "cex_prompt_layers.py",
+      "cex_skill_loader.py",
+      "cex_crew_runner.py"
+    ],
+    "naming_rule": [
+      "cex_doctor.py",
+      "cex_flywheel_audit.py",
+      "cex_stats.py",
+      "cex_kind_deps.py"
+    ],
+    "notifier": [
+      "cex_kind_tool_map.py",
+      "cex_batch.py",
+      "cex_8f_runner.py",
+      "cex_run.py"
+    ],
+    "nps_survey": [
+      "cex_feedback.py",
+      "cex_evolve.py",
+      "cex_score.py",
+      "cex_quality_monitor.py",
+      "cex_hooks.py",
+      "cex_hooks_native.py",
+      "cex_mirror_audit.py"
+    ],
+    "nucleus_def": [
+      "cex_agent_spawn.py",
+      "cex_router.py",
+      "cex_model_updater.py",
+      "cex_crew.py",
+      "cex_8f_runner.py"
+    ],
+    "oauth_app_config": [
+      "cex_setup_validator.py",
+      "cex_preflight.py",
+      "cex_quota_check.py",
+      "cex_router.py",
+      "cex_hooks_native.py"
+    ],
+    "onboarding_flow": [
+      "cex_compile.py",
+      "cex_schema_hydrate.py",
+      "cex_8f_runner.py",
+      "cex_materialize.py"
+    ],
+    "ontology": [
+      "cex_retriever.py",
+      "cex_memory_select.py",
+      "cex_query.py",
+      "cex_fts5_search.py",
+      "cex_compile.py"
+    ],
+    "openapi_spec": [
+      "cex_hooks.py",
+      "cex_schema_hydrate.py",
+      "cex_compile.py",
+      "cex_hooks_native.py"
+    ],
+    "output_validator": [
+      "cex_compile.py",
+      "cex_schema_hydrate.py",
+      "cex_8f_runner.py",
+      "cex_materialize.py"
+    ],
+    "partner_listing": [
+      "cex_compile.py",
+      "cex_schema_hydrate.py",
+      "cex_8f_runner.py",
+      "cex_materialize.py"
+    ],
+    "path_config": [
+      "cex_setup_validator.py",
+      "cex_preflight.py",
+      "cex_quota_check.py",
+      "cex_router.py",
+      "cex_hooks_native.py"
+    ],
+    "personality": [
+      "cex_agent_spawn.py",
+      "cex_router.py",
+      "cex_model_updater.py",
+      "cex_crew.py",
+      "cex_8f_runner.py"
+    ],
+    "pipeline_template": [
+      "cex_mission.py",
+      "cex_mission_runner.py",
+      "cex_gdp.py",
+      "cex_coordinator.py",
+      "cex_crew.py",
+      "cex_signal_watch.py",
+      "signal_writer.py"
+    ],
+    "pitch_deck": [
+      "cex_compile.py",
+      "cex_schema_hydrate.py",
+      "cex_8f_runner.py",
+      "cex_materialize.py"
+    ],
+    "planning_strategy": [
+      "cex_prompt_cache.py",
+      "cex_prompt_optimizer.py",
+      "cex_prompt_layers.py",
+      "cex_skill_loader.py",
+      "cex_crew_runner.py"
+    ],
+    "playground_config": [
+      "cex_setup_validator.py",
+      "cex_preflight.py",
+      "cex_quota_check.py",
+      "cex_router.py",
+      "cex_hooks_native.py"
+    ],
+    "plugin": [
+      "cex_kind_tool_map.py",
+      "cex_batch.py",
+      "cex_8f_runner.py",
+      "cex_run.py"
+    ],
+    "preference_dataset": [
+      "cex_feedback.py",
+      "cex_evolve.py",
+      "cex_score.py",
+      "cex_quality_monitor.py",
+      "cex_hooks.py",
+      "cex_hooks_native.py",
+      "cex_mirror_audit.py"
+    ],
+    "press_release": [
+      "cex_compile.py",
+      "cex_schema_hydrate.py",
+      "cex_8f_runner.py",
+      "cex_materialize.py"
+    ],
+    "pricing_page": [
+      "cex_compile.py",
+      "cex_schema_hydrate.py",
+      "cex_8f_runner.py",
+      "cex_materialize.py"
+    ],
+    "procedural_memory": [
+      "cex_memory_update.py",
+      "cex_memory_select.py",
+      "cex_memory_age.py",
+      "cex_memory_types.py",
+      "cex_user_model.py",
+      "cex_fts5_search.py"
+    ],
+    "process_manager": [
+      "cex_mission.py",
+      "cex_mission_runner.py",
+      "cex_gdp.py",
+      "cex_coordinator.py",
+      "cex_crew.py",
+      "cex_signal_watch.py",
+      "signal_writer.py"
+    ],
+    "product_tour": [
+      "cex_compile.py",
+      "cex_schema_hydrate.py",
+      "cex_8f_runner.py",
+      "cex_materialize.py"
+    ],
+    "prompt_cache": [
+      "cex_prompt_cache.py",
+      "cex_preflight.py",
+      "cex_memory_update.py",
+      "cex_memory_select.py",
+      "cex_memory_age.py",
+      "cex_memory_types.py",
+      "cex_user_model.py",
+      "cex_fts5_search.py"
+    ],
+    "prompt_compiler": [
+      "cex_prompt_cache.py",
+      "cex_prompt_optimizer.py",
+      "cex_prompt_layers.py",
+      "cex_skill_loader.py",
+      "cex_crew_runner.py"
+    ],
+    "prompt_optimizer": [
+      "cex_prompt_cache.py",
+      "cex_prompt_optimizer.py",
+      "cex_prompt_layers.py",
+      "cex_skill_loader.py",
+      "cex_crew_runner.py"
+    ],
+    "prompt_technique": [
+      "cex_prompt_cache.py",
+      "cex_prompt_optimizer.py",
+      "cex_prompt_layers.py",
+      "cex_skill_loader.py",
+      "cex_crew_runner.py"
+    ],
+    "prompt_template": [
+      "cex_prompt_optimizer.py",
+      "cex_prompt_cache.py",
+      "cex_skill_loader.py",
+      "cex_prompt_layers.py",
+      "cex_crew_runner.py"
+    ],
+    "prompt_version": [
+      "cex_prompt_cache.py",
+      "cex_prompt_optimizer.py",
+      "cex_prompt_layers.py",
+      "cex_skill_loader.py",
+      "cex_crew_runner.py"
+    ],
+    "prosody_config": [
+      "cex_setup_validator.py",
+      "cex_preflight.py",
+      "cex_quota_check.py",
+      "cex_router.py",
+      "cex_hooks_native.py"
+    ],
+    "prospective_memory": [
+      "cex_memory_update.py",
+      "cex_memory_select.py",
+      "cex_memory_age.py",
+      "cex_memory_types.py",
+      "cex_user_model.py",
+      "cex_fts5_search.py"
+    ],
+    "quantization_config": [
+      "cex_setup_validator.py",
+      "cex_preflight.py",
+      "cex_quota_check.py",
+      "cex_router.py",
+      "cex_hooks_native.py"
+    ],
+    "quickstart_guide": [
+      "cex_compile.py",
+      "cex_schema_hydrate.py",
+      "cex_8f_runner.py",
+      "cex_materialize.py"
+    ],
+    "rate_limit_config": [
+      "cex_quota_check.py",
+      "cex_router.py",
+      "cex_setup_validator.py",
+      "cex_preflight.py",
+      "cex_hooks_native.py"
+    ],
+    "rbac_policy": [
+      "cex_setup_validator.py",
+      "cex_preflight.py",
+      "cex_quota_check.py",
+      "cex_router.py",
+      "cex_hooks_native.py"
+    ],
+    "realtime_session": [
+      "cex_setup_validator.py",
+      "cex_preflight.py",
+      "cex_quota_check.py",
+      "cex_router.py",
+      "cex_hooks_native.py"
+    ],
+    "reasoning_strategy": [
+      "cex_prompt_cache.py",
+      "cex_prompt_optimizer.py",
+      "cex_prompt_layers.py",
+      "cex_skill_loader.py",
+      "cex_crew_runner.py"
+    ],
+    "reasoning_trace": [
+      "cex_prompt_cache.py",
+      "cex_prompt_optimizer.py",
+      "cex_prompt_layers.py",
+      "cex_skill_loader.py",
+      "cex_crew_runner.py"
+    ],
+    "red_team_eval": [
+      "cex_score.py",
+      "cex_feedback.py",
+      "cex_quality_monitor.py",
+      "cex_evolve.py",
+      "cex_flywheel_audit.py",
+      "cex_system_test.py"
+    ],
+    "referral_program": [
+      "cex_feedback.py",
+      "cex_evolve.py",
+      "cex_score.py",
+      "cex_quality_monitor.py",
+      "cex_hooks.py",
+      "cex_hooks_native.py",
+      "cex_mirror_audit.py"
+    ],
+    "regression_check": [
+      "cex_score.py",
+      "cex_feedback.py",
+      "cex_quality_monitor.py",
+      "cex_evolve.py",
+      "cex_flywheel_audit.py",
+      "cex_system_test.py"
+    ],
+    "renewal_workflow": [
+      "cex_mission.py",
+      "cex_mission_runner.py",
+      "cex_gdp.py",
+      "cex_coordinator.py",
+      "cex_crew.py",
+      "cex_signal_watch.py",
+      "signal_writer.py"
+    ],
+    "repo_map": [
+      "cex_retriever.py",
+      "cex_memory_select.py",
+      "cex_query.py",
+      "cex_fts5_search.py",
+      "cex_compile.py"
+    ],
+    "reranker_config": [
+      "cex_retriever.py",
+      "cex_memory_select.py",
+      "cex_query.py",
+      "cex_fts5_search.py",
+      "cex_compile.py"
+    ],
+    "research_pipeline": [
+      "cex_kind_tool_map.py",
+      "cex_batch.py",
+      "cex_8f_runner.py",
+      "cex_run.py"
+    ],
+    "response_format": [
+      "cex_compile.py",
+      "cex_schema_hydrate.py",
+      "cex_8f_runner.py",
+      "cex_materialize.py"
+    ],
+    "retriever_config": [
+      "cex_retriever.py",
+      "cex_memory_select.py",
+      "cex_query.py",
+      "cex_fts5_search.py",
+      "cex_compile.py"
+    ],
+    "retry_policy": [
+      "cex_setup_validator.py",
+      "cex_preflight.py",
+      "cex_quota_check.py",
+      "cex_router.py",
+      "cex_hooks_native.py"
+    ],
+    "revision_loop_policy": [
+      "cex_feedback.py",
+      "cex_evolve.py",
+      "cex_score.py",
+      "cex_quality_monitor.py",
+      "cex_hooks.py",
+      "cex_hooks_native.py",
+      "cex_mirror_audit.py"
+    ],
+    "reward_model": [
+      "cex_score.py",
+      "cex_feedback.py",
+      "cex_quality_monitor.py",
+      "cex_evolve.py",
+      "cex_flywheel_audit.py",
+      "cex_system_test.py"
+    ],
+    "reward_signal": [
+      "cex_feedback.py",
+      "cex_evolve.py",
+      "cex_score.py",
+      "cex_quality_monitor.py",
+      "cex_hooks.py",
+      "cex_hooks_native.py",
+      "cex_mirror_audit.py"
+    ],
+    "rl_algorithm": [
+      "cex_agent_spawn.py",
+      "cex_router.py",
+      "cex_model_updater.py",
+      "cex_crew.py",
+      "cex_8f_runner.py"
+    ],
+    "roi_calculator": [
+      "cex_feedback.py",
+      "cex_evolve.py",
+      "cex_score.py",
+      "cex_quality_monitor.py",
+      "cex_hooks.py",
+      "cex_hooks_native.py",
+      "cex_mirror_audit.py"
+    ],
+    "runtime_rule": [
+      "cex_setup_validator.py",
+      "cex_preflight.py",
+      "cex_quota_check.py",
+      "cex_router.py",
+      "cex_hooks_native.py"
+    ],
+    "runtime_state": [
+      "cex_memory_update.py",
+      "cex_memory_select.py",
+      "cex_memory_age.py",
+      "cex_memory_types.py",
+      "cex_user_model.py",
+      "cex_fts5_search.py"
+    ],
+    "safety_hazard_taxonomy": [
+      "cex_feedback.py",
+      "cex_evolve.py",
+      "cex_score.py",
+      "cex_quality_monitor.py",
+      "cex_hooks.py",
+      "cex_hooks_native.py",
+      "cex_mirror_audit.py"
+    ],
+    "safety_policy": [
+      "cex_feedback.py",
+      "cex_evolve.py",
+      "cex_score.py",
+      "cex_quality_monitor.py",
+      "cex_hooks.py",
+      "cex_hooks_native.py",
+      "cex_mirror_audit.py"
+    ],
+    "saga": [
+      "cex_mission.py",
+      "cex_mission_runner.py",
+      "cex_gdp.py",
+      "cex_coordinator.py",
+      "cex_crew.py",
+      "cex_signal_watch.py",
+      "signal_writer.py"
+    ],
+    "sales_playbook": [
+      "cex_prompt_cache.py",
+      "cex_prompt_optimizer.py",
+      "cex_prompt_layers.py",
+      "cex_skill_loader.py",
+      "cex_crew_runner.py"
+    ],
+    "sandbox_config": [
+      "cex_setup_validator.py",
+      "cex_preflight.py",
+      "cex_quota_check.py",
+      "cex_router.py",
+      "cex_hooks_native.py"
+    ],
+    "sandbox_spec": [
+      "cex_setup_validator.py",
+      "cex_preflight.py",
+      "cex_quota_check.py",
+      "cex_router.py",
+      "cex_hooks_native.py"
+    ],
+    "schedule": [
+      "cex_mission.py",
+      "cex_mission_runner.py",
+      "cex_gdp.py",
+      "cex_coordinator.py",
+      "cex_crew.py",
+      "cex_signal_watch.py",
+      "signal_writer.py"
+    ],
+    "scoring_rubric": [
+      "cex_score.py",
+      "cex_feedback.py",
+      "cex_evolve.py",
+      "cex_quality_monitor.py",
+      "cex_flywheel_audit.py",
+      "cex_system_test.py"
+    ],
+    "sdk_example": [
+      "cex_kind_tool_map.py",
+      "cex_batch.py",
+      "cex_8f_runner.py",
+      "cex_run.py"
+    ],
+    "search_strategy": [
+      "cex_kind_tool_map.py",
+      "cex_batch.py",
+      "cex_8f_runner.py",
+      "cex_run.py"
+    ],
+    "search_tool": [
+      "cex_kind_tool_map.py",
+      "cex_batch.py",
+      "cex_8f_runner.py",
+      "cex_run.py"
+    ],
+    "secret_config": [
+      "cex_setup_validator.py",
+      "cex_preflight.py",
+      "cex_quota_check.py",
+      "cex_router.py",
+      "cex_hooks_native.py"
+    ],
+    "self_improvement_loop": [
+      "cex_feedback.py",
+      "cex_evolve.py",
+      "cex_score.py",
+      "cex_quality_monitor.py",
+      "cex_hooks.py",
+      "cex_hooks_native.py",
+      "cex_mirror_audit.py"
+    ],
+    "session_backend": [
+      "cex_memory_update.py",
+      "cex_memory_select.py",
+      "cex_memory_age.py",
+      "cex_memory_types.py",
+      "cex_user_model.py",
+      "cex_fts5_search.py"
+    ],
+    "slo_definition": [
+      "cex_setup_validator.py",
+      "cex_preflight.py",
+      "cex_quota_check.py",
+      "cex_router.py",
+      "cex_hooks_native.py"
+    ],
+    "smoke_eval": [
+      "cex_score.py",
+      "cex_feedback.py",
+      "cex_quality_monitor.py",
+      "cex_evolve.py",
+      "cex_flywheel_audit.py",
+      "cex_system_test.py"
+    ],
+    "social_publisher": [
+      "cex_kind_tool_map.py",
+      "cex_batch.py",
+      "cex_8f_runner.py",
+      "cex_run.py"
+    ],
+    "software_project": [
+      "cex_agent_spawn.py",
+      "cex_router.py",
+      "cex_model_updater.py",
+      "cex_crew.py",
+      "cex_8f_runner.py"
+    ],
+    "spawn_config": [
+      "cex_mission.py",
+      "cex_mission_runner.py",
+      "cex_gdp.py",
+      "cex_coordinator.py",
+      "cex_crew.py",
+      "cex_signal_watch.py",
+      "signal_writer.py"
+    ],
+    "sso_config": [
+      "cex_setup_validator.py",
+      "cex_preflight.py",
+      "cex_quota_check.py",
+      "cex_router.py",
+      "cex_hooks_native.py"
+    ],
+    "state_machine": [
+      "cex_mission.py",
+      "cex_mission_runner.py",
+      "cex_gdp.py",
+      "cex_coordinator.py",
+      "cex_crew.py",
+      "cex_signal_watch.py",
+      "signal_writer.py"
+    ],
+    "streaming_config": [
+      "cex_compile.py",
+      "cex_schema_hydrate.py",
+      "cex_8f_runner.py",
+      "cex_materialize.py"
+    ],
+    "stt_provider": [
+      "cex_kind_tool_map.py",
+      "cex_batch.py",
+      "cex_8f_runner.py",
+      "cex_run.py"
+    ],
+    "subscription_tier": [
+      "cex_feedback.py",
+      "cex_evolve.py",
+      "cex_score.py",
+      "cex_quality_monitor.py",
+      "cex_hooks.py",
+      "cex_hooks_native.py",
+      "cex_mirror_audit.py"
+    ],
+    "supabase_data_layer": [
+      "cex_kind_tool_map.py",
+      "cex_batch.py",
+      "cex_8f_runner.py",
+      "cex_run.py"
+    ],
+    "supervisor": [
+      "cex_doctor.py",
+      "cex_flywheel_audit.py",
+      "cex_stats.py",
+      "cex_kind_deps.py"
+    ],
+    "tagline": [
+      "cex_prompt_cache.py",
+      "cex_prompt_optimizer.py",
+      "cex_prompt_layers.py",
+      "cex_skill_loader.py",
+      "cex_crew_runner.py"
+    ],
+    "terminal_backend": [
+      "cex_setup_validator.py",
+      "cex_preflight.py",
+      "cex_quota_check.py",
+      "cex_router.py",
+      "cex_hooks_native.py"
+    ],
+    "thinking_config": [
+      "cex_setup_validator.py",
+      "cex_preflight.py",
+      "cex_quota_check.py",
+      "cex_router.py",
+      "cex_hooks_native.py"
+    ],
+    "threat_model": [
+      "cex_feedback.py",
+      "cex_evolve.py",
+      "cex_score.py",
+      "cex_quality_monitor.py",
+      "cex_hooks.py",
+      "cex_hooks_native.py",
+      "cex_mirror_audit.py"
+    ],
+    "toolkit": [
+      "cex_kind_tool_map.py",
+      "cex_batch.py",
+      "cex_8f_runner.py",
+      "cex_run.py"
+    ],
+    "trace_config": [
+      "cex_score.py",
+      "cex_feedback.py",
+      "cex_quality_monitor.py",
+      "cex_evolve.py",
+      "cex_flywheel_audit.py",
+      "cex_system_test.py"
+    ],
+    "training_method": [
+      "cex_agent_spawn.py",
+      "cex_router.py",
+      "cex_model_updater.py",
+      "cex_crew.py",
+      "cex_8f_runner.py"
+    ],
+    "trajectory_eval": [
+      "cex_score.py",
+      "cex_feedback.py",
+      "cex_quality_monitor.py",
+      "cex_evolve.py",
+      "cex_flywheel_audit.py",
+      "cex_system_test.py"
+    ],
+    "transport_config": [
+      "cex_setup_validator.py",
+      "cex_preflight.py",
+      "cex_quota_check.py",
+      "cex_router.py",
+      "cex_hooks_native.py"
+    ],
+    "tts_provider": [
+      "cex_kind_tool_map.py",
+      "cex_batch.py",
+      "cex_8f_runner.py",
+      "cex_run.py"
+    ],
+    "type_def": [
+      "cex_hooks.py",
+      "cex_schema_hydrate.py",
+      "cex_compile.py",
+      "cex_hooks_native.py"
+    ],
+    "unit_eval": [
+      "cex_score.py",
+      "cex_feedback.py",
+      "cex_quality_monitor.py",
+      "cex_evolve.py",
+      "cex_flywheel_audit.py",
+      "cex_system_test.py"
+    ],
+    "usage_quota": [
+      "cex_setup_validator.py",
+      "cex_preflight.py",
+      "cex_quota_check.py",
+      "cex_router.py",
+      "cex_hooks_native.py"
+    ],
+    "usage_report": [
+      "cex_score.py",
+      "cex_feedback.py",
+      "cex_quality_monitor.py",
+      "cex_evolve.py",
+      "cex_flywheel_audit.py",
+      "cex_system_test.py"
+    ],
+    "user_journey": [
+      "cex_compile.py",
+      "cex_schema_hydrate.py",
+      "cex_8f_runner.py",
+      "cex_materialize.py"
+    ],
+    "vad_config": [
+      "cex_setup_validator.py",
+      "cex_preflight.py",
+      "cex_quota_check.py",
+      "cex_router.py",
+      "cex_hooks_native.py"
+    ],
+    "validation_schema": [
+      "cex_hooks.py",
+      "cex_schema_hydrate.py",
+      "cex_compile.py",
+      "cex_hooks_native.py"
+    ],
+    "value_object": [
+      "cex_hooks.py",
+      "cex_schema_hydrate.py",
+      "cex_compile.py",
+      "cex_hooks_native.py"
+    ],
+    "vc_credential": [
+      "cex_memory_update.py",
+      "cex_memory_select.py",
+      "cex_memory_age.py",
+      "cex_memory_types.py",
+      "cex_user_model.py",
+      "cex_fts5_search.py"
+    ],
+    "vector_store": [
+      "cex_retriever.py",
+      "cex_memory_select.py",
+      "cex_query.py",
+      "cex_fts5_search.py",
+      "cex_compile.py"
+    ],
+    "vision_tool": [
+      "cex_kind_tool_map.py",
+      "cex_batch.py",
+      "cex_8f_runner.py",
+      "cex_run.py"
+    ],
+    "visual_workflow": [
+      "cex_mission.py",
+      "cex_mission_runner.py",
+      "cex_gdp.py",
+      "cex_coordinator.py",
+      "cex_crew.py",
+      "cex_signal_watch.py",
+      "signal_writer.py"
+    ],
+    "webinar_script": [
+      "cex_prompt_cache.py",
+      "cex_prompt_optimizer.py",
+      "cex_prompt_layers.py",
+      "cex_skill_loader.py",
+      "cex_crew_runner.py"
+    ],
+    "white_label_config": [
+      "cex_setup_validator.py",
+      "cex_preflight.py",
+      "cex_quota_check.py",
+      "cex_router.py",
+      "cex_hooks_native.py"
+    ],
+    "workflow_node": [
+      "cex_mission.py",
+      "cex_mission_runner.py",
+      "cex_gdp.py",
+      "cex_coordinator.py",
+      "cex_crew.py",
+      "cex_signal_watch.py",
+      "signal_writer.py"
+    ],
+    "workflow_primitive": [
+      "cex_mission.py",
+      "cex_mission_runner.py",
+      "cex_gdp.py",
+      "cex_coordinator.py",
+      "cex_crew.py",
+      "cex_signal_watch.py",
+      "signal_writer.py"
+    ],
+    "workflow_run_crate": [
+      "cex_memory_update.py",
+      "cex_memory_select.py",
+      "cex_memory_age.py",
+      "cex_memory_types.py",
+      "cex_user_model.py",
+      "cex_fts5_search.py"
+    ],
+    "working_memory": [
+      "cex_memory_update.py",
+      "cex_memory_select.py",
+      "cex_memory_age.py",
+      "cex_memory_types.py",
+      "cex_user_model.py",
+      "cex_fts5_search.py"
+    ]
+  },
+  "pillar_to_tools": {
+    "01": [
+      "cex_evolve_ollama.py",
+      "cex_forge.py",
+      "cex_fractal_fill.py",
+      "cex_ft_dataset.py",
+      "cex_kind_tool_map.py",
+      "cex_merge_pillars.py",
+      "cex_nucleus_builder.py",
+      "cex_pipeline.py"
+    ],
+    "02": [
+      "cex_forge.py",
+      "cex_nucleus_builder.py",
+      "cex_pipeline.py"
+    ],
+    "03": [
+      "cex_compile.py",
+      "cex_coverage.py",
+      "cex_nucleus_builder.py"
+    ],
+    "04": [
+      "cex_compress.py"
+    ],
+    "07": [
+      "cex_cache_audit.py"
+    ],
+    "08": [
+      "cex_nucleus_builder.py"
+    ],
+    "10": [
+      "cex_kind_tool_map.py",
+      "cex_user_model.py"
+    ],
+    "11": [
+      "cex_nucleus_builder.py",
+      "cex_nudge.py"
+    ],
+    "12": [
+      "cex_kind_tool_map.py",
+      "cex_merge_pillars.py",
+      "cex_nucleus_builder.py"
+    ],
+    "P04": [
+      "cex_compress.py"
+    ],
+    "P07": [
+      "cex_cache_audit.py"
+    ],
+    "P10": [
+      "cex_kind_tool_map.py"
+    ]
+  },
+  "tool_to_kinds": {
+    "cex_8f_motor.py": [
+      "agent",
+      "chain",
+      "dispatch_rule",
+      "permission",
+      "router",
+      "signal",
+      "workflow"
+    ],
+    "cex_8f_runner.py": [
+      "action_paradigm",
+      "agent",
+      "agent_name_service_record",
+      "agent_package",
+      "agent_profile",
+      "agents_md",
+      "analyst_briefing",
+      "api_client",
+      "app_directory_entry",
+      "audio_tool",
+      "axiom",
+      "boot_config",
+      "browser_tool",
+      "case_study",
+      "chunk_strategy",
+      "cli_tool",
+      "code_executor",
+      "code_of_conduct",
+      "computer_use",
+      "contributor_guide",
+      "course_module",
+      "customer_segment",
+      "daemon",
+      "db_connector",
+      "diff_strategy",
+      "document_loader",
+      "event_stream",
+      "fallback_chain",
+      "finetune_config",
+      "formatter",
+      "function_def",
+      "github_issue_template",
+      "handoff_protocol",
+      "hook",
+      "hook_config",
+      "integration_guide",
+      "interactive_demo",
+      "landing_page",
+      "learning_record",
+      "lens",
+      "mcp_app_extension",
+      "mcp_server",
+      "memory_scope",
+      "mental_model",
+      "messaging_gateway",
+      "model_architecture",
+      "model_card",
+      "model_provider",
+      "multi_modal_config",
+      "notifier",
+      "nucleus_def",
+      "onboarding_flow",
+      "output_validator",
+      "parser",
+      "partner_listing",
+      "personality",
+      "pitch_deck",
+      "plugin",
+      "press_release",
+      "pricing_page",
+      "product_tour",
+      "quickstart_guide",
+      "research_pipeline",
+      "response_format",
+      "retriever",
+      "rl_algorithm",
+      "role_assignment",
+      "router",
+      "sdk_example",
+      "search_strategy",
+      "search_tool",
+      "skill",
+      "social_publisher",
+      "software_project",
+      "streaming_config",
+      "stt_provider",
+      "supabase_data_layer",
+      "toolkit",
+      "training_method",
+      "tts_provider",
+      "user_journey",
+      "vision_tool",
+      "voice_pipeline",
+      "webhook"
+    ],
+    "cex_agent_spawn.py": [
+      "agent",
+      "agent_card",
+      "agent_package",
+      "agent_profile",
+      "agents_md",
+      "axiom",
+      "boot_config",
+      "customer_segment",
+      "fallback_chain",
+      "finetune_config",
+      "handoff",
+      "handoff_protocol",
+      "instruction",
+      "lens",
+      "mcp_server",
+      "memory_scope",
+      "mental_model",
+      "model_architecture",
+      "model_card",
+      "model_provider",
+      "nucleus_def",
+      "pattern",
+      "personality",
+      "rl_algorithm",
+      "role_assignment",
+      "router",
+      "signal",
+      "software_project",
+      "training_method"
+    ],
+    "cex_agentic_nucleus.py": [
+      "handoff"
+    ],
+    "cex_auto.py": [],
+    "cex_auto_research.py": [],
+    "cex_auto_run.py": [
+      "lens",
+      "signal"
+    ],
+    "cex_batch.py": [
+      "action_paradigm",
+      "agent",
+      "agent_name_service_record",
+      "api_client",
+      "audio_tool",
+      "browser_tool",
+      "cli_tool",
+      "code_executor",
+      "computer_use",
+      "daemon",
+      "db_connector",
+      "diff_strategy",
+      "dispatch_rule",
+      "document_loader",
+      "event_stream",
+      "function_def",
+      "hook",
+      "hook_config",
+      "mcp_app_extension",
+      "mcp_server",
+      "messaging_gateway",
+      "multi_modal_config",
+      "notifier",
+      "plugin",
+      "research_pipeline",
+      "retriever",
+      "sdk_example",
+      "search_strategy",
+      "search_tool",
+      "skill",
+      "social_publisher",
+      "stt_provider",
+      "supabase_data_layer",
+      "toolkit",
+      "tts_provider",
+      "vision_tool",
+      "voice_pipeline",
+      "webhook",
+      "workflow"
+    ],
+    "cex_benchmark_ollama.py": [
+      "benchmark"
+    ],
+    "cex_boot_gen.py": [],
+    "cex_bootstrap.py": [],
+    "cex_builder_linter.py": [
+      "agent"
+    ],
+    "cex_cache_audit.py": [
+      "cli_tool"
+    ],
+    "cex_capability_index.py": [
+      "agent",
+      "capability_registry",
+      "crew_template",
+      "parser",
+      "role_assignment"
+    ],
+    "cex_cdp.py": [],
+    "cex_claude_learn.py": [],
+    "cex_cli_resolver.py": [
+      "chain",
+      "fallback_chain",
+      "router"
+    ],
+    "cex_cohort_analyzer.py": [],
+    "cex_compile.py": [
+      "agentic_rag",
+      "aggregate_root",
+      "analyst_briefing",
+      "api_reference",
+      "app_directory_entry",
+      "case_study",
+      "changelog",
+      "chunk_strategy",
+      "citation",
+      "code_of_conduct",
+      "competitive_matrix",
+      "context_doc",
+      "contributor_guide",
+      "course_module",
+      "data_contract",
+      "dataset_card",
+      "discovery_questions",
+      "domain_vocabulary",
+      "ecommerce_vertical",
+      "edit_format",
+      "edtech_vertical",
+      "embedder_provider",
+      "embedding_config",
+      "enum_def",
+      "event_schema",
+      "faq_entry",
+      "few_shot_example",
+      "fintech_vertical",
+      "formatter",
+      "github_issue_template",
+      "glossary_entry",
+      "govtech_vertical",
+      "graph_rag_config",
+      "healthcare_vertical",
+      "input_schema",
+      "instruction",
+      "integration_guide",
+      "interactive_demo",
+      "interface",
+      "knowledge_card",
+      "knowledge_graph",
+      "landing_page",
+      "legal_vertical",
+      "lineage_record",
+      "onboarding_flow",
+      "ontology",
+      "openapi_spec",
+      "output_validator",
+      "parser",
+      "partner_listing",
+      "pitch_deck",
+      "press_release",
+      "pricing_page",
+      "product_tour",
+      "quickstart_guide",
+      "rag_source",
+      "repo_map",
+      "reranker_config",
+      "response_format",
+      "retriever_config",
+      "streaming_config",
+      "system_prompt",
+      "type_def",
+      "user_journey",
+      "validation_schema",
+      "validator",
+      "value_object",
+      "vector_store"
+    ],
+    "cex_compress.py": [
+      "cli_tool"
+    ],
+    "cex_continuous.py": [
+      "daemon",
+      "handoff",
+      "pattern",
+      "signal"
+    ],
+    "cex_coordinator.py": [
+      "checkpoint",
+      "collaboration_pattern",
+      "crew_template",
+      "dag",
+      "dispatch_rule",
+      "domain_event",
+      "handoff",
+      "pattern",
+      "pipeline_template",
+      "process_manager",
+      "renewal_workflow",
+      "saga",
+      "schedule",
+      "signal",
+      "spawn_config",
+      "state_machine",
+      "team_charter",
+      "visual_workflow",
+      "workflow",
+      "workflow_node",
+      "workflow_primitive"
+    ],
+    "cex_coverage.py": [],
+    "cex_crew.py": [
+      "agent",
+      "agent_package",
+      "agent_profile",
+      "agents_md",
+      "axiom",
+      "boot_config",
+      "checkpoint",
+      "collaboration_pattern",
+      "crew_template",
+      "customer_segment",
+      "dag",
+      "dispatch_rule",
+      "domain_event",
+      "fallback_chain",
+      "finetune_config",
+      "handoff",
+      "handoff_protocol",
+      "lens",
+      "memory_scope",
+      "mental_model",
+      "model_architecture",
+      "model_card",
+      "model_provider",
+      "nucleus_def",
+      "personality",
+      "pipeline_template",
+      "process_manager",
+      "renewal_workflow",
+      "rl_algorithm",
+      "role_assignment",
+      "router",
+      "saga",
+      "schedule",
+      "signal",
+      "software_project",
+      "spawn_config",
+      "state_machine",
+      "team_charter",
+      "training_method",
+      "visual_workflow",
+      "workflow",
+      "workflow_node",
+      "workflow_primitive"
+    ],
+    "cex_crew_runner.py": [
+      "action_prompt",
+      "agent",
+      "chain",
+      "churn_prevention_playbook",
+      "constraint_spec",
+      "context_file",
+      "context_window_config",
+      "crew_template",
+      "dag",
+      "expansion_play",
+      "instruction",
+      "lens",
+      "multimodal_prompt",
+      "parser",
+      "planning_strategy",
+      "prompt_compiler",
+      "prompt_optimizer",
+      "prompt_technique",
+      "prompt_template",
+      "prompt_version",
+      "reasoning_strategy",
+      "reasoning_trace",
+      "retriever",
+      "role_assignment",
+      "router",
+      "sales_playbook",
+      "skill",
+      "system_prompt",
+      "tagline",
+      "team_charter",
+      "webinar_script"
+    ],
+    "cex_discovery.py": [],
+    "cex_doctor.py": [
+      "agent",
+      "agent_card",
+      "agent_computer_interface",
+      "agent_package",
+      "bounded_context",
+      "capability_registry",
+      "component_map",
+      "context_map",
+      "decision_record",
+      "diagram",
+      "dual_loop_architecture",
+      "fhir_agent_capability",
+      "invariant",
+      "knowledge_card",
+      "naming_rule",
+      "pattern",
+      "supervisor"
+    ],
+    "cex_e2e_test.py": [],
+    "cex_env_wizard.py": [],
+    "cex_errors.py": [],
+    "cex_evolve.py": [
+      "ab_test_config",
+      "agent",
+      "ai_rmf_profile",
+      "audit_log",
+      "benchmark",
+      "benchmark_suite",
+      "bias_audit",
+      "bugloop",
+      "cohort_analysis",
+      "compliance_checklist",
+      "compliance_framework",
+      "conformity_assessment",
+      "constitutional_rule",
+      "content_filter",
+      "content_monetization",
+      "curation_nudge",
+      "drift_detector",
+      "e2e_eval",
+      "enterprise_sla",
+      "eval_dataset",
+      "eval_framework",
+      "eval_metric",
+      "experiment_tracker",
+      "golden_test",
+      "gpai_technical_doc",
+      "guardrail",
+      "hitl_config",
+      "hook",
+      "incident_report",
+      "judge_config",
+      "learning_record",
+      "lifecycle_rule",
+      "llm_evaluation_scenario",
+      "llm_judge",
+      "memory_benchmark",
+      "nps_survey",
+      "optimizer",
+      "pattern",
+      "preference_dataset",
+      "quality_gate",
+      "red_team_eval",
+      "referral_program",
+      "regression_check",
+      "revision_loop_policy",
+      "reward_model",
+      "reward_signal",
+      "roi_calculator",
+      "safety_hazard_taxonomy",
+      "safety_policy",
+      "scoring_rubric",
+      "self_improvement_loop",
+      "signal",
+      "smoke_eval",
+      "subscription_tier",
+      "threat_model",
+      "trace_config",
+      "trajectory_eval",
+      "unit_eval",
+      "usage_report"
+    ],
+    "cex_evolve_below9.py": [],
+    "cex_evolve_ollama.py": [],
+    "cex_feedback.py": [
+      "ab_test_config",
+      "ai_rmf_profile",
+      "audit_log",
+      "benchmark",
+      "benchmark_suite",
+      "bias_audit",
+      "bugloop",
+      "cohort_analysis",
+      "compliance_checklist",
+      "compliance_framework",
+      "conformity_assessment",
+      "constitutional_rule",
+      "content_filter",
+      "content_monetization",
+      "curation_nudge",
+      "drift_detector",
+      "e2e_eval",
+      "enterprise_sla",
+      "eval_dataset",
+      "eval_framework",
+      "eval_metric",
+      "experiment_tracker",
+      "golden_test",
+      "gpai_technical_doc",
+      "guardrail",
+      "hitl_config",
+      "incident_report",
+      "judge_config",
+      "learning_record",
+      "lifecycle_rule",
+      "llm_evaluation_scenario",
+      "llm_judge",
+      "memory_benchmark",
+      "nps_survey",
+      "optimizer",
+      "preference_dataset",
+      "quality_gate",
+      "red_team_eval",
+      "referral_program",
+      "regression_check",
+      "revision_loop_policy",
+      "reward_model",
+      "reward_signal",
+      "roi_calculator",
+      "safety_hazard_taxonomy",
+      "safety_policy",
+      "scoring_rubric",
+      "self_improvement_loop",
+      "smoke_eval",
+      "subscription_tier",
+      "threat_model",
+      "trace_config",
+      "trajectory_eval",
+      "unit_eval",
+      "usage_report"
+    ],
+    "cex_finetune_export.py": [
+      "agent",
+      "knowledge_card"
+    ],
+    "cex_fix_boot_banner.py": [],
+    "cex_fix_boot_colors.py": [],
+    "cex_fix_boot_tui.py": [],
+    "cex_flywheel_audit.py": [
+      "agent_card",
+      "agent_computer_interface",
+      "benchmark",
+      "benchmark_suite",
+      "bias_audit",
+      "bounded_context",
+      "capability_registry",
+      "cohort_analysis",
+      "component_map",
+      "context_map",
+      "decision_record",
+      "diagram",
+      "dual_loop_architecture",
+      "e2e_eval",
+      "eval_dataset",
+      "eval_framework",
+      "eval_metric",
+      "experiment_tracker",
+      "fhir_agent_capability",
+      "golden_test",
+      "invariant",
+      "judge_config",
+      "llm_evaluation_scenario",
+      "llm_judge",
+      "memory_benchmark",
+      "naming_rule",
+      "pattern",
+      "quality_gate",
+      "red_team_eval",
+      "regression_check",
+      "reward_model",
+      "scoring_rubric",
+      "smoke_eval",
+      "supervisor",
+      "trace_config",
+      "trajectory_eval",
+      "unit_eval",
+      "usage_report"
+    ],
+    "cex_flywheel_worker.py": [
+      "signal"
+    ],
+    "cex_forge.py": [
+      "agent",
+      "knowledge_card",
+      "rag_source"
+    ],
+    "cex_fractal_align.py": [],
+    "cex_fractal_fill.py": [
+      "knowledge_card"
+    ],
+    "cex_ft_dataset.py": [
+      "instruction"
+    ],
+    "cex_ft_train.py": [],
+    "cex_fts5_search.py": [
+      "agent_grounding_record",
+      "agentic_rag",
+      "c2pa_manifest",
+      "changelog",
+      "chunk_strategy",
+      "citation",
+      "competitive_matrix",
+      "compression_config",
+      "consolidation_policy",
+      "context_doc",
+      "dataset_card",
+      "discovery_questions",
+      "domain_vocabulary",
+      "ecommerce_vertical",
+      "edtech_vertical",
+      "embedder_provider",
+      "embedding_config",
+      "entity_memory",
+      "episodic_memory",
+      "faq_entry",
+      "few_shot_example",
+      "fintech_vertical",
+      "glossary_entry",
+      "govtech_vertical",
+      "graph_rag_config",
+      "healthcare_vertical",
+      "knowledge_card",
+      "knowledge_graph",
+      "knowledge_index",
+      "learning_record",
+      "legal_vertical",
+      "lineage_record",
+      "memory_architecture",
+      "memory_summary",
+      "memory_type",
+      "model_registry",
+      "ontology",
+      "procedural_memory",
+      "prompt_cache",
+      "prospective_memory",
+      "rag_source",
+      "repo_map",
+      "reranker_config",
+      "retriever_config",
+      "runtime_state",
+      "session_backend",
+      "session_state",
+      "user_model",
+      "vc_credential",
+      "vector_store",
+      "workflow_run_crate",
+      "working_memory"
+    ],
+    "cex_gdp.py": [
+      "checkpoint",
+      "collaboration_pattern",
+      "crew_template",
+      "dag",
+      "dispatch_rule",
+      "domain_event",
+      "handoff",
+      "pattern",
+      "permission",
+      "pipeline_template",
+      "process_manager",
+      "renewal_workflow",
+      "saga",
+      "schedule",
+      "signal",
+      "spawn_config",
+      "state_machine",
+      "team_charter",
+      "visual_workflow",
+      "workflow",
+      "workflow_node",
+      "workflow_primitive"
+    ],
+    "cex_gen_fractal_handoffs.py": [],
+    "cex_grid_test.py": [],
+    "cex_handoff_composer.py": [
+      "agent",
+      "agent_card",
+      "dag",
+      "handoff",
+      "pattern",
+      "webhook",
+      "workflow"
+    ],
+    "cex_hooks.py": [
+      "ab_test_config",
+      "aggregate_root",
+      "ai_rmf_profile",
+      "api_reference",
+      "audit_log",
+      "bugloop",
+      "compliance_checklist",
+      "compliance_framework",
+      "conformity_assessment",
+      "constitutional_rule",
+      "content_filter",
+      "content_monetization",
+      "curation_nudge",
+      "data_contract",
+      "drift_detector",
+      "edit_format",
+      "enterprise_sla",
+      "enum_def",
+      "event_schema",
+      "gpai_technical_doc",
+      "guardrail",
+      "hitl_config",
+      "hook",
+      "incident_report",
+      "input_schema",
+      "instruction",
+      "interface",
+      "lifecycle_rule",
+      "nps_survey",
+      "openapi_spec",
+      "optimizer",
+      "parser",
+      "pattern",
+      "preference_dataset",
+      "quality_gate",
+      "referral_program",
+      "revision_loop_policy",
+      "reward_signal",
+      "roi_calculator",
+      "safety_hazard_taxonomy",
+      "safety_policy",
+      "self_improvement_loop",
+      "subscription_tier",
+      "threat_model",
+      "type_def",
+      "validation_schema",
+      "validator",
+      "value_object"
+    ],
+    "cex_hooks_native.py": [
+      "ab_test_config",
+      "aggregate_root",
+      "ai_rmf_profile",
+      "alert_rule",
+      "api_reference",
+      "audit_log",
+      "backpressure_policy",
+      "batch_config",
+      "bugloop",
+      "canary_config",
+      "circuit_breaker",
+      "compliance_checklist",
+      "compliance_framework",
+      "conformity_assessment",
+      "constitutional_rule",
+      "content_filter",
+      "content_monetization",
+      "cost_budget",
+      "curation_nudge",
+      "data_contract",
+      "data_residency",
+      "deployment_manifest",
+      "drift_detector",
+      "edit_format",
+      "effort_profile",
+      "enterprise_sla",
+      "enum_def",
+      "env_config",
+      "event_schema",
+      "experiment_config",
+      "feature_flag",
+      "gpai_technical_doc",
+      "guardrail",
+      "hibernation_policy",
+      "hitl_config",
+      "incident_report",
+      "input_schema",
+      "interface",
+      "kubernetes_ai_requirement",
+      "lifecycle_rule",
+      "marketplace_app_manifest",
+      "nps_survey",
+      "oauth_app_config",
+      "openapi_spec",
+      "optimizer",
+      "path_config",
+      "permission",
+      "playground_config",
+      "preference_dataset",
+      "prosody_config",
+      "quality_gate",
+      "quantization_config",
+      "rate_limit_config",
+      "rbac_policy",
+      "realtime_session",
+      "referral_program",
+      "retry_policy",
+      "revision_loop_policy",
+      "reward_signal",
+      "roi_calculator",
+      "runtime_rule",
+      "safety_hazard_taxonomy",
+      "safety_policy",
+      "sandbox_config",
+      "sandbox_spec",
+      "secret_config",
+      "self_improvement_loop",
+      "signal",
+      "skill",
+      "slo_definition",
+      "sso_config",
+      "subscription_tier",
+      "terminal_backend",
+      "thinking_config",
+      "threat_model",
+      "transport_config",
+      "type_def",
+      "usage_quota",
+      "vad_config",
+      "validation_schema",
+      "validator",
+      "value_object",
+      "white_label_config"
+    ],
+    "cex_hygiene.py": [
+      "agent",
+      "knowledge_card",
+      "parser"
+    ],
+    "cex_index.py": [],
+    "cex_init.py": [
+      "agent"
+    ],
+    "cex_intent.py": [
+      "agent"
+    ],
+    "cex_intent_resolver.py": [
+      "pattern"
+    ],
+    "cex_janitor.py": [],
+    "cex_kc_index.py": [],
+    "cex_kind_deps.py": [
+      "agent_card",
+      "agent_computer_interface",
+      "bounded_context",
+      "capability_registry",
+      "component_map",
+      "context_map",
+      "decision_record",
+      "diagram",
+      "dual_loop_architecture",
+      "fhir_agent_capability",
+      "invariant",
+      "naming_rule",
+      "pattern",
+      "supervisor"
+    ],
+    "cex_kind_register.py": [],
+    "cex_kind_tool_map.py": [
+      "action_paradigm",
+      "agent_name_service_record",
+      "api_client",
+      "audio_tool",
+      "browser_tool",
+      "cli_tool",
+      "code_executor",
+      "computer_use",
+      "daemon",
+      "db_connector",
+      "diff_strategy",
+      "document_loader",
+      "entity_memory",
+      "event_stream",
+      "function_def",
+      "hook",
+      "hook_config",
+      "knowledge_card",
+      "mcp_app_extension",
+      "mcp_server",
+      "messaging_gateway",
+      "multi_modal_config",
+      "notifier",
+      "plugin",
+      "research_pipeline",
+      "retriever",
+      "sdk_example",
+      "search_strategy",
+      "search_tool",
+      "skill",
+      "social_publisher",
+      "stt_provider",
+      "supabase_data_layer",
+      "toolkit",
+      "tts_provider",
+      "vision_tool",
+      "voice_pipeline",
+      "webhook"
+    ],
+    "cex_litellm_test.py": [],
+    "cex_lock.py": [],
+    "cex_materialize.py": [
+      "agent",
+      "agent_card",
+      "analyst_briefing",
+      "app_directory_entry",
+      "case_study",
+      "code_of_conduct",
+      "contributor_guide",
+      "course_module",
+      "formatter",
+      "github_issue_template",
+      "integration_guide",
+      "interactive_demo",
+      "landing_page",
+      "onboarding_flow",
+      "output_validator",
+      "parser",
+      "partner_listing",
+      "pitch_deck",
+      "press_release",
+      "pricing_page",
+      "product_tour",
+      "quickstart_guide",
+      "response_format",
+      "streaming_config",
+      "user_journey",
+      "validator"
+    ],
+    "cex_memo.py": [],
+    "cex_memory.py": [
+      "agent",
+      "pattern"
+    ],
+    "cex_memory_age.py": [
+      "agent_grounding_record",
+      "c2pa_manifest",
+      "citation",
+      "compression_config",
+      "consolidation_policy",
+      "entity_memory",
+      "episodic_memory",
+      "knowledge_index",
+      "learning_record",
+      "memory_architecture",
+      "memory_summary",
+      "memory_type",
+      "model_registry",
+      "pattern",
+      "procedural_memory",
+      "prompt_cache",
+      "prospective_memory",
+      "runtime_state",
+      "session_backend",
+      "session_state",
+      "user_model",
+      "vc_credential",
+      "workflow_run_crate",
+      "working_memory"
+    ],
+    "cex_memory_select.py": [
+      "agent",
+      "agent_grounding_record",
+      "agentic_rag",
+      "c2pa_manifest",
+      "changelog",
+      "chunk_strategy",
+      "citation",
+      "competitive_matrix",
+      "compression_config",
+      "consolidation_policy",
+      "context_doc",
+      "dataset_card",
+      "discovery_questions",
+      "domain_vocabulary",
+      "ecommerce_vertical",
+      "edtech_vertical",
+      "embedder_provider",
+      "embedding_config",
+      "entity_memory",
+      "episodic_memory",
+      "faq_entry",
+      "few_shot_example",
+      "fintech_vertical",
+      "glossary_entry",
+      "govtech_vertical",
+      "graph_rag_config",
+      "healthcare_vertical",
+      "knowledge_card",
+      "knowledge_graph",
+      "knowledge_index",
+      "learning_record",
+      "legal_vertical",
+      "lineage_record",
+      "memory_architecture",
+      "memory_summary",
+      "memory_type",
+      "model_registry",
+      "ontology",
+      "procedural_memory",
+      "prompt_cache",
+      "prospective_memory",
+      "rag_source",
+      "repo_map",
+      "reranker_config",
+      "retriever_config",
+      "runtime_state",
+      "session_backend",
+      "session_state",
+      "user_model",
+      "vc_credential",
+      "vector_store",
+      "workflow_run_crate",
+      "working_memory"
+    ],
+    "cex_memory_types.py": [
+      "agent_grounding_record",
+      "c2pa_manifest",
+      "compression_config",
+      "consolidation_policy",
+      "entity_memory",
+      "episodic_memory",
+      "knowledge_index",
+      "learning_record",
+      "memory_architecture",
+      "memory_summary",
+      "memory_type",
+      "model_registry",
+      "pattern",
+      "procedural_memory",
+      "prompt_cache",
+      "prospective_memory",
+      "runtime_state",
+      "session_backend",
+      "session_state",
+      "user_model",
+      "vc_credential",
+      "workflow_run_crate",
+      "working_memory"
+    ],
+    "cex_memory_update.py": [
+      "agent",
+      "agent_grounding_record",
+      "c2pa_manifest",
+      "compression_config",
+      "consolidation_policy",
+      "entity_memory",
+      "episodic_memory",
+      "knowledge_index",
+      "learning_record",
+      "memory_architecture",
+      "memory_summary",
+      "memory_type",
+      "model_registry",
+      "pattern",
+      "procedural_memory",
+      "prompt_cache",
+      "prospective_memory",
+      "runtime_state",
+      "session_backend",
+      "session_state",
+      "user_model",
+      "vc_credential",
+      "workflow_run_crate",
+      "working_memory"
+    ],
+    "cex_merge_pillars.py": [],
+    "cex_migrate_paths.py": [],
+    "cex_mirror_audit.py": [
+      "ab_test_config",
+      "ai_rmf_profile",
+      "audit_log",
+      "bugloop",
+      "compliance_checklist",
+      "compliance_framework",
+      "conformity_assessment",
+      "constitutional_rule",
+      "content_filter",
+      "content_monetization",
+      "curation_nudge",
+      "drift_detector",
+      "enterprise_sla",
+      "gpai_technical_doc",
+      "guardrail",
+      "handoff",
+      "hitl_config",
+      "incident_report",
+      "lifecycle_rule",
+      "nps_survey",
+      "optimizer",
+      "preference_dataset",
+      "quality_gate",
+      "referral_program",
+      "revision_loop_policy",
+      "reward_signal",
+      "roi_calculator",
+      "safety_hazard_taxonomy",
+      "safety_policy",
+      "self_improvement_loop",
+      "subscription_tier",
+      "threat_model"
+    ],
+    "cex_mission.py": [
+      "checkpoint",
+      "collaboration_pattern",
+      "crew_template",
+      "dag",
+      "dispatch_rule",
+      "domain_event",
+      "handoff",
+      "pipeline_template",
+      "process_manager",
+      "renewal_workflow",
+      "saga",
+      "schedule",
+      "signal",
+      "spawn_config",
+      "state_machine",
+      "team_charter",
+      "visual_workflow",
+      "workflow",
+      "workflow_node",
+      "workflow_primitive"
+    ],
+    "cex_mission_dispatch.py": [],
+    "cex_mission_runner.py": [
+      "agent",
+      "checkpoint",
+      "collaboration_pattern",
+      "crew_template",
+      "dag",
+      "dispatch_rule",
+      "domain_event",
+      "handoff",
+      "knowledge_card",
+      "pipeline_template",
+      "process_manager",
+      "renewal_workflow",
+      "saga",
+      "schedule",
+      "signal",
+      "spawn_config",
+      "state_machine",
+      "team_charter",
+      "visual_workflow",
+      "workflow",
+      "workflow_node",
+      "workflow_primitive"
+    ],
+    "cex_mission_state.py": [
+      "signal"
+    ],
+    "cex_model_updater.py": [
+      "agent",
+      "agent_package",
+      "agent_profile",
+      "agents_md",
+      "axiom",
+      "boot_config",
+      "customer_segment",
+      "fallback_chain",
+      "finetune_config",
+      "handoff_protocol",
+      "lens",
+      "memory_scope",
+      "mental_model",
+      "model_architecture",
+      "model_card",
+      "model_provider",
+      "nucleus_def",
+      "personality",
+      "rl_algorithm",
+      "role_assignment",
+      "router",
+      "software_project",
+      "training_method"
+    ],
+    "cex_naming_validator.py": [
+      "agent",
+      "env_config",
+      "knowledge_card",
+      "validator"
+    ],
+    "cex_notebooklm.py": [],
+    "cex_nucleus_builder.py": [
+      "agent",
+      "agent_card",
+      "dispatch_rule",
+      "knowledge_card",
+      "quality_gate",
+      "system_prompt",
+      "workflow"
+    ],
+    "cex_nudge.py": [
+      "curation_nudge",
+      "hook",
+      "parser"
+    ],
+    "cex_ollama.py": [
+      "handoff",
+      "interface"
+    ],
+    "cex_orchestrate.py": [
+      "signal"
+    ],
+    "cex_output_formatter.py": [
+      "agent",
+      "formatter"
+    ],
+    "cex_overnight.py": [],
+    "cex_patch_boot_timeout.py": [
+      "pattern"
+    ],
+    "cex_patch_exit_signal.py": [],
+    "cex_pipeline.py": [
+      "agent",
+      "knowledge_card"
+    ],
+    "cex_preflight.py": [
+      "agent",
+      "alert_rule",
+      "backpressure_policy",
+      "batch_config",
+      "canary_config",
+      "circuit_breaker",
+      "cost_budget",
+      "data_residency",
+      "deployment_manifest",
+      "effort_profile",
+      "env_config",
+      "experiment_config",
+      "feature_flag",
+      "handoff",
+      "hibernation_policy",
+      "kubernetes_ai_requirement",
+      "marketplace_app_manifest",
+      "oauth_app_config",
+      "path_config",
+      "permission",
+      "playground_config",
+      "prompt_cache",
+      "prosody_config",
+      "quantization_config",
+      "rate_limit_config",
+      "rbac_policy",
+      "realtime_session",
+      "retry_policy",
+      "runtime_rule",
+      "sandbox_config",
+      "sandbox_spec",
+      "secret_config",
+      "slo_definition",
+      "sso_config",
+      "terminal_backend",
+      "thinking_config",
+      "transport_config",
+      "usage_quota",
+      "vad_config",
+      "white_label_config"
+    ],
+    "cex_preflight_runtime.py": [],
+    "cex_prompt_cache.py": [
+      "action_prompt",
+      "agent",
+      "chain",
+      "churn_prevention_playbook",
+      "constraint_spec",
+      "context_file",
+      "context_window_config",
+      "expansion_play",
+      "instruction",
+      "multimodal_prompt",
+      "parser",
+      "planning_strategy",
+      "prompt_cache",
+      "prompt_compiler",
+      "prompt_optimizer",
+      "prompt_technique",
+      "prompt_template",
+      "prompt_version",
+      "reasoning_strategy",
+      "reasoning_trace",
+      "sales_playbook",
+      "system_prompt",
+      "tagline",
+      "webinar_script"
+    ],
+    "cex_prompt_layers.py": [
+      "action_prompt",
+      "chain",
+      "churn_prevention_playbook",
+      "constraint_spec",
+      "context_file",
+      "context_window_config",
+      "expansion_play",
+      "guardrail",
+      "instruction",
+      "multimodal_prompt",
+      "planning_strategy",
+      "prompt_compiler",
+      "prompt_optimizer",
+      "prompt_technique",
+      "prompt_template",
+      "prompt_version",
+      "reasoning_strategy",
+      "reasoning_trace",
+      "sales_playbook",
+      "skill",
+      "system_prompt",
+      "tagline",
+      "webinar_script"
+    ],
+    "cex_prompt_optimizer.py": [
+      "action_prompt",
+      "agent",
+      "chain",
+      "churn_prevention_playbook",
+      "constraint_spec",
+      "context_file",
+      "context_window_config",
+      "expansion_play",
+      "instruction",
+      "multimodal_prompt",
+      "optimizer",
+      "planning_strategy",
+      "prompt_compiler",
+      "prompt_optimizer",
+      "prompt_technique",
+      "prompt_template",
+      "prompt_version",
+      "reasoning_strategy",
+      "reasoning_trace",
+      "sales_playbook",
+      "system_prompt",
+      "tagline",
+      "webinar_script"
+    ],
+    "cex_provider_discovery.py": [],
+    "cex_quality_monitor.py": [
+      "ab_test_config",
+      "ai_rmf_profile",
+      "audit_log",
+      "benchmark",
+      "benchmark_suite",
+      "bias_audit",
+      "bugloop",
+      "cohort_analysis",
+      "compliance_checklist",
+      "compliance_framework",
+      "conformity_assessment",
+      "constitutional_rule",
+      "content_filter",
+      "content_monetization",
+      "curation_nudge",
+      "drift_detector",
+      "e2e_eval",
+      "enterprise_sla",
+      "eval_dataset",
+      "eval_framework",
+      "eval_metric",
+      "experiment_tracker",
+      "golden_test",
+      "gpai_technical_doc",
+      "guardrail",
+      "hitl_config",
+      "incident_report",
+      "judge_config",
+      "learning_record",
+      "lifecycle_rule",
+      "llm_evaluation_scenario",
+      "llm_judge",
+      "memory_benchmark",
+      "nps_survey",
+      "optimizer",
+      "preference_dataset",
+      "quality_gate",
+      "red_team_eval",
+      "referral_program",
+      "regression_check",
+      "revision_loop_policy",
+      "reward_model",
+      "reward_signal",
+      "roi_calculator",
+      "safety_hazard_taxonomy",
+      "safety_policy",
+      "scoring_rubric",
+      "self_improvement_loop",
+      "smoke_eval",
+      "subscription_tier",
+      "threat_model",
+      "trace_config",
+      "trajectory_eval",
+      "unit_eval",
+      "usage_report"
+    ],
+    "cex_query.py": [
+      "agentic_rag",
+      "changelog",
+      "chunk_strategy",
+      "citation",
+      "competitive_matrix",
+      "context_doc",
+      "dataset_card",
+      "discovery_questions",
+      "domain_vocabulary",
+      "ecommerce_vertical",
+      "edtech_vertical",
+      "embedder_provider",
+      "embedding_config",
+      "faq_entry",
+      "few_shot_example",
+      "fintech_vertical",
+      "glossary_entry",
+      "govtech_vertical",
+      "graph_rag_config",
+      "healthcare_vertical",
+      "knowledge_card",
+      "knowledge_graph",
+      "legal_vertical",
+      "lineage_record",
+      "ontology",
+      "rag_source",
+      "repo_map",
+      "reranker_config",
+      "retriever_config",
+      "vector_store",
+      "webhook"
+    ],
+    "cex_quota_check.py": [
+      "alert_rule",
+      "backpressure_policy",
+      "batch_config",
+      "canary_config",
+      "circuit_breaker",
+      "cost_budget",
+      "data_residency",
+      "deployment_manifest",
+      "effort_profile",
+      "env_config",
+      "experiment_config",
+      "feature_flag",
+      "hibernation_policy",
+      "kubernetes_ai_requirement",
+      "marketplace_app_manifest",
+      "model_provider",
+      "oauth_app_config",
+      "path_config",
+      "permission",
+      "playground_config",
+      "prosody_config",
+      "quantization_config",
+      "rate_limit_config",
+      "rbac_policy",
+      "realtime_session",
+      "retry_policy",
+      "runtime_rule",
+      "sandbox_config",
+      "sandbox_spec",
+      "secret_config",
+      "slo_definition",
+      "sso_config",
+      "terminal_backend",
+      "thinking_config",
+      "transport_config",
+      "usage_quota",
+      "vad_config",
+      "white_label_config"
+    ],
+    "cex_release_check.py": [],
+    "cex_repo_align.py": [],
+    "cex_reranker.py": [
+      "retriever"
+    ],
+    "cex_research.py": [],
+    "cex_retriever.py": [
+      "agent",
+      "agentic_rag",
+      "changelog",
+      "chunk_strategy",
+      "citation",
+      "competitive_matrix",
+      "context_doc",
+      "dataset_card",
+      "discovery_questions",
+      "domain_vocabulary",
+      "ecommerce_vertical",
+      "edtech_vertical",
+      "embedder_provider",
+      "embedding_config",
+      "faq_entry",
+      "few_shot_example",
+      "fintech_vertical",
+      "glossary_entry",
+      "govtech_vertical",
+      "graph_rag_config",
+      "healthcare_vertical",
+      "knowledge_card",
+      "knowledge_graph",
+      "knowledge_index",
+      "legal_vertical",
+      "lineage_record",
+      "ontology",
+      "rag_source",
+      "repo_map",
+      "reranker_config",
+      "retriever",
+      "retriever_config",
+      "vector_store"
+    ],
+    "cex_router.py": [
+      "agent",
+      "agent_package",
+      "agent_profile",
+      "agents_md",
+      "alert_rule",
+      "axiom",
+      "backpressure_policy",
+      "batch_config",
+      "boot_config",
+      "canary_config",
+      "chain",
+      "circuit_breaker",
+      "cost_budget",
+      "customer_segment",
+      "data_residency",
+      "deployment_manifest",
+      "effort_profile",
+      "env_config",
+      "experiment_config",
+      "fallback_chain",
+      "feature_flag",
+      "finetune_config",
+      "handoff_protocol",
+      "hibernation_policy",
+      "kubernetes_ai_requirement",
+      "lens",
+      "marketplace_app_manifest",
+      "memory_scope",
+      "mental_model",
+      "model_architecture",
+      "model_card",
+      "model_provider",
+      "nucleus_def",
+      "oauth_app_config",
+      "path_config",
+      "pattern",
+      "permission",
+      "personality",
+      "playground_config",
+      "prosody_config",
+      "quantization_config",
+      "rate_limit_config",
+      "rbac_policy",
+      "realtime_session",
+      "retry_policy",
+      "rl_algorithm",
+      "role_assignment",
+      "router",
+      "runtime_rule",
+      "sandbox_config",
+      "sandbox_spec",
+      "secret_config",
+      "slo_definition",
+      "software_project",
+      "sso_config",
+      "terminal_backend",
+      "thinking_config",
+      "training_method",
+      "transport_config",
+      "usage_quota",
+      "vad_config",
+      "white_label_config"
+    ],
+    "cex_router_v2.py": [
+      "citation",
+      "handoff"
+    ],
+    "cex_run.py": [
+      "action_paradigm",
+      "agent_name_service_record",
+      "api_client",
+      "audio_tool",
+      "browser_tool",
+      "cli_tool",
+      "code_executor",
+      "computer_use",
+      "daemon",
+      "db_connector",
+      "diff_strategy",
+      "document_loader",
+      "event_stream",
+      "function_def",
+      "hook",
+      "hook_config",
+      "mcp_app_extension",
+      "mcp_server",
+      "messaging_gateway",
+      "multi_modal_config",
+      "notifier",
+      "plugin",
+      "research_pipeline",
+      "retriever",
+      "sdk_example",
+      "search_strategy",
+      "search_tool",
+      "skill",
+      "social_publisher",
+      "stt_provider",
+      "supabase_data_layer",
+      "toolkit",
+      "tts_provider",
+      "vision_tool",
+      "voice_pipeline",
+      "webhook",
+      "workflow"
+    ],
+    "cex_sanitize.py": [],
+    "cex_schema_hydrate.py": [
+      "agent",
+      "aggregate_root",
+      "analyst_briefing",
+      "api_reference",
+      "app_directory_entry",
+      "case_study",
+      "chunk_strategy",
+      "code_of_conduct",
+      "contributor_guide",
+      "course_module",
+      "data_contract",
+      "edit_format",
+      "enum_def",
+      "event_schema",
+      "formatter",
+      "github_issue_template",
+      "input_schema",
+      "integration_guide",
+      "interactive_demo",
+      "interface",
+      "landing_page",
+      "memory_scope",
+      "onboarding_flow",
+      "openapi_spec",
+      "output_validator",
+      "parser",
+      "partner_listing",
+      "pitch_deck",
+      "press_release",
+      "pricing_page",
+      "product_tour",
+      "quickstart_guide",
+      "rag_source",
+      "response_format",
+      "signal",
+      "streaming_config",
+      "type_def",
+      "user_journey",
+      "validation_schema",
+      "validator",
+      "value_object"
+    ],
+    "cex_score.py": [
+      "ab_test_config",
+      "ai_rmf_profile",
+      "audit_log",
+      "benchmark",
+      "benchmark_suite",
+      "bias_audit",
+      "bugloop",
+      "cohort_analysis",
+      "compliance_checklist",
+      "compliance_framework",
+      "conformity_assessment",
+      "constitutional_rule",
+      "content_filter",
+      "content_monetization",
+      "curation_nudge",
+      "drift_detector",
+      "e2e_eval",
+      "enterprise_sla",
+      "eval_dataset",
+      "eval_framework",
+      "eval_metric",
+      "experiment_tracker",
+      "golden_test",
+      "gpai_technical_doc",
+      "guardrail",
+      "hitl_config",
+      "incident_report",
+      "judge_config",
+      "lifecycle_rule",
+      "llm_evaluation_scenario",
+      "llm_judge",
+      "memory_benchmark",
+      "nps_survey",
+      "optimizer",
+      "preference_dataset",
+      "quality_gate",
+      "red_team_eval",
+      "referral_program",
+      "regression_check",
+      "revision_loop_policy",
+      "reward_model",
+      "reward_signal",
+      "roi_calculator",
+      "safety_hazard_taxonomy",
+      "safety_policy",
+      "scoring_rubric",
+      "self_improvement_loop",
+      "smoke_eval",
+      "subscription_tier",
+      "threat_model",
+      "trace_config",
+      "trajectory_eval",
+      "unit_eval",
+      "usage_report"
+    ],
+    "cex_score_python.py": [
+      "interface"
+    ],
+    "cex_setup_validator.py": [
+      "alert_rule",
+      "backpressure_policy",
+      "batch_config",
+      "canary_config",
+      "circuit_breaker",
+      "cost_budget",
+      "data_residency",
+      "deployment_manifest",
+      "effort_profile",
+      "env_config",
+      "experiment_config",
+      "feature_flag",
+      "hibernation_policy",
+      "hook",
+      "kubernetes_ai_requirement",
+      "marketplace_app_manifest",
+      "mcp_server",
+      "oauth_app_config",
+      "path_config",
+      "permission",
+      "playground_config",
+      "prosody_config",
+      "quantization_config",
+      "rate_limit_config",
+      "rbac_policy",
+      "realtime_session",
+      "retry_policy",
+      "runtime_rule",
+      "sandbox_config",
+      "sandbox_spec",
+      "secret_config",
+      "slo_definition",
+      "sso_config",
+      "terminal_backend",
+      "thinking_config",
+      "transport_config",
+      "usage_quota",
+      "vad_config",
+      "validator",
+      "white_label_config"
+    ],
+    "cex_shared.py": [
+      "agent",
+      "instruction",
+      "knowledge_card",
+      "signal"
+    ],
+    "cex_showoff.py": [
+      "signal"
+    ],
+    "cex_signal_watch.py": [
+      "checkpoint",
+      "collaboration_pattern",
+      "crew_template",
+      "dag",
+      "dispatch_rule",
+      "domain_event",
+      "handoff",
+      "pipeline_template",
+      "process_manager",
+      "renewal_workflow",
+      "saga",
+      "schedule",
+      "signal",
+      "spawn_config",
+      "state_machine",
+      "team_charter",
+      "visual_workflow",
+      "workflow",
+      "workflow_node",
+      "workflow_primitive"
+    ],
+    "cex_skill_autocreate.py": [
+      "skill"
+    ],
+    "cex_skill_improve.py": [
+      "invariant",
+      "skill"
+    ],
+    "cex_skill_loader.py": [
+      "action_prompt",
+      "agent",
+      "chain",
+      "churn_prevention_playbook",
+      "constraint_spec",
+      "context_file",
+      "context_window_config",
+      "expansion_play",
+      "instruction",
+      "multimodal_prompt",
+      "pattern",
+      "planning_strategy",
+      "prompt_compiler",
+      "prompt_optimizer",
+      "prompt_technique",
+      "prompt_template",
+      "prompt_version",
+      "reasoning_strategy",
+      "reasoning_trace",
+      "sales_playbook",
+      "skill",
+      "system_prompt",
+      "tagline",
+      "webinar_script"
+    ],
+    "cex_social_publisher.py": [
+      "formatter",
+      "webhook"
+    ],
+    "cex_source_harvester.py": [],
+    "cex_stats.py": [
+      "agent_card",
+      "agent_computer_interface",
+      "bounded_context",
+      "capability_registry",
+      "component_map",
+      "context_map",
+      "decision_record",
+      "diagram",
+      "dual_loop_architecture",
+      "fhir_agent_capability",
+      "invariant",
+      "naming_rule",
+      "pattern",
+      "supervisor"
+    ],
+    "cex_system_test.py": [
+      "benchmark",
+      "benchmark_suite",
+      "bias_audit",
+      "cohort_analysis",
+      "e2e_eval",
+      "eval_dataset",
+      "eval_framework",
+      "eval_metric",
+      "experiment_tracker",
+      "golden_test",
+      "judge_config",
+      "llm_evaluation_scenario",
+      "llm_judge",
+      "memory_benchmark",
+      "red_team_eval",
+      "regression_check",
+      "reward_model",
+      "scoring_rubric",
+      "smoke_eval",
+      "trace_config",
+      "trajectory_eval",
+      "unit_eval",
+      "usage_report"
+    ],
+    "cex_taxonomy_scout.py": [
+      "parser"
+    ],
+    "cex_theme.py": [
+      "lens"
+    ],
+    "cex_token_budget.py": [],
+    "cex_translate.py": [],
+    "cex_user_model.py": [
+      "agent_grounding_record",
+      "c2pa_manifest",
+      "compression_config",
+      "consolidation_policy",
+      "entity_memory",
+      "episodic_memory",
+      "knowledge_index",
+      "learning_record",
+      "memory_architecture",
+      "memory_summary",
+      "memory_type",
+      "model_registry",
+      "pattern",
+      "procedural_memory",
+      "prompt_cache",
+      "prospective_memory",
+      "runtime_state",
+      "session_backend",
+      "session_state",
+      "user_model",
+      "vc_credential",
+      "workflow_run_crate",
+      "working_memory"
+    ],
+    "cex_vector_store.py": [
+      "knowledge_card",
+      "retriever"
+    ],
+    "cex_wave_autofix.py": [],
+    "cex_wave_autofix_final.py": [],
+    "cex_wave_autofix_joinbackticks.py": [
+      "pattern"
+    ],
+    "cex_wave_validator.py": [
+      "pattern",
+      "voice_pipeline"
+    ],
+    "cex_web_fetch.py": [
+      "citation"
+    ],
+    "signal_writer.py": [
+      "checkpoint",
+      "collaboration_pattern",
+      "crew_template",
+      "dag",
+      "dispatch_rule",
+      "domain_event",
+      "handoff",
+      "pipeline_template",
+      "process_manager",
+      "renewal_workflow",
+      "saga",
+      "schedule",
+      "signal",
+      "spawn_config",
+      "state_machine",
+      "team_charter",
+      "visual_workflow",
+      "workflow",
+      "workflow_node",
+      "workflow_primitive"
+    ]
+  },
+  "tool_to_pillars": {
+    "cex_8f_motor.py": [],
+    "cex_8f_runner.py": [],
+    "cex_agent_spawn.py": [],
+    "cex_agentic_nucleus.py": [],
+    "cex_auto.py": [],
+    "cex_auto_research.py": [],
+    "cex_auto_run.py": [],
+    "cex_batch.py": [],
+    "cex_benchmark_ollama.py": [],
+    "cex_boot_gen.py": [],
+    "cex_bootstrap.py": [],
+    "cex_builder_linter.py": [],
+    "cex_cache_audit.py": [
+      "07",
+      "P07"
+    ],
+    "cex_capability_index.py": [],
+    "cex_cdp.py": [],
+    "cex_claude_learn.py": [],
+    "cex_cli_resolver.py": [],
+    "cex_cohort_analyzer.py": [],
+    "cex_compile.py": [
+      "03"
+    ],
+    "cex_compress.py": [
+      "04",
+      "P04"
+    ],
+    "cex_continuous.py": [],
+    "cex_coordinator.py": [],
+    "cex_coverage.py": [
+      "03"
+    ],
+    "cex_crew.py": [],
+    "cex_crew_runner.py": [],
+    "cex_discovery.py": [],
+    "cex_doctor.py": [],
+    "cex_e2e_test.py": [],
+    "cex_env_wizard.py": [],
+    "cex_errors.py": [],
+    "cex_evolve.py": [],
+    "cex_evolve_below9.py": [],
+    "cex_evolve_ollama.py": [
+      "01"
+    ],
+    "cex_feedback.py": [],
+    "cex_finetune_export.py": [],
+    "cex_fix_boot_banner.py": [],
+    "cex_fix_boot_colors.py": [],
+    "cex_fix_boot_tui.py": [],
+    "cex_flywheel_audit.py": [],
+    "cex_flywheel_worker.py": [],
+    "cex_forge.py": [
+      "01",
+      "02"
+    ],
+    "cex_fractal_align.py": [],
+    "cex_fractal_fill.py": [
+      "01"
+    ],
+    "cex_ft_dataset.py": [
+      "01"
+    ],
+    "cex_ft_train.py": [],
+    "cex_fts5_search.py": [],
+    "cex_gdp.py": [],
+    "cex_gen_fractal_handoffs.py": [],
+    "cex_grid_test.py": [],
+    "cex_handoff_composer.py": [],
+    "cex_hooks.py": [],
+    "cex_hooks_native.py": [],
+    "cex_hygiene.py": [],
+    "cex_index.py": [],
+    "cex_init.py": [],
+    "cex_intent.py": [],
+    "cex_intent_resolver.py": [],
+    "cex_janitor.py": [],
+    "cex_kc_index.py": [],
+    "cex_kind_deps.py": [],
+    "cex_kind_register.py": [],
+    "cex_kind_tool_map.py": [
+      "01",
+      "10",
+      "12",
+      "P10"
+    ],
+    "cex_litellm_test.py": [],
+    "cex_lock.py": [],
+    "cex_materialize.py": [],
+    "cex_memo.py": [],
+    "cex_memory.py": [],
+    "cex_memory_age.py": [],
+    "cex_memory_select.py": [],
+    "cex_memory_types.py": [],
+    "cex_memory_update.py": [],
+    "cex_merge_pillars.py": [
+      "01",
+      "12"
+    ],
+    "cex_migrate_paths.py": [],
+    "cex_mirror_audit.py": [],
+    "cex_mission.py": [],
+    "cex_mission_dispatch.py": [],
+    "cex_mission_runner.py": [],
+    "cex_mission_state.py": [],
+    "cex_model_updater.py": [],
+    "cex_naming_validator.py": [],
+    "cex_notebooklm.py": [],
+    "cex_nucleus_builder.py": [
+      "01",
+      "02",
+      "03",
+      "08",
+      "11",
+      "12"
+    ],
+    "cex_nudge.py": [
+      "11"
+    ],
+    "cex_ollama.py": [],
+    "cex_orchestrate.py": [],
+    "cex_output_formatter.py": [],
+    "cex_overnight.py": [],
+    "cex_patch_boot_timeout.py": [],
+    "cex_patch_exit_signal.py": [],
+    "cex_pipeline.py": [
+      "01",
+      "02"
+    ],
+    "cex_preflight.py": [],
+    "cex_preflight_runtime.py": [],
+    "cex_prompt_cache.py": [],
+    "cex_prompt_layers.py": [],
+    "cex_prompt_optimizer.py": [],
+    "cex_provider_discovery.py": [],
+    "cex_quality_monitor.py": [],
+    "cex_query.py": [],
+    "cex_quota_check.py": [],
+    "cex_release_check.py": [],
+    "cex_repo_align.py": [],
+    "cex_reranker.py": [],
+    "cex_research.py": [],
+    "cex_retriever.py": [],
+    "cex_router.py": [],
+    "cex_router_v2.py": [],
+    "cex_run.py": [],
+    "cex_sanitize.py": [],
+    "cex_schema_hydrate.py": [],
+    "cex_score.py": [],
+    "cex_score_python.py": [],
+    "cex_setup_validator.py": [],
+    "cex_shared.py": [],
+    "cex_showoff.py": [],
+    "cex_signal_watch.py": [],
+    "cex_skill_autocreate.py": [],
+    "cex_skill_improve.py": [],
+    "cex_skill_loader.py": [],
+    "cex_social_publisher.py": [],
+    "cex_source_harvester.py": [],
+    "cex_stats.py": [],
+    "cex_system_test.py": [],
+    "cex_taxonomy_scout.py": [],
+    "cex_theme.py": [],
+    "cex_token_budget.py": [],
+    "cex_translate.py": [],
+    "cex_user_model.py": [
+      "10"
+    ],
+    "cex_vector_store.py": [],
+    "cex_wave_autofix.py": [],
+    "cex_wave_autofix_final.py": [],
+    "cex_wave_autofix_joinbackticks.py": [],
+    "cex_wave_validator.py": [],
+    "cex_web_fetch.py": []
+  },
+  "per_tool": {
+    "cex_8f_motor.py": {
+      "file": "cex_8f_motor.py",
+      "kinds_explicit": [],
+      "kinds_heuristic": [
+        "agent",
+        "chain",
+        "permission",
+        "router",
+        "signal",
+        "workflow"
+      ],
+      "kinds_all": [
+        "agent",
+        "chain",
+        "permission",
+        "router",
+        "signal",
+        "workflow"
+      ],
+      "pillars_explicit": [],
+      "pillars_inferred": [],
+      "pillars_all": [],
+      "module_doc": "cex_8f_motor.py -- Motor 8F: Intent -> Execution Plan\n\nThe Motor 8F algorithm receives a natural language intent string and produces\na structured execution plan: which builders to activate, in what order,\nwith what dependencies, to satisfy the 8 functions of the LLM pipeline.\n\nPipeline order (from M"
+    },
+    "cex_8f_runner.py": {
+      "file": "cex_8f_runner.py",
+      "kinds_explicit": [],
+      "kinds_heuristic": [
+        "agent",
+        "chunk_strategy",
+        "learning_record",
+        "lens",
+        "skill"
+      ],
+      "kinds_all": [
+        "agent",
+        "chunk_strategy",
+        "learning_record",
+        "lens",
+        "skill"
+      ],
+      "pillars_explicit": [],
+      "pillars_inferred": [],
+      "pillars_all": [],
+      "module_doc": "cex_8f_runner.py -- 8F Runner: Stateful artifact production pipeline.\n\nEach function (F1-F8) produces state that the next CONSUMES.\nWave 1: F1 CONSTRAIN, F2 BECOME, F3 INJECT, F6 PRODUCE, F8 COLLABORATE.\nWave 2: + F4 REASON (LLM planning), F7 GOVERN (6 hard gates + retry loop).\nWave 3 adds: F5 CALL,"
+    },
+    "cex_agent_spawn.py": {
+      "file": "cex_agent_spawn.py",
+      "kinds_explicit": [],
+      "kinds_heuristic": [
+        "agent",
+        "handoff",
+        "instruction",
+        "pattern",
+        "signal"
+      ],
+      "kinds_all": [
+        "agent",
+        "handoff",
+        "instruction",
+        "pattern",
+        "signal"
+      ],
+      "pillars_explicit": [],
+      "pillars_inferred": [],
+      "pillars_all": [],
+      "module_doc": "CEX Agent Spawn -- Fork/Spawn dual-mode dispatch for nuclei.\n\nPattern: OpenClaude AgentTool (forkSubagent.ts, runAgent.ts)\nAdapted for CEX nucleus dispatch with structured lifecycle management.\n\nModes:\n  SPAWN  -- Fresh context. Worker starts cold, needs full briefing.\n  FORK   -- Inherited context."
+    },
+    "cex_agentic_nucleus.py": {
+      "file": "cex_agentic_nucleus.py",
+      "kinds_explicit": [],
+      "kinds_heuristic": [
+        "handoff"
+      ],
+      "kinds_all": [
+        "handoff"
+      ],
+      "pillars_explicit": [],
+      "pillars_inferred": [],
+      "pillars_all": [],
+      "module_doc": "cex_agentic_nucleus.py: Minimal ReAct loop for free agentic nuclei.\n\nRuns a single nucleus task via llama3.1:8b with native tool calling.\nTools: list_dir, read_file, grep, done.\n\nUsage:\n    python _tools/cex_agentic_nucleus.py \\\n        --nucleus n01 \\\n        --handoff .cex/runtime/handoffs/LEVERAG"
+    },
+    "cex_auto.py": {
+      "file": "cex_auto.py",
+      "kinds_explicit": [],
+      "kinds_heuristic": [],
+      "kinds_all": [],
+      "pillars_explicit": [],
+      "pillars_inferred": [],
+      "pillars_all": [],
+      "module_doc": "cex_auto.py -- Autonomous CEX Flywheel\n\nThe self-driving loop: diagnose -> plan -> execute -> validate -> learn -> repeat.\n\nModes:\n  scan     -- Diagnose system, find gaps, suggest actions (read-only)\n  plan     -- Generate an execution plan from gaps\n  execute  -- Run the plan (build artifacts, fix"
+    },
+    "cex_auto_research.py": {
+      "file": "cex_auto_research.py",
+      "kinds_explicit": [],
+      "kinds_heuristic": [],
+      "kinds_all": [],
+      "pillars_explicit": [],
+      "pillars_inferred": [],
+      "pillars_all": [],
+      "module_doc": "CEX Auto-Research Loop -- versioned self-improving artifact evolution.\n\nFuses 3 patterns:\n  - ruflo/SAFLA: feedback loops + cross-session learning\n  - aiox/improve-self: 3 execution modes (YOLO/interactive/preflight)\n  - CEX/cex_evolve.py: scan-judge-build-validate cycle\n\n6-phase cycle: SCAN -> JUDG"
+    },
+    "cex_auto_run.py": {
+      "file": "cex_auto_run.py",
+      "kinds_explicit": [],
+      "kinds_heuristic": [
+        "lens",
+        "signal"
+      ],
+      "kinds_all": [
+        "lens",
+        "signal"
+      ],
+      "pillars_explicit": [],
+      "pillars_inferred": [],
+      "pillars_all": [],
+      "module_doc": "CEX Autonomous Runner -- system-level orchestration + health + missions\n\nFor single-artifact production, prefer cex_run.py or cex_8f_runner.py.\nThis module handles system introspection and multi-nucleus coordination.\n\nUsage:\n  python _tools/cex_auto_run.py \"build landing page for pet shop\"\n  python "
+    },
+    "cex_batch.py": {
+      "file": "cex_batch.py",
+      "kinds_explicit": [],
+      "kinds_heuristic": [
+        "agent",
+        "dispatch_rule",
+        "workflow"
+      ],
+      "kinds_all": [
+        "agent",
+        "dispatch_rule",
+        "workflow"
+      ],
+      "pillars_explicit": [],
+      "pillars_inferred": [],
+      "pillars_all": [],
+      "module_doc": "cex_batch.py -- Batch artifact production via 8F pipeline.\n\nReads intents from a file (one per line) or stdin, runs 8F for each.\n\nUsage:\n  python _tools/cex_batch.py intents.txt                # from file\n  python _tools/cex_batch.py intents.txt --dry-run      # preview only\n  echo \"create agent for"
+    },
+    "cex_benchmark_ollama.py": {
+      "file": "cex_benchmark_ollama.py",
+      "kinds_explicit": [],
+      "kinds_heuristic": [
+        "benchmark"
+      ],
+      "kinds_all": [
+        "benchmark"
+      ],
+      "pillars_explicit": [],
+      "pillars_inferred": [],
+      "pillars_all": [],
+      "module_doc": "CEX Ollama Benchmark -- Compare local models vs Claude Opus on CEX tasks.\n\nRuns identical 8F tasks through multiple models and measures:\n  - Frontmatter accuracy (structural correctness)\n  - Content quality (cex_score.py L1+L2 heuristic)\n  - Response time\n  - Token count\n\nUsage:\n    python _tools/ce"
+    },
+    "cex_boot_gen.py": {
+      "file": "cex_boot_gen.py",
+      "kinds_explicit": [],
+      "kinds_heuristic": [],
+      "kinds_all": [],
+      "pillars_explicit": [],
+      "pillars_inferred": [],
+      "pillars_all": [],
+      "module_doc": "CEX Boot Generator -- reads nucleus_models.yaml -> generates boot/*.ps1\n\nUsage:\n  python _tools/cex_boot_gen.py              # generate all boot scripts\n  python _tools/cex_boot_gen.py --dry-run    # show what would be generated\n  python _tools/cex_boot_gen.py --nucleus n03  # generate one\n  python "
+    },
+    "cex_bootstrap.py": {
+      "file": "cex_bootstrap.py",
+      "kinds_explicit": [],
+      "kinds_heuristic": [],
+      "kinds_all": [],
+      "pillars_explicit": [],
+      "pillars_inferred": [],
+      "pillars_all": [],
+      "module_doc": "cex_bootstrap.py -- First-run brand setup for CEX instances.\n\nWhen a user first clones/installs CEX, this script:\n1. Detects if .cex/brand/brand_config.yaml has real values (not template)\n2. If not -> launches interactive Brand Discovery (N06)\n3. Validates the filled config\n4. Propagates brand to al"
+    },
+    "cex_builder_linter.py": {
+      "file": "cex_builder_linter.py",
+      "kinds_explicit": [],
+      "kinds_heuristic": [
+        "agent"
+      ],
+      "kinds_all": [
+        "agent"
+      ],
+      "pillars_explicit": [],
+      "pillars_inferred": [],
+      "pillars_all": [],
+      "module_doc": "cex_builder_linter.py: Lint CEX builders for completeness + 8F compliance.\n\nFor N03 leverage: static check every builder dir has 13 ISOs, frontmatter,\nand key sections (CONSTRAIN, BECOME, INJECT, etc).\n\nUsage:\n    python _tools/cex_builder_linter.py\n    python _tools/cex_builder_linter.py --builder "
+    },
+    "cex_cache_audit.py": {
+      "file": "cex_cache_audit.py",
+      "kinds_explicit": [
+        "cli_tool"
+      ],
+      "kinds_heuristic": [],
+      "kinds_all": [
+        "cli_tool"
+      ],
+      "pillars_explicit": [
+        "P07"
+      ],
+      "pillars_inferred": [
+        "07"
+      ],
+      "pillars_all": [
+        "07",
+        "P07"
+      ],
+      "module_doc": "---\nkind: cli_tool\npillar: P07\nnucleus: N05\nquality: null\n---\nCEX Cache Audit -- inspect Anthropic prompt-cache breakpoints and transcript hit rates."
+    },
+    "cex_capability_index.py": {
+      "file": "cex_capability_index.py",
+      "kinds_explicit": [],
+      "kinds_heuristic": [
+        "agent",
+        "capability_registry",
+        "crew_template",
+        "parser",
+        "role_assignment"
+      ],
+      "kinds_all": [
+        "agent",
+        "capability_registry",
+        "crew_template",
+        "parser",
+        "role_assignment"
+      ],
+      "pillars_explicit": [],
+      "pillars_inferred": [],
+      "pillars_all": [],
+      "module_doc": "cex_capability_index.py -- build the capability_registry for composable crews.\n\nScans the full CEX agent pool (3 sources) and emits a single registry JSON\nthat any nucleus can query to assemble a crew:\n\n  1. .claude/P02_model/*.md            Claude Code-spawnable sub-agents (builders)\n  2. N0{1..7}_"
+    },
+    "cex_cdp.py": {
+      "file": "cex_cdp.py",
+      "kinds_explicit": [],
+      "kinds_heuristic": [],
+      "kinds_all": [],
+      "pillars_explicit": [],
+      "pillars_inferred": [],
+      "pillars_all": [],
+      "module_doc": "cex_cdp.py -- Chrome DevTools Protocol helper for CEX\n\nControl Chrome via CDP WebSocket. Requires --remote-debugging-port=9222.\n\nSubcommands: status | tabs | navigate | click | type | read | elements\n             eval | new-tab | screenshot\n\nSelector strategies (click/type):\n  css:#btn  text:Submit "
+    },
+    "cex_claude_learn.py": {
+      "file": "cex_claude_learn.py",
+      "kinds_explicit": [],
+      "kinds_heuristic": [],
+      "kinds_all": [],
+      "pillars_explicit": [],
+      "pillars_inferred": [],
+      "pillars_all": [],
+      "module_doc": "CEX Claude Learn -- append a PR-comment lesson to CLAUDE.md.\n\nCalled by .github/workflows/claude_learn.yml when a PR comment starts with\n\"@.claude learn\". Extracts the lesson, formats it, appends under a\n\"Lessons learned\" section (creating the section if missing).\n\nUsage:\n  python _tools/cex_claude_"
+    },
+    "cex_cli_resolver.py": {
+      "file": "cex_cli_resolver.py",
+      "kinds_explicit": [],
+      "kinds_heuristic": [
+        "chain",
+        "fallback_chain",
+        "router"
+      ],
+      "kinds_all": [
+        "chain",
+        "fallback_chain",
+        "router"
+      ],
+      "pillars_explicit": [],
+      "pillars_inferred": [],
+      "pillars_all": [],
+      "module_doc": "CEX CLI Resolver -- YAML-driven CLI selection with fallback chain.\n\nReads .cex/P09_config/nucleus_models.yaml and resolves which CLI/model/flags\nto use for a given nucleus. Supports:\n  - Primary CLI (first working from fallback_chain)\n  - --prefer override (operator picks a CLI explicitly)\n  - --pre"
+    },
+    "cex_cohort_analyzer.py": {
+      "file": "cex_cohort_analyzer.py",
+      "kinds_explicit": [],
+      "kinds_heuristic": [],
+      "kinds_all": [],
+      "pillars_explicit": [],
+      "pillars_inferred": [],
+      "pillars_all": [],
+      "module_doc": "cex_cohort_analyzer.py: Cohort retention + churn table for N06 commercial.\n\nTakes signup/churn events CSV and computes monthly cohort retention matrix.\nNo deps beyond stdlib.\n\nInput CSV format:\n    user_id,signup_date,churn_date\n    42,2026-01-15,2026-03-20\n    43,2026-01-20,\n\nUsage:\n    python _too"
+    },
+    "cex_compile.py": {
+      "file": "cex_compile.py",
+      "kinds_explicit": [],
+      "kinds_heuristic": [
+        "instruction"
+      ],
+      "kinds_all": [
+        "instruction"
+      ],
+      "pillars_explicit": [],
+      "pillars_inferred": [
+        "03"
+      ],
+      "pillars_all": [
+        "03"
+      ],
+      "module_doc": "CEX Compiler: converts .md examples to compiled YAML/JSON for LLM consumption."
+    },
+    "cex_compress.py": {
+      "file": "cex_compress.py",
+      "kinds_explicit": [
+        "cli_tool"
+      ],
+      "kinds_heuristic": [],
+      "kinds_all": [
+        "cli_tool"
+      ],
+      "pillars_explicit": [
+        "P04"
+      ],
+      "pillars_inferred": [
+        "04"
+      ],
+      "pillars_all": [
+        "04",
+        "P04"
+      ],
+      "module_doc": "---\nkind: cli_tool\npillar: P04\nnucleus: N05\nquality: null\n---\nCEX Compress -- LLMLingua-2 wrapper for boot-time markdown compression.\n\nUsage:\n    python _tools/cex_compress.py --target boot\n    python _tools/cex_compress.py --target file --dry-run .claude/rules/ascii-code-rule.md\n    python _tools/c"
+    },
+    "cex_continuous.py": {
+      "file": "cex_continuous.py",
+      "kinds_explicit": [],
+      "kinds_heuristic": [
+        "daemon",
+        "handoff",
+        "pattern",
+        "signal"
+      ],
+      "kinds_all": [
+        "daemon",
+        "handoff",
+        "pattern",
+        "signal"
+      ],
+      "pillars_explicit": [],
+      "pillars_inferred": [],
+      "pillars_all": [],
+      "module_doc": "CEX Continuous Mode v1.0 -- Poll for handoffs, auto-dispatch, keep running.\n\nRuns an infinite loop that:\n  1. Scans .cex/runtime/handoffs/ for *_task.md files\n  2. Dispatches each to the appropriate nucleus\n  3. Watches signals for completion\n  4. Consolidates results (commit, archive, quality gate)"
+    },
+    "cex_coordinator.py": {
+      "file": "cex_coordinator.py",
+      "kinds_explicit": [],
+      "kinds_heuristic": [
+        "pattern",
+        "workflow"
+      ],
+      "kinds_all": [
+        "pattern",
+        "workflow"
+      ],
+      "pillars_explicit": [],
+      "pillars_inferred": [],
+      "pillars_all": [],
+      "module_doc": "CEX Coordinator Protocol -- N07 orchestration runtime.\n\nPattern: OpenClaude Coordinator Mode (coordinatorMode.ts, Section 1-6 protocol)\nAdapted for CEX: N07 NEVER builds, only orchestrates.\n\nThe Coordinator Protocol:\n  1. Coordinate, don't execute.\n  2. Tools: spawn, send_message, stop (NO Bash, Rea"
+    },
+    "cex_coverage.py": {
+      "file": "cex_coverage.py",
+      "kinds_explicit": [],
+      "kinds_heuristic": [],
+      "kinds_all": [],
+      "pillars_explicit": [],
+      "pillars_inferred": [
+        "03"
+      ],
+      "pillars_all": [
+        "03"
+      ],
+      "module_doc": "cex_coverage.py: Artifact coverage by pillar/kind for N05 ops.\n\nMeasures what % of kinds in kinds_meta.json have at least one built artifact.\nReports gaps so N05 can drive backfill.\n\nUsage:\n    python _tools/cex_coverage.py\n    python _tools/cex_coverage.py --pillar P03\n    python _tools/cex_coverag"
+    },
+    "cex_crew.py": {
+      "file": "cex_crew.py",
+      "kinds_explicit": [],
+      "kinds_heuristic": [
+        "crew_template",
+        "role_assignment",
+        "team_charter"
+      ],
+      "kinds_all": [
+        "crew_template",
+        "role_assignment",
+        "team_charter"
+      ],
+      "pillars_explicit": [],
+      "pillars_inferred": [],
+      "pillars_all": [],
+      "module_doc": "cex_crew.py -- discover, list, and run composable crews.\n\nA composable crew is a crew_template.md + N role_assignment.md files + an\noptional team_charter.md. This tool:\n\n  1. Scans the repo for crew_template.md files (by kind frontmatter).\n  2. Resolves role_assignment refs declared in the template'"
+    },
+    "cex_crew_runner.py": {
+      "file": "cex_crew_runner.py",
+      "kinds_explicit": [],
+      "kinds_heuristic": [
+        "agent",
+        "crew_template",
+        "dag",
+        "lens",
+        "parser",
+        "retriever",
+        "role_assignment",
+        "router",
+        "skill",
+        "team_charter"
+      ],
+      "kinds_all": [
+        "agent",
+        "crew_template",
+        "dag",
+        "lens",
+        "parser",
+        "retriever",
+        "role_assignment",
+        "router",
+        "skill",
+        "team_charter"
+      ],
+      "pillars_explicit": [],
+      "pillars_inferred": [],
+      "pillars_all": [],
+      "module_doc": "cex_crew_runner.py -- Crew Runner: Lightweight DAG Executor for CEX\n\nLangGraph-inspired state machine that executes CEX builder plans produced\nby Motor 8F. Zero external deps beyond PyYAML (optional).\n\nDesign principles (from CREW_PATTERNS_RESEARCH.md Section 5):\n  - Explicit DAG (not full LangGraph"
+    },
+    "cex_discovery.py": {
+      "file": "cex_discovery.py",
+      "kinds_explicit": [],
+      "kinds_heuristic": [],
+      "kinds_all": [],
+      "pillars_explicit": [],
+      "pillars_inferred": [],
+      "pillars_all": [],
+      "module_doc": "CEX Discovery Engine -- finds infinite improvement opportunities.\n\nUnlike static task lists, this engine DISCOVERS what to improve each cycle\nby analyzing the current state of the repo. Never converges because each\nimprovement creates new opportunities.\n\nUsage:\n  python _tools/cex_discovery.py next "
+    },
+    "cex_doctor.py": {
+      "file": "cex_doctor.py",
+      "kinds_explicit": [],
+      "kinds_heuristic": [
+        "agent",
+        "agent_package",
+        "knowledge_card"
+      ],
+      "kinds_all": [
+        "agent",
+        "agent_package",
+        "knowledge_card"
+      ],
+      "pillars_explicit": [],
+      "pillars_inferred": [],
+      "pillars_all": [],
+      "module_doc": "CEX Doctor v2.0 -- Naming v2.0 + Density + 13-file completeness.\n\nUsage:\n  python _tools/cex_doctor.py          # diagnose only\n  python _tools/cex_doctor.py --fix    # diagnose + auto-fix naming issues"
+    },
+    "cex_e2e_test.py": {
+      "file": "cex_e2e_test.py",
+      "kinds_explicit": [],
+      "kinds_heuristic": [],
+      "kinds_all": [],
+      "pillars_explicit": [],
+      "pillars_inferred": [],
+      "pillars_all": [],
+      "module_doc": "cex_e2e_test.py -- E2E Stress Test Runner for CEX 8F Pipeline.\n\nFeeds deliberately vague inputs to cex_8f_runner.py and validates:\n  - F1-F8 trace fires correctly\n  - Output files exist at expected paths\n  - Quality scoring meets floor (>= 8.0)\n  - Regression markers are not triggered\n\nModes:\n  --qu"
+    },
+    "cex_env_wizard.py": {
+      "file": "cex_env_wizard.py",
+      "kinds_explicit": [],
+      "kinds_heuristic": [],
+      "kinds_all": [],
+      "pillars_explicit": [],
+      "pillars_inferred": [],
+      "pillars_all": [],
+      "module_doc": "cex_env_wizard.py -- Interactive API key setup wizard. Writes .env from .env.example.\n\nUsage:\n    python _tools/cex_env_wizard.py              # full wizard\n    python _tools/cex_env_wizard.py --check      # verify what is set\n    python _tools/cex_env_wizard.py --nucleus n01  # only keys for N01"
+    },
+    "cex_errors.py": {
+      "file": "cex_errors.py",
+      "kinds_explicit": [],
+      "kinds_heuristic": [],
+      "kinds_all": [],
+      "pillars_explicit": [],
+      "pillars_inferred": [],
+      "pillars_all": [],
+      "module_doc": "cex_errors.py -- CEX Error Hierarchy\n\nTyped exceptions for the entire CEX toolchain.\nEvery tool should raise specific error types instead of bare Exception.\n\nUsage:\n    from cex_errors import BuildError, ValidationError, LLMError\n\n    try:\n        artifact = runner.f6_produce()\n    except LLMError a"
+    },
+    "cex_evolve.py": {
+      "file": "cex_evolve.py",
+      "kinds_explicit": [],
+      "kinds_heuristic": [
+        "agent",
+        "hook",
+        "pattern",
+        "signal"
+      ],
+      "kinds_all": [
+        "agent",
+        "hook",
+        "pattern",
+        "signal"
+      ],
+      "pillars_explicit": [],
+      "pillars_inferred": [],
+      "pillars_all": [],
+      "module_doc": "cex_evolve.py -- Autonomous Experiment Loop (Karpathy AutoResearch pattern)\n\nThree modes:\n  agent   -- TRUE AutoResearch via SDK: Python controls the loop, LLM\n            generates creative hypotheses via execute_prompt(). Budget-\n            tracked, provider-agnostic, no subprocess spawning.\n    "
+    },
+    "cex_evolve_below9.py": {
+      "file": "cex_evolve_below9.py",
+      "kinds_explicit": [],
+      "kinds_heuristic": [],
+      "kinds_all": [],
+      "pillars_explicit": [],
+      "pillars_inferred": [],
+      "pillars_all": [],
+      "module_doc": "CEX Evolve Below-9 Flywheel -- targets already-scored artifacts below 9.0.\n\nNon-overlapping with the main flywheel (which targets quality:null).\nRuns heuristic improvements in batches, commits each batch.\n\nUsage:\n  python _tools/cex_evolve_below9.py              # full loop\n  python _tools/cex_evolv"
+    },
+    "cex_evolve_ollama.py": {
+      "file": "cex_evolve_ollama.py",
+      "kinds_explicit": [],
+      "kinds_heuristic": [],
+      "kinds_all": [],
+      "pillars_explicit": [],
+      "pillars_inferred": [
+        "01"
+      ],
+      "pillars_all": [
+        "01"
+      ],
+      "module_doc": "CEX Evolve Ollama -- LLM-powered artifact improvement via local models.\n\nTargets artifacts the heuristic can't push past 8.7. Uses Ollama (free,\nlocal) to rewrite content: add tables, cross-refs, expand sections.\n\nArchitecture (Karpathy AutoResearch):\n  1. Read artifact + score\n  2. Send to Ollama w"
+    },
+    "cex_feedback.py": {
+      "file": "cex_feedback.py",
+      "kinds_explicit": [],
+      "kinds_heuristic": [],
+      "kinds_all": [],
+      "pillars_explicit": [],
+      "pillars_inferred": [],
+      "pillars_all": [],
+      "module_doc": "cex_feedback.py -- Quality Tracking + Auto-Archive + Promotion Engine\n\nScans all CEX artifacts, extracts quality/density metrics from frontmatter,\nidentifies archive and promotion candidates based on lifecycle rules.\n\nUsage:\n  python _tools/cex_feedback.py              # full scan + report\n  python "
+    },
+    "cex_finetune_export.py": {
+      "file": "cex_finetune_export.py",
+      "kinds_explicit": [],
+      "kinds_heuristic": [
+        "agent",
+        "knowledge_card"
+      ],
+      "kinds_all": [
+        "agent",
+        "knowledge_card"
+      ],
+      "pillars_explicit": [],
+      "pillars_inferred": [],
+      "pillars_all": [],
+      "module_doc": "CEX Fine-Tune Data Export -- Extract training pairs from builder ISOs.\n\nFor each of the 123 kinds, creates a training pair:\n  Input:  kind name + schema definition (from kinds_meta.json + pillar schema)\n  Output: bld_instruction_{kind}.md content (the ideal artifact spec)\n\nUsage:\n    python _tools/c"
+    },
+    "cex_fix_boot_banner.py": {
+      "file": "cex_fix_boot_banner.py",
+      "kinds_explicit": [],
+      "kinds_heuristic": [],
+      "kinds_all": [],
+      "pillars_explicit": [],
+      "pillars_inferred": [],
+      "pillars_all": [],
+      "module_doc": "Strip colored-bg init block and decorative banner from boot scripts.\n\nBoot scripts used to:\n  1. Set DarkBlue background + White foreground\n  2. Resize buffer + window\n  3. Clear-Host\n  4. Write banner\n  5. Run [CEX_TUI_HYGIENE] block (already present) -- reset colors + Clear-Host\n\nSteps 1-4 are wip"
+    },
+    "cex_fix_boot_colors.py": {
+      "file": "cex_fix_boot_colors.py",
+      "kinds_explicit": [],
+      "kinds_heuristic": [],
+      "kinds_all": [],
+      "pillars_explicit": [],
+      "pillars_inferred": [],
+      "pillars_all": [],
+      "module_doc": "Auto-fix: PowerShell boot scripts leak RawUI.BackgroundColor/ForegroundColor\ninto the child CLI (Claude / Codex / Gemini / Ollama), causing color bleed\nwhere sin-aware DarkGreen background bleeds into TUI output.\n\nFix: insert a console-reset block right before the CLI invocation line.\nIdempotent - d"
+    },
+    "cex_fix_boot_tui.py": {
+      "file": "cex_fix_boot_tui.py",
+      "kinds_explicit": [],
+      "kinds_heuristic": [],
+      "kinds_all": [],
+      "pillars_explicit": [],
+      "pillars_inferred": [],
+      "pillars_all": [],
+      "module_doc": "Auto-fix: PowerShell boot scripts leak RawUI colors + mismatched buffer/window\nsize + missing UTF-8 codepage into Claude/Codex/Gemini TUI. Symptoms:\n  - Background color bleeds and gets overwritten mid-render\n  - Unicode box-drawing renders as mojibake (cp1252 console + UTF-8 TUI)\n  - Horizontal scr"
+    },
+    "cex_flywheel_audit.py": {
+      "file": "cex_flywheel_audit.py",
+      "kinds_explicit": [],
+      "kinds_heuristic": [],
+      "kinds_all": [],
+      "pillars_explicit": [],
+      "pillars_inferred": [],
+      "pillars_all": [],
+      "module_doc": "cex_flywheel_audit.py -- Doc vs Practice Flywheel Bootstrap\n\nReads CEX_SYSTEM_MAP.md claims and verifies each against the filesystem.\nProduces a gap report with 4 statuses:\n  WIRED   = documented AND works\n  BROKEN  = documented but broken\n  PHANTOM = documented but missing\n  ORPHAN  = exists but un"
+    },
+    "cex_flywheel_worker.py": {
+      "file": "cex_flywheel_worker.py",
+      "kinds_explicit": [],
+      "kinds_heuristic": [
+        "signal"
+      ],
+      "kinds_all": [
+        "signal"
+      ],
+      "pillars_explicit": [],
+      "pillars_inferred": [],
+      "pillars_all": [],
+      "module_doc": "CEX Flywheel Worker: executes one cycle for a nucleus.\n\nEach call:\n  1. Gap analysis (what's missing?)\n  2. Build missing artifacts via 8F Runner\n  3. Fix broken artifacts (frontmatter, YAML)\n  4. Write completion signal\n  5. Output summary for next nucleus\n\nUsage:\n    python _tools/cex_flywheel_wor"
+    },
+    "cex_forge.py": {
+      "file": "cex_forge.py",
+      "kinds_explicit": [],
+      "kinds_heuristic": [
+        "agent",
+        "knowledge_card",
+        "rag_source"
+      ],
+      "kinds_all": [
+        "agent",
+        "knowledge_card",
+        "rag_source"
+      ],
+      "pillars_explicit": [],
+      "pillars_inferred": [
+        "01",
+        "02"
+      ],
+      "pillars_all": [
+        "01",
+        "02"
+      ],
+      "module_doc": "cex_forge.py -- O Forjador Universal CEX\nGera prompts prontos para LLM que produzem artefatos CEX validos.\n\nFluxo:\n  1. Le _schema.yaml do LP -> extrai regras (max_bytes, density_min, required fields)\n  2. Le template correspondente (via TYPE_TO_TEMPLATE.yaml)\n  3. Monta PROMPT para LLM: template + "
+    },
+    "cex_fractal_align.py": {
+      "file": "cex_fractal_align.py",
+      "kinds_explicit": [],
+      "kinds_heuristic": [],
+      "kinds_all": [],
+      "pillars_explicit": [],
+      "pillars_inferred": [],
+      "pillars_all": [],
+      "module_doc": "cex_fractal_align.py -- Migrate nuclei to exact 12-pillar fractal.\n\nMoves non-canonical dirs (audits, reports, research, etc.) into canonical\n12-pillar layout. Creates missing pillar dirs. Writes nucleus-root README.\n\nUsage:\n    python _tools/cex_fractal_align.py          # dry-run (default)\n    pyt"
+    },
+    "cex_fractal_fill.py": {
+      "file": "cex_fractal_fill.py",
+      "kinds_explicit": [],
+      "kinds_heuristic": [
+        "knowledge_card"
+      ],
+      "kinds_all": [
+        "knowledge_card"
+      ],
+      "pillars_explicit": [],
+      "pillars_inferred": [
+        "01"
+      ],
+      "pillars_all": [
+        "01"
+      ],
+      "module_doc": "cex_fractal_fill.py -- Gap audit for the 8 x 12 nucleus/pillar matrix.\n\nFor every (nucleus, pillar) pair, this tool:\n  1. Scans the pillar dir for .md artifacts\n  2. Parses frontmatter to resolve each artifact's `kind`\n  3. Compares with the canonical kind list for that pillar (kinds_meta.json)\n  4."
+    },
+    "cex_ft_dataset.py": {
+      "file": "cex_ft_dataset.py",
+      "kinds_explicit": [],
+      "kinds_heuristic": [
+        "instruction"
+      ],
+      "kinds_all": [
+        "instruction"
+      ],
+      "pillars_explicit": [],
+      "pillars_inferred": [
+        "01"
+      ],
+      "pillars_all": [
+        "01"
+      ],
+      "module_doc": "CEX Fine-Tune Dataset Builder v2 -- Multi-ISO extraction, per-nucleus output.\n\nExtracts instruction-response pairs from ALL builder ISOs (13 types) plus\nknowledge cards, grouped by nucleus (N01-N07). Outputs Alpaca-format JSONL\nfor QLoRA fine-tuning.\n\nUsage:\n    python _tools/cex_ft_dataset.py      "
+    },
+    "cex_ft_train.py": {
+      "file": "cex_ft_train.py",
+      "kinds_explicit": [],
+      "kinds_heuristic": [],
+      "kinds_all": [],
+      "pillars_explicit": [],
+      "pillars_inferred": [],
+      "pillars_all": [],
+      "module_doc": "CEX QLoRA Fine-Tuning Trainer -- Per-nucleus adapter training.\n\nTrains QLoRA adapters on a base model using per-nucleus JSONL datasets\ngenerated by cex_ft_dataset.py. Produces Ollama-compatible adapter files.\n\nRequirements:\n    pip install unsloth transformers datasets peft trl\n\nUsage:\n    python _t"
+    },
+    "cex_fts5_search.py": {
+      "file": "cex_fts5_search.py",
+      "kinds_explicit": [],
+      "kinds_heuristic": [
+        "session_state"
+      ],
+      "kinds_all": [
+        "session_state"
+      ],
+      "pillars_explicit": [],
+      "pillars_inferred": [],
+      "pillars_all": [],
+      "module_doc": "cex_fts5_search.py -- FTS5 session search + LLM summarization (HERMES W4.4)\n\nIndexes .cex/runtime/traces/ + session transcripts into a SQLite FTS5\nvirtual table for cross-session recall (F3 INJECT, W2 session_state).\n\nUsage:\n    python _tools/cex_fts5_search.py index [--session SESSION]\n    python _"
+    },
+    "cex_gdp.py": {
+      "file": "cex_gdp.py",
+      "kinds_explicit": [],
+      "kinds_heuristic": [
+        "pattern",
+        "permission"
+      ],
+      "kinds_all": [
+        "pattern",
+        "permission"
+      ],
+      "pillars_explicit": [],
+      "pillars_inferred": [],
+      "pillars_all": [],
+      "module_doc": "CEX GDP (Guided Decision Protocol) -- Runtime enforcement layer.\n\nPattern: OpenClaude permission protocol (tools/*/permissions + coordinatorMode)\nAdapted for CEX's domain: ensures subjective decisions go through proper gates.\n\nDecision scopes:\n  USER        -- Always ask the human (tone, audience, s"
+    },
+    "cex_gen_fractal_handoffs.py": {
+      "file": "cex_gen_fractal_handoffs.py",
+      "kinds_explicit": [],
+      "kinds_heuristic": [],
+      "kinds_all": [],
+      "pillars_explicit": [],
+      "pillars_inferred": [],
+      "pillars_all": [],
+      "module_doc": "Generate FRACTAL_FILL wave handoffs (W4/W5/W6) from plan.\n\nReads: .cex/runtime/plans/plan_fractal_fill_waves.md\nReads: .cex/kinds_meta.json\nWrites: .cex/runtime/handoffs/FRACTAL_FILL_W{N}_n0{X}.md"
+    },
+    "cex_grid_test.py": {
+      "file": "cex_grid_test.py",
+      "kinds_explicit": [],
+      "kinds_heuristic": [],
+      "kinds_all": [],
+      "pillars_explicit": [],
+      "pillars_inferred": [],
+      "pillars_all": [],
+      "module_doc": "cex_grid_test.py: multi-runtime wave orchestrator.\n\nRuns the SAME mission across N runtimes sequentially (one wave per runtime):\n  wave_k = dispatch mission to runtime_k --> poll --> close --> archive\n  between waves: active sleep (30s) + status line\n\nFor each wave, produces _reports/gridtest_{missi"
+    },
+    "cex_handoff_composer.py": {
+      "file": "cex_handoff_composer.py",
+      "kinds_explicit": [],
+      "kinds_heuristic": [
+        "agent",
+        "agent_card",
+        "dag",
+        "handoff",
+        "pattern",
+        "webhook",
+        "workflow"
+      ],
+      "kinds_all": [
+        "agent",
+        "agent_card",
+        "dag",
+        "handoff",
+        "pattern",
+        "webhook",
+        "workflow"
+      ],
+      "pillars_explicit": [],
+      "pillars_inferred": [],
+      "pillars_all": [],
+      "module_doc": "CEX Handoff Composer -- auto-select builders, KCs, templates for nucleus dispatch.\n\nCloses GAP G7: Nucleus starts producing on turn 1 instead of spending 5 turns\ndiscovering files. Reads kinds_meta.json, finds builder paths, finds KCs,\nresolves schemas and examples, and composes a complete handoff f"
+    },
+    "cex_hooks.py": {
+      "file": "cex_hooks.py",
+      "kinds_explicit": [],
+      "kinds_heuristic": [
+        "hook",
+        "instruction",
+        "parser",
+        "pattern",
+        "quality_gate",
+        "validator"
+      ],
+      "kinds_all": [
+        "hook",
+        "instruction",
+        "parser",
+        "pattern",
+        "quality_gate",
+        "validator"
+      ],
+      "pillars_explicit": [],
+      "pillars_inferred": [],
+      "pillars_all": [],
+      "module_doc": "cex_hooks.py -- Pre/post build validation hooks for CEX artifacts.\n\nHooks:\n  pre-save   FILE   -- Validate artifact before saving (frontmatter, naming, size)\n  post-save  FILE   -- Compile + check after saving\n  pre-commit        -- Validate all staged .md files (git hook)\n  validate   FILE+  -- Ful"
+    },
+    "cex_hooks_native.py": {
+      "file": "cex_hooks_native.py",
+      "kinds_explicit": [],
+      "kinds_heuristic": [
+        "signal",
+        "skill"
+      ],
+      "kinds_all": [
+        "signal",
+        "skill"
+      ],
+      "pillars_explicit": [],
+      "pillars_inferred": [],
+      "pillars_all": [],
+      "module_doc": "CEX Native Hooks -- single entry point for Claude Code (and runtime-agnostic) hooks.\n\nWired by .claude/settings.json. Detects CEX_NUCLEUS env to scope behavior.\nRuntime-agnostic: gemini/codex/ollama boot wrappers call the same entry via\n`python _tools/cex_hooks_native.py <event>` so every runtime ge"
+    },
+    "cex_hygiene.py": {
+      "file": "cex_hygiene.py",
+      "kinds_explicit": [],
+      "kinds_heuristic": [
+        "agent",
+        "knowledge_card",
+        "parser"
+      ],
+      "kinds_all": [
+        "agent",
+        "knowledge_card",
+        "parser"
+      ],
+      "pillars_explicit": [],
+      "pillars_inferred": [],
+      "pillars_all": [],
+      "module_doc": "CEX Hygiene v1.0 -- Artifact CRUD / garbage collector.\n\nEnforces scope discipline in the CEX repo. Detects and cleans out-of-scope\nartifacts, temp files, stale compiled output, report accumulation, and\ndispatch leftovers.\n\nUsage:\n  python _tools/cex_hygiene.py scan                  # find out-of-sco"
+    },
+    "cex_index.py": {
+      "file": "cex_index.py",
+      "kinds_explicit": [],
+      "kinds_heuristic": [],
+      "kinds_all": [],
+      "pillars_explicit": [],
+      "pillars_inferred": [],
+      "pillars_all": [],
+      "module_doc": "CEX SQLite Indexer -- scans all .md/.yaml, parses frontmatter + wikilinks, stores in .cex/index.db"
+    },
+    "cex_init.py": {
+      "file": "cex_init.py",
+      "kinds_explicit": [],
+      "kinds_heuristic": [
+        "agent"
+      ],
+      "kinds_all": [
+        "agent"
+      ],
+      "pillars_explicit": [],
+      "pillars_inferred": [],
+      "pillars_all": [],
+      "module_doc": "CEX Init v1.0 -- Scaffold a new CEX project in 5 questions.\n\nInteractive:\n  python _tools/cex_init.py\n\nNon-interactive:\n  python _tools/cex_init.py --name myproject --domain engineering --agents 3 --llm claude --quality strict\n\nCreates a functional CEX repo with pillars, nuclei, builders, tools, and"
+    },
+    "cex_intent.py": {
+      "file": "cex_intent.py",
+      "kinds_explicit": [],
+      "kinds_heuristic": [
+        "agent"
+      ],
+      "kinds_all": [
+        "agent"
+      ],
+      "pillars_explicit": [],
+      "pillars_inferred": [],
+      "pillars_all": [],
+      "module_doc": "cex_intent.py -- The Steering Wheel\nNatural language intent -> governed artifact prompt.\n\nUses Motor 8F to classify intent, loads builder specs + KC-Domains,\nand composes a GOVERNED PROMPT ready for LLM execution.\n\nUsage:\n  python cex_intent.py \"cria knowledge card sobre RAG chunking\"\n  python cex_i"
+    },
+    "cex_intent_resolver.py": {
+      "file": "cex_intent_resolver.py",
+      "kinds_explicit": [],
+      "kinds_heuristic": [
+        "pattern"
+      ],
+      "kinds_all": [
+        "pattern"
+      ],
+      "pillars_explicit": [],
+      "pillars_inferred": [],
+      "pillars_all": [],
+      "module_doc": "CEX Intent Resolver -- Python-first kind resolution with ZERO LLM tokens.\n\nResolves user intent to {kind, pillar, nucleus, verb} using:\n  1. Exact match: verb table + kind pattern dict (instant, 0 tokens)\n  2. TF-IDF fallback: similarity search over kinds_meta.json descriptions (~10ms)\n  3. Returns "
+    },
+    "cex_janitor.py": {
+      "file": "cex_janitor.py",
+      "kinds_explicit": [],
+      "kinds_heuristic": [],
+      "kinds_all": [],
+      "pillars_explicit": [],
+      "pillars_inferred": [],
+      "pillars_all": [],
+      "module_doc": "cex_janitor.py: CRUD for repo pollution. List/inspect/delete junk.\n\nCategories (6):\n  pycache      - all __pycache__ dirs (regen'd on next run)\n  empty_files  - 0-byte files\n  stub_md      - .md files under 200B (frontmatter-only, no body)\n  stale_runtime- .cex/runtime/{signals,handoffs,out} older t"
+    },
+    "cex_kc_index.py": {
+      "file": "cex_kc_index.py",
+      "kinds_explicit": [],
+      "kinds_heuristic": [],
+      "kinds_all": [],
+      "pillars_explicit": [],
+      "pillars_inferred": [],
+      "pillars_all": [],
+      "module_doc": "CEX KC Indexer -- Embed all Knowledge Cards into Supabase pgvector.\n\nReads all KCs from filesystem, generates embeddings via OpenAI,\nand upserts into kc_embeddings table. Skips unchanged files (by content hash).\n\nUsage:\n    python _tools/cex_kc_index.py                  # index all KCs\n    python _t"
+    },
+    "cex_kind_deps.py": {
+      "file": "cex_kind_deps.py",
+      "kinds_explicit": [],
+      "kinds_heuristic": [],
+      "kinds_all": [],
+      "pillars_explicit": [],
+      "pillars_inferred": [],
+      "pillars_all": [],
+      "module_doc": "cex_kind_deps.py -- kind dependency graph builder and kinds_meta.json enricher.\n\nReads N00_genesis/P01_knowledge/library/kind/kc_*.md files, extracts cross-kind\nreferences, and outputs a dependency graph. Optionally patches kinds_meta.json\nwith depends_on fields.\n\nUsage:\n  python _tools/cex_kind_dep"
+    },
+    "cex_kind_register.py": {
+      "file": "cex_kind_register.py",
+      "kinds_explicit": [],
+      "kinds_heuristic": [],
+      "kinds_all": [],
+      "pillars_explicit": [],
+      "pillars_inferred": [],
+      "pillars_all": [],
+      "module_doc": "CEX Kind Register -- Add a new kind to the taxonomy in one command."
+    },
+    "cex_kind_tool_map.py": {
+      "file": "cex_kind_tool_map.py",
+      "kinds_explicit": [
+        "entity_memory"
+      ],
+      "kinds_heuristic": [
+        "knowledge_card"
+      ],
+      "kinds_all": [
+        "entity_memory",
+        "knowledge_card"
+      ],
+      "pillars_explicit": [
+        "P10"
+      ],
+      "pillars_inferred": [
+        "01",
+        "10",
+        "12"
+      ],
+      "pillars_all": [
+        "01",
+        "10",
+        "12",
+        "P10"
+      ],
+      "module_doc": "cex_kind_tool_map.py -- Scan _tools/cex_*.py for kind/pillar annotations.\n\nProduces kind_tool_registry.json mapping tools to the kinds and pillars they\noperate on. Used by F5 CALL to route artifact work to the correct tool.\n\nAnnotation formats (in module docstring, function docstring, or inline comm"
+    },
+    "cex_litellm_test.py": {
+      "file": "cex_litellm_test.py",
+      "kinds_explicit": [],
+      "kinds_heuristic": [],
+      "kinds_all": [],
+      "pillars_explicit": [],
+      "pillars_inferred": [],
+      "pillars_all": [],
+      "module_doc": "CEX LiteLLM Integration Test -- Verify routing to all providers.\n\nTests LiteLLM routing to Ollama (local), Anthropic (cloud), and Google (cloud).\nRun after starting the LiteLLM proxy: powershell -File boot/litellm_proxy.ps1\n\nUsage:\n    python _tools/cex_litellm_test.py              # Test all availa"
+    },
+    "cex_lock.py": {
+      "file": "cex_lock.py",
+      "kinds_explicit": [],
+      "kinds_heuristic": [],
+      "kinds_all": [],
+      "pillars_explicit": [],
+      "pillars_inferred": [],
+      "pillars_all": [],
+      "module_doc": "CEX Lock Manager v1.0 -- File-based locking for nucleus coordination.\n\nPrevents two nuclei from writing the same file or resource simultaneously.\nUses atomic file creation (os.open O_CREAT|O_EXCL) for lock acquisition.\n\nFeatures:\n  - Named resource locks (file paths, mission names, nucleus IDs)\n  - "
+    },
+    "cex_materialize.py": {
+      "file": "cex_materialize.py",
+      "kinds_explicit": [],
+      "kinds_heuristic": [
+        "agent",
+        "validator"
+      ],
+      "kinds_all": [
+        "agent",
+        "validator"
+      ],
+      "pillars_explicit": [],
+      "pillars_inferred": [],
+      "pillars_all": [],
+      "module_doc": "cex_materialize.py -- Materialize 99 Claude Code sub-agents from kinds_meta.json.\n\nReads .cex/kinds_meta.json and generates one .claude/P02_model/{kind}-builder.md\nfile per kind. Each sub-agent is a specialized builder that follows the 8F pipeline.\n\nPreserves manually-authored agents (kind-builder.m"
+    },
+    "cex_memo.py": {
+      "file": "cex_memo.py",
+      "kinds_explicit": [],
+      "kinds_heuristic": [],
+      "kinds_all": [],
+      "pillars_explicit": [],
+      "pillars_inferred": [],
+      "pillars_all": [],
+      "module_doc": "CEX Result Memoization -- SHA256 prompt hash -> cached JSON response.\n\nCache location: .cex/cache/memo/\nTTL: 24 hours (configurable via --ttl)\nKey: SHA256(prompt_string)[:32]\n\nUsage (import):\n    from cex_memo import memo_get, memo_set, memo_wrap\n    cached = memo_get(prompt)\n    if cached:\n        "
+    },
+    "cex_memory.py": {
+      "file": "cex_memory.py",
+      "kinds_explicit": [],
+      "kinds_heuristic": [
+        "agent",
+        "pattern"
+      ],
+      "kinds_all": [
+        "agent",
+        "pattern"
+      ],
+      "pillars_explicit": [],
+      "pillars_inferred": [],
+      "pillars_all": [],
+      "module_doc": "CEX Memory Manager -- persistent build context + entity memory.\n\nTracks builder performance per kind, aggregates learning records,\nprovides build-time memory injection, and maintains entity memory\nfor recurring patterns and decisions.\n\nUsage:\n    python cex_memory.py --status                  # Over"
+    },
+    "cex_memory_age.py": {
+      "file": "cex_memory_age.py",
+      "kinds_explicit": [],
+      "kinds_heuristic": [
+        "citation",
+        "pattern"
+      ],
+      "kinds_all": [
+        "citation",
+        "pattern"
+      ],
+      "pillars_explicit": [],
+      "pillars_inferred": [],
+      "pillars_all": [],
+      "module_doc": "CEX Memory Aging -- human-readable freshness + staleness caveats.\n\nPattern: OpenClaude memdir/memoryAge.ts\nAdapted for CEX builder memory recall.\n\nKey insight from OpenClaude: \"Models are poor at date arithmetic --\na raw ISO timestamp doesn't trigger staleness reasoning the way\n'47 days ago' does.\"\n"
+    },
+    "cex_memory_select.py": {
+      "file": "cex_memory_select.py",
+      "kinds_explicit": [],
+      "kinds_heuristic": [
+        "agent"
+      ],
+      "kinds_all": [
+        "agent"
+      ],
+      "pillars_explicit": [],
+      "pillars_inferred": [],
+      "pillars_all": [],
+      "module_doc": "CEX Memory Selector -- TF-IDF relevant memory retrieval.\n\nSelects top-K most relevant builder memories for a given query using\nTF-IDF cosine similarity (zero LLM tokens). Falls back to keyword\noverlap when corpus is too small for TF-IDF.\n\nOptimization: replaced LLM selector (Sonnet, ~1K tokens/call)"
+    },
+    "cex_memory_types.py": {
+      "file": "cex_memory_types.py",
+      "kinds_explicit": [],
+      "kinds_heuristic": [
+        "pattern"
+      ],
+      "kinds_all": [
+        "pattern"
+      ],
+      "pillars_explicit": [],
+      "pillars_inferred": [],
+      "pillars_all": [],
+      "module_doc": "CEX Memory Types -- 4-type taxonomy with decay rates + save guards.\n\nPattern: OpenClaude memdir/memoryTypes.ts\nAdapted for CEX builder memory system.\n\nTypes:\n  user      -- Role, goals, preferences (slow decay)\n  feedback  -- Corrections + confirmations (PERMANENT, no decay)\n  project   -- Ongoing w"
+    },
+    "cex_memory_update.py": {
+      "file": "cex_memory_update.py",
+      "kinds_explicit": [],
+      "kinds_heuristic": [
+        "agent",
+        "pattern"
+      ],
+      "kinds_all": [
+        "agent",
+        "pattern"
+      ],
+      "pillars_explicit": [],
+      "pillars_inferred": [],
+      "pillars_all": [],
+      "module_doc": "CEX Memory Update -- Dynamic builder memory with decay, prune, and append.\n\nCalled AFTER builder execution to record new observations and maintain\nmemory hygiene (decay old observations, prune low-confidence entries).\n\nDecay rates by type:\n  feedback:  0.00 (permanent -- corrective knowledge)\n  user"
+    },
+    "cex_merge_pillars.py": {
+      "file": "cex_merge_pillars.py",
+      "kinds_explicit": [],
+      "kinds_heuristic": [],
+      "kinds_all": [],
+      "pillars_explicit": [],
+      "pillars_inferred": [
+        "01",
+        "12"
+      ],
+      "pillars_all": [
+        "01",
+        "12"
+      ],
+      "module_doc": "cex_merge_pillars.py -- Merge root P01-P12 content INTO N00_genesis pillar dirs.\n\nUsage:\n    python _tools/cex_merge_pillars.py --dry-run   # list all operations\n    python _tools/cex_merge_pillars.py --execute   # run git mv + git rm\n    python _tools/cex_merge_pillars.py --verify    # check N00 ha"
+    },
+    "cex_migrate_paths.py": {
+      "file": "cex_migrate_paths.py",
+      "kinds_explicit": [],
+      "kinds_heuristic": [],
+      "kinds_all": [],
+      "pillars_explicit": [],
+      "pillars_inferred": [],
+      "pillars_all": [],
+      "module_doc": "CEX Migrate Paths -- execute 96 git mv operations + update all refs.\n\nUsage:\n  python _tools/cex_migrate_paths.py --dry-run          # list ops, no changes\n  python _tools/cex_migrate_paths.py --execute           # run all git mv\n  python _tools/cex_migrate_paths.py --update-refs       # grep+sed pa"
+    },
+    "cex_mirror_audit.py": {
+      "file": "cex_mirror_audit.py",
+      "kinds_explicit": [],
+      "kinds_heuristic": [
+        "handoff"
+      ],
+      "kinds_all": [
+        "handoff"
+      ],
+      "pillars_explicit": [],
+      "pillars_inferred": [],
+      "pillars_all": [],
+      "module_doc": "cex_mirror_audit.py -- Fractal mirror enforcement (HERMES W4.6)\n\nAudits nucleus-specific mirror artifacts against N00 archetype templates.\nDetects orphans (no N00 archetype), forbidden-field drift, missing mirrors,\nand reports promotion candidates.\n\nN00 is authoritative. Mirrors may override ONLY:\n "
+    },
+    "cex_mission.py": {
+      "file": "cex_mission.py",
+      "kinds_explicit": [],
+      "kinds_heuristic": [],
+      "kinds_all": [],
+      "pillars_explicit": [],
+      "pillars_inferred": [],
+      "pillars_all": [],
+      "module_doc": "cex_mission.py -- Mission Executor: high-level goal -> decomposed tasks -> artifacts.\n\nThe capstone of CEX autonomy. Takes a mission description, decomposes it into\nconcrete artifact-building tasks, and executes them via 8F Runner.\n\nModes:\n  decompose  -- Break mission into artifact intents (read-on"
+    },
+    "cex_mission_dispatch.py": {
+      "file": "cex_mission_dispatch.py",
+      "kinds_explicit": [],
+      "kinds_heuristic": [],
+      "kinds_all": [],
+      "pillars_explicit": [],
+      "pillars_inferred": [],
+      "pillars_all": [],
+      "module_doc": "cex_mission_dispatch.py: unified /mission entry. Runtime-agnostic dispatcher.\n\nReads:\n  .cex/P09_config/missions/{mission}/mission.yaml  (what to do)\n  .cex/P09_config/runtimes/{runtime}.yaml          (who does it)\n\nDispatches the right grid/solo spawn per runtime, same handoffs across all.\n\nUsage:\n"
+    },
+    "cex_mission_runner.py": {
+      "file": "cex_mission_runner.py",
+      "kinds_explicit": [],
+      "kinds_heuristic": [
+        "agent",
+        "handoff",
+        "knowledge_card",
+        "signal"
+      ],
+      "kinds_all": [
+        "agent",
+        "handoff",
+        "knowledge_card",
+        "signal"
+      ],
+      "pillars_explicit": [],
+      "pillars_inferred": [],
+      "pillars_all": [],
+      "module_doc": "CEX Mission Runner v2.0 -- Autonomous grid orchestration (wave + continuous).\n\nReads a mission plan, executes wave by wave or in continuous batching mode:\n  wave:       dispatch all -> wait all -> consolidate -> next wave\n  continuous: dispatch all -> on completion, immediately re-dispatch -> no idl"
+    },
+    "cex_mission_state.py": {
+      "file": "cex_mission_state.py",
+      "kinds_explicit": [],
+      "kinds_heuristic": [
+        "signal"
+      ],
+      "kinds_all": [
+        "signal"
+      ],
+      "pillars_explicit": [],
+      "pillars_inferred": [],
+      "pillars_all": [],
+      "module_doc": "CEX Mission State v1.0 -- Persistent, crash-recoverable mission state tracking.\n\nTracks mission lifecycle: waves, tasks, quality gates, timing.\nState persists to disk after every mutation (crash-safe).\nIntegrates with cex_lock.py for atomic writes.\n\nStates:\n  PENDING -> RUNNING -> COMPLETE | FAILED "
+    },
+    "cex_model_updater.py": {
+      "file": "cex_model_updater.py",
+      "kinds_explicit": [],
+      "kinds_heuristic": [],
+      "kinds_all": [],
+      "pillars_explicit": [],
+      "pillars_inferred": [],
+      "pillars_all": [],
+      "module_doc": "CEX Model Updater -- Self-healing model discovery and update.\n\nQueries provider APIs for available models, compares against\nnucleus_models.yaml, and suggests or applies updates automatically.\n\nUsage:\n    python cex_model_updater.py --check          # Show stale models\n    python cex_model_updater.py"
+    },
+    "cex_naming_validator.py": {
+      "file": "cex_naming_validator.py",
+      "kinds_explicit": [],
+      "kinds_heuristic": [
+        "agent",
+        "env_config",
+        "knowledge_card",
+        "validator"
+      ],
+      "kinds_all": [
+        "agent",
+        "env_config",
+        "knowledge_card",
+        "validator"
+      ],
+      "pillars_explicit": [],
+      "pillars_inferred": [],
+      "pillars_all": [],
+      "module_doc": "CEX Naming Validator -- enforce pxx_kind_descriptor_nxx naming convention.\n\nNew convention: p{nn}_{kind}_{descriptor}_{nxx}.{ext}\n  pnn  = pillar code (p01-p12)\n  kind = kind name snake_case (e.g. knowledge_card, agent, env_config)\n  desc = short contextual descriptor (snake_case)\n  nxx  = nucleus c"
+    },
+    "cex_notebooklm.py": {
+      "file": "cex_notebooklm.py",
+      "kinds_explicit": [],
+      "kinds_heuristic": [],
+      "kinds_all": [],
+      "pillars_explicit": [],
+      "pillars_inferred": [],
+      "pillars_all": [],
+      "module_doc": "cex_notebooklm.py -- CEX NotebookLM Pipeline Tool.\n\nUnified CLI for uploading KCs to Google NotebookLM notebooks,\nactivating Estudio outputs, and managing domain-notebook mappings.\n\nSubcommands:\n  --upload <kc_path>    Upload a KC as source to a domain notebook\n  --studio <id>         Activate Estud"
+    },
+    "cex_nucleus_builder.py": {
+      "file": "cex_nucleus_builder.py",
+      "kinds_explicit": [],
+      "kinds_heuristic": [
+        "agent",
+        "agent_card",
+        "dispatch_rule",
+        "knowledge_card",
+        "quality_gate",
+        "system_prompt",
+        "workflow"
+      ],
+      "kinds_all": [
+        "agent",
+        "agent_card",
+        "dispatch_rule",
+        "knowledge_card",
+        "quality_gate",
+        "system_prompt",
+        "workflow"
+      ],
+      "pillars_explicit": [],
+      "pillars_inferred": [
+        "01",
+        "02",
+        "03",
+        "08",
+        "11",
+        "12"
+      ],
+      "pillars_all": [
+        "01",
+        "02",
+        "03",
+        "08",
+        "11",
+        "12"
+      ],
+      "module_doc": "cex_nucleus_builder.py -- Build a complete nucleus via 8F Runner.\n\nSequentially produces the 7 core artifacts for a nucleus:\n  1. agent_card (P08) -- deployment spec\n  2. agent (P02) -- persona\n  3. system_prompt (P03) -- voice\n  4. dispatch_rule (P12) -- routing\n  5. knowledge_card (P01) -- domain "
+    },
+    "cex_nudge.py": {
+      "file": "cex_nudge.py",
+      "kinds_explicit": [],
+      "kinds_heuristic": [
+        "curation_nudge",
+        "hook",
+        "parser"
+      ],
+      "kinds_all": [
+        "curation_nudge",
+        "hook",
+        "parser"
+      ],
+      "pillars_explicit": [],
+      "pillars_inferred": [
+        "11"
+      ],
+      "pillars_all": [
+        "11"
+      ],
+      "module_doc": "cex_nudge.py -- Curation nudge runtime (HERMES W4.5)\n\nEvaluates active nudge policies and emits in-session memory-persistence prompts.\nImplements the `curation_nudge` kind (P11) at runtime.\n\nStorage: .cex/nudges/nudge_state.db  (SQLite, also readable by cex_user_model.py)\n\nUsage:\n    python _tools/c"
+    },
+    "cex_ollama.py": {
+      "file": "cex_ollama.py",
+      "kinds_explicit": [],
+      "kinds_heuristic": [
+        "handoff",
+        "interface"
+      ],
+      "kinds_all": [
+        "handoff",
+        "interface"
+      ],
+      "pillars_explicit": [],
+      "pillars_inferred": [],
+      "pillars_all": [],
+      "module_doc": "cex_ollama.py -- Ollama Provider Client for CEX Pipeline.\n\nHandles all Ollama interactions: model listing, generation, structured output\nparsing, and retry logic for malformed output.\n\nThis is the bridge between CEX's 8F pipeline and local Ollama models.\nIt replaces the hardcoded llama3.2 calls scat"
+    },
+    "cex_orchestrate.py": {
+      "file": "cex_orchestrate.py",
+      "kinds_explicit": [],
+      "kinds_heuristic": [
+        "signal"
+      ],
+      "kinds_all": [
+        "signal"
+      ],
+      "pillars_explicit": [],
+      "pillars_inferred": [],
+      "pillars_all": [],
+      "module_doc": "CEX Orchestrate -- single between-wave helper for every dispatch mode.\n\nOne helper, four consumers:\n  - cex_mission_runner.py       /mission\n  - cex_showoff.py              /showoff\n  - cex_auto.py                 autonomous flywheel\n  - dispatch.sh swarm           /batch swarm\n\nResponsibilities (be"
+    },
+    "cex_output_formatter.py": {
+      "file": "cex_output_formatter.py",
+      "kinds_explicit": [],
+      "kinds_heuristic": [
+        "agent",
+        "formatter"
+      ],
+      "kinds_all": [
+        "agent",
+        "formatter"
+      ],
+      "pillars_explicit": [],
+      "pillars_inferred": [],
+      "pillars_all": [],
+      "module_doc": "CEX Output Formatter -- validate and fix LLM output against kind schemas.\n\nUses jsonschema to validate frontmatter against pillar schemas.\nAuto-fixes common issues (missing quality:null, wrong types, missing fields).\nIntegrates into F7 GOVERN for stronger validation.\n\nUsage:\n    python cex_output_fo"
+    },
+    "cex_overnight.py": {
+      "file": "cex_overnight.py",
+      "kinds_explicit": [],
+      "kinds_heuristic": [],
+      "kinds_all": [],
+      "pillars_explicit": [],
+      "pillars_inferred": [],
+      "pillars_all": [],
+      "module_doc": "CEX Overnight Infinite Runner v1.0 -- Long-running autonomous execution.\n\nWraps cex_continuous.py with:\n  - Health monitoring (periodic self-checks)\n  - Auto-recovery (restart failed nuclei, clear stale locks)\n  - Time-bounded execution (--until HH:MM or --hours N)\n  - Resource guards (memory, disk,"
+    },
+    "cex_patch_boot_timeout.py": {
+      "file": "cex_patch_boot_timeout.py",
+      "kinds_explicit": [],
+      "kinds_heuristic": [
+        "pattern"
+      ],
+      "kinds_all": [
+        "pattern"
+      ],
+      "pillars_explicit": [],
+      "pillars_inferred": [],
+      "pillars_all": [],
+      "module_doc": "Patch non-claude boot wrappers to wrap the CLI call with a timeout watchdog.\n\nIdempotent: detects if `run_with_timeout.ps1` is already sourced and skips.\n\nPattern inserted:\n  . $PSScriptRoot/_shared/run_with_timeout.ps1\n  ...\n  $watchdog = Start-CexWatchdog\n  & <cli> @cliArgs $initialMsg\n  $exitStat"
+    },
+    "cex_patch_exit_signal.py": {
+      "file": "cex_patch_exit_signal.py",
+      "kinds_explicit": [],
+      "kinds_heuristic": [],
+      "kinds_all": [],
+      "pillars_explicit": [],
+      "pillars_inferred": [],
+      "pillars_all": [],
+      "module_doc": "Inject Emit-ExitSignal safety net into all non-claude boot wrappers.\n\nIdempotent: skips files already patched.\nTargets: boot/n0{1-6}_{gemini,codex,ollama,litellm}.ps1"
+    },
+    "cex_pipeline.py": {
+      "file": "cex_pipeline.py",
+      "kinds_explicit": [],
+      "kinds_heuristic": [
+        "agent",
+        "knowledge_card"
+      ],
+      "kinds_all": [
+        "agent",
+        "knowledge_card"
+      ],
+      "pillars_explicit": [],
+      "pillars_inferred": [
+        "01",
+        "02"
+      ],
+      "pillars_all": [
+        "01",
+        "02"
+      ],
+      "module_doc": "cex_pipeline.py -- 5-Stage CEX Build Engine\nCAPTURE -> DECOMPOSE -> HYDRATE -> COMPILE -> ENVELOPE\n\nTransforms user input into complete CEX artifacts with dual output (.md + compiled/).\n\nUsage:\n  python cex_pipeline.py --type knowledge_card --topic \"error handling\" --pillar P01\n  python cex_pipeline"
+    },
+    "cex_preflight.py": {
+      "file": "cex_preflight.py",
+      "kinds_explicit": [],
+      "kinds_heuristic": [
+        "agent",
+        "handoff"
+      ],
+      "kinds_all": [
+        "agent",
+        "handoff"
+      ],
+      "pillars_explicit": [],
+      "pillars_inferred": [],
+      "pillars_all": [],
+      "module_doc": "CEX Preflight -- Hybrid local/cloud context pre-compiler for token budget optimization.\n\nPre-compiles minimal, surgical context BEFORE nucleus boot using cheap/local\nmodels (Ollama qwen3:8b/14b or Claude Haiku). Reduces token consumption on\nthe main model (Sonnet/Opus) by 60-70%.\n\nArchitecture:\n  Ph"
+    },
+    "cex_preflight_runtime.py": {
+      "file": "cex_preflight_runtime.py",
+      "kinds_explicit": [],
+      "kinds_heuristic": [],
+      "kinds_all": [],
+      "pillars_explicit": [],
+      "pillars_inferred": [],
+      "pillars_all": [],
+      "module_doc": "CEX Runtime Preflight -- health-check each runtime before dispatch.\n\nFail fast instead of burning 5+ minutes on a gemini stall.\n\nProbes:\n  claude  -- `claude --version` works, ANTHROPIC_API_KEY or session exists\n  gemini  -- `gemini --version` works, GEMINI_API_KEY set, quota not exhausted\n  codex  "
+    },
+    "cex_prompt_cache.py": {
+      "file": "cex_prompt_cache.py",
+      "kinds_explicit": [],
+      "kinds_heuristic": [
+        "agent",
+        "parser"
+      ],
+      "kinds_all": [
+        "agent",
+        "parser"
+      ],
+      "pillars_explicit": [],
+      "pillars_inferred": [],
+      "pillars_all": [],
+      "module_doc": "CEX Prompt Cache v1.0 -- Pre-compiled builder ISO cache.\n\nProblem: cex_skill_loader.py reads 13 ISO files from disk every time a builder\nis invoked. For 124 builders x 13 ISOs = 1612 file reads per full grid pass.\n\nSolution: compile all builder ISOs into a single cached JSON file per builder.\nInvali"
+    },
+    "cex_prompt_layers.py": {
+      "file": "cex_prompt_layers.py",
+      "kinds_explicit": [],
+      "kinds_heuristic": [
+        "guardrail",
+        "skill"
+      ],
+      "kinds_all": [
+        "guardrail",
+        "skill"
+      ],
+      "pillars_explicit": [],
+      "pillars_inferred": [],
+      "pillars_all": [],
+      "module_doc": "CEX Prompt Layers -- load compiled artifacts from pillar directories.\n\nScans P{03,04,08,11}_*/compiled/ for YAML artifacts and provides them\nas injectable prompt layers for cex_crew_runner.py.\n\nDesign: Each artifact is a YAML file with frontmatter. The body text\nafter the frontmatter '---' separator"
+    },
+    "cex_prompt_optimizer.py": {
+      "file": "cex_prompt_optimizer.py",
+      "kinds_explicit": [],
+      "kinds_heuristic": [
+        "agent",
+        "optimizer"
+      ],
+      "kinds_all": [
+        "agent",
+        "optimizer"
+      ],
+      "pillars_explicit": [],
+      "pillars_inferred": [],
+      "pillars_all": [],
+      "module_doc": "CEX Prompt Optimizer -- score, rank, and improve builder instructions.\n\nAnalyzes bld_instruction specs against build outcomes (learning records),\nidentifies weak performers, and generates improvement suggestions.\n\nUsage:\n    python cex_prompt_optimizer.py --scan                  # Score all builders"
+    },
+    "cex_provider_discovery.py": {
+      "file": "cex_provider_discovery.py",
+      "kinds_explicit": [],
+      "kinds_heuristic": [],
+      "kinds_all": [],
+      "pillars_explicit": [],
+      "pillars_inferred": [],
+      "pillars_all": [],
+      "module_doc": "CEX Provider Discovery -- detect available LLM providers\n\nUsage:\n  python _tools/cex_provider_discovery.py --status     # check all providers\n  python _tools/cex_provider_discovery.py --json        # JSON output\n  python _tools/cex_provider_discovery.py --provider anthropic  # check one\n\nChecks:\n  1"
+    },
+    "cex_quality_monitor.py": {
+      "file": "cex_quality_monitor.py",
+      "kinds_explicit": [],
+      "kinds_heuristic": [],
+      "kinds_all": [],
+      "pillars_explicit": [],
+      "pillars_inferred": [],
+      "pillars_all": [],
+      "module_doc": "CEX Quality Monitor -- continuous quality tracking + regression detection.\n\nScores all artifacts, tracks trends over time, identifies regressions,\nand auto-queues rebuilds for artifacts that fall below threshold.\n\nUsage:\n    python cex_quality_monitor.py --scan                   # Score all artifact"
+    },
+    "cex_query.py": {
+      "file": "cex_query.py",
+      "kinds_explicit": [],
+      "kinds_heuristic": [
+        "webhook"
+      ],
+      "kinds_all": [
+        "webhook"
+      ],
+      "pillars_explicit": [],
+      "pillars_inferred": [],
+      "pillars_all": [],
+      "module_doc": "CEX Builder Discovery Query Tool -- find builders by keyword, domain, or natural language intent.\n\nUsage:\n    python _tools/cex_query.py \"criar agente de vendas\"\n    python _tools/cex_query.py \"monetizar curso hotmart\" --top 3\n    python _tools/cex_query.py \"webhook hotmart\" --json\n    python _tools"
+    },
+    "cex_quota_check.py": {
+      "file": "cex_quota_check.py",
+      "kinds_explicit": [],
+      "kinds_heuristic": [],
+      "kinds_all": [],
+      "pillars_explicit": [],
+      "pillars_inferred": [],
+      "pillars_all": [],
+      "module_doc": "CEX Quota Check -- Pre-flight probe for CLI availability.\n\nRuns a cheap API call against each CLI to detect:\n  - Binary missing (not installed)\n  - Auth missing (logged out, no API key)\n  - Quota exhausted (rate-limited, plan cap hit)\n  - Network down (timeout)\n\nOrigin: 2026-04-11 multi-CLI test. Ge"
+    },
+    "cex_release_check.py": {
+      "file": "cex_release_check.py",
+      "kinds_explicit": [],
+      "kinds_heuristic": [],
+      "kinds_all": [],
+      "pillars_explicit": [],
+      "pillars_inferred": [],
+      "pillars_all": [],
+      "module_doc": "CEX Release Check -- Validates everything needed for public release.\n\nUsage:\n    python cex_release_check.py           # Run all checks\n    python cex_release_check.py --fix     # Show fix suggestions"
+    },
+    "cex_repo_align.py": {
+      "file": "cex_repo_align.py",
+      "kinds_explicit": [],
+      "kinds_heuristic": [],
+      "kinds_all": [],
+      "pillars_explicit": [],
+      "pillars_inferred": [],
+      "pillars_all": [],
+      "module_doc": "CEX Repo Align -- structural gap reporter.\n\nUsage:\n  python _tools/cex_repo_align.py            # report gaps\n  python _tools/cex_repo_align.py --json     # JSON output\n  python _tools/cex_repo_align.py --summary  # counts only\n\nExit codes:\n  0 = clean (no gaps)\n  1 = gaps found"
+    },
+    "cex_reranker.py": {
+      "file": "cex_reranker.py",
+      "kinds_explicit": [],
+      "kinds_heuristic": [
+        "retriever"
+      ],
+      "kinds_all": [
+        "retriever"
+      ],
+      "pillars_explicit": [],
+      "pillars_inferred": [],
+      "pillars_all": [],
+      "module_doc": "cex_reranker.py: Rerank candidate docs by BM25 + title match.\n\nFor N04 leverage: improve retriever results with lexical reranking.\nMinimal BM25 without external deps.\n\nUsage:\n    python _tools/cex_reranker.py --query \"query string\" path1.md path2.md ...\n    python _tools/cex_reranker.py --query \"RAG"
+    },
+    "cex_research.py": {
+      "file": "cex_research.py",
+      "kinds_explicit": [],
+      "kinds_heuristic": [],
+      "kinds_all": [],
+      "pillars_explicit": [],
+      "pillars_inferred": [],
+      "pillars_all": [],
+      "module_doc": ""
+    },
+    "cex_retriever.py": {
+      "file": "cex_retriever.py",
+      "kinds_explicit": [],
+      "kinds_heuristic": [
+        "agent",
+        "retriever"
+      ],
+      "kinds_all": [
+        "agent",
+        "retriever"
+      ],
+      "pillars_explicit": [],
+      "pillars_inferred": [],
+      "pillars_all": [],
+      "module_doc": "CEX Retriever -- TF-IDF semantic search over all CEX artifacts.\n\nIndexes all .md artifacts, builds a TF-IDF matrix, and provides\nsimilarity search for F3 INJECT knowledge injection.\n\nUsage:\n    python cex_retriever.py --build                    # Build/rebuild index\n    python cex_retriever.py --que"
+    },
+    "cex_router.py": {
+      "file": "cex_router.py",
+      "kinds_explicit": [],
+      "kinds_heuristic": [
+        "chain",
+        "pattern",
+        "router"
+      ],
+      "kinds_all": [
+        "chain",
+        "pattern",
+        "router"
+      ],
+      "pillars_explicit": [],
+      "pillars_inferred": [],
+      "pillars_all": [],
+      "module_doc": "CEX Smart Router -- Config-driven, health-checked provider routing.\n\nPattern: OpenClaude SmartRouter (smart_router.py)\nAdapted for CEX nucleus routing with YAML config.\n\nFeatures:\n  - Async health pings on startup\n  - EMA latency tracking from real requests\n  - Automatic fallback when primary is unh"
+    },
+    "cex_router_v2.py": {
+      "file": "cex_router_v2.py",
+      "kinds_explicit": [],
+      "kinds_heuristic": [
+        "citation",
+        "handoff"
+      ],
+      "kinds_all": [
+        "citation",
+        "handoff"
+      ],
+      "pillars_explicit": [],
+      "pillars_inferred": [],
+      "pillars_all": [],
+      "module_doc": "cex_router_v2: Hybrid Claude/Ollama routing based on task characteristics.\n\nReads a task spec (YAML or JSON) describing the work, queries provider health,\nand returns the recommended backend alias + reasoning.\n\nUsage:\n    python _tools/cex_router_v2.py --task .cex/runtime/handoffs/n01_task.md\n    py"
+    },
+    "cex_run.py": {
+      "file": "cex_run.py",
+      "kinds_explicit": [],
+      "kinds_heuristic": [
+        "webhook",
+        "workflow"
+      ],
+      "kinds_all": [
+        "webhook",
+        "workflow"
+      ],
+      "pillars_explicit": [],
+      "pillars_inferred": [],
+      "pillars_all": [],
+      "module_doc": "CEX Run -- Full autonomous pipeline: intent -> artifact on disk.\n\nThis is the PRIMARY entry point for artifact production.\nFor system-level operations (health, providers, missions), see cex_auto_run.py.\n\nChains:\n  1. cex_query.py       -> discover best builder\n  2. cex_8f_motor.py    -> parse intent"
+    },
+    "cex_sanitize.py": {
+      "file": "cex_sanitize.py",
+      "kinds_explicit": [],
+      "kinds_heuristic": [],
+      "kinds_all": [],
+      "pillars_explicit": [],
+      "pillars_inferred": [],
+      "pillars_all": [],
+      "module_doc": "cex_sanitize.py -- Universal non-ASCII sanitizer for CEX executable code.\n\nScans .py, .ps1, .sh, .cmd files for non-ASCII characters and replaces them\nwith ASCII equivalents. Designed to prevent UnicodeEncodeError on Windows\nterminals that default to cp1252.\n\nModes:\n  --check   Report-only (exit 0=c"
+    },
+    "cex_schema_hydrate.py": {
+      "file": "cex_schema_hydrate.py",
+      "kinds_explicit": [],
+      "kinds_heuristic": [
+        "agent",
+        "memory_scope",
+        "signal"
+      ],
+      "kinds_all": [
+        "agent",
+        "memory_scope",
+        "signal"
+      ],
+      "pillars_explicit": [],
+      "pillars_inferred": [],
+      "pillars_all": [],
+      "module_doc": "cex_schema_hydrate.py -- Hydrate builder specs with universal schema fields.\n\nAdds 8 universal patterns to all builders:\n  - bld_manifest: keywords, triggers, capabilities (frontmatter)\n  - bld_memory: memory_scope, observation_types (frontmatter)\n  - bld_config: effort, max_turns, disallowed_tools,"
+    },
+    "cex_score.py": {
+      "file": "cex_score.py",
+      "kinds_explicit": [],
+      "kinds_heuristic": [
+        "quality_gate"
+      ],
+      "kinds_all": [
+        "quality_gate"
+      ],
+      "pillars_explicit": [],
+      "pillars_inferred": [],
+      "pillars_all": [],
+      "module_doc": "CEX Hybrid Scorer -- 3-layer scoring: structural + rubric + semantic (LLM).\n\nLayer 1: STRUCTURAL (free, instant) -- bytes, headings, tables, frontmatter\nLayer 2: RUBRIC (free, instant) -- builder's quality_gate hard/soft checks\nLayer 3: SEMANTIC (1 LLM call, ~2K tokens) -- only if layers 1+2 >= 8.5\n"
+    },
+    "cex_score_python.py": {
+      "file": "cex_score_python.py",
+      "kinds_explicit": [],
+      "kinds_heuristic": [
+        "interface"
+      ],
+      "kinds_all": [
+        "interface"
+      ],
+      "pillars_explicit": [],
+      "pillars_inferred": [],
+      "pillars_all": [],
+      "module_doc": "CEX Python-Only Scorer -- L1 (structural) + L2 (rubric) without any LLM call.\n\nWeights: L1 structural 30% + L2 rubric 30% = 60% total.\nOnly triggers LLM (L3 semantic, 40%) when L1+L2 avg >= 8.5.\n\nThis module is a lightweight alternative to cex_score.py's hybrid mode.\nIt reuses the same L1/L2 functio"
+    },
+    "cex_setup_validator.py": {
+      "file": "cex_setup_validator.py",
+      "kinds_explicit": [],
+      "kinds_heuristic": [
+        "hook",
+        "validator"
+      ],
+      "kinds_all": [
+        "hook",
+        "validator"
+      ],
+      "pillars_explicit": [],
+      "pillars_inferred": [],
+      "pillars_all": [],
+      "module_doc": "CEX Setup Validator -- Validates a fresh PC is ready for CEX.\n\nUsage:\n  python _tools/cex_setup_validator.py              # full check, human-readable\n  python _tools/cex_setup_validator.py --json        # machine-readable output\n  python _tools/cex_setup_validator.py --fix         # attempt auto-fi"
+    },
+    "cex_shared.py": {
+      "file": "cex_shared.py",
+      "kinds_explicit": [],
+      "kinds_heuristic": [
+        "agent",
+        "instruction",
+        "knowledge_card",
+        "signal"
+      ],
+      "kinds_all": [
+        "agent",
+        "instruction",
+        "knowledge_card",
+        "signal"
+      ],
+      "pillars_explicit": [],
+      "pillars_inferred": [],
+      "pillars_all": [],
+      "module_doc": "cex_shared.py -- Shared library for all CEX tools.\n\nSingle source of truth for common operations:\n  - CEX_ROOT resolution\n  - YAML frontmatter parsing/stripping\n  - Builder spec loading\n  - File I/O utilities\n  - Signal writing\n\nEvery CEX tool should import from here instead of reimplementing.\n\nUsag"
+    },
+    "cex_showoff.py": {
+      "file": "cex_showoff.py",
+      "kinds_explicit": [],
+      "kinds_heuristic": [
+        "signal"
+      ],
+      "kinds_all": [
+        "signal"
+      ],
+      "pillars_explicit": [],
+      "pillars_inferred": [],
+      "pillars_all": [],
+      "module_doc": "CEX Showoff Grid -- 4-runtime smoke validation.\n\nRuns 5 waves to prove all 4 runtimes (claude + codex + gemini + ollama) work\nin grid dispatch. Each nucleus (N01-N06) produces a tiny signature artifact.\n\nWaves:\n  W1 -- all ollama  (qwen3:8b, local, free)\n  W2 -- all gemini  (gemini-2.5-flash-lite, c"
+    },
+    "cex_signal_watch.py": {
+      "file": "cex_signal_watch.py",
+      "kinds_explicit": [],
+      "kinds_heuristic": [
+        "signal"
+      ],
+      "kinds_all": [
+        "signal"
+      ],
+      "pillars_explicit": [],
+      "pillars_inferred": [],
+      "pillars_all": [],
+      "module_doc": "CEX Signal Watcher v1.0 -- Blocks until all expected nuclei signal or timeout.\n\nUsage:\n    python _tools/cex_signal_watch.py --expect n01,n02,n03,n04,n05,n06 --timeout 3600\n    python _tools/cex_signal_watch.py --expect n01,n03 --mission MONETIZE_CEX --poll 15\n    python _tools/cex_signal_watch.py -"
+    },
+    "cex_skill_autocreate.py": {
+      "file": "cex_skill_autocreate.py",
+      "kinds_explicit": [],
+      "kinds_heuristic": [
+        "skill"
+      ],
+      "kinds_all": [
+        "skill"
+      ],
+      "pillars_explicit": [],
+      "pillars_inferred": [],
+      "pillars_all": [],
+      "module_doc": "CEX Skill Auto-Creator -- HERMES W4.1\n\nWatches task traces (JSONL) and auto-generates skill artifacts when\na task completes with >= 5 successful tool calls.\n\nCLI:\n    python _tools/cex_skill_autocreate.py --trace .cex/runtime/traces/trace_xxx.jsonl [--force] [--dry-run]\n    python _tools/cex_skill_a"
+    },
+    "cex_skill_improve.py": {
+      "file": "cex_skill_improve.py",
+      "kinds_explicit": [],
+      "kinds_heuristic": [
+        "invariant",
+        "skill"
+      ],
+      "kinds_all": [
+        "invariant",
+        "skill"
+      ],
+      "pillars_explicit": [],
+      "pillars_inferred": [],
+      "pillars_all": [],
+      "module_doc": "CEX Skill Improver -- HERMES W4.2\n\nPatches an existing skill artifact when a new execution trace reveals\nnew tool calls, edge cases, or error paths not yet documented.\n\nHERMES invariant: patch in place -- never duplicate a skill.\n\nCLI:\n    python _tools/cex_skill_improve.py --skill <path> --trace <p"
+    },
+    "cex_skill_loader.py": {
+      "file": "cex_skill_loader.py",
+      "kinds_explicit": [],
+      "kinds_heuristic": [
+        "agent",
+        "instruction",
+        "pattern",
+        "skill"
+      ],
+      "kinds_all": [
+        "agent",
+        "instruction",
+        "pattern",
+        "skill"
+      ],
+      "pillars_explicit": [],
+      "pillars_inferred": [],
+      "pillars_all": [],
+      "module_doc": "CEX Skill Loader -- Multi-source, cached, dedup'd builder ISO registry.\n\nPattern: OpenClaude loadSkillsDir.ts + bundledSkills.ts\nAdapted for CEX builder ISOs with 5 priority-ordered sources.\n\nSource priority (lower = overridden by higher):\n  0. genesis   -- N00_genesis/archetypes/ (base templates)\n "
+    },
+    "cex_social_publisher.py": {
+      "file": "cex_social_publisher.py",
+      "kinds_explicit": [],
+      "kinds_heuristic": [
+        "formatter",
+        "webhook"
+      ],
+      "kinds_all": [
+        "formatter",
+        "webhook"
+      ],
+      "pillars_explicit": [],
+      "pillars_inferred": [],
+      "pillars_all": [],
+      "module_doc": "cex_social_publisher.py: Multi-platform social content formatter for N02.\n\nTakes raw copy and outputs platform-sized variants (Twitter/X, LinkedIn, Instagram).\nNo network calls - produces the content for manual posting or webhook dispatch.\n\nUsage:\n    python _tools/cex_social_publisher.py --input dr"
+    },
+    "cex_source_harvester.py": {
+      "file": "cex_source_harvester.py",
+      "kinds_explicit": [],
+      "kinds_heuristic": [],
+      "kinds_all": [],
+      "pillars_explicit": [],
+      "pillars_inferred": [],
+      "pillars_all": [],
+      "module_doc": "cex_source_harvester.py -- Repo-Wide Source Reference Extractor\n\nScans CEX repo files for external source references (URLs, arXiv IDs, RFC\nnumbers, GitHub slugs, W3C TRs, IETF drafts, ISO/IEEE/NIST standards,\nHuggingFace models, DOI references) and merges them into:\n  .cex/P09_config/taxonomy_source"
+    },
+    "cex_stats.py": {
+      "file": "cex_stats.py",
+      "kinds_explicit": [],
+      "kinds_heuristic": [],
+      "kinds_all": [],
+      "pillars_explicit": [],
+      "pillars_inferred": [],
+      "pillars_all": [],
+      "module_doc": "Auto-count repo stats so README badges stop drifting from reality.\n\nUsage:\n    python _tools/cex_stats.py            # print table\n    python _tools/cex_stats.py --json     # machine-readable\n\nCounts: builders, ISOs, kinds, KCs, sub-agents, CLI tools, pillars, nuclei.\nSource of truth for any doc cla"
+    },
+    "cex_system_test.py": {
+      "file": "cex_system_test.py",
+      "kinds_explicit": [],
+      "kinds_heuristic": [],
+      "kinds_all": [],
+      "pillars_explicit": [],
+      "pillars_inferred": [],
+      "pillars_all": [],
+      "module_doc": "cex_system_test.py -- Full system validation for CEX bootstrap.\n\nTests all components: tools, builders, artifacts, hooks, runner, infra.\nRun after bootstrap to confirm system health.\n\nUsage:\n  python _tools/cex_system_test.py           # full test suite\n  python _tools/cex_system_test.py --quick   #"
+    },
+    "cex_taxonomy_scout.py": {
+      "file": "cex_taxonomy_scout.py",
+      "kinds_explicit": [],
+      "kinds_heuristic": [
+        "parser"
+      ],
+      "kinds_all": [
+        "parser"
+      ],
+      "pillars_explicit": [],
+      "pillars_inferred": [],
+      "pillars_all": [],
+      "module_doc": "cex_taxonomy_scout.py -- Weekly Taxonomy Discovery Engine\n\nScans configured sources (GitHub, arXiv, IETF, W3C, community), extracts\ncandidate kinds, scores them, deduplicates against kinds_meta.json, and\nwrites candidates to .cex/runtime/taxonomy_candidates/ for N07 review.\n\nUsage:\n  python _tools/c"
+    },
+    "cex_theme.py": {
+      "file": "cex_theme.py",
+      "kinds_explicit": [],
+      "kinds_heuristic": [
+        "lens"
+      ],
+      "kinds_all": [
+        "lens"
+      ],
+      "pillars_explicit": [],
+      "pillars_inferred": [],
+      "pillars_all": [],
+      "module_doc": "CEX Theme System -- reads nucleus_sins.yaml, outputs color schemes\n\nUsage:\n  python _tools/cex_theme.py --show                    # table of all nuclei + colors\n  python _tools/cex_theme.py --nucleus n03             # show N03's sin + colors\n  python _tools/cex_theme.py --format ps1              # P"
+    },
+    "cex_token_budget.py": {
+      "file": "cex_token_budget.py",
+      "kinds_explicit": [],
+      "kinds_heuristic": [],
+      "kinds_all": [],
+      "pillars_explicit": [],
+      "pillars_inferred": [],
+      "pillars_all": [],
+      "module_doc": "CEX Token Budget -- accurate token counting + prompt budget allocation.\n\nUses tiktoken for real token counts. Allocates budget across F6 PRODUCE\nprompt sections to prevent context overflow.\n\nUsage:\n    python cex_token_budget.py --count \"some text here\"\n    python cex_token_budget.py --count --file "
+    },
+    "cex_translate.py": {
+      "file": "cex_translate.py",
+      "kinds_explicit": [],
+      "kinds_heuristic": [],
+      "kinds_all": [],
+      "pillars_explicit": [],
+      "pillars_inferred": [],
+      "pillars_all": [],
+      "module_doc": "cex_translate.py -- PT-BR to EN translation engine for CEX repo.\n\nUses Anthropic Haiku for batch translation of Portuguese content.\nHandles .py (comments + strings), .md (prose), .ps1 (Write-Host + comments).\n\nUsage:\n    python _tools/cex_translate.py --check [path]      # count PT-BR lines\n    pyth"
+    },
+    "cex_user_model.py": {
+      "file": "cex_user_model.py",
+      "kinds_explicit": [],
+      "kinds_heuristic": [
+        "pattern",
+        "user_model"
+      ],
+      "kinds_all": [
+        "pattern",
+        "user_model"
+      ],
+      "pillars_explicit": [],
+      "pillars_inferred": [
+        "10"
+      ],
+      "pillars_all": [
+        "10"
+      ],
+      "module_doc": "cex_user_model.py -- Honcho-pattern Peer/Session/Message store (HERMES W4.3)\n\nSQLite default (FTS5 full-text search), pgvector optional via CEX_USER_MODEL_PG.\nImplements the `user_model` kind (P10) dialectic loop:\n  pre-response insight -> inject -> generate -> post-derive -> compact.\n\nStorage: .cex"
+    },
+    "cex_vector_store.py": {
+      "file": "cex_vector_store.py",
+      "kinds_explicit": [],
+      "kinds_heuristic": [
+        "knowledge_card",
+        "retriever"
+      ],
+      "kinds_all": [
+        "knowledge_card",
+        "retriever"
+      ],
+      "pillars_explicit": [],
+      "pillars_inferred": [],
+      "pillars_all": [],
+      "module_doc": "CEX Vector Store -- L2 semantic retriever using numpy cosine similarity.\n\nDesign: hnswlib was the target but doesn't build on Python 3.14.\nThis implements a numpy-based cosine similarity fallback that works\nidentically for CEX's scale (~2000 artifacts, ~128-384 dim embeddings).\n\nArchitecture:\n  L1 r"
+    },
+    "cex_wave_autofix.py": {
+      "file": "cex_wave_autofix.py",
+      "kinds_explicit": [],
+      "kinds_heuristic": [],
+      "kinds_all": [],
+      "pillars_explicit": [],
+      "pillars_inferred": [],
+      "pillars_all": [],
+      "module_doc": "cex_wave_autofix -- mechanical autofix for cex_wave_validator failures.\n\nFixes three classes of issues:\n  1. Wrong/missing llm_function (aligns to ISO_LLM_FUNCTION map)\n  2. Missing `quality` key in frontmatter (sets to null)\n  3. Missing `title` key in frontmatter (derived from filename)"
+    },
+    "cex_wave_autofix_final.py": {
+      "file": "cex_wave_autofix_final.py",
+      "kinds_explicit": [],
+      "kinds_heuristic": [],
+      "kinds_all": [],
+      "pillars_explicit": [],
+      "pillars_inferred": [],
+      "pillars_all": [],
+      "module_doc": "Final mechanical pass: (a) backtick-wrap ALL unresolved placeholders in\nprose (anything not already inside a fence or backticks); (b) insert a\nsingle canonical domain-keyword sentence into bodies that lack one.\n\nFor (b), the sentence is inserted right after the first heading line as\na short prose no"
+    },
+    "cex_wave_autofix_joinbackticks.py": {
+      "file": "cex_wave_autofix_joinbackticks.py",
+      "kinds_explicit": [],
+      "kinds_heuristic": [
+        "pattern"
+      ],
+      "kinds_all": [
+        "pattern"
+      ],
+      "pillars_explicit": [],
+      "pillars_inferred": [],
+      "pillars_all": [],
+      "module_doc": "Join adjacent inline-code segments that sandwich a bare placeholder.\n\nInput pattern:  `prefix_`{{placeholder}}`.suffix`\nOutput:         `prefix_{{placeholder}}.suffix`\n\nRuns over archetypes/builders/ (excluding _builder-builder/ meta templates)."
+    },
+    "cex_wave_validator.py": {
+      "file": "cex_wave_validator.py",
+      "kinds_explicit": [],
+      "kinds_heuristic": [
+        "pattern",
+        "voice_pipeline"
+      ],
+      "kinds_all": [
+        "pattern",
+        "voice_pipeline"
+      ],
+      "pillars_explicit": [],
+      "pillars_inferred": [],
+      "pillars_all": [],
+      "module_doc": "cex_wave_validator.py -- Pre-commit ISO gate for CEX builder archetypes.\n\nRuns 7 systemic checks on bld_*.md files (builder ISOs) before they reach git.\nCatches generator-side defects (qwen3 / gemma4 / direct-edit) that the\n8F pipeline and builder self-validation may miss.\n\nThe 7 checks (all surface"
+    },
+    "cex_web_fetch.py": {
+      "file": "cex_web_fetch.py",
+      "kinds_explicit": [],
+      "kinds_heuristic": [
+        "citation"
+      ],
+      "kinds_all": [
+        "citation"
+      ],
+      "pillars_explicit": [],
+      "pillars_inferred": [],
+      "pillars_all": [],
+      "module_doc": "cex_web_fetch.py: Fetch URL content for N01 research.\n\nMinimal HTTP GET with HTML->text extraction. No JS rendering.\nFor N01 leverage: live web research + arxiv + citation sources.\n\nUsage:\n    python _tools/cex_web_fetch.py https://arxiv.org/abs/1706.03762\n    python _tools/cex_web_fetch.py --arxiv "
+    }
+  }
+}

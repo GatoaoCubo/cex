@@ -1,0 +1,114 @@
+---
+id: ex-interface-supabase-tables
+kind: interface
+pillar: P06
+title: Supabase Tables Interface
+version: 0.1.0
+quality: 9.0
+status: template
+brand_placeholders:
+  - BRAND_SUPABASE_PROJECT_REF
+tags: [commerce, template, distillation, supabase, interface, schema]
+density_score: 1.0
+related:
+  - p06_schema_database
+  - p04_ex_supabase_data_layer_ecommerce
+  - p04_ex_supabase_data_layer_content
+  - tpl_crm_admin_spec
+  - p04_ex_supabase_data_layer_marketplace
+  - p04_ex_supabase_data_layer_saas
+  - bld_schema_social_publisher
+  - bld_schema_repo_map
+  - bld_schema_context_window_config
+  - p01_kc_supabase_realtime
+---
+
+# Supabase Tables Interface
+
+## Purpose
+Canonical interface definitions for the tables that every commerce edge function, page, and component depends on. This is the contract between schema and code: if a table changes shape, this doc changes first, then `types.ts` is regenerated, then code is updated.
+
+## When to use
+- New table is being designed -- define its columns here before running the migration.
+- Consumer needs to know "what columns can I expect on `products`?".
+- Cross-nucleus handoff where the downstream team needs the table contract.
+
+## Brand variables used
+- `{{BRAND_SUPABASE_PROJECT_REF}}` -- namespace tag on the generated types; no other brand specifics leak into schema.
+
+## Tables + essential columns
+
+### products
+| Column | Type | Nullable | Notes |
+|--------|------|----------|-------|
+| id | uuid | no | pk, default `gen_random_uuid()` |
+| sku | text | no | unique, cross-channel key |
+| bling_id | bigint | yes | populated once Bling accepts the SKU |
+| shopify_id | text | yes | Shopify GID as text |
+| meli_id | text | yes | `MLB...` listing id |
+| title | text | no |  |
+| description | text | yes |  |
+| price_cents | int | no | store in cents to avoid float |
+| currency | text | no | default `BRL` |
+| stock | int | no | aggregated across warehouses |
+| status | text | no | `active` \| `inactive` \| `archived` |
+| dirty | bool | no | set true by any mutation; cleared post-push |
+| source | text | yes | `shopify` \| `bling` \| `meli` \| `manual` |
+| updated_at | timestamptz | no | default `now()` |
+| created_at | timestamptz | no | default `now()` |
+
+### inventory
+| Column | Type | Notes |
+|--------|------|-------|
+| sku | text | fk -> products.sku |
+| warehouse | text | deposito identifier |
+| quantity | int | >= 0 |
+| updated_at | timestamptz |  |
+| primary key | (sku, warehouse) |
+
+### orders
+| Column | Type | Notes |
+|--------|------|-------|
+| id | uuid | pk |
+| external_id | text | channel-native id |
+| channel | text | `shopify` \| `bling` \| `meli` |
+| customer_id | uuid | nullable for guest checkout |
+| total_cents | int |  |
+| status | text | `created` \| `paid` \| `fulfilled` \| `cancelled` |
+| raw | jsonb | channel payload for replay |
+| created_at | timestamptz |  |
+
+### webhook_inbox_{channel}
+One table per channel for idempotency keys, 48-hour TTL cleanup.
+
+### sync_runs
+Run audit for workflows. Columns: `id, workflow, started_at, ended_at, outcome, report jsonb`.
+
+### sync_conflicts
+Unresolved mismatches caught by `dispatch_rule`. Columns: `id, entity, key, field, channel_values jsonb, authority, resolved_at`.
+
+## Invariants (enforced by constraints + triggers)
+- `products.price_cents >= 0`.
+- `inventory.quantity >= 0`; negative values are programming errors.
+- `orders.channel` must match the channel of its stored `external_id` format.
+- `products.dirty=true` persists until a successful push clears it.
+
+## Related artifacts
+- `ex_supabase_data_layer.md`
+- `ex_db_connector_supabase.md`
+- `ex_validator_inventory_invariants.md`
+
+## Related Artifacts
+
+| Artifact | Relationship | Score |
+|----------|-------------|-------|
+| [[p06_schema_database]] | related | 0.28 |
+| [[p04_ex_supabase_data_layer_ecommerce]] | upstream | 0.22 |
+| [[p04_ex_supabase_data_layer_content]] | upstream | 0.21 |
+| [[tpl_crm_admin_spec]] | downstream | 0.21 |
+| [[p04_ex_supabase_data_layer_marketplace]] | upstream | 0.19 |
+| [[p04_ex_supabase_data_layer_saas]] | upstream | 0.19 |
+| [[bld_schema_social_publisher]] | related | 0.19 |
+| [[bld_schema_repo_map]] | related | 0.18 |
+| [[bld_schema_context_window_config]] | related | 0.18 |
+| [[p01_kc_supabase_realtime]] | upstream | 0.18 |

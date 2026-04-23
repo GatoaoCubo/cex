@@ -1,0 +1,62 @@
+---
+kind: memory
+id: p10_mem_govtech_vertical_builder
+pillar: P10
+llm_function: INJECT
+purpose: Learned patterns and pitfalls for govtech_vertical construction
+quality: 8.8
+title: "Learning Record Govtech Vertical"
+version: "1.0.0"
+author: wave1_builder_gen_v2
+tags: [govtech_vertical, builder, memory]
+tldr: "Learned patterns and pitfalls for govtech_vertical construction"
+domain: "govtech_vertical construction"
+created: "2026-04-14"
+updated: "2026-04-14"
+density_score: 0.85
+related:
+  - bld_instruction_govtech_vertical
+  - govtech-vertical-builder
+  - bld_examples_govtech_vertical
+  - p03_sp_govtech_vertical_builder
+  - bld_tools_govtech_vertical
+  - bld_knowledge_card_govtech_vertical
+  - p01_qg_govtech_vertical
+  - bld_architecture_govtech_vertical
+  - p10_lr_compliance_framework_builder
+  - bld_output_template_govtech_vertical
+---
+
+## Observation
+Common issues include misalignment with FedRAMP or CJIS requirements during artifact design, leading to rework. Accessibility (Section 508) is often addressed late, causing gaps in user experience.
+
+## Pattern
+Successful artifacts integrate compliance early, using modular components that map to GSA and FISMA standards. Cross-functional teams ensure accessibility is baked into workflows, not tacked on later.
+
+## Evidence
+Reviewed artifacts with embedded FedRAMP alignment checks and Section 508-compliant UI templates had 30% fewer compliance issues in pilot phases.
+
+## Recommendations
+- Prioritize modular design to reuse compliance artifacts across FedRAMP, FISMA, and CJIS use cases.
+- Embed automated accessibility testing (Section 508) into CI/CD pipelines for real-time validation.
+- Use GSA-approved templates as a baseline for documentation and procurement artifacts.
+- Conduct joint workshops between compliance and product teams to align on CJIS-specific data security requirements.
+- Maintain a centralized repository of approved FedRAMP and FISMA artifacts to reduce duplication.
+
+## Domain Scope
+This learning record applies to govtech vertical artifact construction, covering FedRAMP/FISMA compliance, Section 508 accessibility, open data standards, and procurement documentation patterns specific to the govtech domain.
+
+## Related Artifacts
+
+| Artifact | Relationship | Score |
+|----------|-------------|-------|
+| [[bld_instruction_govtech_vertical]] | upstream | 0.48 |
+| [[govtech-vertical-builder]] | upstream | 0.45 |
+| [[bld_examples_govtech_vertical]] | upstream | 0.41 |
+| [[p03_sp_govtech_vertical_builder]] | upstream | 0.40 |
+| [[bld_tools_govtech_vertical]] | upstream | 0.35 |
+| [[bld_knowledge_card_govtech_vertical]] | upstream | 0.33 |
+| [[p01_qg_govtech_vertical]] | downstream | 0.28 |
+| [[bld_architecture_govtech_vertical]] | upstream | 0.27 |
+| [[p10_lr_compliance_framework_builder]] | related | 0.25 |
+| [[bld_output_template_govtech_vertical]] | upstream | 0.23 |

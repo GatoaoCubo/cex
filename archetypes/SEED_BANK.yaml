@@ -1,0 +1,292 @@
+# SEED_BANK.yaml — Seeds por tipo CEX
+# Gerado: 2026-03-23 19:00 UTC
+# Fonte: cex_seed_bank.py (analise de schemas + templates)
+# Total: 69 tipos cobertos
+
+# ── P01 knowledge ──
+P01_context_doc:
+  seeds: [domain, scope, background, stakeholders, constraints, assumptions, dependencies, timeline, objectives, boundaries]
+  contexts: [project_setup, handoff, onboarding, planning]
+
+P01_embedding_config:
+  seeds: [model_name, dimensions, chunk_size, overlap, tokenizer, distance_metric, batch_size, normalize, provider, cost]
+  contexts: [setup, optimization, migration, benchmarking]
+
+P01_few_shot_example:
+  seeds: [input, output, quality, edge_case, format, domain, difficulty, explanation, variation, expected_behavior]
+  contexts: [prompt_engineering, evaluation, training, calibration]
+
+P01_glossary_entry:
+  seeds: [term, definition, synonyms, context, disambiguation, domain_specific, abbreviation, usage, related_terms, etymology]
+  contexts: [onboarding, documentation, standardization, reference]
+
+P01_knowledge_card:
+  seeds: [domain, expertise, axioms, patterns, when_to_use, density, tldr, linked, bullets, quick_reference, conceitos, fases, regras_de_ouro, comparativo, flow]
+  contexts: [research, distillation, documentation, analysis]
+
+P01_rag_source:
+  seeds: [url, domain, freshness, indexable, crawl, last_checked, reliability, format, extraction, metadata]
+  contexts: [ingestion, indexing, refresh, validation]
+
+# ── P02 model ──
+P02_agent:
+  seeds: [identity, capabilities, constraints, tools, routing, fallback, boot, agent_group, domain, architecture, when_to_use, input_output, integration, quality_gates, overview]
+  contexts: [creation, modification, audit, deployment]
+
+P02_boot_config:
+  seeds: [provider, identity, constraints, tools, flags, model, temperature, system_prompt, mcp_config, permissions]
+  contexts: [initialization, provider_switch, debugging, optimization]
+
+P02_fallback_chain:
+  seeds: [chain, timeout_per_step, models, degradation, cost, quality_threshold, retry_count, circuit_breaker, logging, alert]
+  contexts: [resilience, cost_optimization, debugging, design]
+
+P02_agent_package:
+  seeds: [manifest, system_instruction, instructions, architecture, examples, error_handling, upload_kit, portable, self_contained, whitelabel, tiers, density, quality_gates]
+  contexts: [packaging, deployment, sharing, audit]
+
+P02_lens:
+  seeds: [perspective, domain, applies_to, bias, focus, filters, interpretation, weight, priority, scope]
+  contexts: [analysis, routing, specialization, context_switching]
+
+P02_mental_model:
+  seeds: [agent, routing_rules, decision_tree, priorities, heuristics, domain_map, tools_available, personality, constraints, fallback]
+  contexts: [agent_design, debugging, optimization, documentation]
+
+P02_model_card:
+  seeds: [model_name, provider, context_window, pricing, capabilities, limitations, benchmarks, latency, modalities, version, training_cutoff, safety, rate_limits, tokens_per_second]
+  contexts: [selection, comparison, budgeting, migration]
+
+P02_router:
+  seeds: [routes, fallback, keywords, agent_group, priority, confidence_threshold, load_balance, timeout, retry, escalation]
+  contexts: [dispatch, optimization, debugging, scaling]
+
+# ── P03 prompt ──
+P03_action_prompt:
+  seeds: [action, input_required, output_expected, steps, validation, purpose, constraints, examples, edge_cases, timeout]
+  contexts: [task_execution, automation, testing, optimization]
+
+P03_chain:
+  seeds: [steps, flow, input_output, branching, parallel, sequential, error_handling, state, context_passing, termination]
+  contexts: [pipeline_design, optimization, debugging, composition]
+
+P03_instruction:
+  seeds: [target, steps, prerequisites, validation, rollback, order, dependencies, idempotent, atomic, logging]
+  contexts: [execution, onboarding, automation, documentation]
+
+P03_prompt_template:
+  seeds: [variables, purpose, quality_gates, examples, semantic_bridge, template_body, mustache, reuse, composability, versioning, input_types, output_format]
+  contexts: [authoring, standardization, reuse, evolution]
+
+P03_system_prompt:
+  seeds: [identity, rules, output_format, persona, constraints, tone, knowledge_boundary, safety, tools_available, response_structure, examples, anti_patterns]
+  contexts: [agent_creation, tuning, A/B_testing, compliance]
+
+# ── P04 tools ──
+P04_cli_tool:
+  seeds: [commands, flags, args, help, output_format, exit_codes, config_file, verbose, interactive, scripting]
+  contexts: [development, automation, documentation, testing]
+
+P04_client:
+  seeds: [api, auth, endpoints, rate_limit, retry, timeout, serialization, error_codes, pagination, caching]
+  contexts: [integration, testing, migration, documentation]
+
+P04_connector:
+  seeds: [service, auth, protocol, endpoints, mapping, transform, retry, health_check, logging, versioning]
+  contexts: [integration, migration, monitoring, debugging]
+
+P04_daemon:
+  seeds: [name, schedule, health_check, restart_policy, logging, pid_file, signal_handling, resource_limits, monitoring, graceful_shutdown]
+  contexts: [deployment, monitoring, debugging, scaling]
+
+P04_hook:
+  seeds: [trigger_event, script_path, pre_post, timeout, blocking, async, error_handling, lifecycle, conditions, logging]
+  contexts: [automation, quality_gates, monitoring, customization]
+
+P04_mcp_server:
+  seeds: [name, transport, tools_provided, resources_provided, auth, stdio, sse, http, schema, rate_limit, health_check, versioning]
+  contexts: [integration, deployment, debugging, documentation]
+
+P04_plugin:
+  seeds: [interface, lifecycle, config, dependencies, isolation, version, enable_disable, hot_reload, api_surface, testing]
+  contexts: [extension, customization, marketplace, development]
+
+P04_scraper:
+  seeds: [target, selectors, pagination, rate_limit, anti_bot, proxy, output_format, scheduling, validation, freshness]
+  contexts: [data_collection, monitoring, research, enrichment]
+
+P04_skill:
+  seeds: [name, trigger, phases, when_to_use, when_not_to_use, examples, anti_patterns, metrics, workflow, input_output, user_invocable, dependencies]
+  contexts: [creation, discovery, execution, audit]
+
+# ── P05 output ──
+P05_formatter:
+  seeds: [format, template, escaping, encoding, pretty_print, minify, custom_rules, locale, truncation, streaming]
+  contexts: [output, display, export, standardization]
+
+P05_naming_rule:
+  seeds: [scope, pattern, prefix, suffix, separator, case_style, versioning, collision, validation, examples]
+  contexts: [standardization, migration, audit, onboarding]
+
+P05_output_schema:
+  seeds: [format, fields, types, required, optional, validation, examples, versioning, serialization, compatibility]
+  contexts: [design, validation, documentation, evolution]
+
+P05_parser:
+  seeds: [target, input_format, extraction, regex, structured, error_handling, fallback, streaming, chunking, normalization]
+  contexts: [ingestion, transformation, debugging, optimization]
+
+# ── P06 schema ──
+P06_input_schema:
+  seeds: [scope, fields, types, required, defaults, validation, coercion, examples, error_messages, versioning]
+  contexts: [contract_design, validation, documentation, testing]
+
+P06_interface:
+  seeds: [contract, methods, input, output, versioning, backward_compatible, deprecation, documentation, testing, mock]
+  contexts: [integration, design, evolution, testing]
+
+P06_output_schema:
+  seeds: [scope, format, fields, types, required, validation, examples, compatibility, streaming, pagination]
+  contexts: [contract_design, validation, documentation, evolution]
+
+P06_type_def:
+  seeds: [type, base, constraints, serialization, examples, composition, inheritance, generics, nullable, documentation]
+  contexts: [design, reuse, standardization, migration]
+
+P06_validator:
+  seeds: [rule, conditions, error_message, severity, auto_fix, pre_commit, quality_gate, threshold, bypass, logging]
+  contexts: [quality_assurance, automation, compliance, debugging]
+
+# ── P07 evals ──
+P07_benchmark:
+  seeds: [metric, baseline, target, methodology, environment, iterations, warmup, percentiles, comparison, reporting]
+  contexts: [optimization, comparison, regression, capacity_planning]
+
+P07_e2e_eval:
+  seeds: [pipeline, stages, input, expected_output, timeout, environment, data_fixtures, cleanup, parallel, reporting]
+  contexts: [release, integration, regression, acceptance]
+
+P07_golden_test:
+  seeds: [case, input, golden_output, quality_score, rationale, edge_case, domain, versioning, reviewer, approval]
+  contexts: [quality_baseline, calibration, training, audit]
+
+P07_scoring_rubric:
+  seeds: [framework, dimensions, weights, thresholds, examples, calibration, inter_rater, automation, edge_cases, appeals]
+  contexts: [evaluation, standardization, training, audit]
+
+P07_smoke_eval:
+  seeds: [scope, critical_path, timeout, health_check, assertions, fast_fail, prerequisites, environment, alerting, frequency]
+  contexts: [deployment, monitoring, CI, quick_validation]
+
+P07_unit_eval:
+  seeds: [target, input, expected_output, assertion, score, timeout, setup, teardown, edge_cases, coverage]
+  contexts: [testing, CI, regression, quality_assurance]
+
+# ── P08 architecture ──
+P08_component_map:
+  seeds: [scope, components, connections, dependencies, data_flow, ownership, health, versioning, interfaces, boundaries]
+  contexts: [architecture_review, debugging, planning, onboarding]
+
+P08_diagram:
+  seeds: [scope, notation, components, connections, layers, legend, ascii, mermaid, zoom_level, annotations]
+  contexts: [documentation, communication, debugging, planning]
+
+P08_law:
+  seeds: [number, statement, rationale, enforcement, exceptions, examples, violations, history, scope, priority]
+  contexts: [governance, compliance, onboarding, evolution]
+
+P08_pattern:
+  seeds: [name, problem, solution, context, forces, consequences, examples, related_patterns, anti_patterns, applicability]
+  contexts: [design, refactoring, documentation, teaching]
+
+P08_agent_card:
+  seeds: [name, role, model, mcps, domain, boot_sequence, constraints, dispatch, tools, dependencies, scaling, monitoring]
+  contexts: [design, deployment, optimization, documentation]
+
+# ── P09 config ──
+P09_env_config:
+  seeds: [scope, variables, defaults, required, sensitive, environment, validation, override, documentation, examples]
+  contexts: [setup, deployment, debugging, migration]
+
+P09_feature_flag:
+  seeds: [feature, enabled, rollout_percentage, conditions, expiry, owner, description, metrics, fallback, cleanup]
+  contexts: [release, experimentation, rollback, cleanup]
+
+P09_path_config:
+  seeds: [scope, paths, platform, relative, absolute, fallback, creation, permissions, validation, documentation]
+  contexts: [setup, cross_platform, migration, debugging]
+
+P09_permission:
+  seeds: [scope, read, write, execute, roles, inheritance, deny_list, allow_list, audit, escalation]
+  contexts: [security, onboarding, compliance, debugging]
+
+P09_runtime_rule:
+  seeds: [rule, timeouts, retries, limits, circuit_breaker, backoff, jitter, priority, resource_caps, monitoring]
+  contexts: [resilience, optimization, debugging, scaling]
+
+# ── P10 memory ──
+P10_axiom:
+  seeds: [rule, rationale, scope, enforcement, immutable, examples, violations, history, priority, dependencies]
+  contexts: [governance, onboarding, compliance, evolution]
+
+P10_knowledge_index:
+  seeds: [index, algorithm, bm25, faiss, hybrid, rebuild_schedule, scope, filters, ranking, freshness]
+  contexts: [setup, optimization, debugging, migration]
+
+P10_learning_record:
+  seeds: [topic, outcome, pattern, anti_pattern, score, context, timestamp, agent_group, reproducibility, impact]
+  contexts: [retrospective, optimization, training, audit]
+
+P10_mental_model:
+  seeds: [agent, routing, decisions, priorities, domain_map, tools, personality, constraints, heuristics, evolution]
+  contexts: [agent_design, optimization, debugging, documentation]
+
+P10_session_state:
+  seeds: [session, snapshot, active_tasks, context_window, tokens_used, tools_called, errors, duration, checkpoints, recovery]
+  contexts: [debugging, recovery, monitoring, optimization]
+
+# ── P11 feedback ──
+P11_bugloop:
+  seeds: [scope, detect, fix, verify, cycle_count, auto_fix, escalation, confidence, test_suite, rollback]
+  contexts: [debugging, CI, self_healing, monitoring]
+
+P11_guardrail:
+  seeds: [scope, boundary, enforcement, severity, bypass, logging, alerting, examples, violations, remediation]
+  contexts: [security, compliance, safety, quality]
+
+P11_lifecycle_rule:
+  seeds: [rule, freshness, archive, promote, demote, expiry, review_cycle, ownership, notification, automation]
+  contexts: [maintenance, governance, cleanup, quality]
+
+P11_optimizer:
+  seeds: [target, metric, action, threshold, frequency, baseline, improvement, cost, risk, monitoring]
+  contexts: [performance, cost_reduction, quality, automation]
+
+P11_quality_gate:
+  seeds: [gate, threshold, dimensions, pass_fail, score, blocking, auto_fix, escalation, bypass, logging]
+  contexts: [CI, review, deployment, automation]
+
+# ── P12 orchestration ──
+P12_dag:
+  seeds: [pipeline, nodes, edges, dependencies, parallel, topological_sort, cycle_detection, execution_order, state, visualization]
+  contexts: [pipeline_design, optimization, debugging, documentation]
+
+P12_dispatch_rule:
+  seeds: [scope, keywords, agent_group, model, priority, confidence, fallback, conditions, load_balance, routing]
+  contexts: [routing, optimization, debugging, scaling]
+
+P12_handoff:
+  seeds: [task, context, commit, scope_fence, seeds, autonomy, quality_target, signal, agent_group, dependencies]
+  contexts: [dispatch, delegation, documentation, automation]
+
+P12_signal:
+  seeds: [event, agent_group, status, score, timestamp, payload, routing, acknowledgment, expiry, priority]
+  contexts: [coordination, monitoring, debugging, automation]
+
+P12_spawn_config:
+  seeds: [mode, agent_group, model, flags, mcp_config, timeout, interactive, prompt, handoff, signal]
+  contexts: [deployment, scaling, debugging, optimization]
+
+P12_workflow:
+  seeds: [name, steps, parallel, sequential, dependencies, error_handling, timeout, retry, state, completion]
+  contexts: [automation, design, debugging, optimization]

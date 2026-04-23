@@ -1,0 +1,152 @@
+---
+quality: 8.4
+quality: 8.0
+kind: config
+id: bld_config_event_schema
+pillar: P09
+llm_function: CONSTRAIN
+purpose: Naming conventions, file paths, size limits, operational constraints
+pattern: CONFIG restricts SCHEMA, never contradicts it
+effort: medium
+max_turns: 25
+disallowed_tools: []
+fork_context: null
+hooks:
+  pre_build: null
+  post_build: null
+  on_error: null
+  on_quality_fail: null
+permission_scope: nucleus
+title: "Config Event Schema"
+version: "1.0.0"
+author: n03_builder
+tags: [event_schema, builder, config]
+tldr: "Naming: p06_evs_{slug}.md. event_type: reverse-DNS + .v{N}. JSON Schema payload. ADDITIVE_ONLY or VERSIONED_TYPE."
+domain: "event schema construction"
+created: "2026-04-17"
+updated: "2026-04-17"
+density_score: 0.90
+related:
+  - bld_schema_audit_log
+  - bld_schema_reranker_config
+  - bld_schema_validation_schema
+  - bld_schema_dataset_card
+  - bld_schema_function_def
+  - bld_schema_input_schema
+  - bld_schema_integration_guide
+  - bld_schema_sandbox_config
+  - bld_schema_api_reference
+  - bld_schema_thinking_config
+---
+
+# Config: event_schema Production Rules
+
+## Naming Convention
+
+| Scope | Convention | Example |
+|-------|-----------|---------|
+| Artifact files | `p06_evs_{event_slug}.md` | `p06_evs_order_created_v1.md` |
+| Builder directory | kebab-case | `event-schema-builder/` |
+| Frontmatter fields | snake_case | `event_type`, `schema_version` |
+| Event slug | snake_case, lowercase, include version | `order_created_v1`, `user_registered_v2` |
+| event_type | reverse-DNS.aggregate.event.v{N} | `com.acme.order.created.v1` |
+| Source URI | path-like string | `/orders-service`, `/payment-gateway` |
+
+Rule: id MUST equal filename stem. Hyphens in id = HARD FAIL.
+
+## File Paths
+
+- Output: `N0X_{domain}/P06_schema/p06_evs_{event_slug}.md`
+- Compiled: `N0X_{domain}/P06_schema/compiled/p06_evs_{event_slug}.yaml`
+
+## Size Limits
+
+- Body: max 4096 bytes
+- Density: >= 0.78 (JSON Schema is structured data)
+
+## Event Type Naming Convention
+
+| Component | Format | Example |
+|-----------|--------|---------|
+| Reverse domain | Lowercase dot-separated | `com.acme`, `io.example` |
+| Aggregate | Singular lowercase | `order`, `user`, `payment` |
+| Event | Past tense lowercase | `created`, `updated`, `cancelled` |
+| Version | `.v{major}` suffix | `.v1`, `.v2` |
+
+Full example: `com.acme.order.created.v1`
+
+## Evolution Strategy
+
+| Change Type | Strategy | Action |
+|-------------|----------|--------|
+| Add optional field | ADDITIVE_ONLY | Same event_type, bump schema_version minor |
+| Add required field | VERSIONED_TYPE | New event_type with .v{N+1} |
+| Remove field | VERSIONED_TYPE | New event_type with .v{N+1} |
+| Change field type | VERSIONED_TYPE | New event_type with .v{N+1} |
+| Rename field | VERSIONED_TYPE | New event_type with .v{N+1} |
+
+Never delete old event_type until all consumers have migrated.
+
+## Schema Version vs Event Type Version
+
+| Version Field | Format | When to Bump |
+|---------------|--------|-------------|
+| schema_version | semver (1.0.0) | Any schema change (major=breaking, minor=additive) |
+| event_type version (.v1) | integer suffix | Only on breaking changes (major version) |
+| Relationship | schema_version 1.1.0 = same .v1 type | Minor schema changes stay in same event_type |
+
+## Source URI Convention
+
+| Service Type | Format | Example |
+|-------------|--------|---------|
+| Microservice | /{service-name} | /orders-service |
+| Lambda function | /lambda/{function-name} | /lambda/order-processor |
+| Event producer app | /{domain}/{app-name} | /commerce/order-api |
+| External partner | https://{partner-domain} | https://partner.example.com |
+
+## CloudEvents Envelope Fields
+
+| Field | Required | Format | Example |
+|-------|----------|--------|---------|
+| specversion | YES | "1.0" | "1.0" |
+| id | YES | UUID v4 | "550e8400-e29b-41d4-a716-446655440000" |
+| type | YES | reverse-DNS.v{N} | "com.acme.order.created.v1" |
+| source | YES | URI string | "/orders-service" |
+| subject | YES | entity id | "order-12345" |
+| time | YES | RFC3339 | "2026-04-17T10:00:00Z" |
+| datacontenttype | YES | MIME type | "application/json" |
+| data | YES | JSON Schema object | `{orderId, customerId, totalAmount}` |
+
+## Common Config Mistakes
+
+| Mistake | Consequence | Correct Behavior |
+|---------|-------------|-----------------|
+| event_type without .v{N} | Breaking changes silently break consumers | Always suffix .v1, .v2, etc. |
+| payload as field list | Not machine-validatable | Use JSON Schema format |
+| Missing required array | Silent null bugs in consumers | Declare required: [field1, field2] |
+| Mixing SLA in schema | Governance confusion | Separate data_contract artifact |
+| Schema Registry | Use if available | Confluent, AWS Glue, Apicurio |
+| datacontenttype | application/json required | CloudEvents 1.0 requirement |
+| Consumer migration | Parallel event types during migration | Run v1 and v2 until all consumers migrate |
+| Deprecated event_type | Mark as deprecated before removing | Add deprecated: true to schema |
+| Consumer SLA in schema | SLA belongs in data_contract | Move to separate data_contract artifact |
+| Version-less type | All consumers break on evolution | Require .v{N} suffix in all event_type values |
+| schema_version | semver format | Must be valid semver (1.0.0) |
+| versioning_strategy | ADDITIVE_ONLY or VERSIONED_TYPE | One of the two strategies required |
+| datacontenttype | application/json | CloudEvents mandatory field |
+| specversion | 1.0 | CloudEvents 1.0 required |
+
+## Related Artifacts
+
+| Artifact | Relationship | Score |
+|----------|-------------|-------|
+| [[bld_schema_audit_log]] | upstream | 0.32 |
+| [[bld_schema_reranker_config]] | upstream | 0.27 |
+| [[bld_schema_validation_schema]] | upstream | 0.27 |
+| [[bld_schema_dataset_card]] | upstream | 0.27 |
+| [[bld_schema_function_def]] | upstream | 0.27 |
+| [[bld_schema_input_schema]] | upstream | 0.27 |
+| [[bld_schema_integration_guide]] | upstream | 0.26 |
+| [[bld_schema_sandbox_config]] | upstream | 0.26 |
+| [[bld_schema_api_reference]] | upstream | 0.26 |
+| [[bld_schema_thinking_config]] | upstream | 0.26 |

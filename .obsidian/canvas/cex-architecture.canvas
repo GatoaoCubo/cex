@@ -1,0 +1,236 @@
+{
+  "nodes": [
+    {
+      "id": "title",
+      "type": "text",
+      "x": -400, "y": -620, "width": 1080, "height": 80,
+      "color": "0",
+      "text": "# CEX Architecture\n**293 kinds** | **298 builders** | **3,563 ISOs** | **12 pillars** | **8 nuclei** | **135 tools** | **4 runtimes** (Claude / Codex / Gemini / Ollama)"
+    },
+
+    {
+      "id": "n07-hub",
+      "type": "text",
+      "x": 60, "y": -460, "width": 160, "height": 140,
+      "color": "0",
+      "text": "## N07\n**Orchestrator**\nOrchestrating Sloth\n`Opus 4.6 (1M)`\n*dispatch, never build*"
+    },
+
+    {
+      "id": "n01",
+      "type": "text",
+      "x": -520, "y": -260, "width": 200, "height": 120,
+      "color": "4",
+      "text": "## N01 Intelligence\n**Analytical Envy**\nResearch, analysis\n`Sonnet 4.6`"
+    },
+    {
+      "id": "n02",
+      "type": "text",
+      "x": -260, "y": -260, "width": 200, "height": 120,
+      "color": "1",
+      "text": "## N02 Marketing\n**Creative Lust**\nCopy, campaigns\n`Sonnet 4.6`"
+    },
+    {
+      "id": "n03",
+      "type": "text",
+      "x": 0, "y": -260, "width": 200, "height": 120,
+      "color": "5",
+      "text": "## N03 Engineering\n**Inventive Pride**\nBuild everything\n`Opus 4.6`"
+    },
+    {
+      "id": "n04",
+      "type": "text",
+      "x": 260, "y": -260, "width": 200, "height": 120,
+      "color": "4",
+      "text": "## N04 Knowledge\n**Knowledge Gluttony**\nRAG, docs, KCs\n`Sonnet 4.6`"
+    },
+    {
+      "id": "n05",
+      "type": "text",
+      "x": -390, "y": -100, "width": 200, "height": 120,
+      "color": "6",
+      "text": "## N05 Operations\n**Gating Wrath**\nCode, test, deploy\n`Sonnet 4.6`"
+    },
+    {
+      "id": "n06",
+      "type": "text",
+      "x": -130, "y": -100, "width": 200, "height": 120,
+      "color": "3",
+      "text": "## N06 Commercial\n**Strategic Greed**\nPricing, funnels\n`Sonnet 4.6`"
+    },
+    {
+      "id": "n00",
+      "type": "text",
+      "x": 130, "y": -100, "width": 200, "height": 120,
+      "color": "0",
+      "text": "## N00 Genesis\n**Pre-sin archetype**\n293 kinds / 298 builders\n*The DNA template*"
+    },
+
+    {
+      "id": "sep1",
+      "type": "text",
+      "x": -520, "y": 60, "width": 980, "height": 30,
+      "color": "0",
+      "text": "### 8F Pipeline --- every nucleus, every task, no exceptions"
+    },
+
+    {
+      "id": "f1",
+      "type": "text",
+      "x": -520, "y": 110, "width": 110, "height": 80,
+      "color": "4",
+      "text": "**F1**\nCONSTRAIN\n`kind+schema`"
+    },
+    {
+      "id": "f2",
+      "type": "text",
+      "x": -390, "y": 110, "width": 110, "height": 80,
+      "color": "4",
+      "text": "**F2**\nBECOME\n`load builder`"
+    },
+    {
+      "id": "f3",
+      "type": "text",
+      "x": -260, "y": 110, "width": 110, "height": 80,
+      "color": "4",
+      "text": "**F3**\nINJECT\n`context`"
+    },
+    {
+      "id": "f4",
+      "type": "text",
+      "x": -130, "y": 110, "width": 110, "height": 80,
+      "color": "5",
+      "text": "**F4**\nREASON\n`plan`"
+    },
+    {
+      "id": "f5",
+      "type": "text",
+      "x": 0, "y": 110, "width": 110, "height": 80,
+      "color": "5",
+      "text": "**F5**\nCALL\n`tools+RAG`"
+    },
+    {
+      "id": "f6",
+      "type": "text",
+      "x": 130, "y": 110, "width": 110, "height": 80,
+      "color": "6",
+      "text": "**F6**\nPRODUCE\n`generate`"
+    },
+    {
+      "id": "f7",
+      "type": "text",
+      "x": 260, "y": 110, "width": 110, "height": 80,
+      "color": "1",
+      "text": "**F7**\nGOVERN\n`quality gate`"
+    },
+    {
+      "id": "f8",
+      "type": "text",
+      "x": 390, "y": 110, "width": 110, "height": 80,
+      "color": "0",
+      "text": "**F8**\nCOLLAB\n`save+signal`"
+    },
+
+    {
+      "id": "sep2",
+      "type": "text",
+      "x": -520, "y": 220, "width": 980, "height": 30,
+      "color": "0",
+      "text": "### 12 Pillars --- domain taxonomy (every nucleus mirrors this structure)"
+    },
+
+    {
+      "id": "p01", "type": "text", "x": -520, "y": 270, "width": 150, "height": 50, "color": "4",
+      "text": "**P01** Knowledge"
+    },
+    {
+      "id": "p02", "type": "text", "x": -350, "y": 270, "width": 150, "height": 50, "color": "4",
+      "text": "**P02** Model"
+    },
+    {
+      "id": "p03", "type": "text", "x": -180, "y": 270, "width": 150, "height": 50, "color": "3",
+      "text": "**P03** Prompt"
+    },
+    {
+      "id": "p04", "type": "text", "x": -10, "y": 270, "width": 150, "height": 50, "color": "1",
+      "text": "**P04** Tools"
+    },
+    {
+      "id": "p05", "type": "text", "x": 160, "y": 270, "width": 150, "height": 50, "color": "5",
+      "text": "**P05** Output"
+    },
+    {
+      "id": "p06", "type": "text", "x": 330, "y": 270, "width": 150, "height": 50, "color": "4",
+      "text": "**P06** Schema"
+    },
+    {
+      "id": "p07", "type": "text", "x": -520, "y": 340, "width": 150, "height": 50, "color": "5",
+      "text": "**P07** Evaluation"
+    },
+    {
+      "id": "p08", "type": "text", "x": -350, "y": 340, "width": 150, "height": 50, "color": "6",
+      "text": "**P08** Architecture"
+    },
+    {
+      "id": "p09", "type": "text", "x": -180, "y": 340, "width": 150, "height": 50, "color": "0",
+      "text": "**P09** Config"
+    },
+    {
+      "id": "p10", "type": "text", "x": -10, "y": 340, "width": 150, "height": 50, "color": "3",
+      "text": "**P10** Memory"
+    },
+    {
+      "id": "p11", "type": "text", "x": 160, "y": 340, "width": 150, "height": 50, "color": "1",
+      "text": "**P11** Feedback"
+    },
+    {
+      "id": "p12", "type": "text", "x": 330, "y": 340, "width": 150, "height": 50, "color": "4",
+      "text": "**P12** Orchestration"
+    },
+
+    {
+      "id": "sep3",
+      "type": "text",
+      "x": -520, "y": 420, "width": 980, "height": 30,
+      "color": "0",
+      "text": "### Foundation --- archetypes, tools, SDK"
+    },
+    {
+      "id": "builders",
+      "type": "text",
+      "x": -520, "y": 470, "width": 300, "height": 80,
+      "color": "0",
+      "text": "**archetypes/builders/**\n298 builders x 12 ISOs each\n= 3,563 instruction sets"
+    },
+    {
+      "id": "tools",
+      "type": "text",
+      "x": -180, "y": 470, "width": 300, "height": 80,
+      "color": "0",
+      "text": "**_tools/**\n135 Python tools\ncex_*.py runtime"
+    },
+    {
+      "id": "sdk",
+      "type": "text",
+      "x": 160, "y": 470, "width": 300, "height": 80,
+      "color": "0",
+      "text": "**cex_sdk/**\n100+ modules\nPython runtime layer"
+    }
+  ],
+  "edges": [
+    { "id": "e-n07-n01", "fromNode": "n07-hub", "toNode": "n01", "fromSide": "bottom", "toSide": "top", "color": "4", "label": "dispatch" },
+    { "id": "e-n07-n02", "fromNode": "n07-hub", "toNode": "n02", "fromSide": "bottom", "toSide": "top", "color": "1", "label": "dispatch" },
+    { "id": "e-n07-n03", "fromNode": "n07-hub", "toNode": "n03", "fromSide": "bottom", "toSide": "top", "color": "5", "label": "dispatch" },
+    { "id": "e-n07-n04", "fromNode": "n07-hub", "toNode": "n04", "fromSide": "bottom", "toSide": "top", "color": "4", "label": "dispatch" },
+    { "id": "e-n07-n05", "fromNode": "n07-hub", "toNode": "n05", "fromSide": "bottom", "toSide": "top", "color": "6", "label": "dispatch" },
+    { "id": "e-n07-n06", "fromNode": "n07-hub", "toNode": "n06", "fromSide": "bottom", "toSide": "top", "color": "3", "label": "dispatch" },
+    { "id": "e-n00-builders", "fromNode": "n00", "toNode": "builders", "fromSide": "bottom", "toSide": "top", "label": "archetypes" },
+    { "id": "e-f1-f2", "fromNode": "f1", "toNode": "f2", "fromSide": "right", "toSide": "left" },
+    { "id": "e-f2-f3", "fromNode": "f2", "toNode": "f3", "fromSide": "right", "toSide": "left" },
+    { "id": "e-f3-f4", "fromNode": "f3", "toNode": "f4", "fromSide": "right", "toSide": "left" },
+    { "id": "e-f4-f5", "fromNode": "f4", "toNode": "f5", "fromSide": "right", "toSide": "left" },
+    { "id": "e-f5-f6", "fromNode": "f5", "toNode": "f6", "fromSide": "right", "toSide": "left" },
+    { "id": "e-f6-f7", "fromNode": "f6", "toNode": "f7", "fromSide": "right", "toSide": "left" },
+    { "id": "e-f7-f8", "fromNode": "f7", "toNode": "f8", "fromSide": "right", "toSide": "left" }
+  ]
+}

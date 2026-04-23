@@ -1,0 +1,77 @@
+---
+id: p10_lr_training_method_builder
+kind: memory
+pillar: P10
+version: 1.0.0
+quality: 9.0
+title: "Memory Training Method Builder"
+tags: [training_method, memory, learning_record, P10]
+tldr: "Learning record for training-method-builder: boundary conditions, common mistakes, quality patterns."
+domain: "training_method construction"
+created: "2026-04-13"
+updated: "2026-04-13"
+density_score: 0.86
+llm_function: INJECT
+related:
+  - p03_sp_training_method_builder
+  - bld_tools_training_method
+  - training-method-builder
+  - bld_knowledge_card_training_method
+  - bld_collaboration_training_method
+  - bld_architecture_training_method
+  - bld_output_template_training_method
+  - bld_examples_training_method
+  - bld_schema_training_method
+  - p02_qg_training_method
+---
+# Memory: training-method-builder Learning Record
+
+## Boundary Decisions (Correct Routing)
+| Situation | Route To | Not To |
+|-----------|----------|--------|
+| "How do I train a BERT classifier?" | training_method | finetune_config |
+| "LoRA config for Llama-3-8B on instruction data" | finetune_config | training_method |
+| "Document the GPT-4o training approach" | model_card | training_method |
+| "Design reward function for RLHF" | reward_model | training_method |
+| "Evaluate model on MMLU" | benchmark | training_method |
+| "Set up DPO alignment training" | training_method (paradigm) + finetune_config (job) | neither alone |
+
+## Common Mistakes
+| Mistake | Correction |
+|---------|-----------|
+| Setting quality to a score | Always `quality: null` -- peer review assigns score |
+| Using `finetune_config` for paradigm docs | training_method captures the METHODOLOGY, not the specific job |
+| Omitting learning_paradigm field | Required -- always specify supervised/unsupervised/rl/etc. |
+| Omitting compute_intensity | Required -- drives hardware planning downstream |
+| Over-specifying job details | training_method is paradigm-level; fine-grained configs go in finetune_config |
+
+## Quality Patterns That Score High
+| Pattern | Why It Works |
+|---------|-------------|
+| Tables over prose for hyperparameters | Scannable, structured, machine-readable |
+| Boundary conditions section | Disambiguates from 4 adjacent kinds |
+| Compute profile with hardware specifics | Actionable, not abstract |
+| Dataset format + field_mapping documented | Enables reproducibility |
+| Evaluation metrics explicitly named | Prevents ambiguous success criteria |
+
+## Known Edge Cases
+| Case | Resolution |
+|------|-----------|
+| Multi-paradigm training (e.g., curriculum + RL) | Use `learning_paradigm: hybrid`, describe phases in body |
+| Pre-training then fine-tuning | Create two artifacts: one training_method for pre-train, one for fine-tune |
+| AutoML / NAS | training_method with `learning_paradigm: unsupervised`, note search space |
+
+## Related Artifacts
+
+| Artifact | Relationship | Score |
+|----------|-------------|-------|
+| [[p03_sp_training_method_builder]] | upstream | 0.59 |
+| [[bld_tools_training_method]] | upstream | 0.57 |
+| [[training-method-builder]] | upstream | 0.56 |
+| [[bld_knowledge_card_training_method]] | upstream | 0.51 |
+| [[bld_collaboration_training_method]] | downstream | 0.44 |
+| [[bld_architecture_training_method]] | upstream | 0.42 |
+| [[bld_output_template_training_method]] | upstream | 0.40 |
+| [[bld_examples_training_method]] | upstream | 0.39 |
+| [[bld_schema_training_method]] | upstream | 0.39 |
+| [[p02_qg_training_method]] | downstream | 0.39 |

@@ -1,0 +1,89 @@
+# Media Pipeline Configuration
+# Used by: _tools/cex_media_produce.py
+# Spec: _docs/specs/spec_mentor_didactic_engine.md (Wave 4)
+
+output_dir: _output/mentor
+formats:
+  - text
+  - audio
+  - video
+  - ppt
+
+languages:
+  - en
+community_languages:
+  - pt-br
+
+# Concept registry (source of truth for 10 infoproduct concepts)
+concept_registry: N05_operations/P09_config/concept_registry.yaml
+
+# NotebookLM integration
+notebooklm:
+  tool: _tools/cex_notebooklm.py
+  domain_prefix: mentor
+  audio_output: audio_overview
+  video_output: video_overview
+  source_template: N05_operations/P03_prompt/prompt_notebooklm_source.md
+  notebooks_config: .cex/config/notebooklm_mentor_notebooks.yaml
+  notebooks:
+    # EN concepts (10 notebooks, enriched with 3 sources each)
+    pillars_en: b99d2038-e9f8-47cf-b618-8b2c0307a989
+    nuclei_en: 3798fba5-45a7-421b-b5a3-15884ea4e5fa
+    kinds_en: 1a77c78d-3dbc-47f9-9716-13655dae184c
+    gdp_en: 7f3f723c-28db-4282-bb0b-ca41982542d6
+    builder_en: 8ceacf27-fbd7-4ae9-a633-f4331c7e35d6
+    dispatch_en: d2ffc688-4096-410a-91e0-63b9660ffd36
+    crews_en: 559db45c-3dbd-473f-9b42-0adc763bd8f1
+    signals_en: 36f4783a-2ef7-48c0-9c95-b60af66452c8
+    memory_en: f5189e2f-5a82-4eba-b68d-c446b56343cc
+    sin_lens_en: 88bb3090-9ef6-4b1c-86d1-dc1815b36238
+    # PT-BR driver concepts (4 notebooks, 3 sources each)
+    structured_thinking_pt: be69b9d3-abfa-4641-9514-b4c424bcea5c
+    seven_sins_pt: ce69e2d3-6f52-4fec-a4ae-25cbb440cc59
+    twelve_pillars_pt: 96e2ef82-ad90-4f61-8cf5-19a68bdff464
+    naming_things_pt: 77b5e8e9-ad72-4366-93fd-3e2d4d718a80
+
+# Marp slide generation
+marp:
+  command: npx @marp-team/marp-cli
+  theme: default
+  output_formats:
+    - pptx
+    - pdf
+  slide_template: N05_operations/P03_prompt/prompt_ppt_generator.md
+
+# Lens system (W1 artifacts, consumed by media pipeline)
+lenses:
+  factory: N04_knowledge/P01_knowledge/kc_lens_factory.md
+  city: N04_knowledge/P01_knowledge/kc_lens_city.md
+  biology: N04_knowledge/P01_knowledge/kc_lens_biology.md
+  game: N04_knowledge/P01_knowledge/kc_lens_game.md
+  bible: N04_knowledge/P01_knowledge/kc_lens_bible.md
+  car: N04_knowledge/P01_knowledge/kc_lens_car.md
+  technical: N04_knowledge/P01_knowledge/kc_lens_technical.md
+  index: N04_knowledge/P01_knowledge/kc_lens_index.md
+
+# Audience-friendly lens aliases (user-facing names -> pipeline keys)
+lens_aliases:
+  anatomy: biology
+  enterprise: city
+  games: game
+  fabrica: factory
+
+# Teaching templates (W2 artifacts, consumed by media pipeline)
+teaching:
+  storyteller: N04_knowledge/P03_prompt/mentor_storyteller.md
+  socratic: N04_knowledge/P03_prompt/mentor_socratic.md
+  journey: N04_knowledge/P03_prompt/mentor_journey.md
+
+# Locale voice templates (W5 artifacts)
+locales:
+  en: N04_knowledge/P03_prompt/mentor_locale_en.md
+  pt-br: N04_knowledge/P03_prompt/mentor_locale_ptbr.md
+
+# Quality gates
+quality:
+  min_text_words: 500
+  max_slides: 20
+  min_slides: 8
+  audio_source_max_chars: 200000

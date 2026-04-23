@@ -1,0 +1,213 @@
+---
+id: p01_kc_rag_chunking_strategies
+kind: knowledge_card
+pillar: P01
+title: "RAG Chunking Strategies Comparison and Selection Guide"
+version: "1.1.0"
+created: "2026-04-02"
+updated: "2026-04-07"
+author: "builder"
+domain: rag_engineering
+quality: 9.1
+tags: [rag, chunking, embedding, retrieval, semantic-search, document-processing, knowledge, vector-db, llm-pipeline]
+tldr: "Fixed-size (256-512 tok) for speed, semantic for coherence, sliding window for overlap, document-aware for structure. 256-512 tokens is the sweet spot -- 1024+ degrades retrieval@5 by ~9%."
+when_to_use: "Designing RAG document preprocessing or optimizing retrieval quality vs performance"
+keywords: [chunking, rag, semantic-chunking, fixed-size, sliding-window, overlap, token-size, retrieval-precision]
+long_tails:
+  - How to choose optimal chunk size for RAG embedding retrieval
+  - Semantic chunking vs fixed size chunking performance comparison
+  - Document structure aware chunking for technical documentation
+  - What chunk overlap percentage maximizes retrieval precision
+axioms:
+  - ALWAYS test chunk strategy against your specific document type and query patterns
+  - NEVER use fixed 1024+ token chunks without measuring retrieval degradation
+  - IF documents have clear structure THEN use document-aware chunking over fixed-size
+  - ALWAYS attach source metadata (doc_id, section, chunk_id) to every chunk
+linked_artifacts:
+  primary: null
+  related: [p01_kc_embedding_strategies, p01_kc_vector_search_optimization]
+density_score: 0.95
+data_source: "https://docs.llamaindex.ai/en/stable/module_guides/loading/node_parsers/"
+related:
+  - p01_kc_chunk_strategy
+  - p01_chunk_strategy
+  - bld_knowledge_card_chunk_strategy
+  - n01_emb_text_embedding_4
+  - p06_schema_embedding
+  - bld_knowledge_card_embedding_config
+  - p01_emb_nomic_embed_text
+  - p01_gl_rag
+  - bld_knowledge_card_document_loader
+  - p06_arch_rag_pipeline
+---
+
+# RAG Chunking Strategies Comparison and Selection Guide
+
+## Decision Table
+
+| Your Situation | Strategy | Token Size | Overlap | Speed (docs/s) |
+|----------------|----------|------------|---------|----------------|
+| Speed critical, simple queries | Fixed-Size | 256-512 | 10% | 1000+ |
+| Complex Q&A, need coherence | Semantic | Variable | 0% | 50-100 |
+| Dense content, multi-topic docs | Sliding Window | 512 | 20% | 200+ |
+| Structured docs (code, manuals) | Document-Aware | Variable | 0% | 500+ |
+| Production system, high quality | Hybrid | 256-512 | 15% | 100+ |
+
+## Strategy Comparison
+
+| Strategy | Mechanism | Boundary Logic | Context | Precision | Best For |
+|----------|-----------|----------------|---------|-----------|----------|
+| Fixed-Size | Split every N tokens | None (arbitrary) | Poor | Medium | Large corpus, speed critical |
+| Semantic | Embed sentences, split on cosine drops | Topic shift detection | Excellent | High | Q&A, technical docs |
+| Sliding Window | Overlapping chunks with stride | Fixed + overlap buffer | Good | High | Dense multi-topic docs |
+| Document-Aware | Respect headers/paragraphs/code blocks | Natural structure | Excellent | High | Structured content, code repos |
+| Hybrid | Combine document-aware + fixed fallback | Multiple rules | Good | Highest | Production systems |
+
+## Chunk Size vs Retrieval Quality
+
+| Chunk Size | Retrieval@5 | Context Coherence | Cost/doc | Verdict |
+|------------|-------------|-------------------|----------|---------|
+| 128 tokens | 0.72 | Low | $0.001 | Too fragmented |
+| 256 tokens | 0.85 | Good | $0.002 | Good default |
+| 512 tokens | 0.89 | Excellent | $0.004 | Best balance |
+| 1024 tokens | 0.81 | Excellent | $0.008 | Embedding degrades |
+
+Embedding dim: 1536 (text-embedding-3-small). Results degrade similarly across models at 1024+.
+
+## Configuration Rules
+
+| Parameter | Rule | Value | Rationale |
+|-----------|------|-------|-----------|
+| Chunk size | Sweet spot for most models | 256-512 tokens | 1024+ degrades precision by ~9% |
+| Overlap | Fixed-size chunks | 10-20% | Captures cross-boundary concepts |
+| Overlap | Semantic/document-aware | 0% | Natural boundaries, overlap wastes tokens |
+| Context buffer | All strategies | 2-3 sentences | Preserves coherence at boundaries |
+| Metadata | Every chunk | doc_id, section, chunk_id | Required for attribution and dedup |
+| Similarity threshold | Semantic chunking | 0.75-0.85 | Lower = fewer chunks; higher = more granular |
+
+## Implementation Phases
+
+| Phase | Action | Key Metrics | Sample Size |
+|-------|--------|-------------|-------------|
+| Profile | Measure doc types, avg length, query patterns | Doc length distribution, query types | 50+ docs |
+| Baseline | Fixed 256-512 tokens | Retrieval@k, answer quality | 100+ queries |
+| Optimize | Test semantic/document-aware | Context coherence, precision@5 | 100+ docs |
+| Tune | Adjust size, overlap, similarity thresholds | Processing speed, cost per doc | Production load |
+| Monitor | Track precision, coherence, throughput | Retrieval drift, user satisfaction | Ongoing |
+
+## Anti-Patterns
+
+| Mistake | Failure Mode | Fix |
+|---------|-------------|-----|
+| Single sentence chunks | Loses context, poor retrieval | Min 2-3 sentences per chunk |
+| 1024+ token chunks | Embedding model saturates | Cap at 512 tokens |
+| No overlap on dense content | Misses cross-boundary concepts | 10-20% sliding window |
+| Ignoring document structure | Breaks code blocks/tables mid-row | Use document-aware parsing |
+| One strategy for all doc types | Suboptimal for mixed corpus | Profile docs, route per type |
+| No metadata on chunks | Cannot attribute or deduplicate | Attach doc_id + section + chunk_id |
+
+## Pipeline Flow
+
+```text
+[Document]
+    |
+    v
+[Structure Analysis] -- detect: markdown? code? prose? table-heavy?
+    |
+    v
+[Strategy Router]
+    |--- Fixed:     split every N tokens --> [Chunks]
+    |--- Semantic:  embed sentences --> cosine similarity --> split at drops
+    |--- Sliding:   N tokens + overlap stride --> [Chunks]
+    |--- Doc-Aware: split on headers/functions/paragraphs --> [Chunks]
+    |
+    v
+[Metadata Injection] -- doc_id, section, chunk_id, char_offset
+    |
+    v
+[Embed + Upsert] --> Vector DB
+```
+
+## Implementation Patterns
+
+```python
+# Fixed-size with metadata
+def fixed_chunk(text, size=512, overlap=50):
+    chunks = []
+    for i in range(0, len(text), size - overlap):
+        chunk = text[i:i + size]
+        chunks.append({
+            'content': chunk,
+            'start_idx': i,
+            'chunk_id': len(chunks)
+        })
+    return chunks
+
+# Semantic: split where topic shifts (cosine similarity drops)
+def semantic_chunk(text, embed_model, threshold=0.8):
+    sentences = split_sentences(text)
+    embeddings = embed_model.encode(sentences)
+    splits = find_similarity_drops(embeddings, threshold)
+    return create_chunks_from_splits(sentences, splits)
+
+# Sliding window: overlapping chunks prevent boundary blindness
+def sliding_window_chunk(text, size=512, overlap=100):
+    chunks, stride = [], size - overlap
+    for i in range(0, len(text), stride):
+        chunk = text[i:i + size]
+        if len(chunk) > overlap:
+            chunks.append({
+                'content': chunk,
+                'start_idx': i,
+                'end_idx': i + len(chunk),
+                'chunk_id': len(chunks)
+            })
+    return chunks
+
+# Document-aware: respect natural boundaries, fallback to fixed for large sections
+def document_aware_chunk(text, doc_type='markdown'):
+    splitters = {
+        'markdown': split_on_headers,
+        'code': split_on_functions,
+    }
+    sections = splitters.get(doc_type, split_on_paragraphs)(text)
+    chunks = []
+    for section in sections:
+        if len(section) > 2048:
+            chunks.extend(fixed_chunk(section, size=512))
+        else:
+            chunks.append({'content': section})
+    return chunks
+```
+
+### Tool-Specific Configurations
+
+| Tool | Chunking Config | Notes |
+|------|----------------|-------|
+| LlamaIndex | `SentenceSplitter(chunk_size=512, chunk_overlap=50)` | Default node parser |
+| LangChain | `RecursiveCharacterTextSplitter(chunk_size=512, chunk_overlap=50)` | Tries `\n\n`, `\n`, ` `, then char |
+| Unstructured | `partition_pdf()` + `chunk_by_title(max_characters=1500)` | Structure-aware out of box |
+| Custom | `document_aware_chunk()` above | Full control, add metadata |
+
+## References
+
+| Source | URL |
+|--------|-----|
+| LlamaIndex Node Parsers | https://docs.llamaindex.ai/en/stable/module_guides/loading/node_parsers/ |
+| Related KC: embedding strategies | p01_kc_embedding_strategies |
+| Related KC: vector search optimization | p01_kc_vector_search_optimization |
+
+## Related Artifacts
+
+| Artifact | Relationship | Score |
+|----------|-------------|-------|
+| [[p01_kc_chunk_strategy]] | sibling | 0.42 |
+| [[p01_chunk_strategy]] | related | 0.38 |
+| [[bld_knowledge_card_chunk_strategy]] | sibling | 0.36 |
+| [[n01_emb_text_embedding_4]] | related | 0.34 |
+| [[p06_schema_embedding]] | downstream | 0.33 |
+| [[bld_knowledge_card_embedding_config]] | sibling | 0.30 |
+| [[p01_emb_nomic_embed_text]] | related | 0.28 |
+| [[p01_gl_rag]] | related | 0.28 |
+| [[bld_knowledge_card_document_loader]] | sibling | 0.28 |
+| [[p06_arch_rag_pipeline]] | downstream | 0.28 |

@@ -1,0 +1,441 @@
+{
+  "timestamp": "2026-04-17T18:19:55.217859+00:00",
+  "version": "1.0.0",
+  "summary": {
+    "total": 3,
+    "passed": 0,
+    "failed": 3,
+    "avg_quality": null
+  },
+  "scenarios": [
+    {
+      "name": "petshop",
+      "input": "faz um CRM pra pet shop",
+      "mode": "full",
+      "status": "FAIL",
+      "checks": [],
+      "kinds_tested": [
+        {
+          "kind": "landing_page",
+          "checks": [
+            {
+              "check": "runner_exits_clean",
+              "passed": false,
+              "detail": "exit=1 stderr=  [F1] bld_schema loaded (2168 chars)\r\n  [F1] bld_config loaded (2157 chars)\r\n  [F1] constraints: 5 "
+            },
+            {
+              "check": "f1_constrain_fires",
+              "passed": true,
+              "detail": "functions=['F1', 'F2', 'F3']"
+            },
+            {
+              "check": "f2_become_fires",
+              "passed": true,
+              "detail": ""
+            },
+            {
+              "check": "f3_inject_fires",
+              "passed": true,
+              "detail": ""
+            },
+            {
+              "check": "artifact_produced",
+              "passed": false,
+              "detail": "words=0, has_prompt=False"
+            },
+            {
+              "check": "f7_gates_pass",
+              "passed": false,
+              "detail": "verdict=UNKNOWN gates=0/0"
+            },
+            {
+              "check": "output_file_exists",
+              "passed": false,
+              "detail": "no path in trace"
+            }
+          ],
+          "score": null,
+          "trace": {
+            "functions_fired": [
+              "F1",
+              "F2",
+              "F3"
+            ],
+            "kind": "",
+            "pillar": "",
+            "verdict": "UNKNOWN",
+            "gates_passed": 0,
+            "gates_total": 0,
+            "retries": 0,
+            "artifact_words": 0,
+            "output_path": "",
+            "has_prompt": false
+          }
+        },
+        {
+          "kind": "content_monetization",
+          "checks": [
+            {
+              "check": "runner_exits_clean",
+              "passed": false,
+              "detail": "exit=1 stderr=  [F1] bld_schema loaded (4199 chars)\r\n  [F1] bld_config loaded (4268 chars)\r\n  [F1] constraints: 5 "
+            },
+            {
+              "check": "f1_constrain_fires",
+              "passed": true,
+              "detail": "functions=['F1', 'F2', 'F3']"
+            },
+            {
+              "check": "f2_become_fires",
+              "passed": true,
+              "detail": ""
+            },
+            {
+              "check": "f3_inject_fires",
+              "passed": true,
+              "detail": ""
+            },
+            {
+              "check": "artifact_produced",
+              "passed": false,
+              "detail": "words=0, has_prompt=False"
+            },
+            {
+              "check": "f7_gates_pass",
+              "passed": false,
+              "detail": "verdict=UNKNOWN gates=0/0"
+            },
+            {
+              "check": "output_file_exists",
+              "passed": false,
+              "detail": "no path in trace"
+            }
+          ],
+          "score": null,
+          "trace": {
+            "functions_fired": [
+              "F1",
+              "F2",
+              "F3"
+            ],
+            "kind": "",
+            "pillar": "",
+            "verdict": "UNKNOWN",
+            "gates_passed": 0,
+            "gates_total": 0,
+            "retries": 0,
+            "artifact_words": 0,
+            "output_path": "",
+            "has_prompt": false
+          }
+        },
+        {
+          "kind": "agent",
+          "checks": [
+            {
+              "check": "runner_exits_clean",
+              "passed": false,
+              "detail": "exit=1 stderr=  [F1] bld_schema loaded (3025 chars)\r\n  [F1] bld_config loaded (2908 chars)\r\n  [F1] constraints: 8 "
+            },
+            {
+              "check": "f1_constrain_fires",
+              "passed": true,
+              "detail": "functions=['F1', 'F2', 'F3']"
+            },
+            {
+              "check": "f2_become_fires",
+              "passed": true,
+              "detail": ""
+            },
+            {
+              "check": "f3_inject_fires",
+              "passed": true,
+              "detail": ""
+            },
+            {
+              "check": "artifact_produced",
+              "passed": false,
+              "detail": "words=0, has_prompt=False"
+            },
+            {
+              "check": "f7_gates_pass",
+              "passed": false,
+              "detail": "verdict=UNKNOWN gates=0/0"
+            },
+            {
+              "check": "output_file_exists",
+              "passed": false,
+              "detail": "no path in trace"
+            }
+          ],
+          "score": null,
+          "trace": {
+            "functions_fired": [
+              "F1",
+              "F2",
+              "F3"
+            ],
+            "kind": "",
+            "pillar": "",
+            "verdict": "UNKNOWN",
+            "gates_passed": 0,
+            "gates_total": 0,
+            "retries": 0,
+            "artifact_words": 0,
+            "output_path": "",
+            "has_prompt": false
+          }
+        }
+      ],
+      "total_elapsed_ms": 25606
+    },
+    {
+      "name": "instagram",
+      "input": "preciso de conteudo pro instagram",
+      "mode": "full",
+      "status": "FAIL",
+      "checks": [],
+      "kinds_tested": [
+        {
+          "kind": "prompt_template",
+          "checks": [
+            {
+              "check": "runner_exits_clean",
+              "passed": false,
+              "detail": "exit=1 stderr=  [F1] bld_schema loaded (4073 chars)\r\n  [F1] bld_config loaded (3029 chars)\r\n  [F1] constraints: 6 "
+            },
+            {
+              "check": "f1_constrain_fires",
+              "passed": true,
+              "detail": "functions=['F1', 'F2', 'F3']"
+            },
+            {
+              "check": "f2_become_fires",
+              "passed": true,
+              "detail": ""
+            },
+            {
+              "check": "f3_inject_fires",
+              "passed": true,
+              "detail": ""
+            },
+            {
+              "check": "artifact_produced",
+              "passed": false,
+              "detail": "words=0, has_prompt=False"
+            },
+            {
+              "check": "f7_gates_pass",
+              "passed": false,
+              "detail": "verdict=UNKNOWN gates=0/0"
+            },
+            {
+              "check": "output_file_exists",
+              "passed": false,
+              "detail": "no path in trace"
+            }
+          ],
+          "score": null,
+          "trace": {
+            "functions_fired": [
+              "F1",
+              "F2",
+              "F3"
+            ],
+            "kind": "",
+            "pillar": "",
+            "verdict": "UNKNOWN",
+            "gates_passed": 0,
+            "gates_total": 0,
+            "retries": 0,
+            "artifact_words": 0,
+            "output_path": "",
+            "has_prompt": false
+          }
+        },
+        {
+          "kind": "schedule",
+          "checks": [
+            {
+              "check": "runner_exits_clean",
+              "passed": false,
+              "detail": "exit=1 stderr=  [F1] bld_schema loaded (2791 chars)\r\n  [F1] bld_config loaded (2654 chars)\r\n  [F1] constraints: 7 "
+            },
+            {
+              "check": "f1_constrain_fires",
+              "passed": true,
+              "detail": "functions=['F1', 'F2', 'F3']"
+            },
+            {
+              "check": "f2_become_fires",
+              "passed": true,
+              "detail": ""
+            },
+            {
+              "check": "f3_inject_fires",
+              "passed": true,
+              "detail": ""
+            },
+            {
+              "check": "artifact_produced",
+              "passed": false,
+              "detail": "words=0, has_prompt=False"
+            },
+            {
+              "check": "f7_gates_pass",
+              "passed": false,
+              "detail": "verdict=UNKNOWN gates=0/0"
+            },
+            {
+              "check": "output_file_exists",
+              "passed": false,
+              "detail": "no path in trace"
+            }
+          ],
+          "score": null,
+          "trace": {
+            "functions_fired": [
+              "F1",
+              "F2",
+              "F3"
+            ],
+            "kind": "",
+            "pillar": "",
+            "verdict": "UNKNOWN",
+            "gates_passed": 0,
+            "gates_total": 0,
+            "retries": 0,
+            "artifact_words": 0,
+            "output_path": "",
+            "has_prompt": false
+          }
+        }
+      ],
+      "total_elapsed_ms": 17791
+    },
+    {
+      "name": "docs",
+      "input": "documenta esse projeto",
+      "mode": "full",
+      "status": "FAIL",
+      "checks": [],
+      "kinds_tested": [
+        {
+          "kind": "knowledge_card",
+          "checks": [
+            {
+              "check": "runner_exits_clean",
+              "passed": false,
+              "detail": "exit=1 stderr=  [F1] bld_schema loaded (3447 chars)\r\n  [F1] bld_config loaded (2388 chars)\r\n  [F1] constraints: 10"
+            },
+            {
+              "check": "f1_constrain_fires",
+              "passed": true,
+              "detail": "functions=['F1', 'F2', 'F3']"
+            },
+            {
+              "check": "f2_become_fires",
+              "passed": true,
+              "detail": ""
+            },
+            {
+              "check": "f3_inject_fires",
+              "passed": true,
+              "detail": ""
+            },
+            {
+              "check": "artifact_produced",
+              "passed": false,
+              "detail": "words=0, has_prompt=False"
+            },
+            {
+              "check": "f7_gates_pass",
+              "passed": false,
+              "detail": "verdict=UNKNOWN gates=0/0"
+            },
+            {
+              "check": "output_file_exists",
+              "passed": false,
+              "detail": "no path in trace"
+            }
+          ],
+          "score": null,
+          "trace": {
+            "functions_fired": [
+              "F1",
+              "F2",
+              "F3"
+            ],
+            "kind": "",
+            "pillar": "",
+            "verdict": "UNKNOWN",
+            "gates_passed": 0,
+            "gates_total": 0,
+            "retries": 0,
+            "artifact_words": 0,
+            "output_path": "",
+            "has_prompt": false
+          }
+        },
+        {
+          "kind": "context_doc",
+          "checks": [
+            {
+              "check": "runner_exits_clean",
+              "passed": false,
+              "detail": "exit=1 stderr=  [F1] bld_schema loaded (2882 chars)\r\n  [F1] bld_config loaded (2343 chars)\r\n  [F1] constraints: 7 "
+            },
+            {
+              "check": "f1_constrain_fires",
+              "passed": true,
+              "detail": "functions=['F1', 'F2', 'F3']"
+            },
+            {
+              "check": "f2_become_fires",
+              "passed": true,
+              "detail": ""
+            },
+            {
+              "check": "f3_inject_fires",
+              "passed": true,
+              "detail": ""
+            },
+            {
+              "check": "artifact_produced",
+              "passed": false,
+              "detail": "words=0, has_prompt=False"
+            },
+            {
+              "check": "f7_gates_pass",
+              "passed": false,
+              "detail": "verdict=UNKNOWN gates=0/0"
+            },
+            {
+              "check": "output_file_exists",
+              "passed": false,
+              "detail": "no path in trace"
+            }
+          ],
+          "score": null,
+          "trace": {
+            "functions_fired": [
+              "F1",
+              "F2",
+              "F3"
+            ],
+            "kind": "",
+            "pillar": "",
+            "verdict": "UNKNOWN",
+            "gates_passed": 0,
+            "gates_total": 0,
+            "retries": 0,
+            "artifact_words": 0,
+            "output_path": "",
+            "has_prompt": false
+          }
+        }
+      ],
+      "total_elapsed_ms": 16586
+    }
+  ]
+}

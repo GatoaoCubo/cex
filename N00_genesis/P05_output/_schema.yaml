@@ -1,0 +1,59 @@
+pillar: P05
+name: Output
+description: What the agent DELIVERS
+frontmatter_cex:
+  related:
+    type: list[string]
+    required: recommended
+    description: "Artifact IDs of related artifacts (upstream, downstream, sibling, alternative)"
+    format: "[p{XX}_{kind}_{slug}, ...]"
+    max: 15
+    min: 0
+    validator: S_RELATED
+    note: "Auto-populated by cex_wikilink.py, manually curated by builders"
+kinds:
+  response_format:
+    description: LLM response format (how the agent responds)
+    boundary: Response format injected into LLM prompt. NOT a validation_schema P06 (post-generation contract applied by the system).
+    layer: spec
+    core: true
+    machine_format: json
+    naming: p05_rf_{{format}}.yaml
+    constraints:
+      max_bytes: 4096
+    llm_function: CONSTRAIN
+  parser:
+    description: Output data extractor
+    boundary: Extractor from raw output data. NOT a formatter (does not transform format) nor validator (P06, does not validate).
+    layer: runtime
+    core: false
+    machine_format: yaml
+    naming: p05_parser_{{target}}.md + .yaml
+    constraints:
+      max_bytes: 4096
+    llm_function: GOVERN
+  formatter:
+    description: Output formatter (json, md, yaml)
+    boundary: Output format transformer. NOT a parser (does not extract data) nor response_format (not what the LLM sees).
+    layer: runtime
+    core: false
+    machine_format: yaml
+    naming: p05_fmt_{{format}}.md
+    constraints:
+      max_bytes: 4096
+    llm_function: GOVERN
+  output_validator:
+    description: Post-LLM validation
+    boundary: Validates OUTPUT. NOT a validator P06.
+    layer: runtime
+    core: true
+    machine_format: yaml
+    naming: p05_oval.md
+    constraints:
+      max_bytes: 2048
+    frontmatter_required:
+    - id
+    - name
+    - checks
+    - on_fail
+    llm_function: GOVERN

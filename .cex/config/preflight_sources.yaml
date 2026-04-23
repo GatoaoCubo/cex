@@ -1,0 +1,53 @@
+# Pre-flight MCP source providers for N07 context gathering.
+# Default providers work with zero API keys (or free GitHub token).
+# Uncomment optional providers if you have the API keys.
+#
+# See: _docs/specs/spec_preflight_expansion_smart_routing.md
+# See: _docs/security/mcp_access_matrix.md
+
+version: "1.0.0"
+
+default_providers:
+  - name: github
+    mcp_server: github
+    operations: [search_code, search_repositories, get_file_contents, list_issues]
+    requires_key: GITHUB_TOKEN
+    free_tier: true
+    notes: "Any GitHub account token works (free)"
+
+  - name: fetch
+    mcp_server: fetch
+    operations: [fetch]
+    requires_key: null
+    free_tier: true
+    notes: "Direct HTTP GET, no API key needed"
+
+  - name: markitdown
+    mcp_server: markitdown
+    operations: [convert_to_markdown]
+    requires_key: null
+    free_tier: true
+    notes: "HTML/PDF to markdown conversion, no API key needed"
+
+optional_providers:
+  # Uncomment and configure in .mcp-n07.json (set disabled: false) to enable:
+
+  # - name: firecrawl
+  #   mcp_server: firecrawl
+  #   operations: [firecrawl_scrape, firecrawl_search, firecrawl_map]
+  #   requires_key: FIRECRAWL_API_KEY
+  #   free_tier: false
+  #   notes: "Deep web crawl + search. Set FIRECRAWL_API_KEY in .env"
+
+  # - name: brave-search
+  #   mcp_server: brave-search
+  #   operations: [brave_web_search]
+  #   requires_key: BRAVE_API_KEY
+  #   free_tier: true
+  #   notes: "2000 free queries/mo. Set BRAVE_API_KEY in .env"
+
+budget:
+  max_external_tokens: 8192
+  timeout_seconds: 60
+  max_queries_per_provider: 3
+  delay_between_queries_ms: 1000

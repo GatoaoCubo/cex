@@ -1,0 +1,276 @@
+---
+id: agent_card_n04
+kind: context_doc
+title: N04 Agent Card -- Available Capabilities
+nucleus: N04
+sin: Knowledge Gluttony
+pillar: P01
+version: 1.0.0
+quality: 9.1
+created: 2026-04-07
+density_score: 1.0
+related:
+  - bld_collaboration_knowledge_card
+  - bld_collaboration_memory_scope
+  - bld_collaboration_knowledge_graph
+  - bld_architecture_kind
+  - kc_intent_resolution_map
+  - bld_collaboration_memory_type
+  - bld_collaboration_memory_architecture
+  - bld_manifest_memory_type
+  - n04_knowledge
+  - bld_collaboration_rag_source
+---
+
+## Identity
+
+| Field | Value |
+|-------|-------|
+| **Nucleus** | N04 -- Knowledge Management |
+| **Sin** | Knowledge Gluttony |
+| **CLI** | Claude (Opus 4.6, 1M context) |
+| **Domain** | RAG pipelines, knowledge cards, embeddings, chunking, retrieval, taxonomy, memory |
+| **Protocol** | 8F mandatory on every task (F1-F8, no exceptions) |
+| **Quality** | null (never self-score -- peer review assigns) |
+
+**Routing TO N04**: knowledge cards, RAG, embeddings, chunking, indexing, taxonomy, documentation, memory management, glossary, brain indexes, context docs, few-shot examples, entity memory, session state.
+
+**Routing AWAY**: research papers (N01), marketing copy (N02), build scaffold (N03), deploy/CI (N05), pricing/funnels (N06).
+
+N04 is the knowledge backbone of CEX. While N01 researches and N03 builds, N04 ingests, indexes, catalogs, and relates. Every fact that enters the system passes through N04's domain -- from raw knowledge cards to the memory infrastructure that persists context across sessions.
+
+## My Artifacts
+
+| Subdir | Count | Purpose |
+|--------|------:|---------|
+| agents | 4 | Agent definitions for knowledge nucleus |
+| architecture | 4 | Agent cards + capability maps |
+| feedback | 2 | Quality gate feedback records |
+| knowledge | 13 | Core domain: chunk strategy, embedding configs, KCs, RAG sources, retriever config |
+| memory | 5 | Knowledge memory index + RAG pipeline memory + scopes |
+| orchestration | 5 | Dispatch rules + workflows (knowledge + Supabase) |
+| output | 19 | KC audits, gap reports, taxonomy maps, knowledge graphs, finetune datasets, SQL migrations, competitive intel, self-reviews |
+| prompts | 3 | System prompts for N04 persona and tasks |
+| quality | 2 | Quality gate + scoring rubric for knowledge artifacts |
+| schemas | 7 | Contracts: database schema, embedding, export format, freshness, KC structure, naming convention, taxonomy |
+| tools | 4 | Supabase data layer + utilities |
+| compiled | 65 | YAML compilations of source artifacts |
+| reports | 1 | Self-audit report (newpc 2026-04-13) |
+| **TOTAL** | **69 source + 65 compiled** | |
+
+## Kinds I Build
+
+22 kinds across 4 pillars fall within N04's domain (P01 Knowledge + P10 Memory + select P02/P04):
+
+### P01 Knowledge (10 kinds)
+
+| Kind | Naming Pattern | Builder |
+|------|---------------|---------|
+| chunk_strategy | `p01_chunk_{{strategy}}.md` | chunk-strategy-builder |
+| context_doc | `p01_ctx_{{topic}}.md + .yaml` | context-doc-builder |
+| embedder_provider | `p01_ep_{{provider}}.yaml` | embedder-provider-builder |
+| embedding_config | `p01_emb_{{model}}.yaml` | embedding-config-builder |
+| few_shot_example | `p01_fse_{{topic}}.md + .yaml` | few-shot-example-builder |
+| glossary_entry | `p01_gl_{{term}}.md + .yaml` | glossary-entry-builder |
+| knowledge_card | `p01_kc_{{topic}}.md + .yaml` | knowledge-card-builder |
+| rag_source | `p01_rs_{{source}}.md + .yaml` | rag-source-builder |
+| retriever_config | `p01_retr_cfg_{{store}}.md` | retriever-config-builder |
+| vector_store | `p01_vdb_{{backend}}.yaml` | vector-store-builder |
+
+### P10 Memory (8 kinds)
+
+| Kind | Naming Pattern | Builder |
+|------|---------------|---------|
+| knowledge_index | `p10_bi_{{index}}.yaml` | knowledge-index-builder |
+| compression_config | `p10_cc_{{scope}}.yaml` | compression-config-builder |
+| entity_memory | `p10_entity_{{name}}.md` | entity-memory-builder |
+| learning_record | `p10_lr_{{topic}}.md + .yaml` | learning-record-builder |
+| memory_summary | `p10_summary_{{scope}}.md` | memory-summary-builder |
+| memory_type | `p10_mt_{{type_name}}.yaml` | memory-type-builder |
+| runtime_state | `p10_rs_{{agent}}.yaml` | (no dedicated builder) |
+| session_backend | `p10_sb_{{backend}}.yaml` | session-backend-builder |
+| session_state | `p10_ss_{{session}}.yaml` | session-state-builder |
+
+### Cross-Pillar (4 kinds with knowledge affinity)
+
+| Kind | Pillar | Naming Pattern | Builder |
+|------|--------|---------------|---------|
+| document_loader | P04 | `p04_loader_{{format}}.md + .yaml` | (P04 native) |
+| memory_scope | P02 | `p02_memscope_{{agent}}.md` | memory-scope-builder |
+| retriever | P04 | `p04_retr_{{store}}.md + .yaml` | retriever-builder |
+
+## Tools I Use
+
+### Core Knowledge Tools
+
+| Tool | Purpose | Relevance |
+|------|---------|-----------|
+| `cex_compile.py` | .md -> .yaml compilation (mandatory F8) | Every artifact |
+| `cex_retriever.py` | TF-IDF artifact similarity (2184 docs, 12K vocab) | Find related KCs, detect duplicates |
+| `cex_query.py` | TF-IDF builder discovery (361L) | Match intent to correct builder |
+| `cex_kc_index.py` | Knowledge card indexing | KC catalog maintenance |
+| `cex_index.py` | General artifact indexing | Cross-pillar discovery |
+
+### Memory Tools
+
+| Tool | Purpose | Relevance |
+|------|---------|-----------|
+| `cex_memory_select.py` | Relevant memory injection (keyword + LLM) | Context hydration at F3 |
+| `cex_memory_update.py` | Memory decay + append + prune | Memory lifecycle |
+| `cex_memory_types.py` | 4-type taxonomy: correction/preference/convention/context | Classification |
+| `cex_memory_age.py` | Freshness caveats, age labels, linear decay over 365d | Staleness detection |
+| `cex_memory.py` | Core memory operations | Read/write memory store |
+
+### Quality + Build Tools
+
+| Tool | Purpose | Relevance |
+|------|---------|-----------|
+| `cex_score.py` | Peer review scoring (--apply) | F7 gate |
+| `cex_doctor.py` | Builder health check | Validation |
+| `cex_evolve.py` | AutoResearch loop for artifact improvement | Continuous improvement |
+| `cex_prompt_layers.py` | Load 15+ pillar artifacts into prompts | Context enrichment |
+| `cex_schema_hydrate.py` | Hydrate ISOs with universal patterns | Builder preparation |
+| `cex_skill_loader.py` | Builder ISO loader: 13 ISOs per kind | F2 BECOME |
+| `cex_token_budget.py` | Token counting + budget allocation | Context window management |
+| `cex_research.py` | Research tool for knowledge gathering | Source acquisition |
+| `validate_schema.py` | Schema validation | Contract enforcement |
+
+## MCP Servers
+
+5 external services via `.mcp-n04.json`:
+
+| Server | Package | Purpose |
+|--------|---------|---------|
+| **supabase** | `@supabase/mcp-server-supabase` | Project management, schema ops, RLS policies, database admin |
+| **postgres** | `@anthropic/mcp-server-postgres` | Direct SQL queries against Supabase PostgreSQL -- migrations, bulk ops |
+| **fetch** | `mcp-server-fetch` | HTTP fetch -- retrieve web content, APIs, documentation for KC authoring |
+| **firecrawl** | `firecrawl-mcp` | Web crawling + scraping -- bulk content extraction, site ingestion |
+| **notebooklm** | `notebooklm-mcp` | NotebookLM content pipeline -- transform KCs into audio summaries, flashcards, quizzes |
+
+### MCP Synergy Map
+
+```
+firecrawl (crawl) --> knowledge_card (author) --> supabase/postgres (store)
+                                                       |
+fetch (enrich) -----> knowledge_card (update) --> notebooklm (transform)
+                                                       |
+                                                   audio_summary
+                                                   flashcards
+                                                   quiz
+```
+
+N04 has the most MCP servers of any nucleus (5) because knowledge work requires both ingestion (firecrawl, fetch) and persistence (supabase, postgres) plus transformation (notebooklm).
+
+## My Strengths
+
+1. **Knowledge Card Factory**: 8 core knowledge artifacts + 15 output deliverables. The heaviest output subdir of any nucleus capability. N04 can produce KC audits, gap reports, taxonomy maps, knowledge graphs, finetune datasets, SQL migrations, competitive intel, and curricula.
+
+2. **Schema Governance**: 7 contracts define the structure for databases, embeddings, exports, freshness, KC structure, naming, and taxonomy. These contracts are the enforcement backbone -- every artifact that touches knowledge must conform.
+
+3. **Full RAG Stack**: Covers the complete RAG pipeline end-to-end: embedding config -> chunk strategy -> retriever config -> rag source -> vectordb backend -> brain index. No other nucleus owns this chain.
+
+4. **Supabase Integration**: Dedicated embedding config, dispatch rule, workflow, data layer tool, and KC for Supabase. Plus 2 MCP servers (supabase + postgres) for direct database operations. This makes N04 the bridge between knowledge artifacts and persistent storage.
+
+5. **Memory Pillar Ownership**: 8 kinds under P10 (knowledge_index through session_state) + 5 memory tools (select, update, types, age, core). N04 owns the memory lifecycle: creation, classification, decay, pruning, and summarization.
+
+6. **5 MCP Servers**: Most connected nucleus. Ingestion (firecrawl + fetch) -> storage (supabase + postgres) -> transformation (notebooklm). This pipeline turns raw web content into indexed, retrievable, transformable knowledge.
+
+7. **20 Sub-Agent Definitions**: Every domain kind has a dedicated builder agent in `.claude/P02_model/`, each loading 13 ISOs. This means N04 can dispatch specialized builders for any knowledge or memory artifact type.
+
+8. **P01 Library Depth**: The P01 compiled directory holds 197 example artifacts -- the largest example corpus of any pillar. These serve as F3 injection sources for template-first construction.
+
+## My Gaps
+
+| Area | Status | Impact |
+|------|--------|--------|
+| agents | Thin (1) | Only `agent_knowledge.md`. No specialized sub-agents (taxonomy agent, embedding agent, ingestion agent). |
+| tools | Thin (1) | Only Supabase data layer tool. Missing: taxonomy builder, KC validator, embedding batch processor. |
+| architecture | Thin (1) | Single agent card. No RAG pipeline architecture diagram, no knowledge graph topology doc. |
+| prompts | Thin (1) | Single system prompt. No specialized prompts for different tasks (taxonomy building, KC auditing, embedding tuning). |
+| feedback | Thin (1) | Single quality gate. No iteration history, no learning from past KC quality issues. |
+| memory | Thin (2) | Index + pipeline only. Missing: taxonomy memory, domain-specific memory scopes, entity memories for tracked domains. |
+| knowledge_index | Missing | Kind exists (P10) but zero artifacts built. Should have at least BM25 + FAISS configs. |
+| entity_memory | Missing | Kind exists (P10) but zero artifacts. Should track entities across knowledge domains. |
+| document_loader | Missing | Kind exists (P04) but zero artifacts. Needed for PDF, HTML, CSV ingestion configs. |
+| few_shot_example | Missing | Kind exists (P01) but zero examples for knowledge domain. Critical for template-first builds. |
+| glossary_entry | Missing | Kind exists (P01) but zero terms authored. A knowledge nucleus without a glossary is incomplete. |
+| config | Missing subdir | No boot_config, env_config, or path_config for N04. Other nuclei have these. |
+
+## Cards in My Agent Card
+
+| Category | Count |
+|----------|------:|
+| Source artifacts (in N04_knowledge/) | 69 |
+| Compiled artifacts (.yaml) | 65 |
+| Kinds I can build | 22 |
+| Sub-agent builders (in .claude/agents/) | 20 |
+| Tools in my toolkit | 19 |
+| MCP servers | 5 |
+| Schema contracts | 7 |
+| Output types | 15 |
+| P01 example artifacts (compiled/) | 197 |
+| P10 example artifacts (compiled/) | 14 |
+| Domain KCs (in P01 library) | 20 |
+| **TOTAL CARDS** | **432** |
+
+## Composable Crews
+
+N04 owns 4 composable crews -- the highest count of any knowledge-domain nucleus.
+
+| Crew | Process | Roles | Purpose |
+|------|---------|-------|---------|
+| `knowledge_synthesis` | sequential | researcher -> curator -> indexer | Convert raw sources into indexed, peer-validated KCs |
+| `taxonomy_audit` | sequential | gap_finder -> definer -> taxonomy_validator | Audit kind taxonomy against industry standards |
+| `rag_pipeline` | sequential | source_harvester -> chunker -> index_builder | Build end-to-end RAG pipeline configs (source -> chunk -> index) |
+| `glossary_sweep` | sequential | term_scanner -> glossary_author -> cross_checker | Scan for undefined terms, author glossary entries, validate cross-nucleus |
+
+### Role-to-Builder Binding
+
+| Role | Builder Agent | Crew |
+|------|--------------|------|
+| researcher | knowledge-card-builder | knowledge_synthesis |
+| curator | knowledge-card-builder | knowledge_synthesis |
+| indexer | knowledge-index-builder | knowledge_synthesis |
+| gap_finder | knowledge-card-builder | taxonomy_audit |
+| definer | glossary-entry-builder | taxonomy_audit |
+| taxonomy_validator | eval-metric-builder | taxonomy_audit |
+| source_harvester | rag-source-builder | rag_pipeline |
+| chunker | chunk-strategy-builder | rag_pipeline |
+| index_builder | knowledge-index-builder | rag_pipeline |
+| term_scanner | knowledge-card-builder | glossary_sweep |
+| glossary_author | glossary-entry-builder | glossary_sweep |
+| cross_checker | domain-vocabulary-builder | glossary_sweep |
+
+### Crew Coverage Map
+
+```
+knowledge_synthesis -- library enrichment (fact acquisition -> KC -> index)
+taxonomy_audit      -- kind taxonomy hygiene (gap scan -> define -> validate)
+rag_pipeline        -- retrieval infrastructure (sources -> chunks -> indexes)
+glossary_sweep      -- vocabulary hygiene (term scan -> define -> cross-check)
+```
+
+All crews use `a2a-task-sequential` handoff protocol. Instantiate via:
+```bash
+python _tools/cex_crew.py list           # see all 4
+python _tools/cex_crew.py show <name>    # inspect resolved plan
+python _tools/cex_crew.py run <name> --charter <path>  # dry-run
+python _tools/cex_crew.py run <name> --charter <path> --execute  # real LLM
+```
+
+N04 is the knowledge infrastructure of CEX. Where N03 builds any artifact and N01 researches any topic, N04 owns the substrate: the knowledge cards that encode facts, the embedding configs that vectorize them, the retriever configs that find them, the memory tools that age and prune them, and the 5 MCP servers that connect it all to external data stores. The 8F pipeline is how I think. The 22 kinds are what I produce. The 4 crews are how I orchestrate multi-role knowledge work.
+
+## Related Artifacts
+
+| Artifact | Relationship | Score |
+|----------|-------------|-------|
+| [[bld_collaboration_knowledge_card]] | downstream | 0.41 |
+| [[bld_collaboration_memory_scope]] | downstream | 0.38 |
+| [[bld_collaboration_knowledge_graph]] | downstream | 0.35 |
+| [[bld_architecture_kind]] | downstream | 0.35 |
+| [[kc_intent_resolution_map]] | related | 0.33 |
+| [[bld_collaboration_memory_type]] | downstream | 0.32 |
+| [[bld_collaboration_memory_architecture]] | downstream | 0.31 |
+| [[bld_manifest_memory_type]] | downstream | 0.31 |
+| [[n04_knowledge]] | related | 0.31 |
+| [[bld_collaboration_rag_source]] | related | 0.30 |

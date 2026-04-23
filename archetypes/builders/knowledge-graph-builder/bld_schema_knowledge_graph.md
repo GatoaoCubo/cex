@@ -1,0 +1,97 @@
+---
+kind: schema
+id: bld_schema_knowledge_graph
+pillar: P06
+llm_function: CONSTRAIN
+purpose: Formal schema -- SINGLE SOURCE OF TRUTH for knowledge_graph
+pattern: TEMPLATE derives from this. CONFIG restricts this.
+quality: 9.2
+title: "Schema: knowledge_graph"
+version: "1.0.0"
+author: n03_builder
+tags: [knowledge_graph, builder, schema, P01]
+tldr: "Formal field constraints for knowledge_graph artifacts: entity types, relation types, extraction, storage, traversal."
+domain: "knowledge graph construction"
+created: "2026-04-13"
+updated: "2026-04-13"
+density_score: 0.90
+related:
+  - bld_schema_retriever_config
+  - bld_schema_action_prompt
+  - bld_schema_memory_scope
+  - bld_schema_output_validator
+  - bld_schema_golden_test
+  - bld_schema_handoff_protocol
+  - bld_schema_cli_tool
+  - bld_schema_unit_eval
+  - bld_schema_chunk_strategy
+  - bld_schema_env_config
+---
+
+# Schema: knowledge_graph
+
+## Frontmatter Fields
+
+| Field | Type | Required | Default | Notes |
+|-------|------|----------|---------|-------|
+| id | string (p01_kg_{name}) | YES | - | Namespace compliance |
+| kind | literal "knowledge_graph" | YES | - | Type integrity |
+| pillar | literal "P01" | YES | - | Pillar assignment |
+| version | semver string | YES | "1.0.0" | Artifact versioning |
+| created | date YYYY-MM-DD | YES | - | Creation date |
+| updated | date YYYY-MM-DD | YES | - | Last update |
+| author | string | YES | - | Producer identity |
+| domain | string | YES | - | Knowledge domain this graph covers |
+| entity_types | list[string], len >= 1 | YES | - | Entity type names defined |
+| relation_types | list[string], len >= 1 | YES | - | Relation type names defined |
+| storage_backend | enum: neo4j/falkordb/in_memory/json | YES | in_memory | Storage engine selection |
+| traversal_strategy | enum: local/global/hybrid | YES | hybrid | Query traversal mode |
+| quality | null | YES | null | Never self-score |
+| tags | list[string], len >= 3 | YES | - | Must include "knowledge_graph" |
+| tldr | string <= 160ch | YES | - | Dense summary |
+| description | string <= 200ch | REC | - | What domain and relations this graph covers |
+| max_depth | integer 1-10 | REC | 3 | Graph traversal depth limit |
+| embedding_integration | boolean | REC | true | Whether to combine vector + graph retrieval |
+| dedup_strategy | enum: exact/fuzzy/llm | REC | fuzzy | Entity deduplication method |
+| community_detection | enum: leiden/louvain/none | REC | leiden | Community grouping algorithm |
+| extraction_prompt | string | REC | - | Short reference to extraction prompt used |
+| node_count_estimate | integer | OPT | - | Estimated graph node count |
+| edge_count_estimate | integer | OPT | - | Estimated graph edge count |
+
+## ID Pattern
+Regex: `^p01_kg_[a-z][a-z0-9_]+$`
+Rule: id MUST equal filename stem.
+
+## Body Structure (required sections)
+1. `## Overview` -- what domain, why a graph, what questions it answers
+2. `## Entity Types` -- table: name, description, extraction hint, example instances
+3. `## Relation Types` -- table: name, source_type, target_type, description, directionality
+4. `## Extraction Config` -- extraction prompt reference, LLM used, output format (triplets)
+5. `## Storage and Traversal` -- backend rationale, traversal strategy, depth, pruning rules
+6. `## Integration` -- embedding model, dedup strategy, community detection, downstream consumers
+
+## Constraints
+- max_bytes: 8192 (body only)
+- naming: p01_kg_{name}.md
+- machine_format: yaml (compiled artifact)
+- id == filename stem
+- entity_types list MUST match entity names in ## Entity Types table
+- relation_types list MUST match relation names in ## Relation Types table
+- quality: null always
+- NEVER include actual data records -- schema only
+- entity_types and relation_types lists may NOT be empty
+
+## Related Artifacts
+
+| Artifact | Relationship | Score |
+|----------|-------------|-------|
+| [[bld_schema_retriever_config]] | sibling | 0.59 |
+| [[bld_schema_action_prompt]] | sibling | 0.59 |
+| [[bld_schema_memory_scope]] | sibling | 0.58 |
+| [[bld_schema_output_validator]] | sibling | 0.57 |
+| [[bld_schema_golden_test]] | sibling | 0.56 |
+| [[bld_schema_handoff_protocol]] | sibling | 0.56 |
+| [[bld_schema_cli_tool]] | sibling | 0.56 |
+| [[bld_schema_unit_eval]] | sibling | 0.56 |
+| [[bld_schema_chunk_strategy]] | sibling | 0.56 |
+| [[bld_schema_env_config]] | sibling | 0.56 |

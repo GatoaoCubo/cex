@@ -1,0 +1,78 @@
+id: dash_kind_census
+kind: dashboard
+title: Kind Census
+version: 2.0.0
+quality: 6.7
+density_score: 0.94
+updated: '2026-04-22'
+related:
+- dash_pillar_health
+- dash_quality_heatmap
+- home
+- dash_cross_ref_health
+- dash_orphan_detector
+- p06_kind_cex_artifact_type
+- bld_instruction_kind
+- bld_architecture_kind
+by_kind_top_25: 'TABLE length(rows) as "Count"
+
+  FROM ""
+
+  WHERE kind
+
+  GROUP BY kind
+
+  SORT length(rows) DESC
+
+  LIMIT 25'
+by_pillar: 'TABLE length(rows) as "Artifacts"
+
+  FROM ""
+
+  WHERE pillar
+
+  GROUP BY pillar
+
+  SORT pillar ASC'
+by_nucleus_folder: 'TABLE length(rows) as "Artifacts"
+
+  FROM "N01_intelligence" OR "N02_marketing" OR "N03_engineering" OR "N04_knowledge" OR "N05_operations" OR "N06_commercial"
+  OR "N07_admin"
+
+  WHERE kind
+
+  GROUP BY regexreplace(file.folder, "/.*", "") as "Nucleus"
+
+  SORT length(rows) DESC'
+singleton_kinds_only_1_instance: 'TABLE length(rows) as "Count"
+
+  FROM ""
+
+  WHERE kind
+
+  GROUP BY kind
+
+  HAVING length(rows) = 1
+
+  SORT kind ASC
+
+  LIMIT 30'
+related_artifacts: '| Artifact | Relationship | Score |
+
+  |----------|-------------|-------|
+
+  | [[dash_pillar_health]] | sibling | 0.64 |
+
+  | [[dash_quality_heatmap]] | sibling | 0.54 |
+
+  | [[home]] | sibling | 0.44 |
+
+  | [[dash_cross_ref_health]] | sibling | 0.43 |
+
+  | [[dash_orphan_detector]] | sibling | 0.37 |
+
+  | [[p06_kind_cex_artifact_type]] | related | 0.25 |
+
+  | [[bld_instruction_kind]] | related | 0.20 |
+
+  | [[bld_architecture_kind]] | related | 0.19 |'

@@ -1,0 +1,93 @@
+---
+id: p10_lr_knowledge_card_builder
+kind: learning_record
+pillar: P10
+version: 1.0.0
+created: 2026-03-27
+updated: 2026-03-27
+author: builder_agent
+observation: "Knowledge cards with body density below 0.80 (ratio of informative content to total words) fail the density gate and require rewrite. Bullets over 80 characters are caught by validator and force reformatting. Filler phrases ('this document describes', 'it is worth noting') consume tokens without adding information and are the primary cause of low density scores. Axioms written as observations ('caching improves performance') instead of rules ('ALWAYS declare cache TTL, NEVER cache without expiry') are rejected by S18. Cards referencing internal system paths fail H09."
+pattern: "Achieve density >= 0.80 by: replacing prose paragraphs with bullet lists, replacing descriptions with comparison tables, removing all transition sentences, ensuring each bullet contains exactly one fact. Axioms must be ALWAYS/NEVER imperatives, not observations. Quality field must be null — scoring is external. Body size 200 bytes minimum, 5KB maximum. No internal paths in any field."
+evidence: "11 knowledge card productions: 6 failed first density check (avg density 0.64). ..."
+confidence: 0.75
+outcome: SUCCESS
+domain: knowledge_card
+tags: [knowledge-card, density, axioms, frontmatter, atomic-facts, classification]
+tldr: "Density >= 0.80 requires bullets over prose and tables over descriptions. Axioms are ALWAYS/NEVER rules, not observations. quality:null always."
+impact_score: 7.5
+decay_rate: 0.05
+agent_group: edison
+keywords: [knowledge_card, density, axiom, frontmatter, bullet, table, tldr, domain, meta, quality_null]
+memory_scope: project
+observation_types: [user, feedback, project, reference]
+llm_function: INJECT
+quality: 9.0
+title: Memory ISO - knowledge_card
+density_score: 0.95
+related:
+  - p01_kc_creation_best_practices
+  - p01_kc_knowledge_best_practices
+  - p01_kc_artifact_quality_evaluation_methods
+  - bld_instruction_knowledge_card
+  - p03_sp_knowledge_card_builder
+  - bld_knowledge_card_knowledge_card
+  - bld_examples_axiom
+  - p06_schema_kc_structure
+  - bld_examples_knowledge_card
+  - bld_examples_validator
+---
+## Summary
+Knowledge cards distill domain knowledge into high-density atomic facts. The primary quality gate is density >= 0.80 — the ratio of informative content to total words. The most reliable path to high density is structural: replace prose with bullets, replace descriptions with tables, and eliminate all filler language.
+## Pattern
+Density boosting techniques (apply in order):
+1. **Prose -> bullets** - Convert every paragraph into a bullet list. Each bullet = one fact. If a bullet needs a sub-fact, use a nested bullet, not a compound sentence.
+2. **Descriptions -> tables** - Convert any comparison, enumeration, or mapping into a markdown table. Tables carry ~3x the information per line compared to prose.
+3. **Remove transitions** - Delete: "as we can see", "it is worth noting", "in summary", "this document", "the following". These add zero information.
+4. **Bullet length** - Each bullet under 80 characters. If over, split into two bullets or use a table.
+5. **Axiom format** - Every axiom must be an imperative starting with ALWAYS or NEVER. Not "caching is important" but "ALWAYS declare TTL when caching, NEVER cache without expiry".
+Frontmatter rules:
+- `quality: null` always — scoring is external, never self-assigned
+- `id` slug uses underscores: `p01_kc_topic_name`
+- `tags` as YAML list, not comma-separated string
+- No paths containing `records/`, `.claude/`, `/home/`, `C:\` anywhere in the card
+Body size constraints: minimum 200 bytes (4+ sections with 3+ lines each), maximum 5KB.
+## Anti-Pattern
+- Prose paragraphs — density drops below 0.70 immediately.
+- Bullets over 80 chars — validator S10 catches, forces reformatting.
+- Axiom as observation: "Caching improves performance" — must be "ALWAYS declare cache TTL".
+- `quality: 8.5` — validator H05 rejects any non-null value.
+- `tags: "ai, ml, cache"` as string — validator H07 rejects, must be YAML list.
+- Internal paths in any field — validator H09 rejects, breaks portability.
+- Self-referencing tldr: "This card describes caching" — tldr must be the direct fact, not a description of the card.
+## Context
+
+
+## Production Log
+
+- [20260331_214115] PASS kind=knowledge_card retries=0 gates=6/6
+
+- [20260331_214308] PASS kind=knowledge_card retries=0 gates=6/6
+
+## Boundary
+
+Persistent learning record. NOT session_state (ephemeral) nor axiom (immutable, does not learn).
+
+
+## 8F Pipeline Function
+
+Primary function: **INJECT**
+
+## Related Artifacts
+
+| Artifact | Relationship | Score |
+|----------|-------------|-------|
+| [[p01_kc_creation_best_practices]] | upstream | 0.40 |
+| [[p01_kc_knowledge_best_practices]] | upstream | 0.38 |
+| [[p01_kc_artifact_quality_evaluation_methods]] | upstream | 0.37 |
+| [[bld_instruction_knowledge_card]] | upstream | 0.31 |
+| [[p03_sp_knowledge_card_builder]] | upstream | 0.30 |
+| [[bld_knowledge_card_knowledge_card]] | upstream | 0.30 |
+| [[bld_examples_axiom]] | upstream | 0.25 |
+| [[p06_schema_kc_structure]] | upstream | 0.25 |
+| [[bld_examples_knowledge_card]] | upstream | 0.24 |
+| [[bld_examples_validator]] | upstream | 0.24 |

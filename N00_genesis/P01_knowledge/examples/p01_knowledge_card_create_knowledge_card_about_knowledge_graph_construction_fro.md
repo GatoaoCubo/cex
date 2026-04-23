@@ -1,0 +1,111 @@
+---
+id: p01_kc_knowledge_graph_construction_documents
+kind: knowledge_card
+pillar: P01
+title: "Knowledge Graph Construction from Document Collections"
+version: "1.0.0"
+created: "2026-04-02"
+updated: "2026-04-02"
+author: "builder"
+domain: knowledge_engineering
+quality: 9.1
+tags: [knowledge-graph, document-processing, ner, relation-extraction, entity-linking, graph-database]
+tldr: "Extract entities and relations from documents via NER+RE+EL pipeline, achieving 85-95% precision with domain-specific models and manual validation loops"
+when_to_use: "When building structured knowledge bases from unstructured document collections (PDFs, articles, reports)"
+keywords: [knowledge-graph, ner, relation-extraction, entity-linking, rdf, neo4j]
+long_tails:
+  - How to extract entities and relations from PDF documents for knowledge graphs
+  - Best practices for entity linking in domain-specific knowledge graph construction
+  - Evaluation metrics for knowledge graph construction quality assessment
+axioms:
+  - ALWAYS validate high-confidence extractions manually before graph insertion
+  - NEVER merge entities without disambiguation scoring >= 0.85
+  - IF relation confidence < 0.7 THEN flag for human review
+linked_artifacts:
+  primary: null
+  related: [p01_kc_rag_fundamentals, p01_kc_embedding_models]
+density_score: 0.89
+data_source: "https://arxiv.org/abs/2103.02313"
+related:
+  - p01_kc_knowledge_graph
+  - bld_collaboration_knowledge_graph
+  - knowledge-graph-builder
+  - p03_sp_knowledge_graph_builder
+  - p10_lr_knowledge_graph_builder
+  - bld_knowledge_card_knowledge_graph
+  - bld_instruction_knowledge_graph
+  - bld_knowledge_card_graph_rag_config
+  - bld_collaboration_entity_memory
+  - bld_knowledge_card_entity_memory
+---
+# Knowledge Graph Construction from Document Collections
+
+## Quick Reference
+```yaml
+topic: knowledge_graph_construction
+scope: Entity-relation extraction from documents to structured graphs
+owner: knowledge_engineer
+criticality: high
+```
+
+## Key Concepts
+- **Named Entity Recognition (NER)**: Identifies entities (persons, orgs, locations) with 90-98% accuracy using BERT-based models
+- **Relation Extraction (RE)**: Extracts semantic relationships between entities using dependency parsing + neural classifiers
+- **Entity Linking (EL)**: Maps extracted mentions to canonical entities in knowledge bases (Wikidata, DBpedia)
+- **Triple Store**: RDF format (subject-predicate-object) for graph storage; typical size 10M-1B triples
+- **Graph Embeddings**: Vector representations enabling similarity queries and reasoning (Node2Vec, TransE)
+
+## Strategy Phases
+1. **Document Preprocessing**: OCR for PDFs, sentence segmentation, tokenization (spaCy/NLTK pipelines)
+2. **Entity Extraction**: Domain-tuned NER models (BioBERT for biomedical, FinBERT for finance)
+3. **Relation Mining**: Pattern-based + neural extraction targeting domain-specific relation types
+4. **Entity Resolution**: Fuzzy matching + embedding similarity for entity deduplication
+5. **Graph Assembly**: Triple validation, schema alignment, quality scoring per edge
+6. **Iterative Refinement**: Precision/recall optimization through active learning loops
+
+## Golden Rules
+- VALIDAÇÃO: Manual review for confidence scores 0.7-0.9; auto-accept >= 0.9
+- DESAMBIGUAÇÃO: Entity linking requires >= 2 supporting contextual features
+- ESCALABILIDADE: Batch processing 1000+ documents via distributed frameworks (Spark)
+- QUALIDADE: Target precision >= 85% for production knowledge graphs
+
+## Flow
+```text
+[Documents] -> [NER] -> [Entities] -> [RE] -> [Relations] -> [EL] -> [Validated Triples] -> [Graph Store]
+     |            |         |          |         |           |              |              |
+   PDF/TXT    spaCy/BERT  mentions   OpenIE   patterns   Wikidata      Neo4j/RDF     Query API
+```
+
+## Comparativo
+| Approach | Precision | Recall | Scale | Best For |
+|----------|-----------|--------|-------|----------|
+| Rule-based patterns | 95% | 40% | 10K docs | High-precision domains |
+| Neural end-to-end | 80% | 85% | 1M docs | General-purpose extraction |
+| Hybrid (rules+ML) | 90% | 75% | 100K docs | Domain-specific applications |
+| Crowdsourced | 98% | 60% | 1K docs | Gold standard creation |
+
+| Graph Store | Query Language | Max Nodes | Performance | Use Case |
+|-------------|---------------|-----------|-------------|----------|
+| Neo4j | Cypher | 34B | Fast traversal | Connected data analysis |
+| Amazon Neptune | SPARQL/Gremlin | 15M | Managed scaling | Cloud deployments |
+| RDF4J | SPARQL | 100M | Standards compliance | Semantic web applications |
+
+## References
+- Source: https://arxiv.org/abs/2103.02313 (Knowledge Graph Construction Survey)
+- Tool: https://spacy.io/usage/linguistic-features#named-entities (spaCy NER)
+- Standard: https://www.w3.org/RDF/ (RDF specification)
+
+## Related Artifacts
+
+| Artifact | Relationship | Score |
+|----------|-------------|-------|
+| [[p01_kc_knowledge_graph]] | sibling | 0.43 |
+| [[bld_collaboration_knowledge_graph]] | downstream | 0.42 |
+| [[knowledge-graph-builder]] | related | 0.39 |
+| [[p03_sp_knowledge_graph_builder]] | downstream | 0.36 |
+| [[p10_lr_knowledge_graph_builder]] | downstream | 0.36 |
+| [[bld_knowledge_card_knowledge_graph]] | sibling | 0.35 |
+| [[bld_instruction_knowledge_graph]] | downstream | 0.34 |
+| [[bld_knowledge_card_graph_rag_config]] | sibling | 0.32 |
+| [[bld_collaboration_entity_memory]] | downstream | 0.31 |
+| [[bld_knowledge_card_entity_memory]] | sibling | 0.31 |

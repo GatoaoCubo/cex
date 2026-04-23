@@ -1,0 +1,76 @@
+id: courses_index
+kind: dashboard
+title: CEXAI Infoproduct Source
+version: 1.0.0
+quality: 7.4
+density_score: 1.0
+updated: '2026-04-22'
+related:
+- spec_courses_driver_tier
+- media_pipeline
+- spec_content_factory_v1
+- p01_kc_notebooklm_integration
+- spec_course_pipeline_wiring
+- bld_collaboration_audio_tool
+- cex_doctor_command
+- spec_mentor_didactic_engine
+- spec_media_pipeline_how_to
+- audio-tool-builder
+audience_tiers: '| Tier | Analogy | What they learn | What they NEVER touch |
+
+  |------|---------|-----------------|----------------------|
+
+  | Driver | Uses the car | Think in 8 steps, organize in 12 pillars, name things by kind | Python, ISOs, schemas, git |
+
+  | Mechanic | Customizes the car | Nucleus rules, sin lenses, crew templates, brand config | cex_sdk internals, dispatch
+  scripts |
+
+  | Engineer | Builds new cars | Builders, pillar schemas, kind genesis, vertical nuclei | (this is the CONTRIBUTING.md audience)
+  |'
+content_pipeline: "concept_registry.yaml       -- 10 registered concepts\n        |\ncex_media_produce.py        -- concept\
+  \ x format x lens x lang\n        |\n_courses/{tier}/{module}/   -- source markdown\n        |\nrendered/              \
+  \     -- gitignored output (video, slides, audio)\n        |\nExternal platforms          -- Hotmart, YouTube, Spotify,\
+  \ NotebookLM"
+directory_convention: "_courses/\n  driver/                   -- Tier 1: non-technical users\n    01_what_is_ai_brain/\n \
+  \   02_eight_steps/\n    03_twelve_pillars/\n    04_naming_things/\n  mechanic/                 -- Tier 2: power users /\
+  \ AI practitioners\n    01_customize_nucleus/\n    02_sin_lenses/\n    03_brand_config/\n    04_crew_templates/\n  engineer/\
+  \                 -- Tier 3: contributors (points to CONTRIBUTING.md)\n  rendered/                 -- gitignored: video,\
+  \ audio, PDF output"
+generating_content: '# List available concepts
+
+  python _tools/cex_media_produce.py --list
+
+
+  # Generate a module
+
+  python _tools/cex_media_produce.py --concept 8f_pipeline --format slides --lang pt-br
+
+
+  # Audio via NotebookLM (requires auth)
+
+  python _tools/cex_media_produce.py --concept artificial_sins --format audio --lang pt-br'
+this_directory_is_stripped_from_the_public_oss_export: '`cex_export_public.sh` removes `_courses/` automatically. The open-source
+  repo is dev-only. Monetized content lives here, published to external platforms.'
+related_artifacts: '| Artifact | Relationship | Score |
+
+  |----------|-------------|-------|
+
+  | [[spec_courses_driver_tier]] | related | 0.32 |
+
+  | [[media_pipeline]] | related | 0.28 |
+
+  | [[spec_content_factory_v1]] | related | 0.22 |
+
+  | [[p01_kc_notebooklm_integration]] | related | 0.20 |
+
+  | [[spec_course_pipeline_wiring]] | related | 0.20 |
+
+  | [[bld_collaboration_audio_tool]] | related | 0.20 |
+
+  | [[cex_doctor_command]] | related | 0.20 |
+
+  | [[spec_mentor_didactic_engine]] | related | 0.18 |
+
+  | [[spec_media_pipeline_how_to]] | related | 0.18 |
+
+  | [[audio-tool-builder]] | related | 0.18 |'

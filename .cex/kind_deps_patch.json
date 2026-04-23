@@ -1,0 +1,834 @@
+{
+  "schema": "kind_deps_patch/v1",
+  "generated_by": "N07 FULL_COVERAGE W1 in-session",
+  "kind_count": 231,
+  "with_deps": 227,
+  "foundational": 4,
+  "patches": {
+    "action_paradigm": [
+      "function_def",
+      "skill"
+    ],
+    "action_prompt": [
+      "prompt_template"
+    ],
+    "agent_computer_interface": [
+      "agent_card",
+      "computer_use"
+    ],
+    "agent_grounding_record": [
+      "entity_memory",
+      "knowledge_index"
+    ],
+    "agent_name_service_record": [
+      "agent_card"
+    ],
+    "agent_package": [
+      "agent",
+      "agent_card"
+    ],
+    "agent_profile": [
+      "agent",
+      "agent_card"
+    ],
+    "agents_md": [
+      "agent",
+      "agent_card"
+    ],
+    "ai_rmf_profile": [
+      "safety_policy",
+      "guardrail"
+    ],
+    "alert_rule": [
+      "trace_config",
+      "env_config"
+    ],
+    "analyst_briefing": [
+      "knowledge_card",
+      "scoring_rubric"
+    ],
+    "api_client": [
+      "env_config",
+      "secret_config"
+    ],
+    "api_reference": [
+      "api_client",
+      "input_schema"
+    ],
+    "app_directory_entry": [
+      "agent_card",
+      "knowledge_card"
+    ],
+    "audio_tool": [
+      "toolkit"
+    ],
+    "audit_log": [
+      "env_config",
+      "knowledge_card"
+    ],
+    "axiom": [
+      "mental_model"
+    ],
+    "backpressure_policy": [
+      "rate_limit_config"
+    ],
+    "batch_config": [
+      "env_config"
+    ],
+    "benchmark_suite": [
+      "benchmark",
+      "eval_dataset",
+      "scoring_rubric"
+    ],
+    "bias_audit": [
+      "eval_dataset",
+      "scoring_rubric"
+    ],
+    "boot_config": [
+      "env_config",
+      "secret_config"
+    ],
+    "bounded_context": [
+      "domain_vocabulary",
+      "context_map"
+    ],
+    "c2pa_manifest": [
+      "knowledge_card"
+    ],
+    "capability_registry": [
+      "agent_card"
+    ],
+    "case_study": [
+      "knowledge_card",
+      "customer_segment"
+    ],
+    "changelog": [
+      "knowledge_card",
+      "learning_record"
+    ],
+    "checkpoint": [
+      "workflow"
+    ],
+    "chunk_strategy": [
+      "embedding_config"
+    ],
+    "citation": [
+      "knowledge_card"
+    ],
+    "cli_tool": [
+      "function_def"
+    ],
+    "code_executor": [
+      "env_config"
+    ],
+    "code_of_conduct": [
+      "knowledge_card"
+    ],
+    "cohort_analysis": [
+      "eval_dataset",
+      "customer_segment"
+    ],
+    "collaboration_pattern": [
+      "workflow",
+      "agent_card"
+    ],
+    "competitive_matrix": [
+      "knowledge_card",
+      "customer_segment"
+    ],
+    "compliance_checklist": [
+      "quality_gate",
+      "knowledge_card"
+    ],
+    "compliance_framework": [
+      "compliance_checklist",
+      "constitutional_rule"
+    ],
+    "component_map": [
+      "agent_card",
+      "knowledge_card"
+    ],
+    "compression_config": [
+      "entity_memory",
+      "memory_summary"
+    ],
+    "computer_use": [
+      "browser_tool",
+      "vision_tool"
+    ],
+    "conformity_assessment": [
+      "compliance_framework",
+      "eval_metric"
+    ],
+    "consolidation_policy": [
+      "entity_memory",
+      "knowledge_index"
+    ],
+    "content_filter": [
+      "guardrail"
+    ],
+    "content_monetization": [
+      "customer_segment",
+      "subscription_tier"
+    ],
+    "context_doc": [
+      "knowledge_card"
+    ],
+    "context_map": [
+      "knowledge_card",
+      "component_map"
+    ],
+    "context_window_config": [
+      "prompt_template"
+    ],
+    "contributor_guide": [
+      "knowledge_card",
+      "context_doc"
+    ],
+    "cost_budget": [
+      "env_config",
+      "usage_quota"
+    ],
+    "course_module": [
+      "knowledge_card",
+      "scoring_rubric"
+    ],
+    "customer_segment": [
+      "knowledge_card"
+    ],
+    "daemon": [
+      "env_config",
+      "boot_config"
+    ],
+    "data_residency": [
+      "env_config",
+      "secret_config"
+    ],
+    "db_connector": [
+      "env_config",
+      "secret_config"
+    ],
+    "decision_record": [
+      "knowledge_card"
+    ],
+    "diagram": [
+      "component_map"
+    ],
+    "diff_strategy": [
+      "function_def"
+    ],
+    "discovery_questions": [
+      "customer_segment",
+      "knowledge_card"
+    ],
+    "dispatch_rule": [
+      "workflow"
+    ],
+    "document_loader": [
+      "parser",
+      "api_client"
+    ],
+    "domain_event": [
+      "event_schema"
+    ],
+    "domain_vocabulary": [
+      "glossary_entry",
+      "ontology"
+    ],
+    "drift_detector": [
+      "eval_metric",
+      "regression_check"
+    ],
+    "dual_loop_architecture": [
+      "workflow",
+      "agent_card"
+    ],
+    "e2e_eval": [
+      "quality_gate",
+      "scoring_rubric"
+    ],
+    "ecommerce_vertical": [
+      "customer_segment",
+      "knowledge_card"
+    ],
+    "edit_format": [
+      "formatter",
+      "type_def"
+    ],
+    "edtech_vertical": [
+      "customer_segment",
+      "knowledge_card"
+    ],
+    "effort_profile": [
+      "env_config"
+    ],
+    "embedder_provider": [
+      "embedding_config"
+    ],
+    "embedding_config": [
+      "vector_store"
+    ],
+    "enterprise_sla": [
+      "quality_gate",
+      "env_config"
+    ],
+    "enum_def": [
+      "type_def"
+    ],
+    "env_config": [],
+    "episodic_memory": [
+      "entity_memory"
+    ],
+    "eval_framework": [
+      "eval_metric",
+      "scoring_rubric"
+    ],
+    "eval_metric": [
+      "scoring_rubric"
+    ],
+    "event_schema": [
+      "type_def",
+      "domain_event"
+    ],
+    "experiment_config": [
+      "env_config",
+      "feature_flag"
+    ],
+    "experiment_tracker": [
+      "experiment_config",
+      "eval_metric"
+    ],
+    "faq_entry": [
+      "knowledge_card"
+    ],
+    "feature_flag": [
+      "env_config"
+    ],
+    "few_shot_example": [
+      "prompt_template"
+    ],
+    "fhir_agent_capability": [
+      "agent_card",
+      "api_client"
+    ],
+    "finetune_config": [
+      "training_method",
+      "eval_dataset"
+    ],
+    "fintech_vertical": [
+      "customer_segment",
+      "knowledge_card"
+    ],
+    "formatter": [
+      "type_def"
+    ],
+    "function_def": [
+      "type_def"
+    ],
+    "github_issue_template": [
+      "knowledge_card"
+    ],
+    "glossary_entry": [
+      "knowledge_card"
+    ],
+    "golden_test": [
+      "eval_dataset",
+      "scoring_rubric"
+    ],
+    "govtech_vertical": [
+      "customer_segment",
+      "knowledge_card"
+    ],
+    "gpai_technical_doc": [
+      "ai_rmf_profile",
+      "knowledge_card"
+    ],
+    "graph_rag_config": [
+      "rag_source",
+      "embedding_config",
+      "vector_store"
+    ],
+    "handoff": [
+      "agent_card",
+      "dispatch_rule"
+    ],
+    "handoff_protocol": [
+      "agent_card",
+      "dispatch_rule"
+    ],
+    "healthcare_vertical": [
+      "customer_segment",
+      "knowledge_card"
+    ],
+    "hitl_config": [
+      "quality_gate",
+      "workflow"
+    ],
+    "hook": [
+      "function_def"
+    ],
+    "hook_config": [
+      "hook",
+      "env_config"
+    ],
+    "incident_report": [
+      "audit_log",
+      "knowledge_card"
+    ],
+    "input_schema": [
+      "type_def"
+    ],
+    "instruction": [
+      "prompt_template"
+    ],
+    "integration_guide": [
+      "api_reference",
+      "knowledge_card"
+    ],
+    "interactive_demo": [
+      "landing_page"
+    ],
+    "interface": [
+      "input_schema",
+      "output_validator"
+    ],
+    "knowledge_card": [
+      "citation"
+    ],
+    "kubernetes_ai_requirement": [
+      "deployment_manifest",
+      "env_config"
+    ],
+    "landing_page": [
+      "prompt_template"
+    ],
+    "legal_vertical": [
+      "customer_segment",
+      "knowledge_card"
+    ],
+    "lens": [
+      "mental_model"
+    ],
+    "lifecycle_rule": [
+      "env_config",
+      "workflow"
+    ],
+    "llm_evaluation_scenario": [
+      "eval_dataset",
+      "scoring_rubric",
+      "llm_judge"
+    ],
+    "marketplace_app_manifest": [
+      "agent_card",
+      "env_config"
+    ],
+    "mcp_app_extension": [
+      "mcp_server",
+      "api_client"
+    ],
+    "memory_architecture": [
+      "entity_memory",
+      "knowledge_index"
+    ],
+    "memory_benchmark": [
+      "benchmark",
+      "entity_memory"
+    ],
+    "memory_scope": [
+      "entity_memory",
+      "session_state"
+    ],
+    "memory_type": [
+      "entity_memory"
+    ],
+    "mental_model": [
+      "knowledge_card"
+    ],
+    "model_architecture": [
+      "model_card",
+      "model_provider"
+    ],
+    "model_card": [
+      "model_provider"
+    ],
+    "model_provider": [
+      "env_config",
+      "secret_config"
+    ],
+    "model_registry": [
+      "model_card",
+      "model_provider"
+    ],
+    "multi_modal_config": [
+      "toolkit"
+    ],
+    "multimodal_prompt": [
+      "prompt_template"
+    ],
+    "naming_rule": [
+      "knowledge_card"
+    ],
+    "notifier": [
+      "webhook",
+      "api_client"
+    ],
+    "nps_survey": [
+      "customer_segment",
+      "knowledge_card"
+    ],
+    "nucleus_def": [
+      "agent",
+      "system_prompt",
+      "agent_card"
+    ],
+    "oauth_app_config": [
+      "secret_config",
+      "env_config"
+    ],
+    "onboarding_flow": [
+      "user_journey",
+      "knowledge_card"
+    ],
+    "optimizer": [
+      "eval_metric",
+      "quality_gate"
+    ],
+    "output_validator": [
+      "validation_schema"
+    ],
+    "parser": [
+      "formatter",
+      "type_def"
+    ],
+    "partner_listing": [
+      "knowledge_card",
+      "agent_card"
+    ],
+    "path_config": [
+      "env_config"
+    ],
+    "pattern": [
+      "knowledge_card"
+    ],
+    "permission": [
+      "rbac_policy"
+    ],
+    "pipeline_template": [
+      "workflow",
+      "dispatch_rule"
+    ],
+    "pitch_deck": [
+      "knowledge_card",
+      "customer_segment"
+    ],
+    "planning_strategy": [
+      "prompt_template",
+      "reasoning_strategy"
+    ],
+    "playground_config": [
+      "env_config",
+      "sandbox_spec"
+    ],
+    "plugin": [
+      "function_def",
+      "toolkit"
+    ],
+    "preference_dataset": [
+      "eval_dataset",
+      "customer_segment"
+    ],
+    "press_release": [
+      "knowledge_card"
+    ],
+    "pricing_page": [
+      "subscription_tier",
+      "customer_segment"
+    ],
+    "procedural_memory": [
+      "entity_memory"
+    ],
+    "product_tour": [
+      "user_journey",
+      "knowledge_card"
+    ],
+    "prompt_compiler": [
+      "prompt_template",
+      "prompt_version"
+    ],
+    "prompt_optimizer": [
+      "prompt_template",
+      "scoring_rubric"
+    ],
+    "prompt_technique": [
+      "prompt_template"
+    ],
+    "prompt_template": [
+      "system_prompt"
+    ],
+    "prompt_version": [
+      "prompt_template"
+    ],
+    "prosody_config": [
+      "env_config"
+    ],
+    "prospective_memory": [
+      "entity_memory"
+    ],
+    "quantization_config": [
+      "model_card",
+      "env_config"
+    ],
+    "quickstart_guide": [
+      "knowledge_card",
+      "context_doc"
+    ],
+    "rate_limit_config": [
+      "env_config"
+    ],
+    "rbac_policy": [
+      "env_config"
+    ],
+    "reasoning_strategy": [
+      "prompt_template",
+      "mental_model"
+    ],
+    "reasoning_trace": [
+      "reasoning_strategy"
+    ],
+    "referral_program": [
+      "customer_segment",
+      "knowledge_card"
+    ],
+    "regression_check": [
+      "quality_gate",
+      "eval_metric"
+    ],
+    "repo_map": [
+      "knowledge_card",
+      "context_doc"
+    ],
+    "reranker_config": [
+      "retriever_config",
+      "embedding_config"
+    ],
+    "response_format": [
+      "formatter",
+      "type_def"
+    ],
+    "retriever": [
+      "retriever_config",
+      "vector_store"
+    ],
+    "retry_policy": [
+      "env_config"
+    ],
+    "reward_model": [
+      "scoring_rubric",
+      "reward_signal"
+    ],
+    "reward_signal": [
+      "eval_metric"
+    ],
+    "rl_algorithm": [
+      "reward_model",
+      "training_method"
+    ],
+    "roi_calculator": [
+      "customer_segment",
+      "eval_metric"
+    ],
+    "role_assignment": [
+      "agent_card",
+      "capability_registry"
+    ],
+    "router": [
+      "model_provider",
+      "fallback_chain"
+    ],
+    "runtime_rule": [
+      "env_config"
+    ],
+    "runtime_state": [
+      "session_state",
+      "entity_memory"
+    ],
+    "safety_hazard_taxonomy": [
+      "safety_policy",
+      "knowledge_card"
+    ],
+    "safety_policy": [
+      "guardrail",
+      "constitutional_rule"
+    ],
+    "sales_playbook": [
+      "customer_segment",
+      "prompt_template"
+    ],
+    "sandbox_spec": [
+      "env_config"
+    ],
+    "schedule": [
+      "workflow"
+    ],
+    "scoring_rubric": [
+      "quality_gate"
+    ],
+    "sdk_example": [
+      "api_client",
+      "function_def"
+    ],
+    "search_strategy": [
+      "retriever_config"
+    ],
+    "search_tool": [
+      "retriever_config",
+      "api_client"
+    ],
+    "secret_config": [],
+    "self_improvement_loop": [
+      "quality_gate",
+      "reward_signal"
+    ],
+    "session_backend": [
+      "entity_memory",
+      "env_config"
+    ],
+    "signal": [
+      "workflow"
+    ],
+    "skill": [
+      "function_def"
+    ],
+    "smoke_eval": [
+      "quality_gate"
+    ],
+    "social_publisher": [
+      "api_client",
+      "prompt_template"
+    ],
+    "software_project": [
+      "agent_card",
+      "context_doc"
+    ],
+    "spawn_config": [
+      "agent",
+      "env_config"
+    ],
+    "sso_config": [
+      "oauth_app_config",
+      "secret_config"
+    ],
+    "state_machine": [
+      "workflow",
+      "dispatch_rule"
+    ],
+    "streaming_config": [
+      "transport_config"
+    ],
+    "stt_provider": [
+      "api_client"
+    ],
+    "subscription_tier": [
+      "customer_segment"
+    ],
+    "supabase_data_layer": [
+      "db_connector",
+      "env_config"
+    ],
+    "supervisor": [
+      "agent",
+      "agent_card"
+    ],
+    "system_prompt": [
+      "boot_config"
+    ],
+    "tagline": [
+      "prompt_template"
+    ],
+    "thinking_config": [
+      "env_config"
+    ],
+    "threat_model": [
+      "safety_policy",
+      "knowledge_card"
+    ],
+    "toolkit": [
+      "function_def"
+    ],
+    "trace_config": [
+      "env_config"
+    ],
+    "training_method": [
+      "eval_dataset",
+      "scoring_rubric"
+    ],
+    "trajectory_eval": [
+      "eval_dataset",
+      "scoring_rubric"
+    ],
+    "transport_config": [
+      "env_config"
+    ],
+    "tts_provider": [
+      "api_client"
+    ],
+    "type_def": [],
+    "unit_eval": [
+      "scoring_rubric"
+    ],
+    "usage_quota": [
+      "rate_limit_config",
+      "env_config"
+    ],
+    "usage_report": [
+      "eval_metric",
+      "knowledge_card"
+    ],
+    "user_journey": [
+      "customer_segment",
+      "knowledge_card"
+    ],
+    "vad_config": [
+      "env_config"
+    ],
+    "validation_schema": [],
+    "validator": [
+      "validation_schema",
+      "quality_gate"
+    ],
+    "vc_credential": [
+      "knowledge_card"
+    ],
+    "vector_store": [
+      "embedding_config"
+    ],
+    "vision_tool": [
+      "api_client"
+    ],
+    "visual_workflow": [
+      "workflow",
+      "diagram"
+    ],
+    "webhook": [
+      "api_client",
+      "env_config"
+    ],
+    "webinar_script": [
+      "prompt_template",
+      "knowledge_card"
+    ],
+    "white_label_config": [
+      "env_config"
+    ],
+    "workflow_node": [
+      "workflow"
+    ],
+    "workflow_run_crate": [
+      "workflow",
+      "knowledge_card"
+    ],
+    "working_memory": [
+      "entity_memory"
+    ]
+  }
+}

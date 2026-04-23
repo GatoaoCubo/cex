@@ -1,0 +1,52 @@
+runtime: ollama-qwen-coder
+tier: free
+provider: ollama
+cli: none
+models:
+  default: qwen2.5-coder:7b
+  n01: llama3.1:8b
+  n02: llama3.1:8b
+  n03: qwen2.5-coder:7b
+  n04: llama3.1:8b
+  n05: qwen2.5-coder:7b
+  n06: llama3.1:8b
+  n07: qwen2.5-coder:7b
+context_window: 32000
+effective_context: 8192
+capabilities:
+  native_tool_calls: partial
+  done_native: true
+  sub_agents: false
+  task_tracking: false
+  large_context: false
+agentic_profile:
+  max_iters: 15
+  min_iters: 4
+  require_reads_before_done: 3
+  nudge_on_shallow: true
+  max_nudges: 2
+  anti_fabrication: true
+  reject_done_without_reads: true
+  temperature: 0.3
+  num_predict: 1500
+boot_script: boot/n0x_ollama.ps1
+spawn_script: _spawn/spawn_grid_ollama.ps1
+runner: _tools/cex_agentic_nucleus.py
+cost_per_mtok_in: 0
+cost_per_mtok_out: 0
+strengths:
+  - calls done() natively (first free model observed doing so)
+  - agentic habits
+  - code-focused training (good for N03/N05)
+weaknesses:
+  - 'fabricates numbers/counts (observed: 46 builders when real is 262)'
+  - repeats same reads (no tool-call memory)
+  - JSON-in-content for some iterations
+routing_pattern: |
+  Analogous to Claude Opus/Sonnet split:
+    N03 (builder)   -> qwen2.5-coder:7b  (agentic + code-focused)
+    N05 (ops/code)  -> qwen2.5-coder:7b  (idem)
+    others          -> llama3.1:8b        (grounded content tasks)
+notes: |
+  Free local, per-nucleus routing. Qwen for code nuclei, Llama for content.
+  REQUIRES anti-fabrication guard: done() must follow >= 2 read_file/grep calls.

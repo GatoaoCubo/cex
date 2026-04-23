@@ -1,0 +1,209 @@
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# CEX Nucleus Model Configuration — TEMPLATE
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+#
+# Copy this to: .cex/P09_config/nucleus_models.yaml
+# Then customize for your budget and subscriptions.
+#
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+#
+# CLI options:
+#   claude  — Anthropic Claude Code CLI
+#   gemini  — Google Gemini CLI
+#   codex   — OpenAI Codex CLI
+#   (pi removed — third-party wrapper no longer supported)
+#   ollama  — Local models via Ollama
+#
+# PRESETS (uncomment one section, or mix and match):
+#
+# ━━━━ PRESET: PREMIUM (best model per domain, 3 subs) ━━━━
+# ━━━━ PRESET: MID     (single provider, mixed tiers)  ━━━━
+# ━━━━ PRESET: LOCAL   (100% free, ollama only)        ━━━━
+# ━━━━ PRESET: CEX-FT  (fine-tuned cex-brain, future)  ━━━━
+#
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+# ╔══════════════════════════════════════════════════╗
+# ║  PREMIUM — Best model per domain (3 providers)  ║
+# ║  Requires: Claude + Gemini + Codex subs          ║
+# ║  Grid load: Claude:3 Gemini:2 Codex:1            ║
+# ╚══════════════════════════════════════════════════╝
+
+# n07:
+#   cli: claude
+#   model: claude-opus-4-6
+#   fallback: { cli: ollama, model: "qwen3:32b" }
+#
+# n01:
+#   cli: gemini
+#   model: gemini-2.5-pro
+#   flags: "--yolo"
+#   fallback: { cli: claude, model: claude-opus-4-6 }
+#   fallback_local: { cli: ollama, model: "qwen3:32b" }
+#
+# n02:
+#   cli: claude
+#   model: claude-sonnet-4-6
+#   fallback: { cli: gemini, model: gemini-2.5-pro }
+#   fallback_local: { cli: ollama, model: "qwen3:14b" }
+#
+# n03:
+#   cli: claude
+#   model: claude-opus-4-6
+#   fallback: { cli: codex, model: o3 }
+#   fallback_local: { cli: ollama, model: "qwen3:32b" }
+#
+# n04:
+#   cli: gemini
+#   model: gemini-2.5-pro
+#   flags: "--yolo"
+#   fallback: { cli: codex, model: o3 }
+#   fallback_local: { cli: ollama, model: "qwen3:14b" }
+#
+# n05:
+#   cli: codex
+#   model: o3
+#   flags: "--full-auto"
+#   fallback: { cli: claude, model: claude-sonnet-4-6 }
+#   fallback_local: { cli: ollama, model: "qwen3:14b" }
+#
+# n06:
+#   cli: claude
+#   model: claude-sonnet-4-6
+#   fallback: { cli: gemini, model: gemini-2.5-pro }
+#   fallback_local: { cli: ollama, model: "qwen3:14b" }
+
+# ╔══════════════════════════════════════════════════╗
+# ║  MID — Single provider, mixed tiers             ║
+# ║  Requires: Claude sub only                       ║
+# ╚══════════════════════════════════════════════════╝
+
+# n07:
+#   cli: claude
+#   model: claude-sonnet-4-6
+#
+# n01:
+#   cli: claude
+#   model: claude-sonnet-4-6
+#
+# n02:
+#   cli: claude
+#   model: claude-haiku-3-20250307
+#
+# n03:
+#   cli: claude
+#   model: claude-sonnet-4-6
+#
+# n04:
+#   cli: claude
+#   model: claude-haiku-3-20250307
+#
+# n05:
+#   cli: claude
+#   model: claude-haiku-3-20250307
+#
+# n06:
+#   cli: claude
+#   model: claude-haiku-3-20250307
+
+# ╔══════════════════════════════════════════════════╗
+# ║  LOCAL — 100% free, Ollama + Qwen3              ║
+# ║  Requires: 16GB+ VRAM for 32b, 10GB for 14b     ║
+# ╚══════════════════════════════════════════════════╝
+
+# n07:
+#   cli: ollama
+#   model: qwen3:32b
+#
+# n01:
+#   cli: ollama
+#   model: qwen3:32b
+#
+# n02:
+#   cli: ollama
+#   model: qwen3:14b
+#
+# n03:
+#   cli: ollama
+#   model: qwen3:32b
+#
+# n04:
+#   cli: ollama
+#   model: qwen3:14b
+#
+# n05:
+#   cli: ollama
+#   model: qwen3:14b
+#
+# n06:
+#   cli: ollama
+#   model: qwen3:14b
+
+# ╔══════════════════════════════════════════════════╗
+# ║  CEX-FT — Fine-tuned cex-brain (future)         ║
+# ║  Requires: ollama + cex-brain model downloaded   ║
+# ║  Status: DEFERRED (pending monetization plan)    ║
+# ╚══════════════════════════════════════════════════╝
+
+# n07:
+#   cli: ollama
+#   model: cex-brain:14b
+#
+# n01:
+#   cli: ollama
+#   model: cex-brain:14b
+#
+# n02:
+#   cli: ollama
+#   model: cex-brain:14b
+#
+# n03:
+#   cli: ollama
+#   model: cex-brain:14b
+#
+# n04:
+#   cli: ollama
+#   model: cex-brain:14b
+#
+# n05:
+#   cli: ollama
+#   model: cex-brain:14b
+#
+# n06:
+#   cli: ollama
+#   model: cex-brain:14b
+
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# YOUR CONFIG — copy a preset above and edit below
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+n07:
+  cli: claude
+  model: claude-opus-4-6
+
+n01:
+  cli: gemini
+  model: gemini-2.5-pro
+  flags: "--yolo"
+
+n02:
+  cli: claude
+  model: claude-sonnet-4-6
+
+n03:
+  cli: claude
+  model: claude-opus-4-6
+
+n04:
+  cli: gemini
+  model: gemini-2.5-pro
+  flags: "--yolo"
+
+n05:
+  cli: codex
+  model: o3
+  flags: "--full-auto"
+
+n06:
+  cli: claude
+  model: claude-sonnet-4-6

@@ -1,0 +1,6 @@
+{
+  "name": "cex-ollama-provider",
+  "version": "1.0.0",
+  "description": "Free local LLM fallback for CEX via Ollama",
+  "main": "index.ts"
+}

@@ -1,0 +1,174 @@
+# === CEX .gitignore ===
+
+# Python
+__pycache__/
+*.pyc
+
+# Secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+_config/*.credentials
+_config/client_secret.json
+_config/token.json
+**/canva_token.json
+**/*_token.json
+**/*_credentials.json
+
+# Audit reports (may contain raw .env scan output -- NEVER commit)
+_reports/audit/
+_reports/leverage_map/
+_reports/leverage_map_v2_*/
+_reports/gridtest_*/
+_reports/gridtest_leverage_map_dispatch.log
+_reports/overnight/
+_reports/smoke/
+_reports/polish/
+_reports/selfheal/
+_reports/spawn_probe/
+_reports/token_trim/
+_reports/ops/
+.cex/quality/audit_*.json
+
+# Supabase local dev temp (contains project ref + connection strings)
+supabase/.temp/
+
+# Showoff ephemeral (logs, wave fix attempts -- keep compiled/ only)
+_showoff/logs/
+_showoff/gemini_fix/
+_showoff/codex_fix/
+_showoff/w*/
+!_showoff/w4/
+!_showoff/w5/
+
+# External projects cloned into workspace (not part of CEX)
+_external/
+
+# Auto-generated context dumps
+CLAUDE_GENERATED.md
+
+# IDE
+.cursorrules
+.windsurfrules
+.vscode/
+
+# Regenerable indexes and caches
+.cex/index.db
+.cex/retriever_index.json
+.cex/quality/
+.cex/memory/
+
+# Fine-tuning data (regenerate with: python _tools/cex_ft_dataset.py)
+_data/ft/*.jsonl
+
+# Research artifacts (8.5MB — ephemeral)
+_tools/proof/
+
+# Legacy / stale
+_archive/
+.cex_signals/
+_ops/
+.githooks/
+
+# Brand config (instance-specific, never share)
+.cex/brand/brand_config.yaml
+
+# Runtime ephemeral (all regenerable at boot)
+.cex/runtime/
+.cex/learning_records/
+.cex/cache/
+.cex/system_test_results.json
+.cex/benchmarks/
+.cex/auto_cycle_results.json
+.cex/skills/autocreated/
+.cex/skills/compiled/
+.cex/nudges/
+
+# Ephemeral handoff stubs (dispatch.sh writes these dynamically)
+n0[1-7]_task.md
+
+# Internal planning archive (not public docs)
+_docs/archive/
+
+# Media (not useful for LLM)
+_docs/*.mp4
+_docs/*.mp3
+_docs/*.srt
+
+# Course rendered output (source .md tracked, renders not)
+_courses/rendered/
+_courses/**/*.mp4
+_courses/**/*.mp3
+_courses/**/*.pdf
+
+# Releases (built locally, not tracked)
+_releases/
+
+# Build / packaging
+node_modules/
+.venv/
+venv/
+dist/
+build/
+*.egg-info/
+.mypy_cache/
+.pytest_cache/
+.ruff_cache/
+*.whl
+*.tar.gz
+
+# Platform
+Thumbs.db
+.DS_Store
+nul
+.cex/temp/
+boot/n01-claude.cmd
+.aider*
+unsloth_compiled_cache/
+.venv_litellm/
+_reports/distillation/inventory_*.md
+_reports/compiled/inventory_*.yaml
+
+# Compiled/generated (regenerate with: python _tools/cex_compile.py --all)
+_output/
+_docs/compiled/
+.claude/compiled/
+_reports/compiled/
+**/compiled/
+
+# MCP instance configs (runtime-specific, never share)
+.mcp-n*.json
+
+# Generated dashboards (regenerate with tools)
+_dashboards/
+
+# Lock files (runtime state)
+.claude/scheduled_tasks.lock
+
+# Coverage artifacts
+.coverage
+htmlcov/
+
+# GitHub compiled artifacts (regenerable)
+.github/compiled/
+
+# Playwright MCP session files (local browser state)
+.playwright-mcp/
+
+# Obsidian vault (track config, ignore dynamic state)
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+.obsidian/plugins/*/main.js
+.obsidian/plugins/*/styles.css
+.obsidian/plugins/*/manifest.json
+.obsidian/hotkeys.json
+.obsidian/cache/
+.cex/archive/
+.cex/skills/
+.cex/overnight/
+.cex/experiments/
+# (runtime subdirs already covered by .cex/runtime/ above)
+.aider.chat.history.md
+_reports/

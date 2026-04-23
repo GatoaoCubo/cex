@@ -1,0 +1,116 @@
+---
+id: p01_kc_prompt_cache
+kind: knowledge_card
+type: kind
+pillar: P10
+title: "Prompt Cache — Deep Knowledge for prompt_cache"
+version: 1.0.0
+created: 2026-04-07
+updated: 2026-04-07
+author: n04_knowledge
+domain: prompt_cache
+quality: 9.1
+tags: [prompt_cache, P10, INJECT, kind-kc]
+tldr: "prompt_cache configures TTL, eviction, and invalidation for cached LLM prompt/completion pairs — reducing latency and cost for repeated or similar queries."
+when_to_use: "Building, reviewing, or reasoning about prompt_cache artifacts"
+keywords: [cache, ttl, eviction, prompt, completion, latency, cost]
+feeds_kinds: [prompt_cache]
+density_score: null
+related:
+  - bld_knowledge_card_prompt_cache
+  - prompt-cache-builder
+  - bld_examples_prompt_cache
+  - bld_output_template_prompt_cache
+  - p10_lr_prompt_cache_builder
+  - p03_sp_prompt_cache_builder
+  - bld_collaboration_prompt_cache
+  - p11_qg_prompt_cache
+  - p01_kc_caching
+  - ex_knowledge_card_prompt_caching
+---
+
+# Prompt Cache
+
+## Spec
+```yaml
+kind: prompt_cache
+pillar: P10
+llm_function: GOVERN
+max_bytes: 2048
+naming: p10_pc_{{name}}.yaml
+core: false
+```
+
+## What It Is
+A prompt_cache is the configuration spec for caching LLM prompt/completion pairs — defining TTL (time-to-live), eviction strategy, cache key hashing, invalidation triggers, and storage backend. It is NOT a session_state (P10, ephemeral agent context), NOT a memory_summary (P10, condensed conversation history), NOT a runtime_state (P10, agent runtime variables).
+
+## Cross-Framework Map
+| Framework/Provider | Class/Concept | Notes |
+|-------------------|---------------|-------|
+| OpenAI | Prompt Caching (automatic) | 128-token prefix caching, 50% discount, 5-10min TTL |
+| Anthropic | Prompt Caching (explicit) | Cache breakpoints, 90% discount, 5min TTL |
+| LangChain | `CacheBackedEmbeddings`, `SQLiteCache` | LLM response caching with pluggable backends |
+| LlamaIndex | `IngestionCache` | Deduplicates embedding calls for unchanged nodes |
+| Semantic Kernel | `IChatCompletionService` cache layer | Custom middleware caching |
+| vLLM | Prefix caching (`--enable-prefix-caching`) | KV-cache reuse for shared prompt prefixes |
+| SGLang | RadixAttention | Automatic prefix sharing across requests |
+
+## Key Parameters
+| Parameter | Type | Default | Tradeoff |
+|-----------|------|---------|----------|
+| ttl_seconds | int | 300 | Higher = more hits but staler results |
+| eviction_strategy | enum | lru | lru/lfu/fifo — LRU best for varied workloads |
+| max_entries | int | 10000 | Higher = more memory, better hit rate |
+| cache_key_method | enum | hash_full | hash_full/hash_prefix/semantic — prefix cheapest, semantic most flexible |
+| invalidation_trigger | enum | ttl_expire | ttl_expire/content_change/manual — content_change most accurate |
+| storage_backend | enum | memory | memory/redis/sqlite — memory fastest, redis shared across instances |
+
+## Patterns
+| Pattern | When to Use | Example |
+|---------|-------------|---------|
+| Prefix caching | System prompts + static context reused across requests | TTL=3600, key=hash_prefix |
+| Semantic dedup | Similar but not identical queries should share cache | key=semantic, threshold=0.95 |
+| Tiered TTL | Different TTLs for different prompt types | system_prompt=3600s, user_query=300s |
+| Shared cache | Multi-agent systems with overlapping knowledge queries | backend=redis, namespace per agent |
+
+## Anti-Patterns
+| Anti-Pattern | Why It Fails | Fix |
+|-------------|-------------|-----|
+| Cache everything | Unique queries pollute cache, waste memory | Filter: only cache prompts with >2 expected repeats |
+| No invalidation | Stale completions served after knowledge update | Tie invalidation to knowledge artifact version |
+| TTL too long | Serves outdated completions for evolving contexts | Profile query freshness needs; default 5min |
+| No namespace isolation | Agent A's cache pollutes Agent B's results | Namespace cache keys by agent_id + domain |
+
+## Integration Graph
+```
+system_prompt, prompt_template --> [prompt_cache] --> runtime_state, agent_card
+                                        |
+                                  model_provider, env_config, token_budget
+```
+
+## Decision Tree
+- IF high query repetition (>30% duplicates) THEN enable aggressive caching (TTL=3600, LRU)
+- IF multi-agent shared context THEN backend=redis, namespace per agent
+- IF cost reduction priority THEN cache system prompts + few-shot examples (longest prefix)
+- IF freshness critical THEN TTL=60, invalidation=content_change
+- DEFAULT: memory backend, TTL=300, LRU eviction, hash_full key
+
+## Quality Criteria
+- GOOD: ttl, eviction_strategy, max_entries, cache_key_method all present
+- GREAT: tiered TTL rules, invalidation triggers documented, hit rate monitoring
+- FAIL: no TTL specified, no eviction strategy, cache everything without filtering
+
+## Related Artifacts
+
+| Artifact | Relationship | Score |
+|----------|-------------|-------|
+| [[bld_knowledge_card_prompt_cache]] | sibling | 0.71 |
+| [[prompt-cache-builder]] | related | 0.61 |
+| [[bld_examples_prompt_cache]] | upstream | 0.56 |
+| [[bld_output_template_prompt_cache]] | upstream | 0.55 |
+| [[p10_lr_prompt_cache_builder]] | related | 0.53 |
+| [[p03_sp_prompt_cache_builder]] | upstream | 0.52 |
+| [[bld_collaboration_prompt_cache]] | downstream | 0.51 |
+| [[p11_qg_prompt_cache]] | downstream | 0.48 |
+| [[p01_kc_caching]] | sibling | 0.45 |
+| [[ex_knowledge_card_prompt_caching]] | sibling | 0.43 |

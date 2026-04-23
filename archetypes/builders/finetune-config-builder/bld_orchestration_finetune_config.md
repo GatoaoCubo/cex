@@ -1,0 +1,102 @@
+---
+kind: collaboration
+id: bld_collaboration_finetune_config
+pillar: P12
+llm_function: COLLABORATE
+purpose: How finetune-config-builder works in crews with other builders
+pattern: each builder must know its ROLE in a team, what it RECEIVES and PRODUCES
+quality: 9.1
+title: "Collaboration Finetune Config"
+version: "1.0.0"
+author: n03_builder
+tags: [finetune_config, builder, collaboration, P02]
+tldr: "finetune-config-builder role in crews: receives base model + task + dataset seeds, produces training job spec."
+domain: "finetune_config construction"
+created: "2026-04-13"
+updated: "2026-04-13"
+density_score: 0.90
+related:
+  - bld_collaboration_model_card
+  - bld_collaboration_model_provider
+  - bld_collaboration_boot_config
+  - bld_architecture_finetune_config
+  - bld_collaboration_agent
+  - finetune-config-builder
+  - bld_collaboration_builder
+  - p03_sp_finetune_config_builder
+  - model-card-builder
+  - bld_collaboration_context_window_config
+---
+
+# Collaboration: finetune-config-builder
+## My Role in Crews
+I am a SPECIALIST. I answer ONE question: "how should this model be adapted -- which base model,
+which dataset, which adapter, and which hyperparameters?"
+I do not configure runtime routing. I do not document trained models. I do not define agents.
+I specify training jobs so they can be handed to a framework and executed.
+
+## Crew Compositions
+### Crew: "Model Adaptation Pipeline"
+```
+  1. knowledge-card-builder -> "document base model capabilities and limitations"
+  2. finetune-config-builder -> "specify training job: adapter, dataset, hyperparameters"
+  3. model-card-builder -> "document trained adapter: capabilities, eval results, usage"
+  4. model-provider-builder -> "configure runtime routing to serve the adapted model"
+```
+### Crew: "Custom Domain Model"
+```
+  1. agent-builder -> "define agent persona and capabilities"
+  2. finetune-config-builder -> "adapt base model to domain task"
+  3. boot-config-builder -> "configure provider startup with trained adapter"
+  4. benchmark-builder -> "define post-training evaluation suite"
+```
+### Crew: "Preference Alignment"
+```
+  1. finetune-config-builder (SFT) -> "initial supervised fine-tune on demonstrations"
+  2. finetune-config-builder (reward) -> "train reward model from preference data"
+  3. finetune-config-builder (RLHF/DPO) -> "align policy with reward signal"
+  4. model-card-builder -> "document aligned model"
+```
+
+## Handoff Protocol
+### I Receive
+- seeds: base_model (HF model ID), task_type (sft/dpo/etc), dataset path or identifier
+- optional: compute constraints (VRAM budget), quality targets, framework preference
+- optional: existing finetune_config IDs to NOT duplicate
+
+### I Produce
+- finetune_config artifact (.md + .yaml frontmatter)
+- committed to: `P02_model/examples/p02_ft_{name}.yaml`
+
+### I Signal
+- signal: complete (with quality score from QUALITY_GATES)
+- if quality < 8.0: signal retry with failure reasons listed
+
+## Builders I Depend On
+| Builder | Why |
+|---------|-----|
+| knowledge-card-builder | Documents base model capabilities I need to understand before specifying adapter |
+| dataset-builder (if exists) | Defines dataset format and field schema I reference in Dataset section |
+
+## Builders That Depend On Me
+| Builder | Why |
+|---------|-----|
+| model-card-builder | Documents the trained adapter produced by running my config |
+| model-provider-builder | Routes inference requests to the model I specify how to train |
+| boot-config-builder | Loads the adapter I specify at provider startup |
+| benchmark-builder | Evaluates the model produced by running my training config |
+
+## Related Artifacts
+
+| Artifact | Relationship | Score |
+|----------|-------------|-------|
+| [[bld_collaboration_model_card]] | sibling | 0.54 |
+| [[bld_collaboration_model_provider]] | sibling | 0.50 |
+| [[bld_collaboration_boot_config]] | sibling | 0.40 |
+| [[bld_architecture_finetune_config]] | upstream | 0.37 |
+| [[bld_collaboration_agent]] | sibling | 0.36 |
+| [[finetune-config-builder]] | upstream | 0.35 |
+| [[bld_collaboration_builder]] | sibling | 0.34 |
+| [[p03_sp_finetune_config_builder]] | upstream | 0.33 |
+| [[model-card-builder]] | upstream | 0.33 |
+| [[bld_collaboration_context_window_config]] | sibling | 0.33 |

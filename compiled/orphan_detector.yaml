@@ -1,0 +1,77 @@
+id: dash_orphan_detector
+kind: dashboard
+title: Orphan Detector
+version: 2.0.0
+quality: 6.9
+density_score: 0.99
+updated: '2026-04-22'
+related:
+- dash_cross_ref_health
+- dash_kind_census
+- dash_pillar_health
+- home
+- dash_quality_heatmap
+- bld_instruction_repo_map
+- bld_instruction_kind
+- bld_schema_kind
+- p06_kind_cex_artifact_type
+- bld_architecture_kind
+true_orphans_0_inlinks_0_outlinks: 'TABLE kind, pillar
+
+  FROM ""
+
+  WHERE kind AND length(file.inlinks) = 0 AND length(file.outlinks) = 0
+
+  SORT file.mtime DESC
+
+  LIMIT 30'
+hub_nodes_most_connected: 'TABLE length(file.inlinks) as "In", length(file.outlinks) as "Out", kind
+
+  FROM ""
+
+  WHERE kind
+
+  SORT length(file.inlinks) DESC
+
+  LIMIT 15'
+fresh_orphans_modified_last_7_days_0_inlinks: 'TABLE kind, file.mtime as "Modified"
+
+  FROM ""
+
+  WHERE kind AND length(file.inlinks) = 0 AND file.mtime >= date(today) - dur(7 days)
+
+  SORT file.mtime DESC
+
+  LIMIT 20'
+missing_frontmatter_kind: 'TABLE file.folder as "Folder"
+
+  FROM ""
+
+  WHERE !kind AND !contains(file.name, "README") AND !contains(file.name, "HOME") AND !contains(file.folder, ".obsidian")
+
+  SORT file.folder ASC
+
+  LIMIT 20'
+related_artifacts: '| Artifact | Relationship | Score |
+
+  |----------|-------------|-------|
+
+  | [[dash_cross_ref_health]] | sibling | 0.63 |
+
+  | [[dash_kind_census]] | sibling | 0.38 |
+
+  | [[dash_pillar_health]] | sibling | 0.35 |
+
+  | [[home]] | sibling | 0.35 |
+
+  | [[dash_quality_heatmap]] | sibling | 0.33 |
+
+  | [[bld_instruction_repo_map]] | related | 0.18 |
+
+  | [[bld_instruction_kind]] | related | 0.18 |
+
+  | [[bld_schema_kind]] | related | 0.18 |
+
+  | [[p06_kind_cex_artifact_type]] | related | 0.16 |
+
+  | [[bld_architecture_kind]] | related | 0.16 |'

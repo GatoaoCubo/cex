@@ -1,0 +1,78 @@
+pillar: P06
+name: Schema
+description: Validation CONTRACTS
+frontmatter_cex:
+  related:
+    type: list[string]
+    required: recommended
+    description: "Artifact IDs of related artifacts (upstream, downstream, sibling, alternative)"
+    format: "[p{XX}_{kind}_{slug}, ...]"
+    max: 15
+    min: 0
+    validator: S_RELATED
+    note: "Auto-populated by cex_wikilink.py, manually curated by builders"
+kinds:
+  input_schema:
+    description: Input contract
+    boundary: Input contract defining required data. NOT a validation_schema (output) nor type_def (abstract definition).
+    layer: spec
+    core: true
+    machine_format: json
+    naming: p06_is_{{scope}}.yaml
+    constraints:
+      max_bytes: 3072
+    llm_function: CONSTRAIN
+  type_def:
+    description: Custom type definition
+    boundary: Custom type definition in the system. NOT an input_schema (input contract) nor interface (bilateral contract).
+    layer: spec
+    core: true
+    machine_format: yaml
+    naming: p06_td_{{type}}.yaml
+    constraints:
+      max_bytes: 3072
+    llm_function: GOVERN
+  validator:
+    description: Validation rule (pre-commit, quality gate)
+    boundary: Technical pass/fail validation rule. NOT a quality_gate (P11, numeric score) nor scoring_rubric (P07, criteria).
+    layer: governance
+    core: true
+    machine_format: yaml
+    naming: p06_val_{{rule}}.yaml
+    constraints:
+      max_bytes: 3072
+    llm_function: GOVERN
+  interface:
+    description: Inter-agent integration contract
+    boundary: Bilateral integration contract between agents. NOT an input_schema (unilateral) nor signal (P12, simple event).
+    layer: spec
+    core: false
+    machine_format: json
+    naming: p06_iface_{{contract}}.yaml
+    constraints:
+      max_bytes: 3072
+    llm_function: CONSTRAIN
+  validation_schema:
+    description: Post-generation validation contract (system applies, LLM does not see)
+    boundary: Formal contract applied by the SYSTEM after generation. NOT a response_format P05 (injected in prompt, LLM sees).
+    layer: spec
+    core: false
+    machine_format: json
+    naming: p06_vs_{{scope}}.yaml
+    constraints:
+      max_bytes: 3072
+    llm_function: GOVERN
+  enum_def:
+    description: Reusable enumeration
+    boundary: Finite list. NOT a type_def.
+    layer: runtime
+    core: true
+    machine_format: yaml
+    naming: p06_enum.md
+    constraints:
+      max_bytes: 1024
+    frontmatter_required:
+    - id
+    - name
+    - values
+    llm_function: CONSTRAIN

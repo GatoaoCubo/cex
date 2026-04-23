@@ -1,0 +1,135 @@
+---
+kind: knowledge_card
+id: bld_knowledge_card_experiment_config
+pillar: P01
+llm_function: INJECT
+purpose: Domain knowledge for experiment_config production -- A/B test and prompt experiment specification
+sources: "Kohavi et al. 'Trustworthy Online Controlled Experiments', Google ExP platform, Optimizely Stats Engine, Evan Miller sample size calculator"
+quality: 9.2
+title: "Knowledge Card Experiment Config"
+version: "1.0.0"
+author: n03_builder
+tags: [experiment_config, builder, knowledge_card, ab-test, P01]
+tldr: "Domain knowledge for experiment_config: controlled experiments, variant design, metric selection, statistical rigor, and LLM prompt A/B testing."
+domain: "experiment config construction"
+created: "2026-04-13"
+updated: "2026-04-13"
+density_score: 0.90
+related:
+  - p03_sp_experiment_config_builder
+  - experiment-config-builder
+  - p10_lr_experiment_config_builder
+  - bld_instruction_experiment_config
+  - p01_kc_experiment_config
+  - p11_qg_experiment_config
+  - bld_collaboration_experiment_config
+  - bld_examples_experiment_config
+  - bld_architecture_experiment_config
+  - bld_config_experiment_config
+---
+
+# Domain Knowledge: experiment_config
+## Executive Summary
+Experiment configs define the complete specification for a controlled trial (A/B test) --
+variant parameters, traffic allocation, success metrics, statistical thresholds, and lifecycle
+state. Following the controlled experiment paradigm, one variant is always the control
+(unchanged baseline); all others are treatments. The experiment concludes when it reaches
+statistical significance AND minimum runtime. Experiment configs are temporary by definition;
+promoted winners become feature_flag (permanent toggle) or env_config (new variable).
+
+## Spec Table
+| Property | Value |
+|----------|-------|
+| Pillar | P09 (config) |
+| llm_function | GOVERN |
+| Frontmatter fields | 18+ |
+| Quality gates | 10 HARD + 12 SOFT |
+| Traffic split | Must sum to 100; equal split preferred |
+| Variant structure | control (baseline) + 1+ treatments |
+| Statistical default | alpha=0.05, 80pct power |
+
+## Patterns
+### Variant Type System
+| Type | Role | Notes |
+|------|------|-------|
+| control | Baseline; no changes | Always first in variants list |
+| treatment | Modified version being tested | Describe exactly what changed |
+
+### Metric Taxonomy
+| Category | Role | Examples |
+|----------|------|---------|
+| primary | Single KPI determining winner | task_completion_rate, response_quality_score |
+| guardrail | Must not regress; pauses experiment if breached | p99_latency_ms, error_rate, cost_per_request |
+| secondary | Context only; not decision-making | session_length, retry_count |
+
+### Statistical Parameters
+| Parameter | Formula/Default | When |
+|-----------|----------------|------|
+| significance_threshold | alpha=0.05 (default) | Pre-register before launch |
+| min_detectable_effect | business-driven minimum | Pre-register before launch |
+| sample_size_target | n = f(alpha, power, MDE, baseline) | Calculate before launch |
+| duration_days | max(7, time_to_reach_sample_target) | Minimum 7 days for novelty effect |
+
+### Experiment Lifecycle
+| Status | Meaning | Next action |
+|--------|---------|-------------|
+| draft | Spec complete; not yet launched | Validate and launch |
+| running | Traffic flowing; collecting data | Monitor guardrails daily |
+| paused | Guardrail breach or operational issue | Investigate and resume or abort |
+| concluded | Decision made; winner documented | Promote winner or document learnings |
+
+## Prompt Experiment Specifics
+LLM prompt A/B tests have unique considerations vs UI experiments:
+- Variance is higher: LLM outputs are stochastic; same prompt produces different outputs
+- Evaluation is harder: primary metrics often require human or LLM-as-judge scoring
+- Novelty effect: users behave differently with new phrasing before adapting (min 7 days)
+- Cost guardrail: treatments with longer prompts may cost more per request
+
+Common primary metrics for prompt experiments:
+| Metric | Type | Notes |
+|--------|------|-------|
+| task_completion_rate | binary | Did the user get what they needed? |
+| response_quality_score | 1-5 scale | LLM-as-judge or human evaluation |
+| user_satisfaction | thumbs up/down | Direct feedback signal |
+| review_acceptance_rate | binary | User accepted/applied the suggestion |
+
+## Anti-Patterns
+| Anti-Pattern | Why it fails |
+|-------------|-------------|
+| No pre-registered primary metric | Enables p-hacking (choosing winning metric post-hoc) |
+| Concluding before minimum runtime | Novelty effect inflates early treatment performance |
+| Traffic split not summing to 100 | Undefined traffic allocation; routing bugs |
+| No guardrail metrics | Wins primary while degrading latency or error rate |
+| Multiple primary metrics | Creates winner selection ambiguity; invalidates stats |
+| Underpowered experiment | Small real effects missed; ship null results as "no winner" |
+
+## Application
+1. Write falsifiable hypothesis before designing variants
+2. Define primary_metric and guardrail_metrics before launch
+3. Calculate sample_size_target from MDE + significance threshold
+4. Set duration_days >= 7; cap at reasonable maximum (e.g., 28 days)
+5. Verify traffic_split sums to 100; use equal splits unless justified
+6. Monitor guardrails daily during running status
+7. Conclude only after: p < significance_threshold AND runtime >= min(7 days, duration_days)
+8. Document winning_variant and learnings; update lifecycle to concluded
+
+## References
+- Kohavi et al. "Trustworthy Online Controlled Experiments" (Cambridge, 2020)
+- Google ExP platform: exp-platform.com
+- Evan Miller sample size calculator: evanmiller.org/ab-testing/sample-size.html
+- Optimizely Stats Engine: optimizely.com/optimization-glossary/stats-engine/
+
+## Related Artifacts
+
+| Artifact | Relationship | Score |
+|----------|-------------|-------|
+| [[p03_sp_experiment_config_builder]] | downstream | 0.55 |
+| [[experiment-config-builder]] | downstream | 0.47 |
+| [[p10_lr_experiment_config_builder]] | downstream | 0.47 |
+| [[bld_instruction_experiment_config]] | downstream | 0.44 |
+| [[p01_kc_experiment_config]] | sibling | 0.40 |
+| [[p11_qg_experiment_config]] | downstream | 0.39 |
+| [[bld_collaboration_experiment_config]] | downstream | 0.39 |
+| [[bld_examples_experiment_config]] | downstream | 0.39 |
+| [[bld_architecture_experiment_config]] | downstream | 0.36 |
+| [[bld_config_experiment_config]] | downstream | 0.35 |

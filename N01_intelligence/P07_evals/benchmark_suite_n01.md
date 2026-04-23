@@ -1,0 +1,137 @@
+---
+id: benchmark_suite_n01
+kind: benchmark_suite
+pillar: P07
+nucleus: n01
+title: "N01 Research Intelligence Benchmark Suite"
+version: 1.0.0
+created: 2026-04-17
+author: n01_intelligence
+domain: research-intelligence
+quality: 8.8
+tags: [benchmark_suite, research_benchmarks, n01, analytical_envy, ground_truth, performance]
+tldr: "Benchmark suite for N01 research capability: 5 benchmark categories with 20 test cases each, covering competitive analysis accuracy, source retrieval quality, synthesis depth, bias detection, and time-to-insight."
+density_score: 0.91
+updated: "2026-04-17"
+related:
+  - p02_card_intelligence
+  - bld_collaboration_benchmark
+  - n01_agent_intelligence
+  - benchmark-builder
+  - n01_dr_intelligence
+  - p07_eval_research_outputs
+  - p03_sp_intelligence_nucleus
+  - bld_architecture_benchmark
+  - n01_atom_26_evaluation_taxonomy
+  - p07_benchmark_api_latency
+---
+
+<!-- 8F: F1 constrain=P07/benchmark_suite F2 become=benchmark-suite-builder F3 inject=eval_framework_n01+llm_judge_n01+scoring_rubric_research+benchmark_research_quality F4 reason=Analytical Envy is not self-congratulatory -- N01 must benchmark its own performance against ground truth and competing approaches F5 call=cex_compile F6 produce=benchmark_suite_n01.md F7 govern=frontmatter+ascii+tables F8 collaborate=N01_intelligence/P07_evals/ -->
+
+## Purpose
+
+N01 claims Analytical Envy -- this suite proves it.
+Five benchmark categories test whether N01 research outperforms:
+1. Naive LLM research (no structured pipeline)
+2. Web search + manual synthesis (baseline)
+3. Commercial intelligence tools (industry standard)
+
+## Benchmark Categories
+
+### B1: Competitive Analysis Accuracy
+
+| Test | Measure | Ground Truth |
+|------|---------|-------------|
+| Pricing accuracy | exact price match vs. verified pricing | official pricing page snapshot |
+| Feature comparison | feature matrix accuracy | product documentation |
+| Market share | estimated vs. analyst report | analyst consensus |
+| Headcount | estimate vs. LinkedIn actual | LinkedIn verified count |
+| Funding total | vs. Crunchbase | Crunchbase verified |
+
+Target: > 85% accuracy on verifiable facts.
+Metric: precision@5 (top 5 claims verified).
+
+### B2: Source Retrieval Quality
+
+| Test | Measure | Method |
+|------|---------|--------|
+| Recall@10 | % relevant sources in top 10 | human-labeled relevance |
+| MRR (Mean Reciprocal Rank) | first relevant result position | TREC eval standard |
+| Freshness | % sources < 30 days for current-events queries | date verification |
+| Triangulation rate | % claims with >= 3 sources | automated count |
+
+Target: Recall@10 > 0.80, MRR > 0.75.
+
+### B3: Synthesis Depth
+
+| Test | Measure | Comparator |
+|------|---------|-----------|
+| Analytical depth (D2 score) | eval_framework D2 | naive LLM baseline |
+| Novel insight rate | % insights not in any single source | human judgment |
+| Causal chain present | mechanistic explanation vs. description | rubric score |
+
+Target: D2 score > 2 points above naive LLM baseline.
+
+### B4: Bias Detection Accuracy
+
+| Test | Measure | Method |
+|------|---------|--------|
+| True positive bias detection | correctly identified biases | human-annotated bias corpus |
+| False positive rate | non-biased flagged as biased | human-annotated clean corpus |
+| Bias type precision | correct bias classification | ground truth labels |
+
+Target: bias detection precision > 0.80, recall > 0.75.
+
+### B5: Time-to-Insight
+
+| Test | Measure | Baseline |
+|------|---------|---------|
+| Competitive brief | time for 5-competitor analysis | human analyst: 4 hours |
+| Market sizing | time for TAM/SAM/SOM estimate | human analyst: 2 hours |
+| Literature review | time for 20-paper synthesis | human analyst: 3 hours |
+
+Target: N01 produces equivalent output in < 15 min for each task.
+
+## Benchmark Dataset
+
+| Category | Test Cases | Labeled By | Update Frequency |
+|----------|-----------|-----------|-----------------|
+| B1 Competitive | 20 companies | N07 + N01 cross-validated | quarterly |
+| B2 Retrieval | 50 queries | human relevance judges | semi-annually |
+| B3 Synthesis | 15 research tasks | N07 with rubric | quarterly |
+| B4 Bias | 40 annotated reports | N01 self-annotated + N07 review | semi-annually |
+| B5 Speed | 10 tasks | wall-clock + output quality | monthly |
+
+## Performance Scorecard
+
+| Category | Current | Target | vs. Naive LLM | vs. Web+Manual |
+|----------|---------|--------|---------------|----------------|
+| B1 Accuracy | TBD | > 85% | +20-30pp | parity |
+| B2 Recall@10 | TBD | > 0.80 | +0.25-0.35 | parity |
+| B3 Depth (D2) | TBD | > 7.5 | +2.0 | +0.5 |
+| B4 Bias precision | TBD | > 0.80 | +0.40 | N/A |
+| B5 Speed (min) | TBD | < 15 | 10x faster | 10x faster |
+
+_[TBD values populated after first benchmark run via cex_system_test.py]_
+
+## Benchmark Run Command
+
+```bash
+python _tools/cex_system_test.py --scope n01 --benchmark-suite benchmark_suite_n01
+```
+
+
+## Related Artifacts
+
+| Artifact | Relationship | Score |
+|----------|-------------|-------|
+| [[p02_card_intelligence]] | upstream | 0.24 |
+| [[bld_collaboration_benchmark]] | downstream | 0.22 |
+| [[n01_agent_intelligence]] | upstream | 0.21 |
+| [[benchmark-builder]] | related | 0.21 |
+| [[n01_dr_intelligence]] | downstream | 0.21 |
+| [[p07_eval_research_outputs]] | related | 0.21 |
+| [[p03_sp_intelligence_nucleus]] | upstream | 0.20 |
+| [[bld_architecture_benchmark]] | downstream | 0.20 |
+| [[n01_atom_26_evaluation_taxonomy]] | upstream | 0.20 |
+| [[p07_benchmark_api_latency]] | related | 0.19 |

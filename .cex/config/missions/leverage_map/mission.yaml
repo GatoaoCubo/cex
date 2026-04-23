@@ -1,0 +1,57 @@
+mission: LEVERAGE_MAP_V2
+version: 2
+description: |
+  Each nucleus verifies ONE newly-wired leverage tool, cross-references with
+  cex_retriever, and reports: Verification, New Wired Tools, Still Missing,
+  Next Iteration. Runtime-agnostic -- swap the runtime, same handoffs.
+
+deliverable_kind: verification_report
+output_root: _reports/leverage_map
+handoffs_root: .cex/runtime/handoffs
+handoff_pattern: "{mission}_{nucleus}.md"
+
+nuclei:
+  - n01
+  - n02
+  - n03
+  - n04
+  - n05
+  - n06
+
+tool_under_verification:
+  n01: _tools/cex_web_fetch.py
+  n02: _tools/cex_social_publisher.py
+  n03: _tools/cex_builder_linter.py
+  n04: _tools/cex_reranker.py
+  n05: _tools/cex_coverage.py
+  n06: _tools/cex_cohort_analyzer.py
+
+required_sections:
+  - Verification
+  - New Wired Tools (since V1)
+  - Still Missing
+  - Next Iteration
+
+quality_floor: 8.0
+min_bytes: 800
+min_tool_calls: 4
+
+runtime_selection:
+  default: ollama-llama
+  supported:
+    - claude
+    - claude-haiku
+    - gemini
+    - codex
+    - ollama-llama
+    - ollama-qwen-coder
+    - ollama-hybrid
+
+commit_policy:
+  auto_commit: true
+  message_template: "[{nucleus_upper}] {mission}: report via {runtime}"
+
+consolidation:
+  owner: n07
+  gate: all_nuclei_complete
+  next_mission: LEVERAGE_MAP_V3

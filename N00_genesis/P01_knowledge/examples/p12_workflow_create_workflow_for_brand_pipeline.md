@@ -1,0 +1,127 @@
+---
+id: p12_wf_brand_pipeline
+kind: workflow
+pillar: P12
+version: "1.0.0"
+created: "2026-04-02"
+updated: "2026-04-02"
+author: "workflow-builder"
+title: "Brand Pipeline Workflow"
+steps_count: 5
+execution: mixed
+agent_groups: [shaka, edison, maya, n02_marketing, stella]
+timeout: 7200
+retry_policy: per_step
+depends_on: []
+signals: [complete, error]
+spawn_configs: [p12_spawn_shaka_brand_discovery, p12_spawn_edison_identity, p12_spawn_maya_assets, p12_spawn_n02_content, p12_spawn_stella_deploy]
+domain: "brand"
+quality: 9.0
+tags: [workflow, brand, pipeline, multi-agent]
+tldr: "5-step mixed workflow: shaka discovers brand, edison builds identity, maya+n02 generate assets+content in parallel, stella consolidates and deploys"
+density_score: 0.91
+related:
+  - p12_wf_marketing_pipeline
+  - p12_wf_engineering_pipeline
+  - p03_sp_brand_nucleus
+  - spec_n06_brand_verticalization
+  - p12_wf_commercial
+  - p02_agent_brand_nucleus
+  - p02_agent_commercial_nucleus
+  - p12_wf_content_factory_v1
+  - p12_wf_builder_8f_pipeline
+  - p08_ac_brand_nucleus
+---
+## Purpose
+Orchestrates end-to-end brand pipeline from discovery through deployment. Wave 1: shaka conducts brand discovery and market research. Wave 2: edison builds core brand identity artifacts from discovery outputs. Wave 3: maya generates visual assets and n02_marketing produces copy in parallel (both depend on Wave 2, independent of each other). Wave 4: stella consolidates all brand outputs, validates consistency, and deploys.
+
+## Steps
+
+### Step 1: Brand Discovery [shaka]
+- **Agent**: shaka (sonnet research specialist)
+- **Action**: Research target market, competitive landscape, and brand positioning opportunities
+- **Input**: brand brief from handoff file, discovery questionnaire responses
+- **Output**: brand discovery report with 5–7 knowledge cards committed to `records/brand/`
+- **Signal**: shaka_complete
+- **Depends on**: none (Wave 1)
+- **On failure**: retry (max 2), then abort
+- **Timeout**: 1800s
+
+### Step 2: Identity Creation [edison]
+- **Agent**: edison (opus builder)
+- **Action**: Build core brand identity artifacts — brand_config.yaml, archetype selection, voice guide
+- **Input**: discovery report and knowledge cards from Step 1
+- **Output**: `brand_config.yaml`, `brand_book.md`, `voice_guide.md` committed to `records/brand/`
+- **Signal**: edison_complete
+- **Depends on**: Step 1 (Wave 2)
+- **On failure**: retry (max 2), then abort
+- **Timeout**: 1800s
+
+### Step 3: Visual Asset Generation [maya]
+- **Agent**: maya (asset specialist)
+- **Action**: Generate visual assets — logo concepts, color palette, typography system, design tokens
+- **Input**: `brand_config.yaml` and `brand_book.md` from Step 2
+- **Output**: visual asset manifest and design tokens committed to `records/brand/assets/`
+- **Signal**: maya_complete
+- **Depends on**: Step 2 (Wave 3 — parallel with Step 4)
+- **On failure**: skip, flag for manual review
+- **Timeout**: 1800s
+
+### Step 4: Content Creation [n02_marketing]
+- **Agent**: n02_marketing (sonnet copywriter)
+- **Action**: Produce brand copy — tagline, hero text, CTAs, email sequence starters
+- **Input**: `brand_config.yaml` and `voice_guide.md` from Step 2
+- **Output**: `copy_kit.md` with tagline, headlines, and CTAs committed to `records/brand/copy/`
+- **Signal**: n02_complete
+- **Depends on**: Step 2 (Wave 3 — parallel with Step 3)
+- **On failure**: retry (max 1), then skip
+- **Timeout**: 1200s
+
+### Step 5: Deployment Consolidation [stella]
+- **Agent**: stella (orchestrator)
+- **Action**: Review all brand outputs, validate brand_config consistency, archive handoffs, push release tag
+- **Input**: maya_complete + n02_complete signals, git log, all brand artifacts
+- **Output**: consolidated brand release commit with version tag in `records/brand/`
+- **Signal**: workflow_complete
+- **Depends on**: Steps 3, 4 (Wave 4)
+- **On failure**: abort, emit workflow_error
+- **Timeout**: 600s
+
+## Dependencies
+- Brand brief or completed discovery questionnaire must exist before dispatch
+- spawn_configs for all 5 agents must be valid: `p12_spawn_shaka_brand_discovery`, `p12_spawn_edison_identity`, `p12_spawn_maya_assets`, `p12_spawn_n02_content`, `p12_spawn_stella_deploy`
+- `brand_config.yaml` schema must be present in `_tools/` for Step 2 validation
+- `records/brand/` directory must exist and be writable
+
+## Signals
+- **shaka_complete**: emitted after discovery report and knowledge cards are committed (Step 1 exit)
+- **edison_complete**: emitted after brand_config.yaml, brand_book.md, and voice_guide.md are committed (Step 2 exit)
+- **maya_complete**: emitted after visual asset manifest is committed (Step 3 exit)
+- **n02_complete**: emitted after copy_kit.md is committed (Step 4 exit)
+- **workflow_complete**: emitted by stella after release tag is pushed; includes aggregate quality score
+- **workflow_error**: emitted if Step 5 aborts or if two or more steps fail; triggers N07 escalation
+
+## Rollback
+- Steps 1–4: delete committed artifacts from `records/brand/` and revert commits
+- Step 5: delete release tag (`git tag -d`), revert consolidation commit
+- Full rollback order: 5 → 4+3 (parallel revert) → 2 → 1
+
+## References
+- signal-builder: naming conventions and emission protocol for all signals listed above
+- spawn-config-builder: agent launch parameters referenced in `spawn_configs`
+- `brand_config.yaml`: schema for brand identity extraction (Step 2 primary output)
+
+## Related Artifacts
+
+| Artifact | Relationship | Score |
+|----------|-------------|-------|
+| [[p12_wf_marketing_pipeline]] | sibling | 0.60 |
+| [[p12_wf_engineering_pipeline]] | sibling | 0.46 |
+| [[p03_sp_brand_nucleus]] | upstream | 0.45 |
+| [[spec_n06_brand_verticalization]] | upstream | 0.41 |
+| [[p12_wf_commercial]] | sibling | 0.40 |
+| [[p02_agent_brand_nucleus]] | upstream | 0.40 |
+| [[p02_agent_commercial_nucleus]] | upstream | 0.40 |
+| [[p12_wf_content_factory_v1]] | sibling | 0.39 |
+| [[p12_wf_builder_8f_pipeline]] | sibling | 0.38 |
+| [[p08_ac_brand_nucleus]] | upstream | 0.38 |

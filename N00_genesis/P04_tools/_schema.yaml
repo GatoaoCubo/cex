@@ -1,0 +1,332 @@
+pillar: P04
+name: Tools
+description: What the agent USES
+frontmatter_cex:
+  related:
+    type: list[string]
+    required: recommended
+    description: "Artifact IDs of related artifacts (upstream, downstream, sibling, alternative)"
+    format: "[p{XX}_{kind}_{slug}, ...]"
+    max: 15
+    min: 0
+    validator: S_RELATED
+    note: "Auto-populated by cex_wikilink.py, manually curated by builders"
+kinds:
+  messaging_gateway:
+    description: Multi-platform messaging transport (Telegram/Discord/Slack/WhatsApp/Signal/Email) -- HERMES assimilation
+    boundary: Multi-platform message transport. NOT webhook (single-event inbound) nor api_client (outbound only) nor notifier (one-way broadcast).
+    layer: runtime
+    core: false
+    machine_format: yaml
+    naming: p04_mg_{{platform}}.yaml
+    constraints:
+      max_bytes: 4096
+    llm_function: CALL
+    upstream_source: NousResearch/hermes-agent gateway/
+  function_def:
+    description: LLM-callable function definition (JSON Schema tool)
+    boundary: JSON Schema for function that LLM can call via tool_use. NOT an mcp_server (full protocol) nor api_client (client implementation).
+    layer: runtime
+    core: true
+    machine_format: json
+    naming: p04_fn_{{name}}.md + .json
+    constraints:
+      max_bytes: 2048
+    frontmatter_required:
+    - id
+    - name
+    - description
+    - parameters
+    - returns
+    llm_function: CALL
+  mcp_server:
+    description: MCP server (tools + resources)
+    boundary: MCP server exposing tools and resources. NOT a connector (simple integration) nor client (API consumer).
+    layer: runtime
+    core: true
+    machine_format: json
+    naming: p04_mcp_{{server}}.md + .yaml
+    constraints:
+      max_bytes: 2048
+    frontmatter_required:
+    - id
+    - name
+    - transport
+    - tools_provided
+    - resources_provided
+    llm_function: CALL
+  code_executor:
+    description: Sandboxed code execution runtime (Docker, E2B, Jupyter)
+    boundary: Isolated environment that executes code. NOT a cli_tool (one-off shell command) nor daemon (persistent process).
+    layer: runtime
+    core: true
+    machine_format: yaml
+    naming: p04_exec_{{runtime}}.md + .yaml
+    constraints:
+      max_bytes: 2048
+    frontmatter_required:
+    - id
+    - name
+    - runtime
+    - sandbox_type
+    - languages
+    - timeout
+    llm_function: CALL
+  computer_use:
+    description: LLM-driven screen, keyboard, and mouse control (Anthropic, browser-use)
+    boundary: GUI interaction via automation. NOT a browser_tool (DOM) nor cli_tool (command line).
+    layer: runtime
+    core: false
+    machine_format: yaml
+    naming: p04_cu_{{target}}.md + .yaml
+    constraints:
+      max_bytes: 2048
+    frontmatter_required:
+    - id
+    - name
+    - target
+    - resolution
+    - actions_supported
+    llm_function: CALL
+  search_tool:
+    description: Web, semantic, or hybrid search (Tavily, Serper, Perplexity)
+    boundary: Searches and returns ranked results. NOT a retriever (local vector store) nor document_loader (ingests files).
+    layer: runtime
+    core: true
+    machine_format: yaml
+    naming: p04_search_{{provider}}.md + .yaml
+    constraints:
+      max_bytes: 2048
+    frontmatter_required:
+    - id
+    - name
+    - provider
+    - search_type
+    - max_results
+    llm_function: CALL
+  document_loader:
+    description: Ingests files and converts to chunks (PDF, HTML, CSV, etc)
+    boundary: Transforms raw file into chunked documents. NOT a retriever (searches over chunks) nor search_tool (external search).
+    layer: runtime
+    core: true
+    machine_format: yaml
+    naming: p04_loader_{{format}}.md + .yaml
+    constraints:
+      max_bytes: 2048
+    frontmatter_required:
+    - id
+    - name
+    - formats_supported
+    - chunk_strategy
+    - output_format
+    llm_function: INJECT
+  retriever:
+    description: Vector/keyword/hybrid search over local store (RAG core)
+    boundary: Search over embedding store or local index. NOT a search_tool (external web search) nor document_loader (ingests files).
+    layer: runtime
+    core: true
+    machine_format: yaml
+    naming: p04_retr_{{store}}.md + .yaml
+    constraints:
+      max_bytes: 2048
+    frontmatter_required:
+    - id
+    - name
+    - store_type
+    - embedding_model
+    - similarity_metric
+    - top_k
+    llm_function: INJECT
+  db_connector:
+    description: Structured data/database connector (SQL, GraphQL, REST-to-DB)
+    boundary: Access to structured data. NOT an api_client nor retriever.
+    layer: runtime
+    core: false
+    machine_format: json
+    naming: p04_db_{{source}}.md + .yaml
+    constraints:
+      max_bytes: 1024
+    llm_function: CALL
+  api_client:
+    description: Typed REST/GraphQL/gRPC API client
+    boundary: Typed unidirectional client. NOT a db_connector nor mcp_server.
+    layer: runtime
+    core: false
+    machine_format: json
+    naming: p04_api_{{service}}.md + .yaml
+    constraints:
+      max_bytes: 1024
+    llm_function: CALL
+  webhook:
+    description: HTTP event-driven endpoint (inbound/outbound)
+    boundary: Receives or sends events via HTTP. NOT an api_client (request-response) nor notifier (message delivery).
+    layer: runtime
+    core: false
+    machine_format: json
+    naming: p04_webhook_{{event}}.md + .json
+    constraints:
+      max_bytes: 1024
+    frontmatter_required:
+    - id
+    - name
+    - direction
+    - event_type
+    - payload_schema
+    llm_function: CALL
+  notifier:
+    description: Push notification delivery (email, SMS, Slack, Discord)
+    boundary: Sends notification to user/system. NOT a webhook (bidirectional event) nor api_client (full integration).
+    layer: runtime
+    core: false
+    machine_format: yaml
+    naming: p04_notify_{{channel}}.md + .yaml
+    constraints:
+      max_bytes: 1024
+    frontmatter_required:
+    - id
+    - name
+    - channel
+    - template
+    - priority
+    llm_function: CALL
+  vision_tool:
+    description: Image analysis, OCR, screenshot interpretation
+    boundary: Processes visual input and returns structured data. NOT a browser_tool (DOM interaction) nor computer_use (screen control).
+    layer: runtime
+    core: false
+    machine_format: yaml
+    naming: p04_vision_{{capability}}.md + .yaml
+    constraints:
+      max_bytes: 2048
+    frontmatter_required:
+    - id
+    - name
+    - input_types
+    - capabilities
+    - output_format
+    llm_function: CALL
+  audio_tool:
+    description: Speech-to-text, text-to-speech, audio analysis
+    boundary: Processes audio input/output. NOT a vision_tool (visual) nor notifier (message delivery).
+    layer: runtime
+    core: false
+    machine_format: yaml
+    naming: p04_audio_{{capability}}.md + .yaml
+    constraints:
+      max_bytes: 2048
+    frontmatter_required:
+    - id
+    - name
+    - direction
+    - models
+    - formats
+    - languages
+    llm_function: CALL
+  browser_tool:
+    description: 'Browser automation: DOM parsing, navigation, interaction, screenshot'
+    boundary: Interacts with web pages via DOM. NOT computer_use (generic screen) nor search_tool (search without navigation).
+    layer: runtime
+    core: true
+    machine_format: yaml
+    naming: p04_browser_{{target}}.md + .yaml
+    constraints:
+      max_bytes: 2048
+    frontmatter_required:
+    - id
+    - name
+    - engine
+    - actions
+    - selectors
+    - output_format
+    llm_function: CALL
+  cli_tool:
+    description: CLI tool
+    boundary: One-off command-line tool. NOT a skill (no phases) nor daemon (does not persist in background).
+    layer: runtime
+    core: false
+    machine_format: yaml
+    naming: p04_cli_{{tool}}.md
+    constraints:
+      max_bytes: 1024
+    llm_function: CALL
+  hook:
+    description: Pre/post processing hook
+    boundary: Executable code on pre/post event. NOT a lifecycle_rule (P11, declarative rule) nor daemon (persistent process).
+    layer: runtime
+    core: true
+    machine_format: yaml
+    naming: p04_hook_{{name}}.md
+    constraints:
+      max_bytes: 1024
+    frontmatter_required:
+    - id
+    - kind
+    - trigger_event
+    - script_path
+    llm_function: GOVERN
+  plugin:
+    description: Pluggable extension
+    boundary: Pluggable system extension. NOT a hook (specific event) nor skill (no structured phases).
+    layer: runtime
+    core: false
+    machine_format: yaml
+    naming: p04_plug_{{name}}.md + .yaml
+    constraints:
+      max_bytes: 2048
+    llm_function: CALL
+  daemon:
+    description: Background process
+    boundary: Persistent background process. NOT a hook (single event) nor cli_tool (one-off execution that terminates).
+    layer: runtime
+    core: false
+    machine_format: yaml
+    naming: p04_daemon_{{name}}.md + .yaml
+    constraints:
+      max_bytes: 1024
+    llm_function: GOVERN
+
+  multi_modal_config:
+    description: Input format, resolution, encoding, and routing rules for multi-modal LLM interactions
+    boundary: Modality config. NOT vision_tool (analise visual), audio_tool (processa audio), nor model_card (capabilities).
+    layer: spec
+    core: false
+    machine_format: yaml
+    naming: p04_mmc_{{capability}}.yaml
+    constraints:
+      max_bytes: 2048
+    frontmatter_required:
+    - id
+    - kind
+    - pillar
+    - supported_modalities
+    - image_max_resolution
+    - image_format
+    - preprocessing
+    - routing_model
+    - token_cost_estimate
+    llm_function: CONSTRAIN
+  hook_config:
+    description: Hook lifecycle configuration for builder execution
+    llm_function: GOVERN
+    boundary: hook_config = DECLARATION of which hooks; hook = IMPLEMENTATION of the hook
+    layer: content
+    core: false
+    machine_format: yaml
+    naming: p04_hook_config_{{topic}}.md + .yaml
+    constraints:
+      max_bytes: 4096
+      density_min: 0.8
+      quality_min: 7.0
+    frontmatter_required:
+    - id
+    - kind
+    - pillar
+    - title
+    - version
+    - created
+    - updated
+    - author
+    - domain
+    - quality
+    - tags
+    - tldr

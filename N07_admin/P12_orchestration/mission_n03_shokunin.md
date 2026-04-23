@@ -1,0 +1,119 @@
+---
+id: p12_mission_n03_shokunin
+kind: dag
+pillar: P12
+title: "Mission: N03 Shokunin Wave — The Craftsman Refines His Tools"
+version: 1.0.0
+created: 2026-03-31
+updated: 2026-03-31
+author: n07_orchestrator
+pipeline: meta_improvement
+domain: orchestration
+quality: 9.1
+tags: [mission, shokunin, n03, self-improvement, testing, refactoring, ci-cd]
+tldr: "Meta-mission: N03 applies its own software engineering knowledge to refine its own tools. pyproject.toml, 80+ tests, shared library (DRY), error hierarchy, CI/CD, type hints, lint, 8F pipeline refactoring."
+node_count: 23
+edge_count: 5
+estimated_duration: "6-8h"
+density_score: 1.0
+related:
+  - p12_mission_software_engineering_n03
+  - bld_sp_quality_gate_software_project
+  - p01_kc_n03_software_engineering
+  - bld_sp_instruction_software_project
+  - bld_sp_system_prompt_software_project
+  - p12_dr_software_project
+  - bld_sp_schema_software_project
+  - p01_kc_tdd_as_llm_skill
+  - p01_kc_ruff_uv
+  - p04_tool_software_project
+---
+
+# Mission: N03 Shokunin Wave (職人)
+
+## The Paradox
+
+N03 teaches 12 software engineering practices.
+N03 violates all 12 in its own code.
+The Shokunin Wave resolves this paradox.
+
+## The Gap
+
+```
+TODAY:  N03 builds perfect .md artifacts (avg 8.9)
+        N03's own Python code: 0 tests, 0 lint, 0 types, 0 CI
+        12,500 lines of untested, unlinted, untyped code
+
+AFTER:  N03's tools follow the same standards as its artifacts
+        80+ tests, 60% coverage, 0 lint errors, CI/CD
+        The builder's tools are as refined as what it builds
+```
+
+## Phase DAG
+
+```
+S1 (foundation)
+├── pyproject.toml
+├── cex_shared.py (DRY)
+├── cex_errors.py (hierarchy)
+└── refactor 3 core tools
+         │
+S2 (tests) ─────────────────┐
+├── conftest.py              │
+└── 10 test files (80+ tests)│
+         │                   │
+S3 (quality) ◄──────────────┘
+├── ruff lint + fix
+├── type hints (5 tools)
+└── error handling (specific types)
+         │
+S4 (ci/cd)
+├── .github/workflows/ci.yml
+└── .github/workflows/quality.yml
+         │
+S5 (meta)
+├── 8F runner refactor (13→5 responsibilities)
+├── structured logging (build_id)
+├── retry with backoff
+└── 3 KCs (shokunin, shared_lib, errors)
+```
+
+## Key Metrics
+
+| Metric | Before | After |
+|--------|--------|-------|
+| Tests | 0 | ≥80 |
+| Coverage | 0% | ≥40% |
+| Lint errors | Unknown | 0 |
+| Typed functions | 9/200 (4%) | 120/200 (60%) |
+| Duplicated code | 6x strip_fm, 6x builder_load | 1x each |
+| Error classes | 0 | 7 |
+| CI workflows | 0 | 2 |
+| 8F runner lines | 1386 | ≤1000 |
+| pyproject.toml | Missing | Complete |
+
+## Outputs
+- Python: pyproject.toml, cex_shared.py, cex_errors.py, 10 test files, conftest.py, 2 CI workflows, 3 refactored tools
+- CEX: 3 knowledge cards (shokunin, shared_lib, errors)
+
+## Status
+- [x] S1: Foundation — pyproject.toml + cex_shared.py (319 lines, 12 functions) + cex_errors.py (7 error classes)
+- [x] S2: Tests — conftest.py (6 fixtures) + 8 test files = 89 tests, 89/89 PASS in 4.0s
+- [x] S3: Quality — ruff lint 0 errors, cex_shared 84% coverage, cex_errors 100% coverage
+- [x] S4: CI/CD — .github/workflows/ci.yml (lint→test→compile→doctor) + quality.yml (score+compile)
+- [ ] S5: Meta (8F refactor + logging + 3 KCs) — deferred to next wave
+
+## Related Artifacts
+
+| Artifact | Relationship | Score |
+|----------|-------------|-------|
+| [[p12_mission_software_engineering_n03]] | sibling | 0.34 |
+| [[bld_sp_quality_gate_software_project]] | upstream | 0.32 |
+| [[p01_kc_n03_software_engineering]] | upstream | 0.31 |
+| [[bld_sp_instruction_software_project]] | upstream | 0.29 |
+| [[bld_sp_system_prompt_software_project]] | upstream | 0.27 |
+| [[p12_dr_software_project]] | related | 0.26 |
+| [[bld_sp_schema_software_project]] | upstream | 0.25 |
+| [[p01_kc_tdd_as_llm_skill]] | upstream | 0.23 |
+| [[p01_kc_ruff_uv]] | upstream | 0.22 |
+| [[p04_tool_software_project]] | upstream | 0.21 |

@@ -1,0 +1,53 @@
+{
+  "comment": "CEX root MCP config (BORIS_MERGE A6). Union of previous .mcp-n0X.json files. Per-nucleus overlays remain in .mcp-n0X.json and win when a boot wrapper points --mcp-config at them.",
+  "mcpServers": {
+    "github": {
+      "command": "cmd",
+      "args": ["/c", "npx", "-y", "@modelcontextprotocol/server-github"],
+      "env": { "GITHUB_TOKEN": "${GITHUB_TOKEN}" }
+    },
+    "fetch": {
+      "command": "uvx",
+      "args": ["mcp-server-fetch", "--ignore-robots-txt"]
+    },
+    "firecrawl": {
+      "command": "cmd",
+      "args": ["/c", "npx", "-y", "firecrawl-mcp"],
+      "env": { "FIRECRAWL_API_KEY": "${FIRECRAWL_API_KEY}" },
+      "disabled": true,
+      "_setup": "Optional. Set FIRECRAWL_API_KEY in .env and change disabled to false."
+    },
+    "markitdown": {
+      "command": "cmd",
+      "args": ["/c", "npx", "-y", "markitdown-mcp-npx"]
+    },
+    "notebooklm": {
+      "command": "cmd",
+      "args": ["/c", "npx", "-y", "notebooklm-mcp@latest"],
+      "disabled": true,
+      "_setup": "Optional. Requires Chrome CDP session. Run boot/chrome_cdp.ps1 first."
+    },
+    "postgres": {
+      "command": "cmd",
+      "args": ["/c", "npx", "-y", "@modelcontextprotocol/server-postgres"],
+      "disabled": true,
+      "_setup": "Optional. Pass connection string as last arg. Set disabled to false when ready."
+    },
+    "canva": {
+      "command": "cmd",
+      "args": ["/c", "npx", "-y", "@mcp_factory/canva-mcp-server"],
+      "env": {
+        "CANVA_CLIENT_ID": "${CANVA_CLIENT_ID}",
+        "CANVA_CLIENT_SECRET": "${CANVA_CLIENT_SECRET}"
+      },
+      "disabled": true,
+      "_setup": "Optional. Set CANVA_CLIENT_ID + CANVA_CLIENT_SECRET in .env. Change disabled to false."
+    },
+    "playwright": {
+      "command": "cmd",
+      "args": ["/c", "npx", "-y", "@playwright/mcp", "--cdp-endpoint", "http://localhost:9222"],
+      "disabled": true,
+      "_setup": "Run boot/chrome_cdp.ps1 first, then set disabled to false."
+    }
+  }
+}

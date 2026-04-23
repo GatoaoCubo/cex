@@ -1,0 +1,158 @@
+---
+id: sch_enum_def_n06
+kind: enum_def
+pillar: P06
+nucleus: n06
+title: Revenue State Enum
+version: 1.0
+quality: 9.0
+tags: [schema, enum, pricing, funnel, revenue]
+density_score: 1.0
+updated: "2026-04-17"
+related:
+  - bld_schema_usage_report
+  - bld_schema_bugloop
+  - bld_schema_reranker_config
+  - bld_schema_quickstart_guide
+  - bld_schema_dataset_card
+  - bld_schema_pitch_deck
+  - bld_schema_action_paradigm
+  - bld_schema_benchmark_suite
+  - bld_schema_sandbox_config
+  - bld_schema_customer_segment
+---
+
+<!-- 8F: F1 constrain=P06/enum_def F2 become=enum-def-builder F3 inject=nucleus_def_n06.md,n06-commercial.md,bld_manifest_enum_def.md,kc_enum_def.md,P06_schema/_schema.yaml F4 reason=closed_set_enum_for_revenue_states_and_offer_control F5 call=apply_patch;python _tools/cex_compile.py F6 produce=7186_bytes F7 govern=frontmatter_sections_ascii_density_review F8 collaborate=N06_commercial/P06_schema/sch_enum_def_n06.md -->
+
+# Revenue State Enum
+
+## Purpose
+
+| Field | Value |
+|-------|-------|
+| Goal | Define the finite revenue states that N06 can reuse across pricing, funnel, offer, and billing artifacts |
+| Business Lens | Strategic Greed favors states that expose where money is captured, delayed, expanded, or lost |
+| Primary Use | Standardize monetization status labels so reports, validators, and configs make the same commercial decision |
+| Failure Prevented | Revenue leakage caused by vague states such as "active" or "pending" that hide monetization risk |
+| Reuse Surface | pricing pages, checkout events, order flows, upsell triggers, renewal audits |
+| Rule | Each state must be mutually exclusive and monetization-relevant |
+
+## Schema
+
+| Property | Type | Required | Constraint | Commercial Intent |
+|----------|------|----------|------------|-------------------|
+| enum_name | string | yes | fixed as `revenue_state` | Stable reference across schemas |
+| namespace | string | yes | `n06.commercial` | Keeps ownership obvious |
+| format | string | yes | snake_case | Reduces parser ambiguity |
+| default | string | yes | one of listed values | Safe default for new records |
+| values | array | yes | 8 entries | Closed set, no drift |
+| descriptions | map | yes | one description per value | Makes state changes auditable |
+| transition_policy | table | yes | allowed transitions only | Blocks accidental revenue downgrades |
+| deprecated | array | no | empty for v1 | Holds future retirements |
+
+## Values
+
+| Value | Meaning | Monetization Trigger | Commercial Decision |
+|-------|---------|----------------------|---------------------|
+| lead_captured | Contact entered funnel but has not paid | opt-in, lead form, quiz | push qualification fast before interest cools |
+| offer_viewed | Prospect saw a monetized offer | landing page render, checkout open | measure pricing-page pull and CTA clarity |
+| checkout_started | Prospect began purchase flow | cart create, checkout init | launch rescue sequence if checkout stalls |
+| payment_authorized | Payment approved but not yet settled | card auth, pix confirmation | reserve access while watching settlement risk |
+| revenue_realized | Cash recognized and access active | settlement complete | unlock fulfillment and start expansion path |
+| expansion_eligible | Customer has paid and fits upsell profile | feature threshold, usage ceiling | prioritize premium conversion before churn window |
+| renewal_at_risk | Paid customer is near churn or failed renewal | dunning event, low usage | defend MRR with save offer or concierge action |
+| revenue_lost | Expected revenue failed or churned | refund, cancel, failed recovery | quantify leakage and feed win-back tactics |
+
+## Transition Map
+
+| From | To | Allowed | Reason |
+|------|----|---------|--------|
+| lead_captured | offer_viewed | yes | Contact consumed monetized surface |
+| offer_viewed | checkout_started | yes | Intent moved from browse to buy |
+| checkout_started | payment_authorized | yes | Buyer committed a payment method |
+| payment_authorized | revenue_realized | yes | Settlement converted intent into cash |
+| revenue_realized | expansion_eligible | yes | Existing customer is now harvestable |
+| revenue_realized | renewal_at_risk | yes | Payment exists but retention weakens |
+| expansion_eligible | revenue_realized | yes | Upsell accepted and recognized |
+| expansion_eligible | renewal_at_risk | yes | Upsell missed and account cooled |
+| renewal_at_risk | revenue_realized | yes | Recovery or save offer worked |
+| renewal_at_risk | revenue_lost | yes | Dunning or save path failed |
+| checkout_started | revenue_lost | yes | Abandonment after pricing exposure |
+| payment_authorized | revenue_lost | yes | Chargeback, auth expiry, or manual void |
+| any_state | lead_captured | no | Do not erase monetization history |
+| revenue_lost | expansion_eligible | no | Must re-enter through new payment path |
+
+## Rationale
+
+| Design Choice | Why It Exists | Strategic Greed Impact |
+|---------------|---------------|------------------------|
+| Only 8 states | Enough resolution without reporting clutter | Keeps dashboards decisive and action-heavy |
+| Payment split between authorized and realized | Cash timing matters | Prevents fake revenue inflation |
+| Separate expansion state | Upsell is a distinct monetization moment | Makes premium harvesting visible |
+| Separate renewal risk state | Retention failure is a profit leak | Forces defense before churn posts |
+| Explicit loss state | Lost cash must be named | Leakage becomes accountable, not hidden |
+| No generic active state | Too broad for pricing decisions | Eliminates soft labels that excuse weak monetization |
+
+## Example
+
+| Scenario | Event Sequence | Final State | Why It Matters |
+|----------|----------------|-------------|----------------|
+| New lead downloads pricing guide | lead form -> sales page view | offer_viewed | lead is warm and pricing-aware |
+| Buyer starts checkout and pays by card | checkout -> auth -> settlement | revenue_realized | fulfillment and onboarding can begin |
+| Existing customer hits usage ceiling | active use -> quota alert -> upgrade prompt | expansion_eligible | highest leverage moment for ARPU lift |
+| Subscription card fails twice | renewal attempt -> dunning -> no recovery | revenue_lost | revenue defense failed and needs win-back |
+
+```yaml
+enum_name: revenue_state
+namespace: n06.commercial
+default: lead_captured
+values:
+  - lead_captured
+  - offer_viewed
+  - checkout_started
+  - payment_authorized
+  - revenue_realized
+  - expansion_eligible
+  - renewal_at_risk
+  - revenue_lost
+```
+
+## Integration Notes
+
+| Consumer | Field | Usage |
+|----------|-------|-------|
+| validator | `allowed_state_transition` | blocks invalid funnel jumps |
+| type_def | `commercial_event.revenue_state` | standard typed field |
+| env_config | `N06_DEFAULT_REVENUE_STATE` | safe boot default |
+| rate_limit_config | `priority_segment` | favors realized and expansion traffic |
+| secret_config | audit only | secrets never depend on state values |
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Owner | N06 Commercial |
+| Scope | pricing, checkout, renewal, upsell |
+| Cardinality | exactly 8 values |
+| Naming Rule | snake_case only |
+| Default | `lead_captured` |
+| Backward Compatibility | additive only, never rename in place |
+| Validation Hook | transition policy must remain monotonic |
+| Commercial Bias | maximize clarity around cash creation and cash loss |
+| Density Target | table-first, low narrative overhead |
+| Related Pillars | P06, P09, P11 |
+
+## Related Artifacts
+
+| Artifact | Relationship | Score |
+|----------|-------------|-------|
+| [[bld_schema_usage_report]] | related | 0.44 |
+| [[bld_schema_bugloop]] | downstream | 0.43 |
+| [[bld_schema_reranker_config]] | related | 0.43 |
+| [[bld_schema_quickstart_guide]] | related | 0.43 |
+| [[bld_schema_dataset_card]] | related | 0.43 |
+| [[bld_schema_pitch_deck]] | related | 0.42 |
+| [[bld_schema_action_paradigm]] | related | 0.41 |
+| [[bld_schema_benchmark_suite]] | related | 0.41 |
+| [[bld_schema_sandbox_config]] | related | 0.41 |
+| [[bld_schema_customer_segment]] | related | 0.41 |

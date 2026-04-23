@@ -1,0 +1,116 @@
+---
+id: p01_kc_citation
+kind: knowledge_card
+type: kind
+pillar: P01
+title: "Citation — Deep Knowledge for citation"
+version: 1.0.0
+created: 2026-04-07
+updated: 2026-04-07
+author: n04_knowledge
+domain: citation
+quality: 9.1
+tags: [citation, P01, INJECT, kind-kc]
+tldr: "citation is a structured source attribution with provenance, URL, date, and reliability metadata — grounding LLM outputs in verifiable external evidence."
+when_to_use: "Building, reviewing, or reasoning about citation artifacts"
+keywords: [citation, reference, provenance, attribution, source, evidence, grounding]
+feeds_kinds: [citation]
+density_score: null
+related:
+  - bld_knowledge_card_citation
+  - p03_sp_citation_builder
+  - bld_instruction_citation
+  - p10_lr_citation_builder
+  - bld_output_template_citation
+  - bld_schema_citation
+  - bld_architecture_citation
+  - p11_qg_citation
+  - bld_config_citation
+  - citation-builder
+---
+
+# Citation
+
+## Spec
+```yaml
+kind: citation
+pillar: P01
+llm_function: INJECT
+max_bytes: 2048
+naming: p01_cit_{{topic}}.md
+core: false
+```
+
+## What It Is
+A citation is a structured reference to an external or internal knowledge source — recording author, title, URL, date accessed, reliability tier, and relevance scope. It provides verifiable provenance for claims made in knowledge cards, context docs, and agent outputs. It is NOT a knowledge_card (P01, which contains the knowledge itself), NOT a rag_source (P01, which configures a retrieval pipeline), NOT a glossary_entry (P01, which defines a term).
+
+## Cross-Framework Map
+| Framework/Provider | Class/Concept | Notes |
+|-------------------|---------------|-------|
+| OpenAI | File search annotations | Assistants API returns file_citation objects with file_id + quote |
+| Anthropic | Citations (2025) | Source-grounded responses with document/web citations |
+| Google | Vertex AI Grounding | Grounding metadata with support chunks + confidence |
+| LangChain | `Document.metadata["source"]` | Source tracking through retrieval chain |
+| LlamaIndex | `NodeWithScore.metadata` | Source node references with relevance scores |
+| Perplexity | Inline citations | Numbered references linked to search results |
+| RAG pattern | Source attribution | Standard pattern: cite retrieved chunks in output |
+
+## Key Parameters
+| Parameter | Type | Default | Tradeoff |
+|-----------|------|---------|----------|
+| source_type | enum | web | web/paper/book/internal/api — determines verification method |
+| reliability_tier | enum | tier_2 | tier_1 (primary)/tier_2 (secondary)/tier_3 (tertiary) |
+| date_accessed | date | today | Captures temporal validity of source |
+| url | string | — | Direct link for verification; may rot over time |
+| excerpt | string | — | Relevant quote; longer = more context but more tokens |
+| relevance_scope | list | [] | Which domains/kinds this citation supports |
+
+## Patterns
+| Pattern | When to Use | Example |
+|---------|-------------|---------|
+| Inline citation | Ground a specific claim in a knowledge card | `[1] Robertson et al., BM25 scoring (2009)` |
+| Citation bundle | Multiple sources supporting one domain | `p01_cit_hybrid_search.md` with 5+ references |
+| Tiered reliability | Distinguish primary research from blog posts | tier_1=paper, tier_2=docs, tier_3=blog |
+| Temporal freshness | Track when a source was last verified | `date_accessed` + `freshness_days: 90` |
+
+## Anti-Patterns
+| Anti-Pattern | Why It Fails | Fix |
+|-------------|-------------|-----|
+| URL-only citation | No context if URL rots; no reliability signal | Include title, author, excerpt, reliability_tier |
+| No date_accessed | Cannot assess temporal validity | Always record access date |
+| Cite without excerpt | Reader must visit source to verify claim | Include relevant 1-3 sentence excerpt |
+| Single tier for all | Blog posts weighted same as peer-reviewed papers | Use 3-tier reliability system |
+
+## Integration Graph
+```
+rag_source, search_tool --> [citation] --> knowledge_card, context_doc, agent output
+                                 |
+                           glossary_entry, learning_record
+```
+
+## Decision Tree
+- IF citing peer-reviewed paper THEN tier_1, include DOI
+- IF citing official documentation THEN tier_2, include version
+- IF citing blog/tutorial THEN tier_3, include date_accessed
+- IF citing internal CEX artifact THEN source_type=internal, include artifact id
+- DEFAULT: tier_2, web source, excerpt required
+
+## Quality Criteria
+- GOOD: source_type, title, url, date_accessed, reliability_tier all present
+- GREAT: excerpt included, relevance_scope mapped, freshness policy defined
+- FAIL: URL-only, no date, no reliability tier, no excerpt
+
+## Related Artifacts
+
+| Artifact | Relationship | Score |
+|----------|-------------|-------|
+| [[bld_knowledge_card_citation]] | sibling | 0.66 |
+| [[p03_sp_citation_builder]] | downstream | 0.56 |
+| [[bld_instruction_citation]] | downstream | 0.55 |
+| [[p10_lr_citation_builder]] | downstream | 0.53 |
+| [[bld_output_template_citation]] | downstream | 0.52 |
+| [[bld_schema_citation]] | downstream | 0.52 |
+| [[bld_architecture_citation]] | downstream | 0.49 |
+| [[p11_qg_citation]] | downstream | 0.48 |
+| [[bld_config_citation]] | downstream | 0.46 |
+| [[citation-builder]] | related | 0.43 |

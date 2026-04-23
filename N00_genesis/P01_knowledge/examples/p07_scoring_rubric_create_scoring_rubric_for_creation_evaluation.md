@@ -1,0 +1,103 @@
+---
+id: p07_sr_creation_evaluation
+kind: scoring_rubric
+pillar: P07
+title: "Rubric: Creation Evaluation"
+version: "1.0.0"
+created: "2026-04-02"
+updated: "2026-04-02"
+author: "scoring-rubric-builder"
+framework: "5D"
+target_kinds: [agent, knowledge_card, system_prompt, workflow, prompt_template, scoring_rubric, quality_gate]
+dimensions_count: 5
+total_weight: 100
+threshold_golden: 9.5
+threshold_publish: 8.0
+threshold_review: 7.0
+automation_status: "semi-automated"
+domain: "creation"
+quality: 9.1
+tags: [scoring-rubric, 5d, creation, evaluation, p07]
+tldr: "5D rubric for creation tasks: correctness 30%, completeness 25%, clarity 20%, originality 15%, usability 10%"
+density_score: 0.91
+calibration_set: [p07_gt_kc_prompt_caching]
+inter_rater_agreement: 0.83
+appeals_process: "Submit to p01-chief with per-dimension rationale; re-evaluation within 1 cycle"
+linked_artifacts:
+  primary: "quality-gate-builder"
+  related: [p11_qg_creation_artifacts, p07_gt_creation_baseline]
+related:
+  - bld_examples_scoring_rubric
+  - p07_sr_knowledge_eval
+  - p07_sr_builder_nucleus
+  - p11_qg_creation_artifacts
+  - bld_instruction_input_schema
+  - p11_qg_prompt_template
+  - p11_qg_kind_builder
+  - p11_qg_quality_gate
+  - p11_qg_input_schema
+  - p11_qg_marketing_artifacts
+---
+## Framework Overview
+
+5D Creation evaluates newly generated artifacts across 5 orthogonal quality dimensions. Designed for creation tasks where technical accuracy, structural completeness, and user value must be balanced. Applies to agents, prompts, workflows, knowledge cards, and system prompts produced by 8F builders or humans.
+
+Complements quality_gate (P11), which enforces binary HARD gates. This rubric provides the weighted soft-scoring layer for nuanced quality ranking and tier placement.
+
+## Dimensions
+
+| Dimension | Weight | Scale | Criteria | Example (10) | Example (5) |
+|-----------|--------|-------|----------|-------------|-------------|
+| Correctness | 30% | 0-10 | Technical accuracy: valid YAML/schema, no factual errors, kind matches pillar, id equals filename stem | Zero errors; all frontmatter fields valid; kind literal matches; all facts verifiable | 1-2 minor field issues (typo in id, optional field absent); logic correct; structure valid |
+| Completeness | 25% | 0-10 | All required sections present per builder template; each section has substantive content (>= 2 bullets or 40 words) | Every bld_output_template section filled; all frontmatter required fields present; no placeholder text | 3-4 sections filled well; 1-2 sections thin (< 2 bullets); all required fields present |
+| Clarity | 20% | 0-10 | Unambiguous language; concrete over vague; structure aids navigation; no circular definitions | Every criterion is observable; no "appropriate" or "good" without qualifier; headers match content | Mostly clear; 2-3 vague phrases; one section harder to follow; no circular definitions |
+| Originality | 15% | 0-10 | Non-boilerplate content; domain-specific insight; novel framing beyond generic templates | Domain-specific examples; at least one non-obvious insight; criteria tailored to artifact kind | Uses generic examples; mostly template-filled; one domain-specific detail present |
+| Usability | 10% | 0-10 | Directly actionable by intended consumer; no lookup required to apply; output ready for pipeline | Consumer can apply immediately with zero clarification; all variables resolved; pipeline-ready | Most sections applicable; one lookup required; minor formatting issue slows consumption |
+
+## Thresholds
+
+| Tier | Score | Range | Action |
+|------|-------|-------|--------|
+| GOLDEN | >= 9.5 | [9.5, 10] | Promote to calibration_set; mark as reference example for builders |
+| PUBLISH | >= 8.0 | [8.0, 9.5) | Merge to artifact pool; no further revision required |
+| REVIEW | >= 7.0 | [7.0, 8.0) | Return with per-dimension feedback; targeted revision cycle |
+| REJECT | < 7.0 | [0, 7.0) | Redo from scratch; do not patch; re-enter 8F at F1 |
+
+## Calibration
+
+- **GOLDEN (9.7)**: p07_gt_kc_prompt_caching — correctness 10 (schema clean), completeness 10 (7 sections, 4+ bullets each), clarity 9 (one mildly vague phrase), originality 9 (novel examples), usability 10 (CLI commands inline)
+- **PUBLISH (8.4)**: Typical KC with all sections present, density 0.83, 1-2 domain-specific details, no errors, one section thinner than ideal
+- **REVIEW (7.2)**: Artifact with 4/6 sections filled well, density 0.71, valid YAML but 2 vague criteria, no original insight beyond template defaults
+- **REJECT (5.8)**: Artifact with missing required sections, placeholder text (`{{var}}` unresolved), wrong kind literal in frontmatter, generic examples only
+
+## Automation
+
+| Dimension | Status | Tool |
+|-----------|--------|------|
+| Correctness | automated | cex_doctor.py — frontmatter parse + schema field validation |
+| Completeness | automated | cex_hooks.py — section count + field presence check |
+| Clarity | semi-automated | Grep for vague terms ("appropriate", "good", "acceptable") + manual spot-check |
+| Originality | manual | Human reviewer: checks for domain-specific examples vs. template defaults |
+| Usability | semi-automated | Variable resolution check (grep `{{`) + manual readability pass |
+
+## References
+
+- AAC&U VALUE Rubrics: https://www.aacu.org/initiatives/value-initiative/value-rubrics
+- Bloom Taxonomy (Anderson & Krathwohl 2001 revision) — cognitive level anchors
+- CEX 8F Pipeline enforcement rules: `.claude/rules/n03-8f-enforcement.md`
+- cex_doctor.py v2.0 — automated correctness + completeness checks
+
+## Related Artifacts
+
+| Artifact | Relationship | Score |
+|----------|-------------|-------|
+| [[bld_examples_scoring_rubric]] | related | 0.36 |
+| [[p07_sr_knowledge_eval]] | sibling | 0.34 |
+| [[p07_sr_builder_nucleus]] | sibling | 0.29 |
+| [[p11_qg_creation_artifacts]] | downstream | 0.28 |
+| [[bld_instruction_input_schema]] | upstream | 0.26 |
+| [[p11_qg_prompt_template]] | downstream | 0.26 |
+| [[p11_qg_kind_builder]] | downstream | 0.26 |
+| [[p11_qg_quality_gate]] | downstream | 0.25 |
+| [[p11_qg_input_schema]] | downstream | 0.25 |
+| [[p11_qg_marketing_artifacts]] | downstream | 0.25 |

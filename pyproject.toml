@@ -1,0 +1,198 @@
+# =============================================================================
+# CEX — Typed Knowledge System for LLM Agents
+# =============================================================================
+#
+# CEX toolchain. Install with:
+#   pip install -e .                                   # _tools only
+#   pip install -e .[sdk-core,sdk-anthropic]           # + cex_sdk with Claude support
+#   pip install -e .[sdk-all]                          # + all SDK providers
+#
+# Usage:
+#   pytest _tools/tests/           # Run tests
+#   ruff check _tools/             # Lint
+#   ruff format _tools/            # Format
+#   mypy _tools/                   # Type check (gradual)
+#
+# =============================================================================
+
+[build-system]
+requires = ["hatchling>=1.21.0"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["cex_sdk", "_tools"]
+
+[project]
+name = "cex-tools"
+version = "10.4.0"
+description = "CEX 8F pipeline toolchain -- 115 Python tools for typed knowledge construction"
+license = {text = "MIT"}
+requires-python = ">=3.10"
+dependencies = [
+    "pyyaml>=6.0",
+]
+
+[project.optional-dependencies]
+llm = [
+    "anthropic>=0.39.0",
+]
+# --- CEX SDK (v7.0.0+) — Runtime absorvido do Agno ---
+sdk-core = [
+    "pydantic>=2.0",
+]
+sdk-anthropic = [
+    "anthropic>=0.39.0",
+]
+sdk-openai = [
+    "openai>=1.0",
+]
+sdk-google = [
+    "google-genai>=1.0",
+]
+sdk-ollama = [
+    "ollama>=0.4.0",
+    "requests>=2.28",
+]
+sdk-litellm = [
+    "litellm>=1.0",
+]
+sdk-readers = [
+    "pymupdf>=1.24",
+    "python-docx>=1.0",
+    "beautifulsoup4>=4.12",
+]
+sdk-embeddings = [
+    "sentence-transformers>=3.0",
+]
+sdk-vectordb-chroma = [
+    "chromadb>=0.5",
+]
+sdk-vectordb-lance = [
+    "lancedb>=0.10",
+]
+sdk-mcp = [
+    "mcp>=1.0",
+]
+sdk-tracing = [
+    "opentelemetry-sdk>=1.20",
+]
+sdk-all = [
+    "cex-tools[sdk-core,sdk-anthropic,sdk-openai,sdk-google,sdk-ollama,sdk-litellm]",
+    "cex-tools[sdk-readers,sdk-embeddings,sdk-vectordb-chroma,sdk-mcp,sdk-tracing]",
+]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-cov>=4.0.0",
+    "ruff>=0.1.0",
+    "mypy>=1.5.0",
+    "types-pyyaml>=6.0.0",
+]
+
+# =============================================================================
+# RUFF — Lint + Format (replaces flake8, isort, black)
+# =============================================================================
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+exclude = [
+    ".git", "__pycache__", ".venv", "node_modules",
+    "P01_knowledge", "P02_schemas", "P03_prompts", "P04_tools",
+    "P05_templates", "P06_output", "P07_quality", "P08_patterns",
+    "P09_config", "P10_memory", "P11_collaboration", "P12_orchestration",
+    "N01_intelligence", "N02_marketing", "N03_engineering", "N04_knowledge",
+    "N05_operations", "N06_commercial", "N07_admin",
+    "archetypes", "_instances", "_spawn", "boot",
+]
+
+[tool.ruff.lint]
+select = [
+    "E",      # pycodestyle errors
+    "W",      # pycodestyle warnings
+    "F",      # pyflakes
+    "I",      # isort
+    "B",      # flake8-bugbear
+    "UP",     # pyupgrade
+    "SIM",    # flake8-simplify
+    "RUF",    # ruff-specific
+]
+ignore = [
+    "E501",   # line too long (formatter handles)
+    "B008",   # function calls in defaults
+    "E402",   # module-level import not at top (common in tools)
+]
+
+[tool.ruff.lint.per-file-ignores]
+"_tools/tests/**/*.py" = ["S101"]
+"_tools/cex_init.py" = ["E501"]  # Long template strings
+
+# =============================================================================
+# PYTEST — Test framework
+# =============================================================================
+
+[tool.pytest.ini_options]
+testpaths = ["_tools/tests"]
+pythonpath = ["."]
+python_files = ["test_*.py"]
+python_functions = ["test_*"]
+addopts = [
+    "-v",
+    "--tb=short",
+    "--strict-markers",
+    "-ra",
+]
+markers = [
+    "unit: fast tests, no I/O or external deps",
+    "integration: requires filesystem or external tools",
+    "slow: takes >10s, skip in CI with -m 'not slow'",
+]
+
+# =============================================================================
+# MYPY — Type checking (gradual strict)
+# =============================================================================
+
+[tool.mypy]
+python_version = "3.10"
+warn_return_any = true
+warn_unused_configs = true
+ignore_missing_imports = true
+check_untyped_defs = true
+disallow_untyped_defs = false  # Gradual: don't block on untyped legacy code
+show_error_codes = true
+
+[[tool.mypy.overrides]]
+module = ["_tools.tests.*"]
+disallow_untyped_defs = false
+
+[[tool.mypy.overrides]]
+module = ["_tools.cex_shared", "_tools.cex_errors"]
+disallow_untyped_defs = true  # New code: strict
+
+# =============================================================================
+# COVERAGE
+# =============================================================================
+
+[tool.coverage.run]
+source = ["_tools"]
+branch = true
+omit = [
+    "_tools/tests/*",
+    "_tools/cex_init.py",       # Interactive, hard to test
+    "_tools/changelog_gen.py",  # One-off script
+    "_tools/compare_builders.py",
+    "_tools/distill.py",
+    "_tools/fix_frontmatter.py",
+    "_tools/signal_writer.py",
+    "_tools/validate_builder.py",
+    "_tools/validate_schema.py",
+]
+
+[tool.coverage.report]
+fail_under = 10  # Wave 1: baseline. Target 40% by wave 2, 60% by wave 3.
+show_missing = true
+exclude_lines = [
+    "pragma: no cover",
+    "if __name__ == .__main__.",
+    "raise NotImplementedError",
+    "if TYPE_CHECKING:",
+]

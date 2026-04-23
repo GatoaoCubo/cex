@@ -1,0 +1,185 @@
+---
+id: sch_type_def_n06
+kind: type_def
+pillar: P06
+nucleus: n06
+title: Commercial Event Type
+version: 1.0
+quality: 9.0
+tags: [schema, type, monetization, pricing, events]
+density_score: 1.0
+related:
+  - bld_schema_usage_report
+  - bld_schema_dataset_card
+  - bld_schema_pitch_deck
+  - bld_schema_sandbox_config
+  - bld_schema_reranker_config
+  - bld_schema_audit_log
+  - bld_schema_benchmark_suite
+  - bld_schema_quickstart_guide
+  - bld_schema_customer_segment
+  - bld_schema_multimodal_prompt
+---
+
+<!-- 8F: F1 constrain=P06/type_def F2 become=type-def-builder F3 inject=nucleus_def_n06.md,n06-commercial.md,bld_manifest_type_def.md,kc_type_def.md,P06_schema/_schema.yaml F4 reason=reusable_type_for_monetization_events_with_margin_controls F5 call=apply_patch;python _tools/cex_compile.py F6 produce=7680_bytes F7 govern=frontmatter_sections_ascii_density_review F8 collaborate=N06_commercial/P06_schema/sch_type_def_n06.md -->
+
+# Commercial Event Type
+
+## Purpose
+
+| Field | Value |
+|-------|-------|
+| Goal | Define a reusable object for monetization events that flow through pricing, checkout, retention, and expansion logic |
+| Business Lens | Strategic Greed requires every event to expose cash potential, margin impact, and urgency for follow-up |
+| Primary Use | Shared typed payload for analytics, validators, and automation |
+| Failure Prevented | Fragmented event shapes that hide revenue leakage or make premium signals impossible to compare |
+| Reuse Surface | checkout logs, funnel telemetry, renewal actions, upsell orchestration, pricing experiments |
+| Rule | The type must be compact enough for broad reuse and explicit enough for direct commercial action |
+
+## Schema
+
+| Property | Type | Required | Constraint | Commercial Intent |
+|----------|------|----------|------------|-------------------|
+| type_name | string | yes | `commercial_event` | Stable shared contract |
+| category | string | yes | `monetization` | Separates this from generic telemetry |
+| base_type | string | yes | object | Runtime-neutral data model |
+| required_fields | array | yes | 10 items | Forces minimum monetization visibility |
+| optional_fields | array | yes | 8 items | Supports experimentation without bloat |
+| field_rules | map | yes | one entry per field | Enables validator reuse |
+| serialization | table | yes | json,yaml,markdown row set | Multi-consumer portability |
+| extensions | array | no | additive only | Supports future tier logic |
+
+## Type Definition
+
+| Field | Type | Required | Constraint | Why N06 Needs It |
+|-------|------|----------|------------|------------------|
+| event_id | string | yes | `^cev_[a-z0-9_]{12,40}$` | Stable commercial audit key |
+| revenue_state | enum_ref | yes | `sch_enum_def_n06:revenue_state` | Unified monetization state |
+| event_timestamp | datetime | yes | ISO 8601 UTC | Preserves ordering for funnel diagnosis |
+| customer_segment | string | yes | `lead,starter,growth,scale,enterprise` | Keeps premium bias visible |
+| offer_code | string | yes | 3-40 chars | Links event to monetized package |
+| channel | string | yes | `organic,paid,partner,referral,sales` | Measures acquisition efficiency |
+| gross_value | decimal | yes | `>= 0` | Cash opportunity before deductions |
+| net_value | decimal | yes | `>= 0` and `<= gross_value` | Real monetized outcome |
+| margin_band | string | yes | `low,medium,high` | Forces profit thinking, not vanity sales |
+| actor_id | string | yes | agent, user, or system key | Tracks who caused the event |
+| currency | string | no | ISO 4217, default `BRL` | Normalizes revenue reporting |
+| campaign_id | string | no | 3-40 chars | Enables campaign ROI joins |
+| checkout_id | string | no | nullable | Connects to payment flow |
+| experiment_id | string | no | nullable | Measures monetization tests |
+| urgency_score | integer | no | 1-5 | Prioritizes save or upsell actions |
+| expected_ltv | decimal | no | `>= net_value` | Greed optimizes lifetime value |
+| risk_reason | string | no | 0-120 chars | Names retention threat or payment risk |
+| note | string | no | 0-240 chars | Human-commercial annotation |
+
+## Field Rules
+
+| Rule ID | Field | Rule | Effect |
+|---------|-------|------|--------|
+| TD01 | gross_value | must exist on every event | prevents blind event logging |
+| TD02 | net_value | cannot exceed gross_value | blocks inflated revenue |
+| TD03 | margin_band | must be derived from margin policy | keeps profit visible |
+| TD04 | revenue_state | must reference N06 enum | eliminates status drift |
+| TD05 | customer_segment | enterprise and scale never default silently | protects premium handling |
+| TD06 | urgency_score | required when revenue_state is renewal_at_risk | forces retention prioritization |
+| TD07 | expected_ltv | recommended for expansion_eligible and revenue_realized | supports upsell prioritization |
+| TD08 | risk_reason | required when state is revenue_lost or renewal_at_risk | leakage must be explainable |
+
+## Serialization
+
+| Format | Shape | Constraint | Reason |
+|--------|-------|------------|--------|
+| JSON | flat object | canonical runtime form | easiest for services and queues |
+| YAML | same fields | authoring and inspection | works with CEX artifact pattern |
+| Markdown | summary table | derived only | makes audits readable |
+| CSV | selected fields only | event export | supports finance review |
+
+## Rationale
+
+| Design Choice | Why It Exists | Strategic Greed Impact |
+|---------------|---------------|------------------------|
+| Require both gross and net values | Sales and realized value diverge | exposes discount and fee drag |
+| Add margin band | Not all revenue is good revenue | prioritizes profitable demand |
+| Include segment and channel | Monetization is context-sensitive | channels can be cut or scaled based on return |
+| Keep urgency score optional but constrained | Only urgent records need escalation | preserves focus for high-yield interventions |
+| Support experiment_id | Pricing tests are part of commercial compounding | makes winners discoverable fast |
+| Use additive extension policy | Revenue models evolve | protects downstream consumers from churn |
+
+## Example
+
+| Example Name | Value |
+|--------------|-------|
+| Scenario | Growth-tier customer sees annual upgrade offer and accepts after quota alert |
+| Commercial Outcome | Higher ARPU with low acquisition cost |
+| Operational Use | Event feeds upsell analytics and post-purchase automation |
+
+```yaml
+type_name: commercial_event
+category: monetization
+required_fields:
+  - event_id
+  - revenue_state
+  - event_timestamp
+  - customer_segment
+  - offer_code
+  - channel
+  - gross_value
+  - net_value
+  - margin_band
+  - actor_id
+example:
+  event_id: cev_upgrade_annual_20260416
+  revenue_state: revenue_realized
+  event_timestamp: 2026-04-16T13:45:00Z
+  customer_segment: growth
+  offer_code: annual_pro_plus
+  channel: sales
+  gross_value: 2400.00
+  net_value: 2280.00
+  margin_band: high
+  actor_id: system_upgrade_flow
+  currency: BRL
+  experiment_id: exp_anchor_annual_v2
+  urgency_score: 4
+  expected_ltv: 5400.00
+```
+
+## Reuse Map
+
+| Artifact | Relationship | Benefit |
+|----------|--------------|---------|
+| `sch_enum_def_n06` | enum dependency | shared state language |
+| `sch_validator_n06` | validation target | blocks weak or inflated events |
+| `con_env_config_n06` | env defaults for pipeline routing | stable runtime assumptions |
+| `con_rate_limit_config_n06` | high-value event priority | spend follows revenue importance |
+| `con_permission_n06` | write restrictions on event sinks | protects commercial evidence |
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Owner | N06 Commercial |
+| Domain | monetization telemetry |
+| Base Type | object |
+| Required Fields | 10 |
+| Optional Fields | 8 |
+| Enum Dependency | `revenue_state` |
+| Compatibility Mode | additive fields only |
+| Audit Focus | cash timing, margin, retention risk |
+| Commercial Bias | revenue and LTV over vanity activity |
+| Related Pillars | P06, P09, P11 |
+
+## Related Artifacts
+
+| Artifact | Relationship | Score |
+|----------|-------------|-------|
+| [[bld_schema_usage_report]] | related | 0.56 |
+| [[bld_schema_dataset_card]] | related | 0.56 |
+| [[bld_schema_pitch_deck]] | related | 0.55 |
+| [[bld_schema_sandbox_config]] | related | 0.54 |
+| [[bld_schema_reranker_config]] | related | 0.54 |
+| [[bld_schema_audit_log]] | related | 0.54 |
+| [[bld_schema_benchmark_suite]] | related | 0.53 |
+| [[bld_schema_quickstart_guide]] | related | 0.53 |
+| [[bld_schema_customer_segment]] | related | 0.53 |
+| [[bld_schema_multimodal_prompt]] | related | 0.53 |

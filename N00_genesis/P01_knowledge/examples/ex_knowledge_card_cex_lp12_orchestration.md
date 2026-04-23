@@ -1,0 +1,139 @@
+---
+id: p01_kc_cex_lp12_orchestration
+kind: knowledge_card
+pillar: P01
+title: "CEX LP12 Orchestration — Multi-Agent Coordination Mechanics"
+version: 1.0.0
+created: 2026-03-25
+updated: 2026-03-25
+author: builder_agent
+domain: cex_taxonomy
+quality: 9.2
+tags: [cex, lp12, orchestration, workflow, spawn, signal, handoff, crew]
+tldr: "P12 define 7 tipos de coordenacao multi-agente: workflow, dag, spawn_config, signal, handoff, dispatch_rule, crew"
+when_to_use: "Entender como agentes LLM isolados viram sistema coordenado"
+keywords: [orchestration, workflow, dag, spawn, signal, handoff, dispatch, crew]
+long_tails:
+  - "Como coordenar multiplos agentes LLM em sistema unificado"
+  - "Qual a diferenca entre workflow e dag no CEX P12"
+axioms:
+  - "SEMPRE usar handoff para transferir contexto entre agentes"
+  - "NUNCA spawnar agente sem spawn_config explicito"
+linked_artifacts:
+  primary: p01_kc_cex_lp11_feedback
+  related: [p01_kc_cex_lp08_architecture]
+density_score: null
+data_source: "https://arxiv.org/abs/2308.08155"
+related:
+  - p01_kc_lp12_orchestration
+  - p01_kc_cex_function_collaborate
+  - handoff-builder
+  - handoff-protocol-builder
+  - bld_architecture_handoff
+  - bld_collaboration_handoff
+  - p01_kc_handoff
+  - bld_collaboration_handoff_protocol
+  - bld_collaboration_workflow
+  - workflow-builder
+---
+
+## Quick Reference
+
+topic: P12 Orchestration | scope: multi-agent coordination | criticality: high
+types: 7 | function: COLLABORATE + PRODUCE + GOVERN | layer: runtime + spec
+
+## Conceitos Chave
+
+- P12 eh o maestro: agentes isolados viram orquestra
+- workflow define steps sequenciais ou paralelos de agentes
+- dag modela grafo aciclico de dependencias entre tasks
+- spawn_config define como executar (solo, grid, continuous)
+- signal comunica eventos simples entre agentes (complete)
+- handoff transfere task + context + commit entre agentes
+- dispatch_rule roteia keyword > agent_group automaticamente
+- crew define grupo multi-agente com protocolo de coord
+- AutoGen tem GroupChat; CrewAI tem Crew; MetaGPT tem Env
+- crew do CEX unifica esses conceitos em tipo formal
+- workflow NAO eh chain (P03, sequencia de prompts)
+- signal NAO eh handoff (evento simples vs instrucao)
+- dispatch_rule NAO eh router (P02, task > model routing)
+- P12 orquestra todos os outros LPs na execucao
+- P12 depende de P02: identidade define quem participa
+- P12 usa P04: mecanismos de comunicacao sao ferramentas
+- P12 eh governado por P07: qualidade da coord eh medida
+- Funcao dominante: COLLABORATE (coordenacao entre agentes)
+
+## Fases
+
+1. Mapear agentes disponiveis e seus dominios (P02)
+2. Definir dispatch_rules para roteamento automatico
+3. Criar spawn_configs por modo (solo, grid, continuous)
+4. Desenhar workflows para fluxos recorrentes
+5. Implementar signals e handoffs para comunicacao
+6. Compor crews para missoes multi-agente complexas
+
+## Regras de Ouro
+
+- SEMPRE usar handoff (nao signal) para transferir tarefas
+- NUNCA spawnar sem spawn_config (evitar defaults implicitos)
+- SEMPRE definir crew protocol antes de execucao conjunta
+- NUNCA misturar workflow com dag (execucao vs dependencia)
+- SEMPRE incluir commit instruction no handoff
+
+## Comparativo
+
+| Tipo | Natureza | Escopo | Exemplo |
+|------|----------|--------|---------|
+| workflow | Execucao | Steps sequenciais | Pipeline de pesquisa |
+| dag | Dependencia | Grafo aciclico | Task dependency graph |
+| spawn_config | Infra | Modo de execucao | Solo, grid, continuous |
+| signal | Evento | Entre 2 agentes | complete, error, progress |
+| handoff | Instrucao | Task completa | Handoff com contexto+commit |
+| dispatch_rule | Roteamento | Keyword > sat | "pesquisar" > research_agent |
+| crew | Grupo | N agentes | Equipe de 3 agent_groups |
+
+## Flow
+
+```
+[P12: Orchestration Layer]
+         |
+    +----+----+----+----+----+----+
+    |    |    |    |    |    |    |
+   wf  dag spawn sig  ho   dr  crew
+    |    |    |    |    |    |    |
+    v    v    v    v    v    v    v
+ [PRODUCE] [GOVERN] [COLLABORATE]
+    |         |           |
+    v         v           v
+ executa   configura   comunica
+    |         |           |
+    +----+----+-----------+
+         |
+         v
+  [agentes coordenados]
+         |
+         v
+  [P07 evals mede qualidade]
+```
+
+## References
+
+- source: https://arxiv.org/abs/2308.08155
+- source: https://arxiv.org/abs/2303.17760
+- related: p01_kc_cex_lp11_feedback
+- related: p01_kc_cex_lp08_architecture
+
+## Related Artifacts
+
+| Artifact | Relationship | Score |
+|----------|-------------|-------|
+| [[p01_kc_lp12_orchestration]] | sibling | 0.45 |
+| [[p01_kc_cex_function_collaborate]] | sibling | 0.40 |
+| [[handoff-builder]] | downstream | 0.29 |
+| [[handoff-protocol-builder]] | downstream | 0.29 |
+| [[bld_architecture_handoff]] | downstream | 0.27 |
+| [[bld_collaboration_handoff]] | downstream | 0.27 |
+| [[p01_kc_handoff]] | sibling | 0.27 |
+| [[bld_collaboration_handoff_protocol]] | downstream | 0.27 |
+| [[bld_collaboration_workflow]] | downstream | 0.27 |
+| [[workflow-builder]] | downstream | 0.26 |

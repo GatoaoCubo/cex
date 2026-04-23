@@ -1,0 +1,165 @@
+---
+id: agent_card_n05
+kind: context_doc
+title: N05 Agent Card -- Available Capabilities
+nucleus: N05
+sin: Gating Wrath
+version: 1.0.0
+pillar: P01
+quality: 9.0
+created: 2026-04-07
+density_score: 1.0
+related:
+  - p02_agent_deploy_ops
+  - p02_agent_test_ops
+  - p02_agent_railway_superintendent
+  - p03_sp_deploy_ops
+  - leverage_map_v2_n05_verify
+  - p08_ac_railway_superintendent
+  - n05_operations
+  - p12_dr_railway_superintendent
+  - p03_sp_railway_superintendent
+  - atom_24_nist_vocabulary
+---
+
+## Identity
+
+| Field | Value |
+|-------|-------|
+| Nucleus | N05 Operations |
+| Sin | Gating Wrath |
+| Domain | Code review, testing, debugging, deployment, CI/CD, infrastructure, monitoring |
+| CLI | claude (Opus 4.6, 1M context) |
+| Sub-agents | Up to 5 parallel |
+| Route TO N05 | Code review, testing, debugging, deploy, CI/CD, infrastructure, monitoring |
+| Route AWAY | Research (N01), marketing (N02), artifact construction (N03) |
+
+## My Artifacts
+
+| Subdir | Count | Purpose |
+|--------|-------|---------|
+| agents | 4 | Railway superintendent + deploy ops + test ops + code review agents |
+| architecture | 3 | Agent card + ADR-001 (Railway topology) + ADR-002 (testing strategy) |
+| feedback | 4 | Quality gates: Railway deploy + security + performance + artifact quality |
+| knowledge | 12 | Domain KCs: Railway, health monitoring, deployments, Nixpacks, PostgreSQL, Uvicorn + 4 new |
+| memory | 3 | Checkpoint + deploy history + operations session memory |
+| orchestration | 3 | Dispatch rules, spawn config, workflow definitions |
+| output | 23 | Deploy checklists, env contracts, health endpoints, middleware, Railway configs, CI/CD, smoke eval, benchmark, regression check, red-team eval |
+| prompts | 4 | System prompts: superintendent + review + deploy + debug modes |
+| schemas | 7 | API response, env contract, health check, middleware, Railway TOML, startup sequence, security validation |
+| scripts | 1 | Operations scripts |
+| reports | 2 | System health + dependency map (NEWPC_SETUP audit) |
+| compiled | 49 | YAML compilations of source artifacts |
+| **Total** | **~71** | **(source .md files, excluding compiled -- updated 2026-04-13)** |
+
+## Kinds I Build
+
+| Kind | Pillar | Domain Relevance |
+|------|--------|-----------------|
+| benchmark | P07 | Performance benchmarks and load testing |
+| bugloop | P11 | Bug detection, reproduction, fix verification loops |
+| checkpoint | P12 | Session state snapshots for recovery |
+| code_executor | P04 | Sandboxed code execution environments |
+| daemon | P04 | Background services and process management |
+| dag | P12 | Directed acyclic graphs for pipeline orchestration |
+| e2e_eval | P07 | End-to-end integration testing evaluation |
+| env_config | P09 | Environment variable contracts and validation |
+| eval_dataset | P07 | Test datasets for evaluation suites |
+| golden_test | P07 | Canonical test cases with known-good outputs |
+| hook | P04 | Pre/post execution hooks (git, CI, deploy) |
+| hook_config | P04 | Hook configuration and trigger rules |
+| lifecycle_rule | P11 | Artifact and process lifecycle management |
+| output_validator | P05 | Output format and schema validation |
+| quality_gate | P11 | Pass/fail gates for CI and deploy pipelines |
+| regression_check | P07 | Regression detection between versions |
+| runtime_rule | P09 | Runtime behavior constraints and policies |
+| runtime_state | P10 | Runtime state tracking and inspection |
+| reward_signal | P11 | Quality feedback signals for improvement loops |
+| schedule | P12 | Cron and time-based task scheduling |
+| signal | P12 | Inter-nucleus and inter-process signaling |
+| smoke_eval | P07 | Quick-pass validation for deployment readiness |
+| trace_config | P07 | Observability, tracing, and telemetry setup |
+| unit_eval | P07 | Unit-level test evaluation |
+| validator | P06 | Schema and data validation logic |
+| red_team_eval | P07 | Security and adversarial testing |
+| webhook | P04 | Webhook endpoint configuration and handling |
+| workflow | P12 | Multi-step pipeline orchestration |
+
+**28 kinds** across 8 pillars (P04, P05, P06, P07, P09, P10, P11, P12).
+
+## Tools I Use
+
+| Tool | Purpose |
+|------|---------|
+| `cex_compile.py` | Compile .md artifacts to .yaml |
+| `cex_doctor.py` | Builder health check -- validates all 118 builders |
+| `cex_hooks.py` | Pre/post validation hooks + git pre-commit |
+| `cex_system_test.py` | Full system validation (54 tests) |
+| `cex_e2e_test.py` | End-to-end test runner |
+| `cex_score.py` | Peer review scoring (--apply) |
+| `cex_feedback.py` | Quality tracking, archive, metrics |
+| `cex_quality_monitor.py` | Quality snapshots + regression detection |
+| `cex_sanitize.py` | ASCII-only enforcement for code files |
+| `cex_release_check.py` | Release gate: README, deps, CI, versions |
+| `cex_flywheel_audit.py` | Doc vs practice: 109 checks, 7 layers, 7 wires |
+| `cex_signal_watch.py` | Blocking signal poll for nucleus completion |
+| `cex_8f_runner.py` | Full 8F pipeline executor |
+| `signal_writer.py` | Inter-nucleus signal emission |
+
+## MCP Servers
+
+| Server | Purpose |
+|--------|---------|
+| `@anthropic-ai/mcp-server-postgres` | PostgreSQL database access -- query, inspect, validate schemas |
+| `@anthropic/mcp-server-github` | GitHub API -- PRs, issues, checks, releases, code review |
+
+## My Strengths
+
+1. **Deep Railway expertise**: 7 domain KCs covering Railway platform, CLI, networking, PostgreSQL, Nixpacks, Uvicorn, zero-downtime deploys
+2. **Schema-driven contracts**: 6 schema artifacts define strict API response, env, health check, middleware, Railway TOML, and startup sequence contracts
+3. **Deploy pipeline coverage**: Checklists, rollback plans, env contracts, health endpoints -- full deploy lifecycle
+4. **Quality enforcement**: Quality gates, hooks, validators, regression checks, smoke evals -- the N05 toolbelt for CI/CD
+5. **Broad eval coverage**: 8 eval/test kinds (unit, e2e, smoke, golden, regression, red-team, benchmark, eval-dataset) for comprehensive validation
+6. **Observability**: Trace configs, health monitoring KCs, signal infrastructure
+
+## My Gaps
+
+| Gap | Status | Resolution |
+|-----|--------|------------|
+| agents/ | ✅ CLOSED | Added deploy_ops, test_ops, code_review agents (Wave 1) |
+| architecture/ | ✅ CLOSED | Added ADR-001 (Railway topology), ADR-002 (testing strategy) (Wave 6) |
+| memory/ | ✅ CLOSED | Added deploy_history + operations_session memory (Wave 6) |
+| prompts/ | ✅ CLOSED | Added review, deploy, debug system prompts (Wave 2) |
+| feedback/ | ✅ CLOSED | Added security, performance, artifact quality gates (Wave 3) |
+| Missing kinds built | ✅ CLOSED | Added trace_config, benchmark, smoke_eval, regression_check (Wave 4) |
+| No CI/CD pipeline artifacts | ✅ CLOSED | Added GitHub Actions workflow config (Wave 5) |
+| No security artifacts | ✅ CLOSED | Added red_team_eval + security_validation_schema (Wave 5) |
+
+**All 8 gaps closed in AutoResearch session 2026-04-07.**
+
+## Cards in My Agent Card
+
+| Category | Count |
+|----------|-------|
+| Source artifacts (.md) | ~71 |
+| Compiled artifacts (.yaml) | 49 |
+| Kinds I can build | 28 |
+| Tools relevant to my domain | 14 |
+| MCP servers | 2 |
+| Domain KCs (shared library) | 17 |
+| **Total cards** | **~181** |
+
+## Related Artifacts
+
+| Artifact | Relationship | Score |
+|----------|-------------|-------|
+| [[p02_agent_deploy_ops]] | downstream | 0.36 |
+| [[p02_agent_test_ops]] | downstream | 0.33 |
+| [[p02_agent_railway_superintendent]] | downstream | 0.32 |
+| [[p03_sp_deploy_ops]] | downstream | 0.32 |
+| [[leverage_map_v2_n05_verify]] | downstream | 0.32 |
+| [[p08_ac_railway_superintendent]] | downstream | 0.30 |
+| [[n05_operations]] | downstream | 0.29 |
+| [[p12_dr_railway_superintendent]] | downstream | 0.29 |
+| [[p03_sp_railway_superintendent]] | downstream | 0.29 |
+| [[atom_24_nist_vocabulary]] | related | 0.28 |

@@ -1,0 +1,31 @@
+runtime: claude
+tier: premium
+provider: anthropic
+cli: claude
+models:
+  n01: claude-opus-4-6
+  n02: claude-sonnet-4-6
+  n03: claude-opus-4-6
+  n04: claude-sonnet-4-6
+  n05: claude-sonnet-4-6
+  n06: claude-sonnet-4-6
+  n07: claude-opus-4-6
+context_window: 200000
+opus_context: 1000000
+capabilities:
+  native_tool_calls: true
+  sub_agents: true
+  task_tracking: true
+  large_context: true
+agentic_profile:
+  max_iters: 50
+  min_iters: 3
+  require_reads_before_done: 2
+  nudge_on_shallow: false
+boot_script: boot/cex.ps1
+spawn_script: _spawn/spawn_grid.ps1
+cost_per_mtok_in: 15
+cost_per_mtok_out: 75
+notes: |
+  Premium tier. Use for tasks that need 1M context (N03/N07) or deep reasoning.
+  Supports sub-agent dispatch via Agent tool.

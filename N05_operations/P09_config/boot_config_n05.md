@@ -1,0 +1,157 @@
+---
+id: boot_config_n05
+kind: boot_config
+pillar: P02
+version: "1.0.0"
+created: "2026-04-17"
+updated: "2026-04-17"
+author: "boot-config-builder"
+provider: "claude"
+identity:
+  name: "N05 Operations"
+  role: "Code review, testing, CI/CD, deployment, quality gates"
+  agent_group: "operations"
+constraints:
+  max_tokens: 16384
+  context_window: 200000
+  timeout_seconds: 3600
+  max_retries: 2
+  temperature: 0.0
+tools:
+  - cex_hooks.py
+  - cex_score.py
+  - cex_compile.py
+  - cex_doctor.py
+  - cex_system_test.py
+  - cex_feedback.py
+  - bash
+  - git
+model: "claude-sonnet-4-6"
+temperature: 0.0
+flags:
+  - --no-chrome
+  - --strict-mcp-config
+mcp_config:
+  filesystem: stdio
+  github: stdio
+permissions:
+  read:
+    - N05_operations/
+    - _tools/
+    - archetypes/builders/
+    - .cex/runtime/handoffs/
+  write:
+    - N05_operations/
+    - .cex/runtime/signals/
+    - .cex/runtime/health/
+  execute:
+    - python
+    - git
+    - bash
+system_prompt_ref: "p03_sp_n05_operations"
+domain: "nucleus boot -- operations, testing, CI/CD, quality gates"
+quality: 9.1
+tags:
+  - boot-config
+  - n05
+  - operations
+  - claude
+  - P02
+tldr: "Claude boot config for N05 Operations: 200K context, temp=0.0, ops tools, Gating Wrath sin lens, auto-commit enabled."
+density_score: 0.88
+sin_lens: "Gating Wrath"
+auto_commit: true
+signal_on_complete: true
+sub_agents_max: 5
+related:
+  - p02_nd_n05.md
+  - bld_collaboration_cli_tool
+  - bld_examples_boot_config
+  - n05_operations
+  - self_audit_n05_codex_2026_04_15
+  - self_audit_n05_20260408
+  - agent_card_n05
+  - kc_cex_distribution_model
+  - p12_sc_admin_orchestrator
+  - spec_infinite_bootstrap_loop
+---
+
+## Provider Overview
+
+`claude` (Claude Code CLI) runtime for N05 Operations nucleus.
+Sonnet-tier, 200K context, deterministic ops execution (temperature=0.0),
+full filesystem + git access for code review, testing, and deployment tasks.
+
+## Identity Block
+
+Name: `N05 Operations`
+Role: Code review, testing, CI/CD, deployment, quality gates
+Agent_group: `operations`
+Sin Lens: Gating Wrath -- zero tolerance on quality failures, hard gates enforced
+
+## Boot Sequence
+
+| Step | Action | Path |
+|------|--------|------|
+| 1 | Load env | CEX_NUCLEUS=n05, CEX_RUNTIME=claude |
+| 2 | Read identity | N05_operations/P08_architecture/nucleus_def_n05.md |
+| 3 | Load rules | N05_operations/rules/n05-operations.md |
+| 4 | F2b SPEAK | N05_operations/P01_knowledge/kc_operations_vocabulary.md |
+| 5 | F1 CONSTRAIN | N00_genesis/P03_prompt/layers/p03_pc_cex_universal.md |
+| 6 | Discover tools | _tools/cex_*.py inventory |
+| 7 | Check handoff | .cex/runtime/handoffs/n05_task.md |
+| 8 | Heartbeat | .cex/runtime/health/ |
+
+## Constraints
+
+| Parameter | Value | Unit | Rationale |
+|-----------|-------|------|-----------|
+| max_tokens | 16384 | tokens | Ops reports: test output + CI logs + code review diffs |
+| context_window | 200000 | tokens | claude-sonnet-4-6 full window; needed for large codebases |
+| timeout_seconds | 3600 | seconds | Full test suites + deploy pipelines can run 30-60 min |
+| max_retries | 2 | count | Transient CI/network failures; idempotent ops only |
+| temperature | 0.0 | float | Ops must be deterministic -- no hallucinated test results |
+
+## Tools Configuration
+
+| Tool | Type | Purpose |
+|------|------|---------|
+| cex_hooks.py | cli | Pre/post validation, git hook enforcement |
+| cex_score.py | cli | Peer review scoring, quality gate application |
+| cex_compile.py | cli | .md -> .yaml compilation after artifact save |
+| cex_doctor.py | cli | Builder health check, system diagnostics |
+| cex_system_test.py | cli | Full system validation (54 tests) |
+| cex_feedback.py | cli | Quality tracking, archive, metrics |
+| bash | cli | Shell execution for test runners and CI |
+| git | cli | Version control, auto-commit on task completion |
+| filesystem | mcp | Read/write nucleus files |
+| github | mcp | PR review, CI status, issue tracking |
+
+## Flags
+
+| Flag | Purpose |
+|------|---------|
+| --no-chrome | No browser needed; ops is CLI-first |
+| --strict-mcp-config | Only declared MCP servers; prevents tool bleed |
+
+## References
+
+- Provider docs: `claude --help`
+- Nucleus def: `N05_operations/P08_architecture/nucleus_def_n05.md`
+- Agent card: `N05_operations/agent_card_n05.md`
+- Related config: `N00_genesis/P09_config/con_env_config_n05.md`
+
+## Related Artifacts
+
+| Artifact | Relationship | Score |
+|----------|-------------|-------|
+| [[p02_nd_n05.md]] | related | 0.34 |
+| [[bld_collaboration_cli_tool]] | downstream | 0.34 |
+| [[bld_examples_boot_config]] | downstream | 0.32 |
+| [[n05_operations]] | downstream | 0.32 |
+| [[self_audit_n05_codex_2026_04_15]] | downstream | 0.28 |
+| [[self_audit_n05_20260408]] | upstream | 0.27 |
+| [[agent_card_n05]] | upstream | 0.26 |
+| [[kc_cex_distribution_model]] | upstream | 0.25 |
+| [[p12_sc_admin_orchestrator]] | downstream | 0.25 |
+| [[spec_infinite_bootstrap_loop]] | related | 0.24 |

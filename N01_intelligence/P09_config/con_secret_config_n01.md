@@ -1,0 +1,135 @@
+---
+id: con_secret_config_n01
+kind: secret_config
+pillar: P09
+nucleus: n01
+title: N01 Secret Config
+version: 1.0
+quality: 9.0
+tags: [secret_config, credentials, rotation, research]
+density_score: 1.0
+related:
+  - bld_collaboration_secret_config
+  - bld_examples_secret_config
+  - bld_knowledge_card_secret_config
+  - p09_secret_openai_key
+  - secret-config-builder
+  - bld_config_secret_config
+  - p03_sp_secret_config_builder
+  - bld_output_template_secret_config
+  - bld_instruction_secret_config
+  - p09_secret_config
+---
+
+<!-- 8F: F1 constrain=P09/secret_config F2 become=secret-config-builder F3 inject=nucleus_def_n01+n01-intelligence+kc_secret_config+P09_schema+secret template F4 reason=pointer registry for research credentials and rotation hygiene F5 call=apply_patch+cex_compile F6 produce=4090 bytes F7 govern=frontmatter+ascii+80-line+self-check F8 collaborate=N01_intelligence/P09_config/con_secret_config_n01.md -->
+
+## Purpose
+
+| Item | Decision |
+|------|----------|
+| Config name | `n01_research_secrets` |
+| Provider | `vault` |
+| Scope | Credential registry for N01 model access and external research connectors |
+| Lens | Analytical Envy accumulates source reach fast; secret hygiene ensures ambition does not become credential sprawl |
+| Value policy | identifiers and paths only, never live secret values |
+
+## Values
+
+| Secret ID | Usage | Storage Path | Rotation | Access Pattern |
+|----------|-------|--------------|----------|----------------|
+| `sec_n01_llm_provider` | base LLM gateway key | `vault://cex/n01/llm/provider` | every 30 days | injected |
+| `sec_n01_search_provider` | search or retrieval API | `vault://cex/n01/search/provider` | every 45 days | injected |
+| `sec_n01_trace_sink` | optional tracing endpoint token | `vault://cex/n01/telemetry/trace_sink` | every 60 days | env |
+
+## Provider
+
+| Field | Value |
+|------|-------|
+| backend | `vault` |
+| auth method | workload identity |
+| namespace | `cex/n01` |
+| audit log | true |
+| fallback | `env_ref_only` |
+
+## Rotation Policy
+
+| Secret ID | Frequency | Method | Trigger | Rollback |
+|----------|-----------|--------|---------|----------|
+| `sec_n01_llm_provider` | monthly | automatic | time-based or suspected leak | restore prior version for 1 hour |
+| `sec_n01_search_provider` | every 45 days | automatic | time-based or provider alert | revert to last good version |
+| `sec_n01_trace_sink` | every 60 days | manual | incident or operator change | disable tracing until replaced |
+
+## Encryption
+
+| Layer | Standard |
+|------|----------|
+| at rest | `AES-256-GCM` |
+| in transit | `TLS 1.3` |
+| secret versioning | enabled |
+| access audit | mandatory |
+
+## Access Pattern
+
+| Step | Behavior |
+|-----|----------|
+| 1 | runtime requests secret by `secret_id` only |
+| 2 | vault resolves workload identity and namespace policy |
+| 3 | value is injected into process memory or env for limited duration |
+| 4 | trace logs store only the `secret_id`, never the value |
+| 5 | expired lease forces re-fetch instead of local persistence |
+
+## Rationale
+
+| Design Choice | Why | Analytical Envy Interpretation |
+|--------------|-----|--------------------------------|
+| vault over flat env file | N01 touches many providers and should not leak breadth through copied keys | operational rigor supports ambitious research |
+| short rotation for provider key | model access is highest blast-radius secret | the strongest capability deserves the strongest hygiene |
+| tracing token separated | observability should not share blast radius with model access | compare systems without coupling every credential |
+| fallback is ref-only | emergency mode keeps config usable without storing secrets in docs | discipline under pressure matters most |
+| explicit secret ids | env config and runtime can point cleanly into this registry | envy scales better when references are stable |
+
+## Example
+
+```yaml
+name: n01_research_secrets
+provider: vault
+rotation_policy:
+  frequency: monthly
+  method: automatic
+encryption:
+  at_rest: AES-256-GCM
+  in_transit: TLS 1.3
+secret_paths:
+  - vault://cex/n01/llm/provider
+  - vault://cex/n01/search/provider
+access_pattern: injected
+fallback: env_ref_only
+```
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `secret_config` |
+| Pillar | `P09` |
+| Nucleus | `n01` |
+| Provider | `vault` |
+| Secret Count | `3` |
+| Audit Log | `true` |
+| Fallback | `env_ref_only` |
+| Quality Field | `null` |
+
+## Related Artifacts
+
+| Artifact | Relationship | Score |
+|----------|-------------|-------|
+| [[bld_collaboration_secret_config]] | downstream | 0.45 |
+| [[bld_examples_secret_config]] | upstream | 0.44 |
+| [[bld_knowledge_card_secret_config]] | upstream | 0.42 |
+| [[p09_secret_openai_key]] | sibling | 0.40 |
+| [[secret-config-builder]] | related | 0.40 |
+| [[bld_config_secret_config]] | related | 0.40 |
+| [[p03_sp_secret_config_builder]] | related | 0.38 |
+| [[bld_output_template_secret_config]] | upstream | 0.37 |
+| [[bld_instruction_secret_config]] | upstream | 0.35 |
+| [[p09_secret_config]] | sibling | 0.33 |

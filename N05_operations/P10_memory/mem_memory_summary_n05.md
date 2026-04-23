@@ -1,0 +1,196 @@
+---
+id: mem_memory_summary_n05
+kind: memory_summary
+pillar: P10
+nucleus: N05
+title: "N05 Operations Memory Summary"
+version: "1.0.0"
+quality: 9.1
+tags: [n05, operations, memory_summary, gating_wrath, compression, session, retrieval]
+density_score: 0.96
+related:
+  - bld_collaboration_memory_summary
+  - memory-summary-builder
+  - p01_kc_memory_summary
+  - p10_memory_summary
+  - bld_collaboration_compression_config
+  - bld_instruction_memory_summary
+  - self_audit_n05_codex_2026_04_15
+  - p03_sp_memory_summary_builder
+  - bld_collaboration_session_backend
+  - bld_config_memory_summary
+---
+<!-- 8F: F1=memory_summary/P10 F2=memory-summary-builder F3=nucleus_def_n05+P10_schema+kc_memory_summary+examples+N05 retrieval docs F4=compressed briefing for next ops session
+     F5=shell+apply_patch+cex_compile F6=approx-5KB dense markdown F7=self-check frontmatter+8F+80L+properties+ascii F8=N05_operations/P10_memory/mem_memory_summary_n05.md -->
+
+# N05 Operations Memory Summary
+
+## Intent
+
+This memory summary defines the compressed briefing N05 should carry forward between sessions when the work concerns retrieval-backed code review, CI triage, deploy gates, and rollback readiness.
+
+It is intentionally lossy, but it must not lose the blockers.
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `memory_summary` |
+| Pillar | `P10` |
+| Nucleus | `N05` |
+| Name | `n05_ops_retrieval_briefing` |
+| Source type | `session_and_artifact_state` |
+| Compression method | `sectioned_abstractive_with_hard_retention` |
+| Trigger | `session_end_or_context_pressure` |
+| Max budget | `700 tokens target` |
+
+## Compression Goal
+
+Preserve only what a future N05 session must know to continue safely:
+
+- current retrieval architecture
+- hard gate rules
+- active default values
+- known failure patterns
+- next likely review questions
+
+Discard:
+
+- repetitive exploratory narration
+- raw tool output already materialized as artifacts
+- duplicate explanations of the same gate
+
+## Retention Rules
+
+Always retain:
+
+- current verdict posture: `fail_closed_on_low_signal`
+- primary vector backend and embedder
+- default top_k and candidate pool
+- any active degraded mode
+- blockers tied to release or deploy safety
+- artifact names in the retrieval chain
+
+Retain if present:
+
+- unresolved namespace rebuild
+- pending benchmark needed to change defaults
+- known stale evidence risk
+
+Never retain:
+
+- transient line-by-line shell noise
+- decorative reasoning
+- superseded candidate options that were rejected
+
+## Summary Shape
+
+The compressed summary should use these sections in order:
+
+1. `State`
+2. `Hard rules`
+3. `Known risks`
+4. `Next actions`
+5. `Artifact chain`
+
+This section order front-loads what matters in a gatekeeper context.
+
+## Example Compressed Briefing
+
+```text
+State:
+- N05 retrieval stack set to structure-aware chunking, OpenAI 1536-dim embeddings, pgvector dense storage, BM25 sparse path, hybrid rerank, top_k 6.
+
+Hard rules:
+- block on low-signal retrieval
+- do not mix embedding models in one namespace
+- do not let memory summaries outrank direct evidence for first-pass triage
+- keep environment and service filters on deploy-sensitive queries
+
+Known risks:
+- degraded mode must be explicit if dense path is unavailable
+- stale deploy logs can contaminate current gate decisions without freshness decay
+
+Next actions:
+- compile and verify artifacts
+- benchmark retrieval before changing defaults
+
+Artifact chain:
+- kno_chunk_strategy_n05
+- kno_embedder_provider_n05
+- kno_retriever_config_n05
+- kno_vector_store_n05
+- mem_knowledge_index_n05
+```
+
+## Gating Wrath Compression Rules
+
+This summary must preserve blockers more aggressively than background context.
+
+Compression priorities:
+
+- blocker > gate rule > default value > rationale > narrative
+
+If space is tight, remove rationale before removing a blocker.
+
+If space is very tight, remove historical explanation before removing the current degraded mode or rebuild risk.
+
+## Trigger Conditions
+
+Write or refresh the summary when:
+
+- the session creates or updates retrieval defaults
+- context pressure rises above the working budget
+- a release-critical risk is identified
+- the retrieval chain changes shape
+
+Do not rewrite the summary after every trivial note. Compression churn creates noise.
+
+## Failure Modes
+
+| Failure mode | Consequence | Fix |
+|--------------|-------------|-----|
+| blocker omitted | future session may approve unsafe action | reserve blocker section |
+| too much narrative | summary stops being injectable | enforce token budget |
+| no artifact names | hard to resume exact chain | retain artifact chain section |
+| stale mode hidden | operator assumes healthy hybrid path | preserve degraded mode explicitly |
+
+## Injection Guidance
+
+Inject this summary:
+
+- at session start for retrieval or gate tasks
+- before a long review that references prior operational decisions
+- when the raw history is too large to keep intact
+
+Do not inject it as the only evidence source when live logs or tests are available. It is a briefing, not proof.
+
+## Validation Checklist
+
+- summary is under budget
+- hard rules are visible near the top
+- blockers are preserved
+- current defaults are named concretely
+- artifact chain is present
+- no decorative filler remains
+
+## Decision Summary
+
+The N05 summary should behave like a handoff brief from one strict operator to another:
+
+short, sharp, and impossible to misread on the points that can break a release.
+
+## Related Artifacts
+
+| Artifact | Relationship | Score |
+|----------|-------------|-------|
+| [[bld_collaboration_memory_summary]] | downstream | 0.32 |
+| [[memory-summary-builder]] | related | 0.31 |
+| [[p01_kc_memory_summary]] | related | 0.30 |
+| [[p10_memory_summary]] | sibling | 0.24 |
+| [[bld_collaboration_compression_config]] | downstream | 0.23 |
+| [[bld_instruction_memory_summary]] | upstream | 0.22 |
+| [[self_audit_n05_codex_2026_04_15]] | upstream | 0.21 |
+| [[p03_sp_memory_summary_builder]] | related | 0.21 |
+| [[bld_collaboration_session_backend]] | downstream | 0.20 |
+| [[bld_config_memory_summary]] | upstream | 0.20 |

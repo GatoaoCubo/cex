@@ -1,0 +1,227 @@
+---
+kind: knowledge_card
+id: p01_kc_builder_builder_meta
+title: "_builder-builder: Meta-Template for Generating Any Type-Builder"
+version: 1.0.0
+quality: 9.1
+domain: builder_architecture
+created: 2026-03-26
+author: builder_agent
+source: "Extracted from 4 existing builders (model-card, knowledge-card, signal, quality-gate)"
+tags: [meta, builder, template, generator]
+density_score: 1.0
+related:
+  - p03_sp__builder_builder
+  - bld_knowledge_card_builder
+  - bld_instruction_kind
+  - bld_architecture_kind
+  - bld_instruction_builder
+  - kind-builder
+  - bld_collaboration_builder
+  - bld_knowledge_card_kind
+  - bld_collaboration_kind
+  - bld_tools_kind
+---
+
+# _builder-builder: Meta-Template for Generating Any Type-Builder
+
+**Version**: 1.0.0 | **Author**: builder_agent | **Created**: 2026-03-26
+**Source**: Extracted from 4 existing builders (model-card, knowledge-card, signal, quality-gate)
+
+---
+
+## What This Is
+
+A set of 13 meta-files that use `{{variables}}` to generate the 13 files of ANY new kind-builder.
+Instead of writing 13 files from scratch for each of the 69 CEX kinds, an LLM reads these
+meta-templates + the target kind's `_schema.yaml` + `SEED_BANK.yaml` and produces a complete builder.
+
+## How to Instantiate a New Builder
+
+### Input Required
+1. **Type name**: e.g., `skill`, `workflow`, `agent` (from TAXONOMY_LAYERS.yaml)
+2. **Pillar**: e.g., P04, P12, P02 (from TAXONOMY_LAYERS.yaml)
+3. **_schema.yaml**: `cex/{LP_dir}/_schema.yaml` (field definitions for the Pillar)
+4. **SEED_BANK.yaml**: `cex/archetypes/SEED_BANK.yaml` (seeds for the kind)
+5. **TAXONOMY_LAYERS.yaml**: `cex/archetypes/TAXONOMY_LAYERS.yaml` (overlaps, layers)
+
+### Output Produced
+13 files in `archetypes/builders/{type_name}-builder/`:
+
+| # | File | Pillar | Function | What It Does |
+|---|------|----|----------|-------------|
+| 1 | MANIFEST.md | P02 | BECOME | Identity, capabilities, routing, crew role |
+| 2 | SYSTEM_PROMPT.md | P03 | BECOME | Persona, ALWAYS/NEVER rules, boundary |
+| 3 | KNOWLEDGE.md | P01 | INJECT | Domain standards, industry patterns, references |
+| 4 | INSTRUCTIONS.md | P03 | REASON | 3-phase pipeline: Research -> Compose -> Validate |
+| 5 | TOOLS.md | P04 | CALL | Available tools, data sources, validation |
+| 6 | OUTPUT_TEMPLATE.md | P05 | PRODUCE | Fillable template with {{vars}} for the artifact |
+| 7 | SCHEMA.md | P06 | CONSTRAIN | SINGLE SOURCE OF TRUTH: fields, kinds, constraints |
+| 8 | EXAMPLES.md | P07 | GOVERN | Golden example + anti-example with gate refs |
+| 9 | ARCHITECTURE.md | P08 | CONSTRAIN | Boundary, flow diagram, dependency graph |
+| 10 | CONFIG.md | P09 | CONSTRAIN | Naming, paths, size limits, operational rules |
+| 11 | MEMORY.md | P10 | INJECT | Common mistakes, domain patterns, counter |
+| 12 | QUALITY_GATES.md | P11 | GOVERN | HARD gates (block) + SOFT gates (score) |
+| 13 | COLLABORATION.md | P12 | COLLABORATE | Crews, handoff protocol, dependencies |
+
+### Step-by-Step Process
+
+```
+1. Choose target kind from TAXONOMY_LAYERS.yaml
+2. Read _schema.yaml for the Pillar (field definitions)
+3. Read SEED_BANK.yaml entry for the kind (seed words)
+4. For EACH meta-file (1-13):
+   a. Read META_{FILE}.md
+   b. Read the <!-- NOTA --> comments for guidance
+   c. Replace {{variables}} with concrete values
+   d. Remove all <!-- comments --> from output
+   e. Write to archetypes/builders/{kind}-builder/{FILE}.md
+5. Run ARCHETYPE_BUILDER_CHECKLIST.md pre-commit gates
+6. Commit to CEX repo
+```
+
+## Variable Reference
+
+### Identity Variables
+| Variable | Source | Example |
+|----------|--------|---------|
+| `{{type_name}}` | TAXONOMY_LAYERS.yaml | `skill`, `workflow`, `signal` |
+| `{{type_name_kebab}}` | Derived (snake->kebab) | `skill`, `workflow`, `signal` |
+| `{{builder_name}}` | `{type_name_kebab}-builder` | `skill-builder` |
+| `{{lp}}` | TAXONOMY_LAYERS.yaml | `P04`, `P12`, `P11` |
+| `{{lp_dir}}` | `{Pillar}_{layer_name}` | `P04_tools`, `P12_orchestration` |
+| `{{lp_chief}}` | `{lp_lower}-chief` | `p04-chief` |
+| `{{domain}}` | Usually = type_name | `skill`, `workflow` |
+
+### Schema Variables
+| Variable | Source | Example |
+|----------|--------|---------|
+| `{{id_prefix}}` | _schema.yaml naming | `p04_sk`, `p12_wf` |
+| `{{id_pattern}}` | Derived from id_prefix | `^p04_sk_[a-z][a-z0-9_]+$` |
+| `{{id_regex}}` | Same as id_pattern | `^p04_sk_[a-z][a-z0-9_]+$` |
+| `{{naming_pattern}}` | id_prefix + slug + ext | `p04_sk_{slug}.md` |
+| `{{machine_format}}` | Type convention | `md` (most), `json` (signal) |
+| `{{field_count}}` | Count from _schema.yaml | `19`, `26`, `13` |
+| `{{max_body_bytes}}` | _schema.yaml or default | `4096`, `5120` |
+| `{{density_min}}` | Type convention | `0.80`, `0.85` |
+| `{{schema_specific_fields}}` | GENERATED from _schema.yaml | Frontmatter fields |
+
+### Content Variables (require research/analysis)
+| Variable | Source | How to Fill |
+|----------|--------|------------|
+| `{{boundary_description}}` | Domain analysis | "what the kind IS" in one dense phrase |
+| `{{boundary_exclusions}}` | TAXONOMY overlaps | Types commonly confused with this one |
+| `{{body_sections}}` | _schema.yaml + conventions | Required body sections for the artifact |
+| `{{hard_gates}}` | GENERATED from SCHEMA.md | HARD checks derived from required fields |
+| `{{soft_gates}}` | GENERATED from quality goals | SOFT checks for scoring dimensions |
+| `{{crew_compositions}}` | TAXONOMY relationships | Which builders work together |
+| `{{knowledge_sources}}` | Domain research | Industry standards, papers, tools |
+| `{{common_mistakes}}` | QUALITY_GATES + experience | Predicted errors from gates |
+| `{{rules}}` | SCHEMA constraints | ALWAYS/NEVER rules from strong constraints |
+
+## Expected Sizes by Complexity
+
+| Complexity | Types | Total Lines (~) | Notes |
+|------------|-------|----------------|-------|
+| Simple | signal, dispatch_rule, env_config | ~400 | Few fields, JSON format, minimal body |
+| Medium | knowledge_card, quality_gate, skill | ~600 | Moderate fields, structured body |
+| Complex | model_card, agent, agent_package | ~800 | Many fields, multiple objects, rich body |
+
+Complexity correlates with: field count, body section count, object nesting, enum variety.
+
+## Dependency Order for Generation
+
+Generate files in this order (each may reference previously generated files):
+
+```
+1. SCHEMA.md        (source of truth — generates first)
+2. OUTPUT_TEMPLATE.md (derives from SCHEMA)
+3. CONFIG.md         (restricts SCHEMA)
+4. QUALITY_GATES.md  (validates SCHEMA)
+5. MANIFEST.md       (identity — needs field count from SCHEMA)
+6. SYSTEM_PROMPT.md  (rules derived from SCHEMA constraints)
+7. KNOWLEDGE.md      (domain research — independent but informed by SCHEMA)
+8. INSTRUCTIONS.md   (references SCHEMA + TEMPLATE + GATES)
+9. TOOLS.md          (references validator from GATES)
+10. EXAMPLES.md      (needs TEMPLATE + GATES for golden/anti examples)
+11. ARCHITECTURE.md  (boundary from SCHEMA, deps from TAXONOMY)
+12. MEMORY.md        (mistakes from GATES, patterns from domain)
+13. COLLABORATION.md (crews from TAXONOMY, handoff from CONFIG)
+```
+
+## Pre-Commit Checklist
+
+Reference: `organization-core/.claude/norms/ARCHETYPE_BUILDER_CHECKLIST.md`
+
+Quick checks:
+- [ ] SCHEMA defines ALL fields (frontmatter + body sections)
+- [ ] OUTPUT_TEMPLATE derives from SCHEMA (no extra fields, no missing fields)
+- [ ] CONFIG restricts SCHEMA (never contradicts)
+- [ ] QUALITY_GATES map 1:1 to SCHEMA constraints
+- [ ] Enums identical across SCHEMA, TEMPLATE, CONFIG
+- [ ] Every variant in INSTRUCTIONS has matching EXAMPLES entry
+- [ ] Golden example passes ALL HARD gates
+- [ ] Anti-example fails with specific gate IDs annotated
+
+## Universal Schema Fields v1.0
+
+Added 2026-03-31 via Schema Evolution mission (Claude Code source analysis).
+
+### New Frontmatter Fields by ISO
+
+| ISO | Field | Type | Default | Source |
+|-----|-------|------|---------|--------|
+| MANIFEST | `keywords` | list[str] | (extracted) | ## Routing body |
+| MANIFEST | `triggers` | list[str] | (extracted) | ## Routing body |
+| MANIFEST | `capabilities` | str | (generated) | Identity + Capabilities |
+| MEMORY | `memory_scope` | enum | project | user/project/local |
+| MEMORY | `observation_types` | list[str] | [user,feedback,project,reference] | Fixed taxonomy |
+| CONFIG | `effort` | enum | medium | low/medium/high/max |
+| CONFIG | `max_turns` | int | 25 | 1-100 |
+| CONFIG | `disallowed_tools` | list[str] | [] | Per-builder |
+| CONFIG | `fork_context` | enum/null | null | inline/fork/null |
+| CONFIG | `hooks` | dict | {nulls} | pre_build/post_build/on_error/on_quality_fail |
+| CONFIG | `permission_scope` | enum | nucleus | nucleus/pillar/global/restricted |
+
+### New Body Section
+
+| ISO | Section | Content |
+|-----|---------|---------|
+| TOOLS | `## Tool Permissions` | ALLOWED/DENIED/EFFECTIVE table |
+
+### Hydration Tool
+
+```bash
+python _tools/cex_schema_hydrate.py --dry-run --stats   # preview
+python _tools/cex_schema_hydrate.py --apply --stats      # execute
+python _tools/cex_schema_hydrate.py --apply --iso config  # specific ISO
+```
+
+### Validation
+
+```bash
+python -m pytest _tools/tests/test_schema_evolution.py -v  # 15 tests
+```
+
+## Cross-Validation Results (Phase 2)
+
+Validated against model-card-builder v2.0:
+- All 13 file positions mapped 1:1
+- Universal skeleton covers 100% of structural elements
+- Variable slots capture all kind-specific content
+- Hierarchy preserved: SCHEMA -> TEMPLATE -> CONFIG -> GATES
+
+## Related Artifacts
+
+| Artifact | Relationship | Score |
+|----------|-------------|-------|
+| [[p03_sp__builder_builder]] | related | 0.37 |
+| [[bld_knowledge_card_builder]] | sibling | 0.34 |
+| [[bld_instruction_kind]] | related | 0.32 |
+| [[bld_architecture_kind]] | related | 0.32 |
+| [[bld_instruction_builder]] | related | 0.32 |
+| [[kind-builder]] | related | 0.31 |
+| [[bld_collaboration_builder]] | related | 0.30 |
+| [[bld_knowledge_card_kind]] | sibling | 0.29 |
+| [[bld_collaboration_kind]] | related | 0.28 |
+| [[bld_tools_kind]] | related | 0.28 |

@@ -1,0 +1,118 @@
+pillar: P12
+name: Orchestration
+description: HOW to coordinate
+frontmatter_cex:
+  related:
+    type: list[string]
+    required: recommended
+    description: "Artifact IDs of related artifacts (upstream, downstream, sibling, alternative)"
+    format: "[p{XX}_{kind}_{slug}, ...]"
+    max: 15
+    min: 0
+    validator: S_RELATED
+    note: "Auto-populated by cex_wikilink.py, manually curated by builders"
+kinds:
+  workflow:
+    description: Workflow (sequential/parallel steps)
+    boundary: Sequential/parallel agents+tools flow. NOT chain (P03, prompt sequence) nor dag (dependency graph
+      no execution).
+    layer: runtime
+    core: true
+    machine_format: yaml
+    naming: p12_wf_{{name}}.md + .yaml
+    constraints:
+      max_bytes: 3072
+    llm_function: PRODUCE
+  dag:
+    description: Acyclic dependency graph
+    boundary: Acyclic dependency graph between tasks. NOT workflow (direct execution) nor component_map (P08, components).
+    layer: spec
+    core: false
+    machine_format: yaml
+    naming: p12_dag_{{pipeline}}.yaml
+    constraints:
+      max_bytes: 3072
+    llm_function: PRODUCE
+  spawn_config:
+    description: Spawn configuration (solo, grid, continuous)
+    boundary: Spawn configuration for agent_groups. NOT boot_config (P02, per-provider) nor env_config (P09, variables).
+    layer: runtime
+    core: true
+    machine_format: yaml
+    naming: p12_spawn_{{mode}}.yaml
+    constraints:
+      max_bytes: 3072
+    llm_function: GOVERN
+  signal:
+    description: Inter-agent signal (complete, error, progress)
+    boundary: Simple signal between agents (complete, error). NOT handoff (complete instruction) nor interface (P06, contract).
+    layer: runtime
+    core: true
+    machine_format: json
+    naming: p12_sig_{{event}}.json
+    constraints:
+      max_bytes: 4096
+    llm_function: COLLABORATE
+  handoff:
+    description: Handoff instruction (task + context + commit)
+    boundary: Handoff instruction with task+context+commit. NOT action_prompt (P03, pure prompt) nor signal (simple event).
+    layer: runtime
+    core: true
+    machine_format: yaml
+    naming: p12_ho_{{task}}.md
+    constraints:
+      max_bytes: 4096
+    llm_function: COLLABORATE
+  dispatch_rule:
+    description: Dispatch rule (keyword > agent_group)
+    boundary: Keyword>agent_group dispatch rule. NOT router (P02, task>model routing) nor workflow (does not execute, only
+      routes).
+    layer: runtime
+    core: false
+    machine_format: yaml
+    naming: p12_dr_{{scope}}.yaml
+    constraints:
+      max_bytes: 3072
+    llm_function: REASON
+  checkpoint:
+    description: State snapshot de workflow
+    boundary: Estado salvo. NOT signal.
+    layer: runtime
+    core: true
+    machine_format: yaml
+    naming: p12_ckpt.md
+    constraints:
+      max_bytes: 2048
+    frontmatter_required:
+    - id
+    - name
+    - workflow_ref
+    - step
+    llm_function: GOVERN
+  schedule:
+    description: Trigger temporal que inicia workflow
+    boundary: QUANDO rodar. NOT dispatch_rule.
+    layer: runtime
+    core: false
+    machine_format: yaml
+    naming: p12_sched.md
+    constraints:
+      max_bytes: 1024
+    frontmatter_required:
+    - id
+    - name
+    - trigger_type
+    - cron
+    - workflow_ref
+    llm_function: GOVERN
+  pipeline_template:
+    description: Scenario-indexed agent pipeline recipe (new-feature, bug-fix, refactor, perf, infra)
+    boundary: Scenario-indexed agent sequence. NOT crew_template (fixed roles + topology) nor workflow (arbitrary DAG). Pipelines encode OpenCode-Hermes 7-scenario catalog with stage sequences + revision loops.
+    layer: runtime
+    core: false
+    machine_format: yaml
+    naming: p12_pt_{{scenario}}.yaml
+    constraints:
+      max_bytes: 4096
+    llm_function: CALL
+    upstream_source: "1ilkhamov/opencode-hermes-multiagent"

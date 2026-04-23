@@ -1,0 +1,74 @@
+---
+kind: architecture
+id: bld_architecture_expansion_play
+pillar: P08
+llm_function: CONSTRAIN
+purpose: Component map of expansion_play -- inventory, dependencies
+quality: 9.0
+title: "Architecture Expansion Play"
+version: "1.0.0"
+author: wave6_n06
+tags: [expansion_play, builder, architecture, upsell, NRR]
+tldr: "Component map of expansion_play -- inventory, dependencies"
+domain: "expansion_play construction"
+created: "2026-04-14"
+updated: "2026-04-14"
+density_score: 0.85
+related:
+  - bld_architecture_roi_calculator
+  - bld_architecture_api_reference
+  - bld_architecture_app_directory_entry
+  - bld_architecture_churn_prevention_playbook
+  - bld_architecture_legal_vertical
+  - bld_architecture_sales_playbook
+  - bld_architecture_benchmark_suite
+  - bld_architecture_quickstart_guide
+  - bld_architecture_nps_survey
+  - bld_architecture_ai_rmf_profile
+---
+
+## Component Inventory
+| ISO Name              | Role                               | Pillar | Status  |
+|-----------------------|------------------------------------|--------|---------|
+| bld_manifest          | Builder identity and routing       | P05    | Active  |
+| bld_instruction       | Production process (3 phases)      | P03    | Active  |
+| bld_system_prompt     | LLM persona and rules              | P03    | Active  |
+| bld_schema            | Expansion play data structure      | P06    | Active  |
+| bld_quality_gate      | NRR/trigger validation rules       | P11    | Active  |
+| bld_output_template   | Play document formatting           | P05    | Active  |
+| bld_examples          | Golden and anti-examples           | P07    | Active  |
+| bld_knowledge_card    | Land-and-expand domain knowledge   | P01    | Active  |
+| bld_architecture      | System blueprint (this file)       | P08    | Active  |
+| bld_collaboration     | AE/CSM/RevOps crew coordination    | P12    | Active  |
+| bld_config            | Naming, paths, runtime limits      | P09    | Active  |
+| bld_memory            | Learned expansion patterns         | P10    | Active  |
+| bld_tools             | CRM and analytics integrations     | P04    | Active  |
+
+## Dependencies
+| From                  | To                      | Type          |
+|-----------------------|-------------------------|---------------|
+| bld_manifest          | bld_config              | configuration |
+| bld_instruction       | bld_schema              | dependency    |
+| bld_output_template   | bld_schema              | dependency    |
+| bld_quality_gate      | bld_examples            | validation    |
+| bld_collaboration     | bld_memory              | coordination  |
+| bld_tools             | CRM/usage data APIs     | integration   |
+| bld_system_prompt     | bld_instruction         | dependency    |
+
+## Architectural Position
+expansion_play serves as the net-new ARR growth engine within CEX P03/P11 commercial layer, translating product usage signals into structured, executable account expansion motions. It bridges the CS (customer success) and AE (account executive) functions, enforcing quantified triggers and NRR accountability across the land-and-expand model used by Snowflake, Datadog, and similar PLG/SLG hybrid vendors.
+
+## Related Artifacts
+
+| Artifact | Relationship | Score |
+|----------|-------------|-------|
+| [[bld_architecture_roi_calculator]] | sibling | 0.72 |
+| [[bld_architecture_api_reference]] | sibling | 0.72 |
+| [[bld_architecture_app_directory_entry]] | sibling | 0.71 |
+| [[bld_architecture_churn_prevention_playbook]] | sibling | 0.70 |
+| [[bld_architecture_legal_vertical]] | sibling | 0.69 |
+| [[bld_architecture_sales_playbook]] | sibling | 0.69 |
+| [[bld_architecture_benchmark_suite]] | sibling | 0.69 |
+| [[bld_architecture_quickstart_guide]] | sibling | 0.69 |
+| [[bld_architecture_nps_survey]] | sibling | 0.68 |
+| [[bld_architecture_ai_rmf_profile]] | sibling | 0.67 |

@@ -1,0 +1,90 @@
+---
+id: hybrid_review3_n03_et
+kind: knowledge_card
+pillar: P01
+title: "HYBRID_REVIEW3 Audit: experiment_tracker (N03)"
+version: 1.0.0
+quality: 8.8
+tags: [audit, hybrid_review3, experiment_tracker, gemma4, wave2]
+domain: ML ops quality assurance
+created: "2026-04-14"
+density_score: 1.0
+related:
+  - hybrid_review3_n03_dc
+  - n04_audit_stt_provider_builder
+  - bld_schema_reranker_config
+  - bld_schema_bugloop
+  - bld_schema_benchmark_suite
+  - n04_audit_tts_provider_builder
+  - hybrid_review3_n03
+  - bld_schema_integration_guide
+  - bld_schema_nps_survey
+  - bld_schema_contributor_guide
+---
+
+# HYBRID_REVIEW3 Audit — experiment_tracker (13 ISOs)
+
+## Source
+- Generator: gemma4:26b (HYBRID Wave 2)
+- Auditor: N03 (claude-opus-4-6)
+- Reference: `N01_intelligence/reports/master_systemic_defects.md`
+
+## Scorecard (pre-fix)
+| # | ISO | D1 Struct | D2 Domain | D3 Density | D4 CEX | D5 Industry | Score | Verdict |
+|---|-----|-----------|-----------|------------|--------|-------------|-------|---------|
+| 1 | manifest | 9 | 9 | 9 | 9 | 9 | 9.0 | LEAVE |
+| 2 | system_prompt | 9 | 9 | 9 | 10 | 9 | 9.2 | LEAVE (BECOME correct, P07 correct) |
+| 3 | instruction | 3 | 3 | 2 | 3 | 3 | 2.8 | **TRUNCATED at "4. Determine" -> REBUILT (4 phases)** |
+| 4 | schema | 8 | 8 | 7 | 6 | 8 | 7.4 | **FIX (quality default "high")** |
+| 5 | output_template | 8 | 8 | 8 | 8 | 8 | 8.0 | LEAVE |
+| 6 | quality_gate | 1 | 1 | 1 | 2 | 1 | 1.2 | **FULL STUB (just "> TODO:") -> REBUILT** |
+| 7 | tools | 4 | 5 | 4 | 3 | 7 | 4.6 | **FIX (cex_logger/verify/audit/tester all fabricated)** |
+| 8 | examples | 7 | 7 | 7 | 8 | 7 | 7.2 | LEAVE |
+| 9 | config | 7 | 7 | 7 | 8 | 7 | 7.2 | LEAVE |
+| 10 | memory | 7 | 7 | 7 | 8 | 7 | 7.2 | LEAVE |
+| 11 | knowledge_card | 8 | 8 | 8 | 8 | 8 | 8.0 | LEAVE |
+| 12 | architecture | 4 | 3 | 6 | 3 | 4 | 4.0 | **FIX (D09: "Viz Engine, Hyper-Optimizer" generic)** |
+| 13 | collaboration | 7 | 7 | 7 | 8 | 7 | 7.2 | LEAVE |
+
+## Defects Found (vs master_systemic_defects.md)
+| Defect | Hit | ISO | Fix |
+|--------|-----|-----|-----|
+| D01 llm_function=INJECT | NO | system_prompt has `BECOME` | — |
+| D04 domain hallucination | NO | P07 correct, no trading/finance leakage | — |
+| D05 quality non-null | NO | all frontmatters = null | — |
+| D05 schema default="high" | YES | bld_schema | quality default -> `null` |
+| D07 fabricated tools | YES | `cex_logger.py`, `cex_verify.py`, `cex_audit.py`, `cex_tester.py` | replaced with real tools + MLflow/W&B/Neptune |
+| D08 bare placeholders | NO | output_template has numbered sections w/ guidance | — |
+| D09 generic tech stack | YES | "Data Ingestor, Metric Store, Viz Engine" | rewritten as 13-ISO map |
+| D10 SCHEMA.md drift | NO | — | — |
+| D11 SOFT weights | N/A | **STUB** -- no weights existed | rebuilt w/ weights=1.00 |
+| **NEW**: quality_gate full stub | YES | body was literally `> TODO:` | rebuilt H01-H07 + D1-D9 |
+| **NEW**: instruction truncated | YES | ended mid-sentence at "4. Determine" | rebuilt 4 phases |
+
+## Industry Alignment Check
+| Standard | Cited? | Notes |
+|----------|--------|-------|
+| MLflow | YES (fixed) | tools + instruction reference runs/params/metrics/artifacts |
+| Weights & Biases | YES (fixed) | project/entity/run/sweep |
+| Neptune.ai | YES (fixed) | namespaces, series |
+| Comet ML | YES (fixed) | Experiment key |
+| TensorBoard | YES (fixed) | SummaryWriter |
+| DVC | YES (fixed) | params.yaml, metrics.json |
+
+## Post-Fix Expected Score: 8.9
+Critical failure (quality_gate stub) resolved. Reproducibility, metric schema, and cross-backend compat now central to SOFT scoring. 6 industry trackers cited.
+
+## Related Artifacts
+
+| Artifact | Relationship | Score |
+|----------|-------------|-------|
+| [[hybrid_review3_n03_dc]] | sibling | 0.70 |
+| [[n04_audit_stt_provider_builder]] | sibling | 0.44 |
+| [[bld_schema_reranker_config]] | downstream | 0.36 |
+| [[bld_schema_bugloop]] | downstream | 0.35 |
+| [[bld_schema_benchmark_suite]] | downstream | 0.34 |
+| [[n04_audit_tts_provider_builder]] | sibling | 0.33 |
+| [[hybrid_review3_n03]] | sibling | 0.33 |
+| [[bld_schema_integration_guide]] | downstream | 0.32 |
+| [[bld_schema_nps_survey]] | downstream | 0.32 |
+| [[bld_schema_contributor_guide]] | downstream | 0.32 |

@@ -1,0 +1,223 @@
+1
+00:00:00,500 --> 00:00:04,786
+O CEX é um dicionário tipado universal para agentes de inteligência artificial.
+
+2
+00:00:05,086 --> 00:00:12,586
+O problema que ele resolve: quando você pede a um LLM para construir um agente, cada modelo gera uma estrutura diferente.
+
+3
+00:00:12,886 --> 00:00:14,886
+Campos inventados na hora.
+
+4
+00:00:15,186 --> 00:00:17,186
+Formatos incompatíveis.
+
+5
+00:00:17,486 --> 00:00:19,486
+Não existe padrão.
+
+6
+00:00:19,786 --> 00:00:22,286
+O CEX define 99 tipos chamados kinds.
+
+7
+00:00:22,586 --> 00:00:28,657
+Cada kind tem um nome, uma definição, um esquema, e um builder com 13 arquivos de instrução.
+
+8
+00:00:28,957 --> 00:00:36,814
+Quando qualquer LLM precisa gerar um artefato, ele consulta o builder daquele kind e produz algo estruturalmente compatível com todo o sistema.
+
+9
+00:00:37,114 --> 00:00:39,971
+Os 99 kinds se organizam em 12 pilares.
+
+10
+00:00:40,271 --> 00:00:42,271
+Pilar 1 é conhecimento.
+
+11
+00:00:42,571 --> 00:00:44,571
+Pilar 2, agentes.
+
+12
+00:00:44,871 --> 00:00:46,871
+Pilar 3, prompts.
+
+13
+00:00:47,171 --> 00:00:49,171
+Pilar 4, ferramentas.
+
+14
+00:00:49,471 --> 00:00:51,971
+Até o pilar 12, que é orquestração.
+
+15
+00:00:52,271 --> 00:00:54,771
+Cada artefato pertence a exatamente um pilar.
+
+16
+00:00:55,071 --> 00:00:57,071
+Uma regra imutável.
+
+17
+00:00:57,371 --> 00:01:01,300
+O motor de construção é o Pipeline 8F: oito funções sequenciais.
+
+18
+00:01:01,600 --> 00:01:03,600
+F1 carrega o esquema.
+
+19
+00:01:03,900 --> 00:01:05,900
+F2 carrega a identidade.
+
+20
+00:01:06,200 --> 00:01:08,200
+F3 injeta conhecimento.
+
+21
+00:01:08,500 --> 00:01:10,500
+F4 planeja.
+
+22
+00:01:10,800 --> 00:01:12,800
+F5 identifica ferramentas.
+
+23
+00:01:13,100 --> 00:01:15,100
+F6 produz o artefato.
+
+24
+00:01:15,400 --> 00:01:18,971
+F7 valida com 12 pontos e scoring de 5 dimensões.
+
+25
+00:01:19,271 --> 00:01:21,414
+F8 salva, compila, indexa, e sinaliza.
+
+26
+00:01:21,714 --> 00:01:23,857
+A validação em F7 é rigorosa.
+
+27
+00:01:24,157 --> 00:01:27,371
+O 12LP checa frontmatter, schema, densidade, unicidade, e boundary.
+
+28
+00:01:27,671 --> 00:01:31,243
+O 5D pontua em estrutura, densidade, acionabilidade, disciplina, e composabilidade.
+
+29
+00:01:31,543 --> 00:01:33,543
+Score abaixo de 8.0?
+
+30
+00:01:33,843 --> 00:01:35,843
+O artefato não é publicado.
+
+31
+00:01:36,143 --> 00:01:38,643
+Acima dos 99 kinds, existem 7 núcleos.
+
+32
+00:01:38,943 --> 00:01:42,514
+Cada núcleo compõe 12 a 25 kinds numa unidade operacional.
+
+33
+00:01:42,814 --> 00:01:46,386
+O N03, o Builder, é a fábrica que constrói fábricas.
+
+34
+00:01:46,686 --> 00:01:50,257
+O N07 é o orquestrador, que despacha mas nunca executa.
+
+35
+00:01:50,557 --> 00:01:52,557
+A arquitetura é multi-LLM.
+
+36
+00:01:52,857 --> 00:01:54,857
+N03 usa Claude Opus.
+
+37
+00:01:55,157 --> 00:01:57,157
+N05 usa Codex.
+
+38
+00:01:57,457 --> 00:02:01,029
+N04 e N01 usam Gemini com 1 milhão de tokens.
+
+39
+00:02:01,329 --> 00:02:03,329
+N02 e N06 usam Sonnet.
+
+40
+00:02:03,629 --> 00:02:07,557
+E como fallback gratuito, Ollama roda modelos locais com custo zero.
+
+41
+00:02:07,857 --> 00:02:11,429
+A orquestração suporta 6 construtores em paralelo com continuous batching.
+
+42
+00:02:11,729 --> 00:02:15,300
+Quando um slot termina, o próximo da fila entra automaticamente.
+
+43
+00:02:15,600 --> 00:02:18,457
+Sinalização por JSON e detecção de travamento automática.
+
+44
+00:02:18,757 --> 00:02:21,971
+O que torna o CEX único é a auto-referência.
+
+45
+00:02:22,271 --> 00:02:25,486
+O N03 se construiu usando o próprio pipeline 8F.
+
+46
+00:02:25,786 --> 00:02:30,786
+Os artefatos que definem como construir artefatos foram construídos pelo sistema que eles definem.
+
+47
+00:02:31,086 --> 00:02:35,371
+Um Strange Loop intencional, resolvido em três fases: gênesis, autopoiese, e reescrita.
+
+48
+00:02:35,671 --> 00:02:40,671
+Para usar: instale, dê boot com o comando cex, e descreva o que quer.
+
+49
+00:02:40,971 --> 00:02:46,329
+O motor resolve a intenção para um kind, carrega o builder, e executa o pipeline.
+
+50
+00:02:46,629 --> 00:02:50,200
+O resultado é um artefato tipado, validado, compilado, e indexado.
+
+51
+00:02:50,500 --> 00:02:53,357
+O CEX não é um framework de agentes.
+
+52
+00:02:53,657 --> 00:02:55,657
+É um dicionário de construção.
+
+53
+00:02:55,957 --> 00:02:57,957
+Qualquer framework consome seus artefatos.
+
+54
+00:02:58,257 --> 00:03:00,257
+Qualquer LLM executa seus builders.
+
+55
+00:03:00,557 --> 00:03:04,129
+A única coisa que o CEX define é a estrutura.
+
+56
+00:03:04,429 --> 00:03:08,714
+E estrutura é o que faz sistemas de IA escalarem com qualidade.

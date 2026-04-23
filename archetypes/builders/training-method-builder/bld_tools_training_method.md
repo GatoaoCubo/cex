@@ -1,0 +1,76 @@
+---
+kind: tools
+id: bld_tools_training_method
+pillar: P04
+llm_function: CALL
+quality: 9.0
+title: "Tools Training Method"
+version: "1.0.0"
+author: n05_builder
+tags: [training_method, tools, P04, ml, builder]
+tldr: "Tools and integrations for training-method-builder: retriever, doctor, compiler, schema validator."
+domain: "training_method construction"
+created: "2026-04-13"
+updated: "2026-04-13"
+density_score: 0.86
+related:
+  - bld_tools_model_architecture
+  - p10_lr_training_method_builder
+  - training-method-builder
+  - bld_architecture_training_method
+  - p03_sp_training_method_builder
+  - bld_knowledge_card_training_method
+  - bld_tools_agent_computer_interface
+  - bld_collaboration_rl_algorithm
+  - p11_qg_knowledge
+  - bld_collaboration_training_method
+---
+
+# Tools: training-method-builder
+
+## Build-Time Tools
+| Tool | Command | When to Use |
+|------|---------|------------|
+| Retriever | `python _tools/cex_retriever.py training_method` | Find similar training_method artifacts before creating |
+| Doctor | `python _tools/cex_doctor.py` | Verify builder completeness (13 ISOs) |
+| Compiler | `python _tools/cex_compile.py {path}` | Compile artifact after save |
+| Hooks | `python _tools/cex_hooks.py validate {path}` | Validate frontmatter before commit |
+| Score | `python _tools/cex_score.py --apply {path}` | Request quality score (peer review) |
+
+## Validation Tools
+| Tool | Command | Purpose |
+|------|---------|---------|
+| Schema check | `python _tools/cex_hooks.py pre-save {path}` | Validate required fields |
+| Size check | `wc -c {path}` | Verify <= 4096 bytes (body) |
+| Density check | `python _tools/cex_score.py --density {path}` | Verify >= 0.85 density |
+| ASCII check | `python _tools/cex_sanitize.py --check {path}` | Verify ASCII-only in code blocks |
+
+## Discovery Tools
+| Tool | Query Pattern | Purpose |
+|------|--------------|---------|
+| Retriever | `learning_paradigm supervised` | Find similar supervised training specs |
+| Retriever | `compute_intensity high` | Find high-compute training methods |
+| Query | `python _tools/cex_query.py training_method` | Discover related builders |
+
+## Integration Points
+| System | How | Purpose |
+|--------|-----|---------|
+| finetune_config | training_method -> finetune_config | training_method defines the paradigm; finetune_config implements the job |
+| model_card | training_method <- model_card | model_card references the training_method used |
+| reward_model | training_method <- reward_model | RLHF training_method references reward_model |
+| benchmark | training_method -> benchmark | training_method defines eval metrics; benchmark implements them |
+
+## Related Artifacts
+
+| Artifact | Relationship | Score |
+|----------|-------------|-------|
+| [[bld_tools_model_architecture]] | sibling | 0.57 |
+| [[p10_lr_training_method_builder]] | downstream | 0.42 |
+| [[training-method-builder]] | upstream | 0.36 |
+| [[bld_architecture_training_method]] | downstream | 0.35 |
+| [[p03_sp_training_method_builder]] | upstream | 0.34 |
+| [[bld_knowledge_card_training_method]] | upstream | 0.33 |
+| [[bld_tools_agent_computer_interface]] | sibling | 0.32 |
+| [[bld_collaboration_rl_algorithm]] | downstream | 0.31 |
+| [[p11_qg_knowledge]] | downstream | 0.31 |
+| [[bld_collaboration_training_method]] | downstream | 0.30 |

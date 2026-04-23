@@ -1,0 +1,102 @@
+---
+quality: 8.2
+quality: 7.8
+kind: config
+id: bld_config_circuit_breaker
+pillar: P09
+llm_function: CONSTRAIN
+purpose: Naming conventions, file paths, size limits, operational constraints
+pattern: CONFIG restricts SCHEMA, never contradicts it
+effort: medium
+max_turns: 25
+disallowed_tools: []
+fork_context: null
+hooks:
+  pre_build: null
+  post_build: null
+  on_error: null
+  on_quality_fail: null
+permission_scope: nucleus
+title: "Config Circuit Breaker"
+version: "1.0.0"
+author: n03_builder
+tags: [circuit_breaker, builder, config]
+tldr: "Naming: p09_cb_{service}.md. Thresholds: 40-60% range. Cooldown: 10-120s. Probe: 2-5."
+domain: "circuit breaker construction"
+created: "2026-04-17"
+updated: "2026-04-17"
+density_score: 0.90
+related:
+  - bld_config_runtime_rule
+  - bld_config_cost_budget
+  - bld_config_memory_scope
+  - bld_config_retriever_config
+  - bld_config_prompt_version
+  - bld_config_output_validator
+  - bld_config_effort_profile
+  - bld_config_connector
+  - bld_config_env_config
+  - bld_config_handoff_protocol
+---
+# Config: circuit_breaker Production Rules
+
+## Naming Convention
+| Scope | Convention | Example |
+|-------|-----------|---------|
+| Artifact files | `p09_cb_{service_slug}.md` | `p09_cb_anthropic_api.md` |
+| Builder directory | kebab-case | `circuit-breaker-builder/` |
+| Frontmatter fields | snake_case | `failure_rate_threshold`, `cooldown_duration` |
+| Service slug | snake_case, lowercase, no hyphens | `anthropic_api`, `postgres_primary` |
+
+Rule: id MUST equal filename stem. Hyphens in id = HARD FAIL.
+
+## File Paths
+- Output: `N0X_{domain}/P09_config/p09_cb_{service_slug}.md`
+- Compiled: `N0X_{domain}/P09_config/compiled/p09_cb_{service_slug}.yaml`
+
+## Size Limits
+- Body: max 3072 bytes
+- Total (frontmatter + body): ~5000 bytes
+- Density: >= 0.80 (no filler)
+
+## Threshold Ranges (operational guidance)
+| Service Type | failure_rate_threshold | cooldown_duration | probe_count |
+|-------------|----------------------|-------------------|-------------|
+| LLM API (Anthropic/OpenAI) | 40-60% | 60-120s | 3-5 |
+| Database (primary) | 30-50% | 10-30s | 2-3 |
+| Payment API (Stripe) | 20-30% | 30-60s | 5-10 |
+| Internal microservice | 50-70% | 10-30s | 3 |
+| Cache (Redis) | 70-80% | 5-15s | 2 |
+
+## Window Conventions
+| Traffic Volume | sliding_window_type | sliding_window_size |
+|----------------|---------------------|---------------------|
+| < 10 req/min | COUNT_BASED | 5-10 |
+| 10-100 req/min | COUNT_BASED | 10-20 |
+| > 100 req/min | TIME_BASED | 10-30 (seconds) |
+
+## Monitored Exceptions Registry
+| Exception | Applies To |
+|-----------|-----------|
+| ConnectionError | All network dependencies |
+| TimeoutError | All async calls |
+| HTTP_5xx | REST APIs |
+| HTTP_529 | Anthropic (overloaded) |
+| HTTP_429 | Rate-limited (optional -- may prefer rate_limit_config) |
+| OperationalError | Databases |
+| AuthenticationError | API key failures |
+
+## Related Artifacts
+
+| Artifact | Relationship | Score |
+|----------|-------------|-------|
+| [[bld_config_runtime_rule]] | sibling | 0.33 |
+| [[bld_config_cost_budget]] | sibling | 0.33 |
+| [[bld_config_memory_scope]] | sibling | 0.31 |
+| [[bld_config_retriever_config]] | sibling | 0.30 |
+| [[bld_config_prompt_version]] | sibling | 0.30 |
+| [[bld_config_output_validator]] | sibling | 0.30 |
+| [[bld_config_effort_profile]] | sibling | 0.29 |
+| [[bld_config_connector]] | sibling | 0.29 |
+| [[bld_config_env_config]] | sibling | 0.29 |
+| [[bld_config_handoff_protocol]] | sibling | 0.28 |

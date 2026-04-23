@@ -1,0 +1,80 @@
+---
+quality: 8.7
+quality: 8.4
+id: p11_lr_drift_detector_builder
+kind: learning_record
+pillar: P11
+version: 1.0.0
+created: 2026-04-17
+updated: 2026-04-17
+author: builder_agent
+observation: "Drift detectors with threshold=0 or 'low' string values produced alert storms. Detectors monitoring 'all features' generically missed actionable signals while firing on noise. Concrete feature lists with calibrated numeric thresholds produced useful alerts in 4/5 test deployments."
+pattern: "Always specify features_monitored as named list. Set threshold as numeric float (not string). Include suppression_window in alert_rule to prevent storms. Choose statistical test based on feature type: KS for continuous, chi-square/JS for categorical."
+evidence: "5 test deployments: 2 alert-storm failures (threshold misconfigured), 1 missed-signal failure (features: all), 4/5 successes with named features + numeric thresholds."
+confidence: 0.87
+outcome: SUCCESS
+domain: drift_detector
+tags: [drift-detector, threshold, features-monitored, suppression, statistical-test]
+tldr: "Named features + numeric threshold + suppression_window are load-bearing for drift_detector quality."
+impact_score: 8.0
+decay_rate: 0.02
+memory_scope: project
+title: "Memory Drift Detector"
+density_score: 0.90
+llm_function: INJECT
+related:
+  - p03_ins_optimizer
+  - p01_kc_regression_check
+  - bld_knowledge_card_regression_check
+  - p03_sp_optimizer_builder
+  - regression-check-builder
+  - bld_instruction_regression_check
+  - p03_sp_regression_check_builder
+  - bld_schema_regression_check
+  - bld_schema_optimizer
+  - p11_qg_regression_check
+---
+## Summary
+Two decisions dominate drift detector utility: what features to monitor (specific list vs generic "all") and how thresholds are calibrated (numeric vs vague). Generic feature monitoring generates alert fatigue; specific named dimensions produce actionable signals. Numeric thresholds with suppression windows prevent cascade failures after initial detection.
+
+## Pattern
+**Named features + calibrated numeric threshold + suppression window.**
+1. features_monitored: list specific dimension names, not "all"
+2. detection_method: match test to feature type (KS/PSI=continuous, chi-square/JS=categorical)
+3. threshold: always float, not string; calibrate against domain-specific baseline variance
+4. alert_rule.suppression_window: always set; 1-4h for operational detectors
+5. window_config: always declare reference source; rolling baseline > fixed for non-stationary environments
+
+## Anti-Pattern
+1. threshold: "low" -- string values fail numeric comparison
+2. features_monitored: ["all"] -- too broad, alert fatigue
+3. No suppression_window -- cascade alerts on correlated drift
+4. Conflating with regression_check -- different detection method, different remediation
+5. No window_config reference -- detector has no baseline to compare against
+6. PSI on categorical features -- PSI assumes continuous; use JS or chi-square for categoricals
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `learning_record` |
+| Pillar | P11 |
+| Domain | drift_detector |
+| Pipeline | 8F |
+| Target | 9.0+ |
+| Density | 0.85+ |
+
+## Related Artifacts
+
+| Artifact | Relationship | Score |
+|----------|-------------|-------|
+| [[p03_ins_optimizer]] | upstream | 0.23 |
+| [[p01_kc_regression_check]] | upstream | 0.21 |
+| [[bld_knowledge_card_regression_check]] | upstream | 0.19 |
+| [[p03_sp_optimizer_builder]] | upstream | 0.19 |
+| [[regression-check-builder]] | upstream | 0.18 |
+| [[bld_instruction_regression_check]] | upstream | 0.17 |
+| [[p03_sp_regression_check_builder]] | upstream | 0.16 |
+| [[bld_schema_regression_check]] | upstream | 0.16 |
+| [[bld_schema_optimizer]] | upstream | 0.16 |
+| [[p11_qg_regression_check]] | related | 0.15 |

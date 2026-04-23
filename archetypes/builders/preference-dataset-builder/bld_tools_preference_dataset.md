@@ -1,0 +1,82 @@
+---
+quality: 8.2
+quality: 7.8
+kind: tools
+id: bld_tools_preference_dataset
+pillar: P04
+llm_function: CALL
+purpose: Tools and APIs available for preference_dataset production
+title: "Tools Preference Dataset"
+version: "1.0.0"
+author: n03_builder
+tags: [preference_dataset, builder, tools]
+tldr: "Tools for building preference_dataset: pair generation, annotation scoring, deduplication, quality filtering."
+domain: "preference dataset construction"
+created: "2026-04-17"
+updated: "2026-04-17"
+density_score: 0.90
+related:
+  - bld_tools_reward_signal
+  - bld_tools_response_format
+  - bld_tools_hitl_config
+  - bld_tools_function_def
+  - bld_tools_retriever_config
+  - bld_tools_cli_tool
+  - bld_tools_memory_scope
+  - bld_tools_validation_schema
+  - bld_tools_prompt_version
+  - bld_tools_path_config
+---
+
+# Tools: preference-dataset-builder
+
+## Production Tools
+| Tool | Purpose | When | Status |
+|------|---------|------|--------|
+| brain_query [MCP] | Search existing preference_dataset artifacts | Phase 1 (check duplicates) | CONDITIONAL |
+| cex_retriever.py | Find similar dataset specs by domain | Phase 1 (research) | AVAILABLE |
+| cex_score.py | Score artifact quality post-production | Phase 3 (validate) | AVAILABLE |
+| cex_compile.py | Compile .md to .yaml | Phase 3 (F8) | AVAILABLE |
+| Argilla [external] | Open-source annotation platform for human preference | Phase 1-2 (annotation) | EXTERNAL |
+| Label Studio [external] | Annotation UI for preference labeling | Phase 1-2 (annotation) | EXTERNAL |
+
+## Data Sources
+| Source | Path/URL | Data |
+|--------|----------|------|
+| CEX Schema | P11_feedback/_schema.yaml | Field definitions, preference_dataset kind |
+| HuggingFace Hub | huggingface.co/datasets | Public preference datasets (Anthropic HH-RLHF, OpenAI WebGPT) |
+| OpenAI WebGPT | huggingface.co/datasets/openai/webgpt_comparisons | Reference preference pairs |
+| Anthropic HH-RLHF | huggingface.co/datasets/Anthropic/hh-rlhf | Helpful+Harmless preference pairs |
+
+## Annotation Tooling
+For automated pair generation:
+- LLM-as-judge: generate N responses, score with strong model, take top/bottom as chosen/rejected
+- Constitutional criteria: define principles, apply auto-critique, generate pairs from revisions
+- Human annotation: Argilla or Label Studio with pairwise comparison UI
+
+## Tool Permissions
+| Category | Tools | Status |
+|----------|-------|--------|
+| ALLOWED | Read, Write, Edit, Bash, Glob, Grep | Explicitly permitted |
+| DENIED | (none) | Explicitly blocked |
+| EFFECTIVE | Bash, Edit, Glob, Grep, Read, Write | ALLOWED minus DENIED |
+
+## Validation
+Key manual checks: YAML parses, id pattern `^p11_pd_`, preference_signal non-empty,
+agreement_rate in [0.0, 1.0], rater_count >= 1, training_objective in enum,
+pairs array present, quality == null, body <= 4096 bytes.
+
+## Related Artifacts
+
+| Artifact | Relationship | Score |
+|----------|-------------|-------|
+| [[bld_tools_reward_signal]] | sibling | 0.37 |
+| [[bld_tools_response_format]] | sibling | 0.37 |
+| [[bld_tools_hitl_config]] | sibling | 0.36 |
+| [[bld_tools_function_def]] | sibling | 0.36 |
+| [[bld_tools_retriever_config]] | sibling | 0.35 |
+| [[bld_tools_cli_tool]] | sibling | 0.35 |
+| [[bld_tools_memory_scope]] | sibling | 0.35 |
+| [[bld_tools_validation_schema]] | sibling | 0.34 |
+| [[bld_tools_prompt_version]] | sibling | 0.34 |
+| [[bld_tools_path_config]] | sibling | 0.33 |

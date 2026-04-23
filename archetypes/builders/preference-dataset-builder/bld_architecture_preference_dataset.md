@@ -1,0 +1,92 @@
+---
+quality: 8.8
+quality: 8.2
+kind: architecture
+id: bld_architecture_preference_dataset
+pillar: P08
+llm_function: CONSTRAIN
+purpose: Component map of preference_dataset -- inventory, dependencies, and architectural position
+title: "Architecture Preference Dataset"
+version: "1.0.0"
+author: n03_builder
+tags: [preference_dataset, builder, architecture]
+tldr: "preference_dataset sits in P11 Feedback as the training signal layer between annotation pipelines and alignment training."
+domain: "preference dataset construction"
+created: "2026-04-17"
+updated: "2026-04-17"
+density_score: 0.90
+related:
+  - bld_knowledge_card_reward_signal
+  - p01_kc_reward_and_alignment
+  - p01_kc_eval_dataset
+  - bld_collaboration_finetune_config
+  - bld_examples_reward_signal
+  - bld_architecture_eval_dataset
+  - bld_architecture_finetune_config
+  - bld_architecture_golden_test
+  - bld_collaboration_reward_signal
+  - p01_kc_cicd_llm_pipeline
+---
+
+## Component Inventory
+| Name | Role | Owner | Status |
+|------|------|-------|--------|
+| preference_signal | Criterion making chosen > rejected | preference_dataset | required |
+| pairs | prompt/chosen/rejected triplets with metadata | preference_dataset | required |
+| annotation_method | How pairs were labeled (human/model/constitutional) | preference_dataset | required |
+| agreement_rate | Inter-annotator agreement threshold | preference_dataset | required |
+| quality_filters | Thresholds for pair inclusion/exclusion | preference_dataset | required |
+| training_objective | RLHF / DPO / KTO target | preference_dataset | required |
+| split_ratios | Train/eval/test proportions | preference_dataset | optional |
+| reward_model | Downstream model trained on this dataset | P02 model | consumer |
+| annotation_pipeline | System that generates and scores pairs | P04 tools | producer |
+| eval_dataset | Evaluation set -- distinct from training pairs | P11 sibling | sibling |
+| golden_test | Deterministic expected outputs for CI | P07 sibling | sibling |
+| drift_detector | Detects when model behavior drifts from trained preferences | P11 sibling | consumer |
+
+## Dependency Graph
+```
+annotation_pipeline  --produces--> pairs
+human_raters         --produces--> pairs
+preference_signal    --governs-->  pairs (chosen vs rejected criterion)
+quality_filters      --governs-->  pairs (inclusion threshold)
+agreement_rate       --governs-->  pairs (agreement threshold)
+pairs                --depends-->  preference_dataset
+training_objective   --depends-->  preference_dataset
+preference_dataset   --trains-->   reward_model
+preference_dataset   --configures--> dpo_trainer
+drift_detector       --monitors-->  reward_model
+```
+
+## Boundary Table
+| preference_dataset IS | preference_dataset IS NOT |
+|-----------------------|--------------------------|
+| Training signal for alignment (RLHF/DPO) | Evaluation holdout (that is eval_dataset) |
+| Human-labeled preference pairs with provenance | Deterministic expected outputs (that is golden_test) |
+| Relative quality signal (chosen > rejected) | Absolute correctness labels (that is annotation) |
+| Configuration spec for annotation and training | Full dataset dump (too large for artifact) |
+| Scoped to a specific domain and objective | General knowledge about model quality (that is knowledge_card) |
+
+## Layer Map
+| Layer | Components | Purpose |
+|-------|-----------|---------|
+| signal | preference_signal, training_objective | Define what "better" means |
+| annotation | annotation_method, rater_count, agreement_rate | Govern labeling quality |
+| data | pairs, split_ratios | Core training data structure |
+| quality | quality_filters | Exclude low-confidence pairs |
+| runtime | reward_model, dpo_trainer | Consume the dataset |
+
+## Related Artifacts
+
+| Artifact | Relationship | Score |
+|----------|-------------|-------|
+| [[bld_knowledge_card_reward_signal]] | upstream | 0.23 |
+| [[p01_kc_reward_and_alignment]] | upstream | 0.21 |
+| [[p01_kc_eval_dataset]] | upstream | 0.20 |
+| [[bld_collaboration_finetune_config]] | downstream | 0.19 |
+| [[bld_examples_reward_signal]] | upstream | 0.19 |
+| [[bld_architecture_eval_dataset]] | sibling | 0.18 |
+| [[bld_architecture_finetune_config]] | sibling | 0.18 |
+| [[bld_architecture_golden_test]] | sibling | 0.17 |
+| [[bld_collaboration_reward_signal]] | downstream | 0.17 |
+| [[p01_kc_cicd_llm_pipeline]] | upstream | 0.17 |

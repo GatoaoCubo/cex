@@ -1,0 +1,162 @@
+---
+kind: knowledge_card
+id: bld_knowledge_card_agent_name_service_record
+pillar: P01
+llm_function: INJECT
+purpose: Domain knowledge about IETF ANS, CNCF AgentDNS, and related agent discovery standards
+quality: 9.1
+title: "Agent Name Service Record Builder -- Knowledge Card"
+version: "1.0.0"
+author: wave7_n05
+tags: [agent_name_service_record, builder, knowledge_card, ANS, IETF, AgentDNS, CNCF]
+tldr: "Domain overview of IETF ANS + CNCF AgentDNS: specs, key concepts, industry integrations (GoDaddy, Salesforce)"
+domain: "agent_name_service_record construction"
+created: "2026-04-14"
+updated: "2026-04-14"
+density_score: 0.85
+related:
+  - bld_system_prompt_agent_name_service_record
+  - bld_examples_agent_name_service_record
+  - bld_tools_agent_name_service_record
+  - bld_manifest_agent_name_service_record
+  - bld_output_template_agent_name_service_record
+  - bld_instruction_agent_name_service_record
+  - bld_schema_agent_name_service_record
+  - bld_memory_agent_name_service_record
+  - bld_collaboration_agent_name_service_record
+  - bld_quality_gate_agent_name_service_record
+---
+
+# Agent Name Service Record Builder -- Knowledge Card
+
+## Domain Overview
+
+ANS (Agent Name Service) = "DNS for AI agents." Structured registry-records advertise endpoints, protocols, capabilities, identity.
+
+| Spec | Status | Lead | Description |
+|------|--------|------|-------------|
+| IETF draft-narajala-ans-00 | IETF draft | Narajala et al. | Core ANS: DNS-like naming, record format, lifecycle |
+| CNCF draft-liang-agentdns-00 | CNCF WG | Liang et al. | Cloud-native AgentDNS: K8s-native, CNCF ecosystem |
+| A2A v0.3 security card signing | Stable | Google | A2A security cards for identity verification |
+| MCP server identity | Stable (Nov 2025) | Anthropic | MCP server identity as protocol-adapter type |
+
+## Timeline
+
+| Date | Event |
+|------|-------|
+| Nov 2025 | MCP server identity spec -- protocol-adapter precedent |
+| Feb 2026 | GoDaddy integrates ANS into registrar infra -- first prod ANS registry |
+| Feb 2026 | Salesforce MuleSoft Agent Fabric launches with ANS support |
+| Mar 2026 | CNCF Cloud Native Agentic Standards WG forms, publishes AgentDNS draft |
+| Apr 2026 | IETF draft-narajala-ans-00 submitted for standards track |
+
+## Key Concepts
+
+| Concept | Industry term | Definition |
+|---------|--------------|------------|
+| ANS name | DNS-like agent ID | `{agent}.{org}.agents`; resolves to record |
+| registry-record | Registry entry | Doc advertising endpoints, protocols, capabilities, lifecycle |
+| PKI-cert | Cert reference | Cert binding enabling mTLS + identity verification |
+| protocol-adapter | Adapter declaration | HOW to connect (mcp/a2a/grpc + endpoint + auth) |
+| capability advertisement | Skill manifest | Skills, concurrency, supported task types |
+| discovery-endpoint | Well-known URL | `/.well-known/agent/{label}` serves record JSON |
+| lifecycle | Record lifecycle | Registered, expires, renewal_policy, status |
+| registry_operator | Registry host | GoDaddy, Salesforce, CNCF, or self-hosted |
+| AgentDNS | CNCF discovery | Cloud-native registry for K8s environments |
+
+## ANS Name Format (IETF draft-narajala-ans-00)
+
+The ANS name format mirrors DNS but uses the `.agents` TLD:
+
+```
+{agent-label}.{org-label}.agents
+```
+
+| Component | Rules | Examples |
+|-----------|-------|---------|
+| agent-label | lowercase, hyphens, 1-63 | `billing-bot`, `customer-service` |
+| org-label | lowercase, hyphens, 1-63 | `acme-corp`, `godaddy`, `salesforce` |
+| TLD | `.agents` | `.agents` only |
+| Separator | `.` | `billing-bot.acme-corp.agents` |
+| Forbidden | upper, underscore, space | `Billing_Bot.Acme.agents` -- INVALID |
+
+## Protocol Adapters
+
+| Protocol | Version | Source spec | Use case |
+|----------|---------|-------------|---------|
+| mcp | 2024-11-05 | Anthropic (Nov 2025) | Claude-ecosystem comms |
+| a2a | 0.3 | Google A2A v0.3 | Cross-vendor agent-to-agent |
+| grpc | 1.0 | gRPC std | High-perf binary RPC |
+| http | 1.1/2.0 | RFC 7235 | REST-based agent comms |
+| websocket | 13 | RFC 6455 | Streaming/bidirectional |
+
+## PKI Integration
+
+| Aspect | Detail |
+|--------|--------|
+| Purpose | Agent identity verification, enables mTLS for secure protocol-adapter connections |
+| Format | `cert:{issuer}:{algorithm}:{fingerprint}` |
+| Required by | GoDaddy (production), Salesforce MuleSoft (production) |
+| Optional for | CNCF AgentDNS, self-hosted registries |
+| A2A relation | A2A v0.3 security card signing uses same PKI infrastructure |
+| Renewal | Tracked via lifecycle.expires + renewal_policy |
+
+## Production Integrations
+
+### GoDaddy (Feb 2026)
+
+GoDaddy integrated ANS into its registrar infra, leveraging DNS expertise to run a prod registry.
+
+| Aspect | Detail |
+|--------|--------|
+| operator | `godaddy` |
+| PKI-cert | Mandatory (DigiCert or LE) |
+| adapter | MCP and/or A2A |
+| Domain convention | `{agent}.{customer-domain}.agents` |
+| Propagation | GoDaddy DNS infra |
+
+### Salesforce MuleSoft Agent Fabric (Feb 2026)
+
+| Aspect | Detail |
+|--------|--------|
+| operator | `salesforce` |
+| PKI-cert | Mandatory (enterprise CA) |
+| adapter | A2A v0.3 required; MCP optional |
+| Discovery pattern | `https://{org}.my.salesforce.com/.well-known/agent/{label}` |
+| Capabilities | Adds `crm_object_access`, `flow_trigger` |
+
+## Relationship to Related Kinds
+
+| Kind | Relationship | Boundary |
+|------|-------------|---------|
+| agent_card (P08) | ANS=discovery; agent_card=deployment spec | where-to-find vs what-it-IS |
+| agent (P02) | ANS registers an agent | 1 agent -> >=1 ANS records |
+| secret_config (P09) | PKI-cert material source | Record holds ref only |
+| transport_config (P04) | Adapter endpoints complement transport | per-connection vs per-agent |
+| search_tool (P04) | Discovery endpoint input for indexing | Registry = searchable index |
+
+## Common Mistakes
+
+| Mistake | Impact | Correct approach |
+|---------|--------|-----------------|
+| snake_case in ANS name | H04 fail | Use hyphens |
+| Confusing ANS with agent_card | Wrong artifact | ANS=discovery; agent_card=deploy |
+| No protocol-adapter in prod | H06 fail | >=1 mcp or a2a |
+| localhost endpoint_url | H05 fail | Production HTTPS |
+| Missing discovery-endpoint | H07 fail | Add /.well-known/agent/{label} |
+| No PKI for GoDaddy/Salesforce | D3=0, blocked | Source from secret_config |
+
+## Related Artifacts
+
+| Artifact | Relationship | Score |
+|----------|-------------|-------|
+| [[bld_system_prompt_agent_name_service_record]] | downstream | 0.65 |
+| [[bld_examples_agent_name_service_record]] | downstream | 0.61 |
+| [[bld_tools_agent_name_service_record]] | downstream | 0.60 |
+| [[bld_manifest_agent_name_service_record]] | downstream | 0.60 |
+| [[bld_output_template_agent_name_service_record]] | downstream | 0.56 |
+| [[bld_instruction_agent_name_service_record]] | downstream | 0.55 |
+| [[bld_schema_agent_name_service_record]] | downstream | 0.55 |
+| [[bld_memory_agent_name_service_record]] | downstream | 0.53 |
+| [[bld_collaboration_agent_name_service_record]] | downstream | 0.48 |
+| [[bld_quality_gate_agent_name_service_record]] | downstream | 0.47 |
