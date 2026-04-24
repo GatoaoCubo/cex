@@ -692,24 +692,49 @@
       color: var(--synapse-dim);
     }
 
-    /* ---- FAQ Accordion ---- */
+    /* ---- FAQ Accordion (seductive glow) ---- */
+    #faq {
+      background: linear-gradient(180deg, var(--bg) 0%, #fdf2f8 50%, var(--bg) 100%);
+    }
     .faq-list {
       max-width: 720px;
       margin: 0 auto;
+      counter-reset: faq-counter;
     }
     .faq-list details {
+      counter-increment: faq-counter;
       border: 1px solid var(--border);
-      border-radius: 10px;
-      margin-bottom: 12px;
+      border-radius: 14px;
+      margin-bottom: 14px;
       overflow: hidden;
-      transition: all 0.2s;
+      transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
       box-shadow: var(--shadow-sm);
+      position: relative;
+    }
+    .faq-list details::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 3px;
+      background: var(--synapse);
+      border-radius: 14px 0 0 14px;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .faq-list details:hover {
+      border-color: rgba(232, 67, 147, 0.35);
+      box-shadow: 0 4px 20px rgba(232, 67, 147, 0.10), var(--shadow-sm);
+      transform: translateY(-1px);
     }
     .faq-list details[open] {
       border-color: var(--synapse);
+      box-shadow: 0 6px 28px rgba(232, 67, 147, 0.14), 0 0 0 1px rgba(232, 67, 147, 0.08);
+    }
+    .faq-list details[open]::before {
+      opacity: 1;
     }
     .faq-list summary {
-      padding: 16px 20px;
+      padding: 18px 22px 18px 56px;
       font-weight: 600;
       font-size: 15px;
       cursor: pointer;
@@ -719,25 +744,58 @@
       justify-content: space-between;
       color: var(--text);
       background: var(--bg-card);
-      transition: background 0.2s;
+      transition: background 0.25s, color 0.25s;
+      position: relative;
     }
-    .faq-list summary:hover { background: var(--bg-raised); }
+    .faq-list summary::before {
+      content: counter(faq-counter, decimal-leading-zero);
+      position: absolute;
+      left: 18px;
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--synapse);
+      opacity: 0.5;
+      transition: opacity 0.3s;
+    }
+    .faq-list details:hover summary::before,
+    .faq-list details[open] summary::before {
+      opacity: 1;
+    }
+    .faq-list summary:hover {
+      background: linear-gradient(90deg, rgba(232, 67, 147, 0.04), var(--bg-card));
+    }
     .faq-list summary::-webkit-details-marker { display: none; }
     .faq-list summary::after {
-      content: '+';
-      font-family: var(--mono);
-      font-size: 18px;
-      color: var(--synapse);
-      transition: transform 0.2s;
+      content: '';
+      width: 20px; height: 20px;
+      background: var(--synapse-glow);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: transform 0.3s, background 0.3s, box-shadow 0.3s;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 10 10'%3E%3Cpath d='M2 4l3 3 3-3' stroke='%23e84393' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: center;
     }
     .faq-list details[open] summary::after {
-      transform: rotate(45deg);
+      transform: rotate(180deg);
+      background-color: var(--synapse);
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 10 10'%3E%3Cpath d='M2 4l3 3 3-3' stroke='white' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      box-shadow: 0 0 12px rgba(232, 67, 147, 0.4);
     }
     .faq-list .faq-body {
-      padding: 0 20px 16px;
+      padding: 0 22px 18px 56px;
       font-size: 14px;
       color: var(--text-dim);
-      line-height: 1.7;
+      line-height: 1.75;
+      animation: faqSlideIn 0.3s ease;
+    }
+    @keyframes faqSlideIn {
+      from { opacity: 0; transform: translateY(-6px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     /* ---- Architecture diagram ---- */
@@ -1316,7 +1374,8 @@
     <div class="container">
       <div class="section-center reveal">
         <p class="section-label">FAQ</p>
-        <h2 class="section-title">Frequently asked questions</h2>
+        <h2 class="section-title">You were going to ask anyway</h2>
+        <p style="color: var(--text-dim); max-width: 520px; margin: 12px auto 0; font-size: 15px; line-height: 1.6;">Eight questions. Zero fluff. Everything you need to decide if CEXAI belongs in your stack.</p>
       </div>
       <div class="faq-list reveal">
         <details>
