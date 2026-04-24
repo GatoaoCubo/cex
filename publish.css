@@ -1,14 +1,27 @@
-/* CEXAI Obsidian Publish -- neural/synapse palette */
-/* Matches docs/index.html dark theme */
+/* CEXAI Obsidian Publish -- forced dark neural palette */
+/* Forces dark mode regardless of user/system theme preference */
 
-/* ---- Accent color (synapse pink) ---- */
+/* ---- Force dark on BOTH theme classes ---- */
+.theme-light.published-container,
+.theme-dark.published-container,
 .published-container {
   --accent-h: 340;
   --accent-s: 80%;
   --accent-l: 65%;
   --background-primary: #0a0a0a;
+  --background-primary-alt: #0e0e0e;
   --background-secondary: #111111;
+  --background-secondary-alt: #161616;
   --background-modifier-border: #222222;
+  --background-modifier-form-field: #161616;
+  --background-modifier-hover: rgba(232, 67, 147, 0.08);
+  --text-normal: #e0e0e0;
+  --text-muted: #999999;
+  --text-faint: #666666;
+  --text-on-accent: #ffffff;
+  --interactive-normal: #1a1a1a;
+  --interactive-hover: #222222;
+  color-scheme: dark;
 }
 
 /* ---- Typography ---- */
@@ -16,6 +29,13 @@
   --font-text: 'Segoe UI', 'Inter', -apple-system, sans-serif;
   --font-monospace: 'Cascadia Code', 'JetBrains Mono', 'Consolas', monospace;
   --font-interface: 'Segoe UI', 'Inter', -apple-system, sans-serif;
+}
+
+/* ---- Force body dark ---- */
+body.published-container,
+body {
+  background-color: #0a0a0a !important;
+  color: #e0e0e0 !important;
 }
 
 /* ---- Links ---- */
