@@ -1,17 +1,18 @@
 ---
 id: n00_mentor_context
 kind: context_doc
+8f: F3_inject
 pillar: P01
 nucleus: n00
 title: "CEX Universal Vocabulary -- Mentor Context"
-version: "1.0.0"
+version: "2.0.0"
 author: n07_orchestrator
 quality: 9.1
 tags: [mentor, vocabulary, taxonomy, 8f, pillars, kinds, nuclei, archetype]
-tldr: "Pre-compiled reference for /mentor: 8F pipeline + 12 pillars + 257 kinds + 8 nuclei."
+tldr: "Pre-compiled reference for /mentor: 8F pipeline + 12 pillars + 300 kinds + 8 nuclei."
 domain: "CEX system"
 created: "2026-04-17"
-updated: "2026-04-17"
+updated: "2026-04-24"
 density_score: 0.95
 related:
   - p01_kc_cex_project_overview
@@ -40,7 +41,7 @@ Every task in CEX -- build, research, analyze, deploy, price -- follows 8 functi
 | Function | Name | What it does | Key action |
 |----------|------|-------------|------------|
 | F1 | CONSTRAIN | Resolve kind, pillar, schema from user intent | Read `kinds_meta.json` + `_schema.yaml` |
-| F2 | BECOME | Load builder identity (13 ISOs per kind) | Read `archetypes/builders/{kind}-builder/` |
+| F2 | BECOME | Load builder identity (12 ISOs per kind) | Read `archetypes/builders/{kind}-builder/` |
 | F3 | INJECT | Assemble context: KCs, examples, brand, memory, similar artifacts | Read `P01_knowledge/library/kind/kc_{kind}.md` |
 | F3b | PERSIST | (optional) Declare new knowledge to save | Entity memory, fact updates, learning records |
 | F3c | GROUND | (optional) Record source provenance | Path, confidence score, freshness |
@@ -60,37 +61,38 @@ documentation, pricing -- everything flows through 8F.
 
 | Code | Name | Domain | Kind count | Primary nuclei |
 |------|------|--------|-----------|----------------|
-| P01 | Knowledge | Storage, retrieval, KCs, RAG, verticals | 28 | N01, N04 |
-| P02 | Model | Agents, providers, personas, training | 22 | N02, N03 |
-| P03 | Prompt | Templates, chains, system prompts, reasoning | 20 | N02, N03 |
-| P04 | Tools | External capabilities: CLI, MCP, browser, API | 34 | N05 |
+| P01 | Knowledge | Storage, retrieval, KCs, RAG, verticals | 32 | N01, N04 |
+| P02 | Model | Agents, providers, personas, training | 24 | N02, N03 |
+| P03 | Prompt | Templates, chains, system prompts, reasoning | 21 | N02, N03 |
+| P04 | Tools | External capabilities: CLI, MCP, browser, API | 36 | N05 |
 | P05 | Output | Production artifacts: pages, decks, guides | 23 | N03, N06 |
-| P06 | Schema | Data contracts: types, validation, interfaces | 8 | N03 |
-| P07 | Evaluation | Quality, scoring, benchmarks, testing | 23 | N05 |
-| P08 | Architecture | System structure: diagrams, decisions, cards | 12 | N03 |
-| P09 | Config | Runtime settings: env, secrets, flags, quotas | 28 | N05 |
-| P10 | Memory | State, context, indexing, provenance | 18 | N04 |
-| P11 | Feedback | Learning, correction, compliance, monetization | 26 | N03, N06 |
-| P12 | Orchestration | Workflows, dispatch, scheduling, crews | 15 | N07 |
+| P06 | Schema | Data contracts: types, validation, interfaces, DDD | 13 | N03 |
+| P07 | Evaluation | Quality, scoring, benchmarks, testing | 25 | N05 |
+| P08 | Architecture | System structure: diagrams, decisions, cards, DDD | 14 | N03 |
+| P09 | Config | Runtime settings: env, secrets, flags, quotas, resilience | 39 | N05 |
+| P10 | Memory | State, context, indexing, provenance | 22 | N04 |
+| P11 | Feedback | Learning, correction, compliance, monetization, safety | 31 | N03, N06 |
+| P12 | Orchestration | Workflows, dispatch, scheduling, crews, DDD events | 20 | N07 |
 
-**Total: 257 kinds across 12 pillars.**
+**Total: 300 kinds across 12 pillars.**
 
 ---
 
-## Section 3: All 257 Kinds
+## Section 3: All 300 Kinds
 
-### P01 Knowledge (28 kinds)
+### P01 Knowledge (32 kinds)
 
 | Kind | Purpose |
 |------|---------|
 | agentic_rag | Agent-driven retrieval augmented generation pattern |
-| changelog | Product changelog entry with semver, features, fixes |
+| changelog | Product changelog entry with semver, features, fixes, breaking changes |
 | chunk_strategy | Chunking strategy for document ingestion |
-| citation | Structured source attribution with provenance |
+| citation | Structured source attribution with provenance, URL, date, reliability |
 | competitive_matrix | Competitive feature matrix for sales battle cards |
 | context_doc | Domain context document |
 | dataset_card | Structured dataset documentation |
 | discovery_questions | MEDDIC/BANT discovery question bank per buyer persona |
+| domain_vocabulary | Governed registry of canonical terms for a bounded context |
 | ecommerce_vertical | eCommerce industry vertical template |
 | edtech_vertical | Education/EdTech industry vertical template |
 | embedder_provider | Text embedding provider for vector search |
@@ -105,14 +107,17 @@ documentation, pricing -- everything flows through 8F.
 | knowledge_card | Atomic searchable fact (density > 0.8) |
 | knowledge_graph | Graph-based knowledge schema with entities and relations |
 | legal_vertical | Legal industry vertical template |
+| lineage_record | Provenance chain documenting artifact derivation and curation |
 | ontology | Formal taxonomy and ontology definitions |
+| query_optimizer | Query rewriting, expansion, and multi-hop decomposition for RAG |
 | rag_source | External indexable source |
 | repo_map | Codebase context extraction strategy |
 | reranker_config | Retrieval reranking model and strategy config |
 | retriever_config | Retrieval configuration (top_k, hybrid, reranker) |
+| synthetic_data_config | Synthetic training data generation pipeline configuration |
 | vector_store | Vector database backend for similarity search |
 
-### P02 Model (22 kinds)
+### P02 Model (24 kinds)
 
 | Kind | Purpose |
 |------|---------|
@@ -123,6 +128,7 @@ documentation, pricing -- everything flows through 8F.
 | axiom | Fundamental immutable principle |
 | boot_config | Boot configuration per provider |
 | customer_segment | Customer segment/ICP definition |
+| distillation_config | Teacher-student model compression and knowledge distillation setup |
 | fallback_chain | Fallback sequence (model A > B > C) |
 | finetune_config | Fine-tuning job configuration |
 | handoff_protocol | Agent-to-agent transfer protocol |
@@ -133,13 +139,14 @@ documentation, pricing -- everything flows through 8F.
 | model_card | LLM spec (pricing, context, capabilities) |
 | model_provider | LLM provider adapter (Claude, GPT, Gemini, Ollama) |
 | nucleus_def | Formal CEX nucleus definition (N00-N07) |
+| personality | Hot-swap persona applied to an agent at runtime |
 | rl_algorithm | Reinforcement learning algorithm definition |
 | role_assignment | Role-to-agent binding with responsibilities |
 | router | Routing rule (task > agent group) |
 | software_project | Complete software project definition |
 | training_method | Model training/adaptation technique |
 
-### P03 Prompt (20 kinds)
+### P03 Prompt (21 kinds)
 
 | Kind | Purpose |
 |------|---------|
@@ -147,6 +154,7 @@ documentation, pricing -- everything flows through 8F.
 | chain | Chained prompt sequence (output A -> input B) |
 | churn_prevention_playbook | Churn prevention with signal detection and intervention |
 | constraint_spec | Constrained generation rules |
+| context_file | Project-scoped instruction file auto-injected into context |
 | context_window_config | Token budget allocation and overflow rules |
 | expansion_play | Account expansion play: upsell/cross-sell |
 | instruction | Step-by-step execution instructions |
@@ -164,7 +172,7 @@ documentation, pricing -- everything flows through 8F.
 | tagline | Short brand phrase (taglines, slogans, headlines) |
 | webinar_script | Webinar script with segments and speaker notes |
 
-### P04 Tools (34 kinds)
+### P04 Tools (36 kinds)
 
 | Kind | Purpose |
 |------|---------|
@@ -180,11 +188,13 @@ documentation, pricing -- everything flows through 8F.
 | db_connector | Database connector (SQL, GraphQL, REST-to-DB) |
 | diff_strategy | Change application and matching algorithm |
 | document_loader | File ingestion + chunking (PDF, HTML, CSV) |
+| event_stream | Real-time ordered sequence of domain events for subscribers |
 | function_def | LLM-callable function definition (JSON Schema) |
 | hook | Pre/post processing hook |
 | hook_config | Hook lifecycle configuration |
 | mcp_app_extension | MCP Apps Extension (SEP-1865) |
 | mcp_server | MCP server (tools + resources) |
+| messaging_gateway | Unified multi-platform messaging transport abstraction |
 | multi_modal_config | Multi-modal input format and routing rules |
 | notifier | Push notification delivery (email, SMS, Slack) |
 | plugin | Pluggable extension |
@@ -231,20 +241,25 @@ documentation, pricing -- everything flows through 8F.
 | streaming_config | SSE/WebSocket streaming configuration |
 | user_journey | End-to-end user journey map |
 
-### P06 Schema (8 kinds)
+### P06 Schema (13 kinds)
 
 | Kind | Purpose |
 |------|---------|
+| aggregate_root | DDD entry point entity enforcing domain invariants |
 | api_reference | API reference doc (endpoints, params, auth) |
+| data_contract | Schema-level agreement between data producer and consumer |
 | edit_format | LLM-to-host file change format |
 | enum_def | Reusable enumeration |
+| event_schema | AsyncAPI/CloudEvents schema for event payloads |
 | input_schema | Input contract |
 | interface | Agent-to-agent integration contract |
+| openapi_spec | Machine-readable API contract (OpenAPI 3.x) |
 | type_def | Custom type definition |
 | validation_schema | Post-generation validation contract |
 | validator | Validation rule (pre-commit, quality gate) |
+| value_object | Immutable typed value without identity |
 
-### P07 Evaluation (23 kinds)
+### P07 Evaluation (25 kinds)
 
 | Kind | Purpose |
 |------|---------|
@@ -252,6 +267,7 @@ documentation, pricing -- everything flows through 8F.
 | benchmark_suite | Composite benchmark with multiple tasks |
 | bias_audit | Fairness evaluation methodology |
 | cohort_analysis | Cohort analysis for retention/LTV |
+| curriculum_config | Training data ordering, difficulty scheduling, adaptive pacing |
 | e2e_eval | End-to-end pipeline test |
 | eval_dataset | Test case collection |
 | eval_framework | Evaluation framework integration |
@@ -264,6 +280,7 @@ documentation, pricing -- everything flows through 8F.
 | memory_benchmark | Memory system quality evaluation |
 | red_team_eval | Adversarial test |
 | regression_check | Baseline comparison |
+| retrieval_evaluator | RAG-specific IR evaluation (MRR, NDCG, precision@k) |
 | reward_model | Process/outcome reward model config |
 | scoring_rubric | Evaluation criterion (5D, 12LP, custom) |
 | smoke_eval | Quick sanity test (< 30s) |
@@ -272,14 +289,16 @@ documentation, pricing -- everything flows through 8F.
 | unit_eval | Agent/prompt unit test |
 | usage_report | Usage analytics report for billing |
 
-### P08 Architecture (12 kinds)
+### P08 Architecture (14 kinds)
 
 | Kind | Purpose |
 |------|---------|
 | agent_card | Deployment spec for autonomous agent |
 | agent_computer_interface | GUI/terminal interaction protocol |
+| bounded_context | DDD boundary within which a domain model applies |
 | capability_registry | Searchable catalog of all available agents |
 | component_map | Component connectivity map |
+| context_map | DDD diagram of bounded context relationships |
 | decision_record | ADR: context, decision, consequences |
 | diagram | Architecture diagram (ASCII or Mermaid) |
 | dual_loop_architecture | Outer/inner loop agent control |
@@ -289,17 +308,24 @@ documentation, pricing -- everything flows through 8F.
 | pattern | Reusable pattern (e.g., continuous batching) |
 | supervisor | Crew orchestrator for multiple builders |
 
-### P09 Config (28 kinds)
+### P09 Config (39 kinds)
 
 | Kind | Purpose |
 |------|---------|
+| alert_rule | Observable threshold that triggers notification or response |
+| backpressure_policy | Policy for when downstream cannot keep up with upstream |
 | batch_config | Async batch processing config |
+| canary_config | Gradual traffic rollout with automatic rollback triggers |
+| circuit_breaker | Auto-disable failing dependencies with recovery cooldown |
 | cost_budget | Token budget and spend tracking |
 | data_residency | GDPR regional compliance config |
+| deployment_manifest | Specification of artifacts to deploy and deployment config |
 | effort_profile | Thinking level config for builder execution |
 | env_config | Environment variables |
 | experiment_config | A/B test and prompt experiment config |
 | feature_flag | Feature flag (on/off, gradual rollout) |
+| hibernation_policy | Policy for hibernating idle serverless workloads |
+| inference_config | Inference-time parameters (temperature, top_p, sampling) |
 | kubernetes_ai_requirement | CNCF Kubernetes AI Requirement (KAR) |
 | marketplace_app_manifest | Marketplace app manifest (Claude/LangChain/HF) |
 | oauth_app_config | OAuth2/PKCE app config |
@@ -311,18 +337,22 @@ documentation, pricing -- everything flows through 8F.
 | rate_limit_config | Rate limiting (RPM, TPM, budget) |
 | rbac_policy | Role-based access control for multi-tenant |
 | realtime_session | Live bidirectional session config |
+| retry_policy | Backoff, jitter, and budget config for retrying failed ops |
 | runtime_rule | Runtime rule (timeouts, retries, limits) |
 | sandbox_config | Isolated code execution environment |
 | sandbox_spec | Enterprise pilot sandbox spec |
 | secret_config | Secret management |
+| slo_definition | Service level objective with target threshold and error budget |
 | sso_config | SSO/SAML/OIDC identity provider config |
+| terminal_backend | Abstract execution backend selectable at runtime |
 | thinking_config | Extended thinking and budget tokens |
+| tokenizer_config | BPE/sentencepiece/tiktoken tokenizer parameters |
 | transport_config | Network transport for realtime communication |
 | usage_quota | Usage quota and fair-use enforcement |
 | vad_config | Voice activity detection settings |
 | white_label_config | White-label/reseller configuration |
 
-### P10 Memory (18 kinds)
+### P10 Memory (22 kinds)
 
 | Kind | Purpose |
 |------|---------|
@@ -331,6 +361,7 @@ documentation, pricing -- everything flows through 8F.
 | compression_config | Context compression config for tool outputs |
 | consolidation_policy | Memory lifecycle management policy |
 | entity_memory | Entity-level memory |
+| episodic_memory | Long-term store of past interactions indexed by episode |
 | knowledge_index | Search index (BM25, FAISS config) |
 | learning_record | Learning record (what worked/failed) |
 | memory_architecture | Complete memory system design |
@@ -339,13 +370,16 @@ documentation, pricing -- everything flows through 8F.
 | model_registry | Model versioning and artifact tracking |
 | procedural_memory | Skill and procedure storage/retrieval |
 | prompt_cache | Cached prompt TTL and eviction config |
+| prospective_memory | Scheduled future actions and reminders for agents |
 | runtime_state | Per-session runtime state |
 | session_backend | Per-user session state persistence |
 | session_state | Session state (ephemeral, snapshot) |
+| user_model | Cross-session model of user preferences and working style |
 | vc_credential | W3C Verifiable Credential for AI agent identity |
 | workflow_run_crate | RO-Crate workflow execution provenance |
+| working_memory | Short-term context store for a single active task |
 
-### P11 Feedback (26 kinds)
+### P11 Feedback (31 kinds)
 
 | Kind | Purpose |
 |------|---------|
@@ -356,8 +390,11 @@ documentation, pricing -- everything flows through 8F.
 | compliance_checklist | SOC2, GDPR, HIPAA, EU AI Act checklist |
 | compliance_framework | Regulatory mapping and attestation |
 | conformity_assessment | EU AI Act Annex IV conformity assessment |
+| constitutional_rule | Absolute behavioral constraint that cannot be overridden |
 | content_filter | Input/output content filtering pipeline |
 | content_monetization | Content monetization pipeline config |
+| curation_nudge | Periodic prompt to persist knowledge to durable memory |
+| drift_detector | Monitor for distribution shift in model inputs/outputs |
 | enterprise_sla | Enterprise SLA (uptime, latency, support) |
 | gpai_technical_doc | EU AI Act GPAI technical documentation |
 | guardrail | Safety restriction / safety boundary |
@@ -366,8 +403,10 @@ documentation, pricing -- everything flows through 8F.
 | lifecycle_rule | Lifecycle rule (freshness, archive, promote) |
 | nps_survey | NPS survey configuration |
 | optimizer | Process optimizer (metric > action) |
+| preference_dataset | Human-labeled preference pairs for RLHF/DPO training |
 | quality_gate | Quality barrier (pass/fail with score) |
 | referral_program | Referral program with viral coefficient |
+| revision_loop_policy | Policy governing max revision iterations and escalation |
 | reward_signal | Continuous quality signal |
 | roi_calculator | ROI calculator with TCO comparison |
 | safety_hazard_taxonomy | MLCommons hazard taxonomy (12 categories) |
@@ -376,7 +415,7 @@ documentation, pricing -- everything flows through 8F.
 | subscription_tier | SaaS subscription tier (pricing + features) |
 | threat_model | Structured hazard/risk assessment |
 
-### P12 Orchestration (15 kinds)
+### P12 Orchestration (20 kinds)
 
 | Kind | Purpose |
 |------|---------|
@@ -385,11 +424,16 @@ documentation, pricing -- everything flows through 8F.
 | crew_template | Reusable crew blueprint (roles, process, memory) |
 | dag | Acyclic dependency graph |
 | dispatch_rule | Dispatch rule (keyword > agent group) |
+| domain_event | Immutable record of something significant in the domain |
 | handoff | Handoff instruction (task + context + commit) |
+| pipeline_template | Scenario-indexed agent pipeline recipe |
+| process_manager | Event-driven coordinator for multi-step processes |
 | renewal_workflow | Renewal workflow with stages and escalation |
+| saga | Long-running distributed transaction with compensating actions |
 | schedule | Temporal trigger for workflows |
 | signal | Inter-agent signal (complete, error, progress) |
 | spawn_config | Spawn configuration (solo, grid, continuous) |
+| state_machine | Formal finite state machine with states and transitions |
 | team_charter | Mission contract for a crew instance |
 | visual_workflow | GUI-based workflow editor config |
 | workflow | Workflow (sequential/parallel steps) |
@@ -400,27 +444,26 @@ documentation, pricing -- everything flows through 8F.
 
 ## Section 4: Builder Structure
 
-Each kind has a builder at `archetypes/builders/{kind}-builder/` with 13 ISOs:
+Each kind has a builder at `archetypes/builders/{kind}-builder/` with 12 ISOs:
 
-| ISO | File pattern | Purpose |
-|-----|-------------|---------|
-| 1 | `bld_manifest_{kind}.md` | Builder identity and capabilities |
-| 2 | `bld_instruction_{kind}.md` | Step-by-step build instructions |
-| 3 | `bld_system_prompt_{kind}.md` | System prompt for the builder agent |
-| 4 | `bld_scoring_rubric_{kind}.md` | Quality scoring criteria |
-| 5 | `bld_template_{kind}.md` | Output template with placeholders |
-| 6 | `bld_example_golden_{kind}.md` | Golden example (quality 9.5+) |
-| 7 | `bld_example_anti_{kind}.md` | Anti-example (common mistakes) |
-| 8 | `bld_knowledge_card_{kind}.md` | Domain knowledge for the kind |
-| 9 | `bld_schema_{kind}.md` | Frontmatter schema definition |
-| 10 | `bld_quality_gate_{kind}.md` | Hard gates (H01-H07) |
-| 11 | `bld_context_doc_{kind}.md` | Domain context and references |
-| 12 | `bld_few_shot_{kind}.md` | Few-shot examples for prompting |
-| 13 | `bld_checklist_{kind}.md` | Pre-publish checklist |
+| ISO | File pattern | 8F stage | Purpose |
+|-----|-------------|----------|---------|
+| 1 | `bld_manifest_{kind}.md` | F2 BECOME | Builder identity and capabilities |
+| 2 | `bld_instruction_{kind}.md` | F6 PRODUCE | Step-by-step build instructions |
+| 3 | `bld_prompt_{kind}.md` | F3 INJECT | System prompt for the builder agent |
+| 4 | `bld_scoring_{kind}.md` | F7 GOVERN | Quality scoring criteria |
+| 5 | `bld_template_{kind}.md` | F6 PRODUCE | Output template with placeholders |
+| 6 | `bld_examples_{kind}.md` | F7 GOVERN | Golden + anti examples |
+| 7 | `bld_knowledge_card_{kind}.md` | F3 INJECT | Domain knowledge for the kind |
+| 8 | `bld_schema_{kind}.md` | F1 CONSTRAIN | Frontmatter schema definition |
+| 9 | `bld_quality_gate_{kind}.md` | F7 GOVERN | Hard gates (H01-H07) |
+| 10 | `bld_architecture_{kind}.md` | F1 CONSTRAIN | Structural constraints and patterns |
+| 11 | `bld_feedback_{kind}.md` | F7 GOVERN | Feedback loops and improvement signals |
+| 12 | `bld_orchestration_{kind}.md` | F8 COLLABORATE | Cross-builder coordination rules |
 
 **Build command**: `python _tools/cex_8f_runner.py "intent" --kind {kind} --execute`
 
-**259 builders** exist today (257 kinds + 2 meta-builders).
+**302 builders** exist today (300 kind-specific + 2 meta-builders).
 
 ---
 
@@ -447,12 +490,12 @@ If it is about SELLING, route to N06. If it crosses domains, N07 orchestrates.
 
 | Stat | Value |
 |------|-------|
-| Total kinds | 257 |
+| Total kinds | 300 |
 | Total pillars | 12 (P01-P12) |
 | Total nuclei | 8 (N00-N07) |
-| Total builders | 259 |
-| ISOs per builder | 13 |
-| Total ISOs | 3,367 |
+| Total builders | 302 |
+| ISOs per builder | 12 |
+| Total ISOs | 3,647 |
 | Pipeline steps | 8 (F1-F8) + 3 sub-steps (F3b, F3c, F7b) |
 | Quality floor | 8.0 |
 | Quality target | 9.0+ |
