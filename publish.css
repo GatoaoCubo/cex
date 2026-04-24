@@ -83,11 +83,7 @@
   padding: 8px 16px;
 }
 
-/* ---- Graph ---- */
-.graph-view.color-fill-unresolved { color: #4a4a4a; }
-.graph-view.color-fill { color: #e84393; }
-.graph-view.color-arrow { color: #e84393; }
-.graph-view.color-line { color: #2a2a2a; }
+/* ---- Graph: no overrides, let Publish use its defaults ---- */
 
 /* ---- Sidebar / navigation ---- */
 .published-container .nav-file-title {
