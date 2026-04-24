@@ -47,6 +47,7 @@ Set-Location $env:CEX_ROOT
 
 # Load .env (secrets for MCP servers, LLM providers). System env wins.
 . "$PSScriptRoot\_shared\load_dotenv.ps1"
+. "$PSScriptRoot\_shared\check_mcp_env.ps1"  # Pre-flight: warn if MCP env vars are missing
 
 Write-Host "  [>>] Probing LiteLLM proxy at $proxyUrl ..." -ForegroundColor DarkGray
 try {

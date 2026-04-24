@@ -37,6 +37,7 @@ $env:CEX_ROOT = $cexRoot
 $env:CEX_CLI = "codex"
 Set-Location $env:CEX_ROOT
 . "$PSScriptRoot\_shared\load_dotenv.ps1"
+. "$PSScriptRoot\_shared\check_mcp_env.ps1"  # Pre-flight: warn if MCP env vars are missing
 
 # System context baked into prompt (no --append-system-prompt on codex)
 $sysPrompt = @'
