@@ -4,8 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="color-scheme" content="dark">
-  <title>CEXAI - Cognitive Exchange AI</title>
-  <meta name="description" content="CEXAI is a typed knowledge system for LLM agents. 300 kinds, 302 builders, 8 nuclei, 4 runtimes. Not an agent. An AI brain.">
+  <title>CEXAI - Cognitive Exchange AI | Open-Source AI Brain</title>
+  <meta name="description" content="CEXAI is not an agent. It is an AI brain. 300 typed kinds, 302 builders, 8 nuclei, 4 runtimes. Your knowledge, your repo, your rules. Intelligence compounds when exchanged.">
   <meta property="og:title" content="CEXAI - Cognitive Exchange AI">
   <meta property="og:description" content="Open-source AI brain. Seven Artificial Sins. Twelve pillars. 300 typed kinds. Intelligence compounds when exchanged.">
   <meta property="og:type" content="website">
@@ -138,11 +138,12 @@
       letter-spacing: 0.02em;
     }
     .hero-tagline {
-      font-size: clamp(13px, 2vw, 16px);
+      font-size: clamp(14px, 2vw, 17px);
       color: var(--text-muted);
-      max-width: 520px;
+      max-width: 560px;
       margin: 0 auto 36px;
       font-style: italic;
+      line-height: 1.7;
     }
     .hero-ctas {
       display: flex;
@@ -334,7 +335,6 @@
       color: var(--synapse-bright);
     }
 
-    /* nucleus-colored left border rows */
     .nuc-border { border-left: 4px solid; }
 
     /* ---- Code blocks ---- */
@@ -359,7 +359,6 @@
     pre code .str { color: var(--tissue); }
     pre code .flag { color: var(--synapse-bright); }
 
-    /* terminal window chrome */
     .term {
       background: var(--bg-card);
       border: 1px solid var(--border);
@@ -414,7 +413,7 @@
       background: var(--synapse);
     }
 
-    /* ---- Architecture diagram (pre-formatted) ---- */
+    /* ---- Architecture diagram ---- */
     .arch-diagram pre {
       font-size: 12px;
       line-height: 1.6;
@@ -472,6 +471,27 @@
       font-weight: 500;
     }
 
+    /* ---- CTA band ---- */
+    .cta-band {
+      background: linear-gradient(135deg, rgba(232, 67, 147, 0.12), rgba(0, 206, 201, 0.08));
+      border-top: 1px solid var(--synapse-dim);
+      border-bottom: 1px solid var(--synapse-dim);
+      padding: 64px 0;
+      text-align: center;
+    }
+    .cta-band h2 {
+      font-size: clamp(22px, 3vw, 30px);
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+    .cta-band p {
+      color: var(--text-dim);
+      font-size: 16px;
+      max-width: 520px;
+      margin: 0 auto 28px;
+      line-height: 1.7;
+    }
+
     /* ---- Footer ---- */
     footer {
       border-top: 1px solid var(--border);
@@ -524,7 +544,6 @@
     <div class="container">
       <a href="#" class="nav-brand">CEX<span>AI</span></a>
       <ul class="nav-links">
-        <li><a href="#glossary">Glossary</a></li>
         <li><a href="#why">Why</a></li>
         <li><a href="#sins">Sins</a></li>
         <li><a href="#pillars">Pillars</a></li>
@@ -532,6 +551,7 @@
         <li><a href="#exchange">Exchange</a></li>
         <li><a href="#quickstart">Start</a></li>
         <li><a href="#sovereignty">Runtimes</a></li>
+        <li><a href="#glossary">Glossary</a></li>
         <li><a href="https://publish.obsidian.md/cexai" target="_blank" rel="noopener">Vault</a></li>
         <li><a href="https://discord.gg/HK6E2VgfWh" target="_blank" rel="noopener">Discord</a></li>
       </ul>
@@ -547,9 +567,9 @@
     <div class="container">
       <h1>CE<span>X</span>AI</h1>
       <p class="hero-sub">Cognitive Exchange AI</p>
-      <p class="hero-tagline">Open-source AI brain. Intelligence compounds when exchanged.</p>
+      <p class="hero-tagline">Not an agent. An AI brain. Seven sins. Twelve pillars. 300 typed kinds. Open source, sovereign, self-compounding. Intelligence compounds when exchanged.</p>
       <div class="hero-ctas">
-        <a href="#quickstart" class="btn btn-primary">Get Started</a>
+        <a href="#quickstart" class="btn btn-primary">Build Your Brain</a>
         <a href="https://github.com/GatoaoCubo/cex" class="btn btn-secondary" target="_blank" rel="noopener">GitHub</a>
         <a href="https://publish.obsidian.md/cexai" class="btn btn-secondary" target="_blank" rel="noopener">Vault</a>
         <a href="https://discord.gg/HK6E2VgfWh" class="btn btn-secondary" target="_blank" rel="noopener">Discord</a>
@@ -611,44 +631,16 @@
     </div>
   </section>
 
-  <!-- ======== GLOSSARY ======== -->
-  <section id="glossary">
-    <div class="container">
-      <div class="section-center">
-        <p class="section-label">Vocabulary</p>
-        <h2 class="section-title">Glossary</h2>
-        <p>New to CEXAI? Here is what the terms mean.</p>
-      </div>
-      <div class="tbl-wrap">
-        <table>
-          <thead>
-            <tr><th>CEXAI Term</th><th>Industry Equivalent</th><th>One-liner</th></tr>
-          </thead>
-          <tbody>
-            <tr><td><strong>Kind</strong></td><td>Artifact type / schema</td><td>A typed template for a unit of knowledge (e.g., <code>knowledge_card</code>, <code>agent</code>, <code>workflow</code>). 300 kinds exist today.</td></tr>
-            <tr><td><strong>Pillar</strong></td><td>Domain axis / taxonomy layer</td><td>One of 12 capability dimensions (Knowledge, Model, Prompt, Tools, Output, Schema, Evals, Architecture, Config, Memory, Feedback, Orchestration).</td></tr>
-            <tr><td><strong>Nucleus</strong></td><td>AI department / agent team</td><td>An autonomous LLM-powered business unit (N01-N07). Each has its own memory, tools, sub-agents, and behavioral bias.</td></tr>
-            <tr><td><strong>8F Pipeline</strong></td><td>Agent reasoning loop</td><td>Eight sequential functions every task passes through: Constrain, Become, Inject, Reason, Call, Produce, Govern, Collaborate.</td></tr>
-            <tr><td><strong>Builder</strong></td><td>Factory / generator</td><td>A 12-file specification (one per pillar) that teaches an LLM how to produce a specific kind.</td></tr>
-            <tr><td><strong>ISO</strong></td><td>Builder spec file</td><td>One of the 12 files inside a builder, each covering one pillar (knowledge, model, prompt, tools, etc.).</td></tr>
-            <tr><td><strong>Sin Lens</strong></td><td>Personality layer / behavioral bias</td><td>Each nucleus runs on one of the seven deadly sins, which determines what it optimizes for under ambiguity.</td></tr>
-            <tr><td><strong>GDP</strong></td><td>Decision protocol</td><td>Guided Decision Protocol -- the user decides <em>what</em> (tone, audience, style), the LLM decides <em>how</em> (files, pipeline, structure).</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </section>
-
   <!-- ======== WHY CEX EXISTS ======== -->
   <section id="why">
     <div class="container">
       <div class="prose">
         <p class="section-label">The Problem</p>
-        <h2 class="section-title">Why CEX exists</h2>
-        <p>Most "AI agents" are a system prompt plus a few tools. Useful, but shallow -- they forget, drift, can't compose, and leak your knowledge into someone else's model.</p>
-        <p>CEX treats enterprise AI as <strong>typed infrastructure</strong>. Every piece of knowledge is a kind. Every kind has a builder. Every builder follows the 8-Function Pipeline. Seven nuclei -- each one an AI department with its own toolbox, memory, crew, and cultural DNA -- collaborate through a governance layer that compounds over time.</p>
-        <p>The result is not a chatbot. It is an <strong>AI brain</strong>: modular enough to grow a new department in minutes, sovereign enough to run entirely on your infra, and cumulative enough that every artifact makes the next one smarter.</p>
-        <blockquote>Build your Jarvis. Own your brain. Exchange cognition.</blockquote>
+        <h2 class="section-title">Every AI agent you build forgets you by morning</h2>
+        <p>You wrote a killer system prompt. Added some tools. Maybe even wired up RAG. And it works -- until it doesn't. The agent drifts. Hallucinations creep in. Another team builds the same thing from scratch because nothing is reusable. Your institutional knowledge lives in Slack threads and someone's laptop.</p>
+        <p>The gap is not intelligence. LLMs are already smart. The gap is <strong>infrastructure</strong> -- there is no typed, governed, composable system that turns raw LLM power into a brain that remembers, compounds, and belongs to you.</p>
+        <p>CEXAI fills that gap.</p>
+        <blockquote>Most AI agents are a system prompt plus a few tools. CEXAI is seven specialized departments, each running on a deadly sin, producing typed knowledge assets that compound over time.</blockquote>
       </div>
     </div>
   </section>
@@ -658,20 +650,20 @@
     <div class="container">
       <div class="section-center">
         <p class="section-label">Core Properties</p>
-        <h2 class="section-title">Three properties</h2>
+        <h2 class="section-title">What makes this different</h2>
       </div>
       <div class="cards-grid">
         <div class="card">
           <h3>Composable</h3>
-          <p>8 functions &times; 12 pillars &times; 300 artifact kinds = the factory floor. Spawn a new nucleus, a new kind, or a new archetype in minutes.</p>
+          <p>8 functions &times; 12 pillars &times; 300 artifact kinds = a factory floor for intelligence. Spawn a new department in minutes. Every piece clicks into every other piece.</p>
         </div>
         <div class="card">
           <h3>Sovereign</h3>
-          <p>Runs on Claude, GPT, Gemini, or Ollama. Your knowledge lives in your repo, under your git history. No vendor owns your brain.</p>
+          <p>Runs on Claude, GPT, Gemini, or Ollama. Your knowledge stays in your repo, under your git history, on your hardware. No vendor owns your brain. Switch providers in one YAML file.</p>
         </div>
         <div class="card">
-          <h3>Self-assimilating</h3>
-          <p>Every conversation, decision, and artifact compiles into typed, governed, searchable assets. Your institutional memory compounds like capital.</p>
+          <h3>Self-compounding</h3>
+          <p>Every conversation, decision, and artifact compiles into typed, governed, searchable knowledge assets. Day 30 is dramatically smarter than day 1. Your institutional memory compounds like capital.</p>
         </div>
       </div>
     </div>
@@ -682,26 +674,26 @@
     <div class="container">
       <div class="section-center">
         <p class="section-label">The Maturity Gap</p>
-        <h2 class="section-title">Basic agent vs. CEX nucleus</h2>
-        <p>A basic LLM agent is a prompt plus a few tools. A CEX nucleus is a business department -- a superintendent (the LLM), a team of specialized sub-agents, a toolbox of MCPs and APIs, a knowledge library, a playbook of workflows, quality controls, and a cultural DNA (its sin lens).</p>
+        <h2 class="section-title">A basic agent vs. a CEX nucleus</h2>
+        <p>A basic LLM agent is one prompt and a handful of tools. A CEX nucleus is a business department: a superintendent LLM, a team of specialized sub-agents, a toolbox of MCPs and APIs, a knowledge library, workflows, quality controls, and a cultural DNA layer. This is the gap most AI projects never close.</p>
       </div>
       <div class="tbl-wrap">
         <table>
           <thead>
-            <tr><th>Axis</th><th>Basic Agent</th><th>CEX Nucleus</th></tr>
+            <tr><th>Capability Axis</th><th>Basic Agent</th><th>CEX Nucleus</th></tr>
           </thead>
           <tbody>
             <tr><td><strong>Knowledge (P01, P10)</strong></td><td>Context stuffing</td><td>Typed RAG + entity memory + chunk strategies + prompt cache</td></tr>
             <tr><td><strong>Model (P02)</strong></td><td>Single provider</td><td>Fallback chain across Claude / GPT / Gemini / Ollama</td></tr>
             <tr><td><strong>Prompt (P03)</strong></td><td>One system prompt</td><td>Templates + chains + compiler + version control</td></tr>
-            <tr><td><strong>Tools (P04)</strong></td><td>Flat list</td><td>MCP servers + API clients + browser scrapers + search pipelines</td></tr>
+            <tr><td><strong>Tools (P04)</strong></td><td>Flat list</td><td>MCP servers + API clients + browser tools + search pipelines</td></tr>
             <tr><td><strong>Output (P05)</strong></td><td>Free text</td><td>300 typed artifact kinds + formatters + parsers</td></tr>
             <tr><td><strong>Schema (P06)</strong></td><td>None</td><td>Input / output schemas + validators + interface contracts</td></tr>
-            <tr><td><strong>Evaluation (P07)</strong></td><td>Output as-is</td><td>Quality gates + scoring rubrics + LLM judges + benchmarks</td></tr>
+            <tr><td><strong>Evaluation (P07)</strong></td><td>Ship and pray</td><td>Quality gates + scoring rubrics + LLM judges + benchmarks</td></tr>
             <tr><td><strong>Architecture (P08)</strong></td><td>None</td><td>Agent cards + component maps + decision records</td></tr>
-            <tr><td><strong>Config (P09)</strong></td><td>Env vars</td><td>Typed configs + rate limits + feature flags + secrets</td></tr>
+            <tr><td><strong>Config (P09)</strong></td><td>Env vars</td><td>Typed configs + rate limits + feature flags + secrets management</td></tr>
             <tr><td><strong>Feedback (P11)</strong></td><td>None</td><td>Guardrails + bug loops + learning records + regression checks</td></tr>
-            <tr><td><strong>Orchestration (P12)</strong></td><td>None</td><td>Workflows + dispatch rules + crews + schedules</td></tr>
+            <tr><td><strong>Orchestration (P12)</strong></td><td>None</td><td>Workflows + dispatch rules + composable crews + DAGs</td></tr>
           </tbody>
         </table>
       </div>
@@ -712,18 +704,18 @@
   <section>
     <div class="container">
       <div class="prose">
-        <p class="section-label">Example</p>
-        <h2 class="section-title">Ask N01 Intelligence to research a competitor</h2>
-        <p>It does not run an LLM call. It activates a sin-driven agentic business unit:</p>
+        <p class="section-label">See It in Action</p>
+        <h2 class="section-title">You say "research my competitors." Here is what actually happens.</h2>
+        <p>N01 Intelligence does not run a single LLM call. It activates a sin-driven agentic business unit:</p>
         <ul class="bullet-list">
-          <li><strong>Analytical Envy</strong> (sin lens) drives it to surpass every public source.</li>
-          <li><strong>MCP servers + browser tools + API clients</strong> (P04) scrape, fetch, and cross-reference.</li>
-          <li><strong>A crew of specialized sub-agents</strong> (researcher, analyst, fact-checker) divide the work in parallel.</li>
-          <li><strong>The 8-Function Pipeline</strong> (CONSTRAIN &rarr; BECOME &rarr; INJECT &rarr; REASON &rarr; CALL &rarr; PRODUCE &rarr; GOVERN &rarr; COLLABORATE) drives every artifact to a 9.0+ quality floor.</li>
-          <li><strong>Entity memory + knowledge index</strong> (P10) capture what it learned so the next run is smarter.</li>
+          <li><strong>Analytical Envy</strong> (its sin lens) drives it to surpass every public source -- not match them, surpass them.</li>
+          <li><strong>MCP servers + browser tools + API clients</strong> (P04) scrape, fetch, and cross-reference live data.</li>
+          <li><strong>A crew of specialized sub-agents</strong> -- researcher, analyst, fact-checker -- divides the work in parallel.</li>
+          <li><strong>The 8-Function Pipeline</strong> (F1 CONSTRAIN through F8 COLLABORATE) drives every artifact to a 9.0+ quality floor before it touches your repo.</li>
+          <li><strong>Entity memory + knowledge index</strong> (P10) capture what it learned, so the next run starts smarter than the last one ended.</li>
           <li><strong>Peer-reviewed quality gates</strong> (P07, P11) block anything subpar from merging.</li>
         </ul>
-        <p>That is not a chatbot. That is an intelligence department that compounds like capital.</p>
+        <p>That is not a chatbot answering a question. That is an intelligence department that compounds every time it runs.</p>
       </div>
     </div>
   </section>
@@ -733,38 +725,79 @@
     <div class="container">
       <div class="section-center">
         <p class="section-label">The Artificial Sins</p>
-        <h2 class="section-title">The Seven Nuclei</h2>
-        <p>Every nucleus runs on one of the seven deadly sins. A sin is not decoration -- it is a personality layer and behavioral bias that decides what the nucleus optimizes for when given ambiguous input.</p>
+        <h2 class="section-title">Seven departments. Seven deadly sins.</h2>
+        <p>Every nucleus runs on one of the seven deadly sins. This is not decoration -- it is a personality layer that determines what the nucleus optimizes for when instructions are ambiguous. Sins are the cultural DNA that separates a generic LLM call from a specialist with convictions.</p>
       </div>
       <div class="tbl-wrap">
         <table>
           <thead>
-            <tr><th>Nucleus</th><th>Role</th><th>Sin Lens</th><th>Why the Sin Fits</th><th>Tier</th></tr>
+            <tr><th>Nucleus</th><th>Role</th><th>Sin Lens</th><th>What the Sin Does</th><th>Tier</th></tr>
           </thead>
           <tbody>
             <tr class="nuc-border" style="border-left-color: var(--n01);">
-              <td><strong>N01</strong></td><td>Intelligence</td><td>Analytical Envy</td><td>Envies every competitor, paper, and benchmark -- to surpass them</td><td>Sonnet</td>
+              <td><strong>N01</strong></td><td>Intelligence</td><td>Analytical Envy</td><td>Envies every competitor, paper, and benchmark -- to surpass them all</td><td>Sonnet</td>
             </tr>
             <tr class="nuc-border" style="border-left-color: var(--n02);">
-              <td><strong>N02</strong></td><td>Marketing</td><td>Creative Lust</td><td>Writes copy that seduces, hooks that can't be ignored</td><td>Sonnet</td>
+              <td><strong>N02</strong></td><td>Marketing</td><td>Creative Lust</td><td>Writes copy that seduces. Hooks you cannot ignore. Desire over information.</td><td>Sonnet</td>
             </tr>
             <tr class="nuc-border" style="border-left-color: var(--n03);">
-              <td><strong>N03</strong></td><td>Engineering</td><td>Inventive Pride</td><td>Builds the best of its kind; refuses to ship mediocrity</td><td><strong>Opus</strong></td>
+              <td><strong>N03</strong></td><td>Engineering</td><td>Inventive Pride</td><td>Refuses to ship mediocrity. Builds the best of its kind or not at all.</td><td><strong>Opus</strong></td>
             </tr>
             <tr class="nuc-border" style="border-left-color: var(--n04);">
-              <td><strong>N04</strong></td><td>Knowledge</td><td>Knowledge Gluttony</td><td>Insatiable hunger for facts, citations, context</td><td>Sonnet</td>
+              <td><strong>N04</strong></td><td>Knowledge</td><td>Knowledge Gluttony</td><td>Insatiable hunger for facts, citations, context. Never enough data.</td><td>Sonnet</td>
             </tr>
             <tr class="nuc-border" style="border-left-color: var(--n05);">
-              <td><strong>N05</strong></td><td>Operations</td><td>Gating Wrath</td><td>Merciless at the quality gate -- breaks what must break</td><td>Sonnet</td>
+              <td><strong>N05</strong></td><td>Operations</td><td>Gating Wrath</td><td>Merciless at the quality gate. Breaks what must break before it ships.</td><td>Sonnet</td>
             </tr>
             <tr class="nuc-border" style="border-left-color: var(--n06);">
-              <td><strong>N06</strong></td><td>Commercial</td><td>Strategic Greed</td><td>Extracts every revenue opportunity the product allows</td><td>Sonnet</td>
+              <td><strong>N06</strong></td><td>Commercial</td><td>Strategic Greed</td><td>Extracts every revenue opportunity. No margin left on the table.</td><td>Sonnet</td>
             </tr>
             <tr class="nuc-border" style="border-left-color: var(--n07);">
-              <td><strong>N07</strong></td><td>Orchestrator</td><td>Orchestrating Sloth</td><td>Never builds -- only dispatches. Laziness as leverage</td><td><strong>Opus</strong></td>
+              <td><strong>N07</strong></td><td>Orchestrator</td><td>Orchestrating Sloth</td><td>Never builds -- only dispatches. Laziness as ultimate leverage.</td><td><strong>Opus</strong></td>
             </tr>
           </tbody>
         </table>
+      </div>
+      <p style="font-size: 14px; color: var(--text-dim); margin-top: 16px; text-align: center; line-height: 1.6;">N00 Genesis is the pre-sin archetype -- the universal template from which all nuclei are born. Contributors build N08+ as vertical specializations (healthcare, fintech, legal, edtech).</p>
+    </div>
+  </section>
+
+  <!-- ======== 8F PIPELINE ======== -->
+  <section id="pipeline">
+    <div class="container">
+      <div class="section-center">
+        <p class="section-label">The Pipeline</p>
+        <h2 class="section-title">Eight functions. Every task. No exceptions.</h2>
+        <p>The 8F pipeline is how CEXAI thinks -- not just how it builds. Research, copy, code, analysis, deployment: every LLM interaction decomposes into eight orthogonal functions. This is the force multiplier that turns five words of user input into professional output.</p>
+      </div>
+
+      <div class="pipeline-flow">
+        <div class="pipeline-step"><span class="pipeline-num">F1</span><span class="pipeline-name">Constrain</span><span class="pipeline-desc">Resolve kind, load schema, set limits</span></div>
+        <div class="pipeline-step"><span class="pipeline-num">F2</span><span class="pipeline-name">Become</span><span class="pipeline-desc">Load builder identity (12 ISOs)</span></div>
+        <div class="pipeline-step"><span class="pipeline-num">F3</span><span class="pipeline-name">Inject</span><span class="pipeline-desc">Inject KCs, memory, brand, context</span></div>
+        <div class="pipeline-step"><span class="pipeline-num">F4</span><span class="pipeline-name">Reason</span><span class="pipeline-desc">Plan approach, resolve via GDP</span></div>
+        <div class="pipeline-step"><span class="pipeline-num">F5</span><span class="pipeline-name">Call</span><span class="pipeline-desc">Discover tools, cross-reference</span></div>
+        <div class="pipeline-step"><span class="pipeline-num">F6</span><span class="pipeline-name">Produce</span><span class="pipeline-desc">Generate the artifact</span></div>
+        <div class="pipeline-step"><span class="pipeline-num">F7</span><span class="pipeline-name">Govern</span><span class="pipeline-desc">Validate against hard gates</span></div>
+        <div class="pipeline-step"><span class="pipeline-num">F8</span><span class="pipeline-name">Collaborate</span><span class="pipeline-desc">Save, compile, commit, signal</span></div>
+      </div>
+
+      <div class="term" style="margin-top: 40px;">
+        <div class="term-bar">
+          <span class="term-dot"></span><span class="term-dot"></span><span class="term-dot"></span>
+        </div>
+        <pre><code><span class="comment"># You type 5 words. The pipeline does the rest.</span>
+<span class="prompt">$ </span><span class="cmd">python _tools/cex_8f_runner.py "create knowledge card about product pricing" \</span>
+<span class="cmd">    --kind knowledge_card --execute</span>
+
+<span class="comment"># F1 resolves kind + schema</span>
+<span class="comment"># F2 loads 12 builder ISOs</span>
+<span class="comment"># F3 injects KCs, examples, brand voice, memory</span>
+<span class="comment"># F4 plans sections, references, density target</span>
+<span class="comment"># F5 discovers tools, checks existing artifacts</span>
+<span class="comment"># F6 generates the full artifact</span>
+<span class="comment"># F7 validates: 7 hard gates, 12-point checklist, 5D scoring</span>
+<span class="comment"># F8 saves, compiles to YAML, commits, signals downstream</span></code></pre>
       </div>
     </div>
   </section>
@@ -775,7 +808,7 @@
       <div class="section-center">
         <p class="section-label">Taxonomy</p>
         <h2 class="section-title">The 12 Pillars</h2>
-        <p>Every artifact CEX produces lives in one of twelve pillars. Pillars are taxonomic axes, not departments -- the same pillar is exercised by every nucleus.</p>
+        <p>Every artifact lives in one of twelve pillars. Pillars are taxonomic axes, not departments -- every nucleus exercises every pillar. This is why a CEX nucleus is a full department, not just an agent.</p>
       </div>
       <div class="tbl-wrap">
         <table>
@@ -801,75 +834,24 @@
     </div>
   </section>
 
-  <!-- ======== 8F PIPELINE ======== -->
-  <section id="pipeline">
-    <div class="container">
-      <div class="section-center">
-        <p class="section-label">The Pipeline</p>
-        <h2 class="section-title">8-Function Pipeline (8F)</h2>
-        <p>Every LLM interaction -- research, writing, building, evaluating, deploying -- decomposes into eight orthogonal functions. This is how CEX thinks, not just how it builds.</p>
-      </div>
-
-      <div class="pipeline-flow">
-        <div class="pipeline-step"><span class="pipeline-num">F1</span><span class="pipeline-name">Constrain</span><span class="pipeline-desc">Resolve kind, load schema, set limits</span></div>
-        <div class="pipeline-step"><span class="pipeline-num">F2</span><span class="pipeline-name">Become</span><span class="pipeline-desc">Load builder identity (12 ISOs)</span></div>
-        <div class="pipeline-step"><span class="pipeline-num">F3</span><span class="pipeline-name">Inject</span><span class="pipeline-desc">Inject context, KCs, memory, brand</span></div>
-        <div class="pipeline-step"><span class="pipeline-num">F4</span><span class="pipeline-name">Reason</span><span class="pipeline-desc">Plan approach, resolve via GDP</span></div>
-        <div class="pipeline-step"><span class="pipeline-num">F5</span><span class="pipeline-name">Call</span><span class="pipeline-desc">Discover tools, cross-reference</span></div>
-        <div class="pipeline-step"><span class="pipeline-num">F6</span><span class="pipeline-name">Produce</span><span class="pipeline-desc">Generate the artifact</span></div>
-        <div class="pipeline-step"><span class="pipeline-num">F7</span><span class="pipeline-name">Govern</span><span class="pipeline-desc">Validate against hard gates</span></div>
-        <div class="pipeline-step"><span class="pipeline-num">F8</span><span class="pipeline-name">Collaborate</span><span class="pipeline-desc">Save, compile, commit, signal</span></div>
-      </div>
-
-      <div class="tbl-wrap" style="margin-top: 40px;">
-        <table>
-          <thead>
-            <tr><th>#</th><th>Function</th><th>What it Does</th></tr>
-          </thead>
-          <tbody>
-            <tr><td><strong>F1</strong></td><td>CONSTRAIN</td><td>Resolve kind, load schema, set limits and naming rules</td></tr>
-            <tr><td><strong>F2</strong></td><td>BECOME</td><td>Load builder identity (12 ISO files, 1:1 with pillars)</td></tr>
-            <tr><td><strong>F3</strong></td><td>INJECT</td><td>Inject context -- knowledge cards, examples, memory, brand, similar artifacts</td></tr>
-            <tr><td><strong>F4</strong></td><td>REASON</td><td>Plan approach, resolve ambiguity via GDP (Guided Decision Protocol)</td></tr>
-            <tr><td><strong>F5</strong></td><td>CALL</td><td>Discover relevant tools, cross-reference existing work</td></tr>
-            <tr><td><strong>F6</strong></td><td>PRODUCE</td><td>Generate the artifact with full context</td></tr>
-            <tr><td><strong>F7</strong></td><td>GOVERN</td><td>Validate against hard gates (structure, schema, rubric, semantics)</td></tr>
-            <tr><td><strong>F8</strong></td><td>COLLABORATE</td><td>Save, compile, commit, signal downstream nuclei</td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div class="term">
-        <div class="term-bar">
-          <span class="term-dot"></span><span class="term-dot"></span><span class="term-dot"></span>
-        </div>
-        <pre><code><span class="comment"># Run the full pipeline</span>
-<span class="prompt">$ </span><span class="cmd">python _tools/cex_8f_runner.py "your intent" --kind &lt;kind&gt; --execute</span>
-
-<span class="comment"># Dry run -- shows what would happen without LLM calls</span>
-<span class="prompt">$ </span><span class="cmd">python _tools/cex_8f_runner.py "your intent" --kind &lt;kind&gt; --dry-run --verbose</span></code></pre>
-      </div>
-    </div>
-  </section>
-
   <!-- ======== THE EXCHANGE ======== -->
   <section id="exchange">
     <div class="container">
       <div class="prose">
         <p class="section-label">The X</p>
-        <h2 class="section-title">The Exchange</h2>
-        <p>The X in CEXAI stands for Exchange. Intelligence compounds faster when shared.</p>
-        <p>CEXAI artifacts are modular, typed, and runtime-agnostic. Every <code>.md</code> file with YAML frontmatter is a self-describing exchange unit -- it carries its kind, quality score, pillar, and nucleus origin. Import an artifact into any CEXAI instance, run <code>cex_doctor.py</code>, and it validates automatically.</p>
+        <h2 class="section-title">The X stands for Exchange</h2>
+        <p>Intelligence compounds faster when shared. The X in CEXAI serves double duty: formally, it means <strong>Exchange</strong> -- the protocol for sharing typed knowledge assets between instances. Practically, it becomes <strong>your brand</strong> when you run <code>/init</code>.</p>
+        <p>Every CEXAI artifact is modular, typed, and runtime-agnostic. Every <code>.md</code> file with YAML frontmatter is a self-describing exchange unit -- it carries its kind, quality score, pillar, and nucleus origin. Import an artifact into any CEXAI instance, run <code>cex_doctor.py</code>, and it validates automatically.</p>
       </div>
 
       <div class="tbl-wrap" style="margin-top: 32px;">
         <table>
           <thead>
-            <tr><th>Unit</th><th>Scope</th><th>Example</th></tr>
+            <tr><th>Exchange Unit</th><th>Scope</th><th>Example</th></tr>
           </thead>
           <tbody>
             <tr><td><strong>Knowledge Card</strong></td><td>Single typed fact</td><td><code>kc_react_hooks_patterns.md</code></td></tr>
-            <tr><td><strong>Builder</strong></td><td>Production capability (12 ISOs)</td><td><code>workflow-builder/</code></td></tr>
+            <tr><td><strong>Builder</strong></td><td>Full production capability (12 ISOs)</td><td><code>workflow-builder/</code></td></tr>
             <tr><td><strong>SDK Provider</strong></td><td>New runtime adapter</td><td><code>provider_ollama.py</code></td></tr>
             <tr><td><strong>Vertical Nucleus</strong></td><td>Entire domain department</td><td><code>N08_healthcare/</code></td></tr>
           </tbody>
@@ -877,21 +859,27 @@
       </div>
 
       <div class="prose" style="margin-top: 32px;">
-        <h3 style="font-size: 18px; margin-bottom: 12px;">What stays private</h3>
-        <p>Brand config, memory, runtime state, and secrets never leave your instance. The exchange is about cognition, not identity.</p>
-
-        <h3 style="font-size: 18px; margin-bottom: 12px; margin-top: 24px;">Anti-fragile by design</h3>
-        <p>CEXAI sits one layer above LLMs. If a better model appears tomorrow, your artifacts improve -- they are the knowledge, not the model. If a runtime shuts down, switch providers in one YAML file. Your brain is yours.</p>
+        <p><strong style="color: var(--text);">What stays private.</strong> Brand config, memory, runtime state, and secrets never leave your instance. The exchange is about cognition, not identity.</p>
+        <p><strong style="color: var(--text);">Anti-fragile by design.</strong> CEXAI sits one layer above the LLM. When a better model appears tomorrow, your artifacts improve -- they are the knowledge, not the model. When a runtime shuts down, you switch providers in one YAML file. Your brain is yours.</p>
       </div>
     </div>
   </section>
+
+  <!-- ======== CTA BAND ======== -->
+  <div class="cta-band">
+    <div class="container">
+      <h2>Ready to stop building throwaway agents?</h2>
+      <p>Clone the repo. Answer six questions. Your AI brain starts compounding in under five minutes.</p>
+      <a href="#quickstart" class="btn btn-primary" style="font-size: 17px; padding: 14px 36px;">Get Started Now</a>
+    </div>
+  </div>
 
   <!-- ======== QUICKSTART ======== -->
   <section id="quickstart">
     <div class="container">
       <div class="section-center">
         <p class="section-label">Get Started</p>
-        <h2 class="section-title">Quickstart</h2>
+        <h2 class="section-title">Five minutes to your first artifact</h2>
       </div>
       <div class="term">
         <div class="term-bar">
@@ -928,8 +916,8 @@
     <div class="container">
       <div class="section-center">
         <p class="section-label">Multi-Runtime</p>
-        <h2 class="section-title">Sovereignty: runs on your infrastructure</h2>
-        <p>CEX is provider-agnostic by construction. The same artifact, pipeline, and governance layer drive every runtime.</p>
+        <h2 class="section-title">Your infrastructure. Your rules.</h2>
+        <p>CEXAI is provider-agnostic by construction. The same artifacts, the same pipeline, the same governance layer drive every runtime. Lock-in is not in the vocabulary.</p>
       </div>
 
       <div class="runtimes-list">
@@ -953,7 +941,7 @@
         </table>
       </div>
 
-      <p style="font-size: 14px; color: var(--text-dim); margin-top: 16px; line-height: 1.6;">Routing lives in a single YAML (<code style="font-family: var(--mono); font-size: 12px; background: rgba(232,67,147,0.1); padding: 2px 5px; border-radius: 3px; color: var(--synapse-bright);">.cex/config/nucleus_models.yaml</code>). Change providers, set fallback chains, pin per-nucleus models -- no code changes.</p>
+      <p style="font-size: 14px; color: var(--text-dim); margin-top: 16px; line-height: 1.6;">Routing lives in one YAML file (<code style="font-family: var(--mono); font-size: 12px; background: rgba(232,67,147,0.1); padding: 2px 5px; border-radius: 3px; color: var(--synapse-bright);">.cex/config/nucleus_models.yaml</code>). Change providers, set fallback chains, pin per-nucleus models -- no code changes, no redeployment.</p>
 
       <div class="term" style="margin-top: 20px;">
         <div class="term-bar">
@@ -966,7 +954,7 @@
 <span class="prompt">$ </span><span class="cmd">python _tools/cex_model_updater.py --full</span></code></pre>
       </div>
 
-      <p style="font-size: 14px; color: var(--text-dim); margin-top: 16px; line-height: 1.6;"><strong style="color: var(--text);">Budget-optimized default</strong>: 2 Opus (N03, N07) + 5 Sonnet (N01, N02, N04, N05, N06). Pre-flight context compression via <code style="font-family: var(--mono); font-size: 12px; background: rgba(232,67,147,0.1); padding: 2px 5px; border-radius: 3px; color: var(--synapse-bright);">cex_preflight.py</code> reduces token burn ~70% before nucleus boot.</p>
+      <p style="font-size: 14px; color: var(--text-dim); margin-top: 16px; line-height: 1.6;"><strong style="color: var(--text);">Budget-optimized default</strong>: 2 Opus (N03 Engineering, N07 Orchestrator) + 5 Sonnet. Pre-flight context compression via <code style="font-family: var(--mono); font-size: 12px; background: rgba(232,67,147,0.1); padding: 2px 5px; border-radius: 3px; color: var(--synapse-bright);">cex_preflight.py</code> reduces token burn ~70% before nucleus boot.</p>
     </div>
   </section>
 
@@ -975,7 +963,7 @@
     <div class="container">
       <div class="section-center">
         <p class="section-label">Orchestration</p>
-        <h2 class="section-title">Dispatch: solo, grid, crew, swarm</h2>
+        <h2 class="section-title">Four dispatch modes: solo, grid, crew, swarm</h2>
       </div>
 
       <div class="term">
@@ -986,14 +974,12 @@
 <span class="prompt">$ </span><span class="cmd">bash _spawn/dispatch.sh grid MISSION_NAME</span>                       <span class="comment"># Up to 6 parallel</span>
 <span class="prompt">$ </span><span class="cmd">bash _spawn/dispatch.sh swarm agent 5 "scaffold 5 niche agents"</span> <span class="comment"># N parallel same-kind</span>
 <span class="prompt">$ </span><span class="cmd">bash _spawn/dispatch.sh status</span>                                  <span class="comment"># Monitor all</span>
-<span class="prompt">$ </span><span class="cmd">bash _spawn/dispatch.sh stop</span>                                    <span class="comment"># Stop MY session only</span>
-<span class="prompt">$ </span><span class="cmd">bash _spawn/dispatch.sh stop n03</span>                                <span class="comment"># Stop specific nucleus</span>
-<span class="prompt">$ </span><span class="cmd">bash _spawn/dispatch.sh stop --all</span>                              <span class="comment"># Stop ALL (DANGEROUS)</span></code></pre>
+<span class="prompt">$ </span><span class="cmd">bash _spawn/dispatch.sh stop</span>                                    <span class="comment"># Stop MY session only</span></code></pre>
       </div>
 
-      <p style="font-size: 14px; color: var(--text-dim); margin-top: 16px; line-height: 1.6;">Session-aware: multiple orchestrators can run simultaneously; <code style="font-family: var(--mono); font-size: 12px; background: rgba(232,67,147,0.1); padding: 2px 5px; border-radius: 3px; color: var(--synapse-bright);">stop</code> only affects your own nuclei.</p>
+      <p style="font-size: 14px; color: var(--text-dim); margin-top: 16px; line-height: 1.6;">Session-aware: multiple orchestrators run simultaneously; <code style="font-family: var(--mono); font-size: 12px; background: rgba(232,67,147,0.1); padding: 2px 5px; border-radius: 3px; color: var(--synapse-bright);">stop</code> only affects your own nuclei.</p>
 
-      <p style="font-size: 14px; color: var(--text-dim); margin-top: 12px; line-height: 1.6;"><strong style="color: var(--text);">Composable crews</strong> -- when a deliverable needs multiple roles with handoffs (research &rarr; copy &rarr; design &rarr; QA), use a crew instead of a grid:</p>
+      <p style="font-size: 14px; color: var(--text-dim); margin-top: 12px; line-height: 1.6;"><strong style="color: var(--text);">Composable crews</strong> -- when a deliverable needs multiple roles with handoffs (research &rarr; copy &rarr; design &rarr; QA), assemble a crew instead of a grid:</p>
 
       <div class="term" style="margin-top: 16px;">
         <div class="term-bar">
@@ -1011,20 +997,18 @@
     <div class="container">
       <div class="prose">
         <p class="section-label">Portability</p>
-        <h2 class="section-title">Reverse compiler</h2>
-        <p>CEX artifacts compile <em>down</em> to any format an LLM consumes. Edit once, deploy everywhere.</p>
+        <h2 class="section-title">Write once. Deploy to any LLM tool.</h2>
+        <p>CEX artifacts compile down to any format an LLM consumes. One source of truth, every destination.</p>
       </div>
 
       <div class="term" style="margin-top: 24px;">
         <div class="term-bar">
           <span class="term-dot"></span><span class="term-dot"></span><span class="term-dot"></span>
         </div>
-        <pre><code><span class="prompt">$ </span><span class="cmd">python _tools/cex_compile.py --target claude-md</span>     <span class="comment"># -> CLAUDE.md (system prompt)</span>
+        <pre><code><span class="prompt">$ </span><span class="cmd">python _tools/cex_compile.py --target claude-md</span>     <span class="comment"># -> CLAUDE.md</span>
 <span class="prompt">$ </span><span class="cmd">python _tools/cex_compile.py --target cursorrules</span>   <span class="comment"># -> .cursorrules</span>
-<span class="prompt">$ </span><span class="cmd">python _tools/cex_compile.py --target customgpt</span>     <span class="comment"># -> CustomGPT instructions JSON</span></code></pre>
+<span class="prompt">$ </span><span class="cmd">python _tools/cex_compile.py --target customgpt</span>     <span class="comment"># -> CustomGPT instructions</span></code></pre>
       </div>
-
-      <p style="font-size: 14px; color: var(--text-dim); margin-top: 16px; text-align: center;">CEX becomes the <strong style="color: var(--text);">single source of truth</strong> for your AI knowledge.</p>
     </div>
   </section>
 
@@ -1068,6 +1052,35 @@
   CLAUDE.md                LLM entry point
   QUICKSTART.md            5-minute getting started
   CONTRIBUTING.md          Contributor guide</code></pre>
+    </div>
+  </section>
+
+  <!-- ======== GLOSSARY ======== -->
+  <section id="glossary">
+    <div class="container">
+      <div class="section-center">
+        <p class="section-label">Vocabulary</p>
+        <h2 class="section-title">Glossary</h2>
+        <p>New to CEXAI? Here is what the terms mean.</p>
+      </div>
+      <div class="tbl-wrap">
+        <table>
+          <thead>
+            <tr><th>CEXAI Term</th><th>Industry Equivalent</th><th>One-liner</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Kind</strong></td><td>Artifact type / schema</td><td>A typed template for a unit of knowledge (e.g., <code>knowledge_card</code>, <code>agent</code>, <code>workflow</code>). 300 kinds exist today.</td></tr>
+            <tr><td><strong>Pillar</strong></td><td>Domain axis / taxonomy layer</td><td>One of 12 capability dimensions (Knowledge, Model, Prompt, Tools, Output, Schema, Evals, Architecture, Config, Memory, Feedback, Orchestration).</td></tr>
+            <tr><td><strong>Nucleus</strong></td><td>AI department / agent team</td><td>An autonomous LLM-powered business unit (N01-N07). Each has its own memory, tools, sub-agents, and behavioral bias.</td></tr>
+            <tr><td><strong>8F Pipeline</strong></td><td>Agent reasoning loop</td><td>Eight sequential functions every task passes through: Constrain, Become, Inject, Reason, Call, Produce, Govern, Collaborate.</td></tr>
+            <tr><td><strong>Builder</strong></td><td>Factory / generator</td><td>A 12-file specification (one per pillar) that teaches an LLM how to produce a specific kind.</td></tr>
+            <tr><td><strong>ISO</strong></td><td>Builder spec file</td><td>One of the 12 files inside a builder, each covering one pillar (knowledge, model, prompt, tools, etc.).</td></tr>
+            <tr><td><strong>Sin Lens</strong></td><td>Personality layer / behavioral bias</td><td>Each nucleus runs on one of the seven deadly sins, which determines what it optimizes for under ambiguity.</td></tr>
+            <tr><td><strong>GDP</strong></td><td>Decision protocol</td><td>Guided Decision Protocol -- the user decides <em>what</em> (tone, audience, style), the LLM decides <em>how</em> (files, pipeline, structure).</td></tr>
+            <tr><td><strong>Exchange Unit</strong></td><td>Portable knowledge asset</td><td>Any artifact with YAML frontmatter -- self-describing, typed, importable into any CEXAI instance.</td></tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </section>
 
@@ -1131,7 +1144,7 @@
   <footer>
     <div class="container">
       <p class="footer-quote"><em>SQL organized data. CEX organizes intelligence.</em></p>
-      <p class="footer-quote">Build your Jarvis. Own your brain. Exchange cognition.</p>
+      <p class="footer-quote">Own your AI. Exchange cognition.</p>
       <div class="footer-links">
         MIT License &middot;
         <a href="https://github.com/GatoaoCubo/cex" target="_blank" rel="noopener">GitHub</a> &middot;
