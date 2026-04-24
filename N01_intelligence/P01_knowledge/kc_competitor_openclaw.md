@@ -62,7 +62,8 @@ non-profit foundation with OpenAI funding support.
 | Feb 15, 2026 | 190,000 | Steinberger joins OpenAI announced |
 | Mar 2, 2026 | 247,000 | Wikipedia snapshot |
 | Mar 3, 2026 | 250,829 | Surpassed React (10-year record) |
-| Apr 2026 | 335,000+ | Current (per skywork.ai analysis) |
+| Apr 2026 (early) | 335,000+ | Per skywork.ai analysis |
+| Apr 24, 2026 | 363,418 | LIVE: gh API verified (74,329 forks, 18,009 open issues, 1,881 contributors) |
 
 **Milestone:** Broke React's record as the most-starred GitHub project in ~60 days.
 OpenClaw is the fastest-growing open-source project in GitHub history by star acceleration.
@@ -71,8 +72,11 @@ OpenClaw is the fastest-growing open-source project in GitHub history by star ac
 
 | Metric | Value |
 |--------|-------|
-| Stars | 335,000+ |
-| Forks | 47,700+ |
+| Stars | 363,418 (gh API, Apr 24) -- up from 335K (early Apr) |
+| Forks | 74,329 (gh API, Apr 24) -- up from 47,700 (Mar) |
+| Open issues | 18,009 (gh API, Apr 24) |
+| Contributors | 1,881 (gh API, Apr 24) |
+| 30d commits | 13,158 (gh API, Apr 24) |
 | Codebase size | ~124,000 lines of code |
 | ClawHub skills | 13,729+ |
 | Public exposed instances | 135,000+ (security finding) |
@@ -129,14 +133,23 @@ server process on the user's machine or VPS and receives commands via messaging 
 | Standard | 4 vCPUs, 16GB RAM | ~$25 |
 | Power user | 8+ vCPUs, 32GB+ RAM | ~$60 |
 
-### Known Critical Vulnerability
+### Known Critical Vulnerabilities (expanded via Firecrawl scrape, Apr 24, 2026)
 
-- CVE-2026-25253 (CVSS 8.8): Remote Code Execution via unvalidated skill payloads
-- 9 additional CVEs disclosed in 4 days (March 2026) -- highest CVE density of any agent framework
+| CVE | Severity | Type | Description |
+|-----|----------|------|-------------|
+| CVE-2026-25253 | High (CVSS 8.8) | Token Theft | WebSocket gatewayUrl injection; attacker steals stored auth tokens |
+| CVE-2026-24763 | Critical | RCE | Remote command execution via command injection |
+| CVE-2026-26322 | High | SSRF | Server-side request forgery enabling internal system exploitation |
+| CVE-2026-26329 | Medium | Path Traversal | Local file exposure via path traversal |
+| CVE-2026-30741 | Critical | Prompt Injection | Code execution via injected commands in prompts |
+| CVE-2026-6011 | High | SSRF | Server-side request forgery (SentinelOne-documented) |
+| CVE-2026-33579 | High | Privilege Escalation | /pair approve fails to forward caller scopes |
+
 - Root cause: TypeScript gateway trusts skill metadata without sandbox isolation
 - Default port 0.0.0.0:18789 exposed to network without auth by default
-- Chinese government (March 2026): barred state enterprises from OpenClaw due to data exfiltration
-  risks, unauthorized deletion, and energy consumption concerns
+- Chinese government (March 2026): barred state enterprises from OpenClaw
+- **Exposure (Feb 2026):** 40,214 internet-exposed instances; 35.4% flagged vulnerable; 63% of deployments considered vulnerable (Infosecurity Magazine)
+- **Supply chain:** ~20% of ClawHub skills contained malicious payloads (Cisco AI Security Team)
 
 ---
 

@@ -8,7 +8,7 @@ version: 1.0.0
 created: 2026-04-24
 quality: null
 tags: [seed-intel, competitor, hermes, nous-research, gepa, self-improving, mcp]
-tldr: "Hermes Agent by Nous Research (57K+ stars; 95.6K reported; fastest-growing framework of 2026) is the only agent with a production-ready self-improvement loop (GEPA, ICLR 2026 Oral), full MCP bidirectional support, and a three-layer memory architecture -- making it the most technically sophisticated direct threat to CEX's compounding intelligence positioning."
+tldr: "Hermes Agent by Nous Research (115K GitHub stars verified April 24, 2026; fastest-growing framework of 2026) is the only agent with a production-ready self-improvement loop (GEPA, ICLR 2026 Oral), full MCP bidirectional support, and a three-layer memory architecture -- making it the most technically sophisticated direct threat to CEX's compounding intelligence positioning."
 ---
 
 # Hermes Agent (Nous Research): Competitor Intelligence Profile
@@ -52,20 +52,24 @@ model of the user across sessions. The tagline is "The agent that grows with you
 | Apr 16, 2026 | 57,200 | v0.10.0 release (hermesatlas.com snapshot) |
 | Apr 17, 2026 | 95,600 | tokenmix.ai review date |
 | Apr 2026 (reported) | 95,600-103,000 | Various sources; DEV.to article: "95.6K Stars" |
+| Apr 24, 2026 | 115,038 | LIVE: gh API verified (16,863 forks, 6,791 open issues, 646 contributors) |
 
-**Growth rate (30-day average as of April 2026):** ~9,500 stars/week
+**Growth rate (verified April 24):** ~19,438 stars in 8 days (Apr 16-24) = ~2,430 stars/day
 
-**Context:** Launched 3 months after OpenClaw (Feb 2026 vs Nov 2025). Reached 95.6K in
-7 weeks. OpenClaw had 345K at the same comparative period -- but Hermes is accelerating and
-has zero CVEs vs. OpenClaw's 10+.
+**Context:** Launched 3 months after OpenClaw (Feb 2026 vs Nov 2025). Reached 115K in
+~8 weeks. 3,202 commits in last 30 days (107/day). OpenClaw had 363K at similar age --
+but Hermes is accelerating faster and has zero CVEs vs. OpenClaw's 7+.
 
 ### Repository Stats (April 2026)
 
 | Metric | Value |
 |--------|-------|
-| Stars | 57,200 (hermesatlas.com) / 95,600-103,000 (tokenmix.ai / DEV.to) |
-| Forks | 7,572 (hermesatlas.com, Apr 16) |
-| Contributors | 274+ (hermesatlas.com) / 240+ (Nous Research Discord announcement) |
+| Stars | 115,038 (gh API, Apr 24) -- up from 57,200 (Apr 16) and 95,600 (Apr 17) |
+| Forks | 16,863 (gh API, Apr 24) -- up from 7,572 (Apr 16) |
+| Contributors | 646 (gh API, Apr 24) -- up from 274 (Apr 16) |
+| Open issues | 6,791 (gh API, Apr 24) |
+| 30d commits | 3,202 (gh API, Apr 24) |
+| Latest release | v2026.4.23 (Apr 23, 2026) |
 | Merged PRs | 1,400+ total |
 | PRs in v0.8 alone | 209 |
 | Discord community | ~4,000 builders (hermesatlas.com) |

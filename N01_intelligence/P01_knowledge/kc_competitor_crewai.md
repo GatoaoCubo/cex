@@ -35,19 +35,24 @@ angle: BR-to-BR founder story, shared language (PT-BR content), and a clear tech
 | GitHub forks | 6,800 | April 2026 |
 | GitHub watchers | 359 | April 2026 |
 | Open issues | 82 | April 2026 |
+| Open issues | 404 | gh API, Apr 24, 2026 |
 | Open PRs | 322 | April 2026 |
 | Total releases | 180 | April 2026 |
 | Latest version | 1.14.3 | April 24, 2026 |
-| Contributors | 250+ | OSS 1.0 announcement |
+| Contributors | 289 | gh API, Apr 24, 2026 |
+| 30d commits | 238 | gh API, Apr 24, 2026 |
 | Monthly downloads | 1.8M | OSS 1.0 announcement |
 | Monthly executions | 450M+ | OSS 1.0 announcement |
-| Total executions | 1.4B+ | OSS 1.0 announcement |
+| Total executions | 2B+ | ET30 blog + NVIDIA article, Mar 2026 (up from 1.4B) |
 | Certified developers | 100,000+ | crewai.com |
 | Fortune 500 adoption | ~60% | Official claim |
+| Global presence | 150+ countries | ET30 blog, Mar 2026 |
 | Cities with events | 30+ | OSS 1.0 announcement |
 | Total funding | $24.5M | Crunchbase |
 | Series A | $18M | October 2024 |
 | License | MIT | GitHub |
+| Enterprise Tech 30 | 2nd consecutive year (Mar 31, 2026) | 98 investors, 85 firms, $2.6T AUM |
+| NVIDIA partnership | NemoClaw integration (Mar 17, 2026) | DGX Station + Nemotron local models |
 
 ---
 
