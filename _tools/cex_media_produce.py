@@ -431,7 +431,12 @@ def produce_ppt(concept, concept_type, tech_def, lens_name, lens_content,
     print(f"  [OK] Slides markdown: {slides_path} ({slide_count} slides)")
 
     # Compile with Marp
-    marp_cmd = config.get("marp", {}).get("command", "npx @marp-team/marp-cli")
+    # Windows: use npx.cmd explicitly to avoid spawning the extensionless 'npx'
+    # script (Unix shebang) which Windows opens in Notepad when PATHEXT puts
+    # .PS1 before .CMD. See boot/_shared/fix_pathext.ps1 for context.
+    import platform
+    _default_npx = "npx.cmd" if platform.system() == "Windows" else "npx"
+    marp_cmd = config.get("marp", {}).get("command", f"{_default_npx} @marp-team/marp-cli")
     output_formats = config.get("marp", {}).get("output_formats", ["pptx"])
 
     for fmt in output_formats:

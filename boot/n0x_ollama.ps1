@@ -1,4 +1,4 @@
-param(
+﻿param(
     [Parameter(Mandatory=$true)][string]$Nucleus,
     [Parameter(Mandatory=$true)][string]$Handoff,
     [Parameter(Mandatory=$true)][string]$Output,
@@ -8,6 +8,7 @@ param(
     [int]$RequireReads = 2
 )
 . $PSScriptRoot/_shared/vt_enable.ps1  # Enable ANSI/VT for TUI (claude/gemini/codex/ollama)
+. $PSScriptRoot/_shared/fix_pathext.ps1  # Guard: .PS1 before .CMD breaks npx-based MCP servers
 
 # Set repo root
 $RepoRoot = Resolve-Path "$PSScriptRoot\.."

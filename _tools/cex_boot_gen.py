@@ -160,8 +160,19 @@ def build_claude_ps1(nucleus: str, cfg: dict, meta: dict) -> str:
     flag_parts = flags.split() if flags else []
     flags_array = ", ".join(f'"{f}"' for f in flag_parts)
 
-    # MCP and settings as conditional argument additions
-    mcp_line = f'$args += "--mcp-config", "{ROOT}\\{mcps}"' if mcps else "# no MCP config"
+    # MCP and settings as conditional argument additions.
+    # Per-nucleus overlay (.mcp-n0X.json) wins when present; otherwise fall back
+    # to root .mcp.json. Avoids "MCP config file not found" when the overlay is
+    # missing for public users (BORIS_MERGE A6: overlays are optional).
+    if mcps:
+        mcp_line = (
+            f'$mcpOverlay = "{ROOT}\\{mcps}"\n'
+            f'$mcpRoot = "{ROOT}\\.mcp.json"\n'
+            f'if (Test-Path $mcpOverlay) {{ $cliArgs += "--mcp-config", $mcpOverlay }}\n'
+            f'elseif (Test-Path $mcpRoot) {{ $cliArgs += "--mcp-config", $mcpRoot }}'
+        )
+    else:
+        mcp_line = "# no MCP config"
     # Settings precedence: explicit cfg.settings -> per-nucleus allowlist stub -> none
     # The allowlist stub (.claude/nucleus-settings/{nucleus}.json) exists for N01-N07
     # as a scoped permission reference; existing nuclei still bypass via global
@@ -192,6 +203,7 @@ def build_claude_ps1(nucleus: str, cfg: dict, meta: dict) -> str:
 # --- UX: Window title with mission + sin + status ---
 # Auto-detect root from script location (worktree-agnostic)
 . $PSScriptRoot/_shared/vt_enable.ps1  # Enable ANSI/VT for TUI (claude/gemini/codex/ollama)
+. $PSScriptRoot/_shared/fix_pathext.ps1  # Guard: .PS1 before .CMD breaks npx-based MCP servers
 $cexRoot = Split-Path -Parent $PSScriptRoot
 $nucleus = "{nucleus}"
 . $PSScriptRoot/_shared/theme.ps1  # Per-nucleus theme (bg color, scrollback)
@@ -333,6 +345,7 @@ def _simple_ps1(nucleus: str, cfg: dict, meta: dict, cli: str,
 # Model: {model} | Handoff suffix: {task_suffix or "(default)"}
 
 . $PSScriptRoot/_shared/vt_enable.ps1  # Enable ANSI/VT for TUI
+. $PSScriptRoot/_shared/fix_pathext.ps1  # Guard: .PS1 before .CMD breaks npx-based MCP servers
 $cexRoot = Split-Path -Parent $PSScriptRoot
 $nucleus = "{nucleus}"
 . $PSScriptRoot/_shared/theme.ps1  # Per-nucleus theme

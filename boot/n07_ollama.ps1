@@ -1,10 +1,11 @@
-# CEX N07 Ollama -- CEX-N07-ORCHESTRATOR (Aider + Ollama)
+﻿# CEX N07 Ollama -- CEX-N07-ORCHESTRATOR (Aider + Ollama)
 # Mirrors boot/n07.ps1 but uses direct Ollama API via _tools/ollama_nucleus.py
 # CLI: python | Model: qwen3:8b (default) -- aider replaced 2026-04-13
 # Sin: Orchestrating Sloth (Orchestrating Sloth)
 
 # --- UX: Window title with mission + sin + status ---
 . $PSScriptRoot/_shared/vt_enable.ps1  # Enable ANSI/VT for TUI (claude/gemini/codex/ollama)
+. $PSScriptRoot/_shared/fix_pathext.ps1  # Guard: .PS1 before .CMD breaks npx-based MCP servers
 . $PSScriptRoot/_shared/emit_exit_signal.ps1
 . $PSScriptRoot/_shared/run_with_timeout.ps1
 $cexRoot = Split-Path -Parent $PSScriptRoot

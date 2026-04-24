@@ -9,6 +9,7 @@
 # --- UX: Window title with mission + sin + status ---
 # Auto-detect root from script location (worktree-agnostic)
 . $PSScriptRoot/_shared/vt_enable.ps1  # Enable ANSI/VT for TUI (claude/gemini/codex/ollama)
+. $PSScriptRoot/_shared/fix_pathext.ps1  # Guard: .PS1 before .CMD breaks npx-based MCP servers
 $cexRoot = Split-Path -Parent $PSScriptRoot
 $nucleus = "n07"
 . $PSScriptRoot/_shared/theme.ps1  # Per-nucleus theme (bg color, scrollback)
@@ -103,7 +104,10 @@ $cliArgs = @("--dangerously-skip-permissions", "--permission-mode", "bypassPermi
 $cliArgs += "--append-system-prompt", "N07_admin/agent_card_n07.md"
 $cliArgs += "--append-system-prompt", ".cex/P09_config/context_self_select.md"
 $cliArgs += "--append-system-prompt", $sysPrompt
-$cliArgs += "--mcp-config", "$cexRoot\.mcp-n07.json"
+$mcpOverlay = "$cexRoot\.mcp-n07.json"
+$mcpRoot = "$cexRoot\.mcp.json"
+if (Test-Path $mcpOverlay) { $cliArgs += "--mcp-config", $mcpOverlay }
+elseif (Test-Path $mcpRoot) { $cliArgs += "--mcp-config", $mcpRoot }
 $stubPath = Join-Path $cexRoot ".claude/nucleus-settings/n07.json"
 if (Test-Path $stubPath) { $cliArgs += "--settings", $stubPath }
 $cliArgs += $initialMsg
