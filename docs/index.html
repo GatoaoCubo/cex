@@ -765,46 +765,6 @@
     </div>
   </section>
 
-  <!-- ======== NUCLEUS != AGENT ======== -->
-  <section>
-    <div class="container">
-      <div class="section-center">
-        <p class="section-label">Comparison</p>
-        <h2 class="section-title">Nucleus != Agent</h2>
-        <p>A nucleus is not an "AI agent" with a system prompt and a tool list. It is a complete operational department.</p>
-      </div>
-      <div class="tbl-wrap">
-        <table>
-          <thead>
-            <tr><th>Capability</th><th>Basic AI Agent</th><th>CEXAI Nucleus</th></tr>
-          </thead>
-          <tbody>
-            <tr><td><strong>Identity</strong></td><td>System prompt</td><td><code>nucleus_def</code> + sin lens + 12-pillar inventory</td></tr>
-            <tr><td><strong>Memory</strong></td><td>Context window</td><td>Entity memory + episodic + procedural</td></tr>
-            <tr><td><strong>Tools</strong></td><td>Flat list</td><td>MCP servers + API clients + browser tools + pipelines</td></tr>
-            <tr><td><strong>Quality</strong></td><td>None / vibes</td><td>8F pipeline + quality gates + scoring rubrics</td></tr>
-            <tr><td><strong>Knowledge</strong></td><td>RAG maybe</td><td>Typed KC library + embedding + retrieval index</td></tr>
-            <tr><td><strong>Orchestration</strong></td><td>None</td><td>Crews, dispatch, workflows, schedules</td></tr>
-            <tr><td><strong>Runtime</strong></td><td>1 provider</td><td>Any (Claude, GPT, Gemini, Ollama)</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </section>
-
-  <!-- ======== NUCLEUS HIERARCHY ======== -->
-  <section>
-    <div class="container">
-      <div class="prose">
-        <p class="section-label">Hierarchy</p>
-        <h2 class="section-title">The nucleus hierarchy</h2>
-        <p><strong>N00 Genesis</strong> is the universal archetype -- the pre-sin template from which all operational nuclei are born. It defines the 12-pillar structure, the 8F pipeline, and every shared convention. Think of it as the base class.</p>
-        <p><strong>N01-N07</strong> are the convention nuclei -- seven departments that ship with CEXAI out of the box. Each one inherits N00's structure and adds its own sin lens, toolbox, memory, and domain expertise.</p>
-        <p><strong>N08+</strong> are community-contributed vertical nuclei. CEXAI's fractal architecture means you can spawn a new department (healthcare, legal, fintech) by cloning N00, assigning a sin, and populating the 12 pillars with domain-specific artifacts. The taxonomy scales horizontally without architectural changes.</p>
-      </div>
-    </div>
-  </section>
-
   <!-- ======== 12 PILLARS ======== -->
   <section id="pillars">
     <div class="container">
@@ -1057,8 +1017,7 @@
         </div>
         <pre><code><span class="prompt">$ </span><span class="cmd">python _tools/cex_compile.py --target claude-md</span>     <span class="comment"># -> CLAUDE.md (system prompt)</span>
 <span class="prompt">$ </span><span class="cmd">python _tools/cex_compile.py --target cursorrules</span>   <span class="comment"># -> .cursorrules</span>
-<span class="prompt">$ </span><span class="cmd">python _tools/cex_compile.py --target customgpt</span>     <span class="comment"># -> CustomGPT instructions JSON</span>
-<span class="prompt">$ </span><span class="cmd">python _tools/cex_compile.py --target mcp-server</span>    <span class="comment"># -> MCP server manifest</span></code></pre>
+<span class="prompt">$ </span><span class="cmd">python _tools/cex_compile.py --target customgpt</span>     <span class="comment"># -> CustomGPT instructions JSON</span></code></pre>
       </div>
 
       <p style="font-size: 14px; color: var(--text-dim); margin-top: 16px; text-align: center;">CEX becomes the <strong style="color: var(--text);">single source of truth</strong> for your AI knowledge.</p>
@@ -1105,35 +1064,6 @@
   CLAUDE.md                LLM entry point
   QUICKSTART.md            5-minute getting started
   CONTRIBUTING.md          Contributor guide</code></pre>
-    </div>
-  </section>
-
-  <!-- ======== KEY NUMBERS ======== -->
-  <section>
-    <div class="container">
-      <div class="section-center">
-        <p class="section-label">Scale</p>
-        <h2 class="section-title">Key numbers</h2>
-      </div>
-      <div class="tbl-wrap">
-        <table>
-          <thead>
-            <tr><th>Metric</th><th style="text-align: right;">Count</th></tr>
-          </thead>
-          <tbody>
-            <tr><td><strong>Artifact kinds</strong></td><td style="text-align: right;">300</td></tr>
-            <tr><td><strong>Builder factories</strong></td><td style="text-align: right;">302</td></tr>
-            <tr><td><strong>Builder ISO files</strong> (12 per kind)</td><td style="text-align: right;">3,647</td></tr>
-            <tr><td><strong>Sub-agents</strong> (<code>.claude/agents/</code>)</td><td style="text-align: right;">301</td></tr>
-            <tr><td><strong>Python CLI tools</strong></td><td style="text-align: right;">144</td></tr>
-            <tr><td><strong>Pillars</strong></td><td style="text-align: right;">12</td></tr>
-            <tr><td><strong>Nuclei</strong></td><td style="text-align: right;">8 (1 archetype + 7 operational)</td></tr>
-            <tr><td><strong>8-Function Pipeline steps</strong></td><td style="text-align: right;">8</td></tr>
-            <tr><td><strong>Flywheel checks</strong></td><td style="text-align: right;">109 (100% WIRED)</td></tr>
-          </tbody>
-        </table>
-      </div>
-      <p style="text-align: center; margin-top: 16px; font-size: 13px; color: var(--text-muted);">Counts are live-verifiable: <code style="font-family: var(--mono); font-size: 12px; background: rgba(232,67,147,0.1); padding: 2px 5px; border-radius: 3px; color: var(--synapse-bright);">python _tools/cex_stats.py</code> and <code style="font-family: var(--mono); font-size: 12px; background: rgba(232,67,147,0.1); padding: 2px 5px; border-radius: 3px; color: var(--synapse-bright);">python _tools/cex_doctor.py</code>.</p>
     </div>
   </section>
 

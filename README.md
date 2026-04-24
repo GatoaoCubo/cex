@@ -286,7 +286,6 @@ CEX artifacts compile *down* to any format an LLM consumes. Edit once, deploy ev
 python _tools/cex_compile.py --target claude-md     # → CLAUDE.md (system prompt)
 python _tools/cex_compile.py --target cursorrules   # → .cursorrules
 python _tools/cex_compile.py --target customgpt     # → CustomGPT instructions JSON
-python _tools/cex_compile.py --target mcp-server    # → MCP server manifest
 ```
 
 CEX becomes the **single source of truth** for your AI knowledge.
