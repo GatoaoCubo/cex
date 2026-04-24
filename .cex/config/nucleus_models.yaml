@@ -47,7 +47,7 @@ n01:
   flags: "--dangerously-skip-permissions --permission-mode bypassPermissions --no-chrome"
   context: 1000000
   domain: research
-  mcps: ".mcp-n01.json"
+  mcps: ""
   settings: ".claude/nucleus-settings/n01.json"
   fallback_chain:
     - {cli: gemini, model: gemini-2.5-flash-lite, flags: "--yolo"}
