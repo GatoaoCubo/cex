@@ -1,17 +1,116 @@
-/* CEXAI Obsidian Publish Theme -- matches landing page neural palette */
+/* CEXAI Obsidian Publish -- neural/synapse palette */
+/* Matches docs/index.html dark theme */
 
-/* Base overrides */
+/* ---- Accent color (synapse pink) ---- */
 .published-container {
   --accent-h: 340;
   --accent-s: 80%;
   --accent-l: 65%;
+  --background-primary: #0a0a0a;
+  --background-secondary: #111111;
+  --background-modifier-border: #222222;
 }
 
-/* Graph node colors by path (pillar-based) */
+/* ---- Typography ---- */
+.published-container {
+  --font-text: 'Segoe UI', 'Inter', -apple-system, sans-serif;
+  --font-monospace: 'Cascadia Code', 'JetBrains Mono', 'Consolas', monospace;
+  --font-interface: 'Segoe UI', 'Inter', -apple-system, sans-serif;
+}
+
+/* ---- Links ---- */
+.published-container a {
+  color: #e84393;
+}
+.published-container a:hover {
+  color: #ff6bb5;
+}
+
+/* ---- Inline code ---- */
+.published-container code {
+  background: rgba(232, 67, 147, 0.1);
+  color: #ff6bb5;
+  border-radius: 3px;
+  padding: 1px 4px;
+}
+
+/* ---- Code blocks ---- */
+.published-container pre {
+  background: #111111;
+  border: 1px solid #222222;
+  border-radius: 6px;
+}
+
+/* ---- Tags ---- */
+.published-container .tag {
+  background: rgba(232, 67, 147, 0.15);
+  color: #e84393;
+  border-radius: 4px;
+}
+
+/* ---- Headings ---- */
+.published-container h1,
+.published-container h2,
+.published-container h3,
+.published-container h4 {
+  color: #f0f0f0;
+}
+
+/* ---- Tables ---- */
+.published-container table {
+  border-collapse: collapse;
+  width: 100%;
+}
+.published-container th {
+  background: #161616;
+  color: #e84393;
+  border-bottom: 2px solid #e84393;
+  text-align: left;
+  padding: 8px 12px;
+}
+.published-container td {
+  border-bottom: 1px solid #222222;
+  padding: 6px 12px;
+}
+.published-container tr:hover td {
+  background: rgba(232, 67, 147, 0.05);
+}
+
+/* ---- Blockquotes ---- */
+.published-container blockquote {
+  border-left: 3px solid #e84393;
+  background: rgba(232, 67, 147, 0.05);
+  padding: 8px 16px;
+}
+
+/* ---- Graph ---- */
 .graph-view.color-fill-unresolved { color: #4a4a4a; }
 .graph-view.color-fill { color: #e84393; }
 .graph-view.color-arrow { color: #e84393; }
 .graph-view.color-line { color: #2a2a2a; }
 
-/* Tag-based graph styling is limited in Publish,
-   but the accent color propagates to active nodes */
+/* ---- Sidebar / navigation ---- */
+.published-container .nav-file-title {
+  color: #e0e0e0;
+}
+.published-container .nav-file-title:hover {
+  color: #ff6bb5;
+}
+.published-container .nav-folder-title {
+  color: #e84393;
+  font-weight: 600;
+}
+
+/* ---- Search ---- */
+.published-container .search-result-file-title {
+  color: #e84393;
+}
+
+/* ---- Scrollbar ---- */
+.published-container ::-webkit-scrollbar-thumb {
+  background: #e84393;
+  border-radius: 4px;
+}
+.published-container ::-webkit-scrollbar-track {
+  background: #111111;
+}
