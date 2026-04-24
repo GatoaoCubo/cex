@@ -12,6 +12,14 @@
 # CLI options:  claude | gemini | codex | ollama
 # Model: any model string your CLI supports
 #
+# mcps field convention:
+#   - ".mcp-n0X.json"  -> per-nucleus overlay path (Test-Path checked at boot;
+#                          falls back to root .mcp.json if the overlay is missing)
+#   - ""               -> nucleus runs WITHOUT MCP (no overlay, no root fallback)
+#   The .mcp-n0X.json files are gitignored (see .gitignore: ".mcp-n*.json").
+#   Most users only have root .mcp.json -- the per-nucleus overlay paths
+#   declared below are aspirational, used only if a contributor creates them.
+#
 # Decision: 2026-04-02 — /guide session, user-confirmed
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 

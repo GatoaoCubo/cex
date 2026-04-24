@@ -164,12 +164,28 @@ def build_claude_ps1(nucleus: str, cfg: dict, meta: dict) -> str:
     # Per-nucleus overlay (.mcp-n0X.json) wins when present; otherwise fall back
     # to root .mcp.json. Avoids "MCP config file not found" when the overlay is
     # missing for public users (BORIS_MERGE A6: overlays are optional).
+    #
+    # Two emission modes:
+    # - HARDCODED (cex.ps1, n07.ps1): bake the overlay path into the script.
+    #   Used when the script is for ONE specific nucleus and overlay is fixed.
+    # - RESOLVER ($resolved.mcps): read overlay path from nucleus_models.yaml at
+    #   boot time. Used when YAML drives behavior (n01-n06.ps1). Lets users
+    #   change YAML without regenerating .ps1.
+    #
+    # We default to RESOLVER -- it's strictly more flexible. The hardcoded
+    # variant lives in the cex.ps1 / n07.ps1 templates that are not regenerated
+    # by this generator (they were hand-written for the orchestrator).
     if mcps:
         mcp_line = (
-            f'$mcpOverlay = "{ROOT}\\{mcps}"\n'
-            f'$mcpRoot = "{ROOT}\\.mcp.json"\n'
-            f'if (Test-Path $mcpOverlay) {{ $cliArgs += "--mcp-config", $mcpOverlay }}\n'
-            f'elseif (Test-Path $mcpRoot) {{ $cliArgs += "--mcp-config", $mcpRoot }}'
+            'if ($resolved.mcps) {\n'
+            '    $mcpOverlay = "$cexRoot\\$($resolved.mcps)"\n'
+            '    $mcpRoot = "$cexRoot\\.mcp.json"\n'
+            '    if (Test-Path $mcpOverlay) { $cliArgs += "--mcp-config", $mcpOverlay }\n'
+            '    elseif (Test-Path $mcpRoot) { $cliArgs += "--mcp-config", $mcpRoot }\n'
+            '} elseif (Test-Path "$cexRoot\\.mcp.json") {\n'
+            '    # No overlay declared in YAML; default to root .mcp.json if present\n'
+            '    $cliArgs += "--mcp-config", "$cexRoot\\.mcp.json"\n'
+            '}'
         )
     else:
         mcp_line = "# no MCP config"
@@ -277,6 +293,7 @@ Set-Location $env:CEX_ROOT
 
 # Load .env (secrets for MCP servers, LLM providers). System env wins.
 . "$PSScriptRoot\\_shared\\load_dotenv.ps1"
+. "$PSScriptRoot\\_shared\\check_mcp_env.ps1"  # Pre-flight: warn if MCP env vars are missing
 
 # --- Launch CLI ---
 # System prompt (sin identity + domain role) injected via --append-system-prompt
@@ -401,6 +418,7 @@ Set-Location $env:CEX_ROOT
 
 # Load .env (secrets for MCP servers, LLM providers). System env wins.
 . "$PSScriptRoot\\_shared\\load_dotenv.ps1"
+. "$PSScriptRoot\\_shared\\check_mcp_env.ps1"  # Pre-flight: warn if MCP env vars are missing
 
 # System context baked into prompt (no --append-system-prompt on {cli})
 $sysPrompt = @'
