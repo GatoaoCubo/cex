@@ -1,9 +1,10 @@
-# CEX N07 LiteLLM -- routes via proxy on :4000
+﻿# CEX N07 LiteLLM -- routes via proxy on :4000
 # Mirrors boot/n07_ollama.ps1 but talks to the LiteLLM proxy instead of
 # Ollama directly. Model alias: cex-n07 -- proxy decides backend (Anthropic
 # -> Gemini -> Ollama gemma4:26b -> qwen3) per .cex/P09_config/litellm_config.yaml.
 
 . $PSScriptRoot/_shared/vt_enable.ps1  # Enable ANSI/VT for TUI (claude/gemini/codex/ollama)
+. $PSScriptRoot/_shared/fix_pathext.ps1  # Guard: .PS1 before .CMD breaks npx-based MCP servers
 $cexRoot = Split-Path -Parent $PSScriptRoot
 $nucleus = "n07"
 . $PSScriptRoot/_shared/theme.ps1  # Per-nucleus theme (bg color, scrollback)
