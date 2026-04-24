@@ -1,6 +1,7 @@
 ---
 id: n04_agent_embedding_engineer
 kind: agent
+8f: F2_become
 pillar: P03
 title: "N04 Embedding Engineer — Vector Pipeline Specialist"
 version: 1.0.0

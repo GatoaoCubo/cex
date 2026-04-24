@@ -1,6 +1,7 @@
 ---
 id: action_prompt_upsell
 kind: action_prompt
+8f: F6_produce
 pillar: P03
 nucleus: n06
 title: "Action Prompt -- Upsell Trigger and Upgrade Conversation"

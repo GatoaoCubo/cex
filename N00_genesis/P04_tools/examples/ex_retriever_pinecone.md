@@ -1,6 +1,7 @@
 ---
 id: p04_retr_pinecone
 kind: retriever
+8f: F3_inject
 pillar: P04
 version: 1.0.0
 created: 2026-03-28

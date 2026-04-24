@@ -2,6 +2,7 @@
 id: atom_25_safety_taxonomy
 title: AI Safety Knowledge Card
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 domain: ai_safety
 pipeline: 8F (F1-F8)

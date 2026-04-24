@@ -1,6 +1,7 @@
 ---
 id: kc_ollama_deployment_guide
 kind: knowledge_card
+8f: F3_inject
 title: "Ollama Deployment Guide"
 version: 1.0.1
 quality: 9.0

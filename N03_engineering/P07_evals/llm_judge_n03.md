@@ -1,6 +1,7 @@
 ---
 id: p07_lj_n03
 kind: llm_judge
+8f: F7_govern
 pillar: P07
 title: "LLM Judge -- N03 Artifact Peer Review"
 version: 1.0.0

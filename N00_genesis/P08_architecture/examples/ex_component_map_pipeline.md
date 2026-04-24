@@ -1,6 +1,7 @@
 ---
 id: ex_component_map_pipeline
 kind: component_map
+8f: F4_reason
 pillar: P08
 title: "Example — Pipeline Engine Component Map"
 tags: [architecture, pipeline, components, 8f, engine]

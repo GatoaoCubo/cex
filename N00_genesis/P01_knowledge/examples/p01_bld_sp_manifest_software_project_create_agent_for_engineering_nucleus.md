@@ -1,6 +1,7 @@
 ---
 id: p02_agent_software_project_manifest
 kind: agent
+8f: F2_become
 pillar: P02
 title: "Software Project Manifest Agent"
 version: "1.0.0"

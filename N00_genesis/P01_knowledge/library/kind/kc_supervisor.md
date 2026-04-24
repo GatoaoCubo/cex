@@ -1,6 +1,7 @@
 ---
 id: p01_kc_supervisor
 kind: knowledge_card
+8f: F3_inject
 type: kind
 pillar: P08
 title: "Supervisor — Deep Knowledge for supervisor"

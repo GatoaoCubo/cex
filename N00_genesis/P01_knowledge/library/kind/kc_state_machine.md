@@ -3,6 +3,7 @@ quality: 8.0
 quality: 7.7
 id: kc_state_machine
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "Knowledge Card -- State Machine"
 version: 1.0.0

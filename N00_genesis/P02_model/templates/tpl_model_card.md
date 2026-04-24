@@ -1,6 +1,7 @@
 ---
 id: "p02_mc_[model_slug]"
 kind: model_card
+8f: F2_become
 pillar: P02
 version: 1.0.0
 title: "Template — Model Card"

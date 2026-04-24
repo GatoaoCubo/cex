@@ -1,6 +1,7 @@
 ---
 id: p03_sp_code_reviewer
 kind: system_prompt
+8f: F2_become
 pillar: P03
 title: System Prompt do Code Reviewer Agent
 target_agent: code-reviewer

@@ -1,6 +1,7 @@
 ---
 id: p11_rc_n04_knowledge
 kind: regression_check
+8f: F7_govern
 pillar: P07
 nucleus: n04
 title: "Regression Check -- N04 Retrieval and Knowledge Quality"

@@ -1,6 +1,7 @@
 ---
 id: tpl_instruction
 kind: instruction
+8f: F6_produce
 pillar: P03
 version: 1.0.0
 title: "Template — Instruction"

@@ -1,6 +1,7 @@
 ---
 id: tpl_notebooklm_audio_wrapper
 kind: prompt_template
+8f: F6_produce
 pillar: P03
 title: "NotebookLM Audio Overview — Brand Intro/Outro Wrapper"
 version: 1.0.0

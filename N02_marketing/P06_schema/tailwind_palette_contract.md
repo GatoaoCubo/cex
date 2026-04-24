@@ -1,6 +1,7 @@
 ---
 id: p06_schema_tailwind_palette
 kind: input_schema
+8f: F1_constrain
 pillar: P06
 title: "Tailwind Palette Contract"
 version: 1.0.0

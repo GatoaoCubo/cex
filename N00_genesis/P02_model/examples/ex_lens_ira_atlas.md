@@ -1,6 +1,7 @@
 ---
 id: p02_lens_ira_atlas
 kind: lens
+8f: F4_reason
 pillar: P02
 perspective: "ira — anger as execution fuel"
 applies_to: atlas_agent_group

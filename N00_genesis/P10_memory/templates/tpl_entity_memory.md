@@ -1,6 +1,7 @@
 ---
 id: p10_entity_memory
 kind: entity_memory
+8f: F3_inject
 pillar: P10
 version: 1.0.0
 title: "Template — Entity Memory"

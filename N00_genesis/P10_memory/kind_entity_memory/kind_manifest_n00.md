@@ -1,6 +1,7 @@
 ---
 id: n00_entity_memory_manifest
 kind: knowledge_card
+8f: F3_inject
 pillar: P10
 nucleus: n00
 title: "Entity Memory -- Canonical Manifest"

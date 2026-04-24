@@ -1,6 +1,7 @@
 ---
 id: p01_kc_design_token_arch
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "Design Token Architecture — Three-Layer System for Scalable Theming"
 version: 1.0.0

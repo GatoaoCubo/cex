@@ -17,7 +17,8 @@
       "eval_metric"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F1_constrain"
   },
   "action_paradigm": {
     "boundary": "Action execution paradigm. NOT agent_computer_interface (specific protocol) nor cli_tool (CLI wrapper).",
@@ -37,7 +38,8 @@
       "skill"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F6_produce"
   },
   "action_prompt": {
     "boundary": "Specific task. The LLM EXECUTES this. NOT prompt_template (reusable template) nor system_prompt (identity).",
@@ -56,7 +58,8 @@
       "prompt_template"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F6_produce"
   },
   "agent": {
     "boundary": "Complete agent definition (persona + capabilities). NOT a skill (P04, executable capability) nor system_prompt (P03, how it speaks).",
@@ -77,13 +80,14 @@
       "agent_card"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F2_become"
   },
   "agent_card": {
     "boundary": "Agent deployment spec. NOT agent (P02, persona only) nor boot_config (P02, provider startup) nor spawn_config (P12, runtime launch).",
     "core": false,
     "deprecated_by": null,
-    "description": "Deployment spec for autonomous agent  identity, model, tools, boot, dispatch, constraints",
+    "description": "Deployment spec for autonomous agent \u0097 identity, model, tools, boot, dispatch, constraints",
     "last_reviewed": "2026-04-14",
     "llm_function": "BECOME",
     "max_bytes": 4096,
@@ -97,7 +101,8 @@
       "capability_registry"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F2_become"
   },
   "agent_computer_interface": {
     "boundary": "Agent-computer interface. NOT browser_tool (web automation) nor computer_use (screen control).",
@@ -117,7 +122,8 @@
       "computer_use"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F2_become"
   },
   "agent_grounding_record": {
     "boundary": "Per-inference grounding record. NOT trace_config (raw OTel spans) nor model_card (training provenance).",
@@ -137,7 +143,8 @@
       "knowledge_index"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F2_become"
   },
   "agent_name_service_record": {
     "boundary": "Agent discovery record (DNS-like). NOT agent_card (capabilities) nor transport_config (protocol only).",
@@ -156,7 +163,8 @@
       "agent_card"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F2_become"
   },
   "agent_package": {
     "boundary": "Distributable agent package in ISO format. NOT agent (agent spec) -- agent_package is the portable bundle.",
@@ -176,7 +184,8 @@
       "agent_card"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F2_become"
   },
   "agent_profile": {
     "boundary": "Agent persona construction. NOT agent (full agent def) nor system_prompt (how agent speaks).",
@@ -196,7 +205,8 @@
       "agent_card"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F2_become"
   },
   "agentic_rag": {
     "boundary": "Agentic RAG pattern. NOT retriever (simple retrieval) nor agent (agent definition).",
@@ -218,7 +228,8 @@
       "chunk_strategy"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F3_inject"
   },
   "agents_md": {
     "boundary": "AGENTS.md standardized manifest. NOT CLAUDE.md (vendor-specific) nor README.md (human docs) nor .cursorrules (editor-specific).",
@@ -238,7 +249,8 @@
       "agent_card"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F2_become"
   },
   "aggregate_root": {
     "boundary": "DDD aggregate root. NOT interface (contract definition) nor input_schema (data validation). Evans Aggregate Root.",
@@ -262,7 +274,8 @@
       "domain_event"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F4_reason"
   },
   "ai_rmf_profile": {
     "boundary": "NIST AI-RMF vertical profile. NOT compliance_framework (broad regulatory mapping) nor threat_model (risk assessment). Structured per AI 600-1 GenAI-profile with action-IDs.",
@@ -282,7 +295,8 @@
       "guardrail"
     ],
     "requires_external_context": true,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F7_govern"
   },
   "alert_rule": {
     "boundary": "Monitoring trigger. NOT guardrail (LLM behavior constraint) nor quality_gate (artifact scoring). Industry: Prometheus alerting rule.",
@@ -302,7 +316,8 @@
       "env_config"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F8_collaborate"
   },
   "analyst_briefing": {
     "boundary": "Analyst briefing. NOT pitch_deck (sales) nor case_study (single ref).",
@@ -322,7 +337,8 @@
       "scoring_rubric"
     ],
     "requires_external_context": true,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F4_reason"
   },
   "api_client": {
     "boundary": "Typed unidirectional client. NOT db_connector nor mcp_server.",
@@ -342,7 +358,8 @@
       "secret_config"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F5_call"
   },
   "api_reference": {
     "boundary": "API docs. NOT schema (internal) nor sdk_example (code-only).",
@@ -362,7 +379,8 @@
       "input_schema"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F5_call"
   },
   "app_directory_entry": {
     "boundary": "App directory entry. NOT marketplace_app_manifest (machine spec) nor partner_listing (sales).",
@@ -382,7 +400,8 @@
       "knowledge_card"
     ],
     "requires_external_context": true,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F8_collaborate"
   },
   "audio_tool": {
     "boundary": "Processes audio input/output. NOT vision_tool (visual) nor notifier (message delivery).",
@@ -401,7 +420,8 @@
       "toolkit"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F5_call"
   },
   "audit_log": {
     "boundary": "Audit log spec. NOT trace_config (observability) nor regression_check (quality).",
@@ -421,13 +441,14 @@
       "knowledge_card"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F8_collaborate"
   },
   "axiom": {
     "boundary": "Immutable fundamental rule. NOT law (P08, adjustable operational) nor instruction (P03, flexible).",
     "core": true,
     "deprecated_by": null,
-    "description": "Principio fundamental imutavel â parte da identidade profunda da entidade",
+    "description": "Principio fundamental imutavel \u00e2\u0080\u0094 parte da identidade profunda da entidade",
     "last_reviewed": "2026-04-14",
     "llm_function": "BECOME",
     "max_bytes": 3072,
@@ -440,7 +461,8 @@
       "mental_model"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F4_reason"
   },
   "backpressure_policy": {
     "boundary": "Downstream overwhelm handling. NOT rate_limit_config (inbound throttle) nor circuit_breaker (dependency failure). Reactive Streams backpressure.",
@@ -459,7 +481,8 @@
       "rate_limit_config"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F1_constrain"
   },
   "batch_config": {
     "boundary": "API-level async batch job config. NOT a schedule (cron-based) nor a workflow (multi-step). This is a single bulk request.",
@@ -478,7 +501,8 @@
       "env_config"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F1_constrain"
   },
   "benchmark": {
     "boundary": "Quantitative performance measurement. NOT eval (does not test correctness) nor scoring_rubric (does not define criteria).",
@@ -499,7 +523,8 @@
       "eval_metric"
     ],
     "requires_external_context": true,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F7_govern"
   },
   "benchmark_suite": {
     "boundary": "Benchmark suite. NOT benchmark (single benchmark) nor eval_framework (evaluation tooling).",
@@ -520,7 +545,8 @@
       "scoring_rubric"
     ],
     "requires_external_context": true,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F7_govern"
   },
   "bias_audit": {
     "boundary": "Fairness evaluation. NOT benchmark (general perf) nor eval_metric (single metric def).",
@@ -540,7 +566,8 @@
       "scoring_rubric"
     ],
     "requires_external_context": true,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F7_govern"
   },
   "boot_config": {
     "boundary": "Bootstrap per provider (claude, cursor, codex). NOT env_config (P09, generic variables) nor spawn_config (P12, agent_groups).",
@@ -560,7 +587,8 @@
       "secret_config"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F2_become"
   },
   "bounded_context": {
     "boundary": "DDD boundary definition. NOT component_map (deployment structure) nor namespace (code boundary). Evans Bounded Context.",
@@ -580,7 +608,8 @@
       "context_map"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F4_reason"
   },
   "browser_tool": {
     "boundary": "Interacts with web pages via DOM. NOT computer_use (generic screen) nor search_tool (search without navigation).",
@@ -599,7 +628,8 @@
       "computer_use"
     ],
     "requires_external_context": false,
-    "requires_live_tools": true
+    "requires_live_tools": true,
+    "primary_8f": "F5_call"
   },
   "bugloop": {
     "boundary": "Automatic detect>fix>verify cycle. NOT unit_eval (P07, manual test) nor optimizer (continuous improvement, not correction).",
@@ -619,7 +649,8 @@
       "quality_gate"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F7_govern"
   },
   "c2pa_manifest": {
     "boundary": "C2PA 2.3 manifest with JUMBF/COSE structure. NOT camera capture manifest, document signing, or W3C VC agent identity.",
@@ -638,7 +669,8 @@
       "knowledge_card"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F1_constrain"
   },
   "canary_config": {
     "boundary": "Canary deployment spec. NOT feature_flag (boolean toggle) nor ab_test_config (experiment split). Industry: Argo Rollouts, Flagger.",
@@ -660,7 +692,8 @@
       "sandbox_spec"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F1_constrain"
   },
   "capability_registry": {
     "boundary": "Discovery catalog. NOT a handoff (P02) or agent card (P08/agent_card). Does not dispatch or execute agents.",
@@ -674,7 +707,8 @@
       "agent_card"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F2_become"
   },
   "case_study": {
     "boundary": "Case study. NOT pitch_deck (all-purpose) nor testimonial (quote only).",
@@ -694,7 +728,8 @@
       "customer_segment"
     ],
     "requires_external_context": true,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F4_reason"
   },
   "chain": {
     "boundary": "Sequence of PROMPTS. NOT workflow (P12, agents+tools).",
@@ -714,7 +749,8 @@
       "action_prompt"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F6_produce"
   },
   "changelog": {
     "boundary": "Changelog. NOT decision_record (rationale) nor release_notes (prose).",
@@ -734,7 +770,8 @@
       "learning_record"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F8_collaborate"
   },
   "checkpoint": {
     "boundary": "Saved state. NOT signal.",
@@ -753,7 +790,8 @@
       "workflow"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F8_collaborate"
   },
   "chunk_strategy": {
     "boundary": "Split method. NOT embedding_config.",
@@ -772,7 +810,8 @@
       "embedding_config"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F3_inject"
   },
   "churn_prevention_playbook": {
     "boundary": "Churn playbook. NOT renewal_workflow (process) nor expansion_play (upsell).",
@@ -792,7 +831,8 @@
       "cohort_analysis"
     ],
     "requires_external_context": true,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F6_produce"
   },
   "circuit_breaker": {
     "boundary": "Dependency circuit breaker. NOT fallback_chain (ordered provider fallback) nor rate_limit_config (inbound throttle). Industry: Hystrix, Resilience4j.",
@@ -812,7 +852,8 @@
       "rate_limit_config"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F8_collaborate"
   },
   "citation": {
     "boundary": "Source reference with provenance. NOT knowledge_card (the content itself), rag_source (pipeline config), nor glossary_entry (term definition).",
@@ -831,7 +872,8 @@
       "knowledge_card"
     ],
     "requires_external_context": true,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F3_inject"
   },
   "cli_tool": {
     "boundary": "One-shot command-line tool. NOT skill (no phases) nor daemon (does not persist in background).",
@@ -850,7 +892,8 @@
       "function_def"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F5_call"
   },
   "code_executor": {
     "boundary": "Isolated environment that executes code. NOT cli_tool (one-shot shell command) nor daemon (persistent process).",
@@ -869,7 +912,8 @@
       "env_config"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F5_call"
   },
   "code_of_conduct": {
     "boundary": "Code of conduct. NOT contributor_guide (technical) nor governance (decision rules).",
@@ -888,7 +932,8 @@
       "knowledge_card"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F8_collaborate"
   },
   "cohort_analysis": {
     "boundary": "Cohort analytics. NOT benchmark (model eval) nor usage_report (billing).",
@@ -908,7 +953,8 @@
       "customer_segment"
     ],
     "requires_external_context": true,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F4_reason"
   },
   "collaboration_pattern": {
     "boundary": "Coordination pattern. NOT workflow (execution sequence) nor handoff_protocol (handoff rules).",
@@ -928,7 +974,8 @@
       "agent_card"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F8_collaborate"
   },
   "competitive_matrix": {
     "boundary": "Competitive doc. NOT customer_segment (ICP) nor pitch_deck (narrative).",
@@ -948,7 +995,8 @@
       "customer_segment"
     ],
     "requires_external_context": true,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F4_reason"
   },
   "compliance_checklist": {
     "boundary": "Audit checklist. NOT guardrail (runtime) nor safety_policy (behavior).",
@@ -968,7 +1016,8 @@
       "knowledge_card"
     ],
     "requires_external_context": true,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F1_constrain"
   },
   "compliance_framework": {
     "boundary": "Regulatory compliance mapping. NOT safety_policy (org rules) nor threat_model (risk assessment).",
@@ -988,7 +1037,8 @@
       "constitutional_rule"
     ],
     "requires_external_context": true,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F1_constrain"
   },
   "component_map": {
     "boundary": "Structured map of components and connections. NOT diagram (visual) nor agent_card (scope of 1 agent_group).",
@@ -1008,7 +1058,8 @@
       "knowledge_card"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F4_reason"
   },
   "compression_config": {
     "added_version": "10.0.0",
@@ -1029,7 +1080,8 @@
       "memory_summary"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F1_constrain"
   },
   "computer_use": {
     "boundary": "GUI interaction via automation. NOT browser_tool (DOM) nor cli_tool (command line).",
@@ -1049,7 +1101,8 @@
       "vision_tool"
     ],
     "requires_external_context": false,
-    "requires_live_tools": true
+    "requires_live_tools": true,
+    "primary_8f": "F5_call"
   },
   "conformity_assessment": {
     "boundary": "Annex IV technical documentation package. NOT compliance_framework (general) nor threat_model (risk only).",
@@ -1069,7 +1122,8 @@
       "eval_metric"
     ],
     "requires_external_context": true,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F7_govern"
   },
   "consolidation_policy": {
     "boundary": "Memory lifecycle policy. NOT memory_scope (access rules) nor compression_config (token compression).",
@@ -1089,7 +1143,8 @@
       "knowledge_index"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F1_constrain"
   },
   "constitutional_rule": {
     "boundary": "Absolute constraint. NOT guardrail (soft constraint with fallback) nor safety_policy (policy document). Anthropic Constitutional AI.",
@@ -1110,7 +1165,8 @@
       "permission"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F7_govern"
   },
   "constraint_spec": {
     "boundary": "Governs decoder. NOT validation_schema.",
@@ -1129,7 +1185,8 @@
       "response_format"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F1_constrain"
   },
   "content_filter": {
     "boundary": "Content filtering pipeline. NOT guardrail (broad safety constraint) nor output_validator (schema check).",
@@ -1148,13 +1205,14 @@
       "guardrail"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F1_constrain"
   },
   "content_monetization": {
     "boundary": "Complete content monetization pipeline: billing, credits, checkout, courses, ads, emails. NOT pricing_strategy (strategy only) nor payment_integration (provider only).",
     "core": false,
     "deprecated_by": null,
-    "description": "Config-driven content monetization pipeline  PARSE>PRICING>CREDITS>CHECKOUT>COURSES>ADS>EMAILS>VALIDATE>DEPLOY",
+    "description": "Config-driven content monetization pipeline \u0097 PARSE>PRICING>CREDITS>CHECKOUT>COURSES>ADS>EMAILS>VALIDATE>DEPLOY",
     "last_reviewed": "2026-04-14",
     "llm_function": "PRODUCE",
     "max_bytes": 5120,
@@ -1168,7 +1226,8 @@
       "subscription_tier"
     ],
     "requires_external_context": true,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F6_produce"
   },
   "context_doc": {
     "boundary": "Domain context for hydrating prompts. NOT knowledge_card (no density gate) nor glossary_entry (does not define a term).",
@@ -1187,7 +1246,8 @@
       "knowledge_card"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F3_inject"
   },
   "context_file": {
     "boundary": "Project-scoped .md that shapes every agent turn. NOT system_prompt (agent-level) nor knowledge_card (fact storage) nor prompt_template (parameterized).",
@@ -1212,7 +1272,8 @@
       "memory_scope"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F2_become"
   },
   "context_map": {
     "boundary": "BC relationship map. NOT bounded_context (single BC definition) nor component_map (deployment structure). Evans DDD context mapping.",
@@ -1232,7 +1293,8 @@
       "component_map"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F4_reason"
   },
   "context_window_config": {
     "boundary": "Budget allocation spec. NOT prompt_template (content), system_prompt (identity), nor model_card (capabilities).",
@@ -1251,7 +1313,8 @@
       "prompt_template"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F1_constrain"
   },
   "contributor_guide": {
     "boundary": "Contributor guide. NOT integration_guide (consumer) nor code_of_conduct (norms).",
@@ -1271,7 +1334,8 @@
       "context_doc"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F8_collaborate"
   },
   "cost_budget": {
     "boundary": "Money and token economics. NOT a rate_limit_config (requests/sec) nor a token_budget tool (internal). This is the budget POLICY.",
@@ -1291,7 +1355,8 @@
       "usage_quota"
     ],
     "requires_external_context": true,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F1_constrain"
   },
   "course_module": {
     "boundary": "Course content module. NOT a prompt_template nor knowledge_card.",
@@ -1311,7 +1376,8 @@
       "scoring_rubric"
     ],
     "requires_external_context": true,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F6_produce"
   },
   "crew_template": {
     "boundary": "Reusable crew blueprint (roles + process + memory). NOT workflow (P12, generic steps) nor supervisor (P12, crew orchestrator instance) nor handoff (P12, single task transfer). Template does not execute; it instantiates the crew.",
@@ -1333,7 +1399,8 @@
       "quality_gate"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F2_become"
   },
   "curriculum_config": {
     "boundary": "Training data ordering and adaptive pacing. NOT training_method (how to train) nor dataset_card (data documentation) nor finetune_config (full training job).",
@@ -1354,7 +1421,8 @@
       "eval_metric"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F1_constrain"
   },
   "customer_segment": {
     "boundary": "ICP artifact. NOT user_journey (path) nor persona (not-a-kind).",
@@ -1373,7 +1441,8 @@
       "knowledge_card"
     ],
     "requires_external_context": true,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F4_reason"
   },
   "daemon": {
     "boundary": "Persistent background process. NOT hook (single event) nor cli_tool (one-shot execution that terminates).",
@@ -1393,7 +1462,8 @@
       "boot_config"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F8_collaborate"
   },
   "dag": {
     "boundary": "Acyclic dependency graph between tasks. NOT workflow (direct execution) nor component_map (P08, components).",
@@ -1413,7 +1483,8 @@
       "schedule"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F8_collaborate"
   },
   "data_contract": {
     "boundary": "Producer-consumer schema contract. NOT dataset_card (data metadata) nor validation_schema (output validation). DDD Published Language.",
@@ -1434,7 +1505,8 @@
       "validation_schema"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F1_constrain"
   },
   "data_residency": {
     "boundary": "Residency spec. NOT secret_config (credentials) nor rbac_policy (access).",
@@ -1454,7 +1526,8 @@
       "secret_config"
     ],
     "requires_external_context": true,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F1_constrain"
   },
   "dataset_card": {
     "boundary": "Dataset documentation. NOT eval_dataset (eval-specific data) nor knowledge_card (general knowledge).",
@@ -1473,7 +1546,8 @@
       "citation"
     ],
     "requires_external_context": true,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F3_inject"
   },
   "db_connector": {
     "boundary": "Access to structured data. NOT api_client nor retriever.",
@@ -1493,7 +1567,8 @@
       "secret_config"
     ],
     "requires_external_context": false,
-    "requires_live_tools": true
+    "requires_live_tools": true,
+    "primary_8f": "F5_call"
   },
   "decision_record": {
     "boundary": "Record. NOT law nor pattern.",
@@ -1512,7 +1587,8 @@
       "knowledge_card"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F4_reason"
   },
   "deployment_manifest": {
     "boundary": "Release deployment spec. NOT env_config (runtime environment) nor sandbox_spec (test environment). Industry: Kubernetes manifest, Helm values.",
@@ -1536,7 +1612,8 @@
       "enterprise_sla"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F8_collaborate"
   },
   "diagram": {
     "boundary": "Visual architecture diagram. NOT component_map (structured data) nor pattern (no prescription).",
@@ -1555,7 +1632,8 @@
       "component_map"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F4_reason"
   },
   "diff_strategy": {
     "boundary": "Diff matching strategy. NOT edit_format (format spec) nor parser (generic parsing).",
@@ -1574,7 +1652,8 @@
       "function_def"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F6_produce"
   },
   "discovery_questions": {
     "boundary": "Discovery qs. NOT sales_playbook (broad) nor customer_segment (ICP).",
@@ -1594,7 +1673,8 @@
       "knowledge_card"
     ],
     "requires_external_context": true,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F4_reason"
   },
   "dispatch_rule": {
     "boundary": "Dispatch rule keyword>agent_group. NOT router (P02, task>model routing) nor workflow (does not execute, only routes).",
@@ -1613,7 +1693,8 @@
       "workflow"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F8_collaborate"
   },
   "distillation_config": {
     "boundary": "Teacher-student knowledge transfer and model compression. NOT finetune_config (full model training) nor quantization_config (weight precision reduction) nor model_card (model documentation).",
@@ -1634,7 +1715,8 @@
       "model_card"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F6_produce"
   },
   "document_loader": {
     "boundary": "Transforms raw files into chunked documents. NOT retriever (search over chunks) nor search_tool (external search).",
@@ -1654,7 +1736,8 @@
       "api_client"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F5_call"
   },
   "domain_event": {
     "boundary": "Domain-level event. NOT signal (system-level) nor audit_log (compliance record). DDD Domain Event.",
@@ -1673,7 +1756,8 @@
       "event_schema"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F4_reason"
   },
   "domain_vocabulary": {
     "boundary": "Controlled vocabulary for one domain. NOT glossary_entry (single term) nor ontology (formal relations). DDD Ubiquitous Language registry.",
@@ -1693,7 +1777,8 @@
       "ontology"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F3_inject"
   },
   "drift_detector": {
     "boundary": "Distribution shift monitor. NOT regression_check (code regression) nor benchmark (point-in-time score). Industry: Evidently AI, Arize.",
@@ -1713,7 +1798,8 @@
       "regression_check"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F7_govern"
   },
   "dual_loop_architecture": {
     "boundary": "Dual-loop control. NOT workflow (linear flow) nor collaboration_pattern (multi-agent topology).",
@@ -1733,7 +1819,8 @@
       "agent_card"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F8_collaborate"
   },
   "e2e_eval": {
     "boundary": "End-to-end test of complete pipeline. NOT unit_eval (isolated scope) nor benchmark (does not measure performance).",
@@ -1753,7 +1840,8 @@
       "scoring_rubric"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F7_govern"
   },
   "ecommerce_vertical": {
     "boundary": "eCommerce vertical KC. NOT fintech_vertical (payments-only) nor case_study (ref).",
@@ -1773,7 +1861,8 @@
       "knowledge_card"
     ],
     "requires_external_context": true,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F1_constrain"
   },
   "edit_format": {
     "boundary": "Edit format spec. NOT diff_strategy (matching algo) nor formatter (output formatting).",
@@ -1793,7 +1882,8 @@
       "type_def"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F1_constrain"
   },
   "edtech_vertical": {
     "boundary": "EdTech vertical KC. NOT course_module (course content) nor compliance_checklist (audit).",
@@ -1813,7 +1903,8 @@
       "knowledge_card"
     ],
     "requires_external_context": true,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F1_constrain"
   },
   "effort_profile": {
     "boundary": "effort_profile = WHICH model/thinking to use; runtime_rule = WHEN/HOW to execute.",
@@ -1832,7 +1923,8 @@
       "env_config"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F4_reason"
   },
   "embedder_provider": {
     "added_version": "10.0.0",
@@ -1852,7 +1944,8 @@
       "embedding_config"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F3_inject"
   },
   "embedding_config": {
     "boundary": "Embedding model configuration. NOT knowledge_index (P10) which configures the index -- only the vector model.",
@@ -1871,7 +1964,8 @@
       "vector_store"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F3_inject"
   },
   "enterprise_sla": {
     "boundary": "SLA contract. NOT quality_gate (runtime) nor compliance_checklist (audit).",
@@ -1891,7 +1985,8 @@
       "env_config"
     ],
     "requires_external_context": true,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F8_collaborate"
   },
   "entity_memory": {
     "boundary": "Facts about X. NOT learning_record.",
@@ -1910,7 +2005,8 @@
       "knowledge_index"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F3_inject"
   },
   "enum_def": {
     "boundary": "Finite list. NOT type_def.",
@@ -1929,7 +2025,8 @@
       "type_def"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F1_constrain"
   },
   "env_config": {
     "boundary": "System environment variables. NOT boot_config (P02, per-provider) nor feature_flag (logical on/off).",
@@ -1945,7 +2042,8 @@
     "status": "stable",
     "upstream_source": null,
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F1_constrain"
   },
   "episodic_memory": {
     "boundary": "Episode-indexed long-term memory. NOT entity_memory (entity facts) nor memory_summary (compressed context). Cognitive: Tulving 1972.",
@@ -1964,7 +2062,8 @@
       "entity_memory"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F3_inject"
   },
   "eval_dataset": {
     "boundary": "Collection. NOT golden_test.",
@@ -1983,7 +2082,8 @@
       "dataset_card"
     ],
     "requires_external_context": true,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F3_inject"
   },
   "eval_framework": {
     "boundary": "Eval framework. NOT benchmark_suite (benchmark collection) nor eval_metric (single metric).",
@@ -2003,7 +2103,8 @@
       "scoring_rubric"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F7_govern"
   },
   "eval_metric": {
     "boundary": "Single metric def. NOT benchmark_suite (composite) nor scoring_rubric (qualitative rubric).",
@@ -2022,7 +2123,8 @@
       "scoring_rubric"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F7_govern"
   },
   "event_schema": {
     "boundary": "Event payload schema. NOT data_contract (producer-consumer SLA) nor event_stream (infrastructure config). CloudEvents 1.0 / AsyncAPI 3.0.",
@@ -2042,7 +2144,8 @@
       "domain_event"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F8_collaborate"
   },
   "event_stream": {
     "boundary": "Real-time event stream config. NOT webhook (single outbound call) nor signal (internal nucleus signal). Industry: Kafka topic, Kinesis stream.",
@@ -2066,7 +2169,8 @@
       "domain_event"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F8_collaborate"
   },
   "expansion_play": {
     "boundary": "Expansion play. NOT churn_prevention_playbook (defensive) nor sales_playbook (new logo).",
@@ -2086,7 +2190,8 @@
       "sales_playbook"
     ],
     "requires_external_context": true,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F8_collaborate"
   },
   "experiment_config": {
     "boundary": "Experiment config with variants and metrics. NOT a feature_flag (boolean toggle) nor a benchmark (one-time evaluation).",
@@ -2106,7 +2211,8 @@
       "feature_flag"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F7_govern"
   },
   "experiment_tracker": {
     "boundary": "Experiment tracking. NOT benchmark (evaluation suite) nor experiment_config (single experiment settings).",
@@ -2126,7 +2232,8 @@
       "eval_metric"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F7_govern"
   },
   "fallback_chain": {
     "boundary": "Fallback sequence between LLM models. NOT chain (P03, prompt sequence) nor router (task routing).",
@@ -2146,7 +2253,8 @@
       "retry_policy"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F8_collaborate"
   },
   "faq_entry": {
     "boundary": "FAQ entry. NOT knowledge_card (broader) nor support_macro (agent canned reply).",
@@ -2165,7 +2273,8 @@
       "knowledge_card"
     ],
     "requires_external_context": true,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F3_inject"
   },
   "feature_flag": {
     "boundary": "Feature flag on/off with gradual rollout. NOT permission (access) nor env_config (generic variable).",
@@ -2184,7 +2293,8 @@
       "env_config"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F1_constrain"
   },
   "few_shot_example": {
     "boundary": "Input/output pair for few-shot learning. NOT golden_test (P07) which evaluates quality -- only exemplifies format.",
@@ -2203,7 +2313,8 @@
       "prompt_template"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F3_inject"
   },
   "fhir_agent_capability": {
     "boundary": "FHIR-native agent capability. NOT general agent (agent_card) nor OAuth2 app (oauth_app_config) nor FHIR workflow (workflow).",
@@ -2223,7 +2334,8 @@
       "api_client"
     ],
     "requires_external_context": true,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F1_constrain"
   },
   "finetune_config": {
     "boundary": "Training config. NOT a model_provider (runtime routing) nor a model_card (documentation). This defines HOW to train/adapt a model.",
@@ -2243,7 +2355,8 @@
       "eval_dataset"
     ],
     "requires_external_context": true,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F6_produce"
   },
   "fintech_vertical": {
     "boundary": "Fintech vertical KC. NOT compliance_checklist (audit) nor case_study (ref).",
@@ -2263,7 +2376,8 @@
       "knowledge_card"
     ],
     "requires_external_context": true,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F1_constrain"
   },
   "formatter": {
     "boundary": "Output format transformer. NOT parser (does not extract data) nor response_format (does not define what the LLM sees).",
@@ -2282,7 +2396,8 @@
       "type_def"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F6_produce"
   },
   "function_def": {
     "boundary": "JSON schema of a function the LLM can call via tool_use. NOT mcp_server (full protocol) nor api_client (client implementation).",
@@ -2301,7 +2416,8 @@
       "type_def"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F6_produce"
   },
   "github_issue_template": {
     "boundary": "Issue template. NOT pull_request_template (separate) nor faq_entry (answers).",
@@ -2320,7 +2436,8 @@
       "knowledge_card"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F8_collaborate"
   },
   "glossary_entry": {
     "boundary": "Short domain term definition. NOT knowledge_card (no minimum density) nor context_doc (no scope).",
@@ -2339,7 +2456,8 @@
       "knowledge_card"
     ],
     "requires_external_context": true,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F3_inject"
   },
   "golden_test": {
     "boundary": "Reference test case quality 9.5+. NOT few_shot_example (P01, exemplifies) nor unit_eval (any quality).",
@@ -2359,7 +2477,8 @@
       "scoring_rubric"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F7_govern"
   },
   "govtech_vertical": {
     "boundary": "Govtech vertical KC. NOT compliance_checklist (audit) nor legal_vertical (private).",
@@ -2379,7 +2498,8 @@
       "knowledge_card"
     ],
     "requires_external_context": true,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F1_constrain"
   },
   "gpai_technical_doc": {
     "boundary": "GPAI provider technical documentation per EU-AI-Act Article-53 and Annex-IV. NOT compliance_framework (policy mapping) nor conformity_assessment (high-risk system). Specific to GPAI models submitted to EU AI Office.",
@@ -2399,7 +2519,8 @@
       "knowledge_card"
     ],
     "requires_external_context": true,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F7_govern"
   },
   "graph_rag_config": {
     "boundary": "Graph RAG config. NOT knowledge_graph (graph instance) nor rag_source (document source).",
@@ -2420,7 +2541,8 @@
       "vector_store"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F3_inject"
   },
   "guardrail": {
     "boundary": "Security and safety boundary constraint. NOT permission (P09, access) nor law (P08, operational).",
@@ -2440,7 +2562,8 @@
       "content_filter"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F7_govern"
   },
   "handoff": {
     "boundary": "Handoff instruction with task+context+commit. NOT action_prompt (P03, pure prompt) nor signal (simple event).",
@@ -2460,7 +2583,8 @@
       "dispatch_rule"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F8_collaborate"
   },
   "handoff_protocol": {
     "boundary": "A2A handoff. NOT dispatch_rule.",
@@ -2480,7 +2604,8 @@
       "dispatch_rule"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F8_collaborate"
   },
   "healthcare_vertical": {
     "boundary": "Healthcare vertical KC. NOT compliance_checklist (audit) nor case_study (ref).",
@@ -2500,7 +2625,8 @@
       "knowledge_card"
     ],
     "requires_external_context": true,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F1_constrain"
   },
   "hitl_config": {
     "boundary": "Requires HUMAN judgment. NOT a guardrail (automated block) nor a quality_gate (automated scoring). This pauses for human review.",
@@ -2520,7 +2646,8 @@
       "workflow"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F7_govern"
   },
   "hook": {
     "boundary": "Executable code on pre/post event. NOT lifecycle_rule (P11, declarative rule) nor daemon (persistent process).",
@@ -2539,7 +2666,8 @@
       "function_def"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F8_collaborate"
   },
   "hook_config": {
     "boundary": "hook_config = DECLARACAO de quais hooks; hook = IMPLEMENTACAO do hook",
@@ -2559,7 +2687,8 @@
       "env_config"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F8_collaborate"
   },
   "incident_report": {
     "boundary": "Incident post-mortem. NOT bugloop (auto-fix) nor learning_record (generic learning).",
@@ -2579,7 +2708,8 @@
       "knowledge_card"
     ],
     "requires_external_context": true,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F8_collaborate"
   },
   "inference_config": {
     "boundary": "Inference-time generation parameters. NOT model_provider (which model to call) nor thinking_config (extended reasoning budget) nor streaming_config (transport streaming).",
@@ -2600,7 +2730,8 @@
       "streaming_config"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F1_constrain"
   },
   "input_schema": {
     "boundary": "Input contract defining required data. NOT validation_schema (output) nor type_def (abstract definition).",
@@ -2619,7 +2750,8 @@
       "type_def"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F1_constrain"
   },
   "instruction": {
     "boundary": "",
@@ -2638,7 +2770,8 @@
       "prompt_template"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F6_produce"
   },
   "integration_guide": {
     "boundary": "Integration guide. NOT quickstart_guide (5min) nor api_reference (schema).",
@@ -2658,7 +2791,8 @@
       "knowledge_card"
     ],
     "requires_external_context": true,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F6_produce"
   },
   "interactive_demo": {
     "boundary": "Demo script. NOT playground_config (env) nor product_tour (in-app).",
@@ -2677,7 +2811,8 @@
       "landing_page"
     ],
     "requires_external_context": false,
-    "requires_live_tools": true
+    "requires_live_tools": true,
+    "primary_8f": "F6_produce"
   },
   "interface": {
     "boundary": "Bilateral integration contract between agents. NOT input_schema (unilateral) nor signal (P12, simple event).",
@@ -2697,7 +2832,8 @@
       "output_validator"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F1_constrain"
   },
   "invariant": {
     "boundary": "Inviolable operational law of the system. NOT instruction (P03, flexible) nor guardrail (P11, safety-focused).",
@@ -2716,7 +2852,8 @@
       "guardrail"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F1_constrain"
   },
   "judge_config": {
     "boundary": "Judge config. NOT llm_judge (judge instance) nor scoring_rubric (human rubric).",
@@ -2736,7 +2873,8 @@
       "audit_log"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F7_govern"
   },
   "knowledge_card": {
     "boundary": "Distilled, static, versioned knowledge. NOT an instruction, template, or configuration.",
@@ -2755,7 +2893,8 @@
       "citation"
     ],
     "requires_external_context": true,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F3_inject"
   },
   "knowledge_graph": {
     "boundary": "Relational knowledge structure. NOT an entity_memory (single entity recall) nor a knowledge_index (flat search). This defines RELATIONSHIPS between entities.",
@@ -2775,7 +2914,8 @@
       "entity_memory"
     ],
     "requires_external_context": true,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F3_inject"
   },
   "knowledge_index": {
     "boundary": "Semantic search index (BM25, FAISS). NOT embedding_config (P01, model) nor rag_source (P01, source).",
@@ -2796,7 +2936,8 @@
       "vector_store"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F3_inject"
   },
   "kubernetes_ai_requirement": {
     "boundary": "KAR conformance artifact. NOT env_config (runtime) nor sandbox_config (isolation) nor compliance_framework (regulatory).",
@@ -2816,7 +2957,8 @@
       "env_config"
     ],
     "requires_external_context": true,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F7_govern"
   },
   "landing_page": {
     "builder": "landing-page-builder",
@@ -2833,7 +2975,8 @@
       "prompt_template"
     ],
     "requires_external_context": true,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F6_produce"
   },
   "learning_record": {
     "boundary": "Persistent learning record. NOT session_state (ephemeral) nor axiom (immutable, does not learn).",
@@ -2853,7 +2996,8 @@
       "scoring_rubric"
     ],
     "requires_external_context": true,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F7_govern"
   },
   "legal_vertical": {
     "boundary": "Legal vertical KC. NOT compliance_checklist (audit) nor case_study (ref).",
@@ -2873,7 +3017,8 @@
       "knowledge_card"
     ],
     "requires_external_context": true,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F1_constrain"
   },
   "lens": {
     "boundary": "Specialized perspective on a domain. NOT agent (no capabilities) nor mental_model (no routing rules).",
@@ -2892,7 +3037,8 @@
       "mental_model"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F4_reason"
   },
   "lifecycle_rule": {
     "boundary": "Declarative lifecycle rule. NOT hook (P04, executable code) nor runtime_rule (P09, technical).",
@@ -2912,7 +3058,8 @@
       "workflow"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F1_constrain"
   },
   "lineage_record": {
     "boundary": "Knowledge provenance. NOT audit_log (compliance event log) nor citation (source reference). Maps to PROV-O standard.",
@@ -2934,7 +3081,8 @@
       "entity_memory"
     ],
     "requires_external_context": true,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F7_govern"
   },
   "llm_evaluation_scenario": {
     "boundary": "Single eval scenario. NOT benchmark (suite) nor eval_metric (measure). Bridges eval_dataset + benchmark.",
@@ -2955,7 +3103,8 @@
       "llm_judge"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F7_govern"
   },
   "llm_judge": {
     "boundary": "LLM evaluator. NOT scoring_rubric.",
@@ -2975,7 +3124,8 @@
       "prompt_template"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F7_govern"
   },
   "marketplace_app_manifest": {
     "boundary": "Marketplace manifest. NOT plugin (loadable) nor app_directory_entry (descriptive).",
@@ -2995,7 +3145,8 @@
       "env_config"
     ],
     "requires_external_context": true,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F5_call"
   },
   "mcp_app_extension": {
     "boundary": "MCP Apps Extension app. NOT mcp_server (protocol base) nor browser_tool (Playwright) nor webhook (callback).",
@@ -3015,7 +3166,8 @@
       "api_client"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F5_call"
   },
   "mcp_server": {
     "boundary": "MCP server exposing tools and resources. NOT connector (simple integration) nor client (API consumer).",
@@ -3035,7 +3187,8 @@
       "openapi_spec"
     ],
     "requires_external_context": false,
-    "requires_live_tools": true
+    "requires_live_tools": true,
+    "primary_8f": "F5_call"
   },
   "memory_architecture": {
     "boundary": "Memory system design. NOT memory_type (single type) nor memory_scope (access scope).",
@@ -3055,7 +3208,8 @@
       "knowledge_index"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F3_inject"
   },
   "memory_benchmark": {
     "boundary": "Memory eval suite. NOT benchmark_suite (general benchmarks) nor memory_architecture (system design).",
@@ -3075,7 +3229,8 @@
       "entity_memory"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F3_inject"
   },
   "memory_scope": {
     "boundary": "Which memory to use. NOT session_state.",
@@ -3095,7 +3250,8 @@
       "session_state"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F3_inject"
   },
   "memory_summary": {
     "boundary": "Compression. NOT session_state.",
@@ -3115,7 +3271,8 @@
       "episodic_memory"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F3_inject"
   },
   "memory_type": {
     "boundary": "Classification and policy for memory types. NOT entity_memory (memory instance) nor memory_scope (who accesses) nor memory_summary (summary).",
@@ -3134,7 +3291,8 @@
       "entity_memory"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F3_inject"
   },
   "mental_model": {
     "boundary": "Fixed agent identity with routing and decisions. NOT runtime_state P10 (variable state per session).",
@@ -3153,7 +3311,8 @@
       "knowledge_card"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F4_reason"
   },
   "messaging_gateway": {
     "boundary": "Multi-platform message transport (TG/Discord/Slack/WhatsApp/Signal/Email). NOT webhook (single-event) nor api_client (outbound only).",
@@ -3179,7 +3338,8 @@
       "voice_pipeline"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F5_call"
   },
   "model_architecture": {
     "boundary": "Architecture definition. NOT model_card (deployment spec) nor model_provider (API integration).",
@@ -3199,7 +3359,8 @@
       "model_provider"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F2_become"
   },
   "model_card": {
     "boundary": "LLM spec (pricing, context window, capabilities). NOT agent (P02, who uses the model) nor boot_config (how it starts).",
@@ -3218,7 +3379,8 @@
       "model_provider"
     ],
     "requires_external_context": true,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F2_become"
   },
   "model_provider": {
     "added_version": "10.0.0",
@@ -3239,7 +3401,8 @@
       "secret_config"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F2_become"
   },
   "model_registry": {
     "boundary": "Model registry. NOT model_card (single model spec) nor checkpoint (training snapshot).",
@@ -3259,7 +3422,8 @@
       "model_provider"
     ],
     "requires_external_context": true,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F2_become"
   },
   "multi_modal_config": {
     "boundary": "Modality config. NOT vision_tool (visual analysis), audio_tool (processes audio), nor model_card (capabilities).",
@@ -3278,7 +3442,8 @@
       "toolkit"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F6_produce"
   },
   "multimodal_prompt": {
     "boundary": "Multimodal prompt. NOT prompt_technique (text-only) nor multi_modal_config (model settings).",
@@ -3297,7 +3462,8 @@
       "prompt_template"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F6_produce"
   },
   "naming_rule": {
     "boundary": "Artifact naming convention rule. NOT validator (P06, validates content) nor type_def (P06, defines type).",
@@ -3316,7 +3482,8 @@
       "knowledge_card"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F1_constrain"
   },
   "notifier": {
     "boundary": "Sends notification to user/system. NOT webhook (bidirectional event) nor api_client (full integration).",
@@ -3336,7 +3503,8 @@
       "api_client"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F5_call"
   },
   "nps_survey": {
     "boundary": "NPS survey. NOT customer_segment (target def) nor cohort_analysis (retention).",
@@ -3356,7 +3524,8 @@
       "knowledge_card"
     ],
     "requires_external_context": true,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F7_govern"
   },
   "nucleus_def": {
     "boundary": "Nucleus contract. NOT agent (individual agent in N0x/agents/) nor model_provider (LLM provider config) nor boot_config (boot runtime).",
@@ -3377,7 +3546,8 @@
       "agent_card"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F2_become"
   },
   "oauth_app_config": {
     "boundary": "OAuth config. NOT sso_config (workforce) nor secret_config (raw creds).",
@@ -3397,7 +3567,8 @@
       "env_config"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F1_constrain"
   },
   "onboarding_flow": {
     "boundary": "Activation flow. NOT user_journey (full path) nor workflow (system execution).",
@@ -3417,7 +3588,8 @@
       "knowledge_card"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F6_produce"
   },
   "ontology": {
     "boundary": "Formal classification structure. NOT a knowledge_graph (entity relations) nor a glossary_entry (single term). This defines the CLASSIFICATION SYSTEM itself.",
@@ -3437,7 +3609,8 @@
       "glossary_entry"
     ],
     "requires_external_context": true,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F3_inject"
   },
   "openapi_spec": {
     "boundary": "Machine-readable API contract. NOT api_reference (human-readable docs) nor api_client (SDK implementation). OpenAPI Initiative OAS 3.x.",
@@ -3457,7 +3630,8 @@
       "data_contract"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F5_call"
   },
   "optimizer": {
     "boundary": "Process optimizer metric>action. NOT bugloop (one-off correction) nor benchmark (P07, passive measurement).",
@@ -3477,7 +3651,8 @@
       "quality_gate"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F8_collaborate"
   },
   "output_validator": {
     "boundary": "Validates OUTPUT. NOT validator P06.",
@@ -3496,7 +3671,8 @@
       "validation_schema"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F6_produce"
   },
   "parser": {
     "boundary": "Raw output data extractor. NOT formatter (does not transform format) nor validator (P06, does not validate).",
@@ -3516,7 +3692,8 @@
       "type_def"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F6_produce"
   },
   "partner_listing": {
     "boundary": "Partner listing. NOT case_study (customer ref) nor app_directory_entry (app marketplace).",
@@ -3536,7 +3713,8 @@
       "agent_card"
     ],
     "requires_external_context": true,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F8_collaborate"
   },
   "path_config": {
     "boundary": "File system paths. NOT env_config (generic variables) nor permission (access control).",
@@ -3555,7 +3733,8 @@
       "env_config"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F1_constrain"
   },
   "pattern": {
     "boundary": "Reusable architecture pattern. NOT law (inviolable) nor workflow (P12, executable sequence).",
@@ -3574,7 +3753,8 @@
       "knowledge_card"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F4_reason"
   },
   "permission": {
     "boundary": "Access permission rule. NOT guardrail (P11, safety boundary) nor feature_flag (feature on/off).",
@@ -3593,7 +3773,8 @@
       "rbac_policy"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F1_constrain"
   },
   "personality": {
     "boundary": "Hot-swappable persona (voice/tone/values). NOT agent (full spec) nor agent_profile (runtime config).",
@@ -3617,7 +3798,8 @@
       "episodic_memory"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F2_become"
   },
   "pipeline_template": {
     "boundary": "Scenario-indexed agent sequence. NOT crew_template (fixed roles) nor workflow (DAG). Pipelines have sequence + revision loops.",
@@ -3637,7 +3819,8 @@
       "dispatch_rule"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F8_collaborate"
   },
   "pitch_deck": {
     "boundary": "Pitch deck. NOT case_study (narrative) nor pricing_page (tier detail).",
@@ -3657,7 +3840,8 @@
       "customer_segment"
     ],
     "requires_external_context": true,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F6_produce"
   },
   "planning_strategy": {
     "boundary": "Planning approach. NOT reasoning_strategy (prompt reasoning) nor workflow (execution flow).",
@@ -3677,7 +3861,8 @@
       "reasoning_strategy"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F4_reason"
   },
   "playground_config": {
     "boundary": "Playground spec. NOT sandbox_spec (isolation) nor interactive_demo (UI).",
@@ -3697,7 +3882,8 @@
       "sandbox_spec"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F6_produce"
   },
   "plugin": {
     "boundary": "Pluggable system extension. NOT hook (specific event) nor skill (no structured phases).",
@@ -3717,7 +3903,8 @@
       "toolkit"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F5_call"
   },
   "preference_dataset": {
     "boundary": "RLHF preference data. NOT eval_dataset (evaluation examples) nor golden_test (expected outputs). Industry: RLHF reward modeling.",
@@ -3737,7 +3924,8 @@
       "customer_segment"
     ],
     "requires_external_context": true,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F3_inject"
   },
   "press_release": {
     "boundary": "Press release. NOT blog_post (long-form) nor pitch_deck (visual).",
@@ -3756,7 +3944,8 @@
       "knowledge_card"
     ],
     "requires_external_context": true,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F6_produce"
   },
   "pricing_page": {
     "boundary": "Pricing page UI. NOT subscription_tier (data) nor landing_page (top-of-funnel).",
@@ -3776,7 +3965,8 @@
       "customer_segment"
     ],
     "requires_external_context": true,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F6_produce"
   },
   "procedural_memory": {
     "boundary": "Procedural memory. NOT entity_memory (entity facts) nor knowledge_card (declarative knowledge).",
@@ -3795,7 +3985,8 @@
       "entity_memory"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F3_inject"
   },
   "process_manager": {
     "boundary": "Event-driven process coordinator. NOT workflow (step-sequential) nor supervisor (agent hierarchy). Enterprise Integration Patterns: Process Manager.",
@@ -3818,7 +4009,8 @@
       "schedule"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F8_collaborate"
   },
   "product_tour": {
     "boundary": "Product tour. NOT interactive_demo (sales) nor onboarding_flow (activation).",
@@ -3838,7 +4030,8 @@
       "knowledge_card"
     ],
     "requires_external_context": true,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F6_produce"
   },
   "prompt_cache": {
     "boundary": "Cache config. NOT session_state (ephemeral context), memory_summary (history), nor runtime_state (runtime variables).",
@@ -3858,7 +4051,8 @@
       "prompt_template"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F3_inject"
   },
   "prompt_compiler": {
     "boundary": "Transmutation rules and mappings. NOT a router (routes between providers), NOT a dispatch_rule (routes tasks to agents), NOT a prompt_template (template with vars). This IS the layer that resolves WHAT the user wants before any routing happens.",
@@ -3878,7 +4072,8 @@
       "prompt_version"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F6_produce"
   },
   "prompt_optimizer": {
     "boundary": "Prompt optimizer. NOT prompt_compiler (CEX internal) nor optimizer (general optimization).",
@@ -3898,7 +4093,8 @@
       "scoring_rubric"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F6_produce"
   },
   "prompt_technique": {
     "boundary": "Prompt technique. NOT prompt_template (reusable template) nor reasoning_strategy (reasoning-specific).",
@@ -3917,7 +4113,8 @@
       "prompt_template"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F6_produce"
   },
   "prompt_template": {
     "boundary": "Template with variables. NOT user_prompt (fixed) nor system_prompt (identity).",
@@ -3936,7 +4133,8 @@
       "system_prompt"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F6_produce"
   },
   "prompt_version": {
     "boundary": "Immutable version. NOT prompt_template.",
@@ -3955,7 +4153,8 @@
       "prompt_template"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F6_produce"
   },
   "prosody_config": {
     "boundary": "Prosody/emotion settings. NOT tts_provider (provider integration) nor agent_profile (agent persona).",
@@ -3974,7 +4173,8 @@
       "env_config"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F6_produce"
   },
   "prospective_memory": {
     "boundary": "Future-action memory. NOT schedule (workflow schedule config) nor session_state (current session). Cognitive: prospective memory.",
@@ -3993,7 +4193,8 @@
       "entity_memory"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F3_inject"
   },
   "quality_gate": {
     "boundary": "Quality barrier with numeric score. NOT validator (P06, technical pass/fail) nor scoring_rubric (P07, defines criteria).",
@@ -4013,7 +4214,8 @@
       "eval_metric"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F7_govern"
   },
   "quantization_config": {
     "boundary": "Quantization settings. NOT compression_config (context compression) nor model_architecture (full arch).",
@@ -4033,7 +4235,8 @@
       "env_config"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F6_produce"
   },
   "query_optimizer": {
     "boundary": "Query transformation and decomposition rules for RAG retrieval. NOT search_strategy (which strategy to use) nor retriever_config (retrieval parameters) nor rag_source (data source definition).",
@@ -4054,7 +4257,8 @@
       "rag_source"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F6_produce"
   },
   "quickstart_guide": {
     "boundary": "Quickstart doc. NOT integration_guide (deep) nor sdk_example (code-only).",
@@ -4074,7 +4278,8 @@
       "context_doc"
     ],
     "requires_external_context": true,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F6_produce"
   },
   "rag_source": {
     "boundary": "Pointer to external indexable source. NOT the content itself -- only a reference with URL and freshness.",
@@ -4094,7 +4299,8 @@
       "embedding_config"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F3_inject"
   },
   "rate_limit_config": {
     "boundary": "Limits. NOT runtime_rule.",
@@ -4113,7 +4319,8 @@
       "env_config"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F1_constrain"
   },
   "rbac_policy": {
     "boundary": "RBAC spec. NOT permission (capability) nor sso_config (identity).",
@@ -4132,7 +4339,8 @@
       "env_config"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F1_constrain"
   },
   "realtime_session": {
     "boundary": "Realtime session config. NOT transport_config (network layer) nor voice_pipeline (full architecture).",
@@ -4152,7 +4360,8 @@
       "session_backend"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F6_produce"
   },
   "reasoning_strategy": {
     "boundary": "Reasoning technique. NOT prompt_technique (generic prompt pattern) nor thinking_config (budget settings).",
@@ -4172,7 +4381,8 @@
       "mental_model"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F4_reason"
   },
   "reasoning_trace": {
     "added_version": "10.0.0",
@@ -4192,7 +4402,8 @@
       "reasoning_strategy"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F4_reason"
   },
   "red_team_eval": {
     "boundary": "Security eval. NOT e2e_eval.",
@@ -4212,7 +4423,8 @@
       "scoring_rubric"
     ],
     "requires_external_context": true,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F7_govern"
   },
   "referral_program": {
     "boundary": "Referral spec. NOT ab_test_config (experiment) nor content_monetization (pricing).",
@@ -4232,7 +4444,8 @@
       "knowledge_card"
     ],
     "requires_external_context": true,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F6_produce"
   },
   "regression_check": {
     "boundary": "Current vs previous. NOT benchmark.",
@@ -4252,7 +4465,8 @@
       "eval_metric"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F7_govern"
   },
   "renewal_workflow": {
     "boundary": "Renewal workflow. NOT churn_prevention_playbook (intervention) nor workflow (generic).",
@@ -4272,7 +4486,8 @@
       "expansion_play"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F8_collaborate"
   },
   "repo_map": {
     "boundary": "Repo context map. NOT component_map (system architecture) nor knowledge_index (search index).",
@@ -4292,7 +4507,8 @@
       "context_doc"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F4_reason"
   },
   "reranker_config": {
     "boundary": "Reranker config. NOT retriever_config (first-stage retrieval) nor retriever (retrieval logic).",
@@ -4312,7 +4528,8 @@
       "embedding_config"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F3_inject"
   },
   "research_pipeline": {
     "boundary": "Multi-source research pipeline STORM+CRAG+CRITIC. NOT retriever (local search) nor search_tool (simple web search).",
@@ -4333,7 +4550,8 @@
       "knowledge_card"
     ],
     "requires_external_context": true,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F5_call"
   },
   "response_format": {
     "boundary": "Response format injected into the LLM prompt. NOT validation_schema P06 (post-generation contract enforced by the system).",
@@ -4353,7 +4571,8 @@
       "type_def"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F6_produce"
   },
   "retrieval_evaluator": {
     "boundary": "IR-specific retrieval quality evaluation suite. NOT eval_metric (single generic metric) nor benchmark (broad model evaluation) nor retriever_config (retrieval parameters).",
@@ -4374,7 +4593,8 @@
       "retriever_config"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F3_inject"
   },
   "retriever": {
     "boundary": "Search over embedding store or local index. NOT search_tool (external web search) nor document_loader (ingests files).",
@@ -4394,7 +4614,8 @@
       "vector_store"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F3_inject"
   },
   "retriever_config": {
     "boundary": "Search parameters. NOT embedding_config.",
@@ -4414,7 +4635,8 @@
       "vector_store"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F3_inject"
   },
   "retry_policy": {
     "boundary": "Retry backoff config. NOT circuit_breaker (open/closed state machine) nor rate_limit_config (inbound throttle). AWS SDK Retry / Polly.",
@@ -4433,7 +4655,8 @@
       "env_config"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F8_collaborate"
   },
   "revision_loop_policy": {
     "boundary": "Max-N revision iterations before escalation. NOT retry_policy (transient failure) nor quality_gate (single check) nor regression_check (diff vs baseline).",
@@ -4456,7 +4679,8 @@
       "pipeline_template"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F7_govern"
   },
   "reward_model": {
     "boundary": "Reward model config. NOT rl_algorithm (training algo) nor scoring_rubric (human eval rubric).",
@@ -4476,7 +4700,8 @@
       "reward_signal"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F7_govern"
   },
   "reward_signal": {
     "boundary": "Score. NOT quality_gate.",
@@ -4495,7 +4720,8 @@
       "eval_metric"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F7_govern"
   },
   "rl_algorithm": {
     "boundary": "RL algorithm def. NOT training_method (broader training) nor reward_model (reward function).",
@@ -4515,7 +4741,8 @@
       "training_method"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F7_govern"
   },
   "roi_calculator": {
     "boundary": "ROI calc. NOT cost_budget (ops) nor usage_report (actual).",
@@ -4535,7 +4762,8 @@
       "eval_metric"
     ],
     "requires_external_context": true,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F6_produce"
   },
   "role_assignment": {
     "boundary": "Binds builder/sub-agent to crew role (CrewAI Agent class). NOT agent (P02, pure identity) nor skill (P04, atomic capability) nor handoff (P12, task transfer). Role binding without execution.",
@@ -4555,7 +4783,8 @@
       "capability_registry"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F2_become"
   },
   "router": {
     "boundary": "Task-to-agent_group routing. NOT dispatch_rule (P12, keyword>agent_group) nor fallback_chain (model>model).",
@@ -4575,7 +4804,8 @@
       "fallback_chain"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F8_collaborate"
   },
   "runtime_rule": {
     "boundary": "Technical runtime rule (timeouts, retries). NOT lifecycle_rule (P11, lifecycle) nor law (P08, inviolable).",
@@ -4594,7 +4824,8 @@
       "env_config"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F1_constrain"
   },
   "runtime_state": {
     "boundary": "Variable mental state accumulated at runtime. NOT mental_model P02 (fixed agent identity, immutable) nor session_state (ephemeral, snapshot).",
@@ -4614,7 +4845,8 @@
       "entity_memory"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F8_collaborate"
   },
   "safety_hazard_taxonomy": {
     "boundary": "Formal AI safety hazard classification taxonomy per MLCommons AILuminate v1.0. NOT content_filter (runtime filtering pipeline) nor guardrail (enforcement boundary). Provides taxonomy structure; enforcement is downstream.",
@@ -4634,7 +4866,8 @@
       "knowledge_card"
     ],
     "requires_external_context": true,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F7_govern"
   },
   "safety_policy": {
     "boundary": "Safety governance rules. NOT threat_model (risk assessment) nor compliance_framework (regulatory mapping).",
@@ -4654,7 +4887,8 @@
       "constitutional_rule"
     ],
     "requires_external_context": true,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F1_constrain"
   },
   "saga": {
     "boundary": "Distributed transaction with compensation. NOT workflow (sequential steps) nor process_manager (event coordination). Saga pattern (Garcia-Molina 1987).",
@@ -4676,7 +4910,8 @@
       "chain"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F8_collaborate"
   },
   "sales_playbook": {
     "boundary": "Sales playbook. NOT pitch_deck (deck) nor discovery_questions (subset).",
@@ -4696,7 +4931,8 @@
       "prompt_template"
     ],
     "requires_external_context": true,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F6_produce"
   },
   "sandbox_config": {
     "boundary": "Sandbox/isolation config. NOT env_config (environment vars) nor code_executor (execution logic).",
@@ -4715,7 +4951,8 @@
       "audit_log"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F1_constrain"
   },
   "sandbox_spec": {
     "boundary": "Sandbox spec. NOT playground_config (interactive) nor env_config (prod).",
@@ -4734,7 +4971,8 @@
       "env_config"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F1_constrain"
   },
   "schedule": {
     "boundary": "WHEN to run. NOT dispatch_rule.",
@@ -4753,7 +4991,8 @@
       "workflow"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F8_collaborate"
   },
   "scoring_rubric": {
     "boundary": "Evaluation criteria with framework. NOT benchmark (does not measure) nor quality_gate (P11, does not block).",
@@ -4772,7 +5011,8 @@
       "quality_gate"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F7_govern"
   },
   "sdk_example": {
     "boundary": "SDK example. NOT api_reference (schema) nor integration_guide (narrative).",
@@ -4792,7 +5032,8 @@
       "function_def"
     ],
     "requires_external_context": true,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F6_produce"
   },
   "search_strategy": {
     "boundary": "Search/inference strategy. NOT reasoning_strategy (prompt technique) nor retriever (document retrieval).",
@@ -4811,7 +5052,8 @@
       "retriever_config"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F5_call"
   },
   "search_tool": {
     "boundary": "Searches and returns ranked results. NOT retriever (local vector store) nor document_loader (ingests files).",
@@ -4831,7 +5073,8 @@
       "api_client"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F5_call"
   },
   "secret_config": {
     "boundary": "Credentials. NOT env_config.",
@@ -4847,7 +5090,8 @@
     "status": "stable",
     "upstream_source": null,
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F1_constrain"
   },
   "self_improvement_loop": {
     "boundary": "Self-improvement loop. NOT bugloop (bug-specific) nor learning_record (passive learning).",
@@ -4867,7 +5111,8 @@
       "reward_signal"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F7_govern"
   },
   "session_backend": {
     "added_version": "10.0.0",
@@ -4888,7 +5133,8 @@
       "env_config"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F5_call"
   },
   "session_state": {
     "boundary": "Ephemeral session state (snapshot). NOT runtime_state (persistent across sessions) nor learning_record (does not accumulate).",
@@ -4908,7 +5154,8 @@
       "entity_memory"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F8_collaborate"
   },
   "signal": {
     "boundary": "Simple signal between agents (complete, error). NOT handoff (complete instruction) nor interface (P06, contract).",
@@ -4927,7 +5174,8 @@
       "workflow"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F8_collaborate"
   },
   "skill": {
     "boundary": "Phased reusable capability with trigger. NOT agent (P02, has identity) or workflow (P12, orchestration steps) or action_prompt (P03, single-turn).",
@@ -4951,7 +5199,8 @@
       "function_def"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F5_call"
   },
   "slo_definition": {
     "boundary": "Measurable SLO target. NOT enterprise_sla (contractual SLA) nor quality_gate (build-time artifact scoring).",
@@ -4972,7 +5221,8 @@
       "benchmark"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F8_collaborate"
   },
   "smoke_eval": {
     "boundary": "Quick sanity test in <30s. NOT unit_eval (deep) nor benchmark (continuous metrics).",
@@ -4991,7 +5241,8 @@
       "quality_gate"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F7_govern"
   },
   "social_publisher": {
     "boundary": "Auto-posting pipeline for social networks. NOT notifier (one-off alerts) nor schedule (generic scheduling).",
@@ -5011,13 +5262,14 @@
       "prompt_template"
     ],
     "requires_external_context": true,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F6_produce"
   },
   "software_project": {
     "boundary": "Complete project. NOT component_map (P08, partial view) nor agent_package (P02, agent package).",
     "core": false,
     "deprecated_by": null,
-    "description": "Complete software project definition  architecture, dependencies, build, deployment, repo structure",
+    "description": "Complete software project definition \u0097 architecture, dependencies, build, deployment, repo structure",
     "last_reviewed": "2026-04-14",
     "llm_function": "BECOME",
     "max_bytes": 8192,
@@ -5031,7 +5283,8 @@
       "context_doc"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F8_collaborate"
   },
   "spawn_config": {
     "boundary": "Agent_groups spawn configuration. NOT boot_config (P02, per-provider) nor env_config (P09, variables).",
@@ -5051,7 +5304,8 @@
       "env_config"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F1_constrain"
   },
   "sso_config": {
     "boundary": "SSO spec. NOT rbac_policy (authorization) nor secret_config (credentials).",
@@ -5071,7 +5325,8 @@
       "secret_config"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F1_constrain"
   },
   "state_machine": {
     "boundary": "Formal FSM. NOT workflow (DAG of steps) nor process_manager (event coordinator). UML statechart / XState.",
@@ -5091,7 +5346,8 @@
       "dispatch_rule"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F8_collaborate"
   },
   "streaming_config": {
     "boundary": "Transport-level streaming config. NOT a response_format (output structure) nor a rate_limit_config (throughput). This controls HOW output is delivered.",
@@ -5110,7 +5366,8 @@
       "transport_config"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F1_constrain"
   },
   "stt_provider": {
     "boundary": "STT provider integration. NOT voice_pipeline (full arch) nor vad_config (detection settings).",
@@ -5129,7 +5386,8 @@
       "api_client"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F6_produce"
   },
   "subscription_tier": {
     "boundary": "Pricing tier. NOT content_monetization (strategy) nor pricing_page (UI).",
@@ -5148,13 +5406,14 @@
       "customer_segment"
     ],
     "requires_external_context": true,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F1_constrain"
   },
   "supabase_data_layer": {
     "boundary": "Supabase data layer. NOT db_connector (generic connection) nor api_client (REST client).",
     "core": false,
     "deprecated_by": null,
-    "description": "Supabase-specific data layer  tables, RLS policies, edge functions, storage buckets, auth rules",
+    "description": "Supabase-specific data layer \u0097 tables, RLS policies, edge functions, storage buckets, auth rules",
     "last_reviewed": "2026-04-14",
     "llm_function": "CALL",
     "max_bytes": 8192,
@@ -5168,7 +5427,8 @@
       "env_config"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F5_call"
   },
   "supervisor": {
     "boundary": "",
@@ -5188,7 +5448,8 @@
       "agent_card"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F8_collaborate"
   },
   "synthetic_data_config": {
     "boundary": "Synthetic training data generation pipeline. NOT dataset_card (data documentation and metadata) nor eval_dataset (evaluation data specification) nor finetune_config (training job parameters).",
@@ -5208,7 +5469,8 @@
       "eval_dataset"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F6_produce"
   },
   "system_prompt": {
     "boundary": "Identity + rules + format. Read FIRST by the LLM.",
@@ -5227,12 +5489,13 @@
       "boot_config"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F2_become"
   },
   "tagline": {
     "builder": "tagline-builder",
     "deprecated_by": null,
-    "description": "Short memorable phrase capturing brand essence  taglines, slogans, headlines",
+    "description": "Short memorable phrase capturing brand essence \u0097 taglines, slogans, headlines",
     "domain": "marketing",
     "last_reviewed": "2026-04-14",
     "naming": "p03_tl_{{topic}}.md",
@@ -5244,7 +5507,8 @@
       "prompt_template"
     ],
     "requires_external_context": true,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F6_produce"
   },
   "team_charter": {
     "boundary": "Governance contract only. NOT a handoff (N07 authors those), NOT a crew_template (reusable), NOT a dispatch_rule (routing logic).",
@@ -5259,7 +5523,8 @@
       "role_assignment"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F8_collaborate"
   },
   "terminal_backend": {
     "boundary": "Execution environment abstraction (local/docker/ssh/daytona/modal/singularity). NOT sandbox_config (security isolation).",
@@ -5283,7 +5548,8 @@
       "hibernation_policy"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F5_call"
   },
   "thinking_config": {
     "boundary": "Thinking budget config. NOT reasoning_strategy (technique) nor context_window_config (token limits).",
@@ -5302,7 +5568,8 @@
       "env_config"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F1_constrain"
   },
   "threat_model": {
     "boundary": "Threat/risk assessment. NOT safety_policy (governance rules) nor guardrail (runtime filter).",
@@ -5322,7 +5589,8 @@
       "knowledge_card"
     ],
     "requires_external_context": true,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F4_reason"
   },
   "tokenizer_config": {
     "boundary": "Tokenization vocabulary and encoding rules. NOT embedding_config (vector representation parameters) nor model_provider (which model to call) nor context_window_config (token budget limits).",
@@ -5342,7 +5610,8 @@
       "model_provider"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F1_constrain"
   },
   "toolkit": {
     "added_version": "10.0.0",
@@ -5362,7 +5631,8 @@
       "function_def"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F5_call"
   },
   "trace_config": {
     "added_version": "10.0.0",
@@ -5382,7 +5652,8 @@
       "env_config"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F8_collaborate"
   },
   "training_method": {
     "boundary": "Training technique. NOT rl_algorithm (RL-specific) nor finetune_config (runtime fine-tune settings).",
@@ -5402,7 +5673,8 @@
       "scoring_rubric"
     ],
     "requires_external_context": true,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F6_produce"
   },
   "trajectory_eval": {
     "boundary": "Trajectory evaluation. NOT benchmark (static eval) nor e2e_eval (end-to-end test).",
@@ -5422,7 +5694,8 @@
       "scoring_rubric"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F7_govern"
   },
   "transport_config": {
     "boundary": "Transport layer config. NOT realtime_session (session lifecycle) nor streaming_config (LLM streaming).",
@@ -5441,7 +5714,8 @@
       "env_config"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F1_constrain"
   },
   "tts_provider": {
     "boundary": "TTS provider integration. NOT voice_pipeline (full arch) nor prosody_config (voice personality).",
@@ -5460,7 +5734,8 @@
       "api_client"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F6_produce"
   },
   "type_def": {
     "boundary": "Custom type definition in the system. NOT input_schema (input contract) nor interface (bilateral contract).",
@@ -5476,7 +5751,8 @@
     "status": "stable",
     "upstream_source": null,
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F1_constrain"
   },
   "unit_eval": {
     "boundary": "Unit test of individual agent or prompt. NOT smoke_eval (quick, no depth) nor e2e_eval (complete pipeline).",
@@ -5495,7 +5771,8 @@
       "scoring_rubric"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F7_govern"
   },
   "usage_quota": {
     "boundary": "Quota spec. NOT rate_limit_config (RPM) nor cost_budget (dollars).",
@@ -5515,7 +5792,8 @@
       "env_config"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F1_constrain"
   },
   "usage_report": {
     "boundary": "Usage analytics spec. NOT cost_budget (limits) nor trace_config (telemetry).",
@@ -5535,7 +5813,8 @@
       "knowledge_card"
     ],
     "requires_external_context": true,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F7_govern"
   },
   "user_journey": {
     "boundary": "Journey map. NOT workflow (system) nor onboarding_flow (activation sub-journey).",
@@ -5555,7 +5834,8 @@
       "knowledge_card"
     ],
     "requires_external_context": true,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F4_reason"
   },
   "user_model": {
     "boundary": "Cross-session dialectic user representation (Honcho-pattern). NOT entity_memory (any entity) nor session_state (single session).",
@@ -5578,7 +5858,8 @@
       "episodic_memory"
     ],
     "requires_external_context": true,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F2_become"
   },
   "vad_config": {
     "boundary": "VAD settings only. NOT voice_pipeline (full arch) nor stt_provider (transcription).",
@@ -5597,7 +5878,8 @@
       "env_config"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F1_constrain"
   },
   "validation_schema": {
     "boundary": "Formal contract enforced by the SYSTEM after generation. NOT response_format P05 (injected into prompt, LLM sees it).",
@@ -5613,7 +5895,8 @@
     "status": "stable",
     "upstream_source": null,
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F1_constrain"
   },
   "validator": {
     "boundary": "Technical pass/fail validation rule. NOT quality_gate (P11, numeric score) nor scoring_rubric (P07, criteria).",
@@ -5633,7 +5916,8 @@
       "quality_gate"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F7_govern"
   },
   "value_object": {
     "boundary": "Immutable value type. NOT type_def (generic type) nor enum_def (enumeration). Evans Value Object.",
@@ -5655,7 +5939,8 @@
       "input_schema"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F4_reason"
   },
   "vc_credential": {
     "boundary": "VC 2.0 JSON-LD with data-integrity proof. NOT vc-jose-cose (JWT encoding), DID document, or Verifiable Presentation.",
@@ -5674,7 +5959,8 @@
       "knowledge_card"
     ],
     "requires_external_context": true,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F8_collaborate"
   },
   "vector_store": {
     "added_version": "10.0.0",
@@ -5694,7 +5980,8 @@
       "embedding_config"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F3_inject"
   },
   "vision_tool": {
     "boundary": "Processes visual input and returns structured data. NOT browser_tool (DOM interaction) nor computer_use (screen control).",
@@ -5713,7 +6000,8 @@
       "api_client"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F5_call"
   },
   "visual_workflow": {
     "boundary": "Visual workflow editor. NOT workflow (code-defined) nor dag (directed acyclic graph).",
@@ -5733,7 +6021,8 @@
       "diagram"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F6_produce"
   },
   "voice_pipeline": {
     "boundary": "Voice pipeline architecture. NOT tts_provider (single provider) nor stt_provider (single provider).",
@@ -5754,7 +6043,8 @@
       "vad_config"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F5_call"
   },
   "webhook": {
     "boundary": "Receives or sends events via HTTP. NOT api_client (request-response) nor notifier (message delivery).",
@@ -5774,7 +6064,8 @@
       "env_config"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F5_call"
   },
   "webinar_script": {
     "boundary": "Webinar script. NOT pitch_deck (visual deck) nor sales_playbook (1:1 selling).",
@@ -5794,7 +6085,8 @@
       "knowledge_card"
     ],
     "requires_external_context": true,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F6_produce"
   },
   "white_label_config": {
     "boundary": "White-label spec. NOT brand_config (identity) nor env_config (runtime).",
@@ -5813,7 +6105,8 @@
       "env_config"
     ],
     "requires_external_context": true,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F1_constrain"
   },
   "workflow": {
     "boundary": "Flow of agents+tools sequential/parallel. NOT chain (P03, prompt sequence) nor dag (dependency graph without execution).",
@@ -5834,7 +6127,8 @@
       "crew_template"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F8_collaborate"
   },
   "workflow_node": {
     "boundary": "Workflow node type. NOT workflow (full workflow) nor visual_workflow (GUI editor config).",
@@ -5853,7 +6147,8 @@
       "workflow"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F8_collaborate"
   },
   "workflow_primitive": {
     "added_version": "10.0.0",
@@ -5873,7 +6168,8 @@
       "router"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F8_collaborate"
   },
   "workflow_run_crate": {
     "boundary": "Execution provenance packaging. NOT workflow definition (workflow, P12), raw dataset (dataset_card, P01), or agent identity (vc_credential, P10).",
@@ -5893,7 +6189,8 @@
       "knowledge_card"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F8_collaborate"
   },
   "working_memory": {
     "boundary": "Task-scoped short-term memory. NOT session_state (session persistence) nor entity_memory (long-term entity store). Cognitive: working memory.",
@@ -5912,7 +6209,8 @@
       "entity_memory"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F3_inject"
   },
   "curation_nudge": {
     "boundary": "Proactive memory-persistence reminder. NOT guardrail (blocks action) nor quality_gate (pass/fail). Nudges ASK.",
@@ -5937,7 +6235,8 @@
       "prompt_template"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F6_produce"
   },
   "hibernation_policy": {
     "boundary": "Idle-state cost guard for serverless backends. NOT cost_budget (spend caps) nor rate_limit_config (throughput).",
@@ -5960,6 +6259,7 @@
       "secret_config"
     ],
     "requires_external_context": false,
-    "requires_live_tools": false
+    "requires_live_tools": false,
+    "primary_8f": "F1_constrain"
   }
 }

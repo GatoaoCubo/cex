@@ -1,6 +1,7 @@
 ---
 id: KC_N05_POSTGRESQL_RAILWAY
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: PostgreSQL & Redis on Railway — Setup, Connection, Performance
 domain: N05_operations

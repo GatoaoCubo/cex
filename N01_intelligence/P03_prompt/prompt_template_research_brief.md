@@ -1,6 +1,7 @@
 ---
 id: prompt_template_research_brief
 kind: prompt_template
+8f: F6_produce
 pillar: P03
 nucleus: n01
 title: "N01 Research Brief Prompt Template"

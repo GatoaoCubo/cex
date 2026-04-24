@@ -1,6 +1,7 @@
 ---
 id: "p03_ap_{{ACTION_SLUG}}"
 kind: action_prompt
+8f: F6_produce
 pillar: P03
 version: 1.0.0
 title: Template - Action Prompt

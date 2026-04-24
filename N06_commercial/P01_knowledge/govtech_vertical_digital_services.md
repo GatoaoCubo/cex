@@ -1,6 +1,7 @@
 ---
 id: govtech_vertical_digital_services
 kind: govtech_vertical
+8f: F1_constrain
 pillar: P01
 nucleus: N06
 domain: govtech

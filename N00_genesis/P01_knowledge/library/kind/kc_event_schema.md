@@ -3,6 +3,7 @@ quality: 8.0
 quality: 7.7
 id: kc_event_schema
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "Knowledge Card -- Event Schema"
 version: 1.0.0

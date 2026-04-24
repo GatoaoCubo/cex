@@ -1,6 +1,7 @@
 ---
 id: ex_entity_memory_partner_profile
 kind: entity_memory
+8f: F3_inject
 pillar: P10
 version: 1.0.0
 title: "Entity Memory -- B2B Partner Profile"

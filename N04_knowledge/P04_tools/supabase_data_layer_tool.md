@@ -1,6 +1,7 @@
 ---
 id: p04_tool_supabase_data_layer
 kind: cli_tool
+8f: F5_call
 pillar: P04
 title: "Supabase Data Layer — N04 Provisioning Tool"
 version: 1.0.0

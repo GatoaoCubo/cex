@@ -1,6 +1,7 @@
 ---
 id: ex_social_publisher_ayrshare
 kind: social_publisher
+8f: F6_produce
 pillar: P05
 title: "Example Social Publisher: Ayrshare Routing"
 version: 1.0.0

@@ -6,6 +6,7 @@
 
 id: p12_ho_{{TASK_SLUG}}
 kind: handoff
+8f: F8_collaborate
 pillar: P12
 title: "Handoff: {{TASK_NAME}}"
 version: 1.0.0

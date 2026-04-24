@@ -1,6 +1,7 @@
 ---
 id: p01_rag_source_supabase
 kind: rag_source
+8f: F3_inject
 pillar: P01
 title: "RAG Source — Supabase pgvector as Embedding Backend"
 version: 1.0.0

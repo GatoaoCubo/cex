@@ -1,6 +1,7 @@
 ---
 id: ex_social_publisher_bakery
 kind: cli_tool
+8f: F5_call
 pillar: P04
 title: "Social Publisher — Artisan Bakery (Food Niche)"
 version: 1.0.0

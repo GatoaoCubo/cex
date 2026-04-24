@@ -1,6 +1,7 @@
 ---
 id: p01_kc_python_testing_strategies_ai_agents
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "Python Testing Strategies for AI Agents"
 version: "1.0.0"

@@ -1,6 +1,7 @@
 ---
 id: ex_db_connector_supabase
 kind: db_connector
+8f: F5_call
 pillar: P09
 title: Supabase Database Connector
 version: 0.1.0

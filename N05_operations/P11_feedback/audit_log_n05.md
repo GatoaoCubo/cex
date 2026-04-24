@@ -1,6 +1,7 @@
 ---
 id: p11_al_n05_operations
 kind: audit_log
+8f: F8_collaborate
 pillar: P11
 title: "Audit Log Config -- N05 Operations"
 version: "1.0.0"

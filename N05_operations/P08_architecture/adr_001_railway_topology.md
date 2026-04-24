@@ -1,6 +1,7 @@
 ---
 id: p08_adr_001_railway_topology
 kind: context_doc
+8f: F3_inject
 pillar: P08
 title: "ADR-001: Railway 4-Service Topology"
 version: 1.0.0

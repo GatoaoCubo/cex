@@ -1,6 +1,7 @@
 ---
 id: kc_tailwind_patterns
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: Tailwind Patterns
 tags: [tailwind, patterns, design]

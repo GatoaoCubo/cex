@@ -1,6 +1,7 @@
 ---
 id: p01_embedding_config_supabase
 kind: embedding_config
+8f: F3_inject
 pillar: P01
 title: "Embedding Config — pgvector in Supabase"
 version: 1.0.0

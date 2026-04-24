@@ -1,6 +1,7 @@
 ---
 id: n00_vector_store_manifest
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 nucleus: n00
 title: "Vector Store -- Canonical Manifest"

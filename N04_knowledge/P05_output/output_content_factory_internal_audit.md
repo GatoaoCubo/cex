@@ -1,6 +1,7 @@
 ---
 id: output_content_factory_internal_audit
 kind: audit_report
+8f: F7_govern
 pillar: P01
 mission: MISSION_content_factory_v1
 wave: 1

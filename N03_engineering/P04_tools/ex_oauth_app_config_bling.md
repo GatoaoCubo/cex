@@ -1,6 +1,7 @@
 ---
 id: ex_oauth_app_config_bling
 kind: oauth_app_config
+8f: F1_constrain
 pillar: P09
 title: Bling ERP OAuth 2.0 App Configuration
 version: 0.1.0

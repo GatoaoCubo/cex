@@ -1,6 +1,7 @@
 ---
 id: ex_vision_tool_image_edit
 kind: vision_tool
+8f: F5_call
 pillar: P04
 title: "Example Vision Tool: Image Edit for Brand Content"
 version: 1.0.0

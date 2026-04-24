@@ -1,6 +1,7 @@
 ---
 id: p03_pt_orchestration_task_dispatch
 kind: prompt_template
+8f: F6_produce
 pillar: P03
 title: "Orchestration Task Dispatch Template"
 version: "1.0.0"

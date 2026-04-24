@@ -1,6 +1,7 @@
 ---
 id: n03_competitive_architecture
 kind: competitive_analysis
+8f: F4_reason
 pillar: P08
 version: 1.0.0
 created: 2026-04-02

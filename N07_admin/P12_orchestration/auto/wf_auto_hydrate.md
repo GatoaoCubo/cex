@@ -1,6 +1,7 @@
 ---
 id: p12_wf_auto_hydrate
 kind: workflow
+8f: F8_collaborate
 pillar: P12
 title: "Auto-Hydrate — Enrich user input before routing"
 version: 1.0.0

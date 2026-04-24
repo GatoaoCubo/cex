@@ -1,6 +1,7 @@
 ---
 id: action_prompt_n01
 kind: action_prompt
+8f: F6_produce
 pillar: P03
 nucleus: n01
 title: "N01 Research Action Prompts"

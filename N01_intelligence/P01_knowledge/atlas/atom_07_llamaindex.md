@@ -1,6 +1,7 @@
 ---
 id: atom_07_llamaindex
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "ATOM-07: LlamaIndex Framework -- Complete Vocabulary Atlas"
 version: 1.1.0

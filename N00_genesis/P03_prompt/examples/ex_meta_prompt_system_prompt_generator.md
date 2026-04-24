@@ -1,6 +1,7 @@
 ---
 id: p03_mp_system_prompt_generator
 kind: meta_prompt
+8f: F6_produce
 pillar: P03
 title: Meta-Prompt for System Prompt Generation
 target_type: system_prompt

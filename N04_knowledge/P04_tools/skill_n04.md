@@ -1,6 +1,7 @@
 ---
 id: skill_n04
 kind: skill
+8f: F5_call
 nucleus: n04
 pillar: P04
 mirrors: N00_genesis/P04_tools/tpl_skill.md

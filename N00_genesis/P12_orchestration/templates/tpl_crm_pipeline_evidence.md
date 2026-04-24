@@ -1,6 +1,7 @@
 ---
 id: tpl_crm_pipeline_evidence
 kind: template
+8f: F6_produce
 pillar: P12
 title: "CRM Pipeline Evidence — Mission Report Template"
 version: 1.0.0

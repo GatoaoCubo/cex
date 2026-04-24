@@ -1,6 +1,7 @@
 ---
 id: n00_optimizer_manifest
 kind: knowledge_card
+8f: F3_inject
 pillar: P11
 nucleus: n00
 title: "Optimizer -- Canonical Manifest"

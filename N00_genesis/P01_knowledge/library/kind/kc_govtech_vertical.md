@@ -1,6 +1,7 @@
 ---
 id: p01_kc_govtech_vertical
 kind: knowledge_card
+8f: F3_inject
 type: kind
 pillar: P01
 title: "Govtech Vertical -- Deep Knowledge for govtech_vertical"

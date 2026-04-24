@@ -1,6 +1,7 @@
 ---
 id: p01_kc_cex_function_inject
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "CEX Function INJECT — Context Injection as Primary Quality Driver"
 version: 1.0.0

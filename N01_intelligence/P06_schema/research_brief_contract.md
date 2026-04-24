@@ -1,6 +1,7 @@
 ---
 id: p06_schema_research_brief
 kind: schema
+8f: F1_constrain
 pillar: P06
 title: "Research Brief Contract"
 version: 1.0.0

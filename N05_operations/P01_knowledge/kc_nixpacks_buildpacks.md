@@ -1,6 +1,7 @@
 ---
 id: KC_N05_NIXPACKS_BUILDPACKS
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: Nixpacks & Railpack — Auto-detection, Build Config, Python
 domain: N05_operations

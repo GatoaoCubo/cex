@@ -1,6 +1,7 @@
 ---
 id: mem_learning_record_n04
 kind: learning_record
+8f: F7_govern
 pillar: P10
 nucleus: n04
 title: N04 Learning Record

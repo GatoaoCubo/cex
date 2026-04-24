@@ -1,6 +1,7 @@
 ---
 id: ex_social_publisher_saas
 kind: cli_tool
+8f: F5_call
 pillar: P04
 title: "Social Publisher — B2B SaaS (Professional Niche)"
 version: 1.0.0

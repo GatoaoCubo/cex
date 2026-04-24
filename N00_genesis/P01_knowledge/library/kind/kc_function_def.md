@@ -1,6 +1,7 @@
 ---
 id: p01_kc_function_def
 kind: knowledge_card
+8f: F3_inject
 type: kind
 pillar: P01
 title: "Function Def — Deep Knowledge for function_def"

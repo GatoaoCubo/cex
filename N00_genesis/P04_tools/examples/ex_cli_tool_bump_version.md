@@ -1,6 +1,7 @@
 ---
 id: p04_ct_bump_version
 kind: cli_tool
+8f: F5_call
 pillar: P04
 title: "Bump Version — Increment LP or global version in VERSION.yaml"
 version: 1.0.0

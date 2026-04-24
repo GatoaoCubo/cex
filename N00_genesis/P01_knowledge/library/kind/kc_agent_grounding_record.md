@@ -1,6 +1,7 @@
 ---
 id: kc_agent_grounding_record
 kind: knowledge_card
+8f: F3_inject
 title: Agent Grounding Record
 version: 1.0.0
 quality: 8.5

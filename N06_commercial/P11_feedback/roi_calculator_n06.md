@@ -1,6 +1,7 @@
 ---
 id: roi_calculator_n06
 kind: roi_calculator
+8f: F6_produce
 pillar: P11
 nucleus: n06
 title: "ROI Calculator -- Customer Value Proof Model"

@@ -1,6 +1,7 @@
 ---
 id: "p04_daemon_{{NAME_SLUG}}"
 kind: daemon
+8f: F8_collaborate
 pillar: P04
 version: 1.0.0
 title: Template - Daemon

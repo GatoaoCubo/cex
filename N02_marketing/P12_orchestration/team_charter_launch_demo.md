@@ -1,6 +1,7 @@
 ---
 id: p12_tc_launch_demo.md
 kind: team_charter
+8f: F8_collaborate
 pillar: P12
 llm_function: GOVERN
 charter_id: launch_demo_20260414

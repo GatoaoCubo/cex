@@ -1,6 +1,7 @@
 ---
 id: p10_lr_continuous_batching
 kind: learning_record
+8f: F7_govern
 pillar: P10
 title: "Learning: Continuous Batching Performance"
 version: 1.0.0

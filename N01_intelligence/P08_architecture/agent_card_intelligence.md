@@ -1,6 +1,7 @@
 ---
 id: p02_card_intelligence
 kind: agent_card
+8f: F2_become
 pillar: P02
 title: "N01 Research Analyst — Agent Card"
 version: 4.0.0

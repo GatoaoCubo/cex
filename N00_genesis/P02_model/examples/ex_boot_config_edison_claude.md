@@ -1,6 +1,7 @@
 ---
 id: p02_boot_edison_claude
 kind: boot_config
+8f: F2_become
 pillar: P02
 provider: claude
 identity: "builder_agent[BUILD]"

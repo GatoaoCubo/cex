@@ -3,6 +3,7 @@ quality: 8.0
 quality: 7.5
 id: ex_notifier_webhook
 kind: notifier
+8f: F5_call
 pillar: P04
 title: Webhook Delivery Notifier
 version: 0.1.0

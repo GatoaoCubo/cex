@@ -1,6 +1,7 @@
 ---
 id: self_audit_n05_20260408
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: N05 Self-Audit -- Tooling & Feature Gap Analysis
 version: 1.0.0

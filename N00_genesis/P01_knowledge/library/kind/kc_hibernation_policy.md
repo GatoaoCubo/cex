@@ -1,6 +1,7 @@
 ---
 id: kc_hibernation_policy
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 nucleus: n00
 title: "Knowledge Card: hibernation_policy"

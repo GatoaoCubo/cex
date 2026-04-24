@@ -1,6 +1,7 @@
 ---
 id: p11_gr_stella_dispatch
 kind: guardrail
+8f: F7_govern
 pillar: P11
 title: "Guardrail: orchestrator Dispatch Boundaries"
 version: 1.0.0

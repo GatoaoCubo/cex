@@ -1,6 +1,7 @@
 ---
 id: tpl_research_pipeline
 kind: cli_tool
+8f: F5_call
 pillar: P04
 title: "Research Pipeline — STORM+CRAG+CRITIC Market Intelligence"
 version: 1.0.0

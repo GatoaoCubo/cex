@@ -1,6 +1,7 @@
 ---
 id: p10_bi_intelligence_outputs
 kind: knowledge_index
+8f: F3_inject
 pillar: P10
 title: "Knowledge Index — N01 Intelligence Outputs"
 version: 1.0.0

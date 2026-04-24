@@ -1,6 +1,7 @@
 ---  
 id: p01_kc_markdown_tables  
 kind: knowledge_card  
+8f: F3_inject
 pillar: P01  
 title: Markdown Tables Syntax and Best Practices  
 version: "1.0.0"  

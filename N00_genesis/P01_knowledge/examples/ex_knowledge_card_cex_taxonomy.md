@@ -1,6 +1,7 @@
 ---
 id: p01_kc_cex_taxonomy
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "CEX Taxonomy — Universal Classification for LLM Enterprise Artifacts"
 version: 1.0.0

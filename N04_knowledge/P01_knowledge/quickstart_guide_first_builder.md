@@ -1,6 +1,7 @@
 ---
 id: p05_qs_first_builder
 kind: quickstart_guide
+8f: F6_produce
 pillar: P05
 title: "Your First CEX Builder in 30 Minutes"
 version: "1.0.0"

@@ -1,6 +1,7 @@
 ---
 id: p01_kc_cex_learning_package_concept
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "CEX Learning Packages — 12 Dimensions That Define Any LLM Entity"
 version: 1.0.0

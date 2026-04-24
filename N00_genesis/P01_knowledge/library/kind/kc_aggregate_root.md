@@ -3,6 +3,7 @@ quality: 8.0
 quality: 7.6
 id: kc_aggregate_root
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 nucleus: n00
 domain: kind-taxonomy

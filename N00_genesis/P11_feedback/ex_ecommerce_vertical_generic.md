@@ -1,6 +1,7 @@
 ---
 id: ex_ecommerce_vertical_generic
 kind: ecommerce_vertical
+8f: F1_constrain
 pillar: P11
 version: 1.0.0
 title: "Ecommerce Vertical Template -- Direct-to-Consumer + B2B Hybrid"

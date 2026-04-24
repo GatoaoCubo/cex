@@ -1,6 +1,7 @@
 ---
 id: wave2_quality_report
 kind: knowledge_card
+8f: F3_inject
 pillar: P07
 title: "Wave 2 empirical quality distribution (149 ISOs)"
 version: 1.0.0

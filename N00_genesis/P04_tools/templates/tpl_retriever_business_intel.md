@@ -1,6 +1,7 @@
 ---
 id: tpl_retriever_business_intel
 kind: template
+8f: F6_produce
 pillar: P04
 title: "Retriever — Multi-Source Business Intelligence"
 version: 1.0.0

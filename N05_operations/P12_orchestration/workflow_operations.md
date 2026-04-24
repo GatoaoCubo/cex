@@ -1,6 +1,7 @@
 ---
 id: p12_wf_railway_superintendent
 kind: workflow
+8f: F8_collaborate
 pillar: P12
 version: 5.0.0
 created: 2026-04-01

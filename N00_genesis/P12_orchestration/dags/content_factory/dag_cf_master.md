@@ -1,6 +1,7 @@
 ---
 id: p12_dag_cf_master
 kind: dag
+8f: F8_collaborate
 pillar: P12
 lp: P12
 version: "1.0.0"

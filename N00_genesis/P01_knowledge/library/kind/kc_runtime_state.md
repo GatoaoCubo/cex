@@ -1,6 +1,7 @@
 ---
 id: p01_kc_runtime_state
 kind: knowledge_card
+8f: F3_inject
 type: kind
 pillar: P10
 title: "Runtime State — Deep Knowledge for runtime_state"

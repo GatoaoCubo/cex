@@ -1,6 +1,7 @@
 ---
 id: p03_prompt_version
 kind: prompt_version
+8f: F6_produce
 pillar: P03
 version: 1.0.0
 title: "Template — Prompt Version"

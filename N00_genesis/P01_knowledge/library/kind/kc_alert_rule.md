@@ -1,6 +1,7 @@
 ---
 id: p01_kc_alert_rule
 kind: knowledge_card
+8f: F3_inject
 type: kind
 pillar: P01
 title: "Alert Rule -- Deep Knowledge for alert_rule"

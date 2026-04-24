@@ -1,6 +1,7 @@
 ---
 id: p01_kc_vector_store
 kind: knowledge_card
+8f: F3_inject
 type: kind
 pillar: P01
 title: "VectorDB Backend -- Deep Knowledge for vector_store"

@@ -1,6 +1,7 @@
 ---
 id: p01_kc_skill_references
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "Skill References Pattern — Interface Leve + Profundidade On-Demand"
 version: 1.0.0

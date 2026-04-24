@@ -1,6 +1,7 @@
 ---
 id: n02_self_review_2026-04-02
 kind: context_doc
+8f: F3_inject
 nucleus: N02
 pillar: P09
 title: "N02 Marketing Self-Review — 2026-04-02"

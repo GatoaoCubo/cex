@@ -1,6 +1,7 @@
 ---
 id: mem_learning_record_n05
 kind: learning_record
+8f: F7_govern
 pillar: P10
 nucleus: N05
 title: "N05 Operations Learning Record"

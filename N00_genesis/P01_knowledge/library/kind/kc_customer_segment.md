@@ -1,6 +1,7 @@
 ---
 id: p01_kc_customer_segment
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "Customer Segment: ICP Targeting and Cohort Definition"
 version: "2.0.0"

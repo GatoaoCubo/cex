@@ -1,6 +1,7 @@
 ---
 id: kc_sales_playbook
 kind: knowledge_card
+8f: F3_inject
 title: Sales Playbook
 version: 1.0.0
 quality: 8.7

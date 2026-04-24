@@ -1,6 +1,7 @@
 ---
 id: p01_kc_agent_package
 kind: knowledge_card
+8f: F3_inject
 type: kind
 pillar: P02
 title: "ISO Package — Deep Knowledge for agent_package"

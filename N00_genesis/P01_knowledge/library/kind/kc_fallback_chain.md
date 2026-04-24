@@ -1,6 +1,7 @@
 ---
 id: p01_kc_fallback_chain
 kind: knowledge_card
+8f: F3_inject
 type: kind
 pillar: P02
 title: "Fallback Chain — Deep Knowledge for fallback_chain"

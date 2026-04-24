@@ -1,6 +1,7 @@
 ---
 id: p04_browser_awesome_list
 kind: browser_tool
+8f: F5_call
 name: awesome_list_crawler
 pillar: P04
 version: 1.0.0

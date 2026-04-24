@@ -1,6 +1,7 @@
 ---
 id: p01_kc_tailwind_patterns
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "Tailwind CSS Patterns & Configuration"
 version: 1.0.0

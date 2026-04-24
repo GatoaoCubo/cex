@@ -1,6 +1,7 @@
 ---
 id: p10_out_kc_audit_report
 kind: output
+8f: F6_produce
 pillar: P10
 title: "Output: KC Audit Report"
 version: 1.0.0

@@ -1,6 +1,7 @@
 ---
 id: kc_consolidation_policy
 kind: knowledge_card
+8f: F3_inject
 title: Consolidation Policy
 version: 1.0.0
 quality: 8.7

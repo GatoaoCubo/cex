@@ -1,6 +1,7 @@
 ---
 id: p01_kc_session_backend
 kind: knowledge_card
+8f: F3_inject
 type: kind
 pillar: P10
 title: "Session Backend -- Deep Knowledge for session_backend"

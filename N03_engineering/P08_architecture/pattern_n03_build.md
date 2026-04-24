@@ -1,6 +1,7 @@
 ---
 id: p08_pat_n03_build
 kind: pattern
+8f: F4_reason
 pillar: P08
 title: "Pattern -- N03 Canonical Build Patterns"
 version: 1.0.0

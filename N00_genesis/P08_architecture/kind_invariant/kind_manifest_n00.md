@@ -1,6 +1,7 @@
 ---
 id: n00_invariant_manifest
 kind: knowledge_card
+8f: F3_inject
 pillar: P08
 nucleus: n00
 title: "Invariant -- Canonical Manifest"

@@ -1,6 +1,7 @@
 ---
 id: p01_kc_creation_best_practices
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "Creation Best Practices for LLM Artifact Engineering"
 version: "1.0.0"

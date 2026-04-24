@@ -1,6 +1,7 @@
 ---
 id: p07_sr_5_dimension_quality
 kind: scoring_rubric
+8f: F7_govern
 pillar: P07
 title: 5-Dimension Quality Scoring (5D)
 version: 1.0.0

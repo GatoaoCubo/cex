@@ -1,6 +1,7 @@
 ---
 id: regression_check_n06
 kind: regression_check
+8f: F7_govern
 pillar: P07
 nucleus: n06
 title: "Regression Check -- Revenue Strategy Anti-Patterns and Failed Hypotheses"

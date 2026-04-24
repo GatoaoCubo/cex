@@ -1,6 +1,7 @@
 ---
 id: p05_ov_toxicity_pii_check
 kind: output_validator
+8f: F6_produce
 pillar: P05
 title: Toxicity + PII Post-LLM Validator
 version: 1.0.0

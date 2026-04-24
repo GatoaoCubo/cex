@@ -1,6 +1,7 @@
 ---
 id: p05_coc_cex
 kind: code_of_conduct
+8f: F8_collaborate
 pillar: P05
 title: "CEX Code of Conduct"
 contact_email: "{{BRAND_EMAIL}}"

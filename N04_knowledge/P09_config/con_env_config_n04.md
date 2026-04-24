@@ -1,6 +1,7 @@
 ---
 id: con_env_config_n04
 kind: env_config
+8f: F1_constrain
 pillar: P09
 nucleus: n04
 title: Knowledge Environment Config

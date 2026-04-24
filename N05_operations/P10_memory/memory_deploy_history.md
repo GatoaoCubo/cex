@@ -1,6 +1,7 @@
 ---
 id: p10_memory_deploy_history
 kind: runtime_state
+8f: F8_collaborate
 pillar: P10
 title: Deploy History Memory
 version: 1.0.0

@@ -1,6 +1,7 @@
 ---
 id: p10_out_swot_analysis
 kind: output
+8f: F6_produce
 pillar: P10
 title: "Output: SWOT Analysis"
 version: 1.0.0

@@ -1,6 +1,7 @@
 ---
 id: p01_kc_cex_function_collaborate
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "CEX Function COLLABORATE — Multi-Agent Coordination and Handoffs"
 version: 1.0.0

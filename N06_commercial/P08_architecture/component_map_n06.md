@@ -1,6 +1,7 @@
 ---
 id: component_map_n06
 kind: component_map
+8f: F4_reason
 pillar: P08
 nucleus: n06
 title: "N06 Commercial -- Component Map"

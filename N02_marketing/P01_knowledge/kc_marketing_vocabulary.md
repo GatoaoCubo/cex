@@ -1,6 +1,7 @@
 ---
 id: kc_marketing_vocabulary
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 nucleus: n02
 title: "N02 Marketing Controlled Vocabulary -- Canonical Terms"

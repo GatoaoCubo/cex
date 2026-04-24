@@ -1,6 +1,7 @@
 ---
 id: n00_team_charter_manifest
 kind: knowledge_card
+8f: F3_inject
 pillar: P12
 nucleus: n00
 title: "Team Charter -- Canonical Manifest"

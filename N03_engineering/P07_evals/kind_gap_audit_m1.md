@@ -1,6 +1,7 @@
 ---
 id: kind_gap_audit_m1
 kind: benchmark
+8f: F7_govern
 pillar: P07
 title: "KIND_GAP_AUDIT M1: N03 Engineering Structural Gap Analysis"
 version: 1.0.0

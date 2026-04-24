@@ -1,6 +1,7 @@
 ---
 id: p03_rp_agent_group_dispatch
 kind: router_prompt
+8f: F8_collaborate
 pillar: P03
 title: Router Prompt for organization Agent_group Task Dispatch
 routes: [research_agent, marketing_agent, builder_agent, knowledge_agent, operations_agent, commercial_agent]

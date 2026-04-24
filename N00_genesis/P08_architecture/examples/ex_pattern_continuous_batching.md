@@ -1,6 +1,7 @@
 ---
 id: p08_pat_continuous_batching
 kind: pattern
+8f: F4_reason
 pillar: P08
 title: "Pattern: Continuous Batching (Agent_group Grid)"
 version: 1.0.0

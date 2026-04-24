@@ -1,6 +1,7 @@
 ---
 id: p01_rc_hybrid_rag
 kind: retriever_config
+8f: F3_inject
 pillar: P01
 title: Hybrid RAG Retriever (BM25 + Dense + Cohere Reranker)
 version: 1.0.0

@@ -1,6 +1,7 @@
 ---
 id: hybrid_review6_n02
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "HYBRID_REVIEW6 N02 Audit: pitch_deck + interactive_demo + product_tour"
 version: "1.0.0"

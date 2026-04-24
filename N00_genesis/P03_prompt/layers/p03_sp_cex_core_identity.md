@@ -1,6 +1,7 @@
 ---
 id: p03_sp_cex_core_identity
 kind: system_prompt
+8f: F2_become
 pillar: P03
 title: "CEX Core Identity System Prompt"
 version: 1.0.0

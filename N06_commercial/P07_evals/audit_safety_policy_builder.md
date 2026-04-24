@@ -1,6 +1,7 @@
 ---
 id: n06_audit_safety_policy_builder
 kind: audit_report
+8f: F7_govern
 nucleus: n06
 pillar: P11
 mission: HYBRID_REVIEW

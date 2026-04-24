@@ -1,6 +1,7 @@
 ---
 id: n06_self_audit_20260408
 kind: context_doc
+8f: F3_inject
 pillar: P01
 title: "N06 Self-Audit -- Commercial Tools & MCP Status (Claude-Native)"
 version: 1.0.0

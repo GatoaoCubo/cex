@@ -1,6 +1,7 @@
 ---
 id: n04_agent_ingestion_engineer
 kind: agent
+8f: F2_become
 pillar: P03
 title: "N04 Ingestion Engineer — Source Acquisition Specialist"
 version: 1.0.0

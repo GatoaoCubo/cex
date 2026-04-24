@@ -1,6 +1,7 @@
 ---
 id: p09_arch_task_queue
 kind: knowledge_card
+8f: F3_inject
 pillar: P09
 title: "Task Queue Specification — Continuous/Infinite Bootstrap Mode"
 version: 1.0.0

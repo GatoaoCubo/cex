@@ -1,6 +1,7 @@
 ---
 id: p11_qg_builder_nucleus
 kind: quality_gate
+8f: F7_govern
 pillar: P11
 title: Quality Gate -- Builder Nucleus
 version: 2.0.0

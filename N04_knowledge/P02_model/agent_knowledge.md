@@ -1,6 +1,7 @@
 ---
 id: n04_agent_knowledge
 kind: agent
+8f: F2_become
 pillar: P01
 title: "N04 Knowledge Engineer — Knowledge Gluttony"
 version: 4.0.0

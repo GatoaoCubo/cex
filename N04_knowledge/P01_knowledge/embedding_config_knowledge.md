@@ -1,6 +1,7 @@
 ---
 id: n04_ec_knowledge
 kind: embedding_config
+8f: F3_inject
 pillar: P01_knowledge
 version: 3.0.0
 created: 2026-03-31

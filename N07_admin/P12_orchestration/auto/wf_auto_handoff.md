@@ -1,6 +1,7 @@
 ---
 id: p12_wf_auto_handoff
 kind: workflow
+8f: F8_collaborate
 pillar: P12
 title: "Auto-Handoff — Session end / context overflow management"
 version: 1.0.0

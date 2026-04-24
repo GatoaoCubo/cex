@@ -1,6 +1,7 @@
 ---
 id: p01_kc_diagram
 kind: knowledge_card
+8f: F3_inject
 type: kind
 pillar: P08
 title: "Diagram — Deep Knowledge for diagram"

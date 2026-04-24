@@ -1,6 +1,7 @@
 ---
 id: landing_page_pet-shop-crm
 kind: landing_page
+8f: F6_produce
 pillar: P05
 title: Pet Shop CRM - Manage Your Business Effortlessly
 version: 1.0.0

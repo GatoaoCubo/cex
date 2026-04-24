@@ -3,6 +3,7 @@ quality: 8.0
 quality: 7.6
 id: p06_vo_quality_score
 kind: value_object
+8f: F4_reason
 pillar: P06
 title: "Value Object: QualityScore"
 version: 0.1.0

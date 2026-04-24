@@ -6,6 +6,7 @@
 
 id: p07_gt_{{CASE_SLUG}}
 kind: golden_test
+8f: F7_govern
 pillar: P07
 title: "Golden Test: {{REFERENCE_CASE_NAME}}"
 version: 1.0.0

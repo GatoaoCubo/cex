@@ -1,6 +1,7 @@
 ---
 id: kc_8f_stress_tests
 kind: knowledge_card
+8f: F3_inject
 type: meta
 pillar: P01
 title: "8F Stress Tests — Vague Input → Production Artifact"

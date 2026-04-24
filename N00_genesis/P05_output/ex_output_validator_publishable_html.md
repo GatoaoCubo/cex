@@ -1,6 +1,7 @@
 ---
 id: ex_output_validator_publishable_html
 kind: output_validator
+8f: F6_produce
 pillar: P05
 title: "Example Output Validator: Publishable HTML"
 version: 1.0.0

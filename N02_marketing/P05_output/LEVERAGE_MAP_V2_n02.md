@@ -1,6 +1,7 @@
 ---
 id: n02_leverage_map_v2_verification
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "N02 Marketing - LEVERAGE_MAP_V2 Verification"
 mission: LEVERAGE_MAP_V2

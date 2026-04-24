@@ -1,6 +1,7 @@
 ---
 id: hybrid_review5_n06
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: HYBRID_REVIEW5 N06 Audit -- enterprise_sla + white_label_config + usage_report (39 ISOs)
 version: 1.0.0

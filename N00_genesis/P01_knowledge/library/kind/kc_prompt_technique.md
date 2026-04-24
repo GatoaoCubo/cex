@@ -1,6 +1,7 @@
 ---
 id: kc_prompt_technique
 kind: knowledge_card
+8f: F3_inject
 title: Prompt Technique Patterns
 version: 1.0.0
 quality: 8.6

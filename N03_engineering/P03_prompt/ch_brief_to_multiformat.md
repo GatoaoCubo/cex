@@ -1,6 +1,7 @@
 ---
 id: p03_ch_brief_to_multiformat
 kind: chain
+8f: F6_produce
 pillar: P03
 version: "1.0.0"
 created: "2026-04-08"

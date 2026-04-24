@@ -1,6 +1,7 @@
 ---
 id: quality_gate_intent_resolution
 kind: quality_gate
+8f: F7_govern
 pillar: P11
 title: Quality Gate -- Intent Resolution Validation
 version: 1.0.0

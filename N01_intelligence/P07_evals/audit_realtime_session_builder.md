@@ -1,6 +1,7 @@
 ---
 id: n01_audit_realtime_session_builder
 kind: audit_report
+8f: F7_govern
 nucleus: n01
 mission: HYBRID_REVIEW2
 builder: realtime-session-builder

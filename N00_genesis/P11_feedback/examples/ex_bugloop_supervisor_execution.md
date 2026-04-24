@@ -1,6 +1,7 @@
 ---
 id: p11_bl_agent_group_execution
 kind: bugloop
+8f: F7_govern
 pillar: P11
 title: "Bugloop: Agent_group Execution Resilience"
 version: 1.0.0

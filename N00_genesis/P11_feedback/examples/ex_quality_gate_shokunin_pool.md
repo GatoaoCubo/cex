@@ -1,6 +1,7 @@
 ---
 id: p11_qg_shokunin_pool
 kind: quality_gate
+8f: F7_govern
 pillar: P11
 title: "Gate: Shokunin Pool Admission"
 version: 1.0.0

@@ -1,6 +1,7 @@
 ---
 id: p01_kc_lp10_memory
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "P10 Memory: O Que Lembra"
 version: 1.0.0

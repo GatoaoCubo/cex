@@ -1,6 +1,7 @@
 ---
 id: p08_pat_nucleus_fractal
 kind: pattern
+8f: F4_reason
 pillar: P08
 title: "Pattern: Nucleus as Fractal of 12 Pillars"
 version: 1.0.0

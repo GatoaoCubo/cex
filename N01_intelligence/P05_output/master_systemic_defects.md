@@ -1,6 +1,7 @@
 ---
 id: master_systemic_defects
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: Master systemic defects across 12 HYBRID_REVIEW audits
 version: 1.0.0

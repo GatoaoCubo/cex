@@ -3,6 +3,7 @@ quality: 9.1
 quality: 8.0
 id: kc_bilingual_term_map
 kind: knowledge_card
+8f: F3_inject
 kc_type: meta_kc
 pillar: P01
 nucleus: n04

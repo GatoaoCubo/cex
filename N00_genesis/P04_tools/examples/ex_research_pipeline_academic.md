@@ -1,6 +1,7 @@
 ---
 id: ex_research_pipeline_academic
 kind: cli_tool
+8f: F5_call
 pillar: P04
 title: "Research Pipeline — Academic Literature Review"
 version: 1.0.0

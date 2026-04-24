@@ -1,6 +1,7 @@
 ---
 id: kc_llm_agent_frameworks
 kind: knowledge_card
+8f: F3_inject
 title: "LLM Agent Frameworks Comparison"
 version: 1.0.0
 quality: 9.0

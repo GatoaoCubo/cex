@@ -1,6 +1,7 @@
 ---
 id: mem_runtime_state_n06
 kind: runtime_state
+8f: F8_collaborate
 pillar: P10
 nucleus: n06
 title: Commercial Runtime State

@@ -1,6 +1,7 @@
 ---
 id: kc_admin_vocabulary
 kind: knowledge_card
+8f: F3_inject
 type: controlled_vocabulary
 pillar: P01
 title: "Orchestration Domain Vocabulary"

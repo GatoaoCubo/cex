@@ -1,6 +1,7 @@
 ---
 id: atom_19_agent_taxonomy_surveys
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 domain: agent-taxonomy
 title: "Agent Taxonomy Surveys: Three Foundational Frameworks Compared"

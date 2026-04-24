@@ -1,6 +1,7 @@
 ---
 id: p01_kc_agent_identity
 kind: knowledge_card
+8f: F3_inject
 type: domain
 pillar: P01
 title: "Agent Identity — Lenses, Mental Models, Model Cards, Boot Configs, ISO Packages, Axioms"

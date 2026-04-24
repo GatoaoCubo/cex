@@ -1,6 +1,7 @@
 ---
 id: n06_output_brand_voice_guide
 kind: output_template
+8f: F6_produce
 pillar: P05
 title: "Brand Voice Guide — Tone Matrix & Channel Calibration"
 version: 1.0.0

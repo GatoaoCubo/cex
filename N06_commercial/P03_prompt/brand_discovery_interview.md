@@ -1,6 +1,7 @@
 ---
 id: p03_brand_discovery_interview
 kind: prompt_template
+8f: F6_produce
 pillar: P03
 title: "Brand Discovery Interview — 3-Phase Progressive Depth"
 version: 2.0.0

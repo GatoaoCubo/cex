@@ -3,6 +3,7 @@ quality: 8.3
 quality: 7.6
 pillar: P01
 kind: knowledge_card
+8f: F3_inject
 id: kc_test_signal_flow
 
 title: Test Signal Flow Documentation

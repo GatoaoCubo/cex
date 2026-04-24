@@ -1,6 +1,7 @@
 ---
 id: p07_kc_memory_benchmark
 kind: knowledge_card
+8f: F3_inject
 type: kind
 pillar: P07
 title: "Memory Benchmark -- Deep Knowledge for memory_benchmark"

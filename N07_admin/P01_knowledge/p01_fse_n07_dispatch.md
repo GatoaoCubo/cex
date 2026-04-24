@@ -1,6 +1,7 @@
 ---
 id: p01_fse_n07_dispatch
 kind: few_shot_example
+8f: F3_inject
 pillar: P01
 nucleus: N07
 title: "Few-Shot Example -- N07 Intent Resolution and Dispatch"

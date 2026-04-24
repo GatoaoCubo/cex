@@ -1,6 +1,7 @@
 ---
 id: p01_kc_lp05_output
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "P05 Output: O Que o Agente Entrega"
 version: 1.0.0

@@ -1,6 +1,7 @@
 ---
 id: n00_partner_listing_manifest
 kind: knowledge_card
+8f: F3_inject
 pillar: P05
 nucleus: n00
 title: "Partner Listing -- Canonical Manifest"

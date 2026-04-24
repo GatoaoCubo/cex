@@ -1,6 +1,7 @@
 ---
 id: ex_dag_multi_marketplace_sync
 kind: dag
+8f: F8_collaborate
 pillar: P12
 title: Multi-Marketplace Sync DAG
 version: 0.1.0

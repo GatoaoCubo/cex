@@ -1,6 +1,7 @@
 ---
 id: n00_prosody_config_manifest
 kind: knowledge_card
+8f: F3_inject
 pillar: P09
 nucleus: n00
 title: "Prosody Config -- Canonical Manifest"

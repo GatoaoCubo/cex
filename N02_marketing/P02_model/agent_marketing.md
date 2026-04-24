@@ -1,6 +1,7 @@
 ---
 id: p02_agent_visual_frontend_marketing
 kind: agent
+8f: F2_become
 pillar: P02
 title: Visual Frontend Engineer & Marketing Agent
 version: 4.0.0

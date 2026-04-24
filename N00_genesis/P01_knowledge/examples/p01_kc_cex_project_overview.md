@@ -1,6 +1,7 @@
 ---
 id: p01_kc_cex_project_overview
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "CEX — Typed Knowledge System for LLM Agents"
 version: "1.0.0"

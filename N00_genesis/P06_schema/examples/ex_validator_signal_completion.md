@@ -1,6 +1,7 @@
 ---
 id: p06_vs_signal_completion
 kind: validation_schema
+8f: F1_constrain
 pillar: P06
 description: "Output schema for agent_group completion signals"
 format: json

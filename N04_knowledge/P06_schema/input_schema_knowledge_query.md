@@ -1,6 +1,7 @@
 ---
 id: p06_is_knowledge_query
 kind: input_schema
+8f: F1_constrain
 pillar: P06
 nucleus: n04
 title: "Input Schema -- Knowledge Query Contract"

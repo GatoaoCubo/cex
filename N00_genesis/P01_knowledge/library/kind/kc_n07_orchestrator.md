@@ -1,6 +1,7 @@
 ---
 id: kc_n07_orchestrator
 kind: knowledge_card
+8f: F3_inject
 title: "N07 Orchestrator — Autonomous Agent Coordination"
 version: 1.0.0
 quality: 9.0

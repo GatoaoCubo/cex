@@ -1,6 +1,7 @@
 ---
 id: eval_metric_commercial
 kind: eval_metric
+8f: F7_govern
 pillar: P07
 nucleus: n06
 title: "Eval Metric -- Commercial KPI Framework"

@@ -1,6 +1,7 @@
 ---
 id: ex_schedule_promo_calendar
 kind: schedule
+8f: F8_collaborate
 pillar: P12
 version: 1.0.0
 title: "Promo Calendar Schedule Template -- Quarterly Overlay"

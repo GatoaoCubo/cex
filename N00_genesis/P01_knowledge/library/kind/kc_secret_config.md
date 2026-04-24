@@ -1,6 +1,7 @@
 ---
 id: p01_kc_secret_config
 kind: knowledge_card
+8f: F3_inject
 type: kind
 pillar: P09
 title: "Secret Config — Deep Knowledge for secret_config"

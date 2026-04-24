@@ -1,6 +1,7 @@
 ---
 id: kc_course_generation
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 quality: 9.0
 tldr: "Using a sequential LLM chain with Pydantic models to progressively generate complex, structured content like online courses."

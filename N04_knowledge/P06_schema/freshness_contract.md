@@ -1,6 +1,7 @@
 ---
 id: p06_schema_freshness
 kind: schema
+8f: F1_constrain
 pillar: P06
 title: "Freshness Contract"
 version: 1.0.0

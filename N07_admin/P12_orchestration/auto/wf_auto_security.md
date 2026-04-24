@@ -1,6 +1,7 @@
 ---
 id: p12_wf_auto_security
 kind: workflow
+8f: F8_collaborate
 pillar: P12
 title: "Auto-Security — Scan before production"
 version: 1.0.0

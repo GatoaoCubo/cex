@@ -1,6 +1,7 @@
 ---
 id: p06_td_quality_score
 kind: type_def
+8f: F1_constrain
 pillar: P06
 description: "Type definition for the 5-dimension quality score used across organization"
 version: 1.0.0

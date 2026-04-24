@@ -1,6 +1,7 @@
 ---
 id: p10_ax_scout_before_create
 kind: axiom
+8f: F4_reason
 pillar: P10
 title: "Axiom: Scout Before Create (Law 8)"
 version: 3.0.0

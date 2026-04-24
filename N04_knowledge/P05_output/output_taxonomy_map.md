@@ -1,6 +1,7 @@
 ---
 id: p10_out_taxonomy_map
 kind: output
+8f: F6_produce
 pillar: P10
 title: "Output: Taxonomy Map"
 version: 1.0.0

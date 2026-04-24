@@ -1,6 +1,7 @@
 ---
 id: commercial_learning_record
 kind: learning_record
+8f: F7_govern
 pillar: P10
 title: "Commercial Learning Record — N06"
 nucleus: N06

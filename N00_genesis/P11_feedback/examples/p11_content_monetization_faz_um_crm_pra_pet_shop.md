@@ -1,6 +1,7 @@
 ---  
 id: petshop-crm  
 kind: content_monetization  
+8f: F6_produce
 pillar: P11  
 title: "Pet Shop CRM"  
 version: "1.0.0"  

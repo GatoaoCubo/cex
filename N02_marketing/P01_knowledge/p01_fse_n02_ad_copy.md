@@ -1,6 +1,7 @@
 ---
 id: p01_fse_n02_ad_copy
 kind: few_shot_example
+8f: F3_inject
 pillar: P01
 nucleus: N02
 title: "Few-Shot Example -- N02 Ad Copy via 8F Pipeline"

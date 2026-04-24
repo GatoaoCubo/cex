@@ -1,6 +1,7 @@
 ---
 id: p12_wf_visual_frontend_marketing
 kind: workflow
+8f: F8_collaborate
 pillar: P12
 version: 4.0.0
 created: 2026-03-30

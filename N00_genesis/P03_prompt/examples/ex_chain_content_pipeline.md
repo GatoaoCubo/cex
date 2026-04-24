@@ -1,6 +1,7 @@
 ---
 id: p03_ch_content_pipeline
 kind: chain
+8f: F6_produce
 pillar: P03
 title: Content Pipeline Chain (Research to Publish)
 steps: 4

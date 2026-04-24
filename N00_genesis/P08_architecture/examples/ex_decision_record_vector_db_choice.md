@@ -1,6 +1,7 @@
 ---
 id: p08_adr_vector_db_choice
 kind: decision_record
+8f: F4_reason
 pillar: P08
 title: "ADR-007: Choose Qdrant over Pinecone for Vector Database"
 status: accepted

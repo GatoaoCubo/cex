@@ -1,6 +1,7 @@
 ---
 id: p10_msc_n04_knowledge
 kind: memory_scope
+8f: F3_inject
 pillar: P02
 nucleus: n04
 title: "Memory Scope -- N04 Context Boundary Definitions"

@@ -1,6 +1,7 @@
 ---
 id: kc_eval_framework
 kind: knowledge_card
+8f: F3_inject
 title: Evaluation Framework Integration
 version: 1.0.0
 quality: 8.6

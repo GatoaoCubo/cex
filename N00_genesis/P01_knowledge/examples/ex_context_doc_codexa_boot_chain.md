@@ -1,6 +1,7 @@
 ---
 id: p01_ctx_organization_boot_chain
 kind: context_doc
+8f: F3_inject
 pillar: P01
 domain: architecture
 scope: boot_initialization

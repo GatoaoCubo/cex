@@ -1,6 +1,7 @@
 ---
 id: p01_kc_model_card
 kind: knowledge_card
+8f: F3_inject
 type: kind
 pillar: P02
 title: "Model Card — Deep Knowledge for model_card"

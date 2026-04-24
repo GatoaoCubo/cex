@@ -1,6 +1,7 @@
 ---
 id: p08_pat_crew_dispatch
 kind: pattern
+8f: F4_reason
 pillar: P08
 version: "1.0.0"
 created: "2026-03-30"

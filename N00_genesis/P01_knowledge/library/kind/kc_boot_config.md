@@ -1,6 +1,7 @@
 ---
 id: p01_kc_boot_config
 kind: knowledge_card
+8f: F3_inject
 type: kind
 pillar: P02
 title: "Boot Config — Deep Knowledge for boot_config"

@@ -1,6 +1,7 @@
 ---
 id: p01_kc_claude_agent_sdk_patterns
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "Claude Agent SDK — Handoffs, Guardrails, Tracing, Structured Output"
 version: 2.0.0

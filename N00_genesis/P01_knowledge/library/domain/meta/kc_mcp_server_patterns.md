@@ -1,6 +1,7 @@
 ---
 id: p01_kc_mcp_server_patterns
 kind: knowledge_card
+8f: F3_inject
 type: domain
 pillar: P01
 title: "MCP Server Patterns — Tool Integration Standard"

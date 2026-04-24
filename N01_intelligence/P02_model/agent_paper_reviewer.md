@@ -1,6 +1,7 @@
 ---
 id: p02_agent_paper_reviewer
 kind: agent
+8f: F2_become
 pillar: P02
 title: "Paper Reviewer Sub-Agent"
 version: 1.0.0

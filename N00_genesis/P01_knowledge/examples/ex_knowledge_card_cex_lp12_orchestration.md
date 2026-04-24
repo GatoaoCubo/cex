@@ -1,6 +1,7 @@
 ---
 id: p01_kc_cex_lp12_orchestration
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "CEX LP12 Orchestration — Multi-Agent Coordination Mechanics"
 version: 1.0.0

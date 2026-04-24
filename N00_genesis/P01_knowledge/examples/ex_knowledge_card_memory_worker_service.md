@@ -1,6 +1,7 @@
 ---
 id: p01_kc_memory_worker_service
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "Background Worker Service Pattern for LLM Memory Daemons"
 version: 1.0.0

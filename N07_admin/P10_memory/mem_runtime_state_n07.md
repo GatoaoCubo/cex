@@ -1,6 +1,7 @@
 ---
 id: p10_rs_n07
 kind: runtime_state
+8f: F8_collaborate
 pillar: P10
 title: "Runtime State: N07 Orchestrator"
 version: "1.0.0"

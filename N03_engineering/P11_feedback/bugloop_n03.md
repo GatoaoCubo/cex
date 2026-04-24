@@ -1,6 +1,7 @@
 ---
 id: p11_bl_n03
 kind: bugloop
+8f: F7_govern
 pillar: P11
 title: "Bugloop -- N03 Autonomous Build Error Detection"
 version: 1.0.0

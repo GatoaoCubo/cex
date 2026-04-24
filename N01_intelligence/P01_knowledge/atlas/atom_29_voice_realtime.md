@@ -1,6 +1,7 @@
 ---
 id: atom_29_voice_realtime
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: Voice Agent Architecture and Configuration Reference
 author: AI Systems Engineering Team

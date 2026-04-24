@@ -3,6 +3,7 @@ quality: 8.0
 quality: 7.3
 id: ex_research_pipeline_marketplace_scrap
 kind: research_pipeline
+8f: F5_call
 pillar: P04
 title: Marketplace Catalog Research Pipeline
 version: 0.1.0

@@ -1,6 +1,7 @@
 ---
 id: p08_pat_pricing_framework
 kind: pattern
+8f: F4_reason
 pillar: P08
 title: "Pattern — Value-Based Pricing Framework"
 nucleus: N06

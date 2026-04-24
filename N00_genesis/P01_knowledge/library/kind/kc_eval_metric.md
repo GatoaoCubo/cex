@@ -1,6 +1,7 @@
 ---
 id: kc_eval_metric
 kind: knowledge_card
+8f: F3_inject
 title: Evaluation Metric Definition
 version: 1.0.0
 quality: 8.7

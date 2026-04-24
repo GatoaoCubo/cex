@@ -1,6 +1,7 @@
 ---
 id: ex_chain_research_pipeline
 kind: chain
+8f: F6_produce
 pillar: P03
 title: "Research Pipeline Chain"
 tags: [chain, research, multi-step, search, synthesis]

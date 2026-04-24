@@ -1,6 +1,7 @@
 ---
 id: p01_kc_model_provider
 kind: knowledge_card
+8f: F3_inject
 type: kind
 pillar: P02
 title: "Model Provider -- Deep Knowledge for model_provider"

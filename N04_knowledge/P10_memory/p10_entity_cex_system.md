@@ -1,6 +1,7 @@
 ---
 id: p10_entity_cex_system
 kind: entity_memory
+8f: F3_inject
 pillar: P10
 title: "Entity Memory — CEX System"
 version: 1.0.0

@@ -1,6 +1,7 @@
 ---
 id: p07_rc_n03
 kind: regression_check
+8f: F7_govern
 pillar: P07
 title: "Regression Check -- N03 Build Quality"
 version: 1.0.0

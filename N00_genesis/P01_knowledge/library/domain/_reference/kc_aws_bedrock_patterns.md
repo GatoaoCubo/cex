@@ -1,6 +1,7 @@
 ---
 id: p01_kc_aws_bedrock_patterns
 kind: knowledge_card
+8f: F3_inject
 type: domain
 pillar: P01
 title: 'AWS Bedrock Patterns: Agents, Knowledge Bases, Guardrails, Orchestration'

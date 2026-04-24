@@ -1,6 +1,7 @@
 ---
 id: p06_schema_responsive_breakpoints
 kind: input_schema
+8f: F1_constrain
 pillar: P06
 title: "Responsive Breakpoints Contract"
 version: 1.0.0

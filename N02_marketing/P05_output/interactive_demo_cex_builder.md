@@ -1,6 +1,7 @@
 ---
 id: p05_id_cex_builder
 kind: interactive_demo
+8f: F6_produce
 pillar: P05
 title: "CEXAI Interactive Builder Demo -- From 5 Words to Knowledge Asset"
 version: 1.0.0

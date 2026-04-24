@@ -2,6 +2,7 @@
 quality: null
 id: kc_legal_vertical
 kind: knowledge_card
+8f: F3_inject
 title: "Legal Industry Vertical: Key Concepts"
 tldr: "Covers privilege, fee models, compliance frameworks, eDiscovery, TAR, and legal tech stack for AI-assisted legal applications"
 version: 1.1.0

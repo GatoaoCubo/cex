@@ -1,6 +1,7 @@
 ---
 id: ex_learning_record_ad_success
 kind: learning_record
+8f: F7_govern
 pillar: P10
 title: Ad Campaign Success Record
 tags: [memory, learning, feedback, success]

@@ -1,6 +1,7 @@
 ---
 id: p05_kc_course_module
 kind: knowledge_card
+8f: F3_inject
 type: kind
 pillar: P05
 title: "Course Module -- Deep Knowledge for course_module"

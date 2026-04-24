@@ -2,6 +2,7 @@
 quality: null
 id: kc_diff_strategy
 kind: knowledge_card
+8f: F3_inject
 title: "Diff Strategy: Change Application and Matching Algorithm"
 version: 1.1.0
 pillar: P01

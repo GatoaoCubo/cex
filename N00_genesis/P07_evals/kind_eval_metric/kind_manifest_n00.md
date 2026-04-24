@@ -1,6 +1,7 @@
 ---
 id: n00_eval_metric_manifest
 kind: knowledge_card
+8f: F3_inject
 pillar: P07
 nucleus: n00
 title: "Eval Metric -- Canonical Manifest"

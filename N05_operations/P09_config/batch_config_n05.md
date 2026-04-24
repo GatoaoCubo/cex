@@ -1,6 +1,7 @@
 ---
 id: p09_bc_n05_ops
 kind: batch_config
+8f: F1_constrain
 pillar: P09
 version: "1.0.0"
 created: "2026-04-17"

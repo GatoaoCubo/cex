@@ -1,6 +1,7 @@
 ---
 id: agent_n03
 kind: agent
+8f: F2_become
 nucleus: n03
 pillar: P02
 mirrors: N00_genesis/P02_model/templates/tpl_agent.md

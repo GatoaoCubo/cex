@@ -1,6 +1,7 @@
 ---
 id: p01_kc_entity_memory
 kind: knowledge_card
+8f: F3_inject
 type: kind
 pillar: P10
 title: "Entity Memory — Deep Knowledge for entity_memory"

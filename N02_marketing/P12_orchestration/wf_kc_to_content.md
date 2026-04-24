@@ -1,6 +1,7 @@
 ---
 id: wf_kc_to_content
 kind: workflow
+8f: F8_collaborate
 pillar: P12
 title: "KC to Published Content — End-to-End NotebookLM Pipeline Workflow"
 version: 1.0.0

@@ -1,6 +1,7 @@
 ---
 id: knowledge_graph_cex_taxonomy
 kind: knowledge_graph
+8f: F3_inject
 pillar: P10
 nucleus: N01
 title: CEX Taxonomy Knowledge Graph

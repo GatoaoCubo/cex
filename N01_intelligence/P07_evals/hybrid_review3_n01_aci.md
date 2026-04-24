@@ -1,6 +1,7 @@
 ---
 id: hybrid_review3_n01_aci
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "HYBRID_REVIEW3 Audit: agent_computer_interface (N01)"
 version: 1.0.0

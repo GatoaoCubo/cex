@@ -1,6 +1,7 @@
 ---
 id: p12_sig_agent_group_complete
 kind: signal
+8f: F8_collaborate
 pillar: P12
 description: "Completion signal emitted by agent_group after task execution"
 event: agent_group_complete

@@ -1,6 +1,7 @@
 ---
 id: sch_validator_n07
 kind: validator
+8f: F7_govern
 pillar: P06
 nucleus: n07
 title: "Orchestrator Validation Rules"

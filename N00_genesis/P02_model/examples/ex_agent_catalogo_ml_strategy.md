@@ -1,6 +1,7 @@
 ---
 id: p02_agent_catalogo_ml_strategy
 kind: agent
+8f: F2_become
 pillar: P02
 title: Agente Estrategista de Catalogo Mercado Livre
 version: 1.0.0

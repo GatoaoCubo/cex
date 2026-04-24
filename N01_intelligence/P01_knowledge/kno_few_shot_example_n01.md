@@ -1,6 +1,7 @@
 ---
 id: kno_few_shot_example_n01
 kind: few_shot_example
+8f: F3_inject
 pillar: P01
 nucleus: N01
 title: "N01 Few Shot Example"

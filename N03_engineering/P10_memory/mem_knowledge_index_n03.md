@@ -1,6 +1,7 @@
 ---
 id: mem_knowledge_index_n03
 kind: knowledge_index
+8f: F3_inject
 pillar: P10
 nucleus: N03
 title: "N03 Knowledge Index"

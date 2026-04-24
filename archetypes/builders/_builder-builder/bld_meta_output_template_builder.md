@@ -55,6 +55,7 @@ pattern: every field here exists in SCHEMA.md — template derives, never invent
 ---
 id: {{id_prefix}}_{{slug_var}}
 kind: {{type_name}}
+8f: {{8f}}
 pillar: {{lp}}
 <!-- NOTE: {{id_prefix}} = derivar de _schema.yaml naming. Ex: p02_mc, p01_kc, p11_qg -->
 <!-- NOTE: {{slug_var}} = parte variable do id. Ex: {{provider}}_{{model_slug}}, {{topic_slug}} -->

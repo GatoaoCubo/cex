@@ -1,6 +1,7 @@
 ---
 id: hybrid_review5_n01
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "HYBRID_REVIEW5 N01 Audit: customer_segment + cohort_analysis + user_journey"
 version: "1.0.0"

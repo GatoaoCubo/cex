@@ -1,6 +1,7 @@
 ---
 id: n00_e2e_eval_manifest
 kind: knowledge_card
+8f: F3_inject
 pillar: P07
 nucleus: n00
 title: "E2e Eval -- Canonical Manifest"

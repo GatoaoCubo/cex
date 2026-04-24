@@ -1,6 +1,7 @@
 ---
 id: sandbox_config_n05
 kind: sandbox_config
+8f: F1_constrain
 nucleus: n05
 pillar: P09
 mirrors: N00_genesis/P09_config/tpl_sandbox_config.md

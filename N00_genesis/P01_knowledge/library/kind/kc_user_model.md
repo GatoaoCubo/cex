@@ -1,6 +1,7 @@
 ---
 id: kc_user_model
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 nucleus: n04
 title: "KC: user_model"

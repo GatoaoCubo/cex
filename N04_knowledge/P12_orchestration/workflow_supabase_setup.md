@@ -1,6 +1,7 @@
 ---
 id: p12_wf_supabase_setup
 kind: workflow
+8f: F8_collaborate
 pillar: P12
 title: "Workflow — Supabase New Project Setup"
 version: 1.0.0

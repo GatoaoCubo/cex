@@ -1,6 +1,7 @@
 ---
 id: n00_p06_kind_index
 kind: knowledge_card
+8f: F3_inject
 pillar: P06
 nucleus: n00
 title: "P06 Schema -- Kind Index"

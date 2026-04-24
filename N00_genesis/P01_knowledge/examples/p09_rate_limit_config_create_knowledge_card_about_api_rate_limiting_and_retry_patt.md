@@ -1,6 +1,7 @@
 ---
 id: p01_kc_api_rate_limiting_retry_patterns
 kind: knowledge_card
+8f: F3_inject
 type: infrastructure
 pillar: P01
 title: "API Rate Limiting and Retry Patterns"

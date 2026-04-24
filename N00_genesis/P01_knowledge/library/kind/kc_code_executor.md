@@ -1,6 +1,7 @@
 ---
 id: p01_kc_code_executor
 kind: knowledge_card
+8f: F3_inject
 type: kind
 pillar: P04
 title: "Code Executor — Deep Knowledge for code_executor"

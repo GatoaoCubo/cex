@@ -1,6 +1,7 @@
 ---
 id: p07_qg_12_point_validation
 kind: quality_gate
+8f: F7_govern
 pillar: P07
 title: 12-Point Validation Checklist (12LP)
 version: 1.0.0

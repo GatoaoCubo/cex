@@ -3,6 +3,7 @@ quality: 7.8
 quality: 7.4
 id: handoff_n04
 kind: handoff
+8f: F8_collaborate
 nucleus: n04
 pillar: P12
 mirrors: N00_genesis/P12_orchestration/tpl_handoff.md

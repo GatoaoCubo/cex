@@ -3,6 +3,7 @@ quality: 8.7
 quality: 8.0
 id: p01_ch_cex_v1
 kind: changelog
+8f: F8_collaborate
 pillar: P01
 title: "CEX Changelog"
 version: "1.0.0"

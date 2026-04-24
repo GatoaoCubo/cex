@@ -1,6 +1,7 @@
 ---
 id: kc_rbac_policy
 kind: knowledge_card
+8f: F3_inject
 title: RBAC Policy for Multi-Tenant Isolation
 version: 1.0.0
 quality: 8.9

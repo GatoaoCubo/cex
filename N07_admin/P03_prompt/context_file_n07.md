@@ -1,6 +1,7 @@
 ---
 id: context_file_n07
 kind: context_file
+8f: F2_become
 nucleus: n07
 pillar: P03
 mirrors: N00_genesis/P03_prompt/tpl_context_file.md

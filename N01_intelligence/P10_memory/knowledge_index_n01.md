@@ -1,6 +1,7 @@
 ---
 id: knowledge_index_n01
 kind: knowledge_index
+8f: F3_inject
 pillar: P10
 nucleus: n01
 title: "N01 Intelligence Corpus Index"

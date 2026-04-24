@@ -1,6 +1,7 @@
 ---
 id: p05_rf_security_audit
 kind: response_format
+8f: F6_produce
 pillar: P05
 title: "Output Schema: Access Control Audit Report"
 version: 1.0.0

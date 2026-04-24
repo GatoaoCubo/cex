@@ -5,6 +5,7 @@
 
 id: p04_plug_{{PLUGIN_SLUG}}
 kind: plugin
+8f: F5_call
 name: {{PLUGIN_NAME}}
 version: 1.0.0
 entrypoint: {{MODULE_OR_COMMAND}}

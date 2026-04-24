@@ -1,6 +1,7 @@
 ---
 id: p09_cb_n05_operations
 kind: cost_budget
+8f: F1_constrain
 pillar: P09
 version: "1.0.0"
 created: "2026-04-17"

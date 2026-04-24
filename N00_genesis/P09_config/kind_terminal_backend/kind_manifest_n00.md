@@ -1,6 +1,7 @@
 ---
 id: n00_terminal_backend_manifest
 kind: knowledge_card
+8f: F3_inject
 pillar: P09
 nucleus: n00
 title: "Terminal Backend -- Canonical Manifest"

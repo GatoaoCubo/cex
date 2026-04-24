@@ -1,6 +1,7 @@
 ---
 id: p12_mission_bootstrap_2026q1
 kind: dag
+8f: F8_collaborate
 pillar: P12
 title: "Mission: CEX Self-Bootstrap — Q1 2026"
 version: 2.0.0

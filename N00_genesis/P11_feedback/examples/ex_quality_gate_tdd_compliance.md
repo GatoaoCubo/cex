@@ -1,6 +1,7 @@
 ---
 id: p11_qg_tdd_compliance
 kind: quality_gate
+8f: F7_govern
 pillar: P11
 title: "Gate: TDD Compliance"
 version: 1.0.0

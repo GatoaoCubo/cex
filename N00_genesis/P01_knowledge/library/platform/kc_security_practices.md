@@ -1,6 +1,7 @@
 ---
 id: p01_kc_security_practices
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "Security Practices — Scanning, Secrets, SAST, Container"
 version: 1.0.0

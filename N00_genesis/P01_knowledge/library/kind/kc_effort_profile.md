@@ -1,6 +1,7 @@
 ---
 id: p01_kc_effort_profile
 kind: knowledge_card
+8f: F3_inject
 type: kind
 pillar: P09
 title: "Effort Profile — Deep Knowledge for effort_profile"

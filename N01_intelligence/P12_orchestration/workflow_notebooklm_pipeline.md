@@ -1,6 +1,7 @@
 ---
 id: p12_wf_notebooklm_pipeline
 kind: workflow
+8f: F8_collaborate
 pillar: P12
 title: "NotebookLM Pipeline -- KC to Human Content via Browser Automation"
 version: 1.0.0

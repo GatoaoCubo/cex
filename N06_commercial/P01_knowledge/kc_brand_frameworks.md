@@ -1,6 +1,7 @@
 ---
 id: p01_kc_brand_frameworks
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "Brand Strategy Frameworks Collection — Positioning, Identity, Voice, Narrative"
 version: 1.0.0

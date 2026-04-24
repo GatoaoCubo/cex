@@ -1,6 +1,7 @@
 ---
 id: p07_bm_agent_group_boot_time
 kind: benchmark
+8f: F7_govern
 pillar: P07
 description: "Benchmark for agent_group boot times across all providers"
 metric: boot_time_seconds

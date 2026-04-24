@@ -1,6 +1,7 @@
 ---
 id: intent_resolution_fixes_results
 kind: regression_check
+8f: F7_govern
 pillar: P07
 title: Intent Resolution Fixes -- Verification Results
 version: 1.0.0

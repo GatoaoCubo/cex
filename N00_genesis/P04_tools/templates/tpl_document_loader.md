@@ -1,6 +1,7 @@
 ---
 id: p04_document_loader_NAME
 kind: document_loader
+8f: F5_call
 pillar: P04
 version: 1.0.0
 title: "Template — Document Loader"

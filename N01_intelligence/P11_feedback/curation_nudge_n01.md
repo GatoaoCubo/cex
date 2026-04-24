@@ -1,6 +1,7 @@
 ---
 id: curation_nudge_n01
 kind: curation_nudge
+8f: F6_produce
 nucleus: n01
 pillar: P11
 mirrors: N00_genesis/P11_feedback/tpl_curation_nudge.md

@@ -1,6 +1,7 @@
 ---
 id: spec_taxonomy_lifecycle
 kind: context_doc
+8f: F3_inject
 title: "CEX Taxonomy Non-Aging Lifecycle System"
 version: 1.0.0
 pillar: P01

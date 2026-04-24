@@ -1,6 +1,7 @@
 ---
 id: n02_tool_headline_scorer
 kind: cli_tool
+8f: F5_call
 pillar: P04
 title: "Headline Scorer — N02 Marketing Optimization Tool"
 version: 1.0.0

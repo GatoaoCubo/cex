@@ -2,6 +2,7 @@
 id: p12_ho_admin_template
 title: "Handoff Admin"
 kind: handoff
+8f: F8_collaborate
 pillar: P12
 version: 2.0.0
 created: 2026-03-30

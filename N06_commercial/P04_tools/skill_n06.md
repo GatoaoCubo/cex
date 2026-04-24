@@ -1,6 +1,7 @@
 ---
 id: skill_n06
 kind: skill
+8f: F5_call
 nucleus: n06
 pillar: P04
 title: "Skill N06: Sales Skills (Discovery / Objection-Handling / Closing)"

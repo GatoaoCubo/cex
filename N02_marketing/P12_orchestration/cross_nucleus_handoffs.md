@@ -1,6 +1,7 @@
 ---
 id: cross_nucleus_handoffs
 kind: handoff_protocol
+8f: F8_collaborate
 pillar: P12
 title: Cross-Nucleus Handoff Protocols for N02 Marketing  
 version: 1.0.0

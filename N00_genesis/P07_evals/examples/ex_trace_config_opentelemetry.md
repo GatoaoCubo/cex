@@ -1,6 +1,7 @@
 ---
 id: p07_tc_opentelemetry
 kind: trace_config
+8f: F8_collaborate
 pillar: P07
 title: "Example — OpenTelemetry Trace Configuration"
 version: 1.0.0

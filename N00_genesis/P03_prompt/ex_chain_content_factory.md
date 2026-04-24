@@ -1,6 +1,7 @@
 ---
 id: ex_chain_content_factory
 kind: chain
+8f: F6_produce
 pillar: P03
 title: "Example Chain: Content Factory"
 version: 1.0.0

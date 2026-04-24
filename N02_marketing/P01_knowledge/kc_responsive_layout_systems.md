@@ -1,6 +1,7 @@
 ---
 id: n02_kc_responsive_layout_systems
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: Responsive Layout Systems
 domain: N02_marketing / Frontend

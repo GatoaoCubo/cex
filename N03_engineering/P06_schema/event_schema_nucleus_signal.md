@@ -3,6 +3,7 @@ quality: 8.6
 quality: 8.1
 id: p06_evs_nucleus_signal
 kind: event_schema
+8f: F8_collaborate
 pillar: P06
 version: "1.0.0"
 created: "2026-04-19"

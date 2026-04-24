@@ -1,6 +1,7 @@
 ---
 id: p01_kc_brand_best_practices
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "Brand Best Practices: Identity, Voice, Consistency, and Measurement"
 version: "1.0.0"

@@ -1,6 +1,7 @@
 ---
 id: p01_kc_fintech_vertical
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "Fintech Vertical — Builder Kind Reference"
 version: 1.1.0

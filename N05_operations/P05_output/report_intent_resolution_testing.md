@@ -1,6 +1,7 @@
 ---
 id: report_intent_resolution_testing
 kind: regression_check
+8f: F7_govern
 pillar: P07
 title: Intent Resolution Pipeline -- E2E Testing Report
 version: 1.0.0

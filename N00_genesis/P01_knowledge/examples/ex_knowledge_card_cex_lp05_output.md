@@ -1,6 +1,7 @@
 ---
 id: p01_kc_cex_lp05_output
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "CEX LP05 Output — Delivery Formats Between LLM and System"
 version: 1.0.0

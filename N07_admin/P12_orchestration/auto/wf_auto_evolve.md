@@ -1,6 +1,7 @@
 ---
 id: p12_wf_auto_evolve
 kind: workflow
+8f: F8_collaborate
 pillar: P12
 title: "Auto-Evolve — Autonomous Experiment Loop + Gap Fill"
 version: 2.0.0

@@ -1,6 +1,7 @@
 ---
 id: n06_output_discovery_report
 kind: output_template
+8f: F6_produce
 pillar: P05
 title: "Brand Discovery Report — Research Output"
 version: 1.0.0

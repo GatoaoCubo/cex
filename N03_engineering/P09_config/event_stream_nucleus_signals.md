@@ -3,6 +3,7 @@ quality: 8.7
 quality: 8.0
 id: p04_es_nucleus_signals
 kind: event_stream
+8f: F8_collaborate
 pillar: P04
 title: "Event Stream: Nucleus Signal System"
 version: 0.1.0

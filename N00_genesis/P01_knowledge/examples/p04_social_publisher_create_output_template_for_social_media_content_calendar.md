@@ -1,6 +1,7 @@
 ---
 id: p04_output_template_social_publisher_content_calendar
 kind: output_template
+8f: F6_produce
 pillar: P04
 title: "Output Template: Social Media Content Calendar"
 version: "1.0.0"

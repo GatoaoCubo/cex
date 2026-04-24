@@ -1,6 +1,7 @@
 ---
 id: p01_kc_confidence_scoring
 kind: knowledge_card
+8f: F3_inject
 type: domain
 pillar: P01
 title: "Confidence Scoring"

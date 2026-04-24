@@ -1,6 +1,7 @@
 ---
 id: p04_hook_NAME
 kind: hook
+8f: F8_collaborate
 pillar: P04
 version: 1.0.0
 title: "Template — Hook"

@@ -6,6 +6,7 @@ title: Ollama Wrapper Test Guide
 description: Comprehensive documentation for testing and validating Ollama wrapper integrations in CEX systems
 tags: ["ollama", "wrapper", "testing", "integration", "api"]
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 priority: 1
 density_score: 1.0

@@ -1,6 +1,7 @@
 ---
 id: mem_knowledge_index_n05
 kind: knowledge_index
+8f: F3_inject
 pillar: P10
 nucleus: N05
 title: "N05 Operations Knowledge Index"

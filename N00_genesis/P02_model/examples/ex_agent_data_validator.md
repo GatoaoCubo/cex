@@ -1,6 +1,7 @@
 ---
 id: p02_agent_data_validator
 kind: agent
+8f: F2_become
 pillar: P02
 title: Data Validator Agent
 version: 1.0.0

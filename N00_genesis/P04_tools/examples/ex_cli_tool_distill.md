@@ -1,6 +1,7 @@
 ---
 id: p04_ct_distill
 kind: cli_tool
+8f: F5_call
 pillar: P04
 title: "CEX Distill — Template-driven knowledge extraction from raw input"
 version: 1.0.0

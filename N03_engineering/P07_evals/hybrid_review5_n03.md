@@ -1,6 +1,7 @@
 ---
 id: hybrid_review5_n03
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: HYBRID_REVIEW5 -- N03 audit of 3 Wave 4 config/content/tier kinds (39 ISOs)
 version: 1.0.0

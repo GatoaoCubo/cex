@@ -1,6 +1,7 @@
 ---
 id: ex_knowledge_card_prompt_caching
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "Prompt Caching Strategies"
 tags: [cache, performance, cost, optimization, llm]

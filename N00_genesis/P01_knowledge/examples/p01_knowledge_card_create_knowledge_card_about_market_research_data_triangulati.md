@@ -1,6 +1,7 @@
 ---
 id: p01_kc_market_research_data_triangulation
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "Market Research Data Triangulation for Insight Validation"
 version: "1.0.0"

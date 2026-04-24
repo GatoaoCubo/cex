@@ -1,6 +1,7 @@
 ---
 id: subscription_tier_n06
 kind: subscription_tier
+8f: F1_constrain
 pillar: P11
 nucleus: n06
 title: "Subscription Tier Architecture -- Revenue Model and Upgrade Logic"

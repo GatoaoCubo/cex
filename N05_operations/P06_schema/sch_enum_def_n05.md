@@ -1,6 +1,7 @@
 ---
 id: sch_enum_def_n05
 kind: enum_def
+8f: F1_constrain
 pillar: P06
 nucleus: n05
 title: Release Gate Enum

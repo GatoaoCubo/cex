@@ -1,6 +1,7 @@
 ---
 id: p01_kc_smoke_eval
 kind: knowledge_card
+8f: F3_inject
 type: kind
 pillar: P07
 title: "Smoke Eval — Deep Knowledge for smoke_eval"

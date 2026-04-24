@@ -1,6 +1,7 @@
 ---
 id: sch_input_schema_n07
 kind: input_schema
+8f: F1_constrain
 pillar: P06
 nucleus: n07
 title: "Orchestrator Input Contract"

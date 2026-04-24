@@ -1,6 +1,7 @@
 ---
 id: p03_brand_book_generator
 kind: prompt_template
+8f: F6_produce
 pillar: P03
 title: "Brand Book Generator — 32-Block Structure"
 version: 1.0.0

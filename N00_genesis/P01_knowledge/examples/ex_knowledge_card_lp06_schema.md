@@ -1,6 +1,7 @@
 ---
 id: p01_kc_lp06_schema
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "P06 Schema: Contratos de Validacao"
 version: 1.0.0

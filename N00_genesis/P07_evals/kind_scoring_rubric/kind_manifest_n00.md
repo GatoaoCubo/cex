@@ -1,6 +1,7 @@
 ---
 id: n00_scoring_rubric_manifest
 kind: knowledge_card
+8f: F3_inject
 pillar: P07
 nucleus: n00
 title: "Scoring Rubric -- Canonical Manifest"

@@ -1,6 +1,7 @@
 ---
 id: p01_kc_systematic_debugging
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "Systematic Debugging — 4-Phase Root Cause Methodology"
 version: 1.0.0

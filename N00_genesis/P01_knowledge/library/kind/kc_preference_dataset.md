@@ -1,6 +1,7 @@
 ---
 id: p01_kc_preference_dataset
 kind: knowledge_card
+8f: F3_inject
 type: kind
 pillar: P11
 title: "Preference Dataset -- Deep Knowledge for preference_dataset"

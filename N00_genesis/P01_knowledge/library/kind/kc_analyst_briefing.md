@@ -1,6 +1,7 @@
 ---
 id: kc_analyst_briefing
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: Analyst Briefing
 version: 1.1.0

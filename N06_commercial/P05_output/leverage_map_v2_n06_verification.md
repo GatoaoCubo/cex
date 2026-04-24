@@ -1,6 +1,7 @@
 ---
 id: leverage_map_v2_n06_verification
 kind: knowledge_card
+8f: F3_inject
 title: "N06 LEVERAGE_MAP_V2 Verification Cycle - Commercial Tools Audit"
 nucleus: N06
 pillar: P01

@@ -1,6 +1,7 @@
 ---
 id: p01_kc_formatter
 kind: knowledge_card
+8f: F3_inject
 type: kind
 pillar: P01
 title: "Formatter — Deep Knowledge for formatter"

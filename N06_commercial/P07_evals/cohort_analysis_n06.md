@@ -1,6 +1,7 @@
 ---
 id: cohort_analysis_n06
 kind: cohort_analysis
+8f: F4_reason
 pillar: P07
 nucleus: n06
 title: "Cohort Analysis -- Revenue Cohort Framework by Channel, Plan, and Period"

@@ -1,6 +1,7 @@
 ---
 id: competitor_monitor_n01
 kind: daemon
+8f: F8_collaborate
 pillar: P04
 nucleus: n01
 title: "N01 Competitor Monitor Daemon"

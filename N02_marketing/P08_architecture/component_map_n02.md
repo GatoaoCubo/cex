@@ -1,6 +1,7 @@
 ---
 id: p08_cm_n02
 kind: component_map
+8f: F4_reason
 pillar: P08
 title: "Component Map -- N02 Marketing System"
 version: 1.0.0

@@ -1,6 +1,7 @@
 ---
 id: p07_eval_research_outputs
 kind: eval_dataset
+8f: F3_inject
 pillar: P07
 title: "Eval Dataset -- N01 Research Output Validation"
 version: 1.0.0

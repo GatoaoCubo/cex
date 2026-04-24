@@ -1,6 +1,7 @@
 ---
 id: n06_funnel_cex_product
 kind: content_monetization
+8f: F6_produce
 pillar: P11
 title: "CEX Product Conversion Funnel -- AIDA Framework Applied"
 version: 1.0.0

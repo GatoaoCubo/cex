@@ -1,6 +1,7 @@
 ---
 id: self_audit_n04_codex_2026_04_15
 kind: self_audit
+8f: F7_govern
 pillar: P07
 title: N04 Knowledge Self-Audit
 version: 1.0.0

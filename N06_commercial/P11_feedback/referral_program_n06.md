@@ -1,6 +1,7 @@
 ---
 id: referral_program_n06
 kind: referral_program
+8f: F6_produce
 pillar: P11
 nucleus: n06
 title: "Referral Program -- Customer Acquisition via Word-of-Mouth Engine"

@@ -1,6 +1,7 @@
 ---
 id: p01_kc_elevenlabs_tts
 kind: knowledge_card
+8f: F3_inject
 type: domain
 pillar: P01
 title: "ElevenLabs TTS — Voice Synthesis for Content Factory"

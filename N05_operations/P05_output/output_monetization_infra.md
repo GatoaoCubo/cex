@@ -1,6 +1,7 @@
 ---
 id: n05_output_monetization_infra
 kind: output_validator
+8f: F6_produce
 pillar: P05
 title: "CEX Monetization Infrastructure Plan"
 version: 1.0.0

@@ -1,6 +1,7 @@
 ---
 id: p01_kc_cex_boundary_concept
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "CEX Boundary — Explicit Exclusion That Prevents Type Confusion"
 version: 1.0.0

@@ -1,6 +1,7 @@
 ---
 id: p12_wf_code_review
 kind: workflow
+8f: F8_collaborate
 pillar: P12
 title: "Workflow — Code Review"
 version: 1.0.0

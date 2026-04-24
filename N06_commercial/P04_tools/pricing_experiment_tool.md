@@ -1,6 +1,7 @@
 ---
 id: pricing_experiment_tool
 kind: tool_card
+8f: F5_call
 pillar: P11
 title: "Pricing Experiment Tool — A/B Testing Framework"
 nucleus: N06

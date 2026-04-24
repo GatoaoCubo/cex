@@ -1,6 +1,7 @@
 ---
 id: p02_bc_builder_nucleus
 kind: boot_config
+8f: F2_become
 pillar: P02
 title: Boot Config -- Builder Nucleus
 version: 2.0.0

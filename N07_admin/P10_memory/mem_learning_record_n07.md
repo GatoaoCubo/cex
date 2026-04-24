@@ -1,6 +1,7 @@
 ---
 id: p10_lr_n07_orchestrator_ops
 kind: learning_record
+8f: F7_govern
 pillar: P10
 version: "1.0.0"
 created: "2026-04-17"

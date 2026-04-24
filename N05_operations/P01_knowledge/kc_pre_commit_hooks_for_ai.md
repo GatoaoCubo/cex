@@ -1,6 +1,7 @@
 ---
 id: kc_pre_commit_hooks_for_ai
 kind: knowledge_card
+8f: F3_inject
 title: "Pre-Commit Hooks for AI-Generated Code"
 version: 1.0.0
 quality: 8.9

@@ -1,6 +1,7 @@
 ---
 id: p04_ct_bootstrap
 kind: cli_tool
+8f: F5_call
 pillar: P04
 title: "CEX Bootstrap — Create project from selected Leverage Points"
 version: 1.0.0

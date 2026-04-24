@@ -1,6 +1,7 @@
 ---
 id: p12_dr_keyword_agent_group
 kind: dispatch_rule
+8f: F8_collaborate
 pillar: P12
 description: "Keyword-to-agent_group routing rules for orchestrator auto-dispatch"
 scope: stella_routing

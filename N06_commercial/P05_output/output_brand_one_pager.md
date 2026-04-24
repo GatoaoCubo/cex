@@ -1,6 +1,7 @@
 ---
 id: n06_output_brand_one_pager
 kind: output_template
+8f: F6_produce
 pillar: P05
 title: "Brand One-Pager — Executive Summary"
 version: 1.0.0

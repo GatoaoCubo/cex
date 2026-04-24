@@ -1,6 +1,7 @@
 ---
 id: p06_schema_env_contract
 kind: input_schema
+8f: F1_constrain
 pillar: P06
 title: Environment Variable Contract Schema
 version: 1.0.0

@@ -1,6 +1,7 @@
 ---
 id: ex_response_format_ad_copy
 kind: response_format
+8f: F6_produce
 pillar: P05
 title: "Example — Ad Copy Output Format"
 tags: [output, format, ad, copy, social-media]

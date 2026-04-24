@@ -1,5 +1,6 @@
 ---
 kind: audit_report
+8f: F7_govern
 id: audit_realtime_session_builder
 pillar: P07
 llm_function: GOVERN

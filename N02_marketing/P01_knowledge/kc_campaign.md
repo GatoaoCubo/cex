@@ -1,6 +1,7 @@
 ---
 id: n02_kc_campaign
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "Campaign Architecture — From Brief to Conversion"
 domain: N02_marketing / Campaigns

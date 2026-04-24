@@ -1,6 +1,7 @@
 ---
 id: regression_check_n01
 kind: regression_check
+8f: F7_govern
 pillar: P07
 nucleus: n01
 title: "N01 Research Quality Regression Check"

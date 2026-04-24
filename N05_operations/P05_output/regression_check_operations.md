@@ -1,6 +1,7 @@
 ---
 id: p07_regression_check_operations
 kind: regression_check
+8f: F7_govern
 pillar: P07
 title: Operations Regression Check Suite
 version: 1.0.0

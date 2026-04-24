@@ -1,6 +1,7 @@
 ---
 id: p01_kc_cex_cortex_enterprise
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "CEX Cortex Enterprise — Modular LLM Brain with CEO Orchestrator and Agent_group Departments"
 version: 1.0.0

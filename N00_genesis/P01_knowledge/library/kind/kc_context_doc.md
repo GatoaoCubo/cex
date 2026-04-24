@@ -1,6 +1,7 @@
 ---
 id: p01_kc_context_doc
 kind: knowledge_card
+8f: F3_inject
 type: kind
 pillar: P01
 title: "Context Doc — Deep Knowledge for context_doc"

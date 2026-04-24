@@ -1,6 +1,7 @@
 ---
 id: discovery_questions_n06
 kind: discovery_questions
+8f: F4_reason
 pillar: P01
 nucleus: n06
 title: "Discovery Questions -- Structured Commercial Qualification Bank"

@@ -1,6 +1,7 @@
 ---
 id: p01_kc_fine_tuning_dataset_preparation
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "Fine-Tuning Dataset Preparation for LLM Training"
 version: "1.0.0"

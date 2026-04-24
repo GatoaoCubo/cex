@@ -1,6 +1,7 @@
 ---
 id: kc_sdk_example
 kind: knowledge_card
+8f: F3_inject
 title: SDK Example Integration Patterns
 version: 1.0.0
 quality: 8.8

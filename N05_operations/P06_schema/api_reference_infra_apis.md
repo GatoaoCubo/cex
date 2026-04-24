@@ -1,6 +1,7 @@
 ---
 id: p06_ar_infra_apis
 kind: api_reference
+8f: F5_call
 pillar: P06
 title: "N05 Infrastructure API Reference"
 version: "v1.0.0"

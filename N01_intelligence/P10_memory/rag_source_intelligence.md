@@ -1,6 +1,7 @@
 ---
 id: n01_rs_academic_feeds
 kind: rag_source
+8f: F3_inject
 pillar: P01
 title: "RAG Sources for N01 Intelligence Nucleus"
 version: "1.0.0"

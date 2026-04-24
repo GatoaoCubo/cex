@@ -1,6 +1,7 @@
 ---
 id: kc_sso_config
 kind: knowledge_card
+8f: F3_inject
 title: SSO/SAML/OIDC Configuration Guide
 version: 1.0.0
 quality: 8.6

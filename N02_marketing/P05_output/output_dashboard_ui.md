@@ -1,6 +1,7 @@
 ---
 id: p05_output_dashboard_ui
 kind: output_validator
+8f: F6_produce
 pillar: P05
 title: "Dashboard UI Template — Sidebar + Main Content"
 version: 1.0.0

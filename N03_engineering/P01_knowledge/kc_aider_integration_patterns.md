@@ -1,6 +1,7 @@
 ---
 id: kc_aider_integration_patterns
 kind: knowledge_card
+8f: F3_inject
 title: "Aider CLI Integration Patterns"
 version: 1.0.0
 quality: 9.0

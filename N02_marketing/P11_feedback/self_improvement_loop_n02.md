@@ -1,6 +1,7 @@
 ---
 id: self_improvement_loop_n02
 kind: self_improvement_loop
+8f: F7_govern
 pillar: P11
 nucleus: n02
 title: "N02 Autonomous Copy Quality Evolution Loop"

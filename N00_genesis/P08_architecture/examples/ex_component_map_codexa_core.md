@@ -1,6 +1,7 @@
 ---
 id: p08_cmap_organization_core
 kind: component_map
+8f: F4_reason
 pillar: P08
 description: "Component map of organization-core repository"
 scope: full_system

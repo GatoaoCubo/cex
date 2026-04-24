@@ -1,6 +1,7 @@
 ---
 id: p01_kc_vector_embedding_model_selection
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "Vector Embedding Model Selection Criteria"
 version: "1.0.0"

@@ -1,6 +1,7 @@
 ---
 id: leverage_map_v2_n04_verify_legacy_2026_04_15
 kind: verification_report
+8f: F7_govern
 pillar: P01
 title: "LEVERAGE_MAP_V2: N04 Verify Cycle (Legacy Draft)"
 version: 0.0.0

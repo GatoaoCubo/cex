@@ -1,6 +1,7 @@
 ---
 id: mem_entity_memory_n05
 kind: entity_memory
+8f: F3_inject
 pillar: P10
 nucleus: N05
 title: "N05 Operations Entity Memory"

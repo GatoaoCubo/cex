@@ -3,6 +3,7 @@ quality: 8.6
 quality: 8.2
 id: p06_ar_artifact
 kind: aggregate_root
+8f: F4_reason
 pillar: P06
 title: "Aggregate Root: Artifact"
 version: 0.1.0

@@ -5,6 +5,7 @@
 
 id: "p09_ec_{{EXPERIMENT_SLUG}}"
 kind: experiment_config
+8f: F7_govern
 pillar: P09
 title: "Experiment: {{EXPERIMENT_NAME}}"
 version: 1.0.0

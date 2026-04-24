@@ -1,6 +1,7 @@
 ---
 id: p04_retriever_NAME
 kind: retriever
+8f: F3_inject
 pillar: P04
 version: 1.0.0
 title: "Template — Retriever"

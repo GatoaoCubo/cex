@@ -1,6 +1,7 @@
 ---
 id: p05_output_env_contract
 kind: output_validator
+8f: F6_produce
 pillar: P05
 title: "Environment Variable Contract — .env.example"
 version: 1.0.0

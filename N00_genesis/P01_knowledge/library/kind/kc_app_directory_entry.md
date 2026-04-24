@@ -1,6 +1,7 @@
 ---
 id: kc_app_directory_entry
 kind: knowledge_card
+8f: F3_inject
 title: App Directory Entry Guide
 version: 1.0.0
 quality: 8.6

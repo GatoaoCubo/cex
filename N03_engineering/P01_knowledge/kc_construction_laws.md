@@ -1,6 +1,7 @@
 ---
 id: p01_kc_construction_laws
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: The 11 Construction Laws -- 3-Layer Framework
 version: 1.0.0

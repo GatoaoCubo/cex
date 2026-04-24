@@ -1,6 +1,7 @@
 ---
 id: p01_kc_ab_testing_content_optimization
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "A/B Testing Framework for Content Optimization"
 version: "1.0.0"

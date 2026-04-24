@@ -1,6 +1,7 @@
 ---
 id: p04_dl_n04_knowledge
 kind: document_loader
+8f: F5_call
 pillar: P04
 nucleus: n04
 title: "Document Loader -- N04 Multi-Format Ingestion Pipeline"

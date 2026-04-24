@@ -1,6 +1,7 @@
 ---
 id: hybrid_review4_n04
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "HYBRID_REVIEW4 N04 Audit: reranker_config + graph_rag_config + agentic_rag"
 version: "1.0.0"

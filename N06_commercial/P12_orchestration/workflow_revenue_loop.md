@@ -1,6 +1,7 @@
 ---
 id: workflow_revenue_loop
 kind: workflow
+8f: F8_collaborate
 pillar: P12
 nucleus: n06
 title: "Workflow -- Revenue Flywheel: Acquire, Activate, Retain, Expand, Measure"

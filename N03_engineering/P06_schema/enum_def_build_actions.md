@@ -1,6 +1,7 @@
 ---
 id: p06_ed_build_actions
 kind: enum_def
+8f: F1_constrain
 pillar: P06
 title: "Enum Definitions -- Build Actions and CEX Constants"
 version: 1.0.0

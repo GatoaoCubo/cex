@@ -1,6 +1,7 @@
 ---
 id: spec_00_master
 kind: spec
+8f: F4_reason
 pillar: P01
 title: "OpenClaude→CEX Assimilation Master Spec"
 version: 1.0.0

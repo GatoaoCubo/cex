@@ -1,6 +1,7 @@
 ---
 id: p11_gr_action_reversibility
 kind: guardrail
+8f: F7_govern
 pillar: P11
 title: "Guardrail: Action Reversibility Check"
 version: 1.0.0

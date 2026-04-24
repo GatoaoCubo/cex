@@ -1,6 +1,7 @@
 ---
 id: atom_06_langchain_langgraph
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 domain: agentic-frameworks
 title: "LangChain LCEL + LangGraph + LangSmith -- Complete Vocabulary Atlas"

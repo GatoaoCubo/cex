@@ -1,6 +1,7 @@
 ---
 id: p05_output_middleware_stack
 kind: output_validator
+8f: F6_produce
 pillar: P05
 title: "Middleware Stack Template — 8-Layer FastAPI"
 version: 1.0.0

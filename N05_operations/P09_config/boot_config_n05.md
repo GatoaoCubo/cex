@@ -1,6 +1,7 @@
 ---
 id: boot_config_n05
 kind: boot_config
+8f: F2_become
 pillar: P02
 version: "1.0.0"
 created: "2026-04-17"

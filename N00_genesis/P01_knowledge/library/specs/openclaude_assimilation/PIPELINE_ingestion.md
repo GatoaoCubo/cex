@@ -1,6 +1,7 @@
 ---
 id: spec_oc_ingestion_pipeline
 kind: context_doc
+8f: F3_inject
 pillar: P01
 version: 1.0.0
 created: 2026-04-05

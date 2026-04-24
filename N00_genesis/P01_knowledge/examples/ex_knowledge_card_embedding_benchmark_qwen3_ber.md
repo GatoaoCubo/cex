@@ -1,6 +1,7 @@
 ---
 id: p01_kc_embedding_benchmark_qwen3_bertimbau
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "Embedding Benchmark: Qwen3 vs BERTimbau para PT-BR E-Commerce"
 version: 2.0.0

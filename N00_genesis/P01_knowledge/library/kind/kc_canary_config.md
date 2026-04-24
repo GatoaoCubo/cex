@@ -2,6 +2,7 @@
 quality: null
 id: kc_canary_config
 kind: knowledge_card
+8f: F3_inject
 title: "Canary Config: Progressive Traffic Rollout Strategy"
 tldr: "Gradual traffic shifting with metric-gated stages, automatic rollback on threshold breach, and multi-platform deployment support"
 version: 1.1.0

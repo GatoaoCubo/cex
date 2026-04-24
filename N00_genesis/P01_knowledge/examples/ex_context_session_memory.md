@@ -1,6 +1,7 @@
 ---
 id: ex_context_session_memory
 kind: context
+8f: F3_inject
 pillar: P01
 title: "Example — Session Memory Context"
 tags: [context, session, memory, conversation, continuity]

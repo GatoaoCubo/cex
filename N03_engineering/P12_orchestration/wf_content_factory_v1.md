@@ -1,6 +1,7 @@
 ---
 id: p12_wf_content_factory_v1
 kind: workflow
+8f: F8_collaborate
 pillar: P12
 version: "1.0.0"
 created: "2026-04-08"

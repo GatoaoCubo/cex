@@ -1,6 +1,7 @@
 ---
 id: n07_memory_user_directive
 kind: memory-summary
+8f: F3_inject
 nucleus: N07
 pillar: P10
 title: "User Directive: N07 as Technical Lead"

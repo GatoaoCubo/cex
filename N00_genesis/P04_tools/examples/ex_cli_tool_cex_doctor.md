@@ -1,6 +1,7 @@
 ---
 id: p04_ct_cex_doctor
 kind: cli_tool
+8f: F5_call
 pillar: P04
 title: "CEX Doctor — Naming, density, and 13-file completeness checker"
 version: 1.0.0

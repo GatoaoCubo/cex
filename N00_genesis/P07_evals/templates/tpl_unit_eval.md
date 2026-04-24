@@ -6,6 +6,7 @@
 
 id: p07_ue_{{TARGET_SLUG}}
 kind: unit_eval
+8f: F7_govern
 pillar: P07
 title: "Unit Eval: {{AGENT_OR_PROMPT_NAME}}"
 version: 1.0.0

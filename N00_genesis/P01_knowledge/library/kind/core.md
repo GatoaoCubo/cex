@@ -1,6 +1,7 @@
 ---
 id: p04_kc_core
 kind: knowledge_card
+8f: F3_inject
 title: Core
 version: 1.0.0
 quality: 9.0

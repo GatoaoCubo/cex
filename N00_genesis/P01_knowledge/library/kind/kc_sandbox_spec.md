@@ -1,6 +1,7 @@
 ---
 id: kc_sandbox_spec
 kind: knowledge_card
+8f: F3_inject
 title: Sandbox Spec
 version: 1.0.0
 quality: 8.7

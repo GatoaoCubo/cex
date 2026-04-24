@@ -1,6 +1,7 @@
 ---
 id: kno_few_shot_example_n05
 kind: few_shot_example
+8f: F3_inject
 pillar: P01
 nucleus: N05
 title: "N05 Operations Few Shot Example"

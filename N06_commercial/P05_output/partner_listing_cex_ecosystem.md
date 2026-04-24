@@ -1,6 +1,7 @@
 ---
 id: partner_listing_cex_ecosystem
 kind: partner_listing
+8f: F8_collaborate
 pillar: P05
 nucleus: N06
 domain: commercial

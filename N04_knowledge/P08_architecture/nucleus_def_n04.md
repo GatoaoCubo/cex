@@ -1,6 +1,7 @@
 ---
 id: p02_nd_n04.md
 kind: nucleus_def
+8f: F2_become
 pillar: P02
 nucleus_id: N04
 role: knowledge

@@ -1,6 +1,7 @@
 ---
 id: p01_kc_responsive_layouts
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 domain: frontend
 quality: 9.0

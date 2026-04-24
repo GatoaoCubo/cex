@@ -1,6 +1,7 @@
 ---
 id: p06_ar_rag_apis
 kind: api_reference
+8f: F5_call
 pillar: P06
 nucleus: n04
 title: "API Reference -- RAG and Vector Store APIs"

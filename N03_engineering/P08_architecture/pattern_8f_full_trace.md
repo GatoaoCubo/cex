@@ -1,6 +1,7 @@
 ---
 id: p08_pat_8f_full_trace
 kind: pattern
+8f: F4_reason
 pillar: P08
 title: "Pattern -- 8F Full Trace Template (CoC)"
 version: 1.0.0

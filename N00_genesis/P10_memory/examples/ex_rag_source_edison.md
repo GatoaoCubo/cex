@@ -1,6 +1,7 @@
 ---
 id: p10_rs_edison
 kind: runtime_state
+8f: F8_collaborate
 pillar: P10
 title: "Mental Model: builder_agent"
 version: 2.0.0

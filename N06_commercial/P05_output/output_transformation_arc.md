@@ -1,6 +1,7 @@
 ---
 id: n06_output_transformation_arc
 kind: output_template
+8f: F6_produce
 pillar: P05
 title: "Transformation Arc — Before → Bridge → After"
 version: 1.0.0

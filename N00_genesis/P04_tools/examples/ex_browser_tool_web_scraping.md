@@ -5,6 +5,7 @@ description: Pipeline de web scraping com selecao automatica de estrategia (stat
 version: 1.0.0
 pillar: P04
 kind: browser_tool
+8f: F5_call
 created: 2026-03-23
 updated: 2026-03-23
 author: builder_agent

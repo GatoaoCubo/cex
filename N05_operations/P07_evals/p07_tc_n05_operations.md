@@ -1,6 +1,7 @@
 ---
 id: p07_tc_n05_operations
 kind: trace_config
+8f: F8_collaborate
 pillar: P07
 version: "1.0.0"
 created: "2026-04-17"

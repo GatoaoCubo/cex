@@ -1,6 +1,7 @@
 ---
 id: p01_kc_llm_benchmark_ecommerce_copy
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "LLM Benchmark para Copy de E-Commerce em PT-BR"
 version: 1.0.0

@@ -1,6 +1,7 @@
 ---
 id: renewal_workflow_n06
 kind: renewal_workflow
+8f: F8_collaborate
 pillar: P12
 nucleus: n06
 title: "Renewal Workflow -- Automated Renewal and Retention Orchestration"

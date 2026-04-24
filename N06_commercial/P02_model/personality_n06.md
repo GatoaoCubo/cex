@@ -1,6 +1,7 @@
 ---
 id: personality_n06
 kind: personality
+8f: F2_become
 nucleus: n06
 pillar: P02
 title: "Personality N06: Sales Persona (Consultative/Challenger/Relationship)"

@@ -1,6 +1,7 @@
 ---
 id: p01_kc_slide_generation
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "CSV-Driven Slide Generation Pipeline with Design Tokens and Emotion Arcs"
 version: 1.0.0

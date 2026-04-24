@@ -1,6 +1,7 @@
 ---
 id: p01_kc_feedback_loops
 kind: knowledge_card
+8f: F3_inject
 type: domain
 pillar: P01
 title: "Feedback Loops — Bug Loops, Lifecycle Rules for Continuous Improvement"

@@ -1,6 +1,7 @@
 ---
 id: p01_kc_bling_erp_field_parametrization
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "Bling ERP: Mapa de Campos do Produto V3"
 version: 2.0.0

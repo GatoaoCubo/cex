@@ -1,6 +1,7 @@
 ---
 id: p01_kc_eval_testing
 kind: knowledge_card
+8f: F3_inject
 type: domain
 pillar: P01
 title: Evaluation Testing -- Benchmarks, Evals, Red Team, Regression

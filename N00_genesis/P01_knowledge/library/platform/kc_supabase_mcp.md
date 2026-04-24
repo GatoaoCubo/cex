@@ -1,6 +1,7 @@
 ---
 id: p01_kc_supabase_mcp
 kind: knowledge_card
+8f: F3_inject
 type: platform
 pillar: P04
 title: "Supabase MCP — Deep Knowledge for platform"

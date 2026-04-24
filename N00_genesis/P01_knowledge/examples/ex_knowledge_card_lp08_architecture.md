@@ -1,6 +1,7 @@
 ---
 id: p01_kc_lp08_architecture
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "P08 Architecture: Como Escala"
 version: 1.0.0

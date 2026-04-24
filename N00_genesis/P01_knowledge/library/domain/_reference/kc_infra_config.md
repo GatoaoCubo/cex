@@ -1,6 +1,7 @@
 ---
 id: p01_kc_infra_config
 kind: knowledge_card
+8f: F3_inject
 type: domain
 pillar: P01
 title: "Infrastructure Configuration — Paths, Permissions, Feature Flags, Runtime Rules, Secrets, Rate Limits"

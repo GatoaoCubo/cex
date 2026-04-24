@@ -2,6 +2,7 @@
 quality: 9.1
 id: ex_integration_guide_meli
 kind: integration_guide
+8f: F6_produce
 pillar: P04
 title: Mercado Livre Integration Guide
 version: 0.2.0

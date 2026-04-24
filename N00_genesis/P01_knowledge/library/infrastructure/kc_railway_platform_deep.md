@@ -1,6 +1,7 @@
 ---
 id: p01_kc_railway_platform_deep
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 domain: infrastructure
 quality: 9.1

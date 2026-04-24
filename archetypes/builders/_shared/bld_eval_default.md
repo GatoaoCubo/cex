@@ -33,7 +33,7 @@ updated: "2026-04-22"
 |------|-------|-------------|
 | H01 | Frontmatter present and valid YAML | Return to F6, add frontmatter |
 | H02 | `quality: null` in frontmatter (never self-score) | Remove score, set null |
-| H03 | Required fields: id, kind, pillar, title | Add missing fields |
+| H03 | Required fields: id, kind, 8f, pillar, title | Add missing fields |
 | H04 | Body density >= 0.85 (content lines / total lines) | Add structured data, remove filler |
 | H05 | No hallucinated sources (cited paths must exist) | Remove or verify citations |
 | H06 | ASCII-only in any generated code blocks | Replace non-ASCII per cex_sanitize rules |

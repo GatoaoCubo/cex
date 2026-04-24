@@ -1,6 +1,7 @@
 ---
 id: p07_qg_commercial
 kind: quality_gate
+8f: F7_govern
 pillar: P07
 title: "N06 Quality Gate — Brand + Monetization (14 Checks)"
 version: 4.0.0

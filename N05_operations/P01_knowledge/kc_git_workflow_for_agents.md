@@ -1,6 +1,7 @@
 ---
 id: kc_git_workflow_for_agents
 kind: knowledge_card
+8f: F3_inject
 title: "Git Workflow for Autonomous Agents"
 version: 1.0.0
 quality: 9.0

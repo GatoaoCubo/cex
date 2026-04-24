@@ -77,6 +77,7 @@ examples:
     quality_target: 9.0
   - name: "api_knowledge_card"
     kind: "knowledge_card" 
+8f: F3_inject
     pillar: "P01"
     tags: ["api", "integration"]
 domain: "creation-operations"

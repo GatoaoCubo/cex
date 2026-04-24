@@ -1,6 +1,7 @@
 ---
 id: p12_wf_auto_research
 kind: workflow
+8f: F8_collaborate
 pillar: P12
 title: "Auto-Research — Fill knowledge gaps during planning"
 version: 1.0.0

@@ -1,6 +1,7 @@
 ---
 id: kc_open_source_ai_ecosystem
 kind: knowledge_card
+8f: F3_inject
 title: "Open Source AI Ecosystem 2026"
 version: 1.0.0
 quality: 9.0

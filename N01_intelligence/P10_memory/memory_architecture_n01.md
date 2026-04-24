@@ -1,6 +1,7 @@
 ---
 id: memory_architecture_n01
 kind: memory_architecture
+8f: F3_inject
 pillar: P10
 nucleus: n01
 title: "N01 Intelligence Memory Architecture"

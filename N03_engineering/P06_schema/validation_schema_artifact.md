@@ -1,6 +1,7 @@
 ---
 id: p06_vs_artifact_output
 kind: validation_schema
+8f: F1_constrain
 pillar: P06
 title: "Validation Schema -- Artifact Output"
 version: 1.0.0

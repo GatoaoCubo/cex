@@ -1,6 +1,7 @@
 ---
 id: n04_self_audit_20260408
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "N04 Knowledge Nucleus Self-Audit -- 2026-04-08"
 version: 1.0.0

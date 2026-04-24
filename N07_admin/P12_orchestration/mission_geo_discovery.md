@@ -1,6 +1,7 @@
 ---
 id: mission_geo_discovery
 kind: workflow
+8f: F8_collaborate
 pillar: P12
 title: "Mission DAG — Geo Discovery Builder"
 version: 1.0.0

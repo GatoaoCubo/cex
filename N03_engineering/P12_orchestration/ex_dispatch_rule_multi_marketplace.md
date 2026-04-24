@@ -1,6 +1,7 @@
 ---
 id: ex_dispatch_rule_multi_marketplace
 kind: dispatch_rule
+8f: F8_collaborate
 pillar: P12
 title: Multi-Marketplace Dispatch Rule
 version: 0.1.0

@@ -1,6 +1,7 @@
 ---
 id: p12_tc_subscription_default.md
 kind: team_charter
+8f: F8_collaborate
 pillar: P12
 llm_function: GOVERN
 charter_id: subscription_default

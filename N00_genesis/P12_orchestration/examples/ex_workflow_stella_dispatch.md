@@ -1,6 +1,7 @@
 ---
 id: p12_wf_stella_dispatch
 kind: workflow
+8f: F8_collaborate
 pillar: P12
 title: "Workflow: orchestrator 5-Phase Dispatch"
 version: 1.0.0

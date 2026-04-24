@@ -1,6 +1,7 @@
 ---
 id: n00_db_connector_manifest
 kind: knowledge_card
+8f: F3_inject
 pillar: P04
 nucleus: n00
 title: "DB Connector -- Canonical Manifest"

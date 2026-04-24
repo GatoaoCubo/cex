@@ -1,6 +1,7 @@
 ---
 id: p12_wf_knowledge
 kind: workflow
+8f: F8_collaborate
 pillar: P12
 title: "N04 Workflow — Knowledge Lifecycle Pipeline"
 version: 4.0.0

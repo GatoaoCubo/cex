@@ -1,6 +1,7 @@
 ---
 id: p06_schema_health_response
 kind: input_schema
+8f: F1_constrain
 pillar: P06
 title: Health Check Response Schema
 version: 1.0.0

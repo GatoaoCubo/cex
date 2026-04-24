@@ -1,6 +1,7 @@
 ---
 id: kc_hotmart_club
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 version: 1.0.0
 created: 2026-03-31

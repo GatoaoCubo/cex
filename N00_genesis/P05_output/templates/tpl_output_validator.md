@@ -1,6 +1,7 @@
 ---
 id: p05_output_validator
 kind: output_validator
+8f: F6_produce
 pillar: P05
 version: 1.0.0
 title: "Template — Output Validator"

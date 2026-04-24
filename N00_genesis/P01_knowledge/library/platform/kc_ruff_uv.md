@@ -1,6 +1,7 @@
 ---
 id: p01_kc_ruff_uv
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "Ruff + UV — Modern Python Tooling"
 version: 1.0.0

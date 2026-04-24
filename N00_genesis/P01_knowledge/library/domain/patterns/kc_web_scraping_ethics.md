@@ -1,6 +1,7 @@
 ---
 id: p01_kc_web_scraping_ethics
 kind: knowledge_card
+8f: F3_inject
 type: domain
 pillar: P01
 title: "Web Scraping Ethics"

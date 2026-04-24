@@ -1,6 +1,7 @@
 ---
 id: p07_se_brain_query
 kind: smoke_eval
+8f: F7_govern
 pillar: P07
 title: "Smoke Eval: Brain MCP Query"
 version: 1.0.0

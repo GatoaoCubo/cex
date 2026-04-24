@@ -1,6 +1,7 @@
 ---
 id: hybrid_review3_n04
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "HYBRID_REVIEW3 Audit: model_registry (N04)"
 version: 1.0.0

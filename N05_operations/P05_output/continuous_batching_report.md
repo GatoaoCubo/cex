@@ -1,6 +1,7 @@
 ---
 id: continuous_batching_report
 kind: context_doc
+8f: F3_inject
 pillar: P01
 title: "Continuous Batching Verification Report"
 version: 1.0.0

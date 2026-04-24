@@ -1,6 +1,7 @@
 ---
 id: p01_kc_knowledge_index
 kind: knowledge_card
+8f: F3_inject
 type: kind
 pillar: P10
 title: "Brain Index — Deep Knowledge for knowledge_index"

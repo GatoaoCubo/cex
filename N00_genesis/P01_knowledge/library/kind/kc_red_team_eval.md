@@ -1,6 +1,7 @@
 ---
 id: p01_kc_red_team_eval
 kind: knowledge_card
+8f: F3_inject
 type: kind
 pillar: P07
 title: "Red Team Eval — Deep Knowledge for red_team_eval"

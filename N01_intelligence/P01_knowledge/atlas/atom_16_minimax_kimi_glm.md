@@ -1,6 +1,7 @@
 ---
 id: atom_16_minimax_kimi_glm
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "MiniMax M2/M2.7 + Kimi K2.5 + GLM-5.1 -- Chinese Agentic Tool-Calling Paradigms"
 version: 0.2.0

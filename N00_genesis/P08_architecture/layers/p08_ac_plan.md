@@ -1,6 +1,7 @@
 ---
 id: p08_ac_plan
 kind: agent_card
+8f: F2_become
 pillar: P08
 title: "Agent Card: Planning Agent"
 version: 1.0.0

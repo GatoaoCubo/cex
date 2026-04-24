@@ -1,6 +1,7 @@
 ---
 id: ex_subscription_tier_content
 kind: subscription_tier
+8f: F1_constrain
 pillar: P11
 version: 1.0.0
 title: "Subscription Tier Template -- Content Factory / AI Platform"

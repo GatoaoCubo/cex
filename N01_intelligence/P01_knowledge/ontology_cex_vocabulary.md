@@ -3,6 +3,7 @@ quality: 8.2
 quality: 7.7
 id: ontology_cex_vocabulary
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 nucleus: N01
 title: CEX Domain Formal Ontology

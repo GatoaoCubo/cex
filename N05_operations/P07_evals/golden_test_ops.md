@@ -1,6 +1,7 @@
 ---
 id: p07_gt_golden_test_ops
 kind: golden_test
+8f: F7_govern
 pillar: P07
 title: "Golden: N05 Operations Reference Fixtures"
 version: "1.0.0"

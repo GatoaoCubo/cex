@@ -1,6 +1,7 @@
 ---
 id: p01_kc_zero_downtime_deploy
 kind: knowledge_card
+8f: F3_inject
 type: infrastructure
 pillar: P01
 title: "Zero-Downtime Deployment"

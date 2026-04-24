@@ -1,6 +1,7 @@
 ---
 id: p04_tool_scraping_config
 kind: tool_config
+8f: F1_constrain
 pillar: P04
 title: "Web Scraping Config -- N01 Intelligence"
 version: 1.0.0

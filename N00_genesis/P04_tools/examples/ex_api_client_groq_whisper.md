@@ -1,6 +1,7 @@
 ---
 id: p04_api_client_groq_whisper
 kind: api_client
+8f: F5_call
 name: groq_whisper
 base_url: "https://api.groq.com/openai/v1"
 auth_method: api_key

@@ -1,6 +1,7 @@
 ---
 id: p06_schema_embedding
 kind: schema
+8f: F1_constrain
 pillar: P06
 title: "Embedding Contract"
 version: 1.0.0

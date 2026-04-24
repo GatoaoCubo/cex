@@ -1,6 +1,7 @@
 ---
 id: p01_kc_computer_use
 kind: knowledge_card
+8f: F3_inject
 type: kind
 pillar: P04
 title: "Computer Use — Deep Knowledge for computer_use"

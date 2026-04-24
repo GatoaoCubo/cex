@@ -1,6 +1,7 @@
 ---
 id: p11_qg_engineering_artifacts
 kind: quality_gate
+8f: F7_govern
 pillar: P11
 title: "Gate: Engineering Artifacts"
 version: "1.1.0"

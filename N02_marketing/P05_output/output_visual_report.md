@@ -1,6 +1,7 @@
 ---
 id: p05_output_visual_report
 kind: output_validator
+8f: F6_produce
 pillar: P05
 title: "Visual Report Template — Professional Long-Form"
 version: 1.0.0

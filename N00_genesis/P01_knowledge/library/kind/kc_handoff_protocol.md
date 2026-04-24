@@ -1,6 +1,7 @@
 ---
 id: p01_kc_handoff_protocol
 kind: knowledge_card
+8f: F3_inject
 type: kind
 pillar: P02
 title: "Handoff Protocol — Deep Knowledge for handoff_protocol"

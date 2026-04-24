@@ -1,6 +1,7 @@
 ---
 id: self_improvement_loop_n06
 kind: self_improvement_loop
+8f: F7_govern
 pillar: P11
 nucleus: n06
 title: "Self-Improvement Loop -- N06 Autonomous Revenue Strategy Evolution"

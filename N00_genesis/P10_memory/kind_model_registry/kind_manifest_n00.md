@@ -1,6 +1,7 @@
 ---
 id: n00_model_registry_manifest
 kind: knowledge_card
+8f: F3_inject
 pillar: P10
 nucleus: n00
 title: "Model Registry -- Canonical Manifest"

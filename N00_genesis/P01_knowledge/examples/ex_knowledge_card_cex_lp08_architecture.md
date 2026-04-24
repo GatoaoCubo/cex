@@ -1,6 +1,7 @@
 ---
 id: p01_kc_cex_lp08_architecture
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "CEX LP08 Architecture — Structure and Scale for LLM Systems"
 version: 1.0.0

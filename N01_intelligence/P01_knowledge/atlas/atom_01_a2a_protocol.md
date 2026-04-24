@@ -1,6 +1,7 @@
 ---
 id: atom_01_a2a_protocol
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "A2A Protocol -- Complete Term Registry and Architecture Atlas"
 version: 0.4.0

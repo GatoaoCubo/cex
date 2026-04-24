@@ -1,6 +1,7 @@
 ---
 id: spec_02_agent_spawn
 kind: spec
+8f: F4_reason
 pillar: P01
 title: "SPEC_02: Agent Fork/Spawn → Dispatch System"
 version: 1.0.0

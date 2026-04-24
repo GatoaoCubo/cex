@@ -1,6 +1,7 @@
 ---
 id: p04_ct_validate_builder
 kind: cli_tool
+8f: F5_call
 pillar: P04
 title: "Validate Builder — 13-file checklist validator for builders"
 version: 1.0.0

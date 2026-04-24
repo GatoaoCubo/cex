@@ -2,6 +2,7 @@
 id: n04_rs_cex_codebase
 title: "Rag Source Knowledge"
 kind: rag_source
+8f: F3_inject
 pillar: P01_knowledge
 version: "2.0.0"
 created: "2024-03-30"

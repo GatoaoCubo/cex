@@ -1,6 +1,7 @@
 ---
 id: n03_readme_technical
 kind: output_template
+8f: F6_produce
 pillar: P05
 title: "CEX Public README — Architecture & Quickstart"
 version: 1.0.0

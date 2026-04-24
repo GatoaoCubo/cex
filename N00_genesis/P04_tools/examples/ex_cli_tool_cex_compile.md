@@ -1,6 +1,7 @@
 ---
 id: p04_ct_cex_compile
 kind: cli_tool
+8f: F5_call
 pillar: P04
 title: "CEX Compile — Markdown to YAML/JSON compiler"
 version: 1.0.0

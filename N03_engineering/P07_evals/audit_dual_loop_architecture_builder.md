@@ -1,6 +1,7 @@
 ---
 id: audit_dual_loop_architecture_builder
 kind: audit_report
+8f: F7_govern
 pillar: P08
 parent: dual-loop-architecture-builder
 llm_function: GOVERN

@@ -1,6 +1,7 @@
 ---
 id: p02_agent_amazon_ads
 kind: agent
+8f: F2_become
 pillar: P02
 title: Amazon Ads Agent - Campaign Strategy & Optimization
 version: 1.0.0

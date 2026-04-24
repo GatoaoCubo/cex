@@ -1,6 +1,7 @@
 ---
 id: atom_13_metagpt_chatdev
 kind: knowledge_card
+8f: F3_inject
 title: "MetaGPT vs. ChatDev: A Comparative Analysis with CEX Mapping"
 version: "1.0.0"
 quality: 8.8

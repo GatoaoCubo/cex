@@ -1,6 +1,7 @@
 ---
 id: p07_smoke_eval_deploy
 kind: smoke_eval
+8f: F7_govern
 pillar: P07
 title: Deploy Smoke Evaluation Suite
 version: 1.0.0

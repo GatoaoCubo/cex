@@ -1,6 +1,7 @@
 ---
 id: mental_model_revenue_flywheel
 kind: mental_model
+8f: F4_reason
 pillar: P01
 nucleus: n06
 title: "Mental Model -- Revenue Flywheel (Acquire -> Activate -> Retain -> Expand -> Measure)"

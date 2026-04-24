@@ -1,6 +1,7 @@
 ---
 id: p04_ct_changelog_gen
 kind: cli_tool
+8f: F5_call
 pillar: P04
 title: "Changelog Gen — Generate changelog from git log grouped by LP"
 version: 1.0.0

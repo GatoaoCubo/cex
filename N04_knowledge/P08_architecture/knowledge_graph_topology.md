@@ -1,6 +1,7 @@
 ---
 id: p06_arch_knowledge_graph
 kind: context_doc
+8f: F3_inject
 pillar: P06
 title: "Knowledge Graph Topology — CEX Entity-Relationship Map"
 version: 1.0.0

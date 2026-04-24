@@ -1,6 +1,7 @@
 ---
 id: p01_kc_dispatch_rule
 kind: knowledge_card
+8f: F3_inject
 type: kind
 pillar: P12
 title: "Dispatch Rule — Deep Knowledge for dispatch_rule"

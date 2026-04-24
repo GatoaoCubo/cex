@@ -1,6 +1,7 @@
 ---
 id: n02_kc_accessibility_a11y
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "Accessibility A11Y"
 version: 1.0.0

@@ -1,6 +1,7 @@
 ---
 id: polish_fixes_20260413
 kind: knowledge_card
+8f: F3_inject
 pillar: P11
 title: Polish pass fixes -- hook errors + doctor FAILs
 version: 1.0.0

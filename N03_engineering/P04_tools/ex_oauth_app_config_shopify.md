@@ -1,6 +1,7 @@
 ---
 id: ex_oauth_app_config_shopify
 kind: oauth_app_config
+8f: F1_constrain
 pillar: P09
 title: Shopify OAuth App Configuration
 version: 0.1.0

@@ -1,6 +1,7 @@
 ---
 id: kc_tool_first_patterns
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: Tool-First Patterns -- Industry Methods for Replacing LLM Calls with Deterministic Tools
 version: 1.0.0

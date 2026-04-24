@@ -1,6 +1,7 @@
 ---
 id: entity_memory_customer
 kind: entity_memory
+8f: F3_inject
 pillar: P10
 nucleus: n06
 title: "Entity Memory -- Customer Entity Schema and ICP Attributes"

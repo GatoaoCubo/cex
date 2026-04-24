@@ -1,6 +1,7 @@
 ---
 id: p04_kc_mcp_app_extension
 kind: knowledge_card
+8f: F3_inject
 type: kind
 pillar: P04
 title: "MCP App Extension -- Deep Knowledge for mcp_app_extension"

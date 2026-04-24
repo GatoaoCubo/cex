@@ -1,6 +1,7 @@
 ---
 id: n06_output_pricing_page
 kind: output_template
+8f: F6_produce
 pillar: P05
 title: "Pricing Page — HTML Responsive Template"
 version: 1.0.0

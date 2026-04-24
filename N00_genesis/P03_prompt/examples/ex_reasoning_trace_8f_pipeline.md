@@ -1,6 +1,7 @@
 ---
 id: p03_rt_n03_builder_agent_20260406
 kind: reasoning_trace
+8f: F4_reason
 pillar: P03
 title: "Example — Reasoning Trace: 8F Pipeline Build Decision"
 version: 1.0.0

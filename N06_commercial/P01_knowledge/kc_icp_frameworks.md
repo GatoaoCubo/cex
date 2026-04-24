@@ -1,6 +1,7 @@
 ---
 id: n06_kc_icp_frameworks
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "ICP Frameworks + Buyer Persona — Universal Methods"
 version: 1.0.0

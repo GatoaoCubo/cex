@@ -1,6 +1,7 @@
 ---
 id: p10_out_competitive_grid
 kind: output
+8f: F6_produce
 pillar: P10
 title: "Output: Competitive Grid"
 version: 1.0.0

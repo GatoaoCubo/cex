@@ -1,6 +1,7 @@
 ---
 id: p07_sr_5d_brand_evaluation
 kind: scoring_rubric
+8f: F7_govern
 pillar: P07
 title: "Rubric: 5D Brand Evaluation"
 version: "1.0.0"

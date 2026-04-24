@@ -1,6 +1,7 @@
 ---
 id: p11_qg_knowledge
 kind: quality_gate
+8f: F7_govern
 pillar: P11
 title: "N04 Quality Gate — Knowledge Card Validation"
 version: 4.0.0

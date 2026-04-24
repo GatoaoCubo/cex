@@ -1,6 +1,7 @@
 ---
 id: n01_kc_source_catalog
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "Knowledge Card — Research Source Catalog (30+ Sources)"
 version: 1.0.0

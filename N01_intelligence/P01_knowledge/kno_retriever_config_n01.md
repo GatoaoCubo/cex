@@ -1,6 +1,7 @@
 ---
 id: kno_retriever_config_n01
 kind: retriever_config
+8f: F3_inject
 pillar: P01
 nucleus: N01
 title: "N01 Retriever Config"

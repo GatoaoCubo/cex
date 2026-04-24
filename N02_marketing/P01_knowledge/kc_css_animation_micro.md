@@ -1,6 +1,7 @@
 ---
 id: n02_kc_css_animation_micro
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: CSS Animation & Micro-interactions
 domain: N02_marketing / Frontend

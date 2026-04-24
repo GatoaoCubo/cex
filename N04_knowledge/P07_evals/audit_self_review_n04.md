@@ -3,6 +3,7 @@ quality: 8.2
 quality: 7.8
 id: audit_self_review_n04
 kind: audit_report
+8f: F7_govern
 pillar: P07
 nucleus: n04
 mission: SELF_AUDIT

@@ -1,6 +1,7 @@
 ---
 id: p01_kc_marp_cli
 kind: knowledge_card
+8f: F3_inject
 type: domain
 pillar: P01
 title: "Marp CLI — Markdown to Slides for Content Factory"

@@ -1,6 +1,7 @@
 ---
 id: p10_mb_n04_knowledge
 kind: memory_benchmark
+8f: F3_inject
 pillar: P07
 nucleus: n04
 title: "Memory Benchmark -- N04 Retrieval Quality Baselines"

@@ -1,6 +1,7 @@
 ---
 id: p10_ax_lifecycle_hooks
 kind: axiom
+8f: F4_reason
 pillar: P10
 title: "Axiom: Memory Lifecycle Hooks (5-Hook Chain)"
 version: 1.0.0

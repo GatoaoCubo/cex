@@ -1,6 +1,7 @@
 ---
 id: hybrid_review3_n01
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "HYBRID_REVIEW3 Master Summary: N01 (agent_computer_interface + training_method)"
 version: 1.0.0

@@ -1,6 +1,7 @@
 ---
 id: p12_wf_auto_diagnose
 kind: workflow
+8f: F8_collaborate
 pillar: P12
 title: "Auto-Diagnose — Observability when health degrades"
 version: 1.0.0

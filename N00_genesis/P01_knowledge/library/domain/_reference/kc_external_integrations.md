@@ -1,6 +1,7 @@
 ---
 id: p01_kc_external_integrations
 kind: knowledge_card
+8f: F3_inject
 type: domain
 pillar: P01
 title: "External Integrations — API Clients, Webhooks, Notifications, DB Connectors, Browser Automation"

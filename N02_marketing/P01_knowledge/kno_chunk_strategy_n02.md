@@ -1,6 +1,7 @@
 ---
 id: kno_chunk_strategy_n02
 kind: chunk_strategy
+8f: F3_inject
 pillar: P01
 nucleus: N02
 title: "N02 Marketing Chunk Strategy"

@@ -1,6 +1,7 @@
 ---
 id: p06_schema_a11y_checklist
 kind: input_schema
+8f: F1_constrain
 pillar: P06
 title: "WCAG 2.1 AA Accessibility Checklist"
 version: 1.0.0

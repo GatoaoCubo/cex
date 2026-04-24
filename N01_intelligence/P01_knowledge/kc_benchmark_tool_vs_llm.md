@@ -1,6 +1,7 @@
 ---
 id: kc_benchmark_tool_vs_llm
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: Benchmark -- Tool vs LLM Accuracy for Top 5 SAFE_REPLACE Candidates
 version: 1.0.0

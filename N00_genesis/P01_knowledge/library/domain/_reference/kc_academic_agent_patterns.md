@@ -1,6 +1,7 @@
 ---
 id: p01_kc_academic_agent_patterns
 kind: knowledge_card
+8f: F3_inject
 type: domain
 pillar: P01
 title: 'Academic Agent Patterns: ReAct, CoT, Reflexion, CoALA, LATS'

@@ -1,6 +1,7 @@
 ---
 id: kc_role_assignment
 kind: knowledge_card
+8f: F3_inject
 title: Role Assignment
 version: 1.0.0
 quality: 8.7

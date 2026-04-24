@@ -1,6 +1,7 @@
 ---
 id: n00_mcp_app_extension_manifest
 kind: knowledge_card
+8f: F3_inject
 pillar: P04
 nucleus: n00
 title: "MCP App Extension -- Canonical Manifest"

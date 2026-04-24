@@ -1,6 +1,7 @@
 ---
 id: n02_output_monetization_launch
 kind: output_validator
+8f: F6_produce
 pillar: P05
 title: "CEX Monetization Launch — Marketing Strategy + Copy"
 version: 1.0.0

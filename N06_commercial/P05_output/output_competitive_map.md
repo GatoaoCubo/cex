@@ -1,6 +1,7 @@
 ---
 id: n06_output_competitive_map
 kind: output_template
+8f: F6_produce
 pillar: P05
 title: "Competitive Positioning Map — 2D Grid & Blue Ocean ERRC"
 version: 1.0.0

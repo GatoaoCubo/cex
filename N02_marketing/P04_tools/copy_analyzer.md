@@ -1,6 +1,7 @@
 ---
 id: n02_tool_copy_analyzer
 kind: cli_tool
+8f: F5_call
 pillar: P04
 title: "Copy Analyzer — N02 Marketing Quality Tool"
 version: 1.0.0

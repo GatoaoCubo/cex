@@ -5,6 +5,7 @@
 
 id: p12_sig_{{EVENT_SLUG}}
 kind: signal
+8f: F8_collaborate
 pillar: P12
 title: "Signal: {{EVENT_NAME}}"
 quality: {{QUALITY_8_TO_10}}

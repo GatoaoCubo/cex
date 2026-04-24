@@ -1,6 +1,7 @@
 ---
 id: p01_kc_benchmark
 kind: knowledge_card
+8f: F3_inject
 type: kind
 pillar: P07
 title: "Benchmark — Deep Knowledge for benchmark"

@@ -2,6 +2,7 @@
 id: atom_32_vendor_glossaries_adk
 title: "AI Frameworks and CEX Architecture Mapping Analysis (v2.0)"
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 domain: ai_frameworks
 author: "AI Architecture Research Team"

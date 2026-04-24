@@ -1,6 +1,7 @@
 ---
 id: n00_safety_policy_manifest
 kind: knowledge_card
+8f: F3_inject
 pillar: P11
 nucleus: n00
 title: "Safety Policy -- Canonical Manifest"

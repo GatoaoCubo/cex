@@ -1,6 +1,7 @@
 ---
 id: p10_ss_agent_group_dispatch
 kind: session_state
+8f: F8_collaborate
 pillar: P10
 description: "Ephemeral session state tracking active agent_group dispatches"
 scope: stella_session

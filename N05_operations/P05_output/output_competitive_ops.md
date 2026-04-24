@@ -1,6 +1,7 @@
 ---
 id: n05_competitive_ops
 kind: competitive_analysis
+8f: F4_reason
 pillar: P05
 quality: 9.0
 timestamp: 2026-04-02T15:30:00Z

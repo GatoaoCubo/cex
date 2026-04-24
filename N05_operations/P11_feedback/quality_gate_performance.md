@@ -1,6 +1,7 @@
 ---
 id: p11_qg_performance
 kind: quality_gate
+8f: F7_govern
 pillar: P11
 title: "Gate: Performance Validation"
 version: 1.0.0

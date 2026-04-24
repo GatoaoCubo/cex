@@ -1,6 +1,7 @@
 ---
 id: tpl_research_batch_marketplaces
 kind: template
+8f: F6_produce
 pillar: P12
 title: "Research Batch — Marketplace & Delivery Discovery"
 version: 1.0.0

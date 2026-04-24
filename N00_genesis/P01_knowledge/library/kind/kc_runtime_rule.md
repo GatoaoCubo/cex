@@ -1,6 +1,7 @@
 ---
 id: p01_kc_runtime_rule
 kind: knowledge_card
+8f: F3_inject
 type: kind
 pillar: P09
 title: "Runtime Rule — Deep Knowledge for runtime_rule"

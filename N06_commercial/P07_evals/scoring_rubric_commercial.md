@@ -1,6 +1,7 @@
 ---
 id: p07_sr_commercial
 kind: scoring_rubric
+8f: F7_govern
 pillar: P07
 title: "N06 Scoring Rubric — Dual Brand + Monetization"
 version: 4.0.0

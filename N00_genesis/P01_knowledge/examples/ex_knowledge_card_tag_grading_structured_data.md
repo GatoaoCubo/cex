@@ -1,6 +1,7 @@
 ---
 id: p01_kc_tag_grading_structured_data
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "TAG Grading: Structured Data Extraction em Paginas CSR"
 version: 2.0.0

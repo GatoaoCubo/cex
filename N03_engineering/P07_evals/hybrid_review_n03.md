@@ -1,5 +1,6 @@
 ---
 kind: audit_report
+8f: F7_govern
 id: p08_hybrid_review_n03
 pillar: P08
 llm_function: GOVERN

@@ -1,6 +1,7 @@
 ---
 id: p01_kc_rag_chunking_strategies
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "RAG Chunking Strategies Comparison and Selection Guide"
 version: "1.1.0"

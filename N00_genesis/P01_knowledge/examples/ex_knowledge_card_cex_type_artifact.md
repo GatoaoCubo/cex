@@ -1,6 +1,7 @@
 ---
 id: p01_kc_cex_type_artifact
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "CEX Type Artifacts — 78 Named Units with Contract, Boundary and Schema"
 version: 1.0.0

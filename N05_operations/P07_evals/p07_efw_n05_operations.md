@@ -1,6 +1,7 @@
 ---
 id: p07_efw_n05_operations
 kind: eval_framework
+8f: F7_govern
 pillar: P07
 title: "N05 Operations Evaluation Framework"
 version: "1.0.0"

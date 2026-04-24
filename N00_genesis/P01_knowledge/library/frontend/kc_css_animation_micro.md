@@ -1,6 +1,7 @@
 ---
 id: p01_kc_css_animation_micro
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: CSS Animation & Micro-interactions
 version: 1.0.0

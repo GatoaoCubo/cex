@@ -1,6 +1,7 @@
 ---
 id: p08_sat_edison
 kind: agent_card
+8f: F2_become
 pillar: P08
 title: "Agent_group: builder_agent"
 version: 1.0.0

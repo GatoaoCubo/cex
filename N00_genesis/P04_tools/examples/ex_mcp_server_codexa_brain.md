@@ -7,6 +7,7 @@ tools_provided: [brain_query, brain_prime, brain_list, brain_status, smart_conte
 resources_provided: [pool_index]
 pillar: P04
 kind: mcp_server
+8f: F5_call
 version: 1.0.0
 created: 2026-03-24
 author: builder_agent

@@ -1,6 +1,7 @@
 ---
 id: p01_kc_pydantic_patterns
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "Pydantic V2 Patterns — Models, Validators, Settings"
 version: 1.0.0

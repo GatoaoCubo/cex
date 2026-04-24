@@ -1,6 +1,7 @@
 ---
 id: n06_funnel_content_factory
 kind: content_monetization
+8f: F6_produce
 pillar: P11
 title: "Content Factory Sales Funnel -- Free-to-Paid Conversion Pipeline"
 version: 1.0.0

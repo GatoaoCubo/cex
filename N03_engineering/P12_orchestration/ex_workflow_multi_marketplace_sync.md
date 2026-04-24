@@ -1,6 +1,7 @@
 ---
 id: ex_workflow_multi_marketplace_sync
 kind: workflow
+8f: F8_collaborate
 pillar: P12
 title: Multi-Marketplace Bidirectional Sync Workflow
 version: 0.1.0

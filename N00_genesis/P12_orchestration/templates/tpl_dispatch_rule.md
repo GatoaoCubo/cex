@@ -5,6 +5,7 @@
 
 id: p12_dr_{{SCOPE_SLUG}}
 kind: dispatch_rule
+8f: F8_collaborate
 pillar: P12
 title: "Dispatch Rule: {{SCOPE_NAME}}"
 quality: {{QUALITY_8_TO_10}}

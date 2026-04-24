@@ -1,6 +1,7 @@
 ---
 id: p08_adr_002_testing_strategy
 kind: context_doc
+8f: F3_inject
 pillar: P08
 title: "ADR-002: CEX Testing Strategy"
 version: 1.0.0

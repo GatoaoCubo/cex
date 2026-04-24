@@ -1,6 +1,7 @@
 ---
 id: terminology_sweep_2026_04_08
 kind: context_doc
+8f: F3_inject
 title: "Terminology Sweep Report -- capability_summary rename + Portuguese cleanup"
 version: 1.0.0
 quality: 9.1

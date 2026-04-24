@@ -1,6 +1,7 @@
 ---
 id: n07_output_monetization_consolidated
 kind: output_template
+8f: F6_produce
 pillar: P05
 title: "MONETIZE_CEX — Consolidated Report (6 Nucleus Perspectives)"
 version: 1.0.0

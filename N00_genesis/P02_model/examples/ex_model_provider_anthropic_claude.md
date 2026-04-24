@@ -1,6 +1,7 @@
 ---
 id: p02_mp_anthropic
 kind: model_provider
+8f: F2_become
 pillar: P02
 title: "Example — Anthropic Claude Model Provider"
 version: 1.0.0

@@ -1,6 +1,7 @@
 ---
 id: kc_credit_system_design
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 quality: 9.0
 tldr: "Architectural patterns for a prepaid credit wallet system, including integer-based currency, service costs, and idempotent operations."

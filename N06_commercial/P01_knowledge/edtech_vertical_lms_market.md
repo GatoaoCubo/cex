@@ -1,6 +1,7 @@
 ---
 id: edtech_vertical_lms_market
 kind: edtech_vertical
+8f: F1_constrain
 pillar: P01
 nucleus: N06
 domain: edtech

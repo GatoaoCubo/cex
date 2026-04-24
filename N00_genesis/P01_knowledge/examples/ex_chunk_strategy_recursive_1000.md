@@ -1,6 +1,7 @@
 ---
 id: p01_cs_recursive_1000
 kind: chunk_strategy
+8f: F3_inject
 pillar: P01
 title: Recursive Markdown Splitter (1000 tokens)
 version: 1.0.0

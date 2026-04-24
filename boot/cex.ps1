@@ -34,7 +34,8 @@ $gitRepo = ""
 $cexTier = if ($env:CEX_TIER) { $env:CEX_TIER.ToUpper() } else { "DEV" }
 try {
     $gitBranch = (git rev-parse --abbrev-ref HEAD 2>$null)
-    $gitRemote = (git remote get-url origin 2>$null)
+    $remName = if ($env:CEX_REMOTE) { $env:CEX_REMOTE } else { "origin" }
+    $gitRemote = (git remote get-url $remName 2>$null)
     if ($gitRemote -match "[/:]([^/]+?)(?:\.git)?$") { $gitRepo = $Matches[1] }
 } catch {}
 

@@ -1,6 +1,7 @@
 ---
 id: n00_hook_config_manifest
 kind: knowledge_card
+8f: F3_inject
 pillar: P04
 nucleus: n00
 title: "Hook Config -- Canonical Manifest"

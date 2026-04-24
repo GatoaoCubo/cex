@@ -1,6 +1,7 @@
 ---
 id: extraction_hnsw_memory
 kind: knowledge_card
+8f: F3_inject
 pillar: P01_knowledge
 title: "Extraction: HNSW Vector Memory from ruflo"
 version: 1.1

@@ -19,6 +19,7 @@ quality: 8.5
 status: production
 pillar: P12
 kind: workflow_node
+8f: F8_collaborate
 version: "1.0.0"
 created: "2026-04-19"
 updated: "2026-04-19"

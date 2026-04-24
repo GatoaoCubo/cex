@@ -1,6 +1,7 @@
 ---
 id: p01_kc_constraint_spec
 kind: knowledge_card
+8f: F3_inject
 type: kind
 pillar: P03
 title: "Constraint Spec — Deep Knowledge for constraint_spec"

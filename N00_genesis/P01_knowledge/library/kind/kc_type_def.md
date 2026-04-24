@@ -1,6 +1,7 @@
 ---
 id: p01_kc_type_def
 kind: knowledge_card
+8f: F3_inject
 type: kind
 pillar: P06
 title: "Type Def — Deep Knowledge for type_def"

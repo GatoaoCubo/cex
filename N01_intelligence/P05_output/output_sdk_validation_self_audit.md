@@ -1,6 +1,7 @@
 ---
 id: n01_sdk_validation_self_audit
 kind: output
+8f: F6_produce
 pillar: P10
 title: "N01 SDK Validation — Self-Audit Report"
 version: 1.0.0

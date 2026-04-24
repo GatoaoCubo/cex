@@ -1,6 +1,7 @@
 ---
 id: p01_kc_8f_pipeline
 kind: knowledge_card
+8f: F3_inject
 type: domain
 pillar: P01
 title: "The 8F Pipeline — Complete Anatomy of CEX Artifact Production"

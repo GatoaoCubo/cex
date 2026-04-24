@@ -1,6 +1,7 @@
 ---
 id: atom_09_autogen_ag2
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "AutoGen / AG2 Framework -- Deep Vocabulary Atlas"
 version: 1.1.0

@@ -1,6 +1,7 @@
 ---
 id: pricing_optimization_memory
 kind: memory_summary
+8f: F3_inject
 pillar: P10
 title: "Pricing Optimization Memory — N06 Commercial"
 nucleus: N06

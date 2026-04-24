@@ -1,6 +1,7 @@
 ---
 id: kc_sdk_coverage_gap
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 nucleus: n04
 domain: sdk_architecture

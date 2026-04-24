@@ -5,6 +5,7 @@
 
 id: p02_lens_{{PERSPECTIVE_SLUG}}
 kind: lens
+8f: F4_reason
 perspective: {{PERSPECTIVE_NAME}}
 applies_to: [{{AGENT_OR_DOMAIN_1}}, {{AGENT_OR_DOMAIN_2}}]
 quality: 9.0

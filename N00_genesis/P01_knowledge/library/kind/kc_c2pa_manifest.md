@@ -1,6 +1,7 @@
 ---
 id: kc_c2pa_manifest
 kind: knowledge_card
+8f: F3_inject
 title: C2PA 2.3 Content Credential Manifest
 version: 1.1.0
 quality: 9.1

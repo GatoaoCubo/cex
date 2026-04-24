@@ -1,6 +1,7 @@
 ---
 id: p01_kc_amazon_ads_benchmarks_brasil
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "Amazon Ads Brasil: Benchmarks Operacionais de 2026"
 version: 2.0.0

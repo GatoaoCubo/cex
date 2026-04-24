@@ -1,6 +1,7 @@
 ---
 id: p11_lc_cex_lifecycle
 kind: lifecycle_rule
+8f: F1_constrain
 pillar: P11
 title: "CEX Artifact Lifecycle Rules"
 version: "1.0.0"

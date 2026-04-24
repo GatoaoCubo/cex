@@ -1,6 +1,7 @@
 ---
 id: p12_ct_migration_pipeline.md
 kind: crew_template
+8f: F2_become
 pillar: P12
 llm_function: CALL
 crew_name: migration_pipeline

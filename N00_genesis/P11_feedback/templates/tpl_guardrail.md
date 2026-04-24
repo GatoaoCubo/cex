@@ -1,6 +1,7 @@
 ---
 id: "p11_gr_{{SCOPE_SLUG}}"
 kind: guardrail
+8f: F7_govern
 pillar: P11
 version: 1.0.0
 title: Template - Guardrail

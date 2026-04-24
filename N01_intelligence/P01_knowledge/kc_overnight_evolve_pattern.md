@@ -1,6 +1,7 @@
 ---
 id: kc_overnight_evolve_pattern
 kind: knowledge_card
+8f: F3_inject
 title: Overnight Evolve Pattern for Continuous AI Improvement
 version: 1.0.0
 quality: 8.9

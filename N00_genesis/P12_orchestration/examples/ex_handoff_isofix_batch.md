@@ -1,6 +1,7 @@
 ---
 id: p12_ho_isofix_batch
 kind: handoff
+8f: F8_collaborate
 pillar: P12
 title: "Handoff: ISOFIX Batch 1 (Edison)"
 version: 1.0.0

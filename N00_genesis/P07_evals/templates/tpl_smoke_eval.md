@@ -1,6 +1,7 @@
 ---
 id: "p07_se_{{SCOPE_SLUG}}"
 kind: smoke_eval
+8f: F7_govern
 pillar: P07
 version: 1.0.0
 title: Template - Smoke Eval

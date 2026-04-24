@@ -1,6 +1,7 @@
 ---
 id: p01_kc_interface
 kind: knowledge_card
+8f: F3_inject
 type: kind
 pillar: P06
 title: "Interface — Deep Knowledge for interface"

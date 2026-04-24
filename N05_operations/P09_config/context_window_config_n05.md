@@ -1,6 +1,7 @@
 ---
 id: p03_cwc_n05_sonnet
 kind: context_window_config
+8f: F1_constrain
 pillar: P03
 title: "N05 Sonnet 200K Context Budget"
 version: "1.0.0"

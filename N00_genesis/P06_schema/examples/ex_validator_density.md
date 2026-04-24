@@ -1,6 +1,7 @@
 ---
 id: ex_validation_rule_density
 kind: validation_rule
+8f: F1_constrain
 pillar: P06
 title: "Example — Density Validation Rule"
 tags: [schema, validation, density, constraint, quality]

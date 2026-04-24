@@ -1,6 +1,7 @@
 ---
 id: n00_data_residency_manifest
 kind: knowledge_card
+8f: F3_inject
 pillar: P09
 nucleus: n00
 title: "Data Residency -- Canonical Manifest"

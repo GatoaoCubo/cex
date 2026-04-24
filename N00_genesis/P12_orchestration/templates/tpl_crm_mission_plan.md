@@ -1,6 +1,7 @@
 ---
 id: tpl_crm_mission_plan
 kind: template
+8f: F6_produce
 pillar: P12
 title: "CRM Full Harvest — Mission Plan Template"
 version: 1.0.0

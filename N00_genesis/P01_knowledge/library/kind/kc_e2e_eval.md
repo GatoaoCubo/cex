@@ -1,6 +1,7 @@
 ---
 id: p01_kc_e2e_eval
 kind: knowledge_card
+8f: F3_inject
 type: kind
 pillar: P07
 title: "E2E Eval — Deep Knowledge for e2e_eval"

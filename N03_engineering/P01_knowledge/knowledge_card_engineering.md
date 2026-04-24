@@ -1,6 +1,7 @@
 ---
 id: p01_kc_meta_construction
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: Knowledge Card -- Meta-Construction
 version: 2.0.0

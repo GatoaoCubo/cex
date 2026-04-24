@@ -1,6 +1,7 @@
 ---
 id: p01_kc_operations_vocabulary
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "N05 Operations Controlled Vocabulary"
 version: "1.0.0"

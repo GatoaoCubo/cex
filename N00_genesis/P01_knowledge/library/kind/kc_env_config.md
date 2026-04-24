@@ -1,6 +1,7 @@
 ---
 id: kc_env_config
 kind: knowledge_card
+8f: F3_inject
 title: "Environment Configuration for LLM Systems"
 version: 1.0.0
 quality: 9.0

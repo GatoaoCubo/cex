@@ -1,6 +1,7 @@
 ---
 id: atom_24_nist_vocabulary
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "NIST AI Vocabulary -- Complete Term Registry and Pillar Mapping"
 version: 0.3.0

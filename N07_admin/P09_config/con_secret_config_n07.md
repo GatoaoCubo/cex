@@ -1,6 +1,7 @@
 ---
 id: con_secret_config_n07
 kind: secret_config
+8f: F1_constrain
 pillar: P09
 nucleus: n07
 title: "Orchestrator Secret Management"

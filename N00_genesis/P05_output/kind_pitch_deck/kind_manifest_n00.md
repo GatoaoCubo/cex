@@ -1,6 +1,7 @@
 ---
 id: n00_pitch_deck_manifest
 kind: knowledge_card
+8f: F3_inject
 pillar: P05
 nucleus: n00
 title: "Pitch Deck -- Canonical Manifest"

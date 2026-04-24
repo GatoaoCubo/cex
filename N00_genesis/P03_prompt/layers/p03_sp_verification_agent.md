@@ -1,6 +1,7 @@
 ---
 id: p03_sp_verification_agent
 kind: system_prompt
+8f: F2_become
 pillar: P03
 title: "Verification Agent System Prompt"
 version: 1.0.0

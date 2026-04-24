@@ -1,6 +1,7 @@
 ---
 id: kc_container_deployment_llm
 kind: knowledge_card
+8f: F3_inject
 title: "Container Deployment for LLM Apps"
 version: 1.0.0
 quality: 9.0

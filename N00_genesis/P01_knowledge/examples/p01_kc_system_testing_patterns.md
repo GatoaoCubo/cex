@@ -1,6 +1,7 @@
 ---  
 id: p01_kc_system_testing_patterns  
 kind: knowledge_card  
+8f: F3_inject
 pillar: P01  
 title: System Testing Patterns  
 version: "1.0.0"  

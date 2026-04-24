@@ -1,6 +1,7 @@
 ---
 id: ex_sales_playbook_content
 kind: sales_playbook
+8f: F6_produce
 pillar: P11
 version: 1.0.0
 title: "Sales Playbook -- Content-Driven Product Integration"

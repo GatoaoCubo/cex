@@ -1,6 +1,7 @@
 ---
 id: p03_pt_cip_image_brief
 kind: prompt_template
+8f: F6_produce
 pillar: P03
 title: "CIP Image Brief: Agua Marinha Product Lifestyle"
 version: 1.0.0

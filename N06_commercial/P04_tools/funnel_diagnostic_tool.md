@@ -1,6 +1,7 @@
 ---
 id: funnel_diagnostic_tool
 kind: tool_card
+8f: F5_call
 pillar: P11
 title: "Funnel Diagnostic Tool — Leak Detection & Fix Prioritization"
 nucleus: N06

@@ -1,6 +1,7 @@
 ---
 id: p06_schema_competitive_analysis
 kind: schema
+8f: F1_constrain
 pillar: P06
 title: "Competitive Analysis Contract"
 version: 1.0.0

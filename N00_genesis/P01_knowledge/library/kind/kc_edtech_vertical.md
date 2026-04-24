@@ -1,6 +1,7 @@
 ---
 id: p01_kc_edtech_vertical
 kind: knowledge_card
+8f: F3_inject
 kc_type: domain_kc
 pillar: P01
 title: "EdTech Vertical: LMS Integration, Compliance, and Learning Analytics"

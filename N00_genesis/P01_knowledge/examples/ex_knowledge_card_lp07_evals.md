@@ -1,6 +1,7 @@
 ---
 id: p01_kc_lp07_evals
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "P07 Evals: Como Medir Qualidade"
 version: 1.0.0

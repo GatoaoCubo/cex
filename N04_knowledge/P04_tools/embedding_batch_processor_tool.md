@@ -1,6 +1,7 @@
 ---
 id: p04_tool_embedding_batch
 kind: cli_tool
+8f: F5_call
 pillar: P04
 title: "Embedding Batch Processor — Bulk Vector Generation"
 version: 1.0.0

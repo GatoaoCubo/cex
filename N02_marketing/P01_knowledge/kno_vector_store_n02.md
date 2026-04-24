@@ -1,6 +1,7 @@
 ---
 id: kno_vector_store_n02
 kind: vector_store
+8f: F3_inject
 pillar: P02
 nucleus: N02
 title: "N02 Marketing Vector Store"

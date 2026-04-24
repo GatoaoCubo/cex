@@ -1,6 +1,7 @@
 ---
 id: p03_brand_audit_prompt
 kind: prompt_template
+8f: F6_produce
 pillar: P03
 title: "Brand Audit — Consistency Scoring Across Artifacts"
 version: 1.0.0

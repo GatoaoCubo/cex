@@ -1,6 +1,7 @@
 ---
 id: p05_output_health_endpoint
 kind: output_validator
+8f: F6_produce
 pillar: P05
 title: "Health Endpoint Template — FastAPI /health + /ready"
 version: 1.0.0

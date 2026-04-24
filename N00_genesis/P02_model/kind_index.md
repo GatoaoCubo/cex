@@ -1,6 +1,7 @@
 ---
 id: n00_p02_kind_index
 kind: knowledge_card
+8f: F3_inject
 pillar: P02
 nucleus: n00
 title: "P02 Model -- Kind Index"

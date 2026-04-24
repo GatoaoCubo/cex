@@ -1,6 +1,7 @@
 ---
 id: p08_pat_consultant_model
 kind: pattern
+8f: F4_reason
 pillar: P08
 title: Consultant Model -- Participative Builder Intelligence
 version: 1.0.0

@@ -1,6 +1,7 @@
 ---
 id: skill_n01
 kind: skill
+8f: F5_call
 nucleus: n01
 pillar: P04
 mirrors: N00_genesis/P04_tools/kind_skill/kind_manifest_n00.md

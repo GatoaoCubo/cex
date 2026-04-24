@@ -1,6 +1,7 @@
 ---
 id: p01_kc_embedding_config
 kind: knowledge_card
+8f: F3_inject
 type: kind
 pillar: P01
 title: "Embedding Config — Deep Knowledge for embedding_config"

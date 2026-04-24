@@ -1,6 +1,7 @@
 ---
 id: p06_is_knowledge_data_model
 kind: input_schema
+8f: F1_constrain
 pillar: P06
 version: "1.0.0"
 created: "2026-04-02"

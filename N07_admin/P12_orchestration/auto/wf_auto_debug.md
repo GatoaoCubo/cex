@@ -1,6 +1,7 @@
 ---
 id: p12_wf_auto_debug
 kind: workflow
+8f: F8_collaborate
 pillar: P12
 title: "Auto-Debug — Root cause analysis on execution errors"
 version: 1.0.0

@@ -1,6 +1,7 @@
 ---
 id: p09_kc_prosody_config
 kind: knowledge_card
+8f: F3_inject
 type: kind
 pillar: P09
 title: "Prosody Config -- Deep Knowledge for prosody_config"

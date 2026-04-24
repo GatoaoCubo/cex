@@ -1,6 +1,7 @@
 ---
 id: p12_spawn_railway_superintendent
 kind: spawn_config
+8f: F1_constrain
 pillar: P12
 version: 4.0.0
 created: 2026-04-01

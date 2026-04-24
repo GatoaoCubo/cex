@@ -2,6 +2,7 @@
 id: p10_ck_railway_deploy_checkpoint
 title: "Checkpoint Operations"
 kind: checkpoint
+8f: F8_collaborate
 pillar: P10
 version: 4.0.0
 created: 2026-04-01

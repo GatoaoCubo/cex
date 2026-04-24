@@ -1,6 +1,7 @@
 ---
 id: p11_rw_answer_quality
 kind: reward_signal
+8f: F7_govern
 pillar: P11
 title: "Answer Quality Reward Signal — LLM-as-Judge Continuous Scoring"
 version: 1.0.0

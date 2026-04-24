@@ -2,6 +2,7 @@
 id: n04_rc_knowledge
 title: "Retriever Config Knowledge"
 kind: retriever_config
+8f: F3_inject
 pillar: P01_knowledge
 version: "2.0.0"
 created: "2024-03-30"

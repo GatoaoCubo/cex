@@ -1,6 +1,7 @@
 ---
 id: consolidation_policy_n01
 kind: consolidation_policy
+8f: F1_constrain
 pillar: P10
 nucleus: n01
 title: "N01 Memory Consolidation Policy"

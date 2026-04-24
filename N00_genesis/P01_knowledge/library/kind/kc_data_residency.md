@@ -1,6 +1,7 @@
 ---
 id: p09_kc_data_residency
 kind: knowledge_card
+8f: F3_inject
 type: kind
 pillar: P09
 title: "Data Residency -- Deep Knowledge for data_residency"

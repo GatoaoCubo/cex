@@ -1,6 +1,7 @@
 ---
 id: p10_memory_summary
 kind: memory_summary
+8f: F3_inject
 pillar: P10
 version: 1.0.0
 title: "Template — Memory Summary"

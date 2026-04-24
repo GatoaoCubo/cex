@@ -2,6 +2,7 @@
 quality: 9.1
 id: kc_lens_factory
 kind: knowledge_card
+8f: F3_inject
 kc_type: meta_kc
 pillar: P01
 nucleus: n04

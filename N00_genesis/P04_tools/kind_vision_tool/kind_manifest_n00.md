@@ -1,6 +1,7 @@
 ---
 id: n00_vision_tool_manifest
 kind: knowledge_card
+8f: F3_inject
 pillar: P04
 nucleus: n00
 title: "Vision Tool -- Canonical Manifest"

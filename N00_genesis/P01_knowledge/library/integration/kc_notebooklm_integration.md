@@ -1,6 +1,7 @@
 ---
 id: p01_kc_notebooklm_integration
 kind: knowledge_card
+8f: F3_inject
 type: domain
 pillar: P01
 title: "NotebookLM Integration — AI-Powered Content Transformation"

@@ -1,6 +1,7 @@
 ---
 id: p03_pt_intelligence_analysis
 kind: prompt_template
+8f: F6_produce
 pillar: P03
 title: "Intelligence Analysis Template"
 version: "1.0.0"

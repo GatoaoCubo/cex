@@ -1,6 +1,7 @@
 ---
 id: chain_research_pipeline_n01
 kind: chain
+8f: F6_produce
 pillar: P03
 nucleus: n01
 title: "N01 Research Pipeline Prompt Chain"

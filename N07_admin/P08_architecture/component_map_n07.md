@@ -1,6 +1,7 @@
 ---
 id: component_map_n07
 kind: component_map
+8f: F4_reason
 pillar: P08
 nucleus: n07
 title: "N07 Admin -- Component Map"

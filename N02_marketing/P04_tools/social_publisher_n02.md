@@ -1,6 +1,7 @@
 ---
 id: social_publisher_n02
 kind: browser_tool
+8f: F5_call
 pillar: P04
 nucleus: n02
 title: "Social Publisher -- Multi-Channel Content Publishing Tool"

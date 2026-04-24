@@ -1,6 +1,7 @@
 ---
 id: p01_kc_browser_tool
 kind: knowledge_card
+8f: F3_inject
 type: kind
 pillar: P04
 title: "Browser Tool — Deep Knowledge for browser_tool"

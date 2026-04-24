@@ -1,6 +1,7 @@
 ---
 id: kc_tts_provider
 kind: knowledge_card
+8f: F3_inject
 title: Text-to-Speech Provider Integration
 version: 1.0.0
 quality: 8.6

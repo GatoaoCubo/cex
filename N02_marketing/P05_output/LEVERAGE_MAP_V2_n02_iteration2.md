@@ -1,6 +1,7 @@
 ---
 id: n02_leverage_map_v2_iteration2
 kind: verification_report
+8f: F7_govern
 pillar: P12
 title: "N02 Marketing - LEVERAGE_MAP_V2 Verification Cycle 2"
 mission: LEVERAGE_MAP_V2

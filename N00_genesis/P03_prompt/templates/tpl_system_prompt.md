@@ -6,6 +6,7 @@ quality: null
 
 id: p03_sp_[agent_slug]
 kind: system_prompt
+8f: F2_become
 pillar: P03
 title: [system_prompt_do_agente]
 target_agent: [agent_name]

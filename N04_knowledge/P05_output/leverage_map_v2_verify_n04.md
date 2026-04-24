@@ -1,6 +1,7 @@
 ---
 id: leverage_map_v2_verify_n04
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "LEVERAGE_MAP_V2: N04 Verification Cycle (Reranker + RAG Stack)"
 version: 1.0

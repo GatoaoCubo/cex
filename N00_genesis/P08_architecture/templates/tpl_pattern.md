@@ -6,6 +6,7 @@
 
 id: p08_pat_{{NAME_SLUG}}
 kind: pattern
+8f: F4_reason
 pillar: P08
 title: "Pattern: {{PATTERN_NAME}}"
 version: 1.0.0

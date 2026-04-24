@@ -1,6 +1,7 @@
 ---
 id: p07_gt_n03
 kind: golden_test
+8f: F7_govern
 pillar: P07
 title: "Golden Tests -- N03 Builder Outputs"
 version: 1.0.0

@@ -1,6 +1,7 @@
 ---
 id: n06_kc_competitive_positioning
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "Competitive Positioning Methods — Universal Frameworks"
 version: 1.0.0

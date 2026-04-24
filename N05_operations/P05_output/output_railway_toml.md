@@ -1,6 +1,7 @@
 ---
 id: p05_output_railway_toml
 kind: output_validator
+8f: F6_produce
 pillar: P05
 title: "Railway TOML Template — Service Variants"
 version: 1.0.0

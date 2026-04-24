@@ -1,6 +1,7 @@
 ---
 id: n04_output_cf_integration_kcs
 kind: output
+8f: F6_produce
 pillar: P01
 nucleus: N04
 mission: MISSION_content_factory_wave2

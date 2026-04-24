@@ -1,6 +1,7 @@
 ---
 id: ex_prompt_template_aida
 kind: prompt_template
+8f: F6_produce
 pillar: P03
 title: "AIDA Copywriting Template"
 tags: [prompt, aida, copywriting, template, marketing]

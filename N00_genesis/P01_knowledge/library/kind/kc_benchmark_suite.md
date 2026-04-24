@@ -1,6 +1,7 @@
 ---
 id: kc_benchmark_suite
 kind: knowledge_card
+8f: F3_inject
 title: Benchmark Suite Definition
 version: 1.0.0
 quality: 9.0

@@ -5,6 +5,7 @@
 
 id: p10_bi_{{INDEX_SLUG}}
 kind: knowledge_index
+8f: F3_inject
 pillar: P10
 title: "Brain Index: {{INDEX_NAME}}"
 quality: {{QUALITY_8_TO_10}}

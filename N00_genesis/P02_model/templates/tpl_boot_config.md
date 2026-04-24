@@ -5,6 +5,7 @@
 
 id: p02_boot_[provider]
 kind: boot_config
+8f: F2_become
 pillar: P02
 provider: [claude|cursor|windsurf|codex|copilot|pi]
 identity: [identidade_que_o_agente_assume]

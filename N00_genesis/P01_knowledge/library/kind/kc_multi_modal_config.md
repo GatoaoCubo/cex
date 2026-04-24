@@ -1,6 +1,7 @@
 ---
 id: p01_kc_multi_modal_config
 kind: knowledge_card
+8f: F3_inject
 type: kind
 pillar: P04
 title: "Multi-Modal Config — Deep Knowledge for multi_modal_config"

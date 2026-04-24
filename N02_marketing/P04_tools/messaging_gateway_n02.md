@@ -1,6 +1,7 @@
 ---
 id: messaging_gateway_n02
 kind: messaging_gateway
+8f: F5_call
 nucleus: n02
 pillar: P04
 mirrors: N00_genesis/P04_tools/tpl_messaging_gateway.md

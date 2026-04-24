@@ -1,6 +1,7 @@
 ---
 id: kc_visual_hierarchy_principles
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: Visual Hierarchy Principles
 tags: [visual, hierarchy, design]

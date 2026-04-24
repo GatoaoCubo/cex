@@ -1,6 +1,7 @@
 ---
 id: n00_p07_kind_index
 kind: knowledge_card
+8f: F3_inject
 pillar: P07
 nucleus: n00
 title: "P07 Evals -- Kind Index"

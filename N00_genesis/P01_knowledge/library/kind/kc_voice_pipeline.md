@@ -1,6 +1,7 @@
 ---
 id: kc_voice_pipeline
 kind: knowledge_card
+8f: F3_inject
 title: Voice Pipeline Architecture
 version: 1.0.0
 quality: 8.8

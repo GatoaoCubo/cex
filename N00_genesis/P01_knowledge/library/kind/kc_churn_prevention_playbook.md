@@ -1,6 +1,7 @@
 ---
 id: kc_churn_prevention_playbook
 kind: knowledge_card
+8f: F3_inject
 title: Churn Prevention Playbook
 version: 1.0.0
 quality: 8.7

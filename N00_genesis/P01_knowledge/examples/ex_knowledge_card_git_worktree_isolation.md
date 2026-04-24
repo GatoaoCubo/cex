@@ -1,6 +1,7 @@
 ---
 id: p01_kc_git_worktree_isolation
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "Git Worktree Isolation — Parallel Agent Workspaces Without Conflict"
 version: 1.0.0

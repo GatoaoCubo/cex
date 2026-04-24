@@ -1,6 +1,7 @@
 ---
 id: p10_lr_builder_genesis
 kind: learning_record
+8f: F7_govern
 pillar: P10
 title: Learning Record -- Builder Genesis Session
 version: 1.0.0

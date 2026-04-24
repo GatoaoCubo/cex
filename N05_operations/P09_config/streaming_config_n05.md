@@ -1,6 +1,7 @@
 ---
 id: p05_sc_n05_ops
 kind: streaming_config
+8f: F1_constrain
 pillar: P05
 version: "1.0.0"
 created: "2026-04-17"

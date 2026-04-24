@@ -1,6 +1,7 @@
 ---
 id: system_prompt_n01_research
 kind: system_prompt
+8f: F2_become
 pillar: P03
 nucleus: n01
 title: "N01 Research Mode System Prompt"

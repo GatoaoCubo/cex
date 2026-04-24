@@ -1,6 +1,7 @@
 ---
 id: team_charter_intelligence_default.md
 kind: team_charter
+8f: F8_collaborate
 pillar: P12
 llm_function: GOVERN
 charter_id: intelligence_default

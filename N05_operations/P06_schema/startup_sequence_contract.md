@@ -1,6 +1,7 @@
 ---
 id: p06_schema_startup_sequence
 kind: input_schema
+8f: F1_constrain
 pillar: P06
 title: "Startup Sequence Contract — 14 Checks"
 version: 1.0.0

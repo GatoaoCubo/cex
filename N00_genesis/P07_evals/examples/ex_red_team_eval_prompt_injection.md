@@ -1,6 +1,7 @@
 ---
 id: p07_redteam_prompt_injection
 kind: red_team_eval
+8f: F7_govern
 pillar: P07
 name: "Prompt Injection Red Team"
 description: "Adversarial evaluation for prompt injection attacks against organization chatbot v2"

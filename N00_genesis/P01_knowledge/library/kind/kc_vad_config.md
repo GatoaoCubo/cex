@@ -1,6 +1,7 @@
 ---
 id: kc_vad_config
 kind: knowledge_card
+8f: F3_inject
 title: Voice Activity Detection (VAD) Configuration
 version: 1.0.0
 quality: 8.8

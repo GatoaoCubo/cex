@@ -1,6 +1,7 @@
 ---
 id: kc_synthetic_data_config
 kind: knowledge_card
+8f: F3_inject
 title: Synthetic Data Config -- Training Data Generation Pipeline
 version: 1.0.0
 quality: null

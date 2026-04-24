@@ -1,6 +1,7 @@
 ---
 id: kc_competitive_intelligence_methods
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 nucleus: n01
 title: "Competitive Intelligence Methods: Framework and Best Practices"

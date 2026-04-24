@@ -1,6 +1,7 @@
 ---
 id: p05_output_deploy_checklist
 kind: output_validator
+8f: F6_produce
 pillar: P05
 title: Railway Deploy Checklist Template
 version: 1.0.0

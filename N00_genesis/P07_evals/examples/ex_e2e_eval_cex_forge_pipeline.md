@@ -1,6 +1,7 @@
 ---
 id: p07_e2e_cex_forge_pipeline
 kind: e2e_eval
+8f: F7_govern
 pillar: P07
 description: "End-to-end test of CEX artifact generation pipeline"
 pipeline: forge_validate_compile

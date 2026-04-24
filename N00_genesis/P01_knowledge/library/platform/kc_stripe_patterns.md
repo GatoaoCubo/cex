@@ -1,6 +1,7 @@
 ---
 id: kc_stripe_patterns
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 quality: 9.1
 tldr: "Design patterns for integrating Stripe, including environment modes, webhook handling, and subscription management."

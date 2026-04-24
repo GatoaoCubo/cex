@@ -1,6 +1,7 @@
 ---
 id: um_{{peer_id}}
 kind: user_model
+8f: F2_become
 pillar: P10
 title: "User Model: {{peer_id}}"
 peer_id: {{unique_peer_identifier}}

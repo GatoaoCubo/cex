@@ -1,6 +1,7 @@
 ---
 id: p03_ch_kc_to_notebooklm
 kind: chain
+8f: F6_produce
 pillar: P03
 title: "Chain: KC Selection + Formatting for NotebookLM Upload"
 version: 1.0.0

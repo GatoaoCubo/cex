@@ -1,6 +1,7 @@
 ---
 id: n00_fhir_agent_capability_manifest
 kind: knowledge_card
+8f: F3_inject
 pillar: P08
 nucleus: n00
 title: "FHIR Agent Capability -- Canonical Manifest"

@@ -1,6 +1,7 @@
 ---
 id: self_audit_n05_codex_2026_04_15
 kind: self_audit
+8f: F7_govern
 pillar: P07
 title: N05 Operations Self-Audit
 version: 1.0.0

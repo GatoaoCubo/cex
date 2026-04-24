@@ -5,6 +5,7 @@
 
 id: p07_sr_{{FRAMEWORK_SLUG}}
 kind: scoring_rubric
+8f: F7_govern
 pillar: P07
 title: "Scoring Rubric: {{FRAMEWORK_NAME}}"
 quality: {{QUALITY_8_TO_10}}

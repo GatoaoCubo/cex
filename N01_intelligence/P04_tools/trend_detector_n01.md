@@ -1,6 +1,7 @@
 ---
 id: trend_detector_n01
 kind: search_tool
+8f: F5_call
 pillar: P04
 nucleus: n01
 title: "N01 Market Trend Detection Tool"

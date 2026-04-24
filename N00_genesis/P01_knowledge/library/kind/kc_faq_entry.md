@@ -1,6 +1,7 @@
 ---
 id: p01_kc_faq_entry
 kind: knowledge_card
+8f: F3_inject
 kc_type: meta_kc
 pillar: P01
 title: "FAQ Entry Kind — Atomic Q&A for Support Deflection"

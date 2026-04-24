@@ -1,6 +1,7 @@
 ---
 id: kc_kind_gap_synthesis
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "CEX Kind Gap Synthesis: Taxonomy + Nucleus Coverage Audit"
 version: "1.0.0"

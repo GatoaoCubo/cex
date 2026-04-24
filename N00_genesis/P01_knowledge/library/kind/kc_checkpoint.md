@@ -1,6 +1,7 @@
 ---
 id: p01_kc_checkpoint
 kind: knowledge_card
+8f: F3_inject
 type: kind
 pillar: P12
 title: "Checkpoint — Deep Knowledge for checkpoint"

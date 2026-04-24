@@ -1,6 +1,7 @@
 ---
 id: p02_agent_admin_orchestrator
 kind: agent
+8f: F2_become
 pillar: P02
 title: Orchestrator Nucleus Agent
 version: 2.0.0

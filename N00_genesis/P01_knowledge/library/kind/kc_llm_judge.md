@@ -1,6 +1,7 @@
 ---
 id: p01_kc_llm_judge
 kind: knowledge_card
+8f: F3_inject
 type: kind
 pillar: P07
 title: "LLM Judge — Deep Knowledge for llm_judge"

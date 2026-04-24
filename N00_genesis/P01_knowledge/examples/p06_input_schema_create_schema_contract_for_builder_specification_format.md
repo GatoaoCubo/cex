@@ -122,6 +122,7 @@ examples:
     max_turns: 25
   - builder_id: "agent-builder"
     kind: "type_builder"
+8f: F2_become
     pillar: "P02"
     domain: "agent"
     identity: "Specialist in constructing autonomous agent definitions with identity, tools, and routing."

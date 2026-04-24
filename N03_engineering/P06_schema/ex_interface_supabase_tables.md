@@ -3,6 +3,7 @@ quality: 8.0
 quality: 7.5
 id: ex_interface_supabase_tables
 kind: interface
+8f: F1_constrain
 pillar: P06
 title: Supabase Tables Interface Contract
 version: 0.1.0

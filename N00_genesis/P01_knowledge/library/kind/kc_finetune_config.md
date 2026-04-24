@@ -1,6 +1,7 @@
 ---
 id: p01_kc_finetune_config
 kind: knowledge_card
+8f: F3_inject
 type: kind
 pillar: P02
 title: "finetune_config: Model Fine-Tuning Configuration"

@@ -1,6 +1,7 @@
 ---
 id: ex_dispatch_rule_research
 kind: dispatch_rule
+8f: F8_collaborate
 pillar: P12
 title: Research Task Routing
 target_nucleus: N01

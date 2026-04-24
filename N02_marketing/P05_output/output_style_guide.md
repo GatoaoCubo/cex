@@ -1,6 +1,7 @@
 ---
 id: p05_output_style_guide
 kind: output_validator
+8f: F6_produce
 pillar: P05
 title: "Design System Style Guide — Self-Contained HTML"
 version: 1.0.0

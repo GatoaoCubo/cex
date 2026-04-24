@@ -1,6 +1,7 @@
 ---
 id: kc_user_journey
 kind: knowledge_card
+8f: F3_inject
 title: User Journey Map
 version: 1.0.0
 quality: 8.8

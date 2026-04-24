@@ -6,6 +6,7 @@
 
 id: p06_is_{{SCOPE_SLUG}}
 kind: input_schema
+8f: F1_constrain
 pillar: P06
 title: "Input Schema: {{AGENT_OR_SKILL_NAME}}"
 version: 1.0.0

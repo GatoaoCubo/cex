@@ -1,6 +1,7 @@
 ---
 id: ex_mental_model_pipeline
 kind: mental_model
+8f: F4_reason
 pillar: P02
 title: "Pipeline Mental Model"
 tags: [mental_model, pipeline, compilation, phases, 8f]

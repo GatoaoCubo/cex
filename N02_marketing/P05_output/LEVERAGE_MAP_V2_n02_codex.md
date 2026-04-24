@@ -1,6 +1,7 @@
 ---
 id: n02_leverage_map_v2_codex_verification
 kind: verification_report
+8f: F7_govern
 pillar: P12
 title: "N02 Marketing - LEVERAGE_MAP_V2 Codex Verification"
 mission: LEVERAGE_MAP_V2

@@ -1,6 +1,7 @@
 ---
 id: atom_23_multiagent_protocols
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: Agent Communication Protocols and CEX Alignment Analysis
 author: CEX Technical Advisory Board

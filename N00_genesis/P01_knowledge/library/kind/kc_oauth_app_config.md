@@ -1,6 +1,7 @@
 ---
 id: kc_oauth_app_config
 kind: knowledge_card
+8f: F3_inject
 title: OAuth 2.0 Application Configuration for Partner Integrations
 version: 1.0.0
 quality: 8.9

@@ -1,6 +1,7 @@
 ---
 id: p02_agent_commercial_nucleus
 kind: agent
+8f: F2_become
 pillar: P02
 title: "Brand Architect & Revenue Engineer — N06 Nucleus Agent"
 version: 4.0.0

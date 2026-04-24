@@ -1,6 +1,7 @@
 ---  
 id: p02_agent_petshop_crm  
 kind: agent  
+8f: F2_become
 pillar: P02  
 title: Pet Shop CRM Agent  
 version: "1.0.0"  

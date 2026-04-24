@@ -1,6 +1,7 @@
 ---
 id: p04_fn_cf_elevenlabs_tts
 kind: function_def
+8f: F6_produce
 pillar: P04
 version: 1.0.0
 created: 2026-04-06

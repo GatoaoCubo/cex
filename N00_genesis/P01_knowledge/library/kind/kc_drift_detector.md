@@ -1,6 +1,7 @@
 ---
 id: p01_kc_drift_detector
 kind: knowledge_card
+8f: F3_inject
 type: kind
 pillar: P11
 title: "Drift Detector -- Deep Knowledge for drift_detector"

@@ -1,6 +1,7 @@
 ---
 id: n00_agents_md_manifest
 kind: knowledge_card
+8f: F3_inject
 pillar: P02
 nucleus: n00
 title: "Agents MD -- Canonical Manifest"

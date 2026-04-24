@@ -1,6 +1,7 @@
 ---
 id: p08_pat_construction_triad
 kind: pattern
+8f: F4_reason
 pillar: P08
 title: Construction Triad -- Three Universal Build Patterns
 version: 1.0.0

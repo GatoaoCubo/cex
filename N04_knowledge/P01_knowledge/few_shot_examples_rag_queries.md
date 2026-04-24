@@ -1,6 +1,7 @@
 ---
 id: few_shot_examples_rag_queries
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 nucleus: n04
 title: "Knowledge Card -- RAG Query Few-Shot Examples (N04)"

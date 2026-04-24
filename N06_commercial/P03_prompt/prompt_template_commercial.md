@@ -1,6 +1,7 @@
 ---
 id: p03_pt_commercial_nucleus
 kind: prompt_template
+8f: F6_produce
 pillar: P03
 title: Commercial Nucleus Prompt Templates
 version: 3.1.0

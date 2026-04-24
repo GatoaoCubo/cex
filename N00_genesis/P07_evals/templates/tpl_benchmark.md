@@ -5,6 +5,7 @@
 
 id: p07_bm_{{METRIC_SLUG}}
 kind: benchmark
+8f: F7_govern
 pillar: P07
 title: "Benchmark: {{METRIC_NAME}}"
 quality: {{QUALITY_8_TO_10}}

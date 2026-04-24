@@ -1,6 +1,7 @@
 ---
 id: n02_audit_voice_pipeline_builder
 kind: audit_report
+8f: F7_govern
 pillar: P07
 nucleus: n02
 mission: HYBRID_REVIEW

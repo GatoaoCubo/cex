@@ -1,6 +1,7 @@
 ---
 id: spec_03_token_budget
 kind: spec
+8f: F4_reason
 pillar: P01
 title: "SPEC_03: Token Budget Tracker → cex_token_budget"
 version: 1.0.0

@@ -1,6 +1,7 @@
 ---
 id: p01_kc_supabase_data_layer
 kind: knowledge_card
+8f: F3_inject
 type: kind
 pillar: P04
 title: "Supabase Data Layer — Deep Knowledge for supabase_data_layer"

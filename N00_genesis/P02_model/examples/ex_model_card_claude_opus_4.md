@@ -1,6 +1,7 @@
 ---
 id: p02_mc_claude_opus_4
 kind: model_card
+8f: F2_become
 pillar: P02
 model_name: claude-opus-4-6520
 provider: anthropic

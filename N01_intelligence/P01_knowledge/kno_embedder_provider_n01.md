@@ -1,6 +1,7 @@
 ---
 id: kno_embedder_provider_n01
 kind: embedder_provider
+8f: F3_inject
 pillar: P02
 nucleus: N01
 title: "N01 Embedder Provider"

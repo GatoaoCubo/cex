@@ -1,6 +1,7 @@
 ---
 id: p07_regcheck_latency_baseline
 kind: regression_check
+8f: F7_govern
 pillar: P07
 name: "Latency Regression Check"
 description: "Regression check comparing API response latency against v2.1 baseline with p50/p95/p99 thresholds"

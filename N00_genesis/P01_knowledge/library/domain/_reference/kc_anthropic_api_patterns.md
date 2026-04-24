@@ -1,6 +1,7 @@
 ---
 id: p01_kc_anthropic_api_patterns
 kind: knowledge_card
+8f: F3_inject
 type: domain
 pillar: P01
 title: 'Anthropic API Patterns: Tool Use, Computer Use, Prompt Caching, Server Tools'

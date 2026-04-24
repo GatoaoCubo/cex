@@ -1,6 +1,7 @@
 ---
 id: kc_self_improvement_loop
 kind: knowledge_card
+8f: F3_inject
 title: Self-Improvement Loop Mechanism
 version: 1.0.0
 quality: 8.5

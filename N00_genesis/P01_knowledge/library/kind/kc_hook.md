@@ -1,6 +1,7 @@
 ---
 id: p01_kc_hook
 kind: knowledge_card
+8f: F3_inject
 type: kind
 pillar: P04
 title: "Hook — Deep Knowledge for hook"

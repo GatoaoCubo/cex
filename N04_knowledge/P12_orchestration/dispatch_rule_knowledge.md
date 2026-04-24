@@ -2,6 +2,7 @@
 id: n04_dr_knowledge
 title: "Dispatch Rule Knowledge"
 kind: dispatch_rule
+8f: F8_collaborate
 pillar: P12_orchestration
 version: 3.0.0
 created: 2026-03-31

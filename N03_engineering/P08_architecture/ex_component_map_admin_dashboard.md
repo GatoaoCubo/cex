@@ -1,6 +1,7 @@
 ---
 id: ex_component_map_admin_dashboard
 kind: component_map
+8f: F4_reason
 pillar: P08
 title: Admin Dashboard Component Map
 version: 0.1.0

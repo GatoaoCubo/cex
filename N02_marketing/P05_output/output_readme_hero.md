@@ -1,6 +1,7 @@
 ---
 id: n02_readme_hero
 kind: output_template
+8f: F6_produce
 pillar: P05
 title: "CEX README Hero Section — Landing Copy"
 nucleus: N02

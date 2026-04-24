@@ -1,6 +1,7 @@
 ---
 id: p04_ct_compare_builders
 kind: cli_tool
+8f: F5_call
 pillar: P04
 title: "Compare Builders — 5-metric diff for original vs reconstructed"
 version: 1.0.0

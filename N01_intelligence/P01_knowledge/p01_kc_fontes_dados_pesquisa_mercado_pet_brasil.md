@@ -1,6 +1,7 @@
 ---
 id: p01_kc_fontes_dados_pesquisa_mercado_pet_brasil
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "Principais Fontes de Dados para Pesquisa de Mercado Pet no Brasil"
 version: "1.0.0"

@@ -1,6 +1,7 @@
 ---
 id: n01_dr_research_pipeline
 kind: dispatch_rule
+8f: F8_collaborate
 pillar: P12
 title: "Dispatch Rule — Research Pipeline"
 version: 1.0.0

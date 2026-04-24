@@ -1,6 +1,7 @@
 ---
 id: ex_audio_tool_narration
 kind: audio_tool
+8f: F5_call
 pillar: P04
 title: "Example Audio Tool: Narration"
 version: 1.0.0

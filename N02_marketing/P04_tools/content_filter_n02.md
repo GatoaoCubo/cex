@@ -1,6 +1,7 @@
 ---
 id: content_filter_n02
 kind: content_filter
+8f: F1_constrain
 pillar: P11
 nucleus: n02
 title: "Brand Voice Compliance Filter -- Content Safety and Quality Gate"

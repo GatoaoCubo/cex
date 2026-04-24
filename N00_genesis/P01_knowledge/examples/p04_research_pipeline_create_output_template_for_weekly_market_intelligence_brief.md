@@ -1,6 +1,7 @@
 ---
 id: p04_rp_weekly_market_intelligence_brief_output_template
 kind: research_pipeline
+8f: F5_call
 pillar: P04
 title: "Weekly Market Intelligence Brief — Output Template Pipeline"
 version: "1.0.0"

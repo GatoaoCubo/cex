@@ -1,6 +1,7 @@
 ---
 id: p01_faq_cex_common_questions
 kind: faq_entry
+8f: F3_inject
 pillar: P01
 title: "CEX Common Questions for New Contributors"
 version: "1.0.0"

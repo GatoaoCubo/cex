@@ -1,6 +1,7 @@
 ---
 id: p04_search_tool_NAME
 kind: search_tool
+8f: F5_call
 pillar: P04
 version: 1.0.0
 title: "Template - Search Tool"

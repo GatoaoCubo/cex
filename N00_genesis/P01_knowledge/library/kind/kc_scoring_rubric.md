@@ -1,6 +1,7 @@
 ---
 id: p01_kc_scoring_rubric
 kind: knowledge_card
+8f: F3_inject
 type: kind
 pillar: P07
 title: "Scoring Rubric — Deep Knowledge for scoring_rubric"

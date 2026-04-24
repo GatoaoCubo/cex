@@ -2,6 +2,7 @@
 id: p12_dr_content_monetization
 title: "Dispatch Rule Content Monetization"
 kind: dispatch_rule
+8f: F8_collaborate
 pillar: P12
 version: 1.0.0
 created: 2026-03-31

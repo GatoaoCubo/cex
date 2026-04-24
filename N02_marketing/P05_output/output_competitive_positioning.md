@@ -1,6 +1,7 @@
 ---
 id: n02_competitive_positioning
 kind: competitive_analysis
+8f: F4_reason
 pillar: P02
 title: "Analise de Posicionamento Competitivo CEX — 2026"
 quality: 9.0

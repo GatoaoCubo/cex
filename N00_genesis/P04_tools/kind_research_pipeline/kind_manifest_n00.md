@@ -1,6 +1,7 @@
 ---
 id: n00_research_pipeline_manifest
 kind: knowledge_card
+8f: F3_inject
 pillar: P04
 nucleus: n00
 title: "Research Pipeline -- Canonical Manifest"

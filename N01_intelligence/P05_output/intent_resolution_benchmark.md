@@ -1,6 +1,7 @@
 ---
 id: p01_kc_intent_resolution_benchmark
 kind: knowledge_card
+8f: F3_inject
 type: domain
 pillar: P01
 title: "Intent Resolution Benchmark: Confidence Scoring, Clarification Patterns, Query Decomposition + 50-Case Test Dataset"

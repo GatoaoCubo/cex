@@ -1,6 +1,7 @@
 ---
 id: kc_compliance_checklist
 kind: knowledge_card
+8f: F3_inject
 title: Compliance Checklist
 version: 1.0.0
 quality: 8.6

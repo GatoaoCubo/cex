@@ -1,6 +1,7 @@
 ---
 id: p12_mission_supabase_data_layer
 kind: dag
+8f: F8_collaborate
 pillar: P12
 title: "Mission: Supabase Data Layer — Universal Data Platform Builder"
 version: 1.0.0

@@ -1,6 +1,7 @@
 ---
 id: p02_fc_cex_model_fallback
 kind: fallback_chain
+8f: F8_collaborate
 pillar: P02
 title: Fallback Chain -- CEX Model Selection
 version: 1.0.0

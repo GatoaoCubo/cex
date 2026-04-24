@@ -1,6 +1,7 @@
 ---
 id: p01_kc_python_project_structure
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "Python Project Structure — pyproject.toml + Hatchling"
 version: 1.0.0

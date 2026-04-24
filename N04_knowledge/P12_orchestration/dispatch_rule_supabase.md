@@ -1,6 +1,7 @@
 ---
 id: p12_dispatch_rule_supabase
 kind: dispatch_rule
+8f: F8_collaborate
 pillar: P12
 title: "Dispatch Rule — Supabase Data Layer (N04)"
 version: 1.0.0

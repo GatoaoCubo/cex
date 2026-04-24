@@ -1,6 +1,7 @@
 ---
 id: n00_rag_source_manifest
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 nucleus: n00
 title: "RAG Source -- Canonical Manifest"

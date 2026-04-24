@@ -1,6 +1,7 @@
 ---
 id: hybrid_review3_n06
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "HYBRID_REVIEW3 Commercial Summary: Wave 2 ML Kinds (N06)"
 version: 1.0.0

@@ -1,6 +1,7 @@
 ---
 id: p01_kc_workflow_hooks_gsd
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "GSD Workflow Hooks — Advisory Enforcement for Claude Code Agents"
 version: 1.0.0

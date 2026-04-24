@@ -1,6 +1,7 @@
 ---
 id: kc_kind_dependency_graph
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 nucleus: n01
 title: "Kind Dependency Graph -- Cross-Kind Build Order for 293 Kinds"

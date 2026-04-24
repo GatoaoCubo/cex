@@ -6,6 +6,7 @@
 
 id: p01_kc_{{TOPIC_SLUG}}
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "{{KNOWLEDGE_CARD_TITLE}}"
 version: 1.0.0

@@ -1,6 +1,7 @@
 ---
 id: n00_revision_loop_policy_manifest
 kind: knowledge_card
+8f: F3_inject
 pillar: P11
 nucleus: n00
 title: "Revision Loop Policy -- Canonical Manifest"

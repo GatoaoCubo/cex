@@ -2,6 +2,7 @@
 id: p08_ac_railway_superintendent
 title: "Agent Card Operations"
 kind: agent_card
+8f: F2_become
 pillar: P08
 version: 4.0.0
 created: 2026-04-01

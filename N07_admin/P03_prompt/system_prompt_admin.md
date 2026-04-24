@@ -1,6 +1,7 @@
 ---
 id: p03_sp_admin_orchestrator
 kind: system_prompt
+8f: F2_become
 pillar: P03
 version: 2.0.0
 created: 2026-03-30

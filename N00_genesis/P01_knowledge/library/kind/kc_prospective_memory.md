@@ -1,6 +1,7 @@
 ---
 id: p01_kc_prospective_memory
 kind: knowledge_card
+8f: F3_inject
 type: kind
 pillar: P10
 title: "Prospective Memory -- Deep Knowledge for prospective_memory"

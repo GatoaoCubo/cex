@@ -1,6 +1,7 @@
 ---
 id: n05_readme_install
 kind: output_template
+8f: F6_produce
 pillar: P05
 quality: 9.0
 title: "Output Readme Install"

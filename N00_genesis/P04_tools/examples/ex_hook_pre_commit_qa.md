@@ -1,6 +1,7 @@
 ---
 id: p04_hook_pre_commit_qa
 kind: pre
+8f: F6_produce
 trigger_event: pre_commit
 script_path: records/core/python/quality_gate.py
 pillar: P04

@@ -1,6 +1,7 @@
 ---
 id: p01_kc_audio_tool
 kind: knowledge_card
+8f: F3_inject
 type: kind
 pillar: P04
 title: "Audio Tool — Deep Knowledge for audio_tool"

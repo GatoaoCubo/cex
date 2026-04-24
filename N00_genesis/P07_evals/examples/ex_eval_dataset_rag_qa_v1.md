@@ -1,6 +1,7 @@
 ---
 id: p07_dataset_rag_qa_v1
 kind: eval_dataset
+8f: F3_inject
 pillar: P07
 name: "RAG QA Dataset v1"
 description: "500-sample evaluation dataset for RAG question-answering over organization knowledge base"

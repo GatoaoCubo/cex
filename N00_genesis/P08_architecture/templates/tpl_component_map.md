@@ -1,6 +1,7 @@
 ---
 id: "p08_cmap_{{SCOPE_SLUG}}"
 kind: component_map
+8f: F4_reason
 pillar: P08
 version: 1.0.0
 title: Template - Component Map

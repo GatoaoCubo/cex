@@ -1,6 +1,7 @@
 ---
 id: p01_kc_lp09_config
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "P09 Config: Como Configura"
 version: 1.0.0

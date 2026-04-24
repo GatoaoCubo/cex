@@ -1,6 +1,7 @@
 ---
 id: p01_kc_cex_lp11_feedback
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "CEX LP11 Feedback — Continuous Improvement Loop for LLM Systems"
 version: 1.0.0

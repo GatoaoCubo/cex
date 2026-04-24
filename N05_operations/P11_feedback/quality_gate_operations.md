@@ -1,6 +1,7 @@
 ---
 id: p11_qg_railway_superintendent
 kind: quality_gate
+8f: F7_govern
 pillar: P11
 title: "Gate: Railway Backend Superintendent"
 version: 4.0.0

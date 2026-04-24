@@ -1,6 +1,7 @@
 ---
 id: landing_page_petshop_crm
 kind: landing_page
+8f: F6_produce
 pillar: P05
 title: PetShop CRM - Manage Your Pet Business
 version: 1.0.0

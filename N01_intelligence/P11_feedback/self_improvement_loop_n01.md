@@ -1,6 +1,7 @@
 ---
 id: self_improvement_loop_n01
 kind: self_improvement_loop
+8f: F7_govern
 pillar: P11
 nucleus: n01
 title: "N01 Autonomous Quality Evolution Protocol"

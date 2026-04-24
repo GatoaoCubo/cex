@@ -1,6 +1,7 @@
 ---
 id: p10_cp_n04_knowledge
 kind: consolidation_policy
+8f: F1_constrain
 pillar: P10
 nucleus: n04
 title: "Consolidation Policy -- N04 Memory Consolidation Rules"

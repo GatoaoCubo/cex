@@ -1,6 +1,7 @@
 ---
 id: p03_fse_schema_design
 kind: few_shot_example
+8f: F3_inject
 pillar: P03
 title: "Few-Shot Example -- P06 Schema Design via 8F"
 version: 1.0.0

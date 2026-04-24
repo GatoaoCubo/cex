@@ -1,6 +1,7 @@
 ---
 id: p01_gl_rag
 kind: glossary_entry
+8f: F3_inject
 pillar: P01
 title: "Retrieval-Augmented Generation (RAG)"
 version: 1.0.0

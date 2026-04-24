@@ -1,6 +1,7 @@
 ---
 id: n00_chunk_strategy_manifest
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 nucleus: n00
 title: "Chunk Strategy -- Canonical Manifest"

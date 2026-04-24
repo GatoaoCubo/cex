@@ -1,6 +1,7 @@
 ---
 id: p02_rt_SCOPE_SLUG
 kind: router
+8f: F8_collaborate
 pillar: P02
 version: 1.0.0
 title: "Template — Router"

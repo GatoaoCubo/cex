@@ -1,6 +1,7 @@
 ---
 id: p01_fse_meta_builder_recipe
 kind: few_shot_example
+8f: F3_inject
 pillar: P01
 title: Few-Shot Example -- The Meta-Builder Recipe
 version: 1.0.0

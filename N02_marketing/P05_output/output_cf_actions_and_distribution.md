@@ -1,6 +1,7 @@
 ---
 id: p05_out_cf_actions_and_distribution
 kind: output_template
+8f: F6_produce
 pillar: P05
 version: "1.0.0"
 created: "2026-04-06"

@@ -3,6 +3,7 @@ quality: 8.9
 quality: 8.2
 id: kc_lens_technical
 kind: knowledge_card
+8f: F3_inject
 kc_type: meta_kc
 pillar: P01
 nucleus: n04

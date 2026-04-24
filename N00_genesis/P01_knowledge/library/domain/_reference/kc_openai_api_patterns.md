@@ -1,6 +1,7 @@
 ---
 id: p01_kc_openai_api_patterns
 kind: knowledge_card
+8f: F3_inject
 type: domain
 pillar: P01
 title: 'OpenAI API Patterns: Function Calling, Structured Outputs, Assistants, Evals'

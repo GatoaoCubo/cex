@@ -1,6 +1,7 @@
 ---
 id: kc_incident_report
 kind: knowledge_card
+8f: F3_inject
 title: Incident Report
 version: 1.0.0
 quality: 8.7

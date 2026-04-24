@@ -1,6 +1,7 @@
 ---
 id: p01_kc_cex_tooling_master
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "CEX Tooling — 23 Python Tools Reference"
 version: 1.0.0

@@ -1,6 +1,7 @@
 ---
 id: p02_fb_model_cascade
 kind: fallback_chain
+8f: F8_collaborate
 pillar: P02
 title: "Model Cascade Fallback Chain"
 chain:

@@ -1,6 +1,7 @@
 ---
 id: ab_test_config_n02
 kind: ab_test_config
+8f: F1_constrain
 pillar: P11
 nucleus: n02
 title: "A/B Test Configuration -- Copy Variant Testing"

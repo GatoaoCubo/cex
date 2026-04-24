@@ -1,6 +1,7 @@
 ---
 id: ex-integration-guide-shopify
 kind: integration_guide
+8f: F6_produce
 pillar: P04
 title: Shopify Integration Guide
 version: 0.1.0

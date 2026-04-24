@@ -1,6 +1,7 @@
 ---
 id: agent_cex_engineering_nucleus
 kind: agent
+8f: F2_become
 title: "CEX Engineering Nucleus Agent"
 version: "1.0.0"
 pillar: P02

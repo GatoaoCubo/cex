@@ -1,6 +1,7 @@
 ---
 id: sales_playbook_n06
 kind: sales_playbook
+8f: F6_produce
 pillar: P03
 nucleus: n06
 title: "Sales Playbook -- Commercial Conversation Protocol"

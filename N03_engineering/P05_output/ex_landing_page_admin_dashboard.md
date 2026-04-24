@@ -1,6 +1,7 @@
 ---
 id: ex_landing_page_admin_dashboard
 kind: landing_page
+8f: F6_produce
 pillar: P05
 title: "Admin Dashboard SaaS - Unified Commerce Operations Hub"
 version: 1.1.0

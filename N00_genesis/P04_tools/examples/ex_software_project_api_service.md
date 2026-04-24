@@ -1,6 +1,7 @@
 ---
 id: p04_ex_software_project_api_service
 kind: example
+8f: F3_inject
 pillar: P04
 title: "Example — API Service (Product API)"
 version: 1.0.0

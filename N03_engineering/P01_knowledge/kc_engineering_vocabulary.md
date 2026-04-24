@@ -1,6 +1,7 @@
 ---
 id: p01_kc_engineering_vocabulary
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "Knowledge Card -- Engineering Vocabulary (N03 Controlled)"
 version: 1.0.0

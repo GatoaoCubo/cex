@@ -1,6 +1,7 @@
 ---
 id: p07_red_team_eval_operations
 kind: red_team_eval
+8f: F7_govern
 pillar: P07
 title: Operations Red Team Evaluation Suite
 version: 1.0.0

@@ -1,6 +1,7 @@
 ---
 id: cn_{{trigger}}
 kind: curation_nudge
+8f: F6_produce
 pillar: P11
 nucleus: "{{nucleus}}"
 title: "Curation Nudge: {{trigger}}"

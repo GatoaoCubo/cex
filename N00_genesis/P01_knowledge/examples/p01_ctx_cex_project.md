@@ -1,6 +1,7 @@
 ---
 id: p01_ctx_cex_project
 kind: context_doc
+8f: F3_inject
 pillar: P01
 version: "1.0.0"
 created: "2026-04-12"

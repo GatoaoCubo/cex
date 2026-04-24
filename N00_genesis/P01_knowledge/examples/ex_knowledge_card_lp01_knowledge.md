@@ -1,6 +1,7 @@
 ---
 id: p01_kc_lp01_knowledge
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "P01 Knowledge: O Que o Agente Sabe"
 version: 1.0.0

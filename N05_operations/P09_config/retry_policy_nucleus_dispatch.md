@@ -1,6 +1,7 @@
 ---
 id: p09_rtp_nucleus_dispatch
 kind: retry_policy
+8f: F8_collaborate
 pillar: P09
 version: "1.0.0"
 created: "2026-04-19"

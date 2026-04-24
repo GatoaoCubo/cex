@@ -1,6 +1,7 @@
 ---
 id: sch_validator_n03
 kind: validator
+8f: F7_govern
 pillar: P06
 nucleus: n03
 title: Foundation Artifact Validator

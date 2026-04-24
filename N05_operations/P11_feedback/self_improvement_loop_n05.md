@@ -1,6 +1,7 @@
 ---
 id: self_improvement_loop_n05
 kind: self_improvement_loop
+8f: F7_govern
 pillar: P11
 title: "N05 Quality Gate Evolution Loop"
 version: "1.0"

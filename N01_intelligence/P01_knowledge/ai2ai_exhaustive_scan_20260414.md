@@ -1,6 +1,7 @@
 ---
 id: ai2ai_exhaustive_scan_20260414
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "AI2AI Exhaustive Standardization Scan -- 9 Layers, April 2026"
 version: 1.0.0

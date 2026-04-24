@@ -1,6 +1,7 @@
 ---
 id: p01_kc_content_monetization
 kind: knowledge_card
+8f: F3_inject
 type: kind
 pillar: P11
 title: "Content Monetization — Deep Knowledge for content_monetization"

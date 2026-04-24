@@ -1,6 +1,7 @@
 ---
 id: self_audit_newpc
 kind: context_doc
+8f: F3_inject
 title: N04 Self-Audit -- New PC Setup (2026-04-13)
 nucleus: N04
 pillar: P01

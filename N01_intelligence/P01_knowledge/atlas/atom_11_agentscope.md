@@ -1,6 +1,7 @@
 ---
 id: atom_11_agentscope
 kind: knowledge_card
+8f: F3_inject
 title: "Atomic Research: AgentScope (Alibaba Tongyi Lab)"
 version: "1.0.0"
 quality: 8.9

@@ -1,6 +1,7 @@
 ---
 id: p03_sp_forge_agent
 kind: system_prompt
+8f: F2_become
 pillar: P03
 title: "System Prompt: CEX Forge Agent"
 target_agent: forge-agent

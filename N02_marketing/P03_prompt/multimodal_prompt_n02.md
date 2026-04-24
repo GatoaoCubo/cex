@@ -1,6 +1,7 @@
 ---
 id: multimodal_prompt_n02
 kind: multimodal_prompt
+8f: F6_produce
 pillar: P03
 nucleus: n02
 title: "Visual + Copy Coordination Prompt -- Image Brief + Caption Combo"

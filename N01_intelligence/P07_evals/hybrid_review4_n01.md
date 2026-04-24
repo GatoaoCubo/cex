@@ -1,6 +1,7 @@
 ---
 id: hybrid_review4_n01
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "HYBRID_REVIEW4 N01 Audit: trajectory_eval + self_improvement_loop + prompt_technique"
 version: "1.0.0"

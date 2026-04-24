@@ -1,6 +1,7 @@
 ---
 id: n00_ai_rmf_profile_manifest
 kind: knowledge_card
+8f: F3_inject
 pillar: P11
 nucleus: n00
 title: "AI RMF Profile -- Canonical Manifest"

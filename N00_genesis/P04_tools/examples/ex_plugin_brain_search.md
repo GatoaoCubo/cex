@@ -1,6 +1,7 @@
 ---
 id: p04_plug_brain_search
 kind: plugin
+8f: F5_call
 name: brain_search_plugin
 version: 1.0.0
 entrypoint: organization_brain.vector_search

@@ -1,6 +1,7 @@
 ---
 id: mem_memory_summary_n03
 kind: memory_summary
+8f: F3_inject
 pillar: P10
 nucleus: N03
 title: "N03 Memory Summary"

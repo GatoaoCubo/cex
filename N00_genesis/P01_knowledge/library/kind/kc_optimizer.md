@@ -1,6 +1,7 @@
 ---
 id: p01_kc_optimizer
 kind: knowledge_card
+8f: F3_inject
 type: kind
 pillar: P11
 title: "Optimizer — Deep Knowledge for optimizer"

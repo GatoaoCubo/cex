@@ -1,6 +1,7 @@
 ---
 id: p02_nd_n06.md
 kind: nucleus_def
+8f: F2_become
 pillar: P02
 nucleus_id: N06
 role: commercial

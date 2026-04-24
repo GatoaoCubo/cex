@@ -1,6 +1,7 @@
 ---
 id: per_{{name}}
 kind: personality
+8f: F2_become
 pillar: P02
 title: "Personality: {{name}}"
 name: {{name}}

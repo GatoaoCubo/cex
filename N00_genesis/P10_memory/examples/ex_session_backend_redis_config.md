@@ -1,6 +1,7 @@
 ---
 id: p10_sb_redis
 kind: session_backend
+8f: F5_call
 pillar: P10
 title: "Example — Redis Session Backend"
 version: 1.0.0

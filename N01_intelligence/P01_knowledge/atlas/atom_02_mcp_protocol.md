@@ -1,6 +1,7 @@
 ---
 id: n01_atom_02_mcp_protocol
 kind: knowledge_card
+8f: F3_inject
 type: research_atom
 pillar: P01
 title: "MCP (Model Context Protocol) -- Complete Term Registry & Specification Atlas"

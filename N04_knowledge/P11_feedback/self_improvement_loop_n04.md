@@ -1,6 +1,7 @@
 ---
 id: p11_sil_n04_knowledge
 kind: self_improvement_loop
+8f: F7_govern
 pillar: P11
 nucleus: n04
 title: "Self-Improvement Loop -- N04 Knowledge Evolution Protocol"

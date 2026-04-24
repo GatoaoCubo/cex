@@ -1,6 +1,7 @@
 ---
 id: p10_hos_html_output_visual_frontend
 kind: input_schema
+8f: F1_constrain
 pillar: P10
 title: HTML Output Schema for Visual Frontend Engineering
 version: 1.0.0

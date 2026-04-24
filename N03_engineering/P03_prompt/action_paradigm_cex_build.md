@@ -1,6 +1,7 @@
 ---
 id: p03_ap_cex_build
 kind: action_paradigm
+8f: F6_produce
 pillar: P03
 title: "Action Paradigm -- CEX Build: Input to Artifact via 8F"
 version: 1.0.0

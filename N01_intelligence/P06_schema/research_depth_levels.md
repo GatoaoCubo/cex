@@ -1,6 +1,7 @@
 ---
 id: p06_schema_research_depth
 kind: schema
+8f: F1_constrain
 pillar: P06
 title: "Research Depth Levels"
 version: 1.0.0

@@ -1,6 +1,7 @@
 ---
 id: p03_pv_pesquisa_system_v2
 kind: prompt_version
+8f: F6_produce
 pillar: P03
 title: "Pesquisa Agent System Prompt v2.0"
 version: 2.0.0

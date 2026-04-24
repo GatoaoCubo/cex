@@ -1,6 +1,7 @@
 ---
 id: ex_knowledge_card_rag_fundamentals
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: RAG Fundamentals
 tags: [rag, retrieval, embedding, search]

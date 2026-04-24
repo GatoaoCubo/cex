@@ -1,6 +1,7 @@
 ---
 id: mem_knowledge_index_n02
 kind: knowledge_index
+8f: F3_inject
 pillar: P10
 nucleus: N02
 title: "N02 Marketing Knowledge Index"

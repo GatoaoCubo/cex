@@ -1,6 +1,7 @@
 ---
 id: ex-interface-supabase-tables
 kind: interface
+8f: F1_constrain
 pillar: P06
 title: Supabase Tables Interface
 version: 0.1.0

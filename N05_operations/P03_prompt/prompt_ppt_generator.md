@@ -1,6 +1,7 @@
 ---
 id: prompt_ppt_generator
 kind: prompt_template
+8f: F6_produce
 pillar: P03
 title: "Marp Slide Deck Generator"
 version: 1.0.0

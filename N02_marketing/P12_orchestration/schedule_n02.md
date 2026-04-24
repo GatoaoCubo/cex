@@ -1,6 +1,7 @@
 ---
 id: schedule_n02
 kind: schedule
+8f: F8_collaborate
 nucleus: n02
 pillar: P12
 mirrors: N00_genesis/P12_orchestration/templates/tpl_schedule.md

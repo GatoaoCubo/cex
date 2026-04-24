@@ -1,6 +1,7 @@
 ---
 id: p01_kc_agentskills_spec
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "AgentSkills.io — Open Standard for Reusable AI Agent Skills"
 version: 1.0.0

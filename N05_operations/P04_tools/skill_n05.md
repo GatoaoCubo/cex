@@ -1,6 +1,7 @@
 ---
 id: skill_n05
 kind: skill
+8f: F5_call
 nucleus: n05
 pillar: P04
 mirrors: N00_genesis/P04_tools/layers/p04_skill_simplify.md

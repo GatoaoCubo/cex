@@ -1,6 +1,7 @@
 ---
 id: p01_kc_canva_connect_api
 kind: knowledge_card
+8f: F3_inject
 type: domain
 pillar: P01
 title: "Canva Connect API — Design Automation for Content Factory"

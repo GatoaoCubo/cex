@@ -1,6 +1,7 @@
 ---
 id: p10_out_research_brief
 kind: output
+8f: F6_produce
 pillar: P10
 title: "Output: Research Brief"
 version: 1.0.0

@@ -1,6 +1,7 @@
 ---
 id: p05_parser_brain_query
 kind: parser
+8f: F6_produce
 pillar: P05
 description: "Extracts ranked knowledge chunks from brain_query raw output"
 input_format: json

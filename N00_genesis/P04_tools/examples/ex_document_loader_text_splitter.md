@@ -1,6 +1,7 @@
 ---
 id: p04_comp_text_splitter
 kind: component
+8f: F8_collaborate
 pillar: P04
 description: "Pipeline component that splits documents into chunks for RAG indexing"
 version: 1.0.0

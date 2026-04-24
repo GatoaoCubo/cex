@@ -1,6 +1,7 @@
 ---
 id: con_path_config_n02
 kind: path_config
+8f: F1_constrain
 pillar: P09
 nucleus: n02
 title: Marketing Path Config

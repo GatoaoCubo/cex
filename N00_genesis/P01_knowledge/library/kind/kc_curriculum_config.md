@@ -1,6 +1,7 @@
 ---
 id: kc_curriculum_config
 kind: knowledge_card
+8f: F3_inject
 title: Curriculum Config -- Training Data Ordering and Adaptive Pacing
 version: 1.0.0
 quality: null

@@ -1,6 +1,7 @@
 ---
 id: golden_test_n01
 kind: golden_test
+8f: F7_govern
 pillar: P07
 nucleus: n01
 title: "N01 Research Pipeline Golden Tests"

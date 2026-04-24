@@ -1,6 +1,7 @@
 ---
 id: brand_voice_templates
 kind: prompt_template
+8f: F6_produce
 pillar: P03
 title: Brand Voice Templates — Tone & Messaging Calibration
 version: 1.0.0

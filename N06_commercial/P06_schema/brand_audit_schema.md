@@ -1,6 +1,7 @@
 ---
 id: n06_schema_brand_audit
 kind: constraint_spec
+8f: F1_constrain
 pillar: P06
 title: "Brand Audit Schema — 6-Dimension Consistency Scoring"
 version: 1.0.0

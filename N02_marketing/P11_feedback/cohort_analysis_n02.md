@@ -1,6 +1,7 @@
 ---
 id: cohort_analysis_n02
 kind: cohort_analysis
+8f: F4_reason
 pillar: P07
 nucleus: n02
 title: "Campaign Audience Cohort Analysis"

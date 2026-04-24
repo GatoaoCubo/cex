@@ -1,6 +1,7 @@
 ---
 id: p06_enum_llm_providers
 kind: enum_def
+8f: F1_constrain
 pillar: P06
 title: "LLM Providers Enum — Multi-Provider Routing Registry"
 version: 1.0.0

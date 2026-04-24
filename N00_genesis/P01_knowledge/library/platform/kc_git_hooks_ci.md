@@ -1,6 +1,7 @@
 ---
 id: p01_kc_git_hooks_ci
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "Git Hooks + Pre-Commit Validation"
 version: 1.0.0

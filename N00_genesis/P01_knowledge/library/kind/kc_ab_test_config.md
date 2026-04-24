@@ -1,6 +1,7 @@
 ---
 id: kc_ab_test_config
 kind: knowledge_card
+8f: F3_inject
 title: A/B Test Configuration for Conversion Optimization
 version: 1.0.0
 quality: 8.5

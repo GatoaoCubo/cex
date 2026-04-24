@@ -1,6 +1,7 @@
 ---
 id: p06_gram_json_object
 kind: grammar
+8f: F1_constrain
 pillar: P06
 description: "BNF grammar constraint for generating valid JSON objects during LLM decoding"
 version: 1.0.0

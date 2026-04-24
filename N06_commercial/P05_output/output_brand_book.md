@@ -1,6 +1,7 @@
 ---
 id: n06_output_brand_book
 kind: output_template
+8f: F6_produce
 pillar: P05
 title: "Brand Book Output — 32-Block Template"
 version: 1.0.0

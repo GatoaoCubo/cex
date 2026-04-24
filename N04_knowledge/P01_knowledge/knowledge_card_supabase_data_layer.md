@@ -1,6 +1,7 @@
 ---
 id: p01_kc_supabase_data_layer_n04
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "N04 Master KC — Supabase Data Layer Superintendence"
 version: 1.0.0

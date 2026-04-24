@@ -1,6 +1,7 @@
 ---
 id: pipeline_template_n05
 kind: pipeline_template
+8f: F8_collaborate
 nucleus: n05
 pillar: P12
 mirrors: N00_genesis/P12_orchestration/templates/tpl_pipeline_template.md

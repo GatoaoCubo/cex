@@ -3,6 +3,7 @@ quality: 8.9
 quality: 8.4
 id: p11_sp_cex_agent_output
 kind: safety_policy
+8f: F1_constrain
 pillar: P11
 title: "Safety Policy: CEX Agent Output Guardrails"
 version: "1.0.0"

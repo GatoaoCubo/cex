@@ -1,6 +1,7 @@
 ---
 id: p02_agent_brand_nucleus
 kind: agent
+8f: F2_become
 pillar: P02
 title: "Brand Nucleus Agent"
 version: "1.0.0"

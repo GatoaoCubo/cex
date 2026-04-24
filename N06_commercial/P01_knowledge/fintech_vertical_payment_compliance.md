@@ -1,6 +1,7 @@
 ---
 id: fintech_vertical_payment_compliance
 kind: fintech_vertical
+8f: F1_constrain
 pillar: P01
 nucleus: N06
 domain: fintech

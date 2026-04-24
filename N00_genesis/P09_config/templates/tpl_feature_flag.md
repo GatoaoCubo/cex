@@ -6,6 +6,7 @@
 
 id: p09_ff_{{FEATURE_SLUG}}
 kind: feature_flag
+8f: F1_constrain
 pillar: P09
 title: "Flag: {{FLAG_NAME}}"
 version: 1.0.0

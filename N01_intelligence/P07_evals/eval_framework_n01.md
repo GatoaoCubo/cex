@@ -1,6 +1,7 @@
 ---
 id: eval_framework_n01
 kind: eval_framework
+8f: F7_govern
 pillar: P07
 nucleus: n01
 title: "N01 Research Quality Evaluation Framework"

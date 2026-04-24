@@ -1,6 +1,7 @@
 ---
 id: email_sequence_template
 kind: prompt_template
+8f: F6_produce
 pillar: P05
 title: Email Sequence Templates — Marketing Campaigns
 version: 1.0.0

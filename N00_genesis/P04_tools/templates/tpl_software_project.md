@@ -1,6 +1,7 @@
 ---
 id: p04_tpl_software_project
 kind: template
+8f: F6_produce
 pillar: P04
 title: "Template — Software Project"
 version: 1.0.0

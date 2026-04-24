@@ -1,6 +1,7 @@
 ---
 id: mem_memory_summary_n05
 kind: memory_summary
+8f: F3_inject
 pillar: P10
 nucleus: N05
 title: "N05 Operations Memory Summary"

@@ -1,6 +1,7 @@
 ---
 id: kc_market_sizing_methodology
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 nucleus: n01
 title: "Market Sizing Methodology: TAM/SAM/SOM and Beyond"

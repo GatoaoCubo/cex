@@ -1,6 +1,7 @@
 ---
 id: ex-oauth-app-config-meli
 kind: oauth_app_config
+8f: F1_constrain
 pillar: P04
 title: Mercado Livre OAuth App Config
 version: 0.1.0

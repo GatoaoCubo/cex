@@ -1,6 +1,7 @@
 ---
 id: kc_team_charter
 kind: knowledge_card
+8f: F3_inject
 title: Team Charter
 version: 1.0.0
 quality: 8.9

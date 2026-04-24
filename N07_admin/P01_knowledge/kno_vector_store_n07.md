@@ -34,6 +34,7 @@ metadata_schema:
   wave: integer
   timestamp: string
   kind: string
+8f: F1_constrain
   quality_score: float
 persistence: manual
 namespace_strategy: "index_per_document_type"

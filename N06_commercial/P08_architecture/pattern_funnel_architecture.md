@@ -1,6 +1,7 @@
 ---
 id: p08_pat_funnel_architecture
 kind: pattern
+8f: F4_reason
 pillar: P08
 title: "Pattern — Conversion Funnel Architecture"
 nucleus: N06

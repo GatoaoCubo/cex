@@ -1,6 +1,7 @@
 ---
 id: hybrid_review6_n06
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "HYBRID_REVIEW6 N06 Audit: healthcare_vertical + fintech_vertical + legal_vertical"
 version: "1.0.0"

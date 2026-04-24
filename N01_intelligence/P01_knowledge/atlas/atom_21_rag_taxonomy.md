@@ -1,6 +1,7 @@
 ---
 id: atom_21_rag_taxonomy
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 quality: 8.8
 title: "RAG Taxonomy Surveys"

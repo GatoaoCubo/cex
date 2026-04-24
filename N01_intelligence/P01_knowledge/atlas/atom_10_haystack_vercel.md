@@ -1,6 +1,7 @@
 ---
 id: atom_10_haystack_vercel
 kind: knowledge_card
+8f: F3_inject
 title: "Atom 10: Haystack (deepset) + Vercel AI SDK -- Full Type Registry & CEX Mapping"
 version: 2.0.0
 date: 2026-04-13

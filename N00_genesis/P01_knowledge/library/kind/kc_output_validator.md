@@ -1,6 +1,7 @@
 ---
 id: p01_kc_output_validator
 kind: knowledge_card
+8f: F3_inject
 type: kind
 pillar: P01
 title: "Output Validator — Deep Knowledge for output_validator"

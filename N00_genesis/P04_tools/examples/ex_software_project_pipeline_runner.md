@@ -1,6 +1,7 @@
 ---
 id: p04_ex_software_project_pipeline_runner
 kind: example
+8f: F3_inject
 pillar: P04
 title: "Example — Pipeline Runner (Research Pipeline)"
 version: 1.0.0

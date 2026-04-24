@@ -1,6 +1,7 @@
 ---
 id: p01_kc_experiment_config
 kind: knowledge_card
+8f: F3_inject
 type: kind
 pillar: P09
 title: "experiment_config: A/B Testing and Prompt Experimentation"

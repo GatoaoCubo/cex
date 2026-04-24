@@ -1,6 +1,7 @@
 ---
 id: api_reference_stripe
 kind: api_reference
+8f: F5_call
 pillar: P06
 nucleus: n06
 title: "API Reference -- Stripe Payment Integration (N06 Commercial)"

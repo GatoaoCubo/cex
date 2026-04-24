@@ -1,6 +1,7 @@
 ---
 id: p01_retr_n07
 kind: retriever_config
+8f: F3_inject
 pillar: P01
 nucleus: N07
 title: "N07 Orchestrator Retriever Config"

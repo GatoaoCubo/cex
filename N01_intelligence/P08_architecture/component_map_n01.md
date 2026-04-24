@@ -1,6 +1,7 @@
 ---
 id: component_map_n01
 kind: component_map
+8f: F4_reason
 pillar: P08
 nucleus: n01
 title: "N01 Intelligence -- Component Map"

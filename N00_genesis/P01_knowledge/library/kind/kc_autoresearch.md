@@ -3,6 +3,7 @@ quality: 9.1
 quality: 8.3
 id: p01_kc_autoresearch
 kind: knowledge_card
+8f: F3_inject
 type: domain
 pillar: P01
 title: "Autoresearch -- Autonomous Experiment Loop for Artifact Evolution"

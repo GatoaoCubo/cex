@@ -1,6 +1,7 @@
 ---
 id: p04_ct_cex_forge
 kind: cli_tool
+8f: F5_call
 pillar: P04
 title: "CEX Forge — Universal prompt generator for CEX artifacts"
 version: 1.0.0

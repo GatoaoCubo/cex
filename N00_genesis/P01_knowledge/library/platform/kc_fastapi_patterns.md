@@ -1,6 +1,7 @@
 ---
 id: p01_kc_fastapi_patterns
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "FastAPI Patterns — Routers, Middleware, Auth, Lifecycle"
 version: 1.0.0

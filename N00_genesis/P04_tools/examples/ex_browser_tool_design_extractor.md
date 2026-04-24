@@ -5,6 +5,7 @@ description: Extrair design tokens e Tailwind configs de qualquer website URL
 version: 1.0.0
 pillar: P04
 kind: browser_tool
+8f: F5_call
 created: 2026-03-22
 updated: 2026-03-22
 author: builder_agent

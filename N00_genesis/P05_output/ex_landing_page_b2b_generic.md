@@ -1,6 +1,7 @@
 ---
 id: ex_landing_page_b2b_generic
 kind: landing_page
+8f: F6_produce
 pillar: P05
 version: 1.0.0
 title: "B2B Landing Page Template -- Partner/Wholesale Channel"

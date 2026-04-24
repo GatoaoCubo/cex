@@ -1,6 +1,7 @@
 ---
 id: user_model_n04
 kind: user_model
+8f: F2_become
 nucleus: n04
 pillar: P10
 mirrors: N00_genesis/P10_memory/tpl_user_model.md

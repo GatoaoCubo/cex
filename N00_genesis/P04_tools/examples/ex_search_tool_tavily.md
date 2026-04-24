@@ -1,6 +1,7 @@
 ---
 id: p04_search_tavily
 kind: search_tool
+8f: F5_call
 pillar: P04
 version: 1.0.0
 created: 2026-03-28

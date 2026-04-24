@@ -1,6 +1,7 @@
 ---
 id: kc_roi_calculator
 kind: knowledge_card
+8f: F3_inject
 title: ROI Calculator Specification
 version: 1.0.0
 quality: 8.8

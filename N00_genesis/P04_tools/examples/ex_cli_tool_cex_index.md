@@ -1,6 +1,7 @@
 ---
 id: p04_ct_cex_index
 kind: cli_tool
+8f: F5_call
 pillar: P04
 title: "CEX Index — SQLite indexer with wikilinks and frontmatter"
 version: 1.0.0

@@ -1,6 +1,7 @@
 ---
 id: p01_kc_meta_factory
 kind: knowledge_card
+8f: F3_inject
 type: domain
 pillar: P01
 title: "Meta-Factory — Builders that Build Builders"

@@ -1,6 +1,7 @@
 ---
 id: p06_schema_kc_structure
 kind: schema
+8f: F1_constrain
 pillar: P06
 title: "KC Structure Contract"
 version: 1.0.0

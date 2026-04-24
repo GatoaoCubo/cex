@@ -1,6 +1,7 @@
 ---
 id: p12_ct_competitive_intelligence.md
 kind: crew_template
+8f: F2_become
 pillar: P12
 llm_function: CALL
 crew_name: competitive_intelligence

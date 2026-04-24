@@ -1,6 +1,7 @@
 ---
 id: p07_em_n04_knowledge
 kind: eval_metric
+8f: F7_govern
 pillar: P07
 nucleus: n04
 title: "Eval Metric -- N04 Retrieval Quality Metrics"

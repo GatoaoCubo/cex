@@ -1,6 +1,7 @@
 ---
 id: p01_kc_lp11_feedback
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "P11 Feedback: Como Melhora"
 version: 1.0.0

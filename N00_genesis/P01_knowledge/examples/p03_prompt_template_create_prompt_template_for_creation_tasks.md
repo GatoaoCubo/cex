@@ -1,6 +1,7 @@
 ---
 id: p03_pt_creation_task
 kind: prompt_template
+8f: F6_produce
 pillar: P03
 title: "Creation Task Prompt Template"
 version: "1.0.0"

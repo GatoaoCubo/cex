@@ -1,6 +1,7 @@
 ---
 id: kc_memory_architecture
 kind: knowledge_card
+8f: F3_inject
 title: Memory Architecture Design
 version: 1.0.0
 quality: 8.8

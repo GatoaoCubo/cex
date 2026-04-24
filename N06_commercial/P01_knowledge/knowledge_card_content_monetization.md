@@ -1,6 +1,7 @@
 ---
 id: n06_kc_content_monetization
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: Content Monetization — Billing, Credits, Courses & Checkout
 version: 1.0.0

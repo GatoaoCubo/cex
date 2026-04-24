@@ -1,6 +1,7 @@
 ---
 id: p01_kc_prompt_engineering_best_practices
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "Prompt Engineering Best Practices for LLM Optimization"
 version: "1.0.0"

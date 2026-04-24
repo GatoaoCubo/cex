@@ -1,6 +1,7 @@
 ---
 id: p01_kc_artifact_quality_evaluation_methods
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "Artifact Quality Evaluation Methods"
 version: "1.0.0"

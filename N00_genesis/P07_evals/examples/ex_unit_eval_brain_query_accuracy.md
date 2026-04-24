@@ -1,6 +1,7 @@
 ---
 id: p07_ue_brain_query_accuracy
 kind: unit_eval
+8f: F7_govern
 pillar: P07
 description: "Unit test for brain_query search accuracy across known queries"
 target: brain_query

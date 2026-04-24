@@ -2,6 +2,7 @@
 id: p12_dr_visual_frontend_marketing
 title: "Dispatch Rule Marketing"
 kind: dispatch_rule
+8f: F8_collaborate
 pillar: P12
 version: 4.0.0
 created: 2026-03-30

@@ -1,6 +1,7 @@
 ---
 id: p10_out_source_dossier
 kind: output
+8f: F6_produce
 pillar: P10
 title: "Output: Source Dossier"
 version: 1.0.0

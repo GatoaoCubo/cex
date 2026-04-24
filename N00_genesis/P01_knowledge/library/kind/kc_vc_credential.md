@@ -1,6 +1,7 @@
 ---
 id: kc_vc_credential
 kind: knowledge_card
+8f: F3_inject
 title: W3C Verifiable Credential 2.0 for AI Agents
 version: 1.0.0
 quality: 8.5

@@ -1,6 +1,7 @@
 ---
 id: p01_kc_tool_use
 kind: knowledge_card
+8f: F3_inject
 type: domain
 pillar: P01
 title: "Tool Use / Function Calling"

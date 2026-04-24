@@ -1,6 +1,7 @@
 ---
 id: reasoning_strategy_n01
 kind: reasoning_strategy
+8f: F4_reason
 pillar: P03
 nucleus: n01
 title: "N01 Structured Analytical Reasoning Protocol"

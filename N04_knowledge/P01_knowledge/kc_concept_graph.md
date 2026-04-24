@@ -3,6 +3,7 @@ quality: 8.8
 quality: 8.0
 id: kc_concept_graph
 kind: knowledge_card
+8f: F3_inject
 kc_type: meta_kc
 pillar: P01
 nucleus: n04

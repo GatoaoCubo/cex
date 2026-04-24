@@ -1,6 +1,7 @@
 ---
 id: p03_sp_builder_nucleus
 kind: system_prompt
+8f: F2_become
 pillar: P03
 title: System Prompt -- Builder Nucleus
 version: 2.0.0

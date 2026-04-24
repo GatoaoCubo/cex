@@ -1,6 +1,7 @@
 ---
 id: curation_nudge_n04
 kind: curation_nudge
+8f: F6_produce
 nucleus: n04
 pillar: P11
 mirrors: N00_genesis/compiled/tpl_curation_nudge.yaml

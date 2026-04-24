@@ -1,6 +1,7 @@
 ---
 id: p01_kc_input_schema
 kind: knowledge_card
+8f: F3_inject
 type: kind
 pillar: P06
 title: "Input Schema — Deep Knowledge for input_schema"

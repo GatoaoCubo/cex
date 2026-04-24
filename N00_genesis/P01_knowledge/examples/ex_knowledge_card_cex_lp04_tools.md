@@ -1,6 +1,7 @@
 ---
 id: p01_kc_cex_lp04_tools
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "CEX LP04 Tools — O Que a LLM Usa (10 Tipos de Ferramenta)"
 version: 1.0.0

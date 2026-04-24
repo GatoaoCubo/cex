@@ -1,6 +1,7 @@
 ---
 id: p10_ma_n04_knowledge
 kind: memory_architecture
+8f: F3_inject
 pillar: P10
 nucleus: n04
 title: "Memory Architecture -- N04 Knowledge Nucleus"

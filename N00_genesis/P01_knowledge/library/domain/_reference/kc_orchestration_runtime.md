@@ -1,6 +1,7 @@
 ---
 id: p01_kc_orchestration_runtime
 kind: knowledge_card
+8f: F3_inject
 type: domain
 pillar: P01
 title: "Orchestration Runtime — DAGs, Spawn Configs, Schedules, RAG Sources"

@@ -1,6 +1,7 @@
 ---
 id: p06_is_builder_nucleus
 kind: input_schema
+8f: F1_constrain
 pillar: P06
 title: Input Schema -- Builder Nucleus
 version: 1.0.0

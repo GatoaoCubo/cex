@@ -1,6 +1,7 @@
 ---
 id: kc_multimodal_prompt
 kind: knowledge_card
+8f: F3_inject
 type: kind
 pillar: P03
 title: "Multimodal Prompt -- Deep Knowledge for multimodal_prompt"

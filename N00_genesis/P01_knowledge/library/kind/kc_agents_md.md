@@ -1,6 +1,7 @@
 ---
 id: kc_agents_md
 kind: knowledge_card
+8f: F3_inject
 title: Agents.md Project-Root Manifest
 version: 1.0.0
 quality: 8.5

@@ -1,6 +1,7 @@
 ---
 id: p01_kc_dataset_card
 kind: knowledge_card
+8f: F3_inject
 type: kind
 pillar: P01
 title: "Dataset Card -- Deep Knowledge for dataset_card"

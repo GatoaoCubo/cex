@@ -1,6 +1,7 @@
 ---
 id: copy_optimization_insights
 kind: learning_record
+8f: F7_govern
 pillar: P10
 title: Copy Optimization Insights & Learning Records
 version: 1.0.0

@@ -1,6 +1,7 @@
 ---
 id: p02_fb_CHAIN_SLUG
 kind: fallback_chain
+8f: F8_collaborate
 pillar: P02
 version: 1.0.0
 title: "Template — Fallback Chain"

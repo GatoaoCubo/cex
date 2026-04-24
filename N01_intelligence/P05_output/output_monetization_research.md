@@ -1,6 +1,7 @@
 ---
 id: n01_output_monetization_research
 kind: output_template
+8f: F6_produce
 pillar: P05
 domain: research
 quality: 9.0

@@ -1,6 +1,7 @@
 ---
 id: openclaude_patterns_index
 kind: context_doc
+8f: F3_inject
 pillar: P01
 title: "OpenClaude Pattern Extraction — CEX Runtime Equivalents"
 version: 1.0.0

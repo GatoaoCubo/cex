@@ -1,6 +1,7 @@
 ---
 id: p07_sr_knowledge_eval
 kind: scoring_rubric
+8f: F7_govern
 pillar: P07
 title: "Rubric: Knowledge Evaluation"
 version: "1.0.0"

@@ -1,6 +1,7 @@
 ---
 id: ex_multi_modal_config_photo_video_narration
 kind: multi_modal_config
+8f: F6_produce
 pillar: P03
 title: "Example Multi Modal Config: Photo Video Narration"
 version: 1.0.0

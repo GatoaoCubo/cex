@@ -1,6 +1,7 @@
 ---
 id: con_permission_n04
 kind: permission
+8f: F1_constrain
 pillar: P09
 nucleus: n04
 title: Knowledge Permission Matrix

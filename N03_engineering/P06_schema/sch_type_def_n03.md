@@ -1,6 +1,7 @@
 ---
 id: sch_type_def_n03
 kind: type_def
+8f: F1_constrain
 pillar: P06
 nucleus: n03
 title: Engineering Artifact Type

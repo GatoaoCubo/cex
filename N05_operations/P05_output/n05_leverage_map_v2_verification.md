@@ -1,6 +1,7 @@
 ---
 id: n05_leverage_map_v2_verification
 kind: context_doc
+8f: F3_inject
 title: N05 Operations - LEVERAGE_MAP_V2 Verification
 nucleus: N05
 pillar: P01

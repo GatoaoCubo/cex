@@ -1,6 +1,7 @@
 ---
 id: p01_report_intent_resolution
 kind: knowledge_card
+8f: F3_inject
 type: domain
 pillar: P01
 title: "Intent Resolution in Agent Frameworks -- Cross-Industry Pattern Survey"

@@ -1,6 +1,7 @@
 ---
 id: p04_tool_software_project
 kind: cli_tool
+8f: F5_call
 pillar: P04
 title: "Software Project Tool — N03 CLI"
 version: 1.0.0

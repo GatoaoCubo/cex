@@ -1,6 +1,7 @@
 ---
 id: multi_model_orchestration
 kind: knowledge_card
+8f: F3_inject
 title: Multi-Model Orchestration Patterns for LLM Agents
 version: 1.0.0
 quality: 9.0

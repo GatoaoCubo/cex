@@ -1,6 +1,7 @@
 ---
 id: p01_fse_builder_golden
 kind: few_shot_example
+8f: F3_inject
 pillar: P01
 title: Few-Shot Examples -- Golden Artifacts
 version: 1.0.0

@@ -1,6 +1,7 @@
 ---
 id: n00_ab_test_config_manifest
 kind: knowledge_card
+8f: F3_inject
 pillar: P11
 nucleus: n00
 title: "A/B Test Config -- Canonical Manifest"

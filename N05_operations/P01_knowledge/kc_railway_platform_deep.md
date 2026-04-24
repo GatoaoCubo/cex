@@ -1,6 +1,7 @@
 ---
 id: KC_N05_RAILWAY_PLATFORM_DEEP
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: Railway Platform - Architecture, Deploy & Operations
 domain: N05_operations

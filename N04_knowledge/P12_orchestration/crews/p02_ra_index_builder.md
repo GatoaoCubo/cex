@@ -1,6 +1,7 @@
 ---
 id: p02_ra_index_builder.md
 kind: role_assignment
+8f: F2_become
 pillar: P02
 llm_function: CONSTRAIN
 role_name: index_builder

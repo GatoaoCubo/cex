@@ -1,6 +1,7 @@
 ---
 id: p08_diag_agent_group_grid
 kind: diagram
+8f: F4_reason
 pillar: P08
 description: "Architecture diagram of orchestrator agent_group grid dispatch"
 format: ascii

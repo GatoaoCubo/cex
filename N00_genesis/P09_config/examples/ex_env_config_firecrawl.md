@@ -1,6 +1,7 @@
 ---
 id: p09_env_firecrawl
 kind: env_config
+8f: F1_constrain
 pillar: P09
 title: "Env: FIRECRAWL_API_KEY"
 version: 1.0.0

@@ -1,6 +1,7 @@
 ---
 id: p10_out_benchmark_report
 kind: output
+8f: F6_produce
 pillar: P10
 title: "Output: Benchmark Report"
 version: 1.0.0

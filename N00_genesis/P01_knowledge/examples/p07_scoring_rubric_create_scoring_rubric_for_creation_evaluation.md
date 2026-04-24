@@ -1,6 +1,7 @@
 ---
 id: p07_sr_creation_evaluation
 kind: scoring_rubric
+8f: F7_govern
 pillar: P07
 title: "Rubric: Creation Evaluation"
 version: "1.0.0"

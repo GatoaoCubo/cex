@@ -1,6 +1,7 @@
 ---
 id: p07_rt_8f_govern
 kind: reasoning_trace
+8f: F4_reason
 pillar: P07
 title: "Reasoning Trace -- F7 GOVERN Live Example"
 version: 1.0.0

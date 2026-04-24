@@ -5,6 +5,7 @@
 
 id: p09_rr_{{RULE_SLUG}}
 kind: runtime_rule
+8f: F1_constrain
 pillar: P09
 title: "Runtime Rule: {{RULE_NAME}}"
 quality: {{QUALITY_8_TO_10}}

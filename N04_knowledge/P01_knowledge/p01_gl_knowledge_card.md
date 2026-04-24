@@ -1,6 +1,7 @@
 ---
 id: p01_gl_knowledge_card
 kind: glossary_entry
+8f: F3_inject
 pillar: P01
 title: "Knowledge Card (KC)"
 version: 1.0.0

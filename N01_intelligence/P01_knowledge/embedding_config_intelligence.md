@@ -1,6 +1,7 @@
 ---
 id: embedding_config_intelligence
 kind: embedding_config
+8f: F3_inject
 pillar: P01
 title: Embedding Configuration for Intelligence
 tags: [intelligence, embedding, configuration]

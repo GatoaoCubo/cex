@@ -1,6 +1,7 @@
 ---
 id: self_audit_n03_builder_20260408
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "N03 Builder Self-Audit -- Agent Definitions & Builder Capabilities"
 version: 1.0.0

@@ -1,6 +1,7 @@
 ---
 id: ex-integration-guide-bling
 kind: integration_guide
+8f: F6_produce
 pillar: P04
 title: Bling ERP Integration Guide
 version: 0.1.0

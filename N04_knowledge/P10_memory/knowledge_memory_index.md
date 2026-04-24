@@ -1,6 +1,7 @@
 ---
 id: n04_knowledge_memory_index
 kind: memory_summary
+8f: F3_inject
 nucleus: N04
 pillar: P10
 domain: knowledge_management

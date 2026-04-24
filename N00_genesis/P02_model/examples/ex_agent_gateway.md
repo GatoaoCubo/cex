@@ -1,6 +1,7 @@
 ---
 id: p02_agent_gateway
 kind: agent
+8f: F2_become
 pillar: P02
 title: Gateway Agent - Entry Point para Usuarios
 version: 1.0.0

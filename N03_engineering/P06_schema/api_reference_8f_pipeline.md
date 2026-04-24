@@ -1,6 +1,7 @@
 ---
 id: p06_ar_8f_pipeline
 kind: api_reference
+8f: F5_call
 pillar: P06
 title: "API Reference -- 8F Pipeline"
 version: 1.0.0

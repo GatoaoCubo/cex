@@ -1,6 +1,7 @@
 ---
 id: p01_kc_component_map
 kind: knowledge_card
+8f: F3_inject
 type: kind
 pillar: P08
 title: "Component Map — Deep Knowledge for component_map"

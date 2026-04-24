@@ -6,6 +6,7 @@
 
 id: p09_env_{{SCOPE}}
 kind: env_config
+8f: F1_constrain
 pillar: P09
 title: "Env: {{VAR_NAME}}"
 version: 1.0.0

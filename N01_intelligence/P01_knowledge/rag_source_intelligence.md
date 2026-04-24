@@ -1,6 +1,7 @@
 ---
 id: n01_rs_intelligence_sources
 kind: rag_source
+8f: F3_inject
 pillar: P01
 title: "RAG Source Configuration for N01 Intelligence Nucleus"
 version: "1.0.0"

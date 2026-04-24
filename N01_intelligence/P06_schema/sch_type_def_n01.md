@@ -1,6 +1,7 @@
 ---
 id: sch_type_def_n01
 kind: type_def
+8f: F1_constrain
 pillar: P06
 nucleus: n01
 title: Competitive Insight Type

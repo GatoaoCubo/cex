@@ -1,6 +1,7 @@
 ---
 id: kc_referral_program
 kind: knowledge_card
+8f: F3_inject
 title: Referral Program Design
 version: 1.0.0
 quality: 8.7

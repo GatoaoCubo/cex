@@ -1,6 +1,7 @@
 ---
 id: ab_testing_framework
 kind: validation_schema
+8f: F1_constrain
 pillar: P09
 title: A/B Testing Framework for Marketing Copy
 version: 1.0.0

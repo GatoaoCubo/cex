@@ -3,6 +3,7 @@ quality: 8.6
 quality: 8.3
 id: p06_oas_cex_sdk
 kind: openapi_spec
+8f: F5_call
 pillar: P06
 version: "1.0.0"
 created: "2026-04-19"

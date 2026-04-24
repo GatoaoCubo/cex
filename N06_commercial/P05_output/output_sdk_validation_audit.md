@@ -1,6 +1,7 @@
 ---
 id: n06_sdk_validation_audit
 kind: context_doc
+8f: F3_inject
 pillar: P09
 title: "N06 SDK Validation Audit — 2026-04-06"
 version: 1.0.0

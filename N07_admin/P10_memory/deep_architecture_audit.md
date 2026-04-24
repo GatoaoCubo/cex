@@ -1,6 +1,7 @@
 ---
 id: n07_memory_deep_audit
 kind: memory-summary
+8f: F3_inject
 nucleus: N07
 pillar: P10
 title: "Deep Architecture Audit: CEX Internals vs Industry Reality"

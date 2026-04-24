@@ -1,6 +1,7 @@
 ---
 id: p02_ap_n04_knowledge
 kind: agent_profile
+8f: F2_become
 pillar: P02
 nucleus: n04
 title: "Agent Profile -- N04 Knowledge Nucleus"

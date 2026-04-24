@@ -1,6 +1,7 @@
 ---
 id: p07_benchmark_api_latency
 kind: benchmark
+8f: F7_govern
 pillar: P07
 title: API Latency Benchmark Suite
 version: 1.0.0

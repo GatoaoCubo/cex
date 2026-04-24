@@ -1,6 +1,7 @@
 ---
 id: sch_type_def_n06
 kind: type_def
+8f: F1_constrain
 pillar: P06
 nucleus: n06
 title: Commercial Event Type

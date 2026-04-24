@@ -1,6 +1,7 @@
 ---
 id: p10_mt_n04_knowledge
 kind: memory_type
+8f: F3_inject
 pillar: P02
 nucleus: n04
 title: "Memory Type -- N04 Memory Classification System"

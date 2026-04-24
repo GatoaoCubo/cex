@@ -1,6 +1,7 @@
 ---
 id: report_bootstrap_preflight
 kind: benchmark
+8f: F7_govern
 title: "Bootstrap Pre-Flight Validation Report"
 version: 1.0.0
 quality: 8.9

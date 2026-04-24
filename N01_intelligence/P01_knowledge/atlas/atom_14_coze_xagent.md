@@ -1,6 +1,7 @@
 ---
 id: atom_14_coze_xagent
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 quality: 8.9
 density_score: 0.93

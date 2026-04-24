@@ -1,6 +1,7 @@
 ---
 id: p01_kc_instruction
 kind: knowledge_card
+8f: F3_inject
 type: kind
 pillar: P03
 title: "Instruction — Deep Knowledge for instruction"

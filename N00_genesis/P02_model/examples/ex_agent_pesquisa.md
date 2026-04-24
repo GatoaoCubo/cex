@@ -1,6 +1,7 @@
 ---
 id: p02_agent_pesquisa
 kind: agent
+8f: F2_become
 pillar: P02
 title: Agente de Pesquisa de Mercado
 version: 1.0.0

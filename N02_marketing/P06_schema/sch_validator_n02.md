@@ -1,6 +1,7 @@
 ---
 id: sch_validator_n02
 kind: validator
+8f: F7_govern
 pillar: P06
 nucleus: n02
 title: Seductive Copy Validator

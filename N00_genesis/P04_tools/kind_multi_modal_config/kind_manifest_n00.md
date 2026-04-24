@@ -1,6 +1,7 @@
 ---
 id: n00_multi_modal_config_manifest
 kind: knowledge_card
+8f: F3_inject
 pillar: P04
 nucleus: n00
 title: "Multi Modal Config -- Canonical Manifest"

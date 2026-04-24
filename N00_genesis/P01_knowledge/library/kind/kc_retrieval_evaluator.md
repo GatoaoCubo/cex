@@ -1,6 +1,7 @@
 ---
 id: kc_retrieval_evaluator
 kind: knowledge_card
+8f: F3_inject
 title: Retrieval Evaluator -- RAG-Specific IR Metrics Suite
 version: 1.0.0
 quality: null

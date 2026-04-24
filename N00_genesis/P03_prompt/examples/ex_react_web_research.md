@@ -1,6 +1,7 @@
 ---
 id: p03_react_web_research
 kind: react
+8f: F4_reason
 pillar: P03
 title: ReAct Web Research Agent with Tool Loop
 tools_available: [search_web, extract_data, calculate]

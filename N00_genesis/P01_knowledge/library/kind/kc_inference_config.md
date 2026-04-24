@@ -1,6 +1,7 @@
 ---
 id: kc_inference_config
 kind: knowledge_card
+8f: F3_inject
 title: Inference Config -- Generation-Time Parameters
 version: 1.0.0
 quality: null

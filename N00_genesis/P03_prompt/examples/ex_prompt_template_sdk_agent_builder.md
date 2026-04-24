@@ -1,6 +1,7 @@
 ---
 id: p03_pt_sdk_agent_builder
 kind: prompt_template
+8f: F6_produce
 pillar: P03
 title: SDK Agent Builder - Generate Agent Artifacts from Description
 version: 1.0.0

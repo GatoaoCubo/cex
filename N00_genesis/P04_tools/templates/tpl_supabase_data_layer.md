@@ -1,6 +1,7 @@
 ---
 id: p04_tpl_supabase_data_layer
 kind: template
+8f: F6_produce
 pillar: P04
 title: "Template — Supabase Data Layer Config"
 version: 1.0.0

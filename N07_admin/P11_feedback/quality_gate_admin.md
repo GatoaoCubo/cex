@@ -1,6 +1,7 @@
 ---
 id: p11_qg_admin_orchestration
 kind: quality_gate
+8f: F7_govern
 pillar: P11
 title: "Gate: N07 Orchestration Quality"
 version: 2.0.0

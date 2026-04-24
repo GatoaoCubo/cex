@@ -1,6 +1,7 @@
 ---
 id: atom_05_semantic_kernel
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 domain: agentic_frameworks
 title: "ATOM-05: Microsoft Semantic Kernel -- Full Vocabulary Atlas"

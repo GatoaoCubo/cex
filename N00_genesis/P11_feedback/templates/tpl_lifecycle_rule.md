@@ -1,6 +1,7 @@
 ---
 id: "p11_lc_{{RULE_SLUG}}"
 kind: lifecycle_rule
+8f: F1_constrain
 pillar: P11
 version: 1.0.0
 title: Template - Lifecycle Rule

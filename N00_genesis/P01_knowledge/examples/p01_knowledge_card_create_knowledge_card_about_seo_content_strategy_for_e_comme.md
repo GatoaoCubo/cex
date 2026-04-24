@@ -1,6 +1,7 @@
 ---
 id: p01_kc_seo_content_strategy_ecommerce
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "SEO Content Strategy for E-commerce: Intent Clusters & Conversion Hierarchy"
 version: "1.0.0"

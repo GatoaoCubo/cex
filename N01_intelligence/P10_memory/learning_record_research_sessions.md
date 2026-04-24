@@ -1,6 +1,7 @@
 ---
 id: p10_lr_research_sessions
 kind: learning_record
+8f: F7_govern
 pillar: P10
 title: "Learning Record — Research Session Patterns"
 version: 1.0.0

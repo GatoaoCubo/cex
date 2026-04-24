@@ -48,6 +48,28 @@ quality: null`** -- builder assigns its own score (audit catches this)
 5. **Stale cross-references** -- references to files that no longer exist
 6. **Over-engineering** -- adding sections not required by the schema
 
+## Hard Gates (H01-H07) -- ALL must pass
+
+| Gate | Check | Fail Action |
+|------|-------|-------------|
+| H01 | Frontmatter present and valid YAML | Return to F6, add frontmatter |
+| H02 | `quality: null` in frontmatter (never self-score) | Remove score, set null |
+| H03 | Required fields: id, kind, 8f, pillar, title | Add missing fields |
+| H04 | Body density >= 0.85 (content lines / total lines) | Add structured data, remove filler |
+| H05 | No hallucinated sources (cited paths must exist) | Remove or verify citations |
+| H06 | ASCII-only in any generated code blocks | Replace non-ASCII per cex_sanitize rules |
+| H07 | Output matches pillar schema constraints | Restructure to match schema |
+
+## Scoring Dimensions (5D)
+
+| Dimension | Weight | Criteria |
+|-----------|--------|---------|
+| D1 Structural | 30% | Frontmatter complete, naming correct, file in right pillar dir |
+| D2 Content | 25% | Density >= 0.85, no filler, tables preferred over prose |
+| D3 Accuracy | 20% | No hallucination, sources verified, constraints respected |
+| D4 Usefulness | 15% | Actionable, implementable, unambiguous |
+| D5 CEX fit | 10% | Kind/pillar/nucleus alignment, 8F stage correctness |
+
 ## Correction Protocol
 
 ```
@@ -55,7 +77,7 @@ F7 FAIL detected
   |
   +-- H01 fail -> add/fix frontmatter
   +-- H02 fail -> set quality: null
-  +-- H03 fail -> add missing required fields
+  +-- H03 fail -> add missing required fields (id, kind, 8f, pillar, title)
   +-- H04 fail -> replace prose with tables, add structured data
   +-- H05 fail -> remove unverified citations
   +-- H06 fail -> run cex_sanitize.py --fix

@@ -1,6 +1,7 @@
 ---
 id: hybrid_review7_n03
 kind: audit
+8f: F7_govern
 pillar: P07
 title: HYBRID_REVIEW7 N03 Audit -- partner_listing + marketplace_app_manifest + oauth_app_config
 version: 1.0.0

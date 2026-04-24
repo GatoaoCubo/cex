@@ -1,6 +1,7 @@
 ---
 id: system_health_20260413
 kind: knowledge_card
+8f: F3_inject
 pillar: P07
 title: CEX system health sweep 2026-04-13
 version: 1.0.0

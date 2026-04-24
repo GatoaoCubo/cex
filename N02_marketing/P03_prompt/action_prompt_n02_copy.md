@@ -1,6 +1,7 @@
 ---
 id: action_prompt_n02_copy
 kind: action_prompt
+8f: F6_produce
 pillar: P03
 nucleus: n02
 title: "Copy Generation Action Prompt -- Headline, Body, CTA Variants"

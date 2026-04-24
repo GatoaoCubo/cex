@@ -1,6 +1,7 @@
 ---
 id: p01_kc_reasoning_trace
 kind: knowledge_card
+8f: F3_inject
 type: kind
 pillar: P03
 title: "Reasoning Trace -- Deep Knowledge for reasoning_trace"

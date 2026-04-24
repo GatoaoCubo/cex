@@ -1,6 +1,7 @@
 ---
 id: p01_kc_conversion_copywriting_frameworks
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "Conversion Copywriting Frameworks with Performance Benchmarks"
 version: "1.0.0"

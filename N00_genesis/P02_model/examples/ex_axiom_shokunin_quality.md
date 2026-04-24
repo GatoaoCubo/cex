@@ -1,6 +1,7 @@
 ---
 id: p10_ax_shokunin_quality
 kind: axiom
+8f: F4_reason
 pillar: P10
 version: "1.0.0"
 created: "2026-03-28"

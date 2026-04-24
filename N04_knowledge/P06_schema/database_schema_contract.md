@@ -1,6 +1,7 @@
 ---
 id: p06_schema_database
 kind: schema
+8f: F1_constrain
 pillar: P06
 title: "Database Schema Contract — Supabase"
 version: 1.0.0

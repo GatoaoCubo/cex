@@ -1,6 +1,7 @@
 ---
 id: knowledge_card_marketing
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 nucleus: N02
 title: "Knowledge Card -- Marketing Domain (N02)"

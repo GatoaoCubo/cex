@@ -1,6 +1,7 @@
 ---
 id: ex_input_schema_partner_registration
 kind: input_schema
+8f: F1_constrain
 pillar: P06
 version: 1.0.0
 title: "Input Schema -- B2B Partner Registration Form"

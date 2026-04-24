@@ -1,6 +1,7 @@
 ---
 id: p01_kc_error_handling_python
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "Error Handling Python — Exception Hierarchy, Retry, Circuit Breaker"
 version: 1.0.0

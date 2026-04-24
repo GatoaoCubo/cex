@@ -1,6 +1,7 @@
 ---
 id: p12_sc_builder_nucleus
 kind: spawn_config
+8f: F1_constrain
 pillar: P12
 title: Spawn Config -- Builder Nucleus
 version: 1.0.0

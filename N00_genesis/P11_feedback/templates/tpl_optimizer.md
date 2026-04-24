@@ -5,6 +5,7 @@
 
 id: p11_opt_{{TARGET_SLUG}}
 kind: optimizer
+8f: F8_collaborate
 pillar: P11
 title: "Optimizer: {{TARGET_NAME}}"
 version: 1.0.0

@@ -1,6 +1,7 @@
 ---
 id: p08_law_shokunin
 kind: invariant
+8f: F1_constrain
 pillar: P08
 title: "Invariant 13: Shokunin — Quality Excellence"
 version: 3.0.0

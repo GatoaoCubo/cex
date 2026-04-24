@@ -1,6 +1,7 @@
 ---
 id: p12_tc_pipeline_default.md
 kind: team_charter
+8f: F8_collaborate
 pillar: P12
 llm_function: GOVERN
 charter_id: pipeline_default

@@ -1,6 +1,7 @@
 ---
 id: n00_few_shot_example_manifest
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 nucleus: n00
 title: "Few-Shot Example -- Canonical Manifest"

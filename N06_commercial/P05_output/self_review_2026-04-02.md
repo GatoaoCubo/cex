@@ -1,6 +1,7 @@
 ---
 id: n06_self_review_20260402
 kind: context-doc
+8f: F3_inject
 nucleus: N06
 pillar: P09
 quality: 9.0

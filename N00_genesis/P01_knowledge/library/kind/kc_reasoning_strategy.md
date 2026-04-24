@@ -1,6 +1,7 @@
 ---
 id: kc_reasoning_strategy
 kind: knowledge_card
+8f: F3_inject
 title: Reasoning Strategy
 version: 1.0.0
 quality: 8.7

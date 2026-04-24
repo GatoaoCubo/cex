@@ -1,6 +1,7 @@
 ---
 id: p01_kc_html_component_library
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "shadcn/ui & Radix UI Component Library"
 version: 1.0.0

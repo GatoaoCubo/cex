@@ -1,6 +1,7 @@
 ---
 id: p01_kc_github_actions
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "GitHub Actions — CI/CD Workflow Patterns"
 version: 1.0.0

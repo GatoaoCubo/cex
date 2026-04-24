@@ -1,6 +1,7 @@
 ---
 id: tpl_content_distribution_plan
 kind: prompt_template
+8f: F6_produce
 pillar: P03
 title: "Content Distribution Plan — NotebookLM Outputs to Multi-Channel Publishing"
 version: 1.0.0

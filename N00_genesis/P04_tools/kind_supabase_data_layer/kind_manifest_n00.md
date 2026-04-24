@@ -1,6 +1,7 @@
 ---
 id: n00_supabase_data_layer_manifest
 kind: knowledge_card
+8f: F3_inject
 pillar: P04
 nucleus: n00
 title: "Supabase Data Layer -- Canonical Manifest"

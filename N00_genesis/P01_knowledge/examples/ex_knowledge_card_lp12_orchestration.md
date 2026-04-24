@@ -1,6 +1,7 @@
 ---
 id: p01_kc_lp12_orchestration
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "P12 Orchestration: Como Coordena"
 version: 1.0.0

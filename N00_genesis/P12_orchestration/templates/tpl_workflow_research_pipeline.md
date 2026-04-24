@@ -1,6 +1,7 @@
 ---
 id: tpl_workflow_research_pipeline
 kind: template
+8f: F6_produce
 pillar: P12
 title: "Workflow — Multi-Source Research Pipeline"
 version: 1.0.0

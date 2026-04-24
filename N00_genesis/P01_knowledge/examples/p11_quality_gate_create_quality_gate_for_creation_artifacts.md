@@ -1,6 +1,7 @@
 ---
 id: p11_qg_creation_artifacts
 kind: quality_gate
+8f: F7_govern
 pillar: P11
 title: "Gate: Creation Artifacts"
 version: "1.0.0"

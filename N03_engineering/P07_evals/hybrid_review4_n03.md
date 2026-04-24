@@ -1,6 +1,7 @@
 ---
 id: hybrid_review4_n03
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 llm_function: INJECT
 title: "HYBRID_REVIEW4 N03 -- audit + surgical fix of workflow_node + eval_framework + judge_config"

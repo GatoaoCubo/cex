@@ -1,6 +1,7 @@
 ---
 id: p01_kc_mcp_server
 kind: knowledge_card
+8f: F3_inject
 type: kind
 pillar: P01
 title: "MCP Server — Deep Knowledge for mcp_server"

@@ -1,6 +1,7 @@
 ---
 id: p10_out_embedding_batch
 kind: output
+8f: F6_produce
 pillar: P10
 title: "Output: Embedding Batch"
 version: 1.0.0

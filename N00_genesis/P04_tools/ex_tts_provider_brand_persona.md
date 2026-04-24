@@ -1,6 +1,7 @@
 ---
 id: ex_tts_provider_brand_persona
 kind: tts_provider
+8f: F6_produce
 pillar: P04
 title: "Example TTS Provider: Brand Persona Voice"
 version: 1.0.0

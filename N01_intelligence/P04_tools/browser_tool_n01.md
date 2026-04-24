@@ -1,6 +1,7 @@
 ---
 id: browser_tool_n01
 kind: browser_tool
+8f: F5_call
 pillar: P04
 nucleus: n01
 title: "N01 Competitive Intelligence Browser Tool"

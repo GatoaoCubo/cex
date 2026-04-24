@@ -1,6 +1,7 @@
 ---
 id: hybrid_review7_n05
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "HYBRID_REVIEW7 N05 Audit: nps_survey + churn_prevention_playbook + renewal_workflow"
 version: "1.0.0"

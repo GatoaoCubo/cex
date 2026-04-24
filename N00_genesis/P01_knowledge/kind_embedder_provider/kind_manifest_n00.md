@@ -1,6 +1,7 @@
 ---
 id: n00_embedder_provider_manifest
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 nucleus: n00
 title: "Embedder Provider -- Canonical Manifest"

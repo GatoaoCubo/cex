@@ -1,6 +1,7 @@
 ---
 id: ex-research-pipeline-marketplace-scrap
 kind: research_pipeline
+8f: F5_call
 pillar: P04
 title: Marketplace Scrap Research Pipeline
 version: 0.1.0

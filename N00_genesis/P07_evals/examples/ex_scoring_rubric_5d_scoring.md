@@ -1,6 +1,7 @@
 ---
 id: p07_sr_5d_scoring
 kind: scoring_rubric
+8f: F7_govern
 pillar: P07
 title: "Scoring Rubric: 5D Quality Framework"
 version: 1.0.0

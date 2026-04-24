@@ -2,6 +2,7 @@
 id: p04_fn_content_monetization
 title: "Content Monetization Tool"
 kind: function_def
+8f: F6_produce
 pillar: P04
 version: 1.1.0
 created: 2026-03-31

@@ -1,6 +1,7 @@
 ---
 id: landing_page_template
 kind: prompt_template
+8f: F6_produce
 pillar: P05
 title: "Landing Page Templates — High-Converting Page Architectures"
 version: 1.0.0

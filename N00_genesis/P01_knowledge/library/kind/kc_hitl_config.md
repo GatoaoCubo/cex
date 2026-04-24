@@ -1,6 +1,7 @@
 ---
 id: p01_kc_hitl_config
 kind: knowledge_card
+8f: F3_inject
 type: kind
 pillar: P11
 title: "hitl_config: Human-in-the-Loop Review Configuration"

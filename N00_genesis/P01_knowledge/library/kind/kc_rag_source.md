@@ -1,6 +1,7 @@
 ---
 id: p01_kc_rag_source
 kind: knowledge_card
+8f: F3_inject
 type: kind
 pillar: P01
 title: "RAG Source — Deep Knowledge for rag_source"

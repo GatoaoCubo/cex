@@ -1,6 +1,7 @@
 ---
 id: n06_audit_diff_strategy_builder
 kind: audit_report
+8f: F7_govern
 nucleus: n06
 mission: HYBRID_REVIEW2
 pillar: P11

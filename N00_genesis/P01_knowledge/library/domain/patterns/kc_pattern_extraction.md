@@ -1,6 +1,7 @@
 ---
 id: p01_kc_pattern_extraction
 kind: knowledge_card
+8f: F3_inject
 type: domain
 pillar: P01
 title: "Pattern Extraction — Mining Reusable Patterns from Code and Conversations"

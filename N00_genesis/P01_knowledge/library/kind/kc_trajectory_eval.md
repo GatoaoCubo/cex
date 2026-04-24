@@ -5,6 +5,7 @@ id: kc_trajectory_eval
 title: Trajectory Evaluation in Knowledge Systems
 description: Comprehensive guide to evaluating knowledge trajectories in CEX systems
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 tags: evaluation, trajectory, knowledge, CEX, system
 density_score: 1.0

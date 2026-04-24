@@ -1,6 +1,7 @@
 ---
 id: p04_tk_browser_tools
 kind: toolkit
+8f: F5_call
 pillar: P04
 title: "Example — Browser Tools Toolkit"
 version: 1.0.0

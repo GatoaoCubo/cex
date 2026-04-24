@@ -1,6 +1,7 @@
 ---
 id: p06_schema_middleware_stack_contract
 kind: input_schema
+8f: F1_constrain
 pillar: P06
 title: "Middleware Stack Contract — 8 Layers"
 version: 1.0.0

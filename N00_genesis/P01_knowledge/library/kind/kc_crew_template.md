@@ -1,6 +1,7 @@
 ---
 id: kc_crew_template
 kind: knowledge_card
+8f: F3_inject
 title: Crew Template
 version: 1.0.0
 quality: 8.8

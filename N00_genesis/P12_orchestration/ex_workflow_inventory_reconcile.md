@@ -1,6 +1,7 @@
 ---
 id: ex-workflow-inventory-reconcile
 kind: workflow
+8f: F8_collaborate
 pillar: P12
 title: Inventory Reconcile Workflow
 version: 0.1.0

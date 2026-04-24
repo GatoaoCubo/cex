@@ -1,6 +1,7 @@
 ---
 id: p01_kc_golden_test
 kind: knowledge_card
+8f: F3_inject
 type: kind
 pillar: P07
 title: "Golden Test — Deep Knowledge for golden_test"

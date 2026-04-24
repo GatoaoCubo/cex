@@ -1,6 +1,7 @@
 ---
 id: audit_intent_resolution
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: Audit Report -- Intent Resolution Artifacts
 version: 1.0.0

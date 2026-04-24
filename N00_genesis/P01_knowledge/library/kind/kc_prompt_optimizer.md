@@ -1,6 +1,7 @@
 ---
 id: kc_prompt_optimizer
 kind: knowledge_card
+8f: F3_inject
 type: kind
 pillar: P01
 title: "Prompt Optimizer -- Deep Knowledge"

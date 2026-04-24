@@ -2,6 +2,7 @@
 quality: 8.4
 id: p05_ws_cex_intro
 kind: webinar_script
+8f: F6_produce
 pillar: P05
 title: "CEXAI Introduction Webinar -- Open-Source AI Brain (45 min)"
 version: 1.1.0

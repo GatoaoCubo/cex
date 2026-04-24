@@ -1,6 +1,7 @@
 ---
 id: kc_reranker_config
 kind: knowledge_card
+8f: F3_inject
 title: Reranker Configuration
 version: 1.0.0
 quality: 8.5

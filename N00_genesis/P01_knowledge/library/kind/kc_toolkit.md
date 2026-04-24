@@ -1,6 +1,7 @@
 ---
 id: p01_kc_toolkit
 kind: knowledge_card
+8f: F3_inject
 type: kind
 pillar: P04
 title: "Toolkit -- Deep Knowledge for toolkit"

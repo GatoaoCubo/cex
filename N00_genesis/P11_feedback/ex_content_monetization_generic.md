@@ -1,6 +1,7 @@
 ---
 id: ex_content_monetization_generic
 kind: content_monetization
+8f: F6_produce
 pillar: P11
 version: 1.0.0
 title: "Content Monetization Framework -- D2C Ecommerce Funnel"

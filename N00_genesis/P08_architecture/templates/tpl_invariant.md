@@ -1,6 +1,7 @@
 ---
 id: "p08_law_{{NUMBER}}"
 kind: invariant
+8f: F1_constrain
 pillar: P08
 version: 1.0.0
 title: Template - Law

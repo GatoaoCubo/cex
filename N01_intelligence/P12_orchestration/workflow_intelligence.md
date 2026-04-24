@@ -1,6 +1,7 @@
 ---
 id: p12_wf_intelligence
 kind: workflow
+8f: F8_collaborate
 pillar: P12
 title: "N01 Workflow — Research Pipeline"
 version: 4.0.0

@@ -1,6 +1,7 @@
 ---
 id: p05_pt_cex
 kind: product_tour
+8f: F6_produce
 pillar: P05
 title: "CEXAI Product Tour -- The 5-Step Revelation Arc"
 version: 1.0.0

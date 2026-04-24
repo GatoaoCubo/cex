@@ -1,6 +1,7 @@
 ---
 id: p12_dr_software_project
 kind: dispatch_rule
+8f: F8_collaborate
 pillar: P12
 title: "Dispatch Rule — Software Project"
 version: 1.0.0

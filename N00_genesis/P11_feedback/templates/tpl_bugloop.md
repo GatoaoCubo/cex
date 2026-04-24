@@ -6,6 +6,7 @@
 
 id: "p11_bl_{{SCOPE_SLUG}}"
 kind: bugloop
+8f: F7_govern
 pillar: P11
 title: "Bugloop: {{SCOPE_NAME}}"
 version: 1.0.0

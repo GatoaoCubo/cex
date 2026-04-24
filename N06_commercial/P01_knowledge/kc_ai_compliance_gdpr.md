@@ -1,6 +1,7 @@
 ---
 id: kc_ai_compliance_gdpr
 kind: knowledge_card
+8f: F3_inject
 title: "AI Compliance and GDPR for LLM Apps"
 version: 1.0.0
 quality: 9.0

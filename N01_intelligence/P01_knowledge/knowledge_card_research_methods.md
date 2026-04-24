@@ -1,6 +1,7 @@
 ---
 id: n01_kc_research_methods
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "Knowledge Card — STORM + CRAG + CRITIC Research Methods"
 version: 1.0.0

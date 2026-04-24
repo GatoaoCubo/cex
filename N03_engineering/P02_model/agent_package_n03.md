@@ -1,6 +1,7 @@
 ---
 id: p02_ap_n03
 kind: agent_package
+8f: F2_become
 pillar: P02
 title: "Agent Package -- N03 Engineering Nucleus"
 version: 1.0.0

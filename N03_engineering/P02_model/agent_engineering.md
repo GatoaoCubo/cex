@@ -1,6 +1,7 @@
 ---
 id: p02_agent_builder_nucleus
 kind: agent
+8f: F2_become
 pillar: P02
 title: Builder Nucleus Agent
 version: 3.0.0

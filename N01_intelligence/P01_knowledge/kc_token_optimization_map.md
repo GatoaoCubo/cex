@@ -1,6 +1,7 @@
 ---
 id: kc_token_optimization_map
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: Token Optimization Map -- LLM Call Audit Across 89 CEX Tools
 version: 1.0.0

@@ -1,6 +1,7 @@
 ---
 id: ex_pricing_page_b2b_generic
 kind: pricing_page
+8f: F6_produce
 pillar: P05
 version: 1.0.0
 title: "B2B Pricing Page Template -- Subscription Tiers + Volume Discounts"

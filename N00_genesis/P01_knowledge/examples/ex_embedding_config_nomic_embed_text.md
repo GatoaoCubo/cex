@@ -1,6 +1,7 @@
 ---
 id: p01_emb_nomic_embed_text
 kind: embedding_config
+8f: F3_inject
 pillar: P01
 title: "Example — Nomic Embed Text Configuration"
 model_name: nomic-embed-text

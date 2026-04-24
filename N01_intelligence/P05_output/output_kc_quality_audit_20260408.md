@@ -1,6 +1,7 @@
 ---
 id: output_kc_quality_audit_20260408
 kind: knowledge_card
+8f: F3_inject
 type: domain
 pillar: P01
 title: "KC Library Quality Audit -- 2026-04-08"

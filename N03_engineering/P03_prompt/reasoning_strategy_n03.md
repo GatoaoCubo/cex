@@ -1,6 +1,7 @@
 ---
 id: p03_rs_n03
 kind: reasoning_strategy
+8f: F4_reason
 pillar: P03
 title: "Reasoning Strategy -- N03 Engineering Depth"
 version: 1.0.0

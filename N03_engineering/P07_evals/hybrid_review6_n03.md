@@ -1,6 +1,7 @@
 ---
 id: hybrid_review6_n03
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: HYBRID_REVIEW6 N03 -- dev-tooling cluster audit (playground/sandbox/integration)
 version: 1.0.0

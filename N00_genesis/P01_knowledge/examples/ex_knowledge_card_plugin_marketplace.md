@@ -1,6 +1,7 @@
 ---
 id: p01_kc_plugin_marketplace
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "Claude Plugin Marketplace — .claude-plugin/ Distribution Structure"
 version: 1.0.0

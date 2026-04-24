@@ -1,6 +1,7 @@
 ---
 id: p02_mm_commercial_nucleus
 kind: mental_model
+8f: F4_reason
 pillar: P02
 title: "Mental Model — Commercial Nucleus"
 nucleus: N06

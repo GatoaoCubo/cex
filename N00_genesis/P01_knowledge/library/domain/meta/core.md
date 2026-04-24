@@ -1,6 +1,7 @@
 ---
 id: p01_kc_core
 kind: knowledge_card
+8f: F3_inject
 type: kind
 pillar: P04
 title: "Core — Foundation for pattern"

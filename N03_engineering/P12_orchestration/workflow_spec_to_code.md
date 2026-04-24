@@ -1,6 +1,7 @@
 ---
 id: p12_wf_spec_to_code
 kind: workflow
+8f: F8_collaborate
 pillar: P12
 title: "Workflow — Spec to Code"
 version: 1.0.0

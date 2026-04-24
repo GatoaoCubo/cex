@@ -1,6 +1,7 @@
 ---
 id: llm_judge_n01
 kind: llm_judge
+8f: F7_govern
 pillar: P07
 nucleus: n01
 title: "N01 Research Fact-Checking and Quality Judge"

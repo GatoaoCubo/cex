@@ -1,6 +1,7 @@
 ---
 id: n06_report_intent_resolution_moat
 kind: content_monetization
+8f: F6_produce
 pillar: P11
 title: "Intent Resolution as Competitive Moat -- Competitive Analysis, Value Calculator, Pricing Tiers & Case Study"
 version: 1.0.0

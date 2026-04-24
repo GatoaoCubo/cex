@@ -1,6 +1,7 @@
 ---
 id: p04_output_github_actions
 kind: hook_config
+8f: F8_collaborate
 pillar: P04
 title: GitHub Actions CI/CD Pipeline Configuration
 version: 1.0.0

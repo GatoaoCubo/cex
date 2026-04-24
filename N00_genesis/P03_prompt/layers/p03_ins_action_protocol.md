@@ -1,6 +1,7 @@
 ---
 id: p03_ins_action_protocol
 kind: instruction
+8f: F6_produce
 pillar: P03
 title: "Instruction: Action Execution Protocol"
 version: 1.0.0

@@ -1,6 +1,7 @@
 ---
 id: tpl_learning_record_autonomy
 kind: template
+8f: F6_produce
 pillar: P11
 title: "Learning Record — Autonomous Mission Phase"
 version: 1.0.0

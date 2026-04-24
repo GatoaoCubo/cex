@@ -1,6 +1,7 @@
 ---
 id: atom_17_japan_ecosystem
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 domain: japanese_llm_agent_ecosystem
 title: "ATOM-17: Japanese LLM & Agent Ecosystem -- Deep Dive"

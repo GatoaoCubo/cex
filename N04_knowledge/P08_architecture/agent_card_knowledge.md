@@ -1,6 +1,7 @@
 ---
 id: p02_card_knowledge
 kind: agent_card
+8f: F2_become
 pillar: P02
 title: "N04 Knowledge Engineer — Agent Card"
 version: 4.0.0

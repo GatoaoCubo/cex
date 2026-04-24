@@ -1,6 +1,7 @@
 ---
 id: p01_kc_brand_propagation_arch
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "Brand Propagation Architecture"
 version: 1.0.0

@@ -1,6 +1,7 @@
 ---
 id: p01_kc_prompt_cache
 kind: knowledge_card
+8f: F3_inject
 type: kind
 pillar: P10
 title: "Prompt Cache — Deep Knowledge for prompt_cache"

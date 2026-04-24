@@ -2,6 +2,7 @@
 id: p12_sig_admin_orchestration
 title: "Signal Admin"
 kind: signal
+8f: F8_collaborate
 pillar: P12
 version: 2.0.0
 created: 2026-03-30

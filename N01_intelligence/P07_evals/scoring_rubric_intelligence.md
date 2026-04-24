@@ -1,6 +1,7 @@
 ---
 id: p07_rubric_intelligence
 kind: scoring_rubric
+8f: F7_govern
 pillar: P07
 title: "N01 Scoring Rubric — Research Quality"
 version: 4.0.0

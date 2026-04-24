@@ -1,6 +1,7 @@
 ---
 id: kc_knowledge_vocabulary
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 nucleus: n04
 title: "Knowledge Card -- N04 Controlled Vocabulary"

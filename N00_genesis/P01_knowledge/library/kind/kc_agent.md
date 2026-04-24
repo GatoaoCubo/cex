@@ -1,6 +1,7 @@
 ---
 id: p01_kc_agent
 kind: knowledge_card
+8f: F3_inject
 type: kind
 pillar: P02
 title: "Agent — Deep Knowledge for agent"

@@ -1,6 +1,7 @@
 ---
 id: p04_fd_builder_toolkit
 kind: function_def
+8f: F6_produce
 pillar: P04
 title: Function Definitions -- Builder Toolkit
 version: 1.0.0

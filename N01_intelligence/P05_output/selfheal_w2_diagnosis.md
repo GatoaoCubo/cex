@@ -3,6 +3,7 @@ quality: 8.3
 quality: 8.2
 id: n01_selfheal_w2_diagnosis
 kind: benchmark
+8f: F7_govern
 title: "SELFHEAL W2 Semantic Diagnosis"
 pillar: P07
 nucleus: n01

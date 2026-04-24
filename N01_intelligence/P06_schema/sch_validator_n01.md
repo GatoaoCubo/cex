@@ -1,6 +1,7 @@
 ---
 id: sch_validator_n01
 kind: validator
+8f: F7_govern
 pillar: P06
 nucleus: n01
 title: Comparative Evidence Validator

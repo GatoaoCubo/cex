@@ -1,6 +1,7 @@
 ---
 id: p01_kc_marketing_best_practices
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "Marketing Best Practices: Frameworks, Channels, and Conversion Patterns"
 version: "1.0.0"

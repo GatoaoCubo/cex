@@ -1,6 +1,7 @@
 ---
 id: tpl_social_publisher
 kind: cli_tool
+8f: F5_call
 pillar: P04
 title: "Social Publisher — Config-Driven Auto-Posting Pipeline"
 version: 1.0.0

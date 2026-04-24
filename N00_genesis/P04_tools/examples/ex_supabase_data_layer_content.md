@@ -1,6 +1,7 @@
 ---
 id: p04_ex_supabase_data_layer_content
 kind: example
+8f: F3_inject
 pillar: P04
 title: "Example — Supabase Data Layer for Content Platform"
 version: 1.0.0

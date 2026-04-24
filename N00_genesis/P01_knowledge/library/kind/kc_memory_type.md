@@ -1,6 +1,7 @@
 ---
 id: p01_kc_memory_type
 kind: knowledge_card
+8f: F3_inject
 type: kind
 pillar: P10
 title: "Memory Type -- Deep Knowledge for memory_type"

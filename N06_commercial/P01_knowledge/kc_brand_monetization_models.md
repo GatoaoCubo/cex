@@ -1,6 +1,7 @@
 ---
 id: p01_kc_brand_monetization_models
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "Brand Monetization Models"
 version: 1.0.0

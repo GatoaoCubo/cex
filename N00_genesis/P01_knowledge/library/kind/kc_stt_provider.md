@@ -1,6 +1,7 @@
 ---
 id: kc_stt_provider
 kind: knowledge_card
+8f: F3_inject
 title: Speech-to-Text Provider Integration
 version: 1.0.0
 quality: 8.7

@@ -1,6 +1,7 @@
 ---
 id: p03_pt_engineering_task
 kind: prompt_template
+8f: F6_produce
 pillar: P03
 title: "Engineering Task Execution Template"
 version: "1.0.0"

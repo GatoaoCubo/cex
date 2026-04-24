@@ -2,6 +2,7 @@
 quality: null
 pillar: P01
 kind: knowledge_card
+8f: F3_inject
 id: kc_training_method
 title: Training Methodologies for Knowledge Systems
 description: Comprehensive guide to training methods for knowledge systems, including supervised, unsupervised, and hybrid approaches

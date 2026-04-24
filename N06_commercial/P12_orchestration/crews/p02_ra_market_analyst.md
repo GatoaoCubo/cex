@@ -1,6 +1,7 @@
 ---
 id: p02_ra_market_analyst.md
 kind: role_assignment
+8f: F2_become
 pillar: P02
 llm_function: CONSTRAIN
 role_name: market_analyst

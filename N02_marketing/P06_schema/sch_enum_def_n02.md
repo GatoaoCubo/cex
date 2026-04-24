@@ -1,6 +1,7 @@
 ---
 id: sch_enum_def_n02
 kind: enum_def
+8f: F1_constrain
 pillar: P06
 nucleus: n02
 title: Seduction Enum Set

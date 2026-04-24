@@ -1,6 +1,7 @@
 ---
 id: p01_kc_cex_agent_group_concept
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "CEX Agent_group Concept — Verticalized Departments as Complete LLM Entities"
 version: 1.0.0

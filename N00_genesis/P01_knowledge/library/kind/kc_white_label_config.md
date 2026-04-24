@@ -3,6 +3,7 @@ quality: 8.4
 quality: 7.9
 id: kc_white_label_config
 kind: knowledge_card
+8f: F3_inject
 title: White-Label Configuration Guide
 date: 2023-10-15
 author: CEX Team

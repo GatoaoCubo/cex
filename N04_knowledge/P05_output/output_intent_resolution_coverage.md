@@ -1,6 +1,7 @@
 ---
 id: n04_output_intent_resolution_coverage
 kind: context_doc
+8f: F3_inject
 pillar: P01
 title: "Kind KC Coverage Audit: Natural Language Discovery Paths"
 version: 1.0.0

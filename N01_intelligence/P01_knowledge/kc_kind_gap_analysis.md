@@ -3,6 +3,7 @@ quality: 8.3
 quality: 7.6
 id: kc_kind_gap_analysis
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 nucleus: n01
 domain: taxonomy-audit

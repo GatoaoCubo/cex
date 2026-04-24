@@ -1,6 +1,7 @@
 ---
 id: data_extractor_n01
 kind: parser
+8f: F6_produce
 pillar: P05
 nucleus: n01
 title: "N01 Structured Data Extractor"

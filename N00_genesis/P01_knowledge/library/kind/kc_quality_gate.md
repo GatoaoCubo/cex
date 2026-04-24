@@ -1,6 +1,7 @@
 ---
 id: p01_kc_quality_gate
 kind: knowledge_card
+8f: F3_inject
 type: kind
 pillar: P11
 title: "Quality Gate — Deep Knowledge for quality_gate"

@@ -1,6 +1,7 @@
 ---
 id: search_strategy_n01
 kind: search_strategy
+8f: F5_call
 pillar: P04
 nucleus: n01
 title: "N01 Layered Search Strategy"

@@ -1,6 +1,7 @@
 ---
 id: kno_few_shot_example_n06
 kind: few_shot_example
+8f: F3_inject
 pillar: P01
 nucleus: n06
 title: Commercial Few Shot Example

@@ -1,6 +1,7 @@
 ---
 id: p10_out_sql_migration
 kind: output
+8f: F6_produce
 pillar: P10
 title: "Output: SQL Migration"
 version: 1.0.0

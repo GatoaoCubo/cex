@@ -1,6 +1,7 @@
 ---
 id: p03_cs_json_output
 kind: constraint_spec
+8f: F1_constrain
 pillar: P03
 title: Structured JSON Output Constraint (answer + confidence)
 version: 1.0.0

@@ -1,6 +1,7 @@
 ---
 id: "p01_fse_{{TOPIC_SLUG}}"
 kind: few_shot_example
+8f: F3_inject
 pillar: P01
 version: 1.0.0
 title: Template - Few Shot Example

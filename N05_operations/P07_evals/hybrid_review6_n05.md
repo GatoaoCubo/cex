@@ -1,6 +1,7 @@
 ---
 id: hybrid_review6_n05
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "HYBRID_REVIEW6 N05 Audit: roi_calculator + discovery_questions + sales_playbook"
 version: "1.0.0"

@@ -1,6 +1,7 @@
 ---
 id: kc_playground_config
 kind: knowledge_card
+8f: F3_inject
 title: Playground/Sandbox Configuration for Interactive Product Evaluation
 version: 1.0.0
 quality: 8.8

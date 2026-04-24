@@ -1,6 +1,7 @@
 ---
 id: p01_kc_domain_vocabulary
 kind: knowledge_card
+8f: F3_inject
 type: kind
 pillar: P01
 title: "Domain Vocabulary -- Deep Knowledge for domain_vocabulary"

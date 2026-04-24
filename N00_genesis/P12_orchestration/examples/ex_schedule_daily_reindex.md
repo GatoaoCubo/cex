@@ -1,6 +1,7 @@
 ---
 id: p12_sched_daily_reindex
 kind: schedule
+8f: F8_collaborate
 pillar: P12
 title: "Daily Reindex Schedule — Nightly Brain FAISS Rebuild"
 version: 1.0.0

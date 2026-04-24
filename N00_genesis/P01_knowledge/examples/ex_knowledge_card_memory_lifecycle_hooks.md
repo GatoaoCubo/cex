@@ -1,6 +1,7 @@
 ---
 id: p01_kc_memory_lifecycle_hooks
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "Memory Lifecycle Hooks — 5-Stage Capture-Compress-Inject Loop for Persistent LLM Memory"
 version: 1.0.0

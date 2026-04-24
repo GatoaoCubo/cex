@@ -1,6 +1,7 @@
 ---
 id: p09_rr_agent_group_spawn
 kind: runtime_rule
+8f: F1_constrain
 pillar: P09
 title: "Runtime Rule: Agent_group Spawn Constraints"
 version: 1.0.0

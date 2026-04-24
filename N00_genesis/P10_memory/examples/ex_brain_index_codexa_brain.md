@@ -1,6 +1,7 @@
 ---
 id: p10_bi_organization_brain
 kind: knowledge_index
+8f: F3_inject
 pillar: P10
 title: "Brain Index: organization Knowledge Base"
 version: 1.0.0

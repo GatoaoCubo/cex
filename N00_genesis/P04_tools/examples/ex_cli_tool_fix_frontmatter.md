@@ -1,6 +1,7 @@
 ---
 id: p04_ct_fix_frontmatter
 kind: cli_tool
+8f: F5_call
 pillar: P04
 title: "Fix Frontmatter — Batch add kind+id to builder files"
 version: 1.0.0

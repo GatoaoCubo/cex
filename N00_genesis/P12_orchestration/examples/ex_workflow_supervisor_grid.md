@@ -1,6 +1,7 @@
 ---
 id: p12_crew_agent_group_grid
 kind: crew
+8f: F8_collaborate
 pillar: P12
 description: "Multi-agent_group crew configuration for parallel task execution via spawn_grid"
 version: 1.0.0

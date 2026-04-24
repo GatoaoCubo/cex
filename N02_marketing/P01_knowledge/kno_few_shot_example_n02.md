@@ -1,6 +1,7 @@
 ---
 id: kno_few_shot_example_n02
 kind: few_shot_example
+8f: F3_inject
 pillar: P01
 nucleus: N02
 title: "N02 Marketing Few Shot Example"

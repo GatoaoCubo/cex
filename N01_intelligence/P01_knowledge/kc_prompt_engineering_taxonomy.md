@@ -1,6 +1,7 @@
 ---
 id: kc_prompt_engineering_taxonomy
 kind: knowledge_card
+8f: F3_inject
 title: "Prompt Engineering Taxonomy"
 version: 1.0.0
 quality: 9.0

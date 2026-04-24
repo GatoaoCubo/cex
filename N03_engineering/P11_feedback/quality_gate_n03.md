@@ -1,6 +1,7 @@
 ---
 id: p11_qg_n03_primary
 kind: quality_gate
+8f: F7_govern
 pillar: P11
 title: "Quality Gate -- N03 Primary Build Gate"
 version: 1.0.0

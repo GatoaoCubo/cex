@@ -1,6 +1,7 @@
 ---
 id: ad_copy_template
 kind: prompt_template
+8f: F6_produce
 pillar: P05
 title: "Ad Copy Templates — Platform-Specific Persuasion Patterns"
 version: 1.0.0

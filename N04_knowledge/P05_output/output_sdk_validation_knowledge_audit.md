@@ -2,6 +2,7 @@
 id: output_sdk_validation_knowledge_audit
 name: SDK Validation — Knowledge Audit
 kind: output
+8f: F6_produce
 pillar: P01
 nucleus: N04
 mission: SDK_VALIDATION

@@ -3,6 +3,7 @@ quality: 9.1
 quality: 7.9
 id: kc_lens_city
 kind: knowledge_card
+8f: F3_inject
 kc_type: meta_kc
 pillar: P01
 nucleus: n04

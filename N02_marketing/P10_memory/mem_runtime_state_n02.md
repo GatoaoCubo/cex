@@ -1,6 +1,7 @@
 ---
 id: mem_runtime_state_n02
 kind: runtime_state
+8f: F8_collaborate
 pillar: P10
 nucleus: N02
 title: "N02 Marketing Runtime State"

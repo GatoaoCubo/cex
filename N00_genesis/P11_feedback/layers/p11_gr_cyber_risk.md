@@ -1,6 +1,7 @@
 ---
 id: p11_gr_cyber_risk
 kind: guardrail
+8f: F7_govern
 pillar: P11
 title: "Guardrail: Cybersecurity Risk Assessment"
 version: 1.0.0

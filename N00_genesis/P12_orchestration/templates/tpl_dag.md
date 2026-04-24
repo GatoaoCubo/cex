@@ -5,6 +5,7 @@
 
 id: p12_dag_{{PIPELINE_SLUG}}
 kind: dag
+8f: F8_collaborate
 pillar: P12
 title: "DAG: {{PIPELINE_NAME}}"
 quality: {{QUALITY_8_TO_10}}

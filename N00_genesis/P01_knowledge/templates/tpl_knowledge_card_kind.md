@@ -6,6 +6,7 @@
 
 id: p01_kc_{{KIND_SLUG}}
 kind: knowledge_card
+8f: F3_inject
 type: kind
 pillar: P01
 title: "{{KIND_TITLE}} — Deep Knowledge for {{KIND_SLUG}}"

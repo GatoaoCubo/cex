@@ -1,6 +1,7 @@
 ---
 id: tpl_research_batch_directories
 kind: template
+8f: F6_produce
 pillar: P12
 title: "Research Batch — Industry Directory Scraping"
 version: 1.0.0

@@ -1,6 +1,7 @@
 ---
 id: learning_record_n01
 kind: learning_record
+8f: F7_govern
 pillar: P10
 nucleus: n01
 title: "N01 Research Learning Record"

@@ -1,6 +1,7 @@
 ---
 id: n00_knowledge_index_manifest
 kind: knowledge_card
+8f: F3_inject
 pillar: P10
 nucleus: n00
 title: "Knowledge Index -- Canonical Manifest"

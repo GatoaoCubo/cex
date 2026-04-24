@@ -1,6 +1,7 @@
 ---
 id: p01_kc_cicd_llm_pipeline
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "CI/CD Pipeline for LLM Applications"
 version: "1.0.0"

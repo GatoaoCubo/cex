@@ -1,6 +1,7 @@
 ---
 id: kc_github_issue_template
 kind: knowledge_card
+8f: F3_inject
 title: GitHub Issue Template
 version: 1.0.0
 quality: 8.6

@@ -1,6 +1,7 @@
 ---
 id: p06_bp_knowledge_card
 kind: artifact_blueprint
+8f: F4_reason
 pillar: P06
 llm_function: CONSTRAIN
 title: "Blueprint: knowledge_card — Meta-Template para Producao de KCs"

@@ -1,6 +1,7 @@
 ---
 id: n04_kc_knowledge_management
 kind: knowledge_card
+8f: F3_inject
 pillar: P01_knowledge
 title: "KC: The CEX Knowledge Lifecycle"
 version: 3.0.0

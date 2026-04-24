@@ -1,6 +1,7 @@
 ---
 id: ex_research_pipeline_saas_global
 kind: cli_tool
+8f: F5_call
 pillar: P04
 title: "Research Pipeline — Global SaaS Competitive Intelligence"
 version: 1.0.0

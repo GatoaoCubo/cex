@@ -1,6 +1,7 @@
 ---
 id: p01_kc_supabase_database
 kind: knowledge_card
+8f: F3_inject
 type: platform
 pillar: P01
 title: "Supabase Database — PostgreSQL 15+ com 50+ Extensions"

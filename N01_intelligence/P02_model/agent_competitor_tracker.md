@@ -1,6 +1,7 @@
 ---
 id: p02_agent_competitor_tracker
 kind: agent
+8f: F2_become
 pillar: P02
 title: "Competitor Tracker Sub-Agent"
 version: 1.0.0

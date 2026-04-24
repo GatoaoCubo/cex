@@ -1,6 +1,7 @@
 ---
 id: input_schema_checkout
 kind: input_schema
+8f: F1_constrain
 pillar: P06
 nucleus: n06
 title: "Input Schema -- Checkout and Order Flow Contract"

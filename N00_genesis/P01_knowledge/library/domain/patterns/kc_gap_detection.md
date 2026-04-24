@@ -1,6 +1,7 @@
 ---
 id: p01_kc_gap_detection
 kind: knowledge_card
+8f: F3_inject
 type: domain
 pillar: P01
 title: "Gap Detection"

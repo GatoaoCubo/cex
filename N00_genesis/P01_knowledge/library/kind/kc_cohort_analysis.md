@@ -1,6 +1,7 @@
 ---
 id: kc_cohort_analysis
 kind: knowledge_card
+8f: F3_inject
 title: Cohort Analysis for Retention and LTV Modeling
 version: 1.0.0
 quality: 8.5

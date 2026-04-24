@@ -1,6 +1,7 @@
 ---
 id: p01_kc_docker_patterns
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "Docker Patterns — Multi-Stage, Compose, Production"
 version: 1.0.0

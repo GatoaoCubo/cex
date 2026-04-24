@@ -1,6 +1,7 @@
 ---
 id: n01_kc_intelligence_domain
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "N01 Domain Knowledge: Research & Intelligence Synthesis"
 version: "1.0.0"

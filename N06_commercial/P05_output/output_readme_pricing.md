@@ -2,6 +2,7 @@
 id: p05_fmt_readme_pricing
 name: "CEX README Pricing Section Formatter"
 kind: formatter
+8f: F6_produce
 pillar: P05
 version: 1.0.0
 created: "2026-04-02"

@@ -1,6 +1,7 @@
 ---
 id: validator_scan_20260413
 kind: knowledge_card
+8f: F3_inject
 pillar: P07
 domain: builder_validation
 version: 1.0.0

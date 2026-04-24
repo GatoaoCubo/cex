@@ -1,6 +1,7 @@
 ---
 id: p06_td_document_types
 kind: type_def
+8f: F1_constrain
 pillar: P06
 nucleus: n04
 title: "Type Definition -- Document Type Taxonomy"

@@ -1,6 +1,7 @@
 ---
 id: n04_audit_tts_provider_builder
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "Audit: tts_provider Builder (13 ISOs)"
 version: "1.0.0"

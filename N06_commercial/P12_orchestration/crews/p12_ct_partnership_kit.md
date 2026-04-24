@@ -1,6 +1,7 @@
 ---
 id: p12_ct_partnership_kit.md
 kind: crew_template
+8f: F2_become
 pillar: P12
 llm_function: CALL
 crew_name: partnership_kit

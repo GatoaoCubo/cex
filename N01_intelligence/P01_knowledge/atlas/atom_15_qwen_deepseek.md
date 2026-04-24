@@ -1,6 +1,7 @@
 ---
 id: atom_15_qwen_deepseek
 kind: knowledge_card
+8f: F3_inject
 title: "Atomic Research 15: Qwen-Agent + DeepSeek Tool-Calling Specs"
 version: "1.2.0"
 quality: 8.9

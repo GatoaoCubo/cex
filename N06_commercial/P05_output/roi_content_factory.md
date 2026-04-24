@@ -1,6 +1,7 @@
 ---
 id: n06_roi_content_factory
 kind: content_monetization
+8f: F6_produce
 pillar: P11
 title: "Content Factory ROI Calculator -- Cost Savings, Revenue Potential, Break-Even"
 version: 1.0.0

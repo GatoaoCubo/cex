@@ -1,6 +1,7 @@
 ---
 id: p08_pat_brand_pipeline
 kind: pattern
+8f: F4_reason
 pillar: P08
 title: "Pattern — Brand Pipeline (Discovery → Propagation)"
 nucleus: N06

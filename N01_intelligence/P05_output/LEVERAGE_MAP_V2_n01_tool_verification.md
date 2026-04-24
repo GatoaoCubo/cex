@@ -1,6 +1,7 @@
 ---
 id: leverage_map_v2_n01_tool_verification
 kind: knowledge_card
+8f: F3_inject
 pillar: P04
 title: LEVERAGE_MAP_V2 - N01 Tool Verification Cycle
 version: 1.0

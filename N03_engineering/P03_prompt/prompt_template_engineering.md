@@ -1,6 +1,7 @@
 ---
 id: p03_pt_builder_construction
 kind: prompt_template
+8f: F6_produce
 pillar: P03
 title: Prompt Template -- Artifact Construction
 version: 1.0.0

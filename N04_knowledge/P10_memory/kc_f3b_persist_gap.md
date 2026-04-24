@@ -1,6 +1,7 @@
 ---
 id: kc_f3b_persist_gap
 kind: knowledge_card
+8f: F3_inject
 pillar: P10
 nucleus: n04
 domain: memory_architecture

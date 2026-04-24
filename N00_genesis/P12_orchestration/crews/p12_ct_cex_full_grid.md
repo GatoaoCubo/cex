@@ -1,6 +1,7 @@
 ---
 id: p12_ct_cex_full_grid
 kind: crew_template
+8f: F2_become
 pillar: P12
 llm_function: CALL
 crew_name: cex_full_grid

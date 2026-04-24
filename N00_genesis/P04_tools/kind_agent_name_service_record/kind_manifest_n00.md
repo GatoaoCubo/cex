@@ -1,6 +1,7 @@
 ---
 id: n00_agent_name_service_record_manifest
 kind: knowledge_card
+8f: F3_inject
 pillar: P04
 nucleus: n00
 title: "Agent Name Service Record -- Canonical Manifest"

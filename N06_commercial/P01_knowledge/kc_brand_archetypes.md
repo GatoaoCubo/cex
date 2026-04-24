@@ -1,6 +1,7 @@
 ---
 id: p01_kc_brand_archetypes
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "12 Jungian Brand Archetypes — Complete Reference"
 version: 1.0.0

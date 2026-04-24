@@ -1,6 +1,7 @@
 ---
 id: p01_kc_validation_schema
 kind: knowledge_card
+8f: F3_inject
 type: kind
 pillar: P06
 title: "Validation Schema — Deep Knowledge for validation_schema"

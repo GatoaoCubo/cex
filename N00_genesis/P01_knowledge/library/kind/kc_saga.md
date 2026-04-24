@@ -2,6 +2,7 @@
 quality: null
 id: kc_saga
 kind: knowledge_card
+8f: F3_inject
 title: "Saga: Long-Running Distributed Transaction with Compensation"
 tldr: "Sequence of local transactions with compensating actions for rollback on partial failure in distributed systems"
 version: 1.1.0

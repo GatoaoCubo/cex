@@ -1,6 +1,7 @@
 ---
 id: p01_kc_data_contract
 kind: knowledge_card
+8f: F3_inject
 type: kind
 pillar: P01
 title: "Data Contract -- Deep Knowledge for data_contract"

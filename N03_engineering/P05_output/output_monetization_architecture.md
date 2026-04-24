@@ -1,6 +1,7 @@
 ---
 id: n03_output_monetization_architecture
 kind: output
+8f: F6_produce
 pillar: P05
 title: "Monetization Technical Architecture — CEX Public + Paid Course + FT Model"
 version: 1.0.0

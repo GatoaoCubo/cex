@@ -1,6 +1,7 @@
 ---
 id: p10_rs_conversation
 kind: runtime_state
+8f: F8_collaborate
 pillar: P10
 title: "Runtime State: Conversation Context Manager"
 version: "1.0.0"

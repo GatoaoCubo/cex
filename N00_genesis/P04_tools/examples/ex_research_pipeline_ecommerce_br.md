@@ -1,6 +1,7 @@
 ---
 id: ex_research_pipeline_ecommerce_br
 kind: cli_tool
+8f: F5_call
 pillar: P04
 title: "Research Pipeline — Brazilian E-commerce (CODEXA Real Production)"
 version: 1.0.0

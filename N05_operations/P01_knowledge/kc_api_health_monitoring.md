@@ -3,6 +3,7 @@ id: KC_N05_API_HEALTH_MONITORING
 title: API Health Monitoring — /health, /ready, /live, Logging, Sentry, OpenTelemetry
 domain: N05_operations
 kind: knowledge_card
+8f: F3_inject
 pillar: P05
 tags: [health, monitoring, observability, logging, sentry, opentelemetry, correlation-id, p95, p99, error-budget]
 quality: 9.0

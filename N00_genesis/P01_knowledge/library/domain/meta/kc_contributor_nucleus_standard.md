@@ -3,6 +3,7 @@ quality: 9.1
 quality: 8.1
 id: kc_contributor_nucleus_standard
 kind: knowledge_card
+8f: F3_inject
 type: domain
 pillar: P01
 title: "Contributor Nucleus Standard -- Building and Sharing Vertical Nuclei"

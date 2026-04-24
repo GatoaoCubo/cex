@@ -1,6 +1,7 @@
 ---
 id: p07_bm_builder_nucleus
 kind: benchmark
+8f: F7_govern
 pillar: P07
 title: Benchmark -- Builder Nucleus
 version: 1.0.0

@@ -1,6 +1,7 @@
 ---
 id: taxonomy_completeness_audit
 kind: knowledge_card
+8f: F3_inject
 title: CEX Taxonomy Completeness Audit
 version: 1.0.0
 quality: 9.1

@@ -1,6 +1,7 @@
 ---
 id: p07_regression_check
 kind: regression_check
+8f: F7_govern
 pillar: P07
 version: 1.0.0
 title: "Template — Regression Check"

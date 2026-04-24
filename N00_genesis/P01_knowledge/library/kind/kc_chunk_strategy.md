@@ -1,6 +1,7 @@
 ---
 id: p01_kc_chunk_strategy
 kind: knowledge_card
+8f: F3_inject
 type: kind
 pillar: P01
 title: "Chunk Strategy — Deep Knowledge for chunk_strategy"

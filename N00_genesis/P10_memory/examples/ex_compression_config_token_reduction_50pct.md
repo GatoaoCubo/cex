@@ -1,6 +1,7 @@
 ---
 id: p10_cc_rolling_window_50pct
 kind: compression_config
+8f: F1_constrain
 pillar: P10
 title: "Example — Rolling Window Compression (50% Token Reduction)"
 version: 1.0.0

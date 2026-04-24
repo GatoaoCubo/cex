@@ -1,6 +1,7 @@
 ---
 id: kno_vector_store_n03
 kind: vector_store
+8f: F3_inject
 pillar: P02
 nucleus: N03
 title: "N03 Vector Store"

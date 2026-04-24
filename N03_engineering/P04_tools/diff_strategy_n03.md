@@ -1,6 +1,7 @@
 ---
 id: p04_ds_n03
 kind: diff_strategy
+8f: F6_produce
 pillar: P04
 title: "Diff Strategy -- N03 Smart Patch Application"
 version: 1.0.0

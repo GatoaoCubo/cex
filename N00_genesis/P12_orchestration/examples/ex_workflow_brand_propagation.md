@@ -18,6 +18,7 @@ examples:
   - "/brand inject --agent_group lily --task 'gerar copy para Instagram'"
 pillar: P12
 kind: workflow
+8f: F8_collaborate
 version: 1.0.0
 created: 2026-03-24
 updated: 2026-03-24

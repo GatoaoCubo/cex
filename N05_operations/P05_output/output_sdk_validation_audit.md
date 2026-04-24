@@ -2,6 +2,7 @@
 id: output_sdk_validation_audit
 name: SDK Validation Ops Audit
 kind: output
+8f: F6_produce
 pillar: P10_output
 domain: operations
 nucleus: N05

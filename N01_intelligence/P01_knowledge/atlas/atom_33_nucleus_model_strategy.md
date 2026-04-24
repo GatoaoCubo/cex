@@ -1,6 +1,7 @@
 ---
 id: atom_33_nucleus_model_strategy
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 quality: 9.0
 title: CEX Nucleus Model Deployment and Fine-Tuning Strategy

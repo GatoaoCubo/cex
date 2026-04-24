@@ -1,6 +1,7 @@
 ---
 id: hybrid_review4_n06
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "HYBRID_REVIEW4 N06 Audit: memory_architecture + procedural_memory + consolidation_policy"
 version: "1.0.0"

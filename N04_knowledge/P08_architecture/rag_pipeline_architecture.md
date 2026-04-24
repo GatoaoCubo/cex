@@ -1,6 +1,7 @@
 ---
 id: p06_arch_rag_pipeline
 kind: context_doc
+8f: F3_inject
 pillar: P06
 title: "RAG Pipeline Architecture — N04 End-to-End Flow"
 version: 1.0.0

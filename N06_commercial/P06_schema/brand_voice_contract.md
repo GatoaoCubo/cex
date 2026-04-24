@@ -1,6 +1,7 @@
 ---
 id: n06_schema_brand_voice_contract
 kind: constraint_spec
+8f: F1_constrain
 pillar: P06
 title: "Brand Voice Contract — 5D Consistency Validation"
 version: 1.0.0

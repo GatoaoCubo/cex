@@ -1,6 +1,7 @@
 ---
 id: tpl_supervisor
 kind: supervisor
+8f: F8_collaborate
 pillar: P08
 version: 1.0.0
 title: "Template — Supervisor"

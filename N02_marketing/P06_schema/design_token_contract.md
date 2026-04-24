@@ -1,6 +1,7 @@
 ---
 id: p10_dtc_design_token_contract
 kind: input_schema
+8f: F1_constrain
 pillar: P10
 title: Design Token Contract — 3-Layer Architecture
 version: 1.0.0

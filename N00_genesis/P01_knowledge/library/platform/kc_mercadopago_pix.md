@@ -1,6 +1,7 @@
 ---
 id: kc_mercadopago_pix
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 quality: 9.1
 tldr: "Integration patterns for MercadoPago PIX payments — preference creation, IPN webhooks, HMAC-SHA256 verification, and sandbox testing."

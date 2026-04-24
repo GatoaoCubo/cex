@@ -1,6 +1,7 @@
 ---
 id: p12_dag_builder_8f
 kind: dag
+8f: F8_collaborate
 pillar: P12
 title: DAG -- 8F Pipeline
 version: 1.0.0

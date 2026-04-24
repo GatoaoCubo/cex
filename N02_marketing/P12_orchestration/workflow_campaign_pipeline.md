@@ -1,6 +1,7 @@
 ---
 id: workflow_campaign_pipeline
 kind: workflow
+8f: F8_collaborate
 pillar: P12
 nucleus: n02
 title: "End-to-End Campaign Workflow Pipeline"

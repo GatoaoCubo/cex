@@ -3,6 +3,7 @@ quality: 8.3
 quality: 7.8
 id: kc_personality
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 nucleus: n00
 title: "KC: personality"

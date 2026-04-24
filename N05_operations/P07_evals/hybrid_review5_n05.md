@@ -1,6 +1,7 @@
 ---
 id: hybrid_review5_n05
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "HYBRID_REVIEW5 N05 Audit: rbac_policy + sso_config + usage_quota (39 ISOs)"
 version: "1.0.0"

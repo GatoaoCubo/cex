@@ -1,6 +1,7 @@
 ---
 id: kc_ai_rmf_profile
 kind: knowledge_card
+8f: F3_inject
 title: AI RMF Profile
 version: 1.0.0
 quality: 8.8

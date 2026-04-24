@@ -1,6 +1,7 @@
 ---
 id: reward_signal_n06
 kind: reward_signal
+8f: F7_govern
 pillar: P11
 nucleus: n06
 title: "Reward Signal -- Validated High-ROI Commercial Patterns"

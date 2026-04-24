@@ -1,6 +1,7 @@
 ---
 id: p04_daemon_autonomous
 kind: daemon
+8f: F8_collaborate
 name: autonomous_agent_daemon
 pid_file: records/core/python/autonomous/daemon.pid
 restart_policy: on_failure

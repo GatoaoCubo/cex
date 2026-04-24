@@ -1,6 +1,7 @@
 ---
 id: p04_ct_cex_pipeline
 kind: cli_tool
+8f: F5_call
 pillar: P04
 title: "CEX Pipeline — 5-stage build engine (capture to envelope)"
 version: 1.0.0

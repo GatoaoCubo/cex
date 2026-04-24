@@ -1,6 +1,7 @@
 ---
 id: p02_agent_research_pipeline_intelligence
 kind: agent
+8f: F2_become
 pillar: P02
 title: "Research Pipeline Agent — Intelligence Nucleus"
 version: "1.0.0"

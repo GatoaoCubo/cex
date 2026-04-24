@@ -1,6 +1,7 @@
 ---
 id: kc_judge_config
 kind: knowledge_card
+8f: F3_inject
 title: LLM Judge Configuration for Automated Evaluation
 version: 1.0.0
 quality: 8.7

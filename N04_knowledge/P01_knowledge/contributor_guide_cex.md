@@ -1,6 +1,7 @@
 ---
 id: p05_cg_cex
 kind: contributor_guide
+8f: F8_collaborate
 pillar: P05
 title: "Contributing to CEX"
 version: 1.0.0

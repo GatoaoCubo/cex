@@ -1,6 +1,7 @@
 ---
 id: p01_kc_retriever
 kind: knowledge_card
+8f: F3_inject
 type: kind
 pillar: P01
 title: "Retriever — Deep Knowledge for retriever"

@@ -1,6 +1,7 @@
 ---
 id: p01_kc_signal
 kind: knowledge_card
+8f: F3_inject
 type: kind
 pillar: P12
 title: "Signal — Deep Knowledge for signal"

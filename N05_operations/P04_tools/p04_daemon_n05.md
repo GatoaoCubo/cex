@@ -1,6 +1,7 @@
 ---
 id: p04_daemon_n05
 kind: daemon
+8f: F8_collaborate
 pillar: P04
 version: "1.0.0"
 created: "2026-04-17"

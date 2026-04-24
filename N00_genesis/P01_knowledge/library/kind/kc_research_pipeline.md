@@ -1,6 +1,7 @@
 ---
 id: p01_kc_research_pipeline
 kind: knowledge_card
+8f: F3_inject
 type: kind
 pillar: P04
 title: "Research Pipeline — Deep Knowledge for research_pipeline"

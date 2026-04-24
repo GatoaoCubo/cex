@@ -1,6 +1,7 @@
 ---
 id: tpl_runtime_state
 kind: runtime_state
+8f: F8_collaborate
 pillar: P10
 version: 1.0.0
 title: "Template — Runtime State"

@@ -1,6 +1,7 @@
 ---
 id: p12_ckpt_rag_pipeline_step3
 kind: checkpoint
+8f: F8_collaborate
 pillar: P12
 title: "RAG Ingest Pipeline Checkpoint — Step 3 Embed After 847 Documents"
 version: 1.0.0

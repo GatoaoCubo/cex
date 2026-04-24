@@ -1,6 +1,7 @@
 ---
 id: ex_cohort_analysis_attribution
 kind: cohort_analysis
+8f: F4_reason
 pillar: P11
 version: 1.0.0
 title: "Attribution Framework -- Content + Promo Multi-Touch"

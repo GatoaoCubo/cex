@@ -1,6 +1,7 @@
 ---
 id: p03_brand_config_extractor
 kind: prompt_template
+8f: F6_produce
 pillar: P03
 title: "Brand Config Extractor — Brand Book → brand_config.yaml"
 version: 1.0.0

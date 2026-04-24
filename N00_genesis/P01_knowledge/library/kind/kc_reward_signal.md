@@ -1,6 +1,7 @@
 ---
 id: p01_kc_reward_signal
 kind: knowledge_card
+8f: F3_inject
 type: kind
 pillar: P11
 title: "Reward Signal — Deep Knowledge for reward_signal"

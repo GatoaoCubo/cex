@@ -1,6 +1,7 @@
 ---
 id: p11_ca_cex_quality_system
 kind: conformity_assessment
+8f: F7_govern
 pillar: P11
 title: "Conformity Assessment -- CEX Quality System"
 system_name: "CEXAI (Cognitive Exchange AI)"

@@ -1,6 +1,7 @@
 ---
 id: sch_input_schema_n01
 kind: input_schema
+8f: F1_constrain
 pillar: P06
 nucleus: n01
 title: Intelligence Intake Schema

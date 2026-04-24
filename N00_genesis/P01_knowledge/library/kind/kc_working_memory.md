@@ -1,6 +1,7 @@
 ---
 id: p01_kc_working_memory
 kind: knowledge_card
+8f: F3_inject
 type: kind
 pillar: P10
 title: "Working Memory -- Deep Knowledge for working_memory"

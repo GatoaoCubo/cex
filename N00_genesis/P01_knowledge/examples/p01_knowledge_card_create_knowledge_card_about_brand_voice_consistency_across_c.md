@@ -1,6 +1,7 @@
 ---
 id: p01_kc_brand_voice_consistency_channels
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "Brand Voice Consistency Across Communication Channels"
 version: "1.0.0"

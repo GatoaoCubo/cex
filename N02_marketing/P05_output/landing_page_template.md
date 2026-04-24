@@ -1,6 +1,7 @@
 ---
 id: p09_lpt_landing_page_template
 kind: output_validator
+8f: F6_produce
 pillar: P09
 title: Landing Page Template — Production Ready
 version: 1.0.0

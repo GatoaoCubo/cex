@@ -1,6 +1,7 @@
 ---
 id: p09_kc_kubernetes_ai_requirement
 kind: knowledge_card
+8f: F3_inject
 type: kind
 pillar: P09
 title: "Kubernetes AI Requirement -- Deep Knowledge for kubernetes_ai_requirement"

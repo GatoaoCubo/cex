@@ -1,6 +1,7 @@
 ---
 id: p01_kc_youtube_api
 kind: knowledge_card
+8f: F3_inject
 type: domain
 pillar: P01
 title: "YouTube Data API — Video Publishing for Content Factory"

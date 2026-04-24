@@ -1,6 +1,7 @@
 ---
 id: n04_qg_knowledge
 kind: quality_gate
+8f: F7_govern
 pillar: P07_evals
 version: 3.0.0
 created: 2026-03-31

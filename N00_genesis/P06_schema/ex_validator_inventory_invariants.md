@@ -1,6 +1,7 @@
 ---
 id: ex-validator-inventory-invariants
 kind: validator
+8f: F7_govern
 pillar: P06
 title: Inventory Invariants Validator
 version: 0.1.0

@@ -1,6 +1,7 @@
 ---
 id: tpl_notebooklm_flashcard_format
 kind: prompt_template
+8f: F6_produce
 pillar: P03
 title: "NotebookLM Flashcards — Branded Study Material Formatter"
 version: 1.0.0

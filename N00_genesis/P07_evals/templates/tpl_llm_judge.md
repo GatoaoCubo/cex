@@ -1,6 +1,7 @@
 ---
 id: p07_llm_judge
 kind: llm_judge
+8f: F7_govern
 pillar: P07
 version: 1.0.0
 title: "Template — LLM Judge"

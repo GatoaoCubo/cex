@@ -1,6 +1,7 @@
 ---
 id: n04_readme_curriculum
 kind: output_template
+8f: F6_produce
 pillar: P01
 quality: 9.0
 density_score: 1.0

@@ -1,6 +1,7 @@
 ---
 id: n02_kc_email_sequence
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "Email Sequence Strategy — Persuasion Architectures That Convert"
 domain: N02_marketing / Email Sequences

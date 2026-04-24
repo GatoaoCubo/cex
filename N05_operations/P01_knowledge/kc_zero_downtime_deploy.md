@@ -3,6 +3,7 @@ id: KC_N05_ZERO_DOWNTIME_DEPLOY
 title: Zero-Downtime Deploy Patterns
 domain: N05_operations
 kind: knowledge_card
+8f: F3_inject
 pillar: P05
 tags: [deploy, zero-downtime, blue-green, railway, sigterm, migrations, rollback, 12-factor]
 quality: 9.1

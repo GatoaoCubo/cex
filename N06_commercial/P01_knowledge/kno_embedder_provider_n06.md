@@ -1,6 +1,7 @@
 ---
 id: kno_embedder_provider_n06
 kind: embedder_provider
+8f: F3_inject
 pillar: P02
 nucleus: n06
 title: Commercial Embedder Provider

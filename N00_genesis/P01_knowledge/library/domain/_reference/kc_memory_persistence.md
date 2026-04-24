@@ -1,6 +1,7 @@
 ---
 id: p01_kc_memory_persistence
 kind: knowledge_card
+8f: F3_inject
 type: domain
 pillar: P01
 title: "Memory & Persistence — Learning Records, Session State, Runtime State, Entity Memory, Summaries"

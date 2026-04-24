@@ -1,6 +1,7 @@
 ---
 id: p01_kc_orchestration
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "CEX Orchestration — Multi-CLI Dispatch"
 version: 2.0.0

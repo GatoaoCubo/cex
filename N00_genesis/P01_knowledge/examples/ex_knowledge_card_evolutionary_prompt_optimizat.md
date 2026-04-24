@@ -1,6 +1,7 @@
 ---
 id: p01_kc_evolutionary_prompt_optimization
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "Evolutionary Prompt Optimization — 5 Techniques with Empirical Benchmarks"
 version: 1.0.0

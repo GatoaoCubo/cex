@@ -1,6 +1,7 @@
 ---
 id: few_shot_example_research
 kind: few_shot_example
+8f: F3_inject
 pillar: P03
 nucleus: n01
 title: "N01 Research Few-Shot Examples"

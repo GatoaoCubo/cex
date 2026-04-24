@@ -1,6 +1,7 @@
 ---
 id: p01_kc_trace_config
 kind: knowledge_card
+8f: F3_inject
 type: kind
 pillar: P07
 title: "Trace Config -- Deep Knowledge for trace_config"

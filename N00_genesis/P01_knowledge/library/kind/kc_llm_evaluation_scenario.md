@@ -1,6 +1,7 @@
 ---
 id: kc_llm_evaluation_scenario
 kind: knowledge_card
+8f: F3_inject
 title: LLM Evaluation Scenario
 version: 1.0.0
 quality: 8.9

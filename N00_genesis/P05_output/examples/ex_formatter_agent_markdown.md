@@ -1,6 +1,7 @@
 ---
 id: p05_fmt_agent_markdown
 kind: formatter
+8f: F6_produce
 pillar: P05
 title: "Formatter: Agent Markdown Response"
 version: 1.0.0

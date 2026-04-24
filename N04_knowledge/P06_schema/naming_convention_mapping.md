@@ -1,6 +1,7 @@
 ---
 id: n04_naming_convention_mapping
 kind: validation_schema
+8f: F1_constrain
 nucleus: N04
 pillar: P06
 domain: nomenclature

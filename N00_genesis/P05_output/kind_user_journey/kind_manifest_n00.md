@@ -1,6 +1,7 @@
 ---
 id: n00_user_journey_manifest
 kind: knowledge_card
+8f: F3_inject
 pillar: P05
 nucleus: n00
 title: "User Journey -- Canonical Manifest"

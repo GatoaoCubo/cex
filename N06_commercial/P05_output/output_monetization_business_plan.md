@@ -1,6 +1,7 @@
 ---
 id: n06_output_monetization_business_plan
 kind: output_template
+8f: F6_produce
 pillar: P05
 title: "CEX Monetization Business Plan — Estratégia Comercial 2026"
 version: 1.0.0

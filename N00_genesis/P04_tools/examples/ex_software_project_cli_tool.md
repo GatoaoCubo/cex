@@ -1,6 +1,7 @@
 ---
 id: p04_ex_software_project_cli_tool
 kind: example
+8f: F3_inject
 pillar: P04
 title: "Example — CLI Tool (CEX Scorer)"
 version: 1.0.0

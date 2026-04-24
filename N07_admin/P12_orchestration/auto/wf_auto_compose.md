@@ -1,6 +1,7 @@
 ---
 id: p12_wf_auto_compose
 kind: workflow
+8f: F8_collaborate
 pillar: P12
 title: "Auto-Compose — Assemble prompts for nucleus execution"
 version: 1.0.0

@@ -1,6 +1,7 @@
 ---
 id: p09_secret_config
 kind: secret_config
+8f: F1_constrain
 pillar: P09
 version: 1.0.0
 title: "Template — Secret Config"

@@ -1,6 +1,7 @@
 ---
 id: ex_quality_gate_content_factory
 kind: quality_gate
+8f: F7_govern
 pillar: P11
 title: "Example Quality Gate: Content Factory"
 version: 1.0.0

@@ -1,6 +1,7 @@
 ---
 id: kc_developer_experience_patterns
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: Developer Experience Patterns
 tags: [developer, experience, patterns]

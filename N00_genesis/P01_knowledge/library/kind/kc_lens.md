@@ -1,6 +1,7 @@
 ---
 id: p01_kc_lens
 kind: knowledge_card
+8f: F3_inject
 type: kind
 pillar: P02
 title: "Lens — Deep Knowledge for lens"

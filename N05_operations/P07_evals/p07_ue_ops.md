@@ -1,6 +1,7 @@
 ---
 id: p07_ue_ops
 kind: unit_eval
+8f: F7_govern
 pillar: P07
 title: "Unit Eval: N05 Operations Tool Suite"
 version: "1.0.0"

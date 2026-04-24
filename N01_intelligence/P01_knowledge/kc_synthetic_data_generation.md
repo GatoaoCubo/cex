@@ -1,6 +1,7 @@
 ---
 id: kc_synthetic_data_generation
 kind: knowledge_card
+8f: F3_inject
 title: "Synthetic Data Generation for LLMs"
 version: 1.0.0
 quality: 8.9

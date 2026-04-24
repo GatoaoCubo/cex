@@ -1,6 +1,7 @@
 ---
 id: "p09_path_{{SCOPE_SLUG}}"
 kind: path_config
+8f: F1_constrain
 pillar: P09
 version: 1.0.0
 title: Template - Path Config

@@ -1,6 +1,7 @@
 ---
 id: ex_dag_content_factory
 kind: dag
+8f: F8_collaborate
 pillar: P12
 title: "Example DAG: Content Factory"
 version: 1.0.0

@@ -1,6 +1,7 @@
 ---
 id: p04_skill_simplify
 kind: skill
+8f: F5_call
 pillar: P04
 title: "Skill: Code Simplification"
 version: 1.0.0

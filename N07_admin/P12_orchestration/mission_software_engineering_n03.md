@@ -1,6 +1,7 @@
 ---
 id: p12_mission_software_engineering_n03
 kind: dag
+8f: F8_collaborate
 pillar: P12
 title: "Mission: Software Engineering Toolkit — N03 Verticalization"
 version: 1.0.0

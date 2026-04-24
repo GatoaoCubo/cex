@@ -1,6 +1,7 @@
 ---
 id: kc_intent_resolution_map
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: Intent Resolution Map -- 123 Kinds x Natural Language Triggers
 version: 1.0.0

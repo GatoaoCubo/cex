@@ -1,6 +1,7 @@
 ---
 id: p11_qg_cex_quality
 kind: quality_gate
+8f: F7_govern
 pillar: P11
 title: "CEX Pre-Commit Quality Gate"
 version: "1.0.0"

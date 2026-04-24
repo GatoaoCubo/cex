@@ -1,6 +1,7 @@
 ---
 id: p01_kc_api_client
 kind: knowledge_card
+8f: F3_inject
 type: kind
 pillar: P04
 title: "API Client — Deep Knowledge for api_client"

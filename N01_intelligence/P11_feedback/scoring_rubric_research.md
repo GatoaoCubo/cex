@@ -1,6 +1,7 @@
 ---
 id: scoring_rubric_research
 kind: scoring_rubric
+8f: F7_govern
 pillar: P11
 nucleus: n01
 title: "N01 Research Output Scoring Rubric"

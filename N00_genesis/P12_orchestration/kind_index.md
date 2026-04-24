@@ -1,6 +1,7 @@
 ---
 id: n00_p12_kind_index
 kind: knowledge_card
+8f: F3_inject
 pillar: P12
 nucleus: n00
 title: "P12 Orchestration -- Kind Index"

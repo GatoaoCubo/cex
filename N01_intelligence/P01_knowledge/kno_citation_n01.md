@@ -1,6 +1,7 @@
 ---
 id: kno_citation_n01
 kind: citation
+8f: F3_inject
 pillar: P01
 nucleus: N01
 title: "N01 Citation"

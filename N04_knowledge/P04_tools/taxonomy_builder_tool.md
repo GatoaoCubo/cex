@@ -1,6 +1,7 @@
 ---
 id: p04_tool_taxonomy_builder
 kind: cli_tool
+8f: F5_call
 pillar: P04
 title: "Taxonomy Builder — Kind Registry & Classification Engine"
 version: 1.0.0

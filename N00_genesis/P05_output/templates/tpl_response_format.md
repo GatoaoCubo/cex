@@ -1,6 +1,7 @@
 ---
 id: tpl_response_format
 kind: response_format
+8f: F6_produce
 pillar: P05
 version: 1.0.0
 title: "Template — Response Format"

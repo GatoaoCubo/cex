@@ -5,6 +5,7 @@
 
 id: p06_td_{{TYPE_SLUG}}
 kind: type_def
+8f: F1_constrain
 pillar: P06
 title: "Type Def: {{TYPE_NAME}}"
 quality: {{QUALITY_8_TO_10}}

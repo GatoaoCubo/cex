@@ -1,6 +1,7 @@
 ---
 id: p01_kc_lp04_tools
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "P04 Tools: O Que o Agente Usa"
 version: 1.0.0

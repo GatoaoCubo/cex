@@ -1,6 +1,7 @@
 ---
 id: p01_kc_intelligence_best_practices
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "Intelligence Best Practices for Research and Analysis"
 version: "1.0.0"

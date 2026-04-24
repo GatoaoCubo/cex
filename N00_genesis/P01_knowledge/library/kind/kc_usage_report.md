@@ -1,6 +1,7 @@
 ---
 id: kc_usage_report
 kind: knowledge_card
+8f: F3_inject
 title: Usage Analytics Report Specification
 version: 1.0.0
 quality: 8.7

@@ -1,6 +1,7 @@
 ---
 id: p12_wf_rag_ingestion_n04
 kind: workflow
+8f: F8_collaborate
 pillar: P12
 nucleus: n04
 title: "Workflow -- RAG Corpus Ingestion Pipeline"

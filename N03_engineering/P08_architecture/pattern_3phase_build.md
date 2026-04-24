@@ -1,6 +1,7 @@
 ---
 id: p08_pat_3phase_build_protocol
 kind: pattern
+8f: F4_reason
 pillar: P08
 title: 3-Phase Build Protocol -- Pre-Flight / Execute / Synthesize
 version: 1.0.0

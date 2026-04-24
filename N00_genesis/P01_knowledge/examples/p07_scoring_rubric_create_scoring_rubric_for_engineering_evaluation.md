@@ -1,6 +1,7 @@
 ---
 id: p07_sr_engineering_quality
 kind: scoring_rubric
+8f: F7_govern
 pillar: P07
 title: "Rubric: Engineering Quality Assessment"
 version: "1.0.0"

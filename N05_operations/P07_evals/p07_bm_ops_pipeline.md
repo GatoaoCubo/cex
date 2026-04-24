@@ -1,6 +1,7 @@
 ---
 id: p07_bm_ops_pipeline
 kind: benchmark
+8f: F7_govern
 pillar: P07
 title: "Benchmark: CEX Operations Pipeline"
 version: "1.0.0"

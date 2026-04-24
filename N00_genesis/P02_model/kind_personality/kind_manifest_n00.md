@@ -3,6 +3,7 @@ quality: 8.0
 quality: 7.6
 id: n00_personality_manifest
 kind: knowledge_card
+8f: F3_inject
 pillar: P02
 nucleus: n00
 title: "Personality -- Canonical Manifest"

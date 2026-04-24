@@ -1,6 +1,7 @@
 ---
 id: multimodal_prompt_n01
 kind: multimodal_prompt
+8f: F6_produce
 pillar: P03
 nucleus: n01
 title: "N01 Multimodal Research Prompts"

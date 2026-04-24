@@ -1,6 +1,7 @@
 ---
 id: kno_competitive_matrix_n01
 kind: competitive_matrix
+8f: F4_reason
 pillar: P01
 nucleus: N01
 title: "N01 Competitive Matrix"

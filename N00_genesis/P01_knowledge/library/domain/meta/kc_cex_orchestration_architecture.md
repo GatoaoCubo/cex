@@ -1,6 +1,7 @@
 ---
 id: p01_kc_cex_orchestration_architecture
 kind: knowledge_card
+8f: F3_inject
 type: domain
 pillar: P01
 title: "CEX Orchestration Architecture -- Multi-Process Pattern for LLM Agent Coordination"

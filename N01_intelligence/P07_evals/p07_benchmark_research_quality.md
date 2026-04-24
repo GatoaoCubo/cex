@@ -1,6 +1,7 @@
 ---
 id: p07_bench_research_quality
 kind: benchmark
+8f: F7_govern
 pillar: P07
 title: "Benchmark -- N01 Research Output Quality"
 version: 1.0.0

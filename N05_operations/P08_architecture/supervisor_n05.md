@@ -1,6 +1,7 @@
 ---
 id: ex_director_ops_health_monitor
 kind: supervisor
+8f: F8_collaborate
 pillar: P08
 title: "N05 Operations Health Supervisor"
 version: "1.0.0"

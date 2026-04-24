@@ -1,6 +1,7 @@
 ---
 id: learning_record_n06
 kind: learning_record
+8f: F7_govern
 pillar: P10
 nucleus: n06
 title: "Learning Record -- N06 Commercial Session Learnings"

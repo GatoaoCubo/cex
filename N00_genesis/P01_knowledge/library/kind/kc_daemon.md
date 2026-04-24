@@ -1,6 +1,7 @@
 ---
 id: p01_kc_daemon
 kind: knowledge_card
+8f: F3_inject
 type: kind
 pillar: P04
 title: "Daemon — Deep Knowledge for daemon"

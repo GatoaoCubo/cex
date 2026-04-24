@@ -1,6 +1,7 @@
 ---
 id: kc_conformity_assessment
 kind: knowledge_card
+8f: F3_inject
 title: Conformity Assessment for High-Risk AI Systems (EU AI Act Annex IV)
 version: 1.0.0
 quality: 8.5

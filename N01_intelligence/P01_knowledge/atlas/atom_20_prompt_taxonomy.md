@@ -1,6 +1,7 @@
 ---
 id: atom_20_prompt_taxonomy
 kind: knowledge_card
+8f: F3_inject
 pillar: P03
 title: "Advanced Prompt Engineering: Techniques, Optimizers, and Multimodal Strategies (v2.0)"
 author: "AI Prompt Engineering Collective"

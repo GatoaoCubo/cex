@@ -1,6 +1,7 @@
 ---
 id: p01_kc_supabase_pgvector_rag_setup
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "Supabase pgvector Setup for RAG Pipelines"
 version: "1.0.0"

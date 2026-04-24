@@ -1,6 +1,7 @@
 ---
 id: p01_kc_railway_cli_patterns
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "Railway CLI Patterns — Commands, Deploy & CI/CD"
 version: 1.0.0

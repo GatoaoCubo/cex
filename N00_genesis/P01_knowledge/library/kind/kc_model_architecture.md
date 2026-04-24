@@ -1,6 +1,7 @@
 ---
 id: kc_model_architecture
 kind: knowledge_card
+8f: F3_inject
 title: Model Architecture
 version: 1.0.0
 quality: 8.5

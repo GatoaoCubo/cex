@@ -1,6 +1,7 @@
 ---
 id: kc_system_prompt
 kind: knowledge_card
+8f: F3_inject
 title: "System Prompt Engineering"
 version: 1.0.0
 quality: 9.0

@@ -1,6 +1,7 @@
 ---
 id: output_content_factory_landscape
 kind: research_output
+8f: F4_reason
 pillar: P01
 mission: MISSION_content_factory_v1
 nucleus: N01

@@ -3,6 +3,7 @@ quality: 8.3
 quality: 7.9
 id: output_sdk_validation_self_audit
 kind: output
+8f: F6_produce
 pillar: P11
 title: "N02 Marketing — SDK Validation Self-Audit Report"
 version: 1.0.0

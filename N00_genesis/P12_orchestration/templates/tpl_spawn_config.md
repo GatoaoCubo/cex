@@ -5,6 +5,7 @@
 
 id: p12_spawn_{{MODE_SLUG}}
 kind: spawn_config
+8f: F1_constrain
 pillar: P12
 title: "Spawn Config: {{MODE_NAME}}"
 quality: {{QUALITY_8_TO_10}}

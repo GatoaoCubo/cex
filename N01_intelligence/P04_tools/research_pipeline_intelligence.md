@@ -1,6 +1,7 @@
 ---
 id: n01_tool_research_pipeline
 kind: cli_tool
+8f: F5_call
 pillar: P04
 title: "Research Pipeline — N01 Intelligence Tool"
 version: 1.0.0

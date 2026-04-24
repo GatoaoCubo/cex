@@ -1,6 +1,7 @@
 ---
 id: team_charter_synthesis_default.md
 kind: team_charter
+8f: F8_collaborate
 pillar: P12
 llm_function: GOVERN
 charter_id: synthesis_default_20260422

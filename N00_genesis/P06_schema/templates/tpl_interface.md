@@ -6,6 +6,7 @@
 
 id: p06_iface_{{CONTRACT_SLUG}}
 kind: interface
+8f: F1_constrain
 pillar: P06
 title: "Interface: {{PRODUCER}} -> {{CONSUMER}}"
 version: 1.0.0

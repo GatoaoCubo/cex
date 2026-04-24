@@ -1,6 +1,7 @@
 ---
 id: tpl_research_batch_social
 kind: template
+8f: F6_produce
 pillar: P12
 title: "Research Batch — Social Media Discovery"
 version: 1.0.0

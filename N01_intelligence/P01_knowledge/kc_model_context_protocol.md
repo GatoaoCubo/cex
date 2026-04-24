@@ -1,6 +1,7 @@
 ---
 id: kc_model_context_protocol
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: Model Context Protocol
 tags: [model, context, protocol]

@@ -1,6 +1,7 @@
 ---
 id: con_rate_limit_config_n04
 kind: rate_limit_config
+8f: F1_constrain
 pillar: P09
 nucleus: n04
 title: Knowledge Rate Limit Config

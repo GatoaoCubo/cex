@@ -1,6 +1,7 @@
 ---
 id: n05_audit_hybrid_review2
 kind: audit_report
+8f: F7_govern
 pillar: P11
 title: "Audit: sandbox-config-builder + repo-map-builder (26 ISOs)"
 version: "1.0.0"

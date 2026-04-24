@@ -1,6 +1,7 @@
 ---
 id: retriever_n01
 kind: retriever
+8f: F3_inject
 pillar: P04
 nucleus: n01
 title: "N01 Intelligence Corpus Retriever"

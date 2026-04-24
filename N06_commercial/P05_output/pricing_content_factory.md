@@ -1,6 +1,7 @@
 ---
 id: n06_pricing_content_factory
 kind: content_monetization
+8f: F6_produce
 pillar: P11
 title: "Content Factory Pricing Model -- Per-Format, Tiered, Bundled"
 version: 2.0.0

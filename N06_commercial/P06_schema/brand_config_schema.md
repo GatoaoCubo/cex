@@ -1,6 +1,7 @@
 ---
 id: n06_schema_brand_config
 kind: constraint_spec
+8f: F1_constrain
 pillar: P06
 title: "Brand Config Schema — 7 Sections, 41 Variables"
 version: 1.0.0

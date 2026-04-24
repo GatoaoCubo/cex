@@ -1,6 +1,7 @@
 ---
 id: n00_p03_kind_index
 kind: knowledge_card
+8f: F3_inject
 pillar: P03
 nucleus: n00
 title: "P03 Prompt -- Kind Index"

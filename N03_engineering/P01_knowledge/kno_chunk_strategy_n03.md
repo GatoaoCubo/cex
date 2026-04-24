@@ -1,6 +1,7 @@
 ---
 id: kno_chunk_strategy_n03
 kind: chunk_strategy
+8f: F3_inject
 pillar: P01
 nucleus: N03
 title: "N03 Chunk Strategy"

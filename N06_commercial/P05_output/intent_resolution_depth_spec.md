@@ -1,6 +1,7 @@
 ---
 id: n06_intent_resolution_depth_spec
 kind: content_monetization
+8f: F6_produce
 pillar: P11
 title: "Intent Resolution Depth Spec -- L0-L7 Levels, Conversion Triggers & Enterprise Value Proposition"
 version: 1.0.0

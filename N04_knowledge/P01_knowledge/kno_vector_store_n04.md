@@ -27,6 +27,7 @@ metadata_filtering: true
 metadata_schema:
   pillar: keyword
   kind: keyword
+8f: F3_inject
   nucleus: keyword
   source_path: keyword
   freshness_days: integer

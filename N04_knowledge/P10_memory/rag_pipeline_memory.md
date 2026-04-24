@@ -1,6 +1,7 @@
 ---
 id: n04_rag_pipeline_memory
 kind: memory_scope  
+8f: F3_inject
 nucleus: N04
 pillar: P10
 domain: rag_pipeline

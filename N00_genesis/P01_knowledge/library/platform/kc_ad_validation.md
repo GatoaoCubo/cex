@@ -1,6 +1,7 @@
 ---
 id: kc_ad_validation
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 quality: 9.1
 tldr: "Patterns for validating LLM-generated content, including fabrication detection, confidence scoring, and retry-with-refinement logic."

@@ -1,6 +1,7 @@
 ---
 id: n06_input_schema_content_order
 kind: input_schema
+8f: F1_constrain
 pillar: P06
 title: "Input Schema -- Content Factory Order"
 version: 1.0.0

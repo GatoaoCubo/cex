@@ -1,6 +1,7 @@
 ---
 id: n06_audit_content_filter_builder
 kind: audit_report
+8f: F7_govern
 nucleus: n06
 pillar: P11
 mission: HYBRID_REVIEW

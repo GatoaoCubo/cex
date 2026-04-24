@@ -1,6 +1,7 @@
 ---
 id: kc_session_20260408
 kind: knowledge_card
+8f: F3_inject
 title: "Session Summary: 2026-04-08 — 3 Grids, 29 Commits, Full Canonicalization"
 version: 1.0.0
 quality: 9.0

@@ -1,6 +1,7 @@
 ---
 id: session_state_n04
 kind: session_state
+8f: F8_collaborate
 nucleus: n04
 pillar: P10
 mirrors: N00_genesis/P10_memory/tpl_session_state.md

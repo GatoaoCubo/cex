@@ -1,6 +1,7 @@
 ---
 id: ex_feedback_tone_correction
 kind: feedback
+8f: F7_govern
 pillar: P11
 title: "Example — Tone Correction Feedback"
 tags: [feedback, tone, correction, guardrail, learning]

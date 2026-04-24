@@ -1,6 +1,7 @@
 ---
 id: p04_st_n04_knowledge
 kind: search_tool
+8f: F5_call
 pillar: P04
 nucleus: n04
 title: "Search Tool -- N04 Knowledge Corpus Search"

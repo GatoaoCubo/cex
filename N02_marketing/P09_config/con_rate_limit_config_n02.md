@@ -1,6 +1,7 @@
 ---
 id: con_rate_limit_config_n02
 kind: rate_limit_config
+8f: F1_constrain
 pillar: P09
 nucleus: n02
 title: Marketing Rate Limits

@@ -3,6 +3,7 @@ quality: 8.0
 quality: 7.3
 pillar: P01
 kind: knowledge_card
+8f: F3_inject
 id: kc_reward_model
 
 title: Reward Model Design and Implementation

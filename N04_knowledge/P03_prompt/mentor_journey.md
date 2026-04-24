@@ -1,6 +1,7 @@
 ---
 id: mentor_journey
 kind: prompt_template
+8f: F6_produce
 pillar: P03
 nucleus: n04
 version: 1.0.0

@@ -39,6 +39,9 @@ CEX_ROOT = Path(__file__).resolve().parent.parent
 REQUIRED_FM = ["id", "kind", "pillar", "quality"]
 DESIRED_FM = ["title", "version", "author", "tags", "tldr", "domain"]
 
+# Valid 8f frontmatter pattern: F[1-8]_lowercase (e.g. F3_inject, F1_constrain)
+VALID_8F_PATTERN = re.compile(r"^F[1-8]_[a-z]+$")
+
 # Pillar prefix pattern
 PILLAR_PATTERN = re.compile(r"^P\d{2}$")
 
@@ -255,6 +258,15 @@ def validate_artifact(path: str, content: str = None) -> list[dict]:
     placeholders = re.findall(r'\b(TODO|TBD|FIXME|INSERT HERE|ADD LATER)\b', content, re.IGNORECASE)
     if placeholders:
         issues.append({"level": "WARN", "code": "W05", "msg": f"Placeholder text found: {', '.join(set(placeholders))}"})
+
+    # W06: 8f field presence and format
+    if "8f" not in fm:
+        issues.append({"level": "WARN", "code": "W06", "msg": "Missing recommended: 8f (primary 8F function)"})
+    else:
+        val_8f = str(fm.get("8f", ""))
+        if val_8f and not VALID_8F_PATTERN.match(val_8f):
+            issues.append({"level": "WARN", "code": "W06",
+                           "msg": "8f value '%s' does not match F[1-8]_[a-z]+ pattern" % val_8f})
 
     # I01: quality is null (info only)
     quality = fm.get("quality")

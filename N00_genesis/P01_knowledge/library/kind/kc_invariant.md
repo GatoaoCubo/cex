@@ -1,6 +1,7 @@
 ---
 id: p01_kc_invariant
 kind: knowledge_card
+8f: F3_inject
 type: kind
 pillar: P08
 title: "Law — Deep Knowledge for law"

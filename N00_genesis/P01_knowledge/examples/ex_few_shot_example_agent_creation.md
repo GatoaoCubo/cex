@@ -1,6 +1,7 @@
 ---
 id: p01_fse_agent_creation
 kind: few_shot_example
+8f: F3_inject
 pillar: P01
 title: "Few-Shot: Agent Creation via 8F Pipeline"
 input: "criar agente de SEO para marketplace"

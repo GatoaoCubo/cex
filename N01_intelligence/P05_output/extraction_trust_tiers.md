@@ -1,6 +1,7 @@
 ---
 id: extraction_trust_tiers
 kind: knowledge_card
+8f: F3_inject
 pillar: P01_knowledge
 title: "Extraction: Trust Tiers (Capability-Based Access) from ruflo"
 version: 1.1

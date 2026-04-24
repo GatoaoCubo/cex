@@ -1,6 +1,7 @@
 ---
 id: p09_rbac_n05
 kind: rbac_policy
+8f: F1_constrain
 pillar: P09
 title: "CEX Operations RBAC Policy (N05)"
 version: "1.0"

@@ -1,6 +1,7 @@
 ---
 id: p01_kc_knowledge_best_practices
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "Knowledge Card Best Practices: Density, Structure, and Retrieval"
 version: "1.0.0"

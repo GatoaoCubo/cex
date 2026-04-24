@@ -1,6 +1,7 @@
 ---
 id: n01_dr_intelligence
 kind: dispatch_rule
+8f: F8_collaborate
 pillar: P12
 title: "Dispatch Rule: N01 Research & Intelligence"
 version: "1.0.0"

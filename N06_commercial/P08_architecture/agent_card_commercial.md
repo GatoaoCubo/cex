@@ -2,6 +2,7 @@
 id: p08_ac_commercial_nucleus
 title: "Agent Card Commercial"
 kind: agent_card
+8f: F2_become
 pillar: P08
 version: 4.0.0
 created: 2026-03-30

@@ -1,6 +1,7 @@
 ---
 id: kc_chrome_cdp_automation
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 version: "1.0.0"
 created: "2026-04-17"

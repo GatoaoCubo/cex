@@ -1,6 +1,7 @@
 ---
 id: n00_app_directory_entry_manifest
 kind: knowledge_card
+8f: F3_inject
 pillar: P05
 nucleus: n00
 title: "App Directory Entry -- Canonical Manifest"

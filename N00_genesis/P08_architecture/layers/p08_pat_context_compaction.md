@@ -1,6 +1,7 @@
 ---
 id: p08_pat_context_compaction
 kind: pattern
+8f: F4_reason
 pillar: P08
 title: "Pattern: Context Compaction Strategy"
 version: 1.0.0

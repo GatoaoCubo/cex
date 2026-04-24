@@ -1,6 +1,7 @@
 ---
 id: kc_dispatch_modes
 kind: knowledge_card
+8f: F3_inject
 title: CEX Dispatch Modes Comparison
 version: 1.0.0
 quality: 8.9

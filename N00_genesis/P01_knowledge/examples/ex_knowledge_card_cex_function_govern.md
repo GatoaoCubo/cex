@@ -1,6 +1,7 @@
 ---
 id: p01_kc_cex_function_govern
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "CEX Function GOVERN — Quality Inspection and System Governance"
 version: 1.0.0

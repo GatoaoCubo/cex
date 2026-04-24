@@ -1,6 +1,7 @@
 ---
 id: p12_wf_auto_health
 kind: workflow
+8f: F8_collaborate
 pillar: P12
 title: "Auto-Health — Probe system before dispatch"
 version: 1.0.0

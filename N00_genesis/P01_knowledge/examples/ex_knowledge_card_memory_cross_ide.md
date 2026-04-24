@@ -1,6 +1,7 @@
 ---
 id: p01_kc_memory_cross_ide
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "Cross-IDE Memory Parity — One Worker API Serving Claude Code, Cursor, and OpenClaw"
 version: 1.0.0

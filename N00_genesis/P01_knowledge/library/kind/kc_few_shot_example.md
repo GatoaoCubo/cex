@@ -1,6 +1,7 @@
 ---
 id: p01_kc_few_shot_example
 kind: knowledge_card
+8f: F3_inject
 type: kind
 pillar: P01
 title: "Few-Shot Example — Deep Knowledge for few_shot_example"

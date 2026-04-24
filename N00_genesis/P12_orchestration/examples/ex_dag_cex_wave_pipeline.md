@@ -1,6 +1,7 @@
 ---
 id: p12_dag_cex_wave_pipeline
 kind: dag
+8f: F8_collaborate
 pillar: P12
 title: "DAG: CEX Wave Migration Pipeline"
 version: 1.0.0

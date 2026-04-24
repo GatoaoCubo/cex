@@ -1,6 +1,7 @@
 ---
 id: n00_code_executor_manifest
 kind: knowledge_card
+8f: F3_inject
 pillar: P04
 nucleus: n00
 title: "Code Executor -- Canonical Manifest"

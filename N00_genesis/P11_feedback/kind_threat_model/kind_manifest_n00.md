@@ -1,6 +1,7 @@
 ---
 id: n00_threat_model_manifest
 kind: knowledge_card
+8f: F3_inject
 pillar: P11
 nucleus: n00
 title: "Threat Model -- Canonical Manifest"

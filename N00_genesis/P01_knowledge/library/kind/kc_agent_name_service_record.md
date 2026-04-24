@@ -1,6 +1,7 @@
 ---
 id: p04_kc_agent_name_service_record
 kind: knowledge_card
+8f: F3_inject
 type: kind
 pillar: P04
 title: "Agent Name Service Record -- Deep Knowledge for agent_name_service_record"

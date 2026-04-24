@@ -1,6 +1,7 @@
 ---
 id: kc_distillation_config
 kind: knowledge_card
+8f: F3_inject
 title: Distillation Config -- Teacher-Student Knowledge Transfer
 version: 1.0.0
 quality: null

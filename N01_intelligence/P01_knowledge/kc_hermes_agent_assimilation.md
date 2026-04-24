@@ -3,6 +3,7 @@ quality: 8.2
 quality: 7.7
 id: kc_hermes_agent_assimilation
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 nucleus: N01
 domain: competitive_intelligence

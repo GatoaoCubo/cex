@@ -2,6 +2,7 @@
 id: kc_crew_orchestration_patterns
 title: "Crew Orchestration Patterns for Multi-Model LLM Systems"
 kind: knowledge_card
+8f: F3_inject
 version: 1.0.0
 quality: 8.9
 pillar: P01

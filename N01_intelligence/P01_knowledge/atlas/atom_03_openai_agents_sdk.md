@@ -1,6 +1,7 @@
 ---
 id: atom_03_openai_agents_sdk
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 domain: multi-agent orchestration
 title: "OpenAI Agents SDK -- Deep Vocabulary Atlas"

@@ -1,6 +1,7 @@
 ---
 id: kc_information_retrieval_fundamentals
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 nucleus: n01
 title: "Information Retrieval Fundamentals for N01"

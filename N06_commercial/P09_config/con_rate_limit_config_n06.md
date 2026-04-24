@@ -1,6 +1,7 @@
 ---
 id: con_rate_limit_config_n06
 kind: rate_limit_config
+8f: F1_constrain
 pillar: P09
 nucleus: n06
 title: Commercial Rate Limits

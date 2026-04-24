@@ -1,6 +1,7 @@
 ---
 id: p06_security_validation_schema
 kind: validator
+8f: F7_govern
 pillar: P06
 title: Security Validation Schema
 version: 1.0.0

@@ -1,6 +1,7 @@
 ---
 id: kc_partner_listing
 kind: knowledge_card
+8f: F3_inject
 title: Partner Directory Listing
 version: 1.0.0
 quality: 8.7

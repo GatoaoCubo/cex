@@ -1,6 +1,7 @@
 ---
 id: n06_content_factory_pricing
 kind: content_monetization
+8f: F6_produce
 pillar: P11
 title: "Content Factory Pricing -- Per-Format Tiers, Margins & Revenue Model"
 version: 1.0.0

@@ -1,6 +1,7 @@
 ---
 id: p07_ed_n04_knowledge
 kind: eval_dataset
+8f: F3_inject
 pillar: P07
 nucleus: n04
 title: "Eval Dataset -- N04 RAG Evaluation Question-Answer Pairs"

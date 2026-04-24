@@ -1,6 +1,7 @@
 ---
 id: p04_vision_gpt4v
 kind: vision_tool
+8f: F5_call
 pillar: P04
 version: 1.0.0
 created: 2026-03-28

@@ -1,6 +1,7 @@
 ---
 id: p01_kc_supabase_realtime
 kind: knowledge_card
+8f: F3_inject
 type: platform
 pillar: P01
 title: "Supabase Realtime — Channels, Presence, Broadcast, DB Changes"

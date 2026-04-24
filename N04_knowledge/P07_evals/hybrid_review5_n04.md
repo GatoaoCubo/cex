@@ -1,6 +1,7 @@
 ---
 id: hybrid_review5_n04
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "HYBRID_REVIEW5 N04 Audit: compliance_checklist, audit_log, data_residency"
 version: "1.0.0"

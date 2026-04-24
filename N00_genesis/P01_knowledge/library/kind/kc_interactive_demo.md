@@ -1,6 +1,7 @@
 ---
 id: kc_interactive_demo
 kind: knowledge_card
+8f: F3_inject
 title: Interactive Product Demo Script
 version: 1.0.0
 quality: 8.7

@@ -1,6 +1,7 @@
 ---
 id: p04_ct_cex_8f_motor
 kind: cli_tool
+8f: F5_call
 pillar: P04
 title: "Motor 8F — Intent to execution plan decomposer"
 version: 1.0.0

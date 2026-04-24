@@ -1,6 +1,7 @@
 ---
 id: n01_emb_text_embedding_4
 kind: embedding_config
+8f: F3_inject
 pillar: P01
 title: "Embedding Config for N01 RAG"
 version: "1.0.0"

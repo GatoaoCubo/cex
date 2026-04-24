@@ -1,6 +1,7 @@
 ---
 id: handoff_n07
 kind: handoff
+8f: F8_collaborate
 nucleus: n07
 pillar: P12
 title: "Handoff N07: Dispatch Context Transfer"

@@ -1,6 +1,7 @@
 ---
 id: n06_integration_content_factory
 kind: content_monetization
+8f: F6_produce
 pillar: P11
 title: "Content Factory Integration Spec -- Pricing x Pipeline x Checkout"
 version: 1.0.0

@@ -1,6 +1,7 @@
 ---
 id: "p04_cli_{{TOOL_SLUG}}"
 kind: cli_tool
+8f: F5_call
 pillar: P04
 version: 1.0.0
 title: Template - Cli Tool

@@ -1,6 +1,7 @@
 ---
 id: p01_kc_context_window_config
 kind: knowledge_card
+8f: F3_inject
 type: kind
 pillar: P03
 title: "Context Window Config — Deep Knowledge for context_window_config"

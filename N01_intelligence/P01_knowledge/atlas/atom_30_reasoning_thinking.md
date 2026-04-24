@@ -1,6 +1,7 @@
 ---
 id: atom_30_reasoning_thinking
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 quality: 8.8
 title: "Reasoning and Thinking Vocabulary"

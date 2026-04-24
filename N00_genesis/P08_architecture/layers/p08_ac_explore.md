@@ -1,6 +1,7 @@
 ---
 id: p08_ac_explore
 kind: agent_card
+8f: F2_become
 pillar: P08
 title: "Agent Card: Exploration Agent"
 version: 1.0.0

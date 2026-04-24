@@ -1,6 +1,7 @@
 ---
 id: kc_audit_log
 kind: knowledge_card
+8f: F3_inject
 title: Immutable Audit Log Configuration for SOC2 Type II Compliance
 version: 1.0.0
 quality: 8.9

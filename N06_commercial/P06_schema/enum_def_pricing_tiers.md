@@ -1,6 +1,7 @@
 ---
 id: enum_def_pricing_tiers
 kind: enum_def
+8f: F1_constrain
 pillar: P06
 nucleus: n06
 title: "Enum Definition -- Pricing Tier Taxonomy"

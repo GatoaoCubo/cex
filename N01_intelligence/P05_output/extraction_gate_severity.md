@@ -1,6 +1,7 @@
 ---
 id: extraction_gate_severity
 kind: knowledge_card
+8f: F3_inject
 pillar: P01_knowledge
 title: "Extraction: Quality Gate Severity Levels from aiox-core"
 version: 1.0

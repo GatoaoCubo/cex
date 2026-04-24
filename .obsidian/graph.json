@@ -8,128 +8,100 @@
   "collapse-color-groups": false,
   "colorGroups": [
     {
-      "query": "path:N01_intelligence",
+      "query": "path:P01_",
       "color": {
         "a": 1,
-        "rgb": 4492543
+        "rgb": 15971768
       }
     },
     {
-      "query": "path:N02_marketing",
+      "query": "path:P02_",
       "color": {
         "a": 1,
-        "rgb": 16718131
+        "rgb": 7114431
       }
     },
     {
-      "query": "path:N03_engineering",
+      "query": "path:P03_",
       "color": {
         "a": 1,
-        "rgb": 16768256
+        "rgb": 14774357
       }
     },
     {
-      "query": "path:N04_knowledge",
+      "query": "path:P04_",
       "color": {
         "a": 1,
-        "rgb": 5546828
+        "rgb": 16611752
       }
     },
     {
-      "query": "path:N05_operations",
+      "query": "path:P05_",
       "color": {
         "a": 1,
-        "rgb": 16729344
+        "rgb": 15221651
       }
     },
     {
-      "query": "path:N06_commercial",
+      "query": "path:P06_",
       "color": {
         "a": 1,
-        "rgb": 11141375
+        "rgb": 10656766
       }
     },
     {
-      "query": "path:N07_admin",
+      "query": "path:P07_",
       "color": {
         "a": 1,
-        "rgb": 1146880
+        "rgb": 16429472
       }
     },
     {
-      "query": "path:N00_genesis",
+      "query": "path:P08_",
       "color": {
         "a": 1,
-        "rgb": 3355443
+        "rgb": 5631940
       }
     },
     {
-      "query": "path:archetypes/builders",
+      "query": "path:P09_",
       "color": {
         "a": 1,
-        "rgb": 16750848
+        "rgb": 12102089
       }
     },
     {
-      "query": "path:_tools",
+      "query": "path:P10_",
       "color": {
         "a": 1,
-        "rgb": 16750848
+        "rgb": 12862825
       }
     },
     {
-      "query": "path:_docs",
+      "query": "path:P11_",
       "color": {
         "a": 1,
-        "rgb": 4473924
+        "rgb": 16742005
       }
     },
     {
-      "query": "path:_reports",
+      "query": "path:P12_",
       "color": {
         "a": 1,
-        "rgb": 4473924
-      }
-    },
-    {
-      "query": "path:_output",
-      "color": {
-        "a": 1,
-        "rgb": 4473924
-      }
-    },
-    {
-      "query": "path:_dashboards",
-      "color": {
-        "a": 1,
-        "rgb": 4473924
-      }
-    },
-    {
-      "query": "path:cex_sdk",
-      "color": {
-        "a": 1,
-        "rgb": 4473924
-      }
-    },
-    {
-      "query": "path:_showoff",
-      "color": {
-        "a": 1,
-        "rgb": 4473924
+        "rgb": 52937
       }
     }
   ],
   "collapse-display": false,
   "showArrow": false,
   "textFadeMultiplier": -3,
-  "nodeSizeMultiplier": 0.840104166666667,
-  "lineSizeMultiplier": 0.202083333333333,
+  "nodeSizeMultiplier": 0.4828125,
+  "lineSizeMultiplier": 0.1,
   "collapse-forces": false,
-  "centerStrength": 0.3,
-  "repelStrength": 14,
-  "linkStrength": 0.8,
-  "linkDistance": 74,
-  "scale": 0.018269266084169015,
+  "centerStrength": 0.35,
+  "repelStrength": 13,
+  "linkStrength": 1,
+  "linkDistance": 130,
+  "scale": 0.01095299138887553,
   "close": false
 }

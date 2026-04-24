@@ -1,6 +1,7 @@
 ---
 id: ai2ai_coverage_matrix_20260414
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "AI2AI Coverage Matrix -- CEX 238 Kinds vs 6 Standard Bodies (April 2026)"
 version: 1.0.0

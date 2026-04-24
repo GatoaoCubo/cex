@@ -1,6 +1,7 @@
 ---
 id: p03_sp_knowledge_nucleus
 kind: system_prompt
+8f: F2_become
 pillar: P03
 version: 4.0.0
 created: 2026-03-31

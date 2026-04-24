@@ -1,6 +1,7 @@
 ---
 id: hybrid_review6_n01
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: HYBRID_REVIEW6 N01 Audit -- quickstart_guide + api_reference + sdk_example
 version: 1.0.0

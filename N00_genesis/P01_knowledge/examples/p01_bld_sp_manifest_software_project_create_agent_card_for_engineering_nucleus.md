@@ -1,5 +1,6 @@
 ---
 kind: agent_card
+8f: F2_become
 id: agent_card_engineering_nucleus
 name: Engineering Nucleus Agent Card
 pillar: P02

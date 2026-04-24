@@ -1,6 +1,7 @@
 ---
 id: p02_ms_conversational_agent
 kind: memory_scope
+8f: F3_inject
 pillar: P02
 title: Conversational Agent Memory (Buffer + Summary + Entity)
 version: 1.0.0

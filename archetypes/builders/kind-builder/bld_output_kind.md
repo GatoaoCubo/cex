@@ -104,7 +104,8 @@ Body sections:
 
 ## ISO 5: Output Template
 
-Body: YAML frontmatter template with `{{vars}}` + body section templates
+Body: YAML frontmatter template with `{{vars}}` + body section templates.
+Frontmatter MUST include `8f: {{8f}}` after `kind:` -- resolved from kind_8f_mapping.yaml at build time.
 
 ## ISO 6: Examples
 

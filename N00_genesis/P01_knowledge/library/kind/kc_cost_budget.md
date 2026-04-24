@@ -1,6 +1,7 @@
 ---
 id: p01_kc_cost_budget
 kind: knowledge_card
+8f: F3_inject
 type: kind
 pillar: P09
 title: "cost_budget: Token Economics and Spend Management"

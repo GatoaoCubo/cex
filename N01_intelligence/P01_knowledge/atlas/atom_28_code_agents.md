@@ -1,6 +1,7 @@
 ---
 id: atom_28_code_agents
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "Code Agent Vocabulary Atlas -- Complete Taxonomy of AI Coding Agent Concepts"
 version: 1.0.0

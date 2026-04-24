@@ -1,6 +1,7 @@
 ---
 id: p07_sr_ops_3layer
 kind: scoring_rubric
+8f: F7_govern
 pillar: P07
 title: "Rubric: N05 Operations 3-Layer"
 version: "1.0.0"

@@ -1,6 +1,7 @@
 ---
 id: kno_chunk_strategy_n06
 kind: chunk_strategy
+8f: F3_inject
 pillar: P01
 nucleus: n06
 title: Commercial Chunk Strategy

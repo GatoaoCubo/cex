@@ -1,6 +1,7 @@
 ---
 id: p04_ct_validate_schema
 kind: cli_tool
+8f: F5_call
 pillar: P04
 title: "Validate Schema — Structural integrity checker for _schema.yaml"
 version: 1.0.0

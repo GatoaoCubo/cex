@@ -1,6 +1,7 @@
 ---
 id: p01_kc_db_connector
 kind: knowledge_card
+8f: F3_inject
 type: kind
 pillar: P01
 title: "DB Connector — Deep Knowledge for db_connector"

@@ -1,6 +1,7 @@
 ---
 id: p04_skill_verify
 kind: skill
+8f: F5_call
 pillar: P04
 title: "Skill: Verification Protocol"
 version: 1.0.0

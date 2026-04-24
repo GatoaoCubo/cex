@@ -1,6 +1,7 @@
 ---
 id: p07_ds_training_dataset_quality_metrics
 kind: eval_dataset
+8f: F3_inject
 pillar: P07
 version: "1.0.0"
 created: "2026-04-02"

@@ -1,6 +1,7 @@
 ---
 id: p01_kc_perception_tools
 kind: knowledge_card
+8f: F3_inject
 type: domain
 pillar: P01
 title: "Perception Tools — Audio Processing, Vision/Image, CLI Automation, Background Daemons"

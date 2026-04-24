@@ -1,6 +1,7 @@
 ---
 id: brand_decisions_memory
 kind: memory_summary
+8f: F3_inject
 pillar: P10
 title: "Brand Decisions Memory — N06 Commercial"
 nucleus: N06

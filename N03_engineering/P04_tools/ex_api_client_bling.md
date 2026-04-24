@@ -1,6 +1,7 @@
 ---
 id: ex_api_client_bling
 kind: api_client
+8f: F5_call
 pillar: P04
 title: Bling ERP API v3 Client
 version: 0.1.0

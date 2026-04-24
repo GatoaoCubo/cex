@@ -3,6 +3,7 @@ quality: 8.8
 quality: 8.2
 id: p01_kc_cross_reference
 kind: knowledge_card
+8f: F3_inject
 type: domain
 pillar: P01
 title: "Cross-Reference Wiring -- Knowledge Graph Edges for Artifact Compounding"

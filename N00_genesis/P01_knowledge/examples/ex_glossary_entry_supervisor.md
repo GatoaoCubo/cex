@@ -1,6 +1,7 @@
 ---
 id: p01_gl_agent_group
 kind: glossary_entry
+8f: F3_inject
 pillar: P01
 version: 1.0.0
 title: "Glossary — Agent Node"

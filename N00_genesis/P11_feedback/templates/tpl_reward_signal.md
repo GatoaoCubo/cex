@@ -1,6 +1,7 @@
 ---
 id: p11_reward_signal
 kind: reward_signal
+8f: F7_govern
 pillar: P11
 version: 1.0.0
 title: "Template — Reward Signal"

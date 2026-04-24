@@ -1,6 +1,7 @@
 ---
 id: con_path_config_n04
 kind: path_config
+8f: F1_constrain
 pillar: P09
 nucleus: n04
 title: Knowledge Path Config

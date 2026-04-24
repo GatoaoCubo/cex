@@ -1,6 +1,7 @@
 ---
 id: mem_entity_memory_n01
 kind: entity_memory
+8f: F3_inject
 pillar: P10
 nucleus: N01
 title: "N01 Entity Memory"

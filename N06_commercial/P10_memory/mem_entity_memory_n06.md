@@ -1,6 +1,7 @@
 ---
 id: mem_entity_memory_n06
 kind: entity_memory
+8f: F3_inject
 pillar: P10
 nucleus: n06
 title: Commercial Entity Memory

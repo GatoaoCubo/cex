@@ -1,6 +1,7 @@
 ---
 id: p01_kc_llm_output_parsing_validation
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "LLM Output Parsing and Validation Patterns"
 version: "1.0.0"

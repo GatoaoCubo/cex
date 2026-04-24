@@ -1,6 +1,7 @@
 ---
 id: p01_kc_retriever_config
 kind: knowledge_card
+8f: F3_inject
 type: kind
 pillar: P04
 title: "Retriever Configuration — Deep Knowledge for retriever configuration"

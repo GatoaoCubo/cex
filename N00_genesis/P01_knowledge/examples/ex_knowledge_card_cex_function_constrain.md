@@ -1,6 +1,7 @@
 ---
 id: p01_kc_cex_function_constrain
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "CEX Function CONSTRAIN — Formatting and Restricting Output to Standards"
 version: 1.0.0

@@ -1,6 +1,7 @@
 ---
 id: p03_up_dispatch_agent_group
 kind: user_prompt
+8f: F6_produce
 action: dispatch_agent_group_task
 input_required: [task_description, agent_group_name, quality_target]
 output_expected: "Completion signal + git commit with artifacts"

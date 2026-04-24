@@ -1,6 +1,7 @@
 ---
 id: p01_kc_rate_limit_config
 kind: knowledge_card
+8f: F3_inject
 type: kind
 pillar: P09
 title: "Rate Limit Config — Deep Knowledge for rate_limit_config"

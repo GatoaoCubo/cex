@@ -1,6 +1,7 @@
 ---
 id: n03_self_review_20260402
 kind: context_doc
+8f: F3_inject
 nucleus: N03
 pillar: P09
 quality: 9.0

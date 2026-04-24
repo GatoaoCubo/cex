@@ -1,6 +1,7 @@
 ---
 id: agent_n01
 kind: agent
+8f: F2_become
 nucleus: n01
 pillar: P02
 mirrors: N00_genesis/P02_model/kind_agent/kind_manifest_n00.md

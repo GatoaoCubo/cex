@@ -1,6 +1,7 @@
 ---
 id: n06_output_visual_identity
 kind: output_template
+8f: F6_produce
 pillar: P05
 title: "Visual Identity Sheet — Colors, Typography, Guidelines"
 version: 1.0.0

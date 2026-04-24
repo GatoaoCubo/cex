@@ -1,6 +1,7 @@
 ---
 id: p07_sr_output_quality_density
 kind: scoring_rubric
+8f: F7_govern
 pillar: P07
 title: Output Quality & Density Scoring Rubric
 version: 1.0.0

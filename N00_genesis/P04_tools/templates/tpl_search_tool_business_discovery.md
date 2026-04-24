@@ -1,6 +1,7 @@
 ---
 id: tpl_search_tool_business_discovery
 kind: template
+8f: F6_produce
 pillar: P04
 title: "Search Tool — Business Discovery Configuration"
 version: 1.0.0

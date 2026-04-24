@@ -1,6 +1,7 @@
 ---
 id: p01_kc_cex_lp09_config
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "CEX LP09 Config — Operational Control Panel for LLM Systems"
 version: 1.0.0

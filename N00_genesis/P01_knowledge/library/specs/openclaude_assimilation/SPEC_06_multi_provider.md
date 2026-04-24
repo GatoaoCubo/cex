@@ -1,6 +1,7 @@
 ---
 id: spec_06_multi_provider
 kind: spec
+8f: F4_reason
 pillar: P01
 title: "SPEC_06: Multi-Provider Router → Nucleus Routing"
 version: 1.0.0

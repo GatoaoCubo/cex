@@ -1,6 +1,7 @@
 ---
 id: benchmark_suite_n01
 kind: benchmark_suite
+8f: F7_govern
 pillar: P07
 nucleus: n01
 title: "N01 Research Intelligence Benchmark Suite"

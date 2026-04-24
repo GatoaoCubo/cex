@@ -1,6 +1,7 @@
 ---
 id: p01_kc_deploy_paas
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "Deploy PaaS — Railway, Render, Nixpacks"
 version: 1.0.0

@@ -1,6 +1,7 @@
 ---
 id: n04_output_monetization_curriculum
 kind: output_template
+8f: F6_produce
 pillar: P05
 domain: knowledge
 quality: 9.0

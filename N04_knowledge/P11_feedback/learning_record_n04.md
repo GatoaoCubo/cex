@@ -1,6 +1,7 @@
 ---
 id: p11_lr_n04_knowledge
 kind: learning_record
+8f: F7_govern
 pillar: P10
 nucleus: n04
 title: "Learning Record -- N04 Knowledge Nucleus"

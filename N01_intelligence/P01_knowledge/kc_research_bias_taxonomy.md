@@ -1,6 +1,7 @@
 ---
 id: kc_research_bias_taxonomy
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 nucleus: n01
 title: "Research Bias Taxonomy for Intelligence Analysis"

@@ -6,6 +6,7 @@
 
 id: p05_fmt_{{FORMAT_SLUG}}
 kind: formatter
+8f: F6_produce
 pillar: P05
 title: "Formatter: {{OUTPUT_NAME}}"
 version: 1.0.0

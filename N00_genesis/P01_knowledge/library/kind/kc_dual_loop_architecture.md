@@ -1,6 +1,7 @@
 ---
 id: kc_dual_loop_architecture
 kind: knowledge_card
+8f: F3_inject
 title: Dual Loop Architecture
 version: 1.0.0
 quality: 8.7

@@ -1,6 +1,7 @@
 ---
 id: p01_kc_source_credibility_scoring_frameworks
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "Source Credibility Scoring Frameworks for Information Verification"
 version: "1.0.0"

@@ -3,6 +3,7 @@ id: KC_N05_UVICORN_PRODUCTION
 title: Uvicorn Production Configuration — Workers, uvloop, Gunicorn, FastAPI Practices
 domain: N05_operations
 kind: knowledge_card
+8f: F3_inject
 pillar: P05
 tags: [uvicorn, gunicorn, workers, uvloop, httptools, fastapi, production, graceful-reload, memory]
 quality: 9.1

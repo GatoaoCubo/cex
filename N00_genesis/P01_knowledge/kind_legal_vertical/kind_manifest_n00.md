@@ -1,6 +1,7 @@
 ---
 id: n00_legal_vertical_manifest
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 nucleus: n00
 title: "Legal Vertical -- Canonical Manifest"

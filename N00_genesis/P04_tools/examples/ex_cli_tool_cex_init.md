@@ -1,6 +1,7 @@
 ---
 id: p04_ct_cex_init
 kind: cli_tool
+8f: F5_call
 pillar: P04
 title: "CEX Init — Scaffold a new CEX project in 5 questions"
 version: 1.0.0

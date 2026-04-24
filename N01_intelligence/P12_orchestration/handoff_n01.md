@@ -3,6 +3,7 @@ quality: 7.6
 quality: 7.3
 id: handoff_n01
 kind: handoff
+8f: F8_collaborate
 nucleus: n01
 pillar: P12
 mirrors: N00_genesis/P12_orchestration/kind_handoff/kind_manifest_n00.md

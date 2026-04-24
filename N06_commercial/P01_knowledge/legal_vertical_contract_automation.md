@@ -1,6 +1,7 @@
 ---
 id: legal_vertical_contract_automation
 kind: legal_vertical
+8f: F1_constrain
 pillar: P01
 nucleus: N06
 domain: legal

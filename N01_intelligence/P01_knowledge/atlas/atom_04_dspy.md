@@ -1,6 +1,7 @@
 ---
 id: atom_04_dspy
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 domain: framework_atlas
 title: "DSPy -- Stanford Framework for Programming (not Prompting) LMs"

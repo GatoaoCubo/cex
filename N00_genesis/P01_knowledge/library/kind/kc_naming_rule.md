@@ -1,6 +1,7 @@
 ---
 id: p01_kc_naming_rule
 kind: knowledge_card
+8f: F3_inject
 type: kind
 pillar: P08
 title: "Naming Rule — Deep Knowledge for naming_rule"

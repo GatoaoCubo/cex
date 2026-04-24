@@ -1,6 +1,7 @@
 ---
 id: customer_segment_n02
 kind: customer_segment
+8f: F4_reason
 pillar: P02
 nucleus: n02
 title: "ICP-Typed Audience Segment Definitions"

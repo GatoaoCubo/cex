@@ -1,6 +1,7 @@
 ---
 id: ex_roi_calculator_content
 kind: roi_calculator
+8f: F6_produce
 pillar: P11
 version: 1.0.0
 title: "ROI Calculator -- Content Factory / AI Content Platform"

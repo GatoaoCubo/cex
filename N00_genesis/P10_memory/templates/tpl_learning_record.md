@@ -6,6 +6,7 @@
 
 id: p10_lr_{{TOPIC_SLUG}}
 kind: learning_record
+8f: F7_govern
 pillar: P10
 title: "Learning: {{TOPIC}}"
 version: 1.0.0

@@ -1,6 +1,7 @@
 ---
 id: p11_sil_n03
 kind: self_improvement_loop
+8f: F7_govern
 pillar: P11
 title: "Self-Improvement Loop -- N03 Engineering Evolution"
 version: 1.0.0

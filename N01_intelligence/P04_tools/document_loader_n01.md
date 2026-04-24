@@ -1,6 +1,7 @@
 ---
 id: document_loader_n01
 kind: document_loader
+8f: F5_call
 pillar: P04
 nucleus: n01
 title: "N01 Multi-Source Document Loader"

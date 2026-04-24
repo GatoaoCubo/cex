@@ -1,6 +1,7 @@
 ---
 id: user_journey_n02
 kind: user_journey
+8f: F4_reason
 pillar: P05
 nucleus: n02
 title: "Funnel-Stage Content Mapping -- User Journey"

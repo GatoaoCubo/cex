@@ -1,6 +1,7 @@
 ---
 id: kc_intelligence_vocabulary
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 nucleus: n01
 title: "N01 Intelligence Domain Controlled Vocabulary"

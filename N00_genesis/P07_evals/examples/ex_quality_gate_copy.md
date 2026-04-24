@@ -1,6 +1,7 @@
 ---
 id: ex_quality_gate_copy
 kind: quality_gate
+8f: F7_govern
 pillar: P07
 title: Copywriting Quality Gate
 tags: [quality, gate, copy, evaluation]

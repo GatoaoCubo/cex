@@ -1,6 +1,7 @@
 ---
 id: n00_validator_manifest
 kind: knowledge_card
+8f: F3_inject
 pillar: P06
 nucleus: n00
 title: "Validator -- Canonical Manifest"

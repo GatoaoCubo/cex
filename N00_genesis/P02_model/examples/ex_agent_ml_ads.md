@@ -5,6 +5,7 @@ description: Mercado Livre Product Ads strategy, ROAS optimization, and campaign
 version: 1.0.0
 pillar: P02
 kind: agent
+8f: F2_become
 created: 2026-03-22
 updated: 2026-03-22
 author: knowledge_agent

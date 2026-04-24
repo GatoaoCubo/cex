@@ -1,6 +1,7 @@
 ---
 id: sch_validator_n04
 kind: validator
+8f: F7_govern
 pillar: P06
 nucleus: n04
 title: Knowledge Intake Validator

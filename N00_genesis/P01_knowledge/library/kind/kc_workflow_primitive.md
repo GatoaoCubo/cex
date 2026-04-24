@@ -1,6 +1,7 @@
 ---
 id: p01_kc_workflow_primitive
 kind: knowledge_card
+8f: F3_inject
 type: kind
 pillar: P12
 title: "Workflow Primitive -- Deep Knowledge for workflow_primitive"

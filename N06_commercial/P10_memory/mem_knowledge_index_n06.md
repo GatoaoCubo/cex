@@ -1,6 +1,7 @@
 ---
 id: mem_knowledge_index_n06
 kind: knowledge_index
+8f: F3_inject
 pillar: P10
 nucleus: n06
 title: Commercial Knowledge Index

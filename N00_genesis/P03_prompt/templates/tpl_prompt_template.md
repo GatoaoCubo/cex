@@ -7,6 +7,7 @@
 
 id: p03_pt_{{TOPIC_SLUG}}
 kind: prompt_template
+8f: F6_produce
 pillar: P03
 title: {{TITLE_DESCRITIVO}}
 version: 1.0.0

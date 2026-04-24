@@ -1,6 +1,7 @@
 ---
 id: tpl_brand_context_nucleus
 kind: template
+8f: F6_produce
 pillar: P09
 title: "Brand Context — Nucleus Injection Template"
 version: 1.0.0

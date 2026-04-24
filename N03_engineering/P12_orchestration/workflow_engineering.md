@@ -1,6 +1,7 @@
 ---
 id: p12_wf_builder_8f_pipeline
 kind: workflow
+8f: F8_collaborate
 pillar: P12
 title: 8F Construction Pipeline
 version: 2.0.0

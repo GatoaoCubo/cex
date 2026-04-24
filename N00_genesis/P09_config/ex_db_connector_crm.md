@@ -1,6 +1,7 @@
 ---
 id: ex_db_connector_crm
 kind: db_connector
+8f: F5_call
 pillar: P09
 version: 1.0.0
 title: "CRM DB Connector Template -- Supabase B2B Partner Tables"

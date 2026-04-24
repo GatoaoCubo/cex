@@ -1,6 +1,7 @@
 ---
 id: kc_realtime_session
 kind: knowledge_card
+8f: F3_inject
 title: Realtime Session Configuration
 version: 1.0.0
 quality: 8.7

@@ -1,6 +1,7 @@
 ---
 id: n00_realtime_session_manifest
 kind: knowledge_card
+8f: F3_inject
 pillar: P09
 nucleus: n00
 title: "Realtime Session -- Canonical Manifest"

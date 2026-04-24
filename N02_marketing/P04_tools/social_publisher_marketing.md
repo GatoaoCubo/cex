@@ -1,6 +1,7 @@
 ---
 id: n02_tool_social_publisher
 kind: cli_tool
+8f: F5_call
 pillar: P04
 title: "Social Publisher — N02 Marketing Automation Tool"
 version: 1.0.0

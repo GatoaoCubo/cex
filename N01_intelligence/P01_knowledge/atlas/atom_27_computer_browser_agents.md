@@ -6,6 +6,7 @@ date: "2024-05-20"
 version: "2.0"
 quality: 8.8
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 domain: computer_use_agents
 hydrated: 2026-04-13

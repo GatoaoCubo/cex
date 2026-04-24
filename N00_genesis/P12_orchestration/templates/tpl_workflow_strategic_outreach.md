@@ -1,6 +1,7 @@
 ---
 id: tpl_workflow_strategic_outreach
 kind: template
+8f: F6_produce
 pillar: P12
 title: "Workflow — Strategic Outreach Campaign"
 version: 1.0.0

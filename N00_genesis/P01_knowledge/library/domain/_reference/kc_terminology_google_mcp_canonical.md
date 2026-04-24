@@ -1,6 +1,7 @@
 ---
 id: p01_kc_terminology_google_mcp_canonical
 kind: knowledge_card
+8f: F3_inject
 type: domain
 pillar: P01
 title: "Google & MCP Official Terminology: Canonical Vocabulary (2026)"

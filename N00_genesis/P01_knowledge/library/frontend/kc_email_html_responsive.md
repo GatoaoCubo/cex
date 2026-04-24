@@ -1,6 +1,7 @@
 ---
 id: p01_kc_email_html_responsive
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: Email HTML & Responsive Design
 version: 1.0.0

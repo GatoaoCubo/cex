@@ -1,6 +1,7 @@
 ---
 id: n01_agent_intelligence
 kind: agent
+8f: F2_become
 pillar: P02
 title: "N01 Research Analyst — Analytical Envy"
 version: 4.0.0

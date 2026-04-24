@@ -6,6 +6,7 @@
 
 id: p05_parser_{{TARGET_SLUG}}
 kind: parser
+8f: F6_produce
 pillar: P05
 title: "Parser: {{TARGET_NAME}}"
 version: 1.0.0

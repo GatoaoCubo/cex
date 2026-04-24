@@ -1,6 +1,7 @@
 ---
 id: n07_taught_terms_registry
 kind: entity_memory
+8f: F3_inject
 pillar: P10
 title: "Taught Terms Registry -- Didactic Protocol Tracker"
 version: 1.0.0

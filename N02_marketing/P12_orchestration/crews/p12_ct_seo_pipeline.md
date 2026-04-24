@@ -1,6 +1,7 @@
 ---
 id: p12_ct_seo_pipeline.md
 kind: crew_template
+8f: F2_become
 pillar: P12
 llm_function: CALL
 crew_name: seo_pipeline

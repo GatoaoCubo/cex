@@ -1,6 +1,7 @@
 ---
 id: kc_cex_distribution_model
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "CEX Distribution Model -- From PI Wrapper to Claude Code Native"
 version: 1.0.0

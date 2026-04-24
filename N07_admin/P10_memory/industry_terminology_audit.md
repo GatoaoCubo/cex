@@ -1,6 +1,7 @@
 ---
 id: n07_memory_industry_audit
 kind: memory-summary
+8f: F3_inject
 nucleus: N07
 pillar: P10
 title: "Industry Terminology Audit: CEX kinds vs Anthropic/OpenAI/Google/LangChain"

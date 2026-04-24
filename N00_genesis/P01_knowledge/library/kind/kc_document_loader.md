@@ -1,6 +1,7 @@
 ---
 id: p01_kc_document_loader
 kind: knowledge_card
+8f: F3_inject
 type: kind
 pillar: P01
 title: "Document Loader — Deep Knowledge for document_loader"

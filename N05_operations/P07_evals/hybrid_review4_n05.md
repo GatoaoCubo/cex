@@ -1,6 +1,7 @@
 ---
 id: hybrid_review4_n05
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "HYBRID_REVIEW4 N05 Audit: benchmark_suite, eval_metric, memory_benchmark"
 version: "1.0.0"

@@ -1,6 +1,7 @@
 ---
 id: p11_qg_security
 kind: quality_gate
+8f: F7_govern
 pillar: P11
 title: "Gate: Security Validation"
 version: 1.0.0

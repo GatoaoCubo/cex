@@ -1,6 +1,7 @@
 ---
 id: ex_workflow_content_factory
 kind: workflow
+8f: F8_collaborate
 pillar: P12
 title: "Example Workflow: Content Factory"
 version: 1.0.0

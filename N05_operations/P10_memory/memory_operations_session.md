@@ -1,6 +1,7 @@
 ---
 id: p10_memory_operations_session
 kind: runtime_state
+8f: F8_collaborate
 pillar: P10
 title: Operations Session Memory
 version: 1.0.0

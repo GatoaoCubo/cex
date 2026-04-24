@@ -1,6 +1,7 @@
 ---
 id: sch_enum_def_n04
 kind: enum_def
+8f: F1_constrain
 pillar: P06
 nucleus: n04
 title: Knowledge Signal Enum

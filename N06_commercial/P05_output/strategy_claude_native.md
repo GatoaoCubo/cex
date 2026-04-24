@@ -1,6 +1,7 @@
 ---
 id: n06_strategy_claude_native
 kind: context_doc
+8f: F3_inject
 pillar: P01
 title: "N06 Commercial Strategy -- Claude-Native Distribution Model"
 version: 1.0.0

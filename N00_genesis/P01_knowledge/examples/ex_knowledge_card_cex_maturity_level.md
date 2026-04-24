@@ -1,6 +1,7 @@
 ---
 id: p01_kc_cex_maturity_level
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "CEX Maturity Level — LP Completeness as Capability Diagnostic"
 version: 1.0.0

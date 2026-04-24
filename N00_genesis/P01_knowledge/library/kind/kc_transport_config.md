@@ -1,6 +1,7 @@
 ---
 id: kc_transport_config
 kind: knowledge_card
+8f: F3_inject
 title: Transport Configuration for Real-Time Communication
 version: 1.0.0
 quality: 8.7

@@ -5,6 +5,7 @@
 
 id: p02_mm_{{MODEL_SLUG}}
 kind: mental_model
+8f: F4_reason
 pillar: P02
 title: "{{MENTAL_MODEL_TITLE}}"
 owner: {{AGENT_GROUP_NAME}}

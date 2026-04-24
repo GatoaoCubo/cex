@@ -1,6 +1,7 @@
 ---
 id: n00_action_paradigm_manifest
 kind: knowledge_card
+8f: F3_inject
 pillar: P04
 nucleus: n00
 title: "Action Paradigm -- Canonical Manifest"

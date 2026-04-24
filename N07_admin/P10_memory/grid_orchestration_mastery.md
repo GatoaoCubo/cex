@@ -1,6 +1,7 @@
 ---
 id: n07_memory_grid_ops
 kind: memory-summary
+8f: F3_inject
 nucleus: N07
 pillar: P08
 title: "Grid Ops — Battle-Tested Operational Knowledge"

@@ -1,6 +1,7 @@
 ---
 id: p01_kc_server_tools
 kind: knowledge_card
+8f: F3_inject
 type: kind
 pillar: P04
 title: "Server Tools — Deep Knowledge for server tools"

@@ -1,6 +1,7 @@
 ---
 id: p01_kc_enterprise_sla
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "Enterprise SLA — Service Level Agreement Kind"
 version: 1.1.0

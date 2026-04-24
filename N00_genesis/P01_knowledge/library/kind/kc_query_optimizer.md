@@ -1,6 +1,7 @@
 ---
 id: kc_query_optimizer
 kind: knowledge_card
+8f: F3_inject
 title: Query Optimizer -- RAG Query Rewriting and Decomposition
 version: 1.0.0
 quality: null

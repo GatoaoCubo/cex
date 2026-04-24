@@ -1,6 +1,7 @@
 ---
 id: p01_kc_competitive_intelligence_osint
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "Competitive Intelligence OSINT Techniques"
 version: "1.0.0"

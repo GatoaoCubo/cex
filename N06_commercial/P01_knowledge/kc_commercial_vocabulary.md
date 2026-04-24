@@ -1,6 +1,7 @@
 ---
 id: kc_commercial_vocabulary
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 nucleus: n06
 title: "Knowledge Card -- N06 Commercial Controlled Vocabulary"

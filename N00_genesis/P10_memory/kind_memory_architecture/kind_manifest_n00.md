@@ -1,6 +1,7 @@
 ---
 id: n00_memory_architecture_manifest
 kind: knowledge_card
+8f: F3_inject
 pillar: P10
 nucleus: n00
 title: "Memory Architecture -- Canonical Manifest"

@@ -1,6 +1,7 @@
 ---
 id: p03_fs_product_extraction
 kind: few_shot
+8f: F3_inject
 pillar: P03
 title: Few-Shot Product Data Extraction from Marketplace Listings
 task: extract_product_data

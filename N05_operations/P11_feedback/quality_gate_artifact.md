@@ -1,6 +1,7 @@
 ---
 id: p11_qg_artifact
 kind: quality_gate
+8f: F7_govern
 pillar: P11
 title: "Gate: Artifact Quality Validation"
 version: 1.0.0

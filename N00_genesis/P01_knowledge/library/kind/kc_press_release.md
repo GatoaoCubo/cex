@@ -1,6 +1,7 @@
 ---
 id: kc_press_release
 kind: knowledge_card
+8f: F3_inject
 title: Press Release
 version: 1.0.0
 quality: 8.7

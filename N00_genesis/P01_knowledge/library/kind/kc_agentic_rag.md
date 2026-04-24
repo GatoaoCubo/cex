@@ -1,6 +1,7 @@
 ---
 id: kc_agentic_rag
 kind: knowledge_card
+8f: F3_inject
 title: Agentic RAG Pattern
 version: 1.0.0
 quality: 8.8

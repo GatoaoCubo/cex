@@ -1,6 +1,7 @@
 ---
 id: n00_expansion_play_manifest
 kind: knowledge_card
+8f: F3_inject
 pillar: P03
 nucleus: n00
 title: "Expansion Play -- Canonical Manifest"

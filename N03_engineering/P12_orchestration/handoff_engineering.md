@@ -1,6 +1,7 @@
 ---
 id: p12_ho_builder_nucleus
 kind: handoff
+8f: F8_collaborate
 pillar: P12
 title: Handoff Protocol -- Builder Nucleus
 version: 1.0.0

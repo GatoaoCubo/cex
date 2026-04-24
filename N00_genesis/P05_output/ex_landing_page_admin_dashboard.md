@@ -1,6 +1,7 @@
 ---
 id: ex-landing-page-admin-dashboard
 kind: landing_page
+8f: F6_produce
 pillar: P05
 title: Admin Dashboard Landing Page
 version: 0.1.0

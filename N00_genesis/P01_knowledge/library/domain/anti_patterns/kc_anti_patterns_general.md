@@ -1,6 +1,7 @@
 ---
 id: p01_kc_anti_patterns_general
 kind: knowledge_card
+8f: F3_inject
 type: domain
 pillar: P01
 title: "LLM Agent Anti-Patterns — General Catalog"

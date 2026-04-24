@@ -1,6 +1,7 @@
 ---
 id: p01_kc_supabase_edge_functions
 kind: knowledge_card
+8f: F3_inject
 type: platform
 pillar: P01
 title: "Supabase Edge Functions — Deno Runtime, Global Deploy"

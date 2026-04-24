@@ -1,6 +1,7 @@
 ---
 id: p11_gr_builder_nucleus
 kind: guardrail
+8f: F7_govern
 pillar: P11
 title: Guardrails -- Builder Nucleus
 version: 1.0.0

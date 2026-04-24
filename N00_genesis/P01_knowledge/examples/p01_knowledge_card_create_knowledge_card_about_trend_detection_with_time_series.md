@@ -1,6 +1,7 @@
 ---
 id: p01_kc_trend_detection_time_series
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "Trend Detection with Time Series Analysis"
 version: "1.0.0"

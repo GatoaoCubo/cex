@@ -1,6 +1,7 @@
 ---
 id: p01_kc_response_format
 kind: knowledge_card
+8f: F3_inject
 type: kind
 pillar: P01
 title: "Response Format — Deep Knowledge for response_format"

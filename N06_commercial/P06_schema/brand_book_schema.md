@@ -1,6 +1,7 @@
 ---
 id: n06_schema_brand_book
 kind: constraint_spec
+8f: F1_constrain
 pillar: P06
 title: "Brand Book Schema — 32-Block Validation"
 version: 1.0.0

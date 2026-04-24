@@ -1,6 +1,7 @@
 ---
 id: p02_mm_codebase_mapper
 kind: mental_model
+8f: F4_reason
 pillar: P02
 title: "Mental Model: Codebase Mapper"
 version: 1.0.0

@@ -1,6 +1,7 @@
 ---
 id: n00_p11_kind_index
 kind: knowledge_card
+8f: F3_inject
 pillar: P11
 nucleus: n00
 title: "P11 Feedback -- Kind Index"

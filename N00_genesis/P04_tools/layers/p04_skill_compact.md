@@ -1,6 +1,7 @@
 ---
 id: p04_skill_compact
 kind: skill
+8f: F5_call
 pillar: P04
 title: "Skill: Context Compaction"
 version: 1.0.0

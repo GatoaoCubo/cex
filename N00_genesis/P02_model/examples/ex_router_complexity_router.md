@@ -1,6 +1,7 @@
 ---
 id: p02_rt_complexity_router
 kind: router
+8f: F8_collaborate
 pillar: P02
 title: "Complexity Router"
 routes:

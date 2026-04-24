@@ -3,6 +3,7 @@ quality: 8.2
 quality: 7.9
 pillar: P01
 kind: knowledge_card
+8f: F3_inject
 id: kc_test_consolidate_loop
 
 title: Test Consolidate Loop

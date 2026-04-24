@@ -1,6 +1,7 @@
 ---
 id: kno_retriever_config_n06
 kind: retriever_config
+8f: F3_inject
 pillar: P01
 nucleus: n06
 title: Commercial Retriever Config

@@ -11,6 +11,11 @@ frontmatter_cex:
     min: 0
     validator: S_RELATED
     note: "Auto-populated by cex_wikilink.py, manually curated by builders"
+  8f:
+    type: string
+    required: recommended
+    description: "8F pipeline stage from kind_8f_mapping.yaml (e.g. F3_inject, F1_constrain)"
+    example: F3_inject
 kinds:
   user_model:
     description: Cross-session dialectic user representation (Honcho pattern, HERMES assimilation)

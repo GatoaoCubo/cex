@@ -1,6 +1,7 @@
 ---
 id: p12_dr_orchestration
 kind: dispatch_rule
+8f: F8_collaborate
 pillar: P12
 version: 1.0.0
 created: 2026-04-02

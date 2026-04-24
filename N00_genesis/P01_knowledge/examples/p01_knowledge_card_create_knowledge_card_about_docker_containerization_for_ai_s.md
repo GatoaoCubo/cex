@@ -1,6 +1,7 @@
 ---
 id: p01_kc_docker_ai_containerization
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "Docker Containerization Patterns for AI Services"
 version: "1.0.0"

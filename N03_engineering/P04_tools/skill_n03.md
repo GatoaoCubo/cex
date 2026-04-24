@@ -1,6 +1,7 @@
 ---
 id: skill_n03
 kind: skill
+8f: F5_call
 nucleus: n03
 pillar: P04
 overrides:

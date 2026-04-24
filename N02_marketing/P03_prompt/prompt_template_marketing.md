@@ -1,6 +1,7 @@
 ---
 id: p03_pt_visual_frontend_marketing
 kind: prompt_template
+8f: F6_produce
 pillar: P03
 title: Visual Frontend + Marketing Production Template
 version: 4.0.0

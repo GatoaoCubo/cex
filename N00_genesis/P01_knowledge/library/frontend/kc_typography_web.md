@@ -1,6 +1,7 @@
 ---
 id: p01_kc_typography_web
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "Typography Web"
 version: 1.0.0

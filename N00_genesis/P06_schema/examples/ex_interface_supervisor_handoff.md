@@ -1,6 +1,7 @@
 ---
 id: p06_iface_agent_group_handoff
 kind: interface
+8f: F1_constrain
 pillar: P06
 title: "Interface: orchestrator → Agent_group Handoff Contract"
 version: 1.0.0

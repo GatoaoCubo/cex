@@ -1,6 +1,7 @@
 ---
 id: p05_rf_builder_artifact
 kind: response_format
+8f: F6_produce
 pillar: P05
 title: Response Format -- CEX Artifact
 version: 2.0.0

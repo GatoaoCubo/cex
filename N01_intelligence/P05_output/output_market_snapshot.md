@@ -1,6 +1,7 @@
 ---
 id: p10_out_market_snapshot
 kind: output
+8f: F6_produce
 pillar: P10
 title: "Output: Market Snapshot"
 version: 1.0.0

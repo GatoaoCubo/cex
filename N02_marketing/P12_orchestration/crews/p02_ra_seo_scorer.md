@@ -1,6 +1,7 @@
 ---
 id: p02_ra_seo_scorer.md
 kind: role_assignment
+8f: F2_become
 pillar: P02
 llm_function: CONSTRAIN
 role_name: seo_scorer

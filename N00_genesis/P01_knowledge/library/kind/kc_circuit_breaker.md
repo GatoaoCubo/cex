@@ -1,6 +1,7 @@
 ---
 id: p01_kc_circuit_breaker
 kind: knowledge_card
+8f: F3_inject
 type: kind
 pillar: P09
 title: "Circuit Breaker -- Deep Knowledge for circuit_breaker"

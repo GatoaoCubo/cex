@@ -1,6 +1,7 @@
 ---
 id: p06_td_cex_types
 kind: type_def
+8f: F1_constrain
 pillar: P06
 title: "Type Definitions -- CEX Core Types"
 version: 1.0.0

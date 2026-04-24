@@ -1,6 +1,7 @@
 ---
 id: leverage_map_v2_verify_2026_04_15
 kind: verification_report
+8f: F7_govern
 pillar: P08
 title: LEVERAGE_MAP_V2 Verification - N03 Builder Linter
 nucleus: N03

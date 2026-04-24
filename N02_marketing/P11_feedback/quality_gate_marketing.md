@@ -1,6 +1,7 @@
 ---
 id: p11_qg_visual_frontend_marketing
 kind: quality_gate
+8f: F7_govern
 pillar: P11
 title: "Gate: Visual Frontend + Marketing Quality"
 version: 4.0.0

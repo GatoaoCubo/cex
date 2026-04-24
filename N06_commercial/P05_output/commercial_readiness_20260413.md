@@ -1,6 +1,7 @@
 ---
 id: commercial_readiness_20260413
 kind: content_monetization
+8f: F6_produce
 pillar: P11
 title: CEX commercial readiness assessment (post Wave 2)
 version: 1.0.0

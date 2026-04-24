@@ -1,6 +1,7 @@
 ---
 id: p01_kc_path_config
 kind: knowledge_card
+8f: F3_inject
 type: kind
 pillar: P09
 title: "Path Config — Deep Knowledge for path_config"

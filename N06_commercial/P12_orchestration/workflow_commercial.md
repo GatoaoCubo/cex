@@ -1,6 +1,7 @@
 ---
 id: p12_wf_commercial
 kind: workflow
+8f: F8_collaborate
 pillar: P12
 title: "N06 Workflow — Brand Discovery + Revenue + Bridge"
 version: 4.0.0

@@ -1,6 +1,7 @@
 ---
 id: cex_llm_vocabulary_whitepaper
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "CEX LLM Ecosystem Vocabulary Whitepaper"
 version: 1.0.0

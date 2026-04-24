@@ -1,6 +1,7 @@
 ---
 id: tpl_research_batch_cnae
 kind: template
+8f: F6_produce
 pillar: P12
 title: "Research Batch — Tax Registry / Business Classification Deep Harvest"
 version: 1.0.0

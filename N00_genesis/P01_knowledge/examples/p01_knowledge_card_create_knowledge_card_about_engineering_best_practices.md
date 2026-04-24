@@ -1,6 +1,7 @@
 ---
 id: p01_kc_engineering_best_practices
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "Software Engineering Best Practices for Quality and Maintainability"
 version: "1.0.0"

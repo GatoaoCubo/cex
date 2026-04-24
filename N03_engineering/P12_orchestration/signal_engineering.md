@@ -1,6 +1,7 @@
 ---
 id: p12_sig_builder_nucleus
 kind: signal
+8f: F8_collaborate
 pillar: P12
 title: Signal Definitions -- Builder Nucleus
 version: 1.0.0

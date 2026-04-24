@@ -1,6 +1,7 @@
 ---
 id: p10_ms_conversation_compress
 kind: memory_summary
+8f: F3_inject
 pillar: P10
 title: "Conversation Compression — Incremental Summarization for Long Sessions"
 version: 1.0.0

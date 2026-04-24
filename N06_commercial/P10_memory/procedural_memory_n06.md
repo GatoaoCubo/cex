@@ -1,6 +1,7 @@
 ---
 id: procedural_memory_n06
 kind: procedural_memory
+8f: F3_inject
 pillar: P10
 nucleus: n06
 title: "Procedural Memory -- N06 Commercial Standard Operating Procedures"

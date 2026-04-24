@@ -1,6 +1,7 @@
 ---
 id: p08_dm_n03_leverage_v2_verification
 kind: decision_record
+8f: F4_reason
 title: "N03 LEVERAGE_MAP_V2: Builder Linter Verification + Next Builds"
 version: 1.1.0
 quality: 9.1

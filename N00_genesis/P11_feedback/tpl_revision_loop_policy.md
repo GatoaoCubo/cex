@@ -1,6 +1,7 @@
 ---
 id: rlp_{{name}}
 kind: revision_loop_policy
+8f: F7_govern
 pillar: P11
 title: "Revision Policy: {{name}}"
 max_iterations: 3

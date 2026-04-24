@@ -1,6 +1,7 @@
 ---
 id: hybrid_review7_n06
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "HYBRID_REVIEW7 N06 Audit: expansion_play + govtech_vertical + edtech_vertical"
 version: "1.0.0"

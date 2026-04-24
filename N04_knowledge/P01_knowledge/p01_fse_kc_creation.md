@@ -1,6 +1,7 @@
 ---
 id: p01_fse_kc_creation
 kind: few_shot_example
+8f: F3_inject
 pillar: P01
 title: "Few-Shot Example — Knowledge Card Creation"
 version: 1.0.0

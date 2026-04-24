@@ -5,6 +5,7 @@
 
 id: p02_iso_[agent_name]
 kind: agent_package
+8f: F2_become
 pillar: P02
 title: [agent_package_do_agente]
 tldr: [pacote_portavel_do_agente_em_uma_frase]

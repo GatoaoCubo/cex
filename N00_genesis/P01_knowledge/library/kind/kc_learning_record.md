@@ -1,6 +1,7 @@
 ---
 id: p01_kc_learning_record
 kind: knowledge_card
+8f: F3_inject
 type: kind
 pillar: P10
 title: "Learning Record — Deep Knowledge for learning_record"

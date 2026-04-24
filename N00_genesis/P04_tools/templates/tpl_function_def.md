@@ -1,6 +1,7 @@
 ---
 id: p04_function_def_NAME
 kind: function_def
+8f: F6_produce
 pillar: P04
 version: 1.0.0
 title: "Template — Function Definition"

@@ -1,6 +1,7 @@
 ---
 id: n02_audit_hybrid_review5
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "HYBRID_REVIEW5 N02 Audit: pricing_page + referral_program + onboarding_flow"
 version: "1.0.0"

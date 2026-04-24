@@ -1,6 +1,7 @@
 ---
 id: n00_quickstart_guide_manifest
 kind: knowledge_card
+8f: F3_inject
 pillar: P05
 nucleus: n00
 title: "Quickstart Guide -- Canonical Manifest"

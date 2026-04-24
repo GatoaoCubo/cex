@@ -1,6 +1,7 @@
 ---
 id: p12_spawn_grid_continuous
 kind: spawn_config
+8f: F1_constrain
 pillar: P12
 title: "Spawn Config: Grid Continuous Mode"
 version: 1.0.0

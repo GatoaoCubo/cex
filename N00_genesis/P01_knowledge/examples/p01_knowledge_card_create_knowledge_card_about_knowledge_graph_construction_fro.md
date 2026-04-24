@@ -1,6 +1,7 @@
 ---
 id: p01_kc_knowledge_graph_construction_documents
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "Knowledge Graph Construction from Document Collections"
 version: "1.0.0"

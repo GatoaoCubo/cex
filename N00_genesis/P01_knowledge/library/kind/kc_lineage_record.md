@@ -2,6 +2,7 @@
 quality: null
 id: kc_lineage_record
 kind: knowledge_card
+8f: F3_inject
 title: "Lineage Record: Artifact Provenance Chain via W3C PROV-O"
 tldr: "Documents the derivation chain of knowledge artifacts using W3C PROV-O ontology with entities, activities, and agents"
 version: 1.1.0

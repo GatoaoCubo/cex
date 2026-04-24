@@ -1,6 +1,7 @@
 ---
 id: p10_ms_n04_knowledge
 kind: memory_summary
+8f: F3_inject
 pillar: P10
 nucleus: n04
 title: "Memory Summary -- N04 Knowledge Nucleus Session Compression Protocol"

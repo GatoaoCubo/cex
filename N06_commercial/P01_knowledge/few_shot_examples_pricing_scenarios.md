@@ -1,6 +1,7 @@
 ---
 id: few_shot_examples_pricing_scenarios
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 nucleus: n06
 title: "Few-Shot Examples -- N06 Pricing Decision Reasoning (4 Scenarios)"

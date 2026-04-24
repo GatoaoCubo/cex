@@ -1,6 +1,7 @@
 ---
 id: mental_model_cex_architecture
 kind: mental_model
+8f: F4_reason
 pillar: P01
 nucleus: n04
 title: "Mental Model -- CEX Architecture for Any LLM or Engineer"

@@ -1,6 +1,7 @@
 ---
 id: p12_wp_map_reduce
 kind: workflow_primitive
+8f: F8_collaborate
 pillar: P12
 title: "Example — Map-Reduce Workflow Primitive"
 version: 1.0.0

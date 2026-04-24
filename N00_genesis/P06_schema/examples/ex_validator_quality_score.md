@@ -1,6 +1,7 @@
 ---
 id: p06_val_quality_score
 kind: validator
+8f: F7_govern
 pillar: P06
 title: "Validator: Quality Score Field"
 version: 1.0.0

@@ -1,6 +1,7 @@
 ---
 id: p12_dr_builder_nucleus
 kind: dispatch_rule
+8f: F8_collaborate
 pillar: P12
 title: Dispatch Rule -- Builder Nucleus
 version: 2.0.0

@@ -1,6 +1,7 @@
 ---
 id: component_map_n04
 kind: component_map
+8f: F4_reason
 pillar: P08
 nucleus: n04
 title: "N04 Knowledge -- Component Map"

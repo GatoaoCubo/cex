@@ -1,6 +1,7 @@
 ---
 id: p12_sc_admin_orchestrator
 kind: spawn_config
+8f: F1_constrain
 pillar: P12
 title: Spawn Config -- N07 Orchestrator
 version: 2.0.0

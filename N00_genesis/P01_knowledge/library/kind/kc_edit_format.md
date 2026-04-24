@@ -1,6 +1,7 @@
 ---
 id: kc_edit_format
 kind: knowledge_card
+8f: F3_inject
 title: Edit Format Specification
 version: 1.0.0
 quality: 8.7

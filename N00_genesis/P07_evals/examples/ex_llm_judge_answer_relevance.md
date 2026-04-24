@@ -1,6 +1,7 @@
 ---
 id: p07_judge_answer_relevance
 kind: llm_judge
+8f: F7_govern
 pillar: P07
 name: "Answer Relevance Judge"
 description: "LLM-as-judge evaluator for RAG answer relevance, completeness, and citation accuracy"

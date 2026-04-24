@@ -1,6 +1,7 @@
 ---
 id: p11_qg_intelligence_artifact
 kind: quality_gate
+8f: F7_govern
 pillar: P11
 title: "Gate: Intelligence Artifact Pre-Publish"
 version: "1.0.0"

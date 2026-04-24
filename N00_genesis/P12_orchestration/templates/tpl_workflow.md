@@ -6,6 +6,7 @@
 
 id: p12_wf_{{NAME_SLUG}}
 kind: workflow
+8f: F8_collaborate
 pillar: P12
 title: "Workflow: {{WORKFLOW_NAME}}"
 version: 1.0.0

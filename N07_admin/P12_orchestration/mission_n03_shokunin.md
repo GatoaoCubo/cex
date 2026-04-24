@@ -1,6 +1,7 @@
 ---
 id: p12_mission_n03_shokunin
 kind: dag
+8f: F8_collaborate
 pillar: P12
 title: "Mission: N03 Shokunin Wave — The Craftsman Refines His Tools"
 version: 1.0.0

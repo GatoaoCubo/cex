@@ -1,6 +1,7 @@
 ---
 id: sch_input_schema_n04
 kind: input_schema
+8f: F1_constrain
 pillar: P06
 nucleus: n04
 title: Knowledge Intake Schema

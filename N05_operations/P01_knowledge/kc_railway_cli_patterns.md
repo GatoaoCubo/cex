@@ -1,6 +1,7 @@
 ---
 id: KC_N05_RAILWAY_CLI_PATTERNS
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: Railway CLI — Commands, CI/CD & Deploy Patterns
 domain: N05_operations

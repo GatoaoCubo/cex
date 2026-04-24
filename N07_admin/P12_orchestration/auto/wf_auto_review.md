@@ -1,6 +1,7 @@
 ---
 id: p12_wf_auto_review
 kind: workflow
+8f: F8_collaborate
 pillar: P12
 title: "Auto-Review — Validate nucleus output on arrival"
 version: 1.0.0

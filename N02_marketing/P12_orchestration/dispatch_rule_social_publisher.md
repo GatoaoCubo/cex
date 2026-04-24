@@ -1,6 +1,7 @@
 ---
 id: n02_dr_social_publisher
 kind: dispatch_rule
+8f: F8_collaborate
 pillar: P12
 title: "Dispatch Rule — Social Publisher"
 version: 1.0.0

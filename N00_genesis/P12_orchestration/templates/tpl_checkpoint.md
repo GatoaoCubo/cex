@@ -1,6 +1,7 @@
 ---
 id: p12_checkpoint
 kind: checkpoint
+8f: F8_collaborate
 pillar: P12
 version: 1.0.0
 title: "Template — Checkpoint"

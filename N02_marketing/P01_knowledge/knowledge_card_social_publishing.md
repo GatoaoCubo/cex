@@ -1,6 +1,7 @@
 ---
 id: n02_kc_social_publishing
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "Knowledge Card — Social Media Auto-Publishing"
 version: 1.0.0

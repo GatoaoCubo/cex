@@ -1,6 +1,7 @@
 ---
 id: p12_wf_cf_publish_youtube
 kind: workflow
+8f: F8_collaborate
 pillar: P12
 version: "1.0.0"
 created: "2026-04-06"

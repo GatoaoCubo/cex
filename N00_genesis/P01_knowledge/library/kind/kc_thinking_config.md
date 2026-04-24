@@ -1,6 +1,7 @@
 ---
 id: kc_thinking_config
 kind: knowledge_card
+8f: F3_inject
 title: Thinking Configuration Settings
 version: 1.0.0
 quality: 8.6

@@ -1,6 +1,7 @@
 ---
 id: n01_atom_26_evaluation_taxonomy
 kind: knowledge_card
+8f: F3_inject
 type: research_atom
 pillar: P01
 title: "LLM Evaluation & Benchmark Taxonomy -- Complete Vocabulary Atlas"

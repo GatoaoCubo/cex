@@ -1,6 +1,7 @@
 ---
 id: p02_memory_scope
 kind: memory_scope
+8f: F3_inject
 pillar: P02
 version: 1.0.0
 title: "Template — Memory Scope"

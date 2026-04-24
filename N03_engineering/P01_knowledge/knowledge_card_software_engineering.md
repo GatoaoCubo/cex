@@ -1,6 +1,7 @@
 ---
 id: p01_kc_n03_software_engineering
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "N03 Master KC — Software Engineering Capabilities"
 version: 1.0.0

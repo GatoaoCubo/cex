@@ -3,6 +3,7 @@ quality: 8.4
 quality: 8.3
 id: personality_n07
 kind: personality
+8f: F2_become
 nucleus: n07
 pillar: P02
 mirrors: N00_genesis/P02_model/tpl_personality.md

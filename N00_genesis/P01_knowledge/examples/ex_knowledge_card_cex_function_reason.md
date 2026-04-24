@@ -1,6 +1,7 @@
 ---
 id: p01_kc_cex_function_reason
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "CEX Function REASON — Structured Thinking Before Action"
 version: 1.0.0

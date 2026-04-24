@@ -1,6 +1,7 @@
 ---
 id: p01_kc_ffmpeg_patterns
 kind: knowledge_card
+8f: F3_inject
 type: domain
 pillar: P01
 title: "FFmpeg Patterns — Media Processing Recipes for Content Factory"

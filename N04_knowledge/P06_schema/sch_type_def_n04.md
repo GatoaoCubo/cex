@@ -1,6 +1,7 @@
 ---
 id: sch_type_def_n04
 kind: type_def
+8f: F1_constrain
 pillar: P06
 nucleus: n04
 title: Knowledge Record Type

@@ -1,6 +1,7 @@
 ---
 id: p01_kc_lp02_model
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "P02 Model: Quem o Agente Eh"
 version: 1.0.0

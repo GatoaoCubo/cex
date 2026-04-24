@@ -1,6 +1,7 @@
 ---
 id: kc_onboarding_flow
 kind: knowledge_card
+8f: F3_inject
 title: User Onboarding Flow
 version: 1.0.0
 quality: 8.7

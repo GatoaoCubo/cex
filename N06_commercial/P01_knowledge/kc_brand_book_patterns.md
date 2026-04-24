@@ -1,6 +1,7 @@
 ---
 id: p01_kc_brand_book_patterns
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "Brand Book Patterns — Frameworks Universais para Construcao de Brand Books"
 version: 1.0.0

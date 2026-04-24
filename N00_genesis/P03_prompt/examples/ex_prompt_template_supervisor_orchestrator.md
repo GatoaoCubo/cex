@@ -1,6 +1,7 @@
 ---
 id: p03_pt_agent_group_orchestrator
 kind: prompt_template
+8f: F6_produce
 pillar: P03
 title: Agent_group Orchestrator - Multi-Agent Dispatch Prompt
 version: 1.0.0

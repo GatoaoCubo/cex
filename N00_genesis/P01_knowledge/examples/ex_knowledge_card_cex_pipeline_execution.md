@@ -1,6 +1,7 @@
 ---
 id: p01_kc_cex_pipeline_execution
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "CEX Pipeline Execution — The 8-Function Sequence From Input to Output"
 version: 1.0.0

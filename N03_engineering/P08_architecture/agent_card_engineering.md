@@ -1,6 +1,7 @@
 ---
 id: p08_ac_builder_nucleus
 kind: agent_card
+8f: F2_become
 pillar: P08
 title: Agent Card -- Builder Nucleus
 version: 2.0.0

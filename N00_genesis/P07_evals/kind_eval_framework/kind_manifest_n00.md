@@ -1,6 +1,7 @@
 ---
 id: n00_eval_framework_manifest
 kind: knowledge_card
+8f: F3_inject
 pillar: P07
 nucleus: n00
 title: "Eval Framework -- Canonical Manifest"

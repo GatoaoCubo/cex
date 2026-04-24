@@ -1,6 +1,7 @@
 ---
 id: hybrid_review7_n01
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "HYBRID_REVIEW7 N01 Audit: analyst_briefing + ecommerce_vertical + faq_entry"
 version: "1.0.0"

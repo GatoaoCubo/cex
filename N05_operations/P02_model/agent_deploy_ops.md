@@ -1,6 +1,7 @@
 ---
 id: p02_agent_deploy_ops
 kind: agent
+8f: F2_become
 pillar: P02
 title: Deploy Operations Agent
 version: 1.0.0

@@ -6,6 +6,7 @@
 
 id: "p11_qg_{{GATE_SLUG}}"
 kind: quality_gate
+8f: F7_govern
 pillar: P11
 title: "Gate: {{GATE_NAME}}"
 version: 1.0.0

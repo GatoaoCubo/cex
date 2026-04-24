@@ -1,6 +1,7 @@
 ---
 id: revision_loop_policy_n04
 kind: revision_loop_policy
+8f: F7_govern
 nucleus: n04
 pillar: P11
 mirrors: N00_genesis/compiled/tpl_revision_loop_policy.yaml

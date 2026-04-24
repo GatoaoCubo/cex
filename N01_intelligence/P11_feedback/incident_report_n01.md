@@ -1,6 +1,7 @@
 ---
 id: incident_report_n01
 kind: incident_report
+8f: F8_collaborate
 pillar: P11
 nucleus: n01
 title: "N01 Research Intelligence Incident Report Template"

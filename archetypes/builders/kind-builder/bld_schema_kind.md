@@ -59,6 +59,7 @@ containing exactly 13 files. Each file is one ISO (Isolated Specification Object
 |-------|------|----------|-------|
 | id | string | YES | Unique identifier for this ISO |
 | kind | string | YES | The ISO's own kind (schema, instruction, etc.) |
+| 8f | string | REC | 8F pipeline stage from kind_8f_mapping.yaml (e.g. F3_inject) |
 | pillar | string | YES | The ISO's own pillar assignment |
 | llm_function | string | YES | Which 8F function this ISO serves |
 | version | semver | YES | Always starts at 1.0.0 |

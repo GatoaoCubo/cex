@@ -1,6 +1,7 @@
 ---
 id: ex_agent_copywriter
 kind: agent
+8f: F2_become
 pillar: P02
 title: Copywriter Agent
 agent_group: persuasion_hub

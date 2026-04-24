@@ -1,6 +1,7 @@
 ---
 id: ex_schedule_editorial_calendar
 kind: schedule
+8f: F8_collaborate
 pillar: P12
 title: "Example Schedule: Editorial Calendar"
 version: 1.0.0

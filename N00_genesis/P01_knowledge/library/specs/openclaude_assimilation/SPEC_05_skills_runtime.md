@@ -1,6 +1,7 @@
 ---
 id: spec_05_skills_runtime
 kind: spec
+8f: F4_reason
 pillar: P01
 title: "SPEC_05: Skills Runtime → Builder ISO Loading"
 version: 1.0.0

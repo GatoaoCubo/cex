@@ -1,6 +1,7 @@
 ---
 id: p01_vdb_pinecone
 kind: vector_store
+8f: F3_inject
 pillar: P01
 title: "Example — Pinecone Vector Database Backend"
 version: 1.0.0

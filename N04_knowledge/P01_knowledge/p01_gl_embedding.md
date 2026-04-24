@@ -1,6 +1,7 @@
 ---
 id: p01_gl_embedding
 kind: glossary_entry
+8f: F3_inject
 pillar: P01
 title: "Embedding"
 version: 1.0.0

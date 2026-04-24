@@ -1,6 +1,7 @@
 ---
 id: p01_rs_SOURCE_SLUG
 kind: rag_source
+8f: F3_inject
 pillar: P01
 version: 1.0.0
 title: "Template — RAG Source"

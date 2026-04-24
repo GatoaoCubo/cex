@@ -1,6 +1,7 @@
 ---
 id: p12_ct_content_campaign.md
 kind: crew_template
+8f: F2_become
 pillar: P12
 llm_function: CALL
 crew_name: content_campaign

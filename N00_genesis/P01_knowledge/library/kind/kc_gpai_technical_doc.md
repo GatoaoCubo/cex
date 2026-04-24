@@ -1,6 +1,7 @@
 ---
 id: p11_kc_gpai_technical_doc
 kind: knowledge_card
+8f: F3_inject
 type: kind
 pillar: P11
 title: "GPAI Technical Doc -- Deep Knowledge for gpai_technical_doc"

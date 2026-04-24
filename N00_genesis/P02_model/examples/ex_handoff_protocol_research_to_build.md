@@ -1,6 +1,7 @@
 ---
 id: p02_hp_research_to_build
 kind: handoff_protocol
+8f: F8_collaborate
 pillar: P02
 title: Research-to-Build Handoff (research_agent to builder_agent)
 version: 1.0.0

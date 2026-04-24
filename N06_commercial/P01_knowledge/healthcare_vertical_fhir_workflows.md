@@ -1,6 +1,7 @@
 ---
 id: healthcare_vertical_fhir_workflows
 kind: healthcare_vertical
+8f: F1_constrain
 pillar: P01
 nucleus: N06
 domain: healthcare

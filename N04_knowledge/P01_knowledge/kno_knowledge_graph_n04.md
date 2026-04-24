@@ -1,6 +1,7 @@
 ---
 id: kno_knowledge_graph_n04
 kind: knowledge_graph
+8f: F3_inject
 pillar: P01
 nucleus: n04
 title: N04 Knowledge Graph

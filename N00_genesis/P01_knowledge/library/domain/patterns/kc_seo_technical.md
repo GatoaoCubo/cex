@@ -1,6 +1,7 @@
 ---
 id: p01_kc_seo_technical
 kind: knowledge_card
+8f: F3_inject
 type: domain
 pillar: P01
 title: "Technical SEO Patterns"

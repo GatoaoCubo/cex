@@ -1,6 +1,7 @@
 ---
 id: p09_ratelimit_anthropic_tier2
 kind: rate_limit_config
+8f: F1_constrain
 pillar: P09
 name: "Anthropic Tier 2 Rate Limits"
 description: "Rate limiting configuration for Anthropic API Tier 2 with RPM, TPM, daily budget, and queue escalation"

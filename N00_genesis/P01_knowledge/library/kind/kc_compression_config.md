@@ -1,6 +1,7 @@
 ---
 id: p01_kc_compression_config
 kind: knowledge_card
+8f: F3_inject
 type: kind
 pillar: P10
 title: "Compression Config -- Deep Knowledge for compression_config"

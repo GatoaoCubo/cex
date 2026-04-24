@@ -1,6 +1,7 @@
 ---
 id: p01_kc_commercial_nucleus
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: Commercial Monetization — Pricing, Courses & Funnels
 version: 3.0.0

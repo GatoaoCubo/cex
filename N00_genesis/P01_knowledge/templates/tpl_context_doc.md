@@ -5,6 +5,7 @@
 
 id: p01_ctx_{{TOPIC_SLUG}}
 kind: context_doc
+8f: F3_inject
 pillar: P01
 title: "{{CONTEXT_TITLE}}"
 domain: {{DOMAIN_NAME}}

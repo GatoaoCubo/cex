@@ -1,6 +1,7 @@
 ---
 id: n03_output_cf_templates_and_tools
 kind: context_doc
+8f: F3_inject
 pillar: P01
 mission: MISSION_content_factory_wave2
 nucleus: N03

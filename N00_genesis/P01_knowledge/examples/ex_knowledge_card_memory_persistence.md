@@ -1,6 +1,7 @@
 ---
 id: p01_ex_memory_persistence
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "Dual Persistence: SQLite + Chroma for LLM Agent Memory"
 version: 1.0.0

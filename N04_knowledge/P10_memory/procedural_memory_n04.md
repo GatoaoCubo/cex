@@ -1,6 +1,7 @@
 ---
 id: p10_pm_n04_knowledge
 kind: procedural_memory
+8f: F3_inject
 pillar: P10
 nucleus: n04
 title: "Procedural Memory -- N04 Standard Operating Procedures"

@@ -1,6 +1,7 @@
 ---
 id: kc_tokenizer_config
 kind: knowledge_card
+8f: F3_inject
 title: Tokenizer Config -- BPE/SentencePiece/Tiktoken Parameters
 version: 1.0.0
 quality: null

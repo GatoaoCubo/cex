@@ -1,6 +1,7 @@
 ---
 id: hybrid_review7_n02
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "HYBRID_REVIEW7 N02 Audit -- press_release, webinar_script, contributor_guide"
 version: "1.0.0"

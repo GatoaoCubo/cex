@@ -1,6 +1,7 @@
 ---
 id: p01_kc_knowledge_distillation
 kind: knowledge_card
+8f: F3_inject
 type: domain
 pillar: P01
 title: "Knowledge Distillation — Compressing Expertise into KCs"

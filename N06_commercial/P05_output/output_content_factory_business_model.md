@@ -1,6 +1,7 @@
 ---
 id: output_content_factory_business_model
 kind: content_monetization
+8f: F6_produce
 pillar: P04
 mission: MISSION_content_factory_v1
 title: "Content Factory as a Service — Business Model & Positioning"

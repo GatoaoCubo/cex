@@ -1,6 +1,7 @@
 ---
 id: atom_22_memory_taxonomy
 kind: knowledge_card
+8f: F3_inject
 pillar: P01_knowledge
 title: "Atomic Research 22: Agent Memory Taxonomy -- Complete Survey Synthesis"
 version: 2.0

@@ -1,6 +1,7 @@
 ---
 id: con_permission_n02
 kind: permission
+8f: F1_constrain
 pillar: P09
 nucleus: n02
 title: Marketing Permission Rule

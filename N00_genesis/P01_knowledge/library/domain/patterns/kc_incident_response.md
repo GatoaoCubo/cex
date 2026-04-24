@@ -1,6 +1,7 @@
 ---
 id: p01_kc_incident_response
 kind: knowledge_card
+8f: F3_inject
 type: domain
 pillar: P01
 title: "Incident Response"

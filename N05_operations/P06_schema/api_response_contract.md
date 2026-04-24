@@ -1,6 +1,7 @@
 ---
 id: p06_schema_api_response_contract
 kind: input_schema
+8f: F1_constrain
 pillar: P06
 title: "API Response Contract"
 version: 1.0.0

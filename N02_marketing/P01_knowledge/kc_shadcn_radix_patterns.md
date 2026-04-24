@@ -1,6 +1,7 @@
 ---
 id: n02_kc_shadcn_radix_patterns
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: shadcn/ui + Radix Primitives — Component Patterns
 version: 1.0.0

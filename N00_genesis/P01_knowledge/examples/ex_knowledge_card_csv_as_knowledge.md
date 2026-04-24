@@ -1,6 +1,7 @@
 ---
 id: p01_kc_csv_as_knowledge
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "CSV as Knowledge — Structured Data as Searchable Runtime Knowledge Base"
 version: 1.0.0

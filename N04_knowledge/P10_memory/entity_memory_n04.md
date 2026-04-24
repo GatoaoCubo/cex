@@ -1,6 +1,7 @@
 ---
 id: p10_em_n04_knowledge
 kind: entity_memory
+8f: F3_inject
 pillar: P10
 nucleus: n04
 title: "Entity Memory -- N04 Knowledge Domain Entities"

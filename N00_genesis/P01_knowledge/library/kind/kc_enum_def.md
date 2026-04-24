@@ -1,6 +1,7 @@
 ---
 id: p01_kc_enum_def
 kind: knowledge_card
+8f: F3_inject
 type: kind
 pillar: P06
 title: "Enum Def — Deep Knowledge for enum_def"

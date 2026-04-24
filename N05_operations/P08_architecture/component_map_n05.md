@@ -1,6 +1,7 @@
 ---
 id: component_map_n05
 kind: component_map
+8f: F4_reason
 pillar: P08
 nucleus: n05
 title: "N05 Operations -- Component Map"

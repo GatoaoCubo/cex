@@ -1,6 +1,7 @@
 ---
 id: kc_instance_variable_registry
 kind: knowledge-card
+8f: F3_inject
 domain: meta
 pillar: P01
 version: "1.0"

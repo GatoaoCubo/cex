@@ -1,6 +1,7 @@
 ---
 id: p01_kc_pytest_patterns
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "pytest Patterns — Fixtures, Parametrize, Markers, Coverage"
 version: 1.0.0

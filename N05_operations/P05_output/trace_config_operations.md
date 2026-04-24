@@ -1,6 +1,7 @@
 ---
 id: p07_trace_config_operations
 kind: trace_config
+8f: F8_collaborate
 pillar: P07
 title: Operations Observability Trace Configuration
 version: 1.0.0

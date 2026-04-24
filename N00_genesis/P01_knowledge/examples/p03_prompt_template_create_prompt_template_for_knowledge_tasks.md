@@ -1,6 +1,7 @@
 ---
 id: p03_pt_knowledge_tasks
 kind: prompt_template
+8f: F6_produce
 pillar: P03
 title: "Knowledge Task Execution Template"
 version: "1.0.0"

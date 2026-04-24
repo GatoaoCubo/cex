@@ -1,6 +1,7 @@
 ---
 id: n00_system_prompt_manifest
 kind: knowledge_card
+8f: F3_inject
 pillar: P03
 nucleus: n00
 title: "System Prompt -- Canonical Manifest"

@@ -1,6 +1,7 @@
 ---
 id: n01_qg_intelligence
 kind: quality_gate
+8f: F7_govern
 pillar: P11
 title: "Quality Gate: N01 Research & Intelligence Output"
 version: "1.0.0"

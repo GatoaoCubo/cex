@@ -6,6 +6,7 @@
 
 id: p12_pt_{{SCENARIO_SLUG}}
 kind: pipeline_template
+8f: F8_collaborate
 pillar: P12
 title: "Pipeline: {{SCENARIO_HUMAN}}"
 scenario: {{SCENARIO}}  # new_feature|new_feature_security|bug_fix_unknown|bug_fix_known|refactoring|perf_opt|infra

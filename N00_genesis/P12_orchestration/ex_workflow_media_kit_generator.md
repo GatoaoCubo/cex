@@ -1,6 +1,7 @@
 ---
 id: ex_workflow_media_kit_generator
 kind: workflow
+8f: F8_collaborate
 pillar: P12
 title: "Example Workflow: Media Kit Generator"
 version: 1.0.0

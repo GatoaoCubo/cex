@@ -1,6 +1,7 @@
 ---
 id: p01_kc_governance_patterns
 kind: knowledge_card
+8f: F3_inject
 type: domain
 pillar: P01
 title: Governance -- Laws, Component Maps, Diagrams, Decision Records

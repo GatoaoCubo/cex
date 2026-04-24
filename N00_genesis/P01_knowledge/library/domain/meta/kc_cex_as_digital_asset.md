@@ -3,6 +3,7 @@ quality: 8.9
 quality: 7.7
 id: p01_kc_cex_as_digital_asset
 kind: knowledge_card
+8f: F3_inject
 type: domain
 pillar: P01
 title: "CEXAI as Knowledge Asset -- Value Proposition of a Brand-Specialized AI Brain"

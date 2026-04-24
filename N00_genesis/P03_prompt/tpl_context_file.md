@@ -1,6 +1,7 @@
 ---
 id: ctx_{{scope}}
 kind: context_file
+8f: F2_become
 pillar: P03
 title: "Context File: {{scope}}"
 scope: workspace

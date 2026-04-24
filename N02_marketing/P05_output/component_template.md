@@ -1,6 +1,7 @@
 ---
 id: p09_ct_component_template
 kind: output_validator
+8f: F6_produce
 pillar: P09
 title: Component Template — shadcn/ui Style Patterns
 version: 1.0.0

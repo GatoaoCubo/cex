@@ -3,6 +3,7 @@ quality: 8.6
 quality: 7.8
 id: p12_pm_grid_dispatch
 kind: process_manager
+8f: F8_collaborate
 pillar: P12
 title: "Process Manager: GridDispatch"
 version: 0.1.0

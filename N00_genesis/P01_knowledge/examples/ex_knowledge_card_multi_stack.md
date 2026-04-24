@@ -1,6 +1,7 @@
 ---
 id: p01_kc_multi_stack
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "Multi-Stack Design Knowledge Architecture — 13 Stacks, Zero Duplication"
 version: 1.0.0

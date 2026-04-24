@@ -3,6 +3,7 @@ quality: 8.3
 quality: 7.8
 id: kc_context_file
 kind: knowledge_card
+8f: F3_inject
 title: "context_file -- Workspace Instruction Auto-Injection"
 version: 1.0.0
 pillar: P01

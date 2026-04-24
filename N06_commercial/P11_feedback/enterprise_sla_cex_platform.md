@@ -1,6 +1,7 @@
 ---
 id: enterprise_sla_cex_platform
 kind: enterprise_sla
+8f: F8_collaborate
 pillar: P11
 nucleus: N06
 domain: commercial

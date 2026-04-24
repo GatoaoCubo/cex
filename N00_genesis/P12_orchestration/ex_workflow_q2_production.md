@@ -1,6 +1,7 @@
 ---
 id: ex_workflow_q2_production
 kind: workflow
+8f: F8_collaborate
 pillar: P12
 title: "Example Workflow: Q2 Production"
 version: 1.0.0

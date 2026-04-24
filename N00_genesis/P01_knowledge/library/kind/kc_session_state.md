@@ -1,6 +1,7 @@
 ---
 id: p01_kc_session_state
 kind: knowledge_card
+8f: F3_inject
 type: kind
 pillar: P10
 title: "Session State — Deep Knowledge for session_state"

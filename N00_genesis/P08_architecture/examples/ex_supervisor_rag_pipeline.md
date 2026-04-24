@@ -1,6 +1,7 @@
 ---
 id: p08_dir_rag_pipeline
 kind: supervisor
+8f: F8_collaborate
 pillar: P08
 version: "1.0.0"
 created: "2026-03-28"

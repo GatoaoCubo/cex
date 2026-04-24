@@ -1,6 +1,7 @@
 ---
 id: kc_healthcare_vertical
 kind: knowledge_card
+8f: F3_inject
 title: Healthcare Vertical Knowledge Card
 version: 1.0.0
 quality: 8.8

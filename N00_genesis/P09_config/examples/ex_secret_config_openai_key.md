@@ -1,6 +1,7 @@
 ---
 id: p09_secret_openai_key
 kind: secret_config
+8f: F1_constrain
 pillar: P09
 name: "OpenAI API Key Configuration"
 description: "Secret management config for OpenAI API key with Vault storage, 90-day rotation, and access audit"

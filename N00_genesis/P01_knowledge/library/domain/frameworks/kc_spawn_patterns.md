@@ -1,6 +1,7 @@
 ---
 id: p01_kc_spawn_patterns
 kind: knowledge_card
+8f: F3_inject
 type: domain
 pillar: P01
 title: "Spawn Patterns — Multi-Agent Process Management"

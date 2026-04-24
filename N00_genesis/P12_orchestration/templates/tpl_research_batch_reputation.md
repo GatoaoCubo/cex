@@ -1,6 +1,7 @@
 ---
 id: tpl_research_batch_reputation
 kind: template
+8f: F6_produce
 pillar: P12
 title: "Research Batch — Reputation + Professional Registry Enrichment"
 version: 1.0.0

@@ -1,6 +1,7 @@
 ---
 id: p01_kc_multi_agent_orchestration_patterns
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "Multi-Agent Orchestration Patterns for Distributed AI Systems"
 version: "1.0.0"

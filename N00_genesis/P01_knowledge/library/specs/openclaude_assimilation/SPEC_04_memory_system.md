@@ -1,6 +1,7 @@
 ---
 id: spec_04_memory_system
 kind: spec
+8f: F4_reason
 pillar: P01
 title: "SPEC_04: Memory Aging/Relevance → cex_memory"
 version: 1.0.0

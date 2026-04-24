@@ -1,6 +1,7 @@
 ---
 id: kc_safety_hazard_taxonomy
 kind: knowledge_card
+8f: F3_inject
 title: Safety Hazard Taxonomy
 version: 1.0.0
 quality: 8.8

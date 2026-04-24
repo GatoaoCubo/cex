@@ -1,6 +1,7 @@
 ---
 id: p01_kc_api_health_monitoring
 kind: knowledge_card  
+8f: F3_inject
 pillar: P01
 title: "API Health Monitoring Patterns"
 version: "1.0.0"

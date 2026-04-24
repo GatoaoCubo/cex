@@ -1,6 +1,7 @@
 ---
 id: p01_kc_plan_driven_dev
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "Plan-Driven Development — Plans as Executable Prompts for Sub-Agents"
 version: 1.0.0

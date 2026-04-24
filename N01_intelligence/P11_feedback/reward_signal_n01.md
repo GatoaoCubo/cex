@@ -1,6 +1,7 @@
 ---
 id: reward_signal_n01
 kind: reward_signal
+8f: F7_govern
 pillar: P11
 nucleus: n01
 title: "N01 Research Quality Reward Signal"

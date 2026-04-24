@@ -1,6 +1,7 @@
 ---
 id: p03_ins_doing_tasks
 kind: instruction
+8f: F6_produce
 pillar: P03
 title: "Instruction: Doing Tasks"
 version: 1.0.0

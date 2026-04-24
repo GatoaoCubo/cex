@@ -1,6 +1,7 @@
 ---
 id: kno_embedder_provider_n02
 kind: embedder_provider
+8f: F3_inject
 pillar: P02
 nucleus: N02
 title: "N02 Marketing Embedder Provider"

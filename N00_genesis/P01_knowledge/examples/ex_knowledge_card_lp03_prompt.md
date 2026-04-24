@@ -1,6 +1,7 @@
 ---
 id: p01_kc_lp03_prompt
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "P03 Prompt: Como o Agente Fala"
 version: 1.0.0

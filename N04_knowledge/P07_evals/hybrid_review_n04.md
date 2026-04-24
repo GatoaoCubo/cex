@@ -1,6 +1,7 @@
 ---
 id: n04_hybrid_review_wave2
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "HYBRID_REVIEW Wave 2 -- N04 Audit Report: 39 Audio/Signal ISOs"
 version: "1.0.0"

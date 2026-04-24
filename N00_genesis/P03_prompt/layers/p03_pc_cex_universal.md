@@ -1,6 +1,7 @@
 ---
 id: p03_pc_cex_universal
 kind: prompt_compiler
+8f: F6_produce
 pillar: P03
 version: 1.1.0
 created: "2026-04-12"

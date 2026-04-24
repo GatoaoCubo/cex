@@ -1,6 +1,7 @@
 ---
 id: p01_kc_citation
 kind: knowledge_card
+8f: F3_inject
 type: kind
 pillar: P01
 title: "Citation — Deep Knowledge for citation"

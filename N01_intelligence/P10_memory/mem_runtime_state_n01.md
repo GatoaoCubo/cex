@@ -1,6 +1,7 @@
 ---
 id: mem_runtime_state_n01
 kind: runtime_state
+8f: F8_collaborate
 pillar: P10
 nucleus: N01
 title: "N01 Runtime State"

@@ -1,6 +1,7 @@
 ---
 id: p07_sr_builder_nucleus
 kind: scoring_rubric
+8f: F7_govern
 pillar: P07
 title: Scoring Rubric -- Builder Nucleus
 version: 2.0.0

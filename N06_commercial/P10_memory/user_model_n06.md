@@ -1,6 +1,7 @@
 ---
 id: user_model_n06
 kind: user_model
+8f: F2_become
 nucleus: n06
 pillar: P10
 title: "User Model N06: Ideal Customer Profile (ICP)"

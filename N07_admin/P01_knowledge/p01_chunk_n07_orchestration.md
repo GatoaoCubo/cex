@@ -1,6 +1,7 @@
 ---
 id: p01_chunk_n07_orchestration
 kind: chunk_strategy
+8f: F3_inject
 pillar: P01
 nucleus: N07
 version: "1.0.0"

@@ -1,6 +1,7 @@
 ---
 id: bugloop_revenue
 kind: bugloop
+8f: F7_govern
 pillar: P11
 nucleus: n06
 title: "Revenue Bugloop -- Automated Revenue Anomaly Detection and Remediation"

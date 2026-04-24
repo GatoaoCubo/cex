@@ -1,6 +1,7 @@
 ---
 id: p03_ch_builder_pipeline
 kind: chain
+8f: F6_produce
 pillar: P03
 title: Prompt Chain -- Builder Pipeline
 version: 1.0.0

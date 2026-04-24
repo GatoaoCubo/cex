@@ -1,6 +1,7 @@
 ---
 id: p08_cm_cex_bounded_contexts
 kind: context_map
+8f: F4_reason
 pillar: P08
 version: "1.0.0"
 created: "2026-04-19"

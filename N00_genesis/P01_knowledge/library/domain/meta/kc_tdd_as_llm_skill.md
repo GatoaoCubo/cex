@@ -1,6 +1,7 @@
 ---
 id: p01_kc_tdd_as_llm_skill
 kind: knowledge_card
+8f: F3_inject
 type: domain
 pillar: P01
 title: "TDD as LLM Skill — Test-Driven Development for Agents"

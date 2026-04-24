@@ -1,6 +1,7 @@
 ---
 id: p05_sp_cex_launch
 kind: social_publisher
+8f: F6_produce
 pillar: P05
 title: "CEX Public Launch -- Social Publishing Strategy"
 version: 1.0.0

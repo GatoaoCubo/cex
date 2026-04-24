@@ -1,6 +1,7 @@
 ---
 id: n06_output_brand_config
 kind: output_template
+8f: F6_produce
 pillar: P05
 title: "Brand Config Output — brand_config.yaml Template"
 version: 1.0.0

@@ -1,6 +1,7 @@
 ---
 id: n00_discovery_questions_manifest
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 nucleus: n00
 title: "Discovery Questions -- Canonical Manifest"

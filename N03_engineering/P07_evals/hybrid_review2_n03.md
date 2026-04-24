@@ -1,6 +1,7 @@
 ---
 id: hybrid_review2_n03
 kind: audit
+8f: F7_govern
 pillar: P07
 title: "HYBRID_REVIEW2 -- N03 Audit: stt_provider + prosody_config"
 version: "1.0.0"

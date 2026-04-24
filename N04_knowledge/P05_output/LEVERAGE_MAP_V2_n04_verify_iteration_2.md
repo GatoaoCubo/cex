@@ -1,6 +1,7 @@
 ---
 id: leverage_map_v2_n04_verify_iter2
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "LEVERAGE_MAP_V2: N04 Verification Cycle (Iteration 2 — Reranker + Ecosystem State)"
 version: 2.0

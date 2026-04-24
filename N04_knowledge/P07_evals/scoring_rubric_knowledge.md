@@ -1,6 +1,7 @@
 ---
 id: p07_rubric_knowledge
 kind: scoring_rubric
+8f: F7_govern
 pillar: P07
 title: "N04 Scoring Rubric — Knowledge Card Quality"
 version: 4.0.0

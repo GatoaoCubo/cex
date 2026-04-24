@@ -1,6 +1,7 @@
 ---
 id: p10_out_knowledge_graph
 kind: output
+8f: F6_produce
 pillar: P10
 title: "Output: Knowledge Graph"
 version: 1.0.0

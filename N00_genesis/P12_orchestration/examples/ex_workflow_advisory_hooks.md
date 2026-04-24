@@ -1,6 +1,7 @@
 ---
 id: p12_wf_advisory_hooks
 kind: workflow
+8f: F8_collaborate
 pillar: P12
 title: "Workflow: 5 Advisory Hooks (Context Injection)"
 version: 1.0.0

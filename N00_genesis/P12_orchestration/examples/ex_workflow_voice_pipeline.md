@@ -5,6 +5,7 @@ description: Pipeline completo de voz via WhatsApp - boot/shutdown de Bridge + D
 version: 1.0.0
 pillar: P12
 kind: workflow
+8f: F8_collaborate
 created: 2026-03-22
 updated: 2026-03-22
 author: operations_agent

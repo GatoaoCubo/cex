@@ -1,6 +1,7 @@
 ---
 id: p10_out_knowledge_card
 kind: output
+8f: F6_produce
 pillar: P10
 title: "Output: Knowledge Card"
 version: 1.0.0

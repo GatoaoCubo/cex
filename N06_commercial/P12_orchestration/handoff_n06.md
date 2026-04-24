@@ -1,6 +1,7 @@
 ---
 id: handoff_n06
 kind: handoff
+8f: F8_collaborate
 nucleus: n06
 pillar: P12
 title: "Handoff N06: Commercial Deal Context"

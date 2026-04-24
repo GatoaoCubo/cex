@@ -1,6 +1,7 @@
 ---
 id: p01_kc_supabase_storage
 kind: knowledge_card
+8f: F3_inject
 type: platform
 pillar: P01
 title: "Supabase Storage — S3-Compatible Buckets + Transforms + CDN"

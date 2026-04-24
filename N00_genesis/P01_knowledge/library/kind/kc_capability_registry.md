@@ -1,6 +1,7 @@
 ---
 id: p08_kc_capability_registry
 kind: knowledge_card
+8f: F3_inject
 type: kind
 pillar: P08
 title: "Capability Registry -- Deep Knowledge for capability_registry"

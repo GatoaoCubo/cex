@@ -1,6 +1,7 @@
 ---
 id: p07_sr_intel_research
 kind: scoring_rubric
+8f: F7_govern
 pillar: P07
 title: "Rubric: Intelligence Research Output Evaluation"
 version: "1.0.0"

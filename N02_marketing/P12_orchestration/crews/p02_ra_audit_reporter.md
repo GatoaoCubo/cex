@@ -1,6 +1,7 @@
 ---
 id: p02_ra_audit_reporter.md
 kind: role_assignment
+8f: F2_become
 pillar: P02
 llm_function: CONSTRAIN
 role_name: audit_reporter

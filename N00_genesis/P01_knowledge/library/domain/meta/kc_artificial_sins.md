@@ -3,6 +3,7 @@ quality: 8.4
 quality: 7.7
 id: kc_artificial_sins
 kind: knowledge_card
+8f: F3_inject
 type: domain
 pillar: P01
 title: "Artificial Sins -- The Cultural DNA of CEXAI's Seven Nuclei"

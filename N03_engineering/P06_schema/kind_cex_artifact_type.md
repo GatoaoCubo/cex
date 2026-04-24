@@ -1,6 +1,7 @@
 ---
 id: p06_kind_cex_artifact_type
 kind: type_def
+8f: F1_constrain
 pillar: P06
 title: "Kind: The Atomic Artifact Type in CEX"
 version: 1.0.0

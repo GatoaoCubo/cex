@@ -1,6 +1,7 @@
 ---
 id: p12_ct_pricing_workshop.md
 kind: crew_template
+8f: F2_become
 pillar: P12
 llm_function: CALL
 crew_name: pricing_workshop

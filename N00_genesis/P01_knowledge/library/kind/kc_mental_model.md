@@ -1,6 +1,7 @@
 ---
 id: p01_kc_mental_model
 kind: knowledge_card
+8f: F3_inject
 type: kind
 pillar: P02
 title: "Mental Model — Deep Knowledge for mental_model"

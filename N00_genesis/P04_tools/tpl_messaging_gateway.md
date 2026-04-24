@@ -1,6 +1,7 @@
 ---
 id: p04_mg_{{platform}}
 kind: messaging_gateway
+8f: F5_call
 pillar: P04
 nucleus: n05
 title: "Messaging Gateway: {{platform}}"

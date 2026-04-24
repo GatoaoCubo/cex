@@ -1,6 +1,7 @@
 ---
 id: tpl_research_batch_maps
 kind: template
+8f: F6_produce
 pillar: P12
 title: "Research Batch — Maps / Business Profile Deep Harvest"
 version: 1.0.0

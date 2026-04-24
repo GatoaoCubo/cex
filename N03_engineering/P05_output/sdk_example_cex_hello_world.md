@@ -8,6 +8,7 @@ pillar: P04
 category: sdk_example
 tags: [sdk_example, cex_sdk, hello_world, P04, getting_started]
 kind: sdk_example
+8f: F6_produce
 version: "1.0.0"
 created: "2026-04-19"
 updated: "2026-04-19"

@@ -1,6 +1,7 @@
 ---
 id: p04_ret_n04_knowledge
 kind: retriever
+8f: F3_inject
 pillar: P04
 nucleus: n04
 title: "Retriever -- N04 Dense + Sparse Fusion Configuration"

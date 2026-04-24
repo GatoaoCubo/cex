@@ -1,6 +1,7 @@
 ---
 id: p02_handoff_protocol
 kind: handoff_protocol
+8f: F8_collaborate
 pillar: P02
 version: 1.0.0
 title: "Template — Handoff Protocol"

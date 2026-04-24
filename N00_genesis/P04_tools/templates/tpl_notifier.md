@@ -1,6 +1,7 @@
 ---
 id: p04_notifier_NAME
 kind: notifier
+8f: F5_call
 pillar: P04
 version: 1.0.0
 title: "Template — Notifier"

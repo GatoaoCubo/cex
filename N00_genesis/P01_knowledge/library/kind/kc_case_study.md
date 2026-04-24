@@ -1,6 +1,7 @@
 ---
 id: p05_kc_case_study
 kind: knowledge_card
+8f: F3_inject
 type: kind
 pillar: P05
 title: "Case Study -- Deep Knowledge for case_study"

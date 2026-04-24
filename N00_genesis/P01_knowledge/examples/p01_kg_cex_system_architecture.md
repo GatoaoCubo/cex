@@ -1,6 +1,7 @@
 ---
 id: p01_kg_cex_system_architecture
 kind: knowledge_graph
+8f: F3_inject
 pillar: P01
 version: "1.0.0"
 created: "2026-04-13"

@@ -1,6 +1,7 @@
 ---
 id: nps_survey_n02
 kind: nps_survey
+8f: F7_govern
 pillar: P11
 nucleus: n02
 title: "Audience Satisfaction NPS Survey -- N02 Marketing"

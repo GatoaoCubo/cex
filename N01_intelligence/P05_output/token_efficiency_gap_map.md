@@ -1,6 +1,7 @@
 ---
 id: token_efficiency_gap_map
 kind: knowledge_card
+8f: F3_inject
 title: Token Efficiency Gap Map -- CEX Cost Optimization Playbook
 version: 1.0.0
 quality: 9.0

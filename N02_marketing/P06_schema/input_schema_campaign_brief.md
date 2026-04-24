@@ -1,6 +1,7 @@
 ---
 id: input_schema_campaign_brief
 kind: input_schema
+8f: F1_constrain
 pillar: P06
 nucleus: n02
 title: "Campaign Brief Input Schema"

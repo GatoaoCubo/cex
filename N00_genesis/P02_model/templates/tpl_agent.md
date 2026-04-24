@@ -7,6 +7,7 @@ quality: 8.8
 
 id: p02_agent_[name_slug]
 kind: agent
+8f: F2_become
 pillar: P02
 title: [titulo_descritivo]
 version: 1.0.0

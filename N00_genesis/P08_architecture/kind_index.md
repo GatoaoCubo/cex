@@ -1,6 +1,7 @@
 ---
 id: n00_p08_kind_index
 kind: knowledge_card
+8f: F3_inject
 pillar: P08
 nucleus: n00
 title: "P08 Architecture -- Kind Index"

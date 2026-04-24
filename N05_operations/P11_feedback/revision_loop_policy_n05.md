@@ -1,6 +1,7 @@
 ---
 id: revision_loop_policy_n05
 kind: revision_loop_policy
+8f: F7_govern
 nucleus: n05
 pillar: P11
 mirrors: N00_genesis/P11_feedback/tpl_revision_loop_policy.md

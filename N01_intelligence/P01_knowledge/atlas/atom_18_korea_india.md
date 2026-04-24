@@ -1,6 +1,7 @@
 ---
 id: n01_atom_18_korea_india
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "Atom 18: Korean + Indian LLM Agent Ecosystems"
 version: 1.2.0

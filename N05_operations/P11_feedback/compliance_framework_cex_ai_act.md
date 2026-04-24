@@ -3,6 +3,7 @@ quality: 8.4
 quality: 8.3
 id: p11_cfw_cex_ai_act
 kind: compliance_framework
+8f: F1_constrain
 pillar: P11
 title: "Compliance Framework: CEX vs EU AI Act (GPAI Provider Obligations)"
 version: "1.0.0"

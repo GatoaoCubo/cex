@@ -1,6 +1,7 @@
 ---
 id: extraction_synapse_stack
 kind: knowledge_card
+8f: F3_inject
 pillar: P01_knowledge
 title: "Extraction: Synapse 8-Layer Context Stack from aiox-core"
 version: 1.1

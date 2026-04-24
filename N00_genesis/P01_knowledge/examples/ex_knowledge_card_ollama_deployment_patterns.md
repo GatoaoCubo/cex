@@ -1,6 +1,7 @@
 ---
 id: p01_kc_ollama_deployment_patterns
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "Ollama Deployment Patterns para Modelos Locais Customizados"
 version: 2.0.0

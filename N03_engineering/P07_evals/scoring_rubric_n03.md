@@ -1,6 +1,7 @@
 ---
 id: p07_sr_n03_artifact
 kind: scoring_rubric
+8f: F7_govern
 pillar: P07
 title: "Scoring Rubric -- N03 Artifact Quality"
 version: 1.0.0

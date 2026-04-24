@@ -1,6 +1,7 @@
 ---
 id: p01_emb_openai_text_embedding_3_small
 kind: embedder_provider
+8f: F3_inject
 pillar: P01
 title: "Example — OpenAI text-embedding-3-small Provider"
 version: 1.0.0

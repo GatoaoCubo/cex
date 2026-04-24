@@ -1,6 +1,7 @@
 ---
 id: audit_planning_strategy_builder
 kind: audit_report
+8f: F7_govern
 pillar: P07
 title: "Audit: planning-strategy-builder family (13 ISOs)"
 version: "1.0.0"

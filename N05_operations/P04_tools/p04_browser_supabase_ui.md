@@ -1,6 +1,7 @@
 ---
 id: p04_browser_supabase_ui
 kind: browser_tool
+8f: F5_call
 pillar: P04
 version: "1.0.0"
 created: "2026-04-17"

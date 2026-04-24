@@ -1,6 +1,7 @@
 ---
 id: p10_ms_n07_orchestration
 kind: memory_summary
+8f: F3_inject
 pillar: P10
 nucleus: N07
 title: "N07 Orchestrator -- 30-Day Mission Memory"

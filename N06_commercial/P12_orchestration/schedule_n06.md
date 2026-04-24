@@ -1,6 +1,7 @@
 ---
 id: schedule_n06
 kind: schedule
+8f: F8_collaborate
 nucleus: n06
 pillar: P12
 title: "Schedule N06: Sales Cadence (Follow-up / Renewal / QBR)"

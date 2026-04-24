@@ -1,6 +1,7 @@
 ---
 id: p06_bp_model_card
 kind: artifact_blueprint
+8f: F4_reason
 pillar: P06
 llm_function: CONSTRAIN
 title: "Blueprint: model_card — Meta-Template para Producao de Model Cards"

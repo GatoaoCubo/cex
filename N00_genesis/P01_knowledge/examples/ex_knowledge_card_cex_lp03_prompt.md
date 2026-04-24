@@ -1,6 +1,7 @@
 ---
 id: p01_kc_cex_lp03_prompt
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "CEX LP03 Prompt — Como a LLM Fala (10 Tipos de Engenharia de Prompt)"
 version: 1.0.0

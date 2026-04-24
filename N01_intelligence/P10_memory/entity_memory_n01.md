@@ -1,6 +1,7 @@
 ---
 id: entity_memory_n01
 kind: entity_memory
+8f: F3_inject
 pillar: P10
 nucleus: n01
 title: "N01 Research Entity Memory"

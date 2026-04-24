@@ -1,6 +1,7 @@
 ---
 id: kc_8f_pipeline_implementation
 kind: knowledge_card
+8f: F3_inject
 title: "8F Pipeline Implementation Guide"
 version: 1.0.0
 quality: 9.0

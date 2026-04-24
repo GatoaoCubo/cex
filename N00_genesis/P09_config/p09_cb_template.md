@@ -5,6 +5,7 @@
 
 id: "p09_cb_{{BUDGET_SLUG}}"
 kind: cost_budget
+8f: F1_constrain
 pillar: P09
 title: "Budget: {{BUDGET_NAME}}"
 version: 1.0.0

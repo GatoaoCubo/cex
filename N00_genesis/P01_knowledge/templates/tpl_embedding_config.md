@@ -1,6 +1,7 @@
 ---
 id: "p01_emb_"PLACEHOLDER""
 kind: embedding_config
+8f: F3_inject
 pillar: P01
 version: 1.0.0
 title: Template - Embedding Config

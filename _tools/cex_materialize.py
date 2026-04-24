@@ -50,6 +50,7 @@ def generate_agent_md(kind: str, meta: dict) -> str:
     pillar = meta.get("pillar", "P??")
     description = meta.get("description", "")
     llm_function = meta.get("llm_function", "")
+    primary_8f = meta.get("primary_8f", "")
     max_bytes = meta.get("max_bytes", 4096)
     naming = meta.get("naming", "")
     boundary = meta.get("boundary", "")
@@ -72,6 +73,7 @@ You are a specialized builder for **{kind}** artifacts (pillar: {pillar}).
 | Kind | `{kind}` |
 | Pillar | `{pillar}` |
 | LLM Function | `{llm_function}` |
+| 8F | `{primary_8f}` |
 | Max Bytes | {max_bytes} |
 | Naming | `{naming}` |
 | Description | {description} |
@@ -94,6 +96,7 @@ You are a specialized builder for **{kind}** artifacts (pillar: {pillar}).
 ## Rules
 
 - `quality: null` ALWAYS -- never self-score
+- `8f:` field MUST be set in frontmatter (value: `{primary_8f}`)
 - Frontmatter MUST parse as valid YAML
 - Body MUST stay under {max_bytes} bytes
 - Follow naming pattern: `{naming}`
@@ -103,7 +106,7 @@ You are a specialized builder for **{kind}** artifacts (pillar: {pillar}).
 ## 8F Trace (show this for every build)
 
 ```
-F1 CONSTRAIN: kind={kind}, pillar={pillar}
+F1 CONSTRAIN: kind={kind}, pillar={pillar}, 8f={primary_8f}
 F2 BECOME: {slug}-builder specs loaded
 F3 INJECT: schema + examples + memory loaded
 F4 REASON: plan decided

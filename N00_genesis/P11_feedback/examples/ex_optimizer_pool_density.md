@@ -1,6 +1,7 @@
 ---
 id: p11_opt_pool_density
 kind: optimizer
+8f: F8_collaborate
 pillar: P11
 title: "Optimizer: Pool Density Improvement"
 version: 1.0.0

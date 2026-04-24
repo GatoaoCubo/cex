@@ -1,6 +1,7 @@
 ---
 id: p07_se_ops_n05
 kind: smoke_eval
+8f: F7_govern
 pillar: P07
 title: "Smoke: N05 Operations Critical Path"
 version: "1.0.0"

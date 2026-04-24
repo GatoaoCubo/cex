@@ -1,6 +1,7 @@
 ---
 id: p01_kc_brand_tokens_pipeline
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "Brand Tokens Pipeline — Living Brand System from Guidelines to Code"
 version: 1.1.0

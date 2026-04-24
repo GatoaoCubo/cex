@@ -1,6 +1,7 @@
 ---
 id: case_studies_intent_resolution
 kind: context_doc
+8f: F3_inject
 title: "Intent Resolution Case Studies: 3 Transformations That Shouldn't Be Possible"
 version: 1.0.0
 pillar: P01

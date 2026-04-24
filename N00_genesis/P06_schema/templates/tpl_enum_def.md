@@ -1,6 +1,7 @@
 ---
 id: p06_enum_def
 kind: enum_def
+8f: F1_constrain
 pillar: P06
 version: 1.0.0
 title: "Template — Enum Definition"

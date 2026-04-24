@@ -5,6 +5,7 @@
 
 id: p05_nr_{{SCOPE_SLUG}}
 kind: naming_rule
+8f: F1_constrain
 pillar: P05
 title: "Naming Rule: {{SCOPE_NAME}}"
 version: 1.0.0

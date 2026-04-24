@@ -1,6 +1,7 @@
 ---
 id: campaign_performance_memory
 kind: memory_summary
+8f: F3_inject
 pillar: P10
 title: Campaign Performance Memory
 version: 1.0.0

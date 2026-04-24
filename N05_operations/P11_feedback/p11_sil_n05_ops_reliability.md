@@ -1,6 +1,7 @@
 ---
 id: p11_sil_n05_ops_reliability
 kind: self_improvement_loop
+8f: F7_govern
 pillar: P11
 title: "N05 Ops Reliability Evolution Loop"
 version: "1.0"

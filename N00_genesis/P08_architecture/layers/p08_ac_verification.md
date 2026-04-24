@@ -1,6 +1,7 @@
 ---
 id: p08_ac_verification
 kind: agent_card
+8f: F2_become
 pillar: P08
 title: "Agent Card: Verification Agent"
 version: 1.0.0

@@ -1,6 +1,7 @@
 ---
 id: p01_kc_llamaindex_patterns
 kind: knowledge_card
+8f: F3_inject
 type: domain
 pillar: P01
 title: "LlamaIndex Patterns — Query Engines, Node Parsers, Response Synthesizers, Workflows"

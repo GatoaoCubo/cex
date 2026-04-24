@@ -6,6 +6,7 @@ quality: 8.4
 
 id: p10_ss_[session_slug]
 kind: session_state
+8f: F8_collaborate
 pillar: P10
 title: [snapshot_da_sessao]
 version: 1.0.0

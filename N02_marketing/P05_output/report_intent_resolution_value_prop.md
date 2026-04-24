@@ -1,6 +1,7 @@
 ---
 id: report_intent_resolution_value_prop
 kind: context_doc
+8f: F3_inject
 title: "Intent Resolution: 5 Words In, Professional Artifact Out"
 version: 1.0.0
 pillar: P01

@@ -1,6 +1,7 @@
 ---
 id: personality_n02
 kind: personality
+8f: F2_become
 nucleus: n02
 pillar: P02
 mirrors: N00_genesis/P02_model/tpl_personality.md

@@ -1,6 +1,7 @@
 ---
 id: prompt_notebooklm_source
 kind: prompt_template
+8f: F6_produce
 pillar: P03
 title: "NotebookLM Source Document Generator"
 version: 1.0.0

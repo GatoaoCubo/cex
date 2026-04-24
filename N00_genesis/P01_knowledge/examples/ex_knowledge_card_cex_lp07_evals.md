@@ -1,6 +1,7 @@
 ---
 id: p01_kc_cex_lp07_evals
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "CEX LP07 Evals — Quality Measurement for LLM Systems"
 version: 1.0.0

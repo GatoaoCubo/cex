@@ -1,6 +1,7 @@
 ---
 id: expansion_play_n06
 kind: expansion_play
+8f: F8_collaborate
 pillar: P03
 nucleus: n06
 title: "Expansion Play -- Upsell and Cross-Sell Trigger Conditions"

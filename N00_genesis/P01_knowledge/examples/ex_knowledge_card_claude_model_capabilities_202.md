@@ -1,6 +1,7 @@
 ---
 id: p01_kc_claude_model_capabilities_2026
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "Claude Model Capabilities 2026 — Opus 4.6, Sonnet 4.6, Haiku 4.5 Specs"
 version: 1.0.0

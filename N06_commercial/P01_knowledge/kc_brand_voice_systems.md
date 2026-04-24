@@ -1,6 +1,7 @@
 ---
 id: p01_kc_brand_voice_systems
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 title: "Brand Voice Systems — Frameworks Universais para Voz e Tom de Marca"
 version: 1.0.0

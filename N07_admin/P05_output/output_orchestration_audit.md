@@ -1,6 +1,7 @@
 ---
 id: n07_output_orchestration_audit
 kind: output_template
+8f: F6_produce
 pillar: P12
 title: "N07 Orchestration Audit — Gap Analysis & Technical Debt"
 version: 1.0.0

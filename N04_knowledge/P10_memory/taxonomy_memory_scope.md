@@ -1,6 +1,7 @@
 ---
 id: p10_memscope_taxonomy
 kind: memory_scope
+8f: F3_inject
 pillar: P02
 title: "Taxonomy Memory Scope — Classification Decision History"
 version: 1.0.0

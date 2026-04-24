@@ -1,6 +1,7 @@
 ---
 id: p08_pat_nucleus_instantiation
 kind: pattern
+8f: F4_reason
 pillar: P08
 title: "Pattern -- Nucleus Instantiation from N00 Archetype"
 version: 1.0.0

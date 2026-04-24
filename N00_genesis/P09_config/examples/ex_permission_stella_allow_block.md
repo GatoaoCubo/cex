@@ -1,6 +1,7 @@
 ---
 id: p09_perm_stella_allow_block
 kind: permission
+8f: F1_constrain
 pillar: P09
 description: "Permission rules for orchestrator orchestrator — what it can and cannot do directly"
 scope: stella

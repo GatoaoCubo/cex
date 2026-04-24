@@ -1,6 +1,7 @@
 ---
 id: bias_audit_n01
 kind: bias_audit
+8f: F7_govern
 pillar: P07
 nucleus: n01
 title: "N01 Research Bias Audit"

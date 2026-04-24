@@ -1,6 +1,7 @@
 ---
 id: churn_prevention_playbook_n06
 kind: churn_prevention_playbook
+8f: F6_produce
 pillar: P03
 nucleus: n06
 title: "Churn Prevention Playbook -- Retention Intervention by Signal and Tier"

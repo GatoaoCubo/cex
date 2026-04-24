@@ -6,6 +6,7 @@ quality: null
 
 id: p07_e2e_[pipeline_slug]
 kind: e2e_eval
+8f: F7_govern
 pillar: P07
 title: [e2e_eval_do_pipeline]
 version: 1.0.0

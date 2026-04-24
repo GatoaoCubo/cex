@@ -1,6 +1,7 @@
 ---
 id: n06_monetization_audit_2026_04_08
 kind: context_doc
+8f: F3_inject
 pillar: P01
 title: "Monetization Portfolio Audit -- N06 Commercial Nucleus"
 version: 1.0.0

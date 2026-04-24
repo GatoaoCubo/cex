@@ -1,6 +1,7 @@
 ---
 id: spec_01_coordinator_protocol
 kind: spec
+8f: F4_reason
 pillar: P01
 title: "SPEC_01: Coordinator Protocol → N07 Orchestrator"
 version: 1.0.0

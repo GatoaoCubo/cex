@@ -1,6 +1,7 @@
 ---
 id: p07_red_team_eval
 kind: red_team_eval
+8f: F7_govern
 pillar: P07
 version: 1.0.0
 title: "Template — Red Team Eval"

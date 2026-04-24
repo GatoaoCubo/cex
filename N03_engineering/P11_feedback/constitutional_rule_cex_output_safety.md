@@ -1,6 +1,7 @@
 ---
 id: p11_cr_cex_output_safety
 kind: constitutional_rule
+8f: F7_govern
 pillar: P11
 title: "Constitutional Rule: CEX Agent Output Safety"
 version: 0.1.0

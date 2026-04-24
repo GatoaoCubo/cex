@@ -4,6 +4,7 @@ quality: 7.8
 id: kc_workflow_run_crate
 title: Workflow Run Crate
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 description: A structured framework for orchestrating multi-step processes with modular components, error handling, and parallel execution
 tags: [automation, orchestration, pipeline, taskflow]

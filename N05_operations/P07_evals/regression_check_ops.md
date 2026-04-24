@@ -1,6 +1,7 @@
 ---
 id: p07_rc_ops
 kind: regression_check
+8f: F7_govern
 pillar: P07
 version: "1.0.0"
 created: "2026-04-17"

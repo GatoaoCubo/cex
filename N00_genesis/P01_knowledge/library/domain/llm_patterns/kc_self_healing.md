@@ -1,6 +1,7 @@
 ---
 id: p01_kc_self_healing
 kind: knowledge_card
+8f: F3_inject
 type: domain
 pillar: P01
 title: "Self-Healing Patterns"

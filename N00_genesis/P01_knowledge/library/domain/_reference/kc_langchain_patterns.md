@@ -1,6 +1,7 @@
 ---
 id: p01_kc_langchain_patterns
 kind: knowledge_card
+8f: F3_inject
 type: domain
 pillar: P01
 title: "LangChain Patterns — LCEL, Runnables, Tools, Retrievers, Output Parsers"

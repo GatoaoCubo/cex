@@ -1,6 +1,7 @@
 ---
 id: kc_email_automation
 kind: knowledge_card
+8f: F3_inject
 pillar: P01
 quality: 9.1
 tldr: "Design patterns for transactional and marketing email automation — template dictionaries, BRL formatting, sequential launch sequences, and provider abstraction."

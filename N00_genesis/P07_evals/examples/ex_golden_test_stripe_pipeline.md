@@ -1,6 +1,7 @@
 ---
 id: p07_gt_stripe_pipeline
 kind: golden_test
+8f: F7_govern
 pillar: P07
 title: "Golden Test: Stripe Evolution Pipeline Validation"
 version: 1.0.0

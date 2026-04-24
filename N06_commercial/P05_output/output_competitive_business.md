@@ -1,6 +1,7 @@
 ---
 id: n06_competitive_business
 kind: benchmark
+8f: F7_govern
 pillar: P07
 description: "Benchmark de modelos de negócio de frameworks AI e pricing do CEX"
 metric: pricing_model_viability

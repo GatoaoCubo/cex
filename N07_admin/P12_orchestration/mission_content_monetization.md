@@ -1,6 +1,7 @@
 ---
 id: mission_content_monetization
 kind: workflow
+8f: F8_collaborate
 pillar: P12
 title: "Mission DAG — Content Monetization Builder"
 version: 1.0.0

@@ -6,6 +6,7 @@
 
 id: p06_val_{{RULE_SLUG}}
 kind: validator
+8f: F7_govern
 pillar: P06
 title: "Validator: {{WHAT_IT_VALIDATES}}"
 version: 1.0.0

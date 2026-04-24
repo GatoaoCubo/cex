@@ -1,6 +1,7 @@
 ---
 id: n06_api_access_pricing
 kind: content_monetization
+8f: F6_produce
 pillar: P11
 title: "API Access Pricing -- CEX SDK Programmatic Access Tiers"
 version: 1.0.0

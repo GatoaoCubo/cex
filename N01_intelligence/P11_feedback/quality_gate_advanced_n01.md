@@ -1,6 +1,7 @@
 ---
 id: quality_gate_advanced_n01
 kind: quality_gate
+8f: F7_govern
 pillar: P11
 nucleus: n01
 title: "N01 Advanced Research Quality Gate v2"

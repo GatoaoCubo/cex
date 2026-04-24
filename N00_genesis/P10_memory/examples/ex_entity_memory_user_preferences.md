@@ -1,6 +1,7 @@
 ---
 id: p10_em_user_preferences
 kind: entity_memory
+8f: F3_inject
 pillar: P10
 title: "User Entity Memory — Preference Tracking Across Sessions"
 version: 1.0.0
