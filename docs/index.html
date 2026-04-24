@@ -3,48 +3,69 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="color-scheme" content="dark">
   <title>CEXAI - Cognitive Exchange AI | Open-Source AI Brain</title>
   <meta name="description" content="CEXAI is not an agent. It is an AI brain. 300 typed kinds, 302 builders, 8 nuclei, 4 runtimes. Your knowledge, your repo, your rules. Intelligence compounds when exchanged.">
   <meta property="og:title" content="CEXAI - Cognitive Exchange AI">
   <meta property="og:description" content="Open-source AI brain. Seven Artificial Sins. Twelve pillars. 300 typed kinds. Intelligence compounds when exchanged.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://gatoaocubo.github.io/cex/">
+  <meta property="og:image" content="https://gatoaocubo.github.io/cex/og-card.png">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="CEXAI - Cognitive Exchange AI">
   <meta name="twitter:description" content="Open-source AI brain. Seven Artificial Sins. Twelve pillars. 300 typed kinds. Intelligence compounds when exchanged.">
+  <link rel="canonical" href="https://gatoaocubo.github.io/cex/">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90' fill='%23e84393'%3EX%3C/text%3E%3C/svg%3E">
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "CEXAI",
+    "alternateName": "Cognitive Exchange AI",
+    "description": "Open-source typed knowledge system for LLM agents. 300 kinds, 302 builders, 8 nuclei, 4 runtimes.",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "Windows, macOS, Linux",
+    "license": "https://opensource.org/licenses/MIT",
+    "url": "https://gatoaocubo.github.io/cex/",
+    "codeRepository": "https://github.com/GatoaoCubo/cex",
+    "programmingLanguage": ["Python", "Markdown", "YAML"],
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+
   <style>
-    *, *::before, *::after {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root {
-      --bg: #0a0a0a;
-      --bg-raised: #111111;
-      --bg-card: #161616;
+      --bg: #ffffff;
+      --bg-raised: #f8f9fa;
+      --bg-card: #ffffff;
+      --bg-hero: #fafafa;
       --synapse: #e84393;
       --synapse-dim: #c0356e;
       --synapse-bright: #ff6bb5;
-      --tissue: #f3b5b8;
-      --cortex: #6c8ebf;
-      --text: #e0e0e0;
-      --text-dim: #8a8a8a;
-      --text-muted: #4a4a4a;
-      --border: #222222;
-      --border-light: #2a2a2a;
+      --synapse-glow: rgba(232, 67, 147, 0.15);
+      --tissue: #d63384;
+      --cortex: #4a6fa5;
+      --text: #1a1a2e;
+      --text-dim: #555566;
+      --text-muted: #999aaa;
+      --border: #e5e7eb;
+      --border-light: #f0f0f3;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
+      --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+      --shadow-lg: 0 8px 30px rgba(0,0,0,0.10);
       --mono: 'SF Mono', 'Cascadia Code', 'Fira Code', 'JetBrains Mono', 'Consolas', monospace;
       --sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-      --max-w: 960px;
-      --n01: #6c8ebf;
+      --max-w: 980px;
+      --n01: #4a6fa5;
       --n02: #e84393;
-      --n03: #ff7675;
-      --n04: #f3b5b8;
-      --n05: #fd79a8;
-      --n06: #e17055;
-      --n07: #00cec9;
+      --n03: #e74c3c;
+      --n04: #d63384;
+      --n05: #c0392b;
+      --n06: #e67e22;
+      --n07: #00b4a6;
     }
 
     html { scroll-behavior: smooth; }
@@ -55,7 +76,6 @@
       color: var(--text);
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
     }
 
     .container {
@@ -67,14 +87,25 @@
     section { padding: 80px 0; }
     section + section { border-top: 1px solid var(--border); }
 
+    /* ---- Scroll animations ---- */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
     /* ---- Nav ---- */
     nav {
       position: fixed;
       top: 0; left: 0; right: 0;
       z-index: 100;
-      background: rgba(10, 10, 10, 0.92);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
       border-bottom: 1px solid var(--border);
     }
     nav .container {
@@ -85,7 +116,7 @@
     }
     .nav-brand {
       font-family: var(--mono);
-      font-size: 16px;
+      font-size: 17px;
       font-weight: 700;
       color: var(--text);
       text-decoration: none;
@@ -94,16 +125,22 @@
     .nav-brand span { color: var(--synapse); }
     .nav-links {
       display: flex;
-      gap: 28px;
+      gap: 24px;
       list-style: none;
     }
     .nav-links a {
       color: var(--text-dim);
       text-decoration: none;
       font-size: 13px;
+      font-weight: 500;
       transition: color 0.2s;
     }
-    .nav-links a:hover { color: var(--text); }
+    .nav-links a:hover { color: var(--synapse); }
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
     .nav-gh {
       color: var(--text-dim);
       text-decoration: none;
@@ -116,38 +153,90 @@
     .nav-gh:hover { color: var(--text); }
     .nav-gh svg { width: 18px; height: 18px; fill: currentColor; }
 
+    /* Hamburger */
+    .hamburger {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+    }
+    .hamburger span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--text);
+      margin: 5px 0;
+      transition: all 0.3s;
+      border-radius: 1px;
+    }
+    .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+    .hamburger.active span:nth-child(2) { opacity: 0; }
+    .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 56px;
+      left: 0; right: 0; bottom: 0;
+      background: rgba(255, 255, 255, 0.98);
+      backdrop-filter: blur(20px);
+      z-index: 99;
+      padding: 32px 24px;
+    }
+    .mobile-menu.open { display: block; }
+    .mobile-menu a {
+      display: block;
+      color: var(--text);
+      text-decoration: none;
+      font-size: 18px;
+      font-weight: 500;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .mobile-menu a:hover { color: var(--synapse); }
+
     /* ---- Hero ---- */
     .hero {
-      padding: 160px 0 60px;
+      padding: 150px 0 60px;
       text-align: center;
+      background: var(--bg-hero);
+      border-bottom: 1px solid var(--border);
     }
     .hero h1 {
       font-family: var(--mono);
-      font-size: clamp(48px, 8vw, 80px);
+      font-size: clamp(52px, 9vw, 88px);
       font-weight: 700;
       letter-spacing: 0.1em;
       margin-bottom: 8px;
       color: var(--text);
     }
-    .hero h1 span { color: var(--synapse); }
+    .hero h1 span {
+      color: var(--synapse);
+      text-shadow: 0 0 40px var(--synapse-glow), 0 0 80px rgba(232, 67, 147, 0.08);
+      animation: xpulse 3s ease-in-out infinite;
+    }
+    @keyframes xpulse {
+      0%, 100% { text-shadow: 0 0 40px var(--synapse-glow), 0 0 80px rgba(232, 67, 147, 0.08); }
+      50% { text-shadow: 0 0 60px rgba(232, 67, 147, 0.3), 0 0 120px rgba(232, 67, 147, 0.15); }
+    }
     .hero-sub {
       font-size: clamp(16px, 2.5vw, 20px);
       color: var(--text-dim);
       font-weight: 400;
-      margin-bottom: 12px;
-      letter-spacing: 0.02em;
+      margin-bottom: 14px;
+      letter-spacing: 0.04em;
     }
     .hero-tagline {
       font-size: clamp(14px, 2vw, 17px);
       color: var(--text-muted);
-      max-width: 560px;
-      margin: 0 auto 36px;
-      font-style: italic;
-      line-height: 1.7;
+      max-width: 580px;
+      margin: 0 auto 40px;
+      line-height: 1.75;
     }
     .hero-ctas {
       display: flex;
-      gap: 16px;
+      gap: 14px;
       justify-content: center;
       flex-wrap: wrap;
     }
@@ -157,9 +246,9 @@
       gap: 8px;
       padding: 12px 28px;
       font-size: 15px;
-      font-weight: 500;
+      font-weight: 600;
       text-decoration: none;
-      border-radius: 6px;
+      border-radius: 8px;
       transition: all 0.2s;
       cursor: pointer;
       border: none;
@@ -168,41 +257,44 @@
     .btn-primary {
       background: var(--synapse);
       color: #fff;
+      box-shadow: 0 2px 12px rgba(232, 67, 147, 0.3);
     }
-    .btn-primary:hover { background: var(--synapse-dim); }
+    .btn-primary:hover {
+      background: var(--synapse-dim);
+      box-shadow: 0 4px 20px rgba(232, 67, 147, 0.4);
+      transform: translateY(-1px);
+    }
     .btn-secondary {
-      background: transparent;
+      background: var(--bg);
       color: var(--text-dim);
-      border: 1px solid var(--border-light);
+      border: 1px solid var(--border);
     }
     .btn-secondary:hover {
       color: var(--text);
-      border-color: var(--text-muted);
+      border-color: var(--synapse);
+      background: var(--bg-raised);
+    }
+    .btn-sm {
+      padding: 8px 18px;
+      font-size: 13px;
+      border-radius: 6px;
     }
 
     /* ---- Badges ---- */
     .badges {
       text-align: center;
-      padding: 24px 0 0;
+      padding: 28px 0 0;
+      background: var(--bg-hero);
     }
-    .badges img {
-      margin: 3px 2px;
-      vertical-align: middle;
-    }
-    .badges-sponsor {
-      margin-top: 12px;
-    }
+    .badges img { margin: 3px 2px; vertical-align: middle; }
+    .badges-sponsor { margin-top: 12px; }
     .badges-sponsor a { text-decoration: none; }
-    .badges-sponsor img {
-      margin: 3px 2px;
-      vertical-align: middle;
-    }
+    .badges-sponsor img { margin: 3px 2px; vertical-align: middle; }
 
     /* ---- Stats ---- */
     .stats {
-      padding: 40px 0;
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
+      padding: 44px 0;
+      background: var(--bg);
     }
     .stats-grid {
       display: grid;
@@ -213,7 +305,7 @@
     .stat-item { padding: 16px 8px; }
     .stat-num {
       font-family: var(--mono);
-      font-size: clamp(20px, 3vw, 28px);
+      font-size: clamp(22px, 3vw, 30px);
       font-weight: 700;
       color: var(--synapse);
       display: block;
@@ -223,6 +315,7 @@
       color: var(--text-dim);
       margin-top: 4px;
       display: block;
+      font-weight: 500;
     }
 
     /* ---- Section chrome ---- */
@@ -233,12 +326,14 @@
       text-transform: uppercase;
       letter-spacing: 0.15em;
       margin-bottom: 16px;
+      font-weight: 600;
     }
     .section-title {
-      font-size: clamp(24px, 3.5vw, 32px);
-      font-weight: 600;
+      font-size: clamp(24px, 3.5vw, 34px);
+      font-weight: 700;
       margin-bottom: 24px;
-      line-height: 1.3;
+      line-height: 1.25;
+      color: var(--text);
     }
     .section-center {
       max-width: 680px;
@@ -247,8 +342,9 @@
     }
     .section-center p {
       color: var(--text-dim);
-      font-size: 15px;
+      font-size: 16px;
       margin-top: 16px;
+      line-height: 1.7;
     }
     .prose {
       max-width: 680px;
@@ -257,15 +353,20 @@
     .prose p {
       color: var(--text-dim);
       font-size: 16px;
-      line-height: 1.75;
-      margin-bottom: 16px;
+      line-height: 1.8;
+      margin-bottom: 18px;
     }
+    .prose strong { color: var(--text); }
     .prose blockquote {
       border-left: 3px solid var(--synapse);
-      padding-left: 16px;
-      color: var(--synapse-bright);
+      padding: 16px 20px;
+      background: var(--synapse-glow);
+      border-radius: 0 8px 8px 0;
+      color: var(--synapse-dim);
       font-style: italic;
-      margin: 24px 0;
+      margin: 28px 0;
+      font-size: 15px;
+      line-height: 1.7;
     }
 
     /* ---- Cards ---- */
@@ -277,27 +378,35 @@
     .card {
       background: var(--bg-card);
       border: 1px solid var(--border);
-      border-radius: 8px;
+      border-radius: 12px;
       padding: 32px 24px;
-      transition: border-color 0.2s;
+      transition: all 0.2s;
+      box-shadow: var(--shadow-sm);
     }
-    .card:hover { border-color: var(--synapse-dim); }
+    .card:hover {
+      border-color: var(--synapse);
+      box-shadow: var(--shadow-md);
+      transform: translateY(-2px);
+    }
     .card h3 {
       font-size: 18px;
-      font-weight: 600;
+      font-weight: 700;
       margin-bottom: 12px;
-      color: var(--synapse-bright);
+      color: var(--synapse);
     }
     .card p {
       font-size: 14px;
       color: var(--text-dim);
-      line-height: 1.65;
+      line-height: 1.7;
     }
 
     /* ---- Tables ---- */
     .tbl-wrap {
       overflow-x: auto;
       margin: 24px 0;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-sm);
     }
     table {
       width: 100%;
@@ -305,43 +414,41 @@
       font-size: 14px;
     }
     thead th {
-      background: var(--synapse-dim);
+      background: var(--text);
       color: #fff;
-      padding: 10px 14px;
+      padding: 12px 16px;
       text-align: left;
       font-weight: 600;
       font-size: 13px;
       letter-spacing: 0.02em;
       white-space: nowrap;
     }
-    thead th:first-child { border-radius: 6px 0 0 0; }
-    thead th:last-child  { border-radius: 0 6px 0 0; }
     tbody td {
-      padding: 10px 14px;
+      padding: 11px 16px;
       border-bottom: 1px solid var(--border);
       color: var(--text-dim);
       vertical-align: top;
     }
     tbody tr:nth-child(even) td { background: var(--bg-raised); }
-    tbody tr:nth-child(odd)  td { background: var(--bg-card); }
-    tbody tr:hover td { background: rgba(232, 67, 147, 0.06); }
+    tbody tr:nth-child(odd)  td { background: var(--bg); }
+    tbody tr:hover td { background: var(--synapse-glow); }
     td strong { color: var(--text); }
     td code {
       font-family: var(--mono);
       font-size: 12px;
-      background: rgba(232, 67, 147, 0.1);
-      padding: 2px 5px;
-      border-radius: 3px;
-      color: var(--synapse-bright);
+      background: rgba(232, 67, 147, 0.08);
+      padding: 2px 6px;
+      border-radius: 4px;
+      color: var(--synapse-dim);
     }
 
     .nuc-border { border-left: 4px solid; }
 
-    /* ---- Code blocks ---- */
+    /* ---- Code blocks (STAY DARK) ---- */
     pre {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 8px;
+      background: #1a1a2e;
+      border: 1px solid #2a2a3e;
+      border-radius: 10px;
       padding: 20px 24px;
       overflow-x: auto;
       margin: 16px 0;
@@ -350,34 +457,34 @@
       font-family: var(--mono);
       font-size: 13px;
       line-height: 1.7;
-      color: var(--text-dim);
+      color: #b0b0c0;
     }
-    pre code .cmd { color: var(--text); }
-    pre code .comment { color: var(--text-muted); }
+    pre code .cmd { color: #e0e0ee; }
+    pre code .comment { color: #555570; }
     pre code .prompt { color: var(--synapse); user-select: none; }
     pre code .kw { color: var(--cortex); }
     pre code .str { color: var(--tissue); }
     pre code .flag { color: var(--synapse-bright); }
 
     .term {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 8px;
+      background: #1a1a2e;
+      border: 1px solid #2a2a3e;
+      border-radius: 10px;
       overflow: hidden;
       margin: 24px 0;
+      box-shadow: var(--shadow-lg);
     }
     .term-bar {
       display: flex;
       align-items: center;
       gap: 8px;
       padding: 10px 16px;
-      background: var(--bg-raised);
-      border-bottom: 1px solid var(--border);
+      background: #141425;
+      border-bottom: 1px solid #2a2a3e;
     }
     .term-dot {
       width: 10px; height: 10px;
       border-radius: 50%;
-      background: var(--border-light);
     }
     .term-dot:nth-child(1) { background: #ff5f57; }
     .term-dot:nth-child(2) { background: #febc2e; }
@@ -396,30 +503,67 @@
     }
     .bullet-list li {
       position: relative;
-      padding-left: 20px;
-      margin-bottom: 10px;
+      padding-left: 22px;
+      margin-bottom: 12px;
       color: var(--text-dim);
-      font-size: 14px;
-      line-height: 1.6;
+      font-size: 15px;
+      line-height: 1.65;
     }
     .bullet-list li::before {
       content: '';
       position: absolute;
       left: 0;
-      top: 8px;
-      width: 6px;
-      height: 6px;
+      top: 9px;
+      width: 7px;
+      height: 7px;
       border-radius: 50%;
       background: var(--synapse);
     }
+    .bullet-list li strong { color: var(--text); }
 
-    /* ---- Architecture diagram ---- */
-    .arch-diagram pre {
-      font-size: 12px;
+    /* ---- How it works ---- */
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      max-width: 780px;
+      margin: 48px auto 0;
+      text-align: center;
+    }
+    .step {
+      position: relative;
+    }
+    .step-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: var(--synapse);
+      color: #fff;
+      font-family: var(--mono);
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 16px;
+      box-shadow: 0 4px 15px rgba(232, 67, 147, 0.3);
+    }
+    .step h4 {
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: var(--text);
+    }
+    .step p {
+      font-size: 14px;
+      color: var(--text-dim);
       line-height: 1.6;
     }
+    .step-arrow {
+      display: none;
+    }
 
-    /* ---- 8F pipeline visual ---- */
+    /* ---- Pipeline visual ---- */
     .pipeline-flow {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -432,23 +576,30 @@
       padding: 18px 10px;
       background: var(--bg-card);
       border: 1px solid var(--border);
-      border-radius: 6px;
-      transition: border-color 0.2s;
+      border-radius: 8px;
+      transition: all 0.2s;
+      box-shadow: var(--shadow-sm);
     }
-    .pipeline-step:hover { border-color: var(--synapse); }
+    .pipeline-step:hover {
+      border-color: var(--synapse);
+      box-shadow: var(--shadow-md);
+      transform: translateY(-2px);
+    }
     .pipeline-num {
       font-family: var(--mono);
       font-size: 12px;
       color: var(--synapse);
       margin-bottom: 4px;
       display: block;
+      font-weight: 600;
     }
     .pipeline-name {
       font-family: var(--mono);
       font-size: 14px;
-      font-weight: 600;
+      font-weight: 700;
       display: block;
       margin-bottom: 6px;
+      color: var(--text);
     }
     .pipeline-desc {
       font-size: 12px;
@@ -466,23 +617,24 @@
     }
     .runtime-item {
       font-family: var(--mono);
-      font-size: 16px;
+      font-size: 17px;
       color: var(--text);
-      font-weight: 500;
+      font-weight: 600;
     }
 
     /* ---- CTA band ---- */
     .cta-band {
-      background: linear-gradient(135deg, rgba(232, 67, 147, 0.12), rgba(0, 206, 201, 0.08));
-      border-top: 1px solid var(--synapse-dim);
-      border-bottom: 1px solid var(--synapse-dim);
+      background: linear-gradient(135deg, rgba(232, 67, 147, 0.06), rgba(0, 180, 166, 0.04));
+      border-top: 1px solid rgba(232, 67, 147, 0.2);
+      border-bottom: 1px solid rgba(232, 67, 147, 0.2);
       padding: 64px 0;
       text-align: center;
     }
     .cta-band h2 {
       font-size: clamp(22px, 3vw, 30px);
-      font-weight: 600;
+      font-weight: 700;
       margin-bottom: 16px;
+      color: var(--text);
     }
     .cta-band p {
       color: var(--text-dim);
@@ -492,19 +644,150 @@
       line-height: 1.7;
     }
 
+    /* ---- Prerequisites ---- */
+    .prereqs-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      margin-top: 40px;
+    }
+    .prereq {
+      text-align: center;
+      padding: 28px 16px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: var(--bg-card);
+      box-shadow: var(--shadow-sm);
+      transition: all 0.2s;
+    }
+    .prereq:hover {
+      border-color: var(--synapse);
+      box-shadow: var(--shadow-md);
+    }
+    .prereq-icon {
+      font-size: 28px;
+      margin-bottom: 12px;
+      display: block;
+      font-family: var(--mono);
+      color: var(--synapse);
+      font-weight: 700;
+    }
+    .prereq h4 {
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 6px;
+      color: var(--text);
+    }
+    .prereq p {
+      font-size: 13px;
+      color: var(--text-dim);
+      line-height: 1.5;
+    }
+    .prereq code {
+      font-family: var(--mono);
+      font-size: 11px;
+      background: rgba(232, 67, 147, 0.08);
+      padding: 2px 6px;
+      border-radius: 4px;
+      color: var(--synapse-dim);
+    }
+
+    /* ---- FAQ Accordion ---- */
+    .faq-list {
+      max-width: 720px;
+      margin: 0 auto;
+    }
+    .faq-list details {
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      margin-bottom: 12px;
+      overflow: hidden;
+      transition: all 0.2s;
+      box-shadow: var(--shadow-sm);
+    }
+    .faq-list details[open] {
+      border-color: var(--synapse);
+    }
+    .faq-list summary {
+      padding: 16px 20px;
+      font-weight: 600;
+      font-size: 15px;
+      cursor: pointer;
+      list-style: none;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: var(--text);
+      background: var(--bg-card);
+      transition: background 0.2s;
+    }
+    .faq-list summary:hover { background: var(--bg-raised); }
+    .faq-list summary::-webkit-details-marker { display: none; }
+    .faq-list summary::after {
+      content: '+';
+      font-family: var(--mono);
+      font-size: 18px;
+      color: var(--synapse);
+      transition: transform 0.2s;
+    }
+    .faq-list details[open] summary::after {
+      transform: rotate(45deg);
+    }
+    .faq-list .faq-body {
+      padding: 0 20px 16px;
+      font-size: 14px;
+      color: var(--text-dim);
+      line-height: 1.7;
+    }
+
+    /* ---- Architecture diagram ---- */
+    .arch-diagram pre { font-size: 12px; line-height: 1.6; }
+
+    /* ---- Back to top ---- */
+    .back-to-top {
+      position: fixed;
+      bottom: 32px;
+      right: 32px;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--synapse);
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      font-size: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 15px rgba(232, 67, 147, 0.35);
+      opacity: 0;
+      transform: translateY(10px);
+      transition: all 0.3s;
+      z-index: 50;
+    }
+    .back-to-top.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .back-to-top:hover {
+      background: var(--synapse-dim);
+      transform: translateY(-2px);
+    }
+
     /* ---- Footer ---- */
     footer {
       border-top: 1px solid var(--border);
       padding: 48px 0;
       text-align: center;
+      background: var(--bg-raised);
     }
     .footer-quote {
       font-style: italic;
       color: var(--text-dim);
-      font-size: 15px;
-      margin-bottom: 4px;
+      font-size: 16px;
+      margin-bottom: 6px;
     }
-    .footer-quote em { color: var(--synapse-bright); }
+    .footer-quote em { color: var(--synapse); }
     .footer-links {
       margin-top: 20px;
       font-size: 13px;
@@ -513,18 +796,21 @@
     .footer-links a {
       color: var(--text-dim);
       text-decoration: none;
+      transition: color 0.2s;
     }
-    .footer-links a:hover { color: var(--text); }
+    .footer-links a:hover { color: var(--synapse); }
 
     /* ---- Responsive ---- */
     @media (max-width: 768px) {
       section { padding: 56px 0; }
       .hero { padding: 120px 0 48px; }
       .stats-grid { grid-template-columns: repeat(3, 1fr); gap: 8px; }
-      .stat-item { padding: 12px 4px; }
       .cards-grid { grid-template-columns: 1fr; gap: 16px; }
       .pipeline-flow { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+      .prereqs-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+      .steps { grid-template-columns: 1fr; gap: 24px; }
       .nav-links { display: none; }
+      .hamburger { display: block; }
       .runtimes-list { gap: 24px; }
       table { font-size: 13px; }
       thead th, tbody td { padding: 8px 10px; }
@@ -532,6 +818,7 @@
     @media (max-width: 480px) {
       .stats-grid { grid-template-columns: repeat(2, 1fr); }
       .pipeline-flow { grid-template-columns: 1fr; }
+      .prereqs-grid { grid-template-columns: 1fr; }
       .hero-ctas { flex-direction: column; align-items: center; }
       .btn { width: 100%; max-width: 280px; justify-content: center; }
     }
@@ -546,28 +833,46 @@
       <ul class="nav-links">
         <li><a href="#why">Why</a></li>
         <li><a href="#sins">Sins</a></li>
-        <li><a href="#pillars">Pillars</a></li>
         <li><a href="#pipeline">8F</a></li>
         <li><a href="#exchange">Exchange</a></li>
         <li><a href="#quickstart">Start</a></li>
         <li><a href="#sovereignty">Runtimes</a></li>
-        <li><a href="#glossary">Glossary</a></li>
+        <li><a href="#faq">FAQ</a></li>
         <li><a href="https://publish.obsidian.md/cexai" target="_blank" rel="noopener">Vault</a></li>
         <li><a href="https://discord.gg/HK6E2VgfWh" target="_blank" rel="noopener">Discord</a></li>
       </ul>
-      <a href="https://github.com/GatoaoCubo/cex" class="nav-gh" target="_blank" rel="noopener">
-        <svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
-        GitHub
-      </a>
+      <div class="nav-right">
+        <a href="https://github.com/GatoaoCubo/cex" class="nav-gh" target="_blank" rel="noopener">
+          <svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+          GitHub
+        </a>
+        <button class="hamburger" aria-label="Menu" onclick="toggleMenu()">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
     </div>
   </nav>
+
+  <!-- Mobile menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#why" onclick="closeMenu()">Why CEX</a>
+    <a href="#sins" onclick="closeMenu()">The Sins</a>
+    <a href="#pipeline" onclick="closeMenu()">8F Pipeline</a>
+    <a href="#exchange" onclick="closeMenu()">Exchange</a>
+    <a href="#quickstart" onclick="closeMenu()">Get Started</a>
+    <a href="#sovereignty" onclick="closeMenu()">Runtimes</a>
+    <a href="#faq" onclick="closeMenu()">FAQ</a>
+    <a href="https://publish.obsidian.md/cexai" target="_blank" rel="noopener">Vault</a>
+    <a href="https://discord.gg/HK6E2VgfWh" target="_blank" rel="noopener">Discord</a>
+    <a href="https://github.com/GatoaoCubo/cex" target="_blank" rel="noopener">GitHub</a>
+  </div>
 
   <!-- ======== HERO ======== -->
   <section class="hero">
     <div class="container">
       <h1>CE<span>X</span>AI</h1>
       <p class="hero-sub">Cognitive Exchange AI</p>
-      <p class="hero-tagline">Not an agent. An AI brain. Seven sins. Twelve pillars. 300 typed kinds. Open source, sovereign, self-compounding. Intelligence compounds when exchanged.</p>
+      <p class="hero-tagline">Not an agent. An AI brain. Seven deadly sins. Twelve pillars. 300 typed kinds. Open source, sovereign, self-compounding. Intelligence compounds when exchanged.</p>
       <div class="hero-ctas">
         <a href="#quickstart" class="btn btn-primary">Build Your Brain</a>
         <a href="https://github.com/GatoaoCubo/cex" class="btn btn-secondary" target="_blank" rel="noopener">GitHub</a>
@@ -601,43 +906,25 @@
 
   <!-- ======== STATS BAR ======== -->
   <section class="stats">
-    <div class="container">
+    <div class="container reveal">
       <div class="stats-grid">
-        <div class="stat-item">
-          <span class="stat-num">300</span>
-          <span class="stat-label">kinds</span>
-        </div>
-        <div class="stat-item">
-          <span class="stat-num">302</span>
-          <span class="stat-label">builders</span>
-        </div>
-        <div class="stat-item">
-          <span class="stat-num">3,647</span>
-          <span class="stat-label">ISOs</span>
-        </div>
-        <div class="stat-item">
-          <span class="stat-num">144</span>
-          <span class="stat-label">tools</span>
-        </div>
-        <div class="stat-item">
-          <span class="stat-num">12</span>
-          <span class="stat-label">pillars</span>
-        </div>
-        <div class="stat-item">
-          <span class="stat-num">8</span>
-          <span class="stat-label">nuclei</span>
-        </div>
+        <div class="stat-item"><span class="stat-num">300</span><span class="stat-label">kinds</span></div>
+        <div class="stat-item"><span class="stat-num">302</span><span class="stat-label">builders</span></div>
+        <div class="stat-item"><span class="stat-num">3,647</span><span class="stat-label">ISOs</span></div>
+        <div class="stat-item"><span class="stat-num">144</span><span class="stat-label">tools</span></div>
+        <div class="stat-item"><span class="stat-num">12</span><span class="stat-label">pillars</span></div>
+        <div class="stat-item"><span class="stat-num">8</span><span class="stat-label">nuclei</span></div>
       </div>
     </div>
   </section>
 
-  <!-- ======== WHY CEX EXISTS ======== -->
+  <!-- ======== WHY ======== -->
   <section id="why">
     <div class="container">
-      <div class="prose">
+      <div class="prose reveal">
         <p class="section-label">The Problem</p>
         <h2 class="section-title">Every AI agent you build forgets you by morning</h2>
-        <p>You wrote a killer system prompt. Added some tools. Maybe even wired up RAG. And it works -- until it doesn't. The agent drifts. Hallucinations creep in. Another team builds the same thing from scratch because nothing is reusable. Your institutional knowledge lives in Slack threads and someone's laptop.</p>
+        <p>You wrote a great system prompt. Added tools. Maybe even wired up RAG. It works -- until it drifts, hallucinates, or another team builds the same thing from scratch because nothing is reusable. Your institutional knowledge lives in Slack threads and someone's laptop.</p>
         <p>The gap is not intelligence. LLMs are already smart. The gap is <strong>infrastructure</strong> -- there is no typed, governed, composable system that turns raw LLM power into a brain that remembers, compounds, and belongs to you.</p>
         <p>CEXAI fills that gap.</p>
         <blockquote>Most AI agents are a system prompt plus a few tools. CEXAI is seven specialized departments, each running on a deadly sin, producing typed knowledge assets that compound over time.</blockquote>
@@ -648,22 +935,22 @@
   <!-- ======== THREE PROPERTIES ======== -->
   <section>
     <div class="container">
-      <div class="section-center">
+      <div class="section-center reveal">
         <p class="section-label">Core Properties</p>
         <h2 class="section-title">What makes this different</h2>
       </div>
-      <div class="cards-grid">
+      <div class="cards-grid reveal">
         <div class="card">
           <h3>Composable</h3>
           <p>8 functions &times; 12 pillars &times; 300 artifact kinds = a factory floor for intelligence. Spawn a new department in minutes. Every piece clicks into every other piece.</p>
         </div>
         <div class="card">
           <h3>Sovereign</h3>
-          <p>Runs on Claude, GPT, Gemini, or Ollama. Your knowledge stays in your repo, under your git history, on your hardware. No vendor owns your brain. Switch providers in one YAML file.</p>
+          <p>Runs on Claude, GPT, Gemini, or Ollama. Your knowledge stays in your repo, under your git history, on your hardware. No vendor owns your brain.</p>
         </div>
         <div class="card">
           <h3>Self-compounding</h3>
-          <p>Every conversation, decision, and artifact compiles into typed, governed, searchable knowledge assets. Day 30 is dramatically smarter than day 1. Your institutional memory compounds like capital.</p>
+          <p>Every conversation, decision, and artifact compiles into typed, governed, searchable knowledge assets. Day 30 is dramatically smarter than day 1.</p>
         </div>
       </div>
     </div>
@@ -672,12 +959,12 @@
   <!-- ======== MATURITY GAP ======== -->
   <section id="maturity">
     <div class="container">
-      <div class="section-center">
+      <div class="section-center reveal">
         <p class="section-label">The Maturity Gap</p>
         <h2 class="section-title">A basic agent vs. a CEX nucleus</h2>
-        <p>A basic LLM agent is one prompt and a handful of tools. A CEX nucleus is a business department: a superintendent LLM, a team of specialized sub-agents, a toolbox of MCPs and APIs, a knowledge library, workflows, quality controls, and a cultural DNA layer. This is the gap most AI projects never close.</p>
+        <p>A basic LLM agent is one prompt and a handful of tools. A CEX nucleus is a full business department: superintendent LLM, specialized sub-agents, toolbox, knowledge library, workflows, quality controls, and cultural DNA.</p>
       </div>
-      <div class="tbl-wrap">
+      <div class="tbl-wrap reveal">
         <table>
           <thead>
             <tr><th>Capability Axis</th><th>Basic Agent</th><th>CEX Nucleus</th></tr>
@@ -691,7 +978,7 @@
             <tr><td><strong>Schema (P06)</strong></td><td>None</td><td>Input / output schemas + validators + interface contracts</td></tr>
             <tr><td><strong>Evaluation (P07)</strong></td><td>Ship and pray</td><td>Quality gates + scoring rubrics + LLM judges + benchmarks</td></tr>
             <tr><td><strong>Architecture (P08)</strong></td><td>None</td><td>Agent cards + component maps + decision records</td></tr>
-            <tr><td><strong>Config (P09)</strong></td><td>Env vars</td><td>Typed configs + rate limits + feature flags + secrets management</td></tr>
+            <tr><td><strong>Config (P09)</strong></td><td>Env vars</td><td>Typed configs + rate limits + feature flags + secrets</td></tr>
             <tr><td><strong>Feedback (P11)</strong></td><td>None</td><td>Guardrails + bug loops + learning records + regression checks</td></tr>
             <tr><td><strong>Orchestration (P12)</strong></td><td>None</td><td>Workflows + dispatch rules + composable crews + DAGs</td></tr>
           </tbody>
@@ -703,19 +990,19 @@
   <!-- ======== N01 EXAMPLE ======== -->
   <section>
     <div class="container">
-      <div class="prose">
+      <div class="prose reveal">
         <p class="section-label">See It in Action</p>
-        <h2 class="section-title">You say "research my competitors." Here is what actually happens.</h2>
+        <h2 class="section-title">You say "research my competitors." Here is what happens.</h2>
         <p>N01 Intelligence does not run a single LLM call. It activates a sin-driven agentic business unit:</p>
         <ul class="bullet-list">
           <li><strong>Analytical Envy</strong> (its sin lens) drives it to surpass every public source -- not match them, surpass them.</li>
           <li><strong>MCP servers + browser tools + API clients</strong> (P04) scrape, fetch, and cross-reference live data.</li>
           <li><strong>A crew of specialized sub-agents</strong> -- researcher, analyst, fact-checker -- divides the work in parallel.</li>
-          <li><strong>The 8-Function Pipeline</strong> (F1 CONSTRAIN through F8 COLLABORATE) drives every artifact to a 9.0+ quality floor before it touches your repo.</li>
+          <li><strong>The 8-Function Pipeline</strong> (F1 through F8) drives every artifact to a 9.0+ quality floor before it touches your repo.</li>
           <li><strong>Entity memory + knowledge index</strong> (P10) capture what it learned, so the next run starts smarter than the last one ended.</li>
           <li><strong>Peer-reviewed quality gates</strong> (P07, P11) block anything subpar from merging.</li>
         </ul>
-        <p>That is not a chatbot answering a question. That is an intelligence department that compounds every time it runs.</p>
+        <p>That is not a chatbot. That is an intelligence department that compounds every time it runs.</p>
       </div>
     </div>
   </section>
@@ -723,55 +1010,41 @@
   <!-- ======== THE ARTIFICIAL SINS ======== -->
   <section id="sins">
     <div class="container">
-      <div class="section-center">
+      <div class="section-center reveal">
         <p class="section-label">The Artificial Sins</p>
         <h2 class="section-title">Seven departments. Seven deadly sins.</h2>
-        <p>Every nucleus runs on one of the seven deadly sins. This is not decoration -- it is a personality layer that determines what the nucleus optimizes for when instructions are ambiguous. Sins are the cultural DNA that separates a generic LLM call from a specialist with convictions.</p>
+        <p>Every nucleus runs on one of the seven deadly sins. This is not decoration -- it is cultural DNA that determines what the nucleus optimizes for when instructions are ambiguous. Sins are what separate a generic LLM call from a specialist with convictions.</p>
       </div>
-      <div class="tbl-wrap">
+      <div class="tbl-wrap reveal">
         <table>
           <thead>
             <tr><th>Nucleus</th><th>Role</th><th>Sin Lens</th><th>What the Sin Does</th><th>Tier</th></tr>
           </thead>
           <tbody>
-            <tr class="nuc-border" style="border-left-color: var(--n01);">
-              <td><strong>N01</strong></td><td>Intelligence</td><td>Analytical Envy</td><td>Envies every competitor, paper, and benchmark -- to surpass them all</td><td>Sonnet</td>
-            </tr>
-            <tr class="nuc-border" style="border-left-color: var(--n02);">
-              <td><strong>N02</strong></td><td>Marketing</td><td>Creative Lust</td><td>Writes copy that seduces. Hooks you cannot ignore. Desire over information.</td><td>Sonnet</td>
-            </tr>
-            <tr class="nuc-border" style="border-left-color: var(--n03);">
-              <td><strong>N03</strong></td><td>Engineering</td><td>Inventive Pride</td><td>Refuses to ship mediocrity. Builds the best of its kind or not at all.</td><td><strong>Opus</strong></td>
-            </tr>
-            <tr class="nuc-border" style="border-left-color: var(--n04);">
-              <td><strong>N04</strong></td><td>Knowledge</td><td>Knowledge Gluttony</td><td>Insatiable hunger for facts, citations, context. Never enough data.</td><td>Sonnet</td>
-            </tr>
-            <tr class="nuc-border" style="border-left-color: var(--n05);">
-              <td><strong>N05</strong></td><td>Operations</td><td>Gating Wrath</td><td>Merciless at the quality gate. Breaks what must break before it ships.</td><td>Sonnet</td>
-            </tr>
-            <tr class="nuc-border" style="border-left-color: var(--n06);">
-              <td><strong>N06</strong></td><td>Commercial</td><td>Strategic Greed</td><td>Extracts every revenue opportunity. No margin left on the table.</td><td>Sonnet</td>
-            </tr>
-            <tr class="nuc-border" style="border-left-color: var(--n07);">
-              <td><strong>N07</strong></td><td>Orchestrator</td><td>Orchestrating Sloth</td><td>Never builds -- only dispatches. Laziness as ultimate leverage.</td><td><strong>Opus</strong></td>
-            </tr>
+            <tr class="nuc-border" style="border-left-color: var(--n01);"><td><strong>N01</strong></td><td>Intelligence</td><td>Analytical Envy</td><td>Envies every competitor and benchmark -- to surpass them all</td><td>Sonnet</td></tr>
+            <tr class="nuc-border" style="border-left-color: var(--n02);"><td><strong>N02</strong></td><td>Marketing</td><td>Creative Lust</td><td>Writes copy that seduces. Hooks you cannot ignore.</td><td>Sonnet</td></tr>
+            <tr class="nuc-border" style="border-left-color: var(--n03);"><td><strong>N03</strong></td><td>Engineering</td><td>Inventive Pride</td><td>Refuses to ship mediocrity. The best of its kind or not at all.</td><td><strong>Opus</strong></td></tr>
+            <tr class="nuc-border" style="border-left-color: var(--n04);"><td><strong>N04</strong></td><td>Knowledge</td><td>Knowledge Gluttony</td><td>Insatiable hunger for facts, citations, context. Never enough.</td><td>Sonnet</td></tr>
+            <tr class="nuc-border" style="border-left-color: var(--n05);"><td><strong>N05</strong></td><td>Operations</td><td>Gating Wrath</td><td>Merciless at the quality gate. Breaks what must break.</td><td>Sonnet</td></tr>
+            <tr class="nuc-border" style="border-left-color: var(--n06);"><td><strong>N06</strong></td><td>Commercial</td><td>Strategic Greed</td><td>Extracts every revenue opportunity. No margin left on the table.</td><td>Sonnet</td></tr>
+            <tr class="nuc-border" style="border-left-color: var(--n07);"><td><strong>N07</strong></td><td>Orchestrator</td><td>Orchestrating Sloth</td><td>Never builds -- only dispatches. Laziness as leverage.</td><td><strong>Opus</strong></td></tr>
           </tbody>
         </table>
       </div>
-      <p style="font-size: 14px; color: var(--text-dim); margin-top: 16px; text-align: center; line-height: 1.6;">N00 Genesis is the pre-sin archetype -- the universal template from which all nuclei are born. Contributors build N08+ as vertical specializations (healthcare, fintech, legal, edtech).</p>
+      <p style="font-size: 14px; color: var(--text-muted); margin-top: 16px; text-align: center;">N00 Genesis is the pre-sin archetype. Contributors build N08+ as vertical specializations (healthcare, fintech, legal, edtech).</p>
     </div>
   </section>
 
   <!-- ======== 8F PIPELINE ======== -->
   <section id="pipeline">
     <div class="container">
-      <div class="section-center">
+      <div class="section-center reveal">
         <p class="section-label">The Pipeline</p>
         <h2 class="section-title">Eight functions. Every task. No exceptions.</h2>
-        <p>The 8F pipeline is how CEXAI thinks -- not just how it builds. Research, copy, code, analysis, deployment: every LLM interaction decomposes into eight orthogonal functions. This is the force multiplier that turns five words of user input into professional output.</p>
+        <p>The 8F pipeline is how CEXAI thinks. Research, copy, code, analysis, deployment -- every LLM interaction decomposes into eight functions. This is the force multiplier that turns five words of user input into professional output.</p>
       </div>
 
-      <div class="pipeline-flow">
+      <div class="pipeline-flow reveal">
         <div class="pipeline-step"><span class="pipeline-num">F1</span><span class="pipeline-name">Constrain</span><span class="pipeline-desc">Resolve kind, load schema, set limits</span></div>
         <div class="pipeline-step"><span class="pipeline-num">F2</span><span class="pipeline-name">Become</span><span class="pipeline-desc">Load builder identity (12 ISOs)</span></div>
         <div class="pipeline-step"><span class="pipeline-num">F3</span><span class="pipeline-name">Inject</span><span class="pipeline-desc">Inject KCs, memory, brand, context</span></div>
@@ -781,53 +1054,33 @@
         <div class="pipeline-step"><span class="pipeline-num">F7</span><span class="pipeline-name">Govern</span><span class="pipeline-desc">Validate against hard gates</span></div>
         <div class="pipeline-step"><span class="pipeline-num">F8</span><span class="pipeline-name">Collaborate</span><span class="pipeline-desc">Save, compile, commit, signal</span></div>
       </div>
-
-      <div class="term" style="margin-top: 40px;">
-        <div class="term-bar">
-          <span class="term-dot"></span><span class="term-dot"></span><span class="term-dot"></span>
-        </div>
-        <pre><code><span class="comment"># You type 5 words. The pipeline does the rest.</span>
-<span class="prompt">$ </span><span class="cmd">python _tools/cex_8f_runner.py "create knowledge card about product pricing" \</span>
-<span class="cmd">    --kind knowledge_card --execute</span>
-
-<span class="comment"># F1 resolves kind + schema</span>
-<span class="comment"># F2 loads 12 builder ISOs</span>
-<span class="comment"># F3 injects KCs, examples, brand voice, memory</span>
-<span class="comment"># F4 plans sections, references, density target</span>
-<span class="comment"># F5 discovers tools, checks existing artifacts</span>
-<span class="comment"># F6 generates the full artifact</span>
-<span class="comment"># F7 validates: 7 hard gates, 12-point checklist, 5D scoring</span>
-<span class="comment"># F8 saves, compiles to YAML, commits, signals downstream</span></code></pre>
-      </div>
     </div>
   </section>
 
   <!-- ======== 12 PILLARS ======== -->
   <section id="pillars">
     <div class="container">
-      <div class="section-center">
+      <div class="section-center reveal">
         <p class="section-label">Taxonomy</p>
         <h2 class="section-title">The 12 Pillars</h2>
-        <p>Every artifact lives in one of twelve pillars. Pillars are taxonomic axes, not departments -- every nucleus exercises every pillar. This is why a CEX nucleus is a full department, not just an agent.</p>
+        <p>Every artifact lives in one of twelve pillars. Pillars are taxonomic axes, not departments -- every nucleus exercises every pillar. That is why a nucleus is a full department, not just an agent.</p>
       </div>
-      <div class="tbl-wrap">
+      <div class="tbl-wrap reveal">
         <table>
-          <thead>
-            <tr><th>Pillar</th><th>Name</th><th>Example Kinds</th></tr>
-          </thead>
+          <thead><tr><th>Pillar</th><th>Name</th><th>Example Kinds</th></tr></thead>
           <tbody>
             <tr><td><strong>P01</strong></td><td>Knowledge</td><td><code>knowledge_card</code>, <code>rag_source</code>, <code>glossary_entry</code>, <code>chunk_strategy</code></td></tr>
             <tr><td><strong>P02</strong></td><td>Model</td><td><code>agent</code>, <code>model_provider</code>, <code>boot_config</code>, <code>mental_model</code></td></tr>
-            <tr><td><strong>P03</strong></td><td>Prompt</td><td><code>system_prompt</code>, <code>prompt_template</code>, <code>chain</code>, <code>action_prompt</code>, <code>tagline</code></td></tr>
-            <tr><td><strong>P04</strong></td><td>Tools</td><td><code>mcp_server</code>, <code>browser_tool</code>, <code>api_client</code>, <code>webhook</code>, <code>research_pipeline</code></td></tr>
+            <tr><td><strong>P03</strong></td><td>Prompt</td><td><code>system_prompt</code>, <code>prompt_template</code>, <code>chain</code>, <code>tagline</code></td></tr>
+            <tr><td><strong>P04</strong></td><td>Tools</td><td><code>mcp_server</code>, <code>browser_tool</code>, <code>api_client</code>, <code>webhook</code></td></tr>
             <tr><td><strong>P05</strong></td><td>Output</td><td><code>landing_page</code>, <code>formatter</code>, <code>parser</code>, <code>diagram</code></td></tr>
             <tr><td><strong>P06</strong></td><td>Schema</td><td><code>input_schema</code>, <code>validator</code>, <code>type_def</code>, <code>interface</code></td></tr>
-            <tr><td><strong>P07</strong></td><td>Evals</td><td><code>quality_gate</code>, <code>scoring_rubric</code>, <code>llm_judge</code>, <code>benchmark</code>, <code>smoke_eval</code></td></tr>
-            <tr><td><strong>P08</strong></td><td>Architecture</td><td><code>agent_card</code>, <code>component_map</code>, <code>decision_record</code>, <code>naming_rule</code></td></tr>
-            <tr><td><strong>P09</strong></td><td>Config</td><td><code>env_config</code>, <code>rate_limit_config</code>, <code>secret_config</code>, <code>feature_flag</code></td></tr>
-            <tr><td><strong>P10</strong></td><td>Memory</td><td><code>entity_memory</code>, <code>knowledge_index</code>, <code>memory_summary</code>, <code>prompt_cache</code></td></tr>
-            <tr><td><strong>P11</strong></td><td>Feedback</td><td><code>quality_gate</code>, <code>bugloop</code>, <code>guardrail</code>, <code>learning_record</code></td></tr>
-            <tr><td><strong>P12</strong></td><td>Orchestration</td><td><code>workflow</code>, <code>dispatch_rule</code>, <code>schedule</code>, <code>crew_template</code>, <code>dag</code></td></tr>
+            <tr><td><strong>P07</strong></td><td>Evals</td><td><code>quality_gate</code>, <code>scoring_rubric</code>, <code>llm_judge</code>, <code>benchmark</code></td></tr>
+            <tr><td><strong>P08</strong></td><td>Architecture</td><td><code>agent_card</code>, <code>component_map</code>, <code>decision_record</code></td></tr>
+            <tr><td><strong>P09</strong></td><td>Config</td><td><code>env_config</code>, <code>rate_limit_config</code>, <code>feature_flag</code></td></tr>
+            <tr><td><strong>P10</strong></td><td>Memory</td><td><code>entity_memory</code>, <code>knowledge_index</code>, <code>memory_summary</code></td></tr>
+            <tr><td><strong>P11</strong></td><td>Feedback</td><td><code>guardrail</code>, <code>bugloop</code>, <code>learning_record</code></td></tr>
+            <tr><td><strong>P12</strong></td><td>Orchestration</td><td><code>workflow</code>, <code>dispatch_rule</code>, <code>crew_template</code>, <code>dag</code></td></tr>
           </tbody>
         </table>
       </div>
@@ -837,18 +1090,16 @@
   <!-- ======== THE EXCHANGE ======== -->
   <section id="exchange">
     <div class="container">
-      <div class="prose">
+      <div class="prose reveal">
         <p class="section-label">The X</p>
         <h2 class="section-title">The X stands for Exchange</h2>
-        <p>Intelligence compounds faster when shared. The X in CEXAI serves double duty: formally, it means <strong>Exchange</strong> -- the protocol for sharing typed knowledge assets between instances. Practically, it becomes <strong>your brand</strong> when you run <code>/init</code>.</p>
-        <p>Every CEXAI artifact is modular, typed, and runtime-agnostic. Every <code>.md</code> file with YAML frontmatter is a self-describing exchange unit -- it carries its kind, quality score, pillar, and nucleus origin. Import an artifact into any CEXAI instance, run <code>cex_doctor.py</code>, and it validates automatically.</p>
+        <p>Intelligence compounds faster when shared. The X in CEXAI serves double duty: formally, it means <strong>Exchange</strong> -- the protocol for sharing typed knowledge assets between instances. Practically, it becomes <strong>your brand</strong> when you bootstrap with <code>/init</code>.</p>
+        <p>Every artifact is a self-describing exchange unit. It carries its kind, quality score, pillar, and nucleus origin in YAML frontmatter. Import an artifact into any CEXAI instance, run <code>cex_doctor.py</code>, and it validates automatically.</p>
       </div>
 
-      <div class="tbl-wrap" style="margin-top: 32px;">
+      <div class="tbl-wrap reveal" style="margin-top: 32px;">
         <table>
-          <thead>
-            <tr><th>Exchange Unit</th><th>Scope</th><th>Example</th></tr>
-          </thead>
+          <thead><tr><th>Exchange Unit</th><th>Scope</th><th>Example</th></tr></thead>
           <tbody>
             <tr><td><strong>Knowledge Card</strong></td><td>Single typed fact</td><td><code>kc_react_hooks_patterns.md</code></td></tr>
             <tr><td><strong>Builder</strong></td><td>Full production capability (12 ISOs)</td><td><code>workflow-builder/</code></td></tr>
@@ -858,15 +1109,15 @@
         </table>
       </div>
 
-      <div class="prose" style="margin-top: 32px;">
-        <p><strong style="color: var(--text);">What stays private.</strong> Brand config, memory, runtime state, and secrets never leave your instance. The exchange is about cognition, not identity.</p>
-        <p><strong style="color: var(--text);">Anti-fragile by design.</strong> CEXAI sits one layer above the LLM. When a better model appears tomorrow, your artifacts improve -- they are the knowledge, not the model. When a runtime shuts down, you switch providers in one YAML file. Your brain is yours.</p>
+      <div class="prose reveal" style="margin-top: 32px;">
+        <p><strong>What stays private.</strong> Brand config, memory, runtime state, and secrets never leave your instance. The exchange is about cognition, not identity.</p>
+        <p><strong>Anti-fragile by design.</strong> CEXAI sits one layer above the LLM. When a better model drops, your artifacts improve -- they are the knowledge, not the model. When a runtime shuts down, switch providers in one YAML file. Your brain is yours.</p>
       </div>
     </div>
   </section>
 
   <!-- ======== CTA BAND ======== -->
-  <div class="cta-band">
+  <div class="cta-band reveal">
     <div class="container">
       <h2>Ready to stop building throwaway agents?</h2>
       <p>Clone the repo. Answer six questions. Your AI brain starts compounding in under five minutes.</p>
@@ -874,14 +1125,78 @@
     </div>
   </div>
 
+  <!-- ======== PREREQUISITES ======== -->
+  <section id="prerequisites">
+    <div class="container">
+      <div class="section-center reveal">
+        <p class="section-label">What You Need</p>
+        <h2 class="section-title">Prerequisites</h2>
+        <p>CEXAI runs through Claude Code. Install it, clone the repo, and Claude handles the rest -- dependencies, configuration, everything.</p>
+      </div>
+      <div class="prereqs-grid reveal">
+        <div class="prereq">
+          <span class="prereq-icon">&gt;_</span>
+          <h4>Claude Code</h4>
+          <p>The CLI that powers CEX. Desktop app or terminal.</p>
+          <p style="margin-top: 8px;"><code>npm i -g @anthropic-ai/claude-code</code></p>
+        </div>
+        <div class="prereq">
+          <span class="prereq-icon">Py</span>
+          <h4>Python 3.10+</h4>
+          <p>For the 144 CLI tools. Claude Code installs pip deps for you.</p>
+          <p style="margin-top: 8px;"><code>python --version</code></p>
+        </div>
+        <div class="prereq">
+          <span class="prereq-icon">Git</span>
+          <h4>Git</h4>
+          <p>Version control. Every artifact is committed and tracked.</p>
+          <p style="margin-top: 8px;"><code>git --version</code></p>
+        </div>
+        <div class="prereq">
+          <span class="prereq-icon">AI</span>
+          <h4>Any LLM Provider</h4>
+          <p>Anthropic API key, OpenAI, Google, or Ollama for fully local.</p>
+          <p style="margin-top: 8px;"><code>ANTHROPIC_API_KEY</code></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======== HOW IT WORKS ======== -->
+  <section>
+    <div class="container">
+      <div class="section-center reveal">
+        <p class="section-label">Three Steps</p>
+        <h2 class="section-title">How it works</h2>
+      </div>
+      <div class="steps reveal">
+        <div class="step">
+          <span class="step-num">1</span>
+          <h4>Clone</h4>
+          <p>Clone the repo. Install deps. Takes 60 seconds.</p>
+        </div>
+        <div class="step">
+          <span class="step-num">2</span>
+          <h4>Bootstrap</h4>
+          <p>Type <code>/init</code>. Answer 6 questions about your brand. CEX injects your identity into every nucleus.</p>
+        </div>
+        <div class="step">
+          <span class="step-num">3</span>
+          <h4>Build</h4>
+          <p>Describe what you want in plain language. The 8F pipeline turns it into a professional, typed artifact.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ======== QUICKSTART ======== -->
   <section id="quickstart">
     <div class="container">
-      <div class="section-center">
+      <div class="section-center reveal">
         <p class="section-label">Get Started</p>
         <h2 class="section-title">Five minutes to your first artifact</h2>
       </div>
-      <div class="term">
+      <div class="term reveal">
         <div class="term-bar">
           <span class="term-dot"></span><span class="term-dot"></span><span class="term-dot"></span>
         </div>
@@ -892,102 +1207,68 @@
 <span class="prompt">$ </span><span class="cmd">pip install -r requirements.txt</span>             <span class="comment"># Core (pyyaml, tiktoken)</span>
 <span class="prompt">$ </span><span class="cmd">pip install -r requirements-llm.txt</span>         <span class="comment"># LLM providers (optional)</span>
 
-<span class="comment"># 3. Bootstrap your brand -- answer ~6 questions about your company</span>
+<span class="comment"># 3. Bootstrap your brand -- answer ~6 questions</span>
 <span class="prompt">$ </span><span class="cmd">python _tools/cex_bootstrap.py</span>
-<span class="comment"># Or: type /init in any Claude session with CEX loaded</span>
+<span class="comment"># Or: type /init in Claude Code with CEX loaded</span>
 
 <span class="comment"># 4. Build your first artifact</span>
 <span class="prompt">$ </span><span class="cmd">python _tools/cex_8f_runner.py "create knowledge card about product pricing" \</span>
 <span class="cmd">    --kind knowledge_card --execute</span>
 
-<span class="comment"># 5. Validate system health</span>
+<span class="comment"># 5. Validate</span>
 <span class="prompt">$ </span><span class="cmd">python _tools/cex_doctor.py</span>                 <span class="comment"># Builder integrity</span>
-<span class="prompt">$ </span><span class="cmd">python _tools/cex_hooks.py validate-all</span>     <span class="comment"># Frontmatter validation</span>
-<span class="prompt">$ </span><span class="cmd">python _tools/cex_flywheel_audit.py audit</span>   <span class="comment"># Full system audit (109 checks)</span></code></pre>
+<span class="prompt">$ </span><span class="cmd">python _tools/cex_flywheel_audit.py audit</span>   <span class="comment"># Full system (109 checks)</span></code></pre>
       </div>
-      <p style="text-align: center; margin-top: 20px; font-size: 14px; color: var(--text-dim);">
-        See <a href="../QUICKSTART.md" style="color: var(--synapse-bright); text-decoration: none;">QUICKSTART.md</a> for a 5-minute walkthrough, or browse the full <a href="./" style="color: var(--synapse-bright); text-decoration: none;">documentation</a> and <a href="../examples/" style="color: var(--synapse-bright); text-decoration: none;">examples</a>.
-      </p>
     </div>
   </section>
 
   <!-- ======== SOVEREIGNTY ======== -->
   <section id="sovereignty">
     <div class="container">
-      <div class="section-center">
+      <div class="section-center reveal">
         <p class="section-label">Multi-Runtime</p>
         <h2 class="section-title">Your infrastructure. Your rules.</h2>
-        <p>CEXAI is provider-agnostic by construction. The same artifacts, the same pipeline, the same governance layer drive every runtime. Lock-in is not in the vocabulary.</p>
+        <p>CEXAI is provider-agnostic by construction. Same artifacts, same pipeline, same governance -- every runtime. Lock-in is not in the vocabulary.</p>
       </div>
 
-      <div class="runtimes-list">
+      <div class="runtimes-list reveal">
         <span class="runtime-item">Claude</span>
         <span class="runtime-item">Codex</span>
         <span class="runtime-item">Gemini</span>
         <span class="runtime-item">Ollama</span>
       </div>
 
-      <div class="tbl-wrap">
+      <div class="tbl-wrap reveal">
         <table>
-          <thead>
-            <tr><th>Runtime</th><th>Auth</th><th>When to Use</th></tr>
-          </thead>
+          <thead><tr><th>Runtime</th><th>Auth</th><th>When to Use</th></tr></thead>
           <tbody>
-            <tr><td><strong>Claude</strong> (Anthropic)</td><td>API key or Anthropic Max</td><td>Default -- highest quality, largest context (200K Sonnet / 1M Opus)</td></tr>
-            <tr><td><strong>Codex</strong> (OpenAI)</td><td>ChatGPT-plus or API key</td><td>GPT-5 / GPT-5-codex runtime via OpenAI CLI</td></tr>
-            <tr><td><strong>Gemini</strong> (Google)</td><td>oauth-personal or API key</td><td>Free tier via <code>gemini-2.5-flash-lite</code></td></tr>
-            <tr><td><strong>Ollama</strong> (local)</td><td>None -- runs on your GPU</td><td>Fully offline; <code>llama3.1:8b</code> / <code>qwen3:14b</code> / <code>gemma2:9b</code></td></tr>
+            <tr><td><strong>Claude</strong> (Anthropic)</td><td>API key or Max</td><td>Default -- highest quality, largest context (200K / 1M)</td></tr>
+            <tr><td><strong>Codex</strong> (OpenAI)</td><td>ChatGPT-plus or API</td><td>GPT-5 runtime via OpenAI CLI</td></tr>
+            <tr><td><strong>Gemini</strong> (Google)</td><td>oauth or API key</td><td>Free tier via <code>gemini-2.5-flash-lite</code></td></tr>
+            <tr><td><strong>Ollama</strong> (local)</td><td>None</td><td>Fully offline on your GPU</td></tr>
           </tbody>
         </table>
       </div>
 
-      <p style="font-size: 14px; color: var(--text-dim); margin-top: 16px; line-height: 1.6;">Routing lives in one YAML file (<code style="font-family: var(--mono); font-size: 12px; background: rgba(232,67,147,0.1); padding: 2px 5px; border-radius: 3px; color: var(--synapse-bright);">.cex/config/nucleus_models.yaml</code>). Change providers, set fallback chains, pin per-nucleus models -- no code changes, no redeployment.</p>
-
-      <div class="term" style="margin-top: 20px;">
-        <div class="term-bar">
-          <span class="term-dot"></span><span class="term-dot"></span><span class="term-dot"></span>
-        </div>
-        <pre><code><span class="comment"># Check provider health + quotas</span>
-<span class="prompt">$ </span><span class="cmd">python _tools/cex_quota_check.py --all --cache</span>
-
-<span class="comment"># Auto-discover + update model versions</span>
-<span class="prompt">$ </span><span class="cmd">python _tools/cex_model_updater.py --full</span></code></pre>
-      </div>
-
-      <p style="font-size: 14px; color: var(--text-dim); margin-top: 16px; line-height: 1.6;"><strong style="color: var(--text);">Budget-optimized default</strong>: 2 Opus (N03 Engineering, N07 Orchestrator) + 5 Sonnet. Pre-flight context compression via <code style="font-family: var(--mono); font-size: 12px; background: rgba(232,67,147,0.1); padding: 2px 5px; border-radius: 3px; color: var(--synapse-bright);">cex_preflight.py</code> reduces token burn ~70% before nucleus boot.</p>
+      <p class="reveal" style="font-size: 14px; color: var(--text-muted); margin-top: 16px; line-height: 1.6;">Routing lives in one YAML file. Change providers, set fallback chains, pin per-nucleus models -- no code changes.</p>
     </div>
   </section>
 
   <!-- ======== DISPATCH ======== -->
   <section id="dispatch">
     <div class="container">
-      <div class="section-center">
+      <div class="section-center reveal">
         <p class="section-label">Orchestration</p>
-        <h2 class="section-title">Four dispatch modes: solo, grid, crew, swarm</h2>
+        <h2 class="section-title">Four dispatch modes</h2>
       </div>
-
-      <div class="term">
+      <div class="term reveal">
         <div class="term-bar">
           <span class="term-dot"></span><span class="term-dot"></span><span class="term-dot"></span>
         </div>
-        <pre><code><span class="prompt">$ </span><span class="cmd">bash _spawn/dispatch.sh solo n03 "build agent card for sales"</span>   <span class="comment"># One builder</span>
-<span class="prompt">$ </span><span class="cmd">bash _spawn/dispatch.sh grid MISSION_NAME</span>                       <span class="comment"># Up to 6 parallel</span>
-<span class="prompt">$ </span><span class="cmd">bash _spawn/dispatch.sh swarm agent 5 "scaffold 5 niche agents"</span> <span class="comment"># N parallel same-kind</span>
-<span class="prompt">$ </span><span class="cmd">bash _spawn/dispatch.sh status</span>                                  <span class="comment"># Monitor all</span>
-<span class="prompt">$ </span><span class="cmd">bash _spawn/dispatch.sh stop</span>                                    <span class="comment"># Stop MY session only</span></code></pre>
-      </div>
-
-      <p style="font-size: 14px; color: var(--text-dim); margin-top: 16px; line-height: 1.6;">Session-aware: multiple orchestrators run simultaneously; <code style="font-family: var(--mono); font-size: 12px; background: rgba(232,67,147,0.1); padding: 2px 5px; border-radius: 3px; color: var(--synapse-bright);">stop</code> only affects your own nuclei.</p>
-
-      <p style="font-size: 14px; color: var(--text-dim); margin-top: 12px; line-height: 1.6;"><strong style="color: var(--text);">Composable crews</strong> -- when a deliverable needs multiple roles with handoffs (research &rarr; copy &rarr; design &rarr; QA), assemble a crew instead of a grid:</p>
-
-      <div class="term" style="margin-top: 16px;">
-        <div class="term-bar">
-          <span class="term-dot"></span><span class="term-dot"></span><span class="term-dot"></span>
-        </div>
-        <pre><code><span class="prompt">$ </span><span class="cmd">python _tools/cex_crew.py list</span>
-<span class="prompt">$ </span><span class="cmd">python _tools/cex_crew.py run product_launch \</span>
-<span class="cmd">    --charter N02_marketing/crews/team_charter_launch_demo.md --execute</span></code></pre>
+        <pre><code><span class="prompt">$ </span><span class="cmd">bash _spawn/dispatch.sh solo n03 "build agent card"</span>              <span class="comment"># One builder</span>
+<span class="prompt">$ </span><span class="cmd">bash _spawn/dispatch.sh grid MISSION_NAME</span>                        <span class="comment"># Up to 6 parallel</span>
+<span class="prompt">$ </span><span class="cmd">bash _spawn/dispatch.sh swarm agent 5 "scaffold 5 agents"</span>        <span class="comment"># N same-kind</span>
+<span class="prompt">$ </span><span class="cmd">python _tools/cex_crew.py run product_launch --execute</span>            <span class="comment"># Multi-role crew</span></code></pre>
       </div>
     </div>
   </section>
@@ -995,19 +1276,18 @@
   <!-- ======== REVERSE COMPILER ======== -->
   <section>
     <div class="container">
-      <div class="prose">
+      <div class="prose reveal">
         <p class="section-label">Portability</p>
         <h2 class="section-title">Write once. Deploy to any LLM tool.</h2>
         <p>CEX artifacts compile down to any format an LLM consumes. One source of truth, every destination.</p>
       </div>
-
-      <div class="term" style="margin-top: 24px;">
+      <div class="term reveal" style="margin-top: 24px;">
         <div class="term-bar">
           <span class="term-dot"></span><span class="term-dot"></span><span class="term-dot"></span>
         </div>
         <pre><code><span class="prompt">$ </span><span class="cmd">python _tools/cex_compile.py --target claude-md</span>     <span class="comment"># -> CLAUDE.md</span>
 <span class="prompt">$ </span><span class="cmd">python _tools/cex_compile.py --target cursorrules</span>   <span class="comment"># -> .cursorrules</span>
-<span class="prompt">$ </span><span class="cmd">python _tools/cex_compile.py --target customgpt</span>     <span class="comment"># -> CustomGPT instructions</span></code></pre>
+<span class="prompt">$ </span><span class="cmd">python _tools/cex_compile.py --target customgpt</span>     <span class="comment"># -> CustomGPT JSON</span></code></pre>
       </div>
     </div>
   </section>
@@ -1015,95 +1295,108 @@
   <!-- ======== ARCHITECTURE ======== -->
   <section id="architecture">
     <div class="container">
-      <div class="section-center">
+      <div class="section-center reveal">
         <p class="section-label">System Design</p>
-        <h2 class="section-title">Architecture at a glance</h2>
+        <h2 class="section-title">Architecture</h2>
       </div>
-
-      <div class="arch-diagram">
+      <div class="arch-diagram reveal">
         <pre><code><span class="kw">Layer 0</span> -- BUILDERS       302 factories x 12 ISOs each = 3,647 artifact constructors
 <span class="kw">Layer 1</span> -- PILLARS        12 pillars x 300 kinds = the taxonomy
-<span class="kw">Layer 2</span> -- NUCLEI         8 nuclei (N00 archetype + N01-N07 operational) = the organization
+<span class="kw">Layer 2</span> -- NUCLEI         8 nuclei (N00 archetype + N01-N07 operational)
 <span class="kw">Layer 3</span> -- PIPELINE       8-Function Pipeline (8F) = the assembly line
-<span class="kw">Layer 4</span> -- GOVERNANCE     hooks + doctor + quality gates + flywheel audit = the quality bar
+<span class="kw">Layer 4</span> -- GOVERNANCE     hooks + doctor + quality gates + flywheel audit
 <span class="kw">Layer 5</span> -- TOOLS          144 Python CLI tools (cex_*.py) = the runtime
-<span class="kw">Layer 6</span> -- WIRING         SDK modules + signals + decision manifests = the nervous system</code></pre>
+<span class="kw">Layer 6</span> -- WIRING         SDK + signals + decision manifests = the nervous system</code></pre>
       </div>
+    </div>
+  </section>
 
-      <h3 style="font-size: 18px; margin: 32px 0 16px;">Repo structure</h3>
-
-      <pre><code>cex/
-  .cex/                    Runtime config, router, cache, runtime state
-    config/                nucleus_models.yaml, runtimes/, router_config.yaml
-    brand/                 Brand config + templates
-    runtime/               handoffs, signals, decisions, plans
-    quality/               Audit reports, overnight logs
-  _tools/                  144 Python CLI tools (cex_*.py)
-  _spawn/                  Dispatch scripts (solo, grid, swarm, monitor)
-  _docs/                   Whitepaper, architecture specs
-  archetypes/              Builder templates (302 builders x 12 ISOs)
-    builders/              One directory per kind
-    _shared/               Shared skills across all builders
-  boot/                    Boot scripts per nucleus x per runtime
-  cex_sdk/                 SDK runtime (providers, models, memory, 100+ modules)
-  P01_knowledge/ ... P12_orchestration/    12 pillar directories
-  N00_genesis/             Genesis archetype (template for new nuclei)
-  N01_intelligence/ ... N07_admin/         8 nucleus directories
-  CLAUDE.md                LLM entry point
-  QUICKSTART.md            5-minute getting started
-  CONTRIBUTING.md          Contributor guide</code></pre>
+  <!-- ======== FAQ ======== -->
+  <section id="faq">
+    <div class="container">
+      <div class="section-center reveal">
+        <p class="section-label">FAQ</p>
+        <h2 class="section-title">Frequently asked questions</h2>
+      </div>
+      <div class="faq-list reveal">
+        <details>
+          <summary>Is CEXAI an agent framework?</summary>
+          <div class="faq-body">No. CEXAI is a <strong>typed knowledge system</strong>. Agent frameworks give you tools to build one agent. CEXAI gives you the infrastructure to build an entire AI-powered organization: seven departments, each with memory, tools, sub-agents, quality controls, and cultural DNA. Think of it as the operating system, not the app.</div>
+        </details>
+        <details>
+          <summary>Do I need to know Python?</summary>
+          <div class="faq-body">No. CEX is designed for Claude Code -- you describe what you want in plain language, and the 8F pipeline handles the rest. The Python tools run automatically in the background. If you want to customize or extend, Python knowledge helps, but it is not required to get value on day one.</div>
+        </details>
+        <details>
+          <summary>Can I use this with GPT, Gemini, or local models?</summary>
+          <div class="faq-body">Yes. CEXAI is provider-agnostic. The default is Claude (highest quality), but every nucleus has a fallback chain configured in one YAML file. Swap to GPT-5 via Codex, Gemini via Google CLI, or run fully offline with Ollama. Your artifacts are the same regardless of which model produces them.</div>
+        </details>
+        <details>
+          <summary>What is the difference between a "kind" and a "builder"?</summary>
+          <div class="faq-body">A <strong>kind</strong> is a typed artifact template (e.g., <code>knowledge_card</code>, <code>agent</code>, <code>workflow</code>). There are 300 kinds. A <strong>builder</strong> is the 12-file specification that teaches an LLM how to produce a specific kind. Think of it as: the kind is the blueprint, the builder is the factory that follows the blueprint.</div>
+        </details>
+        <details>
+          <summary>Is my data private?</summary>
+          <div class="faq-body">Completely. CEXAI runs in your repo, on your machine. Brand config, memory, runtime state, and secrets never leave your instance. The "exchange" protocol is opt-in: you choose what to share, and what stays private.</div>
+        </details>
+        <details>
+          <summary>How is this different from using Claude Code alone?</summary>
+          <div class="faq-body">Claude Code is the runtime. CEXAI is the knowledge layer on top of it. Without CEX, Claude Code starts every session from zero. With CEX, it loads 300 typed builders, 12 pillars of accumulated knowledge, quality gates, and your brand context. Every session compounds on the last one.</div>
+        </details>
+        <details>
+          <summary>Can I contribute a new kind or nucleus?</summary>
+          <div class="faq-body">Yes. New kinds go through the builder pipeline (12 ISOs per kind). New nuclei (N08+) follow the <a href="https://github.com/GatoaoCubo/cex/blob/main/.claude/rules/new-nucleus-bootstrap.md" style="color: var(--synapse);">bootstrap protocol</a>: pick a domain, choose a sin lens, create 9 required assets, and validate. Vertical examples: healthcare, fintech, legal, edtech.</div>
+        </details>
+        <details>
+          <summary>What does "intelligence compounds when exchanged" mean?</summary>
+          <div class="faq-body">Every artifact you create is a typed, portable knowledge asset. Share a builder with another instance, and both get smarter. Import a vertical nucleus someone built for healthcare, and your brain gains an entire medical department. The more the ecosystem exchanges, the faster everyone compounds.</div>
+        </details>
+      </div>
     </div>
   </section>
 
   <!-- ======== GLOSSARY ======== -->
   <section id="glossary">
     <div class="container">
-      <div class="section-center">
+      <div class="section-center reveal">
         <p class="section-label">Vocabulary</p>
         <h2 class="section-title">Glossary</h2>
-        <p>New to CEXAI? Here is what the terms mean.</p>
       </div>
-      <div class="tbl-wrap">
+      <div class="tbl-wrap reveal">
         <table>
-          <thead>
-            <tr><th>CEXAI Term</th><th>Industry Equivalent</th><th>One-liner</th></tr>
-          </thead>
+          <thead><tr><th>CEXAI Term</th><th>Industry Equivalent</th><th>One-liner</th></tr></thead>
           <tbody>
-            <tr><td><strong>Kind</strong></td><td>Artifact type / schema</td><td>A typed template for a unit of knowledge (e.g., <code>knowledge_card</code>, <code>agent</code>, <code>workflow</code>). 300 kinds exist today.</td></tr>
-            <tr><td><strong>Pillar</strong></td><td>Domain axis / taxonomy layer</td><td>One of 12 capability dimensions (Knowledge, Model, Prompt, Tools, Output, Schema, Evals, Architecture, Config, Memory, Feedback, Orchestration).</td></tr>
-            <tr><td><strong>Nucleus</strong></td><td>AI department / agent team</td><td>An autonomous LLM-powered business unit (N01-N07). Each has its own memory, tools, sub-agents, and behavioral bias.</td></tr>
-            <tr><td><strong>8F Pipeline</strong></td><td>Agent reasoning loop</td><td>Eight sequential functions every task passes through: Constrain, Become, Inject, Reason, Call, Produce, Govern, Collaborate.</td></tr>
-            <tr><td><strong>Builder</strong></td><td>Factory / generator</td><td>A 12-file specification (one per pillar) that teaches an LLM how to produce a specific kind.</td></tr>
-            <tr><td><strong>ISO</strong></td><td>Builder spec file</td><td>One of the 12 files inside a builder, each covering one pillar (knowledge, model, prompt, tools, etc.).</td></tr>
-            <tr><td><strong>Sin Lens</strong></td><td>Personality layer / behavioral bias</td><td>Each nucleus runs on one of the seven deadly sins, which determines what it optimizes for under ambiguity.</td></tr>
-            <tr><td><strong>GDP</strong></td><td>Decision protocol</td><td>Guided Decision Protocol -- the user decides <em>what</em> (tone, audience, style), the LLM decides <em>how</em> (files, pipeline, structure).</td></tr>
-            <tr><td><strong>Exchange Unit</strong></td><td>Portable knowledge asset</td><td>Any artifact with YAML frontmatter -- self-describing, typed, importable into any CEXAI instance.</td></tr>
+            <tr><td><strong>Kind</strong></td><td>Artifact type / schema</td><td>A typed template for a unit of knowledge. 300 kinds today.</td></tr>
+            <tr><td><strong>Pillar</strong></td><td>Domain axis</td><td>One of 12 capability dimensions every nucleus exercises.</td></tr>
+            <tr><td><strong>Nucleus</strong></td><td>AI department</td><td>Autonomous LLM-powered business unit (N01-N07) with memory, tools, and sin lens.</td></tr>
+            <tr><td><strong>8F Pipeline</strong></td><td>Reasoning loop</td><td>Eight functions: Constrain, Become, Inject, Reason, Call, Produce, Govern, Collaborate.</td></tr>
+            <tr><td><strong>Builder</strong></td><td>Factory</td><td>12-file spec (one per pillar) that teaches an LLM to produce a specific kind.</td></tr>
+            <tr><td><strong>ISO</strong></td><td>Spec file</td><td>One of the 12 files inside a builder, each covering one pillar.</td></tr>
+            <tr><td><strong>Sin Lens</strong></td><td>Behavioral bias</td><td>Personality layer that determines what a nucleus optimizes for under ambiguity.</td></tr>
+            <tr><td><strong>GDP</strong></td><td>Decision protocol</td><td>User decides <em>what</em>, LLM decides <em>how</em>.</td></tr>
+            <tr><td><strong>Exchange Unit</strong></td><td>Portable asset</td><td>Any artifact with YAML frontmatter -- importable into any CEXAI instance.</td></tr>
           </tbody>
         </table>
       </div>
     </div>
   </section>
 
-  <!-- ======== DOCUMENTATION ======== -->
+  <!-- ======== DOCS ======== -->
   <section id="docs">
     <div class="container">
-      <div class="section-center">
+      <div class="section-center reveal">
         <p class="section-label">Learn More</p>
         <h2 class="section-title">Documentation</h2>
       </div>
-      <div class="tbl-wrap">
+      <div class="tbl-wrap reveal">
         <table>
-          <thead>
-            <tr><th>Resource</th><th>Description</th></tr>
-          </thead>
+          <thead><tr><th>Resource</th><th>Description</th></tr></thead>
           <tbody>
-            <tr><td><a href="quickstart.md" style="color: var(--synapse-bright); text-decoration: none;"><strong>docs/quickstart.md</strong></a></td><td>5-minute setup guide for newcomers</td></tr>
-            <tr><td><a href="concepts.md" style="color: var(--synapse-bright); text-decoration: none;"><strong>docs/concepts.md</strong></a></td><td>Core concepts: kinds, pillars, nuclei, 8F, GDP</td></tr>
-            <tr><td><a href="cli-reference.md" style="color: var(--synapse-bright); text-decoration: none;"><strong>docs/cli-reference.md</strong></a></td><td>All 144 CLI tools with usage examples</td></tr>
-            <tr><td><a href="sdk-reference.md" style="color: var(--synapse-bright); text-decoration: none;"><strong>docs/sdk-reference.md</strong></a></td><td>Python SDK: CEXAgent, providers, memory</td></tr>
-            <tr><td><a href="glossary.md" style="color: var(--synapse-bright); text-decoration: none;"><strong>docs/glossary.md</strong></a></td><td>Canonical vocabulary (100+ terms)</td></tr>
-            <tr><td><a href="faq.md" style="color: var(--synapse-bright); text-decoration: none;"><strong>docs/faq.md</strong></a></td><td>Common questions and answers</td></tr>
-            <tr><td><a href="../examples/" style="color: var(--synapse-bright); text-decoration: none;"><strong>examples/</strong></a></td><td>5 end-to-end patterns (agent, CLI, crew, RAG, grid)</td></tr>
+            <tr><td><a href="quickstart.md" style="color: var(--synapse); text-decoration: none; font-weight: 600;">quickstart.md</a></td><td>5-minute setup guide</td></tr>
+            <tr><td><a href="concepts.md" style="color: var(--synapse); text-decoration: none; font-weight: 600;">concepts.md</a></td><td>Core concepts: kinds, pillars, nuclei, 8F, GDP</td></tr>
+            <tr><td><a href="cli-reference.md" style="color: var(--synapse); text-decoration: none; font-weight: 600;">cli-reference.md</a></td><td>All 144 CLI tools with examples</td></tr>
+            <tr><td><a href="sdk-reference.md" style="color: var(--synapse); text-decoration: none; font-weight: 600;">sdk-reference.md</a></td><td>Python SDK: CEXAgent, providers, memory</td></tr>
+            <tr><td><a href="glossary.md" style="color: var(--synapse); text-decoration: none; font-weight: 600;">glossary.md</a></td><td>Canonical vocabulary (100+ terms)</td></tr>
           </tbody>
         </table>
       </div>
@@ -1113,30 +1406,26 @@
   <!-- ======== CONTRIBUTING ======== -->
   <section id="contributing">
     <div class="container">
-      <div class="prose">
+      <div class="prose reveal">
         <p class="section-label">Open Source</p>
         <h2 class="section-title">Contributing</h2>
-        <p>See <a href="../CONTRIBUTING.md" style="color: var(--synapse-bright); text-decoration: none;">CONTRIBUTING.md</a>. Every contribution must pass:</p>
+        <p>See <a href="../CONTRIBUTING.md" style="color: var(--synapse); text-decoration: none; font-weight: 600;">CONTRIBUTING.md</a>. Every contribution passes:</p>
         <ul class="bullet-list">
-          <li><strong>Naming</strong>: <code>{layer}_{kind}_{topic}.{ext}</code> convention</li>
-          <li><strong>Frontmatter</strong>: <code>id</code>, <code>kind</code>, <code>pillar</code>, <code>title</code>, <code>quality</code> fields validated</li>
-          <li><strong>Quality gate</strong>: peer-reviewed score &ge; 8.0 for published artifacts</li>
-          <li><strong>Pre-commit hooks</strong>: <code>python _tools/cex_hooks.py validate-all</code></li>
-          <li><strong>Secret scan</strong>: <code>gitleaks</code> blocks any credential leak</li>
-          <li><strong>8-Function Pipeline (8F)</strong>: every artifact built must show the F1&rarr;F8 trace</li>
+          <li><strong>Naming</strong>: <code>{layer}_{kind}_{topic}.{ext}</code></li>
+          <li><strong>Frontmatter</strong>: <code>id</code>, <code>kind</code>, <code>pillar</code>, <code>title</code>, <code>quality</code> validated</li>
+          <li><strong>Quality gate</strong>: peer-reviewed score &ge; 8.0</li>
+          <li><strong>Pre-commit hooks</strong>: <code>cex_hooks.py validate-all</code></li>
+          <li><strong>8F trace</strong>: every artifact shows F1&rarr;F8</li>
         </ul>
-        <p>Read <a href="../CODE_OF_CONDUCT.md" style="color: var(--synapse-bright); text-decoration: none;">CODE_OF_CONDUCT.md</a> before opening a PR. Report security issues via <a href="../SECURITY.md" style="color: var(--synapse-bright); text-decoration: none;">SECURITY.md</a> -- never in public issues.</p>
       </div>
     </div>
   </section>
 
   <!-- ======== LICENSE ======== -->
   <section>
-    <div class="container">
-      <div class="prose" style="text-align: center;">
-        <p class="section-label">License</p>
-        <p><a href="../LICENSE" style="color: var(--synapse-bright); text-decoration: none; font-size: 18px; font-weight: 600;">MIT</a></p>
-      </div>
+    <div class="container" style="text-align: center;">
+      <p class="section-label">License</p>
+      <p><a href="../LICENSE" style="color: var(--synapse); text-decoration: none; font-size: 18px; font-weight: 700;">MIT</a></p>
     </div>
   </section>
 
@@ -1157,6 +1446,41 @@
       </div>
     </div>
   </footer>
+
+  <!-- ======== BACK TO TOP ======== -->
+  <button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0})">&#8593;</button>
+
+  <!-- ======== SCRIPTS (minimal, no deps) ======== -->
+  <script>
+    // Hamburger menu
+    function toggleMenu() {
+      document.getElementById('mobileMenu').classList.toggle('open');
+      document.querySelector('.hamburger').classList.toggle('active');
+    }
+    function closeMenu() {
+      document.getElementById('mobileMenu').classList.remove('open');
+      document.querySelector('.hamburger').classList.remove('active');
+    }
+
+    // Back to top
+    var btt = document.getElementById('backToTop');
+    window.addEventListener('scroll', function() {
+      btt.classList.toggle('show', window.scrollY > 600);
+    });
+
+    // Scroll reveal
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.reveal').forEach(function(el) {
+      observer.observe(el);
+    });
+  </script>
 
 </body>
 </html>
