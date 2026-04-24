@@ -378,6 +378,14 @@ Read [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) before opening a PR. Report securi
 
 ---
 
+## Community
+
+- **Discord**: [Join the server](https://discord.gg/HK6E2VgfWh) — 7 nucleus channels, showcase, help forum
+- **Obsidian Vault**: [Browse live](https://publish.obsidian.md/cexai) — full knowledge graph with 3000+ artifacts
+- **GitHub Discussions**: feature requests, Q&A, RFC proposals
+
+---
+
 ## License
 
 [MIT](LICENSE)

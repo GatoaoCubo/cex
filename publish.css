@@ -1,0 +1,17 @@
+/* CEXAI Obsidian Publish Theme -- matches landing page neural palette */
+
+/* Base overrides */
+.published-container {
+  --accent-h: 340;
+  --accent-s: 80%;
+  --accent-l: 65%;
+}
+
+/* Graph node colors by path (pillar-based) */
+.graph-view.color-fill-unresolved { color: #4a4a4a; }
+.graph-view.color-fill { color: #e84393; }
+.graph-view.color-arrow { color: #e84393; }
+.graph-view.color-line { color: #2a2a2a; }
+
+/* Tag-based graph styling is limited in Publish,
+   but the accent color propagates to active nodes */
