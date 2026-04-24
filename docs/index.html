@@ -38,24 +38,28 @@
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root {
-      --bg: #0a0a0f;
-      --bg-raised: #12121a;
-      --bg-card: #111118;
-      --bg-hero: #08080d;
+      /* ---- Light theme (default) ---- */
+      --bg: #ffffff;
+      --bg-raised: #f8f9fa;
+      --bg-card: #ffffff;
+      --bg-hero: #fafafa;
       --synapse: #e84393;
       --synapse-dim: #c0356e;
       --synapse-bright: #ff6bb5;
-      --synapse-glow: rgba(232, 67, 147, 0.18);
+      --synapse-glow: rgba(232, 67, 147, 0.15);
       --tissue: #d63384;
-      --cortex: #6b8fc4;
-      --text: #e8e8f0;
-      --text-dim: #9999aa;
-      --text-muted: #666677;
-      --border: #1e1e2a;
-      --border-light: #16161f;
-      --shadow-sm: 0 1px 3px rgba(0,0,0,0.30);
-      --shadow-md: 0 4px 12px rgba(0,0,0,0.40);
-      --shadow-lg: 0 8px 30px rgba(0,0,0,0.50);
+      --cortex: #4a6fa5;
+      --text: #1a1a2e;
+      --text-dim: #555566;
+      --text-muted: #999aaa;
+      --border: #e5e7eb;
+      --border-light: #f0f0f3;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
+      --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+      --shadow-lg: 0 8px 30px rgba(0,0,0,0.10);
+      --nav-bg: rgba(255, 255, 255, 0.92);
+      --mobile-bg: rgba(255, 255, 255, 0.98);
+      --faq-gradient: linear-gradient(180deg, var(--bg) 0%, #fdf2f8 50%, var(--bg) 100%);
       --mono: 'SF Mono', 'Cascadia Code', 'Fira Code', 'JetBrains Mono', 'Consolas', monospace;
       --sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
       --max-w: 980px;
@@ -68,6 +72,27 @@
       --n07: #00b4a6;
     }
 
+    /* ---- Dark theme ---- */
+    [data-theme="dark"] {
+      --bg: #0a0a0f;
+      --bg-raised: #12121a;
+      --bg-card: #111118;
+      --bg-hero: #08080d;
+      --synapse-glow: rgba(232, 67, 147, 0.18);
+      --cortex: #6b8fc4;
+      --text: #e8e8f0;
+      --text-dim: #9999aa;
+      --text-muted: #666677;
+      --border: #1e1e2a;
+      --border-light: #16161f;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.30);
+      --shadow-md: 0 4px 12px rgba(0,0,0,0.40);
+      --shadow-lg: 0 8px 30px rgba(0,0,0,0.50);
+      --nav-bg: rgba(10, 10, 15, 0.88);
+      --mobile-bg: rgba(10, 10, 15, 0.96);
+      --faq-gradient: linear-gradient(180deg, var(--bg) 0%, #140a10 50%, var(--bg) 100%);
+    }
+
     html { scroll-behavior: smooth; }
 
     body {
@@ -76,6 +101,7 @@
       color: var(--text);
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
+      transition: background 0.3s, color 0.3s;
     }
 
     .container {
@@ -103,10 +129,11 @@
       position: fixed;
       top: 0; left: 0; right: 0;
       z-index: 100;
-      background: rgba(10, 10, 15, 0.88);
+      background: var(--nav-bg);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
       border-bottom: 1px solid var(--border);
+      transition: background 0.3s;
     }
     nav .container {
       display: flex;
@@ -153,6 +180,35 @@
     .nav-gh:hover { color: var(--text); }
     .nav-gh svg { width: 18px; height: 18px; fill: currentColor; }
 
+    /* Theme toggle */
+    .theme-toggle {
+      background: none;
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      width: 34px; height: 34px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: border-color 0.3s, transform 0.3s, background 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+    .theme-toggle:hover {
+      border-color: var(--synapse);
+      background: var(--synapse-glow);
+      transform: rotate(20deg);
+    }
+    .theme-toggle svg {
+      width: 16px; height: 16px;
+      transition: transform 0.4s, opacity 0.3s;
+      position: absolute;
+    }
+    .theme-toggle .icon-sun { color: #e67e22; opacity: 0; transform: rotate(-90deg) scale(0.5); }
+    .theme-toggle .icon-moon { color: var(--synapse); opacity: 1; transform: rotate(0) scale(1); }
+    [data-theme="dark"] .theme-toggle .icon-sun { opacity: 1; transform: rotate(0) scale(1); }
+    [data-theme="dark"] .theme-toggle .icon-moon { opacity: 0; transform: rotate(90deg) scale(0.5); }
+
     /* Hamburger */
     .hamburger {
       display: none;
@@ -179,7 +235,7 @@
       position: fixed;
       top: 56px;
       left: 0; right: 0; bottom: 0;
-      background: rgba(10, 10, 15, 0.96);
+      background: var(--mobile-bg);
       backdrop-filter: blur(20px);
       z-index: 99;
       padding: 32px 24px;
@@ -694,7 +750,7 @@
 
     /* ---- FAQ Accordion (seductive glow) ---- */
     #faq {
-      background: linear-gradient(180deg, var(--bg) 0%, #140a10 50%, var(--bg) 100%);
+      background: var(--faq-gradient);
     }
     .faq-list {
       max-width: 720px;
@@ -900,6 +956,10 @@
         <li><a href="https://discord.gg/HK6E2VgfWh" target="_blank" rel="noopener">Discord</a></li>
       </ul>
       <div class="nav-right">
+        <button class="theme-toggle" aria-label="Toggle theme" onclick="toggleTheme()">
+          <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+          <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        </button>
         <a href="https://github.com/GatoaoCubo/cex" class="nav-gh" target="_blank" rel="noopener">
           <svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
           GitHub
@@ -1520,6 +1580,22 @@
       document.getElementById('mobileMenu').classList.remove('open');
       document.querySelector('.hamburger').classList.remove('active');
     }
+
+    // Theme toggle
+    function toggleTheme() {
+      var html = document.documentElement;
+      var current = html.getAttribute('data-theme');
+      var next = current === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', next);
+      localStorage.setItem('cex-theme', next);
+    }
+    // Restore saved preference on load
+    (function() {
+      var saved = localStorage.getItem('cex-theme');
+      if (saved === 'dark') {
+        document.documentElement.setAttribute('data-theme', 'dark');
+      }
+    })();
 
     // Back to top
     var btt = document.getElementById('backToTop');
