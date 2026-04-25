@@ -3,7 +3,7 @@ id: p01_kc_bling_erp_automation_boundary
 kind: knowledge_card
 8f: F3_inject
 pillar: P01
-title: "Bling ERP: Fronteira de Automacao para Cadastro de Produto"
+title: "Bling ERP: Automation Boundary for Product Registration"
 version: 1.0.0
 created: 2026-03-25
 updated: 2026-03-25
@@ -11,15 +11,15 @@ author: knowledge_agent
 domain: execution
 quality: 9.1
 tags: [bling, automation, boundary, tiering, human-in-the-loop, erp]
-tldr: "44 campos Bling em 3 tiers: Tier1 auto via pipeline, Tier2 heuristica com override, Tier3 dados fiscais/fisicos so pelo usuario."
-when_to_use: "Definir o que o pipeline pode preencher sozinho vs o que exige confirmacao humana no Bling"
+tldr: "44 Bling fields in 3 tiers: Tier1 auto via pipeline, Tier2 heuristic with override, Tier3 fiscal/physical data only by user."
+when_to_use: "Define what the pipeline can fill automatically vs what requires human confirmation in Bling"
 keywords: [automation_boundary, human_override, tier1_tier2_tier3, product_onboarding]
 long_tails:
-  - "Quais campos do Bling podem ser automatizados sem operador humano"
-  - "Como separar fallback do sistema e confirmacao do usuario no cadastro ERP"
+  - "Which Bling fields can be automated without a human operator"
+  - "How to separate system fallback and user confirmation in ERP registration"
 axioms:
-  - "SEMPRE automatizar apenas o que tem fonte repetivel ou default seguro"
-  - "NUNCA empurrar dado fiscal sensivel para automacao cega"
+  - "ALWAYS automate only what has a repeatable source or safe default"
+  - "NEVER push sensitive fiscal data into blind automation"
 linked_artifacts:
   primary: p01_kc_bling_erp_field_parametrization
   related: [p01_kc_zero_touch_execution]
@@ -40,37 +40,37 @@ related:
 
 ## Quick Reference
 
-topic: automation boundary | scope: cadastro de produto no Bling | criticality: high
-modelo: Tier 1 automatico | Tier 2 fallback com override | Tier 3 humano
+topic: automation boundary | scope: product registration in Bling | criticality: high
+model: Tier 1 automatic | Tier 2 fallback with override | Tier 3 human
 
-## Conceitos Chave
+## Key Concepts
 
-- Tier 1 cobre campos repetiveis ou derivados por regra simples
-- Tier 2 aceita heuristica, mas precisa override facil
-- Tier 3 depende de realidade fisica, fiscal ou contratual
-- Limite bom de automacao reduz erro sem esconder incerteza
+- Tier 1 covers repeatable fields or those derived by simple rules
+- Tier 2 accepts heuristics but needs easy override
+- Tier 3 depends on physical, fiscal, or contractual reality
+- Good automation boundary reduces errors without hiding uncertainty
 
-## Comparativo
+## Comparison
 
-| Tier | Origem dominante | Exemplo | Acao do sistema |
-|------|------------------|---------|-----------------|
-| 1 | defaults/pipeline | nome, SKU, imagens | preencher direto |
-| 2 | pesquisa/heuristica | preco, marca, NCM | sugerir e permitir editar |
-| 3 | operador/empresa | GTIN, PIS, fornecedor | bloquear auto-fill |
+| Tier | Dominant Source | Example | System Action |
+|------|----------------|---------|---------------|
+| 1 | defaults/pipeline | name, SKU, images | fill directly |
+| 2 | research/heuristic | price, brand, NCM | suggest and allow editing |
+| 3 | operator/company | GTIN, PIS, supplier | block auto-fill |
 
-| Categoria | Confianca | Campos | Politica |
-|-----------|-----------|--------|----------|
-| Comercial | alta | titulo, descricao, status | automatizar |
-| Operacional | media | peso, dimensoes, estoque | revisar |
-| Fiscal | baixa-media | NCM, CEST, aliquotas | confirmar |
-| Identificacao unica | baixa | GTIN, lote, validade | usuario define |
+| Category | Confidence | Fields | Policy |
+|----------|------------|--------|--------|
+| Commercial | high | title, description, status | automate |
+| Operational | medium | weight, dimensions, stock | review |
+| Fiscal | low-medium | NCM, CEST, tax rates | confirm |
+| Unique identification | low | GTIN, batch, expiry | user defines |
 
-## Regras de Ouro
+## Golden Rules
 
-- SEMPRE expor ao usuario tudo que veio de heuristica Tier 2
-- SEMPRE manter audit trail do valor defaultado pelo pipeline
-- NUNCA autopreencher GTIN, fornecedor ou tributo fixo sem prova
-- SEMPRE degradar para rascunho quando o Tier 3 estiver incompleto
+- ALWAYS expose to the user everything that came from Tier 2 heuristics
+- ALWAYS maintain audit trail of pipeline-defaulted values
+- NEVER auto-fill GTIN, supplier, or fixed tax without proof
+- ALWAYS degrade to draft when Tier 3 is incomplete
 
 ## Code
 

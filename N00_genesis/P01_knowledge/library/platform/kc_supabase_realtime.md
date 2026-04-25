@@ -12,17 +12,17 @@ author: n04_knowledge
 domain: data_platform
 quality: 9.1
 tags: [supabase, realtime, websocket, channels, presence, broadcast, platform]
-tldr: "WebSocket server com 4 modos: Channels (pub/sub), Presence (quem esta online), Broadcast (fire-and-forget), e Postgres Changes (subscribe a INSERT/UPDATE/DELETE)"
-when_to_use: "Quando configurar funcionalidades real-time em projetos Supabase"
+tldr: "WebSocket server with 4 modes: Channels (pub/sub), Presence (who is online), Broadcast (fire-and-forget), and Postgres Changes (subscribe to INSERT/UPDATE/DELETE)"
+when_to_use: "When configuring real-time features in Supabase projects"
 keywords: [supabase-realtime, websocket, channels, presence, postgres-changes]
 long_tails:
-  - Como receber notificacao em tempo real de INSERT no Supabase
-  - Implementar indicador de usuarios online com Supabase Presence
-  - Diferenca entre Broadcast e Postgres Changes no Supabase
+  - How to receive real-time notification of INSERT in Supabase
+  - Implement online users indicator with Supabase Presence
+  - Difference between Broadcast and Postgres Changes in Supabase
 axioms:
-  - SEMPRE filtre Postgres Changes por tabela e evento especifico
-  - NUNCA subscribe a todas as tabelas — causa overhead no WAL
-  - SEMPRE use RLS com Realtime — user só recebe changes que pode ver
+  - ALWAYS filter Postgres Changes by specific table and event
+  - NEVER subscribe to all tables — causes WAL overhead
+  - ALWAYS use RLS with Realtime — user only receives changes they can see
 linked_artifacts:
   primary: null
   related: [p01_kc_supabase_database, p01_kc_supabase_auth]
@@ -49,36 +49,36 @@ topic: supabase_realtime
 scope: WebSocket channels, presence, broadcast, DB changes
 owner: n04_knowledge
 criticality: high
-service: realtime (porta 4000)
+service: realtime (port 4000)
 protocol: WebSocket (Phoenix Channels)
 ```
 
-## 4 Modos de Realtime
-| Modo | Funcao | Latencia | RLS |
-|------|--------|----------|-----|
-| Broadcast | Fire-and-forget para todos no channel | <100ms | Não (channel-level) |
-| Presence | Track quem está online, sync state | <100ms | Não (channel-level) |
-| Postgres Changes | Subscribe a INSERT/UPDATE/DELETE em tabelas | 100-500ms | Sim (row-level) |
-| Realtime Channels | Pub/sub genérico (combina os 3 acima) | Varia | Configável |
+## 4 Realtime Modes
+| Mode | Function | Latency | RLS |
+|------|----------|---------|-----|
+| Broadcast | Fire-and-forget to all in channel | <100ms | No (channel-level) |
+| Presence | Track who is online, sync state | <100ms | No (channel-level) |
+| Postgres Changes | Subscribe to INSERT/UPDATE/DELETE on tables | 100-500ms | Yes (row-level) |
+| Realtime Channels | Generic pub/sub (combines all 3 above) | Varies | Configurable |
 
-## Limites por Tier
-| Metrica | Free | Pro | Team |
+## Limits per Tier
+| Metric | Free | Pro | Team |
 |---------|------|-----|------|
 | Concurrent connections | 200 | 500 | 1000+ |
 | Messages/segundo | 100 | 500 | 2000+ |
-| Channel subscriptions | 100 | 500 | Ilimitado |
-| Postgres Changes (tables) | 10 | 100 | Ilimitado |
+| Channel subscriptions | 100 | 500 | Unlimited |
+| Postgres Changes (tables) | 10 | 100 | Unlimited |
 
-## Broadcast (Chat, Notificacoes)
+## Broadcast (Chat, Notifications)
 ```javascript
-// Enviar mensagem para todos no channel
+// Send message to all in channel
 const channel = supabase.channel('room-1')
 channel.on('broadcast', { event: 'message' }, (payload) => {
   console.log(payload)  // {event:'message', payload:{text:'hello'}}
 })
 await channel.subscribe()
 
-// Enviar
+// Send
 channel.send({
   type: 'broadcast',
   event: 'message',
@@ -86,7 +86,7 @@ channel.send({
 })
 ```
 
-## Presence (Quem Esta Online)
+## Presence (Who Is Online)
 ```javascript
 const channel = supabase.channel('online-users')
 channel.on('presence', { event: 'sync' }, () => {
@@ -113,36 +113,36 @@ const channel = supabase.channel('db-changes')
   .subscribe()
 ```
 
-## Postgres Changes — Como Funciona
+## Postgres Changes — How It Works
 ```text
 [INSERT/UPDATE/DELETE] → [PostgreSQL WAL]
-    → [Supabase Realtime server] lê WAL
-    → [RLS check] filtra por user
-    → [WebSocket] envia para subscribers
+    → [Supabase Realtime server] reads WAL
+    → [RLS check] filters by user
+    → [WebSocket] sends to subscribers
 ```
 
 | Config | Valor | Nota |
 |--------|-------|------|
-| Publication | `supabase_realtime` | Tabela deve estar na publication |
-| Habilitar | `ALTER PUBLICATION supabase_realtime ADD TABLE orders;` | Por tabela |
-| Filter server-side | `filter: 'column=eq.value'` | Reduz tráfego |
-| RLS | Automático se habilitado | User só vê rows que pode SELECT |
+| Publication | `supabase_realtime` | Table must be in the publication |
+| Enable | `ALTER PUBLICATION supabase_realtime ADD TABLE orders;` | Per table |
+| Filter server-side | `filter: 'column=eq.value'` | Reduces traffic |
+| RLS | Automatic if enabled | User only sees rows they can SELECT |
 
 ## Anti-Patterns
-| Anti-Pattern | Risco | Fix |
-|-------------|-------|-----|
-| Subscribe `*` (todas tabelas) | WAL overhead, memória, CPU | Filtrar por tabela + evento |
-| Sem unsubscribe em unmount | Conexões zumbi, memory leak | `channel.unsubscribe()` em cleanup |
-| Broadcast para notificações críticas | Mensagem perdida = dado perdido | Usar Postgres Changes + tabela |
-| Presence sem throttle | Estado sync a cada keypress | Debounce 1-5s no track() |
-| Ignorar RLS em Changes | User vê dados de outros users | Habilitar RLS na tabela |
+| Anti-Pattern | Risk | Fix |
+|-------------|------|-----|
+| Subscribe `*` (all tables) | WAL overhead, memory, CPU | Filter by table + event |
+| No unsubscribe on unmount | Zombie connections, memory leak | `channel.unsubscribe()` in cleanup |
+| Broadcast for critical notifications | Lost message = lost data | Use Postgres Changes + table |
+| Presence without throttle | State sync on every keypress | Debounce 1-5s on track() |
+| Ignoring RLS on Changes | User sees other users' data | Enable RLS on the table |
 
 ## Golden Rules
-- USE Broadcast para efêmero (typing indicators, cursor position)
-- USE Postgres Changes para dados que precisam persistir
-- USE Presence para "quem está online" com sync automático
-- FILTRE sempre: tabela + evento + filter column quando possível
-- HABILITE a tabela na publication antes de subscribir
+- USE Broadcast for ephemeral (typing indicators, cursor position)
+- USE Postgres Changes for data that needs to persist
+- USE Presence for "who is online" with automatic sync
+- ALWAYS FILTER: table + event + filter column when possible
+- ENABLE the table in the publication before subscribing
 
 ## References
 - Docs: https://supabase.com/docs/guides/realtime

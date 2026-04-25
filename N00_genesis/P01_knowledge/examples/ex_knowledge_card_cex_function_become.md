@@ -11,15 +11,15 @@ author: builder_agent
 domain: cex_taxonomy
 quality: 9.1
 tags: [cex, llm-function, become, identity, system-prompt, persona]
-tldr: "BECOME configura identidade do LLM (persona, regras, limites) via 6 tipos de artefato antes de qualquer input"
-when_to_use: "Entender como LLMs assumem papeis e por que identidade precede contexto"
+tldr: "BECOME configures LLM identity (persona, rules, limits) via 6 artifact types before any input"
+when_to_use: "Understand how LLMs assume roles and why identity precedes context"
 keywords: [become, identity, system-prompt, persona, agent-profile]
 long_tails:
-  - "Como configurar identidade de um agente LLM antes do processamento"
-  - "Qual a diferenca entre BECOME e INJECT no CEX"
+  - "How to configure LLM agent identity before processing"
+  - "What is the difference between BECOME and INJECT in CEX"
 axioms:
-  - "SEMPRE executar BECOME antes de INJECT"
-  - "NUNCA misturar identidade (BECOME) com contexto (INJECT)"
+  - "ALWAYS execute BECOME before INJECT"
+  - "NEVER mix identity (BECOME) with context (INJECT)"
 linked_artifacts:
   primary: p01_kc_cex_function_inject
   related: [p01_kc_cex_function_reason]
@@ -40,22 +40,22 @@ related:
 
 ## Summary
 
-BECOME configura a identidade, persona e papel do LLM antes de qualquer processamento. Define QUEM o modelo e para a sessao via system prompt, mental model e boot config. Mapeia ao "Role" do MetaGPT, "Agent Profile" do CrewAI e "InceptionPrompt" do CAMEL. Representa 8% dos tipos CEX (6 de 76).
+BECOME configures the identity, persona, and role of the LLM before any processing. Defines WHO the model is for the session via system prompt, mental model, and boot config. Maps to MetaGPT's "Role", CrewAI's "Agent Profile", and CAMEL's "InceptionPrompt". Represents 8% of CEX types (6 of 76).
 
 ## Spec
 
-| Tipo | LP | Funcao | Detalhe |
-|------|-----|--------|---------|
-| agent | P02 | Identidade completa | Memoria, autonomia, tools, handoffs |
-| mental_model | P02 | Mapa cognitivo | Dominios, vieses produtivos, restricoes |
-| system_prompt | P03 | Papel persistente | Instrucao baseline pre-input |
-| persona | P02 | Comunicacao | Tom, estilo, preferencias afetivas |
-| boot_config | P02 | Inicializacao | Modelo, temperatura, max_tokens, MCPs |
-| model_card | P02 | Especificacao LLM | Provider, versao, custos, limites |
+| Type | LP | Function | Detail |
+|------|-----|----------|--------|
+| agent | P02 | Complete identity | Memory, autonomy, tools, handoffs |
+| mental_model | P02 | Cognitive map | Domains, productive biases, constraints |
+| system_prompt | P03 | Persistent role | Baseline instruction pre-input |
+| persona | P02 | Communication | Tone, style, affective preferences |
+| boot_config | P02 | Initialization | Model, temperature, max_tokens, MCPs |
+| model_card | P02 | LLM specification | Provider, version, costs, limits |
 
-Ordem de execucao: system_prompt → mental_model → persona → agent.
-boot_config e model_card sao pre-requisitos de infraestrutura.
-BECOME executa ANTES de qualquer INJECT — identidade precede contexto.
+Execution order: system_prompt -> mental_model -> persona -> agent.
+boot_config and model_card are infrastructure prerequisites.
+BECOME executes BEFORE any INJECT — identity precedes context.
 
 ## Code
 
@@ -77,19 +77,19 @@ agent = Agent(
 
 | Trigger | Action |
 |---------|--------|
-| Agente precisa de identidade persistente | Usar tipo agent com memoria |
-| Interacao direta com humanos | Adicionar persona ao agent |
-| Decisao arquitetural de modelo | Criar model_card explicito |
-| Multiplos agentes no sistema | Mental model por especialista |
-| Parametros de boot especificos | Boot config com flags e MCPs |
+| Agent needs persistent identity | Use agent type with memory |
+| Direct interaction with humans | Add persona to agent |
+| Model architectural decision | Create explicit model_card |
+| Multiple agents in system | Mental model per specialist |
+| Specific boot parameters | Boot config with flags and MCPs |
 
 ## Anti-Patterns
 
-- Definir identidade dentro do user prompt (volatil)
-- Persona sem system prompt (tom sem papel = incoerente)
-- Confundir BECOME com INJECT (quem SOU vs o que SEI)
-- Agent com 20+ tools sem mental model (sobrecarga)
-- Omitir boot_config (defaults implicitos = bugs)
+- Defining identity inside user prompt (volatile)
+- Persona without system prompt (tone without role = incoherent)
+- Confusing BECOME with INJECT (who I AM vs what I KNOW)
+- Agent with 20+ tools without mental model (overload)
+- Omitting boot_config (implicit defaults = bugs)
 
 ## References
 

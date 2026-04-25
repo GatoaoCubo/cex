@@ -1,113 +1,113 @@
-# GLOSSARIO: 68 Tipos de Artefato x 12 LPs
+# GLOSSARY: 68 Artifact Types x 12 Pillars
 
 ---
 
-## CORE (peso 1.0)
+## CORE (weight 1.0)
 
-### P01 Knowledge (6 tipos)
-- knowledge_card: fato atomico pesquisavel (max 2KB)
-- rag_source: fonte externa indexavel
-- glossary_entry: definicao de termo
-- context_doc: contexto de dominio
-- embedding_config: configuracao de embedding
-- few_shot_example: exemplo pra prompt
+### P01 Knowledge (6 types)
+- knowledge_card: searchable atomic fact (max 2KB)
+- rag_source: indexable external source
+- glossary_entry: term definition
+- context_doc: domain context
+- embedding_config: embedding configuration
+- few_shot_example: example for prompt
 
-### P02 Model (7 tipos)
-- agent: definicao de agente (persona + capabilities)
-- lens: perspectiva especializada sobre dominio
-- boot_config: configuracao de inicializacao
-- mental_model: mapa mental do agente
-- model_card: spec do LLM usado
-- router: regra de roteamento
-- fallback_chain: sequencia de fallback
+### P02 Model (7 types)
+- agent: agent definition (persona + capabilities)
+- lens: specialized perspective on a domain
+- boot_config: initialization configuration
+- mental_model: agent mental map
+- model_card: LLM specification
+- router: routing rule
+- fallback_chain: fallback sequence
 
-### P03 Prompt (5 tipos)
-- system_prompt: prompt de sistema
-- action_prompt: prompt de acao especifica
-- prompt_template: template com {{vars}}
-- instruction: instrucao operacional
-- chain: sequencia de prompts
+### P03 Prompt (5 types)
+- system_prompt: system prompt
+- action_prompt: specific action prompt
+- prompt_template: template with {{vars}}
+- instruction: operational instruction
+- chain: prompt sequence
 
-### P04 Tools (9 tipos)
-- mcp_server: servidor MCP
+### P04 Tools (9 types)
+- mcp_server: MCP server
 - hook: pre/post processing hook
-- skill: habilidade reutilizavel
-- plugin: extensao plugavel
-- client: cliente de API
-- cli_tool: ferramenta CLI
-- scraper: extrator de dados
-- connector: conector de servico
-- daemon: processo background
+- skill: reusable skill
+- plugin: pluggable extension
+- client: API client
+- cli_tool: CLI tool
+- scraper: data extractor
+- connector: service connector
+- daemon: background process
 
 ---
 
-## QUALITY (peso 0.8)
+## QUALITY (weight 0.8)
 
-### P05 Output (4 tipos)
-- output_schema: formato de saida
-- parser: extrator de dados de saida
-- formatter: formatador de saida
-- naming_rule: regra de nomenclatura
+### P05 Output (4 types)
+- output_schema: output format
+- parser: output data extractor
+- formatter: output formatter
+- naming_rule: naming convention
 
-### P06 Schema (5 tipos)
-- input_schema: contrato de entrada
-- output_schema: contrato de saida
-- type_def: definicao de tipo customizado
-- validator: regra de validacao
-- interface: contrato de integracao
+### P06 Schema (5 types)
+- input_schema: input contract
+- output_schema: output contract
+- type_def: custom type definition
+- validator: validation rule
+- interface: integration contract
 
-### P07 Evals (6 tipos)
-- unit_eval: teste unitario de agente
-- smoke_eval: teste rapido de sanidade
-- e2e_eval: teste end-to-end
-- benchmark: medicao de performance
-- golden_test: caso de teste referencia (9.5+)
-- scoring_rubric: criterio de avaliacao
+### P07 Evals (6 types)
+- unit_eval: agent unit test
+- smoke_eval: quick sanity test
+- e2e_eval: end-to-end test
+- benchmark: performance measurement
+- golden_test: reference test case (9.5+)
+- scoring_rubric: evaluation criteria
 
-### P11 Feedback (5 tipos)
-- quality_gate: barreira de qualidade
-- bugloop: ciclo de correcao automatica
-- lifecycle_rule: regra de ciclo de vida
-- guardrail: restricao de seguranca
-- optimizer: otimizador de processo
-
----
-
-## SCALE (peso 0.6)
-
-### P08 Architecture (5 tipos)
-- agent_card: especificacao de agent_group
-- pattern: pattern reutilizavel
-- law: lei operacional
-- diagram: diagrama de arquitetura
-- component_map: mapa de componentes
-
-### P09 Config (5 tipos)
-- env_config: variaveis de ambiente
-- path_config: caminhos do sistema
-- permission: regra de permissao
-- feature_flag: flag de feature
-- runtime_rule: regra de runtime
-
-### P10 Memory (5 tipos)
-- mental_model: modelo mental persistente
-- knowledge_index: indice de busca
-- learning_record: registro de aprendizado
-- session_state: estado de sessao
-- axiom: regra fundamental
-
-### P12 Orchestration (6 tipos)
-- workflow: fluxo de trabalho
-- dag: grafo aciclico de dependencias
-- spawn_config: configuracao de spawn
-- signal: sinal de comunicacao entre agentes
-- handoff: instrucao de handoff
-- dispatch_rule: regra de despacho
+### P11 Feedback (5 types)
+- quality_gate: quality barrier
+- bugloop: automated fix cycle
+- lifecycle_rule: lifecycle rule
+- guardrail: safety constraint
+- optimizer: process optimizer
 
 ---
 
-TOTAL: 68 tipos CORE fixos + _custom/ por LP
-Promocao: usado 10x + quality > 8.0 = vira CORE
+## SCALE (weight 0.6)
+
+### P08 Architecture (5 types)
+- agent_card: agent group specification
+- pattern: reusable pattern
+- law: operational law
+- diagram: architecture diagram
+- component_map: component map
+
+### P09 Config (5 types)
+- env_config: environment variables
+- path_config: system paths
+- permission: permission rule
+- feature_flag: feature flag
+- runtime_rule: runtime rule
+
+### P10 Memory (5 types)
+- mental_model: persistent mental model
+- knowledge_index: search index
+- learning_record: learning record
+- session_state: session state
+- axiom: fundamental rule
+
+### P12 Orchestration (6 types)
+- workflow: workflow
+- dag: directed acyclic dependency graph
+- spawn_config: spawn configuration
+- signal: inter-agent communication signal
+- handoff: handoff instruction
+- dispatch_rule: dispatch rule
 
 ---
-*GLOSSARIO v1.0 | 2026-03-22*
+
+TOTAL: 68 fixed CORE types + _custom/ per pillar
+Promotion: used 10x + quality > 8.0 = becomes CORE
+
+---
+*GLOSSARY v1.0 | 2026-03-22*

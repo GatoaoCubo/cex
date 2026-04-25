@@ -11,15 +11,15 @@ author: builder_agent
 domain: cex_taxonomy
 quality: 9.1
 tags: [cex, lp05, output, response-format, parser, formatter]
-tldr: "P05 define COMO o LLM entrega resultados via 4 tipos: response_format, parser, formatter e naming_rule"
-when_to_use: "Entender formatos de entrega LLM e a fronteira entre geracao (P05) e validacao (P06)"
+tldr: "P05 defines HOW the LLM delivers results via 4 types: response_format, parser, formatter and naming_rule"
+when_to_use: "Understand LLM delivery formats and the boundary between generation (P05) and validation (P06)"
 keywords: [output, response-format, parser, formatter, naming-rule]
 long_tails:
-  - "Como definir o formato de resposta de um agente LLM"
-  - "Qual a diferenca entre response_format e validation_schema"
+  - "How to define the response format of an LLM agent"
+  - "What is the difference between response_format and validation_schema"
 axioms:
-  - "SEMPRE separar formato de resposta (P05) de validacao (P06)"
-  - "NUNCA confundir parser (extrai) com formatter (transforma)"
+  - "ALWAYS separate response format (P05) from validation (P06)"
+  - "NEVER confuse parser (extracts) with formatter (transforms)"
 linked_artifacts:
   primary: p01_kc_cex_lp06_schema
   related: [p01_kc_cex_lp07_evals]
@@ -43,51 +43,51 @@ related:
 topic: P05 Output | scope: delivery formats | criticality: high
 types: 4 | function: CONSTRAIN | layer: spec + runtime + governance
 
-## Conceitos Chave
+## Key Concepts
 
-- P05 define COMO o agente entrega, nao O QUE entrega
-- response_format eh injetado no prompt (LLM ve e segue)
-- validation_schema P06 eh pos-geracao (LLM nao ve)
-- parser extrai dados estruturados de output bruto
-- formatter converte entre formatos (json, md, yaml)
-- naming_rule governa nomenclatura de artefatos gerados
-- LP mais enxuto do CEX: 4 tipos, todos < 4096 bytes
-- Funcao dominante: CONSTRAIN (formatar pos-geracao)
-- response_format usa machine_format json (spec layer)
-- parser usa machine_format yaml (runtime layer)
-- formatter opera na camada runtime (conversao ativa)
-- naming_rule opera na camada governance (padronizacao)
-- P05 depende de P06: schemas definem o que P05 formata
-- P05 eh avaliado por P07: formatos incorretos detectados
-- P05 eh moldado por P02: identidade define tom e estilo
-- Sem response_format, LLM gera formato imprevisivel
+- P05 defines HOW the agent delivers, not WHAT it delivers
+- response_format is injected into the prompt (LLM sees and follows)
+- validation_schema P06 is post-generation (LLM does not see)
+- parser extracts structured data from raw output
+- formatter converts between formats (json, md, yaml)
+- naming_rule governs nomenclature of generated artifacts
+- Leanest LP in CEX: 4 types, all < 4096 bytes
+- Dominant function: CONSTRAIN (format post-generation)
+- response_format uses machine_format json (spec layer)
+- parser uses machine_format yaml (runtime layer)
+- formatter operates at the runtime layer (active conversion)
+- naming_rule operates at the governance layer (standardization)
+- P05 depends on P06: schemas define what P05 formats
+- P05 is evaluated by P07: incorrect formats detected
+- P05 is shaped by P02: identity defines tone and style
+- Without response_format, LLM generates unpredictable format
 
-## Fases
+## Phases
 
-1. Definir response_format no prompt do agente
-2. LLM gera output seguindo formato especificado
-3. Parser extrai dados estruturados do output bruto
-4. Formatter converte para formato de consumo downstream
-5. Naming_rule garante nomenclatura consistente
-6. P06 validation_schema valida o resultado final
+1. Define response_format in the agent prompt
+2. LLM generates output following specified format
+3. Parser extracts structured data from raw output
+4. Formatter converts to downstream consumption format
+5. Naming_rule ensures consistent nomenclature
+6. P06 validation_schema validates the final result
 
-## Regras de Ouro
+## Golden Rules
 
-- SEMPRE definir response_format antes de chamar o LLM
-- NUNCA validar dentro de P05 (validacao eh P06)
-- SEMPRE usar parser para output semi-estruturado
-- NUNCA assumir que LLM segue formato sem instrucao
-- SEMPRE separar extracao (parser) de conversao (fmt)
+- ALWAYS define response_format before calling the LLM
+- NEVER validate within P05 (validation is P06)
+- ALWAYS use parser for semi-structured output
+- NEVER assume LLM follows format without instruction
+- ALWAYS separate extraction (parser) from conversion (fmt)
 
-## Comparativo
+## Comparison
 
-| Aspecto | P05 Output | P06 Schema |
-|---------|-----------|------------|
-| Quando atua | Pre e pos-geracao | Pos-geracao |
-| Visibilidade | LLM ve response_format | Sistema aplica, LLM nao ve |
-| Funcao | Formatar entrega | Validar contrato |
-| Modo de falha | Output malformado | Violacao de contrato |
-| Qtd tipos | 4 (rf, parser, fmt, nr) | 7 (is, td, val, iface, vs, bp, gram) |
+| Aspect | P05 Output | P06 Schema |
+|--------|-----------|------------|
+| When it acts | Pre and post-generation | Post-generation |
+| Visibility | LLM sees response_format | System applies, LLM does not see |
+| Function | Format delivery | Validate contract |
+| Failure mode | Malformed output | Contract violation |
+| Type count | 4 (rf, parser, fmt, nr) | 7 (is, td, val, iface, vs, bp, gram) |
 
 ## Flow
 

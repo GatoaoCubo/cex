@@ -3,7 +3,7 @@ id: p01_kc_cex_lp01_knowledge
 kind: knowledge_card
 8f: F3_inject
 pillar: P01
-title: "CEX LP01 Knowledge — O Que a LLM Sabe (6 Tipos de Memoria Destilada)"
+title: "CEX LP01 Knowledge — What the LLM Knows (6 Types of Distilled Memory)"
 version: 1.0.0
 created: 2026-03-25
 updated: 2026-03-25
@@ -11,15 +11,15 @@ author: builder_agent
 domain: cex_taxonomy
 quality: 9.2
 tags: [cex, lp01, knowledge, inject, knowledge-card, rag, embedding]
-tldr: "P01 Knowledge agrupa 6 tipos de memoria destilada que alimentam o contexto do LLM via funcao INJECT"
-when_to_use: "Classificar artefatos de conhecimento ou entender o papel de P01 na taxonomia CEX"
+tldr: "P01 Knowledge groups 6 types of distilled memory that feed the LLM context via the INJECT function"
+when_to_use: "Classify knowledge artifacts or understand the role of P01 in the CEX taxonomy"
 keywords: [knowledge-card, rag-source, few-shot, embedding, context-doc, glossary]
 long_tails:
-  - "Quais tipos de conhecimento existem no CEX"
-  - "Diferenca entre knowledge_card e context_doc no CEX"
+  - "What types of knowledge exist in CEX"
+  - "Difference between knowledge_card and context_doc in CEX"
 axioms:
-  - "SEMPRE versionar knowledge_cards (conhecimento muda)"
-  - "NUNCA injetar conhecimento sem fonte verificavel"
+  - "ALWAYS version knowledge_cards (knowledge changes)"
+  - "NEVER inject knowledge without a verifiable source"
 linked_artifacts:
   primary: p01_kc_cex_function_inject
   related: [p01_kc_cex_lp03_prompt, p01_kc_cex_lp02_model]
@@ -40,64 +40,64 @@ related:
 
 ## Quick Reference
 
-topic: LP01 Knowledge | scope: 6 tipos de artefato | criticality: high
-funcao_llm: INJECT | analogia: memoria de longo prazo
+topic: LP01 Knowledge | scope: 6 artifact types | criticality: high
+llm_function: INJECT | analogy: long-term memory
 
-## Conceitos Chave
+## Key Concepts
 
-- P01 responde: "que conhecimento esta disponivel?"
-- knowledge_card eh o tipo core (fato atomico denso)
-- Funcao dominante INJECT: dado entra no contexto LLM
-- 6 tipos: kc, rag_source, glossary, context_doc, emb, fse
-- Sem P01 o LLM improvisa; com P01 opera com patrimonio
-- knowledge_card tem density gate >= 0.8 e max 5120 bytes
-- few_shot_example eh par input/output para in-context learning
-- rag_source eh ponteiro para fonte externa (URL + freshness)
-- glossary_entry define termo do dominio (max 3 linhas, 512B)
-- context_doc hidrata prompts com contexto amplo (ate 2048B)
-- embedding_config especifica modelo vetorial e chunk_size
-- KC eh grafo: linked_artifacts conectam nos de conhecimento
-- title + tldr sao campos primarios de BM25 ranking
-- Cada ## header define um chunk de embedding no indice
-- KC valido: 13 campos required + body 200-5120 bytes
+- P01 answers: "what knowledge is available?"
+- knowledge_card is the core type (dense atomic fact)
+- Dominant function INJECT: data enters LLM context
+- 6 types: kc, rag_source, glossary, context_doc, emb, fse
+- Without P01 the LLM improvises; with P01 it operates with assets
+- knowledge_card has density gate >= 0.8 and max 5120 bytes
+- few_shot_example is an input/output pair for in-context learning
+- rag_source is a pointer to an external source (URL + freshness)
+- glossary_entry defines a domain term (max 3 lines, 512B)
+- context_doc hydrates prompts with broad context (up to 2048B)
+- embedding_config specifies the vector model and chunk_size
+- KC is a graph: linked_artifacts connect knowledge nodes
+- title + tldr are the primary fields for BM25 ranking
+- Each ## header defines an embedding chunk in the index
+- Valid KC: 13 required fields + body 200-5120 bytes
 
-## Fases
+## Phases
 
-1. Pesquisa: coletar dados de fontes verificaveis
-2. Destilacao: condensar em formato atomico (KC ou glossary)
-3. Validacao: quality gate (density, completeness, accuracy)
-4. Indexacao: embedding + knowledge_index para retrieval
-5. Injecao: INJECT no contexto do LLM via RAG ou direto
+1. Research: collect data from verifiable sources
+2. Distillation: condense into atomic format (KC or glossary)
+3. Validation: quality gate (density, completeness, accuracy)
+4. Indexing: embedding + knowledge_index for retrieval
+5. Injection: INJECT into the LLM context via RAG or direct
 
-## Regras de Ouro
+## Golden Rules
 
-- SEMPRE incluir data_source em KCs factuais
-- SEMPRE manter density >= 0.8 (sem filler)
-- NUNCA duplicar KC e context_doc (KC eh denso, ctx eh amplo)
-- NUNCA auto-atribuir quality (validacao externa)
-- SEMPRE usar tags como lista, nunca string unica
+- ALWAYS include data_source in factual KCs
+- ALWAYS maintain density >= 0.8 (no filler)
+- NEVER duplicate KC and context_doc (KC is dense, ctx is broad)
+- NEVER self-assign quality (external validation)
+- ALWAYS use tags as a list, never a single string
 
-## Comparativo
+## Comparison
 
-| Tipo | Proposito | Tamanho | Core |
-|------|-----------|---------|------|
-| knowledge_card | Fato atomico denso | <= 5120B | sim |
-| rag_source | Ponteiro externo indexavel | <= 1024B | nao |
-| glossary_entry | Definicao de termo | <= 512B | nao |
-| context_doc | Contexto de dominio | <= 2048B | nao |
-| embedding_config | Config modelo vetorial | <= 512B | nao |
-| few_shot_example | Par input/output | <= 1024B | sim |
+| Type | Purpose | Size | Core |
+|------|---------|------|------|
+| knowledge_card | Dense atomic fact | <= 5120B | yes |
+| rag_source | Indexable external pointer | <= 1024B | no |
+| glossary_entry | Term definition | <= 512B | no |
+| context_doc | Domain context | <= 2048B | no |
+| embedding_config | Vector model config | <= 512B | no |
+| few_shot_example | Input/output pair | <= 1024B | yes |
 
 ## Flow
 
 ```
-[Fonte] -> [Destilacao] -> [KC/Glossary/CtxDoc]
+[Source] -> [Distillation] -> [KC/Glossary/CtxDoc]
                                     |
                             [Embedding + Index]
                                     |
-                            [INJECT no LLM]
+                            [INJECT into LLM]
                                     |
-                            [Output informado]
+                            [Informed output]
 ```
 
 ## References

@@ -1,0 +1,53 @@
+[
+  {
+    "contact_num": "111",
+    "name": "Danilo Gato",
+    "platform": "Twitter/X",
+    "handle": "@odanilogato",
+    "tier": "T2",
+    "region": "BR",
+    "priority": 10,
+    "template_id": "T2-X-BR",
+    "message": "E ai Danilo,\n\nVi seu trabalho sobre --. Achei muito relevante.\n\nAcabamos de lancar o CEX em open-source -- um cerebro de IA tipado com 300 tipos de artefatos, pontuacao de qualidade obrigatoria, e suporte a 4 runtimes.\n\nPosso compartilhar acesso antecipado ou uma demo rapida. Interessa?\n\nYT #30, IG #68, LI #190, Pod #251, NL #267\n\ngithub.com/gato3ao3/cex",
+    "channel": "DM",
+    "profile_url": "",
+    "queued_date": "2026-04-25",
+    "status": "sent",
+    "follow_up_date": "2026-05-02",
+    "notes_for_human": "YT #30, IG #68, LI #190, Pod #251, NL #267"
+  },
+  {
+    "contact_num": "21",
+    "name": "Rocketseat (Diego Fernandes)",
+    "platform": "YouTube",
+    "handle": "Rocketseat",
+    "tier": "T1",
+    "region": "BR",
+    "priority": 9,
+    "template_id": "T1-EM-BR",
+    "message": "Rocketseat,\n\nAcompanho seu trabalho em React, Node, fullstack, AI -- particularmente relevante para o que estamos construindo.\n\nAgentes de IA hoje sao descartaveis -- voce faz um prompt, recebe uma resposta, ela evapora. CEX e diferente. E um cerebro de IA, nao um agente. 300 artefatos de conhecimento tipados, um pipeline de raciocinio obrigatorio de 8 passos e 7 nucleos especializados produzem saidas pontuadas e governadas que vivem no seu repositorio git. Rode em Claude, Gemini, Codex ou Ollama. Seu conhecimento se acumula. Seu provedor nao importa.\n\nGostaria da sua opiniao sobre a arquitetura. Estamos em pre-lancamento e buscamos olhos tecnicos.\n\nUma demo de 15 minutos funciona?\n\nCo-founder/CTO\n\ngithub.com/gato3ao3/cex",
+    "channel": "Email",
+    "profile_url": "",
+    "queued_date": "2026-04-25",
+    "status": "queued",
+    "follow_up_date": null,
+    "notes_for_human": "Co-founder/CTO"
+  },
+  {
+    "contact_num": "34",
+    "name": "Filipe Deschamps",
+    "platform": "YouTube",
+    "handle": "Filipe Deschamps",
+    "tier": "T2",
+    "region": "BR",
+    "priority": 9,
+    "template_id": "T2-YT-BR",
+    "message": "Filipe,\n\nSeu conteudo sobre Tech news, OSS, curso.dev no YouTube e otimo.\n\nConstruimos o CEX -- O cerebro de IA que acumula inteligencia. 300 tipos de artefatos, trace de raciocinio de 8 passos, suporte a 4 runtimes. Renderia um video forte.\n\nTopa um walkthrough ou uma sessao de critica?\n\nLargest BR tech newsletter\n\ngithub.com/gato3ao3/cex",
+    "channel": "Email",
+    "profile_url": "",
+    "queued_date": "2026-04-25",
+    "status": "queued",
+    "follow_up_date": null,
+    "notes_for_human": "Largest BR tech newsletter"
+  }
+]

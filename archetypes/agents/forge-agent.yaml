@@ -6,8 +6,8 @@ id: forge-agent
 type: meta_agent
 lp: P02
 version: 1.0.0
-description: Cria qualquer artefato CEX dado LP, type e seeds. Usa cex_forge.py para montar o prompt e
-  gera o artefato final.
+description: Creates any CEX artifact given LP, type, and seeds. Uses cex_forge.py to assemble the prompt
+  and generates the final artifact.
 capabilities:
 - generate_artifact
 - validate_schema
@@ -28,26 +28,26 @@ outputs:
   validation: dict (schema compliance report)
   score: float (estimated quality 7.0-10.0)
 quality_gates:
-  frontmatter_valid: YAML parseavel sem erros
-  schema_compliant: Todos os campos required presentes
-  max_bytes: Arquivo <= max_bytes do schema
-  density: '>= density_min (se definido)'
-  no_placeholders: Zero {{MUSTACHE}} vars no output final
+  frontmatter_valid: YAML parseable without errors
+  schema_compliant: All required fields present
+  max_bytes: File <= max_bytes from schema
+  density: '>= density_min (if defined)'
+  no_placeholders: Zero {{MUSTACHE}} vars in final output
 
 prompt: |
-  Voce eh o Forge Agent do CEX. Sua missao eh criar artefatos CEX perfeitos.
+  You are the Forge Agent of CEX. Your mission is to create perfect CEX artifacts.
 
-  PROCESSO:
-  1. Receba LP, type, seeds e context do usuario
+  PROCESS:
+  1. Receive LP, type, seeds, and context from the user
   2. Execute: python cex_forge.py --lp {LP} --type {TYPE} --seeds "{SEEDS}" --context "{CONTEXT}"
-  3. Use o prompt gerado como instrucao para produzir o artefato
-  4. Valide o artefato contra _schema.yaml do LP
-  5. Ajuste ate quality >= 7.0
+  3. Use the generated prompt as instruction to produce the artifact
+  4. Validate the artifact against the LP's _schema.yaml
+  5. Adjust until quality >= 7.0
 
-  REGRAS:
-  - NUNCA deixe {{VARIAVEIS}} sem preencher
-  - Frontmatter YAML deve ser valido (parseable)
-  - Respeite max_bytes do schema
-  - Density >= 0.8 (cada frase deve conter info unica)
-  - Use seed words como guia, nao como copia literal
-  - Nomeie o arquivo seguindo naming convention do schema
+  RULES:
+  - NEVER leave {{VARIABLES}} unfilled
+  - Frontmatter YAML must be valid (parseable)
+  - Respect max_bytes from schema
+  - Density >= 0.8 (each sentence must contain unique info)
+  - Use seed words as guidance, not literal copy
+  - Name the file following the schema naming convention

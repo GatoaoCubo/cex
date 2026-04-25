@@ -11,15 +11,15 @@ author: builder_agent
 domain: cex_taxonomy
 quality: 9.1
 tags: [cex, llm-function, produce, chain, workflow, dag, meta-prompt, completion]
-tldr: "PRODUCE gera output final (texto, codigo, dados) via 5 tipos — a funcao de EXECUCAO do pipeline LLM"
-when_to_use: "Entender como LLMs materializam output e a fronteira entre PRODUCE (output externo) e REASON (pensamento interno)"
+tldr: "PRODUCE generates final output (text, code, data) via 5 types — the EXECUTION function of the LLM pipeline"
+when_to_use: "Understand how LLMs materialize output and the boundary between PRODUCE (external output) and REASON (internal thought)"
 keywords: [produce, chain, workflow, dag, meta_prompt, completion, generation]
 long_tails:
-  - "Qual a diferenca entre PRODUCE e REASON no CEX"
-  - "Quais os 5 tipos de producao na taxonomia CEX"
+  - "What is the difference between PRODUCE and REASON in CEX"
+  - "What are the 5 production types in the CEX taxonomy"
 axioms:
-  - "SEMPRE distinguir REASON (pensamento interno) de PRODUCE (output externo)"
-  - "NUNCA usar workflow quando chain linear resolve"
+  - "ALWAYS distinguish REASON (internal thought) from PRODUCE (external output)"
+  - "NEVER use workflow when linear chain suffices"
 linked_artifacts:
   primary: p01_kc_cex_function_call
   related: [p01_kc_cex_function_reason, p01_kc_cex_function_constrain]
@@ -40,46 +40,46 @@ related:
 
 ## Summary
 
-PRODUCE gera o output principal do pipeline LLM — texto, codigo, dados estruturados, artefatos. Com 5 tipos (6% do CEX), cobre de completions brutas a DAGs complexos com dependencias. Fronteira critica: REASON produz PENSAMENTO (operacao interna, meta-cognitiva); PRODUCE produz OUTPUT (operacao externa, artefato consumivel). A funcao menos diferenciadora — todos fazem PRODUCE bem; o diferencial esta nas funcoes ao redor (INJECT, REASON, CONSTRAIN, GOVERN).
+PRODUCE generates the main output of the LLM pipeline — text, code, structured data, artifacts. With 5 types (6% of CEX), it covers from raw completions to complex DAGs with dependencies. Critical boundary: REASON produces THOUGHT (internal, meta-cognitive operation); PRODUCE produces OUTPUT (external, consumable artifact). The least differentiating function — everyone does PRODUCE well; the differentiator lies in the surrounding functions (INJECT, REASON, CONSTRAIN, GOVERN).
 
 ## Spec
 
-| Tipo | LP | Complexidade | Funcao | Detalhe |
-|------|-----|-------------|--------|---------|
-| completion | P03 | Baixa | Output bruto | Texto pre-pos-processamento |
-| meta_prompt | P03 | Media | Prompt gera prompt | Auto-referencialidade aplicada |
-| chain | P12 | Media | Sequencia linear | Output A alimenta input B |
-| workflow | P12 | Alta | Grafo com branches | Condicionais, loops, paralelismo |
-| dag | P12 | Alta | Grafo aciclico | Dependencias sem ciclos |
+| Type | LP | Complexity | Function | Detail |
+|------|-----|-----------|----------|--------|
+| completion | P03 | Low | Raw output | Text pre/post-processing |
+| meta_prompt | P03 | Medium | Prompt generates prompt | Applied self-referentiality |
+| chain | P12 | Medium | Linear sequence | Output A feeds input B |
+| workflow | P12 | High | Graph with branches | Conditionals, loops, parallelism |
+| dag | P12 | High | Acyclic graph | Dependencies without cycles |
 
-Hierarquia de complexidade: completion < meta_prompt < chain < workflow.
-DAG e workflow cobrem necessidades distintas: DAG garante aciclicidade
-(execucao em ordem topologica), workflow permite ciclos e loops.
-chain e a forma minima de composicao: A -> B -> C linear.
-PRODUCE e a 5a funcao no pipeline (apos INJECT, BECOME, REASON, CALL).
-Otimizacoes de REASON (melhorar raciocinio) e de PRODUCE (melhorar
-geracao) requerem tecnicas fundamentalmente diferentes.
-completion eh materia-prima — output bruto antes de CONSTRAIN formatar.
-meta_prompt eh o artefato metacircular do CEX: prompt que gera prompt,
-auto-referencialidade aplicada. Nao confundir com prompt_template
-(CONSTRAIN) que parametriza prompts existentes.
-LangChain Chains, DSPy Modules, Haystack Pipelines — todos confirmam
-que composicao de operacoes LLM eh cidadao de primeira classe.
-PRODUCE eh a razao de existir do LLM, mas paradoxalmente a funcao
-menos diferenciadora. Todos os modelos fazem PRODUCE. O que separa
-sistemas mediocres de excelentes sao as 7 funcoes ao redor.
+Complexity hierarchy: completion < meta_prompt < chain < workflow.
+DAG and workflow cover distinct needs: DAG guarantees acyclicity
+(execution in topological order), workflow allows cycles and loops.
+chain is the minimal form of composition: A -> B -> C linear.
+PRODUCE is the 5th function in the pipeline (after INJECT, BECOME, REASON, CALL).
+Optimizations for REASON (improve reasoning) and PRODUCE (improve
+generation) require fundamentally different techniques.
+completion is raw material — raw output before CONSTRAIN formats it.
+meta_prompt is the metacircular artifact of CEX: prompt that generates prompt,
+applied self-referentiality. Do not confuse with prompt_template
+(CONSTRAIN) which parameterizes existing prompts.
+LangChain Chains, DSPy Modules, Haystack Pipelines — all confirm
+that LLM operation composition is a first-class citizen.
+PRODUCE is the LLM's reason for existence, but paradoxically the least
+differentiating function. All models do PRODUCE. What separates
+mediocre systems from excellent ones are the 7 surrounding functions.
 
 ## Patterns
 
 | Trigger | Action |
 |---------|--------|
-| Output simples sem composicao | completion direto |
-| Pipeline linear sem branches | chain (A -> B -> C) |
-| Pipeline com decisoes condicionais | workflow com branches |
-| Dependencias complexas sem ciclos | dag com ordem topologica |
-| Gerar prompts otimizados automaticamente | meta_prompt (prompt que gera prompt) |
-| Mesmo padrao aplicado a inputs variados | chain + prompt_template (CONSTRAIN) |
-| Tarefa requer raciocinio antes de gerar | REASON primeiro, PRODUCE depois |
+| Simple output without composition | direct completion |
+| Linear pipeline without branches | chain (A -> B -> C) |
+| Pipeline with conditional decisions | workflow with branches |
+| Complex dependencies without cycles | dag with topological order |
+| Generate optimized prompts automatically | meta_prompt (prompt that generates prompt) |
+| Same pattern applied to varied inputs | chain + prompt_template (CONSTRAIN) |
+| Task requires reasoning before generating | REASON first, PRODUCE after |
 
 ## Code
 
@@ -104,12 +104,12 @@ optimized_prompt = llm.complete(meta)  # PRODUCE de segundo ordem
 
 ## Anti-Patterns
 
-- Workflow para pipeline linear simples (complexidade sem necessidade)
-- DAG com ciclos implicitos (viola definicao, use workflow)
-- PRODUCE sem REASON previo em tarefas complexas (output raso)
-- Completion como tipo persistente (use chain ou workflow)
-- meta_prompt sem avaliacao de qualidade (espiral de degradacao)
-- Confundir REASON (chain-of-thought) com PRODUCE (texto final)
+- Workflow for simple linear pipeline (complexity without need)
+- DAG with implicit cycles (violates definition, use workflow)
+- PRODUCE without prior REASON in complex tasks (shallow output)
+- Completion as persistent type (use chain or workflow)
+- meta_prompt without quality evaluation (degradation spiral)
+- Confusing REASON (chain-of-thought) with PRODUCE (final text)
 
 ## References
 

@@ -12,17 +12,17 @@ author: n04_knowledge
 domain: data_platform
 quality: 9.1
 tags: [supabase, multi-tenant, rls, org-isolation, schema, platform]
-tldr: "3 estrategias multi-tenant: shared schema + RLS (simples), schema per tenant (isolamento), project per tenant (maximo). RLS com org_id + JWT claims eh o padrao mais comum."
-when_to_use: "Quando projetar isolamento de dados multi-tenant em Supabase"
+tldr: "3 multi-tenant strategies: shared schema + RLS (simple), schema per tenant (isolation), project per tenant (maximum). RLS with org_id + JWT claims is the most common pattern."
+when_to_use: "When designing multi-tenant data isolation in Supabase"
 keywords: [multi-tenant, rls-patterns, org-isolation, tenant-isolation]
 long_tails:
-  - Como implementar multi-tenancy com RLS no Supabase
-  - Shared schema vs schema per tenant no Supabase
-  - JWT custom claims para org_id no Supabase multi-tenant
+  - How to implement multi-tenancy with RLS in Supabase
+  - Shared schema vs schema per tenant in Supabase
+  - JWT custom claims for org_id in Supabase multi-tenant
 axioms:
-  - SEMPRE use RLS — nunca confie em filtro application-level para isolamento
-  - NUNCA misture dados de tenants sem coluna org_id indexada
-  - SEMPRE indexe a coluna de tenant (org_id) em toda tabela compartilhada
+  - ALWAYS use RLS — never trust application-level filtering for isolation
+  - NEVER mix tenant data without an indexed org_id column
+  - ALWAYS index the tenant column (org_id) in every shared table
 linked_artifacts:
   primary: null
   related: [p01_kc_supabase_auth, p01_kc_supabase_database]
@@ -49,19 +49,19 @@ topic: supabase_multi_tenant
 scope: RLS patterns, org isolation, shared/separate schema, JWT claims
 owner: n04_knowledge
 criticality: high
-padrao_mais_comum: shared schema + RLS por org_id
+most_common_pattern: shared schema + RLS by org_id
 ```
 
-## 3 Estratégias
-| Estratégia | Isolamento | Complexidade | Custo | Quando |
-|------------|-----------|--------------|-------|--------|
-| Shared schema + RLS | Lógico (rows) | Baixa | 1 projeto | <100 tenants, SaaS B2B |
-| Schema per tenant | Lógico (schemas) | Média | 1 projeto | 10-1000 tenants, compliance |
-| Project per tenant | Físico (DB) | Alta | N projetos | Enterprise, data residency |
+## 3 Strategies
+| Strategy | Isolation | Complexity | Cost | When |
+|----------|-----------|------------|------|------|
+| Shared schema + RLS | Logical (rows) | Low | 1 project | <100 tenants, SaaS B2B |
+| Schema per tenant | Logical (schemas) | Medium | 1 project | 10-1000 tenants, compliance |
+| Project per tenant | Physical (DB) | High | N projects | Enterprise, data residency |
 
-## Pattern 1: Shared Schema + RLS (Mais Comum)
+## Pattern 1: Shared Schema + RLS (Most Common)
 ```sql
--- Toda tabela tem org_id
+-- Every table has org_id
 CREATE TABLE orders (
   id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
   org_id UUID NOT NULL REFERENCES organizations(id),
@@ -70,10 +70,10 @@ CREATE TABLE orders (
   created_at TIMESTAMPTZ DEFAULT NOW()
 );
 
--- Index OBRIGATÓRIO na coluna de tenant
+-- MANDATORY index on tenant column
 CREATE INDEX idx_orders_org ON orders(org_id);
 
--- RLS: user vê só dados da sua org
+-- RLS: user sees only their org's data
 ALTER TABLE orders ENABLE ROW LEVEL SECURITY;
 
 CREATE POLICY "tenant_isolation" ON orders
@@ -89,20 +89,20 @@ CREATE POLICY "tenant_isolation" ON orders
 -- Setar via Admin API: supabase.auth.admin.updateUserById(uid, {app_metadata:{org_id}})
 ```
 
-## RLS Patterns (5 Principais)
-| Pattern | Policy | Uso |
+## RLS Patterns (Top 5)
+| Pattern | Policy | Use |
 |---------|--------|-----|
-| Owner | `auth.uid() = user_id` | Dados pessoais (perfil, prefs) |
-| Org member | `org_id = jwt->org_id` | Dados da empresa (pedidos, prods) |
-| Role-based | `jwt->role = 'admin'` | Admin vê tudo na org |
-| Public read | `true` FOR SELECT | Catálogo público, landing pages |
-| Hierarchical | `org_id IN (SELECT org_id FROM memberships WHERE user_id = auth.uid())` | User em múltiplas orgs |
+| Owner | `auth.uid() = user_id` | Personal data (profile, prefs) |
+| Org member | `org_id = jwt->org_id` | Company data (orders, products) |
+| Role-based | `jwt->role = 'admin'` | Admin sees everything in org |
+| Public read | `true` FOR SELECT | Public catalog, landing pages |
+| Hierarchical | `org_id IN (SELECT org_id FROM memberships WHERE user_id = auth.uid())` | User in multiple orgs |
 
-## Outras Estratégias
-| Estratégia | Como | Custo |
-|------------|------|-------|
-| Schema per tenant | `CREATE SCHEMA tenant_x;` + search_path por JWT | 1 projeto |
-| Project per tenant | Management API provisiona projeto por tenant | USD 25/mo × N |
+## Other Strategies
+| Strategy | How | Cost |
+|----------|-----|------|
+| Schema per tenant | `CREATE SCHEMA tenant_x;` + search_path per JWT | 1 project |
+| Project per tenant | Management API provisions project per tenant | USD 25/mo x N |
 
 ## Membership Model
 ```sql
@@ -121,20 +121,20 @@ CREATE INDEX idx_memberships_org ON memberships(org_id);
 ```
 
 ## Anti-Patterns
-| Anti-Pattern | Risco | Fix |
-|-------------|-------|-----|
-| Filtro só no WHERE app-level | Tenant leak se bug no código | RLS obrigatório |
-| Sem index em org_id | Full scan em toda query | CREATE INDEX |
-| org_id hardcoded no app | Muda tenant = muda código | JWT claims dinâmicos |
-| RLS com subquery lenta | Timeout em tabelas grandes | Materializar membership |
-| Sem role hierarchy | Admin não consegue ver tudo | role check no policy |
+| Anti-Pattern | Risk | Fix |
+|-------------|------|-----|
+| Filter only in app-level WHERE | Tenant leak if code bug | RLS mandatory |
+| No index on org_id | Full scan on every query | CREATE INDEX |
+| org_id hardcoded in app | Change tenant = change code | Dynamic JWT claims |
+| RLS with slow subquery | Timeout on large tables | Materialize membership |
+| No role hierarchy | Admin cannot see everything | role check in policy |
 
 ## Golden Rules
-- RLS é a ÚLTIMA linha de defesa — nunca dependa só do app code
-- INDEXE org_id + coluna de sort em toda tabela compartilhada
-- USE JWT claims (app_metadata) para org_id — não query no DB
-- TESTE isolamento: login como user A, tentar acessar dados de org B
-- MONITORE: EXPLAIN ANALYZE queries críticas com RLS ativo
+- RLS is the LAST line of defense — never rely only on app code
+- INDEX org_id + sort column in every shared table
+- USE JWT claims (app_metadata) for org_id — do not query the DB
+- TEST isolation: login as user A, try to access org B data
+- MONITOR: EXPLAIN ANALYZE critical queries with RLS active
 
 ## References
 - RLS: https://supabase.com/docs/guides/database/postgres/row-level-security

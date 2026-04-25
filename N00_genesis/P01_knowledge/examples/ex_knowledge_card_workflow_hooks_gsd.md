@@ -11,15 +11,15 @@ author: builder_agent
 domain: hook_engineering
 quality: 9.1
 tags: [hooks, workflow, advisory, context-monitor, prompt-guard, claude-code]
-tldr: "5 JS hooks enforce workflow sem bloquear — advisory via additionalContext, timeout guard, silent fail"
-when_to_use: "Projetar hooks para Claude Code que guiem agentes sem travar execucao"
+tldr: "5 JS hooks enforce workflow without blocking — advisory via additionalContext, timeout guard, silent fail"
+when_to_use: "Design hooks for Claude Code that guide agents without blocking execution"
 keywords: [gsd-hooks, advisory-hooks, context-monitor, prompt-guard, workflow-guard]
 long_tails:
-  - "Como criar hooks advisory para Claude Code sem bloquear execucao"
-  - "Qual o pattern de timeout guard para hooks em Windows"
+  - "How to create advisory hooks for Claude Code without blocking execution"
+  - "What is the timeout guard pattern for hooks on Windows"
 axioms:
-  - "NUNCA bloquear execucao do agente — hooks sao advisory"
-  - "SEMPRE incluir timeout guard (3-10s) contra hang"
+  - "NEVER block agent execution — hooks are advisory"
+  - "ALWAYS include timeout guard (3-10s) against hang"
 linked_artifacts:
   primary: null
   related: [p01_kc_cex_function_become]
@@ -40,32 +40,32 @@ related:
 
 ## TL;DR
 
-GSD implementa 5 hooks JavaScript para Claude Code que enforcam processo via `additionalContext`.
-Mensagens injetadas que o agente ve mas nunca bloqueiam execucao.
-Pattern core: stdin JSON, timeout guard (3-10s), process, stdout JSON ou exit(0).
+GSD implements 5 JavaScript hooks for Claude Code that enforce process via `additionalContext`.
+Injected messages that the agent sees but never block execution.
+Core pattern: stdin JSON, timeout guard (3-10s), process, stdout JSON or exit(0).
 
-## Conceito Central
+## Core Concept
 
-Hooks advisory resolvem o dilema enforcement vs autonomia: guiam o agente sem interromper fluxo. Cada hook recebe dados via stdin JSON, processa com timeout guard (3-10s), e retorna `additionalContext` ou faz `process.exit(0)` silencioso. Os 5 hooks cobrem: status visual (statusline), alertas de contexto (context-monitor), guarda de workflow (workflow-guard), deteccao de injection (prompt-guard) e version check (check-update).
+Advisory hooks solve the enforcement vs autonomy dilemma: they guide the agent without interrupting flow. Each hook receives data via stdin JSON, processes with timeout guard (3-10s), and returns `additionalContext` or does a silent `process.exit(0)`. The 5 hooks cover: visual status (statusline), context alerts (context-monitor), workflow guard (workflow-guard), injection detection (prompt-guard) and version check (check-update).
 
-Comunicacao entre hooks usa bridge pattern via filesystem — statusline escreve metricas em tmpdir JSON, context-monitor le esse arquivo para calcular thresholds. Esse desacoplamento permite que hooks operem independentes: statusline roda em PreProcess, context-monitor em PostToolUse, cada um no seu lifecycle event sem dependencia direta.
+Inter-hook communication uses bridge pattern via filesystem -- statusline writes metrics to tmpdir JSON, context-monitor reads that file to calculate thresholds. This decoupling allows hooks to operate independently: statusline runs in PreProcess, context-monitor in PostToolUse, each in its own lifecycle event without direct dependency.
 
-Cada hook e configuravel via config file (opt-in/opt-out por hook). Workflow-guard e desabilitado por default — so ativa quem usa GSD workflow. Prompt-guard e statusline estao sempre ativos pois protegem integridade do contexto.
+Each hook is configurable via config file (opt-in/opt-out per hook). Workflow-guard is disabled by default -- only activates for those using GSD workflow. Prompt-guard and statusline are always active as they protect context integrity.
 
-## Arquitetura/Patterns
+## Architecture/Patterns
 
-| Hook | Evento | Funcao | Config |
+| Hook | Event | Function | Config |
 |------|--------|--------|--------|
-| statusline | PreProcess | Barra: modelo, task, contexto% | Sempre |
+| statusline | PreProcess | Bar: model, task, context% | Always |
 | context-monitor | PostToolUse | Warning <=35%, critical <=25% | opt-out |
-| workflow-guard | PreToolUse | Avisa edits fora do workflow | opt-in |
-| prompt-guard | PreToolUse | Detecta injection em planning | Sempre |
-| check-update | SessionStart | Verifica versao em background | Sempre |
+| workflow-guard | PreToolUse | Warns edits outside workflow | opt-in |
+| prompt-guard | PreToolUse | Detects injection in planning | Always |
+| check-update | SessionStart | Checks version in background | Always |
 
-Context-monitor normaliza para contexto utilizavel: Claude reserva 16.5% para autocompact.
+Context-monitor normalizes to usable context: Claude reserves 16.5% for autocompact.
 Formula: `usable = (remaining - 16.5) / (100 - 16.5) * 100`.
-Debounce: 5 tool uses entre warnings; severity escalation (WARNING para CRITICAL) bypassa debounce.
-Prompt-guard detecta regex de injection (ignore previous, pretend you are, invisible unicode) e avisa sem bloquear — falso positivo em blocking hook causa deadlock.
+Debounce: 5 tool uses between warnings; severity escalation (WARNING to CRITICAL) bypasses debounce.
+Prompt-guard detects injection regex (ignore previous, pretend you are, invisible unicode) and warns without blocking -- false positive in blocking hook causes deadlock.
 
 ## Exemplos
 
@@ -88,21 +88,21 @@ process.stdin.on('end', () => {
 });
 ```
 
-Fluxo de comunicacao inter-hook via bridge file:
+Inter-hook communication flow via bridge file:
 - SessionStart: check-update escreve cache/update-check.json (detached, unref)
 - PreProcess: statusline escreve /tmp/claude-ctx-{id}.json com used_pct
 - PostToolUse: context-monitor le /tmp/claude-ctx-{id}.json e injeta warning
 
 ## Anti-Patterns
 
-- Hook que bloqueia com exit(1) — causa deadlock no agente
-- Logar erros de hook ao usuario — ruido sem acao possivel
-- Omitir timeout guard — trava terminal no Windows indefinidamente
-- Thresholds hardcoded sem config — impede customizacao por projeto
-- Prompt guard blocking em vez de advisory — falso positivo trava tudo
-- Bridge file sem session_id — colisao entre sessoes paralelas
+- Hook that blocks with exit(1) -- causes deadlock in agent
+- Logging hook errors to user -- noise without possible action
+- Omitting timeout guard -- freezes terminal on Windows indefinitely
+- Hardcoded thresholds without config -- prevents project customization
+- Prompt guard blocking instead of advisory -- false positive freezes everything
+- Bridge file without session_id -- collision between parallel sessions
 
-## Referencias
+## References
 
 - source: https://docs.anthropic.com/en/docs/claude-code/hooks
 - source: https://www.npmjs.com/package/get-shit-done-cc

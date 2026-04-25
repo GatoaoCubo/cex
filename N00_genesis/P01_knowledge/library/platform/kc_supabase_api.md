@@ -12,17 +12,17 @@ author: n04_knowledge
 domain: data_platform
 quality: 9.1
 tags: [supabase, postgrest, graphql, rest-api, filtering, pagination, platform]
-tldr: "PostgREST gera REST API automaticamente do schema PostgreSQL; pg_graphql gera GraphQL; ambos respeitam RLS e suportam filtering, pagination, embedding"
-when_to_use: "Quando consumir dados Supabase via REST ou GraphQL em clients e servers"
+tldr: "PostgREST auto-generates REST API from PostgreSQL schema; pg_graphql generates GraphQL; both respect RLS and support filtering, pagination, embedding"
+when_to_use: "When consuming Supabase data via REST or GraphQL in clients and servers"
 keywords: [postgrest, graphql, supabase-api, filtering, pagination]
 long_tails:
-  - Como filtrar dados com operadores no PostgREST Supabase
-  - Paginacao com range headers no Supabase REST API
-  - GraphQL queries automaticas no Supabase via pg_graphql
+  - How to filter data with operators in PostgREST Supabase
+  - Pagination with range headers in Supabase REST API
+  - Automatic GraphQL queries in Supabase via pg_graphql
 axioms:
-  - SEMPRE use select() com colunas específicas, nunca select('*') em produção
-  - NUNCA bypass RLS usando service_role_key no client-side
-  - SEMPRE pagine queries com range/limit para evitar timeout
+  - ALWAYS use select() with specific columns, never select('*') in production
+  - NEVER bypass RLS using service_role_key on the client-side
+  - ALWAYS paginate queries with range/limit to avoid timeout
 linked_artifacts:
   primary: null
   related: [p01_kc_supabase_database, p01_kc_supabase_auth]
@@ -52,15 +52,15 @@ criticality: high
 service: PostgREST (porta 3000), pg_graphql (extension)
 ```
 
-## Dois Endpoints Automáticos
-| API | URL | Gerado De | Auth |
+## Two Automatic Endpoints
+| API | URL | Generated From | Auth |
 |-----|-----|-----------|------|
-| REST | `https://[ref].supabase.co/rest/v1/` | PostgREST lê schema public | apikey header + JWT |
-| GraphQL | `https://[ref].supabase.co/graphql/v1` | pg_graphql lê schema public | apikey header + JWT |
+| REST | `https://[ref].supabase.co/rest/v1/` | PostgREST reads public schema | apikey header + JWT |
+| GraphQL | `https://[ref].supabase.co/graphql/v1` | pg_graphql reads public schema | apikey header + JWT |
 
 ## REST — Client SDK Patterns
 ```javascript
-// SELECT com filtros
+// SELECT with filters
 const { data } = await supabase
   .from('products')
   .select('id, name, price, category:categories(name)')  // join!
@@ -73,7 +73,7 @@ const { data } = await supabase
 const { data } = await supabase
   .from('orders')
   .insert({ user_id: auth.uid(), total: 99.90, status: 'pending' })
-  .select()  // retorna o inserido
+  .select()  // returns the inserted row
 
 // UPDATE
 const { data } = await supabase
@@ -93,17 +93,17 @@ const { data } = await supabase.rpc('match_documents', {
 })
 ```
 
-## Operadores de Filtro
-| Operador | SDK | SQL Equivalente | Exemplo |
-|----------|-----|-----------------|---------|
-| eq | `.eq('col', val)` | `= val` | Status exato |
-| neq | `.neq('col', val)` | `!= val` | Excluir status |
-| gt / gte | `.gt('col', val)` | `> val` | Preço mínimo |
-| lt / lte | `.lt('col', val)` | `< val` | Preço máximo |
-| like | `.like('col', '%term%')` | `LIKE` | Busca texto |
+## Filter Operators
+| Operator | SDK | SQL Equivalent | Example |
+|----------|-----|----------------|---------|
+| eq | `.eq('col', val)` | `= val` | Exact status |
+| neq | `.neq('col', val)` | `!= val` | Exclude status |
+| gt / gte | `.gt('col', val)` | `> val` | Minimum price |
+| lt / lte | `.lt('col', val)` | `< val` | Maximum price |
+| like | `.like('col', '%term%')` | `LIKE` | Text search |
 | ilike | `.ilike('col', '%term%')` | `ILIKE` | Case-insensitive |
-| in | `.in('col', [a,b,c])` | `IN (a,b,c)` | Lista valores |
-| is | `.is('col', null)` | `IS NULL` | Nulos |
+| in | `.in('col', [a,b,c])` | `IN (a,b,c)` | Value list |
+| is | `.is('col', null)` | `IS NULL` | Nulls |
 | contains | `.contains('col', {k:v})` | `@>` | JSONB contains |
 | overlaps | `.overlaps('col', [a,b])` | `&&` | Array overlap |
 | textSearch | `.textSearch('col', 'q')` | `@@` | Full-text |
@@ -125,32 +125,32 @@ query {
 ```
 
 ## Pagination Patterns
-| Metodo | Como | Quando |
-|--------|------|--------|
-| Range (offset) | `.range(0, 24)` | Páginas simples, <10K rows |
+| Method | How | When |
+|--------|-----|------|
+| Range (offset) | `.range(0, 24)` | Simple pages, <10K rows |
 | Cursor | `pageInfo.endCursor` + `after:` | Infinite scroll, >10K rows |
-| Keyset | `.gt('id', lastId).limit(25)` | Performance máxima |
+| Keyset | `.gt('id', lastId).limit(25)` | Maximum performance |
 
 ## Performance Tips
-| Tip | Impacto |
-|-----|---------|
-| `select('id,name,price')` vs `select('*')` | 2-5x menos dados |
-| Index nas colunas de filtro | 10-100x query speed |
-| `.limit(25)` em toda query | Previne timeout |
-| Relacionamento via FK | Join automático sem N+1 |
+| Tip | Impact |
+|-----|--------|
+| `select('id,name,price')` vs `select('*')` | 2-5x less data |
+| Index on filter columns | 10-100x query speed |
+| `.limit(25)` on every query | Prevents timeout |
+| FK relationship | Automatic join without N+1 |
 
 ## Anti-Patterns
-| Anti-Pattern | Risco | Fix |
-|-------------|-------|-----|
-| `select('*')` sem limit | Timeout, payload enorme | Colunas + limit |
-| Filtros no client em vez do server | Transfere tudo, filtra JS | Filtros no `.from().eq()` |
-| N+1 queries manuais | Performance 100x pior | Usar joins: `select('*, rel(*)')` |
+| Anti-Pattern | Risk | Fix |
+|-------------|------|-----|
+| `select('*')` without limit | Timeout, huge payload | Columns + limit |
+| Filters on client instead of server | Transfers everything, filters in JS | Filters in `.from().eq()` |
+| Manual N+1 queries | 100x worse performance | Use joins: `select('*, rel(*)')` |
 
 ## Golden Rules
-- FILTRE server-side sempre — nunca traga dados para filtrar no client
-- PAGINE toda query com `.range()` ou `.limit()`
-- USE joins automáticos via FK — não faça queries separadas
-- PREFIRA REST (PostgREST) para CRUD simples, GraphQL para queries complexas
+- ALWAYS filter server-side -- never bring data to filter on client
+- PAGINATE every query with `.range()` or `.limit()`
+- USE automatic joins via FK -- do not make separate queries
+- PREFER REST (PostgREST) for simple CRUD, GraphQL for complex queries
 
 ## References
 - REST: https://supabase.com/docs/guides/api

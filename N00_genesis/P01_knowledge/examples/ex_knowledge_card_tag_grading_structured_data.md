@@ -3,7 +3,7 @@ id: p01_kc_tag_grading_structured_data
 kind: knowledge_card
 8f: F3_inject
 pillar: P01
-title: "TAG Grading: Structured Data Extraction em Paginas CSR"
+title: "TAG Grading: Structured Data Extraction on CSR Pages"
 version: 2.0.0
 created: 2026-03-25
 updated: 2026-03-25
@@ -11,20 +11,20 @@ author: builder_agent
 domain: research
 quality: 9.1
 tags: [tag-grading, structured-data, browser-automation, scraping, csr]
-tldr: "Certificados TAG exigem browser: WebFetch retorna scripts, mas JSON-LD e grades so existem no DOM renderizado."
-when_to_use: "Extrair dados de paginas que renderizam certificados via JavaScript"
+tldr: "TAG certificates require browser: WebFetch returns scripts, but JSON-LD and grades only exist in the rendered DOM."
+when_to_use: "Extract data from pages that render certificates via JavaScript"
 keywords: [tag_grading, dynamic_scraping, json_ld, structured_data, playwright]
 long_tails:
-  - "Como extrair JSON-LD de pagina CSR com browser automation"
-  - "Quando WebFetch falha em certificados renderizados por JS"
+  - "How to extract JSON-LD from CSR page with browser automation"
+  - "When WebFetch fails on JS-rendered certificates"
 axioms:
-  - "SEMPRE validar se a pagina e CSR antes de fechar scraping"
-  - "NUNCA assumir ausencia de schema se HTML inicial vem vazio"
+  - "ALWAYS validate if the page is CSR before finishing scraping"
+  - "NEVER assume absence of schema if initial HTML comes empty"
 linked_artifacts:
   primary: null
   related: [p01_kc_claude_server_tools]
 density_score: 1.0
-data_source: "Analise de pagina TAG Grading T9403163 — fetch estatico bloqueado"
+data_source: "TAG Grading page analysis T9403163 — static fetch blocked"
 related:
   - output_content_factory_landscape
   - p01_kc_browser_tool
@@ -41,47 +41,47 @@ related:
 ## Quick Reference
 
 topic: structured data extraction | scope: TAG certificates | criticality: high
-page alvo: T9403163 | bloqueio: fetch estatico | decisao: browser automation
+target page: T9403163 | blocker: static fetch | decision: browser automation
 
-## Conceitos Chave
+## Key Concepts
 
-- WebFetch retornou scripts, sem certificado completo
-- JSON-LD e grades surgem somente apos render JS
-- Paginas CSR pedem DOM final, nao HTML de resposta
-- Browser automation elimina falso negativo de schema
+- WebFetch returned scripts, no complete certificate
+- JSON-LD and grades appear only after JS render
+- CSR pages require final DOM, not response HTML
+- Browser automation eliminates false negative on schema
 
-## Comparativo
+## Comparison
 
-| Metodo | Captura metas | Captura grade | Custo | Escala |
-|--------|---------------|---------------|-------|--------|
-| Fetch estatico | Baixa | Nula | Minimo | Alta |
-| Browser render | Alta | Alta | Medio | Media |
-| Inspecao manual | Media | Alta | Alto (h/h) | Nula |
-| API discovery | Alta | Alta | Minimo | Alta |
-| Network trace | Alta | Media | Baixo | Baixa |
+| Method | Captures metas | Captures grade | Cost | Scale |
+|--------|----------------|----------------|------|-------|
+| Static fetch | Low | None | Minimal | High |
+| Browser render | High | High | Medium | Medium |
+| Manual inspection | Medium | High | High (h/h) | None |
+| API discovery | High | High | Minimal | High |
+| Network trace | High | Medium | Low | Low |
 
-| Sinal no HTML | Diagnostico | Proxima acao |
-|---------------|-------------|--------------|
-| So scripts/analytics | CSR provavel | Usar browser |
-| IDs sem payload | Dados via API/XHR | Network trace |
-| OG/JSON-LD ausentes | Render pendente | Esperar DOM |
-| 200 OK body vazio | SPA puro | Playwright wait |
-| 403 ou captcha | Anti-bot ativo | Headers + proxy |
+| HTML Signal | Diagnosis | Next action |
+|-------------|-----------|-------------|
+| Scripts/analytics only | CSR likely | Use browser |
+| IDs without payload | Data via API/XHR | Network trace |
+| OG/JSON-LD absent | Render pending | Wait for DOM |
+| 200 OK empty body | Pure SPA | Playwright wait |
+| 403 or captcha | Anti-bot active | Headers + proxy |
 
-| Ferramenta | JS render | Setup | Paralelismo |
-|------------|-----------|-------|-------------|
-| Playwright | Sim | Medio | Alto |
-| Puppeteer | Sim | Medio | Alto |
-| Selenium | Sim | Alto | Limitado |
-| curl/httpx | Nao | Minimo | Alto |
-| Firecrawl | Sim | SaaS | Alto |
+| Tool | JS render | Setup | Parallelism |
+|------|-----------|-------|-------------|
+| Playwright | Yes | Medium | High |
+| Puppeteer | Yes | Medium | High |
+| Selenium | Yes | High | Limited |
+| curl/httpx | No | Minimal | High |
+| Firecrawl | Yes | SaaS | High |
 
-## Regras de Ouro
+## Golden Rules
 
-- SEMPRE esperar DOM final antes de extrair schema
-- SEMPRE inspecionar Network se body vier vazio
-- NUNCA marcar pagina como "sem schema" no 1o fetch
-- SEMPRE salvar screenshot e HTML para auditoria
+- ALWAYS wait for final DOM before extracting schema
+- ALWAYS inspect Network if body comes empty
+- NEVER mark page as "no schema" on 1st fetch
+- ALWAYS save screenshot and HTML for auditing
 
 ## Code
 

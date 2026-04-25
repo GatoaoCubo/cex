@@ -18,8 +18,8 @@ long_tails:
   - "How to write implementation plans that sub-agents can execute autonomously"
   - "What granularity should tasks have for LLM sub-agent execution"
 axioms:
-  - "SEMPRE escrever verificacao explicita para cada task"
-  - "NUNCA criar tasks maiores que 5 minutos de execucao"
+  - "ALWAYS write explicit verification for each task"
+  - "NEVER create tasks longer than 5 minutes of execution"
 linked_artifacts:
   primary: null
   related: [p01_kc_cex_function_become, p01_kc_cex_function_reason]
@@ -40,38 +40,38 @@ related:
 
 ## Summary
 
-Plan-driven development trata planos como prompts executaveis, nao documentos de design.
-Cada task de 2-5 minutos contem caminhos exatos, codigo completo, steps de verificacao e dependencias explicitas.
-Ciclo completo: brainstorm → write-plan → execute-plan → verify.
-Audiencia-alvo: "junior engineer sem contexto e sem julgamento" — se o plano nao for claro para este perfil, nao esta pronto.
-Dois modos de execucao: subagent-driven (paralelo, sem intervencao humana) e sequential (fallback com checkpoints humanos).
+Plan-driven development treats plans as executable prompts, not design documents.
+Each 2-5 minute task contains exact paths, complete code, verification steps and explicit dependencies.
+Complete cycle: brainstorm -> write-plan -> execute-plan -> verify.
+Target audience: "junior engineer with no context and no judgment" -- if the plan is not clear for this profile, it is not ready.
+Two execution modes: subagent-driven (parallel, no human intervention) and sequential (fallback with human checkpoints).
 
 ## Spec
 
-| Aspecto | Valor | Motivo |
-|---------|-------|--------|
-| Granularidade | 2-5 min por task | Tasks maiores causam desvio |
-| Campos por task | paths, codigo, verificacao, deps | Sub-agente nao infere contexto |
-| Audiencia | Junior sem contexto | Forca clareza maxima |
-| TDD | Obrigatorio | Testes primeiro, sempre |
-| Status contract | DONE, CONCERNS, BLOCKED, NEEDS_CTX | Protocolo pos-task padrao |
-| Modo paralelo | 1 sub-agente por task | Rapido para tasks independentes |
-| Modo sequential | Fallback sem sub-agentes | Checkpoints humanos por batch |
-| Plano output | plans/YYYY-MM-DD-topic.md | Rastreavel por data e topico |
-| Review pre-exec | Obrigatorio | Granularidade + deps + verificacoes |
+| Aspect | Value | Reason |
+|--------|-------|--------|
+| Granularity | 2-5 min per task | Larger tasks cause drift |
+| Fields per task | paths, code, verification, deps | Sub-agent does not infer context |
+| Audience | Junior with no context | Forces maximum clarity |
+| TDD | Mandatory | Tests first, always |
+| Status contract | DONE, CONCERNS, BLOCKED, NEEDS_CTX | Standard post-task protocol |
+| Parallel mode | 1 sub-agent per task | Fast for independent tasks |
+| Sequential mode | Fallback without sub-agents | Human checkpoints per batch |
+| Plan output | plans/YYYY-MM-DD-topic.md | Traceable by date and topic |
+| Pre-exec review | Mandatory | Granularity + deps + verifications |
 
-Principios de design: TDD obrigatorio, YAGNI ruthlessly, DRY no design, isolation para paralelismo. Plano deve ser revisado criticamente antes de executar — tasks com granularidade correta, dependencias claras, verificacoes testaveis, e caminhos de arquivo existentes ou com task de criacao.
+Design principles: mandatory TDD, ruthless YAGNI, DRY in design, isolation for parallelism. Plan must be critically reviewed before execution -- tasks with correct granularity, clear dependencies, testable verifications, and existing file paths or with a creation task.
 
 ## Patterns
 
 | Trigger | Action |
 |---------|--------|
-| Feature aprovada | Brainstorm → design doc → plano executavel |
-| Task envolve codigo | Escrever teste RED antes de implementar |
-| Tasks sem dependencia mutua | Despachar em paralelo via sub-agentes |
-| Plano pronto | Revisar: granularidade, deps, verificacoes |
-| Sub-agente reporta BLOCKED | Parar cadeia, resolver dependencia externa |
-| Contexto insuficiente | Sub-agente retorna NEEDS_CONTEXT (nao inventa) |
+| Feature approved | Brainstorm -> design doc -> executable plan |
+| Task involves code | Write RED test before implementing |
+| Tasks without mutual dependency | Dispatch in parallel via sub-agents |
+| Plan ready | Review: granularity, deps, verifications |
+| Sub-agent reports BLOCKED | Stop chain, resolve external dependency |
+| Insufficient context | Sub-agent returns NEEDS_CONTEXT (does not invent) |
 
 ## Code
 
@@ -109,15 +109,15 @@ for batch in plan.dependency_batches():
             log_concerns(r.task_id, r.concerns)
 ```
 
-Fluxo tipico: plan loader le arquivo `.md`, parser extrai tasks com metadata (files, deps, verification), dispatcher agrupa por dependencia em batches, executor despacha batch inteiro em paralelo. Resultado de cada task alimenta o contexto da proxima wave.
+Typical flow: plan loader reads `.md` file, parser extracts tasks with metadata (files, deps, verification), dispatcher groups by dependency into batches, executor dispatches entire batch in parallel. Each task result feeds the next wave context.
 
 ## Anti-Patterns
 
-- Plano como design doc sem steps executaveis (sub-agente nao sabe o que fazer)
-- Tasks de 30+ minutos (perda de foco, desvio do objetivo)
-- Verificacao ausente ("implemente X" sem "confirme via Y")
-- Pular brainstorming e ir direto ao plano (design nao validado)
-- Referenciar arquivos inexistentes sem task de criacao previa
+- Plan as design doc without executable steps (sub-agent does not know what to do)
+- Tasks of 30+ minutes (loss of focus, drift from objective)
+- Missing verification ("implement X" without "confirm via Y")
+- Skipping brainstorming and going straight to plan (unvalidated design)
+- Referencing nonexistent files without a prior creation task
 
 ## References
 

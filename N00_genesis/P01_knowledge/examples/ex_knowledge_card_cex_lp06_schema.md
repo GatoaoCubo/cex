@@ -11,15 +11,15 @@ author: builder_agent
 domain: cex_taxonomy
 quality: 9.1
 tags: [cex, lp06, schema, contracts, validation, grammar, blueprint]
-tldr: "P06 define 7 tipos de contrato que restringem output: de input_schema a grammar (constraint no decoder)"
-when_to_use: "Entender contratos de dados em sistemas LLM e como soft CONSTRAIN vira hard CONSTRAIN"
+tldr: "P06 defines 7 types of contract that constrain output: from input_schema to grammar (constraint on the decoder)"
+when_to_use: "Understand data contracts in LLM systems and how soft CONSTRAIN becomes hard CONSTRAIN"
 keywords: [schema, contracts, validation, grammar, blueprint, type-def]
 long_tails:
-  - "Como definir contratos de dados entre agentes LLM"
-  - "Qual a diferenca entre grammar e validator no CEX"
+  - "How to define data contracts between LLM agents"
+  - "What is the difference between grammar and validator in CEX"
 axioms:
-  - "SEMPRE ter input_schema antes de aceitar dados"
-  - "NUNCA confundir grammar (durante geracao) com validator (pos)"
+  - "ALWAYS have input_schema before accepting data"
+  - "NEVER confuse grammar (during generation) with validator (post)"
 linked_artifacts:
   primary: p01_kc_cex_lp05_output
   related: [p01_kc_cex_lp07_evals]
@@ -43,51 +43,51 @@ related:
 topic: P06 Schema | scope: data contracts | criticality: high
 types: 7 | function: CONSTRAIN + GOVERN | layer: spec + governance
 
-## Conceitos Chave
+## Key Concepts
 
-- P06 eh onde soft CONSTRAIN vira hard CONSTRAIN
-- input_schema define dados requeridos na entrada
-- validation_schema valida output pos-geracao (sistema)
-- type_def cria tipos customizados reutilizaveis
-- interface eh contrato bilateral entre agentes
-- artifact_blueprint eh meta-template (shape de artefato)
-- grammar restringe tokens DURANTE geracao (no decoder)
-- Unifica conceitos de BNF, EBNF, FSM e WHERE clauses
-- Nenhum framework popular tem esses 7 tipos juntos
-- Guidance usa BNF/EBNF para controle caractere a caractere
-- Outlines usa FSMs e CFGs para constraint formal
-- LMQL usa WHERE clauses declarativas pos-geracao
-- P06 eh consumido por P05: schemas definem o que formatar
-- P06 eh validado por P07: conformidade com schema testada
-- P06 eh informado por P01: schemas refletem o dominio
+- P06 is where soft CONSTRAIN becomes hard CONSTRAIN
+- input_schema defines required data at entry
+- validation_schema validates post-generation output (system)
+- type_def creates reusable custom types
+- interface is a bilateral contract between agents
+- artifact_blueprint is a meta-template (artifact shape)
+- grammar restricts tokens DURING generation (at the decoder)
+- Unifies concepts of BNF, EBNF, FSM and WHERE clauses
+- No popular framework has these 7 types together
+- Guidance uses BNF/EBNF for character-by-character control
+- Outlines uses FSMs and CFGs for formal constraint
+- LMQL uses declarative WHERE clauses post-generation
+- P06 is consumed by P05: schemas define what to format
+- P06 is validated by P07: schema conformance tested
+- P06 is informed by P01: schemas reflect the domain
 - input_schema max 3072 bytes (spec layer, core: true)
 - grammar max 3072 bytes (spec layer, core: false)
 
-## Fases
+## Phases
 
-1. Definir input_schema com campos requeridos
-2. Criar type_defs para tipos customizados do dominio
-3. Estabelecer interfaces entre agentes cooperantes
-4. Escrever artifact_blueprints para artefatos recorrentes
-5. Configurar validation_schema para pos-geracao
-6. Aplicar grammar quando precisao > 99% eh critica
+1. Define input_schema with required fields
+2. Create type_defs for domain custom types
+3. Establish interfaces between cooperating agents
+4. Write artifact_blueprints for recurring artifacts
+5. Configure validation_schema for post-generation
+6. Apply grammar when precision > 99% is critical
 
-## Regras de Ouro
+## Golden Rules
 
-- SEMPRE validar input antes de processar (input_schema)
-- NUNCA confundir response_format P05 com validation_schema
-- SEMPRE usar grammar para output deterministico critico
-- NUNCA auto-atribuir quality em artifact_blueprint
-- SEMPRE documentar boundary de cada tipo (evita overlap)
+- ALWAYS validate input before processing (input_schema)
+- NEVER confuse response_format P05 with validation_schema
+- ALWAYS use grammar for critical deterministic output
+- NEVER self-assign quality in artifact_blueprint
+- ALWAYS document the boundary of each type (prevents overlap)
 
-## Comparativo
+## Comparison
 
-| Mecanismo | Quando Atua | Quem Aplica | Precisao |
-|-----------|-------------|-------------|----------|
-| response_format P05 | Pre-geracao | LLM interpreta | ~85% |
-| validation_schema | Pos-geracao | Sistema valida | ~99% |
-| grammar | Durante geracao | Decoder constrains | ~100% |
-| validator | Pos-geracao | Pipeline pass/fail | ~99% |
+| Mechanism | When It Acts | Who Applies | Precision |
+|-----------|-------------|-------------|-----------|
+| response_format P05 | Pre-generation | LLM interprets | ~85% |
+| validation_schema | Post-generation | System validates | ~99% |
+| grammar | During generation | Decoder constrains | ~100% |
+| validator | Post-generation | Pipeline pass/fail | ~99% |
 
 ## Flow
 

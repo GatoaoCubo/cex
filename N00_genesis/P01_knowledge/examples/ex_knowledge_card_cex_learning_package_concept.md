@@ -11,15 +11,15 @@ author: builder_agent
 domain: cex_taxonomy
 quality: 9.1
 tags: [cex, learning-package, dimensions, lp, entity-model]
-tldr: "12 LPs sao dimensoes (nao categorias) que definem qualquer entidade LLM -- de prompt (1 LP) a agent_group (12 LPs)"
-when_to_use: "Entender as 12 dimensoes de uma entidade LLM e como LPs se cruzam com funcoes"
+tldr: "12 LPs are dimensions (not categories) that define any LLM entity -- from prompt (1 LP) to agent_group (12 LPs)"
+when_to_use: "Understand the 12 dimensions of an LLM entity and how LPs intersect with functions"
 keywords: [learning-package, dimensions, entity, orthogonality, completeness]
 long_tails:
-  - "Qual a diferenca entre Learning Package e categoria de artefato"
-  - "Como os 12 LPs se relacionam com as 8 funcoes LLM"
+  - "What is the difference between Learning Package and artifact category"
+  - "How the 12 LPs relate to the 8 LLM functions"
 axioms:
-  - "SEMPRE tratar LPs como dimensoes ortogonais, nao pastas"
-  - "NUNCA confundir LP (o que entidade TEM) com funcao (o que LLM FAZ)"
+  - "ALWAYS treat LPs as orthogonal dimensions, not folders"
+  - "NEVER confuse LP (what entity HAS) with function (what LLM DOES)"
 linked_artifacts:
   primary: p01_kc_cex_taxonomy
   related: [p01_kc_cex_llm_function_concept, p01_kc_cex_type_artifact]
@@ -40,36 +40,36 @@ related:
 
 ## Summary
 
-Learning Packages (LPs) sao as 12 dimensoes que definem qualquer entidade LLM. Nao sao categorias de artefatos -- sao PERGUNTAS. P01 pergunta "o que sabe?", P02 "quem e?", P03 "como fala?". Um prompt preenche 1 LP (P03). Um agente preenche 3-4. Um agent_group preenche todos os 12. A diferenca entre entidades eh dimensionalidade, nao natureza. LPs sao ortogonais as funcoes: LP = o que a entidade TEM, funcao = o que o LLM FAZ.
+Learning Packages (LPs) are the 12 dimensions that define any LLM entity. They are not artifact categories -- they are QUESTIONS. P01 asks "what does it know?", P02 "who is it?", P03 "how does it speak?". A prompt fills 1 LP (P03). An agent fills 3-4. An agent_group fills all 12. The difference between entities is dimensionality, not nature. LPs are orthogonal to functions: LP = what the entity HAS, function = what the LLM DOES.
 
 ## Spec
 
-| LP | Nome | Pergunta | Funcao Dominante |
-|----|------|----------|-----------------|
-| P01 | Knowledge | O que sabe? | INJECT |
-| P02 | Model | Quem e? | BECOME |
-| P03 | Prompt | Como fala? | REASON + CONSTRAIN |
-| P04 | Tools | O que usa? | CALL |
-| P05 | Output | O que entrega? | CONSTRAIN |
-| P06 | Schema | Que contratos? | CONSTRAIN + GOVERN |
-| P07 | Evals | Como medir? | GOVERN |
-| P08 | Architecture | Como escala? | BECOME + GOVERN |
-| P09 | Config | Como configura? | GOVERN |
-| P10 | Memory | O que lembra? | INJECT |
-| P11 | Feedback | Como melhora? | GOVERN |
-| P12 | Orchestration | Como coordena? | COLLABORATE |
+| LP | Name | Question | Dominant Function |
+|----|------|----------|-------------------|
+| P01 | Knowledge | What does it know? | INJECT |
+| P02 | Model | Who is it? | BECOME |
+| P03 | Prompt | How does it speak? | REASON + CONSTRAIN |
+| P04 | Tools | What does it use? | CALL |
+| P05 | Output | What does it deliver? | CONSTRAIN |
+| P06 | Schema | What contracts? | CONSTRAIN + GOVERN |
+| P07 | Evals | How to measure? | GOVERN |
+| P08 | Architecture | How does it scale? | BECOME + GOVERN |
+| P09 | Config | How to configure? | GOVERN |
+| P10 | Memory | What does it remember? | INJECT |
+| P11 | Feedback | How does it improve? | GOVERN |
+| P12 | Orchestration | How does it coordinate? | COLLABORATE |
 
-Ortogonalidade: cada tipo CEX tem 1 LP primario e 1 funcao primaria. LP classifica por dimensao da entidade. Funcao classifica por estagio do pipeline. As duas classificacoes sao independentes e complementares.
+Orthogonality: each CEX type has 1 primary LP and 1 primary function. LP classifies by entity dimension. Function classifies by pipeline stage. The two classifications are independent and complementary.
 
 ## Patterns
 
 | Trigger | Action |
 |---------|--------|
-| Entidade sem memoria entre sessoes | Adicionar LP P10 (Memory) |
-| Agente com output inconsistente | Verificar LP P05 (Output) e P06 (Schema) |
-| Sistema sem quality gates | Implementar LP P07 (Evals) |
-| Novo agente criado | Preencher P02 (Model) + P03 (Prompt) minimo |
-| Agent_group completo necessario | Garantir todos 12 LPs preenchidos |
+| Entity without memory between sessions | Add LP P10 (Memory) |
+| Agent with inconsistent output | Check LP P05 (Output) and P06 (Schema) |
+| System without quality gates | Implement LP P07 (Evals) |
+| New agent created | Fill P02 (Model) + P03 (Prompt) minimum |
+| Complete agent_group needed | Ensure all 12 LPs filled |
 
 ## Code
 
@@ -88,11 +88,11 @@ ENTITY_LPS = {
 
 ## Anti-Patterns
 
-- Tratar LPs como pastas de filesystem (sao dimensoes)
-- Confundir LP com funcao (TEM vs FAZ)
-- Criar entidade sem P02+P03 minimo (sem identidade)
-- Preencher LPs em ordem numerica (ordem eh semantica)
-- Ignorar ortogonalidade LP x funcao na classificacao
+- Treating LPs as filesystem folders (they are dimensions)
+- Confusing LP with function (HAS vs DOES)
+- Creating entity without P02+P03 minimum (no identity)
+- Filling LPs in numerical order (order is semantic)
+- Ignoring LP x function orthogonality in classification
 
 ## References
 

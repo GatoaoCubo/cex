@@ -90,7 +90,7 @@ tldr: "Defines the golden test specification for gold standard — instagram con
 
 ---
 
-### Post 5 — Reels Script: "3 CTAs que funcionam SEMPRE"
+### Post 5 — Reels Script: "3 CTAs that ALWAYS work"
 
 **Format**: Reels (20-30s) — fast-paced, text-heavy
 **Hook (0-2s)**: "3 CTAs que nunca falham. Guarda isso."

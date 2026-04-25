@@ -11,15 +11,15 @@ author: builder_agent
 domain: cex_taxonomy
 quality: 9.0
 tags: [cex, llm-function, govern, quality-gate, shokunin, evals, benchmark]
-tldr: "GOVERN avalia e controla qualidade via 22 tipos (28% do CEX) — a maior funcao, Shokunin do pipeline"
-when_to_use: "Entender como LLMs garantem qualidade e a contribuicao mais original do CEX (governanca como cidadao de 1a classe)"
+tldr: "GOVERN evaluates and controls quality via 22 types (28% of CEX) — the largest function, pipeline Shokunin"
+when_to_use: "Understand how LLMs ensure quality and CEX's most original contribution (governance as first-class citizen)"
 keywords: [govern, quality_gate, validator, benchmark, golden_test, evals, shokunin]
 long_tails:
-  - "Por que GOVERN eh a maior funcao do CEX com 22 tipos"
-  - "Qual a diferenca entre quality_gate e validator no CEX"
+  - "Why GOVERN is the largest CEX function with 22 types"
+  - "What is the difference between quality_gate and validator in CEX"
 axioms:
-  - "SEMPRE implementar GOVERN em todo output consumido por outro sistema"
-  - "NUNCA tratar governanca como step opcional no final do pipeline"
+  - "ALWAYS implement GOVERN on every output consumed by another system"
+  - "NEVER treat governance as an optional step at the end of the pipeline"
 linked_artifacts:
   primary: p01_kc_cex_function_constrain
   related: [p01_kc_cex_function_produce, p01_kc_cex_function_collaborate]
@@ -40,43 +40,43 @@ related:
 
 ## Summary
 
-GOVERN avalia, controla e melhora a qualidade dos outputs via quality gates, benchmarks, validators e lifecycle rules. Com 22 tipos (28% do CEX), eh a maior funcao — refletindo uma lacuna critica na industria onde nenhum framework trata governanca como cidadao de primeira classe. LangChain tem Callback (rudimentar), DSPy tem Metric (parcial), CrewAI nao tem nada. O CEX trata qualidade como funcao arquitetural tao importante quanto geracao. Analogia: Shokunin japones — o artesao que recusa entregar peca abaixo do padrao. REFLECT (auto-critica) eh sub-funcao de GOVERN aplicada internamente.
+GOVERN evaluates, controls, and improves output quality via quality gates, benchmarks, validators, and lifecycle rules. With 22 types (28% of CEX), it is the largest function — reflecting a critical industry gap where no framework treats governance as a first-class citizen. LangChain has Callback (rudimentary), DSPy has Metric (partial), CrewAI has nothing. CEX treats quality as an architectural function as important as generation. Analogy: Japanese Shokunin — the artisan who refuses to deliver work below standard. REFLECT (self-critique) is a sub-function of GOVERN applied internally.
 
 ## Spec
 
-| Sub-funcao | Tipos | LPs | Funcao |
-|------------|-------|-----|--------|
-| Avaliacao | 6 tipos | P07 | Medir qualidade objetivamente |
-| Validacao | 6 tipos | P05-P06 | Verificar conformidade formal |
-| Config | 8 tipos | P02+P09 | Controlar comportamento do sistema |
-| Feedback | 6 tipos | P04+P11 | Corrigir e melhorar iterativamente |
+| Sub-function | Types | LPs | Function |
+|--------------|-------|-----|----------|
+| Evaluation | 6 types | P07 | Measure quality objectively |
+| Validation | 6 types | P05-P06 | Verify formal conformance |
+| Config | 8 types | P02+P09 | Control system behavior |
+| Feedback | 6 types | P04+P11 | Correct and improve iteratively |
 
-Tipos de avaliacao: unit_eval, smoke_eval, e2e_eval, benchmark,
-golden_test, scoring_rubric. De teste unitario a rubrica multi-dimensional.
-quality_gate (score numerico holistic) vs validator (pass/fail binario).
-benchmark (comparativo entre versoes) vs eval (absoluto por criterio).
-confidence_threshold opera PRE-geracao; quality_gate opera POS-geracao.
-law (constitucional, inviolavel) vs runtime_rule (ajustavel em execucao).
-guardrail (proativo, previne) vs validator (reativo, detecta).
-bugloop (test->fail->fix->verify->commit) vs retry simples (repete).
-Reflexion (Shinn 2023) e Self-Refine (Madaan 2023) confirmam:
-auto-critica eh GOVERN aplicado ao proprio output, nao funcao separada.
-22 tipos formais vs LangChain Callback (1) vs DSPy Metric (2).
-Nenhum framework trata governanca com esta granularidade.
+Evaluation types: unit_eval, smoke_eval, e2e_eval, benchmark,
+golden_test, scoring_rubric. From unit test to multi-dimensional rubric.
+quality_gate (holistic numeric score) vs validator (binary pass/fail).
+benchmark (comparative between versions) vs eval (absolute by criterion).
+confidence_threshold operates PRE-generation; quality_gate operates POST-generation.
+law (constitutional, inviolable) vs runtime_rule (adjustable at execution).
+guardrail (proactive, prevents) vs validator (reactive, detects).
+bugloop (test->fail->fix->verify->commit) vs simple retry (repeats).
+Reflexion (Shinn 2023) and Self-Refine (Madaan 2023) confirm:
+self-critique is GOVERN applied to own output, not a separate function.
+22 formal types vs LangChain Callback (1) vs DSPy Metric (2).
+No framework treats governance with this granularity.
 
 ## Patterns
 
 | Trigger | Action |
 |---------|--------|
-| Output consumido por outro sistema | quality_gate com threshold |
-| Conformidade com regras especificas | validator (pass/fail) |
-| Comparacao entre versoes ou modelos | benchmark padronizado |
-| Detectar regressao de qualidade | golden_test como referencia |
-| Avaliacao reproduzivel e explicavel | scoring_rubric com criterios |
-| Teste rapido pos-mudanca | smoke_eval antes de suite completa |
-| Correcao automatica de defeitos | bugloop (test->fix->verify) |
-| Rollout gradual de funcionalidade | feature_flag sem deploy |
-| Principio inviolavel do sistema | law (constitucional) |
+| Output consumed by another system | quality_gate with threshold |
+| Conformance with specific rules | validator (pass/fail) |
+| Comparison between versions or models | standardized benchmark |
+| Detect quality regression | golden_test as reference |
+| Reproducible and explainable evaluation | scoring_rubric with criteria |
+| Quick test after change | smoke_eval before full suite |
+| Automatic defect correction | bugloop (test->fix->verify) |
+| Gradual feature rollout | feature_flag without deploy |
+| Inviolable system principle | law (constitutional) |
 
 ## Code
 
@@ -103,12 +103,12 @@ while not tests_pass(module) and attempts < 3:
 
 ## Anti-Patterns
 
-- Producao sem governanca (fabrica sem controle de qualidade)
-- quality_gate apenas no final (erro propaga por todo pipeline)
-- Auto-scoring de qualidade (quality: null ate validacao externa)
-- Confundir validator (formato) com quality_gate (qualidade)
-- golden_test desatualizado (referencia obsoleta gera falsos negativos)
-- Guardrail sem log (bloqueio silencioso impede debugging)
+- Production without governance (factory without quality control)
+- quality_gate only at the end (error propagates through entire pipeline)
+- Self-scoring quality (quality: null until external validation)
+- Confusing validator (format) with quality_gate (quality)
+- Outdated golden_test (obsolete reference generates false negatives)
+- Guardrail without log (silent blocking prevents debugging)
 
 ## References
 

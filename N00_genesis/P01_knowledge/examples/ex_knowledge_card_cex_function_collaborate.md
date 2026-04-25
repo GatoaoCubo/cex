@@ -11,15 +11,15 @@ author: builder_agent
 domain: cex_taxonomy
 quality: 9.1
 tags: [cex, llm-function, collaborate, handoff, signal, crew, multi-agent]
-tldr: "COLLABORATE coordena agentes via 3 tipos (crew/signal/handoff) — passagem de bastao entre entidades autonomas"
-when_to_use: "Entender como agentes coordenam entre si e a fronteira entre COLLABORATE (agente ativo) e CALL (ferramenta passiva)"
+tldr: "COLLABORATE coordinates agents via 3 types (crew/signal/handoff) — baton pass between autonomous entities"
+when_to_use: "Understand how agents coordinate with each other and the boundary between COLLABORATE (active agent) and CALL (passive tool)"
 keywords: [collaborate, crew, signal, handoff, multi_agent, coordination]
 long_tails:
-  - "Qual a diferenca entre COLLABORATE e CALL no CEX"
-  - "Quais os 3 tipos de coordenacao multi-agente no CEX"
+  - "What is the difference between COLLABORATE and CALL in CEX"
+  - "What are the 3 multi-agent coordination types in CEX"
 axioms:
-  - "SEMPRE usar handoff estruturado (contexto + criterios + formato) ao delegar"
-  - "NUNCA tratar coordenacao multi-agente como caso especial de CALL"
+  - "ALWAYS use structured handoff (context + criteria + format) when delegating"
+  - "NEVER treat multi-agent coordination as a special case of CALL"
 linked_artifacts:
   primary: p01_kc_cex_function_govern
   related: [p01_kc_cex_function_call, p01_kc_cex_function_become]
@@ -40,42 +40,42 @@ related:
 
 ## Summary
 
-COLLABORATE coordena comunicacao e trabalho entre agentes autonomos. Com 3 tipos (4% do CEX), eh a menor funcao mas arquiteturalmente critica — como na corrida de revezamento, a passagem do bastao determina o resultado. Fronteira fundamental com CALL: ferramentas (CALL) sao passivas, stateless, sem identidade; agentes (COLLABORATE) tem goals, persona, memoria e autonomia. AutoGen (Microsoft), CrewAI, MetaGPT e CAMEL confirmam: coordenacao multi-agente eh primeiro principio, nao extensao de function calling. COLLABORATE fecha o ciclo do pipeline CEX e conecta de volta a BECOME (novo ciclo).
+COLLABORATE coordinates communication and work between autonomous agents. With 3 types (4% of CEX), it is the smallest function but architecturally critical — like in a relay race, the baton pass determines the result. Fundamental boundary with CALL: tools (CALL) are passive, stateless, without identity; agents (COLLABORATE) have goals, persona, memory, and autonomy. AutoGen (Microsoft), CrewAI, MetaGPT, and CAMEL confirm: multi-agent coordination is a first principle, not an extension of function calling. COLLABORATE closes the CEX pipeline cycle and connects back to BECOME (new cycle).
 
 ## Spec
 
-| Tipo | LP | Funcao | Detalhe |
-|------|-----|--------|---------|
-| crew | P12 | Equipe de agentes | Objetivo+estado compartilhado, coordenacao |
-| signal | P12 | Mensagem inter-agente | Status, resultado, completude (async) |
-| handoff | P12 | Delegacao formal | Contexto+restricoes+criterios+formato |
+| Type | LP | Function | Detail |
+|------|-----|----------|--------|
+| crew | P12 | Agent team | Shared objective+state, coordination |
+| signal | P12 | Inter-agent message | Status, result, completion (async) |
+| handoff | P12 | Formal delegation | Context+constraints+criteria+format |
 
-crew: equipe com papeis distintos e protocolo de coordenacao.
-signal: notificacao assincrona (nao delega, apenas comunica).
-handoff: delegacao completa com contexto transferido.
-3 diferencas fundamentais entre CALL e COLLABORATE:
-Identidade — ferramentas nao tem goals; agentes tem goals e bias.
-Estado — ferramentas sao stateless; agentes sao stateful.
-Autonomia — ferramentas executam exatamente; agentes interpretam.
-ChatDev (Qian 2023): empresa inteira de software com agentes em
-papeis profissionais, comunicando via documentos estruturados.
-Xi et al. (2023): multi-agent systems como secao separada de tools.
-COLLABORATE fecha o pipeline CEX: apos GOVERN, o agente sinaliza
-completude ou delega proximo passo, conectando a BECOME (novo ciclo).
-AutoGen GroupChat, CrewAI Crew, MetaGPT e CAMEL confirmam:
-coordenacao multi-agente eh tipo dedicado, nao function calling.
+crew: team with distinct roles and coordination protocol.
+signal: asynchronous notification (does not delegate, only communicates).
+handoff: complete delegation with transferred context.
+3 fundamental differences between CALL and COLLABORATE:
+Identity — tools have no goals; agents have goals and bias.
+State — tools are stateless; agents are stateful.
+Autonomy — tools execute exactly; agents interpret.
+ChatDev (Qian 2023): entire software company with agents in
+professional roles, communicating via structured documents.
+Xi et al. (2023): multi-agent systems as a section separate from tools.
+COLLABORATE closes the CEX pipeline: after GOVERN, the agent signals
+completion or delegates next step, connecting to BECOME (new cycle).
+AutoGen GroupChat, CrewAI Crew, MetaGPT, and CAMEL confirm:
+multi-agent coordination is a dedicated type, not function calling.
 
 ## Patterns
 
 | Trigger | Action |
 |---------|--------|
-| Tarefa requer multiplos papeis | crew com objetivo compartilhado |
-| Comunicacao assincrona entre agentes | signal (status/resultado) |
-| Delegacao de tarefa para outro agente | handoff com contexto completo |
-| Resultado parcial para proximo agente | handoff encadeado (pipeline) |
-| Sinalizacao de conclusao para orquestrador | signal de completude |
-| Multiplos agentes trabalhando em paralelo | crew com coordenacao |
-| Ciclo completo finalizado | signal + handoff para BECOME |
+| Task requires multiple roles | crew with shared objective |
+| Asynchronous communication between agents | signal (status/result) |
+| Task delegation to another agent | handoff with complete context |
+| Partial result for next agent | chained handoff (pipeline) |
+| Completion signaling to orchestrator | completion signal |
+| Multiple agents working in parallel | crew with coordination |
+| Full cycle completed | signal + handoff to BECOME |
 
 ## Code
 
@@ -100,12 +100,12 @@ crew.run(protocol="parallel")  # cada agente com papel distinto
 
 ## Anti-Patterns
 
-- Tratar coordenacao como extensao de function calling (sao distintos)
-- Handoff sem contexto (agente receptor perde informacao critica)
-- Signal sem schema estruturado (parsing fragil)
-- Crew sem protocolo de coordenacao (agentes conflitam)
-- Delegar para agente quando ferramenta simples basta (overhead)
-- Coordenacao sincrona quando assincrona eh suficiente (bottleneck)
+- Treating coordination as extension of function calling (they are distinct)
+- Handoff without context (receiving agent loses critical information)
+- Signal without structured schema (fragile parsing)
+- Crew without coordination protocol (agents conflict)
+- Delegating to agent when simple tool suffices (overhead)
+- Synchronous coordination when asynchronous is sufficient (bottleneck)
 
 ## References
 

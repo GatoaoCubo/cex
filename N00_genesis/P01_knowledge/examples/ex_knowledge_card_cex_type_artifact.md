@@ -11,15 +11,15 @@ author: builder_agent
 domain: cex_taxonomy
 quality: 9.1
 tags: [cex, type, artifact, contract, boundary, schema, naming]
-tldr: "78 tipos CEX sao contratos atomicos: cada um tem funcao, LP, camada, tamanho maximo e naming padronizado"
-when_to_use: "Consultar o vocabulario completo de tipos CEX e seus contratos"
+tldr: "78 CEX types are atomic contracts: each has function, LP, layer, maximum size and standardized naming"
+when_to_use: "Consult the complete vocabulary of CEX types and their contracts"
 keywords: [type-artifact, contract, boundary, schema, naming-convention]
 long_tails:
-  - "Quantos tipos de artefato o CEX define e como sao organizados"
-  - "Como funciona o contrato de um tipo CEX"
+  - "How many artifact types does CEX define and how are they organized"
+  - "How does a CEX type contract work"
 axioms:
-  - "SEMPRE verificar se tipo CEX existe antes de criar nomenclatura"
-  - "NUNCA criar artefato sem boundary e schema explicitados"
+  - "ALWAYS check if CEX type exists before creating nomenclature"
+  - "NEVER create artifact without explicit boundary and schema"
 linked_artifacts:
   primary: p01_kc_cex_taxonomy
   related: [p01_kc_cex_llm_function_concept, p01_kc_cex_learning_package_concept]
@@ -40,11 +40,11 @@ related:
 
 ## Summary
 
-Tipos CEX sao as 78 unidades atomicas do vocabulario -- o menor elemento com semantica propria e identidade independente. Cada tipo eh um contrato: define funcao LLM primaria, LP primario, camada (content/spec/prompt/runtime/governance), tamanho maximo e naming convention prefixada pelo LP. Quando algo eh tipado como knowledge_card, sabe-se: fato atomico, funcao INJECT, LP P01, max 5KB, density >= 0.8.
+CEX types are the 78 atomic units of the vocabulary -- the smallest element with its own semantics and independent identity. Each type is a contract: defines primary LLM function, primary LP, layer (content/spec/prompt/runtime/governance), maximum size and naming convention prefixed by the LP. When something is typed as knowledge_card, it is known: atomic fact, function INJECT, LP P01, max 5KB, density >= 0.8.
 
 ## Spec
 
-| LP | Tipos Exemplo | Qtd | Camada |
+| LP | Example Types | Count | Layer |
 |----|---------------|-----|--------|
 | P01 Knowledge | knowledge_card, embedding, glossary | 7 | content |
 | P02 Model | agent, persona, mental_model, model_card | 6 | spec |
@@ -59,19 +59,19 @@ Tipos CEX sao as 78 unidades atomicas do vocabulario -- o menor elemento com sem
 | P11 Feedback | feedback, review, signal | 5 | governance |
 | P12 Orchestration | workflow, handoff, dispatch | 10 | runtime |
 
-Contrato por tipo: (1) funcao LLM primaria, (2) LP primario, (3) camada, (4) tamanho maximo, (5) naming `{lp_code}_{type}_{slug}.md`.
+Contract per type: (1) primary LLM function, (2) primary LP, (3) layer, (4) maximum size, (5) naming `{lp_code}_{type}_{slug}.md`.
 
-Cinco camadas: content (dados), spec (definicoes), prompt (instrucoes), runtime (execucao), governance (controle).
+Five layers: content (data), spec (definitions), prompt (instructions), runtime (execution), governance (control).
 
 ## Patterns
 
 | Trigger | Action |
 |---------|--------|
-| Novo artefato criado | Verificar tipo CEX e usar naming convention |
-| Artefato sem boundary claro | Definir camada + tamanho maximo |
-| Tipo nao encontrado nos 78 | Verificar se eh variante de tipo existente |
-| Migracao de framework | Mapear tipos proprietarios para tipos CEX |
-| Validacao de artefato | Checar contrato: funcao + LP + camada |
+| New artifact created | Check CEX type and use naming convention |
+| Artifact without clear boundary | Define layer + maximum size |
+| Type not found in the 78 | Check if it is a variant of existing type |
+| Framework migration | Map proprietary types to CEX types |
+| Artifact validation | Check contract: function + LP + layer |
 
 ## Code
 
@@ -93,11 +93,11 @@ TYPE_CONTRACT = {
 
 ## Anti-Patterns
 
-- Criar artefato sem tipo CEX definido (artefato orfao)
-- Inventar tipo novo sem verificar os 78 existentes
-- Ignorar naming convention (quebra indexacao e busca)
-- Tipo sem tamanho maximo (artefatos infinitos = ruido)
-- Confundir camada com LP (camada = natureza, LP = dimensao)
+- Creating artifact without defined CEX type (orphan artifact)
+- Inventing new type without checking the existing 78
+- Ignoring naming convention (breaks indexing and search)
+- Type without maximum size (infinite artifacts = noise)
+- Confusing layer with LP (layer = nature, LP = dimension)
 
 ## References
 

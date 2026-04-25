@@ -12,17 +12,17 @@ author: n04_knowledge
 domain: data_platform
 quality: 9.2
 tags: [supabase, cli, migrations, seed, diff, inspect, deploy, platform]
-tldr: "CLI completo: init/link/start para dev local, migration new/push para schema, db diff/inspect para auditoria, functions deploy para edge, e branching para staging"
-when_to_use: "Quando gerenciar Supabase via terminal (dev local, migrations, deploys)"
+tldr: "Full CLI: init/link/start for local dev, migration new/push for schema, db diff/inspect for auditing, functions deploy for edge, and branching for staging"
+when_to_use: "When managing Supabase via terminal (local dev, migrations, deploys)"
 keywords: [supabase-cli, migrations, db-diff, functions-deploy]
 long_tails:
-  - Como fazer migration no Supabase CLI passo a passo
-  - Diferenca entre supabase db push e supabase db reset
-  - Como comparar schema local vs remoto com supabase db diff
+  - How to do migrations in Supabase CLI step by step
+  - Difference between supabase db push and supabase db reset
+  - How to compare local vs remote schema with supabase db diff
 axioms:
-  - SEMPRE use migrations versionadas, nunca SQL direto em produção
-  - NUNCA faça db push em produção sem testar com db reset local antes
-  - SEMPRE commit migrations no git junto com o código
+  - ALWAYS use versioned migrations, never direct SQL in production
+  - NEVER do db push in production without testing with local db reset first
+  - ALWAYS commit migrations in git together with the code
 linked_artifacts:
   primary: null
   related: [p01_kc_supabase_database, p01_kc_supabase_edge_functions]
@@ -46,25 +46,25 @@ related:
 ## Quick Reference
 ```yaml
 topic: supabase_cli
-scope: Dev local, migrations, deploy, inspect, branching
+scope: Local dev, migrations, deploy, inspect, branching
 owner: n04_knowledge
 criticality: high
 install: npm install -g supabase
 version: supabase --version (1.x+)
 ```
 
-## Setup Inicial
+## Initial Setup
 ```bash
-supabase init                      # Cria supabase/ dir com config.toml
-supabase login                     # Auth com access token
-supabase link --project-ref abc123 # Conecta ao projeto cloud
-supabase start                     # Inicia stack local (Docker)
-supabase stop                      # Para stack local
+supabase init                      # Creates supabase/ dir with config.toml
+supabase login                     # Auth with access token
+supabase link --project-ref abc123 # Connects to cloud project
+supabase start                     # Starts local stack (Docker)
+supabase stop                      # Stops local stack
 ```
 
 ## Dev Local (Docker Stack)
 ```text
-supabase start → inicia todos os serviços locais:
+supabase start → starts all local services:
   Studio:      http://localhost:54323
   API (REST):  http://localhost:54321
   GraphQL:     http://localhost:54321/graphql/v1
@@ -73,25 +73,25 @@ supabase start → inicia todos os serviços locais:
   Edge:        http://localhost:54321/functions/v1/
 ```
 
-## Comandos Essenciais
-| Comando | Funcao | Frequência |
-|---------|--------|------------|
-| `supabase migration new nome` | Cria arquivo migration SQL vazio | Cada mudanca schema |
-| `supabase db push` | Aplica migrations pendentes no remote | Cada deploy |
-| `supabase db reset` | Reseta local: drop + migrations + seed | Dev/test |
-| `supabase db diff --schema public` | Compara local vs remote | Antes de deploy |
-| `supabase db lint` | Verifica schema issues | CI/CD |
-| `supabase inspect db` | Estatísticas: tamanho, locks, queries | Debug |
-| `supabase functions deploy` | Deploy edge functions | Cada mudanca |
-| `supabase secrets set K=V` | Define env vars para edge functions | Config |
-| `supabase gen types typescript` | Gera TypeScript types do schema | Após migration |
+## Essential Commands
+| Command | Function | Frequency |
+|---------|----------|-----------|
+| `supabase migration new name` | Creates empty SQL migration file | Each schema change |
+| `supabase db push` | Applies pending migrations to remote | Each deploy |
+| `supabase db reset` | Resets local: drop + migrations + seed | Dev/test |
+| `supabase db diff --schema public` | Compares local vs remote | Before deploy |
+| `supabase db lint` | Checks schema issues | CI/CD |
+| `supabase inspect db` | Statistics: size, locks, queries | Debug |
+| `supabase functions deploy` | Deploy edge functions | Each change |
+| `supabase secrets set K=V` | Sets env vars for edge functions | Config |
+| `supabase gen types typescript` | Generates TypeScript types from schema | After migration |
 
 ## Migration Workflow
 ```text
 1. supabase migration new add_products_table
-   → cria supabase/migrations/20260331120000_add_products_table.sql
+   → creates supabase/migrations/20260331120000_add_products_table.sql
 
-2. Editar o SQL:
+2. Edit the SQL:
    CREATE TABLE products (
      id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
      name TEXT NOT NULL,
@@ -99,45 +99,45 @@ supabase start → inicia todos os serviços locais:
    );
    ALTER TABLE products ENABLE ROW LEVEL SECURITY;
 
-3. supabase db reset     # testa local (drop + replay all migrations)
-4. supabase db diff      # confirma diff entre local e remote
-5. supabase db push      # aplica no remote
+3. supabase db reset     # tests local (drop + replay all migrations)
+4. supabase db diff      # confirms diff between local and remote
+5. supabase db push      # applies to remote
 6. git add supabase/migrations/ && git commit
 ```
 
 ## Seed Data
 ```bash
-# supabase/seed.sql — executado após migrations no db reset
+# supabase/seed.sql — executed after migrations on db reset
 INSERT INTO products (name, price) VALUES
   ('Widget A', 29.90),
   ('Widget B', 49.90);
 
-# Executar seed manualmente
-supabase db reset  # inclui seed automaticamente
+# Run seed manually
+supabase db reset  # includes seed automatically
 ```
 
 ## Inspect + Branching
-| Comando | Funcao |
-|---------|--------|
-| `inspect db table-sizes` | Tamanho tabelas |
+| Command | Function |
+|---------|----------|
+| `inspect db table-sizes` | Table sizes |
 | `inspect db cache-hit` | Cache hit ratio |
 | `inspect db long-running-queries` | Queries >5min |
-| `branches create X` | Branch isolado (Pro+) |
-| `branches switch X` | Mudar branch ativo |
+| `branches create X` | Isolated branch (Pro+) |
+| `branches switch X` | Switch active branch |
 
 ## Anti-Patterns
-| Anti-Pattern | Risco | Fix |
-|-------------|-------|-----|
-| SQL direto no Dashboard prod | Schema drift, migration perdida | Sempre `migration new` |
-| `db push` sem `db reset` antes | Migration falha em prod | Testar local primeiro |
-| Migrations fora do git | Equipe desincronizada | Commit junto com code |
-| Ignorar `db lint` | Schema issues em prod | Rodar no CI |
+| Anti-Pattern | Risk | Fix |
+|-------------|------|-----|
+| Direct SQL in prod Dashboard | Schema drift, lost migration | Always `migration new` |
+| `db push` without `db reset` first | Migration fails in prod | Test locally first |
+| Migrations outside git | Team desynchronized | Commit together with code |
+| Ignoring `db lint` | Schema issues in prod | Run in CI |
 
 ## Golden Rules
-- TESTE toda migration com `db reset` local antes de `db push`
-- GERE types com `gen types typescript` após cada migration
-- VERSIONE `supabase/` inteiro no git (config + migrations + seed)
-- USE `db diff` para detectar mudanças manuais no remote
+- TEST every migration with local `db reset` before `db push`
+- GENERATE types with `gen types typescript` after each migration
+- VERSION entire `supabase/` in git (config + migrations + seed)
+- USE `db diff` to detect manual changes on remote
 
 ## References
 - Docs: https://supabase.com/docs/guides/cli

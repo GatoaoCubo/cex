@@ -11,13 +11,13 @@ domain: brand-identity
 quality: 9.2
 updated: 2026-04-07
 tags: [brand, design-tokens, style-dictionary, css-variables, propagation, theming, prompt-injection, atomic-design]
-tldr: "Arquitetura de 3 camadas (primitivo > semantico > componente), pipeline brand-to-code, Style Dictionary, multi-plataforma e prompt injection"
+tldr: "3-layer architecture (primitive > semantic > component), brand-to-code pipeline, Style Dictionary, multi-platform, and prompt injection"
 when_to_use: "When implementing brand_config.yaml → design tokens → CSS variables pipeline, or configuring brand propagation across nuclei."
 keywords: [design-tokens, style-dictionary, brand-propagation, css-variables, atomic-design, prompt-injection]
 density_score: 0.93
 axioms:
-  - "ALWAYS propagate from brand_config.yaml outward — never hardcode brand values in components."
-  - "NEVER edit tokens directly — edit brand-guidelines.md first, then compile."
+  - "ALWAYS propagate from brand_config.yaml outward -- never hardcode brand values in components."
+  - "NEVER edit tokens directly -- edit brand-guidelines.md first, then compile."
   - "ALWAYS use semantic token layer between primitives and components."
 linked_artifacts:
   primary: p01_kc_brand_tokens_pipeline
@@ -286,7 +286,7 @@ PALETA VISUAL (para descricoes de imagem):
 - Cor principal: {{colors.primary}}
 - Estilo: elegante, acolhedor, harmonioso
 
-Responda SEMPRE no tom definido acima.
+ALWAYS respond in the tone defined above.
 {{/brand}}
 ```
 

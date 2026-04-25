@@ -11,20 +11,20 @@ author: shaka_research
 domain: component-library
 quality: 9.1
 tags: [knowledge_card, shadcn, radix, react, components, ui, N02]
-tldr: Patterns operacionais para shadcn/ui — catalogo de componentes, composicao com cn()/cva, Radix primitives, customizacao via CSS variables, e exemplos HTML prontos para hero/card/dialog/navbar.
-when_to_use: Carregar antes de qualquer tarefa de build UI com shadcn. Referencia para escolha de componente, customizacao de tema e composicao de layouts.
+tldr: Operational patterns for shadcn/ui -- component catalog, composition with cn()/cva, Radix primitives, customization via CSS variables, and ready-made HTML examples for hero/card/dialog/navbar.
+when_to_use: Load before any UI build task with shadcn. Reference for component selection, theme customization, and layout composition.
 keywords: [shadcn, radix-ui, tailwind, cn, cva, CSS variables, theming, dark-mode, copy-paste, npm, component-library]
 long_tails:
-  - Quando usar copy-paste vs npm install no shadcn
-  - Como customizar cores e border-radius no shadcn via CSS variables
-  - Como usar cva para criar variantes de componente
-  - Quais Radix primitives estao por baixo de cada componente shadcn
-  - Como compor hero, card, dialog e navbar com shadcn
+  - When to use copy-paste vs npm install in shadcn
+  - How to customize colors and border-radius in shadcn via CSS variables
+  - How to use cva to create component variants
+  - Which Radix primitives are under each shadcn component
+  - How to compose hero, card, dialog and navbar with shadcn
 axioms:
-  - SEMPRE preferir shadcn copy-paste para componentes que precisam de customizacao profunda
-  - SEMPRE usar cn() para merge de classes Tailwind (evita conflito de utilidades)
-  - NUNCA sobrescrever estilos shadcn com CSS inline — usar CSS variables ou cva variants
-  - SEMPRE definir tema em :root e .dark para suporte a dark mode automatico
+  - ALWAYS prefer shadcn copy-paste for components that need deep customization
+  - ALWAYS use cn() for Tailwind class merging (avoids utility conflicts)
+  - NEVER override shadcn styles with inline CSS -- use CSS variables or cva variants
+  - ALWAYS define theme in :root and .dark for automatic dark mode support
 linked_artifacts:
   primary: p01_kc_tailwind_patterns
   related: [p02_agent_marketing_nucleus]

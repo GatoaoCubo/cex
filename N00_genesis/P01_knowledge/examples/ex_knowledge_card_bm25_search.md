@@ -11,15 +11,15 @@ author: builder_agent
 domain: cex_taxonomy
 quality: 9.2
 tags: [bm25, keyword-search, retrieval, offline-search, knowledge-base]
-tldr: "BM25 busca keyword-based em CSVs/docs locais: ~10ms, offline, sem embeddings — ideal para dados estruturados"
-when_to_use: "Implementar busca rapida em knowledge bases locais sem dependencia de embeddings ou servidor"
+tldr: "BM25 keyword-based search in local CSVs/docs: ~10ms, offline, no embeddings — ideal for structured data"
+when_to_use: "Implement fast search in local knowledge bases without dependency on embeddings or server"
 keywords: [bm25, okapi-bm25, keyword-retrieval, text-search]
 long_tails:
-  - "Como implementar BM25 search em Python para knowledge base local"
-  - "Quando usar BM25 ao inves de embeddings para busca"
+  - "How to implement BM25 search in Python for local knowledge base"
+  - "When to use BM25 instead of embeddings for search"
 axioms:
-  - "SEMPRE cachear instancia BM25 fitted em producao"
-  - "NUNCA usar BM25 para busca semantica — nao entende sinonimos"
+  - "ALWAYS cache fitted BM25 instance in production"
+  - "NEVER use BM25 for semantic search — does not understand synonyms"
 linked_artifacts:
   primary: null
   related: [p01_kc_csv_as_knowledge]
@@ -40,28 +40,28 @@ related:
 
 ## TL;DR
 
-BM25 (Okapi Best Match 25) e um algoritmo de ranking baseado em frequencia de termos que busca em documentos locais sem embeddings, sem servidor, sem GPU. Processa 161 linhas em ~10ms e 1000 linhas em ~50ms usando apenas Python stdlib.
+BM25 (Okapi Best Match 25) is a ranking algorithm based on term frequency that searches local documents without embeddings, without server, without GPU. Processes 161 rows in ~10ms and 1000 rows in ~50ms using only Python stdlib.
 
-## Conceito Central
+## Core Concept
 
-BM25 calcula relevancia usando TF-IDF probabilistico: termos raros em um documento que sao raros no corpus recebem score alto. Dois parametros controlam o comportamento: k1 (saturacao de frequencia, tipicamente 1.2-2.0) e b (normalizacao por comprimento, tipicamente 0.75). O algoritmo tokeniza queries e documentos, constroi indice invertido e rankeia por score.
+BM25 calculates relevance using probabilistic TF-IDF: rare terms in a document that are rare in the corpus receive high scores. Two parameters control behavior: k1 (frequency saturation, typically 1.2-2.0) and b (length normalization, typically 0.75). The algorithm tokenizes queries and documents, builds an inverted index, and ranks by score.
 
-A forca do BM25 e simplicidade: nenhuma dependencia externa, funciona offline, resultado deterministico e interpretavel. A fraqueza e que opera exclusivamente em keywords — "carro" nao encontra "veiculo". Para buscas conceituais, embeddings sao necessarios. BM25 e ideal como primeiro estagio de retrieval ou como unico estagio para dados estruturados com keywords bem definidas.
+BM25's strength is simplicity: no external dependencies, works offline, deterministic and interpretable results. The weakness is that it operates exclusively on keywords — "car" does not find "vehicle". For conceptual searches, embeddings are needed. BM25 is ideal as a first retrieval stage or as the only stage for structured data with well-defined keywords.
 
-Em sistemas hibridos (BM25 + embeddings), BM25 serve como recall rapido e embeddings como reranker semantico. Isso combina velocidade com compreensao conceitual.
+In hybrid systems (BM25 + embeddings), BM25 serves as fast recall and embeddings as semantic reranker. This combines speed with conceptual understanding.
 
-## Arquitetura/Patterns
+## Architecture/Patterns
 
-| Aspecto | Valor | Nota |
-|---------|-------|------|
-| Complexidade | O(n) por query | n = documentos no corpus |
-| Latencia 161 docs | ~10ms | Sem cache, rebuild por query |
-| Latencia 1000 docs | ~50ms | Sem cache, rebuild por query |
-| Dependencias | Zero | Python stdlib apenas |
-| Parametro k1 | 1.2-2.0 | Saturacao de frequencia |
-| Parametro b | 0.75 | Normalizacao por tamanho |
+| Aspect | Value | Note |
+|--------|-------|------|
+| Complexity | O(n) per query | n = documents in corpus |
+| Latency 161 docs | ~10ms | No cache, rebuild per query |
+| Latency 1000 docs | ~50ms | No cache, rebuild per query |
+| Dependencies | Zero | Python stdlib only |
+| Parameter k1 | 1.2-2.0 | Frequency saturation |
+| Parameter b | 0.75 | Length normalization |
 
-Pattern de implementacao:
+Implementation pattern:
 
 ```python
 from rank_bm25 import BM25Okapi
@@ -73,45 +73,45 @@ top_n = sorted(range(len(scores)),
     key=lambda i: scores[i], reverse=True)[:5]
 ```
 
-Para producao: instanciar BM25 uma vez no startup e reutilizar. Rebuild apenas quando corpus muda. Separar search_cols (indexados) de output_cols (retornados) para precisao.
+For production: instantiate BM25 once at startup and reuse. Rebuild only when corpus changes. Separate search_cols (indexed) from output_cols (returned) for precision.
 
-Hibrido BM25 + embeddings (reranking pipeline):
+Hybrid BM25 + embeddings (reranking pipeline):
 ```
 Query -> BM25 recall (top 20, ~10ms)
   -> embedding rerank (top 5, ~200ms)
   -> LLM context injection
 ```
 
-BM25 como primeiro estagio garante velocidade. Embeddings como segundo estagio adicionam compreensao semantica. Custo total: ~210ms vs ~500ms com embeddings puro. Fallback: se embedding service cai, BM25 sozinho ainda funciona.
+BM25 as first stage ensures speed. Embeddings as second stage add semantic understanding. Total cost: ~210ms vs ~500ms with pure embeddings. Fallback: if embedding service goes down, BM25 alone still works.
 
-## Exemplos Praticos
+## Practical Examples
 
-| Cenario | search_cols | Resultado |
-|---------|------------|-----------|
-| Produto por tipo | keywords, category | Top 3 matches com score |
-| Guideline UX | rule_name, description | Regras aplicaveis |
-| Font pairing | style, mood, use_case | Pares tipograficos |
-| Skill discovery | name, description | Skills relevantes |
+| Scenario | search_cols | Result |
+|----------|------------|--------|
+| Product by type | keywords, category | Top 3 matches with score |
+| UX guideline | rule_name, description | Applicable rules |
+| Font pairing | style, mood, use_case | Typographic pairs |
+| Skill discovery | name, description | Relevant skills |
 
-Fluxo tipico:
-1. Carregar CSV com pandas
-2. Concatenar search_cols em campo unico
-3. Tokenizar e construir indice BM25
-4. Query retorna top-N com score > threshold
-5. Filtrar output_cols dos resultados
+Typical flow:
+1. Load CSV with pandas
+2. Concatenate search_cols into single field
+3. Tokenize and build BM25 index
+4. Query returns top-N with score > threshold
+5. Filter output_cols from results
 
-Threshold recomendado: descartar resultados com score < 1.0 (muito generico). Limitar a 3-5 resultados para contexto LLM.
+Recommended threshold: discard results with score < 1.0 (too generic). Limit to 3-5 results for LLM context.
 
 ## Anti-Patterns
 
-- Buscar em muitas colunas verbosas (degrada precisao)
-- Retornar todos os resultados sem threshold de score
-- Assumir que BM25 entende sinonimos ou conceitos
-- Rebuild do indice a cada query em producao (cachear!)
-- Um CSV gigante multi-dominio ao inves de CSVs focados
-- Usar BM25 como unica busca para perguntas abertas
+- Searching across too many verbose columns (degrades precision)
+- Returning all results without score threshold
+- Assuming BM25 understands synonyms or concepts
+- Rebuilding index per query in production (cache it!)
+- One giant multi-domain CSV instead of focused CSVs
+- Using BM25 as the only search for open-ended questions
 
-## Referencias
+## References
 
 - source: https://en.wikipedia.org/wiki/Okapi_BM25
 - related: p01_kc_csv_as_knowledge

@@ -3,7 +3,7 @@ id: p01_kc_cex_lp02_model
 kind: knowledge_card
 8f: F3_inject
 pillar: P01
-title: "CEX LP02 Model — Quem a LLM Eh (9 Tipos de Identidade)"
+title: "CEX LP02 Model — Who the LLM Is (9 Types of Identity)"
 version: 1.0.0
 created: 2026-03-25
 updated: 2026-03-25
@@ -11,15 +11,15 @@ author: builder_agent
 domain: cex_taxonomy
 quality: 9.2
 tags: [cex, lp02, model, become, agent, persona, identity, lens]
-tldr: "P02 Model define identidade do LLM via 9 tipos — de agent a lens — usando funcao BECOME antes de qualquer input"
-when_to_use: "Classificar artefatos de identidade ou entender como P02 configura quem o LLM eh"
+tldr: "P02 Model defines LLM identity via 9 types — from agent to lens — using the BECOME function before any input"
+when_to_use: "Classify identity artifacts or understand how P02 configures who the LLM is"
 keywords: [agent, mental-model, persona, boot-config, model-card, lens, agent-package]
 long_tails:
-  - "Quais tipos de identidade existem no CEX"
-  - "Diferenca entre agent e persona no CEX"
+  - "What types of identity exist in CEX"
+  - "Difference between agent and persona in CEX"
 axioms:
-  - "SEMPRE executar BECOME antes de INJECT"
-  - "NUNCA misturar identidade (P02) com conhecimento (P01)"
+  - "ALWAYS execute BECOME before INJECT"
+  - "NEVER mix identity (P02) with knowledge (P01)"
 linked_artifacts:
   primary: p01_kc_cex_function_become
   related: [p01_kc_cex_lp01_knowledge, p01_kc_cex_lp03_prompt]
@@ -40,56 +40,56 @@ related:
 
 ## Quick Reference
 
-topic: LP02 Model | scope: 9 tipos de artefato | criticality: high
-funcao_llm: BECOME | analogia: DNA + personalidade
+topic: LP02 Model | scope: 9 artifact types | criticality: high
+llm_function: BECOME | analogy: DNA + personality
 
-## Conceitos Chave
+## Key Concepts
 
-- P02 responde: "quem eh esta entidade?"
-- agent eh o tipo core (identidade completa + capabilities)
-- Funcao dominante BECOME: identidade configurada no boot
-- lens eh perspectiva cognitiva que colore toda percepcao
-- mental_model mapeia routing, decisoes e vieses produtivos
-- agent_package eh bundle portable de agente (LLM-agnostic)
-- axiom eh principio imutavel da identidade profunda
-- P02 define COMO P01 eh interpretado e P05 formatado
-- boot_config inicializa por provider (modelo, temp, MCPs)
-- model_card especifica LLM: pricing, context window, limites
-- router traduz task em agent_group (regra de roteamento)
-- fallback_chain sequencia modelos A -> B -> C com timeout
-- Ordem boot: system_prompt -> mental_model -> persona -> agent
-- P02 eh o LP mais diverso: 9 tipos para facetas de identidade
-- Mesma task + lens diferente = output radicalmente diferente
+- P02 answers: "who is this entity?"
+- agent is the core type (complete identity + capabilities)
+- Dominant function BECOME: identity configured at boot
+- lens is a cognitive perspective that colors all perception
+- mental_model maps routing, decisions and productive biases
+- agent_package is a portable agent bundle (LLM-agnostic)
+- axiom is an immutable principle of deep identity
+- P02 defines HOW P01 is interpreted and P05 is formatted
+- boot_config initializes per provider (model, temp, MCPs)
+- model_card specifies the LLM: pricing, context window, limits
+- router translates task to agent_group (routing rule)
+- fallback_chain sequences models A -> B -> C with timeout
+- Boot order: system_prompt -> mental_model -> persona -> agent
+- P02 is the most diverse LP: 9 types for identity facets
+- Same task + different lens = radically different output
 
-## Fases
+## Phases
 
-1. Definicao: escolher papel, dominio e perspectiva (lens)
-2. Composicao: montar agent com persona + mental_model + tools
-3. Boot: carregar boot_config + model_card (infra pre-requisito)
-4. Ativacao: BECOME executa system_prompt -> mental_model -> agent
-5. Operacao: identidade ativa constrange todos os outros LPs
+1. Definition: choose role, domain and perspective (lens)
+2. Composition: assemble agent with persona + mental_model + tools
+3. Boot: load boot_config + model_card (infra prerequisite)
+4. Activation: BECOME executes system_prompt -> mental_model -> agent
+5. Operation: active identity constrains all other LPs
 
-## Regras de Ouro
+## Golden Rules
 
-- SEMPRE definir identidade ANTES de injetar contexto
-- SEMPRE criar mental_model para agentes com 5+ tools
-- NUNCA definir identidade no user prompt (volatil)
-- NUNCA confundir quem SOU (P02) com o que SEI (P01)
-- SEMPRE usar agent_package para agentes que migram entre LLMs
+- ALWAYS define identity BEFORE injecting context
+- ALWAYS create mental_model for agents with 5+ tools
+- NEVER define identity in user prompt (volatile)
+- NEVER confuse who I AM (P02) with what I KNOW (P01)
+- ALWAYS use agent_package for agents that migrate between LLMs
 
-## Comparativo
+## Comparison
 
-| Tipo | Proposito | Tamanho | Core |
-|------|-----------|---------|------|
-| agent | Identidade completa + capabilities | <= 5120B | sim |
-| lens | Perspectiva cognitiva especializada | <= 2048B | nao |
-| mental_model | Mapa de routing e decisoes | <= 2048B | sim |
-| boot_config | Inicializacao por provider | <= 2048B | nao |
-| model_card | Spec do LLM (pricing, limites) | <= 2048B | nao |
-| router | Regra task -> agent_group | <= 1024B | sim |
-| fallback_chain | Sequencia fallback entre modelos | <= 512B | nao |
-| agent_package | Bundle portable de agente | <= 4096B | sim |
-| axiom | Principio fundamental imutavel | <= 3072B | sim |
+| Type | Purpose | Size | Core |
+|------|---------|------|------|
+| agent | Complete identity + capabilities | <= 5120B | yes |
+| lens | Specialized cognitive perspective | <= 2048B | no |
+| mental_model | Routing and decision map | <= 2048B | yes |
+| boot_config | Per-provider initialization | <= 2048B | no |
+| model_card | LLM spec (pricing, limits) | <= 2048B | no |
+| router | Task -> agent_group rule | <= 1024B | yes |
+| fallback_chain | Fallback sequence between models | <= 512B | no |
+| agent_package | Portable agent bundle | <= 4096B | yes |
+| axiom | Immutable fundamental principle | <= 3072B | yes |
 
 ## Flow
 
@@ -104,9 +104,9 @@ funcao_llm: BECOME | analogia: DNA + personalidade
           |
        [agent]  <-- BECOME completo
           |
-  [lens colore percepcao]
+  [lens colors perception]
           |
-  [P01/P03/P04 operam sob identidade]
+  [P01/P03/P04 operate under identity]
 ```
 
 ## References

@@ -11,15 +11,15 @@ author: builder_agent
 domain: plugin_distribution
 quality: 9.1
 tags: [claude-plugin, marketplace, distribution, plugin-json, skill-packaging]
-tldr: ".claude-plugin/ com marketplace.json (registry) e plugin.json (manifest) define distribuicao de skills via Claude Code Marketplace"
-when_to_use: "Empacotar skills para distribuicao publica ou instalar plugins de terceiros via Claude Code"
+tldr: ".claude-plugin/ with marketplace.json (registry) and plugin.json (manifest) defines skill distribution via Claude Code Marketplace"
+when_to_use: "Package skills for public distribution or install third-party plugins via Claude Code"
 keywords: [claude-plugin, marketplace-json, plugin-json, skill-distribution]
 long_tails:
-  - "Como publicar skills no Claude Code Marketplace"
-  - "Qual a estrutura de diretorio para distribuir plugins Claude"
+  - "How to publish skills on the Claude Code Marketplace"
+  - "What is the directory structure for distributing Claude plugins"
 axioms:
-  - "SEMPRE sincronizar version entre marketplace.json e plugin.json"
-  - "NUNCA omitir keywords no plugin.json (prejudica discoverability)"
+  - "ALWAYS sync version between marketplace.json and plugin.json"
+  - "NEVER omit keywords in plugin.json (hurts discoverability)"
 linked_artifacts:
   primary: null
   related: [p01_kc_cex_function_become]
@@ -40,53 +40,53 @@ related:
 
 ## Summary
 
-O diretorio `.claude-plugin/` na raiz de um repositorio define metadados para distribuicao de skills via Claude Code Marketplace.
-Dois arquivos JSON complementares: `marketplace.json` (registry entry para discovery) e `plugin.json` (manifest para instalacao).
-Um unico repo pode conter multiplos plugins via array `plugins[]`.
-Instalacao: `/plugin marketplace add {owner}/{repo}` seguido de `/plugin install {name}@{repo}`.
+The `.claude-plugin/` directory at the repository root defines metadata for skill distribution via Claude Code Marketplace.
+Two complementary JSON files: `marketplace.json` (registry entry for discovery) and `plugin.json` (manifest for installation).
+A single repo can contain multiple plugins via the `plugins[]` array.
+Installation: `/plugin marketplace add {owner}/{repo}` followed by `/plugin install {name}@{repo}`.
 
 ## Spec
 
-| Arquivo | Campo | Tipo | Descricao |
-|---------|-------|------|-----------|
-| marketplace.json | name | string | Slug do repo, kebab-case |
-| marketplace.json | owner.name | string | Nome do autor |
-| marketplace.json | owner.url | string | URL do autor (opcional) |
-| marketplace.json | plugins[] | array | Plugins neste repo |
-| marketplace.json | plugins[].name | string | Ref para install |
-| marketplace.json | plugins[].source | string | Path no repo ("./" = raiz) |
-| marketplace.json | plugins[].version | semver | Sync com plugin.json |
-| plugin.json | name | string | Bater com plugins[].name |
-| plugin.json | description | string | Aparece em `/plugin info` |
-| plugin.json | keywords | string[] | Busca no marketplace |
-| plugin.json | repository | url | URL GitHub do repo |
-| plugin.json | license | string | SPDX identifier (ex: MIT) |
+| File | Field | Type | Description |
+|------|-------|------|-------------|
+| marketplace.json | name | string | Repo slug, kebab-case |
+| marketplace.json | owner.name | string | Author name |
+| marketplace.json | owner.url | string | Author URL (optional) |
+| marketplace.json | plugins[] | array | Plugins in this repo |
+| marketplace.json | plugins[].name | string | Ref for install |
+| marketplace.json | plugins[].source | string | Path in repo ("./" = root) |
+| marketplace.json | plugins[].version | semver | Sync with plugin.json |
+| plugin.json | name | string | Must match plugins[].name |
+| plugin.json | description | string | Shown in `/plugin info` |
+| plugin.json | keywords | string[] | Marketplace search |
+| plugin.json | repository | url | GitHub repo URL |
+| plugin.json | license | string | SPDX identifier (e.g. MIT) |
 
-Versionamento semver sincronizado: patch (1.0.1→1.0.2) para correcoes de skills, minor (1.0→1.1) para skills novas, major (1.x→2.0) para breaking changes na estrutura. Ambos arquivos devem ter a mesma versao.
+Synchronized semver versioning: patch (1.0.1->1.0.2) for skill fixes, minor (1.0->1.1) for new skills, major (1.x->2.0) for breaking structural changes. Both files must have the same version.
 
 ## Patterns
 
 | Trigger | Action |
 |---------|--------|
-| Distribuir skills externamente | Criar .claude-plugin/ com ambos JSONs |
-| Repo com multiplos skill sets | Um entry por set no array plugins[] |
-| Atualizar versao do plugin | Incrementar em AMBOS arquivos simultaneamente |
-| Maximizar discoverability | Keywords descritivas e especificas no plugin.json |
-| Consumir plugin de terceiro | `/plugin marketplace add` + `/plugin install` |
-| Skills internas migrando para publico | Adicionar .claude-plugin/ sem mudar estrutura |
+| Distribute skills externally | Create .claude-plugin/ with both JSONs |
+| Repo with multiple skill sets | One entry per set in the plugins[] array |
+| Update plugin version | Increment in BOTH files simultaneously |
+| Maximize discoverability | Descriptive and specific keywords in plugin.json |
+| Consume third-party plugin | `/plugin marketplace add` + `/plugin install` |
+| Internal skills migrating to public | Add .claude-plugin/ without changing structure |
 
 ## Code
 
 <!-- lang: json | purpose: complete .claude-plugin/ structure -->
 ```bash
-# Estrutura completa de um plugin distribuivel
+# Complete structure of a distributable plugin
 repo-root/
   .claude-plugin/
     marketplace.json      # Registry entry (discovery)
     plugin.json           # Plugin manifest (install metadata)
   skills/
     my-skill/
-      SKILL.md            # Skill definition (frontmatter obrigatorio)
+      SKILL.md            # Skill definition (mandatory frontmatter)
       references/
         *.md
   README.md
@@ -107,19 +107,19 @@ repo-root/
 ```
 
 ```bash
-# Instalacao
+# Installation
 /plugin marketplace add author/my-skills
 /plugin install toolkit@my-skills
-# Formato: {plugin.json:name}@{marketplace.json:name}
+# Format: {plugin.json:name}@{marketplace.json:name}
 ```
 
 ## Anti-Patterns
 
-- Version mismatch entre marketplace.json e plugin.json (install quebra)
-- Omitir keywords (plugin invisivel no marketplace search)
-- plugin.json sem license (bloqueia adocao enterprise/corporativa)
-- Nome do plugin diferente entre os dois arquivos (referencia invalida)
-- Source path apontando para diretorio inexistente no repo
+- Version mismatch between marketplace.json and plugin.json (install breaks)
+- Omitting keywords (plugin invisible in marketplace search)
+- plugin.json without license (blocks enterprise/corporate adoption)
+- Plugin name different between the two files (invalid reference)
+- Source path pointing to nonexistent directory in the repo
 
 ## References
 

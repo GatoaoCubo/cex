@@ -18,8 +18,8 @@ long_tails:
   - "How to implement privacy controls in LLM agent memory"
   - "How to prevent sensitive data from being stored in agent memory"
 axioms:
-  - "SEMPRE enforce privacy at edge (hook layer), never at storage layer"
-  - "NUNCA filter after storage — prevention only, no post-hoc deletion"
+  - "ALWAYS enforce privacy at edge (hook layer), never at storage layer"
+  - "NEVER filter after storage — prevention only, no post-hoc deletion"
 linked_artifacts:
   primary: p01_kc_memory_session_compression
   related: [p01_kc_cex_function_become]

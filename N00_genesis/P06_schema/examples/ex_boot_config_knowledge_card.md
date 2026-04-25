@@ -4,15 +4,15 @@ kind: artifact_blueprint
 8f: F4_reason
 pillar: P06
 llm_function: CONSTRAIN
-title: "Blueprint: knowledge_card — Meta-Template para Producao de KCs"
+title: "Blueprint: knowledge_card — Meta-Template for KC Production"
 version: 2.0.0
 created: 2026-03-25
 updated: 2026-03-25
 author: orchestrator
 quality: 9.1
 tags: [blueprint, knowledge-card, meta-template, production-mold]
-tldr: "Meta-template que define COMO gerar KCs validos — frontmatter, body, quality gates, naming"
-when_to_use: "Antes de gerar qualquer KC — este blueprint eh o molde"
+tldr: "Meta-template that defines HOW to generate valid KCs — frontmatter, body, quality gates, naming"
+when_to_use: "Before generating any KC — this blueprint is the mold"
 synthesis: "Edison (builder) + Gemini (knowledge arch) + orchestrator (boundary/pragmatic)"
 related:
   - bld_examples_knowledge_card
@@ -57,17 +57,17 @@ title: "{{5-100 chars}}"        # BM25 primary signal
 version: "{{semver}}"
 created: "{{YYYY-MM-DD}}"
 updated: "{{YYYY-MM-DD}}"
-author: "{{quem PRODUZIU}}"     # quem escreveu, NAO quem roteou
+author: "{{who PRODUCED}}"       # who wrote it, NOT who routed it
 domain: "{{domain}}"
-quality: null                    # null ate validacao externa
-tags: [t1, t2, t3]              # lista, NUNCA string; cada tag = pesquisavel
-tldr: "{{1 frase, <160 chars}}" # search snippet — funciona sozinho
-when_to_use: "{{condicao}}"     # outra LLM le isto pra decidir se carrega
+quality: null                    # null until external validation
+tags: [t1, t2, t3]              # list, NEVER a string; each tag = searchable
+tldr: "{{1 sentence, <160 chars}}" # search snippet -- works standalone
+when_to_use: "{{condition}}"     # another LLM reads this to decide whether to load
 
-# EXTENDED (6) — melhora recall ~30%
+# EXTENDED (6) -- improves recall ~30%
 keywords: [kw1, kw2]
-long_tails: ["{{pergunta natural}}"]
-axioms: ["{{SEMPRE/NUNCA regra}}"]
+long_tails: ["{{natural question}}"]
+axioms: ["{{ALWAYS/NEVER rule}}"]
 linked_artifacts:
   primary: "{{id ou null}}"      # min 1 link ou explicitar null
   related: ["{{id}}"]
@@ -114,10 +114,10 @@ topic: X | scope: Y | criticality: high
 - Min 3 bullets, max 80 chars cada.
 
 ## Fases
-1. Fase com outcome esperado.
+1. Phase with expected outcome.
 
-## Regras de Ouro
-- SEMPRE/NUNCA imperativo.
+## Golden Rules
+- ALWAYS/NEVER imperative.
 
 ## Comparativo
 | Opcao A | Opcao B |
@@ -184,10 +184,10 @@ domain: llm_engineering
 quality: 8.9
 tags: [prompt-caching, cost-optimization, anthropic]
 tldr: "Cache reutiliza prefixos, cortando custo 90% e latencia 85% para contextos > 1024 tokens"
-when_to_use: "Sistema LLM repete contexto longo entre chamadas"
+when_to_use: "LLM system repeats long context between calls"
 keywords: [prompt-caching, cache-control]
-long_tails: ["Como configurar prompt caching na Anthropic"]
-axioms: ["SEMPRE coloque conteudo estatico ANTES do dinamico"]
+long_tails: ["How to configure prompt caching on Anthropic"]
+axioms: ["ALWAYS place static content BEFORE dynamic content"]
 linked_artifacts:
   primary: p02_agent_llm_specialist
   related: [p01_kc_rag_fundamentals]

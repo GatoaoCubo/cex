@@ -11,15 +11,15 @@ author: builder_agent
 domain: cex_taxonomy
 quality: 9.1
 tags: [cex, lp11, feedback, quality-gate, bugloop, guardrail, optimizer]
-tldr: "P11 define 5 tipos de melhoria continua: quality_gate, bugloop, lifecycle_rule, guardrail, optimizer"
-when_to_use: "Entender como sistemas LLM implementam auto-correcao e melhoria continua"
+tldr: "P11 defines 5 types of continuous improvement: quality_gate, bugloop, lifecycle_rule, guardrail, optimizer"
+when_to_use: "Understand how LLM systems implement self-correction and continuous improvement"
 keywords: [feedback, quality-gate, bugloop, guardrail, optimizer, lifecycle-rule]
 long_tails:
-  - "Como implementar self-healing em sistemas multi-agente LLM"
-  - "Qual a diferenca entre guardrail P11 e permission P09 no CEX"
+  - "How to implement self-healing in multi-agent LLM systems"
+  - "What is the difference between guardrail P11 and permission P09 in CEX"
 axioms:
-  - "SEMPRE fechar o loop: detectar, corrigir, verificar"
-  - "NUNCA confundir guardrail (safety) com permission (acesso)"
+  - "ALWAYS close the loop: detect, correct, verify"
+  - "NEVER confuse guardrail (safety) with permission (access)"
 linked_artifacts:
   primary: p01_kc_cex_lp10_memory
   related: [p01_kc_cex_lp07_evals]
@@ -43,53 +43,53 @@ related:
 topic: P11 Feedback | scope: continuous improvement | criticality: high
 types: 5 | function: GOVERN + CONSTRAIN | layer: governance
 
-## Conceitos Chave
+## Key Concepts
 
-- P11 eh a revisao do chefe: detecta, corrige, melhora
-- quality_gate eh barreira com score numerico (pass/fail)
-- bugloop executa ciclo automatico detect > fix > verify
-- lifecycle_rule governa freshness, archive e promote
-- guardrail eh boundary de seguranca (safety, nao acesso)
-- optimizer mapeia metric > action para melhoria continua
-- P11 fecha o loop: GOVERN detecta, P11 corrige
-- Reflexion, Self-Refine e DSPy sao expressoes de P11
-- SWE-Agent e Voyager demonstram self-healing automatico
-- quality_gate NAO eh validator (P06) nem rubric (P07)
-- bugloop NAO eh unit_eval (P07, teste manual)
-- guardrail NAO eh permission (P09, controle de acesso)
-- lifecycle_rule NAO eh hook (P04, codigo executavel)
-- optimizer NAO eh benchmark (P07, medicao passiva)
-- P11 melhora P03: feedback otimiza prompts iterativamente
-- P11 atualiza P01: feedback gera novo conhecimento
-- P11 utiliza P07: metricas de avaliacao sao input
-- Funcao dominante: GOVERN (melhoria) + CONSTRAIN (safety)
+- P11 is the boss's review: detects, corrects, improves
+- quality_gate is a barrier with numeric score (pass/fail)
+- bugloop executes automatic cycle detect > fix > verify
+- lifecycle_rule governs freshness, archive and promote
+- guardrail is a security boundary (safety, not access)
+- optimizer maps metric > action for continuous improvement
+- P11 closes the loop: GOVERN detects, P11 corrects
+- Reflexion, Self-Refine and DSPy are expressions of P11
+- SWE-Agent and Voyager demonstrate automatic self-healing
+- quality_gate is NOT validator (P06) nor rubric (P07)
+- bugloop is NOT unit_eval (P07, manual test)
+- guardrail is NOT permission (P09, access control)
+- lifecycle_rule is NOT hook (P04, executable code)
+- optimizer is NOT benchmark (P07, passive measurement)
+- P11 improves P03: feedback optimizes prompts iteratively
+- P11 updates P01: feedback generates new knowledge
+- P11 uses P07: evaluation metrics are input
+- Dominant function: GOVERN (improvement) + CONSTRAIN (safety)
 
-## Fases
+## Phases
 
-1. Definir quality_gates com thresholds por artefato
-2. Implementar bugloops para modulos criticos (detect>fix)
-3. Criar lifecycle_rules (freshness 30d, archive 90d)
-4. Estabelecer guardrails de seguranca (safety boundaries)
-5. Configurar optimizers com metricas e acoes automaticas
-6. Conectar P07 evals como input para feedback loop
+1. Define quality_gates with thresholds per artifact
+2. Implement bugloops for critical modules (detect>fix)
+3. Create lifecycle_rules (freshness 30d, archive 90d)
+4. Establish security guardrails (safety boundaries)
+5. Configure optimizers with metrics and automatic actions
+6. Connect P07 evals as input for feedback loop
 
-## Regras de Ouro
+## Golden Rules
 
-- SEMPRE ter quality_gate antes de promover ao pool
-- NUNCA confundir guardrail com permission (safety vs acesso)
-- SEMPRE verificar apos corrigir (bugloop completo)
-- NUNCA auto-atribuir quality score (validator externo)
-- SEMPRE documentar WHY de cada guardrail (contexto)
+- ALWAYS have quality_gate before promoting to pool
+- NEVER confuse guardrail with permission (safety vs access)
+- ALWAYS verify after correcting (complete bugloop)
+- NEVER self-assign quality score (external validator)
+- ALWAYS document WHY for each guardrail (context)
 
-## Comparativo
+## Comparison
 
-| Tipo | Natureza | Trigger | Exemplo |
-|------|----------|---------|---------|
-| quality_gate | Barreira | Score < threshold | KC score >= 8.0 para pool |
-| bugloop | Ciclo | Erro detectado | detect > fix > verify loop |
-| lifecycle_rule | Regra | Tempo/estado | Archive KCs > 90 dias |
-| guardrail | Restricao | Acao perigosa | Bloquear delete em producao |
-| optimizer | Processo | Metrica baixa | Prompt rewrite se score < 7 |
+| Type | Nature | Trigger | Example |
+|------|--------|---------|---------|
+| quality_gate | Barrier | Score < threshold | KC score >= 8.0 for pool |
+| bugloop | Cycle | Error detected | detect > fix > verify loop |
+| lifecycle_rule | Rule | Time/state | Archive KCs > 90 days |
+| guardrail | Restriction | Dangerous action | Block delete in production |
+| optimizer | Process | Low metric | Prompt rewrite if score < 7 |
 
 ## Flow
 
@@ -104,18 +104,18 @@ types: 5 | function: GOVERN + CONSTRAIN | layer: governance
  [GOVERN]  [GOVERN] [CONSTRAIN]
     |         |         |
     v         v         v
- barreira   ciclo    safety
+ barrier   cycle    safety
     |         |         |
     +----+----+---------+
          |
          v
-  [P07 evals como input]
+  [P07 evals as input]
          |
          v
-  [P01 knowledge atualizado]
+  [P01 knowledge updated]
          |
          v
-  [P03 prompts otimizados]
+  [P03 prompts optimized]
 ```
 
 ## References

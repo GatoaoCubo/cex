@@ -12,17 +12,17 @@ author: n04_knowledge
 domain: data_platform
 quality: 9.1
 tags: [supabase, storage, s3, buckets, cdn, imgproxy, tus, platform]
-tldr: "Storage S3-compatible com buckets public/private, RLS policies, image transforms via imgproxy, resumable uploads (TUS), e CDN Cloudflare no Pro+"
-when_to_use: "Quando configurar upload/download de arquivos e media em projetos Supabase"
+tldr: "S3-compatible storage with public/private buckets, RLS policies, image transforms via imgproxy, resumable uploads (TUS), and Cloudflare CDN on Pro+"
+when_to_use: "When configuring file and media upload/download in Supabase projects"
 keywords: [supabase-storage, buckets, imgproxy, tus-upload, cdn]
 long_tails:
-  - Como criar bucket privado com RLS no Supabase Storage
-  - Resize de imagens on-the-fly com Supabase transforms
-  - Upload resumable de arquivos grandes no Supabase
+  - How to create a private bucket with RLS in Supabase Storage
+  - On-the-fly image resizing with Supabase transforms
+  - Resumable upload of large files in Supabase
 axioms:
-  - SEMPRE defina max_file_size e allowed_mime_types por bucket
-  - NUNCA crie bucket público para dados sensíveis
-  - SEMPRE use resumable upload (TUS) para arquivos >6MB
+  - ALWAYS define max_file_size and allowed_mime_types per bucket
+  - NEVER create a public bucket for sensitive data
+  - ALWAYS use resumable upload (TUS) for files >6MB
 linked_artifacts:
   primary: null
   related: [p01_kc_supabase_auth, p01_kc_supabase_database]
@@ -49,23 +49,23 @@ topic: supabase_storage
 scope: S3-compatible storage, RLS policies, image transforms, CDN
 owner: n04_knowledge
 criticality: high
-service: storage-api (porta 5000)
+service: storage-api (port 5000)
 ```
 
-## Limites por Tier
-| Metrica | Free | Pro | Team |
-|---------|------|-----|------|
+## Limits per Tier
+| Metric | Free | Pro | Team |
+|--------|------|-----|------|
 | Storage total | 1 GB | 100 GB (USD 0.021/GB extra) | 100 GB+ |
 | Upload max file | 50 MB | 5 GB | 5 GB |
-| Image transforms | Incluso | Incluso | Incluso |
-| CDN (Cloudflare) | Não | Sim | Sim |
+| Image transforms | Included | Included | Included |
+| CDN (Cloudflare) | No | Yes | Yes |
 | Bandwidth | 2 GB | 250 GB | 250 GB+ |
 
 ## Bucket Types
-| Tipo | Acesso | Uso | URL Pattern |
+| Type | Access | Use | URL Pattern |
 |------|--------|-----|-------------|
-| Public | Qualquer um (sem auth) | Imagens de produto, assets, avatares | `/storage/v1/object/public/bucket/file` |
-| Private | Apenas com auth + RLS policy | Documentos, uploads de usuario | `/storage/v1/object/authenticated/bucket/file` |
+| Public | Anyone (no auth) | Product images, assets, avatars | `/storage/v1/object/public/bucket/file` |
+| Private | Auth + RLS policy only | Documents, user uploads | `/storage/v1/object/authenticated/bucket/file` |
 
 ## Upload Patterns
 ```javascript
@@ -102,21 +102,21 @@ const { data, error } = await supabase.storage
 
 ## Storage RLS Policies
 ```sql
--- Owner upload: user pode fazer upload na sua pasta
+-- Owner upload: user can upload to their folder
 CREATE POLICY "user_upload" ON storage.objects
   FOR INSERT WITH CHECK (
     bucket_id = 'avatars' AND
     (storage.foldername(name))[1] = auth.uid()::text
   );
 
--- Owner read: user pode ler seus arquivos
+-- Owner read: user can read their files
 CREATE POLICY "user_read" ON storage.objects
   FOR SELECT USING (
     bucket_id = 'avatars' AND
     (storage.foldername(name))[1] = auth.uid()::text
   );
 
--- Public read: qualquer um le (bucket publico)
+-- Public read: anyone can read (public bucket)
 CREATE POLICY "public_read" ON storage.objects
   FOR SELECT USING (bucket_id = 'public-assets');
 ```
@@ -124,30 +124,30 @@ CREATE POLICY "public_read" ON storage.objects
 ## Folder Convention
 ```text
 bucket/
-  {user_id}/          ← RLS por owner
+  {user_id}/          ← RLS by owner
     avatars/
     documents/
-  {org_id}/           ← RLS por org (multi-tenant)
+  {org_id}/           ← RLS by org (multi-tenant)
     media/
     exports/
-  public/             ← sem RLS, CDN cached
+  public/             ← no RLS, CDN cached
     logos/
     assets/
 ```
 
 ## Anti-Patterns
-| Anti-Pattern | Risco | Fix |
-|-------------|-------|-----|
-| Bucket público para uploads de user | Arquivos acessiveis sem auth | Bucket private + RLS |
-| Upload sem mime type check | User sobe .exe como .jpg | `allowed_mime_types: ['image/*']` |
-| Sem max_file_size | User sobe arquivo de 5GB no free | Definir limite por bucket |
-| Imagens sem transform | Serve original 4K pro mobile | Usar width/quality params |
+| Anti-Pattern | Risk | Fix |
+|-------------|------|-----|
+| Public bucket for user uploads | Files accessible without auth | Private bucket + RLS |
+| Upload without mime type check | User uploads .exe as .jpg | `allowed_mime_types: ['image/*']` |
+| No max_file_size | User uploads 5GB file on free | Set limit per bucket |
+| Images without transform | Serves original 4K to mobile | Use width/quality params |
 
 ## Golden Rules
-- ORGANIZE arquivos por `{user_id}/` ou `{org_id}/` para RLS simples
-- CONFIGURE transforms para servir webp em vez de PNG/JPEG original
-- USE CDN (Pro+) para assets estáticos com alto tráfego
-- LIMITE mime types por bucket — nunca aceitar `*/*`
+- ORGANIZE files by `{user_id}/` or `{org_id}/` for simple RLS
+- CONFIGURE transforms to serve webp instead of original PNG/JPEG
+- USE CDN (Pro+) for high-traffic static assets
+- LIMIT mime types per bucket — never accept `*/*`
 
 ## References
 - Docs: https://supabase.com/docs/guides/storage

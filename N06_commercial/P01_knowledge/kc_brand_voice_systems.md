@@ -11,7 +11,7 @@ domain: brand-identity
 quality: 9.2
 updated: 2026-04-07
 tags: [brand, voice, tone, brand-voice, nngroup, content-design, governance, messaging]
-tldr: "Frameworks universais para sistemas de voz de marca: NNGroup 4D model, distincao voice/tone, matriz de canais, atributos, Do/Don't, governanca e scoring."
+tldr: "Universal frameworks for brand voice systems: NNGroup 4D model, voice/tone distinction, channel matrix, attributes, Do/Don't, governance, and scoring."
 when_to_use: "When calibrating brand voice dimensions, building tone matrix per channel, or writing voice governance guidelines."
 keywords: [brand-voice, tone-matrix, nngroup-4d, voice-governance, channel-calibration]
 density_score: 0.94
@@ -324,13 +324,13 @@ Voce escreve em nome de [MARCA]. Nossa voz e:
 - [ATRIBUTO 2]: [descricao + exemplo]
 - [ATRIBUTO 3]: [descricao + exemplo]
 
-SEMPRE:
-- [regra especifica]
-- [regra especifica]
+ALWAYS:
+- [specific rule]
+- [specific rule]
 
-NUNCA:
-- [anti-padrao especifico]
-- [anti-padrao especifico]
+NEVER:
+- [specific anti-pattern]
+- [specific anti-pattern]
 
 Tom por canal:
 - Email: [descricao]

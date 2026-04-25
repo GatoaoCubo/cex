@@ -11,16 +11,16 @@ author: builder_agent
 domain: debugging
 quality: 9.1
 tags: [debugging, root-cause, systematic-process, defense-in-depth, condition-based-waiting]
-tldr: "Debugging em 4 fases (root cause, pattern, hypothesis, implementation) com lei de ferro: nenhum fix sem investigacao primeiro"
-when_to_use: "Bug encontrado — antes de qualquer tentativa de fix, seguir este processo sistematico"
+tldr: "4-phase debugging (root cause, pattern, hypothesis, implementation) with iron law: no fix without investigation first"
+when_to_use: "Bug found — before any fix attempt, follow this systematic process"
 keywords: [systematic-debugging, root-cause-analysis, defense-in-depth, flaky-tests, hypothesis-testing]
 long_tails:
-  - "Como debugar sistematicamente sem thrashing ou tentativa e erro"
-  - "Quando parar de tentar fixes e questionar a arquitetura"
+  - "How to debug systematically without thrashing or trial and error"
+  - "When to stop trying fixes and question the architecture"
 axioms:
-  - "NUNCA fixar sem root cause investigation primeiro"
-  - "SEMPRE testar UMA hipotese por vez com mudanca minima"
-  - "NUNCA acumular multiplos fixes simultaneamente"
+  - "NEVER fix without root cause investigation first"
+  - "ALWAYS test ONE hypothesis at a time with minimal change"
+  - "NEVER accumulate multiple fixes simultaneously"
 linked_artifacts:
   primary: null
   related: [p01_kc_cex_function_reason]
@@ -39,33 +39,33 @@ related:
 
 ## Summary
 
-Metodologia de debugging em 4 fases que eleva first-time fix rate de 40% (random) para 95% (sistematico).
-Tempo medio cai de 2-3h (thrashing) para 15-30min (processo estruturado).
-Lei de ferro: nenhum fix sem root cause investigation primeiro.
-4 tecnicas de suporte: root cause tracing, defense-in-depth (4 camadas de validacao), condition-based waiting (elimina flaky tests — 60% para 100% pass rate) e test pressure levels.
-Regra critica: 3+ fixes falhados = problema arquitetural, nao bug isolado.
+4-phase debugging methodology that raises first-time fix rate from 40% (random) to 95% (systematic).
+Average time drops from 2-3h (thrashing) to 15-30min (structured process).
+Iron law: no fix without root cause investigation first.
+4 support techniques: root cause tracing, defense-in-depth (4 validation layers), condition-based waiting (eliminates flaky tests -- 60% to 100% pass rate) and test pressure levels.
+Critical rule: 3+ failed fixes = architectural problem, not isolated bug.
 
 ## Spec
 
-| Fase | Atividade | Criterio de Saida |
-|------|-----------|-------------------|
-| 1. Root Cause | Ler erros, reproduzir, checar mudancas, instrumentar | Entender O QUE e POR QUE |
-| 2. Pattern | Encontrar exemplos funcionando, comparar linha a linha | Identificar diferencas |
-| 3. Hypothesis | Formular UMA teoria, testar com mudanca minima | Confirmado ou nova hipotese |
-| 4. Implementation | Criar teste falhando, fixar causa raiz, verificar | Bug resolvido, testes passam |
+| Phase | Activity | Exit Criteria |
+|-------|----------|---------------|
+| 1. Root Cause | Read errors, reproduce, check changes, instrument | Understand WHAT and WHY |
+| 2. Pattern | Find working examples, compare line by line | Identify differences |
+| 3. Hypothesis | Formulate ONE theory, test with minimal change | Confirmed or new hypothesis |
+| 4. Implementation | Create failing test, fix root cause, verify | Bug resolved, tests pass |
 
-| Metrica | Random | Sistematico |
-|---------|--------|-------------|
-| Tempo medio | 2-3h | 15-30min |
+| Metric | Random | Systematic |
+|--------|--------|------------|
+| Average time | 2-3h | 15-30min |
 | First-time fix rate | 40% | 95% |
-| Fix threshold | — | >= 3 falhas = problema arquitetural |
+| Fix threshold | -- | >= 3 failures = architectural problem |
 
-| Tecnica Suporte | Quando Usar | Resultado |
-|-----------------|-------------|-----------|
-| Root Cause Tracing | Erro fundo no call stack | Fix na fonte, nao no sintoma |
-| Defense-in-Depth | Apos root cause encontrado | Bug torna-se estruturalmente impossivel |
-| Condition-Based Waiting | Testes com setTimeout/sleep | 15 flaky tests fixados, 40% mais rapido |
-| Test Pressure Levels | Treinar processo sob pressao | Processo sistematico vence thrashing |
+| Support Technique | When to Use | Result |
+|-------------------|-------------|--------|
+| Root Cause Tracing | Error deep in call stack | Fix at source, not symptom |
+| Defense-in-Depth | After root cause found | Bug becomes structurally impossible |
+| Condition-Based Waiting | Tests with setTimeout/sleep | 15 flaky tests fixed, 40% faster |
+| Test Pressure Levels | Train process under pressure | Systematic process beats thrashing |
 
 Defense-in-depth: Entry Point (validar input) → Business Logic (validar semantica) → Environment Guards (NODE_ENV) → Debug Instrumentation (logging forense).
 
@@ -73,20 +73,20 @@ Defense-in-depth: Entry Point (validar input) → Business Logic (validar semant
 
 | Trigger | Action |
 |---------|--------|
-| Bug encontrado | Phase 1: ler errors completos, reproduzir, git diff |
-| Erro em sistema multi-componente | Instrumentar cada boundary: log entrada e saida |
-| Root cause identificado | Phase 3: UMA hipotese, UMA mudanca, testar |
-| Fix falhou 3+ vezes | PARAR — questionar arquitetura com humano |
-| Testes flaky com setTimeout | Substituir por condition-based waiting |
-| Bug fixado | Defense-in-depth: 4 camadas tornam bug impossivel |
+| Bug found | Phase 1: read complete errors, reproduce, git diff |
+| Error in multi-component system | Instrument each boundary: log input and output |
+| Root cause identified | Phase 3: ONE hypothesis, ONE change, test |
+| Fix failed 3+ times | STOP -- question architecture with human |
+| Flaky tests with setTimeout | Replace with condition-based waiting |
+| Bug fixed | Defense-in-depth: 4 layers make bug impossible |
 
 ## Anti-Patterns
 
-- "It's probably X, let me fix that" — assumir sem verificar
-- "Quick fix for now, investigate later" — o problema retorna
-- "Just try changing X and see" — thrashing sem hipotese
-- Acumular multiplos fixes e testar juntos — impossivel isolar
-- Fixar onde o erro aparece, nao onde origina (sintoma vs causa)
+- "It's probably X, let me fix that" -- assume without verifying
+- "Quick fix for now, investigate later" -- the problem returns
+- "Just try changing X and see" -- thrashing without hypothesis
+- Accumulate multiple fixes and test together -- impossible to isolate
+- Fix where the error appears, not where it originates (symptom vs cause)
 
 ## Code
 
@@ -113,9 +113,9 @@ async function waitFor<T>(
 ```
 
 ```bash
-# Root cause tracing: instrumentar boundary
+# Root cause tracing: instrument boundary
 echo "DEBUG: input=$input cwd=$(pwd)" >> /tmp/debug.log
-# Rastrear para cima ate a fonte — fix la, nao no sintoma
+# Trace upward to the source -- fix there, not at the symptom
 ```
 
 ## References

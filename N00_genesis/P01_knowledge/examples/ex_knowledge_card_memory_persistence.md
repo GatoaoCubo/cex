@@ -11,15 +11,15 @@ author: builder_agent
 domain: cex_taxonomy
 quality: 9.1
 tags: [memory, sqlite, chroma, vector-search, persistence, hybrid-search]
-tldr: "SQLite (FTS5) + Chroma (vectors) juntos dao hybrid search com 10x economia de tokens via progressive disclosure em 3 camadas"
-when_to_use: "Projetar memoria persistente para agentes LLM com busca keyword + semantica local"
+tldr: "SQLite (FTS5) + Chroma (vectors) together provide hybrid search with 10x token savings via 3-layer progressive disclosure"
+when_to_use: "Design persistent memory for LLM agents with keyword + local semantic search"
 keywords: [sqlite, chroma, fts5, vector-embedding, dual-persistence]
 long_tails:
-  - "Como combinar SQLite e Chroma para memoria de agente LLM"
-  - "Qual a diferenca entre contentSessionId e memorySessionId"
+  - "How to combine SQLite and Chroma for LLM agent memory"
+  - "What is the difference between contentSessionId and memorySessionId"
 axioms:
-  - "SEMPRE usar contentSessionId para observations (estavel)"
-  - "NUNCA usar memorySessionId para FK — ele comeca NULL"
+  - "ALWAYS use contentSessionId for observations (stable)"
+  - "NEVER use memorySessionId for FK — it starts NULL"
 linked_artifacts:
   primary: p01_kc_memory_session_compression
   related: [p01_kc_memory_worker_service, p01_kc_memory_privacy_controls]
@@ -39,13 +39,13 @@ related:
 
 ## TL;DR
 
-SQLite armazena dados estruturados (sessions, observations, summaries) com FTS5 para keyword search. Chroma adiciona embeddings vetoriais para busca semantica. Combinados: hybrid search com progressive disclosure em 3 camadas que reduz consumo de tokens em 10x.
+SQLite stores structured data (sessions, observations, summaries) with FTS5 for keyword search. Chroma adds vector embeddings for semantic search. Combined: hybrid search with 3-layer progressive disclosure that reduces token consumption by 10x.
 
-## Conceito Central
+## Core Concept
 
-Memoria de agente LLM exige dois tipos de busca: keyword exato (FTS5/SQLite) e similaridade semantica (Chroma/vetores). Nenhum resolve sozinho. O padrao dual persistence separa storage estruturado (SQLite) de indice semantico (Chroma), conectados por um workflow MCP de 3 camadas: search (IDs, ~50 tokens) → timeline (contexto, ~200 tokens) → get_observations (detalhes, ~1000 tokens).
+LLM agent memory requires two types of search: exact keyword (FTS5/SQLite) and semantic similarity (Chroma/vectors). Neither solves it alone. The dual persistence pattern separates structured storage (SQLite) from semantic index (Chroma), connected by a 3-layer MCP workflow: search (IDs, ~50 tokens) -> timeline (context, ~200 tokens) -> get_observations (details, ~1000 tokens).
 
-## Arquitetura
+## Architecture
 
 ```
 SQLite (~/.claude-mem/claude-mem.db)
@@ -60,29 +60,29 @@ SQLite (~/.claude-mem/claude-mem.db)
               search → timeline → get_observations
 ```
 
-| Tabela | Campos Chave | Funcao |
-|--------|-------------|--------|
-| sdk_sessions | content_session_id, memory_session_id | Tracking de sessao |
-| observations | memory_session_id, tool_name, title | Dados brutos com FTS5 |
-| summaries | content_session_id, summary | Narrativa comprimida |
+| Table | Key Fields | Function |
+|-------|-----------|----------|
+| sdk_sessions | content_session_id, memory_session_id | Session tracking |
+| observations | memory_session_id, tool_name, title | Raw data with FTS5 |
+| summaries | content_session_id, summary | Compressed narrative |
 
 ## Patterns
 
 | Trigger | Action |
 |---------|--------|
-| Busca exata por nome de tool | FTS5 no campo tool_name |
-| Busca por conceito similar | Chroma semantic search |
-| Context window limitado | Progressive disclosure 3 camadas |
-| Nova sessao precisa de historico | Injetar summaries + observations |
-| Dois session IDs disponiveis | contentSessionId para FK, memorySessionId para resume |
+| Exact search by tool name | FTS5 on tool_name field |
+| Search by similar concept | Chroma semantic search |
+| Limited context window | 3-layer progressive disclosure |
+| New session needs history | Inject summaries + observations |
+| Two session IDs available | contentSessionId for FK, memorySessionId for resume |
 
 ## Anti-Patterns
 
-- Usar so SQLite sem Chroma (perde busca semantica)
-- Usar so Chroma sem SQLite (perde queries estruturadas)
-- Carregar todas observations de uma vez (estoura tokens)
-- Usar memorySessionId como FK (comeca NULL, instavel)
-- Ignorar FTS5 e fazer LIKE queries (10-100x mais lento)
+- Using only SQLite without Chroma (loses semantic search)
+- Using only Chroma without SQLite (loses structured queries)
+- Loading all observations at once (blows token budget)
+- Using memorySessionId as FK (starts NULL, unstable)
+- Ignoring FTS5 and using LIKE queries (10-100x slower)
 
 ## References
 

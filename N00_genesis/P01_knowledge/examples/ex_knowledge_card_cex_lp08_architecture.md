@@ -11,15 +11,15 @@ author: builder_agent
 domain: cex_taxonomy
 quality: 9.1
 tags: [cex, lp08, architecture, patterns, laws, multi-agent, scaling]
-tldr: "P08 define 5 meta-artefatos que governam estrutura: agent_card, pattern, law, diagram, component_map"
-when_to_use: "Entender como sistemas LLM escalam via arquitetura formal e meta-artefatos"
+tldr: "P08 defines 5 meta-artifacts that govern structure: agent_card, pattern, law, diagram, component_map"
+when_to_use: "Understand how LLM systems scale via formal architecture and meta-artifacts"
 keywords: [architecture, agent_group, pattern, law, diagram, component-map]
 long_tails:
-  - "Como escalar sistema multi-agente LLM com arquitetura"
-  - "Qual a diferenca entre pattern e law no CEX"
+  - "How to scale a multi-agent LLM system with architecture"
+  - "What is the difference between pattern and law in CEX"
 axioms:
-  - "SEMPRE ter component_map antes de adicionar componentes"
-  - "NUNCA violar uma law (inviolavel, diferente de instruction)"
+  - "ALWAYS have component_map before adding components"
+  - "NEVER violate a law (inviolable, different from instruction)"
 linked_artifacts:
   primary: p01_kc_cex_lp07_evals
   related: [p01_kc_cex_lp06_schema]
@@ -43,52 +43,52 @@ related:
 topic: P08 Architecture | scope: system structure | criticality: high
 types: 5 | function: BECOME + GOVERN | layer: spec + governance
 
-## Conceitos Chave
+## Key Concepts
 
-- P08 eh sobre ESTRUTURA, nao execucao de tarefas
-- Tipos P08 sao meta-artefatos (descrevem artefatos)
-- agent_card define departamento completo com MCPs
-- pattern eh padrao reutilizavel (ex: continuous batching)
-- law eh regra inviolavel do sistema (nao eh instruction)
-- diagram visualiza arquitetura (ASCII ou Mermaid)
-- component_map mapeia conexoes entre componentes
-- Nenhum framework mainstream tem tipos equivalentes
-- Sistemas LLM crescem sem planta — P08 eh a planta
+- P08 is about STRUCTURE, not task execution
+- P08 types are meta-artifacts (describe artifacts)
+- agent_card defines a complete department with MCPs
+- pattern is a reusable pattern (e.g.: continuous batching)
+- law is an inviolable system rule (not an instruction)
+- diagram visualizes architecture (ASCII or Mermaid)
+- component_map maps connections between components
+- No mainstream framework has equivalent types
+- LLM systems grow without a blueprint — P08 is the blueprint
 - agent_card max 4096 bytes (spec layer, core: true)
-- pattern usa llm_function INJECT (informa, nao obriga)
-- law usa llm_function CONSTRAIN (obriga, inviolavel)
-- P08 constrange todos os LPs: define o que eh possivel
-- P08 eh informado por P07: metricas revelam gaps
-- P08 evolui com P11: arquitetura adapta ao feedback
-- Funcao dominante: BECOME (define) + GOVERN (governa)
-- MetaGPT e CrewAI nao tem meta-artefatos formais
+- pattern uses llm_function INJECT (informs, does not enforce)
+- law uses llm_function CONSTRAIN (enforces, inviolable)
+- P08 constrains all LPs: defines what is possible
+- P08 is informed by P07: metrics reveal gaps
+- P08 evolves with P11: architecture adapts to feedback
+- Dominant function: BECOME (defines) + GOVERN (governs)
+- MetaGPT and CrewAI have no formal meta-artifacts
 
-## Fases
+## Phases
 
-1. Mapear componentes existentes via component_map
-2. Definir laws inviolaveis do sistema (constraints)
-3. Documentar patterns reutilizaveis emergentes
-4. Especificar agent_cards por dominio funcional
-5. Criar diagrams para comunicacao visual do time
-6. Revisar arquitetura quando evals P07 revelam gaps
+1. Map existing components via component_map
+2. Define inviolable system laws (constraints)
+3. Document emerging reusable patterns
+4. Specify agent_cards per functional domain
+5. Create diagrams for team visual communication
+6. Review architecture when P07 evals reveal gaps
 
-## Regras de Ouro
+## Golden Rules
 
-- SEMPRE documentar WHY de cada law (nao so WHAT)
-- NUNCA criar agent_group sem agent_card formal
-- SEMPRE atualizar component_map ao adicionar componente
-- NUNCA tratar pattern como lei (pattern eh recomendacao)
-- SEMPRE separar diagram (visual) de component_map (dados)
+- ALWAYS document WHY for each law (not just WHAT)
+- NEVER create agent_group without formal agent_card
+- ALWAYS update component_map when adding a component
+- NEVER treat pattern as law (pattern is a recommendation)
+- ALWAYS separate diagram (visual) from component_map (data)
 
-## Comparativo
+## Comparison
 
-| Tipo | Rigidez | Escopo | Exemplo |
-|------|---------|--------|---------|
-| law | Inviolavel | Sistema inteiro | "Nunca hardcode brand" |
-| pattern | Recomendado | Reutilizavel | Continuous batching |
-| agent_card | Obrigatorio | 1 departamento | research_agent research spec |
-| diagram | Informativo | Visual | Mermaid do pipeline |
-| component_map | Estrutural | Conexoes | Agent-to-agent graph |
+| Type | Rigidity | Scope | Example |
+|------|----------|-------|---------|
+| law | Inviolable | Entire system | "Never hardcode brand" |
+| pattern | Recommended | Reusable | Continuous batching |
+| agent_card | Mandatory | 1 department | research_agent research spec |
+| diagram | Informational | Visual | Pipeline Mermaid |
+| component_map | Structural | Connections | Agent-to-agent graph |
 
 ## Flow
 
@@ -103,12 +103,12 @@ types: 5 | function: BECOME + GOVERN | layer: spec + governance
 [CONSTRAIN] [INJECT] [BECOME]
     |          |        |
     v          v        v
- governa    informa   define
+ governs    informs   defines
     |          |        |
     +-----+----+--------+
           |
           v
-   [sistema operacional]
+   [operational system]
           |
           v
    [P07 evals feedback loop]

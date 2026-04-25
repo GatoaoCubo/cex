@@ -11,15 +11,15 @@ author: builder_agent
 domain: cex_taxonomy
 quality: 9.1
 tags: [cex, fractal, scale, architecture, lp-completeness]
-tldr: "Mesmos 12 LPs descrevem prompt (1/12), agente (4/12) e sistema (12/12) — diferenca eh completude, nao estrutura"
-when_to_use: "Entender por que a mesma taxonomia funciona em toda escala LLM"
+tldr: "Same 12 LPs describe prompt (1/12), agent (4/12), and system (12/12) — difference is completeness, not structure"
+when_to_use: "Understand why the same taxonomy works at every LLM scale"
 keywords: [fractal, scale-invariance, lp-completeness, emergence]
 long_tails:
-  - "Como os 12 LPs do CEX se aplicam em diferentes escalas"
-  - "Qual a diferenca entre prompt, agente e sistema no CEX"
+  - "How the 12 CEX LPs apply at different scales"
+  - "What is the difference between prompt, agent, and system in CEX"
 axioms:
-  - "SEMPRE usar os mesmos 12 LPs independente da escala"
-  - "NUNCA criar taxonomia separada para prompts vs agentes vs sistemas"
+  - "ALWAYS use the same 12 LPs regardless of scale"
+  - "NEVER create a separate taxonomy for prompts vs agents vs systems"
 linked_artifacts:
   primary: p01_kc_cex_maturity_level
   related: [p01_kc_cex_boundary_concept, p01_kc_cex_lens_concept]
@@ -40,42 +40,42 @@ related:
 
 ## Summary
 
-O principio fractal do CEX estabelece que a mesma estrutura de 12 LPs se repete em toda escala: prompt, chain, agente, runtime, agent_group e sistema. A diferenca entre um prompt simples e um sistema multi-agente nao eh de tipo — eh de completude. Um prompt preenche 1/12 LPs. Um agente, 3-4/12. Um sistema, 12/12. Voce aprende UMA estrutura e escala gradualmente.
+The fractal principle of CEX establishes that the same 12 LP structure repeats at every scale: prompt, chain, agent, runtime, agent_group, and system. The difference between a simple prompt and a multi-agent system is not one of type — it is one of completeness. A prompt fills 1/12 LPs. An agent, 3-4/12. A system, 12/12. You learn ONE structure and scale gradually.
 
 ## Spec
 
-| Escala | LPs | Funcoes Ativas | Equivalente Industria |
-|--------|-----|----------------|----------------------|
-| L0 Prompt | 1/12 (P03) | PRODUCE | OpenAI completion basica |
+| Scale | LPs | Active Functions | Industry Equivalent |
+|-------|-----|-----------------|---------------------|
+| L0 Prompt | 1/12 (P03) | PRODUCE | Basic OpenAI completion |
 | L1 Chain | 2/12 (P03,P12) | PRODUCE, COLLABORATE | LangChain LCEL, DSPy pipeline |
 | L2 Agent | 3-4/12 (P01-P03,P06) | BECOME, INJECT, REASON, PRODUCE | CrewAI Agent, MetaGPT Role |
-| L3 Runtime | 6/12 | +CALL, CONSTRAIN | Claude Code com tools e hooks |
-| L4 Agent_group | 9/12 | +LEARN, EVOLVE | Departamento autonomo com memoria |
-| L5 System | 12/12 | Todas 8 funcoes | Multi-agente coordenado completo |
+| L3 Runtime | 6/12 | +CALL, CONSTRAIN | Claude Code with tools and hooks |
+| L4 Agent_group | 9/12 | +LEARN, EVOLVE | Autonomous department with memory |
+| L5 System | 12/12 | All 8 functions | Complete coordinated multi-agent |
 
-Analogia musical: nota (prompt) → acorde (chain) → frase (agent) → secao (agent_group) → sinfonia (system). Cada nivel adiciona dimensoes, nao substitui.
+Musical analogy: note (prompt) -> chord (chain) -> phrase (agent) -> section (agent_group) -> symphony (system). Each level adds dimensions, does not replace.
 
-Analogia biologica: celula (prompt) → tecido (chain) → orgao (agent) → sistema (agent_group) → organismo (system). Propriedades emergentes surgem da composicao, nao da soma.
+Biological analogy: cell (prompt) -> tissue (chain) -> organ (agent) -> system (agent_group) -> organism (system). Emergent properties arise from composition, not from summation.
 
-Consequencia pratica: organizacao comeca com 1-2 LPs para prompts, evolui para 3-4 para agentes, e escala para 12/12 para sistemas — mesmo vocabulario, mesmas ferramentas.
+Practical consequence: organization starts with 1-2 LPs for prompts, evolves to 3-4 for agents, and scales to 12/12 for systems — same vocabulary, same tools.
 
 ## Patterns
 
 | Trigger | Action |
 |---------|--------|
-| Construindo primeiro prompt | Preencher P03 (minimo viavel) |
-| Prompt precisa de memoria | Adicionar P01, evoluir para L2 |
-| Agente precisa de ferramentas | Adicionar P04+P05, evoluir para L3 |
-| Sistema precisa de coordenacao | Preencher P12, evoluir para L5 |
-| Diagnosticar falha de entidade | Verificar quais LPs estao ausentes |
+| Building first prompt | Fill P03 (minimum viable) |
+| Prompt needs memory | Add P01, evolve to L2 |
+| Agent needs tools | Add P04+P05, evolve to L3 |
+| System needs coordination | Fill P12, evolve to L5 |
+| Diagnosing entity failure | Check which LPs are missing |
 
 ## Anti-Patterns
 
-- Criar taxonomia separada para cada escala (duplicacao)
-- Pular niveis sem preencher LPs intermediarios
-- Assumir que mais LPs = melhor (completude segue necessidade)
-- Tratar fractal como prescricao (eh observacao empirica)
-- Construir sistema L5 sem agentes L2 funcionando
+- Creating separate taxonomy for each scale (duplication)
+- Skipping levels without filling intermediate LPs
+- Assuming more LPs = better (completeness follows need)
+- Treating fractal as prescription (it is empirical observation)
+- Building L5 system without working L2 agents
 
 ## References
 

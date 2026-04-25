@@ -98,15 +98,15 @@ author: "builder"
 domain: llm_engineering
 quality: null
 tags: [prompt-caching, cost-optimization, latency, anthropic, openai, knowledge]
-tldr: "Prompt caching reutiliza prefixos pre-processesdos between chamadas LLM, reduzindo cost em ate 90% e latency em 85%"
-when_to_use: "Quanof the system LLM repete context longo between chamadas"
+tldr: "Prompt caching reuses pre-processed prefixes between LLM calls, reducing cost by up to 90% and latency by 85%"
+when_to_use: "When the LLM system repeats long context between calls"
 keywords: [prompt-caching, cache-control, context-reuse]
 long_tails:
-  - Como configurar prompt caching na API da Anthropic
-  - Tamanho minimal de prefixo for ativar cache em LLMs
+  - How to configure prompt caching in the Anthropic API
+  - Minimum prefix size to activate cache in LLMs
 axioms:
-  - SEMPRE coloque conteudo estatico ANTES do dinamico
-  - NUNCA cache context that muda a each request
+  - ALWAYS place static content BEFORE dynamic content
+  - NEVER cache context that changes on each request
 linked_artifacts:
   primary: null
   related: [p01_kc_rag_fundamentals]

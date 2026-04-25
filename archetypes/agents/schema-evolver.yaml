@@ -6,8 +6,8 @@ id: schema-evolver
 type: meta_agent
 lp: P02
 version: 1.0.0
-description: Propoe mudancas em _schema.yaml baseado em patterns observados nos examples existentes. Evolucao
-  guiada por dados.
+description: Proposes changes to _schema.yaml based on patterns observed in existing examples. Data-driven
+  evolution.
 capabilities:
 - analyze_examples
 - detect_patterns
@@ -27,27 +27,27 @@ outputs:
   compatibility: dict (breaking vs non-breaking changes)
   migration_plan: string (steps to migrate existing artifacts)
 quality_gates:
-  evidence_based: Cada proposal tem >= 3 examples como evidencia
-  backward_compatible: Zero breaking changes sem migration plan
-  rationale: Cada mudanca tem justificativa com dados
-  valid_yaml: Schema proposto eh YAML valido
-  no_field_removal: Campos required nunca removidos diretamente
+  evidence_based: Each proposal has >= 3 examples as evidence
+  backward_compatible: Zero breaking changes without migration plan
+  rationale: Each change has justification with data
+  valid_yaml: Proposed schema is valid YAML
+  no_field_removal: Required fields never removed directly
 
 prompt: |
-  Voce eh o Schema Evolver do CEX. Sua missao eh evoluir schemas baseado em evidencias.
+  You are the Schema Evolver of CEX. Your mission is to evolve schemas based on evidence.
 
-  PROCESSO:
-  1. Leia _schema.yaml do LP alvo
-  2. Colete examples existentes (artifacts desse type no repo)
-  3. Analise patterns: campos recorrentes nao no schema, campos required raramente usados
-  4. Proponha mudancas: novos campos, campos opcionais, constraints ajustados
-  5. Classifique cada mudanca: breaking vs non-breaking
-  6. Gere migration plan para artifacts existentes
+  PROCESS:
+  1. Read the target LP's _schema.yaml
+  2. Collect existing examples (artifacts of that type in the repo)
+  3. Analyze patterns: recurring fields not in schema, required fields rarely used
+  4. Propose changes: new fields, optional fields, adjusted constraints
+  5. Classify each change: breaking vs non-breaking
+  6. Generate migration plan for existing artifacts
 
-  REGRAS:
-  - NUNCA remova campos required sem migration plan
-  - Proposals devem ter rationale com dados (ex: "presente em 85% dos examples")
-  - Prefira non-breaking changes (adicionar optional > mudar required)
-  - Cada proposal deve ter pelo menos 3 examples como evidencia
-  - max_bytes so pode AUMENTAR (nunca reduzir)
-  - Mantenha backward compatibility como prioridade
+  RULES:
+  - NEVER remove required fields without a migration plan
+  - Proposals must have rationale with data (e.g., "present in 85% of examples")
+  - Prefer non-breaking changes (adding optional > changing required)
+  - Each proposal must have at least 3 examples as evidence
+  - max_bytes can only INCREASE (never reduce)
+  - Keep backward compatibility as priority

@@ -1,7 +1,7 @@
 ---
 quality: 8.4
 # TEMPLATE: Session State (P10 Memory)
-# Valide contra P10_memory/_schema.yaml (types.session_state)
+# Validate against P10_memory/_schema.yaml (types.session_state)
 # Max 3072 bytes
 
 id: p10_ss_[session_slug]
@@ -32,7 +32,7 @@ related:
 # Session State: [session_slug]
 
 ## Session IDs
-<!-- INSTRUCAO: dual-ID obrigatorio. content_session_id SEMPRE preenchido. memory_session_id pode ser NULL. -->
+<!-- INSTRUCTION: dual-ID mandatory. content_session_id ALWAYS filled. memory_session_id can be NULL. -->
 ```yaml
 content_session_id: {{STABLE_UUID}}  # Used for ALL DB operations
 memory_session_id: {{SDK_SESSION_ID_OR_NULL}}  # Lazy-captured, for SDK resume only
@@ -41,32 +41,32 @@ compression_status: {{pending|done}}  # Set to "done" after Stop compression
 <!-- INVARIANT: if memory_session_id is NULL, session CANNOT be resumed via SDK. Create new session. -->
 
 ## Snapshot
-<!-- INSTRUCAO: resumir estado atual em 2-3 linhas. -->
+<!-- INSTRUCTION: summarize current state in 2-3 lines. -->
 - Goal: [objetivo_ativo]
 - Stage: [etapa_atual]
 - Owner: [agente_ou_usuario]
 
 ## Active Context
-<!-- INSTRUCAO: somente informacao reutilizavel nesta sessao. -->
+<!-- INSTRUCTION: only reusable information in this session. -->
 - [contexto_1]
 - [contexto_2]
 - [contexto_3]
 
 ## Pending Decisions
-<!-- INSTRUCAO: decisoes abertas e impacto. -->
+<!-- INSTRUCTION: open decisions and impact. -->
 | Decision | Options | Impact |
 |----------|---------|--------|
 | [decisao_1] | [a|b] | [impacto] |
 | [decisao_2] | [a|b] | [impacto] |
 
 ## Next Actions
-<!-- INSTRUCAO: proximas 3 acoes objetivas. -->
+<!-- INSTRUCTION: next 3 objective actions. -->
 1. [acao_1]
 2. [acao_2]
 3. [acao_3]
 
 ## Expiry
-<!-- INSTRUCAO: quando este snapshot deve ser descartado ou renovado. -->
+<!-- INSTRUCTION: when this snapshot should be discarded or renewed. -->
 - Refresh at: [yyyy-mm-dd_or_event]
 - Invalidate when: [condicao]
 

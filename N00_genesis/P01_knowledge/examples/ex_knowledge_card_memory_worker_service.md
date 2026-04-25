@@ -18,8 +18,8 @@ long_tails:
   - "How to build a persistent background worker for Claude Code hooks"
   - "What is the daemon pattern for async AI operations in LLM tools"
 axioms:
-  - "SEMPRE fazer health check antes de chamar endpoint do worker"
-  - "NUNCA propagar erros do worker para o exit code do hook"
+  - "ALWAYS do health check before calling worker endpoint"
+  - "NEVER propagate worker errors to the hook exit code"
 linked_artifacts:
   primary: null
   related: [p01_kc_cex_function_become]

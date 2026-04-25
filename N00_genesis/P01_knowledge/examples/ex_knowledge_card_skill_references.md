@@ -3,7 +3,7 @@ id: p01_kc_skill_references
 kind: knowledge_card
 8f: F3_inject
 pillar: P01
-title: "Skill References Pattern — Interface Leve + Profundidade On-Demand"
+title: "Skill References Pattern — Lightweight Interface + On-Demand Depth"
 version: 1.0.0
 created: 2026-03-26
 updated: 2026-03-26
@@ -11,15 +11,15 @@ author: builder_agent
 domain: knowledge_engineering
 quality: 9.1
 tags: [skill-references, token-efficiency, progressive-disclosure, information-architecture]
-tldr: "SKILL.md leve (workflow + quick ref) + sub-arquivos profundos (tabelas, exemplos) otimiza tokens e mantem profundidade acessivel"
-when_to_use: "Decidir como estruturar conteudo de skill entre interface leve e referencia profunda"
+tldr: "Lightweight SKILL.md (workflow + quick ref) + deep sub-files (tables, examples) optimizes tokens and keeps depth accessible"
+when_to_use: "Decide how to structure skill content between lightweight interface and deep reference"
 keywords: [skill-references, progressive-disclosure, token-efficiency, information-architecture]
 long_tails:
-  - "Como separar interface de skill de referencias profundas para otimizar tokens"
-  - "Quando criar arquivos de referencia auxiliares para uma skill de agente"
+  - "How to separate skill interface from deep references to optimize tokens"
+  - "When to create auxiliary reference files for an agent skill"
 axioms:
-  - "SEMPRE manter SKILL.md abaixo de 200 linhas — profundidade vai para sub-arquivos"
-  - "NUNCA duplicar conteudo entre SKILL.md e arquivos de referencia"
+  - "ALWAYS keep SKILL.md below 200 lines — depth goes to sub-files"
+  - "NEVER duplicate content between SKILL.md and reference files"
 linked_artifacts:
   primary: p01_kc_skill_format_universal
   related: [p01_kc_cex_function_become]
@@ -40,24 +40,24 @@ related:
 
 ## Summary
 
-Pattern de dois niveis para skills de agentes LLM: SKILL.md como interface leve (carregada sempre) + sub-arquivos de referencia como profundidade on-demand.
-Reduz custo de tokens em 60-80% mantendo acesso completo a detalhes quando necessario.
-Originado no obsidian-skills (kepano), replicado em sistemas multi-agente com ISO vectorstore.
+Two-level pattern for LLM agent skills: SKILL.md as lightweight interface (always loaded) + reference sub-files as on-demand depth.
+Reduces token cost by 60-80% while maintaining full access to details when needed.
+Originated in obsidian-skills (kepano), replicated in multi-agent systems with ISO vectorstore.
 
 ## Spec
 
-| Camada | Conteudo | Carregamento | Tamanho Alvo |
-|--------|----------|-------------|--------------|
-| SKILL.md | Workflow, quick ref, links, exemplos simples | Sempre (contexto) | < 200 linhas |
-| sub-arquivos | Tabelas completas, edge cases, exemplos extensos | On-demand | Sem limite fixo |
+| Layer | Content | Loading | Target Size |
+|-------|---------|---------|-------------|
+| SKILL.md | Workflow, quick ref, links, simple examples | Always (context) | < 200 lines |
+| sub-files | Complete tables, edge cases, extensive examples | On-demand | No fixed limit |
 
-Criterios para criar sub-arquivo de referencia:
+Criteria for creating a reference sub-file:
 
-| Condicao | Acao |
-|----------|------|
-| SKILL.md passaria de 200 linhas | Extrair para sub-arquivo |
-| Tabela com mais de 10 itens | Mover tabela completa |
-| Exemplos completos e pesados | Manter sintese inline, completo em sub-arquivo |
+| Condition | Action |
+|-----------|--------|
+| SKILL.md would exceed 200 lines | Extract to sub-file |
+| Table with more than 10 items | Move complete table |
+| Heavy complete examples | Keep synthesis inline, complete in sub-file |
 
 SKILL.md faz links explicitos para sub-arquivos:
 ```markdown
@@ -68,40 +68,40 @@ See [CALLOUTS.md](sub-arquivo/CALLOUTS.md) for the full list.
 
 | Trigger | Action |
 |---------|--------|
-| Skill com >200 linhas de conteudo total | Extrair tabelas e exemplos para sub-arquivos |
-| Tabela de referencia com >10 entradas | Sub-arquivo dedicado com link do SKILL.md |
-| Agente precisa de detalhes edge-case | Link explicito no SKILL.md aponta para detalhe |
-| Multiplos exemplos completos | Inline tem sintese, sub-arquivo tem completo |
-| Novo skill sendo criado em sistema multi-agente | Planejar SKILL.md + sub-arquivos desde o inicio |
+| Skill with >200 lines of total content | Extract tables and examples to sub-files |
+| Reference table with >10 entries | Dedicated sub-file with link from SKILL.md |
+| Agent needs edge-case details | Explicit link in SKILL.md points to detail |
+| Multiple complete examples | Inline has synthesis, sub-file has complete |
+| New skill being created in multi-agent system | Plan SKILL.md + sub-files from the start |
 
 ## Anti-Patterns
 
-- Skill monolitica sem sub-arquivos (contexto inflado, tokens desperdicados)
-- Sub-arquivos sem links explicitos do SKILL.md (profundidade inacessivel)
-- Duplicacao de conteudo entre SKILL.md e sub-arquivos (inconsistencia)
-- Conteudo critico apenas em sub-arquivo (agente perde info essencial)
-- Sub-arquivo com 1-2 linhas (overhead de arquivo sem beneficio real)
+- Monolithic skill without sub-files (bloated context, wasted tokens)
+- Sub-files without explicit links from SKILL.md (inaccessible depth)
+- Content duplication between SKILL.md and sub-files (inconsistency)
+- Critical content only in sub-file (agent misses essential info)
+- Sub-file with 1-2 lines (file overhead without real benefit)
 
 ## Code
 
-<!-- lang: text | purpose: exemplos reais do obsidian-skills -->
+<!-- lang: text | purpose: real examples from obsidian-skills -->
 ```
 # obsidian-markdown/ (kepano/obsidian-skills)
-SKILL.md                  # Workflow 6 steps, wikilinks, callouts basicos
-  sub-arquivos/
-    CALLOUTS.md           # 13 tipos + aliases, foldable, nested, custom CSS
+SKILL.md                  # Workflow 6 steps, wikilinks, basic callouts
+  sub-files/
+    CALLOUTS.md           # 13 types + aliases, foldable, nested, custom CSS
     EMBEDS.md             # Audio, video, PDF, search embeds, external images
-    PROPERTIES.md         # Todos os tipos de property, tag syntax rules
+    PROPERTIES.md         # All property types, tag syntax rules
 
 # obsidian-bases/
 SKILL.md                  # Schema YAML, filter/formula syntax, view types
-  sub-arquivos/
-    FUNCTIONS_REFERENCE.md  # Funcoes por tipo: Date, String, Number, List
+  sub-files/
+    FUNCTIONS_REFERENCE.md  # Functions by type: Date, String, Number, List
 
 # json-canvas/
-SKILL.md                  # Spec completa: nodes, edges, colors, layout
-  sub-arquivos/
-    EXAMPLES.md           # 4 exemplos JSON: mind map, project board, flowchart
+SKILL.md                  # Complete spec: nodes, edges, colors, layout
+  sub-files/
+    EXAMPLES.md           # 4 JSON examples: mind map, project board, flowchart
 ```
 
 ```yaml
@@ -113,7 +113,7 @@ agent_structure:
     - "INSTRUCTIONS.md"            # Execution protocol
     - "EXAMPLES.md"                # Input/output samples
     - "SCHEMA.md"                  # JSON schema
-  principle: "interface leve + profundidade on-demand"
+  principle: "lightweight interface + on-demand depth"
 ```
 
 ## References

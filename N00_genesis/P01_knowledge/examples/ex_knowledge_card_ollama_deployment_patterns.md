@@ -3,7 +3,7 @@ id: p01_kc_ollama_deployment_patterns
 kind: knowledge_card
 8f: F3_inject
 pillar: P01
-title: "Ollama Deployment Patterns para Modelos Locais Customizados"
+title: "Ollama Deployment Patterns for Custom Local Models"
 version: 2.0.0
 created: 2026-03-25
 updated: 2026-03-25
@@ -11,15 +11,15 @@ author: builder_agent
 domain: execution
 quality: 9.1
 tags: [ollama, deployment, gguf, lora, modelfile, local-llm]
-tldr: "Deploy Ollama depende de casar base e adapter, preservar template e escolher quantizacao entre memoria e qualidade."
-when_to_use: "Empacotar modelo fine-tuned para Ollama ou diagnosticar output ruim em deploy local"
+tldr: "Ollama deploy depends on matching base and adapter, preserving template, and choosing quantization between memory and quality."
+when_to_use: "Package fine-tuned model for Ollama or diagnose bad output in local deploy"
 keywords: [ollama_deployment, modelfile, gguf_import, lora_adapter, quantization]
 long_tails:
-  - "Como subir modelo customizado no Ollama sem degradar output"
-  - "Quando usar GGUF unico vs base mais adapter no Ollama"
+  - "How to deploy custom model on Ollama without degrading output"
+  - "When to use single GGUF vs base plus adapter on Ollama"
 axioms:
-  - "SEMPRE usar o mesmo base model do treinamento ao aplicar adapter"
-  - "NUNCA trocar template de chat entre treino e inferencia"
+  - "ALWAYS use the same base model from training when applying adapter"
+  - "NEVER swap chat template between training and inference"
 linked_artifacts:
   primary: null
   related: [p01_kc_zero_touch_execution, p01_kc_cicd_pipeline_architecture]
@@ -43,51 +43,51 @@ related:
 topic: local LLM deployment | scope: Ollama + GGUF/adapter | criticality: high
 pipeline: export -> convert -> Modelfile -> ollama create -> validate
 
-## Conceitos Chave
+## Key Concepts
 
-- Mismatch entre base e adapter gera output erratico
-- Template de chat precisa casar com o do treino
-- GGUF unico simplifica; base+adapter facilita swap
-- Q4_K_M equilibra memoria, velocidade e qualidade
+- Mismatch between base and adapter generates erratic output
+- Chat template must match the one from training
+- Single GGUF simplifies; base+adapter facilitates swap
+- Q4_K_M balances memory, speed and quality
 
-## Comparativo
+## Comparison
 
-| Padrao | Estrutura | Vantagem | Desvantagem |
-|--------|-----------|----------|-------------|
-| GGUF unico | `FROM ./model.gguf` | Build simples | Adapter nao troca |
-| Base+adapter | `FROM base` + `ADAPTER` | Swap rapido | Base precisa casar |
-| Registry HF | `ollama run hf.co/...` | Setup minimo | Depende de rede |
+| Pattern | Structure | Advantage | Disadvantage |
+|---------|-----------|-----------|-------------|
+| Single GGUF | `FROM ./model.gguf` | Simple build | Adapter not swappable |
+| Base+adapter | `FROM base` + `ADAPTER` | Fast swap | Base must match |
+| HF Registry | `ollama run hf.co/...` | Minimal setup | Network dependent |
 
-| Quantizacao | Reducao | Perda | Caso de uso |
-|-------------|---------|-------|-------------|
-| Q8_0 | ~50% | Minima | Qualidade-first |
-| Q5_K_M | ~62% | Baixa | Balanceado plus |
-| Q4_K_M | ~75% | Baixa | Padrao recomendado |
-| Q4_0 | ~75% | Moderada | Speed-first |
-| Q2_K | ~87% | Alta | Hardware extremo |
+| Quantization | Reduction | Loss | Use case |
+|-------------|-----------|------|----------|
+| Q8_0 | ~50% | Minimal | Quality-first |
+| Q5_K_M | ~62% | Low | Balanced plus |
+| Q4_K_M | ~75% | Low | Recommended default |
+| Q4_0 | ~75% | Moderate | Speed-first |
+| Q2_K | ~87% | High | Extreme hardware |
 
-| Sintoma | Causa provavel | Correcao |
-|---------|----------------|----------|
-| Output erratico | Base diferente do treino | Usar base exato |
-| Formato errado | Template incorreto | Setar TEMPLATE |
-| Lentidao | Fallback pra CPU | Checar ollama ps |
-| OOM | Context grande demais | Reduzir num_ctx |
-| Adapter ignorado | Path relativo | Usar path absoluto |
+| Symptom | Probable cause | Fix |
+|---------|----------------|-----|
+| Erratic output | Base different from training | Use exact base |
+| Wrong format | Incorrect template | Set TEMPLATE |
+| Slowness | CPU fallback | Check ollama ps |
+| OOM | Context too large | Reduce num_ctx |
+| Adapter ignored | Relative path | Use absolute path |
 
-| Cenario | Padrao ideal | Quantizacao |
-|---------|-------------|-------------|
-| Prototipo rapido | Registry HF | Q4_K_M |
-| Producao interna | GGUF unico | Q4_K_M ou Q8_0 |
+| Scenario | Ideal pattern | Quantization |
+|----------|-------------|-------------|
+| Quick prototype | HF Registry | Q4_K_M |
+| Internal production | Single GGUF | Q4_K_M or Q8_0 |
 | Multi-adapter dev | Base+adapter | Q4_K_M |
-| Edge device | GGUF unico | Q2_K |
-| Alta fidelidade | GGUF unico | Q8_0 |
+| Edge device | Single GGUF | Q2_K |
+| High fidelity | Single GGUF | Q8_0 |
 
-## Regras de Ouro
+## Golden Rules
 
-- SEMPRE validar FROM contra o base exato do fine-tune
-- SEMPRE fixar num_ctx e SYSTEM no Modelfile de prod
-- NUNCA assumir que adapter compensa template incorreto
-- SEMPRE testar latencia e sanidade antes de expor API
+- ALWAYS validate FROM against the exact fine-tune base
+- ALWAYS fix num_ctx and SYSTEM in the production Modelfile
+- NEVER assume adapter compensates for incorrect template
+- ALWAYS test latency and sanity before exposing API
 
 ## Code
 

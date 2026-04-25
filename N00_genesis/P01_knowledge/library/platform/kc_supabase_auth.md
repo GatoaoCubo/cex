@@ -12,17 +12,17 @@ author: n04_knowledge
 domain: data_platform
 quality: 9.1
 tags: [supabase, auth, gotrue, rls, jwt, mfa, sso, platform]
-tldr: "Auth completo via GoTrue: 30+ providers, JWT com custom claims, MFA TOTP, SSO SAML, anonymous auth, e RLS integrado ao PostgreSQL"
-when_to_use: "Quando configurar autenticacao e autorizacao em projetos Supabase"
+tldr: "Complete auth via GoTrue: 30+ providers, JWT with custom claims, MFA TOTP, SSO SAML, anonymous auth, and RLS integrated with PostgreSQL"
+when_to_use: "When configuring authentication and authorization in Supabase projects"
 keywords: [supabase-auth, gotrue, rls, jwt, mfa]
 long_tails:
-  - Como configurar Google OAuth no Supabase Auth
-  - Row Level Security com auth.uid() no PostgreSQL
-  - Custom claims JWT para role-based access Supabase
+  - How to configure Google OAuth in Supabase Auth
+  - Row Level Security with auth.uid() in PostgreSQL
+  - Custom JWT claims for role-based access in Supabase
 axioms:
-  - SEMPRE habilite RLS em toda tabela com dados de usuario
-  - NUNCA use service_role_key no client-side
-  - SEMPRE valide JWT server-side antes de confiar em custom claims
+  - ALWAYS enable RLS on every table with user data
+  - NEVER use service_role_key on the client-side
+  - ALWAYS validate JWT server-side before trusting custom claims
 linked_artifacts:
   primary: null
   related: [p01_kc_supabase_database, p01_kc_supabase_multi_tenant]
@@ -53,7 +53,7 @@ service: gotrue (porta 9999)
 ```
 
 ## Auth Providers (30+)
-| Categoria | Providers |
+| Category | Providers |
 |-----------|-----------|
 | Credential | Email/password, Phone/SMS (Twilio), Magic link |
 | Social | Google, Apple, Facebook, Twitter/X, Discord, LinkedIn, Spotify |
@@ -84,52 +84,52 @@ service: gotrue (porta 9999)
 ```
 
 ## RLS Patterns (Top 5)
-| Pattern | Policy SQL | Uso |
+| Pattern | Policy SQL | Use |
 |---------|-----------|-----|
-| Owner | `auth.uid() = user_id` | User vê só seus dados |
+| Owner | `auth.uid() = user_id` | User sees only their data |
 | Org member | `auth.uid() IN (SELECT uid FROM members WHERE org_id = t.org_id)` | Multi-tenant |
 | Role-based | `(auth.jwt()->>'role')::text = 'admin'` | Admin bypass |
-| Public read | `true` (SELECT only) | Conteúdo público |
+| Public read | `true` (SELECT only) | Public content |
 | Custom claim | `(auth.jwt()->'app_metadata'->>'plan')::text = 'pro'` | Feature gating |
 
 ## MFA (Multi-Factor Auth)
-| Spec | Valor |
+| Spec | Value |
 |------|-------|
-| Metodo | TOTP (Google Authenticator, Authy) |
+| Method | TOTP (Google Authenticator, Authy) |
 | Enrollment | `supabase.auth.mfa.enroll({factorType:'totp'})` |
-| Verificacao | `supabase.auth.mfa.challengeAndVerify({factorId, code})` |
+| Verification | `supabase.auth.mfa.challengeAndVerify({factorId, code})` |
 | AAL levels | aal1 (password only), aal2 (password + TOTP) |
-| RLS check | `auth.jwt()->>'aal' = 'aal2'` para operacoes sensiveis |
+| RLS check | `auth.jwt()->>'aal' = 'aal2'` for sensitive operations |
 
-## Limites por Tier
-| Metrica | Free | Pro | Team |
-|---------|------|-----|------|
-| MAU (Monthly Active Users) | 50.000 | 100.000 | 100.000+ |
-| Auth requests | Sem limite hard | Sem limite hard | Sem limite hard |
-| Email confirmations | 4/hora (built-in) | Custom SMTP ilimitado | Custom SMTP |
-| SMS OTP | Twilio (seu custo) | Twilio | Twilio |
-| SSO SAML | Não | Addon | Incluido |
-| Custom domains | Não | Sim | Sim |
+## Limits per Tier
+| Metric | Free | Pro | Team |
+|--------|------|-----|------|
+| MAU (Monthly Active Users) | 50,000 | 100,000 | 100,000+ |
+| Auth requests | No hard limit | No hard limit | No hard limit |
+| Email confirmations | 4/hour (built-in) | Custom SMTP unlimited | Custom SMTP |
+| SMS OTP | Twilio (your cost) | Twilio | Twilio |
+| SSO SAML | No | Addon | Included |
+| Custom domains | No | Yes | Yes |
 
 ## Session Management
-- **Access token**: curto (1h default, configuravel `jwt_expiry`)
-- **Refresh token**: longo (rotacao automatica)
-- **onAuthStateChange**: listener client-side para session refresh
-- **Server-side**: `getUser()` valida token a cada request (não confiar em `getSession()` sozinho)
+- **Access token**: short-lived (1h default, configurable `jwt_expiry`)
+- **Refresh token**: long-lived (automatic rotation)
+- **onAuthStateChange**: client-side listener for session refresh
+- **Server-side**: `getUser()` validates token on each request (do not trust `getSession()` alone)
 
 ## Anti-Patterns
-| Anti-Pattern | Risco | Fix |
-|-------------|-------|-----|
-| RLS desabilitado | Qualquer user lê/escreve tudo | `ALTER TABLE t ENABLE ROW LEVEL SECURITY;` |
-| service_role no client | Bypass total de RLS | Usar apenas server-side |
-| Confiar em getSession() sem getUser() | Token expirado aceito | Sempre `getUser()` no server |
-| JWT sem custom claims | Queries N+1 para checar permissoes | `app_metadata` via admin API |
+| Anti-Pattern | Risk | Fix |
+|-------------|------|-----|
+| RLS disabled | Any user reads/writes everything | `ALTER TABLE t ENABLE ROW LEVEL SECURITY;` |
+| service_role on client | Total RLS bypass | Use server-side only |
+| Trusting getSession() without getUser() | Expired token accepted | Always `getUser()` on server |
+| JWT without custom claims | N+1 queries to check permissions | `app_metadata` via admin API |
 
 ## Golden Rules
-- HABILITE RLS antes de inserir dados em qualquer tabela
-- USE custom claims (app_metadata) para roles, não tabela separada
-- CONFIGURE custom SMTP no Pro+ (built-in limita 4 emails/hora)
-- IMPLEMENTE MFA (aal2) para operações sensíveis (billing, delete)
+- ENABLE RLS before inserting data in any table
+- USE custom claims (app_metadata) for roles, not a separate table
+- CONFIGURE custom SMTP on Pro+ (built-in limits 4 emails/hour)
+- IMPLEMENT MFA (aal2) for sensitive operations (billing, delete)
 
 ## References
 - Docs: https://supabase.com/docs/guides/auth

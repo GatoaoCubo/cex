@@ -11,15 +11,15 @@ author: builder_agent
 domain: research
 quality: 9.1
 tags: [amazon-ads, brasil, acos, cpc, roas, benchmarks]
-tldr: "BR roda com CPC e ACOS abaixo dos EUA; breakeven ACOS = margem, target saudavel = margem menos 6 pontos."
-when_to_use: "Definir metas de Amazon Ads no Brasil sem importar benchmarks americanos"
+tldr: "BR runs with CPC and ACOS below the US; breakeven ACOS = margin, healthy target = margin minus 6 points."
+when_to_use: "Set Amazon Ads goals in Brazil without importing American benchmarks"
 keywords: [amazon_ads_br, acos_target, cpc_brasil, sponsored_products, tACOS]
 long_tails:
-  - "Qual ACOS target usar em Amazon Ads Brasil por margem"
-  - "Por que benchmark de Amazon Ads EUA quebra conta no BR"
+  - "What ACOS target to use in Amazon Ads Brazil by margin"
+  - "Why US Amazon Ads benchmarks break accounts in BR"
 axioms:
-  - "SEMPRE calcular ACOS target a partir da margem operacional"
-  - "NUNCA escalar campanha BR usando meta media dos EUA"
+  - "ALWAYS calculate ACOS target from operational margin"
+  - "NEVER scale BR campaign using US average target"
 linked_artifacts:
   primary: null
   related: [p01_kc_catalogo_proprio_mercado_livre]
@@ -36,20 +36,20 @@ related:
 topic: paid media benchmark | scope: Amazon Ads Brasil | criticality: high
 formula: breakeven ACOS = margem % | target = margem % - 6 pp
 
-## Conceitos Chave
+## Key Concepts
 
-- Leilao BR menos denso que EUA reduz CPC
-- Sponsored Products tem melhor custo x ACOS
-- TACOS acima de 8% ja pede revisao no BR
-- Picos sazonais exigem buffer forte de budget
+- BR auction less dense than US reduces CPC
+- Sponsored Products has best cost x ACOS ratio
+- TACOS above 8% already requires review in BR
+- Seasonal peaks require strong budget buffer
 
-## Comparativo
+## Comparison
 
-| Metrica | Brasil | EUA | Leitura |
-|---------|--------|-----|---------|
-| Sellers ads | 15-20% | 60-70% | BR menos concorrido |
-| CPC medio | R$0.15-0.60 | $0.80-1.50 | BR 3-5x mais barato |
-| ACOS medio | 12-18% | 25-35% | BR aceita meta dura |
+| Metric | Brazil | US | Reading |
+|--------|--------|-----|---------|
+| Sellers ads | 15-20% | 60-70% | BR less competitive |
+| Average CPC | R$0.15-0.60 | $0.80-1.50 | BR 3-5x cheaper |
+| Average ACOS | 12-18% | 25-35% | BR accepts hard target |
 
 | Campanha | CPC | CTR | CVR | ACOS |
 |----------|-----|-----|-----|------|
@@ -57,28 +57,28 @@ formula: breakeven ACOS = margem % | target = margem % - 6 pp
 | Spons. Brands | R$0.40-0.70 | 0.20-0.35% | 7-10% | 15-22% |
 | Spons. Display | R$0.15-0.30 | 0.12-0.20% | 4-7% | 20-30% |
 
-| Margem | ACOS alvo | TACOS max | Estrategia |
-|--------|-----------|-----------|------------|
-| > 40% | 20-25% | 12-15% | Agressivo |
-| 30-40% | 15-20% | 10-12% | Equilibrado |
-| 20-30% | 12-15% | 6-8% | Conservador |
-| < 20% | 8-12% | 3-5% | Defensivo |
+| Margin | Target ACOS | Max TACOS | Strategy |
+|--------|-------------|-----------|----------|
+| > 40% | 20-25% | 12-15% | Aggressive |
+| 30-40% | 15-20% | 10-12% | Balanced |
+| 20-30% | 12-15% | 6-8% | Conservative |
+| < 20% | 8-12% | 3-5% | Defensive |
 
-| Periodo | Inflacao CPC | Budget extra |
-|---------|-------------|-------------|
-| Jan-Fev | -10 a -20% | Normal |
-| Mar (Consumidor) | +15 a +20% | +20% |
-| Mai (Maes) | +10 a +20% | +25% |
-| Jul (Prime Day) | +25 a +35% | +40% |
-| Nov (Black Friday) | +30 a +50% | +50-80% |
-| Dez (Natal) | +20 a +30% | +30% |
+| Period | CPC Inflation | Extra Budget |
+|--------|--------------|--------------|
+| Jan-Feb | -10 to -20% | Normal |
+| Mar (Consumer Day) | +15 to +20% | +20% |
+| May (Mothers Day) | +10 to +20% | +25% |
+| Jul (Prime Day) | +25 to +35% | +40% |
+| Nov (Black Friday) | +30 to +50% | +50-80% |
+| Dec (Christmas) | +20 to +30% | +30% |
 
-## Regras de Ouro
+## Golden Rules
 
-- SEMPRE usar margem para definir teto de ACOS
-- SEMPRE iniciar bids em faixa BR, nao dolarizada
-- NUNCA usar TACOS 15% como "saudavel" no BR
-- SEMPRE ampliar budget antes dos picos sazonais
+- ALWAYS use margin to define ACOS ceiling
+- ALWAYS start bids in BR range, not dollarized
+- NEVER use TACOS 15% as "healthy" in BR
+- ALWAYS increase budget before seasonal peaks
 
 ## Code
 

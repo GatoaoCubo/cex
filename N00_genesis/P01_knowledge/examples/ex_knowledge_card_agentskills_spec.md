@@ -11,15 +11,15 @@ author: builder_agent
 domain: cex_taxonomy
 quality: 9.1
 tags: [agentskills, skill-format, agent-interop, markdown-skills, cross-platform]
-tldr: "AgentSkills.io empacota conhecimento como SKILL.md reutilizavel por qualquer agente — Claude Code, Codex CLI, OpenCode"
-when_to_use: "Projetar skills portaveis entre plataformas LLM ou entender o padrao SKILL.md"
+tldr: "AgentSkills.io packages knowledge as reusable SKILL.md consumable by any agent — Claude Code, Codex CLI, OpenCode"
+when_to_use: "Design portable skills across LLM platforms or understand the SKILL.md standard"
 keywords: [agentskills-io, skill-md, agent-skills, cross-platform-skills]
 long_tails:
-  - "Como criar skills reutilizaveis para agentes de IA"
-  - "Qual o formato padrao de SKILL.md para agentes LLM"
+  - "How to create reusable skills for AI agents"
+  - "What is the standard SKILL.md format for LLM agents"
 axioms:
-  - "SEMPRE separar interface (SKILL.md) de profundidade (references/)"
-  - "NUNCA criar SKILL.md monolitico com toda a documentacao"
+  - "ALWAYS separate interface (SKILL.md) from depth (references/)"
+  - "NEVER create a monolithic SKILL.md with all documentation"
 linked_artifacts:
   primary: null
   related: [p01_kc_brand_skill, p01_kc_csv_as_knowledge]
@@ -40,68 +40,68 @@ related:
 
 ## TL;DR
 
-Standard aberto que empacota conhecimento especializado como Markdown files consumiveis por qualquer agente de IA. Cada skill tem SKILL.md (interface leve) + references/ (profundidade on-demand). Discovery automatico via campo `description` no frontmatter.
+Open standard that packages specialized knowledge as Markdown files consumable by any AI agent. Each skill has SKILL.md (lightweight interface) + references/ (on-demand depth). Automatic discovery via `description` field in frontmatter.
 
-## Conceito Central
+## Core Concept
 
-AgentSkills.io resolve o problema de portabilidade de conhecimento entre agentes. Uma skill e um diretorio com arquivo SKILL.md contendo frontmatter YAML (name + description) e body Markdown com workflow e referencia. O campo `description` funciona como trigger rule — o agente le esse campo para decidir se ativa a skill. Cross-platform por design: Claude Code, Codex CLI e OpenCode consomem o mesmo formato sem adaptacao.
+AgentSkills.io solves the problem of knowledge portability between agents. A skill is a directory with a SKILL.md file containing YAML frontmatter (name + description) and a Markdown body with workflow and references. The `description` field acts as a trigger rule — the agent reads this field to decide whether to activate the skill. Cross-platform by design: Claude Code, Codex CLI, and OpenCode consume the same format without adaptation.
 
-A separacao interface/profundidade e fundamental: SKILL.md carrega rapido (~1KB), enquanto references/ contem exemplos, schemas e docs completas que o agente carrega sob demanda. Isso otimiza uso de contexto — so carrega o que precisa.
+The interface/depth separation is fundamental: SKILL.md loads fast (~1KB), while references/ contains examples, schemas, and complete docs that the agent loads on demand. This optimizes context usage — only loads what is needed.
 
-## Arquitetura/Patterns
+## Architecture/Patterns
 
-| Componente | Papel | Tamanho |
-|------------|-------|---------|
-| SKILL.md | Interface principal, trigger rule | Leve (~1KB) |
-| references/EXAMPLES.md | Exemplos de uso concretos | On-demand |
-| references/FUNCTIONS_REF.md | API e funcoes disponiveis | On-demand |
-| references/*.md | Docs especializados por topico | On-demand |
+| Component | Role | Size |
+|-----------|------|------|
+| SKILL.md | Main interface, trigger rule | Lightweight (~1KB) |
+| references/EXAMPLES.md | Concrete usage examples | On-demand |
+| references/FUNCTIONS_REF.md | Available APIs and functions | On-demand |
+| references/*.md | Specialized docs by topic | On-demand |
 
-Formato do frontmatter obrigatorio:
+Mandatory frontmatter format:
 
 ```yaml
 ---
-name: skill-name        # kebab-case, identificador unico
-description: "Use when..." # trigger rule para o agente
+name: skill-name        # kebab-case, unique identifier
+description: "Use when..." # trigger rule for the agent
 ---
 ```
 
-Instalacao por plataforma:
-- Claude Code: plugin marketplace ou diretorio de comandos do projeto
-- Codex CLI: copiar skills/ para `~/.codex/skills/`
-- OpenCode: clonar repo completo em `~/.opencode/skills/`
+Installation by platform:
+- Claude Code: plugin marketplace or project commands directory
+- Codex CLI: copy skills/ to `~/.codex/skills/`
+- OpenCode: clone full repo to `~/.opencode/skills/`
 - Universal: `npx skills add <repo-url>`
 
-Discovery pattern: agente escaneia diretorios de skills, le `description` de cada SKILL.md, ativa quando contexto do request faz match com o trigger.
+Discovery pattern: agent scans skills directories, reads `description` from each SKILL.md, activates when request context matches the trigger.
 
-## Exemplos Praticos
+## Practical Examples
 
-| Skill | Trigger | Dominio |
-|-------|---------|---------|
-| obsidian-markdown | Arquivos .md, wikilinks, callouts | Obsidian editing |
-| obsidian-bases | Arquivos .base, filtros, formulas | Database views |
-| json-canvas | Arquivos .canvas, mind maps | Visual mapping |
-| defuddle | Extrair markdown de URLs | Web content |
+| Skill | Trigger | Domain |
+|-------|---------|--------|
+| obsidian-markdown | .md files, wikilinks, callouts | Obsidian editing |
+| obsidian-bases | .base files, filters, formulas | Database views |
+| json-canvas | .canvas files, mind maps | Visual mapping |
+| defuddle | Extract markdown from URLs | Web content |
 
-Exemplo de description eficaz:
+Effective description example:
 ```
 "Create and edit Obsidian Bases (.base files)
 with views, filters, formulas. Use when working
 with .base files or database-like content."
 ```
 
-O "Use when..." e a parte critica — sem ele, o agente nao sabe quando ativar.
+The "Use when..." is the critical part — without it, the agent does not know when to activate.
 
 ## Anti-Patterns
 
-- SKILL.md monolitico com toda documentacao embutida
-- Campo description vago sem contexto de ativacao
-- Copiar apenas skills/ sem estrutura do repo (OpenCode)
-- Confundir com MCP tools — agentskills e file-based
-- Skills sem references/ quando dominio e complexo
-- Name com espacos ou camelCase (deve ser kebab-case)
+- Monolithic SKILL.md with all documentation embedded
+- Vague description field without activation context
+- Copying only skills/ without repo structure (OpenCode)
+- Confusing with MCP tools — agentskills is file-based
+- Skills without references/ when the domain is complex
+- Name with spaces or camelCase (must be kebab-case)
 
-## Referencias
+## References
 
 - source: https://github.com/kepano/obsidian-skills
 - related: p01_kc_brand_skill

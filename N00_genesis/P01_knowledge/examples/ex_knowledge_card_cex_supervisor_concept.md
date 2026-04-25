@@ -11,15 +11,15 @@ author: builder_agent
 domain: cex_taxonomy
 quality: 9.1
 tags: [cex, agent_group, department, specialization, agent-team, boot-sequence]
-tldr: "Agent_group eh entidade L4 que preenche 12 LPs — departamento completo com identidade, equipe, tools, memoria e governanca"
-when_to_use: "Entender como organizar agentes LLM em departamentos especializados com autonomia total"
+tldr: "Agent_group is an L4 entity that fills 12 LPs — complete department with identity, team, tools, memory and governance"
+when_to_use: "Understand how to organize LLM agents into specialized departments with full autonomy"
 keywords: [agent_group, department, specialization, vertical, agent-team]
 long_tails:
-  - "Como estruturar departamentos de agentes LLM especializados"
-  - "Qual a diferenca entre agent e agent_group no CEX"
+  - "How to structure specialized LLM agent departments"
+  - "What is the difference between agent and agent_group in CEX"
 axioms:
-  - "SEMPRE 1 agent_group = 1 dominio = autonomia total"
-  - "NUNCA agent_group executa fora do seu dominio"
+  - "ALWAYS 1 agent_group = 1 domain = full autonomy"
+  - "NEVER agent_group executes outside its domain"
 linked_artifacts:
   primary: p01_kc_cex_cortex_enterprise
   related: [p01_kc_cex_function_become, p01_kc_cex_pipeline_execution]
@@ -40,50 +40,50 @@ related:
 
 ## Summary
 
-Agent_group eh a entidade de maior completude no CEX (Level 4). Preenche todos os 12 Lifecycle Positions: tem identidade (P02), conhecimento (P01), instrucoes (P03), skills (P04), templates (P05), schemas (P06), testes (P07), arquitetura (P08), config (P09), memoria (P10), learning (P11) e coordenacao (P12). Equivale a um departamento empresarial completo com equipe de 22-105 agentes especializados.
+Agent_group is the highest completeness entity in CEX (Level 4). Fills all 12 Lifecycle Positions: has identity (P02), knowledge (P01), instructions (P03), skills (P04), templates (P05), schemas (P06), tests (P07), architecture (P08), config (P09), memory (P10), learning (P11) and coordination (P12). Equivalent to a complete enterprise department with a team of 22-105 specialized agents.
 
 ## Spec
 
-| Propriedade | Valor | Nota |
-|-------------|-------|------|
-| Level | L4 (maximo) | L1=prompt, L2=chain, L3=agent, L4=agent_group |
-| LPs preenchidos | 12/12 | Unica entidade com cobertura total |
-| Agentes por agent_group | 22-105 | commercial_agent=22 (menor), builder_agent=105 (maior) |
-| Arquivos de identidade | 2 | PRIME_{SAT}.md + mental_model.yaml |
-| Boot time | 5-15s | Depende de MCPs carregados |
-| Modelo | sonnet ou opus | Opus para tarefas complexas (build, deploy) |
-| MCPs | 1-3 por agent_group | Brain (universal) + especializados |
-| Autonomia | Total no dominio | Orquestrador nao interfere na execucao |
+| Property | Value | Note |
+|----------|-------|------|
+| Level | L4 (maximum) | L1=prompt, L2=chain, L3=agent, L4=agent_group |
+| LPs filled | 12/12 | Only entity with total coverage |
+| Agents per agent_group | 22-105 | commercial_agent=22 (smallest), builder_agent=105 (largest) |
+| Identity files | 2 | PRIME_{SAT}.md + mental_model.yaml |
+| Boot time | 5-15s | Depends on loaded MCPs |
+| Model | sonnet or opus | Opus for complex tasks (build, deploy) |
+| MCPs | 1-3 per agent_group | Brain (universal) + specialized |
+| Autonomy | Full within domain | Orchestrator does not interfere with execution |
 
-Implementacao de referencia (organization) — 7 agent_groups:
+Reference implementation (organization) — 7 agent_groups:
 
-| Agent_group | Dominio | Lens | Modelo | MCPs | Agentes |
-|-----------|---------|------|--------|------|---------|
-| orchestrator | Orquestracao | — | opus | brain+orch | 0 (roteia) |
-| research_agent | Pesquisa | Analytical Envy | sonnet | firecrawl+brain | 45 |
+| Agent_group | Domain | Lens | Model | MCPs | Agents |
+|-----------|--------|------|-------|------|--------|
+| orchestrator | Orchestration | — | opus | brain+orch | 0 (routes) |
+| research_agent | Research | Analytical Envy | sonnet | firecrawl+brain | 45 |
 | marketing_agent | Marketing | Creative Lust | sonnet | markitdown+brain | 37 |
-| builder_agent | Engenharia | Inventive Pride | opus | brain | 105 |
-| knowledge_agent | Conhecimento | Knowledge Gluttony | sonnet | brain | 38 |
-| operations_agent | Operacoes | Gating Wrath | opus | railway+pg+brain | 37 |
-| commercial_agent | Receita | Strategic Greed | sonnet | brain | 22 |
+| builder_agent | Engineering | Inventive Pride | opus | brain | 105 |
+| knowledge_agent | Knowledge | Knowledge Gluttony | sonnet | brain | 38 |
+| operations_agent | Operations | Gating Wrath | opus | railway+pg+brain | 37 |
+| commercial_agent | Revenue | Strategic Greed | sonnet | brain | 22 |
 
 ## Patterns
 
 | Trigger | Action |
 |---------|--------|
-| Dominio requer >10 agentes | Criar agent_group dedicado |
-| Tarefa cruza 2+ dominios | Orquestrador decompoe em sub-tarefas por agent_group |
-| Agent_group precisa de boot rapido | Minimizar MCPs (cada MCP = +2-5s) |
-| Equipe cresce acima de 50 agentes | Subdividir com mental_model por especialidade |
-| Novo dominio de negocio emerge | Instanciar agent_group com PRIME + mental_model |
+| Domain requires >10 agents | Create dedicated agent_group |
+| Task crosses 2+ domains | Orchestrator decomposes into sub-tasks per agent_group |
+| Agent_group needs fast boot | Minimize MCPs (each MCP = +2-5s) |
+| Team grows above 50 agents | Subdivide with mental_model by specialty |
+| New business domain emerges | Instantiate agent_group with PRIME + mental_model |
 
 ## Anti-Patterns
 
-- Agent_group sem PRIME.md (sem identidade = execucao incoerente)
-- Agent_group executando tarefas de outro dominio (viola separacao)
-- Orquestrador executando ao inves de despachar para agent_group
-- Agent_group com 0 agentes (container vazio, sem capacidade)
-- Compartilhar MCPs entre agent_groups (acoplamento, boot lento)
+- Agent_group without PRIME.md (no identity = incoherent execution)
+- Agent_group executing tasks of another domain (violates separation)
+- Orchestrator executing instead of dispatching to agent_group
+- Agent_group with 0 agents (empty container, no capability)
+- Sharing MCPs between agent_groups (coupling, slow boot)
 
 ## Code
 

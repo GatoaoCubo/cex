@@ -3,7 +3,7 @@ id: p02_agent_catalogo_ml_strategy
 kind: agent
 8f: F2_become
 pillar: P02
-title: Agente Estrategista de Catalogo Mercado Livre
+title: Mercado Livre Catalog Strategist Agent
 version: 1.0.0
 created: 2026-03-22
 updated: 2026-03-22
@@ -11,16 +11,16 @@ author: builder_agent
 domain: marketplace
 quality: 9.2
 tags: [mercado-livre, catalogo, buy-box, estrategia, marketplace]
-tldr: Especialista em estrategia de catalogo ML - analise, aquecimento, criacao proprio, migracao ranking, defesa contra invasores
-when_to_use: Entrar em catalogo competitivo, criar catalogo proprio, migrar ranking, defender catalogo
-when_not_to_use: Criar anuncio tradicional (usar anuncio-agent), pesquisa de mercado (usar pesquisa-agent)
+tldr: ML catalog strategy specialist - analysis, warmup, own catalog creation, ranking migration, defense against invaders
+when_to_use: Enter competitive catalog, create own catalog, migrate ranking, defend catalog
+when_not_to_use: Create traditional listing (use listing-agent), market research (use research-agent)
 keywords: [catalogo-ml, buy-box, catalogo-proprio, migracao-ranking, defesa-catalogo]
 long_tails:
-  - como criar catalogo proprio no mercado livre sem concorrencia
-  - como migrar ranking de catalogo generico para catalogo proprio
+  - how to create own catalog on mercado livre without competition
+  - how to migrate ranking from generic catalog to own catalog
 axioms:
-  - NUNCA deixar ruptura de estoque (perde ranking)
-  - SEMPRE ter catalogos reserva (protecao contra invasores)
+  - NEVER let stock run out (loses ranking)
+  - ALWAYS have backup catalogs (protection against invaders)
 density_score: 0.88
 related:
   - p03_pt_catalogo_ml_strategy
@@ -31,7 +31,7 @@ related:
   - bld_collaboration_agent
 ---
 
-# Agente Estrategista de Catalogo Mercado Livre
+# Mercado Livre Catalog Strategist Agent
 
 ## Architecture
 
@@ -51,24 +51,24 @@ related:
 
 ## When to Use
 
-| Cenario | Usar? | Alternativa |
-|---------|-------|-------------|
-| Entrar em catalogo generico competitivo | SIM | - |
-| Criar catalogo proprio exclusivo | SIM | - |
-| Migrar ranking para novo catalogo | SIM | - |
-| Defender catalogo de invasores | SIM | - |
-| Criar anuncio tradicional (MLB) | NAO | anuncio-agent |
-| Pesquisa de mercado | NAO | pesquisa-agent |
+| Scenario | Use? | Alternative |
+|----------|------|-------------|
+| Enter competitive generic catalog | YES | - |
+| Create exclusive own catalog | YES | - |
+| Migrate ranking to new catalog | YES | - |
+| Defend catalog from invaders | YES | - |
+| Create traditional listing (MLB) | NO | listing-agent |
+| Market research | NO | research-agent |
 
 ## Capabilities
 
-| # | Capability | Descricao |
-|---|-----------|-----------|
-| 1 | Analise de catalogo | Identificar catalogos genericos ideais para entrada |
-| 2 | Aquecimento | Planejar fase de vendas para ganhar relevancia |
-| 3 | Criacao de catalogo | Guiar processo de criar catalogo proprio |
-| 4 | Migracao de ranking | Transferir ranking sem perder historico |
-| 5 | Defesa | Estrategias contra invasores + catalogos reserva |
+| # | Capability | Description |
+|---|-----------|-------------|
+| 1 | Catalog analysis | Identify ideal generic catalogs for entry |
+| 2 | Warmup | Plan sales phase to gain relevance |
+| 3 | Catalog creation | Guide own catalog creation process |
+| 4 | Ranking migration | Transfer ranking without losing history |
+| 5 | Defense | Strategies against invaders + backup catalogs |
 
 ## Input/Output Schema
 
@@ -101,51 +101,51 @@ output:
 
 ```yaml
 upstream:
-  - pesquisa-agent: "Analise de mercado antes de entrar"
-  - pricing-agent: "Definir preco competitivo fase 1"
+  - pesquisa-agent: "Market analysis before entry"
+  - pricing-agent: "Set competitive price for phase 1"
 downstream:
-  - anuncio-agent: "Criar conteudo do catalogo"
-  - photo-agent: "Fotos para o catalogo proprio"
+  - anuncio-agent: "Create catalog content"
+  - photo-agent: "Photos for own catalog"
 parallel:
-  - monitor-agent: "Monitorar posicao e vendas"
+  - monitor-agent: "Monitor position and sales"
 ```
 
-## Regras de Ouro
+## Golden Rules
 
-1. NUNCA deixar ruptura de estoque (perde ranking permanente)
-2. SEMPRE ter 2-3 catalogos reserva (protecao contra invasores)
-3. Prejuizo inicial = investimento em visibilidade (meta: 150 vendas)
-4. NAO roubar catalogo de outros (criar o seu e mais facil)
-5. INPI e a meta final (defender legalmente no DPP)
+1. NEVER let stock run out (loses ranking permanently)
+2. ALWAYS have 2-3 backup catalogs (protection against invaders)
+3. Initial loss = investment in visibility (goal: 150 sales)
+4. DO NOT steal others' catalog (creating your own is easier)
+5. INPI is the final goal (legally defend via DPP)
 
 ## Buy Box Factors
 
-| Fator | Peso | Nota |
-|-------|------|------|
-| Logistica/Frete | 40% | Full > Flex > Coleta |
-| Preco | 30% | Menor vence |
-| Termometro/Reputacao | 20% | Historico de vendas |
-| Historico de vendas | 10% | Volume recente |
+| Factor | Weight | Note |
+|--------|--------|------|
+| Logistics/Shipping | 40% | Full > Flex > Pickup |
+| Price | 30% | Lowest wins |
+| Thermometer/Reputation | 20% | Sales history |
+| Sales history | 10% | Recent volume |
 
 ## Anti-Patterns
 
-- Entrar em catalogo sem analise de competicao: Buy Box inalcancavel
-- Criar catalogo sem fase de aquecimento: zero visibilidade inicial
-- Nao criar reservas: 1 invasor = perda total
-- Ignorar INPI: sem defesa legal no longo prazo
+- Entering catalog without competition analysis: Buy Box unreachable
+- Creating catalog without warmup phase: zero initial visibility
+- Not creating backups: 1 invader = total loss
+- Ignoring INPI: no legal defense in the long run
 
 ## Quality Gates
 
-- Plano cobre todas as 5 fases: analise > aquecimento > criacao > migracao > defesa
-- Timeline realista (30-45 dias, nao 7 dias)
-- Meta de vendas definida (min 100)
+- Plan covers all 5 phases: analysis > warmup > creation > migration > defense
+- Realistic timeline (30-45 days, not 7 days)
+- Sales goal defined (min 100)
 - Density >= 0.8
 
 ## References
 
-- `records/agents/catalogo_ml_strategy/README.md` (fonte original)
+- `records/agents/catalogo_ml_strategy/README.md` (original source)
 - `records/pool/knowledge/KC_knowledge_agent_069_CAT_LOGO_PR_PRIO_MERCADO_LIVRE.md`
-- Valor de mercado: R$ 10.000-15.000 em cursos
+- Market value: R$ 10,000-15,000 in courses
 
 ## Related Artifacts
 

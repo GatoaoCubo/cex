@@ -4,15 +4,15 @@ kind: artifact_blueprint
 8f: F4_reason
 pillar: P06
 llm_function: CONSTRAIN
-title: "Blueprint: model_card — Meta-Template para Producao de Model Cards"
+title: "Blueprint: model_card — Meta-Template for Model Card Production"
 version: 1.0.0
 created: 2026-03-26
 updated: 2026-03-26
 author: builder_agent
 quality: 9.1
 tags: [blueprint, model-card, meta-template, production-mold, llm-spec]
-tldr: "Meta-template que define COMO gerar model_cards validos — frontmatter layered, capabilities como booleans, pricing normalizado, freshness 90d"
-when_to_use: "Antes de gerar qualquer model_card — este blueprint eh o molde"
+tldr: "Meta-template that defines HOW to generate valid model_cards — layered frontmatter, capabilities as booleans, normalized pricing, 90d freshness"
+when_to_use: "Before generating any model_card — this blueprint is the mold"
 synthesis: "research_agent (standards survey, 12 standards) + knowledge_agent-GEMINI (10-provider comparative) + operations_agent-CODEX (code patterns, 7 frameworks) + builder_agent (CEX analysis + boundary + quality gates)"
 related:
   - bld_schema_model_card
@@ -114,10 +114,10 @@ pricing:
   cache_write: {{float or null}}                 # Anthropic: 1.25x base
   unit: per_1M_tokens                            # ALWAYS this unit — normaliza comparacao
 
-# SEARCH/DISCOVERY (7) — melhora recall ~30%
-# Sources: CEX KC blueprint (padrao), brain search BM25
+# SEARCH/DISCOVERY (7) -- improves recall ~30%
+# Sources: CEX KC blueprint (standard), brain search BM25
 domain: model_selection
-quality: null                                    # NUNCA auto-atribuir — validacao externa
+quality: null                                    # NEVER self-assign -- external validation
 tags: [model-card, {{provider}}, {{model_family}}, {{key_capability}}]
 tldr: "{{1 frase com dados: modelo, provider, contexto, preco, destaque}}"
 when_to_use: "{{condicao de decisao: roteamento, selecao, comparacao}}"

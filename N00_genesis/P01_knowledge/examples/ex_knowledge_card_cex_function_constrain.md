@@ -11,15 +11,15 @@ author: builder_agent
 domain: cex_taxonomy
 quality: 9.1
 tags: [cex, llm-function, constrain, grammar, schema, template, formatting]
-tldr: "CONSTRAIN restringe output via 11 tipos em 3 niveis (hard/medium/soft) — entrega no padrao exigido"
-when_to_use: "Entender como LLMs formatam output e a fronteira entre CONSTRAIN (formato) e GOVERN (qualidade)"
+tldr: "CONSTRAIN restricts output via 11 types in 3 levels (hard/medium/soft) — delivers to required standard"
+when_to_use: "Understand how LLMs format output and the boundary between CONSTRAIN (format) and GOVERN (quality)"
 keywords: [constrain, grammar, schema, template, response_format, validation, formatting]
 long_tails:
-  - "Qual a diferenca entre CONSTRAIN e GOVERN no CEX"
-  - "Quais os 11 tipos de restricao na taxonomia CEX"
+  - "What is the difference between CONSTRAIN and GOVERN in CEX"
+  - "What are the 11 constraint types in the CEX taxonomy"
 axioms:
-  - "SEMPRE preferir grammar (hard) sobre response_format (soft) quando conformidade eh critica"
-  - "NUNCA confundir CONSTRAIN (formato de output) com GOVERN (qualidade de output)"
+  - "ALWAYS prefer grammar (hard) over response_format (soft) when conformance is critical"
+  - "NEVER confuse CONSTRAIN (output format) with GOVERN (output quality)"
 linked_artifacts:
   primary: p01_kc_cex_function_produce
   related: [p01_kc_cex_function_govern, p01_kc_cex_function_call]
@@ -40,42 +40,42 @@ related:
 
 ## Summary
 
-CONSTRAIN formata, estrutura e restringe output para que conforme com schemas, templates e gramaticas formais. Com 11 tipos (14% do CEX), opera em 3 niveis de rigidez: HARD (grammar — impossivel violar no decoder), MEDIUM (law, axiom, guardrail — regras inviolaveis), SOFT (response_format, template — instrucoes que o LLM pode falhar). Insight critico: response_format (LLM ve no prompt) vs grammar (LLM nao ve, decoder aplica). Mesma funcao, garantias radicalmente diferentes. Frameworks como Guidance (Microsoft) e Outlines (dottxt) confirmam que CONSTRAIN intervem no processo de geracao, nao apenas pos-processa.
+CONSTRAIN formats, structures, and restricts output to conform with schemas, templates, and formal grammars. With 11 types (14% of CEX), it operates at 3 rigidity levels: HARD (grammar — impossible to violate at decoder), MEDIUM (law, axiom, guardrail — inviolable rules), SOFT (response_format, template — instructions the LLM may fail to follow). Critical insight: response_format (LLM sees in prompt) vs grammar (LLM does not see, decoder applies). Same function, radically different guarantees. Frameworks like Guidance (Microsoft) and Outlines (dottxt) confirm that CONSTRAIN intervenes in the generation process, not just post-processes.
 
 ## Spec
 
-| Tipo | LP | Rigidez | Funcao | Detalhe |
-|------|-----|---------|--------|---------|
-| grammar | P06 | Hard | Gramatica formal | BNF/EBNF/FSM no decoder |
-| law | P08 | Medium | Regra inviolavel | Principio constitucional |
-| axiom | P10 | Medium | Verdade assumida | Restricao de dominio |
-| guardrail | P11 | Medium | Barreira de seguranca | Previne output inadequado |
-| response_format | P05 | Soft | Formato esperado | JSON, Markdown, XML |
-| prompt_template | P03 | Soft | Template parametrizado | Reutilizacao de prompts |
-| input_schema | P06 | Soft | Validacao de input | Fronteira entre sistemas |
-| output_schema | P06 | Soft | Validacao de output | Formato downstream |
-| validation_schema | P06 | Soft | Validacao intermediaria | Pipeline multi-step |
-| template | P05 | Soft | Template de output | Emails, relatorios |
-| style_guide | P05 | Soft | Convencoes de escrita | Tom, terminologia |
+| Type | LP | Rigidity | Function | Detail |
+|------|-----|----------|----------|--------|
+| grammar | P06 | Hard | Formal grammar | BNF/EBNF/FSM at decoder |
+| law | P08 | Medium | Inviolable rule | Constitutional principle |
+| axiom | P10 | Medium | Assumed truth | Domain constraint |
+| guardrail | P11 | Medium | Safety barrier | Prevents inadequate output |
+| response_format | P05 | Soft | Expected format | JSON, Markdown, XML |
+| prompt_template | P03 | Soft | Parameterized template | Prompt reuse |
+| input_schema | P06 | Soft | Input validation | Boundary between systems |
+| output_schema | P06 | Soft | Output validation | Downstream format |
+| validation_schema | P06 | Soft | Intermediate validation | Multi-step pipeline |
+| template | P05 | Soft | Output template | Emails, reports |
+| style_guide | P05 | Soft | Writing conventions | Tone, terminology |
 
-HARD: grammar opera DURANTE geracao (token-level). Impossivel violar.
-SOFT: response_format opera via prompt. LLM pode ignorar.
-MEDIUM: rules aplicadas por sistema externo. Dificil violar mas nao
-impossivel. Guidance (MS) e Outlines (dottxt) usam FSMs e CFGs para
-constrained generation — alterando o espaco de tokens possiveis.
-LMQL (ETH Zurich) oferece WHERE clauses SQL-like para restricao.
+HARD: grammar operates DURING generation (token-level). Impossible to violate.
+SOFT: response_format operates via prompt. LLM may ignore.
+MEDIUM: rules applied by external system. Hard to violate but not
+impossible. Guidance (MS) and Outlines (dottxt) use FSMs and CFGs for
+constrained generation — altering the space of possible tokens.
+LMQL (ETH Zurich) offers SQL-like WHERE clauses for constraint.
 
 ## Patterns
 
 | Trigger | Action |
 |---------|--------|
-| Conformidade matematicamente garantida | grammar (BNF/EBNF no decoder) |
-| Output JSON para API downstream | output_schema + response_format |
-| Mesmo prompt para inputs variados | prompt_template parametrizado |
-| Consistencia entre multiplos outputs | style_guide compartilhado |
-| Pipeline multi-step com validacao | validation_schema por etapa |
-| Output para consumo humano padronizado | template (email, relatorio) |
-| Fronteira entre sistemas | input_schema na entrada |
+| Mathematically guaranteed conformance | grammar (BNF/EBNF at decoder) |
+| JSON output for downstream API | output_schema + response_format |
+| Same prompt for varied inputs | parameterized prompt_template |
+| Consistency across multiple outputs | shared style_guide |
+| Multi-step pipeline with validation | validation_schema per stage |
+| Output for standardized human consumption | template (email, report) |
+| Boundary between systems | input_schema at entry |
 
 ## Code
 
@@ -99,12 +99,12 @@ prompt = template.format(product="LED", market="BR", format="table")
 
 ## Anti-Patterns
 
-- response_format para dados criticos (LLM pode ignorar, use grammar)
-- grammar para output livre/criativo (sobre-restringe geracao)
-- Confundir schema (validacao) com format (expectativa)
-- Template rigido para output que precisa de adaptacao
-- style_guide sem exemplos concretos (ambiguidade interpretativa)
-- Validacao apenas no output final (erro cascateia no pipeline)
+- response_format for critical data (LLM may ignore, use grammar)
+- grammar for free/creative output (over-constrains generation)
+- Confusing schema (validation) with format (expectation)
+- Rigid template for output that needs adaptation
+- style_guide without concrete examples (interpretive ambiguity)
+- Validation only on final output (error cascades through pipeline)
 
 ## References
 

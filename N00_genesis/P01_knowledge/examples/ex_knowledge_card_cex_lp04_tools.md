@@ -3,7 +3,7 @@ id: p01_kc_cex_lp04_tools
 kind: knowledge_card
 8f: F3_inject
 pillar: P01
-title: "CEX LP04 Tools — O Que a LLM Usa (10 Tipos de Ferramenta)"
+title: "CEX LP04 Tools — What the LLM Uses (10 Types of Tool)"
 version: 1.0.0
 created: 2026-03-25
 updated: 2026-03-25
@@ -11,15 +11,15 @@ author: builder_agent
 domain: cex_taxonomy
 quality: 9.2
 tags: [cex, lp04, tools, call, skill, mcp, hook, plugin]
-tldr: "P04 Tools agrupa 10 tipos de ferramenta que estendem o LLM alem de texto via funcao CALL"
-when_to_use: "Classificar artefatos de tooling ou entender como P04 conecta o LLM ao mundo externo"
+tldr: "P04 Tools groups 10 types of tool that extend the LLM beyond text via the CALL function"
+when_to_use: "Classify tooling artifacts or understand how P04 connects the LLM to the external world"
 keywords: [skill, mcp-server, hook, plugin, connector, daemon, component, cli-tool]
 long_tails:
-  - "Quais tipos de ferramenta existem no CEX"
-  - "Diferenca entre skill e component no CEX"
+  - "What types of tool exist in CEX"
+  - "Difference between skill and component in CEX"
 axioms:
-  - "SEMPRE registrar tools no agent antes de usar"
-  - "NUNCA expor tool sem permissao explicita (P09 governa)"
+  - "ALWAYS register tools in the agent before using"
+  - "NEVER expose a tool without explicit permission (P09 governs)"
 linked_artifacts:
   primary: p01_kc_cex_lp03_prompt
   related: [p01_kc_cex_lp02_model, p01_kc_cex_lp01_knowledge]
@@ -40,59 +40,59 @@ related:
 
 ## Quick Reference
 
-topic: LP04 Tools | scope: 10 tipos de artefato | criticality: high
-funcao_llm: CALL (+ GOVERN para hook/daemon)
-analogia: caixa de ferramentas
+topic: LP04 Tools | scope: 10 artifact types | criticality: high
+llm_function: CALL (+ GOVERN for hook/daemon)
+analogy: toolbox
 
-## Conceitos Chave
+## Key Concepts
 
-- P04 responde: "que ferramentas externas posso invocar?"
-- skill eh o tipo core (habilidade rica com fases e trigger)
-- Funcao dominante CALL: LLM invoca tool durante geracao
-- mcp_server expoe tools + resources via protocolo MCP
-- hook executa codigo em evento pre/post (GOVERN, nao CALL)
-- component eh menor unidade composavel de pipeline
-- Sem P04 o LLM so gera texto; com P04 interage com mundo
-- P04 eh constrangido por P02 (identidade define tools)
-- client eh consumidor unidirecional de API externa
-- connector eh bidirecional (client eh unidirecional)
-- daemon persiste em background (cli_tool executa e termina)
-- scraper extrai dados web (nao confundir com client/API)
-- plugin eh extensao plugavel sem fases estruturadas
-- XAgent (Tsinghua): tools em Docker isolado = seguranca
-- ToolBench cataloga 16.000+ APIs reais com benchmarks
-- P04 interage com P09 (permissoes) e P07 (avaliacao)
+- P04 answers: "what external tools can I invoke?"
+- skill is the core type (rich capability with phases and trigger)
+- Dominant function CALL: LLM invokes tool during generation
+- mcp_server exposes tools + resources via MCP protocol
+- hook executes code on pre/post event (GOVERN, not CALL)
+- component is the smallest composable pipeline unit
+- Without P04 the LLM only generates text; with P04 it interacts with the world
+- P04 is constrained by P02 (identity defines tools)
+- client is a unidirectional consumer of external API
+- connector is bidirectional (client is unidirectional)
+- daemon persists in background (cli_tool executes and terminates)
+- scraper extracts web data (do not confuse with client/API)
+- plugin is a pluggable extension without structured phases
+- XAgent (Tsinghua): tools in isolated Docker = security
+- ToolBench catalogs 16,000+ real APIs with benchmarks
+- P04 interacts with P09 (permissions) and P07 (evaluation)
 
-## Fases
+## Phases
 
-1. Registro: declarar tool no agent ou mcp_server
-2. Permissao: P09 Config governa acesso e limites
-3. Invocacao: LLM decide CALL durante geracao (ReAct loop)
-4. Execucao: tool roda e retorna resultado ao contexto
-5. Monitoramento: P07 Evals testa e avalia performance
+1. Registration: declare tool in agent or mcp_server
+2. Permission: P09 Config governs access and limits
+3. Invocation: LLM decides CALL during generation (ReAct loop)
+4. Execution: tool runs and returns result to context
+5. Monitoring: P07 Evals tests and evaluates performance
 
-## Regras de Ouro
+## Golden Rules
 
-- SEMPRE declarar tools antes de usar (registro explicito)
-- SEMPRE isolar tools em containers quando possivel
-- NUNCA dar acesso irrestrito a tools (least privilege)
-- NUNCA usar daemon quando cli_tool basta (complexidade)
-- SEMPRE preferir mcp_server sobre connector para novos tools
+- ALWAYS declare tools before using (explicit registration)
+- ALWAYS isolate tools in containers when possible
+- NEVER give unrestricted access to tools (least privilege)
+- NEVER use daemon when cli_tool suffices (complexity)
+- ALWAYS prefer mcp_server over connector for new tools
 
-## Comparativo
+## Comparison
 
-| Tipo | Proposito | Persistente | Core |
-|------|-----------|-------------|------|
-| skill | Habilidade com fases + trigger | nao | sim |
-| mcp_server | Servidor MCP (tools + resources) | sim | sim |
-| hook | Pre/post processing em evento | nao | sim |
-| plugin | Extensao plugavel | sim | nao |
-| client | Cliente unidirecional de API | nao | nao |
-| cli_tool | Ferramenta de linha de comando | nao | nao |
-| scraper | Extrator de dados web | nao | nao |
-| connector | Conector bidirecional externo | nao | nao |
-| daemon | Processo background persistente | sim | nao |
-| component | Bloco atomico de pipeline | nao | nao |
+| Type | Purpose | Persistent | Core |
+|------|---------|------------|------|
+| skill | Capability with phases + trigger | no | yes |
+| mcp_server | MCP server (tools + resources) | yes | yes |
+| hook | Pre/post processing on event | no | yes |
+| plugin | Pluggable extension | yes | no |
+| client | Unidirectional API client | no | no |
+| cli_tool | Command-line tool | no | no |
+| scraper | Web data extractor | no | no |
+| connector | External bidirectional connector | no | no |
+| daemon | Persistent background process | yes | no |
+| component | Atomic pipeline block | no | no |
 
 ## Flow
 

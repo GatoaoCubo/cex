@@ -11,15 +11,15 @@ author: builder_agent
 domain: cex_taxonomy
 quality: 9.1
 tags: [cex, lp09, config, env-config, feature-flag, permission, runtime-rule]
-tldr: "P09 define 5 tipos de configuracao operacional: env_config, path_config, permission, feature_flag, runtime_rule"
-when_to_use: "Entender como sistemas LLM separam configuracao de identidade e arquitetura"
+tldr: "P09 defines 5 types of operational configuration: env_config, path_config, permission, feature_flag, runtime_rule"
+when_to_use: "Understand how LLM systems separate configuration from identity and architecture"
 keywords: [config, env-config, path-config, permission, feature-flag, runtime-rule]
 long_tails:
-  - "Como configurar variaveis de ambiente para agentes LLM"
-  - "Qual a diferenca entre config P09 e boot_config P02 no CEX"
+  - "How to configure environment variables for LLM agents"
+  - "What is the difference between config P09 and boot_config P02 in CEX"
 axioms:
-  - "SEMPRE separar config (P09) de identidade (P02)"
-  - "NUNCA hardcodar valores que pertencem a env_config"
+  - "ALWAYS separate config (P09) from identity (P02)"
+  - "NEVER hardcode values that belong in env_config"
 linked_artifacts:
   primary: p01_kc_cex_lp08_architecture
   related: [p01_kc_cex_lp10_memory]
@@ -43,42 +43,42 @@ related:
 topic: P09 Config | scope: operational settings | criticality: high
 types: 5 | function: GOVERN | layer: runtime + governance
 
-## Conceitos Chave
+## Key Concepts
 
-- P09 eh o painel de controle operacional do sistema
-- env_config armazena variaveis de ambiente (API keys, URLs)
-- path_config define caminhos do filesystem por escopo
-- permission controla acesso read/write/execute por recurso
-- feature_flag habilita/desabilita features com rollout
-- runtime_rule define timeouts, retries e limites tecnicos
-- P09 transforma arquitetura (P08) em operacao concreta
-- Config NAO eh identidade: P02 define QUEM, P09 define COMO
-- boot_config (P02) eh per-provider; env_config (P09) eh global
-- permission (P09) controla acesso; guardrail (P11) eh safety
-- runtime_rule (P09) eh tecnico; law (P08) eh inviolavel
-- feature_flag usa JSON; demais tipos usam YAML
+- P09 is the operational control panel of the system
+- env_config stores environment variables (API keys, URLs)
+- path_config defines filesystem paths per scope
+- permission controls read/write/execute access per resource
+- feature_flag enables/disables features with rollout
+- runtime_rule defines timeouts, retries and technical limits
+- P09 transforms architecture (P08) into concrete operation
+- Config is NOT identity: P02 defines WHO, P09 defines HOW
+- boot_config (P02) is per-provider; env_config (P09) is global
+- permission (P09) controls access; guardrail (P11) is safety
+- runtime_rule (P09) is technical; law (P08) is inviolable
+- feature_flag uses JSON; remaining types use YAML
 - env_config max 4096 bytes; feature_flag max 1536 bytes
-- P09 configura P04 (quais tools estao habilitadas)
-- P09 configura P02 (qual modelo, temperatura, tokens)
-- Funcao dominante: GOVERN (governanca operacional)
-- Analogia: altimetro em pes vs metros muda tudo
+- P09 configures P04 (which tools are enabled)
+- P09 configures P02 (which model, temperature, tokens)
+- Dominant function: GOVERN (operational governance)
+- Analogy: altimeter in feet vs meters changes everything
 
-## Fases
+## Phases
 
-1. Levantar todas as variaveis de ambiente necessarias
-2. Criar env_config com valores por escopo (dev/staging/prod)
-3. Definir path_config com caminhos absolutos por ambiente
-4. Mapear permissions por recurso e papel (read/write/exec)
-5. Isolar features experimentais com feature_flags
-6. Documentar runtime_rules (timeouts, retries, rate limits)
+1. Survey all required environment variables
+2. Create env_config with values per scope (dev/staging/prod)
+3. Define path_config with absolute paths per environment
+4. Map permissions per resource and role (read/write/exec)
+5. Isolate experimental features with feature_flags
+6. Document runtime_rules (timeouts, retries, rate limits)
 
-## Regras de Ouro
+## Golden Rules
 
-- SEMPRE externalizar config (nunca inline no codigo)
-- NUNCA confundir env_config com boot_config (P02)
-- SEMPRE validar config na inicializacao (fail fast)
-- NUNCA colocar secrets em feature_flags (usar env_config)
-- SEMPRE ter defaults seguros quando config esta ausente
+- ALWAYS externalize config (never inline in code)
+- NEVER confuse env_config with boot_config (P02)
+- ALWAYS validate config at initialization (fail fast)
+- NEVER place secrets in feature_flags (use env_config)
+- ALWAYS have safe defaults when config is absent
 
 ## Comparativo
 
@@ -103,15 +103,15 @@ types: 5 | function: GOVERN | layer: runtime + governance
   [GOVERN]  [GOVERN]  [GOVERN]
     |          |        |
     v          v        v
- variaveis  acesso   limites
+ variables  access   limits
     |          |        |
     +-----+----+--------+
           |
           v
-   [P04 tools habilitadas]
+   [P04 tools enabled]
           |
           v
-   [P02 modelo configurado]
+   [P02 model configured]
 ```
 
 ## References

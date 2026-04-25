@@ -11,20 +11,20 @@ author: research_agent
 domain: research
 quality: 9.1
 tags: [embedding, benchmark, qwen3, bertimbau, pt-br, rag, ecommerce]
-tldr: "Qwen3 primary (120ms P95) + BERTimbau fallback (91% PT-BR) = hybrid otimo. Ambos local a $0 vs $16K/ano API."
-when_to_use: "Escolher modelo de embedding para RAG em portugues ou comparar custo local vs API"
+tldr: "Qwen3 primary (120ms P95) + BERTimbau fallback (91% PT-BR) = optimal hybrid. Both local at $0 vs $16K/year API."
+when_to_use: "Choose embedding model for Portuguese RAG or compare local vs API cost"
 keywords: [embedding_benchmark, qwen3, bertimbau, hybrid_routing, latency_sla]
 long_tails:
-  - "Qual melhor modelo embedding para portugues brasileiro"
-  - "Quanto custa embedding local vs OpenAI API por ano"
+  - "Best embedding model for Brazilian Portuguese"
+  - "How much does local embedding cost vs OpenAI API per year"
 axioms:
-  - "SEMPRE priorizar latency SLA sobre accuracy marginal"
-  - "NUNCA usar API paga quando modelo local atinge target"
+  - "ALWAYS prioritize latency SLA over marginal accuracy"
+  - "NEVER use paid API when local model meets target"
 linked_artifacts:
   primary: null
   related: [p01_kc_rag_fundamentals]
 density_score: 1.0
-data_source: "Benchmark proprio: 50 queries x 30 docs, metricas Recall/MRR/NDCG/Latency"
+data_source: "Internal benchmark: 50 queries x 30 docs, metrics Recall/MRR/NDCG/Latency"
 related:
   - spec_local_model_per_nucleus
   - p01_kc_vector_embedding_model_selection
@@ -41,19 +41,19 @@ related:
 ## Quick Reference
 
 topic: embedding model selection | scope: PT-BR e-commerce RAG | criticality: high
-dataset: 50 queries, 30 documentos (product search, competitor, pricing, compliance)
-decisao: Qwen3 primary + BERTimbau fallback (hybrid)
+dataset: 50 queries, 30 documents (product search, competitor, pricing, compliance)
+decision: Qwen3 primary + BERTimbau fallback (hybrid)
 
-## Conceitos Chave
+## Key Concepts
 
 - Qwen3: 768-dim, multilingual, 120ms P95, 76% PT-BR
 - BERTimbau: PT-BR specialist, 91% accuracy, 320ms P95
-- Hybrid: regulatorio -> BERTimbau, resto -> Qwen3
-- Custo local: $0/ano (Docker) vs $16K/ano (OpenAI API)
+- Hybrid: regulatory -> BERTimbau, rest -> Qwen3
+- Local cost: $0/year (Docker) vs $16K/year (OpenAI API)
 
-## Comparativo
+## Comparison
 
-| Metrica | Target | Qwen3 | BERTimbau | Vencedor |
+| Metric | Target | Qwen3 | BERTimbau | Winner |
 |---------|--------|-------|-----------|----------|
 | Recall@5 | >= 0.75 | 0.780 | 0.820 | BERTimbau |
 | MRR | >= 0.85 | 0.820 | 0.880 | BERTimbau |
@@ -62,21 +62,21 @@ decisao: Qwen3 primary + BERTimbau fallback (hybrid)
 | PT-BR Accuracy | >= 0.80 | 76% | **91%** | **BERTimbau** |
 | Targets met | 5/5 | 3/5 | 4/5 | — |
 
-| Custo | Mensal | Anual |
-|-------|--------|-------|
-| Qwen3 local | $0 modelo | $0 |
-| BERTimbau local | $0 modelo | $0 |
-| Infra Docker | ~$50 | ~$600 |
+| Cost | Monthly | Annual |
+|------|---------|--------|
+| Qwen3 local | $0 model | $0 |
+| BERTimbau local | $0 model | $0 |
+| Docker infra | ~$50 | ~$600 |
 | **Total local** | **~$50** | **~$600** |
 | OpenAI API | $1,333 | **$16,000** |
-| **Economia** | **$1,283/mes** | **$15,400/ano** |
+| **Savings** | **$1,283/month** | **$15,400/year** |
 
-## Regras de Ouro
+## Golden Rules
 
-- SEMPRE usar Qwen3 como default (120ms atende SLA de UX)
-- SEMPRE rotear queries regulatorias para BERTimbau
-- NUNCA pagar API embedding quando modelo local atinge targets
-- SEMPRE re-benchmarkar mensalmente (modelos driftam)
+- ALWAYS use Qwen3 as default (120ms meets UX SLA)
+- ALWAYS route regulatory queries to BERTimbau
+- NEVER pay for embedding API when local model meets targets
+- ALWAYS re-benchmark monthly (models drift)
 
 ## Code
 
@@ -94,8 +94,8 @@ def embed_hybrid(texts):
 
 - external: https://huggingface.co/Alibaba-NLP/gte-Qwen2-7B-instruct
 - external: https://huggingface.co/neuralmind/bert-base-portuguese-cased
-- deepens: p01_kc_rag_fundamentals (arquitetura RAG completa)
-- deepens: /skill embedding_evaluation (como benchmarkar — a ser criada)
+- deepens: p01_kc_rag_fundamentals (complete RAG architecture)
+- deepens: /skill embedding_evaluation (how to benchmark — to be created)
 
 
 ## Anti-Patterns

@@ -11,15 +11,15 @@ author: builder_agent
 domain: cex_taxonomy
 quality: 9.1
 tags: [cex, llm-function, reason, chain-of-thought, planning, routing]
-tldr: "REASON gera tokens internos (CoT, ReAct, planning) antes de agir — 7 tipos que separam pensar de produzir"
-when_to_use: "Entender por que raciocinio e funcao separada de geracao e como tipificar thinking patterns"
+tldr: "REASON generates internal tokens (CoT, ReAct, planning) before acting — 7 types that separate thinking from producing"
+when_to_use: "Understand why reasoning is a function separate from generation and how to typify thinking patterns"
 keywords: [reason, chain-of-thought, react, planner, router, tree-of-thought]
 long_tails:
-  - "Qual a diferenca entre chain of thought e tree of thought no CEX"
-  - "Por que REASON e funcao separada de PRODUCE no CEX"
+  - "What is the difference between chain of thought and tree of thought in CEX"
+  - "Why REASON is a function separate from PRODUCE in CEX"
 axioms:
-  - "SEMPRE usar REASON antes de CALL em tarefas complexas"
-  - "NUNCA confundir planner (gera plano) com router (seleciona handler)"
+  - "ALWAYS use REASON before CALL in complex tasks"
+  - "NEVER confuse planner (generates plan) with router (selects handler)"
 linked_artifacts:
   primary: p01_kc_cex_function_call
   related: [p01_kc_cex_function_become, p01_kc_cex_function_inject]
@@ -40,26 +40,26 @@ related:
 
 ## Summary
 
-REASON e a operacao meta-cognitiva de PENSAR antes de agir. O LLM gera tokens para si mesmo (chain-of-thought, planning, decomposicao) antes de gerar output final. Com 7 tipos (9% do CEX), e arquiteturalmente distinta de PRODUCE — confirmado por DSPy (ChainOfThought separado de Predict), Semantic Kernel (Planner como tipo de primeira classe) e literatura academica (Wang et al. 2023).
+REASON is the meta-cognitive operation of THINKING before acting. The LLM generates tokens for itself (chain-of-thought, planning, decomposition) before generating final output. With 7 types (9% of CEX), it is architecturally distinct from PRODUCE — confirmed by DSPy (ChainOfThought separate from Predict), Semantic Kernel (Planner as first-class type), and academic literature (Wang et al. 2023).
 
 ## Spec
 
-| Tipo | LP | Funcao | Detalhe |
-|------|-----|--------|---------|
-| chain_of_thought | P03 | Raciocinio linear | Passo a passo explicito ate conclusao |
-| react | P03 | Think-Act-Observe | Intercala raciocinio com acoes no ambiente |
-| planner | P03 | Plano dinamico | Cria workflow em runtime baseado no goal |
-| router | P02 | Selecao de handler | Direciona input ao especialista correto |
-| tree_of_thought | P03 | Raciocinio paralelo | Multiplas ramificacoes com avaliacao |
-| decomposition | P03 | Quebra de problema | Sub-problemas independentes tratados em partes |
-| goal | P03 | Criterio de sucesso | Objetivo mensuravel que guia REASON |
+| Type | LP | Function | Detail |
+|------|-----|----------|--------|
+| chain_of_thought | P03 | Linear reasoning | Explicit step-by-step to conclusion |
+| react | P03 | Think-Act-Observe | Interleaves reasoning with environment actions |
+| planner | P03 | Dynamic plan | Creates workflow at runtime based on goal |
+| router | P02 | Handler selection | Directs input to correct specialist |
+| tree_of_thought | P03 | Parallel reasoning | Multiple branches with evaluation |
+| decomposition | P03 | Problem breakdown | Independent sub-problems treated in parts |
+| goal | P03 | Success criterion | Measurable objective that guides REASON |
 
-Hierarquia de complexidade: CoT < ReAct < Planner < ToT.
-CoT e linear (1 caminho). ReAct intercala com ambiente.
-Planner gera sequencia completa. ToT explora N caminhos.
-Router NAO e raciocinio profundo — e classificacao rapida.
-REASON produz tokens INTERNOS (para o proprio LLM), nao output final.
-Separacao REASON vs PRODUCE: DSPy ChainOfThought != Predict.
+Complexity hierarchy: CoT < ReAct < Planner < ToT.
+CoT is linear (1 path). ReAct interleaves with environment.
+Planner generates complete sequence. ToT explores N paths.
+Router is NOT deep reasoning — it is fast classification.
+REASON produces INTERNAL tokens (for the LLM itself), not final output.
+REASON vs PRODUCE separation: DSPy ChainOfThought != Predict.
 
 ## Code
 
@@ -77,21 +77,21 @@ thought = reason(f"Preco={observation.price}, comparar com meta")
 
 | Trigger | Action |
 |---------|--------|
-| Tarefa requer logica explicita | Usar chain_of_thought |
-| Tarefa requer interacao com ambiente | Usar react (think-act-observe) |
-| Sequencia de acoes imprevisivel | Usar planner para gerar workflow |
-| Multiplos handlers disponiveis | Router seleciona o melhor |
-| Problema com multiplas solucoes | tree_of_thought para explorar |
-| Problema grande demais para resolver | decomposition em sub-tasks |
+| Task requires explicit logic | Use chain_of_thought |
+| Task requires environment interaction | Use react (think-act-observe) |
+| Unpredictable action sequence | Use planner to generate workflow |
+| Multiple handlers available | Router selects the best |
+| Problem with multiple solutions | tree_of_thought to explore |
+| Problem too large to solve at once | decomposition into sub-tasks |
 
 ## Anti-Patterns
 
-- CoT em tarefas triviais (overhead sem ganho)
-- Planner com acoes hardcoded (use workflow, nao planner)
-- Router com 10+ opcoes (LLM nao discrimina bem)
-- Confundir planner com router (sequencia vs selecao)
-- REASON sem INJECT (raciocinar sem dados = alucinacao)
-- Pular REASON e ir direto a CALL (acao sem plano)
+- CoT in trivial tasks (overhead without gain)
+- Planner with hardcoded actions (use workflow, not planner)
+- Router with 10+ options (LLM does not discriminate well)
+- Confusing planner with router (sequence vs selection)
+- REASON without INJECT (reasoning without data = hallucination)
+- Skipping REASON and going straight to CALL (action without plan)
 
 ## References
 

@@ -12,17 +12,17 @@ author: n04_knowledge
 domain: data_platform
 quality: 9.1
 tags: [supabase, edge-functions, deno, serverless, typescript, platform]
-tldr: "Serverless functions em Deno/TypeScript: deploy global, secrets management, CORS configuravel, CPU limits 2s(free)/10s(pro)/150s(team)"
-when_to_use: "Quando configurar serverless compute (webhooks, cron, API custom) em Supabase"
+tldr: "Serverless functions in Deno/TypeScript: global deploy, secrets management, configurable CORS, CPU limits 2s(free)/10s(pro)/150s(team)"
+when_to_use: "When configuring serverless compute (webhooks, cron, custom API) in Supabase"
 keywords: [edge-functions, deno, serverless, supabase-functions]
 long_tails:
-  - Como criar edge function com Supabase CLI
-  - Limites de CPU e memoria das Edge Functions Supabase
-  - Como configurar CORS em Edge Functions Supabase
+  - How to create an edge function with Supabase CLI
+  - CPU and memory limits of Supabase Edge Functions
+  - How to configure CORS in Supabase Edge Functions
 axioms:
-  - SEMPRE use Deno.env.get() para secrets, nunca hardcode
-  - NUNCA exceda o CPU limit do tier — function é killed sem aviso
-  - SEMPRE retorne headers CORS para chamadas de browser
+  - ALWAYS use Deno.env.get() for secrets, never hardcode
+  - NEVER exceed the tier CPU limit — function is killed without warning
+  - ALWAYS return CORS headers for browser calls
 linked_artifacts:
   primary: null
   related: [p01_kc_supabase_cli, p01_kc_supabase_database]
@@ -49,21 +49,21 @@ topic: supabase_edge_functions
 scope: Deno serverless runtime, deploy, secrets, CORS
 owner: n04_knowledge
 criticality: high
-service: edge-runtime (porta 54321 local)
-runtime: Deno (TypeScript nativo, sem node_modules)
+service: edge-runtime (port 54321 local)
+runtime: Deno (native TypeScript, no node_modules)
 ```
 
-## Limites por Tier
-| Metrica | Free | Pro | Team |
-|---------|------|-----|------|
-| Invocations/mês | 500.000 | 2.000.000 | 2.000.000+ |
+## Limits per Tier
+| Metric | Free | Pro | Team |
+|--------|------|-----|------|
+| Invocations/month | 500,000 | 2,000,000 | 2,000,000+ |
 | CPU time/invocation | 2s | 10s | 150s |
 | Memory | 256 MB | 256 MB | 512 MB |
 | Payload size | 2 MB | 6 MB | 6 MB |
 | Concurrent executions | 10 | 100 | 200+ |
 | Deploy regions | 1 | Global (11+ regions) | Global |
 
-## Anatomia de uma Edge Function
+## Anatomy of an Edge Function
 ```typescript
 // supabase/functions/hello-world/index.ts
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts"
@@ -93,15 +93,15 @@ serve(async (req) => {
 
 ## CLI Workflow
 ```text
-supabase functions new hello-world       # cria scaffold
-supabase functions serve                 # dev local (porta 54321)
-supabase secrets set API_KEY=sk-xxx      # definir secrets
-supabase functions deploy hello-world    # deploy producao
-supabase functions deploy --no-verify-jwt # sem auth required
+supabase functions new hello-world       # creates scaffold
+supabase functions serve                 # local dev (port 54321)
+supabase secrets set API_KEY=sk-xxx      # set secrets
+supabase functions deploy hello-world    # deploy to production
+supabase functions deploy --no-verify-jwt # no auth required
 ```
 
-## Triggers de Invocacao
-| Trigger | Como | Exemplo |
+## Invocation Triggers
+| Trigger | How | Example |
 |---------|------|---------|
 | HTTP | `POST /functions/v1/fn-name` | Client SDK, fetch, webhook receiver |
 | Cron | pg_cron chama via pg_net | `SELECT net.http_post(url, body)` daily |
@@ -110,33 +110,33 @@ supabase functions deploy --no-verify-jwt # sem auth required
 
 ## Secrets Management
 ```bash
-# Set secrets (não visíveis no código)
+# Set secrets (not visible in code)
 supabase secrets set OPENAI_KEY=sk-xxx STRIPE_KEY=sk-xxx
 
-# List secrets (nomes apenas, sem valores)
+# List secrets (names only, no values)
 supabase secrets list
 
-# Acessar na function
+# Access in function
 const apiKey = Deno.env.get('OPENAI_KEY')
 
-# Built-in (auto-disponíveis):
+# Built-in (auto-available):
 # SUPABASE_URL, SUPABASE_ANON_KEY, SUPABASE_SERVICE_ROLE_KEY, SUPABASE_DB_URL
 ```
 
 ## Anti-Patterns
-| Anti-Pattern | Risco | Fix |
-|-------------|-------|-----|
-| Import node_modules | Deno não usa npm (exceto esm.sh) | Usar Deno std ou esm.sh |
-| CPU-heavy sync code | Kill em 2s (free) sem aviso | Offload para background job |
-| Hardcode secrets | Expostos no deploy, no git | `Deno.env.get()` + `supabase secrets set` |
-| Sem CORS headers | Browser blocked, 403 | Sempre retornar CORS headers |
-| Sem verificacao JWT | Qualquer um chama a function | Manter JWT verify (default) |
+| Anti-Pattern | Risk | Fix |
+|-------------|------|-----|
+| Import node_modules | Deno does not use npm (except esm.sh) | Use Deno std or esm.sh |
+| CPU-heavy sync code | Killed at 2s (free) without warning | Offload to background job |
+| Hardcode secrets | Exposed on deploy, in git | `Deno.env.get()` + `supabase secrets set` |
+| No CORS headers | Browser blocked, 403 | Always return CORS headers |
+| No JWT verification | Anyone can call the function | Keep JWT verify (default) |
 
 ## Golden Rules
-- SEMPRE responda OPTIONS com CORS headers para browser clients
-- USE `esm.sh` para pacotes npm dentro de Deno
-- GUARDE CPU para lógica — use `pg_net` para chamadas HTTP assíncronas
-- TESTE localmente com `supabase functions serve` antes de deploy
+- ALWAYS respond to OPTIONS with CORS headers for browser clients
+- USE `esm.sh` for npm packages inside Deno
+- SAVE CPU for logic — use `pg_net` for async HTTP calls
+- TEST locally with `supabase functions serve` before deploy
 
 ## References
 - Docs: https://supabase.com/docs/guides/functions

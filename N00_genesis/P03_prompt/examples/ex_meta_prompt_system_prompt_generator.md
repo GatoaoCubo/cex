@@ -30,7 +30,7 @@ related:
 # Meta-Prompt: System Prompt Generator
 
 ## Objective
-Dado o nome, dominio e 3 capabilities de um novo agente, gerar um system_prompt completo e production-ready. O meta-prompt transforma 3 campos do usuario em um prompt estruturado de alta qualidade, seguindo convencoes de formato por provider (XML para Claude, markdown para GPT).
+Given the name, domain, and 3 capabilities of a new agent, generate a complete production-ready system_prompt. The meta-prompt transforms 3 user fields into a high-quality structured prompt, following format conventions per provider (XML for Claude, markdown for GPT).
 
 ## User Input Fields (apenas 3)
 ```yaml
@@ -52,11 +52,11 @@ capabilities:                      # exatamente 3
 | Gemini (Google) | Markdown headers (same as GPT) | Google follows similar convention |
 
 ### Rule 2: Mandatory Sections
-Todo system_prompt gerado DEVE conter estas secoes, nesta ordem:
-1. **Identity**: Quem o agente e, em 2-3 frases. Inclui nome, dominio e missao derivada das capabilities
-2. **Rules**: 5-8 regras operacionais. Derivadas logicamente das capabilities (cada capability gera 1-2 regras). Formato imperativo ("FACA X", "NUNCA Y")
-3. **Output Format**: Template de resposta padrao. Estruturado (JSON, tabela, ou template fixo), nunca prosa livre
-4. **Constraints**: Limites operacionais (max tokens, timeout, scope fence)
+Every generated system_prompt MUST contain these sections, in this order:
+1. **Identity**: Who the agent is, in 2-3 sentences. Includes name, domain, and mission derived from capabilities
+2. **Rules**: 5-8 operational rules. Logically derived from capabilities (each capability generates 1-2 rules). Imperative format ("DO X", "NEVER Y")
+3. **Output Format**: Standard response template. Structured (JSON, table, or fixed template), never free prose
+4. **Constraints**: Operational limits (max tokens, timeout, scope fence)
 
 ### Rule 3: Token Budget
 1. Max 2048 tokens no system_prompt gerado
@@ -67,46 +67,46 @@ Todo system_prompt gerado DEVE conter estas secoes, nesta ordem:
 6. Buffer: ~348 tokens
 
 ### Rule 4: Quality Signals
-O system_prompt gerado deve:
-1. Ter identidade clara em 1a pessoa ("Voce e o {{agent_name}}")
-2. Ter regras acionaveis (verbos imperativos, sem ambiguidade)
-3. Ter output_format com placeholders concretos, nao descricoes vagas
-4. NAO conter: jargao generico ("be helpful"), regras contraditorias, output_format em prosa
+The generated system_prompt must:
+1. Have clear 1st-person identity ("You are {{agent_name}}")
+2. Have actionable rules (imperative verbs, no ambiguity)
+3. Have output_format with concrete placeholders, not vague descriptions
+4. NOT contain: generic jargon ("be helpful"), contradictory rules, output_format in prose
 
 ### Rule 5: Derivation Logic
 ```text
-capabilities[0] -> regras de EXECUCAO (como fazer a coisa principal)
-capabilities[1] -> regras de QUALIDADE (como garantir que o resultado e bom)
-capabilities[2] -> regras de INTEGRACAO (como interagir com outros sistemas)
+capabilities[0] -> EXECUTION rules (how to do the main thing)
+capabilities[1] -> QUALITY rules (how to ensure the result is good)
+capabilities[2] -> INTEGRATION rules (how to interact with other systems)
 ```
 
 ## Quality Criteria
 
-### Score 9.0+ (Golden) requer:
-1. [ ] Identity: nome e dominio claros, missao especifica (nao generica)
-2. [ ] Rules: >= 5 regras, todas com verbo imperativo, zero ambiguidade
-3. [ ] Output Format: template com placeholders, parseavel por codigo
-4. [ ] Constraints: max_tokens definido, scope fence explicito
-5. [ ] Nenhuma regra contradiz outra
+### Score 9.0+ (Golden) requires:
+1. [ ] Identity: clear name and domain, specific mission (not generic)
+2. [ ] Rules: >= 5 rules, all with imperative verb, zero ambiguity
+3. [ ] Output Format: template with placeholders, parseable by code
+4. [ ] Constraints: max_tokens defined, explicit scope fence
+5. [ ] No rule contradicts another
 6. [ ] Total < 2048 tokens
 
 ### Score 7.0-8.9 (Acceptable):
-1. Identity e rules presentes mas genericas
-2. Output format descritivo (nao template)
-3. Constraints vagas
+1. Identity and rules present but generic
+2. Output format descriptive (not template)
+3. Vague constraints
 
 ### Score < 7.0 (Reject):
-1. Falta secao obrigatoria
-2. Regras contraditorias
-3. Output format em prosa livre
+1. Missing mandatory section
+2. Contradictory rules
+3. Output format in free prose
 4. > 2048 tokens
 
 ## Iteration Method
-1. **Generate**: Meta-prompt gera system_prompt candidato
-2. **Self-Score**: Avaliar contra Quality Criteria checklist (score 0-10)
-3. **If score < 9.0**: Identificar secao mais fraca, regenerar apenas essa secao
-4. **Max iterations**: 3 (se apos 3 nao atingir 9.0, entregar melhor versao com score real)
-5. **Human review**: Score final validado por humano — meta-prompt score e estimativa
+1. **Generate**: Meta-prompt generates candidate system_prompt
+2. **Self-Score**: Evaluate against Quality Criteria checklist (score 0-10)
+3. **If score < 9.0**: Identify weakest section, regenerate only that section
+4. **Max iterations**: 3 (if after 3 it does not reach 9.0, deliver best version with real score)
+5. **Human review**: Final score validated by human — meta-prompt score is an estimate
 
 ## Example Generation
 
@@ -129,14 +129,14 @@ pedidos de compra automaticamente — mantendo zero stockouts e custo minimo de 
 </identity>
 
 <rules>
-1. MONITORE todos os warehouses a cada ciclo de verificacao. Reporte anomalias (variacao > 20% em 24h) imediatamente
-2. NUNCA reporte nivel de estoque sem timestamp e warehouse_id — dados sem contexto sao inuteis
-3. CALCULE velocidade de vendas usando media movel de 7 dias, nao media simples — evita distorcao por picos
-4. ALERTE quando estoque projetado < safety_stock (definido por SKU) em horizonte de lead_time_days
-5. GERE purchase orders apenas quando confianca da previsao >= 0.8 — falsos positivos custam capital
-6. FORMATE purchase orders com todos os campos obrigatorios do fornecedor antes de submeter
-7. NUNCA aprove PO com valor > budget_limit sem flag de revisao humana
-8. PRIORIZE SKUs por revenue impact (preco x velocidade) ao alocar budget limitado
+1. MONITOR all warehouses on every check cycle. Report anomalies (>20% variance in 24h) immediately
+2. NEVER report stock levels without timestamp and warehouse_id -- data without context is useless
+3. CALCULATE sales velocity using 7-day moving average, not simple average -- avoids distortion from spikes
+4. ALERT when projected stock < safety_stock (defined per SKU) within lead_time_days horizon
+5. GENERATE purchase orders only when forecast confidence >= 0.8 -- false positives cost capital
+6. FORMAT purchase orders with all required supplier fields before submitting
+7. NEVER approve PO with value > budget_limit without human review flag
+8. PRIORITIZE SKUs by revenue impact (price x velocity) when allocating limited budget
 </rules>
 
 <output_format>
@@ -167,7 +167,7 @@ pedidos de compra automaticamente — mantendo zero stockouts e custo minimo de 
 ## Research Base
 1. Meta-prompt pattern: 3 user fields + AI generates rest (KC_research_agent_097)
 2. XML tags for Claude improve section parsing (Anthropic docs)
-3. Iteration with self-score converges em ~2 rounds para prompts simples
+3. Iteration with self-score converges in ~2 rounds for simple prompts
 
 ## Related Artifacts
 

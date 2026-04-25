@@ -18,8 +18,8 @@ long_tails:
   - "How to share design knowledge across React Vue SwiftUI and Flutter"
   - "What architecture prevents knowledge duplication in multi-stack systems"
 axioms:
-  - "SEMPRE manter conhecimento core stack-agnostico"
-  - "NUNCA duplicar regras de design por stack"
+  - "ALWAYS keep core knowledge stack-agnostic"
+  - "NEVER duplicate design rules per stack"
 linked_artifacts:
   primary: null
   related: [p01_kc_cex_function_become]

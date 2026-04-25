@@ -12,14 +12,14 @@ domain: llm_engineering
 quality: 9.1
 tags: [claude, models, pricing, context-window, model-selection, api]
 tldr: "3 tiers: Opus 4.6 ($5/$25 MTok, 200K/1M ctx), Sonnet 4.6 ($3/$15, balanced), Haiku 4.5 ($1/$5, fastest). Routing correto economiza 50-80%."
-when_to_use: "Selecionar modelo Claude para API calls ou configurar model router com custo otimo"
+when_to_use: "Select Claude model for API calls or configure model router with optimal cost"
 keywords: [model_selection, opus, sonnet, haiku, pricing, context_window]
 long_tails:
-  - "Qual modelo Claude usar para cada tipo de tarefa"
-  - "Quanto custa cada modelo Claude por milhao de tokens"
+  - "Which Claude model to use for each type of task"
+  - "How much does each Claude model cost per million tokens"
 axioms:
-  - "NUNCA usar Opus 4.1 ($15/$75) quando Opus 4.6 ($5/$25) eh melhor e mais barato"
-  - "SEMPRE rotear tarefas simples para Haiku (economia 80% vs Opus)"
+  - "NEVER use Opus 4.1 ($15/$75) when Opus 4.6 ($5/$25) is better and cheaper"
+  - "ALWAYS route simple tasks to Haiku (80% savings vs Opus)"
 linked_artifacts:
   primary: null
   related: [p01_kc_claude_agent_sdk_patterns, p01_kc_claude_server_tools]
@@ -40,7 +40,7 @@ related:
 
 ## Summary
 
-Familia Claude 2026: Opus 4.6 (mais inteligente, 128K output), Sonnet 4.6 (equilibrio custo/inteligencia), Haiku 4.5 (mais rapido, $1/$5 MTok). Todos suportam 200K context com 1M beta para Opus/Sonnet. Extended thinking disponivel nos 3 tiers. Model routing correto economiza 50-80%.
+Claude 2026 family: Opus 4.6 (most intelligent, 128K output), Sonnet 4.6 (cost/intelligence balance), Haiku 4.5 (fastest, $1/$5 MTok). All support 200K context with 1M beta for Opus/Sonnet. Extended thinking available in all 3 tiers. Correct model routing saves 50-80%.
 
 ## Spec
 
@@ -51,38 +51,38 @@ Familia Claude 2026: Opus 4.6 (mais inteligente, 128K output), Sonnet 4.6 (equil
 | Max Output | 128K tokens | 64K tokens | 64K tokens |
 | Input $/MTok | $5 | $3 | $1 |
 | Output $/MTok | $25 | $15 | $5 |
-| Extended Thinking | Sim (adaptive) | Sim (manual+adaptive) | Sim |
+| Extended Thinking | Yes (adaptive) | Yes (manual+adaptive) | Yes |
 | Knowledge Cutoff | May 2025 | Aug 2025 | Feb 2025 |
 
-| 1M Context Beta | Detalhe |
-|----------------|---------|
+| 1M Context Beta | Detail |
+|----------------|--------|
 | Header | `context-1m-2025-08-07` |
-| Modelos | Opus 4.6, Sonnet 4.6, Sonnet 4.5, Sonnet 4 |
+| Models | Opus 4.6, Sonnet 4.6, Sonnet 4.5, Sonnet 4 |
 | Pricing >200K | Input 2x, Output 1.5x |
 | Requisito | Usage tier 4 |
 
-| Legacy (evitar) | Preco Input/Output | Status |
-|-----------------|-------------------|--------|
-| Opus 4.1 | $15/$75 MTok | Ativo mas 3x mais caro que 4.6 |
+| Legacy (avoid) | Price Input/Output | Status |
+|----------------|-------------------|--------|
+| Opus 4.1 | $15/$75 MTok | Active but 3x more expensive than 4.6 |
 | Haiku 3 | Deprecado | Retirement: 2026-04-19 |
 
 ## Patterns
 
 | Trigger | Action |
 |---------|--------|
-| Orquestracao complexa, agent coding | Opus 4.6 |
-| Tarefas padrao, workhorse | Sonnet 4.6 (melhor custo/inteligencia) |
-| Classificacao, tagging, bulk ops | Haiku 4.5 ($1 MTok input) |
-| Contexto >200K tokens | Ativar 1M beta header + tier 4 |
-| Custo alto com Opus em tudo | Router: simples->Haiku, padrao->Sonnet, complexo->Opus |
+| Complex orchestration, agent coding | Opus 4.6 |
+| Standard tasks, workhorse | Sonnet 4.6 (best cost/intelligence) |
+| Classification, tagging, bulk ops | Haiku 4.5 ($1 MTok input) |
+| Context >200K tokens | Activate 1M beta header + tier 4 |
+| High cost with Opus on everything | Router: simple->Haiku, standard->Sonnet, complex->Opus |
 
 ## Anti-Patterns
 
-- Usar Opus 4.1 ($15/$75) quando 4.6 ($5/$25) existe e supera
-- Enviar >200K tokens sem 1M beta header (erro de validacao)
-- Haiku 3 para novos projetos (retirement abril 2026)
-- Opus para tarefas de classificacao simples (5x custo sem ganho)
-- Assumir truncamento silencioso (Claude 4+ retorna erro)
+- Using Opus 4.1 ($15/$75) when 4.6 ($5/$25) exists and outperforms
+- Sending >200K tokens without 1M beta header (validation error)
+- Haiku 3 for new projects (retirement April 2026)
+- Opus for simple classification tasks (5x cost without gain)
+- Assuming silent truncation (Claude 4+ returns error)
 
 ## Code
 

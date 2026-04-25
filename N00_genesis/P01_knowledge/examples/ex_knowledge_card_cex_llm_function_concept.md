@@ -11,15 +11,15 @@ author: builder_agent
 domain: cex_taxonomy
 quality: 9.1
 tags: [cex, llm-function, pipeline, execution-sequence, become-collaborate]
-tldr: "8 funcoes LLM (BECOME a COLLABORATE) descrevem o pipeline real de execucao -- sequencia, nao categorias"
-when_to_use: "Entender como LLMs processam artefatos e por que a sequencia importa"
+tldr: "8 LLM functions (BECOME to COLLABORATE) describe the real execution pipeline -- sequence, not categories"
+when_to_use: "Understand how LLMs process artifacts and why the sequence matters"
 keywords: [llm-function, pipeline, execution-stages, become, collaborate]
 long_tails:
-  - "Quais sao as 8 funcoes que um LLM executa em cada interacao"
-  - "Qual a diferenca entre funcao LLM e categoria de artefato"
+  - "What are the 8 functions an LLM executes in each interaction"
+  - "What is the difference between LLM function and artifact category"
 axioms:
-  - "SEMPRE respeitar a sequencia BECOME antes de INJECT"
-  - "NUNCA tratar funcoes como categorias estaticas de arquivo"
+  - "ALWAYS respect the sequence BECOME before INJECT"
+  - "NEVER treat functions as static file categories"
 linked_artifacts:
   primary: p01_kc_cex_taxonomy
   related: [p01_kc_cex_function_become, p01_kc_cex_function_inject]
@@ -40,34 +40,34 @@ related:
 
 ## Summary
 
-Funcao LLM eh o que o modelo FAZ com um artefato, nao o que o artefato EH. As 8 funcoes (BECOME, INJECT, REASON, CALL, PRODUCE, CONSTRAIN, GOVERN, COLLABORATE) formam o pipeline real de execucao de qualquer sistema LLM. Um prompt simples executa 1-2 funcoes. Um agente executa 4-5. Um agent_group com lifecycle completo executa todas as 8. A diferenca eh de completude, nao de natureza.
+LLM function is what the model DOES with an artifact, not what the artifact IS. The 8 functions (BECOME, INJECT, REASON, CALL, PRODUCE, CONSTRAIN, GOVERN, COLLABORATE) form the real execution pipeline of any LLM system. A simple prompt executes 1-2 functions. An agent executes 4-5. An agent_group with complete lifecycle executes all 8. The difference is one of completeness, not nature.
 
 ## Spec
 
-| Funcao | Estagio | O Que Faz | Tipos Exemplo |
-|--------|---------|-----------|---------------|
-| BECOME | 1 | Configura identidade e papel | agent, persona, system_prompt |
-| INJECT | 2 | Carrega contexto e conhecimento | knowledge_card, memory, embedding |
-| REASON | 3 | Raciocina e decompoe | chain_of_thought, planner, react |
-| CALL | 4 | Usa ferramentas externas | tool, mcp_server, api_call |
-| PRODUCE | 5 | Gera artefatos de saida | code, copy, report |
-| CONSTRAIN | 6 | Valida contra schemas | schema, template, output_format |
-| GOVERN | 7 | Aplica quality gates | quality_gate, benchmark, lifecycle |
-| COLLABORATE | 8 | Coordena com outros agentes | handoff, signal, shared_state |
+| Function | Stage | What It Does | Example Types |
+|----------|-------|-------------|---------------|
+| BECOME | 1 | Configures identity and role | agent, persona, system_prompt |
+| INJECT | 2 | Loads context and knowledge | knowledge_card, memory, embedding |
+| REASON | 3 | Reasons and decomposes | chain_of_thought, planner, react |
+| CALL | 4 | Uses external tools | tool, mcp_server, api_call |
+| PRODUCE | 5 | Generates output artifacts | code, copy, report |
+| CONSTRAIN | 6 | Validates against schemas | schema, template, output_format |
+| GOVERN | 7 | Applies quality gates | quality_gate, benchmark, lifecycle |
+| COLLABORATE | 8 | Coordinates with other agents | handoff, signal, shared_state |
 
-Pipeline completo: INPUT -> BECOME -> INJECT -> REASON -> CALL -> PRODUCE -> CONSTRAIN -> GOVERN -> COLLABORATE -> OUTPUT.
+Complete pipeline: INPUT -> BECOME -> INJECT -> REASON -> CALL -> PRODUCE -> CONSTRAIN -> GOVERN -> COLLABORATE -> OUTPUT.
 
-Funcoes 1-2 configuram. Funcoes 3-5 executam. Funcoes 6-8 validam e comunicam. Descoberta empirica: hipotese inicial de 6 funcoes expandiu para 8 ao constatar que REASON e COLLABORATE tinham artefatos dedicados em todos os frameworks analisados.
+Functions 1-2 configure. Functions 3-5 execute. Functions 6-8 validate and communicate. Empirical discovery: initial hypothesis of 6 functions expanded to 8 upon finding that REASON and COLLABORATE had dedicated artifacts in all analyzed frameworks.
 
 ## Patterns
 
 | Trigger | Action |
 |---------|--------|
-| Agente sem identidade definida | BECOME com system_prompt + mental_model |
-| Resposta sem contexto relevante | Verificar se INJECT carregou knowledge |
-| Output com formato inconsistente | Adicionar CONSTRAIN com schema explicito |
-| Sistema multi-agente sem coordenacao | Implementar COLLABORATE com signals |
-| Raciocinio opaco em decisoes criticas | Ativar REASON com chain_of_thought |
+| Agent without defined identity | BECOME with system_prompt + mental_model |
+| Response without relevant context | Verify if INJECT loaded knowledge |
+| Output with inconsistent format | Add CONSTRAIN with explicit schema |
+| Multi-agent system without coordination | Implement COLLABORATE with signals |
+| Opaque reasoning in critical decisions | Activate REASON with chain_of_thought |
 
 ## Code
 
@@ -90,11 +90,11 @@ PIPELINE = [
 
 ## Anti-Patterns
 
-- Pular BECOME e enviar input direto (sem identidade)
-- Confundir INJECT com BECOME (contexto vs identidade)
-- Executar CALL antes de REASON (acao sem planejamento)
-- PRODUCE sem CONSTRAIN (output sem contrato de formato)
-- Tratar funcoes como categorias de pasta no filesystem
+- Skipping BECOME and sending input directly (no identity)
+- Confusing INJECT with BECOME (context vs identity)
+- Executing CALL before REASON (action without planning)
+- PRODUCE without CONSTRAIN (output without format contract)
+- Treating functions as filesystem folder categories
 
 ## References
 

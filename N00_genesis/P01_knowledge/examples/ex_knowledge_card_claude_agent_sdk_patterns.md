@@ -12,14 +12,14 @@ domain: architecture
 quality: 9.1
 tags: [agent-sdk, multi-agent, handoffs, guardrails, orchestration, claude]
 tldr: "Agent SDK: agent(instructions+tools+model) + handoffs(triage/pipeline/parallel) + guardrails(input/output) + tracing + structured output"
-when_to_use: "Construir multi-agent systems, implementar handoffs entre agentes, ou adicionar guardrails em producao"
+when_to_use: "Build multi-agent systems, implement handoffs between agents, or add guardrails in production"
 keywords: [agent_sdk, handoff, guardrail, tracing, multi_agent]
 long_tails:
-  - "Como implementar handoffs entre agentes no Claude Agent SDK"
-  - "Quais patterns de orquestracao multi-agent existem"
+  - "How to implement handoffs between agents in the Claude Agent SDK"
+  - "What multi-agent orchestration patterns exist"
 axioms:
-  - "NUNCA criar handoffs circulares sem exit condition"
-  - "SEMPRE implementar tracing em producao"
+  - "NEVER create circular handoffs without exit condition"
+  - "ALWAYS implement tracing in production"
 linked_artifacts:
   primary: p01_kc_mcp_tool_infrastructure
   related: [p01_kc_context_parallelization]
@@ -40,35 +40,35 @@ related:
 
 ## Summary
 
-Agent SDK: framework para agentes em producao. Agent = instructions + tools + model. Orquestracao via handoffs (transfere contexto completo). Guardrails validam input/output. Tracing exporta decisoes para observabilidade.
+Agent SDK: framework for agents in production. Agent = instructions + tools + model. Orchestration via handoffs (transfers complete context). Guardrails validate input/output. Tracing exports decisions for observability.
 
 ## Spec
 
-| Componente | Funcao | Detalhe |
-|------------|--------|---------|
-| Agent | Unidade executora | name + instructions + model + tools + handoffs |
-| Handoff | Delegacao | Transfere conversa completa para outro agent |
-| Guardrail | Validacao | Input (pre-process) e output (pos-process) |
-| Tracing | Observabilidade | Decisoes, tool calls, latencia por step |
-| Structured Output | Tipagem | Agent retorna typed object, nao free text |
+| Component | Function | Detail |
+|-----------|----------|--------|
+| Agent | Executor unit | name + instructions + model + tools + handoffs |
+| Handoff | Delegation | Transfers complete conversation to another agent |
+| Guardrail | Validation | Input (pre-process) and output (post-process) |
+| Tracing | Observability | Decisions, tool calls, latency per step |
+| Structured Output | Typing | Agent returns typed object, not free text |
 
 ## Patterns
 
 | Trigger | Action |
 |---------|--------|
-| Multiplos dominios distintos | Triage: router agent delega para especialistas |
-| Tarefas sequenciais dependentes | Pipeline: A -> B -> C com contexto encadeado |
-| Tarefas independentes | Parallel: N agents simultaneos |
-| Coordenacao complexa | Hierarchical: manager coordena workers |
-| Agent retorna dados estruturados | Usar output_type=TypedClass |
+| Multiple distinct domains | Triage: router agent delegates to specialists |
+| Sequential dependent tasks | Pipeline: A -> B -> C with chained context |
+| Independent tasks | Parallel: N simultaneous agents |
+| Complex coordination | Hierarchical: manager coordinates workers |
+| Agent returns structured data | Use output_type=TypedClass |
 
 ## Anti-Patterns
 
-- Handoffs circulares sem exit condition (loop infinito)
-- 10+ handoff options num agent (LLM nao consegue escolher)
-- Agent user-facing sem guardrails (risco de output inadequado)
-- Producao sem tracing (debug cego)
-- Agent unico com 20+ tools (usar especialistas)
+- Circular handoffs without exit condition (infinite loop)
+- 10+ handoff options in one agent (LLM cannot choose)
+- User-facing agent without guardrails (risk of inadequate output)
+- Production without tracing (blind debug)
+- Single agent with 20+ tools (use specialists)
 
 ## Code
 

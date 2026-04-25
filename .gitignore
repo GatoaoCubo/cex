@@ -172,3 +172,11 @@ htmlcov/
 # (runtime subdirs already covered by .cex/runtime/ above)
 .aider.chat.history.md
 _reports/
+
+# Orphan media / local exports (not for repo)
+docs_full_page.png
+landing-*.png
+landing-hero.jpeg
+public_page.jpg
+customgpt_instructions.json
+crm_dashboard_full.png

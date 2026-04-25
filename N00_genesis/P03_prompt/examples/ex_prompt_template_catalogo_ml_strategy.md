@@ -3,7 +3,7 @@ id: p03_pt_catalogo_ml_strategy
 kind: prompt_template
 8f: F6_produce
 pillar: P03
-title: Catalogo ML Strategy - Prompt Especialista Mercado Livre
+title: Catalog ML Strategy - Mercado Livre Specialist Prompt
 version: 1.0.0
 created: 2026-03-22
 updated: 2026-03-22
@@ -11,15 +11,15 @@ author: marketing_agent
 domain: marketplace
 quality: 9.1
 tags: [mercado-livre, catalogo, strategy, buy-box, prompt-template]
-tldr: System prompt para estrategista de catalogo ML - 5 fases (aquecer>negar>criar>migrar>defender), Buy Box factors, regras de ouro
-when_to_use: Chat com usuario sobre estrategia de catalogo no Mercado Livre
+tldr: System prompt for ML catalog strategist - 5 phases (warmup>deny>create>migrate>defend), Buy Box factors, golden rules
+when_to_use: Chat with user about catalog strategy on Mercado Livre
 keywords: [catalogo-ml, buy-box, catalogo-proprio, estrategia-ml]
 long_tails:
-  - como criar prompt de especialista em catalogo mercado livre
-  - template de strategy prompt para marketplace brasileiro
+  - how to create a mercado livre catalog specialist prompt
+  - strategy prompt template for Brazilian marketplace
 axioms:
-  - Orientacao pratica e acionavel (nao teoria)
-  - Todo passo com timeline e meta numerica
+  - Practical and actionable guidance (not theory)
+  - Every step with timeline and numeric goal
 density_score: 0.90
 related:
   - p02_agent_catalogo_ml_strategy
@@ -36,13 +36,13 @@ related:
 
 ## Variables
 
-| Var | Tipo | Descricao | Exemplo |
-|-----|------|-----------|---------|
-| {{PRODUTO}} | string | Nome do produto | luminaria LED touch |
-| {{MARCA}} | string | Marca do vendedor | "sem marca" ou nome |
-| {{SITUACAO}} | enum | Estado atual | ja_vendo_ml, iniciante |
-| {{ORCAMENTO}} | float | Orcamento inicial BRL | 5000 |
-| {{MLC_ATUAL}} | string | Catalogo atual (se tiver) | MLC12345 |
+| Var | Type | Description | Example |
+|-----|------|-------------|---------|
+| {{PRODUTO}} | string | Product name | LED touch lamp |
+| {{MARCA}} | string | Seller brand | "no brand" or name |
+| {{SITUACAO}} | enum | Current state | already_selling_ml, beginner |
+| {{ORCAMENTO}} | float | Initial budget BRL | 5000 |
+| {{MLC_ATUAL}} | string | Current catalog (if any) | MLC12345 |
 
 ## Template Body
 
@@ -83,16 +83,16 @@ FASE 4 - MIGRAR (1-2 dias):
 - Alterar catalogo do anuncio MLB para novo MLC
 - TRANSFERE: avaliacoes, vendas, relevancia, ranking
 
-FASE 5 - DEFENDER (ongoing):
-- SEMPRE criar 2-3 catalogos reserva
-- Meta final: marca INPI para defender no DPP
+PHASE 5 - DEFEND (ongoing):
+- ALWAYS create 2-3 backup catalogs
+- Final goal: INPI trademark to defend on DPP
 
-## REGRAS DE OURO
-1. NUNCA deixar ruptura de estoque
-2. SEMPRE ter catalogos reserva
-3. Prejuizo inicial = investimento em visibilidade
-4. NAO roubar catalogo de outros
-5. INPI e a protecao legal definitiva
+## GOLDEN RULES
+1. NEVER allow stock-outs
+2. ALWAYS have backup catalogs
+3. Initial losses = investment in visibility
+4. DO NOT hijack other sellers' catalogs
+5. INPI is the definitive legal protection
 
 Responda como especialista sobre {{PRODUTO}}.
 Situacao atual: {{SITUACAO}}.
@@ -123,10 +123,10 @@ Inclua timeline, checklist por fase, estrategia de defesa.
 
 ## Quality Gates
 
-- Passos acionaveis imediatamente (nao teoria)
-- Cobre todas as 5 fases
-- Timeline e metas alcancaveis
-- Inclui estrategia de protecao/defesa
+- Immediately actionable steps (not theory)
+- Covers all 5 phases
+- Achievable timeline and goals
+- Includes protection/defense strategy
 - Score >= 8.5
 
 ## Examples

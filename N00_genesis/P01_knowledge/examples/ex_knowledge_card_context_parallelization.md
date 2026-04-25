@@ -12,14 +12,14 @@ domain: architecture
 quality: 9.1
 tags: [parallelization, token-optimization, multi-agent, context-reduction, spawn]
 tldr: "N workers com contexto narrow (2K tokens) substituem 1 agente com contexto full (50K). Reducao 79% tokens, velocidade 3-6x."
-when_to_use: "Agente unico carrega >10K tokens de contexto para tarefas que precisam de <3K cada"
+when_to_use: "Single agent loads >10K tokens of context for tasks that need <3K each"
 keywords: [context_parallelization, token_reduction, multi_agent, fat_adw, spawn]
 long_tails:
-  - "Como reduzir consumo de tokens em sistema multi-agente"
-  - "Qual a diferenca entre contexto full e contexto especializado"
+  - "How to reduce token consumption in multi-agent system"
+  - "What is the difference between full context and specialized context"
 axioms:
-  - "NUNCA carregar contexto full quando worker precisa de <20% dele"
-  - "SEMPRE medir token savings real vs estimado"
+  - "NEVER load full context when worker needs <20% of it"
+  - "ALWAYS measure real token savings vs estimated"
 linked_artifacts:
   primary: p01_kc_claude_agent_sdk_patterns
   related: []
@@ -38,37 +38,37 @@ related:
 
 ## Summary
 
-Agente unico carrega 10K-100K tokens de contexto irrelevante por tarefa. Arquitetura paralela: orchestrator (500 tokens, so routing) + N workers (2K tokens, dominio narrow) + aggregator (merge + quality). Resultado: 79% reducao tokens, velocidade = tempo do worker mais lento (nao soma).
+Single agent loads 10K-100K tokens of irrelevant context per task. Parallel architecture: orchestrator (500 tokens, routing only) + N workers (2K tokens, narrow domain) + aggregator (merge + quality). Result: 79% token reduction, speed = time of the slowest worker (not sum).
 
 ## Spec
 
-| Approach | Tokens/task | Velocidade | Custo relativo |
-|----------|-------------|------------|----------------|
-| 1 agente x 50K contexto | 50,000 | 1x (serial) | 100% |
-| Orch(500) + 5 workers(2K) | 10,500 | 3-6x (paralelo) | 21% |
+| Approach | Tokens/task | Speed | Relative cost |
+|----------|-------------|-------|---------------|
+| 1 agent x 50K context | 50,000 | 1x (serial) | 100% |
+| Orch(500) + 5 workers(2K) | 10,500 | 3-6x (parallel) | 21% |
 | **Savings** | **79% reducao** | **3-6x speedup** | **79% economia** |
 
-| Componente | Tokens | Funcao |
-|------------|--------|--------|
-| Orchestrator | ~500 | Routing logic, sem dominio |
-| Worker | ~1K-2K | Contexto narrow, 1 dominio |
+| Component | Tokens | Function |
+|-----------|--------|----------|
+| Orchestrator | ~500 | Routing logic, no domain |
+| Worker | ~1K-2K | Narrow context, 1 domain |
 | Aggregator | ~500 | Merge results + quality check |
 
 ## Patterns
 
 | Trigger | Action |
 |---------|--------|
-| Agente com >10K contexto | Decompor em workers especializados |
-| Tarefas independentes entre si | Parallelizar workers (spawn N) |
-| Tarefas dependentes | Pipeline sequencial (A->B->C) |
-| Quality check necessario | Aggregator valida merge |
+| Agent with >10K context | Decompose into specialized workers |
+| Mutually independent tasks | Parallelize workers (spawn N) |
+| Dependent tasks | Sequential pipeline (A->B->C) |
+| Quality check needed | Aggregator validates merge |
 
 ## Anti-Patterns
 
-- Carregar contexto full em cada worker (anula o beneficio)
-- Workers com escopo muito amplo (>3K tokens = nao eh narrow)
-- Spawn >10 workers simultaneos (RAM/rate limit)
-- Nao medir savings real (estimativa ≠ producao)
+- Loading full context in each worker (negates the benefit)
+- Workers with overly broad scope (>3K tokens = not narrow)
+- Spawn >10 simultaneous workers (RAM/rate limit)
+- Not measuring real savings (estimate != production)
 
 ## Code
 

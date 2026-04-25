@@ -21,7 +21,7 @@ when_to_use: "Use when teaching CEXAI methodology to faith-oriented, values-driv
 axioms:
   - "ALWAYS map CEX canonical terms first, then explain the metaphor -- never invent a CEX concept from the metaphor."
   - "NEVER use the biblical metaphor to diminish the sacredness of the source text -- the lens is pedagogical, not theological."
-  - "IF the audience is actively religious, lead with the metaphor before introducing the technical term."
+  - "ALWAYS lead with the metaphor before introducing the technical term when the audience is actively religious."
 keywords: [bible lens, faith metaphor, CEX teaching, biblical analogy, didactic]
 long_tails:
   - "how to explain AI systems using biblical metaphors"
@@ -141,10 +141,10 @@ related:
 ## Teaching Hooks (PT-BR Story Seeds)
 
 **Hook 1 -- The Scribe and the Torah:**
-Na antiga Israel, um escriba passava anos aprendendo um unico tipo de texto sagrado. Ele nao escrevia salmos E cartas E profecia -- ele dominava um tipo. No CEX, um *builder* e exatamente isso: um escriba que conhece os 12 mandamentos (ISOs) para escrever um unico tipo de artefato. Quando voce invoca o *knowledge-card-builder*, voce esta chamando o escriba dos versiculos -- aquele que sabe, por lei, como condensar sabedoria em uma unica pagina densa.
+In ancient Israel, a scribe spent years learning a single type of sacred text. He did not write psalms AND letters AND prophecy -- he mastered one type. In CEX, a *builder* is exactly that: a scribe who knows the 12 commandments (ISOs) for writing a single type of artifact. When you invoke the *knowledge-card-builder*, you are calling the scribe of verses -- the one who knows, by law, how to condense wisdom into a single dense page.
 
-**Hook 2 -- Moises nao entra na Terra Prometida sozinho:**
-Moises liderou 40 anos no deserto, mas nao foi ele quem construiu as cidades. Ele enviou os espias, escreveu as leis, organizou as tribos -- mas foram os outros que edificaram. O N07 e o Moises do sistema: orquestra, escreve os mandatos (handoffs), envia os apostolos (dispatch) -- e NUNCA constroe artefatos diretamente. Um lider que constroi e um apostolo mal empregado.
+**Hook 2 -- Moses does not enter the Promised Land alone:**
+Moses led for 40 years in the desert, but he was not the one who built the cities. He sent the spies, wrote the laws, organized the tribes -- but it was others who built. N07 is the Moses of the system: orchestrates, writes the mandates (handoffs), sends the apostles (dispatch) -- and NEVER builds artifacts directly. A leader who builds is a misassigned apostle.
 
 **Hook 3 -- O Dia do Juizo (F7 GOVERN):**
 No fim de cada missao de construcao, o artefato passa pelo gate de qualidade (F7). E como o Dia do Julgamento: o artefato e pesado na balanca. Score acima de 8.0 -- "bem feito, servo bom e fiel." Abaixo de 8.0 -- o artefato e devolvido ao construtor para purificacao, com no maximo duas tentativas. Na terceira vez, o sistema decide: este artefato nao e digno de entrar no canon.

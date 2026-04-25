@@ -3,7 +3,7 @@ id: p01_kc_bling_erp_field_parametrization
 kind: knowledge_card
 8f: F3_inject
 pillar: P01
-title: "Bling ERP: Mapa de Campos do Produto V3"
+title: "Bling ERP: Product Field Map V3"
 version: 2.0.0
 created: 2026-03-25
 updated: 2026-03-25
@@ -11,15 +11,15 @@ author: builder_agent
 domain: execution
 quality: 9.1
 tags: [bling, erp, field-mapping, product, parametrization]
-tldr: "44 campos Bling V3 em 4 blocos — payload minimo de 4 campos obrigatorios, imagens via URL publica e tributacao com defaults seguros."
-when_to_use: "Mapear campos antes de criar payloads, conectores ou telas de cadastro Bling"
+tldr: "44 Bling V3 fields in 4 blocks — minimum payload of 4 mandatory fields, images via public URL, and taxation with safe defaults."
+when_to_use: "Map fields before creating payloads, connectors, or Bling registration screens"
 keywords: [bling_produto, field_mapping, payload, tributacao, imagens]
 long_tails:
-  - "Quais campos do produto Bling sao obrigatorios no V3"
-  - "Como montar payload minimo valido para criar produto no Bling"
+  - "Which Bling product fields are mandatory in V3"
+  - "How to build the minimum valid payload to create a product in Bling"
 axioms:
-  - "SEMPRE garantir payload minimo antes de enriquecer extras"
-  - "NUNCA inferir GTIN, NCM ou CEST sem fonte verificavel"
+  - "ALWAYS ensure minimum payload before enriching with extras"
+  - "NEVER infer GTIN, NCM, or CEST without a verifiable source"
 linked_artifacts:
   primary: p01_kc_bling_erp_automation_boundary
   related: [p01_kc_zero_touch_execution]
@@ -35,45 +35,45 @@ related:
 ## Quick Reference
 
 topic: product field mapping | scope: Bling V3 | fields: 44
-payload minimo: nome + tipo + situacao + formato
+minimum payload: nome + tipo + situacao + formato
 
 ## Spec
 
-| Bloco | Campos | Funcao | Regra central |
-|-------|--------|--------|---------------|
-| Dados principais | 14 | identidade comercial | 4 obrigatorios |
-| Imagens | 2 | exposicao visual | URL publica |
-| Tributacao | 5 | fiscalidade | default seguro |
-| Extras API | 6 | enriquecimento | fallback vazio |
+| Block | Fields | Function | Central Rule |
+|-------|--------|----------|--------------|
+| Main data | 14 | commercial identity | 4 mandatory |
+| Images | 2 | visual display | public URL |
+| Taxation | 5 | fiscal compliance | safe default |
+| API Extras | 6 | enrichment | empty fallback |
 
-| Campo | API key | Tipo | Obrigatorio | Default |
-|-------|---------|------|-------------|---------|
-| `nome` | nome | text | sim | — |
-| `tipo` | tipo | SELECT | sim | P |
-| `situacao` | situacao | TOGGLE | sim | A |
-| `formato` | formato | SELECT | sim | S |
-| `codigo` | codigo | text | nao | auto |
-| `preco` | preco | float | nao | 0.0 |
-| `unidade` | unidade | text | nao | UN |
-| `condicao` | condicao | SELECT | nao | 1 |
+| Field | API key | Type | Mandatory | Default |
+|-------|---------|------|-----------|---------|
+| `nome` | nome | text | yes | — |
+| `tipo` | tipo | SELECT | yes | P |
+| `situacao` | situacao | TOGGLE | yes | A |
+| `formato` | formato | SELECT | yes | S |
+| `codigo` | codigo | text | no | auto |
+| `preco` | preco | float | no | 0.0 |
+| `unidade` | unidade | text | no | UN |
+| `condicao` | condicao | SELECT | no | 1 |
 
 ## Patterns
 
 | Trigger | Action |
 |---------|--------|
-| Criar produto novo | Enviar payload minimo primeiro |
-| Adicionar imagens | POST /produtos/{id}/imagens |
-| Imagem principal | PUT com campo imagemURL |
-| Tributacao | Usar defaults, override por NCM |
-| Campo sem fonte | Deixar vazio, nunca inventar |
+| Create new product | Send minimum payload first |
+| Add images | POST /produtos/{id}/imagens |
+| Main image | PUT with imagemURL field |
+| Taxation | Use defaults, override by NCM |
+| Field without source | Leave empty, never fabricate |
 
 ## Anti-Patterns
 
-- Inferir GTIN/barcode sem produto fisico em maos
-- Preencher NCM/CEST por chute (risco fiscal)
-- Enviar imagem como base64 (Bling exige URL)
-- Misturar imagem principal e galeria no mesmo call
-- Ignorar payload minimo e enviar so campos opcionais
+- Inferring GTIN/barcode without physical product in hand
+- Filling NCM/CEST by guesswork (fiscal risk)
+- Sending image as base64 (Bling requires URL)
+- Mixing main image and gallery in the same call
+- Ignoring minimum payload and sending only optional fields
 
 ## Code
 

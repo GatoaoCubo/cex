@@ -11,15 +11,15 @@ author: builder_agent
 domain: cex_taxonomy
 quality: 9.2
 tags: [cex, lp07, evals, scoring, benchmark, golden-test, shokunin]
-tldr: "P07 formaliza 6 tipos de eval como cidadaos de 1a classe: de smoke_eval 30s a golden_test 9.5+"
-when_to_use: "Entender como medir qualidade em sistemas LLM e o padrao Shokunin de tiers"
+tldr: "P07 formalizes 6 eval types as first-class citizens: from smoke_eval 30s to golden_test 9.5+"
+when_to_use: "Understand how to measure quality in LLM systems and the Shokunin tier standard"
 keywords: [evals, scoring-rubric, benchmark, golden-test, smoke-eval]
 long_tails:
-  - "Como implementar avaliacao de qualidade para agentes LLM"
-  - "O que sao golden tests e scoring rubrics no CEX"
+  - "How to implement quality evaluation for LLM agents"
+  - "What are golden tests and scoring rubrics in CEX"
 axioms:
-  - "SEMPRE medir antes de promover (sem eval = sem pool)"
-  - "NUNCA auto-atribuir quality score (avaliacao externa)"
+  - "ALWAYS measure before promoting (no eval = no pool)"
+  - "NEVER self-assign quality score (external evaluation)"
 linked_artifacts:
   primary: p01_kc_cex_lp06_schema
   related: [p01_kc_cex_lp05_output, p01_kc_cex_lp08_architecture]
@@ -43,61 +43,61 @@ related:
 topic: P07 Evals | scope: quality measurement | criticality: high
 types: 6 | function: GOVERN | layer: governance
 
-## Conceitos Chave
+## Key Concepts
 
-- P07 trata evals como tipos de primeira classe no CEX
-- scoring_rubric define COMO avaliar (criterios e pesos)
-- unit_eval testa agente ou prompt individual isolado
-- smoke_eval eh sanidade rapida em menos de 30 segundos
-- e2e_eval testa pipeline completo ponta a ponta
-- benchmark mede performance quantitativa continua
-- golden_test eh referencia quality 9.5+ (exemplar)
-- Padrao Shokunin: Master >= 9.5 | Skilled >= 8.0
-- Nenhum framework popular formaliza evals assim
-- DSPy tem Metric — o mais proximo, mas isolado
-- LangChain tem Callback para logging, nao avaliacao
-- CrewAI nao tem nenhum tipo de eval formalizado
-- P07 avalia P05: qualidade do formato de output
-- P07 avalia P01: qualidade do conhecimento destilado
-- P07 alimenta P11: resultados de evals sao feedback
+- P07 treats evals as first-class types in CEX
+- scoring_rubric defines HOW to evaluate (criteria and weights)
+- unit_eval tests an individual agent or prompt in isolation
+- smoke_eval is a quick sanity check in under 30 seconds
+- e2e_eval tests the complete pipeline end to end
+- benchmark measures continuous quantitative performance
+- golden_test is a quality 9.5+ reference (exemplar)
+- Shokunin standard: Master >= 9.5 | Skilled >= 8.0
+- No popular framework formalizes evals like this
+- DSPy has Metric — the closest, but isolated
+- LangChain has Callback for logging, not evaluation
+- CrewAI has no formalized eval type
+- P07 evaluates P05: quality of the output format
+- P07 evaluates P01: quality of the distilled knowledge
+- P07 feeds P11: eval results are feedback
 - scoring_rubric max 5120 bytes (governance, core: true)
 - golden_test max 4096 bytes (governance, core: true)
 
-## Fases
+## Phases
 
-1. Criar scoring_rubric com criterios do dominio
-2. Implementar smoke_evals para sanidade rapida (<30s)
-3. Escrever unit_evals para cada agente critico
-4. Construir e2e_evals para pipelines completos
-5. Estabelecer benchmarks para metricas continuas
-6. Promover artefatos 9.5+ a golden_test de referencia
+1. Create scoring_rubric with domain criteria
+2. Implement smoke_evals for quick sanity (<30s)
+3. Write unit_evals for each critical agent
+4. Build e2e_evals for complete pipelines
+5. Establish benchmarks for continuous metrics
+6. Promote artifacts 9.5+ to golden_test reference
 
-## Regras de Ouro
+## Golden Rules
 
-- SEMPRE ter scoring_rubric antes de avaliar
-- NUNCA confundir benchmark (mede) com eval (testa)
-- SEMPRE rodar smoke_eval antes de unit_eval (fail fast)
-- NUNCA promover ao pool sem eval >= 8.0 (Shokunin)
-- SEMPRE preservar golden_tests como referencia imutavel
+- ALWAYS have scoring_rubric before evaluating
+- NEVER confuse benchmark (measures) with eval (tests)
+- ALWAYS run smoke_eval before unit_eval (fail fast)
+- NEVER promote to pool without eval >= 8.0 (Shokunin)
+- ALWAYS preserve golden_tests as immutable reference
 
-## Comparativo
+## Comparison
 
-| Tipo Eval | Velocidade | Escopo | Profundidade |
-|-----------|------------|--------|--------------|
-| smoke_eval | < 30s | Sanidade | Superficial |
-| unit_eval | 1-5 min | Isolado | Profunda |
-| e2e_eval | 5-30 min | Pipeline | Completa |
-| benchmark | Continuo | Metricas | Quantitativa |
-| golden_test | N/A | Referencia | Exemplar 9.5+ |
-| scoring_rubric | N/A | Criterios | Framework |
+| Eval Type | Speed | Scope | Depth |
+|-----------|-------|-------|-------|
+| smoke_eval | < 30s | Sanity | Shallow |
+| unit_eval | 1-5 min | Isolated | Deep |
+| e2e_eval | 5-30 min | Pipeline | Complete |
+| benchmark | Continuous | Metrics | Quantitative |
+| golden_test | N/A | Reference | Exemplar 9.5+ |
+| scoring_rubric | N/A | Criteria | Framework |
 
 ## Flow
 
 ```
-[artefato novo]
+[new artifact]
      |
      v
-[smoke_eval: sanidade <30s]
+[smoke_eval: sanity <30s]
      |
 pass v              fail --> rewrite
 [unit_eval: teste profundo]

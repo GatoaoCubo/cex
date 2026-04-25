@@ -11,15 +11,15 @@ author: builder_agent
 domain: llm_engineering
 quality: 9.1
 tags: [prompt-optimization, evolutionary, promptbreeder, elo-rating, llm]
-tldr: "5 tecnicas evolucionarias (PromptBreeder, C-Evolve, APE, Tournament, Vision-Language) elevam fitness de 0.65 para 0.85+ com meta-mutacao e consenso."
-when_to_use: "Otimizar prompts sistematicamente em vez de iteracao manual — especialmente com populacoes de candidatos"
+tldr: "5 evolutionary techniques (PromptBreeder, C-Evolve, APE, Tournament, Vision-Language) raise fitness from 0.65 to 0.85+ with meta-mutation and consensus."
+when_to_use: "Systematically optimize prompts instead of manual iteration — especially with candidate populations"
 keywords: [prompt_evolution, genetic_algorithm, meta_mutation, elo_rating]
 long_tails:
-  - "Como usar algoritmos geneticos para otimizar prompts de LLM"
-  - "Qual tecnica de prompt evolution tem melhor custo-beneficio"
+  - "How to use genetic algorithms to optimize LLM prompts"
+  - "Which prompt evolution technique has the best cost-benefit ratio"
 axioms:
-  - "SEMPRE usar dual fitness (task + quality) para evitar overfitting"
-  - "NUNCA evoluir prompts sem metricas de fitness quantitativas"
+  - "ALWAYS use dual fitness (task + quality) to avoid overfitting"
+  - "NEVER evolve prompts without quantitative fitness metrics"
 linked_artifacts:
   primary: null
   related: [p01_kc_claude_agent_sdk_patterns]
@@ -31,17 +31,17 @@ related:
 
 ## Summary
 
-Prompt optimization evolucionaria aplica algoritmos geneticos a populacoes de prompts. 5 tecnicas validadas empiricamente elevam fitness baseline de ~0.65 para 0.85+. PromptBreeder (MATH 46.3%) evolui as proprias estrategias de mutacao. APE reduz tempo de dev 60-80%.
+Evolutionary prompt optimization applies genetic algorithms to prompt populations. 5 empirically validated techniques raise baseline fitness from ~0.65 to 0.85+. PromptBreeder (MATH 46.3%) evolves its own mutation strategies. APE reduces dev time 60-80%.
 
 ## Spec
 
-| Tecnica | Mecanismo | Benchmark | Custo | Self-Referential |
-|---------|-----------|-----------|-------|------------------|
-| PromptBreeder | Meta-mutacao de estrategias | MATH 46.3%, GSM8K 83.5% | Alto | Sim |
-| C-Evolve | Ilhas + consenso por votacao | +13.85% Qwen3-8B, +16.09% GPT-4-mini | Alto | Nao |
-| APE | LLM gera + avalia candidatos | +35% accuracy, -60-80% dev time | Alto | Nao |
-| Tournament | Elo rating via debate multi-agent | 97% F1 (BBH-Navigate) | Muito alto | Nao |
-| Vision-Language | Dual fitness (task + critique) | Previne overfitting, emergent tool use | Muito alto | Sim |
+| Technique | Mechanism | Benchmark | Cost | Self-Referential |
+|-----------|-----------|-----------|------|------------------|
+| PromptBreeder | Strategy meta-mutation | MATH 46.3%, GSM8K 83.5% | High | Yes |
+| C-Evolve | Islands + consensus by voting | +13.85% Qwen3-8B, +16.09% GPT-4-mini | High | No |
+| APE | LLM generates + evaluates candidates | +35% accuracy, -60-80% dev time | High | No |
+| Tournament | Elo rating via multi-agent debate | 97% F1 (BBH-Navigate) | Very high | No |
+| Vision-Language | Dual fitness (task + critique) | Prevents overfitting, emergent tool use | Very high | Yes |
 
 | Fase | Fitness Target | Success Rate |
 |------|---------------|--------------|
@@ -53,19 +53,19 @@ Prompt optimization evolucionaria aplica algoritmos geneticos a populacoes de pr
 
 | Trigger | Action |
 |---------|--------|
-| Fitness estagnada apos 5 geracoes | Ativar meta-mutacao (PromptBreeder) |
-| Prompts convergindo prematuramente | Usar island populations (C-Evolve) |
-| Sem tempo para tuning manual | APE: LLM gera 5 variacoes dos top performers |
-| Multiplos candidatos empatados | Tournament com Elo rating (K=32) |
-| Overfitting em task metric | Dual fitness: 0.75*task + 0.25*quality_critique |
+| Fitness stagnated after 5 generations | Activate meta-mutation (PromptBreeder) |
+| Prompts converging prematurely | Use island populations (C-Evolve) |
+| No time for manual tuning | APE: LLM generates 5 variations of top performers |
+| Multiple tied candidates | Tournament with Elo rating (K=32) |
+| Overfitting on task metric | Dual fitness: 0.75*task + 0.25*quality_critique |
 
 ## Anti-Patterns
 
-- Evoluir sem fitness quantitativa (viés de confirmacao)
-- Populacao < 5 candidatos (diversidade insuficiente)
-- Ignorar mutation strategy tracking (nao sabe o que funciona)
-- >10 ilhas simultaneas (overhead > ganho evolutivo)
-- Single fitness function sem quality critique (overfitting)
+- Evolving without quantitative fitness (confirmation bias)
+- Population < 5 candidates (insufficient diversity)
+- Ignoring mutation strategy tracking (cannot tell what works)
+- >10 simultaneous islands (overhead > evolutionary gain)
+- Single fitness function without quality critique (overfitting)
 
 ## Code
 

@@ -13,7 +13,7 @@ tags: [guardrail, stella, dispatch, safety, orchestration]
 tldr: "orchestrator is orchestrator-only: never executes tasks directly, never uses tsp_manager.py, never spawns >3 agent_groups, never writes handoffs to .claude/temp/"
 max_bytes: 512
 density_score: 0.90
-source: organization-core/.claude/rules/orchestrator_RULES.md (NUNCA section)
+source: organization-core/.claude/rules/orchestrator_RULES.md (NEVER section)
 linked_artifacts:
   workflow: p12_wf_stella_dispatch
   law: p08_law_shokunin

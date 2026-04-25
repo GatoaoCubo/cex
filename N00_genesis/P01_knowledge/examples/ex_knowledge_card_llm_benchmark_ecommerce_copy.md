@@ -3,7 +3,7 @@ id: p01_kc_llm_benchmark_ecommerce_copy
 kind: knowledge_card
 8f: F3_inject
 pillar: P01
-title: "LLM Benchmark para Copy de E-Commerce em PT-BR"
+title: "LLM Benchmark for PT-BR E-Commerce Copy"
 version: 1.0.0
 created: 2026-03-25
 updated: 2026-03-25
@@ -11,20 +11,20 @@ author: research_agent
 domain: research
 quality: 9.1
 tags: [llm-benchmark, ecommerce, pt-br, copywriting, pricing, json]
-tldr: "Claude Sonnet lidera qualidade PT-BR e JSON; GPT-4o lidera confiabilidade; Gemini Flash e DeepSeek vencem em custo e volume."
-when_to_use: "Escolher stack LLM para copy, catalogo ou automacao de conteudo em portugues"
+tldr: "Claude Sonnet leads PT-BR quality and JSON; GPT-4o leads reliability; Gemini Flash and DeepSeek win on cost and volume."
+when_to_use: "Choose LLM stack for copy, catalog or content automation in Portuguese"
 keywords: [pt_br_copy, model_selection, json_reliability, throughput, token_cost]
 long_tails:
-  - "Qual LLM usar para copy de e-commerce em portugues brasileiro"
-  - "Como balancear qualidade PT-BR, custo e JSON confiavel"
+  - "Which LLM to use for PT-BR e-commerce copy"
+  - "How to balance PT-BR quality, cost and reliable JSON"
 axioms:
-  - "SEMPRE separar modelo premium de modelo bulk"
-  - "NUNCA promover Gemini 2.5 sem teste PT-BR proprio"
+  - "ALWAYS separate premium model from bulk model"
+  - "NEVER promote Gemini 2.5 without your own PT-BR test"
 linked_artifacts:
   primary: null
   related: [p01_kc_claude_model_capabilities_2026]
 density_score: 1.0
-data_source: "Benchmark comparativo de throughput, uptime, preco e qualidade PT-BR para copy comercial"
+data_source: "Comparative benchmark of throughput, uptime, price and PT-BR quality for commercial copy"
 related:
   - bld_tools_model_card
   - bld_examples_model_card
@@ -41,37 +41,37 @@ related:
 ## Quick Reference
 
 topic: model selection | scope: PT-BR ecommerce copy | criticality: high
-stack recomendada: Claude para premium, DeepSeek bulk, GPT-4o backup, Gemini para latencia
+recommended stack: Claude for premium, DeepSeek bulk, GPT-4o backup, Gemini for latency
 
-## Conceitos Chave
+## Key Concepts
 
-- Claude Sonnet ganha em qualidade PT-BR e JSON estrito
-- GPT-4o ganha em uptime e previsibilidade operacional
-- Gemini Flash entrega menor custo de latencia por request
-- DeepSeek V3 domina workloads massivos por preco
+- Claude Sonnet wins on PT-BR quality and strict JSON
+- GPT-4o wins on uptime and operational predictability
+- Gemini Flash delivers lowest latency cost per request
+- DeepSeek V3 dominates massive workloads by price
 
-## Comparativo
+## Comparison
 
-| Modelo | Forca principal | Sinal numerico | Uso ideal |
-|--------|------------------|----------------|-----------|
-| Claude Sonnet | Qualidade PT-BR | JSON 100% com constraints | Landing e premium copy |
-| GPT-4o | Confiabilidade | 99.6% uptime, 99.9% SLA | Backup e fluxos criticos |
-| Gemini 2.5 Flash | Velocidade | TTFT 0.34s, 249 t/s | Alto volume e baixa latencia |
-| DeepSeek V3 | Custo | 53x mais barato que Claude output | Bulk catalog e SEO |
+| Model | Main strength | Numeric signal | Ideal use |
+|-------|---------------|----------------|-----------|
+| Claude Sonnet | PT-BR quality | JSON 100% with constraints | Landing and premium copy |
+| GPT-4o | Reliability | 99.6% uptime, 99.9% SLA | Backup and critical flows |
+| Gemini 2.5 Flash | Speed | TTFT 0.34s, 249 t/s | High volume and low latency |
+| DeepSeek V3 | Cost | 53x cheaper than Claude output | Bulk catalog and SEO |
 
-| Custo 1M in + 1M out | Valor |
+| Cost 1M in + 1M out | Value |
 |----------------------|-------|
 | DeepSeek V3 | ~$0.34 |
 | Gemini 2.5 Flash | ~$2.80 |
 | GPT-4o | ~$12.50 |
 | Claude Sonnet | ~$18.00 |
 
-## Regras de Ouro
+## Golden Rules
 
-- SEMPRE usar modelo premium so onde margem paga a diferenca
-- SEMPRE medir JSON compliance antes de automacao sem review
-- NUNCA assumir benchmark em ingles como proxy de PT-BR
-- SEMPRE manter fallback operacional entre vendors
+- ALWAYS use premium model only where margin pays for the difference
+- ALWAYS measure JSON compliance before automation without review
+- NEVER assume English benchmark as proxy for PT-BR
+- ALWAYS maintain operational fallback between vendors
 
 ## Code
 

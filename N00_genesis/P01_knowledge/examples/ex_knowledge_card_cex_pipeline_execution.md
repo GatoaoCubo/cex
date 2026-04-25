@@ -11,15 +11,15 @@ author: builder_agent
 domain: cex_taxonomy
 quality: 9.0
 tags: [cex, pipeline, execution, 8-functions, boot-sequence, llm-processing]
-tldr: "Pipeline de 8 funcoes (BECOME-INJECT-REASON-CALL-PRODUCE-CONSTRAIN-GOVERN-COLLABORATE) eh o processamento real de todo sistema LLM"
-when_to_use: "Entender a sequencia completa de execucao de um agente ou agent_group LLM do input ao output"
+tldr: "Pipeline of 8 functions (BECOME-INJECT-REASON-CALL-PRODUCE-CONSTRAIN-GOVERN-COLLABORATE) is the actual processing of every LLM system"
+when_to_use: "Understand the complete execution sequence of an LLM agent or agent_group from input to output"
 keywords: [pipeline, execution, 8-functions, boot-sequence, processing]
 long_tails:
-  - "Qual a sequencia de execucao de um agente LLM do input ao output"
-  - "Como funciona o boot sequence de um agent_group organization"
+  - "What is the execution sequence of an LLM agent from input to output"
+  - "How does the boot sequence of an agent_group organization work"
 axioms:
-  - "SEMPRE executar funcoes na ordem BECOME-INJECT-REASON-CALL-PRODUCE-CONSTRAIN-GOVERN-COLLABORATE"
-  - "NUNCA pular BECOME (identidade precede tudo)"
+  - "ALWAYS execute functions in the order BECOME-INJECT-REASON-CALL-PRODUCE-CONSTRAIN-GOVERN-COLLABORATE"
+  - "NEVER skip BECOME (identity precedes everything)"
 linked_artifacts:
   primary: p01_kc_cex_function_become
   related: [p01_kc_cex_agent_group_concept, p01_kc_cex_cortex_enterprise]
@@ -40,38 +40,38 @@ related:
 
 ## Summary
 
-Todo sistema LLM executa as mesmas 8 funcoes na mesma ordem logica. Um prompt simples executa 1-2 (BECOME implicito + PRODUCE). Um agente executa 4-5. Um agent_group com lifecycle completo executa todas as 8. A diferenca entre prompt e agent_group nao eh de natureza — eh de completude. A boot sequence de um Cortex Enterprise eh ela mesma uma instanciacao dessas 8 funcoes.
+Every LLM system executes the same 8 functions in the same logical order. A simple prompt executes 1-2 (implicit BECOME + PRODUCE). An agent executes 4-5. An agent_group with complete lifecycle executes all 8. The difference between prompt and agent_group is not in nature — it is in completeness. The boot sequence of a Cortex Enterprise is itself an instantiation of these 8 functions.
 
 ## Spec
 
-| # | Funcao | O que faz | Boot Equivalente |
-|---|--------|-----------|------------------|
-| 1 | BECOME | Configura identidade, persona, papel | Carregar PRIME.md + mental_model.yaml |
-| 2 | INJECT | Fornece contexto, dados, conhecimento | Indexar pool de KCs via Brain MCP |
-| 3 | REASON | Planeja, decompoe, decide estrategia | Ler tarefa, decompor em sub-tarefas |
-| 4 | CALL | Usa ferramentas externas, APIs, MCPs | brain_query() + conectar MCPs |
-| 5 | PRODUCE | Gera output: codigo, KCs, copy, deploy | Executar agent teams por agent_group |
-| 6 | CONSTRAIN | Valida contra schemas, formata output | Validar tipos, aplicar templates |
-| 7 | GOVERN | Avalia qualidade, testa, benchmarka | Quality gate >= 7.0, pre-commit hooks |
-| 8 | COLLABORATE | Sinaliza, commita, despacha proximo | Signal file + git commit + next task |
+| # | Function | What it does | Boot Equivalent |
+|---|----------|-------------|-----------------|
+| 1 | BECOME | Configure identity, persona, role | Load PRIME.md + mental_model.yaml |
+| 2 | INJECT | Provide context, data, knowledge | Index KC pool via Brain MCP |
+| 3 | REASON | Plan, decompose, decide strategy | Read task, decompose into sub-tasks |
+| 4 | CALL | Use external tools, APIs, MCPs | brain_query() + connect MCPs |
+| 5 | PRODUCE | Generate output: code, KCs, copy, deploy | Execute agent teams per agent_group |
+| 6 | CONSTRAIN | Validate against schemas, format output | Validate types, apply templates |
+| 7 | GOVERN | Evaluate quality, test, benchmark | Quality gate >= 7.0, pre-commit hooks |
+| 8 | COLLABORATE | Signal, commit, dispatch next | Signal file + git commit + next task |
 
 ## Patterns
 
 | Trigger | Action |
 |---------|--------|
-| Prompt simples sem agente | Executa BECOME (implicito) + PRODUCE |
-| Agente com tools | Adiciona INJECT + REASON + CALL ao pipeline |
-| Agent_group completo | Executa todas as 8 funcoes em sequencia |
-| Boot de Cortex Enterprise | Instancia as 8 funcoes como boot sequence |
-| Falha em GOVERN (score < 7.0) | Loop de retry: REASON-PRODUCE-CONSTRAIN-GOVERN |
+| Simple prompt without agent | Executes BECOME (implicit) + PRODUCE |
+| Agent with tools | Adds INJECT + REASON + CALL to pipeline |
+| Complete agent_group | Executes all 8 functions in sequence |
+| Cortex Enterprise boot | Instantiates the 8 functions as boot sequence |
+| GOVERN failure (score < 7.0) | Retry loop: REASON-PRODUCE-CONSTRAIN-GOVERN |
 
 ## Anti-Patterns
 
-- Pular BECOME (gera output sem identidade, inconsistente)
-- INJECT antes de BECOME (contexto sem papel = ruido)
-- PRODUCE sem REASON (output sem planejamento = lixo)
-- GOVERN ausente (sem quality gate = degradacao silenciosa)
-- COLLABORATE sem GOVERN (propaga erros para proximo no pipeline)
+- Skipping BECOME (generates output without identity, inconsistent)
+- INJECT before BECOME (context without role = noise)
+- PRODUCE without REASON (output without planning = garbage)
+- GOVERN absent (no quality gate = silent degradation)
+- COLLABORATE without GOVERN (propagates errors to next in pipeline)
 
 ## Code
 

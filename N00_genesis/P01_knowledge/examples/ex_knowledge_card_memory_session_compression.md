@@ -18,9 +18,9 @@ long_tails:
   - "How to compress LLM agent session observations into summaries"
   - "How to use dual session IDs for memory and content separation"
 axioms:
-  - "SEMPRE compress at Stop (once/session), never at PostToolUse"
-  - "NUNCA resume SDK session with contentSessionId"
-  - "NUNCA delete raw observations after compression"
+  - "ALWAYS compress at Stop (once/session), never at PostToolUse"
+  - "NEVER resume SDK session with contentSessionId"
+  - "NEVER delete raw observations after compression"
 linked_artifacts:
   primary: p01_kc_memory_privacy_controls
   related: [p01_kc_cex_function_inject]

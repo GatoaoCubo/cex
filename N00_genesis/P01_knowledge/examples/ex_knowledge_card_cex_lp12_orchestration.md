@@ -11,15 +11,15 @@ author: builder_agent
 domain: cex_taxonomy
 quality: 9.2
 tags: [cex, lp12, orchestration, workflow, spawn, signal, handoff, crew]
-tldr: "P12 define 7 tipos de coordenacao multi-agente: workflow, dag, spawn_config, signal, handoff, dispatch_rule, crew"
-when_to_use: "Entender como agentes LLM isolados viram sistema coordenado"
+tldr: "P12 defines 7 types of multi-agent coordination: workflow, dag, spawn_config, signal, handoff, dispatch_rule, crew"
+when_to_use: "Understand how isolated LLM agents become a coordinated system"
 keywords: [orchestration, workflow, dag, spawn, signal, handoff, dispatch, crew]
 long_tails:
-  - "Como coordenar multiplos agentes LLM em sistema unificado"
-  - "Qual a diferenca entre workflow e dag no CEX P12"
+  - "How to coordinate multiple LLM agents in a unified system"
+  - "What is the difference between workflow and dag in CEX P12"
 axioms:
-  - "SEMPRE usar handoff para transferir contexto entre agentes"
-  - "NUNCA spawnar agente sem spawn_config explicito"
+  - "ALWAYS use handoff to transfer context between agents"
+  - "NEVER spawn agent without explicit spawn_config"
 linked_artifacts:
   primary: p01_kc_cex_lp11_feedback
   related: [p01_kc_cex_lp08_architecture]
@@ -43,55 +43,55 @@ related:
 topic: P12 Orchestration | scope: multi-agent coordination | criticality: high
 types: 7 | function: COLLABORATE + PRODUCE + GOVERN | layer: runtime + spec
 
-## Conceitos Chave
+## Key Concepts
 
-- P12 eh o maestro: agentes isolados viram orquestra
-- workflow define steps sequenciais ou paralelos de agentes
-- dag modela grafo aciclico de dependencias entre tasks
-- spawn_config define como executar (solo, grid, continuous)
-- signal comunica eventos simples entre agentes (complete)
-- handoff transfere task + context + commit entre agentes
-- dispatch_rule roteia keyword > agent_group automaticamente
-- crew define grupo multi-agente com protocolo de coord
-- AutoGen tem GroupChat; CrewAI tem Crew; MetaGPT tem Env
-- crew do CEX unifica esses conceitos em tipo formal
-- workflow NAO eh chain (P03, sequencia de prompts)
-- signal NAO eh handoff (evento simples vs instrucao)
-- dispatch_rule NAO eh router (P02, task > model routing)
-- P12 orquestra todos os outros LPs na execucao
-- P12 depende de P02: identidade define quem participa
-- P12 usa P04: mecanismos de comunicacao sao ferramentas
-- P12 eh governado por P07: qualidade da coord eh medida
-- Funcao dominante: COLLABORATE (coordenacao entre agentes)
+- P12 is the conductor: isolated agents become an orchestra
+- workflow defines sequential or parallel steps of agents
+- dag models an acyclic dependency graph between tasks
+- spawn_config defines how to execute (solo, grid, continuous)
+- signal communicates simple events between agents (complete)
+- handoff transfers task + context + commit between agents
+- dispatch_rule routes keyword > agent_group automatically
+- crew defines a multi-agent group with coordination protocol
+- AutoGen has GroupChat; CrewAI has Crew; MetaGPT has Env
+- CEX crew unifies these concepts into a formal type
+- workflow is NOT chain (P03, prompt sequence)
+- signal is NOT handoff (simple event vs instruction)
+- dispatch_rule is NOT router (P02, task > model routing)
+- P12 orchestrates all other LPs in execution
+- P12 depends on P02: identity defines who participates
+- P12 uses P04: communication mechanisms are tools
+- P12 is governed by P07: coordination quality is measured
+- Dominant function: COLLABORATE (coordination between agents)
 
-## Fases
+## Phases
 
-1. Mapear agentes disponiveis e seus dominios (P02)
-2. Definir dispatch_rules para roteamento automatico
-3. Criar spawn_configs por modo (solo, grid, continuous)
-4. Desenhar workflows para fluxos recorrentes
-5. Implementar signals e handoffs para comunicacao
-6. Compor crews para missoes multi-agente complexas
+1. Map available agents and their domains (P02)
+2. Define dispatch_rules for automatic routing
+3. Create spawn_configs per mode (solo, grid, continuous)
+4. Design workflows for recurring flows
+5. Implement signals and handoffs for communication
+6. Compose crews for complex multi-agent missions
 
-## Regras de Ouro
+## Golden Rules
 
-- SEMPRE usar handoff (nao signal) para transferir tarefas
-- NUNCA spawnar sem spawn_config (evitar defaults implicitos)
-- SEMPRE definir crew protocol antes de execucao conjunta
-- NUNCA misturar workflow com dag (execucao vs dependencia)
-- SEMPRE incluir commit instruction no handoff
+- ALWAYS use handoff (not signal) to transfer tasks
+- NEVER spawn without spawn_config (avoid implicit defaults)
+- ALWAYS define crew protocol before joint execution
+- NEVER mix workflow with dag (execution vs dependency)
+- ALWAYS include commit instruction in handoff
 
-## Comparativo
+## Comparison
 
-| Tipo | Natureza | Escopo | Exemplo |
-|------|----------|--------|---------|
-| workflow | Execucao | Steps sequenciais | Pipeline de pesquisa |
-| dag | Dependencia | Grafo aciclico | Task dependency graph |
-| spawn_config | Infra | Modo de execucao | Solo, grid, continuous |
-| signal | Evento | Entre 2 agentes | complete, error, progress |
-| handoff | Instrucao | Task completa | Handoff com contexto+commit |
-| dispatch_rule | Roteamento | Keyword > sat | "pesquisar" > research_agent |
-| crew | Grupo | N agentes | Equipe de 3 agent_groups |
+| Type | Nature | Scope | Example |
+|------|--------|-------|---------|
+| workflow | Execution | Sequential steps | Research pipeline |
+| dag | Dependency | Acyclic graph | Task dependency graph |
+| spawn_config | Infra | Execution mode | Solo, grid, continuous |
+| signal | Event | Between 2 agents | complete, error, progress |
+| handoff | Instruction | Complete task | Handoff with context+commit |
+| dispatch_rule | Routing | Keyword > sat | "research" > research_agent |
+| crew | Group | N agents | Team of 3 agent_groups |
 
 ## Flow
 
@@ -106,15 +106,15 @@ types: 7 | function: COLLABORATE + PRODUCE + GOVERN | layer: runtime + spec
  [PRODUCE] [GOVERN] [COLLABORATE]
     |         |           |
     v         v           v
- executa   configura   comunica
+ executes   configures   communicates
     |         |           |
     +----+----+-----------+
          |
          v
-  [agentes coordenados]
+  [coordinated agents]
          |
          v
-  [P07 evals mede qualidade]
+  [P07 evals measure quality]
 ```
 
 ## References

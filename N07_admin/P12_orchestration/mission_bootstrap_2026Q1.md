@@ -12,7 +12,7 @@ pipeline: bootstrap_full
 domain: orchestration
 quality: 9.1
 tags: [mission, bootstrap, dag, orchestration, N07, critical]
-tldr: "Plano de 4 fases para o CEX se auto-construir: validar tools, N03 reconstroi N07, fix WARNs, N03 sequencial reconstroi N01-N06."
+tldr: "4-phase plan for CEX self-bootstrap: validate tools, N03 rebuilds N07, fix WARNs, N03 sequential rebuilds N01-N06."
 node_count: 16
 edge_count: 15
 estimated_duration: "5-7h total"
@@ -336,7 +336,7 @@ nodes:
 1. Ler N03_engineering/P02_model/agent_engineering.md como referência de quality 9.0
 2. Ler N07_admin/P12_orchestration/spawn_config_admin.md (9.0) como referência de estilo N07
 3. Ler N07_admin/P02_model/fallback_chain_admin.md (9.0) como referência de estilo N07
-4. Identidade N07 = orquestrador multi-CLI, dispatch via spawn, NUNCA constrói
+4. N07 identity = multi-CLI orchestrator, dispatch via spawn, NEVER builds directly
 5. Cada artefato DEVE seguir 8F pipeline completo com builder ISOs
 6. Compilar cada artefato após salvar: `python _tools/cex_compile.py PATH`
 7. Commit incremental a cada 2-3 artefatos: `git add -A && git commit -m "[N03] rebuild N07 batch X"`

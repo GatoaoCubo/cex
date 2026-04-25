@@ -12,17 +12,17 @@ author: n04_knowledge
 domain: data_platform
 quality: 9.1
 tags: [supabase, pgvector, vectors, embeddings, rag, semantic-search, platform]
-tldr: "pgvector nativo no PostgreSQL: vector(1536), indexes HNSW/IVFFlat, match_documents() para semantic search, integra com OpenAI/Cohere/local embeddings"
-when_to_use: "Quando configurar embeddings, semantic search, ou RAG pipeline com Supabase"
+tldr: "Native pgvector in PostgreSQL: vector(1536), HNSW/IVFFlat indexes, match_documents() for semantic search, integrates with OpenAI/Cohere/local embeddings"
+when_to_use: "When configuring embeddings, semantic search, or RAG pipeline with Supabase"
 keywords: [pgvector, embeddings, semantic-search, rag, supabase-vectors]
 long_tails:
-  - Como criar tabela com coluna vector no Supabase
-  - HNSW vs IVFFlat para index de embeddings no pgvector
-  - Function match_documents para semantic search no Supabase
+  - How to create a table with vector column in Supabase
+  - HNSW vs IVFFlat for embedding indexes in pgvector
+  - match_documents function for semantic search in Supabase
 axioms:
-  - SEMPRE crie index HNSW para tabelas com >1000 vetores
-  - NUNCA armazene embeddings sem metadata (content, source, created_at)
-  - SEMPRE use RLS em tabelas de embeddings para multi-tenant isolation
+  - ALWAYS create HNSW index for tables with >1000 vectors
+  - NEVER store embeddings without metadata (content, source, created_at)
+  - ALWAYS use RLS on embedding tables for multi-tenant isolation
 linked_artifacts:
   primary: null
   related: [p01_kc_supabase_database, p01_kc_supabase_auth]
@@ -49,16 +49,16 @@ topic: supabase_vectors
 scope: pgvector, embeddings, HNSW, IVFFlat, semantic search, RAG
 owner: n04_knowledge
 criticality: high
-extension: pgvector (habilitar: create extension vector)
-conexao_n04: backend concreto para RAG/embeddings do N04
+extension: pgvector (enable: create extension vector)
+n04_connection: concrete backend for N04 RAG/embeddings
 ```
 
-## Setup Inicial
+## Initial Setup
 ```sql
--- 1. Habilitar pgvector
+-- 1. Enable pgvector
 CREATE EXTENSION IF NOT EXISTS vector;
 
--- 2. Criar tabela com coluna embedding
+-- 2. Create table with embedding column
 CREATE TABLE documents (
   id BIGSERIAL PRIMARY KEY,
   content TEXT NOT NULL,
@@ -67,46 +67,46 @@ CREATE TABLE documents (
   created_at TIMESTAMPTZ DEFAULT NOW()
 );
 
--- 3. RLS obrigatório
+-- 3. RLS mandatory
 ALTER TABLE documents ENABLE ROW LEVEL SECURITY;
 CREATE POLICY "owner_read" ON documents
   FOR SELECT USING (metadata->>'org_id' = (auth.jwt()->'app_metadata'->>'org_id'));
 
--- 4. Index HNSW (recomendado para >1000 rows)
+-- 4. HNSW index (recommended for >1000 rows)
 CREATE INDEX ON documents
   USING hnsw (embedding vector_cosine_ops)
   WITH (m = 16, ef_construction = 64);
 ```
 
 ## Modelos de Embedding
-| Modelo | Dim | Custo/1M tok |
+| Model | Dim | Cost/1M tok |
 |--------|-----|-------------|
 | text-embedding-3-small (OpenAI) | 1536 | USD 0.02 |
 | text-embedding-3-large (OpenAI) | 3072 | USD 0.13 |
-| nomic-embed-text (local) | 768 | Grátis |
+| nomic-embed-text (local) | 768 | Free |
 | Cohere embed-v3 | 1024 | USD 0.10 |
 
 ## Index Types
-| Index | Quando Usar | Build Time | Query Speed | Recall |
+| Index | When to Use | Build Time | Query Speed | Recall |
 |-------|-------------|------------|-------------|--------|
-| Nenhum | <1000 rows | 0 | Lento (exact) | 100% |
-| IVFFlat | 1K-100K rows, build rápido | Rápido | Médio | ~95% |
-| HNSW | >1K rows, queries frequentes | Lento | Rápido | ~98% |
+| None | <1000 rows | 0 | Slow (exact) | 100% |
+| IVFFlat | 1K-100K rows, fast build | Fast | Medium | ~95% |
+| HNSW | >1K rows, frequent queries | Slow | Fast | ~98% |
 
 ```sql
--- IVFFlat (mais rápido para construir)
+-- IVFFlat (faster to build)
 CREATE INDEX ON documents USING ivfflat (embedding vector_cosine_ops) WITH (lists = 100);
 
--- HNSW (mais rápido para queries)
+-- HNSW (faster for queries)
 CREATE INDEX ON documents USING hnsw (embedding vector_cosine_ops) WITH (m = 16, ef_construction = 64);
 ```
 
 ## Distance Functions
-| Operador | Function | Quando Usar |
+| Operator | Function | When to Use |
 |----------|----------|-------------|
 | `<=>` | vector_cosine_ops | Default: normalized embeddings (OpenAI, Cohere) |
 | `<#>` | vector_ip_ops | Inner product (MRL, matryoshka) |
-| `<->` | vector_l2_ops | L2/Euclidean (imagens, spatial) |
+| `<->` | vector_l2_ops | L2/Euclidean (images, spatial) |
 
 ## Match Function (Semantic Search)
 ```sql
@@ -129,7 +129,7 @@ $$;
 
 ## Hybrid Search (BM25 + Vector)
 ```sql
--- Combinar full-text com vector: pesos 0.3 BM25 + 0.7 vector
+-- Combine full-text with vector: weights 0.3 BM25 + 0.7 vector
 SELECT id, content,
   (0.3 * ts_rank(fts, q) + 0.7 * (1 - (embedding <=> vec))) AS score
 FROM documents, plainto_tsquery('portuguese','termo') q
@@ -137,18 +137,18 @@ WHERE fts @@ q ORDER BY score DESC LIMIT 10;
 ```
 
 ## Anti-Patterns
-| Anti-Pattern | Risco | Fix |
-|-------------|-------|-----|
-| Sem index em >1K rows | Query scan sequencial, timeout | HNSW ou IVFFlat |
-| Dimensões erradas | Insert falha silenciosamente | Match model dimensions exato |
-| Sem metadata | Impossível filtrar por fonte/data | JSONB metadata obrigatório |
-| Embedding sem RLS | Tenant A vê dados do tenant B | RLS por org_id/user_id |
+| Anti-Pattern | Risk | Fix |
+|-------------|------|-----|
+| No index on >1K rows | Sequential query scan, timeout | HNSW or IVFFlat |
+| Wrong dimensions | Insert fails silently | Match exact model dimensions |
+| No metadata | Impossible to filter by source/date | JSONB metadata mandatory |
+| Embedding without RLS | Tenant A sees tenant B data | RLS by org_id/user_id |
 
 ## Golden Rules
-- MATCH dimensões da coluna VECTOR(N) com o modelo exato
-- INDEXE com HNSW para qualquer tabela de produção
-- COMBINE vector search com BM25 para hybrid retrieval
-- GUARDE source/chunk_index no metadata para rastreabilidade
+- MATCH VECTOR(N) column dimensions with the exact model
+- INDEX with HNSW for any production table
+- COMBINE vector search with BM25 for hybrid retrieval
+- STORE source/chunk_index in metadata for traceability
 
 ## References
 - Docs: https://supabase.com/docs/guides/ai

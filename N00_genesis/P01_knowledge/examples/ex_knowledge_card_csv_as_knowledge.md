@@ -11,15 +11,15 @@ author: builder_agent
 domain: cex_taxonomy
 quality: 9.2
 tags: [csv, knowledge-base, bm25, structured-data, runtime-search]
-tldr: "CSVs como knowledge base searchable via BM25 — sem banco, sem embeddings, sem servidor, ~50ms por query"
-when_to_use: "Precisar de recomendacoes contextuais baseadas em dados estruturados sem infraestrutura externa"
+tldr: "CSVs as searchable knowledge base via BM25 — no database, no embeddings, no server, ~50ms per query"
+when_to_use: "When you need contextual recommendations based on structured data without external infrastructure"
 keywords: [csv-knowledge, structured-search, data-driven-decisions, bm25-csv]
 long_tails:
-  - "Como usar CSVs como knowledge base para agentes LLM"
-  - "Quando usar CSV com BM25 ao inves de banco de dados"
+  - "How to use CSVs as knowledge base for LLM agents"
+  - "When to use CSV with BM25 instead of a database"
 axioms:
-  - "SEMPRE um CSV por dominio — nunca um CSV gigante multi-proposito"
-  - "NUNCA hardcodar recomendacoes em codigo — usar CSV como fonte"
+  - "ALWAYS one CSV per domain — never a giant multi-purpose CSV"
+  - "NEVER hardcode recommendations in code — use CSV as source"
 linked_artifacts:
   primary: null
   related: [p01_kc_bm25_search, p01_kc_agentskills_spec]
@@ -40,71 +40,71 @@ related:
 
 ## TL;DR
 
-CSVs funcionam como knowledge bases consultaveis em runtime via BM25. Sem banco de dados, sem embeddings, sem servidor. Cada CSV e um dominio especializado (produtos, estilos, cores, tipografia) com busca em ~50ms. Pattern comprovado com 55+ CSVs em producao cobrindo design, UX e recomendacoes.
+CSVs work as queryable knowledge bases at runtime via BM25. No database, no embeddings, no server. Each CSV is a specialized domain (products, styles, colors, typography) with search in ~50ms. Proven pattern with 55+ CSVs in production covering design, UX and recommendations.
 
-## Conceito Central
+## Core Concept
 
-A premissa e que dados estruturados com keywords bem definidas nao precisam de embeddings para retrieval eficaz. Um CSV com colunas de busca (search_cols) e colunas de output (output_cols) separadas cria uma decision table consultavel: cada linha e uma regra codificada como dado, nao como codigo.
+The premise is that structured data with well-defined keywords does not need embeddings for effective retrieval. A CSV with separate search columns (search_cols) and output columns (output_cols) creates a queryable decision table: each row is a rule encoded as data, not code.
 
-O pattern funciona porque CSVs sao: editaveis por humanos (Excel, Google Sheets), versionaveis (git diff legivel), portaveis (sem dependencia de runtime) e composiveis (multiplos CSVs consultados em paralelo). A busca BM25 no search_cols retorna as linhas mais relevantes, e o sistema extrai apenas os output_cols necessarios.
+The pattern works because CSVs are: human-editable (Excel, Google Sheets), versionable (readable git diff), portable (no runtime dependency) and composable (multiple CSVs queried in parallel). BM25 search on search_cols returns the most relevant rows, and the system extracts only the needed output_cols.
 
-A separacao de dominios e critica: um CSV por tipo de conhecimento (produtos, estilos, guidelines) garante que BM25 opera num espaco lexico focado. CSVs grandes multi-proposito degradam precisao porque termos comuns a varios dominios diluem o ranking.
+Domain separation is critical: one CSV per knowledge type (products, styles, guidelines) ensures BM25 operates in a focused lexical space. Large multi-purpose CSVs degrade precision because terms common to multiple domains dilute ranking.
 
-## Arquitetura/Patterns
+## Architecture/Patterns
 
-| Componente | Arquivo | Conteudo |
-|------------|---------|----------|
-| Catalogo | products.csv | 161 tipos de produto + recomendacoes |
-| Estilos | styles.csv | 67 estilos UI + CSS keywords |
-| Cores | colors.csv | 161 paletas por tipo de produto |
-| Tipografia | typography.csv | 57 font pairings + Google Fonts |
+| Component | File | Content |
+|-----------|------|---------|
+| Catalog | products.csv | 161 product types + recommendations |
+| Styles | styles.csv | 67 UI styles + CSS keywords |
+| Colors | colors.csv | 161 palettes per product type |
+| Typography | typography.csv | 57 font pairings + Google Fonts |
 | Landing | landing.csv | 24 patterns + CTA strategies |
-| UX Rules | ux-guidelines.csv | 99 regras + anti-patterns |
+| UX Rules | ux-guidelines.csv | 99 rules + anti-patterns |
 
-Schema padrao de cada CSV:
+Standard schema for each CSV:
 ```
-search_cols: colunas indexadas pelo BM25 (keywords, desc)
-output_cols: colunas retornadas nos resultados (completas)
-Linha 1: header com nomes das colunas
+search_cols: columns indexed by BM25 (keywords, desc)
+output_cols: columns returned in results (complete)
+Row 1: header with column names
 ```
 
-Multi-domain search (5 CSVs paralelos):
+Multi-domain search (5 parallel CSVs):
 ```
 Request -> detect domain (regex)
-  -> products.csv  (categoria?)
-  -> styles.csv    (estilo UI?)
-  -> colors.csv    (paleta?)
+  -> products.csv  (category?)
+  -> styles.csv    (UI style?)
+  -> colors.csv    (palette?)
   -> landing.csv   (pattern?)
   -> typography.csv (fonts?)
--> merge resultados -> output unificado
+-> merge results -> unified output
 ```
 
-Estrutura replicavel para qualquer dominio:
+Replicable structure for any domain:
 ```
-dominio/
-  data/entities.csv    # catalogo de entidades
-  data/rules.csv       # regras de recomendacao
+domain/
+  data/entities.csv    # entity catalog
+  data/rules.csv       # recommendation rules
   data/guidelines.csv  # anti-patterns + best practices
-  scripts/core.py      # BM25 engine (reutilizavel)
+  scripts/core.py      # BM25 engine (reusable)
 ```
 
-## Exemplos Praticos
+## Practical Examples
 
-| Request | CSV consultado | Resultado |
-|---------|---------------|-----------|
-| Landing page para spa | products.csv | Estilo, paleta, pattern |
-| Font para e-commerce | typography.csv | Pares com Google Fonts URL |
-| Regra UX para forms | ux-guidelines.csv | Regras ARIA + anti-patterns |
-| Grafico para dados | charts.csv | Tipo recomendado + quando nao usar |
+| Request | CSV queried | Result |
+|---------|------------|--------|
+| Landing page for spa | products.csv | Style, palette, pattern |
+| Font for e-commerce | typography.csv | Pairs with Google Fonts URL |
+| UX rule for forms | ux-guidelines.csv | ARIA rules + anti-patterns |
+| Chart for data | charts.csv | Recommended type + when not to use |
 
-Fluxo completo:
-1. User request chega ao sistema
-2. Regex detecta dominio automaticamente
-3. BM25 busca nos search_cols do CSV do dominio
-4. Top 3-5 resultados extraidos com output_cols
-5. Resultado injetado como contexto para geracao LLM
+Complete flow:
+1. User request arrives at the system
+2. Regex detects domain automatically
+3. BM25 searches in the domain CSV's search_cols
+4. Top 3-5 results extracted with output_cols
+5. Result injected as context for LLM generation
 
-CSV como decision table:
+CSV as decision table:
 ```csv
 Product Type,Primary Style,Anti-Pattern
 Banking,Trust & Authority,"AI purple gradients"
@@ -114,12 +114,12 @@ Healthcare,Accessible & Ethical,"Low contrast"
 
 ## Anti-Patterns
 
-- CSV gigante multi-dominio (degrada precisao BM25)
-- Recomendacoes hardcoded em codigo ao inves de CSV
-- Embeddings para dados estruturados simples (overkill)
-- Dados duplicados entre CSVs de dominios diferentes
-- Search_cols com textos longos (BM25 prefere keywords)
-- Ausencia de output_cols separadas (retorna tudo)
+- Giant multi-domain CSV (degrades BM25 precision)
+- Recommendations hardcoded in code instead of CSV
+- Embeddings for simple structured data (overkill)
+- Duplicated data across CSVs from different domains
+- Search_cols with long texts (BM25 prefers keywords)
+- Missing separate output_cols (returns everything)
 
 ## Referencias
 

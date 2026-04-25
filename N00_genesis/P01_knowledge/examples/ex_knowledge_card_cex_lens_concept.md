@@ -11,15 +11,15 @@ author: builder_agent
 domain: cex_taxonomy
 quality: 9.1
 tags: [cex, lens, perspective, cognitive-filter, agent_group]
-tldr: "Lens eh perspectiva cognitiva que filtra TODA percepcao e producao — mesmo input, outputs radicalmente diferentes por lens"
-when_to_use: "Entender como agent_groups processam o mesmo input de formas distintas"
+tldr: "Lens is a cognitive perspective that filters ALL perception and production — same input, radically different outputs per lens"
+when_to_use: "Understand how agent_groups process the same input in distinct ways"
 keywords: [lens, cognitive-perspective, refraction, prismatic-model]
 long_tails:
-  - "Como lenses diferenciam agent_groups que recebem o mesmo input"
-  - "Qual a diferenca entre lens e role em sistemas multi-agente"
+  - "How lenses differentiate agent_groups that receive the same input"
+  - "What is the difference between lens and role in multi-agent systems"
 axioms:
-  - "SEMPRE definir lens no mental_model antes de atribuir tarefas"
-  - "NUNCA tratar lens como role simples (lens colore TODA percepcao)"
+  - "ALWAYS define lens in mental_model before assigning tasks"
+  - "NEVER treat lens as a simple role (lens colors ALL perception)"
 linked_artifacts:
   primary: p01_kc_cex_function_become
   related: [p01_kc_cex_fractal_architecture, p01_kc_cex_boundary_concept]
@@ -40,42 +40,42 @@ related:
 
 ## Summary
 
-Lens eh o conceito mais original do CEX. Diferente de "role" (papel funcional), lens eh perspectiva cognitiva que filtra TODA percepcao e producao de uma entidade. Implementada como artefato P02 no mental_model.yaml de cada agent_group. Modelo prismatico: mesmo input (luz branca) passa por 6 lenses e produz 6 refracoes. O LensEngine orquestra roteamento automatico, execucao por lens especifica e pipelines multi-lens.
+Lens is the most original concept in CEX. Unlike "role" (functional role), lens is a cognitive perspective that filters ALL perception and production of an entity. Implemented as a P02 artifact in each agent_group's mental_model.yaml. Prismatic model: same input (white light) passes through 6 lenses and produces 6 refractions. The LensEngine orchestrates automatic routing, execution by specific lens, and multi-lens pipelines.
 
 ## Spec
 
-| Satelite | Lens | Input Exemplo | Output Refratado |
-|----------|------|---------------|-----------------|
-| research_agent | Analytical Envy | "mercado fones BT" | Tabela comparativa, 15 concorrentes, fontes |
-| marketing_agent | Creative Lust | "mercado fones BT" | 5 gatilhos emocionais, copy de venda |
-| knowledge_agent | Knowledge Gluttony | "mercado fones BT" | KC indexada por categoria, preco, canal |
-| commercial_agent | Strategic Greed | "mercado fones BT" | Margem por faixa, canal mais lucrativo |
-| builder_agent | Inventive Pride | "mercado fones BT" | Prototipo de scraper, componente React |
-| operations_agent | Gating Wrath | "mercado fones BT" | Deploy pipeline, testes E2E, monitoramento |
+| Satellite | Lens | Example Input | Refracted Output |
+|-----------|------|---------------|-----------------|
+| research_agent | Analytical Envy | "BT headphones market" | Comparative table, 15 competitors, sources |
+| marketing_agent | Creative Lust | "BT headphones market" | 5 emotional triggers, sales copy |
+| knowledge_agent | Knowledge Gluttony | "BT headphones market" | KC indexed by category, price, channel |
+| commercial_agent | Strategic Greed | "BT headphones market" | Margin by range, most profitable channel |
+| builder_agent | Inventive Pride | "BT headphones market" | Scraper prototype, React component |
+| operations_agent | Gating Wrath | "BT headphones market" | Deploy pipeline, E2E tests, monitoring |
 
-Conceito industria mais proximo: "Role" (MetaGPT), "backstory" (CrewAI). Diferenca: role descreve funcao, lens colore TODA percepcao.
+Closest industry concept: "Role" (MetaGPT), "backstory" (CrewAI). Difference: role describes function, lens colors ALL perception.
 
-Implementacao: campo `lens` em `mental_model.yaml`. LensEngine orquestra 3 modos: roteamento automatico para lens mais adequada, execucao com intensidade configuravel, pipeline multi-lens sequencial.
+Implementation: `lens` field in `mental_model.yaml`. LensEngine orchestrates 3 modes: automatic routing to most suitable lens, execution with configurable intensity, sequential multi-lens pipeline.
 
-Modelo prismatico: 6 lenses + setima consciencia (usuario/orchestrator). Combinacoes de lenses sao composicionais — 2 lenses em sequencia produzem resultado que nenhuma produziria sozinha.
+Prismatic model: 6 lenses + seventh consciousness (user/orchestrator). Lens combinations are compositional — 2 lenses in sequence produce a result that neither would produce alone.
 
 ## Patterns
 
 | Trigger | Action |
 |---------|--------|
-| Mesmo input precisa de multiplas perspectivas | Rotear para 2+ agent_groups com lenses distintas |
-| Output generico sem personalidade | Verificar se lens esta definida |
-| Satelite produz output fora do esperado | Checar se lens esta alinhada com tarefa |
-| Novo agent_group sendo criado | Definir lens ANTES de tools e knowledge |
-| Pipeline precisa de refino progressivo | Encadear lenses em sequencia |
+| Same input needs multiple perspectives | Route to 2+ agent_groups with distinct lenses |
+| Generic output without personality | Check if lens is defined |
+| Satellite produces unexpected output | Check if lens is aligned with task |
+| New agent_group being created | Define lens BEFORE tools and knowledge |
+| Pipeline needs progressive refinement | Chain lenses in sequence |
 
 ## Anti-Patterns
 
-- Tratar lens como role descritivo (eh cognitiva, nao funcional)
-- Dois agent_groups com lenses identicas (redundancia total)
-- Omitir lens e depender so de instructions (output generico)
-- Mudar lens mid-session (incoerencia de perspectiva)
-- Ignorar modelo prismatico para tarefas multi-perspectiva
+- Treating lens as descriptive role (it is cognitive, not functional)
+- Two agent_groups with identical lenses (total redundancy)
+- Omitting lens and depending only on instructions (generic output)
+- Changing lens mid-session (perspective incoherence)
+- Ignoring prismatic model for multi-perspective tasks
 
 ## References
 

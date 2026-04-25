@@ -11,14 +11,14 @@ domain: brand-identity
 quality: 9.2
 updated: 2026-04-07
 tags: [brand, naming, trademark, linguistic, tagline, strategy]
-tldr: "7 tipos de nome de marca, processo de 5 etapas, screening linguistico/legal e formulas de naming"
+tldr: "7 brand name types, 5-step process, linguistic/legal screening, and naming formulas"
 when_to_use: "When naming a new brand, validating existing brand name, or creating taglines and slogans."
 keywords: [brand-naming, trademark, linguistic-screening, tagline, naming-process]
 density_score: 0.93
 axioms:
   - "ALWAYS check domain + social handle availability BEFORE falling in love with a name."
   - "NEVER name a brand without linguistic screening in target markets."
-  - "ALWAYS generate 20+ candidates before shortlisting — first idea is rarely best."
+  - "ALWAYS generate 20+ candidates before shortlisting -- first idea is rarely best."
 linked_artifacts:
   primary: n06_output_brand_book
   related: [p01_kc_brand_archetypes, p01_kc_brand_frameworks, n06_output_discovery_report]
@@ -92,7 +92,7 @@ STRATEGY → GENERATION → SCREENING → TESTING → REGISTRATION
 - Registro de marca no INPI (Brasil) — classes relevantes da NCL
 - Registro de dominio antes de anunciar publicamente
 - Registro de handles sociais imediatamente apos decisao
-- NUNCA anunciar sem ter dominio e INPI iniciado
+- NEVER announce without having domain and INPI filing initiated
 
 ---
 

@@ -3,7 +3,7 @@ id: p02_agent_gateway
 kind: agent
 8f: F2_become
 pillar: P02
-title: Gateway Agent - Entry Point para Usuarios
+title: Gateway Agent - Entry Point for Users
 version: 1.0.0
 created: 2026-03-22
 updated: 2026-03-22
@@ -11,16 +11,16 @@ author: builder_agent
 domain: orchestration
 quality: 9.1
 tags: [gateway, router, mentor, intent-detection, handoff, entry-point]
-tldr: Ponto de entrada unico - combina mentor (loop interativo) + router (semantic intent detection) com handoff para 5 workflows automaticos
-when_to_use: Frontend chat, onboarding de usuarios, routing de intents
-when_not_to_use: Tarefas diretas de agent_group (usar agent_group dispatch), admin tasks
+tldr: Single entry point - combines mentor (interactive loop) + router (semantic intent detection) with handoff to 5 automatic workflows
+when_to_use: Frontend chat, user onboarding, intent routing
+when_not_to_use: Direct agent_group tasks (use agent_group dispatch), admin tasks
 keywords: [gateway, router, mentor, semantic-router, intent-detection]
 long_tails:
-  - como criar entry point unico para sistema multi-agente
-  - como rotear intents do usuario para workflows automaticos
+  - how to create a single entry point for a multi-agent system
+  - how to route user intents to automatic workflows
 axioms:
-  - Gateway NUNCA executa tasks (mentor OU router, nunca builder)
-  - Intent ambiguo = perguntar (nao adivinhar routing)
+  - Gateway NEVER executes tasks (mentor OR router, never builder)
+  - Ambiguous intent = ask (do not guess routing)
 density_score: 0.87
 related:
   - p01_kc_input_intent_resolution
@@ -35,7 +35,7 @@ related:
   - p01_kc_dispatch_rule
 ---
 
-# Gateway Agent - Entry Point para Usuarios
+# Gateway Agent - Entry Point for Users
 
 ## Architecture
 
@@ -60,23 +60,23 @@ related:
 
 ## When to Use
 
-| Cenario | Usar? | Alternativa |
-|---------|-------|-------------|
-| Frontend chat (organizationapp.com) | SIM | - |
-| Routing de intents do usuario | SIM | - |
-| Onboarding e duvidas | SIM | - |
-| Agent_group dispatch direto | NAO | orchestrator |
-| Admin/infra tasks | NAO | operations_agent |
+| Scenario | Use? | Alternative |
+|----------|------|-------------|
+| Frontend chat (organizationapp.com) | YES | - |
+| User intent routing | YES | - |
+| Onboarding and questions | YES | - |
+| Direct agent_group dispatch | NO | orchestrator |
+| Admin/infra tasks | NO | operations_agent |
 
 ## Capabilities
 
-| # | Capability | Descricao |
-|---|-----------|-----------|
-| 1 | Mentor mode | Loop interativo para duvidas e orientacao |
-| 2 | Intent detection | Keywords + comandos diretos (confianca 0.8+) |
-| 3 | Semantic routing | Router 1-5 (pesquisa/anuncio/combo/photo/else) |
-| 4 | Handoff | Transferencia de contexto para sub-workflows |
-| 5 | Deploy-ready | System prompt + Knowledge Base + Workflow Config prontos |
+| # | Capability | Description |
+|---|-----------|-------------|
+| 1 | Mentor mode | Interactive loop for questions and guidance |
+| 2 | Intent detection | Keywords + direct commands (confidence 0.8+) |
+| 3 | Semantic routing | Router 1-5 (research/listing/combo/photo/else) |
+| 4 | Handoff | Context transfer to sub-workflows |
+| 5 | Deploy-ready | System prompt + Knowledge Base + Workflow Config ready |
 
 ## Intent Routing
 
@@ -86,14 +86,14 @@ related:
 | 2 | ANUNCIO | `-anuncio [produto]` ou "anunciar, listing, copy" |
 | 3 | COMBO | `-combo [produto]` ou "completo, tudo, full" |
 | 4 | FOTO | `-photo [produto]` ou "foto, imagem, visual" |
-| 5 | ELSE | Qualquer outro → volta para mentor loop |
+| 5 | ELSE | Any other → returns to mentor loop |
 
 ## Deploy Artifacts
 
 | Artifact | Tokens | Purpose |
 |----------|--------|---------|
-| GATEWAY_SYSTEM_PROMPT.txt | ~1500 | System prompt do agent |
-| SEMANTIC_ROUTER.txt | ~500 | Classificador 1-5 (temp=0, max=1 token) |
+| GATEWAY_SYSTEM_PROMPT.txt | ~1500 | Agent system prompt |
+| SEMANTIC_ROUTER.txt | ~500 | Classifier 1-5 (temp=0, max=1 token) |
 | KNOWLEDGE_BASE.json | ~2500 | Code Interpreter knowledge |
 | KNOWLEDGE_ECOMMERCE.md | ~3000 | Vector Store knowledge |
 | WORKFLOW_CONFIG.json | ~200 | Config n8n/Make |
@@ -102,36 +102,36 @@ related:
 
 ```yaml
 upstream:
-  - USER: "Input do usuario via chat"
-  - orchestrator: "Routing interno do sistema"
+  - USER: "User input via chat"
+  - orchestrator: "Internal system routing"
 downstream:
-  - pesquisa-agent: "Intent 1 → pesquisa automatica"
-  - anuncio-agent: "Intent 2 → criacao de anuncio"
-  - photo-agent: "Intent 4 → geracao de fotos"
+  - pesquisa-agent: "Intent 1 → automatic research"
+  - anuncio-agent: "Intent 2 → listing creation"
+  - photo-agent: "Intent 4 → photo generation"
 pipeline:
   - combo: "Intent 3 → pesquisa > anuncio (sequential)"
 ```
 
 ## Anti-Patterns
 
-- Gateway executando research/marketing: viola papel de router — delegar para specialists
-- Intent detection sem confianca threshold: routing errado — exigir >= 0.8 ou perguntar
-- Semantic router com temperature > 0: output nao-deterministico — usar temperature=0
-- Sem fallback (intent 5): usuario fica preso — sempre ter mentor loop como default
+- Gateway executing research/marketing: violates router role — delegate to specialists
+- Intent detection without confidence threshold: wrong routing — require >= 0.8 or ask
+- Semantic router with temperature > 0: non-deterministic output — use temperature=0
+- No fallback (intent 5): user gets stuck — always have mentor loop as default
 
 ## Quality Gates
 
-- System prompt < 2000 tokens (latencia)
+- System prompt < 2000 tokens (latency)
 - Intent classification accuracy >= 90%
-- Handoff inclui full context (nao perder informacao)
-- Custo/conversa < $0.05 USD
-- Latencia < 3s/resposta
+- Handoff includes full context (no information loss)
+- Cost/conversation < $0.05 USD
+- Latency < 3s/response
 
 ## References
 
-- `records/agents/gateway/README.md` (fonte original)
+- `records/agents/gateway/README.md` (original source)
 - Deploy: OpenAI Agent Builder (gpt-4o + gpt-4o-mini router)
-- Status: Production-Ready para organizationapp.com
+- Status: Production-Ready for organizationapp.com
 
 ## Related Artifacts
 

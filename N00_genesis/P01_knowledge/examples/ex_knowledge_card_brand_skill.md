@@ -11,15 +11,15 @@ author: builder_agent
 domain: cex_taxonomy
 quality: 9.0
 tags: [brand, design-tokens, design-system, brand-guidelines, css-variables]
-tldr: "Brand como sistema vivo: guidelines.md (fonte unica) -> tokens JSON -> CSS vars -> codigo, com sync automatico"
-when_to_use: "Implementar identidade visual programatica com single source of truth e propagacao automatica"
+tldr: "Brand as a living system: guidelines.md (single source) -> JSON tokens -> CSS vars -> code, with automatic sync"
+when_to_use: "Implement programmatic visual identity with single source of truth and automatic propagation"
 keywords: [brand-system, design-tokens, brand-guidelines, brand-sync]
 long_tails:
-  - "Como criar um sistema de brand com propagacao automatica para codigo"
-  - "Qual a arquitetura de design tokens de guidelines ate CSS"
+  - "How to create a brand system with automatic propagation to code"
+  - "What is the design tokens architecture from guidelines to CSS"
 axioms:
-  - "SEMPRE editar brand-guidelines.md primeiro, nunca tokens diretamente"
-  - "NUNCA usar hex hardcoded em componentes — usar CSS variables"
+  - "ALWAYS edit brand-guidelines.md first, never tokens directly"
+  - "NEVER use hardcoded hex in components — use CSS variables"
 linked_artifacts:
   primary: null
   related: [p01_kc_agentskills_spec, p01_kc_csv_as_knowledge]
@@ -40,26 +40,26 @@ related:
 
 ## TL;DR
 
-Brand como sistema vivo onde um arquivo Markdown (brand-guidelines.md) e a unica fonte de verdade. Scripts de sync propagam automaticamente para design tokens JSON, CSS variables e contexto de prompt. Elimina desincronizacao entre design e codigo.
+Brand as a living system where a Markdown file (brand-guidelines.md) is the single source of truth. Sync scripts propagate automatically to design tokens JSON, CSS variables, and prompt context. Eliminates desynchronization between design and code.
 
-## Conceito Central
+## Core Concept
 
-O problema central de brand em projetos de software e a fragmentacao: cores definidas num Figma, tipografia num CSS, tom de voz num documento que ninguem le. A solucao e tratar brand como pipeline de dados: uma fonte editavel por humanos (Markdown) que se transforma automaticamente em artefatos consumiveis por maquinas.
+The central problem of brand in software projects is fragmentation: colors defined in Figma, typography in CSS, tone of voice in a document nobody reads. The solution is to treat brand as a data pipeline: a human-editable source (Markdown) that automatically transforms into machine-consumable artifacts.
 
-A arquitetura usa 3 camadas de tokens: primitivos (valores brutos como #E8B4B8), semanticos (roles como primary, accent) e componentes (aplicacoes como button-bg, header-text). Cada camada adiciona significado sem perder rastreabilidade ate a fonte. O sync e unidirecional: guidelines.md e a unica entrada, todo o resto e gerado.
+The architecture uses 3 token layers: primitives (raw values like #E8B4B8), semantic (roles like primary, accent), and components (applications like button-bg, header-text). Each layer adds meaning without losing traceability to the source. Sync is unidirectional: guidelines.md is the only input, everything else is generated.
 
-O voice framework complementa o visual com 4 dimensoes: personality traits, tone variations, language rules e content examples. Isso permite que LLMs gerem copy on-brand automaticamente usando o contexto injetado via script.
+The voice framework complements visual with 4 dimensions: personality traits, tone variations, language rules, and content examples. This allows LLMs to generate on-brand copy automatically using context injected via script.
 
-## Arquitetura/Patterns
+## Architecture/Patterns
 
-| Camada | Arquivo | Papel |
-|--------|---------|-------|
-| Fonte | brand-guidelines.md | Editavel por humanos |
-| Tokens | design-tokens.json | Primitivo, semantico, componente |
-| CSS | design-tokens.css | CSS variables para import |
-| Contexto | inject-brand-context.cjs | Injeta brand em prompts LLM |
+| Layer | File | Role |
+|-------|------|------|
+| Source | brand-guidelines.md | Human-editable |
+| Tokens | design-tokens.json | Primitive, semantic, component |
+| CSS | design-tokens.css | CSS variables for import |
+| Context | inject-brand-context.cjs | Injects brand into LLM prompts |
 
-Pipeline de sync:
+Sync pipeline:
 ```
 guidelines.md
   -> sync-brand-to-tokens.cjs
@@ -68,27 +68,27 @@ guidelines.md
         -> import em componentes
 ```
 
-Sistema de cores (3 tipos por brand):
-- **Primary**: CTAs, headers — cor principal da marca
-- **Secondary**: backgrounds, bordas — suporte visual
-- **Accent**: badges, alerts — destaque pontual
+Color system (3 types per brand):
+- **Primary**: CTAs, headers — main brand color
+- **Secondary**: backgrounds, borders — visual support
+- **Accent**: badges, alerts — spot highlight
 
-Cada cor inclui: hex, HSL (para opacity), on-color (texto sobre fundo), semantic role. Tipografia segue pattern similar: heading font + body font com tamanhos e pesos definidos.
+Each color includes: hex, HSL (for opacity), on-color (text over background), semantic role. Typography follows similar pattern: heading font + body font with defined sizes and weights.
 
-Validacao automatica: script detecta valores hardcoded em componentes que deveriam usar tokens. Pre-flight checklist antes de publicar qualquer asset.
+Automatic validation: script detects hardcoded values in components that should use tokens. Pre-flight checklist before publishing any asset.
 
-Escala do pattern: projetos com 55+ CSVs de design usam a mesma pipeline — cada CSV e um dominio visual (cores, tipografia, layouts) e brand-guidelines.md governa todos. O sync unidirecional garante que a unica operacao humana e editar o Markdown fonte; todo o resto e derivado automaticamente via scripts Node.js.
+Pattern scale: projects with 55+ design CSVs use the same pipeline — each CSV is a visual domain (colors, typography, layouts) and brand-guidelines.md governs all. Unidirectional sync ensures the only human operation is editing the source Markdown; everything else is derived automatically via Node.js scripts.
 
-## Exemplos Praticos
+## Practical Examples
 
-| Operacao | Comando | Resultado |
-|----------|---------|-----------|
-| Sync brand | `node sync-brand-to-tokens.cjs` | Tokens atualizados |
-| Injetar contexto | `node inject-brand-context.cjs` | Brand em prompt |
-| Validar asset | `node validate-asset.cjs <path>` | Nome, formato, tamanho |
-| Extrair cores | `node extract-colors.cjs --palette` | Paleta atual |
+| Operation | Command | Result |
+|-----------|---------|--------|
+| Sync brand | `node sync-brand-to-tokens.cjs` | Tokens updated |
+| Inject context | `node inject-brand-context.cjs` | Brand in prompt |
+| Validate asset | `node validate-asset.cjs <path>` | Name, format, size |
+| Extract colors | `node extract-colors.cjs --palette` | Current palette |
 
-Template minimo para nova marca:
+Minimum template for new brand:
 ```markdown
 # Brand Guidelines: [Nome]
 ## Identity
@@ -103,19 +103,19 @@ Template minimo para nova marca:
 - Body: [Font Name]
 ## Voice
 - Tone: [3 adjetivos]
-- Avoid: [palavras proibidas]
+- Avoid: [forbidden words]
 ```
 
 ## Anti-Patterns
 
-- Editar tokens JSON diretamente sem passar por guidelines
-- Multiplas fontes de verdade (Figma + CSS + doc separados)
-- Cores sem semantica — hex puro sem token nomeado
-- Voice framework vago ("seja profissional" nao e acionavel)
-- Assets publicados sem passar pelo approval checklist
-- CSS com font-family literal ao inves de var(--typography-*)
+- Editing JSON tokens directly without going through guidelines
+- Multiple sources of truth (Figma + CSS + separate docs)
+- Colors without semantics — raw hex without named token
+- Vague voice framework ("be professional" is not actionable)
+- Assets published without going through approval checklist
+- CSS with literal font-family instead of var(--typography-*)
 
-## Referencias
+## References
 
 - source: https://www.designtokens.org/glossary/
 - source: https://tr.designtokens.org/format/

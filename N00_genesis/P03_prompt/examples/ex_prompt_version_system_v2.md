@@ -11,8 +11,8 @@ author: builder_agent
 domain: prompt_management
 quality: 9.2
 tags: [prompt-version, system-prompt, pesquisa-agent, a-b-test, rollback, versioning]
-tldr: Versao 2.0 do system prompt do pesquisa-agent — adiciona secao de source credibility scoring e output estruturado, com metricas A/B vs v1 mostrando +18% relevance score
-when_to_use: Referencia para versionamento de prompts com metricas A/B, changelog, e rollback — padrao para qualquer prompt que evolui no organization
+tldr: Version 2.0 of pesquisa-agent system prompt — adds source credibility scoring section and structured output, with A/B metrics vs v1 showing +18% relevance score
+when_to_use: Reference for prompt versioning with A/B metrics, changelog, and rollback — standard for any evolving prompt in organization
 related:
   - p02_agent_web_researcher
   - p02_agent_pesquisa
@@ -46,10 +46,10 @@ related:
 |--------|------|-----------|
 | Added source credibility scoring section | Feature | v1 returned sources without quality assessment — users couldn't distinguish reliable from unreliable |
 | Structured output with JSON schema | Feature | v1 output was free-form markdown — hard to parse in automated pipelines |
-| Added "methodology" field to output | Feature | Transparency sobre como pesquisa foi conduzida |
-| Removed "be thorough" instruction | Removal | Vague instruction causava over-research (+40% latency sem ganho de relevance) |
-| Replaced "find information" with "extract actionable insights" | Rewrite | Shift de informacao bruta para insights acionaveis |
-| Added max_sources=10 cap | Constraint | v1 frequentemente retornava 20+ sources, maioria low-quality padding |
+| Added "methodology" field to output | Feature | Transparency on how research was conducted |
+| Removed "be thorough" instruction | Removal | Vague instruction caused over-research (+40% latency with no relevance gain) |
+| Replaced "find information" with "extract actionable insights" | Rewrite | Shift from raw information to actionable insights |
+| Added max_sources=10 cap | Constraint | v1 frequently returned 20+ sources, mostly low-quality padding |
 
 ## Prompt Content (v2.0)
 ```
@@ -75,7 +75,7 @@ Descarte fontes com credibility < 0.5 a menos que sejam a UNICA evidencia dispon
 5. Gerar output estruturado com insights rankeados por actionability
 
 ## Output Schema
-Responda SEMPRE neste formato JSON:
+ALWAYS respond in this JSON format:
 {
   "query_summary": "string — o que foi pesquisado e por que",
   "methodology": "string — queries usadas, fontes consultadas, filtros aplicados",
@@ -149,9 +149,9 @@ echo "2026-XX-XX: Rollback v2->v1, reason: [description]" >> records/agents/pesq
 - **Risk**: Structured output adds 235 tokens to system prompt — acceptable given 32% output reduction
 
 ## Related
-- `ex_meta_prompt_system_prompt_generator.md` — Meta-prompt que gerou v1 original
-- `ex_constraint_spec_json_output.md` — Constraint de JSON output usado no v2
-- `ex_few_shot_product_extraction.md` — Few-shot que complementa este system prompt
+- `ex_meta_prompt_system_prompt_generator.md` — Meta-prompt that generated original v1
+- `ex_constraint_spec_json_output.md` — JSON output constraint used in v2
+- `ex_few_shot_product_extraction.md` — Few-shot that complements this system prompt
 
 ## Related Artifacts
 

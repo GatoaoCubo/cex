@@ -11,15 +11,15 @@ author: builder_agent
 domain: cex_taxonomy
 quality: 9.1
 tags: [cex, cortex-enterprise, orchestrator, ceo-cognitivo, emergent-properties, brain]
-tldr: "Cortex Enterprise eh cerebro empresarial modular: CEO cognitivo (roteia, nunca executa) + N agent_groups verticalizados + propriedades emergentes"
-when_to_use: "Entender a arquitetura de sistema multi-agente com orquestrador central e departamentos autonomos"
+tldr: "Cortex Enterprise is a modular enterprise brain: cognitive CEO (routes, never executes) + N verticalized agent_groups + emergent properties"
+when_to_use: "Understand multi-agent system architecture with central orchestrator and autonomous departments"
 keywords: [cortex-enterprise, orchestrator, ceo, brain, modular-architecture]
 long_tails:
-  - "Como construir um cerebro empresarial com LLMs e agentes especializados"
-  - "Qual o papel do orquestrador central num sistema multi-agente"
+  - "How to build an enterprise brain with LLMs and specialized agents"
+  - "What is the role of the central orchestrator in a multi-agent system"
 axioms:
-  - "SEMPRE orquestrador roteia, NUNCA executa"
-  - "NUNCA agent_group depende de outro agent_group para completar tarefa"
+  - "ALWAYS orchestrator routes, NEVER executes"
+  - "NEVER agent_group depends on another agent_group to complete a task"
 linked_artifacts:
   primary: p01_kc_cex_agent_group_concept
   related: [p01_kc_cex_pipeline_execution, p01_kc_cex_function_become]
@@ -40,56 +40,56 @@ related:
 
 ## Summary
 
-Cortex Enterprise eh um cerebro empresarial modular baseado em LLM. Arquitetura: orquestrador central (CEO cognitivo) que roteia mas NUNCA executa + N agent_groups verticalizados com autonomia total no seu dominio. Cada organizacao instancia seu Cortex[X]. organization eh a implementacao de referencia com 7 agent_groups e 284 agentes. O sistema exibe 5 propriedades emergentes: bootstrapping, metacircularidade, scaffolding cognitivo, arquitetura fractal e auto-correcao distribuida.
+Cortex Enterprise is a modular enterprise brain based on LLM. Architecture: central orchestrator (cognitive CEO) that routes but NEVER executes + N verticalized agent_groups with full autonomy in their domain. Each organization instantiates its Cortex[X]. Organization is the reference implementation with 7 agent_groups and 284 agents. The system exhibits 5 emergent properties: bootstrapping, metacircularity, cognitive scaffolding, fractal architecture, and distributed self-correction.
 
 ## Spec
 
-| Componente | Funcao | Regra |
-|------------|--------|-------|
-| Orquestrador (orchestrator) | CLARIFY-ENRICH-COMPOSE-EXECUTE-MONITOR | Roteia, nunca executa |
-| Agent_groups (6 exec) | Departamentos verticalizados | 1 dominio = 1 agent_group |
-| Agents (284 total) | Funcionarios especializados | ISO files definem execucao |
-| Handoffs | Despacho estruturado | Contexto + seeds + scope fence |
-| Signals | Comunicacao inter-agent_group | JSON com status + score |
-| Pool (1957 KCs) | Memoria institucional | Knowledge cards indexadas |
+| Component | Function | Rule |
+|-----------|----------|------|
+| Orchestrator | CLARIFY-ENRICH-COMPOSE-EXECUTE-MONITOR | Routes, never executes |
+| Agent_groups (6 exec) | Verticalized departments | 1 domain = 1 agent_group |
+| Agents (284 total) | Specialized workers | ISO files define execution |
+| Handoffs | Structured dispatch | Context + seeds + scope fence |
+| Signals | Inter-agent_group communication | JSON with status + score |
+| Pool (1957 KCs) | Institutional memory | Indexed knowledge cards |
 
-Propriedades emergentes do Cortex instanciado:
+Emergent properties of the instantiated Cortex:
 
-| Propriedade | Mecanismo | Referencia |
-|-------------|-----------|------------|
+| Property | Mechanism | Reference |
+|----------|-----------|-----------|
 | Bootstrapping | KCs alimentam agentes que geram KCs melhores | GCC self-hosting (1980s) |
 | Metacircularidade | Agentes descrevem propria execucao via ISO | SICP eval (Abelson 1996) |
 | Scaffolding cognitivo | Handoffs direcionam sem sobrecarregar contexto | Vygotsky ZPD (1978) |
 | Arquitetura fractal | 12 LPs repetem em 4 niveis (prompt-agent-sat-sys) | Mandelbrot (1982) |
 | Auto-correcao distribuida | Review chain 3-tier entre entidades independentes | Reflexion (Shinn 2023) |
 
-Ciclo de dispatch do orquestrador (5 fases):
+Orchestrator dispatch cycle (5 phases):
 
-| Fase | Input | Output |
-|------|-------|--------|
-| CLARIFY | Pedido do usuario | Tabela de tasks por agent_group |
-| ENRICH | Keywords por task | Contexto via brain_query |
-| COMPOSE | Tasks + contexto | Handoff .md por agent_group |
-| EXECUTE | Handoffs | Agent_groups em execucao paralela |
-| MONITOR | Signals + git log | Relatorio consolidado |
+| Phase | Input | Output |
+|-------|-------|--------|
+| CLARIFY | User request | Task table by agent_group |
+| ENRICH | Keywords per task | Context via brain_query |
+| COMPOSE | Tasks + context | Handoff .md per agent_group |
+| EXECUTE | Handoffs | Agent_groups in parallel execution |
+| MONITOR | Signals + git log | Consolidated report |
 
 ## Patterns
 
 | Trigger | Action |
 |---------|--------|
-| Tarefa multi-dominio | Orquestrador decompoe em waves por agent_group |
-| Conhecimento novo gerado | Agente produz KC, pool indexa, busca melhora |
-| Agent_group falha | Sistema detecta (signal), diagnostica (log), adapta (retry/reroute) |
-| Complexidade >= 70% | Ativar review chain 3-tier (implementer-spec-quality) |
-| Novo dominio de negocio | Instanciar agent_group com PRIME + mental_model + agentes |
+| Multi-domain task | Orchestrator decomposes into waves by agent_group |
+| New knowledge generated | Agent produces KC, pool indexes, search improves |
+| Agent_group fails | System detects (signal), diagnoses (log), adapts (retry/reroute) |
+| Complexity >= 70% | Activate 3-tier review chain (implementer-spec-quality) |
+| New business domain | Instantiate agent_group with PRIME + mental_model + agents |
 
 ## Anti-Patterns
 
-- Orquestrador executando codigo, pesquisa ou copy (perde visao global)
-- Agent_group acessando dominio de outro agent_group (viola separacao)
-- Sistema sem pool de conhecimento (sem bootstrapping, sem melhoria)
-- Agentes sem ISO files (sem identidade, execucao inconsistente)
-- Handoffs sem scope fence (agent_group toca o que nao deve)
+- Orchestrator executing code, research, or copy (loses global view)
+- Agent_group accessing another agent_group's domain (violates separation)
+- System without knowledge pool (no bootstrapping, no improvement)
+- Agents without ISO files (no identity, inconsistent execution)
+- Handoffs without scope fence (agent_group touches what it should not)
 
 ## Code
 

@@ -31,8 +31,8 @@ related:
 
 # Output Template: {{type_name}}
 <!-- This meta-file generates the OUTPUT_TEMPLATE.md of any builder -->
-<!-- REQUIRED INPUT: SCHEMA.md ja gerado (este file DERIVA do schema) -->
-<!-- REGRA: every field aqui DEVE existir em SCHEMA.md. Template NUNCA inventa. -->
+<!-- REQUIRED INPUT: SCHEMA.md already generated (this file DERIVES from the schema) -->
+<!-- RULE: every field here MUST exist in SCHEMA.md. Template NEVER invents. -->
 
 ```yaml
 ---
@@ -43,14 +43,14 @@ pattern: every field here exists in SCHEMA.md — template derives, never invent
 ---
 ```
 
-<!-- NOTE: O format do template depende do machine_format do type -->
-<!-- - md (maioria): YAML frontmatter + markdown body -->
+<!-- NOTE: The template format depends on the type's machine_format -->
+<!-- - md (majority): YAML frontmatter + markdown body -->
 <!-- - json (signal): JSON payload puro -->
 <!-- - yaml: YAML documento -->
 
-<!-- ====== FORMATO MD (model_card, knowledge_card, quality_gate, and maioria) ====== -->
+<!-- ====== MD FORMAT (model_card, knowledge_card, quality_gate, and majority) ====== -->
 
-<!-- FRONTMATTER: Generate a partir de SCHEMA.md Frontmatter Fields -->
+<!-- FRONTMATTER: Generate from SCHEMA.md Frontmatter Fields -->
 ```yaml
 ---
 id: {{id_prefix}}_{{slug_var}}
@@ -63,26 +63,26 @@ version: "1.0.0"
 created: "{{YYYY-MM-DD}}"
 updated: "{{YYYY-MM-DD}}"
 author: "{{who_produced}}"
-<!-- CAMPOS ESPECIFICOS DO TIPO: -->
-<!-- Copiar each field de SCHEMA.md Required/Extended fields -->
-<!-- Usar {{variable}} for values dinamicos -->
-<!-- Usar literais for values fixos (kind, lp, quality: null) -->
+<!-- TYPE-SPECIFIC FIELDS: -->
+<!-- Copy each field from SCHEMA.md Required/Extended fields -->
+<!-- Use {{variable}} for dynamic values -->
+<!-- Use literals for fixed values (kind, lp, quality: null) -->
 {{schema_specific_fields}}
 domain: {{domain_value}}
 quality: null
 tags: [{{tag_1}}, {{tag_2}}, {{tag_3}}]
 tldr: "{{dense_summary_max_160ch}}"
-<!-- CAMPOS OPCIONAIS/RECOMENDADOS: -->
+<!-- OPTIONAL/RECOMMENDED FIELDS: -->
 {{optional_fields}}
 ---
 ```
 
-<!-- BODY: Generate sections a partir de SCHEMA.md Body Structure -->
-<!-- Para each section obrigatoria, crie a estrutura with {{vars}} -->
+<!-- BODY: Generate sections from SCHEMA.md Body Structure -->
+<!-- For each mandatory section, create the structure with {{vars}} -->
 
 ## {{body_section_1_name}}
-<!-- NOTE: Copiar estrutura da section de SCHEMA.md -->
-<!-- Incluir tabelas, bullets, code blocks conforme o type exige -->
+<!-- NOTE: Copy section structure from SCHEMA.md -->
+<!-- Include tables, bullets, code blocks as the type requires -->
 {{body_section_1_content_with_vars}}
 
 ## {{body_section_2_name}}
@@ -91,14 +91,14 @@ tldr: "{{dense_summary_max_160ch}}"
 ## {{body_section_3_name}}
 {{body_section_3_content_with_vars}}
 
-<!-- NOTE: Numero de sections varia per type: -->
+<!-- NOTE: Number of sections varies per type: -->
 <!-- - model_card: 4 sections (Boundary, Specifications, Capabilities, When to Use, References) -->
 <!-- - knowledge_card: 7 sections domain_kc OU 6 sections meta_kc -->
 <!-- - signal: 0 sections body (JSON puro, only Derivation Notes) -->
 <!-- - quality_gate: 5 sections (Definition, Checklist, Scoring, Actions, Bypass) -->
 
-<!-- ====== FORMATO JSON (signal e types machine-only) ====== -->
-<!-- Se machine_format == json, usar template JSON ao inves de YAML+MD: -->
+<!-- ====== JSON FORMAT (signal and machine-only types) ====== -->
+<!-- If machine_format == json, use JSON template instead of YAML+MD: -->
 <!--
 ```json
 {
@@ -113,11 +113,11 @@ Derivation Notes:
 3. Omit absent optional fields instead of using placeholders
 -->
 
-<!-- SECAO UNIVERSAL (todos os types md): -->
+<!-- UNIVERSAL SECTION (all md types): -->
 ## References
 1. {{reference_1}}
 2. {{reference_2}}
-<!-- NOTE: Formato varia: source URL, artifact ref, pricing page, etc. -->
+<!-- NOTE: Format varies: source URL, artifact ref, pricing page, etc. -->
 
 ## Properties
 
