@@ -36,258 +36,258 @@ Source: Carl Jung + Margaret Mark & Carol Pearson (The Hero and the Outlaw)
 
 | Archetype | Core Desire | Fear | Voice Tone |
 |-----------|-------------|------|------------|
-| Inocente | Experimentar o paraiso, felicidade e simplicidade | Fazer algo errado e ser punido, corrupca | Tom acolhedor, simples e genuino. Evita jargoes te |
-| Explorador | Liberdade para descobrir a si mesmo atraves da exp | Ficar preso, conformismo, vazio interior | Tom inspirador, encorajador e empolgante. Vocabula |
-| Sabio | Encontrar a verdade e compreender o mundo | Ser enganado, ignorancia, desinformacao | Tom informativo, preciso e confiavel. Vocabulario  |
-| Heroi | Provar seu valor atraves de acoes corajosas e difi | Fraqueza, vulnerabilidade, desistir, ser | Tom motivacional, empoderador e energico. Linguage |
-| Rebelde | Revolucao, vinganca ou libertacao | Impotencia, irrelevancia, ser comum, con | Tom provocativo, irreverente e desafiador. Linguag |
-| Mago | Compreender as leis fundamentais do universo e tra | Consequencias negativas nao intencionais | Tom visionario, inspirador e misterioso. Linguagem |
-| Cara Comum | Conectar-se com outros, pertencer | Ser deixado de fora, se destacar demais, | Tom amigavel, acessivel e genuino. Linguagem do di |
-| Amante | Intimidade, experiencia sensorial e emocional | Estar sozinho, ser indesejado, ser rejei | Tom sedutor, caloroso e intimo. Linguagem sensoria |
-| Bobo da Corte | Viver no momento com total prazer | Ser chato, entediante ou causar tedio no | Tom leve, divertido e irreverente. Linguagem cheia |
-| Cuidador | Proteger e cuidar dos outros | Egoismo, ingratidao, abandono | Tom acolhedor, protetor e empatetico. Linguagem de |
-| Criador | Criar algo de valor duradouro, expressao | Visao ou execucao medocres, ser copiado, | Tom inspirador, artistico e inovador. Linguagem qu |
-| Governante | Controle, poder e ordem | Caos, ser derrubado, perder controle | Tom autoritativo, confiante e sofisticado. Linguag |
+| Innocent | Experience paradise, happiness, simplicity | Doing wrong, being punished, corruption | Warm, simple, genuine. Avoids jargon |
+| Explorer | Freedom to discover yourself through exploration | Being trapped, conformism, inner emptiness | Inspiring, encouraging, exciting. Discovery vocabulary |
+| Sage | Find truth and understand the world | Being deceived, ignorance, misinformation | Informative, precise, reliable. Technical when needed |
+| Hero | Prove worth through courageous actions | Weakness, vulnerability, giving up | Motivational, empowering, energetic. Achievement language |
+| Outlaw | Revolution, revenge, or liberation | Powerlessness, irrelevance, being ordinary | Provocative, irreverent, challenging. Direct language |
+| Magician | Understand fundamental universal laws | Unintended consequences, charlatanism | Visionary, inspiring, mysterious. Transformation language |
+| Everyman | Connect with others, belong | Being left out, standing out too much | Friendly, accessible, genuine. Everyday language |
+| Lover | Intimacy, sensory and emotional experience | Being alone, unwanted, rejected | Seductive, warm, intimate. Sensory language |
+| Jester | Live in the moment with total joy | Being boring or causing boredom | Light, fun, irreverent. Humor and surprises |
+| Caregiver | Protect and care for others | Selfishness, ingratitude, abandonment | Warm, protective, empathetic. Care language |
+| Creator | Create lasting value, self-expression | Mediocre execution, being copied | Inspiring, artistic, innovative. Originality language |
+| Ruler | Control, power, and order | Chaos, being overthrown, losing control | Authoritative, confident, sophisticated. Leadership language |
 
 ## Detailed Archetypes
 
-### Inocente (Innocent)
+### Innocent
 
-**Motto**: Livre para ser voce mesmo
-**Core Desire**: Experimentar o paraiso, felicidade e simplicidade
-**Goal**: Ser feliz e trazer felicidade aos outros
-**Fear**: Fazer algo errado e ser punido, corrupcao, complexidade
-**Strategy**: Fazer as coisas certas, ser otimista, transmitir pureza e simplicidade
-**Brand Promise**: A vida pode ser simples e boa
+**Motto**: Free to be yourself
+**Core Desire**: Experience paradise, happiness, and simplicity
+**Goal**: Be happy and bring happiness to others
+**Fear**: Doing something wrong and being punished, corruption, complexity
+**Strategy**: Do the right things, be optimistic, convey purity and simplicity
+**Brand Promise**: Life can be simple and good
 
-**Personality**: Otimista, Puro, Honesto, Romantico, Leal, Simples, Nostalgico
-**Shadow**: Ingenuidade excessiva, Negacao de problemas, Dependencia
+**Personality**: Optimistic, Pure, Honest, Romantic, Loyal, Simple, Nostalgic
+**Shadow**: Excessive naivety, Denial of problems, Dependence
 
 **Voice Scores**: formality=2, enthusiasm=4, humor=3, authority=2, warmth=5
-**Voice Description**: Tom acolhedor, simples e genuino. Evita jargoes tecnicos. Usa linguagem acessivel e otimista.
+**Voice Description**: Warm, simple, and genuine tone. Avoids technical jargon. Uses accessible and optimistic language.
 
-**Do**: Use linguagem simples e direta; Transmita otimismo genuino; Conte historias de momentos felizes; Valorize tradicao e nostalgia; Celebre pequenas alegrias do cotidiano
-**Dont**: Usar ironia ou sarcasmo; Abordar temas polemicos; Fazer promessas complexas; Usar linguagem agressiva de vendas; Focar em medos ou problemas
+**Do**: Use simple, direct language; Convey genuine optimism; Tell stories of happy moments; Value tradition and nostalgia; Celebrate small everyday joys
+**Dont**: Use irony or sarcasm; Address controversial topics; Make complex promises; Use aggressive sales language; Focus on fears or problems
 
 ---
 
-### Explorador (Explorer)
+### Explorer
 
-**Motto**: Nao me cerque
-**Core Desire**: Liberdade para descobrir a si mesmo atraves da exploracao do mundo
-**Goal**: Experimentar uma vida melhor, mais autentica e gratificante
-**Fear**: Ficar preso, conformismo, vazio interior, limitacao
-**Strategy**: Viajar, buscar novas experiencias, escapar do tedio e da rotina
-**Brand Promise**: A jornada e a recompensa
+**Motto**: Don't fence me in
+**Core Desire**: Freedom to discover yourself through exploring the world
+**Goal**: Experience a better, more authentic and fulfilling life
+**Fear**: Being trapped, conformism, inner emptiness, limitation
+**Strategy**: Travel, seek new experiences, escape boredom and routine
+**Brand Promise**: The journey is the reward
 
-**Personality**: Aventureiro, Independente, Ambicioso, Individualista, Pioneiro, Inquieto, Autentico
-**Shadow**: Desajuste social, Incapacidade de compromisso, Perfeccionismo paralisante
+**Personality**: Adventurous, Independent, Ambitious, Individualist, Pioneer, Restless, Authentic
+**Shadow**: Social maladjustment, Inability to commit, Paralyzing perfectionism
 
 **Voice Scores**: formality=2, enthusiasm=5, humor=3, authority=3, warmth=3
-**Voice Description**: Tom inspirador, encorajador e empolgante. Vocabulario de descoberta e liberdade.
+**Voice Description**: Inspiring, encouraging, and exciting tone. Discovery and freedom vocabulary.
 
-**Do**: Use verbos de acao e movimento; Inspire a busca por novas experiencias; Valorize autenticidade e individualidade; Conte historias de descobertas; Celebre a coragem de explorar
-**Dont**: Enfatizar seguranca e conforto; Usar linguagem corporativa rigida; Focar em rotinas e padroes; Limitar possibilidades; Ser excessivamente cauteloso
+**Do**: Use action and movement verbs; Inspire the pursuit of new experiences; Value authenticity and individuality; Tell stories of discoveries; Celebrate the courage to explore
+**Dont**: Emphasize safety and comfort; Use rigid corporate language; Focus on routines and patterns; Limit possibilities; Be excessively cautious
 
 ---
 
-### Sabio (Sage)
+### Sage
 
-**Motto**: A verdade libertara voce
-**Core Desire**: Encontrar a verdade e compreender o mundo
-**Goal**: Usar inteligencia e analise para entender o mundo
-**Fear**: Ser enganado, ignorancia, desinformacao
-**Strategy**: Buscar informacao, conhecimento e dados para compreender
-**Brand Promise**: Conhecimento confiavel para decisoes melhores
+**Motto**: The truth will set you free
+**Core Desire**: Find truth and understand the world
+**Goal**: Use intelligence and analysis to understand the world
+**Fear**: Being deceived, ignorance, misinformation
+**Strategy**: Seek information, knowledge, and data for understanding
+**Brand Promise**: Reliable knowledge for better decisions
 
-**Personality**: Inteligente, Analitico, Confiavel, Ponderado, Objetivo, Expertise, Reflexivo
-**Shadow**: Arrogancia intelectual, Frieza emocional, Paralisia por analise
+**Personality**: Intelligent, Analytical, Reliable, Thoughtful, Objective, Expert, Reflective
+**Shadow**: Intellectual arrogance, Emotional coldness, Analysis paralysis
 
 **Voice Scores**: formality=4, enthusiasm=2, humor=2, authority=5, warmth=2
-**Voice Description**: Tom informativo, preciso e confiavel. Vocabulario tecnico quando apropriado, sempre com clareza.
+**Voice Description**: Informative, precise, and reliable tone. Technical vocabulary when appropriate, always with clarity.
 
-**Do**: Apresente dados e evidencias; Use fontes confiaveis e cite referencias; Explique conceitos complexos com clareza; Demonstre expertise e profundidade; Oferer analises e insights
-**Dont**: Fazer afirmacoes sem embasamento; Usar linguagem excessivamente emocional; Simplificar demais (perda de precisao); Fazer promessas exageradas; Ignorar contrapontos validos
+**Do**: Present data and evidence; Use reliable sources and cite references; Explain complex concepts clearly; Demonstrate expertise and depth; Offer analyses and insights
+**Dont**: Make claims without evidence; Use excessively emotional language; Oversimplify (loss of precision); Make exaggerated promises; Ignore valid counterpoints
 
 ---
 
-### Heroi (Hero)
+### Hero
 
-**Motto**: Onde ha vontade, ha um caminho
-**Core Desire**: Provar seu valor atraves de acoes corajosas e dificeis
-**Goal**: Exercer maestria de forma que melhore o mundo
-**Fear**: Fraqueza, vulnerabilidade, desistir, ser covarde
-**Strategy**: Ser forte, competente e poderoso quanto possivel
-**Brand Promise**: Voce pode superar qualquer desafio
+**Motto**: Where there's a will, there's a way
+**Core Desire**: Prove your worth through courageous and difficult actions
+**Goal**: Exercise mastery in ways that improve the world
+**Fear**: Weakness, vulnerability, giving up, being a coward
+**Strategy**: Be as strong, competent, and powerful as possible
+**Brand Promise**: You can overcome any challenge
 
-**Personality**: Corajoso, Determinado, Forte, Competitivo, Honrado, Disciplinado, Vencedor
-**Shadow**: Arrogancia, Necessidade constante de conflito, Incapacidade de delegar
+**Personality**: Courageous, Determined, Strong, Competitive, Honorable, Disciplined, Winner
+**Shadow**: Arrogance, Constant need for conflict, Inability to delegate
 
 **Voice Scores**: formality=3, enthusiasm=5, humor=2, authority=4, warmth=3
-**Voice Description**: Tom motivacional, empoderador e energico. Linguagem de superacao e conquista.
+**Voice Description**: Motivational, empowering, and energetic tone. Language of achievement and conquest.
 
-**Do**: Use linguagem de superacao e vitoria; Mostre resultados concretos e tangiveis; Inspire acao e determinacao; Celebre conquistas e esforco; Desafie o cliente a ser melhor
-**Dont**: Aceitar mediocridade ou desculpas; Ser condescendente ou paternalista; Focar em limitacoes ou fraquezas; Usar linguagem passiva; Evitar desafios ou conflitos
+**Do**: Use language of achievement and victory; Show concrete, tangible results; Inspire action and determination; Celebrate accomplishments and effort; Challenge the customer to be better
+**Dont**: Accept mediocrity or excuses; Be condescending or paternalistic; Focus on limitations or weaknesses; Use passive language; Avoid challenges or conflicts
 
 ---
 
-### Rebelde (Outlaw)
+### Outlaw
 
-**Motto**: Regras foram feitas para serem quebradas
-**Core Desire**: Revolucao, vinganca ou libertacao
-**Goal**: Derrubar o que nao esta funcionando
-**Fear**: Impotencia, irrelevancia, ser comum, conformismo
-**Strategy**: Romper, destruir ou chocar para criar mudanca
-**Brand Promise**: Liberdade para ser quem voce realmente e
+**Motto**: Rules are made to be broken
+**Core Desire**: Revolution, revenge, or liberation
+**Goal**: Tear down what isn't working
+**Fear**: Powerlessness, irrelevance, being ordinary, conformism
+**Strategy**: Disrupt, destroy, or shock to create change
+**Brand Promise**: Freedom to be who you really are
 
-**Personality**: Rebelde, Disruptivo, Ousado, Libertario, Provocador, Inconformista, Radical
-**Shadow**: Autodestruicao, Criminalidade, Negatividade cronica
+**Personality**: Rebel, Disruptive, Bold, Libertarian, Provocateur, Nonconformist, Radical
+**Shadow**: Self-destruction, Criminality, Chronic negativity
 
 **Voice Scores**: formality=1, enthusiasm=4, humor=4, authority=2, warmth=2
-**Voice Description**: Tom provocativo, irreverente e desafiador. Linguagem direta, as vezes agressiva.
+**Voice Description**: Provocative, irreverent, and challenging tone. Direct, sometimes aggressive language.
 
-**Do**: Desafie o status quo diretamente; Use linguagem provocativa e ousada; Celebre a diferenca e individualidade; Questione convencoes e padroes; Crie polarizacao (ame ou odeie)
-**Dont**: Ser institucional ou corporativo; Pedir permissao ou desculpas; Seguir formulas e padroes de mercado; Ser politicamente correto demais; Agradar a todos
+**Do**: Challenge the status quo directly; Use provocative and bold language; Celebrate difference and individuality; Question conventions and standards; Create polarization (love or hate)
+**Dont**: Be institutional or corporate; Ask for permission or apologize; Follow market formulas and patterns; Be too politically correct; Try to please everyone
 
 ---
 
-### Mago (Magician)
+### Magician
 
-**Motto**: Eu faco acontecer
-**Core Desire**: Compreender as leis fundamentais do universo e transforma-las
-**Goal**: Fazer sonhos se tornarem realidade, transformar
-**Fear**: Consequencias negativas nao intencionais, charlatanismo
-**Strategy**: Desenvolver visao e vive-la, criar experiencias transformadoras
-**Brand Promise**: Transformacao e a concretizacao de sonhos
+**Motto**: I make it happen
+**Core Desire**: Understand the fundamental laws of the universe and transform them
+**Goal**: Make dreams come true, transform reality
+**Fear**: Unintended negative consequences, charlatanism
+**Strategy**: Develop a vision and live it, create transformative experiences
+**Brand Promise**: Transformation and the realization of dreams
 
-**Personality**: Visionario, Transformador, Intuitivo, Carismatico, Mistico, Catalico, Inspirador
-**Shadow**: Manipulacao, Desconexao com realidade, Charlatanismo
+**Personality**: Visionary, Transformer, Intuitive, Charismatic, Mystic, Catalytic, Inspiring
+**Shadow**: Manipulation, Disconnection from reality, Charlatanism
 
 **Voice Scores**: formality=3, enthusiasm=4, humor=2, authority=4, warmth=4
-**Voice Description**: Tom visionario, inspirador e misterioso. Linguagem de transformacao e possibilidades.
+**Voice Description**: Visionary, inspiring, and mysterious tone. Language of transformation and possibilities.
 
-**Do**: Fale de transformacao e possibilidades; Use metaforas e linguagem evocativa; Crie senso de magia e encantamento; Mostre o antes e depois transformador; Prometa e entregue experiencias unicas
-**Dont**: Ser excessivamente racional ou tecnico; Prometer sem poder entregar; Parecer manipulador ou enganoso; Desmistificar demais o processo; Ser mundano ou ordinario
+**Do**: Speak of transformation and possibilities; Use metaphors and evocative language; Create a sense of magic and enchantment; Show transformative before-and-after; Promise and deliver unique experiences
+**Dont**: Be excessively rational or technical; Promise without ability to deliver; Appear manipulative or deceptive; Over-demystify the process; Be mundane or ordinary
 
 ---
 
-### Cara Comum (Everyman)
+### Everyman
 
-**Motto**: Todos os homens e mulheres sao criados iguais
-**Core Desire**: Conectar-se com outros, pertencer
-**Goal**: Pertencer, se encaixar, ser aceito como e
-**Fear**: Ser deixado de fora, se destacar demais, parecer esnobe
-**Strategy**: Desenvolver virtudes solidas e comuns, ser autentico e pe-no-chao
-**Brand Promise**: Somos como voce, entendemos voce
+**Motto**: All men and women are created equal
+**Core Desire**: Connect with others, belong
+**Goal**: Belong, fit in, be accepted as you are
+**Fear**: Being left out, standing out too much, seeming snobbish
+**Strategy**: Develop solid common virtues, be authentic and down-to-earth
+**Brand Promise**: We are like you, we understand you
 
-**Personality**: Acessivel, Autentico, Humilde, Solidario, Realista, Trabalhador, Confiavel
-**Shadow**: Perda de identidade propria, Populismo vazio, Medo de se destacar
+**Personality**: Accessible, Authentic, Humble, Supportive, Realistic, Hardworking, Reliable
+**Shadow**: Loss of own identity, Empty populism, Fear of standing out
 
 **Voice Scores**: formality=2, enthusiasm=3, humor=3, authority=2, warmth=5
-**Voice Description**: Tom amigavel, acessivel e genuino. Linguagem do dia-a-dia, sem formalismos.
+**Voice Description**: Friendly, accessible, and genuine tone. Everyday language, no formalities.
 
-**Do**: Use linguagem coloquial e acessivel; Mostre pessoas reais e situacoes do cotidiano; Seja transparente sobre precos e beneficios; Crie senso de comunidade e pertencimento; Valorize o trabalho honesto e a simplicidade
-**Dont**: Parecer elitista ou exclusivo; Usar jargoes tecnicos ou sofisticados; Mostrar luxo ou ostentacao; Ser condescendente com o publico; Criar barreiras de acesso
+**Do**: Use colloquial and accessible language; Show real people and everyday situations; Be transparent about prices and benefits; Create a sense of community and belonging; Value honest work and simplicity
+**Dont**: Appear elitist or exclusive; Use technical or sophisticated jargon; Display luxury or ostentation; Be condescending with the audience; Create access barriers
 
 ---
 
-### Amante (Lover)
+### Lover
 
-**Motto**: Eu so tenho olhos para voce
-**Core Desire**: Intimidade, experiencia sensorial e emocional
-**Goal**: Estar em relacionamento com pessoas, trabalho e experiencias que ama
-**Fear**: Estar sozinho, ser indesejado, ser rejeitado
-**Strategy**: Tornar-se atraente fisica e emocionalmente
-**Brand Promise**: Voce merece ser desejado e amado
+**Motto**: I only have eyes for you
+**Core Desire**: Intimacy, sensory and emotional experience
+**Goal**: Be in relationship with people, work, and experiences you love
+**Fear**: Being alone, being unwanted, being rejected
+**Strategy**: Become physically and emotionally attractive
+**Brand Promise**: You deserve to be desired and loved
 
-**Personality**: Apaixonado, Sensual, Empatetico, Romantico, Comprometido, Intimo, Sedutor
-**Shadow**: Obsessao, Ciumes, Superficialidade
+**Personality**: Passionate, Sensual, Empathetic, Romantic, Committed, Intimate, Seductive
+**Shadow**: Obsession, Jealousy, Superficiality
 
 **Voice Scores**: formality=2, enthusiasm=4, humor=2, authority=2, warmth=5
-**Voice Description**: Tom sedutor, caloroso e intimo. Linguagem sensorial e emocional.
+**Voice Description**: Seductive, warm, and intimate tone. Sensory and emotional language.
 
-**Do**: Use linguagem sensorial (toque, aroma, sabor); Crie conexao emocional profunda; Valorize beleza e estetica; Fale de prazer e satisfacao; Crie experiencias memoraveis
-**Dont**: Ser frio ou distante; Focar apenas em funcionalidades; Ignorar aspectos sensoriais; Ser excessivamente racional; Parecer superficial ou vulgar
+**Do**: Use sensory language (touch, aroma, flavor); Create deep emotional connection; Value beauty and aesthetics; Speak of pleasure and satisfaction; Create memorable experiences
+**Dont**: Be cold or distant; Focus only on functionality; Ignore sensory aspects; Be excessively rational; Appear superficial or vulgar
 
 ---
 
-### Bobo da Corte (Jester)
+### Jester
 
-**Motto**: Voce so vive uma vez
-**Core Desire**: Viver no momento com total prazer
-**Goal**: Se divertir e alegrar o mundo
-**Fear**: Ser chato, entediante ou causar tedio nos outros
-**Strategy**: Ser engraado, fazer piadas, brincar
-**Brand Promise**: A vida e muito curta para ser seria
+**Motto**: You only live once
+**Core Desire**: Live in the moment with total joy
+**Goal**: Have fun and brighten the world
+**Fear**: Being boring, dull, or causing boredom in others
+**Strategy**: Be funny, make jokes, play
+**Brand Promise**: Life is too short to be serious
 
-**Personality**: Divertido, Espontaneo, Irreverente, Alegre, Criativo, Otimista, Travesso
-**Shadow**: Irresponsabilidade, Crueldade disfarada de humor, Incapacidade de levar nada a serio
+**Personality**: Fun, Spontaneous, Irreverent, Joyful, Creative, Optimistic, Mischievous
+**Shadow**: Irresponsibility, Cruelty disguised as humor, Inability to take anything seriously
 
 **Voice Scores**: formality=1, enthusiasm=5, humor=5, authority=1, warmth=4
-**Voice Description**: Tom leve, divertido e irreverente. Linguagem cheia de piadas, trocadilhos e surpresas.
+**Voice Description**: Light, fun, and irreverent tone. Language full of jokes, puns, and surprises.
 
-**Do**: Use humor e piadas relevantes; Surpreenda com o inesperado; Quebre padroes de comunicacao; Celebre a alegria e diversao; Nao se leve muito a serio
-**Dont**: Ser ofensivo ou inadequado; Fazer humor sobre temas sensiveis; Ser previsivel ou entediante; Parecer forcado ou artificial; Ser serio demais
+**Do**: Use relevant humor and jokes; Surprise with the unexpected; Break communication patterns; Celebrate joy and fun; Don't take yourself too seriously
+**Dont**: Be offensive or inappropriate; Make humor about sensitive topics; Be predictable or boring; Appear forced or artificial; Be too serious
 
 ---
 
-### Cuidador (Caregiver)
+### Caregiver
 
-**Motto**: Ame seu proximo como a si mesmo
-**Core Desire**: Proteger e cuidar dos outros
-**Goal**: Ajudar os outros, servir
-**Fear**: Egoismo, ingratidao, abandono
-**Strategy**: Fazer coisas pelos outros, proteger, cuidar
-**Brand Promise**: Nos cuidamos de voce
+**Motto**: Love your neighbor as yourself
+**Core Desire**: Protect and care for others
+**Goal**: Help others, serve
+**Fear**: Selfishness, ingratitude, abandonment
+**Strategy**: Do things for others, protect, care
+**Brand Promise**: We take care of you
 
-**Personality**: Protetor, Generoso, Compassivo, Altruista, Maternal/Paternal, Solidario, Empatetico
-**Shadow**: Martrio, Manipulacao atraves da culpa, Negligencia de si mesmo
+**Personality**: Protective, Generous, Compassionate, Altruistic, Maternal/Paternal, Supportive, Empathetic
+**Shadow**: Martyrdom, Manipulation through guilt, Self-neglect
 
 **Voice Scores**: formality=3, enthusiasm=3, humor=2, authority=3, warmth=5
-**Voice Description**: Tom acolhedor, protetor e empatetico. Linguagem de cuidado e apoio.
+**Voice Description**: Warm, protective, and empathetic tone. Language of care and support.
 
-**Do**: Demonstre empatia e compreensao; Ofereca ajuda e suporte genuinos; Use linguagem inclusiva e acolhedora; Mostre preocupacao com bem-estar; Destaque beneficios para a familia
-**Dont**: Ser frio ou distante; Parecer interesseiro ou egoista; Ignorar necessidades emocionais; Ser paternalista ou condescendente; Fazer promessas que nao pode cumprir
+**Do**: Demonstrate empathy and understanding; Offer genuine help and support; Use inclusive and welcoming language; Show concern for well-being; Highlight benefits for the family
+**Dont**: Be cold or distant; Appear self-interested or selfish; Ignore emotional needs; Be paternalistic or condescending; Make promises you can't keep
 
 ---
 
-### Criador (Creator)
+### Creator
 
-**Motto**: Se pode ser imaginado, pode ser criado
-**Core Desire**: Criar algo de valor duradouro, expressao
-**Goal**: Realizar uma visao, criar cultura
-**Fear**: Visao ou execucao medocres, ser copiado, nao ser original
-**Strategy**: Desenvolver habilidade e controle artistico, criar
-**Brand Promise**: Inovacao e originalidade em tudo que fazemos
+**Motto**: If it can be imagined, it can be created
+**Core Desire**: Create something of lasting value, self-expression
+**Goal**: Realize a vision, create culture
+**Fear**: Mediocre vision or execution, being copied, not being original
+**Strategy**: Develop artistic skill and control, create
+**Brand Promise**: Innovation and originality in everything we do
 
-**Personality**: Criativo, Imaginativo, Artistico, Inovador, Perfeccionista, Expressivo, Visionario
-**Shadow**: Perfeccionismo paralisante, Elitismo artistico, Dificuldade em aceitar feedback
+**Personality**: Creative, Imaginative, Artistic, Innovative, Perfectionist, Expressive, Visionary
+**Shadow**: Paralyzing perfectionism, Artistic elitism, Difficulty accepting feedback
 
 **Voice Scores**: formality=3, enthusiasm=4, humor=2, authority=3, warmth=3
-**Voice Description**: Tom inspirador, artistico e inovador. Linguagem que valoriza originalidade e expressao.
+**Voice Description**: Inspiring, artistic, and innovative tone. Language that values originality and expression.
 
-**Do**: Valorize originalidade e inovacao; Mostre processo criativo e bastidores; Use linguagem artistica e visual; Celebre a criacao e expressao; Destaque diferenciais de design
-**Dont**: Parecer generico ou copiado; Focar apenas em preco; Ignorar aspectos esteticos; Ser excessivamente comercial; Comprometer qualidade por volume
+**Do**: Value originality and innovation; Show creative process and behind-the-scenes; Use artistic and visual language; Celebrate creation and expression; Highlight design differentiators
+**Dont**: Appear generic or copied; Focus only on price; Ignore aesthetic aspects; Be excessively commercial; Compromise quality for volume
 
 ---
 
-### Governante (Ruler)
+### Ruler
 
-**Motto**: Poder nao e tudo, e a unica coisa
-**Core Desire**: Controle, poder e ordem
-**Goal**: Criar uma familia, empresa ou comunidade prospera e bem-sucedida
-**Fear**: Caos, ser derrubado, perder controle
-**Strategy**: Exercer lideranca, demonstrar responsabilidade e competencia
-**Brand Promise**: Excelencia e lideranca em tudo que fazemos
+**Motto**: Power isn't everything, it's the only thing
+**Core Desire**: Control, power, and order
+**Goal**: Create a prosperous and successful family, company, or community
+**Fear**: Chaos, being overthrown, losing control
+**Strategy**: Exercise leadership, demonstrate responsibility and competence
+**Brand Promise**: Excellence and leadership in everything we do
 
-**Personality**: Lider, Poderoso, Responsavel, Organizado, Autoritativo, Confiante, Bem-sucedido
-**Shadow**: Autoritarismo, Rigidez, Paranoia com rivais
+**Personality**: Leader, Powerful, Responsible, Organized, Authoritative, Confident, Successful
+**Shadow**: Authoritarianism, Rigidity, Paranoia about rivals
 
 **Voice Scores**: formality=5, enthusiasm=2, humor=1, authority=5, warmth=2
-**Voice Description**: Tom autoritativo, confiante e sofisticado. Linguagem de lideranca e excelencia.
+**Voice Description**: Authoritative, confident, and sophisticated tone. Language of leadership and excellence.
 
-**Do**: Demonstre lideranca e expertise; Use linguagem sofisticada e precisa; Mostre status e exclusividade; Transmita confianca e seguranca; Destaque tradicao e legado
-**Dont**: Parecer inseguro ou indeciso; Usar linguagem casual demais; Fazer promocoes agressivas; Parecer acessivel demais; Comprometer padrao de qualidade
+**Do**: Demonstrate leadership and expertise; Use sophisticated and precise language; Display status and exclusivity; Convey confidence and assurance; Highlight tradition and legacy
+**Dont**: Appear insecure or indecisive; Use overly casual language; Run aggressive promotions; Appear too accessible; Compromise quality standards
 
 ---
 

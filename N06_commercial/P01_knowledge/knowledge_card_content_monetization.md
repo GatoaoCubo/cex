@@ -13,13 +13,14 @@ quality: 9.2
 tags: [content-monetization, billing, credits, checkout, courses, PIX, MercadoPago, Stripe, N06]
 tldr: Distilled knowledge for N06 content monetization pipeline — BRL credit wallet, payment providers, course LLM generation, ad validation, email automation, and ERP sync.
 when_to_use: When implementing or reasoning about content monetization flows involving billing, credits, course generation, checkout, ad validation, or ERP integration.
-keywords: [monetização, billing, créditos, checkout, PIX, assinatura, curso, geração de curso, anúncio, email]
+keywords: [monetization, billing, credits, checkout, PIX, subscription, course, course-generation, ad-validation, email-automation, content-factory, credit-wallet, payment-provider]
 long_tails:
-  - "Como integrar MercadoPago PIX com sistema de créditos em BRL centavos"
-  - "Pipeline LLM sequencial para geração de curso: outline→módulo→sales page→email"
-  - "Sistema de wallet prepago com PIPELINE_COSTS por operação"
-  - "Checkout com Stripe vs MercadoPago — modo LIVE/TEST/MOCK"
-  - "Validação de anúncios com detecção de fabricação e confidence scoring"
+  - "How to integrate MercadoPago PIX with integer-centavo credit wallet"
+  - "Sequential LLM pipeline for course generation: outline to module to sales page to email"
+  - "Prepaid credit wallet architecture with per-operation PIPELINE_COSTS"
+  - "Stripe vs MercadoPago checkout comparison: LIVE/TEST/MOCK modes"
+  - "Ad content validation with fabrication detection and confidence scoring"
+  - "Idempotent webhook handling for double-charge prevention"
 axioms:
   - "ALWAYS store credit balances in BRL centavos (integer) — float rounding causes billing drift."
   - "NEVER charge credits before consuming the service — consume+refund pattern prevents double-spend."
@@ -67,7 +68,7 @@ modes: [LIVE, TEST, MOCK]
 credit_unit: centavo BRL (1 BRL = 100 créditos)
 ```
 
-## Conceitos-Chave
+## Core Concepts
 
 ### Credit Wallet (BRL Centavos)
 Prepaid wallet where all values are stored as integer centavos to avoid float rounding errors.
@@ -146,15 +147,15 @@ Each step validates Pydantic model. Mock fallback if LLM quota exceeded.
 - Final gate: pricing margins > 30%, mock fallback exists, webhook idempotent
 - Deploy: write monetization_config to instance, signal N06 complete
 
-## Regras de Ouro
+## Golden Rules
 
-1. Centavos never floats. All credit math is integer arithmetic — no rounding bugs.
-2. Idempotency everywhere. Every billing call carries a unique key — double-webhooks are safe.
-3. Mock is mandatory. Every payment path has a MOCK mode — no real charges in CI.
-4. Consume before claim. Check balance → lock → execute → confirm. Never execute then charge.
-5. Course generation is sequential. Each LLM step validates Pydantic output before passing to next.
-6. Fabrication detection is non-negotiable. All ad content passes confidence_score >= 0.7.
-7. PIX for BR market. Always offer PIX as default — 40% lower abandonment than card for BR.
+1. Integer centavos only. All credit math uses integer arithmetic — float rounding causes billing drift at scale.
+2. Idempotency everywhere. Every billing call carries a unique key — double-webhooks are safe, replay-safe.
+3. Mock is mandatory. Every payment path has a MOCK mode — zero real charges in CI/staging environments.
+4. Check-lock-execute-confirm. Validate credit balance before gating — never charge then fail. Refund on downstream error.
+5. Sequential course generation. Each LLM step validates Pydantic output before passing to next — broken chains waste credits.
+6. Fabrication detection is non-negotiable. All ad content passes confidence_score >= 0.7 — false claims destroy trust and trigger platform bans.
+7. PIX-first for BR market. Always offer PIX as default payment — 40% lower cart abandonment vs card for Brazilian users.
 
 ## Visual Flow
 
@@ -188,22 +189,22 @@ Each step validates Pydantic model. Mock fallback if LLM quota exceeded.
 [DEPLOY] ─── monetization_config saved, signal sent
 ```
 
-## Comparativo de Providers
+## Payment Provider Comparison
 
 | Dimension | Stripe | MercadoPago | Hotmart | Digistore24 |
 |-----------|--------|-------------|---------|-------------|
-| Market | Internacional | Brasil/LATAM | BR infoproducts | EU/DACH/Global |
-| PIX | Não | Sim (nativo) | Não (card/boleto) | Não |
-| Boleto | Não | Sim | Sim | Não |
+| Market | International | Brazil/LATAM | BR infoproducts | EU/DACH/Global |
+| PIX | No | Yes (native) | No (card/boleto) | No |
+| Boleto | No | Yes | Yes | No |
 | Currency | USD/multi | BRL native | BRL | EUR (multi) |
 | Webhook | checkout.session.completed | IPN payment.approved | JSON, sha256 HMAC | form-encoded, sha512 |
 | IPN response | HTTP 200 | HTTP 200 | HTTP 200 | exact "OK" |
 | MoR | Seller | Seller | Seller | DS24 (auto EU VAT) |
-| Affiliates | Não | Não | Marketplace 500K+ | DS24 Marketplace |
-| Languages | EN | PT-BR | PT-BR | DE,EN,ES,FR,IT,NL,PL |
-| Best for | SaaS global | E-commerce BR | Infoproduto BR/LATAM | Infoproduto EU/DACH |
+| Affiliates | No | No | Marketplace 500K+ | DS24 Marketplace |
+| Fee range | 2.9% + $0.30 | 3.49% + BRL | 9.9% (includes MoR) | 7.9% + $1 (includes MoR) |
+| Best for | SaaS global | E-commerce BR | Infoproduct BR/LATAM | Infoproduct EU/DACH |
 
-**Multi-platform strategy**: MercadoPago (e-commerce BR) + Hotmart (infoproduto BR) + DS24 (infoproduto INT)
+**Multi-platform strategy**: MercadoPago (e-commerce BR, lowest fees) + Hotmart (infoproduct BR, built-in affiliates) + DS24 (infoproduct international, EU VAT handled)
 
 ## Platform KCs (Phase 2 — 8 Research KCs)
 
@@ -218,7 +219,7 @@ Each step validates Pydantic model. Mock fallback if LLM quota exceeded.
 | Platform Compliance | kc_content_platform_compliance | GDPR, EU VAT, Widerrufsrecht, Impressum |
 | Platform Comparison | kc_content_platform_comparison | Hotmart vs DS24 vs Teachable vs Kiwify |
 
-## Artefatos Relacionados
+## Downstream Artifacts
 
 | Artifact | ID | Purpose |
 |----------|----|---------|

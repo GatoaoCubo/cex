@@ -31,154 +31,154 @@ related:
 
 # Brand Naming Patterns
 
-## 1. Os 7 Tipos de Nome de Marca
+## 1. The 7 Brand Name Types
 
-| Tipo | Definicao | Exemplos | Prós | Contras |
+| Type | Definition | Examples | Pros | Cons |
 |------|-----------|----------|------|---------|
-| **Descriptive** | Descreve diretamente o produto/servico | General Motors, Bank of America, E*Trade | Claro, imediato | Generico, dificil de registrar |
-| **Evocative** | Evoca emocao ou ideia sem descrever literalmente | Apple, Nike, Visa, Amazon | Forte recall, flexivel | Precisa de marketing para construir significado |
-| **Invented** | Neologismo criado — derivado de raizes ou sons | Google, Kodak, Xerox, Häagen-Dazs | Unico, facil de registrar, global | Custo alto para construir significado |
-| **Lexical** | Usa jogos de linguagem: trocadilhos, aliteracao, onomatopeia | Dunkin' Donuts, Krazy Glue, Snapple | Memoravel, divertido | Pode parecer infantil em B2B |
-| **Acronymic** | Iniciais de palavras que formam sigla | IBM, BMW, BP, IKEA (parcial) | Profissional, compacto | Frio, sem personalidade, dificil de lembrar |
-| **Geographical** | Ligado a cidade, regiao ou pais de origem | New York Life, Nantucket Nectars, Patagonia | Autenticidade regional, storytelling | Limita expansao geografica |
-| **Founder** | Nome do fundador ou familia | Ralph Lauren, Ford, L'Oreal, Kiehl's | Pessoal, confianca, legado | Vinculado a reputacao individual |
+| **Descriptive** | Directly describes product/service | General Motors, Bank of America, E*Trade | Clear, immediate | Generic, hard to trademark |
+| **Evocative** | Evokes emotion or idea without literal description | Apple, Nike, Visa, Amazon | Strong recall, flexible | Requires marketing to build meaning |
+| **Invented** | Created neologism — derived from roots or sounds | Google, Kodak, Xerox, Haagen-Dazs | Unique, easy to trademark, global | High cost to build meaning |
+| **Lexical** | Uses wordplay: puns, alliteration, onomatopoeia | Dunkin' Donuts, Krazy Glue, Snapple | Memorable, fun | Can seem juvenile in B2B |
+| **Acronymic** | Initials forming an abbreviation | IBM, BMW, BP, IKEA (partial) | Professional, compact | Cold, no personality, hard to remember |
+| **Geographical** | Tied to city, region, or country of origin | New York Life, Nantucket Nectars, Patagonia | Regional authenticity, storytelling | Limits geographic expansion |
+| **Founder** | Founder or family name | Ralph Lauren, Ford, L'Oreal, Kiehl's | Personal, trust, legacy | Tied to individual reputation |
 
-> **Regra brunasena**: usa 3 tipos principais — descritivo (clareza), evocativo (emocao) e inventado (unicidade registravel).
+> **Rule of thumb**: use 3 primary types — descriptive (clarity), evocative (emotion), and invented (trademarkable uniqueness).
 
 ---
 
-## 2. Processo de Naming: 5 Etapas
+## 2. Naming Process: 5 Stages
 
 ```
-STRATEGY → GENERATION → SCREENING → TESTING → REGISTRATION
+STRATEGY -> GENERATION -> SCREENING -> TESTING -> REGISTRATION
 ```
 
-### Etapa 1: Strategy (Briefing)
-- Posicionamento: quem e a marca, para quem, contra quem
-- Mandatories: o que o nome DEVE comunicar
-- Deal-breakers: o que o nome NAO pode ser
-- Geografias alvo: nacional, LATAM, global
-- Tom: serio, playful, premium, acessivel
+### Stage 1: Strategy (Briefing)
+- Positioning: who is the brand, for whom, against whom
+- Mandatories: what the name MUST communicate
+- Deal-breakers: what the name CANNOT be
+- Target geographies: national, LATAM, global
+- Tone: serious, playful, premium, accessible
 
-### Etapa 2: Generation (Ideacao)
-- Times pequenos superam grupos grandes (evita groupthink)
-- Tecnicas: brainstorm, mapa semantico, raizes etimologicas, traducoes, portmanteau
-- Meta: 100-200 candidatos antes de filtrar
-- Ferramentas: dicionarios, thesaurus, raizes latinas/gregas, geradores de AI
+### Stage 2: Generation (Ideation)
+- Small teams outperform large groups (avoids groupthink)
+- Techniques: brainstorm, semantic maps, etymological roots, translations, portmanteau
+- Target: 100-200 candidates before filtering
+- Tools: dictionaries, thesaurus, Latin/Greek roots, AI generators
 
-### Etapa 3: Screening (Triagem)
-**Triagem rapida (eliminar candidatos ruins):**
-- Pronunciavel em PT/EN/ES?
-- Tem conotacao negativa em alguma lingua?
-- Conflita com marca famosa?
-- Dominio .com ou .com.br disponivel?
+### Stage 3: Screening (Triage)
+**Quick triage (eliminate bad candidates):**
+- Pronounceable in target languages (EN/ES/PT)?
+- Negative connotation in any language?
+- Conflicts with famous brand?
+- Domain .com available?
 
-**Triagem profunda (top 10-15 candidatos):**
-- Busca de marca no **INPI Brasil** (inpi.gov.br) — classes NCL relevantes
-- Busca USPTO para mercado americano
-- Verificacao de dominio: .com, .com.br, .io, .co
-- Verificacao de handles @nomemarca em redes sociais
-- Teste linguistico cultural (CLAB — Cultural & Linguistic Audit)
+**Deep screening (top 10-15 candidates):**
+- Trademark search on **USPTO** (US market)
+- EUIPO for European market
+- Domain verification: .com, .io, .co, country TLDs
+- Social handle check @brandname across platforms
+- Cultural & Linguistic Audit (CLAB)
 
-### Etapa 4: Testing (Validacao)
-| Metodo | Como | O que mede |
+### Stage 4: Testing (Validation)
+| Method | How | What it measures |
 |--------|------|------------|
-| **5-second test** | Mostre o nome por 5 segundos, pergunte o que lembra | Memorabilidade imediata |
-| **Phone test** | Fale o nome pelo telefone sem soletrar | Pronunciabilidade, clareza auditiva |
-| **Crowd testing** | Survey com 50-100 pessoas do target | Associacoes, conotacoes, fit com produto |
-| **Spelling test** | Peca para escrever o nome apos ouvir | Ortografia intuitiva |
+| **5-second test** | Show the name for 5 seconds, ask what they recall | Immediate memorability |
+| **Phone test** | Say the name over the phone without spelling | Pronounceability, auditory clarity |
+| **Crowd testing** | Survey with 50-100 target audience members | Associations, connotations, product fit |
+| **Spelling test** | Ask to write the name after hearing it | Intuitive orthography |
 
-### Etapa 5: Registration (Registro)
-- Registro de marca no INPI (Brasil) — classes relevantes da NCL
-- Registro de dominio antes de anunciar publicamente
-- Registro de handles sociais imediatamente apos decisao
-- NEVER announce without having domain and INPI filing initiated
+### Stage 5: Registration
+- Trademark registration (USPTO, EUIPO, or local office) in relevant Nice Classification classes
+- Domain registration BEFORE public announcement
+- Social handle registration immediately after decision
+- NEVER announce without having domain and trademark filing initiated
 
 ---
 
-## 3. Matriz de Avaliacao de Nome
+## 3. Name Evaluation Matrix
 
-Pontue cada candidato de 1-5 em cada criterio:
+Score each candidate 1-5 on each criterion:
 
-| Criterio | Descricao | Peso |
+| Criterion | Description | Weight |
 |----------|-----------|------|
-| **Memorability** | Facil de lembrar apos 1 exposicao | 25% |
-| **Pronounceability** | Pronunciavel em PT e EN sem ambiguidade | 20% |
-| **Meaning** | Carrega significado relevante para o negocio | 20% |
-| **Uniqueness** | Diferenciado no mercado, registravel | 20% |
-| **Scalability** | Funciona para extensoes de produto/linha | 15% |
+| **Memorability** | Easy to remember after 1 exposure | 25% |
+| **Pronounceability** | Pronounceable in target languages without ambiguity | 20% |
+| **Meaning** | Carries relevant meaning for the business | 20% |
+| **Uniqueness** | Differentiated in market, trademarkable | 20% |
+| **Scalability** | Works for product/line extensions | 15% |
 
-Score total = soma ponderada. Candidatos com score < 3.0 eliminados.
-
----
-
-## 4. Formulas de Naming
-
-### Formulas Construtivas
-```
-[BENEFIT] + [SUFFIX]     → Shopify, Spotify, Dropify
-[EMOTION] alone          → Visa, Apple, Amazon
-[ROOT] + [ROOT]          → Facebook, YouTube, LinkedIn
-[NEOLOGISM]              → Google, Kodak, Xerox
-[PORTMANTEAU]            → Pinterest (pin + interest), Instagram (instant + telegram)
-[VERB-as-brand]          → Slack, Zoom, Stripe
-[PLACE] + [DESCRIPTOR]  → New York Life, Patagonia
-```
-
-### Exemplos Aplicados
-- Produto de organizacao digital → **Ordena** (descritivo PT), **Sorta** (evocativo EN), **Tidlr** (inventado)
-- Plataforma de cursos BR → **Mentoria.io**, **Aprenda.club**, **Edukly**
-- Marca premium de moda → **ARCO** (geografico abstrato), **Selin** (inventado sonoro)
+Total score = weighted sum. Candidates scoring < 3.0 eliminated.
 
 ---
 
-## 5. Padroes de Tagline
+## 4. Naming Formulas
 
-| Padrao | Formula | Exemplo |
+### Constructive Formulas
+```
+[BENEFIT] + [SUFFIX]     -> Shopify, Spotify, Dropify
+[EMOTION] alone          -> Visa, Apple, Amazon
+[ROOT] + [ROOT]          -> Facebook, YouTube, LinkedIn
+[NEOLOGISM]              -> Google, Kodak, Xerox
+[PORTMANTEAU]            -> Pinterest (pin + interest), Instagram (instant + telegram)
+[VERB-as-brand]          -> Slack, Zoom, Stripe
+[PLACE] + [DESCRIPTOR]  -> New York Life, Patagonia
+```
+
+### Applied Examples
+- Digital organization product: **Sorta** (evocative EN), **Tidlr** (invented)
+- Course platform: **Mentoria.io**, **Learnly**, **Edukly**
+- Premium fashion brand: **ARCO** (abstract geographic), **Selin** (sonic invented)
+
+---
+
+## 5. Tagline Patterns
+
+| Pattern | Formula | Example |
 |--------|---------|---------|
-| **Benefit-first** | [O que voce ganha] | "Just do it" (resultado implicito) |
-| **Question** | [Pergunta que o cliente faz] | "Got milk?" |
-| **Command** | [Verbo imperativo forte] | "Think different" |
-| **Metaphor** | [Imagem poetica] | "Red Bull gives you wings" |
-| **Contrast** | [Paradoxo ou oposicao] | "The ultimate driving machine" |
-| **Promise** | [Declaracao de resultado] | "Finger lickin' good" |
+| **Benefit-first** | [What you gain] | "Just do it" (implied outcome) |
+| **Question** | [Question the customer asks] | "Got milk?" |
+| **Command** | [Strong imperative verb] | "Think different" |
+| **Metaphor** | [Poetic image] | "Red Bull gives you wings" |
+| **Contrast** | [Paradox or opposition] | "The ultimate driving machine" |
+| **Promise** | [Outcome declaration] | "Finger lickin' good" |
 
-**Formula para taglines brasileiras:**
+**Tagline formula template:**
 ```
-[Verbo de transformacao] + [Resultado desejado]
-Exemplos: "Venda mais, faca menos" | "Seu negocio, sua identidade" | "De ideia a marca em dias"
+[Transformation verb] + [Desired outcome]
+Examples: "Sell more, do less" | "Your business, your identity" | "From idea to brand in days"
 ```
 
 ---
 
-## 6. Erros Comuns de Naming
+## 6. Common Naming Mistakes
 
-| Erro | Por que e ruim | Exemplo |
+| Mistake | Why it's bad | Example |
 |------|---------------|---------|
-| **Too generic** | Impossivel de registrar, confundivel | "BestShop", "TopStore" |
-| **Hard to spell** | Perda de trafego direto, confusao | Xaelyr, Phishbn |
-| **Negative connotations** | Conotacao ruim em outras culturas | Mitsubishi Pajero (ES) |
-| **Taken domains** | .com ocupado = perda de autoridade | Qualquer nome sem .com livre |
-| **Too literal** | Limita extensao de produto | "Jamba Juice" (so juice?) |
-| **Too personal** | Dependencia de reputacao individual | Fundador controverso = marca toxica |
-| **Hard to pronounce globally** | Barreira em expansao internacional | Nomes com sons inexistentes em EN/ES |
+| **Too generic** | Impossible to trademark, confusable | "BestShop", "TopStore" |
+| **Hard to spell** | Loss of direct traffic, confusion | Xaelyr, Phishbn |
+| **Negative connotations** | Bad meaning in other cultures | Mitsubishi Pajero (ES) |
+| **Taken domains** | .com occupied = lost authority | Any name without .com available |
+| **Too literal** | Limits product extension | "Jamba Juice" (only juice?) |
+| **Too personal** | Dependent on individual reputation | Controversial founder = toxic brand |
+| **Hard to pronounce globally** | Barrier to international expansion | Names with sounds nonexistent in EN/ES |
 
 ---
 
-## 7. Screening Linguistico
+## 7. Linguistic Screening
 
-### Criterios de Audit (CLAB)
-1. **Fonologia**: sons da lingua-alvo existem no nome?
-2. **Ortografia**: unica forma de escrever?
-3. **Conotacoes**: significado em PT, EN, ES, FR, ZH?
-4. **Registros**: tom formal vs informal?
-5. **Traducao**: o nome muda de significado traduzido?
+### CLAB Audit Criteria (Cultural & Linguistic Audit for Brands)
+1. **Phonology**: do target-language sounds exist in the name?
+2. **Orthography**: only one way to spell it?
+3. **Connotations**: meaning in EN, ES, FR, ZH, PT?
+4. **Register**: formal vs informal tone?
+5. **Translation**: does the name change meaning when translated?
 
-### Teste de Telefone (obrigatorio)
-Ligue para 5 pessoas do publico-alvo, fale o nome em voz alta sem soletrar.
-- Escreveram certo? (ortografia intuitiva)
-- Entenderam o setor? (posicionamento implicito)
-- Lembraram apos 10 min? (memorabilidade sonora)
+### Phone Test (mandatory)
+Call 5 target-audience members, say the name aloud without spelling.
+- Did they spell it correctly? (intuitive orthography)
+- Did they understand the sector? (implicit positioning)
+- Did they remember after 10 min? (sonic memorability)
 
 ---
 

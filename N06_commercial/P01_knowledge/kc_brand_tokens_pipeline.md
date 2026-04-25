@@ -43,26 +43,26 @@ related:
 
 ## TL;DR
 
-Brand como sistema vivo onde um arquivo Markdown (brand-guidelines.md) e a unica fonte de verdade. Scripts de sync propagam automaticamente para design tokens JSON, CSS variables e contexto de prompt. Elimina desincronizacao entre design e codigo.
+Brand as a living system where a single Markdown file (brand-guidelines.md) is the sole source of truth. Sync scripts automatically propagate to design tokens JSON, CSS variables, and prompt context. Eliminates design-code desynchronization — the #1 cause of "off-brand" output at scale.
 
-## Conceito Central
+## Core Concept
 
-O problema central de brand em projetos de software e a fragmentacao: cores definidas num Figma, tipografia num CSS, tom de voz num documento que ninguem le. A solucao e tratar brand como pipeline de dados: uma fonte editavel por humanos (Markdown) que se transforma automaticamente em artefatos consumiveis por maquinas.
+The central problem of brand in software projects is fragmentation: colors defined in Figma, typography in CSS, voice tone in a document nobody reads. The solution is to treat brand as a data pipeline: a human-editable source (Markdown) that automatically transforms into machine-consumable artifacts.
 
-A arquitetura usa 3 camadas de tokens: primitivos (valores brutos como #E8B4B8), semanticos (roles como primary, accent) e componentes (aplicacoes como button-bg, header-text). Cada camada adiciona significado sem perder rastreabilidade ate a fonte. O sync e unidirecional: guidelines.md e a unica entrada, todo o resto e gerado.
+The architecture uses 3 token layers: primitives (raw values like #E8B4B8), semantic (roles like primary, accent), and components (applications like button-bg, header-text). Each layer adds meaning without losing traceability back to the source. Sync is unidirectional: guidelines.md is the only input, everything else is generated. ROI: one edit, every platform updated — zero manual propagation cost.
 
-O voice framework complementa o visual com 4 dimensoes: personality traits, tone variations, language rules e content examples. Isso permite que LLMs gerem copy on-brand automaticamente usando o contexto injetado via script.
+The voice framework complements visual with 4 dimensions: personality traits, tone variations, language rules, and content examples. This enables LLMs to generate on-brand copy automatically using context injected via script.
 
-## Arquitetura/Patterns
+## Architecture/Patterns
 
-| Camada | Arquivo | Papel |
-|--------|---------|-------|
-| Fonte | brand-guidelines.md | Editavel por humanos |
-| Tokens | design-tokens.json | Primitivo, semantico, componente |
-| CSS | design-tokens.css | CSS variables para import |
-| Contexto | inject-brand-context.cjs | Injeta brand em prompts LLM |
+| Layer | File | Role |
+|-------|------|------|
+| Source | brand-guidelines.md | Human-editable single source of truth |
+| Tokens | design-tokens.json | Primitive, semantic, component layers |
+| CSS | design-tokens.css | CSS variables for import |
+| Context | inject-brand-context.cjs | Injects brand into LLM prompts |
 
-Pipeline de sync:
+Sync pipeline:
 ```
 guidelines.md
   -> sync-brand-to-tokens.cjs
@@ -71,27 +71,27 @@ guidelines.md
         -> import em componentes
 ```
 
-Sistema de cores (3 tipos por brand):
-- **Primary**: CTAs, headers — cor principal da marca
-- **Secondary**: backgrounds, bordas — suporte visual
-- **Accent**: badges, alerts — destaque pontual
+Color system (3 types per brand):
+- **Primary**: CTAs, headers — main brand color (highest conversion impact)
+- **Secondary**: backgrounds, borders — visual support
+- **Accent**: badges, alerts — punctual highlighting (urgency, promotions)
 
-Cada cor inclui: hex, HSL (para opacity), on-color (texto sobre fundo), semantic role. Tipografia segue pattern similar: heading font + body font com tamanhos e pesos definidos.
+Each color includes: hex, HSL (for opacity), on-color (text on background), semantic role. Typography follows the same pattern: heading font + body font with defined sizes and weights.
 
-Validacao automatica: script detecta valores hardcoded em componentes que deveriam usar tokens. Pre-flight checklist antes de publicar qualquer asset.
+Automatic validation: script detects hardcoded values in components that should use tokens. Pre-flight checklist before publishing any asset.
 
-Escala do pattern: projetos com 55+ CSVs de design usam a mesma pipeline — cada CSV e um dominio visual (cores, tipografia, layouts) e brand-guidelines.md governa todos. O sync unidirecional garante que a unica operacao humana e editar o Markdown fonte; todo o resto e derivado automaticamente via scripts Node.js.
+Scale: projects with 55+ design CSVs use the same pipeline — each CSV is a visual domain (colors, typography, layouts) and brand-guidelines.md governs all. Unidirectional sync ensures the only human operation is editing the Markdown source; everything else is derived automatically via Node.js scripts.
 
-## Exemplos Praticos
+## Practical Examples
 
-| Operacao | Comando | Resultado |
-|----------|---------|-----------|
-| Sync brand | `node sync-brand-to-tokens.cjs` | Tokens atualizados |
-| Injetar contexto | `node inject-brand-context.cjs` | Brand em prompt |
-| Validar asset | `node validate-asset.cjs <path>` | Nome, formato, tamanho |
-| Extrair cores | `node extract-colors.cjs --palette` | Paleta atual |
+| Operation | Command | Result |
+|-----------|---------|--------|
+| Sync brand | `node sync-brand-to-tokens.cjs` | Tokens updated across all platforms |
+| Inject context | `node inject-brand-context.cjs` | Brand injected into LLM prompts |
+| Validate asset | `node validate-asset.cjs <path>` | Name, format, size checked |
+| Extract colors | `node extract-colors.cjs --palette` | Current palette exported |
 
-Template minimo para nova marca:
+Minimum template for a new brand:
 ```markdown
 # Brand Guidelines: [Nome]
 ## Identity
@@ -111,14 +111,14 @@ Template minimo para nova marca:
 
 ## Anti-Patterns
 
-- Editar tokens JSON diretamente sem passar por guidelines
-- Multiplas fontes de verdade (Figma + CSS + doc separados)
-- Cores sem semantica — hex puro sem token nomeado
-- Voice framework vago ("seja profissional" nao e acionavel)
-- Assets publicados sem passar pelo approval checklist
-- CSS com font-family literal ao inves de var(--typography-*)
+- Editing tokens JSON directly without going through guidelines — breaks source-of-truth chain
+- Multiple sources of truth (Figma + CSS + separate docs) — guaranteed drift
+- Colors without semantic layer — raw hex without named tokens leads to inconsistency
+- Vague voice framework ("be professional" is not actionable) — must be measurable dimensions
+- Published assets without approval checklist — brand debt accumulates silently
+- CSS with literal font-family instead of var(--typography-*) — breaks theme switching
 
-## Referencias
+## References
 
 - source: https://www.designtokens.org/glossary/
 - source: https://tr.designtokens.org/format/

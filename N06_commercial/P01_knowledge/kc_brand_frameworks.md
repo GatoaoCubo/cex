@@ -37,20 +37,20 @@ related:
 
 ## POSITIONING
 
-### Declaracao de Posicionamento Ries & Trout
+### Ries & Trout Positioning Statement
 
 **Author**: Al Ries & Jack Trout
 **Source**: Positioning: The Battle for Your Mind (1981)
-**Purpose**: Criar declaracao clara de posicionamento de marca
-**Template**: Para {target_audience} que {need}, {brand} e {category} que {benefit} porque {reason_to_believe}.
+**Purpose**: Create a clear brand positioning statement
+**Template**: For {target_audience} who {need}, {brand} is the {category} that {benefit} because {reason_to_believe}.
 
 **Fields**:
-- `target_audience`: Publico-alvo especifico (demografico + psicografico) (ex: mulheres 25-45 que buscam praticidade no dia a dia)
-- `need`: Necessidade ou problema do publico (ex: precisam de maquiagem duravel para rotina corrida)
-- `brand`: Nome da marca (ex: BEAUTYFIX)
-- `category`: Categoria de mercado em que a marca compete (ex: a linha de cosmeticos profissionais)
-- `benefit`: Beneficio principal que diferencia a marca (ex: oferece 24h de fixacao sem retoque)
-- `reason_to_believe`: Prova ou razao para acreditar no beneficio (ex: nossa formula patenteada com microparticulas de silicone)
+- `target_audience`: Specific target audience (demographic + psychographic)
+- `need`: Audience need or problem
+- `brand`: Brand name
+- `category`: Market category the brand competes in
+- `benefit`: Primary differentiating benefit
+- `reason_to_believe`: Proof or reason to believe the benefit
 
 **Example**:
 - target_audience: mulheres 25-45 que buscam praticidade no dia a dia
@@ -63,11 +63,11 @@ related:
 
 ---
 
-### Estrategia do Oceano Azul - Canvas
+### Blue Ocean Strategy Canvas
 
 **Author**: W. Chan Kim & Renee Mauborgne
 **Source**: Blue Ocean Strategy (2005)
-**Purpose**: Identificar diferenciais criando novo espaco de mercado
+**Purpose**: Identify differentiators by creating new market space
 **Template**: {'eliminate': 'Fatores que a industria compete mas podem ser eliminados: {eliminate_factors}', 'reduce': 'Fatores que podem ser reduzidos abaixo do padrao da industria: {reduce_factors}', 'raise': 'Fatores que podem ser elevados acima do padrao da industria: {raise_factors}', 'create': 'Fatores que a industria nunca ofereceu e podem ser criados: {create_factors}'}
 
 **Example**:
@@ -77,17 +77,17 @@ related:
 
 ---
 
-### Framework Jobs-to-be-Done
+### Jobs-to-be-Done Framework
 
 **Author**: Clayton Christensen
 **Source**: Competing Against Luck (2016)
-**Purpose**: Entender o 'trabalho' que o cliente contrata o produto para fazer
-**Template**: Quando {situation}, eu quero {motivation} para que eu possa {outcome}.
+**Purpose**: Understand the 'job' the customer hires the product to do
+**Template**: When {situation}, I want to {motivation} so I can {outcome}.
 
 **Fields**:
-- `situation`: Contexto ou gatilho que cria a necessidade (ex: estou saindo para o trabalho com pressa)
-- `motivation`: Acao ou solucao desejada (ex: aplicar maquiagem rapidamente)
-- `outcome`: Resultado final desejado (emocional ou funcional) (ex: parecer profissional o dia Planned sem preocupacao)
+- `situation`: Context or trigger that creates the need
+- `motivation`: Desired action or solution
+- `outcome`: Desired end result (emotional or functional)
 
 **Example**:
 - brand: BEAUTYFIX
@@ -97,20 +97,20 @@ related:
 
 ---
 
-### Canvas de Proposta de Valor
+### Value Proposition Canvas
 
 **Author**: Alexander Osterwalder
 **Source**: Value Proposition Design (2014)
-**Purpose**: Alinhar proposta de valor com perfil do cliente
+**Purpose**: Align value proposition with customer profile
 **Template**: {'customer_profile': {'jobs': 'Tarefas que o cliente tenta realizar: {customer_jobs}', 'pains': 'Frustraccoes e obstaculos: {customer_pains}', 'gains': 'Beneficios e resultados desejados: {customer_gains}'}, 'value_map': {'products_services': 'O que oferecemos: {products_services}', 'pain_relievers': 'Como aliviamos as dores: {pain_relievers}', 'gain_creators': 'Como geramos ganhos: {gain_creators}'}}
 
 **Fields**:
-- `customer_jobs`: Lista de 3-5 tarefas principais do cliente
-- `customer_pains`: Lista de 3-5 principais dores/frustraccoes
-- `customer_gains`: Lista de 3-5 ganhos desejados
-- `products_services`: Lista de produtos/servicos oferecidos
-- `pain_relievers`: Como cada produto alivia uma dor especifica
-- `gain_creators`: Como cada produto gera um ganho especifico
+- `customer_jobs`: List of 3-5 main customer tasks
+- `customer_pains`: List of 3-5 main pains/frustrations
+- `customer_gains`: List of 3-5 desired gains
+- `products_services`: List of products/services offered
+- `pain_relievers`: How each product relieves a specific pain
+- `gain_creators`: How each product generates a specific gain
 
 **Example**:
 - brand: FITBOX - Marmitas Fitness

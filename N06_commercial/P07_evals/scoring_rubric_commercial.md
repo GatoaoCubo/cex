@@ -110,8 +110,7 @@ For mixed artifacts (e.g., branded pricing page), average both.
 
 ## Boundary
 
-Criterio de avaliacao com framework. NAO eh benchmark (nao mede) nem quality_gate (P11, nao bloqueia).
-
+Scoring rubric with evaluation framework. NOT a benchmark (does not measure runtime performance) and NOT a quality_gate (P11 — does not hard-block pipeline). This rubric provides dimensional scoring criteria for peer review of N06 commercial artifacts.
 
 ## 8F Pipeline Function
 

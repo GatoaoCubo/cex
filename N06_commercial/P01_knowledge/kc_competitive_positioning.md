@@ -11,7 +11,7 @@ domain: commercial-positioning
 quality: 9.0
 updated: 2026-04-07
 tags: [positioning, competitive, blue-ocean, porter, ries-trout, differentiation, perceptual-map, category-design]
-tldr: "Frameworks universais para posicionar qualquer marca competitivamente: Ries & Trout, Blue Ocean ERRC, Porter, VPC, perceptual mapping, category design."
+tldr: "11 competitive positioning frameworks: Ries & Trout positioning statement, Blue Ocean ERRC grid, Porter generic strategies (cost/differentiation/focus), Value Proposition Canvas (Strategyzer), perceptual mapping (2D competitive grid), category design (Play Bigger), differentiation statement template, competitive audit template, brand positioning scorecard, repositioning approaches, and common positioning mistakes with fixes."
 when_to_use: "When positioning a brand against competitors, creating perceptual maps, or designing new market categories."
 keywords: [competitive-positioning, ries-trout, blue-ocean, porter, perceptual-map, category-design, differentiation]
 density_score: 0.93
@@ -40,18 +40,18 @@ Developed by Al Ries and Jack Trout in *Positioning: The Battle for Your Mind* (
 
 ### Template
 ```
-Para [TARGET SEGMENT] que [UNMET NEED OR PROBLEM],
-[BRAND NAME] e o/a [CATEGORY/FRAME OF REFERENCE]
-que [KEY BENEFIT / POINT OF DIFFERENCE]
-porque [REASON TO BELIEVE / PROOF POINT].
+For [TARGET SEGMENT] who [UNMET NEED OR PROBLEM],
+[BRAND NAME] is the [CATEGORY/FRAME OF REFERENCE]
+that [KEY BENEFIT / POINT OF DIFFERENCE]
+because [REASON TO BELIEVE / PROOF POINT].
 ```
 
 ### Example (Slack)
 ```
-Para equipes de trabalho que sofrem com email fragmentado e reunioes excessivas,
-Slack e a plataforma de comunicacao corporativa
-que centraliza conversas, arquivos e integrações em um so lugar
-porque conecta mais de 2.400 apps e busca todo o historico institucional.
+For work teams who suffer from fragmented email and excessive meetings,
+Slack is the corporate communication platform
+that centralizes conversations, files, and integrations in one place
+because it connects 2,400+ apps and searches all institutional history.
 ```
 
 ### Rules

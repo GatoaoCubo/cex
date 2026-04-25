@@ -37,21 +37,21 @@ related:
 
 # Brand Propagation Architecture
 
-## 1. Design Tokens: Conceito e Especificacao W3C
+## 1. Design Tokens: W3C Concept and Specification
 
-### O que sao Design Tokens
-Design Tokens sao as decisoes de design codificadas como variaveis — a **fonte unica de verdade** que conecta decisoes de marca a codigo executavel em qualquer plataforma.
+### What Are Design Tokens
+Design Tokens are design decisions encoded as variables — the **single source of truth** connecting brand decisions to executable code on any platform. ROI: one token change propagates to every component, every platform, every theme — zero manual per-file updates.
 
-Ao inves de hardcodar `color: #E87C3E` em cada componente, voce declara:
+Instead of hardcoding `color: #E87C3E` in each component, you declare:
 ```json
 "color-brand-primary": { "$value": "#E87C3E", "$type": "color" }
 ```
 ...e todos os sistemas consomem essa variavel. Mudar o token muda tudo.
 
-### Especificacao DTCG (W3C Community Group)
-O DTCG (Design Tokens Community Group) lancou a primeira versao estavel do spec em outubro de 2025.
+### DTCG Specification (W3C Community Group)
+The DTCG (Design Tokens Community Group) released the first stable spec version in October 2025. This is the industry standard — any token tooling investment should target DTCG format for maximum interoperability.
 
-**Formato DTCG (tokens.json):**
+**DTCG format (tokens.json):**
 ```json
 {
   "color": {
@@ -76,15 +76,15 @@ O DTCG (Design Tokens Community Group) lancou a primeira versao estavel do spec 
 }
 ```
 
-**Tipos suportados pelo DTCG:**
-- `color` — cores hex, RGB, HSL
+**Types supported by DTCG:**
+- `color` — hex, RGB, HSL values
 - `dimension` — px, rem, em
 - `fontFamily`, `fontWeight`, `fontSize`, `lineHeight`
-- `duration` — para animacoes (ms)
+- `duration` — for animations (ms)
 - `cubicBezier` — easing functions
 - `number`, `string`, `boolean`
 
-**Alias (referencia entre tokens):**
+**Alias (cross-token references):**
 ```json
 {
   "button": {
@@ -98,37 +98,37 @@ O DTCG (Design Tokens Community Group) lancou a primeira versao estavel do spec 
 
 ---
 
-## 2. Arquitetura de 3 Camadas
+## 2. Three-Layer Token Architecture
 
 ```
-PRIMITIVO (Global)        →    SEMANTICO (Role)         →    COMPONENTE (Application)
-─────────────────────────────────────────────────────────────────────────────────────
-Valores brutos             Significado contextual         Uso especifico por componente
+PRIMITIVE (Global)        ->    SEMANTIC (Role)          ->    COMPONENT (Application)
+-------------------------------------------------------------------------------------
+Raw values                 Contextual meaning             Component-specific binding
 
 blue-400: #4A90E2          color-interactive: blue-400    button-bg-primary: color-interactive
 space-4: 4px               spacing-tight: space-4         card-padding: spacing-tight
 font-bold: 700             font-emphasis: font-bold       heading-weight: font-emphasis
 ```
 
-### Layer 1: Primitive Tokens (Paleta)
-- Todos os valores possiveis do design system
-- Sem contexto semantico — apenas valores
-- Nao usados diretamente em componentes
-- Exemplo: `red-100` thru `red-900`, `space-1` thru `space-64`
+### Layer 1: Primitive Tokens (Palette)
+- All possible values in the design system
+- No semantic context — raw values only
+- Never used directly in components
+- Example: `red-100` through `red-900`, `space-1` through `space-64`
 
-### Layer 2: Semantic Tokens (Papeis)
-- Dao significado contextual aos primitivos
-- Sao o que muda entre temas (light/dark)
-- Exemplo: `color-background-primary`, `color-text-muted`, `color-border-subtle`
+### Layer 2: Semantic Tokens (Roles)
+- Give contextual meaning to primitives
+- These are what changes between themes (light/dark) — the ROI layer for white-labeling
+- Example: `color-background-primary`, `color-text-muted`, `color-border-subtle`
 
-### Layer 3: Component Tokens (Aplicacoes)
-- Mapeiam semantico para componente especifico
-- Permitem override por componente sem quebrar outros
-- Exemplo: `button-background-hover`, `card-border-radius`, `input-focus-ring`
+### Layer 3: Component Tokens (Applications)
+- Map semantic to specific component usage
+- Allow per-component override without breaking others — the customization layer
+- Example: `button-background-hover`, `card-border-radius`, `input-focus-ring`
 
 ---
 
-## 3. Pipeline de Propagacao de Marca
+## 3. Brand Propagation Pipeline
 
 ```
 brand_config.yaml
@@ -151,7 +151,7 @@ React components        SwiftUI views           Compose composables
 LLM Prompt Templates (brand voice injection)
 ```
 
-### brand_config.yaml (arquivo mestre)
+### brand_config.yaml (master file — single source of truth)
 ```yaml
 brand:
   name: "Agua Marinha"
@@ -246,9 +246,9 @@ object StyleDictionary {
 
 ---
 
-## 5. Convencao de Nomenclatura de Tokens
+## 5. Token Naming Convention
 
-### Padrao: categoria-tipo-item-subitem-estado
+### Pattern: category-type-item-subitem-state
 ```
 color  - background - primary  - [null]   - [null]    → color-background-primary
 color  - text       - body      - [null]   - disabled  → color-text-body-disabled
@@ -257,21 +257,21 @@ font   - size       - heading   - xl       - [null]    → font-size-heading-xl
 border - radius     - button    - [null]   - [null]    → border-radius-button
 ```
 
-### Regras
-1. Sempre kebab-case
-2. Comece com categoria (color, space, font, border, shadow, motion)
-3. Nao use valores no nome (`blue-400` e primitivo, nunca semantico)
-4. Estado no final: `hover`, `focus`, `disabled`, `active`, `selected`
-5. Temas como prefixo opcional: `dark-color-background-primary`
+### Rules
+1. Always kebab-case
+2. Start with category (color, space, font, border, shadow, motion)
+3. Never use raw values in semantic names (`blue-400` is primitive, never semantic)
+4. State suffix at the end: `hover`, `focus`, `disabled`, `active`, `selected`
+5. Theme as optional prefix: `dark-color-background-primary`
 
 ---
 
-## 6. Prompt Injection de Marca
+## 6. Brand Prompt Injection
 
-### Conceito
-Extrair identidade de marca do `brand_config.yaml` e injetar automaticamente em prompts de LLM — garante consistencia de voz sem redefinir manualmente.
+### Concept
+Extract brand identity from `brand_config.yaml` and automatically inject into LLM prompts — ensures voice consistency without manual redefinition. ROI: eliminates "make it sound more like us" revision cycles. One system prompt block, consistent across every AI-generated output.
 
-### Template de Injeccao (Mustache)
+### Injection Template (Mustache)
 ```
 {{#brand}}
 Voce e um assistente de {{name}}.
@@ -290,7 +290,7 @@ ALWAYS respond in the tone defined above.
 {{/brand}}
 ```
 
-### Pipeline de Build
+### Build Pipeline
 ```bash
 # 1. Ler brand_config.yaml
 # 2. Renderizar templates Mustache com variaveis da marca
@@ -306,8 +306,8 @@ python scripts/inject_brand.py \
 
 ## 7. Multi-Platform Propagation
 
-### Mapa de Uso por Plataforma
-| Plataforma | Formato de Token | Mecanismo |
+### Platform Usage Map
+| Platform | Token Format | Mechanism |
 |------------|-----------------|-----------|
 | **Web** | CSS Custom Properties | `var(--color-brand-primary)` |
 | **React Native** | JS/TS object | `StyleSheet.create({ bg: tokens.colorBrandPrimary })` |
@@ -317,8 +317,8 @@ python scripts/inject_brand.py \
 | **Figma** | Tokens Plugin / Variables | Sincronizado via Tokens Studio |
 | **Docs** | Markdown/MDX | Tokens renderizados como swatches |
 
-### Email (caso especial)
-Email clients nao suportam CSS vars. Usar Style Dictionary com formatter customizado:
+### Email (special case — highest conversion-impact surface)
+Email clients do not support CSS variables. Use Style Dictionary with a custom formatter:
 ```json
 {
   "platforms": {
@@ -337,7 +337,7 @@ Email clients nao suportam CSS vars. Usar Style Dictionary com formatter customi
 
 ## 8. Theming: Light / Dark / Custom
 
-### Como Funcionar com 1 brand_config.yaml
+### How to Support Multiple Themes from 1 brand_config.yaml
 ```yaml
 themes:
   light:
@@ -351,7 +351,7 @@ themes:
     color-text-primary: "#FFFFFF"
 ```
 
-**Output CSS com suporte a temas:**
+**CSS output with theme support:**
 ```css
 :root { --color-background-primary: #FAF8F5; }
 [data-theme="dark"] { --color-background-primary: #1A1A1A; }
@@ -362,7 +362,7 @@ themes:
 
 ## 9. Brand Consistency Automation (Linting)
 
-### Stylelint Rule para Tokens
+### Stylelint Rules for Tokens
 ```json
 {
   "rules": {
@@ -375,9 +375,9 @@ themes:
 }
 ```
 
-**O que isso garante**: nenhum desenvolvedor hardcoda `color: #E87C3E` — obrigado a usar `var(--color-brand-primary)`.
+**What this enforces**: no developer hardcodes `color: #E87C3E` — forced to use `var(--color-brand-primary)`. Brand consistency is automated, not policed. Cost of drift: zero.
 
-### ESLint Plugin para Design Tokens
+### ESLint Plugin for Design Tokens
 ```js
 // Bloqueia valores magicos de cor em componentes React
 "no-restricted-syntax": ["error", {
@@ -390,7 +390,7 @@ themes:
 
 ## 10. Mustache Variable Pattern (Build-Time Brand Injection)
 
-### Estrutura de Templates
+### Template Structure
 ```
 brand_config.yaml          (fonte de verdade)
       │
@@ -404,7 +404,7 @@ brand_config.yaml          (fonte de verdade)
           └── build_brand.py         (renderiza todos os templates)
 ```
 
-### Exemplo de Template
+### Template Example
 ```mustache
 # Bem-vindo a {{brand.name}}
 
@@ -415,7 +415,7 @@ Nossos valores: {{#brand.values}}{{.}}, {{/brand.values}}
 Cor principal: {{brand.colors.primary}}
 ```
 
-### Script de Build
+### Build Script
 ```python
 import yaml, chevron, glob, os
 
@@ -433,21 +433,21 @@ for tmpl in glob.glob("templates/**/*.mustache"):
 
 ---
 
-## 11. Atomic Design (Contexto de Aplicacao)
+## 11. Atomic Design (Application Context)
 
-Brad Frost define 5 niveis de componentes — tokens permeiam todos os niveis:
+Brad Frost defines 5 component levels — tokens permeate all levels:
 
-| Nivel | Descricao | Usa Tokens? |
-|-------|-----------|-------------|
-| **Atoms** | Elementos basicos (botao, input, icone) | Diretamente (layer 3: component) |
-| **Molecules** | Combinacao de atoms (form field = label + input + error) | Via atoms |
-| **Organisms** | Secoes complexas (header, product card grid) | Via molecules |
-| **Templates** | Layout sem conteudo real | Estrutural |
-| **Pages** | Templates com conteudo real | Conteudo |
+| Level | Description | Uses Tokens? |
+|-------|-------------|-------------|
+| **Atoms** | Basic elements (button, input, icon) | Directly (layer 3: component) |
+| **Molecules** | Atom combinations (form field = label + input + error) | Via atoms |
+| **Organisms** | Complex sections (header, product card grid) | Via molecules |
+| **Templates** | Layout without real content | Structural |
+| **Pages** | Templates with real content | Content |
 
 ---
 
-## Referencias
+## References
 - [Design Tokens W3C Spec v2025.10](https://www.designtokens.org/tr/2025.10/format/)
 - [DTCG Community Group](https://www.w3.org/community/design-tokens/)
 - [Style Dictionary — GitHub](https://github.com/style-dictionary/style-dictionary)

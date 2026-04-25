@@ -56,24 +56,26 @@ Priority: 10 (highest — brand blocks all other branded output)
 
 ## Trigger Phrases
 
-### Brand Triggers
-- "criar brand book"
-- "descobrir identidade da marca"
-- "definir voz da marca"
-- "preencher brand_config"
-- "auditar consistência da marca"
-- "propagar marca para nucleos"
-- "selecionar arquétipo"
-- "criar paleta de cores"
+### Brand Triggers (EN canonical + PT-BR community aliases)
+- "create brand book" / "criar brand book"
+- "discover brand identity" / "descobrir identidade da marca"
+- "define brand voice" / "definir voz da marca"
+- "fill brand_config" / "preencher brand_config"
+- "audit brand consistency" / "auditar marca"
+- "propagate brand to nuclei" / "propagar marca"
+- "select archetype" / "selecionar arquetipo"
+- "create color palette" / "criar paleta de cores"
 
-### Monetization Triggers
-- "precificar produto"
-- "montar funil de vendas"
-- "estruturar curso online"
-- "sequência de upsell"
-- "modelo de receita"
-- "otimizar checkout"
-- "criar página de preços"
+### Monetization Triggers (EN canonical + PT-BR community aliases)
+- "price a product" / "precificar produto"
+- "build sales funnel" / "montar funil de vendas"
+- "structure online course" / "estruturar curso online"
+- "design upsell sequence" / "sequencia de upsell"
+- "revenue model" / "modelo de receita"
+- "optimize checkout" / "otimizar checkout"
+- "create pricing page" / "criar pagina de precos"
+- "calculate LTV" / "calcular LTV"
+- "design tier structure" / "montar tiers"
 
 ## Model Selection
 

@@ -11,16 +11,17 @@ author: n06_commercial
 domain: commercial-monetization
 quality: 9.2
 tags: [commercial, pricing, funnels, courses, monetization, N06, revenue]
-tldr: Distilled knowledge for N06 — pricing frameworks, course monetization models, funnel stages, conversion benchmarks, and Brazilian infoprodutos market specifics.
-when_to_use: When designing pricing strategy, structuring an online course, building a sales funnel, or optimizing conversion for digital products.
-keywords: [pricing, funnel, curso, monetização, conversão, upsell, LTV, MRR, transformação, lançamento, hotmart, kiwify, infoproduto]
+tldr: "N06 commercial playbook: value-based pricing (price=transformation x certainty x speed), 3-tier anchor strategy (70-80% mid-tier conversion), TOFU/MOFU/BOFU funnel benchmarks (2-5% BOFU, 15-30% OTO), LTV calculation (AOV x frequency x lifespan), and upsell architecture (order bump + OTO1 + OTO2 + downsell chain)."
+when_to_use: "When pricing a new product (use value-based formula), launching a course (needs transformation arc + tier design), building a conversion funnel (TOFU/MOFU/BOFU with stage benchmarks), optimizing post-purchase revenue (upsell/downsell architecture), or projecting revenue (MRR/LTV scenario modeling). Trigger: any task involving revenue generation, pricing decisions, or funnel optimization."
+keywords: [pricing, funnel, course, conversion, upsell, LTV, MRR, transformation, launch, hotmart, kiwify, infoproduct, value-based-pricing, anchor-pricing, tiered-pricing]
 long_tails:
-  - "Como precificar um curso online no Brasil"
-  - "Estratégia de funil de vendas para infoprodutos"
-  - "Modelos de receita para cursos online: one-time vs. assinatura"
-  - "Como estruturar upsell sequence para maximizar LTV"
-  - "Qual plataforma usar para vender curso: Hotmart vs Kiwify vs Kajabi"
-  - "Como calcular AOV e LTV para produto digital"
+  - "How to price an online course using value-based pricing"
+  - "Sales funnel strategy for digital information products"
+  - "Revenue models for online courses: one-time vs subscription vs cohort"
+  - "How to structure upsell sequences to maximize customer LTV"
+  - "Platform comparison for selling courses: Hotmart vs Kiwify vs Kajabi"
+  - "How to calculate AOV and LTV for digital products"
+  - "Anchor pricing strategy for 3-tier SaaS pricing pages"
 axioms:
   - "ALWAYS price to the transformation, never to the production cost."
   - "NEVER launch without a defined upsell path — the first sale is the smallest sale."

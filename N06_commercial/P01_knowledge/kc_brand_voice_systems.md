@@ -3,7 +3,7 @@ id: p01_kc_brand_voice_systems
 kind: knowledge_card
 8f: F3_inject
 pillar: P01
-title: "Brand Voice Systems — Frameworks Universais para Voz e Tom de Marca"
+title: "Brand Voice Systems — Universal Frameworks for Brand Voice and Tone"
 version: 1.0.0
 created: 2026-04-01
 author: shaka_research
@@ -31,53 +31,53 @@ related:
   - brand_voice_templates
 ---
 
-# Brand Voice Systems — Frameworks Universais
+# Brand Voice Systems — Universal Frameworks
 
-## 1. Distincao Fundamental: Voice vs Tone
+## 1. Fundamental Distinction: Voice vs Tone
 
 | | Voice | Tone |
 |--|-------|------|
-| **O que e** | Personalidade da marca | Expressao contextual da personalidade |
-| **Consistencia** | Constante — nao muda | Varia por contexto, canal e estado emocional do usuario |
-| **Analogia** | Como voce fala com qualquer pessoa | Como voce ajusta dependendo de quem, quando e onde |
-| **Exemplo** | Marca e "encorajadora e direta" (sempre) | Tom mais formal em termos legais; mais descontraido em social media |
+| **What it is** | Brand personality | Contextual expression of that personality |
+| **Consistency** | Constant — never changes | Varies by context, channel, and user emotional state |
+| **Analogy** | How you speak to anyone | How you adjust depending on who, when, and where |
+| **Example** | Brand is "encouraging and direct" (always) | More formal in legal terms; more casual on social media |
 
 > "You have the same voice all the time, but your tone changes. You might use one tone when out to dinner with your closest friends, and a different tone in a meeting with your boss." — Mailchimp Style Guide
 
-**Regra pratica**: Se um atributo de voz muda dependendo do canal, e tom, nao voz.
+**Practical rule**: If a voice attribute changes depending on channel, it is tone, not voice.
 
 ---
 
-## 2. NNGroup 4 Dimensoes de Tom de Voz
+## 2. NNGroup 4 Tone-of-Voice Dimensions
 
-Modelo de Kate Moran (NNg, 2016, atualizado 2023). Cada dimensao e um espectro — nao binario.
+Kate Moran model (NNg, 2016, updated 2023). Each dimension is a spectrum — not binary.
 
-### As 4 Dimensoes
+### The 4 Dimensions
 
-| # | Dimensao | Polo A | Polo B |
+| # | Dimension | Pole A | Pole B |
 |---|---------|--------|--------|
-| 1 | Formalidade | Formal | Casual |
-| 2 | Seriedade | Serio | Divertido / Humoristico |
-| 3 | Respeito | Respeitoso | Irreverente |
-| 4 | Entusiasmo | Factual / Matter-of-fact | Entusiastico |
+| 1 | Formality | Formal | Casual |
+| 2 | Seriousness | Serious | Playful / Humorous |
+| 3 | Respect | Respectful | Irreverent |
+| 4 | Enthusiasm | Factual / Matter-of-fact | Enthusiastic |
 
-**Escala de medicao**: cada dimensao usa escala Likert de 3 a 5 pontos para teste com usuarios.
+**Measurement scale**: each dimension uses a 3-to-5-point Likert scale for user testing.
 
-### Perfil de Tom (como posicionar a marca)
+### Tone Profile (how to position the brand)
 
-O perfil da marca e sua posicao nas 4 dimensoes simultaneamente — expressado como ponto em espaco quadridimensional.
+The brand profile is its position across all 4 dimensions simultaneously — expressed as a point in 4D space.
 
 ```
-EXEMPLO: Marca fintech moderna
-  Formalidade:   [===o=] Casual (4/5)
-  Seriedade:     [==o==] Neutro (3/5)
-  Respeito:      [o====] Respeitoso (1/5)
-  Entusiasmo:    [====o] Entusiastico (5/5)
+EXAMPLE: Modern fintech brand
+  Formality:     [===o=] Casual (4/5)
+  Seriousness:   [==o==] Neutral (3/5)
+  Respect:       [o====] Respectful (1/5)
+  Enthusiasm:    [====o] Enthusiastic (5/5)
 ```
 
-### Como o Tom Muda por Situacao
+### How Tone Shifts by Situation
 
-**Um erro, quatro tons** (NNg canonical example):
+**One error, four tones** (NNg canonical example):
 
 | Perfil | Copy |
 |--------|------|
@@ -86,243 +86,243 @@ EXEMPLO: Marca fintech moderna
 | + Entusiastico | *"Oops! We're sorry, but we're experiencing a problem on our end."* |
 | + Divertido + irreverente | *"What did you do!? You broke it! (Just kidding. We're experiencing a problem on our end.)"* |
 
-### Insight Critico de Pesquisa (NNg)
+### Critical Research Insight (NNg)
 
-**Trustworthiness explica 52% do willingness-to-recommend. Friendliness adiciona apenas 8% em cima disso.**
+**Trustworthiness explains 52% of willingness-to-recommend. Friendliness adds only 8% on top.**
 
-Implicacoes:
-- Tom playful em industrias serias (seguros) **aumentou** friendliness mas **diminuiu** trustworthiness
-- Linguagem conversacional em industrias "secas" (banking) melhorou **ambos** friendliness E trustworthiness
-- Conclusao: ajuste o tom ao contexto da industria, nao apenas a preferencia da marca
+Implications:
+- Playful tone in serious industries (insurance) **increased** friendliness but **decreased** trustworthiness
+- Conversational language in "dry" industries (banking) improved **both** friendliness AND trustworthiness
+- Conclusion: calibrate tone to industry context, not just brand preference
 
 ---
 
-## 3. Sistema de 5 Dimensoes Estendido (Brunasena 5D)
+## 3. Extended 5-Dimension System (5D)
 
-Para marcas que precisam de granularidade adicional alem do modelo NNg:
+For brands needing additional granularity beyond the NNg model:
 
-| # | Dimensao | Escala 1-5 | Descricao |
+| # | Dimension | Scale 1-5 | Description |
 |---|---------|-----------|-----------|
-| 1 | Formalidade | 1 (muito formal) — 5 (muito casual) | Nivel de linguagem e protocolos |
-| 2 | Seriedade | 1 (serio/grave) — 5 (humoristico) | Presenca de leveza e humor |
-| 3 | Proximidade | 1 (distante/institucional) — 5 (intimo/quente) | Calor e relacionamento |
-| 4 | Autoridade | 1 (humilde/aprendiz) — 5 (especialista/lider) | Nivel de expertise projetado |
-| 5 | Intensidade | 1 (factual/neutro) — 5 (muito entusiastico) | Energia emocional |
+| 1 | Formality | 1 (very formal) — 5 (very casual) | Language register and protocol level |
+| 2 | Seriousness | 1 (grave/serious) — 5 (humorous) | Presence of levity and humor |
+| 3 | Warmth | 1 (distant/institutional) — 5 (intimate/warm) | Warmth and relationship closeness |
+| 4 | Authority | 1 (humble/learner) — 5 (expert/leader) | Projected expertise level |
+| 5 | Intensity | 1 (factual/neutral) — 5 (very enthusiastic) | Emotional energy |
 
-**Template de perfil**:
+**Profile template**:
 ```yaml
 voice_profile:
-  formalidade: 4      # casual, nao coloquial
-  seriedade: 3        # leveza moderada, humor contextual
-  proximidade: 4      # quente, acessivel
-  autoridade: 4       # especialista sem arrogancia
-  intensidade: 3      # energetico mas nao excessivo
+  formality: 4      # casual, not colloquial
+  seriousness: 3    # moderate levity, contextual humor
+  warmth: 4         # warm, approachable
+  authority: 4      # expert without arrogance
+  intensity: 3      # energetic but not excessive
 ```
 
 ---
 
-## 4. Framework de Atributos de Voz: "We are X, not Y"
+## 4. Voice Attribute Framework: "We are X, not Y"
 
-Pattern universal para definir voz com precisao. Cada atributo precisa de seu anti-atributo.
+Universal pattern for defining voice with precision. Each attribute needs its anti-attribute.
 
-### Estrutura
+### Structure
 
 ```
-Atributo: [PALAVRA POSITIVA]
-Nao: [DISTORCAO NEGATIVA DO ATRIBUTO]
-O que isso significa: [DESCRICAO 1-2 frases]
-Exemplo: [FRASE QUE DEMONSTRA]
+Attribute: [POSITIVE WORD]
+Not: [NEGATIVE DISTORTION OF ATTRIBUTE]
+What it means: [1-2 SENTENCE DESCRIPTION]
+Example: [DEMONSTRATING PHRASE]
 ```
 
-### Exemplo Completo (marca de tecnologia B2B)
+### Complete Example (B2B technology brand)
 
-| Somos | Nao somos | Significado |
+| We are | We are not | Meaning |
 |-------|-----------|-------------|
-| **Claros** | Simples demais | Eliminamos jargao mas nao subestimamos a inteligencia do cliente |
-| **Confiaveis** | Rigidos | Prometemos apenas o que entregamos, com dados que suportam cada afirmacao |
-| **Humanos** | Informais demais | Escrevemos como pessoas, nao como corporacao — mas mantemos profissionalismo |
-| **Diretos** | Bruscos | Vamos ao ponto sem rodeios, mas sempre com contexto suficiente |
-| **Entusiasticos** | Exagerados | Genuinamente empolgados, mas sem hiperboles ou superlativos vazios |
+| **Clear** | Oversimplified | We eliminate jargon but don't underestimate the customer's intelligence |
+| **Trustworthy** | Rigid | We promise only what we deliver, with data supporting every claim |
+| **Human** | Too informal | We write as people, not as a corporation — but maintain professionalism |
+| **Direct** | Blunt | We get to the point without hedging, but always with sufficient context |
+| **Enthusiastic** | Over-the-top | Genuinely excited, but without hyperbole or empty superlatives |
 
-### Anti-Patterns Comuns (o que evitar definir como atributo)
+### Common Anti-Patterns (what to avoid defining as attributes)
 
-| Nao use | Por que | Use em vez |
+| Don't use | Why | Use instead |
 |---------|---------|------------|
-| "Inovador" | Toda empresa diz isso | "Direto ao experimentar" |
-| "Apaixonado" | Cliche sem substancia | "Empenhado em [resultado especifico]" |
-| "Autentico" | Vago e autodeclarado | "Transparente sobre limitacoes" |
-| "De classe mundial" | Inutil sem evidencia | "Testado por X clientes em Y paises" |
+| "Innovative" | Every company says this | "Hands-on with experimentation" |
+| "Passionate" | Cliche without substance | "Committed to [specific outcome]" |
+| "Authentic" | Vague and self-declared | "Transparent about limitations" |
+| "World-class" | Meaningless without evidence | "Tested by X clients in Y countries" |
 
 ---
 
-## 5. Matriz de Tom por Canal
+## 5. Tone-by-Channel Matrix
 
-Como a VOZ (consistente) se expressa com TONS diferentes por canal:
+How consistent VOICE expresses itself with different TONES per channel:
 
-| Canal | Tom | Formalidade | Humor | Comprimento | Prioridade |
+| Channel | Tone | Formality | Humor | Length | Priority |
 |-------|-----|-------------|-------|-------------|------------|
-| **Twitter/X** | Agudo, wit, rapido | 4/5 casual | Sim (se natural) | <280 chars | Relevancia + timing |
-| **LinkedIn** | Substancial, profissional | 2/5 formal | Raro | 150-300 palavras | Credibilidade |
-| **Instagram** | Aspiracional, visual-first | 4/5 casual | Sim | 1-3 frases | Emocao + estetica |
-| **TikTok** | Conversacional, autentico | 5/5 casual | Essencial | Hook em 3s | Entretenimento |
-| **Email marketing** | Pessoal, acionavel | 3/5 neutro | Contextual | 50-150 palavras | Abertura + clique |
-| **Suporte** | Empatico, resolutivo | 3/5 neutro | Nunca | Claro e breve | Resolucao rapida |
-| **Documentacao** | Preciso, neutro | 2/5 formal | Nao | Completo | Clareza tecnica |
-| **Ads** | Urgente, beneficio-first | 3/5 neutro | Contextual | Headline < 6 palavras | Conversao |
-| **Push notification** | Imperativo, direto | 4/5 casual | Nunca | < 30 chars | Abertura |
+| **Twitter/X** | Sharp, witty, fast | 4/5 casual | Yes (if natural) | <280 chars | Relevance + timing |
+| **LinkedIn** | Substantive, professional | 2/5 formal | Rare | 150-300 words | Credibility |
+| **Instagram** | Aspirational, visual-first | 4/5 casual | Yes | 1-3 sentences | Emotion + aesthetics |
+| **TikTok** | Conversational, authentic | 5/5 casual | Essential | Hook in 3s | Entertainment |
+| **Email marketing** | Personal, actionable | 3/5 neutral | Contextual | 50-150 words | Open rate + CTR |
+| **Support** | Empathetic, resolution-focused | 3/5 neutral | Never | Clear and brief | Fast resolution |
+| **Documentation** | Precise, neutral | 2/5 formal | No | Complete | Technical clarity |
+| **Ads** | Urgent, benefit-first | 3/5 neutral | Contextual | Headline < 6 words | Conversion |
+| **Push notification** | Imperative, direct | 4/5 casual | Never | < 30 chars | Open rate |
 
 ---
 
-## 6. Modelos de Voice de Empresas World-Class
+## 6. World-Class Voice Models
 
-### 6A. Mailchimp Voice (4 Tracos)
+### 6A. Mailchimp Voice (4 Traits)
 
-| Traco | Definicao | Anti-padrao |
+| Trait | Definition | Anti-pattern |
 |-------|-----------|-------------|
-| **Plainspoken** | Clareza acima de tudo; sem metaforas floreadas | Jargao de marketing, plays emocionais baratos |
-| **Genuine** | Relaciona-se com desafios reais; quente e acessivel | Corporativo, frio, distante |
-| **Translators** | Desmistifica B2B-speak; educa genuinamente | Simplificacao excessiva, condescendencia |
-| **Dry humor** | Sutileza, estoico, um toque eccentrico; winking nao shouting | Humor forcado, piadas exclusivas, condescendencia |
+| **Plainspoken** | Clarity above all; no flowery metaphors | Marketing jargon, cheap emotional plays |
+| **Genuine** | Relates to real challenges; warm and approachable | Corporate, cold, distant |
+| **Translators** | Demystifies B2B-speak; genuinely educates | Oversimplification, condescension |
+| **Dry humor** | Subtle, stoic, a touch eccentric; winking not shouting | Forced humor, insider jokes, condescension |
 
-**Regra de ouro Mailchimp**: "Always more important to be clear than entertaining."
+**Mailchimp golden rule**: "Always more important to be clear than entertaining."
 
-### 6B. Shopify Polaris Voice (4 Principios)
+### 6B. Shopify Polaris Voice (4 Principles)
 
-| Principio | Regra Central | Exemplo |
+| Principle | Core Rule | Example |
 |-----------|--------------|---------|
-| **Content + design** | Palavras sao parte do design; pese cada palavra | "+" nao "+ Add" |
-| **Keep it lean** | Caminho mais curto e claro (abordagem Jenga) | Remova pontuacao se nao for necessaria |
-| **Write like merchants talk** | Linguagem simples, contracoes, nivel 7o ano | "don't" nao "do not" |
-| **Inspire action** | Comece com verbos; direcao unica por instrucao | "add apps" nao "you can add apps" |
+| **Content + design** | Words are part of the design; weigh every word | "+" not "+ Add" |
+| **Keep it lean** | Shortest clear path (Jenga approach) | Remove punctuation if unnecessary |
+| **Write like merchants talk** | Simple language, contractions, 7th-grade level | "don't" not "do not" |
+| **Inspire action** | Start with verbs; one direction per instruction | "add apps" not "you can add apps" |
 
-**Teste de qualidade Shopify**: *"Read it out loud. Does it sound like something a human would say? Ship it."*
+**Shopify quality test**: *"Read it out loud. Does it sound like something a human would say? Ship it."*
 
-### 6C. Adobe Spectrum Voice (3 Caracteristicas + Espectro de 5 Tons)
+### 6C. Adobe Spectrum Voice (3 Characteristics + 5-Tone Spectrum)
 
 **Voice Characteristics**:
 
-| Caracteristica | Definicao | Regra de Governanca |
+| Characteristic | Definition | Governance Rule |
 |----------------|-----------|---------------------|
-| **Rational** | Claro e compreensivel | Decisoes de gramatica baseadas em pesquisa e testadas |
-| **Human** | Amigavel, honesto, responsavel | Varie estilo e estrutura de sentencas para legibilidade |
-| **Focused** | Conciso e simples | Descreva apenas o necessario, sem decoracao desnecessaria |
+| **Rational** | Clear and understandable | Grammar decisions based on research and testing |
+| **Human** | Friendly, honest, responsible | Vary sentence style and structure for readability |
+| **Focused** | Concise and simple | Describe only what is necessary, no unnecessary decoration |
 
-**Tone Spectrum (5 posicoes)**:
+**Tone Spectrum (5 positions)**:
 
 ```
-MOTIVACIONAL ←——————————————————→ SUPORTIVO
-  Positivo e        Polido e      Neutro e      Profissional    Preocupado e
-  encorajador    respeitoso      direto         e confiavel      empatico
+MOTIVATIONAL <-------------------------> SUPPORTIVE
+  Positive and     Polished and   Neutral and    Professional    Concerned and
+  encouraging      respectful     direct         and reliable    empathetic
   
 [Motivational] [Helpful]     [Instructive]  [Reassuring]    [Supportive]
 ```
 
-Tom pode cair entre posicoes (nao binario). Posicao correta depende das necessidades contextuais e estado emocional do usuario.
+Tone can fall between positions (not binary). Correct position depends on contextual needs and user emotional state.
 
 ---
 
-## 7. Padrao Do/Don't para Voice Guidelines
+## 7. Do/Don't Pattern for Voice Guidelines
 
-Estrutura universal para documentar guidelines de voz de forma acionavel:
+Universal structure for documenting voice guidelines in actionable form:
 
 ### Template
 
 ```markdown
-### [ATRIBUTO DE VOZ]
+### [VOICE ATTRIBUTE]
 
 **DO:**
-- [Comportamento especifico com exemplo]
-- [Comportamento especifico com exemplo]
-- [Comportamento especifico com exemplo]
+- [Specific behavior with example]
+- [Specific behavior with example]
+- [Specific behavior with example]
 
 **DON'T:**
-- [Comportamento especifico com exemplo]
-- [Comportamento especifico com exemplo]
-- [Comportamento especifico com exemplo]
+- [Specific behavior with example]
+- [Specific behavior with example]
+- [Specific behavior with example]
 
-**EXEMPLO (mesma mensagem, dois tons):**
-| Errado | Certo |
+**EXAMPLE (same message, two tones):**
+| Wrong | Right |
 |--------|-------|
-| [versao fora da voz] | [versao na voz] |
+| [off-voice version] | [on-voice version] |
 ```
 
-### Exemplo: Marca de Educacao Online
+### Example: Online Education Brand
 
-**Encorajador (nao condescendente)**:
+**Encouraging (not condescending)**:
 
 **DO:**
-- "Voce ja fez a parte mais dificil — continuar quando fica desafiador."
-- "Cada erro e dados para a proxima tentativa."
-- "Nao e sobre o tempo que voce leva, e sobre o que voce constroi."
+- "You've already done the hardest part — keep going when it gets challenging."
+- "Every mistake is data for the next attempt."
+- "It's not about how long it takes, it's about what you build."
 
 **DON'T:**
-- "Simples! Apenas siga estes passos faceis..." (minimiza a dificuldade real)
-- "Qualquer um pode fazer isso." (pressao desnecessaria)
-- "Voce nao e o primeiro a ter dificuldade aqui." (patronizante)
+- "Simple! Just follow these easy steps..." (minimizes real difficulty)
+- "Anyone can do this." (unnecessary pressure)
+- "You're not the first to struggle here." (patronizing)
 
-| Errado | Certo |
+| Wrong | Right |
 |--------|-------|
-| "Erro! Por favor tente novamente." | "Isso nao funcionou. Vamos tentar de outra forma?" |
-| "Voce PODE fazer isso! 🎉🎉🎉" | "Voce esta chegando la." |
+| "Error! Please try again." | "That didn't work. Let's try another way?" |
+| "You CAN do this! [emoji]" | "You're getting there." |
 
 ---
 
-## 8. Padrao de 10 Frases: Mesma Mensagem, Tons Diferentes
+## 8. 10-Phrase Pattern: Same Message, Different Tones
 
-Tecnica para calibrar e documentar voz. Escrever a mesma mensagem em 5-10 tons para demonstrar a diferenca:
+Technique for calibrating and documenting voice. Write the same message in 5-10 tones to demonstrate the difference:
 
-**Mensagem base**: "Houve um problema com seu pagamento."
+**Base message**: "There was a problem with your payment."
 
-| Tom | Versao |
+| Tone | Version |
 |-----|--------|
-| Formal + serio | "Sua transacao nao foi processada. Entre em contato com sua instituicao financeira." |
-| Neutro direto | "Houve um problema com seu pagamento. Verifique os dados e tente novamente." |
-| Casual empatico | "Eita, seu pagamento nao passou. Acontece! Confira os dados do cartao e tente de novo." |
-| Entusiastico | "Quase la! So precisamos resolver um detalhe no pagamento — dois segundos." |
-| Suporte empatico | "Percebemos que o pagamento nao foi concluido. Podemos ajudar — o que preferir?" |
-| Humoristico (contextual) | "Seu banco discordou desta compra. (Acontece com os melhores de nos.) Vamos tentar de novo?" |
+| Formal + serious | "Your transaction was not processed. Please contact your financial institution." |
+| Neutral direct | "There was a problem with your payment. Check your details and try again." |
+| Casual empathetic | "Oops, your payment didn't go through. It happens! Check your card details and try again." |
+| Enthusiastic | "Almost there! We just need to sort out a small payment detail — two seconds." |
+| Support empathetic | "We noticed the payment wasn't completed. We can help — whatever works best for you." |
+| Humorous (contextual) | "Your bank disagreed with this purchase. (Happens to the best of us.) Let's try again?" |
 
-**Uso**: Include 3-5 destas frases no brand guidelines para calibrar writers e LLMs.
+**Usage**: Include 3-5 of these phrases in brand guidelines to calibrate writers and LLMs.
 
 ---
 
-## 9. Voice Governance: Como Manter Consistencia
+## 9. Voice Governance: Maintaining Consistency
 
-### 9A. Estrutura de Responsabilidade
-
-```
-NIVEL 1 — Brand Owner (Head of Content / CMO)
-  Define: principios de voz, score minimo, processo de aprovacao
-
-NIVEL 2 — Voice Champions (representantes por equipe)
-  Aplica: guidelines no dia a dia, revisa copy antes de publicar
-  Treinamento: onboarding de 1h + checklist semanal
-
-NIVEL 3 — All Writers / Contributors
-  Executa: usa guidelines e templates
-  Acesso: brand book + exemplos por canal
-```
-
-### 9B. Onboarding de Voice
+### 9A. Responsibility Structure
 
 ```
-Semana 1: Ler brand voice section (30 min) + 10 exemplos por canal
-Semana 2: Escrever 5 pecas de copy, passar por voice champion
-Semana 3: Calibration session (grupo) — compara versoes e discute
-Ongoing: Quarterly voice audit (amostra de 20 pecas de copy publicadas)
+LEVEL 1 — Brand Owner (Head of Content / CMO)
+  Defines: voice principles, minimum score, approval process
+
+LEVEL 2 — Voice Champions (per-team representatives)
+  Applies: guidelines day-to-day, reviews copy before publishing
+  Training: 1h onboarding + weekly checklist
+
+LEVEL 3 — All Writers / Contributors
+  Executes: uses guidelines and templates
+  Access: brand book + per-channel examples
 ```
 
-### 9C. Voice para LLMs / AI Content
+### 9B. Voice Onboarding
 
-Para garantir que AI-generated content siga a voz da marca:
+```
+Week 1: Read brand voice section (30 min) + 10 examples per channel
+Week 2: Write 5 copy pieces, reviewed by voice champion
+Week 3: Calibration session (group) — compare versions and discuss
+Ongoing: Quarterly voice audit (sample of 20 published copy pieces)
+```
+
+### 9C. Voice for LLMs / AI Content
+
+To ensure AI-generated content follows brand voice:
 
 ```markdown
 ## SYSTEM PROMPT TEMPLATE (brand voice block)
 
-Voce escreve em nome de [MARCA]. Nossa voz e:
-- [ATRIBUTO 1]: [descricao + exemplo]
-- [ATRIBUTO 2]: [descricao + exemplo]
-- [ATRIBUTO 3]: [descricao + exemplo]
+You write on behalf of [BRAND]. Our voice is:
+- [ATTRIBUTE 1]: [description + example]
+- [ATTRIBUTE 2]: [description + example]
+- [ATTRIBUTE 3]: [description + example]
 
 ALWAYS:
 - [specific rule]
@@ -332,158 +332,158 @@ NEVER:
 - [specific anti-pattern]
 - [specific anti-pattern]
 
-Tom por canal:
-- Email: [descricao]
-- Social: [descricao]
-- Suporte: [descricao]
+Tone per channel:
+- Email: [description]
+- Social: [description]
+- Support: [description]
 
-Exemplo de copy aprovado:
-"[frase real na voz da marca]"
+Approved copy example:
+"[real phrase in brand voice]"
 ```
 
 ---
 
 ## 10. Voice Consistency Scoring
 
-### 10A. Metodo de Score Manual (auditoria periodica)
+### 10A. Manual Scoring Method (periodic audit)
 
-Avaliar amostra de 20 pecas de copy publicadas contra checklist:
+Evaluate a sample of 20 published copy pieces against checklist:
 
 ```
-CHECKLIST POR PECA (0/1 por item):
+CHECKLIST PER PIECE (0/1 per item):
 
-[ ] Usa vocabulario aprovado (sem termos proibidos)
-[ ] Comprimento correto para o canal
-[ ] Tom correto para o canal
-[ ] Ativo, nao passivo (preferencia por voz ativa)
-[ ] Evita jargao (ou usa jargao correto do setor se apropriado)
-[ ] Atributo de voz #1 presente
-[ ] Atributo de voz #2 presente
-[ ] Atributo de voz #3 presente
-[ ] Nenhum anti-padrao identificado
-[ ] Passa teste "soa como humano" (leitura em voz alta)
+[ ] Uses approved vocabulary (no prohibited terms)
+[ ] Correct length for channel
+[ ] Correct tone for channel
+[ ] Active, not passive (active voice preferred)
+[ ] Avoids jargon (or uses correct industry jargon if appropriate)
+[ ] Voice attribute #1 present
+[ ] Voice attribute #2 present
+[ ] Voice attribute #3 present
+[ ] No anti-patterns identified
+[ ] Passes "sounds like a human" test (read aloud)
 ```
 
-`Voice Consistency Score = (total de checkmarks) / (20 pecas * 10 itens) = % de 0-100`
+`Voice Consistency Score = (total checkmarks) / (20 pieces * 10 items) = 0-100%`
 
-Benchmark: >85% = excelente | 70-85% = bom | <70% = requer treinamento
+Benchmark: >85% = excellent | 70-85% = good | <70% = requires training
 
-### 10B. Metodo Automatizado (para times com volume alto)
+### 10B. Automated Method (for high-volume teams)
 
 ```python
-# Schema para avaliacao LLM-assistida
+# Schema for LLM-assisted evaluation
 {
   "piece_id": "...",
   "channel": "social|email|support|docs|ads",
-  "voice_score": 0-10,  # avaliacao holistica
-  "attributes_present": ["lista dos atributos detectados"],
-  "anti_patterns_found": ["lista de problemas"],
-  "tone_match": true/false,  # tom correto para canal
-  "recommendations": ["ajustes sugeridos"]
+  "voice_score": 0-10,  # holistic evaluation
+  "attributes_present": ["list of detected attributes"],
+  "anti_patterns_found": ["list of issues"],
+  "tone_match": true/false,  # correct tone for channel
+  "recommendations": ["suggested adjustments"]
 }
 ```
 
-**Prompt para LLM evaluator**:
+**Prompt for LLM evaluator**:
 ```
-Avalie este copy em relacao a voz da marca [MARCA]:
+Evaluate this copy against brand voice for [BRAND]:
 [COPY]
 
-Voz da marca: [BRAND VOICE BLOCK]
-Canal: [CANAL]
+Brand voice: [BRAND VOICE BLOCK]
+Channel: [CHANNEL]
 
-Retorne JSON com: voice_score (0-10), attributes_present, anti_patterns_found, tone_match, recommendations.
+Return JSON with: voice_score (0-10), attributes_present, anti_patterns_found, tone_match, recommendations.
 ```
 
 ---
 
-## 11. Voice Development Process (Como Criar do Zero)
+## 11. Voice Development Process (Building from Scratch)
 
 ```
-FASE 1: DESCOBERTA (1-2 semanas)
-  a) Coletar exemplos de copy existente (30+ pecas de todos os canais)
-  b) Entrevistar 5-10 stakeholders: "Descreva a marca em 3 adjetivos"
-  c) Pesquisa com clientes: "Qual palavra descreve como nos comunicamos?"
-  d) Benchmark: analisar voz de 3-5 concorrentes diretos
+PHASE 1: DISCOVERY (1-2 weeks)
+  a) Collect existing copy examples (30+ pieces from all channels)
+  b) Interview 5-10 stakeholders: "Describe the brand in 3 adjectives"
+  c) Customer research: "What word describes how we communicate?"
+  d) Benchmark: analyze voice of 3-5 direct competitors
 
-FASE 2: DEFINICAO (1 semana)
-  a) Cluster os adjetivos coletados (afinidade map)
-  b) Selecionar 3-5 atributos distintos (remover genericos)
-  c) Para cada atributo: definir + anti-atributo + 3 exemplos
-  d) Posicionar nas 4 dimensoes NNg
+PHASE 2: DEFINITION (1 week)
+  a) Cluster collected adjectives (affinity map)
+  b) Select 3-5 distinct attributes (remove generic ones)
+  c) For each attribute: define + anti-attribute + 3 examples
+  d) Position on 4 NNg dimensions
 
-FASE 3: CALIBRACAO (1 semana)
-  a) Escrever 10 versoes da mesma mensagem (diferentes tons)
-  b) Workshop com equipe: qual versao soa "como nos"?
-  c) Ajustar atributos com base no feedback
-  d) Criar banco inicial de exemplos aprovados (20+ pecas)
+PHASE 3: CALIBRATION (1 week)
+  a) Write 10 versions of the same message (different tones)
+  b) Team workshop: which version sounds "like us"?
+  c) Adjust attributes based on feedback
+  d) Create initial bank of approved examples (20+ pieces)
 
-FASE 4: DOCUMENTACAO
-  a) Escrever voice section do brand book
-  b) Criar Do/Don't por atributo
-  c) Criar matriz de tom por canal
-  d) Gravar video de 5 min "nossa voz em pratica"
+PHASE 4: DOCUMENTATION
+  a) Write voice section of brand book
+  b) Create Do/Don't per attribute
+  c) Create tone-by-channel matrix
+  d) Record 5-min video "our voice in practice"
 
-FASE 5: ATIVACAO
-  a) Training com todos os writers (1h)
-  b) Adicionar voice block em sistema de prompts de AI
-  c) Criar voice champion por equipe
-  d) Agendar voice audit trimestral
+PHASE 5: ACTIVATION
+  a) Training with all writers (1h)
+  b) Add voice block to AI prompt system
+  c) Create voice champion per team
+  d) Schedule quarterly voice audit
 ```
 
 ---
 
-## 12. Vocabulario: Palavras Aprovadas e Proibidas
+## 12. Vocabulary: Approved and Prohibited Words
 
-### Template de Vocabulario de Marca
+### Brand Vocabulary Template
 
-**USAR:**
-| Categoria | Palavras/Frases Aprovadas |
+**USE:**
+| Category | Approved Words/Phrases |
 |-----------|--------------------------|
-| Acao | [verbos que refletem a personalidade] |
-| Beneficio | [descricoes de valor sem hiperbole] |
-| Suporte | [frases de empatia aprovadas] |
-| Tecnico | [jargao do setor, se aplicavel] |
+| Action | [verbs reflecting personality] |
+| Benefit | [value descriptions without hyperbole] |
+| Support | [approved empathy phrases] |
+| Technical | [industry jargon, if appropriate] |
 
-**EVITAR:**
-| Categoria | Palavras/Frases Proibidas | Por que |
+**AVOID:**
+| Category | Prohibited Words/Phrases | Why |
 |-----------|--------------------------|---------|
-| Corporativez | "synergy", "leverage", "holistic" | Vago e desumano |
-| Hiperbole | "incrivel", "revolucionario", "nunca visto" | Perde credibilidade |
-| Passividade | "foi implementado", "e possivel que" | Fraco e indireto |
-| Condescendencia | "simples", "apenas", "so precisa" | Minimiza dificuldade real |
-| Alarme | "AVISO:", "CRITICO:", "URGENTE:" em contextos normais | Gera ansiedade desnecessaria |
+| Corporate-speak | "synergy", "leverage", "holistic" | Vague and impersonal |
+| Hyperbole | "incredible", "revolutionary", "never seen before" | Destroys credibility |
+| Passivity | "was implemented", "it is possible that" | Weak and indirect |
+| Condescension | "simple", "just", "all you need to do" | Minimizes real difficulty |
+| False alarm | "WARNING:", "CRITICAL:", "URGENT:" in normal contexts | Creates unnecessary anxiety |
 
 ---
 
-## 13. Aplicacao para N06 Brand Architect
+## 13. Application for N06 Brand Architect
 
-**Para cada empresa que passa pelo N06**:
+**For each company passing through N06**:
 
-### Input necessario para gerar Voice System
+### Required Input to Generate Voice System
 ```yaml
-empresa: [nome]
-setor: [industria]
-publico: [descricao do ICP]
-arquetipo: [resultado do Brand Core — bloco 11 do modelo 32]
-tom_desejado:
-  formalidade: [1-5]
-  seriedade: [1-5]
-  proximidade: [1-5]
-  autoridade: [1-5]
-  intensidade: [1-5]
-concorrentes: [3 marcas para benchmark]
-exemplos_aprovados: [3-5 frases que "soam como a marca"]
+company: [name]
+industry: [sector]
+audience: [ICP description]
+archetype: [Brand Core result — block 11 of 32-block model]
+desired_tone:
+  formality: [1-5]
+  seriousness: [1-5]
+  warmth: [1-5]
+  authority: [1-5]
+  intensity: [1-5]
+competitors: [3 brands for benchmark]
+approved_examples: [3-5 phrases that "sound like the brand"]
 ```
 
-### Output do N06 (Voice Section do Brand Book)
+### N06 Output (Voice Section of Brand Book)
 ```
-1. Perfil de Voz (5 dimensoes com posicionamento)
-2. 3-5 Atributos com anti-atributos e exemplos
-3. Matriz de Tom por Canal (8 canais)
-4. Do/Don't por atributo (3 itens cada)
-5. Banco de 10 frases calibradas
-6. Vocabulario aprovado e proibido
-7. System prompt template para AI/LLMs
+1. Voice Profile (5 dimensions with positioning)
+2. 3-5 Attributes with anti-attributes and examples
+3. Tone-by-Channel Matrix (8 channels)
+4. Do/Don't per attribute (3 items each)
+5. Bank of 10 calibrated phrases
+6. Approved and prohibited vocabulary
+7. System prompt template for AI/LLMs
 8. Voice Consistency Checklist
 ```
 

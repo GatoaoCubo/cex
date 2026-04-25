@@ -20,7 +20,7 @@ linked_artifacts:
   primary: p12_wf_content_monetization
   related: [p04_fn_content_monetization, p12_dr_commercial, p01_kc_brand_monetization_models]
 scope: content-monetization
-keywords: [monetizar, monetize, billing, faturamento, checkout, pagamento, payment, PIX, boleto, créditos, credits, wallet, saldo, curso, course, assinatura, subscription, plano, plan, pricing, preço, precificar, invoice, cobrança, charge, receita, revenue, MercadoPago, Stripe, Hotmart, Digistore24, DS24, Kiwify, Monetizze, Eduzz, geração de curso, course generation, anúncio monetizado, ads checkout, email transacional, transactional email, ERP sync, BaseLinker, pack de créditos, credit pack, IPN, webhook, affiliate, afiliado, EU VAT, GDPR, Widerrufsrecht]
+keywords: [monetize, billing, checkout, payment, PIX, boleto, credits, wallet, balance, course, subscription, plan, pricing, invoice, charge, revenue, MercadoPago, Stripe, Hotmart, Digistore24, DS24, Kiwify, Monetizze, Eduzz, course-generation, ads-checkout, transactional-email, ERP-sync, BaseLinker, credit-pack, IPN, webhook, affiliate, EU-VAT, GDPR, Widerrufsrecht, credit-wallet, idempotency, payment-provider]
 agent_group: content_monetization_builder
 model: sonnet
 priority: 9

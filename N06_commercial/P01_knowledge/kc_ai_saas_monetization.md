@@ -6,6 +6,20 @@ title: "AI SaaS Monetization Models"
 version: 1.0.0
 quality: 9.0
 pillar: P01
+nucleus: n06
+domain: ai-saas-monetization
+created: 2026-04-07
+updated: 2026-04-25
+author: n06_commercial
+tags: [monetization, saas, pricing, per-token, seat-based, usage-based, freemium, enterprise, ai-pricing]
+tldr: "5 AI SaaS pricing models benchmarked: per-token ($0.002/tok, 89% adoption), seat-based ($12.50/user/mo, 61%), usage-based (72% adoption, highest complexity), freemium (5% conversion rate, strong LTV), enterprise ($150K/yr, 48% adoption). Usage-based dominates AI because cost correlates with value delivered."
+when_to_use: "When choosing a pricing model for an AI-powered product, designing tier structures for API access, evaluating freemium vs usage-based economics, or benchmarking against industry adoption rates."
+keywords: [ai-pricing, saas-monetization, per-token, seat-based, usage-based, freemium, enterprise-tiers, api-pricing, LTV, CAC, conversion-rate]
+axioms:
+  - "ALWAYS match pricing model to value delivery mechanism — per-token for API, seat for collaboration, usage for analytics."
+  - "NEVER default to flat-rate for AI products — variable cost structure demands variable pricing."
+  - "Freemium conversion below 3% signals product-market fit gap, not pricing gap."
+density_score: 0.90
 related:
   - n06_api_access_pricing
   - commercial_readiness_20260413
