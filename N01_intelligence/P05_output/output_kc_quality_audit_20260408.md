@@ -12,7 +12,7 @@ author: N01_intelligence
 domain: quality-audit
 quality: 8.9
 tags: [audit, quality, kc-library, density, gap-analysis]
-tldr: "298 KCs scanned. 4 origin issues FIXED. 3 low-density KCs found. 88 KCs need density scoring. 0 stale KCs. All 123 kinds have KCs (0 gap). 8 SPEC files missing tags."
+tldr: "298 KCs scanned. 4 origin issues FIXED. 3 low-density KCs found. 88 KCs need density scoring. 0 stale KCs. All 300 kinds have KCs (0 gap). 8 SPEC files missing tags."
 density_score: null
 related:
   - p10_out_sql_migration
@@ -71,11 +71,11 @@ Both `.md` source files and `.yaml` compiled files updated (8 edits total).
 
 | Registry | Count |
 |----------|-------|
-| kinds_meta.json | 123 kinds |
+| kinds_meta.json | 300 kinds |
 | P01_knowledge/library/kind/ | 123 KCs |
 | **Gap** | **0 (100% coverage)** |
 
-The handoff expected 25 missing KCs (based on doctor's "98/98" readout). The doctor's "98" refers to kind coverage within **domain KCs** (which reference `feeds_kinds`), not the total kind KC count. All 123 kinds have dedicated `kc_{kind}.md` files.
+The handoff expected 25 missing KCs (based on doctor's "98/98" readout). The doctor's "98" refers to kind coverage within **domain KCs** (which reference `feeds_kinds`), not the total kind KC count. All 300 kinds have dedicated `kc_{kind}.md` files.
 
 ## Part 4: Tag Issues
 

@@ -111,7 +111,7 @@ F8 COLLABORATE -> saved, compiled, committed
 | Pillars | 12 | Every kind belongs to a domain: knowledge, prompts, tools, schema, memory... |
 | Nuclei | 8 | 7 sin-driven departments + 1 orchestrator |
 
-**Say:** "293 kinds means 293 different ways to encode enterprise knowledge. Not documents -- typed, validated, searchable artifacts."
+**Say:** "300 kinds means 293 different ways to encode enterprise knowledge. Not documents -- typed, validated, searchable artifacts."
 
 **Demo:** Show kinds_meta.json. Filter by `pillar: P05`. 23 output types appear. Click one: `landing_page`. The builder loads. The 13 ISOs are visible. Each has a purpose. This is depth, not breadth.
 
@@ -156,7 +156,7 @@ The visitor sees their company name in the frontmatter. The brand voice they des
 reflected back as structured knowledge.
 
 **Path B -- Explore the system:**
-- `/mentor` -- vocabulary: 8F + 12 pillars + 293 kinds explained
+- `/mentor` -- vocabulary: 8F + 12 pillars + 300 kinds explained
 - `/status` -- system health dashboard
 - `python _tools/cex_crew.py list` -- discover composable crews
 

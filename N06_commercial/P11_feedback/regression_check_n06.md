@@ -107,7 +107,7 @@ expected_result: "Fewer lost deals due to feature gaps"
 actual_result: "Feature parity commoditizes the product. Race-to-feature-parity has no end. Customers make commodity purchases on price, not value."
 root_cause: "Feature parity erodes differentiation. If CEX has the same features as competitors, the only differentiator is price -- a war we lose to funded competitors."
 do_not: "Roadmap based on competitor feature matching. Do not respond to 'competitor has X' with 'add X to CEX.'"
-correct_approach: "Double down on unique CEX capabilities (8F pipeline, sin-lens nuclei, 257 kinds, typed knowledge). Win on what competitors cannot replicate, not on what they already have."
+correct_approach: "Double down on unique CEX capabilities (8F pipeline, sin-lens nuclei, 300 kinds, typed knowledge). Win on what competitors cannot replicate, not on what they already have."
 artifacts_affected: [sales_playbook_n06.md, discovery_questions_n06.md]
 ```
 

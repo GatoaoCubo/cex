@@ -73,7 +73,7 @@ Slide 1 -- Their Pain (2 min):
 
 Slide 2 -- CEX Positioning (3 min):
   "CEX is not a writing tool or a template library."
-  "It's a typed enterprise brain -- 257 kinds of commercial knowledge, 8 reasoning steps per artifact."
+  "It's a typed enterprise brain -- 300 kinds of commercial knowledge, 8 reasoning steps per artifact."
   "The 8F pipeline is what makes a 5-word input produce a professional output."
 
 Slide 3 -- ROI Proof (5 min):

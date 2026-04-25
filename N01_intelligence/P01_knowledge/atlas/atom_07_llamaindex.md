@@ -755,7 +755,7 @@ Cloud-hosted services from LlamaIndex Inc.
 
 | LlamaIndex Concept | CEX Equivalent | Notes |
 |---------------------|----------------|-------|
-| `FunctionTool` | `_tools/cex_*.py` (79 tools) | Callable capabilities |
+| `FunctionTool` | `_tools/cex_*.py` (148 tools) | Callable capabilities |
 | `QueryEngineTool` | `cex_query.py` (TF-IDF discovery) | Search over knowledge base |
 | `ToolSpec` | Builder ISOs (13 per kind) | Pre-defined tool collections |
 | `BaseTool` | Tool interface in `cex_sdk/` | Abstract capability |

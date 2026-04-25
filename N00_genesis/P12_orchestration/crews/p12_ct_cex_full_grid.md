@@ -53,7 +53,7 @@ it authors handoffs (F6 PRODUCE) that carry the full artifact specification to e
 | orchestrator | N07 | Orchestrating Sloth | dispatch + monitor + consolidate | dispatch.sh, signal_writer, cex_doctor | all workers |
 | researcher | N01 | Analytical Envy | produce knowledge_cards + competitive intel | cex_retriever, research_pipeline | N02, N04, N06 |
 | copywriter | N02 | Creative Lust | produce campaign copy + landing pages | prompt-template-builder, landing-page-builder | N05, N06 |
-| builder | N03 | Inventive Pride | construct all typed artifacts via 8F | all 295 builders, cex_compile | N04, N05 |
+| builder | N03 | Inventive Pride | construct all typed artifacts via 8F | all 301 builders, cex_compile | N04, N05 |
 | librarian | N04 | Knowledge Gluttony | index + retrieve + taxonomy + RAG | cex_index, cex_retriever, cex_query | all (indexes) |
 | operator | N05 | Gating Wrath | test + deploy + quality gate all outputs | cex_doctor, cex_system_test, cex_hooks | N07 (verdicts) |
 | monetizer | N06 | Strategic Greed | pricing + funnels + charters | content-monetization-builder, subscription-tier-builder | N02, N07 |

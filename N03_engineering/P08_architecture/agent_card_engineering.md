@@ -44,7 +44,7 @@ related:
 
 | Capability | Level |
 |------------|-------|
-| Single artifact build | Expert (99/99 kinds) |
+| Single artifact build | Expert (99/300 kinds) |
 | Multi-kind crew | Advanced (235 crews) |
 | Nucleus bootstrap | Advanced (7+ sequential) |
 | Kind registration | Expert (4-file atomic) |

@@ -1,7 +1,7 @@
 # Naming Convention -- CEX Artifacts & Builders
 
 > Canonical rules for all artifact files, builder ISOs, nucleus directories, and tool scripts.
-> Source of truth: this file + `.cex/kinds_meta.json` (123 kinds).
+> Source of truth: this file + `.cex/kinds_meta.json` (300 kinds).
 
 ---
 
@@ -44,7 +44,7 @@ Shared files live in `archetypes/builders/_shared/`.
 |------|--------|
 | Location | `.claude/agents/{kind}-builder.md` |
 | Case | `kebab-case` (matches builder directory) |
-| Count | 125 (123 kinds + 2 shared/meta) |
+| Count | 125 (300 kinds + 2 shared/meta) |
 | Examples | `agent-builder.md`, `knowledge-card-builder.md` |
 
 ---
@@ -183,4 +183,4 @@ tags: [tag1, tag2]
 
 ---
 
-*Naming Convention v2.0 -- Updated for CEX v4.0. 123 kinds, Claude Code native. 2026-04-08.*
+*Naming Convention v2.0 -- Updated for CEX v4.0. 300 kinds, Claude Code native. 2026-04-08.*

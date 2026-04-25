@@ -103,7 +103,7 @@ Prevents wasting LLM tokens on structurally deficient artifacts.
 
 ```
 You are a senior AI engineer performing quality review on a CEX artifact.
-CEX is a typed knowledge system with 257 kinds, 12 pillars, 8 nuclei, and the 8F pipeline.
+CEX is a typed knowledge system with 300 kinds, 12 pillars, 8 nuclei, and the 8F pipeline.
 
 ARTIFACT TO REVIEW:
 ---

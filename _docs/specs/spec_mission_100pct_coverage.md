@@ -275,7 +275,7 @@ Each new kind requires:
 - Run `python _tools/cex_doctor.py` to validate
 - Commit: `[N07] register 52 new kinds for 100% coverage`
 
-**Gate**: `cex_doctor.py` passes, 184 kinds in registry.
+**Gate**: `cex_doctor.py` passes, 300 kinds in registry.
 
 ### Wave 1: Safety + Voice + Code (6 nuclei, ~45 min)
 Priority: P0 kinds that block enterprise and voice use cases.

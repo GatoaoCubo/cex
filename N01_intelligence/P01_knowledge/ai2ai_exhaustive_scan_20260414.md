@@ -42,7 +42,7 @@ related:
 
 ## Mission Context
 
-Current CEX coverage: 238 kinds, estimated 85-90% of the AI2AI standardization
+Current CEX coverage: 300 kinds, estimated 85-90% of the AI2AI standardization
 surface. This scan identifies the remaining 10-15% gap via live web-sourced
 intelligence (April 2026). All sources verified as 2025-2026 publications.
 

@@ -45,7 +45,7 @@ This document provides a comprehensive comparison between **MetaGPT** and **Chat
 |-------|---------|---------|-----|
 | **Agent Count** | 5-7 fixed roles | 1000+ agents (MacNet DAG) | 7 nuclei × 125 sub-agents |
 | **Communication** | Shared message pool | Chat pairs (instructor-assistant) | File-based (signals, handoffs, proposals) |
-| **Task Decomposition** | Per-project (dynamic) | Per-subtask (fixed roles) | Per-kind (typed, 130 kinds) |
+| **Task Decomposition** | Per-project (dynamic) | Per-subtask (fixed roles) | Per-kind (typed, 300 kinds) |
 | **Quality Control** | Executable tests (F7 GOVERN) | Code review + dynamic testing | 3-layer scoring (structural + rubric + semantic) |
 | **Learning** | Long-term memory (MetaGPT) | Experience pools (ChatDev) | learning_records + knowledge_cards + memory_age decay |
 

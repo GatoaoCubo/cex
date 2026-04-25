@@ -27,7 +27,7 @@ related:
 
 ## Problem Statement
 
-CEX has 238 kinds across 12 pillars. The AI2AI protocol landscape evolves at
+CEX has 300 kinds across 12 pillars. The AI2AI protocol landscape evolves at
 20-30 new specs/year. Without a lifecycle system, CEX taxonomy stales in 12-18
 months: kinds reference dead specs, builders miss emerging protocols, and the
 knowledge graph diverges from industry reality.

@@ -51,7 +51,7 @@ LLMs don't produce identical output twice. Test PROPERTIES, not exact strings:
 - `_tools/tests/` — pytest suite (400+ tests)
 - Unit: tool functions (brand_validate, cex_intent, etc.)
 - Integration: E2E pipeline (brand ingest → validate → propagate → audit)
-- Structural: doctor (105 builders), compile (265 files)
+- Structural: doctor (301 builders), compile (265 files)
 - Pre-commit: `cex_hooks.py` validates staged .md files
 
 ## Cross-References

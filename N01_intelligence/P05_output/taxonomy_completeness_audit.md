@@ -120,7 +120,7 @@ The 12 Pillars were cross-referenced against 8 industry frameworks (62 concepts 
 
 ## Phase 3: 124 Kinds Completeness Audit
 
-124 kinds checked against 38 must-have categories.
+300 kinds checked against 38 must-have categories.
 
 ### Kinds Present (30/38)
 
@@ -243,7 +243,7 @@ The 12 Pillars were cross-referenced against 8 industry frameworks (62 concepts 
 | CLAUDE.md path references | **ALL VALID** | 0 broken references |
 | Boot scripts (7 expected) | **ALL PRESENT** | boot/n01.ps1 - n06.ps1 + boot/cex.ps1 |
 | Nucleus directories (8 expected) | **ALL PRESENT** | N01-N07 + N00_genesis |
-| Builder-kind alignment | **PERFECT** | 124 builders for 124 kinds (100%) |
+| Builder-kind alignment | **PERFECT** | 301 builders for 300 kinds (100%) |
 | Builder ISO completeness | **VERIFIED** | 13 ISOs per builder (manifest checked) |
 | spec_metaphor_dictionary.md | EXISTS | _docs/specs/ |
 | spec_infinite_bootstrap_loop.md | EXISTS | _docs/specs/ |

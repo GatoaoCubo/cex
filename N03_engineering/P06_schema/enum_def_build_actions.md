@@ -10,7 +10,7 @@ author: n03_engineering
 domain: artifact-construction
 quality: 9.1
 tags: [enum-def, build-actions, N03, constants, pillar, nucleus, verb]
-tldr: "Canonical enumerations for all CEX build-time constants: BUILD_ACTION, PILLAR, NUCLEUS, MODEL_TIER, SIGNAL_EVENT, QUALITY_TIER, PIPELINE_FUNCTION. Machine-parseable source of truth for all 259 builders."
+tldr: "Canonical enumerations for all CEX build-time constants: BUILD_ACTION, PILLAR, NUCLEUS, MODEL_TIER, SIGNAL_EVENT, QUALITY_TIER, PIPELINE_FUNCTION. Machine-parseable source of truth for all 301 builders."
 density_score: 0.93
 updated: "2026-04-17"
 related:
@@ -45,7 +45,7 @@ Controls how N03 treats the target artifact path during a build task.
 
 ## PILLAR
 
-The 12 domain groups that organize all 257 kinds.
+The 12 domain groups that organize all 300 kinds.
 
 | Value | Name | Primary Domain |
 |-------|------|----------------|

@@ -48,7 +48,7 @@ related:
 
 | Pattern | Evidence | Reuse |
 |---------|----------|-------|
-| New kind sequence: meta -> KC -> ISOs -> doctor | All 115 kinds followed this | Always |
+| New kind sequence: meta -> KC -> ISOs -> doctor | All 300 kinds followed this | Always |
 | Tables raise density above 0.78 threshold | Doctor density gate pass rate 100% with tables | When ISO density < 0.78 |
 | Enum-driven classification reduces LLM ambiguity | MemoryType enum in cex_memory_types.py | For any categorical kind |
 | Decay rates must align between memory_age and memory_update | Linear decay 1yr floor 50% in both modules | When touching memory pipeline |

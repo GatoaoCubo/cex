@@ -117,4 +117,4 @@ Every nucleus needs at least 7 artifacts:
 
 ---
 
-*Hierarchy v3.0 -- 8 nuclei, 12 pillars, 123 kinds. Claude Code native. 2026-04-08.*
+*Hierarchy v3.0 -- 8 nuclei, 12 pillars, 300 kinds. Claude Code native. 2026-04-08.*

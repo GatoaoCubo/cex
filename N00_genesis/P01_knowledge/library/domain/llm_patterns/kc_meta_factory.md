@@ -40,7 +40,7 @@ KIND DEFINITION → META-FACTORY → SPECIALIZED BUILDER → ARTIFACTS
 
 | System | Meta-Factory | Produces |
 |--------|-------------|----------|
-| CEX | _builder-builder (13 meta-templates) | 105 builders |
+| CEX | _builder-builder (13 meta-templates) | 301 builders |
 | AutoGPT | Agent creator | Task-specific agents |
 | CrewAI | Crew builder | Role-defined agents |
 | LangChain | Chain factory | Task-specific chains |

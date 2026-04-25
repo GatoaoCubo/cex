@@ -29,8 +29,8 @@ updated: "2026-04-22"
 
 ## Executive Summary
 
-CEX achieves **100% builder coverage** across all 293 kinds and 12 pillars — a stronger result than
-comparable typed-knowledge systems (LangChain: ~60 tools, no formal kind taxonomy; AutoGen: ~40
+CEX achieves **100% builder coverage** across all 300 kinds and 12 pillars — a stronger result than
+comparable typed-knowledge systems (LangChain: ~148 tools, no formal kind taxonomy; AutoGen: ~40
 agent types, no pillar schema). N01 itself holds 201 artifacts across 12 pillars, with P01 (67) and
 P07 (24) as the densest. The primary gaps are in 8F **explicit** per-function wiring and thin P08/P09
 coverage within N01's own nucleus directory.
@@ -39,7 +39,7 @@ coverage within N01's own nucleus directory.
 
 ## Pillar Coverage Matrix
 
-Comparison baseline: 293 kinds registered, 294 builders in `archetypes/builders/`, 299 KCs in
+Comparison baseline: 300 kinds registered, 301 builders in `archetypes/builders/`, 299 KCs in
 `N00_genesis/P01_knowledge/library/kind/`.
 
 | Pillar | Domain | Kinds Registered | Builders Exist | KCs Exist | N01 Artifacts | Gap |
@@ -150,7 +150,7 @@ Total files:    3822 (expected 3822)
 Avg density:    0.90
 Oversized:      47 files
 Result:         200 PASS | 94 WARN | 0 FAIL
-KC Library:     3 sources, 32 domains, 98/98 kinds covered
+KC Library:     3 sources, 32 domains, 98/300 kinds covered
 ```
 
 No FAIL conditions. 94 WARNs are density/size issues across the full system, not N01-specific.

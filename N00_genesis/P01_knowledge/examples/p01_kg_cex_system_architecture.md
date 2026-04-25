@@ -55,7 +55,7 @@ related:
 ## Overview
 
 This knowledge graph covers the CEX typed knowledge system architecture -- 8 nuclei (N00-N07),
-12 pillars (P01-P12), 125+ builders, 130 kinds, and the artifacts they produce.
+12 pillars (P01-P12), 125+ builders, 300 kinds, and the artifacts they produce.
 A graph is needed here because the relationships between these components are multi-hop and
 bidirectional: N03 dispatches builders, builders produce kinds, kinds live in pillars, pillars
 contain artifacts, and N07 orchestrates all nuclei -- flat vector search cannot traverse these
@@ -136,7 +136,7 @@ Text: {text}
 | Downstream consumers | cex_retriever.py, N07 orchestrator reasoning, cex_query.py discovery, architecture audit tooling |
 
 ## References
-- CEX kinds_meta.json: .cex/kinds_meta.json (128 kinds, 12 pillars, 8 nuclei)
+- CEX kinds_meta.json: .cex/kinds_meta.json (300 kinds, 12 pillars, 8 nuclei)
 - Builder ISOs: archetypes/builders/{kind}-builder/ (13 ISOs per builder, 125+ builders)
 - Pillar schemas: P{01-12}_*/_schema.yaml
 - Architecture KC: P01_knowledge/library/kind/kc_knowledge_graph.md

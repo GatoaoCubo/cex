@@ -21,7 +21,7 @@ density_score: 0.95
 
 ## Problem
 
-CEX describes an architecture of 8 nuclei x 12 pillars x 257 kinds -- but the file system
+CEX describes an architecture of 8 nuclei x 12 pillars x 300 kinds -- but the file system
 does not reflect this structure. Each nucleus uses semantically-named subdirs (`knowledge/`,
 `agents/`, `prompts/`) instead of pillar-numbered dirs (`P01_knowledge/`, `P02_model/`,
 `P03_prompt/`). N00 lacks the canonical kind-template subfolders that make it a true archetype.

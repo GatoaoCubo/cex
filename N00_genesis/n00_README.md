@@ -192,7 +192,7 @@ python _tools/cex_retriever.py --query "your topic" --top-k 5
 
 | Resource | Path |
 |----------|------|
-| Kinds meta (257 kinds) | `.cex/kinds_meta.json` |
+| Kinds meta (300 kinds) | `.cex/kinds_meta.json` |
 | Pillar schemas | `P{01-12}_*/_schema.yaml` |
 | 8F pipeline rules | `.claude/rules/8f-reasoning.md` |
 | Orchestrator rules | `.claude/rules/n07-orchestrator.md` |

@@ -157,7 +157,7 @@ Command: `python _tools/cex_doctor.py`
 | FAIL | 0 |
 | Expected files present | 3354 / 3354 |
 | Avg density | 0.90 |
-| KC library coverage | 98 / 98 kinds |
+| KC library coverage | 98 / 300 kinds |
 
 Operational read: repo-wide builder health is currently green on hard failures. The remaining debt is density and oversize warnings, not broken builders.
 
@@ -173,8 +173,8 @@ Command: `python _tools/cex_release_check.py`
 
 Current failures:
 
-1. `README` builder count is stale and should mention 260 builders.
-2. `README` tool count is stale and should mention 112 tools.
+1. `README` builder count is stale and should mention 301 builders.
+2. `README` tool count is stale and should mention 148 tools.
 3. One stale `claude-opus-4-202505` reference remains.
 4. Seven stale `claude-sonnet-4-2025` references remain.
 

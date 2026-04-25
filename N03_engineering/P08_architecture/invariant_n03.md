@@ -64,7 +64,7 @@ If an invariant is violated, something is fundamentally wrong.
 |----|-----------|-------|-------------------|
 | INV-13 | type_def_cex_types.md is the single source of truth for all CEX types | P06 | Type divergence between nuclei |
 | INV-14 | enum_def_build_actions.md PILLAR values are fixed at P01-P12 | P06 | Pillar namespace pollution |
-| INV-15 | interface_builder_protocol.md bilateral contract applies to all 259 builders | All builders | Builder without contract |
+| INV-15 | interface_builder_protocol.md bilateral contract applies to all 301 builders | All builders | Builder without contract |
 
 ## Quality Invariants
 

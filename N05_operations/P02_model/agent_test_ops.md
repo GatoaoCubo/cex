@@ -76,7 +76,7 @@ implementation.
 |------|---------|
 | `cex_system_test.py` | Full system validation (54 tests) |
 | `cex_e2e_test.py` | End-to-end test runner |
-| `cex_doctor.py` | Builder health check (118 builders) |
+| `cex_doctor.py` | Builder health check (301 builders) |
 | `cex_score.py` | Quality scoring with peer review |
 | `cex_quality_monitor.py` | Quality snapshots + regression detection |
 | `cex_flywheel_audit.py` | Doc vs practice audit (109 checks) |

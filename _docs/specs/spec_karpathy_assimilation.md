@@ -17,7 +17,7 @@ density_score: 0.92
 
 ## Thesis
 
-CEX is already the most structured LLM Wiki in existence (293 kinds, 424 KCs,
+CEX is already the most structured LLM Wiki in existence (300 kinds, 424 KCs,
 12 pillar schemas, 8F editorial pipeline). CEX already has the autoresearch loop
 (`cex_evolve.py` = modify -> score -> keep/discard). What's missing is the GRAPH --
 artifacts don't link to each other. Knowledge accumulates but doesn't compound.
@@ -139,7 +139,7 @@ related:
 
 **Task**: Add `## Related Artifacts` to output templates + cross-ref soft gate to eval ISOs.
 
-This is the BIG change. 298 builders x 2 ISOs each (bld_prompt + bld_eval) = 596 file modifications.
+This is the BIG change. 301 builders x 2 ISOs each (bld_prompt + bld_eval) = 596 file modifications.
 
 **Approach**: Automated via Python script, NOT manual. N03 builds the script, runs it.
 

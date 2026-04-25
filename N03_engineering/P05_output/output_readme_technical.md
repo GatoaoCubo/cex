@@ -61,7 +61,7 @@ related:
    └────────────────────────────────────────────────┘
 ```
 
-**114 artifact kinds** · **107 builder archetypes** · **8 nuclei** · **12 pillars**
+**300 artifact kinds** · **107 builder archetypes** · **8 nuclei** · **12 pillars**
 
 Each builder loads 13 ISOs (manifest, instruction, system prompt, schema, examples, quality gates, etc.)
 and produces validated artifacts through the 8F pipeline with 18-gate quality enforcement.

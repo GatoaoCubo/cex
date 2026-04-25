@@ -270,7 +270,7 @@ Kinds that logically require other kinds to function:
 
 | Metric | Value |
 |--------|-------|
-| Total nodes | 277 (257 kinds + 12 pillars + 8 nuclei) |
+| Total nodes | 277 (300 kinds + 12 pillars + 8 nuclei) |
 | HAS_PILLAR edges | 257 (one per kind) |
 | ROUTES_TO edges | 257 (one per kind, via pillar) |
 | GOVERNS edges | 253 (kinds with known llm_function) |

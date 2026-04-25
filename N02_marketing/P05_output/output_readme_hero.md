@@ -32,9 +32,9 @@ related:
 ![MIT License](https://img.shields.io/badge/License-MIT-blue.svg)
 ![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)
 ![300 Kinds](https://img.shields.io/badge/kinds-300-green.svg)
-![302 Builders](https://img.shields.io/badge/builders-302-blue.svg)
+![302 Builders](https://img.shields.io/badge/builders-301-blue.svg)
 
-**300 kinds** · **302 builders** · **12 pillars** · **8 nuclei** · **8F pipeline** · **144 tools**
+**300 kinds** · **301 builders** · **12 pillars** · **8 nuclei** · **8F pipeline** · **148 tools**
 
 ---
 

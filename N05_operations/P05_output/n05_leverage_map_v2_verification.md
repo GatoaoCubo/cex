@@ -121,7 +121,7 @@ The doctor remains materially more mature than the new coverage tool:
 - 258 builder directories found
 - 3354 / 3354 expected files present
 - 190 PASS, 63 WARN, 5 FAIL
-- KC library coverage: 98 / 98 kinds covered
+- KC library coverage: 98 / 300 kinds covered
 
 This confirms N05 already has stronger builder-health tooling than artifact
 coverage tooling.

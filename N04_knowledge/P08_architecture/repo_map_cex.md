@@ -11,7 +11,7 @@ author: N04_knowledge
 domain: "cex platform"
 quality: 8.7
 tags: [repo_map, architecture, navigation, cex]
-tldr: "Authoritative directory-by-directory map of the CEX repo: 300 kinds, 302 builders, 8 nuclei, 4 runtimes."
+tldr: "Authoritative directory-by-directory map of the CEX repo: 300 kinds, 301 builders, 8 nuclei, 4 runtimes."
 token_budget: 4096
 symbol_count: 182
 file_count: 3853
@@ -217,7 +217,7 @@ Dispatch and boot infrastructure for multi-nucleus grid runs.
 | `.cex/runtime/pids/` | Process ID tracking for session-aware stop |
 | `.cex/runtime/decisions/` | GDP decision manifests (locked before grid dispatch) |
 | `.cex/runtime/plans/` | Mission wave plans |
-| `.cex/cache/` | Pre-compiled prompt cache (260 builders) |
+| `.cex/cache/` | Pre-compiled prompt cache (301 builders) |
 | `.cex/config/nucleus_models.yaml` | Per-nucleus model + fallback_chain config |
 | `.cex/kinds_meta.json` | 300-kind registry (source of truth for F1 CONSTRAIN) |
 | `.cex/learning_records/` | Session learning records (F3b PERSIST) |

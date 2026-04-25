@@ -226,7 +226,7 @@ Every user intent must resolve to one or more kinds. This map is the exhaustive 
 | N06 (Commercial) | content_monetization | 1 |
 | N07 (Orchestration) | checkpoint, dispatch_rule, handoff, schedule, signal, spawn_config | 6 |
 
-**Total: 123 kinds mapped. 0 gaps.**
+**Total: 300 kinds mapped. 0 gaps.**
 
 ## Related Artifacts
 

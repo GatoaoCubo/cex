@@ -82,8 +82,8 @@ The 8F pipeline performs **7 implicit decisions** the user never had to make:
 |----------|---------------------------|----------------------|---------------|
 | **Raw ChatGPT/Claude** | Generic completion from prompt | Write detailed prompt (500+ words for good output) | CEX: 8F compensates -- 5 words become 500 words of context automatically |
 | **LangChain** | Developer writes chains in Python | Build chain, select retriever, configure prompt template | CEX: auto-resolves kind+builder+context from intent -- zero code |
-| **Cursor/Copilot** | Code-only completion, no domain awareness | Describe code changes precisely | CEX: 123 kinds across 12 domains, not just code |
-| **Custom GPTs** | Fixed instruction set, no taxonomy | User picks the right GPT, writes precise prompt | CEX: dynamic taxonomy -- 1 system handles all 123 kinds |
+| **Cursor/Copilot** | Code-only completion, no domain awareness | Describe code changes precisely | CEX: 300 kinds across 12 domains, not just code |
+| **Custom GPTs** | Fixed instruction set, no taxonomy | User picks the right GPT, writes precise prompt | CEX: dynamic taxonomy -- 1 system handles all 300 kinds |
 | **CrewAI** | Developer defines agents + tasks in Python | Write agent configs, define tools, orchestrate manually | CEX: auto-dispatch to 6 specialized nuclei from natural language |
 | **AutoGen** | Code-level multi-agent orchestration | Write Python, configure group chat, manage state | CEX: natural language -> structured handoffs -> parallel execution |
 | **Jasper AI** | Marketing templates with fill-in fields | Pick template, fill 8-15 fields, select tone | CEX: brand_config auto-injects tone, no field-filling |
@@ -93,7 +93,7 @@ The 8F pipeline performs **7 implicit decisions** the user never had to make:
 
 | Moat Dimension | Depth | Evidence |
 |---------------|-------|---------|
-| **Taxonomy breadth** | 123 artifact kinds | 2+ years R&D. Competitor would need to enumerate all 123 types, define schemas, build builders. |
+| **Taxonomy breadth** | 300 artifact kinds | 2+ years R&D. Competitor would need to enumerate all 123 types, define schemas, build builders. |
 | **Builder specialization** | 13 ISOs per builder (1,599 total) | Each builder has manifest, instruction, system prompt, schema, examples, scoring rubric, pattern, golden test, template, quality gate, few-shot, naming rule, constraint spec. |
 | **Context assembly** | 12 pillars of cross-referenced knowledge | KCs reference other KCs. Builders reference schemas. Schemas validate output. Circular reinforcement. |
 | **Brand injection** | 41 mustache variables auto-propagated | brand_config.yaml -> all nuclei. Competitor must build entire injection system. |
@@ -105,9 +105,9 @@ The 8F pipeline performs **7 implicit decisions** the user never had to make:
 | Component | CEX Investment | Estimated Replication Cost | Time to Replicate |
 |-----------|---------------|---------------------------|-------------------|
 | 123 kind definitions + schemas | ~400 hours | R$120,000 (senior AI engineer @ R$300/h) | 6-8 months |
-| 125 builders (13 ISOs each) | ~600 hours | R$180,000 | 8-10 months |
+| 301 builders (13 ISOs each) | ~600 hours | R$180,000 | 8-10 months |
 | 12 pillar architecture | ~200 hours | R$60,000 | 3-4 months |
-| 8F pipeline + tooling (59 tools) | ~500 hours | R$150,000 | 6-8 months |
+| 8F pipeline + tooling (148 tools) | ~500 hours | R$150,000 | 6-8 months |
 | 2,184 knowledge artifacts | ~300 hours | R$90,000 | 4-6 months |
 | Quality scoring (3-layer) | ~100 hours | R$30,000 | 1-2 months |
 | Multi-nucleus dispatch | ~150 hours | R$45,000 | 2-3 months |
@@ -182,8 +182,8 @@ Intent resolution has measurable depth levels. Each level adds value. Price gate
 
 | Feature | Free | Pro (R$497/mo) | Enterprise (Custom) |
 |---------|------|----------------|---------------------|
-| **Kind resolution** (L1) | 123 kinds | 123 kinds | 123 + custom kinds |
-| **Builder loading** (L2) | 125 builders | 125 builders | 125 + custom builders |
+| **Kind resolution** (L1) | 300 kinds | 300 kinds | 123 + custom kinds |
+| **Builder loading** (L2) | 301 builders | 301 builders | 125 + custom builders |
 | **Context assembly** (L3) | Basic (KC only) | Full (KC + examples + memory + brand + similar) | Full + private knowledge base |
 | **Brand injection** (L4) | -- | 1 brand_config | Unlimited brand configs |
 | **Multi-nucleus dispatch** (L5) | -- | Up to 6 parallel nuclei | 6+ with custom nuclei |
@@ -382,7 +382,7 @@ Payback period:          2.4 days
 | Insight | Implication |
 |---------|-------------|
 | Intent resolution is the **only** system that bridges "5 words" to "professional artifact" | This is the product. Everything else is a feature. |
-| 123 kinds + 125 builders = 2,250 hours to replicate | 12-18 month head start over any competitor |
+| 300 kinds + 301 builders = 2,250 hours to replicate | 12-18 month head start over any competitor |
 | 30x ROI for Pro users (R$497 -> R$15K value) | Pricing has massive headroom -- current prices are undervalued |
 | Knowledge accumulates per session | Switching cost grows with usage (positive lock-in) |
 | Free tier demonstrates L1-L2 (kind+builder) | Users see the magic, hit the wall, upgrade for L3-L7 |
@@ -397,7 +397,7 @@ taxonomy (Enterprise). Every word the user does NOT have to type is a dollar ear
 
 *Generated by N06 Commercial Nucleus -- Intent Resolution Moat Analysis*
 *Every competitor comparison has a price tag. Every value claim has a formula.*
-*The moat is not code. The moat is 123 kinds of understanding.*
+*The moat is not code. The moat is 300 kinds of understanding.*
 
 ## Boundary
 

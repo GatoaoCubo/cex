@@ -740,7 +740,7 @@ DeepSeek fits CEX `model_provider` config:
 - OpenAI-compatible API -- works with existing `cex_router.py`
 - `deepseek-chat` for non-thinking tool calls (fast, cheap)
 - `deepseek-reasoner` for thinking-with-tools (quality, expensive)
-- 128 tool limit is sufficient for CEX (79 tools total)
+- 128 tool limit is sufficient for CEX (148 tools total)
 - Strict mode useful for `validation_schema` enforcement
 
 ### 5.3 reasoning_content Handling

@@ -28,7 +28,7 @@ updated: "2026-04-22"
 
 ## Purpose
 
-CEX operates on 293 typed kinds. Without active stewardship, this taxonomy
+CEX operates on 300 typed kinds. Without active stewardship, this taxonomy
 becomes stale within 12-18 months as new AI2AI protocols, schema standards,
 and agent interoperability specs emerge. This document specifies the automated
 lifecycle system that keeps CEX kinds synchronized with the industry.
@@ -132,7 +132,7 @@ Recency filter: posts from last 7 days with > 50 points.
 Every Monday 08:00 UTC:
   1. Pull diffs from all active watchers (since last run)
   2. Extract candidate kind names via NER + schema heuristics
-  3. Dedupe against existing 293 kinds (embedding similarity > 0.85 = skip)
+  3. Dedupe against existing 300 kinds (embedding similarity > 0.85 = skip)
   4. Score each candidate: adoption + stability + urgency
   5. Write .cex/runtime/taxonomy_candidates/YYYY-MM-DD_{source}_{slug}.md
   6. Signal N07 if any candidate scores >= 7.0
@@ -383,15 +383,15 @@ Total kinds: 293
 
 Freshness:
   Reviewed in last 30d:   48 kinds
-  Reviewed in last 90d:  241 kinds
-  Reviewed in last 180d: 288 kinds
+  Reviewed in last 90d:  300 kinds
+  Reviewed in last 180d: 300 kinds
   Stale (>365d):           0 kinds [OK]
 
 Candidate queue: 3 pending (0 critical, 3 normal)
 Scout last run: 2026-04-14 (5 days ago) [OK]
 
 Coverage estimate:
-  Known protocol space: ~350 kinds
+  Known protocol space: ~300 kinds
   CEX coverage: 293/350 = 83.7% [OK]
 
 Action items:

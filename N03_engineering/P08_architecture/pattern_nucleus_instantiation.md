@@ -40,7 +40,7 @@ CoC rule: every nucleus has the same 13 subdirectory structure. A nucleus that d
 | Check | Command | Expected |
 |-------|---------|---------|
 | N00_genesis exists | `ls N00_genesis/` | 12 pillar dirs + README.md |
-| kinds_meta.json current | `python _tools/cex_doctor.py --kinds` | 257 kinds |
+| kinds_meta.json current | `python _tools/cex_doctor.py --kinds` | 300 kinds |
 | No existing nucleus at target slot | `ls N0{X}_*/` | does not exist |
 | nucleus_sins.yaml has slot | `grep "n0{X}" .cex/config/nucleus_sins.yaml` | sin defined |
 

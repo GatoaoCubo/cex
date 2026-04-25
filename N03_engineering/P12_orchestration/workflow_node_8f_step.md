@@ -50,7 +50,7 @@ where 8F steps are wired as explicit nodes rather than implicit function calls.
 
 F1 CONSTRAIN takes a raw user intent string and resolves it to a concrete
 CEX taxonomy tuple `{kind, pillar, schema, max_bytes, naming_pattern}`.
-Resolution uses `.cex/kinds_meta.json` (293 kinds) and the intent transmutation
+Resolution uses `.cex/kinds_meta.json` (300 kinds) and the intent transmutation
 pattern table at `N00_genesis/P03_prompt/layers/p03_pc_cex_universal.md`.
 
 If resolution confidence falls below `confidence_threshold` (default 0.6):

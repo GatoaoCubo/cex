@@ -31,7 +31,7 @@ updated: "2026-04-22"
 ## Executive Summary
 
 Full scan of the builder infrastructure against the 293-kind registry.
-All 293 kinds have complete 13-ISO builders (100% coverage).
+All 300 kinds have complete 13-ISO builders (100% coverage).
 `cex_doctor.py` reports 200 PASS / 94 WARN / 0 FAIL.
 Critical gaps cluster in three areas: (1) 8F wiring depth in ISO instructions,
 (2) N03 schema artifacts missing for 6 P06 kinds, and
@@ -198,7 +198,7 @@ reduce retrieval signal quality — builders trained on sparse examples produce 
 
 **GAP 5 — cex_compile.py not kind-aware for reverse compilation** (MEDIUM)
 The compiler targets `{claude-md, cursorrules, customgpt, mcp}` but does not route by
-artifact `kind`. All 293 kinds compile through a single parse path. When a kind has
+artifact `kind`. All 300 kinds compile through a single parse path. When a kind has
 domain-specific serialization requirements (e.g., `openapi_spec` -> JSON, `validation_schema`
 -> JSONSchema), the generic compiler produces flat YAML without schema validation.
 **File target**: `_tools/cex_compile.py` — add kind-dispatch for P06 schema kinds.

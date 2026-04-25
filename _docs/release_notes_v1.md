@@ -2,7 +2,7 @@
 
 **Cognitive Exchange AI: Typed Knowledge System for LLM Agents**
 
-> 293 kinds. 298 builders. 3,563 ISOs. 12 pillars. 8 nuclei. 4 runtimes. One brain.
+> 300 kinds. 301 builders. 3,647 ISOs. 12 pillars. 8 nuclei. 4 runtimes. One brain.
 
 ---
 
@@ -19,7 +19,7 @@ Intelligence compounds faster when exchanged. That is the X.
 
 ### The Architecture
 
-- **293 typed kinds** across 12 pillars (P01 Knowledge through P12 Orchestration)
+- **300 typed kinds** across 12 pillars (P01 Knowledge through P12 Orchestration)
 - **298 specialized builders** with 12 ISOs each (1:1 with pillars) = 3,563 builder instructions
 - **8 nuclei** (N00 archetype + N01-N07 operational), each with a unique "sin lens" that defines its optimization bias
 - **8F pipeline** (CONSTRAIN -> BECOME -> INJECT -> REASON -> CALL -> PRODUCE -> GOVERN -> COLLABORATE) -- mandatory for every artifact, every time
@@ -52,7 +52,7 @@ Multi-role teams with handoffs. A crew is a `crew_template` (roles + topology) +
 
 ### Intent Resolution (Prompt Compiler)
 
-Natural language in any language maps to `{kind, pillar, nucleus, verb}` tuples. 293/293 kinds covered (100%). Say "make me a landing page" or "criar landing page" and the system resolves: `kind=landing_page, pillar=P05, nucleus=N03, verb=create`.
+Natural language in any language maps to `{kind, pillar, nucleus, verb}` tuples. 293/300 kinds covered (100%). Say "make me a landing page" or "criar landing page" and the system resolves: `kind=landing_page, pillar=P05, nucleus=N03, verb=create`.
 
 ### Quality System
 
@@ -124,7 +124,7 @@ The system generates: KC, template, builder (12 ISOs), sub-agent, meta entry, pr
 
 | Version | Date | Highlights |
 |---------|------|-----------|
-| v1.0.0 | 2026-04-22 | Public release: 293 kinds, 298 builders, 4 runtimes, 6 crews |
+| v1.0.0 | 2026-04-22 | Public release: 300 kinds, 301 builders, 4 runtimes, 6 crews |
 | v10.4.0 | 2026-04-21 | CEXAI rebrand + OSS wiring |
 | v10.3.0 | 2026-04-19 | Public release prep + security hardening |
 | v10.2.0 | 2026-04-16 | Multi-runtime grid + composable crews |

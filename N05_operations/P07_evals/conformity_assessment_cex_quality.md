@@ -47,7 +47,7 @@ Annex III: not_applicable. Orchestration; GPAI delegates inference. Sec. 1-5: [A
 | Attribute | Value |
 |-----------|-------|
 | System type | Typed knowledge orchestration; GPAI delegates inference |
-| Scope | 293 kinds, 298 builders, 8 nuclei, 12 pillars, 4 runtimes |
+| Scope | 300 kinds, 301 builders, 8 nuclei, 12 pillars, 4 runtimes |
 | Transparency | Advisory; user retains control via GDP (Art. 13) |
 
 ## Sec. 2 -- Development + Data Governance
@@ -111,7 +111,7 @@ EU DoC (Art. 47) not required. Internal assessment only.
 
 | Dimension | Status | Evidence |
 |-----------|--------|---------|
-| Schema enforcement | Conformant | 293 kinds + 12 schemas |
+| Schema enforcement | Conformant | 300 kinds + 12 schemas |
 | Quality scoring | Conformant | 3-layer; floor 8.0; target 9.0 |
 | Human oversight | Conformant | GDP + quality_monitor + doctor |
 | Risk management | Conformant (R-04 Med) | 7 risks, 6 at Low |

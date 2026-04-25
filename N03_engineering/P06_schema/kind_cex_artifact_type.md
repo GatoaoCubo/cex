@@ -10,7 +10,7 @@ updated: "2026-04-19"
 author: n03_engineering
 quality: 8.7
 tags: [kind, type_def, taxonomy, meta, P06, architecture, schema]
-tldr: "Meta-definition of 'kind': the atomic artifact type in CEX. 293 kinds, 12 pillars, 1 builder per kind, 13 ISOs per builder."
+tldr: "Meta-definition of 'kind': the atomic artifact type in CEX. 300 kinds, 12 pillars, 1 builder per kind, 13 ISOs per builder."
 density_score: 0.92
 related:
   - bld_schema_kind
@@ -142,7 +142,7 @@ The builder-kind relationship is 1:1. No builder produces multiple kinds. No kin
 |--------|-------|
 | Total kinds | 293 |
 | Total builders | 295 (includes meta-builders) |
-| Total ISOs | 3,835 (295 builders x 13 ISOs) |
+| Total ISOs | 3,835 (301 builders x 13 ISOs) |
 | Core kinds | ~85 (core: true in kinds_meta.json) |
 | Domain-specific kinds | ~208 |
 | Deprecated kinds | 0 (no deprecations yet) |

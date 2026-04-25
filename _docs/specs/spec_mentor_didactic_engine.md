@@ -34,7 +34,7 @@ the methodology is the product.
 ```
 Layer 1: LENS SYSTEM (multi-analogy translator)
   Factory lens | City lens | Biology lens | Game lens
-  Each lens maps ALL 293 kinds + 8F + 12P + 8 nuclei to a coherent metaphor world
+  Each lens maps ALL 300 kinds + 8F + 12P + 8 nuclei to a coherent metaphor world
 
 Layer 2: TEACHING MODES (storytelling + socratic hybrid)
   /mentor explain <concept>        -- narrative storytelling
@@ -61,12 +61,12 @@ Layer 3: MEDIA PIPELINE (full stack production)
 
 | Action | Path | Kind | Est. Size | Notes |
 |--------|------|------|-----------|-------|
-| CREATE | N04_knowledge/P01_knowledge/kc_lens_factory.md | knowledge_card | 8KB | Factory lens: 293 kinds + 8F + 12P + nuclei mapped to factory metaphors |
+| CREATE | N04_knowledge/P01_knowledge/kc_lens_factory.md | knowledge_card | 8KB | Factory lens: 300 kinds + 8F + 12P + nuclei mapped to factory metaphors |
 | CREATE | N04_knowledge/P01_knowledge/kc_lens_city.md | knowledge_card | 8KB | City lens: infrastructure, districts, services, governance |
 | CREATE | N04_knowledge/P01_knowledge/kc_lens_biology.md | knowledge_card | 8KB | Biology lens: organism, organs, cells, DNA, nervous system |
 | CREATE | N04_knowledge/P01_knowledge/kc_lens_game.md | knowledge_card | 8KB | Game lens: existing metaphor dictionary expanded to full world |
 | CREATE | N04_knowledge/P01_knowledge/kc_lens_index.md | knowledge_card | 4KB | Master index: concept -> all 4 lens translations |
-| UPDATE | _docs/specs/spec_metaphor_dictionary.md | context_doc | +3KB | Add lens references, expand coverage to 293 kinds |
+| UPDATE | _docs/specs/spec_metaphor_dictionary.md | context_doc | +3KB | Add lens references, expand coverage to 300 kinds |
 
 ### Wave 2: Teaching Engine (4 artifacts) -- N04
 
@@ -100,7 +100,7 @@ Layer 3: MEDIA PIPELINE (full stack production)
 |--------|------|------|-----------|-------|
 | CREATE | N04_knowledge/P03_prompt/mentor_locale_en.md | prompt_template | 3KB | EN voice: tone, idioms, cultural references for English audience |
 | CREATE | N04_knowledge/P03_prompt/mentor_locale_ptbr.md | prompt_template | 3KB | PT-BR voice: tone, idioms, cultural references for Brazilian audience |
-| CREATE | N04_knowledge/P01_knowledge/kc_bilingual_term_map.md | knowledge_card | 5KB | Canonical term translations: EN <-> PT-BR for all 293 kinds + 8F + 12P |
+| CREATE | N04_knowledge/P01_knowledge/kc_bilingual_term_map.md | knowledge_card | 5KB | Canonical term translations: EN <-> PT-BR for all 300 kinds + 8F + 12P |
 
 ### Wave 6: Example Content + Integration Test (4 artifacts) -- N04 + N05
 

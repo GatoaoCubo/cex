@@ -110,7 +110,7 @@ to understand CEXAI (Cognitive Exchange AI) without prior exposure to the system
 | `quality gate` | CI gate / test suite | eval pass/fail | Score threshold (>= 8.0 to publish, 9.0 target). Enforced by `cex_score.py` at F7 GOVERN. |
 | `scoring_rubric` | test criteria / acceptance criteria | judge rubric | 5-dimensional scoring: structural (30%) + rubric (30%) + semantic (40%). |
 | `density` | LOC / information ratio | token efficiency | Information per byte. Target >= 0.85. Low-density artifacts are verbose without content. |
-| `doctor` | health check / diagnostics | system audit | Builder health verification across 302 builders. Checks ISOs, sub-agents, schema wiring. Tool: `cex_doctor.py`. |
+| `doctor` | health check / diagnostics | system audit | Builder health verification across 301 builders. Checks ISOs, sub-agents, schema wiring. Tool: `cex_doctor.py`. |
 | `flywheel` | feedback loop / CI/CD cycle | self-improvement | Automated quality improvement cycle: scan -> evolve -> score -> commit. Tool: `cex_flywheel_audit.py`. |
 | `evolve` | refactor / optimize | prompt optimization sweep | Heuristic + agent-mode quality improvement loop. Targets artifacts below 9.0. Tool: `cex_evolve.py`. |
 | `preflight` | pre-deployment check | context pre-fetch | Phase 0 of handoff preparation: N07 gathers external context via MCP before dispatching. |

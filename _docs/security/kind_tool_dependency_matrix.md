@@ -6,7 +6,7 @@ kind: knowledge_card
 pillar: P01
 nucleus: N03
 domain: security-routing
-title: Kind Tool Dependency Matrix -- 293 kinds x 2 routing flags
+title: Kind Tool Dependency Matrix -- 300 kinds x 2 routing flags
 version: 1.0.0
 created: 2026-04-20
 author: n03_builder
@@ -42,7 +42,7 @@ both false                      --> route: any runtime (structural generation, n
 - Total kinds: 293
 - requires_external_context=true: 74 (25%)
 - requires_live_tools=true: 5 (5 kinds, Claude-only routing)
-- Both false: 219 kinds (structural generation, any runtime)
+- Both false: 300 kinds (structural generation, any runtime)
 
 ## Live-Tools Kinds (Claude-only routing)
 
@@ -56,7 +56,7 @@ These 5 kinds require live MCP tool access at runtime. Pre-flight cannot substit
 | interactive_demo | P05 | Needs live browser rendering to verify UI state |
 | mcp_server | P04 | Needs live MCP protocol connection to test server responses |
 
-## Full Classification Matrix (293 kinds)
+## Full Classification Matrix (300 kinds)
 
 | Kind | Pillar | ext_ctx | live_tools | Description |
 |------|--------|---------|------------|-------------|

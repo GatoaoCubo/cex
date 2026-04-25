@@ -12,7 +12,7 @@ title: "Self Review 2026 04 02"
 version: 1.0.0
 author: N04
 tags: [context-doc, knowledge, output]
-tldr: "1. **Missing 8 Knowledge Cards**: 106 KCs found vs 114 kinds in system"
+tldr: "1. **Missing 8 Knowledge Cards**: 106 KCs found vs 300 kinds in system"
 domain: knowledge
 created: 2026-04-06
 updated: 2026-04-07
@@ -31,7 +31,7 @@ related:
 # N04 Self-Review — 2026-04-02
 
 ## Summary
-- KC Library: 106/114 kinds covered
+- KC Library: 106/300 kinds covered
 - N04 artifacts: 34 total
 - Domain-specific: 30+ 
 - Generic/placeholder: Few
@@ -39,7 +39,7 @@ related:
 
 ## CRITICAL Gaps (must fix)
 
-1. **Missing 8 Knowledge Cards**: 106 KCs found vs 114 kinds in system
+1. **Missing 8 Knowledge Cards**: 106 KCs found vs 300 kinds in system
    - Gap analysis incomplete - exact missing kinds need identification
    - Some kinds may have builders but no KCs
 
@@ -73,7 +73,7 @@ related:
    - No verification that KCs are consumed in F3 INJECT phase
 
 3. **Taxonomy Drift Risk**:
-   - 107 builders vs 106 KCs creates maintenance debt
+   - 301 builders vs 106 KCs creates maintenance debt
    - No automated consistency checking between components
 
 ## RAG Pipeline Status

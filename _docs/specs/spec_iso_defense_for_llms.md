@@ -38,7 +38,7 @@ design, relational database theory, object-oriented programming, and multi-agent
 
 ### 1.1 The Scale Problem
 
-A monolithic system prompt for 293 artifact kinds would require injecting the full
+A monolithic system prompt for 300 artifact kinds would require injecting the full
 specification of every kind into every LLM call. This is not hypothetical inefficiency --
 it is a hard ceiling.
 
@@ -47,7 +47,7 @@ it is a hard ceiling.
 | Spec file count | 1 | 12 per builder |
 | Size per builder kind | ~43KB average | ~3.6KB per ISO |
 | Context consumed per build | ~43KB | ~15KB (4-5 relevant ISOs loaded) |
-| Context consumed for all 293 kinds | ~12.6MB | ~44KB (kind-specific only) |
+| Context consumed for all 300 kinds | ~12.6MB | ~44KB (kind-specific only) |
 | Context window headroom | Negative | 185K tokens available |
 
 Measured against the `agent-builder` reference implementation (13 ISOs, 47,397 bytes):
@@ -203,7 +203,7 @@ vs. old 13-ISO regime: all 13 required, regardless of complexity.
 
 ### 3.3 Batch-Edit Leverage
 
-Change `_shared/bld_eval_default.md` (7 hard gates -> 8) = ALL 293 builders
+Change `_shared/bld_eval_default.md` (7 hard gates -> 8) = ALL 301 builders
 updated. No per-builder editing. No inconsistency risk.
 
 | Change type | Old (13 ISOs, no shared) | New (12P + shared) |
@@ -434,11 +434,11 @@ estimated total ~43KB, ~10,750 tokens per complete builder set.
 
 | Scenario | Tokens loaded | Tokens relevant | Utilization |
 |----------|--------------|-----------------|-------------|
-| Monolithic (293 kinds, all ISOs) | ~3,200,000 | ~12,000 (target kind) | **0.37%** |
+| Monolithic (300 kinds, all ISOs) | ~3,200,000 | ~12,000 (target kind) | **0.37%** |
 | ISO-decomposed (kind-specific) | ~11,849 | ~11,849 (all relevant) | **~100%** |
 | ISO-decomposed (stage-filtered) | ~4,000 (4 ISOs) | ~4,000 | **100%** |
 
-A monolithic prompt attempting to cover all 293 kinds:
+A monolithic prompt attempting to cover all 300 kinds:
 - 293 x 11,849 tokens = 3,472,157 tokens
 - Exceeds 200K context window by 17x
 - Would require context truncation -- destroying precision
@@ -521,7 +521,7 @@ A repo IS 8 nuclei, each following the same 12-pillar structure.
 The 12-ISO-to-12-pillar mapping is not an aesthetic choice. It is the consequence of
 five independent architectural requirements:
 
-1. **Prompt decomposition**: Context windows cannot load all 293 kinds simultaneously.
+1. **Prompt decomposition**: Context windows cannot load all 300 kinds simultaneously.
    12 ISOs per kind enables load-on-demand at ~100% utilization vs. ~0.37% monolithic.
 
 2. **Convention over configuration**: The same 12-pillar fractal at repo, nucleus,
@@ -529,7 +529,7 @@ five independent architectural requirements:
    An LLM navigates by name pattern, not documentation.
 
 3. **Inheritance**: `_shared/` defaults cover 7 of 12 ISOs for simple builders.
-   Contributor writes only what is unique. Batch edits propagate to all 293 builders
+   Contributor writes only what is unique. Batch edits propagate to all 301 builders
    from 1 file change.
 
 4. **Portability**: A builder is 12 markdown files. It loads into Claude, GPT, Gemini,
@@ -562,7 +562,7 @@ the cognitive functions an LLM needs to build governed, typed, composable artifa
 | Reference builder | `archetypes/builders/agent-builder/` | Measured data source |
 | Skill loader | `_tools/cex_skill_loader.py` | Load priority implementation |
 | 8F pipeline | `.claude/rules/8f-reasoning.md` | Stage-to-ISO mapping |
-| Kind registry | `.cex/kinds_meta.json` | 293 kinds count |
+| Kind registry | `.cex/kinds_meta.json` | 300 kinds count |
 | Existing whitepaper | `_docs/WHITEPAPER_CEX.md` | SQL analogy, 8F proof |
 | CoC rule | `CLAUDE.md` | Fractal architecture description |
 

@@ -74,8 +74,8 @@ quality: null
 ---
 # Sections
 - problem: Enterprise AI fragmentation -- 7 tools, 0 governance
-- solution: CEX typed knowledge system -- 257 kinds, 8F pipeline
-- traction: 3381 ISOs, 152 tools, 4 runtimes in production
+- solution: CEX typed knowledge system -- 300 kinds, 8F pipeline
+- traction: 3647 ISOs, 148 tools, 4 runtimes in production
 ```
 
 ## Related kinds

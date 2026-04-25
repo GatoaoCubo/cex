@@ -157,7 +157,7 @@ cex_memory_update.py --observation "{entities from commit}"
 | `cex_hooks.py` | Pre/post validation + git hook |
 | `cex_hooks_native.py` | Native Claude hooks (session/tool/stop) |
 | `cex_score.py` | 3-layer hybrid scoring |
-| `cex_doctor.py` | Builder integrity (294 builders) |
+| `cex_doctor.py` | Builder integrity (301 builders) |
 | `cex_flywheel_audit.py` | 109-check system audit |
 | `cex_system_test.py` | 54-test full validation |
 | `cex_quota_check.py` | Provider health + quota |

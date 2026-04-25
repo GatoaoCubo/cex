@@ -25,7 +25,7 @@ related:
 <!-- 8F: F1=knowledge_card P03 F2=knowledge-card-builder F3=kinds_meta+builder-manifest F4=plan F5=scan F6=produce F7=gate F8=save -->
 
 ## Purpose
-A prompt_compiler is an intent-to-artifact transmutation ruleset that maps natural language user input to the structured CEX taxonomy tuple {kind, pillar, nucleus, verb}. It is the F1 CONSTRAIN layer of the 8F pipeline and the canonical source of truth for intent resolution across all 257 kinds in PT+EN. The output enables any nucleus to deterministically convert vague user input into precise builder dispatch without additional clarification rounds.
+A prompt_compiler is an intent-to-artifact transmutation ruleset that maps natural language user input to the structured CEX taxonomy tuple {kind, pillar, nucleus, verb}. It is the F1 CONSTRAIN layer of the 8F pipeline and the canonical source of truth for intent resolution across all 300 kinds in PT+EN. The output enables any nucleus to deterministically convert vague user input into precise builder dispatch without additional clarification rounds.
 
 ## Pillar
 P03 -- prompt

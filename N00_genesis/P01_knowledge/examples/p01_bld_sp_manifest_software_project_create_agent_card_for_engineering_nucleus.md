@@ -46,7 +46,7 @@ related:
 
 | Capability | Level | Notes |
 |------------|-------|-------|
-| Single artifact build (8F) | Expert | All 114 kinds |
+| Single artifact build (8F) | Expert | All 300 kinds |
 | Multi-kind crew dispatch | Advanced | Up to 235 crew configs |
 | Nucleus bootstrap sequence | Advanced | 7+ sequential artifacts |
 | Kind registration (4-file atomic) | Expert | manifest · instruction · system_prompt · KC |

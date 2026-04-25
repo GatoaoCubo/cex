@@ -48,7 +48,7 @@ related:
 ## Namespace Strategy
 | Namespace | Content | Est. Vectors |
 |-----------|---------|-------------|
-| kc | Knowledge cards (114 kinds) | ~2,200 |
+| kc | Knowledge cards (300 kinds) | ~2,200 |
 | memory | Builder memories, observations | ~500 |
 | artifact | Built artifacts from all pillars | ~5,000 |
 

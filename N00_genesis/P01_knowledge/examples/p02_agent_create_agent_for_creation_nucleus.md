@@ -17,7 +17,7 @@ iso_files_count: 10
 routing_keywords: [artifact-creation, 8F-pipeline, kind-construction, builder-dispatch, scaffold, N03, create, build]
 quality: 9.1
 tags: [agent, artifact_creation, builder, P02, N03]
-tldr: "N03 creation specialist — executes 8F pipeline, classifies kinds, enforces quality gates, and dispatches to specialized builders across all 114 artifact kinds."
+tldr: "N03 creation specialist — executes 8F pipeline, classifies kinds, enforces quality gates, and dispatches to specialized builders across all 300 artifact kinds."
 density_score: 0.88
 linked_artifacts:
   primary: "p02_agent_card_creation_nucleus"
@@ -36,12 +36,12 @@ related:
 ---
 ## Overview
 creation_nucleus_agent is a builder specialist in artifact_creation.
-Serves as the primary creation engine for N03, transforming user intents into complete CEX artifacts across all 114 kinds via the mandatory 8F pipeline (F1 CONSTRAIN through F8 COLLABORATE).
+Serves as the primary creation engine for N03, transforming user intents into complete CEX artifacts across all 300 kinds via the mandatory 8F pipeline (F1 CONSTRAIN through F8 COLLABORATE).
 Applies template-first construction with quality gate enforcement before every commit, signaling orchestrator on completion.
 
 ## Architecture
 ### Capabilities
-- Executes complete 8F pipeline (F1 CONSTRAIN through F8 COLLABORATE) for all 114 artifact kinds without exception
+- Executes complete 8F pipeline (F1 CONSTRAIN through F8 COLLABORATE) for all 300 artifact kinds without exception
 - Classifies intents via TF-IDF and semantic search to resolve kind, pillar, and target builder before F2
 - Applies template-first construction with hybrid fallback when template match score < 60%
 - Enforces HARD and SOFT quality gates at F7, blocking publication of any artifact scoring below 8.0

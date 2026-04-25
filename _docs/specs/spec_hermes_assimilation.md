@@ -271,7 +271,7 @@ Estimate: 6 tools x ~30min N03-Opus = ~3h. Budget: ~400k.
 ### Wave 5 -- Integration (N07)
 
 1. Wire tools into `.claude/settings.json` hooks (PostToolUse emits skill trigger)
-2. Update CLAUDE.md (284 -> 293 kinds, reference learning-loop tools)
+2. Update CLAUDE.md (284 -> 300 kinds, reference learning-loop tools)
 3. Update `.claude/rules/ubiquitous-language.md` (add Honcho/Hermes terms)
 4. Run `cex_doctor.py` + `cex_mirror_audit.py --check`
 5. Commit consolidation
@@ -305,7 +305,7 @@ Gate passes when:
 - [ ] `cex_skill_autocreate.py` successfully generates >= 1 skill from a live session with 5+ tool calls
 - [ ] `cex_mirror_audit.py --check` reports 0 orphan mirrors
 - [ ] `prompt_compiler` has 9 new rows (PT+EN)
-- [ ] `.cex/kinds_meta.json` at 293 kinds
+- [ ] `.cex/kinds_meta.json` at 300 kinds
 - [ ] CLAUDE.md header updated
 - [ ] All commits pass pre-commit hooks
 - [ ] Average artifact quality >= 9.0

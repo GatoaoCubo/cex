@@ -118,10 +118,10 @@ Total files:    1274 (expected 1274)
 Avg density:    0.99
 Result:         85 PASS | 13 WARN | 0 FAIL
 
-KC Library: 3 sources, 15 domains, 44/98 kinds covered
+KC Library: 3 sources, 15 domains, 44/300 kinds covered
 ```
 
-1. 0 FAIL across all 98 builders
+1. 0 FAIL across all 301 builders
 2. 13 WARN (all size-related, no naming or completeness issues)
 3. KC Library healthy: 15 domain KCs covering 44 of 98 CEX kinds (45% coverage)
 4. `kc_reward_and_alignment` present with `feeds_kinds: [reward_signal, quality_gate, llm_judge, scoring_rubric, eval_dataset, golden_test]`

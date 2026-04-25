@@ -34,7 +34,7 @@ related:
 ## Domain Memory
 - **RAG Pipeline**: TF-IDF retriever functional, 9.5MB index, ~2184 documents
 - **KC Library**: 106 knowledge cards covering all major kinds
-- **Taxonomy**: 114 kinds tracked across 12 pillars
+- **Taxonomy**: 300 kinds tracked across 12 pillars
 - **Embeddings**: Status unclear - mainly TF-IDF based retrieval
 - **Cross-References**: Naming convention drift (hyphens vs underscores)
 

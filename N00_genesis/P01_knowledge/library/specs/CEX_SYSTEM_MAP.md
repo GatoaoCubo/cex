@@ -10,7 +10,7 @@ author: n07-orchestrator
 title: "CEX System Map: Full Fractal Architecture Census"
 quality: 9.1
 tags: [system-map, architecture, fractal, census, meta]
-tldr: "Complete map of CEX 7-layer fractal architecture: 4740+ files, 115 kinds, 12 pillars, 8 nuclei, 50 tools"
+tldr: "Complete map of CEX 7-layer fractal architecture: 4740+ files, 300 kinds, 12 pillars, 8 nuclei, 148 tools"
 input_taxonomy: "symbiosis_audit_v1 -- full-repo cascade verification with wiring and collaboration mapping"
 related:
   - n03_readme_technical
@@ -34,7 +34,7 @@ related:
 | L0 Genesis+Config | 1 mold + 87 configs + 13 boot + 5 spawn | 106 | Bootstrap, routing, runtime state |
 | L1 Pillars (P01-P12) | 12 pillars x (schema+compiled+examples+templates) | 1196 | Universal typed knowledge store |
 | L2 Nuclei (N01-N07) | 7 nuclei x ~13 subdirs (mirrors P01-P12) | 508 | Domain-specific fractal instances |
-| L3 Archetypes | 107 builders x 13 ISOs + 3 shared + 109 sub-agents | 1527 | Factories that produce artifacts |
+| L3 Archetypes | 301 builders x 13 ISOs + 3 shared + 109 sub-agents | 1527 | Factories that produce artifacts |
 | L4 Knowledge Library | 108 kind KCs + 79 domain KCs + 9 specs | 199 | Deep knowledge for reasoning |
 | L5 Tools | 49 cex_* + 50 helpers + 56 SDK modules | 155 | Runtime execution engine |
 | L6 Governance | 9 rules + 13 commands + 71 learning records | 94 | Quality, decisions, memory |
@@ -147,7 +147,7 @@ archetypes/builders/
     skill_guided_decisions.md
     skill_memory_update.md
     skill_verification_protocol.md    [NEW from OpenClaude]
-  {kind}-builder/       107 builders, each with 13 ISOs:
+  {kind}-builder/       301 builders, each with 13 ISOs:
     bld_instruction     HOW to build (phases, steps)
     bld_schema          WHAT fields are required
     bld_output_template WHAT the output looks like

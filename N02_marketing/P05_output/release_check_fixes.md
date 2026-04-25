@@ -36,17 +36,17 @@ Ending state: **1 FAIL / 27 PASS / 28 total**
 ## Failures Fixed
 
 ### 1. readme:kinds -- FIXED
-- **Was**: README mentioned 132 kinds (badge), 115 (Key Numbers section)
-- **Reality**: 184 kinds in `.cex/kinds_meta.json`
+- **Was**: README mentioned 300 kinds (badge), 115 (Key Numbers section)
+- **Reality**: 300 kinds in `.cex/kinds_meta.json`
 - **Fix**: Updated all README occurrences to 184
 
 ### 2. readme:builders -- FIXED
-- **Was**: README mentioned 128/111 builders
+- **Was**: README mentioned 128/301 builders
 - **Reality**: 164 builder dirs in `archetypes/builders/` (excluding `_shared`)
 - **Fix**: Updated all README occurrences to 164
 
 ### 3. readme:tools -- FIXED
-- **Was**: README mentioned 83/51/52 tools
+- **Was**: README mentioned 83/51/148 tools
 - **Reality**: 86 `cex_*.py` files in `_tools/`
   - Count shifted 84 -> 85 -> 86 during session as POLISH_WAVE2 nuclei added
     `cex_wave_validator.py`, `cex_wave_autofix.py`, `cex_wave_autofix_placeholders.py`

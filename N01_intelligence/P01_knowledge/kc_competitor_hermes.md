@@ -345,7 +345,7 @@ code AGENTHERMES01 for free tier access during launch period.
 | No enterprise features (no SSO, no audit trail, no SOC 2) | CEX F8 COLLABORATE: git commit + signal = audit trail built-in |
 | No typed knowledge system | CEX 300 kinds x 12 pillars = typed; Hermes skills are untyped Python files |
 | No multi-nucleus orchestration (single agent, not 7-nucleus grid) | CEX N07 orchestrates 6 parallel nuclei |
-| Ecosystem still maturing (80 projects vs LangChain's 200+ integrations) | CEX's 300 builders compete on depth, not breadth |
+| Ecosystem still maturing (80 projects vs LangChain's 200+ integrations) | CEX's 301 builders compete on depth, not breadth |
 | No commercial observability layer (no LangSmith equivalent) | CEX cex_score.py + cex_quality_monitor.py + F7 = built-in |
 
 ---

@@ -20,7 +20,7 @@ density_score: 0.95
 
 ## THE PROBLEM
 
-CEX exists. 300 kinds, 302 builders, 8 nuclei, 4 runtimes. But nobody knows it exists.
+CEX exists. 300 kinds, 301 builders, 8 nuclei, 4 runtimes. But nobody knows it exists.
 
 The AI agent framework space in 2026 is a warzone:
 - **OpenClaw**: 9K -> 335K GitHub stars in 60 days (surpassed React)

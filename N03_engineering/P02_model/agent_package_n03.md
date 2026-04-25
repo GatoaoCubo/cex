@@ -70,7 +70,7 @@ Primary capabilities (Inventive Pride domain):
 |-----------|------|--------|-----------|
 | Schema design | input_schema, type_def, interface, enum_def, api_reference, validation_schema | P06 | HIGH |
 | Quality governance | scoring_rubric, quality_gate, llm_judge, regression_check | P07 | HIGH |
-| Artifact construction | all 257 kinds | all | HIGH |
+| Artifact construction | all 300 kinds | all | HIGH |
 | Architecture documentation | component_map, invariant, pattern, decision_record, diagram | P08 | MEDIUM |
 | Build tooling | code_executor, diff_strategy, cli_tool, code_of_conduct | P04 | MEDIUM |
 | Feedback loops | bugloop, self_improvement_loop, quality_gate, guardrail | P11 | MEDIUM |
@@ -134,7 +134,7 @@ Pre-deployment verification:
 - [ ] .cex/brand/brand_config.yaml loaded (or gracefully absent for dev repo)
 - [ ] N03_engineering/rules/n03-8f-enforcement.md readable
 - [ ] archetypes/builders/ accessible (259+ directories)
-- [ ] .cex/kinds_meta.json readable (257 kinds)
+- [ ] .cex/kinds_meta.json readable (300 kinds)
 - [ ] cex_compile.py runnable (python 3.8+)
 - [ ] signal_writer.py runnable
 - [ ] git configured (username + email)

@@ -30,7 +30,7 @@ related:
 
 ## Scope
 
-Target: `archetypes/builders/` — 164 builders x 13 ISOs = 2133 files.
+Target: `archetypes/builders/` — 301 builders x 13 ISOs = 2133 files.
 Tool: `_tools/cex_wave_validator.py` checks C1-C7 (llm_function, quality_null,
 id_pattern, domain_keywords, wrong_domain, placeholders_resolved, frontmatter_complete).
 
@@ -85,7 +85,7 @@ id_pattern, domain_keywords, wrong_domain, placeholders_resolved, frontmatter_co
 
 Tool: `_tools/cex_wave_validator.py`
 Target: `archetypes/builders/`
-Commit context: `[N03] POLISH: validator scan + auto-fix across 165 builders`
+Commit context: `[N03] POLISH: validator scan + auto-fix across 301 builders`
 
 ## Properties
 

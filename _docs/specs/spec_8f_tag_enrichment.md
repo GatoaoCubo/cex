@@ -19,7 +19,7 @@ density_score: 0.95
 ## Problem
 
 - 1054 artifacts have `kind:` in frontmatter but no `8f:` field
-- Builder ISOs already have `llm_function:` (6,634 ISOs tagged) but artifacts don't
+- Builder ISOs already have `llm_function:` (3,647 ISOs tagged) but artifacts don't
 - No way to query "show me all F7_govern artifacts" or "which pipeline stages are thin"
 - New artifacts created by builders don't auto-inherit the 8F tag
 - Dataview queries, cex_retriever, and cex_doctor can't filter by pipeline stage

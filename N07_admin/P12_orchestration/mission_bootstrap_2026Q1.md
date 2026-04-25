@@ -35,7 +35,7 @@ related:
 ## Situação
 
 O CEX repo é um sistema tipado de conhecimento para agentes LLM.
-Contém 99 kinds, 99 builders, 12 pillars, 7 nuclei, 8F pipeline.
+Contém 300 kinds, 301 builders, 12 pillars, 7 nuclei, 8F pipeline.
 
 **Primeiro boot fora do codexa-core.** O repo agora roda em pi + opus (xhigh thinking)
 com inteligência suficiente para se auto-construir — SE seguir os docs como arquiteturado.
@@ -163,15 +163,15 @@ foi a oficina que produziu a arquitetura CEX. Agora o CEX é autônomo.
 | Builders | 98/99 (+ _builder-builder meta) |
 | 13 ISOs por builder | ✅ 100% completo (1274 files) |
 | Doctor result | 86 PASS, 12 WARN (size 1-74B over 4096B), 0 FAIL |
-| KC Library | 98/98 kinds cobertos |
+| KC Library | 98/300 kinds cobertos |
 
 ### Tools
 
 | Tool | Status | Verificado |
 |------|--------|-----------|
 | cex_8f_motor.py | ✅ Intent → kind | Sim |
-| cex_8f_runner.py | ✅ Lista 99 kinds, --dry-run, --execute | Sim |
-| cex_doctor.py | ✅ Diagnostica 98 builders | Sim |
+| cex_8f_runner.py | ✅ Lista 300 kinds, --dry-run, --execute | Sim |
+| cex_doctor.py | ✅ Diagnostica 301 builders | Sim |
 | cex_compile.py | ⬜ Aceita --all / --lp / single file | A testar |
 | cex_index.py | ⬜ Aceita --query / --stats / --orphans | A testar |
 | signal_writer.py | ✅ Gera signal_{nucleus}_{timestamp}.json | Sim |
@@ -591,7 +591,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File _spawn/spawn_solo.ps1 -nucle
 | 4 | N03 perde contexto em sessão longa (>10 arts) | Média | Médio | Batches de max 12 artefatos. Refresh de contexto no handoff |
 | 5 | Git conflicts entre fases | Baixa | Alto | Sequencial. Commit + push entre fases |
 | 6 | Spawn_solo falha (CLI crash) | Baixa | Médio | Re-spawn. Handoff persiste em disco |
-| 7 | Builder ISOs desatualizados para kinds específicos | Baixa | Baixo | Doctor valida. KC library cobre 98/98 kinds |
+| 7 | Builder ISOs desatualizados para kinds específicos | Baixa | Baixo | Doctor valida. KC library cobre 98/300 kinds |
 
 ---
 

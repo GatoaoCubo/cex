@@ -1,6 +1,6 @@
 # CEXAI — Cognitive Exchange AI · Typed Knowledge System for LLM Agents
 
-> 300 kinds · 302 builders · 3,647 ISOs · 12 pillars · 8 nuclei (N00-N07) · 8F pipeline · cex_sdk runtime · 144 tools · 4 runtimes (Claude / Codex / Gemini / Ollama) · HERMES assimilated (2026-04-18)
+> 300 kinds · 301 builders · 3,647 ISOs · 12 pillars · 8 nuclei (N00-N07) · 8F pipeline · cex_sdk runtime · 148 tools · 4 runtimes (Claude / Codex / Gemini / Ollama) · HERMES assimilated (2026-04-18)
 
 ## Positioning
 
@@ -91,7 +91,7 @@ Check `CEX_NUCLEUS`. N07 = Orchestrator. N03 = Builder. Not set = read and decid
 | **Intent Resolver** | `_tools/cex_intent_resolver.py` (Python-first, 0 tokens) |
 | **Setup Validator** | `_tools/cex_setup_validator.py` (new PC readiness check) |
 | **Hygiene Tool** | `_tools/cex_hygiene.py` (artifact CRUD, 8 rules) |
-| **Prompt Cache** | `_tools/cex_prompt_cache.py` + `.cex/cache/` (260 builders pre-compiled) |
+| **Prompt Cache** | `_tools/cex_prompt_cache.py` + `.cex/cache/` (301 builders pre-compiled) |
 | **Preflight** | `_tools/cex_preflight.py` + `_tools/cex_preflight_mcp.py` — Phase 0 MCP gather (N07 only) + local TF-IDF + Haiku reranking |
 | **MCP security policy** | `_docs/specs/spec_mcp_security_policy.md` — N07 read-only MCP policy, secret management, contributor safety |
 | **Preflight sources** | `.cex/config/preflight_sources.yaml` — tiered provider config (free defaults + opt-in premium) |

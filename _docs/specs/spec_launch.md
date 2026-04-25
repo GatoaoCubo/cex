@@ -34,7 +34,7 @@ Ship CEXAI as a credible open-source project. Three tracks, three waves, zero GD
 | Metric | Value | Target | Gap |
 |--------|-------|--------|-----|
 | N00_genesis below 8.0 | 17 | 0 | 17 artifacts |
-| Prompt compiler coverage | 133/293 (45%) | 264/293 (90%) | 160 kinds |
+| Prompt compiler coverage | 133/293 (45%) | 264/293 (90%) | 300 kinds |
 | GitHub releases | 0 | 1 (v1.0.0) | 1 release |
 | Doctor FAIL | 0 | 0 | -- |
 | Release check | 28/28 | 28/28 | -- |
@@ -42,7 +42,7 @@ Ship CEXAI as a credible open-source project. Three tracks, three waves, zero GD
 
 ## Wave 1: N00 Genesis Hardening (N03 + N04)
 
-**Why first:** N00 is the archetype — every nucleus, pillar, kind, and builder inherits from it. A broken template propagates to 293 kinds x 12 ISOs = 3,516 artifacts.
+**Why first:** N00 is the archetype — every nucleus, pillar, kind, and builder inherits from it. A broken template propagates to 300 kinds x 12 ISOs = 3,516 artifacts.
 
 ### W1.1: Fix 17 below-8.0 artifacts (N03)
 
@@ -70,17 +70,17 @@ Ship CEXAI as a credible open-source project. Three tracks, three waves, zero GD
 
 ## Wave 2: Prompt Compiler Expansion (N03)
 
-**Why second:** the prompt compiler is the intent resolution engine. At 45% coverage, 160 kinds silently fail to resolve — the user says "build X" and N07 can't map it.
+**Why second:** the prompt compiler is the intent resolution engine. At 45% coverage, 300 kinds silently fail to resolve — the user says "build X" and N07 can't map it.
 
 ### W2.1: Generate missing kind entries
 
-160 kinds need entries in `p03_pc_cex_universal.md`. Each entry is a row in the bilingual pattern table:
+300 kinds need entries in `p03_pc_cex_universal.md`. Each entry is a row in the bilingual pattern table:
 
 ```
 | User says (EN) | User says (PT) | kind | pillar | nucleus |
 ```
 
-**Source:** `.cex/kinds_meta.json` has all 293 kinds with pillar assignments. The missing 160 can be batch-generated from metadata + builder ISOs.
+**Source:** `.cex/kinds_meta.json` has all 300 kinds with pillar assignments. The missing 160 can be batch-generated from metadata + builder ISOs.
 
 ### W2.2: Validate intent resolution end-to-end
 
@@ -97,7 +97,7 @@ For each of the 160 newly added kinds:
 
 ```bash
 # Tag
-git tag -a v1.0.0 -m "CEXAI v1.0.0: 293 kinds, 298 builders, 12 pillars, 8 nuclei"
+git tag -a v1.0.0 -m "CEXAI v1.0.0: 300 kinds, 301 builders, 12 pillars, 8 nuclei"
 
 # Release
 gh release create v1.0.0 \

@@ -159,7 +159,7 @@ The TF-IDF index is pre-built. Retrieval adds ~200ms per query. No rebuild neede
 | Pillar schemas | `.cex/cache/schema_{pillar}.yaml` | 30 days | Schema file modified |
 | Kind KCs (top-30 per kind) | `.cex/cache/{kind}_kcs.md` | 3 days | New KC added to library |
 
-**File**: `_tools/cex_prompt_cache.py` -- 125 builders pre-compiled, avg ~47.5 KB each.
+**File**: `_tools/cex_prompt_cache.py` -- 301 builders pre-compiled, avg ~47.5 KB each.
 
 ### What NOT to cache (volatile, session-specific)
 

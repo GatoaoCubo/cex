@@ -105,10 +105,10 @@ related:
 
 ## Artifact 4: kinds_meta.json
 
-**Role in intent resolution:** The canonical registry of all 123 kinds. Every intent ultimately resolves to one or more kind entries here. Contains descriptions, boundaries, pillars, naming patterns, and llm_function.
+**Role in intent resolution:** The canonical registry of all 300 kinds. Every intent ultimately resolves to one or more kind entries here. Contains descriptions, boundaries, pillars, naming patterns, and llm_function.
 
 **Strengths:**
-- Complete (123 kinds registered)
+- Complete (300 kinds registered)
 - Boundary field disambiguates similar kinds
 - llm_function field maps kind to 8F pipeline stage
 - Description field supports TF-IDF search
@@ -220,7 +220,7 @@ related:
 
 ## Deliverables from This Audit
 
-1. **Intent Resolution Map** (kc_intent_resolution_map.md) -- maps all 123 kinds to natural language phrases
+1. **Intent Resolution Map** (kc_intent_resolution_map.md) -- maps all 300 kinds to natural language phrases
 2. **Enhanced Intent Resolution Rule** -- expanded with missing mappings and PT triggers
 3. **Intent Resolution Quality Gate** -- 20 test cases (10 EN, 10 PT)
 

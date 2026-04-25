@@ -83,7 +83,7 @@ Or just run `setup.cmd` which does all of the above with validation.
 
 | Runtime | Version | Purpose | Install |
 |---------|---------|---------|---------|
-| **Python** | 3.12+ | All _tools/*.py (59 tools) | python.org or `winget install Python.3` |
+| **Python** | 3.12+ | All _tools/*.py (148 tools) | python.org or `winget install Python.3` |
 | **Node.js** | 18+ LTS | Claude Code runtime | nodejs.org or `winget install OpenJS.NodeJS.LTS` |
 | **Git** | 2.40+ | Version control, nucleus commits | git-scm.com or `winget install Git.Git` |
 

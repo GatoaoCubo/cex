@@ -20,7 +20,7 @@ rebuild_schedule: "on_change"
 freshness_max_days: 1
 embedding_model: "nomic-embed-text"
 density_score: 0.88
-corpus_size_estimate: "~3500 documents, ~15MB text (257 kinds + 424 KCs + handoffs + signals + manifests)"
+corpus_size_estimate: "~3500 documents, ~15MB text (300 kinds + 424 KCs + handoffs + signals + manifests)"
 linked_artifacts:
   primary: "p01_ec_nomic_embed"
   related: [p03_pc_cex_universal, p10_bi_knowledge_pool]

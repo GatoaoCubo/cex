@@ -32,7 +32,7 @@ related:
 | Metric | Result | Change vs 2026-04-12 |
 |--------|--------|----------------------|
 | System tests | **47 PASS / 11 FAIL** / 58 total (81.0%) | -1 pass (-1.8%) |
-| Builder doctor | **133 PASS / 21 WARN / 1 FAIL** / 155 builders | +10 builders added |
+| Builder doctor | **133 PASS / 21 WARN / 1 FAIL** / 301 builders | +10 builders added |
 | ASCII sanitizer | **159/159 clean** (100%) | +19 files, still 0 violations |
 | Env vars (8 required) | **0/8 SET** -- NOT in shell session | REGRESSION from 8/8 |
 | Disk space | **1.5 TB free** (23% used of 1.9 TB) | stable |
@@ -62,11 +62,11 @@ cex_system_test.py run: 2026-04-13 | Time: 8.6s
 
 | Category | Tests | Status | Notes |
 |----------|-------|--------|-------|
-| Doctor health | Pass | PASS | 133 builders, 2006 files, 6313 KB, avg density 0.93 |
+| Doctor health | Pass | PASS | 301 builders, 2006 files, 6313 KB, avg density 0.93 |
 | Sanitizer | Pass | PASS | 159 code files ASCII-clean, 0 violations |
 | Compile/recompile | Pass | PASS | Artifact compilation functional |
 | Retriever | Pass | PASS | TF-IDF functional via direct execution |
-| KC library | 162/98 kinds | PASS | Coverage exceeds minimum (165.3%) |
+| KC library | 162/300 kinds | PASS | Coverage exceeds minimum (165.3%) |
 | doctor:zero_warn | 21 WARN | FAIL | 21 builder density warnings (below 0.78 threshold) |
 | doctor:zero_fail | 1 FAIL | FAIL | 1 builder has critical failure |
 | builders:13_isos | prosody-config-builder | FAIL | 4 ISOs (expected 13) -- incomplete builder |

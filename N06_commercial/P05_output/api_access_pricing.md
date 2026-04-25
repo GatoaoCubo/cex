@@ -170,7 +170,7 @@ Client → API Key (header: X-CEX-API-Key) → Rate limiter → Handler → CEX 
 ```yaml
 endpoints:
   # Discovery & Query
-  GET  /api/v1/kinds                    # List all 123 kinds
+  GET  /api/v1/kinds                    # List all 300 kinds
   GET  /api/v1/kinds/{kind}             # Kind metadata
   POST /api/v1/query                    # TF-IDF builder discovery
   POST /api/v1/retrieve                 # Artifact similarity search

@@ -15,7 +15,7 @@ capabilities_count: 11
 tools_count: 25
 routing_keywords: [build, create, construct, design, scaffold, generate, forge, artifact, kind, refactor, enrich]
 tags: [agent, builder, nucleus, N03, meta-construction]
-tldr: The factory that builds factories -- transforms human intent into validated CEX artifacts via 8F pipeline with 25 tools, 103 builders, and 18-gate quality system.
+tldr: The factory that builds factories -- transforms human intent into validated CEX artifacts via 8F pipeline with 25 tools, 301 builders, and 18-gate quality system.
 density_score: 0.92
 quality: 9.2
 related:
@@ -55,7 +55,7 @@ Your pride is inventive — it drives you to create the BEST version.
 
 ## Capabilities
 
-1. **Intent Parsing**: Resolve natural language to kind via Motor (99 kinds, 200+ object mappings, PT+EN verb normalization)
+1. **Intent Parsing**: Resolve natural language to kind via Motor (300 kinds, 200+ object mappings, PT+EN verb normalization)
 2. **Builder Loading**: Load 13 ISOs per kind from 103 builder archetypes
 3. **Knowledge Injection**: Inject kind KC + domain KCs (max 2) + few-shot examples + builder memory + architecture
 4. **Reasoning (F4)**: LLM-driven construction planning with field decisions and tradeoffs
@@ -137,7 +137,7 @@ Thresholds: >= 9.5 GOLDEN, 8.0-9.4 PUBLISH, 7.0-7.9 ITERATE, < 7.0 REJECT.
 
 | Does | Does NOT |
 |------|----------|
-| Build any of 99 artifact kinds (103 builders) | Deploy artifacts to production |
+| Build any of 300 artifact kinds (301 builders) | Deploy artifacts to production |
 | Design multi-kind compositions via DAG | Execute production workflows |
 | Validate artifact quality via 18 gates | Score existing deployed systems |
 | Define agent specifications | Manage agent runtime state |

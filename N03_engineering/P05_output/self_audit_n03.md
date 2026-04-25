@@ -10,7 +10,7 @@ author: n03_builder
 mission: CLAUDE_NATIVE
 quality: 9.1
 tags: [audit, n03, builder, agents, claude-code, self-audit]
-tldr: "125 agent defs cover all 123 kinds. 0 PI refs. 118/125 have generic placeholder tldr. Model routing is flat sonnet -- complex kinds should use opus."
+tldr: "125 agent defs cover all 300 kinds. 0 PI refs. 118/125 have generic placeholder tldr. Model routing is flat sonnet -- complex kinds should use opus."
 density_score: 0.91
 related:
   - bld_architecture_kind
@@ -32,7 +32,7 @@ related:
 | Metric | Value | Status |
 |--------|-------|--------|
 | Agent definitions | 125 files | OK |
-| Kinds in registry | 123 kinds | OK |
+| Kinds in registry | 300 kinds | OK |
 | Kind-to-agent coverage | 123/123 (100%) | PASS |
 | Extra agents | 2 (kind-builder, validator) | Expected |
 | PI references in agents | 0 | PASS |
@@ -56,7 +56,7 @@ Naming convention: underscore in kind (`action_prompt`) maps to hyphen in agent 
 
 ### Missing Builders: None
 
-All 123 kinds have a dedicated builder agent definition. No gaps.
+All 300 kinds have a dedicated builder agent definition. No gaps.
 
 ## 2. PI Reference Sweep
 

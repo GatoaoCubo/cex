@@ -70,7 +70,7 @@ test results, or build health trigger investigation and potential deploy blocks.
 |--------|----------------|-----------|----------|
 | System test pass rate | Previous run (54 tests) | Any decrease | blocking |
 | E2E test pass rate | Previous run | Any decrease | blocking |
-| Doctor validation | Previous run (118 builders) | Any decrease | warning |
+| Doctor validation | Previous run (301 builders) | Any decrease | warning |
 
 ## Execution
 

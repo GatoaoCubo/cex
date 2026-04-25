@@ -168,9 +168,9 @@ Values:
 | Config kinds (env, rate_limit) | `false` | Internal settings |
 | Workflow, dispatch_rule | `false` | Internal orchestration |
 
-#### Estimated Split (293 kinds)
+#### Estimated Split (300 kinds)
 
-- `false`: ~220 kinds (75%) -- structural, internal
+- `false`: ~300 kinds (75%) -- structural, internal
 - `true`: ~73 kinds (25%) -- research-dependent, external-context-sensitive
 
 ### C. Pre-flight MCP Phase (NEW: Phase 3 in cex_preflight.py)
@@ -309,9 +309,9 @@ runtime (Claude, Codex, Gemini, Ollama) can produce a rich artifact.
 
 | Action | Path | Kind | Est. Size | Notes |
 |--------|------|------|-----------|-------|
-| REWRITE | `.cex/kinds_meta.json` | registry | +293 fields | Add requires_external_context to all 293 kinds |
+| REWRITE | `.cex/kinds_meta.json` | registry | +293 fields | Add requires_external_context to all 300 kinds |
 | CREATE | `_tools/cex_kind_classifier.py` | tool | 3KB | Classify kinds by external context need (batch) |
-| CREATE | `_docs/security/kind_tool_dependency_matrix.md` | knowledge_card | 4KB | Maps all 293 kinds to tool requirements |
+| CREATE | `_docs/security/kind_tool_dependency_matrix.md` | knowledge_card | 4KB | Maps all 300 kinds to tool requirements |
 
 ### Wave 3: Pre-flight Phase 0 (4 artifacts)
 
@@ -366,7 +366,7 @@ Wave 5: Documentation + Rules (handoff format, security docs)
 | DP2 | External context token budget | (a) 4K (b) 8K (c) 12K | **LOCKED: (b) 8K** | 8K external + 7K ISOs/KCs = 15K total per handoff |
 | DP3 | Pre-flight timeout | (a) 10s (b) 30s (c) 60s | **LOCKED: (c) 60s** | Generous timeout for network-bound MCP calls |
 | DP4 | Search strategy | Tiered: free defaults + optional premium | **LOCKED: tiered** | github+fetch+markitdown free; firecrawl/brave opt-in via preflight_sources.yaml |
-| DP5 | Classify all 293 kinds now or incrementally? | (a) all at once (b) top 50 first | **LOCKED: (a)** | One-time batch classification from kind descriptions |
+| DP5 | Classify all 300 kinds now or incrementally? | (a) all at once (b) top 50 first | **LOCKED: (a)** | One-time batch classification from kind descriptions |
 
 ## SECURITY POLICY (for open-source)
 
@@ -402,7 +402,7 @@ Wave 5: Documentation + Rules (handoff format, security docs)
 - [ ] `.mcp-n07.json` exists with 4 read-only MCP servers
 - [ ] `.claude/nucleus-settings/n07.json` denies all GitHub mutations
 - [ ] `boot/cex.ps1` and `boot/n07.ps1` pass `--mcp-config .mcp-n07.json`
-- [ ] `kinds_meta.json` has `requires_external_context` on all 293 kinds
+- [ ] `kinds_meta.json` has `requires_external_context` on all 300 kinds
 - [ ] `cex_preflight.py` Phase 0 gathers external context via MCP
 - [ ] `cex_router_v2.py` routes `requires_live_tools` kinds to Claude-only
 - [ ] Handoff format includes `## External Context` section

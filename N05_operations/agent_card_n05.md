@@ -92,7 +92,7 @@ related:
 | Tool | Purpose |
 |------|---------|
 | `cex_compile.py` | Compile .md artifacts to .yaml |
-| `cex_doctor.py` | Builder health check -- validates all 118 builders |
+| `cex_doctor.py` | Builder health check -- validates all 301 builders |
 | `cex_hooks.py` | Pre/post validation hooks + git pre-commit |
 | `cex_system_test.py` | Full system validation (54 tests) |
 | `cex_e2e_test.py` | End-to-end test runner |

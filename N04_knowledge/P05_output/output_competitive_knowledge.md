@@ -9,7 +9,7 @@ title: "Output Competitive Knowledge"
 version: 1.0.0
 author: N04
 tags: [competitive_analysis, knowledge, output]
-tldr: "This report analyzes the structural depth and governance of the CEX 'Knowledge Operating System' (114 kinds, 12 pillars, 8 functions) against leading LLM..."
+tldr: "This report analyzes the structural depth and governance of the CEX 'Knowledge Operating System' (300 kinds, 12 pillars, 8 functions) against leading LLM..."
 domain: knowledge
 created: 2026-04-06
 updated: 2026-04-07
@@ -28,7 +28,7 @@ related:
 
 # Competitive Intel: CEX Typed Knowledge vs. Market Frameworks
 
-This report analyzes the structural depth and governance of the CEX "Knowledge Operating System" (114 kinds, 12 pillars, 8 functions) against leading LLM orchestration frameworks.
+This report analyzes the structural depth and governance of the CEX "Knowledge Operating System" (300 kinds, 12 pillars, 8 functions) against leading LLM orchestration frameworks.
 
 ## 1. Competitive Landscape: Comparison Table
 
@@ -55,10 +55,10 @@ CEX is unique in its "Industrial Knowledge" approach. While competitors focus on
 ### Where CEX is behind:
 *   **Ecosystem & Community**: Frameworks like LangChain and DSPy have massive open-source momentum and pre-built connectors.
 *   **Programmatic Optimization**: DSPy’s ability to compile and optimize prompts based on metrics is more advanced than CEX's current manual/feedback-driven evolution.
-*   **Ease of Entry**: The CEX learning curve is steep (114 kinds vs. "just write a prompt").
+*   **Ease of Entry**: The CEX learning curve is steep (300 kinds vs. "just write a prompt").
 
 ### Insight: Advantage vs. Over-engineering
-The depth of CEX (114 kinds × 13 ISOs = 1482 possible configurations) is a **strategic advantage** for complex, high-reliability enterprise systems. 
+The depth of CEX (300 kinds × 13 ISOs = 1482 possible configurations) is a **strategic advantage** for complex, high-reliability enterprise systems. 
 *   **Advantage**: It enables "surgical updates." Want to change how an agent *remembers* without touching how it *thinks*? Edit `MEMORY.md`. Want to change its *tools* without touching its *identity*? Edit `TOOLS.md`.
 *   **Mitigation of Over-engineering**: CEX mitigates complexity through the **8F Motor**, which automates the selection and activation of these files based on simple natural language intents.
 

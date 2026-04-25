@@ -124,7 +124,7 @@ N07 never builds -- only plans, specs, dispatches, consolidates.
 
 ## CEX TAXONOMY AUDIT
 
-104 kinds total. Breakdown:
+300 kinds total. Breakdown:
 - 43 universal (industry standard: agent, api_client, dag, webhook, workflow...)
 - 30 AI-domain (recognized in LLM eng: prompt_template, chain, mcp_server, quality_gate...)
 - 13 semi-standard (recognized in context: decision_record/ADR, schedule/cron, env_config...)
@@ -217,7 +217,7 @@ N07 invokes these internally. User never types them.
 CEX had a skill-builder (9 ISO files), 3 KCs about skills, and AgentSkills.io spec knowledge.
 But `kind: skill` was never registered in kinds_meta.json. Gap fixed:
 
-- kinds_meta.json: 104 -> 105 kinds (skill added to P04)
+- kinds_meta.json: 104 -> 300 kinds (skill added to P04)
 - archetypes/builders/skill-builder/: 9 ISO files materialized from proof/
 - .claude/agents/skill-builder.md: agent registered (109th)
 
@@ -226,6 +226,6 @@ Alexa Skills, Semantic Kernel Skills, AgentSkills.io, AutoGPT, Devin.
 Boundary: trigger + phases + reusable. No identity (that is agent). No orchestration (that is workflow).
 
 ### Revised taxonomy score
-- 44 universal + 30 AI-domain + 13 semi + 18 invented = 105 kinds
+- 44 universal + 30 AI-domain + 13 semi + 18 invented = 300 kinds
 - skill joins universal tier (Alexa, Semantic Kernel, AgentSkills.io)
 - **84% standard taxonomy** (was 83%)

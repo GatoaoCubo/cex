@@ -38,7 +38,7 @@ related:
 
 ## Purpose
 Scores ANY artifact produced by the 8F pipeline. Applies universally
-to all 99 kinds. Each dimension has clear 10/5/1 anchors.
+to all 300 kinds. Each dimension has clear 10/5/1 anchors.
 
 ## Dimensions
 

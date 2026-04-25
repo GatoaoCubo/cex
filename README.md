@@ -12,7 +12,7 @@
   <img src="https://img.shields.io/badge/pillars-12-orange" alt="Pillars">
   <img src="https://img.shields.io/badge/nuclei-7+1-crimson" alt="Nuclei">
   <img src="https://img.shields.io/badge/kinds-300-red" alt="Kinds">
-  <img src="https://img.shields.io/badge/builders-302-brightgreen" alt="Builders">
+  <img src="https://img.shields.io/badge/builders-301-brightgreen" alt="Builders">
   <img src="https://img.shields.io/badge/tools-144-informational" alt="Tools">
 </p>
 
@@ -295,7 +295,7 @@ CEX becomes the **single source of truth** for your AI knowledge.
 ## Architecture at a glance
 
 ```
-Layer 0 — BUILDERS       302 factories × 12 ISOs each = 3,647 artifact constructors
+Layer 0 — BUILDERS       301 factories × 12 ISOs each = 3,647 artifact constructors
 Layer 1 — PILLARS        12 pillars × 300 kinds = the taxonomy
 Layer 2 — NUCLEI         8 nuclei (N00 archetype + N01–N07 operational) = the organization
 Layer 3 — PIPELINE       8-Function Pipeline (8F) = the assembly line
@@ -316,7 +316,7 @@ cex/
   _tools/                  144 Python CLI tools (cex_*.py)
   _spawn/                  Dispatch scripts (solo, grid, swarm, monitor)
   _docs/                   Whitepaper, architecture specs
-  archetypes/              Builder templates (302 builders × 12 ISOs)
+  archetypes/              Builder templates (301 builders × 12 ISOs)
     builders/              One directory per kind
     _shared/               Shared skills across all builders
   boot/                    Boot scripts per nucleus × per runtime

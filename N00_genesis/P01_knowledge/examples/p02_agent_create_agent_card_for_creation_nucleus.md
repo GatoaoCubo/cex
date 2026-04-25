@@ -17,7 +17,7 @@ iso_files_count: 13
 routing_keywords: [artifact-creation, 8F-pipeline, N03, kind-production, creation-nucleus, build]
 quality: 9.2
 tags: [agent, artifact_creation, builder, N03, P02, creation]
-tldr: "N03 creation nucleus — executes 8F pipeline across all 114 kinds, enforces quality gates, signals orchestrator on completion"
+tldr: "N03 creation nucleus — executes 8F pipeline across all 300 kinds, enforces quality gates, signals orchestrator on completion"
 density_score: 0.88
 linked_artifacts:
   primary: "p01_knowledge_card_create_knowledge_card_about_creation_best_practices"
@@ -36,13 +36,13 @@ related:
 ---
 ## Overview
 creation_nucleus_agent is the builder agent_group's primary specialist in artifact_creation.
-Transforms user intents into complete CEX artifacts across all 114 kinds via the mandatory 8F pipeline (F1 CONSTRAIN → F8 COLLABORATE).
+Transforms user intents into complete CEX artifacts across all 300 kinds via the mandatory 8F pipeline (F1 CONSTRAIN → F8 COLLABORATE).
 Operates as N03 — dispatched by N07, never autonomous; reads builder ISOs before every build; blocks publish when F7 score < 8.0.
 
 ## Architecture
 
 ### Capabilities
-- Executes the complete 8F pipeline (CONSTRAIN → BECOME → INJECT → REASON → CALL → PRODUCE → GOVERN → COLLABORATE) for all 114 artifact kinds without exception
+- Executes the complete 8F pipeline (CONSTRAIN → BECOME → INJECT → REASON → CALL → PRODUCE → GOVERN → COLLABORATE) for all 300 artifact kinds without exception
 - Classifies intents via TF-IDF and semantic search (cex_8f_motor.py) to resolve kind, pillar, and builder before F2
 - Applies template-first construction: adapts from existing match when score >= 60%, hybrid approach otherwise
 - Enforces 7 HARD + 10 SOFT quality gates at F7; returns to F6 (max 2 retries) before blocking

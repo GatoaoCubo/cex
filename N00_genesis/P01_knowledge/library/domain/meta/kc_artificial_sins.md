@@ -120,7 +120,7 @@ N00 is the **shareable exchange unit** of CEXAI. When you share CEXAI with anoth
 
 | Layer | Default | Customizable? | How |
 |-------|---------|---------------|-----|
-| N00 (archetype) | 293 kinds, 12 pillars, 298 builders | Extend (add kinds, never remove) | `kind_genesis` crew template |
+| N00 (archetype) | 300 kinds, 12 pillars, 301 builders | Extend (add kinds, never remove) | `kind_genesis` crew template |
 | N01-N07 (convention) | Pre-built 7 nuclei with sins | Override (change sin lens, model tier, pillar ownership) | Edit `nucleus_def_n0X.md` |
 | N08+ (community) | Does not exist yet | Create from scratch | `new_nucleus_bootstrap` checklist (9 files) |
 | Sin lens | Fixed per nucleus | Remap (swap sins between nuclei) | Edit `sin_lens:` in nucleus_def frontmatter |

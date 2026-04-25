@@ -189,7 +189,7 @@ Price point: $2,500-15,000/mo. ACV $30K-$180K. Annual commit required.
 
 | Dimension | Before Wave 4 | After Wave 4 | New Score | Delta |
 |-----------|--------------|-------------|-----------|-------|
-| Taxonomy completeness | 184 kinds, 75% | 202 kinds, all builders PASS (2666 ISOs) | 88% | +13pp |
+| Taxonomy completeness | 300 kinds, 75% | 300 kinds, all builders PASS (3647 ISOs) | 88% | +13pp |
 | Quality baseline | 8.96 mean, 90% builders healthy | 9.0-9.2 Wave 4, 100% validator PASS | 93% | +3pp |
 | Developer docs | KCs per kind, no docs site | Unchanged -- no portal, no quickstart | 40% | 0pp |
 | Pricing page | pricing_page builder did not exist | pricing_page + subscription_tier now built | 35% | +30pp |
@@ -271,7 +271,7 @@ Realistic Wave 5 GTM target: **72-75%**
 |-----------|-----------|-----------|-----------|
 | Accessible buyer personas | 2 (dev + practitioner) | 5 (+growth, +compliance, +enterprise arch) | +150% ICP breadth |
 | ENTERPRISE conversion blockers removed | 6 blockers remain | 2 blockers remain (no demo, no docs) | -67% blocker count |
-| Training data asset | 184 builders x 13 ISOs = 2,392 premium examples | 207 builders x 13 ISOs = 2,691 premium examples | +12.5% dataset size |
+| Training data asset | 301 builders x 13 ISOs = 2,392 premium examples | 301 builders x 13 ISOs = 2,691 premium examples | +12.5% dataset size |
 | Estimated addressable ENTERPRISE accounts | ~500 orgs (compliance ready) | ~2,000 orgs (RBAC+SSO+audit gate cleared) | +300% ENTERPRISE TAM |
 
 ### Revenue model recommendation (unchanged, reinforced)
@@ -283,7 +283,7 @@ Realistic Wave 5 GTM target: **72-75%**
 | Training data license | ENTERPRISE | $25K-200K one-time | 2,666 premium ISOs @ 9.0+ quality. Wave 4 adds compliance + commercial examples. |
 | White-label / OEM | ENTERPRISE | $10K-50K/mo | white_label_config kind now exists -- direct sales motion enabled |
 
-**Training data licensing is the highest-margin play**: 2,666 ISOs averaging 9.0+ quality is a premium fine-tuning dataset for enterprise AI teams. Wave 4 adds compliance, commercial, and multi-tenant examples that no public dataset covers. Estimated dataset value: $150K-$500K one-time license per enterprise.
+**Training data licensing is the highest-margin play**: 3,647 ISOs averaging 9.0+ quality is a premium fine-tuning dataset for enterprise AI teams. Wave 4 adds compliance, commercial, and multi-tenant examples that no public dataset covers. Estimated dataset value: $150K-$500K one-time license per enterprise.
 
 **White-label is the multiplier**: white_label_config + enterprise_sla + sso_config now form a complete OEM stack. System integrators can white-label CEX and resell at 3-5x. One OEM deal = $50K-$200K/year ACV.
 

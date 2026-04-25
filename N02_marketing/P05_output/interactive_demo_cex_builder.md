@@ -250,7 +250,7 @@ Same pipeline. Different brand. Your knowledge, your style, your repo.
 | To understand the full system | `/mentor` |
 | To deploy multiple artifacts at once | `/grid` |
 | To plan a complex project | `/mission [goal]` |
-| To see all 293 kinds | `python _tools/cex_query.py [term]` |
+| To see all 300 kinds | `python _tools/cex_query.py [term]` |
 
 **The decision is simple:**
 

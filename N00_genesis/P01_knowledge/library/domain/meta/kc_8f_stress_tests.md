@@ -94,7 +94,7 @@ CLEANUP  git stash pop
 | Quality gate | F7: 7H+6S+retry | None | Linter | None |
 | Structure | Schema frontmatter | Freeform | Code files | Freeform |
 | Versioning | F8 auto-commit | Manual | User git | None |
-| Routing | 8 nuclei × 115 kinds | 1 model | 1 model | 1 GPT |
+| Routing | 8 nuclei × 300 kinds | 1 model | 1 model | 1 GPT |
 | Reuse | F5 dedup + retriever | None | Grep | None |
 | Retry | F7→F6 auto (2x) | User re-prompts | User | User |
 | Reproducible | Same trace | Temperature-var | Session-var | Temperature-var |
@@ -110,9 +110,9 @@ CLEANUP  git stash pop
 ### 8F Loses
 
 1. **Latency**: 8 stages = ~3-5× slower for simple tasks
-2. **Setup cost**: 13 ISOs × 115 kinds = 1495 files to maintain
+2. **Setup cost**: 13 ISOs × 300 kinds = 1495 files to maintain
 3. **Rigidity**: assumes artifact output — poor for open conversation
-4. **Learning curve**: 52 tools vs "just type"
+4. **Learning curve**: 148 tools vs "just type"
 
 ## Related Artifacts
 

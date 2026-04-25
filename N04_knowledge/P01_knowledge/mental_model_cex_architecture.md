@@ -140,7 +140,7 @@ N00_genesis/         <- the mold
     P02_model/       <- base agent definitions
     P03_prompt/      <- universal prompt layers (300-kind intent resolution)
     ...P12           <- all 12 pillars defined here first
-    archetypes/      <- 302 builders (12 ISOs each = 3647 total ISOs)
+    archetypes/      <- 301 builders (12 ISOs each = 3647 total ISOs)
     boot/            <- session startup artifacts
 
 N0X_{domain}/        <- instance of N00 mold

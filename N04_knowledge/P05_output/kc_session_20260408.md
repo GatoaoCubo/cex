@@ -55,7 +55,7 @@ related:
 |---------|------|-------------|--------|
 | N01 | Intent resolution research | Patterns across 16 sources | `a69fe71d` |
 | N02 | Value proposition + seed words | Content + didactic protocol | `cfb41060` |
-| N03 | Intent resolution map (123 kinds) | Full mapping + quality gate + audit | `2783acd0` |
+| N03 | Intent resolution map (300 kinds) | Full mapping + quality gate + audit | `2783acd0` |
 | N04 | Intent resolution KC | KC + Rosetta Stone expansion + metaphor audit | `a447642a` |
 | N05 | E2E pipeline test | Intent resolution testing + failure modes | `91674b6a` |
 | N06 | Commercial moat analysis | Pricing tiers + value calculator | `8d050bf0` |
@@ -88,7 +88,7 @@ related:
 | Kind KCs | 123 | 123 (98/98 covered) |
 | Python tools | ~59 | 92 (64 cex_*) |
 | Sub-agents | 125 | 125 |
-| Intent resolution | Not mapped | 123 kinds mapped + scoring |
+| Intent resolution | Not mapped | 300 kinds mapped + scoring |
 | N07 memory files | 5 | 6 |
 | Rules | 16 | 16 |
 
@@ -112,7 +112,7 @@ related:
 |---------|----------------------|---------------|
 | N01 | 8+ | Intent resolution research, benchmark dataset (50 cases), confidence scoring KC |
 | N02 | 6+ | Onboarding v3, FAQ v3/v4, case studies, seed words, value prop |
-| N03 | 10+ | Intent resolution map (123 kinds), didactic protocol, capabilities rename (146 files) |
+| N03 | 10+ | Intent resolution map (300 kinds), didactic protocol, capabilities rename (146 files) |
 | N04 | 6+ | Intent resolution KC, Rosetta Stone update, metaphor audit, session summary |
 | N05 | 8+ | cex_continuous.py, fine-tune export, EN verbs, fuzzy matching, 65 synonyms, e2e tests |
 | N06 | 6+ | Pricing tiers, moat analysis, L0-L7 depth spec, Content Factory funnel |

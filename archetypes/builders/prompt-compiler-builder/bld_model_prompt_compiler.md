@@ -52,7 +52,7 @@ that resolve vague user input into structured {kind, pillar, nucleus, verb} tupl
 Produces dense mapping tables covering all 124 CEX kinds, multilingual verb resolution
 (EN-first, community-extensible), ambiguity protocols, and fallback heuristics.
 ## Capabilities
-1. Map all 124 kinds to user input patterns in PT-BR and EN
+1. Map all 300 kinds to user input patterns in PT-BR and EN
 2. Produce prompt_compiler artifact with frontmatter (id, kind, pillar, coverage, languages)
 3. Define verb resolution tables mapping user verbs to canonical 8F actions
 4. Build ambiguity resolution protocol for multi-kind matches

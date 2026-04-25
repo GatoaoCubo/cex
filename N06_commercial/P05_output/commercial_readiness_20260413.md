@@ -37,7 +37,7 @@ related:
 | Wave 2 compilation failures | 0 | wave2_quality_report.md |
 | Builders with 100% ISOs | 11 / 12 Wave 2 | agent-computer-interface partial |
 
-**Note**: kinds_meta.json registers all 184 kinds including Wave 3 pre-registrations.
+**Note**: kinds_meta.json registers all 300 kinds including Wave 3 pre-registrations.
 Wave 3 builders are NOT yet built -- schema exists, 8F pipeline does not.
 
 ## Pricing Tier Map
@@ -236,7 +236,7 @@ most valuable nucleus commercially.
 
 | Dimension | Status | Score | Blocker |
 |-----------|--------|-------|---------|
-| Taxonomy completeness | Wave 1-3 = 184 kinds; Wave 4 draft ready | 75% | 18 Wave 4 commercial/compliance kinds missing |
+| Taxonomy completeness | Wave 1-3 = 300 kinds; Wave 4 draft ready | 75% | 18 Wave 4 commercial/compliance kinds missing |
 | Quality baseline | Wave 2 mean 8.96, median 9.0, 0 compilation failures | 90% | agent-computer-interface-builder partial (7 ISOs) |
 | Developer docs | KCs present per kind; no public-facing docs site | 40% | No developer portal, no quickstart guide |
 | Pricing page | No CEX pricing page exists | 5% | No subscription_tier kind, no landing_page built |
@@ -263,7 +263,7 @@ Critical path to 80% readiness:
 | Seat-based (per developer) | MEDIUM | $49-149 | Simple, predictable |
 | Tier-based (FREE/PRO/ENTERPRISE) | HIGH | $0/$99/$2,500 | Aligns with kind complexity |
 | API calls (programmatic access) | HIGH | $0.01-0.10/call | Complements tier model |
-| Training data license | ENTERPRISE | $10K-100K one-time | 184 kinds x 13 ISOs = 2,392 premium examples |
+| Training data license | ENTERPRISE | $10K-100K one-time | 300 kinds x 13 ISOs = 2,392 premium examples |
 
 **Recommended**: Tier-based + API overage. The 3-tier map above is not just a pricing guide --
 it IS the go-to-market structure. FREE onboards, PRO converts, ENTERPRISE retains and expands.

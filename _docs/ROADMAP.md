@@ -21,7 +21,7 @@ density_score: 1.0
 | Builder dirs | 124 (123 kind-builders + _builder-builder) |
 | Builder ISOs | 1,599 files (avg density 0.95) |
 | Sub-agents | 125 (.claude/agents/) |
-| Kind KCs | 123 (98/98 kinds covered) |
+| Kind KCs | 123 (98/300 kinds covered) |
 | Flywheel | 109/109 WIRED (100%) |
 | Python tools | 95 total (67 cex_* tools) |
 | Rules | 16 |
@@ -139,7 +139,7 @@ Commit: `7a78dcdf`.
 Full 6-nucleus grid for intent resolution canonicalization:
 - N01: intent resolution patterns across 16 sources
 - N02: value prop + seed words + didactic protocol
-- N03: intent resolution map (123 kinds) + quality gate + audit
+- N03: intent resolution map (300 kinds) + quality gate + audit
 - N04: intent resolution KC + Rosetta Stone expansion + metaphor audit
 - N05: e2e pipeline test + failure modes + performance audit
 - N06: moat analysis + pricing tiers + value calculator
@@ -202,10 +202,10 @@ Performance on GTX 1070 (4GB VRAM):
 ### S1: Fine-tune dataset preparation
 
 Build QLoRA training dataset from CEX's own artifacts:
-- Source: 1,630 ISOs + 123 KCs + 377 templates/examples
+- Source: 3,647 ISOs + 123 KCs + 377 templates/examples
 - Format: instruction/response pairs for Qwen 3 8B
 - Tool: `cex_continuous.py` (built in H2) has export mode
-- Target: 2,000+ training pairs covering all 123 kinds
+- Target: 2,000+ training pairs covering all 300 kinds
 - Validate: train/test split, dedup, format check
 
 ### S2: QLoRA fine-tune on Qwen 3 8B

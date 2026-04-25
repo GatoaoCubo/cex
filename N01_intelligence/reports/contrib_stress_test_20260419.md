@@ -38,7 +38,7 @@ gaps identified below, ranked by contributor-drop-off risk.
 
 | Framework | CONTRIBUTING.md | Contributors (Apr 2026) | Complexity |
 |-----------|----------------|------------------------|-----------|
-| **CEX** (this doc) | 166 lines, 4 paths | ~1 (bootstrapping) | High (293 kinds, 13 ISOs) |
+| **CEX** (this doc) | 166 lines, 4 paths | ~1 (bootstrapping) | High (300 kinds, 13 ISOs) |
 | **LangChain** | ~800 lines, dev+test+lint | 3,600+ | High (many integrations) |
 | **CrewAI** | ~400 lines, Poetry-first | 800+ | Medium (agent orchestration) |
 
@@ -192,7 +192,7 @@ on structural grounds that could have been caught automatically.
 | GFI discoverability | Low (8 listed) | High (GitHub labels) | Medium | NO |
 | Review transparency | None | Partial | Good | NO |
 | PR merge speed (estimated) | Unknown | 1-2 weeks | ~1 week | UNKNOWN |
-| Domain specificity (kinds) | 293 kinds, 13 ISOs | Unlimited integrations | Agent-focused | YES (depth) |
+| Domain specificity (kinds) | 300 kinds, 13 ISOs | Unlimited integrations | Agent-focused | YES (depth) |
 
 **Net**: CEX wins on architectural depth and taxonomy clarity. CEX loses on
 operational onboarding and community process transparency.

@@ -385,7 +385,7 @@ taxonomy is broad but thin at the DDD boundary. The 10 recommended new kinds wou
 true COVERED to ~19% and eliminate the 6 highest-severity overloads.
 
 **Competitive context:** LangChain has ~40 typed objects (Chain, Tool, Memory, Agent, Retriever,
-Callback). AutoGen has ~15. CrewAI has ~8. CEX's 257 kinds is 6-32x larger -- the deepest
+Callback). AutoGen has ~15. CrewAI has ~8. CEX's 300 kinds is 6-32x larger -- the deepest
 typed taxonomy in the AI agent infrastructure space. The DDD gap is not a weakness but a
 growth frontier: 22 MISSING concepts represent 22 builders that could further differentiate CEX
 from every competitor.

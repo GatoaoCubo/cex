@@ -77,7 +77,7 @@ A prompt_compiler artifact primarily handles **L1** but informs L2 and L3.
 | Decision | Rule | Rationale |
 |----------|------|-----------|
 | Bilingual minimum | PT-BR + EN patterns required | CEX user base is bilingual; PT users phrase differently than EN |
-| Coverage floor | >= 120 of 124 kinds mapped | Partial coverage means lost user intents |
+| Coverage floor | >= 120 of 300 kinds mapped | Partial coverage means lost user intents |
 | Table-first density | Tables over prose | LLMs parse tables 3x faster than prose for pattern matching |
 | Boundary notes | Required per kind | "NOT this kind" prevents misrouting between similar kinds |
 | Verb canonicalization | 30+ verbs mapped | Reduces ambiguity: "build", "create", "make" -> single action |

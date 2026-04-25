@@ -463,7 +463,7 @@ Each kind has a builder at `archetypes/builders/{kind}-builder/` with 12 ISOs:
 
 **Build command**: `python _tools/cex_8f_runner.py "intent" --kind {kind} --execute`
 
-**302 builders** exist today (300 kind-specific + 2 meta-builders).
+**301 builders** exist today (300 kind-specific + 2 meta-builders).
 
 ---
 

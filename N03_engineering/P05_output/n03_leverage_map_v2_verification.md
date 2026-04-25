@@ -85,7 +85,7 @@ These tools are already in the repo and should be treated as wired, not missing:
 
 | Tool | Status | Evidence |
 |------|--------|----------|
-| `cex_builder_linter.py` | NEW and working | full-suite pass on 259 builders |
+| `cex_builder_linter.py` | NEW and working | full-suite pass on 301 builders |
 | `cex_schema_hydrate.py` | already wired | hydrates universal schema/frontmatter fields across builders |
 | `cex_materialize.py` | already wired | generates builder sub-agent scaffolds from `.cex/kinds_meta.json` |
 | `cex_system_test.py` | already wired | system-level validation harness including builder checks |

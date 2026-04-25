@@ -22,7 +22,7 @@ updated: "2026-04-17"
 
 ## THE PROBLEM
 
-CEX has 258 builders, 257 kinds, and 8 nuclei -- but each nucleus is a **partial portfolio**.
+CEX has 301 builders, 300 kinds, and 8 nuclei -- but each nucleus is a **partial portfolio**.
 
 Current gap matrix (artifacts per pillar per nucleus, empirically measured):
 

@@ -562,7 +562,7 @@ Bot                               --                               agent (P02)
 | Human-in-the-loop | 7/10 (Question node + Planning Mode) | 7/10 (AskForHumanHelp) | 8/10 (GDP + manifest) |
 | Autonomous execution | 7/10 (Persistent Planning) | 8/10 (dual-loop) | 7/10 (mission runner) |
 | Quality pipeline | 3/10 (no formal scoring) | 3/10 (no formal scoring) | 9/10 (8F + 3-layer scoring) |
-| Typed knowledge | 4/10 (Knowledge Base) | 2/10 (ad-hoc) | 9/10 (130 kinds, schemas) |
+| Typed knowledge | 4/10 (Knowledge Base) | 2/10 (ad-hoc) | 9/10 (300 kinds, schemas) |
 | Safety / isolation | 5/10 (cloud SaaS) | 8/10 (Docker containers) | 4/10 (host + git rollback) |
 | Open-source maturity | 6/10 (Studio July 2025) | 5/10 (dormant since 2024) | 5/10 (private) |
 

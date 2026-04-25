@@ -84,7 +84,7 @@ updated: "2026-04-22"
 | Wire | Status | Gap |
 |------|--------|-----|
 | F3b auto-persist hook | WIRED (N05 BOOTSTRAP_SELF_W1) | -- |
-| F5 CALL tool-to-kind registry | 47/293 kinds mapped | 246 kinds unmapped |
+| F5 CALL tool-to-kind registry | 47/300 kinds mapped | 300 kinds unmapped |
 | depends_on dependency graph | 62/293 patched | 231 missing |
 | Flywheel audit all-PASS | UNKNOWN | Run to verify |
 | Cross-nucleus handoff ACK | NOT wired | design + build |
@@ -98,11 +98,11 @@ updated: "2026-04-22"
 
 | Tier | Measurable 100% Condition |
 |------|--------------------------|
-| T1 Scaffolding | `cex_doctor.py` 0 FAIL + all 293 kinds have depends_on |
+| T1 Scaffolding | `cex_doctor.py` 0 FAIL + all 300 kinds have depends_on |
 | T2 Fractal | Every nucleus: component_map + benchmark + 3+ P12 workflows + data_contract |
 | T3 Quality | 0 artifacts with quality: null or quality < 8.0; 80%+ at >= 9.0 |
 | T4 SDK | 3 new SDK domains (output, architecture, config) with base classes |
-| T5 Wiring | tool-to-kind for all 293 kinds; flywheel audit 109/109 PASS |
+| T5 Wiring | tool-to-kind for all 300 kinds; flywheel audit 109/109 PASS |
 | T6 Evals | Every nucleus P07: quality_gate + scoring_rubric + benchmark + llm_judge |
 
 ---
@@ -116,15 +116,15 @@ updated: "2026-04-22"
 
 **N01 task:**
 - Read all 293 KCs + builder architecture files
-- For each of the 231 kinds missing depends_on: infer dependencies from KC references + builder architecture sections
+- For each of the 300 kinds missing depends_on: infer dependencies from KC references + builder architecture sections
 - Output: dependency patch file `.cex/kind_deps_patch.json` with 231 entries
 - Format: `{kind: [dep1, dep2, ...]}`
 
 **N07 tool task:**
 - Extend `_tools/cex_kind_deps.py` KNOWN_DEPS dict with all 231 entries from N01 output
 - Run: `python _tools/cex_kind_deps.py --patch`
-- Verify: all 293 kinds have depends_on
-- Commit: `[N07] FULL_COVERAGE W1: 293/293 kinds with depends_on`
+- Verify: all 300 kinds have depends_on
+- Commit: `[N07] FULL_COVERAGE W1: 293/300 kinds with depends_on`
 
 **Success gate:** `python -c "import json; d=json.load(open('.cex/kinds_meta.json')); print(sum(1 for v in d.values() if v.get('depends_on')))"`
 Expected: >= 280 (some leaf kinds have no deps — that is correct, not a gap)
@@ -232,13 +232,13 @@ is expected — they need peer review scoring. This wave assigns those scores.
 ### WAVE 5 — Wiring Completion (N01 + N07)
 
 **Owner:** N01 (research), N07 (tool extension)
-**Gap:** tool-to-kind for 246 kinds; flywheel audit; cross-nucleus ACK
+**Gap:** tool-to-kind for 300 kinds; flywheel audit; cross-nucleus ACK
 
 **N01 task — Extend tool-to-kind registry:**
 - Read `.cex/kind_tool_registry.json` (currently 47 kinds mapped)
 - Read all `_tools/cex_*.py` docstrings more deeply: many tools handle multiple kinds
 - For each of 246 unmapped kinds: find the most relevant tool by name similarity + docstring
-- Output: `.cex/kind_tool_registry_extended.json` with 293 kinds mapped
+- Output: `.cex/kind_tool_registry_extended.json` with 300 kinds mapped
 - Update `_tools/cex_kind_tool_map.py` HEURISTICS dict with explicit kind->tool mappings
 
 **N07 task — Flywheel audit + ACK protocol:**
@@ -257,11 +257,11 @@ is expected — they need peer review scoring. This wave assigns those scores.
 
 | Wave | Nuclei | Primary Output | Success Metric |
 |------|--------|----------------|----------------|
-| W1 depends_on | N01 + N07 | 293/293 kinds with depends_on | `cex_kind_deps.py --report` shows 0 gaps |
+| W1 depends_on | N01 + N07 | 293/300 kinds with depends_on | `cex_kind_deps.py --report` shows 0 gaps |
 | W2 Fractal | N04, N05, N06, N07 | 4 component_maps + 6+ P07 artifacts | All 7 nuclei have component_map + benchmark |
 | W3 Quality | All (via evolve) | 0 null + 0 < 8.0 quality | `cex_evolve.py report` shows 100% scored |
 | W4 SDK | N03 + N05 | 3 new cex_sdk domains | `pytest cex_sdk/tests/ -q` all pass |
-| W5 Wiring | N01 + N07 | 293 kinds tool-mapped + ACK protocol | `cex_flywheel_audit.py audit` 109/109 PASS |
+| W5 Wiring | N01 + N07 | 300 kinds tool-mapped + ACK protocol | `cex_flywheel_audit.py audit` 109/109 PASS |
 
 **Total new artifacts:** ~60 artifacts + 3 SDK domains + 293 depends_on patches + 246 tool mappings
 
@@ -300,7 +300,7 @@ python _tools/cex_flywheel_audit.py audit --format json > .cex/quality/flywheel_
 
 ```bash
 # W1
-bash _spawn/dispatch.sh solo n01 "FULL_COVERAGE W1 — depends_on research for 231 kinds"
+bash _spawn/dispatch.sh solo n01 "FULL_COVERAGE W1 — depends_on research for 300 kinds"
 
 # W2
 bash _spawn/dispatch.sh grid FULL_COVERAGE_W2   # handoffs: n04, n05, n06, n07
@@ -325,7 +325,7 @@ Run after all 5 waves complete:
 python _tools/cex_doctor.py                          # 0 FAIL
 python _tools/cex_flywheel_audit.py audit            # 109/109 PASS
 python _tools/cex_kind_deps.py --report              # 0 gaps
-python _tools/cex_kind_tool_map.py --output /dev/null # 293 kinds indexed
+python _tools/cex_kind_tool_map.py --output /dev/null # 300 kinds indexed
 python _tools/cex_evolve.py report                   # 0 null, 0 < 8.0
 python -c "from cex_sdk import output, architecture, config; print('SDK OK')"
 python -m pytest cex_sdk/tests/ -q                  # all pass
@@ -353,8 +353,8 @@ git log --oneline -20                               # clean history
 
 | Item | Reason |
 |------|--------|
-| HERMES ISO set (scoring_rubric, llm_judge, skill, context_file) for all 295 builders | 1,180 new files — separate HERMES_ISO_BACKFILL mission |
+| HERMES ISO set (scoring_rubric, llm_judge, skill, context_file) for all 301 builders | 1,180 new files — separate HERMES_ISO_BACKFILL mission |
 | Public GitHub release automation | Requires human review gate |
 | LiteLLM / multi-runtime CI | Separate MULTIRUNTIME mission |
 | Fine-tuning dataset generation | Separate FT mission |
-| Per-kind example instances (live artifacts for all 293 kinds) | EXAMPLE_LIBRARY mission |
+| Per-kind example instances (live artifacts for all 300 kinds) | EXAMPLE_LIBRARY mission |

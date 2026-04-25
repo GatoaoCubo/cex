@@ -148,7 +148,7 @@ Quality gates are structurally complete but **spec-to-implementation drift exist
 
 ---
 
-## Tool Coverage Sample (30 of 131 tools)
+## Tool Coverage Sample (30 of 148 tools)
 
 | Tool | Pillar | Kind Mapping | Nucleus | Wired |
 |------|--------|-------------|---------|-------|
@@ -220,9 +220,9 @@ Breakdown by layer:
 - L0 Genesis & Config: 12/12 WIRED
 - L1 Pillars (P01-P12): 24/24 WIRED
 - L2 Nuclei (N01-N07): 21/21 WIRED
-- L3 Archetypes: 7/7 WIRED (295 builders, 4733 ISOs)
+- L3 Archetypes: 7/7 WIRED (301 builders, 3647 ISOs)
 - L4 Knowledge Library: 3/3 WIRED (293/293 KC coverage)
-- L5 Tools: 12/12 WIRED (131 tools, 56 SDK modules)
+- L5 Tools: 12/12 WIRED (148 tools, 56 SDK modules)
 - L6 Governance: 3/3 WIRED (11 rules, 20 commands, 25 learning records)
 - WIRES (OpenClaude integrations): 18/18 WIRED
 - CASCADES (dependency chains): 7/7 WIRED
@@ -254,7 +254,7 @@ production.
 
 ### 1. CLAUDE.md tool count inaccuracy (severity: LOW)
 
-CLAUDE.md claims "158 tools" but `_tools/cex_*.py` yields 131. Including
+CLAUDE.md claims "148 tools" but `_tools/cex_*.py` yields 131. Including
 non-prefixed tools brings the count to ~155. The documented figure is stale.
 
 **File**: `CLAUDE.md` line ~1
@@ -279,9 +279,9 @@ This is spec-implementation divergence.
 **Fix**: Either implement 12LP in `cex_score.py` or update the 8F doc to
 match the actual 3-layer scoring system
 
-### 4. Doctor density warnings: 94 builders below threshold (severity: LOW)
+### 4. Doctor density warnings: 301 builders below threshold (severity: LOW)
 
-94 of 294 builders have at least one ISO below 0.78 density. These are
+94 of 301 builders have at least one ISO below 0.78 density. These are
 WARN not FAIL -- the builder still functions -- but it indicates that ~32%
 of builder ISOs have thin content.
 
@@ -322,7 +322,7 @@ kind with zero usage.
 4. **Batch-evolve the 94 low-density builder ISOs.**
    32% of builders have ISOs below 0.78 density. Run a targeted evolution
    pass: `python _tools/cex_evolve.py --target density --threshold 0.78`
-   Path: `archetypes/builders/*/bld_*.md` (94 builders affected)
+   Path: `archetypes/builders/*/bld_*.md` (301 builders affected)
 
 5. **Instantiate llm_evaluation_scenario in N05.**
    The kind exists with full builder infrastructure but zero instances.

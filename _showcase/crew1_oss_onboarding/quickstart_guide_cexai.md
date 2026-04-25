@@ -30,7 +30,7 @@ density_score: 1.0
 
 ## Overview
 
-CEXAI is a typed knowledge system for LLM agents: 300 artifact kinds, 302 builders,
+CEXAI is a typed knowledge system for LLM agents: 300 artifact kinds, 301 builders,
 12 pillars, and an 8-function pipeline (8F) that converts a natural-language intent
 into a validated, structured markdown artifact. This guide gets you to your first
 artifact in 5 minutes using only the CLI -- no framework knowledge required upfront.

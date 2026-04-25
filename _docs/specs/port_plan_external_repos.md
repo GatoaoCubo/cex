@@ -23,7 +23,7 @@ density_score: 1.0
 
 | Capability | CEX implementation |
 |------------|-------------------|
-| Typed knowledge taxonomy | 123 kinds x 12 pillars x 125 builders x 12 ISOs |
+| Typed knowledge taxonomy | 300 kinds x 12 pillars x 301 builders x 12 ISOs |
 | Reasoning protocol | 8F (F1 CONSTRAIN -> F8 COLLABORATE) mandatory on every task |
 | Nuclei | 8 nuclei (N00-N07) with fractal subdirs mirroring pillars |
 | Dispatch | 3-level CLI routing: L1 explicit / L2 YAML fallback_chain / L3 smart router |
@@ -84,7 +84,7 @@ focus on wave planning, star-command dispatch, and editor synchronization.
 | Peer feature | CEX equivalent (stronger) |
 |--------------|--------------------------|
 | Free-form prompt templates | 123-kind typed taxonomy -- enforces discipline |
-| Ad-hoc builder scripts | 125 builders x 12 ISOs -- fractal, scorable, auditable |
+| Ad-hoc builder scripts | 301 builders x 12 ISOs -- fractal, scorable, auditable |
 | Generic "agent" concept | Nuclei (N01-N07) with sin lenses, pillars, fractal dirs |
 | Unbounded autonomy | GDP -- user decides WHAT, CEX decides HOW |
 | Brand-agnostic output | brand_config.yaml propagation -- every artifact speaks the brand |

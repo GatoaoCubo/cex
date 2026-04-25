@@ -6,7 +6,7 @@ Exchange. CEXAI stands for Cognitive Exchange AI. The core idea is that intellig
 
 ## How is CEX different from CrewAI / LangChain / AutoGen?
 
-Those frameworks give you primitives for building multi-agent systems. CEXAI is a complete, opinionated system already built on top of similar primitives. It ships with 300 artifact types, 302 builders, 12 domain pillars, 7 specialized nuclei, and a quality governance pipeline. You do not assemble the pieces -- you configure and use them.
+Those frameworks give you primitives for building multi-agent systems. CEXAI is a complete, opinionated system already built on top of similar primitives. It ships with 300 artifact types, 301 builders, 12 domain pillars, 7 specialized nuclei, and a quality governance pipeline. You do not assemble the pieces -- you configure and use them.
 
 The tradeoff: CrewAI/LangChain are more flexible if you want to build from scratch. CEXAI is more productive if your work fits the AI brain model -- especially when you want typed, governed, exchangeable knowledge assets instead of throwaway LLM outputs.
 

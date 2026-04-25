@@ -66,7 +66,7 @@ Depended on by: ALL other layers
 
 ## Layer 2: Builder Runtime (archetypes/)
 
-The builders are the execution engine. 259 builders, each with 13 ISOs.
+The builders are the execution engine. 301 builders, each with 13 ISOs.
 
 ```
 archetypes/builders/
@@ -180,7 +180,7 @@ N03_engineering/P{xx}/{kind}_{name}.md (saved artifact)
 |-------|---------------|-------|
 | L0 | Identity artifacts | 3 |
 | L1 | Schema contracts | 6+ |
-| L2 | Builder ISOs (13 per builder) | 259 builders x 13 = 3367 |
+| L2 | Builder ISOs (13 per builder) | 301 builders x 13 = 3367 |
 | L3 | SDK Python tools | 78 |
 | L4 | Quality infrastructure artifacts | 7 |
 | L5 | Knowledge cards | 424+ |

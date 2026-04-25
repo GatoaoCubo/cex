@@ -69,7 +69,7 @@ SPEC_01 (coordinator)      ── Apex (needs all above)
 
 | Function | Risk | Mitigation |
 |----------|------|------------|
-| F1 CONSTRAIN | New patterns may not map to existing 114 kinds | Create `integration` kind if needed |
+| F1 CONSTRAIN | New patterns may not map to existing 300 kinds | Create `integration` kind if needed |
 | F2 BECOME | Builder ISOs don't exist for infra code | Use N05-builder (operations) |
 | F3 INJECT | 165K LoC corpus is too large for context | Pre-filtered to ~5K relevant lines |
 | F4 REASON | TypeScript→Python translation is lossy | Pattern-level, not line-level |

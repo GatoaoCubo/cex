@@ -123,7 +123,7 @@ Or go guided (co-pilot mode):
 
 ```
 cex/
-  archetypes/builders/          # 125 builders (13 ISOs each = 1,625 files)
+  archetypes/builders/          # 301 builders (13 ISOs each = 1,625 files)
   P01_knowledge/ .. P12_orchestration/  # 12 pillars (kind schemas + templates)
   N00_genesis/                  # Archetype mold
   N01_intelligence/ .. N07_admin/       # 7 runtime nuclei (domain instances)
@@ -167,7 +167,7 @@ cex/
 ## Validate
 
 ```bash
-python _tools/cex_doctor.py      # Full health check (123 builders, schemas, density)
+python _tools/cex_doctor.py      # Full health check (301 builders, schemas, density)
 python _tools/cex_compile.py --all   # Compile all .md to .yaml
 ```
 

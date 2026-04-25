@@ -10,7 +10,7 @@ title: "Prompt Compiler Builder Instructions"
 target: "prompt-compiler-builder agent"
 phases_count: 4
 prerequisites:
-  - "kinds_meta.json loaded (124 kinds)"
+  - "kinds_meta.json loaded (300 kinds)"
   - "n07-input-transmutation.md read for existing mappings"
   - "Target languages identified (minimum EN; community languages optional)"
 validation_method: checklist
@@ -22,7 +22,7 @@ atomic: false
 rollback: "Delete the produced prompt_compiler file. No resolution behavior changes until loaded as prompt layer."
 dependencies: []
 logging: true
-tldr: "Build intent resolution tables mapping all 124 kinds to user patterns in PT-BR+EN with verb resolution, ambiguity protocol, and fallback heuristics."
+tldr: "Build intent resolution tables mapping all 300 kinds to user patterns in PT-BR+EN with verb resolution, ambiguity protocol, and fallback heuristics."
 density_score: 0.91
 llm_function: REASON
 related:
@@ -38,11 +38,11 @@ related:
   - bld_architecture_prompt_compiler
 ---
 ## Context
-A **prompt_compiler** artifact defines intent-to-artifact transmutation rules: given natural language user input, which {kind, pillar, nucleus, verb} should handle it? It contains a kind resolution table (all 124 kinds), verb resolution (user verbs to canonical actions), ambiguity resolution (multi-match protocol), and fallback heuristics (unrecognized input).
+A **prompt_compiler** artifact defines intent-to-artifact transmutation rules: given natural language user input, which {kind, pillar, nucleus, verb} should handle it? It contains a kind resolution table (all 300 kinds), verb resolution (user verbs to canonical actions), ambiguity resolution (multi-match protocol), and fallback heuristics (unrecognized input).
 **Inputs**
 | Field | Type | Description |
 |---|---|---|
-| `kinds_registry` | JSON | `.cex/kinds_meta.json` -- all 124 kinds with pillar, llm_function, boundary |
+| `kinds_registry` | JSON | `.cex/kinds_meta.json` -- all 300 kinds with pillar, llm_function, boundary |
 | `existing_mappings` | markdown | `.claude/rules/n07-input-transmutation.md` -- existing user-to-kind tables |
 | `languages` | list | Target languages for pattern matching (minimum: [en]; community: [pt-br, ...]) |
 | `domain` | string | Scope of this compiler (e.g., `cex_universal` for full coverage) |
@@ -55,7 +55,7 @@ A single `.md` file with YAML frontmatter + body containing: Preamble, Kind Reso
 - prompt_template = template with `{{variables}}` for prompt generation (different builder)
 ## Phases
 ### Phase 1: Research -- Kind Inventory
-Load and analyze all 124 kinds before writing.
+Load and analyze all 300 kinds before writing.
 ```
 READ .cex/kinds_meta.json
 FOR each kind:
@@ -86,7 +86,7 @@ Frontmatter: id, kind=prompt_compiler, pillar=P03, title, version, created, upda
   author, domain, coverage=124, languages=[pt-br,en], quality=null, tags, tldr
 Body sections (in order):
   ## Preamble -- what this artifact is, how LLMs use it
-  ## Kind Resolution Table -- ALL 124 kinds, grouped by pillar
+  ## Kind Resolution Table -- ALL 300 kinds, grouped by pillar
     Columns: Kind | Pillar | Nucleus | Patterns (EN) | Patterns (PT) | Verb | 8F Fn | Boundary
   ## Verb Resolution Table -- 30+ verbs, PT+EN, canonical action, 8F function
   ## Ambiguity Resolution -- multi-match protocol (context, specificity, frequency, GDP)
@@ -96,7 +96,7 @@ Body sections (in order):
 ```
 ### Phase 4: Validate -- Quality Gates
 ```
-CHECK: all 124 kinds present in Kind Resolution Table
+CHECK: all 300 kinds present in Kind Resolution Table
 CHECK: multilingual coverage >= 80%
 CHECK: every kind has at least 1 EN pattern and 1 PT pattern
 CHECK: verb table has >= 30 entries

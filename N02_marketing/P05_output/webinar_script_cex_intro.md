@@ -54,7 +54,7 @@ Speaker: "By the end of this session you will have seen a 6-word prompt produce 
 
 Speaker: "Not a chat response. Typed -- compiled, versioned, searchable in six months. I am [Name]. This is CEXAI. Intelligence compounds when exchanged."
 
-[SLIDE 2: "293 kinds. 7 Artificial Sins. 4 runtimes. Your repo."]
+[SLIDE 2: "300 kinds. 7 Artificial Sins. 4 runtimes. Your repo."]
 
 [SPEAKER NOTE: No notes. Hold 3-second silence after demo. Do not fill it.]
 
@@ -64,7 +64,7 @@ Speaker: "Not a chat response. Typed -- compiled, versioned, searchable in six m
 
 [SLIDE 3: "The Compounding Problem"]
 
-Speaker: "Most teams: prompt -> Notion paste -> forgotten in 90 days. Every launch from zero. CEXAI is typed infrastructure: 293 kinds, 12 pillars, 7 nuclei, 4 runtimes. Every output in YOUR repo. Run /init, fill it with your brand."
+Speaker: "Most teams: prompt -> Notion paste -> forgotten in 90 days. Every launch from zero. CEXAI is typed infrastructure: 300 kinds, 12 pillars, 7 nuclei, 4 runtimes. Every output in YOUR repo. Run /init, fill it with your brand."
 
 [SLIDE 4: "CEXAI is not an agent. It is an AI brain."]
 

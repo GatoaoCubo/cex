@@ -32,7 +32,7 @@ related:
 | Name | Role | Owner | Status |
 |------|------|-------|--------|
 | frontmatter block | Metadata header (id, kind, pillar, coverage, languages) | prompt-compiler-builder | active |
-| kind_resolution_table | All 124 kinds mapped to user patterns | author | active |
+| kind_resolution_table | All 300 kinds mapped to user patterns | author | active |
 | verb_resolution_table | User verbs mapped to canonical actions | author | active |
 | ambiguity_resolver | Protocol for multi-kind matches | author | active |
 | fallback_heuristics | Handling unrecognized input | author | active |

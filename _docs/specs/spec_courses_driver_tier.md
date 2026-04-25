@@ -22,7 +22,7 @@ updated: "2026-04-22"
 
 ## Problem
 
-CEXAI has 293 kinds, 8F pipeline, 12 pillars, 7 sin-driven nuclei -- but zero
+CEXAI has 300 kinds, 8F pipeline, 12 pillars, 7 sin-driven nuclei -- but zero
 educational content that non-technical users can consume. The OSS repo IS the
 engine; courses teach people to drive it. No courses = no monetization path.
 

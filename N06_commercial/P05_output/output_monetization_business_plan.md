@@ -179,7 +179,7 @@ Dois tiers claros criam decisão binária mais fácil.
 
 | Framework | Foco | CEX Diferencial |
 |-----------|------|----------------|
-| **LangChain** | RAG pipes genéricos | 114 kinds + 8F pipeline tipado |
+| **LangChain** | RAG pipes genéricos | 300 kinds + 8F pipeline tipado |
 | **CrewAI** | Multi-agent workflows | 8 nuclei especializados + brand injection |
 | **AutoGen** | Conversational agents | Knowledge cards + 12 pillar architecture |
 | **n8n/Zapier** | No-code automation | Code-first mas com templates |
@@ -196,7 +196,7 @@ Dois tiers claros criam decisão binária mais fácil.
 
 **Técnico + Provocador + Didático**
 - "While others build chatbots, we build brains"
-- "114 kinds. 8 functions. Zero bullshit."
+- "300 kinds. 8 functions. Zero bullshit."
 - "Your AI doesn't need more models. It needs more knowledge."
 
 ### Diferencial Core
@@ -210,7 +210,7 @@ Dois tiers claros criam decisão binária mais fácil.
 ### Competitive Threats
 
 **E se OpenAI/Google lança similar?**
-- **Moat**: Our 114 kinds + 12 pillars = 2 anos de R&D
+- **Moat**: Our 300 kinds + 12 pillars = 2 anos de R&D
 - **Defense**: Community-driven evolution (contributors vested)
 - **Timing**: Big tech moves slow, we ship fast
 
@@ -223,7 +223,7 @@ Dois tiers claros criam decisão binária mais fácil.
 - **Mitigation**: CEX knowledge system is model-agnostic (typed .md + .yaml)
 - **Backup plan**: Export artifacts, run via API (pay-per-token) or alternative LLM
 - **Impact**: MEDIO (runtime changes, knowledge persists)
-- **Moat**: 123 kinds + 12 pillars + 2000+ artifacts = portable knowledge, not locked to one provider
+- **Moat**: 300 kinds + 12 pillars + 2000+ artifacts = portable knowledge, not locked to one provider
 
 ### Demand Risk
 
@@ -282,7 +282,7 @@ Dois tiers claros criam decisão binária mais fácil.
 **Estrategia**: Repo publico + curso premium + Claude Code native
 **Target Ano 1**: R$441K-882K receita líquida
 **Key Metrics**: CAC R$89, LTV R$572-1.397, payback imediato
-**Diferencial**: 114 kinds + Template-First construction vs generic frameworks
+**Diferencial**: 300 kinds + Template-First construction vs generic frameworks
 **Risk Mitigation**: Multi-stream revenue, community moat, fast iteration
 
 **Next Actions**:

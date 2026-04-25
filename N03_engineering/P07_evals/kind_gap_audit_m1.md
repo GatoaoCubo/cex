@@ -31,7 +31,7 @@ related:
 
 ## Executive Summary
 
-N03 Engineering covers **62 of 257 kinds (24%)** in the CEX taxonomy.
+N03 Engineering covers **62 of 300 kinds (24%)** in the CEX taxonomy.
 Peer nuclei average ~1650 artifacts vs N03's ~120 -- a 13x gap.
 Two root causes: (1) general kind under-representation across all pillars,
 (2) VERTICAL_DISTILLATION Wave 2A deliverables (22 commerce templates) never executed.

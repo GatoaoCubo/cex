@@ -85,7 +85,7 @@ These terms are defined in N00_genesis and must not be redefined in this KC:
 ## Source Hierarchy
 
 When a term conflict occurs, resolve in this order:
-1. p03_pc_cex_universal.md (prompt_compiler -- 257 kinds, highest authority)
+1. p03_pc_cex_universal.md (prompt_compiler -- 300 kinds, highest authority)
 2. spec_metaphor_dictionary.md (Industry term column)
 3. N00_genesis/P01_knowledge/kc_*.md (canonical N00 definitions)
 4. This file (N03 domain extensions)

@@ -46,9 +46,9 @@ related:
 
 The name CEX carries a deliberate design choice: the X is not a brand, not a product name, not a fixed identity. It is a variable that gets filled when a company runs `/init` and answers six questions about who they are, what they do, and how they sound.
 
-But X also stands for **Exchange**. CEXAI -- Cognitive Exchange AI -- is built on the principle that intelligence compounds when exchanged. N00 (Genesis) is the shareable unit: 293 typed kinds, 298 builders, 12 pillar schemas. When you share CEXAI with another team, they receive the same typed infrastructure. Their `/init` fills the X with their brand. The knowledge structure is exchanged; the brand identity is sovereign.
+But X also stands for **Exchange**. CEXAI -- Cognitive Exchange AI -- is built on the principle that intelligence compounds when exchanged. N00 (Genesis) is the shareable unit: 300 typed kinds, 301 builders, 12 pillar schemas. When you share CEXAI with another team, they receive the same typed infrastructure. Their `/init` fills the X with their brand. The knowledge structure is exchanged; the brand identity is sovereign.
 
-Before `/init`, CEXAI is a blank brain -- 293 typed artifact kinds, 298 builders, 8 nuclei, 135 tools, and zero brand context. Every template has `{{BRAND_NAME}}` placeholders. Every prompt carries `{{BRAND_VOICE}}` slots. Every nucleus reads `.cex/brand/brand_config.yaml` and finds nothing.
+Before `/init`, CEXAI is a blank brain -- 300 typed artifact kinds, 301 builders, 8 nuclei, 148 tools, and zero brand context. Every template has `{{BRAND_NAME}}` placeholders. Every prompt carries `{{BRAND_VOICE}}` slots. Every nucleus reads `.cex/brand/brand_config.yaml` and finds nothing.
 
 After `/init`, the X resolves. `{{BRAND_NAME}}` becomes "Acme Corp." `{{BRAND_VOICE}}` becomes "technical but approachable." Every nucleus, every builder, every artifact produced from that moment forward carries the brand's identity. The blank brain becomes THEIR brain. That is the knowledge asset.
 
@@ -60,7 +60,7 @@ The word "exchange" in CEXAI is not metaphorical. It describes the core value me
 
 | Exchange Type | What Flows | Multiplier Effect |
 |---------------|-----------|-------------------|
-| **N00 sharing** | 293 kinds + 298 builders + 12 schemas | Recipient skips months of infrastructure work; starts building day one |
+| **N00 sharing** | 300 kinds + 301 builders + 12 schemas | Recipient skips months of infrastructure work; starts building day one |
 | **Cross-nucleus handoff** | N01 research feeds N02 copy feeds N06 pricing | Each nucleus consumes another's typed output; quality compounds per handoff |
 | **Overnight evolution** | `cex_evolve.py` re-runs 8F on existing artifacts with newer context | Artifacts improve without human input; yesterday's knowledge enriches today's |
 | **Community contribution** | New kinds, builders, crew templates shared back to N00 | One team's builder becomes everyone's builder; the taxonomy grows |
@@ -141,7 +141,7 @@ With H1+H2 proven, CEXAI becomes distributable.
 | **Parallel work** | One conversation at a time. | Up to 6 nuclei working simultaneously, each in its own 1M-token context. |
 | **Quality control** | User judges. No systematic gates. | 8F pipeline: 7 hard gates (H01-H07), 12-point checklist, 5D scoring. Quality floor enforced. |
 | **Improvement over time** | None. Each session starts fresh. | Overnight flywheel evolves all artifacts autonomously. Quality ratchets up. |
-| **Knowledge structure** | Flat chat history. Lost on session end. | 293 typed artifact kinds with YAML frontmatter, compiled, indexed, retrievable. |
+| **Knowledge structure** | Flat chat history. Lost on session end. | 300 typed artifact kinds with YAML frontmatter, compiled, indexed, retrievable. |
 | **Orchestration** | Manual. User coordinates between tools. | N07 dispatches nuclei, polls signals, chains waves, consolidates. Autonomous lifecycle. |
 | **Reproducibility** | Same prompt, different output. | 8F pipeline: same intent, same builder ISOs, same brand context, consistent output. |
 | **Exchangeability** | Locked to one provider. Knowledge lost on switch. | 4-runtime portable (Claude/Codex/Gemini/Ollama). Knowledge lives in your repo, not the provider's cloud. |
@@ -213,7 +213,7 @@ A traditional website is a digital asset: it works while you sleep, represents y
 
 CEXAI is a higher-order **knowledge asset**: it produces the content that fills websites, courses, funnels, and knowledge bases -- all brand-aligned, quality-gated, and autonomously improving. The asset is not the output. The asset is the system that produces the output. And because the system is open-source, the asset appreciates through community exchange -- every shared builder, kind, or crew template enriches every instance.
 
-The X becomes the brand. The X becomes the exchange. The blank brain becomes the company's institutional knowledge. The 293 artifact kinds become the company's structured intellectual property. And the overnight flywheel ensures that intellectual property compounds in value over time, without additional labor.
+The X becomes the brand. The X becomes the exchange. The blank brain becomes the company's institutional knowledge. The 300 artifact kinds become the company's structured intellectual property. And the overnight flywheel ensures that intellectual property compounds in value over time, without additional labor.
 
 That is the value proposition: not an AI tool you rent by the conversation, but an AI brain you own, that knows who you are, gets better every night, and grows more valuable with every exchange.
 

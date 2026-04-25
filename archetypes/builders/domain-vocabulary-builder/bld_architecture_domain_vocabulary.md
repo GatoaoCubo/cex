@@ -42,7 +42,7 @@ P01 Knowledge
 
 ## Hierarchy
 ```
-N00_genesis core vocabulary (CEX universal terms: 257 kinds, 8F, 12 pillars)
+N00_genesis core vocabulary (CEX universal terms: 300 kinds, 8F, 12 pillars)
     |
     +-- dv_{nucleus}_vocabulary (per-nucleus domain extension)
     |       +-- dv_n01_vocabulary (intelligence terms)

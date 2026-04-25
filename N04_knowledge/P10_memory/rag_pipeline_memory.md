@@ -49,7 +49,7 @@ related:
 | Memory Selector | ❌ Broken | cex_memory_select.py fails |
 
 ## Knowledge Sources
-- Builder ISOs (13 per builder × 107 builders)
+- Builder ISOs (13 per builder × 301 builders)
 - Knowledge Cards (106 KCs)
 - Nucleus artifacts (N01-N07 fractals)
 - Compiled artifacts (.yaml versions)

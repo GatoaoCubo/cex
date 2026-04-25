@@ -99,7 +99,7 @@ Command: `python _tools/cex_retriever.py --stats`
 
 ### 2.2 Important caveat
 
-`python _tools/cex_doctor.py --scope N04_knowledge` does not actually validate only `N04_knowledge`. It reports global builder health: 258 builders, 190 PASS, 63 WARN, 5 FAIL. That is useful repo health data, but it is not evidence of N04-only compliance.
+`python _tools/cex_doctor.py --scope N04_knowledge` does not actually validate only `N04_knowledge`. It reports global builder health: 301 builders, 190 PASS, 63 WARN, 5 FAIL. That is useful repo health data, but it is not evidence of N04-only compliance.
 
 ## 3. RAG Stack Assessment
 

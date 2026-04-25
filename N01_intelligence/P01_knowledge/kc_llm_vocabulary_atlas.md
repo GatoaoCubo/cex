@@ -24,7 +24,7 @@ related:
 
 # LLM Vocabulary Atlas: Universal Term Registry
 
-Cross-references 15 protocol/framework specs, 40+ academic papers, 10+ Chinese/8 Japanese/6 Korean/3 Indian frameworks, 40+ glossaries/ontologies, and 150+ bleeding-edge terms against CEX's 132 kinds and 12 pillars.
+Cross-references 15 protocol/framework specs, 40+ academic papers, 10+ Chinese/8 Japanese/6 Korean/3 Indian frameworks, 40+ glossaries/ontologies, and 150+ bleeding-edge terms against CEX's 300 kinds and 12 pillars.
 
 Key finding: No existing system maps typed vocabulary across the full LLM agent lifecycle. CEX `kinds_meta.json` is the only such registry.
 

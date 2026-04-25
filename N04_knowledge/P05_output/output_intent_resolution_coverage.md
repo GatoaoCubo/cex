@@ -28,7 +28,7 @@ related:
 
 ## Executive Summary
 
-**123 kinds exist. 123 KCs exist. 0 have explicit natural language discovery paths.**
+**300 kinds exist. 123 KCs exist. 0 have explicit natural language discovery paths.**
 
 Every kind has a KC file, but none are optimized for intent resolution. A user saying "I need a test" has no structured path to discover `unit_eval` vs `e2e_eval` vs `smoke_eval` vs `golden_test` vs `benchmark`. The system relies entirely on exact kind names or short keyword lists.
 
@@ -128,7 +128,7 @@ aliases:
 - P0 (7 kinds): Manual curation, 30 min -- requires understanding of common user phrasings
 - P1 (6 kinds): Manual curation, 20 min -- requires disambiguation analysis
 - P2 (5 kinds): Manual curation, 15 min
-- P3 (105 kinds): Automated via `cex_evolve.py` with prompt to add long_tails
+- P3 (300 kinds): Automated via `cex_evolve.py` with prompt to add long_tails
 
 ### Existing infrastructure that supports this
 

@@ -63,7 +63,7 @@ Retention rules:
 
 ## Builder Context
 
-This ISO operates within the `user-model-builder` stack, one of 285 kinds in the CEX
+This ISO operates within the `user-model-builder` stack, one of 300 kinds in the CEX
 architecture. Each builder has 13 ISOs covering system prompt, instruction, output template,
 quality gate, examples, schema, config, tools, memory, manifest, architecture, knowledge card,
 and collaboration.

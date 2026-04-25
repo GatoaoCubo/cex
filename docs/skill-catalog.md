@@ -128,7 +128,7 @@ Slash commands are the primary user interface for CEX. Every command is backed b
 | `/dispatch <nuc> <task>` | `/dispatch n03 fix tests` | Sends task to specific nucleus (bypasses intent resolution) | When you know exactly which nucleus to use | target | 1-2 min setup |
 | `/mission <goal>` | `/mission launch product` | Full lifecycle shortcut: plan + guide + spec + grid + consolidate | Ambitious multi-artifact goals; the "do everything" path | N07 | 30-90 min |
 | `/status` | `/status` | System health dashboard: processes, signals, quality metrics, PID states | Anytime; especially after dispatch | N07 | instant |
-| `/cex-doctor` | `/cex-doctor` or `/cex-doctor --full` | Full diagnostics: builder health (302 builders), ISOs, schema wiring | When something seems broken; before a release gate | N07 | 1-3 min |
+| `/cex-doctor` | `/cex-doctor` or `/cex-doctor --full` | Full diagnostics: builder health (301 builders), ISOs, schema wiring | When something seems broken; before a release gate | N07 | 1-3 min |
 | `/consolidate` | `/consolidate` | Post-dispatch: verify deliverables, stop processes, commit results, archive signals | After nuclei complete a wave | N07 | 2-5 min |
 | `/evolve [file\|all]` | `/evolve all` | Autonomous artifact improvement loop (heuristic then agent mode) | When quality < 9.0 across artifacts; post-session cleanup | N07 | 10-60 min |
 | `/mentor [topic]` | `/mentor 8F` | Teach CEX via 4 lenses: storytelling, analogy, quiz, media production | Learning CEX methodology; producing educational content | N04 | 5-20 min |
@@ -187,7 +187,7 @@ Default threshold: quality < 9.0. Tool: `cex_evolve.py`.
 #### `/cex-doctor`
 
 Two tiers:
-- **fast** (default): checks ISOs, sub-agents, schema wiring for all 302 builders
+- **fast** (default): checks ISOs, sub-agents, schema wiring for all 301 builders
 - **full**: adds flywheel audit (109 checks across 7 layers), ASCII compliance scan, brand ref scan
 - **audit <name>**: focuses on one builder or nucleus
 

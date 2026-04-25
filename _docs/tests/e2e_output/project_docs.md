@@ -10,7 +10,7 @@ density_score: 1.0
 ## What is CEX?
 
 CEX is a typed knowledge system that turns short natural-language intents into production-grade artifacts using LLM agents.
-It defines 117 artifact kinds (knowledge cards, agents, prompts, configs, etc.), each with a dedicated builder that enforces structure, quality gates, and brand consistency.
+It defines 300 artifact kinds (knowledge cards, agents, prompts, configs, etc.), each with a dedicated builder that enforces structure, quality gates, and brand consistency.
 The "X" in CEX is a variable -- once bootstrapped with `/init`, the system becomes a branded brain tailored to a specific company or creator.
 
 ## Quickstart
@@ -77,7 +77,7 @@ Every task (build, research, write, deploy) follows the same 8-step reasoning pr
 
 ### Kinds and Pillars
 
-- **117 kinds** define every artifact type (agent, prompt_template, guardrail, knowledge_card, ...).
+- **300 kinds** define every artifact type (agent, prompt_template, guardrail, knowledge_card, ...).
 - Each kind belongs to one of **12 pillars** (`P01_knowledge` through `P12_meta`).
 - Each kind has a **builder** with 13 ISOs in `archetypes/builders/{kind}-builder/`.
 - Kind metadata lives in `.cex/kinds_meta.json`; pillar schemas in `P{xx}/_schema.yaml`.
@@ -86,7 +86,7 @@ Every task (build, research, write, deploy) follows the same 8-step reasoning pr
 
 | Path | Contents |
 |------|----------|
-| `archetypes/builders/` | 121 builders (13 ISOs each) |
+| `archetypes/builders/` | 301 builders (13 ISOs each) |
 | `P01_knowledge/library/` | Knowledge cards and the kind index |
 | `.cex/runtime/` | Handoffs, signals, PIDs, decisions |
 | `_tools/` | 58 Python tools (compile, doctor, score, etc.) |

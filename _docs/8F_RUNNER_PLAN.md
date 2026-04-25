@@ -200,7 +200,7 @@ python cex_8f_runner.py "create chunk config" --execute     # with LLM
 python cex_8f_runner.py --kind chunk_strategy --execute      # skip classify
 python cex_8f_runner.py "create agent" --step 3             # stop at F3
 python cex_8f_runner.py "create agent" --verbose            # per-F timing
-python cex_8f_runner.py --list-kinds                         # 98 kinds
+python cex_8f_runner.py --list-kinds                         # 300 kinds
 ```
 
 ---

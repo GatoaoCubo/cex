@@ -31,7 +31,7 @@ related:
 
 ## N00 — Genesis (Universal Mold)
 
-The 12 pillars, 114 kinds, 107 builders. Defines what can exist.
+The 12 pillars, 300 kinds, 301 builders. Defines what can exist.
 
 [[N00_genesis]]
 

@@ -342,7 +342,7 @@ conhecimento da sua organizacao enquanto voce dirige a estrategia.
 "Remember when Rails showed the world that you do not need to configure everything from
 scratch? CEX does the same for AI agents. Drop into any of the 300 artifact kinds and the
 system already knows: which of the 12 domain pillars it belongs to, which builder to load,
-which quality gates to apply, and how to compile the output. 302 builders, each with 12
+which quality gates to apply, and how to compile the output. 301 builders, each with 12
 specialized ISOs, do the heavy lifting. You focus on intent; CEX handles structure.
 Convention over configuration -- but for AI."
 
@@ -350,7 +350,7 @@ Convention over configuration -- but for AI."
 "Lembra quando o Rails mostrou ao mundo que voce nao precisa configurar tudo do zero? CEX faz
 o mesmo para agentes de IA. Entre em qualquer um dos 300 tipos de artefatos e o sistema ja
 sabe: a qual dos 12 pilares de dominio pertence, qual builder carregar, quais gates de
-qualidade aplicar, e como compilar a saida. 302 builders, cada um com 12 ISOs
+qualidade aplicar, e como compilar a saida. 301 builders, cada um com 12 ISOs
 especializados, fazem o trabalho pesado. Voce foca na intencao; CEX cuida da estrutura.
 Convencao sobre configuracao -- mas para IA."
 
@@ -379,7 +379,7 @@ resultados mais rapidos e consistentes do que montar tudo do zero. Em 2026, o es
 agentes de IA enfrenta o mesmo problema que Rails resolveu: cada projeto comeca do zero, cada
 desenvolvedor reinventa estrutura, e qualidade depende inteiramente de disciplina individual.
 CEX aplica o padrao Rails para agentes de IA. 300 tipos de artefatos tipados, 12 pilares de
-dominio e 302 builders especializados criam um chao de fabrica onde o trabalho do
+dominio e 301 builders especializados criam um chao de fabrica onde o trabalho do
 desenvolvedor e expressar intencao, nao construir infraestrutura. Voce diz "landing page" --
 CEX sabe que e tipo `landing_page`, pilar P05, carrega os 12 ISOs do builder de landing
 page, injeta contexto da marca, raciocina pelo 8F e produz um artefato pronto para producao.

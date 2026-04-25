@@ -109,7 +109,7 @@ Applied before retrieval to reduce candidate space:
 | nucleus | enum (n01..n07) | Handoffs, signals, KCs |
 | mission | string match | Handoffs, decision manifests |
 | date_range | ISO 8601 window | Signals (last wave only by default) |
-| kind | enum (257 kinds) | KCs, taxonomy lookups |
+| kind | enum (300 kinds) | KCs, taxonomy lookups |
 | status | enum (pending, complete, failed) | Signals |
 
 Filter precedence: nucleus > mission > date_range > kind > status.

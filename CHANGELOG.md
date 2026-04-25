@@ -34,7 +34,7 @@ Format follows [Keep a Changelog](https://keepachangelog.com/).
 - Marketing outputs updated: webinar_script, product_tour, interactive_demo
 
 ### Stats
-- 293 kinds x 298 builders x 12 ISOs = 3,576 artifact constructors
+- 300 kinds x 301 builders x 12 ISOs = 3,576 artifact constructors
 - 4 parallel audit agents: infrastructure 98%, toolchain 95%, nuclei 70%, OSS 85%
 - 12 gaps identified, 12 closed in 3 waves
 - Tag: v10.4.0-cexai
@@ -78,7 +78,7 @@ Format follows [Keep a Changelog](https://keepachangelog.com/).
 - .gitignore expanded with 8 new patterns for runtime ephemeral files
 
 ### Stats
-- 293 kinds x 295 builders x 12 ISOs = 3,540 artifact constructors
+- 300 kinds x 301 builders x 12 ISOs = 3,540 artifact constructors
 - 135 Python CLI tools
 - 12 pillars x 8 nuclei x 8F pipeline
 - 109 flywheel checks (100% WIRED)
@@ -125,7 +125,7 @@ Format follows [Keep a Changelog](https://keepachangelog.com/).
 - Legacy Portuguese-only operational docs (migrated to English for open-source); brand configs and personal memory remain in user's native language by design
 
 ### Stats
-- 257 kinds × 259 builders × 13 ISOs = 3,381 artifact constructors
+- 300 kinds × 301 builders × 13 ISOs = 3,381 artifact constructors
 - 152 Python CLI tools (up from 113)
 - 12 pillars × 8 nuclei (N00 archetype + N01–N07 operational) × 8F pipeline
 - 109 flywheel checks (100% WIRED)

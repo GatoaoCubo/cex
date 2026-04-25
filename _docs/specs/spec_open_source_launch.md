@@ -24,7 +24,7 @@ updated: "2026-04-23"
 CEXAI is going public. The repo has:
 - 580MB+ of runtime artifacts from 11 days of development (handoffs, signals, logs)
 - 109/293 kind boundary fields in Portuguese (global repo = EN only)
-- 293 kinds (marketing wants 300 — 7 Karpathy-aligned gaps identified)
+- 300 kinds (marketing wants 300 — 7 Karpathy-aligned gaps identified)
 - Example fake emails in template artifacts (sarah.johnson@springfieldenergy.com etc.)
 - No .cursorrules for Cursor/Codex users
 - .playwright-mcp/ console logs: 216MB
@@ -241,7 +241,7 @@ If compiler target not ready, manually create `.cursorrules` from CLAUDE.md subs
 | Action | Path | Changes |
 |--------|------|---------|
 | EDIT | `README.md` | 293→300 (6 occurrences), builder count update |
-| EDIT | `CLAUDE.md` | 293→300 (4 occurrences), 298→305 builders, 3563→3647 ISOs, 294→301 sub-agents |
+| EDIT | `CLAUDE.md` | 293→300 (4 occurrences), 298→301 builders, 3563→3647 ISOs, 294→301 sub-agents |
 
 ### Wave 5: VALIDATE (N05, 0 new artifacts)
 
@@ -324,7 +324,7 @@ W5: VALIDATE (N05 solo)
 - [ ] 0 fake person emails in artifacts
 - [ ] .cursorrules exists
 - [ ] README.md shows 300 kinds everywhere
-- [ ] CLAUDE.md shows 300 kinds, 305 builders, 3647 ISOs
+- [ ] CLAUDE.md shows 300 kinds, 301 builders, 3647 ISOs
 - [ ] cex_doctor passes
 - [ ] cex_system_test passes
 - [ ] cex_sanitize passes

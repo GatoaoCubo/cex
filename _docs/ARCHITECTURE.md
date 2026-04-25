@@ -80,7 +80,7 @@ N07 orchestrates, N01-N06 build. N00 is the genesis archetype (mold, not runtime
 
 | What | Source (.md) | Compiled | Sync Tool |
 |------|-------------|----------|-----------|
-| Artifacts (123 kinds) | YAML frontmatter + MD body | `.yaml` or `.json` | cex_compile.py |
+| Artifacts (300 kinds) | YAML frontmatter + MD body | `.yaml` or `.json` | cex_compile.py |
 | Schemas | `.yaml` only | N/A | manual |
 | Builders (13 ISOs) | `.md` only | N/A | manual |
 | Meta-docs | `.md` only | N/A | manual |
@@ -106,7 +106,7 @@ P{NN}_*/_schema.yaml              ROOT (source of truth)
 
 ## 6. Builders (L0)
 
-123 builders, each with 13 ISO files (1,599 total):
+301 builders, each with 13 ISO files (1,599 total):
 
 | # | File Pattern | Pillar | Function |
 |---|-------------|--------|----------|

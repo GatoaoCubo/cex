@@ -30,7 +30,7 @@ density_score: 1.0
 
 # Contributing to CEXAI
 
-CEXAI: open-source typed knowledge system, 300 kinds, 302 builders, 8 nuclei, 12 pillars, 8F pipeline. This guide covers four contribution paths, quality gates, and PR process.
+CEXAI: open-source typed knowledge system, 300 kinds, 301 builders, 8 nuclei, 12 pillars, 8F pipeline. This guide covers four contribution paths, quality gates, and PR process.
 
 ---
 

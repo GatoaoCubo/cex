@@ -58,7 +58,7 @@ density_score: {{0.80_to_1.00}}
 | Kind | Nucleus | Patterns (EN) | Patterns (PT) | Verb | 8F | Boundary |
 |------|---------|---------------|---------------|------|----|----------|
 | {{kind}} | `{{N0x}}` | {{en_patterns}} | {{pt_patterns}} | {{verb}} | {{fn}} | `{{boundary}}` |
-(repeat for all 124 kinds, grouped by pillar P01-P12)
+(repeat for all 300 kinds, grouped by pillar P01-P12)
 ## Verb Resolution Table
 | PT Verb | EN Verb | Canonical Action | Primary 8F Function |
 |---------|---------|-----------------|---------------------|

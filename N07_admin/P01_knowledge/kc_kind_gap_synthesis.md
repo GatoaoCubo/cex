@@ -11,7 +11,7 @@ author: n07_orchestrator
 domain: taxonomy-audit
 quality: 8.8
 tags: [taxonomy, gap-analysis, kinds, ddd, nucleus-coverage]
-tldr: "257 CEX kinds: 10 new DDD/ops kinds needed; N03 has 62/257 kinds active (13x peer gap); P0 fix = VD Wave 2A (22 blocked commerce artifacts)."
+tldr: "257 CEX kinds: 10 new DDD/ops kinds needed; N03 has 62/300 kinds active (13x peer gap); P0 fix = VD Wave 2A (22 blocked commerce artifacts)."
 when_to_use: "Planning taxonomy expansions, prioritizing kind additions, auditing nucleus coverage, or reviewing DDD alignment of CEX 257-kind registry."
 keywords: [kind-gap, taxonomy-audit, ddd-alignment, nucleus-coverage, vertical-distillation]
 long_tails:
@@ -67,7 +67,7 @@ Conflating these causes wrong fixes: adding kinds when instances just need produ
 
 | Source | Nucleus | Lens |
 |--------|---------|------|
-| kc_kind_gap_analysis.md | N01 | DDD Ubiquitous Language (257 kinds vs DDD/AI) |
+| kc_kind_gap_analysis.md | N01 | DDD Ubiquitous Language (300 kinds vs DDD/AI) |
 | kind_gap_audit_m1.md | N03 | Engineering/structural (N03 vs peer nuclei) |
 
 ## N01 Findings: DDD Alignment
@@ -156,7 +156,7 @@ AUDIT -> CLASSIFY: [taxonomy] add kind+ISOs | [coverage] VD wave | [overload] GD
 - ALWAYS add `domain_vocabulary` first — backs UL enforcement at F2b SPEAK.
 - NEVER add a kind with reuse_score < 7 — dilutes taxonomy, adds builder debt.
 - IF workflow models a saga or domain_event THEN refactor — semantic drift compounds.
-- N03 deficit is execution (coverage), not taxonomy — 257 kinds suffice.
+- N03 deficit is execution (coverage), not taxonomy — 300 kinds suffice.
 
 ## References
 

@@ -432,7 +432,7 @@ the only P03 artifact that operates outside the pipeline proper.
 Location: `N00_genesis/P03_prompt/layers/p03_pc_cex_universal.md`
 
 The canonical CEXAI prompt compiler. Key properties:
-- Coverage: 284 kinds across 12 pillars
+- Coverage: 300 kinds across 12 pillars
 - Languages: PT-BR and EN simultaneously
 - Ambiguity resolution: five-step chain with GDP fallback
 - Verb resolution table: 27 PT/EN verb pairs mapped to canonical actions and primary 8F function

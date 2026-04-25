@@ -68,7 +68,7 @@ Rule: id MUST equal filename stem.
 | Kinds with nucleus assignment | 120 | 124 |
 ## Effort Profile
 This is the HIGHEST effort artifact in CEX due to:
-- 124 kinds requiring individual pattern authoring
+- 300 kinds requiring individual pattern authoring
 - Bilingual requirement (PT-BR + EN independently)
 - max_turns: 40 (vs typical 25)
 - Body size: 16384 bytes (vs typical 4096)

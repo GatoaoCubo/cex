@@ -31,7 +31,7 @@ related:
 
 Three deliverables completed:
 1. **Continuous batching mode** implemented and verified in `cex_mission_runner.py`
-2. **Fine-tune training pairs** exported: 123/123 kinds, 554 KB JSONL
+2. **Fine-tune training pairs** exported: 123/300 kinds, 554 KB JSONL
 3. **System tests**: 54 PASS / 4 FAIL (all failures environmental, zero code bugs)
 
 ---
@@ -147,7 +147,7 @@ Result: PASS -- 3 nuclei dispatched, poll loop ran, timeout at 60s, clean exit
 
 ### Method
 
-For each of 123 kinds:
+For each of 300 kinds:
 - **Input**: Kind name + schema fields from `kinds_meta.json` (pillar, description,
   llm_function, max_bytes, naming, core, boundary)
 - **Output**: Full `bld_instruction_{kind}.md` content (the ideal artifact spec)

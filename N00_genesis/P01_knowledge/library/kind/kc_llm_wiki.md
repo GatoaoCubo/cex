@@ -13,7 +13,7 @@ updated: "2026-04-20"
 author: n04_knowledge
 domain: knowledge_graph
 tags: [llm-wiki, karpathy, knowledge-base, self-maintaining, wiki, ingest, summarize]
-tldr: "Karpathy's LLM Wiki pattern: ingest source -> summarize -> update 10-15 related pages -> query interface -> lint for contradictions. CEX is the fullest implementation: 293 kinds, 6000+ artifacts, 12-pillar schema, 8F editorial pipeline, cross-reference graph, and autoresearch evolution loop."
+tldr: "Karpathy's LLM Wiki pattern: ingest source -> summarize -> update 10-15 related pages -> query interface -> lint for contradictions. CEX is the fullest implementation: 300 kinds, 6000+ artifacts, 12-pillar schema, 8F editorial pipeline, cross-reference graph, and autoresearch evolution loop."
 when_to_use: "Designing knowledge management systems, building RAG architectures, or reasoning about how CEX compares to traditional wikis and knowledge bases"
 keywords: [llm-wiki, knowledge-base, ingest, summarize, update, query, lint, self-maintaining]
 density_score: 0.94
@@ -53,7 +53,7 @@ CEX is not inspired by the LLM Wiki pattern -- it IS the pattern at production s
 | LLM Wiki Concept | CEX Implementation | Scale |
 |------------------|--------------------|-------|
 | Wiki page | knowledge_card (.md with frontmatter) | 6000+ artifacts |
-| Page schema | 12 pillar schemas (P01-P12) | 293 kinds |
+| Page schema | 12 pillar schemas (P01-P12) | 300 kinds |
 | Ingest | 8F pipeline F3 INJECT | Auto on every build |
 | Summarize | 8F pipeline F6 PRODUCE | Density-gated (>0.85) |
 | Update 10-15 related | cex_ripple.py (post-save hook) | Spec (W4) |
@@ -69,7 +69,7 @@ CEX is not inspired by the LLM Wiki pattern -- it IS the pattern at production s
 | Dimension | Traditional Wiki | LLM Wiki (CEX) |
 |-----------|-----------------|-----------------|
 | Editor | Human writes/edits | LLM produces via 8F pipeline |
-| Structure | Freeform prose | Typed artifacts (293 kinds x 12 pillars) |
+| Structure | Freeform prose | Typed artifacts (300 kinds x 12 pillars) |
 | Quality | Peer review (human) | Automated scoring + quality gates |
 | Cross-refs | Manual hyperlinks | Auto-populated (cex_wikilink.py) |
 | Consistency | Manual enforcement | Semantic lint (contradiction detection) |

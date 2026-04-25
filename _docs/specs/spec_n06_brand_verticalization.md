@@ -22,7 +22,7 @@ updated: "2026-04-07"
 
 ## THE PROBLEM
 
-CEX is a brain without a face. 7 nuclei, 12 pillars, 108 builders, 8F pipeline -- all generic.
+CEX is a brain without a face. 7 nuclei, 12 pillars, 301 builders, 8F pipeline -- all generic.
 N02 writes copy but doesn't know WHOSE voice. N05 deploys but doesn't know WHOSE product.
 N01 researches but doesn't know WHOSE market. N03 builds but doesn't know WHOSE palette.
 

@@ -205,7 +205,7 @@ Track B (Community + CS): contributor_guide + code_of_conduct + github_issue_tem
 
 ## Revenue Projection Update
 
-**Wave 5 addressable revenue (220 kinds, 3 verticals):**
+**Wave 5 addressable revenue (300 kinds, 3 verticals):**
 
 ### Tier Projections
 
@@ -271,8 +271,8 @@ GDP trigger: `/guide open source launch`
 
 ## 2026-04-19 Addendum: Actual State vs. Wave 5 Snapshot
 
-This report was authored against the Wave 5 snapshot (220 kinds, 2026-04-14).
-As of 2026-04-19, the system has advanced to **293 kinds / 295 builders / 3,540 ISOs**
+This report was authored against the Wave 5 snapshot (300 kinds, 2026-04-14).
+As of 2026-04-19, the system has advanced to **300 kinds / 301 builders / 3,647 ISOs**
 via HERMES assimilation (9 new kinds) + CONTRIB_STRESS_TEST (50+ more kinds activated).
 
 Key addendum facts:

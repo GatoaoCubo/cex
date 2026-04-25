@@ -34,7 +34,7 @@ author: n07_admin
 | Builder archetypes | archetypes/builders/{kind}-builder/ | 121 | 13 components per kind (instruction, examples, quality gate, output template, schema, etc) |
 | Knowledge library | P01_knowledge/library/ | 270+ KCs | Domain knowledge in structured form |
 | Templates | P{01-12}_*/templates/tpl_*.md | 67+ | Output patterns with {{variable}} slots |
-| Kind registry | .cex/kinds_meta.json | 121 kinds | Every artifact type CEX understands |
+| Kind registry | .cex/kinds_meta.json | 300 kinds | Every artifact type CEX understands |
 | Rules | .claude/rules/*.md | 16 | Behavioral constraints (incl. technical-authority, input-transmutation) |
 | Terminology | _docs/specs/spec_metaphor_dictionary.md | 40+ terms | Metaphor → Industry term translation |
 | Rosetta Stone | P01_knowledge/library/domain/_reference/kc_terminology_rosetta_stone.md | 4 providers | Cross-provider canonical naming |
@@ -296,7 +296,7 @@ Each ISO maps to a recognized industry concept: Agent Card, System Prompt, JSON 
 | operational_lessons.md | 7 hard-learned lessons (permanent) |
 | terminology_standardization.md | Metaphor → industry term mapping + rename status |
 | user_directive_technical_authority.md | User delegated tech lead to N07. Terms taught. |
-| industry_terminology_audit.md | 117 kinds vs 4 providers |
+| industry_terminology_audit.md | 300 kinds vs 4 providers |
 | deep_architecture_audit.md | 8F, sins, pillars, ISOs, tools validated |
 | project_cex_product_context.md | CEX ships as unconfigured instance |
 | project_notebooklm_pipeline.md | NotebookLM integration |

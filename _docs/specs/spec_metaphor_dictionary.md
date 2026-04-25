@@ -31,7 +31,7 @@ The user (and internal docs) use metaphors to explain concepts. LLMs and artifac
 | dealer | N07 orchestrator | **orchestrator** / supervisor agent | selects context, writes task specs, dispatches |
 | slot | {{mustache}} variable | **template variable** / slot (NLU) | template field the LLM fills contextually |
 | combo | context combination | **prompt composition** | multiple artifacts assembled for compound effect |
-| library | CEX repository | **knowledge base** / artifact store | all artifacts across 12 pillars + 117 kinds |
+| library | CEX repository | **knowledge base** / artifact store | all artifacts across 12 pillars + 300 kinds |
 | game | pipeline | **pipeline** (MLOps, CI/CD) | the 8F execution flow |
 
 ## Architecture Metaphors

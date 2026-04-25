@@ -373,7 +373,7 @@ Wave 2:
 Wave 3:
   - [ ] 10 cross-synthesis artifacts created
   - [ ] knowledge_graph_cex_domains.md covers >= 6 domain nodes
-  - [ ] ontology_cex_taxonomy.md covers all 12 pillars + 257 kinds
+  - [ ] ontology_cex_taxonomy.md covers all 12 pillars + 300 kinds
   - [ ] few_shot_examples pass cex_compile.py without error
 
 Wave 4:

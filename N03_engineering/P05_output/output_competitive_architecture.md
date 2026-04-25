@@ -30,7 +30,7 @@ related:
 
 | Dimension | CEX | CrewAI | LangGraph | AutoGen | MetaGPT | DSPy |
 |-----------|-----|--------|-----------|---------|---------|------|
-| **Typed Knowledge** | 114 kinds, YAML schemas, 12 pillars, KC library | None — agents return free text | TypedDict state, but no artifact taxonomy | None — message-based | SOPs as docs, no schema enforcement | Signatures (typed I/O), but no artifact taxonomy |
+| **Typed Knowledge** | 300 kinds, YAML schemas, 12 pillars, KC library | None — agents return free text | TypedDict state, but no artifact taxonomy | None — message-based | SOPs as docs, no schema enforcement | Signatures (typed I/O), but no artifact taxonomy |
 | **Schema Enforcement** | Hard gates (H01-H08) + 12LP checklist + 5D scoring | None | Pydantic at edges only | None | Implicit via role templates | Signature validation at call boundary |
 | **Agent Model** | 8 nuclei = 8 OS processes, each a different CLI (Claude, Gemini, Codex) | N agents in-process, same LLM provider | Nodes in a graph, same process, same provider | Agents in conversation loop, same or mixed providers | Roles in waterfall, same provider | Modules in a pipeline, same provider |
 | **Communication** | Filesystem: handoff .md files, signal .json files, PID tracking | In-memory Python objects | State dict passed through graph edges | Message passing in conversation | Shared memory + message pool | Pipeline state between modules |

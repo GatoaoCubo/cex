@@ -61,7 +61,7 @@ related:
 | Average density | 0.95 | [OK] (target >= 0.85) |
 | Oversized files | 0 | [OK] |
 | Missing frontmatter | 0 | [OK] |
-| KC Library | 98/98 kinds covered | [OK] |
+| KC Library | 98/300 kinds covered | [OK] |
 
 **Result: 123/123 PASS. Infrastructure is pristine.**
 
@@ -134,7 +134,7 @@ All ISOs present: manifest, instruction, system_prompt, examples, knowledge_card
 
 | Rank | File | Size | Domain |
 |------|------|------|--------|
-| 1 | knowledge/kc_intent_resolution_map.md | 28,403 B | Maps all 123 kinds to user intent phrases |
+| 1 | knowledge/kc_intent_resolution_map.md | 28,403 B | Maps all 300 kinds to user intent phrases |
 | 2 | output/output_monetization_architecture.md | 23,108 B | Revenue architecture for CEX-based products |
 | 3 | output/self_review_2026-04-02.md | 20,790 B | Comprehensive N03 capability self-review |
 
@@ -172,7 +172,7 @@ All ISOs present: manifest, instruction, system_prompt, examples, knowledge_card
 
 ### Overall
 
-N03's builder infrastructure is **fully operational** on this new PC. The 123 builders, 1,599 ISOs, and 0.95 average density represent a mature, well-maintained construction system. The only blockers are environment variables for MCP servers (user action required) and the SQLite index for cex_query.py.
+N03's builder infrastructure is **fully operational** on this new PC. The 301 builders, 3,647 ISOs, and 0.95 average density represent a mature, well-maintained construction system. The only blockers are environment variables for MCP servers (user action required) and the SQLite index for cex_query.py.
 
 **Infrastructure: HEALTHY. Ready for dispatch.**
 

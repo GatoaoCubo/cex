@@ -92,7 +92,7 @@ venv/
 
 ```
 # CEX — Typed Knowledge System for LLM Agents
-> 114 kinds · 12 pillars · 8 nuclei · 8F pipeline
+> 300 kinds · 12 pillars · 8 nuclei · 8F pipeline
 
 ## What is CEX?
 [2 paragraphs + architecture diagram]

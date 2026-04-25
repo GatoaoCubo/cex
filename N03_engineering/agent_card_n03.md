@@ -37,7 +37,7 @@ related:
 | **Quality Floor** | 9.0 (below = rebuild, no exceptions) |
 | **Protocol** | 8F mandatory on every task (F1-F8) |
 
-**What makes N03 different**: N03 is the factory that builds factories. Every other nucleus consumes what N03 produces. Input is human intent in natural language; output is a validated CEX artifact with correct frontmatter, structured body, compiled YAML, and quality >= 9.0. N03 is the ONLY nucleus that can build any of the 123 artifact kinds across all 12 pillars.
+**What makes N03 different**: N03 is the factory that builds factories. Every other nucleus consumes what N03 produces. Input is human intent in natural language; output is a validated CEX artifact with correct frontmatter, structured body, compiled YAML, and quality >= 9.0. N03 is the ONLY nucleus that can build any of the 300 artifact kinds across all 12 pillars.
 
 **Routing TO N03**: build, create, construct, design, scaffold, generate, forge, artifact, kind, refactor, enrich.
 **Routing AWAY**: research (N01), marketing copy (N02), knowledge/RAG (N04), deploy/test (N05), pricing (N06).
@@ -63,7 +63,7 @@ related:
 
 ## Kinds I Can Build
 
-N03 can build ALL 123 kinds in the CEX registry via 123 builder archetypes (in `archetypes/builders/`).
+N03 can build ALL 300 kinds in the CEX registry via 123 builder archetypes (in `archetypes/builders/`).
 
 | Pillar | # Kinds | Key Kinds |
 |--------|--------:|-----------|
@@ -80,7 +80,7 @@ N03 can build ALL 123 kinds in the CEX registry via 123 builder archetypes (in `
 | P11 Lifecycle | 6 | bugloop, guardrail, lifecycle_rule, optimizer, quality_gate, reward_signal |
 | P12 Orchestration | 9 | checkpoint, dag, dispatch_rule, handoff, schedule, signal, spawn_config, workflow, workflow_primitive |
 
-**123 kinds. 12 pillars. 123 builder archetypes. Each builder has 13 ISOs.**
+**300 kinds. 12 pillars. 123 builder archetypes. Each builder has 13 ISOs.**
 
 ## Tools Available
 
@@ -153,7 +153,7 @@ Config: `.mcp-n03.json`
 
 ## Strengths
 
-1. **Universal Builder**: Can construct any of 117 kinds. No other nucleus has this breadth. The factory that builds factories.
+1. **Universal Builder**: Can construct any of 300 kinds. No other nucleus has this breadth. The factory that builds factories.
 2. **Deep Quality System**: 18-gate validation (8 HARD + 10 SOFT), 12LP checklist, 5D scoring rubric. Quality floor 9.0.
 3. **Pattern Mastery**: 6 architecture patterns (construction triad, crew dispatch, consultant model, 3-phase build) codify how to build anything.
 4. **Rich Knowledge Base**: 6 knowledge artifacts including construction laws, tooling master KC, and meta-builder recipes.
@@ -194,7 +194,7 @@ Config: `.mcp-n03.json`
 | Quality gates | 18 (8H + 10S) |
 | Subdirectories | 18 |
 
-**N03 is the meta-constructor of CEX. 101 artifacts + 123 kinds + 123 builders + 30 tools + 3 MCPs. Every artifact in the system passes through this nucleus. The 8F pipeline is my spine, the 123 builders are my hands, and the quality gates are my conscience.**
+**N03 is the meta-constructor of CEX. 101 artifacts + 300 kinds + 301 builders + 30 tools + 3 MCPs. Every artifact in the system passes through this nucleus. The 8F pipeline is my spine, the 301 builders are my hands, and the quality gates are my conscience.**
 
 ## Composable Crews
 

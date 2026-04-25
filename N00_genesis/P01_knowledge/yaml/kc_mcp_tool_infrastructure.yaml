@@ -46,7 +46,7 @@ content:
   patterns:
     - trigger: "< 20 tools"
       action: "Definir tools inline no request"
-    - trigger: "20-100 tools"
+    - trigger: "20-148 tools"
       action: "Usar tool search para descoberta dinamica"
     - trigger: "100+ tools"
       action: "MCP connector para servers remotos + tool search"

@@ -34,7 +34,7 @@ This SLA governs CEX platform delivery to enterprise customers. Applies to:
 - CEX SaaS runtime (nuclei N01-N07 API access)
 - Builder pipeline (8F artifact production)
 - SDK (`cex_sdk` Python package, versioned releases)
-- Knowledge system (293 kinds, 3835 ISOs, quality gate)
+- Knowledge system (300 kinds, 3647 ISOs, quality gate)
 
 ## Uptime Commitments
 
@@ -68,7 +68,7 @@ Uptime = (total minutes - downtime minutes) / total minutes x 100
 | Metric | Target | Measurement |
 |--------|--------|-------------|
 | Artifact quality (8F output) | >= 8.5/10 avg | Monthly sample of 100 artifacts |
-| Builder coverage | >= 95% of 293 kinds | Monthly cex_doctor.py run |
+| Builder coverage | >= 95% of 300 kinds | Monthly cex_doctor.py run |
 | ISO completeness | 13/13 ISOs per builder | Automated check |
 | Compile success rate | >= 99% | Post-write compile hook |
 

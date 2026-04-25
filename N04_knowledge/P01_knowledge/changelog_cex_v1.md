@@ -117,7 +117,7 @@ density_score: 1.0
 
 ### Added
 
-- **Wave 3 + Wave 4 completion**: 202 kinds / 207 builders / 2666 ISOs produced in overnight grid run
+- **Wave 3 + Wave 4 completion**: 300 kinds / 301 builders / 3647 ISOs produced in overnight grid run
 - **LiteLLM proxy**: 6 gaps fixed (3.14/orjson, cp1252, stale Railway DB); end-to-end verified
 - **Session-aware dispatch v4.0**: multiple N07 orchestrators can run simultaneously; `stop` kills only MY session's nuclei
 
@@ -144,11 +144,11 @@ density_score: 1.0
 
 ### Added
 
-- **Mega session**: 100+ commits, 132 kinds, Ollama+Aider grid, overnight loop
+- **Mega session**: 100+ commits, 300 kinds, Ollama+Aider grid, overnight loop
 - **cex_sdk runtime**: 78 `.py` files, 4504 lines; providers, agents, memory, schema modules
 - **4-runtime support**: Claude / Codex / Gemini / Ollama routing unified under `cex_router.py`
 - **Quality monitor**: `cex_quality_monitor.py` -- snapshots + regression detection
-- **Prompt cache**: `cex_prompt_cache.py` + `.cex/cache/` with 260 builders pre-compiled
+- **Prompt cache**: `cex_prompt_cache.py` + `.cex/cache/` with 301 builders pre-compiled
 
 ---
 

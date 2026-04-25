@@ -24,7 +24,7 @@ updated: "2026-04-17"
 
 ## Problem
 
-CEX describes 8 nuclei x 12 pillars x 257 kinds but artifact filenames inside nucleus
+CEX describes 8 nuclei x 12 pillars x 300 kinds but artifact filenames inside nucleus
 directories do not encode this structure. Files named `agent_intelligence.md`,
 `kc_tool_shed.md`, or `LEVERAGE_MAP_V2.md` are opaque: pillar, kind, and nucleus
 ownership cannot be determined without opening the file.

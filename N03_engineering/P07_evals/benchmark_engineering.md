@@ -67,7 +67,7 @@ must be reverted or fixed before merge. Benchmarks are checked in CI.
 |------|-------|--------|----------|---------------|
 | 2026-03-30 | 99/99 | 86 PASS | 232 | Genesis session |
 | 2026-04-07 | 99/99 | 118 PASS | 259 | WAVE3 builder expansion |
-| 2026-04-13 | 99/99 | 259 PASS | 2133 ISOs | ISO validation sweep |
+| 2026-04-13 | 99/99 | 259 PASS | 3647 ISOs | ISO validation sweep |
 | 2026-04-25 | 300/300 | 300 PASS | 3647 ISOs | Full 300-kind coverage |
 
 Note: Kind count grew from 99 to 300 since genesis. Benchmarks above track the

@@ -77,7 +77,7 @@ Manifest: `.cex/runtime/decisions/decision_manifest.yaml`
 | "Compound AI" | BAIR coined "Compound AI Systems" (2024). IBM/Databricks adopted. | Use "intelligence compounds" as a verb phrase ("In CEXAI, intelligence compounds when exchanged"), not as a noun. Avoids BAIR's established term. |
 | "Digital asset" | Carries crypto/NFT connotation. Enterprise IP law uses "intellectual capital" or "knowledge asset". | For EN marketing: prefer "knowledge asset" or "intellectual capital". For PT-BR: "ativo digital" is fine (no crypto confusion in BR market). |
 | Multi-runtime | Only ~2 projects do runtime-agnostic (Forge Orchestrator, Agent Orchestrator). Most are just model-agnostic. | CEXAI's 4-runtime sovereignty (same handoff runs on Claude/Codex/Gemini/Ollama) is ahead of market. Position as "runtime-sovereign". |
-| Typed contributions | No framework has schema-validated, peer-scored community contributions. LangChain Hub is closest but untyped. | CEXAI's 293 kinds + 12 ISOs per builder + quality gates = unprecedented contribution framework. This IS the exchange edge. |
+| Typed contributions | No framework has schema-validated, peer-scored community contributions. LangChain Hub is closest but untyped. | CEXAI's 300 kinds + 12 ISOs per builder + quality gates = unprecedented contribution framework. This IS the exchange edge. |
 | MCP / A2A standards | Agentic AI Foundation (Linux Foundation) standardizing interop. MCP hit 97M installs Mar 2026. | CEXAI already uses MCP. Position as MCP-native, A2A-compatible. |
 
 **Key positioning insight**: CEXAI is NOT competing with CrewAI/LangGraph/AutoGen. Those are
@@ -257,7 +257,7 @@ STRUCTURE (preserve section order, rewrite content):
 
 # CEXAI -- Cognitive Exchange AI
   Tagline: "Open-source AI brain. Intelligence compounds when exchanged."
-  Subtitle: "Seven Artificial Sins. Twelve pillars. 293 artifact kinds. Your brain."
+  Subtitle: "Seven Artificial Sins. Twelve pillars. 300 artifact kinds. Your brain."
   Badges: [update "Cognitive Enterprise X" in any badge alt-text]
 
 ## Why CEXAI exists

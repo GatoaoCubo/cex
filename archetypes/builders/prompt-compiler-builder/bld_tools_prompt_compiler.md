@@ -39,7 +39,7 @@ related:
 ## Data Sources
 | Source | Path | Data |
 |--------|------|------|
-| Kind registry | .cex/kinds_meta.json | All 124 kinds with pillar, function, boundary |
+| Kind registry | .cex/kinds_meta.json | All 300 kinds with pillar, function, boundary |
 | Transmutation rules | .claude/rules/n07-input-transmutation.md | Existing user-to-kind mapping tables |
 | Intent resolution KC | N03_engineering/P01_knowledge/kc_intent_resolution_map.md | Exhaustive 124-kind intent map |
 | P03 schema | P03_prompt/_schema.yaml | Pillar-level schema for prompt kinds |

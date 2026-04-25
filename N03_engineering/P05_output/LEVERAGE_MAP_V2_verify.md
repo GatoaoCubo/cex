@@ -55,8 +55,8 @@ related:
 | Total dirs in `archetypes/builders/` | 261 |
 | Actual builder dirs (`*-builder`) | 259 |
 | Non-builder helper dirs | `compiled`, `_shared` |
-| Linter default run | `Linted 259 builders: 259 PASS, 0 FAIL` |
-| Linter strict run | `Linted 259 builders: 259 PASS, 0 FAIL` |
+| Linter default run | `Linted 301 builders: 259 PASS, 0 FAIL` |
+| Linter strict run | `Linted 301 builders: 259 PASS, 0 FAIL` |
 | JSON mode | Works; returns summary + per-builder results |
 
 ### API Confirmed
@@ -98,7 +98,7 @@ It is already proving value because the prior report's failing cases are now gon
 
 | Area | Verdict | Notes |
 |------|---------|-------|
-| Fast structural validation | PASS | Cheap static scan across all 259 builders. |
+| Fast structural validation | PASS | Cheap static scan across all 301 builders. |
 | Frontmatter hygiene | PASS | Enforces a small but real required key set. |
 | Minimum ISO presence | PASS | Good first-line defense against incomplete builders. |
 | CI friendliness | PASS | `--json` output is easy to wire into automation. |

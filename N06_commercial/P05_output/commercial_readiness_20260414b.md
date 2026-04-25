@@ -300,7 +300,7 @@ After Wave 6 (18 kinds shipped):
 
 | Dimension | Wave 5 | Wave 6 Target | Notes |
 |-----------|--------|--------------|-------|
-| Taxonomy completeness | 92% | 94% | 238 kinds |
+| Taxonomy completeness | 92% | 94% | 300 kinds |
 | Quality baseline | 94% | 94% | Maintained by HYBRID_REVIEW cycle |
 | Developer docs | 95% | 96% | Minor improvements only |
 | Demo assets | 85% | 86% | No new demo kinds in Wave 6 |
@@ -375,7 +375,7 @@ If Wave 6 ships within 2 weeks:
 | Industry-specific ISOs | 0 | 117 | healthcare+fintech+legal builders (3x39) |
 | Estimated dataset value | $150K-$500K | $200K-$650K | Compliance + vertical examples command premium |
 
-2,900 ISOs at 9.0+ mean quality with HIPAA/SOX/EDRM-compliant examples = premium fine-tuning dataset no public dataset covers. Dataset licensing is the highest-margin SKU.
+3,647 ISOs at 9.0+ mean quality with HIPAA/SOX/EDRM-compliant examples = premium fine-tuning dataset no public dataset covers. Dataset licensing is the highest-margin SKU.
 
 ---
 

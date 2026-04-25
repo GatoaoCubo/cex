@@ -77,7 +77,7 @@ CEX is **architecturally lateral** to mainstream frameworks (CrewAI, LangGraph, 
 3. **Enterprise platforms** (Databricks, SageMaker) - Monitoring dashboards, SLA guarantees
 
 ### CEX's Operational Strengths
-1. **Artifact type governance** - 114 kinds with schema gates (no competitor matches)
+1. **Artifact type governance** - 300 kinds with schema gates (no competitor matches)
 2. **Multi-model heterogeneity** - Native support for 3+ providers simultaneously  
 3. **Quality enforcement** - 7-gate pipeline with mandatory peer review
 4. **Debuggability** - Complete audit trail in readable files
@@ -130,7 +130,7 @@ CEX occupies a **unique niche**: multi-vendor AI orchestration with artifact gov
 
 ### Competitive Moat
 The combination of:
-1. **Typed artifacts** (114 kinds)
+1. **Typed artifacts** (300 kinds)
 2. **Multi-CLI dispatch** (heterogeneous models)  
 3. **Filesystem resilience** (debuggable, resumable)
 

@@ -11,7 +11,7 @@ domain: cex_system
 scope: "CEX typed knowledge system — architecture, nuclei, pipeline, and conventions for agent orientation"
 quality: 9.0
 tags: [context-doc, cex, architecture, orchestration]
-tldr: "CEX: 123 kinds, 12 pillars, 8 nuclei (N01-N07), 8F pipeline. N07 orchestrates; N03 builds. GDP before dispatch."
+tldr: "CEX: 300 kinds, 12 pillars, 8 nuclei (N01-N07), 8F pipeline. N07 orchestrates; N03 builds. GDP before dispatch."
 keywords: [cex, nuclei, 8f, pipeline, kinds, pillars, dispatch]
 density_score: 0.88
 related:
@@ -34,7 +34,7 @@ Out of scope: brand configuration, individual artifact schemas, nucleus-specific
 
 ## Background
 
-CEX is a typed knowledge system for LLM agents. It organizes 123 artifact kinds across 12 pillars (P01-P12), executed by 8 specialized nuclei (N01-N07) through a mandatory 8-step pipeline (8F). Every artifact has a kind, pillar, and quality target >= 9.0. N07 orchestrates; all others build. No nucleus self-scores quality.
+CEX is a typed knowledge system for LLM agents. It organizes 300 artifact kinds across 12 pillars (P01-P12), executed by 8 specialized nuclei (N01-N07) through a mandatory 8-step pipeline (8F). Every artifact has a kind, pillar, and quality target >= 9.0. N07 orchestrates; all others build. No nucleus self-scores quality.
 
 ## Nuclei
 
@@ -63,7 +63,7 @@ F1 CONSTRAIN → F2 BECOME → F3 INJECT → F4 REASON → F5 CALL → F6 PRODUC
 
 ## Dependencies
 
-- `.cex/kinds_meta.json` — kind registry (123 kinds)
+- `.cex/kinds_meta.json` — kind registry (300 kinds)
 - `P{01-12}/_schema.yaml` — pillar schemas
 - `archetypes/builders/{kind}-builder/` — 13 ISOs per kind
 - `.cex/brand/brand_config.yaml` — brand context injected into all prompts

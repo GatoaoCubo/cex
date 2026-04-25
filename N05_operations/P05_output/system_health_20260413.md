@@ -79,7 +79,7 @@ related:
 | 7 | git:clean | 136 dirty files (126 untracked + 8 modified) |
 
 - Elapsed: 311.2s (runner timeout accounts for most of this)
-- KC library: 181/98 kinds covered (exceeds minimum)
+- KC library: 181/300 kinds covered (exceeds minimum)
 
 ### cex_flywheel_audit (109 checks)
 
@@ -131,8 +131,8 @@ RTX 5070 Ti 16303MB GPU available, 1481.9GB free disk, git pre-commit hook insta
 
 | # | Gate | Detail |
 |---|------|--------|
-| 1 | readme:kinds | README should mention 184 kinds (stale count) |
-| 2 | readme:builders | README should mention 163 builders (stale count) |
+| 1 | readme:kinds | README should mention 300 kinds (stale count) |
+| 2 | readme:builders | README should mention 301 builders (stale count) |
 | 3 | health:doctor_zero_fail | 2 FAILs in doctor |
 | 4 | health:hooks_zero_errors | 28 hook errors |
 | 5 | health:flywheel_100pct | 98% health (not 100%) |

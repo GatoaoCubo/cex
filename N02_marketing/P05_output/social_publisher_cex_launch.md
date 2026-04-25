@@ -37,7 +37,7 @@ related:
 Most AI agent frameworks beg for attention. CEX earns it.
 
 The positioning: **You've been building AI agents. CEX builds AI infrastructure.**
-The proof: 293 kinds, 295 builders, 8 nuclei, 4 runtimes -- running on your repo, not ours.
+The proof: 300 kinds, 301 builders, 8 nuclei, 4 runtimes -- running on your repo, not ours.
 
 This strategy does not describe CEX. It DEMONSTRATES it. Every post is a proof point.
 Every thread is a live artifact. The content IS the product.
@@ -86,7 +86,7 @@ N02 runs on Creative Lust. Every word it writes must SEDUCE.
 N03 runs on Inventive Pride. Every artifact must be architecturally sound.
 N07 runs on Orchestrating Sloth. It delegates everything -- because doing is beneath it.
 
-293 kinds. 4 runtimes. 0 vendor lock-in.
+300 kinds. 4 runtimes. 0 vendor lock-in.
 
 CEX is now open source. Link in comments.
 ```
@@ -202,7 +202,7 @@ Content strategy for GitHub is NOT posts. It is ARTIFACTS:
 
 ## Anti-Patterns (Blocked)
 
-- Feature lists without proof ("293 kinds" without showing ONE)
+- Feature lists without proof ("300 kinds" without showing ONE)
 - Passive voice ("CEX can be used to...")
 - Generic AI hype ("Revolutionary AI platform changes everything")
 - Posting without CTA

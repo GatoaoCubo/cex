@@ -40,7 +40,7 @@ repo root
   |-- N06_commercial/      commercial nucleus
   |-- N07_admin/           orchestrator nucleus
   |-- archetypes/builders/ builder ISOs (13 files per kind)
-  |-- _tools/              Python toolchain (158 tools)
+  |-- _tools/              Python toolchain (148 tools)
   |-- _spawn/              dispatch scripts (solo/grid/swarm)
   |-- cex_sdk/             runtime SDK (78 .py, 4504 lines)
   |-- boot/                PowerShell boot scripts (1 per nucleus + shared)
@@ -266,7 +266,7 @@ A kind is an atomic artifact type. Each kind has:
 |-----------|----------|-------|
 | Registry entry | `.cex/kinds_meta.json` | 293 |
 | Knowledge card | `N00_genesis/P01_knowledge/library/kind/kc_{kind}.md` | 424 |
-| Builder (12 ISOs) | `archetypes/builders/{kind}-builder/` | 295 builders |
+| Builder (12 ISOs) | `archetypes/builders/{kind}-builder/` | 301 builders |
 | Sub-agent | `.claude/agents/{kind}-builder.md` | 294 |
 
 Kinds are the type system. A `knowledge_card` is not a `context_doc`. A `prompt_template`

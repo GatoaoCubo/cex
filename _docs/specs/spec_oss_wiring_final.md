@@ -83,7 +83,7 @@ closes them in 3 waves so the repo can go public with zero tech debt.
 
 | Suspected gap | Why it's not a gap |
 |---------------|-------------------|
-| `.cex/agents/` empty (0 vs 295 in `.claude/agents/`) | By design: `.claude/agents/` is Claude Code-specific; cross-runtime uses `archetypes/builders/` (295 builders) |
+| `.cex/agents/` empty (0 vs 295 in `.claude/agents/`) | By design: `.claude/agents/` is Claude Code-specific; cross-runtime uses `archetypes/builders/` (301 builders) |
 | N00 missing agent_card + component_map | N00 is archetype, not operational; has `kind_agent_card/` library instead |
 | Quality self-scoring (87.5% of artifacts) | Scores assigned by peer nuclei during /showoff + /consolidate cycles, not self-scored; reset to null on export via import protocol |
 | interfaces.py missing in cex_sdk | Interfaces distributed in module `__init__.py` files; functional |

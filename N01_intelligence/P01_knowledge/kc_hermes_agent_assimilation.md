@@ -38,7 +38,7 @@ HERMES Agent (NousResearch) is a self-improving single-agent framework with a
 built-in learning loop: autonomous skill creation, three-layer memory, multi-
 platform messaging gateway, six terminal backends, and 118 bundled skills.
 Adjacent repo `opencode-hermes-multiagent` exposes a 17-agent pipeline variant
-with scenario-indexed workflows. CEX is a typed-taxonomy factory (284 kinds /
+with scenario-indexed workflows. CEX is a typed-taxonomy factory (300 kinds /
 12 pillars / 7 nuclei); HERMES is a runtime-plus-skill-library. The gap is
 largely in **user modeling**, **messaging surface**, **personality hot-swap**,
 **terminal backend abstraction**, and **scenario-indexed pipelines**.
@@ -104,7 +104,7 @@ Notable skills CEX lacks as typed artifacts:
 
 **Handoff rules:** full context passed · mandatory @reviewer+@tester gates · max 3 revision loops · priority security > quality > implementation.
 
-## Gap Analysis vs CEX (284 kinds / 12 pillars)
+## Gap Analysis vs CEX (300 kinds / 12 pillars)
 
 ### NOVEL — not typed in CEX (priority P1)
 
@@ -170,11 +170,11 @@ Dispatch N03 + N04 to add frontmatter fields to existing builder ISOs:
 
 ### Wave 3 (integration)
 
-1. Update `.cex/kinds_meta.json` (+9 kinds -> 293 kinds)
+1. Update `.cex/kinds_meta.json` (+9 kinds -> 300 kinds)
 2. Update `p03_pc_cex_universal.md` (prompt_compiler) — add verb/pattern rows for 9 new kinds PT+EN
 3. Update `_docs/specs/spec_metaphor_dictionary.md` — add industry/canonical terms
 4. Write 118-skill catalog scan — mark which map to existing CEX skills vs new
-5. Update CLAUDE.md header (284 -> 293 kinds)
+5. Update CLAUDE.md header (284 -> 300 kinds)
 
 ## Decision Points (GDP — user must confirm before Wave 1)
 

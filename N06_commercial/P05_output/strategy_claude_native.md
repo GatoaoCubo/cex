@@ -96,7 +96,7 @@ related:
 
 1. **Zero infrastructure**: User runs CEX on their own machine with their own Claude subscription
 2. **Self-qualifying**: If they can `git clone`, they can use CEX -- no support burden
-3. **High retention**: 123 kinds + 2000+ artifacts = deep customization lock-in (positive)
+3. **High retention**: 300 kinds + 2000+ artifacts = deep customization lock-in (positive)
 4. **Network effects**: Power users share templates, builders, KCs -- community grows organically
 5. **Upsell natural**: Free repo -> paid templates -> consulting -> enterprise licensing
 
@@ -153,7 +153,7 @@ Month 6+: Enterprise + White-label
 
 | Tier | Price | What You Get | Target |
 |------|-------|-------------|--------|
-| **Free** | R$0 | Full CEX repo (MIT), 123 kinds, 8F pipeline, all builders | Developers exploring |
+| **Free** | R$0 | Full CEX repo (MIT), 300 kinds, 8F pipeline, all builders | Developers exploring |
 | **Pro Templates** | R$97-497 (one-time) | Pre-built template packs, advanced builders, brand presets | Power users wanting shortcuts |
 | **Course** | R$497-997 (one-time) | Video course + exercises + community access + office hours | Users wanting structured learning |
 | **Insiders** | R$97/month | Private Discord, weekly office hours, early access, exclusive templates | Community-driven retention |
@@ -174,7 +174,7 @@ Month 6+: Enterprise + White-label
 
 | Competitor | Model | CEX Differentiator |
 |-----------|-------|-------------------|
-| **LangChain** | Open-source framework | CEX has 123 typed kinds + 8F pipeline. LangChain is plumbing; CEX is architecture. |
+| **LangChain** | Open-source framework | CEX has 300 typed kinds + 8F pipeline. LangChain is plumbing; CEX is architecture. |
 | **CrewAI** | Multi-agent workflows | CEX has 8 specialized nuclei + brand injection. CrewAI agents are generic. |
 | **AutoGen** | Conversational agents | CEX has knowledge cards + 12 pillar structure. AutoGen is chat; CEX is system. |
 | **Cursor/Windsurf** | AI IDE | CEX augments Claude Code specifically. IDE-agnostic knowledge system. |

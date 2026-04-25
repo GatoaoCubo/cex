@@ -79,7 +79,7 @@ The industry has converged on three distinct approaches. CEX must choose one (or
 **Recommendation for CEX**: **Hybrid B+C** (embedding similarity as fast gate, LLM-as-judge for ambiguous cases).
 
 Rationale vs alternatives:
-- **vs A (classifier softmax)**: CEX has no training data and 123 kinds that change. A trained classifier would need retraining on every kind addition. Embedding similarity handles new kinds zero-shot.
+- **vs A (classifier softmax)**: CEX has no training data and 300 kinds that change. A trained classifier would need retraining on every kind addition. Embedding similarity handles new kinds zero-shot.
 - **vs B alone**: Embedding similarity can't handle compound intents ("build agent AND test it") or contextual disambiguation ("agent" in P02 vs "agent" in A2A). LLM-as-judge resolves these.
 - **vs C alone**: LLM-as-judge is too slow/expensive for every input. Embedding similarity handles 80%+ of inputs in <10ms. LLM only needed for the ambiguous 20%.
 
@@ -92,7 +92,7 @@ Rationale vs alternatives:
 | **Comparative scores, not absolute** | Amazon Lex (explicit warning in docs) | Don't treat 0.7 as "good" universally -- compare relative rankings |
 | **Route-specific thresholds** outperform global | Semantic Router (per-route score_threshold) | Some kinds are naturally harder to match -- "agent" is ambiguous, "mcp_server" is precise |
 | **Self-refining is better than hard failure** | DSPy (assertion backtracking) | When confidence is low, try reformulating before falling back to user |
-| **Sub-ms is achievable** for embedding-based routing | Semantic Router benchmarks (<1ms for 100 routes) | CEX with 123 kinds can still achieve <10ms routing with embeddings |
+| **Sub-ms is achievable** for embedding-based routing | Semantic Router benchmarks (<1ms for 100 routes) | CEX with 300 kinds can still achieve <10ms routing with embeddings |
 
 ### 1.4 Proposed CEX Confidence Scoring Design
 

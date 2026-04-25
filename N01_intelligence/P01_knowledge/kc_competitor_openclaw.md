@@ -10,7 +10,7 @@ quality: null
 tags: [seed-intel, competitor, openclaw, agent-framework, mcp, clawHub]
 when_to_use: "When evaluating community-driven skill ecosystems (ClawHub vs. CEX builders); when analyzing viral OSS growth patterns; when assessing security risks of user-contributed agent skills; when studying non-profit governance models for AI frameworks"
 axioms:
-  - "ALWAYS benchmark ClawHub's 13K+ skills against CEX's 300 kinds + 302 builders -- ClawHub is volume-first/untyped, CEX is governance-first/typed"
+  - "ALWAYS benchmark ClawHub's 13K+ skills against CEX's 300 kinds + 301 builders -- ClawHub is volume-first/untyped, CEX is governance-first/typed"
   - "ALWAYS flag the security liability: community-submitted skills with no quality gate = supply chain attack surface that CEX's 8F pipeline + F7 GOVERN eliminates"
   - "NEVER treat 335K stars as indicative of enterprise readiness -- OpenClaw's strength is consumer messaging integration, not production knowledge systems"
   - "NEVER ignore the OpenAI backing signal -- OpenAI funding a non-profit competitor reveals their agent distribution strategy beyond the Agents SDK"

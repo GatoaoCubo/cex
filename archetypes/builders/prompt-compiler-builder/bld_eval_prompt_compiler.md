@@ -48,13 +48,13 @@ Failure on any single gate means REJECT regardless of soft score.
 | H04 | `kind` equals literal `prompt_compiler` | string equality check |
 | H05 | `quality` is null at authoring time | `quality is None` |
 | H06 | All required frontmatter fields present | id, kind, pillar, title, version, created, updated, author, domain, coverage, languages, tags, tldr |
-| H07 | Kind Resolution Table present with >= 120 kinds mapped | count distinct kinds >= 120 |
+| H07 | Kind Resolution Table present with >= 300 kinds mapped | count distinct kinds >= 120 |
 | H08 | `coverage` field matches actual kinds in table | integer == count of table rows |
 | H09 | Verb Resolution Table present with >= 30 verbs | count rows >= 30 |
 ## SOFT Scoring
 | #  | Dimension | Weight |
 |----|-----------|--------|
-| 1  | All 124 kinds covered (not just 120 minimum) | 1.0 |
+| 1  | All 300 kinds covered (not just 120 minimum) | 1.0 |
 | 2  | Multilingual coverage >= 80% (community language patterns for >= 80% of EN patterns) | 1.0 |
 | 3  | Every kind has boundary note (when NOT to pick) | 1.0 |
 | 4  | Ambiguity resolution protocol defined with >= 3 steps | 1.0 |
@@ -108,7 +108,7 @@ density_score: 0.91
 WHY THIS IS GOLDEN:
 - quality: null (H05 pass) | id p03_pc_ pattern (H02 pass) | kind: prompt_compiler (H04 pass)
 - coverage: 124 matches table (H08 pass) | languages: [pt-br, en] (H06 pass)
-- All 124 kinds mapped (S01 pass) | Multilingual >= 80% (S02 pass)
+- All 300 kinds mapped (S01 pass) | Multilingual >= 80% (S02 pass)
 - Boundary notes present (S03 pass) | Verb table >= 30 (H09 pass)
 ## Anti-Example
 INPUT: "Make intent resolver"
@@ -126,7 +126,7 @@ FAILURES:
 2. kind: "router" not "prompt_compiler" -> H04 FAIL
 3. pillar: P02 not P03 -> H06 FAIL
 4. quality: 8.5 (not null) -> H05 FAIL
-5. coverage: 15 (only 15 of 124 kinds) -> H07 FAIL (< 120)
+5. coverage: 15 (only 15 of 300 kinds) -> H07 FAIL (< 120)
 6. Missing: title, languages, tags, tldr -> H06 FAIL
 7. No Kind Resolution Table -> H07 FAIL
 8. No Verb Resolution Table -> H09 FAIL

@@ -143,7 +143,7 @@ SYSTEM "You are N03 Builder, the artifact construction nucleus of CEX..."
 
 | Phase | Timeline | Milestone | Cost Reduction |
 |-------|----------|-----------|----------------|
-| 0 | Immediate | 184 kinds + builders registered | API-dependent |
+| 0 | Immediate | 300 kinds + builders registered | API-dependent |
 | 1 | Week 1 | Gemma4:26b as local fallback | 50% API reduction |
 | 2 | Week 2-3 | Dataset construction pipeline | 30% API reduction |
 | 3 | Week 4-6 | QLoRA adapter deployment | 15% API reduction |

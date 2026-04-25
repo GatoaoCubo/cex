@@ -74,7 +74,7 @@ author: n03_engineering
 domain: schema
 quality: null
 tags: [type_def, artifact, metadata, frontmatter]
-tldr: "Structural type for CEX artifact frontmatter. Enforces required fields, type constraints, and naming conventions across all 257 kinds."
+tldr: "Structural type for CEX artifact frontmatter. Enforces required fields, type constraints, and naming conventions across all 300 kinds."
 density_score: 0.87
 ---
 

@@ -44,16 +44,16 @@ updated: "2026-04-22"
 | P11 Feedback | 31 | 3 | 4 | SPARSE |
 | P12 Orchestration | 20 | 7 | 15 | STRONG |
 
-**Total:** 293 kinds | 39 builders (13%) | 69 N07 artifacts across 12 pillars
+**Total:** 300 kinds | 39 builders (13%) | 69 N07 artifacts across 12 pillars
 
-**System-wide builder gap:** 254 kinds registered with no executable builder. Largest gaps: P09 Config (36/37), P10 Memory (22/22), P04 Tools (28/36).
+**System-wide builder gap:** 300 kinds registered with no executable builder. Largest gaps: P09 Config (36/37), P10 Memory (22/22), P04 Tools (28/36).
 
 ## 8F Wiring Status
 
 | Function | Wired? | Where | Tooling | Gap |
 |----------|--------|-------|---------|-----|
 | F1 CONSTRAIN | YES | `.cex/kinds_meta.json` + `P{xx}/_schema.yaml` | `cex_intent_resolver.py` | None |
-| F2 BECOME | YES | `archetypes/builders/{kind}-builder/` (13 ISOs) | `cex_skill_loader.py` | Only 39/293 builders exist |
+| F2 BECOME | YES | `archetypes/builders/{kind}-builder/` (13 ISOs) | `cex_skill_loader.py` | Only 39/301 builders exist |
 | F2b SPEAK | YES | `kc_{domain}_vocabulary.md` per nucleus | `p03_pc_cex_universal.md` | Not all nuclei have vocab KC |
 | F3 INJECT | YES | `N00_genesis/P01_knowledge/library/` | `cex_retriever.py`, `cex_memory_select.py` | F3b persist rarely triggered |
 | F3b PERSIST | PARTIAL | `entity_memory`, `learning_record` kinds | `cex_memory_update.py` | No auto-persist hook in 8F runs |
@@ -97,7 +97,7 @@ updated: "2026-04-22"
 
 ## Top 5 System Gaps
 
-1. **Builder coverage: 87% dark** (254/293 kinds have no builder). F2 BECOME falls back to generic for most kinds -- no sin lens, no specialized ISOs. Impact: every non-covered kind gets generic output instead of specialist output. Severity: HIGH.
+1. **Builder coverage: 87% dark** (254/300 kinds have no builder). F2 BECOME falls back to generic for most kinds -- no sin lens, no specialized ISOs. Impact: every non-covered kind gets generic output instead of specialist output. Severity: HIGH.
 
 2. **F3b auto-persist not wired** -- every 8F run surfaces new entities and learnings, but `cex_memory_update.py` is only called manually. The institutional memory compounds only when a nucleus explicitly decides to persist. Severity: HIGH.
 
@@ -105,7 +105,7 @@ updated: "2026-04-22"
 
 4. **P09 Config infrastructure: 1 builder for 37 kinds** -- only env_config has a builder. The other 36 config kinds (rate_limit_config, secret_config, feature_flag, canary_config, etc.) are orphaned. F1 CONSTRAIN for config tasks falls back to generic. Severity: HIGH.
 
-5. **Tool-to-kind mapping undocumented** -- 158 tools in _tools/ have no canonical mapping to kinds_meta.json. N07 cannot programmatically discover which tool supports which kind. F5 CALL relies on N07's training data. Severity: MEDIUM.
+5. **Tool-to-kind mapping undocumented** -- 148 tools in _tools/ have no canonical mapping to kinds_meta.json. N07 cannot programmatically discover which tool supports which kind. F5 CALL relies on N07's training data. Severity: MEDIUM.
 
 ## Recommendations
 

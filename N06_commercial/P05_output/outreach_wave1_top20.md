@@ -671,7 +671,7 @@ github.com/gato3/cex
 | Content Type | Python, ML programming |
 | Posting Frequency | weekly |
 
-**Why he matters for CEX:** The original Python ML educator on YouTube. His audience is the Python developer who builds ML projects -- the exact technical profile that would adopt CEX. He programs live, shows real code, and values practical tools. CEX's Python SDK and 144 tools are directly relevant to his content style.
+**Why he matters for CEX:** The original Python ML educator on YouTube. His audience is the Python developer who builds ML projects -- the exact technical profile that would adopt CEX. He programs live, shows real code, and values practical tools. CEX's Python SDK and 148 tools are directly relevant to his content style.
 
 **Template to use:** T1-X-EN (Twitter/X DM) or T1-EM-EN (Email)
 
@@ -687,7 +687,7 @@ work on practical AI tools connects to something we just shipped.
 
 We built CEX -- an open-source AI brain with 300 typed knowledge artifacts, a
 mandatory reasoning pipeline, and multi-runtime support (Claude, Gemini, Codex,
-Ollama). It is a Python project -- 144 tools, full CLI, typed artifacts that
+Ollama). It is a Python project -- 148 tools, full CLI, typed artifacts that
 live in your git repo.
 
 The part I think you would find most interesting: the 8F reasoning pipeline runs
@@ -1075,7 +1075,7 @@ github.com/gato3/cex
 
 **Template to use:** T2-X-BR (Twitter/X DM, PT-BR)
 
-**Personalization notes:** Reference "Live de Python" and his OSS contributions. CEX is a Python project (144 tools, full SDK). Position as both a tool to use AND an OSS project to contribute to. Specific contribution opportunity: Python SDK improvements, FastAPI integration for CEX API endpoints.
+**Personalization notes:** Reference "Live de Python" and his OSS contributions. CEX is a Python project (148 tools, full SDK). Position as both a tool to use AND an OSS project to contribute to. Specific contribution opportunity: Python SDK improvements, FastAPI integration for CEX API endpoints.
 
 **Recommended message:**
 
@@ -1083,7 +1083,7 @@ github.com/gato3/cex
 Oi Eduardo -- acompanho o Live de Python e suas contribuicoes open-source.
 Exatamente o tipo de pessoa que gostaria de ter olhando nosso projeto.
 
-CEX e um cerebro de IA open-source em Python (144 tools, SDK completo, licenca
+CEX e um cerebro de IA open-source em Python (148 tools, SDK completo, licenca
 MIT) com 300 tipos de artefatos tipados e pipeline de raciocinio de 8 passos.
 
 Alem de usar, estamos buscando contribuidores Python -- especificamente alguem

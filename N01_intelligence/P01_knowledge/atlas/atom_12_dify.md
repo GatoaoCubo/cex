@@ -465,7 +465,7 @@ Vision-capable embedding models enable cross-modal image-text retrieval. Images 
 
 | CEX capability | Dify status |
 |---------------|------------|
-| Typed artifact system (130 kinds) | Untyped -- all outputs are strings/JSON |
+| Typed artifact system (300 kinds) | Untyped -- all outputs are strings/JSON |
 | Quality scoring (3-layer: structural + rubric + semantic) | No built-in quality gates |
 | Builder archetypes (13 ISOs per kind) | No builder specialization |
 | Fractal nucleus architecture (7 specialized domains) | Flat -- all agents are equal |

@@ -42,7 +42,7 @@ SEED (minimal core, hand-crafted)
 ## CEX Bootstrap History
 1. Hand-crafted: kinds_meta.json, 3 builder specs
 2. Meta-factory: _builder-builder creates all builders
-3. Builders: 105 builders produce artifacts
+3. Builders: 301 builders produce artifacts
 4. Self-sustaining: auto-evolve fills remaining gaps
 5. Brand: /init personalizes for user's company
 

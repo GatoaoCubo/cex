@@ -189,7 +189,7 @@ How to know if intent resolution is working:
 | `cex_gdp.py` | GDP enforcement -- triggers disambiguation for subjective intents |
 | `cex_router.py` | Multi-provider routing based on resolved intent domain |
 | `spec_metaphor_dictionary.md` | Term normalization -- maps user metaphors to system terms |
-| `kinds_meta.json` | Kind registry -- maps intent to artifact type (123 kinds) |
+| `kinds_meta.json` | Kind registry -- maps intent to artifact type (300 kinds) |
 
 ## Related Concepts
 

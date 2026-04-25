@@ -47,7 +47,7 @@ The 8F pipeline is NOT arbitrary. It maps 1:1 to recognized industry patterns:
 **Verdict: 8F is a valid abstraction of the universal LLM agent execution cycle.**
 No rename needed. The names are already clear enough for any LLM.
 
-### llm_function distribution (117 kinds)
+### llm_function distribution (300 kinds)
 
 | Function | Count | % | Health |
 |----------|-------|---|--------|

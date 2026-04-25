@@ -11,13 +11,13 @@ Imagine the following problem: you want an LLM to build an agent. You ask, and i
 
 CEXAI solves this with a taxonomy of 293 types -- called "kinds". Each kind has a name, a definition, a schema, and a builder with 12 instruction files (one per pillar). When any LLM -- Claude, GPT, Gemini, Llama -- needs to generate an artifact, it consults the builder for that kind and produces something structurally compatible with all other artifacts in the system.
 
-These 293 kinds are organized into 12 pillars. Pillar 1 is knowledge. Pillar 2 is agents. Pillar 3 is prompts. Pillar 4 is tools. And so on, up to pillar 12 which is orchestration. Each artifact belongs to exactly one pillar -- this is an immutable rule called "one kind, one pillar".
+These 300 kinds are organized into 12 pillars. Pillar 1 is knowledge. Pillar 2 is agents. Pillar 3 is prompts. Pillar 4 is tools. And so on, up to pillar 12 which is orchestration. Each artifact belongs to exactly one pillar -- this is an immutable rule called "one kind, one pillar".
 
 The build engine is called the 8F Pipeline -- eight sequential functions that every LLM executes to produce an artifact. F1 Constrain loads the schema. F2 Become loads the builder identity. F3 Inject loads relevant knowledge -- knowledge cards, examples, memory. F4 Reason plans the approach. F5 Call identifies available tools. F6 Produce generates the artifact. F7 Govern validates with a 12-point checklist. F8 Collaborate saves, compiles to YAML, re-indexes, and signals completion.
 
 Validation at F7 uses two methods. 12LP is a 12-point structural checklist -- frontmatter, schema, density, uniqueness, boundary. 5D is a 5-dimension scoring -- structural integrity, content density, actionability, boundary discipline, and composability. The final score is a weighted average. Below 8.0, the artifact is not published.
 
-Above the 293-kind layer, there are 7 nuclei -- each driven by one of the Artificial Sins. Each nucleus is a composition of 12 to 25 kinds forming an operational department. N03, the Builder, is the most important -- it is the factory that builds factories. It accesses all 298 builders and executes the 8F pipeline. N07 is the orchestrator -- it never executes, only dispatches tasks to the other nuclei.
+Above the 293-kind layer, there are 7 nuclei -- each driven by one of the Artificial Sins. Each nucleus is a composition of 12 to 25 kinds forming an operational department. N03, the Builder, is the most important -- it is the factory that builds factories. It accesses all 301 builders and executes the 8F pipeline. N07 is the orchestrator -- it never executes, only dispatches tasks to the other nuclei.
 
 The architecture is multi-LLM by design. N03 uses Claude Opus for complex construction. N05 uses OpenAI Codex for code review. N04 and N01 use Gemini 2.5 Pro with a 1 million token context window for knowledge and research. N02 and N06 use Claude Sonnet for creative writing. And as a free fallback, there is an Ollama provider that runs local models at zero cost.
 
