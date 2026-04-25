@@ -7,6 +7,7 @@ pillar: P11
 source: shared
 title: "Feedback Default: Universal Anti-Patterns"
 tags: [feedback, anti-patterns, P11, shared, default]
+tldr: "_Shared feedback: anti-patterns, regression signals, and quality improvement triggers"
 related:
   - bld_examples_axiom
   - p01_kc_artifact_quality_evaluation_methods

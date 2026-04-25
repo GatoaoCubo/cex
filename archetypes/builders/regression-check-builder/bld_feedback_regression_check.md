@@ -7,6 +7,7 @@ pillar: P11
 title: "Feedback: Regression Check"
 domain: regression_check
 tags: [feedback, anti-patterns, P11, regression_check]
+tldr: "Regression Check feedback: anti-patterns, regression signals, and quality improvement triggers"
 related:
   - p10_lr_golden_test_builder
   - bld_instruction_knowledge_card

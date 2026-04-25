@@ -46,7 +46,7 @@ Ending state: **1 FAIL / 27 PASS / 28 total**
 - **Fix**: Updated all README occurrences to 164
 
 ### 3. readme:tools -- FIXED
-- **Was**: README mentioned 83/51/148 tools
+- **Was**: README mentioned 83/51/150 tools
 - **Reality**: 86 `cex_*.py` files in `_tools/`
   - Count shifted 84 -> 85 -> 86 during session as POLISH_WAVE2 nuclei added
     `cex_wave_validator.py`, `cex_wave_autofix.py`, `cex_wave_autofix_placeholders.py`

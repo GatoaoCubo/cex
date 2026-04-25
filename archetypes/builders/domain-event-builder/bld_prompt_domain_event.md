@@ -10,6 +10,7 @@ quality: 7.3
 tags: [domain_event, builder, instruction]
 title: "Instruction Domain Event Builder"
 author: builder
+tldr: "Step-by-step production process for domain_event"
 density_score: 0.81
 created: "2026-04-17"
 updated: "2026-04-17"

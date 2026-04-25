@@ -12,6 +12,7 @@ tags: [tools, revision_loop_policy, builder, p04, p11]
 domain: "revision_loop_policy construction"
 created: "2026-04-18"
 updated: "2026-04-18"
+tldr: "P04 tools available to the revision-loop-policy-builder"
 density_score: 0.86
 related:
   - bld_tools_kind

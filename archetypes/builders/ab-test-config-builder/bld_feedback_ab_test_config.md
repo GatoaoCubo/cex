@@ -7,6 +7,7 @@ domain: ab_test_config
 version: 1.1.0
 quality: 8.7
 tags: [feedback, anti-patterns, P11, ab_test_config]
+tldr: "Ab Test Config feedback: anti-patterns, regression signals, and quality improvement triggers"
 related:
   - p10_lr_golden_test_builder
   - p03_sp_golden_test_builder

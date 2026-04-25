@@ -8,6 +8,7 @@ quality: 7.4
 tags: [builder, event_stream, memory]
 llm_function: INJECT
 author: builder
+tldr: "Event Stream tools: context persistence, recall triggers, and state management"
 density_score: 0.97
 created: "2026-04-17"
 updated: "2026-04-17"

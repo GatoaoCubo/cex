@@ -9,6 +9,7 @@ quality: 7.3
 tags: [builder, value_object, rules]
 llm_function: COLLABORATE
 author: builder
+tldr: "Value Object schema: workflow coordination, handoffs, and lifecycle management"
 density_score: 0.81
 created: "2026-04-17"
 updated: "2026-04-17"

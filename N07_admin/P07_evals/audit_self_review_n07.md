@@ -105,7 +105,7 @@ updated: "2026-04-22"
 
 4. **P09 Config infrastructure: 1 builder for 37 kinds** -- only env_config has a builder. The other 36 config kinds (rate_limit_config, secret_config, feature_flag, canary_config, etc.) are orphaned. F1 CONSTRAIN for config tasks falls back to generic. Severity: HIGH.
 
-5. **Tool-to-kind mapping undocumented** -- 148 tools in _tools/ have no canonical mapping to kinds_meta.json. N07 cannot programmatically discover which tool supports which kind. F5 CALL relies on N07's training data. Severity: MEDIUM.
+5. **Tool-to-kind mapping undocumented** -- 150 tools in _tools/ have no canonical mapping to kinds_meta.json. N07 cannot programmatically discover which tool supports which kind. F5 CALL relies on N07's training data. Severity: MEDIUM.
 
 ## Recommendations
 

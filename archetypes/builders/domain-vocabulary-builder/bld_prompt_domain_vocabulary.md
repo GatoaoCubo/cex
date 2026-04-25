@@ -10,6 +10,7 @@ quality: 7.3
 tags: [domain_vocabulary, builder, instruction]
 title: "Instruction Domain Vocabulary Builder"
 author: builder
+tldr: "Step-by-step production process for domain_vocabulary"
 density_score: 0.82
 created: "2026-04-17"
 updated: "2026-04-17"

@@ -7,6 +7,7 @@ version: 1.0.0
 quality: 8.3
 tags: [builder, aggregate_root, quality_gate]
 llm_function: GOVERN
+tldr: "Aggregate Root schema: quality gate with scoring dimensions and pass/fail criteria"
 density_score: 1.0
 updated: "2026-04-17"
 related:

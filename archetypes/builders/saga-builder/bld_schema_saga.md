@@ -13,6 +13,7 @@ tags: [schema, saga, P12]
 domain: "distributed orchestration"
 created: "2026-04-17"
 updated: "2026-04-17"
+tldr: "Formal schema -- SINGLE SOURCE OF TRUTH for saga"
 density_score: null
 related:
   - bld_schema_quickstart_guide

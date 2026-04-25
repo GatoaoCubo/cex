@@ -10,6 +10,7 @@ author: n04_knowledge
 domain: data_platform
 quality: 9.1
 tags: [builder, supabase, data-layer, architecture, multi-nucleus]
+tldr: "Supabase Data Layer model: component map, dependencies, and structural constraints"
 density_score: 0.90
 llm_function: CONSTRAIN
 related:

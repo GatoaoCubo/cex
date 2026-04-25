@@ -9,6 +9,7 @@ quality: 7.3
 tags: [builder, process_manager, rules]
 llm_function: COLLABORATE
 author: builder
+tldr: "Process Manager orchestration: workflow coordination, handoffs, and lifecycle management"
 density_score: 0.81
 created: "2026-04-17"
 updated: "2026-04-17"

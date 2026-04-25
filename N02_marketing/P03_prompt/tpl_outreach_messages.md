@@ -497,7 +497,7 @@ Why your readers would care:
 - Convention-over-configuration: the "Rails of AI agents"
 - MIT licensed, no SaaS paywall, no per-operation fees
 
-Stats: 300 kinds, 301 builders, 12 pillars, 8-step reasoning pipeline, 148 tools,
+Stats: 300 kinds, 301 builders, 12 pillars, 8-step reasoning pipeline, 150 tools,
 4 runtimes.
 
 Happy to provide a quote, exclusive early access, or a demo for your team.
@@ -541,7 +541,7 @@ for contributors in {{THEIR_SKILL_AREA}}. Specifically:
 - {{SPECIFIC_CONTRIBUTION_OPPORTUNITY_1}}
 - {{SPECIFIC_CONTRIBUTION_OPPORTUNITY_2}}
 
-The codebase is Python + YAML + Markdown. 148 tools, 302 builder definitions,
+The codebase is Python + YAML + Markdown. 150 tools, 302 builder definitions,
 and a typed knowledge system with 300 artifact kinds.
 
 If you are curious: github.com/{{CEX_REPO}}

@@ -13,6 +13,7 @@ tags: [instruction, curation_nudge, builder, memory, hermes, proactive]
 domain: "curation_nudge construction"
 created: "2026-04-18"
 updated: "2026-04-18"
+tldr: "Step-by-step build instructions for curation_nudge"
 density_score: 0.91
 idempotent: true
 atomic: false

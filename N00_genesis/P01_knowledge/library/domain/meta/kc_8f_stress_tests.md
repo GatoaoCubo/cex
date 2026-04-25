@@ -112,7 +112,7 @@ CLEANUP  git stash pop
 1. **Latency**: 8 stages = ~3-5× slower for simple tasks
 2. **Setup cost**: 13 ISOs × 300 kinds = 1495 files to maintain
 3. **Rigidity**: assumes artifact output — poor for open conversation
-4. **Learning curve**: 148 tools vs "just type"
+4. **Learning curve**: 150 tools vs "just type"
 
 ## Related Artifacts
 

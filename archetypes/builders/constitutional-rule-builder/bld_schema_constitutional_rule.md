@@ -9,6 +9,7 @@ version: 1.0.0
 tags: [builder, constitutional_rule, schema]
 llm_function: CONSTRAIN
 author: builder
+tldr: "Constitutional Rule feedback: data contract, field types, and validation rules"
 density_score: 0.88
 created: "2026-04-17"
 updated: "2026-04-17"

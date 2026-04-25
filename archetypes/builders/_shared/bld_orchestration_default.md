@@ -9,6 +9,7 @@ llm_function: COLLABORATE
 version: 1.1.0
 quality: 7.8
 tags: [orchestration, signal, compile, commit, P12, shared, default]
+tldr: "_Shared orchestration: workflow coordination, handoffs, and lifecycle management"
 related:
   - p12_ho_admin_template
   - agent_card_engineering_nucleus

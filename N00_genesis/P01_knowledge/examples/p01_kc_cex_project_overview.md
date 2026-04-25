@@ -11,7 +11,7 @@ author: "knowledge-card-builder"
 domain: ai-orchestration
 quality: 9.1
 tags: [cex, architecture, nuclei, 8f-pipeline, knowledge-system, orchestration]
-tldr: "CEX: 300 kinds, 12 pillars, 8 nuclei (N00-N07), 8F pipeline, 301 builders, 148 tools — transforms vague user intent into validated production artifacts."
+tldr: "CEX: 300 kinds, 12 pillars, 8 nuclei (N00-N07), 8F pipeline, 301 builders, 150 tools — transforms vague user intent into validated production artifacts."
 when_to_use: "When onboarding to CEX, choosing nucleus/kind for a task, or explaining CEX topology to a collaborator."
 keywords: [cex, nucleus, 8f, pillar, knowledge-system]
 long_tails:
@@ -55,7 +55,7 @@ criticality: high
 - **8 nuclei** (N00-N07) — specialized agents per domain
 - **8F pipeline** — mandatory reasoning protocol for every task
 - **301 builders** — one per kind, 13 ISOs each
-- **148 tools** — SDK runtime (`cex_sdk/`, 78 .py files, 4504 lines)
+- **150 tools** — SDK runtime (`cex_sdk/`, 78 .py files, 4504 lines)
 
 ## 12 Pillars
 

@@ -10,6 +10,7 @@ author: n04_knowledge
 domain: data_platform
 quality: 9.1
 tags: [builder, supabase, data-layer, architecture, tradeoffs]
+tldr: "Supabase Data Layer knowledge: domain knowledge, terminology, and contextual background"
 density_score: 1.0
 when_to_use: "Use when building knowledge card artifacts for data_platform"
 keywords: [layer, knowledge-card, matrix, summary, data_platform]

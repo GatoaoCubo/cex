@@ -12,6 +12,7 @@ tags: [architecture, curation_nudge, builder, p11, memory, hermes]
 domain: "curation_nudge construction"
 created: "2026-04-18"
 updated: "2026-04-18"
+tldr: "F1 CONSTRAIN structural architecture for curation_nudge"
 density_score: 0.89
 related:
   - p01_kc_memory_scope

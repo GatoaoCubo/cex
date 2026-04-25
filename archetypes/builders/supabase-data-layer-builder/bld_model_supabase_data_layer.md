@@ -16,6 +16,7 @@ tags:
 - manifest
 - capabilities
 llm_function: BECOME
+tldr: "Supabase Data Layer prompt: agent definition, personality, and behavioral constraints"
 related:
   - bld_system_prompt_supabase_data_layer
   - p12_wf_supabase_setup

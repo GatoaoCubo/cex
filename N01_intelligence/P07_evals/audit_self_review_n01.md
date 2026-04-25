@@ -30,7 +30,7 @@ updated: "2026-04-22"
 ## Executive Summary
 
 CEX achieves **100% builder coverage** across all 300 kinds and 12 pillars — a stronger result than
-comparable typed-knowledge systems (LangChain: ~148 tools, no formal kind taxonomy; AutoGen: ~40
+comparable typed-knowledge systems (LangChain: ~150 tools, no formal kind taxonomy; AutoGen: ~40
 agent types, no pillar schema). N01 itself holds 201 artifacts across 12 pillars, with P01 (67) and
 P07 (24) as the densest. The primary gaps are in 8F **explicit** per-function wiring and thin P08/P09
 coverage within N01's own nucleus directory.

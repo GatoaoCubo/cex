@@ -8,6 +8,7 @@ quality: 7.6
 tags: [domain_vocabulary, ubiquitous-language, ddd, knowledge]
 title: "Knowledge: Domain Vocabulary Pattern"
 author: builder
+tldr: "Domain Vocabulary knowledge: domain knowledge, terminology, and contextual background"
 density_score: 0.88
 created: "2026-04-17"
 updated: "2026-04-17"

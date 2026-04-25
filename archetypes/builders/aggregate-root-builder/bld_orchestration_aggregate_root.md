@@ -9,6 +9,7 @@ quality: 7.3
 tags: [builder, aggregate_root, rules]
 llm_function: COLLABORATE
 author: builder
+tldr: "Aggregate Root schema: workflow coordination, handoffs, and lifecycle management"
 density_score: 0.82
 created: "2026-04-17"
 updated: "2026-04-17"

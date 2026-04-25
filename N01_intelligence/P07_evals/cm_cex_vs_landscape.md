@@ -30,7 +30,7 @@ tldr: "CEX vs 10 AI agent frameworks across 25 dimensions -- identifying unique 
 | Funding / Backing | Self-funded | OpenAI Foundation | $185M ($1.25B val) | Paradigm + a16z | $24.5M (Insight) | OpenAI ($157B company) | ~$30.8M (Ant/Baidu) | $27.5M (Norwest) | Microsoft | Self-funded (Pydantic) | Self-funded |
 | License | MIT | MIT | MIT (OSS) + commercial | MIT | MIT | MIT | MIT | MIT | MIT + CC-BY-4.0 | MIT | MIT |
 | Primary Language | Python | TypeScript + Swift | Python (90%) + JS | Python (~9.2K LoC) | Python | Python (99.7%) | Python (97.5%) | Python (71.9%) | Python 61.7% + C# 25.1% | Python | Python (97.6%) |
-| Codebase Size | cex_sdk + 148 tools | ~124K LoC | 134,756 LoC | ~9,200 LoC | N/A | N/A | 6,367 commits | N/A | N/A | N/A | N/A |
+| Codebase Size | cex_sdk + 150 tools | ~124K LoC | 134,756 LoC | ~9,200 LoC | N/A | N/A | 6,367 commits | N/A | N/A | N/A | N/A |
 | Latest Release | Active (Apr 2026) | Active | Active | v0.11.0 (Apr 2026) | v1.14.3 (Apr 24, 2026) | v0.14.5 (Apr 23, 2026) | v0.8.1 (Apr 2024) | v0.14.21 (Apr 21, 2026) | v0.7.5 (Sep 2025, maintenance) | v1.86.1 (Apr 24, 2026) | v1.9.4 (Apr 22, 2026) |
 | Project Status | Active | Active (foundation) | Active (IPO-track) | Active (rapid growth) | Active (GA) | Active | Stale (>1yr no release) | Active | MAINTENANCE MODE | Active | Active |
 

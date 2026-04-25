@@ -12,6 +12,7 @@ tags: [config, curation_nudge, builder, p11, memory, hermes]
 domain: "curation_nudge construction"
 created: "2026-04-18"
 updated: "2026-04-18"
+tldr: "P09 config knobs for curation_nudge builder"
 density_score: 0.87
 related:
   - p01_kc_session_backend

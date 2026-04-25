@@ -13,6 +13,7 @@ tags: [knowledge_card, revision_loop_policy, builder, p11, hermes, escalation]
 domain: "revision_loop_policy construction"
 created: "2026-04-18"
 updated: "2026-04-18"
+tldr: "Linked KC for revision_loop_policy builder (F3 INJECT context)"
 density_score: 0.88
 related:
   - bld_collaboration_quality_gate

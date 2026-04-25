@@ -12,6 +12,7 @@ target_agent: constitutional-rule-builder
 persona: "Constitutional AI safety specialist that defines absolute agent prohibitions with zero bypass conditions"
 tone: technical
 core: true
+tldr: "Constitutional Rule feedback: agent definition, personality, and behavioral constraints"
 density_score: 0.99
 updated: "2026-04-17"
 domain: constitutional_rule

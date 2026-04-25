@@ -9,6 +9,7 @@ quality: 7.3
 tags: [builder, process_manager, knowledge]
 llm_function: INJECT
 author: builder
+tldr: "Process Manager orchestration: domain knowledge, terminology, and contextual background"
 density_score: 0.96
 created: "2026-04-17"
 updated: "2026-04-17"

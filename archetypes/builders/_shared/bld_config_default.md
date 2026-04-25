@@ -8,6 +8,7 @@ llm_function: CONSTRAIN
 version: 1.1.0
 quality: 7.8
 tags: [config, tunables, P09, shared, default]
+tldr: "_Shared config: naming conventions, output paths, and production limits"
 related:
   - bld_architecture_kind
   - kind-builder

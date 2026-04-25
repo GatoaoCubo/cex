@@ -20,6 +20,7 @@ hooks:
   on_quality_fail: null
 permission_scope: nucleus
 title: Config ISO - retriever
+tldr: "Retriever schema: naming conventions, output paths, and production limits"
 related:
   - p09_kc_retriever_domain
   - bld_instruction_retriever

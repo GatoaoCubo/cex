@@ -34,7 +34,7 @@ related:
 
 ## Context
 
-CEX has 148 tools, 301 builders, 300 kinds, and a complex multi-nucleus
+CEX has 150 tools, 301 builders, 300 kinds, and a complex multi-nucleus
 architecture. Testing must cover tool correctness, artifact quality,
 pipeline integrity, and deployment safety. A single test layer is
 insufficient.

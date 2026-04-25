@@ -8,6 +8,7 @@ quality: 8.1
 tags: [data_contract, context, rag]
 title: "Context Sources: data_contract"
 author: builder
+tldr: "Data Contract memory: naming conventions, output paths, and production limits"
 density_score: 0.88
 created: "2026-04-17"
 updated: "2026-04-17"

@@ -9,6 +9,7 @@ quality: 7.6
 tags: [builder, event_stream, schema]
 llm_function: CONSTRAIN
 author: builder
+tldr: "Event Stream tools: data contract, field types, and validation rules"
 density_score: 0.88
 created: "2026-04-17"
 updated: "2026-04-17"

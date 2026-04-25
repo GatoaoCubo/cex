@@ -11,6 +11,7 @@ updated: 2026-03-28
 author: builder_agent
 quality: 9.0
 tags: [instruction, retriever, P03, RAG, vector-search]
+tldr: "Step-by-step production process for retriever artifacts"
 density_score: 0.86
 domain: "instruction artifact construction"
 title: "Instruction Retriever"

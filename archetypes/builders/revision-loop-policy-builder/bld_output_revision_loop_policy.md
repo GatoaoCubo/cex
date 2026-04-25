@@ -13,6 +13,7 @@ tags: [output_template, revision_loop_policy, builder, p05, p11]
 domain: "revision_loop_policy construction"
 created: "2026-04-18"
 updated: "2026-04-18"
+tldr: "P05 output shape for revision_loop_policy artifacts"
 density_score: 0.89
 related:
   - p03_sp_quality_gate_builder

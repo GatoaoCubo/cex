@@ -9,6 +9,7 @@ quality: 7.3
 tags: [builder, event_stream, rules]
 llm_function: COLLABORATE
 author: builder
+tldr: "Event Stream tools: workflow coordination, handoffs, and lifecycle management"
 density_score: 0.82
 created: "2026-04-17"
 updated: "2026-04-17"

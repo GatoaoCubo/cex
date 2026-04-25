@@ -10,6 +10,7 @@ quality: 7.3
 tags: [bounded_context, builder, instruction]
 title: "Instruction Bounded Context Builder"
 author: builder
+tldr: "Step-by-step production process for bounded_context"
 density_score: 0.84
 created: "2026-04-17"
 updated: "2026-04-17"

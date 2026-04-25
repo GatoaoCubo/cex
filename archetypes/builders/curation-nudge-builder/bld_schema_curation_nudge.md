@@ -12,6 +12,7 @@ tags: [schema, curation_nudge, builder, p11, memory, hermes]
 domain: "curation_nudge construction"
 created: "2026-04-18"
 updated: "2026-04-18"
+tldr: "F1 CONSTRAIN schema for curation_nudge artifacts"
 density_score: 0.90
 related:
   - p06_schema_env_contract

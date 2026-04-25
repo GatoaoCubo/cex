@@ -61,7 +61,7 @@ Domain: code review, testing, debugging, deployment, CI/CD, infrastructure.
 
 ### Context Sources
 - Task handoff: `.cex/runtime/handoffs/n05_task.md`
-- Tool inventory: `ls -la _tools/cex_*.py` (148 tools)
+- Tool inventory: `ls -la _tools/cex_*.py` (150 tools)
 - Coverage run: `python _tools/cex_coverage.py` output
 - CLAUDE.md rules: N05 operations rules
 

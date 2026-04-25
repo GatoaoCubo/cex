@@ -8,6 +8,7 @@ quality: 8.1
 tags: [bounded_context, template, output]
 title: "Output Template: bounded_context"
 author: builder
+tldr: "Bounded Context prompt: output template, formatting rules, and structure"
 density_score: 1.0
 created: "2026-04-17"
 updated: "2026-04-17"

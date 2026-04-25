@@ -10,6 +10,7 @@ author: n04_knowledge
 domain: data_platform
 quality: 9.1
 tags: [builder, supabase, data-layer, collaboration, multi-nucleus]
+tldr: "Supabase Data Layer orchestration: workflow coordination, handoffs, and lifecycle management"
 density_score: 1.0
 llm_function: COLLABORATE
 related:

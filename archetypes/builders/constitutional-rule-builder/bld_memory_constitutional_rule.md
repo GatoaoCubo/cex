@@ -9,6 +9,7 @@ quality: 7.3
 tags: [builder, constitutional_rule, memory]
 llm_function: INJECT
 author: builder
+tldr: "Constitutional Rule feedback: context persistence, recall triggers, and state management"
 density_score: 0.88
 created: "2026-04-17"
 updated: "2026-04-17"

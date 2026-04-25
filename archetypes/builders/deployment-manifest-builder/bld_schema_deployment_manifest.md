@@ -14,6 +14,7 @@ tags: [schema, deployment_manifest, P09]
 domain: "deployment configuration"
 created: "2026-04-17"
 updated: "2026-04-17"
+tldr: "Formal schema -- SINGLE SOURCE OF TRUTH for deployment_manifest"
 density_score: null
 related:
   - bld_schema_search_strategy

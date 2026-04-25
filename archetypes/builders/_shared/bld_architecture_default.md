@@ -9,6 +9,7 @@ llm_function: CONSTRAIN
 version: 1.1.0
 quality: 7.7
 tags: [architecture, component_map, P08, shared, default]
+tldr: "_Shared architecture: component map, dependencies, and structural constraints"
 related:
   - bld_schema_kind
   - bld_architecture_kind

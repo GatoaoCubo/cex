@@ -184,7 +184,7 @@ Certification courses and enterprise contracts are likely the dominant revenue s
 | No knowledge persistence | CrewAI memory is session-scoped; CEX has typed learning_records + entity_memory |
 | Single runtime | CrewAI = Python only; CEX supports Claude + Codex + Gemini + Ollama (4 runtimes) |
 | No GDP protocol | CrewAI has no guided decision framework; CEX separates WHO decides WHAT from HOW |
-| Shallow tool registry | MCP Registry is consumption-only; CEX has 148 tools + SDK runtime (cex_sdk) |
+| Shallow tool registry | MCP Registry is consumption-only; CEX has 150 tools + SDK runtime (cex_sdk) |
 | No pillar-based artifact taxonomy | CrewAI produces free-form outputs; CEX outputs are typed, searchable, compilable |
 | Cloud lock risk | CrewAI Enterprise requires CrewAI Cloud or private infra; CEX is self-sovereign by design |
 | No self-assimilating flywheel | CrewAI does not convert conversations to searchable knowledge; CEX does |

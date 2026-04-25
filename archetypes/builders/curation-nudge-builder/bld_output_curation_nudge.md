@@ -13,6 +13,7 @@ tags: [output_template, curation_nudge, builder, p05, p11, memory]
 domain: "curation_nudge construction"
 created: "2026-04-18"
 updated: "2026-04-18"
+tldr: "P05 output shape for curation_nudge artifacts"
 density_score: 0.89
 related:
   - p03_ins_router

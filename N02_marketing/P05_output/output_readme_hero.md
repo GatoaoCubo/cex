@@ -34,7 +34,7 @@ related:
 ![300 Kinds](https://img.shields.io/badge/kinds-300-green.svg)
 ![302 Builders](https://img.shields.io/badge/builders-301-blue.svg)
 
-**300 kinds** · **301 builders** · **12 pillars** · **8 nuclei** · **8F pipeline** · **148 tools**
+**300 kinds** · **301 builders** · **12 pillars** · **8 nuclei** · **8F pipeline** · **150 tools**
 
 ---
 

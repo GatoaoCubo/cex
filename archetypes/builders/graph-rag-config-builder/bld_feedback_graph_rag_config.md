@@ -6,6 +6,7 @@ title: "Feedback: Graph Rag Config"
 domain: graph_rag_config
 quality: 8.3
 tags: [feedback, anti-patterns, P11, graph_rag_config]
+tldr: "Graph Rag Config feedback: anti-patterns, regression signals, and quality improvement triggers"
 related:
   - p03_sp_system-prompt-builder
   - p03_sp_n03_creation_nucleus

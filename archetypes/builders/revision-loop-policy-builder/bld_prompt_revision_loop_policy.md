@@ -13,6 +13,7 @@ tags: [instruction, revision_loop_policy, builder, governance, hermes, escalatio
 domain: "revision_loop_policy construction"
 created: "2026-04-18"
 updated: "2026-04-18"
+tldr: "Step-by-step build instructions for revision_loop_policy"
 density_score: 0.91
 idempotent: true
 atomic: false

@@ -40,7 +40,7 @@ repo root
   |-- N06_commercial/      commercial nucleus
   |-- N07_admin/           orchestrator nucleus
   |-- archetypes/builders/ builder ISOs (13 files per kind)
-  |-- _tools/              Python toolchain (148 tools)
+  |-- _tools/              Python toolchain (150 tools)
   |-- _spawn/              dispatch scripts (solo/grid/swarm)
   |-- cex_sdk/             runtime SDK (78 .py, 4504 lines)
   |-- boot/                PowerShell boot scripts (1 per nucleus + shared)

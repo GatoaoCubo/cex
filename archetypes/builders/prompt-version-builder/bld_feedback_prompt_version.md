@@ -7,6 +7,7 @@ pillar: P11
 title: "Feedback: Prompt Version"
 domain: prompt_version
 tags: [feedback, anti-patterns, P11, prompt_version]
+tldr: "Prompt Version feedback: anti-patterns, regression signals, and quality improvement triggers"
 related:
   - p03_sp_system-prompt-builder
   - bld_collaboration_prompt_version

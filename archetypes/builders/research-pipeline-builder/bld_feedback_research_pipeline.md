@@ -7,6 +7,7 @@ pillar: P11
 title: "Feedback: Research Pipeline"
 domain: research_pipeline
 tags: [feedback, anti-patterns, P11, research_pipeline]
+tldr: "Research Pipeline feedback: anti-patterns, regression signals, and quality improvement triggers"
 related:
   - p03_sp_n03_creation_nucleus
   - p03_sp_system-prompt-builder

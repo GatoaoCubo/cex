@@ -11,6 +11,7 @@ updated: 2026-03-28
 author: builder_agent
 quality: 9.0
 tags: [schema, retriever, P04, P06, vector-search, RAG]
+tldr: "Formal schema — SINGLE SOURCE OF TRUTH for retriever"
 density_score: 1.0
 title: Schema ISO - retriever
 related:

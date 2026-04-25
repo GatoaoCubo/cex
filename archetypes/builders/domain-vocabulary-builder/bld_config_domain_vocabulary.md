@@ -8,6 +8,7 @@ quality: 8.3
 tags: [domain_vocabulary, context, rag]
 title: "Context Sources: domain_vocabulary"
 author: builder
+tldr: "Domain Vocabulary memory: naming conventions, output paths, and production limits"
 density_score: 0.88
 created: "2026-04-17"
 updated: "2026-04-17"

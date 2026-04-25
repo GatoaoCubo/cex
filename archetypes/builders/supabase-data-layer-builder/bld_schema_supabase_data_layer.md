@@ -10,6 +10,7 @@ author: n04_knowledge
 domain: data_platform
 quality: 9.0
 tags: [builder, supabase, data-layer, schema, validation]
+tldr: "Supabase Data Layer model: data contract, field types, and validation rules"
 density_score: 0.90
 llm_function: CONSTRAIN
 related:

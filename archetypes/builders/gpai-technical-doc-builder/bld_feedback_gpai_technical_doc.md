@@ -6,6 +6,7 @@ title: "Feedback: Gpai Technical Doc"
 domain: gpai_technical_doc
 quality: 8.3
 tags: [feedback, anti-patterns, P11, gpai_technical_doc]
+tldr: "Gpai Technical Doc feedback: anti-patterns, regression signals, and quality improvement triggers"
 related:
   - bld_instruction_instruction
   - p03_sp_n03_creation_nucleus

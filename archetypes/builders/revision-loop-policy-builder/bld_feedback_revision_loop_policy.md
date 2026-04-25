@@ -7,6 +7,7 @@ pillar: P11
 title: "Feedback: Revision Loop Policy"
 domain: revision_loop_policy
 tags: [feedback, anti-patterns, P11, revision_loop_policy]
+tldr: "Revision Loop Policy feedback: anti-patterns, regression signals, and quality improvement triggers"
 related:
   - p03_sp_n03_creation_nucleus
   - p03_sp_system-prompt-builder

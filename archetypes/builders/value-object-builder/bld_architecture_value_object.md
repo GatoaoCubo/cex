@@ -9,6 +9,7 @@ quality: 7.3
 tags: [builder, value_object, architecture]
 llm_function: CONSTRAIN
 author: builder
+tldr: "Value Object schema: component map, dependencies, and structural constraints"
 density_score: 0.88
 created: "2026-04-17"
 updated: "2026-04-17"

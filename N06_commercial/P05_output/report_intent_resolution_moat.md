@@ -107,7 +107,7 @@ The 8F pipeline performs **7 implicit decisions** the user never had to make:
 | 123 kind definitions + schemas | ~400 hours | R$120,000 (senior AI engineer @ R$300/h) | 6-8 months |
 | 301 builders (13 ISOs each) | ~600 hours | R$180,000 | 8-10 months |
 | 12 pillar architecture | ~200 hours | R$60,000 | 3-4 months |
-| 8F pipeline + tooling (148 tools) | ~500 hours | R$150,000 | 6-8 months |
+| 8F pipeline + tooling (150 tools) | ~500 hours | R$150,000 | 6-8 months |
 | 2,184 knowledge artifacts | ~300 hours | R$90,000 | 4-6 months |
 | Quality scoring (3-layer) | ~100 hours | R$30,000 | 1-2 months |
 | Multi-nucleus dispatch | ~150 hours | R$45,000 | 2-3 months |

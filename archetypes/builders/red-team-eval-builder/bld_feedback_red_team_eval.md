@@ -7,6 +7,7 @@ pillar: P11
 title: "Feedback: Red Team Eval"
 domain: red_team_eval
 tags: [feedback, anti-patterns, P11, red_team_eval]
+tldr: "Red Team Eval feedback: anti-patterns, regression signals, and quality improvement triggers"
 related:
   - bld_collaboration_red_team_eval
   - p03_sp_n03_creation_nucleus

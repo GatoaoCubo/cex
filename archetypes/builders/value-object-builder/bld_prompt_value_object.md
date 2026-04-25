@@ -9,6 +9,7 @@ quality: 7.3
 tags: [builder, value_object, instruction]
 llm_function: REASON
 author: builder
+tldr: "Value Object schema: prompt template with variables, tone, and generation strategy"
 density_score: 0.83
 created: "2026-04-17"
 updated: "2026-04-17"

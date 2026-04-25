@@ -10,6 +10,7 @@ author: n04_knowledge
 domain: data_platform
 quality: 9.0
 tags: [builder, supabase, data-layer, memory, learnings]
+tldr: "Supabase Data Layer knowledge: context persistence, recall triggers, and state management"
 density_score: 0.85
 memory_scope: project
 observation_types: [user, feedback, project, reference]

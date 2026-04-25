@@ -7,6 +7,7 @@ pillar: P11
 title: "Feedback: Response Format"
 domain: response_format
 tags: [feedback, anti-patterns, P11, response_format]
+tldr: "Response Format feedback: anti-patterns, regression signals, and quality improvement triggers"
 related:
   - bld_examples_response_format
   - response-format-builder

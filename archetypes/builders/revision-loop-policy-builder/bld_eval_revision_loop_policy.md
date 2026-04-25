@@ -12,6 +12,7 @@ tags: [quality_gate, revision_loop_policy, builder, p11, governance, f7]
 domain: "revision_loop_policy construction"
 created: "2026-04-18"
 updated: "2026-04-18"
+tldr: "F7 GOVERN quality gates for revision_loop_policy artifacts"
 density_score: 0.91
 target_kind: revision_loop_policy
 delivery_threshold: 0.85

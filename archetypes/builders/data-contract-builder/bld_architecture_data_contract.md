@@ -8,6 +8,7 @@ quality: 8.3
 tags: [data_contract, architecture, published-language]
 title: "Architecture Data Contract"
 author: builder
+tldr: "Data Contract architecture: component map, dependencies, and structural constraints"
 density_score: 1.0
 created: "2026-04-17"
 updated: "2026-04-17"

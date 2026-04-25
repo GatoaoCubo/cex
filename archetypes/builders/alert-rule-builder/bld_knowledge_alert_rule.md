@@ -8,6 +8,7 @@ quality: 7.6
 tags: [alert_rule, prometheus, observability, knowledge]
 title: "Knowledge: Alert Rule Pattern"
 author: builder
+tldr: "Alert Rule knowledge: domain knowledge, terminology, and contextual background"
 density_score: 0.88
 created: "2026-04-17"
 updated: "2026-04-17"

@@ -1,6 +1,6 @@
 # CEXAI — Cognitive Exchange AI · Typed Knowledge System for LLM Agents
 
-> 300 kinds · 301 builders · 3,647 ISOs · 12 pillars · 8 nuclei (N00-N07) · 8F pipeline · cex_sdk runtime · 148 tools · 4 runtimes (Claude / Codex / Gemini / Ollama) · HERMES assimilated (2026-04-18)
+> 300 kinds · 301 builders · 3,647 ISOs · 12 pillars · 8 nuclei (N00-N07) · 8F pipeline · cex_sdk runtime · 150 tools · 4 runtimes (Claude / Codex / Gemini / Ollama) · HERMES assimilated (2026-04-18)
 
 ## Positioning
 

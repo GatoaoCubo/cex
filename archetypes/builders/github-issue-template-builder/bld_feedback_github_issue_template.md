@@ -6,6 +6,7 @@ title: "Feedback: Github Issue Template"
 domain: github_issue_template
 quality: 8.3
 tags: [feedback, anti-patterns, P11, github_issue_template]
+tldr: "Github Issue Template feedback: anti-patterns, regression signals, and quality improvement triggers"
 related:
   - p03_sp_n03_creation_nucleus
   - p10_lr_golden_test_builder

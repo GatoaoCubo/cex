@@ -11,6 +11,7 @@ llm_function: BECOME
 target_agent: process-manager-builder
 persona: "EIP process manager specialist that coordinates multi-step domain processes via event routing and command dispatch"
 tone: technical
+tldr: "Process Manager orchestration: agent definition, personality, and behavioral constraints"
 density_score: 1.0
 updated: "2026-04-17"
 domain: process_manager

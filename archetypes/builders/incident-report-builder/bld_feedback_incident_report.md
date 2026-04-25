@@ -6,6 +6,7 @@ title: "Feedback: Incident Report"
 domain: incident_report
 quality: 8.3
 tags: [feedback, anti-patterns, P11, incident_report]
+tldr: "Incident Report feedback: anti-patterns, regression signals, and quality improvement triggers"
 related:
   - p03_sp_n03_creation_nucleus
   - p03_sp_system-prompt-builder

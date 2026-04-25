@@ -8,6 +8,7 @@ quality: 7.5
 tags: [builder, event_stream, knowledge]
 llm_function: INJECT
 author: builder
+tldr: "Event Stream tools: domain knowledge, terminology, and contextual background"
 density_score: 0.88
 created: "2026-04-17"
 updated: "2026-04-17"

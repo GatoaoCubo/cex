@@ -7,6 +7,7 @@ pillar: P11
 title: "Feedback: Renewal Workflow"
 domain: renewal_workflow
 tags: [feedback, anti-patterns, P11, renewal_workflow]
+tldr: "Renewal Workflow feedback: anti-patterns, regression signals, and quality improvement triggers"
 related:
   - p03_sp_system-prompt-builder
   - p03_sp_n03_creation_nucleus

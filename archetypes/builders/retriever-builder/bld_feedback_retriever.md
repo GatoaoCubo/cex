@@ -7,6 +7,7 @@ pillar: P11
 title: "Feedback: Retriever"
 domain: retriever
 tags: [feedback, anti-patterns, P11, retriever]
+tldr: "Retriever feedback: anti-patterns, regression signals, and quality improvement triggers"
 related:
   - p03_sp_n03_creation_nucleus
   - p10_lr_golden_test_builder

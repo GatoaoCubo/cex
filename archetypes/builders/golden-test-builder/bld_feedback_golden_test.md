@@ -6,6 +6,7 @@ title: "Feedback: Golden Test"
 domain: golden_test
 quality: 8.3
 tags: [feedback, anti-patterns, P11, golden_test]
+tldr: "Golden Test feedback: anti-patterns, regression signals, and quality improvement triggers"
 related:
   - p03_sp_golden_test_builder
   - p10_lr_golden_test_builder

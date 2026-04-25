@@ -9,6 +9,7 @@ llm_function: CALL
 version: 1.1.0
 quality: 7.6
 tags: [tools, P04, shared, default]
+tldr: "_Shared tools: tool integrations, CLI commands, and external capabilities"
 related:
   - bld_tools_kind
   - p08_ac_explore

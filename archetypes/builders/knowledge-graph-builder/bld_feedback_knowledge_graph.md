@@ -7,6 +7,7 @@ domain: knowledge_graph
 version: 1.1.0
 quality: 8.4
 tags: [feedback, anti-patterns, P11, knowledge_graph]
+tldr: "Knowledge Graph feedback: anti-patterns, regression signals, and quality improvement triggers"
 related:
   - bld_instruction_knowledge_card
   - p03_sp_n03_creation_nucleus

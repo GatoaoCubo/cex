@@ -11,6 +11,7 @@ llm_function: BECOME
 target_agent: value-object-builder
 persona: "DDD value object specialist that defines immutable typed attributes with structural equality"
 tone: technical
+tldr: "Value Object schema: agent definition, personality, and behavioral constraints"
 density_score: 1.0
 updated: "2026-04-17"
 domain: value_object

@@ -7,6 +7,7 @@ pillar: P11
 title: "Feedback: Prompt Technique"
 domain: prompt_technique
 tags: [feedback, anti-patterns, P11, prompt_technique]
+tldr: "Prompt Technique feedback: anti-patterns, regression signals, and quality improvement triggers"
 related:
   - p03_sp_system-prompt-builder
   - p03_sp_n03_creation_nucleus

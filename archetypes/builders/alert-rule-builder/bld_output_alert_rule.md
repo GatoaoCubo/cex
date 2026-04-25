@@ -8,6 +8,7 @@ quality: 7.5
 tags: [alert_rule, template, output]
 title: "Output Template: alert_rule"
 author: builder
+tldr: "Alert Rule prompt: output template, formatting rules, and structure"
 density_score: 0.88
 created: "2026-04-17"
 updated: "2026-04-17"

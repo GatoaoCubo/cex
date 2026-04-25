@@ -8,6 +8,7 @@ quality: 7.5
 tags: [builder, aggregate_root, context]
 llm_function: CONSTRAIN
 author: builder
+tldr: "Aggregate Root schema: naming conventions, output paths, and production limits"
 density_score: 0.88
 created: "2026-04-17"
 updated: "2026-04-17"

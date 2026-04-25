@@ -24,7 +24,7 @@ updated: "2026-04-22"
 
 ## Problem
 
-CEX has 300 kinds, 3,647 ISOs, 301 builders, 148 tools, 4 runtimes, and a
+CEX has 300 kinds, 3,647 ISOs, 301 builders, 150 tools, 4 runtimes, and a
 proven 30/30 multi-runtime showoff. But the repo is not shippable:
 
 1. **Security**: 2 critical vulns fixed (C1 exec, C2 shell), 2 remain (C3 done prior, C4 manual key rotation)
@@ -295,7 +295,7 @@ is more token-efficient for this scope (7 waves, no parallelism needed within wa
 
 - [ ] All 7 wave gates pass
 - [ ] `git status` is clean (no uncommitted changes)
-- [ ] README.md accurately reflects: 300 kinds, 301 builders, 3,647 ISOs, 148 tools, 4 runtimes
+- [ ] README.md accurately reflects: 300 kinds, 301 builders, 3,647 ISOs, 150 tools, 4 runtimes
 - [ ] No PT-BR in executable code or public docs (except bilingual intent tables)
 - [ ] No tracked secrets, binary media, or machine-specific data
 - [ ] CHANGELOG.md exists with v1.0.0 entry

@@ -6,6 +6,7 @@ title: "Feedback: Fhir Agent Capability"
 domain: fhir_agent_capability
 quality: 8.3
 tags: [feedback, anti-patterns, P11, fhir_agent_capability]
+tldr: "Fhir Agent Capability feedback: anti-patterns, regression signals, and quality improvement triggers"
 related:
   - p03_sp_system-prompt-builder
   - p03_sp__builder_builder

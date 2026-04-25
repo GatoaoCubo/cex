@@ -8,6 +8,7 @@ llm_function: GOVERN
 version: 1.1.0
 quality: 7.3
 tags: [eval, quality_gate, examples, P07, shared, default]
+tldr: "_Shared evaluation: quality gate with scoring dimensions and pass/fail criteria"
 related:
   - p03_sp_verification_agent
   - p11_qg_kind_builder

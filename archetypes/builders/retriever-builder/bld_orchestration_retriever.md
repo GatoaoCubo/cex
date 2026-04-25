@@ -9,6 +9,7 @@ updated: 2026-03-28
 author: builder_agent
 quality: 9.1
 tags: [collaboration, retriever, P13, RAG, crew, handoff]
+tldr: "Retriever P13: workflow coordination, handoffs, and lifecycle management"
 density_score: 1.0
 title: Collaboration ISO - retriever
 related:

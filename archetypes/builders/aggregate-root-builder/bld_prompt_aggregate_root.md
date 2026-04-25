@@ -9,6 +9,7 @@ quality: 7.3
 tags: [builder, aggregate_root, instruction]
 llm_function: REASON
 author: builder
+tldr: "Aggregate Root schema: prompt template with variables, tone, and generation strategy"
 density_score: 0.81
 created: "2026-04-17"
 updated: "2026-04-17"

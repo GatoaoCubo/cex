@@ -8,6 +8,7 @@ quality: 8.1
 tags: [alert_rule, context, rag]
 title: "Context Sources: alert_rule"
 author: builder
+tldr: "Alert Rule memory: naming conventions, output paths, and production limits"
 density_score: 0.88
 created: "2026-04-17"
 updated: "2026-04-17"

@@ -9,6 +9,7 @@ quality: 7.6
 tags: [builder, process_manager, schema]
 llm_function: CONSTRAIN
 author: builder
+tldr: "Process Manager orchestration: data contract, field types, and validation rules"
 density_score: 0.88
 created: "2026-04-17"
 updated: "2026-04-17"

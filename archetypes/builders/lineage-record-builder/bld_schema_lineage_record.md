@@ -13,6 +13,7 @@ tags: [schema, lineage_record, P01]
 domain: "knowledge provenance"
 created: "2026-04-17"
 updated: "2026-04-17"
+tldr: "Formal schema -- SINGLE SOURCE OF TRUTH for lineage_record"
 density_score: null
 related:
   - bld_schema_reranker_config

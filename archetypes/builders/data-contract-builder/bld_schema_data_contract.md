@@ -9,6 +9,7 @@ version: 1.0.0
 tags: [input_schema, P06]
 title: "Schema Data Contract"
 author: builder
+tldr: "Data Contract schema: data contract, field types, and validation rules"
 density_score: 0.88
 created: "2026-04-17"
 updated: "2026-04-17"

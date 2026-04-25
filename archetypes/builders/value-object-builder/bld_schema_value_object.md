@@ -8,6 +8,7 @@ quality: 7.9
 tags: [builder, value_object, schema]
 llm_function: CONSTRAIN
 author: builder
+tldr: "Value Object schema: data contract, field types, and validation rules"
 density_score: 0.88
 created: "2026-04-17"
 updated: "2026-04-17"

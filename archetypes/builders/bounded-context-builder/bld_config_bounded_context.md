@@ -8,6 +8,7 @@ quality: 8.3
 tags: [bounded_context, context, rag]
 title: "Context Sources: bounded_context"
 author: builder
+tldr: "Bounded Context memory: naming conventions, output paths, and production limits"
 density_score: 0.88
 created: "2026-04-17"
 updated: "2026-04-17"

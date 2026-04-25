@@ -13,6 +13,7 @@ tags: [collaboration, revision_loop_policy, builder, p12, f8, signals, handoff]
 domain: "revision_loop_policy construction"
 created: "2026-04-18"
 updated: "2026-04-18"
+tldr: "F8 COLLABORATE signals and handoff protocol for revision_loop_policy builder"
 density_score: 0.87
 related:
   - p02_agent_creation_nucleus

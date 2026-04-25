@@ -9,6 +9,7 @@ version: 1.0.0
 tags: [domain_vocabulary, schema, ubiquitous-language]
 title: "Schema Domain Vocabulary"
 author: builder
+tldr: "Domain Vocabulary schema: data contract, field types, and validation rules"
 density_score: 0.88
 created: "2026-04-17"
 updated: "2026-04-17"

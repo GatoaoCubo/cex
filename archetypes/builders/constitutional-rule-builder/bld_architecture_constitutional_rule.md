@@ -9,6 +9,7 @@ version: 1.0.0
 tags: [builder, constitutional_rule, architecture]
 llm_function: CONSTRAIN
 author: builder
+tldr: "Constitutional Rule feedback: component map, dependencies, and structural constraints"
 density_score: 0.92
 created: "2026-04-17"
 updated: "2026-04-17"

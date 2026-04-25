@@ -12,7 +12,7 @@ updated: "2026-04-22"
 
 > Open-source AI brain. Intelligence compounds when exchanged.
 
-> 300 kinds | 301 builders | 3,647 ISOs | 12 pillars | 8 nuclei | 148 tools | 4 runtimes
+> 300 kinds | 301 builders | 3,647 ISOs | 12 pillars | 8 nuclei | 150 tools | 4 runtimes
 
 ---
 

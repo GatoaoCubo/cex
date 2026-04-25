@@ -12,6 +12,7 @@ tags: [quality_gate, curation_nudge, builder, p11, memory, f7]
 domain: "curation_nudge construction"
 created: "2026-04-18"
 updated: "2026-04-18"
+tldr: "F7 GOVERN quality gates for curation_nudge artifacts"
 density_score: 0.91
 target_kind: curation_nudge
 delivery_threshold: 0.85

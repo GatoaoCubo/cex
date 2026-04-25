@@ -8,6 +8,7 @@ quality: 7.4
 tags: [builder, value_object, context]
 llm_function: CONSTRAIN
 author: builder
+tldr: "Value Object schema: naming conventions, output paths, and production limits"
 density_score: 0.88
 created: "2026-04-17"
 updated: "2026-04-17"

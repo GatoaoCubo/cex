@@ -8,6 +8,7 @@ quality: 8.3
 tags: [domain_vocabulary, memory, patterns]
 title: "Memory Patterns: domain_vocabulary"
 author: builder
+tldr: "Domain Vocabulary memory: context persistence, recall triggers, and state management"
 density_score: 0.95
 created: "2026-04-17"
 updated: "2026-04-17"

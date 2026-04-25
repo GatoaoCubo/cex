@@ -8,6 +8,7 @@ quality: 7.4
 tags: [bounded_context, ddd, context-map, knowledge]
 title: "Knowledge: Bounded Context Pattern"
 author: builder
+tldr: "Bounded Context knowledge: domain knowledge, terminology, and contextual background"
 density_score: 0.98
 created: "2026-04-17"
 updated: "2026-04-17"

@@ -9,6 +9,7 @@ quality: 7.3
 tags: [builder, event_stream, instruction]
 llm_function: REASON
 author: builder
+tldr: "Event Stream tools: prompt template with variables, tone, and generation strategy"
 density_score: 0.83
 created: "2026-04-17"
 updated: "2026-04-17"

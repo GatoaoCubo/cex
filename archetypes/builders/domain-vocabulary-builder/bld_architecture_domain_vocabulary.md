@@ -7,6 +7,7 @@ version: 1.0.0
 quality: 8.1
 tags: [domain_vocabulary, architecture, ubiquitous-language]
 title: "Architecture Domain Vocabulary"
+tldr: "Domain Vocabulary architecture: component map, dependencies, and structural constraints"
 density_score: 1.0
 updated: "2026-04-17"
 related:

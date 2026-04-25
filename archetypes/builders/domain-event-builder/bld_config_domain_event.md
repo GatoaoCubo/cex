@@ -8,6 +8,7 @@ quality: 8.1
 tags: [domain_event, context, rag]
 title: "Context Sources: domain_event"
 author: builder
+tldr: "Domain Event memory: naming conventions, output paths, and production limits"
 density_score: 0.88
 created: "2026-04-17"
 updated: "2026-04-17"

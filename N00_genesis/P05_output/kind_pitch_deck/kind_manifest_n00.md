@@ -75,7 +75,7 @@ quality: null
 deck_type: investor
 slide_count: 11
 ask: "$3M seed at $15M pre-money"
-traction_metrics: [300 kinds, 3647 ISOs, 4 runtimes, 148 tools]
+traction_metrics: [300 kinds, 3647 ISOs, 4 runtimes, 150 tools]
 ```
 
 ## Related kinds

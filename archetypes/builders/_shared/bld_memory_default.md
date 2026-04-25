@@ -8,6 +8,7 @@ llm_function: INJECT
 version: 1.1.0
 quality: 7.8
 tags: [memory, learning_record, P10, shared, default]
+tldr: "_Shared memory: context persistence, recall triggers, and state management"
 related:
   - bld_collaboration_memory_type
   - p01_kc_memory_scope

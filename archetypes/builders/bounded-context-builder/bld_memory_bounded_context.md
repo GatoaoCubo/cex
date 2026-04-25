@@ -8,6 +8,7 @@ quality: 8.1
 tags: [bounded_context, memory, ddd]
 title: "Memory Patterns: bounded_context"
 author: builder
+tldr: "Bounded Context memory: context persistence, recall triggers, and state management"
 density_score: 0.94
 created: "2026-04-17"
 updated: "2026-04-17"

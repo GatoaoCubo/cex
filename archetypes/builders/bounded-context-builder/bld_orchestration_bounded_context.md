@@ -8,6 +8,7 @@ quality: 7.7
 tags: [bounded_context, rules, guardrail]
 title: "Rules: bounded_context Builder"
 author: builder
+tldr: "Bounded Context feedback: workflow coordination, handoffs, and lifecycle management"
 density_score: 0.99
 created: "2026-04-17"
 updated: "2026-04-17"

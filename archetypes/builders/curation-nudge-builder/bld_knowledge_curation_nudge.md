@@ -13,6 +13,7 @@ tags: [curation_nudge, builder, knowledge_card, hermes, memory, proactive]
 domain: "curation_nudge construction"
 created: "2026-04-18"
 updated: "2026-04-18"
+tldr: "Domain knowledge for curation_nudge builder (F3 INJECT)"
 density_score: 0.89
 related:
   - p01_kc_memory_scope

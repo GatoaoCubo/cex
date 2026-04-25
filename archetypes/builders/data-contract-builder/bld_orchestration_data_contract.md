@@ -8,6 +8,7 @@ quality: 7.7
 tags: [data_contract, rules, guardrail]
 title: "Rules: data_contract Builder"
 author: builder
+tldr: "Data Contract feedback: workflow coordination, handoffs, and lifecycle management"
 density_score: 0.88
 created: "2026-04-17"
 updated: "2026-04-17"

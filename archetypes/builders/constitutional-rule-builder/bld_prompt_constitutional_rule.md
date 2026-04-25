@@ -9,6 +9,7 @@ quality: 7.3
 tags: [builder, constitutional_rule, instruction]
 llm_function: REASON
 author: builder
+tldr: "Constitutional Rule feedback: prompt template with variables, tone, and generation strategy"
 density_score: 0.76
 created: "2026-04-17"
 updated: "2026-04-17"

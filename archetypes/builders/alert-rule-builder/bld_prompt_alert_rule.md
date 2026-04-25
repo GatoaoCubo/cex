@@ -10,6 +10,7 @@ quality: 7.3
 tags: [alert_rule, builder, instruction]
 title: "Instruction Alert Rule Builder"
 author: builder
+tldr: "Step-by-step production process for alert_rule"
 density_score: 0.86
 created: "2026-04-17"
 updated: "2026-04-17"

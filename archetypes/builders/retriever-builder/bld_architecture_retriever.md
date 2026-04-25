@@ -9,6 +9,7 @@ updated: 2026-03-28
 author: builder_agent
 quality: 9.1
 tags: [architecture, retriever, P10, RAG, vector-search, component-map]
+tldr: "Retriever memory: component map, dependencies, and structural constraints"
 density_score: 1.0
 title: Architecture ISO - retriever
 related:

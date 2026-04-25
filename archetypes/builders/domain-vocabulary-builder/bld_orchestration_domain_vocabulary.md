@@ -8,6 +8,7 @@ quality: 7.7
 tags: [domain_vocabulary, rules, guardrail]
 title: "Rules: domain_vocabulary Builder"
 author: builder
+tldr: "Domain Vocabulary feedback: workflow coordination, handoffs, and lifecycle management"
 density_score: 0.88
 created: "2026-04-17"
 updated: "2026-04-17"

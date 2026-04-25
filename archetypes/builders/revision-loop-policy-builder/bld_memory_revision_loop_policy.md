@@ -12,6 +12,7 @@ tags: [memory, revision_loop_policy, builder, p10, patterns, learnings]
 domain: "revision_loop_policy construction"
 created: "2026-04-18"
 updated: "2026-04-18"
+tldr: "P10 memory hooks for revision_loop_policy builder"
 density_score: 0.87
 related:
   - p11_qg_pattern

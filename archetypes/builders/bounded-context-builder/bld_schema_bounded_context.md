@@ -9,6 +9,7 @@ version: 1.0.0
 tags: [bounded_context, schema, ddd]
 title: "Schema Bounded Context"
 author: builder
+tldr: "Bounded Context schema: data contract, field types, and validation rules"
 density_score: 1.0
 created: "2026-04-17"
 updated: "2026-04-17"

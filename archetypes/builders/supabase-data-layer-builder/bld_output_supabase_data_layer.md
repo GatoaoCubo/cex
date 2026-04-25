@@ -10,6 +10,7 @@ author: n04_knowledge
 domain: data_platform
 quality: 9.0
 tags: [builder, supabase, data-layer, output-template, config]
+tldr: "Supabase Data Layer prompt: output template, formatting rules, and structure"
 density_score: 0.87
 llm_function: PRODUCE
 related:

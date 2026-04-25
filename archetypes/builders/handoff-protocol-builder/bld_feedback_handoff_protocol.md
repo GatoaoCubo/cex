@@ -6,6 +6,7 @@ title: "Feedback: Handoff Protocol"
 domain: handoff_protocol
 quality: 8.3
 tags: [feedback, anti-patterns, P11, handoff_protocol]
+tldr: "Handoff Protocol feedback: anti-patterns, regression signals, and quality improvement triggers"
 related:
   - bld_collaboration_handoff_protocol
   - handoff-protocol-builder

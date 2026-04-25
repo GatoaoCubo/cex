@@ -8,6 +8,7 @@ quality: 8.3
 tags: [alert_rule, memory, patterns]
 title: "Memory Patterns: alert_rule"
 author: builder
+tldr: "Alert Rule memory: context persistence, recall triggers, and state management"
 density_score: 0.88
 created: "2026-04-17"
 updated: "2026-04-17"

@@ -8,6 +8,7 @@ quality: 8.1
 tags: [domain_event, memory, patterns]
 title: "Memory Patterns: domain_event"
 author: builder
+tldr: "Domain Event memory: context persistence, recall triggers, and state management"
 density_score: 0.99
 created: "2026-04-17"
 updated: "2026-04-17"

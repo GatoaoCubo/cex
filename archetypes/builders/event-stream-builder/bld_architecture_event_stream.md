@@ -9,6 +9,7 @@ version: 1.0.0
 tags: [builder, event_stream, architecture]
 llm_function: CONSTRAIN
 author: builder
+tldr: "Event Stream tools: component map, dependencies, and structural constraints"
 density_score: 0.88
 created: "2026-04-17"
 updated: "2026-04-17"

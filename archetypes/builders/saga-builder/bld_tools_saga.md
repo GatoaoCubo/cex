@@ -9,6 +9,7 @@ version: 1.0.0
 llm_function: CALL
 tags: [builder, saga, tools]
 author: builder
+tldr: "Saga orchestration: tool integrations, CLI commands, and external capabilities"
 density_score: 0.88
 created: "2026-04-17"
 updated: "2026-04-17"

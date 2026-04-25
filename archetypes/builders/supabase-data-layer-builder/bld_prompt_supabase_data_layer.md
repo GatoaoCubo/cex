@@ -10,6 +10,7 @@ author: n04_knowledge
 domain: data_platform
 quality: 9.0
 tags: [builder, supabase, data-layer, instruction, pipeline]
+tldr: "Supabase Data Layer prompt: prompt template with variables, tone, and generation strategy"
 density_score: 0.89
 llm_function: REASON
 related:

@@ -10,6 +10,7 @@ author: n04_knowledge
 domain: data_platform
 quality: 9.0
 tags: [builder, supabase, data-layer, config, defaults]
+tldr: "Supabase Data Layer model: naming conventions, output paths, and production limits"
 density_score: 0.89
 effort: high
 max_turns: 25

@@ -8,6 +8,7 @@ quality: 7.7
 tags: [alert_rule, rules, guardrail]
 title: "Rules: alert_rule Builder"
 author: builder
+tldr: "Alert Rule feedback: workflow coordination, handoffs, and lifecycle management"
 density_score: 0.88
 created: "2026-04-17"
 updated: "2026-04-17"

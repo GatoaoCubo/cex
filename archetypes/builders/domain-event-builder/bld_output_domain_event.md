@@ -8,6 +8,7 @@ quality: 8.1
 tags: [domain_event, template, output]
 title: "Output Template: domain_event"
 author: builder
+tldr: "Domain Event prompt: output template, formatting rules, and structure"
 density_score: 0.88
 created: "2026-04-17"
 updated: "2026-04-17"

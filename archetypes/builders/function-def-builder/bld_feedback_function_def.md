@@ -6,6 +6,7 @@ title: "Feedback: Function Def"
 domain: function_def
 quality: 8.3
 tags: [feedback, anti-patterns, P11, function_def]
+tldr: "Function Def feedback: anti-patterns, regression signals, and quality improvement triggers"
 related:
   - p03_sp_n03_creation_nucleus
   - p03_sp_system-prompt-builder

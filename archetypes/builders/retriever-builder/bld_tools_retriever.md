@@ -9,6 +9,7 @@ updated: 2026-03-28
 author: builder_agent
 quality: 9.0
 tags: [tools, retriever, P08, RAG, vector-search]
+tldr: "Retriever architecture: tool integrations, CLI commands, and external capabilities"
 density_score: 1.0
 title: Tools ISO - retriever
 related:

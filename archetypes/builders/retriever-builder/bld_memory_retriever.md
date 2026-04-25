@@ -11,6 +11,7 @@ quality: 9.0
 tags: [memory, retriever, P12, RAG, anti-patterns, lessons]
 memory_scope: project
 observation_types: [user, feedback, project, reference]
+tldr: "Retriever orchestration: context persistence, recall triggers, and state management"
 density_score: 1.0
 title: Memory ISO - retriever
 related:

@@ -48,7 +48,7 @@ The name CEX carries a deliberate design choice: the X is not a brand, not a pro
 
 But X also stands for **Exchange**. CEXAI -- Cognitive Exchange AI -- is built on the principle that intelligence compounds when exchanged. N00 (Genesis) is the shareable unit: 300 typed kinds, 301 builders, 12 pillar schemas. When you share CEXAI with another team, they receive the same typed infrastructure. Their `/init` fills the X with their brand. The knowledge structure is exchanged; the brand identity is sovereign.
 
-Before `/init`, CEXAI is a blank brain -- 300 typed artifact kinds, 301 builders, 8 nuclei, 148 tools, and zero brand context. Every template has `{{BRAND_NAME}}` placeholders. Every prompt carries `{{BRAND_VOICE}}` slots. Every nucleus reads `.cex/brand/brand_config.yaml` and finds nothing.
+Before `/init`, CEXAI is a blank brain -- 300 typed artifact kinds, 301 builders, 8 nuclei, 150 tools, and zero brand context. Every template has `{{BRAND_NAME}}` placeholders. Every prompt carries `{{BRAND_VOICE}}` slots. Every nucleus reads `.cex/brand/brand_config.yaml` and finds nothing.
 
 After `/init`, the X resolves. `{{BRAND_NAME}}` becomes "Acme Corp." `{{BRAND_VOICE}}` becomes "technical but approachable." Every nucleus, every builder, every artifact produced from that moment forward carries the brand's identity. The blank brain becomes THEIR brain. That is the knowledge asset.
 

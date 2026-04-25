@@ -12,6 +12,7 @@ tags: [config, revision_loop_policy, builder, p11, governance]
 domain: "revision_loop_policy construction"
 created: "2026-04-18"
 updated: "2026-04-18"
+tldr: "P09 config knobs for revision_loop_policy builder"
 density_score: 0.87
 related:
   - bld_collaboration_llm_evaluation_scenario

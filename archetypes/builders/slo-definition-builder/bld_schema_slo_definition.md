@@ -13,6 +13,7 @@ tags: [schema, slo_definition, P09]
 domain: "reliability configuration"
 created: "2026-04-17"
 updated: "2026-04-17"
+tldr: "Formal schema -- SINGLE SOURCE OF TRUTH for slo_definition"
 density_score: null
 related:
   - bld_schema_reranker_config

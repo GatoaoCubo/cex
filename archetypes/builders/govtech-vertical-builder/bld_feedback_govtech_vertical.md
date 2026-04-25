@@ -6,6 +6,7 @@ title: "Feedback: Govtech Vertical"
 domain: govtech_vertical
 quality: 8.3
 tags: [feedback, anti-patterns, P11, govtech_vertical]
+tldr: "Govtech Vertical feedback: anti-patterns, regression signals, and quality improvement triggers"
 related:
   - p03_sp_n03_creation_nucleus
   - p03_sp_system-prompt-builder

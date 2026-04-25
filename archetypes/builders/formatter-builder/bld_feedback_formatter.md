@@ -6,6 +6,7 @@ title: "Feedback: Formatter"
 domain: formatter
 quality: 8.0
 tags: [feedback, anti-patterns, P11, formatter]
+tldr: "Formatter feedback: anti-patterns, regression signals, and quality improvement triggers"
 related:
   - bld_collaboration_formatter
   - p03_sp_n03_creation_nucleus

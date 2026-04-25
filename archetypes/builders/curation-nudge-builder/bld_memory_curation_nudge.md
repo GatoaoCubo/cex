@@ -12,6 +12,7 @@ tags: [memory, curation_nudge, builder, p10, hermes, anti_patterns]
 domain: "curation_nudge construction"
 created: "2026-04-18"
 updated: "2026-04-18"
+tldr: "Learned patterns and anti-patterns for curation_nudge builder"
 density_score: 0.88
 related:
   - bld_collaboration_memory_type

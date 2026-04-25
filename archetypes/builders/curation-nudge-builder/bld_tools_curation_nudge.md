@@ -12,6 +12,7 @@ tags: [tools, curation_nudge, builder, p04, memory, hermes]
 domain: "curation_nudge construction"
 created: "2026-04-18"
 updated: "2026-04-18"
+tldr: "F5 CALL tools for curation_nudge builder"
 density_score: 0.87
 related:
   - bld_tools_model_architecture

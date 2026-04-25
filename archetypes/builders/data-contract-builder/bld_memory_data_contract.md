@@ -8,6 +8,7 @@ quality: 8.3
 tags: [data_contract, memory, patterns]
 title: "Memory Patterns: data_contract"
 author: builder
+tldr: "Data Contract memory: context persistence, recall triggers, and state management"
 density_score: 0.88
 created: "2026-04-17"
 updated: "2026-04-17"

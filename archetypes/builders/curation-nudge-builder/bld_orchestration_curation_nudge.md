@@ -13,6 +13,7 @@ tags: [collaboration, curation_nudge, builder, p12, f8, signals, handoff, memory
 domain: "curation_nudge construction"
 created: "2026-04-18"
 updated: "2026-04-18"
+tldr: "F8 COLLABORATE signals and handoff protocol for curation_nudge builder"
 density_score: 0.87
 related:
   - bld_collaboration_memory_scope

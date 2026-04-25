@@ -9,6 +9,7 @@ quality: 7.3
 tags: [builder, process_manager, instruction]
 llm_function: REASON
 author: builder
+tldr: "Process Manager orchestration: prompt template with variables, tone, and generation strategy"
 density_score: 0.8
 created: "2026-04-17"
 updated: "2026-04-17"

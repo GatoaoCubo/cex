@@ -9,6 +9,7 @@ version: 1.0.0
 tags: [builder, process_manager, architecture]
 llm_function: CONSTRAIN
 author: builder
+tldr: "Process Manager orchestration: component map, dependencies, and structural constraints"
 density_score: 0.99
 created: "2026-04-17"
 updated: "2026-04-17"

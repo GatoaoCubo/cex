@@ -8,6 +8,7 @@ quality: 8.1
 tags: [domain_event, architecture, ddd]
 title: "Architecture Domain Event"
 author: builder
+tldr: "Domain Event architecture: component map, dependencies, and structural constraints"
 density_score: 1.0
 created: "2026-04-17"
 updated: "2026-04-17"

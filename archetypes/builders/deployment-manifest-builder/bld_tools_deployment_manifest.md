@@ -9,6 +9,7 @@ version: 1.0.0
 llm_function: CALL
 tags: [builder, deployment_manifest, tools]
 author: builder
+tldr: "Deployment Manifest config: tool integrations, CLI commands, and external capabilities"
 density_score: 0.88
 created: "2026-04-17"
 updated: "2026-04-17"

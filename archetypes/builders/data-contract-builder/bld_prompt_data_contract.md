@@ -10,6 +10,7 @@ quality: 7.3
 tags: [data_contract, builder, instruction]
 title: "Instruction Data Contract Builder"
 author: builder
+tldr: "Step-by-step production process for data_contract"
 density_score: 0.83
 created: "2026-04-17"
 updated: "2026-04-17"

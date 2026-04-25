@@ -8,6 +8,7 @@ quality: 7.6
 tags: [builder, constitutional_rule, context]
 llm_function: CONSTRAIN
 author: builder
+tldr: "Constitutional Rule feedback: naming conventions, output paths, and production limits"
 density_score: 0.88
 created: "2026-04-17"
 updated: "2026-04-17"

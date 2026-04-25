@@ -9,6 +9,7 @@ quality: 7.1
 tags: [alert_rule, schema, prometheus]
 title: "Schema Alert Rule"
 author: builder
+tldr: "Alert Rule schema: data contract, field types, and validation rules"
 density_score: 0.88
 created: "2026-04-17"
 updated: "2026-04-17"

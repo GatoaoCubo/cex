@@ -9,6 +9,7 @@ quality: 7.3
 tags: [builder, value_object, knowledge]
 llm_function: INJECT
 author: builder
+tldr: "Value Object schema: domain knowledge, terminology, and contextual background"
 density_score: 0.96
 created: "2026-04-17"
 updated: "2026-04-17"

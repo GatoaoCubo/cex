@@ -8,6 +8,7 @@ quality: 7.6
 tags: [data_contract, schema, published-language, knowledge]
 title: "Knowledge: Data Contract Pattern"
 author: builder
+tldr: "Data Contract knowledge: domain knowledge, terminology, and contextual background"
 density_score: 0.88
 created: "2026-04-17"
 updated: "2026-04-17"

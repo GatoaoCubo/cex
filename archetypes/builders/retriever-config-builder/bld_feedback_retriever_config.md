@@ -7,6 +7,7 @@ pillar: P11
 title: "Feedback: Retriever Config"
 domain: retriever_config
 tags: [feedback, anti-patterns, P11, retriever_config]
+tldr: "Retriever Config feedback: anti-patterns, regression signals, and quality improvement triggers"
 related:
   - p10_lr_golden_test_builder
   - p03_sp_system-prompt-builder

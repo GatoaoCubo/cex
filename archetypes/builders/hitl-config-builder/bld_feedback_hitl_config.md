@@ -6,6 +6,7 @@ title: "Feedback: Hitl Config"
 domain: hitl_config
 quality: 8.3
 tags: [feedback, anti-patterns, P11, hitl_config]
+tldr: "Hitl Config feedback: anti-patterns, regression signals, and quality improvement triggers"
 related:
   - p03_sp_system-prompt-builder
   - p03_sp_n03_creation_nucleus

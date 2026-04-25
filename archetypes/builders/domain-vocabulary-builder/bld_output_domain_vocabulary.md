@@ -8,6 +8,7 @@ quality: 8.1
 tags: [domain_vocabulary, template, output]
 title: "Output Template: domain_vocabulary"
 author: builder
+tldr: "Domain Vocabulary prompt: output template, formatting rules, and structure"
 density_score: 1.0
 created: "2026-04-17"
 updated: "2026-04-17"

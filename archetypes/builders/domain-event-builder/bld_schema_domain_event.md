@@ -10,6 +10,7 @@ version: 1.0.0
 tags: [domain_event, schema, ddd]
 title: "Schema Domain Event"
 author: builder
+tldr: "Formal schema for domain_event"
 density_score: 0.88
 created: "2026-04-17"
 updated: "2026-04-17"

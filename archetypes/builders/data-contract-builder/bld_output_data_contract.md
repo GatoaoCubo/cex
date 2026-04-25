@@ -8,6 +8,7 @@ quality: 8.1
 tags: [data_contract, template, output]
 title: "Output Template: data_contract"
 author: builder
+tldr: "Data Contract prompt: output template, formatting rules, and structure"
 density_score: 1.0
 created: "2026-04-17"
 updated: "2026-04-17"

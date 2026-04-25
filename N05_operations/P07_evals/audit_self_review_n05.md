@@ -148,7 +148,7 @@ Quality gates are structurally complete but **spec-to-implementation drift exist
 
 ---
 
-## Tool Coverage Sample (30 of 148 tools)
+## Tool Coverage Sample (30 of 150 tools)
 
 | Tool | Pillar | Kind Mapping | Nucleus | Wired |
 |------|--------|-------------|---------|-------|
@@ -222,7 +222,7 @@ Breakdown by layer:
 - L2 Nuclei (N01-N07): 21/21 WIRED
 - L3 Archetypes: 7/7 WIRED (301 builders, 3647 ISOs)
 - L4 Knowledge Library: 3/3 WIRED (293/293 KC coverage)
-- L5 Tools: 12/12 WIRED (148 tools, 56 SDK modules)
+- L5 Tools: 12/12 WIRED (150 tools, 56 SDK modules)
 - L6 Governance: 3/3 WIRED (11 rules, 20 commands, 25 learning records)
 - WIRES (OpenClaude integrations): 18/18 WIRED
 - CASCADES (dependency chains): 7/7 WIRED
@@ -254,7 +254,7 @@ production.
 
 ### 1. CLAUDE.md tool count inaccuracy (severity: LOW)
 
-CLAUDE.md claims "148 tools" but `_tools/cex_*.py` yields 131. Including
+CLAUDE.md claims "150 tools" but `_tools/cex_*.py` yields 131. Including
 non-prefixed tools brings the count to ~155. The documented figure is stale.
 
 **File**: `CLAUDE.md` line ~1

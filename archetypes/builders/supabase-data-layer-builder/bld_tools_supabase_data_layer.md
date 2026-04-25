@@ -10,6 +10,7 @@ author: n04_knowledge
 domain: data_platform
 quality: 9.0
 tags: [builder, supabase, data-layer, tools, cli, mcp, sdk]
+tldr: "Supabase Data Layer tools: tool integrations, CLI commands, and external capabilities"
 density_score: 0.91
 llm_function: CALL
 related:

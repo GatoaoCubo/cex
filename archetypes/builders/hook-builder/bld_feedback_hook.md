@@ -6,6 +6,7 @@ title: "Feedback: Hook"
 domain: hook
 quality: 8.0
 tags: [feedback, anti-patterns, P11, hook]
+tldr: "Hook feedback: anti-patterns, regression signals, and quality improvement triggers"
 related:
   - p03_sp_n03_creation_nucleus
   - p03_sp_system-prompt-builder

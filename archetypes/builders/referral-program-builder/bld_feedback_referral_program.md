@@ -7,6 +7,7 @@ pillar: P11
 title: "Feedback: Referral Program"
 domain: referral_program
 tags: [feedback, anti-patterns, P11, referral_program]
+tldr: "Referral Program feedback: anti-patterns, regression signals, and quality improvement triggers"
 related:
   - p03_sp_n03_creation_nucleus
   - p03_sp_system-prompt-builder

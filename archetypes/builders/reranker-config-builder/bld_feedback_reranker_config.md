@@ -7,6 +7,7 @@ pillar: P11
 title: "Feedback: Reranker Config"
 domain: reranker_config
 tags: [feedback, anti-patterns, P11, reranker_config]
+tldr: "Reranker Config feedback: anti-patterns, regression signals, and quality improvement triggers"
 related:
   - p03_sp_system-prompt-builder
   - p03_sp_n03_creation_nucleus
