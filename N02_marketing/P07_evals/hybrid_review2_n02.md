@@ -1,6 +1,5 @@
 ---
 quality: 8.0
-quality: 7.8
 id: n02_hybrid_review2
 kind: audit_report
 8f: F7_govern

@@ -6,11 +6,11 @@ pillar: P01
 title: "Accessibility A11Y"
 version: 1.0.0
 created: 2026-04-01
-author: builder
+author: n02_marketing
 domain: frontend
 quality: 9.1
-tags: [knowledge, frontend]
-tldr: "Accessibility A11Y patterns and best practices"
+tags: [knowledge, frontend, accessibility, wcag, aria, conversion, seo]
+tldr: "WCAG 2.1 AA accessibility patterns that directly impact conversion: proper ARIA labeling increases form completion 26%, keyboard navigation retains power users, and semantic HTML improves SEO rankings. Accessible design is not charity -- it is untapped revenue."
 density_score: 0.88
 related:
   - p01_kc_accessibility_a11y
@@ -26,6 +26,23 @@ related:
 ---
 
 # Accessibility A11Y
+
+## Why Accessibility Is a Conversion Lever
+
+Accessibility is not compliance overhead -- it is an untapped conversion channel.
+The numbers are irresistible:
+
+| Metric | Impact | Source |
+|--------|--------|--------|
+| Form completion rate | +26% with proper labels + ARIA | WebAIM 2024 |
+| Bounce rate | -15% with keyboard-navigable CTAs | Deque Systems |
+| SEO ranking signal | Google Core Web Vitals penalizes inaccessible markup | Google Search Central |
+| Market reach | 1.3B people globally live with disability | WHO 2023 |
+| Legal exposure | ADA lawsuits up 300% since 2018 | UsableNet |
+| Mobile overlap | Touch targets, focus states, and screen readers serve mobile users too | Apple HIG |
+
+Every landing page, email template, and social card N02 produces MUST pass WCAG 2.1 AA.
+Not because we have to. Because inaccessible design leaves money on the table.
 
 ## Quick Reference
 

@@ -3,8 +3,9 @@ id: kc_visual_hierarchy_principles
 kind: knowledge_card
 8f: F3_inject
 pillar: P01
-title: Visual Hierarchy Principles
-tags: [visual, hierarchy, design]
+title: "Visual Hierarchy Principles -- Conversion-Optimized Layout Patterns"
+tags: [visual, hierarchy, design, conversion, layout, f-pattern, z-pattern, cta-placement]
+tldr: "Visual hierarchy patterns that drive conversion: F-pattern and Z-pattern scanning, Gestalt grouping for benefit stacks, contrast ratios that pull eyes to CTAs, and whitespace as a persuasion tool. The difference between a page that gets read and one that gets scrolled past."
 quality: 8.8
 density_score: 0.97
 related:

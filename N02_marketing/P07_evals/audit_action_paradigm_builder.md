@@ -1,6 +1,5 @@
 ---
 quality: 8.0
-quality: 7.8
 id: n02_audit_action_paradigm_builder
 kind: audit_report
 8f: F7_govern

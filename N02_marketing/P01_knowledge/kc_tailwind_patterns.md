@@ -3,8 +3,9 @@ id: kc_tailwind_patterns
 kind: knowledge_card
 8f: F3_inject
 pillar: P01
-title: Tailwind Patterns
-tags: [tailwind, patterns, design]
+title: "Tailwind CSS Patterns -- Production Design System Recipes"
+tags: [tailwind, patterns, design-system, utility-first, responsive, dark-mode, components]
+tldr: "Battle-tested Tailwind CSS patterns for N02 output: responsive grid compositions, dark mode token switching, component variant APIs via CVA, animation utilities for micro-interactions, and the 60-30-10 color distribution rule enforced via design tokens."
 quality: 8.8
 density_score: 0.97
 related:

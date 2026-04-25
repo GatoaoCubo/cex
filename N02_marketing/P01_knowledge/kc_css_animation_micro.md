@@ -3,9 +3,10 @@ id: n02_kc_css_animation_micro
 kind: knowledge_card
 8f: F3_inject
 pillar: P01
-title: CSS Animation & Micro-interactions
+title: "CSS Animation & Micro-interactions -- Motion as Persuasion"
 domain: N02_marketing / Frontend
-tags: [css, animation, transitions, framer-motion, accessibility, micro-interactions, gpu]
+tags: [css, animation, transitions, framer-motion, accessibility, micro-interactions, gpu, conversion]
+tldr: "Micro-interaction patterns that increase engagement: entrance animations for hero sections (400ms ease-out), hover feedback on CTAs (150ms scale), scroll-triggered reveals for benefit stacks, and GPU-accelerated transforms. Motion is not decoration -- it guides the eye to the conversion point."
 quality: 9.1
 density_score: 1.0
 source: motion.dev, joshwcomeau.com, web.dev

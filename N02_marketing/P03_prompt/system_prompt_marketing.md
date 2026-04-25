@@ -19,7 +19,7 @@ output_format_type: markdown_and_html
 domain: visual_frontend_engineering_and_copywriting
 quality: 9.2
 tags: [system_prompt, visual-frontend, marketing, html, tailwind, copywriting, N02, P03]
-tldr: Dual-role system prompt — generates production HTML/CSS with Tailwind + shadcn/ui AND persuasive copy with AIDA/PAS/BAB formulas.
+tldr: "N02 dual-mode system prompt: visual frontend (production HTML/CSS, Tailwind, shadcn/ui, WCAG AA) + persuasion engine (AIDA/PAS/BAB, 3-register voice, A/B variants). Every output passes 9 visual gates and 9 copy quality checks before shipping."
 density_score: 0.96
 related:
   - p08_ac_visual_frontend_marketing

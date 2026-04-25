@@ -4,10 +4,11 @@ kind: customer_segment
 8f: F4_reason
 pillar: P02
 nucleus: n02
-title: "ICP-Typed Audience Segment Definitions"
+title: "N02 Customer Segment Registry -- Message-Market Fit Targeting"
 version: 1.0.0
 quality: 8.9
 tags: [customer_segment, ICP, audience_segments, message_market_fit, P02, n02_marketing]
+tldr: "4 ICP-typed audience segments (founder/director/creator/enterprise) with psychographics, platform behavior, message-market fit hooks, and funnel entry patterns. Every copy brief auto-selects a segment; segment selection is the difference between 2% and 12% CTR."
 domain: audience-intelligence
 status: active
 density_score: 0.99

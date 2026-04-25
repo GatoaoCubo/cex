@@ -3,9 +3,10 @@ id: n02_kc_email_html_responsive
 kind: knowledge_card
 8f: F3_inject
 pillar: P01
-title: Email HTML Responsive
+title: "Email HTML Responsive -- Cross-Client Rendering Patterns"
 domain: N02_marketing / Email
 tags: [email, html, responsive, mjml, react-email, dark-mode, mso, inline-css]
+tldr: "Email HTML patterns that render identically across Gmail, Outlook, Apple Mail, and Yahoo: MJML scaffolds, MSO conditional comments for Outlook, inline CSS extraction, dark mode meta tags, and responsive table layouts. Average email open rate is 21% -- bad rendering drops it to zero."
 quality: 9.0
 density_score: 1.0
 source: react.email, caniemail.com, mjml.io

@@ -8,6 +8,7 @@ title: "Copy Generation Action Prompt -- Headline, Body, CTA Variants"
 version: 1.0.0
 quality: 9.1
 tags: [action_prompt, copy_generation, headline, cta_variants, creative_lust, P03, n02_marketing]
+tldr: "Ready-to-fire copy generation prompt: takes a campaign brief, buyer segment, and register, produces headline variants + body copy + CTA options + A/B split. Enforces personality_n02 anti-patterns and skill_n02 hook structures in every output."
 domain: copy-production
 status: active
 density_score: 1.0

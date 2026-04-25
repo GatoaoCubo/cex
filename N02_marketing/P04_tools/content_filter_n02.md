@@ -8,13 +8,14 @@ title: "Brand Voice Compliance Filter -- Content Safety and Quality Gate"
 version: 1.0.0
 quality: 8.9
 tags: [content_filter, brand_voice, compliance, content_safety, P04, n02_marketing]
+tldr: "Brand voice compliance gate: scans copy output for forbidden phrases, tone violations, off-brand terminology, and CTA anti-patterns. Runs as F7 GOVERN sub-gate -- no copy ships from N02 without passing this filter. Catches the 6 deadliest copy sins before they reach the audience."
 domain: content-governance
 status: active
 density_score: 1.0
 related:
   - p03_brand_book_generator
   - p03_sp_brand_nucleus
-  - p11_gr_{{SCOPE_SLUG}}
+  - p11_qg_marketing_artifacts
   - bld_examples_mental_model
   - bld_examples_hitl_config
   - n02_tool_copy_analyzer

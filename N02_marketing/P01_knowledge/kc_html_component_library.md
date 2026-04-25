@@ -6,11 +6,11 @@ pillar: P01
 title: "shadcn/ui & Radix UI Component Library"
 version: 1.0.0
 created: 2026-04-01
-author: builder
+author: n02_marketing
 domain: frontend
 quality: 9.1
-tags: [knowledge, frontend, components, radix, shadcn]
-tldr: "shadcn/ui built on Radix primitives: unstyled components, variants, accessibility patterns"
+tags: [knowledge, frontend, components, radix, shadcn, design-system, tailwind]
+tldr: "shadcn/ui + Radix UI component patterns: unstyled primitives, variant APIs, composition patterns, and accessibility defaults that let N02 ship production-ready UI without reinventing interaction logic."
 density_score: 0.88
 related:
   - p01_kc_html_component_library

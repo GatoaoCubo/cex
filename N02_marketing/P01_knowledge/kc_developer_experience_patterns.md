@@ -3,8 +3,9 @@ id: kc_developer_experience_patterns
 kind: knowledge_card
 8f: F3_inject
 pillar: P01
-title: Developer Experience Patterns
-tags: [developer, experience, patterns]
+title: "Developer Experience Patterns -- DX as Marketing Leverage"
+tags: [developer, experience, patterns, dx, onboarding, documentation, api-design, cli]
+tldr: "Developer experience patterns that drive adoption: 5-minute time-to-hello-world, progressive disclosure in docs, copy-paste code samples, error messages that teach, and CLI UX that reduces cognitive load. For dev tools, DX IS the marketing -- a frustrated developer never converts."
 quality: 8.8
 density_score: 0.97
 related:

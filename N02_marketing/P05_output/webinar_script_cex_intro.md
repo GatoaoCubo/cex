@@ -1,5 +1,4 @@
 ---
-quality: 8.4
 id: p05_ws_cex_intro
 kind: webinar_script
 8f: F6_produce

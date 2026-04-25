@@ -31,10 +31,10 @@ related:
 
 ![MIT License](https://img.shields.io/badge/License-MIT-blue.svg)
 ![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)
-![123 Kinds](https://img.shields.io/badge/kinds-123-green.svg)
-![125 Builders](https://img.shields.io/badge/builders-125-blue.svg)
+![300 Kinds](https://img.shields.io/badge/kinds-300-green.svg)
+![302 Builders](https://img.shields.io/badge/builders-302-blue.svg)
 
-**123 kinds** · **125 builders** · **12 pillars** · **8 nuclei** · **8F pipeline** · **59 tools**
+**300 kinds** · **302 builders** · **12 pillars** · **8 nuclei** · **8F pipeline** · **144 tools**
 
 ---
 
@@ -50,8 +50,8 @@ CEX transforms LLM chaos into deterministic agent workflows through **typed know
 
 | Capability | Details |
 |-----------|---------|
-| **8F Pipeline** | Frame → Filter → Fan → Focus → Forge → Format → Feedback → File |
-| **123 Typed Kinds** | Every artifact has a schema. `email_sequence`, `knowledge_card`, `landing_page` — all constrained. |
+| **8F Pipeline** | Constrain → Become → Inject → Reason → Call → Produce → Govern → Collaborate |
+| **300 Typed Kinds** | Every artifact has a schema. `email_sequence`, `knowledge_card`, `landing_page` — all constrained. |
 | **8 Specialized Nuclei** | N01 researches. N02 writes copy. N03 builds. N04 documents. N05 codes. N06 monetizes. N07 orchestrates. |
 | **Quality Gates** | Nothing ships below 8.0. Peer review is mandatory. Self-scoring is forbidden. |
 | **GDP Protocol** | User decides WHAT (tone, audience, style). LLM decides HOW (files, pipeline, structure). |
@@ -72,7 +72,7 @@ Then open your LLM agent and type `/init` to configure brand identity.
 
 ```
 User Intent
-  └→ 8F Pipeline (Frame → File)
+  └→ 8F Pipeline (Constrain → Collaborate)
        ├→ N01 Research    ├→ N04 Knowledge
        ├→ N02 Marketing   ├→ N05 Operations
        ├→ N03 Builder     ├→ N06 Strategy
@@ -90,7 +90,7 @@ User Intent
 
 > Quality is not optional. Structure is not overhead. Every shortcut you skip today becomes technical debt tomorrow.
 
-CEX enforces this through typed schemas (123 kinds), mandatory frontmatter, compilation gates, and peer-review scoring. The system trusts no single nucleus to judge its own work.
+CEX enforces this through typed schemas (300 kinds), mandatory frontmatter, compilation gates, and peer-review scoring. The system trusts no single nucleus to judge its own work.
 
 ---
 

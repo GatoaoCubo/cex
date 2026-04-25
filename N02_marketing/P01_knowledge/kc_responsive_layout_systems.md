@@ -3,9 +3,10 @@ id: n02_kc_responsive_layout_systems
 kind: knowledge_card
 8f: F3_inject
 pillar: P01
-title: Responsive Layout Systems
+title: "Responsive Layout Systems -- Mobile-First Grid Architecture"
 domain: N02_marketing / Frontend
 tags: [css, grid, flexbox, responsive, mobile-first, typography, container-queries]
+tldr: "CSS Grid + Flexbox layout patterns for mobile-first marketing pages: intrinsic sizing, container queries, fluid typography with clamp(), and layout shift prevention. Every landing page and email template N02 produces inherits these patterns."
 quality: 9.0
 density_score: 1.0
 source: every-layout.dev, css-tricks.com, web.dev/learn/css

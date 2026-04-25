@@ -8,6 +8,7 @@ title: "Social Publisher -- Multi-Channel Content Publishing Tool"
 version: 1.0.0
 quality: 8.9
 tags: [browser_tool, social_publisher, multi_channel, distribution, publishing, P04, n02_marketing]
+tldr: "Multi-channel social publishing tool: Instagram (Graph API, 25/day), LinkedIn (UGC API, 150/day), X (API v2, 300/3h) with exponential retry, rate limit tracking, optimal posting times by segment, and proof-of-delivery logging. Copy that never ships is a draft -- this is the final mile."
 domain: content-distribution
 status: active
 density_score: 1.0

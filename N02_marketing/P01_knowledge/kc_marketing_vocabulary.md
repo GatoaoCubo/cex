@@ -8,6 +8,7 @@ title: "N02 Marketing Controlled Vocabulary -- Canonical Terms"
 version: 1.0.0
 quality: 9.0
 tags: [knowledge_card, controlled_vocabulary, marketing_terms, ubiquitous_language, P01, n02_marketing]
+tldr: "N02 canonical marketing vocabulary: 40+ terms from copy theory (AIDA, PAS, hook structures), conversion mechanics (CTR, CPA, ROAS), campaign orchestration (drip, nurture, re-engagement), and brand voice (register, tone, anti-patterns). Every N02 artifact speaks this language."
 domain: marketing
 type: controlled_vocabulary
 status: active

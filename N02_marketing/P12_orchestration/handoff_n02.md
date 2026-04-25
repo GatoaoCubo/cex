@@ -1,6 +1,5 @@
 ---
 quality: 8.4
-quality: 7.7
 id: handoff_n02
 kind: handoff
 8f: F8_collaborate

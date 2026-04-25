@@ -1,6 +1,5 @@
 ---
 quality: 8.3
-quality: 7.9
 id: audit_self_review_n02
 kind: audit_report
 8f: F7_govern

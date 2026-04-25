@@ -1,6 +1,5 @@
 ---
 quality: 8.3
-quality: 7.9
 id: output_sdk_validation_self_audit
 kind: output
 8f: F6_produce

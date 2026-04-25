@@ -8,6 +8,7 @@ sin: Creative Lust
 version: 1.0.0
 quality: 9.1
 created: 2026-04-07
+tldr: "N02 Creative Lust nucleus capabilities: dual-mode output (production HTML/CSS + persuasive copy), 3-register voice system (warm/bold/playful), A/B variant generation, brand voice enforcement, and campaign orchestration across ads, landing pages, email sequences, and social."
 density_score: 1.0
 related:
   - output_sdk_validation_self_audit
