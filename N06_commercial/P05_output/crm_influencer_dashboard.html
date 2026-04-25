@@ -96,6 +96,84 @@ body {
   color: #fff;
 }
 
+.btn-secondary {
+  background: transparent;
+  border: 1px solid var(--accent);
+  color: var(--accent);
+}
+
+.btn-secondary:hover {
+  background: var(--accent-dim);
+}
+
+.btn-secondary:disabled {
+  border-color: #444;
+  color: #555;
+  cursor: not-allowed;
+}
+
+.btn-secondary:disabled:hover {
+  background: transparent;
+}
+
+.btn-sm {
+  padding: 6px 12px;
+  font-size: 12px;
+}
+
+/* -- Tab Bar -- */
+.tab-bar {
+  display: flex;
+  background: var(--card);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 57px;
+  z-index: 99;
+}
+
+.tab-btn {
+  padding: 12px 24px;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--muted);
+  background: none;
+  border: none;
+  border-bottom: 3px solid transparent;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.tab-btn:hover {
+  color: var(--text);
+}
+
+.tab-btn.active {
+  color: var(--text);
+  border-bottom-color: var(--accent);
+}
+
+.tab-badge {
+  display: inline-block;
+  background: var(--accent);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 1px 6px;
+  border-radius: 10px;
+  margin-left: 6px;
+  min-width: 18px;
+  text-align: center;
+}
+
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
+}
+
 /* -- KPI Bar -- */
 .kpi-bar {
   display: grid;
@@ -214,7 +292,7 @@ select option {
 .table-wrap {
   overflow-x: auto;
   overflow-y: auto;
-  max-height: calc(100vh - 320px);
+  max-height: calc(100vh - 370px);
   margin: 0;
 }
 
@@ -425,10 +503,282 @@ tr.high-priority {
   flex-shrink: 0;
 }
 
+/* -- Outreach Tab Styles -- */
+.outreach-stats-bar {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  padding: 16px 24px;
+  border-bottom: 1px solid var(--border);
+}
+
+.outreach-empty {
+  padding: 60px 24px;
+  text-align: center;
+  color: var(--muted);
+}
+
+.outreach-empty p {
+  margin-bottom: 8px;
+  font-size: 15px;
+}
+
+.outreach-empty code {
+  display: inline-block;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 6px 12px;
+  font-family: 'Consolas', 'Monaco', monospace;
+  font-size: 13px;
+  color: var(--accent);
+  margin-top: 8px;
+}
+
+.outreach-cards {
+  padding: 16px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.outreach-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px;
+  transition: border-color 0.15s;
+}
+
+.outreach-card:hover {
+  border-color: #3A3A3A;
+}
+
+.outreach-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.outreach-card-title {
+  font-size: 16px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.outreach-card-title .card-num {
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.outreach-card-meta {
+  font-size: 13px;
+  color: var(--muted);
+  margin-bottom: 4px;
+}
+
+.outreach-card-meta span {
+  margin-right: 12px;
+}
+
+.outreach-card-template {
+  font-size: 12px;
+  color: var(--muted);
+  margin-bottom: 12px;
+}
+
+.outreach-card-template strong {
+  color: var(--accent);
+}
+
+.outreach-textarea {
+  width: 100%;
+  min-height: 120px;
+  background: #111;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: #ddd;
+  font-family: 'Consolas', 'Monaco', monospace;
+  font-size: 13px;
+  line-height: 1.6;
+  padding: 12px;
+  resize: vertical;
+  outline: none;
+  transition: border-color 0.15s;
+}
+
+.outreach-textarea:focus {
+  border-color: var(--accent);
+}
+
+.outreach-card-notes {
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 10px;
+  margin-bottom: 14px;
+}
+
+.outreach-card-notes strong {
+  color: #bbb;
+}
+
+.outreach-card-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+/* -- Follow-ups Section -- */
+.followups-section {
+  padding: 24px;
+  border-top: 1px solid var(--border);
+}
+
+.followups-section h3 {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.followup-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px 20px;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.followup-info {
+  flex: 1;
+  min-width: 200px;
+}
+
+.followup-name {
+  font-weight: 600;
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+
+.followup-detail {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.followup-detail .days-ago {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.followup-right {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 300px;
+  flex: 1;
+}
+
+.followup-textarea {
+  display: none;
+  width: 100%;
+  min-height: 80px;
+  background: #111;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: #ddd;
+  font-family: 'Consolas', 'Monaco', monospace;
+  font-size: 12px;
+  line-height: 1.5;
+  padding: 10px;
+  resize: vertical;
+  outline: none;
+}
+
+.followup-textarea:focus {
+  border-color: var(--accent);
+}
+
+.followup-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.no-followups {
+  color: #555;
+  font-size: 13px;
+  font-style: italic;
+}
+
+/* -- Toast -- */
+.toast-container {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  pointer-events: none;
+}
+
+.toast {
+  background: #222;
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 10px 18px;
+  font-size: 13px;
+  font-weight: 500;
+  opacity: 0;
+  transform: translateY(16px);
+  animation: toastIn 0.25s ease forwards, toastOut 0.25s ease 2.75s forwards;
+  pointer-events: auto;
+}
+
+.toast.toast-green {
+  border-color: rgba(46, 204, 113, 0.5);
+  color: #2ecc71;
+}
+
+.toast.toast-gray {
+  border-color: #444;
+  color: #888;
+}
+
+.toast.toast-pink {
+  border-color: rgba(255, 45, 120, 0.5);
+  color: var(--accent);
+}
+
+@keyframes toastIn {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes toastOut {
+  to { opacity: 0; transform: translateY(-8px); }
+}
+
 /* -- Responsive -- */
 @media (max-width: 1200px) {
   .kpi-bar {
     grid-template-columns: repeat(3, 1fr);
+  }
+  .outreach-stats-bar {
+    grid-template-columns: repeat(2, 1fr);
   }
   .filter-bar {
     gap: 10px;
@@ -442,12 +792,21 @@ tr.high-priority {
   .kpi-bar {
     grid-template-columns: repeat(2, 1fr);
   }
+  .outreach-stats-bar {
+    grid-template-columns: repeat(2, 1fr);
+  }
   .top-bar {
     flex-wrap: wrap;
     gap: 8px;
   }
   .filter-bar {
     gap: 8px;
+  }
+}
+
+@media (max-width: 768px) {
+  .outreach-stats-bar {
+    grid-template-columns: 1fr;
   }
 }
 
@@ -528,132 +887,180 @@ tr.high-priority {
   </div>
 </div>
 
-<div class="kpi-bar" id="kpi-bar">
-  <div class="kpi-card">
-    <div class="kpi-value" id="kpi-total">--</div>
-    <div class="kpi-label">Total Contacts</div>
-  </div>
-  <div class="kpi-card">
-    <div class="kpi-value" id="kpi-t1">--</div>
-    <div class="kpi-label">Tier 1</div>
-  </div>
-  <div class="kpi-card">
-    <div class="kpi-value" id="kpi-t2">--</div>
-    <div class="kpi-label">Tier 2</div>
-  </div>
-  <div class="kpi-card">
-    <div class="kpi-value" id="kpi-t3">--</div>
-    <div class="kpi-label">Tier 3</div>
-  </div>
-  <div class="kpi-card accent">
-    <div class="kpi-value" id="kpi-high">--</div>
-    <div class="kpi-label">High Relevance</div>
-  </div>
-  <div class="kpi-card accent">
-    <div class="kpi-value" id="kpi-hot">--</div>
-    <div class="kpi-label">Priority 8+</div>
-  </div>
+<!-- Tab Bar -->
+<div class="tab-bar">
+  <button class="tab-btn active" data-tab="tab-contacts">All Contacts</button>
+  <button class="tab-btn" data-tab="tab-outreach">Today's Outreach<span class="tab-badge" id="outreach-badge" style="display:none;">0</span></button>
 </div>
 
-<div class="filter-bar" id="filter-bar">
-  <div class="filter-group">
-    <span class="filter-group-label">Tier</span>
-    <label><input type="checkbox" data-filter="tier" value="T1" checked> T1</label>
-    <label><input type="checkbox" data-filter="tier" value="T2" checked> T2</label>
-    <label><input type="checkbox" data-filter="tier" value="T3" checked> T3</label>
-    <label><input type="checkbox" data-filter="tier" value="T4" checked> T4</label>
+<!-- TAB 1: All Contacts (existing content) -->
+<div class="tab-content active" id="tab-contacts">
+
+  <div class="kpi-bar" id="kpi-bar">
+    <div class="kpi-card">
+      <div class="kpi-value" id="kpi-total">--</div>
+      <div class="kpi-label">Total Contacts</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-value" id="kpi-t1">--</div>
+      <div class="kpi-label">Tier 1</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-value" id="kpi-t2">--</div>
+      <div class="kpi-label">Tier 2</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-value" id="kpi-t3">--</div>
+      <div class="kpi-label">Tier 3</div>
+    </div>
+    <div class="kpi-card accent">
+      <div class="kpi-value" id="kpi-high">--</div>
+      <div class="kpi-label">High Relevance</div>
+    </div>
+    <div class="kpi-card accent">
+      <div class="kpi-value" id="kpi-hot">--</div>
+      <div class="kpi-label">Priority 8+</div>
+    </div>
   </div>
 
-  <div class="filter-sep"></div>
+  <div class="filter-bar" id="filter-bar">
+    <div class="filter-group">
+      <span class="filter-group-label">Tier</span>
+      <label><input type="checkbox" data-filter="tier" value="T1" checked> T1</label>
+      <label><input type="checkbox" data-filter="tier" value="T2" checked> T2</label>
+      <label><input type="checkbox" data-filter="tier" value="T3" checked> T3</label>
+      <label><input type="checkbox" data-filter="tier" value="T4" checked> T4</label>
+    </div>
 
-  <div class="filter-group">
-    <span class="filter-group-label">Region</span>
-    <label><input type="checkbox" data-filter="region" value="GLOBAL" checked> Global</label>
-    <label><input type="checkbox" data-filter="region" value="BR" checked> BR</label>
+    <div class="filter-sep"></div>
+
+    <div class="filter-group">
+      <span class="filter-group-label">Region</span>
+      <label><input type="checkbox" data-filter="region" value="GLOBAL" checked> Global</label>
+      <label><input type="checkbox" data-filter="region" value="BR" checked> BR</label>
+    </div>
+
+    <div class="filter-sep"></div>
+
+    <div class="filter-group">
+      <span class="filter-group-label">Relevance</span>
+      <label><input type="checkbox" data-filter="relevance" value="HIGH" checked> High</label>
+      <label><input type="checkbox" data-filter="relevance" value="MEDIUM" checked> Medium</label>
+      <label><input type="checkbox" data-filter="relevance" value="LOW" checked> Low</label>
+    </div>
+
+    <div class="filter-sep"></div>
+
+    <div class="filter-group">
+      <span class="filter-group-label">Platform</span>
+      <select id="filter-platform">
+        <option value="">All Platforms</option>
+      </select>
+    </div>
+
+    <div class="filter-group">
+      <span class="filter-group-label">Status</span>
+      <select id="filter-status">
+        <option value="">All Statuses</option>
+        <option value="not_started">Not Started</option>
+        <option value="researched">Researched</option>
+        <option value="contacted">Contacted</option>
+        <option value="replied">Replied</option>
+        <option value="converted">Converted</option>
+        <option value="declined">Declined</option>
+      </select>
+    </div>
+
+    <div class="filter-sep"></div>
+
+    <div class="filter-group">
+      <span class="filter-group-label">Sort</span>
+      <select id="filter-sort">
+        <option value="priority-desc">Priority (high first)</option>
+        <option value="priority-asc">Priority (low first)</option>
+        <option value="name-asc">Name (A-Z)</option>
+        <option value="name-desc">Name (Z-A)</option>
+        <option value="tier-asc">Tier (T1 first)</option>
+        <option value="followers-desc">Followers (most)</option>
+      </select>
+    </div>
+
+    <div class="filter-sep"></div>
+
+    <input type="text" class="search-input" id="search-input" placeholder="Search name, handle, notes...">
   </div>
 
-  <div class="filter-sep"></div>
+  <div class="row-count" id="row-count">Loading...</div>
 
-  <div class="filter-group">
-    <span class="filter-group-label">Relevance</span>
-    <label><input type="checkbox" data-filter="relevance" value="HIGH" checked> High</label>
-    <label><input type="checkbox" data-filter="relevance" value="MEDIUM" checked> Medium</label>
-    <label><input type="checkbox" data-filter="relevance" value="LOW" checked> Low</label>
+  <div class="table-wrap" id="table-wrap">
+    <div class="loading" id="loading-indicator">
+      <div class="loading-spinner"></div>
+      Loading contact data...
+    </div>
+    <table id="crm-table" style="display:none;">
+      <thead>
+        <tr>
+          <th data-col="num" style="width:50px">#</th>
+          <th data-col="name">Name</th>
+          <th data-col="region" style="width:70px">Region</th>
+          <th data-col="tier" style="width:60px">Tier</th>
+          <th data-col="platform">Platform</th>
+          <th data-col="handle">Handle</th>
+          <th data-col="followers">Followers</th>
+          <th data-col="engagement" style="width:90px">Engage</th>
+          <th data-col="relevance" style="width:90px">Relevance</th>
+          <th data-col="priority" style="width:80px">Priority</th>
+          <th data-col="outreach_status" style="width:130px">Status</th>
+          <th data-col="notes">Notes</th>
+        </tr>
+      </thead>
+      <tbody id="crm-tbody"></tbody>
+    </table>
   </div>
 
-  <div class="filter-sep"></div>
-
-  <div class="filter-group">
-    <span class="filter-group-label">Platform</span>
-    <select id="filter-platform">
-      <option value="">All Platforms</option>
-    </select>
+  <div class="footer-chart" id="footer-chart">
+    <h3>Contacts by Platform</h3>
+    <div id="chart-rows"></div>
   </div>
 
-  <div class="filter-group">
-    <span class="filter-group-label">Status</span>
-    <select id="filter-status">
-      <option value="">All Statuses</option>
-      <option value="not_started">Not Started</option>
-      <option value="researched">Researched</option>
-      <option value="contacted">Contacted</option>
-      <option value="replied">Replied</option>
-      <option value="converted">Converted</option>
-      <option value="declined">Declined</option>
-    </select>
-  </div>
-
-  <div class="filter-sep"></div>
-
-  <div class="filter-group">
-    <span class="filter-group-label">Sort</span>
-    <select id="filter-sort">
-      <option value="priority-desc">Priority (high first)</option>
-      <option value="priority-asc">Priority (low first)</option>
-      <option value="name-asc">Name (A-Z)</option>
-      <option value="name-desc">Name (Z-A)</option>
-      <option value="tier-asc">Tier (T1 first)</option>
-      <option value="followers-desc">Followers (most)</option>
-    </select>
-  </div>
-
-  <div class="filter-sep"></div>
-
-  <input type="text" class="search-input" id="search-input" placeholder="Search name, handle, notes...">
 </div>
 
-<div class="row-count" id="row-count">Loading...</div>
+<!-- TAB 2: Today's Outreach -->
+<div class="tab-content" id="tab-outreach">
 
-<div class="table-wrap" id="table-wrap">
-  <div class="loading" id="loading-indicator">
-    <div class="loading-spinner"></div>
-    Loading contact data...
+  <!-- Outreach Stats Bar -->
+  <div class="outreach-stats-bar" id="outreach-stats-bar">
+    <div class="kpi-card">
+      <div class="kpi-value" id="ostat-sent-today">0</div>
+      <div class="kpi-label">Sent Today</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-value" id="ostat-total-contacted">0</div>
+      <div class="kpi-label">Total Contacted</div>
+    </div>
+    <div class="kpi-card accent">
+      <div class="kpi-value" id="ostat-pending-followups">0</div>
+      <div class="kpi-label">Pending Follow-ups</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-value" id="ostat-response-rate">--</div>
+      <div class="kpi-label">Response Rate</div>
+    </div>
   </div>
-  <table id="crm-table" style="display:none;">
-    <thead>
-      <tr>
-        <th data-col="num" style="width:50px">#</th>
-        <th data-col="name">Name</th>
-        <th data-col="region" style="width:70px">Region</th>
-        <th data-col="tier" style="width:60px">Tier</th>
-        <th data-col="platform">Platform</th>
-        <th data-col="handle">Handle</th>
-        <th data-col="followers">Followers</th>
-        <th data-col="engagement" style="width:90px">Engage</th>
-        <th data-col="relevance" style="width:90px">Relevance</th>
-        <th data-col="priority" style="width:80px">Priority</th>
-        <th data-col="outreach_status" style="width:130px">Status</th>
-        <th data-col="notes">Notes</th>
-      </tr>
-    </thead>
-    <tbody id="crm-tbody"></tbody>
-  </table>
+
+  <!-- Outreach Cards Container -->
+  <div id="outreach-cards-container"></div>
+
+  <!-- Follow-ups Section -->
+  <div class="followups-section" id="followups-section" style="display:none;">
+    <h3>Pending Follow-ups (7+ days, no reply)</h3>
+    <div id="followups-container"></div>
+  </div>
+
 </div>
 
-<div class="footer-chart" id="footer-chart">
-  <h3>Contacts by Platform</h3>
-  <div id="chart-rows"></div>
-</div>
+<!-- Toast container -->
+<div class="toast-container" id="toast-container"></div>
 
 <script>
 (function() {
@@ -662,8 +1069,26 @@ tr.high-priority {
   var allData = [];
   var filteredData = [];
   var statusOverrides = {};
+  var outreachQueue = [];
 
   var LS_KEY = "cexai_crm_statuses";
+  var LS_OUTREACH_KEY = "cexai_crm_outreach";
+  var LS_SKIPPED_KEY = "cexai_crm_skipped_today";
+
+  // -- Toast --
+  function showToast(message, variant) {
+    var container = document.getElementById("toast-container");
+    var t = document.createElement("div");
+    t.className = "toast";
+    if (variant === "green") t.className += " toast-green";
+    else if (variant === "gray") t.className += " toast-gray";
+    else if (variant === "pink") t.className += " toast-pink";
+    t.textContent = message;
+    container.appendChild(t);
+    setTimeout(function() {
+      if (t.parentNode) t.parentNode.removeChild(t);
+    }, 3200);
+  }
 
   // -- localStorage helpers --
   function loadStatuses() {
@@ -681,6 +1106,42 @@ tr.high-priority {
 
   function getStatus(num) {
     return statusOverrides[num] || null;
+  }
+
+  function loadOutreachState() {
+    try {
+      var raw = localStorage.getItem(LS_OUTREACH_KEY);
+      return raw ? JSON.parse(raw) : {};
+    } catch(e) { return {}; }
+  }
+
+  function saveOutreachState(state) {
+    try {
+      localStorage.setItem(LS_OUTREACH_KEY, JSON.stringify(state));
+    } catch(e) { /* silent */ }
+  }
+
+  function loadSkippedToday() {
+    try {
+      var raw = localStorage.getItem(LS_SKIPPED_KEY);
+      if (!raw) return {};
+      var data = JSON.parse(raw);
+      // Clear if date changed
+      var today = new Date().toISOString().slice(0, 10);
+      if (data._date !== today) return {};
+      return data;
+    } catch(e) { return {}; }
+  }
+
+  function saveSkippedToday(skipped) {
+    skipped._date = new Date().toISOString().slice(0, 10);
+    try {
+      localStorage.setItem(LS_SKIPPED_KEY, JSON.stringify(skipped));
+    } catch(e) { /* silent */ }
+  }
+
+  function todayISO() {
+    return new Date().toISOString().slice(0, 10);
   }
 
   // -- Parse follower count for sorting --
@@ -704,9 +1165,38 @@ tr.high-priority {
     return 5;
   }
 
+  // -- Tab switching --
+  function initTabs() {
+    var tabs = document.querySelectorAll(".tab-btn");
+    for (var i = 0; i < tabs.length; i++) {
+      tabs[i].addEventListener("click", function() {
+        var targetId = this.getAttribute("data-tab");
+        // Deactivate all tabs
+        var allTabs = document.querySelectorAll(".tab-btn");
+        for (var j = 0; j < allTabs.length; j++) {
+          allTabs[j].classList.remove("active");
+        }
+        var allContents = document.querySelectorAll(".tab-content");
+        for (var k = 0; k < allContents.length; k++) {
+          allContents[k].classList.remove("active");
+        }
+        // Activate target
+        this.classList.add("active");
+        document.getElementById(targetId).classList.add("active");
+
+        // Refresh outreach when switching to that tab
+        if (targetId === "tab-outreach") {
+          renderOutreachTab();
+        }
+      });
+    }
+  }
+
   // -- Load data --
   function init() {
     loadStatuses();
+    initTabs();
+
     fetch("crm_data.json")
       .then(function(r) {
         if (!r.ok) throw new Error("HTTP " + r.status);
@@ -726,11 +1216,461 @@ tr.high-priority {
         document.getElementById("loading-indicator").style.display = "none";
         document.getElementById("crm-table").style.display = "";
         document.getElementById("load-time").textContent = new Date().toLocaleTimeString();
+
+        // Load outreach queue after CRM data is ready
+        loadOutreachQueue();
       })
       .catch(function(err) {
         document.getElementById("loading-indicator").innerHTML =
           "Failed to load crm_data.json -- " + err.message;
+        // Still try outreach queue even if CRM data fails
+        loadOutreachQueue();
       });
+  }
+
+  // -- Load outreach queue --
+  function loadOutreachQueue() {
+    fetch("outreach_queue.json")
+      .then(function(r) {
+        if (!r.ok) throw new Error("HTTP " + r.status);
+        return r.json();
+      })
+      .then(function(data) {
+        if (Array.isArray(data) && data.length > 0) {
+          outreachQueue = data;
+          updateOutreachBadge();
+          renderOutreachTab();
+        } else {
+          outreachQueue = [];
+          updateOutreachBadge();
+          renderOutreachTab();
+        }
+      })
+      .catch(function() {
+        outreachQueue = [];
+        updateOutreachBadge();
+        renderOutreachTab();
+      });
+  }
+
+  function updateOutreachBadge() {
+    var badge = document.getElementById("outreach-badge");
+    var skipped = loadSkippedToday();
+    var outreachState = loadOutreachState();
+    var visible = 0;
+    for (var i = 0; i < outreachQueue.length; i++) {
+      var q = outreachQueue[i];
+      var numKey = String(q.num);
+      var state = outreachState[numKey];
+      if (state && state.status === "contacted") continue;
+      if (skipped[numKey]) continue;
+      visible++;
+    }
+    if (visible > 0) {
+      badge.textContent = visible;
+      badge.style.display = "";
+    } else {
+      badge.style.display = "none";
+    }
+  }
+
+  // -- Outreach tab rendering --
+  function renderOutreachTab() {
+    renderOutreachStats();
+    renderOutreachCards();
+    renderFollowups();
+  }
+
+  function renderOutreachStats() {
+    var outreachState = loadOutreachState();
+    var today = todayISO();
+    var sentToday = 0;
+    var totalContacted = 0;
+    var totalReplied = 0;
+    var pendingFollowups = 0;
+    var now = Date.now();
+    var sevenDays = 7 * 24 * 60 * 60 * 1000;
+
+    var keys = Object.keys(outreachState);
+    for (var i = 0; i < keys.length; i++) {
+      var entry = outreachState[keys[i]];
+      if (!entry || !entry.status) continue;
+
+      if (entry.status === "contacted" || entry.status === "replied") {
+        totalContacted++;
+        if (entry.date && entry.date.slice(0, 10) === today) {
+          sentToday++;
+        }
+        if (entry.status === "replied") {
+          totalReplied++;
+        }
+        if (entry.status === "contacted" && entry.date) {
+          var contactDate = new Date(entry.date).getTime();
+          if ((now - contactDate) >= sevenDays) {
+            pendingFollowups++;
+          }
+        }
+      }
+    }
+
+    var responseRate = totalContacted > 0
+      ? Math.round((totalReplied / totalContacted) * 100) + "%"
+      : "--";
+
+    document.getElementById("ostat-sent-today").textContent = sentToday;
+    document.getElementById("ostat-total-contacted").textContent = totalContacted;
+    document.getElementById("ostat-pending-followups").textContent = pendingFollowups;
+    document.getElementById("ostat-response-rate").textContent = responseRate;
+  }
+
+  function renderOutreachCards() {
+    var container = document.getElementById("outreach-cards-container");
+
+    if (outreachQueue.length === 0) {
+      container.innerHTML =
+        '<div class="outreach-empty">' +
+        '<p>No outreach queued.</p>' +
+        '<p>Run:</p>' +
+        '<code>python _tools/cex_outreach.py generate --count 3</code>' +
+        '</div>';
+      return;
+    }
+
+    var outreachState = loadOutreachState();
+    var skipped = loadSkippedToday();
+    var html = [];
+    var visibleCount = 0;
+
+    // Separate active cards and skipped-to-bottom cards
+    var activeCards = [];
+    var skippedCards = [];
+
+    for (var i = 0; i < outreachQueue.length; i++) {
+      var q = outreachQueue[i];
+      var numKey = String(q.num);
+      var state = outreachState[numKey];
+
+      // Already sent -- hide
+      if (state && state.status === "contacted") continue;
+
+      if (skipped[numKey]) {
+        skippedCards.push(q);
+      } else {
+        activeCards.push(q);
+      }
+    }
+
+    var orderedCards = activeCards.concat(skippedCards);
+
+    for (var c = 0; c < orderedCards.length; c++) {
+      var q = orderedCards[c];
+      var numKey = String(q.num);
+      var isSkipped = !!skipped[numKey];
+      visibleCount++;
+
+      var tierClass = "tier-" + (q.tier || "").replace("--", "none");
+      var profileUrl = q.profile_url || "";
+      var profileDisabled = !profileUrl;
+
+      html.push('<div class="outreach-card" id="ocard-' + numKey + '"' + (isSkipped ? ' style="opacity:0.5;"' : '') + '>');
+
+      // Header
+      html.push('<div class="outreach-card-header">');
+      html.push('<div class="outreach-card-title">');
+      html.push('<span class="card-num">#' + escHtml(q.num) + '</span> ');
+      html.push(escHtml(q.name));
+      html.push(' <span class="tier-badge ' + tierClass + '">' + escHtml(q.tier) + '</span>');
+      html.push(' ' + escHtml(q.region));
+      html.push('</div>');
+      html.push('<span style="color:var(--accent);font-weight:700;font-size:14px;">Priority: ' + q.priority + '</span>');
+      html.push('</div>');
+
+      // Meta
+      html.push('<div class="outreach-card-meta">');
+      html.push('<span>Platform: ' + escHtml(q.platform) + '</span>');
+      html.push('<span>Channel: ' + escHtml(q.channel || "Email") + '</span>');
+      html.push('</div>');
+
+      // Template
+      html.push('<div class="outreach-card-template">');
+      html.push('Template: <strong>' + escHtml(q.template_id || "--") + '</strong>');
+      html.push('</div>');
+
+      // Textarea
+      var msgText = q.message || "";
+      html.push('<textarea class="outreach-textarea" id="omsg-' + numKey + '">' + escHtml(msgText) + '</textarea>');
+
+      // Notes
+      if (q.notes) {
+        html.push('<div class="outreach-card-notes"><strong>Notes:</strong> ' + escHtml(q.notes) + '</div>');
+      }
+
+      // Actions
+      html.push('<div class="outreach-card-actions">');
+      html.push('<button class="btn btn-accent btn-sm" onclick="window._cexOutreach.copy(\'' + numKey + '\')">Copy Message</button>');
+      if (profileDisabled) {
+        html.push('<button class="btn btn-secondary btn-sm" disabled title="No URL -- find manually">Open Profile</button>');
+      } else {
+        html.push('<button class="btn btn-secondary btn-sm" onclick="window._cexOutreach.openProfile(\'' + escAttr(profileUrl) + '\')">Open Profile</button>');
+      }
+      html.push('<button class="btn btn-accent btn-sm" onclick="window._cexOutreach.markSent(\'' + numKey + '\')">Mark Sent</button>');
+      html.push('<button class="btn btn-sm" onclick="window._cexOutreach.skip(\'' + numKey + '\')">' + (isSkipped ? 'Skipped' : 'Skip') + '</button>');
+      html.push('</div>');
+
+      html.push('</div>');
+    }
+
+    if (visibleCount === 0) {
+      container.innerHTML =
+        '<div class="outreach-empty">' +
+        '<p>All queued contacts have been sent or skipped for today.</p>' +
+        '</div>';
+    } else {
+      container.innerHTML = '<div class="outreach-cards">' + html.join("") + '</div>';
+    }
+  }
+
+  function renderFollowups() {
+    var outreachState = loadOutreachState();
+    var section = document.getElementById("followups-section");
+    var container = document.getElementById("followups-container");
+    var now = Date.now();
+    var sevenDays = 7 * 24 * 60 * 60 * 1000;
+    var followups = [];
+
+    var keys = Object.keys(outreachState);
+    for (var i = 0; i < keys.length; i++) {
+      var numKey = keys[i];
+      var entry = outreachState[numKey];
+      if (!entry || entry.status !== "contacted" || !entry.date) continue;
+
+      var contactDate = new Date(entry.date).getTime();
+      var daysSince = Math.floor((now - contactDate) / (24 * 60 * 60 * 1000));
+      if (daysSince < 7) continue;
+
+      // Find contact name from allData or outreachQueue
+      var contactName = numKey;
+      var contactPlatform = "--";
+      for (var j = 0; j < allData.length; j++) {
+        if (String(allData[j].num) === numKey) {
+          contactName = allData[j].name;
+          contactPlatform = allData[j].platform || "--";
+          break;
+        }
+      }
+      if (contactName === numKey) {
+        for (var k = 0; k < outreachQueue.length; k++) {
+          if (String(outreachQueue[k].num) === numKey) {
+            contactName = outreachQueue[k].name;
+            contactPlatform = outreachQueue[k].platform || "--";
+            break;
+          }
+        }
+      }
+
+      followups.push({
+        num: numKey,
+        name: contactName,
+        platform: contactPlatform,
+        daysSince: daysSince
+      });
+    }
+
+    if (followups.length === 0) {
+      section.style.display = "none";
+      return;
+    }
+
+    // Sort by days since contact (oldest first)
+    followups.sort(function(a, b) { return b.daysSince - a.daysSince; });
+
+    section.style.display = "";
+    var html = [];
+
+    for (var f = 0; f < followups.length; f++) {
+      var fu = followups[f];
+      html.push('<div class="followup-card" id="fu-card-' + fu.num + '">');
+      html.push('<div class="followup-info">');
+      html.push('<div class="followup-name">' + escHtml(fu.name) + '</div>');
+      html.push('<div class="followup-detail">');
+      html.push('Platform: ' + escHtml(fu.platform));
+      html.push(' -- <span class="days-ago">' + fu.daysSince + ' days ago</span>');
+      html.push('</div>');
+      html.push('</div>');
+
+      html.push('<div class="followup-right">');
+      html.push('<textarea class="followup-textarea" id="fu-msg-' + fu.num + '">' +
+        'Hi -- following up on my message from ' + fu.daysSince + ' days ago. ' +
+        'Would love to hear your thoughts on a potential collaboration. ' +
+        'No pressure at all -- just wanted to make sure it did not get buried. ' +
+        'Happy to answer any questions!' +
+        '</textarea>');
+      html.push('<div class="followup-actions">');
+      html.push('<button class="btn btn-secondary btn-sm" onclick="window._cexOutreach.toggleFollowup(\'' + fu.num + '\')">Send Follow-up</button>');
+      html.push('<button class="btn btn-sm" onclick="window._cexOutreach.copyFollowup(\'' + fu.num + '\')" style="display:none;" id="fu-copy-' + fu.num + '">Copy Message</button>');
+      html.push('<button class="btn btn-sm" onclick="window._cexOutreach.markReplied(\'' + fu.num + '\')">Mark Replied</button>');
+      html.push('</div>');
+      html.push('</div>');
+
+      html.push('</div>');
+    }
+
+    container.innerHTML = html.join("");
+  }
+
+  // -- Outreach actions (exposed globally) --
+  window._cexOutreach = {
+    copy: function(numKey) {
+      var textarea = document.getElementById("omsg-" + numKey);
+      if (!textarea) return;
+      var text = textarea.value;
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(function() {
+          showToast("Copied!", "pink");
+        }).catch(function() {
+          fallbackCopy(textarea);
+        });
+      } else {
+        fallbackCopy(textarea);
+      }
+    },
+
+    openProfile: function(url) {
+      if (url) window.open(url, "_blank");
+    },
+
+    markSent: function(numKey) {
+      var outreachState = loadOutreachState();
+      outreachState[numKey] = {
+        status: "contacted",
+        date: new Date().toISOString()
+      };
+      saveOutreachState(outreachState);
+
+      // Also update the CRM status in allData + localStorage
+      statusOverrides[numKey] = "contacted";
+      saveStatuses();
+      for (var i = 0; i < allData.length; i++) {
+        if (String(allData[i].num) === numKey) {
+          allData[i].outreach_status = "contacted";
+          break;
+        }
+      }
+
+      // Re-render the contacts table if visible
+      applyFilters();
+
+      // Hide the card
+      var card = document.getElementById("ocard-" + numKey);
+      if (card) {
+        card.style.transition = "opacity 0.3s, max-height 0.3s";
+        card.style.opacity = "0";
+        card.style.maxHeight = card.offsetHeight + "px";
+        card.style.overflow = "hidden";
+        setTimeout(function() {
+          card.style.maxHeight = "0";
+          card.style.padding = "0";
+          card.style.margin = "0";
+          card.style.borderWidth = "0";
+        }, 100);
+        setTimeout(function() {
+          if (card.parentNode) card.parentNode.removeChild(card);
+          updateOutreachBadge();
+          renderOutreachStats();
+          checkEmptyCards();
+        }, 400);
+      }
+
+      showToast("[OK] Marked as sent", "green");
+    },
+
+    skip: function(numKey) {
+      var skipped = loadSkippedToday();
+      skipped[numKey] = true;
+      saveSkippedToday(skipped);
+
+      // Move card to bottom by re-rendering
+      updateOutreachBadge();
+      renderOutreachCards();
+      showToast("Skipped", "gray");
+    },
+
+    toggleFollowup: function(numKey) {
+      var textarea = document.getElementById("fu-msg-" + numKey);
+      var copyBtn = document.getElementById("fu-copy-" + numKey);
+      if (!textarea) return;
+      if (textarea.style.display === "block") {
+        textarea.style.display = "none";
+        if (copyBtn) copyBtn.style.display = "none";
+      } else {
+        textarea.style.display = "block";
+        textarea.focus();
+        if (copyBtn) copyBtn.style.display = "";
+      }
+    },
+
+    copyFollowup: function(numKey) {
+      var textarea = document.getElementById("fu-msg-" + numKey);
+      if (!textarea) return;
+      var text = textarea.value;
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(function() {
+          showToast("Follow-up copied!", "pink");
+        }).catch(function() {
+          fallbackCopy(textarea);
+        });
+      } else {
+        fallbackCopy(textarea);
+      }
+    },
+
+    markReplied: function(numKey) {
+      var outreachState = loadOutreachState();
+      if (outreachState[numKey]) {
+        outreachState[numKey].status = "replied";
+      } else {
+        outreachState[numKey] = { status: "replied", date: new Date().toISOString() };
+      }
+      saveOutreachState(outreachState);
+
+      // Also update CRM status
+      statusOverrides[numKey] = "replied";
+      saveStatuses();
+      for (var i = 0; i < allData.length; i++) {
+        if (String(allData[i].num) === numKey) {
+          allData[i].outreach_status = "replied";
+          break;
+        }
+      }
+      applyFilters();
+
+      // Remove from followups
+      var card = document.getElementById("fu-card-" + numKey);
+      if (card && card.parentNode) card.parentNode.removeChild(card);
+      renderOutreachStats();
+      showToast("[OK] Marked as replied", "green");
+    }
+  };
+
+  function fallbackCopy(textarea) {
+    textarea.select();
+    try {
+      document.execCommand("copy");
+      showToast("Copied!", "pink");
+    } catch(e) {
+      showToast("Copy failed -- select manually", "gray");
+    }
+  }
+
+  function checkEmptyCards() {
+    var container = document.getElementById("outreach-cards-container");
+    var cards = container.querySelectorAll(".outreach-card");
+    if (cards.length === 0) {
+      container.innerHTML =
+        '<div class="outreach-empty">' +
+        '<p>All queued contacts have been sent or skipped for today.</p>' +
+        '</div>';
+    }
   }
 
   // -- Platform filter dropdown --
@@ -935,13 +1875,13 @@ tr.high-priority {
   function escHtml(s) {
     if (!s || s === "--") return '<span style="color:#444;">--</span>';
     var d = document.createElement("div");
-    d.appendChild(document.createTextNode(s));
+    d.appendChild(document.createTextNode(String(s)));
     return d.innerHTML;
   }
 
   function escAttr(s) {
     if (!s) return "";
-    return s.replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    return String(s).replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
   }
 
   // -- Chart --
