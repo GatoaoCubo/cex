@@ -42,8 +42,8 @@ foreach ($file in $mcpFiles) {
             $matches = [regex]::Matches($val, '\$\{([A-Z_][A-Z0-9_]*)\}')
             foreach ($m in $matches) {
                 $varName = $m.Groups[1].Value
-                $resolved = [Environment]::GetEnvironmentVariable($varName)
-                if ([string]::IsNullOrWhiteSpace($resolved)) {
+                $envResolved = [Environment]::GetEnvironmentVariable($varName)
+                if ([string]::IsNullOrWhiteSpace($envResolved)) {
                     if (-not $missing.ContainsKey($varName)) { $missing[$varName] = @() }
                     if ($missing[$varName] -notcontains $name) { $missing[$varName] += $name }
                 }

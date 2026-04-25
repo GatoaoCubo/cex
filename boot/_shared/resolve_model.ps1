@@ -61,29 +61,16 @@ function Resolve-NucleusModel {
         }
     }
 
-    # Parse YAML with Python (PowerShell has no native YAML parser)
-    # Single python call extracts all fields as JSON
-    $pyScript = @"
-import yaml, json, sys
-try:
-    with open(r'$yamlPath', 'r', encoding='utf-8') as f:
-        cfg = yaml.safe_load(f)
-    nuc = cfg.get('$Nucleus', {})
-    print(json.dumps({
-        'cli': nuc.get('cli', 'claude'),
-        'model': nuc.get('model', 'claude-opus-4-6'),
-        'context': nuc.get('context', 1000000),
-        'flags': nuc.get('flags', ''),
-        'mcps': nuc.get('mcps', ''),
-        'settings': nuc.get('settings', '')
-    }))
-except Exception as e:
-    print(json.dumps({'cli':'claude','model':'claude-opus-4-6','context':1000000,'flags':'','mcps':'','settings':'','error':str(e)}))
-"@
+    # Parse YAML with native PowerShell regex (no Python dependency).
+    # The nucleus_models.yaml structure is flat enough for regex extraction.
+    # Previous Python-based parser failed silently in spawned processes
+    # where python was not in PATH (2026-04-25 grid failure).
+    $yamlContent = Get-Content $yamlPath -Raw -Encoding UTF8
 
-    $jsonStr = python -c $pyScript 2>$null
-    if (-not $jsonStr) {
-        Write-Host "  [WARN] Python YAML parse failed -- fallback to opus" -ForegroundColor Yellow
+    # Find the nucleus block: starts with "^{nucleus}:" and ends at next "^[a-z]:" or EOF
+    $pattern = "(?m)^${Nucleus}:\s*\r?\n((?:[ #].*\r?\n)*)"
+    if ($yamlContent -notmatch $pattern) {
+        Write-Host "  [WARN] Nucleus '$Nucleus' not found in YAML -- fallback to opus" -ForegroundColor Yellow
         return @{
             cli     = "claude"
             model   = "claude-opus-4-6"
@@ -93,18 +80,33 @@ except Exception as e:
             settings = ""
         }
     }
+    $block = $Matches[1]
 
-    $parsed = $jsonStr | ConvertFrom-Json
-    if ($parsed.error) {
-        Write-Host "  [WARN] YAML parse error: $($parsed.error)" -ForegroundColor Yellow
+    # Extract fields with simple regex (key: value or key: "value")
+    function Get-YamlField($text, $field, $default) {
+        if ($text -match "(?m)^\s+${field}:\s+`"([^`"]*)`"") { return $Matches[1] }
+        if ($text -match "(?m)^\s+${field}:\s+`'([^`']*)`'") { return $Matches[1] }
+        if ($text -match "(?m)^\s+${field}:\s+(\S+)") { return $Matches[1] }
+        return $default
     }
 
-    return @{
-        cli      = $parsed.cli
-        model    = $parsed.model
-        context  = [int]$parsed.context
-        flags    = $parsed.flags
-        mcps     = $parsed.mcps
-        settings = $parsed.settings
+    $result = @{
+        cli      = Get-YamlField $block "cli" "claude"
+        model    = Get-YamlField $block "model" "claude-opus-4-6"
+        context  = [int](Get-YamlField $block "context" "1000000")
+        flags    = Get-YamlField $block "flags" ""
+        mcps     = Get-YamlField $block "mcps" ""
+        settings = Get-YamlField $block "settings" ""
     }
+
+    # Safety: if model is still empty after parsing, hardcode fallback
+    if (-not $result.model -or $result.model -eq "" -or $result.model -eq '""') {
+        Write-Host "  [WARN] Empty model after parse -- fallback to opus" -ForegroundColor Yellow
+        $result.model = "claude-opus-4-6"
+    }
+    if (-not $result.flags -or $result.flags -eq "" -or $result.flags -eq '""') {
+        $result.flags = "--dangerously-skip-permissions --permission-mode bypassPermissions"
+    }
+
+    return $result
 }
