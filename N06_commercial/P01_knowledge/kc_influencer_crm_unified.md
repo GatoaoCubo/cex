@@ -8,13 +8,13 @@ version: 1.0.0
 created: 2026-04-24
 quality: null
 tags: [seed-intel, crm, influencer, outreach]
-tldr: "Unified CRM of 666+ tech/AI influencers (Global + BR) tiered for CEX open-source seeding outreach"
+tldr: "Unified CRM of 714 tech/AI influencers (Global + BR) tiered for CEX open-source seeding outreach, deduplicated"
 ---
 
 # Unified Influencer CRM -- CEX Open-Source Seeding
 
-> 738 contact entries | 2 regions (GLOBAL / BR) | 4 tiers (T1-T4) | 16-field CRM schema
-> Merged from: kc_influencer_directory_global.md (385) + kc_influencer_directory_br.md (353)
+> 714 contact entries | 2 regions (GLOBAL / BR) | 4 tiers (T1-T4) | 16-field CRM schema
+> Merged from: kc_influencer_directory_global.md (385) + kc_influencer_directory_br.md (353), deduplicated 24 cross-platform/cross-section entries
 > Relevance scoring informed by: cm_cex_vs_landscape.md + kc_cex_positioning_analysis.md
 > Data freeze: 2026-04-24
 
@@ -63,11 +63,11 @@ Score range: 1-10 (normalized). 10 = perfect CEX seeding target.
 
 | Tier | Definition | Global Count | BR Count | Total | Primary Platforms |
 |------|-----------|-------------|----------|-------|-------------------|
-| T1 | 1M+ followers | 18 | 12 | 30 | YouTube, Twitter/X, Instagram, Podcast |
-| T2 | 100K-1M | 77 | 48 | 125 | YouTube, Twitter/X, Newsletter, Instagram, LinkedIn |
-| T3 | 10K-100K | 170 | 282 | 452 | Twitter/X, Instagram, LinkedIn, GitHub, YouTube, Telegram, Podcast, Conference, Academic |
-| T4 | Micro (<10K) | 120 | 11 | 131 | GitHub, Discord, Reddit, Telegram, Community |
-| **TOTAL** | | **385** | **353** | **738** |
+| T1 | 1M+ followers | 17 | 11 | 28 | YouTube, Twitter/X, Instagram, Podcast |
+| T2 | 100K-1M | 76 | 48 | 124 | YouTube, Twitter/X, Newsletter, Instagram, LinkedIn |
+| T3 | 10K-100K | 160 | 275 | 435 | Twitter/X, Instagram, LinkedIn, GitHub, YouTube, Telegram, Podcast, Conference, Academic |
+| T4 | Micro (<10K) | 120 | 7 | 127 | GitHub, Discord, Reddit, Telegram, Community |
+| **TOTAL** | | **373** | **341** | **714** |
 
 ### Relevance Distribution
 
@@ -107,13 +107,12 @@ These are the highest-reach targets. Every contact has potential to generate tho
 |---|------|--------|------|----------|--------|-----------|------|-------------|-------|-----------|---------|----------|-------|---------|-----------|
 | 1 | Satya Nadella | GLOBAL | T1 | Twitter/X | @satyanadella | 5M+ | LOW | AI innovation, Microsoft | weekly | LOW | PR | 3 | CEO Microsoft; mentions drive mass awareness | 2026-04-24 | -- |
 | 2 | Sam Altman | GLOBAL | T1 | Twitter/X | @sama | 4.2M | MEDIUM | AI leadership, OpenAI | daily | LOW | PR/media | 3 | OpenAI CEO; competitor ecosystem | 2026-04-24 | -- |
-| 3 | Lex Fridman | GLOBAL | T1 | Twitter/X | @lexfridman | 4.2M | MEDIUM | AI interviews, deep tech | weekly | LOW | Podcast pitch | 4 | MIT researcher, top AI podcast; also 5M YT | 2026-04-24 | YT #102 |
+| 3 | Lex Fridman | GLOBAL | T1 | YouTube | Lex Fridman | 5.0M | HIGH | AI interviews, deep tech | weekly | LOW | Podcast pitch | 4 | MIT researcher, top AI podcast; also 4.2M on Twitter/X @lexfridman | 2026-04-24 | X #3 |
 | 4 | Manual do Mundo | BR | T1 | YouTube | Ibere Thenorio | 15M+ | HIGH | Science, tech, AI demos | weekly | MEDIUM | PR | 5 | Mainstream science; occasional AI content | 2026-04-24 | -- |
 | 5 | Leon Martins (Coisa de Nerd) | BR | T1 | YouTube | Leon Martins | 11.1M | HIGH | Tech, science, pop culture | weekly | MEDIUM | PR (AMMA) | 5 | Also 2.2M IG; iBest finalist; wife Nilce co-hosts | 2026-04-24 | IG #57 |
 | 6 | 3Blue1Brown | GLOBAL | T1 | YouTube | Grant Sanderson | 8.2M | HIGH | Math/ML visualization | biweekly | MEDIUM | Email | 5 | Best math explainer on YouTube | 2026-04-24 | -- |
-| 7 | Thiago Augusto (Jornada Top) | BR | T1 | Instagram | @jornada.top | 8M | HIGH | Tech innovation | daily | MEDIUM | DM | 5 | Also 1.41M YT; iBest finalist | 2026-04-24 | YT #7 |
-| 8 | Lex Fridman Podcast | GLOBAL | T1 | YouTube | Lex Fridman | 5.0M | HIGH | AI interviews, deep tech | weekly | LOW | Podcast pitch | 4 | MIT, top AI podcast | 2026-04-24 | X #3 |
-| 9 | Fireship | GLOBAL | T1 | YouTube | Jeff Delaney | 4.06M | HIGH | Dev tools, 100-sec explainers | daily | HIGH | DM/email | 8 | Code Report; fast-paced dev content; ideal for CEX demo | 2026-04-24 | -- |
+| 7 | Thiago Augusto (Jornada Top) | BR | T1 | Instagram | @jornada.top | 8M | HIGH | Tech innovation | daily | MEDIUM | DM | 5 | Also 1.41M YT (Jornada Top channel); iBest finalist; merged from YT #22 | 2026-04-24 | YT #22, IG #56 |
+| 8 | Fireship | GLOBAL | T1 | YouTube | Jeff Delaney | 4.06M | HIGH | Dev tools, 100-sec explainers | daily | HIGH | DM/email | 8 | Code Report; fast-paced dev content; ideal for CEX demo | 2026-04-24 | -- |
 | 10 | Gesiel Taveira | BR | T1 | YouTube | Gesiel Taveira | 4.36M | HIGH | Tech reviews, innovation | weekly | MEDIUM | DM | 5 | Also 371K IG; 10+ years on YT | 2026-04-24 | IG #62 |
 | 11 | TecMundo | BR | T1 | YouTube | TecMundo | 3.8M | HIGH | Tech news, hardware | daily | MEDIUM | PR | 4 | Part of NZN network; since 2005 | 2026-04-24 | NL #271 |
 | 12 | Canaltech | BR | T1 | YouTube | Canaltech | 3.57M | HIGH | Tech news, reviews | daily | MEDIUM | PR | 4 | Founded by Felipe Szatkowski; also 529K IG | 2026-04-24 | IG #58, NL #272 |
@@ -126,7 +125,6 @@ These are the highest-reach targets. Every contact has potential to generate tho
 | 19 | sentdex | GLOBAL | T1 | YouTube | Harrison Kinsley | 1.4M | HIGH | Python, ML programming | weekly | HIGH | DM/email | 8 | Python ML tutorials; ideal audience for CEX | 2026-04-24 | -- |
 | 20 | Gustavo Guanabara (Curso em Video) | BR | T1 | YouTube | Guanabara | 1M+ | HIGH | Free programming courses | weekly | MEDIUM | DM/Email | 5 | 20+ years teaching; massive beginner reach | 2026-04-24 | Edu #335 |
 | 21 | Rocketseat (Diego Fernandes) | BR | T1 | YouTube | Rocketseat | 1M+ | HIGH | React, Node, fullstack, AI | daily | HIGH | DM/Email | 9 | Co-founder/CTO; 55K+ students; covers AI tooling | 2026-04-24 | IG #77, LI #174 |
-| 22 | Thiago Augusto (Jornada Top) | BR | T1 | YouTube | Jornada Top | 1.41M | HIGH | Tech innovation | weekly | MEDIUM | DM | 5 | Also 8M IG | 2026-04-24 | IG #56 |
 | 23 | John Carmack | GLOBAL | T1 | Twitter/X | @ID_AA_Carmack | 1.1M | MEDIUM | AGI research, engineering | irregular | LOW | Email | 3 | AGI at Keen Technologies | 2026-04-24 | -- |
 | 24 | Andrew Ng | GLOBAL | T1 | Twitter/X | @AndrewYNg | 1.1M | MEDIUM | AI education, ML courses | weekly | MEDIUM | Coursera/DeepLearning.AI | 5 | Co-founder Coursera, Stanford | 2026-04-24 | NL #222 |
 | 25 | Tina Huang | GLOBAL | T1 | YouTube | Tina Huang | 1.0M+ | HIGH | AI, data science, tech | weekly | MEDIUM | DM/email | 5 | Ex-Meta data scientist | 2026-04-24 | -- |
@@ -197,7 +195,7 @@ These are the highest-reach targets. Every contact has potential to generate tho
 | 83 | AI Andy | GLOBAL | T2 | YouTube | AI Andy | 213K | MEDIUM | AI news with humor | weekly | MEDIUM | DM | 4 | AI commentary | 2026-04-24 | -- |
 | 84 | Erik Brynjolfsson | GLOBAL | T2 | Twitter/X | @erikbryn | 210K | LOW | Digital economy, AI policy | biweekly | LOW | Stanford HAI | 2 | Director DigEconLab | 2026-04-24 | -- |
 | 85 | Hipsters.tech | BR | T2 | Podcast | Alura team | 200K+ listeners | HIGH | Startups, programming | weekly | HIGH | DM | 7 | By Alura; weekly tech discussions | 2026-04-24 | -- |
-| 86 | Swyx (Shawn Wang) | GLOBAL | T2 | Newsletter | Latent Space | 200K+ | HIGH | AI engineering | weekly | HIGH | DM/Substack | 9 | Top 10 US Tech podcast; AI engineering authority | 2026-04-24 | X #84, Pod #249 |
+| 86 | Swyx (Shawn Wang) | GLOBAL | T2 | Newsletter | Latent Space | 200K+ | HIGH | AI engineering | weekly | HIGH | DM/Substack | 9 | Top 10 US Tech podcast; AI engineering authority; also 50K+ on Twitter/X @swyx; merged from X #146 | 2026-04-24 | X #146, Pod #249 |
 | 87 | Pascal Bornet | GLOBAL | T2 | Twitter/X | @pascal_bornet | 158K | MEDIUM | AI automation | weekly | MEDIUM | LinkedIn/DM | 4 | Best-selling author, McKinsey alum | 2026-04-24 | LI #383 |
 | 88 | Oriol Vinyals | GLOBAL | T2 | Twitter/X | @oriolvinyalsml | 182K | LOW | Deep learning, Gemini | irregular | LOW | DeepMind | 2 | VP Research Google DeepMind | 2026-04-24 | -- |
 | 89 | Gary Marcus | GLOBAL | T2 | Twitter/X | @GaryMarcus | 173K | MEDIUM | AI critique, AGI debate | daily | MEDIUM | DM/email | 5 | Author, AI company founder | 2026-04-24 | -- |
@@ -208,7 +206,7 @@ These are the highest-reach targets. Every contact has potential to generate tho
 | 94 | Programacao Dinamica | BR | T2 | YouTube | Prog. Dinamica | 150K+ | HIGH | CS, algorithms, Python | weekly | HIGH | DM | 8 | Academic-quality CS; ideal audience | 2026-04-24 | IG #88, X #-- |
 | 95 | DevPleno (Tulio Faria) | BR | T2 | YouTube | Tulio Faria | 150K+ | MEDIUM | Career, JS, Node mentoring | weekly | MEDIUM | DM | 4 | Mentorship focus | 2026-04-24 | Edu #338 |
 | 96 | Bubows (Bruno Belissimo) | BR | T2 | Instagram | @bubows.ia | 150K+ | HIGH | AI demos, visual content | daily | HIGH | DM | 7 | Simple language; direct AI tool demos | 2026-04-24 | -- |
-| 97 | Jeremy Howard | GLOBAL | T2 | YouTube | Jeremy Howard | 145K | HIGH | Deep learning courses | weekly | HIGH | DM/email | 8 | fast.ai founder; OSS advocate | 2026-04-24 | Blog #317, Speaker #298 |
+| 97 | Jeremy Howard | GLOBAL | T2 | YouTube | Jeremy Howard | 145K | HIGH | Deep learning courses | weekly | HIGH | DM/email | 8 | fast.ai co-founder; OSS advocate; also conference speaker; merged from Conf #128 | 2026-04-24 | Blog #317, Speaker #298, Conf #128 |
 | 98 | Sally Eaves | GLOBAL | T2 | Twitter/X | @sallyeaves | 138K | LOW | AI, 5G, digital transform | weekly | LOW | DM/LinkedIn | 2 | CEO, CTO, thought leader | 2026-04-24 | -- |
 | 99 | Bernard Marr | GLOBAL | T2 | Twitter/X | @bernardmarr | 139K | LOW | AI futurism, keynote | weekly | LOW | PR/email | 2 | Best-selling author | 2026-04-24 | -- |
 | 100 | Rob Lennon | GLOBAL | T2 | Twitter/X | @thatroblennon | 133K | MEDIUM | AI business, prompt writing | weekly | MEDIUM | DM | 4 | 17+ yrs startups | 2026-04-24 | -- |
@@ -239,7 +237,6 @@ These are the highest-reach targets. Every contact has potential to generate tho
 | 125 | Filipe Deschamps NL | BR | T2 | Podcast | Filipe Deschamps | 100K+ listeners | HIGH | Daily tech news | daily | HIGH | Email | 8 | Companion podcast to newsletter | 2026-04-24 | YT #34 |
 | 126 | Thomas Wolf | GLOBAL | T2 | Conference | HuggingFace | -- | HIGH | Transformers library | weekly | HIGH | DM/GH | 8 | Co-founder HuggingFace | 2026-04-24 | Speaker #308 |
 | 127 | Matei Zaharia | GLOBAL | T2 | Conference | Databricks | -- | MEDIUM | Spark, MLflow | irregular | HIGH | DM | 7 | CTO Databricks, Stanford prof | 2026-04-24 | Speaker #291 |
-| 128 | Jeremy Howard | GLOBAL | T2 | Conference | fast.ai | -- | HIGH | Accessible deep learning | irregular | HIGH | DM/email | 8 | fast.ai co-founder | 2026-04-24 | YT #127, Blog #317 |
 | 129 | Percy Liang | GLOBAL | T2 | Conference | Stanford CRFM | -- | HIGH | Foundation models, HELM | irregular | HIGH | Academic | 7 | Stanford CRFM; typed eval | 2026-04-24 | Speaker #281 |
 | 130 | Dario Amodei | GLOBAL | T2 | Conference | Anthropic | -- | LOW | AI safety, Claude | irregular | MEDIUM | PR | 4 | CEO Anthropic, ICML 2026 | 2026-04-24 | Speaker #279 |
 | 131 | Canaltech NL | BR | T2 | Newsletter | Canaltech | 80K+ subs | MEDIUM | Tech news | daily | MEDIUM | PR | 3 | Daily tech news | 2026-04-24 | YT #12 |
@@ -268,20 +265,16 @@ Due to the large number (452 contacts), this section is organized by sub-region 
 | 143 | Nathan Benaich | GLOBAL | Twitter/X | @nathanbenaich | 61K | MEDIUM | 4 | Air Street Capital |
 | 144 | Giuliano Liguori | GLOBAL | Twitter/X | @ingliguori | 61K | LOW | 3 | CEO Kenovy |
 | 145 | Monica Rogati | GLOBAL | Twitter/X | @mrogati | 50K | MEDIUM | 4 | Fractional CDO |
-| 146 | Swyx (Shawn Wang) | GLOBAL | Twitter/X | @swyx | 50K+ | HIGH | 9 | Latent Space; AI eng authority |
 | 147 | Martin Ford | GLOBAL | Twitter/X | @mfordfuture | 45K | LOW | 3 | NY Times bestselling author |
-| 148 | Harrison Chase | GLOBAL | Twitter/X | @hwchase17 | 45K+ | HIGH | 9 | CEO LangChain; direct competitor but key voice |
 | 149 | Catherine Adenle | GLOBAL | Twitter/X | @CatherineAdenle | 43K | LOW | 3 | Women in Tech leader |
 | 150 | Marcus Borba | GLOBAL | Twitter/X | @marcusborba | 40K | LOW | 3 | Global thought leader |
-| 151 | Simon Willison | GLOBAL | Twitter/X | @simonw | 40K+ | HIGH | 9 | Creator llm, datasette; OSS CLI tools |
 | 152 | Mike Tamir | GLOBAL | Twitter/X | @miketamir | 39K | HIGH | 6 | ML Scientist Shopify |
 | 153 | Max Welling | GLOBAL | Twitter/X | @wellingmax | 38K | LOW | 3 | ML researcher |
 | 154 | Aaron Ng | GLOBAL | Twitter/X | @localghost | 36K | HIGH | 7 | Creator Apollo AI |
 | 155 | Kate Darling | GLOBAL | Twitter/X | @grok_ | 35K | LOW | 3 | MIT Media Lab |
-| 156 | Jim Fan | GLOBAL | Twitter/X | @DrJimFan | 33K+ | HIGH | 7 | NVIDIA senior research scientist |
+| 156 | Jim Fan | GLOBAL | Twitter/X | @DrJimFan | 33K+ | HIGH | 7 | NVIDIA senior research scientist; also conference speaker (embodied AI, humanoid robots); merged from Conf #286 |
 | 157 | Rodney Brooks | GLOBAL | Twitter/X | @rodneyabrooks | 32K | LOW | 3 | Robotics pioneer |
 | 158 | Cade Metz | GLOBAL | Twitter/X | @CadeMetz | 31K | MEDIUM | 4 | NYT AI reporter |
-| 159 | Joao Moura | GLOBAL | Twitter/X | @joaomdmoura | 30K+ | HIGH | 9 | Founder CrewAI; BR + multi-agent |
 | 160 | Oren Etzioni | GLOBAL | Twitter/X | @etzioni | 27K | MEDIUM | 4 | Co-founder AI2 |
 | 161 | Daphne Koller | GLOBAL | Twitter/X | @DaphneKoller | 26K | LOW | 3 | CEO insitro |
 | 162 | Alex Champandard | GLOBAL | Twitter/X | @alexjc | 26K | HIGH | 7 | AI tool builder |
@@ -324,7 +317,7 @@ Due to the large number (452 contacts), this section is organized by sub-region 
 | 194 | SingularityNET | GLOBAL | YouTube | SingularityNET | 32K | MEDIUM | 4 | Decentralized AI |
 | 195 | Global AI Community | GLOBAL | YouTube | Global AI Community | 30K | MEDIUM | 4 | Connecting AI communities |
 | 196 | The AI University | GLOBAL | YouTube | AI University | 30K | MEDIUM | 4 | Democratizing AI |
-| 197 | TWIML AI Podcast | GLOBAL | YouTube | Sam Charrington | 29K | HIGH | 7 | This Week in ML |
+| 197 | TWIML AI Podcast (Sam Charrington) | GLOBAL | YouTube | Sam Charrington | 29K | HIGH | 7 | This Week in ML; also longest-running ML podcast; merged from Pod #263 |
 | 198 | Leo Isikdogan | GLOBAL | YouTube | Leo Isikdogan | 25K | MEDIUM | 4 | CV, deep learning |
 | 199 | H2O.ai | GLOBAL | YouTube | H2O.ai | 23K | MEDIUM | 3 | AI cloud platform |
 | 200 | AI for Good | GLOBAL | YouTube | AI for Good | 22K | LOW | 2 | Social impact AI |
@@ -339,10 +332,10 @@ Due to the large number (452 contacts), this section is organized by sub-region 
 
 | # | Name | Region | Platform | GitHub Handle | Project | Stars | Relevance | Priority | Notes |
 |---|------|--------|----------|---------------|---------|-------|-----------|----------|-------|
-| 207 | Harrison Chase | GLOBAL | GitHub | hwchase17 | LangChain | 100K+ | HIGH | 9 | CEO LangChain |
-| 208 | Joao Moura | GLOBAL | GitHub | joaomdmoura | CrewAI | 25K+ | HIGH | 9 | Founder CrewAI; Brazilian |
+| 207 | Harrison Chase | GLOBAL | GitHub | hwchase17 | LangChain | 100K+ | HIGH | 9 | CEO LangChain; also 45K+ Twitter/X @hwchase17; merged from X #148 |
+| 208 | Joao Moura | GLOBAL | GitHub | joaomdmoura | CrewAI | 25K+ | HIGH | 9 | Founder CrewAI; Brazilian; also 30K+ Twitter/X @joaomdmoura; merged from X #159 |
 | 209 | Paul Gauthier | GLOBAL | GitHub | paul-gauthier | Aider | 30K+ | HIGH | 9 | AI pair programming |
-| 210 | Simon Willison | GLOBAL | GitHub | simonw | llm, Datasette | 15K+ | HIGH | 9 | CLI LLM tools |
+| 210 | Simon Willison | GLOBAL | GitHub | simonw | llm, Datasette | 15K+ | HIGH | 9 | CLI LLM tools; also 40K+ Twitter/X @simonw + 100K+ blog; merged from X #151, Blog #267 |
 | 211 | Toran Bruce Richards | GLOBAL | GitHub | torantulino | AutoGPT | 167K+ | HIGH | 8 | Pioneer autonomous agent |
 | 212 | Danny Avila | GLOBAL | GitHub | danny-avila | LibreChat | 20K+ | HIGH | 8 | Multi-model chat UI |
 | 213 | Mintplex Labs | GLOBAL | GitHub | Mintplex-Labs | AnythingLLM | 30K+ | HIGH | 8 | All-in-one AI app |
@@ -400,14 +393,12 @@ Due to the large number (452 contacts), this section is organized by sub-region 
 | 260 | Christoph Molnar | GLOBAL | Newsletter | 30K+ | HIGH | 7 | Stats-grounded AI analysis |
 | 261 | Interconnects AI | GLOBAL | Newsletter | 50K+ | HIGH | 7 | RLHF, AI alignment |
 | 262 | Dan Shipper | GLOBAL | Newsletter | 50K+ | HIGH | 7 | Every (AI productivity) |
-| 263 | Sam Charrington | GLOBAL | Podcast | 28K+ YT | HIGH | 7 | TWIML -- longest-running ML pod |
 | 264 | Practical AI | GLOBAL | Podcast | large | HIGH | 7 | Lockheed Martin + PredictionGuard |
 | 265 | AI Agents Podcast | GLOBAL | Podcast | growing | HIGH | 7 | Jotform CEO + Rise Productive |
 | 266 | AI Native Dev | GLOBAL | Podcast | growing | HIGH | 7 | AI-native software dev |
-| 267 | Simon Willison Blog | GLOBAL | Blog | 100K+ | HIGH | 9 | LLM tooling, AI commentary |
-| 268 | Lilian Weng | GLOBAL | Blog | 500K+ | HIGH | 7 | OpenAI, legendary ML blog |
-| 269 | Chip Huyen | GLOBAL | Blog | 200K+ | HIGH | 8 | ML systems author |
-| 270 | Chris Olah | GLOBAL | Blog | 200K+ | HIGH | 7 | Neural net visualization |
+| 268 | Lilian Weng | GLOBAL | Blog | 500K+ | HIGH | 7 | OpenAI, legendary ML blog; also conference speaker (ML research); merged from Conf #285 |
+| 269 | Chip Huyen | GLOBAL | Blog | 200K+ | HIGH | 8 | ML systems author; also conference speaker; merged from Conf #284 |
+| 270 | Chris Olah | GLOBAL | Blog | 200K+ | HIGH | 7 | Neural net visualization; also conference speaker (interpretability, Anthropic); merged from Conf #288 |
 | 271 | Jay Alammar | GLOBAL | Blog | 300K+ | HIGH | 7 | Transformer visualizations |
 | 272 | Eugene Yan | GLOBAL | Blog | 50K+ | HIGH | 7 | ML engineering practice |
 | 273 | Vicki Boykis | GLOBAL | Blog | 30K+ | HIGH | 7 | ML engineering, search |
@@ -426,11 +417,7 @@ Due to the large number (452 contacts), this section is organized by sub-region 
 | 281 | Jason Wei | GLOBAL | Conference | Chain of thought, reasoning | HIGH | 8 | CoT prompting pioneer; relevant to 8F |
 | 282 | Tri Dao | GLOBAL | Conference | FlashAttention | HIGH | 7 | FlashAttention creator |
 | 283 | Douwe Kiela | GLOBAL | Conference | RAG, retrieval | HIGH | 7 | RAG systems expert |
-| 284 | Chip Huyen | GLOBAL | Conference | ML systems | HIGH | 8 | Author ML systems book |
-| 285 | Lilian Weng | GLOBAL | Conference | ML research, blog | HIGH | 7 | Renowned ML blog |
-| 286 | Jim Fan | GLOBAL | Conference | Embodied AI, humanoid robots | HIGH | 7 | NVIDIA senior research |
 | 287 | Sara Hooker | GLOBAL | Conference | Model efficiency | HIGH | 7 | Cohere research lead |
-| 288 | Chris Olah | GLOBAL | Conference | Interpretability | HIGH | 7 | Neural net viz; Anthropic |
 | 289 | Clementine Fourrier | GLOBAL | Conference | Open LLM Leaderboard | HIGH | 7 | HF leaderboard maintainer |
 
 ### 5.6 T3 BR -- YouTube (25 contacts)
@@ -444,13 +431,12 @@ Due to the large number (452 contacts), this section is organized by sub-region 
 | 294 | Gabriel Pato | BR | YouTube | Gabriel Pato | 60K+ | MEDIUM | 4 | Cybersecurity focus |
 | 295 | BrazilJS | BR | YouTube | BrazilJS | 50K+ | HIGH | 7 | Largest JS event LatAm |
 | 296 | Waldemar Neto | BR | YouTube | Dev Lab | 50K+ | HIGH | 7 | Node.js, DevOps, Docker |
-| 297 | Prof. Sandeco | BR | YouTube | Sandeco | 51K+ | HIGH | 8 | University professor; AI + LLMs |
+| 297 | Prof. Sandeco | BR | YouTube | Sandeco | 51K+ | HIGH | 8 | University professor; AI + LLMs + data science/ML; also Canal Sandeco (35K+); merged from YT #303 |
 | 298 | Hugo Vasconcelos | BR | YouTube | Hugo Vasconcelos | 50K+ | HIGH | 7 | Python, automation, bots |
-| 299 | IA Todo Dia | BR | YouTube | IA Todo Dia | 40K+ | HIGH | 8 | AI news, tools; also top Spotify pod |
+| 299 | IA Todo Dia | BR | YouTube | IA Todo Dia | 40K+ | HIGH | 8 | AI news, tools; also largest AI podcast BR (top Spotify); merged from Pod #457 |
 | 300 | Didatica Tech | BR | YouTube | Didatica Tech | 40K+ | HIGH | 7 | Education-focused AI |
 | 301 | Flutterando | BR | YouTube | Flutterando | 40K+ | MEDIUM | 4 | Flutter, mobile dev |
 | 302 | Full Cycle | BR | YouTube | Full Cycle | 35K+ | HIGH | 7 | Architecture-focused |
-| 303 | Canal Sandeco | BR | YouTube | Sandeco | 35K+ | HIGH | 7 | Data science, ML |
 | 304 | ML4U | BR | YouTube | ML4U | 30K+ | HIGH | 7 | Academic ML content |
 | 305 | Universo Programado | BR | YouTube | Universo Programado | 30K+ | HIGH | 7 | AI demos and tutorials |
 | 306 | DevMedia | BR | YouTube | DevMedia | 30K+ | MEDIUM | 4 | Knowledge portal |
@@ -486,7 +472,7 @@ Due to the large number (452 contacts), this section is organized by sub-region 
 | 331 | Thassius Veloso | BR | Instagram | @thassius | 19K | MEDIUM | 4 | Tech journalist |
 | 332 | DIO | BR | Instagram | @digitalinnovationone | 40K+ | MEDIUM | 4 | Dev education |
 | 333 | Data Hackers IG | BR | Instagram | @datahackersbr | 15K+ | HIGH | 7 | 45K+ community |
-| 334 | WoMakersCode | BR | Instagram | @womakerscodebr | 15K+ | MEDIUM | 4 | Women in IT |
+| 334 | WoMakersCode | BR | Instagram | @womakerscodebr | 15K+ | MEDIUM | 4 | Women in IT; also 5K+ community org; merged from Community #622 |
 | 335 | IlustraDev | BR | Instagram | @ilustradev | 15K+ | MEDIUM | 4 | Illustrated programming |
 | 336 | Verena Paccola | BR | Instagram | @verenapaccola | 15K+ | MEDIUM | 4 | Interdisciplinary tech |
 | 337 | Fabio Akita IG | BR | Instagram | @akitaonrails | 15K+ | HIGH | 6 | CS deep dives |
@@ -545,22 +531,20 @@ Due to the large number (452 contacts), this section is organized by sub-region 
 | 425 | Rafael Milagre LI | BR | LinkedIn | 20K+ | HIGH | 7 | Viver de IA |
 | 426 | Rony Meisler | BR | LinkedIn | 20K+ | MEDIUM | 4 | Reserva co-founder |
 | 427 | Flavio Augusto | BR | LinkedIn | 40K+ | LOW | 2 | Entrepreneur |
-| 428 | Allan Sene | BR | LinkedIn | 15K+ | HIGH | 7 | Dadosfera/Data Hackers |
 | 429 | Onedio Seabra Jr | BR | LinkedIn | 15K+ | HIGH | 7 | i2AI President |
-| 430 | Ana Paula Appel | BR | LinkedIn | 15K+ | HIGH | 7 | IBM; TDC speaker |
+| 430 | Ana Paula Appel | BR | LinkedIn | 15K+ | HIGH | 7 | IBM; TDC Summit speaker; also conference speaker (AI research); merged from Conf #473 |
 | 431 | Marcos Santos | BR | LinkedIn | 15K+ | HIGH | 7 | Aquarela Analytics CEO |
 | 432 | Danilo Gato LI | BR | LinkedIn | 15K+ | HIGH | 8 | CPDF founder |
-| 433 | Marcello Zillo | BR | LinkedIn | 12K+ | HIGH | 6 | Google Cloud |
+| 433 | Marcello Zillo | BR | LinkedIn | 12K+ | HIGH | 6 | Google Cloud; also conference speaker (cybersecurity, cloud); merged from Conf #476 |
 | 434 | Gabriela Haddad | BR | LinkedIn | 12K+ | HIGH | 6 | Accenture |
 | 435 | Elder Moraes | BR | LinkedIn | 12K+ | HIGH | 6 | IBM |
-| 436 | Arthur Fucher | BR | LinkedIn | 12K+ | HIGH | 6 | Nubank |
+| 436 | Arthur Fucher | BR | LinkedIn | 12K+ | HIGH | 6 | Nubank; also conference speaker (data, AI at scale); merged from Conf #474 |
 | 437-456 | (Remaining BR LI T3) | BR | LinkedIn | 10K+ each | MEDIUM-HIGH | 4-7 | See source entries #183-211 |
 
 ### 5.10 T3 BR -- Podcasts (22 contacts)
 
 | # | Name | Region | Platform | Show | Relevance | Priority | Notes |
 |---|------|--------|----------|------|-----------|----------|-------|
-| 457 | IA Todo Dia | BR | Podcast | IA Todo Dia | HIGH | 8 | Largest AI podcast BR |
 | 458 | IA Sob Controle | BR | Podcast | IA Sob Controle | HIGH | 7 | AI news, interviews |
 | 459 | Papo de IA | BR | Podcast | Danilo Gato | HIGH | 8 | #1 tech on Spotify |
 | 460 | Vida com IA | BR | Podcast | Filipe Lauar | HIGH | 7 | AI accessible language |
@@ -574,17 +558,14 @@ Due to the large number (452 contacts), this section is organized by sub-region 
 | 468 | Viver de IA Pod | BR | Podcast | Rafael Milagre | HIGH | 7 | AI for business leaders |
 | 469 | Act4AI | BR | Podcast | Danilo | HIGH | 7 | AI dev interviews |
 | 470 | SABIA | BR | Podcast | Unicamp students | HIGH | 6 | Academic AI |
-| 471 | Cafe com IA | BR | Podcast | Inner AI | HIGH | 7 | 100% AI-narrated |
+| 471 | Cafe com IA | BR | Podcast | Inner AI | HIGH | 7 | 100% AI-narrated; also 10K+ newsletter; merged from NL #625 |
 
 ### 5.11 T3 BR -- Event Speakers/Organizers (25 contacts)
 
 | # | Name | Region | Platform | Focus | Relevance | Priority | Notes |
 |---|------|--------|----------|-------|-----------|----------|-------|
 | 472 | Adriano Pereira | BR | Conference | AI healthcare | HIGH | 6 | UFMG; InWeb |
-| 473 | Ana Paula Appel | BR | Conference | AI research, IBM | HIGH | 6 | TDC Summit speaker |
-| 474 | Arthur Fucher | BR | Conference | Data, AI at scale | HIGH | 6 | Nubank |
-| 475 | Junia Ortiz | BR | Conference | Deep learning, NLP, LLMs | HIGH | 7 | SENAI CIMATEC |
-| 476 | Marcello Zillo | BR | Conference | Cybersecurity, cloud | HIGH | 6 | Google Cloud |
+| 475 | Junia Ortiz | BR | Conference | Deep learning, NLP, LLMs | HIGH | 7 | SENAI CIMATEC; also academic researcher (DL, NLP, LLMs); merged from Acad #497 |
 | 477 | Ricardo Saraiva | BR | Conference | AI, metaverse | HIGH | 6 | AIAT President |
 | 478 | Evandro Rosa | BR | Conference | Quantum computing | HIGH | 6 | Quantuloop |
 | 479 | Daniel Collaco | BR | Conference | Software innovation | HIGH | 7 | NASA Space Apps winner |
@@ -610,7 +591,6 @@ Due to the large number (452 contacts), this section is organized by sub-region 
 | 494 | Julio C. Estrella | BR | Academic | USP | HIGH | 6 | AI, intelligent systems |
 | 495 | Roberto C. S. Pacheco | BR | Academic | UFSC | HIGH | 6 | Digital platforms |
 | 496 | Paulo Silvestre | BR | Academic | Mackenzie/PUC-SP | HIGH | 6 | AI, digital culture |
-| 497 | Junia Ortiz Acad | BR | Academic | SENAI CIMATEC | HIGH | 6 | DL, NLP, LLMs |
 | 498 | Joao M. S. Souza | BR | Academic | SENAI CIMATEC | HIGH | 6 | Quantum computing |
 | 499 | Marcio B. Amaral | BR | Academic | HC FMUSP | HIGH | 6 | AI engineering, healthcare |
 
@@ -760,31 +740,27 @@ T4 micro-influencers are community builders and niche creators with often the hi
 | 608 | Programacao Funcional BR | BR | Telegram | 1K+ | HIGH | 5 | Functional programming |
 | 609 | Rust Floripa | BR | Telegram | 500+ | HIGH | 5 | Rust community |
 | 610 | Programadores BR | BR | Discord | 32K+ | HIGH | 7 | Largest BR dev Discord |
-| 611 | He4rt Developers | BR | Discord | 10K+ | HIGH | 7 | Non-profit; beginner-friendly |
+| 611 | He4rt Developers | BR | Discord | 10K+ | HIGH | 7 | Non-profit; beginner-friendly; also community org; merged from Community #621 |
 | 612 | Data Hackers | BR | Slack | 45K+ | HIGH | 8 | Data science + AI community |
-| 613 | Training Center | BR | Slack/Discord | 5K+ | MEDIUM | 4 | Knowledge sharing |
+| 613 | Training Center | BR | Slack/Discord | 5K+ | MEDIUM | 4 | Knowledge sharing; also community org (education); merged from Community #624 |
 
 ### 6.6 T4 BR -- Community Leaders & Meetup Organizers (11 contacts)
 
 | # | Name/Org | Region | Platform | Members | Relevance | Priority | Notes |
 |---|----------|--------|----------|---------|-----------|----------|-------|
-| 614 | Allan Sene | BR | Community | 45K+ | HIGH | 8 | Data Hackers + Dadosfera |
+| 614 | Allan Sene | BR | Community | 45K+ | HIGH | 8 | Data Hackers + Dadosfera; also 15K+ LinkedIn; merged from LI #428 |
 | 615 | Paulo Vasconcellos | BR | Community | -- | HIGH | 6 | Data Hackers co-founder |
 | 616 | Gabriel Lages | BR | Community | -- | HIGH | 6 | Data Hackers co-founder |
 | 617 | AI Brasil Meetup | BR | Meetup | 5K+ | HIGH | 7 | Largest AI meetup BR |
 | 618 | AI Tinkerers SP | BR | Meetup | 2K+ | HIGH | 8 | Builder-focused; ideal for CEX demo |
 | 619 | SP AI Developer Group | BR | Meetup | 3K+ | HIGH | 7 | Tech talks + workshops |
 | 620 | AI Professionals SP | BR | Meetup | 70K+ | HIGH | 6 | Global with SP chapter |
-| 621 | He4rt Developers | BR | Discord | 10K+ | HIGH | 7 | Non-profit |
-| 622 | WoMakersCode | BR | Community | 5K+ | MEDIUM | 4 | Women in IT |
 | 623 | Devs Java Girl | BR | Community | 2K+ | MEDIUM | 4 | Women + Java |
-| 624 | Training Center | BR | Community | 5K+ | MEDIUM | 4 | Education community |
 
 ### 6.7 T4 BR -- Remaining Newsletter, Podcast, Education entries
 
 | # | Name | Region | Platform | Audience | Relevance | Priority | Notes |
 |---|------|--------|----------|----------|-----------|----------|-------|
-| 625 | Cafe com IA | BR | Newsletter | 10K+ | HIGH | 7 | AI weekly; 100% AI-narrated |
 | 626 | IA Todo Dia NL | BR | Newsletter | 15K+ | HIGH | 7 | Companion to podcast |
 | 627 | Manual do Usuario | BR | Newsletter | 15K+ | HIGH | 6 | Independent tech journalism |
 | 628 | iMasters | BR | Newsletter | 10K+ | MEDIUM | 4 | Developer community |
@@ -927,14 +903,14 @@ These are the first 50 to contact in the CEX open-source seeding campaign.
 ## Data Quality Notes
 
 1. Follower counts are approximate as of April 2026; refresh quarterly
-2. Some contacts appear in multiple tiers/platforms (e.g., Danilo Gato in 7 categories) -- listed in primary category with cross-references
+2. Cross-platform contacts (e.g., Danilo Gato in 7 categories) are listed in their primary category with cross-references; 24 true duplicates were merged during dedup pass (2026-04-25)
 3. GitHub star counts are approximate ranges
 4. Reddit/Discord listed as team entries (5-15 moderators per team)
 5. Contact methods prioritize public/professional channels -- no private emails or phone numbers
 6. Priority scores are CEX-specific: optimized for typed-systems, multi-agent, OSS AI framework seeding
 7. Relevance scoring informed by cm_cex_vs_landscape.md: contacts covering typed systems, multi-agent orchestration, or open-source AI infrastructure scored HIGH
 8. BR contacts often appear on multiple platforms; the CRM entry uses the platform with highest follower count as primary
-9. Outreach_status initialized to `not_started` for all 738 entries
+9. Outreach_status initialized to `not_started` for all 714 entries
 10. This CRM should be updated monthly as follower counts and platform activity shift rapidly
 
 ---
@@ -947,4 +923,4 @@ These are the first 50 to contact in the CEX open-source seeding campaign.
 | kc_influencer_directory_br.md | 353 | BR |
 | cm_cex_vs_landscape.md | -- | Relevance scoring criteria |
 | kc_cex_positioning_analysis.md | -- | Priority scoring alignment |
-| **TOTAL MERGED** | **738** | **GLOBAL + BR** |
+| **TOTAL MERGED** | **714** | **GLOBAL + BR** (24 cross-platform dupes removed) |

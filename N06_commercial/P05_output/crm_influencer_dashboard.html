@@ -1,0 +1,1064 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CEXAI Influencer CRM</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #0A0A0A;
+  --card: #1A1A1A;
+  --border: #2A2A2A;
+  --text: #FFFFFF;
+  --muted: #999999;
+  --accent: #FF2D78;
+  --accent-dim: rgba(255, 45, 120, 0.15);
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.5;
+  min-height: 100vh;
+}
+
+/* -- Top Bar -- */
+.top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 24px;
+  border-bottom: 1px solid var(--border);
+  background: var(--card);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.top-bar h1 {
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+.top-bar h1 span {
+  color: var(--accent);
+}
+
+.top-bar-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.top-bar-stat {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.top-bar-stat strong {
+  color: var(--text);
+}
+
+.btn {
+  padding: 8px 16px;
+  border: 1px solid var(--border);
+  background: var(--card);
+  color: var(--text);
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.btn-accent {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+.btn-accent:hover {
+  background: #e0245e;
+  border-color: #e0245e;
+  color: #fff;
+}
+
+/* -- KPI Bar -- */
+.kpi-bar {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 12px;
+  padding: 16px 24px;
+  border-bottom: 1px solid var(--border);
+}
+
+.kpi-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 14px 16px;
+  text-align: center;
+}
+
+.kpi-card .kpi-value {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.2;
+}
+
+.kpi-card .kpi-label {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-top: 4px;
+}
+
+.kpi-card.accent .kpi-value {
+  color: var(--accent);
+}
+
+/* -- Filter Bar -- */
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 24px;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg);
+}
+
+.filter-group {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.filter-group-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-right: 4px;
+  white-space: nowrap;
+}
+
+.filter-group label {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 13px;
+  color: var(--muted);
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.filter-group label:hover {
+  color: var(--text);
+}
+
+.filter-group input[type="checkbox"] {
+  accent-color: var(--accent);
+  width: 14px;
+  height: 14px;
+}
+
+select, .search-input {
+  background: var(--card);
+  border: 1px solid var(--border);
+  color: var(--text);
+  font-family: inherit;
+  font-size: 13px;
+  padding: 6px 10px;
+  border-radius: 6px;
+  outline: none;
+}
+
+select:focus, .search-input:focus {
+  border-color: var(--accent);
+}
+
+select option {
+  background: var(--card);
+  color: var(--text);
+}
+
+.search-input {
+  width: 220px;
+}
+
+.filter-sep {
+  width: 1px;
+  height: 24px;
+  background: var(--border);
+}
+
+/* -- Table Wrapper -- */
+.table-wrap {
+  overflow-x: auto;
+  overflow-y: auto;
+  max-height: calc(100vh - 320px);
+  margin: 0;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  min-width: 1200px;
+}
+
+thead {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+thead th {
+  background: var(--card);
+  border-bottom: 2px solid var(--border);
+  padding: 10px 12px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--muted);
+  white-space: nowrap;
+  cursor: pointer;
+  user-select: none;
+}
+
+thead th:hover {
+  color: var(--text);
+}
+
+tbody tr {
+  border-bottom: 1px solid var(--border);
+  transition: background 0.1s;
+}
+
+tbody tr:hover {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+tbody td {
+  padding: 8px 12px;
+  vertical-align: middle;
+  color: var(--muted);
+}
+
+tbody td:nth-child(2) {
+  color: var(--text);
+  font-weight: 500;
+}
+
+/* Priority glow */
+tr.high-priority {
+  border-left: 3px solid var(--accent);
+  box-shadow: inset 4px 0 12px -4px rgba(255, 45, 120, 0.25);
+}
+
+/* Tier badges */
+.tier-badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+}
+
+.tier-T1 { background: rgba(255, 45, 120, 0.2); color: #FF2D78; }
+.tier-T2 { background: rgba(255, 165, 0, 0.2); color: #FFA500; }
+.tier-T3 { background: rgba(100, 149, 237, 0.2); color: #6495ED; }
+.tier-T4 { background: rgba(128, 128, 128, 0.2); color: #999; }
+
+/* Relevance badges */
+.rel-badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.rel-HIGH { background: rgba(46, 204, 113, 0.2); color: #2ecc71; }
+.rel-MEDIUM { background: rgba(255, 165, 0, 0.2); color: #FFA500; }
+.rel-LOW { background: rgba(128, 128, 128, 0.2); color: #888; }
+
+/* Priority bar */
+.priority-bar-cell {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.priority-bar {
+  width: 40px;
+  height: 6px;
+  background: var(--border);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.priority-bar-fill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.2s;
+}
+
+/* Status dropdown */
+.status-select {
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 8px;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  font-family: inherit;
+}
+
+.status-not_started { background: #333; color: #999; }
+.status-researched { background: rgba(52, 152, 219, 0.25); color: #3498db; }
+.status-contacted { background: rgba(255, 165, 0, 0.25); color: #FFA500; }
+.status-replied { background: rgba(46, 204, 113, 0.25); color: #2ecc71; }
+.status-converted { background: rgba(155, 89, 182, 0.25); color: #9b59b6; }
+.status-declined { background: rgba(231, 76, 60, 0.25); color: #e74c3c; }
+
+.status-select option {
+  background: var(--card);
+  color: var(--text);
+}
+
+/* Notes cell */
+.notes-cell {
+  max-width: 250px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.notes-cell:hover {
+  white-space: normal;
+  overflow: visible;
+  position: relative;
+  z-index: 5;
+  background: var(--card);
+  border-radius: 4px;
+  padding: 8px 12px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+}
+
+/* -- Footer Chart -- */
+.footer-chart {
+  padding: 24px;
+  border-top: 1px solid var(--border);
+}
+
+.footer-chart h3 {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.chart-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 6px;
+  gap: 8px;
+}
+
+.chart-label {
+  width: 140px;
+  font-size: 12px;
+  color: var(--muted);
+  text-align: right;
+  flex-shrink: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.chart-bar-wrap {
+  flex: 1;
+  height: 20px;
+  background: var(--border);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.chart-bar {
+  height: 100%;
+  background: var(--accent);
+  border-radius: 4px;
+  transition: width 0.4s ease;
+  min-width: 2px;
+}
+
+.chart-count {
+  width: 40px;
+  font-size: 12px;
+  color: var(--muted);
+  text-align: right;
+  flex-shrink: 0;
+}
+
+/* -- Responsive -- */
+@media (max-width: 1200px) {
+  .kpi-bar {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .filter-bar {
+    gap: 10px;
+  }
+  .search-input {
+    width: 160px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .kpi-bar {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .top-bar {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .filter-bar {
+    gap: 8px;
+  }
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #444;
+}
+
+/* Row count indicator */
+.row-count {
+  font-size: 12px;
+  color: var(--muted);
+  padding: 8px 24px;
+  border-bottom: 1px solid var(--border);
+}
+
+.row-count strong {
+  color: var(--text);
+}
+
+/* Loading state */
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 24px;
+  font-size: 16px;
+  color: var(--muted);
+}
+
+.loading-spinner {
+  width: 24px;
+  height: 24px;
+  border: 3px solid var(--border);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin-right: 12px;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Engagement badge */
+.eng-badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.eng-HIGH { background: rgba(46, 204, 113, 0.15); color: #2ecc71; }
+.eng-MEDIUM { background: rgba(255, 165, 0, 0.15); color: #FFA500; }
+.eng-LOW { background: rgba(128, 128, 128, 0.15); color: #666; }
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+  <h1><span>CEXAI</span> Influencer CRM</h1>
+  <div class="top-bar-right">
+    <span class="top-bar-stat">Last loaded: <strong id="load-time">--</strong></span>
+    <button class="btn" id="btn-reset-filters" title="Reset all filters">Reset</button>
+    <button class="btn btn-accent" id="btn-export">Export CSV</button>
+  </div>
+</div>
+
+<div class="kpi-bar" id="kpi-bar">
+  <div class="kpi-card">
+    <div class="kpi-value" id="kpi-total">--</div>
+    <div class="kpi-label">Total Contacts</div>
+  </div>
+  <div class="kpi-card">
+    <div class="kpi-value" id="kpi-t1">--</div>
+    <div class="kpi-label">Tier 1</div>
+  </div>
+  <div class="kpi-card">
+    <div class="kpi-value" id="kpi-t2">--</div>
+    <div class="kpi-label">Tier 2</div>
+  </div>
+  <div class="kpi-card">
+    <div class="kpi-value" id="kpi-t3">--</div>
+    <div class="kpi-label">Tier 3</div>
+  </div>
+  <div class="kpi-card accent">
+    <div class="kpi-value" id="kpi-high">--</div>
+    <div class="kpi-label">High Relevance</div>
+  </div>
+  <div class="kpi-card accent">
+    <div class="kpi-value" id="kpi-hot">--</div>
+    <div class="kpi-label">Priority 8+</div>
+  </div>
+</div>
+
+<div class="filter-bar" id="filter-bar">
+  <div class="filter-group">
+    <span class="filter-group-label">Tier</span>
+    <label><input type="checkbox" data-filter="tier" value="T1" checked> T1</label>
+    <label><input type="checkbox" data-filter="tier" value="T2" checked> T2</label>
+    <label><input type="checkbox" data-filter="tier" value="T3" checked> T3</label>
+    <label><input type="checkbox" data-filter="tier" value="T4" checked> T4</label>
+  </div>
+
+  <div class="filter-sep"></div>
+
+  <div class="filter-group">
+    <span class="filter-group-label">Region</span>
+    <label><input type="checkbox" data-filter="region" value="GLOBAL" checked> Global</label>
+    <label><input type="checkbox" data-filter="region" value="BR" checked> BR</label>
+  </div>
+
+  <div class="filter-sep"></div>
+
+  <div class="filter-group">
+    <span class="filter-group-label">Relevance</span>
+    <label><input type="checkbox" data-filter="relevance" value="HIGH" checked> High</label>
+    <label><input type="checkbox" data-filter="relevance" value="MEDIUM" checked> Medium</label>
+    <label><input type="checkbox" data-filter="relevance" value="LOW" checked> Low</label>
+  </div>
+
+  <div class="filter-sep"></div>
+
+  <div class="filter-group">
+    <span class="filter-group-label">Platform</span>
+    <select id="filter-platform">
+      <option value="">All Platforms</option>
+    </select>
+  </div>
+
+  <div class="filter-group">
+    <span class="filter-group-label">Status</span>
+    <select id="filter-status">
+      <option value="">All Statuses</option>
+      <option value="not_started">Not Started</option>
+      <option value="researched">Researched</option>
+      <option value="contacted">Contacted</option>
+      <option value="replied">Replied</option>
+      <option value="converted">Converted</option>
+      <option value="declined">Declined</option>
+    </select>
+  </div>
+
+  <div class="filter-sep"></div>
+
+  <div class="filter-group">
+    <span class="filter-group-label">Sort</span>
+    <select id="filter-sort">
+      <option value="priority-desc">Priority (high first)</option>
+      <option value="priority-asc">Priority (low first)</option>
+      <option value="name-asc">Name (A-Z)</option>
+      <option value="name-desc">Name (Z-A)</option>
+      <option value="tier-asc">Tier (T1 first)</option>
+      <option value="followers-desc">Followers (most)</option>
+    </select>
+  </div>
+
+  <div class="filter-sep"></div>
+
+  <input type="text" class="search-input" id="search-input" placeholder="Search name, handle, notes...">
+</div>
+
+<div class="row-count" id="row-count">Loading...</div>
+
+<div class="table-wrap" id="table-wrap">
+  <div class="loading" id="loading-indicator">
+    <div class="loading-spinner"></div>
+    Loading contact data...
+  </div>
+  <table id="crm-table" style="display:none;">
+    <thead>
+      <tr>
+        <th data-col="num" style="width:50px">#</th>
+        <th data-col="name">Name</th>
+        <th data-col="region" style="width:70px">Region</th>
+        <th data-col="tier" style="width:60px">Tier</th>
+        <th data-col="platform">Platform</th>
+        <th data-col="handle">Handle</th>
+        <th data-col="followers">Followers</th>
+        <th data-col="engagement" style="width:90px">Engage</th>
+        <th data-col="relevance" style="width:90px">Relevance</th>
+        <th data-col="priority" style="width:80px">Priority</th>
+        <th data-col="outreach_status" style="width:130px">Status</th>
+        <th data-col="notes">Notes</th>
+      </tr>
+    </thead>
+    <tbody id="crm-tbody"></tbody>
+  </table>
+</div>
+
+<div class="footer-chart" id="footer-chart">
+  <h3>Contacts by Platform</h3>
+  <div id="chart-rows"></div>
+</div>
+
+<script>
+(function() {
+  "use strict";
+
+  var allData = [];
+  var filteredData = [];
+  var statusOverrides = {};
+
+  var LS_KEY = "cexai_crm_statuses";
+
+  // -- localStorage helpers --
+  function loadStatuses() {
+    try {
+      var raw = localStorage.getItem(LS_KEY);
+      if (raw) { statusOverrides = JSON.parse(raw); }
+    } catch(e) { statusOverrides = {}; }
+  }
+
+  function saveStatuses() {
+    try {
+      localStorage.setItem(LS_KEY, JSON.stringify(statusOverrides));
+    } catch(e) { /* quota exceeded -- silent */ }
+  }
+
+  function getStatus(num) {
+    return statusOverrides[num] || null;
+  }
+
+  // -- Parse follower count for sorting --
+  function parseFollowers(s) {
+    if (!s || s === "--") return 0;
+    s = s.replace(/\+/g, "").replace(/,/g, "").trim();
+    var m = s.match(/^([\d.]+)\s*([KkMm])?$/);
+    if (!m) return 0;
+    var n = parseFloat(m[1]);
+    if (m[2] === "M" || m[2] === "m") return n * 1000000;
+    if (m[2] === "K" || m[2] === "k") return n * 1000;
+    return n;
+  }
+
+  // -- Tier sort value --
+  function tierValue(t) {
+    if (t === "T1") return 1;
+    if (t === "T2") return 2;
+    if (t === "T3") return 3;
+    if (t === "T4") return 4;
+    return 5;
+  }
+
+  // -- Load data --
+  function init() {
+    loadStatuses();
+    fetch("crm_data.json")
+      .then(function(r) {
+        if (!r.ok) throw new Error("HTTP " + r.status);
+        return r.json();
+      })
+      .then(function(data) {
+        allData = data;
+        // apply saved statuses
+        for (var i = 0; i < allData.length; i++) {
+          var saved = getStatus(allData[i].num);
+          if (saved) { allData[i].outreach_status = saved; }
+        }
+        populatePlatformFilter();
+        updateKPIs();
+        applyFilters();
+        buildChart();
+        document.getElementById("loading-indicator").style.display = "none";
+        document.getElementById("crm-table").style.display = "";
+        document.getElementById("load-time").textContent = new Date().toLocaleTimeString();
+      })
+      .catch(function(err) {
+        document.getElementById("loading-indicator").innerHTML =
+          "Failed to load crm_data.json -- " + err.message;
+      });
+  }
+
+  // -- Platform filter dropdown --
+  function populatePlatformFilter() {
+    var platforms = {};
+    for (var i = 0; i < allData.length; i++) {
+      var p = allData[i].platform || "--";
+      if (!platforms[p]) platforms[p] = 0;
+      platforms[p]++;
+    }
+    var sorted = Object.keys(platforms).sort();
+    var sel = document.getElementById("filter-platform");
+    for (var j = 0; j < sorted.length; j++) {
+      var opt = document.createElement("option");
+      opt.value = sorted[j];
+      opt.textContent = sorted[j] + " (" + platforms[sorted[j]] + ")";
+      sel.appendChild(opt);
+    }
+  }
+
+  // -- KPI update --
+  function updateKPIs() {
+    var total = allData.length;
+    var t1 = 0, t2 = 0, t3 = 0, high = 0, hot = 0;
+    for (var i = 0; i < allData.length; i++) {
+      var c = allData[i];
+      if (c.tier === "T1") t1++;
+      if (c.tier === "T2") t2++;
+      if (c.tier === "T3") t3++;
+      if (c.relevance === "HIGH") high++;
+      if (c.priority >= 8) hot++;
+    }
+    document.getElementById("kpi-total").textContent = total;
+    document.getElementById("kpi-t1").textContent = t1;
+    document.getElementById("kpi-t2").textContent = t2;
+    document.getElementById("kpi-t3").textContent = t3;
+    document.getElementById("kpi-high").textContent = high;
+    document.getElementById("kpi-hot").textContent = hot;
+  }
+
+  // -- Get checked values for a filter group --
+  function getCheckedValues(filterName) {
+    var cbs = document.querySelectorAll('input[data-filter="' + filterName + '"]');
+    var vals = [];
+    for (var i = 0; i < cbs.length; i++) {
+      if (cbs[i].checked) vals.push(cbs[i].value);
+    }
+    return vals;
+  }
+
+  // -- Apply all filters + sort --
+  function applyFilters() {
+    var tiers = getCheckedValues("tier");
+    var regions = getCheckedValues("region");
+    var relevances = getCheckedValues("relevance");
+    var platformFilter = document.getElementById("filter-platform").value;
+    var statusFilter = document.getElementById("filter-status").value;
+    var sortVal = document.getElementById("filter-sort").value;
+    var searchVal = document.getElementById("search-input").value.toLowerCase().trim();
+
+    filteredData = [];
+
+    for (var i = 0; i < allData.length; i++) {
+      var c = allData[i];
+
+      // Tier filter -- include "--" tier if any tier is checked
+      if (tiers.length > 0 && c.tier !== "--" && tiers.indexOf(c.tier) === -1) continue;
+
+      // Region filter
+      if (regions.length > 0 && regions.indexOf(c.region) === -1) continue;
+
+      // Relevance filter -- include "--" if any relevance checked
+      if (relevances.length > 0 && c.relevance !== "--" && relevances.indexOf(c.relevance) === -1) continue;
+
+      // Platform filter
+      if (platformFilter && c.platform !== platformFilter) continue;
+
+      // Status filter
+      if (statusFilter && c.outreach_status !== statusFilter) continue;
+
+      // Search filter
+      if (searchVal) {
+        var hay = (c.name + " " + c.handle + " " + c.notes + " " + c.platform + " " + c.content_type).toLowerCase();
+        if (hay.indexOf(searchVal) === -1) continue;
+      }
+
+      filteredData.push(c);
+    }
+
+    // Sort
+    filteredData.sort(function(a, b) {
+      switch(sortVal) {
+        case "priority-desc": return b.priority - a.priority;
+        case "priority-asc": return a.priority - b.priority;
+        case "name-asc": return a.name.localeCompare(b.name);
+        case "name-desc": return b.name.localeCompare(a.name);
+        case "tier-asc": return tierValue(a.tier) - tierValue(b.tier);
+        case "followers-desc": return parseFollowers(b.followers) - parseFollowers(a.followers);
+        default: return b.priority - a.priority;
+      }
+    });
+
+    renderTable();
+    updateRowCount();
+  }
+
+  // -- Render table body --
+  function renderTable() {
+    var tbody = document.getElementById("crm-tbody");
+    var html = [];
+
+    for (var i = 0; i < filteredData.length; i++) {
+      var c = filteredData[i];
+      var isHot = c.priority >= 8;
+      var tierClass = "tier-" + (c.tier || "").replace("--", "none");
+      var relClass = "rel-" + (c.relevance || "").replace("--", "none");
+      var engClass = "eng-" + (c.engagement || "").replace("--", "none");
+      var pctFill = Math.round((c.priority / 10) * 100);
+
+      // Priority bar color
+      var barColor;
+      if (c.priority >= 8) barColor = "#FF2D78";
+      else if (c.priority >= 6) barColor = "#FFA500";
+      else if (c.priority >= 4) barColor = "#6495ED";
+      else barColor = "#555";
+
+      html.push('<tr class="' + (isHot ? "high-priority" : "") + '">');
+      html.push('<td>' + escHtml(c.num) + '</td>');
+      html.push('<td>' + escHtml(c.name) + '</td>');
+      html.push('<td>' + escHtml(c.region) + '</td>');
+      html.push('<td><span class="tier-badge ' + tierClass + '">' + escHtml(c.tier) + '</span></td>');
+      html.push('<td>' + escHtml(c.platform) + '</td>');
+      html.push('<td style="font-size:12px;color:#bbb;">' + escHtml(c.handle) + '</td>');
+      html.push('<td>' + escHtml(c.followers) + '</td>');
+      html.push('<td><span class="eng-badge ' + engClass + '">' + escHtml(c.engagement) + '</span></td>');
+      html.push('<td><span class="rel-badge ' + relClass + '">' + escHtml(c.relevance) + '</span></td>');
+      html.push('<td>');
+      html.push('<div class="priority-bar-cell">');
+      html.push('<span>' + c.priority + '</span>');
+      html.push('<div class="priority-bar"><div class="priority-bar-fill" style="width:' + pctFill + '%;background:' + barColor + ';"></div></div>');
+      html.push('</div>');
+      html.push('</td>');
+      html.push('<td>' + buildStatusSelect(c.num, c.outreach_status) + '</td>');
+      html.push('<td class="notes-cell" title="' + escAttr(c.notes) + '">' + escHtml(c.notes) + '</td>');
+      html.push('</tr>');
+    }
+
+    tbody.innerHTML = html.join("");
+
+    // Attach status change handlers
+    var selects = tbody.querySelectorAll(".status-select");
+    for (var j = 0; j < selects.length; j++) {
+      selects[j].addEventListener("change", onStatusChange);
+    }
+  }
+
+  function buildStatusSelect(num, current) {
+    var statuses = [
+      { val: "not_started", label: "Not Started" },
+      { val: "researched", label: "Researched" },
+      { val: "contacted", label: "Contacted" },
+      { val: "replied", label: "Replied" },
+      { val: "converted", label: "Converted" },
+      { val: "declined", label: "Declined" }
+    ];
+    var s = '<select class="status-select status-' + current + '" data-num="' + num + '">';
+    for (var i = 0; i < statuses.length; i++) {
+      var sel = statuses[i].val === current ? " selected" : "";
+      s += '<option value="' + statuses[i].val + '"' + sel + '>' + statuses[i].label + '</option>';
+    }
+    s += '</select>';
+    return s;
+  }
+
+  function onStatusChange(e) {
+    var sel = e.target;
+    var num = sel.getAttribute("data-num");
+    var val = sel.value;
+
+    // Update class for coloring
+    sel.className = "status-select status-" + val;
+
+    // Save to localStorage
+    statusOverrides[num] = val;
+    saveStatuses();
+
+    // Update allData
+    for (var i = 0; i < allData.length; i++) {
+      if (allData[i].num === num) {
+        allData[i].outreach_status = val;
+        break;
+      }
+    }
+  }
+
+  function updateRowCount() {
+    var el = document.getElementById("row-count");
+    el.innerHTML = "Showing <strong>" + filteredData.length + "</strong> of <strong>" + allData.length + "</strong> contacts";
+  }
+
+  // -- HTML escape --
+  function escHtml(s) {
+    if (!s || s === "--") return '<span style="color:#444;">--</span>';
+    var d = document.createElement("div");
+    d.appendChild(document.createTextNode(s));
+    return d.innerHTML;
+  }
+
+  function escAttr(s) {
+    if (!s) return "";
+    return s.replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  }
+
+  // -- Chart --
+  function buildChart() {
+    var counts = {};
+    for (var i = 0; i < allData.length; i++) {
+      var p = allData[i].platform || "--";
+      if (!counts[p]) counts[p] = 0;
+      counts[p]++;
+    }
+
+    // Sort by count desc
+    var entries = [];
+    for (var k in counts) {
+      entries.push({ label: k, count: counts[k] });
+    }
+    entries.sort(function(a, b) { return b.count - a.count; });
+
+    var max = entries.length > 0 ? entries[0].count : 1;
+    var container = document.getElementById("chart-rows");
+    var html = [];
+
+    for (var j = 0; j < entries.length; j++) {
+      var pct = Math.round((entries[j].count / max) * 100);
+      html.push('<div class="chart-row">');
+      html.push('<span class="chart-label">' + escHtml(entries[j].label) + '</span>');
+      html.push('<div class="chart-bar-wrap"><div class="chart-bar" style="width:' + pct + '%;"></div></div>');
+      html.push('<span class="chart-count">' + entries[j].count + '</span>');
+      html.push('</div>');
+    }
+
+    container.innerHTML = html.join("");
+  }
+
+  // -- CSV Export --
+  function exportCSV() {
+    var headers = ["#","Name","Region","Tier","Platform","Handle","Followers","Engagement","Relevance","Priority","Status","Notes","Content Type","Frequency","Contact Method","Updated"];
+    var rows = [headers.join(",")];
+
+    for (var i = 0; i < filteredData.length; i++) {
+      var c = filteredData[i];
+      var row = [
+        csvCell(c.num),
+        csvCell(c.name),
+        csvCell(c.region),
+        csvCell(c.tier),
+        csvCell(c.platform),
+        csvCell(c.handle),
+        csvCell(c.followers),
+        csvCell(c.engagement),
+        csvCell(c.relevance),
+        c.priority,
+        csvCell(c.outreach_status),
+        csvCell(c.notes),
+        csvCell(c.content_type),
+        csvCell(c.frequency),
+        csvCell(c.contact_method),
+        csvCell(c.updated)
+      ];
+      rows.push(row.join(","));
+    }
+
+    var blob = new Blob([rows.join("\n")], { type: "text/csv;charset=utf-8;" });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement("a");
+    a.href = url;
+    a.download = "cexai_crm_export_" + new Date().toISOString().slice(0, 10) + ".csv";
+    a.click();
+    URL.revokeObjectURL(url);
+  }
+
+  function csvCell(val) {
+    if (val == null || val === "") return '""';
+    var s = String(val);
+    if (s.indexOf(",") !== -1 || s.indexOf('"') !== -1 || s.indexOf("\n") !== -1) {
+      return '"' + s.replace(/"/g, '""') + '"';
+    }
+    return s;
+  }
+
+  // -- Event bindings --
+  function bindFilters() {
+    var checkboxes = document.querySelectorAll('.filter-bar input[type="checkbox"]');
+    for (var i = 0; i < checkboxes.length; i++) {
+      checkboxes[i].addEventListener("change", applyFilters);
+    }
+
+    document.getElementById("filter-platform").addEventListener("change", applyFilters);
+    document.getElementById("filter-status").addEventListener("change", applyFilters);
+    document.getElementById("filter-sort").addEventListener("change", applyFilters);
+
+    var searchInput = document.getElementById("search-input");
+    var searchTimeout = null;
+    searchInput.addEventListener("input", function() {
+      clearTimeout(searchTimeout);
+      searchTimeout = setTimeout(applyFilters, 150);
+    });
+
+    document.getElementById("btn-export").addEventListener("click", exportCSV);
+
+    document.getElementById("btn-reset-filters").addEventListener("click", function() {
+      // Reset checkboxes
+      var cbs = document.querySelectorAll('.filter-bar input[type="checkbox"]');
+      for (var i = 0; i < cbs.length; i++) { cbs[i].checked = true; }
+      document.getElementById("filter-platform").value = "";
+      document.getElementById("filter-status").value = "";
+      document.getElementById("filter-sort").value = "priority-desc";
+      document.getElementById("search-input").value = "";
+      applyFilters();
+    });
+  }
+
+  // -- Boot --
+  bindFilters();
+  init();
+
+})();
+</script>
+</body>
+</html>
