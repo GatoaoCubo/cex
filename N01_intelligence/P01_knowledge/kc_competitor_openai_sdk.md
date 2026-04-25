@@ -8,6 +8,12 @@ version: 1.0.0
 created: 2026-04-24
 quality: null
 tags: [seed-intel, competitor, openai, agents-sdk, swarm, handoffs, multi-agent]
+when_to_use: "When evaluating platform-owner agent frameworks; when positioning CEX infrastructure depth against SDK minimalism; when analyzing harness/sandbox architecture patterns; when user asks about OpenAI's agent development tools"
+axioms:
+  - "ALWAYS benchmark the 3-primitive model (Agents + Handoffs + Guardrails) against CEX's 300-kind taxonomy -- minimalism vs. infrastructure is the defining axis"
+  - "ALWAYS note the harness system (April 2026) as architectural convergence toward CEX's dispatch model -- long-running agents with sandbox + resume + approval is what dispatch.sh does"
+  - "NEVER ignore the distribution advantage -- OpenAI SDK is the default choice because it ships with the largest API provider; CEX must compete on governance depth, not convenience"
+  - "NEVER assume OpenAI-first bias is permanent -- LiteLLM/any-llm support (100+ models) signals intentional neutralization of the lock-in criticism"
 tldr: "OpenAI Agents SDK is the gorilla in the room -- official, provider-backed, 25K stars, free MIT license, native MCP, but intentionally minimal with no typed knowledge system, no quality gates, and OpenAI-first model bias."
 ---
 

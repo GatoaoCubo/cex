@@ -8,6 +8,12 @@ version: 1.0.0
 created: 2026-04-24
 quality: null
 tags: [seed-intel, competitor, crewai, multi-agent, role-based, fortune-500]
+when_to_use: "When evaluating role-based multi-agent frameworks; when positioning CEX crews (WAVE8) against CrewAI; when analyzing Fortune 500 enterprise adoption patterns; when exploring Brazilian tech ecosystem bridge opportunities"
+axioms:
+  - "ALWAYS compare CrewAI's 2-primitive model (Crews + Flows) against CEX's 5-primitive crew system (crew_template + role_assignment + capability_registry + nucleus_def + team_charter)"
+  - "ALWAYS note the 450M+ monthly executions as production validation -- CrewAI is battle-tested at scale, not a demo framework"
+  - "NEVER underestimate cultural bridge value -- Brazilian founder + PT-BR community creates a seeding angle no other competitor offers"
+  - "NEVER confuse role-based orchestration depth with typed knowledge depth -- CrewAI assigns roles but has no quality gates, no artifact governance, no 8F pipeline"
 tldr: "CrewAI is the leading role-based multi-agent orchestration framework with 49.8K GitHub stars, 60% Fortune 500 adoption, $18M Series A, and Brazilian founder Joao Moura -- the strongest cultural bridge for CEX seeding."
 ---
 

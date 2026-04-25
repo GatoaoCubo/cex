@@ -56,6 +56,42 @@ The `Analytical Envy` lens means every new source triggers an envy-fueled questi
 | `stale_fact_detected` | last_verified > 90 days | "Fact '{{fact}}' unverified since {{date}}. Refresh?" |
 | `gap_vs_competitor` | Competitor KC has data N01 lacks | "Competitor intel gap: {{gap}}. Harvest and persist?" |
 
+## Priority Escalation Rules
+
+Not all nudges are equal. N01 ranks nudge urgency by competitive impact:
+
+| Priority | Flavor | Escalation Action | SLA |
+|----------|--------|-------------------|-----|
+| P0 (critical) | `gap_vs_competitor` where competitor = Hermes or OpenClaw | Immediate nudge + auto-create research task | Same session |
+| P1 (high) | `stale_fact_detected` on competitor KCs with health = HYPER-ACTIVE | Nudge + flag for next /evolve sweep | Within 48h |
+| P2 (normal) | `claim_without_citation` in any N01 artifact | Standard nudge cycle | Within 1 week |
+| P3 (low) | `new_source_detected` for DORMANT competitors (AutoGen, MetaGPT) | Batch into quarterly supplement update | Next quarter |
+
+## Integration with Competitive Intelligence Workflow
+
+```
+Nudge fires -> N01 evaluates priority
+  |
+  P0: gap_vs_competitor (active competitor)
+  |   -> auto-read competitor KC
+  |   -> compare with live supplement
+  |   -> if gap confirmed: create kc_update task
+  |   -> if gap false positive: log to nudge_false_positive_rate
+  |
+  P1-P3: standard curation
+      -> queue in curation_backlog
+      -> process during next research session
+```
+
+## Anti-Patterns (Nudge Fatigue)
+
+| Anti-Pattern | Symptom | Mitigation |
+|-------------|---------|-----------|
+| Nudge storm | >5 nudges in 3 turns, user ignores all | Batch related nudges into single summary |
+| False positive spiral | >40% of nudges dismissed as irrelevant | Tighten threshold by +2 per dismissal; reset after 10 sessions |
+| Stale-fact churn | Same fact re-nudged after user confirmed it | Mark fact as `user_verified` with 180-day TTL |
+| Competitor fixation | All nudges are `gap_vs_competitor` | Cap competitor nudges at 2/session; interleave with source quality |
+
 ## Cadence Overrides
 
 | Parameter | N00 Default | N01 Override | Reason |
@@ -63,6 +99,7 @@ The `Analytical Envy` lens means every new source triggers an envy-fueled questi
 | `min_interval_turns` | 5 | 3 | Research sessions are shorter, denser |
 | `max_per_session` | 3 | 5 | More nudge types warrant higher cap |
 | `threshold` | 10 | 7 | N01 fires earlier -- envy is impatient |
+| `false_positive_cap` | N/A | 0.40 | Above 40%, auto-tighten threshold |
 
 ## Links
 

@@ -8,6 +8,12 @@ version: 1.0.0
 created: 2026-04-24
 quality: null
 tags: [seed-intel, competitor, pydantic-ai, type-safe, samuel-colvin, typed-knowledge]
+when_to_use: "When evaluating typed AI frameworks; when positioning CEX's artifact-level typing against Pydantic AI's I/O-level typing; when analyzing validation-layer infrastructure as competitive moat; when user asks about type-safe agent development"
+axioms:
+  - "ALWAYS distinguish scope: Pydantic AI types the runtime exchange (function params, LLM outputs); CEX types the knowledge artifact (kind, pillar, schema, quality gate, builder ISOs) -- same philosophy, different layers"
+  - "ALWAYS note 106.9M monthly downloads of pydantic-ai-slim -- this is the developer infrastructure layer beneath OpenAI, Anthropic, LangChain, and LlamaIndex simultaneously"
+  - "NEVER position against Pydantic AI as a competitor -- position as a complementary layer; CEX could USE Pydantic for runtime validation while providing artifact governance above it"
+  - "NEVER underestimate the Logfire observability play (+251% growth) -- Pydantic is building a full-stack typed AI platform: validation + observability + agents"
 tldr: "Pydantic AI is the closest philosophical competitor to CEX -- both bet on typed infrastructure over conversational agents -- but Pydantic AI types LLM I/O while CEX types knowledge artifacts across 300 kinds and 12 pillars."
 ---
 

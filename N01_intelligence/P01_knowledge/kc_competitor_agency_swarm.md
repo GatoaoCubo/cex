@@ -8,6 +8,12 @@ version: 1.0.0
 created: 2026-04-24
 quality: null
 tags: [seed-intel, competitor, agency-swarm, vrsen, community-driven, lightweight]
+when_to_use: "When evaluating practitioner-built agent frameworks; when analyzing OSS tools built from dogfooding vs. academic research; when positioning against lean multi-agent tools on the OpenAI ecosystem; when studying extension-of-SDK strategies"
+axioms:
+  - "ALWAYS note the dogfooding signal -- VRSEN builds and uses Agency Swarm in production daily; this feedback loop produces different quality than academic frameworks (compare: MetaGPT's DORMANT status)"
+  - "ALWAYS compare the extension-of-SDK strategy (Agency Swarm leverages OpenAI SDK updates) against CEX's standalone architecture -- parasitic vs. sovereign positioning"
+  - "NEVER dismiss 4.2K stars as irrelevant -- Agency Swarm represents the practitioner-tier competitor that large frameworks consistently underestimate"
+  - "NEVER ignore the zero-abstraction-overhead positioning -- radical simplicity is a valid architectural choice that CEX's 300-kind complexity must justify through output quality"
 tldr: "Agency Swarm is a lean, community-grown multi-agent framework built on OpenAI's Agents SDK by VRSEN -- disruptive not through technical innovation but through radical simplicity and a creator who ships his own dogfood."
 ---
 

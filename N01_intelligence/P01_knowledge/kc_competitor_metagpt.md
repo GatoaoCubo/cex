@@ -8,6 +8,12 @@ version: 1.0.0
 created: 2026-04-24
 quality: null
 tags: [seed-intel, competitor, metagpt, multi-role, software-company, deepwisdom, china]
+when_to_use: "When evaluating SOP-driven multi-agent architectures; when analyzing demo-to-production gaps in agent frameworks; when studying Chinese AI ecosystem competitors; when positioning CEX's flexible nuclei against fixed corporate-role simulations"
+axioms:
+  - "ALWAYS compare MetaGPT's fixed company roles (PM/Architect/Engineer/QA) against CEX's sin-driven nuclei (N01-N07) -- fixed roles optimize for software output; sin-driven nuclei optimize for any domain"
+  - "ALWAYS note the RMB 220M funding + MGX commercial pivot as evidence that pure-research frameworks need commercial wrappers to survive"
+  - "NEVER treat 67.4K stars as production signal -- MetaGPT is DORMANT (0 commits/30d, last release March 2025); the community moved to MGX"
+  - "NEVER ignore the SOP pattern itself -- MetaGPT proved that structured role-to-role handoffs produce better output than free-form agent chat, validating CEX's 8F pipeline philosophy"
 tldr: "MetaGPT is a 67.4K-star Chinese-built framework simulating a software company with PM/architect/engineer roles -- impressive for one-shot demos but less customizable for production, now pivoting to MGX commercial product with RMB 220M funding."
 ---
 

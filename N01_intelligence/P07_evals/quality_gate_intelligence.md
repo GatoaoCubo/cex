@@ -10,7 +10,7 @@ updated: "2026-03-31"
 author: "N01_rebuild_8F"
 quality: 9.1
 tags: [quality, validation, gate, n01, research, intelligence]
-tldr: "Defines the rigorous, two-stage (pass/fail and scored) quality gates for all analytical outputs produced by the N01 Research & Intelligence Nucleus."
+tldr: "Two-stage intelligence gate: Stage 1 pass/fail (>=3 sources cited, no uncited claims, freshness <90d) then Stage 2 scored (methodology rigor 25%, source diversity 25%, insight density 25%, actionability 25%) with pass threshold 8.0 and target 9.0+"
 target_artifact_type: "IntelligenceBrief"
 pass_threshold: 8.0
 density_score: 0.94

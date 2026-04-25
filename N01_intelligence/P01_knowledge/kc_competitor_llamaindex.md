@@ -8,6 +8,12 @@ version: 1.0.0
 created: 2026-04-24
 quality: null
 tags: [seed-intel, competitor, llamaindex, rag, document-intelligence, llamacloud, jerry-liu]
+when_to_use: "When evaluating RAG infrastructure competitors; when positioning CEX P01 knowledge pillar against LlamaIndex; when analyzing document-to-agent platform pivots; when user needs RAG integration guidance"
+axioms:
+  - "ALWAYS compare LlamaIndex's index-everything approach against CEX's type-everything approach -- both start from knowledge infrastructure, but CEX governs what LlamaIndex merely indexes"
+  - "ALWAYS note the 300+ integration packages as LlamaIndex's true moat -- breadth of data connectors, not depth of governance"
+  - "NEVER dismiss the Document Agent Platform pivot -- LlamaCloud + agent workflows puts LlamaIndex on a convergent path with CEX's builder architecture"
+  - "NEVER conflate RAG quality with knowledge quality -- LlamaIndex retrieves documents without quality scoring; CEX scores every artifact against a 5D rubric"
 tldr: "LlamaIndex is the RAG-first framework with 48.9K GitHub stars, $27.5M funding, and 25M+ monthly downloads -- pivoting from data indexing to document-centric AI agents via LlamaCloud, with native MCP support but limited agentic orchestration depth."
 ---
 

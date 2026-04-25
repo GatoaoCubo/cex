@@ -8,7 +8,13 @@ version: 1.0.0
 created: 2026-04-24
 quality: null
 tags: [seed-intel, positioning, strategy]
-tldr: "Gap analysis identifying CEX's unique positioning in the AI agent framework landscape"
+when_to_use: "When preparing investor pitches, README positioning, or conference talks; when user asks 'what makes CEX different'; when comparing against any specific competitor framework; when drafting marketing copy that needs technical backing"
+axioms:
+  - "ALWAYS position CEX as a new category ('Typed Knowledge System') rather than a better version of an existing category -- category creation beats category competition"
+  - "ALWAYS back positioning claims with quantitative data from competitor KCs: kind count (300 vs. CrewAI's 2 primitives), governance depth (8F vs. no pipeline), provider coverage (4 runtimes vs. single-provider lock-in)"
+  - "NEVER claim superiority in areas where competitors genuinely lead -- OpenClaw has 335K stars, CrewAI has 60% Fortune 500, LangChain has 1B+ downloads; CEX's advantage is architectural depth, not adoption"
+  - "NEVER use the word 'agent' as primary identity -- CEX is an AI brain, not an agent; the positioning document must reinforce this distinction"
+tldr: "CEX occupies no existing market category (not framework, not platform, not gateway, not toolkit) -- it defines 'Typed Knowledge System for LLM Agents' with 300 kinds, 12 pillars, and 8F pipeline as differentiators against 10 tracked competitors across 4 established categories"
 ---
 
 # CEX Positioning Analysis: Gap Map and Strategic Recommendations

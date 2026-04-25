@@ -1,5 +1,4 @@
 ---
-quality: 7.6
 quality: 7.3
 id: handoff_n01
 kind: handoff

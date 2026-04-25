@@ -1,5 +1,4 @@
 ---
-quality: 8.3
 quality: 8.0
 id: extraction_hnsw_memory
 kind: knowledge_card

@@ -61,10 +61,34 @@ raises confidence requirements: every derived fact needs a provenance chain.
 
 All base collections from N00 tpl apply unchanged (preferences, working_style, context_history).
 
+## Source Reliability Scoring (N01 Domain-Specific)
+
+N01 assesses every source a peer cites on 4 dimensions before trusting it:
+
+| Dimension | Weight | Scoring Criteria |
+|-----------|--------|-----------------|
+| Recency | 0.30 | <30d = 1.0, 30-90d = 0.8, 90-180d = 0.6, 180-365d = 0.3, >365d = 0.1 |
+| Verifiability | 0.25 | Primary (API/scrape) = 1.0, Official docs = 0.8, Blog/tweet = 0.5, Hearsay = 0.1 |
+| Cross-confirmation | 0.25 | 3+ independent sources = 1.0, 2 sources = 0.7, single source = 0.3 |
+| Domain authority | 0.20 | Core maintainer = 1.0, Contributor = 0.7, Industry analyst = 0.5, General media = 0.2 |
+
+Composite reliability = weighted sum. Threshold for citation in KC: >= 0.55.
+
+## Anti-Patterns (N01 User Modeling)
+
+| Anti-Pattern | Why It Fails | Correction |
+|-------------|-------------|-----------|
+| Treating user claims as facts | Users report aspirational expertise, not verified competence | Cross-check against actual queries and tool usage patterns |
+| Static expertise map | Domain competence shifts session-to-session | Decay factor: 0.95 per week without domain interaction |
+| Ignoring blind spots | Peer may cite sources outside their competence | Flag when citation_depth_preference > domain_expertise_map score |
+| Over-modeling from single session | Small sample size inflates confidence | Require >= 3 sessions before setting any score above 0.7 |
+
 ## Dialectic Loop (N01 flavor)
 
 - `post_response_derive`: also extracts source mentions and logs to `sources` collection
 - `compaction_cadence_turns`: 30 (tighter than N00 default 50 -- research sessions are denser)
+- `expertise_decay_window`: 7 days (multiply domain_expertise_map values by 0.95 per week of inactivity)
+- `blind_spot_detection`: if peer cites a source with reliability < 0.4 in a domain where their expertise > 0.6, flag as potential blind spot
 
 ## Links
 

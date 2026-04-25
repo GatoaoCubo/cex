@@ -1,5 +1,4 @@
 ---
-quality: 8.2
 quality: 7.7
 id: kc_hermes_agent_assimilation
 kind: knowledge_card
@@ -11,6 +10,13 @@ type: framework_analysis
 source: NousResearch/hermes-agent (github, MIT, released 2026-02-25, 95.6K stars at 7 weeks)
 version: 1.0.0
 tags: [hermes, nous_research, agent_framework, gap_analysis, assimilation_spec]
+tldr: "Complete gap analysis of Hermes Agent's 12 core primitives against CEX's 300-kind taxonomy, identifying 9 novel kinds (user_model, messaging_gateway, personality, context_file, pipeline_template, revision_loop_policy, terminal_backend, curation_nudge, hibernation_policy) and 6 partial-coverage enrichments -- all successfully assimilated in W1-W5 (2026-04-18)"
+when_to_use: "When planning future framework assimilations; when evaluating which Hermes features to port deeper; when checking assimilation debt (9 kinds absorbed, upstream divergence monitoring needed)"
+axioms:
+  - "ALWAYS compare primitives 1:1 before declaring a gap -- 8 of Hermes' 12 primitives already had CEX equivalents; only 4 were genuinely novel"
+  - "ALWAYS track assimilation debt -- absorbed kinds must be monitored for upstream divergence as Hermes evolves past v0.11.0"
+  - "NEVER assimilate without typing -- every Hermes concept must map to a CEX kind with pillar, nucleus, and builder before it enters the taxonomy"
+  - "NEVER port skills without governance -- Hermes' 118 untyped skills vs. CEX's 302 typed builders is an architecture decision, not a coverage gap"
 updated: 2026-04-18
 related:
   - p01_kc_agent

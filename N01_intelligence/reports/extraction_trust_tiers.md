@@ -1,5 +1,4 @@
 ---
-quality: 8.3
 quality: 8.0
 id: extraction_trust_tiers
 kind: knowledge_card

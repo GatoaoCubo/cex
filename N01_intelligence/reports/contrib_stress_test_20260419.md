@@ -1,5 +1,4 @@
 ---
-quality: 8.3
 quality: 8.2
 id: contrib_stress_test_20260419
 kind: benchmark

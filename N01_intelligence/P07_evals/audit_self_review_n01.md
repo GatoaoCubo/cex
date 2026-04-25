@@ -1,5 +1,4 @@
 ---
-quality: 8.2
 quality: 7.8
 id: audit_self_review_n01
 kind: audit_report

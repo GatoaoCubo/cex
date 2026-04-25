@@ -1,5 +1,4 @@
 ---
-quality: 8.3
 quality: 7.6
 id: kc_kind_gap_analysis
 kind: knowledge_card

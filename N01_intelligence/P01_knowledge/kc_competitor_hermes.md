@@ -8,6 +8,12 @@ version: 1.0.0
 created: 2026-04-24
 quality: null
 tags: [seed-intel, competitor, hermes, nous-research, gepa, self-improving, mcp]
+when_to_use: "When evaluating self-improvement loop architectures; when comparing memory systems (Hermes 3-layer vs. CEX P10); when analyzing MCP bidirectional support; when user asks about fastest-growing agent frameworks of 2026"
+axioms:
+  - "ALWAYS benchmark CEX's /evolve loop against Hermes GEPA (ICLR 2026 Oral) -- GEPA is the only peer-reviewed self-improvement mechanism in production"
+  - "ALWAYS compare 3-layer memory (Hermes: working/episodic/semantic) vs. CEX P10 (6 memory kinds: entity, episodic, procedural, prospective, working, memory_summary)"
+  - "NEVER dismiss 115K stars in 60 days as hype -- Hermes has ICLR validation, full MCP bidirectional, and a soul.md personality layer that maps to CEX's nucleus_def"
+  - "NEVER ignore assimilation debt -- 9 Hermes-origin kinds were absorbed into CEX (2026-04-18); monitor for upstream divergence"
 tldr: "Hermes Agent by Nous Research (115K GitHub stars verified April 24, 2026; fastest-growing framework of 2026) is the only agent with a production-ready self-improvement loop (GEPA, ICLR 2026 Oral), full MCP bidirectional support, and a three-layer memory architecture -- making it the most technically sophisticated direct threat to CEX's compounding intelligence positioning."
 ---
 

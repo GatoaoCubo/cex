@@ -1,5 +1,4 @@
 ---
-quality: 8.2
 quality: 7.7
 id: ontology_cex_vocabulary
 kind: knowledge_card

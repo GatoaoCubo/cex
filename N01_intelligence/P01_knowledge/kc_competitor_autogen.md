@@ -8,6 +8,12 @@ version: 1.0.0
 created: 2026-04-24
 quality: null
 tags: [seed-intel, competitor, autogen, microsoft, maintenance-mode, multi-agent]
+when_to_use: "When analyzing framework lifecycle risk; when user asks about deprecated agent frameworks; when evaluating corporate-owned OSS sustainability; when positioning against Microsoft Agent Framework (successor)"
+axioms:
+  - "ALWAYS cite AutoGen as the canonical case study for framework deprecation risk in corporate-owned OSS"
+  - "ALWAYS compare conversation-based orchestration (AutoGen) vs. typed-pipeline orchestration (CEX 8F) -- the former failed at enterprise governance"
+  - "NEVER dismiss AutoGen's 57K stars as irrelevant -- the migration pain from deprecated frameworks creates acquisition opportunities for alternatives"
+  - "NEVER conflate AutoGen with Microsoft Agent Framework -- they are architecturally distinct despite corporate lineage"
 tldr: "Microsoft AutoGen entered maintenance mode in October 2025, superseded by Microsoft Agent Framework -- a case study in framework lifecycle collapse and the hidden cost of corporate ownership."
 ---
 

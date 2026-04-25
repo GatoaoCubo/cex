@@ -11,7 +11,7 @@ author: "N01_rebuild_8F"
 domain: "intelligence, research, analysis, academic, financial"
 quality: 9.1
 tags: [rag, source, n01, memory, knowledge, vector, ingestion]
-tldr: "Defines the primary academic and technical data sources for N01's RAG knowledge base, including arXiv, JSTOR, and SEC EDGAR."
+tldr: "3 primary data feeds: arXiv CS.AI/CS.MA (daily, 100 papers/week), JSTOR full-text (weekly, social science cross-reference), SEC EDGAR 10-K/10-Q (quarterly, competitor financials) -- each with embedding config, chunk overlap, and dedup strategy"
 density_score: 1.0
 related:
   - n01_rs_intelligence_sources

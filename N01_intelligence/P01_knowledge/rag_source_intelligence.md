@@ -10,7 +10,7 @@ updated: "2026-03-31"
 author: "N01_rebuild_8F"
 quality: 9.1
 tags: [rag, source, knowledge, n01, research, ingestion]
-tldr: "Defines the tiered data sources, ingestion policies, and update frequencies for the N01 Research Nucleus RAG knowledge base."
+tldr: "5-tier RAG source config: T1 (arXiv/JSTOR/SEC EDGAR, daily), T2 (GitHub trending, weekly), T3 (industry blogs, bi-weekly), T4 (social signals, on-demand), T5 (user-uploaded, immediate) -- each tier has ingestion cadence, chunk strategy, and staleness thresholds calibrated for competitive intelligence freshness"
 density_score: 0.97
 related:
   - n01_rs_academic_feeds

@@ -8,6 +8,12 @@ version: 1.0.0
 created: 2026-04-24
 quality: null
 tags: [seed-intel, competitor, langchain, langgraph, langsmith, agent-engineering]
+when_to_use: "When evaluating LangChain as competitor or integration target; when positioning CEX against incumbent agent platforms; when user mentions LangGraph, LangSmith, or graph-based orchestration"
+axioms:
+  - "ALWAYS benchmark LangChain's ecosystem coupling (LangSmith lock-in) against CEX's provider-agnostic architecture"
+  - "ALWAYS compare graph-paradigm complexity (LangGraph nodes/edges) vs. CEX 8F sequential pipeline"
+  - "NEVER treat 124K stars as proof of production superiority -- downloads (1B+) and Fortune 500 penetration (35%) are the real moat"
+  - "NEVER ignore LangChain's MCP/A2A gap -- this is CEX's strongest differentiation vector until they close it"
 tldr: "LangChain (124K stars, $1.25B valuation) is the incumbent agent engineering platform with 1B+ downloads and 35% Fortune 500 penetration, but its tight ecosystem coupling, graph-paradigm complexity, and no native MCP/A2A support create exploitable gaps for typed-knowledge alternatives like CEX."
 ---
 

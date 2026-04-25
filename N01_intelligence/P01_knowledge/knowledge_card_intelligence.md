@@ -11,7 +11,7 @@ author: "N01_rebuild_8F"
 domain: "research, analysis, intelligence, synthesis, competitors, papers, benchmarks"
 quality: 9.0
 tags: [knowledge, n01, research, synthesis, intelligence, analysis]
-tldr: "Defines the core knowledge base for the N01 Research Nucleus, detailing its expert methodologies in research, analysis frameworks, source evaluation, and intelligence synthesis."
+tldr: "N01's methodological backbone: 4 research frameworks (systematic review, competitive benchmarking, trend detection, source triangulation), 3 synthesis modes (comparative, causal, predictive), and 5 source credibility tiers -- every N01 artifact draws from this methodology layer"
 when_to_use: "As a foundational knowledge layer for any task requiring deep research, competitive analysis, literature review, or strategic foresight."
 keywords: [systematic review, competitor analysis, trend analysis, data synthesis, source credibility]
 axioms:

@@ -8,6 +8,12 @@ version: 1.0.0
 created: 2026-04-24
 quality: null
 tags: [seed-intel, competitor, live-data, github, firecrawl, supplement, 2026-q2]
+when_to_use: "When any competitor KC contradicts this supplement (this wins -- fresher data); when preparing competitive positioning materials; when verifying framework health status before recommending integrations; when user asks for current market landscape"
+axioms:
+  - "ALWAYS treat this supplement as authoritative over individual competitor KCs when data conflicts -- scrape timestamp (2026-04-24) is the freshness proof"
+  - "ALWAYS verify against at least 2 sources before accepting any metric -- Analytical Envy demands competitive context, not single-source trust"
+  - "NEVER cite DORMANT frameworks (MetaGPT, AutoGen) as active competitors without the dormancy qualifier -- misleading positioning damages N01 credibility"
+  - "NEVER extrapolate 30-day commit velocity to long-term health -- OpenClaw's 13K commits/30d could be pre-launch sprint, not sustainable pace"
 tldr: "Live-verified competitive intelligence supplement (April 24, 2026) via GitHub API + Firecrawl deep scrape: 10 frameworks tracked, 363K-4K star range, 3 dormant projects identified, 2 major security events documented, and market valued at $7.84B growing 46% CAGR to $52.6B by 2030."
 data_sources: [gh-cli-api, firecrawl-search, firecrawl-scrape, sangfor-blog, medium, alicelabs, openai-blog, substack]
 scrape_timestamp: "2026-04-24T21:30:00Z"
