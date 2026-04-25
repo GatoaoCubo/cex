@@ -12,6 +12,8 @@ tags:
   - training
   - data-centric
   - P01
+tldr: "Pipeline config for generating artificial training data -- seeds, augmentation, filtering, dedup"
+when_to_use: "When manufacturing training examples at scale to overcome sparse or biased real-world data"
 related:
   - kc_dataset_card
   - kc_eval_dataset

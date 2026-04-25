@@ -19,6 +19,8 @@ related:
   - kc_tokenizer_config
   - kc_prompt_template
   - kc_rate_limit_config
+tldr: "Generation-time sampling parameters like temperature, top_p, and stop sequences for LLM output"
+when_to_use: "When tuning how a language model samples tokens at inference time for a specific use case"
 ---
 
 # Inference Config

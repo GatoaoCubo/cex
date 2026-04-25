@@ -6,6 +6,8 @@ title: Model Registry
 version: 1.0.0
 quality: 8.7
 pillar: P01
+tldr: "Centralized catalog for ML model versioning, metadata, performance metrics, and deployment lineage"
+when_to_use: "When you need version control, audit trails, and reproducibility tracking for machine learning models"
 density_score: 0.98
 related:
   - model-registry-builder

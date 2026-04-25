@@ -8,6 +8,8 @@ pillar: P01
 title: "Knowledge Card -- OpenAPI Spec"
 version: 1.0.0
 tags: [knowledge, openapi_spec, oas3, api-contract, openapi-initiative]
+tldr: "Machine-readable REST API contract following OAS 3.x: paths, schemas, security, and server configs"
+when_to_use: "When defining a REST API surface for code generation, mocking, gateway routing, or SDK generation"
 related:
   - bld_schema_api_reference
   - bld_schema_client

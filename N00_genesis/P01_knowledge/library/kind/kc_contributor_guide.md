@@ -6,6 +6,8 @@ title: Contributor Guide
 version: 1.0.0
 quality: 8.6
 pillar: P01
+tldr: "Standardized onboarding doc for open-source contributors covering setup, PR flow, and CLA"
+when_to_use: "When an open-source project needs structured contributor documentation and PR guidelines"
 density_score: 0.87
 related:
   - bld_examples_contributor_guide

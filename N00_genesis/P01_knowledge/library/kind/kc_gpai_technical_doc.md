@@ -11,6 +11,8 @@ updated: 2026-04-15
 author: n05_selfheal
 quality: 9.1
 tags: []
+tldr: "EU AI Act compliance documentation for general-purpose AI covering transparency and risk"
+when_to_use: "When producing technical documentation required by GPAI regulatory frameworks like the EU AI Act"
 density_score: 1.0
 related:
   - bld_knowledge_card_self_improvement_loop

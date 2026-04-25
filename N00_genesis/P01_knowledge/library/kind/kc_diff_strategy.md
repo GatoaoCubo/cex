@@ -16,6 +16,8 @@ related:
   - bld_config_knowledge_index
   - bld_instruction_diff_strategy
   - bld_examples_edit_format
+tldr: "Defines how two artifact versions are compared, merged, and conflict-resolved"
+when_to_use: "When you need systematic change application, version diffing, or merge conflict resolution"
 density_score: 0.90
 updated: "2026-04-22"
 ---

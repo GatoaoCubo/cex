@@ -9,6 +9,8 @@ version: 1.0.0
 pillar: P01
 language: English
 tags: [context_file, p03, hermes_origin, workspace_instructions, injection, claude_md, agents_md]
+tldr: "Project-scoped static instruction file auto-injected into agent context at a configurable injection point"
+when_to_use: "When a workspace, nucleus, or session needs standing behavioral rules loaded into every agent turn"
 density_score: 0.95
 related:
   - p01_kc_dispatch_rule

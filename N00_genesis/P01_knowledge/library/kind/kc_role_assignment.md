@@ -6,6 +6,8 @@ title: Role Assignment
 version: 1.0.0
 quality: 8.7
 pillar: P01
+tldr: "Agent-to-role binding with responsibilities, delegation rules, and backstory for crew composition"
+when_to_use: "When assigning specific agents to named roles within a multi-agent crew or team"
 density_score: 0.96
 related:
   - role-assignment-builder

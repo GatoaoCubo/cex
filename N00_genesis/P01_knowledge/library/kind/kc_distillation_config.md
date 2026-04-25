@@ -19,6 +19,8 @@ related:
   - kc_inference_config
   - kc_eval_metric
   - kc_curriculum_config
+tldr: "Teacher-student knowledge transfer pipeline with temperature scaling and layer matching"
+when_to_use: "When compressing a large model's learned behavior into a smaller, efficient student model"
 ---
 
 # Distillation Config

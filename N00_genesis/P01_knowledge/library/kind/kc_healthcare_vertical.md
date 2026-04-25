@@ -6,6 +6,8 @@ title: Healthcare Vertical Knowledge Card
 version: 1.0.0
 quality: 8.8
 pillar: P01
+tldr: "Industry vertical for HIPAA-compliant healthcare systems with HL7/FHIR and PHI handling"
+when_to_use: "When building AI agents or tools that operate within healthcare regulatory and interoperability standards"
 density_score: 0.8
 related:
   - healthcare-vertical-builder

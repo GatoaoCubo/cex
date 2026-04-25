@@ -7,6 +7,8 @@ version: 1.0.0
 quality: 9.0
 pillar: P01
 language: English
+tldr: "Runtime environment variables, API keys, provider URLs, and secrets management for LLM systems"
+when_to_use: "When configuring API keys, provider endpoints, feature flags, or secrets for an LLM deployment"
 density_score: 0.92
 related:
   - p01_kc_secret_config

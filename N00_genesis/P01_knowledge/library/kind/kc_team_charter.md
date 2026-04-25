@@ -6,6 +6,8 @@ title: Team Charter
 version: 1.0.0
 quality: 8.9
 pillar: P01
+tldr: "Mission contract defining purpose, deliverables, budget, deadline, and quality gate for a crew"
+when_to_use: "When instantiating a composable crew and need to bind mission scope to a crew template"
 density_score: 1.0
 related:
   - p03_sp_team_charter_builder

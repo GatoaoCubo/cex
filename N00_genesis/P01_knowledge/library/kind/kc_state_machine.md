@@ -8,6 +8,8 @@ pillar: P01
 title: "Knowledge Card -- State Machine"
 version: 1.0.0
 tags: [knowledge, state_machine, fsm, xstate, uml-statechart, entity-lifecycle]
+tldr: "Formal FSM definition with states, events, guards, and actions for governing entity lifecycle transitions"
+when_to_use: "When an entity has multiple lifecycle states with event-driven transitions and guard conditions"
 related:
   - bld_schema_lifecycle_rule
   - bld_schema_runtime_state

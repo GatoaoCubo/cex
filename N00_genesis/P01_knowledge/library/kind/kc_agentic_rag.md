@@ -6,6 +6,8 @@ title: Agentic RAG Pattern
 version: 1.0.0
 quality: 8.8
 pillar: P01
+tldr: "RAG pattern where an agent orchestrates retrieval, context assembly, and generation in a feedback loop"
+when_to_use: "When building retrieval-augmented systems that need agent-driven query routing and iterative refinement"
 density_score: 0.98
 related:
   - kc_model_context_protocol

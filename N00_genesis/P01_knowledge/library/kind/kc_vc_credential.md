@@ -6,6 +6,8 @@ title: W3C Verifiable Credential 2.0 for AI Agents
 version: 1.0.0
 quality: 8.5
 pillar: P01
+tldr: "W3C Verifiable Credential 2.0 for AI agent identity, provenance, and cross-domain trust"
+when_to_use: "When establishing cryptographic proof of agent identity or artifact provenance"
 density_score: 0.97
 related:
   - bld_knowledge_card_vc_credential

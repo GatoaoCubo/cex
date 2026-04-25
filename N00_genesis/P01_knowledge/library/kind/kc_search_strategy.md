@@ -6,6 +6,8 @@ title: Search Strategy
 version: 1.0.0
 quality: 8.7
 pillar: P01
+tldr: "Inference-time search resource allocation with depth control, priority queues, and early stopping"
+when_to_use: "When configuring how compute budget is allocated across search branches during inference"
 density_score: 1.0
 related:
   - search-strategy-builder

@@ -6,6 +6,8 @@ title: Product Tour Guide
 version: 1.0.0
 quality: 8.7
 pillar: P01
+tldr: "Guided in-app walkthrough with tooltips, triggers, and sequential steps for feature discovery"
+when_to_use: "When you need to onboard users to a product via interactive step-by-step feature highlights"
 density_score: 0.96
 related:
   - product-tour-builder

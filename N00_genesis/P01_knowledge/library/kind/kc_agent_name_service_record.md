@@ -11,6 +11,8 @@ updated: 2026-04-15
 author: n05_selfheal
 quality: 9.1
 tags: []
+tldr: "Standardized identity record for agents: ID, capabilities, parameters, security, and relationships"
+when_to_use: "When registering or discovering agents by identity, capabilities, or operational parameters"
 density_score: 1.0
 related:
   - kc_intent_resolution_map

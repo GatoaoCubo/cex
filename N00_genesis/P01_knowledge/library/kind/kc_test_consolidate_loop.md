@@ -21,6 +21,8 @@ related:
   - p01_kc_system_testing_patterns
   - kc_trajectory_eval
   - kc_self_improvement_loop
+tldr: "Validation framework for testing consolidation loops -- metrics, scenarios, and tool integration"
+when_to_use: "When verifying that multi-source data aggregation produces consistent, accurate results"
 density_score: 1.0
 updated: "2026-04-22"
 ---

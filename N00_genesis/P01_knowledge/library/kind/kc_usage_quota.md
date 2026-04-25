@@ -6,6 +6,8 @@ title: Usage Quota and Fair-Use Enforcement
 version: 1.0.0
 quality: 8.8
 pillar: P01
+tldr: "Configurable limits on resource consumption -- rate limiting, queuing, breach actions, fair use"
+when_to_use: "When enforcing equitable access to APIs, compute, or storage across users or agents"
 density_score: 0.97
 related:
   - bld_instruction_usage_quota

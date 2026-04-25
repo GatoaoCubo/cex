@@ -5,6 +5,7 @@ kind: knowledge_card
 8f: F3_inject
 title: "Canary Config: Progressive Traffic Rollout Strategy"
 tldr: "Gradual traffic shifting with metric-gated stages, automatic rollback on threshold breach, and multi-platform deployment support"
+when_to_use: "When deploying a new service version with progressive traffic rollout and automatic rollback on metric breach"
 version: 1.1.0
 pillar: P01
 nucleus: n00

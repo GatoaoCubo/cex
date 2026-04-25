@@ -9,6 +9,8 @@ nucleus: n00
 title: "KC: personality"
 version: 1.0.0
 tags: [personality, knowledge-card, hermes_origin, hot_swap, P02, soul_md, HERMES]
+tldr: "Hot-swappable voice/tone/values overlay for agents based on the HERMES SOUL.md pattern"
+when_to_use: "When you need to change an agent's communication style at runtime without altering capabilities or memory"
 density_score: 0.93
 updated: "2026-04-18"
 related:

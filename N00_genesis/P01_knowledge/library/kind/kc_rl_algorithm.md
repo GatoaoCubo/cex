@@ -6,6 +6,8 @@ title: Reinforcement Learning Algorithm
 version: 1.0.0
 quality: 8.6
 pillar: P01
+tldr: "RL algorithm reference covering MDPs, Q-learning, policy gradients, DQN, PPO, and actor-critic methods"
+when_to_use: "When selecting or implementing a reinforcement learning algorithm for agent decision-making"
 density_score: 0.88
 related:
   - bld_knowledge_card_rl_algorithm

@@ -11,6 +11,8 @@ updated: 2026-04-15
 author: n05_selfheal
 quality: 9.1
 tags: []
+tldr: "Standardized metadata document describing ML dataset provenance, structure, and usage guidelines"
+when_to_use: "When documenting a dataset's characteristics, licensing, biases, and ethical considerations"
 density_score: 0.99
 related:
   - dataset-card-builder

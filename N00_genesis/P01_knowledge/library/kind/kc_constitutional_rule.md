@@ -8,6 +8,8 @@ pillar: P01
 nucleus: n00
 domain: kind-taxonomy
 tags: [kind, taxonomy, constitutional_rule, cai, safety, P11]
+tldr: "Absolute agent behavioral constraint with zero bypass: no override by any user, operator, or prompt"
+when_to_use: "When a prohibition must hold unconditionally with no legitimate exception or escalation path"
 density_score: 0.93
 updated: "2026-04-17"
 related:

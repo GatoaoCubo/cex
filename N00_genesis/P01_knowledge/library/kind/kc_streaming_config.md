@@ -7,6 +7,8 @@ keywords: streaming, configuration, P01, knowledge, parameters, setup, optimizat
 kind: knowledge_card
 version: 1.1.0
 quality: 8.9
+tldr: "Typed parameters for chunked data streaming -- chunk size, buffer, timeout, retry, and parallelism"
+when_to_use: "When configuring how large artifacts or real-time feeds are broken into processable chunks"
 density_score: 1.0
 ---
 

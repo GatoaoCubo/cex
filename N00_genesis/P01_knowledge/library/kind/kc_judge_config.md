@@ -6,6 +6,8 @@ title: LLM Judge Configuration for Automated Evaluation
 version: 1.0.0
 quality: 8.7
 pillar: P01
+tldr: "Configuration for LLM-as-judge automated evaluation: models, scoring, concurrency, and compliance"
+when_to_use: "When setting up automated LLM evaluation with scoring thresholds, judge models, and retry policies"
 density_score: 0.87
 related:
   - kc_eval_framework

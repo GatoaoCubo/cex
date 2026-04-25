@@ -6,6 +6,8 @@ title: API Reference
 version: 1.0.0
 quality: 8.7
 pillar: P01
+tldr: "Structured documentation of API endpoints, parameters, auth methods, and response codes"
+when_to_use: "When documenting REST/HTTP API contracts for developer consumption and integration"
 density_score: 1.0
 related:
   - n06_api_access_pricing

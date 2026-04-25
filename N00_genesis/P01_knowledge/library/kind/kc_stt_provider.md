@@ -6,6 +6,8 @@ title: Speech-to-Text Provider Integration
 version: 1.0.0
 quality: 8.7
 pillar: P01
+tldr: "Integration guide for speech-to-text services -- providers, auth, formats, and quality metrics"
+when_to_use: "When adding voice recognition or transcription capability to an agent or pipeline"
 density_score: 1.0
 related:
   - stt-provider-builder

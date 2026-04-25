@@ -7,6 +7,8 @@ version: 1.0.0
 quality: 8.7
 pillar: P01
 language: English
+tldr: "AP-style press release template with headline, dateline, lede, quotes, boilerplate, and media contacts"
+when_to_use: "When announcing a product launch, funding round, partnership, or company milestone to media outlets"
 density_score: 0.99
 related:
   - bld_examples_press_release

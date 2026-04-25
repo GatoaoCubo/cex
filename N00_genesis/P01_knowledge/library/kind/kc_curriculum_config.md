@@ -19,6 +19,8 @@ related:
   - kc_synthetic_data_config
   - kc_eval_metric
   - kc_distillation_config
+tldr: "Training data ordering and pacing strategy with difficulty scheduling and competency gates"
+when_to_use: "When model training benefits from structured data presentation order rather than random shuffling"
 ---
 
 # Curriculum Config

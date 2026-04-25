@@ -6,6 +6,8 @@ title: Immutable Audit Log Configuration for SOC2 Type II Compliance
 version: 1.0.0
 quality: 8.9
 pillar: P01
+tldr: "Immutable, WORM-based audit log configuration for SOC2 Type II compliance with 7-year retention"
+when_to_use: "When you need tamper-proof activity logging for compliance audits or regulatory requirements"
 density_score: 1.0
 related:
   - audit-log-builder

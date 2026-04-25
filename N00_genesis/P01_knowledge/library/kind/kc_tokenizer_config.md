@@ -12,6 +12,8 @@ tags:
   - sentencepiece
   - vocabulary
   - P09
+tldr: "BPE/SentencePiece/Tiktoken parameters -- vocab size, special tokens, merge table, byte fallback"
+when_to_use: "When configuring how text is segmented into tokens for an LLM pipeline"
 related:
   - kc_embedding_config
   - kc_context_window_config

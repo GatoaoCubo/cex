@@ -6,6 +6,8 @@ title: Sales Playbook
 version: 1.0.0
 quality: 8.7
 pillar: P01
+tldr: "Sales process guide with buyer personas, discovery flow, objection handling, and close patterns"
+when_to_use: "When equipping a sales team with structured scripts for discovery, objections, and closing"
 density_score: 1.0
 related:
   - bld_examples_sales_playbook

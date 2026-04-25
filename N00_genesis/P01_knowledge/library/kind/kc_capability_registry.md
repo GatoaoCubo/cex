@@ -11,6 +11,8 @@ updated: 2026-04-15
 author: n05_selfheal
 quality: 9.1
 tags: []
+tldr: "Index of all spawnable agent capabilities: organization, discovery, synthesis, and validation methods"
+when_to_use: "When querying or registering agent capabilities for crew assembly or dispatch planning"
 density_score: 1.0
 related:
   - bld_collaboration_knowledge_card

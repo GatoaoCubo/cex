@@ -6,6 +6,8 @@ title: Bias Audit
 version: 1.0.0
 quality: 8.7
 pillar: P01
+tldr: "Systematic evaluation of ML model fairness using disparate impact, equal opportunity, and AUC parity"
+when_to_use: "When assessing and mitigating demographic bias in model predictions or decision systems"
 density_score: 1.0
 related:
   - bias-audit-builder

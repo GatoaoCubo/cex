@@ -8,6 +8,8 @@ pillar: P01
 nucleus: n00
 domain: kind-taxonomy
 tags: [kind, taxonomy, aggregate_root, ddd, P06]
+tldr: "DDD entry-point entity owning a consistency boundary, enforcing invariants over sub-entities"
+when_to_use: "When a domain concept has cross-entity business rules requiring atomic transactional consistency"
 density_score: 0.92
 updated: "2026-04-17"
 related:

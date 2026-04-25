@@ -6,6 +6,8 @@ title: Changelog Entry
 version: 1.0.0
 quality: 8.7
 pillar: P01
+tldr: "Versioned record of product changes using SemVer with features, fixes, and breaking changes sections"
+when_to_use: "When tracking release history and communicating changes to users or downstream consumers"
 density_score: 1.0
 related:
   - bld_knowledge_card_changelog

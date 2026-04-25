@@ -6,6 +6,8 @@ title: repo_map
 version: 1.0.0
 quality: 8.9
 pillar: P01
+tldr: "Codebase context extraction strategy mapping components, dependencies, and architectural patterns"
+when_to_use: "When you need a navigable map of a codebase for onboarding, refactoring, or architecture review"
 density_score: 0.99
 related:
   - p08_ac_plan

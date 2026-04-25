@@ -6,6 +6,8 @@ title: Playground/Sandbox Configuration for Interactive Product Evaluation
 version: 1.0.0
 quality: 8.8
 pillar: P01
+tldr: "Sandbox environment configuration: isolation, security, session management, and access control settings"
+when_to_use: "When setting up a controlled playground for safe interactive experimentation with AI systems"
 density_score: 0.99
 related:
   - kc_sandbox_config

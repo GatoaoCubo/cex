@@ -6,6 +6,8 @@ title: Compliance Framework
 version: 1.0.0
 quality: 8.5
 pillar: P01
+tldr: "Structured approach mapping AI operations to regulations with attestation and continuous monitoring"
+when_to_use: "When establishing an organization-wide compliance program spanning multiple regulatory standards"
 density_score: 0.87
 related:
   - bld_knowledge_card_compliance_framework

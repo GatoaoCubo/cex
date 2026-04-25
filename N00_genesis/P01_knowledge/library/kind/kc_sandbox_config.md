@@ -6,6 +6,8 @@ title: Sandbox Configuration
 version: 1.0.0
 quality: 8.6
 pillar: P01
+tldr: "Isolated code execution environment config with resource limits, security restrictions, and audit logging"
+when_to_use: "When setting up a sandboxed runtime for secure, resource-bounded code execution and testing"
 density_score: 1.0
 related:
   - kc_playground_config

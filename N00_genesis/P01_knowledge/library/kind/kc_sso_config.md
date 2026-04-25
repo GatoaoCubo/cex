@@ -6,6 +6,8 @@ title: SSO/SAML/OIDC Configuration Guide
 version: 1.0.0
 quality: 8.6
 pillar: P01
+tldr: "SSO integration config for SAML and OIDC covering IdP endpoints, credentials, and token handling"
+when_to_use: "When integrating single sign-on via SAML or OpenID Connect with an identity provider"
 density_score: 0.92
 related:
   - bld_knowledge_card_sso_config

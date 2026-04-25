@@ -6,6 +6,8 @@ title: Collaboration Pattern
 version: 1.0.0
 quality: 8.7
 pillar: P01
+tldr: "Structural framework for multi-agent coordination: centralized, decentralized, hierarchical, or P2P"
+when_to_use: "When designing how multiple agents communicate, delegate tasks, and resolve conflicts"
 density_score: 1.0
 related:
   - p01_kc_multi_agent_orchestration_patterns

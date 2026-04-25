@@ -8,6 +8,8 @@ quality: 8.5
 pillar: P01
 description: |
   Project-root manifest for AAIF/OpenAI AGENTS.md: setup/test/lint commands, PR format, deploy rules, coding-agent conventions
+tldr: "Project-root manifest declaring setup, test, lint commands, PR format, and coding-agent conventions"
+when_to_use: "When a repo needs a machine-readable AGENTS.md for coding agents to follow project conventions"
 density_score: 1.0
 related:
   - bld_output_template_agents_md

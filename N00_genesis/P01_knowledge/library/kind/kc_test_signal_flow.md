@@ -21,6 +21,8 @@ related:
   - bld_collaboration_reward_signal
   - bld_collaboration_workflow
   - p01_kc_system_testing_patterns
+tldr: "Methodology for designing, executing, and analyzing test signals through processing nodes"
+when_to_use: "When validating signal propagation, timing, and accuracy across system processing stages"
 density_score: 1.0
 updated: "2026-04-22"
 ---

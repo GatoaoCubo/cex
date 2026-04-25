@@ -6,6 +6,8 @@ title: Crew Template
 version: 1.0.0
 quality: 8.8
 pillar: P01
+tldr: "Reusable blueprint defining multi-role crew structure with process topology and handoff protocol"
+when_to_use: "When a deliverable requires coordinated handoffs between multiple specialized roles"
 density_score: 0.98
 related:
   - quality-gate-builder

@@ -7,6 +7,8 @@ version: 1.0.0
 quality: 8.7
 pillar: P01
 description: Referral program design with viral coefficient and reward structure
+tldr: "Referral program blueprint with viral coefficient math, tiered reward structure, and tracking"
+when_to_use: "When designing a user acquisition loop driven by participant referrals and incentive tiers"
 density_score: 1.0
 related:
   - bld_examples_referral_program

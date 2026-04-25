@@ -6,6 +6,8 @@ title: A/B Test Configuration for Conversion Optimization
 version: 1.0.0
 quality: 8.5
 pillar: P01
+tldr: "Typed configuration for A/B test variants, traffic splits, and success metrics"
+when_to_use: "When you need to define experiment parameters for feature or content testing"
 density_score: 0.87
 related:
   - p01_kc_ab_testing_content_optimization

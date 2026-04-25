@@ -8,6 +8,8 @@ pillar: P01
 nucleus: n00
 domain: kind-taxonomy
 tags: [kind, taxonomy, deployment_manifest, P09, config]
+tldr: "Contract specifying which artifacts to deploy, where, with config overrides and rollback strategy"
+when_to_use: "When triggering a deployment pipeline that requires artifact versioning and rollback planning"
 density_score: 1.0
 updated: "2026-04-17"
 related:

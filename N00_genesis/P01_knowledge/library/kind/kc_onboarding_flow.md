@@ -6,6 +6,8 @@ title: User Onboarding Flow
 version: 1.0.0
 quality: 8.7
 pillar: P01
+tldr: "Structured user onboarding process with activation milestones, aha-moment design, and retention triggers"
+when_to_use: "When designing the first-run experience to convert new signups into engaged users with progressive disclosure"
 density_score: 0.99
 related:
   - bld_instruction_onboarding_flow

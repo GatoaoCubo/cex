@@ -6,6 +6,8 @@ title: Reasoning Strategy
 version: 1.0.0
 quality: 8.7
 pillar: P01
+tldr: "Structured prompting framework using CoT, ToT, and role assignment to guide LLM problem-solving"
+when_to_use: "When designing multi-step reasoning flows that require systematic analysis and validation"
 density_score: 0.94
 related:
   - reasoning-strategy-builder

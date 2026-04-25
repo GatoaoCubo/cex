@@ -11,6 +11,8 @@ updated: 2026-04-15
 author: n05_selfheal
 quality: 9.1
 tags: []
+tldr: "Structured learning unit with objectives, activities, assessments, and accessibility guidelines"
+when_to_use: "When building educational content that needs clear structure, duration, and evaluation criteria"
 density_score: 1.0
 related:
   - bld_instruction_course_module

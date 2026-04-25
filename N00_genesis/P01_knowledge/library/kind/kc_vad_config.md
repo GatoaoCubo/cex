@@ -6,6 +6,8 @@ title: Voice Activity Detection (VAD) Configuration
 version: 1.0.0
 quality: 8.8
 pillar: P01
+tldr: "Voice activity detection parameters -- sensitivity, energy threshold, silence detection, profiles"
+when_to_use: "When configuring speech detection in audio pipelines to distinguish voice from background noise"
 density_score: 0.97
 related:
   - vad-config-builder

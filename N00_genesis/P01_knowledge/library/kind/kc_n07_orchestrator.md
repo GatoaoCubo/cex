@@ -7,6 +7,8 @@ version: 1.0.0
 quality: 9.0
 pillar: P01
 language: English
+tldr: "Central coordination hub for autonomous agent task dispatch, resource allocation, and inter-agent communication"
+when_to_use: "When understanding or configuring the N07 orchestrator's task routing, monitoring, and agent coordination"
 density_score: 0.95
 related:
   - p03_pt_orchestration_task_dispatch

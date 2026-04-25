@@ -7,6 +7,8 @@ version: 1.0.0
 quality: 8.7
 pillar: P01
 language: en
+tldr: "Network transport parameters -- protocol, TLS, keepalive, compression, and retry backoff"
+when_to_use: "When configuring real-time communication channels like WebSockets, MQTT, or HTTP/2"
 density_score: 1.0
 related:
   - kc_realtime_session

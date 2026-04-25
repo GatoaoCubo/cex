@@ -6,6 +6,8 @@ title: Agent-Computer Interface
 version: 1.0.0
 quality: 8.9
 pillar: P01
+tldr: "Standardized protocol for agents to interact with computer systems via GUI or terminal"
+when_to_use: "When defining how an agent sends commands to and receives output from a computer system"
 density_score: 0.99
 related:
   - p03_sp_agent_computer_interface_builder

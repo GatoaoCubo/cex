@@ -6,6 +6,8 @@ title: Graph RAG Configuration
 version: 1.0.0
 quality: 8.8
 pillar: P01
+tldr: "Architecture config for knowledge-graph-backed retrieval-augmented generation systems"
+when_to_use: "When building RAG pipelines that leverage entity relationships via graph traversal for retrieval"
 density_score: 0.97
 related:
   - graph-rag-config-builder

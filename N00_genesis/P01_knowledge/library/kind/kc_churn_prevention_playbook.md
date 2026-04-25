@@ -6,6 +6,8 @@ title: Churn Prevention Playbook
 version: 1.0.0
 quality: 8.7
 pillar: P01
+tldr: "Operational playbook for detecting churn signals, triggering interventions, and running save-the-account scripts"
+when_to_use: "When building a structured response system for at-risk customer retention and re-engagement"
 density_score: 1.0
 related:
   - bld_examples_churn_prevention_playbook

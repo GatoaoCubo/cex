@@ -9,6 +9,8 @@ nucleus: n00
 title: "KC: pipeline_template"
 version: 1.0
 tags: [knowledge_card, pipeline_template, p12, hermes, scenario_indexed, opencode]
+tldr: "Scenario-indexed agent pipeline recipe with ordered stages, model tiers, revision loops, and quality gates"
+when_to_use: "When instantiating a reusable multi-stage pipeline for software engineering scenarios like bug-fix or new-feature"
 density_score: 1.0
 upstream_source: "1ilkhamov/opencode-hermes-multiagent"
 related:

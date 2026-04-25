@@ -9,6 +9,8 @@ nucleus: n00
 title: "KC: messaging_gateway"
 version: 1.0.0
 tags: [knowledge_card, messaging_gateway, p04, hermes_origin, honcho, multi_platform, gateway]
+tldr: "Bidirectional multi-platform messaging transport for Telegram, Discord, Slack, WhatsApp, Signal, and Email"
+when_to_use: "When building a unified agent gateway that accepts messages from multiple platforms with shared session memory"
 density_score: 0.92
 related:
   - p01_kc_supabase_mcp

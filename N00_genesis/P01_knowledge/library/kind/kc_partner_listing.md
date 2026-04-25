@@ -6,6 +6,8 @@ title: Partner Directory Listing
 version: 1.0.0
 quality: 8.7
 pillar: P01
+tldr: "Structured directory entry for channel partners: SI/reseller type, certifications, region, and KPIs"
+when_to_use: "When cataloging system integrators or resellers in a partner directory with contact and performance data"
 density_score: 1.0
 related:
   - bld_instruction_partner_listing

@@ -6,6 +6,8 @@ title: Procedural Memory
 version: 1.0.0
 quality: 8.6
 pillar: P01
+tldr: "Long-term implicit memory encoding for motor skills and habitual behaviors via basal ganglia pathways"
+when_to_use: "When modeling or documenting automated skill-based memory systems distinct from declarative knowledge"
 density_score: 0.89
 related:
   - bld_collaboration_memory_type

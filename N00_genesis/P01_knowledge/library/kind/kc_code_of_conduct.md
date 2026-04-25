@@ -7,6 +7,8 @@ version: 1.0.0
 quality: 8.7
 pillar: P01
 language: en
+tldr: "Community behavioral standards covering respectful interaction, prohibited conduct, and enforcement process"
+when_to_use: "When a project or community needs explicit behavioral expectations and an incident response process"
 density_score: 0.92
 related:
   - email_sequence_template

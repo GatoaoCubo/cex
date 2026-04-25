@@ -6,6 +6,8 @@ title: Interactive Product Demo Script
 version: 1.0.0
 quality: 8.7
 pillar: P01
+tldr: "Timed script for live product walkthroughs with talk tracks, feature demos, and CTAs"
+when_to_use: "When you need a structured demo script to showcase product features to prospects or users"
 density_score: 0.83
 related:
   - bld_examples_interactive_demo

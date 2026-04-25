@@ -6,6 +6,8 @@ title: Experiment Tracker
 version: 1.0.0
 quality: 8.8
 pillar: P01
+tldr: "Structured framework for documenting, executing, and analyzing experiments with result logging"
+when_to_use: "When running ML or system experiments that need reproducible tracking of parameters and results"
 density_score: 0.99
 related:
   - experiment-tracker-builder

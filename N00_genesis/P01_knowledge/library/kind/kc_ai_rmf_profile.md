@@ -7,6 +7,8 @@ version: 1.0.0
 quality: 8.8
 pillar: P01
 language: English
+tldr: "NIST AI RMF implementation profile mapping 13 GenAI risk categories to GOVERN/MAP/MEASURE/MANAGE functions"
+when_to_use: "When building a risk management profile for AI systems aligned with NIST AI 600-1 standards"
 density_score: 1.0
 related:
   - ai-rmf-profile-builder

@@ -13,6 +13,7 @@ density_score: 1.0
 updated: "2026-04-07"
 domain: "knowledge management"
 tldr: "Defines the knowledge card specification for kc: tagline, with structural rules, validation gates, and integration points."
+when_to_use: "When producing a short memorable phrase that captures brand essence for hero sections or ads"
 related:
   - bld_knowledge_card_tagline
   - bld_system_prompt_tagline

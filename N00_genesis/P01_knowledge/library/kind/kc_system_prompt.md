@@ -7,6 +7,8 @@ version: 1.0.0
 quality: 9.0
 pillar: P01
 language: English
+tldr: "Structured instructions defining an AI agent's role, constraints, tone, and output format"
+when_to_use: "When crafting the identity and behavioral boundaries for an LLM-powered agent"
 density_score: 0.99
 related:
   - action-prompt-builder

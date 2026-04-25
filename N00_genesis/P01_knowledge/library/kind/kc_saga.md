@@ -5,6 +5,7 @@ kind: knowledge_card
 8f: F3_inject
 title: "Saga: Long-Running Distributed Transaction with Compensation"
 tldr: "Sequence of local transactions with compensating actions for rollback on partial failure in distributed systems"
+when_to_use: "When a multi-service transaction needs partial rollback via compensating actions on failure"
 version: 1.1.0
 pillar: P01
 nucleus: n00

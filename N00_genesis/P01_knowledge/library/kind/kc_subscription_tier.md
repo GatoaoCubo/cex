@@ -7,6 +7,8 @@ version: 1.0.0
 quality: 8.6
 pillar: P01
 language: en
+tldr: "Predefined pricing levels with distinct feature sets and cost structures for SaaS products"
+when_to_use: "When designing tiered pricing models with feature gating and upgrade paths"
 density_score: 1.0
 related:
   - bld_instruction_subscription_tier

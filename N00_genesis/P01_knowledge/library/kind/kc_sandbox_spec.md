@@ -6,6 +6,8 @@ title: Sandbox Spec
 version: 1.0.0
 quality: 8.7
 pillar: P01
+tldr: "Enterprise sandbox environment spec with isolation, compliance frameworks, and procurement gate workflows"
+when_to_use: "When defining isolated pilot environments for enterprise procurement approval with audit trails"
 density_score: 1.0
 related:
   - sandbox-spec-builder

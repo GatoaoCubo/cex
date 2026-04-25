@@ -6,6 +6,8 @@ title: "LLM Safety Guardrails"
 version: 1.0.0
 quality: 9.0
 pillar: P01
+tldr: "Safety mechanisms that block harmful LLM inputs/outputs via filtering, PII detection, and moderation"
+when_to_use: "When an LLM system needs input validation, output filtering, toxicity detection, or PII redaction"
 density_score: 1.0
 related:
   - content-filter-builder

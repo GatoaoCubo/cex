@@ -6,6 +6,8 @@ title: MEDDIC/BANT Discovery Question Bank
 version: 1.0.0
 quality: 8.5
 pillar: P01
+tldr: "MEDDIC/BANT question bank for sales discovery across buyer personas and deal stages"
+when_to_use: "When preparing structured discovery calls to qualify leads and uncover decision criteria"
 density_score: 0.89
 related:
   - kc_competitive_matrix

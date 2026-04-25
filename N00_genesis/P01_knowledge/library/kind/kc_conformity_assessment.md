@@ -6,6 +6,8 @@ title: Conformity Assessment for High-Risk AI Systems (EU AI Act Annex IV)
 version: 1.0.0
 quality: 8.5
 pillar: P01
+tldr: "EU AI Act Annex IV assessment procedure for high-risk AI: modules A/B/C, CE marking, and declaration"
+when_to_use: "When a high-risk AI system requires formal conformity assessment before EU market placement"
 density_score: 0.84
 related:
   - bld_manifest_conformity_assessment

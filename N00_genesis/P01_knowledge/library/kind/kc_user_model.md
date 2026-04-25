@@ -16,6 +16,7 @@ created: "2026-04-18"
 updated: "2026-04-18"
 author: n03_builder
 tldr: "Cross-session dialectic user representation implementing Honcho pattern. SQLite default, pgvector optional. Pre/post-response insight loop per turn."
+when_to_use: "When building persistent per-user memory that grows across sessions via the Honcho dialectic loop"
 related:
   - p01_kc_session_state
   - p01_kc_session_backend

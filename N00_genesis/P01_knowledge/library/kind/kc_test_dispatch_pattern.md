@@ -7,6 +7,8 @@ date: 2023-10-15
 author: CEX Team
 tags: testing, automation, patterns
 version: 1.1.0
+tldr: "Patterns for distributing test cases across workers -- centralized, decentralized, and hybrid"
+when_to_use: "When designing how automated tests are dispatched, load-balanced, and aggregated at scale"
 quality: 9.5
 ---
 

@@ -11,6 +11,8 @@ updated: 2026-04-15
 author: n05_selfheal
 quality: 9.1
 tags: []
+tldr: "Standardized benchmarking framework for DRAM, SSD, and NVM: workloads, metrics, tools, and results"
+when_to_use: "When evaluating memory/storage hardware performance for upgrade decisions or architecture planning"
 density_score: 1.0
 related:
   - bld_examples_memory_benchmark

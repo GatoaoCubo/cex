@@ -6,6 +6,8 @@ title: Text-to-Speech Provider Integration
 version: 1.0.0
 quality: 8.6
 pillar: P01
+tldr: "Integration guide for text-to-speech services -- voice selection, rate, platform support, latency"
+when_to_use: "When adding speech synthesis capability to agents, accessibility tools, or IVR systems"
 density_score: 0.88
 related:
   - kc_stt_provider

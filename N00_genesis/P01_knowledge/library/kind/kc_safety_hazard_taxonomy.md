@@ -6,6 +6,8 @@ title: Safety Hazard Taxonomy
 version: 1.0.0
 quality: 8.8
 pillar: P01
+tldr: "12-category AI safety hazard classification with severity levels and response templates per category"
+when_to_use: "When building content moderation or safety filters that classify and respond to harmful content"
 density_score: 1.0
 related:
   - kc_c2pa_manifest

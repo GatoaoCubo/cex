@@ -7,6 +7,8 @@ version: 1.0.0
 quality: 8.8
 pillar: P01
 language: en
+tldr: "ROI calculation spec with NPV, IRR, and TCO formulas for comparing investment profitability"
+when_to_use: "When building a financial comparison tool for economic buyers evaluating investment options"
 density_score: 1.0
 related:
   - bld_knowledge_card_roi_calculator

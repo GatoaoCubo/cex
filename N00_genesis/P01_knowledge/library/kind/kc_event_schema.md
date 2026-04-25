@@ -8,6 +8,8 @@ pillar: P01
 title: "Knowledge Card -- Event Schema"
 version: 1.0.0
 tags: [knowledge, event_schema, cloudevents, asyncapi, event-driven]
+tldr: "Formal CloudEvents/AsyncAPI-compliant schema for event payloads with versioned type naming"
+when_to_use: "When defining structured event payload contracts for Kafka, webhooks, or domain events"
 related:
   - bld_schema_audit_log
   - bld_schema_reranker_config

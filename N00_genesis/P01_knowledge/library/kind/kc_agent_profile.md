@@ -6,6 +6,8 @@ title: Agent Profile Construction
 version: 1.0.0
 quality: 8.9
 pillar: P01
+tldr: "Structured method for defining agent personas with role, expertise, communication, and identity params"
+when_to_use: "When constructing a new agent persona with measurable identity and behavioral parameters"
 density_score: 1.0
 related:
   - agent-profile-builder

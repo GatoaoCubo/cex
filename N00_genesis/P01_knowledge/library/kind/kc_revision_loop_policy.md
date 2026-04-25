@@ -8,6 +8,8 @@ title: "KC: revision_loop_policy"
 version: 1.0.0
 quality: 9.0
 tags: [knowledge_card, revision_loop_policy, p11, hermes, escalation, iteration]
+tldr: "Declarative iteration budget for artifact revision cycles with quality floor and escalation targets"
+when_to_use: "When capping how many times an artifact can be revised before escalating to a human or senior nucleus"
 density_score: 0.92
 upstream_source: "1ilkhamov/opencode-hermes-multiagent"
 related:

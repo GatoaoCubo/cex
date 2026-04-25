@@ -6,6 +6,8 @@ title: Realtime Session Configuration
 version: 1.0.0
 quality: 8.7
 pillar: P01
+tldr: "Bidirectional low-latency session config for WebSocket/TCP with state sync and connection lifecycle"
+when_to_use: "When building live collaboration, streaming, or real-time communication features"
 density_score: 1.0
 related:
   - kc_transport_config

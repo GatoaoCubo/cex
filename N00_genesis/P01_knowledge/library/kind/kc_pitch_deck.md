@@ -6,6 +6,8 @@ title: Pitch Deck
 version: 1.0.0
 quality: 8.5
 pillar: P01
+tldr: "Structured investor presentation framework: problem, solution, traction, and funding ask slides"
+when_to_use: "When creating a concise slide deck to pitch a business to investors, partners, or enterprise stakeholders"
 density_score: 0.9
 related:
   - p10_mem_pitch_deck_builder

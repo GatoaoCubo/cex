@@ -6,6 +6,8 @@ title: Multi-Model Orchestration Patterns for LLM Agents
 version: 1.0.0
 quality: 9.0
 pillar: P01
+tldr: "Orchestration patterns for multi-LLM systems: cascading inference, complexity routing, and fallback chains"
+when_to_use: "When deploying multiple LLMs with cost/latency/reliability tradeoffs requiring routing and fallback logic"
 density_score: 1.0
 related:
   - p02_rt_complexity_router

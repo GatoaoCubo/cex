@@ -6,6 +6,8 @@ title: Self-Improvement Loop Mechanism
 version: 1.0.0
 quality: 8.5
 pillar: P01
+tldr: "Autonomous 5-phase evolution cycle: sense, analyze, decide, execute, and feedback with quality gates"
+when_to_use: "When building a closed-loop system that iteratively refines its own capabilities over time"
 density_score: 0.96
 related:
   - self-improvement-loop-builder

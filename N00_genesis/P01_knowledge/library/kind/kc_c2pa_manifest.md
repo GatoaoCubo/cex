@@ -10,6 +10,8 @@ author: CEX Documentation Team
 date: 2023-11-15
 tags: [C2PA, provenance, digital assets, authenticity, metadata]
 last_modified: 2023-11-16
+tldr: "C2PA 2.3 JSON manifest providing cryptographic proof of digital asset authenticity and provenance"
+when_to_use: "When you need verifiable content credentials for ownership, usage rights, or provenance chains"
 density_score: 1.0
 related:
   - c2pa-manifest-builder

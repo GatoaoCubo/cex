@@ -6,6 +6,8 @@ title: Quantization Configuration
 version: 1.0.0
 quality: 8.7
 pillar: P01
+tldr: "Model compression settings for bitwidth, pruning thresholds, and precision-performance tradeoffs"
+when_to_use: "When reducing model size via quantization for faster inference on constrained hardware"
 density_score: 1.0
 related:
   - quantization-config-builder

@@ -6,6 +6,8 @@ title: Dual Loop Architecture
 version: 1.0.0
 quality: 8.7
 pillar: P01
+tldr: "Control framework combining strategic outer loop with operational inner loop and feedback"
+when_to_use: "When a system needs hierarchical coordination with separate strategic and operational layers"
 density_score: 0.97
 related:
   - bld_knowledge_card_dual_loop_architecture

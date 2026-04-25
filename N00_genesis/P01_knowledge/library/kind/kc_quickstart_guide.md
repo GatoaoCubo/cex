@@ -6,6 +6,8 @@ title: Quickstart Guide
 version: 1.0.0
 quality: 8.6
 pillar: P01
+tldr: "Minimal step-by-step onboarding document covering install, config, first use, and troubleshooting"
+when_to_use: "When creating a sub-5-minute getting-started guide for a product, API, or tool"
 density_score: 0.9
 related:
   - bld_instruction_quickstart_guide

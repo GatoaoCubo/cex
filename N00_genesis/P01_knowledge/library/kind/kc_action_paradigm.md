@@ -6,6 +6,8 @@ title: Action Paradigm
 version: 1.0.0
 quality: 8.5
 pillar: P01
+tldr: "Framework defining how agents execute actions, make decisions, and interact with environments"
+when_to_use: "When designing agent behavior models for task execution and environment interaction"
 density_score: 0.99
 related:
   - action-paradigm-builder

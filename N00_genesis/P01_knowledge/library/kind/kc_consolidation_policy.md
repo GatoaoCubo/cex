@@ -6,6 +6,8 @@ title: Consolidation Policy
 version: 1.0.0
 quality: 8.7
 pillar: P01
+tldr: "Memory lifecycle policy governing creation, retention, pruning, and deletion of stored data"
+when_to_use: "When defining automated rules for data retention, deduplication, and time-based archival"
 density_score: 0.95
 related:
   - bld_knowledge_card_consolidation_policy

@@ -6,6 +6,8 @@ title: RBAC Policy for Multi-Tenant Isolation
 version: 1.0.0
 quality: 8.9
 pillar: P01
+tldr: "Role-based access control policy defining permissions, tenant isolation, and enforcement mechanisms"
+when_to_use: "When defining user roles, permission boundaries, and multi-tenant data isolation rules"
 density_score: 0.97
 related:
   - bld_knowledge_card_rbac_policy

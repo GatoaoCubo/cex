@@ -6,6 +6,8 @@ title: Prompt Technique Patterns
 version: 1.0.0
 quality: 8.6
 pillar: P01
+tldr: "Catalog of structured prompting methods like CoT, ToT, few-shot, and self-consistency for LLMs"
+when_to_use: "When selecting or combining prompting patterns to improve LLM reasoning on a specific task"
 density_score: 0.78
 related:
   - p01_kc_prompt_engineering_best_practices

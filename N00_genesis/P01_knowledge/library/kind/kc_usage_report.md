@@ -6,6 +6,8 @@ title: Usage Analytics Report Specification
 version: 1.0.0
 quality: 8.7
 pillar: P01
+tldr: "Standardized analytics report format for billing dashboards -- metrics, trends, anomalies"
+when_to_use: "When generating periodic resource utilization reports for CFO or ops dashboards"
 density_score: 1.0
 related:
   - usage-report-builder

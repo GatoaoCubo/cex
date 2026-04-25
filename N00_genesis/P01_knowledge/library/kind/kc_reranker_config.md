@@ -6,6 +6,8 @@ title: Reranker Configuration
 version: 1.0.0
 quality: 8.5
 pillar: P01
+tldr: "Reranking model config with strategy, score threshold, max items, and weighted ranking criteria"
+when_to_use: "When adding a second-stage reranker to re-score and filter retrieval results by relevance"
 density_score: 1.0
 updated: "2026-04-15"
 related:

@@ -12,6 +12,8 @@ related_kcs:
   - kc_8f_pipeline
   - kc_gdp_protocol
   - kc_resource_allocation
+tldr: "Systematic framework for goal decomposition, resource allocation, risk management, and execution planning"
+when_to_use: "When decomposing a complex goal into phased plans with resource allocation and risk mitigation strategies"
 ---
 
 # Planning Strategy Knowledge Core (KC)

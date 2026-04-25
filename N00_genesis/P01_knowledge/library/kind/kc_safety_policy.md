@@ -7,6 +7,8 @@ version: 1.0.0
 quality: 8.8
 pillar: P01
 language: en
+tldr: "Organizational AI safety governance covering transparency, accountability, risk management, and incident response"
+when_to_use: "When establishing enterprise-wide AI safety rules, audit structures, and incident protocols"
 density_score: 0.96
 related:
   - bld_examples_safety_policy

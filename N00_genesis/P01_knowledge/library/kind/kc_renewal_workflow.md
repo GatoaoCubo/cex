@@ -6,6 +6,8 @@ title: Renewal Workflow
 version: 1.0.0
 quality: 8.7
 pillar: P01
+tldr: "Contract renewal pipeline with trigger, review, negotiation, approval, and execution stages"
+when_to_use: "When automating subscription or contract renewal processes with escalation protocols"
 density_score: 1.0
 related:
   - bld_collaboration_renewal_workflow

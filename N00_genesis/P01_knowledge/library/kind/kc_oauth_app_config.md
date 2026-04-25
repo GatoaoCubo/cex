@@ -6,6 +6,8 @@ title: OAuth 2.0 Application Configuration for Partner Integrations
 version: 1.0.0
 quality: 8.9
 pillar: P01
+tldr: "OAuth 2.0 PKCE application config: scopes, redirect URIs, token lifetimes, and refresh policies"
+when_to_use: "When registering an OAuth 2.0 application for partner integrations requiring secure token-based auth"
 density_score: 1.0
 related:
   - bld_knowledge_card_oauth_app_config

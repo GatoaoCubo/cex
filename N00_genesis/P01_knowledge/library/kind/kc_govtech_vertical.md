@@ -11,6 +11,8 @@ updated: 2026-04-15
 author: n05_selfheal
 quality: 9.1
 tags: []
+tldr: "Public sector vertical covering digital services, public safety, and citizen engagement tech"
+when_to_use: "When building AI solutions for government digital transformation or public service delivery"
 density_score: 0.97
 related:
   - kc_healthcare_vertical

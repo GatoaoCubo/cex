@@ -11,6 +11,8 @@ tags: [automation, orchestration, pipeline, taskflow]
 priority: 8
 author: CEX Team
 date: 2023-10-15
+tldr: "Modular framework for orchestrating multi-step workflows with parallel execution and error handling"
+when_to_use: "When building complex automation pipelines with task dependencies, retries, and conditional branching"
 density_score: 0.99
 updated: "2026-04-17"
 related:

@@ -11,6 +11,8 @@ updated: 2026-04-15
 author: n05_selfheal
 quality: 9.1
 tags: []
+tldr: "Modular extension architecture for MCP apps: function, UI, data, and security hooks with lifecycle management"
+when_to_use: "When adding custom functionality to an MCP-based platform without modifying core application code"
 density_score: 1.0
 related:
   - kc_integration_guide

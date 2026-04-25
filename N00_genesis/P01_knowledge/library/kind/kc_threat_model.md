@@ -6,6 +6,8 @@ title: Threat Model
 version: 1.0.0
 quality: 8.6
 pillar: P01
+tldr: "Structured identification of assets, threats, vulnerabilities, risks, and mitigations for AI systems"
+when_to_use: "When assessing security risks like data breaches, model poisoning, or output bias"
 density_score: 0.98
 related:
   - bld_knowledge_card_threat_model

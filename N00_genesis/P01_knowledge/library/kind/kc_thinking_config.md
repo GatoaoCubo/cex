@@ -6,6 +6,8 @@ title: Thinking Configuration Settings
 version: 1.0.0
 quality: 8.6
 pillar: P01
+tldr: "Parameters for extended thinking, token budget allocation, and inference performance tuning"
+when_to_use: "When tuning LLM reasoning depth, token budgets, or streaming/caching behavior"
 density_score: 0.82
 related:
   - bld_knowledge_card_thinking_config

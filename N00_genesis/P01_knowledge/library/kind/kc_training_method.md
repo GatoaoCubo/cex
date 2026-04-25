@@ -18,6 +18,8 @@ related:
   - bld_tools_stt_provider
   - bld_architecture_finetune_config
   - bld_examples_rl_algorithm
+tldr: "Supervised, unsupervised, RLHF, LoRA, and DPO training approaches with hyperparameter reference"
+when_to_use: "When selecting or comparing ML/LLM training strategies for a fine-tuning or alignment task"
 density_score: 0.92
 updated: "2026-04-22"
 ---

@@ -11,6 +11,8 @@ updated: 2026-04-15
 author: n05_selfheal
 quality: 9.1
 tags: []
+tldr: "Compliance-driven config for data storage location, sovereignty rules, and regional policies"
+when_to_use: "When data must comply with jurisdictional regulations like GDPR, HIPAA, or LGPD"
 density_score: 0.99
 related:
   - data-residency-builder

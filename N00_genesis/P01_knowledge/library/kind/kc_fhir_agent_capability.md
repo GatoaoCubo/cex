@@ -6,6 +6,8 @@ title: HL7 FHIR R5 AI Agent Capability Declaration
 version: 1.0.0
 quality: 8.5
 pillar: P01
+tldr: "AI agent capability declaration for HL7 FHIR R5 with SMART scopes and PHI handling"
+when_to_use: "When building AI agents that interact with healthcare FHIR systems under HIPAA/GDPR constraints"
 density_score: 0.98
 related:
   - fhir-agent-capability-builder

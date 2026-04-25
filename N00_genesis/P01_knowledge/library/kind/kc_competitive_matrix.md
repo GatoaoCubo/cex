@@ -6,6 +6,8 @@ title: Competitive Matrix
 version: 1.0.0
 quality: 8.7
 pillar: P01
+tldr: "Side-by-side comparison of competitors across features, pricing, support, and market presence"
+when_to_use: "When mapping competitive landscape to identify gaps, threats, and differentiation opportunities"
 density_score: 0.92
 related:
   - kc_discovery_questions

@@ -5,6 +5,7 @@ kind: knowledge_card
 8f: F3_inject
 title: "SLO Definition: Service Level Objectives with Error Budgets"
 tldr: "Measurable reliability targets expressed as percentages over rolling time windows, with error budget policies gating deployments"
+when_to_use: "When setting internal reliability targets with error budgets and burn-rate alerting for a service"
 version: 1.1.0
 pillar: P01
 nucleus: n00

@@ -6,6 +6,8 @@ title: Workflow Node
 version: 1.0.0
 quality: 8.5
 pillar: P01
+tldr: "Typed entity representing a discrete operation in a workflow -- inputs, outputs, error handling"
+when_to_use: "When defining an individual step in a visual or programmatic workflow graph"
 density_score: 1.0
 related:
   - workflow-node-builder

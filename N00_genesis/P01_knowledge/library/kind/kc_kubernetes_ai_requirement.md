@@ -11,6 +11,8 @@ updated: 2026-04-15
 author: n05_selfheal
 quality: 9.1
 tags: []
+tldr: "Resource, networking, storage, and security requirements for deploying AI workloads on Kubernetes"
+when_to_use: "When planning GPU-accelerated ML pipelines, model serving, or batch AI jobs on a K8s cluster"
 density_score: 1.0
 related:
   - kc_container_deployment_llm

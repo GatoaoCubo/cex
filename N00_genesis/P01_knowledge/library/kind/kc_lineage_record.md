@@ -5,6 +5,7 @@ kind: knowledge_card
 8f: F3_inject
 title: "Lineage Record: Artifact Provenance Chain via W3C PROV-O"
 tldr: "Documents the derivation chain of knowledge artifacts using W3C PROV-O ontology with entities, activities, and agents"
+when_to_use: "When you need to record provenance of a synthesized artifact for reproducibility or compliance audits"
 version: 1.1.0
 pillar: P01
 nucleus: n00

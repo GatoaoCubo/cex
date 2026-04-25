@@ -6,6 +6,8 @@ title: Agent Grounding Record
 version: 1.0.0
 quality: 8.5
 pillar: P01
+tldr: "Structured provenance record of tool calls, RAG chunks, model version, and output hash per inference"
+when_to_use: "When you need reproducibility, auditability, or regulatory traceability for agent outputs"
 density_score: 0.92
 related:
   - bld_manifest_agent_grounding_record

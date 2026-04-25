@@ -8,6 +8,8 @@ title: "Knowledge Card: terminal_backend"
 version: 1.0
 quality: 9.0
 tags: [terminal_backend, p09, hermes, execution_environment, backend, runtime]
+tldr: "P09 config declaring the execution environment for agent terminal sessions across 6 backends"
+when_to_use: "When selecting where agent code runs -- local, Docker, SSH, Daytona, Modal, or Singularity"
 density_score: 0.95
 upstream_source: NousResearch/hermes-agent environments/
 related:

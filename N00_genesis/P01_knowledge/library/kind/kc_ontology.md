@@ -6,6 +6,8 @@ pillar: P01
 title: Ontology (P01)
 version: 1.0.0
 quality: 9.0
+tldr: "Formal machine-readable taxonomy definitions using OWL, SKOS, and schema.org with inference support"
+when_to_use: "When you need a structured, machine-readable taxonomy with explicit semantic relationships and logical rules"
 density_score: 1.0
 updated: "2026-04-13"
 related:

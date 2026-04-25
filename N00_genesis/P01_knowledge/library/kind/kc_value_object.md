@@ -8,6 +8,8 @@ pillar: P01
 nucleus: n00
 domain: kind-taxonomy
 tags: [kind, taxonomy, value_object, ddd, P06]
+tldr: "Immutable domain type without identity, defined by structural equality -- Money, Email, DateRange"
+when_to_use: "When modeling a domain concept defined entirely by its attributes with no tracking identity"
 density_score: 0.93
 updated: "2026-04-17"
 related:

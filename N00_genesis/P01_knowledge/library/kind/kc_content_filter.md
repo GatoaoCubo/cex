@@ -6,6 +6,8 @@ title: Content Filter Pipeline Configuration
 version: 1.0.0
 quality: 8.6
 pillar: P01
+tldr: "Three-stage pipeline config for content moderation: preprocessing, NSFW/toxicity filtering, and scoring"
+when_to_use: "When configuring automated content moderation with pass/block/flag decisions and confidence thresholds"
 density_score: 1.0
 related:
   - p03_ch_kc_to_notebooklm

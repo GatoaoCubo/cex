@@ -6,6 +6,8 @@ title: App Directory Entry Guide
 version: 1.0.0
 quality: 8.6
 pillar: P01
+tldr: "Listing entry for an app store or directory: tagline, screenshots, install steps, and demo link"
+when_to_use: "When publishing an application to a marketplace, catalog, or internal app directory"
 density_score: 0.76
 related:
   - bld_instruction_app_directory_entry

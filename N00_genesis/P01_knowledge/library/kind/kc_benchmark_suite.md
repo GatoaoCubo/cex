@@ -6,6 +6,8 @@ title: Benchmark Suite Definition
 version: 1.0.0
 quality: 9.0
 pillar: P01
+tldr: "Composite benchmark with DAG-structured tasks, per-task metrics, thresholds, and resource constraints"
+when_to_use: "When evaluating system performance across multiple interrelated dimensions with pass/fail gates"
 density_score: 1.0
 related:
   - bld_examples_benchmark_suite

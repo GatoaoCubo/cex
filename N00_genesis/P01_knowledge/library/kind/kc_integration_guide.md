@@ -6,6 +6,8 @@ title: Integration Guide for Platform Partners
 version: 1.0.0
 quality: 8.7
 pillar: P01
+tldr: "Step-by-step developer guide for OAuth, webhooks, and API integration with the platform"
+when_to_use: "When onboarding a partner or developer who needs to connect to your platform via API"
 density_score: 1.0
 related:
   - bld_knowledge_card_client

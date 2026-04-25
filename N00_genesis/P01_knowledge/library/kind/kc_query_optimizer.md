@@ -12,6 +12,8 @@ tags:
   - retrieval
   - decomposition
   - P01
+tldr: "RAG query rewriting and decomposition strategies like HyDE, expansion, multi-hop, and routing"
+when_to_use: "When user queries underperform in retrieval due to vocabulary mismatch or query complexity"
 related:
   - kc_search_strategy
   - kc_prompt_optimizer

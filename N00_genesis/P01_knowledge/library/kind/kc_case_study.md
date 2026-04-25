@@ -11,6 +11,8 @@ updated: 2026-04-15
 author: n05_selfheal
 quality: 9.1
 tags: []
+tldr: "Narrative analysis of a real implementation with objectives, methodology, results, and lessons learned"
+when_to_use: "When documenting a completed project to share quantitative results and reusable patterns"
 density_score: 1.0
 related:
   - p08_kc_capability_registry

@@ -6,6 +6,8 @@ title: Voice Pipeline Architecture
 version: 1.0.0
 quality: 8.8
 pillar: P01
+tldr: "End-to-end voice agent architecture -- audio capture, STT, NLP, TTS, and output rendering"
+when_to_use: "When designing a full speech interaction pipeline from microphone input to synthesized output"
 density_score: 0.99
 related:
   - stt-provider-builder

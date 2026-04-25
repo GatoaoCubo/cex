@@ -6,6 +6,8 @@ title: Edit Format Specification
 version: 1.0.0
 quality: 8.7
 pillar: P01
+tldr: "Standardized YAML format for LLM-to-host file change requests with validation rules"
+when_to_use: "When an LLM agent needs a structured protocol to request file modifications from the host"
 density_score: 1.0
 related:
   - bld_output_template_edit_format

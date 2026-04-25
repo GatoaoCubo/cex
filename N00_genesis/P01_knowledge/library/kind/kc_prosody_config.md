@@ -11,6 +11,8 @@ updated: 2026-04-15
 author: n05_selfheal
 quality: 9.1
 tags: []
+tldr: "TTS speech parameter config for pitch, intonation, stress, rhythm, and pause at global/word/phoneme levels"
+when_to_use: "When configuring text-to-speech output to control voice prosody for natural-sounding synthesis"
 density_score: 1.0
 related:
   - prosody-config-builder

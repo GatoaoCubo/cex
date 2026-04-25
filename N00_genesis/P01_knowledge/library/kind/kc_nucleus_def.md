@@ -6,6 +6,8 @@ title: CEX Nucleus Definition (N00-N07)
 version: 1.0.0
 quality: 8.9
 pillar: P01
+tldr: "Machine-readable identity card for CEX nuclei N00-N07: roles, pillars, sin lenses, and CLI bindings"
+when_to_use: "When defining or referencing a nucleus identity including its owned pillars, model tier, and boot config"
 density_score: 1.0
 related:
   - p02_nd_n01.md

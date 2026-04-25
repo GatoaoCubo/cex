@@ -9,6 +9,8 @@ created: 2026-04-06
 author: n07_orchestrator
 quality: 9.0
 tags: [knowledge-card, landing-page, frontend, ui, marketing, conversion]
+tldr: "Standalone conversion-optimized web page with 12 sections: hero, pricing, FAQ, CTA, and more"
+when_to_use: "When you need a production-ready sales or lead-capture page with responsive HTML+Tailwind output"
 density_score: 1.0
 updated: "2026-04-07"
 domain: "knowledge management"

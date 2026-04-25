@@ -8,6 +8,8 @@ pillar: P01
 title: "Knowledge Card -- Context Map"
 version: 1.0.0
 tags: [knowledge, context_map, ddd, bounded-context, strategic-design]
+tldr: "DDD artifact mapping upstream/downstream relationships between bounded contexts"
+when_to_use: "When documenting integration patterns and coupling between multiple bounded contexts or teams"
 related:
   - bld_schema_bugloop
   - bld_schema_reranker_config

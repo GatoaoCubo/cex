@@ -6,6 +6,8 @@ title: Account Expansion Play
 version: 1.0.0
 quality: 8.8
 pillar: P01
+tldr: "Account expansion playbook with upsell triggers, cross-sell maps, and NRR mechanics"
+when_to_use: "When designing structured upsell/cross-sell motions to grow existing account revenue"
 density_score: 1.0
 related:
   - expansion-play-builder

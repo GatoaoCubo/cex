@@ -9,6 +9,8 @@ kind: knowledge_card
 8f: F3_inject
 pillar: P01
 priority: 1
+tldr: "Test suite for validating Ollama API integration -- inference, model switching, errors, tokens"
+when_to_use: "When verifying that CEX wrappers correctly interact with Ollama endpoints and models"
 density_score: 1.0
 updated: "2026-04-17"
 related:

@@ -7,6 +7,8 @@ version: 1.0.0
 quality: 8.8
 pillar: P01
 language: en
+tldr: "Design blueprint for memory hierarchies: registers, cache, RAM, storage, VRAM, and virtualization"
+when_to_use: "When designing or documenting a system's memory hierarchy, allocation strategy, or storage integration"
 density_score: 1.0
 related:
   - p01_kc_memory_scope

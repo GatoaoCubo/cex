@@ -11,6 +11,8 @@ tags: [white-label, configuration, branding, customization]
 status: draft
 version: 1.1.0
 pillar: P01
+tldr: "Branding, UI, API, security, and analytics settings for rebranding a platform per client"
+when_to_use: "When customizing a software product to match a client's brand while keeping core functionality"
 density_score: 1.0
 updated: "2026-04-17"
 related:

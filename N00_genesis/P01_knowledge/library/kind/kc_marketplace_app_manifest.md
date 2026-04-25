@@ -6,6 +6,8 @@ title: Marketplace App Manifest Specification
 version: 1.0.0
 quality: 8.7
 pillar: P01
+tldr: "Metadata manifest for AI marketplace listings: permissions, pricing, dependencies, and security"
+when_to_use: "When publishing an app to Claude, LangChain, or HuggingFace marketplaces and need a standardized listing"
 density_score: 0.94
 related:
   - marketplace-app-manifest-builder

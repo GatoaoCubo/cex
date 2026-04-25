@@ -6,6 +6,8 @@ title: Evaluation Framework Integration
 version: 1.0.0
 quality: 8.6
 pillar: P01
+tldr: "Systematic validation framework with setup, execution, and quality reporting for artifacts"
+when_to_use: "When you need end-to-end evaluation infrastructure including benchmarks and quality gates"
 density_score: 0.87
 related:
   - eval-framework-builder

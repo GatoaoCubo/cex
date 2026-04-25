@@ -8,6 +8,8 @@ pillar: P01
 nucleus: n00
 domain: kind-taxonomy
 tags: [kind, taxonomy, event_stream, kafka, kinesis, P04]
+tldr: "Configuration for durable, ordered event sequences with partitioning and consumer groups"
+when_to_use: "When multiple independent consumers need replayable, ordered domain events at high throughput"
 density_score: 0.97
 updated: "2026-04-17"
 related:

@@ -6,6 +6,8 @@ title: Visual Workflow Editor Configuration
 version: 1.0.0
 quality: 8.7
 pillar: P01
+tldr: "GUI-based drag-and-drop workflow editor config -- canvas, node library, connections, export"
+when_to_use: "When building or configuring a visual interface for defining and executing workflows"
 density_score: 0.97
 related:
   - visual-workflow-builder

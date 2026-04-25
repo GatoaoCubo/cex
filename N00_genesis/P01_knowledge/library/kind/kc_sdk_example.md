@@ -6,6 +6,8 @@ title: SDK Example Integration Patterns
 version: 1.0.0
 quality: 8.8
 pillar: P01
+tldr: "Multi-language SDK code samples showing canonical integration patterns for API authentication and usage"
+when_to_use: "When providing developers with copy-paste SDK examples in Python, JavaScript, or Java"
 density_score: 1.0
 related:
   - bld_output_template_sdk_example

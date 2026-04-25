@@ -8,6 +8,8 @@ title: "Knowledge Card: hibernation_policy"
 version: 1.0
 quality: 9.0
 tags: [hibernation_policy, p09, config, serverless, cost, hermes]
+tldr: "Idle-suspend rules for serverless/on-demand backends with state persistence and wake SLA"
+when_to_use: "When a compute backend should auto-sleep during inactivity to eliminate idle-time cost"
 density_score: 1.0
 related:
   - bld_collaboration_session_backend

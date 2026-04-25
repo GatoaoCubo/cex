@@ -6,6 +6,8 @@ title: Cohort Analysis for Retention and LTV Modeling
 version: 1.0.0
 quality: 8.5
 pillar: P01
+tldr: "Statistical technique grouping users by shared traits to measure retention curves and lifetime value"
+when_to_use: "When analyzing user retention, churn patterns, or LTV trajectories across acquisition cohorts"
 density_score: 1.0
 related:
   - cohort-analysis-builder

@@ -7,6 +7,8 @@ version: 1.0.0
 quality: 8.8
 pillar: P01
 language: English
+tldr: "Timed webinar script template -- intro, agenda, segments, Q&A, CTA, with speaker notes and slides"
+when_to_use: "When producing a structured script for a live or recorded webinar presentation"
 density_score: 1.0
 related:
   - bld_instruction_webinar_script

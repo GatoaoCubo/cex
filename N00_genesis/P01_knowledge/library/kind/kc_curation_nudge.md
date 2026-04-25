@@ -9,6 +9,8 @@ nucleus: n00
 title: "KC: Curation Nudge"
 version: 1.0
 tags: [curation_nudge, p11, knowledge_card, hermes, memory, proactive]
+tldr: "Declarative config for proactive in-session memory-persistence reminders to agents"
+when_to_use: "When agents need periodic prompts to persist observations to durable memory before context loss"
 density_score: 0.92
 related:
   - bld_collaboration_agent

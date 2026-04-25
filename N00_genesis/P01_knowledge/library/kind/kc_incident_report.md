@@ -6,6 +6,8 @@ title: Incident Report
 version: 1.0.0
 quality: 8.7
 pillar: P01
+tldr: "Post-mortem template for AI system failures with root cause analysis and corrective actions"
+when_to_use: "When documenting system incidents with timeline, impact assessment, and prevention planning"
 density_score: 0.93
 related:
   - bld_instruction_incident_report

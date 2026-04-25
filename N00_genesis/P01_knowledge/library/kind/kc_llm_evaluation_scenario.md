@@ -6,6 +6,8 @@ title: LLM Evaluation Scenario
 version: 1.0.0
 quality: 8.9
 pillar: P01
+tldr: "Structured evaluation framework for LLM performance using HELM metrics, adapter configs, and few-shot pools"
+when_to_use: "When defining repeatable test scenarios to benchmark LLM quality across fluency, relevance, and toxicity"
 density_score: 1.0
 related:
   - llm-evaluation-scenario-builder

@@ -8,6 +8,8 @@ pillar: P01
 title: "Knowledge Card -- Retry Policy"
 version: 1.0.0
 tags: [knowledge, retry_policy, backoff, jitter, resilience, polly]
+tldr: "Resilience config for retrying transient failures with backoff, jitter, attempt limits, and error classification"
+when_to_use: "When operations may fail transiently (429, 503, timeouts) and need automated retry with backoff"
 related:
   - bld_schema_client
   - bld_schema_bugloop

@@ -12,6 +12,8 @@ tags:
   - rag
   - information-retrieval
   - P07
+tldr: "Composite IR metrics suite (MRR, NDCG, Precision@k, Recall@k) for measuring RAG retrieval quality"
+when_to_use: "When evaluating whether your RAG retriever surfaces the right documents for downstream generation"
 related:
   - kc_eval_metric
   - kc_benchmark_suite

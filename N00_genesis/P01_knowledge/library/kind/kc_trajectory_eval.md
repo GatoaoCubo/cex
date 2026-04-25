@@ -8,6 +8,8 @@ kind: knowledge_card
 8f: F3_inject
 pillar: P01
 tags: evaluation, trajectory, knowledge, CEX, system
+tldr: "Framework for evaluating knowledge pathway effectiveness -- completeness, consistency, efficiency"
+when_to_use: "When assessing whether knowledge flows through system nodes meet quality and performance targets"
 density_score: 1.0
 updated: "2026-04-17"
 related:

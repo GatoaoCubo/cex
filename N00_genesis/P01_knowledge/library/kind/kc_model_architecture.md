@@ -6,6 +6,8 @@ title: Model Architecture
 version: 1.0.0
 quality: 8.5
 pillar: P01
+tldr: "Structural design of neural networks: layer types, activations, connectivity, and optimization techniques"
+when_to_use: "When documenting or selecting a neural network architecture for a specific ML task or model design"
 density_score: 0.88
 related:
   - model-architecture-builder

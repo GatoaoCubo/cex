@@ -6,6 +6,8 @@ title: User Journey Map
 version: 1.0.0
 quality: 8.8
 pillar: P01
+tldr: "End-to-end customer experience map from awareness through post-purchase engagement"
+when_to_use: "When mapping touchpoints, conversion paths, and drop-off points across the buyer funnel"
 density_score: 0.97
 related:
   - user-journey-builder

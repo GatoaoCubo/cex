@@ -6,6 +6,8 @@ title: Compliance Checklist
 version: 1.0.0
 quality: 8.6
 pillar: P01
+tldr: "Actionable checklist of regulatory controls for SOC2, GDPR, and HIPAA compliance verification"
+when_to_use: "When auditing a system against specific regulatory frameworks with discrete pass/fail items"
 density_score: 1.0
 related:
   - kc_ai_compliance_gdpr

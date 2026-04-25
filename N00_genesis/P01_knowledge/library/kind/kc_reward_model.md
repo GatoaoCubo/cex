@@ -9,6 +9,8 @@ id: kc_reward_model
 title: Reward Model Design and Implementation
 description: Comprehensive guide to reward model architecture, training, and application in reinforcement learning systems
 keywords: reward model, reinforcement learning, reward shaping, inverse reinforcement learning, sparse rewards
+tldr: "Reward function design for RL agents covering shaping, normalization, multi-objective, and temporal discounting"
+when_to_use: "When defining how an RL agent scores actions to learn optimal behavior in an environment"
 related:
   - bld_knowledge_card_reward_model
   - reward-model-builder

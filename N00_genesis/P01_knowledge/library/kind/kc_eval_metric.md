@@ -6,6 +6,8 @@ title: Evaluation Metric Definition
 version: 1.0.0
 quality: 8.7
 pillar: P01
+tldr: "Quantitative measure definition for assessing ML model or system performance objectively"
+when_to_use: "When defining specific metrics like accuracy, F1, or AUC-ROC for model evaluation"
 density_score: 0.96
 related:
   - bld_knowledge_card_eval_metric

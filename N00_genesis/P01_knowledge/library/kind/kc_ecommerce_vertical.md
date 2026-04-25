@@ -6,6 +6,8 @@ title: eCommerce Vertical Knowledge Card
 version: 1.0.0
 quality: 8.8
 pillar: P01
+tldr: "Industry vertical covering cart/checkout, PCI-DSS compliance, recommendations, and fraud detection"
+when_to_use: "When building AI agents or tools targeting digital commerce operations and payment systems"
 density_score: 1.0
 related:
   - ecommerce-vertical-builder

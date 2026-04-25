@@ -7,6 +7,8 @@ version: 1.0.0
 quality: 8.6
 pillar: P01
 language: en
+tldr: "Net Promoter Score survey setup: 0-10 scale, segmentation, cadence, follow-up routing, and response handling"
+when_to_use: "When configuring customer satisfaction measurement with promoter/detractor segmentation and follow-up flows"
 density_score: 0.96
 related:
   - bld_instruction_nps_survey

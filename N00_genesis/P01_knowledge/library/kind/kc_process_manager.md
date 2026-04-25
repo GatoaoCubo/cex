@@ -8,6 +8,8 @@ pillar: P01
 nucleus: n00
 domain: kind-taxonomy
 tags: [kind, taxonomy, process_manager, eip, saga, P12]
+tldr: "Event-driven saga orchestrator with state machine, compensation logic, and correlation-keyed process tracking"
+when_to_use: "When coordinating a multi-service business process that requires event-driven steps and rollback on failure"
 density_score: 0.95
 updated: "2026-04-17"
 related:

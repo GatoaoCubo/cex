@@ -6,6 +6,8 @@ title: GitHub Issue Template
 version: 1.0.0
 quality: 8.6
 pillar: P01
+tldr: "Standardized issue templates for bug reports, feature requests, and questions with labels"
+when_to_use: "When a GitHub repository needs structured issue reporting with required fields and triage labels"
 density_score: 1.0
 related:
   - github-issue-template-builder
