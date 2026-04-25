@@ -89,6 +89,28 @@ ESCALATE (block + operator gate) | QUARANTINE (isolate + block compile).
 **MONITORS** -- answers: "Are all nuclei healthy and producing valid artifacts?"
 Exclusions: does not execute builds, write signals, or modify artifacts.
 
+## Threshold Configuration
+
+| Monitor | Metric | Warning | Critical | Source |
+|---------|--------|---------|----------|--------|
+| process-monitor | PID age without signal | 30min | 60min | spawn_pids.txt |
+| process-monitor | orphan count | >= 2 | >= 5 | Get-Process tree walk |
+| signal-monitor | signal latency | > 5min after commit | > 15min | signal file mtime |
+| signal-monitor | signal rate | > 50/min | > 100/min | signal dir file count |
+| artifact-monitor | compile drift count | >= 3 files | >= 10 files | md vs yaml mtime |
+| artifact-monitor | doctor failures | >= 1 | >= 5 | cex_doctor.py exit code |
+| resource-monitor | disk usage | > 80% | > 95% | repo dir size |
+| resource-monitor | git objects | > 50K loose | > 100K loose | git count-objects |
+
+## Action Matrix
+
+| Condition | Action | Escalation |
+|-----------|--------|------------|
+| Warning threshold crossed | ALERT: log + N07 notification | auto |
+| Critical threshold crossed | RESTART: kill process tree + re-dispatch | N07 confirms |
+| Multiple critical in same wave | ESCALATE: halt dispatch, operator gate | blocks grid |
+| Artifact quarantined | QUARANTINE: move to `.cex/runtime/quarantine/`, block compile | N05 reviews |
+
 ## Related Artifacts
 
 | Artifact | Relationship | Score |

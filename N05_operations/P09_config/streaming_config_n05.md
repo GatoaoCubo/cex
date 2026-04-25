@@ -75,6 +75,38 @@ Consumer: N07 monitor loop, cex_signal_watch.py, cex_doctor.py.
 | max_reconnect_attempts | null | Watcher re-polls on ENOENT until path exists |
 | shutdown | graceful | Flush buffer, close file handles on SIGTERM |
 
+## Event Schema
+
+Each JSONL line follows this envelope:
+
+```json
+{
+  "ts": "2026-04-25T14:30:00.000Z",
+  "stream": "signal|audit|health|compile|dispatch",
+  "nucleus": "n05",
+  "event": "signal_received|heartbeat|compile_ok|dispatch_start",
+  "payload": {},
+  "seq": 12345
+}
+```
+
+| Stream | Events | Avg Line Size | Burst Rate |
+|--------|--------|---------------|------------|
+| signal | signal_received, signal_sent, signal_expired | 256B | 10/min (gated) |
+| audit | tool_call, permission_check, error_logged | 512B | 50/min peak |
+| health | heartbeat, threshold_crossed, recovery | 128B | 1/min steady |
+| compile | compile_start, compile_ok, compile_fail, drift_detected | 384B | 20/min during grid |
+| dispatch | dispatch_start, dispatch_complete, dispatch_fail, pid_registered | 256B | 6/min max (1 per nucleus) |
+
+## Operational Tuning
+
+| Scenario | Adjustment | Reason |
+|----------|------------|--------|
+| Grid dispatch (6 nuclei) | buffer_bytes: 102400 | 2x buffer for burst |
+| Solo build | buffer_bytes: 25600 | halve for low throughput |
+| Debug mode | flush_interval_ms: 100 | near-realtime for troubleshooting |
+| Overnight evolve | backpressure_strategy: block | preserve all events for audit |
+
 ## Related Artifacts
 
 | Artifact | Relationship | Score |

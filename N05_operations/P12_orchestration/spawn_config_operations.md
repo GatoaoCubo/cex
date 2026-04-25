@@ -41,19 +41,20 @@ related:
 # Spawn Command
 
 ```powershell
-codex --dangerously-skip-permissions --model gpt-5.4 --reasoning-effort high
+claude --model claude-sonnet-4-6
 ```
 
 ## Parameters
 
 | Parameter | Value | Rationale |
 |-----------|-------|-----------|
-| `mode` | `solo` | repository execution tasks typically require single-owner control of the worktree |
-| `agent_group` | `operations_nucleus` | routes directly to the N05 operational persona |
-| `model` | `gpt-5.4` | strongest fit for review, debugging, CI/CD diagnosis, and patching |
-| `mcp_config` | `.mcp-n05.json` | reserved for GitHub Actions, Docker, pytest, and linter integrations |
-| `timeout_seconds` | `5400` | allows long test suites, compile loops, and release validation work |
+| `mode` | `solo` | repository execution tasks require single-owner control of the worktree |
+| `agent_group` | `railway_superintendent` | routes to N05 Railway deployment persona |
+| `model` | `opus` | Opus for superintendent-grade deploy orchestration; Sonnet for standard ops |
+| `mcp_config` | `.mcp-n05.json` | GitHub (read-only), railway, postgresql MCPs |
+| `timeout_seconds` | `7200` | 2h budget: allows full deploy lifecycle + rollback verification |
 | `handoff_path` | `.cex/runtime/handoffs/n05_task.md` | standard intake for operational missions |
+| `prompt_inline` | `false` | task always read from handoff file, never CLI arg (nested-quote safety) |
 
 ## Mandatory Behaviors
 
@@ -70,21 +71,23 @@ codex --dangerously-skip-permissions --model gpt-5.4 --reasoning-effort high
 - CI workflow repair
 - deployment or rollback readiness checks
 
-## Quality Metrics
+## Pre-spawn Checklist
 
-| Metric | Value | Threshold |
-|--------|-------|-----------|
-| Structural completeness | High | ≥ 8.5 |
-| Domain specificity | operations | Verified |
-| Cross-reference density | Adequate | ≥ 3 refs |
-| Actionability | Verified | Pass |
+| Check | Command | Block on Fail |
+|-------|---------|---------------|
+| Handoff exists | `test -f .cex/runtime/handoffs/n05_task.md` | yes |
+| No orphan N05 processes | `Get-Process claude \| Where { $_.Id -ne $PID }` | yes |
+| Git clean state | `git status --porcelain` empty | no (warn) |
+| Doctor green | `python _tools/cex_doctor.py` | yes |
+| Disk space > 1GB free | `Get-PSDrive C` | yes |
 
-### Key Principles
+## Post-spawn Verification
 
-- Operations artifacts follow CEX 8F pipeline from intent to publication
-- Quality gates enforce minimum 8.0 threshold for all published artifacts
-- Cross-nucleus references use explicit id-based linking, not path-based
-- Version tracking enables rollback to any previous artifact state
+| Check | Timeout | Remediation |
+|-------|---------|-------------|
+| Worker PID alive | 30s after spawn | re-dispatch |
+| First tool call observed | 120s | check handoff readability |
+| Heartbeat signal | 300s | kill + investigate |
 
 ## Related Artifacts
 

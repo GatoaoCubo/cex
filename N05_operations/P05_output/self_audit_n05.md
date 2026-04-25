@@ -144,7 +144,7 @@ N05 has solid artifact coverage (45+ files) but **tooling infrastructure is brok
 
 ## Boundary
 
-Conhecimento destilado, estatico, versionado. NAO eh instrucao, template, ou configuracao.
+Distilled, static, versioned knowledge. NOT an instruction, template, or configuration.
 
 ## Related Kinds
 

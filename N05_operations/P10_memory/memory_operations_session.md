@@ -87,7 +87,7 @@ approaches), conventions (established patterns), and accumulated context
 
 ## Boundary
 
-Estado mental variavel acumulado em runtime. NAO eh mental_model P02 (identidade fixa do agente, imutavel) nem session_state (efemero, snapshot).
+Mutable mental state accumulated at runtime. NOT a mental_model P02 (fixed agent identity, immutable) nor a session_state (ephemeral, snapshot).
 
 
 ## 8F Pipeline Function

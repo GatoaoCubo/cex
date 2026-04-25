@@ -452,7 +452,7 @@ And join `de`-linked words before object lookup.
 
 ## Boundary
 
-Atual vs anterior. NAO eh benchmark.
+Current vs previous comparison. NOT a benchmark.
 
 
 ## 8F Pipeline Function

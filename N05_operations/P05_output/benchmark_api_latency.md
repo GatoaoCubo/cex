@@ -121,7 +121,7 @@ hey -n 500 -c 10 -m GET https://api.example.railway.app/health
 
 ## Boundary
 
-Medicao de performance quantitativa. NAO eh eval (nao testa corretude) nem scoring_rubric (nao define criterios).
+Quantitative performance measurement. NOT an eval (does not test correctness) nor a scoring_rubric (does not define criteria).
 
 ## 8F Pipeline Function
 

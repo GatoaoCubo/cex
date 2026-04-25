@@ -92,7 +92,7 @@ Pass condition: all hard gates pass AND `performance_score >= 0.85`
 
 ## Boundary
 
-Barreira de qualidade com score numerico. NAO eh validator (P06, tecnico pass/fail) nem scoring_rubric (P07, define criterios).
+Quality barrier with numeric score. NOT a validator (P06, technical pass/fail) nor a scoring_rubric (P07, defines criteria).
 
 
 ## 8F Pipeline Function

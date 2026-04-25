@@ -167,7 +167,7 @@ is ready for a real from-zero rebuild. No blockers found. All integration points
 
 ## Boundary
 
-Medicao de performance quantitativa. NAO eh eval (nao testa corretude) nem scoring_rubric (nao define criterios).
+Quantitative performance measurement. NOT an eval (does not test correctness) nor a scoring_rubric (does not define criteria).
 
 
 ## 8F Pipeline Function

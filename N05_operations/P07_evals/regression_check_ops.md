@@ -80,6 +80,43 @@ Zero-failure snapshot captured after ascii-code-rule + orphan-cleanup confirmed 
    - `compile_drift`: `cex_compile.py <path>` on all modified .md files.
 4. **Escalation**: unresolved after 30 min -> N07 halts grid dispatch.
 
+## Detection Commands
+
+```bash
+# unicode_crash
+python _tools/cex_sanitize.py --check --scope _tools/ --scope boot/
+# exit 1 = non-ASCII found in executable code
+
+# orphan_processes (PowerShell)
+Get-Process claude -EA SilentlyContinue |
+  Where-Object { (New-TimeSpan $_.StartTime).TotalHours -gt 2 } |
+  ForEach-Object { "$($_.Id) orphan: age $(((New-TimeSpan $_.StartTime).TotalMinutes))min" }
+
+# signal_storm
+find .cex/runtime/signals/ -name "*.json" -newer .cex/runtime/signals/.last_check -exec echo {} \; | wc -l
+# > 100 in 60s = storm
+
+# self_scoring
+grep -rn "^quality: [0-9]" N05_operations/ --include="*.md" | grep -v "README"
+# any match = violation
+
+# cross_nucleus_write
+git diff --name-only HEAD~1 | grep -v "^N05_operations/" | grep -v "^\.cex/"
+# any match outside N05 scope = violation
+
+# compile_drift
+for f in $(find N05_operations -name "*.md" -newer N05_operations/compiled/ -type f 2>/dev/null); do
+  echo "DRIFT: $f"; done
+```
+
+## Retirement Policy
+
+A pattern is retired after:
+1. 90 consecutive clean runs (no detections)
+2. The root cause was architecturally eliminated (not just worked around)
+3. N07 approves removal via decision manifest
+4. The pattern is moved to `regression_check_ops_retired.md` with retirement date
+
 ## Related Artifacts
 
 | Artifact | Relationship | Score |

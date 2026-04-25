@@ -87,6 +87,37 @@ so N05 can resume safely before compile, commit, signal, or deploy guidance.
 - Cleanup trigger: successful completion signal or TTL expiry
 - Safe to overwrite: yes, if it is the same task scope and same commit window
 
+## Validation Example
+
+```yaml
+task_scope: "fix flaky test in cex_system_test.py::test_signal_roundtrip"
+changed_files:
+  - _tools/cex_system_test.py
+  - _tools/signal_writer.py
+evidence_sources:
+  - "git log --oneline -5 _tools/signal_writer.py"
+  - "python _tools/cex_system_test.py -k test_signal_roundtrip --tb=short"
+failing_surface: "test_signal_roundtrip -- AssertionError: signal file not found within 5s timeout"
+remediation_summary: "Increased poll timeout from 5s to 15s; added retry with 1s backoff"
+validation_commands:
+  - "python _tools/cex_system_test.py -k test_signal_roundtrip"
+  - "python _tools/cex_system_test.py --quick"
+  - "python _tools/cex_sanitize.py --check --scope _tools/"
+validation_status: passed
+rollback_notes: "git revert HEAD -- _tools/signal_writer.py _tools/cex_system_test.py"
+observability_notes: "Monitor signal_roundtrip_latency_ms in next 3 grid runs"
+residual_risk: "Timeout increase masks slow filesystem; root cause may be antivirus scan lock"
+```
+
+## Checkpoint Size Budget
+
+| Field | Max Size | Reason |
+|-------|----------|--------|
+| changed_files | 50 entries | larger = scope creep indicator |
+| evidence_sources | 20 entries | focus on critical evidence |
+| validation_commands | 10 entries | beyond 10 = task decomposition needed |
+| text fields | 500 chars each | checkpoint is a snapshot, not a report |
+
 ## Related Artifacts
 
 | Artifact | Relationship | Score |

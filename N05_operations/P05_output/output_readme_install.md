@@ -8,7 +8,7 @@ title: "Output Readme Install"
 version: 1.0.0
 author: N05
 tags: [output_template, operations, output]
-tldr: "Structured output artifact produced by nucleus pipeline with verified quality metrics"
+tldr: "Installation guide: Python 3.9+, optional Ollama for local models, 4 presets (Premium/Mid/Local/FT), cex_doctor.py verification."
 domain: operations
 created: 2026-04-06
 updated: 2026-04-07

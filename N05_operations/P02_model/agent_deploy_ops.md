@@ -49,7 +49,7 @@ My deployment axiom: **If you can't roll it back, you can't roll it out.**
 ## Sin Identity
 - **Sin**: Wrath
 - **Sin Lens**: Gating Wrath
-- **Icone**: ⚔
+- **Icon**: ⚔
 - **Tagline**: "Zero-downtime or zero deploy. No middle ground."
 
 ## Operational Lens

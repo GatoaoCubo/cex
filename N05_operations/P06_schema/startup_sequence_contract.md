@@ -20,7 +20,7 @@ related:
   - p01_kc_fastapi_patterns
   - p12_wf_railway_superintendent
   - KC_N05_POSTGRESQL_RAILWAY
-  - p04_conn_{{SERVICE_SLUG}}
+  - p04_conn_railway_fastapi
   - spec_n05_railway_superintendent
   - p06_schema_health_response
 ---
@@ -174,6 +174,6 @@ async def lifespan(app: FastAPI):
 | [[p01_kc_fastapi_patterns]] | upstream | 0.22 |
 | [[p12_wf_railway_superintendent]] | downstream | 0.20 |
 | [[KC_N05_POSTGRESQL_RAILWAY]] | upstream | 0.19 |
-| [[p04_conn_{{SERVICE_SLUG}}]] | upstream | 0.19 |
+| [[p04_conn_railway_fastapi]] | upstream | 0.19 |
 | [[spec_n05_railway_superintendent]] | related | 0.18 |
 | [[p06_schema_health_response]] | sibling | 0.18 |

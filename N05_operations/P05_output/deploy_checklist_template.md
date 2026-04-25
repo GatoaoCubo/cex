@@ -110,21 +110,15 @@ related:
 **Notes/Issues:**
 _______________________________________________
 
-## Quality Metrics
+## Rollback Triggers
 
-| Metric | Value | Threshold |
-|--------|-------|-----------|
-| Structural completeness | High | ≥ 8.5 |
-| Domain specificity | operations | Verified |
-| Cross-reference density | Adequate | ≥ 3 refs |
-| Actionability | Verified | Pass |
-
-### Key Principles
-
-- Operations artifacts follow CEX 8F pipeline from intent to publication
-- Quality gates enforce minimum 8.0 threshold for all published artifacts
-- Cross-nucleus references use explicit id-based linking, not path-based
-- Version tracking enables rollback to any previous artifact state
+| Condition | Action | SLA |
+|-----------|--------|-----|
+| Health endpoint returns non-200 within 30s of deploy | auto-rollback | 60s |
+| p95 latency exceeds 2x baseline | alert + manual decision | 5min |
+| Error rate > 5% for 2 consecutive minutes | auto-rollback | 120s |
+| Database migration failure | halt deploy, rollback migration | immediate |
+| Startup sequence < 14/14 checks pass | halt, investigate | immediate |
 
 ## Related Artifacts
 

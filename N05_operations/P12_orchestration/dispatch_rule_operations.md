@@ -84,31 +84,25 @@ If the request includes both Railway backend and other platforms:
 If answering correctly requires Railway platform knowledge, FastAPI backend 
 lifecycle, or PostgreSQL database operations, dispatch to Railway Superintendent.
 
-## Quality Metrics
+## Confidence Scoring
 
-| Metric | Value | Threshold |
-|--------|-------|-----------|
-| Structural completeness | High | ≥ 8.5 |
-| Domain specificity | operations | Verified |
-| Cross-reference density | Adequate | ≥ 3 refs |
-| Actionability | Verified | Pass |
+| Signal | Weight | Example |
+|--------|--------|---------|
+| Keyword match (deploy, railway, health, rollback) | 0.3 | "fix the deploy pipeline" -> 0.3 |
+| Domain-specific entity (railway.toml, asyncpg, uvicorn) | 0.4 | "railway.toml is misconfigured" -> 0.4 |
+| Explicit nucleus mention | 0.2 | "N05 should handle this" -> 0.2 |
+| Historical routing accuracy | 0.1 | prior correct routes to N05 | 
 
-### Key Principles
+Dispatch when cumulative confidence >= 0.85. Below 0.85: route to generic N05 operations.
+Below 0.50: escalate to N07 for routing decision.
 
-- Route by intent classification, not by filename convention
-- Fallback chains ensure graceful degradation on nucleus failure
-- Session isolation prevents cross-orchestrator interference
-- Signal completion within 30s of task finish or trigger timeout alert
+## Fallback Chain
 
-### Usage Reference
-
-```yaml
-# dispatch_rule integration
-artifact: dispatch_rule_operations
-nucleus: N05
-domain: operations
-quality_threshold: 9.0
-```
+| Priority | Target | Condition |
+|----------|--------|-----------|
+| 1 | Railway Superintendent (Opus) | Railway + FastAPI + PostgreSQL context |
+| 2 | Generic N05 Operations (Sonnet) | General ops, CI/CD, testing |
+| 3 | N07 Orchestrator | ambiguous routing, multi-nucleus scope |
 
 ## Related Artifacts
 

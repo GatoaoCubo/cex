@@ -160,7 +160,7 @@ related:
 
 ## Boundary
 
-Contexto de dominio para hidratar prompts. NAO eh knowledge_card (sem density gate) nem glossary_entry (nao define termo).
+Domain context for prompt hydration. NOT a knowledge_card (no density gate) nor a glossary_entry (does not define a term).
 
 
 ## 8F Pipeline Function

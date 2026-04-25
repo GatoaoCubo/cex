@@ -103,6 +103,26 @@ related:
 | inbound | N03 | code to test |
 | inbound | N02 | landing pages to deploy |
 
+## Hardening Rules (Gating Wrath)
+
+| Rule | Enforcement | Consequence |
+|------|-------------|-------------|
+| No self-scoring | `quality: null` mandatory in all artifacts | pre-commit hook rejects non-null |
+| ASCII-only code | `cex_sanitize.py --check` on every `.py`/`.ps1` | commit blocked |
+| Doctor green | `cex_doctor.py` exit 0 before signal | signal suppressed |
+| Compile sync | `.md` save triggers `cex_compile.py` | stale `.yaml` = compile_drift alert |
+| Scope guard | git diff limited to `N05_operations/` | cross-nucleus write = regression_check fail |
+| Signal on complete | `write_signal('n05', 'complete', score)` required | N07 timeout if missing |
+
+## Operational SLAs
+
+| Metric | Target | Measurement |
+|--------|--------|-------------|
+| Handoff-to-signal latency | < 30min for standard ops | timestamp delta |
+| Quality gate pass rate | > 95% first-pass | regression_check history |
+| Orphan process TTL | < 5min after detection | daemon heartbeat log |
+| Compile drift window | < 15min | file mtime comparison |
+
 ## Related Artifacts
 
 | Artifact | Relationship | Score |

@@ -27,7 +27,7 @@ related:
   - bld_instruction_daemon
   - bld_examples_daemon
   - bld_knowledge_card_daemon
-  - p04_daemon_{{NAME_SLUG}}
+  - p04_daemon_autonomous
   - p10_lr_daemon_builder
   - report_bootstrap_preflight
   - p04_daemon_autonomous
@@ -62,6 +62,29 @@ stale >3min = N07 alert. Metrics: orphans_reaped, signals_archived,
 compile_flags, locks_released. Alert: error_count >3 per 10min.
 Logging: structured JSON, .cex/runtime/logs/n05_daemon.jsonl, 7d.
 
+## Task Detail
+
+| Task | Interval | Detection Command | Action |
+|------|----------|-------------------|--------|
+| Heartbeat | 60s | write `n05_heartbeat.json` | timestamp + last_task + error_count |
+| Orphan reap (fast) | 5m | `Get-Process claude` age > 2h with no signal | `taskkill /F /PID <pid> /T` |
+| Orphan reap (deep) | 30m | Walk `Win32_Process` tree, match parentless workers | kill + audit log entry |
+| Signal archive | 10m | `ls .cex/runtime/signals/ -Filter *.json` count > 50 | move to `.cex/runtime/archive/signals/` |
+| PID hygiene | 10m | parse `spawn_pids.txt`, verify each PID alive | remove stale lines, log |
+| Compile verify | 15m | compare `.md` mtime vs `.yaml` mtime in `compiled/` | `cex_compile.py` on drifted files |
+| Lock rotate | 1h | `ls .cex/runtime/*.lock` age > 2h | delete stale locks, log |
+| Temp cleanup | 24h | `ls .cex/runtime/tmp/` | purge files older than 48h |
+
+## Resource Constraints
+
+| Resource | Limit | Enforcement |
+|----------|-------|-------------|
+| Memory | 128MB RSS max | PowerShell job memory cap |
+| CPU | 5% sustained | yield between tasks via `Start-Sleep` |
+| Open files | 256 max | close handles after each task cycle |
+| Disk writes | append-only JSONL | never overwrite audit logs |
+| Error budget | 3 errors per 10min | exceed = pause 5min + alert N07 |
+
 ## Related Artifacts
 
 | Artifact | Relationship | Score |
@@ -69,7 +92,7 @@ Logging: structured JSON, .cex/runtime/logs/n05_daemon.jsonl, 7d.
 | [[bld_instruction_daemon]] | upstream | 0.35 |
 | [[bld_examples_daemon]] | downstream | 0.35 |
 | [[bld_knowledge_card_daemon]] | upstream | 0.33 |
-| [[p04_daemon_{{NAME_SLUG}}]] | sibling | 0.32 |
+| [[p04_daemon_autonomous]] | sibling | 0.32 |
 | [[p10_lr_daemon_builder]] | downstream | 0.31 |
 | [[report_bootstrap_preflight]] | downstream | 0.26 |
 | [[p04_daemon_autonomous]] | sibling | 0.25 |
