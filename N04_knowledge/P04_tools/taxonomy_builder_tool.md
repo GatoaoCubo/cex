@@ -29,7 +29,7 @@ related:
 
 ## Purpose
 
-Constructs, maintains, and audits the CEX taxonomy. Turns the flat kind registry (123 kinds) into navigable trees, detects classification anomalies, and enforces tag normalization rules.
+Constructs, maintains, and audits the CEX taxonomy. Turns the flat kind registry (300 kinds) into navigable trees, detects classification anomalies, and enforces tag normalization rules.
 
 ## Usage
 
@@ -53,7 +53,7 @@ python _tools/taxonomy_builder.py distribution
 ## Taxonomy Tree Format
 
 ```
-CEX (2184 artifacts)
+CEX (3647 artifacts)
 ├── P01 Knowledge (10 kinds, 197 compiled)
 │   ├── knowledge_card (123)
 │   ├── glossary_entry (0) ← GAP
@@ -102,7 +102,7 @@ An artifact is orphaned if ANY of:
 
 ## Boundary
 
-Ferramenta de linha de comando pontual. NAO eh skill (sem fases) nem daemon (nao persiste em background).
+One-shot CLI tool. Not a skill (no phases) or daemon (no background persistence).
 
 
 ## 8F Pipeline Function

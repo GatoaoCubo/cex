@@ -1,6 +1,5 @@
 ---
-quality: 8.8
-quality: 8.0
+quality: null
 id: kc_concept_graph
 kind: knowledge_card
 8f: F3_inject
@@ -43,7 +42,7 @@ These concepts have no dependencies -- start here if new to CEX:
 | `CEX` | The enterprise brain system (not an agent) | "What is CEX?" story in any lens |
 | `artifact` | A .md file with YAML frontmatter that encodes one piece of knowledge | "The finished product" in factory lens |
 | `pillar` | P01-P12 domain groupings (12 departments) | "The 12 zones" in game lens |
-| `kind` | Atomic artifact type (293 types exist) | "Product specification" in factory lens |
+| `kind` | Atomic artifact type (300 types exist) | "Product specification" in factory lens |
 
 ## Tier 1 (requires roots)
 

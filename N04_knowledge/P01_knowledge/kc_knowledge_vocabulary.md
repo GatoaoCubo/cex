@@ -54,7 +54,7 @@ Cross-nucleus shared terms (kind, pillar, 8F) are NOT redefined here -- they are
 | `context_window_management` | Techniques to fit relevant content within LLM context limits (200K for N04) | N04 working memory management, LRU eviction, compression | "token management", "prompt trimming" (too vague) |
 | `knowledge_graph` | Graph structure where nodes are entities and edges are typed relationships | N04 graph retrieval mode; kno_knowledge_graph_n04.md | "entity network", "relationship map" |
 | `ontology` | Formal specification of concepts and relationships in a domain | N04 taxonomy design capability; formal ontologies (OWL, RDF) | "taxonomy" (taxonomy = hierarchy only; ontology = full semantics) |
-| `taxonomy` | Hierarchical classification of concepts (is-a relationships only) | CEX 257-kind taxonomy; pillar hierarchy P01-P12 | "ontology" (ontology is more expressive than taxonomy) |
+| `taxonomy` | Hierarchical classification of concepts (is-a relationships only) | CEX 300-kind taxonomy; pillar hierarchy P01-P12 | "ontology" (ontology is more expressive than taxonomy) |
 | `folksonomy` | User-generated, non-hierarchical tagging system | Tag fields in CEX frontmatter (flat tags[], not controlled hierarchy) | "taxonomy" (folksonomies are emergent, not designed) |
 | `knowledge_engineering` | Discipline of building knowledge bases and expert systems | N04's overall domain; KC creation, taxonomy design, RAG architecture | "knowledge management" (KE is technical discipline; KM is organizational) |
 | `information_architecture` | Organization, structure, and labeling of knowledge for findability | Pillar P01-P12 structure; nucleus routing; kind taxonomy | "information design" (less specific), "knowledge organization" |
@@ -71,7 +71,7 @@ Cross-nucleus shared terms (kind, pillar, 8F) are NOT redefined here -- they are
 
 These terms are defined in N00_genesis and apply identically in N04:
 - `8F pipeline` (F1-F8): canonical N04 reasoning protocol
-- `kind`: atomic artifact type from the 257-kind taxonomy
+- `kind`: atomic artifact type from the 300-kind taxonomy
 - `pillar`: P01-P12 domain grouping
 - `nucleus`: N00-N07 operational agent
 - `quality_gate`: F7 GOVERN validation

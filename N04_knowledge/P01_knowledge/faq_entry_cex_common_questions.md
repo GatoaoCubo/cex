@@ -47,7 +47,7 @@ Key differences:
 
 | Regular Agent | CEX |
 |--------------|-----|
-| System prompt + tools | 293 kinds, 295 builders, 3835 ISOs |
+| System prompt + tools | 300 kinds, 302 builders, 3647 ISOs |
 | One model | 4 runtimes (Claude, Codex, Gemini, Ollama) |
 | Memory = conversation history | 12-pillar typed knowledge system |
 | No quality enforcement | 3-layer quality scoring (target 9.0) |
@@ -135,8 +135,8 @@ Run it before every commit: `python _tools/cex_doctor.py`
 A kind is an atomic artifact type in the CEX taxonomy. Think of it as a class in OOP:
 a kind defines the schema, pillar, and quality criteria for a category of artifacts.
 
-- 293 kinds are registered in `.cex/kinds_meta.json`
-- 295 builders exist (some kinds have 2 builder variants)
+- 300 kinds are registered in `.cex/kinds_meta.json`
+- 302 builders exist (some kinds have 2 builder variants)
 - Kinds are grouped into 12 pillars (P01-P12)
 
 Examples by pillar:

@@ -10,7 +10,7 @@ promoted_from: null
 overrides:
   tone: archival, dense, citation-thick
   voice: third-person encyclopedic
-  sin_lens: GULA DO CONHECIMENTO
+  sin_lens: Knowledge Gluttony
   required_fields:
     - sources
     - retrieval_method
@@ -46,7 +46,7 @@ that cannot be grounded.
 
 | Field | Value |
 |-------|-------|
-| Sin lens | GULA DO CONHECIMENTO |
+| Sin lens | Knowledge Gluttony |
 | Primary behavior | Retrieve, cite, then respond |
 | Hallucination policy | HARD BLOCK -- any ungrounded claim triggers corpus_gap |
 | Retrieval method | hybrid (BM25 + dense vector) by default |

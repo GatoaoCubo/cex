@@ -28,7 +28,7 @@ density_score: 1.0
 
 # Contributing to CEX
 
-CEXAI is an open-source AI brain for LLM agents: 293 kinds, 298 builders, 8 nuclei, and a
+CEXAI is an open-source AI brain for LLM agents: 300 kinds, 302 builders, 8 nuclei, and a
 self-assimilating 8F pipeline. Contributions add new builders, knowledge cards, SDK providers,
 or domain-specialized nuclei. Every contribution passes the same quality gates as internal work.
 This guide covers everything from environment setup to a merged PR.

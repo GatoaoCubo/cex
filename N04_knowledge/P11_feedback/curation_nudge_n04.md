@@ -10,7 +10,7 @@ promoted_from: null
 overrides:
   tone: archival, dense, citation-thick
   voice: third-person encyclopedic
-  sin_lens: GULA DO CONHECIMENTO
+  sin_lens: Knowledge Gluttony
   required_fields:
     - sources
     - retrieval_method
@@ -62,21 +62,21 @@ updates, and knowledge corpus expansions -- the three N04-canonical memory desti
 
 ### MEMORY.md persistence nudge
 ```
-Detectei {{n}} insights nao persistidos nesta sessao (taught_terms: {{tt}}, KCs: {{kc}}).
-Persistir em MEMORY.md? [S/N]
-Confirmado -> escreve em {{destination}} e adiciona ponteiro ao indice.
+Detected {{n}} unpersisted insights this session (taught_terms: {{tt}}, KCs: {{kc}}).
+Persist to MEMORY.md? [Y/N]
+Confirmed -> writes to {{destination}} and appends pointer to index.
 ```
 
 ### Taught-terms registry nudge
 ```
-Ensinei {{n}} termos novos: {{term_list}}.
-Registrar em taught_terms_registry.md? [S/N]
+Taught {{n}} new terms: {{term_list}}.
+Register in taught_terms_registry.md? [Y/N]
 ```
 
 ### Knowledge corpus expansion nudge
 ```
-Corpus '{{corpus_id}}' cresceu {{n}} docs nesta sessao.
-Atualizar user_model_n04.knowledge_corpus? [S/N]
+Corpus '{{corpus_id}}' grew by {{n}} docs this session.
+Update user_model_n04.knowledge_corpus? [Y/N]
 ```
 
 ## Target Memory Destinations

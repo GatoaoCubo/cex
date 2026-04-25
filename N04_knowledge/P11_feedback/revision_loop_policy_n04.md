@@ -10,7 +10,7 @@ promoted_from: null
 overrides:
   tone: archival, dense, citation-thick
   voice: third-person encyclopedic
-  sin_lens: GULA DO CONHECIMENTO
+  sin_lens: Knowledge Gluttony
   required_fields:
     - sources
     - retrieval_method

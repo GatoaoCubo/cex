@@ -82,7 +82,7 @@ Tracks all classification decisions made during taxonomy maintenance. Prevents r
 
 ## Boundary
 
-Qual memoria usar. NAO eh session_state.
+Which memory layer to query. Not a session_state.
 
 
 ## 8F Pipeline Function

@@ -11,7 +11,7 @@ author: N04_knowledge
 domain: "cex platform"
 quality: 8.7
 tags: [repo_map, architecture, navigation, cex]
-tldr: "Authoritative directory-by-directory map of the CEX repo: 293 kinds, 295 builders, 8 nuclei, 4 runtimes."
+tldr: "Authoritative directory-by-directory map of the CEX repo: 300 kinds, 302 builders, 8 nuclei, 4 runtimes."
 token_budget: 4096
 symbol_count: 182
 file_count: 3853
@@ -38,7 +38,7 @@ density_score: 1.0
 **Total Python files:** 182 (root + `_tools/` + `cex_sdk/`)
 **Total Markdown artifacts:** 3853 (builders + nuclei + genesis)
 **Builders:** 298 directories in `archetypes/builders/`
-**Kinds registered:** 293 in `.cex/kinds_meta.json`
+**Kinds registered:** 300 in `.cex/kinds_meta.json`
 **Knowledge cards:** 300 in `N00_genesis/P01_knowledge/library/kind/`
 
 ---
@@ -49,7 +49,7 @@ density_score: 1.0
 |------|------|---------|
 | `CLAUDE.md` | Config | Primary system prompt for Claude Code + CEX nucleus routing |
 | `CONTRIBUTING.md` | Doc | 4 contribution paths: builders, KCs, SDK, vertical nuclei |
-| `README.md` | Doc | Public-facing overview: 293 kinds, 8 nuclei, 12 pillars |
+| `README.md` | Doc | Public-facing overview: 300 kinds, 8 nuclei, 12 pillars |
 | `CHANGELOG.md` | Doc | Release history (human-readable) |
 | `CODE_OF_CONDUCT.md` | Doc | Contributor Covenant 2.1 |
 | `SECURITY.md` | Doc | Vulnerability reporting (private channel) |
@@ -219,7 +219,7 @@ Dispatch and boot infrastructure for multi-nucleus grid runs.
 | `.cex/runtime/plans/` | Mission wave plans |
 | `.cex/cache/` | Pre-compiled prompt cache (260 builders) |
 | `.cex/config/nucleus_models.yaml` | Per-nucleus model + fallback_chain config |
-| `.cex/kinds_meta.json` | 293-kind registry (source of truth for F1 CONSTRAIN) |
+| `.cex/kinds_meta.json` | 300-kind registry (source of truth for F1 CONSTRAIN) |
 | `.cex/learning_records/` | Session learning records (F3b PERSIST) |
 | `.cex/experiments/results.tsv` | Benchmark / experiment history |
 

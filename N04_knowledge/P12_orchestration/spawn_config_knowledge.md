@@ -95,7 +95,7 @@ git add -A && git commit -m "[N04] <description>"
 
 ## Boundary
 
-Configuracao de spawn de agent_groups. NAO eh boot_config (P02, per-provider) nem env_config (P09, variaveis).
+Spawn configuration for agent_groups. Not a boot_config (P02, per-provider) or env_config (P09, environment variables).
 
 
 ## 8F Pipeline Function

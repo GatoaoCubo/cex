@@ -80,7 +80,7 @@ Every text that enters the vector store passes through your configuration decisi
 
 ## Boundary
 
-Definicao completa de agente (persona + capabilities). NAO eh skill (P04, habilidade executavel) nem system_prompt (P03, como fala).
+Full agent definition (persona + capabilities). Not a skill (P04, executable ability) or system_prompt (P03, voice configuration).
 
 
 ## 8F Pipeline Function

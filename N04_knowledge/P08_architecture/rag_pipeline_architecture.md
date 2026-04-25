@@ -101,11 +101,11 @@ related:
 
 | Metric | Value |
 |--------|-------|
-| Total artifacts | 2,184 |
+| Total artifacts | 3,647+ |
 | Vocabulary size | ~12,000 terms |
 | TF-IDF index | Active (`cex_retriever.py`) |
 | P01 compiled library | 197 artifacts |
-| Knowledge cards | 123 kind KCs + domain KCs |
+| Knowledge cards | 300 kind KCs + domain KCs |
 | Embedding index | Not yet deployed (gap) |
 
 ## Related Artifacts

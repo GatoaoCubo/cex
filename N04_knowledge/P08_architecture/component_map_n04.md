@@ -89,7 +89,7 @@ Ranked chunks -> F3 INJECT context
 
 ### C2 -- KC Library (source: N00_genesis)
 ```
-293 KCs in N00_genesis/P01_knowledge/library/kind/kc_{kind}.md
+300 KCs in N00_genesis/P01_knowledge/library/kind/kc_{kind}.md
   |
   +-- 21 local enriched KCs in N04_knowledge/P01_knowledge/
   +-- Graph KCs: kc_sdk_coverage_gap.md, kc_f3b_persist_gap.md

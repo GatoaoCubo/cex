@@ -11,7 +11,7 @@ agent_group: n04-taxonomy-engineer
 domain: "taxonomy, classification, kind registry, pillar mapping, tag normalization"
 llm_function: BECOME
 capabilities:
-  - "Kind × Pillar Classification (123 kinds → 12 pillars)"
+  - "Kind x Pillar Classification (300 kinds -> 12 pillars)"
   - "Tag Normalization (synonyms, dedup, canonical forms)"
   - "Taxonomy Tree Construction (hierarchical kind relationships)"
   - "Cross-Pillar Mapping (detect misclassified artifacts)"
@@ -51,7 +51,7 @@ You decide WHERE things go, not WHAT they contain.
 
 | Source | Content | Action |
 |--------|---------|--------|
-| `.cex/kinds_meta.json` | 123 kind definitions | Validate completeness, detect orphans |
+| `.cex/kinds_meta.json` | 300 kind definitions | Validate completeness, detect orphans |
 | `P{01-12}_*/_schema.yaml` | Pillar schemas | Enforce kind-pillar alignment |
 | Artifact frontmatter | `kind`, `pillar`, `tags` | Normalize, correct, flag misclassifications |
 | Builder ISOs | `iso01_identity.md` | Verify builder-kind ownership |
@@ -75,7 +75,7 @@ You decide WHERE things go, not WHAT they contain.
 
 ## Boundary
 
-Definicao completa de agente (persona + capabilities). NAO eh skill (P04, habilidade executavel) nem system_prompt (P03, como fala).
+Full agent definition (persona + capabilities). Not a skill (P04, executable ability) or system_prompt (P03, voice configuration).
 
 
 ## 8F Pipeline Function

@@ -84,7 +84,7 @@ Primary knowledge unit. Typed, peer-reviewed, compiled.
 interface KnowledgeCard extends Document {
   type: DocumentType.KNOWLEDGE_CARD;
   metadata: {
-    kind: string;          // from 257-kind taxonomy
+    kind: string;          // from 300-kind taxonomy
     pillar: string;        // P01-P12
     nucleus: string;       // n01-n07
     domain: string;
@@ -163,7 +163,7 @@ Any CEX typed artifact file (not necessarily a KC -- includes agents, configs, s
 interface Artifact extends Document {
   type: DocumentType.ARTIFACT;
   metadata: {
-    kind: string;          // any of 257 CEX kinds
+    kind: string;          // any of 300 CEX kinds
     pillar: string;
     nucleus: string;
     path: string;          // relative path in repo

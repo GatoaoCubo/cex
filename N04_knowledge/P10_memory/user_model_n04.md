@@ -10,7 +10,7 @@ promoted_from: null
 overrides:
   tone: archival, dense, citation-thick
   voice: third-person encyclopedic
-  sin_lens: GULA DO CONHECIMENTO
+  sin_lens: Knowledge Gluttony
   required_fields:
     - sources           # 3+ minimum per derived fact
     - retrieval_method  # how the fact was surfaced

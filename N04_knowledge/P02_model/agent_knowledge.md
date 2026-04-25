@@ -37,7 +37,7 @@ provider:
   strategy: "Claude for reasoning + structuring. Gemini for large-scale ingestion. Swap on limits."
 quality: 9.1
 tags: [agent, n04, knowledge, engineer, database, ml, fine-tuning, supabase]
-tldr: "The Knowledge Engineer nucleus — gula por conhecimento. Manages the KC lifecycle, database layer (Supabase/SQL), fine-tuning exports, and ML dataset prep. Feeds every other nucleus with knowledge."
+tldr: "The Knowledge Engineer nucleus -- Knowledge Gluttony. Manages the KC lifecycle, database layer (Supabase/SQL), fine-tuning exports, and ML dataset prep. Feeds every other nucleus with knowledge."
 density_score: 0.94
 related:
   - p03_sp_knowledge_nucleus

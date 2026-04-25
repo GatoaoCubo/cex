@@ -105,7 +105,7 @@ Loaded at every session start. When a new procedure is learned, it is appended h
 
 ## SOP-05: Taxonomy Extension (Adding New Kind)
 
-**Trigger**: encounter a concept that has no existing kind in 257-kind taxonomy
+**Trigger**: encounter a concept that has no existing kind in 300-kind taxonomy
 
 1. Check: is this concept 80% covered by an existing kind? (use cex_retriever)
 2. If yes: document as sub-variant in existing KC, do not create new kind

@@ -153,7 +153,7 @@ No fim de cada missao de construcao, o artefato passa pelo gate de qualidade (F7
 Cada nucleo do CEX e movido por um dos 7 pecados capitais -- mas transformado em virtude. A *Inveja Analitica* do N01 o torna o melhor pesquisador do sistema. A *Soberba Inventiva* do N03 o faz construir com orgulho e precisao. A *Gula do Conhecimento* do N04 nunca deixa uma fonte sem indexar. O pecado, canalizado, e forca. O pecado nao controlado e caos.
 
 **Hook 5 -- Adao nomeou todas as criaturas:**
-"Deus trouxe os animais a Adao para ver como ele os chamaria." Nomear e ter autoridade sobre. No CEX, o *kind* (tipo de artefato) e o nome que Adao da a cada criatura do sistema. Ha 293 nomes -- 293 tipos de artefatos. Cada nome carrega uma lei, um construtor, um schema. Quando voce cria um novo kind, voce esta exercendo a autoridade adâmica de nomear o que ainda nao tem nome.
+"Deus trouxe os animais a Adao para ver como ele os chamaria." Nomear e ter autoridade sobre. No CEX, o *kind* (tipo de artefato) e o nome que Adao da a cada criatura do sistema. Ha 300 nomes -- 300 tipos de artefatos. Cada nome carrega uma lei, um construtor, um schema. Quando voce cria um novo kind, voce esta exercendo a autoridade adâmica de nomear o que ainda nao tem nome.
 
 ## Quick Reference
 

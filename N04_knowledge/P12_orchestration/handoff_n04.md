@@ -1,6 +1,5 @@
 ---
-quality: 7.8
-quality: 7.4
+quality: null
 id: handoff_n04
 kind: handoff
 8f: F8_collaborate
@@ -12,7 +11,7 @@ promoted_from: null
 overrides:
   tone: archival, dense, citation-thick
   voice: third-person encyclopedic
-  sin_lens: GULA DO CONHECIMENTO
+  sin_lens: Knowledge Gluttony
   required_fields:
     - sources
     - retrieval_method
@@ -112,7 +111,7 @@ from_nucleus: n04
 to_nucleus: n07
 mission: HERMES_ASSIMILATION
 wave: W3
-task_summary: "Produced 7 fractal mirrors for N04 with GULA DO CONHECIMENTO sin lens"
+task_summary: "Produced 7 fractal mirrors for N04 with Knowledge Gluttony sin lens"
 deliverables:
   - N04_knowledge/P10_memory/user_model_n04.md
   - N04_knowledge/P11_feedback/revision_loop_policy_n04.md

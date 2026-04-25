@@ -10,7 +10,7 @@ author: n04_knowledge
 domain: knowledge-management
 quality: 9.2
 tags: [glossary, taxonomy, classification, hierarchy]
-tldr: "A hierarchical classification system organizing CEX's 123 kinds across 12 pillars with canonical tags, enforced by kind registry and schema contracts."
+tldr: "A hierarchical classification system organizing CEX's 300 kinds across 12 pillars with canonical tags, enforced by kind registry and schema contracts."
 density_score: 0.96
 updated: "2026-04-13"
 related:
@@ -104,7 +104,7 @@ Injects structured classification metadata into all CEX artifacts during creatio
 ## Taxonomy Evolution
 
 - **Phase 1 (2025)**: Initial 12 pillars defined with 50 kinds.  
-- **Phase 2 (2026)**: Expanded to 123 kinds across all pillars.  
+- **Phase 2 (2026)**: Expanded to 300 kinds across all pillars.  
 - **Phase 3 (2027)**: Integration with AI-driven classification agents.  
 - **Phase 4 (2028)**: Dynamic schema contracts with versioned evolution.  
 - **Phase 5 (2029)**: Full automation of taxonomy maintenance via machine learning.  

@@ -13,7 +13,7 @@ status: active
 created: "2026-04-17"
 updated: "2026-04-17"
 author: n04_knowledge
-tldr: "CEX = enterprise knowledge factory. Core analogy: 8F pipeline x 12 pillars x 257 kinds = the factory floor. Seven sin-lens nuclei produce typed artifacts through a universal reasoning protocol. Any LLM can load this model and immediately navigate CEX as a senior engineer would."
+tldr: "CEX = enterprise knowledge factory. Core analogy: 8F pipeline x 12 pillars x 300 kinds = the factory floor. Seven sin-lens nuclei produce typed artifacts through a universal reasoning protocol. Any LLM can load this model and immediately navigate CEX as a senior engineer would."
 density_score: 0.91
 sources:
   - CLAUDE.md
@@ -52,7 +52,7 @@ The factory floor metaphor:
     x
 12 pillars (WHERE knowledge lives)
     x
-257 kinds (WHAT is being produced)
+300 kinds (WHAT is being produced)
     =
 The factory floor (the product CEX delivers)
 ```
@@ -93,7 +93,7 @@ Every nucleus follows the same 8 functions for every task. Never fewer, never re
 | Function | What It Does | Key Output |
 |----------|-------------|-----------|
 | F1 CONSTRAIN | Resolve kind + pillar + schema from user intent | `{kind, pillar, max_bytes, naming}` |
-| F2 BECOME | Load builder identity (13 ISOs per kind) | Builder system prompt + role |
+| F2 BECOME | Load builder identity (12 ISOs per kind) | Builder system prompt + role |
 | F2b SPEAK | Load controlled vocabulary KC | Canonical term set for all subsequent output |
 | F3 INJECT | Assemble context (KCs, examples, memory, brand) | 10+ grounded sources |
 | F4 REASON | Plan sections, approach (Template-First/Hybrid/Fresh) | Section plan, dependency map |
@@ -138,9 +138,9 @@ N00 Genesis is the pre-sin archetype: the template from which N01-N07 are born.
 N00_genesis/         <- the mold
     P01_knowledge/   <- canonical KC library (424 KCs, source of truth)
     P02_model/       <- base agent definitions
-    P03_prompt/      <- universal prompt layers (257-kind intent resolution)
+    P03_prompt/      <- universal prompt layers (300-kind intent resolution)
     ...P12           <- all 12 pillars defined here first
-    archetypes/      <- 259 builders (13 ISOs each = 3381 total ISOs)
+    archetypes/      <- 302 builders (12 ISOs each = 3647 total ISOs)
     boot/            <- session startup artifacts
 
 N0X_{domain}/        <- instance of N00 mold
@@ -169,7 +169,7 @@ User: "document our API" (vague)
     L0: cex_intent_resolver.py    -- Python, 0 tokens, maps to {kind, pillar, nucleus, verb}
     |                                result: {kind=api_reference, pillar=P05, nucleus=N03, verb=create}
     |
-    L1: p03_pc_cex_universal.md   -- 257-kind bilingual (PT+EN) intent resolution table
+    L1: p03_pc_cex_universal.md   -- 300-kind bilingual (PT+EN) intent resolution table
     |                                confirms: api_reference is the right kind
     |
     L2: kc_{domain}_vocabulary.md -- per-nucleus controlled vocabulary overlay
@@ -180,7 +180,7 @@ Precise builder dispatch: api-reference-builder, P05, N03
 ```
 
 This pipeline is why CEX does not hallucinate kinds. L0 is deterministic.
-L1 covers all 257 kinds in both Portuguese and English. L2 adds domain precision.
+L1 covers all 300 kinds in both Portuguese and English. L2 adds domain precision.
 
 ---
 
@@ -221,8 +221,8 @@ The canonical form is unambiguous to ANY LLM on ANY runtime (Claude/Codex/Gemini
 
 | Anti-Pattern | CEX Behavior |
 |-------------|-------------|
-| Single system prompt agent | 259 typed builders, each with 13 ISOs |
-| Untyped knowledge ("just docs") | 257 kinds, each with schema + builder + KC |
+| Single system prompt agent | 302 typed builders, each with 12 ISOs |
+| Untyped knowledge ("just docs") | 300 kinds, each with schema + builder + KC |
 | N07 builds artifacts directly | N07 NEVER builds; dispatches to N01-N06 |
 | Self-scored quality | quality: null until peer review |
 | Invented kinds | Only kinds from `.cex/kinds_meta.json` |
@@ -234,9 +234,9 @@ The canonical form is unambiguous to ANY LLM on ANY runtime (Claude/Codex/Gemini
 ## How to Navigate CEX (For Any LLM)
 
 1. **Identify the task domain** -> select nucleus (N01-N06) or let N07 route
-2. **Map to kind** -> check `.cex/kinds_meta.json` (257 entries)
+2. **Map to kind** -> check `.cex/kinds_meta.json` (300 entries)
 3. **Find the pillar** -> kind's frontmatter has `pillar: Pxx`
-4. **Load builder** -> `archetypes/builders/{kind}-builder/` (13 ISOs)
+4. **Load builder** -> `archetypes/builders/{kind}-builder/` (12 ISOs)
 5. **Run 8F** -> follow F1-F8, never skip F7 GOVERN
 6. **Save to pillar** -> `N0X_{domain}/P{xx}_{name}/{kind}_{domain}.md`
 7. **Signal** -> `write_signal(nucleus, event, score)`

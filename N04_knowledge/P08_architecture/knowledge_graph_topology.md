@@ -10,7 +10,7 @@ author: n04_knowledge
 domain: knowledge-infrastructure
 quality: 9.0
 tags: [architecture, knowledge-graph, topology, entities, relationships, n04]
-tldr: "CEX knowledge graph: 6 entity types, 9 relationship types, 3 traversal patterns. Maps how 2184 artifacts interconnect."
+tldr: "CEX knowledge graph: 6 entity types, 9 relationship types, 3 traversal patterns. Maps how 3647+ artifacts interconnect."
 density_score: 0.93
 related:
   - bld_architecture_kind

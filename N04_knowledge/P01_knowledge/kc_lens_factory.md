@@ -126,7 +126,7 @@ related:
 
 ## Discovery Questions (Socratic Seeds)
 
-1. If the factory has 293 product specs (kinds) but only 12 departments (pillars), how does each department know which specs it's responsible for?
+1. If the factory has 300 product specs (kinds) but only 12 departments (pillars), how does each department know which specs it's responsible for?
 2. A worker (nucleus) receives a work order (handoff) that says "make this product." What information must the work order include so the worker never has to ask a question?
 3. When the QA inspector (F7) rejects a product, it goes back to the production machine (F6). Why is there a maximum of 2 retries, and what happens if the product still fails?
 4. The floor manager (N07) never operates a machine. What would happen if N07 started building artifacts directly?
