@@ -9,7 +9,7 @@ title: "Output Template Visual Workflow"
 version: "1.0.0"
 author: wave1_builder_gen_v2
 tags: [visual_workflow, builder, output_template]
-tldr: "Template with vars for visual_workflow production"
+tldr: "Output template for visual workflow: frontmatter field guide, required body sections, filled example, and quality gate checklist for gui-based workflow editor configuration."
 domain: "visual_workflow construction"
 created: "2026-04-14"
 updated: "2026-04-14"
@@ -52,6 +52,32 @@ def workflow_step():
     print("{{step_name}} executed by {{role}}")
 ```
 ```
+
+## Quality Gate Checklist
+
+| Gate | Check | Pass Condition |
+|------|-------|---------------|
+| H01 | Frontmatter complete | All required fields present with valid types |
+| H02 | ID matches filename | id field equals filename stem |
+| H03 | Naming convention | Follows p12_vw_{{name}}.md pattern |
+| H04 | Body sections present | All required sections non-empty |
+| H05 | Size within limits | Total <= 5120 bytes |
+| H06 | No placeholder text | No {{var}} unreplaced |
+| H07 | quality: null | Never self-scored |
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `output` |
+| Pillar | P05 |
+| Domain | visual workflow construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |
 
 ## Related Artifacts
 

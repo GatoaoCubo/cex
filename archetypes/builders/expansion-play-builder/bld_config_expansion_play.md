@@ -9,7 +9,7 @@ title: "Config Expansion Play"
 version: "1.0.0"
 author: wave1_builder_gen_v2
 tags: [expansion_play, builder, config]
-tldr: "Naming, paths, limits for expansion_play production"
+tldr: "Production constraints for expansion play: naming (p03_ep_{{name}}.md), output paths (P03/), size limit 5120B. Expansion play."
 domain: "expansion_play construction"
 created: "2026-04-14"
 updated: "2026-04-14"
@@ -56,6 +56,38 @@ on_quality_fail: null
 ## Domain
 expansion_play configuration -- governs naming, paths, and runtime limits for expansion play artifacts.
 Expansion plays are triggered by usage thresholds and cross-sell signals, targeting NRR >120%.
+
+## Domain-Specific Constraints
+
+| Constraint | Value |
+|-----------|-------|
+| Boundary | Expansion play |
+| Dependencies | customer_segment, sales_playbook |
+| Primary 8F function | F8_collaborate |
+| Max artifact size | 5120 bytes |
+
+## Edge Cases
+
+| Scenario | Handling |
+|----------|---------|
+| Missing required frontmatter field | Fail H01 gate; return to F6 |
+| ID collision with existing artifact | Append version suffix (_v2) |
+| Body exceeds 5120 bytes | Trim prose sections; preserve tables |
+| Dependency customer_segment not found | Warn; proceed with defaults |
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `config` |
+| Pillar | P09 |
+| Domain | expansion play construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |
 
 ## Related Artifacts
 

@@ -9,7 +9,7 @@ title: "Distillation Config Builder - Tools ISO"
 version: "1.0.0"
 author: n03_builder
 tags: [distillation_config, builder, tools]
-tldr: "Tools available for distillation config production."
+tldr: "Tool registry for distillation config builder: CEX pipeline tools (compile, score, retrieve), file system ops (Read/Write/Edit/Glob/Grep), and domain-specific automation for teacher-student model compression and knowledge distillation setup."
 domain: "model distillation"
 created: "2026-04-23"
 updated: "2026-04-23"
@@ -43,3 +43,26 @@ related:
 |----------|-------|--------|
 | ALLOWED | Read, Write, Edit, Bash, Glob, Grep | Permitted |
 | DENIED | (none) | -- |
+
+## CEX Pipeline Tools
+
+| Tool | Purpose | When |
+|------|---------|------|
+| cex_compile.py | Compile .md artifact to .yaml | After Write (F8) |
+| cex_score.py | Peer-review quality scoring | After production (F7) |
+| cex_retriever.py | Discover similar artifacts by TF-IDF | During F3 INJECT |
+| cex_doctor.py | Health check builder ISOs | Before dispatch |
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `tools` |
+| Pillar | P04 |
+| Domain | distillation config construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

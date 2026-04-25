@@ -29,6 +29,7 @@ related:
   - bld_schema_skill
   - p04_skill_verify
 ---
+
 # Skill
 
 This ISO defines a plugin contract: the extension surface a host uses to load, register, and invoke external capability.
@@ -42,6 +43,37 @@ max_bytes: 4096
 naming: p04_skill_{{name}}.md + .yaml
 core: true
 
+## Token Budget
+
+| Component | Allocation | Notes |
+|-----------|-----------|-------|
+| System prompt | 15%% | Builder identity + sin lens |
+| Context (ISOs) | 40%% | 12 ISOs loaded per builder |
+| Domain knowledge | 25%% | KCs + examples + memory |
+| Generation headroom | 20%% | Artifact output space |
+
+## Style Constraints
+
+| Dimension | Guideline |
+|-----------|-----------|
+| Voice | Technical, precise, builder-appropriate |
+| Structure | Tables over prose; data over description |
+| Density | >= 0.85; every sentence adds information |
+| References | Use canonical kind names, not synonyms |
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `prompt` |
+| Pillar | P03 |
+| Domain | plugin construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |
 
 ## Related Artifacts
 

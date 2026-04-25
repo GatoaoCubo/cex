@@ -9,7 +9,7 @@ title: "Config Data Residency"
 version: "1.0.0"
 author: wave1_builder_gen_v2
 tags: [data_residency, builder, config]
-tldr: "Naming, paths, limits for data_residency production"
+tldr: "Production constraints for data residency: naming (p09_dr_{{name}}.yaml), output paths (P09/), size limit 3072B. Residency spec."
 domain: "data_residency construction"
 created: "2026-04-14"
 updated: "2026-04-14"
@@ -46,6 +46,38 @@ pre_build: null
 post_build: null
 on_error: null
 on_quality_fail: null
+
+## Domain-Specific Constraints
+
+| Constraint | Value |
+|-----------|-------|
+| Boundary | Residency spec |
+| Dependencies | env_config, secret_config |
+| Primary 8F function | F1_constrain |
+| Max artifact size | 3072 bytes |
+
+## Edge Cases
+
+| Scenario | Handling |
+|----------|---------|
+| Missing required frontmatter field | Fail H01 gate; return to F6 |
+| ID collision with existing artifact | Append version suffix (_v2) |
+| Body exceeds 3072 bytes | Trim prose sections; preserve tables |
+| Dependency env_config not found | Warn; proceed with defaults |
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `config` |
+| Pillar | P09 |
+| Domain | data residency construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |
 
 ## Related Artifacts
 

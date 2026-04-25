@@ -46,3 +46,34 @@ query_optimizer --evaluated_by--> retrieval_evaluator (P07)
 | Defines rewriting, expansion, re-ranking | An embedding_config -- embedding configures vectors |
 | Pre-retrieval optimization | A knowledge_index -- index configures search structure |
 | Latency-budgeted pipeline | A search_strategy -- strategy defines overall search approach |
+
+## Component Boundaries
+
+Query transformation and decomposition rules for RAG retrieval. NOT search_strategy (which strategy to use) nor retriever_config (retrieval parameters) nor rag_source (data source definition).
+
+| Boundary | In Scope | Out of Scope |
+|----------|----------|-------------|
+| Kind scope | query optimizer | Adjacent kinds |
+| Dependencies | search_strategy, retriever_config, rag_source | Transitive deps |
+
+## Interfaces
+
+| Interface | Direction | Contract |
+|-----------|-----------|----------|
+| Schema (P06) | upstream | Validates structure |
+| Output (P05) | downstream | Produces artifacts |
+| Config (P09) | lateral | Constrains production |
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `architecture` |
+| Pillar | P08 |
+| Domain | query optimizer construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

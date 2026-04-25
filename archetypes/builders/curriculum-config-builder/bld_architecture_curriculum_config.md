@@ -45,3 +45,34 @@ curriculum_config --independent-- inference_config (P09)
 | Training data scheduling and ordering | A synthetic_data_config -- that generates data |
 | Defines difficulty progression and mixing | A distillation_config -- that configures teacher-student |
 | Specifies phases and competence gates | An eval_metric -- that defines quality measures |
+
+## Component Boundaries
+
+Training data ordering and adaptive pacing. NOT training_method (how to train) nor dataset_card (data documentation) nor finetune_config (full training job).
+
+| Boundary | In Scope | Out of Scope |
+|----------|----------|-------------|
+| Kind scope | curriculum config | Adjacent kinds |
+| Dependencies | dataset_card, training_method, eval_metric | Transitive deps |
+
+## Interfaces
+
+| Interface | Direction | Contract |
+|-----------|-----------|----------|
+| Schema (P06) | upstream | Validates structure |
+| Output (P05) | downstream | Produces artifacts |
+| Config (P09) | lateral | Constrains production |
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `architecture` |
+| Pillar | P08 |
+| Domain | curriculum config construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

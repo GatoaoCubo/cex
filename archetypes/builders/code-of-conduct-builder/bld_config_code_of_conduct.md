@@ -9,7 +9,7 @@ title: "Config Code of Conduct"
 version: "1.0.0"
 author: n04_knowledge
 tags: [code_of_conduct, builder, config]
-tldr: "Naming, paths, limits for code_of_conduct production"
+tldr: "Production constraints for code of conduct: naming (p05_coc_{{name}}.md), output paths (P05/), size limit 4096B. Code of conduct."
 domain: "code_of_conduct construction"
 created: "2026-04-14"
 updated: "2026-04-14"
@@ -45,6 +45,38 @@ pre_build: null
 post_build: python _tools/cex_compile.py {path}
 on_error: log to .cex/runtime/signals/
 on_quality_fail: retry F6 PRODUCE once, then escalate to N07
+
+## Domain-Specific Constraints
+
+| Constraint | Value |
+|-----------|-------|
+| Boundary | Code of conduct |
+| Dependencies | knowledge_card |
+| Primary 8F function | F8_collaborate |
+| Max artifact size | 4096 bytes |
+
+## Edge Cases
+
+| Scenario | Handling |
+|----------|---------|
+| Missing required frontmatter field | Fail H01 gate; return to F6 |
+| ID collision with existing artifact | Append version suffix (_v2) |
+| Body exceeds 4096 bytes | Trim prose sections; preserve tables |
+| Dependency knowledge_card not found | Warn; proceed with defaults |
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `config` |
+| Pillar | P09 |
+| Domain | code of conduct construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |
 
 ## Related Artifacts
 

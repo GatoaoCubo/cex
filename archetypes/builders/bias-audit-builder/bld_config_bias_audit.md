@@ -9,7 +9,7 @@ title: "Config Bias Audit"
 version: "1.0.0"
 author: wave1_builder_gen
 tags: [bias_audit, builder, config]
-tldr: "Naming, paths, limits for bias_audit production"
+tldr: "Production constraints for bias audit: naming (p07_ba_{{name}}.md), output paths (P07/), size limit 5120B. Fairness evaluation."
 domain: "bias_audit construction"
 created: "2026-04-13"
 updated: "2026-04-13"
@@ -51,6 +51,38 @@ Examples:
 - post_build: null
 - on_error: null
 - on_quality_fail: null
+
+## Domain-Specific Constraints
+
+| Constraint | Value |
+|-----------|-------|
+| Boundary | Fairness evaluation |
+| Dependencies | eval_dataset, scoring_rubric |
+| Primary 8F function | F7_govern |
+| Max artifact size | 5120 bytes |
+
+## Edge Cases
+
+| Scenario | Handling |
+|----------|---------|
+| Missing required frontmatter field | Fail H01 gate; return to F6 |
+| ID collision with existing artifact | Append version suffix (_v2) |
+| Body exceeds 5120 bytes | Trim prose sections; preserve tables |
+| Dependency eval_dataset not found | Warn; proceed with defaults |
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `config` |
+| Pillar | P09 |
+| Domain | bias audit construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |
 
 ## Related Artifacts
 

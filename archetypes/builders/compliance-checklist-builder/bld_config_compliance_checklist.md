@@ -9,7 +9,7 @@ title: "Config Compliance Checklist"
 version: "1.0.0"
 author: wave1_builder_gen_v2
 tags: [compliance_checklist, builder, config]
-tldr: "Naming, paths, limits for compliance_checklist production"
+tldr: "Production constraints for compliance checklist: naming (p11_cc_{{name}}.md), output paths (P11/), size limit 6144B. Audit checklist."
 domain: "compliance_checklist construction"
 created: "2026-04-14"
 updated: "2026-04-14"
@@ -47,6 +47,38 @@ Examples:
 - post_build: null
 - on_error: null
 - on_quality_fail: null
+
+## Domain-Specific Constraints
+
+| Constraint | Value |
+|-----------|-------|
+| Boundary | Audit checklist |
+| Dependencies | quality_gate, knowledge_card |
+| Primary 8F function | F1_constrain |
+| Max artifact size | 6144 bytes |
+
+## Edge Cases
+
+| Scenario | Handling |
+|----------|---------|
+| Missing required frontmatter field | Fail H01 gate; return to F6 |
+| ID collision with existing artifact | Append version suffix (_v2) |
+| Body exceeds 6144 bytes | Trim prose sections; preserve tables |
+| Dependency quality_gate not found | Warn; proceed with defaults |
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `config` |
+| Pillar | P09 |
+| Domain | compliance checklist construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |
 
 ## Related Artifacts
 

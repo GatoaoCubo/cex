@@ -54,3 +54,33 @@ None -- independent builder.
 | Builder | Why |
 |---------|-----|
 | distillation-config-builder | Needs generated data specification for training |
+
+## Integration Points
+
+| Point | Direction | Protocol |
+|-------|-----------|----------|
+| F8 COLLABORATE | outbound | signal_writer.write_signal() |
+| F3 INJECT | inbound | Receives upstream artifacts via handoff |
+| dataset_card | upstream | Must exist before synthetic data config production |
+| eval_dataset | upstream | Must exist before synthetic data config production |
+
+## Dependencies
+
+| Dependency | Required | Purpose |
+|-----------|----------|---------|
+| dataset_card | yes | Upstream artifact for synthetic data config |
+| eval_dataset | yes | Upstream artifact for synthetic data config |
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `orchestration` |
+| Pillar | P12 |
+| Domain | synthetic data config construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

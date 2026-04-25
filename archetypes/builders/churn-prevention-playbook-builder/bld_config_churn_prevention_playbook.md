@@ -9,7 +9,7 @@ title: "Config Churn Prevention Playbook"
 version: "1.0.0"
 author: n05_wave6
 tags: [churn_prevention_playbook, builder, config]
-tldr: "Naming, paths, limits for churn_prevention_playbook production"
+tldr: "Production constraints for churn prevention playbook: naming (p03_cpp_{{name}}.md), output paths (P03/), size limit 6144B. Churn playbook."
 domain: "churn_prevention_playbook construction"
 created: "2026-04-14"
 updated: "2026-04-14"
@@ -44,6 +44,38 @@ pre_build: load health_score_model from Gainsight config
 post_build: compile + signal N06 with win-back offer parameters
 on_error: log to `.cex/runtime/signals/churn_error.json`
 on_quality_fail: rebuild -- enforce save script objection handlers
+
+## Domain-Specific Constraints
+
+| Constraint | Value |
+|-----------|-------|
+| Boundary | Churn playbook |
+| Dependencies | customer_segment, cohort_analysis |
+| Primary 8F function | F6_produce |
+| Max artifact size | 6144 bytes |
+
+## Edge Cases
+
+| Scenario | Handling |
+|----------|---------|
+| Missing required frontmatter field | Fail H01 gate; return to F6 |
+| ID collision with existing artifact | Append version suffix (_v2) |
+| Body exceeds 6144 bytes | Trim prose sections; preserve tables |
+| Dependency customer_segment not found | Warn; proceed with defaults |
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `config` |
+| Pillar | P09 |
+| Domain | churn prevention playbook construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |
 
 ## Related Artifacts
 

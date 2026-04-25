@@ -47,3 +47,26 @@ triggers: "configure training curriculum", "data ordering strategy", "training s
 In a crew, I handle TRAINING DATA SCHEDULING.
 I answer: "in what order and proportion should training data be presented?"
 I do NOT handle: data generation (synthetic_data_config), model architecture, inference configuration.
+
+## Capability Matrix
+
+| Capability | Level | Evidence |
+|-----------|-------|---------|
+| curriculum config production | Primary | Builder-specific |
+| 8F pipeline execution | Required | All builders |
+| Quality self-assessment | Prohibited | quality: null enforced |
+| Cross-reference resolution | Required | Related artifacts table |
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `model` |
+| Pillar | P02 |
+| Domain | curriculum config construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

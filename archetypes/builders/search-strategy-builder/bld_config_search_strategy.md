@@ -9,7 +9,7 @@ title: "Config Search Strategy"
 version: "1.0.0"
 author: wave1_builder_gen
 tags: [search_strategy, builder, config]
-tldr: "Naming, paths, limits for search_strategy production"
+tldr: "Production constraints for search strategy: naming (p04_ss_{{name}}.md), output paths (P04/), size limit 4096B. Search/inference strategy."
 domain: "search_strategy construction"
 created: "2026-04-13"
 updated: "2026-04-13"
@@ -44,6 +44,38 @@ pre_build: null
 post_build: null
 on_error: null
 on_quality_fail: null
+
+## Domain-Specific Constraints
+
+| Constraint | Value |
+|-----------|-------|
+| Boundary | Search/inference strategy |
+| Dependencies | retriever_config |
+| Primary 8F function | F5_call |
+| Max artifact size | 4096 bytes |
+
+## Edge Cases
+
+| Scenario | Handling |
+|----------|---------|
+| Missing required frontmatter field | Fail H01 gate; return to F6 |
+| ID collision with existing artifact | Append version suffix (_v2) |
+| Body exceeds 4096 bytes | Trim prose sections; preserve tables |
+| Dependency retriever_config not found | Warn; proceed with defaults |
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `config` |
+| Pillar | P09 |
+| Domain | search strategy construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |
 
 ## Related Artifacts
 

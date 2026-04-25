@@ -47,3 +47,26 @@ triggers: "optimize queries", "improve search", "query rewriting pipeline"
 In a crew, I handle QUERY OPTIMIZATION.
 I answer: "how to transform user queries for better retrieval?"
 I do NOT handle: index config (knowledge_index), embedding selection (embedding_config), retrieval logic (retriever_config).
+
+## Capability Matrix
+
+| Capability | Level | Evidence |
+|-----------|-------|---------|
+| query optimizer production | Primary | Builder-specific |
+| 8F pipeline execution | Required | All builders |
+| Quality self-assessment | Prohibited | quality: null enforced |
+| Cross-reference resolution | Required | Related artifacts table |
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `model` |
+| Pillar | P02 |
+| Domain | query optimizer construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

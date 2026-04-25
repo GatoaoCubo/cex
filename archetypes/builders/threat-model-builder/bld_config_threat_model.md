@@ -9,7 +9,7 @@ title: "Config Threat Model"
 version: "1.0.0"
 author: wave1_builder_gen
 tags: [threat_model, builder, config]
-tldr: "Naming, paths, limits for threat_model production"
+tldr: "Production constraints for threat model: naming (p11_tm_{{name}}.md), output paths (P11/), size limit 5120B. Threat/risk assessment."
 domain: "threat_model construction"
 created: "2026-04-13"
 updated: "2026-04-13"
@@ -46,6 +46,38 @@ pre_build: null
 post_build: null  
 on_error: null  
 on_quality_fail: null
+
+## Domain-Specific Constraints
+
+| Constraint | Value |
+|-----------|-------|
+| Boundary | Threat/risk assessment |
+| Dependencies | safety_policy, knowledge_card |
+| Primary 8F function | F4_reason |
+| Max artifact size | 5120 bytes |
+
+## Edge Cases
+
+| Scenario | Handling |
+|----------|---------|
+| Missing required frontmatter field | Fail H01 gate; return to F6 |
+| ID collision with existing artifact | Append version suffix (_v2) |
+| Body exceeds 5120 bytes | Trim prose sections; preserve tables |
+| Dependency safety_policy not found | Warn; proceed with defaults |
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `config` |
+| Pillar | P09 |
+| Domain | threat model construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |
 
 ## Related Artifacts
 

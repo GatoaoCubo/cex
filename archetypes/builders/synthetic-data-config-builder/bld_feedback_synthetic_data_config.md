@@ -46,3 +46,35 @@ updated: "2026-04-23"
 | 2 | Return to F6 with explicit fix | F6 |
 | 3 | Re-run F7 GOVERN | F7 |
 | 4 | Max 2 retries before escalation | F8 |
+
+## Quality Dimensions
+
+| Dimension | Weight | Criteria |
+|-----------|--------|----------|
+| D1 Structural completeness | 20%% | All required sections present |
+| D2 Domain accuracy | 25% | Content matches synthetic data config domain |
+| D3 Density | 20%% | >= 0.85 information density |
+| D4 Cross-references | 15%% | Valid links to related artifacts |
+| D5 Actionability | 20%% | Builder can produce from this alone |
+
+## Common Failures
+
+| Failure | Frequency | Fix |
+|---------|-----------|-----|
+| Generic content | High | Add domain-specific examples |
+| Missing boundary adherence | Medium | Check kinds_meta.json boundary |
+| Low density score | Medium | Replace prose with tables |
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `feedback` |
+| Pillar | P11 |
+| Domain | synthetic data config construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

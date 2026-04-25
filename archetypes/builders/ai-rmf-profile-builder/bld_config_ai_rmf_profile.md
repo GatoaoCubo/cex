@@ -9,7 +9,7 @@ title: "Config AI RMF Profile"
 version: "1.0.0"
 author: n01_wave7
 tags: [ai_rmf_profile, builder, config, NIST, AI-RMF]
-tldr: "Naming, paths, limits for ai_rmf_profile production"
+tldr: "Production constraints for ai rmf profile: naming (p11_rmf_{{profile}}.md), output paths (P11/), size limit 5120B. NIST AI-RMF vertical profile."
 domain: "ai_rmf_profile construction"
 created: "2026-04-14"
 updated: "2026-04-14"
@@ -44,6 +44,38 @@ pre_build: validate_nist_action_ids
 post_build: compile + signal_n07
 on_error: null
 on_quality_fail: retry_with_gap_analysis
+
+## Domain-Specific Constraints
+
+| Constraint | Value |
+|-----------|-------|
+| Boundary | NIST AI-RMF vertical profile |
+| Dependencies | safety_policy, guardrail |
+| Primary 8F function | F7_govern |
+| Max artifact size | 5120 bytes |
+
+## Edge Cases
+
+| Scenario | Handling |
+|----------|---------|
+| Missing required frontmatter field | Fail H01 gate; return to F6 |
+| ID collision with existing artifact | Append version suffix (_v2) |
+| Body exceeds 5120 bytes | Trim prose sections; preserve tables |
+| Dependency safety_policy not found | Warn; proceed with defaults |
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `config` |
+| Pillar | P09 |
+| Domain | ai rmf profile construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |
 
 ## Related Artifacts
 

@@ -47,3 +47,26 @@ triggers: "configure model serving", "set up inference", "optimize latency"
 In a crew, I handle MODEL SERVING CONFIGURATION.
 I answer: "how to serve this model with what performance targets?"
 I do NOT handle: model training (distillation_config), tokenization (tokenizer_config), evaluation (eval_metric).
+
+## Capability Matrix
+
+| Capability | Level | Evidence |
+|-----------|-------|---------|
+| inference config production | Primary | Builder-specific |
+| 8F pipeline execution | Required | All builders |
+| Quality self-assessment | Prohibited | quality: null enforced |
+| Cross-reference resolution | Required | Related artifacts table |
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `model` |
+| Pillar | P02 |
+| Domain | inference config construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

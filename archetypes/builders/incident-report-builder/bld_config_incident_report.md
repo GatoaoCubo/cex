@@ -9,7 +9,7 @@ title: "Config Incident Report"
 version: "1.1.0"
 author: n05_ops
 tags: [incident_report, builder, config]
-tldr: "Naming, paths, limits for incident_report production"
+tldr: "Production constraints for incident report: naming (p11_ir_{{name}}.md), output paths (P11/), size limit 5120B. Incident post-mortem."
 domain: "incident_report construction"
 created: "2026-04-13"
 updated: "2026-04-13"
@@ -43,6 +43,38 @@ pre_build: null
 post_build: null
 on_error: null
 on_quality_fail: null
+
+## Domain-Specific Constraints
+
+| Constraint | Value |
+|-----------|-------|
+| Boundary | Incident post-mortem |
+| Dependencies | audit_log, knowledge_card |
+| Primary 8F function | F8_collaborate |
+| Max artifact size | 5120 bytes |
+
+## Edge Cases
+
+| Scenario | Handling |
+|----------|---------|
+| Missing required frontmatter field | Fail H01 gate; return to F6 |
+| ID collision with existing artifact | Append version suffix (_v2) |
+| Body exceeds 5120 bytes | Trim prose sections; preserve tables |
+| Dependency audit_log not found | Warn; proceed with defaults |
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `config` |
+| Pillar | P09 |
+| Domain | incident report construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |
 
 ## Related Artifacts
 

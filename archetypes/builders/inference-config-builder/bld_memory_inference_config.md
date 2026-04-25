@@ -33,3 +33,30 @@ VRAM budget and batching strategy are the two most impactful inference configura
 **Continuous batching**: always prefer over static when the framework supports it. 3-5x throughput improvement at no quality cost.
 
 **Concurrency**: measure actual VRAM usage under load before setting max_concurrent. Estimates are unreliable.
+
+## Evidence
+
+Production experience from inference config artifact generation. 
+Inference-time generation parameters 
+Patterns derived from builder runs, quality gate failures, and peer review feedback.
+
+## Pitfalls
+
+- **Missing frontmatter fields**: omitting required fields causes H01 gate failure.
+- **Generic descriptions**: vague purpose/tldr reduces retrieval accuracy.
+- **Ignoring boundary**: Inference-time generation parameters.
+- **Orphaned dependencies**: referencing model_provider without verifying it exists.
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `memory` |
+| Pillar | P10 |
+| Domain | inference config construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

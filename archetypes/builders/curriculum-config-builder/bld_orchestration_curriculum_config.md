@@ -9,7 +9,7 @@ title: "Curriculum Config Builder - Orchestration ISO"
 version: "1.0.0"
 author: n03_builder
 tags: [curriculum_config, builder, collaboration]
-tldr: "Crew collaboration protocol for curriculum config builder."
+tldr: "Orchestration protocol for curriculum config: workflow integration, handoff signals, dependency management, and cross-nucleus coordination for training data ordering, difficulty scheduling, and adaptive pacing configuration."
 domain: "training curriculum"
 created: "2026-04-23"
 updated: "2026-04-23"
@@ -57,3 +57,35 @@ I do not generate data. I do not define model architecture.
 | Builder | Why |
 |---------|-----|
 | distillation-config-builder | Uses curriculum schedule for training data ordering |
+
+## Integration Points
+
+| Point | Direction | Protocol |
+|-------|-----------|----------|
+| F8 COLLABORATE | outbound | signal_writer.write_signal() |
+| F3 INJECT | inbound | Receives upstream artifacts via handoff |
+| dataset_card | upstream | Must exist before curriculum config production |
+| training_method | upstream | Must exist before curriculum config production |
+| eval_metric | upstream | Must exist before curriculum config production |
+
+## Dependencies
+
+| Dependency | Required | Purpose |
+|-----------|----------|---------|
+| dataset_card | yes | Upstream artifact for curriculum config |
+| training_method | yes | Upstream artifact for curriculum config |
+| eval_metric | yes | Upstream artifact for curriculum config |
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `orchestration` |
+| Pillar | P12 |
+| Domain | curriculum config construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

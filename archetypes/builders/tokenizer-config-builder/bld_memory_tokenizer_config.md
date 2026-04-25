@@ -33,3 +33,30 @@ Tokenizer configuration errors are silent and catastrophic. The tokenizer must m
 **Special tokens**: always define BOS (beginning of sequence), EOS (end of sequence), PAD (padding), and UNK (unknown). Missing EOS is the most dangerous omission.
 
 **Max length**: set to the model's context window or lower. Never exceed the model's maximum supported length.
+
+## Evidence
+
+Production experience from tokenizer config artifact generation. 
+Tokenization vocabulary and encoding rules 
+Patterns derived from builder runs, quality gate failures, and peer review feedback.
+
+## Pitfalls
+
+- **Missing frontmatter fields**: omitting required fields causes H01 gate failure.
+- **Generic descriptions**: vague purpose/tldr reduces retrieval accuracy.
+- **Ignoring boundary**: Tokenization vocabulary and encoding rules.
+- **Orphaned dependencies**: referencing embedding_config without verifying it exists.
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `memory` |
+| Pillar | P10 |
+| Domain | tokenizer config construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

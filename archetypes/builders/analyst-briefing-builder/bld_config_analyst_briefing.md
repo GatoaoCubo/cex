@@ -9,7 +9,7 @@ title: "Config Analyst Briefing"
 version: "1.0.0"
 author: n01_wave6
 tags: [analyst_briefing, builder, config]
-tldr: "Naming, paths, limits for analyst_briefing production"
+tldr: "Production constraints for analyst briefing: naming (p05_ab_{{name}}.md), output paths (P05/), size limit 6144B. Analyst briefing."
 domain: "analyst_briefing construction"
 created: "2026-04-14"
 updated: "2026-04-14"
@@ -44,6 +44,38 @@ pre_build: validate proof_point_count >= 3
 post_build: run bld_quality_gate (HARD gates H01-H08)
 on_error: log to ar_error_log.md
 on_quality_fail: escalate to AR team lead
+
+## Domain-Specific Constraints
+
+| Constraint | Value |
+|-----------|-------|
+| Boundary | Analyst briefing |
+| Dependencies | knowledge_card, scoring_rubric |
+| Primary 8F function | F4_reason |
+| Max artifact size | 6144 bytes |
+
+## Edge Cases
+
+| Scenario | Handling |
+|----------|---------|
+| Missing required frontmatter field | Fail H01 gate; return to F6 |
+| ID collision with existing artifact | Append version suffix (_v2) |
+| Body exceeds 6144 bytes | Trim prose sections; preserve tables |
+| Dependency knowledge_card not found | Warn; proceed with defaults |
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `config` |
+| Pillar | P09 |
+| Domain | analyst briefing construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |
 
 ## Related Artifacts
 

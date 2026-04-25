@@ -46,3 +46,26 @@ related:
 | ALLOWED | Read, Write, Edit, Bash, Glob, Grep | Explicitly permitted |
 | DENIED | (none) | -- |
 | EFFECTIVE | Bash, Edit, Glob, Grep, Read, Write | ALLOWED minus DENIED |
+
+## CEX Pipeline Tools
+
+| Tool | Purpose | When |
+|------|---------|------|
+| cex_compile.py | Compile .md artifact to .yaml | After Write (F8) |
+| cex_score.py | Peer-review quality scoring | After production (F7) |
+| cex_retriever.py | Discover similar artifacts by TF-IDF | During F3 INJECT |
+| cex_doctor.py | Health check builder ISOs | Before dispatch |
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `tools` |
+| Pillar | P04 |
+| Domain | retrieval evaluator construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

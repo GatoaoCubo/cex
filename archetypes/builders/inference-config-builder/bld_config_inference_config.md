@@ -46,3 +46,35 @@ related:
 | int8 | 4x vs fp32 | <1% loss | Memory-constrained |
 | int4/gguf_q4 | 8x vs fp32 | 2-5% loss | Edge deployment |
 | gguf_q5 | 6x vs fp32 | 1-2% loss | Quality/size balance |
+
+## Domain-Specific Constraints
+
+| Constraint | Value |
+|-----------|-------|
+| Boundary | Inference-time generation parameters |
+| Dependencies | model_provider, thinking_config, streaming_config |
+| Primary 8F function | F1_constrain |
+| Max artifact size | 4096 bytes |
+
+## Edge Cases
+
+| Scenario | Handling |
+|----------|---------|
+| Missing required frontmatter field | Fail H01 gate; return to F6 |
+| ID collision with existing artifact | Append version suffix (_v2) |
+| Body exceeds 4096 bytes | Trim prose sections; preserve tables |
+| Dependency model_provider not found | Warn; proceed with defaults |
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `config` |
+| Pillar | P09 |
+| Domain | inference config construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

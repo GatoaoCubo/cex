@@ -9,7 +9,7 @@ title: "Config Sdk Example"
 version: "1.0.0"
 author: wave1_builder_gen_v2
 tags: [sdk_example, builder, config]
-tldr: "Naming, paths, limits for sdk_example production"
+tldr: "Production constraints for sdk example: naming (p04_sdk_{{name}}.md), output paths (P04/), size limit 5120B. SDK example."
 domain: "sdk_example construction"
 created: "2026-04-14"
 updated: "2026-04-14"
@@ -45,6 +45,38 @@ Example: `/artifacts/sdk/P04/userauth`
 - post_build: null
 - on_error: null
 - on_quality_fail: null
+
+## Domain-Specific Constraints
+
+| Constraint | Value |
+|-----------|-------|
+| Boundary | SDK example |
+| Dependencies | api_client, function_def |
+| Primary 8F function | F6_produce |
+| Max artifact size | 5120 bytes |
+
+## Edge Cases
+
+| Scenario | Handling |
+|----------|---------|
+| Missing required frontmatter field | Fail H01 gate; return to F6 |
+| ID collision with existing artifact | Append version suffix (_v2) |
+| Body exceeds 5120 bytes | Trim prose sections; preserve tables |
+| Dependency api_client not found | Warn; proceed with defaults |
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `config` |
+| Pillar | P09 |
+| Domain | sdk example construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |
 
 ## Related Artifacts
 

@@ -45,3 +45,34 @@ inference_config --independent-- embedding_config (P01)
 | Serving configuration: framework, quantization, batching | A distillation_config -- that trains the model |
 | Defines how a model runs in production | A tokenizer_config -- that configures tokenization |
 | Specifies hardware and performance targets | A model_provider -- that manages model hosting |
+
+## Component Boundaries
+
+Inference-time generation parameters. NOT model_provider (which model to call) nor thinking_config (extended reasoning budget) nor streaming_config (transport streaming).
+
+| Boundary | In Scope | Out of Scope |
+|----------|----------|-------------|
+| Kind scope | inference config | Adjacent kinds |
+| Dependencies | model_provider, thinking_config, streaming_config | Transitive deps |
+
+## Interfaces
+
+| Interface | Direction | Contract |
+|-----------|-----------|----------|
+| Schema (P06) | upstream | Validates structure |
+| Output (P05) | downstream | Produces artifacts |
+| Config (P09) | lateral | Constrains production |
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `architecture` |
+| Pillar | P08 |
+| Domain | inference config construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

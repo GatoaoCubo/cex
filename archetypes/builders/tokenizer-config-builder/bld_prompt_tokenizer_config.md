@@ -10,7 +10,7 @@ title: "Tokenizer Config Builder - Prompt ISO"
 version: "1.0.0"
 author: n03_builder
 tags: [tokenizer_config, builder, instruction]
-tldr: "Production instructions for tokenizer config artifacts."
+tldr: "Prompt engineering for tokenizer config: structure template, token budget, style constraints, and role framing for bpe, sentencepiece, or tiktoken tokenizer parameters and vocabulary configuration."
 domain: "tokenizer configuration"
 created: "2026-04-23"
 updated: "2026-04-23"
@@ -49,3 +49,35 @@ related:
 4. Verify max_length set
 5. Cross-check: this is TOKENIZER CONFIG, not model config or embedding config
 6. If score < 8.0: revise before outputting
+
+## Token Budget
+
+| Component | Allocation | Notes |
+|-----------|-----------|-------|
+| System prompt | 15%% | Builder identity + sin lens |
+| Context (ISOs) | 40%% | 12 ISOs loaded per builder |
+| Domain knowledge | 25%% | KCs + examples + memory |
+| Generation headroom | 20%% | Artifact output space |
+
+## Style Constraints
+
+| Dimension | Guideline |
+|-----------|-----------|
+| Voice | Technical, precise, builder-appropriate |
+| Structure | Tables over prose; data over description |
+| Density | >= 0.85; every sentence adds information |
+| References | Use canonical kind names, not synonyms |
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `prompt` |
+| Pillar | P03 |
+| Domain | tokenizer config construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

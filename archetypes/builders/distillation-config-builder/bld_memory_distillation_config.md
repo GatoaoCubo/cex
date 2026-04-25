@@ -33,3 +33,30 @@ Distillation parameters interact non-linearly. Temperature and alpha must be tun
 **Alpha balance**: 0.3-0.7 range. Pure KD (alpha=1.0) drifts from ground truth. Pure task loss (alpha=0.0) ignores the teacher.
 
 **Progressive**: for >5x compression, distill through intermediate models to bridge the capacity gap.
+
+## Evidence
+
+Production experience from distillation config artifact generation. 
+Teacher-student knowledge transfer and model compression 
+Patterns derived from builder runs, quality gate failures, and peer review feedback.
+
+## Pitfalls
+
+- **Missing frontmatter fields**: omitting required fields causes H01 gate failure.
+- **Generic descriptions**: vague purpose/tldr reduces retrieval accuracy.
+- **Ignoring boundary**: Teacher-student knowledge transfer and model compression.
+- **Orphaned dependencies**: referencing finetune_config without verifying it exists.
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `memory` |
+| Pillar | P10 |
+| Domain | distillation config construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

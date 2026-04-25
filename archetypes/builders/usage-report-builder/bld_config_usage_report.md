@@ -9,7 +9,7 @@ title: "Config Usage Report"
 version: "1.0.0"
 author: wave1_builder_gen_v2
 tags: [usage_report, builder, config]
-tldr: "Naming, paths, limits for usage_report production"
+tldr: "Production constraints for usage report: naming (p07_ur_{{name}}.yaml), output paths (P07/), size limit 3072B. Usage analytics spec."
 domain: "usage_report construction"
 created: "2026-04-14"
 updated: "2026-04-14"
@@ -49,6 +49,38 @@ Examples:
 - post_build: null
 - on_error: null
 - on_quality_fail: null
+
+## Domain-Specific Constraints
+
+| Constraint | Value |
+|-----------|-------|
+| Boundary | Usage analytics spec |
+| Dependencies | eval_metric, knowledge_card |
+| Primary 8F function | F7_govern |
+| Max artifact size | 3072 bytes |
+
+## Edge Cases
+
+| Scenario | Handling |
+|----------|---------|
+| Missing required frontmatter field | Fail H01 gate; return to F6 |
+| ID collision with existing artifact | Append version suffix (_v2) |
+| Body exceeds 3072 bytes | Trim prose sections; preserve tables |
+| Dependency eval_metric not found | Warn; proceed with defaults |
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `config` |
+| Pillar | P09 |
+| Domain | usage report construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |
 
 ## Related Artifacts
 

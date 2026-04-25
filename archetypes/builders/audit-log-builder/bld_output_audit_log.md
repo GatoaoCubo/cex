@@ -9,7 +9,7 @@ title: "Output Template Audit Log"
 version: "1.0.0"
 author: wave1_builder_gen_v2
 tags: [audit_log, builder, output_template]
-tldr: "Template with vars for audit_log production"
+tldr: "Output template for audit log: frontmatter field guide, required body sections, filled example, and quality gate checklist for immutable audit log configuration for soc2 type ii compliance."
 domain: "audit_log construction"
 created: "2026-04-14"
 updated: "2026-04-14"
@@ -56,6 +56,32 @@ sample_data:
   }
 }
 ```
+
+## Quality Gate Checklist
+
+| Gate | Check | Pass Condition |
+|------|-------|---------------|
+| H01 | Frontmatter complete | All required fields present with valid types |
+| H02 | ID matches filename | id field equals filename stem |
+| H03 | Naming convention | Follows p11_al_{{name}}.yaml pattern |
+| H04 | Body sections present | All required sections non-empty |
+| H05 | Size within limits | Total <= 3072 bytes |
+| H06 | No placeholder text | No {{var}} unreplaced |
+| H07 | quality: null | Never self-scored |
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `output` |
+| Pillar | P05 |
+| Domain | audit log construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |
 
 ## Related Artifacts
 

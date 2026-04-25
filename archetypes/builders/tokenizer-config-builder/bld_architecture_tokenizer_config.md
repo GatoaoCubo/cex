@@ -45,3 +45,34 @@ tokenizer_config --independent-- knowledge_index (P10)
 | Tokenization parameters: algorithm, vocab, tokens | An embedding_config -- embedding configures vectorization |
 | Defines how text becomes token sequences | An inference_config -- inference configures model serving |
 | Infrastructure spec consumed by multiple pipelines | A model_provider -- provider manages model hosting |
+
+## Component Boundaries
+
+Tokenization vocabulary and encoding rules. NOT embedding_config (vector representation parameters) nor model_provider (which model to call) nor context_window_config (token budget limits).
+
+| Boundary | In Scope | Out of Scope |
+|----------|----------|-------------|
+| Kind scope | tokenizer config | Adjacent kinds |
+| Dependencies | embedding_config, model_provider | Transitive deps |
+
+## Interfaces
+
+| Interface | Direction | Contract |
+|-----------|-----------|----------|
+| Schema (P06) | upstream | Validates structure |
+| Output (P05) | downstream | Produces artifacts |
+| Config (P09) | lateral | Constrains production |
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `architecture` |
+| Pillar | P08 |
+| Domain | tokenizer config construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

@@ -47,3 +47,34 @@ synthetic_data_config --independent-- eval_metric (P07)
 | Specifies how to create artificial data | An eval_metric -- eval measures model performance |
 | Includes quality filtering and decontamination | A knowledge_card -- KC distills domain knowledge |
 | Static spec for a data generation pipeline | An embedding_config -- embedding configures vectorization |
+
+## Component Boundaries
+
+Synthetic training data generation pipeline. NOT dataset_card (data documentation and metadata) nor eval_dataset (evaluation data specification) nor finetune_config (training job parameters).
+
+| Boundary | In Scope | Out of Scope |
+|----------|----------|-------------|
+| Kind scope | synthetic data config | Adjacent kinds |
+| Dependencies | dataset_card, eval_dataset | Transitive deps |
+
+## Interfaces
+
+| Interface | Direction | Contract |
+|-----------|-----------|----------|
+| Schema (P06) | upstream | Validates structure |
+| Output (P05) | downstream | Produces artifacts |
+| Config (P09) | lateral | Constrains production |
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `architecture` |
+| Pillar | P08 |
+| Domain | synthetic data config construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

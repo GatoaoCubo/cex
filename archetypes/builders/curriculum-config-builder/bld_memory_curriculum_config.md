@@ -33,3 +33,30 @@ Effective curriculum learning requires three ingredients: a measurable difficult
 **Dynamic mixing**: ratios should shift during training. Start with general data, anneal toward domain-specific data.
 
 **Warmup**: 5-15% of training on easiest data stabilizes early gradients and prevents divergence.
+
+## Evidence
+
+Production experience from curriculum config artifact generation. 
+Training data ordering and adaptive pacing 
+Patterns derived from builder runs, quality gate failures, and peer review feedback.
+
+## Pitfalls
+
+- **Missing frontmatter fields**: omitting required fields causes H01 gate failure.
+- **Generic descriptions**: vague purpose/tldr reduces retrieval accuracy.
+- **Ignoring boundary**: Training data ordering and adaptive pacing.
+- **Orphaned dependencies**: referencing dataset_card without verifying it exists.
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `memory` |
+| Pillar | P10 |
+| Domain | curriculum config construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

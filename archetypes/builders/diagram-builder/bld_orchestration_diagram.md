@@ -52,3 +52,31 @@ I visualize architecture so stakeholders can understand system structure at a gl
 |---------|-----|
 | context-doc-builder | May embed diagrams in domain documentation |
 | knowledge-card-builder | May reference diagrams for visual context |
+
+## Integration Points
+
+| Point | Direction | Protocol |
+|-------|-----------|----------|
+| F8 COLLABORATE | outbound | signal_writer.write_signal() |
+| F3 INJECT | inbound | Receives upstream artifacts via handoff |
+| component_map | upstream | Must exist before diagram production |
+
+## Dependencies
+
+| Dependency | Required | Purpose |
+|-----------|----------|---------|
+| component_map | yes | Upstream artifact for diagram |
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `orchestration` |
+| Pillar | P12 |
+| Domain | diagram construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

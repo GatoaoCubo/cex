@@ -9,7 +9,7 @@ title: "Config Prompt Optimizer"
 version: "1.0.0"
 author: wave1_builder_gen_v2
 tags: [prompt_optimizer, builder, config]
-tldr: "Naming, paths, limits for prompt_optimizer production"
+tldr: "Production constraints for prompt optimizer: naming (p03_po_{{name}}.md), output paths (P03/), size limit 5120B. Prompt optimizer."
 domain: "prompt_optimizer construction"
 created: "2026-04-14"
 updated: "2026-04-14"
@@ -54,6 +54,38 @@ on_quality_fail: null
   | |  | | (_| | (_| | (_| | ||  __/ |   
   |_|  |_|\__,_|\__,_|\__,_|\__\___|_|   
 ```
+
+## Domain-Specific Constraints
+
+| Constraint | Value |
+|-----------|-------|
+| Boundary | Prompt optimizer |
+| Dependencies | prompt_template, scoring_rubric |
+| Primary 8F function | F6_produce |
+| Max artifact size | 5120 bytes |
+
+## Edge Cases
+
+| Scenario | Handling |
+|----------|---------|
+| Missing required frontmatter field | Fail H01 gate; return to F6 |
+| ID collision with existing artifact | Append version suffix (_v2) |
+| Body exceeds 5120 bytes | Trim prose sections; preserve tables |
+| Dependency prompt_template not found | Warn; proceed with defaults |
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `config` |
+| Pillar | P09 |
+| Domain | prompt optimizer construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |
 
 ## Related Artifacts
 

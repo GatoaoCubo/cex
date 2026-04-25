@@ -9,7 +9,7 @@ title: "Config App Directory Entry"
 version: "1.0.0"
 author: wave1_builder_gen_v2
 tags: [app_directory_entry, builder, config]
-tldr: "Naming, paths, limits for app_directory_entry production"
+tldr: "Production constraints for app directory entry: naming (p05_ade_{{name}}.md), output paths (P05/), size limit 4096B. App directory entry."
 domain: "app_directory_entry construction"
 created: "2026-04-14"
 updated: "2026-04-14"
@@ -48,6 +48,38 @@ on_quality_fail: null
 
 ## Domain Scope
 This config applies to app directory entry artifacts. Each app directory entry artifact is stored under the app directory path with the ade prefix, scoping all entry files to the app directory namespace.
+
+## Domain-Specific Constraints
+
+| Constraint | Value |
+|-----------|-------|
+| Boundary | App directory entry |
+| Dependencies | agent_card, knowledge_card |
+| Primary 8F function | F8_collaborate |
+| Max artifact size | 4096 bytes |
+
+## Edge Cases
+
+| Scenario | Handling |
+|----------|---------|
+| Missing required frontmatter field | Fail H01 gate; return to F6 |
+| ID collision with existing artifact | Append version suffix (_v2) |
+| Body exceeds 4096 bytes | Trim prose sections; preserve tables |
+| Dependency agent_card not found | Warn; proceed with defaults |
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `config` |
+| Pillar | P09 |
+| Domain | app directory entry construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |
 
 ## Related Artifacts
 

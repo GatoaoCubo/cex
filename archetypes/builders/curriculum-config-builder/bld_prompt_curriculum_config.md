@@ -9,7 +9,7 @@ title: "Curriculum Config Builder - Prompt ISO"
 version: "1.0.0"
 author: n03_builder
 tags: [curriculum_config, builder, instruction]
-tldr: "Production instructions for curriculum config artifacts."
+tldr: "Prompt engineering for curriculum config: structure template, token budget, style constraints, and role framing for training data ordering, difficulty scheduling, and adaptive pacing configuration."
 domain: "training curriculum"
 created: "2026-04-23"
 updated: "2026-04-23"
@@ -47,3 +47,35 @@ related:
 3. Verify difficulty metric defined
 4. Verify data sources listed with mixing ratios
 5. Cross-check: this is CURRICULUM CONFIG, not data generation or model architecture
+
+## Token Budget
+
+| Component | Allocation | Notes |
+|-----------|-----------|-------|
+| System prompt | 15%% | Builder identity + sin lens |
+| Context (ISOs) | 40%% | 12 ISOs loaded per builder |
+| Domain knowledge | 25%% | KCs + examples + memory |
+| Generation headroom | 20%% | Artifact output space |
+
+## Style Constraints
+
+| Dimension | Guideline |
+|-----------|-----------|
+| Voice | Technical, precise, builder-appropriate |
+| Structure | Tables over prose; data over description |
+| Density | >= 0.85; every sentence adds information |
+| References | Use canonical kind names, not synonyms |
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `prompt` |
+| Pillar | P03 |
+| Domain | curriculum config construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

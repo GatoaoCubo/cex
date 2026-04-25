@@ -33,3 +33,30 @@ Query optimization is an incremental investment. Each technique adds latency and
 **Latency budgeting**: allocate total budget, then distribute across steps. Exceeding 2s total kills interactive use.
 
 **Conditional techniques**: rewriting helps ambiguous queries but wastes time on well-formed ones. Use query classification to route.
+
+## Evidence
+
+Production experience from query optimizer artifact generation. 
+Query transformation and decomposition rules for RAG retrieval 
+Patterns derived from builder runs, quality gate failures, and peer review feedback.
+
+## Pitfalls
+
+- **Missing frontmatter fields**: omitting required fields causes H01 gate failure.
+- **Generic descriptions**: vague purpose/tldr reduces retrieval accuracy.
+- **Ignoring boundary**: Query transformation and decomposition rules for RAG retrieval.
+- **Orphaned dependencies**: referencing search_strategy without verifying it exists.
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `memory` |
+| Pillar | P10 |
+| Domain | query optimizer construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

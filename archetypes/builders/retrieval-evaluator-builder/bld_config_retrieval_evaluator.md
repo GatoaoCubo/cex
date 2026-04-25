@@ -60,3 +60,35 @@ Rule: id MUST equal filename stem.
 | QA / navigational | [1, 3, 5] |
 | Document search | [5, 10, 20] |
 | Recommendation | [10, 20, 50] |
+
+## Domain-Specific Constraints
+
+| Constraint | Value |
+|-----------|-------|
+| Boundary | IR-specific retrieval quality evaluation suite |
+| Dependencies | eval_metric, benchmark, retriever_config |
+| Primary 8F function | F3_inject |
+| Max artifact size | 5120 bytes |
+
+## Edge Cases
+
+| Scenario | Handling |
+|----------|---------|
+| Missing required frontmatter field | Fail H01 gate; return to F6 |
+| ID collision with existing artifact | Append version suffix (_v2) |
+| Body exceeds 5120 bytes | Trim prose sections; preserve tables |
+| Dependency eval_metric not found | Warn; proceed with defaults |
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `config` |
+| Pillar | P09 |
+| Domain | retrieval evaluator construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

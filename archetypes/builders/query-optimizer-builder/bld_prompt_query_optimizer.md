@@ -9,7 +9,7 @@ title: "Query Optimizer Builder - Prompt ISO"
 version: "1.0.0"
 author: n03_builder
 tags: [query_optimizer, builder, instruction]
-tldr: "Production instructions for query optimizer artifacts."
+tldr: "Prompt engineering for query optimizer: structure template, token budget, style constraints, and role framing for query rewriting, expansion, and multi-hop decomposition rules for rag retrieval."
 domain: "query optimization"
 created: "2026-04-23"
 updated: "2026-04-23"
@@ -48,3 +48,35 @@ related:
 3. Verify latency budget specified with numeric targets
 4. Verify fallback behavior documented
 5. Cross-check: this is QUERY OPTIMIZATION, not retrieval logic or index config
+
+## Token Budget
+
+| Component | Allocation | Notes |
+|-----------|-----------|-------|
+| System prompt | 15%% | Builder identity + sin lens |
+| Context (ISOs) | 40%% | 12 ISOs loaded per builder |
+| Domain knowledge | 25%% | KCs + examples + memory |
+| Generation headroom | 20%% | Artifact output space |
+
+## Style Constraints
+
+| Dimension | Guideline |
+|-----------|-----------|
+| Voice | Technical, precise, builder-appropriate |
+| Structure | Tables over prose; data over description |
+| Density | >= 0.85; every sentence adds information |
+| References | Use canonical kind names, not synonyms |
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `prompt` |
+| Pillar | P03 |
+| Domain | query optimizer construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

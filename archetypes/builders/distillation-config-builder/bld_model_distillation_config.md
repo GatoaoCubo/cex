@@ -47,3 +47,26 @@ triggers: "distill model", "compress model", "teacher-student training"
 In a crew, I handle MODEL DISTILLATION CONFIGURATION.
 I answer: "how to distill this teacher into a smaller student?"
 I do NOT handle: model architecture (agent), synthetic data (synthetic_data_config), tokenization (tokenizer_config).
+
+## Capability Matrix
+
+| Capability | Level | Evidence |
+|-----------|-------|---------|
+| distillation config production | Primary | Builder-specific |
+| 8F pipeline execution | Required | All builders |
+| Quality self-assessment | Prohibited | quality: null enforced |
+| Cross-reference resolution | Required | Related artifacts table |
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `model` |
+| Pillar | P02 |
+| Domain | distillation config construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

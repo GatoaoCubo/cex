@@ -60,3 +60,29 @@ tldr: "{{dense_summary_max_160ch}}"
 ## References
 1. `{{reference_1}}`
 2. `{{reference_2}}`
+
+## Quality Gate Checklist
+
+| Gate | Check | Pass Condition |
+|------|-------|---------------|
+| H01 | Frontmatter complete | All required fields present with valid types |
+| H02 | ID matches filename | id field equals filename stem |
+| H03 | Naming convention | Follows p07_re_{{name}}.md + .yaml pattern |
+| H04 | Body sections present | All required sections non-empty |
+| H05 | Size within limits | Total <= 5120 bytes |
+| H06 | No placeholder text | No {{var}} unreplaced |
+| H07 | quality: null | Never self-scored |
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `output` |
+| Pillar | P05 |
+| Domain | retrieval evaluator construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

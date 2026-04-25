@@ -9,7 +9,7 @@ title: "Query Optimizer Builder - Orchestration ISO"
 version: "1.0.0"
 author: n03_builder
 tags: [query_optimizer, builder, collaboration]
-tldr: "Crew collaboration protocol for query optimizer builder."
+tldr: "Orchestration protocol for query optimizer: workflow integration, handoff signals, dependency management, and cross-nucleus coordination for query rewriting, expansion, and multi-hop decomposition rules for rag retrieval."
 domain: "query optimization"
 created: "2026-04-23"
 updated: "2026-04-23"
@@ -56,3 +56,35 @@ I do not configure indexes. I do not build retrieval engines.
 | Builder | Why |
 |---------|-----|
 | retrieval-evaluator-builder | Evaluates optimized query effectiveness |
+
+## Integration Points
+
+| Point | Direction | Protocol |
+|-------|-----------|----------|
+| F8 COLLABORATE | outbound | signal_writer.write_signal() |
+| F3 INJECT | inbound | Receives upstream artifacts via handoff |
+| search_strategy | upstream | Must exist before query optimizer production |
+| retriever_config | upstream | Must exist before query optimizer production |
+| rag_source | upstream | Must exist before query optimizer production |
+
+## Dependencies
+
+| Dependency | Required | Purpose |
+|-----------|----------|---------|
+| search_strategy | yes | Upstream artifact for query optimizer |
+| retriever_config | yes | Upstream artifact for query optimizer |
+| rag_source | yes | Upstream artifact for query optimizer |
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `orchestration` |
+| Pillar | P12 |
+| Domain | query optimizer construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

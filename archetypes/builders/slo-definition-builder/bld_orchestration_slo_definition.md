@@ -44,6 +44,38 @@ related:
 | Agent-based service (not HTTP) | Use custom SLI: task_success_rate / total_tasks_attempted |
 | User asks for SLO on build quality | Redirect: that is quality_gate, not slo_definition |
 
+## Integration Points
+
+| Point | Direction | Protocol |
+|-------|-----------|----------|
+| F8 COLLABORATE | outbound | signal_writer.write_signal() |
+| F3 INJECT | inbound | Receives upstream artifacts via handoff |
+| enterprise_sla | upstream | Must exist before slo definition production |
+| quality_gate | upstream | Must exist before slo definition production |
+| benchmark | upstream | Must exist before slo definition production |
+
+## Dependencies
+
+| Dependency | Required | Purpose |
+|-----------|----------|---------|
+| enterprise_sla | yes | Upstream artifact for slo definition |
+| quality_gate | yes | Upstream artifact for slo definition |
+| benchmark | yes | Upstream artifact for slo definition |
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `orchestration` |
+| Pillar | P12 |
+| Domain | slo definition construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |
+
 ## Related Artifacts
 
 | Artifact | Relationship | Score |

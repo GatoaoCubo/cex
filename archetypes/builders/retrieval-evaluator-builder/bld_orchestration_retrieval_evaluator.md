@@ -67,3 +67,35 @@ None -- independent builder (layer 0). Evaluators are defined from requirements.
 |---------|-----|
 | benchmark-suite-builder | Bundles evaluators into comprehensive suites |
 | regression-check-builder | Uses evaluator thresholds for automated checks |
+
+## Integration Points
+
+| Point | Direction | Protocol |
+|-------|-----------|----------|
+| F8 COLLABORATE | outbound | signal_writer.write_signal() |
+| F3 INJECT | inbound | Receives upstream artifacts via handoff |
+| eval_metric | upstream | Must exist before retrieval evaluator production |
+| benchmark | upstream | Must exist before retrieval evaluator production |
+| retriever_config | upstream | Must exist before retrieval evaluator production |
+
+## Dependencies
+
+| Dependency | Required | Purpose |
+|-----------|----------|---------|
+| eval_metric | yes | Upstream artifact for retrieval evaluator |
+| benchmark | yes | Upstream artifact for retrieval evaluator |
+| retriever_config | yes | Upstream artifact for retrieval evaluator |
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `orchestration` |
+| Pillar | P12 |
+| Domain | retrieval evaluator construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

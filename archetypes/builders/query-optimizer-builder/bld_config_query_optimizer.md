@@ -47,3 +47,35 @@ related:
 | decomposition | 300-800ms | High | Multi-part questions |
 | hyde | 500-1000ms | Very high | Semantic gap |
 | reranking | 100-300ms | Very high | Precision-critical |
+
+## Domain-Specific Constraints
+
+| Constraint | Value |
+|-----------|-------|
+| Boundary | Query transformation and decomposition rules for RAG retrieval |
+| Dependencies | search_strategy, retriever_config, rag_source |
+| Primary 8F function | F6_produce |
+| Max artifact size | 5120 bytes |
+
+## Edge Cases
+
+| Scenario | Handling |
+|----------|---------|
+| Missing required frontmatter field | Fail H01 gate; return to F6 |
+| ID collision with existing artifact | Append version suffix (_v2) |
+| Body exceeds 5120 bytes | Trim prose sections; preserve tables |
+| Dependency search_strategy not found | Warn; proceed with defaults |
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `config` |
+| Pillar | P09 |
+| Domain | query optimizer construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

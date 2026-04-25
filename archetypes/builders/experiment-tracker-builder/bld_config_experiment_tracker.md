@@ -9,7 +9,7 @@ title: "Config Experiment Tracker"
 version: "1.0.0"
 author: wave1_builder_gen
 tags: [experiment_tracker, builder, config]
-tldr: "Naming, paths, limits for experiment_tracker production"
+tldr: "Production constraints for experiment tracker: naming (p07_et_{{name}}.md), output paths (P07/), size limit 4096B. Experiment tracking."
 domain: "experiment_tracker construction"
 created: "2026-04-13"
 updated: "2026-04-13"
@@ -44,6 +44,38 @@ pre_build: null
 post_build: null
 on_error: null
 on_quality_fail: null
+
+## Domain-Specific Constraints
+
+| Constraint | Value |
+|-----------|-------|
+| Boundary | Experiment tracking |
+| Dependencies | experiment_config, eval_metric |
+| Primary 8F function | F7_govern |
+| Max artifact size | 4096 bytes |
+
+## Edge Cases
+
+| Scenario | Handling |
+|----------|---------|
+| Missing required frontmatter field | Fail H01 gate; return to F6 |
+| ID collision with existing artifact | Append version suffix (_v2) |
+| Body exceeds 4096 bytes | Trim prose sections; preserve tables |
+| Dependency experiment_config not found | Warn; proceed with defaults |
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `config` |
+| Pillar | P09 |
+| Domain | experiment tracker construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |
 
 ## Related Artifacts
 

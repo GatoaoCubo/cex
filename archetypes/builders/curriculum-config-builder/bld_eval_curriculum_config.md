@@ -53,3 +53,27 @@ related:
 | >=8.0 | PUBLISH |
 | >=7.0 | REVIEW |
 | <7.0 | REJECT |
+
+## Validation Checklist
+
+| Check | Method | Automated |
+|-------|--------|-----------|
+| Frontmatter schema | cex_compile.py --validate | Yes |
+| Naming convention | Regex match against p07_cc_{{name}}.md + .yaml | Yes |
+| Size limit | Byte count <= 4096 | Yes |
+| Density score | Token/byte ratio >= 0.85 | Yes |
+| Cross-references valid | Link resolution check | Partial |
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `eval` |
+| Pillar | P07 |
+| Domain | curriculum config construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

@@ -9,7 +9,7 @@ title: "Config Collaboration Pattern"
 version: "1.0.0"
 author: wave1_builder_gen
 tags: [collaboration_pattern, builder, config]
-tldr: "Naming, paths, limits for collaboration_pattern production"
+tldr: "Production constraints for collaboration pattern: naming (p12_collab_{{name}}.md), output paths (P12/), size limit 5120B. Coordination pattern."
 domain: "collaboration_pattern construction"
 created: "2026-04-13"
 updated: "2026-04-13"
@@ -58,6 +58,24 @@ Examples: p12_collab_projectA.md, p12_collab_featureX.md
 | Retriever | cex_retriever.py |
 | Quality target | 9.0+ |
 | Density target | 0.85+ |
+
+## Domain-Specific Constraints
+
+| Constraint | Value |
+|-----------|-------|
+| Boundary | Coordination pattern |
+| Dependencies | workflow, agent_card |
+| Primary 8F function | F8_collaborate |
+| Max artifact size | 5120 bytes |
+
+## Edge Cases
+
+| Scenario | Handling |
+|----------|---------|
+| Missing required frontmatter field | Fail H01 gate; return to F6 |
+| ID collision with existing artifact | Append version suffix (_v2) |
+| Body exceeds 5120 bytes | Trim prose sections; preserve tables |
+| Dependency workflow not found | Warn; proceed with defaults |
 
 ## Related Artifacts
 

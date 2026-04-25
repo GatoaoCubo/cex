@@ -47,3 +47,26 @@ triggers: "configure tokenizer", "set up tokenization", "token config"
 In a crew, I handle TOKENIZER CONFIGURATION.
 I answer: "which tokenizer, with what parameters, for this model?"
 I do NOT handle: model training, embedding config, inference optimization.
+
+## Capability Matrix
+
+| Capability | Level | Evidence |
+|-----------|-------|---------|
+| tokenizer config production | Primary | Builder-specific |
+| 8F pipeline execution | Required | All builders |
+| Quality self-assessment | Prohibited | quality: null enforced |
+| Cross-reference resolution | Required | Related artifacts table |
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `model` |
+| Pillar | P02 |
+| Domain | tokenizer config construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

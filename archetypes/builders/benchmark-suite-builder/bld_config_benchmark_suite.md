@@ -9,7 +9,7 @@ title: "Config Benchmark Suite"
 version: "1.0.0"
 author: wave1_builder_gen_v2
 tags: [benchmark_suite, builder, config]
-tldr: "Naming, paths, limits for benchmark_suite production"
+tldr: "Production constraints for benchmark suite: naming (p07_bs_{{name}}.md), output paths (P07/), size limit 5120B. Benchmark suite."
 domain: "benchmark_suite construction"
 created: "2026-04-14"
 updated: "2026-04-14"
@@ -47,6 +47,38 @@ pre_build: null
 post_build: null
 on_error: null
 on_quality_fail: null
+
+## Domain-Specific Constraints
+
+| Constraint | Value |
+|-----------|-------|
+| Boundary | Benchmark suite |
+| Dependencies | benchmark, eval_dataset, scoring_rubric |
+| Primary 8F function | F7_govern |
+| Max artifact size | 5120 bytes |
+
+## Edge Cases
+
+| Scenario | Handling |
+|----------|---------|
+| Missing required frontmatter field | Fail H01 gate; return to F6 |
+| ID collision with existing artifact | Append version suffix (_v2) |
+| Body exceeds 5120 bytes | Trim prose sections; preserve tables |
+| Dependency benchmark not found | Warn; proceed with defaults |
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `config` |
+| Pillar | P09 |
+| Domain | benchmark suite construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |
 
 ## Related Artifacts
 

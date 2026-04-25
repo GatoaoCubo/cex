@@ -9,7 +9,7 @@ title: "Config Action Paradigm"
 version: "1.0.0"
 author: wave1_builder_gen
 tags: [action_paradigm, builder, config]
-tldr: "Naming, paths, limits for action_paradigm production"
+tldr: "Production constraints for action paradigm: naming (p04_act_{{name}}.md), output paths (P04/), size limit 4096B. Action execution paradigm."
 domain: "action_paradigm construction"
 created: "2026-04-13"
 updated: "2026-04-13"
@@ -59,6 +59,24 @@ on_quality_fail: null
 | Retriever | cex_retriever.py |
 | Quality target | 9.0+ |
 | Density target | 0.85+ |
+
+## Domain-Specific Constraints
+
+| Constraint | Value |
+|-----------|-------|
+| Boundary | Action execution paradigm |
+| Dependencies | function_def, skill |
+| Primary 8F function | F6_produce |
+| Max artifact size | 4096 bytes |
+
+## Edge Cases
+
+| Scenario | Handling |
+|----------|---------|
+| Missing required frontmatter field | Fail H01 gate; return to F6 |
+| ID collision with existing artifact | Append version suffix (_v2) |
+| Body exceeds 4096 bytes | Trim prose sections; preserve tables |
+| Dependency function_def not found | Warn; proceed with defaults |
 
 ## Related Artifacts
 

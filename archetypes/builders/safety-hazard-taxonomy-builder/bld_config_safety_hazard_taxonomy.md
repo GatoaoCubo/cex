@@ -9,7 +9,7 @@ title: "Config Safety Hazard Taxonomy"
 version: "1.0.0"
 author: n01_wave7
 tags: [safety_hazard_taxonomy, builder, config, MLCommons, AILuminate]
-tldr: "Naming, paths, limits for safety_hazard_taxonomy production"
+tldr: "Production constraints for safety hazard taxonomy: naming (p11_sht_{{scope}}.md), output paths (P11/), size limit 5120B. Formal AI safety hazard classification taxonomy per MLCommons AILuminate v1."
 domain: "safety_hazard_taxonomy construction"
 created: "2026-04-14"
 updated: "2026-04-14"
@@ -44,6 +44,38 @@ pre_build: validate_category_count
 post_build: compile + signal_n07
 on_error: null
 on_quality_fail: retry_with_missing_categories
+
+## Domain-Specific Constraints
+
+| Constraint | Value |
+|-----------|-------|
+| Boundary | Formal AI safety hazard classification taxonomy per MLCommons AILuminate v1 |
+| Dependencies | safety_policy, knowledge_card |
+| Primary 8F function | F7_govern |
+| Max artifact size | 5120 bytes |
+
+## Edge Cases
+
+| Scenario | Handling |
+|----------|---------|
+| Missing required frontmatter field | Fail H01 gate; return to F6 |
+| ID collision with existing artifact | Append version suffix (_v2) |
+| Body exceeds 5120 bytes | Trim prose sections; preserve tables |
+| Dependency safety_policy not found | Warn; proceed with defaults |
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `config` |
+| Pillar | P09 |
+| Domain | safety hazard taxonomy construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |
 
 ## Related Artifacts
 

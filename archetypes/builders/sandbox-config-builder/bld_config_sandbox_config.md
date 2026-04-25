@@ -9,7 +9,7 @@ title: "Config Sandbox Config"
 version: "1.0.0"
 author: wave1_builder_gen
 tags: [sandbox_config, builder, config]
-tldr: "Naming, paths, limits for sandbox_config production"
+tldr: "Production constraints for sandbox config: naming (p09_sb_{{name}}.yaml), output paths (P09/), size limit 2048B. Sandbox/isolation config."
 domain: "sandbox_config construction"
 created: "2026-04-13"
 updated: "2026-04-13"
@@ -44,6 +44,38 @@ pre_build: null
 post_build: null  
 on_error: null  
 on_quality_fail: null
+
+## Domain-Specific Constraints
+
+| Constraint | Value |
+|-----------|-------|
+| Boundary | Sandbox/isolation config |
+| Dependencies | audit_log |
+| Primary 8F function | F1_constrain |
+| Max artifact size | 2048 bytes |
+
+## Edge Cases
+
+| Scenario | Handling |
+|----------|---------|
+| Missing required frontmatter field | Fail H01 gate; return to F6 |
+| ID collision with existing artifact | Append version suffix (_v2) |
+| Body exceeds 2048 bytes | Trim prose sections; preserve tables |
+| Dependency audit_log not found | Warn; proceed with defaults |
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `config` |
+| Pillar | P09 |
+| Domain | sandbox config construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |
 
 ## Related Artifacts
 

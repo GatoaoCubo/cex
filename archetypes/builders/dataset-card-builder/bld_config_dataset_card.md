@@ -9,7 +9,7 @@ title: "Config Dataset Card"
 version: "1.0.0"
 author: wave1_builder_gen
 tags: [dataset_card, builder, config]
-tldr: "Naming, paths, limits for dataset_card production"
+tldr: "Production constraints for dataset card: naming (p01_dc_{{name}}.md), output paths (P01/), size limit 5120B. Dataset documentation."
 domain: "dataset_card construction"
 created: "2026-04-13"
 updated: "2026-04-13"
@@ -50,6 +50,38 @@ pre_build: validate_dataset_source_accessibility
 post_build: register_dataset_card
 on_error: null
 on_quality_fail: null
+
+## Domain-Specific Constraints
+
+| Constraint | Value |
+|-----------|-------|
+| Boundary | Dataset documentation |
+| Dependencies | citation |
+| Primary 8F function | F3_inject |
+| Max artifact size | 5120 bytes |
+
+## Edge Cases
+
+| Scenario | Handling |
+|----------|---------|
+| Missing required frontmatter field | Fail H01 gate; return to F6 |
+| ID collision with existing artifact | Append version suffix (_v2) |
+| Body exceeds 5120 bytes | Trim prose sections; preserve tables |
+| Dependency citation not found | Warn; proceed with defaults |
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `config` |
+| Pillar | P09 |
+| Domain | dataset card construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |
 
 ## Related Artifacts
 

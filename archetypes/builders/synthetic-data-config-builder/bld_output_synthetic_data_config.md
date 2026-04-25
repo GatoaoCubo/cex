@@ -10,7 +10,7 @@ title: "Synthetic Data Config Builder - Output ISO"
 version: "1.0.0"
 author: n03_builder
 tags: [synthetic_data_config, builder, output]
-tldr: "Output template for synthetic data config artifacts."
+tldr: "Output template for synthetic data config: frontmatter field guide, required body sections, filled example, and quality gate checklist for synthetic training data generation pipeline configuration."
 domain: "synthetic data generation"
 created: "2026-04-23"
 updated: "2026-04-23"
@@ -57,3 +57,29 @@ tldr: "{{dense_summary_max_160ch}}"
 
 ## Cost Estimate
 `{{estimated_api_cost_or_compute_time}}`
+
+## Quality Gate Checklist
+
+| Gate | Check | Pass Condition |
+|------|-------|---------------|
+| H01 | Frontmatter complete | All required fields present with valid types |
+| H02 | ID matches filename | id field equals filename stem |
+| H03 | Naming convention | Follows p01_sdc_{{name}}.md + .yaml pattern |
+| H04 | Body sections present | All required sections non-empty |
+| H05 | Size within limits | Total <= 4096 bytes |
+| H06 | No placeholder text | No {{var}} unreplaced |
+| H07 | quality: null | Never self-scored |
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `output` |
+| Pillar | P05 |
+| Domain | synthetic data config construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

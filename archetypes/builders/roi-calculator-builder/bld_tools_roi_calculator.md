@@ -9,7 +9,7 @@ title: "Tools Roi Calculator"
 version: "1.0.0"
 author: wave1_builder_gen_v2
 tags: [roi_calculator, builder, tools]
-tldr: "Tools available for roi_calculator production"
+tldr: "Tool registry for roi calculator builder: CEX pipeline tools (compile, score, retrieve), file system ops (Read/Write/Edit/Glob/Grep), and domain-specific automation for roi calculator spec with inputs, formulas, tco comparison for economic buyers."
 domain: "roi_calculator construction"
 created: "2026-04-14"
 updated: "2026-04-14"
@@ -45,6 +45,47 @@ related:
 - Forrester TEI (Total Economic Impact) methodology
 - Gartner TCO framework
 - IFRS/GAAP NPV calculation standards
+
+## CEX Pipeline Tools
+
+| Tool | Purpose | When |
+|------|---------|------|
+| cex_compile.py | Compile .md artifact to .yaml | After Write (F8) |
+| cex_score.py | Peer-review quality scoring | After production (F7) |
+| cex_retriever.py | Discover similar artifacts by TF-IDF | During F3 INJECT |
+| cex_doctor.py | Health check builder ISOs | Before dispatch |
+
+## Data Sources
+
+| Source | Content | When to use |
+|--------|---------|-------------|
+| SCHEMA.md | Field definitions, ID pattern, constraints | Every production run |
+| OUTPUT_TEMPLATE.md | Exact frontmatter + body structure | Every production run |
+| QUALITY_GATES.md | H01-H08 HARD gates | Every validation run |
+| KNOWLEDGE.md | Domain concepts for roi calculator | When designing structure |
+| MEMORY.md | Common mistakes, anti-patterns | When stuck or producing a variant |
+
+## Tool Permissions
+
+| Category | Tools | Status |
+|----------|-------|--------|
+| ALLOWED | Read, Write, Edit, Bash, Glob, Grep | Explicitly permitted |
+| DENIED | (none) | Explicitly blocked |
+| EFFECTIVE | Bash, Edit, Glob, Grep, Read, Write | ALLOWED minus DENIED |
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `tools` |
+| Pillar | P04 |
+| Domain | roi calculator construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |
 
 ## Related Artifacts
 

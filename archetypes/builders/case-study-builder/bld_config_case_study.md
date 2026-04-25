@@ -9,7 +9,7 @@ title: "Config Case Study"
 version: "1.0.0"
 author: wave1_builder_gen_v2
 tags: [case_study, builder, config]
-tldr: "Naming, paths, limits for case_study production"
+tldr: "Production constraints for case study: naming (p05_cs_{{name}}.md), output paths (P05/), size limit 6144B. Case study."
 domain: "case_study construction"
 created: "2026-04-14"
 updated: "2026-04-14"
@@ -51,6 +51,38 @@ Subdirectories: `docs/`, `data/`, `outputs/`
 - post_build: null
 - on_error: null
 - on_quality_fail: null
+
+## Domain-Specific Constraints
+
+| Constraint | Value |
+|-----------|-------|
+| Boundary | Case study |
+| Dependencies | knowledge_card, customer_segment |
+| Primary 8F function | F4_reason |
+| Max artifact size | 6144 bytes |
+
+## Edge Cases
+
+| Scenario | Handling |
+|----------|---------|
+| Missing required frontmatter field | Fail H01 gate; return to F6 |
+| ID collision with existing artifact | Append version suffix (_v2) |
+| Body exceeds 6144 bytes | Trim prose sections; preserve tables |
+| Dependency knowledge_card not found | Warn; proceed with defaults |
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `config` |
+| Pillar | P09 |
+| Domain | case study construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |
 
 ## Related Artifacts
 

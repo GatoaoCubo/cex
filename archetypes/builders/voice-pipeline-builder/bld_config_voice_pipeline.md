@@ -9,7 +9,7 @@ title: "Config Voice Pipeline"
 version: "1.0.0"
 author: wave1_builder_gen
 tags: [voice_pipeline, builder, config]
-tldr: "Naming, paths, limits for voice_pipeline production"
+tldr: "Production constraints for voice pipeline: naming (p04_vp_{{name}}.md), output paths (P04/), size limit 5120B. Voice pipeline architecture."
 domain: "voice_pipeline construction"
 created: "2026-04-13"
 updated: "2026-04-13"
@@ -61,6 +61,24 @@ on_quality_fail: null
 | Retriever | cex_retriever.py |
 | Quality target | 9.0+ |
 | Density target | 0.85+ |
+
+## Domain-Specific Constraints
+
+| Constraint | Value |
+|-----------|-------|
+| Boundary | Voice pipeline architecture |
+| Dependencies | stt_provider, tts_provider, vad_config |
+| Primary 8F function | F5_call |
+| Max artifact size | 5120 bytes |
+
+## Edge Cases
+
+| Scenario | Handling |
+|----------|---------|
+| Missing required frontmatter field | Fail H01 gate; return to F6 |
+| ID collision with existing artifact | Append version suffix (_v2) |
+| Body exceeds 5120 bytes | Trim prose sections; preserve tables |
+| Dependency stt_provider not found | Warn; proceed with defaults |
 
 ## Related Artifacts
 

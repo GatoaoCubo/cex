@@ -45,3 +45,34 @@ distillation_config --independent-- embedding_config (P01)
 | Training config for teacher-student compression | A model architecture spec |
 | Specifies loss function and temperature | A synthetic_data_config -- that configures data generation |
 | Defines compression targets and quality budget | An inference_config -- that configures model serving |
+
+## Component Boundaries
+
+Teacher-student knowledge transfer and model compression. NOT finetune_config (full model training) nor quantization_config (weight precision reduction) nor model_card (model documentation).
+
+| Boundary | In Scope | Out of Scope |
+|----------|----------|-------------|
+| Kind scope | distillation config | Adjacent kinds |
+| Dependencies | finetune_config, quantization_config, model_card | Transitive deps |
+
+## Interfaces
+
+| Interface | Direction | Contract |
+|-----------|-----------|----------|
+| Schema (P06) | upstream | Validates structure |
+| Output (P05) | downstream | Produces artifacts |
+| Config (P09) | lateral | Constrains production |
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `architecture` |
+| Pillar | P08 |
+| Domain | distillation config construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

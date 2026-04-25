@@ -9,7 +9,7 @@ title: "Config Agent Computer Interface"
 version: "1.0.0"
 author: wave1_builder_gen
 tags: [agent_computer_interface, builder, config]
-tldr: "Naming, paths, limits for agent_computer_interface production"
+tldr: "Production constraints for agent computer interface: naming (p08_aci_{{name}}.md), output paths (P08/), size limit 5120B. Agent-computer interface."
 domain: "agent_computer_interface construction"
 created: "2026-04-13"
 updated: "2026-04-13"
@@ -46,6 +46,38 @@ pre_build: null
 post_build: null
 on_error: null
 on_quality_fail: null
+
+## Domain-Specific Constraints
+
+| Constraint | Value |
+|-----------|-------|
+| Boundary | Agent-computer interface |
+| Dependencies | agent_card, computer_use |
+| Primary 8F function | F2_become |
+| Max artifact size | 5120 bytes |
+
+## Edge Cases
+
+| Scenario | Handling |
+|----------|---------|
+| Missing required frontmatter field | Fail H01 gate; return to F6 |
+| ID collision with existing artifact | Append version suffix (_v2) |
+| Body exceeds 5120 bytes | Trim prose sections; preserve tables |
+| Dependency agent_card not found | Warn; proceed with defaults |
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `config` |
+| Pillar | P09 |
+| Domain | agent computer interface construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |
 
 ## Related Artifacts
 

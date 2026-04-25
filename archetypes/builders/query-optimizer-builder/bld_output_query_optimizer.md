@@ -9,7 +9,7 @@ title: "Query Optimizer Builder - Output ISO"
 version: "1.0.0"
 author: n03_builder
 tags: [query_optimizer, builder, output]
-tldr: "Output template for query optimizer artifacts."
+tldr: "Output template for query optimizer: frontmatter field guide, required body sections, filled example, and quality gate checklist for query rewriting, expansion, and multi-hop decomposition rules for rag retrieval."
 domain: "query optimization"
 created: "2026-04-23"
 updated: "2026-04-23"
@@ -55,3 +55,29 @@ tldr: "{{dense_summary_max_160ch}}"
 
 ## Fallback
 `{{behavior_on_optimization_failure}}`
+
+## Quality Gate Checklist
+
+| Gate | Check | Pass Condition |
+|------|-------|---------------|
+| H01 | Frontmatter complete | All required fields present with valid types |
+| H02 | ID matches filename | id field equals filename stem |
+| H03 | Naming convention | Follows p01_qo_{{name}}.md + .yaml pattern |
+| H04 | Body sections present | All required sections non-empty |
+| H05 | Size within limits | Total <= 5120 bytes |
+| H06 | No placeholder text | No {{var}} unreplaced |
+| H07 | quality: null | Never self-scored |
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `output` |
+| Pillar | P05 |
+| Domain | query optimizer construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

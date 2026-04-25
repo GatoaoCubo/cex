@@ -33,3 +33,30 @@ Unfiltered synthetic data is noise. Quality filtering and decontamination are no
 **Decontamination**: compute n-gram overlap (8-gram minimum) against all target evaluation sets. Remove any sample with >50% overlap.
 
 **Seed diversity**: minimum 10 seed examples across different topics and formats. Single-seed generation produces monotonic output.
+
+## Evidence
+
+Production experience from synthetic data config artifact generation. 
+Synthetic training data generation pipeline 
+Patterns derived from builder runs, quality gate failures, and peer review feedback.
+
+## Pitfalls
+
+- **Missing frontmatter fields**: omitting required fields causes H01 gate failure.
+- **Generic descriptions**: vague purpose/tldr reduces retrieval accuracy.
+- **Ignoring boundary**: Synthetic training data generation pipeline.
+- **Orphaned dependencies**: referencing dataset_card without verifying it exists.
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `memory` |
+| Pillar | P10 |
+| Domain | synthetic data config construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

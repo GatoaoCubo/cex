@@ -9,7 +9,7 @@ title: "Tools Audit Log"
 version: "1.0.0"
 author: wave1_builder_gen_v2
 tags: [audit_log, builder, tools]
-tldr: "Tools available for audit_log production"
+tldr: "Tool registry for audit log builder: CEX pipeline tools (compile, score, retrieve), file system ops (Read/Write/Edit/Glob/Grep), and domain-specific automation for immutable audit log configuration for soc2 type ii compliance."
 domain: "audit_log construction"
 created: "2026-04-14"
 updated: "2026-04-14"
@@ -41,6 +41,47 @@ related:
 - ISO/IEC 27001:2022 Annex A.8.15 (logging)
 - NIST SP 800-92 (Guide to Computer Security Log Management)
 - AWS CloudTrail, Datadog Audit Trail, Splunk SIEM (implementation references)
+
+## CEX Pipeline Tools
+
+| Tool | Purpose | When |
+|------|---------|------|
+| cex_compile.py | Compile .md artifact to .yaml | After Write (F8) |
+| cex_score.py | Peer-review quality scoring | After production (F7) |
+| cex_retriever.py | Discover similar artifacts by TF-IDF | During F3 INJECT |
+| cex_doctor.py | Health check builder ISOs | Before dispatch |
+
+## Data Sources
+
+| Source | Content | When to use |
+|--------|---------|-------------|
+| SCHEMA.md | Field definitions, ID pattern, constraints | Every production run |
+| OUTPUT_TEMPLATE.md | Exact frontmatter + body structure | Every production run |
+| QUALITY_GATES.md | H01-H08 HARD gates | Every validation run |
+| KNOWLEDGE.md | Domain concepts for audit log | When designing structure |
+| MEMORY.md | Common mistakes, anti-patterns | When stuck or producing a variant |
+
+## Tool Permissions
+
+| Category | Tools | Status |
+|----------|-------|--------|
+| ALLOWED | Read, Write, Edit, Bash, Glob, Grep | Explicitly permitted |
+| DENIED | (none) | Explicitly blocked |
+| EFFECTIVE | Bash, Edit, Glob, Grep, Read, Write | ALLOWED minus DENIED |
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `tools` |
+| Pillar | P04 |
+| Domain | audit log construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |
 
 ## Related Artifacts
 

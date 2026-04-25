@@ -9,7 +9,7 @@ title: "Config Enterprise Sla"
 version: "1.0.0"
 author: wave1_builder_gen_v2
 tags: [enterprise_sla, builder, config]
-tldr: "Naming, paths, limits for enterprise_sla production"
+tldr: "Production constraints for enterprise sla: naming (p11_sla_{{name}}.md), output paths (P11/), size limit 6144B. SLA contract."
 domain: "enterprise_sla construction"
 created: "2026-04-14"
 updated: "2026-04-14"
@@ -44,6 +44,38 @@ pre_build: null
 post_build: null
 on_error: null
 on_quality_fail: null
+
+## Domain-Specific Constraints
+
+| Constraint | Value |
+|-----------|-------|
+| Boundary | SLA contract |
+| Dependencies | quality_gate, env_config |
+| Primary 8F function | F8_collaborate |
+| Max artifact size | 6144 bytes |
+
+## Edge Cases
+
+| Scenario | Handling |
+|----------|---------|
+| Missing required frontmatter field | Fail H01 gate; return to F6 |
+| ID collision with existing artifact | Append version suffix (_v2) |
+| Body exceeds 6144 bytes | Trim prose sections; preserve tables |
+| Dependency quality_gate not found | Warn; proceed with defaults |
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `config` |
+| Pillar | P09 |
+| Domain | enterprise sla construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |
 
 ## Related Artifacts
 
