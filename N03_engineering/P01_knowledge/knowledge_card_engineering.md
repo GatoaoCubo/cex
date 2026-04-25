@@ -11,7 +11,7 @@ author: builder_agent
 domain: meta-construction
 quality: 9.1
 tags: [knowledge-card, builder, N03, meta-construction]
-tldr: What meta-construction is -- building the artifacts that build artifacts.
+tldr: "Meta-construction: N03 builds builders, not products. Scope = new kinds, builder ISOs, quality gates, pipeline improvements. Autopoietic -- N03 builds itself via its own 8F pipeline (strange loop)."
 when_to_use: Designing builders, templates, quality gates, or new kinds.
 keywords: [meta-construction, builder, factory, strange-loop, 8F]
 feeds_kinds: [agent, system_prompt, workflow, quality_gate]

@@ -11,7 +11,7 @@ author: builder_agent
 domain: meta-construction
 quality: 9.0
 tags: [axiom, builder, N03, invariants]
-tldr: 10 immutable truths governing all artifact construction. Violations are hard failures.
+tldr: "10 axioms: AX01 frontmatter=identity, AX02 one-kind-one-pillar, AX03 one-kind-one-function, AX04 quality floor 8.0, AX05 compiled derives from source, AX06 8F is sequential, AX07 builders=13 ISOs complete, AX08 no proprietary refs, AX09 constructor specifies never executes, AX10 kinds_meta.json is truth."
 density_score: 0.95
 related:
   - p03_sp_n03_creation_nucleus

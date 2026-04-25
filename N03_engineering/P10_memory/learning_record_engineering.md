@@ -11,7 +11,7 @@ author: builder_agent
 domain: meta-construction
 quality: 9.0
 tags: [learning-record, builder, N03, genesis]
-tldr: Lessons from the N03 bootstrap -- bigram parser fixes, proprietary cleanup, self-referential construction.
+tldr: "6 genesis-session lessons: bigram regex [^a-z]->[^a-z0-9_] (94->99/99 resolution), 624 proprietary author fields cleaned, TYPE_TO_TEMPLATE sync gap, heredoc failure on complex content, missing F8 auto-index, N03 autopoiesis (builds itself)."
 density_score: 0.85
 related:
   - p07_bm_builder_nucleus
@@ -58,31 +58,22 @@ The builder nucleus builds itself. Phase 1 must be manual (genesis).
 Phase 2 uses the builder to complete itself (autopoiesis).
 Phase 3 rewrites originals with full context (strange loop).
 
-## Quality Metrics
+## Impact Assessment
 
-| Metric | Value | Threshold |
-|--------|-------|-----------|
-| Structural completeness | High | ≥ 8.5 |
-| Domain specificity | engineering | Verified |
-| Cross-reference density | Adequate | ≥ 3 refs |
-| Actionability | Verified | Pass |
+| Lesson | Files Fixed | Prevention Mechanism |
+|--------|-----------|---------------------|
+| L01 Bigram regex | 5 (motor parser) | Unit test in cex_system_test.py |
+| L02 Proprietary terms | 624 author + 81 content | Pre-commit hook + F7 G07 gate |
+| L03 Registry sync | 3 kinds | cex_kind_register.py --validate |
+| L04 Heredoc failure | All builder scripts | Python file writes only |
+| L05 Missing auto-index | 1 (runner.py) | F8 step now includes index call |
+| L06 Autopoiesis | Architectural | N03 bootstraps via own pipeline |
 
-### Key Principles
+## Applicability
 
-- Memory entries decay linearly over 365 days unless refreshed
-- Four memory types: correction, preference, convention, context
-- Relevance scoring combines keyword match with recency weighting
-- Memory pruning removes entries below 0.3 relevance threshold
-
-### Usage Reference
-
-```yaml
-# learning_record integration
-artifact: learning_record_engineering
-nucleus: N03
-domain: engineering
-quality_threshold: 9.0
-```
+These lessons remain load-bearing -- the regex fix, proprietary check, and registry validation
+are still active enforcement mechanisms. L04 (no heredocs) is enforced by convention
+since all artifact writes go through Python's file I/O, not shell scripts.
 
 ## Related Artifacts
 

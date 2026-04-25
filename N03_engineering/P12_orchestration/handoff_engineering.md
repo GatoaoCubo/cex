@@ -11,7 +11,7 @@ author: builder_agent
 domain: meta-construction
 quality: 9.1
 tags: [handoff, builder, N03]
-tldr: How the builder receives work and delivers results.
+tldr: "N03 handoff protocol: receive (task+domain+context+quality_target), deliver (path+kind+quality+compiled+indexed+issues), signal 4 events (building/complete/error/retry), crew chains pass artifact paths as context."
 density_score: 0.88
 related:
   - bld_collaboration_handoff_protocol

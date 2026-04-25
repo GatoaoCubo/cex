@@ -11,7 +11,7 @@ author: builder_agent
 domain: meta-construction
 quality: 9.1
 tags: [dispatch-rule, builder, N03]
-tldr: Routes construction tasks to N03 via keyword matching and confidence scoring.
+tldr: "N03 dispatch rule: 12 trigger keywords (build/create/construct/make/design/scaffold/generate/forge + PT equivalents), confidence 0.70-0.95, explicit anti-routes to N01 (research), N02 (copy), N05 (deploy). N03 is the safe fallback for ambiguous 'make' intents."
 density_score: 0.88
 scope: construction
 keywords: [build, create, construct, design, scaffold, generate, forge, construir, criar, gerar]
@@ -60,31 +60,24 @@ related:
 If confidence < 0.70 and no other nucleus matches, route to N03
 with clarification. Builder is safest default for ambiguous make intents.
 
-## Quality Metrics
+## Confidence Calibration
 
-| Metric | Value | Threshold |
-|--------|-------|-----------|
-| Structural completeness | High | ≥ 8.5 |
-| Domain specificity | engineering | Verified |
-| Cross-reference density | Adequate | ≥ 3 refs |
-| Actionability | Verified | Pass |
+| Confidence Range | Behavior | Example |
+|-----------------|----------|---------|
+| 0.90-1.00 | Direct dispatch, no clarification | "create a knowledge_card" |
+| 0.70-0.89 | Dispatch with Motor resolution | "build something for deploy" |
+| 0.50-0.69 | GDP trigger -- ask user to clarify | "make it better" |
+| < 0.50 | Reject -- route to N07 for triage | "help me with this" |
 
-### Key Principles
+## Anti-Routes (Explicit Exclusions)
 
-- Route by intent classification, not by filename convention
-- Fallback chains ensure graceful degradation on nucleus failure
-- Session isolation prevents cross-orchestrator interference
-- Signal completion within 30s of task finish or trigger timeout alert
-
-### Usage Reference
-
-```yaml
-# dispatch_rule integration
-artifact: dispatch_rule_engineering
-nucleus: N03
-domain: engineering
-quality_threshold: 9.0
-```
+| Intent Pattern | Correct Nucleus | Why Not N03 |
+|---------------|----------------|-------------|
+| "research competitors" | N01 Intelligence | Analysis, not construction |
+| "write ad copy" | N02 Marketing | Creative writing, not artifact building |
+| "fix the tests" | N05 Operations | Debugging, not building |
+| "price the tiers" | N06 Commercial | Business strategy, not construction |
+| "document this API" | N04 Knowledge | Knowledge capture, not meta-construction |
 
 ## Related Artifacts
 

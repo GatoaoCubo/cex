@@ -11,7 +11,7 @@ author: builder_agent
 domain: meta-construction
 quality: 9.0
 tags: [quality-gate, builder, N03, validation]
-tldr: 7 gates that validate every artifact before publication. HARD = instant reject. SOFT = retry allowed.
+tldr: "7 gates at F7 GOVERN: H01 frontmatter integrity [HARD], H02 kind match [HARD], H03 naming convention [WARN], H04 reference resolution [WARN], H05 density >= 0.80 [SOFT], H06 size <= max_bytes [SOFT], H07 schema compliance [HARD]. 4 tiers: GOLDEN >= 9.5, PUBLISH >= 8.0, REVIEW >= 7.0, REJECT < 7.0."
 density_score: 0.92
 related:
   - p11_qg_kind_builder

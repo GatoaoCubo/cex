@@ -11,7 +11,7 @@ author: builder_agent
 domain: meta-construction
 quality: 9.0
 tags: [interface, builder, N03]
-tldr: Public API surface -- CLI commands, Python imports, I/O contracts.
+tldr: "N03 public API: 9 CLI commands (motor, runner, compile, doctor, forge, index, kind_register, nucleus_builder, feedback), Python-importable via cex_sdk, strict I/O contracts per tool."
 density_score: 0.88
 related:
   - p12_sig_builder_nucleus
@@ -52,31 +52,34 @@ Maximum: intent + kind + pillar + context + domain + output_dir + model + dry_ru
 Success: file path + compiled path + quality score + signal JSON.
 Failure: error signal with step number and reason.
 
-## Quality Metrics
+## Python Import Surface
 
-| Metric | Value | Threshold |
-|--------|-------|-----------|
-| Structural completeness | High | ≥ 8.5 |
-| Domain specificity | engineering | Verified |
-| Cross-reference density | Adequate | ≥ 3 refs |
-| Actionability | Verified | Pass |
-
-### Key Principles
-
-- Schema changes require backward compatibility assessment
-- Required fields enforced at validation time, not at parse time
-- Version field tracks breaking vs non-breaking schema evolution
-- Example payloads included for every schema to enable testing
-
-### Usage Reference
-
-```yaml
-# interface integration
-artifact: interface_engineering
-nucleus: N03
-domain: engineering
-quality_threshold: 9.0
+```python
+from cex_sdk.build import CEXAgent, build
+from cex_sdk.motor import parse_intent, classify_kind
+from cex_sdk.compile import compile_artifact, compile_all
+from cex_sdk.doctor import run_health_check
+from cex_sdk.score import score_artifact, ScoreResult
 ```
+
+## Exit Code Contract
+
+All CLI tools follow the same exit code protocol:
+
+| Code | Meaning | Consumer Action |
+|------|---------|-----------------|
+| 0 | Success | Read stdout for result |
+| 1 | Validation failure | Parse stderr for issue list |
+| 2 | Missing dependency | Install/configure and retry |
+| 3 | Kind not found | Check kinds_meta.json |
+| 4 | Quality below floor | Read score from stdout, decide retry |
+
+## Backward Compatibility Rules
+
+- Adding optional frontmatter fields: non-breaking (minor version bump)
+- Removing a required field: breaking (major version bump + migration script)
+- Changing field type (string to list): breaking
+- Adding a new CLI flag: non-breaking if default preserves old behavior
 
 ## Related Artifacts
 

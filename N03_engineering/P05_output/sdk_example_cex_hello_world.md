@@ -1,6 +1,5 @@
 ---
-quality: 8.6
-quality: 8.3
+quality: null
 id: p04_sdk_cex_hello_world
 name: CEX SDK Hello World
 description: Minimal working example that builds a knowledge_card artifact via cex_sdk using CEXAgent and Claude. Demonstrates the 3-line path from intent to artifact path.

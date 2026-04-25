@@ -11,7 +11,7 @@ author: builder_agent
 domain: meta-construction
 quality: 9.0
 tags: [prompt-template, builder, N03]
-tldr: Reusable template for F6 PRODUCE step -- generates any artifact from plan + knowledge.
+tldr: "F6 PRODUCE template: 9 variables (kind, domain, max_bytes, naming, builder_SP, KC_context, plan, existing_artifacts, open_vars) assembled by Runner into a single LLM call that generates a complete artifact with frontmatter + structured body."
 density_score: 0.88
 related:
   - p03_ch_builder_pipeline
@@ -33,7 +33,33 @@ Injected at Runner.F6 (PRODUCE). Variables filled by pipeline from F1-F5 outputs
 
 ## Template
 
+```
+You are {{builder_system_prompt}}.
 
+TASK: Produce a complete {{kind}} artifact.
+
+CONSTRAINTS (from F1):
+- Max bytes: {{max_bytes}}
+- Naming: {{naming}}
+- Domain: {{domain}}
+
+KNOWLEDGE (from F3):
+{{knowledge_context}}
+
+PLAN (from F4):
+{{construction_plan}}
+
+EXISTING ARTIFACTS (from F5):
+{{existing_artifacts_summary}}
+
+OUTPUT REQUIREMENTS:
+1. Start with YAML frontmatter (id, kind, pillar, title, version, created, updated,
+   author, quality: null, tags, tldr)
+2. Structured markdown body per your output template ISO
+3. Use {{open_variables}} for consumer-filled values
+4. Density >= 0.85 -- every section must have substantive content
+5. Tables for structured data, lists for enumerables, no prose padding
+```
 
 ## Variables
 
@@ -49,31 +75,28 @@ Injected at Runner.F6 (PRODUCE). Variables filled by pipeline from F1-F5 outputs
 | {{existing_artifacts_summary}} | artifact scan | F5 |
 | {{open_variables}} | mustache syntax | consumer at use-time |
 
-## Quality Metrics
+## Variable Resolution Order
 
-| Metric | Value | Threshold |
-|--------|-------|-----------|
-| Structural completeness | High | ≥ 8.5 |
-| Domain specificity | engineering | Verified |
-| Cross-reference density | Adequate | ≥ 3 refs |
-| Actionability | Verified | Pass |
+The Runner fills variables in a strict order to avoid circular dependencies:
 
-### Key Principles
+| Phase | Variables Filled | Source |
+|-------|-----------------|--------|
+| F1 | kind, domain, max_bytes, naming | kinds_meta.json + _schema.yaml |
+| F2 | builder_system_prompt | archetypes/builders/{kind}-builder/bld_prompt_{kind}.md |
+| F3 | knowledge_context | KC library + retriever similarity scan |
+| F4 | construction_plan | LLM call with F1+F2+F3 outputs |
+| F5 | existing_artifacts_summary | cex_retriever.py top-5 matches |
+| Runtime | open_variables | Consumer fills at use-time (not N03) |
 
-- Prompt templates use {{VARIABLE}} syntax for parameter injection
-- Chain steps pass context via {previous} placeholder in task field
-- Token budget allocated per step to prevent context overflow
-- System prompts loaded from nucleus config, not hardcoded in chains
+## Token Budget Allocation
 
-### Usage Reference
+Total budget for F6 PRODUCE call: ~4000 output tokens (configurable via CEX_MAX_TOKENS).
 
-```yaml
-# prompt_template integration
-artifact: prompt_template_engineering
-nucleus: N03
-domain: engineering
-quality_threshold: 9.0
-```
+| Section | Target Allocation | Notes |
+|---------|------------------|-------|
+| Frontmatter | ~200 tokens | Fixed overhead, rarely varies |
+| Body sections | ~3000 tokens | Scales with kind complexity |
+| Tables/code | ~800 tokens | Higher density per token than prose |
 
 ## Related Artifacts
 

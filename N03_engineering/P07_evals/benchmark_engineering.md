@@ -11,7 +11,7 @@ author: builder_agent
 domain: meta-construction
 quality: 9.0
 tags: [benchmark, builder, N03, performance]
-tldr: Baseline metrics for builder health -- 99/99 motor resolution, 86 PASS doctor, <30ms pipeline dry-run.
+tldr: "N03 baselines (2026-03-30): Motor 99/99 resolution + 26/26 tests, Doctor 86 PASS / 12 WARN / 0 FAIL, pipeline dry-run <30ms, 232 compiled artifacts, 0 proprietary refs. Any regression blocks merge."
 density_score: 0.88
 related:
   - p04_fd_builder_toolkit
@@ -44,38 +44,34 @@ related:
 
 ## How to Run
 
+```bash
+# Full benchmark suite (runs all checks)
+python _tools/cex_8f_motor.py --test          # Motor resolution: expect 99/99
+python _tools/cex_doctor.py                   # Builder health: expect 0 FAIL
+python _tools/cex_8f_runner.py --dry-run --kind agent  # Pipeline latency: expect <50ms
+python _tools/cex_kind_register.py --validate # Registry sync: expect all in sync
+python _tools/cex_sanitize.py --check --scope N03_engineering/  # ASCII compliance
 
+# Quick smoke test (30 seconds)
+python _tools/cex_8f_motor.py --test && python _tools/cex_doctor.py --quick
+```
 
 ## Regression Policy
 
 Any commit that reduces Motor resolution below 99/99 or introduces doctor FAILs
 must be reverted or fixed before merge. Benchmarks are checked in CI.
 
-## Quality Metrics
+## Benchmark Evolution
 
-| Metric | Value | Threshold |
-|--------|-------|-----------|
-| Structural completeness | High | ≥ 8.5 |
-| Domain specificity | engineering | Verified |
-| Cross-reference density | Adequate | ≥ 3 refs |
-| Actionability | Verified | Pass |
+| Date | Motor | Doctor | Compiled | Change Trigger |
+|------|-------|--------|----------|---------------|
+| 2026-03-30 | 99/99 | 86 PASS | 232 | Genesis session |
+| 2026-04-07 | 99/99 | 118 PASS | 259 | WAVE3 builder expansion |
+| 2026-04-13 | 99/99 | 259 PASS | 2133 ISOs | ISO validation sweep |
+| 2026-04-25 | 300/300 | 300 PASS | 3647 ISOs | Full 300-kind coverage |
 
-### Key Principles
-
-- Baseline metrics established from initial 100-artifact corpus
-- Regression detection triggers alert when score drops below baseline
-- Performance benchmarks run on standardized hardware configuration
-- Test coverage tracked per nucleus with minimum 80% gate threshold
-
-### Usage Reference
-
-```yaml
-# benchmark integration
-artifact: benchmark_engineering
-nucleus: N03
-domain: engineering
-quality_threshold: 9.0
-```
+Note: Kind count grew from 99 to 300 since genesis. Benchmarks above track the
+latest snapshot -- earlier baselines are superseded but preserved in git history.
 
 ## Related Artifacts
 

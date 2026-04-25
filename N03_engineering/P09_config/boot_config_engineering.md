@@ -11,7 +11,7 @@ author: builder_agent
 domain: meta-construction
 quality: 9.0
 tags: [boot-config, builder, N03]
-tldr: Initialization config -- env vars, paths, model defaults, feature flags.
+tldr: "N03 boot config: 6 env vars (CEX_ROOT, API key, model, dry_run, quality_min, max_retries), 5 required paths, 4 feature flags (auto_compile, auto_index, strict_density, crew_mode), 6-step startup sequence."
 density_score: 0.88
 related:
   - bld_architecture_kind

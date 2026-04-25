@@ -11,7 +11,7 @@ author: builder_agent
 domain: meta-construction
 quality: 9.1
 tags: [spawn-config, builder, N03]
-tldr: How to spawn the builder -- model, timeout, environment.
+tldr: "N03 spawn config: Opus default (Haiku/Sonnet/Opus by complexity score 0-100), 120s timeout per artifact, max 10 per session, zero MCP servers, 5-step startup (detect root, verify meta, count builders, check API key, load mental model)."
 density_score: 0.88
 related:
   - bld_collaboration_model_card

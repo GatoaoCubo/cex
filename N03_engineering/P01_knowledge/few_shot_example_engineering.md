@@ -11,7 +11,7 @@ author: builder_agent
 domain: meta-construction
 quality: 9.1
 tags: [few-shot, builder, N03, golden]
-tldr: 3 golden artifact patterns the builder learns from -- agent, KC, workflow.
+tldr: "3 golden patterns injected at F3: Agent (quality 9.5, Identity>Capabilities>Tools>Routing>Boundaries>Crew), KC (quality 9.3, Spec>Definition>Boundaries>Anti-Patterns), Workflow (quality 9.1, Steps with agent/input/output/signal/depends_on)."
 density_score: 0.85
 related:
   - bld_knowledge_card_few_shot_example

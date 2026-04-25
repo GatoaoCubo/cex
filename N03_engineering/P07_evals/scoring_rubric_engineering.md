@@ -19,7 +19,7 @@ automation_status: semi-automated
 domain: meta-construction
 quality: 9.1
 tags: [scoring-rubric, builder, N03, quality]
-tldr: 5-dimension rubric for scoring any CEX artifact -- correctness, completeness, density, usefulness, integration.
+tldr: "5D scoring rubric: D1 Correctness (30%, automatable via doctor), D2 Completeness (25%, semi-auto via template diff), D3 Density (20%, auto via line analysis), D4 Usefulness (15%, manual domain review), D5 Integration (10%, auto via compile+index). Thresholds: GOLDEN >= 9.5, PUBLISH >= 8.0, REJECT < 7.0."
 density_score: 0.90
 related:
   - p07_sr_creation_evaluation

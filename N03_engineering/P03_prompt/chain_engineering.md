@@ -11,7 +11,7 @@ author: builder_agent
 domain: meta-construction
 quality: 9.0
 tags: [chain, builder, N03]
-tldr: 4-step prompt chain -- classify, plan, build, validate.
+tldr: "4-step LLM chain for 8F pipeline: CLASSIFY (F4, temp=0.3, 500tok), BUILD (F6, temp=0.7, 4000tok), VALIDATE (F7, temp=0.0, Haiku, 500tok), RETRY (conditional, temp=0.5). Steps 1-3 and 5 are deterministic; only these 4 are LLM calls."
 density_score: 0.88
 related:
   - p03_pt_builder_construction
@@ -63,31 +63,24 @@ Temperature: 0.0 | Max tokens: 500 | Model: haiku
 
 Temperature: 0.5 | Max tokens: 4000
 
-## Quality Metrics
+## Token Budget Per Step
 
-| Metric | Value | Threshold |
-|--------|-------|-----------|
-| Structural completeness | High | ≥ 8.5 |
-| Domain specificity | engineering | Verified |
-| Cross-reference density | Adequate | ≥ 3 refs |
-| Actionability | Verified | Pass |
+| Step | Input Tokens | Output Tokens | Model | Cost Driver |
+|------|-------------|---------------|-------|-------------|
+| CLASSIFY | ~2000 (constraints+KC summary) | 500 | Opus/Sonnet | Low -- planning only |
+| BUILD | ~4000 (plan+full KC+tools) | 4000 | Opus/Sonnet | High -- artifact generation |
+| VALIDATE | ~5000 (full artifact text) | 500 | Haiku | Low -- structural check |
+| RETRY | ~6000 (artifact+issues) | 4000 | Same as BUILD | Conditional -- only on soft fail |
 
-### Key Principles
+Total per artifact (no retry): ~12K tokens. With 1 retry: ~22K tokens.
 
-- Prompt templates use {{VARIABLE}} syntax for parameter injection
-- Chain steps pass context via {previous} placeholder in task field
-- Token budget allocated per step to prevent context overflow
-- System prompts loaded from nucleus config, not hardcoded in chains
+## Step Context Passing
 
-### Usage Reference
-
-```yaml
-# chain integration
-artifact: chain_engineering
-nucleus: N03
-domain: engineering
-quality_threshold: 9.0
-```
+Each step receives the previous step's output as context:
+- CLASSIFY output (plan) is injected as `{{construction_plan}}` into BUILD
+- BUILD output (artifact text) is injected as `{{artifact_text}}` into VALIDATE
+- VALIDATE output (issues list) is injected as `{{issues}}` into RETRY
+- No step has access to raw user input -- only the Motor-resolved kind and constraints
 
 ## Related Artifacts
 

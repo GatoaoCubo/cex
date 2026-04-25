@@ -11,7 +11,7 @@ author: builder_agent
 domain: meta-construction
 quality: 9.1
 tags: [dag, builder, N03, pipeline]
-tldr: The 8F pipeline as DAG -- 9 nodes, strict order, retry loop at F6-F7.
+tldr: "8F pipeline as directed acyclic graph: 8 nodes (F1-F8), 1 retry cycle (F6<->F7, max 2), 5 deterministic nodes (F1/F2/F3/F5/F7) + 2 LLM nodes (F4/F6) + 1 I/O node (F8). Cross-artifact parallelism via cex_forge.py."
 density_score: 0.88
 related:
   - p01_kc_dag
@@ -70,42 +70,34 @@ Max cycle: 2. After 2 retries, F7 emits HARD FAIL.
 - Across nuclei: full parallel via spawn grid
 
 
-## DAG Execution Semantics
+## Cycle Exception: F6-F7 Retry Loop
 
-The directed acyclic graph defines strict execution ordering with these constraints:
+The graph is acyclic except for the controlled F6->F7->F6 retry edge. This is not
+a general cycle -- it is a bounded retry with hard termination:
 
-- **No cycles allowed**: validator rejects graphs containing backward edges at parse time
-- **Parallel branches**: independent nodes execute concurrently up to nucleus pool limit
-- **Failure propagation**: node failure blocks all downstream dependents immediately
-- **Partial results**: completed branches produce artifacts even if sibling branches fail
+| Attempt | Trigger | Action |
+|---------|---------|--------|
+| 1st | F7 returns SOFT FAIL | F6 re-generates with issues list injected |
+| 2nd | F7 returns SOFT FAIL again | F6 re-generates with both prior issues |
+| 3rd | F7 returns anything < 8.0 | HARD FAIL -- no more retries, error signal |
 
-### DAG Definition Example
+## Cross-Artifact Parallelism
 
-```yaml
-# Engineering pipeline DAG
-dag:
-  name: build_and_validate
-  nodes:
-    - id: scaffold
-      nucleus: N03
-      depends: []
-    - id: test
-      nucleus: N05
-      depends: [scaffold]
-    - id: document
-      nucleus: N04
-      depends: [scaffold]
-    - id: review
-      nucleus: N05
-      depends: [test, document]
+| Scope | Tool | Max Concurrent | Coordination |
+|-------|------|---------------|--------------|
+| Single artifact | cex_8f_runner.py | 1 (sequential F1-F8) | None needed |
+| Batch same-kind | cex_forge.py | 6 (configurable) | Independent -- no shared state |
+| Multi-nucleus grid | spawn_grid.ps1 | 6 nuclei | Signal-based via .cex/runtime/signals/ |
+
+## Multi-Nucleus DAG Example
+
+```
+N01 research ──┐
+               ├──> N03 build ──> N05 test ──> N07 consolidate
+N04 knowledge ─┘
 ```
 
-| Property | Constraint | Default |
-|----------|-----------|---------|
-| max_depth | 8 levels | 5 |
-| max_width | 6 parallel | 4 |
-| timeout_per_node | 300s | 120s |
-| retry_on_failure | 0-3 | 1 |
+Each node is a full 8F pipeline run. Inter-node edges are handoff files.
 
 ## Related Artifacts
 

@@ -11,7 +11,7 @@ author: builder_agent
 domain: meta-construction
 quality: 9.1
 tags: [mental-model, builder, N03, routing, decision]
-tldr: Decision logic for builder -- intent classification, builder selection, crew composition, cost optimization.
+tldr: "N03 decision logic: 7 routing rules (direct 8F, motor resolve, nucleus bootstrap, kind register, batch forge, diagnostic, feedback edit), 8-step temperature map (0.0 for deterministic, 0.3 for planning, 0.7 for generation), 4-step crew selection for multi-kind intents."
 density_score: 0.88
 related:
   - p08_pat_builder_construction
@@ -30,7 +30,27 @@ related:
 
 ## Decision Tree
 
-
+```
+User Intent
+  |
+  +-- Contains explicit kind name? ──YES──> Direct 8F (cex_8f_runner.py)
+  |                                          |
+  |                                          +-- Kind exists in kinds_meta.json? ──NO──> Error: suggest closest
+  |
+  +-- Contains "scaffold/bootstrap nucleus"? ──YES──> cex_nucleus_builder.py (P3 Bootstrap)
+  |
+  +-- Contains "register/new kind"? ──YES──> cex_kind_register.py (taxonomy expansion)
+  |
+  +-- Contains "batch/forge/all"? ──YES──> cex_forge.py (parallel multi-artifact)
+  |
+  +-- Contains "check/health/doctor"? ──YES──> cex_doctor.py (diagnostic, not a build)
+  |
+  +-- General build intent ──> cex_8f_motor.py (resolve kind from natural language)
+       |
+       +-- Motor resolves 1 kind ──> Direct 8F
+       +-- Motor resolves 2+ kinds ──> Crew selection (see below)
+       +-- Motor resolves 0 kinds ──> GDP fallback: ask user to clarify
+```
 
 ## Routing Rules
 

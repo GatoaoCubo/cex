@@ -11,7 +11,7 @@ author: builder_agent
 domain: meta-construction
 quality: 9.1
 tags: [response-format, builder, N03]
-tldr: Output format for all artifacts -- YAML frontmatter + Markdown body with open variables.
+tldr: "Artifact output spec: YAML frontmatter (11 required fields: id/kind/pillar/title/version/created/updated/author/quality/tags/tldr) + structured markdown body per builder output_template ISO. Density >= 0.80. Size <= max_bytes. {{open_variables}} for consumer-filled values."
 density_score: 0.88
 related:
   - bld_examples_response_format

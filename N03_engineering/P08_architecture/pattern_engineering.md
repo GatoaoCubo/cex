@@ -11,7 +11,7 @@ author: builder_agent
 domain: meta-construction
 quality: 9.1
 tags: [pattern, builder, N03]
-tldr: 3 construction patterns -- direct build, crew composition, nucleus bootstrap.
+tldr: "3 build patterns by complexity: P1 Direct (1 kind, Sonnet, 10-60s), P2 Crew (multi-kind dependency chain, Opus, 2-10min), P3 Bootstrap (full nucleus 7+ artifacts, Opus+xthinking, 10-30min). Selection is automatic via Motor intent signal."
 density_score: 0.88
 related:
   - p02_agent_builder_nucleus

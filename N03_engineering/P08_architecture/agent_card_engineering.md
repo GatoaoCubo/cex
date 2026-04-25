@@ -11,7 +11,7 @@ author: builder_agent
 domain: meta-construction
 quality: 9.0
 tags: [agent-card, builder, N03]
-tldr: Deployment spec -- capabilities matrix, resource needs, SLA, failure modes.
+tldr: "N03 deployment spec: Opus 1M context, 10-120s latency per artifact, 300+ kind coverage, 7-gate quality SLA >= 8.0, 4 failure modes with automatic recovery."
 density_score: 0.88
 related:
   - agent_card_engineering_nucleus
@@ -59,31 +59,24 @@ related:
 | Quality < 8.0 | F7 reject | Retry 2x then abort |
 | Timeout | Process killed | Error signal |
 
-## Quality Metrics
+## Resource Requirements
 
-| Metric | Value | Threshold |
-|--------|-------|-----------|
-| Structural completeness | High | ≥ 8.5 |
-| Domain specificity | engineering | Verified |
-| Cross-reference density | Adequate | ≥ 3 refs |
-| Actionability | Verified | Pass |
+| Resource | Minimum | Recommended | Notes |
+|----------|---------|-------------|-------|
+| Model | Sonnet (simple kinds) | Opus (multi-kind, bootstrap) | Routed via nucleus_models.yaml |
+| Context window | 128K | 1M | Multi-artifact crews need 500K+ |
+| API key | ANTHROPIC_API_KEY | Same | Required for non-dry-run |
+| Disk | 50MB (builders) | 200MB (full N03) | Read-only access to archetypes/ |
+| MCP servers | 0 | 0 | N03 uses only local Python tools |
 
-### Key Principles
+## SLA Guarantees
 
-- Agent identity persists across sessions via filesystem state
-- Capabilities declared explicitly; implicit inference prohibited
-- Constraint violations logged and escalated to N07 orchestrator
-- Version pinning ensures reproducible agent behavior across deploys
-
-### Usage Reference
-
-```yaml
-# agent_card integration
-artifact: agent_card_engineering
-nucleus: N03
-domain: engineering
-quality_threshold: 9.0
-```
+| Metric | Target | Measurement |
+|--------|--------|-------------|
+| Kind resolution accuracy | 99/99 (100%) | cex_8f_motor.py --validate |
+| Quality floor adherence | 100% of published artifacts >= 8.0 | F7 GOVERN gate |
+| Signal delivery | < 5s after completion | File write to .cex/runtime/signals/ |
+| Recovery from soft failure | <= 2 retry cycles | F6-F7 loop with targeted fixes |
 
 ## Related Artifacts
 

@@ -11,7 +11,7 @@ author: builder_agent
 domain: meta-construction
 quality: 9.0
 tags: [signal, builder, N03]
-tldr: Completion and error signals from the 8F pipeline -- JSON format, file-based.
+tldr: "File-based IPC signals: 4 types (building/complete/error/retry), JSON payload with nucleus+kind+quality+path, written to .cex/runtime/signals/, polled by N07 or signal_watch.py."
 density_score: 0.88
 related:
   - p04_fd_builder_toolkit
@@ -54,31 +54,35 @@ JSON files written to signal directory.
 File naming: {nucleus}_{kind}_{status}_{timestamp}.json
 Monitors poll the signal directory at configurable interval.
 
-## Quality Metrics
+## Signal File Example
 
-| Metric | Value | Threshold |
-|--------|-------|-----------|
-| Structural completeness | High | ≥ 8.5 |
-| Domain specificity | engineering | Verified |
-| Cross-reference density | Adequate | ≥ 3 refs |
-| Actionability | Verified | Pass |
-
-### Key Principles
-
-- Engineering artifacts follow CEX 8F pipeline from intent to publication
-- Quality gates enforce minimum 8.0 threshold for all published artifacts
-- Cross-nucleus references use explicit id-based linking, not path-based
-- Version tracking enables rollback to any previous artifact state
-
-### Usage Reference
-
-```yaml
-# signal integration
-artifact: signal_engineering
-nucleus: N03
-domain: engineering
-quality_threshold: 9.0
+```json
+{
+  "nucleus": "n03",
+  "status": "complete",
+  "kind": "agent",
+  "quality": 9.2,
+  "timestamp": "2026-04-25T14:30:00Z",
+  "path": "N03_engineering/P02_model/agent_research.md",
+  "message": "Agent artifact built via 8F. H01-H07 passed. Compiled to YAML.",
+  "session_id": "n07_abc123"
+}
 ```
+
+## Signal Lifecycle
+
+| Phase | Who Writes | Who Reads | File Pattern |
+|-------|-----------|-----------|--------------|
+| F1 start | Runner | N07 (optional) | `signal_n03_building_{ts}.json` |
+| F7 pass | Runner | N07 consolidate | `signal_n03_complete_{ts}.json` |
+| F7 fail (retryable) | Runner | Runner itself | `signal_n03_retry_{ts}.json` |
+| F7 fail (hard) | Runner | N07 escalation | `signal_n03_error_{ts}.json` |
+
+## Consumer Patterns
+
+- **N07 interactive**: polls via `git log --since` + `dispatch.sh status` (non-blocking)
+- **Mission runner**: blocks via `signal_watch.py --expect n03 --timeout 3600`
+- **Cleanup**: archived to `.cex/runtime/archive/` after consolidation
 
 ## Related Artifacts
 

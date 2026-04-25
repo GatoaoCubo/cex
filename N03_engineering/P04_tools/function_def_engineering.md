@@ -11,7 +11,7 @@ author: builder_agent
 domain: meta-construction
 quality: 9.1
 tags: [function-def, builder, N03, tools]
-tldr: 10 callable functions in the builder pipeline -- motor, runner, compiler, doctor, forge, indexer, feedback, register, nucleus, validate.
+tldr: "N03 toolkit: 10 Python CLI functions (motor, runner, compiler, doctor, forge, indexer, feedback, kind_register, nucleus_builder, validate) -- all return exit code 0/1, all accept --help, composable via shell or Python import."
 density_score: 0.90
 related:
   - p12_sig_builder_nucleus
@@ -54,31 +54,31 @@ For full artifact creation: F01 > F02 (which runs F1-F8 internally).
 For batch: F05 calls F02 in parallel.
 For nucleus: F09 calls F02 sequentially for each kind.
 
-## Quality Metrics
+## Dependency Graph
 
-| Metric | Value | Threshold |
-|--------|-------|-----------|
-| Structural completeness | High | ≥ 8.5 |
-| Domain specificity | engineering | Verified |
-| Cross-reference density | Adequate | ≥ 3 refs |
-| Actionability | Verified | Pass |
-
-### Key Principles
-
-- Engineering artifacts follow CEX 8F pipeline from intent to publication
-- Quality gates enforce minimum 8.0 threshold for all published artifacts
-- Cross-nucleus references use explicit id-based linking, not path-based
-- Version tracking enables rollback to any previous artifact state
-
-### Usage Reference
-
-```yaml
-# function_def integration
-artifact: function_def_engineering
-nucleus: N03
-domain: engineering
-quality_threshold: 9.0
 ```
+parse_intent (F01)
+    |
+    v
+run_pipeline (F02) -----> compile_artifact (F03) ----> rebuild_index (F06)
+    |                          |
+    |                          v
+    |                    check_health (F04) -- standalone diagnostic
+    |
+    +---> batch_forge (F05) -- parallel wrapper around F02
+    +---> build_nucleus (F09) -- sequential wrapper around F02
+    +---> apply_feedback (F07) -- post-build quality iteration
+    +---> register_kind (F08) -- pre-build kind registration
+    +---> validate_registries (F10) -- consistency check for F08 outputs
+```
+
+## Error Handling Convention
+
+All tools follow the same error output protocol:
+- Structured errors to stderr as `[TOOL_NAME] ERROR: {message}`
+- Exit code 1 for recoverable errors (retry-safe)
+- Exit code 2 for environment errors (missing dependency, no API key)
+- Never silently swallow errors -- every failure path logs explicitly
 
 ## Related Artifacts
 

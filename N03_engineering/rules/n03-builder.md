@@ -10,7 +10,7 @@ title: "N03-Builder"
 version: "1.0.0"
 author: n03_builder
 tags: [artifact, builder, examples]
-tldr: "Golden and anti-examples for CEX system, demonstrating ideal structure and common pitfalls."
+tldr: "N03 identity and enforcement rules: Inventive Pride sin lens, 8F mandatory on every build, quality floor 9.0, quality: null (never self-score), compile after save, signal on complete, ASCII-only code."
 domain: "CEX system"
 created: "2026-04-07"
 updated: "2026-04-07"
@@ -100,21 +100,16 @@ python _tools/cex_score.py --apply artifact.md
 | Quality target | 9.0+ |
 | Density target | 0.85+ |
 
-## System Context
+## Quality Enforcement (3-Layer Scoring)
 
-This artifact participates in the CEX typed knowledge system, a fractal
-architecture with 12 pillars, 8 nuclei, and 125 specialized builders.
-Artifacts flow through the 8F pipeline: Focus, Frame, Fetch, Filter,
-Format, Forge, Furnish, and Feedback.
+| Layer | Weight | Method | Tools |
+|-------|--------|--------|-------|
+| L1 Structural | 30% | Automated frontmatter + schema checks | cex_doctor.py |
+| L2 Rubric | 30% | 5D dimension scoring (D1-D5) | cex_score.py |
+| L3 Semantic | 40% | LLM evaluation (triggered when L1+L2 >= 8.5) | cex_score.py --semantic |
 
-Quality is enforced via 3-layer scoring: structural (30%), rubric (30%),
-and semantic (40%). All artifacts target quality >= 9.0.
-
-| Layer | Weight | Method |
-|-------|--------|--------|
-| Structural | 30% | Automated count-based checks |
-| Rubric | 30% | Quality gate dimension scoring |
-| Semantic | 40% | LLM evaluation (when L1+L2 >= 8.5) |
+N03 has a higher floor (9.0) than other nuclei (8.0) because builders build builders --
+the quality of meta-construction artifacts cascades into every downstream artifact.
 
 ## Related Artifacts
 

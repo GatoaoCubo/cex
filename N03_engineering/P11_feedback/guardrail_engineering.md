@@ -11,7 +11,7 @@ author: builder_agent
 domain: meta-construction
 quality: 9.0
 tags: [guardrail, builder, N03, safety]
-tldr: Protection rules preventing destructive operations -- never overwrite without backup, never delete kinds.
+tldr: "7 guardrails: G01 no overwrite without git backup, G02 kinds_meta only grows (deprecate never delete), G03 always validate frontmatter, G04 never publish below 8.0, G05 never auto-modify builder ISOs, G06 schema check before F6, G07 block proprietary contamination."
 density_score: 0.90
 related:
   - p03_sp_n03_creation_nucleus

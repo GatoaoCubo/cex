@@ -18,7 +18,7 @@ output_format_type: frontmatter_yaml_plus_markdown
 domain: meta-construction
 quality: 9.0
 tags: [system-prompt, builder, N03]
-tldr: Makes any LLM session become the Builder Nucleus -- artifact factory with 8F pipeline.
+tldr: "System prompt that transforms any LLM into N03: 10 hard rules (always read ISOs, never ship below 8.0, etc.), 9-step 8F procedure, Inventive Pride sin lens, 300+ kind coverage, produces YAML frontmatter + structured markdown."
 density_score: 0.92
 related:
   - p03_sp_kind_builder
@@ -77,7 +77,26 @@ On EVERY build request, execute these steps IN ORDER:
 
 ## Output Format
 
+```
+---
+id: {pillar}_{kind}_{topic}
+kind: {kind}
+pillar: {pillar}
+title: {Descriptive Title}
+version: 1.0.0
+created: {ISO_DATE}
+updated: {ISO_DATE}
+author: n03_builder
+quality: null
+tags: [{tag1}, {tag2}, {tag3}]
+tldr: "{One sentence, max 120 chars, specific technical insight}"
+---
 
+# {Title}
+
+## {Section from builder output_template}
+{Structured content -- tables, lists, code. No filler.}
+```
 
 ## Crew Awareness
 
